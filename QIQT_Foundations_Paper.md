@@ -398,11 +398,11 @@ In any specific run, the per-run universe occupies one specific branch of this s
 
 ### 6.6 What is preserved, and what algebraic restriction is (and is not)
 
-**Preserved exactly:** the unitary Schrödinger / Heisenberg evolution of the underlying field algebra. No modification of the dynamics. No stochastic term. No projection operator applied to the underlying state.
+**Preserved exactly on the physical state space $\mathcal{H}_{\rm phys}$:** the unitary Schrödinger / Heisenberg evolution under *physical Hamiltonians* (those that preserve $\mathcal{H}_{\rm phys}$; cf. §7.6). Within $\mathcal{H}_{\rm phys}$, no modification of dynamics, no stochastic term, no projection operator. The physical Hamiltonian generates standard linear unitary evolution on the constrained physical state space.
 
-**Constrained:** the *physical content* of the per-run wave function in any bounded region is bounded by (FQ). This is a constraint on what counts as a physical state, not a modification of the dynamics.
+**Constrained at the kinematic level:** the physical state space itself is restricted to $\mathcal{H}_{\rm phys}$ (those universal wave functions satisfying the Branch-Summed Holographic Bound $I_\Sigma \le Q_R$ for every bounded region). States outside $\mathcal{H}_{\rm phys}$ are mathematically writeable in the unrestricted Hilbert-space formalism but are not physically realizable. Physical Hamiltonians are restricted to those preserving $\mathcal{H}_{\rm phys}$. This is analogous to gauge theory: physical state space is a constrained submanifold; physical Hamiltonians preserve gauge invariance; unrestricted Hilbert-space Hamiltonians are mathematically writeable but unphysical.
 
-**The relationship between global evolution and regional physical content.** The underlying state evolves unitarily: $|\Psi_t\rangle = U(t)|\Psi_0\rangle$. The induced regional algebra-state evolves linearly: $\omega_t(O) = \omega_0(U(t)^\dagger O U(t))$ for $O \in \hat{\mathcal{A}}(R)$. The map $|\Psi\rangle \mapsto \omega_\Psi$ from Hilbert vectors to regional algebra-states is a structural restriction (analogous to forming a reduced state). It is mathematically linear on density operators and quadratic in vectors.
+**The relationship between global evolution and regional physical content.** On $\mathcal{H}_{\rm phys}$ the universal state evolves unitarily under a physical Hamiltonian: $|\Psi_t\rangle = U(t)|\Psi_0\rangle$. The induced regional algebra-state evolves linearly: $\omega_t(O) = \omega_0(U(t)^\dagger O U(t))$ for $O \in \hat{\mathcal{A}}(R)$. The map $|\Psi\rangle \mapsto \omega_\Psi$ from Hilbert vectors to regional algebra-states is a structural restriction (analogous to forming a reduced state). It is mathematically linear on density operators and quadratic in vectors.
 
 What is *not* a standard mathematical operation: the physical-precision quotient. Under the literal physical-instantiation reading, the physical wave function in $R$ is not the algebra-state $\omega_\Psi$ but the *equivalence class of $\omega_\Psi$ under physical resolution-$\epsilon$ equivalence*. This quotient is coarser than the algebra-state equivalence; it is the operative equivalence relation on physical regional states.
 
@@ -512,47 +512,77 @@ Denial of measurement independence preserves: no preferred foliation; no explici
 
 The framework's structural skeleton: (FQ) is the literal physical-instantiation reading of the Bekenstein-Bousso bound, stated rigorously in the CPW Type II algebraic framework; the precision floor is the structural consequence; concentrated per-run amplitudes cross the threshold and the per-run wave function physically is a single-record state.
 
-### 7.6 The Macroscopic Definiteness Conjecture (central open theorem)
+### 7.6 The Branch-Summed Holographic Superselection Rule (foundational postulate)
 
-The above theorems establish the framework's structure but leave a critical question: even after decoherence + (FQ) deliver a strict classical mixture $\sum_k p_k \omega_k^R$ on the regional algebra, this is *still a mixture over multiple macroscopic records*. To establish single-record per-run as a *structural consequence of (FQ)* — without an additional selection postulate — we need a theorem showing that multi-record states are not physically realizable under (FQ).
+The above theorems establish the framework's structure within standard renormalized entropy. They leave a critical question: even after decoherence + (FQ) deliver a strict classical mixture $\sum_k p_k \omega_k^R$ on the regional algebra, this is *still a mixture over multiple macroscopic records*. Standard renormalized entropy on the Type II algebra does **not** forbid such mixtures — by the standard counting, mutually exclusive macroscopic record sectors partition the regional Hilbert space, $\sum_k d_k \le 2^{Q_R}$, and the mixture entropy stays below $Q_R$. To establish single-record per-run as a structural consequence at the level of the macroscopic observable content, the framework commits to a stronger principle than standard entropy bounds: a **branch-summed holographic superselection rule**.
 
-This is the central new mathematical conjecture of the framework. It is built on the macroscopic record subalgebra and thickened-state construction of §6.8.
+This is the framework's central new physical postulate beyond the algebraic scaffolding of CPW/Witten. It is formulated using the decoherent-record machinery of §6.8 combined with branch-summed support counting.
 
-**Conjecture (Macroscopic Definiteness).** *Let $\mathcal{C}(R) \subset \hat{\mathcal{A}}(R)$ be the macroscopic record subalgebra of the regional Type II algebra (§6.8). Under (FQ), the physically realized state on $\mathcal{C}(R)$ at any time in any specific run is a Dirac measure (pure point measure on $\mathrm{Spec}(\mathcal{C}(R))$) — a single macroscopic record. Multi-record states (probability measures on $\mathrm{Spec}(\mathcal{C}(R))$ with support on multiple records) are not physically realizable.*
+**Definition (Branch-summed record cost).** *Let $\mathcal{C}(R) \subset \hat{\mathcal{A}}(R)$ be the macroscopic record subalgebra (§6.8). For a state $\omega_R$ on $\hat{\mathcal{A}}(R)$, let $p_r = \omega_R(P_r)$ be the regional probabilities of records $r \in \mathrm{Spec}(\mathcal{C}(R))$. For each record $r$, let $c_R(r)$ be its per-record physical cost — combining the Zurek-style algorithmic complexity of the macroscopic record description with the residual microscopic entropy of the apparatus + environment configuration consistent with that record. The **smooth active set** $\mathcal{A}_\epsilon(\omega_R)$ for tolerance $\epsilon$ is the smallest set of records carrying total probability $\ge 1 - \epsilon$. The **branch-summed record cost** is*
+$$I_\Sigma^\epsilon[\omega_R] := \sum_{r \in \mathcal{A}_\epsilon(\omega_R)} c_R(r).$$
 
-**Cost-counting argument (sketch of why this should be true).** By the construction of §6.8, the thickened state $\tilde{\delta}_r$ corresponding to a single macroscopic record $r$ uses approximately $Q_R$ bits of renormalized algebraic content on $\hat{\mathcal{A}}(R)$ (macroscopic records consume essentially the full regional holographic capacity, since they specify the full microscopic configuration of the apparatus + environment consistent with the macroscopic record). A multi-record thickened state $\tilde{\mu} = \sum_k p_k \tilde{\delta}_{r_k}$ has renormalized entropy $S_{\rm ren}(\tilde{\mu}) \approx Q_R + H(\{p_k\})$ where $H$ is the Shannon entropy of the record distribution. For $H > 0$ (genuinely multi-record states), this exceeds $Q_R$, violating (FQ). Therefore multi-record states are excluded from the physically realizable class.
+For a single-record state with $c_R(r) = I_0$: $I_\Sigma \approx I_0$.
+For an $N$-record state with comparable record costs: $I_\Sigma \approx N \cdot I_0$.
 
-The mathematical work needed to make this rigorous:
+This measure is **not** standard von Neumann or renormalized entropy on the Type II algebra. It counts the *additive* cost of each occupied decoherent macroscopic record sector, summing rather than coarse-graining over alternatives. It draws on the decoherent-histories framework (Gell-Mann-Hartle, Griffiths, Omnès), Quantum Darwinism / spectrum broadcast structures (Zurek; Brandão-Piani-Horodecki), smooth support / Rényi-0 / Hill-number quantification of effective branch counts, and Zurek-style physical entropy for per-record cost.
 
-1. **Precise specification of $\mathcal{C}(R)$** as the einselected commutative subalgebra of $\hat{\mathcal{A}}(R)$. Existing math to draw on: decoherent histories framework (Gell-Mann-Hartle, Griffiths, Omnès); einselection (Zurek); algebraic state restriction.
+**Postulate (Branch-Summed Holographic Bound — central physical axiom).** *The branch-summed record cost is bounded by the holographic capacity:*
+$$\boxed{I_\Sigma^\epsilon[\omega_R] \le Q_R = \frac{A(\partial R)}{4\ell_P^2} \quad \text{for all bounded regions } R \text{ and all physical states } \omega_R.}$$
 
-2. **Proof that each thickened record state $\tilde{\delta}_r$ has $S_{\rm ren}(\tilde{\delta}_r) \approx Q_R$**, i.e., that macroscopic records saturate the regional capacity. Requires careful analysis of how macroscopic information consumes regional holographic capacity in the Type II algebra setting.
+This is **a strengthening of the standard Bekenstein-Bousso bound**, not a derivation from it. Standard holographic entropy bounds limit the entropy of regional reduced states; the branch-summed bound limits the sum of per-record costs across coexisting decoherent macroscopic records. Existing algebraic-QFT/holography results do not establish the branch-summed bound; we postulate it as a new physical principle.
 
-3. **Proof of the additivity property** $S_{\rm ren}(\sum_k p_k \tilde{\delta}_{r_k}) \approx \sum_k p_k S_{\rm ren}(\tilde{\delta}_{r_k}) + H(\{p_k\})$ for mutually exclusive macroscopic records. Standard for classical mixtures; requires care in the Type II algebra setting.
+**The framework's commitment: the Branch-Summed Bound is a SUPERSELECTION rule, not a dynamical modification.**
 
-4. **Combining (2) and (3) to derive (FQ) violation for multi-record states.**
+Under this commitment, the framework's structure is the following.
 
-**Theorem 6 (Macroscopic Definiteness, conditional).** *Conditional on (1), (2), and (3) holding rigorously, the Macroscopic Definiteness Conjecture follows: under (FQ), multi-record states $\sum_k p_k \tilde{\delta}_{r_k}$ with $H(\{p_k\}) > 0$ have $S_{\rm ren} > Q_R$ and are excluded; physically realized states on $\mathcal{C}(R)$ are Dirac measures (single records).*
+**Definition (Physical state space).** $\mathcal{H}_{\rm phys} \subset \mathcal{H}$ is the subset of universal wave functions whose induced regional states satisfy the Branch-Summed Bound for every bounded region:
+$$\mathcal{H}_{\rm phys} = \{|\Psi\rangle \in \mathcal{H} : I_\Sigma^\epsilon[\omega_\Psi^R] \le Q_R \text{ for all bounded } R\}.$$
 
-**Why this dissolves the MWI tension.** Under the Macroscopic Definiteness Conjecture (or its rigorous formulation as Theorem 6), the framework escapes the MWI-without-many-worlds problem cleanly:
+States outside $\mathcal{H}_{\rm phys}$ are *kinematically forbidden* — they are mathematically writeable in the unrestricted Hilbert-space formalism but are not physically realizable.
 
-- The universal wave function may, at the formal Hilbert-space level, carry mathematical branch structure
-- But the physical content of any region is the state on the macroscopic record subalgebra $\mathcal{C}(R)$ (not the full state on the unrestricted Hilbert space)
-- Under (FQ), this physical content is a single record — no multi-record states are physically realizable
-- The "Everett branches" are mathematical artifacts of the unrestricted Hilbert-space apparatus; they don't enter the macroscopic observable content; they're not part of physics
-- We never have direct physical access to "the universal wave function's branch structure" — only to macroscopic observable content; that content is single-record per region per run
+**Definition (Physical Hamiltonian).** A Hamiltonian $H$ is **physical** if its dynamics preserves $\mathcal{H}_{\rm phys}$: $e^{-iHt/\hbar} \mathcal{H}_{\rm phys} \subset \mathcal{H}_{\rm phys}$ for all $t$.
 
-The framework's single-world per run is therefore not a "selection" from physically real branches. It is the structural consequence of (FQ) constraining the macroscopic observable content. The microscopic Everett-branch question is unobservable and not part of the physical content of the theory.
+The set of physical Hamiltonians is a proper subset of the set of all Hermitian operators on the unconstrained Hilbert space. Generic Hilbert-space Hamiltonians do not preserve $\mathcal{H}_{\rm phys}$; physical Hamiltonians do.
 
-**The mathematical status of Theorem 6.** It is conditional on three precisely-formulated sub-conjectures (1)–(3) above. Each is a concrete mathematical problem with existing literature to draw on (algebraic QFT, decoherent histories, einselection). None are proved rigorously yet. The framework's central mathematical task — beyond the borrowed Type II scaffolding of Witten/CPW — is to establish these sub-conjectures and thereby the Macroscopic Definiteness Theorem.
+**Theorem 6 (Macroscopic Definiteness, under the Branch-Summed Superselection Postulate).** *For any physical state $|\Psi\rangle \in \mathcal{H}_{\rm phys}$ and any bounded region $R$ containing apparatus + environment with $N_{\max} = \lfloor Q_R / I_0 \rfloor$ macroscopically distinguishable records, the smooth active set $\mathcal{A}_\epsilon(\omega_\Psi^R)$ has cardinality at most $N_{\max}$. In the regime where each macroscopic record approximately saturates the regional capacity ($I_0 \approx Q_R$), $N_{\max} = 1$ — only single-record states are physically realizable.*
 
-**Why this is genuinely new math beyond Witten/CPW.** Witten/CPW provide the Type II algebraic infrastructure for regional generalized entropy. They do *not* establish:
-- The specific structure of the macroscopic record subalgebra $\mathcal{C}(R) \subset \hat{\mathcal{A}}(R)$
-- The cost-counting that records saturate $Q_R$
-- The additivity property for thickened multi-record states
-- The (FQ) violation argument for multi-record states
+*Proof.* By definition, $|\Psi\rangle \in \mathcal{H}_{\rm phys}$ satisfies $I_\Sigma^\epsilon[\omega_\Psi^R] \le Q_R$. By the branch-summed counting, $|\mathcal{A}_\epsilon| \cdot I_0 \le I_\Sigma^\epsilon \le Q_R$, hence $|\mathcal{A}_\epsilon| \le Q_R/I_0$. When $I_0 \approx Q_R$, $|\mathcal{A}_\epsilon| \le 1$. $\blacksquare$
 
-These are the framework's specific mathematical contributions, building on the Witten/CPW scaffolding. They constitute a concrete research program: prove the three sub-conjectures, prove Theorem 6, and the framework has a complete structural derivation of single-world per run from (FQ) at the macroscopic observable level.
+The single-record-per-region structure of physical states is therefore a *structural consequence* of the Branch-Summed Holographic Superselection Postulate. Multi-record states are not absent because of dynamical collapse; they are absent because they are *not in the physical state space*.
+
+**Dynamical content of Option 2.** Standard Hilbert-space QM is the unconstrained formalism. The constrained subset $\mathcal{H}_{\rm phys}$ is a *nonlinear submanifold* of $\mathcal{H}$ (the constraint $I_\Sigma \le Q_R$ is nonlinear in the state). Physical Hamiltonians are constrained to preserve this submanifold. The framework's claim is that the actual physical Hamiltonian of nature respects the Branch-Summed Bound — measurement-like unitaries that would (in unrestricted QM) take a single-record state to a multi-record state do not occur in the physical dynamics; the actual physical dynamics, with the constraint imposed, takes single-record states to single-record states (selected by the actual physical initial conditions of apparatus + environment in that run).
+
+This is analogous to how gauge theories work: the physical state space is a constrained submanifold of the unrestricted Hilbert space (gauge-invariant states); physical Hamiltonians preserve gauge invariance; the unrestricted Hamiltonians are mathematically writeable but unphysical. In gauge theory the constraint is gauge invariance; in QIQT-H the constraint is the Branch-Summed Holographic Bound.
+
+**Schrödinger evolution holds on $\mathcal{H}_{\rm phys}$.** Within the physical state space, evolution under physical Hamiltonians is linear and unitary — Schrödinger evolution is preserved. What is *not* preserved is the freedom to use arbitrary Hilbert-space Hamiltonians; physical Hamiltonians are constrained.
+
+**The price the framework pays.** This commitment modifies the physical dynamics relative to unrestricted standard QM. The set of physical Hamiltonians is a constrained set. This is a substantive modification of QM at the foundational level, but only in regimes where the branch-summed cost approaches the holographic capacity. At lab scales — where macroscopic records use only $\sim 10^{25}$ bits of an available $\sim 10^{70}$-bit holographic capacity per cubic meter — the constraint is operationally vacuous. Standard QM at lab scales gives the same predictions as the constrained dynamics. The constraint becomes operationally relevant only when branch-summed cost approaches $Q_R$ — i.e., for macroscopic measurement records, where the framework's deviation from standard QM is to *enforce* single-record per-run at the kinematic level.
+
+**Mathematical work needed:**
+
+1. **Precise specification of $\mathcal{C}(R)$** as the einselected/Darwinistic record subalgebra (drawing on decoherent histories, Quantum Darwinism).
+2. **Per-record cost $c_R(r)$** rigorously defined via Zurek physical entropy.
+3. **Branch-summed bound $I_\Sigma^\epsilon \le Q_R$** as new physical principle — not derivable from existing holography, but conjecturally connectable to deeper quantum-gravity arguments about distinguishable record content per region.
+4. **Characterization of physical Hamiltonians** — which Hermitian operators preserve $\mathcal{H}_{\rm phys}$? This is analogous to characterizing gauge-invariant Hamiltonians in gauge theory.
+5. **Born statistics from typicality** under the constrained dynamics — the typicality theorem for which single-record state is realized per run, with the realization measure reproducing Born weights $|c_k|^2$.
+
+Each of these is a concrete open mathematical problem; together they constitute the framework's explicit research program beyond the borrowed CPW/Witten scaffolding.
+
+**Why this dissolves the MWI tension.** Under the Branch-Summed Superselection Postulate (Theorem 6), the framework escapes the MWI-without-many-worlds problem cleanly:
+
+- The unconstrained Hilbert space contains states with multi-record macroscopic content; these are mathematically writeable but not in $\mathcal{H}_{\rm phys}$
+- Physical states (those in $\mathcal{H}_{\rm phys}$) have $I_\Sigma \le Q_R$ for every bounded region; with $I_0 \approx Q_R$ at macroscopic scales, this means single-record per region
+- The "Everett branches" are mathematical artifacts of considering unrestricted Hilbert-space states; the actual physical state space excludes them by the superselection rule
+- We don't need to "select" one branch from many physically real branches — there are no multi-branch physical states to select from
+
+The framework's single-world per run is therefore a *kinematic structural feature* of the physical state space, not a dynamical selection event. The superselection rule is what makes this true.
+
+**Why this is genuinely new physics beyond Witten/CPW.** Witten/CPW provide the Type II algebraic infrastructure for regional generalized entropy. They do *not* establish:
+- The branch-summed bound as a strengthening of standard holographic entropy
+- The constraint that physical Hamiltonians preserve $\mathcal{H}_{\rm phys}$
+- The exclusion of multi-record states as kinematically forbidden
+
+These are the framework's specific new physical principles, building on the Witten/CPW scaffolding. They constitute a concrete research program: define the branch-summed cost rigorously; postulate the Branch-Summed Bound as new physics; characterize the constrained dynamics; derive Born statistics from typicality within the constrained dynamics.
 
 ---
 
@@ -765,21 +795,25 @@ The open problems are *concrete and well-defined*: each can be attacked in princ
 
 ### 11.3 The central thesis, in one paragraph
 
-> The Bekenstein-Bousso holographic bound, taken literally as a Lorentz-invariant physical information limit on bounded regions of spacetime, applies as a foundational axiom on the wave function regarded as a physical state of spacetime. Under this literal physical-instantiation reading — distinct from the narrow algebraic reading of Witten/CPW — the wave function in any region has finite physical specification precision. Amplitudes physically within $\epsilon(R)$ of $0$ are physically equivalent to amplitude exactly $0$; amplitudes within $\epsilon(R)$ of $1$ are physically equivalent to amplitude exactly $1$. In any actual run, decoherence + microscopic initial conditions drive the amplitudes for distinct macroscopic record components dynamically toward $0$ or $1$; the (FQ) precision floor renders this concentration physically a single-record state. The macroscopic world — a single realized outcome per run — emerges as a structural consequence. The Schrödinger / Heisenberg evolution of the underlying field algebra is preserved exactly. The Born rule is preserved exactly. No collapse, no hidden particle positions, no branching ontology, no modal value-rule are required. Born statistics emerge from typicality of microscopic initial conditions across runs. The CPW Type II crossed-product algebra framework provides the rigorous algebraic infrastructure within which the bound can be stated mathematically; the literal physical-instantiation reading of the bound is our foundational postulate on top.
+> The Bekenstein-Bousso holographic bound, taken literally as a Lorentz-invariant physical information limit on bounded regions of spacetime, motivates a stronger physical postulate: the **Branch-Summed Holographic Bound**, which constrains the sum of per-record costs across coexisting decoherent macroscopic record sectors of any bounded region by the holographic capacity $Q_R$. This bound is a **superselection rule on the physical state space** $\mathcal{H}_{\rm phys}$: universal wave functions whose induced regional states violate the bound are not physically realizable. Physical Hamiltonians are constrained to preserve $\mathcal{H}_{\rm phys}$ (analogous to gauge invariance in gauge theory). Within $\mathcal{H}_{\rm phys}$, Schrödinger / Heisenberg evolution is preserved exactly under physical Hamiltonians. The Born rule is preserved exactly. The macroscopic world — single-record per region per run — emerges as a *kinematic structural consequence* of the superselection rule, not as a dynamical selection event. No collapse, no hidden particle positions, no MWI branches, no modal value-rule are added; the framework is **ψ-monist** (wave function as only ontology) with the physical state space constrained by the Branch-Summed Holographic Bound. Born statistics across runs emerge from typicality of actual initial conditions of actual runs, propagated through the constrained dynamics. The CPW Type II crossed-product algebra framework provides the rigorous mathematical infrastructure; the Branch-Summed Holographic Bound is the framework's new physical principle on top — a strengthening of standard holography that is not derivable from existing QG results but is conjecturally connectable to deeper finite-information constraints on regional macroscopic record content.
 
 ### 11.4 Open problems
 
-1. **Quantitative form of the resolution floor $\epsilon(R)$.** Make explicit the dependence of $\epsilon$ on regional geometry, macroscopic record dimension, and the (FQ) bound. Qualitative existence (Theorem 3) is established under the literal reading; the explicit functional form is the principal quantitative open problem.
+1. **Precise formulation of the branch-summed cost $I_\Sigma^\epsilon[\omega_R]$.** Define $\mathcal{C}(R)$ as the einselected/Darwinistic record subalgebra; define per-record cost $c_R(r)$ via Zurek-style physical entropy; specify the smooth active set $\mathcal{A}_\epsilon$ rigorously. Existing ingredients to draw on: decoherent histories (Gell-Mann-Hartle, Griffiths, Omnès), Quantum Darwinism / spectrum broadcast (Zurek, Brandão-Piani-Horodecki), Rényi-0 / Hill numbers.
 
-2. **Rigorous Born typicality theorem.** Specify the measure $\mu$ on microscopic initial conditions; prove the equivariance-type theorem $\mu(\text{outcome } k) = |c_k|^2$ analogous to Bohmian $|\psi|^2$-equivariance; justify $\mu$ as the empirically realized measure.
+2. **The Branch-Summed Bound as a new holographic principle.** Justify $I_\Sigma^\epsilon \le Q_R$ as a strengthening of standard Bekenstein-Bousso. Connect to deeper finite-information constraints in quantum gravity. This is genuinely new physics that does not follow from existing holographic results.
 
-3. **Defense and refinement of the literal physical-instantiation reading.** Engage with potential counterarguments (the qubit example, basis-dependence concerns, comparisons to abstract Hilbert-space formulations); develop the foundational arguments for why the literal reading is the natural reading of the bound.
+3. **Characterization of physical Hamiltonians.** Which Hermitian operators preserve $\mathcal{H}_{\rm phys}$? Develop the Dirac-style constrained-dynamics formalism analogous to gauge theory. Show that standard low-energy / lab-scale dynamics are approximately physical Hamiltonians (where the constraint is operationally vacuous).
 
-4. **State-extension and reference-state issues.** Make fully precise the embedding of per-run wave functions into the enlarged Hilbert space $\mathcal{H} \otimes L^2(\mathbb{R})$; address reference-state dependence beyond the convention adopted in §3.4.
+4. **Rigorous Born typicality under constrained dynamics.** Specify the measure on actual initial conditions of actual runs; prove that the realized-record distribution across runs reproduces $|c_k|^2$ under the constrained dynamics.
 
-5. **Cosmological / horizon applications.** Extend to the de Sitter static patch (Type II$_1$, finite trace) and black-hole horizon regions, where the algebraic framework is best developed and where finite trace gives tighter structure.
+5. **Quantitative form of the resolution floor $\epsilon(R)$** for the operational equivalence relation on regional algebra states.
 
-6. **Phenomenological predictions.** Identify regimes where (FQ)-structural features become operationally distinguishable from standard QM.
+6. **State-extension and reference-state issues** in the crossed-product algebra formulation.
+
+7. **Cosmological / horizon applications** — extend to the de Sitter static patch and black-hole horizon regions.
+
+8. **Phenomenological predictions.** Identify regimes where the branch-summed superselection rule produces observationally distinguishable signatures (e.g., maximum macroscopic-superposition scale, long-baseline coherence limits).
 
 ### 11.5 Credit division
 
