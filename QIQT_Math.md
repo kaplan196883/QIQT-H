@@ -446,6 +446,22 @@ The often-asked question "which Everett branch is realized in this run?" doesn't
 
 The physical Hamiltonian (which preserves $\mathcal{H}_{\rm phys}$) does not generate multi-branch states from single-record initial conditions. The unitary mapping $(a|0\rangle + b|1\rangle)|S_0\rangle \mapsto a|0\rangle|S_0\rangle + b|1\rangle|S_1\rangle$ that standard textbook QM writes is the *unrestricted Hilbert-space* mapping; the *physical Hamiltonian's* action is constrained to single-record final states. Which specific final state is realized is determined by the specific actual initial conditions.
 
+### 9A.5b The operational answer to the linear measurement obstruction
+
+A standard objection: "By linearity, $U(\alpha|0\rangle + \beta|1\rangle)|S_{\rm ready}\rangle = \alpha|0\rangle|S_0\rangle + \beta|1\rangle|S_1\rangle$ — exactly the multi-record state the framework wants to forbid."
+
+This objection assumes that the unrestricted-Hilbert-space wave function is the physically primary object that we have direct access to. The framework denies this.
+
+**We never have direct physical access to amplitudes of the universal wave function.** We have access only to the macroscopic record content on the screen — which is itself a complex quantum system with $\sim 10^{20}$–$10^{25}$ degrees of freedom, entangled with the particle. When decoherence acts on the joint particle + screen + environment system, the cross-overlaps between distinct macroscopic record states become exponentially small:
+$$\langle E_0 | E_1 \rangle \sim e^{-\Gamma t} \sim e^{-10^{20}}$$
+on physically realistic detection timescales. Under (FQ), these exponentially-small off-diagonal coherence terms are *physically zero* (§7.3 makes this rigorous via the (FQ) precision floor applied to the regional algebra-state).
+
+At the level of physically observable content on the screen, the formal "multi-record state" $\alpha|S_0\rangle + \beta|S_1\rangle$ is therefore *exponentially close to a strict classical mixture* — and under (FQ), exactly a strict classical mixture. The off-diagonal phase coherence that would distinguish the formal multi-record state from a classical mixture is below the precision the regional substrate can encode.
+
+**The physical reality of the screen's macroscopic content** — what's actually displayed on the screen, what cameras would record, what an observer would see — is what we have access to. That content is a classical mixture, not a coherent superposition. The superselection rule then forbids even this classical mixture for sufficiently saturating records.
+
+What actually happens per run: the physical Hamiltonian (constrained to preserve $\mathcal{H}_{\rm phys}$), acting on the actual initial conditions of the screen + environment in that specific run, produces one specific macroscopic record on the screen. Different runs with different actual initial conditions produce different actual records. The standard "linear measurement obstruction" describes what an unconstrained unitary would do at the mathematical Hilbert-space level — but that's not what the actual physical Hamiltonian does, and it's not what we have physical access to anyway.
+
 ### 9A.6 The Born statistics across runs
 
 Across many runs (sequential detection events in the same universe with one universal wave function evolving through them), different actual initial conditions of screen + environment produce different actual realized spots. Each spot is selected from $\mathrm{Spec}(\mathcal{C}(R_S))$ by the physical (constrained) dynamics from the actual initial conditions.
@@ -470,9 +486,30 @@ Each of these is a concrete open problem; together they constitute the framework
 
 ### 9A.8 Operational scale: where the superselection bites
 
-The Branch-Summed Bound is operationally vacuous in regimes where macroscopic records use only a tiny fraction of the holographic capacity. For a lab-scale qubit (single atom, ion, photon polarization), per-record cost is $\sim 10^{25}$ bits or less; holographic capacity for a 1m region is $\sim 10^{70}$ bits; many coexisting microscopic-record states are allowed. The constraint is operationally vacuous at this scale — standard QM behavior is recovered.
+The Branch-Summed Bound has a two-parameter structure:
+- $Q_R = A(\partial R)/(4\ell_P^2)$: regional holographic capacity (geometric; set by quantum gravity)
+- $I_0$: per-record physical cost (experimental parameter, calibrated against the empirically observed quantum-to-classical boundary)
 
-For *macroscopic* detection events (screen spots, photographic emulsions, CCD readouts), per-record cost approaches the regional holographic capacity, and the superselection rule restricts to single-record states. **This is precisely the regime where the measurement problem traditionally lives**, and where the framework's deviation from unrestricted Hilbert-space QM becomes operationally relevant — enforcing single-record per run at the kinematic level.
+The single-outcome enforcement threshold is at $N \cdot I_0 \approx Q_R$.
+
+**Microscopic regime ($N \cdot I_0 \ll Q_R$): constraint vacuous.** For a lab-scale qubit (single atom, ion, photon polarization), per-record cost is small relative to regional capacity; many coexisting microscopic-record states are allowed; standard QM behavior recovered. Quantum interferometers, atom interferometry, ion traps, superconducting qubits all operate in this regime, and the framework predicts no deviations from standard QM.
+
+**Macroscopic regime ($N \cdot I_0 \to Q_R$): constraint enforces single-record per run.** For screen spots, photographic emulsions, CCD readouts, brain states, etc., per-record cost approaches the regional holographic capacity, and the superselection rule restricts to single-record states. This is precisely the regime where the measurement problem traditionally lives.
+
+**The empirical calibration of $I_0$.** The framework's per-record cost $I_0$ is an experimental parameter of the theory, analogous to GRW's collapse rate $\lambda$. Its value must be calibrated against:
+- The largest scale at which Schrödinger-cat-like coherence has been experimentally maintained (current state-of-the-art: ~$10^4$-atom molecular interference; macroscopic mechanical oscillators in superposition over picometer distances)
+- The smallest scale at which classical-definite outcomes are experimentally established
+
+Current best theoretical estimate from Zurek physical entropy of macroscopic records gives $I_0 \sim 10^{25}$ bits. For this to enforce single-record outcomes at the empirically observed scale, either: (a) the relevant regional capacity is the local detection region (not 1m but the few-cm volume of a CCD pixel and its immediate environment, giving smaller $Q_R$), or (b) the effective per-record cost includes environmental entanglement out to a larger radius, increasing $I_0$ above Zurek's estimate. Both options are under study.
+
+**The framework's empirical content.** Unlike standard QM (which makes no prediction about where the quantum-classical boundary lies) and Many-Worlds (which has no boundary), the framework predicts:
+1. There IS a definite scale where macroscopic superpositions become physically impossible
+2. This scale is set by the ratio $Q_R/I_0$
+3. $I_0$ is an experimental parameter; once calibrated against one boundary observation, the framework predicts the boundary at all other scales
+4. The framework distinguishes itself from GRW empirically: GRW predicts stochastic collapse events with rate $\lambda$ producing tiny localization signals (e.g., heating of bulk matter); QIQT-H predicts kinematic exclusion with no stochastic signal — only the boundary itself
+5. The framework converges to standard QM in any regime where $N \cdot I_0 \ll Q_R$
+
+This makes the framework empirically testable in a clean way: find the empirical scale at which macroscopic superpositions break down; set $I_0$ to match this scale; predict boundary behavior at other scales; distinguish QIQT-H from GRW via absence of stochastic signal.
 
 ---
 

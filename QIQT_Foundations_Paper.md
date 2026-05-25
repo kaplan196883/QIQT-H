@@ -552,6 +552,38 @@ The single-record-per-region structure of physical states is therefore a *struct
 
 **Dynamical content of Option 2.** Standard Hilbert-space QM is the unconstrained formalism. The constrained subset $\mathcal{H}_{\rm phys}$ is a *nonlinear submanifold* of $\mathcal{H}$ (the constraint $I_\Sigma \le Q_R$ is nonlinear in the state). Physical Hamiltonians are constrained to preserve this submanifold. The framework's claim is that the actual physical Hamiltonian of nature respects the Branch-Summed Bound — measurement-like unitaries that would (in unrestricted QM) take a single-record state to a multi-record state do not occur in the physical dynamics; the actual physical dynamics, with the constraint imposed, takes single-record states to single-record states (selected by the actual physical initial conditions of apparatus + environment in that run).
 
+**Response to the linear measurement obstruction.** A standard objection: "By linearity, $U(\alpha|0\rangle + \beta|1\rangle)|A_{\rm ready}\rangle = \alpha|A_0\rangle + \beta|A_1\rangle$ — exactly the forbidden multi-record state."
+
+This objection assumes that the unrestricted-Hilbert-space wave function $\alpha|A_0\rangle + \beta|A_1\rangle$ is the physically primary object — the actual physical state that we have direct access to. The framework denies this. **We do not have direct physical access to unrestricted-Hilbert-space states; we have access only to the physical observable content of bounded regions — the state on the macroscopic record subalgebra $\mathcal{C}(R)$, with the (FQ) precision floor.**
+
+The screen is a complex quantum system with $\sim 10^{20}$–$10^{25}$ degrees of freedom that becomes entangled with the particle during detection. Decoherence between distinct macroscopic record states $|A_0\rangle$ and $|A_1\rangle$ produces environmental cross-overlaps $\langle E_0 | E_1 \rangle \sim e^{-10^{20}}$ on physically realistic timescales (§6.2). Under (FQ), these exponentially-small off-diagonal coherence terms are *physically zero* (§6.3).
+
+So at the level of physical observable content — which is what physics is about — the formal $\alpha|A_0\rangle + \beta|A_1\rangle$ structure decoheres to a classical-looking expression, and the residual coherence is rendered physically zero by (FQ). The physical state on the macroscopic observable algebra is a strict classical mixture over records. The framework's superselection rule then says: even this strict classical mixture (with $H(\{p_k\}) > 0$ when $|c_k|^2$ are both non-negligible) violates the Branch-Summed Bound when the records' costs approach $Q_R/I_0$. So this state isn't a *physical* state either.
+
+What actually happens in a specific run, under the constrained physical Hamiltonian acting on the actual initial conditions of that run (specific microscopic state of screen + environment), is that the per-run evolution stays within $\mathcal{H}_{\rm phys}$ throughout — the actual physical Hamiltonian does not produce multi-record states from physically allowed initial conditions. The linear-Hilbert-space-formalism argument $U(\alpha|0\rangle + \beta|1\rangle) \to \alpha|A_0\rangle + \beta|A_1\rangle$ describes what an *unconstrained* unitary would do; the *physical* Hamiltonian, constrained to preserve $\mathcal{H}_{\rm phys}$, takes the per-run initial state (with specific actual microscopic IC) to a per-run final state (with a specific actual macroscopic record). Different runs with different actual initial conditions produce different actual records; across many runs, Born statistics emerge from typicality.
+
+The "linear measurement obstruction" thus disappears once one recognizes that (a) physical observable content, not unrestricted Hilbert-space wave functions, is what we have physical access to; (b) decoherence + (FQ) make the off-diagonal coherence physically zero at the observable level; (c) the constraint on physical Hamiltonians (preserving $\mathcal{H}_{\rm phys}$) eliminates the multi-record final state from physical dynamics.
+
+**The per-record cost $I_0$ as an experimental parameter.** The framework's central physical postulate — the Branch-Summed Holographic Bound $I_\Sigma^\epsilon[\omega_R] \le Q_R$ — combines two quantities:
+- $Q_R = A(\partial R)/(4\ell_P^2)$: the **regional holographic capacity**, a geometric quantity determined by the boundary area in Planck units. Set by quantum gravity; not a free parameter.
+- $c_R(r) \approx I_0$: the **per-record physical cost**, the information cost of specifying a macroscopic record's full microscopic configuration. This is an **experimental parameter** of the theory.
+
+The number of coexisting macroscopic records allowed per region is $N_{\max} \approx Q_R/I_0$. The empirically observed boundary at which macroscopic superpositions cease to occur (the quantum-to-classical transition scale) corresponds to the scale at which $N \cdot I_0$ approaches $Q_R$ for the relevant macroscopic record cost $I_0$.
+
+**This is directly analogous to GRW's parameter structure.** GRW has a collapse rate $\lambda$ that is a free parameter calibrated empirically: small enough that microscopic quantum coherence is preserved, large enough that macroscopic superpositions decohere on observed timescales. QIQT-H has $I_0$ playing an analogous role: small enough that microscopic records (atoms, qubits, small molecules) have $N \cdot I_0 \ll Q_R$ and standard QM behavior is recovered, large enough that macroscopic records have $N \cdot I_0$ approaching $Q_R$ so the superselection enforces single-record per run.
+
+Unlike GRW, where $\lambda$ is ad hoc, in QIQT-H $I_0$ has a **physical interpretation**: the information cost of specifying a macroscopic record's full microscopic configuration in the regional Type II algebra. This is in principle calculable from microphysics (Zurek physical entropy, decoherent-history weights, Quantum Darwinist redundancy), though current best estimates give $I_0 \sim 10^{25}$ bits for typical macroscopic records — far below $Q_R \sim 10^{70}$ for a 1m region.
+
+The framework's empirical content includes the prediction: **the per-record cost $I_0$ must be calibrated such that $N \cdot I_0$ approaches $Q_R$ at the observed quantum-to-classical transition scale.** If standard Zurek entropy gives $I_0 \sim 10^{25}$ bits and laboratory macroscopic records are still well below the regional capacity, then the framework predicts the observable quantum-to-classical boundary involves macroscopic records whose cost is much larger than naive Zurek estimates — including all entangled environmental degrees of freedom out to the relevant decoherence horizon. The framework's specific prediction is that this calibration converges to a definite value of $I_0$ for macroscopic record types, and this value is testable against the observed scale at which Schrödinger-cat-like experiments fail.
+
+The two-parameter structure of the theory:
+| Parameter | Origin | Status |
+|---|---|---|
+| $Q_R = A(\partial R)/(4\ell_P^2)$ | Holographic principle of quantum gravity | Geometric; not adjustable |
+| $I_0 = c_R(r)$ for typical macroscopic records | Per-record physical cost in regional Type II algebra | Experimental; calibrated empirically |
+
+The single-outcome enforcement threshold occurs at $N \cdot I_0 \approx Q_R$. Below this threshold (microscopic regime, $N \cdot I_0 \ll Q_R$): constraint vacuous, standard QM behavior. Above this threshold (macroscopic regime): constraint enforces single-record per run.
+
 This is analogous to how gauge theories work: the physical state space is a constrained submanifold of the unrestricted Hilbert space (gauge-invariant states); physical Hamiltonians preserve gauge invariance; the unrestricted Hamiltonians are mathematically writeable but unphysical. In gauge theory the constraint is gauge invariance; in QIQT-H the constraint is the Branch-Summed Holographic Bound.
 
 **Schrödinger evolution holds on $\mathcal{H}_{\rm phys}$.** Within the physical state space, evolution under physical Hamiltonians is linear and unitary — Schrödinger evolution is preserved. What is *not* preserved is the freedom to use arbitrary Hilbert-space Hamiltonians; physical Hamiltonians are constrained.
@@ -801,19 +833,21 @@ The open problems are *concrete and well-defined*: each can be attacked in princ
 
 1. **Precise formulation of the branch-summed cost $I_\Sigma^\epsilon[\omega_R]$.** Define $\mathcal{C}(R)$ as the einselected/Darwinistic record subalgebra; define per-record cost $c_R(r)$ via Zurek-style physical entropy; specify the smooth active set $\mathcal{A}_\epsilon$ rigorously. Existing ingredients to draw on: decoherent histories (Gell-Mann-Hartle, Griffiths, Omnès), Quantum Darwinism / spectrum broadcast (Zurek, Brandão-Piani-Horodecki), Rényi-0 / Hill numbers.
 
-2. **The Branch-Summed Bound as a new holographic principle.** Justify $I_\Sigma^\epsilon \le Q_R$ as a strengthening of standard Bekenstein-Bousso. Connect to deeper finite-information constraints in quantum gravity. This is genuinely new physics that does not follow from existing holographic results.
+2. **Empirical calibration of $I_0$.** The per-record physical cost $I_0$ is an experimental parameter of the theory, analogous to GRW's collapse rate $\lambda$. Its value must be determined by calibrating against the observed quantum-to-classical transition scale: the largest scale at which Schrödinger-cat-like coherence has been experimentally maintained, and the smallest scale at which classical-definite outcomes have been established. Current best estimates (Zurek physical entropy for typical macroscopic records) give $I_0 \sim 10^{25}$ bits, but the empirically required value may be larger if records include extensive environmental entanglement. The framework's prediction: a definite calibrated value of $I_0$ such that the constraint $N \cdot I_0 \le Q_R$ matches the observed quantum-classical boundary.
 
-3. **Characterization of physical Hamiltonians.** Which Hermitian operators preserve $\mathcal{H}_{\rm phys}$? Develop the Dirac-style constrained-dynamics formalism analogous to gauge theory. Show that standard low-energy / lab-scale dynamics are approximately physical Hamiltonians (where the constraint is operationally vacuous).
+3. **The Branch-Summed Bound as a new holographic principle.** Justify $I_\Sigma^\epsilon \le Q_R$ as a strengthening of standard Bekenstein-Bousso. Connect to deeper finite-information constraints in quantum gravity. This is genuinely new physics that does not follow from existing holographic results.
 
-4. **Rigorous Born typicality under constrained dynamics.** Specify the measure on actual initial conditions of actual runs; prove that the realized-record distribution across runs reproduces $|c_k|^2$ under the constrained dynamics.
+4. **Characterization of physical Hamiltonians.** Which Hermitian operators preserve $\mathcal{H}_{\rm phys}$? Develop the Dirac-style constrained-dynamics formalism analogous to gauge theory. Show that standard low-energy / lab-scale dynamics are approximately physical Hamiltonians (where the constraint is operationally vacuous because $N \cdot I_0 \ll Q_R$ for laboratory-scale records).
 
-5. **Quantitative form of the resolution floor $\epsilon(R)$** for the operational equivalence relation on regional algebra states.
+5. **Rigorous Born typicality under constrained dynamics.** Specify the measure on actual initial conditions of actual runs; prove that the realized-record distribution across runs reproduces $|c_k|^2$ under the constrained dynamics.
 
-6. **State-extension and reference-state issues** in the crossed-product algebra formulation.
+6. **Quantitative form of the resolution floor $\epsilon(R)$** for the operational equivalence relation on regional algebra states.
 
-7. **Cosmological / horizon applications** — extend to the de Sitter static patch and black-hole horizon regions.
+7. **State-extension and reference-state issues** in the crossed-product algebra formulation.
 
-8. **Phenomenological predictions.** Identify regimes where the branch-summed superselection rule produces observationally distinguishable signatures (e.g., maximum macroscopic-superposition scale, long-baseline coherence limits).
+8. **Cosmological / horizon applications** — extend to the de Sitter static patch and black-hole horizon regions.
+
+9. **Phenomenological predictions.** With $I_0$ calibrated, the framework predicts: maximum macroscopic-superposition scale (testable against Schrödinger-cat experiments with progressively larger systems); long-baseline coherence limits; specific signatures distinguishing the framework from GRW-style stochastic collapse (the framework predicts kinematic exclusion, not stochastic events).
 
 ### 11.5 Credit division
 
