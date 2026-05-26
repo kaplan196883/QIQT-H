@@ -1,663 +1,2852 @@
 # A Tutorial on QIQT-H
 
-*How holographic finite-information constraints can — in principle — solve the measurement problem of quantum mechanics, without any of the usual prices.*
+*How holographic finite-information constraints can — in principle — address the measurement problem of quantum mechanics, without adding collapses, worlds as separate substances, or hidden trajectories.*
+
+> **Important status note.** QIQT-H, as presented here, is a research-program framework, not an established theory like standard quantum mechanics or quantum field theory. The goal of this tutorial is not to claim that QIQT-H is already correct. The goal is to explain the pieces: what the mathematical ingredients mean, why they are being used, and how they are supposed to fit together.
 
 ---
 
-## 0. What this is and how to read it
+# 0. What this is and how to read it
 
-I want to walk you through the entire QIQT-H framework — what it's trying to do, why the standard pictures don't work, what mathematics we use, where it comes from, and what we add that's new. You don't need to be a foundations-of-physics specialist. You need to know basic quantum mechanics (state vectors, superposition, the Born rule, the Schrödinger equation), basic linear algebra (Hermitian operators, traces), and to be willing to think.
+The central idea of QIQT-H is:
 
-We're going to build up the framework piece by piece. Every time I introduce a new mathematical structure I'll tell you what physical problem it solves and what it's good for. I'll show you exactly how the framework's central axiom sits on top of standard quantum mechanics and standard quantum-gravity ideas. I'll show you where the framework deviates from the standard story and what price it pays for those deviations.
+> Quantum theory gives amplitudes for many possible histories. But in a universe with gravity, a finite causal region cannot contain arbitrarily much distinguishable information. The holographic entropy bound says that the amount of information associated with a region is controlled not by its volume, but by the area of its boundary. QIQT-H tries to turn that into a constraint on which quantum histories can count as physically admissible records.
 
-Be warned: there's no shortcut. There are about ten layers of structure between "the Schrödinger equation" and "QIQT-H's central postulate." I'll go through every one. By the end you should know exactly what the framework claims, exactly what it borrows from existing mathematics, exactly what it adds that's new, and exactly what's still open.
+That is the short version.
 
----
+The long version requires ingredients from several areas:
 
-## 1. The problem we're trying to solve
+- standard quantum measurement theory,
+- decoherence,
+- black-hole entropy and holography,
+- von Neumann algebras,
+- modular theory,
+- crossed products,
+- generalized entropy,
+- decoherent histories,
+- and some foundations issues such as Bell’s theorem.
 
-Let me start with the standard puzzle. You have a particle in a superposition:
+Some of these words sound intimidating. The point of this tutorial is to unpack them from the ground up.
 
-$$|\psi\rangle = \alpha|A\rangle + \beta|B\rangle$$
+You should know:
 
-It hits a measurement apparatus. The apparatus is initially in some "ready" state $|D_0\rangle$. By the Schrödinger equation — linear, unitary evolution — the joint state evolves as:
+- ordinary undergraduate quantum mechanics,
+- Hilbert spaces and matrices,
+- density matrices,
+- entropy in statistical mechanics,
+- basic special relativity,
+- the rough idea of QFT.
 
-$$|\psi\rangle|D_0\rangle \longrightarrow \alpha|A\rangle|D_A\rangle + \beta|B\rangle|D_B\rangle$$
+You do **not** need to know:
 
-where $|D_A\rangle$ and $|D_B\rangle$ are detector states with the pointer pointing at "A" and "B" respectively. The detector itself is in a superposition.
+- functional analysis,
+- operator algebras,
+- Tomita-Takesaki theory,
+- algebraic QFT,
+- Connes-Takesaki theory.
 
-But in any actual experiment, the pointer points at *one* of those positions, not both. You either see A or you see B. The probability of seeing A is $|\alpha|^2$, the probability of B is $|\beta|^2$ (Born rule), and across many runs you get the right statistics.
-
-The puzzle: **how does the universal wave function, which is a superposition of "pointer at A" and "pointer at B", give you a definite outcome in each individual run?**
-
-The standard responses each pay a price:
-
-- **Copenhagen** says: "shut up and calculate; collapse just happens at measurement." This is an additional postulate beyond the Schrödinger equation, and Copenhagen never says exactly *when* collapse happens or *what* counts as a measurement.
-
-- **Many-Worlds (Everett)** says: "both outcomes happen; the wave function never collapses; each branch is real." Keeps the Schrödinger equation pure, but pays in ontology — infinitely many worlds, all real.
-
-- **Bohmian mechanics** says: "the wave function evolves unitarily, but there's also a particle position that gets pushed around by it; the particle position determines the outcome." Pays by adding extra physical structure (hidden particle positions) that's hard to reconcile with relativity.
-
-- **GRW / CSL** says: "the Schrödinger equation isn't quite right; there's an additional stochastic term that causes large objects to localize." Pays by modifying the dynamics; introduces tunable parameters $\lambda, r_C$.
-
-- **QBism** says: "the wave function isn't physically real; it's just a tool agents use to make predictions." Pays by giving up realism.
-
-QIQT-H wants none of these prices. It wants to keep:
-1. The wave function as physically real (no QBism)
-2. Schrödinger evolution as exact (no collapse, no GRW)
-3. One ontology only — the wave function (no Bohmian particles)
-4. One world per run (no MWI)
-
-That's an ambitious wish list. The framework's claim is that you can have all of this if you take seriously something physicists have known about for decades but haven't applied to the measurement problem: **the holographic principle of quantum gravity.**
+We will build those ideas slowly, starting from matrices.
 
 ---
 
-## 2. The holographic principle and the Bekenstein-Bousso bound
+# 1. The measurement problem in one page
 
-The holographic principle says: the maximum amount of information that can fit in a bounded region of space is finite, and proportional to the *area* of the region's boundary, not the volume. For a region $R$, the maximum entropy is:
+In ordinary quantum mechanics, the state evolves by Schrödinger’s equation:
 
-$$S_{\rm max}(R) \le Q_R := \frac{A(\partial R)}{4 \ell_P^2}$$
+\[
+i\hbar \frac{d}{dt}|\psi(t)\rangle = H|\psi(t)\rangle.
+\]
 
-where $A(\partial R)$ is the boundary's surface area and $\ell_P = \sqrt{\hbar G/c^3} \approx 10^{-35}$ m is the Planck length.
+This evolution is:
 
-This is the Bekenstein-Bousso bound. It comes from black-hole thermodynamics. Bekenstein argued in the 1970s that any bounded system has entropy at most proportional to its boundary area; Hawking's calculation of black-hole radiation gave the precise formula $S_{\rm BH} = A/(4\ell_P^2)$; 't Hooft and Susskind generalized to the "holographic principle"; Bousso made it covariantly precise.
+- deterministic,
+- linear,
+- unitary.
 
-How big is $Q_R$? For a 1-meter cube:
+But measurements seem to produce definite outcomes.
 
-$$Q_R \sim \frac{6 \text{ m}^2}{4 \times (10^{-35} \text{ m})^2} \sim 10^{70} \text{ nats}$$
+Suppose a spin starts in
 
-This is astronomically large in absolute terms. But it's *finite*. And the framework's central move is to take this finiteness seriously as a *foundational constraint on the wave function itself*, not just as a quantum-gravity oddity for black-hole entropy.
+\[
+|\psi\rangle = \alpha |\uparrow\rangle + \beta |\downarrow\rangle.
+\]
 
-The intuitive principle:
+A measuring device begins in a ready state \(|M_0\rangle\). If the device is quantum mechanical, then linearity gives
 
-> The wave function, considered as a physical state of spacetime, has finite information content per bounded region.
+\[
+(\alpha|\uparrow\rangle+\beta|\downarrow\rangle)|M_0\rangle
+\longrightarrow
+\alpha|\uparrow\rangle|M_\uparrow\rangle
++
+\beta|\downarrow\rangle|M_\downarrow\rangle.
+\]
 
-Sounds reasonable. The trouble: how do you actually formulate "finite information content of the wave function in region $R$"?
+But in the lab, we see one pointer position, not a ghostly superposition of two pointer readings.
 
----
+So we have a tension:
 
-## 3. The trouble with QFT local algebras (Type III)
+1. Schrödinger evolution says superpositions persist.
+2. Experience says outcomes are definite.
 
-You might think the answer is obvious. You have the wave function $|\Psi\rangle$ of the universe. You restrict it to region $R$ to get a reduced density matrix $\rho_R$. You compute its von Neumann entropy:
+Standard interpretations solve this in different ways:
 
-$$S(\rho_R) = -\mathrm{Tr}(\rho_R \log \rho_R)$$
-
-And require $S(\rho_R) \le Q_R$.
-
-**This doesn't work in QFT.** Here's why.
-
-In quantum field theory, the operators acting in region $R$ form an algebra $\mathcal{A}(R)$. For a generic QFT (free or interacting, in flat or curved spacetime), this algebra has a specific mathematical type, classified by Murray and von Neumann in the 1930s. It turns out that for most physically interesting regions (causal diamonds, double cones), $\mathcal{A}(R)$ is a **Type III$_1$ von Neumann algebra**.
-
-What does Type III$_1$ mean? It means several bad things:
-
-1. **No trace.** There's no functional $\mathrm{Tr}$ on $\mathcal{A}(R)$ that satisfies the usual properties of a trace.
-
-2. **No tensor factorization.** You can't split $\mathcal{H} = \mathcal{H}_R \otimes \mathcal{H}_{\bar R}$. The Hilbert space doesn't decompose between $R$ and its complement.
-
-3. **No density matrices.** Without a trace, you can't write $\rho = \sum_i p_i |i\rangle\langle i|$ in the usual sense. There are still *states* (linear functionals $\omega: \mathcal{A}(R) \to \mathbb{C}$ that are positive and normalized), but they don't have density-matrix representatives.
-
-4. **Divergent entanglement entropy.** The entanglement entropy $S(\rho_R)$ is formally infinite. There's so much vacuum entanglement at short distances across the boundary $\partial R$ that the entropy diverges.
-
-This is bad if you want to apply the holographic bound: you can't bound an infinite quantity by $A/(4\ell_P^2)$.
-
-Why does this happen physically? Because the QFT vacuum has correlations at every length scale, including arbitrarily short ones. The field at a point inside $R$ is entangled with the field at a point outside $R$, no matter how small the distance. Sum over all such entanglement contributions and you get infinity.
-
-So the naive approach — "compute entanglement entropy, bound it by $Q_R$" — doesn't work mathematically. The standard story of "wave function in region $R$ with finite entropy" needs different mathematics.
-
-This is where Witten and Chandrasekaran-Penington-Witten come in (2022).
-
----
-
-## 4. Tomita-Takesaki modular flow (a beautiful piece of math)
-
-Before I tell you what Witten did, I need to tell you what Tomita and Takesaki did in the 1970s. This is one of those pieces of mathematics that you don't appreciate until you see how it shows up in physics.
-
-Given a Type III von Neumann algebra $\mathcal{A}$ and a "cyclic and separating" state $|\Omega\rangle$ (think: the vacuum), Tomita-Takesaki proved a remarkable structural theorem:
-
-There exist operators $\Delta_\Omega$ (the **modular operator**) and $J_\Omega$ (the **modular conjugation**) with the property that:
-
-$$\Delta_\Omega^{it} \mathcal{A} \Delta_\Omega^{-it} = \mathcal{A} \text{ for all real } t$$
-
-In other words, $\Delta_\Omega^{it}$ generates a one-parameter family of automorphisms of $\mathcal{A}$:
-
-$$\sigma_t^\Omega(A) := \Delta_\Omega^{it} A \Delta_\Omega^{-it}$$
-
-called the **modular flow** of $\mathcal{A}$ with respect to $\Omega$.
-
-Why is this remarkable? Because it says that the algebra itself, combined with any reasonable state, gives you a *canonical* notion of "time evolution" on the algebra. You don't have to choose a Hamiltonian externally; the modular structure is intrinsic.
-
-What does the modular flow do physically? Here's the punchline (Bisognano-Wichmann 1976): for the vacuum state of a free QFT restricted to the right Rindler wedge (the spacetime region accessible to a uniformly accelerated observer), the modular flow is **exactly Lorentz boost** — physical time evolution as seen by the accelerated observer.
-
-So the modular flow is something like the canonical "self-time" of a Type III algebra. It's how the algebra naturally evolves with respect to a chosen state.
-
-Why does this matter for us? Because the modular flow is what Witten uses to convert Type III into Type II.
-
----
-
-## 5. The crossed-product construction
-
-Here's the magic operation, due ultimately to Connes and Takesaki in the 1970s, applied to gravitational physics by Witten in 2022.
-
-You have your Type III algebra $\mathcal{A}(R)$ and a reference state $\Omega$. You construct a *new* algebra by taking the **crossed product** of $\mathcal{A}(R)$ with the modular flow:
-
-$$\hat{\mathcal{A}}(R) := \mathcal{A}(R) \rtimes_{\sigma^\Omega} \mathbb{R}$$
-
-What does this construction do explicitly? It adds a new operator to the algebra — call it $K$ — which has two properties:
-
-1. $K$ is self-adjoint with continuous spectrum on $\mathbb{R}$
-2. $K$ implements the modular flow: $e^{iKt} A e^{-iKt} = \sigma_t^\Omega(A)$ for all $A \in \mathcal{A}(R)$
-
-You can think of $K$ as the "Hamiltonian" of an observer's clock. The new algebra $\hat{\mathcal{A}}(R)$ is generated by the original operators in $\mathcal{A}(R)$ plus this new clock operator.
-
-The crossed-product algebra acts not on the original Hilbert space $\mathcal{H}$ but on the enlarged Hilbert space $\mathcal{H} \otimes L^2(\mathbb{R})$. The $L^2(\mathbb{R})$ factor is the "clock Hilbert space" — wave functions of the observer's time-reading.
-
-Now the magic: **Takesaki's structure theorem** (1973) says the crossed product of a Type III algebra with its modular flow is always **Type II** (specifically, Type II$_\infty$ for generic situations). This means:
-
-1. **There IS a trace** $\tau$ on $\hat{\mathcal{A}}(R)$ — though the identity has infinite trace (semifinite)
-2. **States have finite renormalized entropy**: $S_{\rm ren}(\rho) = -\tau(\rho \log \rho)$
-3. **The renormalized entropy differences match generalized entropy differences**: $\Delta S_{\rm ren} = \Delta S_{\rm gen} = \Delta A/(4\ell_P^2) + \Delta S_{\rm matter}$
-
-The first two are abstract properties of the algebra. The third is a physical claim — proved by Chandrasekaran-Penington-Witten (CPW) 2022 in semiclassical gravity.
-
-So when you include gravity (perturbatively, via the crossed-product construction), the regional algebra becomes well-behaved, finite entropy makes sense, and that entropy reproduces the generalized entropy that appears in black-hole thermodynamics.
-
-This is the mathematical scaffolding QIQT-H borrows wholesale.
-
-**Why does gravity force this construction?** Because gravity imposes a constraint: physical observables must commute with the diffeomorphism constraints. When you do this carefully, you end up dressing your operators with an observer's clock — and that dressing operation is mathematically the crossed product with the modular flow. So this isn't a trick; it's how gravity actually enters when you do the math.
-
----
-
-## 6. The state on $\hat{\mathcal{A}}(R)$ and renormalized entropy
-
-Let's get more concrete. Once you have $\hat{\mathcal{A}}(R)$ and a state $|\Psi\rangle$ on the enlarged Hilbert space $\mathcal{H} \otimes L^2(\mathbb{R})$, you can compute the *state* induced by $|\Psi\rangle$ on the algebra:
-
-$$\omega_\Psi(O) := \langle\Psi|O|\Psi\rangle \text{ for } O \in \hat{\mathcal{A}}(R)$$
-
-This is the "regional state" — it tells you the expectation value of every observable localizable in $R$.
-
-For such a state, the renormalized entropy is:
-
-$$S_{\rm ren}(\omega_\Psi) := -\tau(\rho_{\omega_\Psi} \log \rho_{\omega_\Psi})$$
-
-where $\rho_{\omega_\Psi}$ is the density operator representing $\omega_\Psi$ via the trace $\tau$ (which exists because $\hat{\mathcal{A}}(R)$ is Type II).
-
-In the de Sitter static patch (the cleanest example, CLPW 2022), the algebra is Type II$_1$ — finite trace with $\tau(\mathbf{1}) = 1$. Maximum renormalized entropy is $A_{\rm horizon}/(4\ell_P^2)$ — exactly the de Sitter cosmological horizon area, divided by $4\ell_P^2$. Standard Bekenstein-Bousso.
-
-For generic regions in flat-spacetime QFT plus gravity, the algebra is Type II$_\infty$ — semifinite trace. Maximum entropy is still bounded (with a state-independent constant) by $A/(4\ell_P^2)$.
-
-OK. So at this point we have:
-- A precise mathematical setting (Type II crossed-product algebra) for "physical content of $|\Psi\rangle$ in region $R$"
-- Finite renormalized entropy that bounds something like the Bekenstein-Bousso bound
-- All compatible with standard quantum mechanics and standard quantum gravity
-
-Now we add QIQT-H's first axiom.
-
----
-
-## 7. The (FQ) axiom — the literal physical-instantiation reading
-
-Standard CPW gives you renormalized entropy that *can* be bounded by holographic area. The framework's first axiom takes this as a foundational constraint on physical wave functions:
-
-> **Axiom (FQ).** For every per-run physical wave function $|\Psi\rangle_{\rm run}$ of the universe and every bounded region $R$, the state $\omega_\Psi$ induced on the crossed-product Type II algebra $\hat{\mathcal{A}}(R)$ satisfies:
-> $$S_{\rm ren}(\omega_\Psi) \le Q_R := \frac{A(\partial R)}{4\ell_P^2}$$
-
-This is "the literal reading" of the holographic bound — it says the bound applies to the wave function regarded as a physical state of spacetime, not just as an abstract Hilbert vector.
-
-Why is this an axiom and not a theorem? Because CPW prove that entropy *differences* match generalized entropy differences. The absolute bound — that physical states have $S_{\rm ren}$ literally bounded by $Q_R$ — is a stronger postulate. It's compatible with CPW's framework but is an additional foundational commitment.
-
-Physically, what does (FQ) say? It says: there's no physical wave function in region $R$ whose state on the regional algebra has more than $Q_R$ nats of renormalized entropy. The wave function as a physical object cannot store more information in $R$ than the holographic capacity allows.
-
-**Why we say "per-run" wave function:** because we want to distinguish the actual physical state of the universe in any specific run from the textbook "formal" wave function. In any specific run, the universe has one specific quantum state. Different runs (different actual physical universes at different moments) have different actual states. The textbook $\alpha|0\rangle + \beta|1\rangle$ is a subsystem abstraction that aggregates over the apparatus + environment details that differ across runs.
-
-This is ψ-monism: only the wave function exists, but the wave function of the universe is finer-grained than the textbook subsystem description.
-
-**(FQ) by itself doesn't solve the measurement problem.** Even with (FQ), the post-measurement state $\sum_k c_k |s_k\rangle|A_k\rangle|E_k\rangle$ has bounded entropy (the entropy of the reduced density matrix is at most a few bits — far below $Q_R$). So (FQ) allows multi-record superpositions. We need more.
-
----
-
-## 8. The macroscopic record subalgebra $\mathcal{C}(R)$
-
-Here's the next piece. Inside the regional algebra $\hat{\mathcal{A}}(R)$, there's a special subalgebra: the algebra of **macroscopic record observables**.
-
-The idea: when an apparatus has interacted with a particle, the apparatus has a definite macroscopic configuration — pointer at position $x_k$, screen pixel $k$ flashed, brain neuron $k$ fired, etc. These macroscopic configurations correspond to commuting projection operators $\{P_k\}$ on the regional algebra:
-
-$$P_k \in \hat{\mathcal{A}}(R), \quad P_j P_k = \delta_{jk} P_k, \quad \sum_k P_k = \mathbf{1}_{\rm record}$$
-
-The algebra generated by these projectors is **commutative** — it's like classical probability theory living inside the quantum algebra.
-
-How do we identify which observables are "macroscopic records"? Through **einselection** (Zurek 1981–2003): the environment couples differently to different macroscopic configurations, producing distinct environmental imprints $|E_k\rangle$ that are exponentially orthogonal:
-
-$$\langle E_j | E_k \rangle \sim e^{-\Gamma t} \sim e^{-10^{20}}$$
-
-on physically realistic detection timescales. The decoherence-stable observables — those that don't get scrambled by environmental coupling — are the macroscopic record observables. They form the **einselected pointer-basis subalgebra**.
-
-Formally, $\mathcal{C}(R)$ is the maximal commutative subalgebra of $\hat{\mathcal{A}}(R)$ that's stable under the apparatus + environment dynamics. Its spectrum $\mathrm{Spec}(\mathcal{C}(R))$ is the set of distinguishable macroscopic configurations. By the Gelfand representation theorem:
-
-$$\mathcal{C}(R) \cong C(\mathrm{Spec}(\mathcal{C}(R)))$$
-
-— continuous functions on the spectrum. States on $\mathcal{C}(R)$ are probability measures on the spectrum.
-
-So for a screen with $N$ distinguishable pixels (say $N \sim 10^6$ to $10^9$), $\mathcal{C}(R_S)$ has spectrum $\{r_1, r_2, \ldots, r_N\}$ — one point per pixel. A state on $\mathcal{C}(R_S)$ is a probability distribution $\{p_k\}$ over pixels.
-
----
-
-## 9. Why decoherence + (FQ) gives a strict classical mixture
-
-Here's where (FQ) starts to do real work, even at the entropy level.
-
-After particle-screen-environment interaction:
-
-$$|\Psi\rangle = \sum_k c_k |x_k\rangle |S_k\rangle |E_k\rangle$$
-
-The induced state on $\hat{\mathcal{A}}(R)$ for $R$ containing apparatus + environment is:
-
-$$\omega_\Psi^R = \sum_{j,k} c_j c_k^* \langle E_k | E_j\rangle \cdot \omega_{jk}$$
-
-where $\omega_{jk}$ are the various matrix-element states. The diagonal terms ($j = k$) give the classical-looking mixture:
-
-$$\sum_k |c_k|^2 \omega_k^R$$
-
-The off-diagonal terms ($j \ne k$) carry the quantum coherence between distinct records. **Decoherence** drives these off-diagonal terms to be exponentially small:
-
-$$|c_j c_k^* \langle E_k|E_j\rangle| \sim e^{-10^{20}}$$
-
-for typical macroscopic decoherence rates. So the regional state is *exponentially close to* a strict classical mixture.
-
-But "exponentially close to" is not "exactly equal to." Mathematically, off-diagonal coherence terms of order $10^{-(10^{20})}$ are still nonzero. Standard QM allows you to write them down as nonzero numbers.
-
-Under **(FQ)**, these exponentially-small terms are *physically zero*. Why? Because they're far below the precision the regional Type II algebra can resolve. The (FQ) precision floor renders coherence terms below threshold *physically equivalent to zero*.
-
-So decoherence + (FQ) deliver: the regional state on $\hat{\mathcal{A}}(R)$ is a **strict classical mixture** over macroscopic records:
-
-$$\omega_\Psi^R = \sum_k |c_k|^2 \omega_k^R$$
-
-with no remaining off-diagonal coherence. This is a real consequence of (FQ).
-
-**But we're still not done.** A classical mixture over records is still a *mixture*. In a specific run, which record is realized? This is where the framework's central new physics enters.
-
----
-
-## 10. The Macroscopic Definiteness problem
-
-After decoherence + (FQ), we have a strict classical mixture $\sum_k |c_k|^2 \omega_k^R$. In standard QM, you'd say: this mixture *describes* the system; an observer measures and obtains record $k$ with probability $|c_k|^2$.
-
-But the framework doesn't have an observer doing measurements. It wants single-record per run as a *structural* feature of physics, not as a postulate about observation.
-
-So the question is: **why is the universe in one specific branch $\omega_k$ in any specific run, rather than in the mixture $\sum_k |c_k|^2 \omega_k$?**
-
-Standard answers:
-- **MWI:** all branches are real; we're "in" one branch by self-location; mixture is just our perspective
-- **Bohmian:** particle position determines which branch we're in
-- **GRW:** stochastic collapse picks one branch
-
-The framework wants none of these. It wants: **the multi-record mixture is not a physical state**. The physical state of any region is a *single* macroscopic record. This is what the framework calls the **Macroscopic Definiteness Conjecture**.
-
-How can this be true? If you take the standard counting:
-- Regional Hilbert space dimension: $D_R = 2^{Q_R}$
-- Record sectors partition $\mathcal{H}_R = \bigoplus_k \mathcal{H}_k$ with $\sum_k d_k = D_R$
-- Mixture entropy: $S(\sum_k p_k \rho_k) \le \log \sum_k d_k = \log D_R = Q_R$
-
-The mixture entropy doesn't exceed $Q_R$. So (FQ) alone doesn't forbid multi-record states.
-
-We need a *different* measure of "information cost" that scales differently with the number of macroscopic records. Specifically, we need a measure where multi-record states are forbidden by the holographic bound.
-
-This is where QIQT-H's central new physics comes in.
-
----
-
-## 11. The branch-summed cost $I_\Sigma$
-
-Here's the new measure we introduce. Given a state $\omega_R$ on the regional algebra, and given the macroscopic record subalgebra $\mathcal{C}(R)$ with spectrum $\{r_1, r_2, \ldots\}$:
-
-**Step 1.** Compute the regional probabilities of records: $p_r = \omega_R(P_r)$.
-
-**Step 2.** Identify the smooth active set $\mathcal{A}_\epsilon(\omega_R)$ — the smallest set of records carrying total probability at least $1 - \epsilon$:
-
-$$\mathcal{A}_\epsilon = \min\{S : \sum_{r \in S} p_r \ge 1 - \epsilon\}$$
-
-This is essentially "how many records are non-negligibly occupied" — a smoothed version of the Rényi-0 entropy / Hill number.
-
-**Step 3.** For each record $r$, compute the **per-record physical cost** $c_R(r)$. This is the Zurek-style physical entropy:
-
-$$c_R(r) = K(r) + S_{\rm micro}(r)$$
-
-where $K(r)$ is the algorithmic complexity of specifying the macroscopic record (which pixel, which pointer position, which neuron) and $S_{\rm micro}(r)$ is the residual microscopic entropy of the apparatus + environment configuration consistent with that record.
-
-**Step 4.** Sum:
-
-$$\boxed{I_\Sigma^\epsilon[\omega_R] := \sum_{r \in \mathcal{A}_\epsilon(\omega_R)} c_R(r)}$$
-
-This is the **branch-summed cost**. For a single-record state: $I_\Sigma \approx I_0$ where $I_0$ is the typical per-record cost. For an $N$-record state with comparable costs: $I_\Sigma \approx N \cdot I_0$.
-
-**Crucial property:** $I_\Sigma$ scales *linearly* in the number of occupied records, unlike standard entropy which scales *logarithmically*. This is the new mathematical functional the framework needs.
-
-It's not standard von Neumann entropy. It's not the renormalized algebra entropy. It's a hybrid construction combining:
-- Decoherent histories framework (Gell-Mann-Hartle, Griffiths, Omnès): defines macroscopic branches
-- Quantum Darwinism / spectrum broadcast structure (Zurek; Brandão-Piani-Horodecki): defines records via environmental redundancy
-- Smooth Rényi-0 / Hill numbers: counts active branches
-- Zurek physical entropy: per-record cost
-
-This combination is novel to QIQT-H. None of the existing pieces alone gives you the right scaling, but the combination does.
-
----
-
-## 12. The Branch-Summed Holographic Bound — the central new physics
-
-Here's the framework's central new physical principle:
-
-> **Branch-Summed Holographic Bound (postulate).** For every physical state $\omega_R$ on the regional algebra $\hat{\mathcal{A}}(R)$:
-> $$I_\Sigma^\epsilon[\omega_R] \le Q_R = \frac{A(\partial R)}{4\ell_P^2}$$
-
-This is **a strengthening of standard Bekenstein-Bousso**, not a derivation from it. Standard holography bounds regional entropy; this bounds the branch-summed cost.
-
-**Why this is new:** standard BB allows $N$-record mixtures because their entropy stays below $Q_R$ (they partition the Hilbert space, $\sum_k d_k = D_R$). The Branch-Summed Bound forbids multi-record states because $I_\Sigma$ scales linearly: $N \cdot I_0$ exceeds $Q_R$ for $N > Q_R/I_0$.
-
-This is the framework's distinctive contribution. It's an additional physical principle beyond what Witten/CPW establish. The framework adopts it as a **superselection rule**: states violating the bound are not in the physical state space.
-
----
-
-## 13. The physical state space and constrained dynamics
-
-Define:
-
-$$\mathcal{H}_{\rm phys} := \{|\Psi\rangle \in \mathcal{H} \otimes L^2(\mathbb{R}) : I_\Sigma^\epsilon[\omega_\Psi^R] \le Q_R \text{ for all bounded } R\}$$
-
-States outside $\mathcal{H}_{\rm phys}$ are **kinematically forbidden** — mathematically writeable in the unrestricted Hilbert-space formalism but not physically realizable.
-
-**Physical Hamiltonians** are those that preserve $\mathcal{H}_{\rm phys}$:
-
-$$e^{-iHt/\hbar} \mathcal{H}_{\rm phys} \subset \mathcal{H}_{\rm phys}$$
-
-Generic Hermitian operators on $\mathcal{H} \otimes L^2(\mathbb{R})$ do *not* preserve $\mathcal{H}_{\rm phys}$. Physical Hamiltonians are a proper subset.
-
-**This is analogous to gauge theory.** In Yang-Mills, the physical state space is the gauge-invariant subspace; physical Hamiltonians preserve gauge invariance; arbitrary Hermitian operators on the full Hilbert space are mathematically writeable but unphysical. In QIQT-H, the constraint is the Branch-Summed Bound; physical Hamiltonians preserve it; arbitrary Hilbert-space Hamiltonians are mathematically writeable but unphysical.
-
-The crucial difference: gauge invariance is *linear* (gauge transformations act linearly on the state), so the gauge-invariant subspace is a linear subspace of $\mathcal{H}$. The Branch-Summed Bound is *nonlinear* (since $I_\Sigma$ depends nonlinearly on the state), so $\mathcal{H}_{\rm phys}$ is a nonlinear subset.
-
-This means: within $\mathcal{H}_{\rm phys}$, physical Hamiltonians generate linear unitary evolution (Schrödinger equation preserved). But the constraint of staying within $\mathcal{H}_{\rm phys}$ is a nonlinear restriction on which Hamiltonians count as physical.
-
----
-
-## 14. Why this gives single-world per run
-
-Now the central result:
-
-**Theorem (Macroscopic Definiteness, under the Branch-Summed Superselection Postulate).** For any $|\Psi\rangle \in \mathcal{H}_{\rm phys}$ and any region $R$, the smooth active set $\mathcal{A}_\epsilon(\omega_\Psi^R)$ has cardinality at most $N_{\max} = \lfloor Q_R/I_0 \rfloor$. When $I_0 \approx Q_R$ at macroscopic scales, $N_{\max} = 1$ — only single-record states are physically realizable.
-
-**Proof.** By definition of $\mathcal{H}_{\rm phys}$: $I_\Sigma[\omega_\Psi^R] \le Q_R$. By the branch-summed counting: $|\mathcal{A}_\epsilon| \cdot I_0 \le I_\Sigma \le Q_R$. So $|\mathcal{A}_\epsilon| \le Q_R/I_0$. $\blacksquare$
-
-This is essentially a counting argument: if each record costs $I_0$ and the total budget is $Q_R$, you can fit at most $Q_R/I_0$ records.
-
-**The Everett-branch question dissolves.** Standard QM (in the unrestricted Hilbert-space formalism) can produce a multi-record state $\sum_k c_k |x_k\rangle|S_k\rangle|E_k\rangle$. The framework says: this state is **not in the physical state space**. The unrestricted-Hilbert-space wave function carries mathematical multi-branch structure, but the actual physical universe doesn't contain such states. So there are no "many worlds" to select from — there's only one macroscopic record per region, kinematically.
-
-**This is not collapse.** Nothing dynamical happens — no stochastic event, no projection operator applied. The constraint is purely kinematic: certain states just aren't physically realizable. The physical Hamiltonian (whatever it is — and characterizing it is open work) preserves single-record states by construction.
-
----
-
-## 15. The $I_0$ parameter — empirical content
-
-Here's where the framework gains genuine empirical content.
-
-$Q_R = A(\partial R)/(4\ell_P^2)$ is geometric — fixed by the boundary area, calculable from spacetime geometry. Not adjustable.
-
-$I_0$, the per-record physical cost, is an **experimental parameter of the theory**. Like GRW's collapse rate $\lambda$ or localization scale $r_C$, it needs to be calibrated against observations.
-
-The single-outcome enforcement threshold is at $N \cdot I_0 \approx Q_R$. The framework predicts:
-
-- Below threshold: $N \cdot I_0 \ll Q_R$. The constraint is operationally vacuous. Standard QM behavior recovered.
-- Above threshold: $N \cdot I_0 \to Q_R$. Constraint enforces single-record per run kinematically.
-
-The boundary is where macroscopic-superposition experiments cease to work — current state of the art being molecular interferometry with $\sim 10^4$-atom molecules and macroscopic mechanical oscillators in spatial superpositions over picometer distances.
-
-**Distinctive empirical signature vs GRW:**
-
-| Experiment | GRW/CSL | QIQT-H |
-|---|---|---|
-| Matter-wave interference near boundary | Gradual visibility loss with rate $\lambda$ | Sharp threshold-like exclusion at $N \cdot I_0 \approx Q_R$ |
-| Bulk heating | Generally nonzero (collapse-induced) | Absent (no stochastic events) |
-| Spontaneous radiation | Possible | Absent |
-
-So the framework is empirically distinguishable from GRW in principle: GRW has stochastic localization noise; QIQT-H has kinematic exclusion with no noise signal.
-
----
-
-## 16. The double-slit experiment — worked example
-
-Let me show you how this all plays out for the textbook case.
-
-**Setup.** Particle source, double-slit barrier with slits A and B separated by distance $d$, screen at distance $L$. Particles arrive one at a time.
-
-**Standard QM.** After the slits, the particle's wave function is:
-
-$$|\psi\rangle = \frac{1}{\sqrt{2}}(|A\rangle + |B\rangle)$$
-
-Free propagation gives $\psi(x) = \psi_A(x) + \psi_B(x)$ on the screen, with interference pattern $|\psi(x)|^2 = |\psi_A|^2 + |\psi_B|^2 + 2\,\mathrm{Re}\,(\psi_A^*\psi_B)$.
-
-When particle hits screen, unitary detection gives:
-
-$$|\Psi\rangle = \int dx\, \psi(x) |x\rangle|S_x\rangle|E_x\rangle$$
-
-where $|S_x\rangle, |E_x\rangle$ are macroscopic screen + environment states corresponding to "spot at position $x$."
-
-**The puzzle.** Each particle produces *one* spot on the screen. After many particles, the spot distribution reproduces $|\psi(x)|^2$ with the interference pattern. How does any individual particle, in a single run, produce one spot from this superposition?
-
-**QIQT-H account:**
-
-For the screen region $R_S$:
-- Holographic capacity: $Q_{R_S} \sim 10^{68}$ nats (for a $\sim$few cm² screen)
-- Macroscopic record subalgebra $\mathcal{C}(R_S)$ generated by spot-position projectors $\{P_k\}$
-- Decoherence between distinct spot positions: $\langle E_j|E_k\rangle \sim e^{-10^{20}}$
-- Under (FQ), off-diagonal coherence physically zero → strict classical mixture $\sum_k |c_k|^2 \omega_k^{R_S}$ with $|c_k|^2 = |\psi(x_k)|^2 \Delta x$
-
-So far, this is standard decoherence physics (with the (FQ) precision floor cleaning up the residual coherence).
-
-The new step: **Branch-Summed Holographic Bound.** Multi-spot states have:
-
-$$I_\Sigma^\epsilon[\omega_R] = \sum_k c_{R_S}(r_k) \approx N \cdot I_0$$
-
-For $N \cdot I_0 > Q_{R_S}$, this exceeds the bound. Such states are not in $\mathcal{H}_{\rm phys}$.
-
-The physical Hamiltonian, acting on the actual initial conditions of the screen + environment in any specific run, produces a single-spot final state — not a multi-spot superposition. Which spot is realized depends on the specific actual microscopic configuration of screen + environment in that run.
-
-**Across runs:** different actual initial conditions produce different actual spots. The distribution across many runs reproduces $|\psi(x_k)|^2$ via typicality of microscopic initial conditions (open problem: prove this rigorously, analogous to Bohmian $|\psi|^2$-equivariance).
-
-**The interference pattern.** Each particle goes through both slits (the wave function does — that's standard QM). When the wave function arrives at the screen, the spot probability density at position $x$ is $|\psi_A(x) + \psi_B(x)|^2$ — including the interference cross term. The Branch-Summed Bound enforces single-spot per run, with which spot determined by the actual screen+environment microstate. Across runs, the distribution of selected spots reproduces the interference pattern.
-
-**The wave-particle duality dissolves.** The particle's wave function is genuinely an extended wave that goes through both slits and interferes with itself at the screen. The spot you see is the per-run physical reality on the screen region — one specific spot, kinematically enforced by the Branch-Summed Bound. There's no "wave vs particle" — there's just a wave (the universal wave function) and a screen region whose physical content is constrained to be single-spot per run.
-
-**The which-path case.** Add a detector at slit A. Now the post-measurement state is:
-
-$$|\Psi\rangle = \frac{1}{\sqrt{2}}(|A\rangle|D_A\rangle + |B\rangle|D_0\rangle)$$
-
-The detector is itself a macroscopic record. By the Branch-Summed Bound, only one detector outcome is realized per run. The path is determined by the detector. The screen pattern then has no interference: $P(x) = \frac{1}{2}|\psi_A(x)|^2 + \frac{1}{2}|\psi_B(x)|^2$.
-
-Same framework, same dynamics, different setup, different result. Standard QM phenomenology reproduced, with the measurement-problem resolution being the kinematic exclusion of multi-record states.
-
----
-
-## 17. Bell's theorem and how the framework escapes it
-
-Any deterministic single-world theory reproducing standard QM must confront Bell's theorem. Bell proved: no local hidden-variable theory satisfying measurement independence ($\rho(\lambda|a,b) = \rho(\lambda)$) can reproduce quantum predictions.
-
-QIQT-H is a deterministic single-world theory (within $\mathcal{H}_{\rm phys}$, evolution is deterministic from initial conditions). So something has to give. QIQT-H rejects **measurement independence**, but in a principled (non-conspiratorial) way:
-
-A Bell experiment isn't three independently specifiable pieces (source variables, Alice's setting, Bob's setting). It's *one finite-information physical process embedded in a common spacetime history*. In algebraic QFT, local algebras don't factor independently — they're Type III before gravity, Type II with global structure after. Classical separability of "source variables vary independently of measurement settings" is already false at the algebraic level.
-
-The framework rejects $\rho(\lambda|a,b) = \rho(\lambda)$ not because of a "superdeterministic conspiracy" but because the assumption presupposes classical separability that holographic quantum gravity doesn't respect. Operational free choice is preserved (no signaling, no loss of empirical freedom); only the *metaphysical counterfactual* that exact source-state and arbitrary later-settings are independently variable is denied.
-
-The framework pays the Bell price at measurement independence rather than at locality or unitary dynamics. This preserves: no preferred foliation, no nonlocal collapse, no action-at-a-distance, exact unitary evolution within $\mathcal{H}_{\rm phys}$, Lorentz-covariant holographic bound.
-
-This is similar in spirit to Palmer's RaQM (the closest existing sister program) but with a different motivating principle (holography vs invariant set chaos) and different mathematical apparatus (Type II algebras vs p-adic measures).
-
----
-
-## 18. What's borrowed and what's new
-
-Let me be very clear about what comes from where.
-
-| What | Source |
+| Interpretation | Move |
 |---|---|
-| Local algebras $\mathcal{A}(R)$, isotony, locality | Haag-Kastler 1964; standard algebraic QFT |
-| Type III$_1$ classification for QFT local algebras | Buchholz, Wichmann, Borchers, Longo (1970s-90s) |
-| Tomita-Takesaki modular flow | Tomita-Takesaki 1970s; standard operator algebras |
-| Crossed-product construction | Connes-Takesaki 1970s; pure mathematics |
-| Gravitational dressing $\to$ crossed product $\to$ Type II | Witten 2022 |
-| Type II trace + renormalized entropy | Murray-von Neumann 1936; CPW 2022 |
-| Entropy differences = generalized entropy differences | CPW 2022 |
-| de Sitter Type II$_1$ structure | CLPW 2022 |
-| Bekenstein-Bousso holographic bound | Bekenstein 1981, 't Hooft 1993, Susskind 1995, Bousso 2002 |
-| Einselection / pointer-basis selection | Zurek 1981-2003 |
-| Decoherent histories framework | Gell-Mann-Hartle 1993, Griffiths 2002, Omnès 1994 |
-| Quantum Darwinism / spectrum broadcast | Zurek; Brandão-Piani-Horodecki |
-| Smooth support / Rényi-0 / Hill numbers | Standard information theory |
-| Zurek-style physical entropy | Zurek |
-| **(FQ) — literal physical-instantiation reading of BB** | QIQT-H framework |
-| **Macroscopic record subalgebra $\mathcal{C}(R)$ as einselected commutative subalgebra of crossed-product algebra** | QIQT-H framework |
-| **Branch-summed cost $I_\Sigma^\epsilon[\omega_R]$ as new functional** | QIQT-H framework |
-| **Branch-Summed Holographic Bound as superselection rule** | QIQT-H framework |
-| **Physical state space $\mathcal{H}_{\rm phys}$ + constrained physical Hamiltonians** | QIQT-H framework |
-| **$I_0$ as experimental parameter (GRW $\lambda$ analog)** | QIQT-H framework |
+| Copenhagen | Add collapse as a rule for measurements |
+| Many-worlds | Keep all branches; each observer sees one branch |
+| Bohmian mechanics | Add particle positions guided by the wavefunction |
+| Objective collapse | Modify Schrödinger dynamics |
+| QBism / relational views | Reinterpret the state as information or relation |
 
-The framework borrows extensive cutting-edge mathematical physics (2022 Witten, 2022-23 CPW, decoherent histories, einselection). It adds **a new functional ($I_\Sigma$), a new physical principle (Branch-Summed Bound as superselection rule), a constrained-dynamics formalism analogous to gauge theory, and an experimental parameter**.
+QIQT-H tries a different route.
 
-The originality is in the synthesis and the new principle. The framework is not Witten + handwaving; it's Witten + a specific new physical postulate that does foundational work.
+It keeps ordinary quantum amplitudes but adds a **global information constraint** motivated by gravity and holography.
+
+Roughly:
+
+> Not every formally available branch is allowed to correspond to an independent physical record inside a finite causal region. The admissible set of records must fit inside a holographic entropy budget.
+
+That statement needs a lot of unpacking.
 
 ---
 
-## 19. What's open — the honest research agenda
+# 2. The basic picture: amplitudes, branches, and records
 
-The framework is at the stage of "coherent speculative foundations program," not "completed measurement theory." Here's what's honestly open:
+In ordinary QM, if we have alternatives \(i\), the state can be written
 
-**(1) Rigorous definition of $I_\Sigma^\epsilon[\omega_R]$.** Each ingredient needs precise specification: $\mathcal{C}(R)$ as the einselected subalgebra (in algebraic QFT), $c_R(r)$ as Zurek physical entropy (rigorously), $\mathcal{A}_\epsilon$ as the smooth active set (with all the discontinuity issues handled). The ingredients exist in the literature but haven't been combined into the precise functional QIQT-H needs.
+\[
+|\Psi\rangle = \sum_i c_i |i\rangle.
+\]
 
-**(2) The Branch-Summed Holographic Bound as new physics.** It's not derivable from standard holography. Justifying it requires either (a) connecting to deeper finite-information principles in quantum gravity, (b) showing it's consistent with what's known about Type II crossed-product algebras, (c) finding empirical confirmation.
+The Born rule says
 
-**(3) Characterization of physical Hamiltonians.** Which Hermitian operators preserve $\mathcal{H}_{\rm phys}$? The framework asserts a constrained-dynamics structure analogous to gauge theory, but the actual characterization (analogous to identifying gauge-invariant operators) is open work. The framework also needs to show that ordinary lab Hamiltonians are effective approximations to physical Hamiltonians in regimes where the constraint is operationally vacuous ($N \cdot I_0 \ll Q_R$).
+\[
+P(i)=|c_i|^2.
+\]
 
-**(4) Empirical calibration of $I_0$.** What's the actual numerical value of $I_0$ for typical macroscopic records? Calibrate against current state-of-the-art Schrödinger-cat experiments. Then predict boundaries at other scales.
+But in real measurements, \(i\) is not merely a label in a tiny Hilbert space. It becomes a **record**:
 
-**(5) Born typicality theorem.** Under the constrained physical dynamics, the distribution of realized records across runs should reproduce $|c_k|^2$. This requires specifying the typicality measure on initial conditions and proving an equivariance-type theorem (analogous to Bohmian $|\psi|^2$-equivariance).
+- a pointer points left,
+- a detector clicked,
+- photons scattered into the room,
+- neurons in an observer’s brain encode an outcome.
 
-**(6) Linear measurement obstruction — full operational resolution.** The framework's response (we don't have direct access to amplitudes; physical content is macroscopic observable content; (FQ) makes off-diagonal coherence physically zero) is defensible but needs the constrained-dynamics formalism (item 3) to be fully complete.
+The essential object is not merely “the spin is up,” but rather:
 
-**(7) Quantitative empirical predictions.** Threshold law for visibility loss vs system size. Distinguishing signature vs GRW (no stochastic noise).
+\[
+\text{spin up} + \text{apparatus says up} + \text{environment contains records of up}.
+\]
 
-**(8) Relativistic / QFT formulation.** Foliation choice, Lorentz invariance, compatibility with light-sheet formulation of holographic bound, curved spacetime extensions.
+A branch is approximately a large entangled component:
 
-These aren't vague holes. Each is a concrete mathematical problem with existing literature to draw on. The framework's status is: research program with rigorous scaffolding (Witten/CPW) plus the central new physics (Branch-Summed Bound) plus a clearly identified open agenda.
+\[
+|\Psi\rangle
+\approx
+\alpha |\uparrow\rangle |M_\uparrow\rangle |E_\uparrow\rangle
++
+\beta |\downarrow\rangle |M_\downarrow\rangle |E_\downarrow\rangle.
+\]
 
----
+The environment states are effectively orthogonal:
 
-## 20. Putting it all together
+\[
+\langle E_\uparrow | E_\downarrow\rangle \approx 0.
+\]
 
-Let me give you the framework end-to-end, in one continuous picture.
+That is decoherence. It explains why interference between branches becomes practically impossible.
 
-**The starting point.** Quantum mechanics, taken literally as a physical theory, has a measurement problem: the Schrödinger equation gives superpositions of macroscopic alternatives, but actual experiments produce one outcome. The standard interpretations each pay a price (extra branches, extra particles, modified dynamics, anti-realism). QIQT-H wants to pay a different price: take the holographic principle of quantum gravity seriously as a foundational constraint on the wave function.
+But decoherence alone does **not** choose one outcome. It gives an apparent classical branching structure. The measurement problem remains:
 
-**The mathematical setup.** In QFT, the operators acting in a bounded region $R$ form an algebra $\mathcal{A}(R)$. For generic regions this is a Type III$_1$ von Neumann algebra — pathologically infinite, no trace, no notion of density matrix, divergent entanglement entropy. So you can't naively apply the holographic bound.
+> Why do I experience one branch rather than a superposition of branches?
 
-Witten (2022) and CPW (2022) show that when you include gravity, the operator algebra gets dressed by the modular flow — the natural "self-time" of the algebra discovered by Tomita-Takesaki in the 1970s. The dressing operation is mathematically the crossed product:
-
-$$\hat{\mathcal{A}}(R) = \mathcal{A}(R) \rtimes_{\sigma^\Omega} \mathbb{R}$$
-
-The crossed product is **Type II** — it has a trace, finite renormalized entropy, well-defined density matrices. CPW prove that renormalized entropy differences match generalized entropy differences ($A/(4\ell_P^2) + S_{\rm matter}$). The crossed-product algebra acts on the enlarged Hilbert space $\mathcal{H} \otimes L^2(\mathbb{R})$, where the $L^2(\mathbb{R})$ factor is the observer's clock degrees of freedom.
-
-**The first axiom (FQ).** The framework postulates that the bound applies to physical wave functions:
-
-$$S_{\rm ren}(\omega_\Psi) \le Q_R = \frac{A(\partial R)}{4\ell_P^2}$$
-
-This is the "literal physical-instantiation reading" of Bekenstein-Bousso. It's compatible with CPW but is an additional foundational commitment. By itself, it doesn't solve the measurement problem — it gives finite information content per region, which is necessary but not sufficient.
-
-**The macroscopic record subalgebra.** Inside $\hat{\mathcal{A}}(R)$ lives a commutative subalgebra $\mathcal{C}(R)$ generated by macroscopic record projectors $\{P_k\}$ — the einselected pointer-basis observables. Its spectrum is the set of macroscopic configurations. States on it are probability distributions over configurations.
-
-**Decoherence + (FQ).** Decoherence makes off-diagonal coherence between distinct macroscopic records exponentially small ($\sim e^{-10^{20}}$). Under (FQ), these exponentially-small terms are physically zero. Result: the regional state is a *strict* classical mixture over macroscopic records.
-
-**The branch-summed cost.** The framework defines a new functional:
-
-$$I_\Sigma^\epsilon[\omega_R] = \sum_{r \in \mathcal{A}_\epsilon(\omega_R)} c_R(r)$$
-
-where $\mathcal{A}_\epsilon$ is the smooth active set (records carrying probability $\ge 1-\epsilon$) and $c_R(r)$ is the per-record Zurek physical entropy. For $N$ comparable records: $I_\Sigma \approx N \cdot I_0$.
-
-**The central new physics — Branch-Summed Holographic Bound.** The framework postulates as a *superselection rule*:
-
-$$I_\Sigma^\epsilon[\omega_R] \le Q_R$$
-
-This is a strengthening of standard holography. Multi-record states ($N \cdot I_0 > Q_R$) are kinematically forbidden from the physical state space.
-
-**Physical state space and constrained dynamics.** Define $\mathcal{H}_{\rm phys}$ as the set of wave functions satisfying the bound. Physical Hamiltonians are those preserving $\mathcal{H}_{\rm phys}$. Within $\mathcal{H}_{\rm phys}$, Schrödinger evolution under physical Hamiltonians is exact (linear, unitary). Generic Hilbert-space Hamiltonians are mathematically writeable but unphysical. This is analogous to gauge theory, but with a *nonlinear* constraint.
-
-**Single-world per run as kinematic structural feature.** The Branch-Summed Bound implies single-record macroscopic states per region when $I_0 \approx Q_R$ at macroscopic scales. The Everett-branch question dissolves: multi-record states aren't physical, so there's nothing to "select from."
-
-**Empirical content via $I_0$.** $I_0$ is an experimental parameter analogous to GRW's $\lambda$. The single-outcome enforcement threshold is at $N \cdot I_0 \approx Q_R$. Below: standard QM recovered. Above: kinematic enforcement. Distinguishable from GRW: kinematic exclusion has no stochastic noise signal.
-
-**Born statistics across runs.** Different actual initial conditions of apparatus + environment produce different actual records. The distribution across runs reproduces $|c_k|^2$ via typicality (open problem, analogous to Bohmian equivariance).
-
-**Bell escape via measurement-independence rejection.** Grounded in algebraic-QFT nonseparability, not classical superdeterminism.
+QIQT-H says: the answer may involve not a dynamical collapse, but a constraint on possible records.
 
 ---
 
-## 21. The honest summary
+# 3. The holographic clue: finite information in gravity
 
-Here's what you should walk away with.
+In non-gravitational quantum mechanics, it is tempting to say that a finite volume can contain arbitrarily much information. Just use shorter and shorter wavelengths.
 
-QIQT-H is a **research program**, not a completed theory. It has:
+But gravity changes that.
 
-✅ Rigorous mathematical scaffolding from cutting-edge quantum-gravity work (Witten/CPW Type II crossed-product algebras)
+If you pack too much energy into a region, the region collapses into a black hole. A black hole of horizon area \(A\) has entropy
 
-✅ A clearly stated central postulate (Branch-Summed Holographic Bound as superselection rule)
+\[
+S_{\rm BH} = \frac{k_B A}{4G\hbar}.
+\]
 
-✅ A coherent foundational position: ψ-monist, no extra ontology, kinematic exclusion of multi-record states, single-world per run as structural feature
+In units where \(k_B=1\),
 
-✅ Genuine empirical content via the parameter $I_0$, distinguishable from GRW
+\[
+S_{\rm BH} = \frac{A}{4G\hbar}.
+\]
 
-✅ An explicit research agenda — what's borrowed, what's new, what's open
+This is the Bekenstein-Hawking entropy.
 
-It does **not** have:
+The striking thing is that entropy scales like **area**, not volume.
 
-❌ A completed mathematical formulation of $I_\Sigma$ (the functional needs rigorous specification)
+That motivates the holographic principle:
 
-❌ A derivation of the Branch-Summed Bound from existing physics (it's a new postulate)
+> The maximum number of independent degrees of freedom in a gravitational region scales like the area of its boundary.
 
-❌ A characterization of physical Hamiltonians (analog of identifying gauge-invariant operators in gauge theory)
+If entropy counts distinguishable states, then a region with boundary area \(A\) can contain at most roughly
 
-❌ A Born-typicality theorem (analog of Bohmian $|\psi|^2$-equivariance)
+\[
+N \sim e^{A/4G\hbar}
+\]
 
-❌ Quantitative experimental predictions calibrated against current Schrödinger-cat experiments
+orthogonal distinguishable states.
 
-If the open work can be done, the framework solves the measurement problem with the unique combination of: no collapse, no extra branches, no extra particles, no anti-realism, exact Schrödinger evolution within the constrained state space. The price paid is acceptance of a new physical principle (the Branch-Summed Bound as superselection rule) that strengthens standard holography but isn't currently derivable from it.
+QIQT-H takes this seriously.
 
-The framework's ambition is high: solve the measurement problem using only the holographic principle of quantum gravity, applied seriously as a foundational constraint on the wave function. Whether the ambition is realized depends on the open mathematical work.
+If a measurement creates records, and records are physical information, then the total physically meaningful record content in a causal region should be bounded by generalized entropy.
 
-That's where things stand.
-
----
-
-## 22. Where to go next
-
-If you want to dig deeper:
-
-**For the math:**
-- Witten 2022, "Gravity and the crossed product" (arXiv:2112.12828) — the foundational paper
-- CPW 2022, "Large N algebras and generalized entropy" (arXiv:2209.10454)
-- CLPW 2022, "An algebra of observables for de Sitter space" (arXiv:2206.10780)
-- Jensen-Sorce-Speranza 2023 (arXiv:2306.01837) — extension to general subregions
-- Haag, *Local Quantum Physics* (Springer 1992) — algebraic QFT textbook
-
-**For decoherence and records:**
-- Zurek, "Decoherence, einselection, and the quantum origins of the classical" (Rev. Mod. Phys. 75, 715, 2003)
-- Joos et al., *Decoherence and the Appearance of a Classical World in Quantum Theory* (Springer 2003)
-- Brandão-Piani-Horodecki on spectrum broadcast structures
-
-**For closely related foundations programs:**
-- Palmer 2025 PNAS — RaQM/IST, the closest sister program
-- Adrian Kent's single-history program
-
-**For the QIQT-H framework itself:**
-- The trilogy in this repo: `QIQT_Position_Paper.md`, `QIQT_Foundations_Paper.md`, `QIQT_Math.md`
-- The strategy documents in `paper_strategy/` — 32 documents tracking 20+ rounds of GPT-5.5 review and the framework's evolution
+This is the “H” in QIQT-H: holographic.
 
 ---
 
-*This tutorial is a companion to the QIQT-H trilogy. It's meant to give you the intuition and the math, layer by layer, so you understand what the framework is doing, why each piece is there, and what's still open. The framework is a research program. The mathematics is real. The central conjecture is open. The empirical content is testable. Whether it solves the measurement problem depends on whether the open work can be done — but the path is clearly marked.*
+# 4. Entropy basics: Shannon, von Neumann, Rényi-0, and support
 
-*— Tutorial written 2026, accompanying the QIQT-H research program.*
+Before we talk about holographic information constraints, we need to review several kinds of entropy.
+
+## 4.1 Shannon entropy
+
+For a classical probability distribution \(p_i\), the Shannon entropy is
+
+\[
+H(p) = -\sum_i p_i \log p_i.
+\]
+
+It measures the expected surprise of a draw from the distribution.
+
+Example:
+
+- Fair coin: \(p=(1/2,1/2)\)
+
+\[
+H = -2\cdot \frac12 \log \frac12 = \log 2.
+\]
+
+- Biased coin: \(p=(0.99,0.01)\)
+
+\[
+H \approx 0.056 \text{ nats},
+\]
+
+much smaller.
+
+Shannon entropy cares about probabilities.
+
+## 4.2 Von Neumann entropy
+
+For a density matrix \(\rho\), the quantum version is
+
+\[
+S(\rho) = -\mathrm{Tr}(\rho \log \rho).
+\]
+
+If \(\rho\) has eigenvalues \(p_i\), then
+
+\[
+S(\rho) = -\sum_i p_i \log p_i.
+\]
+
+So von Neumann entropy is just Shannon entropy applied to the eigenvalues of \(\rho\).
+
+Example:
+
+\[
+\rho =
+\begin{pmatrix}
+1/2 & 0 \\
+0 & 1/2
+\end{pmatrix}
+\]
+
+has
+
+\[
+S(\rho)=\log 2.
+\]
+
+A pure state
+
+\[
+\rho=|\psi\rangle\langle\psi|
+\]
+
+has eigenvalues \(1,0,0,\dots\), so
+
+\[
+S(\rho)=0.
+\]
+
+## 4.3 Rényi entropies
+
+The Rényi entropy of order \(\alpha\) is
+
+\[
+H_\alpha(p)=\frac{1}{1-\alpha}\log\left(\sum_i p_i^\alpha\right).
+\]
+
+Different \(\alpha\) emphasize different aspects of the distribution.
+
+The most important one for QIQT-H is the \(\alpha=0\) case.
+
+## 4.4 Rényi-0 entropy: counting possible outcomes
+
+For \(\alpha=0\),
+
+\[
+p_i^0 =
+\begin{cases}
+1, & p_i>0,\\
+0, & p_i=0.
+\end{cases}
+\]
+
+So
+
+\[
+H_0(p)=\log(\#\text{ of nonzero-probability outcomes}).
+\]
+
+This is called the **support entropy**.
+
+Example:
+
+\[
+p=(0.99,0.01)
+\]
+
+has Shannon entropy small, but Rényi-0 entropy
+
+\[
+H_0 = \log 2.
+\]
+
+Why? Because two outcomes are possible.
+
+If
+
+\[
+p=(0.999999,0.000001),
+\]
+
+then Shannon entropy is even smaller, but Rényi-0 is still \(\log 2\).
+
+So Rényi-0 asks:
+
+> How many alternatives have nonzero support?
+
+It does not ask how likely they are.
+
+This matters for QIQT-H because a holographic bound is plausibly a bound on distinguishable alternatives, not merely on average surprise.
+
+## 4.5 Hill numbers
+
+Instead of entropy, ecologists often use the “effective number of species,” called a Hill number.
+
+For Shannon entropy,
+
+\[
+N_{\rm eff}=e^{H}.
+\]
+
+For Rényi-0,
+
+\[
+N_0 = e^{H_0}
+\]
+
+is literally the number of nonzero possibilities.
+
+Example:
+
+\[
+p=(1/2,1/2)
+\]
+
+has \(N_0=2\).
+
+\[
+p=(0.999,0.001)
+\]
+
+also has \(N_0=2\), even though its Shannon effective number is close to \(1\).
+
+## 4.6 Smooth support
+
+A problem: in quantum mechanics, tiny amplitudes are everywhere. If every nonzero amplitude counts, then almost everything has enormous or infinite support.
+
+So one uses a **smooth support**.
+
+Instead of counting all outcomes with \(p_i>0\), we allow ourselves to ignore a tiny total probability \(\varepsilon\).
+
+Define the \(\varepsilon\)-smooth support size as:
+
+> the smallest number of outcomes whose total probability is at least \(1-\varepsilon\).
+
+Example:
+
+\[
+p=(0.98,0.01,0.01).
+\]
+
+If \(\varepsilon=0.03\), then one outcome already captures \(0.98\), so
+
+\[
+N_0^\varepsilon=1.
+\]
+
+If \(\varepsilon=0.005\), then we need all three outcomes, so
+
+\[
+N_0^\varepsilon=3.
+\]
+
+This is useful when tiny tails are physically irrelevant.
+
+QIQT-H often uses a support-like entropy because it wants to count possible records, while smoothing avoids being dominated by absurdly tiny amplitudes.
+
+---
+
+# 5. Zurek’s physical entropy
+
+Wojciech Zurek suggested that physical entropy should include two pieces:
+
+\[
+S_{\rm phys} = K(\text{description}) + S_{\rm Boltzmann}.
+\]
+
+Here:
+
+- \(K(\text{description})\) is the algorithmic complexity of the macroscopic description,
+- \(S_{\rm Boltzmann}=k_B\log W\) is the entropy of the microstates compatible with that description.
+
+Let’s make this concrete.
+
+## 5.1 Gas in a piston
+
+Suppose you have a gas in a box. A macrostate might be described by:
+
+\[
+\text{“Energy }E,\text{ volume }V,\text{ particle number }N.”}
+\]
+
+That description is short. Its algorithmic complexity is small.
+
+But many microscopic configurations have the same \(E,V,N\). The number of compatible microstates is \(W\), so
+
+\[
+S_{\rm Boltzmann}=k_B\log W.
+\]
+
+Now consider a bizarre macro-description:
+
+> “The gas molecules occupy exactly this intricate fractal-shaped subset of phase space.”
+
+That description may have high algorithmic complexity. Even if the residual number of compatible microstates is smaller, the description itself carries information.
+
+So Zurek’s idea is:
+
+> Entropy is not only ignorance within a macrostate. It also includes the information cost of specifying the macrostate.
+
+In QIQT-H, this matters because “records” are not free. A record must be physically describable, storable, and distinguishable.
+
+---
+
+# 6. Decoherence: why classical branches appear
+
+The standard measurement problem involves superpositions of macroscopically distinct states. Decoherence explains why these superpositions become unobservable in practice.
+
+## 6.1 A two-state system coupled to an environment
+
+Let the system have states \(|0\rangle, |1\rangle\). Suppose the environment starts in \(|E_0\rangle\).
+
+Interaction produces:
+
+\[
+(\alpha|0\rangle+\beta|1\rangle)|E_0\rangle
+\longrightarrow
+\alpha|0\rangle|E_0^{(0)}\rangle
++
+\beta|1\rangle|E_0^{(1)}\rangle.
+\]
+
+The total density matrix is
+
+\[
+\rho_{\rm total}
+=
+|\Psi\rangle\langle\Psi|.
+\]
+
+The reduced density matrix of the system is obtained by tracing over the environment:
+
+\[
+\rho_S = \mathrm{Tr}_E(\rho_{\rm total}).
+\]
+
+Compute it:
+
+\[
+\rho_S
+=
+|\alpha|^2 |0\rangle\langle 0|
++
+|\beta|^2 |1\rangle\langle 1|
++
+\alpha\beta^* \langle E_0^{(1)}|E_0^{(0)}\rangle |0\rangle\langle 1|
++
+\alpha^*\beta \langle E_0^{(0)}|E_0^{(1)}\rangle |1\rangle\langle 0|.
+\]
+
+If
+
+\[
+\langle E_0^{(1)}|E_0^{(0)}\rangle \approx 0,
+\]
+
+then the off-diagonal terms vanish:
+
+\[
+\rho_S \approx
+|\alpha|^2 |0\rangle\langle 0|
++
+|\beta|^2 |1\rangle\langle 1|.
+\]
+
+This looks like a classical mixture.
+
+But remember: the total state is still pure. Decoherence did not collapse the wavefunction. It only made branches stop interfering locally.
+
+## 6.2 Einselection: environment-induced superselection
+
+The environment does not decohere every basis equally. It picks out a preferred basis, called the pointer basis.
+
+This is called **einselection**, short for environment-induced superselection.
+
+### Toy model
+
+Let
+
+\[
+H_{\rm int}=g\, \sigma_z \otimes B_E,
+\]
+
+where \(B_E\) is some environment operator.
+
+Then \(|0\rangle,|1\rangle\), the eigenstates of \(\sigma_z\), are stable under the interaction. Superpositions of them get entangled with the environment.
+
+So the environment selects the \(\sigma_z\) basis as the pointer basis.
+
+If instead
+
+\[
+H_{\rm int}=g\, \sigma_x \otimes B_E,
+\]
+
+then the pointer basis would be the \(\sigma_x\) eigenbasis.
+
+So pointer states are not magical. They are the states that the system-environment interaction monitors.
+
+## 6.3 Quantum Darwinism
+
+Quantum Darwinism asks:
+
+> Why do many observers agree on the same classical facts?
+
+Zurek’s answer: because information about pointer states is redundantly copied into many fragments of the environment.
+
+Example: a dust grain in sunlight.
+
+A photon scatters off the dust particle. The outgoing photon carries information about the particle’s position. Many photons scatter, and each carries partial information.
+
+So the environment becomes a communication channel:
+
+\[
+\text{dust position}
+\longrightarrow
+\text{many scattered photons}.
+\]
+
+Different observers can intercept different photons and infer the same position without disturbing the dust grain.
+
+This is redundancy.
+
+Schematically:
+
+\[
+|x\rangle |E_0\rangle
+\longrightarrow
+|x\rangle |E_x^{(1)}\rangle |E_x^{(2)}\rangle \cdots |E_x^{(N)}\rangle.
+\]
+
+Each fragment \(E^{(k)}\) contains information about \(x\).
+
+## 6.4 Spectrum broadcast structure
+
+A strong form of Quantum Darwinism is called **spectrum broadcast structure**.
+
+A state has this structure if it looks like
+
+\[
+\rho_{S E_1 \cdots E_N}
+=
+\sum_i p_i |i\rangle\langle i|_S
+\otimes \rho_i^{E_1}
+\otimes \rho_i^{E_2}
+\otimes \cdots
+\otimes \rho_i^{E_N},
+\]
+
+with the environment fragment states distinguishable:
+
+\[
+\rho_i^{E_k}\rho_j^{E_k}=0
+\quad
+\text{for } i\neq j.
+\]
+
+This means:
+
+- the system is classically in one of the pointer states \(i\),
+- each environment fragment contains a readable record of \(i\),
+- different observers can independently learn \(i\).
+
+This is the mathematical form of objective classical facts emerging from quantum mechanics.
+
+---
+
+# 7. Decoherent histories
+
+The decoherent histories framework is a way to talk about whole sequences of events without assuming measurements at each time.
+
+## 7.1 What is a history?
+
+A history is a sequence of alternatives at different times.
+
+Example:
+
+At time \(t_1\), the particle is in region \(A\) or \(B\).
+
+At time \(t_2\), it is in region \(C\) or \(D\).
+
+A possible history is:
+
+\[
+A \text{ at } t_1,\quad C \text{ at } t_2.
+\]
+
+In quantum mechanics, alternatives are represented by projection operators.
+
+Let
+
+\[
+P_A(t_1),\quad P_C(t_2)
+\]
+
+be Heisenberg-picture projectors. Then the class operator for the history \(h=(A,C)\) is
+
+\[
+C_h = P_C(t_2)P_A(t_1).
+\]
+
+For longer histories,
+
+\[
+C_h=P_{i_n}(t_n)\cdots P_{i_2}(t_2)P_{i_1}(t_1).
+\]
+
+## 7.2 The decoherence functional
+
+Given initial state \(\rho\), define
+
+\[
+D(h,h')=\mathrm{Tr}(C_h \rho C_{h'}^\dagger).
+\]
+
+This is called the decoherence functional.
+
+The diagonal elements
+
+\[
+D(h,h)
+\]
+
+are candidate probabilities.
+
+But probabilities only make sense if histories do not interfere. That requires off-diagonal terms to vanish approximately:
+
+\[
+D(h,h')\approx 0
+\quad
+\text{for } h\neq h'.
+\]
+
+This condition is called decoherence of histories.
+
+## 7.3 Medium decoherence
+
+A set of histories is medium decoherent if
+
+\[
+D(h,h')\approx 0
+\quad
+\text{for } h\neq h'.
+\]
+
+Then the probabilities
+
+\[
+p(h)=D(h,h)
+\]
+
+obey ordinary probability rules.
+
+For example, if history \(h\) is the union of two alternatives \(h_1,h_2\), then
+
+\[
+p(h)=p(h_1)+p(h_2)
+\]
+
+provided interference vanishes.
+
+## 7.4 Two-slit example
+
+In the two-slit experiment, histories are:
+
+- particle went through slit 1 and arrived at screen point \(x\),
+- particle went through slit 2 and arrived at screen point \(x\).
+
+If no environment records which slit, the two histories interfere:
+
+\[
+D(1,x;2,x)\neq 0.
+\]
+
+You cannot assign classical probabilities to “went through slit 1” and “went through slit 2.”
+
+If a detector records the slit, the environment states become orthogonal:
+
+\[
+|E_1\rangle,\quad |E_2\rangle,
+\qquad
+\langle E_1|E_2\rangle\approx 0.
+\]
+
+Then
+
+\[
+D(1,x;2,x)\approx 0.
+\]
+
+Now the histories decohere, and you can assign probabilities.
+
+## 7.5 Why QIQT-H likes histories
+
+Measurements are not instantaneous magic. They are physical processes extended in time.
+
+QIQT-H uses decoherent histories because its fundamental constraint is not simply on states at an instant. It is on possible **recorded histories** inside a causal region.
+
+A record is evidence that a history occurred.
+
+---
+
+# 8. The QIQT-H central postulate, schematically
+
+Now we can state the central idea in a clean but schematic form.
+
+Consider a causal region \(D\), such as the region accessible to an observer between two times. Let \(\partial D\) be its boundary.
+
+QIQT-H says:
+
+> The physically admissible decoherent histories in \(D\) are constrained by a holographic information budget.
+
+A schematic version is
+
+\[
+I_{\rm branch}^{\varepsilon}(D)
+\;\leq\;
+S_{\rm gen}(\partial D).
+\]
+
+Here:
+
+- \(I_{\rm branch}^{\varepsilon}(D)\) is a smoothed support-like entropy counting distinguishable records across decoherent branches in the region,
+- \(S_{\rm gen}(\partial D)\) is the generalized entropy associated with the boundary.
+
+The generalized entropy is
+
+\[
+S_{\rm gen}
+=
+\frac{A}{4G\hbar}
++
+S_{\rm matter}^{\rm ren}.
+\]
+
+We will explain this later.
+
+For now, the interpretation is:
+
+> The number of physically distinguishable recorded alternatives cannot exceed the holographic entropy budget.
+
+Equivalently, if a formal quantum state contains more branch-record alternatives than can fit in the region, not all of those alternatives are jointly admissible as physical records.
+
+## 8.1 Branch-summed rather than branch-by-branch
+
+This is crucial.
+
+The constraint is not:
+
+> Each branch individually must fit.
+
+That would be weak.
+
+Instead, it is:
+
+> The total set of distinguishable branch records available in the region must fit.
+
+This is called a **branch-summed constraint**.
+
+Suppose a measurement produces \(N\) distinguishable possible records. A support entropy would be
+
+\[
+I_{\rm branch}\sim \log N.
+\]
+
+The holographic bound says
+
+\[
+\log N \leq S_{\rm gen}.
+\]
+
+With smoothing,
+
+\[
+\log N^\varepsilon_{\rm eff}\leq S_{\rm gen}.
+\]
+
+So very tiny-amplitude alternatives may be ignored up to tolerance \(\varepsilon\), but robust recorded alternatives count.
+
+## 8.2 Probabilities
+
+Given a decoherent family of histories \(\{h\}\), ordinary quantum mechanics assigns weights
+
+\[
+w(h)=D(h,h).
+\]
+
+QIQT-H keeps these weights but restricts to admissible histories.
+
+For an admissible family \(\mathcal{H}_{\rm adm}\),
+
+\[
+P(h)
+=
+\frac{w(h)}{\sum_{h'\in \mathcal{H}_{\rm adm}} w(h')}.
+\]
+
+If the admissible set contains essentially all Born-weight-relevant histories, this reduces to ordinary quantum mechanics.
+
+So QIQT-H aims to reproduce normal Born statistics in ordinary laboratory regimes while imposing new constraints in extreme gravitational or cosmological regimes.
+
+## 8.3 Why this might help the measurement problem
+
+Decoherence explains why branches stop interfering. QIQT-H adds:
+
+> Not every formal decohered branch can be promoted to an independent physical record if doing so would exceed the holographic information budget.
+
+Thus, definite outcomes are tied to the finite capacity of physical record-keeping.
+
+The hope is to get:
+
+- no explicit collapse law,
+- no many-worlds ontology with arbitrarily many equally real recorded branches,
+- no Bohmian particle trajectories,
+- ordinary quantum predictions in normal experiments,
+- new constraints when gravitational entropy bounds matter.
+
+This is the rough conceptual skeleton. Now we need the machinery.
+
+---
+
+# 9. Why operator algebras enter at all
+
+In ordinary undergraduate QM, we start with a Hilbert space \(\mathcal{H}\). Observables are Hermitian operators on \(\mathcal{H}\).
+
+For a finite-dimensional system, all operators are matrices.
+
+Example: for one qubit,
+
+\[
+\mathcal{H}=\mathbb{C}^2,
+\]
+
+and observables are \(2\times 2\) Hermitian matrices.
+
+The full algebra of operators is
+
+\[
+M_2(\mathbb{C}).
+\]
+
+For two qubits,
+
+\[
+\mathcal{H}=\mathbb{C}^2\otimes \mathbb{C}^2,
+\]
+
+and the full algebra is
+
+\[
+M_4(\mathbb{C}).
+\]
+
+So far, everything is simple.
+
+But QFT and gravity force us to think more carefully.
+
+In QFT, the degrees of freedom are spread over spacetime regions. We often care about the observables localized in a region \(O\). So we associate an algebra
+
+\[
+\mathcal{A}(O)
+\]
+
+to each spacetime region \(O\).
+
+This is the algebraic viewpoint:
+
+> Instead of starting with particles, start with observables associated to regions.
+
+This is useful because:
+
+- particle number can be observer-dependent in curved spacetime,
+- local fields are distributions, not ordinary operators at points,
+- entanglement across spatial boundaries is UV-divergent,
+- gravitational subregions are subtle.
+
+The algebras that appear are often not just finite matrices. They are von Neumann algebras.
+
+---
+
+# 10. Von Neumann algebras from matrices upward
+
+## 10.1 What is an algebra of observables?
+
+An algebra is a set of operators closed under:
+
+- addition,
+- multiplication,
+- scalar multiplication,
+- adjoint \(A\mapsto A^\dagger\),
+- limits of suitable sequences.
+
+In finite dimensions, an algebra is just a set of matrices closed under those operations.
+
+Example:
+
+All \(2\times 2\) matrices:
+
+\[
+M_2(\mathbb{C}).
+\]
+
+Example:
+
+All diagonal \(2\times 2\) matrices:
+
+\[
+\left\{
+\begin{pmatrix}
+a & 0\\
+0 & b
+\end{pmatrix}
+: a,b\in\mathbb{C}
+\right\}.
+\]
+
+This diagonal algebra is commutative. It behaves like classical observables for a two-outcome system.
+
+## 10.2 The commutant
+
+Given an algebra \(\mathcal{A}\), its commutant \(\mathcal{A}'\) is the set of all operators that commute with every operator in \(\mathcal{A}\):
+
+\[
+\mathcal{A}'=\{B:[A,B]=0\text{ for all }A\in\mathcal{A}\}.
+\]
+
+Example:
+
+If \(\mathcal{A}=M_n(\mathbb{C})\) acting on \(\mathbb{C}^n\), then the only matrices commuting with all matrices are multiples of the identity:
+
+\[
+\mathcal{A}'=\mathbb{C}I.
+\]
+
+Example:
+
+If \(\mathcal{A}\) is all diagonal \(2\times 2\) matrices, then \(\mathcal{A}'\) is also all diagonal \(2\times 2\) matrices.
+
+## 10.3 Von Neumann algebra
+
+A von Neumann algebra is an operator algebra satisfying
+
+\[
+\mathcal{A}=\mathcal{A}''.
+\]
+
+That is, it equals its double commutant.
+
+In finite dimensions, this condition is not mysterious. Most familiar matrix algebras of observables are von Neumann algebras.
+
+The reason the definition matters is that in infinite dimensions, taking limits becomes subtle. The double-commutant condition captures the idea that the algebra is closed under physically relevant limiting operations.
+
+---
+
+# 11. Factors and the Type I/II/III classification
+
+Von Neumann algebras are classified into Types I, II, and III.
+
+This classification is one of the most enigmatic things for physics students, so let’s build it carefully.
+
+## 11.1 The center
+
+The center of an algebra \(\mathcal{A}\) is
+
+\[
+Z(\mathcal{A})=\{A\in\mathcal{A}:[A,B]=0\text{ for all }B\in\mathcal{A}\}.
+\]
+
+If the center is just multiples of the identity,
+
+\[
+Z(\mathcal{A})=\mathbb{C}I,
+\]
+
+then \(\mathcal{A}\) is called a **factor**.
+
+A factor is an algebra with no classical superselection label sitting inside it.
+
+Example:
+
+\[
+M_n(\mathbb{C})
+\]
+
+is a factor.
+
+The diagonal algebra is not a factor because every diagonal matrix commutes with every other diagonal matrix.
+
+The Type classification classifies factors.
+
+---
+
+## 11.2 Type I: ordinary quantum mechanics
+
+Type I factors are the familiar ones:
+
+\[
+\mathcal{A}=B(\mathcal{H}),
+\]
+
+the algebra of all bounded operators on a Hilbert space.
+
+Finite-dimensional example:
+
+\[
+M_n(\mathbb{C}).
+\]
+
+This is ordinary quantum mechanics.
+
+Type I algebras have minimal projections.
+
+A projection is an operator \(P\) satisfying
+
+\[
+P^2=P,\qquad P^\dagger=P.
+\]
+
+It represents a yes/no question.
+
+In \(M_n(\mathbb{C})\), a one-dimensional projector
+
+\[
+P=|\psi\rangle\langle\psi|
+\]
+
+is minimal: it cannot be decomposed into smaller nonzero projections.
+
+So Type I algebras have atoms, like individual basis states.
+
+This is the world of undergraduate QM.
+
+---
+
+## 11.3 Type II: continuous dimension
+
+Type II factors are stranger.
+
+They have no minimal projections, but they still have a trace.
+
+A trace is a function \(\tau\) satisfying
+
+\[
+\tau(AB)=\tau(BA),
+\]
+
+like the ordinary matrix trace.
+
+For a Type II\(_1\) factor, the trace is finite and normalized:
+
+\[
+\tau(I)=1.
+\]
+
+The surprising part is that projections can have any continuous size between 0 and 1.
+
+For ordinary matrices \(M_n\), projection ranks are discrete:
+
+\[
+\mathrm{rank}(P)=0,1,2,\dots,n.
+\]
+
+The normalized trace gives
+
+\[
+\frac{\mathrm{rank}(P)}{n}
+=
+0,\frac{1}{n},\frac{2}{n},\dots,1.
+\]
+
+Only discrete values.
+
+In a Type II\(_1\) factor, projections can have trace
+
+\[
+\tau(P)=r
+\]
+
+for any real number \(0\leq r\leq 1\).
+
+That is why von Neumann described Type II algebras as having **continuous dimension**.
+
+### Toy model intuition: infinite spin chain limit
+
+Take \(N\) qubits.
+
+The algebra is
+
+\[
+M_{2^N}(\mathbb{C}).
+\]
+
+The normalized trace of a projection can be
+
+\[
+0,\frac{1}{2^N},\frac{2}{2^N},\dots,1.
+\]
+
+As \(N\to\infty\), the spacing between possible trace values goes to zero.
+
+A Type II\(_1\) factor is morally like the infinite limit of such matrix algebras, where the possible projection sizes become continuous.
+
+This is not a complete construction, but it gives the right intuition.
+
+Type II factors are important because they are infinite-dimensional but still have a good trace. Entropy can be defined using that trace.
+
+---
+
+## 11.4 Type III: the QFT case
+
+Type III factors are the weird ones.
+
+They have:
+
+- no minimal projections,
+- no finite trace,
+- no ordinary density matrices for local regions,
+- no clean tensor factorization into “inside” and “outside.”
+
+These appear naturally in relativistic QFT.
+
+If \(O\) is a bounded spacetime region, the local algebra \(\mathcal{A}(O)\) is usually Type III.
+
+This is not an exotic exception. It is the generic case.
+
+## 11.5 Why QFT gives Type III algebras
+
+In ordinary QM, if a system splits into two parts,
+
+\[
+\mathcal{H}=\mathcal{H}_A\otimes\mathcal{H}_B,
+\]
+
+then the observables in \(A\) are
+
+\[
+B(\mathcal{H}_A)\otimes I_B.
+\]
+
+That is Type I.
+
+But in continuum QFT, the vacuum is entangled across every spatial boundary at arbitrarily short distances.
+
+There is no exact factorization
+
+\[
+\mathcal{H}_{\rm total}
+\neq
+\mathcal{H}_{\rm inside}\otimes \mathcal{H}_{\rm outside}
+\]
+
+in the naive way.
+
+A region’s algebra is therefore not \(B(\mathcal{H}_{\rm inside})\). It is Type III.
+
+The divergence of entanglement entropy is one symptom of this.
+
+---
+
+# 12. Why QFT vacuum entanglement diverges at boundaries
+
+Let’s use a simple example: a 1+1 dimensional conformal field theory on a line.
+
+Consider an interval of length \(L\), with UV cutoff \(\epsilon\). The vacuum entanglement entropy of the interval is
+
+\[
+S(L)\sim \frac{c}{3}\log\frac{L}{\epsilon},
+\]
+
+where \(c\) is the central charge.
+
+For a half-line with an IR cutoff \(L\), one often gets
+
+\[
+S_{\rm half-line}\sim \frac{c}{6}\log\frac{L}{\epsilon}.
+\]
+
+As \(\epsilon\to 0\),
+
+\[
+S\to \infty.
+\]
+
+Why?
+
+Because field modes on opposite sides of the boundary are entangled at all wavelengths. Near the boundary, there are correlations at arbitrarily short distances.
+
+A rough counting argument:
+
+- divide space into lattice sites of spacing \(\epsilon\),
+- degrees of freedom just across the boundary are entangled,
+- every scale contributes some amount,
+- the number of scales between \(\epsilon\) and \(L\) is
+
+\[
+\log\frac{L}{\epsilon}.
+\]
+
+So entropy grows logarithmically in 1+1 dimensions.
+
+In higher dimensions, the leading divergence is usually an area law:
+
+\[
+S\sim \alpha \frac{\mathrm{Area}}{\epsilon^{d-2}}+\cdots.
+\]
+
+This divergence is not merely a calculational nuisance. It reflects the Type III nature of local QFT algebras.
+
+---
+
+# 13. Cyclic and separating vectors
+
+Modular theory begins with two strange words: cyclic and separating.
+
+Let \(\mathcal{A}\) be an algebra acting on a Hilbert space \(\mathcal{H}\), and let \(|\Omega\rangle\) be a vector.
+
+## 13.1 Cyclic
+
+\(|\Omega\rangle\) is cyclic for \(\mathcal{A}\) if applying operators in \(\mathcal{A}\) to it generates a dense set of states:
+
+\[
+\{A|\Omega\rangle:A\in\mathcal{A}\}
+\]
+
+spans the Hilbert space.
+
+Finite-dimensional translation:
+
+> By acting on \(|\Omega\rangle\) with observables in \(\mathcal{A}\), you can reach any vector.
+
+## 13.2 Separating
+
+\(|\Omega\rangle\) is separating for \(\mathcal{A}\) if
+
+\[
+A|\Omega\rangle=0
+\quad\Rightarrow\quad
+A=0.
+\]
+
+In words:
+
+> No nonzero operator in the algebra kills \(|\Omega\rangle\).
+
+## 13.3 Toy example with two qubits
+
+Let
+
+\[
+\mathcal{H}=\mathbb{C}^2_L\otimes \mathbb{C}^2_R.
+\]
+
+Let the algebra be operators on the left qubit:
+
+\[
+\mathcal{A}=B(\mathbb{C}^2_L)\otimes I_R.
+\]
+
+Consider the entangled state
+
+\[
+|\Omega\rangle
+=
+\sqrt{p}|0\rangle_L|0\rangle_R
++
+\sqrt{1-p}|1\rangle_L|1\rangle_R,
+\]
+
+with \(0<p<1\).
+
+This state has full Schmidt rank.
+
+Acting with arbitrary left operators can generate any state of the form
+
+\[
+a|0\rangle_L|0\rangle_R
++
+b|1\rangle_L|0\rangle_R
++
+c|0\rangle_L|1\rangle_R
++
+d|1\rangle_L|1\rangle_R?
+\]
+
+Actually, left operators cannot change the right basis labels directly, but because the state is entangled, left operators acting on the two Schmidt components generate the full two-qubit space when the Schmidt ranks match.
+
+More explicitly, choose left operators like
+
+\[
+|0\rangle\langle0|,\quad |1\rangle\langle0|,\quad |0\rangle\langle1|,\quad |1\rangle\langle1|.
+\]
+
+Acting on \(|\Omega\rangle\), these produce vectors proportional to
+
+\[
+|0\rangle_L|0\rangle_R,\quad
+|1\rangle_L|0\rangle_R,\quad
+|0\rangle_L|1\rangle_R,\quad
+|1\rangle_L|1\rangle_R.
+\]
+
+So \(|\Omega\rangle\) is cyclic.
+
+It is also separating. If
+
+\[
+(A_L\otimes I_R)|\Omega\rangle=0,
+\]
+
+then because both Schmidt coefficients are nonzero, \(A_L\) must annihilate a basis of \(\mathbb{C}^2_L\), so \(A_L=0\).
+
+## 13.4 Why this matters in QFT
+
+The Reeh-Schlieder theorem says that the QFT vacuum is cyclic and separating for local algebras associated with suitable spacetime regions.
+
+That sounds bizarre:
+
+> By acting only with operators in one small region, you can approximate any state.
+
+This does not mean you can send signals faster than light. The required operators are generally extremely non-unitary and physically unrealistic. But mathematically it expresses the enormous entanglement of the vacuum.
+
+Cyclic and separating vectors are precisely the setup needed for Tomita-Takesaki modular theory.
+
+---
+
+# 14. Tomita-Takesaki modular theory from matrices
+
+Tomita-Takesaki theory sounds forbidding. Let’s start with finite matrices.
+
+## 14.1 The finite-dimensional problem
+
+Suppose we have an algebra of observables \(\mathcal{A}\) and a state \(\omega\).
+
+In finite-dimensional QM, a state is represented by a density matrix \(\rho\):
+
+\[
+\omega(A)=\mathrm{Tr}(\rho A).
+\]
+
+If \(\rho\) is full rank, then it has no zero eigenvalues.
+
+The modular theory associated with \((\mathcal{A},\omega)\) gives a canonical “flow” of the algebra:
+
+\[
+\sigma_t^\omega(A).
+\]
+
+In finite dimensions, this flow is simply
+
+\[
+\sigma_t^\omega(A)
+=
+\rho^{it} A \rho^{-it}.
+\]
+
+That is the key formula.
+
+It says:
+
+> The state \(\rho\) defines an intrinsic time evolution on the algebra by conjugation with \(\rho^{it}\).
+
+Because
+
+\[
+\rho^{it}=e^{it\log\rho},
+\]
+
+the generator is
+
+\[
+K_\omega=-\log\rho,
+\]
+
+called the modular Hamiltonian.
+
+Then
+
+\[
+\sigma_t^\omega(A)
+=
+e^{-itK_\omega}A e^{itK_\omega}
+\]
+
+up to sign conventions.
+
+## 14.2 What is the modular Hamiltonian?
+
+If
+
+\[
+\rho=\frac{e^{-\beta H}}{Z},
+\]
+
+then
+
+\[
+K_\omega=-\log\rho
+=
+\beta H+\log Z.
+\]
+
+The constant \(\log Z\) commutes with everything, so it does not affect the flow.
+
+Then
+
+\[
+\sigma_t^\omega(A)
+=
+e^{-i\beta H t} A e^{i\beta H t}.
+\]
+
+So for a thermal state, modular flow is ordinary time evolution, but with time rescaled by \(\beta\).
+
+This is a key physical idea:
+
+> Modular flow generalizes thermal time evolution to situations where there may be no ordinary density matrix or Hamiltonian for a subregion.
+
+## 14.3 The standard representation: why \(\rho^{1/2}\) appears
+
+In a more precise finite-dimensional version, we represent states as Hilbert-Schmidt operators.
+
+Let
+
+\[
+\mathcal{H}_{\rm HS}
+=
+\{X:\mathcal{H}\to\mathcal{H}\}
+\]
+
+with inner product
+
+\[
+\langle X,Y\rangle=\mathrm{Tr}(X^\dagger Y).
+\]
+
+The algebra \(\mathcal{A}=B(\mathcal{H})\) acts by left multiplication:
+
+\[
+L_A X=AX.
+\]
+
+A density matrix \(\rho\) is represented by the vector
+
+\[
+|\Omega_\rho\rangle \leftrightarrow \rho^{1/2}.
+\]
+
+Then
+
+\[
+\omega(A)=\langle \Omega_\rho,L_A\Omega_\rho\rangle
+=
+\mathrm{Tr}(\rho^{1/2}A\rho^{1/2})
+=
+\mathrm{Tr}(\rho A).
+\]
+
+So the vector representing the state is \(\rho^{1/2}\).
+
+Strictly speaking, the modular operator is not just \(\rho^{1/2}\). For the left algebra, it acts as
+
+\[
+\Delta = L_\rho R_{\rho^{-1}},
+\]
+
+where \(R_{\rho^{-1}}\) means right multiplication by \(\rho^{-1}\).
+
+Then modular flow gives
+
+\[
+\Delta^{it} L_A \Delta^{-it}
+=
+L_{\rho^{it}A\rho^{-it}}.
+\]
+
+So the finite-dimensional facts are:
+
+- the cyclic-separating vector is \(\rho^{1/2}\),
+- the modular operator involves \(\rho\) on the left and \(\rho^{-1}\) on the right,
+- the induced flow on observables is \(A\mapsto \rho^{it}A\rho^{-it}\).
+
+That is the part to remember.
+
+---
+
+# 15. Why modular theory matters for Type III algebras
+
+In Type I quantum mechanics, a state on a subsystem is described by a density matrix.
+
+But for a Type III local QFT algebra, there is no ordinary density matrix for the region.
+
+That sounds catastrophic. How can we define entropy, thermal behavior, or time evolution?
+
+Tomita-Takesaki theory solves part of this.
+
+Given:
+
+- a von Neumann algebra \(\mathcal{A}\),
+- a cyclic and separating state \(|\Omega\rangle\),
+
+modular theory constructs:
+
+1. a modular operator \(\Delta\),
+2. a modular conjugation \(J\),
+3. a modular flow
+
+\[
+\sigma_t(A)=\Delta^{it}A\Delta^{-it}.
+\]
+
+This works even when there is no density matrix.
+
+So modular theory is a replacement for the missing density matrix.
+
+In finite dimensions, modular flow is just \(\rho^{it}A\rho^{-it}\). In QFT, it is a deeper structure intrinsic to the algebra-state pair.
+
+---
+
+# 16. Lorentz boosts, Rindler wedges, and the Unruh effect
+
+The most important physical example of modular flow is the Rindler wedge.
+
+## 16.1 Rindler wedge
+
+In flat spacetime with coordinates \((t,x)\), the right Rindler wedge is
+
+\[
+x>|t|.
+\]
+
+This is the region accessible to an observer with constant acceleration to the right.
+
+Introduce Rindler coordinates:
+
+\[
+t=\rho\sinh(a\eta),
+\]
+
+\[
+x=\rho\cosh(a\eta),
+\]
+
+with \(\rho>0\).
+
+Curves of constant \(\rho\) are hyperbolas:
+
+\[
+x^2-t^2=\rho^2.
+\]
+
+These are the worldlines of uniformly accelerated observers.
+
+## 16.2 Boosts
+
+A Lorentz boost in the \(x\)-direction acts like a time translation in Rindler coordinates.
+
+So for an accelerated observer, the boost generator plays the role of Hamiltonian.
+
+## 16.3 Unruh effect
+
+The Minkowski vacuum looks thermal to an accelerated observer.
+
+The Unruh temperature is
+
+\[
+T_U=\frac{\hbar a}{2\pi c k_B}.
+\]
+
+In natural units,
+
+\[
+T_U=\frac{a}{2\pi}.
+\]
+
+This means the vacuum restricted to the Rindler wedge behaves like a thermal state with respect to boost time.
+
+## 16.4 Bisognano-Wichmann theorem
+
+The Bisognano-Wichmann theorem says, roughly:
+
+> For relativistic QFT in the vacuum, the modular flow of the algebra of a Rindler wedge is exactly the Lorentz boost flow.
+
+In formula form,
+
+\[
+\sigma_s(A)=e^{i 2\pi s K_{\rm boost}} A e^{-i 2\pi s K_{\rm boost}}.
+\]
+
+This is profound because it connects:
+
+- abstract modular theory,
+- thermal behavior,
+- spacetime geometry,
+- acceleration horizons.
+
+For QIQT-H, this is a major clue: modular flow is not just mathematical bookkeeping. In important cases, it is geometric time.
+
+---
+
+# 17. Crossed products: adding the clock explicitly
+
+Now we reach another abstract object: the crossed product.
+
+The crossed product is how one takes an algebra with a symmetry flow and builds a larger algebra in which the symmetry is implemented by explicit operators.
+
+Let’s start finite.
+
+## 17.1 Finite group toy model
+
+Suppose we have an algebra
+
+\[
+\mathcal{A}=\mathbb{C}^2,
+\]
+
+the algebra of functions on two points. Elements are pairs
+
+\[
+(a,b).
+\]
+
+Represent them as diagonal matrices:
+
+\[
+(a,b)\leftrightarrow
+\begin{pmatrix}
+a&0\\
+0&b
+\end{pmatrix}.
+\]
+
+Let the group \(G=\mathbb{Z}_2\) act by swapping the two points:
+
+\[
+\alpha(a,b)=(b,a).
+\]
+
+Now add a unitary \(U\) that implements the swap:
+
+\[
+U
+\begin{pmatrix}
+a&0\\
+0&b
+\end{pmatrix}
+U^\dagger
+=
+\begin{pmatrix}
+b&0\\
+0&a
+\end{pmatrix}.
+\]
+
+Choose
+
+\[
+U=
+\begin{pmatrix}
+0&1\\
+1&0
+\end{pmatrix}.
+\]
+
+The algebra generated by diagonal matrices and \(U\) is all of \(M_2(\mathbb{C})\).
+
+This is the crossed product
+
+\[
+\mathbb{C}^2\rtimes \mathbb{Z}_2
+\cong
+M_2(\mathbb{C}).
+\]
+
+So the crossed product means:
+
+> Start with an algebra. Add operators that implement a symmetry of that algebra.
+
+## 17.2 General definition idea
+
+Suppose a group \(G\) acts on \(\mathcal{A}\) by automorphisms:
+
+\[
+\alpha_g:\mathcal{A}\to\mathcal{A}.
+\]
+
+An automorphism is a structure-preserving map:
+
+\[
+\alpha_g(AB)=\alpha_g(A)\alpha_g(B),
+\]
+
+\[
+\alpha_g(A^\dagger)=\alpha_g(A)^\dagger.
+\]
+
+The crossed product
+
+\[
+\mathcal{A}\rtimes_\alpha G
+\]
+
+is generated by:
+
+- elements \(A\in\mathcal{A}\),
+- unitaries \(U_g\) for \(g\in G\),
+
+with the relation
+
+\[
+U_g A U_g^\dagger=\alpha_g(A).
+\]
+
+This relation is the heart of the construction.
+
+## 17.3 The continuous case: \(G=\mathbb{R}\)
+
+For modular theory, the group is usually
+
+\[
+G=\mathbb{R},
+\]
+
+because modular flow is a continuous one-parameter family:
+
+\[
+\sigma_t(A).
+\]
+
+The crossed product is
+
+\[
+\mathcal{A}\rtimes_\sigma \mathbb{R}.
+\]
+
+It is obtained by adding unitaries \(U(t)\) satisfying
+
+\[
+U(t) A U(t)^\dagger = \sigma_t(A).
+\]
+
+By Stone’s theorem, a continuous unitary group has a self-adjoint generator \(K\):
+
+\[
+U(t)=e^{-itK}.
+\]
+
+So adding the crossed product is like adding the modular Hamiltonian \(K\) as an actual operator in an enlarged algebra.
+
+## 17.4 Why an \(L^2(\mathbb{R})\) factor appears
+
+For a continuous parameter \(t\), the natural Hilbert space of wavefunctions over that parameter is
+
+\[
+L^2(\mathbb{R}).
+\]
+
+This is the space of square-integrable functions
+
+\[
+\psi(s),
+\]
+
+where \(s\) is a real variable.
+
+Think of \(s\) as a clock reading.
+
+On \(L^2(\mathbb{R})\), define:
+
+- clock-reading operator
+
+\[
+(T\psi)(s)=s\psi(s),
+\]
+
+- clock-momentum operator
+
+\[
+(K\psi)(s)=-i\frac{d}{ds}\psi(s).
+\]
+
+They satisfy
+
+\[
+[T,K]=i.
+\]
+
+The unitary
+
+\[
+e^{-itK}
+\]
+
+shifts the clock wavefunction:
+
+\[
+(e^{-itK}\psi)(s)=\psi(s-t).
+\]
+
+So the crossed product Hilbert space often looks like
+
+\[
+\mathcal{H}_{\rm original}\otimes L^2(\mathbb{R}).
+\]
+
+Physically, the new \(L^2(\mathbb{R})\) factor is a quantum clock tracking modular time.
+
+## 17.5 Connection to quantum gravity clock formalisms
+
+In canonical quantum gravity, there is often no external time. Instead, one introduces a clock degree of freedom \(T\) and describes other variables relative to it.
+
+A simple Page-Wootters-style constraint is
+
+\[
+(P_T+H_{\rm sys})|\Psi\rangle=0.
+\]
+
+Here:
+
+- \(T\) is the clock reading,
+- \(P_T=-i\partial_T\) is its conjugate momentum,
+- \(H_{\rm sys}\) is the system Hamiltonian.
+
+Then conditional states
+
+\[
+|\psi(t)\rangle = \langle T=t|\Psi\rangle
+\]
+
+obey an ordinary Schrödinger equation.
+
+The crossed product clock is similar in spirit: modular time becomes represented by an explicit Hilbert-space degree of freedom.
+
+---
+
+# 18. Takesaki’s structure theorem: Type III plus clock gives Type II
+
+Now we can state the key structural fact.
+
+For a Type III von Neumann algebra \(\mathcal{M}\) with modular flow \(\sigma_t\), the crossed product
+
+\[
+\mathcal{M}\rtimes_{\sigma}\mathbb{R}
+\]
+
+is often a Type II algebra, more precisely a semifinite Type II algebra such as Type II\(_\infty\).
+
+This is part of Takesaki’s theory.
+
+## 18.1 Intuition
+
+Type III algebras lack a trace. Without a trace, ordinary entropy is hard to define.
+
+The modular flow is like an intrinsic thermal time. But in the Type III algebra, that flow is external as an automorphism.
+
+When we form the crossed product, we add an explicit generator of that flow — a clock or energy-like variable.
+
+Doing this enlarges the algebra enough that a trace appears.
+
+So:
+
+\[
+\text{Type III algebra}
++
+\text{modular clock}
+\quad
+\Longrightarrow
+\quad
+\text{Type II algebra with trace}.
+\]
+
+This is the slogan.
+
+## 18.2 Why this helps entropy
+
+Entropy usually needs a trace:
+
+\[
+S=-\mathrm{Tr}(\rho\log\rho).
+\]
+
+Type III algebras do not have a suitable trace, so naïve entropy fails.
+
+After crossing with modular flow, one gets a Type II algebra with a semifinite trace \(\tau\). Then one can define entropy-like quantities using \(\tau\):
+
+\[
+S=-\tau(\rho\log\rho),
+\]
+
+with appropriate renormalization.
+
+This is one route to defining finite, renormalized entropies for QFT subregions.
+
+## 18.3 Not magic
+
+This does not mean Type III problems disappear.
+
+The crossed product adds extra structure: a modular time/clock degree of freedom. The result depends on the state through its modular flow, though there are powerful theorems saying the resulting “core” is canonical up to equivalence.
+
+The physical interpretation still requires care.
+
+For QIQT-H, the important point is:
+
+> A region that is Type III at the purely local-QFT level can be embedded into a Type II “core” where traces and entropies become meaningful.
+
+---
+
+# 19. Renormalized entropy
+
+In QFT, naïve entanglement entropy diverges:
+
+\[
+S_{\rm ent}\to\infty
+\]
+
+as the UV cutoff is removed.
+
+But physics often deals with divergent quantities by renormalization.
+
+## 19.1 Energy analogy
+
+In QFT, the vacuum energy is formally infinite:
+
+\[
+E_0=\frac12\sum_{\mathbf{k}}\hbar\omega_{\mathbf{k}}.
+\]
+
+But only energy differences or gravitationally renormalized quantities are physical.
+
+We subtract or absorb divergences into counterterms.
+
+Similarly, local entanglement entropy has universal boundary divergences. These are not usually directly observable by themselves.
+
+## 19.2 Entropy differences and relative entropy
+
+A very useful finite quantity is relative entropy.
+
+For density matrices,
+
+\[
+S(\rho||\sigma)
+=
+\mathrm{Tr}(\rho\log\rho)
+-
+\mathrm{Tr}(\rho\log\sigma).
+\]
+
+It measures distinguishability of \(\rho\) from \(\sigma\).
+
+In QFT, even when individual entanglement entropies diverge, relative entropy can be finite.
+
+There is an important identity:
+
+\[
+S(\rho||\sigma)
+=
+\Delta\langle K_\sigma\rangle
+-
+\Delta S,
+\]
+
+where
+
+\[
+K_\sigma=-\log\sigma
+\]
+
+is the modular Hamiltonian of \(\sigma\),
+
+\[
+\Delta\langle K_\sigma\rangle
+=
+\mathrm{Tr}(\rho K_\sigma)-\mathrm{Tr}(\sigma K_\sigma),
+\]
+
+and
+
+\[
+\Delta S=S(\rho)-S(\sigma).
+\]
+
+Even if \(S(\rho)\) and \(S(\sigma)\) separately diverge, the difference can be meaningful after renormalization.
+
+## 19.3 Renormalized matter entropy
+
+The renormalized entropy is roughly:
+
+\[
+S_{\rm matter}^{\rm ren}
+=
+S_{\rm matter}^{\rm cutoff}
+-
+S_{\rm divergent\ boundary}.
+\]
+
+But QIQT-H wants this subtraction to be canonical, not arbitrary.
+
+The modular/crossed-product machinery provides a principled way to define the finite part associated with the algebra and state.
+
+The slogan is:
+
+> Use modular structure to define entropy relative to the vacuum/reference state, subtracting the universal UV boundary entanglement.
+
+This is why Type III and crossed products matter for QIQT-H. The holographic bound uses entropy, but QFT entropy is divergent unless handled carefully.
+
+---
+
+# 20. Generalized entropy
+
+In gravitational physics, the entropy associated with a surface is not just matter entropy. It is
+
+\[
+S_{\rm gen}
+=
+\frac{A}{4G\hbar}
++
+S_{\rm matter}^{\rm ren}.
+\]
+
+This is called generalized entropy.
+
+## 20.1 Origin: black-hole thermodynamics
+
+Bekenstein argued that black holes should have entropy proportional to horizon area. Hawking radiation fixed the coefficient:
+
+\[
+S_{\rm BH}=\frac{A}{4G\hbar}.
+\]
+
+If matter falls into a black hole, ordinary matter entropy outside may decrease. But the black hole area increases.
+
+The generalized second law says:
+
+\[
+S_{\rm outside}+S_{\rm BH}
+\]
+
+never decreases.
+
+So the correct entropy in gravity is not merely matter entropy. It is matter entropy plus area entropy.
+
+## 20.2 Why area appears
+
+In semiclassical gravity, geometry itself carries entropy.
+
+A horizon hides information. The area term counts gravitational degrees of freedom associated with the boundary.
+
+Thus, for a region with boundary \(\partial D\), QIQT-H uses
+
+\[
+S_{\rm gen}(\partial D)
+=
+\frac{\mathrm{Area}(\partial D)}{4G\hbar}
++
+S_{\rm matter}^{\rm ren}.
+\]
+
+This is the entropy budget.
+
+## 20.3 Why this is the right bound for records
+
+If records are physical information in a gravitational region, the number of distinguishable records should not exceed the generalized entropy.
+
+So QIQT-H’s core inequality is schematically
+
+\[
+I_{\rm records}^{\varepsilon}
+\leq
+S_{\rm gen}.
+\]
+
+This ties the measurement problem to black-hole thermodynamics.
+
+---
+
+# 21. Gauge theory analogy
+
+QIQT-H’s branch-summed constraint is often compared to a gauge constraint. Let’s review gauge theory first.
+
+## 21.1 Gauge redundancy in electromagnetism
+
+In electromagnetism, the vector potential \(A_\mu\) is not unique.
+
+The transformation
+
+\[
+A_\mu \to A_\mu+\partial_\mu\lambda
+\]
+
+does not change the electromagnetic fields \(E\) and \(B\).
+
+So different \(A_\mu\)'s can represent the same physical situation.
+
+Gauge symmetry is redundancy in our description.
+
+## 21.2 Gauss law as a constraint
+
+In canonical electromagnetism, physical states must satisfy Gauss’s law:
+
+\[
+\nabla\cdot E=\rho.
+\]
+
+In quantum theory, this becomes an operator constraint:
+
+\[
+(\nabla\cdot \hat E-\hat\rho)|\Psi_{\rm phys}\rangle=0.
+\]
+
+So not every vector in the formal Hilbert space is physical.
+
+The physical Hilbert space is the subspace satisfying the constraint.
+
+## 21.3 BRST cohomology
+
+In more advanced gauge theory, especially for nonabelian gauge fields, one introduces a BRST operator \(Q\) satisfying
+
+\[
+Q^2=0.
+\]
+
+Physical states are BRST-closed:
+
+\[
+Q|\psi\rangle=0,
+\]
+
+and states differing by BRST-exact terms are identified:
+
+\[
+|\psi\rangle \sim |\psi\rangle+Q|\chi\rangle.
+\]
+
+This is called cohomology.
+
+You do not need the details. The key idea is:
+
+> Gauge theory has a large formal state space, but only a constrained quotient/subspace is physical.
+
+## 21.4 Analogy to QIQT-H
+
+QIQT-H similarly says:
+
+> The formal quantum branch space is larger than the physically admissible record space.
+
+The branch-summed constraint plays a role analogous to Gauss’s law:
+
+\[
+\mathcal{C}_{\rm QIQT-H}|\Psi_{\rm phys}\rangle=0
+\]
+
+or, more generally,
+
+\[
+I_{\rm branch}^\varepsilon(D)\leq S_{\rm gen}(\partial D).
+\]
+
+The analogy is not exact.
+
+Gauge constraints remove redundant descriptions. QIQT-H constraints remove or restrict physically admissible record structures.
+
+But the shared pattern is:
+
+1. Write a large formal space.
+2. Impose a constraint.
+3. Physical states/histories are those satisfying the constraint.
+
+---
+
+# 22. Bohmian equivariance and why Born weights matter
+
+QIQT-H wants to reproduce ordinary Born statistics. A useful comparison is Bohmian mechanics.
+
+## 22.1 Bohmian mechanics in brief
+
+Bohmian mechanics adds actual particle positions \(Q(t)\).
+
+The wavefunction obeys Schrödinger’s equation. The particles obey a guidance equation.
+
+For one particle,
+
+\[
+\frac{dQ}{dt}
+=
+\frac{\hbar}{m}\operatorname{Im}
+\frac{\nabla\psi}{\psi}(Q).
+\]
+
+The probability density
+
+\[
+\rho(q,t)=|\psi(q,t)|^2
+\]
+
+is special.
+
+## 22.2 Equivariance
+
+Equivariance means:
+
+> If particle positions are distributed as \(|\psi(q,0)|^2\) initially, then they remain distributed as \(|\psi(q,t)|^2\) at later times.
+
+Why?
+
+Schrödinger’s equation implies the continuity equation
+
+\[
+\frac{\partial |\psi|^2}{\partial t}
++
+\nabla\cdot j=0,
+\]
+
+where
+
+\[
+j=\frac{\hbar}{m}\operatorname{Im}(\psi^*\nabla\psi).
+\]
+
+The Bohmian velocity is
+
+\[
+v=\frac{j}{|\psi|^2}.
+\]
+
+So a distribution of particles moving with velocity \(v\) obeys
+
+\[
+\frac{\partial \rho}{\partial t}
++
+\nabla\cdot(\rho v)=0.
+\]
+
+If initially \(\rho=|\psi|^2\), then both obey the same equation. Therefore equality persists.
+
+That is equivariance.
+
+## 22.3 What QIQT-H needs analogously
+
+QIQT-H does not add particle positions. But it needs a measure over admissible histories.
+
+The natural candidate is the Born/decoherence weight:
+
+\[
+w(h)=D(h,h).
+\]
+
+An analogue of equivariance would be a theorem saying:
+
+> The admissibility constraint and the dynamics preserve Born-weight consistency across time and coarse-graining.
+
+In other words, if probabilities are Born-like at one stage, the branch-summed constraint should not spoil them at later stages.
+
+This is one of the technical tasks for the framework.
+
+---
+
+# 23. Bell’s theorem and measurement independence
+
+Any foundations proposal must face Bell’s theorem.
+
+## 23.1 Bell setup
+
+Two experimenters, Alice and Bob, measure entangled particles.
+
+Alice chooses setting \(a\), gets outcome \(A=\pm1\).
+
+Bob chooses setting \(b\), gets outcome \(B=\pm1\).
+
+A hidden-variable theory introduces variables \(\lambda\) that determine or influence outcomes.
+
+A local hidden-variable model assumes
+
+\[
+A=A(a,\lambda),
+\]
+
+\[
+B=B(b,\lambda).
+\]
+
+The joint expectation is
+
+\[
+E(a,b)=\int d\lambda\, \rho(\lambda) A(a,\lambda)B(b,\lambda).
+\]
+
+Bell/CHSH inequalities follow, for example:
+
+\[
+|E(a,b)+E(a,b')+E(a',b)-E(a',b')|\leq 2.
+\]
+
+Quantum mechanics can violate this bound up to
+
+\[
+2\sqrt{2}.
+\]
+
+Experiments agree with quantum mechanics.
+
+## 23.2 Measurement independence
+
+Bell’s derivation assumes measurement independence:
+
+\[
+\rho(\lambda|a,b)=\rho(\lambda).
+\]
+
+That means the hidden variables \(\lambda\) are statistically independent of the later choices of measurement settings \(a,b\).
+
+If this fails, Bell inequalities need not follow.
+
+## 23.3 Is rejecting measurement independence superdeterminism?
+
+Often, any violation of measurement independence is called superdeterminism.
+
+But there are different possible attitudes.
+
+A crude superdeterministic picture says:
+
+> The universe conspiratorially prearranged your detector settings and particle variables to fake quantum correlations.
+
+QIQT-H aims for a different picture:
+
+> The admissible global histories are constrained by holographic record consistency. Settings, outcomes, and hidden/global variables are not sampled independently because only globally admissible record configurations exist.
+
+In probability terms, the framework may have
+
+\[
+\rho(\lambda|a,b)\neq \rho(\lambda),
+\]
+
+not because of a malicious conspiracy, but because \(\lambda,a,b\) are all parts of one constrained physical history.
+
+However, one should be honest:
+
+> Many physicists would still classify any denial of measurement independence as a form of superdeterminism in the broad sense.
+
+So QIQT-H must do more than say “measurement independence fails.” It must explain the correlations naturally, quantitatively, and without destroying experimental freedom in ordinary practice.
+
+---
+
+# 24. How the pieces fit together
+
+Let’s now assemble the framework.
+
+## 24.1 Starting point
+
+We begin with ordinary quantum theory:
+
+- a global state,
+- unitary evolution,
+- decoherence producing branches,
+- Born/decoherence weights for histories.
+
+## 24.2 The problem
+
+Decoherence gives effective branches, but not definite outcomes.
+
+Many-worlds accepts all branches as real. QIQT-H says:
+
+> In quantum gravity, the total record content of a causal region is finite. Therefore, the formal branch structure must be constrained.
+
+## 24.3 The entropy budget
+
+For a region \(D\),
+
+\[
+S_{\rm gen}(\partial D)
+=
+\frac{A(\partial D)}{4G\hbar}
++
+S_{\rm matter}^{\rm ren}.
+\]
+
+This is the maximum information budget.
+
+## 24.4 The branch information
+
+For a decoherent family of histories, define a support-like entropy
+
+\[
+I_{\rm branch}^{\varepsilon}
+=
+\log N_{\rm eff}^{\varepsilon},
+\]
+
+where \(N_{\rm eff}^{\varepsilon}\) is the smoothed number of distinguishable recorded alternatives.
+
+## 24.5 The QIQT-H constraint
+
+The central condition is
+
+\[
+I_{\rm branch}^{\varepsilon}(D)
+\leq
+S_{\rm gen}(\partial D).
+\]
+
+This is branch-summed: it counts alternatives across the family, not only within one branch.
+
+## 24.6 The role of operator algebras
+
+In continuum QFT, local algebras are Type III, so naïve entropy is divergent.
+
+Tomita-Takesaki modular theory supplies a canonical modular flow for a region and state.
+
+The crossed product by modular flow produces a Type II core with a trace.
+
+This allows a renormalized entropy to be defined.
+
+Thus:
+
+\[
+\text{QFT region}
+\rightarrow
+\text{Type III algebra}
+\rightarrow
+\text{modular flow}
+\rightarrow
+\text{crossed product Type II core}
+\rightarrow
+\text{renormalized entropy}
+\rightarrow
+S_{\rm gen}.
+\]
+
+That is the mathematical pipeline.
+
+---
+
+# 25. A finite-dimensional toy model of QIQT-H
+
+Let’s make a toy model that captures the logic without Type III complications.
+
+Suppose a system undergoes repeated binary measurements. After \(n\) measurements, ordinary quantum theory gives
+
+\[
+2^n
+\]
+
+possible bit-string records:
+
+\[
+h=(b_1,b_2,\dots,b_n),
+\qquad b_i\in\{0,1\}.
+\]
+
+If all are nonzero-probability and distinguishable, the support entropy is
+
+\[
+I_{\rm branch}= \log 2^n = n\log 2.
+\]
+
+Now suppose the region has entropy budget
+
+\[
+S_{\rm max}=m\log 2.
+\]
+
+That corresponds to \(m\) bits.
+
+The QIQT-H constraint says
+
+\[
+n\log 2 \leq m\log 2,
+\]
+
+or
+
+\[
+n\leq m.
+\]
+
+If \(n>m\), then the full \(2^n\)-branch record family cannot be physically realized as mutually distinguishable records inside the region.
+
+With smoothing, if most probability is concentrated on fewer histories, the effective support can be smaller.
+
+Example:
+
+Suppose after many measurements, probabilities are heavily concentrated on \(2^m\) histories, with total probability \(1-\varepsilon\). Then
+
+\[
+N^\varepsilon_{\rm eff}=2^m,
+\]
+
+and the family may be admissible.
+
+This toy model is crude, but it shows the logic:
+
+> QIQT-H constrains not amplitudes directly, but physically distinguishable recorded alternatives.
+
+---
+
+# 26. Another toy model: decoherence plus finite record capacity
+
+Let a qubit system interact with a memory register of \(m\) bits.
+
+The memory Hilbert space has dimension
+
+\[
+2^m.
+\]
+
+It can store at most \(2^m\) orthogonal classical records.
+
+Now imagine a formal process that tries to create \(N>2^m\) perfectly distinguishable outcomes.
+
+Unitary quantum mechanics on a memory of dimension \(2^m\) cannot map \(N\) orthogonal input alternatives to \(N\) orthogonal memory states if \(N>2^m\).
+
+This is just linear algebra.
+
+QIQT-H generalizes this idea gravitationally:
+
+- finite memory register \(\rightarrow\) finite causal region,
+- memory dimension \(2^m\) \(\rightarrow\) \(e^{S_{\rm gen}}\),
+- record capacity bound \(\rightarrow\) holographic entropy bound.
+
+---
+
+# 27. What is new in QIQT-H?
+
+QIQT-H is not merely saying “there is decoherence.” Decoherence is already standard.
+
+It adds:
+
+1. **A holographic record-capacity constraint.**
+2. **A branch-summed support entropy.**
+3. **A modular-algebraic way to define entropy in QFT regions.**
+4. **A rule for admissible histories rather than a collapse law.**
+
+The hope is that definite outcomes emerge because the physical record structure is finite and constrained.
+
+---
+
+# 28. What remains open?
+
+Several major problems remain.
+
+## 28.1 Precise definition of branch information
+
+One must define
+
+\[
+I_{\rm branch}^{\varepsilon}(D)
+\]
+
+in a way that is:
+
+- basis-independent,
+- compatible with decoherence,
+- stable under coarse-graining,
+- physically computable.
+
+Pointer bases and spectrum broadcast structures help, but a full definition is hard.
+
+## 28.2 Equivariance-like theorem
+
+QIQT-H needs a theorem showing that Born weights are preserved under admissible dynamics and coarse-graining.
+
+Without this, it risks either disagreeing with quantum experiments or smuggling in the Born rule.
+
+## 28.3 Relativistic covariance
+
+The constraint must not depend on arbitrary choices of time slicing.
+
+Using causal diamonds, local algebras, and modular flow helps, but a complete covariant formulation is needed.
+
+## 28.4 Gravity beyond semiclassical approximation
+
+The generalized entropy formula
+
+\[
+S_{\rm gen}=\frac{A}{4G\hbar}+S_{\rm matter}^{\rm ren}
+\]
+
+is semiclassical. A full quantum gravity version may require more.
+
+## 28.5 Bell correlations
+
+If QIQT-H violates measurement independence, it must explain precisely how, without making science impossible.
+
+It must reproduce observed Bell violations while preserving the practical independence of experimental choices.
+
+## 28.6 Experimental signatures
+
+A framework is more convincing if it predicts deviations from standard quantum theory somewhere.
+
+Possible places to look:
+
+- near black holes,
+- cosmological horizons,
+- extreme entropy-saturating systems,
+- high-complexity quantum information experiments,
+- gravitationally constrained quantum memories.
+
+At present, this is speculative.
+
+---
+
+# 29. Summary in one picture
+
+The framework can be summarized as:
+
+\[
+\boxed{
+\text{Unitary quantum theory}
++
+\text{decoherent histories}
++
+\text{holographic finite-information constraint}
+}
+\]
+
+with the entropy side defined using:
+
+\[
+\boxed{
+\text{Type III local QFT algebra}
+\rightarrow
+\text{modular theory}
+\rightarrow
+\text{crossed product Type II core}
+\rightarrow
+\text{renormalized entropy}
+}
+\]
+
+and the central inequality:
+
+\[
+\boxed{
+I_{\rm branch}^{\varepsilon}(D)
+\leq
+S_{\rm gen}(\partial D)
+=
+\frac{A}{4G\hbar}
++
+S_{\rm matter}^{\rm ren}
+}
+\]
+
+The interpretation is:
+
+> A finite gravitational region cannot support an arbitrarily large set of mutually distinguishable quantum records. Measurement outcomes are tied to the admissible record structure of the universe, not to an explicit dynamical collapse.
+
+---
+
+# 30. Glossary
+
+## Branch
+
+An effectively noninterfering component of the wavefunction produced by decoherence.
+
+## Record
+
+A physical encoding of an outcome, such as a pointer position, detector click, scattered photon pattern, or memory state.
+
+## Decoherence
+
+The suppression of interference between branches due to entanglement with the environment.
+
+## Einselection
+
+The environment-induced selection of stable pointer states.
+
+## Quantum Darwinism
+
+The idea that classical objectivity arises because many environment fragments redundantly encode the same pointer-state information.
+
+## Decoherent histories
+
+A formulation of quantum mechanics assigning probabilities to whole sequences of events when interference between histories is negligible.
+
+## Von Neumann algebra
+
+An algebra of operators closed under adjoints and suitable limits, equivalently equal to its double commutant.
+
+## Type I algebra
+
+The ordinary algebra of all operators on a Hilbert space. This is standard QM.
+
+## Type II algebra
+
+An infinite-dimensional algebra with a trace and continuous projection dimensions.
+
+## Type III algebra
+
+An algebra with no finite trace and no ordinary density matrices for subregions. Local QFT algebras are typically Type III.
+
+## Cyclic vector
+
+A vector \(|\Omega\rangle\) such that applying algebra elements to it generates the whole Hilbert space.
+
+## Separating vector
+
+A vector \(|\Omega\rangle\) such that no nonzero algebra element annihilates it.
+
+## Modular flow
+
+A canonical automorphism flow of an algebra determined by a state. In finite dimensions:
+
+\[
+\sigma_t(A)=\rho^{it}A\rho^{-it}.
+\]
+
+## Modular Hamiltonian
+
+\[
+K=-\log\rho
+\]
+
+in finite dimensions. It generates modular flow.
+
+## Crossed product
+
+An enlarged algebra obtained by adding unitaries that implement a symmetry or flow.
+
+## Takesaki theorem
+
+A result saying, roughly, that crossing a Type III algebra by its modular flow produces a Type II algebra with a trace.
+
+## Renormalized entropy
+
+A finite entropy obtained by subtracting universal UV divergences from QFT entanglement entropy.
+
+## Generalized entropy
+
+\[
+S_{\rm gen}
+=
+\frac{A}{4G\hbar}
++
+S_{\rm matter}^{\rm ren}.
+\]
+
+## Rényi-0 entropy
+
+The logarithm of the number of nonzero-probability outcomes.
+
+## Smooth support
+
+A regularized support count that ignores outcomes with total probability at most \(\varepsilon\).
+
+## Measurement independence
+
+The Bell assumption
+
+\[
+\rho(\lambda|a,b)=\rho(\lambda).
+\]
+
+It says hidden variables are statistically independent of measurement settings.
+
+## Equivariance
+
+The preservation of a probability measure under dynamics, as \(|\psi|^2\) is preserved in Bohmian mechanics.
+
+---
+
+# 31. Final perspective
+
+QIQT-H is motivated by a simple physical suspicion:
+
+> The measurement problem may look impossible because we usually ignore gravity. We allow the wavefunction to generate unlimited independent records inside finite regions. But quantum gravity suggests finite information capacity.
+
+The hard part is turning that suspicion into mathematics.
+
+That is why the framework uses:
+
+- decoherent histories to define record-bearing alternatives,
+- Quantum Darwinism to identify objective records,
+- Rényi-0 and smooth support to count alternatives,
+- generalized entropy to set the gravitational budget,
+- Type III algebra to describe QFT regions correctly,
+- modular theory and crossed products to renormalize entropy,
+- gauge-like constraints to define physical admissibility.
+
+Whether this ultimately works is open.
+
+But the roadmap is clear:
+
+\[
+\text{measurements create records}
+\]
+
+\[
+\text{records require information capacity}
+\]
+
+\[
+\text{gravity bounds information capacity}
+\]
+
+\[
+\text{therefore quantum histories must satisfy holographic record constraints}.
+\]
+
+That is the core of QIQT-H.
