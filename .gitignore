@@ -3,3 +3,12 @@
 *.swp
 .DS_Store
 Thumbs.db
+
+# LaTeX build intermediates (keep .tex and .pdf only)
+build/*.aux
+build/*.log
+build/*.out
+build/*.toc
+build/*.fls
+build/*.fdb_latexmk
+build/*.synctex.gz
