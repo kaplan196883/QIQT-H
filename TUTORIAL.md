@@ -53,9 +53,9 @@ We will build those ideas slowly, starting from matrices.
 
 In ordinary quantum mechanics, the state evolves by Schrödinger’s equation:
 
-\[
+$$
 i\hbar \frac{d}{dt}|\psi(t)\rangle = H|\psi(t)\rangle.
-\]
+$$
 
 This evolution is:
 
@@ -67,19 +67,19 @@ But measurements seem to produce definite outcomes.
 
 Suppose a spin starts in
 
-\[
+$$
 |\psi\rangle = \alpha |\uparrow\rangle + \beta |\downarrow\rangle.
-\]
+$$
 
-A measuring device begins in a ready state \(|M_0\rangle\). If the device is quantum mechanical, then linearity gives
+A measuring device begins in a ready state $|M_0\rangle$. If the device is quantum mechanical, then linearity gives
 
-\[
+$$
 (\alpha|\uparrow\rangle+\beta|\downarrow\rangle)|M_0\rangle
 \longrightarrow
 \alpha|\uparrow\rangle|M_\uparrow\rangle
 +
 \beta|\downarrow\rangle|M_\downarrow\rangle.
-\]
+$$
 
 But in the lab, we see one pointer position, not a ghostly superposition of two pointer readings.
 
@@ -112,19 +112,19 @@ That statement needs a lot of unpacking.
 
 # 2. The basic picture: amplitudes, branches, and records
 
-In ordinary QM, if we have alternatives \(i\), the state can be written
+In ordinary QM, if we have alternatives $i$, the state can be written
 
-\[
+$$
 |\Psi\rangle = \sum_i c_i |i\rangle.
-\]
+$$
 
 The Born rule says
 
-\[
+$$
 P(i)=|c_i|^2.
-\]
+$$
 
-But in real measurements, \(i\) is not merely a label in a tiny Hilbert space. It becomes a **record**:
+But in real measurements, $i$ is not merely a label in a tiny Hilbert space. It becomes a **record**:
 
 - a pointer points left,
 - a detector clicked,
@@ -133,25 +133,25 @@ But in real measurements, \(i\) is not merely a label in a tiny Hilbert space. I
 
 The essential object is not merely “the spin is up,” but rather:
 
-\[
+$$
 \text{spin up} + \text{apparatus says up} + \text{environment contains records of up}.
-\]
+$$
 
 A branch is approximately a large entangled component:
 
-\[
+$$
 |\Psi\rangle
 \approx
 \alpha |\uparrow\rangle |M_\uparrow\rangle |E_\uparrow\rangle
 +
 \beta |\downarrow\rangle |M_\downarrow\rangle |E_\downarrow\rangle.
-\]
+$$
 
 The environment states are effectively orthogonal:
 
-\[
+$$
 \langle E_\uparrow | E_\downarrow\rangle \approx 0.
-\]
+$$
 
 That is decoherence. It explains why interference between branches becomes practically impossible.
 
@@ -169,17 +169,17 @@ In non-gravitational quantum mechanics, it is tempting to say that a finite volu
 
 But gravity changes that.
 
-If you pack too much energy into a region, the region collapses into a black hole. A black hole of horizon area \(A\) has entropy
+If you pack too much energy into a region, the region collapses into a black hole. A black hole of horizon area $A$ has entropy
 
-\[
+$$
 S_{\rm BH} = \frac{k_B A}{4G\hbar}.
-\]
+$$
 
-In units where \(k_B=1\),
+In units where $k_B=1$,
 
-\[
+$$
 S_{\rm BH} = \frac{A}{4G\hbar}.
-\]
+$$
 
 This is the Bekenstein-Hawking entropy.
 
@@ -189,11 +189,11 @@ That motivates the holographic principle:
 
 > The maximum number of independent degrees of freedom in a gravitational region scales like the area of its boundary.
 
-If entropy counts distinguishable states, then a region with boundary area \(A\) can contain at most roughly
+If entropy counts distinguishable states, then a region with boundary area $A$ can contain at most roughly
 
-\[
+$$
 N \sim e^{A/4G\hbar}
-\]
+$$
 
 orthogonal distinguishable states.
 
@@ -211,27 +211,27 @@ Before we talk about holographic information constraints, we need to review seve
 
 ## 4.1 Shannon entropy
 
-For a classical probability distribution \(p_i\), the Shannon entropy is
+For a classical probability distribution $p_i$, the Shannon entropy is
 
-\[
+$$
 H(p) = -\sum_i p_i \log p_i.
-\]
+$$
 
 It measures the expected surprise of a draw from the distribution.
 
 Example:
 
-- Fair coin: \(p=(1/2,1/2)\)
+- Fair coin: $p=(1/2,1/2)$
 
-\[
+$$
 H = -2\cdot \frac12 \log \frac12 = \log 2.
-\]
+$$
 
-- Biased coin: \(p=(0.99,0.01)\)
+- Biased coin: $p=(0.99,0.01)$
 
-\[
+$$
 H \approx 0.056 \text{ nats},
-\]
+$$
 
 much smaller.
 
@@ -239,101 +239,101 @@ Shannon entropy cares about probabilities.
 
 ## 4.2 Von Neumann entropy
 
-For a density matrix \(\rho\), the quantum version is
+For a density matrix $\rho$, the quantum version is
 
-\[
+$$
 S(\rho) = -\mathrm{Tr}(\rho \log \rho).
-\]
+$$
 
-If \(\rho\) has eigenvalues \(p_i\), then
+If $\rho$ has eigenvalues $p_i$, then
 
-\[
+$$
 S(\rho) = -\sum_i p_i \log p_i.
-\]
+$$
 
-So von Neumann entropy is just Shannon entropy applied to the eigenvalues of \(\rho\).
+So von Neumann entropy is just Shannon entropy applied to the eigenvalues of $\rho$.
 
 Example:
 
-\[
+$$
 \rho =
 \begin{pmatrix}
 1/2 & 0 \\
 0 & 1/2
 \end{pmatrix}
-\]
+$$
 
 has
 
-\[
+$$
 S(\rho)=\log 2.
-\]
+$$
 
 A pure state
 
-\[
+$$
 \rho=|\psi\rangle\langle\psi|
-\]
+$$
 
-has eigenvalues \(1,0,0,\dots\), so
+has eigenvalues $1,0,0,\dots$, so
 
-\[
+$$
 S(\rho)=0.
-\]
+$$
 
 ## 4.3 Rényi entropies
 
-The Rényi entropy of order \(\alpha\) is
+The Rényi entropy of order $\alpha$ is
 
-\[
+$$
 H_\alpha(p)=\frac{1}{1-\alpha}\log\left(\sum_i p_i^\alpha\right).
-\]
+$$
 
-Different \(\alpha\) emphasize different aspects of the distribution.
+Different $\alpha$ emphasize different aspects of the distribution.
 
-The most important one for QIQT-H is the \(\alpha=0\) case.
+The most important one for QIQT-H is the $\alpha=0$ case.
 
 ## 4.4 Rényi-0 entropy: counting possible outcomes
 
-For \(\alpha=0\),
+For $\alpha=0$,
 
-\[
+$$
 p_i^0 =
 \begin{cases}
 1, & p_i>0,\\
 0, & p_i=0.
 \end{cases}
-\]
+$$
 
 So
 
-\[
+$$
 H_0(p)=\log(\#\text{ of nonzero-probability outcomes}).
-\]
+$$
 
 This is called the **support entropy**.
 
 Example:
 
-\[
+$$
 p=(0.99,0.01)
-\]
+$$
 
 has Shannon entropy small, but Rényi-0 entropy
 
-\[
+$$
 H_0 = \log 2.
-\]
+$$
 
 Why? Because two outcomes are possible.
 
 If
 
-\[
+$$
 p=(0.999999,0.000001),
-\]
+$$
 
-then Shannon entropy is even smaller, but Rényi-0 is still \(\log 2\).
+then Shannon entropy is even smaller, but Rényi-0 is still $\log 2$.
 
 So Rényi-0 asks:
 
@@ -349,31 +349,31 @@ Instead of entropy, ecologists often use the “effective number of species,” 
 
 For Shannon entropy,
 
-\[
+$$
 N_{\rm eff}=e^{H}.
-\]
+$$
 
 For Rényi-0,
 
-\[
+$$
 N_0 = e^{H_0}
-\]
+$$
 
 is literally the number of nonzero possibilities.
 
 Example:
 
-\[
+$$
 p=(1/2,1/2)
-\]
+$$
 
-has \(N_0=2\).
+has $N_0=2$.
 
-\[
+$$
 p=(0.999,0.001)
-\]
+$$
 
-also has \(N_0=2\), even though its Shannon effective number is close to \(1\).
+also has $N_0=2$, even though its Shannon effective number is close to $1$.
 
 ## 4.6 Smooth support
 
@@ -381,29 +381,29 @@ A problem: in quantum mechanics, tiny amplitudes are everywhere. If every nonzer
 
 So one uses a **smooth support**.
 
-Instead of counting all outcomes with \(p_i>0\), we allow ourselves to ignore a tiny total probability \(\varepsilon\).
+Instead of counting all outcomes with $p_i>0$, we allow ourselves to ignore a tiny total probability $\varepsilon$.
 
-Define the \(\varepsilon\)-smooth support size as:
+Define the $\varepsilon$-smooth support size as:
 
-> the smallest number of outcomes whose total probability is at least \(1-\varepsilon\).
+> the smallest number of outcomes whose total probability is at least $1-\varepsilon$.
 
 Example:
 
-\[
+$$
 p=(0.98,0.01,0.01).
-\]
+$$
 
-If \(\varepsilon=0.03\), then one outcome already captures \(0.98\), so
+If $\varepsilon=0.03$, then one outcome already captures $0.98$, so
 
-\[
+$$
 N_0^\varepsilon=1.
-\]
+$$
 
-If \(\varepsilon=0.005\), then we need all three outcomes, so
+If $\varepsilon=0.005$, then we need all three outcomes, so
 
-\[
+$$
 N_0^\varepsilon=3.
-\]
+$$
 
 This is useful when tiny tails are physically irrelevant.
 
@@ -415,14 +415,14 @@ QIQT-H often uses a support-like entropy because it wants to count possible reco
 
 Wojciech Zurek suggested that physical entropy should include two pieces:
 
-\[
+$$
 S_{\rm phys} = K(\text{description}) + S_{\rm Boltzmann}.
-\]
+$$
 
 Here:
 
-- \(K(\text{description})\) is the algorithmic complexity of the macroscopic description,
-- \(S_{\rm Boltzmann}=k_B\log W\) is the entropy of the microstates compatible with that description.
+- $K(\text{description})$ is the algorithmic complexity of the macroscopic description,
+- $S_{\rm Boltzmann}=k_B\log W$ is the entropy of the microstates compatible with that description.
 
 Let’s make this concrete.
 
@@ -430,17 +430,17 @@ Let’s make this concrete.
 
 Suppose you have a gas in a box. A macrostate might be described by:
 
-\[
+$$
 \text{“Energy }E,\text{ volume }V,\text{ particle number }N.”}
-\]
+$$
 
 That description is short. Its algorithmic complexity is small.
 
-But many microscopic configurations have the same \(E,V,N\). The number of compatible microstates is \(W\), so
+But many microscopic configurations have the same $E,V,N$. The number of compatible microstates is $W$, so
 
-\[
+$$
 S_{\rm Boltzmann}=k_B\log W.
-\]
+$$
 
 Now consider a bizarre macro-description:
 
@@ -462,35 +462,35 @@ The standard measurement problem involves superpositions of macroscopically dist
 
 ## 6.1 A two-state system coupled to an environment
 
-Let the system have states \(|0\rangle, |1\rangle\). Suppose the environment starts in \(|E_0\rangle\).
+Let the system have states $|0\rangle, |1\rangle$. Suppose the environment starts in $|E_0\rangle$.
 
 Interaction produces:
 
-\[
+$$
 (\alpha|0\rangle+\beta|1\rangle)|E_0\rangle
 \longrightarrow
 \alpha|0\rangle|E_0^{(0)}\rangle
 +
 \beta|1\rangle|E_0^{(1)}\rangle.
-\]
+$$
 
 The total density matrix is
 
-\[
+$$
 \rho_{\rm total}
 =
 |\Psi\rangle\langle\Psi|.
-\]
+$$
 
 The reduced density matrix of the system is obtained by tracing over the environment:
 
-\[
+$$
 \rho_S = \mathrm{Tr}_E(\rho_{\rm total}).
-\]
+$$
 
 Compute it:
 
-\[
+$$
 \rho_S
 =
 |\alpha|^2 |0\rangle\langle 0|
@@ -500,22 +500,22 @@ Compute it:
 \alpha\beta^* \langle E_0^{(1)}|E_0^{(0)}\rangle |0\rangle\langle 1|
 +
 \alpha^*\beta \langle E_0^{(0)}|E_0^{(1)}\rangle |1\rangle\langle 0|.
-\]
+$$
 
 If
 
-\[
+$$
 \langle E_0^{(1)}|E_0^{(0)}\rangle \approx 0,
-\]
+$$
 
 then the off-diagonal terms vanish:
 
-\[
+$$
 \rho_S \approx
 |\alpha|^2 |0\rangle\langle 0|
 +
 |\beta|^2 |1\rangle\langle 1|.
-\]
+$$
 
 This looks like a classical mixture.
 
@@ -531,23 +531,23 @@ This is called **einselection**, short for environment-induced superselection.
 
 Let
 
-\[
+$$
 H_{\rm int}=g\, \sigma_z \otimes B_E,
-\]
+$$
 
-where \(B_E\) is some environment operator.
+where $B_E$ is some environment operator.
 
-Then \(|0\rangle,|1\rangle\), the eigenstates of \(\sigma_z\), are stable under the interaction. Superpositions of them get entangled with the environment.
+Then $|0\rangle,|1\rangle$, the eigenstates of $\sigma_z$, are stable under the interaction. Superpositions of them get entangled with the environment.
 
-So the environment selects the \(\sigma_z\) basis as the pointer basis.
+So the environment selects the $\sigma_z$ basis as the pointer basis.
 
 If instead
 
-\[
+$$
 H_{\rm int}=g\, \sigma_x \otimes B_E,
-\]
+$$
 
-then the pointer basis would be the \(\sigma_x\) eigenbasis.
+then the pointer basis would be the $\sigma_x$ eigenbasis.
 
 So pointer states are not magical. They are the states that the system-environment interaction monitors.
 
@@ -565,11 +565,11 @@ A photon scatters off the dust particle. The outgoing photon carries information
 
 So the environment becomes a communication channel:
 
-\[
+$$
 \text{dust position}
 \longrightarrow
 \text{many scattered photons}.
-\]
+$$
 
 Different observers can intercept different photons and infer the same position without disturbing the dust grain.
 
@@ -577,13 +577,13 @@ This is redundancy.
 
 Schematically:
 
-\[
+$$
 |x\rangle |E_0\rangle
 \longrightarrow
 |x\rangle |E_x^{(1)}\rangle |E_x^{(2)}\rangle \cdots |E_x^{(N)}\rangle.
-\]
+$$
 
-Each fragment \(E^{(k)}\) contains information about \(x\).
+Each fragment $E^{(k)}$ contains information about $x$.
 
 ## 6.4 Spectrum broadcast structure
 
@@ -591,7 +591,7 @@ A strong form of Quantum Darwinism is called **spectrum broadcast structure**.
 
 A state has this structure if it looks like
 
-\[
+$$
 \rho_{S E_1 \cdots E_N}
 =
 \sum_i p_i |i\rangle\langle i|_S
@@ -599,21 +599,21 @@ A state has this structure if it looks like
 \otimes \rho_i^{E_2}
 \otimes \cdots
 \otimes \rho_i^{E_N},
-\]
+$$
 
 with the environment fragment states distinguishable:
 
-\[
+$$
 \rho_i^{E_k}\rho_j^{E_k}=0
 \quad
 \text{for } i\neq j.
-\]
+$$
 
 This means:
 
-- the system is classically in one of the pointer states \(i\),
-- each environment fragment contains a readable record of \(i\),
-- different observers can independently learn \(i\).
+- the system is classically in one of the pointer states $i$,
+- each environment fragment contains a readable record of $i$,
+- different observers can independently learn $i$.
 
 This is the mathematical form of objective classical facts emerging from quantum mechanics.
 
@@ -629,61 +629,61 @@ A history is a sequence of alternatives at different times.
 
 Example:
 
-At time \(t_1\), the particle is in region \(A\) or \(B\).
+At time $t_1$, the particle is in region $A$ or $B$.
 
-At time \(t_2\), it is in region \(C\) or \(D\).
+At time $t_2$, it is in region $C$ or $D$.
 
 A possible history is:
 
-\[
+$$
 A \text{ at } t_1,\quad C \text{ at } t_2.
-\]
+$$
 
 In quantum mechanics, alternatives are represented by projection operators.
 
 Let
 
-\[
+$$
 P_A(t_1),\quad P_C(t_2)
-\]
+$$
 
-be Heisenberg-picture projectors. Then the class operator for the history \(h=(A,C)\) is
+be Heisenberg-picture projectors. Then the class operator for the history $h=(A,C)$ is
 
-\[
+$$
 C_h = P_C(t_2)P_A(t_1).
-\]
+$$
 
 For longer histories,
 
-\[
+$$
 C_h=P_{i_n}(t_n)\cdots P_{i_2}(t_2)P_{i_1}(t_1).
-\]
+$$
 
 ## 7.2 The decoherence functional
 
-Given initial state \(\rho\), define
+Given initial state $\rho$, define
 
-\[
+$$
 D(h,h')=\mathrm{Tr}(C_h \rho C_{h'}^\dagger).
-\]
+$$
 
 This is called the decoherence functional.
 
 The diagonal elements
 
-\[
+$$
 D(h,h)
-\]
+$$
 
 are candidate probabilities.
 
 But probabilities only make sense if histories do not interfere. That requires off-diagonal terms to vanish approximately:
 
-\[
+$$
 D(h,h')\approx 0
 \quad
 \text{for } h\neq h'.
-\]
+$$
 
 This condition is called decoherence of histories.
 
@@ -691,25 +691,25 @@ This condition is called decoherence of histories.
 
 A set of histories is medium decoherent if
 
-\[
+$$
 D(h,h')\approx 0
 \quad
 \text{for } h\neq h'.
-\]
+$$
 
 Then the probabilities
 
-\[
+$$
 p(h)=D(h,h)
-\]
+$$
 
 obey ordinary probability rules.
 
-For example, if history \(h\) is the union of two alternatives \(h_1,h_2\), then
+For example, if history $h$ is the union of two alternatives $h_1,h_2$, then
 
-\[
+$$
 p(h)=p(h_1)+p(h_2)
-\]
+$$
 
 provided interference vanishes.
 
@@ -717,30 +717,30 @@ provided interference vanishes.
 
 In the two-slit experiment, histories are:
 
-- particle went through slit 1 and arrived at screen point \(x\),
-- particle went through slit 2 and arrived at screen point \(x\).
+- particle went through slit 1 and arrived at screen point $x$,
+- particle went through slit 2 and arrived at screen point $x$.
 
 If no environment records which slit, the two histories interfere:
 
-\[
+$$
 D(1,x;2,x)\neq 0.
-\]
+$$
 
 You cannot assign classical probabilities to “went through slit 1” and “went through slit 2.”
 
 If a detector records the slit, the environment states become orthogonal:
 
-\[
+$$
 |E_1\rangle,\quad |E_2\rangle,
 \qquad
 \langle E_1|E_2\rangle\approx 0.
-\]
+$$
 
 Then
 
-\[
+$$
 D(1,x;2,x)\approx 0.
-\]
+$$
 
 Now the histories decohere, and you can assign probabilities.
 
@@ -758,34 +758,34 @@ A record is evidence that a history occurred.
 
 Now we can state the central idea in a clean but schematic form.
 
-Consider a causal region \(D\), such as the region accessible to an observer between two times. Let \(\partial D\) be its boundary.
+Consider a causal region $D$, such as the region accessible to an observer between two times. Let $\partial D$ be its boundary.
 
 QIQT-H says:
 
-> The physically admissible decoherent histories in \(D\) are constrained by a holographic information budget.
+> The physically admissible decoherent histories in $D$ are constrained by a holographic information budget.
 
 A schematic version is
 
-\[
+$$
 I_{\rm branch}^{\varepsilon}(D)
 \;\leq\;
 S_{\rm gen}(\partial D).
-\]
+$$
 
 Here:
 
-- \(I_{\rm branch}^{\varepsilon}(D)\) is a smoothed support-like entropy counting distinguishable records across decoherent branches in the region,
-- \(S_{\rm gen}(\partial D)\) is the generalized entropy associated with the boundary.
+- $I_{\rm branch}^{\varepsilon}(D)$ is a smoothed support-like entropy counting distinguishable records across decoherent branches in the region,
+- $S_{\rm gen}(\partial D)$ is the generalized entropy associated with the boundary.
 
 The generalized entropy is
 
-\[
+$$
 S_{\rm gen}
 =
 \frac{A}{4G\hbar}
 +
 S_{\rm matter}^{\rm ren}.
-\]
+$$
 
 We will explain this later.
 
@@ -811,47 +811,49 @@ Instead, it is:
 
 This is called a **branch-summed constraint**.
 
-Suppose a measurement produces \(N\) distinguishable possible records. A support entropy would be
+Suppose a measurement produces $N$ distinguishable possible records. A support entropy would be
 
-\[
+$$
 I_{\rm branch}\sim \log N.
-\]
+$$
 
 The holographic bound says
 
-\[
+$$
 \log N \leq S_{\rm gen}.
-\]
+$$
 
 With smoothing,
 
-\[
+$$
 \log N^\varepsilon_{\rm eff}\leq S_{\rm gen}.
-\]
+$$
 
-So very tiny-amplitude alternatives may be ignored up to tolerance \(\varepsilon\), but robust recorded alternatives count.
+So very tiny-amplitude alternatives may be ignored up to tolerance $\varepsilon$, but robust recorded alternatives count.
 
 ## 8.2 Probabilities
 
-Given a decoherent family of histories \(\{h\}\), ordinary quantum mechanics assigns weights
+Given a decoherent family of histories $\{h\}$, ordinary quantum mechanics assigns weights
 
-\[
+$$
 w(h)=D(h,h).
-\]
+$$
 
 QIQT-H keeps these weights but restricts to admissible histories.
 
-For an admissible family \(\mathcal{H}_{\rm adm}\),
+For an admissible family $\mathcal{H}_{\rm adm}$,
 
-\[
+$$
 P(h)
 =
 \frac{w(h)}{\sum_{h'\in \mathcal{H}_{\rm adm}} w(h')}.
-\]
+$$
 
 If the admissible set contains essentially all Born-weight-relevant histories, this reduces to ordinary quantum mechanics.
 
-So QIQT-H aims to reproduce normal Born statistics in ordinary laboratory regimes while imposing new constraints in extreme gravitational or cosmological regimes.
+**Caveat.** This renormalization formula is only consistent if the admissibility rule $\mathcal{H}_{\rm adm}$ is stable under coarse-graining, compatible with causal localization, and admits a Born-weight equivariance-like theorem (analogous to Bohmian $|\psi|^2$-equivariance, §22). Without such compatibility, the renormalization can in principle introduce *nonlinear effective probabilities* that may threaten no-signaling in relativistic settings. Establishing the appropriate equivariance/no-signaling theorem for QIQT-H's admissibility rule is one of the framework's central open problems.
+
+So QIQT-H aims to reproduce normal Born statistics in ordinary laboratory regimes while imposing new constraints in extreme gravitational or cosmological regimes — but the precise statement that the renormalization-by-admissibility recovers Born statistics safely is currently a conjecture, not a theorem.
 
 ## 8.3 Why this might help the measurement problem
 
@@ -869,7 +871,11 @@ The hope is to get:
 - ordinary quantum predictions in normal experiments,
 - new constraints when gravitational entropy bounds matter.
 
-**Why ordinary lab measurements aren't affected.** A natural worry: a single lab does thousands of measurements per second; surely these would quickly violate any branch-summed bound? The answer: no, because $S_{\rm gen}$ for ordinary macroscopic regions is **astronomically large** — $\sim 10^{70}$ nats for a one-meter region. Each macroscopic record contributes $\sim 10^{25}$ bits at most (Zurek physical entropy for a typical macroscopic configuration). So the budget allows $\sim 10^{45}$ comparable macroscopic records per cubic meter before any constraint bites. Lab experiments are nowhere near saturation. The framework predicts deviations from standard QM only at the scale where $N \cdot I_0$ approaches $Q_R$ — the regime of macroscopic Schrödinger-cat states with comparable per-record costs approaching the regional holographic capacity. At ordinary lab scales the constraint is operationally vacuous; standard QM is recovered exactly.
+**Why ordinary lab measurements don't immediately violate the bound — and what this exposes.** A natural worry: a single lab does thousands of measurements per second; surely these would quickly violate any branch-summed bound? The answer is that the area term $A/(4G\hbar)$ for a one-meter region is fantastically large — of order $10^{69}$–$10^{70}$ in natural units. Ordinary laboratory records occupy a negligible fraction of this capacity. Therefore QIQT-H, if correct, must reproduce standard quantum mechanics in ordinary non-gravitational laboratory regimes — the constraint is operationally vacuous there.
+
+**However, this also exposes an important open issue.** If the holographic constraint is far from saturation in ordinary measurements, then the constraint alone does not by itself select a unique laboratory outcome. An ordinary Stern-Gerlach measurement would still have, in principle, an admissible multi-record decohered structure within the bound — yet experimentally one observes one outcome. QIQT-H must therefore explain definite ordinary outcomes through *some additional global admissibility of record histories*, not through simple local saturation of the holographic budget. Making that global selection rule precise is one of the framework's central open problems (see §28).
+
+The honest picture: the Branch-Summed Bound predicts a definite quantum-to-classical *boundary scale*, above which multi-record structures are kinematically excluded. Below that scale, the bound is operationally vacuous, and the framework needs an additional global admissibility mechanism to recover ordinary single-outcome experience. The current research program proposes the bound but does not yet supply the global mechanism. The tutorial should be read with this caveat throughout.
 
 This is the rough conceptual skeleton. Now we need the machinery.
 
@@ -877,47 +883,47 @@ This is the rough conceptual skeleton. Now we need the machinery.
 
 # 9. Why operator algebras enter at all
 
-In ordinary undergraduate QM, we start with a Hilbert space \(\mathcal{H}\). Observables are Hermitian operators on \(\mathcal{H}\).
+In ordinary undergraduate QM, we start with a Hilbert space $\mathcal{H}$. Observables are Hermitian operators on $\mathcal{H}$.
 
 For a finite-dimensional system, all operators are matrices.
 
 Example: for one qubit,
 
-\[
+$$
 \mathcal{H}=\mathbb{C}^2,
-\]
+$$
 
-and observables are \(2\times 2\) Hermitian matrices.
+and observables are $2\times 2$ Hermitian matrices.
 
 The full algebra of operators is
 
-\[
+$$
 M_2(\mathbb{C}).
-\]
+$$
 
 For two qubits,
 
-\[
+$$
 \mathcal{H}=\mathbb{C}^2\otimes \mathbb{C}^2,
-\]
+$$
 
 and the full algebra is
 
-\[
+$$
 M_4(\mathbb{C}).
-\]
+$$
 
 So far, everything is simple.
 
 But QFT and gravity force us to think more carefully.
 
-In QFT, the degrees of freedom are spread over spacetime regions. We often care about the observables localized in a region \(O\). So we associate an algebra
+In QFT, the degrees of freedom are spread over spacetime regions. We often care about the observables localized in a region $O$. So we associate an algebra
 
-\[
+$$
 \mathcal{A}(O)
-\]
+$$
 
-to each spacetime region \(O\).
+to each spacetime region $O$.
 
 This is the algebraic viewpoint:
 
@@ -943,24 +949,24 @@ An algebra is a set of operators closed under:
 - addition,
 - multiplication,
 - scalar multiplication,
-- adjoint \(A\mapsto A^\dagger\),
+- adjoint $A\mapsto A^\dagger$,
 - limits of suitable sequences.
 
 In finite dimensions, an algebra is just a set of matrices closed under those operations.
 
 Example:
 
-All \(2\times 2\) matrices:
+All $2\times 2$ matrices:
 
-\[
+$$
 M_2(\mathbb{C}).
-\]
+$$
 
 Example:
 
-All diagonal \(2\times 2\) matrices:
+All diagonal $2\times 2$ matrices:
 
-\[
+$$
 \left\{
 \begin{pmatrix}
 a & 0\\
@@ -968,37 +974,37 @@ a & 0\\
 \end{pmatrix}
 : a,b\in\mathbb{C}
 \right\}.
-\]
+$$
 
 This diagonal algebra is commutative. It behaves like classical observables for a two-outcome system.
 
 ## 10.2 The commutant
 
-Given an algebra \(\mathcal{A}\), its commutant \(\mathcal{A}'\) is the set of all operators that commute with every operator in \(\mathcal{A}\):
+Given an algebra $\mathcal{A}$, its commutant $\mathcal{A}'$ is the set of all operators that commute with every operator in $\mathcal{A}$:
 
-\[
+$$
 \mathcal{A}'=\{B:[A,B]=0\text{ for all }A\in\mathcal{A}\}.
-\]
+$$
 
 Example:
 
-If \(\mathcal{A}=M_n(\mathbb{C})\) acting on \(\mathbb{C}^n\), then the only matrices commuting with all matrices are multiples of the identity:
+If $\mathcal{A}=M_n(\mathbb{C})$ acting on $\mathbb{C}^n$, then the only matrices commuting with all matrices are multiples of the identity:
 
-\[
+$$
 \mathcal{A}'=\mathbb{C}I.
-\]
+$$
 
 Example:
 
-If \(\mathcal{A}\) is all diagonal \(2\times 2\) matrices, then \(\mathcal{A}'\) is also all diagonal \(2\times 2\) matrices.
+If $\mathcal{A}$ is all diagonal $2\times 2$ matrices, then $\mathcal{A}'$ is also all diagonal $2\times 2$ matrices.
 
 ## 10.3 Von Neumann algebra
 
 A von Neumann algebra is an operator algebra satisfying
 
-\[
+$$
 \mathcal{A}=\mathcal{A}''.
-\]
+$$
 
 That is, it equals its double commutant.
 
@@ -1016,27 +1022,27 @@ This classification is one of the most enigmatic things for physics students, so
 
 ## 11.1 The center
 
-The center of an algebra \(\mathcal{A}\) is
+The center of an algebra $\mathcal{A}$ is
 
-\[
+$$
 Z(\mathcal{A})=\{A\in\mathcal{A}:[A,B]=0\text{ for all }B\in\mathcal{A}\}.
-\]
+$$
 
 If the center is just multiples of the identity,
 
-\[
+$$
 Z(\mathcal{A})=\mathbb{C}I,
-\]
+$$
 
-then \(\mathcal{A}\) is called a **factor**.
+then $\mathcal{A}$ is called a **factor**.
 
 A factor is an algebra with no classical superselection label sitting inside it.
 
 Example:
 
-\[
+$$
 M_n(\mathbb{C})
-\]
+$$
 
 is a factor.
 
@@ -1050,35 +1056,35 @@ The Type classification classifies factors.
 
 Type I factors are the familiar ones:
 
-\[
+$$
 \mathcal{A}=B(\mathcal{H}),
-\]
+$$
 
 the algebra of all bounded operators on a Hilbert space.
 
 Finite-dimensional example:
 
-\[
+$$
 M_n(\mathbb{C}).
-\]
+$$
 
 This is ordinary quantum mechanics.
 
 Type I algebras have minimal projections.
 
-A projection is an operator \(P\) satisfying
+A projection is an operator $P$ satisfying
 
-\[
+$$
 P^2=P,\qquad P^\dagger=P.
-\]
+$$
 
 It represents a yes/no question.
 
-In \(M_n(\mathbb{C})\), a one-dimensional projector
+In $M_n(\mathbb{C})$, a one-dimensional projector
 
-\[
+$$
 P=|\psi\rangle\langle\psi|
-\]
+$$
 
 is minimal: it cannot be decomposed into smaller nonzero projections.
 
@@ -1094,67 +1100,67 @@ Type II factors are stranger.
 
 They have no minimal projections, but they still have a trace.
 
-A trace is a function \(\tau\) satisfying
+A trace is a function $\tau$ satisfying
 
-\[
+$$
 \tau(AB)=\tau(BA),
-\]
+$$
 
 like the ordinary matrix trace.
 
-For a Type II\(_1\) factor, the trace is finite and normalized:
+For a Type II$_1$ factor, the trace is finite and normalized:
 
-\[
+$$
 \tau(I)=1.
-\]
+$$
 
 The surprising part is that projections can have any continuous size between 0 and 1.
 
-For ordinary matrices \(M_n\), projection ranks are discrete:
+For ordinary matrices $M_n$, projection ranks are discrete:
 
-\[
+$$
 \mathrm{rank}(P)=0,1,2,\dots,n.
-\]
+$$
 
 The normalized trace gives
 
-\[
+$$
 \frac{\mathrm{rank}(P)}{n}
 =
 0,\frac{1}{n},\frac{2}{n},\dots,1.
-\]
+$$
 
 Only discrete values.
 
-In a Type II\(_1\) factor, projections can have trace
+In a Type II$_1$ factor, projections can have trace
 
-\[
+$$
 \tau(P)=r
-\]
+$$
 
-for any real number \(0\leq r\leq 1\).
+for any real number $0\leq r\leq 1$.
 
 That is why von Neumann described Type II algebras as having **continuous dimension**.
 
 ### Toy model intuition: infinite spin chain limit
 
-Take \(N\) qubits.
+Take $N$ qubits.
 
 The algebra is
 
-\[
+$$
 M_{2^N}(\mathbb{C}).
-\]
+$$
 
 The normalized trace of a projection can be
 
-\[
+$$
 0,\frac{1}{2^N},\frac{2}{2^N},\dots,1.
-\]
+$$
 
-As \(N\to\infty\), the spacing between possible trace values goes to zero.
+As $N\to\infty$, the spacing between possible trace values goes to zero.
 
-A Type II\(_1\) factor is morally like the infinite limit of such matrix algebras, where the possible projection sizes become continuous.
+A Type II$_1$ factor is morally like the infinite limit of such matrix algebras, where the possible projection sizes become continuous.
 
 This is not a complete construction, but it gives the right intuition.
 
@@ -1170,7 +1176,7 @@ There are actually **two species** of Type II factors:
 
 This distinction matters later. When we form the crossed product of a Type III algebra with its modular flow (§17), the result (the "continuous core") is generically Type II$_\infty$, not Type II$_1$. The trace is still semifinite — well-defined, satisfying $\tau(AB) = \tau(BA)$ — but the identity has infinite trace. So you can compute trace-like quantities, but $S = -\tau(\rho \log \rho)$ may not be automatically finite without further regularization.
 
-For the special case of the de Sitter static patch (where the crossed product gives Type II$_1$), the trace is finite and the entropy bound is cleanly $S \le \log \tau(\mathbf{1}) = 0$ in natural normalization — which matches the de Sitter cosmological horizon entropy $A/(4G\hbar)$ up to additive constants. This is the cleanest example in the literature (CLPW 2022).
+In the de Sitter static-patch construction of CLPW 2022, the observer algebra can become Type II$_1$, reflecting the finite entropy of the cosmological horizon. One has to be careful with normalization here: with the normalized Type II$_1$ trace $\tau(\mathbf{1}) = 1$, the maximally mixed (tracial) state has $S = -\tau(\mathbf{1} \log \mathbf{1}) = 0$, and smaller-support states have negative entropy. This is mathematically fine but physically nonintuitive — the physical de Sitter horizon entropy $A/(4G\hbar)$ appears as an additive *gravitational normalization constant* relative to this convention, not literally as $\log \tau(\mathbf{1})$. So the Type II$_1$ structure encodes a finite-entropy state space (which is the important physics), but the numerical horizon entropy requires restoring the gravitational normalization. This is the cleanest example of Type II$_1$ structure in semiclassical gravity in the literature.
 
 ---
 
@@ -1187,7 +1193,7 @@ They have:
 
 These appear naturally in relativistic QFT.
 
-If \(O\) is a bounded spacetime region, the local algebra \(\mathcal{A}(O)\) is usually Type III.
+If $O$ is a bounded spacetime region, the local algebra $\mathcal{A}(O)$ is usually Type III.
 
 This is not an exotic exception. It is the generic case.
 
@@ -1195,15 +1201,15 @@ This is not an exotic exception. It is the generic case.
 
 In ordinary QM, if a system splits into two parts,
 
-\[
+$$
 \mathcal{H}=\mathcal{H}_A\otimes\mathcal{H}_B,
-\]
+$$
 
-then the observables in \(A\) are
+then the observables in $A$ are
 
-\[
+$$
 B(\mathcal{H}_A)\otimes I_B.
-\]
+$$
 
 That is Type I.
 
@@ -1211,15 +1217,15 @@ But in continuum QFT, the vacuum is entangled across every spatial boundary at a
 
 There is no exact factorization
 
-\[
+$$
 \mathcal{H}_{\rm total}
 \neq
 \mathcal{H}_{\rm inside}\otimes \mathcal{H}_{\rm outside}
-\]
+$$
 
 in the naive way.
 
-A region's algebra is therefore not \(B(\mathcal{H}_{\rm inside})\). It is Type III.
+A region's algebra is therefore not $B(\mathcal{H}_{\rm inside})$. It is Type III.
 
 The divergence of entanglement entropy is one symptom of this.
 
@@ -1231,25 +1237,25 @@ The divergence of entanglement entropy is one symptom of this.
 
 Let’s use a simple example: a 1+1 dimensional conformal field theory on a line.
 
-Consider an interval of length \(L\), with UV cutoff \(\epsilon\). The vacuum entanglement entropy of the interval is
+Consider an interval of length $L$, with UV cutoff $\epsilon$. The vacuum entanglement entropy of the interval is
 
-\[
+$$
 S(L)\sim \frac{c}{3}\log\frac{L}{\epsilon},
-\]
+$$
 
-where \(c\) is the central charge.
+where $c$ is the central charge.
 
-For a half-line with an IR cutoff \(L\), one often gets
+For a half-line with an IR cutoff $L$, one often gets
 
-\[
+$$
 S_{\rm half-line}\sim \frac{c}{6}\log\frac{L}{\epsilon}.
-\]
+$$
 
-As \(\epsilon\to 0\),
+As $\epsilon\to 0$,
 
-\[
+$$
 S\to \infty.
-\]
+$$
 
 Why?
 
@@ -1257,22 +1263,22 @@ Because field modes on opposite sides of the boundary are entangled at all wavel
 
 A rough counting argument:
 
-- divide space into lattice sites of spacing \(\epsilon\),
+- divide space into lattice sites of spacing $\epsilon$,
 - degrees of freedom just across the boundary are entangled,
 - every scale contributes some amount,
-- the number of scales between \(\epsilon\) and \(L\) is
+- the number of scales between $\epsilon$ and $L$ is
 
-\[
+$$
 \log\frac{L}{\epsilon}.
-\]
+$$
 
 So entropy grows logarithmically in 1+1 dimensions.
 
 In higher dimensions, the leading divergence is usually an area law:
 
-\[
+$$
 S\sim \alpha \frac{\mathrm{Area}}{\epsilon^{d-2}}+\cdots.
-\]
+$$
 
 This divergence is not merely a calculational nuisance. It reflects the Type III nature of local QFT algebras.
 
@@ -1282,67 +1288,67 @@ This divergence is not merely a calculational nuisance. It reflects the Type III
 
 Modular theory begins with two strange words: cyclic and separating.
 
-Let \(\mathcal{A}\) be an algebra acting on a Hilbert space \(\mathcal{H}\), and let \(|\Omega\rangle\) be a vector.
+Let $\mathcal{A}$ be an algebra acting on a Hilbert space $\mathcal{H}$, and let $|\Omega\rangle$ be a vector.
 
 ## 13.1 Cyclic
 
-\(|\Omega\rangle\) is cyclic for \(\mathcal{A}\) if applying operators in \(\mathcal{A}\) to it generates a dense set of states:
+$|\Omega\rangle$ is cyclic for $\mathcal{A}$ if applying operators in $\mathcal{A}$ to it generates a dense set of states:
 
-\[
+$$
 \{A|\Omega\rangle:A\in\mathcal{A}\}
-\]
+$$
 
 spans the Hilbert space.
 
 Finite-dimensional translation:
 
-> By acting on \(|\Omega\rangle\) with observables in \(\mathcal{A}\), you can reach any vector.
+> By acting on $|\Omega\rangle$ with observables in $\mathcal{A}$, you can reach any vector.
 
 ## 13.2 Separating
 
-\(|\Omega\rangle\) is separating for \(\mathcal{A}\) if
+$|\Omega\rangle$ is separating for $\mathcal{A}$ if
 
-\[
+$$
 A|\Omega\rangle=0
 \quad\Rightarrow\quad
 A=0.
-\]
+$$
 
 In words:
 
-> No nonzero operator in the algebra kills \(|\Omega\rangle\).
+> No nonzero operator in the algebra kills $|\Omega\rangle$.
 
 ## 13.3 Toy example with two qubits
 
 Let
 
-\[
+$$
 \mathcal{H}=\mathbb{C}^2_L\otimes \mathbb{C}^2_R.
-\]
+$$
 
 Let the algebra be operators on the left qubit:
 
-\[
+$$
 \mathcal{A}=B(\mathbb{C}^2_L)\otimes I_R.
-\]
+$$
 
 Consider the entangled state
 
-\[
+$$
 |\Omega\rangle
 =
 \sqrt{p}|0\rangle_L|0\rangle_R
 +
 \sqrt{1-p}|1\rangle_L|1\rangle_R,
-\]
+$$
 
-with \(0<p<1\).
+with $0<p<1$.
 
 This state has full Schmidt rank.
 
 Acting with arbitrary left operators can generate any state of the form
 
-\[
+$$
 a|0\rangle_L|0\rangle_R
 +
 b|1\rangle_L|0\rangle_R
@@ -1350,34 +1356,34 @@ b|1\rangle_L|0\rangle_R
 c|0\rangle_L|1\rangle_R
 +
 d|1\rangle_L|1\rangle_R?
-\]
+$$
 
 Actually, left operators cannot change the right basis labels directly, but because the state is entangled, left operators acting on the two Schmidt components generate the full two-qubit space when the Schmidt ranks match.
 
 More explicitly, choose left operators like
 
-\[
+$$
 |0\rangle\langle0|,\quad |1\rangle\langle0|,\quad |0\rangle\langle1|,\quad |1\rangle\langle1|.
-\]
+$$
 
-Acting on \(|\Omega\rangle\), these produce vectors proportional to
+Acting on $|\Omega\rangle$, these produce vectors proportional to
 
-\[
+$$
 |0\rangle_L|0\rangle_R,\quad
 |1\rangle_L|0\rangle_R,\quad
 |0\rangle_L|1\rangle_R,\quad
 |1\rangle_L|1\rangle_R.
-\]
+$$
 
-So \(|\Omega\rangle\) is cyclic.
+So $|\Omega\rangle$ is cyclic.
 
 It is also separating. If
 
-\[
+$$
 (A_L\otimes I_R)|\Omega\rangle=0,
-\]
+$$
 
-then because both Schmidt coefficients are nonzero, \(A_L\) must annihilate a basis of \(\mathbb{C}^2_L\), so \(A_L=0\).
+then because both Schmidt coefficients are nonzero, $A_L$ must annihilate a basis of $\mathbb{C}^2_L$, so $A_L=0$.
 
 ## 13.4 Why this matters in QFT
 
@@ -1399,29 +1405,29 @@ Tomita-Takesaki theory sounds forbidding. Let’s start with finite matrices.
 
 ## 14.1 The finite-dimensional problem
 
-Suppose we have an algebra of observables \(\mathcal{A}\) and a state \(\omega\).
+Suppose we have an algebra of observables $\mathcal{A}$ and a state $\omega$.
 
-In finite-dimensional QM, a state is represented by a density matrix \(\rho\):
+In finite-dimensional QM, a state is represented by a density matrix $\rho$:
 
-\[
+$$
 \omega(A)=\mathrm{Tr}(\rho A).
-\]
+$$
 
-If \(\rho\) is full rank, then it has no zero eigenvalues.
+If $\rho$ is full rank, then it has no zero eigenvalues.
 
-The modular theory associated with \((\mathcal{A},\omega)\) gives a canonical “flow” of the algebra:
+The modular theory associated with $(\mathcal{A},\omega)$ gives a canonical “flow” of the algebra:
 
-\[
+$$
 \sigma_t^\omega(A).
-\]
+$$
 
-In the simplest finite-dimensional case — when \(\mathcal{A} = B(\mathcal{H})\) is the full matrix algebra and \(\omega(A) = \mathrm{Tr}(\rho A)\) with $\rho$ a faithful density matrix — this flow is
+In the simplest finite-dimensional case — when $\mathcal{A} = B(\mathcal{H})$ is the full matrix algebra and $\omega(A) = \mathrm{Tr}(\rho A)$ with $\rho$ a faithful density matrix — this flow is
 
-\[
+$$
 \sigma_t^\omega(A)
 =
 \rho^{it} A \rho^{-it}.
-\]
+$$
 
 That is the key formula in this special case.
 
@@ -1429,29 +1435,29 @@ That is the key formula in this special case.
 
 It says, in the simplest case:
 
-> The state \(\rho\) defines an intrinsic time evolution on the algebra by conjugation with \(\rho^{it}\).
+> The state $\rho$ defines an intrinsic time evolution on the algebra by conjugation with $\rho^{it}$.
 
 Because
 
-\[
+$$
 \rho^{it}=e^{it\log\rho},
-\]
+$$
 
 the generator is
 
-\[
+$$
 K_\omega=-\log\rho,
-\]
+$$
 
 called the modular Hamiltonian.
 
 Then
 
-\[
+$$
 \sigma_t^\omega(A)
 =
 e^{-itK_\omega}A e^{itK_\omega}
-\]
+$$
 
 up to sign conventions.
 
@@ -1459,97 +1465,97 @@ up to sign conventions.
 
 If
 
-\[
+$$
 \rho=\frac{e^{-\beta H}}{Z},
-\]
+$$
 
 then
 
-\[
+$$
 K_\omega=-\log\rho
 =
 \beta H+\log Z.
-\]
+$$
 
-The constant \(\log Z\) commutes with everything, so it does not affect the flow.
+The constant $\log Z$ commutes with everything, so it does not affect the flow.
 
 Then
 
-\[
+$$
 \sigma_t^\omega(A)
 =
 e^{-i\beta H t} A e^{i\beta H t}.
-\]
+$$
 
-So for a thermal state, modular flow is ordinary time evolution, but with time rescaled by \(\beta\).
+So for a thermal state, modular flow is ordinary time evolution, but with time rescaled by $\beta$.
 
 This is a key physical idea:
 
 > Modular flow generalizes thermal time evolution to situations where there may be no ordinary density matrix or Hamiltonian for a subregion.
 
-## 14.3 The standard representation: why \(\rho^{1/2}\) appears
+## 14.3 The standard representation: why $\rho^{1/2}$ appears
 
 In a more precise finite-dimensional version, we represent states as Hilbert-Schmidt operators.
 
 Let
 
-\[
+$$
 \mathcal{H}_{\rm HS}
 =
 \{X:\mathcal{H}\to\mathcal{H}\}
-\]
+$$
 
 with inner product
 
-\[
+$$
 \langle X,Y\rangle=\mathrm{Tr}(X^\dagger Y).
-\]
+$$
 
-The algebra \(\mathcal{A}=B(\mathcal{H})\) acts by left multiplication:
+The algebra $\mathcal{A}=B(\mathcal{H})$ acts by left multiplication:
 
-\[
+$$
 L_A X=AX.
-\]
+$$
 
-A density matrix \(\rho\) is represented by the vector
+A density matrix $\rho$ is represented by the vector
 
-\[
+$$
 |\Omega_\rho\rangle \leftrightarrow \rho^{1/2}.
-\]
+$$
 
 Then
 
-\[
+$$
 \omega(A)=\langle \Omega_\rho,L_A\Omega_\rho\rangle
 =
 \mathrm{Tr}(\rho^{1/2}A\rho^{1/2})
 =
 \mathrm{Tr}(\rho A).
-\]
+$$
 
-So the vector representing the state is \(\rho^{1/2}\).
+So the vector representing the state is $\rho^{1/2}$.
 
-Strictly speaking, the modular operator is not just \(\rho^{1/2}\). For the left algebra, it acts as
+Strictly speaking, the modular operator is not just $\rho^{1/2}$. For the left algebra, it acts as
 
-\[
+$$
 \Delta = L_\rho R_{\rho^{-1}},
-\]
+$$
 
-where \(R_{\rho^{-1}}\) means right multiplication by \(\rho^{-1}\).
+where $R_{\rho^{-1}}$ means right multiplication by $\rho^{-1}$.
 
 Then modular flow gives
 
-\[
+$$
 \Delta^{it} L_A \Delta^{-it}
 =
 L_{\rho^{it}A\rho^{-it}}.
-\]
+$$
 
 So the finite-dimensional facts are:
 
-- the cyclic-separating vector is \(\rho^{1/2}\),
-- the modular operator involves \(\rho\) on the left and \(\rho^{-1}\) on the right,
-- the induced flow on observables is \(A\mapsto \rho^{it}A\rho^{-it}\).
+- the cyclic-separating vector is $\rho^{1/2}$,
+- the modular operator involves $\rho$ on the left and $\rho^{-1}$ on the right,
+- the induced flow on observables is $A\mapsto \rho^{it}A\rho^{-it}$.
 
 That is the part to remember.
 
@@ -1567,24 +1573,24 @@ Tomita-Takesaki theory solves part of this.
 
 Given:
 
-- a von Neumann algebra \(\mathcal{A}\),
-- a cyclic and separating state \(|\Omega\rangle\),
+- a von Neumann algebra $\mathcal{A}$,
+- a cyclic and separating state $|\Omega\rangle$,
 
 modular theory constructs:
 
-1. a modular operator \(\Delta\),
-2. a modular conjugation \(J\),
+1. a modular operator $\Delta$,
+2. a modular conjugation $J$,
 3. a modular flow
 
-\[
+$$
 \sigma_t(A)=\Delta^{it}A\Delta^{-it}.
-\]
+$$
 
 This works even when there is no density matrix.
 
 So modular theory is a replacement for the missing density matrix.
 
-In finite dimensions, modular flow is just \(\rho^{it}A\rho^{-it}\). In QFT, it is a deeper structure intrinsic to the algebra-state pair.
+In finite dimensions, modular flow is just $\rho^{it}A\rho^{-it}$. In QFT, it is a deeper structure intrinsic to the algebra-state pair.
 
 ---
 
@@ -1594,37 +1600,37 @@ The most important physical example of modular flow is the Rindler wedge.
 
 ## 16.1 Rindler wedge
 
-In flat spacetime with coordinates \((t,x)\), the right Rindler wedge is
+In flat spacetime with coordinates $(t,x)$, the right Rindler wedge is
 
-\[
+$$
 x>|t|.
-\]
+$$
 
 This is the region accessible to an observer with constant acceleration to the right.
 
 Introduce Rindler coordinates:
 
-\[
+$$
 t=\rho\sinh(a\eta),
-\]
+$$
 
-\[
+$$
 x=\rho\cosh(a\eta),
-\]
+$$
 
-with \(\rho>0\).
+with $\rho>0$.
 
-Curves of constant \(\rho\) are hyperbolas:
+Curves of constant $\rho$ are hyperbolas:
 
-\[
+$$
 x^2-t^2=\rho^2.
-\]
+$$
 
 These are the worldlines of uniformly accelerated observers.
 
 ## 16.2 Boosts
 
-A Lorentz boost in the \(x\)-direction acts like a time translation in Rindler coordinates.
+A Lorentz boost in the $x$-direction acts like a time translation in Rindler coordinates.
 
 So for an accelerated observer, the boost generator plays the role of Hamiltonian.
 
@@ -1634,15 +1640,15 @@ The Minkowski vacuum looks thermal to an accelerated observer.
 
 The Unruh temperature is
 
-\[
+$$
 T_U=\frac{\hbar a}{2\pi c k_B}.
-\]
+$$
 
 In natural units,
 
-\[
+$$
 T_U=\frac{a}{2\pi}.
-\]
+$$
 
 This means the vacuum restricted to the Rindler wedge behaves like a thermal state with respect to boost time.
 
@@ -1654,9 +1660,9 @@ The Bisognano-Wichmann theorem says, roughly:
 
 In formula form,
 
-\[
+$$
 \sigma_s(A)=e^{i 2\pi s K_{\rm boost}} A e^{-i 2\pi s K_{\rm boost}}.
-\]
+$$
 
 This is profound because it connects:
 
@@ -1681,35 +1687,35 @@ Let’s start finite.
 
 Suppose we have an algebra
 
-\[
+$$
 \mathcal{A}=\mathbb{C}^2,
-\]
+$$
 
 the algebra of functions on two points. Elements are pairs
 
-\[
+$$
 (a,b).
-\]
+$$
 
 Represent them as diagonal matrices:
 
-\[
+$$
 (a,b)\leftrightarrow
 \begin{pmatrix}
 a&0\\
 0&b
 \end{pmatrix}.
-\]
+$$
 
-Let the group \(G=\mathbb{Z}_2\) act by swapping the two points:
+Let the group $G=\mathbb{Z}_2$ act by swapping the two points:
 
-\[
+$$
 \alpha(a,b)=(b,a).
-\]
+$$
 
-Now add a unitary \(U\) that implements the swap:
+Now add a unitary $U$ that implements the swap:
 
-\[
+$$
 U
 \begin{pmatrix}
 a&0\\
@@ -1721,27 +1727,27 @@ U^\dagger
 b&0\\
 0&a
 \end{pmatrix}.
-\]
+$$
 
 Choose
 
-\[
+$$
 U=
 \begin{pmatrix}
 0&1\\
 1&0
 \end{pmatrix}.
-\]
+$$
 
-The algebra generated by diagonal matrices and \(U\) is all of \(M_2(\mathbb{C})\).
+The algebra generated by diagonal matrices and $U$ is all of $M_2(\mathbb{C})$.
 
 This is the crossed product
 
-\[
+$$
 \mathbb{C}^2\rtimes \mathbb{Z}_2
 \cong
 M_2(\mathbb{C}).
-\]
+$$
 
 So the crossed product means:
 
@@ -1749,162 +1755,162 @@ So the crossed product means:
 
 ## 17.2 General definition idea
 
-Suppose a group \(G\) acts on \(\mathcal{A}\) by automorphisms:
+Suppose a group $G$ acts on $\mathcal{A}$ by automorphisms:
 
-\[
+$$
 \alpha_g:\mathcal{A}\to\mathcal{A}.
-\]
+$$
 
 An automorphism is a structure-preserving map:
 
-\[
+$$
 \alpha_g(AB)=\alpha_g(A)\alpha_g(B),
-\]
+$$
 
-\[
+$$
 \alpha_g(A^\dagger)=\alpha_g(A)^\dagger.
-\]
+$$
 
 The crossed product
 
-\[
+$$
 \mathcal{A}\rtimes_\alpha G
-\]
+$$
 
 is generated by:
 
-- elements \(A\in\mathcal{A}\),
-- unitaries \(U_g\) for \(g\in G\),
+- elements $A\in\mathcal{A}$,
+- unitaries $U_g$ for $g\in G$,
 
 with the relation
 
-\[
+$$
 U_g A U_g^\dagger=\alpha_g(A).
-\]
+$$
 
 This relation is the heart of the construction.
 
-## 17.3 The continuous case: \(G=\mathbb{R}\)
+## 17.3 The continuous case: $G=\mathbb{R}$
 
 For modular theory, the group is usually
 
-\[
+$$
 G=\mathbb{R},
-\]
+$$
 
 because modular flow is a continuous one-parameter family:
 
-\[
+$$
 \sigma_t(A).
-\]
+$$
 
 The crossed product is
 
-\[
+$$
 \mathcal{A}\rtimes_\sigma \mathbb{R}.
-\]
+$$
 
-It is obtained by adding unitaries \(U(t)\) satisfying
+It is obtained by adding unitaries $U(t)$ satisfying
 
-\[
+$$
 U(t) A U(t)^\dagger = \sigma_t(A).
-\]
+$$
 
-By Stone’s theorem, a continuous unitary group has a self-adjoint generator \(K\):
+By Stone’s theorem, a continuous unitary group has a self-adjoint generator $K$:
 
-\[
+$$
 U(t)=e^{-itK}.
-\]
+$$
 
 So the crossed product contains the unitary implementers $U(t)$ of the modular flow as bounded operators in an enlarged algebra. The generator $K$ is generally an *unbounded self-adjoint operator affiliated with* the crossed-product algebra — not literally an element of it, but uniquely determined by it via Stone's theorem. (The slogan "we add the modular Hamiltonian as an operator" is a useful shorthand, but the precise statement is the affiliation, not literal membership.)
 
-## 17.4 Why an \(L^2(\mathbb{R})\) factor appears
+## 17.4 Why an $L^2(\mathbb{R})$ factor appears
 
-For a continuous parameter \(t\), the natural Hilbert space of wavefunctions over that parameter is
+For a continuous parameter $t$, the natural Hilbert space of wavefunctions over that parameter is
 
-\[
+$$
 L^2(\mathbb{R}).
-\]
+$$
 
 This is the space of square-integrable functions
 
-\[
+$$
 \psi(s),
-\]
+$$
 
-where \(s\) is a real variable.
+where $s$ is a real variable.
 
-Think of \(s\) as a clock reading.
+Think of $s$ as a clock reading.
 
-On \(L^2(\mathbb{R})\), define:
+On $L^2(\mathbb{R})$, define:
 
 - clock-reading operator
 
-\[
+$$
 (T\psi)(s)=s\psi(s),
-\]
+$$
 
 - clock-momentum operator
 
-\[
+$$
 (K\psi)(s)=-i\frac{d}{ds}\psi(s).
-\]
+$$
 
 They satisfy
 
-\[
+$$
 [T,K]=i.
-\]
+$$
 
 The unitary
 
-\[
+$$
 e^{-itK}
-\]
+$$
 
 shifts the clock wavefunction:
 
-\[
+$$
 (e^{-itK}\psi)(s)=\psi(s-t).
-\]
+$$
 
 So the crossed product Hilbert space often looks like
 
-\[
+$$
 \mathcal{H}_{\rm original}\otimes L^2(\mathbb{R}).
-\]
+$$
 
 **The honest statement** is that the regular representation of the crossed product introduces an $L^2(\mathbb{R})$ factor associated with the *flow parameter* — the variable that labels the modular automorphism. Mathematically, that's all the bare theorem says.
 
 Interpreting this $L^2(\mathbb{R})$ as a *physical quantum clock* is an additional move, motivated by quantum-gravity ideas (Page-Wootters formalism, gravitationally dressed observers, observer-relative algebras). In Witten 2022 and CPW 2022 the physical clock interpretation is natural and well-motivated — it's how gravity actually enters the construction. But you should keep in mind: the clock interpretation is a *physical reading* of an extra mathematical degree of freedom; it is not part of the bare operator-algebra theorem.
 
 Also, the action of the original algebra on $\mathcal{H} \otimes L^2(\mathbb{R})$ is more subtle than a simple tensor structure $A \otimes I$. In the standard representation,
-\[
+$$
 (\pi(A)\xi)(s) = \sigma_{-s}(A) \, \xi(s),
-\]
+$$
 so the original-algebra operators act in a way that's "twisted" by the modular flow itself. The clean tensor-product picture is a useful first approximation, not the exact structure.
 
 ## 17.5 Connection to quantum gravity clock formalisms
 
-In canonical quantum gravity, there is often no external time. Instead, one introduces a clock degree of freedom \(T\) and describes other variables relative to it.
+In canonical quantum gravity, there is often no external time. Instead, one introduces a clock degree of freedom $T$ and describes other variables relative to it.
 
 A simple Page-Wootters-style constraint is
 
-\[
+$$
 (P_T+H_{\rm sys})|\Psi\rangle=0.
-\]
+$$
 
 Here:
 
-- \(T\) is the clock reading,
-- \(P_T=-i\partial_T\) is its conjugate momentum,
-- \(H_{\rm sys}\) is the system Hamiltonian.
+- $T$ is the clock reading,
+- $P_T=-i\partial_T$ is its conjugate momentum,
+- $H_{\rm sys}$ is the system Hamiltonian.
 
 Then conditional states
 
-\[
+$$
 |\psi(t)\rangle = \langle T=t|\Psi\rangle
-\]
+$$
 
 obey an ordinary Schrödinger equation.
 
@@ -1916,11 +1922,11 @@ The crossed product clock is similar in spirit: modular time becomes represented
 
 Now we can state the key structural fact.
 
-For a Type III von Neumann algebra \(\mathcal{M}\) with modular flow \(\sigma_t\), the crossed product
+For a Type III von Neumann algebra $\mathcal{M}$ with modular flow $\sigma_t$, the crossed product
 
-\[
+$$
 \mathcal{M}\rtimes_{\sigma}\mathbb{R}
-\]
+$$
 
 is called the **continuous core** of $\mathcal{M}$. It is always *semifinite*. For Type III$_1$ factors (the relevant case for local QFT algebras), the continuous core is **Type II$_\infty$** — semifinite trace with $\tau(\mathbf{1}) = \infty$. For Type III$_\lambda$ ($0 < \lambda < 1$) or Type III$_0$ factors, the continuous core may have a nontrivial center (i.e., not be a single factor).
 
@@ -1940,7 +1946,7 @@ Doing this enlarges the algebra enough that a trace appears.
 
 So:
 
-\[
+$$
 \text{Type III algebra}
 +
 \text{modular clock}
@@ -1948,7 +1954,7 @@ So:
 \Longrightarrow
 \quad
 \text{Type II algebra with trace}.
-\]
+$$
 
 This is the slogan.
 
@@ -1956,17 +1962,17 @@ This is the slogan.
 
 Entropy usually needs a trace:
 
-\[
+$$
 S=-\mathrm{Tr}(\rho\log\rho).
-\]
+$$
 
 Type III algebras do not have a normal semifinite trace, so naïve entropy fails.
 
 After crossing with modular flow, one gets a semifinite algebra (the continuous core) with a faithful normal semifinite trace $\tau$. This provides a trace framework in which entropy-like quantities can sometimes be defined:
 
-\[
+$$
 S=-\tau(\rho\log\rho),
-\]
+$$
 
 with appropriate renormalization choices.
 
@@ -1996,9 +2002,9 @@ For QIQT-H, the important point is:
 
 In QFT, naïve entanglement entropy diverges:
 
-\[
+$$
 S_{\rm ent}\to\infty
-\]
+$$
 
 as the UV cutoff is removed.
 
@@ -2008,9 +2014,9 @@ But physics often deals with divergent quantities by renormalization.
 
 In QFT, the vacuum energy is formally infinite:
 
-\[
+$$
 E_0=\frac12\sum_{\mathbf{k}}\hbar\omega_{\mathbf{k}}.
-\]
+$$
 
 But only energy differences or gravitationally renormalized quantities are physical.
 
@@ -2024,71 +2030,71 @@ A very useful finite quantity is relative entropy.
 
 For density matrices,
 
-\[
+$$
 S(\rho||\sigma)
 =
 \mathrm{Tr}(\rho\log\rho)
 -
 \mathrm{Tr}(\rho\log\sigma).
-\]
+$$
 
-It measures distinguishability of \(\rho\) from \(\sigma\).
+It measures distinguishability of $\rho$ from $\sigma$.
 
 In QFT, even when individual entanglement entropies diverge, relative entropy can be finite.
 
 There is an important identity:
 
-\[
+$$
 S(\rho||\sigma)
 =
 \Delta\langle K_\sigma\rangle
 -
 \Delta S,
-\]
+$$
 
 where
 
-\[
+$$
 K_\sigma=-\log\sigma
-\]
+$$
 
-is the modular Hamiltonian of \(\sigma\),
+is the modular Hamiltonian of $\sigma$,
 
-\[
+$$
 \Delta\langle K_\sigma\rangle
 =
 \mathrm{Tr}(\rho K_\sigma)-\mathrm{Tr}(\sigma K_\sigma),
-\]
+$$
 
 and
 
-\[
+$$
 \Delta S=S(\rho)-S(\sigma).
-\]
+$$
 
-Even if \(S(\rho)\) and \(S(\sigma)\) separately diverge, the difference can be meaningful after renormalization.
+Even if $S(\rho)$ and $S(\sigma)$ separately diverge, the difference can be meaningful after renormalization.
 
 ## 19.3 Renormalized matter entropy
 
 The renormalized entropy is roughly:
 
-\[
+$$
 S_{\rm matter}^{\rm ren}
 =
 S_{\rm matter}^{\rm cutoff}
 -
 S_{\rm divergent\ boundary}.
-\]
+$$
 
-But QIQT-H wants this subtraction to be canonical, not arbitrary.
+QIQT-H wants this subtraction to be principled rather than arbitrary.
 
-The modular/crossed-product machinery provides a principled way to define the finite part associated with the algebra and state.
+The modular/crossed-product machinery provides a principled framework for defining entropy *differences* — Araki relative entropy is already well-defined in Type III, and the CPW crossed-product construction reproduces generalized-entropy *differences*. Absolute-like renormalized entropies can also be defined within this framework once a reference state and normalization are chosen.
 
 The slogan is:
 
-> Use modular structure to define entropy relative to the vacuum/reference state, subtracting the universal UV boundary entanglement.
+> Use modular structure to define entropy relative to a reference state, subtracting the universal UV boundary entanglement in a principled way.
 
-This is why Type III and crossed products matter for QIQT-H. The holographic bound uses entropy, but QFT entropy is divergent unless handled carefully.
+This is why Type III and crossed products matter for QIQT-H. The holographic bound talks about entropy, but raw QFT entropy is divergent — the modular/crossed-product machinery gives us trace-based tools (with appropriate choices) that match generalized-entropy differences in semiclassical gravity. Whether they give *canonical absolute* entropies depends on scheme choices; the framework should not claim more canonicity than the underlying mathematics actually delivers.
 
 ---
 
@@ -2096,13 +2102,13 @@ This is why Type III and crossed products matter for QIQT-H. The holographic bou
 
 In gravitational physics, the entropy associated with a *codimension-2 surface* $\Sigma$ — for example a black-hole horizon cross-section, or a quantum extremal surface bounding a spatial region $R$ — is not just matter entropy. It is
 
-\[
+$$
 S_{\rm gen}(\Sigma; R)
 =
 \frac{\mathrm{Area}(\Sigma)}{4G\hbar}
 +
 S_{\rm matter}^{\rm ren}(R).
-\]
+$$
 
 This is called the **generalized entropy**.
 
@@ -2112,17 +2118,17 @@ A note on dimensions: the area term is the area of a codimension-2 surface (2-di
 
 Bekenstein argued that black holes should have entropy proportional to horizon area. Hawking radiation fixed the coefficient:
 
-\[
+$$
 S_{\rm BH}=\frac{A}{4G\hbar}.
-\]
+$$
 
 If matter falls into a black hole, ordinary matter entropy outside may decrease. But the black hole area increases.
 
 The generalized second law says:
 
-\[
+$$
 S_{\rm outside}+S_{\rm BH}
-\]
+$$
 
 never decreases.
 
@@ -2134,15 +2140,15 @@ In semiclassical gravity, geometry itself carries entropy.
 
 A horizon hides information. The area term counts gravitational degrees of freedom associated with the boundary.
 
-Thus, for a region with boundary \(\partial D\), QIQT-H uses
+Thus, for a region with boundary $\partial D$, QIQT-H uses
 
-\[
+$$
 S_{\rm gen}(\partial D)
 =
 \frac{\mathrm{Area}(\partial D)}{4G\hbar}
 +
 S_{\rm matter}^{\rm ren}.
-\]
+$$
 
 This is the entropy budget.
 
@@ -2152,11 +2158,11 @@ If records are physical information in a gravitational region, the number of dis
 
 So QIQT-H’s core inequality is schematically
 
-\[
+$$
 I_{\rm records}^{\varepsilon}
 \leq
 S_{\rm gen}.
-\]
+$$
 
 This ties the measurement problem to black-hole thermodynamics.
 
@@ -2168,17 +2174,17 @@ QIQT-H’s branch-summed constraint is often compared to a gauge constraint. Let
 
 ## 21.1 Gauge redundancy in electromagnetism
 
-In electromagnetism, the vector potential \(A_\mu\) is not unique.
+In electromagnetism, the vector potential $A_\mu$ is not unique.
 
 The transformation
 
-\[
+$$
 A_\mu \to A_\mu+\partial_\mu\lambda
-\]
+$$
 
-does not change the electromagnetic fields \(E\) and \(B\).
+does not change the electromagnetic fields $E$ and $B$.
 
-So different \(A_\mu\)'s can represent the same physical situation.
+So different $A_\mu$'s can represent the same physical situation.
 
 Gauge symmetry is redundancy in our description.
 
@@ -2186,15 +2192,15 @@ Gauge symmetry is redundancy in our description.
 
 In canonical electromagnetism, physical states must satisfy Gauss’s law:
 
-\[
+$$
 \nabla\cdot E=\rho.
-\]
+$$
 
 In quantum theory, this becomes an operator constraint:
 
-\[
+$$
 (\nabla\cdot \hat E-\hat\rho)|\Psi_{\rm phys}\rangle=0.
-\]
+$$
 
 So not every vector in the formal Hilbert space is physical.
 
@@ -2202,23 +2208,23 @@ The physical Hilbert space is the subspace satisfying the constraint.
 
 ## 21.3 BRST cohomology
 
-In more advanced gauge theory, especially for nonabelian gauge fields, one introduces a BRST operator \(Q\) satisfying
+In more advanced gauge theory, especially for nonabelian gauge fields, one introduces a BRST operator $Q$ satisfying
 
-\[
+$$
 Q^2=0.
-\]
+$$
 
 Physical states are BRST-closed:
 
-\[
+$$
 Q|\psi\rangle=0,
-\]
+$$
 
 and states differing by BRST-exact terms are identified:
 
-\[
+$$
 |\psi\rangle \sim |\psi\rangle+Q|\chi\rangle.
-\]
+$$
 
 This is called cohomology.
 
@@ -2234,15 +2240,15 @@ QIQT-H similarly says:
 
 The branch-summed constraint plays a role analogous to Gauss’s law:
 
-\[
+$$
 \mathcal{C}_{\rm QIQT-H}|\Psi_{\rm phys}\rangle=0
-\]
+$$
 
 or, more generally,
 
-\[
+$$
 I_{\rm branch}^\varepsilon(D)\leq S_{\rm gen}(\partial D).
-\]
+$$
 
 The analogy is **structural, not technical**.
 
@@ -2282,24 +2288,24 @@ QIQT-H wants to reproduce ordinary Born statistics. A useful comparison is Bohmi
 
 ## 22.1 Bohmian mechanics in brief
 
-Bohmian mechanics adds actual particle positions \(Q(t)\).
+Bohmian mechanics adds actual particle positions $Q(t)$.
 
 The wavefunction obeys Schrödinger’s equation. The particles obey a guidance equation.
 
 For one particle,
 
-\[
+$$
 \frac{dQ}{dt}
 =
 \frac{\hbar}{m}\operatorname{Im}
 \frac{\nabla\psi}{\psi}(Q).
-\]
+$$
 
 The probability density
 
-\[
+$$
 \rho(q,t)=|\psi(q,t)|^2
-\]
+$$
 
 is special.
 
@@ -2307,39 +2313,39 @@ is special.
 
 Equivariance means:
 
-> If particle positions are distributed as \(|\psi(q,0)|^2\) initially, then they remain distributed as \(|\psi(q,t)|^2\) at later times.
+> If particle positions are distributed as $|\psi(q,0)|^2$ initially, then they remain distributed as $|\psi(q,t)|^2$ at later times.
 
 Why?
 
 Schrödinger’s equation implies the continuity equation
 
-\[
+$$
 \frac{\partial |\psi|^2}{\partial t}
 +
 \nabla\cdot j=0,
-\]
+$$
 
 where
 
-\[
+$$
 j=\frac{\hbar}{m}\operatorname{Im}(\psi^*\nabla\psi).
-\]
+$$
 
 The Bohmian velocity is
 
-\[
+$$
 v=\frac{j}{|\psi|^2}.
-\]
+$$
 
-So a distribution of particles moving with velocity \(v\) obeys
+So a distribution of particles moving with velocity $v$ obeys
 
-\[
+$$
 \frac{\partial \rho}{\partial t}
 +
 \nabla\cdot(\rho v)=0.
-\]
+$$
 
-If initially \(\rho=|\psi|^2\), then both obey the same equation. Therefore equality persists.
+If initially $\rho=|\psi|^2$, then both obey the same equation. Therefore equality persists.
 
 That is equivariance.
 
@@ -2349,9 +2355,9 @@ QIQT-H does not add particle positions. But it needs a measure over admissible h
 
 The natural candidate is the Born/decoherence weight:
 
-\[
+$$
 w(h)=D(h,h).
-\]
+$$
 
 An analogue of equivariance would be a theorem saying:
 
@@ -2371,39 +2377,39 @@ Any foundations proposal must face Bell’s theorem.
 
 Two experimenters, Alice and Bob, measure entangled particles.
 
-Alice chooses setting \(a\), gets outcome \(A=\pm1\).
+Alice chooses setting $a$, gets outcome $A=\pm1$.
 
-Bob chooses setting \(b\), gets outcome \(B=\pm1\).
+Bob chooses setting $b$, gets outcome $B=\pm1$.
 
-A hidden-variable theory introduces variables \(\lambda\) that determine or influence outcomes.
+A hidden-variable theory introduces variables $\lambda$ that determine or influence outcomes.
 
 A local hidden-variable model assumes
 
-\[
+$$
 A=A(a,\lambda),
-\]
+$$
 
-\[
+$$
 B=B(b,\lambda).
-\]
+$$
 
 The joint expectation is
 
-\[
+$$
 E(a,b)=\int d\lambda\, \rho(\lambda) A(a,\lambda)B(b,\lambda).
-\]
+$$
 
 Bell/CHSH inequalities follow, for example:
 
-\[
+$$
 |E(a,b)+E(a,b')+E(a',b)-E(a',b')|\leq 2.
-\]
+$$
 
 Quantum mechanics can violate this bound up to
 
-\[
+$$
 2\sqrt{2}.
-\]
+$$
 
 Experiments agree with quantum mechanics.
 
@@ -2411,11 +2417,11 @@ Experiments agree with quantum mechanics.
 
 Bell’s derivation assumes measurement independence:
 
-\[
+$$
 \rho(\lambda|a,b)=\rho(\lambda).
-\]
+$$
 
-That means the hidden variables \(\lambda\) are statistically independent of the later choices of measurement settings \(a,b\).
+That means the hidden variables $\lambda$ are statistically independent of the later choices of measurement settings $a,b$.
 
 If this fails, Bell inequalities need not follow.
 
@@ -2435,11 +2441,11 @@ QIQT-H aims for a different picture:
 
 In probability terms, the framework may have
 
-\[
+$$
 \rho(\lambda|a,b)\neq \rho(\lambda),
-\]
+$$
 
-not because of a malicious conspiracy, but because \(\lambda,a,b\) are all parts of one constrained physical history.
+not because of a malicious conspiracy, but because $\lambda,a,b$ are all parts of one constrained physical history.
 
 However, one should be honest:
 
@@ -2472,15 +2478,15 @@ Many-worlds accepts all branches as real. QIQT-H says:
 
 ## 24.3 The entropy budget
 
-For a region \(D\),
+For a region $D$,
 
-\[
+$$
 S_{\rm gen}(\partial D)
 =
 \frac{A(\partial D)}{4G\hbar}
 +
 S_{\rm matter}^{\rm ren}.
-\]
+$$
 
 This is the maximum information budget.
 
@@ -2488,23 +2494,23 @@ This is the maximum information budget.
 
 For a decoherent family of histories, define a support-like entropy
 
-\[
+$$
 I_{\rm branch}^{\varepsilon}
 =
 \log N_{\rm eff}^{\varepsilon},
-\]
+$$
 
-where \(N_{\rm eff}^{\varepsilon}\) is the smoothed number of distinguishable recorded alternatives.
+where $N_{\rm eff}^{\varepsilon}$ is the smoothed number of distinguishable recorded alternatives.
 
 ## 24.5 The QIQT-H constraint
 
 The central condition is
 
-\[
+$$
 I_{\rm branch}^{\varepsilon}(D)
 \leq
 S_{\rm gen}(\partial D).
-\]
+$$
 
 This is branch-summed: it counts alternatives across the family, not only within one branch.
 
@@ -2514,25 +2520,25 @@ In continuum QFT, local algebras are Type III, so naïve entropy is divergent.
 
 Tomita-Takesaki modular theory supplies a canonical modular flow for a region and state.
 
-The crossed product by modular flow produces a Type II core with a trace.
+The crossed product by modular flow produces a semifinite continuous core (Type II$_\infty$ in the typical Type III$_1$ case) with a trace.
 
-This allows a renormalized entropy to be defined.
+This framework supports entropy *differences* canonically (via Araki relative entropy and CPW generalized-entropy-difference results) and, with additional choices of reference state and normalization, absolute-like renormalized entropies.
 
-Thus:
+Thus, schematically:
 
-\[
+$$
 \text{QFT region}
 \rightarrow
 \text{Type III algebra}
 \rightarrow
 \text{modular flow}
 \rightarrow
-\text{crossed product Type II core}
+\text{crossed-product core with semifinite trace}
 \rightarrow
-\text{renormalized entropy}
+\text{entropy differences / renormalized entropies with choices}
 \rightarrow
 S_{\rm gen}.
-\]
+$$
 
 That is the mathematical pipeline.
 
@@ -2542,56 +2548,56 @@ That is the mathematical pipeline.
 
 Let’s make a toy model that captures the logic without Type III complications.
 
-Suppose a system undergoes repeated binary measurements. After \(n\) measurements, ordinary quantum theory gives
+Suppose a system undergoes repeated binary measurements. After $n$ measurements, ordinary quantum theory gives
 
-\[
+$$
 2^n
-\]
+$$
 
 possible bit-string records:
 
-\[
+$$
 h=(b_1,b_2,\dots,b_n),
 \qquad b_i\in\{0,1\}.
-\]
+$$
 
 If all are nonzero-probability and distinguishable, the support entropy is
 
-\[
+$$
 I_{\rm branch}= \log 2^n = n\log 2.
-\]
+$$
 
 Now suppose the region has entropy budget
 
-\[
+$$
 S_{\rm max}=m\log 2.
-\]
+$$
 
-That corresponds to \(m\) bits.
+That corresponds to $m$ bits.
 
 The QIQT-H constraint says
 
-\[
+$$
 n\log 2 \leq m\log 2,
-\]
+$$
 
 or
 
-\[
+$$
 n\leq m.
-\]
+$$
 
-If \(n>m\), then the full \(2^n\)-branch record family cannot be physically realized as mutually distinguishable records inside the region.
+If $n>m$, then the full $2^n$-branch record family cannot be physically realized as mutually distinguishable records inside the region.
 
 With smoothing, if most probability is concentrated on fewer histories, the effective support can be smaller.
 
 Example:
 
-Suppose after many measurements, probabilities are heavily concentrated on \(2^m\) histories, with total probability \(1-\varepsilon\). Then
+Suppose after many measurements, probabilities are heavily concentrated on $2^m$ histories, with total probability $1-\varepsilon$. Then
 
-\[
+$$
 N^\varepsilon_{\rm eff}=2^m,
-\]
+$$
 
 and the family may be admissible.
 
@@ -2603,27 +2609,27 @@ This toy model is crude, but it shows the logic:
 
 # 26. Another toy model: decoherence plus finite record capacity
 
-Let a qubit system interact with a memory register of \(m\) bits.
+Let a qubit system interact with a memory register of $m$ bits.
 
 The memory Hilbert space has dimension
 
-\[
+$$
 2^m.
-\]
+$$
 
-It can store at most \(2^m\) orthogonal classical records.
+It can store at most $2^m$ orthogonal classical records.
 
-Now imagine a formal process that tries to create \(N>2^m\) perfectly distinguishable outcomes.
+Now imagine a formal process that tries to create $N>2^m$ perfectly distinguishable outcomes.
 
-Unitary quantum mechanics on a memory of dimension \(2^m\) cannot map \(N\) orthogonal input alternatives to \(N\) orthogonal memory states if \(N>2^m\).
+Unitary quantum mechanics on a memory of dimension $2^m$ cannot map $N$ orthogonal input alternatives to $N$ orthogonal memory states if $N>2^m$.
 
 This is just linear algebra.
 
 QIQT-H generalizes this idea gravitationally:
 
-- finite memory register \(\rightarrow\) finite causal region,
-- memory dimension \(2^m\) \(\rightarrow\) \(e^{S_{\rm gen}}\),
-- record capacity bound \(\rightarrow\) holographic entropy bound.
+- finite memory register $\rightarrow$ finite causal region,
+- memory dimension $2^m$ $\rightarrow$ $e^{S_{\rm gen}}$,
+- record capacity bound $\rightarrow$ holographic entropy bound.
 
 ---
 
@@ -2650,9 +2656,9 @@ Several major problems remain.
 
 One must define
 
-\[
+$$
 I_{\rm branch}^{\varepsilon}(D)
-\]
+$$
 
 in a way that is:
 
@@ -2679,9 +2685,9 @@ Using causal diamonds, local algebras, and modular flow helps, but a complete co
 
 The generalized entropy formula
 
-\[
+$$
 S_{\rm gen}=\frac{A}{4G\hbar}+S_{\rm matter}^{\rm ren}
-\]
+$$
 
 is semiclassical. A full quantum gravity version may require more.
 
@@ -2711,7 +2717,7 @@ At present, this is speculative.
 
 The framework can be summarized as:
 
-\[
+$$
 \boxed{
 \text{Unitary quantum theory}
 +
@@ -2719,11 +2725,11 @@ The framework can be summarized as:
 +
 \text{holographic finite-information constraint}
 }
-\]
+$$
 
 with the entropy side defined using:
 
-\[
+$$
 \boxed{
 \text{Type III local QFT algebra}
 \rightarrow
@@ -2733,11 +2739,11 @@ with the entropy side defined using:
 \rightarrow
 \text{renormalized entropy}
 }
-\]
+$$
 
 and the central inequality:
 
-\[
+$$
 \boxed{
 I_{\rm branch}^{\varepsilon}(D)
 \leq
@@ -2747,7 +2753,7 @@ S_{\rm gen}(\partial D)
 +
 S_{\rm matter}^{\rm ren}
 }
-\]
+$$
 
 The interpretation is:
 
@@ -2799,25 +2805,25 @@ An algebra with no finite trace and no ordinary density matrices for subregions.
 
 ## Cyclic vector
 
-A vector \(|\Omega\rangle\) such that applying algebra elements to it generates the whole Hilbert space.
+A vector $|\Omega\rangle$ such that applying algebra elements to it generates the whole Hilbert space.
 
 ## Separating vector
 
-A vector \(|\Omega\rangle\) such that no nonzero algebra element annihilates it.
+A vector $|\Omega\rangle$ such that no nonzero algebra element annihilates it.
 
 ## Modular flow
 
 A canonical automorphism flow of an algebra determined by a state. In finite dimensions:
 
-\[
+$$
 \sigma_t(A)=\rho^{it}A\rho^{-it}.
-\]
+$$
 
 ## Modular Hamiltonian
 
-\[
+$$
 K=-\log\rho
-\]
+$$
 
 in finite dimensions. It generates modular flow.
 
@@ -2835,13 +2841,13 @@ A finite entropy obtained by subtracting universal UV divergences from QFT entan
 
 ## Generalized entropy
 
-\[
+$$
 S_{\rm gen}
 =
 \frac{A}{4G\hbar}
 +
 S_{\rm matter}^{\rm ren}.
-\]
+$$
 
 ## Rényi-0 entropy
 
@@ -2849,21 +2855,21 @@ The logarithm of the number of nonzero-probability outcomes.
 
 ## Smooth support
 
-A regularized support count that ignores outcomes with total probability at most \(\varepsilon\).
+A regularized support count that ignores outcomes with total probability at most $\varepsilon$.
 
 ## Measurement independence
 
 The Bell assumption
 
-\[
+$$
 \rho(\lambda|a,b)=\rho(\lambda).
-\]
+$$
 
 It says hidden variables are statistically independent of measurement settings.
 
 ## Equivariance
 
-The preservation of a probability measure under dynamics, as \(|\psi|^2\) is preserved in Bohmian mechanics.
+The preservation of a probability measure under dynamics, as $|\psi|^2$ is preserved in Bohmian mechanics.
 
 ---
 
@@ -2889,20 +2895,20 @@ Whether this ultimately works is open.
 
 But the roadmap is clear:
 
-\[
+$$
 \text{measurements create records}
-\]
+$$
 
-\[
+$$
 \text{records require information capacity}
-\]
+$$
 
-\[
+$$
 \text{gravity bounds information capacity}
-\]
+$$
 
-\[
+$$
 \text{therefore quantum histories must satisfy holographic record constraints}.
-\]
+$$
 
 That is the core of QIQT-H.
