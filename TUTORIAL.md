@@ -869,6 +869,8 @@ The hope is to get:
 - ordinary quantum predictions in normal experiments,
 - new constraints when gravitational entropy bounds matter.
 
+**Why ordinary lab measurements aren't affected.** A natural worry: a single lab does thousands of measurements per second; surely these would quickly violate any branch-summed bound? The answer: no, because $S_{\rm gen}$ for ordinary macroscopic regions is **astronomically large** — $\sim 10^{70}$ nats for a one-meter region. Each macroscopic record contributes $\sim 10^{25}$ bits at most (Zurek physical entropy for a typical macroscopic configuration). So the budget allows $\sim 10^{45}$ comparable macroscopic records per cubic meter before any constraint bites. Lab experiments are nowhere near saturation. The framework predicts deviations from standard QM only at the scale where $N \cdot I_0$ approaches $Q_R$ — the regime of macroscopic Schrödinger-cat states with comparable per-record costs approaching the regional holographic capacity. At ordinary lab scales the constraint is operationally vacuous; standard QM is recovered exactly.
+
 This is the rough conceptual skeleton. Now we need the machinery.
 
 ---
@@ -1158,6 +1160,18 @@ This is not a complete construction, but it gives the right intuition.
 
 Type II factors are important because they are infinite-dimensional but still have a good trace. Entropy can be defined using that trace.
 
+### Type II$_1$ vs Type II$_\infty$ — an important distinction
+
+There are actually **two species** of Type II factors:
+
+- **Type II$_1$**: finite normalized trace, $\tau(\mathbf{1}) = 1$. All projections have $\tau(P) \in [0, 1]$. Like the "infinite spin chain limit" picture above.
+
+- **Type II$_\infty$**: *semifinite* trace, with $\tau(\mathbf{1}) = \infty$. Projections can have any nonnegative real trace, including infinite. Think of it as Type II$_1$ tensored with an infinite-dimensional Type I piece — $\mathcal{A}_{\rm II_\infty} \cong \mathcal{A}_{\rm II_1} \otimes B(\mathcal{H}_\infty)$.
+
+This distinction matters later. When we form the crossed product of a Type III algebra with its modular flow (§17), the result (the "continuous core") is generically Type II$_\infty$, not Type II$_1$. The trace is still semifinite — well-defined, satisfying $\tau(AB) = \tau(BA)$ — but the identity has infinite trace. So you can compute trace-like quantities, but $S = -\tau(\rho \log \rho)$ may not be automatically finite without further regularization.
+
+For the special case of the de Sitter static patch (where the crossed product gives Type II$_1$), the trace is finite and the entropy bound is cleanly $S \le \log \tau(\mathbf{1}) = 0$ in natural normalization — which matches the de Sitter cosmological horizon entropy $A/(4G\hbar)$ up to additive constants. This is the cleanest example in the literature (CLPW 2022).
+
 ---
 
 ## 11.4 Type III: the QFT case
@@ -1205,9 +1219,11 @@ There is no exact factorization
 
 in the naive way.
 
-A region’s algebra is therefore not \(B(\mathcal{H}_{\rm inside})\). It is Type III.
+A region's algebra is therefore not \(B(\mathcal{H}_{\rm inside})\). It is Type III.
 
 The divergence of entanglement entropy is one symptom of this.
+
+**Caveat — the split property.** Sharp-boundary factorization fails, but an *approximate* factorization is often available if you leave a small buffer region between inside and outside. For nice QFTs (those satisfying the "split property" of Doplicher-Longo), the algebras for $R$ and for the complement-of-a-slight-enlargement-of-$R$ can be embedded in a Type I factor structure. So Type III is the exact mathematical fact about sharp regions, but Type I factorizations are recoverable in the limit of nonzero buffer width. The Bekenstein-Bousso bound is naturally formulated for the sharp region (Type III) case; the framework's machinery is built for that.
 
 ---
 
@@ -1399,7 +1415,7 @@ The modular theory associated with \((\mathcal{A},\omega)\) gives a canonical �
 \sigma_t^\omega(A).
 \]
 
-In finite dimensions, this flow is simply
+In the simplest finite-dimensional case — when \(\mathcal{A} = B(\mathcal{H})\) is the full matrix algebra and \(\omega(A) = \mathrm{Tr}(\rho A)\) with $\rho$ a faithful density matrix — this flow is
 
 \[
 \sigma_t^\omega(A)
@@ -1407,9 +1423,11 @@ In finite dimensions, this flow is simply
 \rho^{it} A \rho^{-it}.
 \]
 
-That is the key formula.
+That is the key formula in this special case.
 
-It says:
+**Important caveat.** This simple "conjugate by $\rho^{it}$" formula is *only* exact for the full matrix algebra $B(\mathcal{H})$. For a proper subalgebra $\mathcal{A} \subset B(\mathcal{H})$ — and crucially for Type III algebras in QFT — the modular flow is associated with the *algebra-state pair* $(\mathcal{A}, \Omega)$ and is **not** generally obtained by conjugating with a global density matrix. The intuition "$\rho^{it}$ generates the flow" survives in form (with $\rho$ replaced by the modular operator $\Delta_\Omega$), but the global-density-matrix picture breaks down.
+
+It says, in the simplest case:
 
 > The state \(\rho\) defines an intrinsic time evolution on the algebra by conjugation with \(\rho^{it}\).
 
@@ -1798,7 +1816,7 @@ By Stone’s theorem, a continuous unitary group has a self-adjoint generator \(
 U(t)=e^{-itK}.
 \]
 
-So adding the crossed product is like adding the modular Hamiltonian \(K\) as an actual operator in an enlarged algebra.
+So the crossed product contains the unitary implementers $U(t)$ of the modular flow as bounded operators in an enlarged algebra. The generator $K$ is generally an *unbounded self-adjoint operator affiliated with* the crossed-product algebra — not literally an element of it, but uniquely determined by it via Stone's theorem. (The slogan "we add the modular Hamiltonian as an operator" is a useful shorthand, but the precise statement is the affiliation, not literal membership.)
 
 ## 17.4 Why an \(L^2(\mathbb{R})\) factor appears
 
@@ -1856,7 +1874,15 @@ So the crossed product Hilbert space often looks like
 \mathcal{H}_{\rm original}\otimes L^2(\mathbb{R}).
 \]
 
-Physically, the new \(L^2(\mathbb{R})\) factor is a quantum clock tracking modular time.
+**The honest statement** is that the regular representation of the crossed product introduces an $L^2(\mathbb{R})$ factor associated with the *flow parameter* — the variable that labels the modular automorphism. Mathematically, that's all the bare theorem says.
+
+Interpreting this $L^2(\mathbb{R})$ as a *physical quantum clock* is an additional move, motivated by quantum-gravity ideas (Page-Wootters formalism, gravitationally dressed observers, observer-relative algebras). In Witten 2022 and CPW 2022 the physical clock interpretation is natural and well-motivated — it's how gravity actually enters the construction. But you should keep in mind: the clock interpretation is a *physical reading* of an extra mathematical degree of freedom; it is not part of the bare operator-algebra theorem.
+
+Also, the action of the original algebra on $\mathcal{H} \otimes L^2(\mathbb{R})$ is more subtle than a simple tensor structure $A \otimes I$. In the standard representation,
+\[
+(\pi(A)\xi)(s) = \sigma_{-s}(A) \, \xi(s),
+\]
+so the original-algebra operators act in a way that's "twisted" by the modular flow itself. The clean tensor-product picture is a useful first approximation, not the exact structure.
 
 ## 17.5 Connection to quantum gravity clock formalisms
 
@@ -1896,9 +1922,11 @@ For a Type III von Neumann algebra \(\mathcal{M}\) with modular flow \(\sigma_t\
 \mathcal{M}\rtimes_{\sigma}\mathbb{R}
 \]
 
-is often a Type II algebra, more precisely a semifinite Type II algebra such as Type II\(_\infty\).
+is called the **continuous core** of $\mathcal{M}$. It is always *semifinite*. For Type III$_1$ factors (the relevant case for local QFT algebras), the continuous core is **Type II$_\infty$** — semifinite trace with $\tau(\mathbf{1}) = \infty$. For Type III$_\lambda$ ($0 < \lambda < 1$) or Type III$_0$ factors, the continuous core may have a nontrivial center (i.e., not be a single factor).
 
-This is part of Takesaki’s theory.
+So the precise statement is: *crossed product with modular flow gives a semifinite algebra (the continuous core), which is Type II$_\infty$ in the cases relevant to QFT*. The slogan "Type III + clock = Type II" is shorthand for this; the exact type and structure depend on which Type III subclass you started with.
+
+This is part of Takesaki's theory (Connes-Takesaki decomposition).
 
 ## 18.1 Intuition
 
@@ -1932,17 +1960,23 @@ Entropy usually needs a trace:
 S=-\mathrm{Tr}(\rho\log\rho).
 \]
 
-Type III algebras do not have a suitable trace, so naïve entropy fails.
+Type III algebras do not have a normal semifinite trace, so naïve entropy fails.
 
-After crossing with modular flow, one gets a Type II algebra with a semifinite trace \(\tau\). Then one can define entropy-like quantities using \(\tau\):
+After crossing with modular flow, one gets a semifinite algebra (the continuous core) with a faithful normal semifinite trace $\tau$. This provides a trace framework in which entropy-like quantities can sometimes be defined:
 
 \[
 S=-\tau(\rho\log\rho),
 \]
 
-with appropriate renormalization.
+with appropriate renormalization choices.
 
-This is one route to defining finite, renormalized entropies for QFT subregions.
+**Important caveat.** Two clarifications matter here:
+
+1. **The crossed product does NOT automatically give finite entropy.** The trace $\tau$ on a Type II$_\infty$ algebra has $\tau(\mathbf{1}) = \infty$. So generic states on the continuous core can still have divergent or undefined entropy. Defining a finite renormalized entropy requires further choices: a reference state, a regularization, or selecting states whose "density operator" relative to $\tau$ is trace-class. The continuous core is a *necessary condition* for an entropy notion, not a *sufficient* one.
+
+2. **Relative entropy was already well-defined for Type III algebras directly,** via Araki's construction using the relative modular operator. So the modular machinery already gave us a perfectly good notion of *relative* entropy (entropy of one state with respect to another) without needing crossed products. What the crossed-product construction adds is a route to *absolute*-like renormalized entropies via the trace structure, which is more subtle.
+
+So the slogan "Type III + clock = renormalized entropy" should be heard as: the crossed product gives us trace-based machinery and reproduces *differences* in generalized entropy (CPW's main result); absolute renormalized entropies require additional scheme choices.
 
 ## 18.3 Not magic
 
@@ -2060,17 +2094,19 @@ This is why Type III and crossed products matter for QIQT-H. The holographic bou
 
 # 20. Generalized entropy
 
-In gravitational physics, the entropy associated with a surface is not just matter entropy. It is
+In gravitational physics, the entropy associated with a *codimension-2 surface* $\Sigma$ — for example a black-hole horizon cross-section, or a quantum extremal surface bounding a spatial region $R$ — is not just matter entropy. It is
 
 \[
-S_{\rm gen}
+S_{\rm gen}(\Sigma; R)
 =
-\frac{A}{4G\hbar}
+\frac{\mathrm{Area}(\Sigma)}{4G\hbar}
 +
-S_{\rm matter}^{\rm ren}.
+S_{\rm matter}^{\rm ren}(R).
 \]
 
-This is called generalized entropy.
+This is called the **generalized entropy**.
+
+A note on dimensions: the area term is the area of a codimension-2 surface (2-dimensional in 4D spacetime), not the area of a codimension-1 hypersurface boundary. For a spatial region $R$ at a moment of time, the relevant $\Sigma$ is $\partial R$ as a 2-surface. The matter entropy is the renormalized entropy of matter on one side of $\Sigma$ (say inside $R$). Throughout the rest of this tutorial, when we write $\partial R$ or similar without further qualification, we mean the codimension-2 boundary surface; this is the convention CPW use.
 
 ## 20.1 Origin: black-hole thermodynamics
 
@@ -2208,15 +2244,35 @@ or, more generally,
 I_{\rm branch}^\varepsilon(D)\leq S_{\rm gen}(\partial D).
 \]
 
-The analogy is not exact.
+The analogy is **structural, not technical**.
 
-Gauge constraints remove redundant descriptions. QIQT-H constraints remove or restrict physically admissible record structures.
+**Important caveat.** Gauge constraints in the technical sense have specific properties that the QIQT-H admissibility condition does NOT have:
 
-But the shared pattern is:
+- Gauge constraints are *linear* operator equations: $G_a|\psi\rangle = 0$, where $G_a$ are bounded or affiliated operators acting linearly on the state.
+- Gauge constraints are *local*: $G_a$ involves fields at a point or smeared over a small region.
+- Gauge constraints reflect *redundancy*: gauge-equivalent states are physically identical.
+- Gauge constraints *generate symmetries*: gauge transformations are flows generated by the constraints.
+- BRST machinery requires *nilpotency* $Q^2 = 0$.
+
+The QIQT-H admissibility condition $I_\Sigma^\epsilon[\omega_R] \le Q_R$ is:
+
+- *Nonlinear* (depends nonlinearly on the state through the active-set construction)
+- *History- and coarse-graining-dependent* (requires choosing $\mathcal{C}(R)$, the record subalgebra, and the smoothing parameter $\epsilon$)
+- *Not from a symmetry* (no generator, not even formally)
+- *Not a redundancy*: forbidden multi-record states are not gauge-equivalent to allowed states — they are simply excluded
+- *Not BRST-like*: no nilpotent charge or cohomological structure
+
+So when we say "QIQT-H's constraint is like a gauge constraint," we mean: both restrict a larger formal space to a smaller physical one, and physical Hamiltonians must preserve the constraint. **That structural pattern is the entire analogy. The mathematical machinery is completely different.**
+
+In particular: writing $\mathcal{C}_{\rm QIQT-H}|\Psi_{\rm phys}\rangle = 0$ above is suggestive notation, not a literal operator equation. There is no Hermitian "constraint operator" $\mathcal{C}_{\rm QIQT-H}$ whose kernel defines $\mathcal{H}_{\rm phys}$. The admissibility condition is a nonlinear inequality on regional algebra-states. Its dynamical implementation — characterizing which Hermitian operators preserve $\mathcal{H}_{\rm phys}$ — is one of the framework's central open problems.
+
+The shared pattern is:
 
 1. Write a large formal space.
 2. Impose a constraint.
 3. Physical states/histories are those satisfying the constraint.
+
+But the *kind* of constraint, and the mathematical machinery for implementing it dynamically, is genuinely different in QIQT-H from anything in gauge theory or BRST.
 
 ---
 
