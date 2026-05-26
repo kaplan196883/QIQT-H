@@ -71,7 +71,13 @@ $$
 |\psi\rangle = \alpha |\uparrow\rangle + \beta |\downarrow\rangle.
 $$
 
-A measuring device begins in a ready state $|M_0\rangle$. If the device is quantum mechanical, then linearity gives
+A measuring device begins in a ready state $|M_0\rangle$ (pointer at zero, nothing recorded yet). We assume a *good* measurement coupling: if the spin is definitely $|\uparrow\rangle$, the device evolves to a macroscopically distinct pointer state $|M_\uparrow\rangle$ — "pointer reads up" — and similarly $|\downarrow\rangle|M_0\rangle \longrightarrow |\downarrow\rangle|M_\downarrow\rangle$ with $|M_\downarrow\rangle$ being "pointer reads down." The two pointer states are orthogonal,
+
+$$
+\langle M_\uparrow | M_\downarrow \rangle = 0,
+$$
+
+because they differ in a macroscopic degree of freedom (the pointer is literally in a different position). For an unknown input spin, linearity of Schrödinger evolution forces
 
 $$
 (\alpha|\uparrow\rangle+\beta|\downarrow\rangle)|M_0\rangle
@@ -147,15 +153,39 @@ $$
 \beta |\downarrow\rangle |M_\downarrow\rangle |E_\downarrow\rangle.
 $$
 
-The environment states are effectively orthogonal:
+Why should
 
 $$
-\langle E_\uparrow | E_\downarrow\rangle \approx 0.
+\langle E_\uparrow | E_\downarrow\rangle \approx 0
 $$
 
-That is decoherence. It explains why interference between branches becomes practically impossible.
+in practice? Because the apparatus is not isolated. Air molecules, photons, phonons, electronics, and other degrees of freedom continually "monitor" it. A pointer in the up-position scatters the environment into one enormous state; a pointer in the down-position scatters it into another. Even if each environmental fragment carries only a tiny amount of which-branch information, the total overlap is a product of many tiny overlaps:
 
-But decoherence alone does **not** choose one outcome. It gives an apparent classical branching structure. The measurement problem remains:
+$$
+\langle E_\uparrow | E_\downarrow \rangle
+=
+\prod_{k=1}^N \langle e^{(k)}_\uparrow | e^{(k)}_\downarrow \rangle
+\;\approx\; 0
+\quad \text{for huge } N.
+$$
+
+So the orthogonality is not a new postulate. It is what happens when information about the outcome leaks into many uncontrolled degrees of freedom. To reverse it, one would have to collect and phase-align essentially all of those degrees of freedom. For a macroscopic record, that is physically hopeless.
+
+The effect is seen by ignoring the environment. Let $S$ denote the spin plus measuring device. The reduced density matrix is
+
+$$
+\begin{aligned}
+\rho_S = \mathrm{Tr}_E |\Psi\rangle\langle\Psi|
+&= |\alpha|^2 |\uparrow M_\uparrow\rangle\langle\uparrow M_\uparrow|
++ |\beta|^2 |\downarrow M_\downarrow\rangle\langle\downarrow M_\downarrow| \\
+&\quad + \alpha\beta^* \langle E_\downarrow | E_\uparrow\rangle |\uparrow M_\uparrow\rangle\langle\downarrow M_\downarrow| \\
+&\quad + \alpha^*\beta \langle E_\uparrow | E_\downarrow\rangle |\downarrow M_\downarrow\rangle\langle\uparrow M_\uparrow|.
+\end{aligned}
+$$
+
+The diagonal terms are the apparent alternatives. The off-diagonal terms are the interference terms. Decoherence is the practical suppression of those off-diagonal terms by the tiny factor $\langle E_\uparrow | E_\downarrow\rangle$.
+
+But nothing has collapsed. The full state of system, apparatus, and environment is still a pure entangled state. Decoherence explains why branches stop interfering for local observers — but it does **not** choose one outcome. It gives an apparent classical branching structure. The measurement problem remains:
 
 > Why do I experience one branch rather than a superposition of branches?
 
