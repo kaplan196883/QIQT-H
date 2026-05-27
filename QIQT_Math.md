@@ -9,7 +9,7 @@ keywords: [double-slit experiment, holographic principle, Bekenstein-Bousso boun
 
 ## Abstract
 
-We present a fully worked mathematical account of the double-slit experiment in the QIQT-H framework (Kapłański 2026, position paper and companion foundations paper). The framework combines the Chandrasekaran-Penington-Witten (2022) and Witten (2022) Type II crossed-product algebra construction with a foundational axiom (FQ) postulating finite physical specification precision on the wave function as a physical state of spacetime. The double-slit serves as an ideal testbed: it contains both the wave-like interference pattern that builds up across many runs and the particle-like single-spot detection in each individual run. We work through the experiment step by step. First, we set up the algebraic QFT description with the screen region $R_S$ and its Type II crossed-product algebra $\hat{\mathcal{A}}(R_S)$. Second, we show how decoherence — the entanglement of the particle's position with the screen's microscopic substrate and the surrounding electromagnetic environment — dynamically suppresses off-diagonal coherence between distinct spot positions on the screen. Third, we distinguish the formal wave function (the textbook $\psi(x)$ pattern) from the per-run wave function (the actual physical state in any specific run). Fourth, we explain how the per-run dynamics — driven by the specific microscopic initial conditions of the screen substrate and environment in that run — concentrates the per-run state on one specific spot. Fifth, we show how the (FQ) precision floor renders this dynamical concentration physically exact: the per-run wave function on the screen region is, after detection, physically equivalent to a single-spot state. No collapse postulate is invoked. The Schrödinger evolution of the underlying field algebra is preserved exactly. The macroscopic single-spot outcome per run emerges as the structural consequence of decoherence + microscopic initial conditions + the (FQ) finite-precision postulate. Across many runs, the typicality distribution of microscopic initial conditions reproduces the Born interference pattern $|\psi_A(x) + \psi_B(x)|^2$. We then work through the which-path case, showing how the detector at one slit destroys the interference pattern (the standard result) in the same framework. Throughout, the QIQT-H reading clarifies what "collapse" actually is: not a dynamical reduction but the structural consequence of finite physical resolution + decoherence-driven concentration.
+We present a fully worked mathematical account of the double-slit experiment in the QIQT-H framework (Kapłański 2026, position paper and companion foundations paper). The framework combines the Chandrasekaran-Penington-Witten (2022) and Witten (2022) Type II crossed-product algebra construction with a foundational axiom (FQ) postulating finite physical specification precision on the wave function as a physical state of spacetime. The double-slit serves as an ideal testbed: it contains both the wave-like interference pattern that builds up across many runs and the particle-like single-spot detection in each individual run. We work through the experiment step by step. First, we set up the algebraic QFT description with the screen region $R_S$ and its Type II crossed-product algebra $\hat{\mathcal{A}}(R_S)$. Second, we show how decoherence, the entanglement of the particle's position with the screen's microscopic substrate and the surrounding electromagnetic environment, dynamically suppresses off-diagonal coherence between distinct spot positions on the screen. Third, we distinguish the formal wave function (the textbook $\psi(x)$ pattern) from the per-run wave function (the actual physical state in any specific run). Fourth, we explain how the per-run dynamics, driven by the specific microscopic initial conditions of the screen substrate and environment in that run, concentrates the per-run state on one specific spot. Fifth, we show how the (FQ) precision floor renders this dynamical concentration physically exact: the per-run wave function on the screen region is, after detection, physically equivalent to a single-spot state. No collapse postulate is invoked. The Schrödinger evolution of the underlying field algebra is preserved exactly. The macroscopic single-spot outcome per run emerges as the structural consequence of decoherence + microscopic initial conditions + the (FQ) finite-precision postulate. Across many runs, the typicality distribution of microscopic initial conditions reproduces the Born interference pattern $|\psi_A(x) + \psi_B(x)|^2$. We then work through the which-path case, showing how the detector at one slit destroys the interference pattern (the standard result) in the same framework. Throughout, the QIQT-H reading clarifies what "collapse" actually is: not a dynamical reduction but the structural consequence of finite physical resolution + decoherence-driven concentration.
 
 **Keywords:** double-slit experiment; holographic principle; Bekenstein-Bousso bound; Type II algebra; crossed product; finite-precision wave function; measurement problem; decoherence.
 
@@ -23,9 +23,9 @@ The QIQT-H framework (Kapłański 2026, position paper and companion foundations
 
 1. The Chandrasekaran-Penington-Witten (2022) and Witten (2022) Type II crossed-product algebra construction for regional observables in algebraic QFT with gravitational dressing.
 
-2. A foundational axiom (FQ) postulating that the wave function, regarded as a physical state of spacetime, has finite physical specification precision determined by the holographic information capacity of the region — the *literal physical-instantiation reading* of the Bekenstein-Bousso bound.
+2. A foundational axiom (FQ) postulating that the wave function, regarded as a physical state of spacetime, has finite physical specification precision determined by the holographic information capacity of the region, the *literal physical-instantiation reading* of the Bekenstein-Bousso bound.
 
-The framework's central foundational claim is that the measurement problem — the apparent collapse of the wave function during measurement — is resolved by recognizing that:
+The framework's central foundational claim is that the measurement problem, the apparent collapse of the wave function during measurement, is resolved by recognizing that:
 
 - The formal wave function of standard QM is an ensemble descriptor.
 - Per-run wave functions have specific microscopic initial conditions that drive amplitudes dynamically toward 0 or 1 in any specific run.
@@ -34,12 +34,12 @@ The framework's central foundational claim is that the measurement problem — t
 
 This paper works through the double-slit experiment as a concrete worked example of the framework in action. We chose the double-slit because:
 
-- It is the textbook archetype of "collapse" — a particle exhibits wave-like behavior in transit and particle-like behavior at detection.
+- It is the textbook archetype of "collapse", a particle exhibits wave-like behavior in transit and particle-like behavior at detection.
 - It contains both the formal-wave-function pattern $|\psi(x)|^2$ (built up statistically across many runs) and the per-run single-spot detection.
 - It naturally exhibits the framework's distinction between formal (ensemble) and per-run (actual) wave functions.
 - It provides a controlled setting in which we can apply the (FQ) precision floor concretely.
 
-We give explicit calculations where they illuminate the framework's structure. The paper is intended as a *demonstrative companion* to the position and foundations papers — showing the framework working end-to-end on a concrete experiment.
+We give explicit calculations where they illuminate the framework's structure. The paper is intended as a *demonstrative companion* to the position and foundations papers, showing the framework working end-to-end on a concrete experiment.
 
 ### 1.2 What this paper does not claim
 
@@ -55,7 +55,7 @@ This paper does not prove the (FQ) axiom from first principles (that is the topi
 
 ### 2.1 Setup
 
-A source $S$ emits particles (electrons, photons, neutrons — the physics is the same) one at a time. Each particle propagates to a barrier with two narrow slits $A$ and $B$ separated by distance $d$. Behind the barrier at distance $L$ is a screen — a position-sensitive detector array.
+A source $S$ emits particles (electrons, photons, neutrons, the physics is the same) one at a time. Each particle propagates to a barrier with two narrow slits $A$ and $B$ separated by distance $d$. Behind the barrier at distance $L$ is a screen, a position-sensitive detector array.
 
 A particle's state immediately after passing the slits is, in the standard idealization,
 $$|\psi\rangle = \frac{1}{\sqrt{2}}\left(|A\rangle + |B\rangle\right),$$
@@ -72,7 +72,7 @@ with $r_A, r_B$ the distances from each slit to screen position $x$.
 The Born rule gives:
 $$P(x) = |\psi(x)|^2 = |\psi_A(x)|^2 + |\psi_B(x)|^2 + 2\,\mathrm{Re}\,[\psi_A^*(x)\psi_B(x)].$$
 
-The third term — the *interference term* — produces the characteristic fringe pattern. With $\Delta r = r_B - r_A \approx d \sin\theta$ and $\theta \approx x/L$:
+The third term, the *interference term*, produces the characteristic fringe pattern. With $\Delta r = r_B - r_A \approx d \sin\theta$ and $\theta \approx x/L$:
 $$2\,\mathrm{Re}\,[\psi_A^*\psi_B] \propto \cos\left(\frac{2\pi d x}{\lambda L}\right),$$
 giving bright fringes at $x_n = n\lambda L/d$ and dark fringes at $x_n = (n+1/2)\lambda L/d$.
 
@@ -116,7 +116,7 @@ $$\hat{\mathcal{A}}(R) := \mathcal{A}(R) \rtimes_{\sigma^\Omega} \mathbb{R}.$$
 
 The crossed-product algebra $\hat{\mathcal{A}}(R)$ is of Type II in the Murray-von Neumann classification, with a semifinite trace $\tau$ permitting a renormalized entropy $S_{\rm ren}(\rho) = -\tau(\rho \log \rho)$ for suitable states. The algebra is naturally represented on the enlarged Hilbert space $\mathcal{H} \otimes L^2(\mathbb{R})$, with the $L^2(\mathbb{R})$ factor encoding observer-frame / clock degrees of freedom.
 
-For the screen region $R_S$, the Type II algebra $\hat{\mathcal{A}}(R_S)$ is the rigorous mathematical home for "physical observables localized in the screen." States on $\hat{\mathcal{A}}(R_S)$ — that is, normal positive linear functionals $\omega: \hat{\mathcal{A}}(R_S) \to \mathbb{C}$ — represent the physical content of the wave function in $R_S$.
+For the screen region $R_S$, the Type II algebra $\hat{\mathcal{A}}(R_S)$ is the rigorous mathematical home for "physical observables localized in the screen." States on $\hat{\mathcal{A}}(R_S)$, that is, normal positive linear functionals $\omega: \hat{\mathcal{A}}(R_S) \to \mathbb{C}$, represent the physical content of the wave function in $R_S$.
 
 ### 3.4 (FQ) axiom for the screen region
 
@@ -129,7 +129,7 @@ $$S_{\rm ren}(\omega_\Psi) \le Q_{R_S} := \frac{A(\partial R_S)}{4\ell_P^2}.$$
 
 (iii) The wave function in $R_S$ is regarded as a physical state of spacetime with finite physical information capacity $Q_{R_S}$. Two abstract wave functions whose physical instantiations in $R_S$ are indistinguishable at the precision floor $\epsilon(R_S)$ are physically identical in $R_S$.
 
-For a macroscopic screen, $Q_{R_S}$ is astronomical in conventional units (a typical screen of area $\sim 10^{-2}$ m² and thickness $\sim 10^{-3}$ m has $A(\partial R_S) \sim 10^{-4}$ m² and $Q_{R_S} \sim 10^{68}$ nats). The precision floor $\epsilon(R_S)$ is correspondingly fine, but — crucially — finite.
+For a macroscopic screen, $Q_{R_S}$ is astronomical in conventional units (a typical screen of area $\sim 10^{-2}$ m² and thickness $\sim 10^{-3}$ m has $A(\partial R_S) \sim 10^{-4}$ m² and $Q_{R_S} \sim 10^{68}$ nats). The precision floor $\epsilon(R_S)$ is correspondingly fine, but, crucially, finite.
 
 ---
 
@@ -137,7 +137,7 @@ For a macroscopic screen, $Q_{R_S}$ is astronomical in conventional units (a typ
 
 ### 4.1 Macroscopic record observables
 
-The screen is a macroscopic matter system — a photographic plate, a CCD array, a fluorescent screen — that records the arrival position of a particle through a physical amplification cascade. The screen's quantum state is, for our purposes, fully specified by:
+The screen is a macroscopic matter system, a photographic plate, a CCD array, a fluorescent screen, that records the arrival position of a particle through a physical amplification cascade. The screen's quantum state is, for our purposes, fully specified by:
 - The microscopic state of all atoms / molecules / electronic excitations in the screen material
 - The state of any photons emitted by the detection event
 - The state of any electrical signals from the CCD pixels
@@ -146,15 +146,15 @@ For each position $x_k$ on the screen (where $k$ labels distinct macroscopic pos
 
 The record observables form a set of projectors $\{P_k\}_{k=1}^N$ in $\hat{\mathcal{A}}(R_S)$:
 $$P_k \in \hat{\mathcal{A}}(R_S), \quad P_k P_j = \delta_{jk} P_k, \quad \sum_k P_k = \mathbf{1}_{R_S}^{\rm record},$$
-where $\mathbf{1}_{R_S}^{\rm record}$ is the projector onto the subalgebra of macroscopic record observables. The number $N$ of distinct spot positions is finite — determined by the screen's pixel resolution, the detector physics, and the (FQ) information capacity (in practice $N \sim 10^6 - 10^9$ for typical screens).
+where $\mathbf{1}_{R_S}^{\rm record}$ is the projector onto the subalgebra of macroscopic record observables. The number $N$ of distinct spot positions is finite, determined by the screen's pixel resolution, the detector physics, and the (FQ) information capacity (in practice $N \sim 10^6 - 10^9$ for typical screens).
 
-The record states are $\omega_k(O) := \tau(P_k O P_k) / \tau(P_k)$ for $O \in \hat{\mathcal{A}}(R_S)$ — the Type II algebra-state associated with the record projector $P_k$.
+The record states are $\omega_k(O) := \tau(P_k O P_k) / \tau(P_k)$ for $O \in \hat{\mathcal{A}}(R_S)$, the Type II algebra-state associated with the record projector $P_k$.
 
 ### 4.2 The environmental algebra
 
-The screen does not exist in isolation. It is surrounded by an environment $R_E$ — thermal photons, residual gas molecules, ambient electromagnetic fields — that interacts with the screen during the detection event. The environmental algebra $\hat{\mathcal{A}}(R_E)$ contains observables on this surrounding region.
+The screen does not exist in isolation. It is surrounded by an environment $R_E$, thermal photons, residual gas molecules, ambient electromagnetic fields, that interacts with the screen during the detection event. The environmental algebra $\hat{\mathcal{A}}(R_E)$ contains observables on this surrounding region.
 
-For each record $k$, there is a corresponding *environmental record state* $\omega_k^E \in \mathcal{S}(\hat{\mathcal{A}}(R_E))$ — the state of the environment after the screen has registered the particle at position $x_k$, with thermal/optical signatures propagating outward. The environmental records are mutually approximately orthogonal:
+For each record $k$, there is a corresponding *environmental record state* $\omega_k^E \in \mathcal{S}(\hat{\mathcal{A}}(R_E))$, the state of the environment after the screen has registered the particle at position $x_k$, with thermal/optical signatures propagating outward. The environmental records are mutually approximately orthogonal:
 $$\omega_j^E \perp \omega_k^E \quad \text{for } j \ne k \text{ (to good approximation, after decoherence)}.$$
 
 This is the algebraic formulation of einselection (Zurek 2003): the environment "selects" the position basis $\{P_k\}$ as the macroscopic pointer basis by becoming entangled with it.
@@ -186,7 +186,7 @@ Decoherence theory (Zurek 2003; Joos et al. 2003) establishes that for macroscop
 $$\langle E_{x'} | E_x \rangle \to 0 \quad \text{and} \quad \langle S_{x'} | S_x \rangle \to 0 \quad \text{rapidly},$$
 by the product-of-overlaps argument over many independent environmental degrees of freedom (see the companion *Tutorial* §2 for an explicit derivation).
 
-The off-diagonal terms in the density matrix are dynamically suppressed. The reduced state of the particle becomes (approximately) diagonal in the position basis — this is einselection: the position basis is selected because the system-environment interaction is position-local (see *Tutorial* §6.2):
+The off-diagonal terms in the density matrix are dynamically suppressed. The reduced state of the particle becomes (approximately) diagonal in the position basis, this is einselection: the position basis is selected because the system-environment interaction is position-local (see *Tutorial* §6.2):
 $$\rho_{\rm particle}(x, x') \to |\psi(x)|^2 \delta(x - x').$$
 
 In algebraic terms, the formal state on the apparatus + environment algebra $\hat{\mathcal{A}}(R_{SE})$ becomes:
@@ -199,7 +199,7 @@ where the sum runs over distinct macroscopic positions and the off-diagonal cohe
 
 **What decoherence does not give:** A single-record state. The formal state is a mixture of records, not a single record. In standard interpretations, this is where the measurement problem reasserts itself: the mixture has the form of a classical probability distribution over records, but each branch remains present in the global pure state $|\Psi\rangle = \sum_k c_k |x_k\rangle|S_k\rangle|E_k\rangle$.
 
-The QIQT-H framework's resolution begins at this point. The formal state is the *ensemble descriptor* — the average over the ensemble of per-run wave functions. The per-run wave function in any specific run is *not* the formal mixed state; it is a single-record state, made physically exact by the (FQ) precision floor.
+The QIQT-H framework's resolution begins at this point. The formal state is the *ensemble descriptor*, the average over the ensemble of per-run wave functions. The per-run wave function in any specific run is *not* the formal mixed state; it is a single-record state, made physically exact by the (FQ) precision floor.
 
 ---
 
@@ -207,7 +207,7 @@ The QIQT-H framework's resolution begins at this point. The formal state is the 
 
 ### 6.1 One wave function per run
 
-**The central commitment of the framework: one wave function per run.** Each individual particle sent through the double-slit corresponds to one universal wave function of the universe at that moment. We do *not* claim that the same particle preparation secretly corresponds to many different "per-run wave functions" — that would conflict with the extremality of pure quantum states and would constitute a problematic ψ-supplementation.
+**The central commitment of the framework: one wave function per run.** Each individual particle sent through the double-slit corresponds to one universal wave function of the universe at that moment. We do *not* claim that the same particle preparation secretly corresponds to many different "per-run wave functions", that would conflict with the extremality of pure quantum states and would constitute a problematic ψ-supplementation.
 
 Each particle sent through the double-slit has its own wave function. Each particle interacts with a screen + environment whose actual microscopic state is specific to that particle's arrival. The Born statistical pattern emerges across *many actual particles in many actual runs*, each with its own actual universal wave function evolving from its own actual initial conditions.
 
@@ -217,11 +217,11 @@ There are two senses in which one talks about "the wave function" of the double-
 
 **Subsystem wave function** $|\psi\rangle_{\rm sub}$: the textbook abstraction for the prepared particle alone, $|\psi\rangle_{\rm sub} = (|A\rangle + |B\rangle)/\sqrt{2}$ after the slits, with $\psi(x) = \psi_A(x) + \psi_B(x)$ on the screen. This treats the particle as a closed quantum system, abstracting away from the apparatus and environment. It is correct for calculating expectation values of subsystem observables in the standard QM way, but it is *not* the complete physical state of the universe.
 
-**Per-run universal wave function** $|\Psi\rangle_{\rm run}$: the actual physical wave function of the universe in any specific run — the particle + apparatus + environment + everything. This is the complete physical state in any specific run. Its content on the regional algebra $\hat{\mathcal{A}}(R_S)$ of the screen region is given by $\omega_\Psi^{R_S}$ on the regional Type II algebra.
+**Per-run universal wave function** $|\Psi\rangle_{\rm run}$: the actual physical wave function of the universe in any specific run, the particle + apparatus + environment + everything. This is the complete physical state in any specific run. Its content on the regional algebra $\hat{\mathcal{A}}(R_S)$ of the screen region is given by $\omega_\Psi^{R_S}$ on the regional Type II algebra.
 
 The textbook ($\sum_k c_k |x_k\rangle$ after diffraction; $\sum_k c_k |x_k\rangle|S_k\rangle|E_k\rangle$ after entanglement with apparatus + environment) is the *subsystem wave function evolved up through the relevant interactions*. It uses the formal Hilbert-space superposition structure to encode the joint quantum state of particle + apparatus + environment.
 
-**The framework's claim is not that this is wrong**, but that it is the *subsystem-level* description. The per-run universal wave function is the actual state of the universe in that run. The framework says nothing the textbook doesn't already say at this level — the per-run universal wave function evolves unitarily under the universal Hamiltonian from the actual initial conditions of the universe in that run.
+**The framework's claim is not that this is wrong**, but that it is the *subsystem-level* description. The per-run universal wave function is the actual state of the universe in that run. The framework says nothing the textbook doesn't already say at this level, the per-run universal wave function evolves unitarily under the universal Hamiltonian from the actual initial conditions of the universe in that run.
 
 ### 6.3 What varies across runs
 
@@ -246,7 +246,7 @@ Neither addition introduces a second physical layer. The framework is wavefuncti
 
 ### 6.5 The Born statistics as ensemble over actual runs
 
-The Born statistics across many runs of the double-slit experiment — the interference fringe pattern building up dot by dot — emerge from the distribution of *actual initial conditions* across *actual different particles in actual different runs*. Each particle has its own universal wave function evolving from its own actual initial conditions through unitary dynamics + (FQ). Each particle ends up at one specific spot on the screen. Across many particles, the distribution of spots reproduces $|\psi_A + \psi_B|^2$ (the Born conjecture from typicality).
+The Born statistics across many runs of the double-slit experiment, the interference fringe pattern building up dot by dot, emerge from the distribution of *actual initial conditions* across *actual different particles in actual different runs*. Each particle has its own universal wave function evolving from its own actual initial conditions through unitary dynamics + (FQ). Each particle ends up at one specific spot on the screen. Across many particles, the distribution of spots reproduces $|\psi_A + \psi_B|^2$ (the Born conjecture from typicality).
 
 **This is not "averaging over different per-run wave functions for the same preparation."** It is averaging over actual different physical particles in actual different physical runs of the experiment. The Born rule is a statement about the statistical distribution of outcomes across many actual independent runs, each with its own actual universal wave function.
 
@@ -254,7 +254,7 @@ The Born statistics across many runs of the double-slit experiment — the inter
 
 Foundations-of-physics literature (Spekkens-Harrigan ontological-models framework) sometimes uses "ontic state" $\lambda$ to refer to whatever fully specifies the physical state of a single system. In QIQT-H, this is the per-run universal wave function $|\Psi\rangle_{\rm run}$. There is no $\lambda$ beyond the wave function. The framework is ψ-monist and ψ-ontic.
 
-The textbook subsystem wave function $|\psi\rangle_{\rm sub}$ is *not* the ontic state — it is the subsystem description. Confusing $|\psi\rangle_{\rm sub}$ with $|\Psi\rangle_{\rm run}$ is what generates the apparent puzzle of "how does the formal pure state correspond to a distribution of per-run pure states?" The puzzle dissolves: $|\psi\rangle_{\rm sub}$ is not the universal wave function in any run; $|\Psi\rangle_{\rm run}$ is. There is one $|\Psi\rangle_{\rm run}$ per run, and different runs have actually different universal wave functions because the actual physical universe is actually different in each run.
+The textbook subsystem wave function $|\psi\rangle_{\rm sub}$ is *not* the ontic state, it is the subsystem description. Confusing $|\psi\rangle_{\rm sub}$ with $|\Psi\rangle_{\rm run}$ is what generates the apparent puzzle of "how does the formal pure state correspond to a distribution of per-run pure states?" The puzzle dissolves: $|\psi\rangle_{\rm sub}$ is not the universal wave function in any run; $|\Psi\rangle_{\rm run}$ is. There is one $|\Psi\rangle_{\rm run}$ per run, and different runs have actually different universal wave functions because the actual physical universe is actually different in each run.
 
 ---
 
@@ -262,9 +262,9 @@ The textbook subsystem wave function $|\psi\rangle_{\rm sub}$ is *not* the ontic
 
 ### 7.1 The naive picture is wrong
 
-A common but misleading reading treats the post-detection state on the screen as a "naive superposition" of spots — say, "amplitude $\psi(x_1)$ at spot 1, amplitude $\psi(x_2)$ at spot 2, …, sitting there as accessible alternatives." The puzzle then becomes "how do these amplitudes magically transition to one specific spot per run?"
+A common but misleading reading treats the post-detection state on the screen as a "naive superposition" of spots, say, "amplitude $\psi(x_1)$ at spot 1, amplitude $\psi(x_2)$ at spot 2, …, sitting there as accessible alternatives." The puzzle then becomes "how do these amplitudes magically transition to one specific spot per run?"
 
-This picture is wrong. We never have direct access to amplitudes. We have access only to the macroscopic record on the screen — which is itself a complex quantum system with $\sim 10^{20}$–$10^{25}$ degrees of freedom (atoms, electronic excitations, photon emissions, electrical signals), entangled with the particle that was just absorbed.
+This picture is wrong. We never have direct access to amplitudes. We have access only to the macroscopic record on the screen, which is itself a complex quantum system with $\sim 10^{20}$–$10^{25}$ degrees of freedom (atoms, electronic excitations, photon emissions, electrical signals), entangled with the particle that was just absorbed.
 
 The question to ask is not "how do amplitudes transition to 0 or 1?" but "what does the joint particle-screen-environment state actually look like as a state on the regional algebra $\hat{\mathcal{A}}(R_{SE})$?"
 
@@ -286,9 +286,9 @@ where $\omega_k^{SE}$ are the macroscopic record states on the joint algebra (wi
 
 ### 7.3 The (FQ) floor renders off-diagonal coherence physically zero
 
-The off-diagonal coherence terms are exponentially small — on the order of $\exp(-10^{20})$ — but mathematically nonzero. In standard QM without (FQ), this is the source of the measurement problem: even though the coherence is operationally inaccessible, it is mathematically present, and one is forced to either (a) treat all branches as real (MWI) or (b) invoke an additional selection mechanism (collapse, modal value-rule, hidden variable).
+The off-diagonal coherence terms are exponentially small, on the order of $\exp(-10^{20})$, but mathematically nonzero. In standard QM without (FQ), this is the source of the measurement problem: even though the coherence is operationally inaccessible, it is mathematically present, and one is forced to either (a) treat all branches as real (MWI) or (b) invoke an additional selection mechanism (collapse, modal value-rule, hidden variable).
 
-Under (FQ), the off-diagonal coherence is **physically zero**, not merely suppressed. The (FQ) precision floor $\epsilon(R_{SE})$ on the regional algebra-state, while astronomically fine in absolute terms, is enormously larger than $\exp(-10^{20})$. Therefore by Lemma 1 (from foundations paper §5.1), the off-diagonal coherence terms — being below the (FQ) precision floor — are physically equivalent to exactly zero.
+Under (FQ), the off-diagonal coherence is **physically zero**, not merely suppressed. The (FQ) precision floor $\epsilon(R_{SE})$ on the regional algebra-state, while astronomically fine in absolute terms, is enormously larger than $\exp(-10^{20})$. Therefore by Lemma 1 (from foundations paper §5.1), the off-diagonal coherence terms, being below the (FQ) precision floor, are physically equivalent to exactly zero.
 
 The post-decoherence + (FQ) regional state on $\hat{\mathcal{A}}(R_{SE})$ is therefore the **strict classical mixture**:
 $$\omega_\Psi^{R_{SE}} = \sum_k |c_k|^2 \omega_k^{SE},$$
@@ -306,7 +306,7 @@ The strict classical mixture $\sum_k |c_k|^2 \omega_k^{SE}$ on $\hat{\mathcal{A}
 
 **The framework's claim: in any specific run, the per-run universe occupies one specific branch of the strictly-exclusive classical mixture. Which branch is determined by the per-run microscopic initial conditions of the screen + environment.**
 
-This is *not* a claim that amplitudes magically transition from $|c_k|^2$ to $\delta_{k,k_{\rm run}}$. The amplitudes don't need to transition: after decoherence + (FQ), the regional state is already a strict classical mixture with exclusive macroscopic records. The framework's per-run claim is simply that, in any specific run, the universe is in *one* of these now-exclusive branches — analogous to how, in classical statistical mechanics, a thermodynamic ensemble at temperature $T$ describes a probability distribution over microstates, but any specific physical realization sits at one specific microstate.
+This is *not* a claim that amplitudes magically transition from $|c_k|^2$ to $\delta_{k,k_{\rm run}}$. The amplitudes don't need to transition: after decoherence + (FQ), the regional state is already a strict classical mixture with exclusive macroscopic records. The framework's per-run claim is simply that, in any specific run, the universe is in *one* of these now-exclusive branches, analogous to how, in classical statistical mechanics, a thermodynamic ensemble at temperature $T$ describes a probability distribution over microstates, but any specific physical realization sits at one specific microstate.
 
 ### 8.2 The classical statistical mechanics analogy made precise
 
@@ -319,7 +319,7 @@ Consider a gas at temperature $T$ with $N \sim 10^{23}$ molecules. The canonical
 The QIQT-H framework reads the quantum case analogously, with the *additional* ingredient that decoherence + (FQ) make the macroscopic-record alternatives strictly exclusive on the regional algebra. After decoherence + (FQ):
 
 - The regional algebra-state $\omega_\Psi^{R_{SE}} = \sum_k |c_k|^2 \omega_k^{SE}$ is a strict classical mixture over macroscopic records.
-- The per-run universe is in *one* specific branch — one specific $\omega_{k_{\rm run}}^{SE}$.
+- The per-run universe is in *one* specific branch, one specific $\omega_{k_{\rm run}}^{SE}$.
 - Across many runs, the empirical distribution over branches is $|c_k|^2$ (Born statistics).
 - The formal wave function $|\Psi\rangle$ is the descriptor of this distribution, not the per-run physical state.
 
@@ -327,7 +327,7 @@ The QIQT-H framework reads the quantum case analogously, with the *additional* i
 
 Within any specific run, the screen + environment has specific microscopic initial conditions: the actual thermal microstate of the screen substrate, the actual configurations of vacuum fluctuations, the actual positions and velocities of residual gas molecules, the actual ambient radiation field. These microscopic conditions are not controlled by the experimenter and vary across runs.
 
-The amplification cascade in the screen — single particle absorption at one specific atom, secondary electron emission, electrical signal — is extraordinarily sensitive to these microscopic conditions. Which atom in the screen substrate is "available" to absorb the particle (in the right energy state, with the right local field configuration) depends on the run-specific microstate. The amplification then locks in this specific atom as the realized spot.
+The amplification cascade in the screen, single particle absorption at one specific atom, secondary electron emission, electrical signal, is extraordinarily sensitive to these microscopic conditions. Which atom in the screen substrate is "available" to absorb the particle (in the right energy state, with the right local field configuration) depends on the run-specific microstate. The amplification then locks in this specific atom as the realized spot.
 
 In algebraic terms: the per-run universe is in the branch $\omega_{k_{\rm run}}^{SE}$ corresponding to the specific microstate-determined amplification path of that run. Across many runs, the distribution of selected branches follows the Born weights $|c_k|^2$ (under the typicality conjecture for the measure on microscopic IC; see §9).
 
@@ -346,19 +346,19 @@ The per-run microscopic IC are *not* hidden variables in the sense of an additio
 
 What the framework adds is the distinction between two senses of "wave function":
 
-**Formal wave function** $|\Psi\rangle_{\rm formal}$: the textbook abstract wave function used in calculations — for example $\alpha|0\rangle + \beta|1\rangle$ for a prepared qubit, or $\sum_k c_k |x_k\rangle|S_k\rangle|E_k\rangle$ after measurement. This is a *descriptor of the ensemble* of possible runs, not the per-run physical state.
+**Formal wave function** $|\Psi\rangle_{\rm formal}$: the textbook abstract wave function used in calculations, for example $\alpha|0\rangle + \beta|1\rangle$ for a prepared qubit, or $\sum_k c_k |x_k\rangle|S_k\rangle|E_k\rangle$ after measurement. This is a *descriptor of the ensemble* of possible runs, not the per-run physical state.
 
 **Per-run wave function** $|\Psi\rangle_{\rm run}$: the actual physical wave function of the universe in any specific run. This is a definite physical state at any moment. Different runs of the "same" experiment correspond to different per-run universal wave functions because the actual physical universe is different in each run (different photon configurations, different thermal microstates, different vacuum fluctuations).
 
-The "per-run microscopic IC" are not additional ontology. They are simply *the run-specific values of degrees of freedom that the formal wave function ensemble-averages over*. The formal wave function aggregates over apparatus + environment microstates; the per-run wave function in any specific run has the apparatus + environment in one specific microstate. There is nothing beyond the wave function — but the wave function in each actual run is finer-grained than the textbook ensemble descriptor.
+The "per-run microscopic IC" are not additional ontology. They are simply *the run-specific values of degrees of freedom that the formal wave function ensemble-averages over*. The formal wave function aggregates over apparatus + environment microstates; the per-run wave function in any specific run has the apparatus + environment in one specific microstate. There is nothing beyond the wave function, but the wave function in each actual run is finer-grained than the textbook ensemble descriptor.
 
 Compare to Bohm: Bohm adds particle positions *on top of* the wave function as a separate ontological layer, with a guidance equation. The framework does nothing analogous. The wave function is the *only* ontology. The per-run wave function is just the actual wave function; the formal wave function is the calculational descriptor of the distribution across runs.
 
-The framework's claim is that taking ψ-monism seriously — combined with the recognition that (FQ) makes bounded spacetime physically incapable of storing macroscopic-superposition wave functions — gives single-outcome per-run reality without modifying Schrödinger dynamics and without adding particles, fields, branches, or any other ontological layer.
+The framework's claim is that taking ψ-monism seriously, combined with the recognition that (FQ) makes bounded spacetime physically incapable of storing macroscopic-superposition wave functions, gives single-outcome per-run reality without modifying Schrödinger dynamics and without adding particles, fields, branches, or any other ontological layer.
 
 ### 8.5 Quantitative scale
 
-For a typical macroscopic screen, $Q_{R_{SE}} \sim 10^{68}$ nats. The (FQ) precision floor $\epsilon(R_{SE})$ is astronomically fine in absolute terms — but enormously larger than the decoherence suppression $\sim e^{-10^{20}}$. The (FQ) floor's role is to convert "exponentially small but mathematically nonzero" off-diagonal coherence into "physically zero" — converting the merely-approximate classical mixture that standard decoherence delivers into a strictly-exclusive classical mixture. The per-run branch selection then proceeds as in classical statistical mechanics: one specific realization occupies one specific microstate.
+For a typical macroscopic screen, $Q_{R_{SE}} \sim 10^{68}$ nats. The (FQ) precision floor $\epsilon(R_{SE})$ is astronomically fine in absolute terms, but enormously larger than the decoherence suppression $\sim e^{-10^{20}}$. The (FQ) floor's role is to convert "exponentially small but mathematically nonzero" off-diagonal coherence into "physically zero", converting the merely-approximate classical mixture that standard decoherence delivers into a strictly-exclusive classical mixture. The per-run branch selection then proceeds as in classical statistical mechanics: one specific realization occupies one specific microstate.
 
 ---
 
@@ -366,7 +366,7 @@ For a typical macroscopic screen, $Q_{R_{SE}} \sim 10^{68}$ nats. The (FQ) preci
 
 ### 9.1 Single runs and ensemble statistics
 
-We have established (§§7–8) that in any specific run, the per-run wave function on the screen region is, after detection, physically equivalent to a single-record state $\omega_{k_{\rm run}}$ — one specific spot.
+We have established (§§7–8) that in any specific run, the per-run wave function on the screen region is, after detection, physically equivalent to a single-record state $\omega_{k_{\rm run}}$, one specific spot.
 
 Across many runs, the realized records $\{k_{\rm run}^{(1)}, k_{\rm run}^{(2)}, \ldots, k_{\rm run}^{(M)}\}$ form a statistical distribution. The empirical relative frequency of spot $k$ across $M$ runs is:
 $$f_k^{(M)} := \frac{1}{M} \sum_{j=1}^M \delta_{k, k_{\rm run}^{(j)}}.$$
@@ -403,7 +403,7 @@ For the present worked example, we treat Born from typicality as a working assum
 
 ## 9A. The Modular-Local Holographic Superselection Rule Applied to the Double-Slit Screen
 
-The framework's central new physical principle (foundations paper §7.6) — the **Modular-Local Holographic Bound as superselection rule** — has a concrete interpretation for the double-slit screen. Working through it here makes explicit what the postulate means in a familiar setting.
+The framework's central new physical principle (foundations paper §7.6), the **Modular-Local Holographic Bound as superselection rule**, has a concrete interpretation for the double-slit screen. Working through it here makes explicit what the postulate means in a familiar setting.
 
 ### 9A.0 Modular-local form and its classical-mixture reduction
 
@@ -411,7 +411,7 @@ The *foundational* statement of the bound is modular-local (foundations paper §
 
 $$\chi_{R_S}(\omega) := S_{\hat{\mathcal{A}}(R_S)}(\omega_{R_S} \,\|\, \Omega_{R_S}) \;\le\; C(R_S) = \frac{A(\partial R_S)}{4\ell_P^2},$$
 
-where $\chi_{R_S}$ is Araki / Type II core relative entropy — finite, basis-independent, defined directly on the Type III local algebra via the CPW Type II core construction (foundations paper §3). This is the form that delivers no-signaling automatically from AQFT microcausality (foundations paper §7.7).
+where $\chi_{R_S}$ is Araki / Type II core relative entropy, finite, basis-independent, defined directly on the Type III local algebra via the CPW Type II core construction (foundations paper §3). This is the form that delivers no-signaling automatically from AQFT microcausality (foundations paper §7.7).
 
 After decoherence the post-detection regional state on the screen is a strict classical mixture over distinguishable spot records (§7 of this paper):
 
@@ -421,7 +421,7 @@ with $p_k$ the spot probabilities and $\omega_k$ the single-spot regional states
 
 $$\chi_{R_S}(\omega) \;\approx\; \sum_k p_k\, c_{R_S}(r_k) + H_{\rm Shannon}(\{p_k\}),$$
 
-with $c_{R_S}(r_k) = S(\omega_k \| \Omega_{R_S})$ the per-record relative entropy and $H_{\rm Shannon}$ the entropy of the mixture weights. This recovers the **branch-summed cost** $I_\Sigma^\varepsilon \approx N \cdot I_0$ used in earlier formulations as a **derived approximation** in the appropriate (single-region, classical-mixture) regime — which is precisely the regime that applies to the double-slit screen after detection.
+with $c_{R_S}(r_k) = S(\omega_k \| \Omega_{R_S})$ the per-record relative entropy and $H_{\rm Shannon}$ the entropy of the mixture weights. This recovers the **branch-summed cost** $I_\Sigma^\varepsilon \approx N \cdot I_0$ used in earlier formulations as a **derived approximation** in the appropriate (single-region, classical-mixture) regime, which is precisely the regime that applies to the double-slit screen after detection.
 
 The rest of §9A works in this classical-mixture approximation. All the conclusions about $N_{\max}$, $I_0$ calibration, the Schrödinger-cat scale, and the operational kinematic-exclusion of multi-spot states therefore carry over from the modular-local bound directly. The branch-counting language is the right intuitive handle for this single-region detector calculation.
 
@@ -443,13 +443,13 @@ The framework's central commitment is the **record-instantiation-cost postulate 
 
 ### 9A.1 The macroscopic record subalgebra and the spectrum of screen spots
 
-For the screen region $R_S$, the macroscopic record subalgebra $\mathcal{C}(R_S) \subset \hat{\mathcal{A}}(R_S)$ is generated by the position-localized record projectors $\{P_k\}_{k=1}^N$ — one for each macroscopically distinct spot position, with $N \sim 10^6 - 10^9$ for typical screen resolutions. These projectors are mutually commuting and decoherence-stable; off-diagonal coherence between distinct $P_j, P_k$ is suppressed exponentially $\sim e^{-10^{20}}$ and physically zero under (FQ).
+For the screen region $R_S$, the macroscopic record subalgebra $\mathcal{C}(R_S) \subset \hat{\mathcal{A}}(R_S)$ is generated by the position-localized record projectors $\{P_k\}_{k=1}^N$, one for each macroscopically distinct spot position, with $N \sim 10^6 - 10^9$ for typical screen resolutions. These projectors are mutually commuting and decoherence-stable; off-diagonal coherence between distinct $P_j, P_k$ is suppressed exponentially $\sim e^{-10^{20}}$ and physically zero under (FQ).
 
 The spectrum $\mathrm{Spec}(\mathcal{C}(R_S)) = \{r_1, \ldots, r_N\}$ is the discrete set of macroscopic spot positions. States on $\mathcal{C}(R_S)$ are probability distributions $\{p_k\}$ over spots.
 
 ### 9A.2 Per-record cost and the branch-summed cost for the screen
 
-For each spot position $r_k$, define the per-record cost $c_{R_S}(r_k)$ as the Zurek-style physical entropy of the macroscopic record — combining the algorithmic complexity of the macroscopic description (which spot, with what apparatus state) and the residual microscopic entropy of the screen + environment configuration consistent with that record.
+For each spot position $r_k$, define the per-record cost $c_{R_S}(r_k)$ as the Zurek-style physical entropy of the macroscopic record, combining the algorithmic complexity of the macroscopic description (which spot, with what apparatus state) and the residual microscopic entropy of the screen + environment configuration consistent with that record.
 
 For a regional state $\omega_{R_S}$ with spot probabilities $p_k = \omega_{R_S}(P_k)$, the smooth active set $\mathcal{A}_\epsilon(\omega_{R_S})$ is the smallest set of spots carrying total probability $\ge 1 - \epsilon$. The **branch-summed record cost** is:
 $$I_\Sigma^\epsilon[\omega_{R_S}] = \sum_{r \in \mathcal{A}_\epsilon} c_{R_S}(r)$$
@@ -469,35 +469,35 @@ is the framework's new physical postulate. It is **not** a theorem of standard h
 Under this superselection rule:
 - The physical state space $\mathcal{H}_{\rm phys}$ excludes universal wave functions whose induced regional state on the screen has $I_\Sigma > Q_{R_S}$
 - The maximum number of coexisting macroscopic spot records in any physical state is $N_{\max} \approx \lfloor Q_{R_S}/I_0 \rfloor$
-- In the regime where each macroscopic record approximately saturates the regional capacity (e.g., the screen substrate has thermal entropy comparable to its holographic capacity at relevant scales), $N_{\max} = 1$ — **only single-spot states are physically realizable on the screen**
+- In the regime where each macroscopic record approximately saturates the regional capacity (e.g., the screen substrate has thermal entropy comparable to its holographic capacity at relevant scales), $N_{\max} = 1$, **only single-spot states are physically realizable on the screen**
 
 ### 9A.4 Per run: one spot, as a kinematic consequence
 
-In any specific run, the universal wave function (within $\mathcal{H}_{\rm phys}$) has its induced state on $\mathcal{C}(R_S)$ supported on a single spot. This is not because of dynamical collapse, not because of branch selection from many physically real branches, but because **multi-spot states are not in the physical state space** — they would violate the superselection rule.
+In any specific run, the universal wave function (within $\mathcal{H}_{\rm phys}$) has its induced state on $\mathcal{C}(R_S)$ supported on a single spot. This is not because of dynamical collapse, not because of branch selection from many physically real branches, but because **multi-spot states are not in the physical state space**, they would violate the superselection rule.
 
-Which specific spot is realized depends on the actual physical initial conditions of the screen + environment at the moment of detection (the actual microscopic configuration of screen atoms, vacuum fluctuations, environmental modes). The physical Hamiltonian — constrained to preserve $\mathcal{H}_{\rm phys}$ — takes specific initial conditions to a specific single-spot final state.
+Which specific spot is realized depends on the actual physical initial conditions of the screen + environment at the moment of detection (the actual microscopic configuration of screen atoms, vacuum fluctuations, environmental modes). The physical Hamiltonian, constrained to preserve $\mathcal{H}_{\rm phys}$, takes specific initial conditions to a specific single-spot final state.
 
 ### 9A.5 The Everett-branch question dissolved by superselection
 
-The often-asked question "which Everett branch is realized in this run?" doesn't arise as a foundational puzzle under the superselection rule. The "Everett branches" of an unrestricted-Hilbert-space superposition $\sum_k c_k |x_k\rangle|S_k\rangle|E_k\rangle$ correspond to a multi-spot state with $I_\Sigma > Q_{R_S}$ — this state is **not in the physical state space**. The unrestricted Hilbert-space formalism allows writing such states mathematically, but they don't exist physically.
+The often-asked question "which Everett branch is realized in this run?" doesn't arise as a foundational puzzle under the superselection rule. The "Everett branches" of an unrestricted-Hilbert-space superposition $\sum_k c_k |x_k\rangle|S_k\rangle|E_k\rangle$ correspond to a multi-spot state with $I_\Sigma > Q_{R_S}$, this state is **not in the physical state space**. The unrestricted Hilbert-space formalism allows writing such states mathematically, but they don't exist physically.
 
 The physical Hamiltonian (which preserves $\mathcal{H}_{\rm phys}$) does not generate multi-branch states from single-record initial conditions. The unitary mapping $(a|0\rangle + b|1\rangle)|S_0\rangle \mapsto a|0\rangle|S_0\rangle + b|1\rangle|S_1\rangle$ that standard textbook QM writes is the *unrestricted Hilbert-space* mapping; the *physical Hamiltonian's* action is constrained to single-record final states. Which specific final state is realized is determined by the specific actual initial conditions.
 
 ### 9A.5b The operational answer to the linear measurement obstruction
 
-A standard objection: "By linearity, $U(\alpha|0\rangle + \beta|1\rangle)|S_{\rm ready}\rangle = \alpha|0\rangle|S_0\rangle + \beta|1\rangle|S_1\rangle$ — exactly the multi-record state the framework wants to forbid."
+A standard objection: "By linearity, $U(\alpha|0\rangle + \beta|1\rangle)|S_{\rm ready}\rangle = \alpha|0\rangle|S_0\rangle + \beta|1\rangle|S_1\rangle$, exactly the multi-record state the framework wants to forbid."
 
 This objection assumes that the unrestricted-Hilbert-space wave function is the physically primary object that we have direct access to. The framework denies this.
 
-**We never have direct physical access to amplitudes of the universal wave function.** We have access only to the macroscopic record content on the screen — which is itself a complex quantum system with $\sim 10^{20}$–$10^{25}$ degrees of freedom, entangled with the particle. When decoherence acts on the joint particle + screen + environment system, the cross-overlaps between distinct macroscopic record states become exponentially small:
+**We never have direct physical access to amplitudes of the universal wave function.** We have access only to the macroscopic record content on the screen, which is itself a complex quantum system with $\sim 10^{20}$–$10^{25}$ degrees of freedom, entangled with the particle. When decoherence acts on the joint particle + screen + environment system, the cross-overlaps between distinct macroscopic record states become exponentially small:
 $$\langle E_0 | E_1 \rangle \sim e^{-\Gamma t} \sim e^{-10^{20}}$$
 on physically realistic detection timescales. Under (FQ), these exponentially-small off-diagonal coherence terms are *physically zero* (§7.3 makes this rigorous via the (FQ) precision floor applied to the regional algebra-state).
 
-At the level of physically observable content on the screen, the formal "multi-record state" $\alpha|S_0\rangle + \beta|S_1\rangle$ is therefore *exponentially close to a strict classical mixture* — and under (FQ), exactly a strict classical mixture. The off-diagonal phase coherence that would distinguish the formal multi-record state from a classical mixture is below the precision the regional substrate can encode.
+At the level of physically observable content on the screen, the formal "multi-record state" $\alpha|S_0\rangle + \beta|S_1\rangle$ is therefore *exponentially close to a strict classical mixture*, and under (FQ), exactly a strict classical mixture. The off-diagonal phase coherence that would distinguish the formal multi-record state from a classical mixture is below the precision the regional substrate can encode.
 
-**The physical reality of the screen's macroscopic content** — what's actually displayed on the screen, what cameras would record, what an observer would see — is what we have access to. That content is a classical mixture, not a coherent superposition. The superselection rule then forbids even this classical mixture for sufficiently saturating records.
+**The physical reality of the screen's macroscopic content**, what's actually displayed on the screen, what cameras would record, what an observer would see, is what we have access to. That content is a classical mixture, not a coherent superposition. The superselection rule then forbids even this classical mixture for sufficiently saturating records.
 
-What actually happens per run: the physical Hamiltonian (constrained to preserve $\mathcal{H}_{\rm phys}$), acting on the actual initial conditions of the screen + environment in that specific run, produces one specific macroscopic record on the screen. Different runs with different actual initial conditions produce different actual records. The standard "linear measurement obstruction" describes what an unconstrained unitary would do at the mathematical Hilbert-space level — but that's not what the actual physical Hamiltonian does, and it's not what we have physical access to anyway.
+What actually happens per run: the physical Hamiltonian (constrained to preserve $\mathcal{H}_{\rm phys}$), acting on the actual initial conditions of the screen + environment in that specific run, produces one specific macroscopic record on the screen. Different runs with different actual initial conditions produce different actual records. The standard "linear measurement obstruction" describes what an unconstrained unitary would do at the mathematical Hilbert-space level, but that's not what the actual physical Hamiltonian does, and it's not what we have physical access to anyway.
 
 ### 9A.6 The Born statistics across runs
 
@@ -515,9 +515,9 @@ The framework gives a complete structural account of single-spot per run + Born 
 
 3. **Branch-Summed Holographic Bound** as a new physical postulate. Connection to deeper finite-information constraints in quantum gravity is conjectural.
 
-4. **Characterization of physical Hamiltonians** for the screen + environment system — which Hermitian operators preserve $\mathcal{H}_{\rm phys}$? The constrained dynamics formalism is analogous to gauge theory.
+4. **Characterization of physical Hamiltonians** for the screen + environment system, which Hermitian operators preserve $\mathcal{H}_{\rm phys}$? The constrained dynamics formalism is analogous to gauge theory.
 
-5. **Born typicality theorem** under the constrained dynamics — the typicality measure on actual screen + environment initial conditions that reproduces the Born weights as realized-spot frequencies.
+5. **Born typicality theorem** under the constrained dynamics, the typicality measure on actual screen + environment initial conditions that reproduces the Born weights as realized-spot frequencies.
 
 Each of these is a concrete open problem; together they constitute the framework's explicit research program beyond the borrowed CPW/Witten scaffolding.
 
@@ -543,7 +543,7 @@ Current best theoretical estimate from Zurek physical entropy of macroscopic rec
 1. There IS a definite scale where macroscopic superpositions become physically impossible
 2. This scale is set by the ratio $Q_R/I_0$
 3. $I_0$ is an experimental parameter; once calibrated against one boundary observation, the framework predicts the boundary at all other scales
-4. The framework distinguishes itself from GRW empirically: GRW predicts stochastic collapse events with rate $\lambda$ producing tiny localization signals (e.g., heating of bulk matter); QIQT-H predicts kinematic exclusion with no stochastic signal — only the boundary itself
+4. The framework distinguishes itself from GRW empirically: GRW predicts stochastic collapse events with rate $\lambda$ producing tiny localization signals (e.g., heating of bulk matter); QIQT-H predicts kinematic exclusion with no stochastic signal, only the boundary itself
 5. The framework converges to standard QM in any regime where $N \cdot I_0 \ll Q_R$
 
 This makes the framework empirically testable in a clean way: find the empirical scale at which macroscopic superpositions break down; set $I_0$ to match this scale; predict boundary behavior at other scales; distinguish QIQT-H from GRW via absence of stochastic signal.
@@ -567,7 +567,7 @@ where the $S_k^A, S_k^B$ and $E_k^A, E_k^B$ states include the path-detector cor
 When we trace over the path-detector + environment (i.e., compute the reduced state on the screen-position algebra), the off-diagonal terms in path are suppressed by decoherence:
 $$\rho_{\rm screen}(x, x') = \frac{1}{2}\left[\psi_A(x)\psi_A^*(x') + \psi_B(x)\psi_B^*(x')\right] \cdot \delta_{xx'} \text{ (approx)}.$$
 
-The interference term between $\psi_A$ and $\psi_B$ — the cross term $\psi_A^*\psi_B$ — is absent because of the path-detector correlation. The screen position distribution is:
+The interference term between $\psi_A$ and $\psi_B$, the cross term $\psi_A^*\psi_B$, is absent because of the path-detector correlation. The screen position distribution is:
 $$P_{\rm screen}(x) = \frac{1}{2}|\psi_A(x)|^2 + \frac{1}{2}|\psi_B(x)|^2.$$
 
 No interference fringes. This is the standard "which-path" result.
@@ -618,9 +618,9 @@ QIQT-H: "The per-run wave function on the screen region is physically a single-r
 
 Bohm: "The particle has a definite position at all times, guided by the wave function. The position determines which spot is hit. The wave function passes through both slits; the particle goes through one. There are two ontological layers: the wave function and the particle position."
 
-QIQT-H: "The wave function is the only ontology. The per-run universal wave function is the actual physical state of the universe in any specific run; the formal wave function is the textbook ensemble descriptor. In any specific run, the per-run wave function is concentrated on one branch of the post-decoherence + (FQ) classical mixture — and which branch is realized is determined by what the per-run wave function physically is. No particles, no separate position ontology, no guidance equation."
+QIQT-H: "The wave function is the only ontology. The per-run universal wave function is the actual physical state of the universe in any specific run; the formal wave function is the textbook ensemble descriptor. In any specific run, the per-run wave function is concentrated on one branch of the post-decoherence + (FQ) classical mixture, and which branch is realized is determined by what the per-run wave function physically is. No particles, no separate position ontology, no guidance equation."
 
-**The difference:** Bohm adds primitive particle positions as a second ontological layer. QIQT-H is **ψ-monist** — only the wave function exists. The framework's contribution is the distinction between the formal wave function (ensemble descriptor) and the per-run wave function (actual physical state), not the addition of a second ontology.
+**The difference:** Bohm adds primitive particle positions as a second ontological layer. QIQT-H is **ψ-monist**, only the wave function exists. The framework's contribution is the distinction between the formal wave function (ensemble descriptor) and the per-run wave function (actual physical state), not the addition of a second ontology.
 
 ### 11.4 Decoherence-without-collapse accounts
 
@@ -654,14 +654,14 @@ In the QIQT-H reading, "collapse" is not a dynamical event. It is the *structura
 - **Per-run concentration** (per-run dynamics with specific microscopic IC): in any specific run, the amplification cascade drives the per-run regional state to concentrate on one record.
 - **(FQ) precision floor** (foundational postulate): concentrated amplitudes below the floor are physically equivalent to zero; the per-run wave function physically *is* a single-record state.
 
-The Schrödinger / Heisenberg evolution of the underlying field algebra is preserved exactly. The "collapse" is what the standard textbook observes from outside the framework: a single spot appears on the screen, the wave function "seems to" jump from a continuous superposition to a localized state. In the framework, what is really happening is that the per-run wave function on the screen region is, after detection, physically a single-record state — the apparent "jump" is just the recognition that the per-run wave function was always (per the foundational postulate) a finite-precision physical state, and after concentration it is physically a single record.
+The Schrödinger / Heisenberg evolution of the underlying field algebra is preserved exactly. The "collapse" is what the standard textbook observes from outside the framework: a single spot appears on the screen, the wave function "seems to" jump from a continuous superposition to a localized state. In the framework, what is really happening is that the per-run wave function on the screen region is, after detection, physically a single-record state, the apparent "jump" is just the recognition that the per-run wave function was always (per the foundational postulate) a finite-precision physical state, and after concentration it is physically a single record.
 
 ### 12.3 What remains open: the math status
 
 The framework's account of the double-slit relies on:
-- The (FQ) precision floor with quantitative form $\epsilon(R)$ — qualitative existence follows from the foundational postulate; quantitative form is open
-- Decoherence + (FQ) yielding strict classical mixture on the regional algebra — argued qualitatively with numerical scaling; not yet a formal theorem
-- The Born-typicality theorem (the appropriate measure on actual initial conditions across actual runs yields Born weights) — sketched here, rigorous proof open
+- The (FQ) precision floor with quantitative form $\epsilon(R)$, qualitative existence follows from the foundational postulate; quantitative form is open
+- Decoherence + (FQ) yielding strict classical mixture on the regional algebra, argued qualitatively with numerical scaling; not yet a formal theorem
+- The Born-typicality theorem (the appropriate measure on actual initial conditions across actual runs yields Born weights), sketched here, rigorous proof open
 
 **Mathematical status of the framework, honestly characterized:**
 
@@ -678,13 +678,13 @@ The framework's account of the double-slit relies on:
 
 The framework has the *scaffolding* (Type II algebras from CPW/Witten) and the *axiom* ((FQ) literal reading). Qualitative consequences are worked out. Explicit theorems for the central claims are open.
 
-This is the status of a research program with concrete, well-defined open problems — not the status of a completed mathematical theory. Each open problem can be attacked by an analyst willing to engage with algebraic QFT and foundations of QM.
+This is the status of a research program with concrete, well-defined open problems, not the status of a completed mathematical theory. Each open problem can be attacked by an analyst willing to engage with algebraic QFT and foundations of QM.
 
 The present worked example demonstrates that *if the open problems are resolved*, the framework gives a complete and structurally clean account of the double-slit. It does not constitute a rigorous proof of the framework's resolution of the measurement problem; it demonstrates the *structure* of that resolution on a concrete textbook case.
 
 ### 12.4 The take-home
 
-The double-slit experiment, the textbook archetype of "wave-particle duality" and "collapse," is in the QIQT-H framework simply a worked example of finite physical specification precision applied to wave-function instantiation in bounded spacetime regions. The wave-like pattern is what the wave function physically *is*; the particle-like spot is the per-run physical state after concentration + (FQ) precision floor; the Born statistics across runs reproduce the interference pattern. There is no duality, no collapse, no mystery — only the literal physical-instantiation reading of the holographic information bound, applied carefully to a regional Type II algebra with proper attention to per-run vs ensemble structure.
+The double-slit experiment, the textbook archetype of "wave-particle duality" and "collapse," is in the QIQT-H framework simply a worked example of finite physical specification precision applied to wave-function instantiation in bounded spacetime regions. The wave-like pattern is what the wave function physically *is*; the particle-like spot is the per-run physical state after concentration + (FQ) precision floor; the Born statistics across runs reproduce the interference pattern. There is no duality, no collapse, no mystery, only the literal physical-instantiation reading of the holographic information bound, applied carefully to a regional Type II algebra with proper attention to per-run vs ensemble structure.
 
 ---
 

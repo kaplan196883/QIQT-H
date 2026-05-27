@@ -1,6 +1,6 @@
 # A Tutorial on QIQT-H
 
-*How holographic finite-information constraints can — in principle — address the measurement problem of quantum mechanics, without adding collapses, worlds as separate substances, or hidden trajectories.*
+*How holographic finite-information constraints can, in principle, address the measurement problem of quantum mechanics, without adding collapses, worlds as separate substances, or hidden trajectories.*
 
 > **Important status note.** QIQT-H, as presented here, is a research-program framework, not an established theory like standard quantum mechanics or quantum field theory. The goal of this tutorial is not to claim that QIQT-H is already correct. The goal is to explain the pieces: what the mathematical ingredients mean, why they are being used, and how they are supposed to fit together.
 
@@ -71,7 +71,7 @@ $$
 |\psi\rangle = \alpha |\uparrow\rangle + \beta |\downarrow\rangle.
 $$
 
-A measuring device begins in a ready state $|M_0\rangle$ (pointer at zero, nothing recorded yet). We assume a *good* measurement coupling: if the spin is definitely $|\uparrow\rangle$, the device evolves to a macroscopically distinct pointer state $|M_\uparrow\rangle$ — "pointer reads up" — and similarly $|\downarrow\rangle|M_0\rangle \longrightarrow |\downarrow\rangle|M_\downarrow\rangle$ with $|M_\downarrow\rangle$ being "pointer reads down." The two pointer states are orthogonal,
+A measuring device begins in a ready state $|M_0\rangle$ (pointer at zero, nothing recorded yet). We assume a *good* measurement coupling: if the spin is definitely $|\uparrow\rangle$, the device evolves to a macroscopically distinct pointer state $|M_\uparrow\rangle$, "pointer reads up", and similarly $|\downarrow\rangle|M_0\rangle \longrightarrow |\downarrow\rangle|M_\downarrow\rangle$ with $|M_\downarrow\rangle$ being "pointer reads down." The two pointer states are orthogonal,
 
 $$
 \langle M_\uparrow | M_\downarrow \rangle = 0,
@@ -174,7 +174,7 @@ $$
 D_N \equiv \langle E_\downarrow^{(N)} | E_\uparrow^{(N)}\rangle = \prod_{k=1}^N \langle e_\downarrow^{(k)} | e_\uparrow^{(k)}\rangle.
 $$
 
-This is the product formula. It is not a new postulate — it follows from many independent scattering records. Each scattered photon or molecule may carry only a tiny amount of which-branch information, but the information accumulates *multiplicatively*.
+This is the product formula. It is not a new postulate, it follows from many independent scattering records. Each scattered photon or molecule may carry only a tiny amount of which-branch information, but the information accumulates *multiplicatively*.
 
 Suppose each event reduces the squared overlap by a small amount, $|\langle e_\downarrow^{(k)} | e_\uparrow^{(k)}\rangle|^2 = 1 - \eta$, and events arrive at rate $\gamma$, so $N(t) \simeq \gamma t$. Then
 
@@ -184,7 +184,7 @@ $$
 \qquad t_D = \Lambda^{-1}.
 $$
 
-This $t_D$ is the **decoherence time**. For a macroscopic pointer in an ordinary environment it is usually fantastically short — the original Joos-Zeh 1985 collisional-decoherence calculation gives $t_D \sim 10^{-30}\,\mathrm{s}$ for a dust grain in air. Decoherence is fast.
+This $t_D$ is the **decoherence time**. For a macroscopic pointer in an ordinary environment it is usually fantastically short, the original Joos-Zeh 1985 collisional-decoherence calculation gives $t_D \sim 10^{-30}\,\mathrm{s}$ for a dust grain in air. Decoherence is fast.
 
 The effect is seen by tracing out the environment. Using an orthonormal basis $\{|r\rangle\}$ for $E$,
 
@@ -202,7 +202,7 @@ The diagonal terms are the apparent alternatives. The off-diagonal terms are the
 
 This statement is basis-dependent. Decoherence suppresses interference in the basis that the environment *monitors*. For a measuring device this is a basis of robust **pointer states**: macroscopically distinct positions, currents, tracks, or records. Zurek calls this environmental selection of stable states **einselection**, and we return to it in §6.
 
-But nothing has collapsed. The full state of spin, apparatus, and environment is still a pure entangled state. Decoherence explains why branches stop interfering for local observers — but it does **not** choose one outcome. It gives an apparent classical branching structure. The measurement problem remains:
+But nothing has collapsed. The full state of spin, apparatus, and environment is still a pure entangled state. Decoherence explains why branches stop interfering for local observers, but it does **not** choose one outcome. It gives an apparent classical branching structure. The measurement problem remains:
 
 > Why do I experience one branch rather than a superposition of branches?
 
@@ -218,7 +218,7 @@ But gravity changes that.
 
 If you pack too much energy into a region, the region collapses into a black hole.
 
-Here is the standard textbook calculation of the black-hole entropy. It is not the full Hawking 1975 derivation — that requires quantum field theory in curved spacetime — but it uses Hawking's main result, the temperature of the horizon, plus ordinary thermodynamics, and arrives at the right answer.
+Here is the standard textbook calculation of the black-hole entropy. It is not the full Hawking 1975 derivation, that requires quantum field theory in curved spacetime, but it uses Hawking's main result, the temperature of the horizon, plus ordinary thermodynamics, and arrives at the right answer.
 
 For a Schwarzschild black hole of mass $M$, the Hawking temperature is
 
@@ -320,7 +320,7 @@ This is the “H” in QIQT-H: holographic.
 
 Before we talk about holographic information constraints, we need to review several kinds of entropy.
 
-Why several? Because "how much information is in a distribution?" is not one question — it is many. *On average, how surprising is a draw?* *How many outcomes are possible at all?* *How peaked is the worst-case outcome?* *Can we ignore vanishingly tiny tails?* Each of these legitimate questions gets its own entropy. In QIQT-H different parts of the framework care about different ones: the holographic bound is most naturally a bound on the **number of distinguishable record alternatives**, not on average surprise — so we will eventually need a *support-counting* entropy rather than Shannon. To see why, we need the full menu.
+Why several? Because "how much information is in a distribution?" is not one question, it is many. *On average, how surprising is a draw?* *How many outcomes are possible at all?* *How peaked is the worst-case outcome?* *Can we ignore vanishingly tiny tails?* Each of these legitimate questions gets its own entropy. In QIQT-H different parts of the framework care about different ones: the holographic bound is most naturally a bound on the **number of distinguishable record alternatives**, not on average surprise, so we will eventually need a *support-counting* entropy rather than Shannon. To see why, we need the full menu.
 
 ## 4.1 Shannon entropy
 
@@ -330,7 +330,7 @@ $$
 H(p) = -\sum_i p_i \log p_i.
 $$
 
-It measures the expected surprise of a draw from the distribution — equivalently, the average number of bits needed to encode an outcome. It is the right entropy when you care about *typical* behaviour: thermodynamics, source coding, channel capacity. Its weakness for our purposes is that it almost ignores rare outcomes — a tiny tail probability barely affects $H$, even though the corresponding outcome is *still physically possible*.
+It measures the expected surprise of a draw from the distribution, equivalently, the average number of bits needed to encode an outcome. It is the right entropy when you care about *typical* behaviour: thermodynamics, source coding, channel capacity. Its weakness for our purposes is that it almost ignores rare outcomes, a tiny tail probability barely affects $H$, even though the corresponding outcome is *still physically possible*.
 
 Example:
 
@@ -354,7 +354,7 @@ Shannon entropy cares about probabilities.
 
 ## 4.2 Von Neumann entropy
 
-Shannon entropy takes a probability distribution as input. In quantum mechanics the fundamental object is not a probability distribution but a *density matrix* $\rho$ — possibly carrying coherences between basis states. We need a quantum analogue.
+Shannon entropy takes a probability distribution as input. In quantum mechanics the fundamental object is not a probability distribution but a *density matrix* $\rho$, possibly carrying coherences between basis states. We need a quantum analogue.
 
 For a density matrix $\rho$, the quantum entropy is
 
@@ -408,16 +408,16 @@ $$
 
 with the boundary cases understood as limits. Two values matter for QIQT-H:
 
-- $\alpha \to 0$: take the one-sided limit $\alpha \to 0^+$ inside the sum. For $p_i > 0$, $p_i^\alpha \to 1$; for $p_i = 0$, $0^\alpha = 0$ for every $\alpha > 0$, so the limit is $0$. Hence each nonzero outcome contributes a $1$ and $H_0 = \log|\mathrm{supp}(p)|$ — *counts possibilities*.
-- $\alpha \to 1$: recovers Shannon entropy — *typical behaviour*.
+- $\alpha \to 0$: take the one-sided limit $\alpha \to 0^+$ inside the sum. For $p_i > 0$, $p_i^\alpha \to 1$; for $p_i = 0$, $0^\alpha = 0$ for every $\alpha > 0$, so the limit is $0$. Hence each nonzero outcome contributes a $1$ and $H_0 = \log|\mathrm{supp}(p)|$, *counts possibilities*.
+- $\alpha \to 1$: recovers Shannon entropy, *typical behaviour*.
 
-(Other choices exist — $\alpha = 2$ gives the collision entropy $H_2 = -\log\sum_i p_i^2$, and $\alpha \to \infty$ gives the min-entropy $H_\infty = -\log\max_i p_i$ — but QIQT-H does not use them.)
+(Other choices exist, $\alpha = 2$ gives the collision entropy $H_2 = -\log\sum_i p_i^2$, and $\alpha \to \infty$ gives the min-entropy $H_\infty = -\log\max_i p_i$, but QIQT-H does not use them.)
 
 The holographic capacity is about *distinguishable possibilities*, not average surprise, so the central QIQT-H quantity will be built from $\alpha = 0$. Shannon ($\alpha = 1$) reappears on the *other* side of the bound, inside the generalized entropy.
 
 ## 4.4 Rényi-0 entropy: counting possible outcomes
 
-The expression $p_i^0$ is fine for $p_i > 0$ but ambiguous when $p_i = 0$, since $0^0$ is undefined. If we naively extended $x^0 = 1$ to the zero bins as well, we would get $H_0 = \log N$ where $N$ is the number of *formal* bins listed — including ones that cannot occur. That number depends on how we wrote down the distribution, not on its physical content. Useless.
+The expression $p_i^0$ is fine for $p_i > 0$ but ambiguous when $p_i = 0$, since $0^0$ is undefined. If we naively extended $x^0 = 1$ to the zero bins as well, we would get $H_0 = \log N$ where $N$ is the number of *formal* bins listed, including ones that cannot occur. That number depends on how we wrote down the distribution, not on its physical content. Useless.
 
 Strictly, $H_0$ is defined by the outer limit
 
@@ -439,7 +439,7 @@ $$
 
 This is called the **support entropy**.
 
-This is the same kind of limit convention used to define Shannon entropy, where one writes $0\log 0 := \lim_{p \to 0^+} p\log p = 0$. Boundary cases are *not* arbitrary algebraic conventions — they are forced by continuity.
+This is the same kind of limit convention used to define Shannon entropy, where one writes $0\log 0 := \lim_{p \to 0^+} p\log p = 0$. Boundary cases are *not* arbitrary algebraic conventions, they are forced by continuity.
 
 The crucial feature: **$H_0$ depends only on which outcomes are possible, not on how likely they are**. Once a probability is nonzero, $H_0$ does not care whether it is $0.99$ or $10^{-30}$. That is exactly the feature QIQT-H wants when it asks "how many physically distinguishable records does this state admit?"
 
@@ -489,7 +489,7 @@ $$
 N_q = \exp(H_q^{\rm nat}) = \left(\sum_i p_i^q\right)^{1/(1-q)}.
 $$
 
-This is the **effective number of outcomes** — measured in the same units as "number of species" or "number of records."
+This is the **effective number of outcomes**, measured in the same units as "number of species" or "number of records."
 
 The Shannon case ($q = 1$) is
 
@@ -561,7 +561,7 @@ This is useful when tiny tails are physically irrelevant.
 
 QIQT-H often uses a support-like entropy because it wants to count possible records, while smoothing avoids being dominated by absurdly tiny amplitudes.
 
-To summarise the menu: **Shannon and von Neumann** measure average surprise / mixedness — natural for thermodynamics and entanglement, but blind to small-amplitude possibilities. **Rényi-α** lets us slide between possibility-counting ($\alpha \to 0$) and worst-case ($\alpha \to \infty$). **Rényi-0**, sharpened by **smooth support**, is the right tool when we want to ask "how many physically realisable records does this state describe?" That is the entropy the holographic bound naturally constrains.
+To summarise the menu: **Shannon and von Neumann** measure average surprise / mixedness, natural for thermodynamics and entanglement, but blind to small-amplitude possibilities. **Rényi-α** lets us slide between possibility-counting ($\alpha \to 0$) and worst-case ($\alpha \to \infty$). **Rényi-0**, sharpened by **smooth support**, is the right tool when we want to ask "how many physically realisable records does this state describe?" That is the entropy the holographic bound naturally constrains.
 
 ---
 
@@ -713,7 +713,7 @@ $$
 \alpha|0\rangle|E_0(t)\rangle + \beta|1\rangle|E_1(t)\rangle.
 $$
 
-The system and environment are now entangled. Once $\langle E_0(t) | E_1(t)\rangle \to 0$ — by the product-of-overlaps mechanism of §2 — the reduced system state is decohered in the $\sigma_z$ basis. So the pointer basis is the $\sigma_z$ eigenbasis.
+The system and environment are now entangled. Once $\langle E_0(t) | E_1(t)\rangle \to 0$, by the product-of-overlaps mechanism of §2, the reduced system state is decohered in the $\sigma_z$ basis. So the pointer basis is the $\sigma_z$ eigenbasis.
 
 **Concrete realization: dephasing by bath spins.** Let the environment be a single bath spin and let $B_E = \sigma_z^{(1)}$, so
 
@@ -721,7 +721,7 @@ $$
 H_{\rm int} = g\,\sigma_z \otimes \sigma_z^{(1)}.
 $$
 
-This is the simplest spin-environment model. Prepare the bath in $|+\rangle_1 = (|0\rangle_1 + |1\rangle_1)/\sqrt{2}$ — a state carrying no initial information about $s$. A short calculation gives
+This is the simplest spin-environment model. Prepare the bath in $|+\rangle_1 = (|0\rangle_1 + |1\rangle_1)/\sqrt{2}$, a state carrying no initial information about $s$. A short calculation gives
 
 $$
 |E_0(t)\rangle = \tfrac{1}{\sqrt{2}}\!\left(e^{-igt/\hbar}|0\rangle_1 + e^{+igt/\hbar}|1\rangle_1\right), \quad
@@ -740,7 +740,7 @@ $$
 \langle E_0(t) | E_1(t)\rangle = \prod_{k=1}^N \cos\!\left(\frac{2 g_k t}{\hbar}\right).
 $$
 
-For generic incommensurate $g_k$ and large $N$ this drops to essentially zero almost immediately and stays there — the dephasing version of the product formula from §2. Decoherence in the $\sigma_z$ basis is just many bath spins independently dephasing the system superposition.
+For generic incommensurate $g_k$ and large $N$ this drops to essentially zero almost immediately and stays there, the dephasing version of the product formula from §2. Decoherence in the $\sigma_z$ basis is just many bath spins independently dephasing the system superposition.
 
 The standard criterion says the same thing in one line. **Pointer states are eigenstates of any system observable $A$ that commutes with the system part of the interaction**:
 
@@ -758,7 +758,7 @@ $$
 
 then the commuting observable is $\sigma_x$, and the pointer basis is the $\sigma_x$ eigenbasis.
 
-In real measurements, the pointer basis is almost always **position-like**: macroscopic pointer positions, detector currents, cloud-chamber tracks, spots on a screen. The reason is that most physical interactions are local in position — scattering, electromagnetic coupling, mass-density coupling all depend on *where* things are. So position commutes (approximately) with the interaction Hamiltonian, and position eigenstates are the natural pointer states.
+In real measurements, the pointer basis is almost always **position-like**: macroscopic pointer positions, detector currents, cloud-chamber tracks, spots on a screen. The reason is that most physical interactions are local in position, scattering, electromagnetic coupling, mass-density coupling all depend on *where* things are. So position commutes (approximately) with the interaction Hamiltonian, and position eigenstates are the natural pointer states.
 
 Pointer states are not magical. They are the states that the system-environment interaction monitors.
 
@@ -1062,9 +1062,9 @@ $$
 
 If the admissible set contains essentially all Born-weight-relevant histories, this reduces to ordinary quantum mechanics.
 
-**Caveat.** This renormalization formula is only consistent if the admissibility rule $\mathcal{H}_{\rm adm}$ is stable under coarse-graining and compatible with causal localization. A naive global-budget formulation would *fail* — it would let a distant experimenter's choice affect a local experimenter's marginal probabilities. The framework's resolution is the **modular-local reformulation** of §8.4 below: admissibility is imposed on each region separately, not as a joint cap. Under that reformulation no-signaling is automatic (§8.4 makes this precise).
+**Caveat.** This renormalization formula is only consistent if the admissibility rule $\mathcal{H}_{\rm adm}$ is stable under coarse-graining and compatible with causal localization. A naive global-budget formulation would *fail*, it would let a distant experimenter's choice affect a local experimenter's marginal probabilities. The framework's resolution is the **modular-local reformulation** of §8.4 below: admissibility is imposed on each region separately, not as a joint cap. Under that reformulation no-signaling is automatic (§8.4 makes this precise).
 
-Born-weight equivariance — the statement that the renormalized weights still reduce to $|c_k|^2$ under admissibility conditioning — is the framework's remaining major open problem (analogous to Bohmian $|\psi|^2$-equivariance, §22). In ordinary laboratory regimes where the bound is far from saturation, the equivariance holds trivially because the admissibility predicate is vacuous and $P_{\rm QIQT}(h) = w(h)$ exactly.
+Born-weight equivariance, the statement that the renormalized weights still reduce to $|c_k|^2$ under admissibility conditioning, is the framework's remaining major open problem (analogous to Bohmian $|\psi|^2$-equivariance, §22). In ordinary laboratory regimes where the bound is far from saturation, the equivariance holds trivially because the admissibility predicate is vacuous and $P_{\rm QIQT}(h) = w(h)$ exactly.
 
 ## 8.3 Why this might help the measurement problem
 
@@ -1082,15 +1082,15 @@ The hope is to get:
 - ordinary quantum predictions in normal experiments,
 - new constraints when gravitational entropy bounds matter.
 
-**Why ordinary lab measurements don't immediately violate the bound — and what this exposes.** A natural worry: a single lab does thousands of measurements per second; surely these would quickly violate any branch-summed bound? The answer is that the area term $A/(4G\hbar)$ for a one-meter region is fantastically large — of order $10^{69}$–$10^{70}$ in natural units. Ordinary laboratory records occupy a negligible fraction of this capacity. Therefore QIQT-H, if correct, must reproduce standard quantum mechanics in ordinary non-gravitational laboratory regimes — the constraint is operationally vacuous there.
+**Why ordinary lab measurements don't immediately violate the bound, and what this exposes.** A natural worry: a single lab does thousands of measurements per second; surely these would quickly violate any branch-summed bound? The answer is that the area term $A/(4G\hbar)$ for a one-meter region is fantastically large, of order $10^{69}$–$10^{70}$ in natural units. Ordinary laboratory records occupy a negligible fraction of this capacity. Therefore QIQT-H, if correct, must reproduce standard quantum mechanics in ordinary non-gravitational laboratory regimes, the constraint is operationally vacuous there.
 
-**However, this also exposes an important open issue.** If the holographic constraint is far from saturation in ordinary measurements, then the constraint alone does not by itself select a unique laboratory outcome. An ordinary Stern-Gerlach measurement would still have, in principle, an admissible multi-record decohered structure within the bound — yet experimentally one observes one outcome. QIQT-H must therefore explain definite ordinary outcomes through *some additional global admissibility of record histories*, not through simple local saturation of the holographic budget. Making that global selection rule precise is one of the framework's central open problems (see §28).
+**However, this also exposes an important open issue.** If the holographic constraint is far from saturation in ordinary measurements, then the constraint alone does not by itself select a unique laboratory outcome. An ordinary Stern-Gerlach measurement would still have, in principle, an admissible multi-record decohered structure within the bound, yet experimentally one observes one outcome. QIQT-H must therefore explain definite ordinary outcomes through *some additional global admissibility of record histories*, not through simple local saturation of the holographic budget. Making that global selection rule precise is one of the framework's central open problems (see §28).
 
 The honest picture: the Branch-Summed Bound predicts a definite quantum-to-classical *boundary scale*, above which multi-record structures are kinematically excluded. Below that scale, the bound is operationally vacuous, and the framework needs an additional global admissibility mechanism to recover ordinary single-outcome experience. The current research program proposes the bound but does not yet supply the global mechanism. The tutorial should be read with this caveat throughout.
 
 ## 8.4 The modular-local reformulation (why no-signaling works)
 
-The "branch-summed" picture above is intuitive, but as stated it has a subtle problem. When Alice and Bob measure entangled particles at spacelike separation and their records are later compared in a *joint region* $D_{AB}$, the joint region has its own holographic budget. If the branch-summed cost in $D_{AB}$ is treated as "Alice's record bits + Bob's record bits", then Bob's choice of measurement can in principle affect how much budget is available for Alice's outcomes — and Alice would see her marginal statistics shift depending on what Bob did. That is **superluminal signaling**, which relativity forbids.
+The "branch-summed" picture above is intuitive, but as stated it has a subtle problem. When Alice and Bob measure entangled particles at spacelike separation and their records are later compared in a *joint region* $D_{AB}$, the joint region has its own holographic budget. If the branch-summed cost in $D_{AB}$ is treated as "Alice's record bits + Bob's record bits", then Bob's choice of measurement can in principle affect how much budget is available for Alice's outcomes, and Alice would see her marginal statistics shift depending on what Bob did. That is **superluminal signaling**, which relativity forbids.
 
 A concrete Bell-style example confirms the worry: with asymmetric record costs and a hard joint cutoff, one can compute
 
@@ -1100,7 +1100,7 @@ $$
 
 which depends on Bob's setting $y$. So the naive formulation as stated is *inconsistent with relativity*.
 
-The fix is structural. Instead of "count records in each region and bound the count", state the constraint as a bound on the **regional relative entropy** — a quantity already well-defined for Type III local QFT algebras via Araki / Connes machinery:
+The fix is structural. Instead of "count records in each region and bound the count", state the constraint as a bound on the **regional relative entropy**, a quantity already well-defined for Type III local QFT algebras via Araki / Connes machinery:
 
 $$
 \chi_R(\omega) := S_{\hat{\mathcal{A}}(R)}(\omega_R \,\|\, \Omega_R) \;\le\; C(R) = \frac{A(\partial R)}{4G\hbar}.
@@ -1114,7 +1114,7 @@ $$
 \mathrm{Adm}(D_A \cup D_B) \;=\; \mathrm{Adm}(D_A) \;\text{AND}\; \mathrm{Adm}(D_B).
 $$
 
-That is: a state is admissible on the spacelike pair iff its restriction to *each* local algebra is admissible. **No joint cutoff is applied to the combined algebra $\hat{\mathcal{A}}(D_A) \vee \hat{\mathcal{A}}(D_B)$.** The vacuum may remain entangled across the spacelike boundary — the framework doesn't try to disentangle it; it simply asks that each region's *local* relative entropy be below its *local* capacity.
+That is: a state is admissible on the spacelike pair iff its restriction to *each* local algebra is admissible. **No joint cutoff is applied to the combined algebra $\hat{\mathcal{A}}(D_A) \vee \hat{\mathcal{A}}(D_B)$.** The vacuum may remain entangled across the spacelike boundary, the framework doesn't try to disentangle it; it simply asks that each region's *local* relative entropy be below its *local* capacity.
 
 ### Why this gives no-signaling automatically
 
@@ -1124,7 +1124,7 @@ $$
 [\hat{\mathcal{A}}(D_A), \hat{\mathcal{A}}(D_B)] = 0.
 $$
 
-This is **microcausality** — the bedrock principle that spacelike operations cannot interfere with each other. From microcausality plus the modular-local form of the bound, Alice's marginal probability is independent of Bob's setting in one line:
+This is **microcausality**, the bedrock principle that spacelike operations cannot interfere with each other. From microcausality plus the modular-local form of the bound, Alice's marginal probability is independent of Bob's setting in one line:
 
 If Bob performs an instrument $\{\Psi_b^y\}$ in $D_B$ with the *summed* operation $\Psi^y = \sum_b \Psi_b^y$ (i.e., we don't record Bob's outcome), then by microcausality $\Psi^y$ acts as the identity on Alice's algebra. Therefore Alice's outcome effect $E_a^x \in \hat{\mathcal{A}}(D_A)$ gives
 
@@ -1144,7 +1144,7 @@ $$
 \chi_R(\omega_{\rm classical\;mixture}) \;\approx\; \sum_r p_r\, c_R(r) + H_{\rm Shannon}(\{p_r\}),
 $$
 
-where $c_R(r)$ is the per-record relative entropy. So "branch-summed cost" becomes a *derived approximation* of the modular-local bound in the classical-mixture regime — useful for operational calibration ($I_0$ as an empirical parameter, predicting the Schrödinger-cat scale, designing macroscopic-superposition experiments) but no longer the *fundamental* statement of the bound.
+where $c_R(r)$ is the per-record relative entropy. So "branch-summed cost" becomes a *derived approximation* of the modular-local bound in the classical-mixture regime, useful for operational calibration ($I_0$ as an empirical parameter, predicting the Schrödinger-cat scale, designing macroscopic-superposition experiments) but no longer the *fundamental* statement of the bound.
 
 The fundamental statement is algebraic. The branch-counting picture is the right intuitive handle in the appropriate regime.
 
@@ -1152,7 +1152,7 @@ The fundamental statement is algebraic. The branch-counting picture is the right
 
 In QFT, the vacuum is wildly entangled across every spatial boundary. Two regions sharing a boundary share entangled vacuum modes; the regions are not independent universes. This is the deep reason local algebras are Type III.
 
-The modular-local approach handles this correctly. $\chi_R$ is *defined* on the regional algebra including its boundary structure — it already accounts for the boundary entanglement that's always there. What the framework explicitly *avoids* is trying to compute a joint relative entropy across the boundary, which would re-couple the two regions and re-introduce signaling. Relative entropy is used locally only; spacelike combination is by meet.
+The modular-local approach handles this correctly. $\chi_R$ is *defined* on the regional algebra including its boundary structure, it already accounts for the boundary entanglement that's always there. What the framework explicitly *avoids* is trying to compute a joint relative entropy across the boundary, which would re-couple the two regions and re-introduce signaling. Relative entropy is used locally only; spacelike combination is by meet.
 
 ### Summary
 
@@ -1164,7 +1164,7 @@ The modular-local approach handles this correctly. $\chi_R$ is *defined* on the 
 | Fundamental object: support count | Fundamental object: algebra-state pair |
 | Branch counting is the rule | Branch counting is a derived approximation in the classical-mixture regime |
 
-The modular-local reformulation is the framework's response to the no-signaling constraint — and it produces a more elegant, more mathematically clean version of the same physical idea.
+The modular-local reformulation is the framework's response to the no-signaling constraint, and it produces a more elegant, more mathematically clean version of the same physical idea.
 
 ## 8.5 Four technical commitments the framework makes
 
@@ -1176,7 +1176,7 @@ $$
 \mathcal{S}_{\rm phys}(t, h) = \{ \omega_t^h : \chi_R((\omega_t^h)_R) \le C(R) \text{ for every } R \in \mathfrak{R}_t(h) \},
 $$
 
-where $\mathfrak{R}_t(h)$ collects the bounded diamonds available to the framework on branch $h$ at stage $t$ — past records and the regions causally downstream of them. There is no single global admissibility list applied for all time; constraints come into force as their regions are physically instantiated. The Hilbert-space picture $\mathcal{H}_{\rm phys}$ is recovered only as equivalence classes of representatives inducing the same regional states. The constraint is *nonlinear* in the Hilbert vector, and there is no projector onto $\mathcal{H}_{\rm phys}$.
+where $\mathfrak{R}_t(h)$ collects the bounded diamonds available to the framework on branch $h$ at stage $t$, past records and the regions causally downstream of them. There is no single global admissibility list applied for all time; constraints come into force as their regions are physically instantiated. The Hilbert-space picture $\mathcal{H}_{\rm phys}$ is recovered only as equivalence classes of representatives inducing the same regional states. The constraint is *nonlinear* in the Hilbert vector, and there is no projector onto $\mathcal{H}_{\rm phys}$.
 
 **2. Macroscopic definiteness is "effective" on the *normalized active set*, not literal.** The earlier "$N$ records fit iff $N \cdot I_0 \le Q_R$" argument is replaced by an effective-entropy bound on the normalized active distribution $\tilde p_k = p_k/q$ (where $q = \sum_{k \in \mathcal{A}_\epsilon} p_k$ is the active-set total weight):
 
@@ -1184,9 +1184,9 @@ $$
 H_\epsilon := -\sum_k \tilde p_k \log \tilde p_k \;\le\; C(R) - I_0 + 2\eta_\epsilon, \qquad N^{(\epsilon)}_{\rm eff} := \exp H_\epsilon.
 $$
 
-Single-record-per-run is **exact only at exact saturation** $I_0 = C(R)$ and $\eta_\epsilon = 0$. At finite $\eta_\epsilon$, the conclusion weakens to $H_\epsilon \le 2\eta_\epsilon$ — a single record dominates with probability $\ge 1 - O(\eta_\epsilon)$. The framework is honest that this is a *probabilistic concentration* on a small effective set, not a sharp kinematic exclusion of all multi-record states.
+Single-record-per-run is **exact only at exact saturation** $I_0 = C(R)$ and $\eta_\epsilon = 0$. At finite $\eta_\epsilon$, the conclusion weakens to $H_\epsilon \le 2\eta_\epsilon$, a single record dominates with probability $\ge 1 - O(\eta_\epsilon)$. The framework is honest that this is a *probabilistic concentration* on a small effective set, not a sharp kinematic exclusion of all multi-record states.
 
-**3. Instruments must be branchwise admissibility-preserving.** A measurement instrument $\{\Phi_a\}$ is physical only if *every* normalized post-outcome state $\omega_a = \omega \circ \Phi_a^* / p_a$ is admissible — not just the non-selective average. Precisely: the outcome is localized in a bounded diamond $O_a$, and $\omega_a$ must satisfy $\chi_R((\omega_a)_R) \le C(R)$ for every bounded $R \Subset J^+(O_a)$ that has been causally instantiated at the relevant stage. A measurement could in principle preserve admissibility on average while one branch violates it; the framework forbids this.
+**3. Instruments must be branchwise admissibility-preserving.** A measurement instrument $\{\Phi_a\}$ is physical only if *every* normalized post-outcome state $\omega_a = \omega \circ \Phi_a^* / p_a$ is admissible, not just the non-selective average. Precisely: the outcome is localized in a bounded diamond $O_a$, and $\omega_a$ must satisfy $\chi_R((\omega_a)_R) \le C(R)$ for every bounded $R \Subset J^+(O_a)$ that has been causally instantiated at the relevant stage. A measurement could in principle preserve admissibility on average while one branch violates it; the framework forbids this.
 
 **4. Admissibility applies causally, never retroactively.** When a joint future diamond $D_{AB}$ contains both Alice's and Bob's records, $D_{AB}$ has its own capacity $C(D_{AB})$ that constrains the *future joint state* on $\hat{\mathcal{A}}(D_{AB})$ **once $D_{AB}$ is causally instantiated**. The constraint **does not** retroactively delete or reweight Alice's or Bob's past separately-admissible branches. Without this clause, the framework would smuggle in postselection signaling through future joint conditions.
 
@@ -1200,9 +1200,9 @@ $$
 \delta_R \le \frac{\mathbb{E}[\chi_R]}{C(R)} \lesssim \frac{2\pi L \, E_R / (\hbar c)}{A(\partial R)/(4 \ell_P^2)}.
 $$
 
-For $L \sim 1\,\mathrm{m}$ and $E_R \sim 1\,\mathrm{kg}\,c^2$, the numerator is $\sim 2 \times 10^{43}$ nats and the denominator $\sim 10^{70}$ nats, giving the **conditional** order-of-magnitude estimate $\delta_R \lesssim 10^{-27}$. Operationally invisible — but importantly, the bound is now **region- and energy-dependent**, not a universal constant. Larger or more energetic regions have different deviations.
+For $L \sim 1\,\mathrm{m}$ and $E_R \sim 1\,\mathrm{kg}\,c^2$, the numerator is $\sim 2 \times 10^{43}$ nats and the denominator $\sim 10^{70}$ nats, giving the **conditional** order-of-magnitude estimate $\delta_R \lesssim 10^{-27}$. Operationally invisible, but importantly, the bound is now **region- and energy-dependent**, not a universal constant. Larger or more energetic regions have different deviations.
 
-The estimate is *conditional* because the modular-energy bound $\Delta\langle K_R^\sigma\rangle \lesssim 2\pi L E_R/(\hbar c)$ is exact only for two special cases — Rindler wedges (Bisognano-Wichmann theorem) and balls in a CFT vacuum (conformal modular Hamiltonian). For generic ball-shaped regions in flat-spacetime QFT, the bound is obtained by enclosing-wedge monotonicity of relative entropy. The $\chi_R \le \Delta\langle K_R^\sigma\rangle$ step further assumes a non-negative entropy shift $\Delta S_R \ge 0$. So $10^{-27}$ is a textbook-style heuristic, not a generic QFT theorem. The framework's main point — that operational signaling is *vanishingly small* under these standard hypotheses — survives.
+The estimate is *conditional* because the modular-energy bound $\Delta\langle K_R^\sigma\rangle \lesssim 2\pi L E_R/(\hbar c)$ is exact only for two special cases, Rindler wedges (Bisognano-Wichmann theorem) and balls in a CFT vacuum (conformal modular Hamiltonian). For generic ball-shaped regions in flat-spacetime QFT, the bound is obtained by enclosing-wedge monotonicity of relative entropy. The $\chi_R \le \Delta\langle K_R^\sigma\rangle$ step further assumes a non-negative entropy shift $\Delta S_R \ge 0$. So $10^{-27}$ is a textbook-style heuristic, not a generic QFT theorem. The framework's main point, that operational signaling is *vanishingly small* under these standard hypotheses, survives.
 
 ---
 
@@ -1491,17 +1491,17 @@ This is not a complete construction, but it gives the right intuition.
 
 Type II factors are important because they are infinite-dimensional but still have a good trace. Entropy can be defined using that trace.
 
-### Type II$_1$ vs Type II$_\infty$ — an important distinction
+### Type II$_1$ vs Type II$_\infty$, an important distinction
 
 There are actually **two species** of Type II factors:
 
 - **Type II$_1$**: finite normalized trace, $\tau(\mathbf{1}) = 1$. All projections have $\tau(P) \in [0, 1]$. Like the "infinite spin chain limit" picture above.
 
-- **Type II$_\infty$**: *semifinite* trace, with $\tau(\mathbf{1}) = \infty$. Projections can have any nonnegative real trace, including infinite. Think of it as Type II$_1$ tensored with an infinite-dimensional Type I piece — $\mathcal{A}_{\rm II_\infty} \cong \mathcal{A}_{\rm II_1} \otimes B(\mathcal{H}_\infty)$.
+- **Type II$_\infty$**: *semifinite* trace, with $\tau(\mathbf{1}) = \infty$. Projections can have any nonnegative real trace, including infinite. Think of it as Type II$_1$ tensored with an infinite-dimensional Type I piece, $\mathcal{A}_{\rm II_\infty} \cong \mathcal{A}_{\rm II_1} \otimes B(\mathcal{H}_\infty)$.
 
-This distinction matters later. When we form the crossed product of a Type III algebra with its modular flow (§17), the result (the "continuous core") is generically Type II$_\infty$, not Type II$_1$. The trace is still semifinite — well-defined, satisfying $\tau(AB) = \tau(BA)$ — but the identity has infinite trace. So you can compute trace-like quantities, but $S = -\tau(\rho \log \rho)$ may not be automatically finite without further regularization.
+This distinction matters later. When we form the crossed product of a Type III algebra with its modular flow (§17), the result (the "continuous core") is generically Type II$_\infty$, not Type II$_1$. The trace is still semifinite, well-defined, satisfying $\tau(AB) = \tau(BA)$, but the identity has infinite trace. So you can compute trace-like quantities, but $S = -\tau(\rho \log \rho)$ may not be automatically finite without further regularization.
 
-In the de Sitter static-patch construction of CLPW 2022, the observer algebra can become Type II$_1$, reflecting the finite entropy of the cosmological horizon. One has to be careful with normalization here: with the normalized Type II$_1$ trace $\tau(\mathbf{1}) = 1$, the maximally mixed (tracial) state has $S = -\tau(\mathbf{1} \log \mathbf{1}) = 0$, and smaller-support states have negative entropy. This is mathematically fine but physically nonintuitive — the physical de Sitter horizon entropy $A/(4G\hbar)$ appears as an additive *gravitational normalization constant* relative to this convention, not literally as $\log \tau(\mathbf{1})$. So the Type II$_1$ structure encodes a finite-entropy state space (which is the important physics), but the numerical horizon entropy requires restoring the gravitational normalization. This is the cleanest example of Type II$_1$ structure in semiclassical gravity in the literature.
+In the de Sitter static-patch construction of CLPW 2022, the observer algebra can become Type II$_1$, reflecting the finite entropy of the cosmological horizon. One has to be careful with normalization here: with the normalized Type II$_1$ trace $\tau(\mathbf{1}) = 1$, the maximally mixed (tracial) state has $S = -\tau(\mathbf{1} \log \mathbf{1}) = 0$, and smaller-support states have negative entropy. This is mathematically fine but physically nonintuitive, the physical de Sitter horizon entropy $A/(4G\hbar)$ appears as an additive *gravitational normalization constant* relative to this convention, not literally as $\log \tau(\mathbf{1})$. So the Type II$_1$ structure encodes a finite-entropy state space (which is the important physics), but the numerical horizon entropy requires restoring the gravitational normalization. This is the cleanest example of Type II$_1$ structure in semiclassical gravity in the literature.
 
 ---
 
@@ -1554,7 +1554,7 @@ A region's algebra is therefore not $B(\mathcal{H}_{\rm inside})$. It is Type II
 
 The divergence of entanglement entropy is one symptom of this.
 
-**Caveat — the split property.** Sharp-boundary factorization fails, but an *approximate* factorization is often available if you leave a small buffer region between inside and outside. For nice QFTs (those satisfying the "split property" of Doplicher-Longo), the algebras for $R$ and for the complement-of-a-slight-enlargement-of-$R$ can be embedded in a Type I factor structure. So Type III is the exact mathematical fact about sharp regions, but Type I factorizations are recoverable in the limit of nonzero buffer width. The Bekenstein-Bousso bound is naturally formulated for the sharp region (Type III) case; the framework's machinery is built for that.
+**Caveat, the split property.** Sharp-boundary factorization fails, but an *approximate* factorization is often available if you leave a small buffer region between inside and outside. For nice QFTs (those satisfying the "split property" of Doplicher-Longo), the algebras for $R$ and for the complement-of-a-slight-enlargement-of-$R$ can be embedded in a Type I factor structure. So Type III is the exact mathematical fact about sharp regions, but Type I factorizations are recoverable in the limit of nonzero buffer width. The Bekenstein-Bousso bound is naturally formulated for the sharp region (Type III) case; the framework's machinery is built for that.
 
 ---
 
@@ -1746,7 +1746,7 @@ $$
 \sigma_t^\omega(A).
 $$
 
-In the simplest finite-dimensional case — when $\mathcal{A} = B(\mathcal{H})$ is the full matrix algebra and $\omega(A) = \mathrm{Tr}(\rho A)$ with $\rho$ a faithful density matrix — this flow is
+In the simplest finite-dimensional case, when $\mathcal{A} = B(\mathcal{H})$ is the full matrix algebra and $\omega(A) = \mathrm{Tr}(\rho A)$ with $\rho$ a faithful density matrix, this flow is
 
 $$
 \sigma_t^\omega(A)
@@ -1756,7 +1756,7 @@ $$
 
 That is the key formula in this special case.
 
-**Important caveat.** This simple "conjugate by $\rho^{it}$" formula is *only* exact for the full matrix algebra $B(\mathcal{H})$. For a proper subalgebra $\mathcal{A} \subset B(\mathcal{H})$ — and crucially for Type III algebras in QFT — the modular flow is associated with the *algebra-state pair* $(\mathcal{A}, \Omega)$ and is **not** generally obtained by conjugating with a global density matrix. The intuition "$\rho^{it}$ generates the flow" survives in form (with $\rho$ replaced by the modular operator $\Delta_\Omega$), but the global-density-matrix picture breaks down.
+**Important caveat.** This simple "conjugate by $\rho^{it}$" formula is *only* exact for the full matrix algebra $B(\mathcal{H})$. For a proper subalgebra $\mathcal{A} \subset B(\mathcal{H})$, and crucially for Type III algebras in QFT, the modular flow is associated with the *algebra-state pair* $(\mathcal{A}, \Omega)$ and is **not** generally obtained by conjugating with a global density matrix. The intuition "$\rho^{it}$ generates the flow" survives in form (with $\rho$ replaced by the modular operator $\Delta_\Omega$), but the global-density-matrix picture breaks down.
 
 It says, in the simplest case:
 
@@ -2147,7 +2147,7 @@ $$
 U(t)=e^{-itK}.
 $$
 
-So the crossed product contains the unitary implementers $U(t)$ of the modular flow as bounded operators in an enlarged algebra. The generator $K$ is generally an *unbounded self-adjoint operator affiliated with* the crossed-product algebra — not literally an element of it, but uniquely determined by it via Stone's theorem. (The slogan "we add the modular Hamiltonian as an operator" is a useful shorthand, but the precise statement is the affiliation, not literal membership.)
+So the crossed product contains the unitary implementers $U(t)$ of the modular flow as bounded operators in an enlarged algebra. The generator $K$ is generally an *unbounded self-adjoint operator affiliated with* the crossed-product algebra, not literally an element of it, but uniquely determined by it via Stone's theorem. (The slogan "we add the modular Hamiltonian as an operator" is a useful shorthand, but the precise statement is the affiliation, not literal membership.)
 
 ## 17.4 Why an $L^2(\mathbb{R})$ factor appears
 
@@ -2205,9 +2205,9 @@ $$
 \mathcal{H}_{\rm original}\otimes L^2(\mathbb{R}).
 $$
 
-**The honest statement** is that the regular representation of the crossed product introduces an $L^2(\mathbb{R})$ factor associated with the *flow parameter* — the variable that labels the modular automorphism. Mathematically, that's all the bare theorem says.
+**The honest statement** is that the regular representation of the crossed product introduces an $L^2(\mathbb{R})$ factor associated with the *flow parameter*, the variable that labels the modular automorphism. Mathematically, that's all the bare theorem says.
 
-Interpreting this $L^2(\mathbb{R})$ as a *physical quantum clock* is an additional move, motivated by quantum-gravity ideas (Page-Wootters formalism, gravitationally dressed observers, observer-relative algebras). In Witten 2022 and CPW 2022 the physical clock interpretation is natural and well-motivated — it's how gravity actually enters the construction. But you should keep in mind: the clock interpretation is a *physical reading* of an extra mathematical degree of freedom; it is not part of the bare operator-algebra theorem.
+Interpreting this $L^2(\mathbb{R})$ as a *physical quantum clock* is an additional move, motivated by quantum-gravity ideas (Page-Wootters formalism, gravitationally dressed observers, observer-relative algebras). In Witten 2022 and CPW 2022 the physical clock interpretation is natural and well-motivated, it's how gravity actually enters the construction. But you should keep in mind: the clock interpretation is a *physical reading* of an extra mathematical degree of freedom; it is not part of the bare operator-algebra theorem.
 
 Also, the action of the original algebra on $\mathcal{H} \otimes L^2(\mathbb{R})$ is more subtle than a simple tensor structure $A \otimes I$. In the standard representation,
 $$
@@ -2253,7 +2253,7 @@ $$
 \mathcal{M}\rtimes_{\sigma}\mathbb{R}
 $$
 
-is called the **continuous core** of $\mathcal{M}$. It is always *semifinite*. For Type III$_1$ factors (the relevant case for local QFT algebras), the continuous core is **Type II$_\infty$** — semifinite trace with $\tau(\mathbf{1}) = \infty$. For Type III$_\lambda$ ($0 < \lambda < 1$) or Type III$_0$ factors, the continuous core may have a nontrivial center (i.e., not be a single factor).
+is called the **continuous core** of $\mathcal{M}$. It is always *semifinite*. For Type III$_1$ factors (the relevant case for local QFT algebras), the continuous core is **Type II$_\infty$**, semifinite trace with $\tau(\mathbf{1}) = \infty$. For Type III$_\lambda$ ($0 < \lambda < 1$) or Type III$_0$ factors, the continuous core may have a nontrivial center (i.e., not be a single factor).
 
 So the precise statement is: *crossed product with modular flow gives a semifinite algebra (the continuous core), which is Type II$_\infty$ in the cases relevant to QFT*. The slogan "Type III + clock = Type II" is shorthand for this; the exact type and structure depend on which Type III subclass you started with.
 
@@ -2265,7 +2265,7 @@ Type III algebras lack a trace. Without a trace, ordinary entropy is hard to def
 
 The modular flow is like an intrinsic thermal time. But in the Type III algebra, that flow is external as an automorphism.
 
-When we form the crossed product, we add an explicit generator of that flow — a clock or energy-like variable.
+When we form the crossed product, we add an explicit generator of that flow, a clock or energy-like variable.
 
 Doing this enlarges the algebra enough that a trace appears.
 
@@ -2413,19 +2413,19 @@ $$
 
 QIQT-H wants this subtraction to be principled rather than arbitrary.
 
-The modular/crossed-product machinery provides a principled framework for defining entropy *differences* — Araki relative entropy is already well-defined in Type III, and the CPW crossed-product construction reproduces generalized-entropy *differences*. Absolute-like renormalized entropies can also be defined within this framework once a reference state and normalization are chosen.
+The modular/crossed-product machinery provides a principled framework for defining entropy *differences*, Araki relative entropy is already well-defined in Type III, and the CPW crossed-product construction reproduces generalized-entropy *differences*. Absolute-like renormalized entropies can also be defined within this framework once a reference state and normalization are chosen.
 
 The slogan is:
 
 > Use modular structure to define entropy relative to a reference state, subtracting the universal UV boundary entanglement in a principled way.
 
-This is why Type III and crossed products matter for QIQT-H. The holographic bound talks about entropy, but raw QFT entropy is divergent — the modular/crossed-product machinery gives us trace-based tools (with appropriate choices) that match generalized-entropy differences in semiclassical gravity. Whether they give *canonical absolute* entropies depends on scheme choices; the framework should not claim more canonicity than the underlying mathematics actually delivers.
+This is why Type III and crossed products matter for QIQT-H. The holographic bound talks about entropy, but raw QFT entropy is divergent, the modular/crossed-product machinery gives us trace-based tools (with appropriate choices) that match generalized-entropy differences in semiclassical gravity. Whether they give *canonical absolute* entropies depends on scheme choices; the framework should not claim more canonicity than the underlying mathematics actually delivers.
 
 ---
 
 # 20. Generalized entropy
 
-In gravitational physics, the entropy associated with a *codimension-2 surface* $\Sigma$ — for example a black-hole horizon cross-section, or a quantum extremal surface bounding a spatial region $R$ — is not just matter entropy. It is
+In gravitational physics, the entropy associated with a *codimension-2 surface* $\Sigma$, for example a black-hole horizon cross-section, or a quantum extremal surface bounding a spatial region $R$, is not just matter entropy. It is
 
 $$
 S_{\rm gen}(\Sigma; R)
@@ -2590,12 +2590,12 @@ The QIQT-H admissibility condition $I_\Sigma^\epsilon[\omega_R] \le Q_R$ is:
 - *Nonlinear* (depends nonlinearly on the state through the active-set construction)
 - *History- and coarse-graining-dependent* (requires choosing $\mathcal{C}(R)$, the record subalgebra, and the smoothing parameter $\epsilon$)
 - *Not from a symmetry* (no generator, not even formally)
-- *Not a redundancy*: forbidden multi-record states are not gauge-equivalent to allowed states — they are simply excluded
+- *Not a redundancy*: forbidden multi-record states are not gauge-equivalent to allowed states, they are simply excluded
 - *Not BRST-like*: no nilpotent charge or cohomological structure
 
 So when we say "QIQT-H's constraint is like a gauge constraint," we mean: both restrict a larger formal space to a smaller physical one, and physical Hamiltonians must preserve the constraint. **That structural pattern is the entire analogy. The mathematical machinery is completely different.**
 
-In particular: writing $\mathcal{C}_{\rm QIQT-H}|\Psi_{\rm phys}\rangle = 0$ above is suggestive notation, not a literal operator equation. There is no Hermitian "constraint operator" $\mathcal{C}_{\rm QIQT-H}$ whose kernel defines $\mathcal{H}_{\rm phys}$. The admissibility condition is a nonlinear inequality on regional algebra-states. Its dynamical implementation — characterizing which Hermitian operators preserve $\mathcal{H}_{\rm phys}$ — is one of the framework's central open problems.
+In particular: writing $\mathcal{C}_{\rm QIQT-H}|\Psi_{\rm phys}\rangle = 0$ above is suggestive notation, not a literal operator equation. There is no Hermitian "constraint operator" $\mathcal{C}_{\rm QIQT-H}$ whose kernel defines $\mathcal{H}_{\rm phys}$. The admissibility condition is a nonlinear inequality on regional algebra-states. Its dynamical implementation, characterizing which Hermitian operators preserve $\mathcal{H}_{\rm phys}$, is one of the framework's central open problems.
 
 The shared pattern is:
 
