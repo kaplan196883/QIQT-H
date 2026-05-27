@@ -592,7 +592,7 @@ This is a **strengthening of the standard Bekenstein-Bousso bound**, not a deriv
 $$
 \chi_R(\bar\omega_R) \;=\; \sum_k p_k \, c_R(r_k) - I_{\rm Hol}^R,
 $$
-where $c_R(r_k) = \chi_R(\omega_{k,R})$ is the per-record cost (relative entropy of branch $k$ to the reference $\sigma_R$) and $I_{\rm Hol}^R = \sum_k p_k S_{\rm Araki}(\omega_{k,R} \| \bar\omega_R)$ is the Holevo information of the mixture. In the strict distinguishable-record limit, $I_{\rm Hol}^R \approx H(\{p_k\})$. Branch multiplicity is thus controlled by the Holevo term that reappears in Theorem 6, not by an independent spacelike joint cutoff. **The earlier "branch-summed cost" $I_\Sigma^\epsilon$ is a derived classical-mixture approximation in this sense, useful for operational calibration (the $I_0$ parameter, Schrödinger-cat scale, exclusion curves) but not the fundamental statement of the bound.**
+where $c_R(r_k) = \chi_R(\omega_{k,R})$ is the per-record cost (relative entropy of branch $k$ to the reference $\sigma_R$) and $I_{\rm Hol}^R = \sum_k p_k S_{\rm Araki}(\omega_{k,R} \| \bar\omega_R)$ is the Holevo information of the mixture. In the strict distinguishable-record limit, $I_{\rm Hol}^R \approx H(\{p_k\})$. Effective branch multiplicity is thus controlled by the Holevo term that reappears in Theorem 6, not by an independent spacelike joint cutoff. **The earlier "branch-summed cost" $I_\Sigma^\epsilon$ is a derived classical-mixture approximation in this sense, useful for operational calibration (the $I_0$ parameter, Schrödinger-cat scale, exclusion curves) but not the fundamental statement of the bound.**
 
 This formulation matters for two reasons:
 
@@ -806,7 +806,7 @@ $$
 P_{\rm QIQT}(a \mid x, y) \;=\; P_{\rm QIQT}(a \mid x).
 $$
 
-*Proof.* Bob's nonselective channel is $\Psi^y = \sum_b \Psi_b^y$, localized in $\hat{\mathcal{A}}(D_B)$ by construction. By locality of this deterministic channel together with microcausality $[\hat{\mathcal{A}}(D_A), \hat{\mathcal{A}}(D_B)] = 0$, the Heisenberg dual $\Psi^{y*}$ acts as the identity on Alice's algebra:
+*Proof.* Bob's nonselective channel is $\Psi^y = \sum_b \Psi_b^y$, localized in $\hat{\mathcal{A}}(D_B)$ by construction. By locality of this deterministic channel (i.e., $\Psi^{y*}$ is implemented by operators in $\hat{\mathcal{A}}(D_B)$, equivalently it acts trivially on $\hat{\mathcal{A}}(D_B)'$) together with microcausality $[\hat{\mathcal{A}}(D_A), \hat{\mathcal{A}}(D_B)] = 0$, the Heisenberg dual $\Psi^{y*}$ acts as the identity on Alice's algebra:
 $$
 \Psi^{y*}(X) \;=\; X \qquad \forall X \in \hat{\mathcal{A}}(D_A).
 $$
