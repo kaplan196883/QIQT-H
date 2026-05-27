@@ -592,9 +592,9 @@ This is a **strengthening of the standard Bekenstein-Bousso bound**, not a deriv
 $$
 \chi_R(\omega_{\rm classical-mixture}) \;\approx\; \sum_{r \in \mathcal{A}_\epsilon} p_r \, c_R(r) + H_{\rm Shannon}(\{p_r\}),
 $$
-where $c_R(r) = S(\omega_r \| \Omega_R)$ is the per-record relative entropy of record $r$ and $H_{\rm Shannon}$ is the entropy of the mixture weights. In the regime where one record dominates, $\chi_R \approx c_R(r_{\rm dominant}) \approx I_0$; in the regime where $N$ records share weight comparably, $\chi_R \approx N \cdot I_0$ up to the Shannon term. **The "branch-summed cost" $I_\Sigma^\epsilon$ used in earlier formulations of QIQT-H is a derived macroscopic-classical-mixture approximation of $\chi_R$**, not an independent quantity. It remains the right object for operational calibration (the $I_0$ parameter, Schrödinger-cat scale, exclusion curves) but is no longer the fundamental statement of the bound.
+where $c_R(r) = S(\omega_r \| \Omega_R)$ is the per-record relative entropy of record $r$ and $H_{\rm Shannon}$ is the entropy of the mixture weights. In the regime where one record dominates, $\chi_R \approx c_R(r_{\rm dominant}) \approx I_0$; in the regime where $N$ records share weight comparably, $\chi_R \approx N \cdot I_0$ up to the Shannon term. **The "branch-summed cost" $I_\Sigma^\epsilon$ is a derived macroscopic-classical-mixture approximation of $\chi_R$**, not an independent quantity. It remains the right object for operational calibration (the $I_0$ parameter, Schrödinger-cat scale, exclusion curves) but is no longer the fundamental statement of the bound.
 
-This refactoring matters for two reasons:
+This formulation matters for two reasons:
 
 1. **Type III compatibility.** $\chi_R$ is defined directly in Type III via Araki; it does not require selecting a record subalgebra or smoothing parameter to be fundamentally defined. Branch counting is a coarse-graining of $\chi_R$ in the classical-mixture limit, not a new entropy concept.
 

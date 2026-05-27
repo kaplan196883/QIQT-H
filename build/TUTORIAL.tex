@@ -1313,7 +1313,7 @@ The hope is to get:
 
 The honest picture: the Branch-Summed Bound predicts a definite quantum-to-classical \emph{boundary scale}, above which multi-record structures are kinematically excluded. Below that scale, the bound is operationally vacuous, and the framework needs an additional global admissibility mechanism to recover ordinary single-outcome experience. The current research program proposes the bound but does not yet supply the global mechanism. The tutorial should be read with this caveat throughout.
 
-\subsection{The modular-local reformulation (why no-signaling works)}
+\subsection{The modular-local form (why no-signaling works)}
 
 The "branch-summed" picture above is intuitive, but as stated it has a subtle problem. When Alice and Bob measure entangled particles at spacelike separation and their records are later compared in a \emph{joint region} $D_{AB}$, the joint region has its own holographic budget. If the branch-summed cost in $D_{AB}$ is treated as "Alice's record bits + Bob's record bits", then Bob's choice of measurement can in principle affect how much budget is available for Alice's outcomes, and Alice would see her marginal statistics shift depending on what Bob did. That is \textbf{superluminal signaling}, which relativity forbids.
 
@@ -1323,7 +1323,7 @@ A concrete Bell-style example confirms the worry: with asymmetric record costs a
 P_{\rm QIQT}(\text{Alice}=+ \mid x, y) = \frac{2}{3 + \cos\theta_{xy}},
 \]
 
-which depends on Bob's setting $y$. So the naive formulation as stated is \emph{inconsistent with relativity}.
+which depends on Bob's setting $y$. So the naive formulation is \emph{inconsistent with relativity}.
 
 The fix is structural. Instead of "count records in each region and bound the count", state the constraint as a bound on the \textbf{regional relative entropy}, a quantity already well-defined for Type III local QFT algebras via Araki / Connes machinery:
 
@@ -1426,11 +1426,11 @@ Single-record-per-run is \textbf{exact only at exact saturation} $I_0 = C(R)$ an
 
 \textbf{4. Admissibility applies causally, never retroactively.} When a joint future diamond $D_{AB}$ contains both Alice's and Bob's records, $D_{AB}$ has its own capacity $C(D_{AB})$ that constrains the \emph{future joint state} on $\hat{\mathcal{A}}(D_{AB})$ \textbf{once $D_{AB}$ is causally instantiated}. The constraint \textbf{does not} retroactively delete or reweight Alice's or Bob's past separately-admissible branches. Without this clause, the framework would smuggle in postselection signaling through future joint conditions.
 
-These four commitments turn the framework's working informal description into a \emph{specifically constrained} algebraic theory. They are the price of having the modular-local refactor close the no-signaling loophole properly.
+These four commitments turn the framework's working informal description into a \emph{specifically constrained} algebraic theory. They are the price of having the modular-local form closes the no-signaling loophole properly.
 
-\subsubsection{A small numerical update}
+\subsubsection{Lab-scale deviation estimate}
 
-The earlier estimate that QIQT-H deviations from Born probabilities at lab scale are below $\sim 10^{-24}$ used a Bekenstein cap on branch counts. The modular-local form gives the deviation directly via Markov:
+A naive Bekenstein cap on branch counts would give $\sim 10^{-24}$. The modular-local form gives the lab-scale deviation directly via Markov:
 
 \[
 \delta_R \le \frac{\mathbb{E}[\chi_R]}{C(R)} \lesssim \frac{2\pi L \, E_R / (\hbar c)}{A(\partial R)/(4 \ell_P^2)}.
