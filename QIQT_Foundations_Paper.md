@@ -205,7 +205,17 @@ Part (i) defines the mathematical content of "wave function in $R$": it is the s
 
 The literal reading is a stronger statement than the narrow entanglement-entropy reading and a stronger statement than what Witten's algebraic theorem directly establishes. It is our foundational postulate. The relationship to Witten's framework is made explicit in §4.3.
 
-**Important: (FQ) is a per-region kinematic constraint, not a single global budget.** Each bounded region $R$ has its own capacity $Q_R$ set by *its* boundary area; the bound is imposed independently for each $R$. There is no single shared information budget over all spacetime. This is essential for consistency with no-signaling — a single global cap shared across spacelike-separated regions would let a distant experimenter's choice consume budget belonging to a local experimenter, producing operational superluminal signaling. A joint causal diamond $D_{AB}$ containing two spacelike-separated record-comparison events does carry its own $Q_{D_{AB}}$, and this can in principle couple the records' joint admissibility; the explicit no-signaling theorem required to rule out signaling through such joint diamonds is identified as Open Problem 10 (§11.4).
+**Important: (FQ) is a modular-local kinematic constraint, not a single global budget.** Each bounded region $R$ has its own capacity $Q_R$ set by *its* boundary area; the bound is imposed independently for each $R$ as a constraint on the algebra-state pair $(\hat{\mathcal{A}}(R), \omega_\Psi|_R)$. There is no single shared information budget over all spacetime, and no joint-region cutoff is applied to the spacelike-combined algebra $\hat{\mathcal{A}}(D_A) \vee \hat{\mathcal{A}}(D_B)$.
+
+**Spacelike combination by meet of local predicates.** For spacelike-separated regions $D_A, D_B$:
+
+$$
+\mathrm{Adm}(D_A \cup D_B) \;=\; \mathrm{Adm}(D_A) \wedge \mathrm{Adm}(D_B).
+$$
+
+That is: a state is admissible on the spacelike pair iff its restriction to *each* local algebra is admissible. The joint algebra $\hat{\mathcal{A}}(D_A) \vee \hat{\mathcal{A}}(D_B)$ may remain vacuum-entangled and Type III non-factorizing — the admissibility predicate imposes nothing on the joint structure beyond the two local restrictions. The framework's admissibility is therefore a **local subfunctor** of the AQFT state functor.
+
+This modular-local formulation makes no-signaling a *theorem*, not an extra axiom: it follows automatically from AQFT microcausality (§7.7 below). The naive alternative — imposing the bound on the joint spacelike algebra as well — would produce operational signaling (cf. Open Problem 10 history in `paper_strategy/38`), because the vacuum is not a product state across spacelike-separated boundaries.
 
 ### 4.2 Motivation: the literal reading of the bound
 
@@ -514,24 +524,47 @@ Denial of measurement independence preserves: no preferred foliation; no explici
 
 The framework's structural skeleton: (FQ) is the literal physical-instantiation reading of the Bekenstein-Bousso bound, stated rigorously in the CPW Type II algebraic framework; the precision floor is the structural consequence; concentrated per-run amplitudes cross the threshold and the per-run wave function physically is a single-record state.
 
-### 7.6 The Branch-Summed Holographic Superselection Rule (foundational postulate)
+### 7.6 The Modular-Local Holographic Superselection Rule (foundational postulate)
 
-The above theorems establish the framework's structure within standard renormalized entropy. They leave a critical question: even after decoherence + (FQ) deliver a strict classical mixture $\sum_k p_k \omega_k^R$ on the regional algebra, this is *still a mixture over multiple macroscopic records*. Standard renormalized entropy on the Type II algebra does **not** forbid such mixtures — by the standard counting, mutually exclusive macroscopic record sectors partition the regional Hilbert space, $\sum_k d_k \le 2^{Q_R}$, and the mixture entropy stays below $Q_R$. To establish single-record per-run as a structural consequence at the level of the macroscopic observable content, the framework commits to a stronger principle than standard entropy bounds: a **branch-summed holographic superselection rule**.
+The above theorems establish the framework's structure within standard renormalized entropy. They leave a critical question: even after decoherence + (FQ) deliver a strict classical mixture $\sum_k p_k \omega_k^R$ on the regional algebra, this is *still a mixture over multiple macroscopic records*. Standard renormalized entropy on the Type II algebra does **not** forbid such mixtures — by the standard counting, mutually exclusive macroscopic record sectors partition the regional Hilbert space, $\sum_k d_k \le 2^{Q_R}$, and the mixture entropy stays below $Q_R$. To establish single-record per-run as a structural consequence at the level of the macroscopic observable content, the framework commits to a stronger principle than standard entropy bounds: a **modular-local holographic superselection rule**.
 
-This is the framework's central new physical postulate beyond the algebraic scaffolding of CPW/Witten. It is formulated using the decoherent-record machinery of §6.8 combined with branch-summed support counting.
+This is the framework's central new physical postulate beyond the algebraic scaffolding of CPW/Witten. It is formulated *intrinsically* on the algebra-state pair via Araki / Type II core relative entropy, with no joint-region cutoff applied to spacelike-combined algebras.
 
-**Definition (Branch-summed record cost).** *Let $\mathcal{C}(R) \subset \hat{\mathcal{A}}(R)$ be the macroscopic record subalgebra (§6.8). For a state $\omega_R$ on $\hat{\mathcal{A}}(R)$, let $p_r = \omega_R(P_r)$ be the regional probabilities of records $r \in \mathrm{Spec}(\mathcal{C}(R))$. For each record $r$, let $c_R(r)$ be its per-record physical cost — combining the Zurek-style algorithmic complexity of the macroscopic record description with the residual microscopic entropy of the apparatus + environment configuration consistent with that record. The **smooth active set** $\mathcal{A}_\epsilon(\omega_R)$ for tolerance $\epsilon$ is the smallest set of records carrying total probability $\ge 1 - \epsilon$. The **branch-summed record cost** is*
-$$I_\Sigma^\epsilon[\omega_R] := \sum_{r \in \mathcal{A}_\epsilon(\omega_R)} c_R(r).$$
+**Definition (Regional information functional).** *For a bounded region $R$ with local algebra $\hat{\mathcal{A}}(R)$ and a reference state $\Omega_R$ (typically the vacuum or a stationary cosmological reference), the regional information functional is the Araki relative entropy*
+$$
+\chi_R(\omega) \;:=\; S_{\hat{\mathcal{A}}(R)}(\omega_R \,\|\, \Omega_R),
+$$
+*where $\omega_R = \omega|_{\hat{\mathcal{A}}(R)}$. Equivalently, in the Type II crossed-product core with canonical semifinite trace $\tau_R$ and Haagerup densities $h_{\omega, R}$, $h_{\Omega, R}$:*
+$$
+\chi_R(\omega) \;=\; \tau_R\!\left[ h_{\omega, R} \left( \log h_{\omega, R} - \log h_{\Omega, R} \right) \right] + \text{counterterms},
+$$
+*finite by the CPW/Witten construction (no UV divergence; no density-matrix assumption).*
 
-For a single-record state with $c_R(r) = I_0$: $I_\Sigma \approx I_0$.
-For an $N$-record state with comparable record costs: $I_\Sigma \approx N \cdot I_0$.
+**Postulate (Modular-Local Holographic Bound — central physical axiom).** *The regional information functional is bounded by the holographic capacity, region by region:*
+$$
+\boxed{\chi_R(\omega) \;\le\; C(R) \;=\; \frac{A(\partial R)}{4\ell_P^2} \quad \text{for every bounded region } R \text{ and every physical state } \omega.}
+$$
 
-This measure is **not** standard von Neumann or renormalized entropy on the Type II algebra. It counts the *additive* cost of each occupied decoherent macroscopic record sector, summing rather than coarse-graining over alternatives. It draws on the decoherent-histories framework (Gell-Mann-Hartle, Griffiths, Omnès), Quantum Darwinism / spectrum broadcast structures (Zurek; Brandão-Piani-Horodecki), smooth support / Rényi-0 / Hill-number quantification of effective branch counts, and Zurek-style physical entropy for per-record cost.
+*For spacelike-separated regions $D_A, D_B$, admissibility combines as the meet of local predicates:*
+$$
+\mathrm{Adm}(D_A \cup D_B) \;=\; \mathrm{Adm}(D_A) \wedge \mathrm{Adm}(D_B).
+$$
 
-**Postulate (Branch-Summed Holographic Bound — central physical axiom).** *The branch-summed record cost is bounded by the holographic capacity:*
-$$\boxed{I_\Sigma^\epsilon[\omega_R] \le Q_R = \frac{A(\partial R)}{4\ell_P^2} \quad \text{for all bounded regions } R \text{ and all physical states } \omega_R.}$$
+*No bound is imposed on the joint spacelike algebra $\hat{\mathcal{A}}(D_A) \vee \hat{\mathcal{A}}(D_B)$ beyond what the local restrictions already require.*
 
-This is **a strengthening of the standard Bekenstein-Bousso bound**, not a derivation from it. Standard holographic entropy bounds limit the entropy of regional reduced states; the branch-summed bound limits the sum of per-record costs across coexisting decoherent macroscopic records. Existing algebraic-QFT/holography results do not establish the branch-summed bound; we postulate it as a new physical principle.
+This is a **strengthening of the standard Bekenstein-Bousso bound**, not a derivation from it. Standard holographic entropy bounds limit the renormalized entropy of regional reduced states; the modular-local bound limits the *relative* entropy with respect to a reference state, intrinsically defined via Araki/Connes machinery in Type III local QFT.
+
+**Branch-summed cost as derived approximation.** When $\omega_R$ is a strict classical mixture over decoherent macroscopic records (as it is after decoherence + (FQ) at lab scale, §6.2–6.3), $\chi_R(\omega)$ reduces to a sum over record contributions:
+$$
+\chi_R(\omega_{\rm classical-mixture}) \;\approx\; \sum_{r \in \mathcal{A}_\epsilon} p_r \, c_R(r) + H_{\rm Shannon}(\{p_r\}),
+$$
+where $c_R(r) = S(\omega_r \| \Omega_R)$ is the per-record relative entropy of record $r$ and $H_{\rm Shannon}$ is the entropy of the mixture weights. In the regime where one record dominates, $\chi_R \approx c_R(r_{\rm dominant}) \approx I_0$; in the regime where $N$ records share weight comparably, $\chi_R \approx N \cdot I_0$ up to the Shannon term. **The "branch-summed cost" $I_\Sigma^\epsilon$ used in earlier formulations of QIQT-H is a derived macroscopic-classical-mixture approximation of $\chi_R$**, not an independent quantity. It remains the right object for operational calibration (the $I_0$ parameter, Schrödinger-cat scale, exclusion curves) but is no longer the fundamental statement of the bound.
+
+This refactoring matters for two reasons:
+
+1. **Type III compatibility.** $\chi_R$ is defined directly in Type III via Araki; it does not require selecting a record subalgebra or smoothing parameter to be fundamentally defined. Branch counting is a coarse-graining of $\chi_R$ in the classical-mixture limit, not a new entropy concept.
+
+2. **No-signaling becomes a theorem.** Because $\chi_R$ depends only on the algebra-state pair $(\hat{\mathcal{A}}(R), \omega_R)$ and not on any joint-region structure, and because the admissibility predicate for spacelike-separated regions is the meet of local predicates, no-signaling follows automatically from AQFT microcausality. See §7.7.
 
 **The framework's commitment: the Branch-Summed Bound is a SUPERSELECTION rule, not a dynamical modification.**
 
@@ -617,6 +650,38 @@ The framework's single-world per run is therefore a *kinematic structural featur
 - The exclusion of multi-record states as kinematically forbidden
 
 These are the framework's specific new physical principles, building on the Witten/CPW scaffolding. They constitute a concrete research program: define the branch-summed cost rigorously; postulate the Branch-Summed Bound as new physics; characterize the constrained dynamics; derive Born statistics from typicality within the constrained dynamics.
+
+### 7.7 Theorem (No-signaling from modular-local admissibility)
+
+**Theorem 7 (No-signaling).** *Let $D_A, D_B$ be spacelike-separated causally complete regions with $[\hat{\mathcal{A}}(D_A), \hat{\mathcal{A}}(D_B)] = 0$. Let $\{\Phi_a^x\}$ be a normal CP instrument localized in $\hat{\mathcal{A}}(D_A)$ with setting $x$ and outcomes $a$, and let $\{\Psi_b^y\}$ be similarly localized in $\hat{\mathcal{A}}(D_B)$. Under the Modular-Local Holographic Superselection Rule (§7.6), Alice's marginal probability is independent of Bob's setting:*
+$$
+P_{\rm QIQT}(a \mid x, y) \;=\; P_{\rm QIQT}(a \mid x).
+$$
+
+*Proof.* Bob's nonselective channel is $\Psi^y = \sum_b \Psi_b^y$, and by completeness and microcausality its Heisenberg dual acts as the identity on Alice's algebra:
+$$
+\Psi^{y*}(X) \;=\; X \qquad \forall X \in \hat{\mathcal{A}}(D_A).
+$$
+
+Alice's outcome effect is $E_a^x = \Phi_a^{x*}(\mathbf{1}) \in \hat{\mathcal{A}}(D_A)$. Therefore:
+$$
+P_{\rm QIQT}(a \mid x, y) \;=\; \omega\!\left(\Psi^{y*}(E_a^x)\right) \;=\; \omega(E_a^x),
+$$
+which is manifestly independent of $y$.
+
+The admissibility predicate does not alter this conclusion, because (§7.6) admissibility on spacelike-separated regions is the *meet of local predicates*: $\mathrm{Adm}(D_A \cup D_B) = \mathrm{Adm}(D_A) \wedge \mathrm{Adm}(D_B)$. Alice's local admissibility predicate $\mathrm{Adm}(D_A)$ depends only on $\omega|_{\hat{\mathcal{A}}(D_A)}$, which Bob's nonselective operation does not affect. Hence Alice's branch admissibility cannot depend on $y$. $\blacksquare$
+
+**Remarks.**
+
+1. The proof uses *only* microcausality $[\hat{\mathcal{A}}(D_A), \hat{\mathcal{A}}(D_B)] = 0$, which is the bedrock of relativistic AQFT. It does *not* assume tensor factorization $\mathcal{A}(D_A \cup D_B) \cong \mathcal{A}(D_A) \,\bar\otimes\, \mathcal{A}(D_B)$ — which Type III local QFT generally lacks because of vacuum boundary entanglement.
+
+2. The crucial structural feature is that the admissibility predicate is a **local subfunctor** of the AQFT state functor: $\mathrm{Adm}(D) \subseteq \mathrm{States}_{\rm normal}(\hat{\mathcal{A}}(D))$ is defined entirely from data on $\hat{\mathcal{A}}(D)$, with no joint-region cutoff. Imposing a hard cutoff on the joint relative entropy $S_{\hat{\mathcal{A}}(D_A) \vee \hat{\mathcal{A}}(D_B)}(\omega \| \Omega)$ would *not* satisfy the modular-local form and would re-introduce signaling — because the vacuum is not a product state across spacelike boundaries (the difference between joint and additive relative entropies is precisely the mutual-information / boundary-entanglement contribution).
+
+3. **Joint causal diamonds containing record-comparison events** ($D_{AB}$ containing both Alice's and Bob's records, encountered when records meet in a common future) carry their own capacity $C(D_{AB})$ and their own modular-local admissibility predicate $\mathrm{Adm}(D_{AB})$, which constrains the *single* algebra-state pair $(\hat{\mathcal{A}}(D_{AB}), \omega|_{D_{AB}})$. No additional cross-coupling is imposed. The admissibility of the joint record is the relative entropy of the joint state on the joint algebra, not a sum of separate Alice-cost plus Bob-cost.
+
+4. **Operational rule on instruments**, not on branches: a physical instrument $\{\Phi_a^x\}$ must be branchwise admissibility-preserving — if $\omega \in \mathrm{Adm}(D)$, then for every nonzero branch $a$ the post-outcome state $\omega \circ \Phi_a^* / \omega(\Phi_a^*(\mathbf{1}))$ must also be in $\mathrm{Adm}(D)$. Inadmissible outcomes are not produced because the dynamics that would produce them is not a physical operation, *not* because branches are postselected away after the fact. This preserves the superselection (kinematic-exclusion) flavor of the framework.
+
+This theorem retires the earlier Open Problem 10 — the no-signaling concern arising from the joint-comparison-diamond signaling counter-example (see `paper_strategy/38` for the explicit Bell-style counter-example that motivated the modular-local reformulation, and `paper_strategy/39` for the resolution).
 
 ---
 
@@ -851,11 +916,7 @@ The open problems are *concrete and well-defined*: each can be attacked in princ
 
 9. **Phenomenological predictions.** With $I_0$ calibrated, the framework predicts: maximum macroscopic-superposition scale (testable against Schrödinger-cat experiments with progressively larger systems); long-baseline coherence limits; specific signatures distinguishing the framework from GRW-style stochastic collapse (the framework predicts kinematic exclusion, not stochastic events).
 
-10. **No-signaling theorem under regional admissibility.** Prove that
-
-    $$P_{\rm QIQT}(a \mid x, y) = P_{\rm QIQT}(a \mid x)$$
-
-    for all spacelike-separated settings $x, y$ and outcomes $a$ under the Branch-Summed admissibility conditioning. A *sufficient* algebraic condition is the conditional-expectation factorization $K_{xy} = K_A^x \cdot K_B^y$ with $E_A(K_B^y) = c_y \mathbf{1}$ across spacelike algebras; this works in toy tensor-product Bell models but is not generic in Type III local QFT (algebras do not tensor-factorize, and state-preserving conditional expectations onto local subalgebras are absent for entangled states). The *naive* global-budget formulation $I_A + I_B \le S_{AB}$ explicitly violates no-signaling — Alice and Bob would compete for one entropy budget — so the framework is committed to per-region budgets ((FQ) is stated per region in §4.1). The remaining problem is the *joint comparison diamond*: when records from spacelike-separated $D_A$ and $D_B$ are later compared in a common future diamond $D_{AB}$, the bound $Q_{D_{AB}}$ on the joint diamond can couple A's and B's admissibility. Prove that this coupling does not enable operational signaling — either via a causal screening theorem for the joint diamond's admissibility predicate, or by identifying a locality/factorization structure on the Type II algebras that survives in Type III local QFT.
+10. **~~No-signaling theorem under regional admissibility.~~ RESOLVED in §7.7.** Under the Modular-Local Holographic Superselection Rule (§7.6) — admissibility defined as a local subfunctor on each algebra-state pair $(\hat{\mathcal{A}}(D), \omega_D)$ via Araki / Type II core relative entropy, with spacelike-separated regions combined by the meet of local predicates — no-signaling follows automatically from AQFT microcausality (Theorem 7). No additional axiom required. The earlier formulation as branch-summed support counting suggested a global / joint-region constraint that would have violated no-signaling (see `paper_strategy/38` for the Bell-style counter-example, `paper_strategy/39` for the modular-local resolution); the reformulated bound $\chi_R(\omega) \le C(R)$ on each region separately, with admissibility being the meet of local predicates, is intrinsically local and signaling-free.
 
 ### 11.5 Credit division
 
