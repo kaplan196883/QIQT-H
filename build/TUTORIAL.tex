@@ -1402,6 +1402,42 @@ Branch counting is the rule & Branch counting is a derived approximation in the 
 
 The modular-local reformulation is the framework's response to the no-signaling constraint — and it produces a more elegant, more mathematically clean version of the same physical idea.
 
+\subsection{Four technical commitments the framework makes}
+
+The modular-local reformulation forces four concrete commitments that deserve to be stated explicitly. Each is a refinement of an earlier informal statement.
+
+\textbf{1. The physical state space is not a Hilbert subspace.} Under the modular-local bound, the physical state space is the \emph{algebraic} set
+
+\[
+\mathcal{S}_{\rm phys} = \{ \omega : \chi_R(\omega_R) \le C(R) \text{ for every bounded region } R \},
+\]
+
+not a linear subspace of Hilbert space. The Hilbert-space picture $\mathcal{H}_{\rm phys}$ is recovered only as equivalence classes of representatives that induce the same regional states. The constraint is \emph{nonlinear} in the Hilbert vector, and there is no projector onto $\mathcal{H}_{\rm phys}$.
+
+\textbf{2. Macroscopic definiteness is "effective", not literal.} The earlier "$N$ records fit iff $N \cdot I_0 \le Q_R$" argument is replaced by an effective-entropy bound:
+
+\[
+H(\{p_k\}) \le C(R) - I_0, \qquad N_{\rm eff} := \exp H(p) \le \exp(C(R) - I_0).
+\]
+
+Single-record-per-run is exact only at saturation $I_0 = C(R)$. Approximate saturation gives an \emph{effective} number of records (Hill number / perplexity, §4.5) much less than $\exp(C(R))$, but not a hard cardinality bound. The framework is honest that this is a \emph{probabilistic} concentration on a small effective set, not a sharp kinematic exclusion of all multi-record states.
+
+\textbf{3. Instruments must be branchwise admissibility-preserving.} A measurement instrument $\{\Phi_a\}$ is physical only if \emph{every} normalized post-outcome state $\omega_a = \omega \circ \Phi_a^* / p_a$ is admissible — not just the non-selective average. A measurement could in principle preserve admissibility on average while one branch violates it; the framework forbids this.
+
+\textbf{4. Admissibility applies causally, never retroactively.} When a joint future diamond $D_{AB}$ contains both Alice's and Bob's records, $D_{AB}$ has its own capacity $C(D_{AB})$ that constrains the \emph{future joint state} on $\hat{\mathcal{A}}(D_{AB})$. The constraint \textbf{does not} retroactively delete or reweight Alice's or Bob's past separately-admissible branches. Without this clause, the framework would smuggle in postselection signaling through future joint conditions.
+
+These four commitments turn the framework's working informal description into a \emph{specifically constrained} algebraic theory. They are the price of having the modular-local refactor close the no-signaling loophole properly.
+
+\subsubsection{A small numerical update}
+
+The earlier estimate that QIQT-H deviations from Born probabilities at lab scale are below $\sim 10^{-24}$ used a Bekenstein cap on branch counts. The modular-local form gives the deviation directly via Markov:
+
+\[
+\delta_R \le \frac{\mathbb{E}[\chi_R]}{C(R)} \lesssim \frac{2\pi L \, E_R / (\hbar c)}{A(\partial R)/(4 \ell_P^2)}.
+\]
+
+For $L \sim 1\,\mathrm{m}$ and $E_R \sim 1\,\mathrm{kg}\,c^2$, the numerator is $\sim 2 \times 10^{43}$ nats and the denominator $\sim 10^{70}$ nats, giving $\delta_R \lesssim 10^{-27}$. Operationally invisible — but importantly, the bound is now \textbf{region- and energy-dependent}, not a universal constant. Larger or more energetic regions have different deviations.
+
 \medskip\hrule\medskip
 
 \section{Why operator algebras enter at all}
