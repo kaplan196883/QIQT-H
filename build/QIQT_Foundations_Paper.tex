@@ -1371,18 +1371,42 @@ The Bekenstein-Bousso holographic bound, taken literally as a Lorentz-invariant 
 
 \subsection{Open problems}
 
+The open-problems list has been restructured after the modular-local refactor (§7.6) and Theorem 6's Donald's-identity reformulation. Items related to \emph{global} branch-summed admissibility have been retired or rephrased; the framework's commitments are now sharply located in the \textbf{record-instantiation-cost postulate} (H2 in Theorem 6) and the \textbf{stagewise causal admissibility structure} (§7.6).
+
+\textbf{Foundational (the framework's central new commitments):}
+
 \begin{enumerate}
-  \item \textbf{Precise formulation of the branch-summed cost $I_\Sigma^\epsilon[\omega_R]$.} Define $\mathcal{C}(R)$ as the einselected/Darwinistic record subalgebra; define per-record cost $c_R(r)$ via Zurek-style physical entropy; specify the smooth active set $\mathcal{A}_\epsilon$ rigorously. Existing ingredients to draw on: decoherent histories (Gell-Mann-Hartle, Griffiths, Omnès), Quantum Darwinism / spectrum broadcast (Zurek, Brandão-Piani-Horodecki), Rényi-0 / Hill numbers.
-  \item \textbf{Empirical calibration of $I_0$.} The per-record physical cost $I_0$ is an experimental parameter of the theory, analogous to GRW's collapse rate $\lambda$. Its value must be determined by calibrating against the observed quantum-to-classical transition scale: the largest scale at which Schrödinger-cat-like coherence has been experimentally maintained, and the smallest scale at which classical-definite outcomes have been established. Current best estimates (Zurek physical entropy for typical macroscopic records) give $I_0 \sim 10^{25}$ bits, but the empirically required value may be larger if records include extensive environmental entanglement. The framework's prediction: a definite calibrated value of $I_0$ such that the constraint $N \cdot I_0 \le Q_R$ matches the observed quantum-classical boundary.
-  \item \textbf{The Branch-Summed Bound as a new holographic principle.} Justify $I_\Sigma^\epsilon \le Q_R$ as a strengthening of standard Bekenstein-Bousso. Connect to deeper finite-information constraints in quantum gravity. This is genuinely new physics that does not follow from existing holographic results.
-  \item \textbf{Characterization of physical Hamiltonians.} Which Hermitian operators preserve $\mathcal{H}_{\rm phys}$? Develop the Dirac-style constrained-dynamics formalism analogous to gauge theory. Show that standard low-energy / lab-scale dynamics are approximately physical Hamiltonians (where the constraint is operationally vacuous because $N \cdot I_0 \ll Q_R$ for laboratory-scale records).
-  \item \textbf{Rigorous Born typicality under constrained dynamics.} Specify the measure on actual initial conditions of actual runs; prove that the realized-record distribution across runs reproduces $|c_k|^2$ under the constrained dynamics.
-  \item \textbf{Quantitative form of the resolution floor $\epsilon(R)$} for the operational equivalence relation on regional algebra states.
-  \item \textbf{State-extension and reference-state issues} in the crossed-product algebra formulation.
-  \item \textbf{Cosmological / horizon applications} — extend to the de Sitter static patch and black-hole horizon regions.
-  \item \textbf{Phenomenological predictions.} With $I_0$ calibrated, the framework predicts: maximum macroscopic-superposition scale (testable against Schrödinger-cat experiments with progressively larger systems); long-baseline coherence limits; specific signatures distinguishing the framework from GRW-style stochastic collapse (the framework predicts kinematic exclusion, not stochastic events).
-  \item \textbf{\textasciitilde{}\textasciitilde{}No-signaling theorem under regional admissibility.\textasciitilde{}\textasciitilde{} RESOLVED in §7.7.} Under the Modular-Local Holographic Superselection Rule (§7.6) — admissibility defined as a local subfunctor on each algebra-state pair $(\hat{\mathcal{A}}(D), \omega_D)$ via Araki / Type II core relative entropy, with spacelike-separated regions combined by the meet of local predicates — no-signaling follows automatically from AQFT microcausality (Theorem 7). No additional axiom required. The earlier formulation as branch-summed support counting suggested a global / joint-region constraint that would have violated no-signaling (see \texttt{paper\_strategy/38} for the Bell-style counter-example, \texttt{paper\_strategy/39} for the modular-local resolution); the reformulated bound $\chi_R(\omega) \le C(R)$ on each region separately, with admissibility being the meet of local predicates, is intrinsically local and signaling-free.
+  \item \textbf{The record-instantiation-cost postulate (H2).} The framework's central new physical axiom: instantiating a macroscopic record on region $R$ requires modular cost $\chi_R(\bar\omega_R) \ge I_0 - \eta_0$. Justify this as a strengthening of standard Bekenstein-Bousso. Connect to deeper finite-information constraints in quantum gravity (e.g., a \emph{modular} Bekenstein bound on record-bearing states). This is genuinely new physics that does not follow from existing holographic results.
+  \item \textbf{Operational distinguishability axiomatization (H3).} Make precise — under decoherence + Quantum Darwinism — when the macroscopic-record subalgebra admits a normal measurement instrument decoding the record index with small error, so that the Fano-type bound $H_\epsilon \le I_{\rm Hol}^R + \eta_{\rm def}$ holds. Existing ingredients: spectrum broadcast structure (Zurek, Brandão-Piani-Horodecki), redundancy plateaus, decoherent-histories medium-decoherence conditions.
+  \item \textbf{Stagewise adapted process and refinement compatibility.} Construct rigorously the stagewise process $h \mapsto \omega_t^h$ of §7.6, including: existence under Cauchy-slice refinement; compatibility of $\mathfrak{R}_t(h)$ with the AQFT net's isotony; conditions under which the adapted family extends to a completed-history limit.
+  \item \textbf{Empirical calibration of $I_0$.} The per-record physical cost $I_0$ is an experimental parameter, analogous to GRW's collapse rate $\lambda$. Its value must be calibrated against the observed quantum-to-classical transition scale. Current best estimates (Zurek physical entropy for typical macroscopic records) give $I_0 \sim 10^{25}$ bits, but the empirically required value may be larger if records include extensive environmental entanglement. The framework's prediction: a definite calibrated value of $I_0$ such that the saturation condition $I_0 \approx C(R)$ matches the observed quantum-classical boundary for macroscopic systems.
 \end{enumerate}
+
+\textbf{Algebraic / mathematical-physics:}
+
+\begin{enumerate}
+  \item \textbf{Functorial / isotonic crossed-product local nets.} Establish the functorial structure $D \mapsto \hat{\mathcal{A}}(D)$ as a covariant net of Type II crossed-product algebras with normal embeddings under inclusion. Needed for the modular-local bound to behave consistently under region refinement / coarse-graining.
+  \item \textbf{Modular-Hamiltonian estimates beyond wedges and CFT balls.} Generalize the wedge / CFT-ball modular-Hamiltonian estimate to broader classes of regions, either via tighter enclosing-wedge monotonicity arguments or new geometric forms of $K_R^\sigma$. Without this the conditional $\delta_R \sim 10^{-27}$ estimate cannot be extended to generic laboratory geometries.
+  \item \textbf{Quantitative form of the resolution floor $\epsilon(R)$} for the operational equivalence relation on regional algebra states (the (FQ)(iii) precision floor).
+  \item \textbf{State-extension and reference-state issues} in the crossed-product algebra formulation: extension of states across causal-diamond boundaries, choice of $\sigma_R$ in cosmological / non-stationary backgrounds.
+\end{enumerate}
+
+\textbf{Empirical / phenomenological:}
+
+\begin{enumerate}
+  \item \textbf{Concrete measurement-apparatus models realizing finite $\chi_R$ budgets.} Build explicit toy models (Stern-Gerlach, interferometer, optomechanical) where $\chi_R$ for the apparatus-record state is computable and the saturation regime can be approached. Without these the framework's content cannot be confronted with experiment.
+  \item \textbf{Rigorous Born typicality under constrained dynamics.} Specify the measure on actual initial conditions of actual runs; prove that the realized-record distribution across runs reproduces $|c_k|^2$ under the constrained dynamics. Analogous to Bohmian DGZ $|\psi|^2$-equivariance.
+  \item \textbf{Phenomenological predictions.} With $I_0$ calibrated, the framework predicts: maximum macroscopic-superposition scale (testable against Schrödinger-cat experiments with progressively larger systems); long-baseline coherence limits; specific signatures distinguishing the framework from GRW-style stochastic collapse (the framework predicts kinematic exclusion, not stochastic events).
+  \item \textbf{Cosmological / horizon applications} — extend to the de Sitter static patch and black-hole horizon regions, where $C(R)$ becomes finite and saturation may be physically relevant.
+\end{enumerate}
+
+\textbf{Resolved or retired:}
+
+\begin{itemize}
+  \item \textasciitilde{}\textasciitilde{}"No-signaling theorem under regional admissibility"\textasciitilde{}\textasciitilde{} \textbf{RESOLVED in §7.7} via modular-local admissibility + AQFT microcausality. The earlier Bell-style counter-example with hard joint-diamond cutoff (see \texttt{paper\_strategy/38}, \texttt{paper\_strategy/39}) motivated the modular-local refactor.
+  \item \textasciitilde{}\textasciitilde{}"Precise formulation of the branch-summed cost"\textasciitilde{}\textasciitilde{} \textbf{RETIRED}: the branch-summed cost $I_\Sigma^\epsilon$ is now a \emph{derived classical-mixture approximation} of $\chi_R$, not a fundamental quantity.
+  \item \textasciitilde{}\textasciitilde{}"Characterization of physical Hamiltonians on $\mathcal{H}_{\rm phys}$"\textasciitilde{}\textasciitilde{} \textbf{REPHRASED} as item 3 (stagewise adapted process): the framework's dynamics is now stated as admissibility-preserving normal CP maps on the algebraic state space, not Hamiltonian flow on a Hilbert subspace.
+\end{itemize}
 
 \subsection{Credit division}
 
