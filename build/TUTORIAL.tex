@@ -1283,9 +1283,9 @@ P(h)
 
 If the admissible set contains essentially all Born-weight-relevant histories, this reduces to ordinary quantum mechanics.
 
-\textbf{Caveat.} This renormalization formula is only consistent if the admissibility rule $\mathcal{H}_{\rm adm}$ is stable under coarse-graining, compatible with causal localization, and admits a Born-weight equivariance-like theorem (analogous to Bohmian $|\psi|^2$-equivariance, §22). Without such compatibility, the renormalization can in principle introduce \emph{nonlinear effective probabilities} that may threaten no-signaling in relativistic settings. Establishing the appropriate equivariance/no-signaling theorem for QIQT-H's admissibility rule is one of the framework's central open problems.
+\textbf{Caveat.} This renormalization formula is only consistent if the admissibility rule $\mathcal{H}_{\rm adm}$ is stable under coarse-graining and compatible with causal localization. A naive global-budget formulation would \emph{fail} — it would let a distant experimenter's choice affect a local experimenter's marginal probabilities. The framework's resolution is the \textbf{modular-local reformulation} of §8.4 below: admissibility is imposed on each region separately, not as a joint cap. Under that reformulation no-signaling is automatic (§8.4 makes this precise).
 
-So QIQT-H aims to reproduce normal Born statistics in ordinary laboratory regimes while imposing new constraints in extreme gravitational or cosmological regimes — but the precise statement that the renormalization-by-admissibility recovers Born statistics safely is currently a conjecture, not a theorem.
+Born-weight equivariance — the statement that the renormalized weights still reduce to $|c_k|^2$ under admissibility conditioning — is the framework's remaining major open problem (analogous to Bohmian $|\psi|^2$-equivariance, §22). In ordinary laboratory regimes where the bound is far from saturation, the equivariance holds trivially because the admissibility predicate is vacuous and $P_{\rm QIQT}(h) = w(h)$ exactly.
 
 \subsection{Why this might help the measurement problem}
 
@@ -1313,7 +1313,94 @@ The hope is to get:
 
 The honest picture: the Branch-Summed Bound predicts a definite quantum-to-classical \emph{boundary scale}, above which multi-record structures are kinematically excluded. Below that scale, the bound is operationally vacuous, and the framework needs an additional global admissibility mechanism to recover ordinary single-outcome experience. The current research program proposes the bound but does not yet supply the global mechanism. The tutorial should be read with this caveat throughout.
 
-This is the rough conceptual skeleton. Now we need the machinery.
+\subsection{The modular-local reformulation (why no-signaling works)}
+
+The "branch-summed" picture above is intuitive, but as stated it has a subtle problem. When Alice and Bob measure entangled particles at spacelike separation and their records are later compared in a \emph{joint region} $D_{AB}$, the joint region has its own holographic budget. If the branch-summed cost in $D_{AB}$ is treated as "Alice's record bits + Bob's record bits", then Bob's choice of measurement can in principle affect how much budget is available for Alice's outcomes — and Alice would see her marginal statistics shift depending on what Bob did. That is \textbf{superluminal signaling}, which relativity forbids.
+
+A concrete Bell-style example confirms the worry: with asymmetric record costs and a hard joint cutoff, one can compute
+
+\[
+P_{\rm QIQT}(\text{Alice}=+ \mid x, y) = \frac{2}{3 + \cos\theta_{xy}},
+\]
+
+which depends on Bob's setting $y$. So the naive formulation as stated is \emph{inconsistent with relativity}.
+
+The fix is structural. Instead of "count records in each region and bound the count", state the constraint as a bound on the \textbf{regional relative entropy} — a quantity already well-defined for Type III local QFT algebras via Araki / Connes machinery:
+
+\[
+\chi_R(\omega) := S_{\hat{\mathcal{A}}(R)}(\omega_R \,\|\, \Omega_R) \;\le\; C(R) = \frac{A(\partial R)}{4G\hbar}.
+\]
+
+Here $\chi_R(\omega)$ measures how complicated the regional state $\omega_R$ is compared to a reference state $\Omega_R$ (typically the vacuum), evaluated \emph{intrinsically} on the regional algebra. It is finite, basis-independent, and well-defined even when the algebra is Type III (no density-matrix factorization needed).
+
+For two spacelike-separated regions $D_A$ and $D_B$, admissibility is the \textbf{meet of local predicates}:
+
+\[
+\mathrm{Adm}(D_A \cup D_B) \;=\; \mathrm{Adm}(D_A) \;\text{AND}\; \mathrm{Adm}(D_B).
+\]
+
+That is: a state is admissible on the spacelike pair iff its restriction to \emph{each} local algebra is admissible. \textbf{No joint cutoff is applied to the combined algebra $\hat{\mathcal{A}}(D_A) \vee \hat{\mathcal{A}}(D_B)$.} The vacuum may remain entangled across the spacelike boundary — the framework doesn't try to disentangle it; it simply asks that each region's \emph{local} relative entropy be below its \emph{local} capacity.
+
+\subsubsection{Why this gives no-signaling automatically}
+
+In algebraic QFT, the algebras of spacelike-separated regions commute:
+
+\[
+[\hat{\mathcal{A}}(D_A), \hat{\mathcal{A}}(D_B)] = 0.
+\]
+
+This is \textbf{microcausality} — the bedrock principle that spacelike operations cannot interfere with each other. From microcausality plus the modular-local form of the bound, Alice's marginal probability is independent of Bob's setting in one line:
+
+If Bob performs an instrument $\{\Psi_b^y\}$ in $D_B$ with the \emph{summed} operation $\Psi^y = \sum_b \Psi_b^y$ (i.e., we don't record Bob's outcome), then by microcausality $\Psi^y$ acts as the identity on Alice's algebra. Therefore Alice's outcome effect $E_a^x \in \hat{\mathcal{A}}(D_A)$ gives
+
+\[
+P_{\rm QIQT}(a \mid x, y) = \omega(\Psi^{y*}(E_a^x)) = \omega(E_a^x),
+\]
+
+independent of $y$. The admissibility predicate cannot break this, because Alice's local admissibility depends only on her local state restriction, which Bob's non-selective operation does not touch.
+
+\textbf{No-signaling is now a one-line theorem}, not an extra axiom and not an approximation. The framework was \emph{forced} into this modular-local form by the no-signaling constraint, and the fact that the constraint forces such a clean algebraic reformulation is itself evidence that this is the right structure.
+
+\subsubsection{What survives from the branch-counting picture}
+
+The branch-counting language ($I_\Sigma^\varepsilon$, $I_0$, $N \le Q_R/I_0$) doesn't disappear. When a regional state is a classical mixture of decoherent macroscopic records (which is what measurement produces, after §6's einselection and Quantum Darwinism do their work), the regional relative entropy \emph{reduces} to a sum:
+
+\[
+\chi_R(\omega_{\rm classical\;mixture}) \;\approx\; \sum_r p_r\, c_R(r) + H_{\rm Shannon}(\{p_r\}),
+\]
+
+where $c_R(r)$ is the per-record relative entropy. So "branch-summed cost" becomes a \emph{derived approximation} of the modular-local bound in the classical-mixture regime — useful for operational calibration ($I_0$ as an empirical parameter, predicting the Schrödinger-cat scale, designing macroscopic-superposition experiments) but no longer the \emph{fundamental} statement of the bound.
+
+The fundamental statement is algebraic. The branch-counting picture is the right intuitive handle in the appropriate regime.
+
+\subsubsection{Why this respects the boundary entanglement}
+
+In QFT, the vacuum is wildly entangled across every spatial boundary. Two regions sharing a boundary share entangled vacuum modes; the regions are not independent universes. This is the deep reason local algebras are Type III.
+
+The modular-local approach handles this correctly. $\chi_R$ is \emph{defined} on the regional algebra including its boundary structure — it already accounts for the boundary entanglement that's always there. What the framework explicitly \emph{avoids} is trying to compute a joint relative entropy across the boundary, which would re-couple the two regions and re-introduce signaling. Relative entropy is used locally only; spacelike combination is by meet.
+
+\subsubsection{Summary}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{|Y|Y|}
+\hline
+\textbf{Original (branch-summed)} & \textbf{Reformulated (modular-local)} \\
+\hline
+Count records in $R$, bound the count by $Q_R/I_0$ & Bound regional relative entropy $\chi_R(\omega)$ by $C(R)$ \\
+\hline
+Spacelike regions combined by joint-budget cap (dangerous) & Spacelike regions combined by meet of local predicates (safe) \\
+\hline
+No-signaling: open problem & No-signaling: one-line theorem from microcausality \\
+\hline
+Fundamental object: support count & Fundamental object: algebra-state pair \\
+\hline
+Branch counting is the rule & Branch counting is a derived approximation in the classical-mixture regime \\
+\hline
+\end{tabularx}
+\end{center}
+
+The modular-local reformulation is the framework's response to the no-signaling constraint — and it produces a more elegant, more mathematically clean version of the same physical idea.
 
 \medskip\hrule\medskip
 
