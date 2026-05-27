@@ -905,7 +905,7 @@ The closest neighbor. Ballentine treats the formal wave function as ensemble-des
 
 ### 10.8 Palmer's Rare-event Quantum Mechanics / Invariant Set Theory (sister program)
 
-Palmer's Rare-event Quantum Mechanics (RaQM 2025, PNAS) and the broader Invariant Set Theory (IST) program is the closest neighbor in the space of *single-world, structural-principle, measurement-dependent* frameworks. Both Palmer and the present framework reject Bell's measurement-independence assumption on principled grounds (not as conspiratorial superdeterminism); both treat the wave function as not exhausting the per-run physical content; both seek to ground the measurement problem's resolution in a deep structural feature of physics rather than in collapse, branching, or particle ontology.
+Palmer's Rational Quantum Mechanics (RaQM 2025, PNAS) and the broader Invariant Set Theory (IST) program is the closest neighbor in the space of *single-world, structural-principle, measurement-dependent* frameworks. Both Palmer and the present framework reject Bell's measurement-independence assumption on principled grounds (not as conspiratorial superdeterminism); both treat the wave function as not exhausting the per-run physical content; both seek to ground the measurement problem's resolution in a deep structural feature of physics rather than in collapse, branching, or particle ontology.
 
 **Shared structural commitments:**
 - Single-world realism per run
@@ -1124,7 +1124,7 @@ The author thanks the participants in extended discussions that informed the fra
 
 1. Ballentine, L. E. (1970). The statistical interpretation of quantum mechanics. *Rev. Mod. Phys.*, 42, 358.
 2. Banks, T. (2025). *Finite Entropy Implies Finite Dimension in Quantum Gravity.* arXiv:2509.17856.
-3. Bassi, A., Dorato, M., & Ulbricht, H. (2025). *The Quantum Measurement Problem: A Review of Recent Trends.* arXiv:2502.19278.
+3. Bassi, A., Dorato, M., & Ulbricht, H. (2023). *Collapse Models: A Theoretical, Experimental and Philosophical Review.* Entropy 25, 645. arXiv:2310.14969. (See also Tomaz, A. A., Mattos, R. S., & Barbatti, M. (2025). *The Quantum Measurement Problem: A Review of Recent Trends.* Phil. Mag. C. arXiv:2502.19278, for a broader recent survey.)
 4. Bekenstein, J. D. (1981). Universal upper bound on the entropy-to-energy ratio for bounded systems. *Phys. Rev. D*, 23, 287.
 5. Bohm, D. (1952). A suggested interpretation of the quantum theory in terms of "hidden" variables. *Phys. Rev.*, 85, 166.
 6. Bousso, R. (2002). The holographic principle. *Rev. Mod. Phys.*, 74, 825. arXiv:hep-th/0203101.
@@ -1134,7 +1134,7 @@ The author thanks the participants in extended discussions that informed the fra
 10. Dieks, D. (1989). Quantum mechanics without the projection postulate. *Foundations of Physics*, 19, 1397.
 11. Diósi, L. (1989). Models for universal reduction of macroscopic quantum fluctuations. *Phys. Rev. A*, 40, 1165.
 12. Dürr, D., Goldstein, S., & Zanghì, N. (1992). Quantum equilibrium and the origin of absolute uncertainty. *J. Stat. Phys.*, 67, 843.
-13. Engelhardt, N., & Wall, A. C. (2015). Quantum extremal surfaces. *JHEP* 01 (2015) 073.
+13. Engelhardt, N., & Wall, A. C. (2015). *Quantum extremal surfaces: holographic entanglement entropy beyond the classical regime.* JHEP 01 (2015) 073. arXiv:1408.3203.
 14. Everett, H. (1957). "Relative state" formulation of quantum mechanics. *Rev. Mod. Phys.*, 29, 454.
 15. Gell-Mann, M., & Hartle, J. B. (1993). Classical equations for quantum systems. *Phys. Rev. D*, 47, 3345.
 16. Ghirardi, G. C., Rimini, A., & Weber, T. (1986). Unified dynamics for microscopic and macroscopic systems. *Phys. Rev. D*, 34, 470.
@@ -1149,7 +1149,7 @@ The author thanks the participants in extended discussions that informed the fra
 25. **Murray, F. J., & von Neumann, J. (1936).** On rings of operators. *Annals of Mathematics*, 37, 116.
 26. Nielsen, M. A., & Chuang, I. L. (2010). *Quantum Computation and Quantum Information.* Cambridge.
 27. Omnès, R. (1994). *The Interpretation of Quantum Mechanics.* Princeton University Press.
-28. Palmer, T. N. (2025). Rare-event quantum mechanics from a discretized Hilbert space. *Proc. Natl. Acad. Sci. USA* (PNAS). arXiv:2510.02877. (See also Palmer, *The Invariant Set Postulate: A New Geometric Framework for the Foundations of Quantum Theory*, Proc. Roy. Soc. A, 2009; and subsequent IST development.)
+28. Palmer, T. N. (2025). *Rational Quantum Mechanics: Testing Quantum Theory with Quantum Computers.* Proc. Natl. Acad. Sci. USA (PNAS). arXiv:2510.02877. (See also Palmer, T. N. (2009). *The Invariant Set Postulate: A New Geometric Framework for the Foundations of Quantum Theory and the Role Played by Gravity.* Proc. Roy. Soc. A 465, 3165–3185. DOI: 10.1098/rspa.2009.0080. arXiv:0812.1148; and subsequent IST development.)
 29. Pearle, P. (1989). Combining stochastic dynamical state-vector reduction with spontaneous localization. *Phys. Rev. A*, 39, 2277.
 30. Penrose, R. (1996). On gravity's role in quantum state reduction. *Gen. Rel. Grav.*, 28, 581.
 31. Susskind, L. (1995). The world as a hologram. *J. Math. Phys.*, 36, 6377. arXiv:hep-th/9409089.

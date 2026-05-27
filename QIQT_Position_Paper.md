@@ -236,7 +236,7 @@ The author thanks the participants in extended discussions that informed the pos
 - Ghirardi, G. C., Rimini, A., & Weber, T. (1986). Unified dynamics for microscopic and macroscopic systems. *Phys. Rev. D*, 34, 470.
 - 't Hooft, G. (1993). Dimensional reduction in quantum gravity. arXiv:gr-qc/9310026.
 - Penrose, R. (1996). On gravity's role in quantum state reduction. *Gen. Rel. Grav.*, 28, 581.
-- Palmer, T. N. (2025). Rare-event quantum mechanics from a discretized Hilbert space. *Proc. Natl. Acad. Sci. USA*. arXiv:2510.02877. (See also Palmer, *The Invariant Set Postulate*, Proc. Roy. Soc. A, 2009.)
+- Palmer, T. N. (2025). *Rational Quantum Mechanics: Testing Quantum Theory with Quantum Computers.* Proc. Natl. Acad. Sci. USA. arXiv:2510.02877. (See also Palmer, T. N. (2009). *The Invariant Set Postulate: A New Geometric Framework for the Foundations of Quantum Theory and the Role Played by Gravity.* Proc. Roy. Soc. A 465, 3165. arXiv:0812.1148.)
 - Wallace, D. (2012). *The Emergent Multiverse.* Oxford University Press.
 - Zurek, W. H. (2003). Decoherence, einselection, and the quantum origins of the classical. *Rev. Mod. Phys.*, 75, 715.
 - Kapłański, P. (2026). *One Wave Function, One World: Finite-Information Regional Algebras and the Macroscopic World from Holographic Constraint.* (Companion technical paper.)

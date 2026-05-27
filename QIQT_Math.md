@@ -708,7 +708,7 @@ The author thanks the participants in extended discussions that informed the fra
 10. Joos, E., Zeh, H. D., Kiefer, C., Giulini, D., Kupsch, J., & Stamatescu, I.-O. (2003). *Decoherence and the Appearance of a Classical World in Quantum Theory.* Springer.
 11. Kapłański, P. (2026). *One Wave Function, One World: How the Holographic Information Bound Selects the Macroscopic World.* (Position paper.)
 12. Kapłański, P. (2026). *One Wave Function, One World: Finite-Information Regional Algebras and the Macroscopic World from Holographic Constraint.* (Foundations paper.)
-13. Palmer, T. N. (2025). Rare-event quantum mechanics from a discretized Hilbert space. *Proc. Natl. Acad. Sci. USA*. arXiv:2510.02877.
+13. Palmer, T. N. (2025). *Rational Quantum Mechanics: Testing Quantum Theory with Quantum Computers.* Proc. Natl. Acad. Sci. USA. arXiv:2510.02877.
 14. Susskind, L. (1995). The world as a hologram. *J. Math. Phys.*, 36, 6377. arXiv:hep-th/9409089.
 15. 't Hooft, G. (1993). *Dimensional reduction in quantum gravity.* arXiv:gr-qc/9310026.
 16. Wallace, D. (2012). *The Emergent Multiverse.* Oxford University Press.
