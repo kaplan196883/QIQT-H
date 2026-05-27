@@ -205,6 +205,8 @@ Part (i) defines the mathematical content of "wave function in $R$": it is the s
 
 The literal reading is a stronger statement than the narrow entanglement-entropy reading and a stronger statement than what Witten's algebraic theorem directly establishes. It is our foundational postulate. The relationship to Witten's framework is made explicit in §4.3.
 
+**Important: (FQ) is a per-region kinematic constraint, not a single global budget.** Each bounded region $R$ has its own capacity $Q_R$ set by *its* boundary area; the bound is imposed independently for each $R$. There is no single shared information budget over all spacetime. This is essential for consistency with no-signaling — a single global cap shared across spacelike-separated regions would let a distant experimenter's choice consume budget belonging to a local experimenter, producing operational superluminal signaling. A joint causal diamond $D_{AB}$ containing two spacelike-separated record-comparison events does carry its own $Q_{D_{AB}}$, and this can in principle couple the records' joint admissibility; the explicit no-signaling theorem required to rule out signaling through such joint diamonds is identified as Open Problem 10 (§11.4).
+
 ### 4.2 Motivation: the literal reading of the bound
 
 We adopt (FQ) as a foundational axiom. The motivation rests on:
@@ -848,6 +850,12 @@ The open problems are *concrete and well-defined*: each can be attacked in princ
 8. **Cosmological / horizon applications** — extend to the de Sitter static patch and black-hole horizon regions.
 
 9. **Phenomenological predictions.** With $I_0$ calibrated, the framework predicts: maximum macroscopic-superposition scale (testable against Schrödinger-cat experiments with progressively larger systems); long-baseline coherence limits; specific signatures distinguishing the framework from GRW-style stochastic collapse (the framework predicts kinematic exclusion, not stochastic events).
+
+10. **No-signaling theorem under regional admissibility.** Prove that
+
+    $$P_{\rm QIQT}(a \mid x, y) = P_{\rm QIQT}(a \mid x)$$
+
+    for all spacelike-separated settings $x, y$ and outcomes $a$ under the Branch-Summed admissibility conditioning. A *sufficient* algebraic condition is the conditional-expectation factorization $K_{xy} = K_A^x \cdot K_B^y$ with $E_A(K_B^y) = c_y \mathbf{1}$ across spacelike algebras; this works in toy tensor-product Bell models but is not generic in Type III local QFT (algebras do not tensor-factorize, and state-preserving conditional expectations onto local subalgebras are absent for entangled states). The *naive* global-budget formulation $I_A + I_B \le S_{AB}$ explicitly violates no-signaling — Alice and Bob would compete for one entropy budget — so the framework is committed to per-region budgets ((FQ) is stated per region in §4.1). The remaining problem is the *joint comparison diamond*: when records from spacelike-separated $D_A$ and $D_B$ are later compared in a common future diamond $D_{AB}$, the bound $Q_{D_{AB}}$ on the joint diamond can couple A's and B's admissibility. Prove that this coupling does not enable operational signaling — either via a causal screening theorem for the joint diamond's admissibility predicate, or by identifying a locality/factorization structure on the Type II algebras that survives in Type III local QFT.
 
 ### 11.5 Credit division
 
