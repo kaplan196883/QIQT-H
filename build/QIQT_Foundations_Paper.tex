@@ -812,13 +812,13 @@ This is the framework's central new physical postulate beyond the algebraic scaf
 
 This is a \textbf{strengthening of the standard Bekenstein-Bousso bound}, not a derivation from it. Standard holographic entropy bounds limit the renormalized entropy of regional reduced states; the modular-local bound limits the \emph{relative} entropy with respect to a reference state, intrinsically defined via Araki/Connes machinery in Type III local QFT.
 
-\textbf{Branch-summed cost as derived approximation.} When $\omega_R$ is a strict classical mixture over decoherent macroscopic records (as it is after decoherence + (FQ) at lab scale, §6.2–6.3), $\chi_R(\omega)$ reduces to a sum over record contributions:
+\textbf{Branch-summed cost as derived approximation.} When $\omega_R$ is a strict classical mixture $\bar\omega_R = \sum_k p_k \omega_{k,R}$ over decoherent macroscopic records (as after decoherence + (FQ) at lab scale, §6.2–6.3), Donald's identity for Araki relative entropy gives
 
 \[
-\chi_R(\omega_{\rm classical-mixture}) \;\approx\; \sum_{r \in \mathcal{A}_\epsilon} p_r \, c_R(r) + H_{\rm Shannon}(\{p_r\}),
+\chi_R(\bar\omega_R) \;=\; \sum_k p_k \, c_R(r_k) - I_{\rm Hol}^R,
 \]
 
-where $c_R(r) = S(\omega_r \| \Omega_R)$ is the per-record relative entropy of record $r$ and $H_{\rm Shannon}$ is the entropy of the mixture weights. In the regime where one record dominates, $\chi_R \approx c_R(r_{\rm dominant}) \approx I_0$; in the regime where $N$ records share weight comparably, $\chi_R \approx N \cdot I_0$ up to the Shannon term. \textbf{The "branch-summed cost" $I_\Sigma^\epsilon$ is a derived macroscopic-classical-mixture approximation of $\chi_R$}, not an independent quantity. It remains the right object for operational calibration (the $I_0$ parameter, Schrödinger-cat scale, exclusion curves) but is no longer the fundamental statement of the bound.
+where $c_R(r_k) = \chi_R(\omega_{k,R})$ is the per-record cost (relative entropy of branch $k$ to the reference $\sigma_R$) and $I_{\rm Hol}^R = \sum_k p_k S_{\rm Araki}(\omega_{k,R} \| \bar\omega_R)$ is the Holevo information of the mixture. In the strict distinguishable-record limit, $I_{\rm Hol}^R \approx H(\{p_k\})$. Branch multiplicity is thus controlled by the Holevo term that reappears in Theorem 6, not by an independent spacelike joint cutoff. \textbf{The earlier "branch-summed cost" $I_\Sigma^\epsilon$ is a derived classical-mixture approximation in this sense, useful for operational calibration (the $I_0$ parameter, Schrödinger-cat scale, exclusion curves) but not the fundamental statement of the bound.}
 
 This formulation matters for two reasons:
 
@@ -827,7 +827,7 @@ This formulation matters for two reasons:
   \item \textbf{No-signaling becomes a theorem.} Because $\chi_R$ depends only on the algebra-state pair $(\hat{\mathcal{A}}(R), \omega_R)$ and not on any joint-region structure, and because the admissibility predicate for spacelike-separated regions is the meet of local predicates, no-signaling follows automatically from AQFT microcausality. See §7.7.
 \end{enumerate}
 
-\textbf{The framework's commitment: the modular-local capacity bound is a SUPERSELECTION / admissibility rule, not a dynamical collapse rule and not a universal branch-summed cardinality postulate.}
+\textbf{The framework's commitment: the modular-local capacity bound is a superselection/admissibility rule, not a dynamical collapse rule and not a universal branch-summed cardinality postulate.}
 
 Under this commitment, the framework's structure is the following.
 
@@ -1076,7 +1076,7 @@ These are the framework's specific new physical principles, building on the Witt
 P_{\rm QIQT}(a \mid x, y) \;=\; P_{\rm QIQT}(a \mid x).
 \]
 
-\emph{Proof.} Bob's nonselective channel is $\Psi^y = \sum_b \Psi_b^y$, and by completeness and microcausality its Heisenberg dual acts as the identity on Alice's algebra:
+\emph{Proof.} Bob's nonselective channel is $\Psi^y = \sum_b \Psi_b^y$, localized in $\hat{\mathcal{A}}(D_B)$ by construction. By locality of this deterministic channel together with microcausality $[\hat{\mathcal{A}}(D_A), \hat{\mathcal{A}}(D_B)] = 0$, the Heisenberg dual $\Psi^{y*}$ acts as the identity on Alice's algebra:
 
 \[
 \Psi^{y*}(X) \;=\; X \qquad \forall X \in \hat{\mathcal{A}}(D_A).

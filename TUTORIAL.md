@@ -1090,7 +1090,7 @@ The honest picture: the Branch-Summed Bound predicts a definite quantum-to-class
 
 ## 8.4 The modular-local form (why no-signaling works)
 
-The "branch-summed" picture above is intuitive, but as stated it has a subtle problem. When Alice and Bob measure entangled particles at spacelike separation and their records are later compared in a *joint region* $D_{AB}$, the joint region has its own holographic budget. If the branch-summed cost in $D_{AB}$ is treated as "Alice's record bits + Bob's record bits", then Bob's choice of measurement can in principle affect how much budget is available for Alice's outcomes, and Alice would see her marginal statistics shift depending on what Bob did. That is **superluminal signaling**, which relativity forbids.
+If the branch-summed picture above were promoted to a fundamental spacelike joint cutoff, it would permit a subtle pathology. When Alice and Bob measure entangled particles at spacelike separation and their records are later compared in a *joint region* $D_{AB}$, the joint region has its own holographic budget. If the branch-summed cost in $D_{AB}$ is treated as "Alice's record bits + Bob's record bits", then Bob's choice of measurement can in principle affect how much budget is available for Alice's outcomes, and Alice would see her marginal statistics shift depending on what Bob did. That is **superluminal signaling**, which relativity forbids.
 
 A concrete Bell-style example confirms the worry: with asymmetric record costs and a hard joint cutoff, one can compute
 
@@ -1100,7 +1100,7 @@ $$
 
 which depends on Bob's setting $y$. So the naive formulation is *inconsistent with relativity*.
 
-The fix is structural. Instead of "count records in each region and bound the count", state the constraint as a bound on the **regional relative entropy**, a quantity already well-defined for Type III local QFT algebras via Araki / Connes machinery:
+The modular-local form fixes this at the level of structure. Instead of "count records in each region and bound the count", state the constraint as a bound on the **regional relative entropy**, a quantity already well-defined for Type III local QFT algebras via Araki / Connes machinery:
 
 $$
 \chi_R(\omega) := S_{\hat{\mathcal{A}}(R)}(\omega_R \,\|\, \Omega_R) \;\le\; C(R) = \frac{A(\partial R)}{4G\hbar}.
