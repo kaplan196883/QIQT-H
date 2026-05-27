@@ -194,10 +194,20 @@ Two technical issues require comment.
 
 **Axiom (FQ) — Literal physical-instantiation reading.** *For every per-run wave function $|\Psi\rangle_{\rm run}$ of the universe (regarded as an element of the enlarged Hilbert space $\mathcal{H} \otimes L^2(\mathbb{R})$, cf. §3.4) and every bounded region $R$ of space:*
 
-*(i) The physical content of $|\Psi\rangle_{\rm run}$ in $R$ is given by the state $\omega_\Psi : \hat{\mathcal{A}}(R) \to \mathbb{C}$ defined by $\omega_\Psi(O) = \langle\Psi_{\rm run}|O|\Psi_{\rm run}\rangle$ for $O \in \hat{\mathcal{A}}(R)$.*
+**Local von Neumann net and normality.** Work in the GNS representation $(\mathcal{H}_\sigma, \pi_\sigma, \Omega_\sigma)$ of the reference state $\sigma$ (§7.6). For each bounded region $R$, let
 
-*(ii) The renormalized entropy $S_{\rm ren}(\omega_\Psi)$ on $\hat{\mathcal{A}}(R)$ is bounded by the area-law generalized entropy:*
-$$S_{\rm ren}(\omega_\Psi) \le Q_R := \frac{A(\partial R)}{4\ell_P^2}.$$
+$$
+\mathcal{M}(R) := \pi_\sigma(\mathcal{A}_{\rm loc}(R))''
+$$
+
+be the local von Neumann algebra. The hatted algebra $\hat{\mathcal{A}}(R)$ denotes the corresponding semifinite Type II crossed-product / core algebra, represented in the standard crossed-product representation induced by $\mathcal{M}(R)$ and $\sigma_R$. (If no crossed-product refinement is being used, set $\hat{\mathcal{A}}(R) = \mathcal{M}(R)$.) The net is assumed isotonic and local: $R' \subset R \Rightarrow \hat{\mathcal{A}}(R') \subset \hat{\mathcal{A}}(R)$, and $R_1 \perp R_2 \Rightarrow [\hat{\mathcal{A}}(R_1), \hat{\mathcal{A}}(R_2)] = 0$.
+
+*(i) **Local normality.** The physical content of $|\Psi\rangle_{\rm run}$ in $R$ is given by the regional restriction $\omega_\Psi|_R$. This restriction must be a normal state on $\hat{\mathcal{A}}(R)$ — equivalently, a positive unital $\sigma$-weakly continuous linear functional, $\omega_\Psi|_R \in \hat{\mathcal{A}}(R)_*^+$ with $\|\omega_\Psi|_R\| = 1$.*
+
+*(ii) **Finite holographic modular budget.** The renormalized entropy $S_{\rm ren}(\omega_\Psi)$ on $\hat{\mathcal{A}}(R)$ — equivalently, the Araki relative entropy $\chi_R(\omega_\Psi|_R)$ with respect to the reference state $\sigma_R$ (§7.6) — is bounded by the area-law generalized entropy:*
+$$
+\chi_R(\omega_\Psi|_R) \;=\; S^{\hat{\mathcal{A}}(R)}_{\rm Araki}(\omega_\Psi|_R \,\|\, \sigma_R) \;\le\; Q_R \;:=\; \frac{A(\partial R)}{4\ell_P^2}.
+$$
 
 *(iii) The wave function $|\Psi\rangle_{\rm run}$ is regarded as a physical object instantiated in spacetime. The total physical information content needed to instantiate $|\Psi\rangle_{\rm run}$ in $R$ — including amplitudes, phase coherence, superposition structure — is bounded by $Q_R$. Two abstract wave functions whose physical instantiations in $R$ are indistinguishable at the precision afforded by this bound are physically identical in $R$.*
 
@@ -526,23 +536,41 @@ The framework's structural skeleton: (FQ) is the literal physical-instantiation 
 
 ### 7.6 The Modular-Local Holographic Superselection Rule (foundational postulate)
 
+**Reference state sector.** Fix once and for all a faithful locally normal reference state $\sigma$ on the quasilocal algebra, and choose the hatted local algebras coherently with this reference sector. In the Minkowski-vacuum sector $\sigma$ is the vacuum state; on stationary thermal backgrounds it is the geometrically preferred KMS state; and on de Sitter / cosmological backgrounds it is the Bunch–Davies, Hartle–Hawking, or other specified invariant reference state. For every bounded diamond $R$, write
+
+$$
+\sigma_R := \sigma|_{\hat{\mathcal{A}}(R)}.
+$$
+
+The family $\{\sigma_R\}$ is required to be **restriction-compatible**: whenever $R' \subset R$, isotony gives $\hat{\mathcal{A}}(R') \subset \hat{\mathcal{A}}(R)$, and
+
+$$
+\sigma_{R'} = \sigma_R |_{\hat{\mathcal{A}}(R')}.
+$$
+
+All relative entropies and modular Hamiltonians below are taken with respect to this $\sigma_R$. The notation $\Omega_R$, when it appears in vacuum-sector examples, denotes only the GNS vector representative of $\sigma_R$, not a second reference state.
+
 The entropy quantity denoted $S_{\rm ren}$ in §4.1(ii) is the modular-local information functional used here:
+
 $$
-S_{\rm ren}(R; \omega) \;\equiv\; \chi_R(\omega_R) \;:=\; S_{\rm Araki}(\omega_R \,\|\, \sigma_R) \;=\; \Delta_\omega \langle K_R^\sigma \rangle - \Delta_\omega S_R,
+S_{\rm ren}(R; \omega) \;\equiv\; \chi_R(\omega_R) \;:=\; S^{\hat{\mathcal{A}}(R)}_{\rm Araki}(\omega_R \,\|\, \sigma_R).
 $$
-for the chosen faithful reference state $\sigma_R$. Thus the holographic condition (FQ)(ii) is precisely the modular-local capacity bound $\chi_R(\omega_R) \le C(R)$.
+
+When the Type II crossed-product representation supplies a canonical trace and a modular Hamiltonian $K_R^\sigma$, this is equivalently written as
+
+$$
+\chi_R(\omega_R) \;=\; \Delta_\omega \langle K_R^\sigma \rangle - \Delta_\omega S_R.
+$$
+
+The holographic condition (FQ)(ii) is precisely the modular-local capacity bound $\chi_R(\omega_R) \le C(R)$.
 
 The above theorems establish the framework's structure within standard renormalized entropy. They leave a critical question: even after decoherence + (FQ) deliver a strict classical mixture $\sum_k p_k \omega_k^R$ on the regional algebra, this is *still a mixture over multiple macroscopic records*. The modular-local capacity bound controls the record-entropy / effective support of this mixture: for $k$ equiprobable records of per-record cost $I_0$, one typically has $\chi_R \simeq I_0 + \log k$, so raw cardinality is not excluded without additional branch-summed assumptions. To establish single-record per-run as a structural consequence at the level of the macroscopic observable content, the framework commits to a stronger principle than standard entropy bounds: a **modular-local holographic superselection rule**.
 
 This is the framework's central new physical postulate beyond the algebraic scaffolding of CPW/Witten. It is formulated *intrinsically* on the algebra-state pair via Araki / Type II core relative entropy, with no joint-region cutoff applied to spacelike-combined algebras.
 
-**Definition (Regional information functional).** *For a bounded region $R$ with local algebra $\hat{\mathcal{A}}(R)$ and a reference state $\Omega_R$ (typically the vacuum or a stationary cosmological reference), the regional information functional is the Araki relative entropy*
+**Definition (Regional information functional, restated).** *The regional information functional $\chi_R$ is the Araki relative entropy on $\hat{\mathcal{A}}(R)$ with respect to the fixed reference $\sigma_R$ defined above. Equivalently, in the Type II crossed-product core with canonical semifinite trace $\tau_R$ and Haagerup densities $h_{\omega, R}$, $h_{\sigma, R}$:*
 $$
-\chi_R(\omega) \;:=\; S_{\hat{\mathcal{A}}(R)}(\omega_R \,\|\, \Omega_R),
-$$
-*where $\omega_R = \omega|_{\hat{\mathcal{A}}(R)}$. Equivalently, in the Type II crossed-product core with canonical semifinite trace $\tau_R$ and Haagerup densities $h_{\omega, R}$, $h_{\Omega, R}$:*
-$$
-\chi_R(\omega) \;=\; \tau_R\!\left[ h_{\omega, R} \left( \log h_{\omega, R} - \log h_{\Omega, R} \right) \right] + \text{counterterms},
+\chi_R(\omega) \;=\; \tau_R\!\left[ h_{\omega, R} \left( \log h_{\omega, R} - \log h_{\sigma, R} \right) \right] + \text{counterterms},
 $$
 *finite by the CPW/Witten construction (no UV divergence; no density-matrix assumption).*
 
@@ -576,17 +604,24 @@ This refactoring matters for two reasons:
 
 Under this commitment, the framework's structure is the following.
 
-**Definition (Algebraic physical state space).** *Write $\omega_R := \omega|_{\hat{\mathcal{A}}(R)}$ for the restriction of an algebraic state $\omega$ to the regional algebra. The physical state space is the modular-locally admissible algebraic state space*
+**Definition (Stagewise causal admissibility).** *Fix a global time function with Cauchy slices $\{\Sigma_t\}$. Let $\{\mathcal{F}_t\}$ be the classical filtration generated by outcome records whose localization diamonds lie in $J^-(\Sigma_t)$. For a branch/history $h \in \mathcal{F}_t$, let $\mathcal{O}_t(h)$ be the set of record diamonds realized on that branch up to time $t$.*
+
+*A bounded diamond $R$ is **causally instantiated** at stage $(t, h)$ if $R \Subset J^-(\Sigma_t)$ and, for the finite set $Y \subset \mathcal{O}_t(h)$ of records whose alternatives are being jointly constrained in $R$,*
 $$
-\mathcal{S}_{\rm phys} \;:=\; \{\omega \in \mathcal{S}(\hat{\mathcal{A}}) : \omega_R \text{ is normal and } \chi_R(\omega_R) \le C(R) \text{ for every bounded } R\}.
+R \;\Subset\; \bigcap_{O \in Y} J^+(O).
+$$
+*The case $Y = \varnothing$ gives the ordinary unconditioned local constraint. Denote the resulting collection of instantiated regions by $\mathfrak{R}_t(h)$.*
+
+*The **stagewise physical state space** is*
+$$
+\mathcal{S}_{\rm phys}(t, h) \;:=\; \left\{ \omega_t^h : (\omega_t^h)_R \in \hat{\mathcal{A}}(R)_*^+,\; \|(\omega_t^h)_R\| = 1,\; \chi_R((\omega_t^h)_R) \le C(R) \text{ for all } R \in \mathfrak{R}_t(h) \right\}.
 $$
 
-*If a universal Hilbert-space representation is used, let $\pi(|\Psi\rangle) = \omega_\Psi$ be the induced algebraic state. Then*
-$$
-\mathcal{H}_{\rm phys} \;:=\; \pi^{-1}(\mathcal{S}_{\rm phys})/\!\sim, \qquad |\Psi\rangle \sim |\Phi\rangle \iff \omega_\Psi|_{\hat{\mathcal{A}}(R)} = \omega_\Phi|_{\hat{\mathcal{A}}(R)} \;\forall R.
-$$
+*A **physical process** is an adapted family $h \mapsto \omega_t^h$ such that $\omega_t^h \in \mathcal{S}_{\rm phys}(t, h)$ for every stage $t$ and $\mathcal{F}_t$-almost every branch $h$.*
 
-*Thus $\mathcal{H}_{\rm phys}$ denotes physical equivalence classes of Hilbert representatives, not a linear subspace of $\mathcal{H}$.* States outside $\mathcal{S}_{\rm phys}$ are *kinematically forbidden* — they are mathematically writeable in the unrestricted formalism but are not physically realizable.
+*The unqualified notation $\mathcal{S}_{\rm phys}$ denotes this stagewise family unless a terminal completed-history limit is explicitly specified. Future joint-diamond constraints are therefore imposed only when the relevant region has become causally instantiated; they do not retroactively delete branches that were admissible at earlier stages.*
+
+*If a universal Hilbert-space representation is used, let $\pi(|\Psi\rangle) = \omega_\Psi$ be the induced algebraic state. Then $\mathcal{H}_{\rm phys}$ denotes the set of $|\Psi\rangle$ whose induced stagewise family $(\omega_\Psi)_t^h$ satisfies the stagewise condition above, modulo the equivalence $|\Psi\rangle \sim |\Phi\rangle \iff \omega_\Psi|_R = \omega_\Phi|_R$ for every $R$. This is a set of physical equivalence classes, not a linear subspace of $\mathcal{H}$.* States outside $\mathcal{S}_{\rm phys}$ are *kinematically forbidden* — they are mathematically writeable in the unrestricted formalism but are not physically realizable.
 
 **Definition (Physical dynamics and instruments).** *A deterministic evolution is represented in the Heisenberg picture by a normal unital completely positive map $\alpha_t: \hat{\mathcal{A}} \to \hat{\mathcal{A}}$; for closed reversible dynamics, $\alpha_t$ is an automorphism. It is **physical** iff*
 $$
@@ -597,37 +632,59 @@ $$
 
 *A measurement instrument $\mathcal{I} = \{\mathcal{I}_a\}_a$ is **physical** iff $\sum_a \mathcal{I}_a$ is unital and, for every $\omega \in \mathcal{S}_{\rm phys}$:*
 *(i) the non-selective state $\omega \circ (\sum_a \mathcal{I}_a)$ lies in $\mathcal{S}_{\rm phys}$; and*
-*(ii) **branchwise**, whenever $p_a = \omega(\mathcal{I}_a(\mathbf{1})) > 0$, the normalized conditional state*
+*(ii) **branchwise**: for each outcome $a$, the corresponding durable classical record is localized in a bounded diamond $O_a$. Whenever $p_a = \omega(\mathcal{I}_a(\mathbf{1})) > 0$, the normalized conditional state*
 $$
 \omega_a(B) := \frac{\omega(\mathcal{I}_a(B))}{p_a}
 $$
-*is admissible on every bounded region in the causal future of the outcome record. Conditional feed-forward operations must satisfy the same condition on each branch.*
+*must satisfy the admissibility bound on every bounded diamond $R \Subset J^+(O_a)$:*
+$$
+(\omega_a)_R \in \hat{\mathcal{A}}(R)_*^+, \qquad \chi_R((\omega_a)_R) \le C(R).
+$$
+*At finite process stage $t$, this condition is imposed only for those $R \Subset J^+(O_a) \cap J^-(\Sigma_t)$ that lie in the instantiated collection $\mathfrak{R}_t(a)$. Conditional feed-forward operations must satisfy the same condition on each branch.*
 
 The set of physical dynamics is a proper subset of the set of all normal unital CP maps on $\hat{\mathcal{A}}$. Generic Hilbert-space Hamiltonians do not induce physical dynamics; physical dynamics do.
 
 **Axiom (Causal application of admissibility).** *Modular-local admissibility is imposed on the state of a region when that region is physically instantiated in the causal order. If earlier alternatives are separately admissible in their respective past algebras, a later joint diamond $D^+$ constrains only the state restricted to $\hat{\mathcal{A}}(D^+)$ after the relevant systems enter $D^+$. Failure of $\chi_{D^+} \le C(D^+)$ makes the proposed future joint state or transition inadmissible; it does **not** retroactively delete previously admissible past branches.*
 
-**Theorem 6 (Effective Macroscopic Definiteness, modular-local form).** *Let $\omega \in \mathcal{S}_{\rm phys}$ and let $R$ contain a decohered macroscopic record algebra with mutually exclusive record predicates $\{P_k\}_{k \in \mathcal{A}_\epsilon}$. Let $p_k = \omega_R(P_k)$, normalized on the $\epsilon$-smoothed active set, and let $\omega_{k,R}$ be the corresponding conditional regional state. Assume the smoothed record decomposition obeys the modular Holevo-type lower bound*
+**Theorem 6 (Effective Macroscopic Definiteness, modular-local form).** *Let $\omega \in \mathcal{S}_{\rm phys}$ and let $R$ contain a decohered macroscopic record algebra with mutually exclusive record predicates $\{P_k\}_{k \in \mathcal{A}_\epsilon}$ forming the $\epsilon$-smoothed active set. Let $p_k = \omega_R(P_k)$ and set*
 $$
-\chi_R(\omega_R) \;\ge\; H(p) + \sum_{k \in \mathcal{A}_\epsilon} p_k \, \chi_R(\omega_{k,R}) - \eta_\epsilon,
+q := \sum_{k \in \mathcal{A}_\epsilon} p_k.
 $$
-*with $H(p) = -\sum_k p_k \log p_k$ and $\eta_\epsilon \to 0$ as the smoothing is removed. If every active macroscopic record has cost*
+*Assume $q > 0$ and apply the bound to the **normalized active distribution**:*
 $$
-\chi_R(\omega_{k,R}) \;\ge\; I_0 - \eta_\epsilon,
+\tilde p_k := \frac{p_k}{q}, \qquad k \in \mathcal{A}_\epsilon.
 $$
-*then*
+*Write*
 $$
-H(p) \;\le\; C(R) - I_0 + 2\eta_\epsilon, \qquad N_{\rm eff} := \exp H(p) \;\le\; \exp(C(R) - I_0 + 2\eta_\epsilon).
+H_\epsilon := -\sum_{k \in \mathcal{A}_\epsilon} \tilde p_k \log \tilde p_k, \qquad N^{(\epsilon)}_{\rm eff} := \exp H_\epsilon,
 $$
-*Moreover, for every $0 < \delta < 1$, there exists a subset $T_\delta \subseteq \mathcal{A}_\epsilon$ with active probability at least $1 - \delta$ and*
+*and $\bar\omega_R := \sum_k \tilde p_k \omega_{k,R}$. Assume the active records obey the modular Holevo-type lower bound*
+$$
+I_{\rm Hol}^R := \sum_{k \in \mathcal{A}_\epsilon} \tilde p_k \, S^{\hat{\mathcal{A}}(R)}_{\rm Araki}(\omega_{k,R} \,\|\, \bar\omega_R) \;\ge\; H_\epsilon - \eta_\epsilon,
+$$
+*and that*
+$$
+\chi_R(\bar\omega_R) \;\ge\; I_0 + I_{\rm Hol}^R - \eta_\epsilon.
+$$
+*Together with $\chi_R(\bar\omega_R) \le C(R)$, this gives*
+$$
+H_\epsilon \;\le\; C(R) - I_0 + 2\eta_\epsilon, \qquad N^{(\epsilon)}_{\rm eff} \;\le\; \exp(C(R) - I_0 + 2\eta_\epsilon).
+$$
+*Moreover, for every $0 < \delta < 1$, there exists $T_\delta \subseteq \mathcal{A}_\epsilon$ with normalized active probability $\ge 1 - \delta$ and*
 $$
 |T_\delta| \;\le\; \exp\!\left(\frac{C(R) - I_0 + 2\eta_\epsilon}{\delta}\right).
 $$
-*In the saturation regime $I_0 = C(R)$ and $\eta_\epsilon = 0$, the active distribution has $H(p) = 0$, hence a single record has probability one. For approximate saturation, the conclusion is **effective / probability-weighted** rather than a raw cardinality bound.*
+*If the leakage sector $\mathcal{A}_\epsilon^c$ is retained, the theorem bounds only the conditional active entropy $H_\epsilon$. The full unnormalized entropy decomposes as $H(p) = h_2(q) + q H_\epsilon + (1-q) H(p \mid \mathcal{A}_\epsilon^c)$, so an additional finite-support or entropy assumption on the leakage sector is required to bound $H(p)$ itself.*
 
-*Proof.* Since $\omega \in \mathcal{S}_{\rm phys}$, $\chi_R(\omega_R) \le C(R)$. Combining this with the two stated lower bounds gives $C(R) \ge H(p) + I_0 - 2\eta_\epsilon$. The effective-number bound follows immediately. The smoothed support bound follows by Markov's inequality applied to the random variable $-\log p_k$. Finally $p_{\max} \ge e^{-H(p)}$, so exact saturation forces $p_{\max} = 1$. $\blacksquare$
+*Consequently, at **exact** saturation $I_0 = C(R)$ and $\eta_\epsilon = 0$, one obtains $H_\epsilon = 0$, hence a single record has normalized active probability one. For **finite** $\eta_\epsilon$, the correct conclusion is*
+$$
+H_\epsilon \;\le\; 2\eta_\epsilon,
+$$
+*so a single record dominates with probability $\ge 1 - O(\eta_\epsilon)$. For approximate saturation, the conclusion is **effective / probability-weighted** rather than a raw cardinality bound.*
 
-**Modular estimate of Born-weight deviations.** Let $\mu$ be the Born measure over conditional record states $r \mapsto \omega_r$, and define the inadmissible set
+*Proof.* Since $\omega \in \mathcal{S}_{\rm phys}$, $\chi_R(\bar\omega_R) \le C(R)$. Combining this with the two stated lower bounds gives $C(R) \ge H_\epsilon + I_0 - 2\eta_\epsilon$. The effective-number bound follows immediately. The smoothed support bound follows by Markov's inequality applied to the random variable $-\log \tilde p_k$. Finally $\tilde p_{\max} \ge e^{-H_\epsilon}$, so $\eta_\epsilon = 0$ at saturation forces $\tilde p_{\max} = 1$. $\blacksquare$
+
+**Conditional modular estimate of Born-weight deviations.** Let $\mu$ be the Born measure over conditional record states $r \mapsto \omega_r$, and define the inadmissible set
 $$
 F_R := \{r : \chi_R(\omega_r) > C(R)\}, \qquad \delta_R := \mu(F_R).
 $$
@@ -635,19 +692,36 @@ Since $\chi_R \ge 0$, Markov's inequality gives
 $$
 \delta_R \;\le\; \frac{\mathbb{E}_\mu[\chi_R(\omega_r)]}{C(R)}.
 $$
-Using $\chi_R = \Delta\langle K_R^\sigma\rangle - \Delta S_R$,
+
+The conversion of $\chi_R$ into a stress-energy estimate is *not* assumed for a generic QFT ball. It is used only when the reference modular Hamiltonian is known geometrically, or when $R$ is compared to such a region by monotonicity of relative entropy.
+
+*Wedge case (Bisognano-Wichmann).* In the Minkowski-vacuum sector, let $W$ be a Rindler wedge with $R \subset W$. By the Bisognano-Wichmann theorem,
 $$
-\mathbb{E}_\mu[\chi_R(\omega_r)] \;\le\; \mathbb{E}_\mu[\Delta\langle K_R^\sigma\rangle_r] + \mathbb{E}_\mu[|\Delta S_R(r)|].
+K_W^\sigma \;=\; \frac{2\pi}{\hbar c} \int_W x^1 \, T_{00}(x) \, d^{d-1}x.
 $$
-For a ball of radius $L$ in the vacuum modular approximation, the modular Hamiltonian gives
+If the excitation has positive energy $E_W$ supported within $0 \le x^1 \le L$, then $\Delta\langle K_W^\sigma\rangle \le 2\pi L E_W/(\hbar c)$. By monotonicity of Araki relative entropy under restriction,
 $$
-\Delta\langle K_R^\sigma\rangle \;\lesssim\; \frac{2\pi L\, E_R}{\hbar c},
+\chi_R(\omega_R) \;\le\; \chi_W(\omega_W) \;=\; \Delta\langle K_W^\sigma\rangle - \Delta S_W.
 $$
-so
+Hence $\chi_R(\omega_R) \le 2\pi L E_W/(\hbar c) + s_W$ provided the entropy shift satisfies $\Delta S_W \ge -s_W$. The commonly used estimate $\chi_R(\omega_R) \le 2\pi L E_W/(\hbar c)$ requires the additional hypothesis $\Delta S_W \ge 0$.
+
+*CFT-vacuum ball case.* For a ball $B_L$ in a CFT vacuum, the conformal modular Hamiltonian gives
 $$
-\delta_R \;\lesssim\; \frac{2\pi L \, \mathbb{E}_\mu[E_R]/(\hbar c) + \mathbb{E}_\mu[|\Delta S_R|]}{C(R)}.
+K_{B_L}^\sigma \;=\; \frac{2\pi}{\hbar c} \int_{|x| < L} \frac{L^2 - |x|^2}{2L} T_{00}(x) \, d^{d-1}x,
 $$
-For $L \sim 1\,\mathrm{m}$ and $E_R \sim 1\,\mathrm{kg}\,c^2$, the modular-energy numerator is $\sim 2 \times 10^{43}$ nats, while $C(R) \sim A/(4\ell_P^2) \sim 10^{70}$ nats, giving $\delta_R \lesssim 10^{-27}$ up to entropy corrections. The bound is **region- and energy-dependent**, not a universal lab-scale constant. Per the deviation theorem (`paper_strategy/36`), Born probabilities under modular-local admissibility deviate from standard Born probabilities by at most $\delta_R$ on bounded observables — operationally invisible at lab scale.
+and the same conclusion holds, with the corresponding entropy-shift qualification.
+
+*Generic QFT ball.* For a non-conformal QFT ball, no universal local formula for $K_R^\sigma$ is assumed; the bound is obtained only by enclosing-wedge monotonicity as above.
+
+Under these hypotheses, the Born-deviation estimate reads
+$$
+\delta_R \;\lesssim\; \frac{2\pi L \, \mathbb{E}_\mu[E_R]/(\hbar c) + s_R}{A(\partial R)/(4\ell_P^2)}.
+$$
+If $s_R$ is negligible, $A(\partial R) \simeq 4\pi L^2$, $L \simeq 1\,\mathrm{m}$, and $E_R \simeq 1\,\mathrm{kg}\,c^2$, this gives the **conditional** order-of-magnitude estimate
+$$
+\delta_R \;\sim\; 10^{-27}.
+$$
+This number is therefore **not a generic QFT consequence**; it is a wedge / CFT-ball modular-energy estimate with the stated entropy-shift hypothesis. Per the deviation theorem (`paper_strategy/36`), Born probabilities under modular-local admissibility deviate from standard Born probabilities by at most $\delta_R$ on bounded observables — operationally invisible at lab scale, conditional on the hypotheses above.
 
 The single-record-per-region structure of physical states is therefore a *structural consequence* of the Branch-Summed Holographic Superselection Postulate. Multi-record states are not absent because of dynamical collapse; they are absent because they are *not in the physical state space*.
 
