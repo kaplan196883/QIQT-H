@@ -34,8 +34,9 @@ Every "missing piece" below is a thing the LHS, the admissibility relation, or t
 4. **Coarse-graining monotonicity.** Refining the record algebra cannot decrease $I^\varepsilon_{\rm branch}$.
 5. **Computability.** There must exist an algorithm or closed-form expression for $I^\varepsilon_{\rm branch}$ given a regional state $\omega_\Psi$ on $\hat{\mathcal{A}}(D)$.
 6. **Core-choice invariance.** $I^\varepsilon_{\rm branch}$ must be invariant under the choice of modular reference weight $\varphi_D$ used to build the Type II crossed-product core, and under the normalization of the canonical semifinite trace $\tau_D$. *Not merely under intra-core basis change.* This is the strong form of basis-independence the framework actually needs.
+7. **Physical trace normalization.** $\tau_D$ must be normalized to physical units (Planck area or generalized-entropy nats) so that comparing $\log \tau_D(p)$ to $A/(4G\hbar) + S^{\rm ren}_{\rm matter}$ is meaningful. Setting the Haagerup convention $\mathrm{Tr}(h_\omega) = \omega(1)$ fixes the mathematical normalization but does *not* automatically match the trace unit to the holographic unit. This is part of the substantive holographic claim, not a mathematical nuisance.
 
-**Current state.** A concrete candidate — the $\varepsilon$-smooth support volume of the Haagerup $L^1$ density on $\widehat{\mathcal{A}}(D)$ — secures intra-core basis-independence via Connes cocycle and Fack-Kosaki rearrangement. **Open:** invariance under the choice of modular reference weight and core normalization, which the cocycle argument does *not* automatically deliver. See `paper_strategy/34` (attempted construction) and `paper_strategy/35` (self-review).
+**Current state.** A concrete candidate — the $\varepsilon$-smooth support volume of the Haagerup $L^1$ density on $\widehat{\mathcal{A}}(D)$ — secures intra-core basis-independence via Connes cocycle and Fack-Kosaki rearrangement. A *conditional* theorem then gives core-choice invariance modulo a normalization constant. **Open:** (i) the precise hypotheses under which the Connes cocycle preserves the full Haagerup $L^1$ structure (dual action + canonical trace + scaling condition), (ii) the physical normalization fixing $\tau_D$ in Planck-area units. See `paper_strategy/34`, `35`, `36`, `37`.
 
 ### 2.2 The admissible-history algebra $\mathcal{H}_{\rm adm}$
 
@@ -46,7 +47,24 @@ Every "missing piece" below is a thing the LHS, the admissibility relation, or t
 2. **Dynamical selection.** Under unitary evolution restricted to $D$, $\mathcal{H}_{\rm adm}$ must evolve consistently — admissible histories at $t_1$ must give rise to admissible histories at $t_2 > t_1$ via the standard decoherent-histories class operators. *Maximal admissible subalgebras are non-unique;* the framework must therefore **derive (rather than parametrize) the physically realized admissible Boolean subalgebra from dynamics, decoherence, locality, or a variational principle**.
 3. **Born compatibility.** The induced probability measure restricted to $\mathcal{H}_{\rm adm}$ must reduce to Born weights $|c_i|^2$ in regimes where the holographic bound is far from saturated.
 
-**Current state.** The Boolean-subalgebra-of-histories formulation gives the right *kind* of object, and a log-sum-exp closure bound is available (loose, but useful). **Open and central:** a dynamical selection law that picks one physically realized admissible Boolean subalgebra rather than parametrising the choice. Without it the framework names the arena where the answer lives but does not derive the answer. See `paper_strategy/34` and `paper_strategy/35`.
+**Current state.** The Boolean-subalgebra-of-histories formulation gives the right *kind* of object, and a log-sum-exp closure bound is available (loose, but useful). A candidate selection functional has been proposed:
+
+$$
+\mathcal{F}_t(B) = R_\eta(B) \cdot H_\omega(B) - \lambda C(B) - \kappa D_{\rm off}(B),
+$$
+
+where $R_\eta$ is Quantum-Darwinism redundancy, $H_\omega$ is Shannon entropy of atom weights, $C$ is a complexity penalty, and $D_{\rm off}$ measures decoherence failure. Maximizing instantaneously fails time-stability; a filtration-level variational principle over consistent history filtrations $B_{t_1} \hookrightarrow B_{t_2} \hookrightarrow \cdots$ is the proposed fix.
+
+**Open sub-problems** (each independently nontrivial):
+1. A preferred record algebra $\mathcal{R}_t$ — defining localized subsystems in QG is hard because of gauge constraints and gravitational dressing.
+2. An environment-fragment decomposition for the redundancy term.
+3. A complexity functional $C(B)$ — not basis- or model-independent.
+4. A metric $d(B, B')$ on Boolean subalgebras — not unique.
+5. An admissibility / refinement rule for filtrations.
+
+Also: $R_\eta \cdot H$ is *invented* for this purpose, not a standard Quantum-Darwinism criterion. Darwinism emphasizes redundancy plateaus tied to pointer-state stability and the predictability sieve. Multiplying redundancy by Boolean entropy is plausible but not established.
+
+**Bottom line:** the variational principle clarifies the *form* the answer should take, but delegates the actual selection to five sub-problems. See `paper_strategy/34`, `35`, `36`, `37`.
 
 ### 2.3 The per-record cost $c_R(r)$ and universal constant $I_0$
 
@@ -74,7 +92,23 @@ Every "missing piece" below is a thing the LHS, the admissibility relation, or t
 2. **Enlargement invariance.** Predictions must not change discontinuously when $D$ is replaced by a larger region $D' \supset D$ — only the bound becomes weaker. Exact enlargement invariance requires a Type II core factorization $\widehat{M}_{D'} \cong \widehat{M}_D \,\bar\otimes\, \widehat{M}_K$ which does not generically exist in AQFT.
 3. **Surface prescription.** The codimension-two surface $\partial D$ entering $S_{\rm gen}$ must be specified — classical extremal, maximin, or quantum-extremal — and the framework's predictions must be robust under (or independent of) that choice. The current candidates are *not neutral*: different surface prescriptions define different regions and different bounds.
 
-**Current state.** Causal diamond is the working candidate (defended in `paper_strategy/34`). **Open:** observer-worldline dependence; exact enlargement invariance; principled choice of holographic surface prescription. Without these the framework has relocated foliation dependence rather than eliminated it. See `paper_strategy/35`.
+**Current state.** Causal diamond is the working candidate. A candidate observer-independent capacity has been proposed:
+
+$$
+C(R) = \inf_{D \supset R} S_{\rm gen}(\partial D),
+$$
+
+minimizing over causal diamonds containing the record-comparison events $R$.
+
+**Concrete no-go (`paper_strategy/37`).** $S_{\rm gen}$ is **not monotone** under causal-diamond enlargement. *Counter-example:* let $R$ contain one half of $N$ entangled pairs, with the partners just outside. Then $S^{\rm ren}_{\rm matter}(R) \sim N\log 2$. Enlarging $R$ to $D$ that includes the partners drops the matter entropy near zero, while the area increases by $\Delta A$. If $N\log 2 > \Delta A/(4G\hbar)$:
+
+$$
+S_{\rm gen}(D) < S_{\rm gen}(R) \quad \text{even though } D \supset R.
+$$
+
+So $S_{\rm gen}$ can *decrease* under enlargement, and the capacity definition above is **not** well-defined as stated. **Required additional restrictions** on the diamond family (energy conditions, Bekenstein bound, quantum focusing, or the generalized second law along privileged horizons) must be specified before the capacity is operational.
+
+**Open:** observer-worldline dependence (covariance ≠ uniqueness); the restricted-monotonicity setting that makes $C(R)$ well-defined; principled choice of holographic surface prescription. Without these the framework has relocated foliation dependence rather than eliminated it. See `paper_strategy/35`, `36`, `37`.
 
 ### 2.5 The physical state space
 
@@ -116,7 +150,19 @@ reduce to ordinary Born weights $|c_i|^2$ in the regime $I^\varepsilon_{\rm bran
 
 **Analogy.** Bohmian mechanics has its $|\psi|^2$-equivariance theorem (Dürr-Goldstein-Zanghì). QIQT-H needs the structural analogue *plus* a quantitative deviation bound.
 
-**Difficulty.** Major open problem. Without (2) the framework either reproduces Born statistics by assumption (circular) or contradicts experiment.
+**Result so far (`paper_strategy/36`).** A clean measure-theoretic bound holds: if $\mu(A^c) \le \delta$, then $|\nu(h) - \mu(h)| \le \delta$ for $0 \le h \le 1$. A Markov bound then gives $\delta \le \mathbb{E}_\mu[I^\varepsilon_{\rm branch}(D)]/S_{\rm gen}(\partial D)$.
+
+**Circularity warning (`paper_strategy/37`).** The numerical estimate $\delta \lesssim 10^{-24}$ for a 1-m region used a Bekenstein-style bound $I^\varepsilon_{\rm branch}(D) \le S_{\rm Bek}(E, R)$ as input. This bound is **not** an independent theorem: standard Bekenstein / Bousso bounds constrain thermodynamic / von Neumann entropy, not smooth-support counts of decoherent Everett-style branches in a Type II core. Smooth max-support quantities can be much larger than von Neumann entropy if many tiny-weight branches exist — *unless one adds constraints that are precisely the QIQT-H postulate*. So the argument as written is circular.
+
+**Prerequisite theorem needed.** Prove an independent Bekenstein-style bound on smooth-support branch counts:
+
+$$
+I^\varepsilon_{\rm branch}(D) \le S_{\rm Bek}(E, R)
+$$
+
+that does *not* assume the QIQT-H postulate.
+
+**Difficulty.** Major open problem. Without (2) and the prerequisite Bekenstein-on-branches theorem, the framework either reproduces Born statistics by assumption (circular) or contradicts experiment.
 
 ### 3.2 No-signaling theorem
 
@@ -138,7 +184,15 @@ This is the *causal screening theorem* the framework needs.
 
 **Required input.** Definition of $\mathcal{H}_{\rm adm}$, its behaviour under spacelike-separated operations, and a factorization or conditional-expectation property of the admissibility weight across spacelike-separated regions.
 
-**Difficulty.** Gisin's specific mechanism does not directly apply (QIQT-H operates on whole histories, not on instantaneous reduced states). But postselection-style signaling remains a live threat. See `paper_strategy/34` and `paper_strategy/35`.
+**Result so far (`paper_strategy/36`).** A *sufficient* algebraic condition for no-signaling has been identified: if $K_{xy} = K_A^x \cdot K_B^y$ with $K_A^x \in \mathcal{A}_x$, $K_B^y \in \mathcal{B}_y$, $[\mathcal{A}_x, \mathcal{B}_y] = 0$, and there exists a $\mu$-preserving conditional expectation $E_A^{xy}: \mathcal{A}_x \vee \mathcal{B}_y \to \mathcal{A}_x$ satisfying $E_A^{xy}(K_B^y) = c_y \mathbf{1}$, then $P_{\rm QIQT}(a \mid x, y) = P_{\rm QIQT}(a \mid x)$.
+
+**Concrete no-go (`paper_strategy/36`, `37`).** The naive **global formulation** $K_{xy} = \mathbf{1}\{I_A^x + I_B^y \le S_{AB}\}$ (single global $S_{\rm gen}$ budget shared across spacelike regions) **does not split**, because Alice and Bob compete for one entropy budget — Bob's choice $y$ alters Alice's available admissibility. The sufficient condition fails, and operational signaling can occur.
+
+**Operational restriction.** The QIQT-H bound must therefore be applied *per causal-diamond region*, not as a single global cap. Locality requires either:
+- **Tensor factorization** $\mathcal{A}(D_A \cup D_B) \cong \mathcal{A}(D_A) \,\bar\otimes\, \mathcal{A}(D_B)$ — rare in QFT (Type III algebras generally do not tensor-factorize across spacelike-separated regions), or
+- **State-preserving conditional expectation** onto a local subalgebra — generically absent for entangled states, since such a map would force product-like structure inconsistent with entanglement.
+
+**Difficulty.** Gisin's specific mechanism does not directly apply. But postselection-style signaling under global admissibility is a *real* threat with a concrete counter-example. The framework's formulation must be regionally local. See `paper_strategy/34`, `35`, `36`, `37`.
 
 ### 3.3 Concentration conjecture
 
@@ -248,7 +302,17 @@ By difficulty × impact, ordered from foundational to refinement:
 
 Items 1-5 are blockers. Until they are resolved the rest cannot be addressed rigorously.
 
-**Status after `paper_strategy/34` (attempted constructions) and `paper_strategy/35` (self-review).** Items §2.1 and §2.2 have *partial real progress* — intra-core basis independence is proved, and the right algebraic scaffolding for admissibility is in place. Items §2.4, §3.1, §3.2 remain *labelled* progress: the right targets are now sharply stated, but the actual theorems are not delivered. The framework is closer to evaluable as a research program, but still has work to do before it can be evaluated as a physical theory.
+**Status after four passes** (`paper_strategy/34`–`37`):
+
+| Item | Result |
+|---|---|
+| §2.1 | *Conditional theorem* — Connes cocycle preserves $N^\varepsilon_{\rm eff}$ modulo trace-normalization constant; physical Planck-area normalization open. |
+| §2.2 | *Candidate variational principle* (Darwinism redundancy × Shannon − complexity − decoherence failure) over consistent history filtrations. Delegates to 5 sub-problems. |
+| §3.1(2) | *Measure-theoretic bound* $|\nu - \mu| \le \delta$ proved; numerical lab-scale estimate circular without independent Bekenstein-on-branches theorem. |
+| §3.2 | *Sufficient condition* identified + *concrete counter-example*: global $I_A + I_B \le S_{AB}$ formulation violates no-signaling. Bound must be regionally local. |
+| §2.4 | *Concrete no-go*: $S_{\rm gen}$ not monotone under causal-diamond enlargement (entangled-pair counter-example); minimal-diamond capacity not well-defined without restrictions. |
+
+**Net.** Two valid conditional theorems (§2.1, §3.1(2)). Two concrete no-go results (§2.4, §3.2). One candidate variational principle delegated to sub-problems (§2.2). The framework now has *real* technical constraints — not just "needs more work" labels. Some formulations have been *ruled out* (single global budget; naive capacity infimum). The framework is closer to evaluable as a research program; it is not yet a completed mathematical foundation.
 
 ---
 
