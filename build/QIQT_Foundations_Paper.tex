@@ -878,7 +878,9 @@ The set of physical dynamics is a proper subset of the set of all normal unital 
 
 \textbf{Axiom (Causal application of admissibility).} \emph{Modular-local admissibility is imposed on the state of a region when that region is physically instantiated in the causal order. If earlier alternatives are separately admissible in their respective past algebras, a later joint diamond $D^+$ constrains only the state restricted to $\hat{\mathcal{A}}(D^+)$ after the relevant systems enter $D^+$. Failure of $\chi_{D^+} \le C(D^+)$ makes the proposed future joint state or transition inadmissible; it does \textbf{not} retroactively delete previously admissible past branches.}
 
-\textbf{Theorem 6 (Effective Macroscopic Definiteness via Donald's identity, conditional form).} \emph{Let $\omega \in \mathcal{S}_{\rm phys}$ and let $R$ contain a decohered macroscopic record algebra with mutually exclusive record predicates $\{P_k\}_{k \in \mathcal{A}_\epsilon}$ forming the $\epsilon$-smoothed active set. Let $p_k = \omega_R(P_k)$, $q := \sum_{k \in \mathcal{A}_\epsilon} p_k > 0$, $\tilde p_k := p_k/q$. Let $\omega_{k,R}$ be the conditional regional state of branch $k$, $\bar\omega_R := \sum_k \tilde p_k \, \omega_{k,R}$, and}
+\textbf{Theorem 6 (Effective Macroscopic Definiteness via Donald's identity, conditional form).} \emph{Throughout this theorem, $\chi_R(\varphi) := S_{\rm Araki}^{\hat{\mathcal{A}}(R)}(\varphi \| \sigma_R)$ denotes Araki relative entropy to the \textbf{fixed} regional reference state $\sigma_R$ of §7.6, and all states are normal on $\hat{\mathcal{A}}(R)$.}
+
+\emph{Let $\omega \in \mathcal{S}_{\rm phys}$ and let $R$ contain a decohered macroscopic record algebra with mutually exclusive record predicates $\{P_k\}_{k \in \mathcal{A}_\epsilon}$ forming the $\epsilon$-smoothed active set, with $|\mathcal{A}_\epsilon| < \infty$ (finite effective support). Let $p_k = \omega_R(P_k)$, $q := \sum_{k \in \mathcal{A}_\epsilon} p_k > 0$, $\tilde p_k := p_k/q$. Let $\omega_{k,R}$ be the conditional regional state of branch $k$, $\bar\omega_R := \sum_k \tilde p_k \, \omega_{k,R}$, and}
 
 \[
 I_{\rm Hol}^R \;:=\; \sum_{k \in \mathcal{A}_\epsilon} \tilde p_k \, S^{\hat{\mathcal{A}}(R)}_{\rm Araki}(\omega_{k,R} \,\|\, \bar\omega_R), \qquad H_\epsilon \;:=\; -\sum_k \tilde p_k \log \tilde p_k.
@@ -893,19 +895,23 @@ I_{\rm Hol}^R \;:=\; \sum_{k \in \mathcal{A}_\epsilon} \tilde p_k \, S^{\hat{\ma
 \emph{Assume:}
 \emph{(H1) \textbf{Branchwise admissibility.} Each active branch satisfies $\chi_R(\omega_{k,R}) \le C(R)$.}
 \emph{(H2) \textbf{Record-instantiation cost} (independent framework postulate). The mean regional state has cost $\chi_R(\bar\omega_R) \ge I_0 - \eta_0$, where $I_0$ is the per-record cost parameter and $\eta_0 \ge 0$ a tolerance.}
-\emph{(H3) \textbf{Operational distinguishability.} There exists a normal measurement instrument on $\hat{\mathcal{A}}(R)$ decoding the active record index with error at most $\eta_{\rm def}/\log|\mathcal{A}_\epsilon|$, so that the Fano-type bound $H_\epsilon \le I_{\rm Hol}^R + \eta_{\rm def}$ holds.}
+\emph{(H3) \textbf{Operational distinguishability.} There exists a normal measurement instrument on $\hat{\mathcal{A}}(R)$ decoding the active record index $K \in \mathcal{A}_\epsilon$ with average error probability $P_e$. Standard information theory gives $H_\epsilon = I(K;Y) + H(K \mid Y)$ where $Y$ is the decoded outcome. The Holevo bound yields $I(K;Y) \le I_{\rm Hol}^R$, and Fano's inequality gives $H(K \mid Y) \le h_2(P_e) + P_e \log(|\mathcal{A}_\epsilon| - 1) =: \eta_{\rm def}$. Hence $H_\epsilon \le I_{\rm Hol}^R + \eta_{\rm def}$.}
 
 \emph{Then Donald's identity $(\star)$ together with (H1) and (H2) gives}
 
 \[
-I_{\rm Hol}^R \;=\; \sum_k \tilde p_k \chi_R(\omega_{k,R}) - \chi_R(\bar\omega_R) \;\le\; C(R) - I_0 + \eta_0,
+I_{\rm Hol}^R \;=\; \sum_k \tilde p_k \chi_R(\omega_{k,R}) - \chi_R(\bar\omega_R) \;\le\; C(R) - I_0 + \eta_0.
 \]
+
+\emph{(Since $I_{\rm Hol}^R \ge 0$, this is informative only when $C(R) - I_0 + \eta_0 \ge 0$. If $C(R) < I_0 - \eta_0$, the hypotheses (H1) and (H2) are jointly unsatisfiable — the region cannot support even a single record at its specified cost, so no admissible record-bearing state on $R$ exists.)}
 
 \emph{and with (H3),}
 
 \[
 \boxed{H_\epsilon \;\le\; C(R) - I_0 + \eta_0 + \eta_{\rm def}, \qquad N^{(\epsilon)}_{\rm eff} := \exp H_\epsilon \;\le\; \exp(C(R) - I_0 + \eta_0 + \eta_{\rm def}).}
 \]
+
+\emph{Here $\eta_{\rm def} = h_2(P_e) + P_e \log(|\mathcal{A}_\epsilon| - 1)$ is the explicit Fano residual.}
 
 \emph{Moreover, for every $0 < \delta < 1$, there exists $T_\delta \subseteq \mathcal{A}_\epsilon$ with normalized active probability $\ge 1 - \delta$ and}
 
@@ -935,12 +941,13 @@ Since $\chi_R \ge 0$, Markov's inequality gives
 
 The conversion of $\chi_R$ into a stress-energy estimate is \emph{not} assumed for a generic QFT ball. It is used only when the reference modular Hamiltonian is known geometrically, or when $R$ is compared to such a region by monotonicity of relative entropy.
 
-\emph{Wedge case (Bisognano-Wichmann).} In the Minkowski-vacuum sector, let $W$ be a Rindler wedge with $R \subset W$. By the Bisognano-Wichmann theorem, for states normal to the vacuum representation and in the domain of the boost / modular Hamiltonian, the \emph{exact first-moment expression} is
+\emph{Wedge case (Bisognano-Wichmann).} In the Minkowski-vacuum sector — i.e., with $\sigma_R$ taken to be the vacuum / geometric-modular reference state corresponding to a Rindler wedge $W \supset R$ — the Bisognano-Wichmann theorem gives, for states normal to the vacuum representation and in the domain of the boost / modular Hamiltonian, the \emph{exact first-moment expression}
 
 \[
 \Delta\langle K_W^\sigma\rangle \;=\; \frac{2\pi}{\hbar c} \int_W x^1 \, \Delta\langle T_{00}\rangle(x) \, d^{d-1}x.
 \]
 
+\emph{(This formula is specific to the vacuum / geometric-wedge modular setting; for arbitrary $\sigma_R$ no such universal local form is available.)}
 The simplified estimate $\Delta\langle K_W^\sigma\rangle \le 2\pi L E_W/(\hbar c)$ requires: (i) finite renormalized energy; (ii) finite first moment; (iii) the excitation has support effectively in $0 \le x^1 \le L$ (split / smeared localization to avoid UV pathologies of sharp localization); (iv) nonnegative renormalized energy density / positive energy measure in that region. If these conditions fail, use the exact first-moment expression rather than the $L E_W$ bound.
 
 By monotonicity of Araki relative entropy under restriction,
