@@ -526,7 +526,13 @@ The framework's structural skeleton: (FQ) is the literal physical-instantiation 
 
 ### 7.6 The Modular-Local Holographic Superselection Rule (foundational postulate)
 
-The above theorems establish the framework's structure within standard renormalized entropy. They leave a critical question: even after decoherence + (FQ) deliver a strict classical mixture $\sum_k p_k \omega_k^R$ on the regional algebra, this is *still a mixture over multiple macroscopic records*. Standard renormalized entropy on the Type II algebra does **not** forbid such mixtures — by the standard counting, mutually exclusive macroscopic record sectors partition the regional Hilbert space, $\sum_k d_k \le 2^{Q_R}$, and the mixture entropy stays below $Q_R$. To establish single-record per-run as a structural consequence at the level of the macroscopic observable content, the framework commits to a stronger principle than standard entropy bounds: a **modular-local holographic superselection rule**.
+The entropy quantity denoted $S_{\rm ren}$ in §4.1(ii) is the modular-local information functional used here:
+$$
+S_{\rm ren}(R; \omega) \;\equiv\; \chi_R(\omega_R) \;:=\; S_{\rm Araki}(\omega_R \,\|\, \sigma_R) \;=\; \Delta_\omega \langle K_R^\sigma \rangle - \Delta_\omega S_R,
+$$
+for the chosen faithful reference state $\sigma_R$. Thus the holographic condition (FQ)(ii) is precisely the modular-local capacity bound $\chi_R(\omega_R) \le C(R)$.
+
+The above theorems establish the framework's structure within standard renormalized entropy. They leave a critical question: even after decoherence + (FQ) deliver a strict classical mixture $\sum_k p_k \omega_k^R$ on the regional algebra, this is *still a mixture over multiple macroscopic records*. The modular-local capacity bound controls the record-entropy / effective support of this mixture: for $k$ equiprobable records of per-record cost $I_0$, one typically has $\chi_R \simeq I_0 + \log k$, so raw cardinality is not excluded without additional branch-summed assumptions. To establish single-record per-run as a structural consequence at the level of the macroscopic observable content, the framework commits to a stronger principle than standard entropy bounds: a **modular-local holographic superselection rule**.
 
 This is the framework's central new physical postulate beyond the algebraic scaffolding of CPW/Witten. It is formulated *intrinsically* on the algebra-state pair via Araki / Type II core relative entropy, with no joint-region cutoff applied to spacelike-combined algebras.
 
@@ -566,22 +572,82 @@ This refactoring matters for two reasons:
 
 2. **No-signaling becomes a theorem.** Because $\chi_R$ depends only on the algebra-state pair $(\hat{\mathcal{A}}(R), \omega_R)$ and not on any joint-region structure, and because the admissibility predicate for spacelike-separated regions is the meet of local predicates, no-signaling follows automatically from AQFT microcausality. See §7.7.
 
-**The framework's commitment: the Branch-Summed Bound is a SUPERSELECTION rule, not a dynamical modification.**
+**The framework's commitment: the modular-local capacity bound is a SUPERSELECTION / admissibility rule, not a dynamical collapse rule and not a universal branch-summed cardinality postulate.**
 
 Under this commitment, the framework's structure is the following.
 
-**Definition (Physical state space).** $\mathcal{H}_{\rm phys} \subset \mathcal{H}$ is the subset of universal wave functions whose induced regional states satisfy the Branch-Summed Bound for every bounded region:
-$$\mathcal{H}_{\rm phys} = \{|\Psi\rangle \in \mathcal{H} : I_\Sigma^\epsilon[\omega_\Psi^R] \le Q_R \text{ for all bounded } R\}.$$
+**Definition (Algebraic physical state space).** *Write $\omega_R := \omega|_{\hat{\mathcal{A}}(R)}$ for the restriction of an algebraic state $\omega$ to the regional algebra. The physical state space is the modular-locally admissible algebraic state space*
+$$
+\mathcal{S}_{\rm phys} \;:=\; \{\omega \in \mathcal{S}(\hat{\mathcal{A}}) : \omega_R \text{ is normal and } \chi_R(\omega_R) \le C(R) \text{ for every bounded } R\}.
+$$
 
-States outside $\mathcal{H}_{\rm phys}$ are *kinematically forbidden* — they are mathematically writeable in the unrestricted Hilbert-space formalism but are not physically realizable.
+*If a universal Hilbert-space representation is used, let $\pi(|\Psi\rangle) = \omega_\Psi$ be the induced algebraic state. Then*
+$$
+\mathcal{H}_{\rm phys} \;:=\; \pi^{-1}(\mathcal{S}_{\rm phys})/\!\sim, \qquad |\Psi\rangle \sim |\Phi\rangle \iff \omega_\Psi|_{\hat{\mathcal{A}}(R)} = \omega_\Phi|_{\hat{\mathcal{A}}(R)} \;\forall R.
+$$
 
-**Definition (Physical Hamiltonian).** A Hamiltonian $H$ is **physical** if its dynamics preserves $\mathcal{H}_{\rm phys}$: $e^{-iHt/\hbar} \mathcal{H}_{\rm phys} \subset \mathcal{H}_{\rm phys}$ for all $t$.
+*Thus $\mathcal{H}_{\rm phys}$ denotes physical equivalence classes of Hilbert representatives, not a linear subspace of $\mathcal{H}$.* States outside $\mathcal{S}_{\rm phys}$ are *kinematically forbidden* — they are mathematically writeable in the unrestricted formalism but are not physically realizable.
 
-The set of physical Hamiltonians is a proper subset of the set of all Hermitian operators on the unconstrained Hilbert space. Generic Hilbert-space Hamiltonians do not preserve $\mathcal{H}_{\rm phys}$; physical Hamiltonians do.
+**Definition (Physical dynamics and instruments).** *A deterministic evolution is represented in the Heisenberg picture by a normal unital completely positive map $\alpha_t: \hat{\mathcal{A}} \to \hat{\mathcal{A}}$; for closed reversible dynamics, $\alpha_t$ is an automorphism. It is **physical** iff*
+$$
+\alpha_{t*}(\mathcal{S}_{\rm phys}) \subseteq \mathcal{S}_{\rm phys}, \qquad (\alpha_{t*}\omega)(A) := \omega(\alpha_t(A)).
+$$
 
-**Theorem 6 (Macroscopic Definiteness, under the Branch-Summed Superselection Postulate).** *For any physical state $|\Psi\rangle \in \mathcal{H}_{\rm phys}$ and any bounded region $R$ containing apparatus + environment with $N_{\max} = \lfloor Q_R / I_0 \rfloor$ macroscopically distinguishable records, the smooth active set $\mathcal{A}_\epsilon(\omega_\Psi^R)$ has cardinality at most $N_{\max}$. In the regime where each macroscopic record approximately saturates the regional capacity ($I_0 \approx Q_R$), $N_{\max} = 1$ — only single-record states are physically realizable.*
+*A Hamiltonian is physical only insofar as its induced automorphism group satisfies this condition.*
 
-*Proof.* By definition, $|\Psi\rangle \in \mathcal{H}_{\rm phys}$ satisfies $I_\Sigma^\epsilon[\omega_\Psi^R] \le Q_R$. By the branch-summed counting, $|\mathcal{A}_\epsilon| \cdot I_0 \le I_\Sigma^\epsilon \le Q_R$, hence $|\mathcal{A}_\epsilon| \le Q_R/I_0$. When $I_0 \approx Q_R$, $|\mathcal{A}_\epsilon| \le 1$. $\blacksquare$
+*A measurement instrument $\mathcal{I} = \{\mathcal{I}_a\}_a$ is **physical** iff $\sum_a \mathcal{I}_a$ is unital and, for every $\omega \in \mathcal{S}_{\rm phys}$:*
+*(i) the non-selective state $\omega \circ (\sum_a \mathcal{I}_a)$ lies in $\mathcal{S}_{\rm phys}$; and*
+*(ii) **branchwise**, whenever $p_a = \omega(\mathcal{I}_a(\mathbf{1})) > 0$, the normalized conditional state*
+$$
+\omega_a(B) := \frac{\omega(\mathcal{I}_a(B))}{p_a}
+$$
+*is admissible on every bounded region in the causal future of the outcome record. Conditional feed-forward operations must satisfy the same condition on each branch.*
+
+The set of physical dynamics is a proper subset of the set of all normal unital CP maps on $\hat{\mathcal{A}}$. Generic Hilbert-space Hamiltonians do not induce physical dynamics; physical dynamics do.
+
+**Axiom (Causal application of admissibility).** *Modular-local admissibility is imposed on the state of a region when that region is physically instantiated in the causal order. If earlier alternatives are separately admissible in their respective past algebras, a later joint diamond $D^+$ constrains only the state restricted to $\hat{\mathcal{A}}(D^+)$ after the relevant systems enter $D^+$. Failure of $\chi_{D^+} \le C(D^+)$ makes the proposed future joint state or transition inadmissible; it does **not** retroactively delete previously admissible past branches.*
+
+**Theorem 6 (Effective Macroscopic Definiteness, modular-local form).** *Let $\omega \in \mathcal{S}_{\rm phys}$ and let $R$ contain a decohered macroscopic record algebra with mutually exclusive record predicates $\{P_k\}_{k \in \mathcal{A}_\epsilon}$. Let $p_k = \omega_R(P_k)$, normalized on the $\epsilon$-smoothed active set, and let $\omega_{k,R}$ be the corresponding conditional regional state. Assume the smoothed record decomposition obeys the modular Holevo-type lower bound*
+$$
+\chi_R(\omega_R) \;\ge\; H(p) + \sum_{k \in \mathcal{A}_\epsilon} p_k \, \chi_R(\omega_{k,R}) - \eta_\epsilon,
+$$
+*with $H(p) = -\sum_k p_k \log p_k$ and $\eta_\epsilon \to 0$ as the smoothing is removed. If every active macroscopic record has cost*
+$$
+\chi_R(\omega_{k,R}) \;\ge\; I_0 - \eta_\epsilon,
+$$
+*then*
+$$
+H(p) \;\le\; C(R) - I_0 + 2\eta_\epsilon, \qquad N_{\rm eff} := \exp H(p) \;\le\; \exp(C(R) - I_0 + 2\eta_\epsilon).
+$$
+*Moreover, for every $0 < \delta < 1$, there exists a subset $T_\delta \subseteq \mathcal{A}_\epsilon$ with active probability at least $1 - \delta$ and*
+$$
+|T_\delta| \;\le\; \exp\!\left(\frac{C(R) - I_0 + 2\eta_\epsilon}{\delta}\right).
+$$
+*In the saturation regime $I_0 = C(R)$ and $\eta_\epsilon = 0$, the active distribution has $H(p) = 0$, hence a single record has probability one. For approximate saturation, the conclusion is **effective / probability-weighted** rather than a raw cardinality bound.*
+
+*Proof.* Since $\omega \in \mathcal{S}_{\rm phys}$, $\chi_R(\omega_R) \le C(R)$. Combining this with the two stated lower bounds gives $C(R) \ge H(p) + I_0 - 2\eta_\epsilon$. The effective-number bound follows immediately. The smoothed support bound follows by Markov's inequality applied to the random variable $-\log p_k$. Finally $p_{\max} \ge e^{-H(p)}$, so exact saturation forces $p_{\max} = 1$. $\blacksquare$
+
+**Modular estimate of Born-weight deviations.** Let $\mu$ be the Born measure over conditional record states $r \mapsto \omega_r$, and define the inadmissible set
+$$
+F_R := \{r : \chi_R(\omega_r) > C(R)\}, \qquad \delta_R := \mu(F_R).
+$$
+Since $\chi_R \ge 0$, Markov's inequality gives
+$$
+\delta_R \;\le\; \frac{\mathbb{E}_\mu[\chi_R(\omega_r)]}{C(R)}.
+$$
+Using $\chi_R = \Delta\langle K_R^\sigma\rangle - \Delta S_R$,
+$$
+\mathbb{E}_\mu[\chi_R(\omega_r)] \;\le\; \mathbb{E}_\mu[\Delta\langle K_R^\sigma\rangle_r] + \mathbb{E}_\mu[|\Delta S_R(r)|].
+$$
+For a ball of radius $L$ in the vacuum modular approximation, the modular Hamiltonian gives
+$$
+\Delta\langle K_R^\sigma\rangle \;\lesssim\; \frac{2\pi L\, E_R}{\hbar c},
+$$
+so
+$$
+\delta_R \;\lesssim\; \frac{2\pi L \, \mathbb{E}_\mu[E_R]/(\hbar c) + \mathbb{E}_\mu[|\Delta S_R|]}{C(R)}.
+$$
+For $L \sim 1\,\mathrm{m}$ and $E_R \sim 1\,\mathrm{kg}\,c^2$, the modular-energy numerator is $\sim 2 \times 10^{43}$ nats, while $C(R) \sim A/(4\ell_P^2) \sim 10^{70}$ nats, giving $\delta_R \lesssim 10^{-27}$ up to entropy corrections. The bound is **region- and energy-dependent**, not a universal lab-scale constant. Per the deviation theorem (`paper_strategy/36`), Born probabilities under modular-local admissibility deviate from standard Born probabilities by at most $\delta_R$ on bounded observables — operationally invisible at lab scale.
 
 The single-record-per-region structure of physical states is therefore a *structural consequence* of the Branch-Summed Holographic Superselection Postulate. Multi-record states are not absent because of dynamical collapse; they are absent because they are *not in the physical state space*.
 
@@ -653,7 +719,9 @@ These are the framework's specific new physical principles, building on the Witt
 
 ### 7.7 Theorem (No-signaling from modular-local admissibility)
 
-**Theorem 7 (No-signaling).** *Let $D_A, D_B$ be spacelike-separated causally complete regions with $[\hat{\mathcal{A}}(D_A), \hat{\mathcal{A}}(D_B)] = 0$. Let $\{\Phi_a^x\}$ be a normal CP instrument localized in $\hat{\mathcal{A}}(D_A)$ with setting $x$ and outcomes $a$, and let $\{\Psi_b^y\}$ be similarly localized in $\hat{\mathcal{A}}(D_B)$. Under the Modular-Local Holographic Superselection Rule (§7.6), Alice's marginal probability is independent of Bob's setting:*
+**Non-selective-instrument convention.** All operations used in the no-signaling argument below are deterministic *non-selective* channels — i.e., instruments enter only through their sum $\mathcal{I} = \sum_a \mathcal{I}_a$. Selective conditional states $\omega_a$ are admissibility-checked branchwise (cf. §7.6 Definition (Physical instruments)), but **postselection on the outcome label $a$ is not an operation available for spacelike signaling**; it becomes operational only once the outcome record is classically available in the common future. Without this restriction, even ordinary Born probabilities can be made to "signal" by postselecting on rare outcomes; with it, no-signaling reduces cleanly to algebraic commutation.
+
+**Theorem 7 (No-signaling).** *Let $D_A, D_B$ be spacelike-separated causally complete regions with $[\hat{\mathcal{A}}(D_A), \hat{\mathcal{A}}(D_B)] = 0$. Let $\{\Phi_a^x\}$ be a normal CP instrument localized in $\hat{\mathcal{A}}(D_A)$ with setting $x$ and outcomes $a$, and let $\{\Psi_b^y\}$ be similarly localized in $\hat{\mathcal{A}}(D_B)$. Under the Modular-Local Holographic Superselection Rule (§7.6) and the non-selective-instrument convention above, Alice's marginal probability is independent of Bob's setting:*
 $$
 P_{\rm QIQT}(a \mid x, y) \;=\; P_{\rm QIQT}(a \mid x).
 $$
