@@ -183,9 +183,10 @@ After the detection interaction, the reduced state of the particle's position de
 $$\rho_{\rm particle}(x, x') = \psi(x) \psi^*(x') \langle E_{x'} | E_x \rangle \langle S_{x'} | S_x \rangle.$$
 
 Decoherence theory (Zurek 2003; Joos et al. 2003) establishes that for macroscopically distinct positions $x \ne x'$:
-$$\langle E_{x'} | E_x \rangle \to 0 \quad \text{and} \quad \langle S_{x'} | S_x \rangle \to 0 \quad \text{rapidly}.$$
+$$\langle E_{x'} | E_x \rangle \to 0 \quad \text{and} \quad \langle S_{x'} | S_x \rangle \to 0 \quad \text{rapidly},$$
+by the product-of-overlaps argument over many independent environmental degrees of freedom (see the companion *Tutorial* §2 for an explicit derivation).
 
-The off-diagonal terms in the density matrix are dynamically suppressed. The reduced state of the particle becomes (approximately) diagonal in the position basis:
+The off-diagonal terms in the density matrix are dynamically suppressed. The reduced state of the particle becomes (approximately) diagonal in the position basis — this is einselection: the position basis is selected because the system-environment interaction is position-local (see *Tutorial* §6.2):
 $$\rho_{\rm particle}(x, x') \to |\psi(x)|^2 \delta(x - x').$$
 
 In algebraic terms, the formal state on the apparatus + environment algebra $\hat{\mathcal{A}}(R_{SE})$ becomes:

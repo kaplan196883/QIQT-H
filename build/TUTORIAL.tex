@@ -342,33 +342,50 @@ Why should
 \langle E_\uparrow | E_\downarrow\rangle \approx 0
 \]
 
-in practice? Because the apparatus is not isolated. Air molecules, photons, phonons, electronics, and other degrees of freedom continually "monitor" it. A pointer in the up-position scatters the environment into one enormous state; a pointer in the down-position scatters it into another. Even if each environmental fragment carries only a tiny amount of which-branch information, the total overlap is a product of many tiny overlaps:
+in practice? The standard Joos-Zeh answer is: because the apparatus is continually scattered by its environment. Air molecules, photons, phonons, electronics, and many other degrees of freedom interact with the pointer. If the pointer is in the up-position, an incoming environmental particle is scattered into one outgoing state; if it is in the down-position, into a different outgoing state:
 
 \[
-\langle E_\uparrow | E_\downarrow \rangle
-=
-\prod_{k=1}^N \langle e^{(k)}_\uparrow | e^{(k)}_\downarrow \rangle
-\;\approx\; 0
-\quad \text{for huge } N.
+|M_i\rangle |e^{(k)}_{\rm in}\rangle \longrightarrow |M_i\rangle |e^{(k)}_i\rangle,
+\qquad i=\uparrow,\downarrow.
 \]
 
-So the orthogonality is not a new postulate. It is what happens when information about the outcome leaks into many uncontrolled degrees of freedom. To reverse it, one would have to collect and phase-align essentially all of those degrees of freedom. For a macroscopic record, that is physically hopeless.
+Here $k$ labels one scattering event. The crucial approximation is independence: different environmental particles scatter separately, and the incoming environment is approximately a product state. After $N$ such events,
 
-The effect is seen by ignoring the environment. Let $S$ denote the spin plus measuring device. The reduced density matrix is
+\[
+|E_i^{(N)}\rangle = |e_i^{(1)}\rangle |e_i^{(2)}\rangle \cdots |e_i^{(N)}\rangle,
+\qquad
+D_N \equiv \langle E_\downarrow^{(N)} | E_\uparrow^{(N)}\rangle = \prod_{k=1}^N \langle e_\downarrow^{(k)} | e_\uparrow^{(k)}\rangle.
+\]
+
+This is the product formula. It is not a new postulate — it follows from many independent scattering records. Each scattered photon or molecule may carry only a tiny amount of which-branch information, but the information accumulates \emph{multiplicatively}.
+
+Suppose each event reduces the squared overlap by a small amount, $|\langle e_\downarrow^{(k)} | e_\uparrow^{(k)}\rangle|^2 = 1 - \eta$, and events arrive at rate $\gamma$, so $N(t) \simeq \gamma t$. Then
+
+\[
+|D_N|^2 = (1-\eta)^N \approx e^{-N\eta} \approx e^{-\Lambda t},
+\qquad \Lambda = \gamma\eta,
+\qquad t_D = \Lambda^{-1}.
+\]
+
+This $t_D$ is the \textbf{decoherence time}. For a macroscopic pointer in an ordinary environment it is usually fantastically short — the original Joos-Zeh 1985 collisional-decoherence calculation gives $t_D \sim 10^{-30}\,\mathrm{s}$ for a dust grain in air. Decoherence is fast.
+
+The effect is seen by tracing out the environment. Using an orthonormal basis $\{|r\rangle\}$ for $E$,
 
 \[
 \begin{aligned}
-\rho_S = \mathrm{Tr}_E |\Psi\rangle\langle\Psi|
+\rho_S
+&= \mathrm{Tr}_E |\Psi\rangle\langle\Psi| = \sum_r \langle r | \Psi\rangle\langle\Psi | r\rangle \\
 &= |\alpha|^2 |\uparrow M_\uparrow\rangle\langle\uparrow M_\uparrow|
 + |\beta|^2 |\downarrow M_\downarrow\rangle\langle\downarrow M_\downarrow| \\
-&\quad + \alpha\beta^* \langle E_\downarrow | E_\uparrow\rangle |\uparrow M_\uparrow\rangle\langle\downarrow M_\downarrow| \\
-&\quad + \alpha^*\beta \langle E_\uparrow | E_\downarrow\rangle |\downarrow M_\downarrow\rangle\langle\uparrow M_\uparrow|.
+&\quad + \alpha\beta^* \langle E_\downarrow | E_\uparrow\rangle |\uparrow M_\uparrow\rangle\langle\downarrow M_\downarrow| + \text{h.c.}
 \end{aligned}
 \]
 
-The diagonal terms are the apparent alternatives. The off-diagonal terms are the interference terms. Decoherence is the practical suppression of those off-diagonal terms by the tiny factor $\langle E_\uparrow | E_\downarrow\rangle$.
+The diagonal terms are the apparent alternatives. The off-diagonal terms are the interference terms. Decoherence is the rapid suppression of those off-diagonal terms by the factor $\langle E_\downarrow | E_\uparrow\rangle$.
 
-But nothing has collapsed. The full state of system, apparatus, and environment is still a pure entangled state. Decoherence explains why branches stop interfering for local observers — but it does \textbf{not} choose one outcome. It gives an apparent classical branching structure. The measurement problem remains:
+This statement is basis-dependent. Decoherence suppresses interference in the basis that the environment \emph{monitors}. For a measuring device this is a basis of robust \textbf{pointer states}: macroscopically distinct positions, currents, tracks, or records. Zurek calls this environmental selection of stable states \textbf{einselection}, and we return to it in §6.
+
+But nothing has collapsed. The full state of spin, apparatus, and environment is still a pure entangled state. Decoherence explains why branches stop interfering for local observers — but it does \textbf{not} choose one outcome. It gives an apparent classical branching structure. The measurement problem remains:
 
 \begin{qiqtquote}
 Why do I experience one branch rather than a superposition of branches?
@@ -384,19 +401,83 @@ In non-gravitational quantum mechanics, it is tempting to say that a finite volu
 
 But gravity changes that.
 
-If you pack too much energy into a region, the region collapses into a black hole. A black hole of horizon area $A$ has entropy
+If you pack too much energy into a region, the region collapses into a black hole.
+
+Here is the standard textbook calculation of the black-hole entropy. It is not the full Hawking 1975 derivation — that requires quantum field theory in curved spacetime — but it uses Hawking's main result, the temperature of the horizon, plus ordinary thermodynamics, and arrives at the right answer.
+
+For a Schwarzschild black hole of mass $M$, the Hawking temperature is
 
 \[
-S_{\rm BH} = \frac{k_B A}{4G\hbar}.
+T_H = \frac{\hbar c^3}{8\pi G M k_B}.
 \]
 
-In units where $k_B=1$,
+This temperature is set by the surface gravity of the horizon: larger black holes are colder.
+
+Use the first law of thermodynamics, $dE = T_H \, dS$, with the black-hole energy $E = M c^2$, so $dE = c^2 \, dM$. Then
+
+\[
+dS = \frac{c^2 \, dM}{T_H} = c^2 \, dM \cdot \frac{8\pi G M k_B}{\hbar c^3} = \frac{8\pi G k_B}{\hbar c} \, M \, dM.
+\]
+
+Integrating from $0$ to $M$,
+
+\[
+S(M) = \frac{4\pi G M^2 k_B}{\hbar c}.
+\]
+
+Now rewrite in terms of the horizon area. The Schwarzschild radius is $r_s = 2GM/c^2$, so the horizon area is
+
+\[
+A = 4\pi r_s^2 = \frac{16\pi G^2 M^2}{c^4}.
+\]
+
+Define the Planck area
+
+\[
+\ell_P^2 = \frac{G\hbar}{c^3}.
+\]
+
+Then
+
+\[
+\frac{k_B A}{4 \ell_P^2}
+= \frac{k_B}{4} \cdot \frac{16\pi G^2 M^2}{c^4} \cdot \frac{c^3}{G\hbar}
+= \frac{4\pi G M^2 k_B}{\hbar c}.
+\]
+
+This matches the entropy from the first law, so
+
+\[
+S_{\rm BH} = \frac{k_B A}{4 \ell_P^2} = \frac{k_B c^3 A}{4 G \hbar}.
+\]
+
+This is the Bekenstein-Hawking entropy.
+
+There is also Bekenstein's intuitive "drop a bit" heuristic, which gives the scaling without invoking the first law. A bit of information localized in a region of size $R$ needs a wavelength of order $R$, so its minimum energy is $E_{\rm bit} \sim \hbar c / R$. Drop one such bit into a Schwarzschild black hole of horizon radius $R$. The mass increase is
+
+\[
+dM = E_{\rm bit} / c^2 \sim \hbar / (R c).
+\]
+
+The change in horizon area is
+
+\[
+dA = \frac{dA}{dM} \, dM = \frac{32\pi G^2 M}{c^4} \cdot \frac{\hbar}{R c}.
+\]
+
+Using $R = r_s = 2GM/c^2$,
+
+\[
+dA \sim 16\pi \, \frac{G\hbar}{c^3} = 16\pi \, \ell_P^2.
+\]
+
+Up to numerical factors: \textbf{one bit of information costs about one Planck area of horizon}. The entropy is the number of bits the horizon can store, so $S \sim A/\ell_P^2$.
+
+In the natural units used in the rest of the tutorial, $c = k_B = 1$, the Planck area is $\ell_P^2 = G\hbar$ and the Bekenstein-Hawking entropy reads
 
 \[
 S_{\rm BH} = \frac{A}{4G\hbar}.
 \]
-
-This is the Bekenstein-Hawking entropy.
 
 The striking thing is that entropy scales like \textbf{area}, not volume.
 
@@ -426,6 +507,8 @@ This is the “H” in QIQT-H: holographic.
 
 Before we talk about holographic information constraints, we need to review several kinds of entropy.
 
+Why several? Because "how much information is in a distribution?" is not one question — it is many. \emph{On average, how surprising is a draw?} \emph{How many outcomes are possible at all?} \emph{How peaked is the worst-case outcome?} \emph{Can we ignore vanishingly tiny tails?} Each of these legitimate questions gets its own entropy. In QIQT-H different parts of the framework care about different ones: the holographic bound is most naturally a bound on the \textbf{number of distinguishable record alternatives}, not on average surprise — so we will eventually need a \emph{support-counting} entropy rather than Shannon. To see why, we need the full menu.
+
 \subsection{Shannon entropy}
 
 For a classical probability distribution $p_i$, the Shannon entropy is
@@ -434,7 +517,7 @@ For a classical probability distribution $p_i$, the Shannon entropy is
 H(p) = -\sum_i p_i \log p_i.
 \]
 
-It measures the expected surprise of a draw from the distribution.
+It measures the expected surprise of a draw from the distribution — equivalently, the average number of bits needed to encode an outcome. It is the right entropy when you care about \emph{typical} behaviour: thermodynamics, source coding, channel capacity. Its weakness for our purposes is that it almost ignores rare outcomes — a tiny tail probability barely affects $H$, even though the corresponding outcome is \emph{still physically possible}.
 
 Example:
 
@@ -458,9 +541,15 @@ much smaller.
 
 Shannon entropy cares about probabilities.
 
+\begin{qiqtquote}
+\textbf{Aside: units (bits, nats, hartleys).} The entropy $H = -\sum_i p_i \log p_i$ depends on the base of the logarithm. Using $\log_2$ gives \textbf{bits} (binary digits); using $\ln$ gives \textbf{nats}; using $\log_{10}$ gives \textbf{hartleys} (decimal digits). The conversion is $1\,\text{nat} = 1/\ln 2 \approx 1.443\,\text{bits}$. In QIQT-H the choice of units does not change the physics; we use natural logarithms throughout.
+\end{qiqtquote}
+
 \subsection{Von Neumann entropy}
 
-For a density matrix $\rho$, the quantum version is
+Shannon entropy takes a probability distribution as input. In quantum mechanics the fundamental object is not a probability distribution but a \emph{density matrix} $\rho$ — possibly carrying coherences between basis states. We need a quantum analogue.
+
+For a density matrix $\rho$, the quantum entropy is
 
 \[
 S(\rho) = -\mathrm{Tr}(\rho \log \rho).
@@ -472,7 +561,7 @@ If $\rho$ has eigenvalues $p_i$, then
 S(\rho) = -\sum_i p_i \log p_i.
 \]
 
-So von Neumann entropy is just Shannon entropy applied to the eigenvalues of $\rho$.
+So von Neumann entropy is just Shannon entropy applied to the eigenvalues of $\rho$. Its physical content is sharper than Shannon's: $S(\rho)$ measures the \emph{mixedness} of a quantum state, and for a bipartite pure state it equals the \textbf{entanglement entropy} of either subsystem. This is the entropy that appears in QFT entanglement bounds, in Page's curve, and in the Bekenstein-Hawking formula. Like Shannon, however, it weights outcomes by probability and is insensitive to small-amplitude branches.
 
 Example:
 
@@ -504,35 +593,50 @@ S(\rho)=0.
 
 \subsection{Rényi entropies}
 
-The Rényi entropy of order $\alpha$ is
+The \textbf{Rényi entropies} are a family $H_\alpha$, indexed by a parameter $\alpha \ge 0$, whose $\alpha \to 1$ limit is the Shannon entropy. Changing $\alpha$ changes which probabilities dominate the answer: small $\alpha$ treats all nonzero possibilities more equally, while large $\alpha$ emphasizes the largest probabilities. Explicitly, for $\alpha \ge 0$ with $\alpha \ne 1$,
 
 \[
-H_\alpha(p)=\frac{1}{1-\alpha}\log\left(\sum_i p_i^\alpha\right).
+H_\alpha(p)=\frac{1}{1-\alpha}\log\left(\sum_i p_i^\alpha\right),
 \]
 
-Different $\alpha$ emphasize different aspects of the distribution.
+with the boundary cases understood as limits. Two values matter for QIQT-H:
 
-The most important one for QIQT-H is the $\alpha=0$ case.
+\begin{itemize}
+  \item $\alpha \to 0$: take the one-sided limit $\alpha \to 0^+$ inside the sum. For $p_i > 0$, $p_i^\alpha \to 1$; for $p_i = 0$, $0^\alpha = 0$ for every $\alpha > 0$, so the limit is $0$. Hence each nonzero outcome contributes a $1$ and $H_0 = \log|\mathrm{supp}(p)|$ — \emph{counts possibilities}.
+  \item $\alpha \to 1$: recovers Shannon entropy — \emph{typical behaviour}.
+\end{itemize}
+
+(Other choices exist — $\alpha = 2$ gives the collision entropy $H_2 = -\log\sum_i p_i^2$, and $\alpha \to \infty$ gives the min-entropy $H_\infty = -\log\max_i p_i$ — but QIQT-H does not use them.)
+
+The holographic capacity is about \emph{distinguishable possibilities}, not average surprise, so the central QIQT-H quantity will be built from $\alpha = 0$. Shannon ($\alpha = 1$) reappears on the \emph{other} side of the bound, inside the generalized entropy.
 
 \subsection{Rényi-0 entropy: counting possible outcomes}
 
-For $\alpha=0$,
+The expression $p_i^0$ is fine for $p_i > 0$ but ambiguous when $p_i = 0$, since $0^0$ is undefined. If we naively extended $x^0 = 1$ to the zero bins as well, we would get $H_0 = \log N$ where $N$ is the number of \emph{formal} bins listed — including ones that cannot occur. That number depends on how we wrote down the distribution, not on its physical content. Useless.
+
+Strictly, $H_0$ is defined by the outer limit
 
 \[
-p_i^0 =
-\begin{cases}
-1, & p_i>0,\\
-0, & p_i=0.
-\end{cases}
+H_0(p) = \lim_{\alpha \to 0^+} \frac{1}{1-\alpha}\log\sum_i p_i^\alpha.
 \]
 
-So
+For a finite outcome set the sum has finitely many terms, so we may take the limit term by term. For $p_i > 0$, $p_i^\alpha \to 1$; for $p_i = 0$, $0^\alpha = 0$ for every $\alpha > 0$. Hence
 
 \[
-H_0(p)=\log(\#\text{ of nonzero-probability outcomes}).
+\sum_i p_i^\alpha \;\longrightarrow\; |\mathrm{supp}(p)|,
+\]
+
+and since $\log$ is continuous and $1/(1-\alpha) \to 1$,
+
+\[
+H_0(p) = \log|\mathrm{supp}(p)| = \log(\#\text{ of nonzero-probability outcomes}).
 \]
 
 This is called the \textbf{support entropy}.
+
+This is the same kind of limit convention used to define Shannon entropy, where one writes $0\log 0 := \lim_{p \to 0^+} p\log p = 0$. Boundary cases are \emph{not} arbitrary algebraic conventions — they are forced by continuity.
+
+The crucial feature: \textbf{$H_0$ depends only on which outcomes are possible, not on how likely they are}. Once a probability is nonzero, $H_0$ does not care whether it is $0.99$ or $10^{-30}$. That is exactly the feature QIQT-H wants when it asks "how many physically distinguishable records does this state admit?"
 
 Example:
 
@@ -568,35 +672,57 @@ This matters for QIQT-H because a holographic bound is plausibly a bound on dist
 
 \subsection{Hill numbers}
 
-Instead of entropy, ecologists often use the “effective number of species,” called a Hill number.
+Entropy is a logarithmic count. A \textbf{Hill number} removes the logarithm.
 
-For Shannon entropy,
-
-\[
-N_{\rm eff}=e^{H}.
-\]
-
-For Rényi-0,
+For a Rényi entropy in nats,
 
 \[
-N_0 = e^{H_0}
+H_q^{\rm nat} = \frac{1}{1-q}\ln\left(\sum_i p_i^q\right),
 \]
 
-is literally the number of nonzero possibilities.
+the corresponding Hill number is
+
+\[
+N_q = \exp(H_q^{\rm nat}) = \left(\sum_i p_i^q\right)^{1/(1-q)}.
+\]
+
+This is the \textbf{effective number of outcomes} — measured in the same units as "number of species" or "number of records."
+
+The Shannon case ($q = 1$) is
+
+\[
+N_1 = \exp\left(-\sum_i p_i \ln p_i\right).
+\]
+
+In NLP and machine learning this is called the \textbf{perplexity}. It says how many equally likely words would produce the same uncertainty as the actual distribution.
+
+The three important cases for us are:
+
+\[
+N_0 = |\mathrm{supp}(p)|, \qquad N_1 = \text{perplexity}, \qquad N_\infty = \frac{1}{\max_i p_i}.
+\]
 
 Example:
 
 \[
-p=(1/2,1/2)
+p = (1/2, 1/2) \quad\Longrightarrow\quad N_0 = N_1 = N_\infty = 2.
 \]
 
-has $N_0=2$.
+Example:
 
 \[
-p=(0.999,0.001)
+p = (0.999, 0.001) \quad\Longrightarrow\quad N_0 = 2,
 \]
 
-also has $N_0=2$, even though its Shannon effective number is close to $1$.
+because both outcomes are possible. But its Shannon effective number is
+
+\[
+N_1 \approx 1.008,
+\]
+
+close to $1$, because in a typical draw the second outcome is essentially never seen.
+
+This is the natural way to state the holographic bound: it is an inequality on a \emph{count} of records, not on the logarithm of a count.
 
 \subsection{Smooth support}
 
@@ -633,6 +759,8 @@ N_0^\varepsilon=3.
 This is useful when tiny tails are physically irrelevant.
 
 QIQT-H often uses a support-like entropy because it wants to count possible records, while smoothing avoids being dominated by absurdly tiny amplitudes.
+
+To summarise the menu: \textbf{Shannon and von Neumann} measure average surprise / mixedness — natural for thermodynamics and entanglement, but blind to small-amplitude possibilities. \textbf{Rényi-α} lets us slide between possibility-counting ($\alpha \to 0$) and worst-case ($\alpha \to \infty$). \textbf{Rényi-0}, sharpened by \textbf{smooth support}, is the right tool when we want to ask "how many physically realisable records does this state describe?" That is the entropy the holographic bound naturally constrains.
 
 \medskip\hrule\medskip
 
@@ -754,33 +882,90 @@ But remember: the total state is still pure. Decoherence did not collapse the wa
 
 \subsection{Einselection: environment-induced superselection}
 
-The environment does not decohere every basis equally. It picks out a preferred basis, called the pointer basis.
+The environment does not decohere every basis equally. It picks out a preferred basis, called the \textbf{pointer basis}.
 
 This is called \textbf{einselection}, short for environment-induced superselection.
 
-\subsubsection{Toy model}
+The rule is simple: the environment monitors the system observable that appears in the interaction Hamiltonian.
+
+\subsubsection{Toy model: monitoring $\sigma_z$}
 
 Let
 
 \[
-H_{\rm int}=g\, \sigma_z \otimes B_E,
+H_{\rm int} = g\,\sigma_z \otimes B_E, \qquad \sigma_z |s\rangle = s\,|s\rangle,
 \]
 
-where $B_E$ is some environment operator.
+where $g$ is a real coupling constant (units of energy) that sets the strength of the system-environment interaction, $B_E$ is some environment operator, and $|s\rangle$ is either $|0\rangle$ or $|1\rangle$, with $s = \pm 1$.
 
-Then $|0\rangle,|1\rangle$, the eigenstates of $\sigma_z$, are stable under the interaction. Superpositions of them get entangled with the environment.
-
-So the environment selects the $\sigma_z$ basis as the pointer basis.
-
-If instead
+Evolve an initial product state $|s\rangle|e\rangle$. Since $|s\rangle$ is an eigenstate of $\sigma_z$,
 
 \[
-H_{\rm int}=g\, \sigma_x \otimes B_E,
+e^{-i H_{\rm int} t / \hbar} |s\rangle|e\rangle
+= |s\rangle \otimes e^{-i g s t B_E / \hbar} |e\rangle
+\equiv |s\rangle |E_s(t)\rangle.
 \]
 
-then the pointer basis would be the $\sigma_x$ eigenbasis.
+The system state has not changed. There is no mixing between $|0\rangle$ and $|1\rangle$. Only the environment changes, and it changes in a way that depends on $s$.
 
-So pointer states are not magical. They are the states that the system-environment interaction monitors.
+That is what "stable under the interaction" means here.
+
+A superposition evolves differently:
+
+\[
+(\alpha|0\rangle + \beta|1\rangle)|e\rangle
+\longrightarrow
+\alpha|0\rangle|E_0(t)\rangle + \beta|1\rangle|E_1(t)\rangle.
+\]
+
+The system and environment are now entangled. Once $\langle E_0(t) | E_1(t)\rangle \to 0$ — by the product-of-overlaps mechanism of §2 — the reduced system state is decohered in the $\sigma_z$ basis. So the pointer basis is the $\sigma_z$ eigenbasis.
+
+\textbf{Concrete realization: dephasing by bath spins.} Let the environment be a single bath spin and let $B_E = \sigma_z^{(1)}$, so
+
+\[
+H_{\rm int} = g\,\sigma_z \otimes \sigma_z^{(1)}.
+\]
+
+This is the simplest spin-environment model. Prepare the bath in $|+\rangle_1 = (|0\rangle_1 + |1\rangle_1)/\sqrt{2}$ — a state carrying no initial information about $s$. A short calculation gives
+
+\[
+|E_0(t)\rangle = \tfrac{1}{\sqrt{2}}\!\left(e^{-igt/\hbar}|0\rangle_1 + e^{+igt/\hbar}|1\rangle_1\right), \quad
+|E_1(t)\rangle = \tfrac{1}{\sqrt{2}}\!\left(e^{+igt/\hbar}|0\rangle_1 + e^{-igt/\hbar}|1\rangle_1\right),
+\]
+
+with overlap
+
+\[
+\langle E_0(t) | E_1(t)\rangle = \cos\!\left(\frac{2gt}{\hbar}\right).
+\]
+
+A single bath spin makes the overlap \emph{oscillate}, never permanently vanishing. Now take $N$ independent bath spins with couplings $g_k$, each in $|+\rangle$. Because the bath factorises, the total overlap is the product of one-spin overlaps:
+
+\[
+\langle E_0(t) | E_1(t)\rangle = \prod_{k=1}^N \cos\!\left(\frac{2 g_k t}{\hbar}\right).
+\]
+
+For generic incommensurate $g_k$ and large $N$ this drops to essentially zero almost immediately and stays there — the dephasing version of the product formula from §2. Decoherence in the $\sigma_z$ basis is just many bath spins independently dephasing the system superposition.
+
+The standard criterion says the same thing in one line. \textbf{Pointer states are eigenstates of any system observable $A$ that commutes with the system part of the interaction}:
+
+\[
+[A, H_{\rm int}^{(S)}] = 0.
+\]
+
+If this holds, eigenstates of $A$ evolve without intra-basis mixing. The environment may record \emph{which} eigenstate is present, but it does not rotate one pointer state into another.
+
+For the model above, $H_{\rm int}^{(S)} = \sigma_z$, so the pointer states are $\sigma_z$ eigenstates. If instead
+
+\[
+H_{\rm int} = g\,\sigma_x \otimes B_E,
+\]
+
+then the commuting observable is $\sigma_x$, and the pointer basis is the $\sigma_x$ eigenbasis.
+
+In real measurements, the pointer basis is almost always \textbf{position-like}: macroscopic pointer positions, detector currents, cloud-chamber tracks, spots on a screen. The reason is that most physical interactions are local in position — scattering, electromagnetic coupling, mass-density coupling all depend on \emph{where} things are. So position commutes (approximately) with the interaction Hamiltonian, and position eigenstates are the natural pointer states.
+
+Pointer states are not magical. They are the states that the system-environment interaction monitors.
 
 \subsection{Quantum Darwinism}
 
