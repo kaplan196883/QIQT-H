@@ -1170,25 +1170,25 @@ The modular-local reformulation is the framework's response to the no-signaling 
 
 The modular-local reformulation forces four concrete commitments that deserve to be stated explicitly. Each is a refinement of an earlier informal statement.
 
-**1. The physical state space is not a Hilbert subspace.** Under the modular-local bound, the physical state space is the *algebraic* set
+**1. The physical state space is not a Hilbert subspace, and it is *stagewise*, not global.** Under the modular-local bound, admissibility is imposed at each process stage on the regions that are *causally instantiated* at that stage:
 
 $$
-\mathcal{S}_{\rm phys} = \{ \omega : \chi_R(\omega_R) \le C(R) \text{ for every bounded region } R \},
+\mathcal{S}_{\rm phys}(t, h) = \{ \omega_t^h : \chi_R((\omega_t^h)_R) \le C(R) \text{ for every } R \in \mathfrak{R}_t(h) \},
 $$
 
-not a linear subspace of Hilbert space. The Hilbert-space picture $\mathcal{H}_{\rm phys}$ is recovered only as equivalence classes of representatives that induce the same regional states. The constraint is *nonlinear* in the Hilbert vector, and there is no projector onto $\mathcal{H}_{\rm phys}$.
+where $\mathfrak{R}_t(h)$ collects the bounded diamonds available to the framework on branch $h$ at stage $t$ — past records and the regions causally downstream of them. There is no single global admissibility list applied for all time; constraints come into force as their regions are physically instantiated. The Hilbert-space picture $\mathcal{H}_{\rm phys}$ is recovered only as equivalence classes of representatives inducing the same regional states. The constraint is *nonlinear* in the Hilbert vector, and there is no projector onto $\mathcal{H}_{\rm phys}$.
 
-**2. Macroscopic definiteness is "effective", not literal.** The earlier "$N$ records fit iff $N \cdot I_0 \le Q_R$" argument is replaced by an effective-entropy bound:
+**2. Macroscopic definiteness is "effective" on the *normalized active set*, not literal.** The earlier "$N$ records fit iff $N \cdot I_0 \le Q_R$" argument is replaced by an effective-entropy bound on the normalized active distribution $\tilde p_k = p_k/q$ (where $q = \sum_{k \in \mathcal{A}_\epsilon} p_k$ is the active-set total weight):
 
 $$
-H(\{p_k\}) \le C(R) - I_0, \qquad N_{\rm eff} := \exp H(p) \le \exp(C(R) - I_0).
+H_\epsilon := -\sum_k \tilde p_k \log \tilde p_k \;\le\; C(R) - I_0 + 2\eta_\epsilon, \qquad N^{(\epsilon)}_{\rm eff} := \exp H_\epsilon.
 $$
 
-Single-record-per-run is exact only at saturation $I_0 = C(R)$. Approximate saturation gives an *effective* number of records (Hill number / perplexity, §4.5) much less than $\exp(C(R))$, but not a hard cardinality bound. The framework is honest that this is a *probabilistic* concentration on a small effective set, not a sharp kinematic exclusion of all multi-record states.
+Single-record-per-run is **exact only at exact saturation** $I_0 = C(R)$ and $\eta_\epsilon = 0$. At finite $\eta_\epsilon$, the conclusion weakens to $H_\epsilon \le 2\eta_\epsilon$ — a single record dominates with probability $\ge 1 - O(\eta_\epsilon)$. The framework is honest that this is a *probabilistic concentration* on a small effective set, not a sharp kinematic exclusion of all multi-record states.
 
-**3. Instruments must be branchwise admissibility-preserving.** A measurement instrument $\{\Phi_a\}$ is physical only if *every* normalized post-outcome state $\omega_a = \omega \circ \Phi_a^* / p_a$ is admissible — not just the non-selective average. A measurement could in principle preserve admissibility on average while one branch violates it; the framework forbids this.
+**3. Instruments must be branchwise admissibility-preserving.** A measurement instrument $\{\Phi_a\}$ is physical only if *every* normalized post-outcome state $\omega_a = \omega \circ \Phi_a^* / p_a$ is admissible — not just the non-selective average. Precisely: the outcome is localized in a bounded diamond $O_a$, and $\omega_a$ must satisfy $\chi_R((\omega_a)_R) \le C(R)$ for every bounded $R \Subset J^+(O_a)$ that has been causally instantiated at the relevant stage. A measurement could in principle preserve admissibility on average while one branch violates it; the framework forbids this.
 
-**4. Admissibility applies causally, never retroactively.** When a joint future diamond $D_{AB}$ contains both Alice's and Bob's records, $D_{AB}$ has its own capacity $C(D_{AB})$ that constrains the *future joint state* on $\hat{\mathcal{A}}(D_{AB})$. The constraint **does not** retroactively delete or reweight Alice's or Bob's past separately-admissible branches. Without this clause, the framework would smuggle in postselection signaling through future joint conditions.
+**4. Admissibility applies causally, never retroactively.** When a joint future diamond $D_{AB}$ contains both Alice's and Bob's records, $D_{AB}$ has its own capacity $C(D_{AB})$ that constrains the *future joint state* on $\hat{\mathcal{A}}(D_{AB})$ **once $D_{AB}$ is causally instantiated**. The constraint **does not** retroactively delete or reweight Alice's or Bob's past separately-admissible branches. Without this clause, the framework would smuggle in postselection signaling through future joint conditions.
 
 These four commitments turn the framework's working informal description into a *specifically constrained* algebraic theory. They are the price of having the modular-local refactor close the no-signaling loophole properly.
 
@@ -1200,7 +1200,9 @@ $$
 \delta_R \le \frac{\mathbb{E}[\chi_R]}{C(R)} \lesssim \frac{2\pi L \, E_R / (\hbar c)}{A(\partial R)/(4 \ell_P^2)}.
 $$
 
-For $L \sim 1\,\mathrm{m}$ and $E_R \sim 1\,\mathrm{kg}\,c^2$, the numerator is $\sim 2 \times 10^{43}$ nats and the denominator $\sim 10^{70}$ nats, giving $\delta_R \lesssim 10^{-27}$. Operationally invisible — but importantly, the bound is now **region- and energy-dependent**, not a universal constant. Larger or more energetic regions have different deviations.
+For $L \sim 1\,\mathrm{m}$ and $E_R \sim 1\,\mathrm{kg}\,c^2$, the numerator is $\sim 2 \times 10^{43}$ nats and the denominator $\sim 10^{70}$ nats, giving the **conditional** order-of-magnitude estimate $\delta_R \lesssim 10^{-27}$. Operationally invisible — but importantly, the bound is now **region- and energy-dependent**, not a universal constant. Larger or more energetic regions have different deviations.
+
+The estimate is *conditional* because the modular-energy bound $\Delta\langle K_R^\sigma\rangle \lesssim 2\pi L E_R/(\hbar c)$ is exact only for two special cases — Rindler wedges (Bisognano-Wichmann theorem) and balls in a CFT vacuum (conformal modular Hamiltonian). For generic ball-shaped regions in flat-spacetime QFT, the bound is obtained by enclosing-wedge monotonicity of relative entropy. The $\chi_R \le \Delta\langle K_R^\sigma\rangle$ step further assumes a non-negative entropy shift $\Delta S_R \ge 0$. So $10^{-27}$ is a textbook-style heuristic, not a generic QFT theorem. The framework's main point — that operational signaling is *vanishingly small* under these standard hypotheses — survives.
 
 ---
 

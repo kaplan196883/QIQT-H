@@ -667,13 +667,13 @@ with $c_{R_S}(r_k) = S(\omega_k \| \Omega_{R_S})$ the per-record relative entrop
 
 The rest of §9A works in this classical-mixture approximation. All the conclusions about $N_{\max}$, $I_0$ calibration, the Schrödinger-cat scale, and the operational kinematic-exclusion of multi-spot states therefore carry over from the modular-local bound directly. The branch-counting language is the right intuitive handle for this single-region detector calculation.
 
-\textbf{Important qualification (effective vs. literal definiteness).} Under the modular-local bound (foundations paper §7.6, Theorem 6), the macroscopic-definiteness claim is more carefully stated than "$N_{\max}$ records fit iff $N \cdot I_0 \le Q_{R_S}$". The correct bound is on the Shannon entropy of the spot-probability distribution:
+\textbf{Important qualification (effective vs. literal definiteness).} Under the modular-local bound (foundations paper §7.6, Theorem 6), the macroscopic-definiteness claim is more carefully stated than "$N_{\max}$ records fit iff $N \cdot I_0 \le Q_{R_S}$". The correct bound is on the Shannon entropy of the \emph{normalized active distribution} $\tilde p_k = p_k/q$, where $q = \sum_{k \in \mathcal{A}_\epsilon} p_k$ is the total active-set probability:
 
 \[
-H(\{p_k\}) \;\le\; C(R_S) - I_0 + 2\eta_\epsilon,
+H_\epsilon := -\sum_{k \in \mathcal{A}_\epsilon} \tilde p_k \log \tilde p_k \;\le\; C(R_S) - I_0 + 2\eta_\epsilon,
 \]
 
-hence on the \emph{effective} number of spots $N_{\rm eff} := \exp H(\{p_k\})$, not on the raw cardinality of the active set. Single-spot-per-run is \emph{exact} only at exact saturation $I_0 = C(R_S)$; in the approximate regime, "single spot" means $N_{\rm eff}$ very close to 1 (one spot has probability essentially 1, the others are exponentially suppressed). For the screen example with $C(R_S) \sim 10^{68}$ nats and macroscopic record cost $I_0$ of comparable order, this saturation condition is exactly what calibration of $I_0$ against the observed quantum-to-classical transition is supposed to deliver. The discussion in §9A.3–9A.7 below treats this effective statement as the operational content.
+hence on the \emph{effective} number of spots $N^{(\epsilon)}_{\rm eff} := \exp H_\epsilon$, not on the raw cardinality of the active set. Single-spot-per-run is \emph{exact} only at exact saturation $I_0 = C(R_S)$ and $\eta_\epsilon = 0$; with finite smoothing $\eta_\epsilon$, the bound weakens to $H_\epsilon \le 2\eta_\epsilon$, meaning one spot dominates with probability $\ge 1 - O(\eta_\epsilon)$, while the others are exponentially suppressed. For the screen example with $C(R_S) \sim 10^{68}$ nats and macroscopic record cost $I_0$ of comparable order, this saturation condition is exactly what calibration of $I_0$ against the observed quantum-to-classical transition is supposed to deliver. The discussion in §9A.3–9A.7 below treats this effective statement as the operational content.
 
 \subsection{The macroscopic record subalgebra and the spectrum of screen spots}
 
