@@ -166,7 +166,7 @@ $$
 \qquad i=\uparrow,\downarrow.
 $$
 
-Here $k$ labels one scattering event. The crucial approximation is independence: different environmental particles scatter separately, and the incoming environment is approximately a product state. After $N$ such events,
+Here $k$ labels one scattering event. The key approximation is independence: different environmental particles scatter separately, and the incoming environment is approximately a product state. After $N$ such events,
 
 $$
 |E_i^{(N)}\rangle = |e_i^{(1)}\rangle |e_i^{(2)}\rangle \cdots |e_i^{(N)}\rangle,
@@ -441,7 +441,7 @@ This is called the **support entropy**.
 
 This is the same kind of limit convention used to define Shannon entropy, where one writes $0\log 0 := \lim_{p \to 0^+} p\log p = 0$. Boundary cases are *not* arbitrary algebraic conventions, they are forced by continuity.
 
-The crucial feature: **$H_0$ depends only on which outcomes are possible, not on how likely they are**. Once a probability is nonzero, $H_0$ does not care whether it is $0.99$ or $10^{-30}$. That is exactly the feature QIQT-H wants when it asks "how many physically distinguishable records does this state admit?"
+The key feature: **$H_0$ depends only on which outcomes are possible, not on how likely they are**. Once a probability is nonzero, $H_0$ does not care whether it is $0.99$ or $10^{-30}$. That is exactly the feature QIQT-H wants when it asks "how many physically distinguishable records does this state admit?"
 
 Example:
 
@@ -1008,7 +1008,7 @@ Equivalently, if a formal quantum state contains more branch-record alternatives
 
 ## 8.1 Branch-summed rather than branch-by-branch
 
-This is crucial.
+This matters.
 
 The constraint is not:
 
@@ -1040,7 +1040,7 @@ $$
 \log N^\varepsilon_{\rm eff}\leq S_{\rm gen}.
 $$
 
-So very tiny-amplitude alternatives may be ignored up to tolerance $\varepsilon$, but robust recorded alternatives count.
+So very tiny-amplitude alternatives may be ignored up to tolerance $\varepsilon$, but macroscopically distinguishable recorded alternatives count.
 
 ## 8.2 Probabilities
 

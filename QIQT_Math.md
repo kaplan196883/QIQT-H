@@ -534,7 +534,7 @@ The single-outcome enforcement threshold is at $N \cdot I_0 \approx Q_R$.
 **Macroscopic regime ($N \cdot I_0 \to Q_R$): constraint enforces single-record per run.** For screen spots, photographic emulsions, CCD readouts, brain states, etc., per-record cost approaches the regional holographic capacity, and the superselection rule restricts to single-record states. This is precisely the regime where the measurement problem traditionally lives.
 
 **The empirical calibration of $I_0$.** The framework's per-record cost $I_0$ is an experimental parameter of the theory, analogous to GRW's collapse rate $\lambda$. Its value must be calibrated against:
-- The largest scale at which Schrödinger-cat-like coherence has been experimentally maintained (current state-of-the-art: ~$10^4$-atom molecular interference; macroscopic mechanical oscillators in superposition over picometer distances)
+- The largest scale at which Schrödinger-cat-like coherence has been experimentally maintained (best results to date: ~$10^4$-atom molecular interference; macroscopic mechanical oscillators in superposition over picometer distances)
 - The smallest scale at which classical-definite outcomes are experimentally established
 
 Current best theoretical estimate from Zurek physical entropy of macroscopic records gives $I_0 \sim 10^{25}$ bits. For this to enforce single-record outcomes at the empirically observed scale, either: (a) the relevant regional capacity is the local detection region (not 1m but the few-cm volume of a CCD pixel and its immediate environment, giving smaller $Q_R$), or (b) the effective per-record cost includes environmental entanglement out to a larger radius, increasing $I_0$ above Zurek's estimate. Both options are under study.
@@ -584,7 +584,7 @@ In the framework:
 
 The QIQT-H reading is the same structure as in the no-detector case: per-run, single record; across runs, Born statistics. The difference is that the path-detector record correlates per-run with the path taken; this breaks the symmetry between paths $A$ and $B$ in each individual run, so the interference cross-term is absent in the empirical distribution.
 
-**The crucial point:** the framework does not need a separate "wave function collapse on the path detector" event. The path detector is just another macroscopic recording device; its detection is, in the framework, exactly the same kind of per-run amplitude concentration + (FQ) precision floor that the screen detection is. The framework's account of the which-path case is structurally identical to the no-detector case, with the path detector simply adding another macroscopic record.
+**The key point:** the framework does not need a separate "wave function collapse on the path detector" event. The path detector is just another macroscopic recording device; its detection is, in the framework, exactly the same kind of per-run amplitude concentration + (FQ) precision floor that the screen detection is. The framework's account of the which-path case is structurally identical to the no-detector case, with the path detector simply adding another macroscopic record.
 
 ### 10.4 Erasure experiments
 
