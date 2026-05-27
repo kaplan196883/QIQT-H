@@ -1164,11 +1164,11 @@ The modular-local approach handles this correctly. $\chi_R$ is *defined* on the 
 | Fundamental object: support count | Fundamental object: algebra-state pair |
 | Branch counting is the rule | Branch counting is a derived approximation in the classical-mixture regime |
 
-The modular-local reformulation is the framework's response to the no-signaling constraint, and it produces a more elegant, more mathematically clean version of the same physical idea.
+The modular-local form is the framework's response to the no-signaling constraint, and it gives a more mathematically clean version of the same physical idea.
 
 ## 8.5 Four technical commitments the framework makes
 
-The modular-local reformulation forces four concrete commitments that deserve to be stated explicitly. Each is a refinement of an earlier informal statement.
+The modular-local form forces four concrete commitments that deserve to be stated explicitly.
 
 **1. The physical state space is not a Hilbert subspace, and it is *stagewise*, not global.** Under the modular-local bound, admissibility is imposed at each process stage on the regions that are *causally instantiated* at that stage:
 
@@ -1190,7 +1190,7 @@ Single-record-per-run is **exact only at exact saturation** $I_0 = C(R)$ and $\e
 
 **4. Admissibility applies causally, never retroactively.** When a joint future diamond $D_{AB}$ contains both Alice's and Bob's records, $D_{AB}$ has its own capacity $C(D_{AB})$ that constrains the *future joint state* on $\hat{\mathcal{A}}(D_{AB})$ **once $D_{AB}$ is causally instantiated**. The constraint **does not** retroactively delete or reweight Alice's or Bob's past separately-admissible branches. Without this clause, the framework would smuggle in postselection signaling through future joint conditions.
 
-These four commitments turn the framework's working informal description into a *specifically constrained* algebraic theory. They are the price of having the modular-local form closes the no-signaling loophole properly.
+These four commitments turn the framework's working description into a *specifically constrained* algebraic theory. They are what allows the modular-local form to close the no-signaling loophole properly.
 
 ### Lab-scale deviation estimate
 
