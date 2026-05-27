@@ -33,19 +33,20 @@ Every "missing piece" below is a thing the LHS, the admissibility relation, or t
 3. **Smoothing stability.** $I^\varepsilon_{\rm branch}$ must be continuous in $\varepsilon$ for $\varepsilon > 0$, and must dominate naïve Rényi-0 counts which diverge under continuous spectra.
 4. **Coarse-graining monotonicity.** Refining the record algebra cannot decrease $I^\varepsilon_{\rm branch}$.
 5. **Computability.** There must exist an algorithm or closed-form expression for $I^\varepsilon_{\rm branch}$ given a regional state $\omega_\Psi$ on $\hat{\mathcal{A}}(D)$.
+6. **Core-choice invariance.** $I^\varepsilon_{\rm branch}$ must be invariant under the choice of modular reference weight $\varphi_D$ used to build the Type II crossed-product core, and under the normalization of the canonical semifinite trace $\tau_D$. *Not merely under intra-core basis change.* This is the strong form of basis-independence the framework actually needs.
 
-**Current state.** Schematic. Defined as "smoothed support entropy" without a basis-independent, coarse-graining-stable formula.
+**Current state.** A concrete candidate — the $\varepsilon$-smooth support volume of the Haagerup $L^1$ density on $\widehat{\mathcal{A}}(D)$ — secures intra-core basis-independence via Connes cocycle and Fack-Kosaki rearrangement. **Open:** invariance under the choice of modular reference weight and core normalization, which the cocycle argument does *not* automatically deliver. See `paper_strategy/34` (attempted construction) and `paper_strategy/35` (self-review).
 
 ### 2.2 The admissible-history algebra $\mathcal{H}_{\rm adm}$
 
 **What it must do.** Specify which formal decoherent histories count as *physically realizable* records.
 
 **Required properties.**
-1. **Closure.** $\mathcal{H}_{\rm adm}$ must be closed under the decoherent-histories sum-rule operations: if $h_1, h_2 \in \mathcal{H}_{\rm adm}$ and they are mutually exclusive in the medium-decoherence sense, then their coarse-grained union is in $\mathcal{H}_{\rm adm}$.
-2. **Dynamical stability.** Under unitary evolution restricted to $D$, $\mathcal{H}_{\rm adm}$ must evolve consistently — admissible histories at $t_1$ must give rise to admissible histories at $t_2 > t_1$ via the standard decoherent-histories class operators.
+1. **Closure.** Admissibility is *not* closed under union for individual histories — combining two separately admissible alternatives can exceed the total holographic branch budget (this is the branch-summed nature of the bound). The right object is therefore a Boolean *subalgebra* of histories jointly satisfying the bound on every nonzero event, with closure built into the membership condition.
+2. **Dynamical selection.** Under unitary evolution restricted to $D$, $\mathcal{H}_{\rm adm}$ must evolve consistently — admissible histories at $t_1$ must give rise to admissible histories at $t_2 > t_1$ via the standard decoherent-histories class operators. *Maximal admissible subalgebras are non-unique;* the framework must therefore **derive (rather than parametrize) the physically realized admissible Boolean subalgebra from dynamics, decoherence, locality, or a variational principle**.
 3. **Born compatibility.** The induced probability measure restricted to $\mathcal{H}_{\rm adm}$ must reduce to Born weights $|c_i|^2$ in regimes where the holographic bound is far from saturated.
 
-**Current state.** Underdetermined. The framework states the bound $I^\varepsilon_{\rm branch}(D) \le S_{\rm gen}(\partial D)$ but does not specify *which* of the formal decoherent histories are removed when the bound is approached.
+**Current state.** The Boolean-subalgebra-of-histories formulation gives the right *kind* of object, and a log-sum-exp closure bound is available (loose, but useful). **Open and central:** a dynamical selection law that picks one physically realized admissible Boolean subalgebra rather than parametrising the choice. Without it the framework names the arena where the answer lives but does not derive the answer. See `paper_strategy/34` and `paper_strategy/35`.
 
 ### 2.3 The per-record cost $c_R(r)$ and universal constant $I_0$
 
@@ -63,16 +64,17 @@ Every "missing piece" below is a thing the LHS, the admissibility relation, or t
 **What it must do.** Specify which spacetime region $D$ the bound applies to for a given measurement.
 
 **Candidate prescriptions** that the framework must choose among:
-- Causal diamond of the measurement event.
+- Causal diamond of the measurement event (current working choice).
 - The apparatus + environment region.
 - The minimal enclosing screen of the macroscopic record.
 - The environmental redundancy domain (where Quantum Darwinism makes the record objective).
 
 **Required properties.**
-1. **Covariance.** Two observers must agree on the region for the same physical measurement.
-2. **Enlargement invariance.** Predictions must not change discontinuously when $D$ is replaced by a larger region $D' \supset D$ — only the bound becomes weaker.
+1. **Covariance.** Two observers must agree on the region for the same physical measurement. *Covariance under diffeomorphisms is not uniqueness:* a causal diamond covaries with the observer worldline used to define it, but the choice of worldline is extra structure. The framework must either eliminate observer-worldline dependence or derive a unique worldline / region selection rule.
+2. **Enlargement invariance.** Predictions must not change discontinuously when $D$ is replaced by a larger region $D' \supset D$ — only the bound becomes weaker. Exact enlargement invariance requires a Type II core factorization $\widehat{M}_{D'} \cong \widehat{M}_D \,\bar\otimes\, \widehat{M}_K$ which does not generically exist in AQFT.
+3. **Surface prescription.** The codimension-two surface $\partial D$ entering $S_{\rm gen}$ must be specified — classical extremal, maximin, or quantum-extremal — and the framework's predictions must be robust under (or independent of) that choice. The current candidates are *not neutral*: different surface prescriptions define different regions and different bounds.
 
-**Current state.** Not specified. The bound $S_{\rm gen}(\partial D)$ depends on the chosen $D$; the framework needs a principled choice.
+**Current state.** Causal diamond is the working candidate (defended in `paper_strategy/34`). **Open:** observer-worldline dependence; exact enlargement invariance; principled choice of holographic surface prescription. Without these the framework has relocated foliation dependence rather than eliminated it. See `paper_strategy/35`.
 
 ### 2.5 The physical state space
 
@@ -104,19 +106,39 @@ $$
 
 reduce to ordinary Born weights $|c_i|^2$ in the regime $I^\varepsilon_{\rm branch}(D) \ll S_{\rm gen}(\partial D)$, with corrections of order $I^\varepsilon_{\rm branch}/S_{\rm gen}$.
 
-**Required input.** A precise definition of $\mathcal{H}_{\rm adm}$ (§2.2) and a typicality measure on microscopic initial conditions.
+**Two distinct requirements** — only the second is non-trivial:
 
-**Analogy.** Bohmian mechanics has its $|\psi|^2$-equivariance theorem (Dürr-Goldstein-Zanghì). QIQT-H needs the structural analogue.
+1. **Non-binding regime consistency (trivial).** If no histories relevant to an experiment are excluded by the bound, then $\nu = \mu$ tautologically. This is a consistency observation, not a Born-compatibility theorem.
 
-**Difficulty.** Major open problem. Without this theorem, the framework either reproduces Born statistics by assumption (circular) or contradicts experiment.
+2. **Binding-regime quantification (hard).** Quantify the deviation $|\nu(h) - \mu(h)|$ when the bound *does* exclude histories. Show that for ordinary laboratory measurements this deviation is below experimental tolerance — i.e., that ordinary laboratory contexts actually lie in the non-binding regime. The framework needs *both* a deviation bound *and* a demonstration that lab measurements satisfy the non-binding criterion.
+
+**Required input.** A precise definition of $\mathcal{H}_{\rm adm}$ (§2.2), a typicality measure on microscopic initial conditions, and a projective-consistency theorem ensuring admissibility-restricted measures form a coherent family over time.
+
+**Analogy.** Bohmian mechanics has its $|\psi|^2$-equivariance theorem (Dürr-Goldstein-Zanghì). QIQT-H needs the structural analogue *plus* a quantitative deviation bound.
+
+**Difficulty.** Major open problem. Without (2) the framework either reproduces Born statistics by assumption (circular) or contradicts experiment.
 
 ### 3.2 No-signaling theorem
 
-**Statement (target).** The renormalized conditional probabilities introduced by the admissibility constraint do not allow superluminal signaling.
+**Statement (target).** Prove that
 
-**Required input.** Definition of $\mathcal{H}_{\rm adm}$ and its behaviour under spacelike-separated operations.
+$$
+P_{\rm QIQT}(a \mid x, y) \;=\; P_{\rm QIQT}(a \mid x)
+$$
 
-**Difficulty.** Nonlinear modifications of QM generically allow superluminal signaling unless carefully constrained (Gisin 1990). This theorem must rule that out.
+for all spacelike-separated settings $x, y$ and outcomes $a$ under QIQT-H admissibility conditioning. *Avoiding the specific form of Gisin's nonlinear-density-matrix mechanism is not sufficient* — global history-level admissibility is structurally similar to postselection, and postselection generically enables signaling unless protected by a precise locality / factorization theorem.
+
+**Sufficient condition (candidate).** For Alice's record-comparison diamond $D_A$ and Bob's spacelike setting region, the admissibility predicate measurable in $M_{D_A}$ alone is independent of Bob's setting $y$:
+
+$$
+\mathbf{1}_{A_{x,y}}|_{D_A} = \mathbf{1}_{A_x}^{D_A}, \quad \text{independent of } y.
+$$
+
+This is the *causal screening theorem* the framework needs.
+
+**Required input.** Definition of $\mathcal{H}_{\rm adm}$, its behaviour under spacelike-separated operations, and a factorization or conditional-expectation property of the admissibility weight across spacelike-separated regions.
+
+**Difficulty.** Gisin's specific mechanism does not directly apply (QIQT-H operates on whole histories, not on instantaneous reduced states). But postselection-style signaling remains a live threat. See `paper_strategy/34` and `paper_strategy/35`.
 
 ### 3.3 Concentration conjecture
 
@@ -211,11 +233,11 @@ By difficulty × impact, ordered from foundational to refinement:
 
 | Rank | Item | Foundational? |
 |---|---|---|
-| 1 | §3.1 Equivariance / Born compatibility theorem | Yes — without it the framework is either circular or contradicts experiment |
-| 2 | §2.2 Precise definition of $\mathcal{H}_{\rm adm}$ | Yes — prerequisite for (1) |
-| 3 | §2.1 Basis-independent $I^\varepsilon_{\rm branch}$ | Yes — prerequisite for (2) |
-| 4 | §3.2 No-signaling theorem | Yes — relativistic consistency |
-| 5 | §2.4 Region prescription | Yes — prerequisite for any quantitative claim |
+| 1 | §3.1(2) Binding-regime Born deviation bound + lab non-binding proof | Yes — non-binding regime is tautological; the real theorem is here |
+| 2 | §2.2 Dynamical selection law for admissible Boolean subalgebra | Yes — prerequisite for (1); current scaffolding parametrizes but does not derive |
+| 3 | §2.1 Core-choice invariance of $I^\varepsilon_{\rm branch}$ | Yes — prerequisite for (2); intra-core invariance solved, cross-reference still open |
+| 4 | §3.2 Causal screening theorem (real no-signaling) | Yes — Gisin avoidance is not no-signaling |
+| 5 | §2.4 Region prescription + worldline/surface dependence | Yes — covariance ≠ uniqueness; foliation dependence still hidden |
 | 6 | §5.1–5.2 Concrete exclusion / threshold predictions | High — empirical content |
 | 7 | §2.3 $I_0$ universality and composition | High — empirical falsifiability |
 | 8 | §3.3 Concentration conjecture | High — single-outcome experience |
@@ -225,6 +247,8 @@ By difficulty × impact, ordered from foundational to refinement:
 | 12 | §2.5 State-space precision | Foundational hygiene |
 
 Items 1-5 are blockers. Until they are resolved the rest cannot be addressed rigorously.
+
+**Status after `paper_strategy/34` (attempted constructions) and `paper_strategy/35` (self-review).** Items §2.1 and §2.2 have *partial real progress* — intra-core basis independence is proved, and the right algebraic scaffolding for admissibility is in place. Items §2.4, §3.1, §3.2 remain *labelled* progress: the right targets are now sharply stated, but the actual theorems are not delivered. The framework is closer to evaluable as a research program, but still has work to do before it can be evaluated as a physical theory.
 
 ---
 
