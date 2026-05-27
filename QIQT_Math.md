@@ -401,9 +401,29 @@ For the present worked example, we treat Born from typicality as a working assum
 
 ---
 
-## 9A. The Branch-Summed Holographic Superselection Rule Applied to the Double-Slit Screen
+## 9A. The Modular-Local Holographic Superselection Rule Applied to the Double-Slit Screen
 
-The framework's central new physical principle (foundations paper §7.6) — the **Branch-Summed Holographic Bound as superselection rule** — has a concrete interpretation for the double-slit screen. Working through it here makes explicit what the postulate means in a familiar setting.
+The framework's central new physical principle (foundations paper §7.6) — the **Modular-Local Holographic Bound as superselection rule** — has a concrete interpretation for the double-slit screen. Working through it here makes explicit what the postulate means in a familiar setting.
+
+### 9A.0 Modular-local form and its classical-mixture reduction
+
+The *foundational* statement of the bound is modular-local (foundations paper §7.6): for the screen region $R_S$ with local algebra $\hat{\mathcal{A}}(R_S)$ and a reference state $\Omega_{R_S}$,
+
+$$\chi_{R_S}(\omega) := S_{\hat{\mathcal{A}}(R_S)}(\omega_{R_S} \,\|\, \Omega_{R_S}) \;\le\; C(R_S) = \frac{A(\partial R_S)}{4\ell_P^2},$$
+
+where $\chi_{R_S}$ is Araki / Type II core relative entropy — finite, basis-independent, defined directly on the Type III local algebra via the CPW Type II core construction (foundations paper §3). This is the form that delivers no-signaling automatically from AQFT microcausality (foundations paper §7.7).
+
+After decoherence the post-detection regional state on the screen is a strict classical mixture over distinguishable spot records (§7 of this paper):
+
+$$\omega_{R_S} = \sum_k p_k \,\omega_k,$$
+
+with $p_k$ the spot probabilities and $\omega_k$ the single-spot regional states. In this classical-mixture regime the modular-local bound reduces to a sum over per-record costs:
+
+$$\chi_{R_S}(\omega) \;\approx\; \sum_k p_k\, c_{R_S}(r_k) + H_{\rm Shannon}(\{p_k\}),$$
+
+with $c_{R_S}(r_k) = S(\omega_k \| \Omega_{R_S})$ the per-record relative entropy and $H_{\rm Shannon}$ the entropy of the mixture weights. This recovers the **branch-summed cost** $I_\Sigma^\varepsilon \approx N \cdot I_0$ used in earlier formulations as a **derived approximation** in the appropriate (single-region, classical-mixture) regime — which is precisely the regime that applies to the double-slit screen after detection.
+
+The rest of §9A works in this classical-mixture approximation. All the conclusions about $N_{\max}$, $I_0$ calibration, the Schrödinger-cat scale, and the operational kinematic-exclusion of multi-spot states therefore carry over from the modular-local bound directly. The branch-counting language is the right intuitive handle for this single-region detector calculation.
 
 ### 9A.1 The macroscopic record subalgebra and the spectrum of screen spots
 
