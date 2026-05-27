@@ -425,11 +425,21 @@ with $c_{R_S}(r_k) = S(\omega_k \| \Omega_{R_S})$ the per-record relative entrop
 
 The rest of §9A works in this classical-mixture approximation. All the conclusions about $N_{\max}$, $I_0$ calibration, the Schrödinger-cat scale, and the operational kinematic-exclusion of multi-spot states therefore carry over from the modular-local bound directly. The branch-counting language is the right intuitive handle for this single-region detector calculation.
 
-**Important qualification (effective vs. literal definiteness).** Under the modular-local bound (foundations paper §7.6, Theorem 6), the macroscopic-definiteness claim is more carefully stated than "$N_{\max}$ records fit iff $N \cdot I_0 \le Q_{R_S}$". The correct bound is on the Shannon entropy of the *normalized active distribution* $\tilde p_k = p_k/q$, where $q = \sum_{k \in \mathcal{A}_\epsilon} p_k$ is the total active-set probability:
+**Important qualification (effective vs. literal definiteness, via Donald's identity).** Under the modular-local bound (foundations paper §7.6, Theorem 6), the macroscopic-definiteness claim for the screen is more carefully stated than "$N_{\max}$ records fit iff $N \cdot I_0 \le Q_{R_S}$". It uses **Donald's identity** for Araki relative entropy:
+
 $$
-H_\epsilon := -\sum_{k \in \mathcal{A}_\epsilon} \tilde p_k \log \tilde p_k \;\le\; C(R_S) - I_0 + 2\eta_\epsilon,
+\sum_{k} \tilde p_k \, \chi_{R_S}(\omega_{k, R_S}) \;=\; \chi_{R_S}(\bar\omega_{R_S}) + I_{\rm Hol}^{R_S},
 $$
-hence on the *effective* number of spots $N^{(\epsilon)}_{\rm eff} := \exp H_\epsilon$, not on the raw cardinality of the active set. Single-spot-per-run is *exact* only at exact saturation $I_0 = C(R_S)$ and $\eta_\epsilon = 0$; with finite smoothing $\eta_\epsilon$, the bound weakens to $H_\epsilon \le 2\eta_\epsilon$, meaning one spot dominates with probability $\ge 1 - O(\eta_\epsilon)$, while the others are exponentially suppressed. For the screen example with $C(R_S) \sim 10^{68}$ nats and macroscopic record cost $I_0$ of comparable order, this saturation condition is exactly what calibration of $I_0$ against the observed quantum-to-classical transition is supposed to deliver. The discussion in §9A.3–9A.7 below treats this effective statement as the operational content.
+
+where $\tilde p_k = p_k / q$ is the normalized active distribution ($q$ the active-set total weight), $\bar\omega_{R_S} = \sum_k \tilde p_k \omega_{k, R_S}$ the mean state, and $I_{\rm Hol}^{R_S}$ the Holevo-like quantity. Given (H1) branchwise admissibility $\chi_{R_S}(\omega_{k,R_S}) \le C(R_S)$, (H2) the record-instantiation-cost postulate $\chi_{R_S}(\bar\omega_{R_S}) \ge I_0 - \eta_0$, and (H3) operational distinguishability of records (so $H_\epsilon \le I_{\rm Hol}^{R_S} + \eta_{\rm def}$ via Fano), one derives
+
+$$
+H_\epsilon \;\le\; C(R_S) - I_0 + \eta_0 + \eta_{\rm def}, \qquad N^{(\epsilon)}_{\rm eff} := \exp H_\epsilon.
+$$
+
+Hence the bound is on the *effective* number of spots, not on the raw cardinality of the active set. Single-spot-per-run is *exact* only at exact saturation $I_0 = C(R_S)$ and $\eta_0 = \eta_{\rm def} = 0$; for finite tolerances the bound weakens to $H_\epsilon \le \eta_0 + \eta_{\rm def}$, meaning one spot dominates with probability $\ge 1 - O(\eta_0 + \eta_{\rm def})$ while the others are exponentially suppressed. For the screen example with $C(R_S) \sim 10^{68}$ nats and macroscopic record cost $I_0$ of comparable order, this saturation condition is exactly what calibration of $I_0$ against the observed quantum-to-classical transition is supposed to deliver. The discussion in §9A.3–9A.7 below treats this effective statement as the operational content.
+
+The framework's central commitment is the **record-instantiation-cost postulate (H2)**: instantiating a macroscopic record on $R_S$ requires modular cost at least $I_0$. This is an independent postulate beyond standard AQFT / holography and is calibrated empirically.
 
 ### 9A.1 The macroscopic record subalgebra and the spectrum of screen spots
 
