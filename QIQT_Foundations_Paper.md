@@ -1128,22 +1128,22 @@ The author thanks the participants in extended discussions that informed the fra
 4. Bekenstein, J. D. (1981). Universal upper bound on the entropy-to-energy ratio for bounded systems. *Phys. Rev. D*, 23, 287.
 5. Bohm, D. (1952). A suggested interpretation of the quantum theory in terms of "hidden" variables. *Phys. Rev.*, 85, 166.
 6. Bousso, R. (2002). The holographic principle. *Rev. Mod. Phys.*, 74, 825. arXiv:hep-th/0203101.
-7. Carroll, S. M., & Sebens, C. (2014). Many worlds, the Born rule, and self-locating uncertainty. In *Quantum Theory: A Two-Time Success Story*.
+7. Carroll, S. M., & Sebens, C. (2014). Many worlds, the Born rule, and self-locating uncertainty. In *Quantum Theory: A Two-Time Success Story: Yakir Aharonov Festschrift*, Springer, pp. 157–169. arXiv:1405.7907.
 8. **Chandrasekaran, V., Longo, R., Penington, G., & Witten, E. (2022).** *An algebra of observables for de Sitter space.* JHEP 02 (2023) 082. arXiv:2206.10780.
 9. **Chandrasekaran, V., Penington, G., & Witten, E. (2022).** *Large N algebras and generalized entropy.* JHEP 04 (2023) 009. arXiv:2209.10454.
 10. Dieks, D. (1989). Quantum mechanics without the projection postulate. *Foundations of Physics*, 19, 1397.
 11. Diósi, L. (1989). Models for universal reduction of macroscopic quantum fluctuations. *Phys. Rev. A*, 40, 1165.
-12. Dürr, D., Goldstein, S., & Zanghì, N. (1992). Quantum equilibrium and the origin of absolute uncertainty. *J. Stat. Phys.*, 67, 843.
+12. Dürr, D., Goldstein, S., & Zanghì, N. (1992). Quantum equilibrium and the origin of absolute uncertainty. *J. Stat. Phys.*, 67, 843–907. arXiv:quant-ph/0308039.
 13. Engelhardt, N., & Wall, A. C. (2015). *Quantum extremal surfaces: holographic entanglement entropy beyond the classical regime.* JHEP 01 (2015) 073. arXiv:1408.3203.
 14. Everett, H. (1957). "Relative state" formulation of quantum mechanics. *Rev. Mod. Phys.*, 29, 454.
-15. Gell-Mann, M., & Hartle, J. B. (1993). Classical equations for quantum systems. *Phys. Rev. D*, 47, 3345.
+15. Gell-Mann, M., & Hartle, J. B. (1993). Classical equations for quantum systems. *Phys. Rev. D*, 47, 3345. arXiv:gr-qc/9210010.
 16. Ghirardi, G. C., Rimini, A., & Weber, T. (1986). Unified dynamics for microscopic and macroscopic systems. *Phys. Rev. D*, 34, 470.
 17. Griffiths, R. B. (2002). *Consistent Quantum Theory.* Cambridge University Press.
 18. **Haag, R. (1992).** *Local Quantum Physics: Fields, Particles, Algebras.* Springer.
 19. **Haag, R., & Kastler, D. (1964).** An algebraic approach to quantum field theory. *J. Math. Phys.*, 5, 848.
 20. Healey, R. (2017). *The Quantum Revolution in Philosophy.* Oxford University Press.
 21. 't Hooft, G. (1993). *Dimensional reduction in quantum gravity.* arXiv:gr-qc/9310026.
-22. Jacobson, T. (1995). Thermodynamics of spacetime: The Einstein equation of state. *Phys. Rev. Lett.*, 75, 1260.
+22. Jacobson, T. (1995). Thermodynamics of spacetime: The Einstein equation of state. *Phys. Rev. Lett.*, 75, 1260–1263. arXiv:gr-qc/9504004.
 23. **Jensen, K., Sorce, J., & Speranza, A. J. (2023).** *Generalized entropy for general subregions in quantum gravity.* arXiv:2306.01837.
 24. Joos, E., Zeh, H. D., Kiefer, C., Giulini, D., Kupsch, J., & Stamatescu, I.-O. (2003). *Decoherence and the Appearance of a Classical World in Quantum Theory.* Springer.
 25. **Murray, F. J., & von Neumann, J. (1936).** On rings of operators. *Annals of Mathematics*, 37, 116.
@@ -1154,11 +1154,11 @@ The author thanks the participants in extended discussions that informed the fra
 30. Penrose, R. (1996). On gravity's role in quantum state reduction. *Gen. Rel. Grav.*, 28, 581.
 31. Susskind, L. (1995). The world as a hologram. *J. Math. Phys.*, 36, 6377. arXiv:hep-th/9409089.
 32. von Neumann, J. (1932). *Mathematische Grundlagen der Quantenmechanik.* Springer.
-33. Wald, R. M. (1993). Black hole entropy is the Noether charge. *Phys. Rev. D*, 48, R3427.
-34. Wall, A. C. (2012). A proof of the generalized second law for rapidly changing fields and arbitrary horizon slices. *Phys. Rev. D*, 85, 104049.
+33. Wald, R. M. (1993). Black hole entropy is the Noether charge. *Phys. Rev. D*, 48, R3427–R3431. arXiv:gr-qc/9307038.
+34. Wall, A. C. (2012). A proof of the generalized second law for rapidly changing fields and arbitrary horizon slices. *Phys. Rev. D*, 85, 104049. arXiv:1105.3445. (Erratum: *Phys. Rev. D* 87, 069904, 2013.)
 35. Wallace, D. (2012). *The Emergent Multiverse: Quantum Theory according to the Everett Interpretation.* Oxford University Press.
 36. **Witten, E. (2022).** *Gravity and the crossed product.* JHEP 10 (2022) 008. arXiv:2112.12828.
-37. Zurek, W. H. (2003). Decoherence, einselection, and the quantum origins of the classical. *Rev. Mod. Phys.*, 75, 715.
+37. Zurek, W. H. (2003). Decoherence, einselection, and the quantum origins of the classical. *Rev. Mod. Phys.*, 75, 715–775. arXiv:quant-ph/0105127.
 38. Kapłański, P. (2026). *One Wave Function, One World: How the Holographic Information Bound Selects the Macroscopic World.* (Position paper, companion to this one.)
 
 ---
