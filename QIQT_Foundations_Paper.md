@@ -1046,7 +1046,7 @@ The open problems are *concrete and well-defined*: each can be attacked in princ
 
 ### 11.4 Open problems
 
-The open-problems list has been restructured after the modular-local refactor (§7.6) and Theorem 6's Donald's-identity reformulation. Items related to *global* branch-summed admissibility have been retired or rephrased; the framework's commitments are now sharply located in the **record-instantiation-cost postulate** (H2 in Theorem 6) and the **stagewise causal admissibility structure** (§7.6).
+The framework's central new commitments are located in the **record-instantiation-cost postulate** (H2 in Theorem 6) and the **stagewise causal admissibility structure** (§7.6). The open problems below organize the research agenda that follows from these commitments.
 
 **Foundational (the framework's central new commitments):**
 
@@ -1077,12 +1077,6 @@ The open-problems list has been restructured after the modular-local refactor (�
 11. **Phenomenological predictions.** With $I_0$ calibrated, the framework predicts: maximum macroscopic-superposition scale (testable against Schrödinger-cat experiments with progressively larger systems); long-baseline coherence limits; specific signatures distinguishing the framework from GRW-style stochastic collapse (the framework predicts kinematic exclusion, not stochastic events).
 
 12. **Cosmological / horizon applications**, extend to the de Sitter static patch and black-hole horizon regions, where $C(R)$ becomes finite and saturation may be physically relevant.
-
-**Resolved or retired:**
-
-- ~~"No-signaling theorem under regional admissibility"~~ **RESOLVED in §7.7** via modular-local admissibility + AQFT microcausality. The earlier Bell-style counter-example with hard joint-diamond cutoff motivated the modular-local refactor.
-- ~~"Precise formulation of the branch-summed cost"~~ **RETIRED**: the branch-summed cost $I_\Sigma^\epsilon$ is now a *derived classical-mixture approximation* of $\chi_R$, not a fundamental quantity.
-- ~~"Characterization of physical Hamiltonians on $\mathcal{H}_{\rm phys}$"~~ **REPHRASED** as item 3 (stagewise adapted process): the framework's dynamics is now stated as admissibility-preserving normal CP maps on the algebraic state space, not Hamiltonian flow on a Hilbert subspace.
 
 ### 11.5 Credit division
 
