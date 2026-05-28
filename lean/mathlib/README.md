@@ -17,6 +17,15 @@ facts they consume.  This variant discharges those axioms against
 | `QIQTH.UnitarityLocality` | `QIQTH/UnitarityLocality.lean` — closes the microcausality ⇒ locality gap for Theorem 7 (unitary-dilation case) |
 | `QIQTH.Donald` | `QIQTH/Donald.lean` — derives Donald's identity from three primitive relative-entropy axioms (A1, A2, A3) |
 | `QIQTH.DoubleSlit` | `QIQTH/DoubleSlit.lean` — worked instance: single-spot saturation collapses Theorem 6 to determinacy |
+| `QIQTH.StateLevelNoSignaling` | Lifts T7 from probabilities to states; closure of Alice-fixing under composition and convex mixtures |
+| `QIQTH.KrausLocality` | Generalizes `UnitarityLocality` to arbitrary finite-Kraus Bob channels (POVMs, projective measurements) |
+| `QIQTH.ResolutionExt` | Monotonicity `Q₁ ≤ Q₂ ⇒ ε(Q₂) ≤ ε(Q₁)`, bits/nats conversion, complement lemmas |
+| `QIQTH.CapacityPacking` | `N · I_0 ≤ Q_R ⇒ N ≤ ⌊Q_R / I_0⌋` + Markov-style suppression bounds |
+| `QIQTH.RelEntPositivity` | `D(ρ ‖ σ) ≥ 0` (Klein, axiomatized) + convexity of `D` in first argument (derived from Donald) |
+| `QIQTH.HolevoCoarseGraining` | Donald deficit formula + saturation rigidity + coarse-graining inequality |
+| `QIQTH.DPI` | Data Processing Inequality interface + regional monotonicity + composition |
+| `QIQTH.ShannonFano` | Finite Shannon entropy + single-record certainty bridge from `H_ε ≤ 0` |
+| `QIQTH.BellMarginal` | Algebraic Bell/POVM marginalization identity |
 | `QIQTH` (root, re-exports) | `QIQTH.lean` |
 
 ## What Mathlib gives us
