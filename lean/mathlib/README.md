@@ -28,6 +28,8 @@ facts they consume.  This variant discharges those axioms against
 | `QIQTH.BellMarginal` | Algebraic Bell/POVM marginalization identity |
 | `QIQTH.Bell` | **CHSH-LHV bound** `\|chsh\| ≤ 2` for any local-hidden-variable model + **QIQT-H corollary** (no LHV model reproduces QIQT-H's quantum-level CHSH violations, yet QIQT-H still satisfies no-signaling) |
 | `QIQTH.Tsirelson` | **Rigorous singlet construction.** Explicit 4D real construction: ψ⁻ = (\|01⟩−\|10⟩)/√2, σ_z⊗σ_z, σ_x⊗σ_x. Direct computation gives ⟨ZZ⟩ = ⟨XX⟩ = −1, hence ⟨T⟩ = √2·(−1+−1) = −2√2. Discharges `Bell.tsirelson_bound` axiom. |
+| `QIQTH.H1H2Audit` | **Central audit:** (H1) + Donald + Klein + DPI do NOT imply (H2). Classical KL countermodel σ = (½,½), ρ = δ₀: KL = log 2 ≈ 0.693 < 1 = I_0. **Sharp replacement:** (H2) is equivalent to σ(E_record) ≤ exp(−I_0). Converts the framework's central non-AQFT postulate from "opaque empirical axiom" to "precise reference-weight bound on pointer sectors". |
+| `QIQTH.NoConcentration` | **Central audit:** Linear unitary measurement-decoherence preserves branch weights — it does NOT concentrate amplitudes to 0/1. Equal-superposition input ψ = (\|0⟩+\|1⟩)/√2 leaves weights (½,½). Theorems 1/4 ("single-record per-run") therefore require something beyond unitary decoherence: (FQ) literal truncation, hidden-variable selection, stochastic conditioning, or an explicit concentration axiom. |
 | `QIQTH` (root, re-exports) | `QIQTH.lean` |
 
 ## What Mathlib gives us

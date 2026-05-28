@@ -19,3 +19,6 @@ import QIQTH.ShannonFano
 import QIQTH.BellMarginal
 import QIQTH.Bell
 import QIQTH.Tsirelson
+-- Central audits proposed by GPT-5.5-pro:
+import QIQTH.H1H2Audit
+import QIQTH.NoConcentration
