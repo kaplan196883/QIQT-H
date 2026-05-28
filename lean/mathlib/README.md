@@ -1,0 +1,54 @@
+# QIQT-H Lean formalizations — Mathlib variant
+
+Mathlib-rooted proofs of QIQT-H Theorems 6, 7, Lemma 1, Theorem 3.
+
+The standalone counterparts in `../*.lean` axiomatize the arithmetic
+facts they consume.  This variant discharges those axioms against
+`Mathlib.Data.Real.Basic`, so the trust base is `Mathlib + Lean kernel`
+(no custom axioms).
+
+## Files
+
+| Lake module | Source |
+|---|---|
+| `QIQTH.Theorem6` | `QIQTH/Theorem6.lean` |
+| `QIQTH.Theorem7` | `QIQTH/Theorem7.lean` |
+| `QIQTH.Resolution` | `QIQTH/Resolution.lean` |
+| `QIQTH` (root, re-exports) | `QIQTH.lean` |
+
+## What Mathlib gives us
+
+| Standalone axiom | Mathlib replacement |
+|---|---|
+| `RealQ.le_refl` | `le_refl` |
+| `RealQ.le_trans` | `le_trans` |
+| `RealQ.add_le_add_right` | `add_le_add_right` |
+| `RealQ.sub_le_self_of_nonneg` | `sub_le_self_of_nonneg` (via `linarith`) |
+| `RealQ.eq_sub_of_sum` | `eq_sub_of_add_eq'` (via `linarith`) |
+
+All five real-arithmetic axioms collapse to a single `linarith` call.
+
+`Resolution.lean` additionally gets the **continuous form** of
+Theorem 3:  `eps Q := (1/2 : ℝ)^Q` with `eps_pos` proven by
+`positivity`. The standalone variant only carries the discrete
+`numBins Q > 0`.
+
+## Verifying
+
+```bash
+cd lean/mathlib
+lake exe cache get   # one-time, fetches precompiled Mathlib (~5 GB)
+lake build           # compiles QIQTH/*.lean (~30 s on warm cache)
+```
+
+A clean `lake build` (exit 0, no error lines) means the proofs check.
+
+## Setup notes
+
+- Lean toolchain: `leanprover/lean4:v4.30.0` (pinned in `lean-toolchain`).
+- Mathlib pinned at `v4.30.0` tag (declared in `lakefile.lean`).
+- `lake exe cache get` fetches precompiled `.olean` files from
+  `leanprover-community/mathlib4` Azure cache — much faster than
+  building Mathlib from source (which would take hours).
+- First-run `lake update` fetches ~10 transitive dependencies
+  (Mathlib + plausible + Aesop + Qq + batteries + Cli + …).
