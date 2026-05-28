@@ -25,7 +25,16 @@ variants:
 ### Mathlib-rooted (`mathlib/`)
 
 See `mathlib/README.md`. Lake project; `lake build` compiles the
-QIQTH library against precompiled Mathlib.
+QIQTH library against precompiled Mathlib.  In addition to the
+three theorems above, the Mathlib variant adds:
+
+- `QIQTH.UnitarityLocality` — derives the `locality` axiom of
+  Theorem 7 from microcausality, for unitary-dilation Bob channels
+  (`Ψ y X = U_y^* X U_y` with `U_y ∈ Â(D_B)`).
+- `QIQTH.Donald` — derives Donald's identity from three primitive
+  axioms about relative entropy, entropy, and cross-entropy.
+- `QIQTH.DoubleSlit` — worked instance applying Theorem 6 to the
+  double-slit screen region at exact saturation.
 
 ## Verifying
 

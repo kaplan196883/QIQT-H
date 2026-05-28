@@ -14,6 +14,9 @@ facts they consume.  This variant discharges those axioms against
 | `QIQTH.Theorem6` | `QIQTH/Theorem6.lean` |
 | `QIQTH.Theorem7` | `QIQTH/Theorem7.lean` |
 | `QIQTH.Resolution` | `QIQTH/Resolution.lean` |
+| `QIQTH.UnitarityLocality` | `QIQTH/UnitarityLocality.lean` — closes the microcausality ⇒ locality gap for Theorem 7 (unitary-dilation case) |
+| `QIQTH.Donald` | `QIQTH/Donald.lean` — derives Donald's identity from three primitive relative-entropy axioms (A1, A2, A3) |
+| `QIQTH.DoubleSlit` | `QIQTH/DoubleSlit.lean` — worked instance: single-spot saturation collapses Theorem 6 to determinacy |
 | `QIQTH` (root, re-exports) | `QIQTH.lean` |
 
 ## What Mathlib gives us
