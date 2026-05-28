@@ -298,8 +298,10 @@ The (FQ) axiom asserts: for the screen region $R_S$ and the per-run wave functio
 (ii) The renormalized entropy is bounded:
 
 \[
-S_{\rm ren}(\omega_\Psi) \le Q_{R_S} := \frac{A(\partial R_S)}{4\ell_P^2}.
+S_{\rm ren}(\omega_\Psi) \le Q_{R_S} \equiv C(R_S) := \frac{A(\partial R_S)}{4\ell_P^2}.
 \]
+
+(We use $Q_{R_S}$ and $C(R_S)$ interchangeably for the regional holographic capacity throughout this paper.)
 
 (iii) The wave function in $R_S$ is regarded as a physical state of spacetime with finite physical information capacity $Q_{R_S}$. Two abstract wave functions whose physical instantiations in $R_S$ are indistinguishable at the precision floor $\epsilon(R_S)$ are physically identical in $R_S$.
 
@@ -643,10 +645,10 @@ The framework's central new physical principle (foundations paper §7.6), the \t
 
 \subsection{Modular-local form and its classical-mixture reduction}
 
-The \emph{foundational} statement of the bound is modular-local (foundations paper §7.6): for the screen region $R_S$ with local algebra $\hat{\mathcal{A}}(R_S)$ and a reference state $\Omega_{R_S}$,
+The \emph{foundational} statement of the bound is modular-local (foundations paper §7.6): for the screen region $R_S$ with local algebra $\hat{\mathcal{A}}(R_S)$ and the canonical sector reference state $\sigma_{R_S}$ (foundations paper §7.6),
 
 \[
-\chi_{R_S}(\omega) := S_{\hat{\mathcal{A}}(R_S)}(\omega_{R_S} \,\|\, \Omega_{R_S}) \;\le\; C(R_S) = \frac{A(\partial R_S)}{4\ell_P^2},
+\chi_{R_S}(\omega) := S_{\hat{\mathcal{A}}(R_S)}(\omega_{R_S} \,\|\, \sigma_{R_S}) \;\le\; C(R_S) = \frac{A(\partial R_S)}{4\ell_P^2},
 \]
 
 where $\chi_{R_S}$ is Araki / Type II core relative entropy, finite, basis-independent, defined directly on the Type III local algebra via the CPW Type II core construction (foundations paper §3). This is the form that delivers no-signaling automatically from AQFT microcausality (foundations paper §7.7).
@@ -657,13 +659,13 @@ After decoherence the post-detection regional state on the screen is a strict cl
 \omega_{R_S} = \sum_k p_k \,\omega_k,
 \]
 
-with $p_k$ the spot probabilities and $\omega_k$ the single-spot regional states. In this classical-mixture regime Donald's identity for Araki relative entropy gives
+with $p_k$ the spot probabilities and $\omega_k$ the single-spot regional states. Let $\tilde p_k := p_k / q$ be the normalized active distribution on the smooth active set $\mathcal{A}_\epsilon$, with total weight $q := \sum_{k \in \mathcal{A}_\epsilon} p_k$ (in the strict-classical-mixture regime $q \to 1$ and $\tilde p_k \to p_k$). In this classical-mixture regime Donald's identity for Araki relative entropy gives
 
 \[
-\chi_{R_S}(\bar\omega_{R_S}) \;=\; \sum_k p_k\, c_{R_S}(r_k) - I_{\rm Hol}^{R_S},
+\chi_{R_S}(\bar\omega_{R_S}) \;=\; \sum_k \tilde p_k\, c_{R_S}(r_k) - I_{\rm Hol}^{R_S},
 \]
 
-with $c_{R_S}(r_k) = S(\omega_k \| \sigma_{R_S})$ the per-record cost and $I_{\rm Hol}^{R_S} = \sum_k p_k S(\omega_k \| \bar\omega_{R_S})$ the Holevo information of the spot mixture. In the strict distinguishable-record limit $I_{\rm Hol}^{R_S} \approx H(\{p_k\})$. The \textbf{branch-summed cost} $I_\Sigma^\varepsilon$ is a derived classical-mixture quantity in this sense, useful for operational calibration of $I_0$ against the Schrödinger-cat scale but not the fundamental statement of the bound, which is the modular-local capacity $\chi_{R_S}(\omega) \le C(R_S)$ on the algebra-state pair.
+with $\bar\omega_{R_S} := \sum_k \tilde p_k \omega_{k,R_S}$, $c_{R_S}(r_k) = S(\omega_k \| \sigma_{R_S})$ the per-record cost, and $I_{\rm Hol}^{R_S} = \sum_k \tilde p_k S(\omega_k \| \bar\omega_{R_S})$ the Holevo information of the spot mixture. In the strict distinguishable-record limit $I_{\rm Hol}^{R_S} \approx H(\{p_k\})$. The \textbf{branch-summed cost} $I_\Sigma^\varepsilon$ is a derived classical-mixture quantity in this sense, useful for operational calibration of $I_0$ against the Schrödinger-cat scale but not the fundamental statement of the bound, which is the modular-local capacity $\chi_{R_S}(\omega) \le C(R_S)$ on the algebra-state pair.
 
 The rest of §9A works in this classical-mixture approximation. All the conclusions about $N_{\max}$, $I_0$ calibration, the Schrödinger-cat scale, and the operational kinematic-exclusion of multi-spot states therefore carry over from the modular-local bound directly. The branch-counting language is the right intuitive handle for this single-region detector calculation.
 
@@ -712,24 +714,26 @@ The Branch-Summed Holographic Bound applied to the screen region:
 I_\Sigma^\epsilon[\omega_{R_S}] \le Q_{R_S} = \frac{A(\partial R_S)}{4\ell_P^2} \sim 10^{68} \text{ nats}
 \]
 
-is the framework's new physical postulate. It is \textbf{not} a theorem of standard holography (which bounds entropy, not branch-summed cost), but a \emph{strengthening} of the holographic principle that the framework adopts as a superselection rule.
+is the framework's new physical postulate (a derived classical-mixture approximation of the modular-local bound; §9A.0). It is \textbf{not} a theorem of standard holography (which bounds entropy, not branch-summed cost), but a \emph{strengthening} of the holographic principle that the framework adopts as a superselection rule.
 
-Under this superselection rule:
+The conclusions below are stated in the \textbf{exact-saturation limit} of Theorem 6 ($I_0 = C(R_S)$, $\eta_0 = \eta_{\rm def} = 0$). For finite tolerances, the precise effective form is the entropy bound $H_\epsilon \le C(R_S) - I_0 + \eta_0 + \eta_{\rm def}$ (§9A.0 / foundations paper Theorem 6), with multi-record states \emph{exponentially suppressed} rather than literally forbidden.
+
+In the exact-saturation limit:
 \begin{itemize}
   \item The physical state space $\mathcal{H}_{\rm phys}$ excludes universal wave functions whose induced regional state on the screen has $I_\Sigma > Q_{R_S}$
   \item The maximum number of coexisting macroscopic spot records in any physical state is $N_{\max} \approx \lfloor Q_{R_S}/I_0 \rfloor$
-  \item In the regime where each macroscopic record approximately saturates the regional capacity (e.g., the screen substrate has thermal entropy comparable to its holographic capacity at relevant scales), $N_{\max} = 1$, \textbf{only single-spot states are physically realizable on the screen}
+  \item In the regime where each macroscopic record approximately saturates the regional capacity (e.g., the screen substrate has thermal entropy comparable to its holographic capacity at relevant scales), $N_{\max} = 1$, \textbf{only single-spot states are physically realizable on the screen} (effective form: a single spot has active probability $\ge 1 - O(\eta_0+\eta_{\rm def})$)
 \end{itemize}
 
 \subsection{Per run: one spot, as a kinematic consequence}
 
-In any specific run, the universal wave function (within $\mathcal{H}_{\rm phys}$) has its induced state on $\mathcal{C}(R_S)$ supported on a single spot. This is not because of dynamical collapse, not because of branch selection from many physically real branches, but because \textbf{multi-spot states are not in the physical state space}, they would violate the superselection rule.
+In any specific run, the universal wave function (within $\mathcal{H}_{\rm phys}$) has its induced state on $\mathcal{C}(R_S)$ supported on a single spot. This is not because of dynamical collapse, not because of branch selection from many physically real branches, but because, at exact saturation, multi-spot states violate the superselection rule (effective form: a single spot dominates the active distribution with overwhelming probability; §9A.3).
 
 Which specific spot is realized depends on the actual physical initial conditions of the screen + environment at the moment of detection (the actual microscopic configuration of screen atoms, vacuum fluctuations, environmental modes). The physical Hamiltonian, constrained to preserve $\mathcal{H}_{\rm phys}$, takes specific initial conditions to a specific single-spot final state.
 
 \subsection{The Everett-branch question dissolved by superselection}
 
-The often-asked question "which Everett branch is realized in this run?" doesn't arise as a foundational puzzle under the superselection rule. The "Everett branches" of an unrestricted-Hilbert-space superposition $\sum_k c_k |x_k\rangle|S_k\rangle|E_k\rangle$ correspond to a multi-spot state with $I_\Sigma > Q_{R_S}$, this state is \textbf{not in the physical state space}. The unrestricted Hilbert-space formalism allows writing such states mathematically, but they don't exist physically.
+The often-asked question "which Everett branch is realized in this run?" doesn't arise as a foundational puzzle under the superselection rule. The "Everett branches" of an unrestricted-Hilbert-space superposition $\sum_k c_k |x_k\rangle|S_k\rangle|E_k\rangle$ correspond, at exact saturation, to a multi-spot state with $I_\Sigma > Q_{R_S}$ that violates the bound; at finite tolerances, to a state with effective multiplicity $N^{(\epsilon)}_{\rm eff} \ll N_{\rm Everett}$. Either way, the unrestricted Hilbert-space formalism allows writing such states mathematically, but they are either kinematically forbidden (exact saturation) or exponentially suppressed (approximate saturation).
 
 The physical Hamiltonian (which preserves $\mathcal{H}_{\rm phys}$) does not generate multi-branch states from single-record initial conditions. The unitary mapping $(a|0\rangle + b|1\rangle)|S_0\rangle \mapsto a|0\rangle|S_0\rangle + b|1\rangle|S_1\rangle$ that standard textbook QM writes is the \emph{unrestricted Hilbert-space} mapping; the \emph{physical Hamiltonian's} action is constrained to single-record final states. Which specific final state is realized is determined by the specific actual initial conditions.
 

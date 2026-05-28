@@ -1328,10 +1328,12 @@ which depends on Bob's setting $y$. So the naive formulation is \emph{inconsiste
 The modular-local form fixes this at the level of structure. Instead of "count records in each region and bound the count", state the constraint as a bound on the \textbf{regional relative entropy}, a quantity already well-defined for Type III local QFT algebras via Araki / Connes machinery:
 
 \[
-\chi_R(\omega) := S_{\hat{\mathcal{A}}(R)}(\omega_R \,\|\, \Omega_R) \;\le\; C(R) = \frac{A(\partial R)}{4G\hbar}.
+\chi_R(\omega) := S_{\hat{\mathcal{A}}(R)}(\omega_R \,\|\, \sigma_R) \;\le\; C(R) = \frac{A(\partial R)}{4G\hbar}.
 \]
 
-Here $\chi_R(\omega)$ measures how complicated the regional state $\omega_R$ is compared to a reference state $\Omega_R$ (typically the vacuum), evaluated \emph{intrinsically} on the regional algebra. It is finite, basis-independent, and well-defined even when the algebra is Type III (no density-matrix factorization needed).
+(We use $C(R)$ and $Q_R$ interchangeably for $A(\partial R)/(4\ell_P^2)$; here in natural units $\ell_P^2 = G\hbar$, so the area term is $A/(4G\hbar)$. With $c$ restored, $C(R) = A(\partial R) c^3/(4 G \hbar)$.)
+
+Here $\chi_R(\omega)$ measures how complicated the regional state $\omega_R$ is compared to the sector reference state $\sigma_R$ (typically the vacuum), evaluated \emph{intrinsically} on the regional algebra. It is finite, basis-independent, and well-defined even when the algebra is Type III (no density-matrix factorization needed).
 
 For two spacelike-separated regions $D_A$ and $D_B$, admissibility is the \textbf{meet of local predicates}:
 
@@ -1366,10 +1368,10 @@ independent of $y$. The admissibility predicate cannot break this, because Alice
 The branch-counting language ($I_\Sigma^\varepsilon$, $I_0$, $N \le Q_R/I_0$) doesn't disappear. When a regional state is a classical mixture of decoherent macroscopic records (which is what measurement produces, after §6's einselection and Quantum Darwinism do their work), the regional relative entropy \emph{reduces} to a sum:
 
 \[
-\chi_R(\omega_{\rm classical\;mixture}) \;\approx\; \sum_r p_r\, c_R(r) + H_{\rm Shannon}(\{p_r\}),
+\chi_R(\omega_{\rm classical\;mixture}) \;=\; \sum_r p_r\, c_R(r) - I_{\rm Hol}^R \;\approx\; \sum_r p_r\, c_R(r) - H_{\rm Shannon}(\{p_r\}),
 \]
 
-where $c_R(r)$ is the per-record relative entropy. So "branch-summed cost" becomes a \emph{derived approximation} of the modular-local bound in the classical-mixture regime, useful for operational calibration ($I_0$ as an empirical parameter, predicting the Schrödinger-cat scale, designing macroscopic-superposition experiments) but no longer the \emph{fundamental} statement of the bound.
+by Donald's identity for Araki relative entropy ($I_{\rm Hol}^R \approx H_{\rm Shannon}$ in the strict distinguishable-record limit), where $c_R(r)$ is the per-record relative entropy. So "branch-summed cost" becomes a \emph{derived approximation} of the modular-local bound in the classical-mixture regime, useful for operational calibration ($I_0$ as an empirical parameter, predicting the Schrödinger-cat scale, designing macroscopic-superposition experiments) but no longer the \emph{fundamental} statement of the bound.
 
 The fundamental statement is algebraic. The branch-counting picture is the right intuitive handle in the appropriate regime.
 
@@ -1419,6 +1421,8 @@ where $\mathfrak{R}_t(h)$ collects the bounded diamonds available to the framewo
 \[
 H_\epsilon := -\sum_k \tilde p_k \log \tilde p_k \;\le\; C(R) - I_0 + 2\eta_\epsilon, \qquad N^{(\epsilon)}_{\rm eff} := \exp H_\epsilon.
 \]
+
+Here $\eta_\epsilon := (\eta_0 + \eta_{\rm def})/2$ amalgamates the two tolerances of Foundations-paper Theorem 6: $\eta_0$ is the slack in the record-instantiation-cost postulate (H2), and $\eta_{\rm def}$ is the Fano residual from operational decoder error (H3). Under the symmetric-tolerance amalgamation, $\eta_0 + \eta_{\rm def} = 2\eta_\epsilon$.
 
 Single-record-per-run is \textbf{exact only at exact saturation} $I_0 = C(R)$ and $\eta_\epsilon = 0$. At finite $\eta_\epsilon$, the conclusion weakens to $H_\epsilon \le 2\eta_\epsilon$, a single record dominates with probability $\ge 1 - O(\eta_\epsilon)$. The framework is honest that this is a \emph{probabilistic concentration} on a small effective set, not a sharp kinematic exclusion of all multi-record states.
 

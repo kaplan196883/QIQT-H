@@ -206,8 +206,10 @@ be the local von Neumann algebra. The hatted algebra $\hat{\mathcal{A}}(R)$ deno
 
 *(ii) **Finite holographic modular budget.** The renormalized entropy $S_{\rm ren}(\omega_\Psi)$ on $\hat{\mathcal{A}}(R)$, equivalently, the Araki relative entropy $\chi_R(\omega_\Psi|_R)$ with respect to the reference state $\sigma_R$ (§7.6), is bounded by the area-law generalized entropy:*
 $$
-\chi_R(\omega_\Psi|_R) \;=\; S^{\hat{\mathcal{A}}(R)}_{\rm Araki}(\omega_\Psi|_R \,\|\, \sigma_R) \;\le\; Q_R \;:=\; \frac{A(\partial R)}{4\ell_P^2}.
+\chi_R(\omega_\Psi|_R) \;=\; S^{\hat{\mathcal{A}}(R)}_{\rm Araki}(\omega_\Psi|_R \,\|\, \sigma_R) \;\le\; Q_R \;\equiv\; C(R) \;:=\; \frac{A(\partial R)}{4\ell_P^2}.
 $$
+
+*(The symbols $Q_R$ and $C(R)$ are used interchangeably throughout for the regional holographic capacity. We retain both because $Q_R$ emphasizes "information capacity" while $C(R)$ emphasizes "modular-cost ceiling"; the underlying quantity is identical.)*
 
 *(iii) The wave function $|\Psi\rangle_{\rm run}$ is regarded as a physical object instantiated in spacetime. The total physical information content needed to instantiate $|\Psi\rangle_{\rm run}$ in $R$, including amplitudes, phase coherence, superposition structure, is bounded by $Q_R$. Two abstract wave functions whose physical instantiations in $R$ are indistinguishable at the precision afforded by this bound are physically identical in $R$.*
 
@@ -729,7 +731,7 @@ $$
 $$
 This number is therefore **not a generic QFT consequence**; it is a wedge / CFT-ball modular-energy estimate with the stated entropy-shift hypothesis. The deviation theorem (§7.4) then implies that Born probabilities under modular-local admissibility deviate from standard Born probabilities by at most $\delta_R$ on bounded observables, operationally invisible at lab scale, conditional on the hypotheses above.
 
-The single-record-per-region structure of physical states is therefore a *structural consequence* of the Branch-Summed Holographic Superselection Postulate. Multi-record states are not absent because of dynamical collapse; they are absent because they are *not in the physical state space*.
+The single-record-per-region structure of physical states is therefore a *structural consequence* of the modular-local capacity bound. **Effective form (Theorem 6, the precise statement).** Multi-record states are not absent because of dynamical collapse; under approximate saturation $I_0 \approx C(R)$ they are *exponentially suppressed* on the normalized active distribution (effective multiplicity $N^{(\epsilon)}_{\rm eff} = \exp H_\epsilon \le \exp(C(R) - I_0 + \eta_0 + \eta_{\rm def})$), and at exact saturation $I_0 = C(R), \eta_0 = \eta_{\rm def} = 0$ they are *kinematically forbidden* (single record with active probability one). The strong-language passages below ("not in the physical state space", "$N_{\max} \approx Q_R/I_0$") are to be read in the exact-saturation limit; the precise effective form for finite tolerances is Theorem 6.
 
 **Dynamical content of Option 2.** Standard Hilbert-space QM is the unconstrained formalism. The constrained subset $\mathcal{H}_{\rm phys}$ is a *nonlinear submanifold* of $\mathcal{H}$ (the constraint $I_\Sigma \le Q_R$ is nonlinear in the state). Physical Hamiltonians are constrained to preserve this submanifold. The framework's claim is that the actual physical Hamiltonian of nature respects the Branch-Summed Bound, measurement-like unitaries that would (in unrestricted QM) take a single-record state to a multi-record state do not occur in the physical dynamics; the actual physical dynamics, with the constraint imposed, takes single-record states to single-record states (selected by the actual physical initial conditions of apparatus + environment in that run).
 
