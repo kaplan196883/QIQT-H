@@ -26,6 +26,7 @@ facts they consume.  This variant discharges those axioms against
 | `QIQTH.DPI` | Data Processing Inequality interface + regional monotonicity + composition |
 | `QIQTH.ShannonFano` | Finite Shannon entropy + single-record certainty bridge from `H_ε ≤ 0` |
 | `QIQTH.BellMarginal` | Algebraic Bell/POVM marginalization identity |
+| `QIQTH.Bell` | **CHSH-LHV bound** `\|chsh\| ≤ 2` for any local-hidden-variable model + **QIQT-H corollary** (no LHV model reproduces QIQT-H's quantum-level CHSH violations, yet QIQT-H still satisfies no-signaling) |
 | `QIQTH` (root, re-exports) | `QIQTH.lean` |
 
 ## What Mathlib gives us
