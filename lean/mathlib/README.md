@@ -27,6 +27,7 @@ facts they consume.  This variant discharges those axioms against
 | `QIQTH.ShannonFano` | Finite Shannon entropy + single-record certainty bridge from `H_ε ≤ 0` |
 | `QIQTH.BellMarginal` | Algebraic Bell/POVM marginalization identity |
 | `QIQTH.Bell` | **CHSH-LHV bound** `\|chsh\| ≤ 2` for any local-hidden-variable model + **QIQT-H corollary** (no LHV model reproduces QIQT-H's quantum-level CHSH violations, yet QIQT-H still satisfies no-signaling) |
+| `QIQTH.Tsirelson` | **Rigorous singlet construction.** Explicit 4D real construction: ψ⁻ = (\|01⟩−\|10⟩)/√2, σ_z⊗σ_z, σ_x⊗σ_x. Direct computation gives ⟨ZZ⟩ = ⟨XX⟩ = −1, hence ⟨T⟩ = √2·(−1+−1) = −2√2. Discharges `Bell.tsirelson_bound` axiom. |
 | `QIQTH` (root, re-exports) | `QIQTH.lean` |
 
 ## What Mathlib gives us

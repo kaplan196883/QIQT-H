@@ -18,3 +18,4 @@ import QIQTH.DPI
 import QIQTH.ShannonFano
 import QIQTH.BellMarginal
 import QIQTH.Bell
+import QIQTH.Tsirelson

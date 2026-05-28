@@ -152,9 +152,12 @@ theorem not_lhv_if_chsh_gt_two
   linarith
 
 /-- The Tsirelson bound (axiomatized at this layer) — the maximum
-    QM-predicted CHSH value is 2√2 > 2.  Formalizing the quantum
-    construction requires entangled-state Hilbert-space machinery
-    not in this file. -/
+    QM-predicted CHSH value is 2√2 > 2.
+
+    *This axiom is discharged by `Tsirelson.tsirelson_rigorous` via an
+    explicit singlet-state + Pauli-tensor construction in 4D real space.*
+    Kept here as an axiom so `Bell.lean` is self-contained; the rigorous
+    version lives in `Tsirelson.lean`. -/
 axiom tsirelson_bound : ∃ qm_prediction : ℝ, 2 < |qm_prediction|
 
 /-- **Bell's theorem in QIQT-H form.**
