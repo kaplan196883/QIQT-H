@@ -13,245 +13,165 @@
   prove the analogous result in Bohmian mechanics for the
   configuration-space density `p^ψ(q)`.
 
-  **This module's structure (revised):** rather than axiomatizing the
-  full theorem as a single black box, we decompose it into the four
-  logical steps of the standard Schur-Lemma + tensor-multiplicativity
-  argument:
+  **CONSOLIDATION PASS (2026-05):**
 
-    Step 1 (Schur): linear + unitary-equivariant density functionals
-                    on a finite-dimensional state space form a
-                    two-parameter family
-                    `D_ρ = α · ρ + β · tr(ρ) · I_norm`.
+  This module previously duplicated Steps 1-4 + `combine_canonical` as
+  five independent abstract axioms — separate from the concrete versions
+  of those same steps in `GoldsteinStruyveFinDim`.  The duplication
+  added 5 redundant axioms and 7 opaque type/value declarations to the
+  axiom audit without adding mathematical content.
 
-    Step 2 (Normalization): `tr(D_ρ) = tr(ρ)` forces `α + β = 1`.
+  Consolidated structure:
 
-    Step 3 (Tensor multiplicativity, locality analog): D respects
-           product states ⇒ narrows the family to two solutions:
-           `D = identity` or `D = uniform`.
+    • The abstract types (`QState`, `Density`, `DensityFunctional`,
+      `canonicalDensity`, `uniformDensity`, `combine`) are REPLACED with
+      dimension-parameterised `abbrev`s pointing to the concrete
+      `Matrix (Fin d) (Fin d) ℂ` infrastructure in
+      `GoldsteinStruyveFinDim`.
 
-    Step 4 (Symmetry breaking): D is non-trivial on pure states
-           ⇒ picks `D = identity`, the canonical density.
+    • The abstract property predicates (`IsLinear`, `IsUnitaryEquivariant`,
+      `IsNormalized`, `IsTensorMultiplicative`, `IsNonDegenerate`,
+      `IsFQEquivariant`) are REPLACED with `def`s pointing to the
+      concrete property predicates from `GoldsteinStruyveFinDim`.
 
-    Combined: D_ρ = ρ.
+    • The five sub-step axioms (`step1_schur_classification`,
+      `step2_normalization_constraint`,
+      `step3_tensor_multiplicativity_narrowing`,
+      `step4_nondegeneracy_selection`, `combine_canonical`) are
+      ELIMINATED — they were duplicates of the concrete versions
+      proved or axiomatized in `GoldsteinStruyveFinDim`.
 
-  Steps 1-3 are direct applications of representation theory and
-  tensor algebra; they would be Lean-provable from `Matrix`-level
-  Mathlib infrastructure given enough effort.  Step 4 is the
-  irreducible *physical* commitment — it is the assumption that
-  pure states have non-trivial typicality content (not all collapsed
-  to the maximally mixed state).
+    • The combined theorem `canonical_ic_measure_principle` is now
+      a thin wrapper delegating to the concrete proved theorem
+      `GoldsteinStruyveFinDim.goldstein_struyve_findim`.
 
-  For the present formalization we expose this decomposition and
-  axiomatize each sub-step at the appropriate interface layer.
-  The COMBINED uniqueness result is then PROVED in Lean, given
-  the four sub-axioms.
-
-  Strategic content: the open mathematical work is to discharge
-  Steps 1, 2, 3 (Mathlib-tractable matrix-algebra results) and to
-  justify Step 4 from QIQT-H's physical commitments (the IC space
-  has non-trivial typicality structure on pure preparations).
+  *Net axiom savings:* 12 axiom-objects removed from
+  `FQEquivarianceUniqueness`'s namespace.  Sub-theorem C now depends
+  only on the two genuinely-open Goldstein-Struyve axioms (Step 1
+  Schur classification and Step 3 tensor multiplicativity) from the
+  concrete module — both of which are decomposed further into named
+  sub-lemmas in `GoldsteinStruyveStep1` / `GoldsteinStruyveStep3` /
+  `GoldsteinStruyveKronecker`.
 -/
 
-import Mathlib.Data.Real.Basic
+import QIQTH.GoldsteinStruyveFinDim
 
 namespace QIQTH
 namespace FQEquivarianceUniqueness
 
-/- ── Abstract interface ────────────────────────────────────────── -/
+/- ── Abstract interface — now concrete via abbreviations ────────── -/
 
-/-- A QIQT-H normal state on the regional Type II algebra. -/
-axiom QState : Type
-
-/-- A density operator (positive trace-class for trace-density form). -/
-axiom Density : Type
-
-/-- A density functional `D : QState → Density`. -/
-axiom DensityFunctional : Type
-
-/-- Evaluation: applying a functional to a state. -/
-axiom DensityFunctional.eval : DensityFunctional → QState → Density
+/-- A QIQT-H density functional on dimension-`d` matrices.  Concretely
+    realised as `Matrix (Fin d) (Fin d) ℂ → Matrix (Fin d) (Fin d) ℂ`. -/
+abbrev DensityFunctional (d : ℕ) : Type :=
+  GoldsteinStruyveFinDim.DensityFunctional d
 
 /-- The canonical density functional `D_ρ = ρ`. -/
-axiom canonicalDensity : DensityFunctional
+abbrev canonicalDensity (d : ℕ) : DensityFunctional d :=
+  @GoldsteinStruyveFinDim.canonicalD d
 
-/-- The "uniform" density functional `D_ρ = tr(ρ) · I/d` (constant on
-    normalized states). -/
-axiom uniformDensity : DensityFunctional
+/-- The "uniform" density functional `D_ρ = tr(ρ) · I/d`. -/
+noncomputable abbrev uniformDensity (d : ℕ) : DensityFunctional d :=
+  GoldsteinStruyveFinDim.uniformD d
 
-/- ── Properties of density functionals ────────────────────────────── -/
+/- ── Properties of density functionals (concrete) ────────────────── -/
 
-/-- **Linearity.** `D` respects convex combinations / linear sums of
-    states. -/
-def IsLinear (D : DensityFunctional) : Prop := True  -- abstract
+/-- **Linearity.** -/
+def IsLinear {d : ℕ} (D : DensityFunctional d) : Prop :=
+  GoldsteinStruyveFinDim.IsLinear D
 
-/-- **Unitary equivariance.** `D` commutes with conjugation by unitaries:
-    `D_{UρU*} = U · D_ρ · U*`. -/
-def IsUnitaryEquivariant (D : DensityFunctional) : Prop := True  -- abstract
+/-- **Unitary equivariance.** -/
+def IsUnitaryEquivariant {d : ℕ} (D : DensityFunctional d) : Prop :=
+  GoldsteinStruyveFinDim.IsUnitaryEquivariant D
 
-/-- **Trace normalization.** `tr(D_ρ) = tr(ρ)` whenever D_ρ is defined. -/
-def IsNormalized (D : DensityFunctional) : Prop := True  -- abstract
+/-- **Trace normalization.** -/
+def IsNormalized {d : ℕ} (D : DensityFunctional d) : Prop :=
+  GoldsteinStruyveFinDim.IsNormalized D
 
-/-- **Tensor multiplicativity (locality analog).** `D` respects product
-    structure: `D_{ρ ⊗ σ} = D_ρ ⊗ D_σ`. -/
-def IsTensorMultiplicative (D : DensityFunctional) : Prop := True  -- abstract
+/-- **Tensor multiplicativity (locality analog).** -/
+def IsTensorMultiplicative {d : ℕ} (D : DensityFunctional d) : Prop :=
+  ∀ Dd2 : GoldsteinStruyveFinDim.DensityFunctional (d * d),
+    GoldsteinStruyveFinDim.IsTensorMultiplicative D Dd2
 
-/-- **Non-degeneracy on pure states.** `D` does not collapse all pure
-    states to the maximally mixed state — there exists a pure state ψ
-    such that `D_{|ψ⟩⟨ψ|} ≠ uniformDensity_{|ψ⟩⟨ψ|}`. -/
-def IsNonDegenerate (D : DensityFunctional) : Prop := True  -- abstract
+/-- **Non-degeneracy on pure states.** -/
+def IsNonDegenerate {d : ℕ} (D : DensityFunctional d) : Prop :=
+  GoldsteinStruyveFinDim.IsNonDegenerate D
 
-/-- **FQ-equivariance.** `D` is preserved under (FQ)-restricted
-    Hamiltonian flow. -/
-def IsFQEquivariant (D : DensityFunctional) : Prop := True  -- abstract
+/-- **FQ-equivariance.**  `D` is preserved under (FQ)-restricted
+    Hamiltonian flow.  Abstract placeholder (analogous to the
+    QIQT-H-side dynamical commitment, complementary to the
+    measure-theoretic content). -/
+def IsFQEquivariant {d : ℕ} (_D : DensityFunctional d) : Prop :=
+  True
 
-/- ── Step 1: Schur-Lemma classification ──────────────────────────── -/
+/- ── Combined: the QIQT-H Goldstein-Struyve uniqueness theorem ─── -/
 
-/-- Convex combination of two density functionals (abstract operation). -/
-axiom DensityFunctional.combine :
-    ℝ → DensityFunctional → ℝ → DensityFunctional → DensityFunctional
-
-/-- **Step 1 (Schur's lemma for U(d) on Hermitian matrices).**
-
-    On a finite-dimensional state space, any linear unitary-equivariant
-    density functional has the form `D = α · canonicalDensity +
-    β · uniformDensity` for some α, β ∈ ℝ.
-
-    *Status:* Direct consequence of Schur's lemma applied to the
-    irreducible decomposition of Hermitian matrices under the conjugation
-    action of U(d) into traceless + scalar subspaces.  Mathlib-tractable
-    given matrix infrastructure, axiomatized at the interface here. -/
-axiom step1_schur_classification
-    (D : DensityFunctional)
-    (h_linear : IsLinear D)
-    (h_uniteq : IsUnitaryEquivariant D) :
-    ∃ α β : ℝ, D = DensityFunctional.combine α canonicalDensity β uniformDensity
-
-/-- **Step 2 (Normalization constraint).**
-
-    If `D` is normalized and has the Schur form
-    `D = α · canonicalDensity + β · uniformDensity`, then `α + β = 1`. -/
-axiom step2_normalization_constraint
-    (α β : ℝ)
-    (h_norm : IsNormalized (DensityFunctional.combine α canonicalDensity β uniformDensity)) :
-    α + β = 1
-
-/-- **Step 3 (Tensor multiplicativity narrows the solution set).**
-
-    If `D = α · canonicalDensity + β · uniformDensity` is tensor-
-    multiplicative, then `(α, β) ∈ {(1, 0), (0, 1)}`.
-
-    *Status:* Direct calculation expanding `D_{ρ ⊗ σ} = D_ρ ⊗ D_σ` and
-    matching coefficients of `ρ⊗σ`, `ρ⊗I`, `I⊗σ`, `I⊗I` — yields
-    `α² = α`, `αβ = 0`, `β² = β`.  Mathlib-tractable given tensor-
-    product infrastructure, axiomatized at the interface here. -/
-axiom step3_tensor_multiplicativity_narrowing
-    (α β : ℝ) (h_sum : α + β = 1)
-    (h_tensor : IsTensorMultiplicative
-                   (DensityFunctional.combine α canonicalDensity β uniformDensity)) :
-    (α = 1 ∧ β = 0) ∨ (α = 0 ∧ β = 1)
-
-/-- **Step 4 (Non-degeneracy picks the canonical density).**
-
-    If `D = α · canonicalDensity + β · uniformDensity` is non-degenerate
-    on pure states and `(α, β) ∈ {(1,0), (0,1)}`, then `(α, β) = (1, 0)`
-    (i.e., D is the canonical density).
-
-    *Status:* The "uniform" choice `(0, 1)` maps every pure state to
-    the same uniform density, contradicting non-degeneracy.  Direct
-    finite-dimensional calculation. -/
-axiom step4_nondegeneracy_selection
-    (α β : ℝ)
-    (h_case : (α = 1 ∧ β = 0) ∨ (α = 0 ∧ β = 1))
-    (h_nondegen : IsNonDegenerate
-                     (DensityFunctional.combine α canonicalDensity β uniformDensity)) :
-    α = 1 ∧ β = 0
-
-/-- Helper: the combination with (α=1, β=0) is the canonical density. -/
-axiom combine_canonical :
-    DensityFunctional.combine 1 canonicalDensity 0 uniformDensity = canonicalDensity
-
-/- ── Combined: the QIQT-H Goldstein-Struyve uniqueness theorem ────── -/
-
-/-- **Sub-theorem C (PROVED, not axiomatized) — combined four-step
-    QIQT-H Goldstein-Struyve uniqueness.**
+/-- **Sub-theorem C — Goldstein-Struyve QIQT-H uniqueness (PROVED via
+    delegation to the concrete `GoldsteinStruyveFinDim` proof).**
 
     A density functional satisfying linearity + unitary-equivariance +
     normalization + tensor-multiplicativity + non-degeneracy is the
     canonical density.
 
-    The proof composes the four sub-steps:
-      Step 1 (Schur)             → 2-parameter family
-      Step 2 (Normalization)     → α + β = 1
-      Step 3 (Tensor-mult)       → (α,β) ∈ {(1,0), (0,1)}
-      Step 4 (Non-degeneracy)    → (α,β) = (1,0)
-      Combined                   → D = canonical -/
+    *Where the content lives:*
+      Step 1 (Schur classification) — axiomatized in `GoldsteinStruyveFinDim`,
+            structurally decomposed in `GoldsteinStruyveStep1`
+      Step 2 (Normalization)        — PROVED concretely in `GoldsteinStruyveFinDim`
+      Step 3 (Tensor multiplicativity) — axiomatized in `GoldsteinStruyveFinDim`,
+            algebraic core PROVED in `GoldsteinStruyveStep3`,
+            Kronecker bridge PROVED in `GoldsteinStruyveKronecker`
+      Step 4 (Non-degeneracy)       — PROVED concretely in `GoldsteinStruyveFinDim` -/
 theorem goldstein_struyve_qiqth_proved
-    (D : DensityFunctional)
+    {d : ℕ} (hd : 1 < d)
+    (D : DensityFunctional d)
     (h_linear : IsLinear D)
     (h_uniteq : IsUnitaryEquivariant D)
     (h_norm : IsNormalized D)
     (h_tensor : IsTensorMultiplicative D)
     (h_nondegen : IsNonDegenerate D) :
-    D = canonicalDensity := by
-  -- Step 1: Schur classification gives D = α·canonical + β·uniform.
-  obtain ⟨α, β, h_schur⟩ := step1_schur_classification D h_linear h_uniteq
-  rw [h_schur]
-  -- Step 2: Normalization gives α + β = 1.
-  rw [h_schur] at h_norm
-  have h_sum : α + β = 1 := step2_normalization_constraint α β h_norm
-  -- Step 3: Tensor-multiplicativity narrows to two cases.
-  rw [h_schur] at h_tensor
-  have h_case := step3_tensor_multiplicativity_narrowing α β h_sum h_tensor
-  -- Step 4: Non-degeneracy selects (α, β) = (1, 0).
-  rw [h_schur] at h_nondegen
-  obtain ⟨hα, hβ⟩ := step4_nondegeneracy_selection α β h_case h_nondegen
-  -- Substitute α = 1, β = 0; combine to canonical density.
-  rw [hα, hβ]
-  exact combine_canonical
+    D = canonicalDensity d :=
+  GoldsteinStruyveFinDim.goldstein_struyve_findim d hd D
+    h_linear h_uniteq h_norm h_tensor h_nondegen
 
 /-- **The QIQT-H Canonical IC Measure Principle (final form).**
 
-    Combined with sub-theorem A (Mackey-Gleason ⇒ trace-density form)
-    and the four sub-axioms above (Schur classification, normalization,
-    tensor-multiplicativity narrowing, non-degeneracy selection):
+    Combined with sub-theorem A (Mackey-Gleason ⇒ trace-density form,
+    `TypicalityMackeyGleason.qiqth_typicality_mackey_gleason`) and the
+    two acknowledged interface axioms in `GoldsteinStruyveFinDim`
+    (Step 1 Schur classification and Step 3 tensor multiplicativity):
     the canonical IC measure on QIQT-H's IC space is uniquely the
     trace-density measure `μ_ρ(B) = τ_R(ρ · P_B)`.
 
-    *What remains to discharge each sub-axiom:*
-      Step 1: Schur's lemma for U(d) on Hermitian matrices
-              (Mathlib representation theory, given matrix scaffolding).
-      Step 2: Trace linearity (Mathlib `Matrix.trace_smul` etc.).
-      Step 3: Tensor-product coefficient matching
-              (Mathlib `TensorProduct` infrastructure).
-      Step 4: Physical commitment that pure states have non-trivial
-              typicality content.  This is the irreducible foundational
-              axiom — analogous to Boltzmann's equiprobability axiom
-              in classical statistical mechanics. -/
+    *Post-consolidation dependency:* this theorem now depends only on
+    `GoldsteinStruyveFinDim.step1_schur_classification` and
+    `GoldsteinStruyveFinDim.step3_tensor_multiplicativity` (plus
+    standard Lean/Mathlib axioms).  The previous duplicate sub-axioms
+    in `FQEquivarianceUniqueness` (5 axioms + 7 opaque types) have
+    been eliminated. -/
 theorem canonical_ic_measure_principle
-    (D : DensityFunctional)
+    {d : ℕ} (hd : 1 < d)
+    (D : DensityFunctional d)
     (h_linear : IsLinear D)
     (h_uniteq : IsUnitaryEquivariant D)
     (h_norm : IsNormalized D)
     (h_tensor : IsTensorMultiplicative D)
     (h_nondegen : IsNonDegenerate D) :
-    D = canonicalDensity :=
-  goldstein_struyve_qiqth_proved D h_linear h_uniteq h_norm h_tensor h_nondegen
+    D = canonicalDensity d :=
+  goldstein_struyve_qiqth_proved hd D h_linear h_uniteq h_norm h_tensor h_nondegen
 
-/-- **Backward-compatibility:** the original `IsLocal + IsNatural +
-    IsFQEquivariant` interface from the first version of this module.
-    Bridge: under standard interpretations, locality ↔ tensor
-    multiplicativity, naturality ↔ unitary equivariance + linearity,
-    FQ-equivariance is independently necessary for dynamical consistency. -/
+/-- **Uniqueness corollary.**  Two density functionals each satisfying
+    the five properties must agree (both equal the canonical density). -/
 theorem qiqth_typicality_uniqueness
-    (D₁ D₂ : DensityFunctional)
+    {d : ℕ} (hd : 1 < d)
+    (D₁ D₂ : DensityFunctional d)
     (h₁_linear : IsLinear D₁) (h₂_linear : IsLinear D₂)
     (h₁_uniteq : IsUnitaryEquivariant D₁) (h₂_uniteq : IsUnitaryEquivariant D₂)
     (h₁_norm : IsNormalized D₁) (h₂_norm : IsNormalized D₂)
     (h₁_tensor : IsTensorMultiplicative D₁) (h₂_tensor : IsTensorMultiplicative D₂)
     (h₁_nondegen : IsNonDegenerate D₁) (h₂_nondegen : IsNonDegenerate D₂) :
     D₁ = D₂ := by
-  rw [goldstein_struyve_qiqth_proved D₁ h₁_linear h₁_uniteq h₁_norm h₁_tensor h₁_nondegen]
-  rw [goldstein_struyve_qiqth_proved D₂ h₂_linear h₂_uniteq h₂_norm h₂_tensor h₂_nondegen]
+  rw [goldstein_struyve_qiqth_proved hd D₁ h₁_linear h₁_uniteq h₁_norm h₁_tensor h₁_nondegen]
+  rw [goldstein_struyve_qiqth_proved hd D₂ h₂_linear h₂_uniteq h₂_norm h₂_tensor h₂_nondegen]
 
 end FQEquivarianceUniqueness
 end QIQTH

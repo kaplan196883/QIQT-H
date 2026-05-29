@@ -42,3 +42,9 @@ import QIQTH.GoldsteinStruyveFinDim
 import QIQTH.GoldsteinStruyveStep3
 import QIQTH.GoldsteinStruyveKronecker
 import QIQTH.GoldsteinStruyveStep1
+-- A1 strengthening: locality discharged from equivariance + local dynamics:
+import QIQTH.MarginalLocality
+-- A6 strengthening: minimality/independence table for Born premises:
+import QIQTH.BornMinimalityTable
+-- A4 strengthening: Chebyshev concentration upgrading Born means to frequencies:
+import QIQTH.BornConcentration

@@ -128,4 +128,39 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GoldsteinStruyveStep1.step1_via_sub_lemmas
 -- expected: standard + 5 sub-axioms + the abstract Step 1 axiom
 
+-- ── A1/A2/A4/A6 strengthening pass (PROVED concretely) ──────────────
+-- All of these should depend only on standard Lean/Mathlib axioms.
+
+-- A1: marginal locality from equivariance + local dynamics
+#print axioms QIQTH.MarginalLocality.marginal_invariant_of_local_dynamics
+-- expected: standard only
+#print axioms QIQTH.MarginalLocality.alice_marginal_unchanged_by_bob_dynamics
+-- expected: standard only
+
+-- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
+#print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
+-- expected: standard only — direct matrix-entry computation
+#print axioms QIQTH.GoldsteinStruyveStep1.step1c_collapse_of_perm_symmetric
+-- expected: standard only — Equiv.swap transitivity argument
+
+-- A4: Chebyshev concentration
+#print axioms QIQTH.BornConcentration.chebyshev_finite
+-- expected: standard only — finite sum manipulation
+#print axioms QIQTH.BornConcentration.chebyshev_tail_bound
+-- expected: standard only
+#print axioms QIQTH.BornConcentration.bernoulli_variance
+-- expected: standard only — single sum + ring identity
+#print axioms QIQTH.BornConcentration.born_chebyshev_single_trial
+-- expected: standard only
+
+-- A6: minimality / independence package
+#print axioms QIQTH.BornMinimalityTable.P1_canonical_measure_necessary
+-- expected: standard only (re-export of NoBornFromNothing)
+#print axioms QIQTH.BornMinimalityTable.P2_measure_equivariance_necessary
+-- expected: standard only (re-export of EquivarianceGap)
+#print axioms QIQTH.BornMinimalityTable.P3_operational_sufficiency_necessary
+-- expected: standard only (re-export of OperationalNoGo)
+#print axioms QIQTH.BornMinimalityTable.P4_locality_reducible_to_equivariance
+-- expected: standard only (re-export of MarginalLocality)
+
 end QIQTH.AxiomAudit
