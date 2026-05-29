@@ -538,15 +538,43 @@ Denial of measurement independence preserves: no preferred foliation; no explici
 
 *Remark on decoherence as the load-bearing ingredient.* A machine-verified audit (`lean/mathlib/QIQTH/NoConcentration.lean`) confirms that linear unitary measurement-decoherence **alone** cannot produce single-record concentration: branch weights $|c_k|^2$ are conserved by unitarity, not concentrated toward $0$ or $1$. The equal-superposition input $\psi = (|0\rangle + |1\rangle)/\sqrt{2}$ leaves post-measurement weights exactly $(1/2, 1/2)$, never $(1, 0)$ or $(0, 1)$. Theorem 4 therefore relies essentially on at least one of: (a) non-linear amplitude truncation via the (FQ) literal reading, (b) microscopic-IC selection of a single trajectory through the (FQ)-restricted dynamics, or (c) the Concentration Conjecture of §6.2 as an independent dynamical postulate. The framework's position is that (a) + (b) jointly suffice: (FQ) restricts the physical Hamiltonian to $\mathcal{H}_{\rm phys}$ (non-unitarily on the unrestricted Hilbert space), and microscopic initial conditions then determine which single-record branch is realized. The audit's value is forcing this distinction: "decoherence" by itself does not select.
 
-### 7.4 Theorem (Born statistics from typicality, schematic)
+### 7.4 Theorem (Conditional Born typicality)
 
-**Theorem 5 (Born from typicality, schematic).** *If the measure $\mu$ on microscopic initial conditions is appropriately chosen, then for a standard preparation/measurement procedure with formal Born weights $|c_k|^2$, the empirical relative frequency of macroscopic outcome $k$ (the record above the resolution threshold in the per-run wave function) across many runs converges to $|c_k|^2$.*
+**Reframing.** QIQT-H has no fundamental probabilities. The framework is deterministic per run: microscopic initial conditions of that run determine which macroscopic record is realized. "Born" in QIQT-H refers to the *empirical frequency pattern* across many runs — a statistical regularity that must emerge from the IC distribution, not a primitive probability assignment. Accordingly Theorem 5 is best understood not in the probability-axiomatic mode of Gleason's theorem, but in the **typicality** mode of Bohmian Dürr-Goldstein-Zanghì equivariance (adapted to QIQT-H's no-particle, no-branching ontology).
 
-*Proof sketch.* The (FQ)-constrained dynamics, starting from microscopic initial conditions drawn from $\mu$ and propagating to the post-measurement (FQ)-resolved per-run wave function, induces a map from initial conditions to realized records. The claim is that for the appropriate $\mu$, the measure of initial conditions mapped to record $k$ is $|c_k|^2$. Rigorous derivation, specification of $\mu$, proof that the (FQ)-constrained dynamics yields the right measure-preserving structure, justification that this measure is the empirically realized one, is identified as the second key open problem of the framework, analogous to but distinct from Bohmian $|\psi|^2$-equivariance. The framework specifies *what* needs to be proved; the proof itself is open. $\blacksquare$
+**Theorem 5 (Conditional Born typicality).** *Let $\rho$ be a preparation state, $\Omega_\rho$ the QIQT-H microscopic-IC space, and $O_M : \Omega_\rho \to \mathrm{Outcomes}(M)$ the deterministic outcome map for a measurement protocol $M$. Suppose:*
 
-**Audit remark — $\mu$-selection is load-bearing.** A machine-verified audit (`lean/mathlib/QIQTH/NoBornFromNothing.lean`) establishes the *negative* companion theorem: for **any** target outcome distribution $p$ (not just $|c_k|^2$) and any surjective outcome map from the microscopic IC space, there exists a microscopic measure $\mu_p$ whose outcome-marginal equals $p$. Construction: choose a section $s$ of the outcome map and place mass $p_k$ on $s(k)$. Hence the structural axioms of QIQT-H (FQ, microcausality, Donald, holographic bound) do *not* select Born statistics over any other distribution; Theorem 5 is conditional on the right $\mu$ being the physically realized one. The framework's identification of $\mu$-selection as a key open problem is rigorously justified by this audit.
+*(i) **Canonicality.** There exists a measure $\mu_\rho$ on $\Omega_\rho$ defined from QIQT-H primitives (not fitted per measurement).*
 
-**Audit remark — support preservation $\neq$ measure preservation.** A second machine-verified audit (`lean/mathlib/QIQTH/EquivarianceGap.lean`) establishes that the framework's "(FQ)-restricted physical Hamiltonian preserves $\mathcal{H}_{\rm phys}$" statement is *support preservation*, strictly weaker than the Bohmian-style measure-preservation ($|\psi|^2$-equivariance) that Theorem 5 implicitly requires. Concrete counterexample: a bijection on a 2-point space preserves the support trivially yet shuffles a non-uniform measure. A genuine Born-equivariance theorem for QIQT-H therefore requires *additional* structure beyond the framework's current postulates — a concrete microscopic dynamics, a Born-measure family indexed by the universal wave function, and an equivariance proof. None of these is supplied by FQ + AQFT alone.
+*(ii) **Born pushforward.** $(O_M)_* \mu_\rho(i) = \mathrm{tr}(\rho E_i)$ for every allowed outcome effect $E_i$ in the measurement protocol $M$.*
+
+*(iii) **Equivariance / stationarity.** $\mu_\rho$ is preserved (up to allowed parameter-dependence on $\rho$) by the (FQ)-restricted physical Hamiltonian.*
+
+*(iv) **Repeated-trial typicality.** Repeated trials of the prepare-measure procedure are represented by a $\mu_\rho$-typical iid (or stationary-ergodic) process on $\Omega_\rho$.*
+
+*Then for $\mu_\rho$-typical microscopic-IC sequences, the empirical relative frequency of macroscopic outcome $k$ across many runs converges to the Born weight $\mathrm{tr}(\rho E_k)$ (= $|c_k|^2$ for pure states with $\rho = |\psi\rangle\langle\psi|$ and projective measurements).* $\blacksquare$
+
+**Status of the four hypotheses.** Hypotheses (ii) and (iv) are standard: (ii) is what defines $\mu_\rho$ as "the Born measure" for $\rho$; (iv) is a routine LLN/ergodicity input. Hypotheses (i) and (iii) — *canonicality* and *equivariance* — are the **framework's load-bearing open commitments**. They are not delivered by FQ + AQFT + holography alone; see machine-verified audits below.
+
+The conditional shape of Theorem 5 is now formalized in `lean/mathlib/QIQTH/BornTypicality.lean` (theorem `qiqth_born_typicality_conditional`). The deterministic core (mean per-run frequency equals the outcome marginal) is rigorously proved; the LLN step is taken as a standard probability black box at the interface layer.
+
+**Important — QIQT-H does not derive the Born measure.** It identifies the exact canonical-measure / equivariance principle required for Born frequencies, and reduces the Born problem to that principle. This is the typicality-paradigm analog of Bohmian $|\psi|^2$-equivariance, adapted for QIQT-H's no-particle ontology.
+
+**Audit remark — universal realizability (the negative companion).** A machine-verified audit (`lean/mathlib/QIQTH/NoBornFromNothing.lean`) establishes that for **any** target outcome distribution $p$ (not just $|c_k|^2$) and any surjective outcome map from the IC space, there exists a measure $\mu_p$ whose outcome-marginal equals $p$. Construction: choose a section of the outcome map and place mass $p_k$ on $s(k)$. Hence the framework's structural axioms (FQ, microcausality, Donald, holographic bound) do *not* select Born over any other distribution. Hypothesis (i) of Theorem 5 is therefore *genuinely independent* of the other QIQT-H postulates — it must be added as a separate principle, not derived.
+
+**Audit remark — support preservation $\neq$ Born equivariance.** A second machine-verified audit (`lean/mathlib/QIQTH/EquivarianceGap.lean`) establishes that the framework's "(FQ)-restricted physical Hamiltonian preserves $\mathcal{H}_{\rm phys}$" statement is *support preservation*, strictly weaker than the measure-preservation hypothesis (iii) of Theorem 5. Concrete counterexample: a bijection on a 2-point space preserves the support trivially yet shuffles a non-uniform measure. Hypothesis (iii) is therefore a *genuine additional commitment* beyond the framework's current postulates.
+
+**Candidate principles for hypothesis (i).** Three candidate physical mechanisms could supply the Canonical IC Measure Principle:
+
+*(α) **Canonical tracial typicality from CPW Type II structure.** The crossed-product Type II algebra $\hat{\mathcal{A}}(R)$ carries a canonical normal semifinite trace $\tau_R$ (unique up to scale). If $\tau_R$ induces, via the natural identification of IC space with the algebra's state space, a canonical measure $\mu_\rho^{\tau}$ satisfying (i)–(iv), this is the most QIQT-H-native route. (Currently the leading candidate.)*
+
+*(β) **Symmetric equiprobability** on a natural decomposition of $\Omega_\rho$ into record-fibers, with Born weights emerging from fiber-volume ratios. This route requires a structural principle making the decomposition canonical and the fiber volumes well-defined.*
+
+*(γ) **Holographic / modular construction** from the canonical sector reference state $\sigma_R$ (vacuum on Minkowski, KMS on stationary thermal, Bunch-Davies on de Sitter, etc.) via a modular-theoretic construction yielding $\mu_\rho$. Physically attractive but currently the least mathematically developed of the three.*
+
+None of (α), (β), (γ) is derivable from FQ + AQFT + holography alone; each is a candidate **additional postulate** the framework would need to adopt. The framework presently leaves the choice open; Open Problem 1 (§11.4) sharpens the canonical-measure problem with explicit sub-conditions.
+
+*Remark on Gleason.* Gleason's theorem derives the Born rule from probability-axiomatic constraints (noncontextuality + orthogonal additivity) on a projection lattice. It is *not* the appropriate primary derivation for QIQT-H, which is deterministic per run and has no primitive probability assignment. Gleason functions as a consistency check on the *target* empirical frequencies (Born is the unique probability rule consistent with the noncontextuality axioms), but cannot select the microscopic IC measure $\mu_\rho$ — many distinct $\mu_\rho$ push forward to the same Born outcome distribution. Closing the gap requires the typicality argument above, not Gleason.
 
 ### 7.5 What §7.1–7.4 establishes
 
@@ -1070,37 +1098,69 @@ The open problems are *concrete and well-defined*: each can be attacked in princ
 
 ### 11.4 Open problems
 
-The framework's central new commitments are located in the **record-instantiation-cost postulate** (H2 in Theorem 6) and the **stagewise causal admissibility structure** (§7.6). The open problems below organize the research agenda that follows from these commitments.
+The Lean audit work (see `lean/mathlib/QIQTH/` and the formal-verification footnote in the abstract) has sharpened the boundary between what the framework derives from FQ + AQFT + holography and what remains as load-bearing additional commitments. The open problems are reorganized here to reflect that sharpened boundary, with the Born / canonical-measure problem promoted to first position as the most central remaining commitment.
 
-**Foundational (the framework's central new commitments):**
+**Open Problem 1 — Canonical IC Measure Principle (the central Born/typicality problem).**
+Construct, for each preparation state $\rho$, a measure $\mu_\rho$ on the QIQT-H microscopic-IC space $\Omega_\rho$ satisfying:
+   (a) **Canonicality** — defined from QIQT-H primitives, not fitted per measurement;
+   (b) **Born pushforward** — $(O_M)_* \mu_\rho(i) = \mathrm{tr}(\rho E_i)$ for every allowed measurement protocol $M$ with effects $\{E_i\}$;
+   (c) **Equivariance / stationarity** — preserved by the (FQ)-restricted physical Hamiltonian;
+   (d) **Repeated-trial typicality** — supports iid / exchangeable / stationary-ergodic frequency theorems;
+   (e) **Measurement-setting independence** — $\mu_\rho$ does not depend on the measurement context (unless the theory explicitly accepts contextual / measurement-dependent typicality);
+   (f) **Uniqueness / stability** — robust under coarse-graining and equivalent IC descriptions.
 
-1. **The record-instantiation-cost postulate (H2).** The framework's central new physical axiom: instantiating a macroscopic record on region $R$ requires modular cost $\chi_R(\bar\omega_R) \ge I_0 - \eta_0$. Justify this as a strengthening of standard Bekenstein-Bousso. Connect to deeper finite-information constraints in quantum gravity (e.g., a *modular* Bekenstein bound on record-bearing states). This is genuinely new physics that does not follow from existing holographic results.
+  Given such a $\mu_\rho$, the conditional Born typicality theorem (Theorem 5; formalized in `lean/mathlib/QIQTH/BornTypicality.lean`) closes the empirical-frequency problem. Three candidate routes (none derivable from FQ + AQFT + holography alone):
+   *(α)* canonical tracial typicality from CPW Type II structure (currently the leading candidate);
+   *(β)* symmetric equiprobability on a natural record-fiber decomposition of $\Omega_\rho$;
+   *(γ)* holographic / modular construction from the canonical sector reference state $\sigma_R$.
 
-2. **Operational distinguishability axiomatization (H3).** Make precise, under decoherence + Quantum Darwinism, when the macroscopic-record subalgebra admits a normal measurement instrument decoding the record index with small error, so that the Fano-type bound $H_\epsilon \le I_{\rm Hol}^R + \eta_{\rm def}$ holds. Existing ingredients: spectrum broadcast structure (Zurek, Brandão-Piani-Horodecki), redundancy plateaus, decoherent-histories medium-decoherence conditions.
+  Machine-verified audits confirming this is genuinely open: `NoBornFromNothing.lean` (any distribution realizable; the structural axioms do not pick out Born), `EquivarianceGap.lean` (support preservation $\neq$ Born equivariance).
 
-3. **Stagewise adapted process and refinement compatibility.** Construct rigorously the stagewise process $h \mapsto \omega_t^h$ of §7.6, including: existence under Cauchy-slice refinement; compatibility of $\mathfrak{R}_t(h)$ with the AQFT net's isotony; conditions under which the adapted family extends to a completed-history limit.
+**Open Problem 2 — Reference-weight bound (sharpened H2).**
+The record-instantiation-cost postulate (H2 in Theorem 6) is *equivalent* to the reference-weight bound $\sigma_R(E_{\rm record}) \le \exp(-(I_0 - \eta_0))$ on macroscopic pointer sectors (see §7.6 Sharpening of (H2); formalized in `lean/mathlib/QIQTH/H1H2Audit.lean`). Derive this reference-weight bound from modular / holographic first principles, as a strengthening of standard Bekenstein-Bousso. Donald's identity + Klein positivity + DPI alone are insufficient. This is genuinely new physics; progress here feeds directly into Open Problem 3.
 
-4. **Empirical calibration of $I_0$.** The per-record physical cost $I_0$ is an experimental parameter, analogous to GRW's collapse rate $\lambda$. Its value must be calibrated against the observed quantum-to-classical transition scale. Current best estimates (Zurek physical entropy for typical macroscopic records) give $I_0 \sim 10^{25}$ bits, but the empirically required value may be larger if records include extensive environmental entanglement. The framework's prediction: a definite calibrated value of $I_0$ such that the saturation condition $I_0 \approx C(R)$ matches the observed quantum-classical boundary for macroscopic systems.
+**Open Problem 3 — Concentration Conjecture.**
+Per-run amplitudes for distinct macroscopic record components evolve dynamically toward 0 or 1 under decoherence + microscopic IC + FQ. Currently argued qualitatively with numerical scaling; not yet a formal theorem. A machine-verified audit (`NoConcentration.lean`) confirms that *linear unitary decoherence alone* cannot produce concentration; the framework's position requires (FQ) literal truncation + microscopic-IC selection to jointly do the work. Make this mechanism a theorem.
 
-**Algebraic / mathematical-physics:**
+**Open Problem 4 — Quantitative form of $\epsilon(R)$.**
+The (FQ)(iii) resolution floor satisfies $\epsilon(R) > 0$ (Theorem 3; formalized in `Resolution.lean`). Derive an explicit functional form $\epsilon(R) = f(\text{geometry}, Q_R, \text{macroscopic record dimension})$ tying the framework to numerical predictions. Downstream of Open Problems 2 and 3.
 
-5. **Functorial / isotonic crossed-product local nets.** Establish the functorial structure $D \mapsto \hat{\mathcal{A}}(D)$ as a covariant net of Type II crossed-product algebras with normal embeddings under inclusion. Needed for the modular-local bound to behave consistently under region refinement / coarse-graining.
+**Open Problem 5 — Empirical calibration of $I_0$.**
+The per-record physical cost $I_0$ is a phenomenological parameter, analogous to GRW's collapse rate $\lambda$. Current best estimates (Zurek physical entropy for typical macroscopic records) give $I_0 \sim 10^{25}$ bits. The framework's prediction: a definite calibrated value of $I_0$ such that the saturation condition $I_0 \approx C(R)$ matches the observed quantum-to-classical transition. Downstream of Open Problem 4.
 
-6. **Modular-Hamiltonian estimates beyond wedges and CFT balls.** Generalize the wedge / CFT-ball modular-Hamiltonian estimate to broader classes of regions, either via tighter enclosing-wedge monotonicity arguments or new geometric forms of $K_R^\sigma$. Without this the conditional $\delta_R \sim 10^{-27}$ estimate cannot be extended to generic laboratory geometries.
+---
 
-7. **Quantitative form of the resolution floor $\epsilon(R)$** for the operational equivalence relation on regional algebra states (the (FQ)(iii) precision floor).
+**Algebraic / mathematical-physics infrastructure:**
 
-8. **State-extension and reference-state issues** in the crossed-product algebra formulation: extension of states across causal-diamond boundaries, choice of $\sigma_R$ in cosmological / non-stationary backgrounds.
+6. **Operational distinguishability axiomatization (H3).** Make precise, under decoherence + Quantum Darwinism, when the macroscopic-record subalgebra admits a normal measurement instrument decoding the record index with small error, so that the Fano-type bound $H_\epsilon \le I_{\rm Hol}^R + \eta_{\rm def}$ holds. Existing ingredients: spectrum broadcast structure (Zurek, Brandão-Piani-Horodecki), redundancy plateaus, decoherent-histories medium-decoherence conditions.
+
+7. **Stagewise adapted process and refinement compatibility.** Construct rigorously the stagewise process $h \mapsto \omega_t^h$ of §7.6, including: existence under Cauchy-slice refinement; compatibility of $\mathfrak{R}_t(h)$ with the AQFT net's isotony; conditions under which the adapted family extends to a completed-history limit.
+
+8. **Functorial / isotonic crossed-product local nets.** Establish the functorial structure $D \mapsto \hat{\mathcal{A}}(D)$ as a covariant net of Type II crossed-product algebras with normal embeddings under inclusion. Needed for the modular-local bound to behave consistently under region refinement / coarse-graining.
+
+9. **Modular-Hamiltonian estimates beyond wedges and CFT balls.** Generalize the wedge / CFT-ball modular-Hamiltonian estimate to broader classes of regions, either via tighter enclosing-wedge monotonicity arguments or new geometric forms of $K_R^\sigma$. Without this the conditional $\delta_R \sim 10^{-27}$ estimate cannot be extended to generic laboratory geometries.
+
+10. **State-extension and reference-state issues** in the crossed-product algebra formulation: extension of states across causal-diamond boundaries, choice of $\sigma_R$ in cosmological / non-stationary backgrounds.
+
+11. **Locality of the (FQ)-restricted dynamics.** The (FQ) projection onto $\mathcal{H}_{\rm phys}$ must commute with the local algebras' observables for Theorem 7's no-signaling argument to apply to the *restricted* (physical) theory rather than only the ambient (unrestricted) theory. The compression-locality leakage identity (formalized in `CompressionLocality.lean`) isolates this implicit constraint. Construct concrete (FQ) projections satisfying it; characterize the class of admissible projections.
 
 **Empirical / phenomenological:**
 
-9. **Concrete measurement-apparatus models realizing finite $\chi_R$ budgets.** Build explicit toy models (Stern-Gerlach, interferometer, optomechanical) where $\chi_R$ for the apparatus-record state is computable and the saturation regime can be approached. Without these the framework's content cannot be confronted with experiment.
+12. **Concrete measurement-apparatus models realizing finite $\chi_R$ budgets.** Build explicit toy models (Stern-Gerlach, interferometer, optomechanical) where $\chi_R$ for the apparatus-record state is computable and the saturation regime can be approached. Without these the framework's content cannot be confronted with experiment.
 
-10. **Rigorous Born typicality under constrained dynamics.** Specify the measure on actual initial conditions of actual runs; prove that the realized-record distribution across runs reproduces $|c_k|^2$ under the constrained dynamics. Analogous to Bohmian DGZ $|\psi|^2$-equivariance.
+13. **Phenomenological predictions.** With $I_0$ calibrated, the framework predicts: maximum macroscopic-superposition scale (testable against Schrödinger-cat experiments with progressively larger systems); long-baseline coherence limits; specific signatures distinguishing the framework from GRW-style stochastic collapse (the framework predicts kinematic exclusion, not stochastic events).
 
-11. **Phenomenological predictions.** With $I_0$ calibrated, the framework predicts: maximum macroscopic-superposition scale (testable against Schrödinger-cat experiments with progressively larger systems); long-baseline coherence limits; specific signatures distinguishing the framework from GRW-style stochastic collapse (the framework predicts kinematic exclusion, not stochastic events).
+14. **Cosmological / horizon applications**, extend to the de Sitter static patch and black-hole horizon regions, where $C(R)$ becomes finite and saturation may be physically relevant.
 
-12. **Cosmological / horizon applications**, extend to the de Sitter static patch and black-hole horizon regions, where $C(R)$ becomes finite and saturation may be physically relevant.
+---
+
+**Strategic note.** Of the central open problems, the audit work suggests two bottleneck chains:
+
+  • **Foundations bottleneck:** Open Problem 1 (canonical $\mu$-selection / equivariance). Progress here transforms the Born section from conditional to substantive, and is the most pressing problem for foundations-of-QM defensibility.
+
+  • **Quantitative-emergence bottleneck:** Open Problem 2 (reference-weight bound) $\Rightarrow$ Open Problem 3 (Concentration) $\Rightarrow$ Open Problem 4 ($\epsilon(R)$) $\Rightarrow$ Open Problem 5 ($I_0$ calibration). Progress on Open Problem 2 unlocks the quantitative QIQT-H pipeline.
+
+These are the two genuinely open research directions left after the Lean audit work has clarified the deductive boundary. The remaining items (6–14) are infrastructure and phenomenology that follow once the bottlenecks are addressed.
 
 ### 11.5 Credit division
 
