@@ -41,3 +41,4 @@ import QIQTH.FQEquivarianceUniqueness
 import QIQTH.GoldsteinStruyveFinDim
 import QIQTH.GoldsteinStruyveStep3
 import QIQTH.GoldsteinStruyveKronecker
+import QIQTH.GoldsteinStruyveStep1
