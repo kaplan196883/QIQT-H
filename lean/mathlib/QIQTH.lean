@@ -29,3 +29,6 @@ import QIQTH.ArakiInterface
 -- Final non-entropy audits proposed by GPT-5.5-pro:
 import QIQTH.FQDynamicsNoGo
 import QIQTH.CompressionLocality
+-- Born-rule audits from fourth GPT-5.5-pro consultation:
+import QIQTH.NoBornFromNothing
+import QIQTH.EquivarianceGap
