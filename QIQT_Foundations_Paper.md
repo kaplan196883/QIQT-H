@@ -1102,9 +1102,9 @@ The Lean audit work (see `lean/mathlib/QIQTH/` and the formal-verification footn
 
 **Open Problem 1 — Canonical IC Measure Principle (the central Born/typicality problem).**
 
-*Existence note.* Beyond the six structural sub-conditions listed below, the framework currently has *no existence proof* that a measure $\mu_\rho$ satisfying conditions (a)–(f) simultaneously exists in the full QIQT-H Type II setting. The sub-theorems A and C (machine-verified below) prove uniqueness *conditional on existence* of such a measure with the required normality/locality/equivariance structure. Demonstrating existence — either by explicit construction (e.g., via canonical trace pullback) or by a non-vacuity proof — is part of the open problem.
+This problem decomposes naturally into six layers, each requiring different kinds of work. The decomposition is based on a closing audit (`lean/mathlib/QIQTH/AxiomAudit.lean` + GPT-5.5-pro consultation) that distinguishes what is mathematically derivable from what is genuinely open physics from what is irreducible empirical calibration.
 
-Construct, for each preparation state $\rho$, a measure $\mu_\rho$ on the QIQT-H microscopic-IC space $\Omega_\rho$ satisfying:
+**Goal.** Specify, for each preparation state $\rho$, a measure $\mu_\rho$ on the QIQT-H microscopic-IC space $\Omega_\rho$ (alternatively: a typicality structure on the FQ-restricted physical Hilbert space) satisfying:
    (a) **Canonicality** — defined from QIQT-H primitives, not fitted per measurement;
    (b) **Born pushforward** — $(O_M)_* \mu_\rho(i) = \mathrm{tr}(\rho E_i)$ for every allowed measurement protocol $M$ with effects $\{E_i\}$;
    (c) **Equivariance / stationarity** — preserved by the (FQ)-restricted physical Hamiltonian;
@@ -1112,28 +1112,109 @@ Construct, for each preparation state $\rho$, a measure $\mu_\rho$ on the QIQT-H
    (e) **Measurement-setting independence** — $\mu_\rho$ does not depend on the measurement context (unless the theory explicitly accepts contextual / measurement-dependent typicality);
    (f) **Uniqueness / stability** — robust under coarse-graining and equivalent IC descriptions.
 
-  Given such a $\mu_\rho$, the conditional Born typicality theorem (Theorem 5; formalized in `lean/mathlib/QIQTH/BornTypicality.lean`) closes the empirical-frequency problem. Three candidate routes (none derivable from FQ + AQFT + holography alone):
-   *(α)* canonical tracial typicality from CPW Type II structure (currently the leading candidate);
-   *(β)* symmetric equiprobability on a natural record-fiber decomposition of $\Omega_\rho$;
-   *(γ)* holographic / modular construction from the canonical sector reference state $\sigma_R$.
+Machine-verified audits flag the difficulty: `NoBornFromNothing.lean` (any distribution realizable; the structural axioms do not pick out Born), `EquivarianceGap.lean` (support preservation $\neq$ Born equivariance), `OperationalNoGo.lean` (operational frequency data alone insufficient).
 
-  Machine-verified audits confirming this is genuinely open: `NoBornFromNothing.lean` (any distribution realizable; the structural axioms do not pick out Born), `EquivarianceGap.lean` (support preservation $\neq$ Born equivariance).
+#### 11.4.1 Formal Born representation theorem (Mackey-Gleason + noncommutative Radon-Nikodym)
 
-  **Concrete attack plan: three sub-theorems.** Following Goldstein-Struyve's uniqueness argument for Bohmian $|\psi|^2$-equilibrium (J. Stat. Phys. 128, 1197, 2007) and the Mackey-Gleason / noncommutative Radon-Nikodym machinery of vN-algebra theory, the Canonical IC Measure Principle decomposes into three sub-theorems, all three of which are now Lean-formalized as conditional theorems at the operator-algebra interface layer:
+**The mathematical core.** For a normal probability measure on the projection lattice of a von Neumann algebra without Type $I_2$ summand, Mackey-Gleason (Bunce-Wright 1990s, extending classical Gleason 1957) gives a unique normal state extension. Combined with the noncommutative Radon-Nikodym theorem (Sakai 1971; Takesaki vol. II), this yields the trace-density form
+$$\mu_\rho(P) = \tau(D_\rho \cdot P)$$
+on semifinite vN algebras with faithful normal trace $\tau$.
 
-  - **Sub-theorem A — Typicality Mackey-Gleason** (`TypicalityMackeyGleason.lean`). Normal, additive, normalized, noncontextual typicality weights on the IC projection algebra $\mathcal{C}_{\rm IC} \subset \hat{\mathcal{A}}(R)$ are uniquely of the **trace-density form**
-  $$\mu(P_B) = \tau_R(D \cdot P_B)$$
-  for a positive density operator $D \in L^1(\hat{\mathcal{A}}(R), \tau_R)$. Conditional on the standard Mackey-Gleason theorem (Bunce-Wright 1990s extending classical Gleason to general vN algebras) and the noncommutative Radon-Nikodym theorem (Sakai, Takesaki); both axiomatized at the interface layer since Mathlib does not yet have them in this generality.
+**Caveats to be explicit about:**
+- **No bare qubit Gleason**: classical Gleason has a $d=2$ exception. The fix is Busch's POVM-Gleason theorem (2003) extending the result to all effects (Busch, Caves-Fuchs-Manne-Renes 2004).
+- Normality / σ-additivity vs finite additivity assumptions.
+- Complex Hilbert spaces (real/quaternionic variants require separate treatment).
+- Factor vs non-factor center (superselection sectors).
+- PVM-only vs POVM/effect-level Born rule.
+- Exclusion of singular states.
 
-  - **Sub-theorem B — Operational no-go** (`OperationalNoGo.lean`). Concrete witness on a 3-element IC space mapping to a 2-element outcome space: two distinct IC measures $\mu_1 = (1/4, 1/4, 1/2)$ and $\mu_2 = (1/2, 0, 1/2)$ produce identical outcome marginals $(1/2, 1/2)$. Operational frequency data therefore cannot distinguish them; structural input from sub-theorems A and C is required to pick out a unique $\mu_\rho$. Fully proved, no axioms.
+**Lean status:** Sub-theorem A (`TypicalityMackeyGleason.lean`) packages the Mackey-Gleason + noncommutative Radon-Nikodym implication as a conditional theorem. The interface axioms are well-defined Mathlib-formalization tasks (multi-week for the full vN-algebraic version; tractable in finite dimensions).
 
-  - **Sub-theorem C — Goldstein-Struyve uniqueness for QIQT-H** (`FQEquivarianceUniqueness.lean`). Among trace-density typicality structures, **locality + naturality + FQ-equivariance** uniquely fix the canonical density $D = D_\rho^{\rm can}$. Conditional on the QIQT-H-specific Goldstein-Struyve uniqueness theorem (which adapts the 2007 Bohmian result to the CPW Type II crossed-product algebraic setting with FQ-restricted dynamics); this adaptation is the genuinely new mathematical work the framework owes.
+#### 11.4.2 Existence and canonicality in finite factors (Type $II_1$)
 
-  **Combined:** sub-theorems A + C deliver the full Canonical IC Measure Principle as a **Nernst-style consistency derivation** — *the canonical IC measure is not an independent postulate; it is forced by structural consistency among Mackey-Gleason additivity, Goldstein-Struyve locality/naturality, and FQ-Hamiltonian equivariance*. Sub-theorem B confirms that this derivation cannot be achieved by operational axioms alone, motivating the need for the structural input from A and C.
+**Standard mathematical existence (NOT open).** For a finite Type II factor $M$ with faithful normal tracial state $\tau$, the construction
+$$\mu_\rho(p) = \tau(\rho \cdot p), \quad \rho \in L^1(M, \tau)_+, \quad \tau(\rho) = 1$$
+yields a normal probability measure on the projection lattice $\mathrm{Proj}(M)$. Positivity, normalization, orthogonal additivity, normality, and unitary covariance are all standard theorems. **In a $II_1$ factor, the trace $\tau$ is the unique normal state invariant under all inner unitaries** — so canonicality under unitary invariance is *not* an open problem; it is a consequence of factor structure.
 
-  **What remains genuinely open after the three sub-theorems:**
-   1. *Mathematical:* prove the QIQT-H-specific Goldstein-Struyve uniqueness theorem (sub-theorem C's interface axiom). Adapts a 2007 result from Bohmian guiding-equation dynamics to QIQT-H's Type II + (FQ) setting.
-   2. *Physical:* justify the **measurement-calibration step** — identify the canonical density $D_\rho^{\rm can}$ at QIQT-H state $\rho$ with the standard QM density operator. This is the actual physical content of Born and cannot be derived from typicality structure alone; it is the irreducible bridge from formal mathematics to empirical observation (analogous to the bridge from Liouville measure to thermodynamic ensembles in classical statistical mechanics).
+**What remains open in $II_1$:** none of the *mathematical* existence; only the (genuinely open) question of canonical *physical selection* — what makes a particular $\rho$ correspond to a particular preparation. That is the empirical calibration step (§11.4.4 below).
+
+**Lean status:** This is a Lean formalization gap, *not* an open math problem. The construction can be formalised directly given the requisite vN-algebra infrastructure in Mathlib.
+
+#### 11.4.3 Infinite trace and Type $II_\infty$ — a sharp obstruction
+
+**The obstruction.** For a Type $II_\infty$ factor with semifinite trace $\tau$, the trace satisfies $\tau(1) = \infty$. Therefore the trace itself is a *weight*, not a probability state. There is **no normalized normal state on a $II_\infty$ factor invariant under all unitaries**.
+
+Concretely: one cannot define a "canonical uniform" probability measure $\mu(p) = \tau(p)$ in $II_\infty$; the candidate is not normalizable.
+
+**Options for the QIQT-H Type II setting:**
+1. Choose a density $\rho$: $\mu_\rho(p) = \tau(\rho \cdot p)$ with $\rho \in L^1(M, \tau)_+$ and $\tau(\rho) = 1$. The measure exists; canonicality requires an additional principle to select $\rho$ for a given physical preparation.
+2. Restrict to a finite corner $eMe$ with $\tau(e) < \infty$: recovers the $II_1$ analysis above on the corner.
+3. Use semifinite *typicality weight* rather than probability measure — appropriate if the framework adopts a non-probability typicality reading.
+4. Provide additional physical selection principles (canonical sector reference state, modular structure, holographic origin).
+
+**Lean status:** Sub-theorem A's interface (Mackey-Gleason + RN) applies to $II_\infty$; the obstruction is *physical canonicality*, not formal existence of $\mu_\rho$.
+
+#### 11.4.3a Type III caveat (AQFT local algebras)
+
+**A non-trivial caveat.** AQFT local algebras of bounded regions are typically Type $III_1$, not Type II (Buchholz, Borchers, Longo; see foundations paper §3). The QIQT-H framework uses the CPW Type II crossed-product construction (CPW 2022, Witten 2022) precisely to *escape* Type III to a well-defined entropy structure. But:
+
+- **There is no trace-density picture in Type III.** Normal states still give projection probabilities $\phi(p)$, but the formula $\phi(p) = \tau(\rho \cdot p)$ has no analog in Type III (no trace).
+- The relationship between the underlying Type III local algebras and the crossed-product Type II algebras is mediated by the modular flow of the canonical sector reference state $\sigma_R$.
+- The Born representation problem in Type III is structurally different and requires either passing through the Type II crossed product or using Connes' spatial derivative / Haagerup's $L^p$-space construction.
+
+**Open:** make explicit how the Type II crossed-product trace-density picture relates to the underlying Type III local-algebra structure — particularly whether the canonical IC measure $\mu_\rho$ on the Type II core has a natural Type III pullback.
+
+#### 11.4.4 Operational calibration — split into derivable and irreducible parts
+
+**Splitting the calibration step.** The "measurement-calibration" step (often informally called "the Born content bridge") is actually two parts:
+
+- **(4a) Mathematical restriction (derivable).** If $A \cong M_d(\mathbb{C})$ is a finite-dimensional measurement subalgebra of a Type II factor and $\phi$ is a normal state, then $\phi|_A(a) = \mathrm{tr}_d(\rho_A \cdot a)$ for a unique ordinary $d \times d$ density matrix $\rho_A$. If the embedding is trace-preserving, the Type II trace restricts to the normalized matrix trace on $A$. *This is standard mathematics.*
+
+- **(4b) Empirical calibration (irreducible).** The identifications:
+  - this detector $\leftrightarrow$ this projection / effect;
+  - this preparation $\leftrightarrow$ this density;
+  - this pointer event $\leftrightarrow$ this subalgebra;
+  - this finite-dimensional operational model $\leftrightarrow$ the right model of the actual lab.
+  
+  Operational reconstructions (Hardy 2001; Chiribella-D'Ariano-Perinotti 2011; Masanes-Müller 2011; Brukner-Zeilinger) derive the Born pairing from operational axioms — but the axioms themselves are physical/empirical inputs. *Calibration is not eliminated; it is relocated.*
+
+**The irreducible part is small but real.** Any deterministic theory needs (4b). It is the analog of the bridge from Liouville measure to thermodynamic ensembles in classical statistical mechanics.
+
+**POVMs and instruments.** Modern operational treatments use POVMs (effects) rather than PVMs (projections). For sequential measurements and state update, Davies-Lewis / Ozawa instruments are the appropriate framework. The QIQT-H paper should include POVM formulations in §7.6 and §7.7 to avoid the bare-qubit Gleason exception.
+
+#### 11.4.5 Dynamics, equivariance, and locality
+
+The conditional Born typicality theorem (`BornTypicality.lean`) requires three additional physical inputs:
+
+- **Equivariance theorem.** If $\rho_t = U_t \rho_0 U_t^*$ under FQ-restricted unitary dynamics, then $\mu_{\rho_t}(p) = \mu_{\rho_0}(U_t^* p U_t)$. For QFT-style Hamiltonians, this requires careful treatment of domain / self-adjointness issues. The `EquivarianceGap.lean` audit establishes that support preservation (the framework's current claim) is strictly weaker than measure preservation.
+
+- **Projection locality.** Need precise assumptions on the local algebraic structure: tensor product factorisation (or its absence in Type III), commuting local algebras (microcausality), split property, finite corners. The `CompressionLocality.lean` audit isolates the compression-locality leakage identity and identifies when the FQ projection preserves microcausality at the restricted level.
+
+- **Empirical frequency bridge.** If μ is interpreted as typicality (rather than primitive probability), one needs a DGZ-style step from typical initial configurations to observed frequencies. The `BornTypicality.lean` module formalizes this conditionally via standard finite LLN.
+
+#### 11.4.6 Typicality vs probability
+
+**The conceptual framing.** QIQT-H is fully deterministic; the "measure" $\mu_\rho$ is a *typicality structure* on the microscopic-IC space (à la Dürr-Goldstein-Zanghì 1992 in Bohmian mechanics), not a primitive probability assignment. The candidate routes for canonicality (§7.4 α/β/γ) are typicality principles, not probability axioms.
+
+**Caveats and references:**
+- **Goldstein-Struyve uniqueness** (J. Stat. Phys. 128, 1197, 2007): in Bohmian mechanics, $|\psi|^2$ is the unique local equivariant typicality density. The adaptation to QIQT-H's Type II + (FQ) setting is precisely the multi-week mathematical task of Sub-theorem C.
+- **Valentini nonequilibrium** (1991, 2002; Valentini-Westman 2005): there exist non-Born typicality measures whose dynamics relaxes (or fails to relax) to equilibrium. This is the principled objection to "canonical = equivariant" — equivariance is necessary but may not be sufficient without an additional relaxation argument.
+- **Noncontextuality** in this deterministic-with-typicality setting refers to the equilibrium probability assignment to quantum effects (Spekkens 2005 generalised noncontextuality), *not* to noncontextual pre-existing values (which Kochen-Specker rules out in $d \ge 3$).
+
+#### Combined: what is and is not open
+
+| Layer | Item | Status |
+|---|---|---|
+| 11.4.1 | Mackey-Gleason + RN representation theorem | Standard math; Mathlib formalisation gap (multi-week) |
+| 11.4.2 | Existence in finite Type II ($II_1$) | Standard math; Lean formalisation gap (constructive) |
+| 11.4.3 | Canonical normalised probability state on $II_\infty$ | **Sharply obstructed**; requires density or finite corner or additional principle |
+| 11.4.3a | Type III ↔ Type II crossed-product correspondence for IC measure | Open; mathematically non-trivial |
+| 11.4.4a | Type II → finite-dim restriction (math) | Standard math |
+| 11.4.4b | Empirical lab-to-formalism calibration | Irreducible empirical bridge (no derivation in any framework eliminates it) |
+| 11.4.5 | Equivariance theorem under FQ-restricted Hamiltonian | Open; requires concrete FQ-Hamiltonian + self-adjointness analysis |
+| 11.4.6 | Justification of typicality framing (Goldstein-Struyve adaptation; Valentini relaxation) | Open; multi-year research direction |
+
+**Bottom line.** The Canonical IC Measure Principle is **not** a monolithic mystery. The hard parts are: the $II_\infty$ canonicality obstruction (11.4.3); the Type III correspondence (11.4.3a); the equivariance theorem for FQ-restricted dynamics (11.4.5); and the typicality justification (11.4.6). The mathematical core (11.4.1, 11.4.2, 11.4.4a) is standard given operator-algebra infrastructure; the empirical calibration (11.4.4b) is irreducible.
 
 **Open Problem 2 — Reference-weight bound (sharpened H2).**
 The record-instantiation-cost postulate (H2 in Theorem 6) is *equivalent* to the reference-weight bound $\sigma_R(E_{\rm record}) \le \exp(-(I_0 - \eta_0))$ on macroscopic pointer sectors (see §7.6 Sharpening of (H2); formalized in `lean/mathlib/QIQTH/H1H2Audit.lean`). Derive this reference-weight bound from modular / holographic first principles, as a strengthening of standard Bekenstein-Bousso. Donald's identity + Klein positivity + DPI alone are insufficient. This is genuinely new physics; progress here feeds directly into Open Problem 3.
