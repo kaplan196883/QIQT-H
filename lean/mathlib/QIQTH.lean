@@ -26,3 +26,6 @@ import QIQTH.NoConcentration
 import QIQTH.EntropyBridge
 import QIQTH.BranchLedger
 import QIQTH.ArakiInterface
+-- Final non-entropy audits proposed by GPT-5.5-pro:
+import QIQTH.FQDynamicsNoGo
+import QIQTH.CompressionLocality
