@@ -206,12 +206,22 @@ be the local von Neumann algebra. The hatted algebra $\hat{\mathcal{A}}(R)$ deno
 
 *(i) **Local normality.** The physical content of $|\Psi\rangle_{\rm run}$ in $R$ is given by the regional restriction $\omega_\Psi|_R$. This restriction must be a normal state on $\hat{\mathcal{A}}(R)$, equivalently, a positive unital $\sigma$-weakly continuous linear functional, $\omega_\Psi|_R \in \hat{\mathcal{A}}(R)_*^+$ with $\|\omega_\Psi|_R\| = 1$.*
 
-*(ii) **Finite holographic modular budget.** The renormalized entropy $S_{\rm ren}(\omega_\Psi)$ on $\hat{\mathcal{A}}(R)$, equivalently, the Araki relative entropy $\chi_R(\omega_\Psi|_R)$ with respect to the reference state $\sigma_R$ (§7.6), is bounded by the area-law generalized entropy:*
+*(ii) **Finite holographic modular budget.** Define the regional information functional as the Araki relative entropy with respect to the canonical sector reference state $\sigma_R$ (§7.6):*
 $$
-\chi_R(\omega_\Psi|_R) \;=\; S^{\hat{\mathcal{A}}(R)}_{\rm Araki}(\omega_\Psi|_R \,\|\, \sigma_R) \;\le\; Q_R \;\equiv\; C(R) \;:=\; \frac{A(\partial R)}{4\ell_P^2}.
+\chi_R(\omega_\Psi|_R) \;:=\; S^{\hat{\mathcal{A}}(R)}_{\rm Araki}(\omega_\Psi|_R \,\|\, \sigma_R).
+$$
+*The (FQ) postulate (ii) is the modular-local bound:*
+$$
+\chi_R(\omega_\Psi|_R) \;\le\; Q_R \;\equiv\; C(R) \;:=\; \frac{A(\partial R)}{4\ell_P^2}.
 $$
 
 *(The symbols $Q_R$ and $C(R)$ are used interchangeably throughout for the regional holographic capacity. We retain both because $Q_R$ emphasizes "information capacity" while $C(R)$ emphasizes "modular-cost ceiling"; the underlying quantity is identical.)*
+
+*Notational caveat: we will also write this functional as $S_{\rm ren}(\omega_\Psi)$ for emphasis on "modular-local information content", and (FQ)(ii) then reads $S_{\rm ren}(\omega_\Psi) \le Q_R$. This $S_{\rm ren}$ is **not** the same functional as the CPW/Witten "renormalized entropy" of the state on the Type II crossed-product algebra — they are distinct functionals related by the modular identity*
+$$
+\chi_R(\omega) \;=\; \Delta_\omega \langle K_R^\sigma \rangle - \Delta_\omega S_R^{\rm CPW}
+$$
+*where $K_R^\sigma$ is the modular Hamiltonian of $\sigma_R$ and $S_R^{\rm CPW}$ is the CPW renormalized entropy. **The (FQ) bound is on the relative-entropy functional $\chi_R$, not on the CPW renormalized entropy.** The two functionals can disagree substantially (a state may satisfy one bound and violate the other; see the formal verification module `lean/mathlib/QIQTH/EntropyBridge.lean` for a classical counterexample making this concrete).*
 
 *(iii) The wave function $|\Psi\rangle_{\rm run}$ is regarded as a physical object instantiated in spacetime. The total physical information content needed to instantiate $|\Psi\rangle_{\rm run}$ in $R$, including amplitudes, phase coherence, superposition structure, is bounded by $Q_R$. Two abstract wave functions whose physical instantiations in $R$ are indistinguishable at the precision afforded by this bound are physically identical in $R$.*
 

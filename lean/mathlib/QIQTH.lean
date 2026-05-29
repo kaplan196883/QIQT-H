@@ -22,3 +22,7 @@ import QIQTH.Tsirelson
 -- Central audits proposed by GPT-5.5-pro:
 import QIQTH.H1H2Audit
 import QIQTH.NoConcentration
+-- Entropy-focused audits from second GPT-5.5-pro consultation:
+import QIQTH.EntropyBridge
+import QIQTH.BranchLedger
+import QIQTH.ArakiInterface
