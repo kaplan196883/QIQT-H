@@ -37,3 +37,5 @@ import QIQTH.BornTypicality
 import QIQTH.TypicalityMackeyGleason
 import QIQTH.OperationalNoGo
 import QIQTH.FQEquivarianceUniqueness
+-- Concrete finite-dim Goldstein-Struyve (Steps 2, 4 proved; 1, 3 axiomatized):
+import QIQTH.GoldsteinStruyveFinDim
