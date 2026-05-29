@@ -13,7 +13,7 @@ We develop a foundational framework for quantum mechanics that combines the alge
 
 **Keywords:** foundations of quantum mechanics; Bekenstein-Bousso bound; holographic principle; Type II von Neumann algebras; crossed product; generalized entropy; finite-resolution wave function; ensemble interpretation; typicality.
 
-**Formal verification.** The deductive core of this framework — Theorems 3, 6, 7, Lemma 1, Donald's identity, the no-signaling chain, the Bell/CHSH inequality (with rigorous singlet construction reaching $2\sqrt{2}$), and seven structural audits (independence of (H2) from (H1) plus its sharp reference-weight reformulation; unitary decoherence does not imply concentration; the modular-local entropy bound is distinct from the CPW renormalized entropy; branch-summed cost is not a holographic consequence; literal-finite (FQ) admissibility gives trivial dynamics; compression-locality leakage and the local-projection constraint on (FQ); $\mu$-selection is load-bearing for Born statistics; support preservation $\neq$ Born equivariance) — is machine-verified in Lean 4 with Mathlib. See `lean/mathlib/QIQTH/` in the project repository.
+**Formal verification.** The deductive core of this framework — Theorems 3, 6, 7, Lemma 1, Donald's identity, the no-signaling chain, the Bell/CHSH inequality (with rigorous singlet construction reaching $2\sqrt{2}$), seven structural audits (independence of (H2) from (H1) plus its sharp reference-weight reformulation; unitary decoherence does not imply concentration; the modular-local entropy bound is distinct from the CPW renormalized entropy; branch-summed cost is not a holographic consequence; literal-finite (FQ) admissibility gives trivial dynamics; compression-locality leakage and the local-projection constraint on (FQ); $\mu$-selection is load-bearing for Born statistics; support preservation $\neq$ Born equivariance), and three sub-theorems for the Canonical IC Measure Principle (typicality Mackey-Gleason; operational data insufficient; FQ-equivariance uniqueness) — is machine-verified in Lean 4 with Mathlib. See `lean/mathlib/QIQTH/` in the project repository.
 
 ---
 
@@ -1116,6 +1116,22 @@ Construct, for each preparation state $\rho$, a measure $\mu_\rho$ on the QIQT-H
 
   Machine-verified audits confirming this is genuinely open: `NoBornFromNothing.lean` (any distribution realizable; the structural axioms do not pick out Born), `EquivarianceGap.lean` (support preservation $\neq$ Born equivariance).
 
+  **Concrete attack plan: three sub-theorems.** Following Goldstein-Struyve's uniqueness argument for Bohmian $|\psi|^2$-equilibrium (J. Stat. Phys. 128, 1197, 2007) and the Mackey-Gleason / noncommutative Radon-Nikodym machinery of vN-algebra theory, the Canonical IC Measure Principle decomposes into three sub-theorems, all three of which are now Lean-formalized as conditional theorems at the operator-algebra interface layer:
+
+  - **Sub-theorem A — Typicality Mackey-Gleason** (`TypicalityMackeyGleason.lean`). Normal, additive, normalized, noncontextual typicality weights on the IC projection algebra $\mathcal{C}_{\rm IC} \subset \hat{\mathcal{A}}(R)$ are uniquely of the **trace-density form**
+  $$\mu(P_B) = \tau_R(D \cdot P_B)$$
+  for a positive density operator $D \in L^1(\hat{\mathcal{A}}(R), \tau_R)$. Conditional on the standard Mackey-Gleason theorem (Bunce-Wright 1990s extending classical Gleason to general vN algebras) and the noncommutative Radon-Nikodym theorem (Sakai, Takesaki); both axiomatized at the interface layer since Mathlib does not yet have them in this generality.
+
+  - **Sub-theorem B — Operational no-go** (`OperationalNoGo.lean`). Concrete witness on a 3-element IC space mapping to a 2-element outcome space: two distinct IC measures $\mu_1 = (1/4, 1/4, 1/2)$ and $\mu_2 = (1/2, 0, 1/2)$ produce identical outcome marginals $(1/2, 1/2)$. Operational frequency data therefore cannot distinguish them; structural input from sub-theorems A and C is required to pick out a unique $\mu_\rho$. Fully proved, no axioms.
+
+  - **Sub-theorem C — Goldstein-Struyve uniqueness for QIQT-H** (`FQEquivarianceUniqueness.lean`). Among trace-density typicality structures, **locality + naturality + FQ-equivariance** uniquely fix the canonical density $D = D_\rho^{\rm can}$. Conditional on the QIQT-H-specific Goldstein-Struyve uniqueness theorem (which adapts the 2007 Bohmian result to the CPW Type II crossed-product algebraic setting with FQ-restricted dynamics); this adaptation is the genuinely new mathematical work the framework owes.
+
+  **Combined:** sub-theorems A + C deliver the full Canonical IC Measure Principle as a **Nernst-style consistency derivation** — *the canonical IC measure is not an independent postulate; it is forced by structural consistency among Mackey-Gleason additivity, Goldstein-Struyve locality/naturality, and FQ-Hamiltonian equivariance*. Sub-theorem B confirms that this derivation cannot be achieved by operational axioms alone, motivating the need for the structural input from A and C.
+
+  **What remains genuinely open after the three sub-theorems:**
+   1. *Mathematical:* prove the QIQT-H-specific Goldstein-Struyve uniqueness theorem (sub-theorem C's interface axiom). Adapts a 2007 result from Bohmian guiding-equation dynamics to QIQT-H's Type II + (FQ) setting.
+   2. *Physical:* justify the **measurement-calibration step** — identify the canonical density $D_\rho^{\rm can}$ at QIQT-H state $\rho$ with the standard QM density operator. This is the actual physical content of Born and cannot be derived from typicality structure alone; it is the irreducible bridge from formal mathematics to empirical observation (analogous to the bridge from Liouville measure to thermodynamic ensembles in classical statistical mechanics).
+
 **Open Problem 2 — Reference-weight bound (sharpened H2).**
 The record-instantiation-cost postulate (H2 in Theorem 6) is *equivalent* to the reference-weight bound $\sigma_R(E_{\rm record}) \le \exp(-(I_0 - \eta_0))$ on macroscopic pointer sectors (see §7.6 Sharpening of (H2); formalized in `lean/mathlib/QIQTH/H1H2Audit.lean`). Derive this reference-weight bound from modular / holographic first principles, as a strengthening of standard Bekenstein-Bousso. Donald's identity + Klein positivity + DPI alone are insufficient. This is genuinely new physics; progress here feeds directly into Open Problem 3.
 
@@ -1156,7 +1172,7 @@ The per-record physical cost $I_0$ is a phenomenological parameter, analogous to
 
 **Strategic note.** Of the central open problems, the audit work suggests two bottleneck chains:
 
-  • **Foundations bottleneck:** Open Problem 1 (canonical $\mu$-selection / equivariance). Progress here transforms the Born section from conditional to substantive, and is the most pressing problem for foundations-of-QM defensibility.
+  • **Foundations bottleneck:** Open Problem 1 (canonical $\mu$-selection / equivariance). Now decomposed into three sub-theorems A, B, C (see above). Two of the three are direct applications of existing operator-algebra machinery (Mackey-Gleason + noncommutative Radon-Nikodym); the third requires adapting the Goldstein-Struyve 2007 uniqueness theorem from Bohmian dynamics to QIQT-H's Type II / (FQ) setting. Progress here transforms the Born section from conditional to substantive, and is the most pressing problem for foundations-of-QM defensibility.
 
   • **Quantitative-emergence bottleneck:** Open Problem 2 (reference-weight bound) $\Rightarrow$ Open Problem 3 (Concentration) $\Rightarrow$ Open Problem 4 ($\epsilon(R)$) $\Rightarrow$ Open Problem 5 ($I_0$ calibration). Progress on Open Problem 2 unlocks the quantitative QIQT-H pipeline.
 
