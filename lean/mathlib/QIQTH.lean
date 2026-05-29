@@ -33,3 +33,7 @@ import QIQTH.CompressionLocality
 import QIQTH.NoBornFromNothing
 import QIQTH.EquivarianceGap
 import QIQTH.BornTypicality
+-- Sub-theorems A, B, C for the Canonical IC Measure Principle:
+import QIQTH.TypicalityMackeyGleason
+import QIQTH.OperationalNoGo
+import QIQTH.FQEquivarianceUniqueness
