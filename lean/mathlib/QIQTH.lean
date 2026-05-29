@@ -32,3 +32,4 @@ import QIQTH.CompressionLocality
 -- Born-rule audits from fourth GPT-5.5-pro consultation:
 import QIQTH.NoBornFromNothing
 import QIQTH.EquivarianceGap
+import QIQTH.BornTypicality
