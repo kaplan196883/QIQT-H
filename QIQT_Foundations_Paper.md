@@ -13,6 +13,8 @@ We develop a foundational framework for quantum mechanics that combines the alge
 
 **Keywords:** foundations of quantum mechanics; Bekenstein-Bousso bound; holographic principle; Type II von Neumann algebras; crossed product; generalized entropy; finite-resolution wave function; ensemble interpretation; typicality.
 
+**Formal verification.** The deductive core of this framework — including Theorems 3, 6, 7, Lemma 1, Donald's identity, the no-signaling chain, the Bell/CHSH inequality (with rigorous singlet construction reaching $2\sqrt{2}$), and two central structural audits (independence of (H2) from (H1) plus its sharp reference-weight reformulation; unitary decoherence does not imply concentration) — is machine-verified in Lean 4 with Mathlib. See `lean/mathlib/QIQTH/` in the project repository.
+
 ---
 
 ## 1. Introduction
@@ -524,6 +526,8 @@ Denial of measurement independence preserves: no preferred foliation; no explici
 
 *Remark on the role of the concentration claim.* The concentration claim of §6.2 is that per-run amplitudes evolve dynamically toward $0$ or $1$. Whether this convergence is exact mathematically or only approximate is irrelevant to Theorem 4: the (FQ) resolution floor makes "approximate convergence to within $\epsilon$" physically equivalent to "exact convergence to $0$ or $1$." Standard decoherence + microscopic IC give the approximate convergence; (FQ) supplies the precision floor at which approximate becomes exact physically. This is the cooperative role of the two ingredients.
 
+*Remark on decoherence as the load-bearing ingredient.* A machine-verified audit (`lean/mathlib/QIQTH/NoConcentration.lean`) confirms that linear unitary measurement-decoherence **alone** cannot produce single-record concentration: branch weights $|c_k|^2$ are conserved by unitarity, not concentrated toward $0$ or $1$. The equal-superposition input $\psi = (|0\rangle + |1\rangle)/\sqrt{2}$ leaves post-measurement weights exactly $(1/2, 1/2)$, never $(1, 0)$ or $(0, 1)$. Theorem 4 therefore relies essentially on at least one of: (a) non-linear amplitude truncation via the (FQ) literal reading, (b) microscopic-IC selection of a single trajectory through the (FQ)-restricted dynamics, or (c) the Concentration Conjecture of §6.2 as an independent dynamical postulate. The framework's position is that (a) + (b) jointly suffice: (FQ) restricts the physical Hamiltonian to $\mathcal{H}_{\rm phys}$ (non-unitarily on the unrestricted Hilbert space), and microscopic initial conditions then determine which single-record branch is realized. The audit's value is forcing this distinction: "decoherence" by itself does not select.
+
 ### 7.4 Theorem (Born statistics from typicality, schematic)
 
 **Theorem 5 (Born from typicality, schematic).** *If the measure $\mu$ on microscopic initial conditions is appropriately chosen, then for a standard preparation/measurement procedure with formal Born weights $|c_k|^2$, the empirical relative frequency of macroscopic outcome $k$ (the record above the resolution threshold in the per-run wave function) across many runs converges to $|c_k|^2$.*
@@ -688,6 +692,10 @@ $$
 *Proof.* Donald's identity $(\star)$ is a standard property of Araki relative entropy on a von Neumann algebra (Donald 1986; cf. Ohya-Petz 1993, Thm 5.21). Under (H1), the LHS of $(\star)$ is bounded by $C(R)$. Under (H2), the term $\chi_R(\bar\omega_R)$ in the RHS of $(\star)$ is at least $I_0 - \eta_0$. Rearranging gives the bound on $I_{\rm Hol}^R$. Applying (H3) gives the bound on $H_\epsilon$. The smoothed support bound follows by Markov's inequality on $-\log \tilde p_k$, and $\tilde p_{\max} \ge e^{-H_\epsilon}$ gives the saturation conclusion. $\blacksquare$
 
 **Status of the assumptions.** (H1) is a direct consequence of $\omega \in \mathcal{S}_{\rm phys}$ provided each $\omega_{k,R}$ inherits admissibility, natural under the branchwise instrument condition of §7.6. (H3), operational distinguishability, is the formal expression of macroscopic record decodability, established under decoherence + Quantum Darwinism for the macroscopic-record subalgebra (§6.4–6.7). (H2) is the *independent framework postulate*: it asserts that physical instantiation of a macroscopic record on $R$ requires modular cost $\ge I_0$. This is *not* a theorem of standard AQFT or holography; it is the framework's central commitment, calibrated empirically against the observed quantum-to-classical transition scale.
+
+**Sharpening of (H2) — reference-weight form.** A machine-verified audit (see `lean/mathlib/QIQTH/H1H2Audit.lean` in the project repository) confirms that (H2) is genuinely independent of (H1), Donald's identity, Klein positivity, and DPI: a classical KL countermodel with $\sigma=(1/2,1/2)$ and $\rho=\delta_0$ satisfies all the structural hypotheses but violates (H2) with $I_0=1$. The same audit also yields the following sharp structural reformulation of (H2). For a perfect-record state on event $E_{\rm record}$,
+$$\chi_R(\bar\omega_R) \ge I_0 - \eta_0 \quad \Longleftrightarrow \quad \sigma_R(E_{\rm record}) \le e^{-(I_0 - \eta_0)}.$$
+Equivalently: (H2) is the assertion that **macroscopic record sectors occupy exponentially small reference-weight** under the canonical sector reference state $\sigma_R$. This identifies the load-bearing physical content of (H2): not the positivity of relative entropy (which Klein already provides), but a reference-weight bound on pointer sectors that a future first-principles derivation must obtain from modular/holographic structure on macroscopic records.
 
 **Conditional modular estimate of Born-weight deviations.** Let $\mu$ be the Born measure over conditional record states $r \mapsto \omega_r$, and define the inadmissible set
 $$

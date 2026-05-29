@@ -13,6 +13,8 @@ We present a fully worked mathematical account of the double-slit experiment in 
 
 **Keywords:** double-slit experiment; holographic principle; Bekenstein-Bousso bound; Type II algebra; crossed product; finite-precision wave function; measurement problem; decoherence.
 
+**Formal verification.** The framework's deductive core (Theorems 3, 6, 7, Lemma 1, Donald's identity, no-signaling, Bell/CHSH inequalities with rigorous singlet construction, plus structural audits of (H1)/(H2) independence and decoherence-vs-concentration) is machine-verified in Lean 4 with Mathlib. See `lean/mathlib/QIQTH/` in the project repository, including the worked double-slit instance (`QIQTH.DoubleSlit`) that exercises Theorem 6 on the screen-region branch decomposition discussed in §9A.
+
 ---
 
 ## 1. Introduction
@@ -442,6 +444,10 @@ $$
 Hence the bound is on the *effective* number of spots, not on the raw cardinality of the active set. Single-spot-per-run is *exact* only at exact saturation $I_0 = C(R_S)$ and $\eta_0 = \eta_{\rm def} = 0$; for finite tolerances the bound weakens to $H_\epsilon \le \eta_0 + \eta_{\rm def}$, meaning one spot dominates with probability $\ge 1 - O(\eta_0 + \eta_{\rm def})$ while the others are exponentially suppressed. For the screen example with $C(R_S) \sim 10^{68}$ nats and macroscopic record cost $I_0$ of comparable order, this saturation condition is exactly what calibration of $I_0$ against the observed quantum-to-classical transition is supposed to deliver. The discussion in §9A.3–9A.7 below treats this effective statement as the operational content.
 
 The framework's central commitment is the **record-instantiation-cost postulate (H2)**: instantiating a macroscopic record on $R_S$ requires modular cost at least $I_0$. This is an independent postulate beyond standard AQFT / holography and is calibrated empirically.
+
+**Sharpened structural form of (H2).** A machine-verified audit (`lean/mathlib/QIQTH/H1H2Audit.lean`) establishes that (H2) is genuinely independent of (H1), Donald's identity, Klein positivity, and DPI — a classical KL countermodel satisfying all four hypotheses violates (H2). The same audit yields the equivalent reformulation: for a perfect-record state on event $E_{\rm record}$,
+$$\chi_{R_S}(\bar\omega_{R_S}) \ge I_0 - \eta_0 \quad \Longleftrightarrow \quad \sigma_{R_S}(E_{\rm record}) \le e^{-(I_0 - \eta_0)}.$$
+Thus (H2) is exactly the assertion that **macroscopic record sectors have exponentially small reference weight** under the canonical sector reference state $\sigma_{R_S}$. A future derivation of (H2) from modular/holographic first principles must produce this reference-weight bound on pointer sectors; Donald's identity and Klein positivity alone are insufficient.
 
 ### 9A.1 The macroscopic record subalgebra and the spectrum of screen spots
 

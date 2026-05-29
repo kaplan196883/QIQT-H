@@ -4,6 +4,8 @@
 
 > **Important status note.** QIQT-H, as presented here, is a research-program framework, not an established theory like standard quantum mechanics or quantum field theory. The goal of this tutorial is not to claim that QIQT-H is already correct. The goal is to explain the pieces: what the mathematical ingredients mean, why they are being used, and how they are supposed to fit together.
 
+> **Formal verification.** The framework's deductive core — Theorems 3, 6, 7, Lemma 1, Donald's identity, no-signaling, the Bell/CHSH inequality with a rigorous singlet construction reaching $2\sqrt{2}$, and two structural audits (independence and sharp reference-weight reformulation of the record-cost postulate (H2); unitary decoherence alone cannot produce single-record concentration) — is machine-verified in Lean 4 with Mathlib. See `lean/mathlib/QIQTH/` in the project repository.
+
 ---
 
 # 0. What this is and how to read it
