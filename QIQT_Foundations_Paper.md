@@ -1101,6 +1101,9 @@ The open problems are *concrete and well-defined*: each can be attacked in princ
 The Lean audit work (see `lean/mathlib/QIQTH/` and the formal-verification footnote in the abstract) has sharpened the boundary between what the framework derives from FQ + AQFT + holography and what remains as load-bearing additional commitments. The open problems are reorganized here to reflect that sharpened boundary, with the Born / canonical-measure problem promoted to first position as the most central remaining commitment.
 
 **Open Problem 1 — Canonical IC Measure Principle (the central Born/typicality problem).**
+
+*Existence note.* Beyond the six structural sub-conditions listed below, the framework currently has *no existence proof* that a measure $\mu_\rho$ satisfying conditions (a)–(f) simultaneously exists in the full QIQT-H Type II setting. The sub-theorems A and C (machine-verified below) prove uniqueness *conditional on existence* of such a measure with the required normality/locality/equivariance structure. Demonstrating existence — either by explicit construction (e.g., via canonical trace pullback) or by a non-vacuity proof — is part of the open problem.
+
 Construct, for each preparation state $\rho$, a measure $\mu_\rho$ on the QIQT-H microscopic-IC space $\Omega_\rho$ satisfying:
    (a) **Canonicality** — defined from QIQT-H primitives, not fitted per measurement;
    (b) **Born pushforward** — $(O_M)_* \mu_\rho(i) = \mathrm{tr}(\rho E_i)$ for every allowed measurement protocol $M$ with effects $\{E_i\}$;
@@ -1177,6 +1180,53 @@ The per-record physical cost $I_0$ is a phenomenological parameter, analogous to
   • **Quantitative-emergence bottleneck:** Open Problem 2 (reference-weight bound) $\Rightarrow$ Open Problem 3 (Concentration) $\Rightarrow$ Open Problem 4 ($\epsilon(R)$) $\Rightarrow$ Open Problem 5 ($I_0$ calibration). Progress on Open Problem 2 unlocks the quantitative QIQT-H pipeline.
 
 These are the two genuinely open research directions left after the Lean audit work has clarified the deductive boundary. The remaining items (6–14) are infrastructure and phenomenology that follow once the bottlenecks are addressed.
+
+### 11.4a Claim-to-Lean theorem matrix
+
+The following table maps each major paper claim to its Lean theorem, with explicit status. Status labels:
+
+  • **U** — unconditional (no project-specific axioms; depends only on standard Lean axioms `propext`, `Classical.choice`, `Quot.sound`).
+  • **C** — conditional on a standard external theorem (Mathlib-citable; axiomatized at clean interface in the project).
+  • **P** — programmatic interface axiom (specific framework or AQFT-level axiom; concrete Lean discharge is a multi-day to multi-week task).
+  • **N** — negative audit / counterexample (proves a *non*-derivation).
+
+| Paper claim | Lean theorem | Status | Notes |
+|---|---|---|---|
+| Theorem 3 (resolution floor) | `Resolution.eps_pos` | U | $\varepsilon(R) > 0$ from finite $Q_R$ |
+| Lemma 1 (near-extreme indistinguishability) | `Resolution.lemma1_zero` | U | Discrete-bin formalization |
+| Theorem 6 (effective definiteness) | `Theorem6.effective_definiteness` | U | Donald-bound chain |
+| Theorem 6 inner step | `Theorem6.BranchData.holevo_le_capacity` | U | $I_{\rm Hol}^R \le C(R)$ from $\chi_R \le C(R)$ and Klein |
+| Theorem 7 (no-signaling) | `Theorem7.Setup.no_signaling` | U | From microcausality + locality |
+| Donald's identity | `Donald.donald_identity` | C | Conditional on 3 cross-entropy axioms (A1, A2, A3) |
+| Microcausality ⇒ locality (unitary) | `UnitarityLocality.locality_of_conjugation` | U | StarRing argument |
+| Microcausality ⇒ locality (Kraus) | `KrausLocality.kraus_channel_aliceFixing` | U | Generalization to CPTP channels |
+| Bell/CHSH inequality (LHV bound) | `Bell.LHVModel.chsh_le_two` | U | Finite probability + ±1 algebra |
+| Tsirelson saturation by singlet | `Tsirelson.singlet_chsh_abs_gt_two` | U | Explicit 4D real construction; attains $2\sqrt{2}$ exactly (does *not* prove the universal upper bound) |
+| (H1) ⇏ (H2) | `H1H2Audit.H1_does_not_imply_H2` | N | Classical KL countermodel |
+| (H2) ⇔ reference-weight bound | `H1H2Audit.H2_iff_reference_weight` | U | Sharp structural reformulation |
+| Decoherence ⇏ concentration | `NoConcentration.audit_conclusion` | N | Linear unitary preserves branch weights |
+| $S_{\rm ren}$ (paper) $\neq$ $S_{\rm ren}^{\rm CPW}$ | `EntropyBridge.fq_ambiguity_counterexample` | N | Classical KL counterexample distinguishing the two |
+| Branch-summed cost > Shannon possible | `BranchLedger.branchSummed_not_bounded_by_Shannon` | N | Binary uniform witness |
+| FQ-literal finite ⇒ trivial dynamics | `FQDynamicsNoGo.finite_admissible_flow_fixed` | U | Continuous flow on finite T2 space (only — not arbitrary finite-info dynamics) |
+| Compression-locality leakage identity | `CompressionLocality.compressed_commutator_with_commute` | U | Pure ring algebra |
+| Any $p$ realizable (no Born from nothing) | `NoBornFromNothing.exists_probability_realizing` | N | Concrete section-based construction |
+| Support preservation $\neq$ Born equivariance | `EquivarianceGap.support_preservation_does_not_imply_measure_preservation` | N | Concrete `Fin 2` counterexample |
+| Born typicality (mean form) | `BornTypicality.born_mean_conditional` | U | Conditional on canonical $\mu_\rho$ with Born marginal |
+| Operational data ⇏ unique IC measure | `OperationalNoGo.operational_data_insufficient` | N | Concrete `Fin 3` witness |
+| Sub-thm A (Typicality Mackey-Gleason) | `TypicalityMackeyGleason.qiqth_typicality_mackey_gleason` | C | Conditional on Mackey-Gleason + noncommutative Radon-Nikodym (standard operator-algebra theorems, axiomatized) |
+| Sub-thm C (FQ-equivariance uniqueness) | `FQEquivarianceUniqueness.canonical_ic_measure_principle` | P | Conditional on 4 axiomatized sub-steps (Schur, normalization, tensor-mult, non-degeneracy) |
+| GS Step 2 (normalization) | `GoldsteinStruyveFinDim.step2_normalization` | U | Concrete `Matrix.trace` computation |
+| GS Step 4 (non-degeneracy) | `GoldsteinStruyveFinDim.step4_nondegeneracy` | U | Direct case analysis |
+| GS Step 3 algebraic core | `GoldsteinStruyveStep3.step3_algebraic_core` | U | Polynomial identity via `ring` |
+| GS Step 3 Kronecker bridge | `GoldsteinStruyveKronecker.step3_kronecker_bridge` | U | Concrete `d = 2` witness with E₁₁ ⊗ E₁₁ |
+| GS Step 1 (Schur classification) | `GoldsteinStruyveStep1.step1_via_sub_lemmas` | P | Decomposed into 5 sub-axioms (complex-linear extension, diagonal-unitary basis preservation, permutation-unitary coefficient unification, Hadamard rotation, Hermitian restriction); concrete discharge is multi-week Lean work per sub-lemma |
+| Combined GS finite-dim theorem | `GoldsteinStruyveFinDim.goldstein_struyve_findim` | P | Proved by composition; inherits Step 1 + Step 3 axioms |
+
+**No-signaling clarification.** All "no-signaling" results in this paper are about *nonselective* CPTP instruments — the unconditional marginal probability after Bob's measurement, marginalized over outcomes (equivalently, the trace-preserving sum over Kraus operators). Selective post-measurement conditional states can change remotely once Bob's outcome is known; this is not "signaling" because the conditional update requires classical communication.
+
+**Tsirelson clarification.** The Lean module `QIQTH.Tsirelson` proves *attainability* of the value $2\sqrt{2}$ by an explicit singlet-state construction in 4-dimensional real Euclidean space (which is the achievability content of Tsirelson's theorem). The *upper bound* statement that CHSH $\le 2\sqrt{2}$ for *every* quantum state and *every* measurement choice — the full Tsirelson theorem — requires operator-norm machinery on C\*-algebras and is *not* proved in this formalization. The framework relies on the standard Tsirelson upper bound as a cited result.
+
+**Markov suppression clarification.** The `CapacityPacking` module formalizes only the *Markov-style* multi-record suppression (polynomial tail in the modular slack), explicitly *not* exponential suppression. Where the paper says "exponentially suppressed", the reference is to *decoherence-driven* exponential suppression of off-diagonal coherence (which is genuinely exponential, e.g., $e^{-10^{20}}$ for macroscopic environment dimensions), not to Markov-style multi-record suppression from the entropy bound alone.
 
 ### 11.5 Credit division
 

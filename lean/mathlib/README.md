@@ -1,5 +1,7 @@
 # QIQT-H Lean formalizations — Mathlib variant
 
+**Status:** 34 theorem-bearing modules + 1 axiom audit (35 total). 2062 build jobs, exit 0. Every "PROVED concretely" theorem depends only on the three standard Lean axioms (`propext`, `Classical.choice`, `Quot.sound`) — no `sorryAx`, no accidental project-axiom contamination. Verified via `QIQTH.AxiomAudit` (`lake build QIQTH.AxiomAudit` emits `#print axioms` for each key theorem).
+
 Mathlib-rooted proofs of QIQT-H Theorems 6, 7, Lemma 1, Theorem 3.
 
 The standalone counterparts in `../*.lean` axiomatize the arithmetic
