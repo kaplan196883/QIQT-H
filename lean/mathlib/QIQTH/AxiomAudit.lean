@@ -132,6 +132,8 @@ namespace QIQTH.AxiomAudit
 -- All of these should depend only on standard Lean/Mathlib axioms.
 
 -- A1: marginal locality from equivariance + local dynamics
+#print axioms QIQTH.MarginalLocality.pushforward_marginal_local
+-- expected: standard only — pure pushforward, NO equivariance assumption
 #print axioms QIQTH.MarginalLocality.marginal_invariant_of_local_dynamics
 -- expected: standard only
 #print axioms QIQTH.MarginalLocality.alice_marginal_unchanged_by_bob_dynamics
@@ -140,6 +142,8 @@ namespace QIQTH.AxiomAudit
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation
+#print axioms QIQTH.GoldsteinStruyveStep1.diagonalU_conj_matrixUnit
+-- expected: standard only — diagonal-character conjugation identity
 #print axioms QIQTH.GoldsteinStruyveStep1.step1c_collapse_of_perm_symmetric
 -- expected: standard only — Equiv.swap transitivity argument
 
@@ -152,6 +156,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — single sum + ring identity
 #print axioms QIQTH.BornConcentration.born_chebyshev_single_trial
 -- expected: standard only
+#print axioms QIQTH.BornConcentration.centered_first_moment_zero
+-- expected: standard only — centered first moment vanishes
+#print axioms QIQTH.BornConcentration.variance_add_of_product
+-- expected: standard only — variance adds for independent variables
+#print axioms QIQTH.BornConcentration.two_trial_bernoulli_variance
+-- expected: standard only — 2·p(1−p) via variance-addition
 
 -- A6: minimality / independence package
 #print axioms QIQTH.BornMinimalityTable.P1_canonical_measure_necessary

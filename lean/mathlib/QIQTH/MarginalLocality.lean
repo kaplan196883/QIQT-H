@@ -126,23 +126,48 @@ theorem marginal_invariant_of_local_dynamics
   · intro h
     exact absurd (Finset.mem_univ (T a)) h
 
-/-- **Corollary: equivariant measure has local marginal.**
+/-- **Pure-pushforward marginal locality (the no-signaling core).**
 
-    If `μ` is `T`-equivariant *and* `T` is local under `r`, then we can
-    replace `μ` with `pushForward T μ` inside `pushForward r` without
-    changing the marginal.  This is the cleanest "no-signaling at the
-    measure level" statement: Bob's local dynamics `T` cannot affect
-    the marginal that Alice sees. -/
-theorem alice_marginal_unchanged_by_bob_dynamics
+    If `T : α → α` is local under the restriction `r : α → β`
+    (`r ∘ T = r`), then pushing `μ` through `T` and *then* restricting
+    to Alice gives the same marginal as restricting directly:
+
+        `pushForward r (pushForward T μ) = pushForward r μ`.
+
+    **Crucially, this requires NO equivariance assumption on `μ`.**  The
+    locality of `T` under `r` alone forces the `r`-marginal to be
+    `T`-invariant.  This is the cleanest "no-signaling at the measure
+    level" statement: Bob's local dynamics `T` cannot affect the
+    marginal Alice sees, for *any* underlying IC measure `μ` whatsoever
+    — equilibrium, nonequilibrium (Valentini), or arbitrary.
+
+    Stated this way the conclusion is manifestly not baked into the
+    hypotheses: nothing about Born, equivariance, or stationarity is
+    assumed; only that `T` is invisible to `r`. -/
+theorem pushforward_marginal_local
     {α β : Type*} [Fintype α] [DecidableEq α] [DecidableEq β]
     (r : α → β) (T : α → α)
     (h_local : IsLocalUnder r T)
-    (μ : α → ℝ) (_h_equiv : IsEquivariant T μ) :
+    (μ : α → ℝ) :
     pushForward r (pushForward T μ) = pushForward r μ := by
   -- `pushForward T μ` is definitionally `fun b => ∑ a, if T a = b then μ a else 0`,
   -- which is exactly the shape `marginal_invariant_of_local_dynamics` expects.
   show pushForward r (fun b => ∑ a, if T a = b then μ a else 0) = pushForward r μ
   exact marginal_invariant_of_local_dynamics r T h_local μ
+
+/-- **Corollary: equivariant measure has local marginal.**
+
+    The special case of `pushforward_marginal_local` where `μ` is
+    additionally `T`-equivariant.  Kept for downstream compatibility
+    (`BornMinimalityTable`), but note the equivariance hypothesis is
+    *not used* — the conclusion follows from locality of `T` alone. -/
+theorem alice_marginal_unchanged_by_bob_dynamics
+    {α β : Type*} [Fintype α] [DecidableEq α] [DecidableEq β]
+    (r : α → β) (T : α → α)
+    (h_local : IsLocalUnder r T)
+    (μ : α → ℝ) (_h_equiv : IsEquivariant T μ) :
+    pushForward r (pushForward T μ) = pushForward r μ :=
+  pushforward_marginal_local r T h_local μ
 
 /- ── Instantiation: unitary-dilation special case ──────────────────── -/
 
@@ -183,24 +208,35 @@ theorem born_marginal_local_under_bob_unitary
   alice_marginal_unchanged_by_bob_dynamics r T
     (set_level_locality_from_unitary_dilation (α := α) (β := β) r T h_alg) μ h_equiv
 
-/-- **Audit conclusion.**
+/-- **Audit conclusion (carefully stated).**
 
-    The Canonical IC Measure Principle's "locality" sub-axiom
-    (originally posed as an independent assumption alongside Mackey-
-    Gleason / equivariance / typicality) reduces to a *theorem* about
-    equivariant measures, given:
+    The Canonical IC Measure Principle's *measure-level* locality
+    (no-signaling of Alice's marginal under Bob's local dynamics) splits
+    into two parts:
 
-      (a) the algebraic-level locality of Bob's channel (proved in
-          UnitarityLocality / KrausLocality / CompressionLocality), and
-      (b) the set-level bridging axiom
-          `set_level_locality_from_unitary_dilation` (a Heisenberg ↔
-          Schrödinger correspondence, standard in operational
-          frameworks).
+      (1) **The finite marginal-invariance step — PROVED unconditionally.**
+          `pushforward_marginal_local`: given `r ∘ T = r`, Alice's
+          marginal is `T`-invariant for *any* IC measure `μ` (no
+          equivariance assumption).  This is the substantive
+          no-signaling content at the measure level, and it depends on
+          no project axioms.
 
-    Net effect: one Canonical IC sub-axiom is discharged; the
-    Principle's irreducible content shrinks from 4 to 3 named
-    sub-axioms (canonical-measure principle, operational sufficiency,
-    FQ equivariance).  Locality is no longer separately postulated. -/
+      (2) **The Hilbert-to-set locality bridge — REMAINS an axiom.**
+          `set_level_locality_from_unitary_dilation`: that a Bob-local
+          unitary's Heisenberg-picture locality (proved algebraically in
+          UnitarityLocality / KrausLocality / CompressionLocality) lifts
+          to set-level locality `r ∘ T = r` of the IC dynamics.  This is
+          a Heisenberg ↔ Schrödinger correspondence; it is named and
+          explicit, not eliminated.
+
+    Net effect, stated honestly: the finite marginal-locality step is
+    now a theorem (part 1), so locality is no longer an *independent*
+    Canonical IC sub-axiom on the same footing as the canonical-measure
+    principle, operational sufficiency, and FQ-equivariance.  But the
+    reduction is *conditional* on the bridge axiom (part 2): locality
+    has been relocated into the (well-understood, standard) bridge, not
+    derived from nothing.  The irreducible *Born-selection* content is
+    {P1, P2, P3} relative to the current finite formal decomposition. -/
 theorem audit_conclusion : True := trivial
 
 end MarginalLocality

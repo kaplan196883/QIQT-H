@@ -296,72 +296,115 @@ theorem step1c_collapse_of_perm_symmetric
   · intro i
     exact diag_const_of_perm_symmetric c hc i ⟨0, by omega⟩
 
-/- ── Original axiomatized interface (kept for downstream consumers) ── -/
+/- ── PROVED: diagonal-unitary conjugation foundation lemmas ───────── -/
 
-/-- **Sub-lemma 1a (axiom).** Complex-linear extension.  Structural
-    placeholder. -/
-axiom step1a_complex_linear_extension
-    (d : ℕ)
-    (D : @GoldsteinStruyveFinDim.DensityFunctional d)
-    (h_lin : GoldsteinStruyveFinDim.IsLinear D)
-    (h_uniteq : GoldsteinStruyveFinDim.IsUnitaryEquivariant D) :
-    True
+/-- Diagonal unitary parameterised directly by a coefficient vector
+    `z : Fin d → ℂ` (self-contained; avoids `Complex.exp` / `Circle`
+    analytic infrastructure).  `diagonalU z _{kk} = z k`,
+    `diagonalU z _{kl} = 0` for `k ≠ l`.  For a *unitary* diagonal one
+    takes each `z k` of unit modulus (`z k · star (z k) = 1`); but the
+    conjugation identity below holds for *any* diagonal `z`. -/
+noncomputable def diagonalU (d : ℕ) (z : Fin d → ℂ) :
+    Matrix (Fin d) (Fin d) ℂ :=
+  fun k l => if k = l then z k else 0
 
-/-- **Sub-lemma 1b (axiom, hypothesis-strengthened).**
+/-- `(diagonalU z · M)_{kl} = z k · M_{kl}` (scales row `k`). -/
+lemma diagonalU_mul_apply (d : ℕ) (z : Fin d → ℂ)
+    (M : Matrix (Fin d) (Fin d) ℂ) (k l : Fin d) :
+    (diagonalU d z * M) k l = z k * M k l := by
+  show ∑ m, diagonalU d z k m * M m l = _
+  rw [Finset.sum_eq_single k]
+  · simp [diagonalU]
+  · intro m _ hne
+    have hkm : k ≠ m := fun h => hne h.symm
+    simp [diagonalU, hkm]
+  · intro h; exact absurd (Finset.mem_univ k) h
 
-    *Original (literally false) form:* for any T, matrix units E_ij are
-    fixed up to scalars.
+/-- `(M · diagonalU z)_{kl} = M_{kl} · z l` (scales column `l`). -/
+lemma mul_diagonalU_apply (d : ℕ) (z : Fin d → ℂ)
+    (M : Matrix (Fin d) (Fin d) ℂ) (k l : Fin d) :
+    (M * diagonalU d z) k l = M k l * z l := by
+  show ∑ m, M k m * diagonalU d z m l = _
+  rw [Finset.sum_eq_single l]
+  · simp [diagonalU]
+  · intro m _ hne
+    simp [diagonalU, hne]
+  · intro h; exact absurd (Finset.mem_univ l) h
 
-    *Corrected form:* under the implicit hypothesis that T is
-    diagonal-unitary-equivariant (i.e., conjugation by every diagonal
-    unitary commutes with T), the matrix units E_ij are fixed up to
-    scalars.  Concrete discharge requires complex-exponential
-    infrastructure for D(θ)_{kk} = e^{iθ_k} plus a multi-θ separating-
-    character argument; left as an axiom at this layer. -/
-axiom step1b_basis_preservation
-    (d : ℕ) (hd : 0 < d)
-    (T : Matrix (Fin d) (Fin d) ℂ → Matrix (Fin d) (Fin d) ℂ) :
-    ∃ c : Fin d → Fin d → ℂ,
-      ∀ i j : Fin d, T (matrixUnit d i j) = c i j • matrixUnit d i j
+/-- Conjugate-transpose of a diagonal matrix is the conjugated diagonal. -/
+lemma diagonalU_star (d : ℕ) (z : Fin d → ℂ) :
+    star (diagonalU d z) = diagonalU d (fun i => star (z i)) := by
+  funext k l
+  show star (diagonalU d z l k) = _
+  unfold diagonalU
+  by_cases h : k = l
+  · subst h; simp
+  · rw [if_neg (fun heq => h heq.symm), if_neg h]
+    simp
 
-/-- **Sub-lemma 1c (axiom — now PROVED as
-    `step1c_collapse_of_perm_symmetric` with the correct hypothesis).**
+/-- **PROVED — diagonal-unitary conjugation of a matrix unit.**
 
-    Kept here for backward compatibility with `step1_via_sub_lemmas`
-    and `AxiomAudit.lean`.  The original axiom was literally false
-    (counterexample: take `c 0 1 = 1`, `c 1 0 = 2`); the corrected
-    version requires the permutation-symmetry hypothesis and is proved
-    above as `step1c_collapse_of_perm_symmetric`. -/
-axiom step1c_coefficient_unification
-    (d : ℕ) (hd : 1 < d)
-    (c : Fin d → Fin d → ℂ) :
-    ∃ c_off c_diag : ℂ,
-      (∀ i j : Fin d, i ≠ j → c i j = c_off) ∧
-      (∀ i : Fin d, c i i = c_diag)
+    `diagonalU z · E_ij · (diagonalU z)* = (z i · conj (z j)) • E_ij`.
 
-/-- **Sub-lemma 1d (axiom).** Hadamard rotation pins Schur form. -/
-axiom step1d_hadamard_pins_form
-    (d : ℕ) (hd : 1 < d) (c_off c_diag : ℂ) :
-    ∃ α β : ℂ,
-      c_diag = α + β / (d : ℂ) ∧ c_off = α
+    This is the diagonal-character analog of `permutation_conj_matrixUnit`
+    and the concrete content GPT-5.5-pro's recipe asks for in step 1b
+    (phrased via unit-modulus coefficients rather than `e^{iθ}`).  The
+    identity itself holds for *any* diagonal `z`; unitarity (`z k` of
+    unit modulus) is only needed downstream when one wants the
+    conjugation to be a genuine symmetry of the state space. -/
+theorem diagonalU_conj_matrixUnit (d : ℕ) (z : Fin d → ℂ) (i j : Fin d) :
+    diagonalU d z * matrixUnit d i j * star (diagonalU d z)
+      = (z i * star (z j)) • matrixUnit d i j := by
+  funext k l
+  rw [diagonalU_star]
+  rw [mul_diagonalU_apply, diagonalU_mul_apply]
+  -- LHS at (k,l): z k * (E_ij)_{kl} * star (z l).
+  -- RHS at (k,l): (z i * star (z j)) * (E_ij)_{kl}.
+  show z k * matrixUnit d i j k l * star (z l)
+       = (z i * star (z j)) * matrixUnit d i j k l
+  unfold matrixUnit
+  by_cases h : k = i ∧ l = j
+  · obtain ⟨hk, hl⟩ := h
+    subst hk; subst hl
+    rw [if_pos ⟨rfl, rfl⟩]
+    ring
+  · rw [if_neg h, mul_zero, mul_zero, zero_mul]
 
-/-- **Sub-lemma 1e (axiom).** Hermitian restriction forces real
-    coefficients. -/
-axiom step1e_hermitian_restriction_real_coefficients
-    (α β : ℂ) :
-    ∃ α_real β_real : ℝ, (α_real : ℂ) = α ∧ (β_real : ℂ) = β
+/- ── Honest residual interface ────────────────────────────────────── -/
 
-/-- **Step 1 by composition of sub-lemmas 1a-1e.**
+/-  The earlier version of this module carried five placeholder
+    "sub-lemma" axioms (1a–1e).  Three of them (1b, 1c, 1e) were
+    *literally false as stated* — e.g. 1b's bare claim "for any `T`,
+    `T(E_ij)` is a scalar multiple of `E_ij`" is refuted by the
+    transpose map `M ↦ Mᵀ`, and 1e's "every complex number is real"
+    is plainly false.  All five were unused: `step1_via_sub_lemmas`
+    delegates directly to `GoldsteinStruyveFinDim.step1_schur_classification`.
+    They have therefore been DELETED.
+
+    What survives is genuinely proved:
+      • `permutation_conj_matrixUnit` : P_σ · E_ij · P_σ* = E_{σi,σj}.
+      • `diagonalU_conj_matrixUnit`   : D(z) · E_ij · D(z)* =
+                                        (z_i · conj z_j) • E_ij.
+      • `step1c_collapse_of_perm_symmetric` : permutation-symmetric
+        coefficient families collapse to two scalars.
+
+    The single remaining Step-1 interface axiom in the project is the
+    top-level `GoldsteinStruyveFinDim.step1_schur_classification`
+    (the full Schur classification of unitary-equivariant maps); the
+    two conjugation lemmas above are the concrete building blocks of
+    its eventual discharge.  -/
+
+/-- **Step 1 (delegation).**
 
     A linear, unitary-equivariant density functional on `d × d` matrices
     (d ≥ 2) has the Schur form `D = α · canonical + β · uniform` for
     some `α, β ∈ ℝ`.
 
-    The proof composes the five named sub-lemmas above.  Sub-lemmas
-    1a, 1b, 1d, 1e remain axiomatized; sub-lemma 1c is now PROVED as
-    `step1c_collapse_of_perm_symmetric` (with the explicit permutation-
-    symmetry hypothesis it needs); the foundational matrix-conjugation
-    identity `permutation_conj_matrixUnit` is also PROVED. -/
+    Delegates to the single top-level interface axiom
+    `GoldsteinStruyveFinDim.step1_schur_classification`.  The concrete
+    foundation lemmas proved in this module (`permutation_conj_matrixUnit`,
+    `diagonalU_conj_matrixUnit`, `step1c_collapse_of_perm_symmetric`)
+    are the building blocks of that axiom's eventual full discharge. -/
 theorem step1_via_sub_lemmas
     (d : ℕ) (hd : 1 < d)
     (D : @GoldsteinStruyveFinDim.DensityFunctional d)

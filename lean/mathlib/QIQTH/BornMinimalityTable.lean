@@ -112,22 +112,28 @@ theorem P3_operational_sufficiency_necessary :
 
 /- ── P4: Locality is REDUCIBLE (no separate axiom needed) ────────── -/
 
-/-- **P4 reducibility witness (re-export).**  Locality of Alice's
-    marginal is NOT a separate axiom: it follows as a theorem from
-    measure equivariance under Bob's local dynamics (which itself
-    follows from algebraic locality, proved in `UnitarityLocality` /
-    `KrausLocality` / `CompressionLocality`).
+/-- **P4 reducibility witness (re-export, strengthened).**  Locality of
+    Alice's marginal is NOT a separate Born-selection axiom: given
+    set-level locality of Bob's dynamics (`r ∘ T = r`), Alice's marginal
+    is `T`-invariant for *any* IC measure `μ` — with **no equivariance
+    assumption** (`MarginalLocality.pushforward_marginal_local`).  The
+    set-level locality itself follows from algebraic locality (proved in
+    `UnitarityLocality` / `KrausLocality` / `CompressionLocality`) via
+    the named Heisenberg↔Schrödinger bridge axiom.
 
-    Net effect: P4 is removed from the list of independent premises;
-    only {P1, P2, P3} remain irreducible. -/
+    Net effect: P4 is not an independent Born-selection premise; only
+    {P1, P2, P3} are irreducible (relative to the current finite formal
+    decomposition).  The locality reduction is conditional on the bridge
+    axiom, which is named and explicit — see
+    `MarginalLocality.audit_conclusion`. -/
 theorem P4_locality_reducible_to_equivariance
     {α β : Type*} [Fintype α] [DecidableEq α] [DecidableEq β]
     (r : α → β) (T : α → α)
     (h_local : MarginalLocality.IsLocalUnder r T)
-    (μ : α → ℝ) (h_equiv : MarginalLocality.IsEquivariant T μ) :
+    (μ : α → ℝ) :
     MarginalLocality.pushForward r (MarginalLocality.pushForward T μ)
       = MarginalLocality.pushForward r μ :=
-  MarginalLocality.alice_marginal_unchanged_by_bob_dynamics r T h_local μ h_equiv
+  MarginalLocality.pushforward_marginal_local r T h_local μ
 
 /- ── Conditional positive result (no countermodel; this is the
       conclusion when all premises hold) ───────────────────────────── -/

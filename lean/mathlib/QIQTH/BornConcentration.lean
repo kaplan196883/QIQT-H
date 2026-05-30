@@ -213,23 +213,145 @@ theorem born_chebyshev_single_trial
   rw [h_var] at h_chev
   exact h_chev
 
+/- ── Independence: variance adds over a product of two trials ─────── -/
+
+/-- **Centered first moment vanishes.**  For a probability weight `P`
+    (`∑ P = 1`), the `P`-average of `X − mean P X` is zero. -/
+theorem centered_first_moment_zero
+    {Ω : Type*} [Fintype Ω]
+    (P : Ω → ℝ) (hP : ∑ ω, P ω = 1) (X : Ω → ℝ) :
+    ∑ ω, P ω * (X ω - mean P X) = 0 := by
+  have h : ∑ ω, P ω * (X ω - mean P X)
+         = (∑ ω, P ω * X ω) - mean P X * (∑ ω, P ω) := by
+    rw [Finset.mul_sum, ← Finset.sum_sub_distrib]
+    apply Finset.sum_congr rfl; intro ω _; ring
+  rw [h, hP, mul_one]
+  unfold mean
+  ring
+
+/-- **Variance adds for independent variables (the core independence
+    lemma).**
+
+    Let `P₁ : Ω₁ → ℝ` and `P₂ : Ω₂ → ℝ` be probability weights
+    (`∑ Pᵢ = 1`).  On the product space `Ω₁ × Ω₂` with the product
+    weight `P(ω₁,ω₂) = P₁ ω₁ · P₂ ω₂` and the additive variable
+    `X(ω₁,ω₂) = X₁ ω₁ + X₂ ω₂`, the variance decomposes:
+
+        Var_P(X) = Var_{P₁}(X₁) + Var_{P₂}(X₂)
+
+    centred at the respective means.  This is exactly the statement
+    that the variance of a sum of *independent* random variables is
+    the sum of the variances — the product structure of `P` is what
+    encodes independence.  The cross term vanishes via
+    `centered_first_moment_zero`. -/
+theorem variance_add_of_product
+    {Ω₁ Ω₂ : Type*} [Fintype Ω₁] [Fintype Ω₂]
+    (P₁ : Ω₁ → ℝ) (P₂ : Ω₂ → ℝ)
+    (hP₁ : ∑ ω, P₁ ω = 1) (hP₂ : ∑ ω, P₂ ω = 1)
+    (X₁ : Ω₁ → ℝ) (X₂ : Ω₂ → ℝ) :
+    varianceAround (fun ω : Ω₁ × Ω₂ => P₁ ω.1 * P₂ ω.2)
+        (fun ω => X₁ ω.1 + X₂ ω.2) (mean P₁ X₁ + mean P₂ X₂)
+      = varianceAround P₁ X₁ (mean P₁ X₁)
+        + varianceAround P₂ X₂ (mean P₂ X₂) := by
+  set μ₁ := mean P₁ X₁
+  set μ₂ := mean P₂ X₂
+  unfold varianceAround
+  -- Expand the product sum and the square (a+b)² = a²+2ab+b² with
+  -- a = X₁ ω₁ − μ₁, b = X₂ ω₂ − μ₂.
+  rw [Fintype.sum_prod_type]
+  -- Inner: for fixed ω₁, ∑_{ω₂} P₁ω₁ P₂ω₂ ((X₁ω₁−μ₁)+(X₂ω₂−μ₂))².
+  have expand :
+      ∀ ω₁ : Ω₁,
+        (∑ ω₂ : Ω₂, P₁ ω₁ * P₂ ω₂ * (X₁ ω₁ + X₂ ω₂ - (μ₁ + μ₂))^2)
+        = P₁ ω₁ * (X₁ ω₁ - μ₁)^2 * (∑ ω₂, P₂ ω₂)
+          + 2 * (P₁ ω₁ * (X₁ ω₁ - μ₁)) * (∑ ω₂, P₂ ω₂ * (X₂ ω₂ - μ₂))
+          + P₁ ω₁ * (∑ ω₂, P₂ ω₂ * (X₂ ω₂ - μ₂)^2) := by
+    intro ω₁
+    rw [Finset.mul_sum, Finset.mul_sum, Finset.mul_sum]
+    rw [← Finset.sum_add_distrib, ← Finset.sum_add_distrib]
+    apply Finset.sum_congr rfl
+    intro ω₂ _
+    ring
+  rw [Finset.sum_congr rfl (fun ω₁ _ => expand ω₁)]
+  -- Replace the two closed inner sums:  ∑_{ω₂}P₂ = 1  and
+  -- ∑_{ω₂} P₂ (X₂−μ₂) = 0 (the cross term vanishes).
+  have hcross : ∑ ω₂, P₂ ω₂ * (X₂ ω₂ - μ₂) = 0 :=
+    centered_first_moment_zero P₂ hP₂ X₂
+  -- Middle term ×0 drops (hcross); ∑_{ω₂} P₂ = 1 in the first term.
+  simp only [hcross, hP₂, mul_zero, add_zero]
+  rw [Finset.sum_add_distrib]
+  congr 1
+  · -- First summand: ∑_{ω₁} P₁ (X₁−μ₁)²·1 = Var₁.
+    simp only [mul_one, varianceAround]
+  · -- Second summand: ∑_{ω₁} P₁ · Var₂inner = (∑P₁)·Var₂ = Var₂.
+    rw [← Finset.sum_mul, hP₁, one_mul]
+
+/-- **Two-trial Bernoulli variance (PROVED via independence).**
+
+    Two independent Bernoulli(`p`) trials, modelled on
+    `Bool × Bool` with product weight, have count-variance `2·p(1−p)`.
+    Concrete instance of `variance_add_of_product` + `bernoulli_variance`,
+    exhibiting variance-addition across independent trials. -/
+theorem two_trial_bernoulli_variance
+    (p : ℝ) (hp_nn : 0 ≤ p) (hp_le_one : p ≤ 1) :
+    let P : Bool → ℝ := fun b => if b = false then 1 - p else p
+    let X : Bool → ℝ := fun b => if b = false then 0 else 1
+    varianceAround (fun ω : Bool × Bool => P ω.1 * P ω.2)
+        (fun ω => X ω.1 + X ω.2) (mean P X + mean P X)
+      = 2 * (p * (1 - p)) := by
+  intro P X
+  -- Bool-eq condition reductions, used to evaluate the two-point sums.
+  have htf : ((true : Bool) = false) = False := by simp
+  have hff : ((false : Bool) = false) = True := by simp
+  have hP_sum : ∑ b, P b = 1 := by
+    show ∑ b : Bool, (if b = false then 1 - p else p) = 1
+    rw [Fintype.sum_bool]
+    simp only [htf, hff, if_true, if_false]; ring
+  -- Bernoulli single-trial variance, re-expressed for the Bool model
+  -- (false ↦ 0/weight 1−p, true ↦ 1/weight p): same value p(1−p).
+  have hmean : mean P X = p := by
+    show (∑ b : Bool, (if b = false then 1 - p else p) * (if b = false then (0:ℝ) else 1)) = p
+    rw [Fintype.sum_bool]
+    simp only [htf, hff, if_true, if_false]; ring
+  have hvar : varianceAround P X (mean P X) = p * (1 - p) := by
+    rw [hmean]
+    show (∑ b : Bool, (if b = false then 1 - p else p)
+            * ((if b = false then (0:ℝ) else 1) - p)^2) = p * (1 - p)
+    rw [Fintype.sum_bool]
+    simp only [htf, hff, if_true, if_false]; ring
+  have key : varianceAround (fun ω : Bool × Bool => P ω.1 * P ω.2)
+      (fun ω => X ω.1 + X ω.2) (mean P X + mean P X)
+      = varianceAround P X (mean P X) + varianceAround P X (mean P X) :=
+    variance_add_of_product P P hP_sum hP_sum X X
+  rw [hvar] at key
+  -- key : varianceAround (product) ... = p(1−p) + p(1−p);  goal: ... = 2·p(1−p).
+  exact key.trans (by ring)
+
 /-- **Audit conclusion.**
 
-    The Chebyshev-style concentration bound is now formally available
-    in the QIQT-H Lean corpus.  Combined with `BornTypicality.
-    born_mean_conditional` (proved), the framework supports the
-    publication-level claim:
+    The Chebyshev-style concentration bound and the variance-addition
+    (independence) lemma are now formally available in the QIQT-H Lean
+    corpus.  Combined with `BornTypicality.born_mean_conditional`
+    (proved), the framework supports the publication-level claim:
 
         For any ε > 0, the per-trial probability of empirical
         deviation from Born weights by more than ε is bounded by
-        p(1−p)/ε².  Hence, by the standard product-measure
-        Chebyshev scaling, the N-trial frequency deviates from
-        Born by more than ε with probability at most
-        p(1−p)/(N·ε²) — converging to 0 at rate 1/N.
+        p(1−p)/ε².  Variance adds across independent trials
+        (`variance_add_of_product`), so the N-trial count has variance
+        N·p(1−p) and the empirical mean has variance p(1−p)/N; hence
+        by Chebyshev the N-trial frequency deviates from Born by more
+        than ε with probability at most p(1−p)/(N·ε²) — converging to
+        0 at rate 1/N.
 
-    The N-trial product-measure scaling is standard probability
-    theory left as an axiom at the BornTypicality.LLN interface;
-    the single-trial concentration is now PROVED concretely. -/
+    *What is now PROVED concretely:* the single-trial Chebyshev bound
+    (`born_chebyshev_single_trial`); the variance-addition theorem for
+    independent variables (`variance_add_of_product`); and the
+    two-trial Bernoulli instance (`two_trial_bernoulli_variance`)
+    exhibiting variance-addition.  The general N-fold induction
+    (folding `variance_add_of_product` over `Fin N`) is the only
+    remaining step to fully retire the binary-case LLN interface
+    axiom; the reusable independence lemma that the induction would
+    iterate is in hand. -/
 theorem audit_conclusion : True := trivial
 
 end BornConcentration
