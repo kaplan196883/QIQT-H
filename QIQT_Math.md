@@ -306,7 +306,7 @@ This is the cooperative role of decoherence and (FQ): decoherence drives off-dia
 
 ### 8.1 What the framework actually claims
 
-The strict classical mixture $\sum_k |c_k|^2 \omega_k^{SE}$ on $\hat{\mathcal{A}}(R_{SE})$ is not a single record. It is a probability distribution over records, with weight $|c_k|^2$ on each. In any specific run, which record actually obtains?
+The strict classical mixture $\sum_k |c_k|^2 \omega_k^{SE}$ on $\hat{\mathcal{A}}(R_{SE})$ is not a single record. It is a weighted list of records carrying the weights $|c_k|^2$ — the across-run relative frequencies, not per-run probabilities (the framework has no fundamental probabilities). It still carries every record; decoherence has removed interference, not multiplicity. In any specific run, which record actually obtains, and why is it a *single* record at all?
 
 **The framework's claim: in any specific run, the per-run universe occupies one specific branch of the strictly-exclusive classical mixture. Which branch is determined by the per-run microscopic initial conditions of the screen + environment.**
 
@@ -485,7 +485,7 @@ In the exact-saturation limit:
 
 In any specific run, the universal wave function (within $\mathcal{H}_{\rm phys}$) has its induced state on $\mathcal{C}(R_S)$ supported on a single spot. This is not because of dynamical collapse, not because of branch selection from many physically real branches, but because, at exact saturation, multi-spot states violate the superselection rule (effective form: a single spot dominates the active distribution with overwhelming probability; §9A.3).
 
-Which specific spot is realized depends on the actual physical initial conditions of the screen + environment at the moment of detection (the actual microscopic configuration of screen atoms, vacuum fluctuations, environmental modes). The physical Hamiltonian, constrained to preserve $\mathcal{H}_{\rm phys}$, takes specific initial conditions to a specific single-spot final state.
+Which specific spot is realized depends on the actual physical initial conditions of the screen + environment at the moment of detection (the actual microscopic configuration of screen atoms, vacuum fluctuations, environmental modes). The dynamics is exactly unitary throughout; the resident regional content is single-record because a $\ge 2$-record content is not instantiable under the finite-information restriction, and the run's microscopic initial conditions index *which* single spot it is.
 
 ### 9A.5 The Everett-branch question dissolved by superselection
 
@@ -507,7 +507,7 @@ At the level of physically observable content on the screen, the formal "multi-r
 
 **The physical reality of the screen's macroscopic content**, what's actually displayed on the screen, what cameras would record, what an observer would see, is what we have access to. That content is a classical mixture, not a coherent superposition. The superselection rule then forbids even this classical mixture for sufficiently saturating records.
 
-What actually happens per run: the physical Hamiltonian (constrained to preserve $\mathcal{H}_{\rm phys}$), acting on the actual initial conditions of the screen + environment in that specific run, produces one specific macroscopic record on the screen. Different runs with different actual initial conditions produce different actual records. The standard "linear measurement obstruction" describes what an unconstrained unitary would do at the mathematical Hilbert-space level, but that's not what the actual physical Hamiltonian does, and it's not what we have physical access to anyway.
+What actually happens per run: the dynamics is exactly the standard unitary evolution (no Hamiltonian is restricted), but the *physically instantiable regional content* is single-record, because a $\ge 2$-record regional content exceeds $Q_R$ and has no per-run physical referent. The run's actual screen + environment initial conditions index which single record it carries; different runs with different actual initial conditions carry different records. The standard "linear measurement obstruction" describes the formal multi-record global vector — a perfectly good calculational/ensemble descriptor — but that vector is not the per-run regional physical content, which is single-record.
 
 ### 9A.6 The Born statistics across runs
 
@@ -525,9 +525,9 @@ The framework gives a complete structural account of single-spot per run + Born 
 
 3. **Branch-Summed Holographic Bound** as a new physical postulate. Connection to deeper finite-information constraints in quantum gravity is conjectural.
 
-4. **Characterization of physical Hamiltonians** for the screen + environment system, which Hermitian operators preserve $\mathcal{H}_{\rm phys}$? The constrained dynamics formalism is analogous to gauge theory.
+4. **Characterization of instantiable regional content** for the screen + environment system, which regional algebra-states satisfy $I_\Sigma \le Q_R$, and the proof that a $\ge 2$-record content violates it (the Macroscopic Definiteness Conjecture). This is a restriction on regional content, not on Hamiltonians; the dynamics is left exactly unitary.
 
-5. **Born typicality theorem** under the constrained dynamics, the typicality measure on actual screen + environment initial conditions that reproduces the Born weights as realized-spot frequencies.
+5. **Born typicality theorem** under the exactly-unitary dynamics, the typicality measure on actual screen + environment initial conditions that reproduces the Born weights as emergent across-run realized-spot frequencies.
 
 Each of these is a concrete open problem; together they constitute the framework's explicit research program beyond the borrowed CPW/Witten scaffolding.
 

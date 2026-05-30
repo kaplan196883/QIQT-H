@@ -703,7 +703,7 @@ $$
 \alpha_{t*}(\mathcal{S}_{\rm phys}) \subseteq \mathcal{S}_{\rm phys}, \qquad (\alpha_{t*}\omega)(A) := \omega(\alpha_t(A)).
 $$
 
-*A Hamiltonian is physical only insofar as its induced automorphism group satisfies this condition.*
+*Here $\mathcal{S}_{\rm phys}$ is the set of physically instantiable regional contents (those satisfying the finite-information admissibility bound). The condition says only that physical evolution carries instantiable contents to instantiable contents; it is **not** a restriction on the admissible Hamiltonians. The global Schrödinger / Heisenberg law is exactly unitary and unconstrained — a formal global state whose regional content leaves $\mathcal{S}_{\rm phys}$ remains a valid calculational descriptor, it simply has no per-run physical referent in that region.*
 
 *A measurement instrument $\mathcal{I} = \{\mathcal{I}_a\}_a$ is **physical** iff $\sum_a \mathcal{I}_a$ is unital and, for every $\omega \in \mathcal{S}_{\rm phys}$:*
 *(i) the non-selective state $\omega \circ (\sum_a \mathcal{I}_a)$ lies in $\mathcal{S}_{\rm phys}$; and*
@@ -717,7 +717,7 @@ $$
 $$
 *At finite process stage $t$, this condition is imposed only for those $R \Subset J^+(O_a) \cap J^-(\Sigma_t)$ that lie in the instantiated collection $\mathfrak{R}_t(a)$. Conditional feed-forward operations must satisfy the same condition on each branch.*
 
-The set of physical dynamics is a proper subset of the set of all normal unital CP maps on $\hat{\mathcal{A}}$. Generic Hilbert-space Hamiltonians do not induce physical dynamics; physical dynamics do.
+Equivalently: physical evolution preserves the set of instantiable regional contents. This is a closure property of $\mathcal{S}_{\rm phys}$ under the (exactly unitary, unconstrained) dynamics, not a selection rule on Hamiltonians — every standard Hamiltonian is admissible; what the framework restricts is which *regional contents* count as physically instantiated, not which evolutions are allowed.
 
 **Axiom (Causal application of admissibility).** *Modular-local admissibility is imposed on the state of a region when that region is physically instantiated in the causal order. If earlier alternatives are separately admissible in their respective past algebras, a later joint diamond $D^+$ constrains only the state restricted to $\hat{\mathcal{A}}(D^+)$ after the relevant systems enter $D^+$. Failure of $\chi_{D^+} \le C(D^+)$ makes the proposed future joint state or transition inadmissible; it does **not** retroactively delete previously admissible past branches.*
 
@@ -881,7 +881,7 @@ These are the framework's specific new physical principles, building on the Witt
 
 **Non-selective-instrument convention.** All operations used in the no-signaling argument below are deterministic *non-selective* channels, i.e., instruments enter only through their sum $\mathcal{I} = \sum_a \mathcal{I}_a$. Selective conditional states $\omega_a$ are admissibility-checked branchwise (cf. §7.6 Definition (Physical instruments)), but **postselection on the outcome label $a$ is not an operation available for spacelike signaling**; it becomes operational only once the outcome record is classically available in the common future. Without this restriction, even ordinary Born probabilities can be made to "signal" by postselecting on rare outcomes; with it, no-signaling reduces cleanly to algebraic commutation.
 
-**Theorem 7 (No-signaling).** *Let $D_A, D_B$ be spacelike-separated causally complete regions with $[\hat{\mathcal{A}}(D_A), \hat{\mathcal{A}}(D_B)] = 0$. Let $\{\Phi_a^x\}$ be a normal CP instrument localized in $\hat{\mathcal{A}}(D_A)$ with setting $x$ and outcomes $a$, and let $\{\Psi_b^y\}$ be similarly localized in $\hat{\mathcal{A}}(D_B)$. Under the Modular-Local Holographic Superselection Rule (§7.6) and the non-selective-instrument convention above, Alice's marginal probability is independent of Bob's setting:*
+**Theorem 7 (No-signaling).** *Let $D_A, D_B$ be spacelike-separated causally complete regions with $[\hat{\mathcal{A}}(D_A), \hat{\mathcal{A}}(D_B)] = 0$. Let $\{\Phi_a^x\}$ be a normal CP instrument localized in $\hat{\mathcal{A}}(D_A)$ with setting $x$ and outcomes $a$, and let $\{\Psi_b^y\}$ be similarly localized in $\hat{\mathcal{A}}(D_B)$. Under the modular-local finite-information admissibility restriction (§7.6) and the non-selective-instrument convention above, Alice's marginal probability is independent of Bob's setting:*
 $$
 P_{\rm QIQT}(a \mid x, y) \;=\; P_{\rm QIQT}(a \mid x).
 $$
