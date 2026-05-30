@@ -56,13 +56,13 @@ This paper develops a position in the foundations of quantum mechanics whose str
 
 5. The Type II structure of $\hat{\mathcal{A}}(R)$ implies a finite physical resolution for regional states: states agreeing on all operators in $\hat{\mathcal{A}}(R)$ are physically identical in $R$. This is the natural mathematical realization of "amplitudes physically within $\epsilon$ of $0$ are physically the same state as amplitude exactly $0$", the equivalence is between regional states, not between abstract Hilbert vectors.
 
-6. The standard textbook formal wave function, a superposition $\sum_i c_i |s_i\rangle|A_i\rangle|E_i\rangle$, is an idealized statistical description of an ensemble of per-run wave functions across many runs. The per-run wave function evolves unitarily from specific microscopic initial conditions; decoherence drives amplitudes for distinct macroscopic record components to concentrate dynamically; the Type II resolution structure renders the post-concentration per-run wave function physically a single-record state.
+6. The standard textbook formal wave function, a superposition $\sum_i c_i |s_i\rangle|A_i\rangle|E_i\rangle$, is an idealized statistical description of an ensemble of per-run wave functions across many runs. The per-run wave function evolves unitarily from specific microscopic initial conditions; decoherence renders the macroscopic record components non-interfering; and the finite-information restriction (a $\ge 2$-record regional content exceeds the regional capacity $Q_R$ and so is not an instantiable physical state) leaves the per-run regional content single-record. The run's microscopic initial conditions index which record.
 
 7. Born statistics emerge from typicality of microscopic initial conditions across runs.
 
 ### 1.2 What this paper does and does not claim
 
-**Does.** Introduces (FQ) in its rigorous algebraic form using Type II crossed-product algebras. Distinguishes formal vs per-run wave functions. Establishes the finite-physical-resolution consequence of Type II regional algebras. Discusses the decoherence-and-concentration mechanism. States four formal results. Identifies three explicit open problems.
+**Does.** Introduces (FQ) in its rigorous algebraic form using Type II crossed-product algebras. Distinguishes formal vs per-run wave functions. Establishes the finite-physical-resolution consequence of Type II regional algebras. Discusses the decoherence-plus-finite-information-restriction mechanism for single-record regional content. States four formal results. Identifies three explicit open problems.
 
 **Does not.** Derive the resolution floor as an explicit function of regional geometry beyond the qualitative implication. Provide a fully rigorous typicality theorem for Born weights. Modify the Schrödinger equation, posit Bohmian particles, MWI branches, modal value-rules, or any actuality primitive beyond the per-run wave function regarded as a state on the regional algebras.
 
@@ -281,7 +281,7 @@ The two readings can be compared:
 | What the bound limits | Renormalized entropy on Type II algebra | Total physical info needed to instantiate WF in $R$ |
 | Equivalence relation on states | Exact equality on algebra | Algebraic + physical-precision floor |
 | Near-zero amplitudes | Distinct from zero (continuous state space) | Physically equivalent to zero (below precision) |
-| Single-record per run | Requires separate Concentration Conjecture | Structural consequence of precision + decoherence |
+| Single-record per run | Requires separate Concentration Conjecture | Structural consequence of decoherence + finite-information capacity restriction |
 | Status w.r.t. Witten's theorem | Direct mathematical reading | Stronger interpretive postulate; compatible but not derived |
 
 Whether the literal reading is the correct foundational reading of the bound is a substantive philosophical / physical question, not a mathematical theorem. Our position is that the literal reading is the natural reading of "Bekenstein-Bousso as a Lorentz-invariant information limit on bounded regions of spacetime", what the bound says, taken at face value as a physical limit rather than as a narrow technical inequality on a derived quantity.
@@ -341,7 +341,7 @@ The macroscopic record structure enters naturally: macroscopically distinct reco
 
 ---
 
-## 6. The Mechanism: Decoherence, Concentration, and Algebraic Resolution
+## 6. The Mechanism: Decoherence, Finite-Information Restriction, and Algebraic Resolution
 
 ### 6.1 Decoherence in algebraic terms
 
@@ -438,9 +438,9 @@ This strict classical mixture still carries every record; decoherence has remove
 
 ### 6.6 What is preserved, and what algebraic restriction is (and is not)
 
-**Preserved exactly on the physical state space $\mathcal{H}_{\rm phys}$:** the unitary Schrödinger / Heisenberg evolution under *physical Hamiltonians* (those that preserve $\mathcal{H}_{\rm phys}$; cf. §7.6). Within $\mathcal{H}_{\rm phys}$, no modification of dynamics, no stochastic term, no projection operator. The physical Hamiltonian generates standard linear unitary evolution on the constrained physical state space.
+**Preserved exactly:** the unitary Schrödinger / Heisenberg evolution of the underlying field algebra. No modification of dynamics, no stochastic term, no projection operator, no restriction on the admissible Hamiltonians. The evolution law is exactly standard QM; what the framework adds operates not on the dynamics but on which *regional contents* count as physically instantiable (next paragraph).
 
-**Constrained at the kinematic level:** the physical state space itself is restricted to $\mathcal{H}_{\rm phys}$ (those universal wave functions satisfying the Branch-Summed Holographic Bound $I_\Sigma \le Q_R$ for every bounded region). States outside $\mathcal{H}_{\rm phys}$ are mathematically writeable in the unrestricted Hilbert-space formalism but are not physically realizable. Physical Hamiltonians are restricted to those preserving $\mathcal{H}_{\rm phys}$. This is analogous to gauge theory: physical state space is a constrained submanifold; physical Hamiltonians preserve gauge invariance; unrestricted Hilbert-space Hamiltonians are mathematically writeable but unphysical.
+**Constrained at the kinematic level:** what is restricted is which *regional contents* are physically instantiable — those with regional information cost $I_\Sigma \le Q_R$. A global wave function whose induced regional content carries $\ge 2$ macroscopically distinct records (cost exceeding $Q_R$) is a perfectly good *formal/calculational* descriptor but has no single-region per-run physical referent. **This is not a restriction on the Hamiltonians and not a modification of the dynamics:** the global Schrödinger / Heisenberg evolution law is exactly unitary and unconstrained, including ordinary measurement interactions. The restriction is purely on physical *instantiability of regional content* (FQ part (iii) + the formal/per-run distinction) — unlike gauge theory, where one additionally restricts the admissible Hamiltonians.
 
 **The relationship between global evolution and regional physical content.** On $\mathcal{H}_{\rm phys}$ the universal state evolves unitarily under a physical Hamiltonian: $|\Psi_t\rangle = U(t)|\Psi_0\rangle$. The induced regional algebra-state evolves linearly: $\omega_t(O) = \omega_0(U(t)^\dagger O U(t))$ for $O \in \hat{\mathcal{A}}(R)$. The map $|\Psi\rangle \mapsto \omega_\Psi$ from Hilbert vectors to regional algebra-states is a structural restriction (analogous to forming a reduced state). It is mathematically linear on density operators and quadratic in vectors.
 
@@ -552,7 +552,9 @@ The correct statement is therefore: QIQT-H leaves the tunneling wave function an
 
 **Theorem 4 (Single-record per-run).** *Under (FQ) in its literal physical-instantiation reading, together with (i) standard decoherence (which renders the macroscopic records non-interfering) and (ii) the Macroscopic Definiteness Conjecture of §7.6 (a regional content carrying $\ge 2$ macroscopically distinct records exceeds the regional capacity $Q_R$ and is not an instantiable physical state), the per-run wave function in any region $R$ containing apparatus + environment after measurement is physically a single-record state. Which record is realized is indexed by the run's microscopic initial conditions; the unrealized records have no physical referent in $R$ (they are not instantiable, not "real elsewhere"). No amplitude is trimmed and the global evolution is exactly unitary throughout.*
 
-*Proof.* By Theorem 3, (FQ) gives a finite resolution floor $\epsilon(R) > 0$. By the concentration claim of §6.2, per-run amplitudes for distinct macroscopic records evolve dynamically toward $0$ or $1$. Once the concentration crosses the resolution threshold, the per-run wave function is physically a single-record state. The single-record state is the wave function's actual physical state in $R$. No collapse postulate is required; the structural combination of (FQ) (precision floor) and decoherence (concentration) produces the single-record outcome. $\blacksquare$
+*Proof.* By standard (unitary) decoherence, the regional state on $\hat{\mathcal{A}}(R)$ is exponentially close to a strict classical mixture $\sum_k |c_k|^2 \omega_k^R$ of macroscopic records — interference is gone, but the mixture still carries every record (branch weights $|c_k|^2$ are conserved; cf. `NoConcentration.lean`). By Theorem 3 the (FQ) resolution floor $\epsilon(R) > 0$ makes the residual sub-$\epsilon$ off-diagonal coherence have no physical referent (a resolution-equivalence on regional states, §5.1), so the resident content is exactly that strict mixture. By the finite-information restriction of §7.6, a regional content carrying $\ge 2$ macroscopically distinct records has summed cost $I_\Sigma \approx K \cdot I_0 > Q_R$ and is therefore not an instantiable physical state of $R$; hence the resident regional content is single-record. Which record is realized is indexed by the run's microscopic initial conditions. The global evolution remains exactly unitary; no amplitude is trimmed. $\blacksquare$
+
+*(This proof inherits the open status of the §7.6 Macroscopic Definiteness Conjecture, the $I_\Sigma > Q_R$ step, which is Open Problem 3; the rest is standard decoherence plus the (FQ) resolution-equivalence of §5.1.)*
 
 *Remark on what does the work (not "amplitude concentration").* It would be a mistake to read Theorem 4 as "decoherence + microscopic IC drive the per-run amplitudes dynamically to $0$ or $1$." They do not: by unitarity the branch weights $|c_k|^2$ are conserved (the `NoConcentration.lean` audit makes this precise), so decoherence removes *interference* but never *selects* a record — the decohered diagonal content still carries every record. The single-record conclusion comes instead from the finite-information restriction on the physical state space (§7.6): a $\ge 2$-record regional content is not an instantiable physical state because its summed information cost exceeds $Q_R$. The (FQ) resolution floor plays the subsidiary role of removing the residual sub-$\epsilon$ off-diagonal coherence (as a resolution-equivalence on regional states, not by trimming any amplitude). Microscopic IC then merely index which single record the run carries. This is the cooperative structure: decoherence (interference) + capacity bound (single-ness, the load-bearing step) + IC (which one).
 
@@ -604,9 +606,9 @@ None of (α), (β), (γ) is derivable from FQ + AQFT + holography alone; each is
 
 ### 7.5 What §7.1–7.4 establishes
 
-(FQ) restricts the model class properly (Theorem 2); the literal physical-instantiation reading implies finite physical resolution (Theorem 3); combined with dynamical concentration via decoherence + microscopic IC, this yields single-record per-run wave functions structurally (Theorem 4); Born statistics emerge from typicality (Theorem 5, schematic).
+(FQ) restricts the model class properly (Theorem 2); the literal physical-instantiation reading implies finite physical resolution (Theorem 3); combined with decoherence (which removes interference) and the finite-information restriction of §7.6 (which makes a $\ge 2$-record regional content non-instantiable), this yields single-record per-run regional content structurally (Theorem 4); Born statistics emerge as an across-run typicality / relative-frequency result (Theorem 5, schematic).
 
-The framework's structural skeleton: (FQ) is the literal physical-instantiation reading of the Bekenstein-Bousso bound, stated rigorously in the CPW Type II algebraic framework; the precision floor is the structural consequence; concentrated per-run amplitudes cross the threshold and the per-run wave function physically is a single-record state.
+The framework's structural skeleton: (FQ) is the literal physical-instantiation reading of the Bekenstein-Bousso bound, stated rigorously in the CPW Type II algebraic framework; the finite-information restriction on regional content is what makes the resident regional state single-record, with the run's microscopic initial conditions indexing which record and the global evolution left exactly unitary.
 
 ### 7.6 The Modular-Local Holographic Superselection Rule (foundational postulate)
 
@@ -817,11 +819,11 @@ This objection assumes that the unrestricted-Hilbert-space wave function $\alpha
 
 The screen is a complex quantum system with $\sim 10^{20}$–$10^{25}$ degrees of freedom that becomes entangled with the particle during detection. Decoherence between distinct macroscopic record states $|A_0\rangle$ and $|A_1\rangle$ produces environmental cross-overlaps $\langle E_0 | E_1 \rangle \sim e^{-10^{20}}$ on physically realistic timescales (§6.2). Under (FQ), these exponentially-small off-diagonal coherence terms are *physically zero* (§6.3).
 
-So at the level of physical observable content, which is what physics is about, the formal $\alpha|A_0\rangle + \beta|A_1\rangle$ structure decoheres to a classical-looking expression, and the residual coherence is rendered physically zero by (FQ). The physical state on the macroscopic observable algebra is a strict classical mixture over records. The framework's superselection rule then says: even this strict classical mixture (with $H(\{p_k\}) > 0$ when $|c_k|^2$ are both non-negligible) violates the Branch-Summed Bound when the records' costs approach $Q_R/I_0$. So this state isn't a *physical* state either.
+So at the level of physical observable content, which is what physics is about, the formal $\alpha|A_0\rangle + \beta|A_1\rangle$ structure decoheres to a classical-looking expression, and the residual sub-$\epsilon$ coherence has no physical referent under (FQ) (a resolution-equivalence on regional states). The physical content on the macroscopic observable algebra is a strict classical mixture over records. The finite-information restriction then says: a regional content carrying $\ge 2$ macroscopically distinct records (summed cost $I_\Sigma \approx K\cdot I_0$ approaching/exceeding $Q_R$) is *not an instantiable physical state of the region* — it has no per-run physical referent.
 
-What actually happens in a specific run, under the constrained physical Hamiltonian acting on the actual initial conditions of that run (specific microscopic state of screen + environment), is that the per-run evolution stays within $\mathcal{H}_{\rm phys}$ throughout, the actual physical Hamiltonian does not produce multi-record states from physically allowed initial conditions. The linear-Hilbert-space-formalism argument $U(\alpha|0\rangle + \beta|1\rangle) \to \alpha|A_0\rangle + \beta|A_1\rangle$ describes what an *unconstrained* unitary would do; the *physical* Hamiltonian, constrained to preserve $\mathcal{H}_{\rm phys}$, takes the per-run initial state (with specific actual microscopic IC) to a per-run final state (with a specific actual macroscopic record). Different runs with different actual initial conditions produce different actual records; across many runs, Born statistics emerge from typicality.
+It is essential that this is a restriction on which *regional contents* are physically instantiable, **not** a modification of the dynamics. The formal global vector $\alpha|A_0\rangle|E_0\rangle + \beta|A_1\rangle|E_1\rangle$ produced by ordinary linear unitary evolution is a perfectly good *calculational descriptor* — it is the cross-run ensemble descriptor, not the per-run physical state. What is physically real per run is the regional content, and by the finite-information restriction that content is single-record. *Which* record a given run carries is fixed by that run's actual microscopic initial conditions (distinct runs are distinct actual universes; the IC index the run, they do not produce the single-ness). The global Schrödinger / Heisenberg evolution law is left exactly unitary and entirely standard throughout; no Hamiltonian is restricted and no amplitude is trimmed.
 
-The "linear measurement obstruction" thus disappears once one recognizes that (a) physical observable content, not unrestricted Hilbert-space wave functions, is what we have physical access to; (b) decoherence + (FQ) make the off-diagonal coherence physically zero at the observable level; (c) the constraint on physical Hamiltonians (preserving $\mathcal{H}_{\rm phys}$) eliminates the multi-record final state from physical dynamics.
+The "linear measurement obstruction" thus disappears once one recognizes that (a) physical content is the regional algebra-state content of bounded regions, not the unrestricted global Hilbert-space vector; (b) decoherence removes interference and (FQ) removes the residual sub-$\epsilon$ coherence as a resolution-equivalence; (c) the finite-information restriction makes a $\ge 2$-record *regional content* non-instantiable — the multi-record global vector remains a valid ensemble descriptor but has no single-region per-run physical referent.
 
 **The per-record cost $I_0$ as an experimental parameter.** The framework's central physical postulate, the Branch-Summed Holographic Bound $I_\Sigma^\epsilon[\omega_R] \le Q_R$, combines two quantities:
 - $Q_R = A(\partial R)/(4\ell_P^2)$: the **regional holographic capacity**, a geometric quantity determined by the boundary area in Planck units. Set by quantum gravity; not a free parameter.
@@ -843,19 +845,19 @@ The two-parameter structure of the theory:
 
 The single-outcome enforcement threshold occurs at $N \cdot I_0 \approx Q_R$. Below this threshold (microscopic regime, $N \cdot I_0 \ll Q_R$): constraint vacuous, standard QM behavior. Above this threshold (macroscopic regime): constraint enforces single-record per run.
 
-This is analogous to how gauge theories work: the physical state space is a constrained submanifold of the unrestricted Hilbert space (gauge-invariant states); physical Hamiltonians preserve gauge invariance; the unrestricted Hamiltonians are mathematically writeable but unphysical. In gauge theory the constraint is gauge invariance; in QIQT-H the constraint is the Branch-Summed Holographic Bound.
+A clarifying contrast with gauge theory: in gauge theory the physical state space is a constrained submanifold (gauge-invariant states) and one *also* restricts the admissible Hamiltonians to gauge-preserving ones. QIQT-H is **not** of this form. The restriction here is on which *regional contents* count as instantiable physical states (those with $I_\Sigma \le Q_R$); the global evolution law is left exactly unitary and unconstrained, and the formal global wave function — including formal multi-record vectors — evolves by ordinary standard QM. The Branch-Summed Bound constrains what can physically *reside* in a region, not which Hamiltonians may act.
 
-**Schrödinger evolution holds on $\mathcal{H}_{\rm phys}$.** Within the physical state space, evolution under physical Hamiltonians is linear and unitary, Schrödinger evolution is preserved. What is *not* preserved is the freedom to use arbitrary Hilbert-space Hamiltonians; physical Hamiltonians are constrained.
+**The Schrödinger law is exactly unitary and unmodified.** There is no restriction on Hamiltonians and no non-unitary or non-linear term anywhere. What the framework adds is a kinematic statement about regional physical instantiability: a regional content carrying $\ge 2$ macroscopically distinct records has no per-run physical referent. This is (FQ) part (iii) plus the formal/per-run distinction, not a dynamical modification.
 
-**The price the framework pays.** This commitment modifies the physical dynamics relative to unrestricted standard QM. The set of physical Hamiltonians is a constrained set. This is a substantive modification of QM at the foundational level, but only in regimes where the branch-summed cost approaches the holographic capacity. At lab scales, where macroscopic records use only $\sim 10^{25}$ bits of an available $\sim 10^{70}$-bit holographic capacity per cubic meter, the constraint is operationally vacuous. Standard QM at lab scales gives the same predictions as the constrained dynamics. The constraint becomes operationally relevant only when branch-summed cost approaches $Q_R$, i.e., for macroscopic measurement records, where the framework's deviation from standard QM is to *enforce* single-record per-run at the kinematic level.
+**The price the framework pays.** The commitment is a new *kinematic postulate* — the Branch-Summed Holographic Bound on instantiable regional content — not a change to the dynamics. It is substantive at the foundational level, but only in regimes where the branch-summed cost approaches the holographic capacity. At lab scales, where macroscopic records use only $\sim 10^{25}$ bits of an available $\sim 10^{70}$-bit holographic capacity per cubic meter, the restriction is operationally vacuous and standard QM is recovered exactly. The restriction becomes operationally relevant only when branch-summed cost approaches $Q_R$, i.e., for macroscopic measurement records, where its content is to make $\ge 2$-record regional content non-instantiable — single-record per run at the kinematic level, with the dynamics still exactly unitary.
 
 **Mathematical work needed:**
 
 1. **Precise specification of $\mathcal{C}(R)$** as the einselected/Darwinistic record subalgebra (drawing on decoherent histories, Quantum Darwinism).
 2. **Per-record cost $c_R(r)$** rigorously defined via Zurek physical entropy.
 3. **Branch-summed bound $I_\Sigma^\epsilon \le Q_R$** as new physical principle, not derivable from existing holography, but conjecturally connectable to deeper quantum-gravity arguments about distinguishable record content per region.
-4. **Characterization of physical Hamiltonians**, which Hermitian operators preserve $\mathcal{H}_{\rm phys}$? This is analogous to characterizing gauge-invariant Hamiltonians in gauge theory.
-5. **Born statistics from typicality** under the constrained dynamics, the typicality theorem for which single-record state is realized per run, with the realization measure reproducing Born weights $|c_k|^2$.
+4. **Characterization of instantiable regional content** — a precise statement of which regional algebra-states satisfy $I_\Sigma \le Q_R$, and the proof that $\ge 2$-record content violates it (the Macroscopic Definiteness Conjecture, Open Problem 3). This is a constraint on regional content, not on Hamiltonians; the dynamics is left exactly unitary.
+5. **Born statistics from typicality** — the typicality theorem for which single-record content is realized per run, with the across-run realization frequency reproducing Born weights $|c_k|^2$ (probability emergent, not a per-run primitive).
 
 Each of these is a concrete open mathematical problem; together they constitute the framework's explicit research program beyond the borrowed CPW/Witten scaffolding.
 
@@ -870,10 +872,10 @@ The framework's single-world per run is therefore a *kinematic structural featur
 
 **Why this is genuinely new physics beyond Witten/CPW.** Witten/CPW provide the Type II algebraic infrastructure for regional generalized entropy. They do *not* establish:
 - The branch-summed bound as a strengthening of standard holographic entropy
-- The constraint that physical Hamiltonians preserve $\mathcal{H}_{\rm phys}$
-- The exclusion of multi-record states as kinematically forbidden
+- The kinematic non-instantiability of $\ge 2$-record regional content (a restriction on which regional contents are physical, not on the dynamics)
+- The exclusion of multi-record regional content as kinematically forbidden
 
-These are the framework's specific new physical principles, building on the Witten/CPW scaffolding. They constitute a concrete research program: define the branch-summed cost rigorously; postulate the Branch-Summed Bound as new physics; characterize the constrained dynamics; derive Born statistics from typicality within the constrained dynamics.
+These are the framework's specific new physical principles, building on the Witten/CPW scaffolding. They constitute a concrete research program: define the branch-summed cost rigorously; postulate the Branch-Summed Bound on instantiable regional content as new physics; prove that $\ge 2$-record content is excluded; derive Born statistics as an across-run typicality / relative-frequency result. The global evolution law remains exactly unitary throughout.
 
 ### 7.7 Theorem (No-signaling from modular-local admissibility)
 
@@ -955,11 +957,11 @@ The de Sitter static patch and black-hole horizon regions are the natural arenas
 
 ### 10.1 Copenhagen
 
-Invokes collapse without dynamics. We invoke no collapse. The single-record per-run wave function is a consequence of the Type II structure + decoherence + concentration, not of dynamical reduction.
+Invokes collapse without dynamics. We invoke no collapse. The single-record per-run regional content is a consequence of decoherence (removing interference) + the finite-information restriction on regional content (making a $\ge 2$-record content non-instantiable), not of dynamical reduction.
 
 ### 10.2 Many-Worlds
 
-Posits all formal components as equally real branches. We are single-world per run: the per-run wave function's regional state is concentrated on a single record; alternatives correspond to vanishing components in the Type II state space.
+Posits all formal components as equally real branches. We are single-world per run: the per-run regional content is single-record because a $\ge 2$-record regional content exceeds the region's information capacity $Q_R$ and is not an instantiable physical state; the unrealized records have no physical referent (they are not "real elsewhere"), in contrast to Many-Worlds.
 
 ### 10.3 Bohmian mechanics
 
@@ -967,7 +969,7 @@ Bohm adds particle positions in $3N$-dim configuration space as a *second ontolo
 
 ### 10.4 Objective collapse (GRW, CSL, DP, OR)
 
-Modify Schrödinger with collapse terms. We modify nothing dynamical. The Schrödinger evolution of the underlying field algebra is exactly unitary; the regional physical content is structurally single-record after concentration via the Type II algebra structure.
+Modify Schrödinger with collapse terms. We modify nothing dynamical. The Schrödinger evolution of the underlying field algebra is exactly unitary; the regional physical content is structurally single-record because a $\ge 2$-record regional content is not an instantiable physical state under the finite-information restriction — a constraint on which regional contents can reside, not on the dynamics.
 
 ### 10.5 QBism, relational quantum mechanics
 
@@ -975,7 +977,7 @@ Treat the wave function as epistemic / perspectival. We are objectively realist:
 
 ### 10.6 Modal interpretations, decoherent histories
 
-Introduce a modal value-rule or history-selection structure. We require neither. The Type II algebra has finite resolution intrinsically; concentration + this resolution yield single records without external value-rules.
+Introduce a modal value-rule or history-selection structure. We require neither. The finite-information restriction on regional content makes a $\ge 2$-record content non-instantiable, yielding single records without external value-rules.
 
 ### 10.7 Ensemble interpretations (Ballentine)
 
@@ -1052,7 +1054,7 @@ The structure rests on:
 
 3. **Finite physical resolution (Theorem 3, consequence of (FQ) under the literal reading).** Amplitudes within $\epsilon(R)$ of $0$ are physically equivalent to exact $0$; amplitudes within $\epsilon(R)$ of $1$ are physically equivalent to exact $1$. This is the structural consequence that does the foundational work.
 
-4. **The decoherence-and-concentration mechanism.** Under standard unitary dynamics + microscopic initial conditions of any specific run, per-run amplitudes for distinct macroscopic record components evolve dynamically toward $0$ or $1$. Combined with the (FQ) resolution floor, this yields single-record per-run wave functions structurally (Theorem 4).
+4. **The decoherence-plus-finite-information-restriction mechanism.** Under standard unitary dynamics, decoherence removes interference between macroscopic record components (their weights $|c_k|^2$ are conserved, not driven to $0$ or $1$); the (FQ) resolution floor removes the residual sub-$\epsilon$ coherence as a resolution-equivalence; and the finite-information restriction (a $\ge 2$-record regional content exceeds $Q_R$) makes the resident regional content single-record, with the run's microscopic initial conditions indexing which record (Theorem 4).
 
 5. **The Born typicality program (open).** A conjectural program for deriving Born statistics from typicality of microscopic initial conditions; analogous to but distinct from Bohmian $|\psi|^2$-equivariance, identified as the central open quantitative problem.
 
@@ -1120,7 +1122,7 @@ The open problems are *concrete and well-defined*: each can be attacked in princ
 
 ### 11.3 The central thesis, in one paragraph
 
-> The Bekenstein-Bousso holographic bound, taken literally as a Lorentz-invariant physical information limit on bounded regions of spacetime, motivates a stronger physical postulate: the **Branch-Summed Holographic Bound**, which constrains the sum of per-record costs across coexisting decoherent macroscopic record sectors of any bounded region by the holographic capacity $Q_R$. This bound is a **superselection rule on the physical state space** $\mathcal{H}_{\rm phys}$: universal wave functions whose induced regional states violate the bound are not physically realizable. Physical Hamiltonians are constrained to preserve $\mathcal{H}_{\rm phys}$ (analogous to gauge invariance in gauge theory). Within $\mathcal{H}_{\rm phys}$, Schrödinger / Heisenberg evolution is preserved exactly under physical Hamiltonians. The Born rule is preserved exactly. The macroscopic world, single-record per region per run, emerges as a *kinematic structural consequence* of the superselection rule, not as a dynamical selection event. No collapse, no hidden particle positions, no MWI branches, no modal value-rule are added; the framework is **ψ-monist** (wave function as only ontology) with the physical state space constrained by the Branch-Summed Holographic Bound. Born statistics across runs emerge from typicality of actual initial conditions of actual runs, propagated through the constrained dynamics. The CPW Type II crossed-product algebra framework provides the rigorous mathematical infrastructure; the Branch-Summed Holographic Bound is the framework's new physical principle on top, a strengthening of standard holography that is not derivable from existing QG results but is conjecturally connectable to deeper finite-information constraints on regional macroscopic record content.
+> The Bekenstein-Bousso holographic bound, taken literally as a Lorentz-invariant physical information limit on bounded regions of spacetime, motivates a stronger physical postulate: the **Branch-Summed Holographic Bound**, which constrains the sum of per-record costs across coexisting decoherent macroscopic record sectors of any bounded region by the holographic capacity $Q_R$. This is a restriction on the **physical state space** — on which *regional contents* are physically instantiable, not on the dynamics: a regional content carrying two or more macroscopically distinct records has summed information cost exceeding $Q_R$ and so has no per-run physical referent in that region. The Schrödinger / Heisenberg evolution law of the underlying field algebra is left **exactly unitary and entirely standard** (including ordinary measurement interactions); no amplitude is trimmed, no Hamiltonian is restricted, and a formal multi-record Hilbert-space vector remains a perfectly good *calculational* descriptor — it simply does not correspond to an instantiable single-region physical content. The macroscopic world, single-record per region per run, emerges as a *kinematic structural consequence* of this finite-information restriction, not as a dynamical selection event: decoherence removes interference (conserving the weights $|c_k|^2$), and the capacity restriction makes the resulting $\ge 2$-record mixture non-instantiable, leaving single-record regional content. No collapse, no hidden particle positions, no MWI branches (the unrealized records have no physical referent, not a parallel reality), no modal value-rule are added; the framework is **ψ-monist** (the wave function on a finite-information state space is the only ontology). There are no fundamental probabilities — the only fundamental quantities are the amplitude and the number of branches/records; the Born weights $|c_k|^2$ are an *emergent* relative branch-frequency across runs (the run's microscopic initial conditions index which record), not a per-run probability. The CPW Type II crossed-product algebra framework provides the rigorous mathematical infrastructure; the Branch-Summed Holographic Bound is the framework's new physical principle on top, a strengthening of standard holography that is not derivable from existing QG results but is conjecturally connectable to deeper finite-information constraints on regional macroscopic record content.
 
 ### 11.4 Open problems
 
@@ -1390,7 +1392,7 @@ The credit division is sharp: CPW supplies the mathematical infrastructure (Type
 
 ### 11.6 Closing remarks
 
-The framework retains standard quantum mechanics exactly at the level of the underlying field algebra. It adds one foundational axiom, (FQ) in its literal physical-instantiation reading, and one distinction (formal vs per-run wave function). From these, the structural consequences follow: finite physical resolution, decoherence-driven concentration, single-record per-run wave functions, the macroscopic world emerging without dynamical modification.
+The framework retains standard quantum mechanics exactly at the level of the underlying field algebra. It adds one foundational axiom, (FQ) in its literal physical-instantiation reading, and one distinction (formal vs per-run wave function). From these, the structural consequences follow: finite physical resolution; decoherence removing interference; the finite-information restriction on regional content making a $\ge 2$-record content non-instantiable; hence single-record per-run regional content, the macroscopic world emerging without any dynamical modification.
 
 The framework is empirically conservative, Schrödinger and Born preserved exactly, no laboratory deviations predicted. It is metaphysically modest, no actuality primitive beyond the per-run wave function as a physical state of spacetime. It is mathematically grounded in the CPW Type II algebra framework. The principal open problems are quantitative, the explicit form of $\epsilon(R)$ and the rigorous Born typicality theorem.
 
