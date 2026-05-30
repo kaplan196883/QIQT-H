@@ -12,7 +12,7 @@ A three-paper foundational program in quantum mechanics by Paweł Kapłański (2
 
 ## Central claim
 
-The framework is **ψ-monist** (wave function as the only ontology) with a finite-information axiom (FQ) constraining the universal wave function per bounded region of spacetime:
+The framework is **weak-ψ-monist** (the wave function $\Phi$ is the sole *dynamical* ontology; the complete per-run state is the pair $(\Phi, \lambda)$ with $\lambda$ a non-dynamical run-index selecting the realized record — ψ-ontic, weak-ψ-monist, formal-ψ-incomplete) with a finite-information axiom (FQ) constraining the instantiable regional content per bounded region of spacetime:
 
 $$S_{\rm ren}(\omega_\Psi) \le Q_R := \frac{A(\partial R)}{4\ell_P^2}$$
 
