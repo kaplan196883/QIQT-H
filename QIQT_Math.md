@@ -1,4 +1,4 @@
----
+﻿---
 title: "The QIQT-H Framework in Action: A Worked Mathematical Account of the Double-Slit Experiment"
 author: "Paweł Kapłański"
 date: 2026-05-25
@@ -636,7 +636,7 @@ QIQT-H: "The wave function is the only ontology. The per-run universal wave func
 
 Some accounts argue that decoherence alone "solves" the measurement problem. QIQT-H agrees that decoherence is part of the answer but explicitly identifies what decoherence does not do:
 
-Decoherence gives the diagonal formal mixed state $\sum_k p_k \omega_k$. It does not select a single record per run. The selection requires the per-run amplitude concentration (driven by amplification + microscopic IC) plus the (FQ) precision floor (rendering the concentrated amplitudes physically exact). Decoherence + concentration + (FQ) together give the single-record per-run outcome; decoherence alone does not.
+Decoherence gives the diagonal formal mixed state $\sum_k p_k \omega_k$. It removes interference, but it does **not** by itself select a single record per run — the diagonal mixture still carries every record. The single-record content comes from the finite-information bound: a regional content carrying two or more macroscopically distinct records (coherent or mixed) would cost more information than the screen region's holographic capacity $Q_R$ can hold, so it is not an instantiable physical state. The (FQ) resolution floor separately removes the residual sub-$\epsilon$ coherence (two regional states differing below it are the same physical state). No amplitude is trimmed and the dynamics stays exactly unitary; the per-run microscopic IC only index which single-record outcome the run carries.
 
 ---
 
@@ -649,8 +649,8 @@ We have worked through the double-slit experiment end-to-end in the QIQT-H frame
 1. The algebraic QFT setup, with Type II crossed-product algebras for the screen and environment regions.
 2. The decoherence calculation, showing how the off-diagonal coherence between distinct screen positions is suppressed by particle-screen-environment entanglement.
 3. The distinction between formal wave function (ensemble descriptor) and per-run wave function (specific run with specific microscopic IC).
-4. The per-run amplitude concentration via the detection cascade + microscopic IC.
-5. The (FQ) precision floor that renders the concentration physically exact, producing a single-record per-run state.
+4. The finite-information capacity bound: a regional content carrying $\ge 2$ macroscopically distinct spot-records costs more information than the screen region's holographic capacity $Q_R$ can hold, so it is not an instantiable physical state — this is what makes the resident content single-record (the decisive step), with the per-run microscopic initial conditions only indexing *which* single spot the run carries.
+5. The (FQ) precision floor, which removes the residual sub-$\epsilon$ record-coherence (regional states differing below it are the same physical state), so the resident regional content is a single-record state — with no amplitude trimmed and the dynamics left exactly unitary.
 6. The Born interference pattern emerging as the statistical distribution of single-spot outcomes across many runs.
 7. The which-path case, where the path-detector correlation breaks the symmetry between paths and absent the cross term in the empirical distribution.
 
