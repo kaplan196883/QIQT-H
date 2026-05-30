@@ -4,25 +4,29 @@
 
   GPT-5.5-pro fourth audit:
 
-      QIQT-H's framework says the "FQ-restricted physical Hamiltonian"
-      preserves H_phys.  This is *support preservation* — admissible
-      states map to admissible states.  But it is NOT *measure
-      preservation* in the Bohmian sense.
+      Under the canonical (state-space) reading, the exactly-unitary
+      dynamics carries instantiable regional contents to instantiable
+      regional contents (the §7.6 closure property — *support
+      preservation* of the admissible set).  But support preservation
+      is NOT *measure preservation* in the Bohmian sense.
 
       Bohmian mechanics has |ψ|²-equivariance: if μ_t = |ψ_t|² at one
       time, the guided dynamics preserves this throughout.  QIQT-H's
-      "Hamiltonian preserves H_phys" condition does NOT give an
-      analogous Born-measure preservation theorem.
+      closure property (instantiable contents stay instantiable) does
+      NOT give an analogous Born-measure preservation theorem.
 
       Counterexample: a swap bijection on a 2-point space with non-
       uniform measure (3/4, 1/4).  Support is preserved (the swap maps
       the 2-point space to itself), but the measure is shuffled.
 
-  Strategic implication: the paper must not slide from "physical
-  subspace is dynamically invariant" to "Born distribution is
-  dynamically preserved".  A genuine equivariance theorem (analogous
-  to Bohmian |ψ|²-equivariance) requires a concrete microscopic
-  dynamics specification the framework does not yet have.
+  Strategic implication: the paper must not slide from "the set of
+  instantiable regional contents is dynamically invariant" to "the Born
+  distribution is dynamically preserved".  A genuine equivariance
+  theorem (analogous to Bohmian |ψ|²-equivariance) is a *genuine
+  additional commitment* (hypothesis (iii) of Theorem 5), not a
+  consequence of the framework's current postulates.  Note this is
+  about the across-run typicality measure, not about the dynamics,
+  which remains exactly unitary.
 -/
 
 import Mathlib.Algebra.BigOperators.Fin

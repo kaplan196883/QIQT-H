@@ -2,27 +2,32 @@
   Decoherence-does-not-imply-concentration — central structural audit.
 
   Theorems 1 and 4 of `QIQT_Foundations_Paper.md` claim "single-record
-  per-run wave functions" emerge from (FQ) + decoherence + concentration
-  + microscopic initial conditions.  This file rigorously establishes
-  what GPT-5.5-pro flagged as the audit-worthy structural negative:
+  per-run regional content".  This file rigorously establishes what
+  GPT-5.5-pro flagged as the audit-worthy structural negative:
 
-      **Linear unitary measurement-decoherence ALONE cannot produce
-       single-record concentration.  Branch weights are CONSERVED, not
-       concentrated.**
+      **Linear unitary measurement-decoherence ALONE cannot select a
+       single outcome.  Branch weights are CONSERVED, not driven to
+       0/1.**
 
   Concrete formalization: a 2-outcome measurement-unitary on a qubit
   input preserves both |c₀|² and |c₁|² as branch weights of the output
   pointer state.  Equal-superposition input ψ = (|0⟩+|1⟩)/√2 leaves
   branch weights (½, ½) — never (1, 0) or (0, 1).
 
-  The audit isolates what (FQ) literal truncation + concentration
-  conjecture + microscopic IC must do — namely, *break linearity or
-  unitarity* (FQ literal reading does the former: amplitudes are
-  truncated to Q bits, the dynamics restricted to H_phys is therefore
-  not a unitary on the unrestricted Hilbert space).
-
-  If any QIQT-H argument slides rhetorically from "decoherence" to
-  "single record" without flagging this, the audit closes that gap.
+  **Significance under the canonical (state-space) reading.**  This is
+  exactly why the framework's single-outcome mechanism is NOT
+  "decoherence drives amplitudes to 0/1" (it does not, as proved here)
+  and is NOT any amplitude trimming or dynamics modification.  Per the
+  canonical reading the dynamics stays *exactly unitary*; decoherence
+  only removes interference, leaving a multi-record mixture.  The
+  single-record content comes from the separate, kinematic
+  finite-information restriction (a ≥2-record regional content exceeds
+  the regional capacity Q_R and is not an instantiable physical state —
+  the Macroscopic Definiteness Conjecture), with the microscopic
+  initial conditions merely *indexing* which record a given run carries.
+  This audit closes the rhetorical gap: it forbids any slide from
+  "decoherence" to "single record", forcing the finite-information
+  restriction to be named as the load-bearing step.
 -/
 
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
@@ -88,14 +93,25 @@ theorem equal_superposition_stays_equal
 
 /-- **Audit conclusion.**
 
-    Single-record per-run wave functions (QIQT-H Theorems 1, 4) do
-    NOT follow from linear unitary decoherence alone.  At least one
-    of the following must be added:
-      (a) Non-linear amplitude truncation (e.g., (FQ) literal reading).
-      (b) A hidden-variable / measure-over-IC selection rule.
-      (c) A stochastic conditioning / collapse postulate.
-      (d) An explicit concentration axiom (the Concentration Conjecture
-          of §6.2 — itself still open).
+    Single-record per-run regional content (QIQT-H Theorems 1, 4) does
+    NOT follow from linear unitary decoherence alone: both branches
+    remain populated, with weights conserved (proved below).
+
+    Under the canonical (state-space) reading, the load rests on the
+    **finite-information restriction on instantiable regional content**:
+    a ≥2-record regional content exceeds the regional capacity Q_R and
+    is not an instantiable physical state (the Macroscopic Definiteness
+    Conjecture, §7.6 — itself still open).  This restriction is a
+    *kinematic* constraint on which regional contents are physical; it
+    does NOT modify the dynamics (which stays exactly unitary), does NOT
+    trim amplitudes, and is NOT a collapse or stochastic rule.  The
+    microscopic initial conditions only *index* which single record a
+    given run carries; they do not produce the single-ness.
+
+    (Historical note: earlier drafts framed the missing ingredient as
+    "(FQ) literal amplitude truncation" or a dynamics modification.
+    That framing is superseded — see the module header.  This theorem's
+    content is unchanged: decoherence conserves branch weights.)
 
     This is a positive statement of where the framework's load actually
     rests, not a refutation. -/
