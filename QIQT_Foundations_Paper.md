@@ -42,6 +42,25 @@ This paper proposes a different resolution: **deny (3) at the level of physical 
 
 This is arguably the *least radical* resolution. It does not multiply worlds, add particles, modify dynamics, or subjectivize the wave function. It accepts one physically natural constraint, bounded spacetime cannot physically contain infinite information, which is *independently motivated* by holography and quantum gravity. The measurement problem is resolved by recognizing that we were illegitimately combining (1)–(4) when only three of the four can hold at the level of physical instantiation.
 
+### 1.0a Two facts, one world
+
+The framework rests on two physical commitments.
+
+**Fact 1 — There is only the wave function, and it carries no probability.** $\Phi$ is the whole of physical reality, evolving by one exactly-unitary law: no collapse, no branches-as-substances, no observer standing outside it, and no probability built into it. What is conventionally called the Born rule is an *across-run frequency*, not a number the world assigns to a single run. The only further fact is $\lambda$ — *which* of $\Phi$'s macroscopic realizations is the actual one. $\lambda$ is not a substance, not an observer, and not a probability; it is actuality, and nothing more (§7.6, §11.3).
+
+**Fact 2 — Information is limited by surface area.** Every bounded region $R$ can physically hold only $Q_R = A(\partial R)/4\ell_P^2$ worth of information (Bekenstein–Bousso, read as a literal instantiation bound; (FQ) below). A region can instantiate only *finitely many distinguishable records.*
+
+From these, with decoherence, the measurement problem dissolves — not by adding a mechanism but by removing a mistake: **the binary, definite outcomes we observe are a feature of macroscopic record-structures, which are area-limited and einselected, not of the wave function.** We measure in $0/1$ because *we* are macroscopic.
+
+The positive thesis makes the division of labor explicit — and is deliberate about what each ingredient does and does *not* do:
+
+- **Continuous, conserved amplitude.** The weights $|c_k|^2$ are continuous and are *conserved* under unitary evolution; decoherence never drives them to $0$ or $1$ (formalized as `NoConcentration`; §9). The wave function itself has no binary structure and no probability.
+- **Decoherence + einselection ⟹ stable, Boolean *records*.** What becomes effectively $0/1$ is a *different* variable from the amplitude: macroscopic record-existence (whether a definite pointer-record is instantiated in this region). Einselection makes such records redundant, robust, and mutually exclusive; this is *why a macroscopic system — apparatus, brain, or AI — can only register a definite result.* This explains the **stability and classicality** of outcomes, not their **uniqueness**.
+- **The holographic bound ⟹ finitely many records.** $Q_R$ caps *how many* distinguishable records a region can hold (its genuine, non-redundant role). It does **not**, by itself, forbid a superposition of records (§7.6).
+- **$\lambda$ ⟹ which record is actual.** That exactly one record is the lived one is the non-dynamical actuality fact $\lambda$. Born statistics are the across-run tally of $\lambda$ under a typicality measure — emergent bookkeeping, not a per-run probability (§8, Open Problem on the typicality measure).
+
+The dissolution is then this: there is **no external observer to whom a probability is assigned.** "The outcome" is simply which macroscopic realization of $\Phi$ is actual. Collapse and fundamental probability were posited to explain a definiteness that lives in *us* — macroscopic, area-limited record-structures — and was never a feature of $\Phi$. There is only $\Phi$; the binary is the texture of our scale, not of the world.
+
 ### 1.1 The position
 
 This paper develops a position in the foundations of quantum mechanics whose structure is:
@@ -664,6 +683,14 @@ $$
 *No bound is imposed on the joint spacelike algebra $\hat{\mathcal{A}}(D_A) \vee \hat{\mathcal{A}}(D_B)$ beyond what the local restrictions already require.*
 
 This is a **strengthening of the standard Bekenstein-Bousso bound**, not a derivation from it. Standard holographic entropy bounds limit the renormalized entropy of regional reduced states; the modular-local bound limits the *relative* entropy with respect to a reference state, intrinsically defined via Araki/Connes machinery in Type III local QFT.
+
+**Scope: what the bound does *not* forbid, and what therefore does the work (important).** It is essential to be precise about the reach of any entropy-type bound, because a naive reading overclaims. The naive argument — "a two-record content must encode the joint information of both records, which exceeds $Q_R$" — *does not follow from the Bekenstein–Bousso bound, and we explicitly disavow it.* An entropy bound limits the number of mutually **distinguishable** records a region can carry ($\# \le e^{Q_R}$); it does **not** forbid a **superposition** of records. The decisive counterexample is a redundant cat state,
+$$
+|\Psi\rangle = \alpha\,|0\rangle^{\otimes N} + \beta\,|1\rangle^{\otimes N},
+$$
+which encodes two macroscopically distinct, redundantly copied records, fits in $N$ qubits, and is a **pure state of zero entropy** — violating no entropy bound whatsoever. More generally, by linearity of the exactly-unitary dynamics, if $|R_0\rangle$ and $|R_1\rangle$ are each individually instantiable in $R$, then so is $\alpha|R_0\rangle + \beta|R_1\rangle$, *unless an additional superselection-type principle is imposed* — and any such principle stands in tension with the exact unitary linearity this framework otherwise preserves. (This is precisely why the single-record claim is a *postulated superselection rule* above, a strengthening of standard holography, and not a corollary of it.)
+
+Consequently the honest **division of labor** is: decoherence + einselection supply *stable, robust, effectively Boolean* candidate records (the classical stage; this gives robustness, not uniqueness); the modular-local capacity bound makes the set of *distinguishable* records *finite* (cardinality, not superposition-exclusion); and the **uniqueness of the actual record is supplied by the non-dynamical actuality fact $\lambda$** (§1.0a, §11.3), not derived from $Q_R$. The framework's single-record-per-run content rests on $\lambda$ regardless of whether the superselection rule below can be established. A positive resolution of that rule would upgrade $\lambda$-selection from a postulate toward a structural consequence; a negative resolution leaves all empirical claims intact, with the selection mechanism explicitly postulated. In its strong "finite capacity *forbids* macroscopic superposition" form, the rule is not merely unproven but, in light of the cat-state obstruction above, currently *implausible* without additional nonstandard structure; this is recorded honestly as Open Problem 3.
 
 **Branch-summed cost as derived approximation.** When $\omega_R$ is a strict classical mixture $\bar\omega_R = \sum_k p_k \omega_{k,R}$ over decoherent macroscopic records (as after decoherence + (FQ) at lab scale, §6.2–6.3), Donald's identity for Araki relative entropy gives
 $$

@@ -2,6 +2,14 @@
 
 A three-paper foundational program in quantum mechanics by Paweł Kapłański (2026), combining the Chandrasekaran-Penington-Witten Type II crossed-product algebra construction with a literal physical-instantiation reading of the Bekenstein-Bousso holographic information bound.
 
+## Two facts, one world
+
+**1. There is only the wave function — and it carries no probability.** $\Phi$ is the whole of physical reality, evolving by one exactly-unitary law: no collapse, no branches-as-substances, no observer standing outside it, and no probability built into it. What we call the Born rule is an *across-run frequency*, not a number the world assigns to a single run. The only further fact is $\lambda$ — *which* of $\Phi$'s macroscopic realizations is the actual one. $\lambda$ is not a substance, not an observer, and not a probability; it is actuality, nothing more.
+
+**2. Information is limited by surface area.** Every bounded region $R$ can hold only $Q_R = A(\partial R)/4\ell_P^2$ worth of physical information (Bekenstein–Bousso, read literally). A region can instantiate only *finitely many distinguishable records.*
+
+From these two facts, with decoherence, the measurement problem dissolves — not by adding a mechanism, but by removing a mistake: **the binary, definite outcomes we observe are a feature of macroscopic record-structures (which are area-limited and einselected), not of the wave function.** We measure in $0/1$ because *we* are macroscopic. There is only $\Phi$; the binary is the texture of our scale, not of the world. (What the two facts furnish is a *stable, finite stage* of robust classical records; *which* record is the actual one is $\lambda$ — see the Central claim and the Macroscopic Definiteness Conjecture below for the honest division of labor.)
+
 ## The trilogy
 
 1. **`QIQT_Position_Paper.md`** — accessible position statement: *One Wave Function, One World: How the Holographic Information Bound Selects the Macroscopic World*
@@ -16,18 +24,18 @@ The framework is **weak-ψ-monist** (the wave function $\Phi$ is the sole *dynam
 
 $$S_{\rm ren}(\omega_\Psi) \le Q_R := \frac{A(\partial R)}{4\ell_P^2}$$
 
-The literal physical-instantiation reading of this bound, combined with decoherence and the macroscopic record subalgebra structure, gives single-record per-run outcomes as a structural consequence — without collapse, hidden particles, branching ontology, or modal value-rules. Schrödinger / Heisenberg evolution of the underlying field algebra is preserved exactly.
+The division of labor is explicit. **Continuous, conserved amplitude:** the weights $|c_k|^2$ are continuous and conserved under unitary evolution — decoherence never drives them to $0$ or $1$ (formally: `NoConcentration`). **Decoherence + einselection** make macroscopic *records* stable, redundant, and effectively Boolean — this is why a macroscopic system (apparatus, brain, AI) can only register a definite result; it explains the *stability and classicality* of outcomes, not their uniqueness. **The holographic bound** caps *how many* distinguishable records a region can hold (its genuine, non-redundant role). **$\lambda$** supplies *which* single record is actual. Schrödinger / Heisenberg evolution of the underlying field algebra is preserved exactly; no collapse, no hidden particles, no branching ontology, no modal value-rules are added.
 
 ## Central conjecture (open theorem)
 
-**Macroscopic Definiteness Conjecture** (foundations paper §7.6): under (FQ), the physically realized state on the macroscopic record subalgebra of any region is a single point of its spectrum — multi-record states are not physically realizable because they would require more information than the regional holographic capacity allows.
+**Macroscopic Definiteness Conjecture** (foundations paper §7.6). *Revised statement.* A naive reading — "two macroscopic records cost twice the information, so a two-record content exceeds $Q_R$" — does **not** follow from the Bekenstein–Bousso bound, which limits *entropy* (the number of mutually **distinguishable** records, $\#\le e^{Q_R}$), not *superposition*: a redundant cat state $\alpha\,|0\rangle^{\otimes N} + \beta\,|1\rangle^{\otimes N}$ encodes two macroscopically distinct records, fits in $N$ qubits, and is a pure state of zero entropy, violating no bound. By linearity, if $|R_0\rangle$ and $|R_1\rangle$ are each instantiable in $R$, so is their superposition — unless a superselection-type principle is added, which would stand in tension with the exact unitary linearity the framework preserves. We therefore **do not claim** the holographic bound forbids multi-record content; its genuine role is to bound the *number and redundancy* of distinguishable records, and the **uniqueness of the actual record is supplied by $\lambda$**, not derived from $Q_R$. The conjecture is restated as the open question of whether finite capacity plus einselection can be strengthened into a genuine macroscopic superselection rule consistent with unitarity — flagged as the framework's central unresolved problem, on equal footing with the Born-typicality measure, and candidly noted as currently implausible in its strong "forbids superposition" form. The framework's single-outcome content rests on $\lambda$ regardless of its fate.
 
 ## Mathematical status
 
 - **Rigorous scaffolding (borrowed)**: Type II crossed-product algebras (Witten 2022; Chandrasekaran-Penington-Witten 2022; Chandrasekaran-Longo-Penington-Witten 2022; Jensen-Sorce-Speranza 2023)
 - **Foundational axiom (our postulate)**: (FQ) literal physical-instantiation reading of Bekenstein-Bousso bound
-- **Qualitative consequences worked out**: finite physical resolution; decoherence + (FQ) → strict classical mixture; single-record per run from Macroscopic Definiteness
-- **Open problems explicitly identified**: explicit closed-form $\epsilon(R)$; rigorous proof of Macroscopic Definiteness Theorem; Born-typicality theorem analogous to Bohmian $|\psi|^2$-equivariance
+- **Qualitative consequences worked out**: finite physical resolution; decoherence + (FQ) → stable, finite, effectively Boolean record structure (the *stage*); single-record actuality supplied by $\lambda$
+- **Open problems explicitly identified**: explicit closed-form $\epsilon(R)$; whether finite capacity + einselection strengthen into a genuine macroscopic superselection rule consistent with unitarity (the revised Macroscopic Definiteness Conjecture — its strong "forbids superposition" form is currently implausible); Born-typicality measure over $\lambda$-histories analogous to Bohmian $|\psi|^2$-equivariance
 
 The framework is presented as a research program with rigorous scaffolding + clearly identified open theorems — not a completed mathematical theory.
 

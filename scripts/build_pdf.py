@@ -199,6 +199,9 @@ PREAMBLE_TEMPLATE = r"""\documentclass[11pt,a4paper]{article}
 \newunicodechar{⟷}{$\longleftrightarrow$}
 \newunicodechar{⟶}{$\longrightarrow$}
 \newunicodechar{⟵}{$\longleftarrow$}
+\newunicodechar{⟹}{$\Longrightarrow$}
+\newunicodechar{⟸}{$\Longleftarrow$}
+\newunicodechar{⟺}{$\Longleftrightarrow$}
 \newunicodechar{←}{$\leftarrow$}
 \newunicodechar{⇒}{$\Rightarrow$}
 \newunicodechar{⇐}{$\Leftarrow$}
