@@ -3088,9 +3088,9 @@ The interpretation is:
 
 # 30. Glossary
 
-being detected, this resolution floor means the residual record-coherence has no physical referent (two regional states differing below it are the same physical state), so the record is definite at the level of regional physical content. But the decisive step is the finite-information bound on which states can RESIDE in the region: a content carrying two or more macroscopically distinct records (coherent or mixed) would cost more information than the region's holographic capacity Q_R can hold, so it is not an instantiable physical state at all. The resident content is therefore single-record. Decoherence removes interference; the capacity bound is what makes the resident content single. Then the microscopic initial conditions of that specific run only label which single-record outcome the run carries (they do not produce the single-ness). There are no probabilities and no branching worlds — only the wave function on a finite-information state space; what looks like collapse is decoherence plus the finite-information residence constraint, with the run's outcome indexed by its microscopic initial conditions.
+## Branch
 
-An effectively noninterfering component of the wavefunction produced by decoherence.
+An effectively noninterfering component of the wavefunction produced by decoherence. In QIQT-H a branch is *not* a separate world: decoherence makes branches stop interfering, but a regional content carrying two or more macroscopically distinct branch-records exceeds the region's finite information capacity $Q_R$ and so is not an instantiable physical state. The resident regional content is single-record; the unrealized branches have no physical referent (they are not "real elsewhere"). Which single branch a run carries is indexed by its microscopic initial conditions.
 
 ## Record
 
