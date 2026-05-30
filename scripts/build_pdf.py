@@ -194,6 +194,81 @@ PREAMBLE_TEMPLATE = r"""\documentclass[11pt,a4paper]{article}
 \newunicodechar{‐}{-}
 \newunicodechar{‑}{-}
 
+% --- QIQTH extended symbol coverage (arrows/relations/logic/brackets) ---
+\newunicodechar{↔}{$\leftrightarrow$}
+\newunicodechar{⟷}{$\longleftrightarrow$}
+\newunicodechar{⟶}{$\longrightarrow$}
+\newunicodechar{⟵}{$\longleftarrow$}
+\newunicodechar{←}{$\leftarrow$}
+\newunicodechar{⇒}{$\Rightarrow$}
+\newunicodechar{⇐}{$\Leftarrow$}
+\newunicodechar{⇔}{$\Leftrightarrow$}
+\newunicodechar{⇏}{$\nRightarrow$}
+\newunicodechar{⇎}{$\nLeftrightarrow$}
+\newunicodechar{⇌}{$\rightleftharpoons$}
+\newunicodechar{↑}{$\uparrow$}
+\newunicodechar{↓}{$\downarrow$}
+\newunicodechar{↕}{$\updownarrow$}
+\newunicodechar{↪}{$\hookrightarrow$}
+\newunicodechar{≡}{$\equiv$}
+\newunicodechar{≢}{$\not\equiv$}
+\newunicodechar{≅}{$\cong$}
+\newunicodechar{≃}{$\simeq$}
+\newunicodechar{≲}{$\lesssim$}
+\newunicodechar{≳}{$\gtrsim$}
+\newunicodechar{≪}{$\ll$}
+\newunicodechar{≫}{$\gg$}
+\newunicodechar{∝}{$\propto$}
+\newunicodechar{≔}{$:=$}
+\newunicodechar{∀}{$\forall$}
+\newunicodechar{∃}{$\exists$}
+\newunicodechar{∄}{$\nexists$}
+\newunicodechar{∅}{$\emptyset$}
+\newunicodechar{¬}{$\neg$}
+\newunicodechar{∧}{$\wedge$}
+\newunicodechar{∨}{$\vee$}
+\newunicodechar{⊙}{$\odot$}
+\newunicodechar{⊥}{$\perp$}
+\newunicodechar{∥}{$\parallel$}
+\newunicodechar{‖}{$\Vert$}
+\newunicodechar{∘}{$\circ$}
+\newunicodechar{∙}{$\bullet$}
+\newunicodechar{•}{$\bullet$}
+\newunicodechar{∗}{$\ast$}
+\newunicodechar{⊇}{$\supseteq$}
+\newunicodechar{⊃}{$\supset$}
+\newunicodechar{∖}{$\setminus$}
+\newunicodechar{⟨}{$\langle$}
+\newunicodechar{⟩}{$\rangle$}
+\newunicodechar{†}{$\dagger$}
+\newunicodechar{‡}{$\ddagger$}
+\newunicodechar{′}{$'$}
+\newunicodechar{″}{$''$}
+\newunicodechar{⟂}{$\perp$}
+\newunicodechar{⊤}{$\top$}
+\newunicodechar{⊨}{$\models$}
+\newunicodechar{⊢}{$\vdash$}
+\newunicodechar{∎}{$\blacksquare$}
+\newunicodechar{□}{$\square$}
+\newunicodechar{△}{$\triangle$}
+\newunicodechar{Ξ}{$\Xi$}
+\newunicodechar{Υ}{$\Upsilon$}
+\newunicodechar{ϕ}{$\phi$}
+\newunicodechar{ϵ}{$\epsilon$}
+\newunicodechar{ϑ}{$\vartheta$}
+\newunicodechar{∓}{$\mp$}
+\newunicodechar{°}{\textdegree}
+\newunicodechar{µ}{$\mu$}
+\newunicodechar{²}{\textsuperscript{2}}
+\newunicodechar{³}{\textsuperscript{3}}
+\newunicodechar{¹}{\textsuperscript{1}}
+\newunicodechar{⁰}{\textsuperscript{0}}
+\newunicodechar{₀}{\textsubscript{0}}
+\newunicodechar{₁}{\textsubscript{1}}
+\newunicodechar{₂}{\textsubscript{2}}
+\newunicodechar{₃}{\textsubscript{3}}
+\newunicodechar{ₙ}{\textsubscript{n}}
+
 \title{__TITLE__}
 \author{__AUTHOR__}
 \date{__DATE__}
@@ -617,7 +692,7 @@ def convert_inline_fragment(md: str) -> str:
 
 def build_one(src: Path) -> bool:
     print(f"\n=== {src.name} ===")
-    md = src.read_text(encoding="utf-8")
+    md = src.read_text(encoding="utf-8").replace("﻿", "")
     print(f"  read {len(md)} chars, {md.count(chr(10)) + 1} lines")
 
     meta, body = parse_frontmatter(md)
