@@ -240,13 +240,15 @@ These are not "alternative possible wave functions for the same preparation." Th
 
 ### 6.4 What the framework adds (and what it doesn't)
 
-The framework adds *no extra ontology* beyond the universal wave function. It is **ψ-monist**. The framework's two additions to standard QM are:
+The framework adds *no second dynamical substance* beyond the universal wave function. It is **ψ-monist in the weak (dynamical) sense** — $\Phi$ is the sole dynamical ontology. The framework's additions to standard QM are:
 
 1. **Recognition that the subsystem wave function $|\psi\rangle_{\rm sub}$ is an abstraction**, not the complete physical state. The per-run universal wave function $|\Psi\rangle_{\rm run}$ is the actual state. This is just standard QM at the universal level (which is always the full story; the subsystem description is a calculational convenience).
 
 2. **The (FQ) axiom** limiting the physical information content of the universal wave function in any bounded region. This is the foundational postulate.
 
-Neither addition introduces a second physical layer. The framework is wavefunction-monist standard QM with (FQ) added.
+3. **A non-dynamical run-index $\lambda$** (the run's actual microscopic initial conditions) selecting which single record is realized.
+
+None of these introduces a second *dynamical* layer or a guidance law. The complete per-run state is the pair $(\Phi, \lambda)$: weak-ψ-monist standard QM with (FQ) added, plus a non-dynamical actuality selector. In Spekkens–Harrigan terms the framework is ψ-ontic, weak-ψ-monist, and formal-ψ-incomplete.
 
 ### 6.5 The Born statistics as ensemble over actual runs
 
@@ -344,9 +346,9 @@ In algebraic terms: the per-run universe is in the branch $\omega_{k_{\rm run}}^
 
 No collapse postulate is invoked. Schrödinger / Heisenberg evolution of the underlying field algebra is preserved exactly. The single-spot per-run outcome emerges as the structural consequence of decoherence + (FQ) + per-run microscopic IC.
 
-### 8.4 ψ-monism: there is only the wave function
+### 8.4 Weak ψ-monism: one dynamical ontology, plus a non-dynamical actuality fact
 
-The per-run microscopic IC are *not* hidden variables in the sense of an additional ontology beyond the wave function. The framework is **ψ-monist**: the wave function is the only physical ontology. There are no Bohmian particles, no extra fields, no second ontological layer of any kind.
+The per-run microscopic IC ($\lambda$) are *not* a second dynamical substance and not a guided hidden variable: there are no Bohmian particles, no extra fields, no guidance law. The framework is **weak-ψ-monist** — the wave function $\Phi$ is the sole *dynamical* ontology. It is, however, honest to record that $\lambda$ — the run's actual microscopic configuration, which selects the realized record — is a *broad-sense* beable: a non-dynamical actuality fact not contained in the bare textbook formal wave function. So the complete per-run state is the pair $(\Phi, \lambda)$, and the framework is ψ-ontic, weak-ψ-monist, and formal-ψ-incomplete.
 
 What the framework adds is the distinction between two senses of "wave function":
 
