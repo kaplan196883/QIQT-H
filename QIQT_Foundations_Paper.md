@@ -512,6 +512,20 @@ Denial of measurement independence preserves: no preferred foliation; no explici
 
 **Sister program: Palmer's RaQM / Invariant Set Theory.** Palmer (2025 and prior work) develops a structurally similar Bell escape: principled rejection of measurement independence via the geometry of a fractal invariant set in cosmological state space. The two frameworks share the strategic shape, single-world realism + measurement-dependence grounded in deep structural physics, not in conspiratorial superdeterminism. They differ in the motivating principle (chaos / invariant set vs holography / information capacity) and the mathematical apparatus (p-adic measures + Niven's theorem vs CPW Type II algebras + finite-precision postulate). Detailed comparison is in §10.8.
 
+### 6.10 Tunneling: standard dynamics, record-level reading
+
+Quantum tunneling is a useful test of what QIQT-H does and does not modify. The under-barrier amplitude is real physical content of the formal field state, and **all tunneling amplitudes and rates are exactly those of standard quantum theory** — coherent tunneling (ammonia inversion, Josephson oscillation, double-well coherent oscillation), WKB barrier penetration, $\alpha$-decay and fusion rates, instanton / vacuum-decay amplitudes, and Quantum Zeno / anti-Zeno effects are all unchanged, because (FQ) does not modify the Schrödinger evolution of the underlying field algebra.
+
+**Where the (FQ) reading acts — and where it does not.** A subtlety worth stating explicitly. The finite-information / (FQ) precision floor applies to *physically distinguishable, decohered, coarse-grained records* within a region $R$ — **not** to the pointwise evanescent wave function in the forbidden region, and **not** to an infinitesimal per-time-slice transition amplitude. Three reasons make the naive "any tunneling amplitude below $\varepsilon(R)$ is kinematically excluded" reading incorrect:
+
+1. *Per-attempt amplitude is not invariant.* In continuous-time tunneling/decay, the transition amplitude over a time slice scales with the (arbitrary) slice duration; a fixed pointwise floor would freeze ordinary decay by making every sufficiently short-time amplitude vanish.
+2. *Pointwise $\psi$ in the forbidden region is not the physically meaningful object.* It is basis-, normalization-, and coarse-graining-dependent, and in the continuum it is dimensionful; only a branch norm / probability for a *specified coarse-grained alternative* is physical.
+3. *Repeated trials aggregate.* Even a tiny per-trial tunneling probability $p$ gives an order-$Np$ chance of at least one event over $N$ trials; physical instantiation cannot be decided from a single per-attempt amplitude.
+
+The correct statement is therefore: QIQT-H leaves tunneling dynamics and rates exactly standard, and differs only when a tunneling outcome **becomes a decohered macroscopic record** (the particle is found, or not, on the far side). At that point — per run — decoherence + microscopic initial conditions + (FQ) select a single realized record, and typicality over initial conditions recovers the Born distribution for the tunneling probability. This is the same mechanism as for any other measurement (§6); tunneling is not a special case. **Standard mechanism (barrier penetration); QIQT-H reading of detection records only.**
+
+**Horizon tunneling (Hawking radiation).** The Parikh-Wilczek (1999) tunneling derivation of Hawking emission expresses the rate in terms of the change in Bekenstein-Hawking entropy $S_{\rm BH} = A/(4\ell_P^2)$ — exactly the holographic capacity that QIQT-H reads as the finite information content of the horizon region (in bits, $Q_{\rm hor} = S_{\rm BH}/\ln 2 = A/(4\ell_P^2 \ln 2)$). This is a clean conceptual alignment — the same quantity governs lab-scale per-run wave functions and the horizon's information budget — but it is a *reinterpretation*, not a new prediction: QIQT-H does not by itself modify or re-derive the Parikh-Wilczek emission rate.
+
 ---
 
 ## 7. Formal Consequences
