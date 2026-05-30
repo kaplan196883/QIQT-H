@@ -142,7 +142,7 @@ With (FQ) read literally and the precision mechanism in place, the position has 
 
 ## 6. What this avoids and what it does not avoid
 
-**No collapse postulate.** The Schrödinger / Heisenberg evolution of the underlying field algebra is preserved exactly. No non-unitary transition during measurement. What appears in standard accounts as collapse is the joint product of decoherence (dynamical amplitude concentration) and finite physical resolution (the (FQ) bound rendering near-zero amplitudes physically equivalent to zero).
+**No collapse postulate.** The Schrödinger / Heisenberg evolution of the underlying field algebra is preserved exactly. No non-unitary transition during measurement, and (FQ) trims no amplitude — there are no fundamental probabilities, only the wave function. What appears in standard accounts as collapse is the joint product of decoherence (which renders the macroscopic records exponentially distinguishable, without modifying any amplitude weights) and the (FQ) finite-resolution *residence* constraint (regional states differing below the resolution floor are the *same* physical state, so a decohered regional state and a strict classical mixture of records are physically identical). Which single record resides per run is fixed by that run's microscopic initial conditions. The Born weights $|c_k|^2$ are the empirical frequency pattern across runs, not a per-run probability.
 
 **No hidden particle positions.** No Bohmian particles in $3N$-dim configuration space.
 
