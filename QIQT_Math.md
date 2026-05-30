@@ -49,7 +49,7 @@ This paper does not prove the (FQ) axiom from first principles (that is the topi
 
 ### 1.3 Roadmap
 
-§2 reviews the standard QM account of the double-slit. §3 sets up the algebraic QFT framework. §4 introduces the Type II regional algebra of the screen. §5 develops the decoherence calculation. §6 distinguishes formal and per-run wave functions for the double-slit. §7 develops per-run amplitude concentration. §8 applies the (FQ) precision floor for single-spot emergence. §9 shows how Born statistics across runs reproduce the interference pattern. §10 works through the which-path case. §11 compares with standard textbook accounts. §12 concludes.
+§2 reviews the standard QM account of the double-slit. §3 sets up the algebraic QFT framework. §4 introduces the Type II regional algebra of the screen. §5 develops the decoherence calculation. §6 distinguishes formal and per-run wave functions for the double-slit. §7 develops single-record regional content (finite-information restriction + IC indexing). §8 applies the (FQ) resolution floor and capacity restriction for single-spot emergence. §9 shows how Born statistics across runs reproduce the interference pattern. §10 works through the which-path case. §11 compares with standard textbook accounts. §12 concludes.
 
 ---
 
@@ -513,7 +513,7 @@ What actually happens per run: the dynamics is exactly the standard unitary evol
 
 Across many runs (sequential detection events in the same universe with one universal wave function evolving through them), different actual initial conditions of screen + environment produce different actual realized spots. Each spot is selected from $\mathrm{Spec}(\mathcal{C}(R_S))$ by the physical (constrained) dynamics from the actual initial conditions.
 
-The Born conjecture: across many runs, the distribution of realized spots reproduces the Born weights $p_k = |\psi_A(x_k) + \psi_B(x_k)|^2$ as the empirical relative frequency. This requires a typicality theorem: for the appropriate measure on actual screen + environment initial conditions, the distribution of realized records under the constrained physical Hamiltonian matches the Born weights of the standard QM calculation. This is the second central open problem of the framework.
+The Born conjecture: across many runs, the distribution of realized spots reproduces the Born weights $p_k = |\psi_A(x_k) + \psi_B(x_k)|^2$ as the emergent empirical relative frequency. This requires a typicality theorem: for the appropriate measure on actual screen + environment initial conditions, the distribution of realized records under the exactly-unitary dynamics matches the Born weights of the standard QM calculation. This is the second central open problem of the framework.
 
 ### 9A.7 Mathematical status
 
@@ -660,9 +660,9 @@ The framework gives a complete structural account of the double-slit phenomenolo
 
 In the QIQT-H reading, "collapse" is not a dynamical event. It is the *structural consequence* of three ingredients working together:
 
-- **Decoherence** (standard QM): off-diagonal coherence between macroscopic records is dynamically suppressed by environmental entanglement.
-- **Per-run concentration** (per-run dynamics with specific microscopic IC): in any specific run, the amplification cascade drives the per-run regional state to concentrate on one record.
-- **(FQ) precision floor** (foundational postulate): concentrated amplitudes below the floor are physically equivalent to zero; the per-run wave function physically *is* a single-record state.
+- **Decoherence** (standard QM, unitary): off-diagonal coherence between macroscopic records is suppressed by environmental entanglement. This removes interference but leaves a multi-record mixture — it does not by itself select one record.
+- **Finite-information restriction** (the decisive step): a regional content carrying two or more macroscopically distinct records exceeds the region's holographic capacity $Q_R$ and so is not an instantiable physical state. The resident regional content is therefore single-record. The run's microscopic initial conditions index *which* record (they do not produce the single-ness).
+- **(FQ) resolution floor** (foundational postulate): the residual sub-$\epsilon$ record-coherence has no physical referent (regional states differing below the floor are the same physical state). No amplitude is trimmed; the dynamics stays exactly unitary.
 
 The Schrödinger / Heisenberg evolution of the underlying field algebra is preserved exactly. The "collapse" is what the standard textbook observes from outside the framework: a single spot appears on the screen, the wave function "seems to" jump from a continuous superposition to a localized state. In the framework, what is really happening is that the per-run wave function on the screen region is, after detection, physically a single-record state, the apparent "jump" is just the recognition that the per-run wave function was always (per the foundational postulate) a finite-precision physical state, and after concentration it is physically a single record.
 
