@@ -411,12 +411,12 @@ In the quantum case, the same structure obtains with one additional ingredient: 
 
 The per-run "microscopic initial conditions" are *not* hidden variables in any ontological sense. They are simply *the actual physical state of the apparatus + environment in the specific run*. Different runs of an experiment correspond to different actual physical universes, different particles emitted, different microscopic apparatus states, different environmental configurations. These differences are not added structure; they are the standard fact that *actual physical universes differ across actual physical experiments*. Standard QM, at the universal-wave-function level, already accommodates this trivially: the universal wave function is a function of all degrees of freedom in the universe; those degrees of freedom take different actual values in different runs.
 
-The framework is **ψ-monist**: there is no ontological structure beyond the universal wave function. What the framework does, and what standard textbook QM elides, is to take seriously that:
+The framework is **ψ-monist in the weak (dynamical) sense** (§2.2): the wave function is the only ontology carrying a law of motion; the only additional fact is the non-dynamical run-index $\lambda$, not a second dynamical substance. What the framework does, and what standard textbook QM elides, is to take seriously that:
 1. The universal wave function (not the textbook subsystem wave function) is the actual physical state in each run
 2. Different runs are different actual physical universes, not different versions of "the same" universe
 3. The Born statistics across runs come from the distribution of *actual* initial conditions across *actual* runs, not from any "alternative" wave functions for a single preparation
 
-In Bohmian language: there are no Bohmian particles, no extra ontological layer; the universal wave function is the only thing, and different runs have different actual universal wave functions because the actual physical universe differs in each run. This is wavefunction-monist standard QM with (FQ) added as a finite-information constraint.
+In Bohmian language: there are no Bohmian particles and no second *dynamical* ontology; the wave function $\Phi$ is the only thing carrying a law of motion. What plays a role structurally analogous to the Bohmian configuration is the run-index $\lambda$ — the run's actual microscopic initial conditions — a *non-dynamical* actuality fact (no guidance law, no back-reaction on $\Phi$) that selects which single record is realized. Different runs carry different $\lambda$. This is weak-ψ-monist standard QM with (FQ) added as a finite-information constraint, plus the non-dynamical actuality selector $\lambda$.
 
 ### 6.5 Theorem: Single-record per-run wave functions
 
@@ -480,7 +480,7 @@ This is the cost-counting argument the framework rests on for the Macroscopic De
 
 ### 6.9 The Bell escape: holographic nonseparability vs classical separability
 
-A natural objection: any deterministic single-world theory reproducing standard quantum predictions must confront Bell's theorem. The framework is **ψ-monist** (the wave function is the only ontology; no extra hidden particles or fields are added) but the per-run wave function in any specific run differs from the textbook formal ensemble descriptor; it reproduces standard quantum predictions; it has single outcomes per run. Which Bell assumption does it reject?
+A natural objection: any deterministic single-world theory reproducing standard quantum predictions must confront Bell's theorem. The framework is **ψ-monist in the weak (dynamical) sense** (no extra dynamical particles or fields; §2.2) — though the complete per-run description is the pair $(\Phi, \lambda)$, with $\lambda$ a non-dynamical actuality fact — the per-run state in any specific run differs from the textbook formal ensemble descriptor; it reproduces standard quantum predictions; it has single outcomes per run. Which Bell assumption does it reject?
 
 **The framework's answer: measurement independence, grounded in holographic nonseparability.**
 
@@ -512,7 +512,7 @@ Denial of measurement independence preserves: no preferred foliation; no explici
 
 **Position with respect to Kochen-Specker.** If per-run microscopic structure determines outcomes, value assignments must be contextual, which the framework accepts. The per-run wave function's content on a regional algebra is naturally contextual: different measurement contexts probe different algebra-projections, and there is no requirement of joint-value consistency across noncommuting contexts.
 
-**Position with respect to PBR.** The framework is **ψ-ontic and ψ-monist**: the wave function is physically real and is the only ontology. The framework does *not* add hidden particle positions, hidden fields, or any other ontological layer beyond the wave function itself. What is "supplemented" relative to standard textbook QM is not the ontology but the *recognition that the per-run wave function differs from the formal ensemble descriptor*: the formal wave function used in textbook calculations describes the distribution across runs; the per-run wave function in any specific run is a definite physical state of the universe. PBR rules out certain ψ-epistemic positions; the framework is ψ-ontic and not one of those.
+**Position with respect to PBR.** The framework is **ψ-ontic and ψ-monist in the weak (dynamical) sense**: the wave function is physically real and is the sole dynamical ontology. The framework does *not* add hidden particle positions, hidden fields, or any second *dynamical* layer. It does, however, include one non-dynamical actuality fact — the run-index $\lambda$ fixing which single record is realized (§2.2, §7.6) — so it is **formal-ψ-incomplete**: the actual per-run ontic state is the pair $(\Phi, \lambda)$, finer-grained than the textbook formal wave function (which describes the distribution across runs). PBR rules out certain ψ-epistemic positions; the framework is ψ-ontic and not one of those — $\Phi$ is real, not a state of knowledge.
 
 **Sister program: Palmer's RaQM / Invariant Set Theory.** Palmer (2025 and prior work) develops a structurally similar Bell escape: principled rejection of measurement independence via the geometry of a fractal invariant set in cosmological state space. The two frameworks share the strategic shape, single-world realism + measurement-dependence grounded in deep structural physics, not in conspiratorial superdeterminism. They differ in the motivating principle (chaos / invariant set vs holography / information capacity) and the mathematical apparatus (p-adic measures + Niven's theorem vs CPW Type II algebras + finite-precision postulate). Detailed comparison is in §10.8.
 
@@ -969,7 +969,7 @@ Posits all formal components as equally real branches. We are single-world per r
 
 ### 10.3 Bohmian mechanics
 
-Bohm adds particle positions in $3N$-dim configuration space as a *second ontological layer* beyond the wave function, with a guidance equation connecting the two. The framework adds *no second ontological layer*. We are **ψ-monist**: the wave function is the only ontology. The per-run wave function is simply the actual physical wave function of the universe in any specific run; the formal wave function is the textbook ensemble descriptor. No particles, no fields, no extra structure, the distinction the framework adds is between the formal wave function (ensemble) and per-run wave function (actual), not between the wave function and some other physical thing.
+Bohm adds particle positions in $3N$-dim configuration space as a *second dynamical layer* beyond the wave function, with a guidance equation connecting the two — the configuration evolves under a law driven by $\Phi$. The framework adds *no second dynamical layer and no guidance law*: $\Phi$ is the sole dynamical ontology (weak ψ-monism; §2.2). The structural counterpart of the Bohmian configuration is the run-index $\lambda$ — the run's actual microscopic initial conditions, which select the realized record — but $\lambda$ is *non-dynamical*: it carries no equation of motion and exerts no back-reaction on $\Phi$. So the difference from Bohm is sharp: same single-world realism and a run-indexing actuality fact, but no extra guided substance and no modification of the dynamics. The complete per-run state is the pair $(\Phi, \lambda)$; the formal wave function is the textbook ensemble descriptor.
 
 ### 10.4 Objective collapse (GRW, CSL, DP, OR)
 
@@ -998,7 +998,7 @@ Palmer's Rational Quantum Mechanics (RaQM 2025, PNAS) and the broader Invariant 
 - Non-conspiratorial rejection of metaphysical counterfactual recombination
 - Motivation by deep structural principles rather than ad hoc modification of QM
 
-(The frameworks differ in ontology: Palmer treats the wave function as derived/emergent from invariant-set statistics, with the underlying ontology being points on the fractal invariant set $I_U$; our framework is ψ-monist with the wave function itself as the only ontology, where the per-run wave function is the actual physical state distinct from the textbook formal ensemble descriptor.)
+(The frameworks differ in ontology: Palmer treats the wave function as derived/emergent from invariant-set statistics, with the underlying ontology being points on the fractal invariant set $I_U$; our framework is weak-ψ-monist, with $\Phi$ the sole dynamical ontology plus a non-dynamical run-index $\lambda$ selecting the realized record — the per-run state $(\Phi,\lambda)$ being finer-grained than the textbook formal ensemble descriptor. Interestingly Palmer's $I_U$-point and our $\lambda$ play structurally similar run-indexing roles.)
 
 **Differences in mathematical apparatus and motivating principle:**
 
@@ -1038,7 +1038,7 @@ Our framework can be read as an algebraic foundational program: the macroscopic 
 | Decoherent histories | No | No | No | None | Formal + history selection |
 | Ballentine ensemble | No | No | No | None | An ensemble member, unspecified |
 | Palmer RaQM / IST | No (emergent dynamics) | No particles; per-run microstate on invariant set | No | Invariant-set discreteness (p-adic) | Specific microstate on $I_U$; measurement-dependent |
-| **(FQ) literal reading framework** | **No** | **No (ψ-monist: only the wave function; per-run WF ≠ formal WF, no extra ontology)** | **No** | **Finite physical resolution from holographic bound** | **One specific single-branch wave function, structurally selected by (FQ) precision floor + decoherence + per-run universal wave function being the actual physical state** |
+| **(FQ) literal reading framework** | **No** | **No second *dynamical* ontology (weak ψ-monist); one non-dynamical run-index $\lambda$ — formal-ψ-incomplete** | **No** | **Finite physical resolution + finite-information capacity on regional content** | **One single-record regional content $C_R = A_R[\Phi,\lambda]$: capacity bound forbids $\ge 2$-record content, $\lambda$ selects which; dynamics exactly unitary** |
 
 The (FQ) literal reading framework is uniquely characterized by a **finite physical resolution structure from the holographic bound**: the wave function as a physical state of spacetime has finite specification precision; amplitudes within precision of 0 or 1 are physically equivalent to exact 0 or 1; combined with decoherence and microscopic initial conditions, this yields a single-record per-run wave function structurally, without collapse, without modified dynamics, without hidden particles, without branches. The CPW Type II algebra framework provides the rigorous mathematical infrastructure; the literal physical-instantiation reading of the bound is the additional foundational postulate that does the work.
 
