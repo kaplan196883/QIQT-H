@@ -111,11 +111,12 @@ What is sometimes loosely called the "formal wave function" in textbook accounts
 
 The relationship across runs: there is *one* per-run universal wave function per run. Different runs have *different actual* per-run universal wave functions because the actual initial conditions of the universe differ. Born statistics across runs (§7.4) arise from the distribution of these actual initial conditions, not from any "alternative" wave functions for the same preparation. The "ensemble" is over actual different physical universes, not over hypothetical alternatives.
 
-**The framework adds no ontology beyond the universal wave function.** It is ψ-monist. The framework's two contributions are:
+**The framework adds no second *dynamical* substance beyond the wave function** (no Bohmian particles, no extra fields, no guidance law). The framework's contributions are:
 1. The recognition that the textbook subsystem wave function $|\psi\rangle_{\rm sub}$ is *not* the complete physical state of the universe in a run, the per-run universal wave function $|\Psi\rangle_{\rm run}$ is. This is standard QM at the universal level.
 2. The (FQ) axiom limiting the physical information content of the universal wave function per region.
+3. A *non-dynamical run-index* $\lambda$ (the run's actual microscopic initial conditions) that selects which single record is realized (§7.6).
 
-Neither of these adds extra ontology. The "extra structure" is just standard QM at the universal-wave-function level (which always was the full story; the textbook subsystem abstraction is just convenient for calculations) plus the (FQ) postulate.
+**A note on "ψ-monism" as used throughout.** The framework is **ψ-monist in the weak (dynamical) sense**: the wave function $\Phi$ is the only thing carrying a law of motion (exactly unitary), and no second *dynamical* ontology is added. It is **not** ψ-monist in the strong sense that $\Phi$ alone is the complete per-run state — the single realized record per run is fixed by $\lambda$, a *non-dynamical actuality fact* (a broad-sense beable, structurally analogous to the configuration in Bohmian mechanics or the actual history in modal interpretations, but with no guidance law and no back-reaction on $\Phi$; see §7.6). In the Spekkens–Harrigan taxonomy the framework is therefore **ψ-ontic, weak-ψ-monist, and formal-ψ-incomplete**: $\Phi$ is real and is the sole dynamical ontology, but the complete per-run description is the pair $(\Phi, \lambda)$. Every later use of "ψ-monist" in this paper is shorthand for this weak/dynamical sense.
 
 ### 2.3 Empirical content
 
