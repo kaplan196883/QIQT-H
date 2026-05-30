@@ -147,11 +147,13 @@
 \maketitle
 
 \begin{abstract}
-\noindent We develop a foundational framework for quantum mechanics that combines the algebraic quantum field theory framework with the recent crossed-product / Type II construction of Chandrasekaran-Penington-Witten (2022) and Witten (2022). In ordinary QFT, the local algebras of bounded regions are of Type III$_1$, admitting no trace, no Hilbert-space factorization, and UV-divergent entanglement entropy. CPW and Witten show that gravitational dressing, implemented via the crossed product with the modular flow of a reference state, produces a Type II algebra $\hat{\mathcal{A}}(R)$ with a semifinite trace and a well-defined renormalized entropy whose differences match the generalized entropy expression $A/(4\ell_P^2) + S_{\rm matter}$. We use this algebraic infrastructure as the mathematical home for a foundational axiom (FQ) that we propose: \emph{for every per-run physical wave function and every bounded region $R$, the state $\omega_\Psi$ induced on the gravitationally dressed regional algebra $\hat{\mathcal{A}}(R)$ has renormalized entropy bounded by $Q_R := A(\partial R)/(4\ell_P^2)$, and two abstract wave functions inducing the same state on $\hat{\mathcal{A}}(R)$ are physically identical in $R$.} The crossed-product construction is borrowed from CPW/Witten; the holographic bound $S_{\rm ren} \le Q_R$ is postulated as a finite-information axiom in this algebraic setting (not derived from CPW); the foundational application of this algebraic infrastructure to the measurement problem is our contribution. We distinguish the \textbf{formal wave function} of standard QM (an idealized ensemble description) from the \textbf{per-run wave function} (whose regional physical content is given by its values on the regional Type II algebras). Algebra-state equivalence provides a basis-independent notion of regional physical indistinguishability, two abstract Hilbert vectors are physically the same regional state iff they agree on every observable in $\hat{\mathcal{A}}(R)$. \emph{Conjecturally}, under decoherence and microscopic initial conditions, per-run regional states concentrate dynamically on single-record states; \emph{if this concentration conjecture is established}, the per-run wave function in any region containing apparatus and environment is, in the algebraic sense, equivalent to a single-record state. The Schrödinger / Heisenberg evolution of the underlying field algebra is preserved exactly; (FQ) operates at the level of regional algebraic content. No collapse, no Bohmian particles, no MWI branches, no modal value-rule are added. Born statistics from typicality is stated schematically and identified as a key open problem. We state two propositions and two explicit conjectures, identify four explicit open problems, and frame the construction as a research program rather than a completed interpretation.
+\noindent We develop a foundational framework for quantum mechanics that combines the algebraic quantum field theory framework with the recent crossed-product / Type II construction of Chandrasekaran-Penington-Witten (2022) and Witten (2022). In ordinary QFT, the local algebras of bounded regions are of Type III$_1$, admitting no trace, no Hilbert-space factorization, and UV-divergent entanglement entropy. CPW and Witten show that gravitational dressing, implemented via the crossed product with the modular flow of a reference state, produces a Type II algebra $\hat{\mathcal{A}}(R)$ with a semifinite trace and a well-defined renormalized entropy whose differences match the generalized entropy expression $A/(4\ell_P^2) + S_{\rm matter}$. We use this algebraic infrastructure as the mathematical home for a foundational axiom (FQ) that we propose: \emph{for every per-run physical wave function and every bounded region $R$, the state $\omega_\Psi$ induced on the gravitationally dressed regional algebra $\hat{\mathcal{A}}(R)$ has renormalized entropy bounded by $Q_R := A(\partial R)/(4\ell_P^2)$, and two abstract wave functions inducing the same state on $\hat{\mathcal{A}}(R)$ are physically identical in $R$.} The crossed-product construction is borrowed from CPW/Witten; the holographic bound $S_{\rm ren} \le Q_R$ is postulated as a finite-information axiom in this algebraic setting (not derived from CPW); the foundational application of this algebraic infrastructure to the measurement problem is our contribution. We distinguish the \textbf{formal wave function} of standard QM (an idealized ensemble description) from the \textbf{per-run wave function} (whose regional physical content is given by its values on the regional Type II algebras). Algebra-state equivalence provides a basis-independent notion of regional physical indistinguishability, two abstract Hilbert vectors are physically the same regional state iff they agree on every observable in $\hat{\mathcal{A}}(R)$. \emph{Conjecturally} (the Macroscopic Definiteness Conjecture), a regional content carrying two or more macroscopically distinct records exceeds the regional capacity $Q_R$ and is therefore not an instantiable physical state; \emph{if this conjecture is established}, then after decoherence renders the records non-interfering, the per-run wave function in any region containing apparatus and environment is, in the algebraic sense, a single-record state — with the run's microscopic initial conditions indexing which record, the global evolution left exactly unitary, and no amplitude trimmed. The Schrödinger / Heisenberg evolution of the underlying field algebra is preserved exactly; (FQ) operates at the level of regional algebraic content. No collapse, no Bohmian particles, no MWI branches, no modal value-rule are added. Born statistics from typicality is stated schematically and identified as a key open problem. We state two propositions and two explicit conjectures, identify four explicit open problems, and frame the construction as a research program rather than a completed interpretation.
 
 
 \medskip
 \noindent\textbf{Keywords:} foundations of quantum mechanics; Bekenstein-Bousso bound; holographic principle; Type II von Neumann algebras; crossed product; generalized entropy; finite-resolution wave function; ensemble interpretation; typicality.
+
+\textbf{Formal verification.} The deductive core of this framework — Theorems 3, 6, 7, Lemma 1, Donald's identity, the no-signaling chain, the Bell/CHSH inequality (with rigorous singlet construction reaching $2\sqrt{2}$), seven structural audits (independence of (H2) from (H1) plus its sharp reference-weight reformulation; unitary decoherence does not imply concentration; the modular-local entropy bound is distinct from the CPW renormalized entropy; branch-summed cost is not a holographic consequence; literal-finite (FQ) admissibility gives trivial dynamics; compression-locality leakage and the local-projection constraint on (FQ); $\mu$-selection is load-bearing for Born statistics; support preservation $\neq$ Born equivariance), and three sub-theorems for the Canonical IC Measure Principle (typicality Mackey-Gleason; operational data insufficient; FQ-equivariance uniqueness) — is machine-verified in Lean 4 with Mathlib. A subsequent \textbf{A1+A2+A4+A6 strengthening pass} further: (i) proves the \emph{finite marginal-locality step} of the Canonical IC Measure Principle as a theorem holding for \textbf{any} IC measure — with no equivariance assumption (\texttt{MarginalLocality.pushforward\_marginal\_local}) — so locality is no longer an \emph{independent} Born-selection sub-axiom, though the reduction remains conditional on a named, explicit Hilbert→set-level locality bridge axiom (\texttt{set\_level\_locality\_from\_unitary\_dilation}); (ii) proves the permutation-symmetry collapse component of Goldstein-Struyve sub-lemma 1c under its necessary hypothesis (\texttt{step1c\_collapse\_of\_perm\_symmetric}) together with the foundational matrix-conjugation identities $P_\sigma \cdot E_{ij} \cdot P_\sigma^* = E_{\sigma(i),\sigma(j)}$ and $D(z)\cdot E_{ij}\cdot D(z)^* = (z_i\,\overline{z_j})\,E_{ij}$ — while the \emph{full} Goldstein-Struyve Schur classification remains a single named interface axiom; (iii) proves a single-trial Chebyshev frequency-concentration bound and the variance-addition (independence) lemma for Bernoulli trials (\texttt{BornConcentration.lean}), with the $N$-fold product-measure scaling still resting on the LLN interface axiom; and (iv) packages the three remaining Born sub-axioms with their independence countermodels in a unified minimality table (\texttt{BornMinimalityTable.lean}). Consolidation: the \texttt{FQEquivarianceUniqueness} module was rewritten to route through the concrete \texttt{GoldsteinStruyveFinDim} proof (eliminating 12 redundant abstract axioms), and the five Goldstein-Struyve Step-1 sub-axioms (three of which were \emph{literally false as stated} and all of which were unused) were deleted — reducing the project axiom total from 57 to 40 and leaving \texttt{canonical\_ic\_measure\_principle} dependent on exactly two project-specific axioms (Schur classification + tensor multiplicativity). The theorems introduced by the strengthening pass themselves depend only on the standard Lean axioms \texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}; the \emph{end-to-end} Born pipeline still rests on the named interface axioms (Mackey-Gleason / Radon-Nikodym, Schur classification, tensor multiplicativity, the LLN scaling, and the locality bridge), which the complete axiom audit in \texttt{lean/mathlib/QIQTH/AxiomAudit.lean} enumerates explicitly. See \texttt{lean/mathlib/QIQTH/} in the project repository.
 \end{abstract}
 
 \tableofcontents
@@ -197,13 +199,13 @@ This paper develops a position in the foundations of quantum mechanics whose str
   \item The mathematical home of this constraint is the algebraic QFT framework with gravitational dressing. The regional algebra $\hat{\mathcal{A}}(R)$, obtained from the standard Type III$_1$ local algebra $\mathcal{A}(R)$ via the crossed product with the modular flow of a reference state, is of \textbf{Type II} and admits a semifinite trace whose finite values realize finite renormalized entropy for regional states. This is the framework of Chandrasekaran-Penington-Witten (2022), Witten (2022), and successors.
   \item The (FQ) axiom: \emph{the physical content of the per-run wave function in any bounded region $R$ is given by its expectation values on $\hat{\mathcal{A}}(R)$, and the renormalized entropy is bounded by $Q_R = A(\partial R)/(4\ell_P^2)$.}
   \item The Type II structure of $\hat{\mathcal{A}}(R)$ implies a finite physical resolution for regional states: states agreeing on all operators in $\hat{\mathcal{A}}(R)$ are physically identical in $R$. This is the natural mathematical realization of "amplitudes physically within $\epsilon$ of $0$ are physically the same state as amplitude exactly $0$", the equivalence is between regional states, not between abstract Hilbert vectors.
-  \item The standard textbook formal wave function, a superposition $\sum_i c_i |s_i\rangle|A_i\rangle|E_i\rangle$, is an idealized statistical description of an ensemble of per-run wave functions across many runs. The per-run wave function evolves unitarily from specific microscopic initial conditions; decoherence drives amplitudes for distinct macroscopic record components to concentrate dynamically; the Type II resolution structure renders the post-concentration per-run wave function physically a single-record state.
+  \item The standard textbook formal wave function, a superposition $\sum_i c_i |s_i\rangle|A_i\rangle|E_i\rangle$, is an idealized statistical description of an ensemble of per-run wave functions across many runs. The per-run wave function evolves unitarily from specific microscopic initial conditions; decoherence renders the macroscopic record components non-interfering; and the finite-information restriction (a $\ge 2$-record regional content exceeds the regional capacity $Q_R$ and so is not an instantiable physical state) leaves the per-run regional content single-record. The run's microscopic initial conditions index which record.
   \item Born statistics emerge from typicality of microscopic initial conditions across runs.
 \end{enumerate}
 
 \subsection{What this paper does and does not claim}
 
-\textbf{Does.} Introduces (FQ) in its rigorous algebraic form using Type II crossed-product algebras. Distinguishes formal vs per-run wave functions. Establishes the finite-physical-resolution consequence of Type II regional algebras. Discusses the decoherence-and-concentration mechanism. States four formal results. Identifies three explicit open problems.
+\textbf{Does.} Introduces (FQ) in its rigorous algebraic form using Type II crossed-product algebras. Distinguishes formal vs per-run wave functions. Establishes the finite-physical-resolution consequence of Type II regional algebras. Discusses the decoherence-plus-finite-information-restriction mechanism for single-record regional content. States four formal results. Identifies three explicit open problems.
 
 \textbf{Does not.} Derive the resolution floor as an explicit function of regional geometry beyond the qualitative implication. Provide a fully rigorous typicality theorem for Born weights. Modify the Schrödinger equation, posit Bohmian particles, MWI branches, modal value-rules, or any actuality primitive beyond the per-run wave function regarded as a state on the regional algebras.
 
@@ -254,13 +256,14 @@ What is sometimes loosely called the "formal wave function" in textbook accounts
 
 The relationship across runs: there is \emph{one} per-run universal wave function per run. Different runs have \emph{different actual} per-run universal wave functions because the actual initial conditions of the universe differ. Born statistics across runs (§7.4) arise from the distribution of these actual initial conditions, not from any "alternative" wave functions for the same preparation. The "ensemble" is over actual different physical universes, not over hypothetical alternatives.
 
-\textbf{The framework adds no ontology beyond the universal wave function.} It is ψ-monist. The framework's two contributions are:
+**The framework adds no second \emph{dynamical} substance beyond the wave function** (no Bohmian particles, no extra fields, no guidance law). The framework's contributions are:
 \begin{enumerate}
-  \item The recognition that the textbook subsystem wave function $|\psi\rangle_{\rm sub}$ is \emph{not} the complete physical state of the universe in a run, the per-run universal wave function $|\Psi\rangle_{\rm run}$ is. This is standard QM at the universal level.
+  \item The recognition that the textbook subsystem wave function $|\psi\rangle_{\rm sub}$ is \emph{not} the relevant complete dynamical quantum state of a run; the per-run universal wave function $\Phi = |\Psi\rangle_{\rm run}$ is. (The complete per-run \emph{ontology}, however, is not $\Phi$ alone but the pair $(\Phi, \lambda)$; see the note below.) This is standard QM at the universal level.
   \item The (FQ) axiom limiting the physical information content of the universal wave function per region.
+  \item A \emph{non-dynamical run-index} $\lambda$ (the run's actual microscopic initial conditions) that selects which single record is realized (§7.6).
 \end{enumerate}
 
-Neither of these adds extra ontology. The "extra structure" is just standard QM at the universal-wave-function level (which always was the full story; the textbook subsystem abstraction is just convenient for calculations) plus the (FQ) postulate.
+\textbf{A note on "ψ-monism" as used throughout.} The framework is \textbf{ψ-monist in the weak (dynamical) sense}: the wave function $\Phi$ is the only thing carrying a law of motion (exactly unitary), and no second \emph{dynamical} ontology is added. It is \textbf{not} ψ-monist in the strong sense that $\Phi$ alone is the complete per-run state — the single realized record per run is fixed by $\lambda$, a \emph{non-dynamical actuality fact} (a broad-sense beable, structurally analogous to the configuration in Bohmian mechanics or the actual history in modal interpretations, but with no guidance law and no back-reaction on $\Phi$; see §7.6). In the Spekkens–Harrigan taxonomy the framework is therefore \textbf{ψ-ontic, weak-ψ-monist, and formal-ψ-incomplete}: $\Phi$ is real and is the sole dynamical ontology, but the complete per-run description is the pair $(\Phi, \lambda)$. Every later use of "ψ-monist" in this paper is shorthand for this weak/dynamical sense.
 
 \subsection{Empirical content}
 
@@ -365,13 +368,27 @@ be the local von Neumann algebra. The hatted algebra $\hat{\mathcal{A}}(R)$ deno
 
 \emph{(i) \textbf{Local normality.} The physical content of $|\Psi\rangle_{\rm run}$ in $R$ is given by the regional restriction $\omega_\Psi|_R$. This restriction must be a normal state on $\hat{\mathcal{A}}(R)$, equivalently, a positive unital $\sigma$-weakly continuous linear functional, $\omega_\Psi|_R \in \hat{\mathcal{A}}(R)_*^+$ with $\|\omega_\Psi|_R\| = 1$.}
 
-\emph{(ii) \textbf{Finite holographic modular budget.} The renormalized entropy $S_{\rm ren}(\omega_\Psi)$ on $\hat{\mathcal{A}}(R)$, equivalently, the Araki relative entropy $\chi_R(\omega_\Psi|_R)$ with respect to the reference state $\sigma_R$ (§7.6), is bounded by the area-law generalized entropy:}
+\emph{(ii) \textbf{Finite holographic modular budget.} Define the regional information functional as the Araki relative entropy with respect to the canonical sector reference state $\sigma_R$ (§7.6):}
 
 \[
-\chi_R(\omega_\Psi|_R) \;=\; S^{\hat{\mathcal{A}}(R)}_{\rm Araki}(\omega_\Psi|_R \,\|\, \sigma_R) \;\le\; Q_R \;\equiv\; C(R) \;:=\; \frac{A(\partial R)}{4\ell_P^2}.
+\chi_R(\omega_\Psi|_R) \;:=\; S^{\hat{\mathcal{A}}(R)}_{\rm Araki}(\omega_\Psi|_R \,\|\, \sigma_R).
+\]
+
+\emph{The (FQ) postulate (ii) is the modular-local bound:}
+
+\[
+\chi_R(\omega_\Psi|_R) \;\le\; Q_R \;\equiv\; C(R) \;:=\; \frac{A(\partial R)}{4\ell_P^2}.
 \]
 
 \emph{(The symbols $Q_R$ and $C(R)$ are used interchangeably throughout for the regional holographic capacity. We retain both because $Q_R$ emphasizes "information capacity" while $C(R)$ emphasizes "modular-cost ceiling"; the underlying quantity is identical.)}
+
+\emph{Notational caveat: we will also write this functional as $S_{\rm ren}(\omega_\Psi)$ for emphasis on "modular-local information content", and (FQ)(ii) then reads $S_{\rm ren}(\omega_\Psi) \le Q_R$. This $S_{\rm ren}$ is \textbf{not} the same functional as the CPW/Witten "renormalized entropy" of the state on the Type II crossed-product algebra — they are distinct functionals related by the modular identity}
+
+\[
+\chi_R(\omega) \;=\; \Delta_\omega \langle K_R^\sigma \rangle - \Delta_\omega S_R^{\rm CPW}
+\]
+
+\emph{where $K_R^\sigma$ is the modular Hamiltonian of $\sigma_R$ and $S_R^{\rm CPW}$ is the CPW renormalized entropy. \textbf{The (FQ) bound is on the relative-entropy functional $\chi_R$, not on the CPW renormalized entropy.} The two functionals can disagree substantially (a state may satisfy one bound and violate the other; see the formal verification module \texttt{lean/mathlib/QIQTH/EntropyBridge.lean} for a classical counterexample making this concrete).}
 
 \emph{(iii) The wave function $|\Psi\rangle_{\rm run}$ is regarded as a physical object instantiated in spacetime. The total physical information content needed to instantiate $|\Psi\rangle_{\rm run}$ in $R$, including amplitudes, phase coherence, superposition structure, is bounded by $Q_R$. Two abstract wave functions whose physical instantiations in $R$ are indistinguishable at the precision afforded by this bound are physically identical in $R$.}
 
@@ -444,7 +461,7 @@ Equivalence relation on states & Exact equality on algebra & Algebraic + physica
 \hline
 Near-zero amplitudes & Distinct from zero (continuous state space) & Physically equivalent to zero (below precision) \\
 \hline
-Single-record per run & Requires separate Concentration Conjecture & Structural consequence of precision + decoherence \\
+Single-record per run & Requires separate Concentration Conjecture & Structural consequence of decoherence + finite-information capacity restriction \\
 \hline
 Status w.r.t. Witten's theorem & Direct mathematical reading & Stronger interpretive postulate; compatible but not derived \\
 \hline
@@ -470,6 +487,8 @@ Under (FQ) in its literal physical-instantiation reading, the per-run wave funct
 \end{itemize}
 
 The resolution floor is a structural physical fact, not a measurement-precision limitation imposed by external observers. Below the resolution, distinct mathematical amplitudes correspond to the same physical state. The wave function as a physical instantiation in spacetime does not encode the distinction.
+
+\textbf{Stability requirement (recoherence).} For the resolution-$\epsilon$ relation to be a well-defined identity of physical states, it must be \emph{stable} under admissible subsequent evolution: two regional contents identified as the same physical state at resolution $\epsilon(R)$ must not be separable by later dynamics into distinct macroscopic records. In the measurement/decoherence setting this holds because the relevant sub-$\epsilon$ content is the residual record-coherence of an already-decohered, effectively irreversible interaction with $\sim 10^{20}$ environmental degrees of freedom; recoherence of distinct macroscopic records is dynamically excluded on any physical timescale. The general characterization of which contexts guarantee this stability is recorded as a subsidiary part of Open Problem 3.
 
 \subsection{The Mandelbrot rendering analogy}
 
@@ -510,7 +529,7 @@ The macroscopic record structure enters naturally: macroscopically distinct reco
 
 \medskip\hrule\medskip
 
-\section{The Mechanism: Decoherence, Concentration, and Algebraic Resolution}
+\section{The Mechanism: Decoherence, Finite-Information Restriction, and Algebraic Resolution}
 
 \subsection{Decoherence in algebraic terms}
 
@@ -582,11 +601,11 @@ The result: the physical regional state on $\hat{\mathcal{A}}(R)$ is a \emph{str
 
 \subsection{Per-run branch selection via microscopic initial conditions}
 
-The classical mixture $\sum_k |c_k|^2 \omega_k^R$ is \emph{not} a single record. It is a probability distribution over records, with weight $|c_k|^2$ on each.
+The classical mixture $\sum_k |c_k|^2 \omega_k^R$ is \emph{not} a single record. It is a weighted list of records carrying the Born weights $|c_k|^2$ — weights that the framework reads as the \emph{empirical frequency pattern across runs} (§7.4), not as a fundamental per-run probability (QIQT-H has no fundamental probabilities).
 
-In any specific run, which record obtains? The framework's answer:
+Two distinct questions must be separated. \emph{Why is the resident content a single record at all (rather than a multi-record mixture)?} and \emph{which} record is it in this run? The first is answered by the finite-information restriction of §7.6: a $\ge 2$-record regional content exceeds the region's capacity $Q_R$ and is not an instantiable physical state, so what resides in $R$ is single-record. The second is answered by the run's actual microscopic initial conditions:
 
-\textbf{Per-run, the universe is in one specific branch of the decohered-and-(FQ)-cleaned classical mixture. Which branch is selected by the per-run microscopic initial conditions of the apparatus + environment, propagated through the unitary dynamics from these specific microstates.}
+**Per-run, the universe carries one specific record of the decohered-and-(FQ)-restricted regional content. \emph{Which} record is fixed by the per-run microscopic initial conditions of the apparatus + environment, propagated through the unitary dynamics from these specific microstates. The initial conditions do not \emph{produce} the single-ness — the finite-information restriction does that; they merely \emph{index} which single-record universe this run is.**
 
 This is analogous to how, in classical statistical mechanics, a system at temperature $T$ has specific molecular configurations in any individual realization. The thermodynamic ensemble $e^{-\beta H}$ is a probability distribution over microstates; any specific realization sits at one microstate. We do not say "the system is in a quantum superposition of all microstates with thermal weights"; we say "the system is in some specific microstate, the distribution over runs follows the thermal ensemble."
 
@@ -595,21 +614,21 @@ In the quantum case, the same structure obtains with one additional ingredient: 
 \textbf{This is not a magic transition from "70\% A + 30\% B as a superposition" to "100\% A as a single outcome".} It is the recognition that:
 \begin{enumerate}
   \item We never have direct access to a "70\%/30\% superposition" of macroscopic alternatives, we have access only to macroscopic records, which after decoherence are exponentially exclusive
-  \item (FQ) makes "exponentially exclusive" into "strictly exclusive"
-  \item The per-run universe is in one of the now-strictly-exclusive branches
-  \item Which branch is selected by per-run microscopic IC
+  \item (FQ) makes "exponentially exclusive" into "strictly exclusive": the residual sub-$\epsilon$ record-coherence has no physical referent
+  \item A regional content carrying $\ge 2$ macroscopically distinct records exceeds the region's information capacity $Q_R$ and is therefore not an instantiable physical state — so the resident content is single-record (this is what makes the outcome single)
+  \item \emph{Which} single record the per-run universe carries is indexed by its microscopic IC (the IC does not produce the single-ness — step 3 does)
 \end{enumerate}
 
 The per-run "microscopic initial conditions" are \emph{not} hidden variables in any ontological sense. They are simply \emph{the actual physical state of the apparatus + environment in the specific run}. Different runs of an experiment correspond to different actual physical universes, different particles emitted, different microscopic apparatus states, different environmental configurations. These differences are not added structure; they are the standard fact that \emph{actual physical universes differ across actual physical experiments}. Standard QM, at the universal-wave-function level, already accommodates this trivially: the universal wave function is a function of all degrees of freedom in the universe; those degrees of freedom take different actual values in different runs.
 
-The framework is \textbf{ψ-monist}: there is no ontological structure beyond the universal wave function. What the framework does, and what standard textbook QM elides, is to take seriously that:
+The framework is \textbf{ψ-monist in the weak (dynamical) sense} (§2.2): the wave function is the only ontology carrying a law of motion; the only additional fact is the non-dynamical run-index $\lambda$, not a second dynamical substance. What the framework does, and what standard textbook QM elides, is to take seriously that:
 \begin{enumerate}
   \item The universal wave function (not the textbook subsystem wave function) is the actual physical state in each run
   \item Different runs are different actual physical universes, not different versions of "the same" universe
   \item The Born statistics across runs come from the distribution of \emph{actual} initial conditions across \emph{actual} runs, not from any "alternative" wave functions for a single preparation
 \end{enumerate}
 
-In Bohmian language: there are no Bohmian particles, no extra ontological layer; the universal wave function is the only thing, and different runs have different actual universal wave functions because the actual physical universe differs in each run. This is wavefunction-monist standard QM with (FQ) added as a finite-information constraint.
+In Bohmian language: there are no Bohmian particles and no second \emph{dynamical} ontology; the wave function $\Phi$ is the only thing carrying a law of motion. What plays a role structurally analogous to the Bohmian configuration is the run-index $\lambda$ — the run's actual microscopic initial conditions — a \emph{non-dynamical} actuality fact (no guidance law, no back-reaction on $\Phi$) that selects which single record is realized. Different runs carry different $\lambda$. This is weak-ψ-monist standard QM with (FQ) added as a finite-information constraint, plus the non-dynamical actuality selector $\lambda$.
 
 \subsection{Theorem: Single-record per-run wave functions}
 
@@ -617,7 +636,9 @@ In Bohmian language: there are no Bohmian particles, no extra ontological layer;
 
 \emph{Proof.} By standard decoherence theory, after measurement interaction, the joint state's induced regional state on $\hat{\mathcal{A}}(R)$ has off-diagonal coherence terms suppressed exponentially: $\omega_\Psi^R = \sum_k |c_k|^2 \omega_k^R + O(\exp(-N))$. By Lemma 1 (§5.1), components below the (FQ) precision floor $\epsilon(R)$ are physically equivalent to zero. Since $e^{-N} \ll \epsilon(R)$ for any reasonable macroscopic decoherence regime, the off-diagonal coherence terms are physically exactly zero. The resulting regional state is the strict classical mixture $\sum_k |c_k|^2 \omega_k^R$, with macroscopic records physically exclusive (no remaining coherence between distinct $\omega_k^R$).
 
-In any specific run, the per-run universe occupies one specific branch of this strictly-exclusive classical mixture. Which branch is the realized one is determined by the per-run microscopic initial conditions of the apparatus + environment, propagated through unitary evolution. The per-run physical regional state on $\hat{\mathcal{A}}(R)$ is therefore $\omega_{k_{\rm run}}^R$ for some specific $k_{\rm run}$, a single-record state. $\blacksquare$
+This strict classical mixture still carries every record; decoherence has removed interference, not multiplicity. The single-record conclusion requires the finite-information restriction (§7.6): a regional content carrying $\ge 2$ macroscopically distinct records has summed information cost $I_\Sigma \approx K\cdot I_0 > Q_R$ and so is not an instantiable physical state of $R$. Hence the resident regional content is single-record, $\omega_{k_{\rm run}}^R$ for some specific $k_{\rm run}$. Which record $k_{\rm run}$ is realized is indexed by the per-run microscopic initial conditions of the apparatus + environment (the ICs index the run; the capacity restriction, not the ICs, is what makes the content single). The global evolution remains exactly unitary throughout; no amplitude is trimmed. $\blacksquare$
+
+\emph{(This proof inherits the open status of the §7.6 Macroscopic Definiteness Conjecture — the $I_\Sigma > Q_R$ step — which is Open Problem 3; the rest is standard decoherence plus the (FQ) resolution-equivalence of §5.1.)}
 
 \textbf{Remark on the role of each ingredient:}
 \begin{itemize}
@@ -631,9 +652,9 @@ In any specific run, the per-run universe occupies one specific branch of this s
 
 \subsection{What is preserved, and what algebraic restriction is (and is not)}
 
-\textbf{Preserved exactly on the physical state space $\mathcal{H}_{\rm phys}$:} the unitary Schrödinger / Heisenberg evolution under \emph{physical Hamiltonians} (those that preserve $\mathcal{H}_{\rm phys}$; cf. §7.6). Within $\mathcal{H}_{\rm phys}$, no modification of dynamics, no stochastic term, no projection operator. The physical Hamiltonian generates standard linear unitary evolution on the constrained physical state space.
+\textbf{Preserved exactly:} the unitary Schrödinger / Heisenberg evolution of the underlying field algebra. No modification of dynamics, no stochastic term, no projection operator, no restriction on the admissible Hamiltonians. The evolution law is exactly standard QM; what the framework adds operates not on the dynamics but on which \emph{regional contents} count as physically instantiable (next paragraph).
 
-\textbf{Constrained at the kinematic level:} the physical state space itself is restricted to $\mathcal{H}_{\rm phys}$ (those universal wave functions satisfying the Branch-Summed Holographic Bound $I_\Sigma \le Q_R$ for every bounded region). States outside $\mathcal{H}_{\rm phys}$ are mathematically writeable in the unrestricted Hilbert-space formalism but are not physically realizable. Physical Hamiltonians are restricted to those preserving $\mathcal{H}_{\rm phys}$. This is analogous to gauge theory: physical state space is a constrained submanifold; physical Hamiltonians preserve gauge invariance; unrestricted Hilbert-space Hamiltonians are mathematically writeable but unphysical.
+\textbf{Constrained at the kinematic level:} what is restricted is which \emph{regional contents} are physically instantiable — those with regional information cost $I_\Sigma \le Q_R$. A global wave function whose induced regional content carries $\ge 2$ macroscopically distinct records (cost exceeding $Q_R$) is a perfectly good \emph{formal/calculational} descriptor but has no single-region per-run physical referent. \textbf{This is not a restriction on the Hamiltonians and not a modification of the dynamics:} the global Schrödinger / Heisenberg evolution law is exactly unitary and unconstrained, including ordinary measurement interactions. The restriction is purely on physical \emph{instantiability of regional content} (FQ part (iii) + the formal/per-run distinction) — unlike gauge theory, where one additionally restricts the admissible Hamiltonians.
 
 \textbf{The relationship between global evolution and regional physical content.} On $\mathcal{H}_{\rm phys}$ the universal state evolves unitarily under a physical Hamiltonian: $|\Psi_t\rangle = U(t)|\Psi_0\rangle$. The induced regional algebra-state evolves linearly: $\omega_t(O) = \omega_0(U(t)^\dagger O U(t))$ for $O \in \hat{\mathcal{A}}(R)$. The map $|\Psi\rangle \mapsto \omega_\Psi$ from Hilbert vectors to regional algebra-states is a structural restriction (analogous to forming a reduced state). It is mathematically linear on density operators and quadratic in vectors.
 
@@ -675,7 +696,7 @@ This is the cost-counting argument the framework rests on for the Macroscopic De
 
 \subsection{The Bell escape: holographic nonseparability vs classical separability}
 
-A natural objection: any deterministic single-world theory reproducing standard quantum predictions must confront Bell's theorem. The framework is \textbf{ψ-monist} (the wave function is the only ontology; no extra hidden particles or fields are added) but the per-run wave function in any specific run differs from the textbook formal ensemble descriptor; it reproduces standard quantum predictions; it has single outcomes per run. Which Bell assumption does it reject?
+A natural objection: any deterministic single-world theory reproducing standard quantum predictions must confront Bell's theorem. The framework is \textbf{ψ-monist in the weak (dynamical) sense} (no extra dynamical particles or fields; §2.2) — though the complete per-run description is the pair $(\Phi, \lambda)$, with $\lambda$ a non-dynamical actuality fact — the per-run state in any specific run differs from the textbook formal ensemble descriptor; it reproduces standard quantum predictions; it has single outcomes per run. Which Bell assumption does it reject?
 
 \textbf{The framework's answer: measurement independence, grounded in holographic nonseparability.}
 
@@ -716,9 +737,27 @@ Denial of measurement independence preserves: no preferred foliation; no explici
 
 \textbf{Position with respect to Kochen-Specker.} If per-run microscopic structure determines outcomes, value assignments must be contextual, which the framework accepts. The per-run wave function's content on a regional algebra is naturally contextual: different measurement contexts probe different algebra-projections, and there is no requirement of joint-value consistency across noncommuting contexts.
 
-\textbf{Position with respect to PBR.} The framework is \textbf{ψ-ontic and ψ-monist}: the wave function is physically real and is the only ontology. The framework does \emph{not} add hidden particle positions, hidden fields, or any other ontological layer beyond the wave function itself. What is "supplemented" relative to standard textbook QM is not the ontology but the \emph{recognition that the per-run wave function differs from the formal ensemble descriptor}: the formal wave function used in textbook calculations describes the distribution across runs; the per-run wave function in any specific run is a definite physical state of the universe. PBR rules out certain ψ-epistemic positions; the framework is ψ-ontic and not one of those.
+\textbf{Position with respect to PBR.} The framework is \textbf{ψ-ontic and ψ-monist in the weak (dynamical) sense}: the wave function is physically real and is the sole dynamical ontology. The framework does \emph{not} add hidden particle positions, hidden fields, or any second \emph{dynamical} layer. It does, however, include one non-dynamical actuality fact — the run-index $\lambda$ fixing which single record is realized (§2.2, §7.6) — so it is \textbf{formal-ψ-incomplete}: the actual per-run ontic state is the pair $(\Phi, \lambda)$, finer-grained than the textbook formal wave function (which describes the distribution across runs). PBR rules out certain ψ-epistemic positions; the framework is ψ-ontic and not one of those — $\Phi$ is real, not a state of knowledge.
 
 \textbf{Sister program: Palmer's RaQM / Invariant Set Theory.} Palmer (2025 and prior work) develops a structurally similar Bell escape: principled rejection of measurement independence via the geometry of a fractal invariant set in cosmological state space. The two frameworks share the strategic shape, single-world realism + measurement-dependence grounded in deep structural physics, not in conspiratorial superdeterminism. They differ in the motivating principle (chaos / invariant set vs holography / information capacity) and the mathematical apparatus (p-adic measures + Niven's theorem vs CPW Type II algebras + finite-precision postulate). Detailed comparison is in §10.8.
+
+\subsection{Tunneling: standard dynamics, record-level reading}
+
+Quantum tunneling is a useful test of what QIQT-H does and does not modify. The under-barrier amplitude is real physical content of the formal field state, and \textbf{all tunneling amplitudes and rates are exactly those of standard quantum theory} — coherent tunneling (ammonia inversion, Josephson oscillation, double-well coherent oscillation), WKB barrier penetration, $\alpha$-decay and fusion rates, instanton / vacuum-decay amplitudes, and Quantum Zeno / anti-Zeno effects are all unchanged, because (FQ) does not modify the Schrödinger evolution of the underlying field algebra.
+
+**The information limit constrains how the wave function \emph{resides}; it does not trim it.\textbf{ This point must be stated carefully, because QIQT-H is ψ-monist and deterministic: there are }no fundamental probabilities** in the theory — only the wave function and its unitary evolution. The holographic / (FQ) bound is a constraint on the \emph{physical specification capacity} of a region — on how much amplitude/phase structure the wave function can be instantiated with in $R$ — not a dynamical rule that sets small amplitudes to zero. Concretely:
+
+\begin{itemize}
+  \item The under-barrier evanescent tail is \textbf{genuine wave-function content} and stays so. (FQ) never deletes it, never truncates it to zero, and never alters its unitary evolution. The Schrödinger equation runs untouched.
+  \item (FQ) does \emph{not} act pointwise on $\psi$ in the forbidden region. The pointwise value $\psi(x)$ is not even a well-defined physical target for a floor: it is basis-, normalization-, and coarse-graining-dependent, and in the continuum it is dimensionful. The bound is a statement about the regional algebra-state's information content, not about individual amplitudes.
+  \item There is therefore \textbf{no kinematic cutoff on tunneling amplitudes}. Any reading on which "a tunneling amplitude below $\varepsilon(R)$ is excluded" is mistaken. The decisive objection is dynamical and basis-theoretic: a fixed pointwise floor would be ill-defined (a transition amplitude over a time slice scales with the arbitrary slice duration; the pointwise value is basis-, normalization-, and coarse-graining-dependent) and, applied to the dynamics, would break unitarity and wrongly freeze ordinary decay. Independently, such a reading misreads (FQ): (FQ) is a capacity constraint on regional residence, not an amplitude-trimming operation — and, since the theory has no fundamental probabilities, "excluding a low-amplitude outcome" is not even a move the framework can make.
+\end{itemize}
+
+What (FQ) \emph{does} constrain is the regional \textbf{record structure}: distinct, decohered, macroscopically distinguishable records cannot be co-instantiated in $R$ beyond its finite capacity $Q_R$. This is where the framework's content enters — not in the coherent tunneling amplitude, but in how a tunneling \emph{outcome} can reside as a definite regional record.
+
+The correct statement is therefore: QIQT-H leaves the tunneling wave function and its evolution exactly as in standard quantum theory, and differs only in what it says about the \textbf{regional record once decoherence has occurred} (the particle is found, or not, on the far side). Per run, the deterministic evolution of the full wave function — together with the finite regional capacity, which cannot hold a co-resident superposition of macroscopically distinct records — leaves a single record physically instantiated in $R$. The textbook Born numbers $|\psi|^2$ are recovered as the \emph{empirical frequency pattern} of records across many runs (the typicality reading of §7.4, §11.4), never as a fundamental per-run probability. This is the same mechanism as for any other measurement (§6); tunneling is not a special case. \textbf{Standard dynamics (barrier penetration, unchanged); QIQT-H reading of the regional record only — and even there, by capacity constraint, not by amplitude trimming.}
+
+\textbf{Horizon tunneling (Hawking radiation).} The Parikh-Wilczek (1999) tunneling derivation of Hawking emission expresses the emission rate as $\Gamma \sim \Gamma_{\rm grey}\, e^{\Delta S_{\rm BH}}$, where $\Delta S_{\rm BH} = \Delta A/(4\ell_P^2)$ is the change in Bekenstein-Hawking entropy (in nats). For an emitted quantum the horizon area decreases, $\Delta A < 0$, so the exponential factor \emph{suppresses} emission; writing the positive entropy loss $\Delta S_{\rm loss} = S_i - S_f > 0$, $\Gamma \sim \Gamma_{\rm grey}\, e^{-\Delta S_{\rm loss}}$ (greybody prefactor $\Gamma_{\rm grey}$ aside). The same entropy is what QIQT-H reads as the finite information content of the horizon region (in bits, $Q_{\rm hor} = S_{\rm BH}/\ln 2 = A/(4\ell_P^2 \ln 2)$). This is a clean conceptual alignment — the same quantity governs lab-scale per-run wave functions and the horizon's information budget — but it is a \emph{reinterpretation}, not a new prediction: QIQT-H does not by itself modify or re-derive the Parikh-Wilczek emission rate.
 
 \medskip\hrule\medskip
 
@@ -738,23 +777,66 @@ Denial of measurement independence preserves: no preferred foliation; no explici
 
 \subsection{Theorem (Single-record per-run wave functions)}
 
-\textbf{Theorem 4 (Single-record per-run).} \emph{Under (FQ) in its literal physical-instantiation reading and the per-run concentration claim of §6.2 (per-run amplitudes for distinct macroscopic record components driven dynamically toward $0$ or $1$ via decoherence + microscopic initial conditions), the per-run wave function in any region $R$ containing apparatus + environment after measurement is physically a single-record state. The realized outcome is the record whose amplitude has crossed above $1 - \epsilon(R)$; alternative records have amplitudes below $\epsilon(R)$ and are physically equivalent to amplitude exactly $0$.}
+\textbf{Theorem 4 (Single-record per-run).} \emph{Under (FQ) in its literal physical-instantiation reading, together with (i) standard decoherence (which renders the macroscopic records non-interfering) and (ii) the Macroscopic Definiteness Conjecture of §7.6 (a regional content carrying $\ge 2$ macroscopically distinct records exceeds the regional capacity $Q_R$ and is not an instantiable physical state), the per-run wave function in any region $R$ containing apparatus + environment after measurement is physically a single-record state. Which record is realized is indexed by the run's microscopic initial conditions; the unrealized records have no physical referent in $R$ (they are not instantiable, not "real elsewhere"). No amplitude is trimmed and the global evolution is exactly unitary throughout.}
 
-\emph{Proof.} By Theorem 3, (FQ) gives a finite resolution floor $\epsilon(R) > 0$. By the concentration claim of §6.2, per-run amplitudes for distinct macroscopic records evolve dynamically toward $0$ or $1$. Once the concentration crosses the resolution threshold, the per-run wave function is physically a single-record state. The single-record state is the wave function's actual physical state in $R$. No collapse postulate is required; the structural combination of (FQ) (precision floor) and decoherence (concentration) produces the single-record outcome. $\blacksquare$
+\emph{Proof.} By standard (unitary) decoherence, the regional state on $\hat{\mathcal{A}}(R)$ is exponentially close to a strict classical mixture $\sum_k |c_k|^2 \omega_k^R$ of macroscopic records — interference is gone, but the mixture still carries every record (branch weights $|c_k|^2$ are conserved; cf. \texttt{NoConcentration.lean}). By Theorem 3 the (FQ) resolution floor $\epsilon(R) > 0$ makes the residual sub-$\epsilon$ off-diagonal coherence have no physical referent (a resolution-equivalence on regional states, §5.1), so the resident content is exactly that strict mixture. By the finite-information restriction of §7.6, a regional content carrying $\ge 2$ macroscopically distinct records has summed cost $I_\Sigma \approx K \cdot I_0 > Q_R$ and is therefore not an instantiable physical state of $R$; hence the resident regional content is single-record. Which record is realized is indexed by the run's microscopic initial conditions. The global evolution remains exactly unitary; no amplitude is trimmed. $\blacksquare$
 
-\emph{Remark on the role of the concentration claim.} The concentration claim of §6.2 is that per-run amplitudes evolve dynamically toward $0$ or $1$. Whether this convergence is exact mathematically or only approximate is irrelevant to Theorem 4: the (FQ) resolution floor makes "approximate convergence to within $\epsilon$" physically equivalent to "exact convergence to $0$ or $1$." Standard decoherence + microscopic IC give the approximate convergence; (FQ) supplies the precision floor at which approximate becomes exact physically. This is the cooperative role of the two ingredients.
+\emph{(This proof inherits the open status of the §7.6 Macroscopic Definiteness Conjecture, the $I_\Sigma > Q_R$ step, which is Open Problem 3; the rest is standard decoherence plus the (FQ) resolution-equivalence of §5.1.)}
 
-\subsection{Theorem (Born statistics from typicality, schematic)}
+\emph{Remark on what does the work (not "amplitude concentration").} It would be a mistake to read Theorem 4 as "decoherence + microscopic IC drive the per-run amplitudes dynamically to $0$ or $1$." They do not: by unitarity the branch weights $|c_k|^2$ are conserved (the \texttt{NoConcentration.lean} audit makes this precise), so decoherence removes \emph{interference} but never \emph{selects} a record — the decohered diagonal content still carries every record. The single-record conclusion comes instead from the finite-information restriction on the physical state space (§7.6): a $\ge 2$-record regional content is not an instantiable physical state because its summed information cost exceeds $Q_R$. The (FQ) resolution floor plays the subsidiary role of removing the residual sub-$\epsilon$ off-diagonal coherence (as a resolution-equivalence on regional states, not by trimming any amplitude). Microscopic IC then merely index which single record the run carries. This is the cooperative structure: decoherence (interference) + capacity bound (single-ness, the load-bearing step) + IC (which one).
 
-\textbf{Theorem 5 (Born from typicality, schematic).} \emph{If the measure $\mu$ on microscopic initial conditions is appropriately chosen, then for a standard preparation/measurement procedure with formal Born weights $|c_k|^2$, the empirical relative frequency of macroscopic outcome $k$ (the record above the resolution threshold in the per-run wave function) across many runs converges to $|c_k|^2$.}
+\emph{Remark on how a single record arises (decoherence is necessary but not sufficient).} A machine-verified audit (\texttt{lean/mathlib/QIQTH/NoConcentration.lean}) confirms that linear unitary measurement-decoherence \textbf{alone} cannot produce a single record: branch weights $|c_k|^2$ are conserved by unitarity, not concentrated toward $0$ or $1$. The equal-superposition input $\psi = (|0\rangle + |1\rangle)/\sqrt{2}$ leaves post-measurement weights exactly $(1/2, 1/2)$. Decoherence solves the \emph{interference} problem (it makes distinct records exponentially distinguishable), but it does \textbf{not} solve the \emph{selection} problem: the decohered regional state $\sum_k |c_k|^2 \omega_k^R$ is diagonal yet still carries $K \ge 2$ macroscopic records. The single-record-per-run content comes from the \textbf{finite-information space itself}, in two cooperating steps with the second doing the load-bearing work:
 
-\emph{Proof sketch.} The (FQ)-constrained dynamics, starting from microscopic initial conditions drawn from $\mu$ and propagating to the post-measurement (FQ)-resolved per-run wave function, induces a map from initial conditions to realized records. The claim is that for the appropriate $\mu$, the measure of initial conditions mapped to record $k$ is $|c_k|^2$. Rigorous derivation, specification of $\mu$, proof that the (FQ)-constrained dynamics yields the right measure-preserving structure, justification that this measure is the empirically realized one, is identified as the second key open problem of the framework, analogous to but distinct from Bohmian $|\psi|^2$-equivariance. The framework specifies \emph{what} needs to be proved; the proof itself is open. $\blacksquare$
+\begin{enumerate}
+  \item \textbf{Decoherence (unitary, standard, dynamical).} Entangling a record with $N$ apparatus + environment particles drives the off-diagonal coherence between macroscopically distinct records down like $e^{-N}$. This is ordinary Schrödinger evolution — no modification, no probability, no amplitude trimming.
+  \item \textbf{Holographic restriction on the physical state space (the one-world source).} The region has finite information capacity $Q_R$, and the physical wave function \emph{resides on that restricted information space}. A regional content carrying $K \ge 2$ macroscopically distinct records — whether coherently superposed \emph{or} classically mixed — has summed information cost $I_\Sigma \approx K \cdot I_0$, and with $I_0 \approx Q_R$ at macroscopic scale this exceeds $Q_R$ for $K \ge 2$. Such a content is therefore \textbf{not a point of the region's physical state space at all} (the Branch-Summed Holographic Bound / Macroscopic Definiteness Conjecture, §7.6). The resident regional physical content is single-record.
+\end{enumerate}
+
+This is decisively \textbf{not} many-worlds with regional coarse-graining: the unrealized records are not "real elsewhere" — they have \emph{no physical referent}, because a $\ge 2$-record regional content exceeds the region's information capacity and is not instantiable. It is also \textbf{not} a modification of the dynamics: the Schrödinger / Heisenberg evolution \emph{law} is exactly unitary throughout; what is restricted is the \emph{physical state space} (the finite-information regional content). A formal multi-record Hilbert-space vector remains a perfectly good \emph{calculational} descriptor; it simply has no per-run physical referent in $R$ — this is (FQ) part (iii) together with the formal/per-run distinction, not a ban on Hamiltonians and not a non-unitary projection. \textbf{There are no fundamental probabilities anywhere:} the weights $|c_k|^2$ are the empirical frequency pattern of records \emph{across runs} (§7.4, §11.4), and the per-run microscopic initial conditions merely \emph{index which} single-record universe a given run is (distinct runs are distinct actual universes) — IC does not \emph{produce} single-ness; the finite-information restriction does.
+
+\subsection{Theorem (Conditional Born typicality)}
+
+\textbf{Reframing.} QIQT-H has no fundamental probabilities. The framework is deterministic per run: microscopic initial conditions of that run determine which macroscopic record is realized. "Born" in QIQT-H refers to the \emph{empirical frequency pattern} across many runs — a statistical regularity that must emerge from the IC distribution, not a primitive probability assignment. Accordingly Theorem 5 is best understood not in the probability-axiomatic mode of Gleason's theorem, but in the \textbf{typicality} mode of Bohmian Dürr-Goldstein-Zanghì equivariance (adapted to QIQT-H's no-particle, no-branching ontology).
+
+\textbf{Theorem 5 (Conditional Born typicality).} \emph{Let $\rho$ be a preparation state, $\Omega_\rho$ the QIQT-H microscopic-IC space, and $O_M : \Omega_\rho \to \mathrm{Outcomes}(M)$ the deterministic outcome map for a measurement protocol $M$. Suppose:}
+
+\emph{(i) \textbf{Canonicality.} There exists a measure $\mu_\rho$ on $\Omega_\rho$ defined from QIQT-H primitives (not fitted per measurement).}
+
+\emph{(ii) \textbf{Born pushforward.} $(O_M)_* \mu_\rho(i) = \mathrm{tr}(\rho E_i)$ for every allowed outcome effect $E_i$ in the measurement protocol $M$.}
+
+\emph{(iii) \textbf{Equivariance / stationarity.} $\mu_\rho$ is preserved (up to allowed parameter-dependence on $\rho$) by the (FQ)-restricted physical Hamiltonian.}
+
+\emph{(iv) \textbf{Repeated-trial typicality.} Repeated trials of the prepare-measure procedure are represented by a $\mu_\rho$-typical iid (or stationary-ergodic) process on $\Omega_\rho$.}
+
+\emph{Then for $\mu_\rho$-typical microscopic-IC sequences, the empirical relative frequency of macroscopic outcome $k$ across many runs converges to the Born weight $\mathrm{tr}(\rho E_k)$ (= $|c_k|^2$ for pure states with $\rho = |\psi\rangle\langle\psi|$ and projective measurements).} $\blacksquare$
+
+\textbf{Status of the four hypotheses.} Hypotheses (ii) and (iv) are standard: (ii) is what defines $\mu_\rho$ as "the Born measure" for $\rho$; (iv) is a routine LLN/ergodicity input. Hypotheses (i) and (iii) — \emph{canonicality} and \emph{equivariance} — are the \textbf{framework's load-bearing open commitments}. They are not delivered by FQ + AQFT + holography alone; see machine-verified audits below.
+
+The conditional shape of Theorem 5 is now formalized in \texttt{lean/mathlib/QIQTH/BornTypicality.lean} (theorem \texttt{qiqth\_born\_typicality\_conditional}). The deterministic core (mean per-run frequency equals the outcome marginal) is rigorously proved; the LLN step is taken as a standard probability black box at the interface layer.
+
+\textbf{Important — QIQT-H does not derive the Born measure.} It identifies the exact canonical-measure / equivariance principle required for Born frequencies, and reduces the Born problem to that principle. This is the typicality-paradigm analog of Bohmian $|\psi|^2$-equivariance, adapted for QIQT-H's no-particle ontology.
+
+\textbf{Audit remark — universal realizability (the negative companion).} A machine-verified audit (\texttt{lean/mathlib/QIQTH/NoBornFromNothing.lean}) establishes that for \textbf{any} target outcome distribution $p$ (not just $|c_k|^2$) and any surjective outcome map from the IC space, there exists a measure $\mu_p$ whose outcome-marginal equals $p$. Construction: choose a section of the outcome map and place mass $p_k$ on $s(k)$. Hence the framework's structural axioms (FQ, microcausality, Donald, holographic bound) do \emph{not} select Born over any other distribution. Hypothesis (i) of Theorem 5 is therefore \emph{genuinely independent} of the other QIQT-H postulates — it must be added as a separate principle, not derived.
+
+\textbf{Audit remark — support preservation $\neq$ Born equivariance.} A second machine-verified audit (\texttt{lean/mathlib/QIQTH/EquivarianceGap.lean}) establishes that the framework's claim that the exactly-unitary dynamics carries instantiable regional contents to instantiable regional contents (the closure property of §7.6 — preservation of the \emph{support} of the admissible set) is strictly weaker than the measure-preservation hypothesis (iii) of Theorem 5. Concrete counterexample: a bijection on a 2-point space preserves the support trivially yet shuffles a non-uniform measure. Hypothesis (iii) is therefore a \emph{genuine additional commitment} beyond the framework's current postulates.
+
+\textbf{Candidate principles for hypothesis (i).} Three candidate physical mechanisms could supply the Canonical IC Measure Principle:
+
+\emph{(α) \textbf{Canonical tracial typicality from CPW Type II structure.} The crossed-product Type II algebra $\hat{\mathcal{A}}(R)$ carries a canonical normal semifinite trace $\tau_R$ (unique up to scale). If $\tau_R$ induces, via the natural identification of IC space with the algebra's state space, a canonical measure $\mu_\rho^{\tau}$ satisfying (i)–(iv), this is the most QIQT-H-native route. (Currently the leading candidate.)}
+
+\emph{(β) \textbf{Symmetric equiprobability} on a natural decomposition of $\Omega_\rho$ into record-fibers, with Born weights emerging from fiber-volume ratios. This route requires a structural principle making the decomposition canonical and the fiber volumes well-defined.}
+
+\emph{(γ) \textbf{Holographic / modular construction} from the canonical sector reference state $\sigma_R$ (vacuum on Minkowski, KMS on stationary thermal, Bunch-Davies on de Sitter, etc.) via a modular-theoretic construction yielding $\mu_\rho$. Physically attractive but currently the least mathematically developed of the three.}
+
+None of (α), (β), (γ) is derivable from FQ + AQFT + holography alone; each is a candidate \textbf{additional postulate} the framework would need to adopt. The framework presently leaves the choice open; Open Problem 1 (§11.4) sharpens the canonical-measure problem with explicit sub-conditions.
+
+\emph{Remark on Gleason.} Gleason's theorem derives the Born rule from probability-axiomatic constraints (noncontextuality + orthogonal additivity) on a projection lattice. It is \emph{not} the appropriate primary derivation for QIQT-H, which is deterministic per run and has no primitive probability assignment. Gleason functions as a consistency check on the \emph{target} empirical frequencies (Born is the unique probability rule consistent with the noncontextuality axioms), but cannot select the microscopic IC measure $\mu_\rho$ — many distinct $\mu_\rho$ push forward to the same Born outcome distribution. Closing the gap requires the typicality argument above, not Gleason.
 
 \subsection{What §7.1–7.4 establishes}
 
-(FQ) restricts the model class properly (Theorem 2); the literal physical-instantiation reading implies finite physical resolution (Theorem 3); combined with dynamical concentration via decoherence + microscopic IC, this yields single-record per-run wave functions structurally (Theorem 4); Born statistics emerge from typicality (Theorem 5, schematic).
+(FQ) restricts the model class properly (Theorem 2); the literal physical-instantiation reading implies finite physical resolution (Theorem 3); combined with decoherence (which removes interference) and the finite-information restriction of §7.6 (which makes a $\ge 2$-record regional content non-instantiable), this yields single-record per-run regional content structurally (Theorem 4); Born statistics emerge as an across-run typicality / relative-frequency result (Theorem 5, schematic).
 
-The framework's structural skeleton: (FQ) is the literal physical-instantiation reading of the Bekenstein-Bousso bound, stated rigorously in the CPW Type II algebraic framework; the precision floor is the structural consequence; concentrated per-run amplitudes cross the threshold and the per-run wave function physically is a single-record state.
+The framework's structural skeleton: (FQ) is the literal physical-instantiation reading of the Bekenstein-Bousso bound, stated rigorously in the CPW Type II algebraic framework; the finite-information restriction on regional content is what makes the resident regional state single-record, with the run's microscopic initial conditions indexing which record and the global evolution left exactly unitary.
 
 \subsection{The Modular-Local Holographic Superselection Rule (foundational postulate)}
 
@@ -858,7 +940,7 @@ Under this commitment, the framework's structure is the following.
 \alpha_{t*}(\mathcal{S}_{\rm phys}) \subseteq \mathcal{S}_{\rm phys}, \qquad (\alpha_{t*}\omega)(A) := \omega(\alpha_t(A)).
 \]
 
-\emph{A Hamiltonian is physical only insofar as its induced automorphism group satisfies this condition.}
+\emph{Here $\mathcal{S}_{\rm phys}$ is the set of physically instantiable regional contents (those satisfying the finite-information admissibility bound). The condition says only that physical evolution carries instantiable contents to instantiable contents; it is \textbf{not} a restriction on the admissible Hamiltonians. The global Schrödinger / Heisenberg law is exactly unitary and unconstrained — a formal global state whose regional content leaves $\mathcal{S}_{\rm phys}$ remains a valid calculational descriptor, it simply has no per-run physical referent in that region.}
 
 \emph{A measurement instrument $\mathcal{I} = \{\mathcal{I}_a\}_a$ is \textbf{physical} iff $\sum_a \mathcal{I}_a$ is unital and, for every $\omega \in \mathcal{S}_{\rm phys}$:}
 \emph{(i) the non-selective state $\omega \circ (\sum_a \mathcal{I}_a)$ lies in $\mathcal{S}_{\rm phys}$; and}
@@ -876,7 +958,7 @@ Under this commitment, the framework's structure is the following.
 
 \emph{At finite process stage $t$, this condition is imposed only for those $R \Subset J^+(O_a) \cap J^-(\Sigma_t)$ that lie in the instantiated collection $\mathfrak{R}_t(a)$. Conditional feed-forward operations must satisfy the same condition on each branch.}
 
-The set of physical dynamics is a proper subset of the set of all normal unital CP maps on $\hat{\mathcal{A}}$. Generic Hilbert-space Hamiltonians do not induce physical dynamics; physical dynamics do.
+Equivalently: physical evolution preserves the set of instantiable regional contents. This is a closure property of $\mathcal{S}_{\rm phys}$ under the (exactly unitary, unconstrained) dynamics, not a selection rule on Hamiltonians — every standard Hamiltonian is admissible; what the framework restricts is which \emph{regional contents} count as physically instantiated, not which evolutions are allowed.
 
 \textbf{Axiom (Causal application of admissibility).} \emph{Modular-local admissibility is imposed on the state of a region when that region is physically instantiated in the causal order. If earlier alternatives are separately admissible in their respective past algebras, a later joint diamond $D^+$ constrains only the state restricted to $\hat{\mathcal{A}}(D^+)$ after the relevant systems enter $D^+$. Failure of $\chi_{D^+} \le C(D^+)$ makes the proposed future joint state or transition inadmissible; it does \textbf{not} retroactively delete previously admissible past branches.}
 
@@ -928,6 +1010,14 @@ I_{\rm Hol}^R \;=\; \sum_k \tilde p_k \chi_R(\omega_{k,R}) - \chi_R(\bar\omega_R
 \emph{Proof.} Donald's identity $(\star)$ is a standard property of Araki relative entropy on a von Neumann algebra (Donald 1986; cf. Ohya-Petz 1993, Thm 5.21). Under (H1), the LHS of $(\star)$ is bounded by $C(R)$. Under (H2), the term $\chi_R(\bar\omega_R)$ in the RHS of $(\star)$ is at least $I_0 - \eta_0$. Rearranging gives the bound on $I_{\rm Hol}^R$. Applying (H3) gives the bound on $H_\epsilon$. The smoothed support bound follows by Markov's inequality on $-\log \tilde p_k$, and $\tilde p_{\max} \ge e^{-H_\epsilon}$ gives the saturation conclusion. $\blacksquare$
 
 \textbf{Status of the assumptions.} (H1) is a direct consequence of $\omega \in \mathcal{S}_{\rm phys}$ provided each $\omega_{k,R}$ inherits admissibility, natural under the branchwise instrument condition of §7.6. (H3), operational distinguishability, is the formal expression of macroscopic record decodability, established under decoherence + Quantum Darwinism for the macroscopic-record subalgebra (§6.4–6.7). (H2) is the \emph{independent framework postulate}: it asserts that physical instantiation of a macroscopic record on $R$ requires modular cost $\ge I_0$. This is \emph{not} a theorem of standard AQFT or holography; it is the framework's central commitment, calibrated empirically against the observed quantum-to-classical transition scale.
+
+\textbf{Sharpening of (H2) — reference-weight form.} A machine-verified audit (see \texttt{lean/mathlib/QIQTH/H1H2Audit.lean} in the project repository) confirms that (H2) is genuinely independent of (H1), Donald's identity, Klein positivity, and DPI: a classical KL countermodel with $\sigma=(1/2,1/2)$ and $\rho=\delta_0$ satisfies all the structural hypotheses but violates (H2) with $I_0=1$. The same audit also yields the following sharp structural reformulation of (H2). For a perfect-record state on event $E_{\rm record}$,
+
+\[
+\chi_R(\bar\omega_R) \ge I_0 - \eta_0 \quad \Longleftrightarrow \quad \sigma_R(E_{\rm record}) \le e^{-(I_0 - \eta_0)}.
+\]
+
+Equivalently: (H2) is the assertion that \textbf{macroscopic record sectors occupy exponentially small reference-weight} under the canonical sector reference state $\sigma_R$. This identifies the load-bearing physical content of (H2): not the positivity of relative entropy (which Klein already provides), but a reference-weight bound on pointer sectors that a future first-principles derivation must obtain from modular/holographic structure on macroscopic records.
 
 \textbf{Conditional modular estimate of Born-weight deviations.} Let $\mu$ be the Born measure over conditional record states $r \mapsto \omega_r$, and define the inadmissible set
 
@@ -986,7 +1076,15 @@ This number is therefore \textbf{not a generic QFT consequence}; it is a wedge /
 
 The single-record-per-region structure of physical states is therefore a \emph{structural consequence} of the modular-local capacity bound. \textbf{Effective form (Theorem 6, the precise statement).} Multi-record states are not absent because of dynamical collapse; under approximate saturation $I_0 \approx C(R)$ they are \emph{exponentially suppressed} on the normalized active distribution (effective multiplicity $N^{(\epsilon)}_{\rm eff} = \exp H_\epsilon \le \exp(C(R) - I_0 + \eta_0 + \eta_{\rm def})$), and at exact saturation $I_0 = C(R), \eta_0 = \eta_{\rm def} = 0$ they are \emph{kinematically forbidden} (single record with active probability one). The strong-language passages below ("not in the physical state space", "$N_{\max} \approx Q_R/I_0$") are to be read in the exact-saturation limit; the precise effective form for finite tolerances is Theorem 6.
 
-\textbf{Dynamical content of Option 2.} Standard Hilbert-space QM is the unconstrained formalism. The constrained subset $\mathcal{H}_{\rm phys}$ is a \emph{nonlinear submanifold} of $\mathcal{H}$ (the constraint $I_\Sigma \le Q_R$ is nonlinear in the state). Physical Hamiltonians are constrained to preserve this submanifold. The framework's claim is that the actual physical Hamiltonian of nature respects the Branch-Summed Bound, measurement-like unitaries that would (in unrestricted QM) take a single-record state to a multi-record state do not occur in the physical dynamics; the actual physical dynamics, with the constraint imposed, takes single-record states to single-record states (selected by the actual physical initial conditions of apparatus + environment in that run).
+\textbf{The adopted reading: a restriction on the physical state space, not on the dynamics.} Standard Hilbert-space QM is the unconstrained formalism. The constrained set $\mathcal{H}_{\rm phys}$ — regional contents with $I_\Sigma \le Q_R$ — is a \emph{nonlinear set of admissible regional contents} (the possible values of $C_R$), \textbf{not} an invariant Hilbert subspace in which the global $\Phi(t)$ evolves; the constraint $I_\Sigma \le Q_R$ is nonlinear in the state. The restriction is on \emph{which regional contents are instantiable physical states}, \textbf{not} a restriction on the allowed Hamiltonians and \textbf{not} a claim that "certain unitaries do not occur." The Schrödinger / Heisenberg evolution law is exactly unitary and entirely standard, including ordinary measurement interactions. What the formalism's linearity produces — the global multi-record vector $\sum_k c_k |A_k\rangle|E_k\rangle$ — remains a perfectly good \emph{calculational} descriptor; the framework's claim is that its regional content in $R$, carrying $\ge 2$ macroscopic records at summed cost $I_\Sigma \approx K \cdot I_0 > Q_R$, \textbf{cannot be instantiated in its entirety as the actual content of $R$}.
+
+It is essential to be precise about what this does and does not deliver. The capacity bound does \emph{negative} work only: it forbids a $\ge 2$-record regional content. It does \textbf{not}, by itself, pick out which single record is the actual one — and decoherence cannot do so either (it conserves the branch weights $|c_k|^2$; \texttt{NoConcentration.lean}). The actual single-record content of $R$ in a given run is the derived beable
+
+\[
+C_R = A_R[\Phi, \lambda],
+\]
+
+the single record sector selected by $\lambda$, the run's actual microscopic initial conditions of apparatus + environment. Here $A_R$ is a \emph{fixed, non-dynamical reading functional}, part of the interpretive postulate (not a per-run free object): given $\Phi(t)$, the run-index $\lambda$, and the decoherence-defined record decomposition of region $R$, it returns one admissible record sector $C_R(t)$. It carries no run-dependent degrees of freedom beyond $\lambda$, does not alter $\Phi$, and is required to be consistent across overlapping/nested regions and across time. Thus the per-run ontology is the pair $(\Phi, \lambda)$ (the exactly-unitary global $\Phi$ plus the non-dynamical actuality selector $\lambda$), and the fixed theoretical structure comprises the unitary law, the capacity bound, the typicality measure, and the reading functionals $\{A_R\}$ — lawlike structure, not a further per-run substance. $C_R$ is not a third substance and is not $\Phi$ restricted to $R$ (that restriction is the full $K$-record mixture); it is the $\lambda$-selected sector, eliminable in favour of $(\Phi, \lambda, A_R)$ but \textbf{not} in favour of $\Phi$ alone. Two honest consequences follow. First, $\lambda$ is a \emph{broad-sense} beable — an actuality fact not contained in bare $\Phi$ — so the framework is ψ-monist only in the \emph{weak (dynamical)} sense ($\Phi$ is the sole dynamical ontology), not in the strong sense that $\Phi$ alone is the complete per-run state. Second, the selection role of $\lambda$ and the typicality measure it carries are genuine additional commitments (consistent with the \texttt{EquivarianceGap.lean} audit), not consequences of (FQ) alone. This is (FQ) part (iii) plus the formal/per-run distinction — a statement about physical instantiability of regional contents and their $\lambda$-selection, with the global evolution law left untouched.
 
 \textbf{Response to the linear measurement obstruction.} A standard objection: "By linearity, $U(\alpha|0\rangle + \beta|1\rangle)|A_{\rm ready}\rangle = \alpha|A_0\rangle + \beta|A_1\rangle$, exactly the forbidden multi-record state."
 
@@ -994,11 +1092,11 @@ This objection assumes that the unrestricted-Hilbert-space wave function $\alpha
 
 The screen is a complex quantum system with $\sim 10^{20}$–$10^{25}$ degrees of freedom that becomes entangled with the particle during detection. Decoherence between distinct macroscopic record states $|A_0\rangle$ and $|A_1\rangle$ produces environmental cross-overlaps $\langle E_0 | E_1 \rangle \sim e^{-10^{20}}$ on physically realistic timescales (§6.2). Under (FQ), these exponentially-small off-diagonal coherence terms are \emph{physically zero} (§6.3).
 
-So at the level of physical observable content, which is what physics is about, the formal $\alpha|A_0\rangle + \beta|A_1\rangle$ structure decoheres to a classical-looking expression, and the residual coherence is rendered physically zero by (FQ). The physical state on the macroscopic observable algebra is a strict classical mixture over records. The framework's superselection rule then says: even this strict classical mixture (with $H(\{p_k\}) > 0$ when $|c_k|^2$ are both non-negligible) violates the Branch-Summed Bound when the records' costs approach $Q_R/I_0$. So this state isn't a \emph{physical} state either.
+So at the level of physical observable content, which is what physics is about, the formal $\alpha|A_0\rangle + \beta|A_1\rangle$ structure decoheres to a classical-looking expression, and the residual sub-$\epsilon$ coherence has no physical referent under (FQ) (a resolution-equivalence on regional states). The physical content on the macroscopic observable algebra is a strict classical mixture over records. The finite-information restriction then says: a regional content carrying $\ge 2$ macroscopically distinct records (summed cost $I_\Sigma \approx K\cdot I_0$ approaching/exceeding $Q_R$) is \emph{not an instantiable physical state of the region} — it has no per-run physical referent.
 
-What actually happens in a specific run, under the constrained physical Hamiltonian acting on the actual initial conditions of that run (specific microscopic state of screen + environment), is that the per-run evolution stays within $\mathcal{H}_{\rm phys}$ throughout, the actual physical Hamiltonian does not produce multi-record states from physically allowed initial conditions. The linear-Hilbert-space-formalism argument $U(\alpha|0\rangle + \beta|1\rangle) \to \alpha|A_0\rangle + \beta|A_1\rangle$ describes what an \emph{unconstrained} unitary would do; the \emph{physical} Hamiltonian, constrained to preserve $\mathcal{H}_{\rm phys}$, takes the per-run initial state (with specific actual microscopic IC) to a per-run final state (with a specific actual macroscopic record). Different runs with different actual initial conditions produce different actual records; across many runs, Born statistics emerge from typicality.
+It is essential that this is a restriction on which \emph{regional contents} are physically instantiable, \textbf{not} a modification of the dynamics. The formal global vector $\alpha|A_0\rangle|E_0\rangle + \beta|A_1\rangle|E_1\rangle$ produced by ordinary linear unitary evolution is a perfectly good \emph{calculational descriptor} — it is the cross-run ensemble descriptor, not the per-run physical state. What is physically real per run is the regional content, and by the finite-information restriction that content is single-record. \emph{Which} record a given run carries is fixed by that run's actual microscopic initial conditions (distinct runs are distinct actual universes; the IC index the run, they do not produce the single-ness). The global Schrödinger / Heisenberg evolution law is left exactly unitary and entirely standard throughout; no Hamiltonian is restricted and no amplitude is trimmed.
 
-The "linear measurement obstruction" thus disappears once one recognizes that (a) physical observable content, not unrestricted Hilbert-space wave functions, is what we have physical access to; (b) decoherence + (FQ) make the off-diagonal coherence physically zero at the observable level; (c) the constraint on physical Hamiltonians (preserving $\mathcal{H}_{\rm phys}$) eliminates the multi-record final state from physical dynamics.
+The "linear measurement obstruction" thus disappears once one recognizes that (a) physical content is the regional algebra-state content of bounded regions, not the unrestricted global Hilbert-space vector; (b) decoherence removes interference and (FQ) removes the residual sub-$\epsilon$ coherence as a resolution-equivalence; (c) the finite-information restriction makes a $\ge 2$-record \emph{regional content} non-instantiable — the multi-record global vector remains a valid ensemble descriptor but has no single-region per-run physical referent.
 
 \textbf{The per-record cost $I_0$ as an experimental parameter.} The framework's central physical postulate, the Branch-Summed Holographic Bound $I_\Sigma^\epsilon[\omega_R] \le Q_R$, combines two quantities:
 \begin{itemize}
@@ -1030,11 +1128,11 @@ $I_0 = c_R(r)$ for typical macroscopic records & Per-record physical cost in reg
 
 The single-outcome enforcement threshold occurs at $N \cdot I_0 \approx Q_R$. Below this threshold (microscopic regime, $N \cdot I_0 \ll Q_R$): constraint vacuous, standard QM behavior. Above this threshold (macroscopic regime): constraint enforces single-record per run.
 
-This is analogous to how gauge theories work: the physical state space is a constrained submanifold of the unrestricted Hilbert space (gauge-invariant states); physical Hamiltonians preserve gauge invariance; the unrestricted Hamiltonians are mathematically writeable but unphysical. In gauge theory the constraint is gauge invariance; in QIQT-H the constraint is the Branch-Summed Holographic Bound.
+A clarifying contrast with gauge theory: in gauge theory the physical state space is a constrained submanifold (gauge-invariant states) and one \emph{also} restricts the admissible Hamiltonians to gauge-preserving ones. QIQT-H is \textbf{not} of this form. The restriction here is on which \emph{regional contents} count as instantiable physical states (those with $I_\Sigma \le Q_R$); the global evolution law is left exactly unitary and unconstrained, and the formal global wave function — including formal multi-record vectors — evolves by ordinary standard QM. The Branch-Summed Bound constrains what can physically \emph{reside} in a region, not which Hamiltonians may act.
 
-\textbf{Schrödinger evolution holds on $\mathcal{H}_{\rm phys}$.} Within the physical state space, evolution under physical Hamiltonians is linear and unitary, Schrödinger evolution is preserved. What is \emph{not} preserved is the freedom to use arbitrary Hilbert-space Hamiltonians; physical Hamiltonians are constrained.
+\textbf{The Schrödinger law is exactly unitary and unmodified.} There is no restriction on Hamiltonians and no non-unitary or non-linear term anywhere. What the framework adds is a kinematic statement about regional physical instantiability: a regional content carrying $\ge 2$ macroscopically distinct records has no per-run physical referent. This is (FQ) part (iii) plus the formal/per-run distinction, not a dynamical modification.
 
-\textbf{The price the framework pays.} This commitment modifies the physical dynamics relative to unrestricted standard QM. The set of physical Hamiltonians is a constrained set. This is a substantive modification of QM at the foundational level, but only in regimes where the branch-summed cost approaches the holographic capacity. At lab scales, where macroscopic records use only $\sim 10^{25}$ bits of an available $\sim 10^{70}$-bit holographic capacity per cubic meter, the constraint is operationally vacuous. Standard QM at lab scales gives the same predictions as the constrained dynamics. The constraint becomes operationally relevant only when branch-summed cost approaches $Q_R$, i.e., for macroscopic measurement records, where the framework's deviation from standard QM is to \emph{enforce} single-record per-run at the kinematic level.
+\textbf{The price the framework pays.} The commitment is a new \emph{kinematic postulate} — the Branch-Summed Holographic Bound on instantiable regional content — not a change to the dynamics. It is substantive at the foundational level, but only in regimes where the branch-summed cost approaches the holographic capacity. At lab scales, where macroscopic records use only $\sim 10^{25}$ bits of an available $\sim 10^{70}$-bit holographic capacity per cubic meter, the restriction is operationally vacuous and standard QM is recovered exactly. The restriction becomes operationally relevant only when branch-summed cost approaches $Q_R$, i.e., for macroscopic measurement records, where its content is to make $\ge 2$-record regional content non-instantiable — single-record per run at the kinematic level, with the dynamics still exactly unitary.
 
 \textbf{Mathematical work needed:}
 
@@ -1042,8 +1140,8 @@ This is analogous to how gauge theories work: the physical state space is a cons
   \item \textbf{Precise specification of $\mathcal{C}(R)$} as the einselected/Darwinistic record subalgebra (drawing on decoherent histories, Quantum Darwinism).
   \item \textbf{Per-record cost $c_R(r)$} rigorously defined via Zurek physical entropy.
   \item \textbf{Branch-summed bound $I_\Sigma^\epsilon \le Q_R$} as new physical principle, not derivable from existing holography, but conjecturally connectable to deeper quantum-gravity arguments about distinguishable record content per region.
-  \item \textbf{Characterization of physical Hamiltonians}, which Hermitian operators preserve $\mathcal{H}_{\rm phys}$? This is analogous to characterizing gauge-invariant Hamiltonians in gauge theory.
-  \item \textbf{Born statistics from typicality} under the constrained dynamics, the typicality theorem for which single-record state is realized per run, with the realization measure reproducing Born weights $|c_k|^2$.
+  \item \textbf{Characterization of instantiable regional content} — a precise statement of which regional algebra-states satisfy $I_\Sigma \le Q_R$, and the proof that $\ge 2$-record content violates it (the Macroscopic Definiteness Conjecture, Open Problem 3). This is a constraint on regional content, not on Hamiltonians; the dynamics is left exactly unitary.
+  \item \textbf{Born statistics from typicality} — the typicality theorem for which single-record content is realized per run, with the across-run realization frequency reproducing Born weights $|c_k|^2$ (probability emergent, not a per-run primitive).
 \end{enumerate}
 
 Each of these is a concrete open mathematical problem; together they constitute the framework's explicit research program beyond the borrowed CPW/Witten scaffolding.
@@ -1062,17 +1160,17 @@ The framework's single-world per run is therefore a \emph{kinematic structural f
 \textbf{Why this is genuinely new physics beyond Witten/CPW.} Witten/CPW provide the Type II algebraic infrastructure for regional generalized entropy. They do \emph{not} establish:
 \begin{itemize}
   \item The branch-summed bound as a strengthening of standard holographic entropy
-  \item The constraint that physical Hamiltonians preserve $\mathcal{H}_{\rm phys}$
-  \item The exclusion of multi-record states as kinematically forbidden
+  \item The kinematic non-instantiability of $\ge 2$-record regional content (a restriction on which regional contents are physical, not on the dynamics)
+  \item The exclusion of multi-record regional content as kinematically forbidden
 \end{itemize}
 
-These are the framework's specific new physical principles, building on the Witten/CPW scaffolding. They constitute a concrete research program: define the branch-summed cost rigorously; postulate the Branch-Summed Bound as new physics; characterize the constrained dynamics; derive Born statistics from typicality within the constrained dynamics.
+These are the framework's specific new physical principles, building on the Witten/CPW scaffolding. They constitute a concrete research program: define the branch-summed cost rigorously; postulate the Branch-Summed Bound on instantiable regional content as new physics; prove that $\ge 2$-record content is excluded; derive Born statistics as an across-run typicality / relative-frequency result. The global evolution law remains exactly unitary throughout.
 
 \subsection{Theorem (No-signaling from modular-local admissibility)}
 
 \textbf{Non-selective-instrument convention.} All operations used in the no-signaling argument below are deterministic \emph{non-selective} channels, i.e., instruments enter only through their sum $\mathcal{I} = \sum_a \mathcal{I}_a$. Selective conditional states $\omega_a$ are admissibility-checked branchwise (cf. §7.6 Definition (Physical instruments)), but \textbf{postselection on the outcome label $a$ is not an operation available for spacelike signaling}; it becomes operational only once the outcome record is classically available in the common future. Without this restriction, even ordinary Born probabilities can be made to "signal" by postselecting on rare outcomes; with it, no-signaling reduces cleanly to algebraic commutation.
 
-\textbf{Theorem 7 (No-signaling).} \emph{Let $D_A, D_B$ be spacelike-separated causally complete regions with $[\hat{\mathcal{A}}(D_A), \hat{\mathcal{A}}(D_B)] = 0$. Let $\{\Phi_a^x\}$ be a normal CP instrument localized in $\hat{\mathcal{A}}(D_A)$ with setting $x$ and outcomes $a$, and let $\{\Psi_b^y\}$ be similarly localized in $\hat{\mathcal{A}}(D_B)$. Under the Modular-Local Holographic Superselection Rule (§7.6) and the non-selective-instrument convention above, Alice's marginal probability is independent of Bob's setting:}
+\textbf{Theorem 7 (No-signaling).} \emph{Let $D_A, D_B$ be spacelike-separated causally complete regions with $[\hat{\mathcal{A}}(D_A), \hat{\mathcal{A}}(D_B)] = 0$. Let $\{\Phi_a^x\}$ be a normal CP instrument localized in $\hat{\mathcal{A}}(D_A)$ with setting $x$ and outcomes $a$, and let $\{\Psi_b^y\}$ be similarly localized in $\hat{\mathcal{A}}(D_B)$. Under the modular-local finite-information admissibility restriction (§7.6) and the non-selective-instrument convention above, Alice's marginal probability is independent of Bob's setting:}
 
 \[
 P_{\rm QIQT}(a \mid x, y) \;=\; P_{\rm QIQT}(a \mid x).
@@ -1151,19 +1249,19 @@ The de Sitter static patch and black-hole horizon regions are the natural arenas
 
 \subsection{Copenhagen}
 
-Invokes collapse without dynamics. We invoke no collapse. The single-record per-run wave function is a consequence of the Type II structure + decoherence + concentration, not of dynamical reduction.
+Invokes collapse without dynamics. We invoke no collapse. The single-record per-run regional content is a consequence of decoherence (removing interference) + the finite-information restriction on regional content (making a $\ge 2$-record content non-instantiable), not of dynamical reduction.
 
 \subsection{Many-Worlds}
 
-Posits all formal components as equally real branches. We are single-world per run: the per-run wave function's regional state is concentrated on a single record; alternatives correspond to vanishing components in the Type II state space.
+Posits all formal components as equally real branches. We are single-world per run: the per-run regional content is single-record because a $\ge 2$-record regional content exceeds the region's information capacity $Q_R$ and is not an instantiable physical state; the unrealized records have no physical referent (they are not "real elsewhere"), in contrast to Many-Worlds.
 
 \subsection{Bohmian mechanics}
 
-Bohm adds particle positions in $3N$-dim configuration space as a \emph{second ontological layer} beyond the wave function, with a guidance equation connecting the two. The framework adds \emph{no second ontological layer}. We are \textbf{ψ-monist}: the wave function is the only ontology. The per-run wave function is simply the actual physical wave function of the universe in any specific run; the formal wave function is the textbook ensemble descriptor. No particles, no fields, no extra structure, the distinction the framework adds is between the formal wave function (ensemble) and per-run wave function (actual), not between the wave function and some other physical thing.
+Bohm adds particle positions in $3N$-dim configuration space as a \emph{second dynamical layer} beyond the wave function, with a guidance equation connecting the two — the configuration evolves under a law driven by $\Phi$. The framework adds \emph{no second dynamical layer and no guidance law}: $\Phi$ is the sole dynamical ontology (weak ψ-monism; §2.2). The structural counterpart of the Bohmian configuration is the run-index $\lambda$ — the run's actual microscopic initial conditions, which select the realized record — but $\lambda$ is \emph{non-dynamical}: it carries no equation of motion and exerts no back-reaction on $\Phi$. So the difference from Bohm is sharp: same single-world realism and a run-indexing actuality fact, but no extra guided substance and no modification of the dynamics. The complete per-run state is the pair $(\Phi, \lambda)$; the formal wave function is the textbook ensemble descriptor.
 
 \subsection{Objective collapse (GRW, CSL, DP, OR)}
 
-Modify Schrödinger with collapse terms. We modify nothing dynamical. The Schrödinger evolution of the underlying field algebra is exactly unitary; the regional physical content is structurally single-record after concentration via the Type II algebra structure.
+Modify Schrödinger with collapse terms. We modify nothing dynamical. The Schrödinger evolution of the underlying field algebra is exactly unitary; the regional physical content is structurally single-record because a $\ge 2$-record regional content is not an instantiable physical state under the finite-information restriction — a constraint on which regional contents can reside, not on the dynamics.
 
 \subsection{QBism, relational quantum mechanics}
 
@@ -1171,7 +1269,7 @@ Treat the wave function as epistemic / perspectival. We are objectively realist:
 
 \subsection{Modal interpretations, decoherent histories}
 
-Introduce a modal value-rule or history-selection structure. We require neither. The Type II algebra has finite resolution intrinsically; concentration + this resolution yield single records without external value-rules.
+Introduce a modal value-rule or history-selection structure. We require neither. The finite-information restriction on regional content makes a $\ge 2$-record content non-instantiable, yielding single records without external value-rules.
 
 \subsection{Ensemble interpretations (Ballentine)}
 
@@ -1190,7 +1288,7 @@ Palmer's Rational Quantum Mechanics (RaQM 2025, PNAS) and the broader Invariant 
   \item Motivation by deep structural principles rather than ad hoc modification of QM
 \end{itemize}
 
-(The frameworks differ in ontology: Palmer treats the wave function as derived/emergent from invariant-set statistics, with the underlying ontology being points on the fractal invariant set $I_U$; our framework is ψ-monist with the wave function itself as the only ontology, where the per-run wave function is the actual physical state distinct from the textbook formal ensemble descriptor.)
+(The frameworks differ in ontology: Palmer treats the wave function as derived/emergent from invariant-set statistics, with the underlying ontology being points on the fractal invariant set $I_U$; our framework is weak-ψ-monist, with $\Phi$ the sole dynamical ontology plus a non-dynamical run-index $\lambda$ selecting the realized record — the per-run state $(\Phi,\lambda)$ being finer-grained than the textbook formal ensemble descriptor. Interestingly Palmer's $I_U$-point and our $\lambda$ play structurally similar run-indexing roles.)
 
 \textbf{Differences in mathematical apparatus and motivating principle:}
 
@@ -1257,7 +1355,7 @@ Ballentine ensemble & No & No & No & None & An ensemble member, unspecified \\
 \hline
 Palmer RaQM / IST & No (emergent dynamics) & No particles; per-run microstate on invariant set & No & Invariant-set discreteness (p-adic) & Specific microstate on $I_U$; measurement-dependent \\
 \hline
-\textbf{(FQ) literal reading framework} & \textbf{No} & \textbf{No (ψ-monist: only the wave function; per-run WF ≠ formal WF, no extra ontology)} & \textbf{No} & \textbf{Finite physical resolution from holographic bound} & \textbf{One specific single-branch wave function, structurally selected by (FQ) precision floor + decoherence + per-run universal wave function being the actual physical state} \\
+\textbf{(FQ) literal reading framework} & \textbf{No} & **No second \emph{dynamical} ontology (weak ψ-monist); one non-dynamical run-index $\lambda$ — formal-ψ-incomplete\textbf{ & }No\textbf{ & }Finite physical resolution + finite-information capacity on regional content\textbf{ & }One single-record regional content $C_R = A_R[\Phi,\lambda]$: capacity bound forbids $\ge 2$-record content, $\lambda$ selects which; dynamics exactly unitary** \\
 \hline
 \end{tabularx}
 \end{center}
@@ -1278,7 +1376,7 @@ The structure rests on:
   \item \textbf{The CPW/Witten algebraic infrastructure (borrowed).} Local algebras in QFT with gravitational dressing are Type II with semifinite trace and well-defined renormalized entropy differences matching generalized entropy. This provides the rigorous algebraic home for the bound.
   \item \textbf{The (FQ) axiom in its literal physical-instantiation reading (our postulate).} The wave function in any bounded region $R$ is a physical state of spacetime with finite physical information capacity $Q_R = A(\partial R)/(4\ell_P^2)$. Amplitudes have finite physical specification precision $\epsilon(R) > 0$; below the precision, distinct mathematical wave functions are the same physical state. The literal reading goes beyond Witten's algebraic theorem, Witten supplies the mathematical scaffold; the literal physical-instantiation reading is an additional foundational interpretation.
   \item \textbf{Finite physical resolution (Theorem 3, consequence of (FQ) under the literal reading).} Amplitudes within $\epsilon(R)$ of $0$ are physically equivalent to exact $0$; amplitudes within $\epsilon(R)$ of $1$ are physically equivalent to exact $1$. This is the structural consequence that does the foundational work.
-  \item \textbf{The decoherence-and-concentration mechanism.} Under standard unitary dynamics + microscopic initial conditions of any specific run, per-run amplitudes for distinct macroscopic record components evolve dynamically toward $0$ or $1$. Combined with the (FQ) resolution floor, this yields single-record per-run wave functions structurally (Theorem 4).
+  \item \textbf{The decoherence-plus-finite-information-restriction mechanism.} Under standard unitary dynamics, decoherence removes interference between macroscopic record components (their weights $|c_k|^2$ are conserved, not driven to $0$ or $1$); the (FQ) resolution floor removes the residual sub-$\epsilon$ coherence as a resolution-equivalence; and the finite-information restriction (a $\ge 2$-record regional content exceeds $Q_R$) makes the resident regional content single-record, with the run's microscopic initial conditions indexing which record (Theorem 4).
   \item \textbf{The Born typicality program (open).} A conjectural program for deriving Born statistics from typicality of microscopic initial conditions; analogous to but distinct from Bohmian $|\psi|^2$-equivariance, identified as the central open quantitative problem.
 \end{enumerate}
 
@@ -1357,7 +1455,7 @@ Explicit form of $\epsilon(R)$ & A function $\epsilon(R) = f(Q_R, \text{record s
 \hline
 Decoherence + (FQ) → strict mixture & A theorem in algebraic QFT showing that, under (FQ), decoherent suppression below $\epsilon$ gives a strict classical mixture on the regional algebra \\
 \hline
-Born-typicality theorem & A measure $\mu$ on the space of universal initial conditions, plus an equivariance-type theorem $\mu\{\lambda : k(\lambda, \Psi) = k\} = |c_k|^2$ \\
+Born-typicality theorem & A measure $\mu$ on the space of universal initial conditions, plus an equivariance-type theorem $\mu\{\lambda : k(\lambda, \Psi) = k\} = \vert c_k\vert ^2$ \\
 \hline
 FQ as operational equivalence (not literal thresholding) & A clean mathematical formulation: states differing on the regional algebra by less than $\epsilon$ (in some operational metric like trace distance) are physically equivalent \\
 \hline
@@ -1375,39 +1473,344 @@ The open problems are \emph{concrete and well-defined}: each can be attacked in 
 \subsection{The central thesis, in one paragraph}
 
 \begin{qiqtquote}
-The Bekenstein-Bousso holographic bound, taken literally as a Lorentz-invariant physical information limit on bounded regions of spacetime, motivates a stronger physical postulate: the \textbf{Branch-Summed Holographic Bound}, which constrains the sum of per-record costs across coexisting decoherent macroscopic record sectors of any bounded region by the holographic capacity $Q_R$. This bound is a \textbf{superselection rule on the physical state space} $\mathcal{H}_{\rm phys}$: universal wave functions whose induced regional states violate the bound are not physically realizable. Physical Hamiltonians are constrained to preserve $\mathcal{H}_{\rm phys}$ (analogous to gauge invariance in gauge theory). Within $\mathcal{H}_{\rm phys}$, Schrödinger / Heisenberg evolution is preserved exactly under physical Hamiltonians. The Born rule is preserved exactly. The macroscopic world, single-record per region per run, emerges as a \emph{kinematic structural consequence} of the superselection rule, not as a dynamical selection event. No collapse, no hidden particle positions, no MWI branches, no modal value-rule are added; the framework is \textbf{ψ-monist} (wave function as only ontology) with the physical state space constrained by the Branch-Summed Holographic Bound. Born statistics across runs emerge from typicality of actual initial conditions of actual runs, propagated through the constrained dynamics. The CPW Type II crossed-product algebra framework provides the rigorous mathematical infrastructure; the Branch-Summed Holographic Bound is the framework's new physical principle on top, a strengthening of standard holography that is not derivable from existing QG results but is conjecturally connectable to deeper finite-information constraints on regional macroscopic record content.
+The Bekenstein-Bousso holographic bound, taken literally as a Lorentz-invariant physical information limit on bounded regions of spacetime, motivates a stronger physical postulate: the \textbf{Branch-Summed Holographic Bound}, which constrains the sum of per-record costs across coexisting decoherent macroscopic record sectors of any bounded region by the holographic capacity $Q_R$. This is a restriction on the \textbf{physical state space} — on which \emph{regional contents} are physically instantiable, not on the dynamics: under the Macroscopic Definiteness Conjecture (Open Problem 3), a regional content carrying two or more \emph{relevant} macroscopic records has summed information cost exceeding $Q_R$ and so cannot be instantiated as the actual content of that region. The Schrödinger / Heisenberg evolution law of the underlying field algebra is left \textbf{exactly unitary and entirely standard} (including ordinary measurement interactions); no amplitude is trimmed, no Hamiltonian is restricted, and the global multi-record Hilbert-space vector remains a perfectly good \emph{calculational} descriptor — it simply is not, in its entirety, the actual single-region content. \textbf{The per-run ontology is the pair $(\Phi, \lambda)$:} an exactly-unitarily-evolving global wavefunction $\Phi(t)$, together with a fixed \emph{non-dynamical actual-history selector} $\lambda$ (the run's actual microscopic initial conditions). For each region $R$ the actual regional content is the derived beable $C_R(t) = A_R[\Phi(t), \lambda]$, the single $\lambda$-selected decoherent record sector of $\Phi(t)$, constrained by the finite-capacity bound; the unselected sectors remain in $\Phi(t)$ but are not regionally instantiated. The mechanism has a clean division of labour: decoherence removes interference (conserving the weights $|c_k|^2$; this is proved not to select an outcome, \texttt{NoConcentration.lean}); the capacity bound forbids the $\ge 2$-record content (negative work — it does \emph{not} by itself select the survivor); and $\lambda$ selects which single record is actual. No collapse dynamics, no Bohmian particle-position ontology or guidance law, no Everettian parallel \emph{actual} branches (the unrealized records are not a parallel reality — they remain in $\Phi$ but are not regionally instantiated), and crucially \textbf{no modification of the dynamics} are added; the only actuality rule is the fixed $\lambda / A_R$ reading rule, not a stochastic or modal dynamics. The framework is \textbf{ψ-monist in the weak (dynamical) sense}: $\Phi$ is the only thing that dynamically evolves and the only ontology subject to a law of motion — but the complete description of a run is the pair $(\Phi, \lambda)$, with $\lambda$ a non-dynamical actuality fact (a broad-sense beable, structurally analogous to the configuration in Bohmian mechanics or the actual history in modal interpretations, but with no guidance law and no back-reaction on $\Phi$). There are \textbf{no fundamental single-run probabilities} — no per-run stochastic or collapse chance is postulated; the Born weights $|c_k|^2$ are to be recovered, \emph{if at all}, as an emergent relative frequency across the $\lambda$-indexed ensemble of runs, conditional on the adopted (candidate) canonical typicality measure on initial conditions (the Born-typicality program, §7.4, §11.4 — itself open). The CPW Type II crossed-product algebra framework provides the rigorous mathematical infrastructure; the Branch-Summed Holographic Bound is the framework's new physical principle on top, a strengthening of standard holography that is \emph{not yet proved} (the Macroscopic Definiteness Conjecture, Open Problem 3) and is conjecturally connectable to deeper finite-information constraints on regional macroscopic record content. The single-record-per-region claim is therefore stated as a \emph{kinematic structural consequence conditional on} that conjecture plus the actuality/typicality principles, not as an established theorem.
 \end{qiqtquote}
 
 \subsection{Open problems}
 
-The framework's central new commitments are located in the \textbf{record-instantiation-cost postulate} (H2 in Theorem 6) and the \textbf{stagewise causal admissibility structure} (§7.6). The open problems below organize the research agenda that follows from these commitments.
+The Lean audit work (see \texttt{lean/mathlib/QIQTH/} and the formal-verification footnote in the abstract) has sharpened the boundary between what the framework derives from FQ + AQFT + holography and what remains as load-bearing additional commitments. The open problems are reorganized here to reflect that sharpened boundary, with the Born / canonical-measure problem promoted to first position as the most central remaining commitment.
 
-\textbf{Foundational (the framework's central new commitments):}
+\textbf{Open Problem 1 — Canonical IC Measure Principle (the central Born/typicality problem).}
 
+This problem decomposes naturally into six layers, each requiring different kinds of work. The decomposition is based on a closing audit (\texttt{lean/mathlib/QIQTH/AxiomAudit.lean} + GPT-5.5-pro consultation) that distinguishes what is mathematically derivable from what is genuinely open physics from what is irreducible empirical calibration.
+
+\textbf{Goal.} Specify, for each preparation state $\rho$, a measure $\mu_\rho$ on the QIQT-H microscopic-IC space $\Omega_\rho$ (alternatively: a typicality structure on the FQ-restricted physical Hilbert space) satisfying:
+   (a) \textbf{Canonicality} — defined from QIQT-H primitives, not fitted per measurement;
+   (b) \textbf{Born pushforward} — $(O_M)_* \mu_\rho(i) = \mathrm{tr}(\rho E_i)$ for every allowed measurement protocol $M$ with effects $\{E_i\}$;
+   (c) \textbf{Equivariance / stationarity} — preserved by the (FQ)-restricted physical Hamiltonian;
+   (d) \textbf{Repeated-trial typicality} — supports iid / exchangeable / stationary-ergodic frequency theorems;
+   (e) \textbf{Measurement-setting independence} — $\mu_\rho$ does not depend on the measurement context (unless the theory explicitly accepts contextual / measurement-dependent typicality);
+   (f) \textbf{Uniqueness / stability} — robust under coarse-graining and equivalent IC descriptions.
+
+Machine-verified audits flag the difficulty: \texttt{NoBornFromNothing.lean} (any distribution realizable; the structural axioms do not pick out Born), \texttt{EquivarianceGap.lean} (support preservation $\neq$ Born equivariance), \texttt{OperationalNoGo.lean} (operational frequency data alone insufficient). The independence package \texttt{BornMinimalityTable.lean} re-exports these three countermodels and shows that the locality premise is \emph{not} an independent Born-selection sub-axiom — its marginal-level content is a theorem holding for any measure (\texttt{MarginalLocality.pushforward\_marginal\_local}), modulo a named Hilbert→set-level bridge axiom (§11.4.5). Relative to the current finite formal decomposition, the Canonical IC Measure Principle's irreducible Born-selection content is three named sub-axioms (canonical measure, equivariance, operational sufficiency), each provably necessary by concrete finite countermodel — alongside the two acknowledged operator-algebra interface axioms (Schur classification, tensor multiplicativity) that the Born representation itself rests on.
+
+\subsubsection{Formal Born representation theorem (Mackey-Gleason + noncommutative Radon-Nikodym)}
+
+\textbf{The mathematical core.} For a normal probability measure on the projection lattice of a von Neumann algebra without Type $I_2$ summand, Mackey-Gleason (Bunce-Wright 1990s, extending classical Gleason 1957) gives a unique normal state extension. Combined with the noncommutative Radon-Nikodym theorem (Sakai 1971; Takesaki vol. II), this yields the trace-density form
+
+\[
+\mu_\rho(P) = \tau(D_\rho \cdot P)
+\]
+
+on semifinite vN algebras with faithful normal trace $\tau$.
+
+\textbf{Caveats to be explicit about:}
+\begin{itemize}
+  \item \textbf{No bare qubit Gleason}: classical Gleason has a $d=2$ exception. The fix is Busch's POVM-Gleason theorem (2003) extending the result to all effects (Busch, Caves-Fuchs-Manne-Renes 2004).
+  \item Normality / σ-additivity vs finite additivity assumptions.
+  \item Complex Hilbert spaces (real/quaternionic variants require separate treatment).
+  \item Factor vs non-factor center (superselection sectors).
+  \item PVM-only vs POVM/effect-level Born rule.
+  \item Exclusion of singular states.
+\end{itemize}
+
+\textbf{Lean status:} Sub-theorem A (\texttt{TypicalityMackeyGleason.lean}) packages the Mackey-Gleason + noncommutative Radon-Nikodym implication as a conditional theorem. The interface axioms are well-defined Mathlib-formalization tasks (multi-week for the full vN-algebraic version; tractable in finite dimensions).
+
+\subsubsection{Existence and canonicality in finite factors (Type $II_1$)}
+
+\textbf{Standard mathematical existence (NOT open).} For a finite Type II factor $M$ with faithful normal tracial state $\tau$, the construction
+
+\[
+\mu_\rho(p) = \tau(\rho \cdot p), \quad \rho \in L^1(M, \tau)_+, \quad \tau(\rho) = 1
+\]
+
+yields a normal probability measure on the projection lattice $\mathrm{Proj}(M)$. Positivity, normalization, orthogonal additivity, normality, and unitary covariance are all standard theorems. \textbf{In a $II_1$ factor, the trace $\tau$ is the unique normal state invariant under all inner unitaries} — so canonicality under unitary invariance is \emph{not} an open problem; it is a consequence of factor structure.
+
+\textbf{What remains open in $II_1$:} none of the \emph{mathematical} existence; only the (genuinely open) question of canonical \emph{physical selection} — what makes a particular $\rho$ correspond to a particular preparation. That is the empirical calibration step (§11.4.4 below).
+
+\textbf{Lean status:} This is a Lean formalization gap, \emph{not} an open math problem. The construction can be formalised directly given the requisite vN-algebra infrastructure in Mathlib.
+
+\subsubsection{Infinite trace and Type $II_\infty$ — a sharp obstruction}
+
+\textbf{The obstruction.} For a Type $II_\infty$ factor with semifinite trace $\tau$, the trace satisfies $\tau(1) = \infty$. Therefore the trace itself is a \emph{weight}, not a probability state. There is \textbf{no normalized normal state on a $II_\infty$ factor invariant under all unitaries}.
+
+Concretely: one cannot define a "canonical uniform" probability measure $\mu(p) = \tau(p)$ in $II_\infty$; the candidate is not normalizable.
+
+\textbf{Options for the QIQT-H Type II setting:}
 \begin{enumerate}
-  \item \textbf{The record-instantiation-cost postulate (H2).} The framework's central new physical axiom: instantiating a macroscopic record on region $R$ requires modular cost $\chi_R(\bar\omega_R) \ge I_0 - \eta_0$. Justify this as a strengthening of standard Bekenstein-Bousso. Connect to deeper finite-information constraints in quantum gravity (e.g., a \emph{modular} Bekenstein bound on record-bearing states). This is genuinely new physics that does not follow from existing holographic results.
-  \item \textbf{Operational distinguishability axiomatization (H3).} Make precise, under decoherence + Quantum Darwinism, when the macroscopic-record subalgebra admits a normal measurement instrument decoding the record index with small error, so that the Fano-type bound $H_\epsilon \le I_{\rm Hol}^R + \eta_{\rm def}$ holds. Existing ingredients: spectrum broadcast structure (Zurek, Brandão-Piani-Horodecki), redundancy plateaus, decoherent-histories medium-decoherence conditions.
-  \item \textbf{Stagewise adapted process and refinement compatibility.} Construct rigorously the stagewise process $h \mapsto \omega_t^h$ of §7.6, including: existence under Cauchy-slice refinement; compatibility of $\mathfrak{R}_t(h)$ with the AQFT net's isotony; conditions under which the adapted family extends to a completed-history limit.
-  \item \textbf{Empirical calibration of $I_0$.} The per-record physical cost $I_0$ is an experimental parameter, analogous to GRW's collapse rate $\lambda$. Its value must be calibrated against the observed quantum-to-classical transition scale. Current best estimates (Zurek physical entropy for typical macroscopic records) give $I_0 \sim 10^{25}$ bits, but the empirically required value may be larger if records include extensive environmental entanglement. The framework's prediction: a definite calibrated value of $I_0$ such that the saturation condition $I_0 \approx C(R)$ matches the observed quantum-classical boundary for macroscopic systems.
+  \item Choose a density $\rho$: $\mu_\rho(p) = \tau(\rho \cdot p)$ with $\rho \in L^1(M, \tau)_+$ and $\tau(\rho) = 1$. The measure exists; canonicality requires an additional principle to select $\rho$ for a given physical preparation.
+  \item Restrict to a finite corner $eMe$ with $\tau(e) < \infty$: recovers the $II_1$ analysis above on the corner.
+  \item Use semifinite \emph{typicality weight} rather than probability measure — appropriate if the framework adopts a non-probability typicality reading.
+  \item Provide additional physical selection principles (canonical sector reference state, modular structure, holographic origin).
 \end{enumerate}
 
-\textbf{Algebraic / mathematical-physics:}
+\textbf{Lean status:} Sub-theorem A's interface (Mackey-Gleason + RN) applies to $II_\infty$; the obstruction is \emph{physical canonicality}, not formal existence of $\mu_\rho$.
+
+\subsubsection{Type III caveat (AQFT local algebras)}
+
+\textbf{A non-trivial caveat.} AQFT local algebras of bounded regions are typically Type $III_1$, not Type II (Buchholz, Borchers, Longo; see foundations paper §3). The QIQT-H framework uses the CPW Type II crossed-product construction (CPW 2022, Witten 2022) precisely to \emph{escape} Type III to a well-defined entropy structure. But:
+
+\begin{itemize}
+  \item \textbf{There is no trace-density picture in Type III.} Normal states still give projection probabilities $\phi(p)$, but the formula $\phi(p) = \tau(\rho \cdot p)$ has no analog in Type III (no trace).
+  \item The relationship between the underlying Type III local algebras and the crossed-product Type II algebras is mediated by the modular flow of the canonical sector reference state $\sigma_R$.
+  \item The Born representation problem in Type III is structurally different and requires either passing through the Type II crossed product or using Connes' spatial derivative / Haagerup's $L^p$-space construction.
+\end{itemize}
+
+\textbf{Open:} make explicit how the Type II crossed-product trace-density picture relates to the underlying Type III local-algebra structure — particularly whether the canonical IC measure $\mu_\rho$ on the Type II core has a natural Type III pullback.
+
+\subsubsection{Operational calibration — split into derivable and irreducible parts}
+
+\textbf{Splitting the calibration step.} The "measurement-calibration" step (often informally called "the Born content bridge") is actually two parts:
+
+\begin{itemize}
+  \item \textbf{(4a) Mathematical restriction (derivable).} If $A \cong M_d(\mathbb{C})$ is a finite-dimensional measurement subalgebra of a Type II factor and $\phi$ is a normal state, then $\phi|_A(a) = \mathrm{tr}_d(\rho_A \cdot a)$ for a unique ordinary $d \times d$ density matrix $\rho_A$. If the embedding is trace-preserving, the Type II trace restricts to the normalized matrix trace on $A$. \emph{This is standard mathematics.}
+  \item \textbf{(4b) Empirical calibration (irreducible).} The identifications:
+  \item this detector $\leftrightarrow$ this projection / effect;
+  \item this preparation $\leftrightarrow$ this density;
+  \item this pointer event $\leftrightarrow$ this subalgebra;
+  \item this finite-dimensional operational model $\leftrightarrow$ the right model of the actual lab.
+\end{itemize}
+  
+  Operational reconstructions (Hardy 2001; Chiribella-D'Ariano-Perinotti 2011; Masanes-Müller 2011; Brukner-Zeilinger) derive the Born pairing from operational axioms — but the axioms themselves are physical/empirical inputs. \emph{Calibration is not eliminated; it is relocated.}
+
+\textbf{The irreducible part is small but real.} Any deterministic theory needs (4b). It is the analog of the bridge from Liouville measure to thermodynamic ensembles in classical statistical mechanics.
+
+\textbf{POVMs and instruments.} Modern operational treatments use POVMs (effects) rather than PVMs (projections). For sequential measurements and state update, Davies-Lewis / Ozawa instruments are the appropriate framework. The QIQT-H paper should include POVM formulations in §7.6 and §7.7 to avoid the bare-qubit Gleason exception.
+
+\subsubsection{Dynamics, equivariance, and locality}
+
+The conditional Born typicality theorem (\texttt{BornTypicality.lean}) requires three additional physical inputs:
+
+\begin{itemize}
+  \item \textbf{Equivariance theorem.} If $\rho_t = U_t \rho_0 U_t^*$ under FQ-restricted unitary dynamics, then $\mu_{\rho_t}(p) = \mu_{\rho_0}(U_t^* p U_t)$. For QFT-style Hamiltonians, this requires careful treatment of domain / self-adjointness issues. The \texttt{EquivarianceGap.lean} audit establishes that support preservation (the framework's current claim) is strictly weaker than measure preservation.
+  \item \textbf{Projection locality.} Need precise assumptions on the local algebraic structure: tensor product factorisation (or its absence in Type III), commuting local algebras (microcausality), split property, finite corners. The \texttt{CompressionLocality.lean} audit isolates the compression-locality leakage identity and identifies when the FQ projection preserves microcausality at the restricted level. \emph{Post A1 strengthening} (\texttt{MarginalLocality.pushforward\_marginal\_local}): given set-level locality of Bob's dynamics ($r\circ T = r$), the Alice-marginal is invariant for \textbf{any} IC measure — with no equivariance assumption — so locality of the marginal is a theorem, not a separate Born-selection postulate. This reduction is, however, \emph{conditional} on a named Hilbert→set-level locality bridge axiom (\texttt{set\_level\_locality\_from\_unitary\_dilation}, a standard Heisenberg↔Schrödinger correspondence): locality has been relocated into that explicit bridge, not eliminated. Subject to that caveat, locality is no longer counted among the independent Born-selection sub-axioms of the Canonical IC Measure Principle.
+  \item \textbf{Empirical frequency bridge.} If μ is interpreted as typicality (rather than primitive probability), one needs a DGZ-style step from typical initial configurations to observed frequencies. The \texttt{BornTypicality.lean} module formalizes this conditionally via standard finite LLN.
+\end{itemize}
+
+\subsubsection{Typicality vs probability}
+
+\textbf{The conceptual framing.} QIQT-H is fully deterministic; the "measure" $\mu_\rho$ is a \emph{typicality structure} on the microscopic-IC space (à la Dürr-Goldstein-Zanghì 1992 in Bohmian mechanics), not a primitive probability assignment. The candidate routes for canonicality (§7.4 α/β/γ) are typicality principles, not probability axioms.
+
+\textbf{Caveats and references:}
+\begin{itemize}
+  \item \textbf{Frequency concentration (PROVED, single-trial + independence step).} The Lean module \texttt{BornConcentration.lean} proves Chebyshev's tail bound on finite probability spaces ($\Pr(|X-\mu| \ge \varepsilon) \le \mathrm{Var}/\varepsilon^2$), computes the Bernoulli variance ($p(1-p)$), proves the variance-addition (independence) lemma \texttt{variance\_add\_of\_product} (variance of a sum of independent variables equals the sum of variances), and combines these to give the single-trial concentration inequality and the two-trial Bernoulli variance $2p(1-p)$. \emph{What is proved:} the single-trial Chebyshev bound and the reusable variance-addition lemma the $N$-fold induction would iterate. \emph{What remains axiomatic:} the full $N$-trial product-measure scaling $\Pr(|\mathrm{freq}_N - p| \ge \varepsilon) \le p(1-p)/(N\varepsilon^2)$ rests on the LLN interface axiom in \texttt{BornTypicality.lean}. Accordingly the framework's frequency statement ("Born \emph{frequencies}", not merely "Born \emph{means}") is established up to that single named scaling axiom — for which the per-trial variance and the independence step are now both in hand.
+  \item \textbf{Goldstein-Struyve uniqueness} (J. Stat. Phys. 128, 1197, 2007): in Bohmian mechanics, $|\psi|^2$ is the unique local equivariant typicality density. The adaptation to QIQT-H's Type II + (FQ) setting is precisely the multi-week mathematical task of Sub-theorem C.
+  \item \textbf{Valentini nonequilibrium} (1991, 2002; Valentini-Westman 2005): there exist non-Born typicality measures whose dynamics relaxes (or fails to relax) to equilibrium. This is the principled objection to "canonical = equivariant" — equivariance is necessary but may not be sufficient without an additional relaxation argument.
+  \item \textbf{Noncontextuality} in this deterministic-with-typicality setting refers to the equilibrium probability assignment to quantum effects (Spekkens 2005 generalised noncontextuality), \emph{not} to noncontextual pre-existing values (which Kochen-Specker rules out in $d \ge 3$).
+\end{itemize}
+
+\subsubsection{Independence / minimality of the remaining sub-axioms}
+
+Per GPT-5.5-pro's sixth audit, the honest Born claim is not "Born is derived from holography alone" — \texttt{NoBornFromNothing} refutes that — but rather:
+
+\begin{qiqtquote}
+\emph{Born is the unique admissible measure given a NAMED minimal set of additional postulates, and each postulate is INDEPENDENT — dropping any one yields a finite countermodel where Born fails.}
+\end{qiqtquote}
+
+The independence package \texttt{BornMinimalityTable.lean} makes this explicit. Relative to the current finite formal decomposition, the Canonical IC Measure Principle has three irreducible Born-selection sub-axioms, each with a concrete finite countermodel witnessing its necessity (with the locality premise reducible, modulo the named bridge axiom of §11.4.5):
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{|Y|Y|Y|Y|}
+\hline
+\textbf{Tag} & \textbf{Premise} & \textbf{Minimality witness (Lean module)} & \textbf{Countermodel size} \\
+\hline
+P1 & Canonical IC measure (some structurally-distinguished $\mu$ is selected) & \texttt{NoBornFromNothing.any\_anti\_born\_realizable} & $\Gamma$ arbitrary finite \\
+\hline
+P2 & Measure equivariance under FQ-restricted dynamics & \texttt{EquivarianceGap.support\_preservation\_does\_not\_imply\_…} & $\mathrm{Fin}\,2$ swap \\
+\hline
+P3 & Operational sufficiency (click-statistics determine IC marginal) & \texttt{OperationalNoGo.operational\_data\_insufficient} & $\mathrm{Fin}\,3 \to \mathrm{Fin}\,2$ \\
+\hline
+P4 & Locality of Alice's marginal under Bob's local dynamics & \textbf{REDUCIBLE} — proved as a theorem holding for \emph{any} measure (\texttt{MarginalLocality.pushforward\_marginal\_local}), conditional on the named Hilbert→set-level bridge axiom (§11.4.5) & (not an independent Born-selection axiom) \\
+\hline
+\end{tabularx}
+\end{center}
+
+This converts the standing concern "you still assume X" into a sharper audit conclusion: X is \emph{necessary}. Relative to the current finite formal decomposition, the irreducible Born-selection premise set is $\{P1, P2, P3\}$ (down from four, once the marginal-locality step is theoremized modulo its bridge axiom); each premise has a finite-dimensional countermodel; and Born follows uniquely when all three hold together with the two acknowledged interface axioms (Schur classification, tensor multiplicativity) and the operator-algebraic Mackey-Gleason / Radon-Nikodym input. This is the strongest honest statement available without resolving Sub-theorems A and C as theorems-in-Mathlib; it is a \emph{minimality relative to this decomposition}, not a proof that no coarser axiom set could suffice.
+
+\subsubsection{Combined: what is and is not open}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{|Y|Y|Y|}
+\hline
+\textbf{Layer} & \textbf{Item} & \textbf{Status} \\
+\hline
+11.4.1 & Mackey-Gleason + RN representation theorem & Standard math; Mathlib formalisation gap (multi-week) \\
+\hline
+11.4.2 & Existence in finite Type II ($II_1$) & Standard math; Lean formalisation gap (constructive) \\
+\hline
+11.4.3 & Canonical normalised probability state on $II_\infty$ & \textbf{Sharply obstructed}; requires density or finite corner or additional principle \\
+\hline
+11.4.3a & Type III ↔ Type II crossed-product correspondence for IC measure & Open; mathematically non-trivial \\
+\hline
+11.4.4a & Type II → finite-dim restriction (math) & Standard math \\
+\hline
+11.4.4b & Empirical lab-to-formalism calibration & Irreducible empirical bridge (no derivation in any framework eliminates it) \\
+\hline
+11.4.5 & Equivariance theorem under FQ-restricted Hamiltonian & Open; requires concrete FQ-Hamiltonian + self-adjointness analysis \\
+\hline
+11.4.6 & Justification of typicality framing (Goldstein-Struyve adaptation; Valentini relaxation) & Open; multi-year research direction \\
+\hline
+11.4.6 & Born \textbf{frequency} concentration (single-trial Chebyshev) & \textbf{PROVED} in \texttt{BornConcentration.born\_chebyshev\_single\_trial}; $N$-trial scaling at LLN axiom interface \\
+\hline
+11.4.7 & Independence/minimality of P1, P2, P3 by finite countermodel & \textbf{PROVED} in \texttt{BornMinimalityTable.lean} \\
+\hline
+11.4.7 & Reducibility of locality (P4): marginal-locality step proved for \emph{any} measure & \textbf{PROVED} in \texttt{MarginalLocality.pushforward\_marginal\_local}; reduction conditional on the named Hilbert→set bridge axiom \\
+\hline
+\end{tabularx}
+\end{center}
+
+\textbf{Bottom line.} The Canonical IC Measure Principle is \textbf{not} a monolithic mystery. The hard parts are: the $II_\infty$ canonicality obstruction (11.4.3); the Type III correspondence (11.4.3a); the equivariance theorem for FQ-restricted dynamics (11.4.5); and the typicality justification (11.4.6). The mathematical core (11.4.1, 11.4.2, 11.4.4a) is standard given operator-algebra infrastructure; the empirical calibration (11.4.4b) is irreducible. \textbf{After the A1+A2+A4+A6 strengthening pass:} the marginal-locality step is theoremized (for \emph{any} measure, no equivariance assumed) so locality is no longer an independent Born-selection sub-axiom — modulo a named Hilbert→set-level bridge axiom into which the locality content is relocated, not eliminated; relative to the current decomposition the irreducible Born-selection set has three named members (P1/P2/P3), each provably necessary by concrete finite countermodel; and single-trial Born frequency concentration plus the variance-addition (independence) lemma are proved, with the $N$-trial scaling to full frequency convergence still resting on the named product-measure LLN axiom. These are minimality and reduction results \emph{relative to this formal decomposition}, not claims that the underlying operator-algebra interface axioms (Schur classification, tensor multiplicativity, Mackey-Gleason/Radon-Nikodym) have been discharged.
+
+\textbf{Open Problem 2 — Reference-weight bound (sharpened H2).}
+The record-instantiation-cost postulate (H2 in Theorem 6) is \emph{equivalent} to the reference-weight bound $\sigma_R(E_{\rm record}) \le \exp(-(I_0 - \eta_0))$ on macroscopic pointer sectors (see §7.6 Sharpening of (H2); formalized in \texttt{lean/mathlib/QIQTH/H1H2Audit.lean}). Derive this reference-weight bound from modular / holographic first principles, as a strengthening of standard Bekenstein-Bousso. Donald's identity + Klein positivity + DPI alone are insufficient. This is genuinely new physics; progress here feeds directly into Open Problem 3.
+
+\textbf{Open Problem 3 — The Macroscopic Definiteness Conjecture (the one-world mechanism, made rigorous).}
+Make rigorous the claim that, per run, a single macroscopic record physically \emph{resides} in a region $R$ containing apparatus + environment after measurement. The mechanism is \emph{not} a dynamical concentration of amplitudes (the global wave function evolves by exact unitary dynamics and (FQ) trims no amplitude; a machine-verified audit, \texttt{NoConcentration.lean}, confirms that \emph{linear unitary decoherence alone} conserves branch weights and cannot push them toward $0$ or $1$). It is also not microscopic-IC selection, which only \emph{indexes} which single-record universe a given run is. The one-world content comes from the \textbf{finite-information restriction on the physical state space}: a regional content carrying $K \ge 2$ macroscopically distinct records (coherent or classically mixed) has summed information cost $I_\Sigma \approx K \cdot I_0 > Q_R$ once $I_0 \approx Q_R$ at macroscopic scale, so it is not a point of the region's physical state space. The open problem is to \textbf{prove this Branch-Summed bound} — i.e. that the summed information of a $\ge 2$-record regional algebra-state genuinely exceeds $Q_R$ (the \emph{Macroscopic Definiteness Conjecture}, §7.6) — and to characterize the regional-capacity threshold sharply. Two subsidiary requirements: (a) \textbf{recoherence stability} — show that two regional states declared physically identical at the $\epsilon(R)$ resolution cannot later be unitarily amplified into distinct records (else the resolution-equivalence is not a well-defined physical identity); and (b) \textbf{no-signaling consistency} of the information restriction (Open Problem 10), since a regional/global admissibility constraint is structurally postselection-like.
+
+\textbf{Open Problem 4 — Quantitative form of $\epsilon(R)$.}
+The (FQ)(iii) resolution floor satisfies $\epsilon(R) > 0$ (Theorem 3; formalized in \texttt{Resolution.lean}). Derive an explicit functional form $\epsilon(R) = f(\text{geometry}, Q_R, \text{macroscopic record dimension})$ tying the framework to numerical predictions. Downstream of Open Problems 2 and 3.
+
+\textbf{Open Problem 5 — Empirical calibration of $I_0$.}
+The per-record physical cost $I_0$ is a phenomenological parameter, analogous to GRW's collapse rate $\lambda$. Current best estimates (Zurek physical entropy for typical macroscopic records) give $I_0 \sim 10^{25}$ bits. The framework's prediction: a definite calibrated value of $I_0$ such that the saturation condition $I_0 \approx C(R)$ matches the observed quantum-to-classical transition. Downstream of Open Problem 4.
+
+\medskip\hrule\medskip
+
+\textbf{Algebraic / mathematical-physics infrastructure:}
 
 \begin{enumerate}
+  \item \textbf{Operational distinguishability axiomatization (H3).} Make precise, under decoherence + Quantum Darwinism, when the macroscopic-record subalgebra admits a normal measurement instrument decoding the record index with small error, so that the Fano-type bound $H_\epsilon \le I_{\rm Hol}^R + \eta_{\rm def}$ holds. Existing ingredients: spectrum broadcast structure (Zurek, Brandão-Piani-Horodecki), redundancy plateaus, decoherent-histories medium-decoherence conditions.
+  \item \textbf{Stagewise adapted process and refinement compatibility.} Construct rigorously the stagewise process $h \mapsto \omega_t^h$ of §7.6, including: existence under Cauchy-slice refinement; compatibility of $\mathfrak{R}_t(h)$ with the AQFT net's isotony; conditions under which the adapted family extends to a completed-history limit.
   \item \textbf{Functorial / isotonic crossed-product local nets.} Establish the functorial structure $D \mapsto \hat{\mathcal{A}}(D)$ as a covariant net of Type II crossed-product algebras with normal embeddings under inclusion. Needed for the modular-local bound to behave consistently under region refinement / coarse-graining.
   \item \textbf{Modular-Hamiltonian estimates beyond wedges and CFT balls.} Generalize the wedge / CFT-ball modular-Hamiltonian estimate to broader classes of regions, either via tighter enclosing-wedge monotonicity arguments or new geometric forms of $K_R^\sigma$. Without this the conditional $\delta_R \sim 10^{-27}$ estimate cannot be extended to generic laboratory geometries.
-  \item \textbf{Quantitative form of the resolution floor $\epsilon(R)$} for the operational equivalence relation on regional algebra states (the (FQ)(iii) precision floor).
   \item \textbf{State-extension and reference-state issues} in the crossed-product algebra formulation: extension of states across causal-diamond boundaries, choice of $\sigma_R$ in cosmological / non-stationary backgrounds.
+  \item \textbf{Locality of the (FQ)-restricted dynamics.} The (FQ) projection onto $\mathcal{H}_{\rm phys}$ must commute with the local algebras' observables for Theorem 7's no-signaling argument to apply to the \emph{restricted} (physical) theory rather than only the ambient (unrestricted) theory. The compression-locality leakage identity (formalized in \texttt{CompressionLocality.lean}) isolates this implicit constraint. Construct concrete (FQ) projections satisfying it; characterize the class of admissible projections.
 \end{enumerate}
 
 \textbf{Empirical / phenomenological:}
 
 \begin{enumerate}
   \item \textbf{Concrete measurement-apparatus models realizing finite $\chi_R$ budgets.} Build explicit toy models (Stern-Gerlach, interferometer, optomechanical) where $\chi_R$ for the apparatus-record state is computable and the saturation regime can be approached. Without these the framework's content cannot be confronted with experiment.
-  \item \textbf{Rigorous Born typicality under constrained dynamics.} Specify the measure on actual initial conditions of actual runs; prove that the realized-record distribution across runs reproduces $|c_k|^2$ under the constrained dynamics. Analogous to Bohmian DGZ $|\psi|^2$-equivariance.
   \item \textbf{Phenomenological predictions.} With $I_0$ calibrated, the framework predicts: maximum macroscopic-superposition scale (testable against Schrödinger-cat experiments with progressively larger systems); long-baseline coherence limits; specific signatures distinguishing the framework from GRW-style stochastic collapse (the framework predicts kinematic exclusion, not stochastic events).
   \item \textbf{Cosmological / horizon applications}, extend to the de Sitter static patch and black-hole horizon regions, where $C(R)$ becomes finite and saturation may be physically relevant.
 \end{enumerate}
+
+\medskip\hrule\medskip
+
+\textbf{Strategic note.} Of the central open problems, the audit work suggests two bottleneck chains:
+
+  • \textbf{Foundations bottleneck:} Open Problem 1 (canonical $\mu$-selection / equivariance). Now decomposed into three sub-theorems A, B, C (see above), with the A1+A2+A4+A6 strengthening pass further narrowing the load-bearing content. Two of the three sub-theorems are direct applications of existing operator-algebra machinery (Mackey-Gleason + noncommutative Radon-Nikodym); the third requires adapting the Goldstein-Struyve 2007 uniqueness theorem from Bohmian dynamics to QIQT-H's Type II / (FQ) setting. Concrete progress: the permutation-symmetry collapse component of Goldstein-Struyve Step 1 sub-lemma 1c is \textbf{PROVED} under its necessary hypothesis (\texttt{step1c\_collapse\_of\_perm\_symmetric}) along with the foundational matrix-conjugation identities (\texttt{permutation\_conj\_matrixUnit}, \texttt{diagonalU\_conj\_matrixUnit}), while the full Schur classification remains a single named interface axiom; the marginal-locality step is \textbf{PROVED} as a theorem holding for any measure (\texttt{MarginalLocality.pushforward\_marginal\_local}), reducing locality to a named Hilbert→set-level bridge axiom rather than eliminating it; single-trial Chebyshev frequency concentration and the variance-addition (independence) lemma are \textbf{PROVED} (\texttt{BornConcentration}), with the $N$-trial scaling still on the LLN axiom; and the duplicate axiomatization of Goldstein-Struyve sub-steps in \texttt{FQEquivarianceUniqueness} is \textbf{CONSOLIDATED} to route through the concrete \texttt{GoldsteinStruyveFinDim} proof (\texttt{canonical\_ic\_measure\_principle} now depends on exactly two project-specific axioms, down from nine), with the five false/unused Step-1 placeholder sub-axioms deleted (project axiom total 57 → 40). Progress on the remaining load-bearing axioms transforms the Born section from conditional to substantive, and is the most pressing problem for foundations-of-QM defensibility.
+
+  • \textbf{Quantitative-emergence bottleneck:} Open Problem 2 (reference-weight bound) $\Rightarrow$ Open Problem 3 (Macroscopic Definiteness / Branch-Summed bound) $\Rightarrow$ Open Problem 4 ($\epsilon(R)$) $\Rightarrow$ Open Problem 5 ($I_0$ calibration). Progress on Open Problem 2 unlocks the quantitative QIQT-H pipeline.
+
+These are the two genuinely open research directions left after the Lean audit work has clarified the deductive boundary. The remaining items (6–14) are infrastructure and phenomenology that follow once the bottlenecks are addressed.
+
+\subsection{Claim-to-Lean theorem matrix}
+
+The following table maps each major paper claim to its Lean theorem, with explicit status. Status labels:
+
+  • \textbf{U} — unconditional (no project-specific axioms; depends only on standard Lean axioms \texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}).
+  • \textbf{C} — conditional on a standard external theorem (Mathlib-citable; axiomatized at clean interface in the project).
+  • \textbf{P} — programmatic interface axiom (specific framework or AQFT-level axiom; concrete Lean discharge is a multi-day to multi-week task).
+  • \textbf{N} — negative audit / counterexample (proves a \emph{non}-derivation).
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{|Y|Y|Y|Y|}
+\hline
+\textbf{Paper claim} & \textbf{Lean theorem} & \textbf{Status} & \textbf{Notes} \\
+\hline
+Theorem 3 (resolution floor) & \texttt{Resolution.eps\_pos} & U & $\varepsilon(R) > 0$ from finite $Q_R$ \\
+\hline
+Lemma 1 (near-extreme indistinguishability) & \texttt{Resolution.lemma1\_zero} & U & Discrete-bin formalization \\
+\hline
+Theorem 6 (effective definiteness) & \texttt{Theorem6.effective\_definiteness} & U & Donald-bound chain \\
+\hline
+Theorem 6 inner step & \texttt{Theorem6.BranchData.holevo\_le\_capacity} & U & $I_{\rm Hol}^R \le C(R)$ from $\chi_R \le C(R)$ and Klein \\
+\hline
+Theorem 7 (no-signaling) & \texttt{Theorem7.Setup.no\_signaling} & U & From microcausality + locality \\
+\hline
+Donald's identity & \texttt{Donald.donald\_identity} & C & Conditional on 3 cross-entropy axioms (A1, A2, A3) \\
+\hline
+Microcausality ⇒ locality (unitary) & \texttt{UnitarityLocality.locality\_of\_conjugation} & U & StarRing argument \\
+\hline
+Microcausality ⇒ locality (Kraus) & \texttt{KrausLocality.kraus\_channel\_aliceFixing} & U & Generalization to CPTP channels \\
+\hline
+Bell/CHSH inequality (LHV bound) & \texttt{Bell.LHVModel.chsh\_le\_two} & U & Finite probability + ±1 algebra \\
+\hline
+Tsirelson saturation by singlet & \texttt{Tsirelson.singlet\_chsh\_abs\_gt\_two} & U & Explicit 4D real construction; attains $2\sqrt{2}$ exactly (does \emph{not} prove the universal upper bound) \\
+\hline
+(H1) ⇏ (H2) & \texttt{H1H2Audit.H1\_does\_not\_imply\_H2} & N & Classical KL countermodel \\
+\hline
+(H2) ⇔ reference-weight bound & \texttt{H1H2Audit.H2\_iff\_reference\_weight} & U & Sharp structural reformulation \\
+\hline
+Decoherence ⇏ concentration & \texttt{NoConcentration.audit\_conclusion} & N & Linear unitary preserves branch weights \\
+\hline
+$S_{\rm ren}$ (paper) $\neq$ $S_{\rm ren}^{\rm CPW}$ & \texttt{EntropyBridge.fq\_ambiguity\_counterexample} & N & Classical KL counterexample distinguishing the two \\
+\hline
+Branch-summed cost > Shannon possible & \texttt{BranchLedger.branchSummed\_not\_bounded\_by\_Shannon} & N & Binary uniform witness \\
+\hline
+FQ-literal finite ⇒ trivial dynamics & \texttt{FQDynamicsNoGo.finite\_admissible\_flow\_fixed} & U & Continuous flow on finite T2 space (only — not arbitrary finite-info dynamics) \\
+\hline
+Compression-locality leakage identity & \texttt{CompressionLocality.compressed\_commutator\_with\_commute} & U & Pure ring algebra \\
+\hline
+Any $p$ realizable (no Born from nothing) & \texttt{NoBornFromNothing.exists\_probability\_realizing} & N & Concrete section-based construction \\
+\hline
+Support preservation $\neq$ Born equivariance & \texttt{EquivarianceGap.support\_preservation\_does\_not\_imply\_measure\_preservation} & N & Concrete \texttt{Fin 2} counterexample \\
+\hline
+Born typicality (mean form) & \texttt{BornTypicality.born\_mean\_conditional} & U & Conditional on canonical $\mu_\rho$ with Born marginal \\
+\hline
+Operational data ⇏ unique IC measure & \texttt{OperationalNoGo.operational\_data\_insufficient} & N & Concrete \texttt{Fin 3} witness \\
+\hline
+Sub-thm A (Typicality Mackey-Gleason) & \texttt{TypicalityMackeyGleason.qiqth\_typicality\_mackey\_gleason} & C & Conditional on Mackey-Gleason + noncommutative Radon-Nikodym (standard operator-algebra theorems, axiomatized) \\
+\hline
+Sub-thm C (FQ-equivariance uniqueness) & \texttt{FQEquivarianceUniqueness.canonical\_ic\_measure\_principle} & P & \textbf{Post-consolidation:} depends on exactly 2 project axioms (\texttt{GoldsteinStruyveFinDim.step1\_schur\_classification} + \texttt{step3\_tensor\_multiplicativity}), down from 9 (12 redundant abstract axioms eliminated) \\
+\hline
+GS Step 2 (normalization) & \texttt{GoldsteinStruyveFinDim.step2\_normalization} & U & Concrete \texttt{Matrix.trace} computation \\
+\hline
+GS Step 4 (non-degeneracy) & \texttt{GoldsteinStruyveFinDim.step4\_nondegeneracy} & U & Direct case analysis \\
+\hline
+GS Step 3 algebraic core & \texttt{GoldsteinStruyveStep3.step3\_algebraic\_core} & U & Polynomial identity via \texttt{ring} \\
+\hline
+GS Step 3 Kronecker bridge & \texttt{GoldsteinStruyveKronecker.step3\_kronecker\_bridge} & U & Concrete \texttt{d = 2} witness with E₁₁ ⊗ E₁₁ \\
+\hline
+GS Step 1 (Schur classification) & \texttt{GoldsteinStruyveStep1.step1\_via\_sub\_lemmas} & P & Delegates to the single top-level interface axiom \texttt{GoldsteinStruyveFinDim.step1\_schur\_classification}. The five former placeholder sub-axioms (1a–1e) — three of them literally false as stated, all unused — have been \textbf{deleted}; the proved foundation lemmas \texttt{permutation\_conj\_matrixUnit}, \texttt{diagonalU\_conj\_matrixUnit}, and \texttt{step1c\_collapse\_of\_perm\_symmetric} are its concrete building blocks \\
+\hline
+GS Step 1c (coefficient unification, partial) & \texttt{GoldsteinStruyveStep1.step1c\_collapse\_of\_perm\_symmetric} & U & \textbf{NEW (A2):} the \emph{permutation-symmetry collapse component} of Step 1c, proved via \texttt{Equiv.swap} transitivity under its necessary permutation-symmetry hypothesis. The prior bare-coefficient axiom (no hypothesis) was literally false and has been \textbf{deleted}. The \emph{full} Schur classification (Step 1) remains the single named interface axiom \\
+\hline
+Permutation conjugation of matrix units & \texttt{GoldsteinStruyveStep1.permutation\_conj\_matrixUnit} & U & \textbf{NEW (A2):} $P_\sigma \cdot E_{ij} \cdot P_\sigma^* = E_{\sigma(i),\sigma(j)}$ via direct matrix-entry computation \\
+\hline
+Diagonal-unitary conjugation of matrix units & \texttt{GoldsteinStruyveStep1.diagonalU\_conj\_matrixUnit} & U & \textbf{NEW (A2):} $D(z)\cdot E_{ij}\cdot D(z)^* = (z_i\,\overline{z_j})\,E_{ij}$, self-contained diagonal parameterization (no \texttt{Complex.exp}) \\
+\hline
+Combined GS finite-dim theorem & \texttt{GoldsteinStruyveFinDim.goldstein\_struyve\_findim} & P & Proved by composition; inherits Step 1 + Step 3 axioms \\
+\hline
+Marginal locality (pure pushforward) & \texttt{MarginalLocality.pushforward\_marginal\_local} & U & \textbf{NEW (A1):} $r\circ T = r \Rightarrow r_*(T_*\mu) = r_*\mu$ for \textbf{any} $\mu$ — no equivariance assumption; reindexing argument \\
+\hline
+Marginal locality (equivariant corollary) & \texttt{MarginalLocality.alice\_marginal\_unchanged\_by\_bob\_dynamics} & U & \textbf{NEW (A1):} thin corollary of the pure version; discharges the \emph{marginal-locality step} (not the Hilbert→set bridge, which stays a named axiom) \\
+\hline
+Chebyshev tail bound on finite probability space & \texttt{BornConcentration.chebyshev\_tail\_bound} & U & \textbf{NEW (A4):} abstract Chebyshev via variance-dominates-restriction \\
+\hline
+Bernoulli variance $p(1-p)$ & \texttt{BornConcentration.bernoulli\_variance} & U & \textbf{NEW (A4):} direct two-term sum computation \\
+\hline
+Variance addition (independence) & \texttt{BornConcentration.variance\_add\_of\_product} & U & \textbf{NEW (A4):} $\mathrm{Var}(X_1+X_2)=\mathrm{Var}\,X_1+\mathrm{Var}\,X_2$ on a product measure — the reusable lemma the $N$-fold LLN induction would iterate \\
+\hline
+Two-trial Bernoulli variance $2p(1-p)$ & \texttt{BornConcentration.two\_trial\_bernoulli\_variance} & U & \textbf{NEW (A4):} concrete instance of variance-addition \\
+\hline
+Born single-trial frequency concentration & \texttt{BornConcentration.born\_chebyshev\_single\_trial} & U & \textbf{NEW (A4):} single-trial bound; the $N$-trial scaling to full "Born frequencies" still rests on the LLN interface axiom \\
+\hline
+Minimality witnesses for P1, P2, P3 & \texttt{BornMinimalityTable.\{P1, P2, P3\}\_…\_necessary} & N + U & \textbf{NEW (A6):} unified independence package showing each Born sub-axiom is necessary by concrete finite countermodel (minimality \emph{relative to the current decomposition}) \\
+\hline
+Locality (P4) is reducible & \texttt{BornMinimalityTable.P4\_locality\_reducible\_to\_equivariance} & U & \textbf{NEW (A6):} marginal-locality theoremized (modulo the named bridge axiom); not an independent Born-selection sub-axiom \\
+\hline
+\end{tabularx}
+\end{center}
+
+\textbf{No-signaling clarification.} All "no-signaling" results in this paper are about \emph{nonselective} CPTP instruments — the unconditional marginal probability after Bob's measurement, marginalized over outcomes (equivalently, the trace-preserving sum over Kraus operators). Selective post-measurement conditional states can change remotely once Bob's outcome is known; this is not "signaling" because the conditional update requires classical communication.
+
+\textbf{Tsirelson clarification.} The Lean module \texttt{QIQTH.Tsirelson} proves \emph{attainability} of the value $2\sqrt{2}$ by an explicit singlet-state construction in 4-dimensional real Euclidean space (which is the achievability content of Tsirelson's theorem). The \emph{upper bound} statement that CHSH $\le 2\sqrt{2}$ for \emph{every} quantum state and \emph{every} measurement choice — the full Tsirelson theorem — requires operator-norm machinery on C\textbackslash\{\}*-algebras and is \emph{not} proved in this formalization. The framework relies on the standard Tsirelson upper bound as a cited result.
+
+\textbf{Markov suppression clarification.} The \texttt{CapacityPacking} module formalizes only the \emph{Markov-style} multi-record suppression (polynomial tail in the modular slack), explicitly \emph{not} exponential suppression. Where the paper says "exponentially suppressed", the reference is to \emph{decoherence-driven} exponential suppression of off-diagonal coherence (which is genuinely exponential, e.g., $e^{-10^{20}}$ for macroscopic environment dimensions), not to Markov-style multi-record suppression from the entropy bound alone.
 
 \subsection{Credit division}
 
@@ -1431,7 +1834,7 @@ The credit division is sharp: CPW supplies the mathematical infrastructure (Type
 
 \subsection{Closing remarks}
 
-The framework retains standard quantum mechanics exactly at the level of the underlying field algebra. It adds one foundational axiom, (FQ) in its literal physical-instantiation reading, and one distinction (formal vs per-run wave function). From these, the structural consequences follow: finite physical resolution, decoherence-driven concentration, single-record per-run wave functions, the macroscopic world emerging without dynamical modification.
+The framework retains standard quantum mechanics exactly at the level of the underlying field algebra. It adds one foundational axiom, (FQ) in its literal physical-instantiation reading, and one distinction (formal vs per-run wave function). From these, the structural consequences follow: finite physical resolution; decoherence removing interference; the finite-information restriction on regional content making a $\ge 2$-record content non-instantiable; hence single-record per-run regional content, the macroscopic world emerging without any dynamical modification.
 
 The framework is empirically conservative, Schrödinger and Born preserved exactly, no laboratory deviations predicted. It is metaphysically modest, no actuality primitive beyond the per-run wave function as a physical state of spacetime. It is mathematically grounded in the CPW Type II algebra framework. The principal open problems are quantitative, the explicit form of $\epsilon(R)$ and the rigorous Born typicality theorem.
 

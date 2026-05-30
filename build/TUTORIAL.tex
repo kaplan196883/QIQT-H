@@ -153,6 +153,7 @@
 
 \tableofcontents
 \newpage
+﻿\# A Tutorial on QIQT-H
 
 \emph{How holographic finite-information constraints can, in principle, address the measurement problem of quantum mechanics, without adding collapses, worlds as separate substances, or hidden trajectories.}
 
@@ -160,9 +161,11 @@
 \textbf{Important status note.} QIQT-H, as presented here, is a research-program framework, not an established theory like standard quantum mechanics or quantum field theory. The goal of this tutorial is not to claim that QIQT-H is already correct. The goal is to explain the pieces: what the mathematical ingredients mean, why they are being used, and how they are supposed to fit together.
 \end{qiqtquote}
 
-\medskip\hrule\medskip
+\begin{qiqtquote}
+\textbf{Formal verification.} The framework's deductive core — Theorems 3, 6, 7, Lemma 1, Donald's identity, no-signaling, the Bell/CHSH inequality with a rigorous singlet construction reaching $2\sqrt{2}$, seven structural audits (independence and sharp reference-weight reformulation of (H2); decoherence-vs-concentration; modular-local entropy vs CPW renormalized entropy; branch-summed cost vs Shannon; FQ-finite admissibility gives trivial dynamics; compression-locality leakage; $\mu$-selection is load-bearing for Born and support preservation $\neq$ Born equivariance), and three sub-theorems for the Canonical IC Measure Principle (typicality Mackey-Gleason, operational data insufficient, FQ-equivariance uniqueness) — is machine-verified in Lean 4 with Mathlib. A subsequent A1+A2+A4+A6 strengthening pass adds: the marginal-locality step proved as a theorem holding for \emph{any} measure (\texttt{MarginalLocality.pushforward\_marginal\_local}), so locality is no longer an independent Born-selection sub-axiom — modulo a named Hilbert→set-level bridge axiom into which the locality content is relocated, not eliminated; the permutation-symmetry collapse component of Goldstein-Struyve sub-lemma 1c proved under its necessary hypothesis (\texttt{step1c\_collapse\_of\_perm\_symmetric}), with the \emph{full} Schur classification still a single named interface axiom; single-trial Chebyshev frequency concentration and the variance-addition (independence) lemma on finite Bernoulli trials (\texttt{BornConcentration}), with the $N$-trial scaling still resting on the LLN interface axiom; and a unified independence/minimality package showing each remaining Born sub-axiom is necessary by concrete finite countermodel (\texttt{BornMinimalityTable}). The \texttt{FQEquivarianceUniqueness} module was consolidated to eliminate 12 redundant abstract axioms and the five false/unused Step-1 placeholder sub-axioms were deleted (project axiom total 57 → 40); the headline theorem \texttt{canonical\_ic\_measure\_principle} now depends on exactly two project-specific axioms. The strengthening-pass theorems themselves depend only on the standard Lean axioms; the end-to-end Born pipeline still rests on the named interface axioms. See \texttt{lean/mathlib/QIQTH/} in the project repository, and \texttt{lean/mathlib/QIQTH/AxiomAudit.lean} for the complete axiom audit.
+\end{qiqtquote}
 
-\section{What this is and how to read it}
+\medskip\hrule\medskip
 
 The central idea of QIQT-H is:
 
@@ -2889,9 +2892,9 @@ The QIQT-H admissibility condition $I_\Sigma^\epsilon[\omega_R] \le Q_R$ is:
   \item \emph{Not BRST-like}: no nilpotent charge or cohomological structure
 \end{itemize}
 
-So when we say "QIQT-H's constraint is like a gauge constraint," we mean: both restrict a larger formal space to a smaller physical one, and physical Hamiltonians must preserve the constraint. \textbf{That structural pattern is the entire analogy. The mathematical machinery is completely different.}
+So when we say "QIQT-H's constraint is like a gauge constraint," we mean only this: both restrict a larger \emph{formal} space to a smaller set of \emph{physically instantiable} contents. \textbf{That structural pattern is the entire analogy, and even there it is imperfect.} The mathematical machinery is completely different — and, importantly, the analogy does \emph{not} extend to the dynamics. In gauge theory one also restricts the admissible Hamiltonians to gauge-preserving ones; QIQT-H does \textbf{not} restrict the Hamiltonians at all. The global Schrödinger / Heisenberg law remains exactly unitary and unconstrained; what is restricted is only which regional \emph{contents} count as physically instantiable (a $\ge 2$-record content exceeding the regional capacity has no per-run physical referent).
 
-In particular: writing $\mathcal{C}_{\rm QIQT-H}|\Psi_{\rm phys}\rangle = 0$ above is suggestive notation, not a literal operator equation. There is no Hermitian "constraint operator" $\mathcal{C}_{\rm QIQT-H}$ whose kernel defines $\mathcal{H}_{\rm phys}$. The admissibility condition is a nonlinear inequality on regional algebra-states. Its dynamical implementation, characterizing which Hermitian operators preserve $\mathcal{H}_{\rm phys}$, is one of the framework's central open problems.
+In particular: writing $\mathcal{C}_{\rm QIQT-H}|\Psi_{\rm phys}\rangle = 0$ above is suggestive notation, not a literal operator equation. There is no Hermitian "constraint operator" $\mathcal{C}_{\rm QIQT-H}$ whose kernel defines $\mathcal{H}_{\rm phys}$, and there is no restriction on the Hamiltonian. The admissibility condition is a nonlinear inequality on regional algebra-states — a statement about which regional contents are physically instantiable, with the dynamics left exactly unitary. Making this finite-information restriction precise (and proving that a $\ge 2$-record content violates it — the Macroscopic Definiteness Conjecture) is one of the framework's central open problems.
 
 The shared pattern is:
 
@@ -3408,7 +3411,7 @@ A finite gravitational region cannot support an arbitrarily large set of mutuall
 
 \subsection{Branch}
 
-An effectively noninterfering component of the wavefunction produced by decoherence.
+An effectively noninterfering component of the wavefunction produced by decoherence. In QIQT-H a branch is \emph{not} a separate world: decoherence makes branches stop interfering, but a regional content carrying two or more macroscopically distinct branch-records exceeds the region's finite information capacity $Q_R$ and so is not an instantiable physical state. The resident regional content is single-record; the unrealized branches have no physical referent (they are not "real elsewhere"). Which single branch a run carries is indexed by its microscopic initial conditions.
 
 \subsection{Record}
 
@@ -3559,4 +3562,5 @@ But the roadmap is clear:
 \]
 
 That is the core of QIQT-H.
+
 \end{document}

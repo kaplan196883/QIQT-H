@@ -1115,7 +1115,7 @@ These are stated with reasoning but not proved as explicit theorems with formal 
 |---|---|
 | Explicit form of $\epsilon(R)$ | A function $\epsilon(R) = f(Q_R, \text{record subalgebra dimension}, \text{geometry})$ |
 | Decoherence + (FQ) → strict mixture | A theorem in algebraic QFT showing that, under (FQ), decoherent suppression below $\epsilon$ gives a strict classical mixture on the regional algebra |
-| Born-typicality theorem | A measure $\mu$ on the space of universal initial conditions, plus an equivariance-type theorem $\mu\{\lambda : k(\lambda, \Psi) = k\} = |c_k|^2$ |
+| Born-typicality theorem | A measure $\mu$ on the space of universal initial conditions, plus an equivariance-type theorem $\mu\{\lambda : k(\lambda, \Psi) = k\} = \vert c_k\vert ^2$ |
 | FQ as operational equivalence (not literal thresholding) | A clean mathematical formulation: states differing on the regional algebra by less than $\epsilon$ (in some operational metric like trace distance) are physically equivalent |
 | Connection to Bell correlations | An explicit measurement-dependence model showing how holographic nonseparability reproduces CHSH violations |
 
