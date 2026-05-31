@@ -1,11 +1,11 @@
 ---
-title: "One Wave Function, One World: How the Holographic Information Bound Selects the Macroscopic World"
+title: "One Wave Function, One World: How the Holographic Information Bound Constrains the Macroscopic World"
 author: "Paweł Kapłański"
 date: 2026-05-25
 keywords: [foundations of quantum mechanics, holographic principle, Bekenstein-Bousso bound, measurement problem, finite-precision wave function]
 ---
 
-# One Wave Function, One World: How the Holographic Information Bound Selects the Macroscopic World
+# One Wave Function, One World: How the Holographic Information Bound Constrains the Macroscopic World
 
 ## Abstract
 
