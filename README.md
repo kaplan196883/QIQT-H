@@ -12,7 +12,7 @@ From these two facts, with decoherence, the measurement problem is *decomposed* 
 
 ## The trilogy
 
-1. **`QIQT_Position_Paper.md`** — accessible position statement: *One Wave Function, One World: How the Holographic Information Bound Constrains the Macroscopic World*
+1. **`QIQT_Position_Paper.md`** — accessible position statement: *One Wave Function, One World: How the Holographic Information Bound Selects the Macroscopic World*
 
 2. **`QIQT_Foundations_Paper.md`** — rigorous technical framework with Type II algebras, theorems, hidden-inconsistency framing, the Bell stance (keep free settings; violate Parameter Independence at the ontic level; operational no-signaling), the Macroscopic Definiteness Conjecture: *One Wave Function, One World: Finite-Information Regional Algebras and the Macroscopic World from Holographic Constraint*
 

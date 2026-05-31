@@ -1,11 +1,13 @@
 ---
-title: "One Wave Function, One World: How the Holographic Information Bound Constrains the Macroscopic World"
+title: "One Wave Function, One World: How the Holographic Information Bound Selects the Macroscopic World"
 author: "Paweł Kapłański"
 date: 2026-05-25
 keywords: [foundations of quantum mechanics, holographic principle, Bekenstein-Bousso bound, measurement problem, finite-precision wave function]
 ---
 
-# One Wave Function, One World: How the Holographic Information Bound Constrains the Macroscopic World
+# One Wave Function, One World: How the Holographic Information Bound Selects the Macroscopic World
+
+*A note on the title.* The word **"selects"** states the program's **target**, not an established theorem. At the present stage the holographic bound provably does the weaker, non-redundant job of *constraining* the macroscopic world — it bounds the number of mutually distinguishable regional records ($\# \le e^{Q_R}$) — while *which* single record is actual is supplied by a separate non-dynamical actuality fact $\lambda$ (the honest division of labor set out below). The bound would *select* the macroscopic world in the full sense only if the finite-capacity constraint, together with einselection, can be strengthened into a genuine macroscopic *superselection rule* consistent with exact unitarity — the central open conjecture (Open Problem 3; companion paper §7.6). We keep the stronger word in the title because it names the thesis the program is built to establish; the body is scrupulous about the gap between target and theorem.
 
 ## Abstract
 
