@@ -2700,7 +2700,7 @@ This is one of the technical tasks for the framework.
 
 ---
 
-# 23. Bell’s theorem and measurement independence
+# 23. Bell’s theorem: QIQT-H violates Parameter Independence
 
 Any foundations proposal must face Bell’s theorem.
 
@@ -2756,33 +2756,29 @@ That means the hidden variables $\lambda$ are statistically independent of the l
 
 If this fails, Bell inequalities need not follow.
 
-## 23.3 Is rejecting measurement independence superdeterminism?
+## 23.3 Which premise QIQT-H gives up: Parameter Independence (not measurement independence)
 
-Often, any violation of measurement independence is called superdeterminism.
+Every interpretation that reproduces quantum predictions must give up *one* of Bell's premises — outcome definiteness, measurement independence (free settings), or local causality. This is not special to QIQT-H; orthodox quantum mechanics already gives one up.
 
-But there are different possible attitudes.
+QIQT-H's commitments fix the choice with no freedom left:
 
-A crude superdeterministic picture says:
+- It **keeps outcome definiteness** (one record per run) — so it is not Everett.
+- It **keeps measurement independence**, $\rho(\lambda|a,b)=\rho(\lambda)$: the settings $a,b$ are genuinely free of the run's actuality fact $\lambda$. So QIQT-H **rejects superdeterminism** — it deliberately does *not* take the measurement-dependence escape.
+- Because the per-run selection is deterministic in $(\Phi,\lambda)$, **Outcome Independence holds automatically** (a definite outcome can't depend on the distant *outcome* given $\lambda$).
 
-> The universe conspiratorially prearranged your detector settings and particle variables to fake quantum correlations.
+Bell's local causality splits (Jarrett/Shimony) into Outcome Independence + Parameter Independence. With the first two premises kept and Outcome Independence automatic, the **only door left is Parameter Independence** — your outcome may depend on the distant *setting*, given $\lambda$. QIQT-H violates Parameter Independence at the ontic level.
 
-QIQT-H aims for a different picture:
+This is *Bell-nonlocal by necessity*: every single-world, non-superdeterministic, definite-outcome theory must land here. It is the generic price, not a holographic trick.
 
-> The admissible global histories are constrained by holographic record consistency. Settings, outcomes, and hidden/global variables are not sampled independently because only globally admissible record configurations exist.
-
-In probability terms, the framework may have
-
+**What you keep, despite ontic Parameter-Independence violation:** *operational no-signaling.* After averaging over the actuality measure $\mu$,
 $$
-\rho(\lambda|a,b)\neq \rho(\lambda),
+P(A|a,b) = P(A|a),
 $$
+even though $P(A|a,b,\lambda)\neq P(A|a,\lambda)$ at the hidden level. No message can be sent; experimental freedom is untouched. Operational no-signaling is proved for the framework's instruments (and machine-checked in Lean).
 
-not because of a malicious conspiracy, but because $\lambda,a,b$ are all parts of one constrained physical history.
+**The honest open burden (Wood–Spekkens).** That this no-signaling cancellation is *not fine-tuned* — that the same $\mu$ which yields Born weights also enforces no-signaling without an experiment-by-experiment conspiracy — is a genuine open problem, part of the Born-typicality program. We flag it rather than hide it.
 
-However, one should be honest:
-
-> Many physicists would still classify any denial of measurement independence as a form of superdeterminism in the broad sense.
-
-So QIQT-H must do more than say “measurement independence fails.” It must explain the correlations naturally, quantitatively, and without destroying experimental freedom in ordinary practice.
+**Contrast with Palmer's RaQM.** Palmer takes the *opposite* horn: he denies measurement independence (a principled, non-conspiratorial measurement-dependence / superdeterminism-family escape via the invariant set). QIQT-H keeps measurement independence and pays at Parameter Independence instead. The two share single-world realism and a finite-information motivation, but on the central Bell move they are contrasting, not allied.
 
 ---
 
@@ -3018,7 +3014,7 @@ is semiclassical. A full quantum gravity version may require more.
 
 ## 28.5 Bell correlations
 
-If QIQT-H violates measurement independence, it must explain precisely how, without making science impossible.
+QIQT-H keeps measurement independence (free settings) and instead violates Parameter Independence at the ontic level (§23.3); it must show precisely how this reproduces observed Bell violations while preserving operational no-signaling and the practical independence of experimental choices — and that the no-signaling cancellation is not fine-tuned (Wood–Spekkens).
 
 It must reproduce observed Bell violations while preserving the practical independence of experimental choices.
 
@@ -3090,7 +3086,7 @@ The interpretation is:
 
 ## Branch
 
-An effectively noninterfering component of the wavefunction produced by decoherence. In QIQT-H a branch is *not* a separate world: decoherence makes branches stop interfering, but a regional content carrying two or more macroscopically distinct branch-records exceeds the region's finite information capacity $Q_R$ and so is not an instantiable physical state. The resident regional content is single-record; the unrealized branches have no physical referent (they are not "real elsewhere"). Which single branch a run carries is indexed by its microscopic initial conditions.
+An effectively noninterfering component of the wavefunction produced by decoherence. In QIQT-H a branch is *not* a separate world: decoherence makes branches stop interfering, but a regional content carrying two or more macroscopically distinct branch-records exceeds the region's finite information capacity $Q_R$ and so is not an instantiable physical state. The resident regional content is single-record; the unrealized branches have no physical referent (they are not "real elsewhere"). Which single branch a run carries is fixed by its actuality selector $\lambda$ (a non-dynamical, atemporal fact about which macroscopic realization the run is).
 
 ## Record
 

@@ -23,8 +23,10 @@
   single-record content comes from the separate, kinematic
   finite-information restriction (a ≥2-record regional content exceeds
   the regional capacity Q_R and is not an instantiable physical state —
-  the Macroscopic Definiteness Conjecture), with the microscopic
-  initial conditions merely *indexing* which record a given run carries.
+  the Macroscopic Definiteness Conjecture), with the non-dynamical,
+  atemporal actuality selector λ (a global 4D fact about which
+  macroscopic realization the run is — not past "initial data") merely
+  *indexing* which record a given run carries.
   This audit closes the rhetorical gap: it forbids any slide from
   "decoherence" to "single record", forcing the finite-information
   restriction to be named as the load-bearing step.
@@ -105,8 +107,9 @@ theorem equal_superposition_stays_equal
     *kinematic* constraint on which regional contents are physical; it
     does NOT modify the dynamics (which stays exactly unitary), does NOT
     trim amplitudes, and is NOT a collapse or stochastic rule.  The
-    microscopic initial conditions only *index* which single record a
-    given run carries; they do not produce the single-ness.
+    non-dynamical, atemporal actuality selector λ only *indexes* which
+    single record a given run carries; it does not produce the
+    single-ness.
 
     (Historical note: earlier drafts framed the missing ingredient as
     "(FQ) literal amplitude truncation" or a dynamics modification.

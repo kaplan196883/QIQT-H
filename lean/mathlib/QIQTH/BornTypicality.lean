@@ -5,9 +5,11 @@
   The setup (matching QIQT-H's actual character):
 
       QIQT-H has no fundamental probabilities.  It is deterministic per
-      run: microscopic initial conditions of the run determine the
-      realized outcome.  "Born" refers to the *empirical frequency
-      pattern* across many runs, not a probability assignment.
+      run: the run's non-dynamical, atemporal actuality selector λ (a
+      global 4D fact about which macroscopic realization the run is —
+      not past "initial data") fixes the realized outcome.  "Born"
+      refers to the *empirical frequency pattern* across many runs, not
+      a probability assignment.
 
       The question μ-selection must answer is therefore NOT "what
       probability rule does QIQT-H use?" but rather:
