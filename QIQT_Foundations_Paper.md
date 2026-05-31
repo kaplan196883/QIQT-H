@@ -1474,7 +1474,7 @@ The author thanks the participants in extended discussions that informed the fra
 35. Wallace, D. (2012). *The Emergent Multiverse: Quantum Theory according to the Everett Interpretation.* Oxford University Press.
 36. **Witten, E. (2022).** *Gravity and the crossed product.* JHEP 10 (2022) 008. arXiv:2112.12828.
 37. Zurek, W. H. (2003). Decoherence, einselection, and the quantum origins of the classical. *Rev. Mod. Phys.*, 75, 715–775. arXiv:quant-ph/0105127.
-38. Kapłański, P. (2026). *One Wave Function, One World: How the Holographic Information Bound Selects the Macroscopic World.* (Position paper, companion to this one.)
+38. Kapłański, P. (2026). *One Wave Function, One World: How the Holographic Information Bound Constrains the Macroscopic World.* (Position paper, companion to this one.)
 
 ---
 
