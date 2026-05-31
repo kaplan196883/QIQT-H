@@ -133,7 +133,7 @@ The relationship across runs: there is *one* per-run universal wave function per
 **The framework adds no second *dynamical* substance beyond the wave function** (no Bohmian particles, no extra fields, no guidance law). The framework's contributions are:
 1. The recognition that the textbook subsystem wave function $|\psi\rangle_{\rm sub}$ is *not* the relevant complete dynamical quantum state of a run; the per-run universal wave function $\Phi = |\Psi\rangle_{\rm run}$ is. (The complete per-run *ontology*, however, is not $\Phi$ alone but the pair $(\Phi, \lambda)$; see the note below.) This is standard QM at the universal level.
 2. The (FQ) axiom limiting the physical information content of the universal wave function per region.
-3. A *non-dynamical run-index* $\lambda$ (the run's actual microscopic initial conditions) that selects which single record is realized (§7.6).
+3. A *non-dynamical run-index* $\lambda$ — a global, atemporal actuality fact about *which* of $\Phi$'s macroscopic realizations the whole run is (fixed for the entire 4-dimensional history; *not* past-localized "initial data," to avoid any setting-correlation / Conway–Kochen reading; see §6.9) — that selects which single record is realized (§7.6).
 
 **A note on "ψ-monism" as used throughout.** The framework is **ψ-monist in the weak (dynamical) sense**: the wave function $\Phi$ is the only thing carrying a law of motion (exactly unitary), and no second *dynamical* ontology is added. It is **not** ψ-monist in the strong sense that $\Phi$ alone is the complete per-run state — the single realized record per run is fixed by $\lambda$, a *non-dynamical actuality fact* (a broad-sense beable, structurally analogous to the configuration in Bohmian mechanics or the actual history in modal interpretations, but with no guidance law and no back-reaction on $\Phi$; see §7.6). In the Spekkens–Harrigan taxonomy the framework is therefore **ψ-ontic, weak-ψ-monist, and formal-ψ-incomplete**: $\Phi$ is real and is the sole dynamical ontology, but the complete per-run description is the pair $(\Phi, \lambda)$. Every later use of "ψ-monist" in this paper is shorthand for this weak/dynamical sense.
 
@@ -1012,16 +1012,16 @@ Introduce a modal value-rule or history-selection structure. We require neither.
 
 The closest neighbor. Ballentine treats the formal wave function as ensemble-descriptive with per-run states underdetermined. We supply the mechanism: the Type II regional algebra structure makes per-run states physically single-record despite the formal wave function's superposed appearance.
 
-### 10.8 Palmer's Rational Quantum Mechanics / Invariant Set Theory (sister program)
+### 10.8 Palmer's Rational Quantum Mechanics / Invariant Set Theory (nearest neighbour on motivation — opposite horn on Bell)
 
-Palmer's Rational Quantum Mechanics (RaQM 2025, PNAS) and the broader Invariant Set Theory (IST) program is the closest neighbor in the space of *single-world, structural-principle, measurement-dependent* frameworks. Both Palmer and the present framework reject Bell's measurement-independence assumption on principled grounds (not as conspiratorial superdeterminism); both treat the wave function as not exhausting the per-run physical content; both seek to ground the measurement problem's resolution in a deep structural feature of physics rather than in collapse, branching, or particle ontology.
+Palmer's Rational Quantum Mechanics (RaQM 2025, PNAS) and the broader Invariant Set Theory (IST) program is the closest neighbor in the space of *single-world, structural-principle, finite-information* frameworks. Both treat the wave function as not exhausting the per-run physical content, and both seek to ground the measurement problem's resolution in a deep structural feature of physics rather than in collapse, branching, or particle ontology. **On the Bell question, however, the two take opposite horns:** Palmer rejects Bell's measurement-independence assumption (a measurement-dependence / superdeterminism-family escape, principled rather than conspiratorial), whereas the present framework *keeps* measurement independence and rejects superdeterminism, paying instead at Parameter Independence at the ontic level (§6.9). The comparison below is therefore a contrast on the central Bell move, not an alliance.
 
 **Shared structural commitments:**
 - Single-world realism per run
-- Bell escape via principled measurement-dependence (not nonlocality)
 - Recognition that the textbook formal wave function does not exhaust the per-run physical content
-- Non-conspiratorial rejection of metaphysical counterfactual recombination
 - Motivation by deep structural principles rather than ad hoc modification of QM
+
+**The decisive difference (Bell horn):** Palmer denies measurement independence (a measurement-dependence / superdeterminism-family escape, with a non-conspiratorial rejection of metaphysical counterfactual recombination); the present framework *keeps* measurement independence and rejects superdeterminism, denying Parameter Independence at the ontic level instead (§6.9). This is the opposite Bell move, not a shared one.
 
 (The frameworks differ in ontology: Palmer treats the wave function as derived/emergent from invariant-set statistics, with the underlying ontology being points on the fractal invariant set $I_U$; our framework is weak-ψ-monist, with $\Phi$ the sole dynamical ontology plus a non-dynamical run-index $\lambda$ selecting the realized record — the per-run state $(\Phi,\lambda)$ being finer-grained than the textbook formal ensemble descriptor. Interestingly Palmer's $I_U$-point and our $\lambda$ play structurally similar run-indexing roles.)
 
@@ -1030,17 +1030,17 @@ Palmer's Rational Quantum Mechanics (RaQM 2025, PNAS) and the broader Invariant 
 | | Palmer's RaQM / IST | Present framework |
 |---|---|---|
 | Mathematical apparatus | p-adic measures; Niven's theorem; fractal invariant set $I_U$ in cosmological state space | CPW Type II crossed-product algebra; finite-precision physical-instantiation postulate |
-| Source of measurement-dependence | Counterfactual states off the invariant set are not physically realizable (Impossible Triangle Corollary) | Counterfactual configurations exceed regional information capacity |
+| Bell horn | Denies measurement independence (counterfactual settings off the invariant set not realizable; Impossible Triangle Corollary) — superdeterminism-family | Keeps measurement independence; denies Parameter Independence at the ontic level; rejects superdeterminism (§6.9) |
 | Status of wave function | Derived / emergent from invariant-set statistics; not fundamentally physically real | Physically real but finite-precision (ψ-ontic) |
 | Status of Schrödinger evolution | Emergent from chaotic dynamics on invariant set | Preserved exactly at the underlying field-algebra level |
 | Connection to quantum gravity | Indirect: chaos-based, cosmological motivation | Direct: Bekenstein-Hawking entropy, Witten/CPW Type II structure |
 | Empirical predictions | Cosmological (CMB anomalies, fine-tuning, dark matter); explicit Bell-correlation models | Empirically conservative at lab scales; possible long-baseline signatures; cosmological extensions deferred |
 
-**Relationship: complementary, not competing.** The two frameworks occupy the same niche in foundational space (single-world, Bell-escape via measurement-dependence, structural motivation) but reach it from different physical principles (chaos / invariant set vs holography / information capacity). They are not in conflict and could in principle be combined: Palmer's invariant set could be a characterization of *which* per-run microscopic configurations are physically realized, and our holographic finite-precision bound could be the *physical reason* the invariant set has the structure it does. Both could be true simultaneously.
+**Relationship: same motivation, opposite Bell horn.** The two frameworks share single-world realism and a finite-information motivation, but they are *not* the same Bell escape: Palmer pays at measurement independence, the present framework pays at Parameter Independence (§6.9). They are therefore contrasting positions on the central Bell move, not interchangeable. (They are not in direct conflict as research programs — one could imagine a hybrid in which an invariant-set structure characterizes which per-run configurations are realized while a holographic bound constrains regional record capacity — but on the Bell question itself they diverge.)
 
 **Where the frameworks complement each other's weaknesses:** Palmer's program is more developed (PNAS-published, decade of prior literature, explicit cosmological predictions, concrete Bell-model with Niven's theorem) but uses a more idiosyncratic mathematical machinery (p-adic measures, rational/irrational distinction). Our framework uses mainstream algebraic QFT + holographic bound (lower entry cost for the foundations community) but is at the proposal stage with the Concentration Conjecture and Born-typicality program as open work.
 
-**For readers familiar with Palmer:** the present framework can be read as "Palmer's measurement-dependence program with a different motivating principle (holography rather than dynamical chaos) and a different mathematical home (CPW Type II algebras rather than p-adic invariant sets)." For readers unfamiliar with Palmer, the comparison illustrates that measurement-dependence as a Bell escape is a serious foundational position with multiple independent motivations, not a single idiosyncratic move.
+**For readers familiar with Palmer:** do *not* read the present framework as "Palmer with holography" — that conflates the two on Bell. Palmer takes the measurement-dependence horn; the present framework takes the Parameter-Independence horn while keeping free settings (§6.9). The shared content is single-world realism plus a finite-information motivation; the Bell move is opposite.
 
 ### 10.9 The algebraic-foundational program
 
@@ -1141,7 +1141,7 @@ These are stated with reasoning but not proved as explicit theorems with formal 
 | Decoherence + (FQ) → strict mixture | A theorem in algebraic QFT showing that, under (FQ), decoherent suppression below $\epsilon$ gives a strict classical mixture on the regional algebra |
 | Born-typicality theorem | A measure $\mu$ on the space of universal initial conditions, plus an equivariance-type theorem $\mu\{\lambda : k(\lambda, \Psi) = k\} = \vert c_k\vert ^2$ |
 | FQ as operational equivalence (not literal thresholding) | A clean mathematical formulation: states differing on the regional algebra by less than $\epsilon$ (in some operational metric like trace distance) are physically equivalent |
-| Connection to Bell correlations | An explicit measurement-dependence model showing how holographic nonseparability reproduces CHSH violations |
+| Connection to Bell correlations | An explicit $(\Phi,\lambda)$ model reproducing CHSH $=2\sqrt2$ via ontic Parameter-Independence violation, keeping free settings and yielding operational no-signaling without fine-tuning (§6.9) |
 
 **Honest characterization of math status:** the framework provides the *scaffolding* (Type II algebras from CPW/Witten) and the *axiom* ((FQ) literal reading). It establishes *qualitative* consequences. It does not yet have *explicit theorems* for the central claims. This is the status of a research program, not a completed mathematical theory.
 
