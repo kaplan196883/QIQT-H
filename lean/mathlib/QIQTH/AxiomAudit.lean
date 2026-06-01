@@ -191,4 +191,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — KMS from trace cyclicity; NO project axioms,
 -- NO analytic input.  Genuine finite-dim Tomita–Takesaki, proved.
 
+-- Free-field finite-mode instance (a, b, c)
+#print axioms QIQTH.FreeFieldRecord.holographic_bound
+-- expected: standard only — (a) N free-fermion modes ⇒ log₂ #Atoms = N ≤ Q_R
+#print axioms QIQTH.FreeFieldRecord.decoherence_decay
+-- expected: standard only — (b) Gaussian overlap e^{-cN} → 0 as N → ∞
+#print axioms QIQTH.FreeFieldRecord.boost_comp
+-- expected: standard only — (c) finite-mode Lorentz action group law
+#print axioms QIQTH.FreeFieldRecord.boost_bijective
+-- expected: standard only — (c) each boost is a record-sector bijection
+
 end QIQTH.AxiomAudit

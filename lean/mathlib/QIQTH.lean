@@ -55,3 +55,7 @@ import QIQTH.LorentzSelection
 -- matrix algebra + trace cyclicity — engine for the free-field finite-mode
 -- record instance; NO axioms beyond the standard three:
 import QIQTH.FiniteModularTheory
+-- Free-field finite-mode instance: (a) holographic record count, (b) Gaussian
+-- decoherence decay, (c) finite-mode Lorentz action — concrete theorems
+-- instantiating parts of the LorentzSelection AQFT axioms; standard axioms only:
+import QIQTH.FreeFieldRecord
