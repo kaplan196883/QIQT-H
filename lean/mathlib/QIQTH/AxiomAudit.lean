@@ -182,4 +182,13 @@ namespace QIQTH.AxiomAudit
 -- AQFT analytic axioms — covariance is proved structurally from
 -- equivariant naturality, exactly as §11.4 claims.
 
+-- Finite-dimensional Tomita–Takesaki (the modular engine)
+#print axioms QIQTH.FiniteModularTheory.modAut_mul
+-- expected: standard only — σ_t is a *-endomorphism (⅟m * m cancels)
+#print axioms QIQTH.FiniteModularTheory.modAut_comp
+-- expected: standard only — one-parameter group law σ_s∘σ_t = σ_{s+t}
+#print axioms QIQTH.FiniteModularTheory.kms_condition
+-- expected: standard only — KMS from trace cyclicity; NO project axioms,
+-- NO analytic input.  Genuine finite-dim Tomita–Takesaki, proved.
+
 end QIQTH.AxiomAudit

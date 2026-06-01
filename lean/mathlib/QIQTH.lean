@@ -51,3 +51,7 @@ import QIQTH.BornConcentration
 -- Open Problem 3b (Lorentz covariance): discrete sheaf skeleton + covariance
 -- one-liner proved; AQFT analytic inputs named as interface axioms:
 import QIQTH.LorentzSelection
+-- Finite-dimensional Tomita–Takesaki (modular flow σ_t, KMS) proved from
+-- matrix algebra + trace cyclicity — engine for the free-field finite-mode
+-- record instance; NO axioms beyond the standard three:
+import QIQTH.FiniteModularTheory
