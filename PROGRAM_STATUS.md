@@ -85,14 +85,32 @@ Sell it as the former (defensible); never as the latter (fails).
 
 ## 4. GAP RANKING (severity for publishability)
 
-| # | Gap | Severity | Fix |
+Status legend: ✅ DONE (committed) · ◻ OPEN (research agenda).
+
+| # | Gap | Severity | Status / Fix |
 |---|-----|----------|-----|
-| 1 | **Bell: PI-vs-measurement-dependence contradiction** | **FATAL in current text** | Commit to PI-violation horn; drop measurement-dependence/Palmer-as-our-position |
-| 2 | **Unconstructed μ + no-signaling/fine-tuning** | Fatal to *breakthrough*; OK as flagged open problem | = the prize (§2) |
-| 3 | **Lorentz covariance of A_R[Φ,λ]** | Fatal to *"relativistic completion"* claims; OK as open problem | covariant causal-diamond Q_R/ε; covariance of selection map |
-| 4 | **λ = "microscopic initial conditions"** | **MUST FIX before submission** | relabel → atemporal global actuality/history selector (Conway–Kochen) |
-| 5 | **Born interface axioms in Lean** | Non-fatal *if transparent* | dependency table; don't claim Born machine-derived |
-| 6 | **MDC strong form** | Non-fatal; already demoted | keep as open/speculative |
+| 1 | **Bell: PI-vs-measurement-dependence contradiction** | was **FATAL** | ✅ DONE — committed to PI-violation horn; §6.9/Position/Tutorial rewritten; Palmer reframed as opposite horn |
+| 2 | **Unconstructed μ + no-signaling/fine-tuning** | Fatal to *breakthrough*; OK as flagged open problem | ◻ OPEN — = the prize (§2); Open Problem 1 |
+| 3 | **Lorentz covariance of A_R[Φ,λ]** | Fatal to *"relativistic completion"* claims; OK as open problem | ◻ OPEN — now a numbered Open Problem 3b with 5 explicit requirements (§4a below + paper §11.4) |
+| 4 | **λ = "microscopic initial conditions"** | was MUST-FIX | ✅ DONE — relabeled "atemporal global actuality selector" across 4 papers + Lean docstrings + memory |
+| 5 | **Born interface axioms in Lean** | Non-fatal *if transparent* | ✅ adequate — AxiomAudit.lean enumerates; abstract states it is conditional |
+| 6 | **MDC strong form** | Non-fatal; already demoted | ✅ DONE — disavowed (cat-state) in §7.6 + README; restated as open superselection question |
+
+**As of HEAD (2026-06): the one load-bearing inconsistency (#1) is resolved and the must-fix calibration set is committed. The remaining gaps (#2, #3) are the genuine research agenda — honest open problems, not contradictions.**
+
+---
+
+## 4a. OPEN PROBLEM 3b — Lorentz covariance of the selection structure (detail)
+
+Equal in rank to the Born/μ problem; the relativistic counterpart of it. **Not** secured by operational no-signaling (no-signaling ≠ Lorentz invariance of the beable). QIQT-H is structurally *better placed* than Bohm — Φ's dynamics is exactly-unitary and already covariant, and λ is non-dynamical (no collapse/guidance event to time-order, so nothing needs a "now") — but that is "better placed," not "proved." Five requirements, increasing difficulty:
+
+1. **λ as a genuinely 4D object** — defined geometrically over the whole spacetime history (a globally consistent decoherent history / bundle section), Poincaré acting geometrically, NO Cauchy slice. "Initial data on Σ₀" reintroduces a preferred frame and fails. (Definitional; discipline.)
+2. **Covariant region structure** — $Q_R$, ε(R) on **causal diamonds** via the **Bousso light-sheet** bound, not spatial slices (slice-area is frame-dependent). CPW/Witten scaffolding is already diamond-based + microcausal, so scaffolding is covariant; burden is λ and $A_R$. *Concrete, fixable now — do first.*
+3. **The covariance identity (core theorem)** — prove $A_{gR}[U_g\Phi,\, g\!\cdot\!\lambda] = g\cdot A_R[\Phi,\lambda]$ for every Poincaré $g$ ("every frame agrees on the facts"). OPEN.
+4. **Foliation-free global consistency** — the family $\{C_R\}$ restriction-compatible on nested diamonds and jointly consistent on spacelike diamonds, with the consistency condition statable in the **causal partial order alone** (no global time function). Operational no-signaling is its observable shadow; the ontic statement must be proved. OPEN.
+5. **Poincaré-invariant typicality** — μ over λ must satisfy $\mu(g\cdot S)=\mu(S)$, else a preferred frame re-enters through the statistics even if λ is clean. **Couples to Open Problem 1**: covariant μ is strictly harder than μ; relativistic analogue of Bohm's $|\psi|^2$-equilibrium frame-dependence. HARDEST. OPEN.
+
+Honest riders: 3–5 are genuine open theorems; the Lorentz-friendliness is *bought with* an atemporal / all-at-once (block, mildly retrocausal-flavored) reading of λ (owned, not hidden); this places QIQT-H in the Kent / Wharton–Sutherland family rather than the foliation-bound Bohm/GRW family — a structural advantage that is, as yet, a promissory note.
 
 ---
 
@@ -119,6 +137,12 @@ Sell it as the former (defensible); never as the latter (fails).
 **Submission gate:** item (1) is the one *load-bearing inconsistency* — do NOT
 submit with it unresolved. The rest are honesty/calibration; with them done, the
 paper is defensible as a research-program / foundations-architecture paper.
+
+**Status update (2026-06):** items (0)–(6) are all COMMITTED. The load-bearing
+inconsistency (1) is resolved. What remains is the genuine research agenda — the
+two breakthrough-defining open problems (μ construction; Lorentz covariance,
+Open Problem 3b §4a) plus the supporting open problems (ε(R) form, recoherence
+stability). These are honest gaps in a research-program paper, not blockers.
 
 ---
 
