@@ -173,4 +173,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BornMinimalityTable.P4_locality_reducible_to_equivariance
 -- expected: standard only (re-export of MarginalLocality)
 
+-- Open Problem 3b: Lorentz-covariance discrete skeleton
+#print axioms QIQTH.LorentzSelection.bulk_overlap_agreement
+-- expected: NO axioms at all (pure rewrite by GlobalSection.consistent)
+#print axioms QIQTH.LorentzSelection.evaluation_covariance
+-- expected: standard `Quot.sound` + the single order-theoretic interface
+-- axiom `actSection_consistent`.  CRUCIALLY *not* any of the 4 deferred
+-- AQFT analytic axioms — covariance is proved structurally from
+-- equivariant naturality, exactly as §11.4 claims.
+
 end QIQTH.AxiomAudit

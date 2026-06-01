@@ -48,3 +48,6 @@ import QIQTH.MarginalLocality
 import QIQTH.BornMinimalityTable
 -- A4 strengthening: Chebyshev concentration upgrading Born means to frequencies:
 import QIQTH.BornConcentration
+-- Open Problem 3b (Lorentz covariance): discrete sheaf skeleton + covariance
+-- one-liner proved; AQFT analytic inputs named as interface axioms:
+import QIQTH.LorentzSelection
