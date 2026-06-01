@@ -112,6 +112,11 @@ Equal in rank to the Born/μ problem; the relativistic counterpart of it. **Not*
 
 Honest riders: 3–5 are genuine open theorems; the Lorentz-friendliness is *bought with* an atemporal / all-at-once (block, mildly retrocausal-flavored) reading of λ (owned, not hidden); this places QIQT-H in the Kent / Wharton–Sutherland family rather than the foliation-bound Bohm/GRW family — a structural advantage that is, as yet, a promissory note.
 
+**Proposed construction (intended line of attack; paper §11.4):**
+- **Dirac, not Schrödinger.** Φ is a relativistic quantum field (Dirac field for matter), with a genuine Poincaré action U_g via the spinor rep S(Λ). Required, not cosmetic: req-3's identity A_{gR}[U_gΦ,g·λ]=g·A_R is only statable with a covariant U_g, which Galilean Schrödinger lacks. Also: the Dirac field is the natural matter content of the CPW/Witten AQFT algebras — this just names the QFT the scaffolding already presupposes. (Carrier is the field, not the one-particle Dirac eq, which has Klein/negative-energy pathologies.)
+- **λ = holographic boundary data on causal-diamond screens.** C_D = A_D[Φ,λ] reconstructed from λ|_{∂D}. Forcing motivation: the capacity Q_R = A(∂R)/4ℓ_P² is itself a boundary quantity, so the fact that spends it should live on the boundary. Discharges three requirements at once: (1) ∂D is a covariant slice-free object (boundary data ≠ Cauchy data); (2) Q_R and λ share the screen; (4) boundary data on nested/overlapping diamonds glues by edge-agreement → order-theoretic gluing, no global time.
+- **Honest status:** "boundary data fixes the bulk record" = holographic bulk reconstruction (HKLL / entanglement-wedge), subtle and non-literal even in AdS/CFT, open for general causal diamonds. So the proposal *relocates* req 3–4 to the sharper theorem "does holographic screen data on a causal diamond uniquely + covariantly fix the λ-selected bulk record?" — not yet solved, but λ now has a concrete covariant home and Φ a covariant U_g.
+
 ---
 
 ## 5. MUST-FIX SET BEFORE arXiv (the checklist)
