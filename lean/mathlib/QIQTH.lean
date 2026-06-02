@@ -63,3 +63,9 @@ import QIQTH.FreeFieldRecord
 -- effect-Gleason representation is one named axiom; the μ-is-Born history
 -- corollary and the finite no-signaling marginal are PROVED from it:
 import QIQTH.GleasonSelector
+-- Strengthened Lorentz layer (GPT-5.5-pro A–G): externalized geometry (rigid
+-- holographic bound + boundary), a real Poincaré GROUP action with covariance
+-- ∀g, an equivariant-measure total-mass theorem that consumes covariance, and
+-- the BORN LINK (normalization derived from GleasonSelector.born, not assumed).
+-- Zero project axioms; turns the conditional interface rigid + connected:
+import QIQTH.LorentzSelectionStrong

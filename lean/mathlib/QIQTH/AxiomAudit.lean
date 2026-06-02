@@ -196,6 +196,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LorentzSelection.covariant_selection_exists
 -- expected: standard only — IF a net exists, a covariant selector exists.
 
+-- STRENGTHENED Lorentz layer (GPT-5.5-pro A–G): makes the conditional interface
+-- RIGID (externalized geometry) and CONNECTED (Born link), with theorems that
+-- genuinely CONSUME the analytic fields.  All standard axioms only; ZERO project
+-- axioms.
+#print axioms QIQTH.LorentzSelectionStrong.card_le_of_le
+-- expected: standard only — holographic bound propagates (uses N_mono).
+#print axioms QIQTH.LorentzSelectionStrong.reconSection
+-- expected: standard only — screen-encoded history is a consistent boundary
+-- section (uses recon_nat).
+#print axioms QIQTH.LorentzSelectionStrong.group_evaluation_covariance
+-- expected: standard only — covariance for EVERY group element.
+#print axioms QIQTH.LorentzSelectionStrong.act_mul_diam
+-- expected: standard only — group composition law on diamonds (uses act_mul).
+#print axioms QIQTH.LorentzSelectionStrong.measure_pushforward_total
+-- expected: standard only — g-covariant weight ⇒ g-invariant total mass
+-- (CONSUMES the covariance hypothesis, unlike covariant_selection_of_net).
+#print axioms QIQTH.LorentzSelectionStrong.bornω_sum_one
+-- expected: standard only — NORMALIZATION DERIVED from the Born functional
+-- (born_sum/born_one), tying the Lorentz strand to the axiom-free Gleason strand.
+#print axioms QIQTH.LorentzSelectionStrong.bornωRe_sum_one
+-- expected: standard only — real probability normalization derived.
+
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
 -- expected: standard only — σ_t is a *-endomorphism (⅟m * m cancels)
