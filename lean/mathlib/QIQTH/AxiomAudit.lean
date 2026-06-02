@@ -247,6 +247,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — uniform PVM weights are a COVARIANT probability
 -- distribution (nonneg ∧ sum=1 ∧ ω_{gD}(γx)=ω_D(x)); fuses positivity +
 -- unitary covariance in one object.
+-- Fifth pass: PVM coherence under transport + section eval API.
+#print axioms QIQTH.LorentzSelection.actSection_val
+-- expected: NO axioms — public spec of actSection (unblocks the section-object
+-- group-action law; actVal is private).
+#print axioms QIQTH.LorentzSelectionStrong.E_cov_preserves_proj
+-- expected: standard only — boosted effects stay a PVM (coherence as a theorem;
+-- the UnitaryCovariance + UniformPVMData structure is not over-determined).
+#print axioms QIQTH.LorentzSelectionStrong.covariantProbability_of_unitaryPVM
+-- expected: standard only — packaged covariant probability distribution.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

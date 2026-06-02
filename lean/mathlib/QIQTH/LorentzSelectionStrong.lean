@@ -501,5 +501,52 @@ theorem upvm_covariant_probability {G : Type*} [Group G] {P : RecordPresheaf Dia
    ubornω_sum_one B.toUniformBornData D,
    fun x => ubornω_covariant C g D x⟩
 
+/- ── K. Coherence: unitary transport preserves the PVM (item 4 coherence) ─ -/
+
+/-- **Unitary conjugation preserves a projection.**  If `E` is a Hermitian
+    idempotent and `Uᴴ U = 1`, then `U E Uᴴ` is again a Hermitian idempotent.
+    This is the coherence fact behind `E_cov`: the boosted effects are guaranteed
+    to remain PVM elements (answering the review's "is the structure secretly
+    over-determined / contradictory?" — no, it is automatically consistent). -/
+theorem proj_conj_unitary {n : Type*} [Fintype n] [DecidableEq n]
+    {U E : Matrix n n ℂ} (hU : Uᴴ * U = 1) (hh : Eᴴ = E) (hi : E * E = E) :
+    (U * E * Uᴴ)ᴴ = U * E * Uᴴ ∧ (U * E * Uᴴ) * (U * E * Uᴴ) = U * E * Uᴴ := by
+  refine ⟨?_, ?_⟩
+  · rw [conjTranspose_mul, conjTranspose_conjTranspose, conjTranspose_mul, hh, ← mul_assoc]
+  · have h1 : (U * E * Uᴴ) * (U * E * Uᴴ) = U * E * (Uᴴ * U) * E * Uᴴ := by noncomm_ring
+    rw [h1, hU, mul_one, mul_assoc U E E, hi]
+
+/-- **The boosted effects remain a PVM** (coherence as a THEOREM).  Given the
+    unitary transport `E_cov` and unitarity, the effect on the boosted diamond
+    `E_{gD}(γ_g x)` is a Hermitian idempotent — so `UnitaryCovariance` over a
+    `UniformPVMData` is internally consistent, not over-determined. -/
+theorem E_cov_preserves_proj {G : Type*} [Group G] {P : RecordPresheaf Diam}
+    {A : GroupAction G P} {B : UniformPVMData P}
+    (C : UnitaryCovariance A B.toUniformBornData) (g : G) (D : Diam) (x : P.X D) :
+    (B.E (A.act g D) (A.γ g D x))ᴴ = B.E (A.act g D) (A.γ g D x) ∧
+      (B.E (A.act g D) (A.γ g D x)) * (B.E (A.act g D) (A.γ g D x))
+        = B.E (A.act g D) (A.γ g D x) := by
+  rw [C.E_cov g D x]
+  exact proj_conj_unitary (C.U_unit g D) (B.proj_herm D x) (B.proj_idem D x)
+
+/-- **Covariant probability distribution, packaged** (API polish, review item).
+    The three facts of `upvm_covariant_probability` as a single `Prop`-bundle. -/
+structure CovariantProbability {G : Type*} [Group G] {P : RecordPresheaf Diam}
+    (A : GroupAction G P) (B : UniformBornData P) : Prop where
+  nonneg : ∀ (D : Diam) (x : P.X D), 0 ≤ ubornω B D x
+  sum_one : ∀ D : Diam,
+    @Finset.sum (P.X D) ℝ _ (@Finset.univ (P.X D) (B.fin D)) (ubornω B D) = 1
+  covariant : ∀ (g : G) (D : Diam) (x : P.X D),
+    ubornω B (A.act g D) (A.γ g D x) = ubornω B D x
+
+/-- A uniform PVM with unitary transport IS a covariant probability. -/
+theorem covariantProbability_of_unitaryPVM {G : Type*} [Group G]
+    {P : RecordPresheaf Diam} {A : GroupAction G P} {B : UniformPVMData P}
+    (C : UnitaryCovariance A B.toUniformBornData) :
+    CovariantProbability A B.toUniformBornData where
+  nonneg := fun D x => upvm_ubornω_nonneg B D x
+  sum_one := fun D => ubornω_sum_one B.toUniformBornData D
+  covariant := fun g D x => ubornω_covariant C g D x
+
 end LorentzSelectionStrong
 end QIQTH

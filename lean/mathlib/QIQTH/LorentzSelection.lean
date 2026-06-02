@@ -232,6 +232,24 @@ noncomputable def actSection
     castSector (g.act.apply_symm_apply D') (actVal g lam D')
   consistent := fun h => actSection_consistent g lam h
 
+/-- **Public evaluation of `actSection`** (the `actVal` field is private; this
+    is the public spec).  Exposed so downstream modules can reason about the
+    pushed-forward section's values — e.g. to prove `actSection` is a group
+    action on `Γ(X)` (`LorentzSelectionStrong`). -/
+@[simp] theorem actSection_val {P : RecordPresheaf Diam} (g : PoincareAction P)
+    (lam : GlobalSection P) (D' : Diam) :
+    (actSection g lam).val D'
+      = castSector (g.act.apply_symm_apply D')
+          (g.γ (g.act.symm D') (lam.val (g.act.symm D'))) := rfl
+
+/-- **Extensionality for global sections**: equal on every diamond ⟹ equal.
+    (The `consistent` field is a `Prop`, hence proof-irrelevant.) -/
+theorem GlobalSection.ext {P : RecordPresheaf Diam} {s t : GlobalSection P}
+    (h : ∀ D : Diam, s.val D = t.val D) : s = t := by
+  obtain ⟨v, _⟩ := s; obtain ⟨w, _⟩ := t
+  have hvw : v = w := funext h
+  subst hvw; rfl
+
 /- ── 6. THE COVARIANCE IDENTITY (the proved one-liner) ─────────────────
 
     Requirement 3:  A_{gD}[U_gΦ, g·λ] = g · A_D[Φ,λ].
