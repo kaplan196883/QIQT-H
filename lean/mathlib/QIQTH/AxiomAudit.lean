@@ -239,6 +239,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — per-cell pushforward, now unconditional on hcov.
 #print axioms QIQTH.LorentzSelectionStrong.ubornω_total_invariant
 -- expected: standard only — total-mass invariance, now unconditional on hcov.
+-- Fourth pass: γ-cocycle on the selection + unified covariant probability data.
+#print axioms QIQTH.LorentzSelectionStrong.selection_cocycle
+-- expected: standard only — selection transports as a cocycle (γ_{g₁g₂} via the
+-- once-pushed section); consumes IsRepMul + group_evaluation_covariance.
+#print axioms QIQTH.LorentzSelectionStrong.upvm_covariant_probability
+-- expected: standard only — uniform PVM weights are a COVARIANT probability
+-- distribution (nonneg ∧ sum=1 ∧ ω_{gD}(γx)=ω_D(x)); fuses positivity +
+-- unitary covariance in one object.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

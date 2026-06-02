@@ -426,5 +426,80 @@ theorem ubornω_total_invariant {G : Type*} [Group G] {P : RecordPresheaf Diam}
   @measure_pushforward_total Diam _ G _ P A (ubornω B)
     (fun g D x => ubornω_covariant C g D x) g D (B.fin D) (B.fin (A.act g D))
 
+/- ── I. The γ-cocycle threaded onto the SELECTION (item 1) ─────────────── -/
+
+/-- **The selection transports as a cocycle.**  The record selected at `D`,
+    transported by the composite `g₁*g₂`, equals `g₂` applied to the *actual
+    selection on the `g₁`-pushed section* — i.e. multi-step transformed
+    selections agree with the one-step transform.  CONSUMES the γ-cocycle
+    `IsRepMul` (via `γ_cocycle_apply`) and the structural `group_evaluation_
+    covariance`, threading `act_mul` through `actSection`.  This is the
+    representation property at the level of the selector, not just of `γ`. -/
+theorem selection_cocycle {G : Type*} [Group G] {P : RecordPresheaf Diam}
+    (A : GroupAction G P) (hmul : IsRepMul A) (lam : GlobalSection P)
+    (g₁ g₂ : G) (D : Diam) :
+    A.γ (g₁ * g₂) D (selector lam D)
+      = fibCast (act_mul_diam A g₁ g₂ D).symm
+          (A.γ g₂ ((A.act g₁) D)
+            (selector (actSection (A.toPoincare g₁) lam) ((A.act g₁) D))) := by
+  rw [γ_cocycle_apply A hmul g₁ g₂ D (selector lam D),
+      ← group_evaluation_covariance A lam g₁ D]
+
+/- ── J. Unified COVARIANT PROBABILITY data (item 4) ────────────────────── -/
+
+/-- Normalization for uniform Born data (the `UniformBornData` analogue of
+    `bornωRe_sum_one`): `∑_x ω = 1`. -/
+theorem ubornω_sum_one {P : RecordPresheaf Diam} (B : UniformBornData P) (D : Diam) :
+    @Finset.sum (P.X D) ℝ _ (@Finset.univ (P.X D) (B.fin D)) (ubornω B D) = 1 := by
+  haveI := B.ddeq D
+  have h1 : @Finset.sum (P.X D) ℂ _ (@Finset.univ (P.X D) (B.fin D))
+        (fun x => born (B.ψ D) (B.E D x))
+      = born (B.ψ D)
+          (@Finset.sum (P.X D) _ _ (@Finset.univ (P.X D) (B.fin D)) (B.E D)) :=
+    (born_sum (B.ψ D) (@Finset.univ (P.X D) (B.fin D)) (B.E D)).symm
+  have hcomplex : @Finset.sum (P.X D) ℂ _ (@Finset.univ (P.X D) (B.fin D))
+        (fun x => born (B.ψ D) (B.E D x)) = 1 := by
+    rw [h1, B.complete D]; exact born_one (B.ψ D) (B.ψ_unit D)
+  have hre : @Finset.sum (P.X D) ℝ _ (@Finset.univ (P.X D) (B.fin D)) (ubornω B D)
+      = (@Finset.sum (P.X D) ℂ _ (@Finset.univ (P.X D) (B.fin D))
+          (fun x => born (B.ψ D) (B.E D x))).re :=
+    (Complex.re_sum (@Finset.univ (P.X D) (B.fin D))
+      (fun x => born (B.ψ D) (B.E D x))).symm
+  rw [hre, hcomplex, Complex.one_re]
+
+/-- **Uniform Born data that is also a PVM** — both the unitary-covariance layer
+    (`UniformBornData` + `UnitaryCovariance`) and the probability layer (PVM
+    positivity) in ONE object, closing the review's "two structures" gap. -/
+structure UniformPVMData (P : RecordPresheaf Diam) extends UniformBornData P where
+  proj_herm : ∀ (D : Diam) (x : P.X D), (E D x)ᴴ = E D x
+  proj_idem : ∀ (D : Diam) (x : P.X D), (E D x) * (E D x) = E D x
+
+/-- PVM uniform Born weights are nonnegative. -/
+theorem upvm_ubornω_nonneg {P : RecordPresheaf Diam} (B : UniformPVMData P)
+    (D : Diam) (x : P.X D) : 0 ≤ ubornω B.toUniformBornData D x := by
+  have hps : (B.E D x).PosSemidef := proj_posSemidef (B.proj_herm D x) (B.proj_idem D x)
+  have hnn : (0 : ℂ) ≤ born (B.ψ D) (B.E D x) := born_posSemidef_nonneg (B.ψ D) hps
+  unfold ubornω
+  simpa using (Complex.nonneg_iff.mp hnn).1
+
+/-- **A covariant probability distribution — the unified capstone.**  For uniform
+    PVM data with a unitary Poincaré transport, the Born weights on each diamond
+    are simultaneously (i) nonnegative, (ii) summing to `1`, and (iii) Poincaré-
+    covariant `ω_{gD}(γ_g x) = ω_D(x)` — a genuine probability distribution whose
+    covariance is *derived* (not assumed).  This fuses the PVM-positivity strand
+    and the unitary-covariance strand into one object, the last in-interface gap
+    the review named. -/
+theorem upvm_covariant_probability {G : Type*} [Group G] {P : RecordPresheaf Diam}
+    {A : GroupAction G P} {B : UniformPVMData P}
+    (C : UnitaryCovariance A B.toUniformBornData) (g : G) (D : Diam) :
+    (∀ x : P.X D, 0 ≤ ubornω B.toUniformBornData D x) ∧
+    (@Finset.sum (P.X D) ℝ _ (@Finset.univ (P.X D) (B.fin D))
+        (ubornω B.toUniformBornData D) = 1) ∧
+    (∀ x : P.X D, ubornω B.toUniformBornData (A.act g D) (A.γ g D x)
+        = ubornω B.toUniformBornData D x) :=
+  ⟨fun x => upvm_ubornω_nonneg B D x,
+   ubornω_sum_one B.toUniformBornData D,
+   fun x => ubornω_covariant C g D x⟩
+
 end LorentzSelectionStrong
 end QIQTH
