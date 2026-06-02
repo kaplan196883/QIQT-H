@@ -223,14 +223,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GleasonSelector.born_is_forced
 -- expected: standard ONLY — Born FORCED from linearity + ray-support +
 -- ray-certainty.  No project axiom (the false axiom is gone).
+#print axioms QIQTH.GleasonSelector.positive_functional_hermitian
+-- expected: standard ONLY — a positive functional is a *-functional, PROVED by
+-- polarization (was a named axiom; now discharged).
+#print axioms QIQTH.GleasonSelector.quadratic_nonneg_forall_linear_zero
+-- expected: standard only — the real-quadratic null core (PROVED).
 #print axioms QIQTH.GleasonSelector.support_of_positive_certain
--- expected: standard + psd_null_radical + positive_functional_hermitian — the
--- genuine Gleason bridge: positivity + certainty ⇒ ray-support, PROVED via the
--- Cauchy–Schwarz null-radical argument (Q = I−P has w Q = 0 ⇒ off-ray terms die).
+-- expected: standard + psd_null_radical (ONLY) — the genuine Gleason bridge:
+-- positivity + certainty ⇒ ray-support, via the Cauchy–Schwarz null-radical
+-- argument (Q = I−P has w Q = 0 ⇒ off-ray terms die).
 #print axioms QIQTH.GleasonSelector.positive_ray_certain_forces_born
--- expected: standard + the two PSD/*-functional axioms — THE CAPSTONE: Born
--- follows from POSITIVITY + normalization + ray-certainty (not from a
--- conclusion-equivalent support premise). The real μ-uniqueness result.
+-- expected: standard + psd_null_radical (ONLY) — THE CAPSTONE: Born follows
+-- from POSITIVITY + normalization + ray-certainty. One residual standard axiom.
 #print axioms QIQTH.GleasonSelector.history_measure_is_born
 -- expected: standard only — μ on a decoherent record family = Born weights.
 #print axioms QIQTH.GleasonSelector.history_measure_total

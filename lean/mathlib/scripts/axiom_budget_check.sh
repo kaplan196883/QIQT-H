@@ -79,12 +79,16 @@ done
 # `support_of_positive_certain` (positivity + certainty ⇒ ray-support) and the
 # capstone `positive_ray_certain_forces_born` (positivity + normalization +
 # ray-certainty ⇒ Born).  These rest on TWO standard linear-algebra interface
-# axioms: `psd_null_radical` (a null vector of a PSD sesquilinear form is in
-# its radical — the Cauchy–Schwarz core) and `positive_functional_hermitian`
-# (a positive functional is a *-functional).  Both are standard, finite, and
-# far weaker/true compared to the retired false "Gleason ⇒ Born" axiom.
-# Net: 44 → 46 (+2 honest standard-fact axioms; the false axiom stays retired).
-AXIOM_BUDGET=46
+# axioms.  DISCHARGE PASS (since): `positive_functional_hermitian` is now
+# PROVED (polarization: realness of w((A+X)ᴴ(A+X)) and w((A+iX)ᴴ(A+iX)) ⇒
+# conjugate symmetry), and the real-quadratic core
+# `quadratic_nonneg_forall_linear_zero` is proved.  Only `psd_null_radical`
+# (a null vector of a PSD sesquilinear form is in its radical — the
+# Cauchy–Schwarz core; the residual complex re/im bookkeeping) remains a named
+# axiom.  It is standard, finite, and far weaker/true vs. the retired false
+# "Gleason ⇒ Born" axiom.  Net: 44 → 45 (+1 standard-fact axiom; one of the
+# original two discharged; the false axiom stays retired).
+AXIOM_BUDGET=45
 AXIOM_COUNT="$(grep -rhE '^axiom ' QIQTH/ | wc -l | tr -d ' ')"
 echo "[axiom-budget] raw axiom count: $AXIOM_COUNT (budget $AXIOM_BUDGET)"
 if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then

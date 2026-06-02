@@ -250,12 +250,50 @@ theorem proj_sandwich (ψ : n → ℂ) (_hψ : star ψ ⬝ᵥ ψ = 1)
     native order; this is the predicate used for positivity of `w` on squares.) -/
 def NonnegC (z : ℂ) : Prop := ∃ r : ℝ, 0 ≤ r ∧ z = (r : ℂ)
 
-/-- **PSD-form null-radical lemma (Cauchy–Schwarz core), abstract form.**
+/-- A nonneg-real complex number is fixed by conjugation. -/
+theorem NonnegC.star_eq {z : ℂ} (hz : NonnegC z) : star z = z := by
+  obtain ⟨r, _, rfl⟩ := hz
+  exact Complex.conj_ofReal r
+
+/-- A nonneg-real complex number has zero imaginary part. -/
+theorem NonnegC.im_zero {z : ℂ} (hz : NonnegC z) : z.im = 0 := by
+  obtain ⟨r, _, rfl⟩ := hz; simp
+
+/-- **Real-quadratic null lemma.**  If `0 ≤ d t² + 2 a t` for all real `t`
+    (with `0 ≤ d`), then `a = 0`.  Proof: evaluate at `t = -a/(d+1)`. -/
+theorem quadratic_nonneg_forall_linear_zero {d a : ℝ} (hd : 0 ≤ d)
+    (h : ∀ t : ℝ, 0 ≤ d * t ^ 2 + 2 * a * t) : a = 0 := by
+  -- Evaluate at t = s and t = -s for small s>0: 0 ≤ d s² ± 2 a s.
+  -- Subtracting bounds 4|a|s ≤ ... forces a = 0 as s→0; cleanest: nlinarith
+  -- with a chosen evaluation point.  Use t = -a (gives 0 ≤ d a² − 2 a²),
+  -- and t = a is not needed; instead use the two-point trick directly.
+  by_contra ha
+  -- WLOG handle the sign of a via |a|; use t = -a / (d+1) > 0-direction.
+  have hd1 : (0:ℝ) < d + 1 := by linarith
+  have ht := h (-a / (d + 1))
+  have e : d * (-a / (d + 1)) ^ 2 + 2 * a * (-a / (d + 1))
+      = (a^2 * (d - 2*(d+1))) / (d+1)^2 := by
+    field_simp; ring
+  rw [e] at ht
+  have ha2 : 0 < a^2 := by positivity
+  have hnum : a^2 * (d - 2*(d+1)) < 0 := by nlinarith [ha2]
+  have hden : (0:ℝ) < (d+1)^2 := by positivity
+  have : a^2 * (d - 2*(d+1)) / (d+1)^2 < 0 := div_neg_of_neg_of_pos hnum hden
+  linarith
+
+/-- **PSD-form null-radical lemma (Cauchy–Schwarz core).**
     Let `B : M → M → ℂ` be a sesquilinear form (linear in the 2nd slot,
     conjugate-symmetric) that is positive-semidefinite (`∀ A, NonnegC (B A A)`).
-    If `B Q Q = 0` then `B Q X = 0` for all `X`.  This is the standard "null
-    vectors are in the radical" fact; here stated as the single named input the
-    support theorem needs, isolated so its (standard PSD) content is explicit. -/
+    If `B Q Q = 0` then `B Q X = 0` for all `X` (null vectors are in the
+    radical).  This is the standard "null vectors are in the radical" fact —
+    the only remaining named interface axiom of this module.  Its proof is the
+    real-quadratic discriminant argument: for every `c`,
+    `B (Q+cX) (Q+cX) ≥ 0`; expanding via first-slot conjugate-linearity gives
+    `2 Re(c·B Q X) + |c|² (B X X).re ≥ 0`; evaluating at `c = t` and `c = i t`
+    and applying the (PROVED, in this file) `quadratic_nonneg_forall_linear_zero`
+    forces `Re (B Q X) = Im (B Q X) = 0`.  The real-quadratic core is proved;
+    the remaining work is the complex re/im bookkeeping of the expansion, kept
+    as a named axiom so the module stays clean. -/
 axiom psd_null_radical {M : Type*} [AddCommGroup M] [Module ℂ M] (B : M → M → ℂ)
     (hsesq_add : ∀ A X Y, B A (X + Y) = B A X + B A Y)
     (hsesq_smul : ∀ A (c : ℂ) X, B A (c • X) = c * B A X)
@@ -264,19 +302,60 @@ axiom psd_null_radical {M : Type*} [AddCommGroup M] [Module ℂ M] (B : M → M 
     {Q : M} (hQ : B Q Q = 0) :
     ∀ X, B Q X = 0
 
-/-- **Hermiticity of a positive functional.**  A positive (on squares),
-    linear functional `w` satisfies `w (Aᴴ * X) = star (w (Xᴴ * A))`.  This is
-    the standard fact that a positive functional is a `*`-functional
-    (`w (Yᴴ) = star (w Y)`), applied to `Y = Xᴴ * A`.  Named as a residual
-    interface axiom: its proof is the polarization identity over the four
-    powers of `i`, a finite but separate development. -/
-axiom positive_functional_hermitian
+/-- **Hermiticity of a positive functional (PROVED, no axiom).**  A positive
+    (on squares), complex-linear functional `w` satisfies
+    `w (Aᴴ * X) = star (w (Xᴴ * A))`.  Standard polarization: the diagonal
+    `w(Yᴴ Y)` is real (positivity), so realness of `w((A+X)ᴴ(A+X))` and of
+    `w((A+iX)ᴴ(A+iX))`, combined, forces conjugate symmetry. -/
+theorem positive_functional_hermitian
     {n : Type*} [Fintype n] [DecidableEq n] (w : Matrix n n ℂ → ℂ)
     (hadd : ∀ A B, w (A + B) = w A + w B)
     (hhom : ∀ (c : ℂ) A, w (c • A) = c * w A)
     (hpsd : ∀ A, NonnegC (w (Aᴴ * A)))
     (A X : Matrix n n ℂ) :
-    w (Aᴴ * X) = star (w (Xᴴ * A))
+    w (Aᴴ * X) = star (w (Xᴴ * A)) := by
+  set a := w (Aᴴ * X) with ha
+  set b := w (Xᴴ * A) with hb
+  -- Expand the diagonal at scale `c`: w((A+cX)ᴴ(A+cX)) = wAA + (star c)a + c b + |c|²wXX.
+  have hexpand : ∀ (c : ℂ),
+      w ((A + c • X)ᴴ * (A + c • X))
+        = w (Aᴴ * A) + (c * a + (starRingEnd ℂ) c * b)
+          + ((starRingEnd ℂ) c * c) * w (Xᴴ * X) := by
+    intro c
+    rw [Matrix.conjTranspose_add, Matrix.conjTranspose_smul,
+        Matrix.add_mul, Matrix.mul_add, Matrix.mul_add,
+        Matrix.smul_mul, Matrix.mul_smul, Matrix.smul_mul, Matrix.mul_smul,
+        hadd, hadd, hadd, hhom, hhom, hhom, hhom, ← ha, ← hb]
+    rw [Complex.star_def]
+    ring
+  -- diagonal realness at c = 1 and c = I.
+  have h1 := (hpsd (A + (1:ℂ) • X)).star_eq
+  have hI := (hpsd (A + Complex.I • X)).star_eq
+  rw [hexpand 1] at h1
+  rw [hexpand Complex.I] at hI
+  have hAA := (hpsd A).star_eq
+  have hXX := (hpsd X).star_eq
+  -- Normalize star-distribution; convert `star Complex.I` to `-Complex.I`.
+  have hsI : star (Complex.I) = -Complex.I := by
+    rw [Complex.star_def, Complex.conj_I]
+  simp only [map_one, one_mul, map_add, star_add, star_mul', star_neg,
+             star_star, hsI, Complex.conj_I, Complex.I_mul_I, neg_mul, neg_neg,
+             mul_one, mul_neg] at h1 hI
+  -- Two ℂ-linear equations in {a, b, star a, star b}:
+  --   h1 : star a + star b = a + b  (after cancelling the real diagonal terms)
+  --   hI : -I·star a + I·star b = I·a − I·b  (ditto)
+  -- Solve: star a = b.  Cancel I in hI first to avoid I-coefficient bookkeeping.
+  have key1 : star a + star b = a + b := by linear_combination h1 - hAA - hXX
+  have hI0 : (Complex.I : ℂ) ≠ 0 := Complex.I_ne_zero
+  have keyI : -star a + star b = a - b := by
+    have e : Complex.I * (-star a + star b) = Complex.I * (a - b) := by
+      linear_combination hI - hAA - hXX
+    exact mul_left_cancel₀ hI0 e
+  -- key1 + keyI: 2 star b = 2 a... actually star a = b.  From the two:
+  --   (star a + star b) + (-star a + star b) = (a+b)+(a-b) ⇒ 2 star b = 2a ⇒ star b = a.
+  have hsb : star b = a := by linear_combination (key1 + keyI) / 2
+  -- goal: a = star b, which is hsb.symm.
+  exact hsb.symm
 
 /-- **Ray-support FROM positivity (PROVED from `psd_null_radical`).**
 
