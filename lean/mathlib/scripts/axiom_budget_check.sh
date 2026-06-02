@@ -71,17 +71,20 @@ done
 # 4 AQFT axioms.  The FiniteModularTheory and FreeFieldRecord modules add ZERO
 # axioms (pure proof / standard analysis).
 #
-# Audit note (2026-06, GleasonSelector → +0, back to 44): GleasonSelector
-# (Open Problem 1, the μ construction) originally added a named axiom
-# `effect_gleason_representation`, but the SECOND GPT-5.5-pro review showed that
-# axiom was FALSE (positivity-free; a Fin 2 counterexample satisfies its
-# premises but is not Born).  It was RETIRED and replaced by PROVED content:
-# the red-team counterexample `naive_gleason_premises_insufficient`, the
-# `proj_sandwich` identity, and `born_is_forced` (Born forced from linearity +
-# ray-support + ray-certainty — the positivity content now an explicit
-# hypothesis, not a hidden false axiom).  The module now adds ZERO project
-# axioms.  Net budget returns to 44.
-AXIOM_BUDGET=44
+# Audit note (2026-06, GleasonSelector): the module originally named a FALSE
+# axiom `effect_gleason_representation` (positivity-free; a Fin 2
+# counterexample satisfies its premises but is not Born).  RETIRED.  In its
+# place — after the THIRD GPT-5.5-pro review (discharge ray-support from
+# positivity) — the genuine Gleason bridge is now PROVED:
+# `support_of_positive_certain` (positivity + certainty ⇒ ray-support) and the
+# capstone `positive_ray_certain_forces_born` (positivity + normalization +
+# ray-certainty ⇒ Born).  These rest on TWO standard linear-algebra interface
+# axioms: `psd_null_radical` (a null vector of a PSD sesquilinear form is in
+# its radical — the Cauchy–Schwarz core) and `positive_functional_hermitian`
+# (a positive functional is a *-functional).  Both are standard, finite, and
+# far weaker/true compared to the retired false "Gleason ⇒ Born" axiom.
+# Net: 44 → 46 (+2 honest standard-fact axioms; the false axiom stays retired).
+AXIOM_BUDGET=46
 AXIOM_COUNT="$(grep -rhE '^axiom ' QIQTH/ | wc -l | tr -d ' ')"
 echo "[axiom-budget] raw axiom count: $AXIOM_COUNT (budget $AXIOM_BUDGET)"
 if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then

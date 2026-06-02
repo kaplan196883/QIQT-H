@@ -218,11 +218,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GleasonSelector.naive_gleason_premises_insufficient
 -- expected: standard only — PROVED red-team: positivity-free premises do NOT
 -- force Born (Fin 2 counterexample). Soundness check.
-#print axioms QIQTH.GleasonSelector.proj_sandwich
--- expected: standard only — P_ψ E P_ψ = ⟨ψ|E|ψ⟩ • P_ψ.
+#print axioms QIQTH.GleasonSelector.rankOne_sandwich
+-- expected: standard only — |ψ⟩⟨ψ| E |ψ⟩⟨ψ| = ⟨ψ|E|ψ⟩ • |ψ⟩⟨ψ| (no hψ).
 #print axioms QIQTH.GleasonSelector.born_is_forced
--- expected: standard ONLY — Born is FORCED from linearity + ray-support +
+-- expected: standard ONLY — Born FORCED from linearity + ray-support +
 -- ray-certainty.  No project axiom (the false axiom is gone).
+#print axioms QIQTH.GleasonSelector.support_of_positive_certain
+-- expected: standard + psd_null_radical + positive_functional_hermitian — the
+-- genuine Gleason bridge: positivity + certainty ⇒ ray-support, PROVED via the
+-- Cauchy–Schwarz null-radical argument (Q = I−P has w Q = 0 ⇒ off-ray terms die).
+#print axioms QIQTH.GleasonSelector.positive_ray_certain_forces_born
+-- expected: standard + the two PSD/*-functional axioms — THE CAPSTONE: Born
+-- follows from POSITIVITY + normalization + ray-certainty (not from a
+-- conclusion-equivalent support premise). The real μ-uniqueness result.
 #print axioms QIQTH.GleasonSelector.history_measure_is_born
 -- expected: standard only — μ on a decoherent record family = Born weights.
 #print axioms QIQTH.GleasonSelector.history_measure_total

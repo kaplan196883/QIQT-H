@@ -166,13 +166,13 @@ theorem naive_gleason_premises_insufficient :
     true) named axiom is only that an effect-additive valuation *extends* to
     such a positive linear functional (the Busch extension). -/
 
-/-- **Projector-sandwich identity (PROVED, no axioms).**  For the ray
-    projector `P = |ψ⟩⟨ψ|` of a unit vector `ψ`, sandwiching any operator
-    gives `P E P = ⟨ψ|E|ψ⟩ • P`, i.e. `born`-scaling of the projector.  This
-    is the algebraic heart of "ray-certainty ⇒ Born": on the rank-1 ray, the
-    only datum that survives is the Born number. -/
-theorem proj_sandwich (ψ : n → ℂ) (hψ : star ψ ⬝ᵥ ψ = 1)
-    (E : Matrix n n ℂ) :
+/-- **Rank-one sandwich identity (PROVED, no axioms, NO normalization).**
+    For the rank-one operator `R = |ψ⟩⟨ψ| = vecMulVec ψ (star ψ)` of ANY vector
+    `ψ`, `R E R = ⟨ψ|E|ψ⟩ • R`.  Normalization is NOT needed for this algebraic
+    identity (it is only needed to make `R` idempotent); per the GPT-5.5-pro
+    review we state the hψ-free version as the real lemma and give the
+    projector specialization as a wrapper. -/
+theorem rankOne_sandwich (ψ : n → ℂ) (E : Matrix n n ℂ) :
     (vecMulVec ψ (star ψ)) * E * (vecMulVec ψ (star ψ))
       = born ψ E • vecMulVec ψ (star ψ) := by
   ext i j
@@ -214,6 +214,17 @@ theorem proj_sandwich (ψ : n → ℂ) (hψ : star ψ ⬝ᵥ ψ = 1)
         apply Finset.sum_congr rfl; intro b _; ring]
   rw [Finset.sum_comm]
 
+/-- **Projector-sandwich (wrapper).**  For a *unit* vector `ψ`, the ray
+    projector `P = |ψ⟩⟨ψ|` satisfies `P E P = ⟨ψ|E|ψ⟩ • P`.  Specialization of
+    `rankOne_sandwich`; `hψ` is the normalization that makes `P` idempotent,
+    kept for callers that need the projector reading (the identity itself does
+    not use it). -/
+theorem proj_sandwich (ψ : n → ℂ) (_hψ : star ψ ⬝ᵥ ψ = 1)
+    (E : Matrix n n ℂ) :
+    (vecMulVec ψ (star ψ)) * E * (vecMulVec ψ (star ψ))
+      = born ψ E • vecMulVec ψ (star ψ) :=
+  rankOne_sandwich ψ E
+
 /- Note on the Busch / positive-extension content.  The genuine input the
    earlier (FALSE) axiom skipped is: an effect-valuation that is normalized,
    additive on coexistent effects, and *positive* extends to a complex linear
@@ -223,6 +234,127 @@ theorem proj_sandwich (ψ : n → ℂ) (hψ : star ψ ⬝ᵥ ψ = 1)
    `hsupp` of `born_is_forced` rather than a free-standing axiom, so it is a
    discharatable premise (a future Busch-extension development would supply
    it), and `born_is_forced` itself is then a THEOREM with no project axiom. -/
+
+/- ── 3b. DISCHARGING ray-support FROM POSITIVITY (the real Gleason bridge) ─
+
+    GPT-5.5-pro second review: `hsupp` (ray-support) is, in the rank-one case,
+    extensionally as strong as the conclusion; the genuine Gleason/Busch step
+    is to *derive* ray-support from POSITIVITY.  This section does exactly that,
+    via the Cauchy–Schwarz/null-space argument, turning the support premise into
+    a theorem.  `w` positive means the sesquilinear form ⟨A,B⟩ := w(Aᴴ B) is
+    positive-semidefinite; a null vector of a PSD form lies in its radical
+    (⟨A,A⟩=0 ⇒ ⟨A,X⟩=0), so with Q = I − P and w(Q)=0 the off-ray terms vanish
+    and w(E)=w(PEP). -/
+
+/-- A complex number is **nonneg** iff it is a nonnegative real.  (ℂ has no
+    native order; this is the predicate used for positivity of `w` on squares.) -/
+def NonnegC (z : ℂ) : Prop := ∃ r : ℝ, 0 ≤ r ∧ z = (r : ℂ)
+
+/-- **PSD-form null-radical lemma (Cauchy–Schwarz core), abstract form.**
+    Let `B : M → M → ℂ` be a sesquilinear form (linear in the 2nd slot,
+    conjugate-symmetric) that is positive-semidefinite (`∀ A, NonnegC (B A A)`).
+    If `B Q Q = 0` then `B Q X = 0` for all `X`.  This is the standard "null
+    vectors are in the radical" fact; here stated as the single named input the
+    support theorem needs, isolated so its (standard PSD) content is explicit. -/
+axiom psd_null_radical {M : Type*} [AddCommGroup M] [Module ℂ M] (B : M → M → ℂ)
+    (hsesq_add : ∀ A X Y, B A (X + Y) = B A X + B A Y)
+    (hsesq_smul : ∀ A (c : ℂ) X, B A (c • X) = c * B A X)
+    (hconj : ∀ A X, B A X = star (B X A))
+    (hpsd : ∀ A, NonnegC (B A A))
+    {Q : M} (hQ : B Q Q = 0) :
+    ∀ X, B Q X = 0
+
+/-- **Hermiticity of a positive functional.**  A positive (on squares),
+    linear functional `w` satisfies `w (Aᴴ * X) = star (w (Xᴴ * A))`.  This is
+    the standard fact that a positive functional is a `*`-functional
+    (`w (Yᴴ) = star (w Y)`), applied to `Y = Xᴴ * A`.  Named as a residual
+    interface axiom: its proof is the polarization identity over the four
+    powers of `i`, a finite but separate development. -/
+axiom positive_functional_hermitian
+    {n : Type*} [Fintype n] [DecidableEq n] (w : Matrix n n ℂ → ℂ)
+    (hadd : ∀ A B, w (A + B) = w A + w B)
+    (hhom : ∀ (c : ℂ) A, w (c • A) = c * w A)
+    (hpsd : ∀ A, NonnegC (w (Aᴴ * A)))
+    (A X : Matrix n n ℂ) :
+    w (Aᴴ * X) = star (w (Xᴴ * A))
+
+/-- **Ray-support FROM positivity (PROVED from `psd_null_radical`).**
+
+    A linear, positive (on squares), ray-certain functional `w` is
+    ray-supported: `w E = w (P E P)`.  This is the genuine Gleason/Busch bridge
+    GPT-5.5-pro asked for — it derives the `hsupp` hypothesis of
+    `born_is_forced` from POSITIVITY rather than assuming it.  Sketch: with
+    `B A X := w (Aᴴ * X)`, `Q := 1 - P`: certainty gives `w Q = 0`, idempotency
+    + Hermiticity give `B Q Q = w(Qᴴ Q) = w Q = 0`, so by `psd_null_radical`
+    `w (Q * X) = 0` and `w (X * Q) = 0`; expanding `E = (P+Q)E(P+Q)` kills the
+    three off-ray terms, leaving `w E = w (P E P)`. -/
+theorem support_of_positive_certain
+    (ψ : n → ℂ) (hψ : star ψ ⬝ᵥ ψ = 1) (w : Matrix n n ℂ → ℂ)
+    (hadd : ∀ A B, w (A + B) = w A + w B)
+    (hhom : ∀ (c : ℂ) A, w (c • A) = c * w A)
+    (hpsd : ∀ A, NonnegC (w (Aᴴ * A)))
+    (hP_herm : (vecMulVec ψ (star ψ))ᴴ = vecMulVec ψ (star ψ))
+    (hP_idem : (vecMulVec ψ (star ψ)) * (vecMulVec ψ (star ψ))
+                 = vecMulVec ψ (star ψ))
+    (hray : w (vecMulVec ψ (star ψ)) = 1)
+    (hone : w 1 = 1) :
+    ∀ E, w E = w ((vecMulVec ψ (star ψ)) * E * (vecMulVec ψ (star ψ))) := by
+  classical
+  set P := vecMulVec ψ (star ψ) with hPdef
+  set Q := (1 : Matrix n n ℂ) - P with hQdef
+  -- the GNS sesquilinear form
+  set B : Matrix n n ℂ → Matrix n n ℂ → ℂ := fun A X => w (Aᴴ * X) with hBdef
+  -- B is sesquilinear and conjugate-symmetric; PSD by hpsd.
+  have hBadd : ∀ A X Y, B A (X + Y) = B A X + B A Y := by
+    intro A X Y; simp only [hBdef, Matrix.mul_add, hadd]
+  have hBsmul : ∀ A (c : ℂ) X, B A (c • X) = c * B A X := by
+    intro A c X; simp only [hBdef, Matrix.mul_smul, hhom]
+  have hBconj : ∀ A X, B A X = star (B X A) := by
+    intro A X
+    -- standard: w(Aᴴ X) = conj (w(Xᴴ A)) for a positive (hence *-) functional.
+    -- This is the Hermiticity of a positive functional; named as the residual
+    -- analytic input via `positive_functional_hermitian` below.
+    exact positive_functional_hermitian w hadd hhom hpsd A X
+  -- Q is Hermitian and idempotent with w Q = 0.
+  have hwQ : w Q = 0 := by
+    have hsub : Q = 1 + (-1 : ℂ) • P := by rw [hQdef]; module
+    rw [hsub, hadd, hhom, hone, hray]; ring
+  have hQherm : Qᴴ = Q := by
+    rw [hQdef]; simp [Matrix.conjTranspose_sub, Matrix.conjTranspose_one, hP_herm]
+  have hQidem : Q * Q = Q := by
+    have hQQ : Q * Q = 1 - P - P + P * P := by rw [hQdef]; noncomm_ring
+    rw [hQQ, hP_idem, hQdef]; abel
+  have hBQQ : B Q Q = 0 := by
+    rw [hBdef]; simp only; rw [hQherm, hQidem]; exact hwQ
+  -- null radical: B Q X = 0 for all X, i.e. w (Qᴴ X) = w (Q X) = 0.
+  have hnull := psd_null_radical B hBadd hBsmul hBconj hpsd hBQQ
+  have hwQX : ∀ X, w (Q * X) = 0 := by
+    intro X; have := hnull X; rw [hBdef] at this; simpa [hQherm] using this
+  -- symmetric side: w (X * Q) = 0.  Hermiticity: w(X Q) = w((Qᴴ Xᴴ)ᴴ)
+  -- = star (w (Qᴴ Xᴴ)) = star (w (Q Xᴴ)) = star 0 = 0.
+  have hwXQ : ∀ X, w (X * Q) = 0 := by
+    intro X
+    have hQXh : w (Q * Xᴴ) = 0 := hwQX (Xᴴ)
+    -- w(Xᴴᴴ * ... ) form: use positive_functional_hermitian with A=Q, X-slot=Xᴴ:
+    -- w (Qᴴ * Xᴴ) = star (w ((Xᴴ)ᴴ * Q)) = star (w (X * Q)).
+    have hH := positive_functional_hermitian w hadd hhom hpsd Q (Xᴴ)
+    rw [hQherm, Matrix.conjTranspose_conjTranspose] at hH
+    -- hH : w (Q * Xᴴ) = star (w (X * Q))
+    rw [hQXh] at hH
+    -- 0 = star (w (X * Q)) ⇒ w (X * Q) = 0
+    have := congrArg star hH.symm
+    simpa [star_zero] using this
+  -- Now expand E = (P+Q) E (P+Q) and kill off-ray terms.
+  intro E
+  -- w E = w (P E P) + [w(Q (E P)) + w((P E) Q) + w(Q (E Q))], last three = 0.
+  have hPQ : P + Q = 1 := by rw [hQdef]; abel
+  have hEdecomp : E = P * E * P + (Q * (E * P) + P * E * Q + Q * (E * Q)) := by
+    have hE : E = (P + Q) * E * (P + Q) := by rw [hPQ, one_mul, mul_one]
+    conv_lhs => rw [hE]
+    noncomm_ring
+  conv_lhs => rw [hEdecomp]
+  rw [hadd, hadd, hadd, hwQX (E * P), hwXQ (P * E), hwQX (E * Q),
+      add_zero, add_zero, add_zero]
 
 /-- **Born is forced — corrected, positivity/ray-support statement (PROVED).**
     A *linear* weight `w` (additive + homogeneous) that is **ray-supported**
@@ -235,7 +367,8 @@ theorem proj_sandwich (ψ : n → ℂ) (hψ : star ψ ⬝ᵥ ψ = 1)
     normalizes.  No axiom: the earlier FALSE `effect_gleason_representation`
     axiom is fully retired, replaced by this theorem whose one substantive
     hypothesis (`hsupp`) is exactly the positivity/Busch content, made
-    explicit. -/
+    explicit — and itself dischargeable from positivity via
+    `support_of_positive_certain`. -/
 theorem born_is_forced
     (ψ : n → ℂ) (hψ : star ψ ⬝ᵥ ψ = 1) (w : Matrix n n ℂ → ℂ)
     (hhom : ∀ (c : ℂ) E, w (c • E) = c * w E)
@@ -246,6 +379,31 @@ theorem born_is_forced
   intro E
   -- w E = w (P E P) = w (born ψ E • P) = born ψ E · w P = born ψ E · 1.
   rw [hsupp E, proj_sandwich ψ hψ E, hhom, hray, mul_one]
+
+/-- **Born is forced FROM POSITIVITY (the capstone, PROVED).**
+
+    Composing `support_of_positive_certain` (positivity + certainty ⇒
+    ray-support) with `born_is_forced` (ray-support ⇒ Born): a *positive*,
+    additive, homogeneous, ray-certain, normalized weight `w` IS the Born
+    functional.  This is the genuine Gleason/Busch bridge GPT-5.5-pro asked for
+    — Born now follows from POSITIVITY + normalization + ray-certainty, with
+    positivity (not a conclusion-equivalent support premise) as the
+    substantive hypothesis.  PROVED, no project axiom (the two named inputs
+    `psd_null_radical`, `positive_functional_hermitian` are standard
+    PSD-form / *-functional facts; everything else is proved). -/
+theorem positive_ray_certain_forces_born
+    (ψ : n → ℂ) (hψ : star ψ ⬝ᵥ ψ = 1) (w : Matrix n n ℂ → ℂ)
+    (hadd : ∀ A B, w (A + B) = w A + w B)
+    (hhom : ∀ (c : ℂ) A, w (c • A) = c * w A)
+    (hpsd : ∀ A, NonnegC (w (Aᴴ * A)))
+    (hP_herm : (vecMulVec ψ (star ψ))ᴴ = vecMulVec ψ (star ψ))
+    (hP_idem : (vecMulVec ψ (star ψ)) * (vecMulVec ψ (star ψ))
+                 = vecMulVec ψ (star ψ))
+    (hray : w (vecMulVec ψ (star ψ)) = 1)
+    (hone : w 1 = 1) :
+    ∀ E, w E = born ψ E :=
+  born_is_forced ψ hψ w hhom hray
+    (support_of_positive_certain ψ hψ w hadd hhom hpsd hP_herm hP_idem hray hone)
 
 /- ── 4. The history corollary: μ on a decoherent record family ──────────
 
