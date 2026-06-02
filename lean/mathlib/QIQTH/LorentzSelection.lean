@@ -293,14 +293,31 @@ theorem evaluation_covariance
     Haagerup-L^p content as type-checked data + propositions, and makes the
     covariance result a *conditional theorem* over it.
 
-    This is strictly more honest than the old axioms: the deferred assumptions
-    are now precisely-stated hypotheses (the "interface-as-hypothesis, not
-    axiom" pattern this corpus already prefers — cf. `pushforward_marginal_local`
-    and the discharged Gleason module), and the module adds ZERO project axioms.
-    What remains genuinely open is no longer hidden behind a name: it is the
-    single, written-down question "does a `RecordedHistoryNet` exist for
-    realistic relativistic QFT?" — the analytic existence problem, not solved,
-    but now a precise conjecture rather than an assumed axiom. -/
+    This is more honest than the old axioms for *formal hygiene*: the deferred
+    assumptions are now precisely-stated hypotheses (the "interface-as-hypothesis,
+    not axiom" pattern this corpus prefers — cf. `pushforward_marginal_local` and
+    the discharged Gleason module), and the module adds ZERO project axioms.
+
+    HONEST CAVEAT (GPT-5.5-pro adversarial review — do not overstate this):
+    * The covariance theorem below (`covariant_selection_of_net`) consumes only
+      the presheaf field `net.P`; its proof is the structural identity
+      `evaluation_covariance`, and the analytic fields (`N`, `recon`, `ω`,
+      `ω_marg`) are NOT used.  So it is evaluation-equivariance, not covariance
+      of the decoherence measure or of a fixed selection rule.
+    * Several fields are NON-RIGID as written (chosen inside the same structure):
+      `card_le` is satisfiable by `N D := Fintype.card (P.X D)`; boundary
+      reconstruction by `Pb := P`, `recon := Equiv.refl`; `ω` by any finite PMF.
+      The one-point net (`P.X D := Unit`) satisfies every field, so the BARE
+      existence statement "a `RecordedHistoryNet` exists" is TRIVIALLY TRUE and
+      is NOT the open problem.
+    * `net_no_signaling` is a two-line rewrite of the ASSUMED `ω_marg`, not a
+      derivation from microcausality.
+    The genuine Open Problem 3b is the REALIZATION problem: a net whose data are
+    extracted from a fixed relativistic QFT + geometry (area-law `N` and boundary
+    algebra fixed externally; weights pinned to Born values `ω_Φ(P_i^D)` of an
+    actual state `Φ`) under a true Poincaré GROUP action with equivariant
+    measure.  This module retires the four opaque axioms and machine-checks the
+    finite combinatorial skeleton; it does NOT discharge that realization. -/
 
 universe uD uX
 
@@ -431,21 +448,28 @@ theorem covariant_selection_exists {Diam : Type uD} [Preorder Diam]
           `screen_local_marginal` (= linchpin hypotheses 1–3, 2, 6, 9): the
           holographic finiteness bound, the boundary-reconstruction natural iso,
           the decoherence-functional probability weights, and the projective /
-          no-signaling marginal (the last even yields `net_no_signaling` as a
-          *theorem*).  The covariance result is now the conditional theorems
-          `covariant_selection_of_net` / `covariant_selection_exists` over this
-          structure.  The module adds ZERO project axioms.
+          no-signaling marginal (the last gives the convenience lemma
+          `net_no_signaling` — a two-line rewrite of the assumed `ω_marg`, NOT a
+          derivation from microcausality).  The covariance result is the
+          conditional theorems `covariant_selection_of_net` /
+          `covariant_selection_exists` over this structure.  The module adds ZERO
+          project axioms.
 
-    Net effect, stated honestly: "equivariant naturality + a global section ⟹
-    a covariant single-outcome selection map" is a machine-checked theorem, and
-    the four AQFT inputs are no longer assumed axioms but an explicit, written-
-    down hypothesis structure.  The relativistic problem of Open Problem 3b has
-    been *relocated* into the single precise question "does a `RecordedHistoryNet`
-    exist for realistic relativistic QFT?" — the Type III₁ / Tomita–Takesaki /
-    Haagerup-L^p existence problem (carrying the Roberts-net-cohomology gluing
-    obstruction and the equivariant-γ split), not solved, but now a stated
-    conjecture rather than an opaque axiom.  This is precisely the same shape as
-    the rest of the QIQT-H Lean corpus. -/
+    Net effect, stated honestly (with the adversarial-review caveat above):
+    "equivariant naturality + a global section ⟹ a covariant single-outcome
+    selection map" is a machine-checked, axiom-free theorem, and the four AQFT
+    inputs are no longer assumed axioms but an explicit hypothesis structure.
+    But this is FORMAL HYGIENE, not a discharge of the physics: the covariance
+    theorem uses only `net.P`, the structure's analytic fields are non-rigid
+    (the one-point net satisfies them all), so the BARE existence of a
+    `RecordedHistoryNet` is trivially true and is NOT the open problem.  The
+    genuine Open Problem 3b is the REALIZATION problem — a net extracted from a
+    fixed QFT + geometry (externally-rigid area-law `N` and boundary algebra,
+    Born-pinned weights `ω_Φ(P_i^D)`) under a true Poincaré GROUP action with
+    equivariant measure — i.e. the Type III₁ / Tomita–Takesaki / Haagerup-L^p
+    existence problem (carrying the Roberts-net-cohomology gluing obstruction and
+    the equivariant-γ split).  That remains open; only the finite combinatorial
+    skeleton is machine-checked here. -/
 theorem audit_conclusion : True := trivial
 
 end LorentzSelection

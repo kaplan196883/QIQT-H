@@ -72,9 +72,14 @@ done
 # is now the conditional theorems `covariant_selection_of_net` /
 # `covariant_selection_exists`, and no-signaling is the THEOREM
 # `net_no_signaling`.  This is the "interface-as-hypothesis, not axiom" pattern:
-# the deep Type III₁ existence problem is NOT solved, but it is now a single
-# precise, written-down conjecture ("does a RecordedHistoryNet exist for
-# realistic QFT?") rather than four assumed axioms.  The module adds ZERO project
+# the deep Type III₁ existence problem is NOT solved.  HONEST CAVEAT (GPT-5.5-pro
+# review): this is formal hygiene, not a discharge of the physics — the covariance
+# theorem uses only the presheaf field, the structure's analytic fields are
+# non-rigid (the one-point net satisfies them all), so BARE existence of a
+# RecordedHistoryNet is trivially true and is NOT the open problem.  The genuine
+# Open Problem 3b is the REALIZATION problem (net extracted from a fixed QFT +
+# geometry: externally-rigid area-law N and boundary, Born-pinned weights, a true
+# Poincaré GROUP action with equivariant measure).  The module adds ZERO project
 # axioms.  An earlier 5th axiom (`actSection_consistent`, transport bookkeeping)
 # was likewise ELIMINATED by upgrading the diamond action to an `OrderIso`
 # (inverse-monotonicity makes the consistency a theorem); `evaluation_covariance`
