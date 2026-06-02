@@ -71,15 +71,17 @@ done
 # 4 AQFT axioms.  The FiniteModularTheory and FreeFieldRecord modules add ZERO
 # axioms (pure proof / standard analysis).
 #
-# Audit note (2026-06, +1 → 45): GleasonSelector (Open Problem 1, the μ
-# construction) adds ONE named interface axiom, `effect_gleason_representation`
-# — the deep finite-dim Busch / POVM-Gleason theorem (non-contextual additive
-# normalized ray-certain effect-weight ⇒ Born), not in current Mathlib.  Its
-# CONSEQUENCES are proved: the μ-is-Born history corollary and the finite
-# no-signaling marginal (the latter depends on NO project axiom).  Gleason-spine
-# architecture (GPT-5.5-pro μ-options consultation): the deep representation
-# step is the cited axiom; "Born is forced" + no-signaling are what it buys.
-AXIOM_BUDGET=45
+# Audit note (2026-06, GleasonSelector → +0, back to 44): GleasonSelector
+# (Open Problem 1, the μ construction) originally added a named axiom
+# `effect_gleason_representation`, but the SECOND GPT-5.5-pro review showed that
+# axiom was FALSE (positivity-free; a Fin 2 counterexample satisfies its
+# premises but is not Born).  It was RETIRED and replaced by PROVED content:
+# the red-team counterexample `naive_gleason_premises_insufficient`, the
+# `proj_sandwich` identity, and `born_is_forced` (Born forced from linearity +
+# ray-support + ray-certainty — the positivity content now an explicit
+# hypothesis, not a hidden false axiom).  The module now adds ZERO project
+# axioms.  Net budget returns to 44.
+AXIOM_BUDGET=44
 AXIOM_COUNT="$(grep -rhE '^axiom ' QIQTH/ | wc -l | tr -d ' ')"
 echo "[axiom-budget] raw axiom count: $AXIOM_COUNT (budget $AXIOM_BUDGET)"
 if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then

@@ -212,20 +212,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FreeFieldRecord.recordOverlap_tendsto_zero
 -- expected: standard only — (b′) derived q^N → 0 decay from the mode product.
 
--- Gleason-route μ construction (Open Problem 1)
-#print axioms QIQTH.GleasonSelector.born_add
--- expected: standard only — Born functional linearity.
+-- Gleason-route μ construction (Open Problem 1).  NOTE: the earlier FALSE
+-- axiom `effect_gleason_representation` was RETIRED (2nd GPT-5.5-pro review);
+-- this module now adds NO project axiom — every theorem below is standard-only.
+#print axioms QIQTH.GleasonSelector.naive_gleason_premises_insufficient
+-- expected: standard only — PROVED red-team: positivity-free premises do NOT
+-- force Born (Fin 2 counterexample). Soundness check.
+#print axioms QIQTH.GleasonSelector.proj_sandwich
+-- expected: standard only — P_ψ E P_ψ = ⟨ψ|E|ψ⟩ • P_ψ.
 #print axioms QIQTH.GleasonSelector.born_is_forced
--- expected: standard + the SINGLE named axiom effect_gleason_representation
--- (the deep finite-dim Busch/POVM-Gleason step) — "Born is forced".
+-- expected: standard ONLY — Born is FORCED from linearity + ray-support +
+-- ray-certainty.  No project axiom (the false axiom is gone).
 #print axioms QIQTH.GleasonSelector.history_measure_is_born
--- expected: standard only — μ on a decoherent record family = Born weights
--- (given GleasonAdmissible).
+-- expected: standard only — μ on a decoherent record family = Born weights.
 #print axioms QIQTH.GleasonSelector.history_measure_total
 -- expected: standard only — the record measure is normalized to 1.
 #print axioms QIQTH.GleasonSelector.no_signaling_marginal
 -- expected: standard ONLY — requirement (2) honest form: one functional gives
 -- spacelike-marginal independence for all Bob settings (no per-experiment
--- tuning). Depends on NO project axiom.
+-- tuning).
 
 end QIQTH.AxiomAudit
