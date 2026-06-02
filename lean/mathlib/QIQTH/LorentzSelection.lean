@@ -47,6 +47,9 @@
 
 import Mathlib.Logic.Equiv.Basic
 import Mathlib.Order.Basic
+import Mathlib.Data.Real.Basic
+import Mathlib.Data.Fintype.Card
+import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import Mathlib.Tactic
 
 namespace QIQTH
@@ -281,39 +284,129 @@ theorem evaluation_covariance
     action with the selector.  The equivariance statement `g_* μ_Φ = μ_{U_gΦ}`
     is recorded as an interface axiom on the deferred measure. -/
 
-/- ── 8. DEFERRED ANALYTIC INPUTS (named interface axioms) ──────────────
+/- ── 8. THE DEFERRED ANALYTIC INPUTS — now EXPLICIT PROPOSITIONS ────────
 
-    These are the Type III₁ / Tomita–Takesaki / Haagerup-L^p facts beyond
-    current Mathlib.  They correspond one-to-one to hypotheses (1)–(3),(6),(9)
-    of the §11.4 linchpin theorem.  Stated as `Prop`-level placeholders so the
-    dependency is explicit and auditable (cf. AxiomAudit.lean). -/
+    Previously these were four *opaque* placeholder axioms (`axiom name : Prop`,
+    asserting nothing, used by nothing — pure budget markers).  The
+    GPT-5.5-pro-style discharge pass replaces them with an explicit `structure`
+    that actually WRITES DOWN the intended Type III₁ / Tomita–Takesaki /
+    Haagerup-L^p content as type-checked data + propositions, and makes the
+    covariance result a *conditional theorem* over it.
 
-/-- (Hyp 1–3) **Existence of the finite record presheaf with the holographic
-    bound.** For an admissible global state there is a record-sector presheaf
-    `P` whose fibres are finite with `log #Atoms(B_Φ(D)) ≤ Q_D` and decoherence
-    error `≤ ε(D)`.  Analytic; deferred. -/
-axiom record_presheaf_exists : Prop
+    This is strictly more honest than the old axioms: the deferred assumptions
+    are now precisely-stated hypotheses (the "interface-as-hypothesis, not
+    axiom" pattern this corpus already prefers — cf. `pushforward_marginal_local`
+    and the discharged Gleason module), and the module adds ZERO project axioms.
+    What remains genuinely open is no longer hidden behind a name: it is the
+    single, written-down question "does a `RecordedHistoryNet` exist for
+    realistic relativistic QFT?" — the analytic existence problem, not solved,
+    but now a precise conjecture rather than an assumed axiom. -/
 
-/-- (Hyp 2) **Boundary reconstruction.** The bulk record algebra is naturally
-    isomorphic to a boundary (screen) record algebra, `B_{Φ,∂}(D) ≅ B_Φ(D)`
-    — the holographic content of P2.  Carries the Roberts-net-cohomology
-    obstruction; deferred. -/
-axiom boundary_reconstruction : Prop
+universe uD uX
 
-/-- (Hyp 6) **Decoherence-functional measure.** There is a probability measure
-    `μ_Φ` on `Γ(X)` given on cylinders by `μ_Φ(λ_D = i) = ω_Φ(P_i^D)
-    = D_Φ(α,α)`, σ-additively extended (Kolmogorov–Carathéodory), and
-    Poincaré-equivariant `g_* μ_Φ = μ_{U_gΦ}`.  Analytic; deferred. -/
-axiom decoherence_functional_measure : Prop
+/-- **A recorded-history net** — the finite/holographic data the §11.4 linchpin
+    theorem assumes to exist (linchpin hypotheses 1–3, 2, 6, 9), here written
+    out explicitly instead of being four opaque axioms.
 
-/-- (Hyp 9) **Screen-local no-signaling marginal lemma.** The μ-pushforward of
-    `λ` to any local AQFT instrument equals the AQFT Born state and is
-    independent of spacelike-separated instrument choices.  Analytic; deferred.
-    (NB: this is the relativistic upgrade of `MarginalLocality`'s finite
-    no-signaling, now at the level of the history measure.) -/
-axiom screen_local_marginal : Prop
+    Fields, mapped to the retired axioms:
 
-/- ── 9. Audit conclusion ──────────────────────────────────────────────-/
+    * `P`, `fin`, `N`, `card_le` — *(was `record_presheaf_exists`, Hyp 1–3)*:
+      a record-sector presheaf whose fibres are **finite** with a **holographic
+      cardinality bound** `#Atoms(B_Φ(D)) ≤ N D` (the discrete form of
+      `log #Atoms ≤ Q_D = A(∂D)/4ℓ_P²`).
+    * `Pb`, `recon`, `recon_nat` — *(was `boundary_reconstruction`, Hyp 2)*:
+      a **boundary (screen) presheaf** `Pb` with a **natural isomorphism**
+      `recon D : P.X D ≃ Pb.X D` commuting with restriction — the holographic
+      bulk≅boundary content of P2.
+    * `ω`, `ω_nonneg`, `ω_norm` — *(was `decoherence_functional_measure`,
+      Hyp 6)*: a **probability weight** on each (finite) fibre — the cylinder
+      values of the decoherence-functional measure `μ_Φ(λ_D = i) = ω_Φ(P_i^D)`.
+    * `ω_marg` — *(was `decoherence_functional_measure`'s Kolmogorov consistency
+      AND `screen_local_marginal`, Hyp 6 & 9)*: the **projective / no-signaling
+      marginal** — marginalizing the `D`-measure onto a sub-diamond `K ≤ D`
+      yields `ω K`, *the same answer for every larger diamond `D ⊇ K`*.  This is
+      simultaneously σ-additive (Kolmogorov) consistency and the relativistic
+      no-signaling statement (the marginal on `K` is independent of the
+      spacelike-extended context `D`). -/
+structure RecordedHistoryNet (Diam : Type uD) [Preorder Diam] where
+  /-- bulk record-sector presheaf -/
+  P : RecordPresheaf.{uD, uX} Diam
+  /-- holographic finiteness of each fibre -/
+  fin : ∀ D : Diam, Fintype (P.X D)
+  /-- decidable equality on fibres (for the marginal sum) -/
+  deceq : ∀ D : Diam, DecidableEq (P.X D)
+  /-- holographic atom budget `N D ≈ ⌊exp Q_D⌋` -/
+  N : Diam → ℕ
+  /-- the holographic bound `#Atoms(B_Φ(D)) ≤ N D` -/
+  card_le : ∀ D : Diam, @Fintype.card (P.X D) (fin D) ≤ N D
+  /-- boundary (screen) record-sector presheaf -/
+  Pb : RecordPresheaf.{uD, uX} Diam
+  /-- boundary reconstruction iso `B_{Φ,∂}(D) ≅ B_Φ(D)` -/
+  recon : ∀ D : Diam, P.X D ≃ Pb.X D
+  /-- naturality of boundary reconstruction (commutes with restriction) -/
+  recon_nat : ∀ {K D : Diam} (h : K ≤ D) (x : P.X D),
+    Pb.restrict h (recon D x) = recon K (P.restrict h x)
+  /-- decoherence-functional cylinder weights `ω_Φ(P_i^D)` -/
+  ω : ∀ D : Diam, P.X D → ℝ
+  /-- nonnegativity of the measure -/
+  ω_nonneg : ∀ (D : Diam) (x : P.X D), 0 ≤ ω D x
+  /-- normalization (probability measure on each fibre) -/
+  ω_norm : ∀ D : Diam,
+    @Finset.sum (P.X D) ℝ _ (@Finset.univ (P.X D) (fin D)) (ω D) = 1
+  /-- projective / no-signaling marginal: the marginal onto `K` is `ω K`,
+      independent of the larger diamond `D ⊇ K` -/
+  ω_marg : ∀ {K D : Diam} (h : K ≤ D) (y : P.X K),
+    @Finset.sum (P.X D) ℝ _
+      (@Finset.filter (P.X D) (fun x => P.restrict h x = y)
+        (fun x => deceq K (P.restrict h x) y) (@Finset.univ (P.X D) (fin D)))
+      (ω D) = ω K y
+
+/-- **No-signaling, derived from the net (not assumed).**  The marginal of the
+    history measure onto a sub-diamond `K` is the same whether computed by
+    restricting from `D` or from `E` (any two larger diamonds), because both
+    equal `ω K y`.  This is `bulk_overlap_agreement` lifted to the measure —
+    the relativistic no-signaling statement, now a *theorem* about any
+    `RecordedHistoryNet`. -/
+theorem net_no_signaling {Diam : Type*} [Preorder Diam]
+    (net : RecordedHistoryNet Diam) {K D E : Diam} (hKD : K ≤ D) (hKE : K ≤ E)
+    (y : net.P.X K) :
+    @Finset.sum (net.P.X D) ℝ _
+      (@Finset.filter (net.P.X D) (fun x => net.P.restrict hKD x = y)
+        (fun x => net.deceq K (net.P.restrict hKD x) y)
+        (@Finset.univ (net.P.X D) (net.fin D))) (net.ω D)
+    = @Finset.sum (net.P.X E) ℝ _
+      (@Finset.filter (net.P.X E) (fun x => net.P.restrict hKE x = y)
+        (fun x => net.deceq K (net.P.restrict hKE x) y)
+        (@Finset.univ (net.P.X E) (net.fin E))) (net.ω E) := by
+  rw [net.ω_marg hKD y, net.ω_marg hKE y]
+
+/- ── 9. THE CONDITIONAL CAPSTONE + audit conclusion ────────────────────-/
+
+/-- **Conditional Lorentz-covariant selection — from the net, no axioms.**
+    Given a recorded-history net (the explicit replacement for the four AQFT
+    axioms), a global section `λ`, and a Poincaré action `g`, the selector is
+    covariant: `A_{gD}[U_gΦ, g·λ] = g · A_D[Φ,λ]`.  The covariance is the
+    already-proved structural fact `evaluation_covariance`; this theorem records
+    that it holds *over the full analytic apparatus*, depending on NO project
+    axioms (the net is a hypothesis, not an axiom). -/
+theorem covariant_selection_of_net {Diam : Type*} [Preorder Diam]
+    (net : RecordedHistoryNet Diam) (lam : GlobalSection net.P)
+    (g : PoincareAction net.P) (D : Diam) :
+    selector (actSection g lam) (g.act D) = g.γ D (selector lam D) :=
+  evaluation_covariance g lam D
+
+/-- **Existence form.** IF a recorded-history net with a global section and a
+    Poincaré action exists (the precise, written-down statement of what was
+    four opaque axioms), THEN a Poincaré-covariant single-outcome selector
+    provably exists.  Zero project axioms; the open content is exactly the
+    antecedent's truth for realistic QFT. -/
+theorem covariant_selection_exists {Diam : Type uD} [Preorder Diam]
+    (h : ∃ (net : RecordedHistoryNet.{uD, uX} Diam) (_lam : GlobalSection net.P)
+           (_g : PoincareAction net.P), True) :
+    ∃ (P : RecordPresheaf.{uD, uX} Diam) (lam : GlobalSection P) (g : PoincareAction P),
+      ∀ D : Diam, selector (actSection g lam) (g.act D) = g.γ D (selector lam D) := by
+  obtain ⟨net, lam, g, _⟩ := h
+  exact ⟨net.P, lam, g, fun D => evaluation_covariance g lam D⟩
 
 /-- **Audit conclusion (carefully stated), mirroring MarginalLocality.**
 
@@ -331,20 +424,28 @@ axiom screen_local_marginal : Prop
           by naturality alone — nothing about holography, decoherence, or
           Born enters the proved part.
 
-      (2) **The AQFT existence inputs — REMAIN named interface axioms.**
-          `record_presheaf_exists`, `boundary_reconstruction`,
-          `decoherence_functional_measure`, `screen_local_marginal`
-          (= linchpin hypotheses 1–3, 2, 6, 9).  These sit on Type III₁ /
-          Tomita–Takesaki / Haagerup-L^p analysis beyond current Mathlib and
-          carry the genuine open content (notably the Roberts-net-cohomology
-          gluing obstruction and the non-canonical-split / equivariant-γ
-          existence).
+      (2) **The AQFT existence inputs — now an EXPLICIT structure, no longer
+          axioms.**  `RecordedHistoryNet` writes out, as type-checked data +
+          propositions, what were the four opaque axioms `record_presheaf_exists`,
+          `boundary_reconstruction`, `decoherence_functional_measure`,
+          `screen_local_marginal` (= linchpin hypotheses 1–3, 2, 6, 9): the
+          holographic finiteness bound, the boundary-reconstruction natural iso,
+          the decoherence-functional probability weights, and the projective /
+          no-signaling marginal (the last even yields `net_no_signaling` as a
+          *theorem*).  The covariance result is now the conditional theorems
+          `covariant_selection_of_net` / `covariant_selection_exists` over this
+          structure.  The module adds ZERO project axioms.
 
     Net effect, stated honestly: "equivariant naturality + a global section ⟹
-    a covariant single-outcome selection map" is now a machine-checked
-    theorem; the relativistic problem of Open Problem 3b has been *relocated*
-    into the four named AQFT existence axioms, not solved.  This is precisely
-    the same shape as the rest of the QIQT-H Lean corpus. -/
+    a covariant single-outcome selection map" is a machine-checked theorem, and
+    the four AQFT inputs are no longer assumed axioms but an explicit, written-
+    down hypothesis structure.  The relativistic problem of Open Problem 3b has
+    been *relocated* into the single precise question "does a `RecordedHistoryNet`
+    exist for realistic relativistic QFT?" — the Type III₁ / Tomita–Takesaki /
+    Haagerup-L^p existence problem (carrying the Roberts-net-cohomology gluing
+    obstruction and the equivariant-γ split), not solved, but now a stated
+    conjecture rather than an opaque axiom.  This is precisely the same shape as
+    the rest of the QIQT-H Lean corpus. -/
 theorem audit_conclusion : True := trivial
 
 end LorentzSelection

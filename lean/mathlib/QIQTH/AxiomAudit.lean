@@ -178,11 +178,23 @@ namespace QIQTH.AxiomAudit
 -- expected: NO axioms at all (pure rewrite by GlobalSection.consistent)
 #print axioms QIQTH.LorentzSelection.evaluation_covariance
 -- expected: standard axioms ONLY (propext, Quot.sound).  CRUCIALLY *not* any
--- of the 4 deferred AQFT axioms, AND no longer `actSection_consistent`
--- (eliminated by the OrderIso upgrade — it is now a proved theorem).
+-- of the (now-RETIRED) 4 deferred AQFT axioms, AND no longer
+-- `actSection_consistent` (eliminated by the OrderIso upgrade — proved theorem).
 #print axioms QIQTH.LorentzSelection.actSection_consistent
 -- expected: standard only — the pushed-forward section's consistency, PROVED
 -- (was an axiom; now a theorem via act : ≃o and restrict_cast).
+-- DISCHARGE PASS: the four opaque `axiom _ : Prop` AQFT placeholders
+-- (record_presheaf_exists, boundary_reconstruction,
+-- decoherence_functional_measure, screen_local_marginal) have been RETIRED and
+-- replaced by the explicit `RecordedHistoryNet` structure + conditional
+-- theorems.  The module now adds ZERO project axioms; the open content is the
+-- single written-down existence question, not an assumed axiom.
+#print axioms QIQTH.LorentzSelection.net_no_signaling
+-- expected: standard only — no-signaling is now a THEOREM about any net.
+#print axioms QIQTH.LorentzSelection.covariant_selection_of_net
+-- expected: standard only — covariance over the full (hypothesized) net.
+#print axioms QIQTH.LorentzSelection.covariant_selection_exists
+-- expected: standard only — IF a net exists, a covariant selector exists.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

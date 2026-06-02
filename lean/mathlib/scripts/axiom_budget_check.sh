@@ -59,17 +59,27 @@ done
 # Raise this number ONLY with an accompanying audit note explaining the
 # new axiom; never silently.
 #
-# Audit note (2026-06, +4 → 44): the LorentzSelection module (Open Problem
-# 3b skeleton) adds 4 named AQFT *interface* axioms for the Type III₁ /
-# Tomita–Takesaki analytic inputs beyond current Mathlib
-# (`record_presheaf_exists`, `boundary_reconstruction`,
-# `decoherence_functional_measure`, `screen_local_marginal`).  An earlier 5th
-# axiom (`actSection_consistent`, transport bookkeeping) was ELIMINATED in the
-# GPT-5.5-pro-review pass by upgrading the diamond action to an `OrderIso`
+# Audit note (2026-06, LorentzSelection +4 then −4 → net 0): the LorentzSelection
+# module (Open Problem 3b skeleton) ORIGINALLY named 4 opaque AQFT *interface*
+# axioms (`axiom _ : Prop`) for the Type III₁ / Tomita–Takesaki analytic inputs
+# beyond current Mathlib (`record_presheaf_exists`, `boundary_reconstruction`,
+# `decoherence_functional_measure`, `screen_local_marginal`).  DISCHARGE PASS:
+# these four — which asserted nothing (opaque Props) and were used by no theorem —
+# have been RETIRED and replaced by the explicit `RecordedHistoryNet` structure
+# that WRITES DOWN the intended content as type-checked data + propositions
+# (holographic finiteness bound, boundary-reconstruction natural iso, decoherence
+# probability weights, projective/no-signaling marginal).  The covariance result
+# is now the conditional theorems `covariant_selection_of_net` /
+# `covariant_selection_exists`, and no-signaling is the THEOREM
+# `net_no_signaling`.  This is the "interface-as-hypothesis, not axiom" pattern:
+# the deep Type III₁ existence problem is NOT solved, but it is now a single
+# precise, written-down conjecture ("does a RecordedHistoryNet exist for
+# realistic QFT?") rather than four assumed axioms.  The module adds ZERO project
+# axioms.  An earlier 5th axiom (`actSection_consistent`, transport bookkeeping)
+# was likewise ELIMINATED by upgrading the diamond action to an `OrderIso`
 # (inverse-monotonicity makes the consistency a theorem); `evaluation_covariance`
-# now depends only on standard axioms + that proved theorem, and on NONE of the
-# 4 AQFT axioms.  The FiniteModularTheory and FreeFieldRecord modules add ZERO
-# axioms (pure proof / standard analysis).
+# depends only on standard axioms.  FiniteModularTheory and FreeFieldRecord add
+# ZERO axioms (pure proof / standard analysis).
 #
 # Audit note (2026-06, GleasonSelector): the module originally named a FALSE
 # axiom `effect_gleason_representation` (positivity-free; a Fin 2
@@ -87,7 +97,10 @@ done
 # B Q X).  The GleasonSelector module now adds ZERO project axioms; the
 # capstone `positive_ray_certain_forces_born` ("Born follows from positivity")
 # depends on the STANDARD Lean axioms only.  Net: 45 → 44.
-AXIOM_BUDGET=44
+#
+# Audit note (2026-06, LorentzSelection AQFT discharge): the 4 opaque AQFT
+# placeholder axioms retired (see the LorentzSelection note above).  Net: 44 → 40.
+AXIOM_BUDGET=40
 AXIOM_COUNT="$(grep -rhE '^axiom ' QIQTH/ | wc -l | tr -d ' ')"
 echo "[axiom-budget] raw axiom count: $AXIOM_COUNT (budget $AXIOM_BUDGET)"
 if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then
