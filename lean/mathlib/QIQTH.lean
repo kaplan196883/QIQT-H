@@ -59,3 +59,7 @@ import QIQTH.FiniteModularTheory
 -- decoherence decay, (c) finite-mode Lorentz action — concrete theorems
 -- instantiating parts of the LorentzSelection AQFT axioms; standard axioms only:
 import QIQTH.FreeFieldRecord
+-- Gleason-route μ construction (Open Problem 1): the deep finite-dim
+-- effect-Gleason representation is one named axiom; the μ-is-Born history
+-- corollary and the finite no-signaling marginal are PROVED from it:
+import QIQTH.GleasonSelector

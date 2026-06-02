@@ -212,4 +212,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FreeFieldRecord.recordOverlap_tendsto_zero
 -- expected: standard only — (b′) derived q^N → 0 decay from the mode product.
 
+-- Gleason-route μ construction (Open Problem 1)
+#print axioms QIQTH.GleasonSelector.born_add
+-- expected: standard only — Born functional linearity.
+#print axioms QIQTH.GleasonSelector.born_is_forced
+-- expected: standard + the SINGLE named axiom effect_gleason_representation
+-- (the deep finite-dim Busch/POVM-Gleason step) — "Born is forced".
+#print axioms QIQTH.GleasonSelector.history_measure_is_born
+-- expected: standard only — μ on a decoherent record family = Born weights
+-- (given GleasonAdmissible).
+#print axioms QIQTH.GleasonSelector.history_measure_total
+-- expected: standard only — the record measure is normalized to 1.
+#print axioms QIQTH.GleasonSelector.no_signaling_marginal
+-- expected: standard ONLY — requirement (2) honest form: one functional gives
+-- spacelike-marginal independence for all Bob settings (no per-experiment
+-- tuning). Depends on NO project axiom.
+
 end QIQTH.AxiomAudit
