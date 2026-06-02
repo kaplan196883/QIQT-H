@@ -177,10 +177,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LorentzSelection.bulk_overlap_agreement
 -- expected: NO axioms at all (pure rewrite by GlobalSection.consistent)
 #print axioms QIQTH.LorentzSelection.evaluation_covariance
--- expected: standard `Quot.sound` + the single order-theoretic interface
--- axiom `actSection_consistent`.  CRUCIALLY *not* any of the 4 deferred
--- AQFT analytic axioms — covariance is proved structurally from
--- equivariant naturality, exactly as §11.4 claims.
+-- expected: standard axioms ONLY (propext, Quot.sound).  CRUCIALLY *not* any
+-- of the 4 deferred AQFT axioms, AND no longer `actSection_consistent`
+-- (eliminated by the OrderIso upgrade — it is now a proved theorem).
+#print axioms QIQTH.LorentzSelection.actSection_consistent
+-- expected: standard only — the pushed-forward section's consistency, PROVED
+-- (was an axiom; now a theorem via act : ≃o and restrict_cast).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
@@ -188,8 +190,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FiniteModularTheory.modAut_comp
 -- expected: standard only — one-parameter group law σ_s∘σ_t = σ_{s+t}
 #print axioms QIQTH.FiniteModularTheory.kms_condition
--- expected: standard only — KMS from trace cyclicity; NO project axioms,
--- NO analytic input.  Genuine finite-dim Tomita–Takesaki, proved.
+-- expected: standard only — KMS boundary identity from trace cyclicity.
+#print axioms QIQTH.FiniteModularTheory.sigmaDiag_comp
+-- expected: standard only — the GENUINE real-time modular flow's
+-- one-parameter group law σ_s∘σ_t=σ_{s+t} (diagonal case), via cpow_add.
+#print axioms QIQTH.FiniteModularTheory.diagPow_mul
+-- expected: standard only — (p i)^{is}·(p i)^{it} = (p i)^{i(s+t)}.
 
 -- Free-field finite-mode instance (a, b, c)
 #print axioms QIQTH.FreeFieldRecord.holographic_bound
@@ -200,5 +206,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — (c) finite-mode Lorentz action group law
 #print axioms QIQTH.FreeFieldRecord.boost_bijective
 -- expected: standard only — (c) each boost is a record-sector bijection
+#print axioms QIQTH.FreeFieldRecord.recordOverlap_le_pow
+-- expected: standard only — (b′) the SUBSTANTIVE content: the factorized
+-- environment overlap |⟨E_α|E_β⟩| = |∏ mode overlaps| ≤ q^(#differing modes).
+#print axioms QIQTH.FreeFieldRecord.recordOverlap_tendsto_zero
+-- expected: standard only — (b′) derived q^N → 0 decay from the mode product.
 
 end QIQTH.AxiomAudit

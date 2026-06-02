@@ -59,18 +59,18 @@ done
 # Raise this number ONLY with an accompanying audit note explaining the
 # new axiom; never silently.
 #
-# Audit note (2026-06, +5 → 45): the LorentzSelection module (Open Problem
-# 3b skeleton) adds 5 axioms — 1 order-theoretic transport-bookkeeping fact
-# (`actSection_consistent`, provable in principle, isolated to keep the
-# Equiv-transport proof readable) and 4 named AQFT *interface* axioms for
-# the Type III₁ / Tomita–Takesaki analytic inputs beyond current Mathlib
+# Audit note (2026-06, +4 → 44): the LorentzSelection module (Open Problem
+# 3b skeleton) adds 4 named AQFT *interface* axioms for the Type III₁ /
+# Tomita–Takesaki analytic inputs beyond current Mathlib
 # (`record_presheaf_exists`, `boundary_reconstruction`,
-# `decoherence_functional_measure`, `screen_local_marginal`). The module's
-# headline theorem `evaluation_covariance` depends on NONE of the 4 AQFT
-# axioms — only on `actSection_consistent` + standard `Quot.sound` — i.e.
-# the covariance is proved structurally; the analytic axioms are inert
-# scaffolding marking the deferred linchpin hypotheses.
-AXIOM_BUDGET=45
+# `decoherence_functional_measure`, `screen_local_marginal`).  An earlier 5th
+# axiom (`actSection_consistent`, transport bookkeeping) was ELIMINATED in the
+# GPT-5.5-pro-review pass by upgrading the diamond action to an `OrderIso`
+# (inverse-monotonicity makes the consistency a theorem); `evaluation_covariance`
+# now depends only on standard axioms + that proved theorem, and on NONE of the
+# 4 AQFT axioms.  The FiniteModularTheory and FreeFieldRecord modules add ZERO
+# axioms (pure proof / standard analysis).
+AXIOM_BUDGET=44
 AXIOM_COUNT="$(grep -rhE '^axiom ' QIQTH/ | wc -l | tr -d ' ')"
 echo "[axiom-budget] raw axiom count: $AXIOM_COUNT (budget $AXIOM_BUDGET)"
 if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then

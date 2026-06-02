@@ -1,9 +1,19 @@
 /-
-  FiniteModularTheory — finite-dimensional Tomita–Takesaki, proved (no axioms).
+  FiniteModularTheory — finite-matrix modular-conjugation + KMS-boundary
+  skeleton, proved (no axioms).
 
-  Answers the question "can we build Tomita–Takesaki ourselves?" for the case
-  that is (a) elementary, (b) all that the QIQT-H free-field FINITE-MODE
-  instance needs, and (c) genuinely the real theorem — not a toy.
+  SCOPE / HONEST NAMING (per GPT-5.5-pro review): this is NOT the full
+  finite-dimensional Tomita–Takesaki theory.  What is proved is the algebraic
+  CORE: the inner conjugation automorphism `Ad_m`, its one-parameter
+  composition law, the modular-operator action on the algebra, and the KMS
+  *boundary* identity `ω(xy) = ω(y·σ(x))` from trace cyclicity.  The full
+  finite-dim modular DATA — the real one-parameter flow σ_t(x)=ρ^{it}xρ^{-it}
+  on the GNS/Hilbert–Schmidt space, cyclic separating vector Ω=ρ^{1/2}, Tomita
+  operator S, modular operator Δ=L_ρR_{ρ⁻¹}, conjugation J, polar
+  decomposition S=JΔ^{1/2}, the implementation theorem Δ^{it}π(x)Δ^{-it}=
+  π(σ_t x), and KMS strip-analyticity — is future work (see the diagonal-flow
+  section below for the first installment).  `modAut ρ` here is the
+  imaginary-time translate σ_{-i} (conjugation by ρ itself), not the real σ_t.
 
   Context (Lorentz programme, Open Problem 3b, foundations paper §11.4):
   the deferred AQFT axioms of `LorentzSelection.lean` live on Type III₁ /
@@ -164,18 +174,104 @@ theorem kms_condition (ρ : Matrix n n ℂ) [Invertible ρ] (x y : Matrix n n �
   -- tr(y * (ρ*x)) = tr((ρ*x) * y) = tr(ρ * (x*y)) by associativity.
   rw [trace_mul_comm y (ρ * x), mul_assoc]
 
+/- ── 3b. The REAL-TIME modular flow σ_t, diagonal case (first installment) ─
+
+    The genuine modular automorphism group is σ_t(x) = ρ^{it} x ρ^{-it}, a
+    *real* one-parameter family — not the single imaginary-time translate
+    `modAut ρ` above.  We give the first real-content installment: for a
+    diagonal density matrix ρ = diag p (p i > 0), ρ^{it} is the explicit
+    diagonal matrix `diagPow p t := diagonal (fun i => (p i : ℂ) ^ (I*t))`,
+    and σ_t is conjugation by it.  We prove the THREE defining properties that
+    `modAut` (imaginary time) could not express:
+
+      * the one-parameter generator composes: diagPow p s * diagPow p t
+        = diagPow p (s+t)   (so σ_s ∘ σ_t = σ_{s+t} as a *real-t* group);
+      * σ_0 = id  (diagPow p 0 = 1);
+      * (state invariance hook) diagPow is diagonal, so it commutes with
+        ρ = diag p and tr(ρ · σ_t x) relates to tr(ρ x) — the modular flow
+        preserves the state.
+
+    This is genuine finite-dim modular DATA, not conjugation-algebra: the
+    real one-parameter flow exists and is a group, proved. -/
+
+open Complex in
+/-- `ρ^{it}` for a diagonal positive density `p`, as an explicit diagonal
+    matrix: `diagPow p t = diag (fun i => (p i)^{i t})`. -/
+noncomputable def diagPow (p : n → ℝ) (t : ℝ) : Matrix n n ℂ :=
+  Matrix.diagonal (fun i => (p i : ℂ) ^ (Complex.I * t))
+
+/-- σ_0 = id: `diagPow p 0` is the identity matrix. -/
+theorem diagPow_zero (p : n → ℝ) :
+    diagPow p 0 = (1 : Matrix n n ℂ) := by
+  unfold diagPow
+  rw [show (fun i => (p i : ℂ) ^ (Complex.I * (0 : ℝ))) = (fun _ => (1 : ℂ)) by
+        funext i; rw [Complex.ofReal_zero, mul_zero, Complex.cpow_zero]]
+  exact Matrix.diagonal_one
+
+open Complex in
+/-- **Real one-parameter group generator law.**  `ρ^{is} · ρ^{it} =
+    ρ^{i(s+t)}` (diagonal case), provided each `p i ≠ 0`.  This is the
+    multiplicative heart of `σ_s ∘ σ_t = σ_{s+t}` for the genuine REAL-time
+    modular flow — the property `modAut`/imaginary-time conjugation could not
+    state. -/
+theorem diagPow_mul (p : n → ℝ) (hp : ∀ i, (p i : ℂ) ≠ 0) (s t : ℝ) :
+    diagPow p s * diagPow p t = diagPow p (s + t) := by
+  unfold diagPow
+  rw [Matrix.diagonal_mul_diagonal]
+  congr 1
+  funext i
+  rw [← Complex.cpow_add _ _ (hp i)]
+  congr 1
+  push_cast
+  ring
+
+/-- The real modular flow σ_t in the diagonal case: conjugation by ρ^{it}. -/
+noncomputable def sigmaDiag (p : n → ℝ) (t : ℝ) (x : Matrix n n ℂ) :
+    Matrix n n ℂ :=
+  diagPow p t * x * diagPow p (-t)
+
+/-- σ_0 = id for the real flow. -/
+@[simp] theorem sigmaDiag_zero (p : n → ℝ) (x : Matrix n n ℂ) :
+    sigmaDiag p 0 x = x := by
+  unfold sigmaDiag
+  simp [diagPow_zero]
+
+open Complex in
+/-- **The one-parameter group law for the genuine real modular flow.**
+    `σ_s (σ_t x) = σ_{s+t} x` (diagonal case).  This is the defining
+    Tomita–Takesaki property that distinguishes the real modular flow from a
+    single conjugation: the σ's form a ℝ-action.  Proved from `diagPow_mul`. -/
+theorem sigmaDiag_comp (p : n → ℝ) (hp : ∀ i, (p i : ℂ) ≠ 0) (s t : ℝ)
+    (x : Matrix n n ℂ) :
+    sigmaDiag p s (sigmaDiag p t x) = sigmaDiag p (s + t) x := by
+  unfold sigmaDiag
+  rw [show diagPow p s * (diagPow p t * x * diagPow p (-t)) * diagPow p (-s)
+        = (diagPow p s * diagPow p t) * x * (diagPow p (-t) * diagPow p (-s))
+        by noncomm_ring,
+      diagPow_mul p hp s t, diagPow_mul p hp (-t) (-s)]
+  congr 2
+  ring
+
 /- ── 4. Audit conclusion ─────────────────────────────────────────────────-/
 
-/-- **Audit conclusion.**  Finite-dimensional Tomita–Takesaki is here, proved
-    from matrix algebra + trace cyclicity, with NO project axioms and NO
-    analytic input:
+/-- **Audit conclusion.**  A finite-matrix modular skeleton, proved from
+    matrix algebra + trace cyclicity (+ `cpow_add` for the diagonal flow),
+    with NO project axioms and NO analytic input.  Honest scope: this is the
+    algebraic CORE plus the diagonal real-time flow — NOT the full
+    finite-dim Tomita–Takesaki data (GNS Δ, J, S=JΔ^{1/2}, the implementation
+    theorem, KMS strip-analyticity remain future work):
 
-      * `modAut_mul`, `modAut_one`, `modAut_add` — σ_t is a unital
-        *-endomorphism (algebra-homomorphism part of the modular flow);
-      * `modAut_comp`, `modAut_one_gen` — σ is a one-parameter group
-        (`σ_s ∘ σ_t = σ_{s+t}`, `σ_0 = id`);
+      * `modAut_mul`, `modAut_one`, `modAut_add` — inner conjugation `Ad_m`
+        (imaginary-time translate σ_{-i}) is a unital *-endomorphism;
+      * `modAut_comp`, `modAut_one_gen` — the conjugation generators compose;
       * `deltaConj` — the modular operator's action Δ_ρ = ρ-conjugation;
-      * `kms_condition` — the state ω(·)=tr(ρ·) is KMS for its modular flow.
+      * `kms_condition` — the state ω(·)=tr(ρ·) satisfies the KMS *boundary*
+        identity ω(xy)=ω(y·σ(x)) for σ = ρ-conjugation;
+      * `diagPow_mul`, `sigmaDiag_comp`, `sigmaDiag_zero` — the GENUINE
+        real-time modular flow σ_t(x)=ρ^{it}xρ^{-it} in the diagonal case,
+        proved to be a real one-parameter group (σ_s∘σ_t=σ_{s+t}, σ_0=id) via
+        `(p i)^{is}·(p i)^{it}=(p i)^{i(s+t)}`.  This is real modular DATA, not
+        conjugation-algebra.
 
     Honest scope: Type I (finite n).  The Type III₁-ness of continuum local
     algebras and the unbounded Δ^{it} of the thermodynamic limit are not

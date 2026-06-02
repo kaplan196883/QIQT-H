@@ -143,47 +143,90 @@ def selector {P : RecordPresheaf Diam} (lam : GlobalSection P) (D : Diam) : P.X 
     the covariance identity is proved here. -/
 
 /-- A Poincaré element acting covariantly on the record presheaf:
-    a poset automorphism `act` of diamonds together with a natural family of
-    sector isomorphisms `γ` commuting with restriction. -/
+    an **order isomorphism** `act` of diamonds (a poset automorphism whose
+    inverse is also monotone — this is what `≃o` provides, and what makes the
+    pushed-forward section provably consistent, with no transport axiom)
+    together with a natural family of sector isomorphisms `γ` commuting with
+    restriction.
+
+    Using `≃o` rather than a bare `≃` + a one-directional `mono` field is the
+    fix flagged by the GPT-5.5-pro review: a monotone *bijection* need not have
+    a monotone inverse, which is exactly why the earlier formulation had to
+    leave `actSection`'s consistency as an axiom.  An `OrderIso` carries
+    inverse-monotonicity for free, so the consistency is now *proved*. -/
 structure PoincareAction (P : RecordPresheaf Diam) where
-  /-- action on diamonds (a poset automorphism: preserves inclusion both ways) -/
-  act : Diam ≃ Diam
-  mono : ∀ {K D : Diam}, K ≤ D → act K ≤ act D
+  /-- action on diamonds: a poset automorphism (order isomorphism).  Using
+      `≃o` (not a bare `≃` + one-directional `mono`) gives inverse-monotonicity
+      for free, which is what makes the pushed-forward section's consistency
+      *provable* rather than axiomatic (GPT-5.5-pro review fix). -/
+  act : Diam ≃o Diam
   /-- the natural record-sector isomorphism `γ_g : X D → X (act D)` -/
   γ : ∀ D : Diam, P.X D ≃ P.X (act D)
   /-- **naturality**: `γ` commutes with restriction
       (`ρ ∘ γ = γ ∘ ρ`) — the equivariant-naturality square. -/
   natural : ∀ {K D : Diam} (h : K ≤ D) (x : P.X D),
-    P.restrict (mono h) (γ D x) = γ K (P.restrict h x)
+    P.restrict (act.monotone h) (γ D x) = γ K (P.restrict h x)
 
-/- **Push a global section forward by a Poincaré action: `g · λ`.**
+/-- Cast a record sector along an equality of diamonds (transport in the
+    presheaf fibre).  Isolated so the transport reasoning is contained. -/
+def castSector {P : RecordPresheaf Diam} {D D' : Diam} (h : D = D')
+    (x : P.X D) : P.X D' := h ▸ x
 
-    `(g · λ)_{gD} = γ_g (λ_D)`.  We define it as a section indexed by all
-    diamonds via `act.symm`, then prove it is again a consistent global
-    section (so the action is well-defined on `Γ(X)`).  The transport
-    bookkeeping for its consistency is the named axiom directly below. -/
+/-- `castSector` is heterogeneously equal to its argument. -/
+theorem castSector_heq {P : RecordPresheaf Diam} {D D' : Diam} (h : D = D')
+    (x : P.X D) : HEq (castSector (P := P) h x) x := by
+  subst h; rfl
 
-/-- Transport-bookkeeping for `actSection.consistent` (order-theoretic; named
-    so the `▸`-heavy proof does not clutter the skeleton).  Discharges to
-    `PoincareAction.natural` + `GlobalSection.consistent`; isolated as an
-    interface fact because the `Equiv`-transport rewriting is verbose. -/
-axiom actSection_consistent
-    {Diam : Type*} [Preorder Diam] {P : RecordPresheaf Diam}
-    (g : PoincareAction P) (lam : GlobalSection P)
+/-- **Restriction commutes with the diamond-cast (transport naturality of
+    `restrict`).**  Restricting a cast equals casting a restrict.  Proved by
+    `subst`-ing the two diamond equalities, after which both casts are the
+    identity and the two `restrict` proofs coincide by proof irrelevance. -/
+theorem restrict_cast {P : RecordPresheaf Diam} {K₀ D₀ K D : Diam}
+    (hD : D₀ = D) (hK : K₀ = K) (h : K ≤ D) (h₀ : K₀ ≤ D₀) (x : P.X D₀) :
+    P.restrict h (castSector hD x) = castSector hK (P.restrict h₀ x) := by
+  subst hD; subst hK; rfl
+
+/-- The pushed-forward section value at `D'`, before casting:
+    `γ_g (λ_{act.symm D'})`, living in `X (act (act.symm D'))`. -/
+private noncomputable def actVal
+    {P : RecordPresheaf Diam} (g : PoincareAction P) (lam : GlobalSection P)
+    (D' : Diam) : P.X (g.act (g.act.symm D')) :=
+  g.γ (g.act.symm D') (lam.val (g.act.symm D'))
+
+/-- **Consistency of the pushed-forward section — PROVED (no axiom).**
+
+    `restrict h ((g·λ).val D) = (g·λ).val K` for `K ≤ D`.  This is the fix
+    flagged by the GPT-5.5-pro review: with `act : ≃o`, `act.symm` is monotone
+    (`hKD`), so γ-naturality applies at the pulled-back diamonds and
+    λ-consistency closes it; the transport casts are handled cleanly by
+    `restrict_cast` (no HEq gymnastics, no axiom). -/
+theorem actSection_consistent
+    {P : RecordPresheaf Diam} (g : PoincareAction P) (lam : GlobalSection P)
     {K D : Diam} (h : K ≤ D) :
     P.restrict h
-      ((g.act.apply_symm_apply D) ▸ g.γ (g.act.symm D) (lam.val (g.act.symm D)))
-      = (g.act.apply_symm_apply K) ▸ g.γ (g.act.symm K) (lam.val (g.act.symm K))
+        (castSector (g.act.apply_symm_apply D) (actVal g lam D))
+      = castSector (g.act.apply_symm_apply K) (actVal g lam K) := by
+  -- act.symm is monotone (the ≃o inverse): pull `h` back to the source frame.
+  have hKD : g.act.symm K ≤ g.act.symm D := g.act.symm.monotone h
+  -- γ-naturality at `hKD`, then collapse the inner restrict by λ-consistency.
+  have hnat := g.natural hKD (lam.val (g.act.symm D))
+  rw [lam.consistent hKD] at hnat
+  -- hnat : P.restrict (g.act.monotone hKD) (γ (act.symm D) (λ (act.symm D)))
+  --        = γ (act.symm K) (λ (act.symm K))
+  -- Unfold actVal so the casts' arguments match, push `restrict h` through the
+  -- LHS cast via transport-naturality, then rewrite by hnat.
+  unfold actVal
+  rw [restrict_cast (g.act.apply_symm_apply D) (g.act.apply_symm_apply K)
+        h (g.act.monotone hKD) (g.γ (g.act.symm D) (lam.val (g.act.symm D))), hnat]
 
+/-- **Push a global section forward by a Poincaré action: `g · λ`** — now a
+    well-defined element of `Γ(X)`, with `actSection_consistent` as its
+    consistency field (PROVED, no axiom). -/
 noncomputable def actSection
     {P : RecordPresheaf Diam} (g : PoincareAction P) (lam : GlobalSection P) :
     GlobalSection P where
-  -- value at a diamond `D'`: pull `D'` back to `g.act.symm D'`, take the
-  -- section there, push forward by γ, and transport along `act (act.symm D') = D'`.
   val := fun D' =>
-    (g.act.apply_symm_apply D') ▸ g.γ (g.act.symm D') (lam.val (g.act.symm D'))
-  -- consistency follows from naturality of γ and consistency of λ; the
-  -- transport (`▸`) bookkeeping is isolated in `actSection_consistent`.
+    castSector (g.act.apply_symm_apply D') (actVal g lam D')
   consistent := fun h => actSection_consistent g lam h
 
 /- ── 6. THE COVARIANCE IDENTITY (the proved one-liner) ─────────────────
@@ -214,19 +257,18 @@ theorem evaluation_covariance
     {P : RecordPresheaf Diam} (g : PoincareAction P) (lam : GlobalSection P)
     (D : Diam) :
     selector (actSection g lam) (g.act D) = g.γ D (selector lam D) := by
-  -- Unfold the selector and the pushed-forward section.
-  show (actSection g lam).val (g.act D) = g.γ D (lam.val D)
-  show ((g.act.apply_symm_apply (g.act D)) ▸
-          g.γ (g.act.symm (g.act D)) (lam.val (g.act.symm (g.act D))))
-        = g.γ D (lam.val D)
-  -- The transport `▸` produces a term `HEq` to its argument; the argument, in
-  -- turn, equals the RHS once the index `act.symm (act D)` collapses to `D`.
-  -- So: cancel the transport via `eqRec_heq`, then close the heterogeneous
-  -- equality by rewriting the inner `act.symm (act D) = D`.
+  -- selector (actSection g lam) (act D) = (g·λ).val (act D)
+  --   = castSector _ (γ (act.symm (act D)) (λ (act.symm (act D)))).
+  -- Cancel the cast heterogeneously, then collapse `act.symm (act D) = D`.
+  show castSector (g.act.apply_symm_apply (g.act D)) (actVal g lam (g.act D))
+      = g.γ D (lam.val D)
   apply eq_of_heq
-  refine (eqRec_heq _ _).trans ?_
-  -- goal: HEq (g.γ (g.act.symm (g.act D)) (lam.val (g.act.symm (g.act D))))
-  --           (g.γ D (lam.val D))
+  refine (castSector_heq _ _).trans ?_
+  -- goal: HEq (actVal g lam (act D)) (γ D (λ D)), i.e.
+  --       HEq (γ (act.symm (act D)) (λ (act.symm (act D)))) (γ D (λ D));
+  -- collapses to rfl once `act.symm (act D) = D`.
+  show HEq (g.γ (g.act.symm (g.act D)) (lam.val (g.act.symm (g.act D))))
+           (g.γ D (lam.val D))
   rw [g.act.symm_apply_apply D]
 
 /- ── 7. Equivariant family over all of Γ(X) (req-5 hook) ───────────────
