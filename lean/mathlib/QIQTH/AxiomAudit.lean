@@ -228,13 +228,16 @@ namespace QIQTH.AxiomAudit
 -- polarization (was a named axiom; now discharged).
 #print axioms QIQTH.GleasonSelector.quadratic_nonneg_forall_linear_zero
 -- expected: standard only — the real-quadratic null core (PROVED).
+#print axioms QIQTH.GleasonSelector.psd_null_radical
+-- expected: standard ONLY — Cauchy–Schwarz null-radical, PROVED (was an axiom;
+-- now discharged via the real-quadratic discriminant at c=t and c=it).
 #print axioms QIQTH.GleasonSelector.support_of_positive_certain
--- expected: standard + psd_null_radical (ONLY) — the genuine Gleason bridge:
--- positivity + certainty ⇒ ray-support, via the Cauchy–Schwarz null-radical
--- argument (Q = I−P has w Q = 0 ⇒ off-ray terms die).
+-- expected: standard ONLY — the genuine Gleason bridge: positivity + certainty
+-- ⇒ ray-support, fully proved (no project axiom).
 #print axioms QIQTH.GleasonSelector.positive_ray_certain_forces_born
--- expected: standard + psd_null_radical (ONLY) — THE CAPSTONE: Born follows
--- from POSITIVITY + normalization + ray-certainty. One residual standard axiom.
+-- expected: standard ONLY — THE CAPSTONE: Born follows from POSITIVITY +
+-- normalization + ray-certainty, with NO project axiom. The finite-dim
+-- Gleason result, complete.
 #print axioms QIQTH.GleasonSelector.history_measure_is_born
 -- expected: standard only — μ on a decoherent record family = Born weights.
 #print axioms QIQTH.GleasonSelector.history_measure_total

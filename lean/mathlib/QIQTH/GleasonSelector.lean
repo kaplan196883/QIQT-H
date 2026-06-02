@@ -281,26 +281,80 @@ theorem quadratic_nonneg_forall_linear_zero {d a : ℝ} (hd : 0 ≤ d)
   have : a^2 * (d - 2*(d+1)) / (d+1)^2 < 0 := div_neg_of_neg_of_pos hnum hden
   linarith
 
-/-- **PSD-form null-radical lemma (Cauchy–Schwarz core).**
+/-- **PSD-form null-radical lemma (Cauchy–Schwarz core) — PROVED, no axiom.**
     Let `B : M → M → ℂ` be a sesquilinear form (linear in the 2nd slot,
     conjugate-symmetric) that is positive-semidefinite (`∀ A, NonnegC (B A A)`).
     If `B Q Q = 0` then `B Q X = 0` for all `X` (null vectors are in the
-    radical).  This is the standard "null vectors are in the radical" fact —
-    the only remaining named interface axiom of this module.  Its proof is the
-    real-quadratic discriminant argument: for every `c`,
-    `B (Q+cX) (Q+cX) ≥ 0`; expanding via first-slot conjugate-linearity gives
-    `2 Re(c·B Q X) + |c|² (B X X).re ≥ 0`; evaluating at `c = t` and `c = i t`
-    and applying the (PROVED, in this file) `quadratic_nonneg_forall_linear_zero`
-    forces `Re (B Q X) = Im (B Q X) = 0`.  The real-quadratic core is proved;
-    the remaining work is the complex re/im bookkeeping of the expansion, kept
-    as a named axiom so the module stays clean. -/
-axiom psd_null_radical {M : Type*} [AddCommGroup M] [Module ℂ M] (B : M → M → ℂ)
+    radical).  Proof: first-slot conjugate-linearity follows from `hconj` +
+    second-slot linearity; for every `c`, `B (Q+cX) (Q+cX) ≥ 0` expands to
+    `c·z + (star c)·(star z) + |c|²·(B X X)` with `z = B Q X`; evaluating at
+    `c = t` and `c = i t` (`t∈ℝ`) and applying the (proved)
+    `quadratic_nonneg_forall_linear_zero` forces `z.re = z.im = 0`. -/
+theorem psd_null_radical {M : Type*} [AddCommGroup M] [Module ℂ M] (B : M → M → ℂ)
     (hsesq_add : ∀ A X Y, B A (X + Y) = B A X + B A Y)
     (hsesq_smul : ∀ A (c : ℂ) X, B A (c • X) = c * B A X)
     (hconj : ∀ A X, B A X = star (B X A))
     (hpsd : ∀ A, NonnegC (B A A))
     {Q : M} (hQ : B Q Q = 0) :
-    ∀ X, B Q X = 0
+    ∀ X, B Q X = 0 := by
+  -- first-slot additivity and conjugate-linearity, derived from hconj.
+  have hadd1 : ∀ A Y Z, B (A + Y) Z = B A Z + B Y Z := by
+    intro A Y Z
+    rw [hconj (A + Y) Z, hsesq_add, star_add, ← hconj A Z, ← hconj Y Z]
+  have hsmul1 : ∀ (c : ℂ) A Z, B (c • A) Z = star c * B A Z := by
+    intro c A Z
+    rw [hconj (c • A) Z, hsesq_smul, star_mul', ← hconj A Z]
+  intro X
+  set z := B Q X with hz
+  -- the expansion of the diagonal at direction c.
+  have hquad : ∀ c : ℂ,
+      B (Q + c • X) (Q + c • X)
+        = (c * z + star c * star z) + (star c * c) * B X X := by
+    intro c
+    have e1 : B (Q + c • X) (Q + c • X)
+        = B (Q + c • X) Q + c * B (Q + c • X) X := by
+      rw [hsesq_add, hsesq_smul]
+    have e2 : B (Q + c • X) Q = star c * star z := by
+      rw [hadd1, hsmul1, hQ, zero_add, hconj X Q, ← hz]
+    have e3 : B (Q + c • X) X = z + star c * B X X := by
+      rw [hadd1, hsmul1, ← hz]
+    rw [e1, e2, e3]; ring
+  -- B X X is a nonneg real dX.
+  obtain ⟨dX, hdX0, hdXeq⟩ := hpsd X
+  -- real part: z.re = 0 (evaluate at c = t).
+  have hp : z.re = 0 := by
+    apply quadratic_nonneg_forall_linear_zero (d := dX) hdX0
+    intro t
+    obtain ⟨r, hr0, hr⟩ := hpsd (Q + (t : ℂ) • X)
+    rw [hquad, hdXeq] at hr
+    -- hr : (↑t·z + star ↑t · star z) + star ↑t·↑t·↑dX = ↑r
+    have hre := congrArg Complex.re hr
+    simp only [Complex.star_def, Complex.conj_ofReal, Complex.add_re,
+               Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im,
+               Complex.conj_re, Complex.conj_im, Complex.add_im,
+               Complex.mul_im, mul_zero, zero_mul, sub_zero, add_zero,
+               zero_add, mul_neg, neg_neg] at hre
+    nlinarith [hr0, hre, sq_nonneg t]
+  -- imaginary part: z.im = 0 (evaluate at c = i t).
+  have hq : z.im = 0 := by
+    have h0 : -z.im = 0 := by
+      apply quadratic_nonneg_forall_linear_zero (d := dX) hdX0
+      intro t
+      obtain ⟨r, hr0, hr⟩ := hpsd (Q + ((t : ℂ) * Complex.I) • X)
+      rw [hquad, hdXeq] at hr
+      have hre := congrArg Complex.re hr
+      simp only [Complex.star_def, map_mul, Complex.conj_ofReal, Complex.conj_I,
+                 Complex.add_re, Complex.mul_re, Complex.mul_im,
+                 Complex.ofReal_re, Complex.ofReal_im, Complex.conj_re,
+                 Complex.conj_im, Complex.I_re, Complex.I_im, Complex.add_im,
+                 Complex.neg_re, Complex.neg_im,
+                 mul_zero, zero_mul, sub_zero, add_zero, zero_add, mul_neg,
+                 neg_neg, neg_mul, mul_one] at hre
+      nlinarith [hr0, hre, sq_nonneg t]
+    linarith
+  -- z.re = z.im = 0 ⇒ z = 0.
+  have hz0 : z = 0 := by apply Complex.ext <;> simp [hp, hq]
+  exact hz0
 
 /-- **Hermiticity of a positive functional (PROVED, no axiom).**  A positive
     (on squares), complex-linear functional `w` satisfies
