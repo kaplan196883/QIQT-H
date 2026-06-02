@@ -229,6 +229,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LorentzSelectionStrong.pvm_isProbability
 -- expected: standard only — PVM weights are a genuine probability distribution
 -- (nonneg ∧ sum = 1) — closes the affine-vs-probability gap.
+-- Third pass: measure covariance DERIVED from unitarity (hcov now a theorem).
+#print axioms QIQTH.LorentzSelectionStrong.born_unitary_invariant
+-- expected: standard only — UNCONDITIONAL: ⟨Uψ|U E Uᴴ|Uψ⟩ = ⟨ψ|E|ψ⟩.
+#print axioms QIQTH.LorentzSelectionStrong.ubornω_covariant
+-- expected: standard only — measure covariance DERIVED from unitary transport
+-- (the previously-assumed hcov is now a consequence).
+#print axioms QIQTH.LorentzSelectionStrong.ubornω_pushforward_cell
+-- expected: standard only — per-cell pushforward, now unconditional on hcov.
+#print axioms QIQTH.LorentzSelectionStrong.ubornω_total_invariant
+-- expected: standard only — total-mass invariance, now unconditional on hcov.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

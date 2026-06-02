@@ -344,5 +344,87 @@ theorem pvm_isProbability {P : RecordPresheaf Diam} (B : PVMData P) (D : Diam) :
       @Finset.sum (P.X D) ℝ _ (@Finset.univ (P.X D) (B.fin D)) (bornωRe B.toBornData D) = 1 :=
   ⟨fun x => pvm_bornωRe_nonneg B D x, bornωRe_sum_one B.toBornData D⟩
 
+/- ── H. Measure covariance DERIVED from unitarity (hcov is now a theorem) ── -/
+
+/-- **The Born functional is unitary-invariant** — the unconditional core fact:
+    `⟨Uψ| U E Uᴴ |Uψ⟩ = ⟨ψ|E|ψ⟩` for `Uᴴ U = 1`.  This is a genuine theorem
+    (no hypotheses beyond unitarity), and it is the engine that lets us DERIVE
+    measure covariance instead of assuming it (`hcov` in the earlier theorems). -/
+theorem born_unitary_invariant {n : Type*} [Fintype n] [DecidableEq n]
+    (U : Matrix n n ℂ) (ψ : n → ℂ) (E : Matrix n n ℂ) (hU : Uᴴ * U = 1) :
+    born (U *ᵥ ψ) (U * E * Uᴴ) = born ψ E := by
+  have hUU : Uᴴ *ᵥ (U *ᵥ ψ) = ψ := by rw [mulVec_mulVec, hU, one_mulVec]
+  have e1 : (U * E * Uᴴ) *ᵥ (U *ᵥ ψ) = U *ᵥ (E *ᵥ ψ) := by
+    rw [mul_assoc, ← mulVec_mulVec, ← mulVec_mulVec, hUU]
+  unfold born
+  rw [e1, star_mulVec, dotProduct_mulVec, vecMul_vecMul, hU, vecMul_one]
+
+/-- **Uniform-dimension Born data**: the local Hilbert space has a single
+    dimension `d` across all diamonds (the boosted region carries an isomorphic
+    Hilbert space — the natural setting for a *unitary* Poincaré transport, with
+    no fibre-dimension casts).  Otherwise identical to `BornData`. -/
+structure UniformBornData (P : RecordPresheaf Diam) where
+  fin : ∀ D : Diam, Fintype (P.X D)
+  ddeq : ∀ D : Diam, DecidableEq (P.X D)
+  d : ℕ
+  ψ : Diam → Fin d → ℂ
+  ψ_unit : ∀ D : Diam, star (ψ D) ⬝ᵥ (ψ D) = 1
+  E : ∀ D : Diam, P.X D → Matrix (Fin d) (Fin d) ℂ
+  complete : ∀ D : Diam,
+    @Finset.sum (P.X D) _ _ (@Finset.univ (P.X D) (fin D)) (E D) = 1
+
+/-- The (real) Born weight for uniform-dimension data. -/
+noncomputable def ubornω {P : RecordPresheaf Diam} (B : UniformBornData P)
+    (D : Diam) (x : P.X D) : ℝ := (born (B.ψ D) (B.E D x)).re
+
+/-- **Unitary Poincaré transport**: the LOWER-LEVEL covariance the review asked
+    us to assume *instead of* `hcov`.  For each `g` and `D` a unitary `U g D`
+    implements the action — the state transforms `ψ_{gD} = U_{g,D} ψ_D` and the
+    effects conjugate `E_{gD}(γ_g x) = U_{g,D} (E_D x) U_{g,D}ᴴ`.  From THIS,
+    measure covariance is a theorem (`ubornω_covariant`), not a premise. -/
+structure UnitaryCovariance {G : Type*} [Group G] {P : RecordPresheaf Diam}
+    (A : GroupAction G P) (B : UniformBornData P) where
+  /-- the unitary implementing `g` on the local Hilbert space of `D` -/
+  U : G → Diam → Matrix (Fin B.d) (Fin B.d) ℂ
+  /-- unitarity -/
+  U_unit : ∀ (g : G) (D : Diam), (U g D)ᴴ * (U g D) = 1
+  /-- the state transforms unitarily -/
+  ψ_cov : ∀ (g : G) (D : Diam), B.ψ (A.act g D) = (U g D) *ᵥ (B.ψ D)
+  /-- the effects conjugate unitarily, intertwined with the sector map `γ` -/
+  E_cov : ∀ (g : G) (D : Diam) (x : P.X D),
+    B.E (A.act g D) (A.γ g D x) = (U g D) * (B.E D x) * (U g D)ᴴ
+
+/-- **Measure covariance is now a THEOREM** (`hcov` derived).  Given unitary
+    transport of the state and effects, the Born weights are covariant:
+    `ω_{gD}(γ_g x) = ω_D(x)`.  Proof: substitute the transport laws and apply
+    `born_unitary_invariant`.  This converts the previously-assumed `hcov` into a
+    consequence of lower-level unitary equivariance — the review's top ask. -/
+theorem ubornω_covariant {G : Type*} [Group G] {P : RecordPresheaf Diam}
+    {A : GroupAction G P} {B : UniformBornData P} (C : UnitaryCovariance A B)
+    (g : G) (D : Diam) (x : P.X D) :
+    ubornω B (A.act g D) (A.γ g D x) = ubornω B D x := by
+  unfold ubornω
+  rw [C.ψ_cov g D, C.E_cov g D x,
+    born_unitary_invariant (C.U g D) (B.ψ D) (B.E D x) (C.U_unit g D)]
+
+/-- **Per-cell pushforward covariance, now UNCONDITIONAL** (given unitary
+    transport): `ω_{gD}(y) = ω_D(γ_g⁻¹ y)`, with the measure-covariance input
+    discharged by `ubornω_covariant` rather than assumed. -/
+theorem ubornω_pushforward_cell {G : Type*} [Group G] {P : RecordPresheaf Diam}
+    {A : GroupAction G P} {B : UniformBornData P} (C : UnitaryCovariance A B)
+    (g : G) (D : Diam) (y : P.X (A.act g D)) :
+    ubornω B (A.act g D) y = ubornω B D ((A.γ g D).symm y) :=
+  measure_pushforward_cell A (ubornω B) (fun g D x => ubornω_covariant C g D x) g D y
+
+/-- **Total-mass invariance, now UNCONDITIONAL** (given unitary transport). -/
+theorem ubornω_total_invariant {G : Type*} [Group G] {P : RecordPresheaf Diam}
+    {A : GroupAction G P} {B : UniformBornData P} (C : UnitaryCovariance A B)
+    (g : G) (D : Diam) :
+    @Finset.sum (P.X (A.act g D)) ℝ _ (@Finset.univ (P.X (A.act g D)) (B.fin (A.act g D)))
+        (ubornω B (A.act g D))
+      = @Finset.sum (P.X D) ℝ _ (@Finset.univ (P.X D) (B.fin D)) (ubornω B D) :=
+  @measure_pushforward_total Diam _ G _ P A (ubornω B)
+    (fun g D x => ubornω_covariant C g D x) g D (B.fin D) (B.fin (A.act g D))
+
 end LorentzSelectionStrong
 end QIQTH
