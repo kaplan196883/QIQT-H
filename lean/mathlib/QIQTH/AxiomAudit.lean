@@ -217,6 +217,18 @@ namespace QIQTH.AxiomAudit
 -- (born_sum/born_one), tying the Lorentz strand to the axiom-free Gleason strand.
 #print axioms QIQTH.LorentzSelectionStrong.bornωRe_sum_one
 -- expected: standard only — real probability normalization derived.
+-- Second strengthening pass (γ-cocycle + per-cell measure + PVM positivity):
+#print axioms QIQTH.LorentzSelectionStrong.γ_cocycle_apply
+-- expected: standard only — pointwise group cocycle on fibres (CONSUMES IsRepMul).
+#print axioms QIQTH.LorentzSelectionStrong.measure_pushforward_cell
+-- expected: standard only — per-cell (not just total) measure covariance.
+#print axioms QIQTH.LorentzSelectionStrong.born_posSemidef_nonneg
+-- expected: standard only — ⟨ψ|E|ψ⟩ ≥ 0 for PSD E (matrix-adjoint positivity).
+#print axioms QIQTH.LorentzSelectionStrong.pvm_bornωRe_nonneg
+-- expected: standard only — PVM Born weights are nonnegative.
+#print axioms QIQTH.LorentzSelectionStrong.pvm_isProbability
+-- expected: standard only — PVM weights are a genuine probability distribution
+-- (nonneg ∧ sum = 1) — closes the affine-vs-probability gap.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

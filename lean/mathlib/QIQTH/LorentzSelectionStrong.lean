@@ -48,6 +48,8 @@
 import QIQTH.LorentzSelection
 import QIQTH.GleasonSelector
 import Mathlib.Data.Complex.BigOperators
+import Mathlib.Analysis.Complex.Order
+import Mathlib.LinearAlgebra.Matrix.PosDef
 import Mathlib.Tactic
 
 namespace QIQTH
@@ -57,6 +59,7 @@ open LorentzSelection
 open GleasonSelector
 open Matrix
 open scoped BigOperators
+open scoped ComplexOrder
 
 variable {Diam : Type*} [Preorder Diam]
 
@@ -150,6 +153,48 @@ theorem act_mul_diam {G : Type*} [Group G] {P : RecordPresheaf Diam}
     (A.act (g₁ * g₂)) D = (A.act g₂) ((A.act g₁) D) := by
   rw [A.act_mul]; rfl
 
+/- ── B′. The γ-cocycle: a genuine representation on the fibres ──────────── -/
+
+/-- Transport a record sector along an equality of diamonds (fibre cast).  This
+    is the cast the cocycle laws need to compare `γ` over equal-but-not-syntactic
+    diamonds (`act (g₁*g₂) D` vs `act g₂ (act g₁ D)`). -/
+def fibCast {P : RecordPresheaf Diam} {D D' : Diam} (h : D = D') :
+    P.X D ≃ P.X D' := Equiv.cast (congrArg P.X h)
+
+/-- **Identity cocycle law** (`γ 1 = id`, modulo the diamond cast).  This is the
+    γ-component of "being a representation," absent from the bare `GroupAction`
+    (where the group laws only acted on the base poset). -/
+def IsRepOne {G : Type*} [Group G] {P : RecordPresheaf Diam}
+    (A : GroupAction G P) : Prop :=
+  ∀ D : Diam, A.γ 1 D = fibCast (act_one_diam A D).symm
+
+/-- **Composition cocycle law** (`γ (g₁*g₂) = γ g₂ ∘ γ g₁`, modulo the diamond
+    cast).  Together with `IsRepOne` this upgrades the family `{γ g}` from "a
+    natural equivalence per element" to a genuine action on the record-sector
+    fibres — the gap the review flagged. -/
+def IsRepMul {G : Type*} [Group G] {P : RecordPresheaf Diam}
+    (A : GroupAction G P) : Prop :=
+  ∀ (g₁ g₂ : G) (D : Diam),
+    A.γ (g₁ * g₂) D
+      = ((A.γ g₁ D).trans (A.γ g₂ ((A.act g₁) D))).trans
+          (fibCast (act_mul_diam A g₁ g₂ D).symm)
+
+/-- **Identity cocycle, pointwise** — CONSUMES `IsRepOne`. -/
+theorem γ_rep_one_apply {G : Type*} [Group G] {P : RecordPresheaf Diam}
+    (A : GroupAction G P) (hone : IsRepOne A) (D : Diam) (x : P.X D) :
+    A.γ 1 D x = fibCast (act_one_diam A D).symm x := by
+  rw [hone D]
+
+/-- **Composition cocycle, pointwise** — CONSUMES `IsRepMul`: applying `g₁` then
+    `g₂` to a sector equals applying `g₁*g₂` (up to the diamond cast).  This is
+    the representation property at the level of records. -/
+theorem γ_cocycle_apply {G : Type*} [Group G] {P : RecordPresheaf Diam}
+    (A : GroupAction G P) (hmul : IsRepMul A) (g₁ g₂ : G) (D : Diam) (x : P.X D) :
+    A.γ (g₁ * g₂) D x
+      = fibCast (act_mul_diam A g₁ g₂ D).symm
+          ((A.γ g₂ ((A.act g₁) D)) (A.γ g₁ D x)) := by
+  rw [hmul g₁ g₂ D]; rfl
+
 /- ── C. Equivariant measure: covariance is consumed, not ignored ───────── -/
 
 /-- **A g-covariant weight has g-invariant total mass.**  This theorem
@@ -164,6 +209,18 @@ theorem measure_pushforward_total {G : Type*} [Group G] {P : RecordPresheaf Diam
     ∑ y : P.X (A.act g D), ω (A.act g D) y = ∑ x : P.X D, ω D x := by
   rw [← Equiv.sum_comp (A.γ g D) (ω (A.act g D))]
   exact Finset.sum_congr rfl (fun x _ => hcov g D x)
+
+/-- **Per-cell measure covariance** (the stronger, non-coarse statement the
+    review asked for).  The weight on a sector `y` over the boosted diamond
+    equals the weight on its pre-image sector over the original diamond — not
+    merely equal total mass.  CONSUMES `hcov` (at the pulled-back point). -/
+theorem measure_pushforward_cell {G : Type*} [Group G] {P : RecordPresheaf Diam}
+    (A : GroupAction G P) (ω : ∀ D : Diam, P.X D → ℝ)
+    (hcov : ∀ (g : G) (D : Diam) (x : P.X D), ω (A.act g D) (A.γ g D x) = ω D x)
+    (g : G) (D : Diam) (y : P.X (A.act g D)) :
+    ω (A.act g D) y = ω D ((A.γ g D).symm y) := by
+  have h := hcov g D ((A.γ g D).symm y)
+  rwa [Equiv.apply_symm_apply] at h
 
 /- ── G. The Born link: normalization is DERIVED, not assumed ───────────── -/
 
@@ -230,13 +287,62 @@ theorem bornωRe_sum_one {P : RecordPresheaf Diam} (B : BornData P) (D : Diam) :
     (Complex.re_sum (@Finset.univ (P.X D) (B.fin D)) (fun x => bornω B D x)).symm
   rw [hre, hc, Complex.one_re]
 
-/-  Honest scope note (nonnegativity).  The companion fact `0 ≤ bornωRe B D x`
-    when `E_x^D` is a projection is the standard PVM positivity
-    `⟨ψ|P|ψ⟩ = ‖Pψ‖² ≥ 0`; it is NOT mechanized here (it needs the matrix-adjoint
-    `star ψ ⬝ᵥ (Pᴴ P *ᵥ ψ) = star (P *ᵥ ψ) ⬝ᵥ (P *ᵥ ψ)` plus `dotProduct`-self
-    nonnegativity).  Stated plainly so "full strengthening" is not over-read: the
-    normalization lock (`bornω_sum_one`) is the load-bearing Born-link theorem and
-    IS mechanized; the nonnegativity adjunct is left as a routine future lemma. -/
+/- ── G′. PVM positivity: weights are genuine PROBABILITIES ─────────────── -/
+
+/-- A Hermitian idempotent (orthogonal projection) is positive semidefinite:
+    `P = Pᴴ P`, so `P = Eᴴ*E`-form. -/
+theorem proj_posSemidef {n : Type*} [Fintype n] [DecidableEq n]
+    {E : Matrix n n ℂ} (hh : Eᴴ = E) (hi : E * E = E) : E.PosSemidef := by
+  have he : Eᴴ * E = E := by rw [hh]; exact hi
+  have hp := posSemidef_conjTranspose_mul_self E
+  rwa [he] at hp
+
+/-- **Born value of a PSD effect is nonnegative** (and real): `0 ≤ ⟨ψ|E|ψ⟩` in
+    `ℂ`.  This is the matrix-adjoint positivity the review asked to mechanize,
+    obtained from `PosSemidef.dotProduct_mulVec_nonneg`. -/
+theorem born_posSemidef_nonneg {n : Type*} [Fintype n] [DecidableEq n]
+    (ψ : n → ℂ) {E : Matrix n n ℂ} (hE : E.PosSemidef) :
+    0 ≤ born ψ E := by
+  unfold born
+  exact hE.dotProduct_mulVec_nonneg ψ
+
+/-- **A projection-valued measure realizing the net's weights.**  Strengthens
+    `BornData` with the requirement that every effect is a Hermitian projection
+    (an orthogonal PVM element), the constraint the review flagged as missing —
+    without it, `complete : ∑ E = 1` permits signed/complex "weights." -/
+structure PVMData (P : RecordPresheaf Diam) extends BornData P where
+  /-- each effect is self-adjoint -/
+  proj_herm : ∀ (D : Diam) (x : P.X D), (E D x)ᴴ = E D x
+  /-- each effect is idempotent (a projection) -/
+  proj_idem : ∀ (D : Diam) (x : P.X D), (E D x) * (E D x) = E D x
+
+/-- **Born weights of a PVM are nonnegative** — the missing half of "these are
+    probabilities."  `0 ≤ bornωRe`, from projection ⇒ PSD ⇒ `⟨ψ|E|ψ⟩ ≥ 0`. -/
+theorem pvm_bornωRe_nonneg {P : RecordPresheaf Diam} (B : PVMData P)
+    (D : Diam) (x : P.X D) : 0 ≤ bornωRe B.toBornData D x := by
+  have hps : (B.E D x).PosSemidef := proj_posSemidef (B.proj_herm D x) (B.proj_idem D x)
+  have hnn : (0 : ℂ) ≤ born (B.ψ D) (B.E D x) := born_posSemidef_nonneg (B.ψ D) hps
+  unfold bornωRe bornω
+  simpa using (Complex.nonneg_iff.mp hnn).1
+
+/-- **Born weights of a PVM are real** (zero imaginary part) — so `bornωRe`
+    loses no information. -/
+theorem pvm_bornω_im_zero {P : RecordPresheaf Diam} (B : PVMData P)
+    (D : Diam) (x : P.X D) : (bornω B.toBornData D x).im = 0 := by
+  have hps : (B.E D x).PosSemidef := proj_posSemidef (B.proj_herm D x) (B.proj_idem D x)
+  have hnn : (0 : ℂ) ≤ born (B.ψ D) (B.E D x) := born_posSemidef_nonneg (B.ψ D) hps
+  unfold bornω
+  exact ((Complex.nonneg_iff.mp hnn).2).symm
+
+/-- **PVM weights form a finite probability distribution.**  Combining
+    `pvm_bornωRe_nonneg` (nonneg) with `bornωRe_sum_one` (sums to 1): the Born
+    lock now yields genuine PROBABILITY normalization, not merely an affine
+    functional summing to 1 — the review's single highest-value gap, closed.  (A
+    `PMF` term is then immediate from these two facts.) -/
+theorem pvm_isProbability {P : RecordPresheaf Diam} (B : PVMData P) (D : Diam) :
+    (∀ x : P.X D, 0 ≤ bornωRe B.toBornData D x) ∧
+      @Finset.sum (P.X D) ℝ _ (@Finset.univ (P.X D) (B.fin D)) (bornωRe B.toBornData D) = 1 :=
+  ⟨fun x => pvm_bornωRe_nonneg B D x, bornωRe_sum_one B.toBornData D⟩
 
 end LorentzSelectionStrong
 end QIQTH
