@@ -374,6 +374,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ⋆ THE BOUNDED-BOREL FC ∫f dE: ⟪(∫f dE)x,y⟫ = B_f(x,y).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.intBorel_norm_le
 -- expected: standard only — operator norm bound ‖∫f dE‖ ≤ 2C.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_const
+-- expected: standard only — B_(const c)(x,y) = c⟪x,y⟫ (polarization of ‖·‖²).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.intBorel_const
+-- expected: standard only — orientation: intBorel(const c) = conj(c)•1 (the Riesz op is conjugated).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_const
+-- expected: standard only — oriented FC is unital: boundedFC(const c) = c•1, so Φ(1)=1.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

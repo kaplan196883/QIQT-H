@@ -958,6 +958,67 @@ theorem intBorel_norm_le {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (hC0 : 0
   · rw [pow_two] at hkey
     exact le_of_mul_le_mul_right hkey h0
 
+/- ── Orientation check + correctly-oriented FC (E2c follow-up) ─────────────-/
+
+/-- `D_f` of a CONSTANT function: `∫ c dμ_z = ‖z‖²·c`. -/
+theorem diagInt_const (c : ℂ) (z : H) :
+    P.diagInt (fun _ => c) z = (‖z‖ : ℂ) ^ 2 * c := by
+  rw [diagInt, MeasureTheory.integral_const, MeasureTheory.measureReal_def,
+    P.scalarMeasure_univ, ENNReal.toReal_ofReal (sq_nonneg _), Complex.real_smul]
+  push_cast; ring
+
+/-- `B_f` of a CONSTANT function is `c·⟪x,y⟫` (polarization of `‖·‖²` = `⟪x,y⟫`).
+    Note this is conjugate-linear in `x` — confirming that the Riesz operator
+    `intBorel` is the *conjugated* calculus (see `intBorel_const`). -/
+theorem bilinDiag_const (c : ℂ) (x y : H) :
+    P.bilinDiag (fun _ => c) x y = c * inner ℂ x y := by
+  have e : ∀ u : H, (‖u‖ : ℂ) ^ 2 = inner ℂ u u :=
+    fun u => (inner_self_eq_norm_sq_to_K u).symm
+  have hbr : (‖x + y‖ : ℂ) ^ 2 - (‖x - y‖ : ℂ) ^ 2
+      + Complex.I * (‖Complex.I • x + y‖ : ℂ) ^ 2
+      - Complex.I * (‖Complex.I • x - y‖ : ℂ) ^ 2 = 4 * inner ℂ x y := by
+    rw [e, e, e, e]
+    simp only [inner_add_left, inner_add_right, inner_sub_left, inner_sub_right,
+      inner_smul_left, inner_smul_right, Complex.conj_I]
+    linear_combination (2 * (inner ℂ y x - inner ℂ x y)) * Complex.I_sq
+  rw [bilinDiag, P.diagInt_const, P.diagInt_const, P.diagInt_const, P.diagInt_const]
+  linear_combination (4⁻¹ * c) * hbr
+
+/-- **Orientation diagnosis (GPT-5.5-pro check):** the Riesz operator satisfies
+    `intBorel (const c) = conj(c)·1`, NOT `c·1` — because `⟪(intBorel) x, y⟫ = B_f(x,y)`
+    puts the operator on the *first* (conjugate-linear) inner slot.  Hence the
+    correctly-oriented bounded-Borel calculus is the ADJOINT, `boundedFC` below. -/
+theorem intBorel_const (c : ℂ) :
+    P.intBorel (f := fun _ => c) measurable_const (norm_nonneg c) (fun _ => le_rfl)
+      = (starRingEnd ℂ) c • (1 : H →L[ℂ] H) := by
+  refine ContinuousLinearMap.ext (fun y => ?_)
+  refine ext_inner_right ℂ (fun x => ?_)
+  rw [P.inner_intBorel, P.bilinDiag_const, ContinuousLinearMap.smul_apply,
+    ContinuousLinearMap.one_apply, inner_smul_left, starRingEnd_self_apply]
+
+/-- **The correctly-oriented bounded-Borel functional calculus** `Φ(f) := (∫f dE)*`
+    (the adjoint of the Riesz operator), so that `⟪x, Φ(f) y⟫ = B_f(x,y) = ∫ f dμ_{x,y}`
+    with the operator on the SECOND slot — the standard convention. -/
+noncomputable def boundedFC {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, ‖f ω‖ ≤ C) : H →L[ℂ] H :=
+  ContinuousLinearMap.adjoint (P.intBorel hf hC0 hC)
+
+/-- Defining property of the oriented FC: `⟪x, Φ(f) y⟫ = B_f(x,y)`. -/
+theorem inner_boundedFC {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, ‖f ω‖ ≤ C) (x y : H) :
+    inner ℂ x ((P.boundedFC hf hC0 hC) y) = P.bilinDiag f x y := by
+  rw [boundedFC, ContinuousLinearMap.adjoint_inner_right, P.inner_intBorel]
+
+/-- **Unitality / constant rule:** `Φ(const c) = c·1`.  In particular `Φ(1) = 1`,
+    so the oriented calculus is unital (a genuine functional calculus). -/
+theorem boundedFC_const (c : ℂ) :
+    P.boundedFC (f := fun _ => c) measurable_const (norm_nonneg c) (fun _ => le_rfl)
+      = c • (1 : H →L[ℂ] H) := by
+  refine ContinuousLinearMap.ext (fun y => ?_)
+  refine ext_inner_left ℂ (fun x => ?_)
+  rw [P.inner_boundedFC, P.bilinDiag_const, ContinuousLinearMap.smul_apply,
+    ContinuousLinearMap.one_apply, inner_smul_right]
+
 end ProjectionValuedMeasure
 
 /- ── Phase-1 analytic TARGETS (named, sound on `ProjectionValuedMeasure`) ──
