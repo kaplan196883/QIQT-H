@@ -159,5 +159,93 @@ theorem witness_covariantProbability :
     CovariantProbability Awit Bwit.toUniformBornData :=
   covariantProbability_of_unitaryPVM Cwit
 
+/- ── Witness B: a NON-TRIVIAL group acting non-trivially on diamonds ────── -/
+
+/-  The first witness used the trivial group.  Here the acting group genuinely
+    moves the geometry: two causal diamonds with the *indiscrete* preorder (so
+    every permutation is an order-isomorphism), and `G = Perm` permuting them.
+    The record/Born data is homogeneous (the same PVM at every diamond), so the
+    covariant-probability theorems hold over a non-trivial Poincaré-style orbit —
+    exercising the covariance machinery, not just the probability content.  Still
+    rational (no √2), still axiom-free. -/
+
+/-- Two causal diamonds. -/
+inductive D2 | d0 | d1
+deriving DecidableEq, Fintype
+
+/-- The indiscrete preorder: every diamond is `≤` every diamond, so every
+    bijection of `D2` is an order-isomorphism (the geometry imposes no order
+    constraint a permutation could violate). -/
+instance : Preorder D2 where
+  le _ _ := True
+  le_refl _ := trivial
+  le_trans _ _ _ _ _ := trivial
+
+/-- Lift a permutation of diamonds to an order-isomorphism (free, since `≤` is
+    indiscrete). -/
+def actD (g : Equiv.Perm D2) : D2 ≃o D2 where
+  toEquiv := g
+  map_rel_iff' := Iff.rfl
+
+/-- Record presheaf over the two diamonds: each carries a `Fin 2` fibre. -/
+@[reducible] def Prec2 : RecordPresheaf D2 where
+  X := fun _ => Fin 2
+  restrict := fun _ x => x
+  restrict_id := fun _ => rfl
+  restrict_comp := fun _ _ _ => rfl
+
+/-- Homogeneous PVM Born data: the same state and PVM at every diamond. -/
+@[reducible] noncomputable def Bwit2 : UniformPVMData Prec2 where
+  fin := fun _ => inferInstance
+  ddeq := fun _ => inferInstance
+  d := 2
+  ψ := fun _ => psi
+  ψ_unit := fun _ => psi_unit
+  E := fun _ i => Eproj i
+  complete := fun _ => Eproj_complete
+  proj_herm := fun _ i => Eproj_herm i
+  proj_idem := fun _ i => Eproj_idem i
+
+/-- The acting group: all permutations of the two diamonds. -/
+abbrev G2 := Equiv.Perm D2
+
+/-- `Perm D2` is abelian (two elements), checked by `decide`. -/
+theorem perm_d2_comm (g₁ g₂ : Equiv.Perm D2) : g₁ * g₂ = g₂ * g₁ := by
+  revert g₁ g₂; decide
+
+/-- The group action: `g` permutes diamonds; the fibres and records are carried
+    identically (`γ = refl`). -/
+def Awit2 : GroupAction G2 Prec2 where
+  act := actD
+  γ := fun _ _ => Equiv.refl (Fin 2)
+  natural := by intros; rfl
+  act_one := by ext y; rfl
+  act_mul := fun g₁ g₂ => by
+    ext y
+    show (g₁ * g₂) y = g₂ (g₁ y)
+    rw [perm_d2_comm g₁ g₂]; rfl
+
+/-- The unitary covariance: the homogeneous data is carried with `U = 1`. -/
+noncomputable def Cwit2 : UnitaryCovariance Awit2 Bwit2.toUniformBornData where
+  U := fun _ _ => (1 : Matrix (Fin 2) (Fin 2) ℂ)
+  U_unit := fun _ _ => by rw [Matrix.conjTranspose_one, Matrix.one_mul]
+  ψ_cov := fun _ _ => by simp [Awit2, Bwit2, one_mulVec]
+  E_cov := fun _ _ i => by
+    simp only [Awit2, Bwit2, Equiv.refl_apply, Matrix.conjTranspose_one,
+      Matrix.one_mul, Matrix.mul_one]
+
+/-- **The group acts NON-trivially on the geometry**: the swap of the two
+    diamonds moves `d0` to `d1`.  (Contrast the trivial-group Witness A.) -/
+theorem witness2_action_nontrivial :
+    (Awit2.act (Equiv.swap D2.d0 D2.d1)) D2.d0 = D2.d1 := by
+  simp [Awit2, actD]
+
+/-- **Witness B capstone**: a concrete `CovariantProbability` for a NON-trivial
+    group acting non-trivially on the diamond geometry — the covariance machinery
+    is exercised over a genuine orbit, not just the probability content. -/
+theorem witness2_covariantProbability :
+    CovariantProbability Awit2 Bwit2.toUniformBornData :=
+  covariantProbability_of_unitaryPVM Cwit2
+
 end LorentzWitness
 end QIQTH

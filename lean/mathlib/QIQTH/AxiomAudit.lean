@@ -271,6 +271,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LorentzWitness.witness_nondegenerate
 -- expected: standard only — its Born weights are 9/25, 16/25 ∈ (0,1): a genuine
 -- spread 2-outcome distribution, not a point mass / one-point fibre.
+-- Witness B: a NON-trivial group acting non-trivially on the diamond geometry.
+#print axioms QIQTH.LorentzWitness.witness2_action_nontrivial
+-- expected: standard only — the swap moves diamond d0 to d1 (non-trivial orbit).
+#print axioms QIQTH.LorentzWitness.witness2_covariantProbability
+-- expected: standard only — covariant probability over a non-trivial group orbit
+-- (exercises the covariance machinery, not just the probability content).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
