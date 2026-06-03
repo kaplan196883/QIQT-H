@@ -368,6 +368,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — E2b linearity in second slot B_f(x,c·y) = c·B_f(x,y).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.diagInt_norm_le
 -- expected: standard only — E2c diagonal bound ‖D_f x‖ ≤ C‖x‖².
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_norm_le
+-- expected: standard only — E2c product bound ‖B_f(x,y)‖ ≤ 2C‖x‖‖y‖.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.inner_intBorel
+-- expected: standard only — ⋆ THE BOUNDED-BOREL FC ∫f dE: ⟪(∫f dE)x,y⟫ = B_f(x,y).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

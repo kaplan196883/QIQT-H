@@ -842,6 +842,105 @@ theorem bilinDiag_smul_right {f : Ω → ℂ} (hf : Measurable f) {C : ℝ}
     intro w; rw [P.bilinDiag_conj_symm]; simp only [Complex.conj_conj]
   rw [key (c • y), P.bilinDiag_smul_left hfc hCc c y x, map_mul, Complex.conj_conj, key y]
 
+/-- `B_f(x, 0) = 0`. -/
+theorem bilinDiag_zero_right (f : Ω → ℂ) (x : H) : P.bilinDiag f x 0 = 0 := by
+  simp only [bilinDiag, add_zero, sub_zero]; ring
+
+/-- **Quadratic bound** `‖B_f(x,y)‖ ≤ C(‖x‖²+‖y‖²)` (polarization + diagonal bound
+    + two parallelogram laws). -/
+theorem bilinDiag_norm_le_add {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, ‖f ω‖ ≤ C) (x y : H) :
+    ‖P.bilinDiag f x y‖ ≤ C * (‖x‖ ^ 2 + ‖y‖ ^ 2) := by
+  have hb : ∀ z, ‖P.diagInt f z‖ ≤ C * ‖z‖ ^ 2 := fun z => P.diagInt_norm_le hf hC0 hC z
+  have hpar1 : ‖x + y‖ ^ 2 + ‖x - y‖ ^ 2 = 2 * (‖x‖ ^ 2 + ‖y‖ ^ 2) :=
+    parallelogram_law_with_norm (𝕜 := ℂ) x y
+  have hpar2 : ‖Complex.I • x + y‖ ^ 2 + ‖Complex.I • x - y‖ ^ 2 = 2 * (‖x‖ ^ 2 + ‖y‖ ^ 2) := by
+    rw [parallelogram_law_with_norm (𝕜 := ℂ) (Complex.I • x) y, norm_smul, Complex.norm_I, one_mul]
+  set a := P.diagInt f (x + y)
+  set b := P.diagInt f (x - y)
+  set c := P.diagInt f (Complex.I • x + y)
+  set d := P.diagInt f (Complex.I • x - y)
+  have htri : ‖a - b + Complex.I * c - Complex.I * d‖ ≤ ‖a‖ + ‖b‖ + ‖c‖ + ‖d‖ := by
+    calc ‖a - b + Complex.I * c - Complex.I * d‖
+        ≤ ‖a - b + Complex.I * c‖ + ‖Complex.I * d‖ := norm_sub_le _ _
+      _ ≤ ‖a - b‖ + ‖Complex.I * c‖ + ‖Complex.I * d‖ := by gcongr; exact norm_add_le _ _
+      _ ≤ ‖a‖ + ‖b‖ + ‖Complex.I * c‖ + ‖Complex.I * d‖ := by gcongr; exact norm_sub_le _ _
+      _ = ‖a‖ + ‖b‖ + ‖c‖ + ‖d‖ := by
+          rw [norm_mul, norm_mul, Complex.norm_I, one_mul, one_mul]
+  rw [bilinDiag, norm_mul, show ‖(4 : ℂ)⁻¹‖ = 4⁻¹ from by norm_num]
+  have hsum : ‖a‖ + ‖b‖ + ‖c‖ + ‖d‖ ≤ C * (4 * (‖x‖ ^ 2 + ‖y‖ ^ 2)) := by
+    have := hb (x + y); have := hb (x - y); have := hb (Complex.I • x + y)
+    have := hb (Complex.I • x - y)
+    nlinarith [hb (x + y), hb (x - y), hb (Complex.I • x + y), hb (Complex.I • x - y),
+      hpar1, hpar2]
+  calc 4⁻¹ * ‖a - b + Complex.I * c - Complex.I * d‖
+      ≤ 4⁻¹ * (‖a‖ + ‖b‖ + ‖c‖ + ‖d‖) := by gcongr
+    _ ≤ 4⁻¹ * (C * (4 * (‖x‖ ^ 2 + ‖y‖ ^ 2))) := by gcongr
+    _ = C * (‖x‖ ^ 2 + ‖y‖ ^ 2) := by ring
+
+/-- **Product (bilinear) bound** `‖B_f(x,y)‖ ≤ 2C·‖x‖·‖y‖` — the bound feeding
+    `LinearMap.mkContinuous₂`.  Proof: normalize to unit vectors and apply the
+    quadratic bound (giving `‖u‖²+‖v‖² = 2`). -/
+theorem bilinDiag_norm_le {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, ‖f ω‖ ≤ C) (x y : H) :
+    ‖P.bilinDiag f x y‖ ≤ 2 * C * ‖x‖ * ‖y‖ := by
+  rcases eq_or_ne x 0 with hx | hx
+  · simp [hx, P.bilinDiag_zero_left]
+  rcases eq_or_ne y 0 with hy | hy
+  · simp [hy, P.bilinDiag_zero_right]
+  have hxpos : 0 < ‖x‖ := norm_pos_iff.mpr hx
+  have hypos : 0 < ‖y‖ := norm_pos_iff.mpr hy
+  set u := (‖x‖⁻¹ : ℂ) • x with hu
+  set v := (‖y‖⁻¹ : ℂ) • y with hv
+  have hxu : x = (‖x‖ : ℂ) • u := by
+    rw [hu, smul_smul, mul_inv_cancel₀ (by exact_mod_cast hxpos.ne'), one_smul]
+  have hyv : y = (‖y‖ : ℂ) • v := by
+    rw [hv, smul_smul, mul_inv_cancel₀ (by exact_mod_cast hypos.ne'), one_smul]
+  have hofr : ∀ z : H, ‖(‖z‖ : ℂ)‖ = ‖z‖ := fun z => by simp
+  have hnu : ‖u‖ = 1 := by
+    rw [hu, norm_smul, norm_inv, hofr, inv_mul_cancel₀ hxpos.ne']
+  have hnv : ‖v‖ = 1 := by
+    rw [hv, norm_smul, norm_inv, hofr, inv_mul_cancel₀ hypos.ne']
+  have hdecomp : P.bilinDiag f x y = (‖x‖ : ℂ) * ((‖y‖ : ℂ) * P.bilinDiag f u v) := by
+    conv_lhs => rw [hxu, hyv]
+    rw [P.bilinDiag_smul_left hf hC, P.bilinDiag_smul_right hf hC, Complex.conj_ofReal]
+  rw [hdecomp, norm_mul, norm_mul, hofr, hofr]
+  have hquad : ‖P.bilinDiag f u v‖ ≤ C * (‖u‖ ^ 2 + ‖v‖ ^ 2) :=
+    P.bilinDiag_norm_le_add hf hC0 hC u v
+  rw [hnu, hnv] at hquad
+  have hq2 : ‖P.bilinDiag f u v‖ ≤ 2 * C := by nlinarith [hquad]
+  calc ‖x‖ * (‖y‖ * ‖P.bilinDiag f u v‖)
+      ≤ ‖x‖ * (‖y‖ * (2 * C)) := by gcongr
+    _ = 2 * C * ‖x‖ * ‖y‖ := by ring
+
+/-- The polarized form as a **bundled sesquilinear `LinearMap`** `H →ₗ⋆[ℂ] H →ₗ[ℂ] ℂ`
+    (conjugate-linear in the first slot, linear in the second), mirroring `innerₛₗ`. -/
+noncomputable def bilinDiagₗ {f : Ω → ℂ} (hf : Measurable f) {C : ℝ}
+    (hC : ∀ ω, ‖f ω‖ ≤ C) : H →ₗ⋆[ℂ] H →ₗ[ℂ] ℂ :=
+  LinearMap.mk₂'ₛₗ (starRingEnd ℂ) (RingHom.id ℂ) (fun x y => P.bilinDiag f x y)
+    (fun x₁ x₂ y => P.bilinDiag_add_left hf hC x₁ x₂ y)
+    (fun c x y => by rw [smul_eq_mul]; exact P.bilinDiag_smul_left hf hC c x y)
+    (fun x y₁ y₂ => P.bilinDiag_add_right hf hC x y₁ y₂)
+    (fun c x y => by rw [RingHom.id_apply, smul_eq_mul]; exact P.bilinDiag_smul_right hf hC c x y)
+
+/-- **The bounded-Borel functional calculus `∫ f dE`** (E2c), defined via the Riesz
+    representation `continuousLinearMapOfBilin` of the bounded sesquilinear form
+    `B_f`.  Requires `0 ≤ C` and `‖f‖ ≤ C`. -/
+noncomputable def intBorel {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, ‖f ω‖ ≤ C) : H →L[ℂ] H :=
+  InnerProductSpace.continuousLinearMapOfBilin
+    (LinearMap.mkContinuous₂ (P.bilinDiagₗ hf hC) (2 * C)
+      (fun x y => P.bilinDiag_norm_le hf hC0 hC x y))
+
+/-- **Defining property of `∫ f dE`:** `⟪(∫f dE) x, y⟫ = B_f(x,y)` — the
+    sesquilinear form `B_f(x,y) = ∫ f dμ_{x,y}` is realized by the operator. -/
+theorem inner_intBorel {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, ‖f ω‖ ≤ C) (x y : H) :
+    inner ℂ ((P.intBorel hf hC0 hC) x) y = P.bilinDiag f x y := by
+  rw [intBorel, InnerProductSpace.continuousLinearMapOfBilin_apply,
+    LinearMap.mkContinuous₂_apply]
+  rfl
+
 end ProjectionValuedMeasure
 
 /- ── Phase-1 analytic TARGETS (named, sound on `ProjectionValuedMeasure`) ──
