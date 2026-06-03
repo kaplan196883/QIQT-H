@@ -312,6 +312,16 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ∑ᵢ E sᵢ = E(⋃ᵢ sᵢ) (finite additivity over a Finset).
 #print axioms QIQTH.Spectral.PVContent.integralSimple_one
 -- expected: standard only — ∫1 dE = 1 over a covering partition (FC unitality).
+#print axioms QIQTH.Spectral.PVContent.E_nonneg
+-- expected: standard only — 0 ≤ E s (self-adjoint idempotent is positive, Loewner).
+#print axioms QIQTH.Spectral.PVContent.E_le_one
+-- expected: standard only — E s ≤ 1 (subprojection of identity; 1-E s = E sᶜ ≥ 0).
+#print axioms QIQTH.Spectral.PVContent.norm_sum_sq_of_orthogonal
+-- expected: standard only — finite Pythagoras ‖∑gᵢ‖²=∑‖gᵢ‖² for orthogonal families.
+#print axioms QIQTH.Spectral.PVContent.norm_E_apply_le
+-- expected: standard only — projections are contractions (‖E s x‖ ≤ ‖x‖).
+#print axioms QIQTH.Spectral.PVContent.integralSimple_opNorm_le
+-- expected: standard only — the C*-NORM BOUND ‖∫f dE‖ ≤ ‖f‖∞ for the simple FC.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

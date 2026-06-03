@@ -30,6 +30,7 @@
 import Mathlib.Analysis.InnerProductSpace.Adjoint
 import Mathlib.Analysis.InnerProductSpace.Basic
 import Mathlib.Analysis.InnerProductSpace.LinearMap
+import Mathlib.Analysis.InnerProductSpace.Positive
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import Mathlib.MeasureTheory.Measure.MeasureSpace
 import Mathlib.Topology.Algebra.InfiniteSum.Module
@@ -91,6 +92,20 @@ theorem E_compl (s : Set Ω) : P.E sᶜ = 1 - P.E s := by
   have h := P.E_add s sᶜ disjoint_compl_right
   rw [Set.union_compl_self, P.E_univ] at h
   rw [h]; abel
+
+/-- Each `E s` is a **positive** operator (`0 ≤ E s` in the Loewner order): a
+    self-adjoint idempotent is positive. -/
+theorem E_nonneg (s : Set Ω) : 0 ≤ P.E s :=
+  (ContinuousLinearMap.nonneg_iff_isPositive _).mpr
+    ((ContinuousLinearMap.IsIdempotentElem.isPositive_iff_isSelfAdjoint
+        (p := P.E s) (P.isIdem s)).mpr (P.isSA s))
+
+/-- Each `E s` is a **subprojection of the identity** (`E s ≤ 1`): from
+    `1 - E s = E sᶜ ≥ 0`. -/
+theorem E_le_one (s : Set Ω) : P.E s ≤ 1 :=
+  (ContinuousLinearMap.le_def _ _).mpr (by
+    rw [← P.E_compl s]
+    exact (ContinuousLinearMap.nonneg_iff_isPositive _).mp (P.E_nonneg sᶜ))
 
 /-- The scalar set function `μ_x(s) = ‖E s x‖²` (finitely additive; a genuine
     `Measure` only on the σ-additive `ProjectionValuedMeasure`). -/
@@ -197,6 +212,107 @@ theorem integralSimple_one {ι : Type*} [DecidableEq ι] (t : Finset ι)
     P.integralSimple t (fun _ => 1) sets = 1 := by
   simp only [integralSimple, one_smul]
   rw [P.sum_E_biUnion t sets hdisj, hcover, P.E_univ]
+
+/- ── Norm bound for the simple spectral integral ──────────────────────────-/
+
+/-- **Finite Pythagoras** for a pairwise-orthogonal family of vectors:
+    `‖∑ᵢ gᵢ‖² = ∑ᵢ ‖gᵢ‖²`.  (General inner-product fact, used to control the
+    norm of `∑ᵢ cᵢ E sᵢ x` on a disjoint family.) -/
+theorem norm_sum_sq_of_orthogonal {ι : Type*} (t : Finset ι) (g : ι → H)
+    (h : ∀ i ∈ t, ∀ j ∈ t, i ≠ j → inner ℂ (g i) (g j) = (0 : ℂ)) :
+    ‖∑ i ∈ t, g i‖ ^ 2 = ∑ i ∈ t, ‖g i‖ ^ 2 := by
+  have key : inner ℂ (∑ i ∈ t, g i) (∑ i ∈ t, g i)
+      = ∑ i ∈ t, inner ℂ (g i) (g i) := by
+    rw [sum_inner]
+    refine Finset.sum_congr rfl (fun i hi => ?_)
+    rw [inner_sum, Finset.sum_eq_single i]
+    · intro j hj hji; exact h i hi j hj (Ne.symm hji)
+    · intro hni; exact absurd hi hni
+  simp only [inner_self_eq_norm_sq_to_K] at key
+  exact_mod_cast key
+
+/-- **Two-term Pythagoras** for orthogonal vectors: `‖a+b‖² = ‖a‖²+‖b‖²`. -/
+theorem norm_add_sq_orthogonal (a b : H) (h : inner ℂ a b = (0 : ℂ)) :
+    ‖a + b‖ ^ 2 = ‖a‖ ^ 2 + ‖b‖ ^ 2 := by
+  have hba : inner ℂ b a = (0 : ℂ) := by rw [← inner_conj_symm, h, map_zero]
+  have key : inner ℂ (a + b) (a + b) = inner ℂ a a + inner ℂ b b := by
+    rw [inner_add_left, inner_add_right, inner_add_right, h, hba]; ring
+  have e1 : inner ℂ (a + b) (a + b) = (‖a + b‖ : ℂ) ^ 2 := inner_self_eq_norm_sq_to_K _
+  have e2 : inner ℂ a a = (‖a‖ : ℂ) ^ 2 := inner_self_eq_norm_sq_to_K _
+  have e3 : inner ℂ b b = (‖b‖ : ℂ) ^ 2 := inner_self_eq_norm_sq_to_K _
+  have hC : (‖a + b‖ : ℂ) ^ 2 = (‖a‖ : ℂ) ^ 2 + (‖b‖ : ℂ) ^ 2 := by
+    rw [← e1, key, e2, e3]
+  exact_mod_cast hC
+
+/-- For **disjoint** `s, t`, the ranges of `E s` and `E t` are orthogonal:
+    `⟪E s x, E t x⟫ = 0` (since `E s · E t = E (s∩t) = E ∅ = 0`). -/
+theorem E_apply_orthogonal {s t : Set Ω} (hd : Disjoint s t) (x : H) :
+    inner ℂ (P.E s x) (P.E t x) = (0 : ℂ) := by
+  rw [← ContinuousLinearMap.adjoint_inner_right (P.E s) x (P.E t x), P.adjoint_eq,
+    ← ContinuousLinearMap.mul_apply, ← P.E_inter, hd.inter_eq, P.E_empty]
+  simp
+
+/-- Each projection is a **contraction**: `‖E s x‖ ≤ ‖x‖`.  From the orthogonal
+    decomposition `x = E s x + E sᶜ x` and Pythagoras. -/
+theorem norm_E_apply_le (s : Set Ω) (x : H) : ‖P.E s x‖ ≤ ‖x‖ := by
+  have hx : P.E s x + P.E sᶜ x = x := by
+    rw [P.E_compl]
+    simp only [ContinuousLinearMap.sub_apply, ContinuousLinearMap.one_apply]
+    abel
+  have h := norm_add_sq_orthogonal (P.E s x) (P.E sᶜ x)
+    (P.E_apply_orthogonal disjoint_compl_right x)
+  rw [hx] at h
+  have hle : ‖P.E s x‖ ^ 2 ≤ ‖x‖ ^ 2 := by rw [h]; nlinarith [sq_nonneg ‖P.E sᶜ x‖]
+  calc ‖P.E s x‖ = Real.sqrt (‖P.E s x‖ ^ 2) := (Real.sqrt_sq (norm_nonneg _)).symm
+    _ ≤ Real.sqrt (‖x‖ ^ 2) := Real.sqrt_le_sqrt hle
+    _ = ‖x‖ := Real.sqrt_sq (norm_nonneg _)
+
+/-- **Norm bound for the simple FC** (the C\*-bound `‖∫f dE‖ ≤ ‖f‖∞`): for a
+    pairwise-disjoint family with `‖cᵢ‖ ≤ M`, `‖∑ᵢ cᵢ E sᵢ‖ ≤ M`.  Proof: the
+    pointwise estimate `‖T x‖² = ∑ᵢ ‖cᵢ‖² ‖E sᵢ x‖² ≤ M² ∑ᵢ ‖E sᵢ x‖²
+    = M² ‖E(⋃ᵢ sᵢ) x‖² ≤ M² ‖x‖²`, both Pythagoras steps using disjointness. -/
+theorem integralSimple_opNorm_le {ι : Type*} [DecidableEq ι] (t : Finset ι)
+    (c : ι → ℂ) (sets : ι → Set Ω) {M : ℝ} (hM : 0 ≤ M)
+    (hc : ∀ i ∈ t, ‖c i‖ ≤ M)
+    (hdisj : ∀ i ∈ t, ∀ j ∈ t, i ≠ j → Disjoint (sets i) (sets j)) :
+    ‖P.integralSimple t c sets‖ ≤ M := by
+  refine ContinuousLinearMap.opNorm_le_bound _ hM (fun x => ?_)
+  have hTx : P.integralSimple t c sets x = ∑ i ∈ t, c i • (P.E (sets i) x) := by
+    simp only [integralSimple, ContinuousLinearMap.sum_apply,
+      ContinuousLinearMap.smul_apply]
+  set g : ι → H := fun i => c i • (P.E (sets i) x) with hg
+  have hgorth : ∀ i ∈ t, ∀ j ∈ t, i ≠ j → inner ℂ (g i) (g j) = (0 : ℂ) := by
+    intro i hi j hj hij
+    simp only [hg, inner_smul_left, inner_smul_right,
+      P.E_apply_orthogonal (hdisj i hi j hj hij) x, mul_zero]
+  have hpyth : ‖P.integralSimple t c sets x‖ ^ 2 = ∑ i ∈ t, ‖g i‖ ^ 2 := by
+    rw [hTx]; exact norm_sum_sq_of_orthogonal t g hgorth
+  have hbound : ∑ i ∈ t, ‖g i‖ ^ 2 ≤ M ^ 2 * ∑ i ∈ t, ‖P.E (sets i) x‖ ^ 2 := by
+    rw [Finset.mul_sum]
+    refine Finset.sum_le_sum (fun i hi => ?_)
+    have hgi : ‖g i‖ ^ 2 = ‖c i‖ ^ 2 * ‖P.E (sets i) x‖ ^ 2 := by
+      simp [hg, norm_smul, mul_pow]
+    rw [hgi]
+    exact mul_le_mul_of_nonneg_right (pow_le_pow_left₀ (norm_nonneg _) (hc i hi) 2)
+      (sq_nonneg _)
+  have hEorth : ∀ i ∈ t, ∀ j ∈ t, i ≠ j →
+      inner ℂ (P.E (sets i) x) (P.E (sets j) x) = (0 : ℂ) :=
+    fun i hi j hj hij => P.E_apply_orthogonal (hdisj i hi j hj hij) x
+  have hEpyth : ∑ i ∈ t, ‖P.E (sets i) x‖ ^ 2 = ‖∑ i ∈ t, P.E (sets i) x‖ ^ 2 :=
+    (norm_sum_sq_of_orthogonal t (fun i => P.E (sets i) x) hEorth).symm
+  have hsumE : ∑ i ∈ t, P.E (sets i) x = P.E (⋃ i ∈ t, sets i) x := by
+    rw [← P.sum_E_biUnion t sets hdisj, ContinuousLinearMap.sum_apply]
+  have hfin : ‖P.integralSimple t c sets x‖ ^ 2 ≤ (M * ‖x‖) ^ 2 := by
+    rw [hpyth, mul_pow]
+    refine le_trans hbound ?_
+    refine mul_le_mul_of_nonneg_left ?_ (sq_nonneg M)
+    rw [hEpyth, hsumE]
+    exact pow_le_pow_left₀ (norm_nonneg _) (P.norm_E_apply_le _ x) 2
+  have h1 : 0 ≤ M * ‖x‖ := mul_nonneg hM (norm_nonneg _)
+  calc ‖P.integralSimple t c sets x‖
+      = Real.sqrt (‖P.integralSimple t c sets x‖ ^ 2) := (Real.sqrt_sq (norm_nonneg _)).symm
+    _ ≤ Real.sqrt ((M * ‖x‖) ^ 2) := Real.sqrt_le_sqrt hfin
+    _ = M * ‖x‖ := Real.sqrt_sq h1
 
 end PVContent
 
@@ -313,16 +429,22 @@ end ProjectionValuedMeasure
          `∫f·∫g = ∫(fg)` over a pairwise-disjoint family — cross terms vanish via
          `E sᵢ·E sⱼ = E(sᵢ∩sⱼ) = E ∅ = 0`, diagonal collapses by idempotence).
          Also PROVED: `integralSimple_star_mul_self` (`(∫f)⋆(∫f) = ∫|f|²`, the
-         positive operator `T⋆T`), the key step toward the norm bound.
-         REMAINING (analytic): the norm bound `‖∫f dE‖ ≤ ‖f‖∞`.  Route identified
-         (all Mathlib lemmas exist): C\*-identity `CStarRing.norm_star_mul_self`
-         gives `‖T‖² = ‖T⋆T‖`; then `0 ≤ T⋆T ≤ M²•1` (`star_mul_self_nonneg` +
-         the order bound) feeds `CStarAlgebra.norm_le_norm_of_nonneg_of_le` to get
-         `‖T⋆T‖ ≤ ‖M²•1‖ = M²`.  The order bound: `sum_E_biUnion`
-         (`∑ᵢ E sᵢ = E(⋃ᵢ sᵢ)`, finite additivity over a `Finset`) is now PROVED,
-         with `integralSimple_one` (`∫1 dE = 1` over a covering partition) as a
-         corollary.  Remaining for the bound: `E(⋃) ≤ 1` (projection `≤ 1`) + the
-         ℂ-smul/real-order plumbing.  Then simple→bounded-Borel by monotone-class /
+         positive operator `T⋆T`).
+         ★ THE NORM BOUND `‖∫f dE‖ ≤ ‖f‖∞` IS NOW PROVED axiom-free
+         (`integralSimple_opNorm_le`).  The C\*-order route via
+         `CStarAlgebra.norm_le_norm_of_nonneg_of_le` is BLOCKED in Mathlib: the
+         partial order on `H →L[ℂ] H` is the Loewner order (`instLoewnerPartialOrder`)
+         but there is no `StarOrderedRing (H →L[ℂ] H)` instance (upstream TODO), so
+         that lemma does not fire.  Instead the bound is proved by the elementary
+         POINTWISE PYTHAGORAS estimate: with `sᵢ` pairwise disjoint the vectors
+         `cᵢ E sᵢ x` are orthogonal (`E_apply_orthogonal`), so
+         `‖T x‖² = ∑ᵢ ‖cᵢ‖² ‖E sᵢ x‖² ≤ M² ∑ᵢ ‖E sᵢ x‖² = M² ‖E(⋃ᵢ sᵢ) x‖²
+         ≤ M² ‖x‖²` (`norm_sum_sq_of_orthogonal` twice; `sum_E_biUnion` for the
+         middle equality; `norm_E_apply_le`, i.e. `E ≤ 1` ⟹ contraction, for the
+         last), then `opNorm_le_bound`.  Supporting order facts also PROVED:
+         `E_nonneg` (`0 ≤ E s`) and `E_le_one` (`E s ≤ 1`), and
+         `integralSimple_one` (`∫1 dE = 1` over a covering partition).
+         REMAINING for T2: simple→bounded-Borel by monotone-class /
          SOT bounded-convergence, and `⟪x,(∫f dE)y⟫ = ∫ f dμ_{x,y}`.
 
     (T3) SPECTRAL THEOREM.  Every bounded self-adjoint `T` admits a unique PVM on

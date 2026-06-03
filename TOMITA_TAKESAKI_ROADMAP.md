@@ -94,8 +94,12 @@ upstream because it is the keystone everyone needs and unblocks Route 1.
   SOT bounded convergence, *not* uniqueness; ◧ STARTED — the `*`-homomorphism
   CORE on simple functions is PROVED axiom-free: `integralSimple_adjoint`
   (`∫f̄=(∫f)†`) and `integralSimple_mul` (`∫f·∫g=∫(fg)` over a disjoint family, the
-  multiplicativity heart); remaining = norm bound + simple→Borel extension +
-  sesquilinear form); **(T3)** the spectral theorem, via
+  multiplicativity heart); **the C\*-norm bound `‖∫f dE‖ ≤ ‖f‖∞`
+  (`integralSimple_opNorm_le`) is now PROVED axiom-free** — via the pointwise
+  Pythagoras estimate, since the C\*-order route is blocked by the missing
+  `StarOrderedRing (H →L[ℂ] H)` instance in Mathlib (only the Loewner order is
+  available); supporting `E_nonneg`/`E_le_one`/`norm_E_apply_le` also proved;
+  remaining = simple→Borel extension + sesquilinear form); **(T3)** the spectral theorem, via
   Mathlib's **continuous FC + Riesz–Markov** (extend `π : C(spec T)→B(H)` to a
   normal rep of bounded Borel functions, then `E(B):=Φ(1_B)`; *avoid* the
   bidual/universal-W\* route in Lean).
