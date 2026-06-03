@@ -336,6 +336,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — μ_{x,y}(s) = ¼-combo of the four genuine measures μ_z.
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.inner_integralSimple_eq_polarization
 -- expected: standard only — simple sesquilinear form via genuine scalar measures.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.scalarMeasure_toReal
+-- expected: standard only — (μ_x s).toReal = ‖E s x‖².
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.scalarMeasure_toReal_parallelogram
+-- expected: standard only — parallelogram identity (seed of sesquilinearity, T2 ext).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

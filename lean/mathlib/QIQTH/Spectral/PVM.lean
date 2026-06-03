@@ -524,6 +524,30 @@ theorem inner_integralSimple_eq_polarization {ι : Type*} (t : Finset ι) (c : �
   refine Finset.sum_congr rfl (fun i hi => ?_)
   rw [P.inner_E_eq_polarization_measures (sets i) (hm i hi)]
 
+/- ── Foundations for the simple→bounded-Borel extension (Route A, Riesz) ───-/
+
+/-- `μ_x` is a **finite** measure (total mass `‖x‖²`) — so every bounded
+    measurable function is Bochner-integrable against it.  Prerequisite for the
+    integral functional `f ↦ ∫ f dμ_x` of the bounded-Borel FC. -/
+instance instIsFiniteMeasure_scalarMeasure (x : H) :
+    MeasureTheory.IsFiniteMeasure (P.scalarMeasure x) :=
+  ⟨by rw [P.scalarMeasure_univ x]; exact ENNReal.ofReal_lt_top⟩
+
+/-- **Parallelogram identity for the scalar measures** (real form):
+    `(μ_{x+y} + μ_{x−y})(s) = 2 μ_x(s) + 2 μ_y(s)`.  This is the seed of the
+    sesquilinearity of the form `(x,y) ↦ ∫ f dμ_{x,y}` underlying the
+    bounded-Borel functional calculus (Route A): integrating it against a
+    bounded `f` gives the parallelogram law for the diagonal functional
+    `D_f(x) := ∫ f dμ_x`, whence its polarization is sesquilinear. -/
+theorem scalarMeasure_toReal_parallelogram (x y : H) {s : Set Ω}
+    (hs : MeasurableSet s) :
+    (P.scalarMeasure (x + y) s).toReal + (P.scalarMeasure (x - y) s).toReal
+      = 2 * (P.scalarMeasure x s).toReal + 2 * (P.scalarMeasure y s).toReal := by
+  rw [P.scalarMeasure_toReal _ hs, P.scalarMeasure_toReal _ hs,
+    P.scalarMeasure_toReal _ hs, P.scalarMeasure_toReal _ hs, map_add, map_sub]
+  have h := parallelogram_law_with_norm (𝕜 := ℂ) (P.E s x) (P.E s y)
+  linarith [h]
+
 end ProjectionValuedMeasure
 
 /- ── Phase-1 analytic TARGETS (named, sound on `ProjectionValuedMeasure`) ──
@@ -579,9 +603,17 @@ end ProjectionValuedMeasure
          scalar measures — so `μ_{x,y}` inherits countable additivity), with the
          capstone `inner_integralSimple_eq_polarization` writing the simple
          sesquilinear form `⟪x,(∫f)y⟫` purely via the genuine measures.
-         REMAINING for T2: only the simple→bounded-Borel EXTENSION (monotone-class /
-         SOT bounded-convergence) lifting these from simple `f` to all bounded
-         Borel `f` — the heavy analytic step.
+         REMAINING for T2: only the simple→bounded-Borel EXTENSION lifting these
+         from simple `f` to all bounded Borel `f`.  ROUTE CHOSEN (scoped, see
+         TOMITA_TAKESAKI_ROADMAP.md "T2 extension sub-plan"): **A, Riesz form** via
+         `InnerProductSpace.continuousLinearMapOfBilin` (`B♯` with `⟪B♯v,w⟫=B v w`),
+         building `∫f dE := (B_f)♯` from the bounded sesquilinear form
+         `B_f(x,y) = ∫ f dμ_{x,y}` — no operator-topology limit needed for
+         existence.  FOUNDATIONS PROVED here: `instIsFiniteMeasure_scalarMeasure`
+         (bounded `f` Bochner-integrable against `μ_x`) and
+         `scalarMeasure_toReal_parallelogram` (seeds the form's sesquilinearity).
+         The deepest residual is multiplicativity `∫(fg) = ∫f ∘ ∫g` for bounded
+         `f,g` (needs a monotone-class / dominated-convergence step).
 
     (T3) SPECTRAL THEOREM.  Every bounded self-adjoint `T` admits a unique PVM on
          `ℝ` (supported on `spectrum`) with `⟪x, T x⟫ = ∫ id dμ_x`.  Recommended

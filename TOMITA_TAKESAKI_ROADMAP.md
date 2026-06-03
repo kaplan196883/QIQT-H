@@ -296,6 +296,50 @@ Theory* (arXiv:math-ph/0511034). Equation numbers below are from those papers.
   of a bounded form; multiplicativity by monotone-class from indicators); T3 from
   `CStarAlgebra/ContinuousFunctionalCalculus` + `MeasureTheory` Riesz–Markov
   (`RieszMarkovKakutani`).
+
+### T2 extension sub-plan — simple → bounded-Borel `∫ f dE` (scoped 2026-06-03)
+
+Everything for *simple* `f` is now PROVED axiom-free (norm bound, `⋆`-hom core,
+quadratic-form + polarization bridges to the genuine `μ_x` / `μ_{x,y}`).
+The remaining lift to bounded measurable `f` is the genuine analytic residual.
+**Chosen route: A (Riesz form), because Mathlib supplies the operator-from-form
+map and it avoids operator-topology limits for *existence*.**
+
+- **Key Mathlib hook (found):** `InnerProductSpace.continuousLinearMapOfBilin`
+  `(B : E →L⋆[𝕜] E →L[𝕜] 𝕜) : E →L[𝕜] E` with
+  `continuousLinearMapOfBilin_apply : ⟪B♯ v, w⟫ = B v w` and
+  `unique_continuousLinearMapOfBilin` (needs `CompleteSpace`, which we have).
+  So `∫ f dE := (B_f)♯` once `B_f : H →L⋆[ℂ] H →L[ℂ] ℂ` is built.
+- **Bricks DONE (foundations):** `instIsFiniteMeasure_scalarMeasure` (so bounded
+  measurable `f` is Bochner-integrable against `μ_x`) and
+  `scalarMeasure_toReal_parallelogram` (the parallelogram identity seeding
+  sesquilinearity).
+- **E2a — diagonal functional.** `D_f(x) := ∫ f dμ_x` (ℂ-valued Bochner integral,
+  `f` bounded measurable). Integrability via `IsFiniteMeasure` +
+  `integrable_const_iff_isFiniteMeasure` / bounded-measurable. Prove
+  `D_f(cx) = ‖c‖² D_f(x)` (from `μ_{cx} = ‖c‖²·μ_x`) and the **parallelogram**
+  `D_f(x+y) + D_f(x−y) = 2D_f(x) + 2D_f(y)` (integrate
+  `scalarMeasure_toReal_parallelogram` via `integral_add_measure`).
+- **E2b — sesquilinear form.** `B_f(x,y) := ¼(D_f(x+y) − D_f(x−y) − i D_f(x+iy)
+  + i D_f(x−iy))`. **Hardest brick:** prove `B_f` conj-linear in `x`, linear in
+  `y` — derive additivity/homogeneity from the E2a identities (this is the
+  algebraic "polarization of a quadratic form is sesquilinear" lemma; no Mathlib
+  off-the-shelf, but elementary from parallelogram + `D_f(cx)=‖c‖²D_f`).
+- **E2c — boundedness + bundle.** `|B_f(x,y)| ≤ ‖f‖∞ ‖x‖‖y‖` (from
+  `|∫ f dμ_z| ≤ ‖f‖∞·μ_z(univ) = ‖f‖∞‖z‖²` + polarization arithmetic). Bundle into
+  `H →L⋆[ℂ] H →L[ℂ] ℂ` (continuity in each slot from the bound), then
+  `intBorel f := B_f♯`, giving `⟪x,(intBorel f)y⟫ = B_f(x,y)` and `‖intBorel f‖ ≤ ‖f‖∞`.
+- **E2d — consistency.** `intBorel (simple f) = integralSimple …` via
+  `unique_continuousLinearMapOfBilin` + `inner_integralSimple_eq_polarization`
+  (both sides have the same sesquilinear form). Transfers `∫f̄=(∫f)†` to bounded `f`.
+- **E2e — multiplicativity (deepest).** `intBorel (f·g) = intBorel f ∘ intBorel g`.
+  Riesz does **not** give this for free; needs an approximation/monotone-class
+  argument (`MeasurableSpace.induction_on_inter` over indicators, or
+  dominated-convergence in `μ_x`). This is the one genuinely heavy sub-step and is
+  the right place to expect multi-session effort.
+- **Estimate.** E2a–E2d: each a handful of lemmas, all with identified Mathlib
+  hooks — tractable brick-by-brick. E2e is the analytic frontier. None can be
+  faked with axioms; all stay within the standard-three budget.
 - **Phase 2 (E1b).** Cayley transform `(T−i)(T+i)^{−1}` of a self-adjoint
   `LinearPMap` (`InnerProductSpace/LinearPMap`); unbounded Borel FC; `Δ^{it}` via
   `f_t(λ)=λ^{it}` bounded-Borel; Stone-type strong continuity.
