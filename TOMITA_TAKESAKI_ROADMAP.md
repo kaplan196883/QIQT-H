@@ -45,6 +45,17 @@ theory, not the classification. *That local QFT algebras are Type III₁* is a d
 QFT theorem (Buchholz–Wichmann, Fredenhagen) to be **cited as input, not proved**.
 Full Connes Type III_λ ([F]–[I]) is **out of scope**.
 
+*Scoping corrections (GPT-5.5-pro consultation).* (i) The **Type II
+crossed-product** `M⋊_σℝ` is NOT a small Phase-4 add-on — it needs W\*-dynamical
+systems, normal weights, the dual action, operator-valued integration, semifinite
+traces, and usually the Connes cocycle; it is Phase-5-scale and should be **cited**
+unless heavily scoped. (ii) **KMS**: C\*-KMS assumes norm-continuous dynamics, but
+modular automorphism groups are only point-**ultraweakly** continuous — formalize
+an interim KMS on a specified analytic core / the Weyl C\*-algebra before the vN
+closure. (iii) the **Connes cocycle** `(Dψ:Dφ)ₜ` is needed *iff* the
+decoherence-functional covariance compares **different** states/weights (likely
+for QIQT-H) — if so, carry at least a stated/interface version.
+
 ## Two routes
 
 - **Route 1 (general/abstract):** [A]→[B]→[C]→[D]. Canonical, heaviest; [A] alone
@@ -65,20 +76,46 @@ upstream because it is the keystone everyone needs and unblocks Route 1.
   (σₜ = ρ^{it}·ρ^{−it}, KMS boundary identity, 1-parameter group). The spec the
   abstract version must generalize.
 - **Phase 1 — keystone [A]: PVM + bounded spectral theorem + Borel FC.**
-  *(STARTED — `QIQTH/Spectral/PVM.lean`.)* Projection-valued measures; scalar
-  spectral measures `μ_x(s)=‖E(s)x‖²`; the simple-function spectral integral
-  `∫(∑cᵢ𝟙_{sᵢ})dE = ∑cᵢE(sᵢ)`; bounded-Borel extension (norm limit) and the
-  spectral theorem (existence/uniqueness of E for self-adjoint T) named as the
-  Phase-1 analytic targets.
+  *(STARTED — `QIQTH/Spectral/PVM.lean`; revised after GPT-5.5-pro consultation.)*
+  Two layers: `PVContent` (finitely-additive projection-valued content — the
+  algebraic lemmas `inner_E_self`, `E_compl`, the scalar set function, the simple
+  integral, all proved axiom-free) and the genuine `ProjectionValuedMeasure`
+  (laws on a `MeasurableSpace`'s measurable sets + **strong-operator** countable
+  additivity `HasSum (fun n => E(Aₙ)x) (E(⋃Aₙ)x)`). *Correctness note from the
+  consultation:* finite additivity + multiplicativity does **not** imply countable
+  additivity (ultrafilter counterexample), so the scalar `μ_x`-is-a-`Measure`
+  claim (T1) is sound only on the σ-additive `ProjectionValuedMeasure`, not on a
+  content; and σ-additivity must be strong-operator, never operator-norm (norm
+  σ-additivity is false). Named analytic targets: **(T1)** scalar measures as
+  genuine `Measure`s [next concrete theorem, weeks–months]; **(T2)** bounded-Borel
+  FC `f↦∫f dE` (hard step = continuous→Borel multiplicativity extension +
+  SOT bounded convergence, *not* uniqueness); **(T3)** the spectral theorem, via
+  Mathlib's **continuous FC + Riesz–Markov** (extend `π : C(spec T)→B(H)` to a
+  normal rep of bounded Borel functions, then `E(B):=Φ(1_B)`; *avoid* the
+  bidual/universal-W\* route in Lean).
 - **Phase 2 — [B]:** unbounded self-adjoint operators (closed/closable
-  `LinearPMap`, adjoint theory), spectral theorem for unbounded self-adjoint,
-  `Δ^{it}` as a strongly-continuous 1-parameter unitary group, polar decomposition
+  `LinearPMap`, adjoint theory), spectral theorem for unbounded self-adjoint **via
+  the Cayley transform from the bounded normal spectral theorem [A]**, `Δ^{it}` as
+  a **strongly**-continuous 1-parameter unitary group (note: `λ↦λ^{it}` is bounded
+  Borel, not continuous at `0` where `Δ` typically has continuous spectrum — so
+  [A]'s Borel FC, not the continuous FC, is what's required), polar decomposition
   of closed densely-defined operators.
 - **Phase 3 — [C]+[D]:** abstract Tomita–Takesaki: cyclic/separating Ω,
-  `S/F/Δ/J`, `S=JΔ^½`, `JMJ=M′`, `σₜ(M)=M`.
-- **Phase 3′ (parallel, Route 2):** free-field modular theory via
-  `StandardSubspace` + second quantization → first non-toy `RecordedHistoryNet` /
-  `UnitaryCovariance` with a genuine `σₜ` and Poincaré transport.
+  `S/F/Δ/J`, `S=JΔ^½`, `JMJ=M′`, `σₜ(M)=M`. *Extra cost flagged in consultation:*
+  the Tomita operator `S` is **conjugate-linear AND unbounded**, so this needs
+  antilinear closed/closable-operator theory + polar decomposition of antilinear
+  closed operators — beyond ordinary linear closed operators.
+- **Phase 3′ (parallel, Route 2 — the pragmatic QIQT-H path):** free-field modular
+  theory via `StandardSubspace` + second quantization. *Key shortcut (consultation):*
+  in geometric/Bisognano–Wichmann free-field cases the one-particle modular group
+  is an **explicit** unitary group `U(t)=Δ_V^{it}` (boosts/dilations); second
+  quantizing it directly, `σₜ(W(f)) = W(U(t)f)`, does **not** need the general
+  spectral theorem (only second quantization of a strongly-continuous unitary
+  group, built on finite-particle vectors by density) — it is `Γ(Δ)`/`Γ(log Δ)`
+  that would need [A]/[B]. So **coordinate with the `StandardSubspace` line**
+  (complementary, not parallel) and avoid a competing antilinear/unbounded stack.
+  Deliverable: first non-toy `RecordedHistoryNet` / `UnitaryCovariance` with a
+  genuine `σₜ` and Poincaré transport.
 - **Phase 4 — [E]:** KMS + normal states; modular automorphism group; discharge
   the free-field `decoherence_functional_measure`-type covariance inputs.
 - **Phase 5 (optional, long) — [F]/[G]:** types + Connes cocycle + weights. Only
