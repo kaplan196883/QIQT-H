@@ -34,6 +34,7 @@ import Mathlib.Analysis.InnerProductSpace.Positive
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import Mathlib.MeasureTheory.Measure.MeasureSpace
 import Mathlib.MeasureTheory.Integral.Lebesgue.Add
+import Mathlib.MeasureTheory.Integral.Bochner.Basic
 import Mathlib.Topology.Algebra.InfiniteSum.Module
 import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
 import Mathlib.Tactic
@@ -41,7 +42,7 @@ import Mathlib.Tactic
 namespace QIQTH
 namespace Spectral
 
-open scoped BigOperators
+open scoped BigOperators ENNReal
 
 variable {Ω : Type*} {H : Type*}
   [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
@@ -547,6 +548,70 @@ theorem scalarMeasure_toReal_parallelogram (x y : H) {s : Set Ω}
     P.scalarMeasure_toReal _ hs, P.scalarMeasure_toReal _ hs, map_add, map_sub]
   have h := parallelogram_law_with_norm (𝕜 := ℂ) (P.E s x) (P.E s y)
   linarith [h]
+
+/-- **Scaling at the measure level:** `μ_{c·x} = ‖c‖² · μ_x`.  (`E s (c•x) = c•E s x`
+    so `‖E s (c•x)‖² = ‖c‖²‖E s x‖²`.) -/
+theorem scalarMeasure_smul (c : ℂ) (x : H) :
+    P.scalarMeasure (c • x) = ENNReal.ofReal (‖c‖ ^ 2) • P.scalarMeasure x := by
+  refine MeasureTheory.Measure.ext (fun s hs => ?_)
+  rw [MeasureTheory.Measure.smul_apply, smul_eq_mul, P.scalarMeasure_apply _ hs,
+    P.scalarMeasure_apply _ hs, map_smul, norm_smul, mul_pow,
+    ENNReal.ofReal_mul (sq_nonneg _)]
+
+/-- **Parallelogram at the measure level:** `μ_{x+y} + μ_{x−y} = 2·μ_x + 2·μ_y`. -/
+theorem scalarMeasure_parallelogram_measure (x y : H) :
+    P.scalarMeasure (x + y) + P.scalarMeasure (x - y)
+      = (2 : ℝ≥0∞) • P.scalarMeasure x + (2 : ℝ≥0∞) • P.scalarMeasure y := by
+  refine MeasureTheory.Measure.ext (fun s hs => ?_)
+  have hreal : ‖P.E s (x + y)‖ ^ 2 + ‖P.E s (x - y)‖ ^ 2
+      = (‖P.E s x‖ ^ 2 + ‖P.E s x‖ ^ 2) + (‖P.E s y‖ ^ 2 + ‖P.E s y‖ ^ 2) := by
+    rw [map_add, map_sub]
+    have h := parallelogram_law_with_norm (𝕜 := ℂ) (P.E s x) (P.E s y)
+    linarith [h]
+  simp only [MeasureTheory.Measure.add_apply, MeasureTheory.Measure.smul_apply, smul_eq_mul]
+  rw [P.scalarMeasure_apply _ hs, P.scalarMeasure_apply _ hs,
+    P.scalarMeasure_apply _ hs, P.scalarMeasure_apply _ hs, two_mul, two_mul,
+    ← ENNReal.ofReal_add (sq_nonneg _) (sq_nonneg _),
+    ← ENNReal.ofReal_add (sq_nonneg _) (sq_nonneg _),
+    ← ENNReal.ofReal_add (sq_nonneg _) (sq_nonneg _),
+    ← ENNReal.ofReal_add (by positivity) (by positivity), hreal]
+
+/-- A bounded measurable function is **Bochner-integrable** against the finite
+    measure `μ_x`. -/
+theorem integrable_boundedMeasurable {f : Ω → ℂ} (hf : Measurable f) {C : ℝ}
+    (hC : ∀ ω, ‖f ω‖ ≤ C) (x : H) :
+    MeasureTheory.Integrable f (P.scalarMeasure x) :=
+  (MeasureTheory.integrable_const C).mono' hf.aestronglyMeasurable
+    (Filter.Eventually.of_forall hC)
+
+/-- **The diagonal functional** `D_f(x) := ∫ f dμ_x` (E2a of the bounded-Borel FC
+    sub-plan).  Its homogeneity `D_f(c·x) = ‖c‖² D_f(x)` and parallelogram law are
+    what make the polarized form `B_f(x,y)` sesquilinear. -/
+noncomputable def diagInt (f : Ω → ℂ) (x : H) : ℂ :=
+  ∫ ω, f ω ∂(P.scalarMeasure x)
+
+/-- **Homogeneity** of the diagonal functional: `D_f(c·x) = ‖c‖² D_f(x)`. -/
+theorem diagInt_smul (f : Ω → ℂ) (c : ℂ) (x : H) :
+    P.diagInt f (c • x) = ((‖c‖ ^ 2 : ℝ) : ℂ) * P.diagInt f x := by
+  simp only [diagInt]
+  rw [P.scalarMeasure_smul, MeasureTheory.integral_smul_measure,
+    ENNReal.toReal_ofReal (sq_nonneg _), Complex.real_smul]
+
+/-- **Parallelogram law** for the diagonal functional:
+    `D_f(x+y) + D_f(x−y) = 2 D_f(x) + 2 D_f(y)`. -/
+theorem diagInt_parallelogram {f : Ω → ℂ} (hf : Measurable f) {C : ℝ}
+    (hC : ∀ ω, ‖f ω‖ ≤ C) (x y : H) :
+    P.diagInt f (x + y) + P.diagInt f (x - y)
+      = 2 * P.diagInt f x + 2 * P.diagInt f y := by
+  have hint : ∀ z, MeasureTheory.Integrable f (P.scalarMeasure z) :=
+    fun z => P.integrable_boundedMeasurable hf hC z
+  simp only [diagInt]
+  rw [← MeasureTheory.integral_add_measure (hint (x + y)) (hint (x - y)),
+    P.scalarMeasure_parallelogram_measure x y,
+    MeasureTheory.integral_add_measure
+      ((hint x).smul_measure (by norm_num)) ((hint y).smul_measure (by norm_num)),
+    MeasureTheory.integral_smul_measure, MeasureTheory.integral_smul_measure]
+  simp only [ENNReal.toReal_ofNat, Complex.real_smul, Complex.ofReal_ofNat]
 
 end ProjectionValuedMeasure
 

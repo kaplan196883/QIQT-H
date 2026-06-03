@@ -314,12 +314,14 @@ map and it avoids operator-topology limits for *existence*.**
   measurable `f` is Bochner-integrable against `μ_x`) and
   `scalarMeasure_toReal_parallelogram` (the parallelogram identity seeding
   sesquilinearity).
-- **E2a — diagonal functional.** `D_f(x) := ∫ f dμ_x` (ℂ-valued Bochner integral,
-  `f` bounded measurable). Integrability via `IsFiniteMeasure` +
-  `integrable_const_iff_isFiniteMeasure` / bounded-measurable. Prove
-  `D_f(cx) = ‖c‖² D_f(x)` (from `μ_{cx} = ‖c‖²·μ_x`) and the **parallelogram**
-  `D_f(x+y) + D_f(x−y) = 2D_f(x) + 2D_f(y)` (integrate
-  `scalarMeasure_toReal_parallelogram` via `integral_add_measure`).
+- **E2a — diagonal functional. ✅ DONE (axiom-free).** `diagInt f x := ∫ f dμ_x`
+  (ℂ-valued Bochner integral). Bricks: `integrable_boundedMeasurable` (bounded
+  measurable `f` integrable against the finite `μ_x`), the measure-level identities
+  `scalarMeasure_smul` (`μ_{cx} = ‖c‖²·μ_x`) and `scalarMeasure_parallelogram_measure`
+  (`μ_{x+y}+μ_{x−y} = 2μ_x+2μ_y`), and the functional laws `diagInt_smul`
+  (`D_f(cx) = ‖c‖² D_f(x)`, via `integral_smul_measure`) and `diagInt_parallelogram`
+  (`D_f(x+y)+D_f(x−y) = 2D_f(x)+2D_f(y)`, via `integral_add_measure`). These are
+  exactly the quadratic-form identities feeding E2b.
 - **E2b — sesquilinear form.** `B_f(x,y) := ¼(D_f(x+y) − D_f(x−y) − i D_f(x+iy)
   + i D_f(x−iy))`. **Hardest brick:** prove `B_f` conj-linear in `x`, linear in
   `y` — derive additivity/homogeneity from the E2a identities (this is the

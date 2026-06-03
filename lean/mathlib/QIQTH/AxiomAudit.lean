@@ -340,6 +340,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — (μ_x s).toReal = ‖E s x‖².
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.scalarMeasure_toReal_parallelogram
 -- expected: standard only — parallelogram identity (seed of sesquilinearity, T2 ext).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.scalarMeasure_smul
+-- expected: standard only — μ_{c·x} = ‖c‖²·μ_x (scaling at the measure level).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.scalarMeasure_parallelogram_measure
+-- expected: standard only — μ_{x+y}+μ_{x−y} = 2μ_x+2μ_y (measure-level parallelogram).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.diagInt_smul
+-- expected: standard only — E2a homogeneity D_f(c·x) = ‖c‖² D_f(x).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.diagInt_parallelogram
+-- expected: standard only — E2a parallelogram D_f(x+y)+D_f(x−y)=2D_f(x)+2D_f(y).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
