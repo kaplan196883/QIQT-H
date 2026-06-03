@@ -114,17 +114,27 @@ So the threshold is DERIVED from redundancy + the tensor (information) capacity,
 assumed. Two objective records of NON-commuting observables cannot share one SBS (it is
 diagonal in a single pointer basis) — objectivity itself einselects the basis.
 
-**Proposed Lean structure (`QIQTH/TierB/SBSRecord.lean`, not yet written):**
-- `SBSRecord`: pointer outcomes `ι`, observed fragments `Fin R`, fragment states
-  `ρ : ι → Fin R → (mixed state)`, with `orthogonal_supports` per fragment.
-- `infoCost := R · log (card ι)` (or fragment-entropy sum); `Q_max : ℝ`.
-- bridge: `objective (R ≥ R_macro) → Q_max/2 < infoCost` ⟹ instantiates
-  `CoreNoCollapse.RecordContext.cost_gt_half`.
+**Lean implementation — `QIQTH/SBSBridge.lean` (DONE, axiom-free):**
+- `fragment_finrank_ge` : perfect distinguishability of `n` outcomes ⇒ fragment
+  dimension `≥ n` (orthonormal record states; `card ≤ finrank`). PROVED.
+- `broadcast_finrank_ge` : broadcasting TENSORS the fragments, so dimensions MULTIPLY
+  (`finrank (A⊗B)=finrank A·finrank B`); two fragments ⇒ broadcast dim `≥ n²`. PROVED —
+  this is the information/tensor model (fixes the rank-vs-information flaw).
+- `infoCost R n := R·log n`, with `infoCost_eq_log_broadcastDim : = log(nᴿ)` (information
+  adds across the `R` redundant copies). PROVED.
+- `SBSContext` + `toRecordContext` : the BRIDGE — cost `j := R j·log(n j)` (broadcast
+  information), and `cost_gt_half` is PROVED from `R j ≥ R_macro` + the capacity relation
+  `Q_max/2 < R_macro·log 2`.  Instantiates `CoreNoCollapse.RecordContext`.
+- `sbs_single_outcome` : Tier-B single-outcome theorem — saturation DERIVED from
+  redundancy, cost a genuine broadcast information, not a stipulated ">half register".
 
-**Cost (honest):** heavy — needs `TensorProduct` of Hilbert spaces, orthogonal-support
-distinguishability, and a `log`-dimension / von-Neumann-entropy cost in Mathlib. This is
-genuine multi-session research, and it is exactly the Strasberg–Winter "branch selection
-problem" given a constructive (SBS-based) answer.
+**Honest residual.** The capacity relation `Q_max/2 < R_macro·log 2` is the transparent
+physical input (the accessible-information capacity `Q_max` is small vs a macroscopic
+record's broadcast information — Holevo/Bekenstein), now a relation between `Q_max` and the
+macroscopic-redundancy scale rather than a circular ">half" stipulation.  DEFERRED (genuine
+multi-session research): full SBS with mixed fragment states + von-Neumann-entropy cost, the
+SBS uniqueness theorem, and the non-commuting-basis (objectivity einselects the basis) result
+— a constructive answer to the Strasberg–Winter "branch selection problem".
 
 **Tier B references (TeX downloaded):**
 - arXiv:2007.04276 — Korbicz, *Roads to objectivity: QD, SBS, strong QD* (review; SBS

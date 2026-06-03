@@ -470,4 +470,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CapacityModel.capacity_exactly_one
 -- expected: standard only — capacity + selector ⇒ EXACTLY ONE macroscopic record.
 
+-- QIQT-H TIER B: the bridge theorem (Spectrum Broadcast Structures, information cost).
+#print axioms QIQTH.SBSBridge.fragment_finrank_ge
+-- expected: standard only — distinguishability ⇒ fragment dimension ≥ n (orthonormal).
+#print axioms QIQTH.SBSBridge.broadcast_finrank_ge
+-- expected: standard only — broadcasting tensors spaces: dims multiply (≥ n²).
+#print axioms QIQTH.SBSBridge.infoCost_eq_log_broadcastDim
+-- expected: standard only — R·log n = log(nᴿ): info adds across redundant copies.
+#print axioms QIQTH.SBSBridge.sbs_single_outcome
+-- expected: standard only — Tier-B single outcome: saturation DERIVED from redundancy.
+
 end QIQTH.AxiomAudit
