@@ -308,6 +308,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — FC adjoint law ∫f̄ = (∫f)†.
 #print axioms QIQTH.Spectral.PVContent.integralSimple_star_mul_self
 -- expected: standard only — (∫f)⋆(∫f) = ∫|f|² (positive T⋆T); step toward ‖·‖ bound.
+#print axioms QIQTH.Spectral.PVContent.sum_E_biUnion
+-- expected: standard only — ∑ᵢ E sᵢ = E(⋃ᵢ sᵢ) (finite additivity over a Finset).
+#print axioms QIQTH.Spectral.PVContent.integralSimple_one
+-- expected: standard only — ∫1 dE = 1 over a covering partition (FC unitality).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

@@ -166,6 +166,38 @@ theorem integralSimple_star_mul_self {ι : Type*} (t : Finset ι) (c : ι → �
   rw [ContinuousLinearMap.star_eq_adjoint, P.integralSimple_adjoint,
     P.integralSimple_mul t (fun i => star (c i)) c sets hdisj]
 
+/-- **Finite additivity over a `Finset`:** for a pairwise-disjoint family,
+    `∑ᵢ E sᵢ = E(⋃ᵢ sᵢ)`.  By induction on the index set from `E_add`.  Needed for
+    the norm bound `‖∫f dE‖ ≤ ‖f‖∞` (the `∑ E sᵢ ≤ 1` step) and for `∫1 dE = 1`. -/
+theorem sum_E_biUnion {ι : Type*} [DecidableEq ι] (t : Finset ι) (sets : ι → Set Ω)
+    (hdisj : ∀ i ∈ t, ∀ j ∈ t, i ≠ j → Disjoint (sets i) (sets j)) :
+    ∑ i ∈ t, P.E (sets i) = P.E (⋃ i ∈ t, sets i) := by
+  classical
+  revert hdisj
+  induction t using Finset.induction with
+  | empty => intro _; simp [P.E_empty]
+  | @insert a s ha ih =>
+    intro hdisj
+    rw [Finset.sum_insert ha, Finset.set_biUnion_insert]
+    have hd : Disjoint (sets a) (⋃ i ∈ s, sets i) := by
+      simp only [Set.disjoint_iUnion_right]
+      intro i hi
+      exact hdisj a (Finset.mem_insert_self a s) i (Finset.mem_insert_of_mem hi)
+        (by rintro rfl; exact ha hi)
+    rw [P.E_add _ _ hd, ih (fun i hi j hj hne =>
+      hdisj i (Finset.mem_insert_of_mem hi) j (Finset.mem_insert_of_mem hj) hne)]
+
+/-- **Unitality of the FC:** `∫ 1 dE = 1` over a covering partition
+    (`⋃ᵢ sᵢ = univ`, pairwise disjoint).  `∑ᵢ 1·E sᵢ = ∑ᵢ E sᵢ = E(⋃ᵢ sᵢ) =
+    E univ = 1`. -/
+theorem integralSimple_one {ι : Type*} [DecidableEq ι] (t : Finset ι)
+    (sets : ι → Set Ω)
+    (hdisj : ∀ i ∈ t, ∀ j ∈ t, i ≠ j → Disjoint (sets i) (sets j))
+    (hcover : ⋃ i ∈ t, sets i = Set.univ) :
+    P.integralSimple t (fun _ => 1) sets = 1 := by
+  simp only [integralSimple, one_smul]
+  rw [P.sum_E_biUnion t sets hdisj, hcover, P.E_univ]
+
 end PVContent
 
 /- ── Projection-valued MEASURE (the genuine object) ───────────────────────-/
@@ -286,10 +318,12 @@ end ProjectionValuedMeasure
          (all Mathlib lemmas exist): C\*-identity `CStarRing.norm_star_mul_self`
          gives `‖T‖² = ‖T⋆T‖`; then `0 ≤ T⋆T ≤ M²•1` (`star_mul_self_nonneg` +
          the order bound) feeds `CStarAlgebra.norm_le_norm_of_nonneg_of_le` to get
-         `‖T⋆T‖ ≤ ‖M²•1‖ = M²`.  The order bound needs two helpers still to build:
-         `∑ᵢ E sᵢ = E(⋃ᵢ sᵢ) ≤ 1` (finite additivity over a `Finset` + projection
-         `≤ 1`) and the ℂ-smul/real-order plumbing.  Then simple→bounded-Borel by
-         monotone-class / SOT bounded-convergence, and `⟪x,(∫f dE)y⟫ = ∫ f dμ_{x,y}`.
+         `‖T⋆T‖ ≤ ‖M²•1‖ = M²`.  The order bound: `sum_E_biUnion`
+         (`∑ᵢ E sᵢ = E(⋃ᵢ sᵢ)`, finite additivity over a `Finset`) is now PROVED,
+         with `integralSimple_one` (`∫1 dE = 1` over a covering partition) as a
+         corollary.  Remaining for the bound: `E(⋃) ≤ 1` (projection `≤ 1`) + the
+         ℂ-smul/real-order plumbing.  Then simple→bounded-Borel by monotone-class /
+         SOT bounded-convergence, and `⟪x,(∫f dE)y⟫ = ∫ f dμ_{x,y}`.
 
     (T3) SPECTRAL THEOREM.  Every bounded self-adjoint `T` admits a unique PVM on
          `ℝ` (supported on `spectrum`) with `⟪x, T x⟫ = ∫ id dμ_x`.  Recommended
