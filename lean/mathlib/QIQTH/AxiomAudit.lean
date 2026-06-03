@@ -451,8 +451,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — capacity + selector ⇒ EXACTLY ONE actual record.
 #print axioms QIQTH.CoreNoCollapse.qiqth_single_outcome_no_collapse
 -- expected: standard only — ∃! actual record, no collapse postulate.
-#print axioms QIQTH.CoreNoCollapse.QMRecords.joint_eq_weight_mul_cond
--- expected: standard only — collapse recovered as conditionalization (chain rule).
+#print axioms QIQTH.CoreNoCollapse.FinPVM.weight_sum_eq_one
+-- expected: standard only — Born normalisation ∑‖E r ψ‖²=1 (genuine resolution of identity).
+#print axioms QIQTH.CoreNoCollapse.FinPVM.condProb_eq_born_postState
+-- expected: standard only — collapse=conditionalization: condProb = Born on Lüders post-state.
+#print axioms QIQTH.CoreNoCollapse.FinPVM.joint_eq_weight_mul_cond
+-- expected: standard only — sequential Born = weight × conditional (chain rule).
+#print axioms QIQTH.CoreNoCollapse.pair_exceeds_of_cost_gt_half
+-- expected: standard only — cost_gt_half ⇒ the honest exact premise Qmax < cost r + cost s.
 
 -- QIQT-H CAPACITY MODEL: the finite-capacity bound DERIVED (not assumed).
 #print axioms QIQTH.CapacityModel.orthonormal_card_le_finrank

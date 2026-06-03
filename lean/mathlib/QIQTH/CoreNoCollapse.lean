@@ -32,6 +32,7 @@ Supporting literature (see CORE_THEOREM_REFS.md; TeX sources in refs/arxiv_sourc
 
 This module is axiom-free (standard three only). -/
 import Mathlib.Analysis.InnerProductSpace.Basic
+import Mathlib.Analysis.InnerProductSpace.Adjoint
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import Mathlib.Tactic
 
@@ -91,6 +92,15 @@ theorem coactual_subsingleton (A : Coactual C) : A.active.card ≤ 1 := by
     rwa [Finset.sum_pair hne] at h
   linarith [C.cost_gt_half r₁, C.cost_gt_half r₂, A.capacity]
 
+/-- **The honest exact premise.**  `coactual_subsingleton` really only needs that any
+    two distinct records together exceed capacity (`Q_max < cost r + cost s`); the
+    structure's `cost_gt_half` is a (clean, symmetric) *sufficient condition* for that.
+    This makes explicit where the physical content sits — and that it is the genuine
+    open target (the capacity model + bridge theorem) rather than a hidden assumption. -/
+theorem pair_exceeds_of_cost_gt_half (r s : C.Rec) (h : r ≠ s) :
+    C.Qmax < C.cost r + C.cost s := by
+  linarith [C.cost_gt_half r, C.cost_gt_half s]
+
 /- ── Block 4: actuality selector λ ─────────────────────────────────────────-/
 
 /-- The **actuality selector** `λ` for a run: it makes at least one complete record
@@ -112,44 +122,98 @@ theorem exactly_one_actual (S : Selection C) : S.config.active.card = 1 := by
 noncomputable def Selection.outcome (S : Selection C) : C.Rec :=
   (Finset.card_eq_one.mp (exactly_one_actual S)).choose
 
-/- ── Blocks 1,5,6: records as a PVM, Born weights, conditionalization ──────-/
+/- ── Blocks 1,5,6: a GENUINE PVM, Born normalisation, Lüders conditionalization ──
 
-variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
+   Upgraded after the 2026-06 GPT-5.5-pro soundness review: the record observable is
+   now an actual resolution of the identity (orthogonal projections summing to `1`), so
+   the Born normalisation `∑ ‖E r ψ‖² = 1` and the Lüders post-state are THEOREMS, not
+   names.  Requires a Hilbert space (`CompleteSpace`, for the adjoint).  Self-contained:
+   the core does NOT depend on the Tomita–Takesaki spectral module. -/
 
-/-- A **quantum record system**: a finite orthogonal resolution of the identity
-    (the decohered pointer/record observable) on the universal state `ψ`, evolving
-    unitarily (no collapse map appears). -/
-structure QMRecords (H : Type*) [NormedAddCommGroup H] [InnerProductSpace ℂ H] where
+variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
+
+/-- Finite Pythagoras for a pairwise-orthogonal family. -/
+private theorem norm_sum_sq_orthogonal {ι : Type*} (t : Finset ι) (g : ι → H)
+    (h : ∀ i ∈ t, ∀ j ∈ t, i ≠ j → inner ℂ (g i) (g j) = (0 : ℂ)) :
+    ‖∑ i ∈ t, g i‖ ^ 2 = ∑ i ∈ t, ‖g i‖ ^ 2 := by
+  have key : inner ℂ (∑ i ∈ t, g i) (∑ i ∈ t, g i) = ∑ i ∈ t, inner ℂ (g i) (g i) := by
+    rw [sum_inner]
+    refine Finset.sum_congr rfl (fun i hi => ?_)
+    rw [inner_sum, Finset.sum_eq_single i]
+    · intro j hj hji; exact h i hi j hj (Ne.symm hji)
+    · intro hni; exact absurd hi hni
+  simp only [inner_self_eq_norm_sq_to_K] at key
+  exact_mod_cast key
+
+/-- A **finite projective measurement (PVM)** — the decohered record observable as a
+    genuine resolution of the identity: orthogonal projections `E r` summing to `1`. -/
+structure FinPVM (H : Type*) [NormedAddCommGroup H] [InnerProductSpace ℂ H]
+    [CompleteSpace H] where
   Rec : Type
   [recFintype : Fintype Rec]
-  /-- record projections `E r` (orthogonal, complete) — already decohered -/
   E : Rec → (H →L[ℂ] H)
-  ψ : H
+  selfadj : ∀ r, IsSelfAdjoint (E r)
+  idem : ∀ r, IsIdempotentElem (E r)
+  orth : ∀ r s, r ≠ s → E r * E s = 0
+  complete : ∑ r, E r = 1
 
-attribute [instance] QMRecords.recFintype
+attribute [instance] FinPVM.recFintype
 
-/-- **Born weight** of a record: `w(r) = ‖E r ψ‖²` (the across-run frequency under
-    the typicality measure — cf. `QIQTH.GleasonSelector`/`BornTypicality`). -/
-noncomputable def QMRecords.weight (Q : QMRecords H) (r : Q.Rec) : ℝ :=
-  ‖Q.E r Q.ψ‖ ^ 2
+namespace FinPVM
 
-/-- **Collapse-as-conditionalization.**  The conditional probability of a later
-    record `b` (projection `F`) given the actual record `r` is the *Lüders* rule
-    `‖F (E r ψ)‖² / ‖E r ψ‖²`.  The joint/sequential probability factors as
-    `weight(r) · (conditional) = ‖F (E r ψ)‖²` — i.e. the textbook post-measurement
-    ("collapsed state `E r ψ / ‖E r ψ‖`") prediction is RECOVERED by conditioning on
-    the selected record, with NO collapse map in the dynamics. -/
-noncomputable def QMRecords.condProb (Q : QMRecords H) (r : Q.Rec) (F : H →L[ℂ] H) : ℝ :=
-  ‖F (Q.E r Q.ψ)‖ ^ 2 / ‖Q.E r Q.ψ‖ ^ 2
+variable (M : FinPVM H)
 
-/-- The joint (sequential) Born probability equals `weight × conditional` — the
-    chain rule that makes the collapse postulate operationally redundant. -/
-theorem QMRecords.joint_eq_weight_mul_cond (Q : QMRecords H) (r : Q.Rec)
-    (F : H →L[ℂ] H) (hr : Q.E r Q.ψ ≠ 0) :
-    Q.weight r * Q.condProb r F = ‖F (Q.E r Q.ψ)‖ ^ 2 := by
-  have hden : ‖Q.E r Q.ψ‖ ^ 2 ≠ 0 := pow_ne_zero 2 (norm_ne_zero_iff.mpr hr)
-  unfold QMRecords.weight QMRecords.condProb
+/-- Branch vectors of distinct records are orthogonal. -/
+theorem branch_orthogonal (ψ : H) {r s : M.Rec} (h : r ≠ s) :
+    inner ℂ (M.E r ψ) (M.E s ψ) = (0 : ℂ) := by
+  have hadj : ContinuousLinearMap.adjoint (M.E r) = M.E r := by
+    rw [← ContinuousLinearMap.star_eq_adjoint]; exact M.selfadj r
+  rw [← ContinuousLinearMap.adjoint_inner_right, hadj,
+    ← ContinuousLinearMap.mul_apply, M.orth r s h]
+  simp
+
+/-- **Born weight** of a record: `w(r) = ‖E r ψ‖²`. -/
+noncomputable def weight (ψ : H) (r : M.Rec) : ℝ := ‖M.E r ψ‖ ^ 2
+
+/-- **Born normalisation (THEOREM):** for a unit state the record weights sum to `1`.
+    This is the resolution of identity (`∑ E r = 1`) + orthogonality (Pythagoras). -/
+theorem weight_sum_eq_one (ψ : H) (hψ : ‖ψ‖ = 1) : ∑ r, M.weight ψ r = 1 := by
+  have hsum : ∑ r, M.E r ψ = ψ := by
+    rw [← ContinuousLinearMap.sum_apply, M.complete, ContinuousLinearMap.one_apply]
+  have hp := norm_sum_sq_orthogonal Finset.univ (fun r => M.E r ψ)
+    (fun i _ j _ hij => M.branch_orthogonal ψ hij)
+  rw [hsum] at hp
+  simp only [weight]
+  rw [← hp, hψ]; norm_num
+
+/-- Conditional probability of a later effect `F` given record `r` (Lüders rule). -/
+noncomputable def condProb (ψ : H) (r : M.Rec) (F : H →L[ℂ] H) : ℝ :=
+  ‖F (M.E r ψ)‖ ^ 2 / ‖M.E r ψ‖ ^ 2
+
+/-- The Lüders **post-selected (collapsed) state** `ψ_r = E r ψ / ‖E r ψ‖`. -/
+noncomputable def postState (ψ : H) (r : M.Rec) : H :=
+  ((‖M.E r ψ‖ : ℂ))⁻¹ • M.E r ψ
+
+/-- **Collapse-as-conditionalization (substantive form):** the conditional probability
+    `condProb` is exactly the Born rule applied to the *collapsed* post-selected state
+    `ψ_r`.  So "updating to the collapsed state" and "conditioning on the record" give
+    the SAME predictions — the collapse map is operationally redundant. -/
+theorem condProb_eq_born_postState (ψ : H) (r : M.Rec) (F : H →L[ℂ] H)
+    (hr : M.E r ψ ≠ 0) : ‖F (M.postState ψ r)‖ ^ 2 = M.condProb ψ r F := by
+  have hn : ‖M.E r ψ‖ ≠ 0 := norm_ne_zero_iff.mpr hr
+  have hnc : ‖(‖M.E r ψ‖ : ℂ)‖ = ‖M.E r ψ‖ := by simp
+  unfold postState condProb
+  rw [map_smul, norm_smul, norm_inv, hnc, mul_pow, inv_pow]
   field_simp
+
+/-- The joint (sequential) Born probability factors as `weight × conditional`. -/
+theorem joint_eq_weight_mul_cond (ψ : H) (r : M.Rec) (F : H →L[ℂ] H)
+    (hr : M.E r ψ ≠ 0) : M.weight ψ r * M.condProb ψ r F = ‖F (M.E r ψ)‖ ^ 2 := by
+  have hden : ‖M.E r ψ‖ ^ 2 ≠ 0 := pow_ne_zero 2 (norm_ne_zero_iff.mpr hr)
+  unfold weight condProb
+  field_simp
+
+end FinPVM
 
 /- ── Block 7: a non-vacuous instance (hypotheses NOT encoding the conclusion) ─-/
 
@@ -163,9 +227,19 @@ def witnessContext : RecordContext where
   Qmax := 3
   cost_gt_half := fun _ => by norm_num
 
-/-- In the witness, a selected run indeed has exactly one actual record. -/
-example (S : Selection witnessContext) : S.config.active.card = 1 :=
-  exactly_one_actual S
+/-- A concrete **`Selection`** in the witness: record `true` is actual (cost `2 ≤ 3`).
+    Witnesses that the FINAL theorem (`exactly_one_actual`) is non-vacuous — the
+    hypotheses are jointly satisfiable, not just `RecordContext` alone. -/
+def witnessSelection : Selection witnessContext where
+  config :=
+    { active := {true}
+      capacity := by
+        show (∑ _r ∈ ({true} : Finset Bool), (2 : ℝ)) ≤ 3
+        rw [Finset.sum_const, Finset.card_singleton]; norm_num }
+  selected := ⟨true, Finset.mem_singleton_self true⟩
+
+/-- The concrete selected run has exactly one actual record. -/
+example : witnessSelection.config.active.card = 1 := exactly_one_actual witnessSelection
 
 /- ── Capstone: the conditional no-collapse representation statement ────────-/
 
