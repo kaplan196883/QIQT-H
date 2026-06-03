@@ -122,6 +122,38 @@ theorem integralSimple_union {ι : Type*} [DecidableEq ι] (t₁ t₂ : Finset �
       = P.integralSimple t₁ c sets + P.integralSimple t₂ c sets := by
   simp only [integralSimple, Finset.sum_union h]
 
+/-- **The functional calculus respects the adjoint** (`∫ f̄ dE = (∫ f dE)†`), on
+    simple functions: `(∑ᵢ cᵢ E sᵢ)† = ∑ᵢ c̄ᵢ E sᵢ` (each `E sᵢ` self-adjoint). -/
+theorem integralSimple_adjoint {ι : Type*} (t : Finset ι) (c : ι → ℂ)
+    (sets : ι → Set Ω) :
+    ContinuousLinearMap.adjoint (P.integralSimple t c sets)
+      = P.integralSimple t (fun i => star (c i)) sets := by
+  rw [← ContinuousLinearMap.star_eq_adjoint]
+  simp only [integralSimple, star_sum, star_smul]
+  refine Finset.sum_congr rfl (fun i _ => ?_)
+  rw [show star (P.E (sets i)) = P.E (sets i) from P.isSA (sets i)]
+
+/-- **The functional calculus is multiplicative** on simple functions over a
+    pairwise-disjoint family: `(∑ᵢ cᵢ E sᵢ)(∑ⱼ dⱼ E sⱼ) = ∑ᵢ cᵢdᵢ E sᵢ`.  This is
+    the heart of "`f ↦ ∫ f dE` is a `*`-homomorphism": the cross terms vanish via
+    `E sᵢ · E sⱼ = E(sᵢ∩sⱼ) = E ∅ = 0` for `i ≠ j`, and the diagonal collapses by
+    idempotence — exactly `∫ f dE · ∫ g dE = ∫ (fg) dE` for simple `f, g`. -/
+theorem integralSimple_mul {ι : Type*} (t : Finset ι) (c d : ι → ℂ)
+    (sets : ι → Set Ω)
+    (hdisj : ∀ i ∈ t, ∀ j ∈ t, i ≠ j → Disjoint (sets i) (sets j)) :
+    P.integralSimple t c sets * P.integralSimple t d sets
+      = P.integralSimple t (fun i => c i * d i) sets := by
+  simp only [integralSimple]
+  rw [Finset.sum_mul]
+  refine Finset.sum_congr rfl (fun i hi => ?_)
+  rw [Finset.mul_sum]
+  have hoff : ∀ j ∈ t, j ≠ i →
+      (c i • P.E (sets i)) * (d j • P.E (sets j)) = 0 := by
+    intro j hj hji
+    rw [smul_mul_smul, ← P.E_inter,
+      (hdisj i hi j hj (Ne.symm hji)).inter_eq, P.E_empty, smul_zero]
+  rw [Finset.sum_eq_single_of_mem i hi hoff, smul_mul_smul, P.mul_self]
+
 end PVContent
 
 /- ── Projection-valued MEASURE (the genuine object) ───────────────────────-/
@@ -230,9 +262,15 @@ end ProjectionValuedMeasure
     (T2) BOUNDED-BOREL FUNCTIONAL CALCULUS.  `f ↦ ∫ f dE` from bounded measurable
          functions to `H →L[ℂ] H`, a `*`-homomorphism with `‖∫f dE‖ ≤ ‖f‖∞`,
          `∫f̄ dE = (∫f dE)†`, `∫(fg)dE = (∫f dE)(∫g dE)`, and
-         `⟪x,(∫f dE)y⟫ = ∫ f dμ_{x,y}` (μ via polarization of the `μ_x`).  The
-         hard step is the continuous→Borel multiplicativity extension
-         (monotone-class) + SOT bounded-convergence, NOT uniqueness.
+         `⟪x,(∫f dE)y⟫ = ∫ f dμ_{x,y}` (μ via polarization of the `μ_x`).
+         ◧ STARTED — the `*`-HOMOMORPHISM CORE on simple functions is PROVED
+         (axiom-free): `integralSimple_adjoint` (adjoint law `∫f̄ = (∫f)†`, each
+         `E s` self-adjoint) and `integralSimple_mul` (multiplicativity
+         `∫f·∫g = ∫(fg)` over a pairwise-disjoint family — cross terms vanish via
+         `E sᵢ·E sⱼ = E(sᵢ∩sⱼ) = E ∅ = 0`, diagonal collapses by idempotence).
+         REMAINING (analytic): the norm bound `‖∫f dE‖ ≤ ‖f‖∞` (orthogonal-
+         projection norm), the simple→bounded-Borel extension by monotone-class /
+         SOT bounded-convergence, and the form `⟪x,(∫f dE)y⟫ = ∫ f dμ_{x,y}`.
 
     (T3) SPECTRAL THEOREM.  Every bounded self-adjoint `T` admits a unique PVM on
          `ℝ` (supported on `spectrum`) with `⟪x, T x⟫ = ∫ id dμ_x`.  Recommended

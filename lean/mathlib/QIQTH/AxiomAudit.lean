@@ -301,6 +301,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — Phase-1 target T1 PROVED: the scalar spectral
 -- measure is a genuine MeasureTheory.Measure of total mass ‖x‖² (from strong-
 -- operator σ-additivity via the bounded functional ⟪x,·⟫).
+-- Phase-1 target T2 (bounded-Borel FC), homomorphism core on simple functions:
+#print axioms QIQTH.Spectral.PVContent.integralSimple_mul
+-- expected: standard only — FC multiplicativity ∫f·∫g=∫(fg) on a disjoint family.
+#print axioms QIQTH.Spectral.PVContent.integralSimple_adjoint
+-- expected: standard only — FC adjoint law ∫f̄ = (∫f)†.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
