@@ -71,8 +71,11 @@ theorem D_convex_in_first_arg
 noncomputable def KL {ι : Type*} (s : Finset ι) (p q : ι → ℝ) : ℝ :=
   ∑ i ∈ s, p i * Real.log (p i / q i)
 
-/-- **Klein-style inequality for *finite classical* KL — PROVED** (Gibbs'
-    inequality).  Discharges the former axiom by the elementary log bound
+/-- **Klein-style inequality for *finite classical* KL — PROVED** (the
+    *full-support* finite Gibbs' inequality: `q` strictly positive on all of `s`,
+    the standard hypothesis; the more general support-degenerate form would
+    instead require only `p_i > 0 → q_i > 0` with the `0·log(0/q)=0` convention).
+    Discharges the former axiom by the elementary log bound
     `Real.log x ≤ x − 1`: termwise `p_i - q_i ≤ p_i·log(p_i/q_i)`, then sum and
     use `∑ p = ∑ q = 1`.  This is the finite-classical shadow of Klein /
     relative-entropy positivity (Open Problem 9 / the information bound behind

@@ -97,7 +97,9 @@ theorem single_record_certain {ι : Type*} (s : Finset ι) (p : ι → ℝ)
 /-- **Determinacy from zero entropy — PROVED.**  If `H(p) = 0` (and `p` is a
     distribution with `p_i ≤ 1`), some record has probability exactly `1`.
     Immediate from `single_record_certain` (the `δ = 0` case of the Fano-step
-    bound), discharging the former interface axiom. -/
+    bound), discharging the former interface axiom.  This is the "certain-atom"
+    form (`∃ i₀, p i₀ = 1`); the complementary `∀ j ≠ i₀, p j = 0` then follows
+    from `hp_nn` + `hSum` (the other masses sum to `0` and are nonnegative). -/
 theorem H_zero_imp_dirac {ι : Type*} (s : Finset ι) (p : ι → ℝ)
     (hp_nn : ∀ i ∈ s, 0 ≤ p i) (hp_le : ∀ i ∈ s, p i ≤ 1)
     (hSum : ∑ i ∈ s, p i = 1) (hH : H s p = 0) :
