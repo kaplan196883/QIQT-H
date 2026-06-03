@@ -297,6 +297,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — E sᶜ = 1 - E s.
 #print axioms QIQTH.Spectral.PVContent.mu_univ
 -- expected: standard only — scalar set-function total mass ‖x‖².
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.scalarMeasure_univ
+-- expected: standard only — Phase-1 target T1 PROVED: the scalar spectral
+-- measure is a genuine MeasureTheory.Measure of total mass ‖x‖² (from strong-
+-- operator σ-additivity via the bounded functional ⟪x,·⟫).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

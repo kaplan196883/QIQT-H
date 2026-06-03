@@ -86,8 +86,10 @@ upstream because it is the keystone everyone needs and unblocks Route 1.
   additivity (ultrafilter counterexample), so the scalar `μ_x`-is-a-`Measure`
   claim (T1) is sound only on the σ-additive `ProjectionValuedMeasure`, not on a
   content; and σ-additivity must be strong-operator, never operator-norm (norm
-  σ-additivity is false). Named analytic targets: **(T1)** scalar measures as
-  genuine `Measure`s [next concrete theorem, weeks–months]; **(T2)** bounded-Borel
+  σ-additivity is false). Named analytic targets: **(T1) ✅ PROVED** —
+  `ProjectionValuedMeasure.scalarMeasure x` is a genuine `MeasureTheory.Measure`
+  with `μ_x s = ofReal ‖E s x‖²` and total mass `ofReal ‖x‖²` (strong σ-additivity
+  pushed through the bounded functional `⟪x,·⟫`; axiom-free); **(T2)** bounded-Borel
   FC `f↦∫f dE` (hard step = continuous→Borel multiplicativity extension +
   SOT bounded convergence, *not* uniqueness); **(T3)** the spectral theorem, via
   Mathlib's **continuous FC + Riesz–Markov** (extend `π : C(spec T)→B(H)` to a

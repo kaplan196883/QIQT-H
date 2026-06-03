@@ -29,9 +29,11 @@
 
 import Mathlib.Analysis.InnerProductSpace.Adjoint
 import Mathlib.Analysis.InnerProductSpace.Basic
+import Mathlib.Analysis.InnerProductSpace.LinearMap
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.MeasureTheory.MeasurableSpace.Basic
-import Mathlib.Topology.Algebra.InfiniteSum.Basic
+import Mathlib.MeasureTheory.Measure.MeasureSpace
+import Mathlib.Topology.Algebra.InfiniteSum.Module
+import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
 import Mathlib.Tactic
 
 namespace QIQTH
@@ -144,15 +146,86 @@ structure ProjectionValuedMeasure (Ω H : Type*) [MeasurableSpace Ω]
     (Pairwise fun m n => Disjoint (A m) (A n)) →
     ∀ x : H, HasSum (fun n => E (A n) x) (E (⋃ n, A n) x)
 
+namespace ProjectionValuedMeasure
+
+variable [MeasurableSpace Ω] (P : ProjectionValuedMeasure Ω H)
+
+theorem adjoint_eq {s : Set Ω} (hs : MeasurableSet s) :
+    ContinuousLinearMap.adjoint (P.E s) = P.E s := by
+  rw [← ContinuousLinearMap.star_eq_adjoint]; exact P.isSA hs
+
+theorem E_apply_idem {s : Set Ω} (hs : MeasurableSet s) (x : H) :
+    P.E s (P.E s x) = P.E s x := by
+  rw [← ContinuousLinearMap.mul_apply, P.isIdem hs]
+
+/-- `⟪x, E s x⟫ = ‖E s x‖²` for measurable `s`. -/
+theorem inner_E_self {s : Set Ω} (hs : MeasurableSet s) (x : H) :
+    inner ℂ x (P.E s x) = (‖P.E s x‖ : ℂ) ^ 2 := by
+  have key : inner ℂ x (ContinuousLinearMap.adjoint (P.E s) (P.E s x))
+      = inner ℂ (P.E s x) (P.E s x) :=
+    ContinuousLinearMap.adjoint_inner_right (P.E s) x (P.E s x)
+  rw [P.adjoint_eq hs, P.E_apply_idem hs] at key
+  rw [key]; exact inner_self_eq_norm_sq_to_K _
+
+/-- Real form: `Re ⟪x, E s x⟫ = ‖E s x‖²`. -/
+theorem re_inner_E {s : Set Ω} (hs : MeasurableSet s) (x : H) :
+    (inner ℂ x (P.E s x)).re = ‖P.E s x‖ ^ 2 := by
+  rw [P.inner_E_self hs]; norm_cast
+
+/-- **The scalar spectral measure** `μ_x` — now a genuine
+    `MeasureTheory.Measure Ω` (this is Phase-1 target T1, PROVED): the strong-
+    operator σ-additivity of `E` (`hasSum_iUnion`) pushed through the bounded
+    linear functional `⟪x,·⟫` gives σ-additivity of `s ↦ ‖E s x‖²`. -/
+noncomputable def scalarMeasure (x : H) : MeasureTheory.Measure Ω :=
+  MeasureTheory.Measure.ofMeasurable
+    (fun s _ => ENNReal.ofReal (‖P.E s x‖ ^ 2))
+    (by simp [P.E_empty])
+    (fun f hf hd => by
+      show ENNReal.ofReal (‖P.E (⋃ i, f i) x‖ ^ 2)
+        = ∑' n, ENNReal.ofReal (‖P.E (f n) x‖ ^ 2)
+      have hUm : MeasurableSet (⋃ i, f i) := MeasurableSet.iUnion hf
+      have hsum := P.hasSum_iUnion hf hd x
+      have hC := ContinuousLinearMap.hasSum (innerSL ℂ x) hsum
+      have hRe := ContinuousLinearMap.hasSum Complex.reCLM hC
+      have hR : HasSum (fun n => ‖P.E (f n) x‖ ^ 2) (‖P.E (⋃ i, f i) x‖ ^ 2) := by
+        have hfun : (fun n => Complex.reCLM (innerSL ℂ x (P.E (f n) x)))
+            = (fun n => ‖P.E (f n) x‖ ^ 2) := by
+          funext n
+          simp only [Complex.reCLM_apply]
+          exact P.re_inner_E (hf n) x
+        have htar : Complex.reCLM (innerSL ℂ x (P.E (⋃ i, f i) x))
+            = ‖P.E (⋃ i, f i) x‖ ^ 2 := by
+          simp only [Complex.reCLM_apply]; exact P.re_inner_E hUm x
+        rw [hfun, htar] at hRe; exact hRe
+      rw [show ‖P.E (⋃ i, f i) x‖ ^ 2 = ∑' n, ‖P.E (f n) x‖ ^ 2 from hR.tsum_eq.symm]
+      exact ENNReal.ofReal_tsum_of_nonneg (fun _ => sq_nonneg _) hR.summable)
+
+/-- Value of the scalar spectral measure on a measurable set. -/
+theorem scalarMeasure_apply (x : H) {s : Set Ω} (hs : MeasurableSet s) :
+    P.scalarMeasure x s = ENNReal.ofReal (‖P.E s x‖ ^ 2) :=
+  MeasureTheory.Measure.ofMeasurable_apply s hs
+
+/-- **Total mass `‖x‖²`** — `μ_x` is a finite measure summing the resolution of
+    identity. -/
+theorem scalarMeasure_univ (x : H) :
+    P.scalarMeasure x Set.univ = ENNReal.ofReal (‖x‖ ^ 2) := by
+  rw [P.scalarMeasure_apply x MeasurableSet.univ, P.E_univ,
+    ContinuousLinearMap.one_apply]
+
+end ProjectionValuedMeasure
+
 /- ── Phase-1 analytic TARGETS (named, sound on `ProjectionValuedMeasure`) ──
 
     Recorded precisely (not as opaque axioms — the module stays axiom-free):
 
-    (T1) SCALAR MEASURES.  For each `x : H`, `s ↦ ENNReal.ofReal (‖E s x‖²)` is a
-         genuine finite `MeasureTheory.Measure` on `Ω` of total mass `‖x‖²`.
-         NOW SOUND given strong σ-additivity (`hasSum_iUnion` ⇒ countable
-         additivity of `‖E(·)x‖²`); FALSE for a mere `PVContent`.  [Next concrete
-         theorem — scale: weeks–months.]
+    (T1) SCALAR MEASURES.  ✅ PROVED — `ProjectionValuedMeasure.scalarMeasure x`
+         is a genuine finite `MeasureTheory.Measure Ω` with
+         `scalarMeasure_apply : μ_x s = ENNReal.ofReal (‖E s x‖²)` (measurable `s`)
+         and `scalarMeasure_univ : μ_x univ = ENNReal.ofReal (‖x‖²)`.  Proof:
+         strong σ-additivity `hasSum_iUnion` pushed through the bounded linear
+         functional `⟪x,·⟫` (then `Re`) gives σ-additivity of `‖E(·)x‖²`, fed to
+         `Measure.ofMeasurable`.  (FALSE for a mere `PVContent` — see the
+         ultrafilter remark above.)
 
     (T2) BOUNDED-BOREL FUNCTIONAL CALCULUS.  `f ↦ ∫ f dE` from bounded measurable
          functions to `H →L[ℂ] H`, a `*`-homomorphism with `‖∫f dE‖ ≤ ‖f‖∞`,
