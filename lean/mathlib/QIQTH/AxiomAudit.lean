@@ -372,6 +372,8 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — E2c product bound ‖B_f(x,y)‖ ≤ 2C‖x‖‖y‖.
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.inner_intBorel
 -- expected: standard only — ⋆ THE BOUNDED-BOREL FC ∫f dE: ⟪(∫f dE)x,y⟫ = B_f(x,y).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.intBorel_norm_le
+-- expected: standard only — operator norm bound ‖∫f dE‖ ≤ 2C.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

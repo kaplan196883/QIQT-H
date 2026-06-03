@@ -941,6 +941,23 @@ theorem inner_intBorel {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (hC0 : 0 �
     LinearMap.mkContinuous₂_apply]
   rfl
 
+/-- **Operator norm bound:** `‖∫f dE‖ ≤ 2C`.  From `‖T x‖² = Re B_f(x, T x) ≤
+    ‖B_f(x, T x)‖ ≤ 2C‖x‖‖T x‖`. -/
+theorem intBorel_norm_le {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, ‖f ω‖ ≤ C) : ‖P.intBorel hf hC0 hC‖ ≤ 2 * C := by
+  refine ContinuousLinearMap.opNorm_le_bound _ (by linarith) (fun x => ?_)
+  set T := P.intBorel hf hC0 hC with hT
+  have hkey : ‖T x‖ ^ 2 ≤ 2 * C * ‖x‖ * ‖T x‖ := by
+    have h1 : (P.bilinDiag f x (T x)).re = ‖T x‖ ^ 2 := by
+      rw [hT, ← P.inner_intBorel hf hC0 hC x, inner_self_eq_norm_sq_to_K]; norm_cast
+    rw [← h1]
+    calc (P.bilinDiag f x (T x)).re ≤ ‖P.bilinDiag f x (T x)‖ := Complex.re_le_norm _
+      _ ≤ 2 * C * ‖x‖ * ‖T x‖ := P.bilinDiag_norm_le hf hC0 hC x (T x)
+  rcases (norm_nonneg (T x)).eq_or_lt with h0 | h0
+  · rw [← h0]; exact mul_nonneg (mul_nonneg (by norm_num) hC0) (norm_nonneg x)
+  · rw [pow_two] at hkey
+    exact le_of_mul_le_mul_right hkey h0
+
 end ProjectionValuedMeasure
 
 /- ── Phase-1 analytic TARGETS (named, sound on `ProjectionValuedMeasure`) ──

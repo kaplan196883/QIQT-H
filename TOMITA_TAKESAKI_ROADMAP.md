@@ -344,10 +344,14 @@ map and it avoids operator-topology limits for *existence*.**
   `bilinDiag_conj_symm` (slot-2 linearity) and additivity, `B_f` is a sesquilinear
   form. **No `DCT`, no total-variation, no continuity of `v↦μ_v` — pure measure
   algebra + polarization.**
-- **E2c — boundedness + bundle.** `|B_f(x,y)| ≤ ‖f‖∞ ‖x‖‖y‖` (from
-  `|∫ f dμ_z| ≤ ‖f‖∞·μ_z(univ) = ‖f‖∞‖z‖²` + polarization arithmetic). Bundle into
-  `H →L⋆[ℂ] H →L[ℂ] ℂ` (continuity in each slot from the bound), then
-  `intBorel f := B_f♯`, giving `⟪x,(intBorel f)y⟫ = B_f(x,y)` and `‖intBorel f‖ ≤ ‖f‖∞`.
+- **E2c — boundedness + bundle. ✅ DONE (axiom-free).** `diagInt_norm_le`
+  (`‖D_f x‖ ≤ C‖x‖²`), `bilinDiag_norm_le_add` (`‖B_f(x,y)‖ ≤ C(‖x‖²+‖y‖²)`,
+  polarization + parallelogram), `bilinDiag_norm_le` (`‖B_f(x,y)‖ ≤ 2C‖x‖‖y‖`,
+  unit-vector normalization). Bundled `bilinDiagₗ : H →ₗ⋆[ℂ] H →ₗ[ℂ] ℂ`
+  (`LinearMap.mk₂'ₛₗ`), then **`intBorel f := continuousLinearMapOfBilin
+  (mkContinuous₂ bilinDiagₗ (2C) bound)`** — the operator `∫f dE` EXISTS. Properties:
+  `inner_intBorel` (`⟪(∫f dE) x, y⟫ = B_f(x,y)`) and `intBorel_norm_le`
+  (`‖∫f dE‖ ≤ 2C`). No operator-topology limits, no continuity hypotheses.
 - **E2d — consistency.** `intBorel (simple f) = integralSimple …` via
   `unique_continuousLinearMapOfBilin` + `inner_integralSimple_eq_polarization`
   (both sides have the same sesquilinear form). Transfers `∫f̄=(∫f)†` to bounded `f`.
