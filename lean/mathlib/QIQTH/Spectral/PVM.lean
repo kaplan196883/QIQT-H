@@ -33,6 +33,7 @@ import Mathlib.Analysis.InnerProductSpace.LinearMap
 import Mathlib.Analysis.InnerProductSpace.Positive
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import Mathlib.MeasureTheory.Measure.MeasureSpace
+import Mathlib.MeasureTheory.Integral.Lebesgue.Add
 import Mathlib.Topology.Algebra.InfiniteSum.Module
 import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
 import Mathlib.Tactic
@@ -404,6 +405,70 @@ theorem scalarMeasure_univ (x : H) :
   rw [P.scalarMeasure_apply x MeasurableSet.univ, P.E_univ,
     ContinuousLinearMap.one_apply]
 
+/- ── Simple integral and the integral-against-`μ_x` bridge (T2) ────────────-/
+
+/-- **Spectral integral of a simple function** on the genuine PVM:
+    `∫(∑ᵢ cᵢ 𝟙_{sᵢ}) dE = ∑ᵢ cᵢ E sᵢ`. -/
+noncomputable def integralSimple {ι : Type*} (t : Finset ι)
+    (c : ι → ℂ) (sets : ι → Set Ω) : H →L[ℂ] H :=
+  ∑ i ∈ t, c i • P.E (sets i)
+
+/-- **Sesquilinear form of the simple integral** (pure linearity, no measurability
+    needed): `⟪x, (∫f dE) y⟫ = ∑ᵢ cᵢ ⟪x, E sᵢ y⟫`.  This is the bilinear datum
+    whose diagonal is `∫ f dμ_x` and whose polarization gives the complex measures
+    `μ_{x,y}`. -/
+theorem inner_integralSimple_left {ι : Type*} (t : Finset ι) (c : ι → ℂ)
+    (sets : ι → Set Ω) (x y : H) :
+    inner ℂ x ((P.integralSimple t c sets) y)
+      = ∑ i ∈ t, c i * inner ℂ x (P.E (sets i) y) := by
+  simp only [integralSimple, ContinuousLinearMap.sum_apply,
+    ContinuousLinearMap.smul_apply, inner_sum, inner_smul_right]
+
+/-- **Diagonal real form**: for real coefficients,
+    `Re ⟪x, (∫f dE) x⟫ = ∑ᵢ aᵢ ‖E sᵢ x‖²` — the μ_x-weighted sum. -/
+theorem re_inner_integralSimple_self {ι : Type*} (t : Finset ι) (a : ι → ℝ)
+    (sets : ι → Set Ω) (x : H) (hm : ∀ i ∈ t, MeasurableSet (sets i)) :
+    (inner ℂ x ((P.integralSimple t (fun i => (a i : ℂ)) sets) x)).re
+      = ∑ i ∈ t, a i * ‖P.E (sets i) x‖ ^ 2 := by
+  have h : inner ℂ x ((P.integralSimple t (fun i => (a i : ℂ)) sets) x)
+      = ((∑ i ∈ t, a i * ‖P.E (sets i) x‖ ^ 2 : ℝ) : ℂ) := by
+    rw [P.inner_integralSimple_left, Complex.ofReal_sum]
+    refine Finset.sum_congr rfl (fun i hi => ?_)
+    rw [P.inner_E_self (hm i hi)]; push_cast; ring
+  rw [h, Complex.ofReal_re]
+
+/-- **The simple FC integrates against `μ_x`** (genuine Lebesgue integral):
+    `∫⁻ (∑ᵢ aᵢ 𝟙_{sᵢ}) dμ_x = ENNReal.ofReal (∑ᵢ aᵢ ‖E sᵢ x‖²)` for nonneg `aᵢ`. -/
+theorem lintegral_indicatorSum_eq {ι : Type*} (t : Finset ι) (a : ι → ℝ)
+    (sets : ι → Set Ω) (x : H) (hm : ∀ i ∈ t, MeasurableSet (sets i))
+    (ha : ∀ i ∈ t, 0 ≤ a i) :
+    ∫⁻ ω, (∑ i ∈ t, (sets i).indicator (fun _ => ENNReal.ofReal (a i)) ω)
+        ∂(P.scalarMeasure x)
+      = ENNReal.ofReal (∑ i ∈ t, a i * ‖P.E (sets i) x‖ ^ 2) := by
+  have hmeas : ∀ i ∈ t,
+      Measurable ((sets i).indicator (fun _ => ENNReal.ofReal (a i))) :=
+    fun i hi => measurable_const.indicator (hm i hi)
+  rw [MeasureTheory.lintegral_finsetSum t hmeas,
+    ENNReal.ofReal_sum_of_nonneg (fun i hi => mul_nonneg (ha i hi) (sq_nonneg _))]
+  refine Finset.sum_congr rfl (fun i hi => ?_)
+  rw [MeasureTheory.lintegral_indicator_const (hm i hi),
+    P.scalarMeasure_apply x (hm i hi), ← ENNReal.ofReal_mul (ha i hi)]
+
+/-- **`⟪x,(∫f dE)x⟫ = ∫ f dμ_x`** for a nonneg real simple function
+    `f = ∑ᵢ aᵢ 𝟙_{sᵢ}` (the Phase-1 T2 quadratic-form bridge, on the *genuine*
+    scalar spectral measure): the expectation of the simple effect in state `x`
+    equals the Lebesgue integral of `f` against `μ_x`. -/
+theorem re_inner_integralSimple_eq_lintegral {ι : Type*} (t : Finset ι) (a : ι → ℝ)
+    (sets : ι → Set Ω) (x : H) (hm : ∀ i ∈ t, MeasurableSet (sets i))
+    (ha : ∀ i ∈ t, 0 ≤ a i) :
+    (inner ℂ x ((P.integralSimple t (fun i => (a i : ℂ)) sets) x)).re
+      = (∫⁻ ω, (∑ i ∈ t, (sets i).indicator (fun _ => ENNReal.ofReal (a i)) ω)
+          ∂(P.scalarMeasure x)).toReal := by
+  rw [P.lintegral_indicatorSum_eq t a sets x hm ha,
+    P.re_inner_integralSimple_self t a sets x hm,
+    ENNReal.toReal_ofReal
+      (Finset.sum_nonneg (fun i hi => mul_nonneg (ha i hi) (sq_nonneg _)))]
+
 end ProjectionValuedMeasure
 
 /- ── Phase-1 analytic TARGETS (named, sound on `ProjectionValuedMeasure`) ──
@@ -444,8 +509,16 @@ end ProjectionValuedMeasure
          last), then `opNorm_le_bound`.  Supporting order facts also PROVED:
          `E_nonneg` (`0 ≤ E s`) and `E_le_one` (`E s ≤ 1`), and
          `integralSimple_one` (`∫1 dE = 1` over a covering partition).
-         REMAINING for T2: simple→bounded-Borel by monotone-class /
-         SOT bounded-convergence, and `⟪x,(∫f dE)y⟫ = ∫ f dμ_{x,y}`.
+         ★ THE SESQUILINEAR / QUADRATIC-FORM BRIDGE IS NOW PROVED on the genuine
+         `ProjectionValuedMeasure` (axiom-free): `inner_integralSimple_left`
+         (`⟪x,(∫f)y⟫ = ∑ᵢ cᵢ⟪x,E sᵢ y⟫`, the bilinear datum), its diagonal
+         `re_inner_integralSimple_self` (`Re⟪x,(∫f)x⟫ = ∑ᵢ aᵢ‖E sᵢ x‖²`), and the
+         genuine Lebesgue-integral identity `re_inner_integralSimple_eq_lintegral`
+         (`Re⟪x,(∫f dE)x⟫ = ∫ f dμ_x` for a nonneg real simple `f`, with `μ_x` the
+         T1 scalar spectral measure), via `lintegral_indicatorSum_eq`.
+         REMAINING for T2: the simple→bounded-Borel EXTENSION (monotone-class /
+         SOT bounded-convergence) lifting these from simple `f` to all bounded
+         Borel `f`, and the off-diagonal complex measures `μ_{x,y}` by polarization.
 
     (T3) SPECTRAL THEOREM.  Every bounded self-adjoint `T` admits a unique PVM on
          `ℝ` (supported on `spectrum`) with `⟪x, T x⟫ = ∫ id dμ_x`.  Recommended

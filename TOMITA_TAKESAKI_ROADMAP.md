@@ -99,7 +99,11 @@ upstream because it is the keystone everyone needs and unblocks Route 1.
   Pythagoras estimate, since the C\*-order route is blocked by the missing
   `StarOrderedRing (H →L[ℂ] H)` instance in Mathlib (only the Loewner order is
   available); supporting `E_nonneg`/`E_le_one`/`norm_E_apply_le` also proved;
-  remaining = simple→Borel extension + sesquilinear form); **(T3)** the spectral theorem, via
+  **the quadratic-form bridge `Re⟪x,(∫f dE)x⟫ = ∫ f dμ_x` (nonneg simple `f`,
+  genuine scalar measure `μ_x`) is now PROVED axiom-free**
+  (`re_inner_integralSimple_eq_lintegral`, via `inner_integralSimple_left` +
+  `lintegral_indicatorSum_eq`); remaining = simple→bounded-Borel extension +
+  off-diagonal `μ_{x,y}` by polarization); **(T3)** the spectral theorem, via
   Mathlib's **continuous FC + Riesz–Markov** (extend `π : C(spec T)→B(H)` to a
   normal rep of bounded Borel functions, then `E(B):=Φ(1_B)`; *avoid* the
   bidual/universal-W\* route in Lean).

@@ -322,6 +322,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — projections are contractions (‖E s x‖ ≤ ‖x‖).
 #print axioms QIQTH.Spectral.PVContent.integralSimple_opNorm_le
 -- expected: standard only — the C*-NORM BOUND ‖∫f dE‖ ≤ ‖f‖∞ for the simple FC.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.inner_integralSimple_left
+-- expected: standard only — sesquilinear form ⟪x,(∫f)y⟫ = ∑ᵢ cᵢ⟪x,E sᵢ y⟫.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.re_inner_integralSimple_self
+-- expected: standard only — diagonal real form Re⟪x,(∫f)x⟫ = ∑ᵢ aᵢ‖E sᵢ x‖².
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.lintegral_indicatorSum_eq
+-- expected: standard only — ∫⁻(∑aᵢ𝟙_{sᵢ}) dμ_x = ofReal(∑aᵢ‖E sᵢ x‖²).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.re_inner_integralSimple_eq_lintegral
+-- expected: standard only — T2 BRIDGE ⟪x,(∫f dE)x⟫ = ∫ f dμ_x (genuine measure).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
