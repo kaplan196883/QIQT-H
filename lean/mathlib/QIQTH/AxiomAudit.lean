@@ -256,6 +256,15 @@ namespace QIQTH.AxiomAudit
 -- the UnitaryCovariance + UniformPVMData structure is not over-determined).
 #print axioms QIQTH.LorentzSelectionStrong.covariantProbability_of_unitaryPVM
 -- expected: standard only — packaged covariant probability distribution.
+-- Sixth pass: the SECTION-OBJECT group-action law + full-PVM preservation.
+#print axioms QIQTH.LorentzSelectionStrong.actSection_one
+-- expected: standard only — identity law 1·λ = λ (section-object level).
+#print axioms QIQTH.LorentzSelectionStrong.actSection_mul
+-- expected: standard only — composition law (g₁g₂)·λ = g₂·(g₁·λ); actSection is
+-- a genuine G-action on Γ(X) (the section-object law, no longer just the
+-- selector-level shadow selection_cocycle).
+#print axioms QIQTH.LorentzSelectionStrong.unitary_preserves_resolution
+-- expected: standard only — U preserves ∑E=1 (boosted effects are a full PVM).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

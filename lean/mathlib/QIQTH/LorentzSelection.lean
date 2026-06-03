@@ -250,6 +250,14 @@ theorem GlobalSection.ext {P : RecordPresheaf Diam} {s t : GlobalSection P}
   have hvw : v = w := funext h
   subst hvw; rfl
 
+/-- **Transport a section value along a diamond equality** — `castSector` of a
+    section value at `D₀` is the section value at `D₁`.  Removes transport noise
+    when reasoning about `actSection` across propositionally-equal diamonds
+    (GPT-5.5-pro-recommended helper for the section-object group-action law). -/
+theorem GlobalSection.val_cast {P : RecordPresheaf Diam} (s : GlobalSection P)
+    {D₀ D₁ : Diam} (h : D₀ = D₁) : castSector h (s.val D₀) = s.val D₁ := by
+  cases h; rfl
+
 /- ── 6. THE COVARIANCE IDENTITY (the proved one-liner) ─────────────────
 
     Requirement 3:  A_{gD}[U_gΦ, g·λ] = g · A_D[Φ,λ].

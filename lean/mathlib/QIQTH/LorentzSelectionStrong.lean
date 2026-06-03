@@ -548,5 +548,74 @@ theorem covariantProbability_of_unitaryPVM {G : Type*} [Group G]
   sum_one := fun D => ubornω_sum_one B.toUniformBornData D
   covariant := fun g D x => ubornω_covariant C g D x
 
+/-- **Unitary transport preserves the resolution of identity** — completeness,
+    not just individual projections, is preserved.  Conjugating the source PVM's
+    resolution of identity `∑_x E_x = 1` by `U` gives `U·1·Uᴴ = U Uᴴ = 1` (the
+    last step uses `U Uᴴ = 1`, derived from the finite-square `Uᴴ U = 1` via
+    `mul_eq_one_comm`).  Together with `E_cov` (`E_{gD}(γ x) = U E_x Uᴴ`) and
+    `E_cov_preserves_proj`, this says the boosted effects form a FULL PVM —
+    closing the preservation gap the review left (only projections were
+    preserved before). -/
+theorem unitary_preserves_resolution {G : Type*} [Group G] {P : RecordPresheaf Diam}
+    {A : GroupAction G P} {B : UniformPVMData P}
+    (C : UnitaryCovariance A B.toUniformBornData) (g : G) (D : Diam) :
+    (C.U g D)
+        * (@Finset.sum (P.X D) _ _ (@Finset.univ (P.X D) (B.fin D)) (B.E D))
+        * (C.U g D)ᴴ = 1 := by
+  rw [B.complete D, mul_one]
+  exact mul_eq_one_comm.mpr (C.U_unit g D)
+
+/- ── L. The section-object group-action law (item a — section-level) ────── -/
+
+/-- `fibCast` along `h.symm` undoes `castSector` along `h`. -/
+theorem fibCast_symm_castSector {P : RecordPresheaf Diam} {D₀ D₁ : Diam}
+    (h : D₀ = D₁) (z : P.X D₀) : fibCast h.symm (castSector h z) = z := by
+  cases h; rfl
+
+/-- **Cast-free evaluation of the pushed-forward section at the acted diamond**:
+    `(g·λ)(gD) = γ_g(λ_D)` (this is `evaluation_covariance` in `A.act`/`A.γ`
+    form — the key fact that makes the section-object law avoid `HEq`). -/
+theorem actSection_val_act' {G : Type*} [Group G] {P : RecordPresheaf Diam}
+    (A : GroupAction G P) (g : G) (lam : GlobalSection P) (D : Diam) :
+    (actSection (A.toPoincare g) lam).val ((A.act g) D) = A.γ g D (lam.val D) :=
+  evaluation_covariance (A.toPoincare g) lam D
+
+/-- **Identity law for the section action**: `1 · λ = λ`.  Uses `IsRepOne` and
+    the public eval API; the diamond cast `act 1 D = D` is handled by
+    `val_cast` + `fibCast_symm_castSector` (no `HEq`). -/
+theorem actSection_one {G : Type*} [Group G] {P : RecordPresheaf Diam}
+    (A : GroupAction G P) (hone : IsRepOne A) (lam : GlobalSection P) :
+    actSection (A.toPoincare 1) lam = lam := by
+  apply GlobalSection.ext; intro D'
+  obtain ⟨D, rfl⟩ : ∃ D, (A.act 1) D = D' :=
+    ⟨(A.act 1).symm D', (A.act 1).apply_symm_apply D'⟩
+  rw [actSection_val_act' A 1 lam D, γ_rep_one_apply A hone D (lam.val D),
+      ← GlobalSection.val_cast lam (act_one_diam A D)]
+  exact fibCast_symm_castSector (act_one_diam A D) (lam.val ((A.act 1) D))
+
+/-- **Composition law for the section action**: `(g₁*g₂) · λ = g₂ · (g₁ · λ)` —
+    `actSection` is a genuine group action on `Γ(X)`, the section-object–level
+    statement of which `selection_cocycle` was the evaluation shadow.  Uses
+    `IsRepMul` (the γ-cocycle) and the public eval API; all transports are
+    handled by `val_cast` + `fibCast_symm_castSector`, no raw `HEq` (the strategy
+    GPT-5.5-pro outlined). -/
+theorem actSection_mul {G : Type*} [Group G] {P : RecordPresheaf Diam}
+    (A : GroupAction G P) (hmul : IsRepMul A) (lam : GlobalSection P) (g₁ g₂ : G) :
+    actSection (A.toPoincare (g₁ * g₂)) lam
+      = actSection (A.toPoincare g₂) (actSection (A.toPoincare g₁) lam) := by
+  apply GlobalSection.ext; intro D'
+  obtain ⟨D, rfl⟩ : ∃ D, (A.act (g₁ * g₂)) D = D' :=
+    ⟨(A.act (g₁ * g₂)).symm D', (A.act (g₁ * g₂)).apply_symm_apply D'⟩
+  rw [actSection_val_act' A (g₁ * g₂) lam D,
+      γ_cocycle_apply A hmul g₁ g₂ D (lam.val D),
+      ← actSection_val_act' A g₁ lam D,
+      ← actSection_val_act' A g₂ (actSection (A.toPoincare g₁) lam) ((A.act g₁) D),
+      ← GlobalSection.val_cast
+          (actSection (A.toPoincare g₂) (actSection (A.toPoincare g₁) lam))
+          (act_mul_diam A g₁ g₂ D)]
+  exact fibCast_symm_castSector (act_mul_diam A g₁ g₂ D)
+    ((actSection (A.toPoincare g₂) (actSection (A.toPoincare g₁) lam)).val
+      ((A.act (g₁ * g₂)) D))
+
 end LorentzSelectionStrong
 end QIQTH
