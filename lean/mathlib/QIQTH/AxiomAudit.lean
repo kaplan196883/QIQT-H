@@ -354,6 +354,8 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — E2b conjugate-symmetry conj(B_f(y,x)) = B_{f̄}(x,y).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_add_right
 -- expected: standard only — E2b additivity in the second slot.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_I_smul_left
+-- expected: standard only — E2b i-scaling B_f(i·x,y) = conj(i)·B_f(x,y).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

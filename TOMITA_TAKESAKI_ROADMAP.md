@@ -322,11 +322,22 @@ map and it avoids operator-topology limits for *existence*.**
   (`D_f(cx) = ‖c‖² D_f(x)`, via `integral_smul_measure`) and `diagInt_parallelogram`
   (`D_f(x+y)+D_f(x−y) = 2D_f(x)+2D_f(y)`, via `integral_add_measure`). These are
   exactly the quadratic-form identities feeding E2b.
-- **E2b — sesquilinear form.** `B_f(x,y) := ¼(D_f(x+y) − D_f(x−y) − i D_f(x+iy)
-  + i D_f(x−iy))`. **Hardest brick:** prove `B_f` conj-linear in `x`, linear in
-  `y` — derive additivity/homogeneity from the E2a identities (this is the
-  algebraic "polarization of a quadratic form is sesquilinear" lemma; no Mathlib
-  off-the-shelf, but elementary from parallelogram + `D_f(cx)=‖c‖²D_f`).
+- **E2b — sesquilinear form. ◧ MOSTLY DONE (axiom-free).** `bilinDiag f x y`
+  mirrors Mathlib's JvN `inner_` with `D_f` for `‖·‖²`. PROVED: **additivity in
+  both slots** — `bilinDiag_add_left` (ported from `OfNorm.add_left`, no
+  `algebraMap` step since `D_f` is ℂ-valued), `bilinDiag_add_right` (via the
+  conjugate-symmetry `bilinDiag_conj_symm : conj B_f(y,x) = B_{f̄}(x,y)`); and
+  **`i`-scaling** `bilinDiag_I_smul_left` (`I_prop`, pure `i²=−1` algebra).
+  Supporting `diagInt` facts: `diagInt_unit_smul`, `diagInt_neg` (even),
+  `diagInt_conj`, `diagInt_I_left/right`.
+  **REMAINING (the analytic linchpin): real-scalar homogeneity**
+  `B_f(r·x,y) = r·B_f(x,y)` (`r:ℝ`). From additivity we get ℚ-homogeneity for
+  free; ℝ needs **continuity of `D_f` (i.e. `v ↦ ∫ f dμ_v`)** — Mathlib's JvN gets
+  this from continuity of `‖·‖`, but here it requires that `v ↦ μ_v` is continuous
+  (setwise/total-variation) so `∫ f dμ_v` is continuous (bounded `f` + DCT). This
+  same continuity also yields the clean bilinear bound `|B_f|≤‖f‖∞‖x‖‖y‖` for E2c.
+  Once real homogeneity + `i`-scaling combine (`r + i s` decomposition), `B_f` is
+  fully sesquilinear.
 - **E2c — boundedness + bundle.** `|B_f(x,y)| ≤ ‖f‖∞ ‖x‖‖y‖` (from
   `|∫ f dμ_z| ≤ ‖f‖∞·μ_z(univ) = ‖f‖∞‖z‖²` + polarization arithmetic). Bundle into
   `H →L⋆[ℂ] H →L[ℂ] ℂ` (continuity in each slot from the bound), then

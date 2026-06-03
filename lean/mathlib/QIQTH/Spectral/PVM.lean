@@ -708,6 +708,17 @@ theorem bilinDiag_add_right {f : Ω → ℂ} (hf : Measurable f) {C : ℝ}
     simp only [Complex.conj_conj]
   rw [key (y + z), key y, key z, P.bilinDiag_add_left hfc hCc y z x, map_add]
 
+/-- **`i`-scaling in the first slot** (the `I_prop` of Jordan–von Neumann, pure
+    algebra via `i² = −1` and evenness of `D_f`): `B_f(i·x, y) = conj(i)·B_f(x,y)`. -/
+theorem bilinDiag_I_smul_left (f : Ω → ℂ) (x y : H) :
+    P.bilinDiag f (Complex.I • x) y
+      = (starRingEnd ℂ) Complex.I * P.bilinDiag f x y := by
+  simp only [bilinDiag, Complex.conj_I, smul_smul, Complex.I_mul_I, neg_one_smul]
+  rw [show -x + y = -(x - y) from by abel, show -x - y = -(x + y) from by abel,
+    P.diagInt_neg, P.diagInt_neg]
+  linear_combination (P.diagInt f (Complex.I • x + y)
+    - P.diagInt f (Complex.I • x - y)) / 4 * Complex.I_sq
+
 end ProjectionValuedMeasure
 
 /- ── Phase-1 analytic TARGETS (named, sound on `ProjectionValuedMeasure`) ──
