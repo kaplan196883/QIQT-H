@@ -134,3 +134,54 @@ upstream because it is the keystone everyone needs and unblocks Route 1.
 - QIQT-H payoff lands at **Phase 3′ + 4**: free-field modular flow + KMS converts
   the OP3b/OP1 continuum from "named axiom" to "proved for the free field" — the
   first genuine dent in the continuum wall.
+
+## Route-2 target, grounded in the literature (Neeb, arXiv:1707.05506)
+
+The modular theory of **standard subspaces** is the clean, finite-prerequisite
+core to formalize on top of Mathlib's `StandardSubspace` (whose own TODO is
+exactly *"Define the Tomita conjugation, prove Tomita's theorem, prove the KMS
+condition"*). Precise statements (Neeb, *On the geometry of standard subspaces*):
+
+- **Standard subspace** `V ⊆ H`: closed real subspace, *cyclic* (`V + iV` dense)
+  and *separating* (`V ∩ iV = {0}`).
+- **Tomita operator** `S_V : V + iV → H`, `S_V(v + iw) = v − iw` — antilinear,
+  involutive (`S_V² = id` on its domain), and **closed**.
+- **Polar decomposition** `S_V = J_V Δ_V^{1/2}`: `J_V` antiunitary conjugation
+  (`J_V² = id`, `J_V* = J_V`), `Δ_V > 0` self-adjoint (modular operator, unbounded
+  in general).
+- **Theorems** (target chain): (T-i) `J_V Δ_V J_V = Δ_V^{-1}`; (T-ii)
+  `Δ_V^{it} V = V` for all `t` (modular flow preserves `V`); (T-iii)
+  `J_V V = V'` (symplectic complement); + the one-parameter group laws.
+- **Dependency order** (Neeb; the formalization plan): define `V` → construct
+  `S_V` (closed/antilinear/involutive) → polar decomposition `S_V = J_V Δ_V^{1/2}`
+  → `J_V` antiunitary, `Δ_V` positive self-adjoint (uses the **spectral theorem**,
+  i.e. our Phase 1/2) → (T-i) → (T-ii) → (T-iii) → modular flow.
+
+Note the dependency on `Δ_V^{1/2}` / `Δ_V^{it}` still routes through the spectral
+theorem for the (unbounded, positive) `Δ_V` — i.e. Phase 1/2 remain the
+prerequisite even on Route 2 — UNLESS the modular group is given **explicitly**
+(Bisognano–Wichmann: for wedge regions `Δ_V^{it}` is the geometric boost group),
+in which case one second-quantizes the explicit `U(t)` directly (see Phase 3′).
+
+## References (open-access only — no pirated/in-copyright texts)
+
+Grounding sources, all author-posted / arXiv (the source trail behind Mathlib's
+`StandardSubspace`); the canonical textbooks (Takesaki, Bratteli–Robinson,
+Kadison–Ringrose, Connes) are in copyright and deliberately NOT used here.
+
+- K.-H. Neeb, *On the geometry of standard subspaces*, arXiv:1707.05506 — the
+  precise S_V / J_V / Δ_V theory used above. **Primary.**
+- K.-H. Neeb, G. Ólafsson, *Antiunitary representations and modular theory*,
+  arXiv:1704.01336 — modular theory ↔ antiunitary representations.
+- *Inclusions of Standard Subspaces*, arXiv:2506.16085 (2025) — inclusions
+  (relevant to the diamond-poset net structure).
+- R. Longo, *Lecture Notes* (Part 1, Ch. 2) — cited directly by Mathlib's
+  `StandardSubspace`; modular theory of standard subspaces + second quantization.
+- E. Witten, *Notes on Some Entanglement Properties of QFT*, arXiv:1803.04993 —
+  Tomita–Takesaki, KMS, why local algebras are **Type III₁**, Bisognano–Wichmann;
+  the physics-facing reference for the *cited* deep facts (Type III₁-ness, BW).
+
+**Action item:** coordinate with the `StandardSubspace` Mathlib development rather
+than duplicate it — its open TODO (Tomita conjugation / Tomita's theorem / KMS) is
+precisely Route 2, and our Phase-1 PVM/spectral work is the complementary
+prerequisite it will need for `Δ_V^{it}`.
