@@ -82,6 +82,53 @@ orthonormal family of pointer states (frames) in a finite-dim register of dimens
 What remains as transparent physical modelling (NOT a hidden assumption): the choice
 that a "complete macroscopic record" is one occupying `> D/2` of the register
 (`Macroscopic D label j := D < 2·recDim j`). Reducing even this to first principles
-(deriving the `> D/2` threshold from a holographic/Bekenstein bound or the
-Holevo/functional-information capacity of arXiv:2509.17775) is the remaining research
-target — exactly where the Strasberg–Winter "branch selection problem" lives.
+is **Tier B** (below).
+
+## Tier B design — the bridge theorem, grounded (TeX in refs/arxiv_sources/)
+
+GPT-5.5-pro's soundness review (2026-06) named the open content: a **bridge theorem**
+`CompleteRecord r → cost > Q_max/2` derived from *independent* record-quality
+conditions (decoherence/redundancy/accessibility), with an *information* (not rank)
+cost. The objectivity literature supplies the exact mechanism.
+
+**Definitions to formalize (Korbicz–Horodecki, "Roads to objectivity", arXiv:2007.04276;
+"Objectivity through state broadcasting", arXiv:1305.3247):**
+- *Objectivity* (Zurek): the state of `S` is objective iff many observers can determine
+  it independently and without perturbing it.
+- *Spectrum Broadcast Structure (SBS)* — the UNIQUE state structure compatible with
+  operational objectivity:
+  `ρ_{S:E_obs} = ∑ᵢ pᵢ |i⟩⟨i|_S ⊗ ρ^{E₁}_i ⊗ … ⊗ ρ^{E_{R}}_i`,  with the family
+  `{ρ^{Eₖ}_i}ᵢ` having **pairwise-orthogonal supports** (perfect distinguishability) in
+  each observed fragment `k`.
+- *Redundancy* `R_δ = 1/f_δ`: the number of disjoint environment fragments each carrying
+  (≈ full) information about the pointer outcome.
+
+**Why this gives the bridge (and fixes the rank-vs-information flaw):**
+An objective record of an `n`-outcome pointer, broadcast (SBS) to `R` fragments, forces
+each fragment to perfectly distinguish `n` alternatives, so the broadcast support has
+Hilbert dimension `≥ nᴿ` (TENSOR product — dims MULTIPLY), i.e. **information cost
+`≥ R·log n` bits**. With a finite information capacity `Q_max` (Holevo / functional
+information, arXiv:2509.17775; or Bekenstein/holographic), `cost(complete record)
+= R·log n` and "macroscopic" = large redundancy `R` ⟹ `cost > Q_max/2` ⟹ at most one.
+So the threshold is DERIVED from redundancy + the tensor (information) capacity, not
+assumed. Two objective records of NON-commuting observables cannot share one SBS (it is
+diagonal in a single pointer basis) — objectivity itself einselects the basis.
+
+**Proposed Lean structure (`QIQTH/TierB/SBSRecord.lean`, not yet written):**
+- `SBSRecord`: pointer outcomes `ι`, observed fragments `Fin R`, fragment states
+  `ρ : ι → Fin R → (mixed state)`, with `orthogonal_supports` per fragment.
+- `infoCost := R · log (card ι)` (or fragment-entropy sum); `Q_max : ℝ`.
+- bridge: `objective (R ≥ R_macro) → Q_max/2 < infoCost` ⟹ instantiates
+  `CoreNoCollapse.RecordContext.cost_gt_half`.
+
+**Cost (honest):** heavy — needs `TensorProduct` of Hilbert spaces, orthogonal-support
+distinguishability, and a `log`-dimension / von-Neumann-entropy cost in Mathlib. This is
+genuine multi-session research, and it is exactly the Strasberg–Winter "branch selection
+problem" given a constructive (SBS-based) answer.
+
+**Tier B references (TeX downloaded):**
+- arXiv:2007.04276 — Korbicz, *Roads to objectivity: QD, SBS, strong QD* (review; SBS
+  theorem, objectivity/redundancy/non-disturbance definitions). THE definitional anchor.
+- arXiv:1305.3247 — *Objectivity through state broadcasting* (origin of SBS).
+- arXiv:2509.17775 — functional-information / Holevo capacity (the `Q_max` model).
+- arXiv:2601.19703 — Strasberg–Winter branch-selection (the open problem SBS answers).
