@@ -102,8 +102,12 @@ upstream because it is the keystone everyone needs and unblocks Route 1.
   **the quadratic-form bridge `Re⟪x,(∫f dE)x⟫ = ∫ f dμ_x` (nonneg simple `f`,
   genuine scalar measure `μ_x`) is now PROVED axiom-free**
   (`re_inner_integralSimple_eq_lintegral`, via `inner_integralSimple_left` +
-  `lintegral_indicatorSum_eq`); remaining = simple→bounded-Borel extension +
-  off-diagonal `μ_{x,y}` by polarization); **(T3)** the spectral theorem, via
+  `lintegral_indicatorSum_eq`); **the off-diagonal polarization is also PROVED
+  axiom-free** — `inner_E_eq_polarization_measures` writes `μ_{x,y}(s) = ⟪x,E s y⟫`
+  as a ℂ-combination of the four genuine measures `μ_{x±y}`, `μ_{x±iy}`, so the
+  complex weight inherits countable additivity (`inner_E_polarization` +
+  `inner_integralSimple_eq_polarization`); remaining = ONLY the simple→bounded-Borel
+  extension (the heavy SOT/monotone-class step)); **(T3)** the spectral theorem, via
   Mathlib's **continuous FC + Riesz–Markov** (extend `π : C(spec T)→B(H)` to a
   normal rep of bounded Borel functions, then `E(B):=Φ(1_B)`; *avoid* the
   bidual/universal-W\* route in Lean).

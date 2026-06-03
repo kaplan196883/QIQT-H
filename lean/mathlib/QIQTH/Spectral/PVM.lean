@@ -469,6 +469,61 @@ theorem re_inner_integralSimple_eq_lintegral {ι : Type*} (t : Finset ι) (a : �
     ENNReal.toReal_ofReal
       (Finset.sum_nonneg (fun i hi => mul_nonneg (ha i hi) (sq_nonneg _)))]
 
+/- ── Polarization: the off-diagonal complex weights `μ_{x,y}` ──────────────-/
+
+/-- The real value of `μ_x` on a measurable set: `(μ_x s).toReal = ‖E s x‖²`. -/
+theorem scalarMeasure_toReal (x : H) {s : Set Ω} (hs : MeasurableSet s) :
+    (P.scalarMeasure x s).toReal = ‖P.E s x‖ ^ 2 := by
+  rw [P.scalarMeasure_apply x hs, ENNReal.toReal_ofReal (sq_nonneg _)]
+
+/-- **Polarization of the sesquilinear form** `⟪x, E s y⟫` into diagonal quadratic
+    forms `⟪z, E s z⟫`.  (No self-adjointness or measurability needed — pure
+    sesquilinearity, exactly Mathlib's `inner_map_polarization` technique.) -/
+theorem inner_E_polarization (s : Set Ω) (x y : H) :
+    inner ℂ x (P.E s y) =
+      (inner ℂ (x + y) (P.E s (x + y)) - inner ℂ (x - y) (P.E s (x - y))
+        - Complex.I * inner ℂ (x + Complex.I • y) (P.E s (x + Complex.I • y))
+        + Complex.I * inner ℂ (x - Complex.I • y) (P.E s (x - Complex.I • y))) / 4 := by
+  simp only [map_add, map_sub, map_smul, inner_add_left, inner_add_right,
+    inner_sub_left, inner_sub_right, inner_smul_left, inner_smul_right,
+    Complex.conj_I, ← pow_two, Complex.I_sq, mul_add, mul_sub, ← mul_assoc,
+    mul_neg, neg_neg, one_mul, neg_one_mul, sub_sub]
+  ring
+
+/-- **The off-diagonal weight `μ_{x,y}(s) := ⟪x, E s y⟫` is a ℂ-combination of the
+    four GENUINE scalar measures** `μ_{x±y}`, `μ_{x±iy}` (polarization).  This is
+    what makes `μ_{x,y}` a complex measure: it inherits countable additivity from
+    the (already-proved) `MeasureTheory.Measure`s `scalarMeasure z`. -/
+theorem inner_E_eq_polarization_measures (s : Set Ω) (hs : MeasurableSet s)
+    (x y : H) :
+    inner ℂ x (P.E s y) =
+      (((P.scalarMeasure (x + y) s).toReal : ℂ)
+        - ((P.scalarMeasure (x - y) s).toReal : ℂ)
+        - Complex.I * ((P.scalarMeasure (x + Complex.I • y) s).toReal : ℂ)
+        + Complex.I * ((P.scalarMeasure (x - Complex.I • y) s).toReal : ℂ)) / 4 := by
+  rw [P.inner_E_polarization s x y, P.inner_E_self hs, P.inner_E_self hs,
+    P.inner_E_self hs, P.inner_E_self hs, P.scalarMeasure_toReal _ hs,
+    P.scalarMeasure_toReal _ hs, P.scalarMeasure_toReal _ hs,
+    P.scalarMeasure_toReal _ hs]
+  push_cast
+  ring
+
+/-- **Capstone: the simple-integral sesquilinear form expressed entirely via the
+    genuine scalar measures** (no operator inner products remain).  This realizes
+    `⟪x,(∫f dE)y⟫ = ∫ f dμ_{x,y}` for simple `f` with `μ_{x,y}` the polarization
+    complex measure — the off-diagonal companion of `re_inner_integralSimple_eq_lintegral`. -/
+theorem inner_integralSimple_eq_polarization {ι : Type*} (t : Finset ι) (c : ι → ℂ)
+    (sets : ι → Set Ω) (x y : H) (hm : ∀ i ∈ t, MeasurableSet (sets i)) :
+    inner ℂ x ((P.integralSimple t c sets) y) =
+      ∑ i ∈ t, c i *
+        ((((P.scalarMeasure (x + y) (sets i)).toReal : ℂ)
+          - ((P.scalarMeasure (x - y) (sets i)).toReal : ℂ)
+          - Complex.I * ((P.scalarMeasure (x + Complex.I • y) (sets i)).toReal : ℂ)
+          + Complex.I * ((P.scalarMeasure (x - Complex.I • y) (sets i)).toReal : ℂ)) / 4) := by
+  rw [P.inner_integralSimple_left]
+  refine Finset.sum_congr rfl (fun i hi => ?_)
+  rw [P.inner_E_eq_polarization_measures (sets i) (hm i hi)]
+
 end ProjectionValuedMeasure
 
 /- ── Phase-1 analytic TARGETS (named, sound on `ProjectionValuedMeasure`) ──
@@ -516,9 +571,17 @@ end ProjectionValuedMeasure
          genuine Lebesgue-integral identity `re_inner_integralSimple_eq_lintegral`
          (`Re⟪x,(∫f dE)x⟫ = ∫ f dμ_x` for a nonneg real simple `f`, with `μ_x` the
          T1 scalar spectral measure), via `lintegral_indicatorSum_eq`.
-         REMAINING for T2: the simple→bounded-Borel EXTENSION (monotone-class /
+         ★ THE OFF-DIAGONAL POLARIZATION IS NOW PROVED axiom-free:
+         `inner_E_polarization` (`⟪x,E s y⟫` as a ℂ-combination of diagonal forms
+         `⟪z,E s z⟫`) and `inner_E_eq_polarization_measures`
+         (`μ_{x,y}(s) = ¼(μ_{x+y}(s) − μ_{x−y}(s) − i μ_{x+iy}(s) + i μ_{x−iy}(s))`,
+         exhibiting the complex weight as a combination of the four GENUINE
+         scalar measures — so `μ_{x,y}` inherits countable additivity), with the
+         capstone `inner_integralSimple_eq_polarization` writing the simple
+         sesquilinear form `⟪x,(∫f)y⟫` purely via the genuine measures.
+         REMAINING for T2: only the simple→bounded-Borel EXTENSION (monotone-class /
          SOT bounded-convergence) lifting these from simple `f` to all bounded
-         Borel `f`, and the off-diagonal complex measures `μ_{x,y}` by polarization.
+         Borel `f` — the heavy analytic step.
 
     (T3) SPECTRAL THEOREM.  Every bounded self-adjoint `T` admits a unique PVM on
          `ℝ` (supported on `spectrum`) with `⟪x, T x⟫ = ∫ id dμ_x`.  Recommended

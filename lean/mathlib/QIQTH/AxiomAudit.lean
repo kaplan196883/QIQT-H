@@ -330,6 +330,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ∫⁻(∑aᵢ𝟙_{sᵢ}) dμ_x = ofReal(∑aᵢ‖E sᵢ x‖²).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.re_inner_integralSimple_eq_lintegral
 -- expected: standard only — T2 BRIDGE ⟪x,(∫f dE)x⟫ = ∫ f dμ_x (genuine measure).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.inner_E_polarization
+-- expected: standard only — sesquilinear polarization ⟪x,E s y⟫ via diagonal forms.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.inner_E_eq_polarization_measures
+-- expected: standard only — μ_{x,y}(s) = ¼-combo of the four genuine measures μ_z.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.inner_integralSimple_eq_polarization
+-- expected: standard only — simple sesquilinear form via genuine scalar measures.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
