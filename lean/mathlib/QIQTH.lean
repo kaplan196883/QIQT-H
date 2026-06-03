@@ -69,3 +69,8 @@ import QIQTH.GleasonSelector
 -- the BORN LINK (normalization derived from GleasonSelector.born, not assumed).
 -- Zero project axioms; turns the conditional interface rigid + connected:
 import QIQTH.LorentzSelectionStrong
+-- A CONCRETE NON-TRIVIAL model of the strengthened Lorentz interface: a genuine
+-- 2-outcome PVM record system with Born weights (9/25, 16/25) — proves the
+-- conditional interface is not vacuously satisfied only by the one-point net.
+-- Does NOT touch the continuum realization (still open). Standard axioms only:
+import QIQTH.LorentzWitness

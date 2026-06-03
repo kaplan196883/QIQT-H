@@ -265,6 +265,12 @@ namespace QIQTH.AxiomAudit
 -- selector-level shadow selection_cocycle).
 #print axioms QIQTH.LorentzSelectionStrong.unitary_preserves_resolution
 -- expected: standard only — U preserves ∑E=1 (boosted effects are a full PVM).
+-- CONCRETE NON-TRIVIAL MODEL (refutes "only the one-point net satisfies it"):
+#print axioms QIQTH.LorentzWitness.witness_covariantProbability
+-- expected: standard only — a concrete CovariantProbability instance exists.
+#print axioms QIQTH.LorentzWitness.witness_nondegenerate
+-- expected: standard only — its Born weights are 9/25, 16/25 ∈ (0,1): a genuine
+-- spread 2-outcome distribution, not a point mass / one-point fibre.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
