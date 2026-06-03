@@ -306,6 +306,8 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — FC multiplicativity ∫f·∫g=∫(fg) on a disjoint family.
 #print axioms QIQTH.Spectral.PVContent.integralSimple_adjoint
 -- expected: standard only — FC adjoint law ∫f̄ = (∫f)†.
+#print axioms QIQTH.Spectral.PVContent.integralSimple_star_mul_self
+-- expected: standard only — (∫f)⋆(∫f) = ∫|f|² (positive T⋆T); step toward ‖·‖ bound.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

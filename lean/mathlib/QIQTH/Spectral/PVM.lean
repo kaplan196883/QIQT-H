@@ -154,6 +154,18 @@ theorem integralSimple_mul {ι : Type*} (t : Finset ι) (c d : ι → ℂ)
       (hdisj i hi j hj (Ne.symm hji)).inter_eq, P.E_empty, smul_zero]
   rw [Finset.sum_eq_single_of_mem i hi hoff, smul_mul_smul, P.mul_self]
 
+/-- **`(∫f dE)⋆ (∫f dE) = ∫|f|² dE`** on a disjoint family — the positive
+    operator `T⋆T` of a simple FC element is again a simple FC element with
+    nonnegative coefficients `star(cᵢ)·cᵢ = ‖cᵢ‖²`.  Immediate from the adjoint and
+    multiplicativity laws; the key step toward the norm bound `‖∫f dE‖ ≤ ‖f‖∞`. -/
+theorem integralSimple_star_mul_self {ι : Type*} (t : Finset ι) (c : ι → ℂ)
+    (sets : ι → Set Ω)
+    (hdisj : ∀ i ∈ t, ∀ j ∈ t, i ≠ j → Disjoint (sets i) (sets j)) :
+    star (P.integralSimple t c sets) * P.integralSimple t c sets
+      = P.integralSimple t (fun i => star (c i) * c i) sets := by
+  rw [ContinuousLinearMap.star_eq_adjoint, P.integralSimple_adjoint,
+    P.integralSimple_mul t (fun i => star (c i)) c sets hdisj]
+
 end PVContent
 
 /- ── Projection-valued MEASURE (the genuine object) ───────────────────────-/
@@ -268,9 +280,16 @@ end ProjectionValuedMeasure
          `E s` self-adjoint) and `integralSimple_mul` (multiplicativity
          `∫f·∫g = ∫(fg)` over a pairwise-disjoint family — cross terms vanish via
          `E sᵢ·E sⱼ = E(sᵢ∩sⱼ) = E ∅ = 0`, diagonal collapses by idempotence).
-         REMAINING (analytic): the norm bound `‖∫f dE‖ ≤ ‖f‖∞` (orthogonal-
-         projection norm), the simple→bounded-Borel extension by monotone-class /
-         SOT bounded-convergence, and the form `⟪x,(∫f dE)y⟫ = ∫ f dμ_{x,y}`.
+         Also PROVED: `integralSimple_star_mul_self` (`(∫f)⋆(∫f) = ∫|f|²`, the
+         positive operator `T⋆T`), the key step toward the norm bound.
+         REMAINING (analytic): the norm bound `‖∫f dE‖ ≤ ‖f‖∞`.  Route identified
+         (all Mathlib lemmas exist): C\*-identity `CStarRing.norm_star_mul_self`
+         gives `‖T‖² = ‖T⋆T‖`; then `0 ≤ T⋆T ≤ M²•1` (`star_mul_self_nonneg` +
+         the order bound) feeds `CStarAlgebra.norm_le_norm_of_nonneg_of_le` to get
+         `‖T⋆T‖ ≤ ‖M²•1‖ = M²`.  The order bound needs two helpers still to build:
+         `∑ᵢ E sᵢ = E(⋃ᵢ sᵢ) ≤ 1` (finite additivity over a `Finset` + projection
+         `≤ 1`) and the ℂ-smul/real-order plumbing.  Then simple→bounded-Borel by
+         monotone-class / SOT bounded-convergence, and `⟪x,(∫f dE)y⟫ = ∫ f dμ_{x,y}`.
 
     (T3) SPECTRAL THEOREM.  Every bounded self-adjoint `T` admits a unique PVM on
          `ℝ` (supported on `spectrum`) with `⟪x, T x⟫ = ∫ id dμ_x`.  Recommended
