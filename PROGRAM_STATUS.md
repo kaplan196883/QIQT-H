@@ -67,9 +67,24 @@ contribution on the path.
 - **Lean formalization + assumption audit** (*the strongest original component*):
   no-signaling, CHSH→Tsirelson 2√2 with rigorous singlet, microcausality,
   Donald's identity, `NoConcentration` (decoherence conserves |c_k|²),
-  support-preservation ≠ Born-equivariance, structural audits. 40 project axioms
-  (down from 57). Publishable **as a formal dependency analysis**, NOT as a
-  completed Born derivation.
+  support-preservation ≠ Born-equivariance, structural audits. **37 project
+  axioms** (down from 57). Publishable **as a formal dependency analysis**, NOT
+  as a completed Born derivation. Recent discharges (all machine-checked,
+  standard Lean axioms only):
+  - **Gleason/Born:** `GleasonSelector` is now **axiom-free** — Born is *derived
+    from positivity* + normalization + ray-certainty (`positive_ray_certain_
+    forces_born`); the earlier FALSE Gleason axiom was retired with a
+    counterexample, and both residual linear-algebra axioms discharged.
+  - **Lorentz (OP3b) finite interface:** `LorentzSelection`(+`Strong`) is
+    **axiom-free** — the four opaque AQFT axioms retired for an explicit
+    `RecordedHistoryNet`; measure covariance **derived from unitarity**
+    (`ubornω_covariant`, no longer assumed); a genuine **group action on Γ(X)**
+    proved (`actSection_mul`); PVM positivity + completeness preserved under
+    transport; and **non-trivial models built** (`LorentzWitness` A/B) refuting
+    vacuity. Continuum Type III₁ realization remains open.
+  - **Infra (OP6/OP9):** the finite-classical axioms `KL_classical_nonneg`
+    (Gibbs), `H_bound_imp_max_lb` (Rényi-∞ ≤ Shannon, the Fano step), and
+    `H_zero_imp_dirac` are now **proved**; `ShannonFano` is axiom-free.
 - **Finite distinguishable-record quotient** M_ε(R) ≤ e^{Q_R} — potentially
   interesting if made precise (→ Record Quotient Theorem above).
 
@@ -91,12 +106,12 @@ Status legend: ✅ DONE (committed) · ◻ OPEN (research agenda).
 |---|-----|----------|-----|
 | 1 | **Bell: PI-vs-measurement-dependence contradiction** | was **FATAL** | ✅ DONE — committed to PI-violation horn; §6.9/Position/Tutorial rewritten; Palmer reframed as opposite horn |
 | 2 | **Unconstructed μ + no-signaling/fine-tuning** | Fatal to *breakthrough*; OK as flagged open problem | ◻ OPEN — = the prize (§2); Open Problem 1 |
-| 3 | **Lorentz covariance of A_R[Φ,λ]** | Fatal to *"relativistic completion"* claims; OK as open problem | ◻ OPEN — now a numbered Open Problem 3b with 5 explicit requirements (§4a below + paper §11.4) |
+| 3 | **Lorentz covariance of A_R[Φ,λ]** | Fatal to *"relativistic completion"* claims; OK as open problem | ◧ PARTIAL — the **finite conditional interface is fully discharged & axiom-free** (`LorentzSelection`+`Strong`: covariance derived from unitarity, a real group action on Γ(X), full-PVM preservation) and **non-trivially instantiated** (`LorentzWitness` A/B); the **continuum Type III₁ realization is OPEN** (Open Problem 3b, §4a + paper §11.4) |
 | 4 | **λ = "microscopic initial conditions"** | was MUST-FIX | ✅ DONE — relabeled "atemporal global actuality selector" across 4 papers + Lean docstrings + memory |
 | 5 | **Born interface axioms in Lean** | Non-fatal *if transparent* | ✅ adequate — AxiomAudit.lean enumerates; abstract states it is conditional |
 | 6 | **MDC strong form** | Non-fatal; already demoted | ✅ DONE — disavowed (cat-state) in §7.6 + README; restated as open superselection question |
 
-**As of HEAD (2026-06): the one load-bearing inconsistency (#1) is resolved and the must-fix calibration set is committed. The remaining gaps (#2, #3) are the genuine research agenda — honest open problems, not contradictions.**
+**As of HEAD (2026-06): the one load-bearing inconsistency (#1) is resolved and the must-fix calibration set is committed. #3 (Lorentz) has had its entire *finite conditional interface* discharged, made axiom-free, and instantiated by non-trivial models; #2 (μ) has its finite Gleason core (Born from positivity) discharged axiom-free. What remains for both #2 and #3 is the same *continuum* operator-algebra wall (Type III₁ / Tomita–Takesaki, beyond current Mathlib) — the genuine research agenda, honest open problems, not contradictions.**
 
 ---
 
@@ -128,7 +143,14 @@ Honest riders: 3–5 are genuine open theorems; the Lorentz-friendliness is *bou
 
 **THE LINCHPIN — Poincaré-equivariant holographic recorded-history sheaf theorem (paper §11.4):** for a covariant Haag–Kastler net (locality, isotony, time-slice, Haag duality, split/nuclearity, BW covariance) and every admissible Φ, ∃ finite Boolean record algebras B_Φ(D) with log#Atoms≤Q_D and DecErr≤ε(D), boundary reconstruction B_{Φ,∂}(D)≅B_Φ(D), a sheaf X_Φ over Diam, a nonempty Γ(X_Φ), a Born/decoherence-functional measure μ_Φ with Kolmogorov consistency, Poincaré equivariance, and no-signaling marginals. Then A_D[Φ,λ]=λ_D (mere evaluation) and req-3 covariance is immediate. **This is the real target of OP3b**; proving it even for FREE FIELDS first would convert the Lorentz promissory note into a result.
 
-**Lean formalization target (genuinely startable now):** prove, in Lean, "equivariant naturality + Kolmogorov consistency ⟹ a covariant single-outcome selection map" — the poset/sheaf layer (Diam poset, presheaf X_Φ, restriction maps, Γ as a projective limit, Kolmogorov consistency as a finitely-additive set function), with the evaluation-gives-covariance one-liner PROVED (same shape as the already-machine-checked MarginalLocality.lean). Deferred to named interface axioms (same strategy as AxiomAudit.lean): existence of finite record algebras + holographic bound (hyp 1–3), boundary reconstruction (2), the decoherence-functional measure + σ-additive extension (6), no-signaling marginal lemma (9) — all on Type III₁ / Tomita–Takesaki / Haagerup-L^p analysis beyond current Mathlib. Deliverable = machine-checked conditional theorem + explicit AQFT axiom audit.
+**Lean formalization target — DONE for the finite conditional layer (HEAD 2026-06).** The poset/sheaf layer is built and **axiom-free**: `LorentzSelection` (Diam poset, presheaf X_Φ with functorial restriction, global section λ, evaluation-gives-covariance PROVED) and `LorentzSelectionStrong`, which goes well beyond the original target:
+- the four opaque AQFT axioms (record algebras + holographic bound, boundary reconstruction, decoherence measure, no-signaling marginal) were **retired** and replaced by an explicit `RecordedHistoryNet` structure — interface-as-hypothesis, not opaque axiom;
+- **measure covariance is DERIVED, not assumed**: `born_unitary_invariant` ⇒ `ubornω_covariant` (the old `hcov` is now a theorem from unitary state/effect transport);
+- `actSection` is a **genuine group action on Γ(X)** (`actSection_one`/`actSection_mul`, the section-object law, no `HEq` hacks);
+- the boosted effects are a **full PVM** (`E_cov_preserves_proj` + `unitary_preserves_resolution`) and the weights a **covariant probability distribution** (`upvm_covariant_probability`);
+- **non-trivial models exist** (`LorentzWitness` A: a spread 2-outcome Born distribution refuting the one-point net; B: a non-trivial group permuting two diamonds), settling vacuity.
+
+All machine-checked, standard Lean axioms only, project axiom budget 37. Reviewed across seven GPT-5.5-pro rounds (Red → "Green for the finite conditional interface"). **What remains is exactly the continuum:** producing such a `RecordedHistoryNet` *with its unitary Poincaré transport* from an actual relativistic Type III₁ QFT (Tomita–Takesaki / Haagerup-L^p, beyond current Mathlib) — the genuine, untouched hard problem. Proving the linchpin even for FREE FIELDS first remains the next real target.
 
 ---
 
