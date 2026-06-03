@@ -287,6 +287,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ShannonFano.H_zero_imp_dirac
 -- expected: standard only — zero entropy ⇒ a Dirac record.
 
+-- Tomita–Takesaki roadmap, Phase 1: PVM / spectral-theorem keystone scaffold.
+#print axioms QIQTH.Spectral.PVM.inner_E_self
+-- expected: standard only — ⟪x, E s x⟫ = ‖E s x‖² (projection diagonal identity).
+#print axioms QIQTH.Spectral.PVM.E_compl
+-- expected: standard only — E sᶜ = 1 - E s.
+#print axioms QIQTH.Spectral.PVM.mu_univ
+-- expected: standard only — scalar spectral measure total mass ‖x‖².
+
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
 -- expected: standard only — σ_t is a *-endomorphism (⅟m * m cancels)

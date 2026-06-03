@@ -74,3 +74,9 @@ import QIQTH.LorentzSelectionStrong
 -- conditional interface is not vacuously satisfied only by the one-point net.
 -- Does NOT touch the continuum realization (still open). Standard axioms only:
 import QIQTH.LorentzWitness
+-- Phase 1 of the Tomita–Takesaki roadmap (TOMITA_TAKESAKI_ROADMAP.md): the
+-- projection-valued-measure / bounded-spectral-theorem keystone. Structural PVM
+-- content proved axiom-free; the analytic core (σ-additivity, bounded-Borel FC,
+-- spectral theorem) is the named Phase-1 target. General Mathlib-bound material;
+-- ZERO project axioms:
+import QIQTH.Spectral.PVM

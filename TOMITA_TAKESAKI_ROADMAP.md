@@ -1,0 +1,97 @@
+# Roadmap: Tomita–Takesaki modular theory + Type III in Lean/Mathlib
+
+**Goal.** Build the operator-algebra machinery that the QIQT-H *continuum* open
+problems need (OP1 Born/typicality continuum, OP3b Lorentz continuum), whose
+common wall is: modular theory of von Neumann algebras and the Type III local
+algebras of relativistic QFT. This is a multi-person-year, Mathlib-grade effort;
+the roadmap is phased so each phase is a usable, axiom-free checkpoint, with the
+next layer's analytic input named as an explicit interface until it is built
+(the project's standard *interface-as-hypothesis* discipline).
+
+## What Mathlib has today (verified, lean4 v4.30 vendored copy)
+
+| Component | Status |
+|---|---|
+| C\*-algebras, Gelfand duality, **GNS for states** (`CStarAlgebra/`) | ✅ solid |
+| **Continuous** functional calculus (bounded normal/self-adjoint) | ✅ extensive |
+| von Neumann algebra **definition** (bicommutant), `commutant_commutant`; `WStarAlgebra` (Sakai predual *existence* only) | ✅ `VonNeumannAlgebra/Basic.lean` only (162 lines) |
+| Unbounded operators `LinearPMap` + adjoints | ✅ partial (`InnerProductSpace/LinearPMap.lean`) |
+| **`StandardSubspace`** — explicitly *"an analogue of Tomita–Takesaki modular theory"* | 🟡 **active (2026, Y. Tanimoto)** — the one-particle / spatial route |
+| **Spectral theorem / Borel FC / projection-valued measures** (bounded *or* unbounded self-adjoint) | ❌ **missing** (only compact/finite-dim) |
+| Normal states/weights constructively; predual of B(H); trace-class / Schatten | ❌ missing |
+| Modular Δ, J, S=JΔ^½, σₜ, KMS, commutation theorem JMJ=M′ | ❌ missing |
+| Murray–von Neumann I/II/III; **Connes Type III_λ**, flow of weights, crossed products, Connes cocycle | ❌ missing entirely |
+
+**Keystone gap:** the spectral theorem with projection-valued measures (PVM) for
+(un)bounded self-adjoint operators. Without it there is no `Δ^{it}`, no modular
+flow. That is Phase 1.
+
+## Dependency DAG
+
+```
+[A] Bounded spectral theorem + Borel FC (PVM, ∫λ dE)      ← keystone (Phase 1)
+[B] Unbounded self-adjoint: spectral thm, Δ^{it} 1-param group, polar decomp (Phase 2)
+[C] vN alg + cyclic/separating Ω; S₀(aΩ)=a*Ω closable; S=JΔ^½ (Phase 3)
+[D] TOMITA–TAKESAKI: JMJ=M′, σₜ(M)=M  (Phase 3, the theorem)
+[E] KMS + modular automorphism group of a normal state (Phase 4)
+[F] Murray–von Neumann I/II/III              [G] weights, Connes cocycle (Dφ:Dψ)ₜ
+                                             [H] crossed product M⋊_σℝ, flow of weights
+                                             [I] CONNES Type III_λ classification (Phase 5, optional)
+```
+
+**Scoping for QIQT-H.** We need **[D]+[E]** (modular flow + KMS for the regional
+state) and the **Type II crossed-product** of CPW — i.e. the *use* of modular
+theory, not the classification. *That local QFT algebras are Type III₁* is a deep
+QFT theorem (Buchholz–Wichmann, Fredenhagen) to be **cited as input, not proved**.
+Full Connes Type III_λ ([F]–[I]) is **out of scope**.
+
+## Two routes
+
+- **Route 1 (general/abstract):** [A]→[B]→[C]→[D]. Canonical, heaviest; [A] alone
+  is a flagship contribution.
+- **Route 2 (spatial + free fields):** build on `StandardSubspace` (one-particle
+  modular theory) + second quantization (CCR/CAR, quasi-free states) to reach
+  **free-field** Tomita–Takesaki sooner, with explicit modular objects that
+  sidestep much of the general unbounded machinery. Connects to `FreeFieldRecord`
+  / `LorentzWitness`.
+
+**Decision:** Route 2 for the QIQT-H *deliverable* (free-field modular flow → a
+free-field instance of the OP3b/OP1 continuum), while contributing **[A]**
+upstream because it is the keystone everyone needs and unblocks Route 1.
+
+## Phases (each = a usable checkpoint)
+
+- **Phase 0 — DONE.** Finite/matrix Tomita–Takesaki: `FiniteModularTheory.lean`
+  (σₜ = ρ^{it}·ρ^{−it}, KMS boundary identity, 1-parameter group). The spec the
+  abstract version must generalize.
+- **Phase 1 — keystone [A]: PVM + bounded spectral theorem + Borel FC.**
+  *(STARTED — `QIQTH/Spectral/PVM.lean`.)* Projection-valued measures; scalar
+  spectral measures `μ_x(s)=‖E(s)x‖²`; the simple-function spectral integral
+  `∫(∑cᵢ𝟙_{sᵢ})dE = ∑cᵢE(sᵢ)`; bounded-Borel extension (norm limit) and the
+  spectral theorem (existence/uniqueness of E for self-adjoint T) named as the
+  Phase-1 analytic targets.
+- **Phase 2 — [B]:** unbounded self-adjoint operators (closed/closable
+  `LinearPMap`, adjoint theory), spectral theorem for unbounded self-adjoint,
+  `Δ^{it}` as a strongly-continuous 1-parameter unitary group, polar decomposition
+  of closed densely-defined operators.
+- **Phase 3 — [C]+[D]:** abstract Tomita–Takesaki: cyclic/separating Ω,
+  `S/F/Δ/J`, `S=JΔ^½`, `JMJ=M′`, `σₜ(M)=M`.
+- **Phase 3′ (parallel, Route 2):** free-field modular theory via
+  `StandardSubspace` + second quantization → first non-toy `RecordedHistoryNet` /
+  `UnitaryCovariance` with a genuine `σₜ` and Poincaré transport.
+- **Phase 4 — [E]:** KMS + normal states; modular automorphism group; discharge
+  the free-field `decoherence_functional_measure`-type covariance inputs.
+- **Phase 5 (optional, long) — [F]/[G]:** types + Connes cocycle + weights. Only
+  if the *classification* is wanted; cite Type III₁-ness rather than prove it.
+
+## Effort & risk
+
+- Person-years, not weeks. Phase 1 alone is a flagship Mathlib contribution.
+- One phase = one usable, axiom-free layer; the next layer's analytic input stays
+  a named hypothesis until built.
+- Biggest risk is Phase 1/2 (spectral/unbounded analysis) — collaborate with /
+  build on the people already in this corner of Mathlib (the standard-subspace
+  line is the obvious ally).
+- QIQT-H payoff lands at **Phase 3′ + 4**: free-field modular flow + KMS converts
+  the OP3b/OP1 continuum from "named axiom" to "proved for the free field" — the
+  first genuine dent in the continuum wall.
