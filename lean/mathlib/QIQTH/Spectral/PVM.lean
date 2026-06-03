@@ -815,6 +815,33 @@ theorem bilinDiag_smul_left {f : Ω → ℂ} (hf : Measurable f) {C : ℝ}
     P.bilinDiag_real_smul_left hf hC, P.bilinDiag_I_smul_left, Complex.conj_I, hconj]
   ring
 
+/-- **Diagonal bound** `‖D_f x‖ ≤ C‖x‖²` from `‖f‖ ≤ C` and `μ_x(univ) = ‖x‖²`. -/
+theorem diagInt_norm_le {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, ‖f ω‖ ≤ C) (x : H) : ‖P.diagInt f x‖ ≤ C * ‖x‖ ^ 2 := by
+  have hint : MeasureTheory.Integrable f (P.scalarMeasure x) :=
+    P.integrable_boundedMeasurable hf hC x
+  calc ‖P.diagInt f x‖
+      ≤ ∫ ω, ‖f ω‖ ∂(P.scalarMeasure x) := MeasureTheory.norm_integral_le_integral_norm _
+    _ ≤ ∫ _ω, C ∂(P.scalarMeasure x) :=
+        MeasureTheory.integral_mono hint.norm (MeasureTheory.integrable_const C)
+          (fun ω => hC ω)
+    _ = C * ‖x‖ ^ 2 := by
+        rw [MeasureTheory.integral_const, MeasureTheory.measureReal_def, P.scalarMeasure_univ,
+          ENNReal.toReal_ofReal (sq_nonneg _), smul_eq_mul, mul_comm]
+
+/-- **Linearity in the second slot:** `B_f(x, c·y) = c·B_f(x,y)` (from
+    conjugate-symmetry + first-slot conjugate-linearity of `f̄`). -/
+theorem bilinDiag_smul_right {f : Ω → ℂ} (hf : Measurable f) {C : ℝ}
+    (hC : ∀ ω, ‖f ω‖ ≤ C) (c : ℂ) (x y : H) :
+    P.bilinDiag f x (c • y) = c * P.bilinDiag f x y := by
+  have hfc : Measurable (fun ω => (starRingEnd ℂ) (f ω)) :=
+    RCLike.continuous_conj.measurable.comp hf
+  have hCc : ∀ ω, ‖(starRingEnd ℂ) (f ω)‖ ≤ C := fun ω => by rw [RCLike.norm_conj]; exact hC ω
+  have key : ∀ w : H, P.bilinDiag f x w
+      = (starRingEnd ℂ) (P.bilinDiag (fun ω => (starRingEnd ℂ) (f ω)) w x) := by
+    intro w; rw [P.bilinDiag_conj_symm]; simp only [Complex.conj_conj]
+  rw [key (c • y), P.bilinDiag_smul_left hfc hCc c y x, map_mul, Complex.conj_conj, key y]
+
 end ProjectionValuedMeasure
 
 /- ── Phase-1 analytic TARGETS (named, sound on `ProjectionValuedMeasure`) ──

@@ -364,6 +364,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — E2b real homogeneity B_f(r·x,y) = r·B_f(x,y).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_smul_left
 -- expected: standard only — E2b FULL conj-linearity B_f(c·x,y) = conj(c)·B_f(x,y).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_smul_right
+-- expected: standard only — E2b linearity in second slot B_f(x,c·y) = c·B_f(x,y).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.diagInt_norm_le
+-- expected: standard only — E2c diagonal bound ‖D_f x‖ ≤ C‖x‖².
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
