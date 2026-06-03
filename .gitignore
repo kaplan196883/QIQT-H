@@ -12,3 +12,7 @@ build/*.toc
 build/*.fls
 build/*.fdb_latexmk
 build/*.synctex.gz
+
+# local scratch: fetched arXiv LaTeX sources (not redistributed)
+.arxivtmp/
+refs/
