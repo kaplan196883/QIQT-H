@@ -356,6 +356,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — E2b additivity in the second slot.
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_I_smul_left
 -- expected: standard only — E2b i-scaling B_f(i·x,y) = conj(i)·B_f(x,y).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.scalarMeasure_odd_measure
+-- expected: standard only — odd measure identity (continuity-free real-homogeneity key).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.diagInt_odd
+-- expected: standard only — D_f(r·x+y)−D_f(r·x−y) = r(D_f(x+y)−D_f(x−y)).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_real_smul_left
+-- expected: standard only — E2b real homogeneity B_f(r·x,y) = r·B_f(x,y).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_smul_left
+-- expected: standard only — E2b FULL conj-linearity B_f(c·x,y) = conj(c)·B_f(x,y).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

@@ -719,6 +719,102 @@ theorem bilinDiag_I_smul_left (f : Ω → ℂ) (x y : H) :
   linear_combination (P.diagInt f (Complex.I • x + y)
     - P.diagInt f (Complex.I • x - y)) / 4 * Complex.I_sq
 
+/-- **Odd measure identity** (the continuity-free key to real homogeneity): for
+    `r ≥ 0`, `μ_{r·x+y} + r·μ_{x−y} = μ_{r·x−y} + r·μ_{x+y}` (both sides equal
+    `r²‖Ex‖² + ‖Ey‖² + r‖Ex‖² + r‖Ey‖²` at each set; all positive measures, no
+    signed-measure machinery). -/
+theorem scalarMeasure_odd_measure (x y : H) {r : ℝ} (hr : 0 ≤ r) :
+    P.scalarMeasure ((r : ℂ) • x + y) + ENNReal.ofReal r • P.scalarMeasure (x - y)
+      = P.scalarMeasure ((r : ℂ) • x - y) + ENNReal.ofReal r • P.scalarMeasure (x + y) := by
+  refine MeasureTheory.Measure.ext (fun s hs => ?_)
+  have hreal : ‖P.E s ((r : ℂ) • x + y)‖ ^ 2 + r * ‖P.E s (x - y)‖ ^ 2
+      = ‖P.E s ((r : ℂ) • x - y)‖ ^ 2 + r * ‖P.E s (x + y)‖ ^ 2 := by
+    have e : ∀ u : H, ((‖u‖ ^ 2 : ℝ) : ℂ) = inner ℂ u u := fun u => by
+      rw [inner_self_eq_norm_sq_to_K]; norm_cast
+    have key : ((‖P.E s ((r : ℂ) • x + y)‖ ^ 2 + r * ‖P.E s (x - y)‖ ^ 2 : ℝ) : ℂ)
+        = ((‖P.E s ((r : ℂ) • x - y)‖ ^ 2 + r * ‖P.E s (x + y)‖ ^ 2 : ℝ) : ℂ) := by
+      rw [Complex.ofReal_add, Complex.ofReal_add, Complex.ofReal_mul, Complex.ofReal_mul,
+        e (P.E s ((r : ℂ) • x + y)), e (P.E s (x - y)), e (P.E s ((r : ℂ) • x - y)),
+        e (P.E s (x + y))]
+      simp only [map_add, map_sub, map_smul, inner_add_left, inner_add_right,
+        inner_sub_left, inner_sub_right, inner_smul_left, inner_smul_right, Complex.conj_ofReal]
+      ring
+    exact_mod_cast key
+  simp only [MeasureTheory.Measure.add_apply, MeasureTheory.Measure.smul_apply, smul_eq_mul]
+  rw [P.scalarMeasure_apply _ hs, P.scalarMeasure_apply _ hs, P.scalarMeasure_apply _ hs,
+    P.scalarMeasure_apply _ hs, ← ENNReal.ofReal_mul hr, ← ENNReal.ofReal_mul hr,
+    ← ENNReal.ofReal_add (sq_nonneg _) (mul_nonneg hr (sq_nonneg _)),
+    ← ENNReal.ofReal_add (sq_nonneg _) (mul_nonneg hr (sq_nonneg _)), hreal]
+
+/-- **Odd functional identity:** `D_f(r·x+y) − D_f(r·x−y) = r(D_f(x+y) − D_f(x−y))`
+    (here as `D_f(r·x+y) + r·D_f(x−y) = D_f(r·x−y) + r·D_f(x+y)`), `r ≥ 0`.
+    Integrates `scalarMeasure_odd_measure`; the seed of real homogeneity of `B_f`. -/
+theorem diagInt_odd {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (hC : ∀ ω, ‖f ω‖ ≤ C)
+    (x y : H) {r : ℝ} (hr : 0 ≤ r) :
+    P.diagInt f ((r : ℂ) • x + y) + (r : ℂ) * P.diagInt f (x - y)
+      = P.diagInt f ((r : ℂ) • x - y) + (r : ℂ) * P.diagInt f (x + y) := by
+  have hint : ∀ z, MeasureTheory.Integrable f (P.scalarMeasure z) :=
+    fun z => P.integrable_boundedMeasurable hf hC z
+  simp only [diagInt]
+  have hsmul : ∀ w : H, (r : ℂ) * ∫ ω, f ω ∂(P.scalarMeasure w)
+      = ∫ ω, f ω ∂(ENNReal.ofReal r • P.scalarMeasure w) := fun w => by
+    rw [MeasureTheory.integral_smul_measure, ENNReal.toReal_ofReal hr, Complex.real_smul]
+  rw [hsmul (x - y), hsmul (x + y),
+    ← MeasureTheory.integral_add_measure (hint _) ((hint _).smul_measure (by simp)),
+    ← MeasureTheory.integral_add_measure (hint _) ((hint _).smul_measure (by simp)),
+    P.scalarMeasure_odd_measure x y hr]
+
+/-- **Real homogeneity in the first slot, `r ≥ 0`:** `B_f(r·x, y) = r·B_f(x,y)`.
+    Both the `x` and the `i·x` odd identities feed in; no continuity used. -/
+theorem bilinDiag_real_smul_left_nonneg {f : Ω → ℂ} (hf : Measurable f) {C : ℝ}
+    (hC : ∀ ω, ‖f ω‖ ≤ C) (x y : H) {r : ℝ} (hr : 0 ≤ r) :
+    P.bilinDiag f ((r : ℂ) • x) y = (r : ℂ) * P.bilinDiag f x y := by
+  have hodd1 := P.diagInt_odd hf hC x y hr
+  have hodd2 := P.diagInt_odd hf hC (Complex.I • x) y hr
+  have hsc : Complex.I • ((r : ℂ) • x) = (r : ℂ) • (Complex.I • x) := smul_comm _ _ _
+  simp only [bilinDiag, hsc]
+  linear_combination (hodd1 + Complex.I * hodd2) / 4
+
+/-- `B_f(0, y) = 0`. -/
+theorem bilinDiag_zero_left (f : Ω → ℂ) (y : H) : P.bilinDiag f 0 y = 0 := by
+  simp only [bilinDiag, zero_add, zero_sub, smul_zero, P.diagInt_neg]
+  ring
+
+/-- `B_f(-x, y) = -B_f(x, y)` (from additivity in the first slot). -/
+theorem bilinDiag_neg_left {f : Ω → ℂ} (hf : Measurable f) {C : ℝ}
+    (hC : ∀ ω, ‖f ω‖ ≤ C) (x y : H) :
+    P.bilinDiag f (-x) y = -P.bilinDiag f x y := by
+  have h := P.bilinDiag_add_left hf hC x (-x) y
+  rw [add_neg_cancel, P.bilinDiag_zero_left] at h
+  linear_combination -h
+
+/-- **Real homogeneity in the first slot (all `r : ℝ`):** `B_f(r·x,y) = r·B_f(x,y)`. -/
+theorem bilinDiag_real_smul_left {f : Ω → ℂ} (hf : Measurable f) {C : ℝ}
+    (hC : ∀ ω, ‖f ω‖ ≤ C) (x y : H) (r : ℝ) :
+    P.bilinDiag f ((r : ℂ) • x) y = (r : ℂ) * P.bilinDiag f x y := by
+  rcases le_total 0 r with hr | hr
+  · exact P.bilinDiag_real_smul_left_nonneg hf hC x y hr
+  · have hnr : (0 : ℝ) ≤ -r := by linarith
+    have h := P.bilinDiag_real_smul_left_nonneg hf hC x y hnr
+    have hcoe : (r : ℂ) • x = -(((-r : ℝ) : ℂ) • x) := by
+      push_cast; rw [neg_smul, neg_neg]
+    rw [hcoe, P.bilinDiag_neg_left hf hC, h]; push_cast; ring
+
+/-- **Conjugate-linearity in the first slot (full `ℂ`):**
+    `B_f(c·x, y) = conj(c)·B_f(x,y)` — combines real homogeneity, `i`-scaling and
+    additivity via `c = c.re + c.im·i`.  This is the sesquilinear half (with
+    `bilinDiag_conj_symm` giving linearity in the second slot). -/
+theorem bilinDiag_smul_left {f : Ω → ℂ} (hf : Measurable f) {C : ℝ}
+    (hC : ∀ ω, ‖f ω‖ ≤ C) (c : ℂ) (x y : H) :
+    P.bilinDiag f (c • x) y = (starRingEnd ℂ) c * P.bilinDiag f x y := by
+  have hdecomp : c • x = (c.re : ℂ) • x + (c.im : ℂ) • (Complex.I • x) := by
+    rw [smul_smul, ← add_smul, Complex.re_add_im]
+  have hconj : (starRingEnd ℂ) c = (c.re : ℂ) - (c.im : ℂ) * Complex.I := by
+    apply Complex.ext <;> simp
+  rw [hdecomp, P.bilinDiag_add_left hf hC, P.bilinDiag_real_smul_left hf hC,
+    P.bilinDiag_real_smul_left hf hC, P.bilinDiag_I_smul_left, Complex.conj_I, hconj]
+  ring
+
 end ProjectionValuedMeasure
 
 /- ── Phase-1 analytic TARGETS (named, sound on `ProjectionValuedMeasure`) ──

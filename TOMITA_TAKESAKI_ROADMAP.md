@@ -330,14 +330,20 @@ map and it avoids operator-topology limits for *existence*.**
   **`i`-scaling** `bilinDiag_I_smul_left` (`I_prop`, pure `i²=−1` algebra).
   Supporting `diagInt` facts: `diagInt_unit_smul`, `diagInt_neg` (even),
   `diagInt_conj`, `diagInt_I_left/right`.
-  **REMAINING (the analytic linchpin): real-scalar homogeneity**
-  `B_f(r·x,y) = r·B_f(x,y)` (`r:ℝ`). From additivity we get ℚ-homogeneity for
-  free; ℝ needs **continuity of `D_f` (i.e. `v ↦ ∫ f dμ_v`)** — Mathlib's JvN gets
-  this from continuity of `‖·‖`, but here it requires that `v ↦ μ_v` is continuous
-  (setwise/total-variation) so `∫ f dμ_v` is continuous (bounded `f` + DCT). This
-  same continuity also yields the clean bilinear bound `|B_f|≤‖f‖∞‖x‖‖y‖` for E2c.
-  Once real homogeneity + `i`-scaling combine (`r + i s` decomposition), `B_f` is
-  fully sesquilinear.
+  **✅ E2b NOW COMPLETE — `B_f` is FULLY SESQUILINEAR, axiom-free, and the
+  "continuity linchpin" was DISSOLVED (no continuity needed).** Real homogeneity
+  `B_f(r·x,y)=r·B_f(x,y)` was obtained NOT via continuity of `D_f` but via the
+  **odd measure identity** `scalarMeasure_odd_measure`:
+  `μ_{r·x+y} + r·μ_{x−y} = μ_{r·x−y} + r·μ_{x+y}` (`r≥0`; both sides
+  `= r²‖Ex‖²+‖Ey‖²+r‖Ex‖²+r‖Ey‖²` at each set — all positive measures, no signed
+  measures). Integrating gives `diagInt_odd`
+  (`D_f(r·x+y)−D_f(r·x−y)=r(D_f(x+y)−D_f(x−y))`), and feeding both the `x` and
+  `i·x` odd identities into the polarization gives `bilinDiag_real_smul_left_nonneg`,
+  extended to all `r` (`bilinDiag_neg_left`/`bilinDiag_zero_left`) and then to full
+  ℂ via `c=c.re+c.im·i`: `bilinDiag_smul_left : B_f(c·x,y)=conj(c)·B_f(x,y)`. With
+  `bilinDiag_conj_symm` (slot-2 linearity) and additivity, `B_f` is a sesquilinear
+  form. **No `DCT`, no total-variation, no continuity of `v↦μ_v` — pure measure
+  algebra + polarization.**
 - **E2c — boundedness + bundle.** `|B_f(x,y)| ≤ ‖f‖∞ ‖x‖‖y‖` (from
   `|∫ f dμ_z| ≤ ‖f‖∞·μ_z(univ) = ‖f‖∞‖z‖²` + polarization arithmetic). Bundle into
   `H →L⋆[ℂ] H →L[ℂ] ℂ` (continuity in each slot from the bound), then
