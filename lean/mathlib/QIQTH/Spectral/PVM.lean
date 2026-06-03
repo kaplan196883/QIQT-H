@@ -613,6 +613,34 @@ theorem diagInt_parallelogram {f : Ω → ℂ} (hf : Measurable f) {C : ℝ}
     MeasureTheory.integral_smul_measure, MeasureTheory.integral_smul_measure]
   simp only [ENNReal.toReal_ofNat, Complex.real_smul, Complex.ofReal_ofNat]
 
+/-- **E2b — the polarized sesquilinear form** `B_f(x,y)`, mirroring Mathlib's
+    Fréchet–von Neumann–Jordan `inner_` but with the quadratic functional
+    `D_f = diagInt f` in place of `‖·‖²`.  Its diagonal is `D_f` and (once shown
+    sesquilinear + bounded) it represents `∫ f dE` via `continuousLinearMapOfBilin`. -/
+noncomputable def bilinDiag (f : Ω → ℂ) (x y : H) : ℂ :=
+  4⁻¹ * (P.diagInt f (x + y) - P.diagInt f (x - y)
+    + Complex.I * P.diagInt f (Complex.I • x + y)
+    - Complex.I * P.diagInt f (Complex.I • x - y))
+
+/-- **Additivity in the first slot** of `B_f` — the Jordan–von Neumann core,
+    ported from `InnerProductSpace.OfNorm.add_left` (no `algebraMap` casting needed
+    since `D_f` is already ℂ-valued), using `diagInt_parallelogram`. -/
+theorem bilinDiag_add_left {f : Ω → ℂ} (hf : Measurable f) {C : ℝ}
+    (hC : ∀ ω, ‖f ω‖ ≤ C) (x y z : H) :
+    P.bilinDiag f (x + y) z = P.bilinDiag f x z + P.bilinDiag f y z := by
+  simp only [bilinDiag]
+  have h1 := P.diagInt_parallelogram hf hC (x + y + z) (x - z)
+  have h2 := P.diagInt_parallelogram hf hC (x + y - z) (x + z)
+  have h3 := P.diagInt_parallelogram hf hC (y + z) z
+  have h4 := P.diagInt_parallelogram hf hC (y - z) z
+  have h5 := P.diagInt_parallelogram hf hC (Complex.I • (x + y) + z) (Complex.I • x - z)
+  have h6 := P.diagInt_parallelogram hf hC (Complex.I • (x + y) - z) (Complex.I • x + z)
+  have h7 := P.diagInt_parallelogram hf hC (Complex.I • y + z) z
+  have h8 := P.diagInt_parallelogram hf hC (Complex.I • y - z) z
+  simp only [smul_add] at *
+  abel_nf at *
+  linear_combination (-h1 + h2 + h3 - h4 + Complex.I * (-h5 + h6 + h7 - h8)) / 8
+
 end ProjectionValuedMeasure
 
 /- ── Phase-1 analytic TARGETS (named, sound on `ProjectionValuedMeasure`) ──

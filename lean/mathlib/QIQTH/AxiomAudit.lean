@@ -348,6 +348,8 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — E2a homogeneity D_f(c·x) = ‖c‖² D_f(x).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.diagInt_parallelogram
 -- expected: standard only — E2a parallelogram D_f(x+y)+D_f(x−y)=2D_f(x)+2D_f(y).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_add_left
+-- expected: standard only — E2b Jordan–von Neumann core: B_f additive in first slot.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
