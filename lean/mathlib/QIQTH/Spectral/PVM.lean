@@ -35,6 +35,7 @@ import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import Mathlib.MeasureTheory.Measure.MeasureSpace
 import Mathlib.MeasureTheory.Integral.Lebesgue.Add
 import Mathlib.MeasureTheory.Integral.Bochner.Basic
+import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 import Mathlib.Topology.Algebra.InfiniteSum.Module
 import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
 import Mathlib.Tactic
@@ -640,6 +641,72 @@ theorem bilinDiag_add_left {f : Ω → ℂ} (hf : Measurable f) {C : ℝ}
   simp only [smul_add] at *
   abel_nf at *
   linear_combination (-h1 + h2 + h3 - h4 + Complex.I * (-h5 + h6 + h7 - h8)) / 8
+
+/-- `D_f` is invariant under **unit-modulus scaling**: `D_f(c·x) = D_f(x)` when
+    `‖c‖ = 1` (special case of `diagInt_smul`). -/
+theorem diagInt_unit_smul (f : Ω → ℂ) {c : ℂ} (hc : ‖c‖ = 1) (x : H) :
+    P.diagInt f (c • x) = P.diagInt f x := by
+  rw [P.diagInt_smul, hc, one_pow, Complex.ofReal_one, one_mul]
+
+/-- `D_f` is **even**: `D_f(-x) = D_f(x)`. -/
+theorem diagInt_neg (f : Ω → ℂ) (x : H) : P.diagInt f (-x) = P.diagInt f x := by
+  rw [← neg_one_smul ℂ x]; exact P.diagInt_unit_smul f (by simp) x
+
+/-- **Conjugation** passes through `D_f`: `conj (D_f x) = D_{f̄}(x)` (the scalar
+    measure `μ_x` is real, so `conj ∫ f = ∫ conj f`). -/
+theorem diagInt_conj (f : Ω → ℂ) (x : H) :
+    (starRingEnd ℂ) (P.diagInt f x) = P.diagInt (fun ω => (starRingEnd ℂ) (f ω)) x := by
+  simp only [diagInt]; exact integral_conj.symm
+
+/-- `D_f(i·y + x) = D_f(i·x − y)` (unit-scaling invariance + evenness; used to
+    establish the conjugate-symmetry of `B_f`). -/
+theorem diagInt_I_left (f : Ω → ℂ) (x y : H) :
+    P.diagInt f (Complex.I • y + x) = P.diagInt f (Complex.I • x - y) := by
+  have hv : Complex.I • y + x = Complex.I • (y - Complex.I • x) := by
+    rw [smul_sub, smul_smul, Complex.I_mul_I, neg_one_smul]; abel
+  have hu : P.diagInt f (Complex.I • (y - Complex.I • x)) = P.diagInt f (y - Complex.I • x) :=
+    P.diagInt_unit_smul f Complex.norm_I _
+  have hn : y - Complex.I • x = -(Complex.I • x - y) := by abel
+  rw [hv, hu, hn, P.diagInt_neg]
+
+/-- `D_f(i·y − x) = D_f(i·x + y)` (companion of `diagInt_I_left`). -/
+theorem diagInt_I_right (f : Ω → ℂ) (x y : H) :
+    P.diagInt f (Complex.I • y - x) = P.diagInt f (Complex.I • x + y) := by
+  have hv : Complex.I • y - x = Complex.I • (y + Complex.I • x) := by
+    rw [smul_add, smul_smul, Complex.I_mul_I, neg_one_smul]; abel
+  have hu : P.diagInt f (Complex.I • (y + Complex.I • x)) = P.diagInt f (y + Complex.I • x) :=
+    P.diagInt_unit_smul f Complex.norm_I _
+  have hc2 : y + Complex.I • x = Complex.I • x + y := by abel
+  rw [hv, hu, hc2]
+
+/-- **Conjugate-symmetry of the polarized form** for complex `f`:
+    `conj (B_f(y,x)) = B_{f̄}(x,y)` where `f̄ = conj ∘ f`.  (For real `f` this is the
+    usual `⟪x,y⟫ = conj⟪y,x⟫`.)  This transfers slot-1 additivity to slot 2. -/
+theorem bilinDiag_conj_symm (f : Ω → ℂ) (x y : H) :
+    (starRingEnd ℂ) (P.bilinDiag f y x)
+      = P.bilinDiag (fun ω => (starRingEnd ℂ) (f ω)) x y := by
+  simp only [bilinDiag, map_mul, map_sub, map_add, map_inv₀, map_ofNat, Complex.conj_I,
+    P.diagInt_conj]
+  rw [show y + x = x + y from add_comm y x, show y - x = -(x - y) from by abel,
+    P.diagInt_neg, P.diagInt_I_left (fun ω => (starRingEnd ℂ) (f ω)) x y,
+    P.diagInt_I_right (fun ω => (starRingEnd ℂ) (f ω)) x y]
+  ring
+
+/-- **Additivity in the second slot** of `B_f`, from slot-1 additivity (of `f̄`)
+    through `bilinDiag_conj_symm`. -/
+theorem bilinDiag_add_right {f : Ω → ℂ} (hf : Measurable f) {C : ℝ}
+    (hC : ∀ ω, ‖f ω‖ ≤ C) (x y z : H) :
+    P.bilinDiag f x (y + z) = P.bilinDiag f x y + P.bilinDiag f x z := by
+  have hfc : Measurable (fun ω => (starRingEnd ℂ) (f ω)) :=
+    RCLike.continuous_conj.measurable.comp hf
+  have hCc : ∀ ω, ‖(starRingEnd ℂ) (f ω)‖ ≤ C := fun ω => by
+    rw [RCLike.norm_conj]; exact hC ω
+  have key : ∀ w : H, P.bilinDiag f x w
+      = (starRingEnd ℂ) (P.bilinDiag (fun ω => (starRingEnd ℂ) (f ω)) w x) := by
+    intro w
+    rw [P.bilinDiag_conj_symm]
+    simp only [Complex.conj_conj]
+  rw [key (y + z), key y, key z, P.bilinDiag_add_left hfc hCc y z x, map_add]
 
 end ProjectionValuedMeasure
 

@@ -350,6 +350,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — E2a parallelogram D_f(x+y)+D_f(x−y)=2D_f(x)+2D_f(y).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_add_left
 -- expected: standard only — E2b Jordan–von Neumann core: B_f additive in first slot.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_conj_symm
+-- expected: standard only — E2b conjugate-symmetry conj(B_f(y,x)) = B_{f̄}(x,y).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_add_right
+-- expected: standard only — E2b additivity in the second slot.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
