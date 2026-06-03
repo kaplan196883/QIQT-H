@@ -35,33 +35,47 @@ theorem H_dirac_zero {ι : Type*} [DecidableEq ι]
     simp [hj]
   · intro h; exact absurd h_mem h
 
-/-- **Determinacy from low entropy (qualitative form).**
-    If `H(p) = 0` and all `p_i ∈ [0,1]` with Σ p_i = 1, then there
-    is some index where `p_i = 1` (Dirac).  We give the *contrapositive
-    interface* form: this is the deductive content the framework needs
-    for translating `H_ε = 0` (DoubleSlit determinacy) into a literal
-    single-spot statement.
-
-    The full proof requires `0 ≤ p · log p ≤ 0` analysis and care
-    around `p = 0` and `p = 1`; we axiomatize the conclusion as an
-    interface, with a `Real.log` sketch in the file body. -/
-axiom H_zero_imp_dirac {ι : Type*} [DecidableEq ι]
-    (s : Finset ι) (p : ι → ℝ)
-    (hp_nn : ∀ i ∈ s, 0 ≤ p i) (hp_le : ∀ i ∈ s, p i ≤ 1)
-    (hSum : ∑ i ∈ s, p i = 1)
-    (hH : H s p = 0) :
-    ∃ i₀ ∈ s, p i₀ = 1
-
-/-- **Quantitative determinacy (axiom).**  If `H(p) ≤ δ` (in nats),
-    then some probability is at least `exp(-δ)`.  Equivalently:
-        max_i p_i  ≥  exp(−H(p))  ≥  exp(−δ).
-    This is the standard *Rényi-∞ vs. Shannon* relation; it
-    follows from concavity of `log` and Jensen's inequality. -/
-axiom H_bound_imp_max_lb {ι : Type*} (s : Finset ι) (p : ι → ℝ)
+/-- **Quantitative determinacy — PROVED.**  If `H(p) ≤ δ` (in nats), then some
+    probability is at least `exp(-δ)`: `max_i p_i ≥ exp(−H(p)) ≥ exp(−δ)`.  This
+    is the Rényi-∞ ≤ Shannon relation, the finite-classical Fano-step content
+    behind Open Problem 6 (operational distinguishability).  Proof: at the
+    maximizer `i₀`, `log p_j ≤ log p_{i₀}` for every `j`, so
+    `∑ p_j log p_j ≤ (∑ p_j) log p_{i₀} = log p_{i₀}`, whence
+    `H = −∑ p_j log p_j ≥ −log p_{i₀}`; combined with `H ≤ δ` this gives
+    `log p_{i₀} ≥ −δ`, i.e. `p_{i₀} ≥ exp(−δ)`. -/
+theorem H_bound_imp_max_lb {ι : Type*} (s : Finset ι) (p : ι → ℝ)
     (hp_nn : ∀ i ∈ s, 0 ≤ p i) (hp_le : ∀ i ∈ s, p i ≤ 1)
     (hSum : ∑ i ∈ s, p i = 1)
     (δ : ℝ) (hH : H s p ≤ δ) :
-    ∃ i₀ ∈ s, Real.exp (-δ) ≤ p i₀
+    ∃ i₀ ∈ s, Real.exp (-δ) ≤ p i₀ := by
+  have hne : s.Nonempty := by
+    rcases s.eq_empty_or_nonempty with h | h
+    · rw [h] at hSum; simp at hSum
+    · exact h
+  obtain ⟨i₀, hi₀, hmax⟩ := s.exists_max_image p hne
+  refine ⟨i₀, hi₀, ?_⟩
+  have hpos : 0 < p i₀ := by
+    by_contra h
+    push_neg at h
+    have hz : ∀ j ∈ s, p j = 0 := fun j hj =>
+      le_antisymm (le_trans (hmax j hj) h) (hp_nn j hj)
+    rw [Finset.sum_congr rfl hz] at hSum
+    simp at hSum
+  have hHge : - Real.log (p i₀) ≤ H s p := by
+    unfold H
+    have hbound : ∑ j ∈ s, p j * Real.log (p j) ≤ ∑ j ∈ s, p j * Real.log (p i₀) := by
+      apply Finset.sum_le_sum
+      intro j hj
+      rcases eq_or_lt_of_le (hp_nn j hj) with hpj | hpj
+      · rw [← hpj]; simp
+      · exact mul_le_mul_of_nonneg_left (Real.log_le_log hpj (hmax j hj)) (le_of_lt hpj)
+    have hrhs : ∑ j ∈ s, p j * Real.log (p i₀) = Real.log (p i₀) := by
+      rw [← Finset.sum_mul, hSum, one_mul]
+    rw [hrhs] at hbound
+    linarith
+  calc Real.exp (-δ) ≤ Real.exp (Real.log (p i₀)) :=
+        Real.exp_le_exp.mpr (by linarith)
+    _ = p i₀ := Real.exp_log hpos
 
 /-- **Single-record certainty from H_ε ≤ 0.**
     The deductive bridge from Theorem 6's `H_ε ≤ 0` to "one record
@@ -79,6 +93,16 @@ theorem single_record_certain {ι : Type*} (s : Finset ι) (p : ι → ℝ)
   have h1 : Real.exp (-0 : ℝ) = 1 := by simp
   rw [h1] at hi₀_ge
   exact le_antisymm (hp_le i₀ hi₀_mem) hi₀_ge
+
+/-- **Determinacy from zero entropy — PROVED.**  If `H(p) = 0` (and `p` is a
+    distribution with `p_i ≤ 1`), some record has probability exactly `1`.
+    Immediate from `single_record_certain` (the `δ = 0` case of the Fano-step
+    bound), discharging the former interface axiom. -/
+theorem H_zero_imp_dirac {ι : Type*} (s : Finset ι) (p : ι → ℝ)
+    (hp_nn : ∀ i ∈ s, 0 ≤ p i) (hp_le : ∀ i ∈ s, p i ≤ 1)
+    (hSum : ∑ i ∈ s, p i = 1) (hH : H s p = 0) :
+    ∃ i₀ ∈ s, p i₀ = 1 :=
+  single_record_certain s p hp_nn hp_le hSum (le_of_eq hH)
 
 end ShannonFano
 end QIQTH

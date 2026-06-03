@@ -278,6 +278,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — covariant probability over a non-trivial group orbit
 -- (exercises the covariance machinery, not just the probability content).
 
+-- Infrastructure finite-discharge pass (Open Problems 6 & 9): the finite-
+-- classical axioms are now PROVED, not assumed.
+#print axioms QIQTH.RelEntPositivity.KL_classical_nonneg
+-- expected: standard only — Gibbs' inequality (finite relative-entropy ≥ 0).
+#print axioms QIQTH.ShannonFano.H_bound_imp_max_lb
+-- expected: standard only — Rényi-∞ ≤ Shannon (the Fano-step bound, OP6).
+#print axioms QIQTH.ShannonFano.H_zero_imp_dirac
+-- expected: standard only — zero entropy ⇒ a Dirac record.
+
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
 -- expected: standard only — σ_t is a *-endomorphism (⅟m * m cancels)

@@ -105,7 +105,20 @@ done
 #
 # Audit note (2026-06, LorentzSelection AQFT discharge): the 4 opaque AQFT
 # placeholder axioms retired (see the LorentzSelection note above).  Net: 44 → 40.
-AXIOM_BUDGET=40
+#
+# Audit note (2026-06, infrastructure finite-discharge pass, Open Problems 6/9):
+# the finite-CLASSICAL axioms that were provable (and flagged as such in-file)
+# are now PROVED, not assumed: `RelEntPositivity.KL_classical_nonneg` (Gibbs'
+# inequality, via Real.log x ≤ x-1 — the finite shadow of relative-entropy /
+# modular positivity, OP9) and BOTH `ShannonFano` axioms — `H_bound_imp_max_lb`
+# (Rényi-∞ ≤ Shannon, the Fano-step bound behind OP6) and `H_zero_imp_dirac`
+# (now a corollary of `single_record_certain`).  The remaining axioms in the
+# entropy/relative-entropy stack (D_nonneg, D_eq_zero_iff_eq, Donald.*, DPI.*,
+# EntropyBridge.*, ArakiInterface.*) are the genuinely vN-algebraic / continuum
+# inputs (Klein at the vN level = operator convexity of -log; Donald's identity;
+# quantum DPI; the CPW bridge; Araki relative entropy) which Mathlib does not yet
+# reach.  Net: 40 → 37.
+AXIOM_BUDGET=37
 AXIOM_COUNT="$(grep -rhE '^axiom ' QIQTH/ | wc -l | tr -d ' ')"
 echo "[axiom-budget] raw axiom count: $AXIOM_COUNT (budget $AXIOM_BUDGET)"
 if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then
