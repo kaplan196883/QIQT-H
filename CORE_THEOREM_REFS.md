@@ -66,11 +66,22 @@ references ground each block.
 | collapse = conditionalization | `QMRecords.joint_eq_weight_mul_cond` | 2010.15101, 1702.01845 |
 | why decoherence is insufficient | (motivation for `Selection`/`λ`) | 1308.4055 |
 
-## Open physical input (NOT a Lean theorem)
+## Capacity model — the saturation premise is now DERIVED (`QIQTH/CapacityModel.lean`)
 
-The saturation premise `cost r > Q_max/2` (each complete macroscopic record consumes
-> half the capacity ⇒ at most one fits) is the genuine physical content. Justifying it
-from a concrete capacity model (holographic/Bekenstein, modular nuclearity, or the
-Holevo/functional-information bounds of 2509.17775) is the next research target — this
-is exactly where the Strasberg–Winter "branch selection problem" locates the open
-question.
+The saturation premise `cost r > Q_max/2` is no longer assumed for the concrete
+"orthogonal-records-in-a-finite-register" model. With records realized as an
+orthonormal family of pointer states (frames) in a finite-dim register of dimension
+`D = finrank`:
+- `orthonormal_card_le_finrank` : #records ≤ D (the raw capacity fact — Strasberg's
+  `N_detectable ≤ D`, here exact via `Orthonormal.linearIndependent` + card ≤ finrank);
+- `capacity_total` : `∑ⱼ recDim j ≤ D` (capacity additive and bounded — DERIVED);
+- `macroscopic_subsingleton` : at most ONE record with `D < 2·recDim j` — the
+  saturation premise of `CoreNoCollapse` is now a **theorem**;
+- `capacity_exactly_one` : capacity + selector ⇒ exactly one macroscopic record.
+
+What remains as transparent physical modelling (NOT a hidden assumption): the choice
+that a "complete macroscopic record" is one occupying `> D/2` of the register
+(`Macroscopic D label j := D < 2·recDim j`). Reducing even this to first principles
+(deriving the `> D/2` threshold from a holographic/Bekenstein bound or the
+Holevo/functional-information capacity of arXiv:2509.17775) is the remaining research
+target — exactly where the Strasberg–Winter "branch selection problem" lives.

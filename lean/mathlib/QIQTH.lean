@@ -86,3 +86,8 @@ import QIQTH.Spectral.PVM
 -- EXACTLY ONE actual record; collapse recovered as conditionalization. This —
 -- NOT the Tomita–Takesaki tower — is the load-bearing part of the breakthrough:
 import QIQTH.CoreNoCollapse
+-- Capacity MODEL: DERIVES the finite-capacity bound (and the saturation premise)
+-- of CoreNoCollapse from orthonormality of records in a finite-dim register
+-- (∑ recDim ≤ D = finrank). Removes the "cost > Q_max/2" assumption for this model:
+-- macroscopic_subsingleton is now a THEOREM. Grounds Strasberg et al. arXiv:2601.19703.
+import QIQTH.CapacityModel

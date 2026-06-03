@@ -454,4 +454,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CoreNoCollapse.QMRecords.joint_eq_weight_mul_cond
 -- expected: standard only — collapse recovered as conditionalization (chain rule).
 
+-- QIQT-H CAPACITY MODEL: the finite-capacity bound DERIVED (not assumed).
+#print axioms QIQTH.CapacityModel.orthonormal_card_le_finrank
+-- expected: standard only — #records ≤ finrank (raw capacity fact, Strasberg).
+#print axioms QIQTH.CapacityModel.capacity_total
+-- expected: standard only — ∑ recDim ≤ D (capacity additive + bounded, DERIVED).
+#print axioms QIQTH.CapacityModel.macroscopic_subsingleton
+-- expected: standard only — ≤1 macroscopic record (saturation premise now a THEOREM).
+#print axioms QIQTH.CapacityModel.capacity_exactly_one
+-- expected: standard only — capacity + selector ⇒ EXACTLY ONE macroscopic record.
+
 end QIQTH.AxiomAudit
