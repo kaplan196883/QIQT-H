@@ -444,4 +444,14 @@ namespace QIQTH.AxiomAudit
 -- spacelike-marginal independence for all Bob settings (no per-experiment
 -- tuning).
 
+-- QIQT-H CORE: single-outcome-without-collapse (the load-bearing theorem).
+#print axioms QIQTH.CoreNoCollapse.coactual_subsingleton
+-- expected: standard only — finite capacity ⇒ ≤1 coactual record (NON-CIRCULAR core).
+#print axioms QIQTH.CoreNoCollapse.exactly_one_actual
+-- expected: standard only — capacity + selector ⇒ EXACTLY ONE actual record.
+#print axioms QIQTH.CoreNoCollapse.qiqth_single_outcome_no_collapse
+-- expected: standard only — ∃! actual record, no collapse postulate.
+#print axioms QIQTH.CoreNoCollapse.QMRecords.joint_eq_weight_mul_cond
+-- expected: standard only — collapse recovered as conditionalization (chain rule).
+
 end QIQTH.AxiomAudit

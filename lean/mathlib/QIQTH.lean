@@ -80,3 +80,9 @@ import QIQTH.LorentzWitness
 -- spectral theorem) is the named Phase-1 target. General Mathlib-bound material;
 -- ZERO project axioms:
 import QIQTH.Spectral.PVM
+-- QIQT-H CORE (post-2026-06 GPT-5.5-pro strategic pivot): the conditional
+-- representation theorem for single-outcome-without-collapse. The non-circular
+-- finite-capacity exclusion (coactual_subsingleton) + actuality selector give
+-- EXACTLY ONE actual record; collapse recovered as conditionalization. This —
+-- NOT the Tomita–Takesaki tower — is the load-bearing part of the breakthrough:
+import QIQTH.CoreNoCollapse
