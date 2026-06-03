@@ -180,6 +180,32 @@ Kadison–Ringrose, Connes) are in copyright and deliberately NOT used here.
 - E. Witten, *Notes on Some Entanglement Properties of QFT*, arXiv:1803.04993 —
   Tomita–Takesaki, KMS, why local algebras are **Type III₁**, Bisognano–Wichmann;
   the physics-facing reference for the *cited* deep facts (Type III₁-ness, BW).
+- S. J. Summers, *Tomita–Takesaki Modular Theory*, arXiv:math-ph/0511034 — the
+  clean open survey of the vN-algebra TT theorem + KMS + Type III + applications.
+  **Primary for Phases 3–4 statements.**
+- H. Kosaki, *Type III Factors and Index Theory* (Univ. of Oregon lecture notes,
+  pages.uoregon.edu/njp/lec-f.pdf) — structure analysis of Type III factors via
+  modular theory (for Phase 5 / Connes classification, cite-only).
+- T. Masuda, *Tomita–Takesaki theory and ...*, Math. J. Okayama Univ. 60 (2018),
+  37–58 (open) — classification via Takesaki duality / approximate innerness.
+
+## Type III classification — precise statements (cite-only; Summers survey)
+
+For the vN-algebra TT theorem (`M` with cyclic+separating `Ω`, `S₀(AΩ)=A*Ω`,
+`S = JΔ^{1/2}`): **`J M J = M'`** and **`σ_t(A)=Δ^{it}AΔ^{-it}` preserves `M`**;
+the vector state `ω_Ω` satisfies the **KMS condition** `ω(A σ_t(B))` analytically
+continued `= ω(B A)`, and `σ_t` is the *unique* modular flow of `ω_Ω`.
+Classification: **Type I** (minimal projections, finite/semifinite trace);
+**Type II** (no minimal projections, semifinite normal trace; II₁ if `τ(1)=1`,
+else II_∞); **Type III** (NO semifinite normal trace; `σ_t` outer). The **Connes
+invariant `S(M)`** (modular spectrum, a closed subgroup of `(0,∞)`) subclassifies
+Type III: **III_λ** when `S(M)={λⁿ : n∈ℤ}∪{0}` (`0<λ<1`), **III₁** when
+`S(M)=[0,∞)`. *Deep — cite:* TT existence/uniqueness, the trace-characterization
+of Type III, Connes' `S(M)` computation, and **Haag–Kastler ⇒ Type III₁** for
+local QFT algebras. *Derivable from `S=JΔ^{1/2}`:* `JMJ=M'`, `σ_t` central
+commutation. This is the precise basis for the scoping decision: QIQT-H **cites**
+Type III₁-ness and the Connes `S(M)` material (Phase 5), and **uses** only the
+modular flow `σ_t` + KMS (Phases 3–4).
 
 **Action item:** coordinate with the `StandardSubspace` Mathlib development rather
 than duplicate it — its open TODO (Tomita conjugation / Tomita's theorem / KMS) is
