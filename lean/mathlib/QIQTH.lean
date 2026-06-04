@@ -109,3 +109,8 @@ import QIQTH.CollisionalGamma
 -- two gaps the prize needs: Born tensor-multiplicativity (independent experiments factor)
 -- and decoherent coarse-graining additivity (Born for ALL decoherent partitions). Axiom-free.
 import QIQTH.RecordGleason
+-- Toward the PRIZE, step G1 (GLEASON_SCOPE.md): finite-dimensional Busch/effect (POVM)
+-- Gleason. Foundation installment — effect predicate + closure (0/1/smul/sub), μ 0 = 0,
+-- monotonicity, scaling-additivity. Will discharge the finite-dim Mackey-Gleason axiom and
+-- the Goldstein-Struyve Born-uniqueness axioms, and complete Stage 1. Axiom-free.
+import QIQTH.EffectGleason

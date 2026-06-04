@@ -530,4 +530,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RecordGleason.stage1_record_measure
 -- expected: standard only — packaged Stage-1 minimal-breakthrough record measure.
 
+-- QIQT-H EFFECT-GLEASON step G1 (GLEASON_SCOPE.md): finite-dim Busch/POVM Gleason
+-- foundation. All axiom-free (standard three only).
+#print axioms QIQTH.EffectGleason.isEffect_smul
+-- expected: standard only — effects closed under scaling by t ∈ [0,1].
+#print axioms QIQTH.EffectGleason.EffectMeasure.map_zero
+-- expected: standard only — μ 0 = 0.
+#print axioms QIQTH.EffectGleason.EffectMeasure.mono
+-- expected: standard only — monotonicity (E ≤ F ⇒ μ E ≤ μ F).
+#print axioms QIQTH.EffectGleason.EffectMeasure.map_smul_add
+-- expected: standard only — scaling additivity (seed of homogeneity).
+
 end QIQTH.AxiomAudit
