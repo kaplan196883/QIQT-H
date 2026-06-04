@@ -102,16 +102,32 @@ G2 (spectral split + well-definedness).**
   **G2** (well-definedness of the extension across effect decompositions).
 - G3/G4 mostly reuse `GleasonSelector` lemmas.
 
-## Staged Lean plan (`QIQTH/EffectGleason.lean`)
+## Staged Lean plan (`QIQTH/EffectGleason.lean`) — progress
 
-1. **G1 (this installment):** `IsEffect`, effect closure (`zero`/`one`/`smul`/`add`),
-   `effect_mono` (monotonicity), `mu_zero`, natural-multiple + rational homogeneity, then
-   real homogeneity. *Start here — the new core; surfaces surprises early.*
-2. **G2:** Hermitian split + `Λ` extension + linearity.
-3. **G3:** trace-form Riesz on Hermitians.
-4. **G4:** positivity/normalization ⇒ density matrix; uniqueness.
+1. **G1 — DONE (axiom-free, committed).** `IsEffect`, effect closure
+   (`isEffect_zero/one/smul/sub`), `EffectMeasure` (normalized/nonneg/coexistent-additive),
+   `map_zero`, `mono`, `map_smul_add`, **`cauchy_unit_interval`** (additive + monotone on
+   `[0,1]` ⇒ ℝ-linear, via the `⌊t·n⌋` squeeze) and **`map_smul`** (`μ(t•E) = t·μ E`). The
+   load-bearing real-analysis core — the part original projection-Gleason needs spherical
+   harmonics for — is complete.
+2. **G2 — NEXT, with an identified Mathlib gap.** Hermitian split + `Λ` extension. **Blocker
+   to build first:** a PSD **Löwner-order bound** `∀ A, A.PosSemidef → ∃ c ≥ 0, (c•1 −
+   A).PosSemidef` — *not in Mathlib* (only `PosSemidef.trace_nonneg` /
+   `conjTranspose_mul_mul_same` exist). Must be derived from `Matrix.IsHermitian.
+   spectral_theorem` (eigenvalues `≤ trace`, so `c := trace A` works), as a reusable
+   `Matrix.PosSemidef` order lemma. Then: extend `μ` to the PSD cone (`ν A := c·μ(A/c)`,
+   well-defined by `map_smul`), to Hermitians (`Λ H := ν H₊ − ν H₋`), then ℂ-linearly.
+3. **G3:** trace-form Riesz **via matrix units** — `ρ` defined by `ρ j i := Λ (single i j)`,
+   then `Λ M = (ρ*M).trace` by `matrix_eq_sum_single` + linearity + `trace_single_mul`
+   (avoids abstract Riesz). Mathlib has the matrix-unit API (`Matrix.single`,
+   `matrix_eq_sum_single`, `trace_single_eq_same`).
+4. **G4:** positivity (`μ` on rank-one projections ⇒ `ρ.PosSemidef`) + normalization
+   (`μ 1 = 1 ⇒ ρ.trace = 1`); uniqueness from trace-form non-degeneracy.
 5. **Capstone `finite_effect_gleason`** + re-route `TypicalityMackeyGleason` finite case and
    retire the Goldstein–Struyve axioms; update `AxiomAudit.lean` and the budget.
 
-Pen-and-paper / out of scope: the continuum Type-II/III Bunce–Wright generalization (Wall 1
-deeper); that remains a named interface input.
+**Honest status:** the hard core (G1) is proved axiom-free. G2–G5 are mechanical but
+substantial, and G2 requires first building PSD Löwner-order infrastructure that Mathlib
+lacks — a bounded sub-project, no open-math risk. Pen-and-paper / out of scope throughout:
+the continuum Type-II/III Bunce–Wright generalization (Wall 1 deeper), which remains a named
+interface input.
