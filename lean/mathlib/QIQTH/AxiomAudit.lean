@@ -100,6 +100,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GoldsteinStruyveFinDim.step2_normalization
 -- expected: standard only — concrete Matrix.trace computation
 
+#print axioms QIQTH.GoldsteinStruyveFinDim.step3_tensor_multiplicativity
+-- expected: standard only — traceless-Z (diag 1,−1) Kronecker entry computation
+-- (formerly an axiom; PROVED 2026-06, retiring it: budget 37→36)
+
 #print axioms QIQTH.GoldsteinStruyveFinDim.step4_nondegeneracy
 -- expected: standard only
 

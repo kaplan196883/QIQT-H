@@ -170,18 +170,60 @@ def IsTensorMultiplicative {d : ℕ}
       - `I⊗I`: β = β²  ⇒  β ∈ {0, 1}
     Combined with α + β = 1: `(α, β) ∈ {(1, 0), (0, 1)}`.
 
-    *Status (2026-06):* now a **consistent** axiom — its hypothesis `IsTensorMultiplicative` is
-    genuine (no longer the vacuous `True`), so it can no longer fire on `(α,β)=(½,½)`; it
-    asserts a true statement.  Proving it outright (and retiring it, 37→36) is a bounded
-    follow-up via GPT-5.5-pro's traceless-`Z` argument (`Z = diag(1,−1)` ⇒ `schurForm α β Z =
-    α·Z`; tensor multiplicativity at `(Z,Z)` ⇒ `α·(Z⊗Z) = α²·(Z⊗Z)` ⇒ `α = α²`), modulo the
-    `finProdFinEquiv` reindex / Kronecker entry bookkeeping. -/
-axiom step3_tensor_multiplicativity (d : ℕ) (hd : 1 < d) (α β : ℝ)
+    **PROVED (2026-06), axiom-free** via GPT-5.5-pro's traceless-`Z` argument.  Take the
+    traceless witness `Z = diag(1,−1)` (`single 0 0 1 − single 1 1 1`).  Since `tr Z = 0`,
+    `schurForm α β Z = α·Z`.  Evaluating tensor multiplicativity at `(Z, Z)` on the diagonal
+    entry indexed by `finProdFinEquiv (0,0)` — where `(Z ⊗ Z)` has value `1` and the
+    uniform term drops out (`tr (Z ⊗ Z) = (tr Z)² = 0`) — gives `α = α²`, hence `α ∈ {0,1}`;
+    combined with `α + β = 1` this yields `(α,β) ∈ {(1,0),(0,1)}`. -/
+theorem step3_tensor_multiplicativity (d : ℕ) (hd : 1 < d) (α β : ℝ)
     (h_sum : α + β = 1)
     (h_tensor : IsTensorMultiplicative
                   (@schurForm d α β)
                   (@schurForm (d * d) α β)) :
-    (α = 1 ∧ β = 0) ∨ (α = 0 ∧ β = 1)
+    (α = 1 ∧ β = 0) ∨ (α = 0 ∧ β = 1) := by
+  haveI : NeZero d := ⟨by omega⟩
+  have h10 : (1 : Fin d) ≠ (0 : Fin d) := by
+    apply Fin.ne_of_val_ne
+    rw [Fin.val_one', Fin.val_zero, Nat.mod_eq_of_lt hd]; exact one_ne_zero
+  -- traceless witness `Z = diag(1, −1)`
+  set Z : Matrix (Fin d) (Fin d) ℂ := single 0 0 1 - single 1 1 1 with hZ
+  have hZ00 : Z 0 0 = 1 := by
+    simp only [hZ, Matrix.sub_apply, Matrix.single_apply_same, Matrix.single_apply_of_ne,
+      sub_zero, h10, false_and, and_false, not_false_eq_true]
+  have hZtr : Z.trace = 0 := by
+    rw [hZ, Matrix.trace_sub, Matrix.trace_single_eq_same, Matrix.trace_single_eq_same, sub_self]
+  have hsZ : schurForm α β Z = (α : ℂ) • Z := by simp [schurForm, hZtr]
+  -- the tensor identity at `(Z, Z)`, with the Schur forms substituted on the right
+  have h := h_tensor Z Z
+  rw [hsZ] at h
+  set e := (finProdFinEquiv : Fin d × Fin d ≃ Fin (d * d)) with he
+  -- the reindexed Kronecker product is traceless
+  have hKtr : (Matrix.reindex e e (Z ⊗ₖ Z)).trace = 0 := by
+    have hperm : (Matrix.reindex e e (Z ⊗ₖ Z)).trace = (Z ⊗ₖ Z).trace := by
+      simp only [Matrix.trace, Matrix.diag_apply, Matrix.reindex_apply, Matrix.submatrix_apply]
+      exact Fintype.sum_equiv e.symm _ _ (fun _ => rfl)
+    rw [hperm, Matrix.trace_kronecker, hZtr, mul_zero]
+  -- read off the diagonal entry indexed by `e (0,0)`
+  have hee : e.symm (e (0, 0)) = (0, 0) := Equiv.symm_apply_apply e (0, 0)
+  have key := congrFun (congrFun h (e (0, 0))) (e (0, 0))
+  -- pass 1: unfold the Schur form, exposing the (still-reindexed) trace term
+  simp only [schurForm, Matrix.add_apply, Matrix.smul_apply, Matrix.one_apply_eq,
+    smul_eq_mul] at key
+  rw [hKtr] at key
+  -- pass 2: evaluate the surviving diagonal entries
+  simp only [Matrix.reindex_apply, Matrix.submatrix_apply, hee, Matrix.kronecker_apply,
+    Matrix.smul_apply, hZ00, smul_eq_mul, zero_div, zero_mul, mul_zero, mul_one, add_zero] at key
+  -- key : (α : ℂ) = (α : ℂ) * (α : ℂ)
+  have hα : α = α * α := by exact_mod_cast key
+  have hfac : α * (α - 1) = 0 := by rw [mul_sub, mul_one, ← hα, sub_self]
+  have hcase : α = 0 ∨ α = 1 := by
+    rcases mul_eq_zero.mp hfac with h0 | h1
+    · exact Or.inl h0
+    · exact Or.inr (by linarith)
+  rcases hcase with h0 | h1
+  · exact Or.inr ⟨h0, by linarith⟩
+  · exact Or.inl ⟨h1, by linarith⟩
 
 /- ── Step 4 (PROVED): non-degeneracy selection ──────────────────── -/
 
