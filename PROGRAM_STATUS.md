@@ -1,8 +1,9 @@
 # QIQT-H — Program Status: where we are, and what the breakthrough would be
 
-*Living status document. Last updated 2026-05-31, after a holistic GPT-5.5-pro
-adversarial review. This is the honest map: what is done, what is the prize we
-are chasing, and what must be fixed before arXiv.*
+*Living status document. Last updated 2026-06-04, after a multi-round GPT-5.5-pro
+adversarial soundness review that produced a **strategic pivot** (§2a) and a new
+axiom-free **capacity-exclusion core** (§3c). This is the honest map: what is done,
+what is the prize we are chasing, and what must be fixed before arXiv.*
 
 ---
 
@@ -58,6 +59,27 @@ contribution on the path.
 
 ---
 
+## 2a. STRATEGIC PIVOT (2026-06) — what is actually load-bearing
+
+A multi-round GPT-5.5-pro soundness review settled a question that had been
+quietly distorting the priorities: **the Tomita–Takesaki / Type-III tower is
+infrastructure, not the load-bearing part of "finite Q_max removes the need for
+the collapse postulate."** Type III does not imply finite capacity, and modular
+flow is reversible — neither delivers the single-outcome content. The spectral /
+crossed-product machinery (`QIQTH/Spectral/PVM.lean`, the bounded-Borel functional
+calculus completed this session) is a correct and reusable mathematical home, but
+it is *not* where the breakthrough claim is discharged.
+
+The load-bearing content is, instead, the chain **finite-capacity exclusion →
+actuality selector λ → Born/typicality → collapse-as-conditionalization**, plus a
+concrete *mechanism* that makes the capacity threshold non-circular. That chain is
+now machine-checked, axiom-free, in three new files (§3c). The pivot is recorded so
+the program does not again sink effort into Type-III analysis as if it were the
+prize; it is a tool, available when the continuum realization (Open Problem 3b) is
+attacked, not the source of the single-world result.
+
+---
+
 ## 3. WHERE WE ARE — what is genuinely done / novel (publishable)
 
 - **Division-of-labor clarity** (cleaner than most "decoherence solves outcomes"
@@ -96,6 +118,79 @@ Q_R does **non-redundant** work *only* as: "for a finite causal region at scale
 α|0⟩^N+β|1⟩^N · derive Born · produce collapse · create exact superselection.
 Sell it as the former (defensible); never as the latter (fails).
 
+## 3c. THE CAPACITY-EXCLUSION CORE — new axiom-free mechanism (2026-06)
+
+The pivot (§2a) was accompanied by *building* the load-bearing chain as a
+machine-checked, axiom-free conditional theorem. Three new modules (standard Lean
+axioms only — `propext`, `Classical.choice`, `Quot.sound`; in the project budget
+of 37; verified by `AxiomAudit.lean`):
+
+- **`QIQTH/CoreNoCollapse.lean`** — the conditional representation theorem.
+  Finite-capacity exclusion (`coactual_subsingleton`: a region whose record cost
+  exceeds half its capacity can hold at most one active record) **plus** the
+  actuality selector λ (`Selection`) ⇒ **exactly one** actual record
+  (`exactly_one_actual`, `qiqth_single_outcome_no_collapse`). A *genuine* PVM
+  (`FinPVM`: self-adjoint, idempotent, orthogonal, complete) with Born
+  normalization (`weight_sum_eq_one`: ∑‖Eψ‖²=1) and collapse-as-conditionalization
+  (`condProb_eq_born_postState`, `joint_eq_weight_mul_cond`: sequential Born =
+  weight × conditional, so "collapse" is recovered as Bayesian updating, not a
+  dynamical event).
+- **`QIQTH/CapacityModel.lean`** — *derives* the capacity bound from orthonormality:
+  records as an orthonormal pointer family in a finite register force ∑ⱼ recDim ≤ D
+  (`capacity_total`), so at most one record can occupy > D/2 (`macroscopic_subsingleton`,
+  `capacity_exactly_one`). The saturation premise of `CoreNoCollapse` is here a
+  *theorem*, not a stipulation.
+- **`QIQTH/SBSBridge.lean`** (Tier B) — the bridge that makes the threshold a
+  *physical* fact rather than a ">half the register" fiat. An **objective record**
+  (Zurek/Korbicz Spectrum Broadcast Structure) of an n-outcome pointer broadcast to
+  R environment fragments forces a broadcast support of Hilbert dimension ≥ nᴿ
+  (tensor product — dims multiply: `broadcast_finrank_ge`), i.e. **information cost
+  ≥ R·log n** (`redundancy_le_logStorage`). With finite information capacity Q_max,
+  "macroscopic = large redundancy R" ⇒ cost > Q_max/2 ⇒ at most one
+  (`sbs_single_outcome`). The chain is robust to *approximate* decoherence (a
+  near-orthonormal family with pairwise overlap < 1/(n−1) is still linearly
+  independent ⇒ dim ≥ n: `fragment_finrank_ge_approx`) and includes the
+  amplification fact that weak per-collision monitoring compounds to reliable
+  records (block overlap ≤ γ^L → 0 for γ<1: `block_overlap_tendsto_zero`).
+
+**Machine-checked ladder (all axiom-free):** distinguishability ⇒ dim ≥ n;
+*approximate* distinguishability ⇒ dim ≥ n; R fragments ⇒ storage ≥ R·log n; weak
+overlap γ<1 ⇒ block overlap → 0 (amplification); objectivity witness ⇒ macroscopic
+storage; finite additive capacity ⇒ ≤ 1 objective record active (small records
+coexist — the bound is honest, not a by-fiat "exactly one for everything"); Born
+normalization + collapse-as-conditionalization.
+
+**Honest standing (GPT-5.5-pro, seven review passes).** Unified rank **(b+)** with
+an **(a)-grade mechanized mathematical core**. The mechanized-theorem fraction of
+the central claim rose from ~25% to **~50% mechanized theorem / ~45% explicit
+physical-modeling premise / ~5% residual (mostly wording risk)**. Referee judgment
+for a Lean-formalization-of-physics paper: **accept / weak-accept** *with conditional
+framing*; **major revision** if it claims an unconditional solution of the
+measurement problem.
+
+**The single OPEN physical input, now sharply isolated:** derive a *stable,
+factorized, branch-dependent scattering model with uniform per-collision
+distinguishability γ<1 from a concrete Hamiltonian.* Everything downstream of that
+premise (amplification → redundancy → storage bound → single-record exclusion) is
+machine-checked. The remaining modeling choices (finite Q_max, additive capacity
+for disjoint substrates, tensor factorization, no-recoherence, reading low-overlap
+branch states as records) are transparent, not hidden. Full SBS with mixed fragment
+states + von-Neumann-entropy cost, the SBS uniqueness theorem, and the
+non-commuting-basis (objectivity einselects the basis) result are deferred
+multi-session research — and constitute a *constructive* answer to the
+Strasberg–Winter "branch selection problem" (arXiv:2601.19703).
+
+**Guardrail (do not violate in any abstract or claim).** Do **not** write "We prove
+in Lean that finite Q_max alone eliminates the collapse postulate and solves the
+measurement problem." The defensible statement is: *a conditional capacity theorem —
+under finite additive storage and a scattering model with uniform per-collision
+distinguishability, repeated interactions amplify small overlaps into redundant
+record states requiring macroscopic storage, while deriving the scattering premise
+from a Hamiltonian remains open.*
+
+Design notes, the block→reference map, and the closing assessment are in
+`CORE_THEOREM_REFS.md`; arXiv TeX sources in `refs/arxiv_sources/` (git-ignored).
+
 ---
 
 ## 4. GAP RANKING (severity for publishability)
@@ -109,9 +204,9 @@ Status legend: ✅ DONE (committed) · ◻ OPEN (research agenda).
 | 3 | **Lorentz covariance of A_R[Φ,λ]** | Fatal to *"relativistic completion"* claims; OK as open problem | ◧ PARTIAL — the **finite conditional interface is fully discharged & axiom-free** (`LorentzSelection`+`Strong`: covariance derived from unitarity, a real group action on Γ(X), full-PVM preservation) and **non-trivially instantiated** (`LorentzWitness` A/B); the **continuum Type III₁ realization is OPEN** (Open Problem 3b, §4a + paper §11.4) |
 | 4 | **λ = "microscopic initial conditions"** | was MUST-FIX | ✅ DONE — relabeled "atemporal global actuality selector" across 4 papers + Lean docstrings + memory |
 | 5 | **Born interface axioms in Lean** | Non-fatal *if transparent* | ✅ adequate — AxiomAudit.lean enumerates; abstract states it is conditional |
-| 6 | **MDC strong form** | Non-fatal; already demoted | ✅ DONE — disavowed (cat-state) in §7.6 + README; restated as open superselection question |
+| 6 | **MDC strong form** | Non-fatal; already demoted | ✅ DONE — strong "forbids superposition" form disavowed (cat-state) in §7.6 + README; the **number-bound (≤ 1 record) form is now a conditional axiom-free theorem** in the finite SBS / capacity model (§3c, `SBSBridge.sbs_single_outcome`), conditional on the scattering premise |
 
-**As of HEAD (2026-06): the one load-bearing inconsistency (#1) is resolved and the must-fix calibration set is committed. #3 (Lorentz) has had its entire *finite conditional interface* discharged, made axiom-free, and instantiated by non-trivial models; #2 (μ) has its finite Gleason core (Born from positivity) discharged axiom-free. What remains for both #2 and #3 is the same *continuum* operator-algebra wall (Type III₁ / Tomita–Takesaki, beyond current Mathlib) — the genuine research agenda, honest open problems, not contradictions.**
+**As of HEAD (2026-06): the one load-bearing inconsistency (#1) is resolved and the must-fix calibration set is committed. #3 (Lorentz) has had its entire *finite conditional interface* discharged, made axiom-free, and instantiated by non-trivial models; #2 (μ) has its finite Gleason core (Born from positivity) discharged axiom-free; and the single-outcome *mechanism* (#6, number-bound) is now a machine-checked conditional theorem via the capacity-exclusion core (§3c). What remains for #2 and #3 is the same *continuum* operator-algebra wall (Type III₁ / Tomita–Takesaki, beyond current Mathlib), and for the §3c core the one isolated physical input (Hamiltonian origin of the γ<1 scattering premise) — the genuine research agenda, honest open problems, not contradictions.**
 
 ---
 
