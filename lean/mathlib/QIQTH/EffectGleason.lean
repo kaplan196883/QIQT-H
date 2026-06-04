@@ -261,6 +261,24 @@ theorem imHerm_isHermitian (M : Matrix (Fin d) (Fin d) ℂ) : (imHerm M).IsHermi
   rw [show (Mᴴ - M) = -(M - Mᴴ) by abel, smul_neg, ← neg_smul]
   congr 1; ring
 
+/-- `reHerm(i•M) = −imHerm M`. -/
+theorem reHerm_I (M : Matrix (Fin d) (Fin d) ℂ) :
+    reHerm (Complex.I • M) = -imHerm M := by
+  have hconj : (Complex.I • M)ᴴ = (-Complex.I) • Mᴴ := by
+    rw [conjTranspose_smul, Complex.star_def, Complex.conj_I]
+  simp only [reHerm, imHerm, hconj]
+  match_scalars <;> (push_cast; ring)
+
+/-- `imHerm(i•M) = reHerm M`. -/
+theorem imHerm_I (M : Matrix (Fin d) (Fin d) ℂ) :
+    imHerm (Complex.I • M) = reHerm M := by
+  have hconj : (Complex.I • M)ᴴ = (-Complex.I) • Mᴴ := by
+    rw [conjTranspose_smul, Complex.star_def, Complex.conj_I]
+  simp only [imHerm, reHerm]
+  rw [hconj, neg_smul, sub_neg_eq_add, ← smul_add, smul_smul]
+  congr 1
+  rw [mul_assoc, neg_mul, Complex.I_mul_I]; ring
+
 /-- `M = reHerm M + i·imHerm M`. -/
 theorem hermDecomp (M : Matrix (Fin d) (Fin d) ℂ) :
     reHerm M + Complex.I • imHerm M = M := by
@@ -605,6 +623,51 @@ theorem coneExt_eq_mu_of_isEffect {E : Matrix (Fin d) (Fin d) ℂ} (hE : IsEffec
 theorem hermExt_eq_mu_of_isEffect {E : Matrix (Fin d) (Fin d) ℂ} (hE : IsEffect E) :
     m.hermExt E = m.μ E := by
   rw [m.hermExt_eq_coneExt hE.1, m.coneExt_eq_mu_of_isEffect hE]
+
+/-- **ℂ-linear extension** of `μ` to all matrices: `Λ_ℂ M = Λ(reHerm M) + i·Λ(imHerm M)`. -/
+noncomputable def cExt (M : Matrix (Fin d) (Fin d) ℂ) : ℂ :=
+  (m.hermExt (reHerm M) : ℂ) + Complex.I * (m.hermExt (imHerm M) : ℂ)
+
+/-- `Λ_ℂ` is additive. -/
+theorem cExt_add (M N : Matrix (Fin d) (Fin d) ℂ) :
+    m.cExt (M + N) = m.cExt M + m.cExt N := by
+  have hre : reHerm (M + N) = reHerm M + reHerm N := by
+    simp only [reHerm, conjTranspose_add]; module
+  have him : imHerm (M + N) = imHerm M + imHerm N := by
+    simp only [imHerm, conjTranspose_add]; module
+  simp only [cExt, hre, him, m.hermExt_add (reHerm_isHermitian M) (reHerm_isHermitian N),
+    m.hermExt_add (imHerm_isHermitian M) (imHerm_isHermitian N)]
+  push_cast; ring
+
+/-- `Λ_ℂ` on a `ℂ`-real scalar: `Λ_ℂ((↑r)•M) = ↑r · Λ_ℂ M`. -/
+theorem cExt_ofReal_smul (r : ℝ) (M : Matrix (Fin d) (Fin d) ℂ) :
+    m.cExt ((r : ℂ) • M) = (r : ℂ) * m.cExt M := by
+  have hre : reHerm ((r : ℂ) • M) = (r : ℝ) • reHerm M := by
+    simp only [reHerm, conjTranspose_smul, Complex.star_def, Complex.conj_ofReal, coe_smul]
+    module
+  have him : imHerm ((r : ℂ) • M) = (r : ℝ) • imHerm M := by
+    simp only [imHerm, conjTranspose_smul, Complex.star_def, Complex.conj_ofReal, coe_smul]
+    module
+  simp only [cExt, hre, him, m.hermExt_smul (reHerm_isHermitian M),
+    m.hermExt_smul (imHerm_isHermitian M)]
+  push_cast; ring
+
+/-- `Λ_ℂ(i•M) = i·Λ_ℂ M` (complex-structure compatibility). -/
+theorem cExt_I_smul (M : Matrix (Fin d) (Fin d) ℂ) :
+    m.cExt (Complex.I • M) = Complex.I * m.cExt M := by
+  simp only [cExt, reHerm_I, imHerm_I, m.hermExt_neg (imHerm_isHermitian M)]
+  push_cast
+  linear_combination (-(↑(m.hermExt (imHerm M)) : ℂ)) * Complex.I_sq
+
+/-- **ℂ-linearity of `Λ_ℂ`**: `Λ_ℂ(c•M) = c·Λ_ℂ M` for all `c ∈ ℂ`.  With `cExt_add`, `Λ_ℂ`
+    is a ℂ-linear functional on all matrices (the complexification of `Λ`). -/
+theorem cExt_smul (c : ℂ) (M : Matrix (Fin d) (Fin d) ℂ) :
+    m.cExt (c • M) = c * m.cExt M := by
+  conv_lhs => rw [show c • M = (↑c.re : ℂ) • M + (↑c.im : ℂ) • (Complex.I • M) by
+    rw [smul_smul, ← add_smul, Complex.re_add_im]]
+  rw [m.cExt_add, m.cExt_ofReal_smul, m.cExt_ofReal_smul, m.cExt_I_smul,
+    show c * m.cExt M = ((↑c.re : ℂ) + ↑c.im * Complex.I) * m.cExt M by rw [Complex.re_add_im]]
+  ring
 
 end EffectMeasure
 

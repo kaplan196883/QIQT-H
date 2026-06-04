@@ -580,5 +580,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — G2: Λ E = μ E on effects (recovers μ; the capstone link).
 #print axioms QIQTH.EffectGleason.hermDecomp
 -- expected: standard only — G3: M = reHerm M + i·imHerm M (complexification decomposition).
+#print axioms QIQTH.EffectGleason.EffectMeasure.cExt_add
+-- expected: standard only — G3: Λ_ℂ additive.
+#print axioms QIQTH.EffectGleason.EffectMeasure.cExt_smul
+-- expected: standard only — G3: Λ_ℂ(c•M) = c·Λ_ℂ M ⇒ Λ_ℂ is ℂ-LINEAR on all matrices.
 
 end QIQTH.AxiomAudit
