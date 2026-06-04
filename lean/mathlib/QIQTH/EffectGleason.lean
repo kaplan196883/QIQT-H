@@ -375,6 +375,22 @@ theorem coneExt_nonneg {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) :
   · rw [m.coneExt_eq hA hpos (posSemidef_sumNorm_sub hA)]
     exact mul_nonneg (le_of_lt hpos) (m.nonneg _ (isEffect_inv_smul hA hpos (posSemidef_sumNorm_sub hA)))
 
+/-- `ν(a·1) = a` for `a ≥ 0`. -/
+theorem coneExt_smul_one {a : ℝ} (ha : 0 ≤ a) :
+    m.coneExt ((a : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ)) = a := by
+  rcases eq_or_lt_of_le ha with h0 | hpos
+  · rw [← h0, Complex.ofReal_zero, zero_smul]; simp [coneExt]
+  · have hPSD : ((a : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ)).PosSemidef := by
+      rw [← coe_smul]; exact Matrix.PosSemidef.one.smul ha
+    have hbd : ((a : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ)
+        - (a : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ)).PosSemidef := by
+      rw [sub_self]; exact Matrix.PosSemidef.zero
+    rw [m.coneExt_eq hPSD hpos hbd]
+    have h1 : (1 / a) • ((a : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ)) = 1 := by
+      rw [coe_smul, smul_smul, ← Complex.ofReal_mul, one_div, inv_mul_cancel₀ (ne_of_gt hpos),
+        Complex.ofReal_one, one_smul]
+    rw [h1, m.normalized, mul_one]
+
 /-- **Additivity of `ν`** on PSD matrices.  Uses a common Löwner bound
     `c = ∑‖Aᵢⱼ‖ + ∑‖Bᵢⱼ‖ + 1` for `A`, `B`, and `A+B`, then the additivity of `μ` on the
     coexistent effects `(1/c)•A`, `(1/c)•B`. -/
@@ -403,6 +419,39 @@ theorem coneExt_add {A B : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) (hB :
   rw [smul_add]
   exact m.additive _ _ (isEffect_inv_smul hA hc hbA) (isEffect_inv_smul hB hc hbB)
     (by rw [← smul_add]; exact isEffect_inv_smul (hA.add hB) hc hbAB)
+
+/-- **Hermitian extension** of `μ`: `Λ H = ν(H + c·1) − c` for any `c ≥ 0` with `H + c·1 ⪰ 0`
+    (using the two-sided Löwner bound).  Defined with `c = ∑‖Hᵢⱼ‖`; `hermExt_eq` shows
+    independence of `c`. -/
+noncomputable def hermExt (H : Matrix (Fin d) (Fin d) ℂ) : ℝ :=
+  m.coneExt (((∑ i, ∑ j, ‖H i j‖ : ℝ) : ℂ) • 1 + H) - (∑ i, ∑ j, ‖H i j‖)
+
+/-- **Well-definedness of `Λ`.**  `Λ H = ν(H + c·1) − c` for any valid bound `c`.  Proof:
+    `(s+c)·1 + H` decomposes both as `(s·1+H) + c·1` and `(c·1+H) + s·1`; `coneExt_add` +
+    `coneExt_smul_one` give `ν(s·1+H) + c = ν(c·1+H) + s`. -/
+theorem hermExt_eq {H : Matrix (Fin d) (Fin d) ℂ} (hH : H.IsHermitian) {c : ℝ} (hc : 0 ≤ c)
+    (hbd : ((c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) + H).PosSemidef) :
+    m.hermExt H = m.coneExt ((c : ℂ) • 1 + H) - c := by
+  unfold hermExt
+  set s : ℝ := ∑ i, ∑ j, ‖H i j‖ with hs
+  have hs0 : (0:ℝ) ≤ s := by rw [hs]; positivity
+  have hsbd : ((s : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) + H).PosSemidef := by
+    have hthis := posSemidef_sumNorm_sub_herm hH.neg
+    rw [show (∑ i, ∑ j, ‖(-H) i j‖) = s by rw [hs]; simp [Matrix.neg_apply], sub_neg_eq_add]
+      at hthis
+    exact hthis
+  have hcps : ((c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ)).PosSemidef := by
+    rw [← coe_smul]; exact Matrix.PosSemidef.one.smul hc
+  have hsps : ((s : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ)).PosSemidef := by
+    rw [← coe_smul]; exact Matrix.PosSemidef.one.smul hs0
+  have hcone1 : m.coneExt (((s : ℂ) • 1 + H) + (c : ℂ) • 1) = m.coneExt ((s : ℂ) • 1 + H) + c := by
+    rw [m.coneExt_add hsbd hcps, m.coneExt_smul_one hc]
+  have hcone2 : m.coneExt (((c : ℂ) • 1 + H) + (s : ℂ) • 1) = m.coneExt ((c : ℂ) • 1 + H) + s := by
+    rw [m.coneExt_add hbd hsps, m.coneExt_smul_one hs0]
+  have key : ((s : ℂ) • 1 + H) + (c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ)
+      = ((c : ℂ) • 1 + H) + (s : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) := by abel
+  rw [key, hcone2] at hcone1
+  linarith [hcone1]
 
 end EffectMeasure
 

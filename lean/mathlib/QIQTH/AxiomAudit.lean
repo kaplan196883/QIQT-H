@@ -562,5 +562,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — G2: Löwner-bound monotonicity (A ⪯ a•1, a≤b ⇒ A ⪯ b•1).
 #print axioms QIQTH.EffectGleason.EffectMeasure.coneExt_add
 -- expected: standard only — G2: ν is additive on PSD (common-bound argument).
+#print axioms QIQTH.EffectGleason.EffectMeasure.coneExt_smul_one
+-- expected: standard only — G2: ν(a·1) = a for a ≥ 0.
+#print axioms QIQTH.EffectGleason.EffectMeasure.hermExt_eq
+-- expected: standard only — G2: Hermitian extension Λ H = ν(H+c·1) − c, bound-independent.
 
 end QIQTH.AxiomAudit
