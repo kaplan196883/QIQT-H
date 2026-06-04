@@ -233,6 +233,13 @@ theorem exists_smul_one_sub_posSemidef {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.
 theorem coe_smul (t : ℝ) (M : Matrix (Fin d) (Fin d) ℂ) : t • M = (↑t : ℂ) • M := by
   ext i j; simp [Matrix.smul_apply, Complex.real_smul]
 
+/-- A real multiple of a Hermitian matrix is Hermitian. -/
+theorem isHermitian_smul {H : Matrix (Fin d) (Fin d) ℂ} (hH : H.IsHermitian) (t : ℝ) :
+    (t • H).IsHermitian := by
+  rw [coe_smul]
+  show ((↑t : ℂ) • H)ᴴ = (↑t : ℂ) • H
+  rw [conjTranspose_smul, hH, Complex.star_def, Complex.conj_ofReal]
+
 /-- **Effect closure under `(1/c)·`.**  If `A` is PSD and `A ⪯ c·1` (`c > 0`), then
     `(1/c)•A` is an effect: it is PSD, and `1 − (1/c)•A = (1/c)•(c·1 − A)` is PSD.  Lets us
     scale any PSD matrix bounded by `c·1` down into the effect cube — the engine of the cone
@@ -400,6 +407,32 @@ theorem coneExt_smul_one {a : ℝ} (ha : 0 ≤ a) :
         Complex.ofReal_one, one_smul]
     rw [h1, m.normalized, mul_one]
 
+/-- **Homogeneity of `ν`** for nonnegative scalars: `ν(t•A) = t·ν A` (`t ≥ 0`, `A` PSD). -/
+theorem coneExt_smul {t : ℝ} (ht : 0 ≤ t) {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) :
+    m.coneExt (t • A) = t * m.coneExt A := by
+  rcases eq_or_lt_of_le ht with ht0 | htpos
+  · rw [← ht0, zero_smul, zero_mul]; simp [coneExt]
+  · rcases eq_or_lt_of_le (show (0:ℝ) ≤ ∑ i, ∑ j, ‖A i j‖ by positivity) with hc0 | hcpos
+    · have hA0 : A = 0 := by
+        have hsum0 : (∑ i, ∑ j, ‖A i j‖) = 0 := hc0.symm
+        ext i j
+        have h1 := (Finset.sum_eq_zero_iff_of_nonneg
+          (fun i _ => Finset.sum_nonneg fun j _ => norm_nonneg _)).mp hsum0 i (Finset.mem_univ i)
+        have h2 := (Finset.sum_eq_zero_iff_of_nonneg
+          (fun j _ => norm_nonneg _)).mp h1 j (Finset.mem_univ j)
+        simpa using norm_eq_zero.mp h2
+      rw [hA0, smul_zero]; simp [coneExt]
+    · set c : ℝ := ∑ i, ∑ j, ‖A i j‖ with hc
+      have hbd : ((↑(t * c) : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - t • A).PosSemidef := by
+        rw [show ((↑(t * c) : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - t • A)
+            = t • ((↑c : ℂ) • 1 - A) by simp only [coe_smul]; push_cast; module]
+        exact (posSemidef_sumNorm_sub hA).smul ht
+      rw [m.coneExt_eq (hA.smul ht) (by positivity) hbd,
+        m.coneExt_eq hA hcpos (posSemidef_sumNorm_sub hA),
+        show (1 / (t * c)) • (t • A) = (1 / c) • A by
+          rw [smul_smul]; congr 1; field_simp]
+      ring
+
 /-- **Additivity of `ν`** on PSD matrices.  Uses a common Löwner bound
     `c = ∑‖Aᵢⱼ‖ + ∑‖Bᵢⱼ‖ + 1` for `A`, `B`, and `A+B`, then the additivity of `μ` on the
     coexistent effects `(1/c)•A`, `(1/c)•B`. -/
@@ -492,6 +525,43 @@ theorem hermExt_eq_coneExt {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) 
 theorem hermExt_nonneg {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) :
     0 ≤ m.hermExt A := by
   rw [m.hermExt_eq_coneExt hA]; exact m.coneExt_nonneg hA
+
+/-- `Λ 0 = 0`. -/
+theorem hermExt_zero : m.hermExt (0 : Matrix (Fin d) (Fin d) ℂ) = 0 := by
+  rw [m.hermExt_eq_coneExt Matrix.PosSemidef.zero]; simp [coneExt]
+
+/-- `Λ(−H) = −Λ H` (from additivity and `Λ 0 = 0`). -/
+theorem hermExt_neg {H : Matrix (Fin d) (Fin d) ℂ} (hH : H.IsHermitian) :
+    m.hermExt (-H) = -m.hermExt H := by
+  have h := m.hermExt_add hH hH.neg
+  rw [add_neg_cancel, m.hermExt_zero] at h
+  linarith
+
+/-- `Λ(t•H) = t·Λ H` for `t ≥ 0` (via `coneExt_smul` and `hermExt_eq` with bound `t·s`). -/
+theorem hermExt_smul_nonneg {t : ℝ} (ht : 0 ≤ t) {H : Matrix (Fin d) (Fin d) ℂ}
+    (hH : H.IsHermitian) : m.hermExt (t • H) = t * m.hermExt H := by
+  set s : ℝ := ∑ i, ∑ j, ‖H i j‖ with hs
+  have hs0 : (0:ℝ) ≤ s := by rw [hs]; positivity
+  have hsps : ((s : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) + H).PosSemidef := by
+    rw [hs]; exact posSemidef_sumNorm_add_herm hH
+  have heq : ((↑(t * s) : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) + t • H)
+      = t • ((s : ℂ) • 1 + H) := by simp only [coe_smul]; push_cast; module
+  have hts : ((↑(t * s) : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) + t • H).PosSemidef := by
+    rw [heq]; exact hsps.smul ht
+  rw [m.hermExt_eq (isHermitian_smul hH t) (by positivity) hts, m.hermExt_eq hH hs0 hsps, heq,
+    m.coneExt_smul ht hsps]
+  ring
+
+/-- **ℝ-homogeneity of `Λ`** (all `t ∈ ℝ`): `Λ(t•H) = t·Λ H`.  With `hermExt_add`, `Λ` is
+    ℝ-linear on Hermitian matrices.  `t < 0` reduces to `t ≥ 0` via `Λ(−H) = −Λ H`. -/
+theorem hermExt_smul {t : ℝ} {H : Matrix (Fin d) (Fin d) ℂ} (hH : H.IsHermitian) :
+    m.hermExt (t • H) = t * m.hermExt H := by
+  rcases le_total 0 t with ht | ht
+  · exact m.hermExt_smul_nonneg ht hH
+  · have e : t • H = -((-t) • H) := by rw [neg_smul, neg_neg]
+    rw [e, m.hermExt_neg (isHermitian_smul hH (-t)),
+      m.hermExt_smul_nonneg (by linarith : (0:ℝ) ≤ -t) hH]
+    ring
 
 end EffectMeasure
 

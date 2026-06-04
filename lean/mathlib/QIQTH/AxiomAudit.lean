@@ -572,5 +572,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — G2: Λ additive on Hermitian matrices.
 #print axioms QIQTH.EffectGleason.EffectMeasure.hermExt_nonneg
 -- expected: standard only — G2: Λ ≥ 0 on PSD (= ν there).
+#print axioms QIQTH.EffectGleason.EffectMeasure.coneExt_smul
+-- expected: standard only — G2: ν(t•A) = t·ν A for t ≥ 0.
+#print axioms QIQTH.EffectGleason.EffectMeasure.hermExt_smul
+-- expected: standard only — G2: Λ(t•H) = t·Λ H for all t ∈ ℝ ⇒ Λ is ℝ-linear.
 
 end QIQTH.AxiomAudit
