@@ -481,5 +481,8 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — non-vacuity: the storage bound holds for Euclidean fragments.
 #print axioms QIQTH.SBSBridge.sbs_single_outcome
 -- expected: standard only — Tier-B single outcome: saturation DERIVED from redundancy.
+#print axioms QIQTH.SBSBridge.fragmented_single_outcome
+-- expected: standard only — FULLY load-bearing: storageCost finrank-DEFINED, hstorage PROVED
+-- (no free field); redundancy_le_logStorage is in the dependency graph.
 
 end QIQTH.AxiomAudit

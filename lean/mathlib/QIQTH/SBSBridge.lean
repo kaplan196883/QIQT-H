@@ -79,8 +79,9 @@ theorem redundancy_le_logStorage {Frag : Type*} [Fintype Frag] {n : ℕ} (hn : 1
         Finset.sum_le_sum (fun f _ => Real.log_le_log hnpos (hdim f))
 
 /-- **Non-vacuity:** `R` Euclidean fragments of dimension `n` (orthonormal basis as the
-    distinguishing family) realize the bound with equality `R·log n = ∑ log n`.  Shows the
-    storage bound is genuinely sourced from real Hilbert-space distinguishability. -/
+    distinguishing family) satisfy the bound (in fact with equality, since each
+    `finrank = n`).  Shows the storage bound is genuinely sourced from real Hilbert-space
+    distinguishability, not vacuous. -/
 theorem euclidean_storage_bound (R n : ℕ) (hn : 1 ≤ n) :
     (R : ℝ) * Real.log n ≤
       ∑ _f : Fin R, Real.log (finrank 𝕜 (EuclideanSpace 𝕜 (Fin n))) := by
@@ -149,5 +150,66 @@ noncomputable def SBSContext.toRecordContext (S : SBSContext) : RecordContext wh
 theorem sbs_single_outcome (S : SBSContext) (sel : Selection S.toRecordContext) :
     ∃! r : S.ι, r ∈ sel.config.active :=
   qiqth_single_outcome_no_collapse sel
+
+/- ── Fully load-bearing layer: storage DEFINED from fragment dimensions ────-/
+
+/-- A **fragmented** SBS context: the fragment Hilbert spaces are EXPLICIT, so the storage
+    cost is DEFINED from their dimensions and the bridge premise `hstorage` becomes a
+    THEOREM (`redundancy_le_logStorage`), not a free field.  Record `j` is an `n j`-outcome
+    pointer broadcast to fragments `Frag j`, each a finite-dim Hilbert space `E j f` with an
+    orthonormal distinguishing family `rec j f : Fin (n j) → E j f`. -/
+structure FragmentedSBSContext (𝕜 : Type*) [RCLike 𝕜] where
+  ι : Type
+  [finι : Fintype ι]
+  Frag : ι → Type
+  [finFrag : ∀ j, Fintype (Frag j)]
+  n : ι → ℕ
+  hn : ∀ j, 2 ≤ n j
+  E : (j : ι) → Frag j → Type*
+  [ng : ∀ j f, NormedAddCommGroup (E j f)]
+  [ip : ∀ j f, InnerProductSpace 𝕜 (E j f)]
+  [fd : ∀ j f, FiniteDimensional 𝕜 (E j f)]
+  dist : (j : ι) → (f : Frag j) → Fin (n j) → E j f
+  hdist : ∀ j f, Orthonormal 𝕜 (dist j f)
+  Rmacro : ℕ
+  hRmacro : 1 ≤ Rmacro
+  hmacro : ∀ j, Rmacro ≤ Fintype.card (Frag j)
+  Qmax : ℝ
+  hcap : Qmax / 2 < (Rmacro : ℝ) * Real.log 2
+
+attribute [instance] FragmentedSBSContext.finι FragmentedSBSContext.finFrag
+  FragmentedSBSContext.ng FragmentedSBSContext.ip FragmentedSBSContext.fd
+
+/-- Storage cost DEFINED from the fragment dimensions: `∑_f log(finrank (E j f))`. -/
+noncomputable def FragmentedSBSContext.storageCost (S : FragmentedSBSContext 𝕜) (j : S.ι) : ℝ :=
+  ∑ f : S.Frag j, Real.log (finrank 𝕜 (S.E j f))
+
+/-- **The physical constructor.**  A fragmented context yields an `SBSContext` whose
+    `storageCost` is finrank-defined and whose `hstorage` is PROVED by
+    `redundancy_le_logStorage` — so the dimension theorem is now load-bearing in the
+    dependency graph (no free `hstorage` field, no room to cheat). -/
+noncomputable def FragmentedSBSContext.toSBSContext (S : FragmentedSBSContext 𝕜) :
+    SBSContext where
+  ι := S.ι
+  R := fun j => Fintype.card (S.Frag j)
+  n := S.n
+  hn := S.hn
+  Rmacro := S.Rmacro
+  hRmacro := S.hRmacro
+  hmacro := S.hmacro
+  storageCost := S.storageCost
+  hstorage := fun j =>
+    redundancy_le_logStorage (le_trans one_le_two (S.hn j)) (S.dist j) (S.hdist j)
+  Qmax := S.Qmax
+  hcap := S.hcap
+
+/-- **Fully load-bearing single-outcome theorem.**  Over a fragmented SBS context — where
+    the cost is the finrank-defined storage and the saturation premise is the dimension
+    theorem `redundancy_le_logStorage` (no `hstorage` shell) — the actuality selector picks
+    EXACTLY ONE objective record. -/
+theorem fragmented_single_outcome (S : FragmentedSBSContext 𝕜)
+    (sel : Selection S.toSBSContext.toRecordContext) :
+    ∃! r : S.ι, r ∈ sel.config.active :=
+  sbs_single_outcome S.toSBSContext sel
 
 end QIQTH.SBSBridge
