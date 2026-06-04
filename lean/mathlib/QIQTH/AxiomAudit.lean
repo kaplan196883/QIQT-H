@@ -546,5 +546,7 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — G1: μ(t•E) = t·μ E (additive + bounded ⇒ ℝ-homogeneous).
 #print axioms QIQTH.EffectGleason.exists_smul_one_sub_posSemidef
 -- expected: standard only — G2 prereq (absent from Mathlib): PSD A ⪯ c•1 (Löwner bound).
+#print axioms QIQTH.EffectGleason.isEffect_inv_smul
+-- expected: standard only — G2: PSD A bounded by c•1 ⇒ (1/c)•A is an effect (cone-scaling).
 
 end QIQTH.AxiomAudit

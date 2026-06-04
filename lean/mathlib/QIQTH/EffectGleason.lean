@@ -204,6 +204,27 @@ theorem exists_smul_one_sub_posSemidef {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.
         Complex.zero_im, zero_mul, add_zero]
       rw [hQim, hRim]; ring
 
+/-- Real-smul equals complex-smul on a ℂ-matrix: `t • M = (↑t) • M`.  (Bridges the
+    `ℝ`-scaling used by `map_smul`/`isEffect_smul` and the `ℂ`-scaling in the PSD bound.) -/
+theorem coe_smul (t : ℝ) (M : Matrix (Fin d) (Fin d) ℂ) : t • M = (↑t : ℂ) • M := by
+  ext i j; simp [Matrix.smul_apply, Complex.real_smul]
+
+/-- **Effect closure under `(1/c)·`.**  If `A` is PSD and `A ⪯ c·1` (`c > 0`), then
+    `(1/c)•A` is an effect: it is PSD, and `1 − (1/c)•A = (1/c)•(c·1 − A)` is PSD.  Lets us
+    scale any PSD matrix bounded by `c·1` down into the effect cube — the engine of the cone
+    extension `ν`. -/
+theorem isEffect_inv_smul {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) {c : ℝ}
+    (hc : 0 < c) (hbd : ((c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A).PosSemidef) :
+    IsEffect ((1 / c) • A) := by
+  refine ⟨hA.smul (by positivity), ?_⟩
+  have h1 : (1 / c) • ((c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ)) = 1 := by
+    rw [coe_smul, smul_smul, ← Complex.ofReal_mul, one_div, inv_mul_cancel₀ (ne_of_gt hc),
+      Complex.ofReal_one, one_smul]
+  have key : (1 : Matrix (Fin d) (Fin d) ℂ) - (1 / c) • A
+      = (1 / c) • ((c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A) := by
+    rw [smul_sub, h1]
+  rw [key]; exact hbd.smul (by positivity)
+
 /-- A **finite effect measure** (generalized probability measure on effects): normalized,
     nonnegative, and additive on coexistent effects.  This is the hypothesis of
     effect-Gleason; the theorem (future installments) is that `μ E = tr(ρ E)`. -/
