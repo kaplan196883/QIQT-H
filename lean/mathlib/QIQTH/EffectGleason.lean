@@ -214,6 +214,15 @@ theorem posSemidef_sumNorm_sub {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemid
     (((∑ i, ∑ j, ‖A i j‖ : ℝ) : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A).PosSemidef :=
   posSemidef_sumNorm_sub_herm hA.1
 
+/-- Lower Löwner bound: for Hermitian `A`, `(∑‖Aᵢⱼ‖)·1 + A` is PSD (apply the upper bound
+    to `−A`).  Gives `−c·1 ⪯ A`, the lower half of the two-sided bound. -/
+theorem posSemidef_sumNorm_add_herm {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.IsHermitian) :
+    (((∑ i, ∑ j, ‖A i j‖ : ℝ) : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) + A).PosSemidef := by
+  have hthis := posSemidef_sumNorm_sub_herm hA.neg
+  rw [show (∑ i, ∑ j, ‖(-A) i j‖) = ∑ i, ∑ j, ‖A i j‖ by simp [Matrix.neg_apply],
+    sub_neg_eq_add] at hthis
+  exact hthis
+
 /-- Existential form of the PSD Löwner-order bound (`A ⪯ c•1` for some `c ≥ 0`). -/
 theorem exists_smul_one_sub_posSemidef {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) :
     ∃ c : ℝ, 0 ≤ c ∧ ((c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A).PosSemidef :=
@@ -452,6 +461,37 @@ theorem hermExt_eq {H : Matrix (Fin d) (Fin d) ℂ} (hH : H.IsHermitian) {c : �
       = ((c : ℂ) • 1 + H) + (s : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) := by abel
   rw [key, hcone2] at hcone1
   linarith [hcone1]
+
+/-- **Additivity of `Λ`** on Hermitian matrices.  Uses `hermExt_eq` with bounds `c₁`, `c₂`,
+    `c₁+c₂`: `(c₁+c₂)·1 + (H₁+H₂) = (c₁·1+H₁) + (c₂·1+H₂)` and `coneExt_add`. -/
+theorem hermExt_add {H₁ H₂ : Matrix (Fin d) (Fin d) ℂ} (h₁ : H₁.IsHermitian)
+    (h₂ : H₂.IsHermitian) : m.hermExt (H₁ + H₂) = m.hermExt H₁ + m.hermExt H₂ := by
+  set c₁ : ℝ := ∑ i, ∑ j, ‖H₁ i j‖ with hc₁
+  set c₂ : ℝ := ∑ i, ∑ j, ‖H₂ i j‖ with hc₂
+  have hc₁0 : (0:ℝ) ≤ c₁ := by rw [hc₁]; positivity
+  have hc₂0 : (0:ℝ) ≤ c₂ := by rw [hc₂]; positivity
+  have hb₁ : ((c₁ : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) + H₁).PosSemidef := by
+    rw [hc₁]; exact posSemidef_sumNorm_add_herm h₁
+  have hb₂ : ((c₂ : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) + H₂).PosSemidef := by
+    rw [hc₂]; exact posSemidef_sumNorm_add_herm h₂
+  have hrw : ((↑(c₁ + c₂) : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) + (H₁ + H₂))
+      = ((c₁ : ℂ) • 1 + H₁) + ((c₂ : ℂ) • 1 + H₂) := by push_cast; module
+  have hbsum : ((↑(c₁ + c₂) : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) + (H₁ + H₂)).PosSemidef := by
+    rw [hrw]; exact hb₁.add hb₂
+  rw [m.hermExt_eq h₁ hc₁0 hb₁, m.hermExt_eq h₂ hc₂0 hb₂,
+    m.hermExt_eq (h₁.add h₂) (by positivity) hbsum, hrw, m.coneExt_add hb₁ hb₂]
+  ring
+
+/-- On PSD matrices the Hermitian extension agrees with the cone extension: `Λ A = ν A`
+    (take the bound `c = 0`). -/
+theorem hermExt_eq_coneExt {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) :
+    m.hermExt A = m.coneExt A := by
+  rw [m.hermExt_eq hA.1 (c := 0) le_rfl (by simpa using hA)]; simp
+
+/-- `Λ ≥ 0` on PSD matrices (it equals `ν ≥ 0` there). -/
+theorem hermExt_nonneg {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) :
+    0 ≤ m.hermExt A := by
+  rw [m.hermExt_eq_coneExt hA]; exact m.coneExt_nonneg hA
 
 end EffectMeasure
 

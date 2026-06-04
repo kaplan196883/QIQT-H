@@ -566,5 +566,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — G2: ν(a·1) = a for a ≥ 0.
 #print axioms QIQTH.EffectGleason.EffectMeasure.hermExt_eq
 -- expected: standard only — G2: Hermitian extension Λ H = ν(H+c·1) − c, bound-independent.
+#print axioms QIQTH.EffectGleason.posSemidef_sumNorm_add_herm
+-- expected: standard only — G2: lower Löwner bound (∑‖Aᵢⱼ‖)•1 + A PSD for Hermitian A.
+#print axioms QIQTH.EffectGleason.EffectMeasure.hermExt_add
+-- expected: standard only — G2: Λ additive on Hermitian matrices.
+#print axioms QIQTH.EffectGleason.EffectMeasure.hermExt_nonneg
+-- expected: standard only — G2: Λ ≥ 0 on PSD (= ν there).
 
 end QIQTH.AxiomAudit
