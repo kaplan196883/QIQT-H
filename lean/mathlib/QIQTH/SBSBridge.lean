@@ -342,4 +342,72 @@ theorem overlap_block_zero {Frag : Type*} (B : Finset Frag) (c : Frag → ℂ)
     {a : Frag} (ha : a ∈ B) (hca : c a = 0) : ∏ a ∈ B, c a = 0 :=
   Finset.prod_eq_zero ha hca
 
+/- ── Approximate δ-decoding: imperfect distinguishability still forces dimension ──
+
+   The amplification only gives APPROXIMATE orthogonality (overlap `≤ γ^L`, not `0`).  The
+   realistic (Strasberg "approximate decoherence") question: does imperfect distinguishability
+   still force the storage/objectivity bound?  YES: a near-orthonormal family (pairwise overlap
+   `ε < 1/(n-1)`) is still linearly independent, so `dim ≥ n` and the whole storage chain is
+   robust.  Combined with amplification (`ε = γ^L`, small once `L` is large), weak per-collision
+   monitoring over enough collisions forces the bound — no exact orthogonality needed. -/
+
+/-- **Near-orthonormal ⇒ linearly independent.**  Unit vectors with pairwise overlap `≤ ε`
+    and `(n-1)·ε < 1` are linearly independent (Gram matrix diagonally dominant; max-coefficient
+    argument: `‖g k‖ ≤ ∑_{i≠k} ‖g i‖ε ≤ (n-1)ε‖g k‖ < ‖g k‖`). -/
+theorem linearIndependent_of_near_orthonormal {n : ℕ} (v : Fin n → H)
+    (hnorm : ∀ i, ‖v i‖ = 1) {ε : ℝ} (hε0 : 0 ≤ ε)
+    (hε : ∀ i j, i ≠ j → ‖(inner 𝕜 (v i) (v j) : 𝕜)‖ ≤ ε)
+    (hsmall : ((n : ℝ) - 1) * ε < 1) : LinearIndependent 𝕜 v := by
+  classical
+  rw [Fintype.linearIndependent_iff]
+  intro g hg
+  have hbound : ∀ k, ‖g k‖ ≤ ∑ i ∈ Finset.univ.erase k, ‖g i‖ * ε := by
+    intro k
+    have h0 : (g k : 𝕜) = -∑ i ∈ Finset.univ.erase k, g i * inner 𝕜 (v k) (v i) := by
+      have hz : inner 𝕜 (v k) (∑ i, g i • v i) = (0 : 𝕜) := by rw [hg]; exact inner_zero_right _
+      rw [inner_sum] at hz
+      simp only [inner_smul_right] at hz
+      rw [← Finset.add_sum_erase _ _ (Finset.mem_univ k)] at hz
+      have hkk : (inner 𝕜 (v k) (v k) : 𝕜) = 1 := by
+        rw [inner_self_eq_norm_sq_to_K, hnorm k]; norm_num
+      rw [hkk, mul_one] at hz
+      linear_combination hz
+    rw [h0, norm_neg]
+    refine le_trans (norm_sum_le _ _) (Finset.sum_le_sum (fun i hi => ?_))
+    rw [norm_mul]
+    exact mul_le_mul_of_nonneg_left (hε k i (Finset.ne_of_mem_erase hi).symm) (norm_nonneg _)
+  rcases isEmpty_or_nonempty (Fin n) with hemp | hne
+  · intro i; exact (hemp.false i).elim
+  · haveI := hne
+    have hn1 : 1 ≤ n := by
+      have h := Fintype.card_pos (α := Fin n); rwa [Fintype.card_fin] at h
+    obtain ⟨k, -, hk⟩ :=
+      Finset.exists_max_image Finset.univ (fun i => ‖g i‖) Finset.univ_nonempty
+    have hMbound : ‖g k‖ ≤ ((n : ℝ) - 1) * ε * ‖g k‖ :=
+      calc ‖g k‖ ≤ ∑ i ∈ Finset.univ.erase k, ‖g i‖ * ε := hbound k
+        _ ≤ ∑ _i ∈ Finset.univ.erase k, ‖g k‖ * ε :=
+            Finset.sum_le_sum (fun i _ =>
+              mul_le_mul_of_nonneg_right (hk i (Finset.mem_univ i)) hε0)
+        _ = ((n : ℝ) - 1) * ε * ‖g k‖ := by
+            rw [Finset.sum_const, nsmul_eq_mul, Finset.card_erase_of_mem (Finset.mem_univ k),
+              Finset.card_univ, Fintype.card_fin, Nat.cast_sub hn1, Nat.cast_one]
+            ring
+    have hgk0 : ‖g k‖ = 0 := by
+      by_contra h
+      have hpos : 0 < ‖g k‖ := lt_of_le_of_ne (norm_nonneg _) (Ne.symm h)
+      nlinarith [hMbound, mul_pos hpos (sub_pos.mpr hsmall)]
+    intro i
+    exact norm_eq_zero.mp (le_antisymm (by rw [← hgk0]; exact hk i (Finset.mem_univ i))
+      (norm_nonneg _))
+
+/-- **Approximate distinguishability still forces dimension `≥ n`.**  A fragment whose `n`
+    branch states are only `ε`-distinguishable (`ε < 1/(n-1)`, the imperfect-decoherence
+    regime) still has dimension `≥ n` — so the storage lower bound `redundancy_le_logStorage`
+    and the whole objectivity/exclusion chain survive approximate decoherence. -/
+theorem fragment_finrank_ge_approx {n : ℕ} (v : Fin n → H) (hnorm : ∀ i, ‖v i‖ = 1)
+    {ε : ℝ} (hε0 : 0 ≤ ε) (hε : ∀ i j, i ≠ j → ‖(inner 𝕜 (v i) (v j) : 𝕜)‖ ≤ ε)
+    (hsmall : ((n : ℝ) - 1) * ε < 1) : n ≤ finrank 𝕜 H := by
+  have h := (linearIndependent_of_near_orthonormal v hnorm hε0 hε hsmall).fintype_card_le_finrank
+  simpa using h
+
 end QIQTH.SBSBridge
