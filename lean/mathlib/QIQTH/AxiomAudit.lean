@@ -540,5 +540,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — monotonicity (E ≤ F ⇒ μ E ≤ μ F).
 #print axioms QIQTH.EffectGleason.EffectMeasure.map_smul_add
 -- expected: standard only — scaling additivity (seed of homogeneity).
+#print axioms QIQTH.EffectGleason.cauchy_unit_interval
+-- expected: standard only — G1 CORE: additive + monotone on [0,1] ⇒ ℝ-linear (Cauchy squeeze).
+#print axioms QIQTH.EffectGleason.EffectMeasure.map_smul
+-- expected: standard only — G1: μ(t•E) = t·μ E (additive + bounded ⇒ ℝ-homogeneous).
 
 end QIQTH.AxiomAudit
