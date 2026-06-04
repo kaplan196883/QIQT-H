@@ -143,6 +143,67 @@ theorem cauchy_unit_interval (g : ℝ → ℝ) (h0 : g 0 = 0)
     rw [le_div_iff₀ hn0] at hb
     nlinarith [hb, hn]
 
+/-- **PSD Löwner-order bound (G2 prerequisite — absent from Mathlib).**  Every PSD `A` is
+    bounded above by `c • 1` in the Löwner order for some `c ≥ 0`: here `c = ∑ᵢⱼ ‖Aᵢⱼ‖`, and
+    `c•1 − A` is PSD.  Lets us scale an arbitrary PSD matrix into an effect.  Proved
+    elementarily (no spectral theorem): the quadratic form `⟨x,Ax⟩` is a nonneg real bounded
+    by `(∑‖Aᵢⱼ‖)·∑‖xₖ‖²` via the triangle inequality and `‖xᵢ‖‖xⱼ‖ ≤ ∑‖x_k‖²`. -/
+theorem exists_smul_one_sub_posSemidef {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) :
+    ∃ c : ℝ, 0 ≤ c ∧ ((c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A).PosSemidef := by
+  classical
+  refine ⟨∑ i, ∑ j, ‖A i j‖, by positivity, ?_⟩
+  set c : ℝ := ∑ i, ∑ j, ‖A i j‖ with hc
+  rw [Matrix.posSemidef_iff_dotProduct_mulVec]
+  refine ⟨?_, ?_⟩
+  · -- IsHermitian
+    show ((c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A)ᴴ
+        = (c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A
+    rw [conjTranspose_sub, conjTranspose_smul, conjTranspose_one, hA.1]
+    simp [Complex.conj_ofReal]
+  · intro x
+    have hexp : star x ⬝ᵥ (((c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A) *ᵥ x)
+        = (c : ℂ) * (star x ⬝ᵥ x) - star x ⬝ᵥ (A *ᵥ x) := by
+      rw [sub_mulVec, smul_mulVec, one_mulVec, dotProduct_sub, dotProduct_smul, smul_eq_mul]
+    rw [hexp]
+    have hQre : (star x ⬝ᵥ x).re = ∑ i, ‖x i‖ ^ 2 := by
+      rw [dotProduct, Complex.re_sum]
+      refine Finset.sum_congr rfl (fun i _ => ?_)
+      rw [Pi.star_apply, Complex.star_def, ← Complex.normSq_eq_conj_mul_self, Complex.ofReal_re,
+        Complex.sq_norm]
+    have hQim : (star x ⬝ᵥ x).im = 0 := by
+      have h := (Complex.le_def.mp (dotProduct_star_self_nonneg x)).2; simpa using h.symm
+    have hRim : (star x ⬝ᵥ (A *ᵥ x)).im = 0 := by
+      have h := (Complex.le_def.mp ((Matrix.posSemidef_iff_dotProduct_mulVec.mp hA).2 x)).2
+      simpa using h.symm
+    have hRexp : star x ⬝ᵥ (A *ᵥ x) = ∑ i, ∑ j, star (x i) * (A i j * x j) := by
+      simp only [dotProduct, mulVec, Pi.star_apply, Finset.mul_sum]
+    have hRre : (star x ⬝ᵥ (A *ᵥ x)).re ≤ c * (star x ⬝ᵥ x).re := by
+      have hnorm : ‖star x ⬝ᵥ (A *ᵥ x)‖ ≤ c * (star x ⬝ᵥ x).re := by
+        rw [hRexp, hQre, hc, Finset.sum_mul]
+        refine le_trans (norm_sum_le _ _) (Finset.sum_le_sum (fun i _ => ?_))
+        rw [Finset.sum_mul]
+        refine le_trans (norm_sum_le _ _) (Finset.sum_le_sum (fun j _ => ?_))
+        rw [norm_mul, norm_mul, norm_star]
+        have hxij : ‖x i‖ * ‖x j‖ ≤ ∑ k, ‖x k‖ ^ 2 := by
+          have hi : ‖x i‖ ^ 2 ≤ ∑ k, ‖x k‖ ^ 2 :=
+            Finset.single_le_sum (f := fun k => ‖x k‖ ^ 2) (fun k _ => by positivity)
+              (Finset.mem_univ i)
+          have hj : ‖x j‖ ^ 2 ≤ ∑ k, ‖x k‖ ^ 2 :=
+            Finset.single_le_sum (f := fun k => ‖x k‖ ^ 2) (fun k _ => by positivity)
+              (Finset.mem_univ j)
+          nlinarith [hi, hj, sq_nonneg (‖x i‖ - ‖x j‖), norm_nonneg (x i), norm_nonneg (x j)]
+        calc ‖x i‖ * (‖A i j‖ * ‖x j‖) = ‖A i j‖ * (‖x i‖ * ‖x j‖) := by ring
+          _ ≤ ‖A i j‖ * ∑ k, ‖x k‖ ^ 2 := mul_le_mul_of_nonneg_left hxij (norm_nonneg (A i j))
+      exact le_trans (Complex.re_le_norm _) hnorm
+    rw [Complex.le_def]
+    refine ⟨?_, ?_⟩
+    · simp only [Complex.sub_re, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im,
+        Complex.zero_re, zero_mul, sub_zero]
+      linarith [hRre]
+    · simp only [Complex.sub_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
+        Complex.zero_im, zero_mul, add_zero]
+      rw [hQim, hRim]; ring
+
 /-- A **finite effect measure** (generalized probability measure on effects): normalized,
     nonnegative, and additive on coexistent effects.  This is the hypothesis of
     effect-Gleason; the theorem (future installments) is that `μ E = tr(ρ E)`. -/
