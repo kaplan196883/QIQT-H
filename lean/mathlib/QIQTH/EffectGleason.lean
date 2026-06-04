@@ -563,6 +563,17 @@ theorem hermExt_smul {t : ℝ} {H : Matrix (Fin d) (Fin d) ℂ} (hH : H.IsHermit
       m.hermExt_smul_nonneg (by linarith : (0:ℝ) ≤ -t) hH]
     ring
 
+/-- On an effect, the cone extension recovers `μ`: `ν E = μ E` (take the bound `c = 1`,
+    since `E ≤ 1`). -/
+theorem coneExt_eq_mu_of_isEffect {E : Matrix (Fin d) (Fin d) ℂ} (hE : IsEffect E) :
+    m.coneExt E = m.μ E := by
+  rw [m.coneExt_eq hE.1 (c := 1) one_pos (by simpa using hE.2)]; simp
+
+/-- On an effect, the Hermitian extension recovers `μ`: `Λ E = μ E`. -/
+theorem hermExt_eq_mu_of_isEffect {E : Matrix (Fin d) (Fin d) ℂ} (hE : IsEffect E) :
+    m.hermExt E = m.μ E := by
+  rw [m.hermExt_eq_coneExt hE.1, m.coneExt_eq_mu_of_isEffect hE]
+
 end EffectMeasure
 
 end QIQTH.EffectGleason
