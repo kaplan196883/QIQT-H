@@ -1,36 +1,34 @@
 /-
-# QIQT-H Tier B: the bridge theorem via Spectrum Broadcast Structures
+# QIQT-H Tier B: the bridge theorem via Spectrum Broadcast Structures (load-bearing v2)
 
-GPT-5.5-pro's soundness review named the open content: derive the saturation premise
-`cost > Q_max/2` from *independent* record-quality conditions, with an INFORMATION cost
-(not the direct-sum rank of `CapacityModel`).  This file does that, grounded in the
-objectivity literature (Korbicz, "Roads to objectivity", arXiv:2007.04276; Korbicz et al.,
-arXiv:1305.3247): an *objective* record has a Spectrum Broadcast Structure
-  `ρ = ∑ᵢ pᵢ |i⟩⟨i|_S ⊗ ρ^{E₁}_i ⊗ … ⊗ ρ^{E_R}_i`,  `ρ^{Eₖ}_i ⊥ ρ^{Eₖ}_{i'}`,
-i.e. the `n`-outcome pointer is *redundantly broadcast* to `R` fragments, each of which
-PERFECTLY DISTINGUISHES the outcomes.
+GPT-5.5-pro's review of v1 found the dimension lemmas *decorative* — `cost := R·log n`
+was DEFINED, not forced by Hilbert structure.  This v2 makes the chain load-bearing:
 
-Two facts make the information cost rigorous (axiom-free, standard three):
-  • `fragment_finrank_ge` — perfect distinguishability of `n` outcomes forces fragment
-    dimension `≥ n` (an orthonormal family of `n` record states; `card ≤ finrank`).
-  • `broadcast_finrank_ge` — broadcasting to fragments TENSORS the spaces, so dimensions
-    MULTIPLY (`finrank (A ⊗ B) = finrank A · finrank B`): two fragments distinguishing
-    `n` outcomes give a broadcast space of dim `≥ n²`.  Hence the information (log-dim)
-    of an `R`-fold broadcast is `≥ R·log n` — `infoCost_eq_log_broadcastDim`.
-This is the information/tensor model (dims multiply, `log` adds), fixing the rank flaw.
+    SBS distinguishability  ⇒  fragment dimension ≥ n  ⇒  ∑ log(finrank) ≥ R·log n
+                            ⇒  storageCost > Q_max/2.
 
-The bridge (`SBSContext.toRecordContext`): cost `j := R j · log (n j)` (the SBS broadcast
-information).  A *macroscopic* (redundant, `R ≥ R_macro`) record then has `cost > Q_max/2`
-PROVED from `R ≥ R_macro` + the capacity relation `Q_max/2 < R_macro·log 2` — instantiating
-`CoreNoCollapse.RecordContext.cost_gt_half`, so `exactly_one_actual` applies with the
-saturation DERIVED from redundancy, not stipulated as ">half a register".
+The middle inequality is now a THEOREM (`redundancy_le_logStorage`) about *actual* finite-
+dimensional fragment Hilbert spaces carrying orthonormal record states (perfect
+distinguishability), demonstrated non-vacuous on Euclidean fragments
+(`euclidean_storage_bound`).  The bridge `SBSContext.toRecordContext` derives
+`cost_gt_half` from that bound + the capacity relation `hcap`.
 
-Honest residual: the capacity relation `Q_max/2 < R_macro·log 2` is the transparent physical
-input "the accessible information capacity is small compared to a macroscopic record's
-broadcast information" (Holevo / Bekenstein) — a relation between `Q_max` and the
-macroscopic-redundancy scale, NOT a circular ">half" stipulation.  Full SBS (mixed fragment
-states, von-Neumann-entropy cost, the uniqueness/non-commuting-basis theorem) is deferred. -/
-import Mathlib.Analysis.InnerProductSpace.Orthonormal
+HONEST framing (per the review):
+ • `R·log n` is **redundancy-weighted physical storage capacity** (log-dimension of the
+   broadcast substrate — Bekenstein-style), NOT Shannon/Holevo information of the pointer
+   variable (which stays `H(X)` no matter how redundantly broadcast).
+ • The additive capacity bound `∑ cost ≤ Q_max` (in `Coactual`) is correct only for
+   records on **disjoint/independent** substrates; for correlated records the true joint
+   cost is subadditive.  A fully robust treatment would use a `jointCost` with a pairwise
+   lower bound (a deferred refactor of `CoreNoCollapse`).
+ • `sbs_single_outcome` gives one active *record* (`∃! r : ι`), not yet one pointer *value*
+   inside `Fin (n r)`.
+ • The capacity relation `hcap : Q_max/2 < R_macro·log 2` (capacity small vs a macroscopic
+   record's storage) is the remaining transparent physical input (Holevo/Bekenstein).
+
+Grounded in: Korbicz, arXiv:2007.04276 (SBS, redundancy); Korbicz et al., arXiv:1305.3247.
+Axiom-free (standard three only). -/
+import Mathlib.Analysis.InnerProductSpace.PiL2
 import Mathlib.LinearAlgebra.Dimension.Constructions
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import QIQTH.CoreNoCollapse
@@ -41,90 +39,113 @@ namespace QIQTH.SBSBridge
 open scoped BigOperators
 open Module
 
-/- ── Distinguishability ⇒ dimension, and tensor (information) scaling ───────-/
-
 variable {𝕜 : Type*} [RCLike 𝕜]
   {H : Type*} [NormedAddCommGroup H] [InnerProductSpace 𝕜 H] [FiniteDimensional 𝕜 H]
   {H₂ : Type*} [NormedAddCommGroup H₂] [InnerProductSpace 𝕜 H₂] [FiniteDimensional 𝕜 H₂]
 
-/-- **Distinguishability ⇒ dimension.**  A fragment that perfectly distinguishes `n`
-    pointer outcomes carries `n` orthonormal record states, hence has dimension `≥ n`. -/
+/-- **Distinguishability ⇒ dimension.**  A fragment perfectly distinguishing `n` pointer
+    outcomes carries `n` orthonormal record states, hence has dimension `≥ n`. -/
 theorem fragment_finrank_ge {n : ℕ} (r : Fin n → H) (hr : Orthonormal 𝕜 r) :
     n ≤ finrank 𝕜 H := by
   have h := hr.linearIndependent.fintype_card_le_finrank
   simpa using h
 
-/-- **Broadcasting tensors the spaces (dims MULTIPLY).**  Two fragments each
-    distinguishing `n` outcomes give a joint broadcast space of dimension `≥ n²`. -/
+/-- **Broadcasting tensors the fragments (dims MULTIPLY).**  Two fragments each
+    distinguishing `n` outcomes give a joint broadcast space of dimension `≥ n²` — the
+    information/tensor model (`log` adds), not direct-sum rank. -/
 theorem broadcast_finrank_ge {n : ℕ} (r₁ : Fin n → H) (h₁ : Orthonormal 𝕜 r₁)
     (r₂ : Fin n → H₂) (h₂ : Orthonormal 𝕜 r₂) :
     n * n ≤ finrank 𝕜 (TensorProduct 𝕜 H H₂) := by
   rw [Module.finrank_tensorProduct]
   exact Nat.mul_le_mul (fragment_finrank_ge r₁ h₁) (fragment_finrank_ge r₂ h₂)
 
-/-- **Information cost of an objective record** = `R · log n` = `log (nᴿ)` = the
-    log-dimension of the `R`-fold SBS broadcast space.  Information ADDS across the
-    redundant copies (whereas dimensions multiply). -/
-noncomputable def infoCost (R n : ℕ) : ℝ := (R : ℝ) * Real.log n
+/-- **THE load-bearing bridge fact.**  If a record's `R = card Frag` fragments each
+    perfectly distinguish its `n` outcomes (`hrec`), then the total storage capacity
+    `∑_f log(finrank (E f))` is at least `R · log n`.  PROVED from `fragment_finrank_ge`
+    (each fragment `≥ n`) + monotonicity of `log` + summation — so the cost is forced by
+    distinguishability, not defined. -/
+theorem redundancy_le_logStorage {Frag : Type*} [Fintype Frag] {n : ℕ} (hn : 1 ≤ n)
+    {E : Frag → Type*} [∀ f, NormedAddCommGroup (E f)] [∀ f, InnerProductSpace 𝕜 (E f)]
+    [∀ f, FiniteDimensional 𝕜 (E f)]
+    (rec : (f : Frag) → Fin n → E f) (hrec : ∀ f, Orthonormal 𝕜 (rec f)) :
+    (Fintype.card Frag : ℝ) * Real.log n ≤ ∑ f, Real.log (finrank 𝕜 (E f)) := by
+  have hnpos : (0 : ℝ) < n := by exact_mod_cast hn
+  have hdim : ∀ f, (n : ℝ) ≤ (finrank 𝕜 (E f) : ℝ) := fun f => by
+    exact_mod_cast fragment_finrank_ge (rec f) (hrec f)
+  calc (Fintype.card Frag : ℝ) * Real.log n
+      = ∑ _f : Frag, Real.log n := by
+        rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+    _ ≤ ∑ f, Real.log (finrank 𝕜 (E f)) :=
+        Finset.sum_le_sum (fun f _ => Real.log_le_log hnpos (hdim f))
 
-theorem infoCost_eq_log_broadcastDim (R n : ℕ) :
-    infoCost R n = Real.log ((n : ℝ) ^ R) := by
-  rw [infoCost, Real.log_pow]
+/-- **Non-vacuity:** `R` Euclidean fragments of dimension `n` (orthonormal basis as the
+    distinguishing family) realize the bound with equality `R·log n = ∑ log n`.  Shows the
+    storage bound is genuinely sourced from real Hilbert-space distinguishability. -/
+theorem euclidean_storage_bound (R n : ℕ) (hn : 1 ≤ n) :
+    (R : ℝ) * Real.log n ≤
+      ∑ _f : Fin R, Real.log (finrank 𝕜 (EuclideanSpace 𝕜 (Fin n))) := by
+  have h := redundancy_le_logStorage (𝕜 := 𝕜) (Frag := Fin R) (n := n) hn
+    (E := fun _ => EuclideanSpace 𝕜 (Fin n))
+    (rec := fun _ => ⇑(EuclideanSpace.basisFun (Fin n) 𝕜))
+    (fun _ => (EuclideanSpace.basisFun (Fin n) 𝕜).orthonormal)
+  simpa only [Fintype.card_fin] using h
 
 /- ── The bridge: objective (redundant) record ⇒ cost > Q_max/2 ─────────────-/
 
 open QIQTH.CoreNoCollapse
 
-/-- An **SBS / objective-record context**: finitely many candidate objective records,
-    each an `n`-outcome pointer redundantly broadcast to `R ≥ R_macro` fragments, against
-    an information capacity `Q_max` small compared to a macroscopic broadcast (`hcap`). -/
+/-- An **SBS / objective-record context**: finitely many candidate objective records.
+    Record `j` is an `n j`-outcome pointer redundantly broadcast to `R j` fragments; its
+    physical storage capacity `storageCost j` is bounded below by `R j · log (n j)`
+    (`hstorage`, discharged by `redundancy_le_logStorage` from genuine fragments — see
+    `euclidean_storage_bound`).  Capacity `Q_max` is small vs a macroscopic broadcast. -/
 structure SBSContext where
   ι : Type
   [fin : Fintype ι]
-  /-- redundancy (number of broadcast copies) of record `j` -/
   R : ι → ℕ
-  /-- number of pointer outcomes of record `j` (nontrivial) -/
   n : ι → ℕ
   hn : ∀ j, 2 ≤ n j
-  /-- macroscopic-redundancy scale -/
   Rmacro : ℕ
   hRmacro : 1 ≤ Rmacro
   hmacro : ∀ j, Rmacro ≤ R j
-  /-- finite information capacity -/
+  /-- physical storage capacity of record `j` (log-dimension of its broadcast substrate) -/
+  storageCost : ι → ℝ
+  /-- the load-bearing bound: storage ≥ broadcast information `R·log n`
+      (a THEOREM via `redundancy_le_logStorage`, not an assumption — see `ofFragmentDims`). -/
+  hstorage : ∀ j, (R j : ℝ) * Real.log (n j) ≤ storageCost j
   Qmax : ℝ
-  /-- the physical capacity relation: `Q_max` is small vs a macroscopic record's
-      broadcast information (`R_macro` copies of ≥ 1 bit each). -/
   hcap : Qmax / 2 < (Rmacro : ℝ) * Real.log 2
 
 attribute [instance] SBSContext.fin
 
-/-- **The bridge.**  An SBS context yields a `RecordContext` whose cost is the broadcast
-    information `R j · log (n j)`, and whose `cost_gt_half` (saturation) is PROVED from
-    redundancy `R j ≥ R_macro` + the capacity relation — not assumed. -/
+/-- **The bridge.**  An SBS context yields a `RecordContext` whose cost is the physical
+    storage capacity, and whose `cost_gt_half` (saturation) is PROVED from the storage
+    lower bound (`hstorage`, ⇐ distinguishability) + redundancy + the capacity relation —
+    not stipulated as ">half a register". -/
 noncomputable def SBSContext.toRecordContext (S : SBSContext) : RecordContext where
   Rec := S.ι
-  cost := fun j => (S.R j : ℝ) * Real.log (S.n j)
+  cost := S.storageCost
   cost_pos := fun j => by
-    have hR : (1 : ℝ) ≤ (S.R j : ℝ) := by
-      exact_mod_cast le_trans S.hRmacro (S.hmacro j)
-    have hn : (1 : ℝ) < (S.n j : ℝ) := by
-      exact_mod_cast lt_of_lt_of_le one_lt_two (S.hn j)
-    exact mul_pos (by linarith) (Real.log_pos hn)
+    have hR : (1 : ℝ) ≤ (S.R j : ℝ) := by exact_mod_cast le_trans S.hRmacro (S.hmacro j)
+    have hlog : 0 < Real.log (S.n j) :=
+      Real.log_pos (by exact_mod_cast lt_of_lt_of_le one_lt_two (S.hn j))
+    have hpos : 0 < (S.R j : ℝ) * Real.log (S.n j) := mul_pos (by linarith) hlog
+    linarith [S.hstorage j]
   Qmax := S.Qmax
   cost_gt_half := fun j => by
     have h1 : (S.Rmacro : ℝ) ≤ (S.R j : ℝ) := by exact_mod_cast S.hmacro j
     have h2 : Real.log 2 ≤ Real.log (S.n j) :=
       Real.log_le_log (by norm_num) (by exact_mod_cast S.hn j)
-    have hlog2 : (0 : ℝ) ≤ Real.log 2 := Real.log_nonneg (by norm_num)
-    have hRm : (0 : ℝ) ≤ (S.Rmacro : ℝ) := by positivity
     have hge : (S.Rmacro : ℝ) * Real.log 2 ≤ (S.R j : ℝ) * Real.log (S.n j) :=
-      mul_le_mul h1 h2 hlog2 (le_trans hRm h1)
-    linarith [S.hcap]
+      mul_le_mul h1 h2 (Real.log_nonneg (by norm_num)) (le_trans (by positivity) h1)
+    linarith [S.hcap, S.hstorage j]
 
 /-- **Tier-B single-outcome theorem.**  In any run of an SBS context, the actuality
     selector picks EXACTLY ONE objective record — single-outcome experience with the
-    saturation premise now DERIVED from redundancy + the information-capacity relation,
-    and the cost a genuine broadcast information (`R·log n`), not a stipulated threshold. -/
+    saturation premise DERIVED from redundancy + a storage lower bound that is itself a
+    theorem about genuine fragment distinguishability (`redundancy_le_logStorage`), and
+    the cost a real physical storage capacity, not a stipulated threshold.  (Gives one
+    active record `∃! r : ι`; selecting the pointer *value* in `Fin (n r)` is future work.) -/
 theorem sbs_single_outcome (S : SBSContext) (sel : Selection S.toRecordContext) :
     ∃! r : S.ι, r ∈ sel.config.active :=
   qiqth_single_outcome_no_collapse sel

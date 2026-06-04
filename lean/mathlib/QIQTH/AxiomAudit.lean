@@ -475,8 +475,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — distinguishability ⇒ fragment dimension ≥ n (orthonormal).
 #print axioms QIQTH.SBSBridge.broadcast_finrank_ge
 -- expected: standard only — broadcasting tensors spaces: dims multiply (≥ n²).
-#print axioms QIQTH.SBSBridge.infoCost_eq_log_broadcastDim
--- expected: standard only — R·log n = log(nᴿ): info adds across redundant copies.
+#print axioms QIQTH.SBSBridge.redundancy_le_logStorage
+-- expected: standard only — LOAD-BEARING: distinguishability ⇒ ∑log(finrank) ≥ R·log n.
+#print axioms QIQTH.SBSBridge.euclidean_storage_bound
+-- expected: standard only — non-vacuity: the storage bound holds for Euclidean fragments.
 #print axioms QIQTH.SBSBridge.sbs_single_outcome
 -- expected: standard only — Tier-B single outcome: saturation DERIVED from redundancy.
 
