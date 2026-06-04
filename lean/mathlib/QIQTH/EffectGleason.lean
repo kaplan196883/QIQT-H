@@ -669,6 +669,35 @@ theorem cExt_smul (c : ℂ) (M : Matrix (Fin d) (Fin d) ℂ) :
     show c * m.cExt M = ((↑c.re : ℂ) + ↑c.im * Complex.I) * m.cExt M by rw [Complex.re_add_im]]
   ring
 
+/-- `Λ_ℂ` bundled as a ℂ-linear map (for `map_sum`). -/
+noncomputable def cExtₗ : Matrix (Fin d) (Fin d) ℂ →ₗ[ℂ] ℂ where
+  toFun := m.cExt
+  map_add' := m.cExt_add
+  map_smul' c M := by simp [m.cExt_smul]
+
+/-- The **density matrix** of the effect measure: `ρ a b := Λ_ℂ(E_{ba})`. -/
+noncomputable def rho : Matrix (Fin d) (Fin d) ℂ :=
+  Matrix.of (fun a b => m.cExt (Matrix.single b a 1))
+
+/-- **G3 — the trace (Riesz) representation:** `Λ_ℂ M = tr(ρ M)`.  Expand `M` in matrix units
+    (`matrix_eq_sum_single`) and use ℂ-linearity of `Λ_ℂ`; the trace side is the same double
+    sum after `Finset.sum_comm`. -/
+theorem cExt_trace (M : Matrix (Fin d) (Fin d) ℂ) : m.cExt M = (m.rho * M).trace := by
+  have hL : m.cExt M = ∑ i, ∑ j, M i j * m.cExt (Matrix.single i j 1) := by
+    conv_lhs => rw [show m.cExt M = m.cExtₗ M from rfl, matrix_eq_sum_single M]
+    rw [map_sum]
+    refine Finset.sum_congr rfl fun i _ => ?_
+    rw [map_sum]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [show Matrix.single i j (M i j) = M i j • Matrix.single i j 1 by
+      rw [Matrix.smul_single, smul_eq_mul, mul_one]]
+    exact (m.cExtₗ.map_smul (M i j) (Matrix.single i j 1)).trans (smul_eq_mul _ _)
+  have hR : (m.rho * M).trace = ∑ i, ∑ j, M i j * m.cExt (Matrix.single i j 1) := by
+    simp only [Matrix.trace, Matrix.diag_apply, Matrix.mul_apply, rho, Matrix.of_apply]
+    rw [Finset.sum_comm]
+    exact Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => mul_comm _ _
+  rw [hL, hR]
+
 end EffectMeasure
 
 end QIQTH.EffectGleason
