@@ -252,4 +252,56 @@ theorem unique_objective_record {ι : Type*} [DecidableEq ι] {R n : ι → ℕ}
   refine ⟨j₀, ⟨h₀, hobj₀⟩, fun y hy =>
     active_macroscopic_subsingleton hcost hcapacity hy.1 h₀ (hmac y hy.2) (hmac j₀ hobj₀)⟩
 
+/- ── (E) Objectivity ⇒ redundancy (operational; the DYNAMICAL generation is open) ──
+
+   Item (E) of the GPT-5.5-pro review: turn the redundancy premise `R ≥ R_macro` from a bare
+   number into a CONSEQUENCE of an operational objectivity condition.  Following Zurek's
+   objectivity (the outcome is independently determinable by many observers without
+   disturbance) and its Korbicz–Horodecki formalization as a Spectrum Broadcast Structure
+   (arXiv:2007.04276, 1305.3247): an objective record is one whose pointer outcomes are
+   redundantly broadcast to ≥ R_macro environment fragments, each carrying a perfect
+   orthonormal codebook (perfect distinguishability for that fragment's observer).
+
+   What is DERIVED here: objectivity ⇒ macroscopic storage (`storage ≥ R_macro·log n`), via
+   `redundancy_le_logStorage`.  So `R ≥ R_macro` is now a consequence of the objectivity
+   witness, not assumed.  What stays OPEN (genuinely model-dependent physics, NOT formalized):
+   that decoherence DYNAMICS *produces* such an objectivity witness — the quantum-Darwinism
+   redundancy plateau, shown case-by-case (QBM, spin-spin, …) in the literature, not in general. -/
+
+/-- **Operational objectivity witness** (Zurek/Korbicz SBS): the record's `n` outcomes are
+    independently recoverable by `≥ R_macro` observers, each from a distinct environment
+    fragment carrying a perfect orthonormal codebook.  Redundancy = number of such fragments. -/
+structure ObjectivityWitness (𝕜 : Type*) [RCLike 𝕜] (n Rmacro : ℕ) where
+  Frag : Type
+  [finFrag : Fintype Frag]
+  redundant : Rmacro ≤ Fintype.card Frag
+  E : Frag → Type*
+  [ng : ∀ f, NormedAddCommGroup (E f)]
+  [ip : ∀ f, InnerProductSpace 𝕜 (E f)]
+  [fd : ∀ f, FiniteDimensional 𝕜 (E f)]
+  codebook : (f : Frag) → Fin n → E f
+  hcodebook : ∀ f, Orthonormal 𝕜 (codebook f)
+
+attribute [instance] ObjectivityWitness.finFrag ObjectivityWitness.ng
+  ObjectivityWitness.ip ObjectivityWitness.fd
+
+/-- Physical storage capacity of an objective record (log-dim of its broadcast substrate). -/
+noncomputable def ObjectivityWitness.storageCost {n Rmacro : ℕ}
+    (O : ObjectivityWitness 𝕜 n Rmacro) : ℝ :=
+  ∑ f : O.Frag, Real.log (finrank 𝕜 (O.E f))
+
+/-- **Objectivity ⇒ macroscopic storage (DERIVED).**  An operational objectivity witness
+    (≥ `R_macro` distinguishing fragments) forces `storageCost ≥ R_macro·log n` — via the
+    redundancy count + `redundancy_le_logStorage`.  So the redundancy/macroscopicity is a
+    CONSEQUENCE of objectivity, not a bare assumption.  (The remaining gap is dynamical:
+    decoherence ⇒ this witness exists.) -/
+theorem ObjectivityWitness.storage_ge {n Rmacro : ℕ} (hn : 1 ≤ n)
+    (O : ObjectivityWitness 𝕜 n Rmacro) :
+    (Rmacro : ℝ) * Real.log n ≤ O.storageCost := by
+  calc (Rmacro : ℝ) * Real.log n
+      ≤ (Fintype.card O.Frag : ℝ) * Real.log n :=
+        mul_le_mul_of_nonneg_right (by exact_mod_cast O.redundant)
+          (Real.log_nonneg (by exact_mod_cast hn))
+    _ ≤ O.storageCost := redundancy_le_logStorage hn O.codebook O.hcodebook
+
 end QIQTH.SBSBridge
