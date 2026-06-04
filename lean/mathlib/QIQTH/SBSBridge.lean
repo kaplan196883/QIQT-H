@@ -342,14 +342,21 @@ theorem overlap_block_zero {Frag : Type*} (B : Finset Frag) (c : Frag → ℂ)
     {a : Frag} (ha : a ∈ B) (hca : c a = 0) : ∏ a ∈ B, c a = 0 :=
   Finset.prod_eq_zero ha hca
 
-/- ── Approximate δ-decoding: imperfect distinguishability still forces dimension ──
+/- ── Approximate distinguishability still forces dimension (storage robustness) ──
 
    The amplification only gives APPROXIMATE orthogonality (overlap `≤ γ^L`, not `0`).  The
    realistic (Strasberg "approximate decoherence") question: does imperfect distinguishability
    still force the storage/objectivity bound?  YES: a near-orthonormal family (pairwise overlap
    `ε < 1/(n-1)`) is still linearly independent, so `dim ≥ n` and the whole storage chain is
    robust.  Combined with amplification (`ε = γ^L`, small once `L` is large), weak per-collision
-   monitoring over enough collisions forces the bound — no exact orthogonality needed. -/
+   monitoring over enough collisions forces the storage bound — no exact orthogonality needed.
+
+   HONEST NAMING (GPT-5.5-pro pass 7): this is a DIMENSION/storage lower bound from near-
+   orthogonality — NOT a literal operational δ-decoding (POVM error-bound) theorem.  It is
+   exactly what the storage/capacity chain needs.  A genuine operational decoder (a measurement
+   recovering the branch label with success ≥ 1 − (n−1)γ^L) would follow from a Gram-matrix
+   polar-orthogonalization (`G ≥ (1−η)·I`); that is a nice OPTIONAL refinement, not required
+   here, and is left as future work. -/
 
 /-- **Near-orthonormal ⇒ linearly independent.**  Unit vectors with pairwise overlap `≤ ε`
     and `(n-1)·ε < 1` are linearly independent (Gram matrix diagonally dominant; max-coefficient

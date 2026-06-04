@@ -142,3 +142,38 @@ SBS uniqueness theorem, and the non-commuting-basis (objectivity einselects the 
 - arXiv:1305.3247 — *Objectivity through state broadcasting* (origin of SBS).
 - arXiv:2509.17775 — functional-information / Holevo capacity (the `Q_max` model).
 - arXiv:2601.19703 — Strasberg–Winter branch-selection (the open problem SBS answers).
+
+## Closing assessment (GPT-5.5-pro, seven review passes, 2026-06)
+
+Unified rank: **(b+), with an (a)-grade mechanized mathematical core.** Across the passes the
+mechanized-theorem fraction of "finite Q_max removes the need for the collapse postulate" rose
+from ~25% to **~50% mechanized theorem / ~45% explicit physical-modeling premise / ~5% residual
+(mostly wording risk)**.
+
+Most accurate one-line characterization (GPT): *"an axiom-free Lean formalization of a
+conditional Hilbert-space capacity theorem showing that scattering-induced small overlaps plus
+finite additive storage force redundancy/storage bounds and macroscopic-record exclusion, while
+the Hamiltonian origin of the scattering premise and the interpretation as collapse-removal
+remain external."*
+
+Machine-checked ladder (all axiom-free): distinguishability ⇒ dim ≥ n; APPROXIMATE
+distinguishability (overlap < 1/(n−1)) ⇒ dim ≥ n; R fragments ⇒ storage ≥ R·log n; weak
+per-collision overlap γ<1 ⇒ block overlap ≤ γ^L → 0 (amplification); objectivity witness ⇒
+macroscopic storage; finite additive capacity ⇒ ≤1 objective record active (small coexist);
+Born ∑‖Eψ‖²=1 + collapse-as-conditionalization.
+
+The single OPEN physical input (precise form): *derive a stable, factorized, branch-dependent
+scattering model with uniform per-collision distinguishability γ<1 from a concrete Hamiltonian.*
+Plus the modeling choices: finite Q_max, additive capacity for disjoint substrates, tensor
+factorization, no-recoherence, and the interpretation of low-overlap branch states as records.
+
+Referee judgment (Lean-formalization-of-physics paper): **accept / weak accept** with conditional
+framing; **major revision** if it claims an unconditional solution of the measurement problem.
+
+ABSTRACT MUST NOT SAY: *"We prove in Lean that finite Q_max alone eliminates the collapse
+postulate and solves the quantum measurement problem."*
+
+SAFE ABSTRACT (GPT): *"We formalize a conditional capacity theorem: under finite additive storage
+and a scattering model with uniform per-collision distinguishability, repeated interactions
+amplify small overlaps into redundant record states requiring macroscopic storage, while deriving
+the scattering premise from a Hamiltonian remains open."*
