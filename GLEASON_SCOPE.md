@@ -126,8 +126,21 @@ G2 (spectral split + well-definedness).**
 5. **Capstone `finite_effect_gleason`** + re-route `TypicalityMackeyGleason` finite case and
    retire the Goldstein–Struyve axioms; update `AxiomAudit.lean` and the budget.
 
-**Honest status:** the hard core (G1) is proved axiom-free. G2–G5 are mechanical but
-substantial, and G2 requires first building PSD Löwner-order infrastructure that Mathlib
-lacks — a bounded sub-project, no open-math risk. Pen-and-paper / out of scope throughout:
-the continuum Type-II/III Bunce–Wright generalization (Wall 1 deeper), which remains a named
-interface input.
+**STATUS: COMPLETE (2026-06).** All of G1–G4 are proved axiom-free in `EffectGleason.lean`;
+the capstone `finite_effect_gleason` is the finite-dimensional effect (Busch) Gleason
+theorem: a normalized, nonnegative, coexistent-additive functional `μ` on effects equals
+`μ E = tr(ρ E)` for a density matrix `ρ` (PSD, trace 1). The full ladder, all standard-three
+axioms only:
+- **G1** — `cauchy_unit_interval` (additive + monotone on [0,1] ⇒ ℝ-linear), `map_smul`.
+- **G2** — PSD/Hermitian Löwner bounds `posSemidef_sumNorm_sub(_herm)` (the lemmas absent
+  from Mathlib, proved without the spectral theorem), cone extension `coneExt` (ν), and the
+  ℝ-linear Hermitian extension `hermExt` (Λ): `hermExt_add`, `hermExt_smul`, `hermExt_nonneg`.
+- **G3** — complexification `reHerm`/`imHerm`, ℂ-linear `cExt` (Λ_ℂ): `cExt_add`, `cExt_smul`;
+  trace (Riesz) representation `cExt_trace` (`Λ_ℂ M = tr(ρM)`, `ρ a b := Λ_ℂ(E_{ba})`).
+- **G4** — `rho_isHermitian`, `rho_posSemidef`, `rho_trace`, and `finite_effect_gleason`.
+
+This is the Born rule derived from positivity + additivity alone, in finite dimension. **Out
+of scope (unchanged):** the continuum Type-II/III Bunce–Wright generalization (Wall 1 deeper),
+a named interface input; and retiring the project's finite Mackey-Gleason / Goldstein–Struyve
+Born-uniqueness axioms by routing `canonical_ic_measure_principle` through this capstone
+(a follow-up refactor, 37 → ~34).
