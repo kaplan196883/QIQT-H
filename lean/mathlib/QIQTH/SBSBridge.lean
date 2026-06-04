@@ -304,4 +304,42 @@ theorem ObjectivityWitness.storage_ge {n Rmacro : ℕ} (hn : 1 ≤ n)
           (Real.log_nonneg (by exact_mod_cast hn))
     _ ≤ O.storageCost := redundancy_le_logStorage hn O.codebook O.hcodebook
 
+/- ── Dynamical amplification of distinguishability (GPT-5.5-pro item #5) ─────
+
+   "A standard measurement-like interaction amplifies distinguishability into many
+   independent records."  Model: a QND/product-branching interaction deposits, in each
+   environment collision `a`, a system-conditioned branch state; the OVERLAP between the
+   `i` and `j` branches in collision `a` is `c a` with `‖c a‖ ≤ γ < 1` (each single
+   collision only partially distinguishes the outcomes).  For a BLOCK `B` of independent
+   collisions the joint branch states are tensor products, so their overlap is the PRODUCT
+   `∏_{a∈B} c a` — which decays as `γ^|B|`.  Thus a block of `L` collisions distinguishes
+   the outcomes with overlap `≤ γ^L → 0`: distinguishability is amplified exponentially,
+   turning weak per-collision monitoring into near-perfect records — and, partitioning `N`
+   collisions into `k = ⌊N/L⌋` blocks, into `k` redundant records (an `ObjectivityWitness`
+   with redundancy `k`).  The exact (`γ = 0`) limit gives orthogonality directly. -/
+
+/-- **Distinguishability amplifies:** the joint overlap of a block of independent collisions
+    is the product of the per-collision overlaps, hence `≤ γ^|B|`.  (`‖∏‖ = ∏‖·‖` ≤ `∏ γ`.) -/
+theorem overlap_amplifies {Frag : Type*} (B : Finset Frag) {γ : ℝ} (c : Frag → ℂ)
+    (hc : ∀ a ∈ B, ‖c a‖ ≤ γ) : ‖∏ a ∈ B, c a‖ ≤ γ ^ B.card := by
+  rw [norm_prod]
+  calc ∏ a ∈ B, ‖c a‖
+      ≤ ∏ _a ∈ B, γ := Finset.prod_le_prod (fun a _ => norm_nonneg _) hc
+    _ = γ ^ B.card := by rw [Finset.prod_const]
+
+/-- **Exponential suppression:** for partial per-collision distinguishability `γ < 1`, the
+    block overlap `γ^L → 0` as the block size `L → ∞`.  So sufficiently long blocks become
+    arbitrarily distinguishable — weak monitoring is amplified into reliable records. -/
+theorem block_overlap_tendsto_zero {γ : ℝ} (h0 : 0 ≤ γ) (h1 : γ < 1) :
+    Filter.Tendsto (fun L : ℕ => γ ^ L) Filter.atTop (nhds 0) :=
+  tendsto_pow_atTop_nhds_zero_of_lt_one h0 h1
+
+/-- **Exact limit (γ = 0):** if even one collision in the block perfectly distinguishes the
+    outcomes (`c a = 0`), the whole block's overlap is `0` — the block branches are
+    orthogonal, a perfect record.  This is the orthonormal-codebook input of an
+    `ObjectivityWitness`. -/
+theorem overlap_block_zero {Frag : Type*} (B : Finset Frag) (c : Frag → ℂ)
+    {a : Frag} (ha : a ∈ B) (hca : c a = 0) : ∏ a ∈ B, c a = 0 :=
+  Finset.prod_eq_zero ha hca
+
 end QIQTH.SBSBridge

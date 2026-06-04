@@ -457,6 +457,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — honest form: ∃! OBJECTIVE (redundant) active record; small ones coexist.
 #print axioms QIQTH.SBSBridge.ObjectivityWitness.storage_ge
 -- expected: standard only — (E) operational objectivity ⇒ macroscopic storage (redundancy DERIVED).
+#print axioms QIQTH.SBSBridge.overlap_amplifies
+-- expected: standard only — (#5) block overlap = ∏ per-collision overlaps ≤ γ^L (amplification).
+#print axioms QIQTH.SBSBridge.block_overlap_tendsto_zero
+-- expected: standard only — γ<1 ⇒ γ^L → 0: distinguishability amplified exponentially.
+#print axioms QIQTH.SBSBridge.overlap_block_zero
+-- expected: standard only — one perfect collision ⇒ block branches orthogonal (exact record).
 #print axioms QIQTH.CoreNoCollapse.FinPVM.weight_sum_eq_one
 -- expected: standard only — Born normalisation ∑‖E r ψ‖²=1 (genuine resolution of identity).
 #print axioms QIQTH.CoreNoCollapse.FinPVM.condProb_eq_born_postState
