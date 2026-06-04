@@ -212,4 +212,44 @@ theorem fragmented_single_outcome (S : FragmentedSBSContext 𝕜)
     ∃! r : S.ι, r ∈ sel.config.active :=
   sbs_single_outcome S.toSBSContext sel
 
+/- ── Honest form: small records may coexist; exactly one OBJECTIVE record is active ──
+
+   Addresses the GPT-5.5-pro worry that the global `hmacro` excludes small records by fiat.
+   Here records carry VARYING redundancy `R j`; "objective" = sufficiently redundant
+   (`R j ≥ R_macro`).  A redundant record is macroscopic (storage `> Q_max/2`); by the
+   capacity bound at most one macroscopic record is active, so at most one OBJECTIVE record
+   is active — while sub-threshold (non-objective) records may freely coexist. -/
+
+/-- A sufficiently-redundant record is **macroscopic**: its storage exceeds `Q_max/2`. -/
+theorem macroscopic_of_redundant {ι : Type*} {R n : ι → ℕ} {storageCost : ι → ℝ}
+    {Rmacro : ℕ} {Qmax : ℝ} (hn : ∀ j, 2 ≤ n j)
+    (hstore : ∀ j, (R j : ℝ) * Real.log (n j) ≤ storageCost j)
+    (hcap : Qmax / 2 < (Rmacro : ℝ) * Real.log 2) {j : ι} (hj : Rmacro ≤ R j) :
+    Qmax / 2 < storageCost j := by
+  have h1 : (Rmacro : ℝ) ≤ (R j : ℝ) := by exact_mod_cast hj
+  have h2 : Real.log 2 ≤ Real.log (n j) := Real.log_le_log (by norm_num) (by exact_mod_cast hn j)
+  have hge : (Rmacro : ℝ) * Real.log 2 ≤ (R j : ℝ) * Real.log (n j) :=
+    mul_le_mul h1 h2 (Real.log_nonneg (by norm_num)) (le_trans (by positivity) h1)
+  linarith [hstore j]
+
+/-- **Honest single-outcome theorem (small records coexist).**  Given candidate records with
+    varying redundancy `R j` and finrank-defined-style storage lower bounds, a capacity
+    `Q_max` sub-macroscopic (`hcap`), and a selector making at least one OBJECTIVE record
+    (`R ≥ R_macro`) active, then EXACTLY ONE objective record is active.  Non-objective
+    (`R < R_macro`) records may also be active — they are not excluded by fiat. -/
+theorem unique_objective_record {ι : Type*} [DecidableEq ι] {R n : ι → ℕ}
+    (hn : ∀ j, 2 ≤ n j) {storageCost : ι → ℝ}
+    (hstore : ∀ j, (R j : ℝ) * Real.log (n j) ≤ storageCost j)
+    {Rmacro : ℕ} {Qmax : ℝ} (hcap : Qmax / 2 < (Rmacro : ℝ) * Real.log 2)
+    {active : Finset ι} (hcapacity : ∑ j ∈ active, storageCost j ≤ Qmax)
+    {j₀ : ι} (h₀ : j₀ ∈ active) (hobj₀ : Rmacro ≤ R j₀) :
+    ∃! j, j ∈ active ∧ Rmacro ≤ R j := by
+  have hcost : ∀ j, 0 ≤ storageCost j := fun j =>
+    le_trans (mul_nonneg (Nat.cast_nonneg _)
+      (Real.log_nonneg (by exact_mod_cast le_trans one_le_two (hn j)))) (hstore j)
+  have hmac : ∀ j, Rmacro ≤ R j → Qmax / 2 < storageCost j :=
+    fun j hj => macroscopic_of_redundant hn hstore hcap hj
+  refine ⟨j₀, ⟨h₀, hobj₀⟩, fun y hy =>
+    active_macroscopic_subsingleton hcost hcapacity hy.1 h₀ (hmac y hy.2) (hmac j₀ hobj₀)⟩
+
 end QIQTH.SBSBridge

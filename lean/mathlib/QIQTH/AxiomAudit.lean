@@ -451,6 +451,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — capacity + selector ⇒ EXACTLY ONE actual record.
 #print axioms QIQTH.CoreNoCollapse.qiqth_single_outcome_no_collapse
 -- expected: standard only — ∃! actual record, no collapse postulate.
+#print axioms QIQTH.CoreNoCollapse.active_macroscopic_subsingleton
+-- expected: standard only — ≤1 MACROSCOPIC active record (small records may coexist; no fiat).
+#print axioms QIQTH.SBSBridge.unique_objective_record
+-- expected: standard only — honest form: ∃! OBJECTIVE (redundant) active record; small ones coexist.
 #print axioms QIQTH.CoreNoCollapse.FinPVM.weight_sum_eq_one
 -- expected: standard only — Born normalisation ∑‖E r ψ‖²=1 (genuine resolution of identity).
 #print axioms QIQTH.CoreNoCollapse.FinPVM.condProb_eq_born_postState

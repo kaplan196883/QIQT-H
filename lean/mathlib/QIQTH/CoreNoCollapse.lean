@@ -101,6 +101,28 @@ theorem pair_exceeds_of_cost_gt_half (r s : C.Rec) (h : r ≠ s) :
     C.Qmax < C.cost r + C.cost s := by
   linarith [C.cost_gt_half r, C.cost_gt_half s]
 
+/-- **Honest macroscopic exclusion (no global macroscopicity).**  In ANY capacity-bounded
+    active set, at most one *macroscopic* record (`Q_max/2 < cost`) can be present — two
+    would exceed capacity.  Unlike `coactual_subsingleton`, this does NOT assume every
+    record is macroscopic: SMALL records (`cost ≤ Q_max/2`) may freely coexist.  Stated as
+    "any two active macroscopic records are equal".  (Addresses the GPT-5.5-pro worry that
+    requiring all records macroscopic excludes small ones by fiat.) -/
+theorem active_macroscopic_subsingleton {Rec : Type*} [DecidableEq Rec] {cost : Rec → ℝ}
+    {Qmax : ℝ} (hcost : ∀ r, 0 ≤ cost r) {active : Finset Rec}
+    (hcap : ∑ r ∈ active, cost r ≤ Qmax) {r₁ r₂ : Rec}
+    (h₁ : r₁ ∈ active) (h₂ : r₂ ∈ active)
+    (hm₁ : Qmax / 2 < cost r₁) (hm₂ : Qmax / 2 < cost r₂) : r₁ = r₂ := by
+  by_contra hne
+  have hsub : ({r₁, r₂} : Finset Rec) ⊆ active := by
+    intro z hz; simp only [Finset.mem_insert, Finset.mem_singleton] at hz
+    rcases hz with rfl | rfl
+    · exact h₁
+    · exact h₂
+  have hpair : cost r₁ + cost r₂ ≤ ∑ r ∈ active, cost r := by
+    have h := Finset.sum_le_sum_of_subset_of_nonneg hsub (fun i _ _ => hcost i)
+    rwa [Finset.sum_pair hne] at h
+  linarith
+
 /- ── Block 4: actuality selector λ ─────────────────────────────────────────-/
 
 /-- The **actuality selector** `λ` for a run: it makes at least one complete record
