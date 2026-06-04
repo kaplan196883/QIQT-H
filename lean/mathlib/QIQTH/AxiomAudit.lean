@@ -554,5 +554,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — G2: ν 1 = 1.
 #print axioms QIQTH.EffectGleason.EffectMeasure.coneExt_nonneg
 -- expected: standard only — G2: ν ≥ 0 on PSD matrices.
+#print axioms QIQTH.EffectGleason.posSemidef_smul_one_sub_mono
+-- expected: standard only — G2: Löwner-bound monotonicity (A ⪯ a•1, a≤b ⇒ A ⪯ b•1).
+#print axioms QIQTH.EffectGleason.EffectMeasure.coneExt_add
+-- expected: standard only — G2: ν is additive on PSD (common-bound argument).
 
 end QIQTH.AxiomAudit

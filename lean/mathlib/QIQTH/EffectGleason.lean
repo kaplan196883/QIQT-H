@@ -229,6 +229,19 @@ theorem isEffect_inv_smul {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) {
     rw [smul_sub, h1]
   rw [key]; exact hbd.smul (by positivity)
 
+/-- **Monotonicity of the Löwner bound.**  If `A ⪯ a·1` and `a ≤ b`, then `A ⪯ b·1`
+    (`b·1 − A = (a·1 − A) + (b−a)·1`, a sum of PSD matrices). -/
+theorem posSemidef_smul_one_sub_mono {A : Matrix (Fin d) (Fin d) ℂ} {a b : ℝ}
+    (hbd : ((a : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A).PosSemidef) (hab : a ≤ b) :
+    ((b : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A).PosSemidef := by
+  have hPSD : (((b - a : ℝ)) • (1 : Matrix (Fin d) (Fin d) ℂ)).PosSemidef :=
+    Matrix.PosSemidef.one.smul (by linarith)
+  have key : (b : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A
+      = ((a : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A)
+        + (b - a : ℝ) • (1 : Matrix (Fin d) (Fin d) ℂ) := by
+    rw [coe_smul]; push_cast; module
+  rw [key]; exact hbd.add hPSD
+
 /-- A **finite effect measure** (generalized probability measure on effects): normalized,
     nonnegative, and additive on coexistent effects.  This is the hypothesis of
     effect-Gleason; the theorem (future installments) is that `μ E = tr(ρ E)`. -/
@@ -350,6 +363,35 @@ theorem coneExt_nonneg {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) :
   · unfold coneExt; rw [← h0]; simp
   · rw [m.coneExt_eq hA hpos (posSemidef_sumNorm_sub hA)]
     exact mul_nonneg (le_of_lt hpos) (m.nonneg _ (isEffect_inv_smul hA hpos (posSemidef_sumNorm_sub hA)))
+
+/-- **Additivity of `ν`** on PSD matrices.  Uses a common Löwner bound
+    `c = ∑‖Aᵢⱼ‖ + ∑‖Bᵢⱼ‖ + 1` for `A`, `B`, and `A+B`, then the additivity of `μ` on the
+    coexistent effects `(1/c)•A`, `(1/c)•B`. -/
+theorem coneExt_add {A B : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) (hB : B.PosSemidef) :
+    m.coneExt (A + B) = m.coneExt A + m.coneExt B := by
+  have hsA0 : (0:ℝ) ≤ ∑ i, ∑ j, ‖A i j‖ := by positivity
+  have hsB0 : (0:ℝ) ≤ ∑ i, ∑ j, ‖B i j‖ := by positivity
+  set c : ℝ := (∑ i, ∑ j, ‖A i j‖) + (∑ i, ∑ j, ‖B i j‖) + 1 with hcdef
+  have hc : 0 < c := by rw [hcdef]; linarith
+  have hbA : ((c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A).PosSemidef :=
+    posSemidef_smul_one_sub_mono (posSemidef_sumNorm_sub hA) (by rw [hcdef]; linarith)
+  have hbB : ((c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - B).PosSemidef :=
+    posSemidef_smul_one_sub_mono (posSemidef_sumNorm_sub hB) (by rw [hcdef]; linarith)
+  have htri : (∑ i, ∑ j, ‖(A + B) i j‖) ≤ c := by
+    have h1 : (∑ i, ∑ j, ‖(A + B) i j‖) ≤ ∑ i, ∑ j, (‖A i j‖ + ‖B i j‖) :=
+      Finset.sum_le_sum (fun i _ => Finset.sum_le_sum (fun j _ => by
+        rw [Matrix.add_apply]; exact norm_add_le _ _))
+    calc (∑ i, ∑ j, ‖(A + B) i j‖) ≤ ∑ i, ∑ j, (‖A i j‖ + ‖B i j‖) := h1
+      _ = (∑ i, ∑ j, ‖A i j‖) + (∑ i, ∑ j, ‖B i j‖) := by simp only [Finset.sum_add_distrib]
+      _ ≤ c := by rw [hcdef]; linarith
+  have hbAB : ((c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - (A + B)).PosSemidef :=
+    posSemidef_smul_one_sub_mono (posSemidef_sumNorm_sub (hA.add hB)) htri
+  rw [m.coneExt_eq (hA.add hB) hc hbAB, m.coneExt_eq hA hc hbA, m.coneExt_eq hB hc hbB,
+    ← mul_add]
+  congr 1
+  rw [smul_add]
+  exact m.additive _ _ (isEffect_inv_smul hA hc hbA) (isEffect_inv_smul hB hc hbB)
+    (by rw [← smul_add]; exact isEffect_inv_smul (hA.add hB) hc hbAB)
 
 end EffectMeasure
 
