@@ -121,6 +121,20 @@ lemma permMatrix_star (d : ℕ) (σ : Equiv.Perm (Fin d)) :
     rw [if_neg this]
     simp
 
+/-- **PROVED.**  A permutation matrix is unitary: `P_σ · P_σ* = 1`.
+    (`P_σ* = P_{σ⁻¹}` and `P_σ · P_{σ⁻¹} = 1`.)  This is the hypothesis
+    needed to feed `P_σ` into `IsUnitaryEquivariant`. -/
+lemma permMatrix_unitary (d : ℕ) (σ : Equiv.Perm (Fin d)) :
+    permMatrix d σ * star (permMatrix d σ) = 1 := by
+  rw [permMatrix_star]
+  funext k l
+  rw [mul_permMatrix_apply]
+  unfold permMatrix
+  rw [Equiv.apply_symm_apply]
+  by_cases h : k = l
+  · subst h; rw [if_pos rfl, Matrix.one_apply_eq]
+  · rw [if_neg h, Matrix.one_apply_ne h]
+
 /-- **PROVED.**  Conjugation of `E_ij` by a permutation matrix permutes
     the indices: `P_σ · E_ij · P_σ* = E_{σ(i), σ(j)}`.
 
@@ -369,6 +383,21 @@ theorem diagonalU_conj_matrixUnit (d : ℕ) (z : Fin d → ℂ) (i j : Fin d) :
     rw [if_pos ⟨rfl, rfl⟩]
     ring
   · rw [if_neg h, mul_zero, mul_zero, zero_mul]
+
+/-- **PROVED.**  A diagonal matrix with unit-modulus entries
+    (`z k · conj (z k) = 1` for all `k`) is unitary:
+    `diagonalU z · (diagonalU z)* = 1`.  This is the hypothesis needed
+    to feed `diagonalU z` into `IsUnitaryEquivariant`. -/
+lemma diagonalU_unitary (d : ℕ) (z : Fin d → ℂ)
+    (hz : ∀ k, z k * star (z k) = 1) :
+    diagonalU d z * star (diagonalU d z) = 1 := by
+  rw [diagonalU_star]
+  funext k l
+  rw [diagonalU_mul_apply]
+  unfold diagonalU
+  by_cases h : k = l
+  · subst h; rw [if_pos rfl, hz, Matrix.one_apply_eq]
+  · rw [if_neg h, mul_zero, Matrix.one_apply_ne h]
 
 /- ── Honest residual interface ────────────────────────────────────── -/
 
