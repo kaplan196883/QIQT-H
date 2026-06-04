@@ -544,6 +544,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — G1 CORE: additive + monotone on [0,1] ⇒ ℝ-linear (Cauchy squeeze).
 #print axioms QIQTH.EffectGleason.EffectMeasure.map_smul
 -- expected: standard only — G1: μ(t•E) = t·μ E (additive + bounded ⇒ ℝ-homogeneous).
+#print axioms QIQTH.EffectGleason.quadForm_im_zero
+-- expected: standard only — G2: Hermitian quadratic form ⟨x,Hx⟩ is real (im = 0).
+#print axioms QIQTH.EffectGleason.posSemidef_sumNorm_sub_herm
+-- expected: standard only — G2: Hermitian Löwner bound H ⪯ (∑‖Hᵢⱼ‖)•1 (absent from Mathlib).
 #print axioms QIQTH.EffectGleason.exists_smul_one_sub_posSemidef
 -- expected: standard only — G2 prereq (absent from Mathlib): PSD A ⪯ c•1 (Löwner bound).
 #print axioms QIQTH.EffectGleason.isEffect_inv_smul

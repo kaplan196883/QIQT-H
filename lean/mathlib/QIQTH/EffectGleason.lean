@@ -143,12 +143,20 @@ theorem cauchy_unit_interval (g : ℝ → ℝ) (h0 : g 0 = 0)
     rw [le_div_iff₀ hn0] at hb
     nlinarith [hb, hn]
 
-/-- **PSD Löwner-order bound (G2 prerequisite — absent from Mathlib).**  Every PSD `A` is
-    bounded above by `c • 1` in the Löwner order for some `c ≥ 0`: here `c = ∑ᵢⱼ ‖Aᵢⱼ‖`, and
-    `c•1 − A` is PSD.  Lets us scale an arbitrary PSD matrix into an effect.  Proved
-    elementarily (no spectral theorem): the quadratic form `⟨x,Ax⟩` is a nonneg real bounded
-    by `(∑‖Aᵢⱼ‖)·∑‖xₖ‖²` via the triangle inequality and `‖xᵢ‖‖xⱼ‖ ≤ ∑‖x_k‖²`. -/
-theorem posSemidef_sumNorm_sub {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) :
+/-- The quadratic form `⟨x, H x⟩` of a Hermitian matrix is **real** (`im = 0`):
+    `star(⟪x,Hx⟫) = ⟪x,Hx⟫` since `Hᴴ = H`. -/
+theorem quadForm_im_zero {H : Matrix (Fin d) (Fin d) ℂ} (hH : H.IsHermitian) (x : Fin d → ℂ) :
+    (star x ⬝ᵥ (H *ᵥ x)).im = 0 := by
+  rw [← Complex.conj_eq_iff_im, ← Complex.star_def]
+  conv_lhs => rw [Matrix.star_dotProduct, star_star]
+  rw [Matrix.star_mulVec, hH, Matrix.dotProduct_mulVec]
+
+/-- **Löwner-order bound for Hermitian matrices (G2 — absent from Mathlib).**  Every
+    Hermitian `A` satisfies `A ⪯ c·1` with `c = ∑ᵢⱼ‖Aᵢⱼ‖`, i.e. `c•1 − A` is PSD.  Proved
+    elementarily (no spectral theorem): for Hermitian `A` the quadratic form `⟨x,Ax⟩` is real
+    (`quadForm_im_zero`) and `|⟨x,Ax⟩| ≤ (∑‖Aᵢⱼ‖)·∑‖xₖ‖²` via the triangle inequality and
+    `‖xᵢ‖‖xⱼ‖ ≤ ∑‖x_k‖²`.  (PSD is the special case `posSemidef_sumNorm_sub` below.) -/
+theorem posSemidef_sumNorm_sub_herm {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.IsHermitian) :
     (((∑ i, ∑ j, ‖A i j‖ : ℝ) : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A).PosSemidef := by
   classical
   set c : ℝ := ∑ i, ∑ j, ‖A i j‖ with hc
@@ -157,7 +165,7 @@ theorem posSemidef_sumNorm_sub {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemid
   · -- IsHermitian
     show ((c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A)ᴴ
         = (c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A
-    rw [conjTranspose_sub, conjTranspose_smul, conjTranspose_one, hA.1]
+    rw [conjTranspose_sub, conjTranspose_smul, conjTranspose_one, hA]
     simp [Complex.conj_ofReal]
   · intro x
     have hexp : star x ⬝ᵥ (((c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A) *ᵥ x)
@@ -171,9 +179,7 @@ theorem posSemidef_sumNorm_sub {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemid
         Complex.sq_norm]
     have hQim : (star x ⬝ᵥ x).im = 0 := by
       have h := (Complex.le_def.mp (dotProduct_star_self_nonneg x)).2; simpa using h.symm
-    have hRim : (star x ⬝ᵥ (A *ᵥ x)).im = 0 := by
-      have h := (Complex.le_def.mp ((Matrix.posSemidef_iff_dotProduct_mulVec.mp hA).2 x)).2
-      simpa using h.symm
+    have hRim : (star x ⬝ᵥ (A *ᵥ x)).im = 0 := quadForm_im_zero hA x
     have hRexp : star x ⬝ᵥ (A *ᵥ x) = ∑ i, ∑ j, star (x i) * (A i j * x j) := by
       simp only [dotProduct, mulVec, Pi.star_apply, Finset.mul_sum]
     have hRre : (star x ⬝ᵥ (A *ᵥ x)).re ≤ c * (star x ⬝ᵥ x).re := by
@@ -202,6 +208,11 @@ theorem posSemidef_sumNorm_sub {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemid
     · simp only [Complex.sub_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
         Complex.zero_im, zero_mul, add_zero]
       rw [hQim, hRim]; ring
+
+/-- PSD special case of the Löwner-order bound: `A ⪯ (∑‖Aᵢⱼ‖)·1`. -/
+theorem posSemidef_sumNorm_sub {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) :
+    (((∑ i, ∑ j, ‖A i j‖ : ℝ) : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A).PosSemidef :=
+  posSemidef_sumNorm_sub_herm hA.1
 
 /-- Existential form of the PSD Löwner-order bound (`A ⪯ c•1` for some `c ≥ 0`). -/
 theorem exists_smul_one_sub_posSemidef {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) :
