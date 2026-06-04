@@ -732,6 +732,42 @@ theorem rho_trace : m.rho.trace = 1 := by
   rw [mul_one] at h
   rw [← h, m.cExt_eq_mu_of_isEffect isEffect_one, m.normalized, Complex.ofReal_one]
 
+/-- `ρ` is Hermitian (from the conjugate symmetry of `Λ_ℂ` and `(E_{ba})ᴴ = E_{ab}`). -/
+theorem rho_isHermitian : m.rho.IsHermitian := by
+  ext a b
+  rw [Matrix.conjTranspose_apply]
+  simp only [rho, Matrix.of_apply]
+  rw [Complex.star_def, ← m.cExt_conjTranspose]
+  congr 1
+  ext p q
+  simp [Matrix.single_apply, Matrix.conjTranspose_apply, and_comm]
+
+/-- `ρ` is PSD.  For any `x`, `⟨x, ρ x⟩ = tr(ρ·|x⟩⟨x|) = Λ_ℂ(|x⟩⟨x|) = ↑(Λ(|x⟩⟨x|)) ≥ 0`,
+    since `|x⟩⟨x| = vecMulVec x (star x)` is PSD and `Λ ≥ 0` on PSD. -/
+theorem rho_posSemidef : m.rho.PosSemidef := by
+  rw [Matrix.posSemidef_iff_dotProduct_mulVec]
+  refine ⟨m.rho_isHermitian, fun x => ?_⟩
+  have hPSD := Matrix.posSemidef_vecMulVec_self_star x
+  have htr : star x ⬝ᵥ (m.rho *ᵥ x) = (m.rho * vecMulVec x (star x)).trace := by
+    simp only [Matrix.trace, Matrix.diag_apply, Matrix.mul_apply, Matrix.vecMulVec_apply,
+      Matrix.mulVec, dotProduct, Pi.star_apply, Finset.mul_sum]
+    exact Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun k _ => by ring
+  rw [htr, ← m.cExt_trace, m.cExt_of_isHermitian hPSD.1]
+  have := m.hermExt_nonneg hPSD
+  rw [show (0:ℂ) = ((0:ℝ):ℂ) by norm_num]
+  exact_mod_cast this
+
+/-- **G4 CAPSTONE — finite-dimensional effect (Busch) Gleason.**  Every normalized,
+    nonnegative, coexistent-additive functional `μ` on effects is `μ E = tr(ρ E)` for a
+    density matrix `ρ` (PSD, trace 1).  ρ = the `Λ_ℂ`-matrix; representation from
+    `cExt_trace` + `cExt_eq_mu_of_isEffect`; positivity/normalization from `rho_posSemidef`/
+    `rho_trace`.  This is the Born rule, derived from positivity + additivity alone. -/
+theorem finite_effect_gleason :
+    ∃ ρ : Matrix (Fin d) (Fin d) ℂ, ρ.PosSemidef ∧ ρ.trace = 1 ∧
+      ∀ E, IsEffect E → (m.μ E : ℂ) = (ρ * E).trace := by
+  refine ⟨m.rho, m.rho_posSemidef, m.rho_trace, fun E hE => ?_⟩
+  rw [← m.cExt_eq_mu_of_isEffect hE, m.cExt_trace]
+
 end EffectMeasure
 
 end QIQTH.EffectGleason

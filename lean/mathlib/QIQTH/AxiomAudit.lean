@@ -590,5 +590,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — G4: Λ_ℂ E = ↑(μ E) on effects.
 #print axioms QIQTH.EffectGleason.EffectMeasure.rho_trace
 -- expected: standard only — G4: tr ρ = 1 (normalization).
+#print axioms QIQTH.EffectGleason.EffectMeasure.rho_posSemidef
+-- expected: standard only — G4: ρ PSD (rank-1 |x⟩⟨x| route + hermExt_nonneg).
+#print axioms QIQTH.EffectGleason.EffectMeasure.finite_effect_gleason
+-- expected: standard only — CAPSTONE: finite-dim effect (Busch) Gleason — μ E = tr(ρE),
+-- ρ a density matrix. The Born rule from positivity + additivity, axiom-free.
 
 end QIQTH.AxiomAudit
