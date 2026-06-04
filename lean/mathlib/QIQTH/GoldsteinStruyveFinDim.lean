@@ -20,6 +20,17 @@
                     (α, β) = (1, 0).
   Steps 1, 3 (axiomatized): cleanly stated with concrete matrix content.
 
+  NOTE (2026-06): `QIQTH.EffectGleason.finite_effect_gleason` now gives an INDEPENDENT,
+  fully axiom-free finite-dimensional Born-uniqueness result (effect/POVM Gleason:
+  effect-algebra-additive μ ⇒ μ E = tr(ρE), ρ a unique density matrix).  The Goldstein-Struyve
+  Step-1/Step-3 axioms below are a DIFFERENT route (Schur classification of unitary-equivariant
+  density functionals + tensor multiplicativity), so they are NOT discharged by effect-Gleason
+  and are retained here.  Re-routing the Born-uniqueness *consumer*
+  (`FQEquivarianceUniqueness` / `canonical_ic_measure_principle`) through effect-Gleason
+  instead — which would let these two axioms be dropped — is a deferred refactor: it requires
+  bridging the abstract IC-measure/`DensityFunctional` interface to the concrete `EffectMeasure`
+  layer (different abstraction levels).
+
   The combined `goldstein_struyve_findim_uniqueness` theorem composes
   all four steps and is proved (modulo the two interface axioms).
 -/

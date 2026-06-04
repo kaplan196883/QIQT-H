@@ -67,16 +67,22 @@ def IsNoncontextual (w : TypicalityWeight) : Prop := True  -- abstract
     L^1 such that `w(P) = τ(D · P)` for every event P. -/
 def HasTraceDensityForm (w : TypicalityWeight) : Prop := True  -- interface
 
-/-- **Mackey-Gleason theorem (interface axiom).**
+/-- **Mackey-Gleason theorem (interface axiom) — now CONTINUUM-ONLY.**
 
     Normal additive normalized noncontextual typicality weights on a
     Type II vN-algebra projection lattice (without I_2 summand) extend
     uniquely to normal states.  Combined with the noncommutative
     Radon-Nikodym theorem, this gives the trace-density form.
 
-    *Status:* Standard operator-algebra theorem (Bunce-Wright 1990s
-    extending classical Gleason from B(H) to general vN algebras),
-    not yet in Mathlib in this generality. -/
+    *Status (2026-06):* the **FINITE-DIMENSIONAL case of this is now PROVED, axiom-free**, in
+    `QIQTH.EffectGleason.finite_effect_gleason(_unique)`: a normalized, nonnegative,
+    effect-algebra-additive functional on the effects of `ℂ^d` is `μ E = tr(ρE)` for a unique
+    density `ρ` (the finite Busch/CFMR effect-Gleason theorem, no spectral theorem, standard
+    Lean axioms only).  This axiom is therefore retained ONLY for the genuine **continuum**
+    (Type-II / Bunce-Wright) generalization that current Mathlib cannot express; it is NOT a
+    finite-dimensional gap.  (It is NOT discharged by deleting it: `EffectGleason` is a
+    concrete `Matrix`-level result, while this is an abstract projection-lattice interface —
+    different abstraction levels, per the GPT-5.5-pro caution.) -/
 axiom mackey_gleason_to_trace_density
     (w : TypicalityWeight)
     (h_norm : IsNormal w) (h_add : IsAdditive w)

@@ -141,6 +141,24 @@ axioms only:
 
 This is the Born rule derived from positivity + additivity alone, in finite dimension. **Out
 of scope (unchanged):** the continuum Type-II/III Bunce–Wright generalization (Wall 1 deeper),
-a named interface input; and retiring the project's finite Mackey-Gleason / Goldstein–Struyve
-Born-uniqueness axioms by routing `canonical_ic_measure_principle` through this capstone
-(a follow-up refactor, 37 → ~34).
+a named interface input.
+
+**Axiom-retirement finding (2026-06, after GPT-5.5-pro caution #4).** The hoped-for "37 → ~34"
+by deleting the project's Born axioms via this capstone is **NOT soundly available**, and the
+code confirms GPT's warning:
+- `TypicalityMackeyGleason.mackey_gleason_to_trace_density` is an **abstract** projection-lattice
+  interface (vacuous `HasTraceDensityForm := True`), a *different abstraction level* from this
+  concrete `Matrix` result. Its **finite-dimensional content is now proved** here
+  (`finite_effect_gleason`), so it is downgraded to **continuum-only** (docstring updated), but
+  it cannot be deleted without erasing the genuine continuum gap.
+- `GoldsteinStruyveFinDim.step1_schur_classification` / `step3_tensor_multiplicativity` are a
+  **different route** (Schur classification of unitary-equivariant density functionals + tensor
+  multiplicativity), *not* "effect measure ⇒ trace form" — so effect-Gleason does not discharge
+  them. Effect-Gleason supersedes the *need* for that route in finite dimension, but actually
+  dropping the two axioms requires re-routing the consumer (`FQEquivarianceUniqueness` /
+  `canonical_ic_measure_principle`) from the abstract IC-measure/`DensityFunctional` interface
+  to the concrete `EffectMeasure` layer — a genuine bridge across abstraction levels, deferred.
+
+Net: the finite Born *representation* is now a theorem (not assumed); the remaining Born axioms
+are honestly continuum / alternative-route interfaces, not finite-dimensional debt. Raw count
+stays 37 (no unsound deletions).
