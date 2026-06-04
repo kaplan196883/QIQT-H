@@ -44,6 +44,17 @@ this may be a restatement of the measurement problem itself — every single-wor
 program (Everett, Bohm, modal, Kent) owes essentially this same object. So the
 prize is real, hard, and shared; sharply *stating* it is itself a contribution.
 
+**Attack plan: see `PRIZE_ROADMAP.md`** (GPT-5.5-pro "be bold" consultation, 2026-06).
+The committed route is **Effect-Gleason + Kolmogorov** (NOT the raw decoherence
+functional): finite records ⇒ POVM effects ⇒ Busch/Bunce–Wright Mackey-Gleason
+uniqueness ⇒ Born ⇒ projective cylinders ⇒ unique covariant μ. The make-or-break
+sub-claim is the **Covariant Record-Completeness Lemma** (records functorially = effects,
+rich enough for Gleason); the uniqueness spine is Busch-Gleason + record-certainty (which
+kills the maximally-mixed alternative) + Kolmogorov. Staged: **Stage 1 (finite-dim) is the
+minimal breakthrough** and is mostly done — `GleasonSelector.positive_ray_certain_forces_
+born` is the single-state core; the new gaps (tensor multiplicativity + decoherent
+partition additivity) are being built in `RecordGleason.lean`.
+
 **The single sharpening that would most raise the contribution short of the full
 prize — the "Record Quotient Theorem":**
 > For every internal observer in a finite causal region R at distinguishability

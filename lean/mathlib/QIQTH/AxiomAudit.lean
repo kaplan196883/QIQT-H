@@ -519,4 +519,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CollisionalGamma.sigmaX_branch_overlap
 -- expected: standard only — non-vacuity: the σ_x model on ℂ² realizes ⟨E_+|E_-⟩ = cos 2θ.
 
+-- QIQT-H STAGE 1 toward the PRIZE (Effect-Gleason route, PRIZE_ROADMAP.md): the two
+-- gaps beyond the single-state Gleason core. All axiom-free (standard three only).
+#print axioms QIQTH.RecordGleason.born_kron
+-- expected: standard only — Born factorizes on tensor products (independent experiments).
+#print axioms QIQTH.RecordGleason.decoherent_partition_additive
+-- expected: standard only — Born for ALL decoherent partitions (cylinder-consistency seed).
+#print axioms QIQTH.RecordGleason.born_complete_total
+-- expected: standard only — complete record family ⇒ weights sum to 1 (a probability).
+#print axioms QIQTH.RecordGleason.stage1_record_measure
+-- expected: standard only — packaged Stage-1 minimal-breakthrough record measure.
+
 end QIQTH.AxiomAudit

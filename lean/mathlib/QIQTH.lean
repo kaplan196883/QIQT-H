@@ -103,3 +103,9 @@ import QIQTH.SBSBridge
 -- records overlap by cos 2θ, so γ = |cos 2θ| < 1 for generic coupling; over L independent
 -- collisions the overlap factorizes to γ^L → 0, feeding overlap_amplifies. Axiom-free.
 import QIQTH.CollisionalGamma
+-- Toward the PRIZE (PRIZE_ROADMAP.md, GPT-5.5-pro "be bold" plan): Stage 1 of the
+-- Effect-Gleason route to the canonical covariant typicality measure μ. Extends the
+-- single-state Gleason core (GleasonSelector.positive_ray_certain_forces_born) with the
+-- two gaps the prize needs: Born tensor-multiplicativity (independent experiments factor)
+-- and decoherent coarse-graining additivity (Born for ALL decoherent partitions). Axiom-free.
+import QIQTH.RecordGleason
