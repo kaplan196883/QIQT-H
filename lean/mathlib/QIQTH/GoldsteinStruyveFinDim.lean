@@ -47,6 +47,7 @@ namespace QIQTH
 namespace GoldsteinStruyveFinDim
 
 open Matrix
+open scoped Kronecker
 
 variable {d : ℕ}
 
@@ -142,15 +143,17 @@ axiom step1_schur_classification (d : ℕ) (hd : 1 < d)
 
 /- ── Step 3 (axiomatized): tensor multiplicativity narrowing ─────── -/
 
-/-- **Tensor multiplicativity** (locality analog):
-    `D(ρ ⊗ σ) = D(ρ) ⊗ D(σ)` for all states ρ, σ. -/
+/-- **Tensor multiplicativity** (locality analog): `D₂(ρ ⊗ σ) = D(ρ) ⊗ D(σ)` for all `ρ, σ`,
+    with the Kronecker products reindexed `Fin d × Fin d ≃ Fin (d·d)` (`finProdFinEquiv`) so
+    that `D₂ : DensityFunctional (d·d)` applies.  (Previously a vacuous `True` placeholder,
+    which — combined with `step3` — was a soundness bug: it let `step3` fire on `(α,β)=(½,½)`
+    and derive a false conclusion.  Now a genuine condition.) -/
 def IsTensorMultiplicative {d : ℕ}
     (Dd : DensityFunctional d)
     (Dd2 : DensityFunctional (d * d)) : Prop :=
   ∀ ρ σ : Matrix (Fin d) (Fin d) ℂ,
-    -- For simplicity we state the property abstractly; the actual
-    -- formalization needs Kronecker-product index reindexing.
-    True
+    Dd2 (Matrix.reindex finProdFinEquiv finProdFinEquiv (ρ ⊗ₖ σ))
+      = Matrix.reindex finProdFinEquiv finProdFinEquiv (Dd ρ ⊗ₖ Dd σ)
 
 /-- **Step 3 (axiom) — Tensor multiplicativity narrowing.**
 
