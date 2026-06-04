@@ -167,6 +167,30 @@ scattering model with uniform per-collision distinguishability γ<1 from a concr
 Plus the modeling choices: finite Q_max, additive capacity for disjoint substrates, tensor
 factorization, no-recoherence, and the interpretation of low-overlap branch states as records.
 
+## γ<1 from a toy Hamiltonian — DISCHARGED for the collisional model (2026-06)
+
+The isolated input above is now a machine-checked, axiom-free theorem for the standard Zurek
+collisional/QND monitor `H_int = g·σ_z^S ⊗ σ_x^E` (`QIQTH/CollisionalGamma.lean`, see also
+`GAMMA_FROM_HAMILTONIAN.md`):
+- `collisionU` = `U_s(θ) = exp(-iθ s A) = cos θ·𝟙 - i s sin θ·A` (A = σ_x, self-adjoint involution),
+  the Schrödinger propagator of the branch Hamiltonian `H_s = s·A`.
+- `collisionU_group` + `collisionU_zero` : `U_s` is a genuine one-parameter unitary group
+  (the exp homomorphism); `hamiltonian_isSymmetric` : `H_s` is self-adjoint ⇒ unitary by Stone.
+- `branch_overlap` : `⟨E_+|E_-⟩ = cos²θ - sin²θ = cos 2θ` — the per-collision overlap COMPUTED.
+- `gamma_lt_one` : `γ = |cos 2θ| < 1` for generic coupling `0 < θ < π/4` (weak monitoring) —
+  γ<1 is DERIVED, not assumed (at θ=π/4, γ=0: one-shot perfect record).
+- `collisional_block_overlap` + `collisional_overlap_tendsto_zero` : L independent collisions
+  factorize the overlap to `γ^L → 0` — feeds the existing `overlap_amplifies` chain.
+- `sigmaX_branch_overlap` : concrete σ_x-on-ℂ² witness realizing `⟨E_+|E_-⟩ = cos 2θ` (non-vacuity).
+- Pointer basis einselected because `[H_int, σ_z^S] = 0` (a consequence of H, not posited).
+
+All standard-three axioms only (`AxiomAudit.lean`); raw axiom count unchanged at 37.
+
+**Residual after this discharge:** the *field-theoretic* version — uniform γ<1, and the
+QND/factorized/no-recoherence structure itself, from a realistic system–environment Hamiltonian
+rather than the posited collisional form.  This is the genuine open physics (a constructive
+answer to Strasberg–Winter, arXiv:2601.19703), no longer "assume γ<1".
+
 Referee judgment (Lean-formalization-of-physics paper): **accept / weak accept** with conditional
 framing; **major revision** if it claims an unconditional solution of the measurement problem.
 

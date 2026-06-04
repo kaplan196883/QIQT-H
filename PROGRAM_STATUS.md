@@ -154,8 +154,9 @@ of 37; verified by `AxiomAudit.lean`):
   records (block overlap ≤ γ^L → 0 for γ<1: `block_overlap_tendsto_zero`).
 
 **Machine-checked ladder (all axiom-free):** distinguishability ⇒ dim ≥ n;
-*approximate* distinguishability ⇒ dim ≥ n; R fragments ⇒ storage ≥ R·log n; weak
-overlap γ<1 ⇒ block overlap → 0 (amplification); objectivity witness ⇒ macroscopic
+*approximate* distinguishability ⇒ dim ≥ n; R fragments ⇒ storage ≥ R·log n; **toy
+Hamiltonian `H_int = g σ_z⊗σ_x` ⇒ per-collision overlap `cos 2θ`, so `γ<1` derived**;
+weak overlap γ<1 ⇒ block overlap → 0 (amplification); objectivity witness ⇒ macroscopic
 storage; finite additive capacity ⇒ ≤ 1 objective record active (small records
 coexist — the bound is honest, not a by-fiat "exactly one for everything"); Born
 normalization + collapse-as-conditionalization.
@@ -168,13 +169,27 @@ for a Lean-formalization-of-physics paper: **accept / weak-accept** *with condit
 framing*; **major revision** if it claims an unconditional solution of the
 measurement problem.
 
-**The single OPEN physical input, now sharply isolated:** derive a *stable,
-factorized, branch-dependent scattering model with uniform per-collision
-distinguishability γ<1 from a concrete Hamiltonian.* Everything downstream of that
-premise (amplification → redundancy → storage bound → single-record exclusion) is
-machine-checked. The remaining modeling choices (finite Q_max, additive capacity
-for disjoint substrates, tensor factorization, no-recoherence, reading low-overlap
-branch states as records) are transparent, not hidden. Full SBS with mixed fragment
+**The single isolated physical input — now DISCHARGED for a toy Hamiltonian (2026-06).**
+The premise was: derive a *stable, factorized, branch-dependent scattering model with
+uniform per-collision distinguishability γ<1 from a concrete Hamiltonian.* This is now a
+machine-checked, axiom-free theorem for the standard Zurek collisional/QND monitor
+`H_int = g·σ_z^S ⊗ σ_x^E` (`QIQTH/CollisionalGamma.lean`): the branch-conditioned
+environment records overlap by `⟨E_+|E_-⟩ = cos 2θ` (`branch_overlap`), so the
+per-collision distinguishability `γ = |cos 2θ| < 1` for generic coupling
+(`gamma_lt_one`) — *derived*, not assumed; the propagator `U_s(θ) = exp(-iθ s A)` is a
+verified one-parameter unitary group (`collisionU_group`) with self-adjoint generator
+(`hamiltonian_isSymmetric`); and over `L` independent collisions the overlap factorizes
+to `γ^L → 0` (`collisional_overlap_tendsto_zero`), feeding the existing
+`overlap_amplifies` chain. A concrete `σ_x`-on-ℂ² witness refutes vacuity
+(`sigmaX_branch_overlap`). Everything downstream of the premise
+(amplification → redundancy → storage bound → single-record exclusion) was already
+machine-checked, so the toy-model chain is now end-to-end mechanized.
+**Residual (genuinely open):** the *field-theoretic* version — deriving uniform `γ<1`
+(and the QND/factorized, no-recoherence structure itself) from a realistic
+system–environment Hamiltonian rather than positing the collisional form. The remaining
+modeling choices (finite Q_max, additive capacity for disjoint substrates, tensor
+factorization, no-recoherence, reading low-overlap branch states as records) are
+transparent, not hidden. Full SBS with mixed fragment
 states + von-Neumann-entropy cost, the SBS uniqueness theorem, and the
 non-commuting-basis (objectivity einselects the basis) result are deferred
 multi-session research — and constitute a *constructive* answer to the

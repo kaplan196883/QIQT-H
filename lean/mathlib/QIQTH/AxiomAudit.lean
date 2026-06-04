@@ -501,4 +501,22 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — FULLY load-bearing: storageCost finrank-DEFINED, hstorage PROVED
 -- (no free field); redundancy_le_logStorage is in the dependency graph.
 
+-- QIQT-H COLLISIONAL γ: the per-collision distinguishability γ<1 DERIVED from a toy
+-- Hamiltonian H_int = g σ_z^S ⊗ σ_x^E (discharges the one isolated physical input of the
+-- SBS chain, GPT-5.5-pro).  All axiom-free (standard three only).
+#print axioms QIQTH.CollisionalGamma.collisionU_group
+-- expected: standard only — U_s is a one-parameter unitary group (exp(-iθ s A) homomorphism).
+#print axioms QIQTH.CollisionalGamma.hamiltonian_isSymmetric
+-- expected: standard only — H_s = s·A is self-adjoint (genuine observable / Stone).
+#print axioms QIQTH.CollisionalGamma.branch_overlap
+-- expected: standard only — ⟨E_+|E_-⟩ = cos²θ - sin²θ (the per-collision overlap, COMPUTED).
+#print axioms QIQTH.CollisionalGamma.gamma_lt_one
+-- expected: standard only — γ = |cos 2θ| < 1 for generic coupling (DERIVED, not assumed).
+#print axioms QIQTH.CollisionalGamma.collisional_block_overlap
+-- expected: standard only — factorized amplification: block overlap ≤ γ^|B| (feeds overlap_amplifies).
+#print axioms QIQTH.CollisionalGamma.collisional_overlap_tendsto_zero
+-- expected: standard only — γ^L → 0: weak monitoring amplified into reliable records.
+#print axioms QIQTH.CollisionalGamma.sigmaX_branch_overlap
+-- expected: standard only — non-vacuity: the σ_x model on ℂ² realizes ⟨E_+|E_-⟩ = cos 2θ.
+
 end QIQTH.AxiomAudit

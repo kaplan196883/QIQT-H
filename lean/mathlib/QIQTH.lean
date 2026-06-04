@@ -97,3 +97,9 @@ import QIQTH.CapacityModel
 -- ⇒ dimension (proved), broadcasting tensors spaces ⇒ dims multiply (proved), so a
 -- macroscopic (redundant) record costs > half the capacity. Grounds arXiv:2007.04276 (SBS):
 import QIQTH.SBSBridge
+-- Discharging the ONE isolated physical input of the SBS chain (GPT-5.5-pro): the
+-- per-collision distinguishability γ<1 is DERIVED from a concrete toy Hamiltonian
+-- H_int = g σ_z^S ⊗ σ_x^E (Zurek collisional/QND monitoring). The branch-conditioned
+-- records overlap by cos 2θ, so γ = |cos 2θ| < 1 for generic coupling; over L independent
+-- collisions the overlap factorizes to γ^L → 0, feeding overlap_amplifies. Axiom-free.
+import QIQTH.CollisionalGamma
