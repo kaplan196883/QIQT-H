@@ -148,10 +148,9 @@ theorem cauchy_unit_interval (g : ℝ → ℝ) (h0 : g 0 = 0)
     `c•1 − A` is PSD.  Lets us scale an arbitrary PSD matrix into an effect.  Proved
     elementarily (no spectral theorem): the quadratic form `⟨x,Ax⟩` is a nonneg real bounded
     by `(∑‖Aᵢⱼ‖)·∑‖xₖ‖²` via the triangle inequality and `‖xᵢ‖‖xⱼ‖ ≤ ∑‖x_k‖²`. -/
-theorem exists_smul_one_sub_posSemidef {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) :
-    ∃ c : ℝ, 0 ≤ c ∧ ((c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A).PosSemidef := by
+theorem posSemidef_sumNorm_sub {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) :
+    (((∑ i, ∑ j, ‖A i j‖ : ℝ) : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A).PosSemidef := by
   classical
-  refine ⟨∑ i, ∑ j, ‖A i j‖, by positivity, ?_⟩
   set c : ℝ := ∑ i, ∑ j, ‖A i j‖ with hc
   rw [Matrix.posSemidef_iff_dotProduct_mulVec]
   refine ⟨?_, ?_⟩
@@ -203,6 +202,11 @@ theorem exists_smul_one_sub_posSemidef {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.
     · simp only [Complex.sub_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
         Complex.zero_im, zero_mul, add_zero]
       rw [hQim, hRim]; ring
+
+/-- Existential form of the PSD Löwner-order bound (`A ⪯ c•1` for some `c ≥ 0`). -/
+theorem exists_smul_one_sub_posSemidef {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) :
+    ∃ c : ℝ, 0 ≤ c ∧ ((c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A).PosSemidef :=
+  ⟨_, by positivity, posSemidef_sumNorm_sub hA⟩
 
 /-- Real-smul equals complex-smul on a ℂ-matrix: `t • M = (↑t) • M`.  (Bridges the
     `ℝ`-scaling used by `map_smul`/`isEffect_smul` and the `ℂ`-scaling in the PSD bound.) -/
@@ -291,6 +295,61 @@ theorem map_smul {E : Matrix (Fin d) (Fin d) ℂ} (hE : IsEffect E) {t : ℝ}
       have : (b • E) - (a • E) = (b - a) • E := by module
       rw [this]; exact hE.1.smul (by linarith)
     exact m.mono haE hbE hpsd
+
+/-- **Cone extension** of `μ` to all PSD matrices: `ν A = c · μ((1/c)•A)` for any Löwner
+    bound `A ⪯ c·1`.  Defined concretely with `c = ∑‖Aᵢⱼ‖` (the PSD-bound witness); the key
+    theorem `coneExt_eq` shows the value is independent of the chosen bound `c`. -/
+noncomputable def coneExt (A : Matrix (Fin d) (Fin d) ℂ) : ℝ :=
+  (∑ i, ∑ j, ‖A i j‖) * m.μ ((1 / (∑ i, ∑ j, ‖A i j‖)) • A)
+
+/-- **Well-definedness of `ν`.**  For any Löwner bound `A ⪯ c·1` (`c > 0`),
+    `coneExt A = c · μ((1/c)•A)` — independent of which bound is used.  Proof: scaling
+    `(1/c)•A = (a/c)•((1/a)•A)` and `map_smul` make `c·μ((1/c)•A)` constant in the bound. -/
+theorem coneExt_eq {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) {c : ℝ} (hc : 0 < c)
+    (hbd : ((c : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A).PosSemidef) :
+    m.coneExt A = c * m.μ ((1 / c) • A) := by
+  unfold coneExt
+  set s : ℝ := ∑ i, ∑ j, ‖A i j‖ with hs
+  have hindep : ∀ (a b : ℝ), 0 < a → 0 < b → a ≤ b →
+      ((a : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A).PosSemidef →
+      ((b : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A).PosSemidef →
+      a * m.μ ((1 / a) • A) = b * m.μ ((1 / b) • A) := by
+    intro a b ha hb hab hbda _
+    have hEa : IsEffect ((1 / a) • A) := isEffect_inv_smul hA ha hbda
+    have hsm : (1 / b) • A = (a / b) • ((1 / a) • A) := by
+      rw [smul_smul]; congr 1; field_simp
+    have hmap := m.map_smul hEa (by positivity : (0:ℝ) ≤ a / b)
+      (by rw [div_le_one hb]; exact hab)
+    rw [← hsm] at hmap
+    rw [hmap]; field_simp
+  rcases eq_or_lt_of_le (show (0:ℝ) ≤ s by rw [hs]; positivity) with hs0 | hspos
+  · have hA0 : A = 0 := by
+      have hsum0 : (∑ i, ∑ j, ‖A i j‖) = 0 := by rw [← hs]; exact hs0.symm
+      ext i j
+      have h1 := (Finset.sum_eq_zero_iff_of_nonneg
+        (fun i _ => Finset.sum_nonneg fun j _ => norm_nonneg _)).mp hsum0 i (Finset.mem_univ i)
+      have h2 := (Finset.sum_eq_zero_iff_of_nonneg
+        (fun j _ => norm_nonneg _)).mp h1 j (Finset.mem_univ j)
+      simpa using norm_eq_zero.mp h2
+    rw [hA0]; simp [m.map_zero]
+  · have hsbd : ((s : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A).PosSemidef := by
+      rw [hs]; exact posSemidef_sumNorm_sub hA
+    rcases le_total s c with hsc | hcs
+    · exact hindep s c hspos hc hsc hsbd hbd
+    · exact (hindep c s hc hspos hcs hbd hsbd).symm
+
+/-- `ν 1 = 1` (normalization survives the cone extension). -/
+theorem coneExt_one : m.coneExt 1 = 1 := by
+  rw [m.coneExt_eq Matrix.PosSemidef.one one_pos (by simpa using Matrix.PosSemidef.zero)]
+  simp [m.normalized]
+
+/-- `ν` is nonnegative on PSD matrices. -/
+theorem coneExt_nonneg {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) :
+    0 ≤ m.coneExt A := by
+  rcases eq_or_lt_of_le (show (0:ℝ) ≤ ∑ i, ∑ j, ‖A i j‖ by positivity) with h0 | hpos
+  · unfold coneExt; rw [← h0]; simp
+  · rw [m.coneExt_eq hA hpos (posSemidef_sumNorm_sub hA)]
+    exact mul_nonneg (le_of_lt hpos) (m.nonneg _ (isEffect_inv_smul hA hpos (posSemidef_sumNorm_sub hA)))
 
 end EffectMeasure
 

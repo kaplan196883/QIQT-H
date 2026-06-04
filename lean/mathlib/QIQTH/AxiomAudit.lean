@@ -548,5 +548,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — G2 prereq (absent from Mathlib): PSD A ⪯ c•1 (Löwner bound).
 #print axioms QIQTH.EffectGleason.isEffect_inv_smul
 -- expected: standard only — G2: PSD A bounded by c•1 ⇒ (1/c)•A is an effect (cone-scaling).
+#print axioms QIQTH.EffectGleason.EffectMeasure.coneExt_eq
+-- expected: standard only — G2: cone extension ν A = c·μ((1/c)•A), bound-independent.
+#print axioms QIQTH.EffectGleason.EffectMeasure.coneExt_one
+-- expected: standard only — G2: ν 1 = 1.
+#print axioms QIQTH.EffectGleason.EffectMeasure.coneExt_nonneg
+-- expected: standard only — G2: ν ≥ 0 on PSD matrices.
 
 end QIQTH.AxiomAudit
