@@ -399,6 +399,82 @@ lemma diagonalU_unitary (d : ℕ) (z : Fin d → ℂ)
   · subst h; rw [if_pos rfl, hz, Matrix.one_apply_eq]
   · rw [if_neg h, mul_zero, Matrix.one_apply_ne h]
 
+/- ── PROVED: the off-diagonal support step (step 1b core) ──────────── -/
+
+/-- **PROVED — phase separation.**
+
+    For `i ≠ j` and any off-target index pair `(k,l) ≠ (i,j)`, there is a
+    unit-modulus diagonal `z` whose character separates the two pairs:
+    `z i · conj (z j) ≠ z k · conj (z l)`.
+
+    Construction: a single-marker diagonal `z_p = I` at one index `p`,
+    `1` elsewhere (both unit modulus).  Choosing `p = i` works whenever
+    `k ≠ i`; the remaining case `k = i` (forcing `l ≠ j`) is separated by
+    `p = j`.  This is the analytic heart of the "diagonal characters
+    pin the support of `D(E_ij)`" argument, done with `{1, I}` phases so
+    it stays `Complex.exp`-free. -/
+lemma phase_separation {d : ℕ} {i j k l : Fin d} (hij : i ≠ j)
+    (hkl : (k, l) ≠ (i, j)) :
+    ∃ z : Fin d → ℂ, (∀ m, z m * star (z m) = 1) ∧
+      z i * star (z j) ≠ z k * star (z l) := by
+  have hstarI : star Complex.I = -Complex.I := by simp
+  have hI_unit : Complex.I * star Complex.I = 1 := by
+    rw [hstarI, mul_neg, Complex.I_mul_I, neg_neg]
+  have hmarker : ∀ (p : Fin d) (m : Fin d),
+      (if m = p then Complex.I else 1) * star (if m = p then Complex.I else 1) = 1 := by
+    intro p m
+    by_cases hm : m = p
+    · rw [if_pos hm]; exact hI_unit
+    · rw [if_neg hm, star_one, one_mul]
+  by_cases hki : k = i
+  · -- k = i, hence l ≠ j; separate with the marker at j
+    have hlj : l ≠ j := fun h => hkl (by rw [hki, h])
+    refine ⟨fun m => if m = j then Complex.I else 1, hmarker j, ?_⟩
+    simp [hki, hij, hlj, hstarI, Complex.ext_iff] <;> norm_num
+  · -- k ≠ i; separate with the marker at i
+    refine ⟨fun m => if m = i then Complex.I else 1, hmarker i, ?_⟩
+    by_cases hli : l = i
+    · simp [hki, hij.symm, hli, hstarI, Complex.ext_iff] <;> norm_num
+    · simp [hki, hij.symm, hli, Complex.ext_iff] <;> norm_num
+
+/-- **PROVED — off-diagonal support of a unitary-equivariant map.**
+
+    For a ℂ-linear, unitary-equivariant `D` and `i ≠ j`, the image
+    `D(E_ij)` of an off-diagonal matrix unit vanishes off the `(i,j)`
+    entry: `D(E_ij) k l = 0` whenever `(k,l) ≠ (i,j)`.  Equivalently,
+    `D(E_ij)` is a scalar multiple of `E_ij`.
+
+    *Proof:* conjugating `E_ij` by a unit-modulus diagonal `U = diagonalU z`
+    multiplies it by the character `z_i · conj z_j`
+    (`diagonalU_conj_matrixUnit`); equivariance + linearity then force, at
+    each entry `(k,l)`, `(z_i conj z_j − z_k conj z_l) · D(E_ij) k l = 0`.
+    `phase_separation` supplies a `z` with nonzero bracket, so the entry
+    is `0`.  This is the genuine content of Goldstein-Struyve step 1b. -/
+theorem offdiag_support_of_unitary_equivariant
+    {d : ℕ} (D : GoldsteinStruyveFinDim.DensityFunctional d)
+    (h_lin : GoldsteinStruyveFinDim.IsLinear D)
+    (h_uniteq : GoldsteinStruyveFinDim.IsUnitaryEquivariant D)
+    {i j k l : Fin d} (hij : i ≠ j) (hkl : (k, l) ≠ (i, j)) :
+    D (matrixUnit d i j) k l = 0 := by
+  have hsmul : ∀ (c : ℂ) (ρ : Matrix (Fin d) (Fin d) ℂ), D (c • ρ) = c • D ρ := by
+    intro c ρ; have := h_lin c 0 ρ ρ; simpa using this
+  obtain ⟨z, hzunit, hsep⟩ := phase_separation hij hkl
+  have hU : diagonalU d z * star (diagonalU d z) = 1 := diagonalU_unitary d z hzunit
+  have heq := h_uniteq (diagonalU d z) hU (matrixUnit d i j)
+  rw [diagonalU_conj_matrixUnit, hsmul] at heq
+  have hRHS : (diagonalU d z * D (matrixUnit d i j) * star (diagonalU d z)) k l
+      = z k * D (matrixUnit d i j) k l * star (z l) := by
+    rw [diagonalU_star, mul_diagonalU_apply, diagonalU_mul_apply]
+  have hkey := congrFun (congrFun heq k) l
+  rw [Matrix.smul_apply, smul_eq_mul, hRHS] at hkey
+  set X := D (matrixUnit d i j) k l with hX
+  have hzero : (z i * star (z j) - z k * star (z l)) * X = 0 := by
+    have hcomm : z i * star (z j) * X = z k * star (z l) * X := by rw [hkey]; ring
+    rw [sub_mul, hcomm, sub_self]
+  rcases mul_eq_zero.mp hzero with hb | hx
+  · exact absurd (sub_eq_zero.mp hb) hsep
+  · exact hx
+
 /- ── Honest residual interface ────────────────────────────────────── -/
 
 /-  The earlier version of this module carried five placeholder

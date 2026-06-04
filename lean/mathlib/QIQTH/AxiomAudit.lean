@@ -150,6 +150,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — diagonal-character conjugation identity
 #print axioms QIQTH.GoldsteinStruyveStep1.step1c_collapse_of_perm_symmetric
 -- expected: standard only — Equiv.swap transitivity argument
+#print axioms QIQTH.GoldsteinStruyveStep1.permMatrix_unitary
+-- expected: standard only
+#print axioms QIQTH.GoldsteinStruyveStep1.diagonalU_unitary
+-- expected: standard only
+#print axioms QIQTH.GoldsteinStruyveStep1.phase_separation
+-- expected: standard only — {1, I} marker diagonal, Complex.exp-free
+#print axioms QIQTH.GoldsteinStruyveStep1.offdiag_support_of_unitary_equivariant
+-- expected: standard only — diagonal-character support step (GS step 1b core)
 
 -- A4: Chebyshev concentration
 #print axioms QIQTH.BornConcentration.chebyshev_finite
