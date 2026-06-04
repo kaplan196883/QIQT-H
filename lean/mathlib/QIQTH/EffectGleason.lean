@@ -240,6 +240,38 @@ theorem isHermitian_smul {H : Matrix (Fin d) (Fin d) ℂ} (hH : H.IsHermitian) (
   show ((↑t : ℂ) • H)ᴴ = (↑t : ℂ) • H
   rw [conjTranspose_smul, hH, Complex.star_def, Complex.conj_ofReal]
 
+/-- Hermitian "real part" of a matrix: `(M + Mᴴ)/2`. -/
+noncomputable def reHerm (M : Matrix (Fin d) (Fin d) ℂ) : Matrix (Fin d) (Fin d) ℂ :=
+  ((2⁻¹ : ℝ) : ℂ) • (M + Mᴴ)
+
+/-- Hermitian "imaginary part": `(M − Mᴴ)/(2i) = (−i/2)(M − Mᴴ)`. -/
+noncomputable def imHerm (M : Matrix (Fin d) (Fin d) ℂ) : Matrix (Fin d) (Fin d) ℂ :=
+  (((2⁻¹ : ℝ) : ℂ) * (-Complex.I)) • (M - Mᴴ)
+
+theorem reHerm_isHermitian (M : Matrix (Fin d) (Fin d) ℂ) : (reHerm M).IsHermitian := by
+  show (reHerm M)ᴴ = reHerm M
+  rw [reHerm, conjTranspose_smul, conjTranspose_add, conjTranspose_conjTranspose,
+    Complex.star_def, Complex.conj_ofReal, add_comm Mᴴ M]
+
+theorem imHerm_isHermitian (M : Matrix (Fin d) (Fin d) ℂ) : (imHerm M).IsHermitian := by
+  show (imHerm M)ᴴ = imHerm M
+  rw [imHerm, conjTranspose_smul, conjTranspose_sub, conjTranspose_conjTranspose,
+    show star (((2⁻¹ : ℝ) : ℂ) * (-Complex.I)) = ((2⁻¹ : ℝ) : ℂ) * Complex.I by
+      simp [Complex.star_def, Complex.conj_ofReal]]
+  rw [show (Mᴴ - M) = -(M - Mᴴ) by abel, smul_neg, ← neg_smul]
+  congr 1; ring
+
+/-- `M = reHerm M + i·imHerm M`. -/
+theorem hermDecomp (M : Matrix (Fin d) (Fin d) ℂ) :
+    reHerm M + Complex.I • imHerm M = M := by
+  rw [reHerm, imHerm, smul_smul,
+    show Complex.I * (((2⁻¹ : ℝ) : ℂ) * (-Complex.I)) = ((2⁻¹ : ℝ) : ℂ) by
+      rw [mul_comm, mul_assoc]; rw [show (-Complex.I) * Complex.I = 1 by
+        rw [neg_mul, Complex.I_mul_I]; ring]; ring,
+    ← smul_add]
+  rw [show (M + Mᴴ) + (M - Mᴴ) = (2 : ℂ) • M by module, smul_smul]
+  norm_num
+
 /-- **Effect closure under `(1/c)·`.**  If `A` is PSD and `A ⪯ c·1` (`c > 0`), then
     `(1/c)•A` is an effect: it is PSD, and `1 − (1/c)•A = (1/c)•(c·1 − A)` is PSD.  Lets us
     scale any PSD matrix bounded by `c·1` down into the effect cube — the engine of the cone

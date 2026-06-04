@@ -578,5 +578,7 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — G2: Λ(t•H) = t·Λ H for all t ∈ ℝ ⇒ Λ is ℝ-linear.
 #print axioms QIQTH.EffectGleason.EffectMeasure.hermExt_eq_mu_of_isEffect
 -- expected: standard only — G2: Λ E = μ E on effects (recovers μ; the capstone link).
+#print axioms QIQTH.EffectGleason.hermDecomp
+-- expected: standard only — G3: M = reHerm M + i·imHerm M (complexification decomposition).
 
 end QIQTH.AxiomAudit
