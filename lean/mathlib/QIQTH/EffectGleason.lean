@@ -1,20 +1,27 @@
 /-
-# QIQT-H: finite-dimensional Effect (POVM) Gleason — Stage 1 / step G1
+# QIQT-H: finite-dimensional Effect (POVM) Gleason — COMPLETE
 
-Target (`GLEASON_SCOPE.md`): the Busch / Caves–Fuchs–Manne–Renes finite-dimensional
-effect-Gleason theorem — a normalized, nonnegative, (coexistent-)additive functional on
-effects `0 ≤ E ≤ 1` is `μ E = tr(ρ E)` for a unique density matrix `ρ`.  This discharges
-the finite-dim case of `TypicalityMackeyGleason.mackey_gleason_to_trace_density`, makes the
-`GoldsteinStruyveFinDim` Born-uniqueness axioms retirable, and completes the Stage-1
-"minimal breakthrough" of `PRIZE_ROADMAP.md` by discharging the `hsupp` hypothesis of
-`GleasonSelector.born_is_forced` from first principles.
+The Busch / Caves–Fuchs–Manne–Renes finite-dimensional effect-Gleason theorem
+(`finite_effect_gleason`, `finite_effect_gleason_unique`): a normalized, nonnegative,
+**effect-algebra (partially) additive** functional `μ` on effects `0 ≤ E ≤ 1` — additive on
+*coexistent* pairs `E, F` with `E + F ≤ 1` — is `μ E = tr(ρ E)` for a UNIQUE density matrix
+`ρ` (PSD, trace 1).  The hypothesis class is inhabited (`maxMixed`, for `0 < d`), and a POVM's
+probabilities sum to one (`mu_sum_of_povm`).
 
-This installment lands **step G1's foundation**: the effect predicate, effect closure
-(`0`, `1`, scaling, subtraction), `μ 0 = 0`, **monotonicity**, and the
-scaling-additivity that drives the homogeneity argument.  The remaining G1 core (additive +
-bounded ⇒ ℝ-homogeneous, via the Cauchy-on-`[0,1]` squeeze) and steps G2–G4 follow.
+This discharges the finite-dim Born-representation assumption used in the QIQT-H Born program
+(`TypicalityMackeyGleason.mackey_gleason_to_trace_density`); see `PRIZE_ROADMAP.md` /
+`GLEASON_SCOPE.md`.
 
-Axiom-free (standard three only). -/
+Ladder: G1 `cauchy_unit_interval`/`map_smul` (additive + bounded ⇒ ℝ-homogeneous); G2 the
+PSD/Hermitian Löwner bounds `A ⪯ (∑‖Aᵢⱼ‖)·1` (not in Mathlib; proved without the spectral
+theorem), cone extension `coneExt`, ℝ-linear `hermExt`; G3 complexification `reHerm`/`imHerm`,
+ℂ-linear `cExt`, trace/Riesz `cExt_trace`; G4 density positivity/normalization + capstone.
+
+HONEST SCOPE: finite-dimensional; no `sorry` and no project-specific axioms (every theorem
+depends only on the standard Lean/Mathlib axioms `propext`, `Classical.choice`, `Quot.sound`).
+The continuum (Type-II/III Bunce–Wright) generalization is out of scope. The effect-algebra
+additivity + context-independence hypothesis is operationally load-bearing (it is the standard
+Busch/CFMR hypothesis), not a derivation of probability from nothing. -/
 import Mathlib.LinearAlgebra.Matrix.PosDef
 import Mathlib.Tactic
 
@@ -55,6 +62,29 @@ theorem isEffect_sub {E F : Matrix (Fin d) (Fin d) ℂ} (hE : IsEffect E) (hF : 
   have : (1 : Matrix (Fin d) (Fin d) ℂ) - (F - E) = (1 - F) + E := by abel
   rw [this]
   exact hF.2.add hE.1
+
+/-- A finite sum of PSD matrices is PSD. -/
+theorem posSemidef_sum {ι : Type*} (S : Finset ι) (f : ι → Matrix (Fin d) (Fin d) ℂ)
+    (hf : ∀ i ∈ S, (f i).PosSemidef) : (∑ i ∈ S, f i).PosSemidef := by
+  classical
+  induction S using Finset.induction with
+  | empty => simpa using Matrix.PosSemidef.zero
+  | insert a s ha ih =>
+      rw [Finset.sum_insert ha]
+      exact (hf a (Finset.mem_insert_self a s)).add
+        (ih fun i hi => hf i (Finset.mem_insert_of_mem hi))
+
+/-- For a POVM `{Eᵢ}` (`∑ Eᵢ = 1`, each an effect), every partial sum `∑_{i∈S} Eᵢ` is an
+    effect: it is PSD, and `1 − ∑_{i∈S} Eᵢ = ∑_{i∉S} Eᵢ` is PSD. -/
+theorem isEffect_sum_of_povm {ι : Type*} [Fintype ι] (E : ι → Matrix (Fin d) (Fin d) ℂ)
+    (hE : ∀ i, IsEffect (E i)) (hsum : ∑ i, E i = 1) (S : Finset ι) :
+    IsEffect (∑ i ∈ S, E i) := by
+  classical
+  refine ⟨posSemidef_sum S E (fun i _ => (hE i).1), ?_⟩
+  have hsplit : (1 : Matrix (Fin d) (Fin d) ℂ) - ∑ i ∈ S, E i = ∑ i ∈ Sᶜ, E i := by
+    rw [← hsum, ← Finset.sum_add_sum_compl S E]; abel
+  rw [hsplit]
+  exact posSemidef_sum Sᶜ E (fun i _ => (hE i).1)
 
 /-- **Cauchy on the unit interval (the homogeneity core).**  A function `g : ℝ → ℝ` that
     is additive and monotone on `[0,1]` (with `g 0 = 0`) is linear there: `g t = t · g 1`.
@@ -214,6 +244,16 @@ theorem posSemidef_sumNorm_sub {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemid
     (((∑ i, ∑ j, ‖A i j‖ : ℝ) : ℂ) • (1 : Matrix (Fin d) (Fin d) ℂ) - A).PosSemidef :=
   posSemidef_sumNorm_sub_herm hA.1
 
+/-- `∑ᵢⱼ‖Aᵢⱼ‖ = 0 ⇒ A = 0` (all entries have zero norm). -/
+theorem eq_zero_of_sumNorm_zero {A : Matrix (Fin d) (Fin d) ℂ}
+    (h : ∑ i, ∑ j, ‖A i j‖ = 0) : A = 0 := by
+  ext i j
+  have h1 := (Finset.sum_eq_zero_iff_of_nonneg
+    (fun i _ => Finset.sum_nonneg fun j _ => norm_nonneg _)).mp h i (Finset.mem_univ i)
+  have h2 := (Finset.sum_eq_zero_iff_of_nonneg
+    (fun j _ => norm_nonneg _)).mp h1 j (Finset.mem_univ j)
+  simpa using norm_eq_zero.mp h2
+
 /-- Lower Löwner bound: for Hermitian `A`, `(∑‖Aᵢⱼ‖)·1 + A` is PSD (apply the upper bound
     to `−A`).  Gives `−c·1 ⪯ A`, the lower half of the two-sided bound. -/
 theorem posSemidef_sumNorm_add_herm {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.IsHermitian) :
@@ -306,6 +346,35 @@ theorem isEffect_inv_smul {A : Matrix (Fin d) (Fin d) ℂ} (hA : A.PosSemidef) {
     rw [smul_sub, h1]
   rw [key]; exact hbd.smul (by positivity)
 
+/-- **Trace-form non-degeneracy on effects.**  If `M₁ − M₂` is Hermitian and
+    `tr(M₁ E) = tr(M₂ E)` for every effect `E`, then `M₁ = M₂`.  Proof: `tr(Δ E) = 0` on
+    effects ⇒ on the whole PSD cone (scale by `1/c`) ⇒ on all Hermitians (`H = (H+c·1) − c·1`)
+    ⇒ `tr(Δ·Δ) = 0` ⇒ `Δ = 0`.  Gives uniqueness of the Gleason density. -/
+theorem trace_form_unique {M₁ M₂ : Matrix (Fin d) (Fin d) ℂ}
+    (hH : (M₁ - M₂).IsHermitian)
+    (h : ∀ E, IsEffect E → (M₁ * E).trace = (M₂ * E).trace) : M₁ = M₂ := by
+  have hΔE : ∀ E, IsEffect E → ((M₁ - M₂) * E).trace = 0 := fun E hE => by
+    rw [sub_mul, Matrix.trace_sub, h E hE, sub_self]
+  have hΔPSD : ∀ A : Matrix (Fin d) (Fin d) ℂ, A.PosSemidef → ((M₁ - M₂) * A).trace = 0 := by
+    intro A hA
+    rcases eq_or_lt_of_le (show (0:ℝ) ≤ ∑ i, ∑ j, ‖A i j‖ by positivity) with hc0 | hcpos
+    · rw [eq_zero_of_sumNorm_zero hc0.symm, mul_zero, Matrix.trace_zero]
+    · have ht := hΔE _ (isEffect_inv_smul hA hcpos (posSemidef_sumNorm_sub hA))
+      rw [Matrix.mul_smul, Matrix.trace_smul, Complex.real_smul] at ht
+      exact (mul_eq_zero.mp ht).resolve_left
+        (by exact_mod_cast one_div_ne_zero (ne_of_gt hcpos))
+  have hΔH : ∀ H : Matrix (Fin d) (Fin d) ℂ, H.IsHermitian → ((M₁ - M₂) * H).trace = 0 := by
+    intro H hH'
+    have h1 := hΔPSD _ (posSemidef_sumNorm_add_herm hH')
+    have h2 := hΔPSD _ (show (((∑ i, ∑ j, ‖H i j‖ : ℝ) : ℂ) •
+        (1 : Matrix (Fin d) (Fin d) ℂ)).PosSemidef by
+      rw [← coe_smul]; exact Matrix.PosSemidef.one.smul (by positivity))
+    rw [mul_add, Matrix.trace_add, h2, zero_add] at h1
+    exact h1
+  have hzero : ((M₁ - M₂)ᴴ * (M₁ - M₂)).trace = 0 := by rw [hH]; exact hΔH _ hH
+  have : M₁ - M₂ = 0 := Matrix.trace_conjTranspose_mul_self_eq_zero_iff.mp hzero
+  rwa [sub_eq_zero] at this
+
 /-- **Monotonicity of the Löwner bound.**  If `A ⪯ a·1` and `a ≤ b`, then `A ⪯ b·1`
     (`b·1 − A = (a·1 − A) + (b−a)·1`, a sum of PSD matrices). -/
 theorem posSemidef_smul_one_sub_mono {A : Matrix (Fin d) (Fin d) ℂ} {a b : ℝ}
@@ -320,12 +389,16 @@ theorem posSemidef_smul_one_sub_mono {A : Matrix (Fin d) (Fin d) ℂ} {a b : ℝ
   rw [key]; exact hbd.add hPSD
 
 /-- A **finite effect measure** (generalized probability measure on effects): normalized,
-    nonnegative, and additive on coexistent effects.  This is the hypothesis of
-    effect-Gleason; the theorem (future installments) is that `μ E = tr(ρ E)`. -/
+    nonnegative, and **effect-algebra (partially) additive** — additive on *coexistent* pairs
+    `E, F` (those with `E + F` still an effect, i.e. `E + F ≤ 1`).  This is the standard
+    Busch/CFMR hypothesis; effect-Gleason gives `μ E = tr(ρ E)`. -/
 structure EffectMeasure (d : ℕ) where
   μ : Matrix (Fin d) (Fin d) ℂ → ℝ
+  /-- normalization `μ 1 = 1` -/
   normalized : μ 1 = 1
+  /-- nonnegativity on effects -/
   nonneg : ∀ E, IsEffect E → 0 ≤ μ E
+  /-- effect-algebra (partial) additivity: additive on coexistent pairs -/
   additive : ∀ E F, IsEffect E → IsEffect F → IsEffect (E + F) → μ (E + F) = μ E + μ F
 
 namespace EffectMeasure
@@ -758,8 +831,8 @@ theorem rho_posSemidef : m.rho.PosSemidef := by
   exact_mod_cast this
 
 /-- **G4 CAPSTONE — finite-dimensional effect (Busch) Gleason.**  Every normalized,
-    nonnegative, coexistent-additive functional `μ` on effects is `μ E = tr(ρ E)` for a
-    density matrix `ρ` (PSD, trace 1).  ρ = the `Λ_ℂ`-matrix; representation from
+    nonnegative, effect-algebra (partially) additive functional `μ` on effects is
+    `μ E = tr(ρ E)` for a density matrix `ρ` (PSD, trace 1).  ρ = the `Λ_ℂ`-matrix; representation from
     `cExt_trace` + `cExt_eq_mu_of_isEffect`; positivity/normalization from `rho_posSemidef`/
     `rho_trace`.  This is the Born rule, derived from positivity + additivity alone. -/
 theorem finite_effect_gleason :
@@ -768,6 +841,48 @@ theorem finite_effect_gleason :
   refine ⟨m.rho, m.rho_posSemidef, m.rho_trace, fun E hE => ?_⟩
   rw [← m.cExt_eq_mu_of_isEffect hE, m.cExt_trace]
 
+/-- **Uniqueness of the Gleason density.**  The representing density matrix is unique. -/
+theorem finite_effect_gleason_unique :
+    ∃! ρ : Matrix (Fin d) (Fin d) ℂ, ρ.PosSemidef ∧ ρ.trace = 1 ∧
+      ∀ E, IsEffect E → (m.μ E : ℂ) = (ρ * E).trace := by
+  have hrep : ∀ E, IsEffect E → (m.μ E : ℂ) = (m.rho * E).trace :=
+    fun E hE => by rw [← m.cExt_eq_mu_of_isEffect hE, m.cExt_trace]
+  refine ⟨m.rho, ⟨m.rho_posSemidef, m.rho_trace, hrep⟩, ?_⟩
+  rintro ρ' ⟨hpos, _, hrep'⟩
+  refine trace_form_unique (hpos.1.sub m.rho_posSemidef.1) (fun E hE => ?_)
+  rw [← hrep' E hE, ← hrep E hE]
+
+/-- **POVM normalization corollary:** for a POVM `{Eᵢ}` (each an effect, `∑ Eᵢ = 1`), the
+    probabilities sum to one: `∑ᵢ μ(Eᵢ) = 1`.  (Additivity over the finset, since every
+    partial sum is an effect.) -/
+theorem mu_sum_of_povm {ι : Type*} [Fintype ι] (E : ι → Matrix (Fin d) (Fin d) ℂ)
+    (hE : ∀ i, IsEffect (E i)) (hsum : ∑ i, E i = 1) : ∑ i, m.μ (E i) = 1 := by
+  classical
+  have hpartial : ∀ S : Finset ι, m.μ (∑ i ∈ S, E i) = ∑ i ∈ S, m.μ (E i) := by
+    intro S
+    induction S using Finset.induction with
+    | empty => simpa using m.map_zero
+    | insert a s ha ih =>
+        rw [Finset.sum_insert ha, Finset.sum_insert ha,
+          m.additive (E a) (∑ i ∈ s, E i) (hE a) (isEffect_sum_of_povm E hE hsum s)
+            (by rw [← Finset.sum_insert ha]; exact isEffect_sum_of_povm E hE hsum (insert a s)),
+          ih]
+  have h := hpartial Finset.univ
+  rw [hsum, m.normalized] at h
+  exact h.symm
+
 end EffectMeasure
+
+/-- **Non-vacuity:** for `0 < d`, the maximally-mixed measure `E ↦ tr(E).re / d` is an
+    `EffectMeasure` — the hypothesis class of effect-Gleason is inhabited. -/
+noncomputable def maxMixed (hd : 0 < d) : EffectMeasure d where
+  μ E := (E.trace).re / d
+  normalized := by
+    rw [Matrix.trace_one, Fintype.card_fin, Complex.natCast_re]
+    exact div_self (by exact_mod_cast hd.ne')
+  nonneg E hE := by
+    have hre : 0 ≤ (E.trace).re := (Complex.le_def.mp hE.1.trace_nonneg).1
+    exact div_nonneg hre (Nat.cast_nonneg d)
+  additive E F _ _ _ := by rw [Matrix.trace_add, Complex.add_re, add_div]
 
 end QIQTH.EffectGleason

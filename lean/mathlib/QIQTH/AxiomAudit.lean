@@ -595,5 +595,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EffectGleason.EffectMeasure.finite_effect_gleason
 -- expected: standard only — CAPSTONE: finite-dim effect (Busch) Gleason — μ E = tr(ρE),
 -- ρ a density matrix. The Born rule from positivity + additivity, axiom-free.
+#print axioms QIQTH.EffectGleason.trace_form_unique
+-- expected: standard only — trace-form non-degeneracy on effects (uniqueness engine).
+#print axioms QIQTH.EffectGleason.EffectMeasure.finite_effect_gleason_unique
+-- expected: standard only — UNIQUENESS of the Gleason density (∃!).
+#print axioms QIQTH.EffectGleason.EffectMeasure.mu_sum_of_povm
+-- expected: standard only — POVM probabilities sum to 1.
+#print axioms QIQTH.EffectGleason.maxMixed
+-- expected: standard only — non-vacuity: maximally-mixed EffectMeasure (0 < d).
 
 end QIQTH.AxiomAudit
