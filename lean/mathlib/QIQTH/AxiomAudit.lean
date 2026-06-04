@@ -586,5 +586,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — G3: Λ_ℂ(c•M) = c·Λ_ℂ M ⇒ Λ_ℂ is ℂ-LINEAR on all matrices.
 #print axioms QIQTH.EffectGleason.EffectMeasure.cExt_trace
 -- expected: standard only — G3 Riesz: Λ_ℂ M = tr(ρM), ρ a b := Λ_ℂ(E_{ba}).
+#print axioms QIQTH.EffectGleason.EffectMeasure.cExt_eq_mu_of_isEffect
+-- expected: standard only — G4: Λ_ℂ E = ↑(μ E) on effects.
+#print axioms QIQTH.EffectGleason.EffectMeasure.rho_trace
+-- expected: standard only — G4: tr ρ = 1 (normalization).
 
 end QIQTH.AxiomAudit

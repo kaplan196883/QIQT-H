@@ -698,6 +698,40 @@ theorem cExt_trace (M : Matrix (Fin d) (Fin d) ℂ) : m.cExt M = (m.rho * M).tra
     exact Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => mul_comm _ _
   rw [hL, hR]
 
+/-- On a Hermitian matrix, `Λ_ℂ H = ↑(Λ H)` (imaginary part vanishes). -/
+theorem cExt_of_isHermitian {H : Matrix (Fin d) (Fin d) ℂ} (hH : H.IsHermitian) :
+    m.cExt H = (m.hermExt H : ℂ) := by
+  have him : imHerm H = 0 := by
+    simp only [imHerm]; rw [hH, sub_self, smul_zero]
+  have hre : reHerm H = H := by
+    simp only [reHerm]; rw [hH, ← two_smul ℂ H, smul_smul]
+    norm_num
+  rw [cExt, hre, him, m.hermExt_zero]; simp
+
+/-- On an effect, `Λ_ℂ E = ↑(μ E)`. -/
+theorem cExt_eq_mu_of_isEffect {E : Matrix (Fin d) (Fin d) ℂ} (hE : IsEffect E) :
+    m.cExt E = (m.μ E : ℂ) := by
+  rw [m.cExt_of_isHermitian hE.1.1, m.hermExt_eq_mu_of_isEffect hE]
+
+/-- `Λ_ℂ(Mᴴ) = conj(Λ_ℂ M)` (conjugate symmetry of the complexification). -/
+theorem cExt_conjTranspose (M : Matrix (Fin d) (Fin d) ℂ) :
+    m.cExt Mᴴ = (starRingEnd ℂ) (m.cExt M) := by
+  have hre : reHerm Mᴴ = reHerm M := by
+    simp only [reHerm, conjTranspose_conjTranspose]; rw [add_comm]
+  have him : imHerm Mᴴ = -imHerm M := by
+    simp only [imHerm, conjTranspose_conjTranspose]
+    rw [show Mᴴ - M = -(M - Mᴴ) by abel, smul_neg]
+  rw [cExt, cExt, hre, him, m.hermExt_neg (imHerm_isHermitian M)]
+  push_cast
+  simp only [map_add, Complex.conj_ofReal, map_mul, Complex.conj_I]
+  ring
+
+/-- `tr ρ = 1` (normalization).  `tr ρ = tr(ρ·1) = Λ_ℂ 1 = ↑(μ 1) = 1`. -/
+theorem rho_trace : m.rho.trace = 1 := by
+  have h := m.cExt_trace 1
+  rw [mul_one] at h
+  rw [← h, m.cExt_eq_mu_of_isEffect isEffect_one, m.normalized, Complex.ofReal_one]
+
 end EffectMeasure
 
 end QIQTH.EffectGleason
