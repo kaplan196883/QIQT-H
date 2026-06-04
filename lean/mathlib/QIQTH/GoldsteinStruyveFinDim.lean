@@ -170,8 +170,12 @@ def IsTensorMultiplicative {d : ℕ}
       - `I⊗I`: β = β²  ⇒  β ∈ {0, 1}
     Combined with α + β = 1: `(α, β) ∈ {(1, 0), (0, 1)}`.
 
-    1-3 days of Lean work given Kronecker infrastructure; axiomatized
-    here at the interface layer. -/
+    *Status (2026-06):* now a **consistent** axiom — its hypothesis `IsTensorMultiplicative` is
+    genuine (no longer the vacuous `True`), so it can no longer fire on `(α,β)=(½,½)`; it
+    asserts a true statement.  Proving it outright (and retiring it, 37→36) is a bounded
+    follow-up via GPT-5.5-pro's traceless-`Z` argument (`Z = diag(1,−1)` ⇒ `schurForm α β Z =
+    α·Z`; tensor multiplicativity at `(Z,Z)` ⇒ `α·(Z⊗Z) = α²·(Z⊗Z)` ⇒ `α = α²`), modulo the
+    `finProdFinEquiv` reindex / Kronecker entry bookkeeping. -/
 axiom step3_tensor_multiplicativity (d : ℕ) (hd : 1 < d) (α β : ℝ)
     (h_sum : α + β = 1)
     (h_tensor : IsTensorMultiplicative
