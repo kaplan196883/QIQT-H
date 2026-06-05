@@ -33,8 +33,8 @@ import QIQTH.CompressionLocality
 import QIQTH.NoBornFromNothing
 import QIQTH.EquivarianceGap
 import QIQTH.BornTypicality
--- Sub-theorems A, B, C for the Canonical IC Measure Principle:
-import QIQTH.TypicalityMackeyGleason
+-- Sub-theorems B, C for the Canonical IC Measure Principle (sub-theorem A — the content-free
+-- `TypicalityMackeyGleason` placeholder — was DELETED 2026-06, superseded by `EffectGleason`):
 import QIQTH.OperationalNoGo
 import QIQTH.FQEquivarianceUniqueness
 -- Concrete finite-dim Goldstein-Struyve (Steps 2, 4 proved; 1, 3 axiomatized):

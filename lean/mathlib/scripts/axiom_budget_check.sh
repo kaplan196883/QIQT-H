@@ -118,7 +118,19 @@ done
 # inputs (Klein at the vN level = operator convexity of -log; Donald's identity;
 # quantum DPI; the CPW bridge; Araki relative entropy) which Mathlib does not yet
 # reach.  Net: 40 → 37.
-AXIOM_BUDGET=37
+#
+# Audit note (2026-06, GS Step 1 + Step 3 discharged): two finite-dim Goldstein–Struyve
+# interface axioms (`step1_schur_classification`, `step3_tensor_multiplicativity`) were
+# PROVED axiom-free and retired.  Net 37 → 35.
+#
+# Audit note (2026-06, placeholder deletion): the two CONTENT-FREE placeholder axioms
+# `BornTypicality.LLN_typicality_axiom` (conclusion `∀ε>0,∀k,∃N,True`) and
+# `TypicalityMackeyGleason.mackey_gleason_to_trace_density` (conclusion `HasTraceDensityForm := True`)
+# were DELETED — both superseded by the axiom-free finite results (`BornTypicalityFinite`,
+# `EffectGleason`); the whole `TypicalityMackeyGleason` placeholder module was removed.  The
+# *continuum* LLN / Bunce–Wright generalizations remain genuinely open (they were never this
+# placeholder).  Net 35 → 33.  Budget ratcheted to 33; raise ONLY with an audit note.
+AXIOM_BUDGET=33
 AXIOM_COUNT="$(grep -rhE '^axiom ' QIQTH/ | wc -l | tr -d ' ')"
 echo "[axiom-budget] raw axiom count: $AXIOM_COUNT (budget $AXIOM_BUDGET)"
 if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then

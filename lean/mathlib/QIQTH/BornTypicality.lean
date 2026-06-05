@@ -110,63 +110,32 @@ structure CanonicalIcMeasure
   /-- The pushforward of μ under the outcome map equals Born weights. -/
   born_marginal : ∀ k, outcomeMarginal outcome μ k = (c k)^2
 
-/-- **Strong Law of Large Numbers — typicality interface (axiomatized).**
+/- **Strong Law of Large Numbers — the content-free `LLN_typicality_axiom` was DELETED
+    (2026-06).**  Its conclusion was `∀ε>0,∀k,∃N,True` — a placeholder with no convergence
+    content.  The genuine, axiom-free finite weak law of large numbers now lives in
+    `QIQTH.BornTypicalityFinite` (`chebyshev_freq`: `P(|freq − p k| ≥ ε) ≤ p k(1−p k)/(Nε²)`,
+    `chebyshev_freq_union_le`) and its quantum/measure lifts (`BornTypicalityQuantum`,
+    `BornMeasureUniqueness`, `BornJoin`).  The continuum/AQFT LLN over IC sequences remains an
+    open target (it is NOT this deleted placeholder). -/
 
-    For a canonical IC measure μ, μ-typical (i.e., μ-product-measure-1)
-    IC sequences yield empirical frequencies converging to the per-run
-    expected value (= the outcome marginal = Born weights, by
-    construction).
+/-- **The QIQT-H Born typicality theorem (mean form).**
 
-    Mathlib has a finite-distribution LLN; the AQFT/IC formulation
-    requires framework-specific structure beyond Mathlib's current
-    probability infrastructure, so we axiomatize the conclusion here.
+    *Hypothesis:* a canonical IC measure μ for the Born distribution `|c_k|²`.
+    *Conclusion:* the expected per-run outcome distribution is Born — proved rigorously from
+    the marginal hypothesis.
 
-    The axiom captures: "given the canonical IC measure and standard
-    probability theory, empirical frequencies converge to Born". -/
-axiom LLN_typicality_axiom
-    {Γ Outcome : Type*} [Fintype Γ] [Fintype Outcome]
-    (outcome : Γ → Outcome) (c : Outcome → ℝ)
-    (M : CanonicalIcMeasure Γ Outcome outcome c) :
-    -- For each ε > 0, all but a μ-product-measure-zero set of IC
-    -- sequences have empirical frequencies within ε of |c_k|² for
-    -- sufficiently large N.  Stated as: there exists such an N-bound.
-    ∀ ε : ℝ, 0 < ε → ∀ k : Outcome,
-      ∃ _N : ℕ, True  -- Placeholder for the convergence statement; the
-                       -- structural content is in the conditional shape.
-
-/-- **The QIQT-H Born typicality theorem (conditional form).**
-
-    *Hypothesis:* There exists a canonical IC measure μ for the Born
-    distribution `|c_k|²`.
-
-    *Conclusion:*
-      1. The expected outcome distribution per run is Born.
-      2. (Conditional on the LLN axiom above) μ-typical empirical
-         frequency sequences converge to Born.
-
-    The first part is proved rigorously.  The second part is the
-    standard LLN, axiomatized here at the interface layer.
-
-    *Strategic content:* this is the typicality-paradigm Born theorem
-    for QIQT-H, replacing Bohmian DGZ equivariance.  The remaining
-    research question is justifying the "canonical" qualifier on μ from
-    physical first principles (candidates: canonical tracial typicality
-    from CPW Type II structure, symmetric equiprobability, holographic
-    modular construction). -/
+    The almost-sure / frequency direction is NO LONGER stated here as a content-free placeholder;
+    the genuine finite weak LLN is `BornTypicalityFinite.chebyshev_freq` (axiom-free).  The
+    remaining research question is justifying the "canonical" qualifier on μ from physical first
+    principles (CPW Type II tracial typicality, holographic modular construction). -/
 theorem qiqth_born_typicality_conditional
     {Γ Outcome : Type*} [Fintype Γ] [Fintype Outcome]
     (outcome : Γ → Outcome) (c : Outcome → ℝ)
     (M : CanonicalIcMeasure Γ Outcome outcome c) :
     -- Mean form: per-run expected frequency = Born.
-    (∀ k, expectedIndicator outcome M.μ k = (c k)^2) ∧
-    -- Almost-sure form (via LLN axiom): typical sequences → Born.
-    (∀ ε : ℝ, 0 < ε → ∀ k : Outcome, ∃ _N : ℕ, True) := by
-  refine ⟨?_, ?_⟩
-  · -- Mean form: direct from the marginal hypothesis.
-    intro k
-    exact born_mean_conditional outcome M.μ c M.born_marginal k
-  · -- Almost-sure form: from the LLN axiom.
-    exact LLN_typicality_axiom outcome c M
+    ∀ k, expectedIndicator outcome M.μ k = (c k)^2 := by
+  intro k
+  exact born_mean_conditional outcome M.μ c M.born_marginal k
 
 /-- **Audit summary.**
 

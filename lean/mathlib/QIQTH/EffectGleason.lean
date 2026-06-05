@@ -8,9 +8,10 @@ The Busch / Caves–Fuchs–Manne–Renes finite-dimensional effect-Gleason theo
 `ρ` (PSD, trace 1).  The hypothesis class is inhabited (`maxMixed`, for `0 < d`), and a POVM's
 probabilities sum to one (`mu_sum_of_povm`).
 
-This discharges the finite-dim Born-representation assumption used in the QIQT-H Born program
-(`TypicalityMackeyGleason.mackey_gleason_to_trace_density`); see `PRIZE_ROADMAP.md` /
-`GLEASON_SCOPE.md`.
+This is the finite-dim Born-representation theorem of the QIQT-H Born program (it SUPERSEDES the
+former content-free placeholder `TypicalityMackeyGleason.mackey_gleason_to_trace_density`, deleted
+2026-06; the continuum Type-II / Bunce–Wright generalization remains open); see `PRIZE_ROADMAP.md`
+/ `GLEASON_SCOPE.md` / `FINITE_BORN_REPRESENTATION.md`.
 
 Ladder: G1 `cauchy_unit_interval`/`map_smul` (additive + bounded ⇒ ℝ-homogeneous); G2 the
 PSD/Hermitian Löwner bounds `A ⪯ (∑‖Aᵢⱼ‖)·1` (not in Mathlib; proved without the spectral

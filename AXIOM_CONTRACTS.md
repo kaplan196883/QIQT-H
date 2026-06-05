@@ -5,7 +5,7 @@
 Two soundness bugs in this project (`IsTensorMultiplicative := ∀ρσ,True` feeding `step3`; the
 unsatisfiable `∀-Dd2` flagship hypothesis) shared one failure mode: a **vacuous / too-permissive
 predicate** that the `#print axioms` budget check (`scripts/axiom_budget_check.sh`) cannot see.
-This document audits the **35 remaining axioms** for that family and for **circularity** (a
+This document audits the **33 remaining axioms** (down from 35 — see the deletion banner) for that family and for **circularity** (a
 "bridge" axiom whose conclusion is essentially the Born claim).
 
 **Tooling:** `scripts/vacuity_lint.sh` greps for vacuous Prop bodies (`:= True`, `↦ True`,
@@ -14,22 +14,31 @@ This document audits the **35 remaining axioms** for that family and for **circu
 The detector for the *soundness* family is not the count — it is (a) attempting to discharge the
 axiom by proof, and (b) the positive/negative model witnesses in `QIQTH/GoldsteinStruyveModels.lean`.
 
+> **RESOLVED (2026-06-06).** Both content-free placeholder axioms below have been **DELETED**:
+> `BornTypicality.LLN_typicality_axiom` (the whole `LLN`-placeholder, headline #1) and
+> `TypicalityMackeyGleason.mackey_gleason_to_trace_density` (the entire `TypicalityMackeyGleason`
+> module, headline #2). Both are superseded by axiom-free finite results (`BornTypicalityFinite` /
+> `EffectGleason` and the finite Born-representation thread — see `FINITE_BORN_REPRESENTATION.md`).
+> Axiom count **35 → 33**. The continuum LLN / Bunce–Wright generalizations remain open (they were
+> never these placeholders). Headlines #1/#2 below are retained as the historical record.
+
 ---
 
-## Triage of the 5 vacuous-body sites the linter flags
+## Triage of the vacuous-body sites the linter flags
+
+After the deletion (2026-06-06) only ONE vacuous-body site remains; the three in the deleted modules
+(`BornTypicality.lean` `∃_N,True`; `TypicalityMackeyGleason.lean` `HasTraceDensityForm`/`IsNormal`/
+`IsNoncontextual := True`) are gone.
 
 | Site | Kind | Verdict |
 |------|------|---------|
-| `BornTypicality.lean:134` `∃ _N : ℕ, True` | **vacuous CONCLUSION** of `LLN_typicality_axiom` | ⚠️ **content-free** (see headline #1) |
-| `TypicalityMackeyGleason.lean:68` `HasTraceDensityForm := True` | vacuous CONCLUSION of `mackey_gleason_to_trace_density` | ⚠️ **content-free** (see headline #2) |
-| `TypicalityMackeyGleason.lean:59,63` `IsNormal/IsNoncontextual := True` | vacuous HYPOTHESES of that axiom | sound — its conclusion is itself `True`, so no falsifiable conclusion is reachable |
 | `LorentzWitness.lean:180` `le _ _ := True` | trivial preorder **instance field** | harmless (a deliberately-trivial order witness, not an axiom hypothesis) |
 
 No site matches the dangerous pattern **vacuous HYPOTHESIS → concretely-falsifiable CONCLUSION**
 (that was the `step3`/`IsTensorMultiplicative` bug, now fixed). So **no new soundness hole** is
 present. But two *content-free* conclusions overstate what is proved:
 
-### ⚠️ Headline finding #1 — the Born-frequency punchline is a placeholder
+### ✅ Headline finding #1 — RESOLVED (axiom deleted 2026-06-06; historical record below)
 
 `BornTypicality.LLN_typicality_axiom` is meant to deliver "μ-typical IC sequences have empirical
 frequencies converging to the Born weights." Its **conclusion is literally `∀ ε>0, ∀ k, ∃ _N, True`**
@@ -38,7 +47,7 @@ frequencies converging to the Born weights." Its **conclusion is literally `∀ 
 cited as "Born derived as a frequency." Giving it real content (a genuine LLN in the AQFT/IC
 framework) is open, multi-week work.
 
-### ⚠️ Headline finding #2 — typicality Mackey–Gleason is content-free
+### ✅ Headline finding #2 — RESOLVED (axiom + module deleted 2026-06-06; historical record below)
 
 `TypicalityMackeyGleason.HasTraceDensityForm := True`, so `mackey_gleason_to_trace_density`
 (`… → HasTraceDensityForm w`) and the "theorem" `qiqth_typicality_mackey_gleason` prove a
@@ -48,7 +57,7 @@ Type-II Bunce–Wright statement here is a named placeholder.
 
 ---
 
-## The 35 axioms by cluster
+## The 33 axioms by cluster
 
 Most are one of: **(T)** opaque-type declarations (`axiom Foo : Type`) — harmless, just abstract
 carriers; **(F)** opaque function symbols on those types; **(S)** genuine standard theorems
@@ -70,8 +79,8 @@ axiomatized because the operator-algebra infrastructure is absent from Mathlib.
   relative entropy). No vacuity.
 - **Bell.lean (1):** `tsirelson_bound` `∃ q, 2 < |q|` (S, existential — true, harmless).
 - **MarginalLocality.lean (1):** `set_level_locality_from_unitary_dilation` (S).
-- **TypicalityMackeyGleason.lean (1):** `mackey_gleason_to_trace_density` — **content-free** (#2).
-- **BornTypicality.lean (1):** `LLN_typicality_axiom` — **content-free** (#1).
+- ~~**TypicalityMackeyGleason.lean (1):** `mackey_gleason_to_trace_density`~~ — **DELETED 2026-06-06** (#2; module removed, superseded by `EffectGleason`).
+- ~~**BornTypicality.lean (1):** `LLN_typicality_axiom`~~ — **DELETED 2026-06-06** (#1; superseded by `BornTypicalityFinite`).
 
 ## Circularity check (the real risk for a Born-rule program)
 

@@ -42,7 +42,7 @@ The framework is presented as a research program with rigorous scaffolding + cle
 ## Machine-checked finite core (Lean 4 / Mathlib)
 
 The load-bearing *finite* content is formalized **axiom-free** (only Lean's standard
-`propext, Classical.choice, Quot.sound`; project axiom budget **35**, all of them continuum /
+`propext, Classical.choice, Quot.sound`; project axiom budget **33**, all of them continuum /
 operator-algebra interface axioms — none in the finite core). The headline machine-checked
 result is a **finite no-collapse Born representation theorem**:
 

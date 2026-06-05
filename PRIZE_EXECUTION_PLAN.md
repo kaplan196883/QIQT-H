@@ -28,7 +28,7 @@ hypothesis); the open problem is *inhabiting* them from a real field, plus the a
 
 **Net:** the finite case is done; the prize is (1) a real free-field instance of the
 `RecordedHistoryNet`/sheaf with an equivariant Born μ, (2) the global-section / cohomology layer,
-(3) the infinite-dim analytic core. The 35 remaining project axioms (Araki / Donald / DPI /
+(3) the infinite-dim analytic core. The 33 remaining project axioms (Araki / Donald / DPI /
 EntropyBridge / Mackey–Gleason / `TypicalityMackeyGleason` / `FQEquivarianceUniqueness`) are the
 continuum interface those stages would retire.
 
@@ -123,7 +123,7 @@ new Mathlib operator-algebra infrastructure. This discharges the remaining conti
   uniqueness on type II/III algebras — retires the `TypicalityMackeyGleason` content-free placeholder.
   *Path:* cited interface or major build. *Dep:* 3.1.
 
-**Stage-3 result:** the genuine continuum covariant μ — the actual prize. Retires the bulk of the 35
+**Stage-3 result:** the genuine continuum covariant μ — the actual prize. Retires the bulk of the 33
 continuum interface axioms.
 
 ---

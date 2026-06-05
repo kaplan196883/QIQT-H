@@ -150,10 +150,11 @@ theorem goldstein_struyve_qiqth_proved
 
 /-- **The QIQT-H Canonical IC Measure Principle (final form).**
 
-    Combined with sub-theorem A (Mackey-Gleason ⇒ trace-density form,
-    `TypicalityMackeyGleason.qiqth_typicality_mackey_gleason`) and the
-    two acknowledged interface axioms in `GoldsteinStruyveFinDim`
-    (Step 1 Schur classification and Step 3 tensor multiplicativity):
+    Combined with the finite trace-density result
+    `EffectGleason.finite_effect_gleason` (which SUPERSEDED the deleted
+    content-free `TypicalityMackeyGleason` placeholder) and the
+    Goldstein–Struyve Schur classification (Step 1, Step 3 — both now
+    proved axiom-free):
     the canonical IC measure on QIQT-H's IC space is uniquely the
     trace-density measure `μ_ρ(B) = τ_R(ρ · P_B)`.
 

@@ -3,7 +3,7 @@
 *Consolidation document for the finite, machine-checked core built 2026-06 (Lean 4 /
 Mathlib, `lean/mathlib/QIQTH/`). Every result below is **axiom-free**: it depends only on
 Lean's three standard foundational axioms `propext, Classical.choice, Quot.sound` (verified
-by `AxiomAudit.lean`; project axiom budget unchanged at **35**, all 35 being continuum /
+by `AxiomAudit.lean`; project axiom budget **33**, all 33 being continuum /
 operator-algebra interface axioms — NONE in this finite core). Two independent GPT-5.5-pro
 adversarial verification passes are folded in; their honest caveats are kept verbatim in the
 "Scope" rows so the result is not overstated.*
@@ -117,7 +117,7 @@ explanatory depth.)
 This finite core is the **realized, finite portion** of the QIQT-H breakthrough target. It does
 **not** settle the two breakthrough-defining open problems (see `PROGRAM_STATUS.md`,
 `PRIZE_ROADMAP.md`): (1) the **continuum, Lorentz-covariant** construction of the typicality
-measure μ (the 35 remaining interface axioms live here, gated by Type III₁ / Tomita–Takesaki
+measure μ (the 33 remaining interface axioms live here, gated by Type III₁ / Tomita–Takesaki
 beyond current Mathlib); (2) deriving the scattering / objectivity premises from a realistic
 field-theoretic Hamiltonian. The finite result stands on its own as a foundations-of-physics
 formalization paper; the continuum is honestly gated.

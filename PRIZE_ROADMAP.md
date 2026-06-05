@@ -9,7 +9,7 @@ composition, with NO per-measurement stipulation — the object that turns QIQT-
 ## 0a. Status (2026-06-06) — the FINITE portion of this route is realized, axiom-free
 
 The **finite-dimensional** stage of the Effect-Gleason route below is now machine-checked,
-axiom-free (budget 35, standard-three only). Built and joined this session: finite effect-Gleason
+axiom-free (budget 33, standard-three only). Built and joined this session: finite effect-Gleason
 (`EffectGleason.finite_effect_gleason` — Born from positivity+additivity); the single-trial Born
 law **forced from non-contextuality** (`OneSiteGleason.oneSite_forced`) with its converse
 (`traceEffectMeasure`); product-preparation independence (`BornTypicalityFinite.w_history_factorizes`);
@@ -22,7 +22,7 @@ NOT from `Q_max` alone. Full claim→theorem map + honest scope: **`FINITE_BORN_
 
 **What this route's PRIZE still needs (continuum):** Stages 3–5 below — the Covariant
 Record-Completeness Lemma and the AQFT localization producing a single **Lorentz-covariant** μ.
-The 35 remaining axioms are exactly this continuum / Type III₁ interface (beyond current Mathlib).
+The 33 remaining axioms are exactly this continuum / Type III₁ interface (beyond current Mathlib).
 
 **A concrete, Lean-grounded staged execution plan** (free-field finite-mode instance → sheaf /
 global-section / cohomology layer → continuum analytic infrastructure), with per-item difficulty,

@@ -7,10 +7,12 @@ Born representation** joining the capacity core to the Born/typicality layer (§
 scope map in `FINITE_BORN_REPRESENTATION.md`). This is the honest map: what is done,
 what is the prize we are chasing, and what must be fixed before arXiv.*
 
-> **Update 2026-06-06.** The project axiom budget is now **35** (all 35 are continuum /
+> **Update 2026-06-06.** The project axiom budget is now **33** (all 33 are continuum /
 > operator-algebra interface axioms; the entire finite core below is axiom-free —
-> `propext, Classical.choice, Quot.sound` only). References to "37" elsewhere in this
-> document predate the Goldstein–Struyve Step-1 / Step-3 discharges and should read 35.
+> `propext, Classical.choice, Quot.sound` only). 37 → 35 via the Goldstein–Struyve Step-1 /
+> Step-3 discharges; 35 → 33 by DELETING the two content-free placeholder axioms
+> (`LLN_typicality_axiom`, `mackey_gleason_to_trace_density`), both superseded by axiom-free
+> finite results. References to "37"/"35" elsewhere in this document predate these and read 33.
 
 ---
 
@@ -107,7 +109,7 @@ attacked, not the source of the single-world result.
 - **Lean formalization + assumption audit** (*the strongest original component*):
   no-signaling, CHSH→Tsirelson 2√2 with rigorous singlet, microcausality,
   Donald's identity, `NoConcentration` (decoherence conserves |c_k|²),
-  support-preservation ≠ Born-equivariance, structural audits. **35 project
+  support-preservation ≠ Born-equivariance, structural audits. **33 project
   axioms** (down from 57; all continuum/operator-algebra interface). Publishable
   **as a formal dependency analysis**, NOT
   as a completed Born derivation. Recent discharges (all machine-checked,
@@ -142,7 +144,7 @@ Sell it as the former (defensible); never as the latter (fails).
 The pivot (§2a) was accompanied by *building* the load-bearing chain as a
 machine-checked, axiom-free conditional theorem. Three new modules (standard Lean
 axioms only — `propext`, `Classical.choice`, `Quot.sound`; in the project budget
-of 35; verified by `AxiomAudit.lean`):
+of 33; verified by `AxiomAudit.lean`):
 
 - **`QIQTH/CoreNoCollapse.lean`** — the conditional representation theorem.
   Finite-capacity exclusion (`coactual_subsingleton`: a region whose record cost
@@ -259,7 +261,7 @@ preparation; world-measure shown observationally free; finite, axiom-free, machi
 
 New axiom-free modules: `BornTypicalityFinite`, `BornTypicalityQuantum`, `BornMeasureUniqueness`,
 `ValueSelection`, `OneSiteBorn`, `OneSiteGleason`, `BornJoin`, `BornJoinGleason`,
-`OrthogonalCapacity` (all standard-three; budget 35).
+`OrthogonalCapacity` (all standard-three; budget 33).
 
 ---
 
@@ -315,7 +317,7 @@ Honest riders: 3–5 are genuine open theorems; the Lorentz-friendliness is *bou
 - the boosted effects are a **full PVM** (`E_cov_preserves_proj` + `unitary_preserves_resolution`) and the weights a **covariant probability distribution** (`upvm_covariant_probability`);
 - **non-trivial models exist** (`LorentzWitness` A: a spread 2-outcome Born distribution refuting the one-point net; B: a non-trivial group permuting two diamonds), settling vacuity.
 
-All machine-checked, standard Lean axioms only, project axiom budget 35. Reviewed across seven GPT-5.5-pro rounds (Red → "Green for the finite conditional interface"). **What remains is exactly the continuum:** producing such a `RecordedHistoryNet` *with its unitary Poincaré transport* from an actual relativistic Type III₁ QFT (Tomita–Takesaki / Haagerup-L^p, beyond current Mathlib) — the genuine, untouched hard problem. Proving the linchpin even for FREE FIELDS first remains the next real target.
+All machine-checked, standard Lean axioms only, project axiom budget 33. Reviewed across seven GPT-5.5-pro rounds (Red → "Green for the finite conditional interface"). **What remains is exactly the continuum:** producing such a `RecordedHistoryNet` *with its unitary Poincaré transport* from an actual relativistic Type III₁ QFT (Tomita–Takesaki / Haagerup-L^p, beyond current Mathlib) — the genuine, untouched hard problem. Proving the linchpin even for FREE FIELDS first remains the next real target.
 
 ---
 
