@@ -16,3 +16,5 @@ build/*.synctex.gz
 # local scratch: fetched arXiv LaTeX sources (not redistributed)
 .arxivtmp/
 refs/
+.playwright-mcp/
+refs/
