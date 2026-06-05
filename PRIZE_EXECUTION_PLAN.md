@@ -41,6 +41,16 @@ equivariant Born μ on its recorded histories — converting the Lorentz promiss
 finite-mode result. Effort: **M–L**. Builds directly on `FreeFieldRecord` + `RecordGleason` +
 `LorentzSelectionStrong`.*
 
+> **STATUS (2026-06-06, commit bf6cb23): core deliverable DONE (minimal 2-mode version).**
+> `QIQTH/FreeFieldNet.lean` builds, axiom-free, the first `RecordedHistoryNet` with GENUINE
+> marginalizing restriction (vs `LorentzWitness`'s trivial identity restriction) and the product
+> Born measure `ω`, where the no-signaling marginal `ω_marg` is a real THEOREM (`bornNet`,
+> `bornNet_no_signaling`); `bornNet_covariant_selection` discharges `covariant_selection_exists`
+> for it. This realizes the heart of 1.4 for a 2-mode (`false ≤ true`) net with a TRIVIAL action.
+> **Still to do for full Stage 1:** ground the fibres/state in `FreeFieldRecord` sectors (1.1),
+> the effect-completeness bridge via `EffectGleason.trace_form_unique` (1.2), and a NON-trivial
+> mode-permutation action with equivariant μ (1.3, `FreeFieldRecord.boost_*`).
+
 - **1.1 (M) Finite-mode measurement POVM.** Define the `n`-mode number-basis / Gaussian PVM as a
   concrete `FinPVM` (or matrix POVM) on `⊗ⁿ ℂ^d`. Target: `freefield_pvm_complete` (∑ E = 1) and
   each `E` an `IsEffect`. *Exists:* `FreeFieldRecord` sectors + `kronN` machinery in
