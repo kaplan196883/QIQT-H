@@ -1,0 +1,52 @@
+- contentinfo "footer" [ref=e6]:
+  - generic [ref=e7]:
+    - generic [ref=e9]:
+      - img "Orcid" [ref=e11] [cursor=pointer]
+      - link "Linkedin (opens in a new tab)" [ref=e12] [cursor=pointer]:
+        - /url: https://www.linkedin.com/company/orcid
+        - img "Linkedin (opens in a new tab)" [ref=e13]
+      - link "Bluesky (opens in a new tab)" [ref=e14] [cursor=pointer]:
+        - /url: https://bsky.app/profile/orcid.org
+        - img "Bluesky (opens in a new tab)" [ref=e15]
+      - link "Facebook (opens in a new tab)" [ref=e16] [cursor=pointer]:
+        - /url: https://www.facebook.com/ORCID.org
+        - img "Facebook (opens in a new tab)" [ref=e17]
+      - link "Mastodon (opens in a new tab)" [ref=e18] [cursor=pointer]:
+        - /url: https://scicomm.xyz/@ORCID_Org
+        - img "Mastodon (opens in a new tab)" [ref=e19]
+      - link "Youtube (opens in a new tab)" [ref=e20] [cursor=pointer]:
+        - /url: https://www.youtube.com/@orcid_org
+        - img "Youtube (opens in a new tab)" [ref=e21]
+      - link "Vimeo (opens in a new tab)" [ref=e22] [cursor=pointer]:
+        - /url: https://vimeo.com/orcidvideos
+        - img "Vimeo (opens in a new tab)" [ref=e23]
+      - link "Github (opens in a new tab)" [ref=e24] [cursor=pointer]:
+        - /url: https://github.com/ORCID
+        - img "Github (opens in a new tab)" [ref=e25]
+      - link "RSS (opens in a new tab)" [ref=e26] [cursor=pointer]:
+        - /url: https://info.orcid.org/blog/feed
+        - img "RSS (opens in a new tab)" [ref=e27]
+    - generic [ref=e29]:
+      - img "public domain" [ref=e31]
+      - paragraph [ref=e32]:
+        - text: The text of this website is published under a
+        - link "CC0license (opens in a new tab)" [ref=e33] [cursor=pointer]:
+          - /url: http://creativecommons.org/publicdomain/zero/1.0/
+          - text: CC0 license.
+        - text: ORCID™, the ORCID logo, and the iD logo are trademarks of ORCID, Inc. ORCID is registered in the US and other jurisdictions.
+    - generic [ref=e35]:
+      - link "About ORCID" [ref=e36] [cursor=pointer]:
+        - /url: /about
+      - link "Privacy Policy" [ref=e37] [cursor=pointer]:
+        - /url: /privacy-policy
+      - link "Terms of Use" [ref=e38] [cursor=pointer]:
+        - /url: /content/orcid-terms-use
+      - link "Accessibility Statement" [ref=e39] [cursor=pointer]:
+        - /url: /content/orcid-accessibility-statement
+      - link "ORCID Help Center" [ref=e40] [cursor=pointer]:
+        - /url: https://support.orcid.org/
+      - link "Dispute procedures" [ref=e41] [cursor=pointer]:
+        - /url: /orcid-dispute-procedures
+      - link "Brand Guidelines" [ref=e42] [cursor=pointer]:
+        - /url: /trademark-and-id-display-guidelines/
+      - generic [ref=e43] [cursor=pointer]: Cookie Settings

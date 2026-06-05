@@ -22,6 +22,7 @@ import Mathlib.LinearAlgebra.Matrix.PosDef
 import Mathlib.Data.Complex.Basic
 import Mathlib.Data.Complex.BigOperators
 import Mathlib.Analysis.Complex.Order
+import Mathlib.Analysis.InnerProductSpace.Positive
 import QIQTH.BornTypicalityFinite
 
 namespace QIQTH
@@ -125,7 +126,7 @@ theorem quantum_chebyshev_freq (ρ : Matrix (Fin d) (Fin d) ℂ)
 /-- The coarse-grained product POVM effect of an event `S` of histories:
     `F_S = ∑_{ω ∈ S} ⊗ₜ E(ωₜ)`.  (POVM outcomes are alternatives, so the effects
     ADD — no amplitude interference.) -/
-def eventEffect (E : Fin m → Matrix (Fin d) (Fin d) ℂ)
+noncomputable def eventEffect (E : Fin m → Matrix (Fin d) (Fin d) ℂ)
     (S : Finset (Fin n → Fin m)) : Matrix (Fin n → Fin d) (Fin n → Fin d) ℂ :=
   ∑ ω ∈ S, kronN (fun t => E (ω t))
 
@@ -152,6 +153,32 @@ theorem quantum_chebyshev_freq_event (ρ : Matrix (Fin d) (Fin d) ℂ)
   rw [trace_eventEffect_eq_sum]
   exact quantum_chebyshev_freq ρ E hρ hE hp0 hp1 k hε hn
 
+/-- `tr(vv* · E) = v* · (E v)` (rank-one trace as a quadratic form). -/
+theorem trace_vecMulVec_mul_eq {N : ℕ} (v : Fin N → ℂ) (E : Matrix (Fin N) (Fin N) ℂ) :
+    (vecMulVec v (star v) * E).trace = star v ⬝ᵥ (E *ᵥ v) := by
+  simp only [Matrix.trace, Matrix.diag_apply, Matrix.mul_apply, Matrix.vecMulVec_apply,
+    Matrix.mulVec, dotProduct, Finset.mul_sum]
+  rw [Finset.sum_comm]
+  exact Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => by ring
+
+/-- **Trace of a product of two PSD matrices is nonnegative** (`0 ≤ tr(ρ·E)` in `ℂ`).
+    Proved via the rank-one decomposition `ρ = ∑ᵢ vᵢ vᵢ*` and the quadratic-form
+    nonnegativity of the PSD `E`. -/
+theorem trace_mul_nonneg {N : ℕ} {ρ E : Matrix (Fin N) (Fin N) ℂ}
+    (hρ : ρ.PosSemidef) (hE : E.PosSemidef) : 0 ≤ (ρ * E).trace := by
+  obtain ⟨k, v, hv⟩ := Matrix.posSemidef_iff_eq_sum_vecMulVec.mp hρ
+  rw [hv, Finset.sum_mul, Matrix.trace_sum]
+  refine Finset.sum_nonneg (fun i _ => ?_)
+  rw [trace_vecMulVec_mul_eq]
+  exact hE.dotProduct_mulVec_nonneg (v i)
+
+/-- **Born weights are nonnegative** (`0 ≤ tr(ρ Eₖ)`) for PSD `ρ` and PSD effects. -/
+theorem bornProb_nonneg {ρ : Matrix (Fin d) (Fin d) ℂ} {E : Fin m → Matrix (Fin d) (Fin d) ℂ}
+    (hρ : ρ.PosSemidef) (hE : ∀ k, (E k).PosSemidef) (k : Fin m) :
+    0 ≤ bornProb ρ E k := by
+  have h := trace_mul_nonneg hρ (hE k)
+  simpa [bornProb] using (Complex.le_def.mp h).1
+
 /-- **The Born weights sum to one** (`∑ₖ tr(ρ Eₖ) = tr(ρ·∑E) = tr ρ = 1`), from POVM
     completeness `∑ E = 1` and unit trace `tr ρ = 1`. -/
 theorem bornProb_sum (ρ : Matrix (Fin d) (Fin d) ℂ) (E : Fin m → Matrix (Fin d) (Fin d) ℂ)
@@ -161,26 +188,22 @@ theorem bornProb_sum (ρ : Matrix (Fin d) (Fin d) ℂ) (E : Fin m → Matrix (Fi
   rw [← Complex.re_sum, ← Matrix.trace_sum, ← Finset.mul_sum, hEsum, Matrix.mul_one, hρtr,
     Complex.one_re]
 
-/-- **Quantum Born-typicality for a density matrix + POVM.**  From `ρ` PSD with
-    unit trace and a POVM `E` (each `Eₖ` PSD, `∑ E = 1`), Hermiticity and the
-    normalization `∑ bornProb = 1` are discharged automatically.
-
-    The single residual hypothesis `hp0 : ∀ k, 0 ≤ bornProb ρ E k` (`tr(ρ Eₖ) ≥ 0`)
-    is mathematically a consequence of PSD-ness, but Mathlib (this snapshot) has no
-    direct "trace of a product of two PSD matrices is ≥ 0"; deriving it needs the
-    spectral/`vecMulVec` factorization in `Mathlib.Analysis` (a heavier import) — left
-    as the one residual, flagged honestly. -/
+/-- **Quantum Born-typicality for a genuine density matrix + POVM (no residual).**
+    From `ρ` PSD with unit trace and a POVM `E` (each `Eₖ` PSD, `∑ E = 1`), ALL of
+    Hermiticity, nonnegativity (`0 ≤ tr(ρ Eₖ)`) and normalization (`∑ bornProb = 1`)
+    are discharged: the quantum probability of measuring a frequency `ε`-far from the
+    Born weight `tr(ρ Eₖ)`, over `n` product copies, is `≤ p k·(1−p k)/(n·ε²)`. -/
 theorem quantum_chebyshev_freq_density (ρ : Matrix (Fin d) (Fin d) ℂ)
     (E : Fin m → Matrix (Fin d) (Fin d) ℂ) (hρ : ρ.PosSemidef) (hE : ∀ k, (E k).PosSemidef)
     (hEsum : ∑ k, E k = 1) (hρtr : Matrix.trace ρ = 1)
-    (hp0 : ∀ k, 0 ≤ bornProb ρ E k)
     (k : Fin m) {ε : ℝ} (hε : 0 < ε) (hn : 0 < n) :
     (∑ ω ∈ (univ : Finset (Fin n → Fin m)).filter
         (fun ω => ((n : ℝ) * ε) ^ 2
           ≤ (BornTypicalityFinite.count k ω - (n : ℝ) * bornProb ρ E k) ^ 2),
         quantumWeight ρ E ω).re
       ≤ bornProb ρ E k * (1 - bornProb ρ E k) / ((n : ℝ) * ε ^ 2) :=
-  quantum_chebyshev_freq ρ E hρ.1 (fun k => (hE k).1) hp0 (bornProb_sum ρ E hEsum hρtr) k hε hn
+  quantum_chebyshev_freq ρ E hρ.1 (fun k => (hE k).1) (bornProb_nonneg hρ hE)
+    (bornProb_sum ρ E hEsum hρtr) k hε hn
 
 end BornTypicalityQuantum
 end QIQTH

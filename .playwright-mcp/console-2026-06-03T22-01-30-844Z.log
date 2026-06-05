@@ -1,0 +1,2 @@
+[   16645ms] [ERROR] Access to manifest at 'https://static.arxiv.org/static/base/1.0.0a5/images/icons/site.webmanifest' from origin 'https://arxiv.org' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://arxiv.org/search/?searchtype=all&terms-0-field=abstract&terms-0-term=quantum+Darwinism+redundancy+Holevo:0
+[   16645ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://static.arxiv.org/static/base/1.0.0a5/images/icons/site.webmanifest:0

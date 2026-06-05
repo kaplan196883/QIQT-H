@@ -1,0 +1,48 @@
+- main [ref=e2]:
+  - generic [ref=e4]:
+    - alert [ref=e5]:
+      - paragraph [ref=e6]: Please log in to access this page.
+    - button "Close" [ref=e8] [cursor=pointer]:
+      - generic [ref=e9]: 
+  - generic [ref=e11]:
+    - link "Zenodo" [ref=e13] [cursor=pointer]:
+      - /url: /
+      - img "Zenodo" [ref=e14]
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - heading "Log in to account" [level=1] [ref=e21]
+          - generic [ref=e22]:
+            - link "Sign in with ORCID" [ref=e24] [cursor=pointer]:
+              - /url: /oauth/login/orcid/?next=/uploads/new
+              - text: Sign in with ORCID
+            - link " Sign in with GitHub" [ref=e27] [cursor=pointer]:
+              - /url: /oauth/login/github/?next=/uploads/new
+              - generic [ref=e28]: 
+              - text: Sign in with GitHub
+            - link "Sign in with OpenAIRE" [ref=e30] [cursor=pointer]:
+              - /url: /oauth/login/openaire_aai/?next=/uploads/new
+              - text: Sign in with OpenAIRE
+          - generic [ref=e32]: OR
+          - generic [ref=e33]:
+            - generic [ref=e35]:
+              - generic: 
+              - textbox "Email Address" [active] [ref=e36]
+            - generic [ref=e38]:
+              - generic: 
+              - textbox "Password" [ref=e39]
+            - button "Log in" [ref=e40] [cursor=pointer]:
+              - generic [ref=e41]: 
+              - text: Log in
+        - generic [ref=e42]:
+          - paragraph [ref=e43]:
+            - text: New to Zenodo?
+            - link "Sign up" [ref=e44] [cursor=pointer]:
+              - /url: /signup/
+          - link "Privacy notice" [ref=e45] [cursor=pointer]:
+            - /url: https://about.zenodo.org/privacy-policy/
+      - generic [ref=e46]:
+        - link "Forgot password?" [ref=e48] [cursor=pointer]:
+          - /url: /lost-password/
+        - link "Resend confirmation email" [ref=e50] [cursor=pointer]:
+          - /url: /confirm

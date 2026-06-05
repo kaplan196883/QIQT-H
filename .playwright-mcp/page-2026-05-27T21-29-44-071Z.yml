@@ -1,0 +1,242 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - link "PhilSci Archive":
+          - /url: https://philsci-archive.pitt.edu/
+          - img "PhilSci Archive" [ref=e5] [cursor=pointer]
+      - table [ref=e6]:
+        - rowgroup [ref=e7]:
+          - row "Manage depositsLogged in as Dr Pawel Kaplanski ProfileSaved searchesLogout" [ref=e8]:
+            - cell "Manage depositsLogged in as Dr Pawel Kaplanski ProfileSaved searchesLogout" [ref=e9]:
+              - list [ref=e10]:
+                - listitem [ref=e11]:
+                  - link "Manage deposits" [ref=e12] [cursor=pointer]:
+                    - /url: https://philsci-archive.pitt.edu/cgi/users/home?screen=Items
+                - listitem [ref=e13]:
+                  - text: Logged in as
+                  - generic [ref=e14]: Dr Pawel Kaplanski
+                - listitem [ref=e15]:
+                  - link "Profile" [ref=e16] [cursor=pointer]:
+                    - /url: https://philsci-archive.pitt.edu/cgi/users/home?screen=User%3A%3AView
+                - listitem [ref=e17]:
+                  - link "Saved searches" [ref=e18] [cursor=pointer]:
+                    - /url: https://philsci-archive.pitt.edu/cgi/users/home?screen=User%3A%3ASavedSearches
+                - listitem [ref=e19]:
+                  - link "Logout" [ref=e20] [cursor=pointer]:
+                    - /url: /cgi/logout
+    - generic:
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - heading "Search & Browse" [level=1] [ref=e23]
+          - list [ref=e24]:
+            - listitem [ref=e25]:
+              - link "Advanced Search" [ref=e26] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/cgi/search/advanced
+            - listitem [ref=e27]:
+              - link "Browse by Author" [ref=e28] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/view/creators/
+            - listitem [ref=e29]:
+              - link "Browse by Subject" [ref=e30] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/view/subjects/
+            - listitem [ref=e31]:
+              - link "Browse by Year" [ref=e32] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/view/year/
+            - listitem [ref=e33]:
+              - link "Browse by Conferences/Volumes" [ref=e34] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/view/confandvol/
+            - listitem [ref=e35]:
+              - link "Browse Open Access Journals" [ref=e36] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/journals.html
+            - listitem [ref=e37]:
+              - link "Browse Open Access Books" [ref=e38] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/books.html
+            - listitem [ref=e39]:
+              - link "Latest Additions" [ref=e40] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/cgi/latest_days2?n=30
+            - listitem [ref=e41]:
+              - link "Browse the PhilMath Archive" [ref=e42] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/philmath.html
+        - generic [ref=e43]:
+          - heading "Information" [level=1] [ref=e44]
+          - list [ref=e45]:
+            - listitem [ref=e46]:
+              - link "Home" [ref=e47] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu
+            - listitem [ref=e48]:
+              - link "About the Archive" [ref=e49] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/information.html
+            - listitem [ref=e50]:
+              - link "Archive Policy" [ref=e51] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/policy.html
+            - listitem [ref=e52]:
+              - link "History" [ref=e53] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/history.html
+            - listitem [ref=e54]:
+              - link "Statistics" [ref=e55] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/cgi/stats/report
+            - listitem [ref=e56]:
+              - link "Help" [ref=e57] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/help/
+            - listitem [ref=e58]:
+              - link "FAQ" [ref=e59] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/faq.html
+            - listitem [ref=e60]:
+              - link "Plan S" [ref=e61] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/plans.html
+            - listitem [ref=e62]:
+              - link "Journal Eprint Policies" [ref=e63] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/copyright.html
+            - listitem [ref=e64]:
+              - link "Register" [ref=e65] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/cgi/register
+            - listitem [ref=e66]:
+              - link "Contact Us" [ref=e67] [cursor=pointer]:
+                - /url: mailto:philsci-archive@mail.pitt.edu
+      - table [ref=e69]:
+        - rowgroup [ref=e70]:
+          - row [ref=e71]:
+            - cell [ref=e72]:
+              - 'heading "Edit item: Article #29766" [level=1] [ref=e73]':
+                - text: "Edit item:"
+                - 'link "Article #29766" [ref=e74] [cursor=pointer]':
+                  - /url: "?screen=EPrint::View&eprintid=29766"
+              - generic [ref=e75]:
+                - table [ref=e76]:
+                  - rowgroup [ref=e77]:
+                    - row "Type Details Subjects Upload Deposit" [ref=e78]:
+                      - cell "Type" [ref=e79]:
+                        - button "Type" [ref=e80]
+                      - cell [ref=e81]
+                      - cell "Details" [ref=e82]:
+                        - button "Details" [ref=e83]
+                      - cell [ref=e84]
+                      - cell "Subjects" [ref=e85]:
+                        - button "Subjects" [ref=e86]
+                      - cell [ref=e87]
+                      - cell "Upload" [ref=e88]:
+                        - button "Upload" [ref=e89]
+                      - cell [ref=e90]
+                      - cell "Deposit" [ref=e91]:
+                        - button "Deposit" [ref=e92]
+                - generic [ref=e93]:
+                  - button "Save and Return" [ref=e94] [cursor=pointer]
+                  - button "Cancel" [ref=e95] [cursor=pointer]
+                  - button "Next >" [ref=e96] [cursor=pointer]
+                - generic [ref=e98]:
+                  - table [ref=e100]:
+                    - rowgroup [ref=e101]:
+                      - row "Required Item Type +" [ref=e102]:
+                        - cell "Required Item Type" [ref=e103]:
+                          - generic [ref=e104]:
+                            - img "Required" [ref=e105]
+                            - text: Item Type
+                        - cell "+" [ref=e106]:
+                          - link "+" [ref=e109] [cursor=pointer]:
+                            - /url: "#"
+                            - img "+" [ref=e110]
+                  - generic [ref=e113]:
+                    - term [ref=e114]:
+                      - generic [ref=e115]:
+                        - radio "Preprint A complete, stable draft of a paper or monograph typically prior to publication in the peer-reviewed philosophy of science literature." [ref=e116]
+                        - text: Preprint
+                    - definition [ref=e117]: A complete, stable draft of a paper or monograph typically prior to publication in the peer-reviewed philosophy of science literature.
+                    - term [ref=e118]:
+                      - generic [ref=e119]:
+                        - radio "Conference or Workshop Item A draft of a paper given or to be given at a conference or workshop, which the event organizers have invited you to post under a PhilSci-Archive heading." [ref=e120]
+                        - text: Conference or Workshop Item
+                    - definition [ref=e121]: A draft of a paper given or to be given at a conference or workshop, which the event organizers have invited you to post under a PhilSci-Archive heading.
+                    - term [ref=e122]:
+                      - generic [ref=e123]:
+                        - 'radio "Published Article or Volume A paper or monograph that has been formally published elsewhere. You must provide a link to the published work and give a full citation. You may upload a postprint or journal-formatted PDF if it was published under a Creative Commons license, or if posting is otherwise allowed by the journal. Upon uploading the document, you may wish to set an embargo expiry date: the uploaded document will not be shown until that date has passed. If you have not uploaded a postprint, and if a previous version has not already been posted on PhilSci-Archive, you must upload a full text preprint." [ref=e124]'
+                        - text: Published Article or Volume
+                    - definition [ref=e125]: "A paper or monograph that has been formally published elsewhere. You must provide a link to the published work and give a full citation. You may upload a postprint or journal-formatted PDF if it was published under a Creative Commons license, or if posting is otherwise allowed by the journal. Upon uploading the document, you may wish to set an embargo expiry date: the uploaded document will not be shown until that date has passed. If you have not uploaded a postprint, and if a previous version has not already been posted on PhilSci-Archive, you must upload a full text preprint."
+                    - term [ref=e126]:
+                      - generic [ref=e127]:
+                        - radio "Open Access Book A book or a conference volume." [ref=e128]
+                        - text: Open Access Book
+                    - definition [ref=e129]: A book or a conference volume.
+                    - term [ref=e130]:
+                      - generic [ref=e131]:
+                        - radio "Other Something within the scope of the official PhilSci-Archive Policy, but which is not covered by the other categories." [ref=e132]
+                        - text: Other
+                    - definition [ref=e133]:
+                      - generic [ref=e134]:
+                        - text: Something within the scope of the official
+                        - link "PhilSci-Archive Policy" [ref=e135] [cursor=pointer]:
+                          - /url: /policy.html
+                        - text: ", but which is not covered by the other categories."
+                - generic [ref=e136]:
+                  - button "Save and Return" [ref=e137] [cursor=pointer]
+                  - button "Cancel" [ref=e138] [cursor=pointer]
+                  - button "Next >" [ref=e139] [cursor=pointer]
+  - generic [ref=e140]:
+    - generic:
+      - generic [ref=e141]:
+        - heading "ULS D-Scribe" [level=4] [ref=e142]
+        - link "D-Scribe" [ref=e143] [cursor=pointer]:
+          - /url: http://www.library.pitt.edu/dscribe/
+          - img "D-Scribe" [ref=e144]
+        - paragraph [ref=e145]:
+          - text: This site is hosted by the
+          - link "University Library System" [ref=e146] [cursor=pointer]:
+            - /url: http://www.library.pitt.edu
+          - text: of the
+          - link "University of Pittsburgh" [ref=e147] [cursor=pointer]:
+            - /url: http://www.pitt.edu
+          - text: as part of its
+          - link "D-Scribe Digital Publishing Program" [ref=e148] [cursor=pointer]:
+            - /url: http://www.library.pitt.edu/dscribe/
+      - generic [ref=e149]:
+        - heading "E-Prints" [level=4] [ref=e150]
+        - link "E-Prints" [ref=e151] [cursor=pointer]:
+          - /url: http://eprints.org
+          - img "E-Prints" [ref=e152]
+        - paragraph [ref=e153]:
+          - text: Philsci Archive is powered by
+          - emphasis [ref=e154]:
+            - link "EPrints 3" [ref=e155] [cursor=pointer]:
+              - /url: http://eprints.org/software/
+          - text: which is developed by the
+          - link "School of Electronics and Computer Science" [ref=e156] [cursor=pointer]:
+            - /url: http://www.ecs.soton.ac.uk/
+          - text: at the University of Southampton.
+          - link "More information and software credits" [ref=e157] [cursor=pointer]:
+            - /url: /eprints/
+          - text: .
+      - generic [ref=e158]:
+        - heading "Share" [level=4] [ref=e159]
+        - generic:
+          - generic "More Bookmark and Search Options"
+          - generic "Share on Facebook"
+          - generic "Tweet this on Twitter"
+          - generic "E-Mail this!"
+          - generic "Bookmark this on Google"
+        - heading "Feeds" [level=4] [ref=e160]
+        - paragraph [ref=e161]:
+          - link "[feed]" [ref=e162] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=Atom
+            - img "[feed]" [ref=e163]
+          - link "Atom" [ref=e164] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=Atom
+        - paragraph [ref=e165]:
+          - link "[feed]" [ref=e166] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=RSS
+            - img "[feed]" [ref=e167]
+          - link "RSS 1.0" [ref=e168] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=RSS
+        - paragraph [ref=e169]:
+          - link "[feed]" [ref=e170] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=RSS2
+            - img "[feed]" [ref=e171]
+          - link "RSS 2.0" [ref=e172] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=RSS2
+      - generic [ref=e173]:
+        - heading "Get Alerts for All New Posts" [level=4] [ref=e174]
+        - combobox [ref=e176]:
+          - option "Get daily alerts via:" [selected]
+          - option "E-mail"
+          - option "Facebook Page"
+          - option "Twitter Page"
+        - link "More Subscription Options..." [ref=e177] [cursor=pointer]:
+          - /url: https://philsci-archive.pitt.edu/subscription.html

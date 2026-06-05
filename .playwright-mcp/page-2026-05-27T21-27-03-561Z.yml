@@ -1,0 +1,180 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - link "PhilSci Archive":
+          - /url: https://philsci-archive.pitt.edu/
+          - img "PhilSci Archive" [ref=e5] [cursor=pointer]
+      - table [ref=e6]:
+        - rowgroup [ref=e7]:
+          - row "LoginCreate Account" [ref=e8]:
+            - cell "LoginCreate Account" [ref=e9]:
+              - list [ref=e10]:
+                - listitem [ref=e11]:
+                  - link "Login" [ref=e12] [cursor=pointer]:
+                    - /url: https://philsci-archive.pitt.edu/cgi/users/home
+                - listitem [ref=e13]:
+                  - link "Create Account" [ref=e14] [cursor=pointer]:
+                    - /url: /cgi/register
+    - generic:
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - heading "Search & Browse" [level=1] [ref=e17]
+          - list [ref=e18]:
+            - listitem [ref=e19]:
+              - link "Advanced Search" [ref=e20] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/cgi/search/advanced
+            - listitem [ref=e21]:
+              - link "Browse by Author" [ref=e22] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/view/creators/
+            - listitem [ref=e23]:
+              - link "Browse by Subject" [ref=e24] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/view/subjects/
+            - listitem [ref=e25]:
+              - link "Browse by Year" [ref=e26] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/view/year/
+            - listitem [ref=e27]:
+              - link "Browse by Conferences/Volumes" [ref=e28] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/view/confandvol/
+            - listitem [ref=e29]:
+              - link "Browse Open Access Journals" [ref=e30] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/journals.html
+            - listitem [ref=e31]:
+              - link "Browse Open Access Books" [ref=e32] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/books.html
+            - listitem [ref=e33]:
+              - link "Latest Additions" [ref=e34] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/cgi/latest_days2?n=30
+            - listitem [ref=e35]:
+              - link "Browse the PhilMath Archive" [ref=e36] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/philmath.html
+        - generic [ref=e37]:
+          - heading "Information" [level=1] [ref=e38]
+          - list [ref=e39]:
+            - listitem [ref=e40]:
+              - link "Home" [ref=e41] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu
+            - listitem [ref=e42]:
+              - link "About the Archive" [ref=e43] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/information.html
+            - listitem [ref=e44]:
+              - link "Archive Policy" [ref=e45] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/policy.html
+            - listitem [ref=e46]:
+              - link "History" [ref=e47] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/history.html
+            - listitem [ref=e48]:
+              - link "Statistics" [ref=e49] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/cgi/stats/report
+            - listitem [ref=e50]:
+              - link "Help" [ref=e51] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/help/
+            - listitem [ref=e52]:
+              - link "FAQ" [ref=e53] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/faq.html
+            - listitem [ref=e54]:
+              - link "Plan S" [ref=e55] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/plans.html
+            - listitem [ref=e56]:
+              - link "Journal Eprint Policies" [ref=e57] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/copyright.html
+            - listitem [ref=e58]:
+              - link "Register" [ref=e59] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/cgi/register
+            - listitem [ref=e60]:
+              - link "Contact Us" [ref=e61] [cursor=pointer]:
+                - /url: mailto:philsci-archive@mail.pitt.edu
+      - table [ref=e63]:
+        - rowgroup [ref=e64]:
+          - 'row "Login Please enter your username and password. If you have forgotten your password, you may reset it. Username: Password: Login Note: you must have cookies enabled." [ref=e65]':
+            - 'cell "Login Please enter your username and password. If you have forgotten your password, you may reset it. Username: Password: Login Note: you must have cookies enabled." [ref=e66]':
+              - heading "Login" [level=1] [ref=e67]
+              - generic [ref=e69]:
+                - paragraph [ref=e70]:
+                  - text: Please enter your username and password. If you have forgotten your password, you may
+                  - link "reset" [ref=e71] [cursor=pointer]:
+                    - /url: https://philsci-archive.pitt.edu/cgi/reset_password
+                  - text: it.
+                - table [ref=e72]:
+                  - rowgroup [ref=e73]:
+                    - row "Username:" [ref=e74]:
+                      - cell "Username:" [ref=e75]
+                      - cell [ref=e76]:
+                        - textbox [active] [ref=e77]
+                    - 'row "Password: Login" [ref=e78]':
+                      - cell "Password:" [ref=e79]
+                      - cell [ref=e80]:
+                        - textbox [ref=e81]
+                      - cell "Login" [ref=e82]:
+                        - button "Login" [ref=e83] [cursor=pointer]
+                - paragraph [ref=e84]: "Note: you must have cookies enabled."
+  - generic [ref=e85]:
+    - generic:
+      - generic [ref=e86]:
+        - heading "ULS D-Scribe" [level=4] [ref=e87]
+        - link "D-Scribe" [ref=e88] [cursor=pointer]:
+          - /url: http://www.library.pitt.edu/dscribe/
+          - img "D-Scribe" [ref=e89]
+        - paragraph [ref=e90]:
+          - text: This site is hosted by the
+          - link "University Library System" [ref=e91] [cursor=pointer]:
+            - /url: http://www.library.pitt.edu
+          - text: of the
+          - link "University of Pittsburgh" [ref=e92] [cursor=pointer]:
+            - /url: http://www.pitt.edu
+          - text: as part of its
+          - link "D-Scribe Digital Publishing Program" [ref=e93] [cursor=pointer]:
+            - /url: http://www.library.pitt.edu/dscribe/
+      - generic [ref=e94]:
+        - heading "E-Prints" [level=4] [ref=e95]
+        - link "E-Prints" [ref=e96] [cursor=pointer]:
+          - /url: http://eprints.org
+          - img "E-Prints" [ref=e97]
+        - paragraph [ref=e98]:
+          - text: Philsci Archive is powered by
+          - emphasis [ref=e99]:
+            - link "EPrints 3" [ref=e100] [cursor=pointer]:
+              - /url: http://eprints.org/software/
+          - text: which is developed by the
+          - link "School of Electronics and Computer Science" [ref=e101] [cursor=pointer]:
+            - /url: http://www.ecs.soton.ac.uk/
+          - text: at the University of Southampton.
+          - link "More information and software credits" [ref=e102] [cursor=pointer]:
+            - /url: /eprints/
+          - text: .
+      - generic [ref=e103]:
+        - heading "Share" [level=4] [ref=e104]
+        - generic:
+          - generic "More Bookmark and Search Options"
+          - generic "Share on Facebook"
+          - generic "Tweet this on Twitter"
+          - generic "E-Mail this!"
+          - generic "Bookmark this on Google"
+        - heading "Feeds" [level=4] [ref=e105]
+        - paragraph [ref=e106]:
+          - link "[feed]" [ref=e107] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=Atom
+            - img "[feed]" [ref=e108]
+          - link "Atom" [ref=e109] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=Atom
+        - paragraph [ref=e110]:
+          - link "[feed]" [ref=e111] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=RSS
+            - img "[feed]" [ref=e112]
+          - link "RSS 1.0" [ref=e113] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=RSS
+        - paragraph [ref=e114]:
+          - link "[feed]" [ref=e115] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=RSS2
+            - img "[feed]" [ref=e116]
+          - link "RSS 2.0" [ref=e117] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=RSS2
+      - generic [ref=e118]:
+        - heading "Get Alerts for All New Posts" [level=4] [ref=e119]
+        - combobox [ref=e121]:
+          - option "Get daily alerts via:" [selected]
+          - option "E-mail"
+          - option "Facebook Page"
+          - option "Twitter Page"
+        - link "More Subscription Options..." [ref=e122] [cursor=pointer]:
+          - /url: https://philsci-archive.pitt.edu/subscription.html

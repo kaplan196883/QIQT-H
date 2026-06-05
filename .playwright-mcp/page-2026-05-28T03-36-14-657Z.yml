@@ -1,0 +1,43 @@
+- main [ref=e2]:
+  - generic [ref=e4]:
+    - link "Zenodo" [ref=e6] [cursor=pointer]:
+      - /url: /
+      - img "Zenodo" [ref=e7]
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - heading "Log in to account" [level=1] [ref=e14]
+          - generic [ref=e15]:
+            - link "Sign in with ORCID" [ref=e17] [cursor=pointer]:
+              - /url: /oauth/login/orcid/?next=/
+              - text: Sign in with ORCID
+            - link " Sign in with GitHub" [ref=e20] [cursor=pointer]:
+              - /url: /oauth/login/github/?next=/
+              - generic [ref=e21]: 
+              - text: Sign in with GitHub
+            - link "Sign in with OpenAIRE" [ref=e23] [cursor=pointer]:
+              - /url: /oauth/login/openaire_aai/?next=/
+              - text: Sign in with OpenAIRE
+          - generic [ref=e25]: OR
+          - generic [ref=e26]:
+            - generic [ref=e28]:
+              - generic: 
+              - textbox "Email Address" [active] [ref=e29]
+            - generic [ref=e31]:
+              - generic: 
+              - textbox "Password" [ref=e32]
+            - button "Log in" [ref=e33] [cursor=pointer]:
+              - generic [ref=e34]: 
+              - text: Log in
+        - generic [ref=e35]:
+          - paragraph [ref=e36]:
+            - text: New to Zenodo?
+            - link "Sign up" [ref=e37] [cursor=pointer]:
+              - /url: /signup/
+          - link "Privacy notice" [ref=e38] [cursor=pointer]:
+            - /url: https://about.zenodo.org/privacy-policy/
+      - generic [ref=e39]:
+        - link "Forgot password?" [ref=e41] [cursor=pointer]:
+          - /url: /lost-password/
+        - link "Resend confirmation email" [ref=e43] [cursor=pointer]:
+          - /url: /confirm

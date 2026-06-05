@@ -169,8 +169,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — event-effect form: tr(ρ^⊗ⁿ · F_bad).re ≤ p(1−p)/(nε²)
 #print axioms QIQTH.BornTypicalityQuantum.bornProb_sum
 -- expected: standard only — ∑ₖ bornProb = 1 from POVM completeness + unit trace
+#print axioms QIQTH.BornTypicalityQuantum.trace_vecMulVec_mul_eq
+-- expected: standard only — rank-one trace as quadratic form tr(vv*·E) = v*·(E v)
+#print axioms QIQTH.BornTypicalityQuantum.trace_mul_nonneg
+-- expected: standard only — 0 ≤ tr(ρ·E) for PSD ρ, E (via vecMulVec decomposition)
+#print axioms QIQTH.BornTypicalityQuantum.bornProb_nonneg
+-- expected: standard only — 0 ≤ bornProb for PSD ρ + PSD effects
 #print axioms QIQTH.BornTypicalityQuantum.quantum_chebyshev_freq_density
--- expected: standard only — density/POVM wrapper (Hermiticity + ∑=1 derived; nonneg residual)
+-- expected: standard only — density/POVM wrapper (Hermiticity + nonneg + ∑=1 ALL derived; no residual)
 
 #print axioms QIQTH.FQEquivarianceUniqueness.canonical_ic_measure_principle
 -- expected: standard + 4 acknowledged sub-axioms

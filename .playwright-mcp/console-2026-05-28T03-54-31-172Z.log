@@ -1,0 +1,38 @@
+[    1325ms] [ERROR] Refused to apply style from 'https://zenodo.org/communities/community-theme-.css/' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled. @ https://zenodo.org/uploads/new:0
+[    1624ms] [WARNING] {templateLoaders: Array(3), sections: Array(2), record: Object, children: null, discoverSectionLabel: Domain specific fields} @ https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:1
+[  121474ms] TypeError: Cannot read properties of undefined (reading 'value')
+    at https://zenodo.org/static/dist/js/3502.6db21c9e7bee4870598f.js:1:24549
+    at Object.onAddItem (https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:83121)
+    at r (https://zenodo.org/static/dist/js/2827.8eef3096245254bf123c.js:2:190659)
+    at s (https://zenodo.org/static/dist/js/2827.8eef3096245254bf123c.js:2:207206)
+    at r (https://zenodo.org/static/dist/js/2827.8eef3096245254bf123c.js:2:190693)
+    at https://zenodo.org/static/dist/js/2827.8eef3096245254bf123c.js:2:204088
+    at t.handleItemClick (https://zenodo.org/static/dist/js/8064.5aee4fdd899216392104.js:2:191413)
+    at Object.onClick (https://zenodo.org/static/dist/js/8064.5aee4fdd899216392104.js:2:198224)
+    at r (https://zenodo.org/static/dist/js/2827.8eef3096245254bf123c.js:2:190659)
+    at s (https://zenodo.org/static/dist/js/2827.8eef3096245254bf123c.js:2:207206)
+[  171533ms] TypeError: e.replace is not a function
+    at Pr (https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:905024)
+    at https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:1047531
+    at https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:1048067
+    at H.map (https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:883524)
+    at Fv (https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:1047274)
+    at Object.setContent (https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:1113613)
+    at https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:1127874
+    at https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:1127890
+    at Object.map (https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:965208)
+    at ZC (https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:1127835)
+[  194450ms] [ERROR] UNMOUNTED @ https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:1
+[  194450ms] [ERROR] TypeError: Cannot read properties of undefined (reading 'map')
+    at serializeSubjects (https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:111606)
+    at Fe.executeSearch (https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:85707)
+    at async Fe.searchIfNoSuggestions (https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:85990)
+    at async Fe.onSelectValue (https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:84998) @ https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:1
+[  201692ms] [ERROR] UNMOUNTED @ https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:1
+[  201692ms] [ERROR] TypeError: Cannot read properties of undefined (reading 'map')
+    at serializeSubjects (https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:111606)
+    at Fe.executeSearch (https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:85707)
+    at async Fe.searchIfNoSuggestions (https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:85990)
+    at async Fe.onSelectValue (https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:2:84998) @ https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:1
+[11369733ms] [ERROR] Refused to apply style from 'https://zenodo.org/communities/community-theme-.css/' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled. @ https://zenodo.org/uploads/20422107:0
+[11370234ms] [WARNING] {templateLoaders: Array(3), sections: Array(2), record: Object, children: null, discoverSectionLabel: Domain specific fields} @ https://zenodo.org/static/dist/js/1057.2081eb592a388c85894c.js:1

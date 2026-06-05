@@ -1,0 +1,405 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - link "PhilSci Archive":
+          - /url: https://philsci-archive.pitt.edu/
+          - img "PhilSci Archive" [ref=e5] [cursor=pointer]
+      - table [ref=e6]:
+        - rowgroup [ref=e7]:
+          - row "Manage depositsLogged in as Dr Pawel Kaplanski ProfileSaved searchesLogout" [ref=e8]:
+            - cell "Manage depositsLogged in as Dr Pawel Kaplanski ProfileSaved searchesLogout" [ref=e9]:
+              - list [ref=e10]:
+                - listitem [ref=e11]:
+                  - link "Manage deposits" [ref=e12] [cursor=pointer]:
+                    - /url: https://philsci-archive.pitt.edu/cgi/users/home?screen=Items
+                - listitem [ref=e13]:
+                  - text: Logged in as
+                  - generic [ref=e14]: Dr Pawel Kaplanski
+                - listitem [ref=e15]:
+                  - link "Profile" [ref=e16] [cursor=pointer]:
+                    - /url: https://philsci-archive.pitt.edu/cgi/users/home?screen=User%3A%3AView
+                - listitem [ref=e17]:
+                  - link "Saved searches" [ref=e18] [cursor=pointer]:
+                    - /url: https://philsci-archive.pitt.edu/cgi/users/home?screen=User%3A%3ASavedSearches
+                - listitem [ref=e19]:
+                  - link "Logout" [ref=e20] [cursor=pointer]:
+                    - /url: /cgi/logout
+    - generic:
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - heading "Search & Browse" [level=1] [ref=e23]
+          - list [ref=e24]:
+            - listitem [ref=e25]:
+              - link "Advanced Search" [ref=e26] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/cgi/search/advanced
+            - listitem [ref=e27]:
+              - link "Browse by Author" [ref=e28] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/view/creators/
+            - listitem [ref=e29]:
+              - link "Browse by Subject" [ref=e30] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/view/subjects/
+            - listitem [ref=e31]:
+              - link "Browse by Year" [ref=e32] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/view/year/
+            - listitem [ref=e33]:
+              - link "Browse by Conferences/Volumes" [ref=e34] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/view/confandvol/
+            - listitem [ref=e35]:
+              - link "Browse Open Access Journals" [ref=e36] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/journals.html
+            - listitem [ref=e37]:
+              - link "Browse Open Access Books" [ref=e38] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/books.html
+            - listitem [ref=e39]:
+              - link "Latest Additions" [ref=e40] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/cgi/latest_days2?n=30
+            - listitem [ref=e41]:
+              - link "Browse the PhilMath Archive" [ref=e42] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/philmath.html
+        - generic [ref=e43]:
+          - heading "Information" [level=1] [ref=e44]
+          - list [ref=e45]:
+            - listitem [ref=e46]:
+              - link "Home" [ref=e47] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu
+            - listitem [ref=e48]:
+              - link "About the Archive" [ref=e49] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/information.html
+            - listitem [ref=e50]:
+              - link "Archive Policy" [ref=e51] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/policy.html
+            - listitem [ref=e52]:
+              - link "History" [ref=e53] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/history.html
+            - listitem [ref=e54]:
+              - link "Statistics" [ref=e55] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/cgi/stats/report
+            - listitem [ref=e56]:
+              - link "Help" [ref=e57] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/help/
+            - listitem [ref=e58]:
+              - link "FAQ" [ref=e59] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/faq.html
+            - listitem [ref=e60]:
+              - link "Plan S" [ref=e61] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/plans.html
+            - listitem [ref=e62]:
+              - link "Journal Eprint Policies" [ref=e63] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/copyright.html
+            - listitem [ref=e64]:
+              - link "Register" [ref=e65] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/cgi/register
+            - listitem [ref=e66]:
+              - link "Contact Us" [ref=e67] [cursor=pointer]:
+                - /url: mailto:philsci-archive@mail.pitt.edu
+      - table [ref=e69]:
+        - rowgroup [ref=e70]:
+          - 'row "Manage deposits + Help New Item Import from BibTeX Import Showing User Workarea. Showing Under Review. Showing Live Archive. Showing Retired. Last Modified Down Title Item Type Item Status 27 May 2026 21:36 One Wave Function, One World: Finite-Information Regional Algebras and the Macroscopic World from Holographic Constraint Preprint Under Review View Item X > < X > < X > < X Abstract Add Column" [ref=e71]':
+            - 'cell "Manage deposits + Help New Item Import from BibTeX Import Showing User Workarea. Showing Under Review. Showing Live Archive. Showing Retired. Last Modified Down Title Item Type Item Status 27 May 2026 21:36 One Wave Function, One World: Finite-Information Regional Algebras and the Macroscopic World from Holographic Constraint Preprint Under Review View Item X > < X > < X > < X Abstract Add Column" [ref=e72]':
+              - heading "Manage deposits" [level=1] [ref=e73]
+              - link "+ Help" [ref=e78] [cursor=pointer]:
+                - /url: "#"
+                - img "+" [ref=e79]
+                - text: Help
+              - list [ref=e81]:
+                - listitem [ref=e82]:
+                  - button "New Item" [ref=e84] [cursor=pointer]
+              - table [ref=e86]:
+                - rowgroup [ref=e87]:
+                  - row "Import from BibTeX Import" [ref=e88]:
+                    - cell "Import from BibTeX Import" [ref=e89]:
+                      - text: Import from
+                      - combobox [ref=e90]:
+                        - option "BibTeX" [selected]
+                        - option "DOI (via CrossRef)"
+                        - option "DSpace Metadata"
+                        - option "EPrints XML"
+                        - option "ISI Web of Knowledge"
+                        - option "Microsoft .docx"
+                        - option "PubMed ID"
+                        - option "PubMed XML"
+                      - button "Import" [ref=e91] [cursor=pointer]
+                  - row [ref=e92]:
+                    - cell [ref=e93]
+              - generic [ref=e94]:
+                - link "Showing User Workarea" [ref=e95] [cursor=pointer]:
+                  - /url: /cgi/users/home?set_show_inbox=&_listing_order=eprintid&screen=Items&dataset=eprint
+                  - img "Showing" [ref=e96]
+                  - text: User Workarea
+                - text: .
+                - link "Showing Under Review" [ref=e97] [cursor=pointer]:
+                  - /url: /cgi/users/home?set_show_buffer=&_listing_order=eprintid&screen=Items&dataset=eprint
+                  - img "Showing" [ref=e98]
+                  - text: Under Review
+                - text: .
+                - link "Showing Live Archive" [ref=e99] [cursor=pointer]:
+                  - /url: /cgi/users/home?_listing_order=eprintid&screen=Items&set_show_archive=&dataset=eprint
+                  - img "Showing" [ref=e100]
+                  - text: Live Archive
+                - text: .
+                - link "Showing Retired" [ref=e101] [cursor=pointer]:
+                  - /url: /cgi/users/home?_listing_order=eprintid&screen=Items&dataset=eprint&set_show_deletion=
+                  - img "Showing" [ref=e102]
+                  - text: Retired
+                - text: .
+              - table [ref=e104]:
+                - rowgroup [ref=e105]:
+                  - row "Last Modified Down Title Item Type Item Status" [ref=e106]:
+                    - columnheader "Last Modified Down" [ref=e107]:
+                      - table [ref=e108]:
+                        - rowgroup [ref=e109]:
+                          - row "Last Modified Down" [ref=e110]:
+                            - cell "Last Modified" [ref=e111]:
+                              - link "Last Modified" [ref=e112] [cursor=pointer]:
+                                - /url: /cgi/users/home?screen=Items&_buffer_offset=0&_buffer_order=lastmod
+                            - cell "Down" [ref=e113]:
+                              - link "Down" [ref=e114] [cursor=pointer]:
+                                - /url: /cgi/users/home?screen=Items&_buffer_offset=0&_buffer_order=lastmod
+                                - img "Down" [ref=e115]
+                    - columnheader "Title" [ref=e116]:
+                      - table [ref=e117]:
+                        - rowgroup [ref=e118]:
+                          - row "Title" [ref=e119]:
+                            - cell "Title" [ref=e120]:
+                              - link "Title" [ref=e121] [cursor=pointer]:
+                                - /url: /cgi/users/home?screen=Items&_buffer_offset=0&_buffer_order=title
+                    - columnheader "Item Type" [ref=e122]:
+                      - table [ref=e123]:
+                        - rowgroup [ref=e124]:
+                          - row "Item Type" [ref=e125]:
+                            - cell "Item Type" [ref=e126]:
+                              - link "Item Type" [ref=e127] [cursor=pointer]:
+                                - /url: /cgi/users/home?screen=Items&_buffer_offset=0&_buffer_order=type
+                    - columnheader "Item Status" [ref=e128]:
+                      - table [ref=e129]:
+                        - rowgroup [ref=e130]:
+                          - row "Item Status" [ref=e131]:
+                            - cell "Item Status" [ref=e132]:
+                              - link "Item Status" [ref=e133] [cursor=pointer]:
+                                - /url: /cgi/users/home?screen=Items&_buffer_offset=0&_buffer_order=eprint_status
+                    - columnheader [ref=e134]
+                  - 'row "27 May 2026 21:36 One Wave Function, One World: Finite-Information Regional Algebras and the Macroscopic World from Holographic Constraint Preprint Under Review View Item" [ref=e135]':
+                    - cell "27 May 2026 21:36" [ref=e136]
+                    - 'cell "One Wave Function, One World: Finite-Information Regional Algebras and the Macroscopic World from Holographic Constraint" [ref=e137]'
+                    - cell "Preprint" [ref=e138]
+                    - cell "Under Review" [ref=e139]
+                    - cell "View Item" [ref=e140]:
+                      - list [ref=e141]:
+                        - listitem [ref=e142]:
+                          - link "View Item" [ref=e143] [cursor=pointer]:
+                            - /url: /cgi/users/home?screen=EPrint%3A%3AView&eprintid=29766
+                            - img "View Item" [ref=e144]
+                  - row "X > < X > < X > < X" [ref=e145]:
+                    - cell "X >" [ref=e146]:
+                      - table [ref=e147]:
+                        - rowgroup [ref=e148]:
+                          - row "X >" [ref=e149]:
+                            - cell [ref=e150]
+                            - cell "X" [ref=e151]:
+                              - button "X" [ref=e153] [cursor=pointer]: Remove Column
+                            - cell ">" [ref=e154]:
+                              - button ">" [ref=e156] [cursor=pointer]: Move Right
+                    - cell "< X >" [ref=e157]:
+                      - table [ref=e158]:
+                        - rowgroup [ref=e159]:
+                          - row "< X >" [ref=e160]:
+                            - cell "<" [ref=e161]:
+                              - button "<" [ref=e163] [cursor=pointer]: Move Left
+                            - cell "X" [ref=e164]:
+                              - button "X" [ref=e166] [cursor=pointer]: Remove Column
+                            - cell ">" [ref=e167]:
+                              - button ">" [ref=e169] [cursor=pointer]: Move Right
+                    - cell "< X >" [ref=e170]:
+                      - table [ref=e171]:
+                        - rowgroup [ref=e172]:
+                          - row "< X >" [ref=e173]:
+                            - cell "<" [ref=e174]:
+                              - button "<" [ref=e176] [cursor=pointer]: Move Left
+                            - cell "X" [ref=e177]:
+                              - button "X" [ref=e179] [cursor=pointer]: Remove Column
+                            - cell ">" [ref=e180]:
+                              - button ">" [ref=e182] [cursor=pointer]: Move Right
+                    - cell "< X" [ref=e183]:
+                      - table [ref=e184]:
+                        - rowgroup [ref=e185]:
+                          - row "< X" [ref=e186]:
+                            - cell "<" [ref=e187]:
+                              - button "<" [ref=e189] [cursor=pointer]: Move Left
+                            - cell "X" [ref=e190]:
+                              - button "X" [ref=e192] [cursor=pointer]: Remove Column
+                            - cell [ref=e193]
+                    - cell [ref=e194]
+              - generic [ref=e196]:
+                - combobox [ref=e197]:
+                  - option "Abstract" [selected]
+                  - option "Additional Information"
+                  - option "Alternative Location"
+                  - option "Commentary on"
+                  - option "Commentary on"
+                  - option "Comments and Suggestions"
+                  - option "Completion Time"
+                  - option "Composition Type"
+                  - option "Conference Date"
+                  - option "Conference Location"
+                  - option "Conferences and Volumes"
+                  - option "Contact Email Address"
+                  - 'option "Contributors: Contribution"'
+                  - 'option "Contributors: Email"'
+                  - 'option "Contributors: Name"'
+                  - 'option "Contributors: ORCID <http://orcid.org>"'
+                  - option "Copyright Holders"
+                  - option "Corporate Creators"
+                  - 'option "Creators: Creators"'
+                  - 'option "Creators: Email"'
+                  - 'option "Creators: ORCID <http://orcid.org>"'
+                  - option "DOI or Unique Handle"
+                  - option "Date"
+                  - option "Date Deposited"
+                  - option "Date Type"
+                  - option "Department"
+                  - option "Depositing User"
+                  - option "Divisions"
+                  - 'option "Editors: Editors"'
+                  - 'option "Editors: Email"'
+                  - 'option "Editors: ORCID <http://orcid.org>"'
+                  - option "Event Dates"
+                  - option "Event Location"
+                  - option "Event Title"
+                  - option "Event Type"
+                  - option "Full Text Status"
+                  - option "Funders"
+                  - 'option "Google Scholar: Citations"'
+                  - 'option "Google Scholar: Cluster ID"'
+                  - 'option "Google Scholar: Datestamp"'
+                  - option "ISBN"
+                  - option "ISSN"
+                  - option "Import Collection"
+                  - option "Institution"
+                  - 'option "Issues: Comments"'
+                  - 'option "Issues: Description"'
+                  - 'option "Issues: Issue ID"'
+                  - 'option "Issues: Issue type"'
+                  - 'option "Issues: Reported by"'
+                  - 'option "Issues: Resolved by"'
+                  - 'option "Issues: Status"'
+                  - 'option "Issues: Timestamp"'
+                  - option "Item ID"
+                  - option "Journal or Publication Title"
+                  - option "Keywords"
+                  - option "Last Status Change"
+                  - option "Later Version of"
+                  - option "Latitude"
+                  - option "Learning Level"
+                  - option "Links to files"
+                  - 'option "Lock: Locked by"'
+                  - 'option "Lock: Locked since"'
+                  - 'option "Lock: Locked until"'
+                  - option "Longitude"
+                  - option "Media of Output"
+                  - option "Metadata Visibility"
+                  - option "Monograph Type"
+                  - option "Number"
+                  - option "Number of Pages"
+                  - option "Number of Pieces"
+                  - option "Number of issues"
+                  - option "Official URL"
+                  - option "Page Range"
+                  - option "Patent Applicant"
+                  - option "Pedagogic Type"
+                  - option "Place of Publication"
+                  - option "Presentation Type"
+                  - option "Projects"
+                  - option "Public Domain"
+                  - option "Publisher"
+                  - option "Refereed"
+                  - option "References"
+                  - 'option "Related URLs: URL"'
+                  - 'option "Related URLs: URL Type"'
+                  - 'option "Relationships: Relation type"'
+                  - 'option "Relationships: Target identifier"'
+                  - option "Revision"
+                  - option "SWORD Depositor"
+                  - option "SWORD Slug"
+                  - option "Series Name"
+                  - option "Skill Areas"
+                  - option "Source"
+                  - option "Status"
+                  - option "Subjects"
+                  - option "Task Purpose"
+                  - option "Thesis Name"
+                  - option "Thesis Type"
+                  - option "Title of Book"
+                  - option "Type of Data"
+                  - option "Volume"
+                - button "Add Column" [ref=e198] [cursor=pointer]
+  - generic [ref=e199]:
+    - generic:
+      - generic [ref=e200]:
+        - heading "ULS D-Scribe" [level=4] [ref=e201]
+        - link "D-Scribe" [ref=e202] [cursor=pointer]:
+          - /url: http://www.library.pitt.edu/dscribe/
+          - img "D-Scribe" [ref=e203]
+        - paragraph [ref=e204]:
+          - text: This site is hosted by the
+          - link "University Library System" [ref=e205] [cursor=pointer]:
+            - /url: http://www.library.pitt.edu
+          - text: of the
+          - link "University of Pittsburgh" [ref=e206] [cursor=pointer]:
+            - /url: http://www.pitt.edu
+          - text: as part of its
+          - link "D-Scribe Digital Publishing Program" [ref=e207] [cursor=pointer]:
+            - /url: http://www.library.pitt.edu/dscribe/
+      - generic [ref=e208]:
+        - heading "E-Prints" [level=4] [ref=e209]
+        - link "E-Prints" [ref=e210] [cursor=pointer]:
+          - /url: http://eprints.org
+          - img "E-Prints" [ref=e211]
+        - paragraph [ref=e212]:
+          - text: Philsci Archive is powered by
+          - emphasis [ref=e213]:
+            - link "EPrints 3" [ref=e214] [cursor=pointer]:
+              - /url: http://eprints.org/software/
+          - text: which is developed by the
+          - link "School of Electronics and Computer Science" [ref=e215] [cursor=pointer]:
+            - /url: http://www.ecs.soton.ac.uk/
+          - text: at the University of Southampton.
+          - link "More information and software credits" [ref=e216] [cursor=pointer]:
+            - /url: /eprints/
+          - text: .
+      - generic [ref=e217]:
+        - heading "Share" [level=4] [ref=e218]
+        - generic:
+          - generic "More Bookmark and Search Options"
+          - generic "Share on Facebook"
+          - generic "Tweet this on Twitter"
+          - generic "E-Mail this!"
+          - generic "Bookmark this on Google"
+        - heading "Feeds" [level=4] [ref=e219]
+        - paragraph [ref=e220]:
+          - link "[feed]" [ref=e221] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=Atom
+            - img "[feed]" [ref=e222]
+          - link "Atom" [ref=e223] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=Atom
+        - paragraph [ref=e224]:
+          - link "[feed]" [ref=e225] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=RSS
+            - img "[feed]" [ref=e226]
+          - link "RSS 1.0" [ref=e227] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=RSS
+        - paragraph [ref=e228]:
+          - link "[feed]" [ref=e229] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=RSS2
+            - img "[feed]" [ref=e230]
+          - link "RSS 2.0" [ref=e231] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=RSS2
+      - generic [ref=e232]:
+        - heading "Get Alerts for All New Posts" [level=4] [ref=e233]
+        - combobox [ref=e235]:
+          - option "Get daily alerts via:" [selected]
+          - option "E-mail"
+          - option "Facebook Page"
+          - option "Twitter Page"
+        - link "More Subscription Options..." [ref=e236] [cursor=pointer]:
+          - /url: https://philsci-archive.pitt.edu/subscription.html

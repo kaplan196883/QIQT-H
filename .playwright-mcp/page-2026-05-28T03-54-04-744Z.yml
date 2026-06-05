@@ -1,0 +1,113 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e4]:
+    - navigation [ref=e7]:
+      - link "Zenodo home" [ref=e9] [cursor=pointer]:
+        - /url: /
+        - img "Zenodo home" [ref=e10]
+      - button "Menu" [ref=e12] [cursor=pointer]
+      - text:                        
+  - main [ref=e14]:
+    - generic [ref=e16]:
+      - region "Information banner"
+      - generic [ref=e19]:
+        - article [ref=e20]:
+          - button " Manage record" [ref=e23] [cursor=pointer]:
+            - generic [ref=e24]: 
+            - text: Manage record
+          - region "Publication date and version number" [ref=e25]:
+            - generic [ref=e27]:
+              - generic [ref=e28]: Published May 25, 2026 | Version v1
+              - generic [ref=e29]:
+                - note "Resource type" [ref=e30]: Preprint
+                - note "Access status" [ref=e31]:
+                  - generic [ref=e32]: 
+                  - text: Open
+          - region "Record title, authors and contributors" [ref=e34]:
+            - 'heading "One Wave Function, One World: Finite-Information Regional Algebras and the Macroscopic World from Holographic Constraint" [level=1] [ref=e35]'
+            - region "Authors and contributors" [ref=e36]:
+              - generic [ref=e38]:
+                - generic [ref=e39]:
+                  - heading "Authors/Creators" [level=3] [ref=e40]
+                  - list [ref=e41]:
+                    - listitem [ref=e42]:
+                      - link "Kapłański, Paweł1" [ref=e43] [cursor=pointer]:
+                        - /url: /search?q=metadata.creators.person_or_org.name:%22Kap%C5%82a%C5%84ski,+Pawe%C5%82%22
+                        - text: Kapłański, Paweł
+                        - superscript [ref=e44]: "1"
+                      - link "Kapłański, Paweł's ORCID profile" [ref=e45] [cursor=pointer]:
+                        - /url: https://orcid.org/0000-0003-2223-0870
+                        - img "ORCID icon"
+                - button "Show affiliations" [ref=e47] [cursor=pointer]
+          - region "Files" [ref=e48]:
+            - heading "Files" [level=2] [ref=e49]
+            - generic [ref=e50]:
+              - heading "File preview" [level=3] [ref=e51] [cursor=pointer]:
+                - button "File preview" [expanded] [ref=e52]:
+                  - text: QIQT_Foundations_Paper.pdf
+                  - generic [ref=e53]: 
+              - region "File preview" [ref=e54]:
+                - iframe [ref=e56]:
+                  - generic [ref=f16e6]:
+                    - generic [ref=f16e7]:
+                      - button "Previous" [ref=f16e9]
+                      - spinbutton "Page" [ref=f16e12]: "1"
+                      - button "Next" [ref=f16e14]
+                    - generic [ref=f16e15]:
+                      - button "Zoom Out" [ref=f16e17]
+                      - combobox "Zoom" [ref=f16e19]:
+                        - option "Automatic Zoom" [selected]
+                        - option "Actual Size"
+                        - option "Page Fit"
+                        - option "Page Width"
+                        - option "50%"
+                        - option "75%"
+                        - option "100%"
+                        - option "125%"
+                        - option "150%"
+                        - option "200%"
+                        - option "300%"
+                        - option "400%"
+                      - button "Zoom In" [ref=f16e21]
+                    - generic [ref=f16e22]:
+                      - button "Download" [ref=f16e24]
+                      - button "Toggle Fullscreen Mode" [ref=f16e26]
+            - generic [ref=e57]:
+              - heading "Files (633.6 kB)" [level=3] [ref=e58] [cursor=pointer]:
+                - button "Files (633.6 kB)" [expanded] [ref=e59]:
+                  - text: Files (633.6 kB)
+                  - generic [ref=e60]: 
+              - region "Files (633.6 kB)" [ref=e61]:
+                - table [ref=e63]:
+                  - text: 
+                  - rowgroup [ref=e64]:
+                    - row "QIQT_Foundations_Paper.pdf md5:ae3251fa2da27180c3bb9e5130ba43b4  633.6 kB Preview Download" [ref=e65]:
+                      - cell "QIQT_Foundations_Paper.pdf md5:ae3251fa2da27180c3bb9e5130ba43b4 " [ref=e66]:
+                        - link "QIQT_Foundations_Paper.pdf" [ref=e68] [cursor=pointer]:
+                          - /url: /records/20422040/files/QIQT_Foundations_Paper.pdf?download=1
+                        - generic [ref=e69]:
+                          - text: md5:ae3251fa2da27180c3bb9e5130ba43b4
+                          - generic [ref=e71]: 
+                      - cell "633.6 kB" [ref=e72]
+                      - cell "Preview Download" [ref=e73]:
+                        - generic [ref=e74]:
+                          - button "Preview" [ref=e75] [cursor=pointer]:
+                            - generic [ref=e76]: 
+                            - text: Preview
+                          - button "Download" [ref=e77] [cursor=pointer]:
+                            - generic [ref=e78]: 
+                            - text: Download
+          - region "Additional record details" [ref=e79]:
+            - heading "Additional details" [level=2] [ref=e80]
+            - generic [ref=e82]:
+              - heading "Related works" [level=3] [ref=e84]
+              - generic [ref=e86]:
+                - term [ref=e87]: Is identical to
+                - definition [ref=e88]:
+                  - text: "Preprint:"
+                  - link "https://philsci-archive.pitt.edu/id/eprint/29766" [ref=e89] [cursor=pointer]:
+                    - /url: https://philsci-archive.pitt.edu/id/eprint/29766
+                  - text: (URL)
+          - region "Record citations"
+        - complementary "Record details"

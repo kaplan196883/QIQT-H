@@ -1,0 +1,229 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - link "PhilSci Archive":
+          - /url: https://philsci-archive.pitt.edu/
+          - img "PhilSci Archive" [ref=e5] [cursor=pointer]
+      - table [ref=e6]:
+        - rowgroup [ref=e7]:
+          - row "Manage depositsLogged in as Dr Pawel Kaplanski ProfileSaved searchesLogout" [ref=e8]:
+            - cell "Manage depositsLogged in as Dr Pawel Kaplanski ProfileSaved searchesLogout" [ref=e9]:
+              - list [ref=e10]:
+                - listitem [ref=e11]:
+                  - link "Manage deposits" [ref=e12] [cursor=pointer]:
+                    - /url: https://philsci-archive.pitt.edu/cgi/users/home?screen=Items
+                - listitem [ref=e13]:
+                  - text: Logged in as
+                  - generic [ref=e14]: Dr Pawel Kaplanski
+                - listitem [ref=e15]:
+                  - link "Profile" [ref=e16] [cursor=pointer]:
+                    - /url: https://philsci-archive.pitt.edu/cgi/users/home?screen=User%3A%3AView
+                - listitem [ref=e17]:
+                  - link "Saved searches" [ref=e18] [cursor=pointer]:
+                    - /url: https://philsci-archive.pitt.edu/cgi/users/home?screen=User%3A%3ASavedSearches
+                - listitem [ref=e19]:
+                  - link "Logout" [ref=e20] [cursor=pointer]:
+                    - /url: /cgi/logout
+    - generic:
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - heading "Search & Browse" [level=1] [ref=e23]
+          - list [ref=e24]:
+            - listitem [ref=e25]:
+              - link "Advanced Search" [ref=e26] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/cgi/search/advanced
+            - listitem [ref=e27]:
+              - link "Browse by Author" [ref=e28] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/view/creators/
+            - listitem [ref=e29]:
+              - link "Browse by Subject" [ref=e30] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/view/subjects/
+            - listitem [ref=e31]:
+              - link "Browse by Year" [ref=e32] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/view/year/
+            - listitem [ref=e33]:
+              - link "Browse by Conferences/Volumes" [ref=e34] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/view/confandvol/
+            - listitem [ref=e35]:
+              - link "Browse Open Access Journals" [ref=e36] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/journals.html
+            - listitem [ref=e37]:
+              - link "Browse Open Access Books" [ref=e38] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/books.html
+            - listitem [ref=e39]:
+              - link "Latest Additions" [ref=e40] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/cgi/latest_days2?n=30
+            - listitem [ref=e41]:
+              - link "Browse the PhilMath Archive" [ref=e42] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/philmath.html
+        - generic [ref=e43]:
+          - heading "Information" [level=1] [ref=e44]
+          - list [ref=e45]:
+            - listitem [ref=e46]:
+              - link "Home" [ref=e47] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu
+            - listitem [ref=e48]:
+              - link "About the Archive" [ref=e49] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/information.html
+            - listitem [ref=e50]:
+              - link "Archive Policy" [ref=e51] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/policy.html
+            - listitem [ref=e52]:
+              - link "History" [ref=e53] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/history.html
+            - listitem [ref=e54]:
+              - link "Statistics" [ref=e55] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/cgi/stats/report
+            - listitem [ref=e56]:
+              - link "Help" [ref=e57] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/help/
+            - listitem [ref=e58]:
+              - link "FAQ" [ref=e59] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/faq.html
+            - listitem [ref=e60]:
+              - link "Plan S" [ref=e61] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/plans.html
+            - listitem [ref=e62]:
+              - link "Journal Eprint Policies" [ref=e63] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/copyright.html
+            - listitem [ref=e64]:
+              - link "Register" [ref=e65] [cursor=pointer]:
+                - /url: https://philsci-archive.pitt.edu/cgi/register
+            - listitem [ref=e66]:
+              - link "Contact Us" [ref=e67] [cursor=pointer]:
+                - /url: mailto:philsci-archive@mail.pitt.edu
+      - table [ref=e69]:
+        - rowgroup [ref=e70]:
+          - 'row "Edit item: One Wave Function, One World: How the Holographic Information Bound Selects the Macroscopic World Type Details Subjects Upload Deposit < Previous Save and Return Cancel Next > Add a new document To upload a document to this repository, click the Browse button below to select the file and the Upload button to upload it to the archive. You may then add additional files to the document (such as images for HTML files) or upload more files to create additional documents. You may wish to use the SHERPA RoMEO tool to verify publisher policies before depositing. File From URL Choose File C:\\fakepath\\QIQT_Position_Paper.pdf Cancel < Previous Save and Return Cancel Next >" [ref=e162]':
+            - 'cell "Edit item: One Wave Function, One World: How the Holographic Information Bound Selects the Macroscopic World Type Details Subjects Upload Deposit < Previous Save and Return Cancel Next > Add a new document To upload a document to this repository, click the Browse button below to select the file and the Upload button to upload it to the archive. You may then add additional files to the document (such as images for HTML files) or upload more files to create additional documents. You may wish to use the SHERPA RoMEO tool to verify publisher policies before depositing. File From URL Choose File C:\\fakepath\\QIQT_Position_Paper.pdf Cancel < Previous Save and Return Cancel Next >" [ref=e163]':
+              - 'heading "Edit item: One Wave Function, One World: How the Holographic Information Bound Selects the Macroscopic World" [level=1] [ref=e73]':
+                - text: "Edit item:"
+                - 'link "One Wave Function, One World: How the Holographic Information Bound Selects the Macroscopic World" [ref=e74] [cursor=pointer]':
+                  - /url: "?screen=EPrint::View&eprintid=29767"
+              - generic [ref=e75]:
+                - table [ref=e76]:
+                  - rowgroup [ref=e77]:
+                    - row "Type Details Subjects Upload Deposit" [ref=e78]:
+                      - cell "Type" [ref=e79]:
+                        - button "Type" [ref=e80]
+                      - cell [ref=e81]
+                      - cell "Details" [ref=e82]:
+                        - button "Details" [ref=e83]
+                      - cell [ref=e84]
+                      - cell "Subjects" [ref=e85]:
+                        - button "Subjects" [ref=e86]
+                      - cell [ref=e87]
+                      - cell "Upload" [ref=e88]:
+                        - button "Upload" [ref=e89]
+                      - cell [ref=e90]
+                      - cell "Deposit" [ref=e91]:
+                        - button "Deposit" [ref=e92]
+                - generic [ref=e93]:
+                  - button "< Previous" [ref=e94] [cursor=pointer]
+                  - button "Save and Return" [ref=e95] [cursor=pointer]
+                  - button "Cancel" [ref=e96] [cursor=pointer]
+                  - button "Next >" [ref=e97] [cursor=pointer]
+                - generic [ref=e99]:
+                  - generic [ref=e101]: Add a new document
+                  - generic [ref=e103]:
+                    - generic [ref=e105]:
+                      - paragraph [ref=e106]: To upload a document to this repository, click the Browse button below to select the file and the Upload button to upload it to the archive. You may then add additional files to the document (such as images for HTML files) or upload more files to create additional documents.
+                      - paragraph [ref=e107]:
+                        - text: You may wish to use the
+                        - link "SHERPA RoMEO" [ref=e108] [cursor=pointer]:
+                          - /url: http://www.sherpa.ac.uk/romeo.php
+                        - text: tool to verify publisher policies before depositing.
+                    - list:
+                      - listitem [ref=e109]:
+                        - link "File" [ref=e110] [cursor=pointer]:
+                          - /url: /cgi/users/home?screen=EPrint%3A%3AEdit&eprintid=29767&stage=files&c9_current=0
+                      - listitem [ref=e111]:
+                        - link "From URL" [ref=e112] [cursor=pointer]:
+                          - /url: /cgi/users/home?screen=EPrint%3A%3AEdit&eprintid=29767&stage=files&c9_current=1
+                    - generic [ref=e116]:
+                      - button "Choose File" [active] [ref=e117]
+                      - table [ref=e164]:
+                        - row "C:\\fakepath\\QIQT_Position_Paper.pdf Cancel" [ref=e165]:
+                          - cell "C:\\fakepath\\QIQT_Position_Paper.pdf" [ref=e166]
+                          - cell [ref=e167]
+                          - cell [ref=e168]
+                          - cell [ref=e169]
+                          - iframe
+                          - cell "Cancel" [ref=e170]:
+                            - button "Cancel" [ref=e171] [cursor=pointer]
+                - generic [ref=e119]:
+                  - button "< Previous" [ref=e120] [cursor=pointer]
+                  - button "Save and Return" [ref=e121] [cursor=pointer]
+                  - button "Cancel" [ref=e122] [cursor=pointer]
+                  - button "Next >" [ref=e123] [cursor=pointer]
+  - generic [ref=e124]:
+    - generic:
+      - generic [ref=e125]:
+        - heading "ULS D-Scribe" [level=4] [ref=e126]
+        - link "D-Scribe" [ref=e127] [cursor=pointer]:
+          - /url: http://www.library.pitt.edu/dscribe/
+          - img "D-Scribe" [ref=e128]
+        - paragraph [ref=e129]:
+          - text: This site is hosted by the
+          - link "University Library System" [ref=e130] [cursor=pointer]:
+            - /url: http://www.library.pitt.edu
+          - text: of the
+          - link "University of Pittsburgh" [ref=e131] [cursor=pointer]:
+            - /url: http://www.pitt.edu
+          - text: as part of its
+          - link "D-Scribe Digital Publishing Program" [ref=e132] [cursor=pointer]:
+            - /url: http://www.library.pitt.edu/dscribe/
+      - generic [ref=e133]:
+        - heading "E-Prints" [level=4] [ref=e134]
+        - link "E-Prints" [ref=e135] [cursor=pointer]:
+          - /url: http://eprints.org
+          - img "E-Prints" [ref=e136]
+        - paragraph [ref=e137]:
+          - text: Philsci Archive is powered by
+          - emphasis [ref=e138]:
+            - link "EPrints 3" [ref=e139] [cursor=pointer]:
+              - /url: http://eprints.org/software/
+          - text: which is developed by the
+          - link "School of Electronics and Computer Science" [ref=e140] [cursor=pointer]:
+            - /url: http://www.ecs.soton.ac.uk/
+          - text: at the University of Southampton.
+          - link "More information and software credits" [ref=e141] [cursor=pointer]:
+            - /url: /eprints/
+          - text: .
+      - generic [ref=e142]:
+        - heading "Share" [level=4] [ref=e143]
+        - generic:
+          - generic "More Bookmark and Search Options"
+          - generic "Share on Facebook"
+          - generic "Tweet this on Twitter"
+          - generic "E-Mail this!"
+          - generic "Bookmark this on Google"
+        - heading "Feeds" [level=4] [ref=e144]
+        - paragraph [ref=e145]:
+          - link "[feed]" [ref=e146] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=Atom
+            - img "[feed]" [ref=e147]
+          - link "Atom" [ref=e148] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=Atom
+        - paragraph [ref=e149]:
+          - link "[feed]" [ref=e150] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=RSS
+            - img "[feed]" [ref=e151]
+          - link "RSS 1.0" [ref=e152] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=RSS
+        - paragraph [ref=e153]:
+          - link "[feed]" [ref=e154] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=RSS2
+            - img "[feed]" [ref=e155]
+          - link "RSS 2.0" [ref=e156] [cursor=pointer]:
+            - /url: /cgi/latest_tool?output=RSS2
+      - generic [ref=e157]:
+        - heading "Get Alerts for All New Posts" [level=4] [ref=e158]
+        - combobox [ref=e160]:
+          - option "Get daily alerts via:" [selected]
+          - option "E-mail"
+          - option "Facebook Page"
+          - option "Twitter Page"
+        - link "More Subscription Options..." [ref=e161] [cursor=pointer]:
+          - /url: https://philsci-archive.pitt.edu/subscription.html
