@@ -129,6 +129,17 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — step1 now takes the Schur form as a supplied hypothesis
 -- (no axiom); step3 is also proved.  (Callers discharge step1 via schur_classification_real.)
 
+#print axioms QIQTH.GoldsteinStruyveFinDim.step3_tensor_narrowing
+-- expected: standard only — honest tensor narrowing (independent composite coefficient α')
+
+-- ── Regression suite (non-vacuity + countermodels) ────────────────
+#print axioms QIQTH.GoldsteinStruyveModels.canonical_principle_nonvacuous
+-- expected: standard only — identity witnesses ALL hypotheses of the flagship (non-vacuous)
+#print axioms QIQTH.GoldsteinStruyveModels.imaginaryId_not_hermitianPreserving
+-- expected: standard only — i·id rejected by IsHermitianPreserving
+#print axioms QIQTH.GoldsteinStruyveModels.depolarizing_not_nonDegenerate
+-- expected: standard only — trace-depolarizing rejected by IsNonDegenerate
+
 #print axioms QIQTH.FQEquivarianceUniqueness.canonical_ic_measure_principle
 -- expected: standard + 4 acknowledged sub-axioms
 
