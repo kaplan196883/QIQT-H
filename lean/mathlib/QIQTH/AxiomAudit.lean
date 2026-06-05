@@ -153,6 +153,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — Chebyshev concentration: P((count−Np)² ≥ (Nε)²) ≤ E[(count−Np)²]/(Nε)²
 #print axioms QIQTH.BornTypicalityFinite.marginal2
 -- expected: standard only — two-coordinate marginal (covariance structure; p k if s=s', p k² else)
+#print axioms QIQTH.BornTypicalityFinite.variance_count
+-- expected: standard only — Var = N·p k·(1−p k) (binomial variance)
+#print axioms QIQTH.BornTypicalityFinite.chebyshev_freq
+-- expected: standard only — CLEAN typicality bound: P(|freq−p k| ≥ ε) ≤ p k(1−p k)/(Nε²)
 
 #print axioms QIQTH.FQEquivarianceUniqueness.canonical_ic_measure_principle
 -- expected: standard + 4 acknowledged sub-axioms

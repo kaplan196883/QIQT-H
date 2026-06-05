@@ -14,17 +14,17 @@
 
   For the QIQT-H reading, `p k = tr(ρ E_k)` (Born weights of a finite POVM):
   the canonical product measure assigns those weights as the expected
-  frequencies.  We also prove the CONCENTRATION direction:
+  frequencies.  We also prove the full CONCENTRATION direction:
 
-    • `markov_le`        finite Markov inequality for the product measure;
-    • `chebyshev_count`  Chebyshev: the weight of the deviation event
-                         `(count − N·p k)² ≥ (N·ε)²` (i.e. `|freq − p k| ≥ ε`)
-                         is `≤ E[(count − N·p k)²] / (N·ε)²`.
+    • `marginal2`/`expectation_count_sq`/`variance_count`  the binomial variance
+                         `E[(count − N·p k)²] = N·p k·(1 − p k)`;
+    • `markov_le`/`chebyshev_count`  finite Markov / Chebyshev on the squared deviation;
+    • `chebyshev_freq`   the CLEAN typicality bound: the weight of `|freq − p k| ≥ ε`
+                         is `≤ p k·(1 − p k) / (N·ε²)`.
 
-  With `expectation_count` (`E[count] = N·p k`), the second-moment numerator is
-  the variance; computing it to `N·p k·(1 − p k)` (needs the two-coordinate
-  marginal) yields the standard `p(1−p)/(Nε²)` typicality bound — the last
-  remaining step.
+  So `P(|freq − p k| ≥ ε) → 0` as `N → ∞`: empirical frequencies are typically the
+  Born weights.  This is the genuine finite content that the vacuous
+  `BornTypicality.LLN_typicality_axiom` (`∃ N, True`) only gestured at.
 -/
 
 import Mathlib.Algebra.BigOperators.Ring.Finset
@@ -32,6 +32,8 @@ import Mathlib.Algebra.Order.BigOperators.GroupWithZero.Finset
 import Mathlib.Algebra.Order.BigOperators.Group.Finset
 import Mathlib.Data.Fintype.BigOperators
 import Mathlib.Data.Complex.Basic
+import Mathlib.Tactic.FieldSimp
+import Mathlib.Tactic.Ring
 
 namespace QIQTH
 namespace BornTypicalityFinite
@@ -148,6 +150,27 @@ theorem expectation_count (p : Fin m → ℝ) (hp1 : ∑ i, p i = 1) (k : Fin m)
   simp_rw [marginal p hp1 k]
   rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
 
+/-- **Second moment of the empirical count:** `E[count² ] = ∑_{s,s'} two-coordinate
+    marginal` — the double sum of `marginal2`. -/
+theorem expectation_count_sq (p : Fin m → ℝ) (hp1 : ∑ i, p i = 1) (k : Fin m) :
+    ∑ ω : Fin N → Fin m, w p ω * (count k ω) ^ 2
+      = ∑ s : Fin N, ∑ s' : Fin N, (if s = s' then p k else p k * p k) := by
+  have expand : ∀ ω : Fin N → Fin m, w p ω * (count k ω) ^ 2
+      = ∑ s : Fin N, ∑ s' : Fin N,
+          (∏ t, p (ω t)) * (if ω s = k then (1 : ℝ) else 0) * (if ω s' = k then (1 : ℝ) else 0) := by
+    intro ω
+    rw [sq, count, Finset.sum_mul_sum, Finset.mul_sum]
+    refine Finset.sum_congr rfl (fun s _ => ?_)
+    rw [Finset.mul_sum]
+    refine Finset.sum_congr rfl (fun s' _ => ?_)
+    simp only [w]; ring
+  simp_rw [expand]
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl (fun s _ => ?_)
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl (fun s' _ => ?_)
+  exact marginal2 p hp1 k s s'
+
 /-- **Finite Markov inequality** for the product measure: for a nonnegative
     observable `g` and threshold `c > 0`, the weight of `{g ≥ c}` is at most
     `E[g] / c`. -/
@@ -183,6 +206,48 @@ theorem chebyshev_count (p : Fin m → ℝ) (hp : ∀ i, 0 ≤ p i) (k : Fin m)
       (fun ω _ _ => mul_nonneg (w_nonneg p hp ω) (sq_nonneg _)))
   rw [Finset.mem_filter] at hω
   exact mul_le_mul_of_nonneg_left hω.2 (w_nonneg p hp ω)
+
+/-- **Variance of the empirical count:** `E[(count − N·p k)²] = N · p k · (1 − p k)`
+    (binomial variance — diagonal terms `N·p` minus the `N²p²` from the mean,
+    plus the off-diagonal `N(N−1)p²`). -/
+theorem variance_count (p : Fin m → ℝ) (hp1 : ∑ i, p i = 1) (k : Fin m) :
+    ∑ ω : Fin N → Fin m, w p ω * (count k ω - (N : ℝ) * p k) ^ 2
+      = (N : ℝ) * p k * (1 - p k) := by
+  -- evaluate the double sum of `marginal2`
+  have hds : (∑ s : Fin N, ∑ s' : Fin N, (if s = s' then p k else p k * p k))
+      = (N : ℝ) * ((N : ℝ) * (p k * p k) + (p k - p k * p k)) := by
+    have hinner : ∀ s : Fin N, (∑ s' : Fin N, (if s = s' then p k else p k * p k))
+        = (N : ℝ) * (p k * p k) + (p k - p k * p k) := by
+      intro s
+      have hrw : ∀ s' : Fin N, (if s = s' then p k else p k * p k)
+          = p k * p k + (if s = s' then (p k - p k * p k) else 0) := by
+        intro s'; by_cases h : s = s' <;> simp [h]
+      simp_rw [hrw, Finset.sum_add_distrib, Finset.sum_const, Finset.card_univ,
+        Fintype.card_fin, nsmul_eq_mul]
+      rw [Finset.sum_ite_eq univ s (fun _ => p k - p k * p k), if_pos (mem_univ s)]
+    simp_rw [hinner, Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
+  -- expand the squared deviation and substitute the three moments
+  have hpt : ∀ ω : Fin N → Fin m, w p ω * (count k ω - (N : ℝ) * p k) ^ 2
+      = w p ω * (count k ω) ^ 2 - 2 * ((N : ℝ) * p k) * (w p ω * count k ω)
+          + ((N : ℝ) * p k) ^ 2 * w p ω := fun ω => by ring
+  simp_rw [hpt]
+  rw [Finset.sum_add_distrib, Finset.sum_sub_distrib, ← Finset.mul_sum, ← Finset.mul_sum,
+    expectation_count p hp1 k, sum_w_eq_one p hp1, expectation_count_sq p hp1 k, hds]
+  ring
+
+/-- **Clean Chebyshev typicality bound:** the weight of `|freq − p k| ≥ ε` is at most
+    `p k (1 − p k) / (N ε²)`.  This is the finite, quantitative form of "empirical
+    frequencies are typically the Born weights" — replacing the vacuous
+    `LLN_typicality_axiom` placeholder. -/
+theorem chebyshev_freq (p : Fin m → ℝ) (hp : ∀ i, 0 ≤ p i) (hp1 : ∑ i, p i = 1)
+    (k : Fin m) {ε : ℝ} (hε : 0 < ε) (hN : 0 < N) :
+    (∑ ω ∈ (univ : Finset (Fin N → Fin m)).filter
+          (fun ω => ((N : ℝ) * ε) ^ 2 ≤ (count k ω - (N : ℝ) * p k) ^ 2), w p ω)
+      ≤ p k * (1 - p k) / ((N : ℝ) * ε ^ 2) := by
+  refine (chebyshev_count p hp k hε hN).trans (le_of_eq ?_)
+  rw [variance_count p hp1 k]
+  have hNr : (N : ℝ) ≠ 0 := by exact_mod_cast hN.ne'
+  rw [mul_pow]; field_simp
 
 end BornTypicalityFinite
 end QIQTH
