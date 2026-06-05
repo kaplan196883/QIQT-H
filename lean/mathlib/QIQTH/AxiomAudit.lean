@@ -139,6 +139,8 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — i·id rejected by IsHermitianPreserving
 #print axioms QIQTH.GoldsteinStruyveModels.depolarizing_not_nonDegenerate
 -- expected: standard only — trace-depolarizing rejected by IsNonDegenerate
+#print axioms QIQTH.GoldsteinStruyveModels.conjTranspose_not_isLinear
+-- expected: standard only — conjugate-transpose rejected by IsLinear (certifies ℂ-linearity)
 
 #print axioms QIQTH.FQEquivarianceUniqueness.canonical_ic_measure_principle
 -- expected: standard + 4 acknowledged sub-axioms

@@ -86,5 +86,22 @@ theorem depolarizing_not_nonDegenerate {d : ℕ} (hd : 1 < d) :
   apply hne
   simp [schurForm, hP]
 
+/-- Conjugate-transpose `A ↦ Aᴴ` (= `star`) is NOT `IsLinear` — it is only
+    REAL-linear (`star (c • A) = conj c • star A`).  This certifies that
+    `IsLinear` is genuine ℂ-linearity; were it merely real-linear, this
+    transpose countermodel would slip into Step 1 (it is unitary-equivariant
+    and Hermitian-preserving). -/
+theorem conjTranspose_not_isLinear {d : ℕ} (hd : 1 < d) :
+    ¬ IsLinear (fun A => star A : DensityFunctional d) := by
+  haveI : NeZero d := ⟨by omega⟩
+  intro h
+  have hcon := h Complex.I 0 (single 0 0 1) 0
+  simp only [zero_smul, add_zero, smul_zero] at hcon
+  have h00 := congrFun (congrFun hcon 0) 0
+  simp only [Matrix.star_apply, Matrix.smul_apply, Matrix.single_apply_same, smul_eq_mul,
+    mul_one, star_one] at h00
+  rw [show star Complex.I = -Complex.I from by simp, Complex.ext_iff] at h00
+  norm_num at h00
+
 end GoldsteinStruyveModels
 end QIQTH
