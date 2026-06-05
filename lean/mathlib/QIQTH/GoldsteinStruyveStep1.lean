@@ -803,6 +803,75 @@ theorem diag_image_eq {d : ℕ} (D : GoldsteinStruyveFinDim.DensityFunctional d)
       matrixUnit_at_other d i i k l (fun hc => hkl (hc.1.trans hc.2.symm)), mul_zero]
     exact diag_support_of_unitary_equivariant D h_uniteq hkl
 
+/-- **PROVED — complex Schur classification (the assembly).**  Every
+    ℂ-linear, unitary-equivariant `D` on `d×d` matrices (`d ≥ 2`) has the
+    form `D A = c_off · A + c_rest · (tr A) · 1` for some `c_off, c_rest : ℂ`.
+    (The REAL-coefficient `schurForm` requires additionally
+    `IsHermitianPreserving`; see `schur_classification_real`.) -/
+theorem schur_assembly_complex
+    {d : ℕ} (hd : 1 < d) (D : GoldsteinStruyveFinDim.DensityFunctional d)
+    (h_lin : GoldsteinStruyveFinDim.IsLinear D)
+    (h_uniteq : GoldsteinStruyveFinDim.IsUnitaryEquivariant D) :
+    ∃ co cr : ℂ, ∀ A : Matrix (Fin d) (Fin d) ℂ,
+      D A = co • A + cr • (Matrix.trace A • (1 : Matrix (Fin d) (Fin d) ℂ)) := by
+  have hsmul : ∀ (c : ℂ) (X : Matrix (Fin d) (Fin d) ℂ), D (c • X) = c • D X := by
+    intro c X; have := h_lin c 0 X X; simpa using this
+  have hadd : ∀ X Y : Matrix (Fin d) (Fin d) ℂ, D (X + Y) = D X + D Y := by
+    intro X Y; have := h_lin 1 1 X Y; simpa using this
+  haveI : NeZero d := ⟨by omega⟩
+  have h01 : (0 : Fin d) ≠ 1 := by
+    apply Fin.ne_of_val_ne
+    rw [Fin.val_zero, Fin.val_one', Nat.mod_eq_of_lt hd]; omega
+  haveI : Nontrivial (Fin d) := ⟨0, 1, h01⟩
+  obtain ⟨co, cd, hoff, hdiag⟩ := coeff_collapse hd D h_uniteq
+  obtain ⟨cr, _cd', hrest, _hdiag'⟩ := diag_coeff_collapse hd D h_uniteq
+  have hrel : cd - cr = co := by
+    have h := hadamard_relation D h_lin h_uniteq h01
+    rw [hoff 0 1 h01, hdiag 0, hrest 0 1 h01] at h; exact h.symm
+  -- unified image of every matrix unit
+  have himg : ∀ i j : Fin d, D (matrixUnit d i j)
+      = co • matrixUnit d i j + (if i = j then cr • (1 : Matrix (Fin d) (Fin d) ℂ) else 0) := by
+    intro i j
+    by_cases hij : i = j
+    · subst hij
+      rw [if_pos rfl]
+      obtain ⟨k, hk⟩ := exists_ne i
+      rw [diag_image_eq D h_uniteq hk, hrest i k (Ne.symm hk), hdiag i, hrel, add_comm]
+    · rw [if_neg hij, add_zero, offdiag_eq_smul D h_lin h_uniteq hij, hoff i j hij]
+  refine ⟨co, cr, fun A => ?_⟩
+  -- decomposition A = ∑∑ A i j • E_ij
+  have hconv : ∀ i j : Fin d, Matrix.single i j (A i j) = A i j • matrixUnit d i j := fun i j => by
+    rw [matrixUnit_eq_single, Matrix.smul_single, smul_eq_mul, mul_one]
+  have hA : A = ∑ i, ∑ j, A i j • matrixUnit d i j := by
+    conv_lhs => rw [matrix_eq_sum_single A]
+    simp_rw [hconv]
+  -- push D through the sum
+  have hD : ∀ (s : Finset (Fin d)) (f : Fin d → Matrix (Fin d) (Fin d) ℂ),
+      D (∑ x ∈ s, f x) = ∑ x ∈ s, D (f x) :=
+    fun s f => map_sum (AddMonoidHom.mk' D hadd) f s
+  have key : D A = ∑ i, ∑ j, A i j • D (matrixUnit d i j) := by
+    conv_lhs => rw [hA]
+    rw [hD]
+    simp_rw [hD, hsmul]
+  rw [key]
+  simp_rw [himg, smul_add, Finset.sum_add_distrib]
+  -- first block → co • A, second block → cr • (tr A • 1)
+  have hfst : (∑ i, ∑ j, A i j • (co • matrixUnit d i j)) = co • A := by
+    conv_rhs => rw [hA]
+    rw [Finset.smul_sum]
+    simp_rw [Finset.smul_sum, smul_comm co]
+  have hsnd : (∑ i, ∑ j, A i j • (if i = j then cr • (1 : Matrix (Fin d) (Fin d) ℂ) else 0))
+      = cr • (Matrix.trace A • (1 : Matrix (Fin d) (Fin d) ℂ)) := by
+    simp_rw [smul_ite, smul_zero, Finset.sum_ite_eq, Finset.mem_univ, if_true, smul_smul]
+    rw [← Finset.sum_smul]
+    congr 1
+    rw [← Finset.sum_mul, Matrix.trace]
+    simp_rw [Matrix.diag_apply]
+    rw [mul_comm]
+  rw [hfst, hsnd]
+
+/- ── Honest residual interface ────────────────────────────────────── -/
+
 /- ── Honest residual interface ────────────────────────────────────── -/
 
 /-  The earlier version of this module carried five placeholder
