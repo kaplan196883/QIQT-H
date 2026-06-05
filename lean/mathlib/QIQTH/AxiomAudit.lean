@@ -627,6 +627,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PointerValue.existsUnique_actualHistory
 -- expected: standard only — unique actual pointer-value history over n trials
 
+-- QIQT-H PRIZE BRIDGE C2: one-site Born (vector valuation = Born weight).
+#print axioms QIQTH.OneSiteBorn.vectorState_eq_weight
+-- expected: standard only — ν_ψ(Eᵣ) = ‖Eᵣψ‖² = weight (one-site Born calibration)
+#print axioms QIQTH.OneSiteBorn.bornVec_sum
+-- expected: standard only — Born weights are a probability vector (sum = 1)
+
 -- QIQT-H TIER B: the bridge theorem (Spectrum Broadcast Structures, information cost).
 #print axioms QIQTH.SBSBridge.fragment_finrank_ge
 -- expected: standard only — distinguishability ⇒ fragment dimension ≥ n (orthonormal).
