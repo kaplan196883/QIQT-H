@@ -100,6 +100,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GoldsteinStruyveFinDim.step2_normalization
 -- expected: standard only — concrete Matrix.trace computation
 
+#print axioms QIQTH.GoldsteinStruyveStep1.schur_classification_real
+-- expected: standard only — step1 Schur classification, FULLY PROVED (axiom retired 2026-06)
+
 #print axioms QIQTH.GoldsteinStruyveFinDim.step3_tensor_multiplicativity
 -- expected: standard only — traceless-Z (diag 1,−1) Kronecker entry computation
 -- (formerly an axiom; PROVED 2026-06, retiring it: budget 37→36)
@@ -123,8 +126,8 @@ namespace QIQTH.AxiomAudit
 -- These SHOULD show their interface dependencies; that is expected.
 
 #print axioms QIQTH.GoldsteinStruyveFinDim.goldstein_struyve_findim
--- expected: standard + step1_schur_classification + step3_tensor_multiplicativity
--- (the two acknowledged interface axioms)
+-- expected: standard only — step1 now takes the Schur form as a supplied hypothesis
+-- (no axiom); step3 is also proved.  (Callers discharge step1 via schur_classification_real.)
 
 #print axioms QIQTH.FQEquivarianceUniqueness.canonical_ic_measure_principle
 -- expected: standard + 4 acknowledged sub-axioms

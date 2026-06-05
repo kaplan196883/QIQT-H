@@ -55,6 +55,7 @@
 -/
 
 import QIQTH.GoldsteinStruyveFinDim
+import QIQTH.GoldsteinStruyveStep1
 
 namespace QIQTH
 namespace FQEquivarianceUniqueness
@@ -137,7 +138,8 @@ theorem goldstein_struyve_qiqth_proved
     (h_nondegen : IsNonDegenerate D) :
     D = canonicalDensity d :=
   GoldsteinStruyveFinDim.goldstein_struyve_findim d hd D
-    h_linear h_uniteq h_herm h_norm h_tensor h_nondegen
+    (GoldsteinStruyveStep1.schur_classification_real hd D h_linear h_uniteq h_herm)
+    h_norm h_tensor h_nondegen
 
 /-- **The QIQT-H Canonical IC Measure Principle (final form).**
 

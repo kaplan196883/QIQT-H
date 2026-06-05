@@ -127,38 +127,20 @@ def IsUnitaryEquivariant (D : DensityFunctional d) : Prop :=
 def IsHermitianPreserving (D : DensityFunctional d) : Prop :=
   ∀ ρ : Matrix (Fin d) (Fin d) ℂ, star ρ = ρ → star (D ρ) = D ρ
 
-/-- **Step 1 (axiom) — Schur classification.**
+/-  **Step 1 — Schur classification — RETIRED as an axiom (2026-06).**
 
-    Any linear, unitary-equivariant density functional on
-    `d × d` complex matrices (`d ≥ 2`) is of the Schur form
-    `D = α · canonical + β · uniform` for some `α, β : ℝ`.
+    Previously the interface axiom `step1_schur_classification`
+    (`IsLinear` + `IsUnitaryEquivariant` + `IsHermitianPreserving D` ⇒
+    `∃ α β : ℝ, D = schurForm α β`).  It is now **fully PROVED**, axiom-free, in
+    `GoldsteinStruyveStep1.schur_classification_real` (via the permutation /
+    diagonal-character support steps, the Hadamard relation, the linear assembly,
+    and the `IsHermitianPreserving` reality argument).  `goldstein_struyve_findim`
+    below therefore takes the Schur form as a supplied hypothesis `h_schur`, which
+    its consumers discharge with that theorem — no axiom remains on this path.
 
-    *Proof outline (per GPT-5.5-pro recommendation):*
-      1. Extend D to a complex-linear map T on all complex matrices.
-      2. Diagonal unitaries ⇒ T preserves the matrix-unit basis E_ij.
-      3. Permutation unitaries ⇒ T acts with one scalar on all off-
-         diagonal E_ij.
-      4. Hadamard 2-rotation ⇒ T acts with one scalar on diagonal
-         differences E_ii − E_jj.
-      5. T(I) is unitary-invariant ⇒ scalar multiple of I.
-      Hence T(A) = α · A + β · trace(A) · I/d.
-      Restrict to Hermitian sub-vector-space (real α, β).
-
-    This is 2-5 weeks of Lean work per GPT estimate; axiomatized here
-    at the interface layer.
-
-    *Soundness (2026-06):* the `h_herm : IsHermitianPreserving D` hypothesis is
-    REQUIRED.  Without it the statement is inconsistent — `D = (ρ ↦ i·ρ)` is
-    `IsLinear` and `IsUnitaryEquivariant` but is not `@schurForm d α β` for any
-    real `α, β` (compare the `(0,1)` entry: `i` vs the real `α`), so the bare
-    axiom yields `False`.  `IsHermitianPreserving` excludes exactly such maps
-    (`i·id` sends Hermitian `H` to the anti-Hermitian `i·H`) and is the genuine
-    reality condition of step 1e.  See [[feedback_axiom_budget_blind_spot]]. -/
-axiom step1_schur_classification (d : ℕ) (hd : 1 < d)
-    (D : DensityFunctional d)
-    (h_lin : IsLinear D) (h_uniteq : IsUnitaryEquivariant D)
-    (h_herm : IsHermitianPreserving D) :
-    ∃ α β : ℝ, D = @schurForm d α β
+    NOTE: the `h_herm` reality condition is genuinely required; without it the
+    real-coefficient statement is inconsistent (`D = (ρ ↦ i·ρ)` is a
+    counterexample). -/
 
 /- ── Step 3 (axiomatized): tensor multiplicativity narrowing ─────── -/
 
@@ -296,15 +278,14 @@ theorem step4_nondegeneracy
 theorem goldstein_struyve_findim
     (d : ℕ) (hd : 1 < d)
     (D : DensityFunctional d)
-    (h_lin : IsLinear D)
-    (h_uniteq : IsUnitaryEquivariant D)
-    (h_herm : IsHermitianPreserving D)
+    (h_schur : ∃ α β : ℝ, D = @schurForm d α β)
     (h_norm : IsNormalized D)
     (h_tensor : ∀ Dd2, IsTensorMultiplicative D Dd2)
     (h_nondegen : IsNonDegenerate D) :
     D = canonicalD := by
-  -- Step 1: Schur classification.
-  obtain ⟨α, β, h_schur⟩ := step1_schur_classification d hd D h_lin h_uniteq h_herm
+  -- Step 1: Schur classification (now supplied as a PROVED fact, not an axiom —
+  -- see `GoldsteinStruyveStep1.schur_classification_real`).
+  obtain ⟨α, β, h_schur⟩ := h_schur
   -- Substitute D = schurForm α β throughout.
   rw [h_schur]
   rw [h_schur] at h_norm h_tensor h_nondegen
