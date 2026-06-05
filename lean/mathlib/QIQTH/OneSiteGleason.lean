@@ -38,7 +38,15 @@ variable {d : ℕ}
     outcome probabilities `m.μ(Pₐ)` are the Born weights `Re tr(ρ Pₐ)` of a density matrix `ρ`
     — DERIVED from the effect-Gleason theorem, not assumed.  This is the honest content behind
     `BornJoin.oneSite`: the single-trial law is Born because any non-contextual normalized
-    additive assignment is (finite effect-Gleason). -/
+    additive assignment is (finite effect-Gleason).
+
+    HONEST CAVEAT (GPT-5.5-pro verification): the premise `EffectMeasure` is STRONG — precisely a
+    normalized, positive, finitely-additive (on coexistent effects) state on the whole quantum
+    effect algebra.  "Non-contextuality" is fair only with that qualifier (probability of an effect
+    depends on the operator, not the POVM context, plus coarse-graining additivity).  It is not
+    syntactically Born (no ρ/trace assumed) — effect-Gleason is the real engine — but it is a
+    genuine assumption, not a triviality.  For a measurement one also reads `∑ₐ Pₐ = 1` (used in
+    `forced_isProbVector`); here only `IsEffect (Pₐ)` is needed for the Born form per outcome. -/
 theorem oneSite_forced (m : EffectMeasure d) {ι : Type*}
     (P : ι → Matrix (Fin d) (Fin d) ℂ) (hP : ∀ a, IsEffect (P a)) :
     ∃ ρ : Matrix (Fin d) (Fin d) ℂ, ρ.PosSemidef ∧ ρ.trace = 1 ∧

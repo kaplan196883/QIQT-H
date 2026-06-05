@@ -62,13 +62,16 @@ theorem finite_noCollapseBorn_fromNoncontextuality (E : ActualEnsemble m n)
   obtain ⟨huniq, hpush, htyp⟩ := E.finite_noCollapseBornRepresentation k hε hn
   exact ⟨ρ, hpos, htr, huniq, hborn, hpush, htyp⟩
 
-/-- **No-collapse Born representation tied to a concrete density matrix (`hcal` discharged).**
-    Same conclusion as `finite_noCollapseBorn_fromNoncontextuality`, but the abstract
-    non-contextual assignment `M` and the calibration `hcal` are DISCHARGED via the concrete
-    `traceEffectMeasure ρ` — so the only quantum input is `hp` ("the ensemble's single-trial law
-    IS the Born weight of the density matrix `ρ`"), which is exactly the (motivated) claim that
-    the experimentally prepared state's statistics are `tr(ρ·)`.  No abstract `EffectMeasure` is
-    assumed; non-contextuality is instantiated by an actual quantum state. -/
+/-- **No-collapse Born representation tied to a concrete density matrix (interface, not a
+    reduction).**  Same conclusion as `finite_noCollapseBorn_fromNoncontextuality` with `M`,
+    `hcal` discharged via `traceEffectMeasure ρ`; the only quantum input is `hp` (the single-trial
+    law IS `tr(ρ Pₐ)`).  HONEST CAVEAT (GPT-5.5-pro verification): as a standalone Born DERIVATION
+    this trace path is CIRCULAR — `traceEffectMeasure ρ` is built FROM `ρ` via the Born formula
+    and Gleason then recovers a density matrix, so `hp` already asserts `p` is Born.  This is an
+    INTERFACE/specialization theorem (convenient when the state is known), NOT an assumption
+    reduction.  The genuine reduction is the non-trace path `ensemble_p_isBorn` /
+    `finite_noCollapseBorn_fromNoncontextuality`, where `M` is an INDEPENDENTLY given non-contextual
+    effect measure and Born is forced by effect-Gleason. -/
 theorem finite_noCollapseBorn_trace (E : ActualEnsemble m n)
     (ρ : Matrix (Fin d) (Fin d) ℂ) (hρ : ρ.PosSemidef) (htrρ : ρ.trace = 1)
     (P : Fin m → Matrix (Fin d) (Fin d) ℂ) (hP : ∀ a, IsEffect (P a))
