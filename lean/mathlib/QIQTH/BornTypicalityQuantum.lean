@@ -23,6 +23,7 @@ import Mathlib.Data.Complex.Basic
 import Mathlib.Data.Complex.BigOperators
 import Mathlib.Analysis.Complex.Order
 import Mathlib.Analysis.InnerProductSpace.Positive
+import Mathlib.Algebra.Star.BigOperators
 import QIQTH.BornTypicalityFinite
 
 namespace QIQTH
@@ -60,6 +61,20 @@ theorem kronN_mul (A B : Fin n → Matrix (Fin d) (Fin d) ℂ) :
 theorem trace_kronN_mul (A B : Fin n → Matrix (Fin d) (Fin d) ℂ) :
     (kronN A * kronN B).trace = ∏ t, (A t * B t).trace := by
   rw [kronN_mul, trace_kronN]
+
+/-- **`kronN` commutes with conjugate transpose:** `(⊗ₜ A t)ᴴ = ⊗ₜ (A t)ᴴ`. -/
+theorem kronN_conjTranspose (A : Fin n → Matrix (Fin d) (Fin d) ℂ) :
+    (kronN A)ᴴ = kronN (fun t => (A t)ᴴ) := by
+  ext x y
+  simp only [Matrix.conjTranspose_apply, kronN, star_prod]
+
+/-- A product tensor of Hermitian matrices is Hermitian. -/
+theorem kronN_isHermitian (A : Fin n → Matrix (Fin d) (Fin d) ℂ)
+    (hA : ∀ t, (A t).IsHermitian) : (kronN A).IsHermitian := by
+  rw [Matrix.IsHermitian, kronN_conjTranspose]
+  congr 1
+  funext t
+  exact hA t
 
 /- ── Born weights and the quantum→classical bridge ────────────────── -/
 

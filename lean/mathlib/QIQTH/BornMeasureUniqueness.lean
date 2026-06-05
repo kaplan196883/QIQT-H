@@ -73,6 +73,24 @@ theorem bornMeasure_univ (hp1 : ∑ k, bornProb ρ E k = 1) :
     bornMeasure ρ E (univ : Finset (Fin n → Fin m)) = 1 :=
   BornTypicalityFinite.sum_w_eq_one (bornProb ρ E) hp1
 
+/-- **The selector measure is nonnegative:** `0 ≤ λ(S)` for a density matrix `ρ`
+    (PSD) and PSD effects.  This is the substantive positivity of the *measure* — the
+    Born product weights `∏ₜ tr(ρ E_{ωₜ})` are nonnegative — and does NOT depend on
+    formalizing tensor-PSD of the effects `F_ω`. -/
+theorem bornMeasure_nonneg (hρ : ρ.PosSemidef) (hE : ∀ k, (E k).PosSemidef)
+    (S : Finset (Fin n → Fin m)) : 0 ≤ bornMeasure ρ E S :=
+  Finset.sum_nonneg (fun ω _ =>
+    BornTypicalityFinite.w_nonneg _ (fun k => bornProb_nonneg hρ hE k) ω)
+
+/-- **The product-history event effects are self-adjoint:** `F_S = ∑_{ω∈S} ⊗ₜ E(ωₜ)`
+    is Hermitian when the single-trial effects are.  (Completeness `∑_ω F_ω = 1` is
+    `eventEffect_univ`.) -/
+theorem eventEffect_isHermitian (hE : ∀ k, (E k).IsHermitian) (S : Finset (Fin n → Fin m)) :
+    (eventEffect E S).IsHermitian := by
+  rw [Matrix.IsHermitian, eventEffect, Matrix.conjTranspose_sum]
+  exact Finset.sum_congr rfl (fun ω _ =>
+    (kronN_isHermitian (fun t => E (ω t)) (fun t => hE (ω t))))
+
 /-- **λ equals the trace functional** `tr(ρ^⊗ⁿ · F_S)` for a Hermitian state and
     Hermitian effects (Born weights real). -/
 theorem bornMeasure_eq_trace (hρ : ρ.IsHermitian) (hE : ∀ k, (E k).IsHermitian)
@@ -84,10 +102,13 @@ theorem bornMeasure_eq_trace (hρ : ρ.IsHermitian) (hE : ∀ k, (E k).IsHermiti
     ← Complex.ofReal_sum, Complex.ofReal_re]
   rfl
 
-/-- **The product-history effects form a POVM:** `∑_ω ⊗ₜ E(ωₜ) = 1` on the n-fold
+/-- **Completeness of the product-history effects:** `∑_ω ⊗ₜ E(ωₜ) = 1` on the n-fold
     product space, from completeness `∑ₖ Eₖ = 1` of the single-trial POVM.  (Same
     product/sum interchange — `Finset.prod_univ_sum` — that makes the product weights
-    a probability distribution.) -/
+    a probability distribution.)  This is the completeness half of the POVM property;
+    self-adjointness of each `F_ω` is `eventEffect_isHermitian`, and positivity of each
+    `F_ω = ⊗ₜ E(ωₜ)` is the standard tensor-of-PSD fact (not formalized here — it is
+    NOT needed for the measure's positivity, which is `bornMeasure_nonneg` directly). -/
 theorem eventEffect_univ (hEsum : ∑ k, E k = 1) :
     eventEffect E (univ : Finset (Fin n → Fin m))
       = (1 : Matrix (Fin n → Fin d) (Fin n → Fin d) ℂ) := by
@@ -152,6 +173,87 @@ theorem product_born_measure_unique
   intro S
   rw [hμ S]
   exact bornMeasure_eq_trace ρ E hρ.1 (fun k => (hE k).1) S
+
+/-! ### Deriving the product marginals from explicit independence
+
+  `product_born_measure_unique` takes the single-history weights `μ{ω} = ∏ₜ tr(ρ E_{ωₜ})`
+  as a hypothesis (`hpt`), which silently bundles TWO things: the single-trial Born
+  values, and their *independent* combination across trials.  GPT-5.5-pro's review
+  correctly flagged that this hides the independence assumption.  The following makes
+  it explicit: `hpt` is DERIVED from (a) the single-trial cylinder values
+  `μ(η t = k) = tr(ρ Eₖ)` and (b) an explicit cylinder-independence principle.  This
+  is necessary — single-trial marginals alone do NOT force the product (a maximally
+  correlated measure has the same marginals), so the independence input is real and
+  must appear somewhere; here it is named, not buried. -/
+
+/-- Cylinder event: histories fixed to `ω` on the coordinate set `s` (free elsewhere). -/
+def cyl (s : Finset (Fin n)) (ω : Fin n → Fin m) : Finset (Fin n → Fin m) :=
+  univ.filter (fun η => ∀ t ∈ s, η t = ω t)
+
+/-- Single-coordinate cylinder: histories with `η t = k`. -/
+def cylAt (t : Fin n) (k : Fin m) : Finset (Fin n → Fin m) :=
+  univ.filter (fun η => η t = k)
+
+theorem cyl_empty_eq_univ (ω : Fin n → Fin m) :
+    cyl (∅ : Finset (Fin n)) ω = univ := by
+  rw [cyl]
+  exact Finset.filter_true_of_mem (fun η _ t ht => by simp at ht)
+
+theorem cyl_univ_eq_singleton (ω : Fin n → Fin m) :
+    cyl (univ : Finset (Fin n)) ω = {ω} := by
+  rw [cyl]
+  ext η
+  simp only [Finset.mem_filter, Finset.mem_univ, true_and, Finset.mem_singleton]
+  constructor
+  · intro h; funext t; exact h t trivial
+  · intro h t _; rw [h]
+
+/-- **Cylinder weights factor:** under single-trial values `hone` and explicit
+    independence `hind`, `μ(cyl s ω) = ∏_{t ∈ s} tr(ρ E_{ωₜ})`.  (Induction on `s`.) -/
+theorem cyl_prod (μ : Finset (Fin n → Fin m) → ℝ)
+    (hμuniv : μ (univ : Finset (Fin n → Fin m)) = 1)
+    (hone : ∀ t k, μ (cylAt t k) = bornProb ρ E k)
+    (hind : ∀ (s : Finset (Fin n)) (t : Fin n) (ω : Fin n → Fin m), t ∉ s →
+      μ (cyl (insert t s) ω) = μ (cylAt t (ω t)) * μ (cyl s ω))
+    (ω : Fin n → Fin m) :
+    ∀ s : Finset (Fin n), μ (cyl s ω) = ∏ t ∈ s, bornProb ρ E (ω t) := by
+  intro s
+  induction s using Finset.induction with
+  | empty => rw [cyl_empty_eq_univ, hμuniv, Finset.prod_empty]
+  | insert t0 s ht0 ih =>
+      rw [hind s t0 ω ht0, hone t0 (ω t0), ih, Finset.prod_insert ht0]
+
+/-- **The product marginals, derived.**  `μ{ω} = ∏ₜ tr(ρ E_{ωₜ})` follows from the
+    single-trial Born values and explicit cylinder independence — the `hpt` of
+    `product_born_measure_unique` is no longer a free assumption. -/
+theorem hpt_of_cylinder_independence (μ : Finset (Fin n → Fin m) → ℝ)
+    (hμuniv : μ (univ : Finset (Fin n → Fin m)) = 1)
+    (hone : ∀ t k, μ (cylAt t k) = bornProb ρ E k)
+    (hind : ∀ (s : Finset (Fin n)) (t : Fin n) (ω : Fin n → Fin m), t ∉ s →
+      μ (cyl (insert t s) ω) = μ (cylAt t (ω t)) * μ (cyl s ω)) :
+    ∀ ω, μ {ω} = ∏ t, bornProb ρ E (ω t) := by
+  intro ω
+  have h := cyl_prod ρ E μ hμuniv hone hind ω univ
+  rwa [cyl_univ_eq_singleton ω] at h
+
+/-- **λ-identification with independence made explicit (the honest form).**  For a
+    density matrix `ρ` + POVM `E`, ANY finitely-additive history measure `μ` that is
+    normalized, has single-trial Born marginals `μ(η t = k) = tr(ρ Eₖ)`, and combines
+    trials independently (cylinder factorization `hind`) MUST equal the trace
+    functional `tr(ρ^⊗ⁿ · F_S)`.  Independence is now a NAMED, motivated input — not
+    smuggled into a product-marginal hypothesis. -/
+theorem product_born_measure_unique_of_independent_trials
+    (hρ : ρ.PosSemidef) (hE : ∀ k, (E k).PosSemidef)
+    (μ : Finset (Fin n → Fin m) → ℝ)
+    (hμ0 : μ ∅ = 0)
+    (hμins : ∀ a (S : Finset (Fin n → Fin m)), a ∉ S → μ (insert a S) = μ {a} + μ S)
+    (hμuniv : μ (univ : Finset (Fin n → Fin m)) = 1)
+    (hone : ∀ t k, μ (cylAt t k) = bornProb ρ E k)
+    (hind : ∀ (s : Finset (Fin n)) (t : Fin n) (ω : Fin n → Fin m), t ∉ s →
+      μ (cyl (insert t s) ω) = μ (cylAt t (ω t)) * μ (cyl s ω)) :
+    ∀ S, μ S = (kronN (fun _ : Fin n => ρ) * eventEffect E S).trace.re :=
+  product_born_measure_unique ρ E hρ hE μ hμ0 hμins
+    (hpt_of_cylinder_independence ρ E μ hμuniv hone hind)
 
 /-- **Non-vacuity witness.**  The product Born measure ITSELF satisfies the
     hypotheses of `product_born_measure_unique` (additivity + Born product marginals),

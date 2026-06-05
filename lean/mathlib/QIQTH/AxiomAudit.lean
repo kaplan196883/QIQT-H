@@ -198,6 +198,18 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — λ-IDENTIFICATION: product Born measure forced = trace functional
 #print axioms QIQTH.BornMeasureUniqueness.bornMeasure_satisfies_hyps
 -- expected: standard only — non-vacuity witness for the λ-identification
+#print axioms QIQTH.BornTypicalityQuantum.kronN_conjTranspose
+-- expected: standard only — (⊗ₜ A)ᴴ = ⊗ₜ Aᴴ
+#print axioms QIQTH.BornTypicalityQuantum.kronN_isHermitian
+-- expected: standard only — tensor of Hermitian is Hermitian
+#print axioms QIQTH.BornMeasureUniqueness.bornMeasure_nonneg
+-- expected: standard only — 0 ≤ λ(S) (measure positivity from bornProb_nonneg)
+#print axioms QIQTH.BornMeasureUniqueness.eventEffect_isHermitian
+-- expected: standard only — product-history event effects are self-adjoint
+#print axioms QIQTH.BornMeasureUniqueness.hpt_of_cylinder_independence
+-- expected: standard only — product marginals DERIVED from explicit cylinder independence
+#print axioms QIQTH.BornMeasureUniqueness.product_born_measure_unique_of_independent_trials
+-- expected: standard only — λ-identification with independence made an explicit named input
 
 #print axioms QIQTH.FQEquivarianceUniqueness.canonical_ic_measure_principle
 -- expected: standard + 4 acknowledged sub-axioms
