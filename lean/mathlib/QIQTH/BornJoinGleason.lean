@@ -62,4 +62,28 @@ theorem finite_noCollapseBorn_fromNoncontextuality (E : ActualEnsemble m n)
   obtain ⟨huniq, hpush, htyp⟩ := E.finite_noCollapseBornRepresentation k hε hn
   exact ⟨ρ, hpos, htr, huniq, hborn, hpush, htyp⟩
 
+/-- **No-collapse Born representation tied to a concrete density matrix (`hcal` discharged).**
+    Same conclusion as `finite_noCollapseBorn_fromNoncontextuality`, but the abstract
+    non-contextual assignment `M` and the calibration `hcal` are DISCHARGED via the concrete
+    `traceEffectMeasure ρ` — so the only quantum input is `hp` ("the ensemble's single-trial law
+    IS the Born weight of the density matrix `ρ`"), which is exactly the (motivated) claim that
+    the experimentally prepared state's statistics are `tr(ρ·)`.  No abstract `EffectMeasure` is
+    assumed; non-contextuality is instantiated by an actual quantum state. -/
+theorem finite_noCollapseBorn_trace (E : ActualEnsemble m n)
+    (ρ : Matrix (Fin d) (Fin d) ℂ) (hρ : ρ.PosSemidef) (htrρ : ρ.trace = 1)
+    (P : Fin m → Matrix (Fin d) (Fin d) ℂ) (hP : ∀ a, IsEffect (P a))
+    (hp : ∀ a, E.p a = (Matrix.trace (ρ * P a)).re) (k : Fin m) {ε : ℝ} (hε : 0 < ε) (hn : 0 < n) :
+    (∀ ω : E.Ω, ∃! h : Fin n → Fin m,
+        ∀ t, ∃ r ∈ (E.V ω t).config.active, (E.V ω t).ctx.valueOf r = h t)
+    ∧ (∀ a, E.p a = (Matrix.trace (ρ * P a)).re)
+    ∧ (∀ h : Fin n → Fin m,
+        E.P.massSet ((univ : Finset E.Ω).filter (fun ω => E.actualHist ω = h)) = w E.p h)
+    ∧ E.P.massSet ((univ : Finset E.Ω).filter (fun ω =>
+        ((n : ℝ) * ε) ^ 2 ≤ (count k (E.actualHist ω) - (n : ℝ) * E.p k) ^ 2))
+        ≤ E.p k * (1 - E.p k) / ((n : ℝ) * ε ^ 2) := by
+  obtain ⟨_, _, _, huniq, _, hpush, htyp⟩ :=
+    finite_noCollapseBorn_fromNoncontextuality E (OneSiteGleason.traceEffectMeasure ρ hρ htrρ)
+      P hP (fun a => by rw [OneSiteGleason.traceEffectMeasure_apply]; exact (hp a).symm) k hε hn
+  exact ⟨huniq, hp, hpush, htyp⟩
+
 end QIQTH.BornJoinGleason

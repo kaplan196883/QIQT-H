@@ -656,6 +656,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — non-contextual ensemble law p is FORCED Born (p = Re tr(ρ Pₐ))
 #print axioms QIQTH.BornJoinGleason.finite_noCollapseBorn_fromNoncontextuality
 -- expected: standard only — full representation with the single-trial law DERIVED (not assumed)
+#print axioms QIQTH.OneSiteGleason.traceEffectMeasure
+-- expected: standard only — converse to Gleason: every density matrix IS a non-contextual EffectMeasure
+#print axioms QIQTH.BornJoinGleason.finite_noCollapseBorn_trace
+-- expected: standard only — representation with hcal DISCHARGED via the concrete trace measure
 
 -- QIQT-H TIER B: the bridge theorem (Spectrum Broadcast Structures, information cost).
 #print axioms QIQTH.SBSBridge.fragment_finrank_ge

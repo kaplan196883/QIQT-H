@@ -23,6 +23,7 @@ to a real (non-tautological) no-collapse Born result.  Axiom-free (standard thre
 trials, the world measure, and that the ensemble's marginal actually IS such a non-contextual
 `EffectMeasure`.  Those remain open.) -/
 import QIQTH.EffectGleason
+import QIQTH.BornTypicalityQuantum
 import Mathlib.Tactic
 
 namespace QIQTH.OneSiteGleason
@@ -53,5 +54,24 @@ theorem forced_isProbVector (m : EffectMeasure d) {ι : Type*} [Fintype ι]
     (P : ι → Matrix (Fin d) (Fin d) ℂ) (hP : ∀ a, IsEffect (P a)) (hsum : ∑ a, P a = 1) :
     (∀ a, 0 ≤ m.μ (P a)) ∧ ∑ a, m.μ (P a) = 1 :=
   ⟨fun a => m.nonneg (P a) (hP a), m.mu_sum_of_povm P hP hsum⟩
+
+/-- **Non-contextual assignments ARE the Born/trace forms (converse to effect-Gleason).**
+    Every density matrix `ρ` (PSD, unit trace) defines an `EffectMeasure` `E ↦ Re tr(ρ E)`:
+    normalized (`tr ρ = 1`), nonnegative (`trace_mul_nonneg`), and additive (trace linearity).
+    So the non-contextuality premise of `oneSite_forced` is concrete and SATISFIABLE — and the
+    non-contextual functionals are exactly the Born functionals. -/
+noncomputable def traceEffectMeasure (ρ : Matrix (Fin d) (Fin d) ℂ)
+    (hρ : ρ.PosSemidef) (htr : ρ.trace = 1) : EffectMeasure d where
+  μ := fun E => (Matrix.trace (ρ * E)).re
+  normalized := by rw [Matrix.mul_one, htr]; exact Complex.one_re
+  nonneg := fun E hE => by
+    have h := BornTypicalityQuantum.trace_mul_nonneg hρ hE.1
+    simpa using (Complex.le_def.mp h).1
+  additive := fun E F _ _ _ => by
+    rw [Matrix.mul_add, Matrix.trace_add, Complex.add_re]
+
+@[simp] theorem traceEffectMeasure_apply (ρ : Matrix (Fin d) (Fin d) ℂ)
+    (hρ : ρ.PosSemidef) (htr : ρ.trace = 1) (E : Matrix (Fin d) (Fin d) ℂ) :
+    (traceEffectMeasure ρ hρ htr).μ E = (Matrix.trace (ρ * E)).re := rfl
 
 end QIQTH.OneSiteGleason
