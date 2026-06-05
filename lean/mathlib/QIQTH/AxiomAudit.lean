@@ -158,6 +158,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — {1, I} marker diagonal, Complex.exp-free
 #print axioms QIQTH.GoldsteinStruyveStep1.offdiag_support_of_unitary_equivariant
 -- expected: standard only — diagonal-character support step (GS step 1b core)
+#print axioms QIQTH.GoldsteinStruyveStep1.offdiag_eq_smul
+-- expected: standard only
+#print axioms QIQTH.GoldsteinStruyveStep1.diag_support_of_unitary_equivariant
+-- expected: standard only — E_ii maps to a diagonal matrix
+#print axioms QIQTH.GoldsteinStruyveStep1.coeff_perm_symmetric
+-- expected: standard only — permutation symmetry of D(E_ij) i j
+#print axioms QIQTH.GoldsteinStruyveStep1.coeff_collapse
+-- expected: standard only — off-diagonal/diagonal coefficients each collapse to one scalar
 
 -- A4: Chebyshev concentration
 #print axioms QIQTH.BornConcentration.chebyshev_finite

@@ -401,6 +401,22 @@ lemma diagonalU_unitary (d : ℕ) (z : Fin d → ℂ)
 
 /- ── PROVED: the off-diagonal support step (step 1b core) ──────────── -/
 
+/-- The single-marker diagonal `z_p = I` at `p`, `1` elsewhere, is
+    unit modulus at every index. -/
+lemma marker_unit (d : ℕ) (p m : Fin d) :
+    (if m = p then Complex.I else 1) * star (if m = p then Complex.I else 1) = 1 := by
+  by_cases hm : m = p
+  · rw [if_pos hm, show star Complex.I = -Complex.I from by simp, mul_neg,
+      Complex.I_mul_I, neg_neg]
+  · rw [if_neg hm, star_one, one_mul]
+
+/-- **PROVED — phase separation (diagonal version).**  For `k ≠ l` there is
+    a unit-modulus diagonal with `z k · conj (z l) ≠ 1` (marker at `k`). -/
+lemma phase_separation_diag {d : ℕ} {k l : Fin d} (hkl : k ≠ l) :
+    ∃ z : Fin d → ℂ, (∀ m, z m * star (z m) = 1) ∧ z k * star (z l) ≠ 1 := by
+  refine ⟨fun m => if m = k then Complex.I else 1, marker_unit d k, ?_⟩
+  simp [Ne.symm hkl, Complex.ext_iff] <;> norm_num
+
 /-- **PROVED — phase separation.**
 
     For `i ≠ j` and any off-target index pair `(k,l) ≠ (i,j)`, there is a
@@ -474,6 +490,88 @@ theorem offdiag_support_of_unitary_equivariant
   rcases mul_eq_zero.mp hzero with hb | hx
   · exact absurd (sub_eq_zero.mp hb) hsep
   · exact hx
+
+/-- **PROVED.**  Consequence of the support step: an off-diagonal matrix
+    unit maps to a scalar multiple of itself,
+    `D(E_ij) = (D(E_ij) i j) • E_ij` (for `i ≠ j`). -/
+theorem offdiag_eq_smul
+    {d : ℕ} (D : GoldsteinStruyveFinDim.DensityFunctional d)
+    (h_lin : GoldsteinStruyveFinDim.IsLinear D)
+    (h_uniteq : GoldsteinStruyveFinDim.IsUnitaryEquivariant D)
+    {i j : Fin d} (hij : i ≠ j) :
+    D (matrixUnit d i j) = (D (matrixUnit d i j) i j) • matrixUnit d i j := by
+  funext k l
+  rw [Matrix.smul_apply, smul_eq_mul]
+  by_cases hkl : k = i ∧ l = j
+  · obtain ⟨rfl, rfl⟩ := hkl
+    rw [matrixUnit_at_ij, mul_one]
+  · have hne : (k, l) ≠ (i, j) := fun h => hkl (by rwa [Prod.mk.injEq] at h)
+    rw [offdiag_support_of_unitary_equivariant D h_lin h_uniteq hij hne,
+      matrixUnit_at_other d i j k l hkl, mul_zero]
+
+/-- **PROVED — diagonal support of a unitary-equivariant map.**
+
+    The diagonal analog of the support step: a diagonal matrix unit `E_ii`
+    maps to a *diagonal* matrix, `D(E_ii) k l = 0` for `k ≠ l`.  Since the
+    character `z_i · conj z_i = 1`, `E_ii` is fixed by every unit-modulus
+    diagonal conjugation, so `D(E_ii)` commutes with all of them; reading
+    entry `(k,l)` with `k ≠ l` and a separating `z` forces it to vanish. -/
+theorem diag_support_of_unitary_equivariant
+    {d : ℕ} (D : GoldsteinStruyveFinDim.DensityFunctional d)
+    (h_uniteq : GoldsteinStruyveFinDim.IsUnitaryEquivariant D)
+    {i k l : Fin d} (hkl : k ≠ l) :
+    D (matrixUnit d i i) k l = 0 := by
+  obtain ⟨z, hzunit, hsep⟩ := phase_separation_diag hkl
+  have hU : diagonalU d z * star (diagonalU d z) = 1 := diagonalU_unitary d z hzunit
+  have heq := h_uniteq (diagonalU d z) hU (matrixUnit d i i)
+  rw [diagonalU_conj_matrixUnit, hzunit i, one_smul] at heq
+  have hRHS : (diagonalU d z * D (matrixUnit d i i) * star (diagonalU d z)) k l
+      = z k * D (matrixUnit d i i) k l * star (z l) := by
+    rw [diagonalU_star, mul_diagonalU_apply, diagonalU_mul_apply]
+  have hkey := congrFun (congrFun heq k) l
+  rw [hRHS] at hkey
+  set X := D (matrixUnit d i i) k l with hX
+  have hzero : (1 - z k * star (z l)) * X = 0 := by
+    have hc : z k * star (z l) * X = X := by
+      conv_rhs => rw [hkey]
+      ring
+    rw [sub_mul, one_mul, hc, sub_self]
+  rcases mul_eq_zero.mp hzero with hb | hx
+  · exact absurd (sub_eq_zero.mp hb).symm hsep
+  · exact hx
+
+/-- **PROVED.**  The coefficient family `c i j := D(E_ij) i j` of a
+    unitary-equivariant `D` is permutation-symmetric:
+    `c (σ i) (σ j) = c i j`.
+
+    *Proof:* conjugation by `P_σ` sends `E_ij` to `E_{σi,σj}`
+    (`permutation_conj_matrixUnit`) and reads `(P_σ M P_σ*)_{σi,σj} = M_{ij}`
+    off the permutation-matrix apply lemmas; equivariance equates the two. -/
+theorem coeff_perm_symmetric
+    {d : ℕ} (D : GoldsteinStruyveFinDim.DensityFunctional d)
+    (h_uniteq : GoldsteinStruyveFinDim.IsUnitaryEquivariant D) :
+    IsPermutationSymmetric (fun i j => D (matrixUnit d i j) i j) := by
+  intro σ i j
+  have hP : permMatrix d σ * star (permMatrix d σ) = 1 := permMatrix_unitary d σ
+  have heq := h_uniteq (permMatrix d σ) hP (matrixUnit d i j)
+  rw [permutation_conj_matrixUnit] at heq
+  have hpt := congrFun (congrFun heq (σ i)) (σ j)
+  rw [permMatrix_star, mul_permMatrix_apply, permMatrix_mul_apply,
+    Equiv.symm_apply_apply, Equiv.symm_apply_apply] at hpt
+  exact hpt
+
+/-- **PROVED.**  For a unitary-equivariant `D` (with `d ≥ 2`), the
+    coefficient `D(E_ij) i j` takes a single value `c_off` across all
+    off-diagonal `(i,j)`, and a single value `c_diag` across all diagonal
+    `(i,i)`.  Combines `coeff_perm_symmetric` with the permutation-symmetry
+    collapse `step1c_collapse_of_perm_symmetric`. -/
+theorem coeff_collapse
+    {d : ℕ} (hd : 1 < d) (D : GoldsteinStruyveFinDim.DensityFunctional d)
+    (h_uniteq : GoldsteinStruyveFinDim.IsUnitaryEquivariant D) :
+    ∃ c_off c_diag : ℂ,
+      (∀ i j, i ≠ j → D (matrixUnit d i j) i j = c_off) ∧
+      (∀ i, D (matrixUnit d i i) i i = c_diag) :=
+  step1c_collapse_of_perm_symmetric hd _ (coeff_perm_symmetric D h_uniteq)
 
 /- ── Honest residual interface ────────────────────────────────────── -/
 
