@@ -307,5 +307,25 @@ theorem chebyshev_freq_union_le (p : Fin m → ℝ) (hp : ∀ i, 0 ≤ p i) (hp1
   have hden : 0 < (N : ℝ) * ε ^ 2 := mul_pos (by exact_mod_cast hN) (pow_pos hε 2)
   exact (div_le_div_iff_of_pos_right hden).mpr hsum
 
+/-- **Product preparation ⇒ trial independence.**  For the product weight `w q` (the law of
+    `N` i.i.d. trials), the weight of a full history `h` equals the product of the single-trial
+    marginals: `w q {h} = ∏ₜ (weight of "trial t reads hₜ")`.  This is the trial-independence
+    property `BornJoin.indep`, DERIVED purely from the product structure of `w q` — it is
+    exactly the statement that the world-measure is a PRODUCT (independent preparation of `N`
+    copies).  Independence cannot be derived from less: a product measure is genuinely required
+    (no-signaling alone permits correlations), so product preparation is the irreducible,
+    motivated physical input behind `indep`. -/
+theorem w_history_factorizes (q : Fin m → ℝ) (hq1 : ∑ i, q i = 1) (h : Fin N → Fin m) :
+    (∑ ω ∈ (univ : Finset (Fin N → Fin m)).filter (fun ω => ω = h), w q ω)
+      = ∏ t : Fin N, (∑ ω ∈ (univ : Finset (Fin N → Fin m)).filter (fun ω => ω t = h t), w q ω) := by
+  rw [Finset.filter_eq', if_pos (mem_univ h), Finset.sum_singleton]
+  have hmarg : ∀ t : Fin N,
+      (∑ ω ∈ (univ : Finset (Fin N → Fin m)).filter (fun ω => ω t = h t), w q ω) = q (h t) := by
+    intro t
+    rw [Finset.sum_filter, ← marginal q hq1 (h t) t]
+    exact Finset.sum_congr rfl (fun ω _ => by by_cases hc : ω t = h t <;> simp [hc, w])
+  rw [Finset.prod_congr rfl (fun t _ => hmarg t)]
+  rfl
+
 end BornTypicalityFinite
 end QIQTH
