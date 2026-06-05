@@ -128,3 +128,10 @@ if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then
 fi
 
 echo "[axiom-budget] OK — no sorryAx, no deleted-axiom regressions, count within budget."
+
+# Informational: vacuous-predicate scan (catches the soundness-hole family the
+# axiom count cannot see).  Non-failing — known continuum placeholders are
+# documented in AXIOM_CONTRACTS.md.
+if [ -f "$(dirname "$0")/vacuity_lint.sh" ]; then
+  bash "$(dirname "$0")/vacuity_lint.sh" || true
+fi
