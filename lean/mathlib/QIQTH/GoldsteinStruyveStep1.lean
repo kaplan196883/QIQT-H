@@ -870,6 +870,63 @@ theorem schur_assembly_complex
     rw [mul_comm]
   rw [hfst, hsnd]
 
+/-- **PROVED — Schur classification with REAL coefficients (discharges the
+    `step1_schur_classification` axiom).**  A ℂ-linear, unitary-equivariant,
+    Hermiticity-preserving `D` on `d×d` matrices (`d ≥ 2`) equals
+    `schurForm α β` for some REAL `α, β`.  Reality comes from
+    `IsHermitianPreserving`: testing on the Hermitian `E_01 + E_10` forces
+    `c_off` real, and on `E_00` forces `c_rest` real. -/
+theorem schur_classification_real
+    {d : ℕ} (hd : 1 < d) (D : GoldsteinStruyveFinDim.DensityFunctional d)
+    (h_lin : GoldsteinStruyveFinDim.IsLinear D)
+    (h_uniteq : GoldsteinStruyveFinDim.IsUnitaryEquivariant D)
+    (h_herm : GoldsteinStruyveFinDim.IsHermitianPreserving D) :
+    ∃ α β : ℝ, D = @GoldsteinStruyveFinDim.schurForm d α β := by
+  obtain ⟨co, cr, hform⟩ := schur_assembly_complex hd D h_lin h_uniteq
+  haveI : NeZero d := ⟨by omega⟩
+  have h01 : (0 : Fin d) ≠ 1 := by
+    apply Fin.ne_of_val_ne; rw [Fin.val_zero, Fin.val_one', Nat.mod_eq_of_lt hd]; omega
+  have hd0 : (d : ℂ) ≠ 0 := by exact_mod_cast (show d ≠ 0 by omega)
+  have htr00 : Matrix.trace (matrixUnit d 0 0) = 1 := by
+    simp [matrixUnit_eq_single]
+  -- c_rest is real (test on E_00)
+  have hscr : star cr = cr := by
+    have hQ := h_herm (matrixUnit d 0 0) (by rw [star_matrixUnit])
+    rw [hform, htr00, one_smul] at hQ
+    have h11 := congrFun (congrFun hQ 1) 1
+    simpa [Matrix.star_apply, Matrix.add_apply, Matrix.smul_apply, matrixUnit_apply, h01,
+      Ne.symm h01, Matrix.one_apply] using h11
+  -- c_off is real (test on the Hermitian E_01 + E_10)
+  have hsco : star co = co := by
+    have hPh : star (matrixUnit d 0 1 + matrixUnit d 1 0)
+        = matrixUnit d 0 1 + matrixUnit d 1 0 := by
+      rw [star_add, star_matrixUnit, star_matrixUnit, add_comm]
+    have htrP : Matrix.trace (matrixUnit d 0 1 + matrixUnit d 1 0) = 0 := by
+      simp [matrixUnit_eq_single, h01, Ne.symm h01]
+    have hP := h_herm (matrixUnit d 0 1 + matrixUnit d 1 0) hPh
+    rw [hform, htrP, zero_smul, smul_zero, add_zero] at hP
+    have h01e := congrFun (congrFun hP 0) 1
+    simpa [Matrix.star_apply, Matrix.smul_apply, Matrix.add_apply, matrixUnit_apply, h01,
+      Ne.symm h01] using h01e
+  have hco : (co.re : ℂ) = co := by
+    have hi := congrArg Complex.im hsco
+    simp only [Complex.star_def, Complex.conj_im] at hi
+    have him : co.im = 0 := by linarith
+    apply Complex.ext <;> simp [him]
+  have hcr : (cr.re : ℂ) = cr := by
+    have hi := congrArg Complex.im hscr
+    simp only [Complex.star_def, Complex.conj_im] at hi
+    have him : cr.im = 0 := by linarith
+    apply Complex.ext <;> simp [him]
+  refine ⟨co.re, (d : ℝ) * cr.re, ?_⟩
+  have hβ : (((d : ℝ) * cr.re : ℝ) : ℂ) = (d : ℂ) * cr := by push_cast; rw [hcr]
+  funext A
+  rw [hform]
+  simp only [GoldsteinStruyveFinDim.schurForm, hco, hβ, smul_smul]
+  congr 1
+  congr 1
+  field_simp
+
 /- ── Honest residual interface ────────────────────────────────────── -/
 
 /- ── Honest residual interface ────────────────────────────────────── -/
@@ -913,8 +970,9 @@ theorem step1_via_sub_lemmas
     (h_lin : GoldsteinStruyveFinDim.IsLinear D)
     (h_uniteq : GoldsteinStruyveFinDim.IsUnitaryEquivariant D)
     (h_herm : GoldsteinStruyveFinDim.IsHermitianPreserving D) :
-    ∃ α β : ℝ, D = @GoldsteinStruyveFinDim.schurForm d α β := by
-  exact GoldsteinStruyveFinDim.step1_schur_classification d hd D h_lin h_uniteq h_herm
+    ∃ α β : ℝ, D = @GoldsteinStruyveFinDim.schurForm d α β :=
+  -- now AXIOM-FREE: discharged by the fully-proved classification
+  schur_classification_real hd D h_lin h_uniteq h_herm
 
 end GoldsteinStruyveStep1
 end QIQTH
