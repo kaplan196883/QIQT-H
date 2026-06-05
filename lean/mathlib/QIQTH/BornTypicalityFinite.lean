@@ -90,6 +90,54 @@ theorem marginal (p : Fin m → ℝ) (hp1 : ∑ i, p i = 1) (k : Fin m) (s : Fin
         · simp only [ht, if_false, mul_one]; exact hp1
     _ = p k := by rw [Finset.prod_ite_eq' univ s (fun _ => p k), if_pos (mem_univ s)]
 
+/-- **Two-coordinate marginal:** `∑_ω w(ω)·[ω s = k]·[ω s' = k] = p k` if `s = s'`
+    (idempotent indicator) and `p k · p k` if `s ≠ s'` (independence of distinct
+    trials).  This is the covariance structure behind the variance. -/
+theorem marginal2 (p : Fin m → ℝ) (hp1 : ∑ i, p i = 1) (k : Fin m) (s s' : Fin N) :
+    ∑ ω : Fin N → Fin m,
+        (∏ t, p (ω t)) * (if ω s = k then (1 : ℝ) else 0) * (if ω s' = k then (1 : ℝ) else 0)
+      = if s = s' then p k else p k * p k := by
+  by_cases hss : s = s'
+  · subst hss
+    rw [if_pos rfl]
+    have hidem : ∀ ω : Fin N → Fin m,
+        (∏ t, p (ω t)) * (if ω s = k then (1 : ℝ) else 0) * (if ω s = k then (1 : ℝ) else 0)
+          = (∏ t, p (ω t)) * (if ω s = k then (1 : ℝ) else 0) := by
+      intro ω; rw [mul_assoc]; congr 1; by_cases h : ω s = k <;> simp [h]
+    simp_rw [hidem]; exact marginal p hp1 k s
+  · rw [if_neg hss]
+    have key : ∀ ω : Fin N → Fin m,
+        (∏ t, p (ω t)) * (if ω s = k then (1 : ℝ) else 0) * (if ω s' = k then (1 : ℝ) else 0)
+          = ∏ t, p (ω t) * (if t = s then (if ω t = k then (1 : ℝ) else 0) else 1)
+                  * (if t = s' then (if ω t = k then (1 : ℝ) else 0) else 1) := by
+      intro ω
+      rw [Finset.prod_mul_distrib, Finset.prod_mul_distrib,
+        Finset.prod_ite_eq' univ s, if_pos (mem_univ s),
+        Finset.prod_ite_eq' univ s', if_pos (mem_univ s')]
+    simp_rw [key]
+    calc ∑ ω : Fin N → Fin m, ∏ t, p (ω t) * (if t = s then (if ω t = k then (1 : ℝ) else 0) else 1)
+              * (if t = s' then (if ω t = k then (1 : ℝ) else 0) else 1)
+        = ∑ ω ∈ Fintype.piFinset (fun _ : Fin N => (univ : Finset (Fin m))),
+            ∏ t, p (ω t) * (if t = s then (if ω t = k then (1 : ℝ) else 0) else 1)
+              * (if t = s' then (if ω t = k then (1 : ℝ) else 0) else 1) := by
+          rw [Fintype.piFinset_univ]
+      _ = ∏ t : Fin N, ∑ j, p j * (if t = s then (if j = k then (1 : ℝ) else 0) else 1)
+              * (if t = s' then (if j = k then (1 : ℝ) else 0) else 1) :=
+          (Finset.prod_univ_sum _ (fun t j => p j
+            * (if t = s then (if j = k then (1 : ℝ) else 0) else 1)
+            * (if t = s' then (if j = k then (1 : ℝ) else 0) else 1))).symm
+      _ = ∏ t : Fin N, ((if t = s then p k else 1) * (if t = s' then p k else 1)) := by
+          refine Finset.prod_congr rfl (fun t _ => ?_)
+          by_cases hts : t = s
+          · have hts2 : ¬ t = s' := fun h => hss (hts ▸ h)
+            simp [if_pos hts, if_neg hts2, mul_ite, mul_one, mul_zero, Finset.sum_ite_eq']
+          · by_cases hts2 : t = s'
+            · simp [if_neg hts, if_pos hts2, mul_ite, mul_one, mul_zero, Finset.sum_ite_eq']
+            · simp only [if_neg hts, if_neg hts2, mul_one]; exact hp1
+      _ = p k * p k := by
+          rw [Finset.prod_mul_distrib, Finset.prod_ite_eq' univ s, if_pos (mem_univ s),
+            Finset.prod_ite_eq' univ s', if_pos (mem_univ s')]
+
 /-- **Empirical counts are unbiased estimators of the Born weight:**
     `E[#{t : ω t = k}] = N · p k`.  (Linearity of expectation over the `N`
     i.i.d. trials, each `marginal` giving `p k`.) -/

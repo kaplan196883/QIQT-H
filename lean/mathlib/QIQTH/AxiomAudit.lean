@@ -151,6 +151,8 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — finite Markov inequality for the product measure
 #print axioms QIQTH.BornTypicalityFinite.chebyshev_count
 -- expected: standard only — Chebyshev concentration: P((count−Np)² ≥ (Nε)²) ≤ E[(count−Np)²]/(Nε)²
+#print axioms QIQTH.BornTypicalityFinite.marginal2
+-- expected: standard only — two-coordinate marginal (covariance structure; p k if s=s', p k² else)
 
 #print axioms QIQTH.FQEquivarianceUniqueness.canonical_ic_measure_principle
 -- expected: standard + 4 acknowledged sub-axioms
