@@ -24,6 +24,12 @@ NOT from `Q_max` alone. Full claim→theorem map + honest scope: **`FINITE_BORN_
 Record-Completeness Lemma and the AQFT localization producing a single **Lorentz-covariant** μ.
 The 35 remaining axioms are exactly this continuum / Type III₁ interface (beyond current Mathlib).
 
+**A concrete, Lean-grounded staged execution plan** (free-field finite-mode instance → sheaf /
+global-section / cohomology layer → continuum analytic infrastructure), with per-item difficulty,
+dependencies, what already exists, and kill-criteria, is in **`PRIZE_EXECUTION_PLAN.md`**. Headline:
+Stages 1–2 (free fields, finite-mode) are the next concrete builds and would already convert the
+Lorentz promissory note into a result; Stage 3 (Type III₁ / Tomita–Takesaki) is the long pole.
+
 ## 0. The route we commit to (and what we reject)
 
 **Effect-Gleason + Kolmogorov — NOT the raw decoherence functional.**
