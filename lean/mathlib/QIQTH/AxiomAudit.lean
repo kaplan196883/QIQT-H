@@ -159,6 +159,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — CLEAN typicality bound: P(|freq−p k| ≥ ε) ≤ p k(1−p k)/(Nε²)
 #print axioms QIQTH.BornTypicalityQuantum.trace_kronN_mul
 -- expected: standard only — product trace factorization tr((⊗ρ)(⊗E)) = ∏ tr(ρ E) (no independence smuggled)
+#print axioms QIQTH.BornTypicalityQuantum.quantumWeight_eq_w
+-- expected: standard only — quantum N-copy product weight = classical product weight of Born vector
+#print axioms QIQTH.BornTypicalityQuantum.quantum_chebyshev_freq
+-- expected: standard only — END-TO-END quantum Born-typicality: bad-frequency event weight ≤ p(1−p)/(nε²)
 
 #print axioms QIQTH.FQEquivarianceUniqueness.canonical_ic_measure_principle
 -- expected: standard + 4 acknowledged sub-axioms
