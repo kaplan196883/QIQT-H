@@ -83,6 +83,10 @@ import QIQTH.LorentzSelectionStrong
 -- conditional interface is not vacuously satisfied only by the one-point net.
 -- Does NOT touch the continuum realization (still open). Standard axioms only:
 import QIQTH.LorentzWitness
+-- Prize Stage 1 (PRIZE_EXECUTION_PLAN.md): a NON-TOY recorded-history net with genuine
+-- marginalizing restriction and the product Born measure — the no-signaling marginal ω_marg is
+-- a THEOREM about the product Born measure (vs LorentzWitness's trivial restriction). Axiom-free:
+import QIQTH.FreeFieldNet
 -- Phase 1 of the Tomita–Takesaki roadmap (TOMITA_TAKESAKI_ROADMAP.md): the
 -- projection-valued-measure / bounded-spectral-theorem keystone. Structural PVM
 -- content proved axiom-free; the analytic core (σ-additivity, bounded-Borel FC,

@@ -397,6 +397,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — covariant probability over a non-trivial group orbit
 -- (exercises the covariance machinery, not just the probability content).
 
+-- PRIZE STAGE 1: non-toy recorded-history net with product-Born no-signaling.
+#print axioms QIQTH.FreeFieldNet.bornNet
+-- expected: standard only — non-toy net (genuine marginalizing restriction, product Born ω)
+#print axioms QIQTH.FreeFieldNet.bornNet_no_signaling
+-- expected: standard only — no-signaling marginal DERIVED from the product Born measure
+#print axioms QIQTH.FreeFieldNet.bornNet_covariant_selection
+-- expected: standard only — covariant single-outcome selector over the non-toy net
+
 -- Infrastructure finite-discharge pass (Open Problems 6 & 9): the finite-
 -- classical axioms are now PROVED, not assumed.
 #print axioms QIQTH.RelEntPositivity.KL_classical_nonneg
