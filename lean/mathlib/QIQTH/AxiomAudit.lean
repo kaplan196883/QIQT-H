@@ -619,6 +619,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OrthogonalCapacity.witness
 -- expected: standard only — concrete 2-record orthogonal witness (non-vacuity)
 
+-- QIQT-H PRIZE BRIDGE C1: one actual RECORD → one actual VALUE.
+#print axioms QIQTH.PointerValue.ValueSelection.active_value_eq
+-- expected: standard only — all coactual records share one pointer value
+#print axioms QIQTH.PointerValue.ValueSelection.existsUnique_actualValue
+-- expected: standard only — EXACTLY ONE actual pointer value (value-level single outcome)
+#print axioms QIQTH.PointerValue.existsUnique_actualHistory
+-- expected: standard only — unique actual pointer-value history over n trials
+
 -- QIQT-H TIER B: the bridge theorem (Spectrum Broadcast Structures, information cost).
 #print axioms QIQTH.SBSBridge.fragment_finrank_ge
 -- expected: standard only — distinguishability ⇒ fragment dimension ≥ n (orthonormal).

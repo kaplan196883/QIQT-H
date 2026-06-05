@@ -103,6 +103,9 @@ import QIQTH.CapacityModel
 -- Grounding the subadditive core: pairwise overflow DERIVED from orthogonality of
 -- distinct records (span-dimension joint cost; no additivity assumed):
 import QIQTH.OrthogonalCapacity
+-- Prize bridge C1: one actual RECORD → one actual VALUE (redundant same-value records
+-- coexist; the experienced pointer value is unique), iterated to a unique value history:
+import QIQTH.ValueSelection
 -- Tier B (GPT-5.5-pro review): the BRIDGE theorem via Spectrum Broadcast Structures.
 -- DERIVES the saturation premise cost>Q_max/2 from an objective record's redundancy +
 -- an INFORMATION cost R·log n (tensor/log, fixing the rank-model flaw): distinguishability
