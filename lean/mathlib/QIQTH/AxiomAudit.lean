@@ -142,6 +142,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GoldsteinStruyveModels.conjTranspose_not_isLinear
 -- expected: standard only — conjugate-transpose rejected by IsLinear (certifies ℂ-linearity)
 
+-- ── Finite Born-typicality (genuine, non-vacuous; replaces LLN placeholder) ──
+#print axioms QIQTH.BornTypicalityFinite.sum_w_eq_one
+-- expected: standard only — the canonical product weight is a probability distribution
+#print axioms QIQTH.BornTypicalityFinite.expectation_count
+-- expected: standard only — E[#{t: ω t = k}] = N·p k  (frequencies unbiased for Born weights)
+
 #print axioms QIQTH.FQEquivarianceUniqueness.canonical_ic_measure_principle
 -- expected: standard + 4 acknowledged sub-axioms
 

@@ -44,6 +44,8 @@ import QIQTH.GoldsteinStruyveKronecker
 import QIQTH.GoldsteinStruyveStep1
 -- Regression suite: positive (non-vacuity) + negative (countermodel) witnesses:
 import QIQTH.GoldsteinStruyveModels
+-- Finite Born-typicality (non-vacuous replacement for the LLN placeholder content):
+import QIQTH.BornTypicalityFinite
 -- A1 strengthening: locality discharged from equivariance + local dynamics:
 import QIQTH.MarginalLocality
 -- A6 strengthening: minimality/independence table for Born premises:
