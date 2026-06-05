@@ -19,9 +19,30 @@ From these we DERIVE:
     of outcome `k` is `≤ p k(1−p k)/(n·ε²) → 0` (finite Chebyshev LLN, `BornTypicalityFinite`).
 
 No collapse map appears.  Capacity gives the unique actual value; calibration+independence
-give the Born product law; typicality follows.  Axiom-free (standard three only). -/
+give the Born product law; typicality follows.  Axiom-free (standard three only).
+
+HONEST SCOPE (GPT-5.5-pro verification, 2026-06 — do NOT overstate).  This is a CONDITIONAL
+representation theorem, NOT a derivation of Born statistics from capacity.  Brutally:
+  • The Born law is an ASSUMPTION: `oneSite` + `indep` are fields of `ActualEnsemble`, and
+    together they essentially ARE the Born product law — `pushforward_eq_w` is their
+    composition.  Honest reading: "ASSUMING Born one-site marginals + independence, the actual
+    histories have the Born product law and are Chebyshev-typical."
+  • The no-collapse core's contribution here (unique actual value, C1) is largely a WRAPPER:
+    the probability content would hold for any `X : Ω → Fin n → Fin m`; the capacity/value
+    machinery imposes no probabilistic constraint (any process can be dressed as value
+    selections; correlated ones simply fail the explicit `indep` field).
+  • `iidWitness` is logically non-vacuous but DEGENERATE: it sets `mass = w p` (building in the
+    law it exhibits) and uses trivial one-record `Unit` selections.
+  • `p` is an ARBITRARY probability vector here; it is the genuine quantum Born weight only when
+    instantiated `p := OneSiteBorn.bornVec M ψ` (for a unit state — see `bornVec_isProbVector`).
+NOT established: deriving Born from Hilbert-space QM, deriving independence, deriving the world
+measure, or that no-collapse dynamics produce typical frequencies.  Fair one-line claim:
+"Lean verifies that finite no-collapse value-selection wrappers over an explicitly Born-marginal,
+independent world ensemble have unique actual histories whose pushforward is the Born product
+measure and hence are Chebyshev-typical." -/
 import QIQTH.ValueSelection
 import QIQTH.BornTypicalityFinite
+import QIQTH.OneSiteBorn
 import Mathlib.Tactic
 
 namespace QIQTH.BornJoin
@@ -220,5 +241,15 @@ example (p : Fin m → ℝ) (hp0 : ∀ k, 0 ≤ p k) (hp1 : ∑ k, p k = 1) (h :
         ((univ : Finset (Fin n → Fin m)).filter
           (fun ω => (iidWitness p hp0 hp1).actualHist ω = h)) = w p h :=
   (iidWitness p hp0 hp1).pushforward_eq_w h
+
+/-- **The single-trial law CAN be the genuine quantum Born weight.**  For a unit state `ψ`
+    and a finite PVM `M`, `OneSiteBorn.bornVec M ψ` (`a ↦ ‖Eₐψ‖²`) is a valid probability
+    vector, so it may serve as `ActualEnsemble.p`.  Then `oneSite` reads "world-mass of actual
+    value `a` = ‖Eₐψ‖²" — the quantum Born weight, not a free parameter.  (This fixes `p`; the
+    one-site CALIBRATION itself remains a named assumption.) -/
+theorem bornVec_isProbVector {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
+    [CompleteSpace H] (M : CoreNoCollapse.FinPVM H) (ψ : H) (hψ : ‖ψ‖ = 1) :
+    (∀ a, 0 ≤ OneSiteBorn.bornVec M ψ a) ∧ ∑ a, OneSiteBorn.bornVec M ψ a = 1 :=
+  ⟨OneSiteBorn.bornVec_nonneg M ψ, OneSiteBorn.bornVec_sum M ψ hψ⟩
 
 end QIQTH.BornJoin
