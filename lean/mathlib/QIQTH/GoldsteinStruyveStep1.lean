@@ -816,9 +816,10 @@ theorem step1_via_sub_lemmas
     (d : ℕ) (hd : 1 < d)
     (D : @GoldsteinStruyveFinDim.DensityFunctional d)
     (h_lin : GoldsteinStruyveFinDim.IsLinear D)
-    (h_uniteq : GoldsteinStruyveFinDim.IsUnitaryEquivariant D) :
+    (h_uniteq : GoldsteinStruyveFinDim.IsUnitaryEquivariant D)
+    (h_herm : GoldsteinStruyveFinDim.IsHermitianPreserving D) :
     ∃ α β : ℝ, D = @GoldsteinStruyveFinDim.schurForm d α β := by
-  exact GoldsteinStruyveFinDim.step1_schur_classification d hd D h_lin h_uniteq
+  exact GoldsteinStruyveFinDim.step1_schur_classification d hd D h_lin h_uniteq h_herm
 
 end GoldsteinStruyveStep1
 end QIQTH

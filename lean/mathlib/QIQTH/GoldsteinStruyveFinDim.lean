@@ -117,6 +117,16 @@ def IsUnitaryEquivariant (D : DensityFunctional d) : Prop :=
     U * (star U) = 1 →
     ∀ ρ, D (U * ρ * star U) = U * D ρ * star U
 
+/-- **Hermiticity preservation.**  `D` maps self-adjoint matrices to
+    self-adjoint matrices.  This is the reality condition that makes the
+    Schur coefficients `α, β` REAL: it is satisfied by every genuine
+    density functional (which maps density operators to density-like
+    operators), but NOT by maps like `ρ ↦ i·ρ`.  Without it,
+    `step1_schur_classification` would be FALSE — `i·id` is ℂ-linear and
+    unitary-equivariant yet equals no real-coefficient Schur form. -/
+def IsHermitianPreserving (D : DensityFunctional d) : Prop :=
+  ∀ ρ : Matrix (Fin d) (Fin d) ℂ, star ρ = ρ → star (D ρ) = D ρ
+
 /-- **Step 1 (axiom) — Schur classification.**
 
     Any linear, unitary-equivariant density functional on
@@ -135,10 +145,19 @@ def IsUnitaryEquivariant (D : DensityFunctional d) : Prop :=
       Restrict to Hermitian sub-vector-space (real α, β).
 
     This is 2-5 weeks of Lean work per GPT estimate; axiomatized here
-    at the interface layer. -/
+    at the interface layer.
+
+    *Soundness (2026-06):* the `h_herm : IsHermitianPreserving D` hypothesis is
+    REQUIRED.  Without it the statement is inconsistent — `D = (ρ ↦ i·ρ)` is
+    `IsLinear` and `IsUnitaryEquivariant` but is not `@schurForm d α β` for any
+    real `α, β` (compare the `(0,1)` entry: `i` vs the real `α`), so the bare
+    axiom yields `False`.  `IsHermitianPreserving` excludes exactly such maps
+    (`i·id` sends Hermitian `H` to the anti-Hermitian `i·H`) and is the genuine
+    reality condition of step 1e.  See [[feedback_axiom_budget_blind_spot]]. -/
 axiom step1_schur_classification (d : ℕ) (hd : 1 < d)
     (D : DensityFunctional d)
-    (h_lin : IsLinear D) (h_uniteq : IsUnitaryEquivariant D) :
+    (h_lin : IsLinear D) (h_uniteq : IsUnitaryEquivariant D)
+    (h_herm : IsHermitianPreserving D) :
     ∃ α β : ℝ, D = @schurForm d α β
 
 /- ── Step 3 (axiomatized): tensor multiplicativity narrowing ─────── -/
@@ -279,12 +298,13 @@ theorem goldstein_struyve_findim
     (D : DensityFunctional d)
     (h_lin : IsLinear D)
     (h_uniteq : IsUnitaryEquivariant D)
+    (h_herm : IsHermitianPreserving D)
     (h_norm : IsNormalized D)
     (h_tensor : ∀ Dd2, IsTensorMultiplicative D Dd2)
     (h_nondegen : IsNonDegenerate D) :
     D = canonicalD := by
   -- Step 1: Schur classification.
-  obtain ⟨α, β, h_schur⟩ := step1_schur_classification d hd D h_lin h_uniteq
+  obtain ⟨α, β, h_schur⟩ := step1_schur_classification d hd D h_lin h_uniteq h_herm
   -- Substitute D = schurForm α β throughout.
   rw [h_schur]
   rw [h_schur] at h_norm h_tensor h_nondegen

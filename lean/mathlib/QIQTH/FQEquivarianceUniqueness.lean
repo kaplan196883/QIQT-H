@@ -84,6 +84,11 @@ def IsLinear {d : ℕ} (D : DensityFunctional d) : Prop :=
 def IsUnitaryEquivariant {d : ℕ} (D : DensityFunctional d) : Prop :=
   GoldsteinStruyveFinDim.IsUnitaryEquivariant D
 
+/-- **Hermiticity preservation** (reality condition; required for soundness
+    of Step 1 — see `GoldsteinStruyveFinDim.step1_schur_classification`). -/
+def IsHermitianPreserving {d : ℕ} (D : DensityFunctional d) : Prop :=
+  GoldsteinStruyveFinDim.IsHermitianPreserving D
+
 /-- **Trace normalization.** -/
 def IsNormalized {d : ℕ} (D : DensityFunctional d) : Prop :=
   GoldsteinStruyveFinDim.IsNormalized D
@@ -126,12 +131,13 @@ theorem goldstein_struyve_qiqth_proved
     (D : DensityFunctional d)
     (h_linear : IsLinear D)
     (h_uniteq : IsUnitaryEquivariant D)
+    (h_herm : IsHermitianPreserving D)
     (h_norm : IsNormalized D)
     (h_tensor : IsTensorMultiplicative D)
     (h_nondegen : IsNonDegenerate D) :
     D = canonicalDensity d :=
   GoldsteinStruyveFinDim.goldstein_struyve_findim d hd D
-    h_linear h_uniteq h_norm h_tensor h_nondegen
+    h_linear h_uniteq h_herm h_norm h_tensor h_nondegen
 
 /-- **The QIQT-H Canonical IC Measure Principle (final form).**
 
@@ -153,11 +159,12 @@ theorem canonical_ic_measure_principle
     (D : DensityFunctional d)
     (h_linear : IsLinear D)
     (h_uniteq : IsUnitaryEquivariant D)
+    (h_herm : IsHermitianPreserving D)
     (h_norm : IsNormalized D)
     (h_tensor : IsTensorMultiplicative D)
     (h_nondegen : IsNonDegenerate D) :
     D = canonicalDensity d :=
-  goldstein_struyve_qiqth_proved hd D h_linear h_uniteq h_norm h_tensor h_nondegen
+  goldstein_struyve_qiqth_proved hd D h_linear h_uniteq h_herm h_norm h_tensor h_nondegen
 
 /-- **Uniqueness corollary.**  Two density functionals each satisfying
     the five properties must agree (both equal the canonical density). -/
@@ -166,12 +173,13 @@ theorem qiqth_typicality_uniqueness
     (D₁ D₂ : DensityFunctional d)
     (h₁_linear : IsLinear D₁) (h₂_linear : IsLinear D₂)
     (h₁_uniteq : IsUnitaryEquivariant D₁) (h₂_uniteq : IsUnitaryEquivariant D₂)
+    (h₁_herm : IsHermitianPreserving D₁) (h₂_herm : IsHermitianPreserving D₂)
     (h₁_norm : IsNormalized D₁) (h₂_norm : IsNormalized D₂)
     (h₁_tensor : IsTensorMultiplicative D₁) (h₂_tensor : IsTensorMultiplicative D₂)
     (h₁_nondegen : IsNonDegenerate D₁) (h₂_nondegen : IsNonDegenerate D₂) :
     D₁ = D₂ := by
-  rw [goldstein_struyve_qiqth_proved hd D₁ h₁_linear h₁_uniteq h₁_norm h₁_tensor h₁_nondegen]
-  rw [goldstein_struyve_qiqth_proved hd D₂ h₂_linear h₂_uniteq h₂_norm h₂_tensor h₂_nondegen]
+  rw [goldstein_struyve_qiqth_proved hd D₁ h₁_linear h₁_uniteq h₁_herm h₁_norm h₁_tensor h₁_nondegen]
+  rw [goldstein_struyve_qiqth_proved hd D₂ h₂_linear h₂_uniteq h₂_herm h₂_norm h₂_tensor h₂_nondegen]
 
 end FQEquivarianceUniqueness
 end QIQTH
