@@ -642,6 +642,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — world-mass form of typicality
 #print axioms QIQTH.BornJoin.ActualEnsemble.finite_noCollapseBornRepresentation
 -- expected: standard only — THE PRIZE: unique actual history + Born product law + typicality
+#print axioms QIQTH.BornJoin.iidWitness
+-- expected: standard only — concrete i.i.d. Born ensemble: oneSite+indep JOINTLY SATISFIABLE
+#print axioms QIQTH.BornJoin.iid_oneSite
+-- expected: standard only — single-trial marginal of the product Born weight is p (non-vacuity)
 
 -- QIQT-H TIER B: the bridge theorem (Spectrum Broadcast Structures, information cost).
 #print axioms QIQTH.SBSBridge.fragment_finrank_ge

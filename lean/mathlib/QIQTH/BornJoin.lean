@@ -144,4 +144,81 @@ theorem finite_noCollapseBornRepresentation (k : Fin m) {ε : ℝ} (hε : 0 < ε
     E.actualHistory_typical_world k hε hn⟩
 
 end ActualEnsemble
+
+/- ── C6: a concrete i.i.d. Born witness (non-vacuity of the prize) ──
+
+   Shows the prize theorem's hypotheses (`oneSite` + `indep`) are JOINTLY SATISFIABLE, so
+   `finite_noCollapseBornRepresentation` is not vacuous.  Model: worlds = histories, world-mass
+   = the product Born weight `w p`, and each trial's record is a one-record (Unit) context
+   forced to that world's outcome.  Then `oneSite` is the single-trial marginal of `w p` (= p)
+   and `indep` is the product structure of `w p`. -/
+
+open PointerValue
+
+/-- The trivial one-record capacity context on `Unit` (zero cost, zero capacity). -/
+def unitJoint : JointRecordContext where
+  Rec := Unit
+  jointCost := fun _ => 0
+  mono := fun _ => le_refl 0
+  Qmax := 0
+  pair_exceeds := fun r s h => absurd (Subsingleton.elim r s) h
+
+/-- A value context with a single record forced to value `a`. -/
+def singleValueContext (a : Fin m) : ValueContext (Fin m) where
+  J := unitJoint
+  valueOf := fun _ => a
+  pair_exceeds_value := fun _ _ h => absurd rfl h
+
+/-- A value selection whose unique actual value is `a`. -/
+def singleValueSelection (a : Fin m) : ValueSelection (Fin m) where
+  ctx := singleValueContext a
+  config := { active := {()}, capacity := le_refl 0 }
+  selected := ⟨(), Finset.mem_singleton_self ()⟩
+
+@[simp] theorem singleValueSelection_actualValue (a : Fin m) :
+    (singleValueSelection a).actualValue = a :=
+  ((singleValueSelection a).actualValue_eq_of_mem (Finset.mem_singleton_self ())).symm
+
+/-- **Single-trial marginal of the product Born weight is `p`.**  (The `oneSite` calibration
+    of the witness, from `BornTypicalityFinite.marginal`.) -/
+theorem iid_oneSite (p : Fin m → ℝ) (hp1 : ∑ k, p k = 1) (t : Fin n) (a : Fin m) :
+    (∑ ω ∈ (univ : Finset (Fin n → Fin m)).filter
+        (fun ω => (singleValueSelection (ω t)).actualValue = a), w p ω) = p a := by
+  simp only [singleValueSelection_actualValue]
+  rw [Finset.sum_filter, ← marginal p hp1 a t]
+  refine Finset.sum_congr rfl (fun ω _ => ?_)
+  by_cases h : ω t = a <;> simp [h, w]
+
+/-- **The i.i.d. Born ensemble** witnessing non-vacuity of the prize: worlds are histories,
+    mass is the product Born weight, each trial is forced to that world's outcome. -/
+noncomputable def iidWitness (p : Fin m → ℝ) (hp0 : ∀ k, 0 ≤ p k) (hp1 : ∑ k, p k = 1) :
+    ActualEnsemble m n where
+  Ω := Fin n → Fin m
+  P := ⟨w p, fun ω => w_nonneg p hp0 ω, sum_w_eq_one p hp1⟩
+  V := fun ω t => singleValueSelection (ω t)
+  p := p
+  p_nonneg := hp0
+  p_sum := hp1
+  oneSite := fun t a => iid_oneSite p hp1 t a
+  indep := fun h => by
+    have hL : (∑ ω ∈ (univ : Finset (Fin n → Fin m)).filter
+        (fun ω => (fun t => (singleValueSelection (ω t)).actualValue) = h), w p ω) = w p h := by
+      have hset : (univ : Finset (Fin n → Fin m)).filter
+          (fun ω => (fun t => (singleValueSelection (ω t)).actualValue) = h) = {h} := by
+        ext ω
+        simp only [mem_filter, mem_univ, true_and, mem_singleton, singleValueSelection_actualValue]
+      rw [hset, Finset.sum_singleton]
+    have hR : (∏ t, (∑ ω ∈ (univ : Finset (Fin n → Fin m)).filter
+        (fun ω => (singleValueSelection (ω t)).actualValue = h t), w p ω)) = w p h :=
+      (Finset.prod_congr rfl (fun t _ => iid_oneSite p hp1 t (h t)))
+    exact hL.trans hR.symm
+
+/-- The prize theorem's Born product law holds on the concrete i.i.d. witness — confirming the
+    hypotheses are realized and `finite_noCollapseBornRepresentation` is non-vacuous. -/
+example (p : Fin m → ℝ) (hp0 : ∀ k, 0 ≤ p k) (hp1 : ∑ k, p k = 1) (h : Fin n → Fin m) :
+    (iidWitness p hp0 hp1).P.massSet
+        ((univ : Finset (Fin n → Fin m)).filter
+          (fun ω => (iidWitness p hp0 hp1).actualHist ω = h)) = w p h :=
+  (iidWitness p hp0 hp1).pushforward_eq_w h
+
 end QIQTH.BornJoin
