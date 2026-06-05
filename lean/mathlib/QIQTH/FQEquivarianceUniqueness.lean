@@ -94,10 +94,13 @@ def IsHermitianPreserving {d : ℕ} (D : DensityFunctional d) : Prop :=
 def IsNormalized {d : ℕ} (D : DensityFunctional d) : Prop :=
   GoldsteinStruyveFinDim.IsNormalized D
 
-/-- **Tensor multiplicativity (locality analog).** -/
-def IsTensorMultiplicative {d : ℕ} (D : DensityFunctional d) : Prop :=
-  ∀ Dd2 : GoldsteinStruyveFinDim.DensityFunctional (d * d),
-    GoldsteinStruyveFinDim.IsTensorMultiplicative D Dd2
+/-- **Tensor multiplicativity (locality analog).**  Genuine factorization of a
+    *specific* composite functional `Dd2` through `D`: `Dd2(ρ⊗σ) = D(ρ)⊗D(σ)`.
+    (Previously `∀ Dd2, …`, which was UNSATISFIABLE — making the flagship theorem
+    vacuous; fixed 2026-06.) -/
+def IsTensorMultiplicative {d : ℕ} (D : DensityFunctional d)
+    (Dd2 : DensityFunctional (d * d)) : Prop :=
+  GoldsteinStruyveFinDim.IsTensorMultiplicative D Dd2
 
 /-- **Non-degeneracy on pure states.** -/
 def IsNonDegenerate {d : ℕ} (D : DensityFunctional d) : Prop :=
@@ -119,26 +122,30 @@ def IsFQEquivariant {d : ℕ} (_D : DensityFunctional d) : Prop :=
     normalization + tensor-multiplicativity + non-degeneracy is the
     canonical density.
 
-    *Where the content lives:*
-      Step 1 (Schur classification) — axiomatized in `GoldsteinStruyveFinDim`,
-            structurally decomposed in `GoldsteinStruyveStep1`
-      Step 2 (Normalization)        — PROVED concretely in `GoldsteinStruyveFinDim`
-      Step 3 (Tensor multiplicativity) — axiomatized in `GoldsteinStruyveFinDim`,
-            algebraic core PROVED in `GoldsteinStruyveStep3`,
-            Kronecker bridge PROVED in `GoldsteinStruyveKronecker`
-      Step 4 (Non-degeneracy)       — PROVED concretely in `GoldsteinStruyveFinDim` -/
+    *Where the content lives (all four steps now PROVED, axiom-free):*
+      Step 1 (Schur classification) — PROVED in `GoldsteinStruyveStep1.schur_classification_real`
+      Step 2 (Normalization)        — PROVED in `GoldsteinStruyveFinDim`
+      Step 3 (Tensor multiplicativity) — PROVED in `GoldsteinStruyveFinDim.step3_tensor_narrowing`
+      Step 4 (Non-degeneracy)       — PROVED in `GoldsteinStruyveFinDim`
+
+    The tensor hypothesis is the GENUINE factorization `Dd2(ρ⊗σ) = D(ρ)⊗D(σ)` for a concrete
+    composite functional `Dd2` (also classified by Step 1).  The earlier `∀ Dd2, …` form was
+    unsatisfiable, rendering this theorem vacuous; that is fixed. -/
 theorem goldstein_struyve_qiqth_proved
     {d : ℕ} (hd : 1 < d)
-    (D : DensityFunctional d)
-    (h_linear : IsLinear D)
-    (h_uniteq : IsUnitaryEquivariant D)
+    (D : DensityFunctional d) (Dd2 : DensityFunctional (d * d))
+    (h_linear : IsLinear D) (h_uniteq : IsUnitaryEquivariant D)
     (h_herm : IsHermitianPreserving D)
+    (h_linear2 : IsLinear Dd2) (h_uniteq2 : IsUnitaryEquivariant Dd2)
+    (h_herm2 : IsHermitianPreserving Dd2)
     (h_norm : IsNormalized D)
-    (h_tensor : IsTensorMultiplicative D)
+    (h_tensor : IsTensorMultiplicative D Dd2)
     (h_nondegen : IsNonDegenerate D) :
     D = canonicalDensity d :=
-  GoldsteinStruyveFinDim.goldstein_struyve_findim d hd D
+  GoldsteinStruyveFinDim.goldstein_struyve_findim d hd D Dd2
     (GoldsteinStruyveStep1.schur_classification_real hd D h_linear h_uniteq h_herm)
+    (GoldsteinStruyveStep1.schur_classification_real
+      (by nlinarith [hd] : 1 < d * d) Dd2 h_linear2 h_uniteq2 h_herm2)
     h_norm h_tensor h_nondegen
 
 /-- **The QIQT-H Canonical IC Measure Principle (final form).**
@@ -150,38 +157,44 @@ theorem goldstein_struyve_qiqth_proved
     the canonical IC measure on QIQT-H's IC space is uniquely the
     trace-density measure `μ_ρ(B) = τ_R(ρ · P_B)`.
 
-    *Post-consolidation dependency:* this theorem now depends only on
-    `GoldsteinStruyveFinDim.step1_schur_classification` and
-    `GoldsteinStruyveFinDim.step3_tensor_multiplicativity` (plus
-    standard Lean/Mathlib axioms).  The previous duplicate sub-axioms
-    in `FQEquivarianceUniqueness` (5 axioms + 7 opaque types) have
-    been eliminated. -/
+    *Dependency (2026-06):* this theorem is now **axiom-free** (only the standard
+    `propext`/`Classical.choice`/`Quot.sound`).  Steps 1 and 3 — formerly interface axioms —
+    are fully proved; the previous duplicate sub-axioms (5 axioms + 7 opaque types) were
+    eliminated earlier.  The hypotheses are jointly satisfiable (the identity is a witness),
+    so the statement is non-vacuous; see the regression suite `GoldsteinStruyveModels`. -/
 theorem canonical_ic_measure_principle
     {d : ℕ} (hd : 1 < d)
-    (D : DensityFunctional d)
-    (h_linear : IsLinear D)
-    (h_uniteq : IsUnitaryEquivariant D)
+    (D : DensityFunctional d) (Dd2 : DensityFunctional (d * d))
+    (h_linear : IsLinear D) (h_uniteq : IsUnitaryEquivariant D)
     (h_herm : IsHermitianPreserving D)
+    (h_linear2 : IsLinear Dd2) (h_uniteq2 : IsUnitaryEquivariant Dd2)
+    (h_herm2 : IsHermitianPreserving Dd2)
     (h_norm : IsNormalized D)
-    (h_tensor : IsTensorMultiplicative D)
+    (h_tensor : IsTensorMultiplicative D Dd2)
     (h_nondegen : IsNonDegenerate D) :
     D = canonicalDensity d :=
-  goldstein_struyve_qiqth_proved hd D h_linear h_uniteq h_herm h_norm h_tensor h_nondegen
+  goldstein_struyve_qiqth_proved hd D Dd2 h_linear h_uniteq h_herm
+    h_linear2 h_uniteq2 h_herm2 h_norm h_tensor h_nondegen
 
 /-- **Uniqueness corollary.**  Two density functionals each satisfying
     the five properties must agree (both equal the canonical density). -/
 theorem qiqth_typicality_uniqueness
     {d : ℕ} (hd : 1 < d)
-    (D₁ D₂ : DensityFunctional d)
+    (D₁ D₂ : DensityFunctional d) (Dd2₁ Dd2₂ : DensityFunctional (d * d))
     (h₁_linear : IsLinear D₁) (h₂_linear : IsLinear D₂)
     (h₁_uniteq : IsUnitaryEquivariant D₁) (h₂_uniteq : IsUnitaryEquivariant D₂)
     (h₁_herm : IsHermitianPreserving D₁) (h₂_herm : IsHermitianPreserving D₂)
+    (h₁_linear2 : IsLinear Dd2₁) (h₂_linear2 : IsLinear Dd2₂)
+    (h₁_uniteq2 : IsUnitaryEquivariant Dd2₁) (h₂_uniteq2 : IsUnitaryEquivariant Dd2₂)
+    (h₁_herm2 : IsHermitianPreserving Dd2₁) (h₂_herm2 : IsHermitianPreserving Dd2₂)
     (h₁_norm : IsNormalized D₁) (h₂_norm : IsNormalized D₂)
-    (h₁_tensor : IsTensorMultiplicative D₁) (h₂_tensor : IsTensorMultiplicative D₂)
+    (h₁_tensor : IsTensorMultiplicative D₁ Dd2₁) (h₂_tensor : IsTensorMultiplicative D₂ Dd2₂)
     (h₁_nondegen : IsNonDegenerate D₁) (h₂_nondegen : IsNonDegenerate D₂) :
     D₁ = D₂ := by
-  rw [goldstein_struyve_qiqth_proved hd D₁ h₁_linear h₁_uniteq h₁_herm h₁_norm h₁_tensor h₁_nondegen]
-  rw [goldstein_struyve_qiqth_proved hd D₂ h₂_linear h₂_uniteq h₂_herm h₂_norm h₂_tensor h₂_nondegen]
+  rw [goldstein_struyve_qiqth_proved hd D₁ Dd2₁ h₁_linear h₁_uniteq h₁_herm
+        h₁_linear2 h₁_uniteq2 h₁_herm2 h₁_norm h₁_tensor h₁_nondegen]
+  rw [goldstein_struyve_qiqth_proved hd D₂ Dd2₂ h₂_linear h₂_uniteq h₂_herm
+        h₂_linear2 h₂_uniteq2 h₂_herm2 h₂_norm h₂_tensor h₂_nondegen]
 
 end FQEquivarianceUniqueness
 end QIQTH

@@ -226,6 +226,83 @@ theorem step3_tensor_multiplicativity (d : ℕ) (hd : 1 < d) (α β : ℝ)
   · exact Or.inr ⟨h0, by linarith⟩
   · exact Or.inl ⟨h1, by linarith⟩
 
+/-- **Step 3 (general companion) — tensor narrowing with an INDEPENDENT
+    composite coefficient.**  This is the honest form (cf. GPT-5.5-pro): the
+    `d²`-system functional is its own Schur form `schurForm (d·d) α' β'`, with
+    `α', β'` a priori unrelated to `α, β`.  Tensor multiplicativity forces both
+    `α' = α²` (test at `(Z,Z)`, `Z = diag(1,−1)` traceless) AND `α' = α` (test at
+    `(Z, I)`, using `schurForm α β I = I` from `α+β=1`); hence `α = α²`, so
+    `α ∈ {0,1}`.  The same-coefficient assumption of the older
+    `step3_tensor_multiplicativity` is thereby DERIVED, not assumed. -/
+theorem step3_tensor_narrowing (d : ℕ) (hd : 1 < d) (α β α' β' : ℝ)
+    (h_sum : α + β = 1)
+    (h_fact : IsTensorMultiplicative (@schurForm d α β) (@schurForm (d * d) α' β')) :
+    (α = 1 ∧ β = 0) ∨ (α = 0 ∧ β = 1) := by
+  haveI : NeZero d := ⟨by omega⟩
+  have hd0 : (d : ℂ) ≠ 0 := by exact_mod_cast (show d ≠ 0 by omega)
+  have h10 : (1 : Fin d) ≠ (0 : Fin d) := by
+    apply Fin.ne_of_val_ne; rw [Fin.val_one', Fin.val_zero, Nat.mod_eq_of_lt hd]; exact one_ne_zero
+  set Z : Matrix (Fin d) (Fin d) ℂ := single 0 0 1 - single 1 1 1 with hZ
+  have hZ00 : Z 0 0 = 1 := by
+    simp only [hZ, Matrix.sub_apply, Matrix.single_apply_same, Matrix.single_apply_of_ne,
+      sub_zero, h10, false_and, and_false, not_false_eq_true]
+  have hZtr : Z.trace = 0 := by
+    rw [hZ, Matrix.trace_sub, Matrix.trace_single_eq_same, Matrix.trace_single_eq_same, sub_self]
+  have hsZ : schurForm α β Z = (α : ℂ) • Z := by simp [schurForm, hZtr]
+  have hsI : @schurForm d α β 1 = 1 := by
+    have hab : ((α : ℂ) + (β : ℂ)) = 1 := by exact_mod_cast h_sum
+    simp only [schurForm, Matrix.trace_one, Fintype.card_fin, div_self hd0, one_smul]
+    rw [← add_smul, hab, one_smul]
+  -- (Z,Z): α' = α²
+  have hZZ : (α' : ℂ) = (α : ℂ) * (α : ℂ) := by
+    have h := h_fact Z Z
+    rw [hsZ] at h
+    set e := (finProdFinEquiv : Fin d × Fin d ≃ Fin (d * d)) with he
+    have hKtr : (Matrix.reindex e e (Z ⊗ₖ Z)).trace = 0 := by
+      have hperm : (Matrix.reindex e e (Z ⊗ₖ Z)).trace = (Z ⊗ₖ Z).trace := by
+        simp only [Matrix.trace, Matrix.diag_apply, Matrix.reindex_apply, Matrix.submatrix_apply]
+        exact Fintype.sum_equiv e.symm _ _ (fun _ => rfl)
+      rw [hperm, Matrix.trace_kronecker, hZtr, mul_zero]
+    have hee : e.symm (e (0, 0)) = (0, 0) := Equiv.symm_apply_apply e (0, 0)
+    have key := congrFun (congrFun h (e (0, 0))) (e (0, 0))
+    simp only [schurForm, Matrix.add_apply, Matrix.smul_apply, Matrix.one_apply_eq,
+      smul_eq_mul] at key
+    rw [hKtr] at key
+    simp only [Matrix.reindex_apply, Matrix.submatrix_apply, hee, Matrix.kronecker_apply,
+      Matrix.smul_apply, hZ00, smul_eq_mul, zero_div, zero_mul, mul_zero, mul_one, add_zero] at key
+    exact key
+  -- (Z,I): α' = α
+  have hZI : (α' : ℂ) = (α : ℂ) := by
+    have h := h_fact Z 1
+    rw [hsZ, hsI] at h
+    set e := (finProdFinEquiv : Fin d × Fin d ≃ Fin (d * d)) with he
+    have hKtr : (Matrix.reindex e e (Z ⊗ₖ (1 : Matrix (Fin d) (Fin d) ℂ))).trace = 0 := by
+      have hperm : (Matrix.reindex e e (Z ⊗ₖ (1 : Matrix (Fin d) (Fin d) ℂ))).trace
+          = (Z ⊗ₖ (1 : Matrix (Fin d) (Fin d) ℂ)).trace := by
+        simp only [Matrix.trace, Matrix.diag_apply, Matrix.reindex_apply, Matrix.submatrix_apply]
+        exact Fintype.sum_equiv e.symm _ _ (fun _ => rfl)
+      rw [hperm, Matrix.trace_kronecker, hZtr, zero_mul]
+    have hee : e.symm (e (0, 0)) = (0, 0) := Equiv.symm_apply_apply e (0, 0)
+    have key := congrFun (congrFun h (e (0, 0))) (e (0, 0))
+    simp only [schurForm, Matrix.add_apply, Matrix.smul_apply, Matrix.one_apply_eq,
+      smul_eq_mul] at key
+    rw [hKtr] at key
+    simp only [Matrix.reindex_apply, Matrix.submatrix_apply, hee, Matrix.kronecker_apply,
+      Matrix.smul_apply, Matrix.one_apply_eq, hZ00, smul_eq_mul, zero_div, zero_mul, mul_zero,
+      mul_one, add_zero] at key
+    exact key
+  have hα : α = α * α := by
+    have hc : (α : ℂ) = (α : ℂ) * (α : ℂ) := hZI.symm.trans hZZ
+    exact_mod_cast hc
+  have hfac : α * (α - 1) = 0 := by rw [mul_sub, mul_one, ← hα, sub_self]
+  have hcase : α = 0 ∨ α = 1 := by
+    rcases mul_eq_zero.mp hfac with h0 | h1
+    · exact Or.inl h0
+    · exact Or.inr (by linarith)
+  rcases hcase with h0 | h1
+  · exact Or.inr ⟨h0, by linarith⟩
+  · exact Or.inl ⟨h1, by linarith⟩
+
 /- ── Step 4 (PROVED): non-degeneracy selection ──────────────────── -/
 
 /-- **Non-degeneracy on a pure state.**  There exists a pure state
@@ -277,28 +354,26 @@ theorem step4_nondegeneracy
     Combined                              → D = canonicalD. -/
 theorem goldstein_struyve_findim
     (d : ℕ) (hd : 1 < d)
-    (D : DensityFunctional d)
+    (D : DensityFunctional d) (Dd2 : DensityFunctional (d * d))
     (h_schur : ∃ α β : ℝ, D = @schurForm d α β)
+    (h_schur2 : ∃ α' β' : ℝ, Dd2 = @schurForm (d * d) α' β')
     (h_norm : IsNormalized D)
-    (h_tensor : ∀ Dd2, IsTensorMultiplicative D Dd2)
+    (h_tensor : IsTensorMultiplicative D Dd2)
     (h_nondegen : IsNonDegenerate D) :
     D = canonicalD := by
-  -- Step 1: Schur classification (now supplied as a PROVED fact, not an axiom —
-  -- see `GoldsteinStruyveStep1.schur_classification_real`).
-  obtain ⟨α, β, h_schur⟩ := h_schur
-  -- Substitute D = schurForm α β throughout.
-  rw [h_schur]
-  rw [h_schur] at h_norm h_tensor h_nondegen
+  -- Step 1: Schur classification for BOTH D and its composite companion Dd2
+  -- (supplied as PROVED facts — see `GoldsteinStruyveStep1.schur_classification_real`).
+  obtain ⟨α, β, hD⟩ := h_schur
+  obtain ⟨α', β', hD2⟩ := h_schur2
+  subst hD; subst hD2
   -- Step 2: Normalization ⇒ α + β = 1.
-  have h_sum : α + β = 1 := step2_normalization (Nat.lt_of_lt_of_le Nat.zero_lt_one (le_of_lt hd)) α β h_norm
-  -- Step 3: Tensor-mult ⇒ (α, β) ∈ {(1,0), (0,1)}.
-  have h_case := step3_tensor_multiplicativity d hd α β h_sum
-                   (h_tensor (@schurForm (d * d) α β))
+  have h_sum : α + β = 1 := step2_normalization (by omega) α β h_norm
+  -- Step 3 (general companion): tensor-mult ⇒ (α, β) ∈ {(1,0), (0,1)}
+  -- (the composite coefficient α' is independent; α'=α is DERIVED inside).
+  have h_case := step3_tensor_narrowing d hd α β α' β' h_sum h_tensor
   -- Step 4: Non-degeneracy ⇒ (α, β) = (1, 0).
   obtain ⟨hα, hβ⟩ := step4_nondegeneracy α β h_case h_nondegen
-  -- Substitute to get schurForm 1 0 = canonicalD.
   rw [hα, hβ]
-  -- schurForm 1 0 ρ = (1:ℂ) • ρ + (0:ℂ) • _ = ρ.
   funext ρ
   simp [schurForm, canonicalD]
 
