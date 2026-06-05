@@ -163,6 +163,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — quantum N-copy product weight = classical product weight of Born vector
 #print axioms QIQTH.BornTypicalityQuantum.quantum_chebyshev_freq
 -- expected: standard only — END-TO-END quantum Born-typicality: bad-frequency event weight ≤ p(1−p)/(nε²)
+#print axioms QIQTH.BornTypicalityQuantum.trace_eventEffect_eq_sum
+-- expected: standard only — tr(ρ^⊗ⁿ · F_S) = ∑ quantumWeight (POVM effects ADD; no amplitude interference)
+#print axioms QIQTH.BornTypicalityQuantum.quantum_chebyshev_freq_event
+-- expected: standard only — event-effect form: tr(ρ^⊗ⁿ · F_bad).re ≤ p(1−p)/(nε²)
+#print axioms QIQTH.BornTypicalityQuantum.bornProb_sum
+-- expected: standard only — ∑ₖ bornProb = 1 from POVM completeness + unit trace
+#print axioms QIQTH.BornTypicalityQuantum.quantum_chebyshev_freq_density
+-- expected: standard only — density/POVM wrapper (Hermiticity + ∑=1 derived; nonneg residual)
 
 #print axioms QIQTH.FQEquivarianceUniqueness.canonical_ic_measure_principle
 -- expected: standard + 4 acknowledged sub-axioms

@@ -18,14 +18,17 @@ import Mathlib.Algebra.BigOperators.Ring.Finset
 import Mathlib.Data.Fintype.BigOperators
 import Mathlib.LinearAlgebra.Matrix.Trace
 import Mathlib.LinearAlgebra.Matrix.Hermitian
+import Mathlib.LinearAlgebra.Matrix.PosDef
 import Mathlib.Data.Complex.Basic
 import Mathlib.Data.Complex.BigOperators
+import Mathlib.Analysis.Complex.Order
 import QIQTH.BornTypicalityFinite
 
 namespace QIQTH
 namespace BornTypicalityQuantum
 
 open Finset Matrix
+open scoped ComplexOrder
 
 variable {n d m : ℕ}
 
@@ -118,6 +121,66 @@ theorem quantum_chebyshev_freq (ρ : Matrix (Fin d) (Fin d) ℂ)
       ← Complex.ofReal_sum, Complex.ofReal_re]
   rw [hconv]
   exact BornTypicalityFinite.chebyshev_freq (bornProb ρ E) hp0 hp1 k hε hn
+
+/-- The coarse-grained product POVM effect of an event `S` of histories:
+    `F_S = ∑_{ω ∈ S} ⊗ₜ E(ωₜ)`.  (POVM outcomes are alternatives, so the effects
+    ADD — no amplitude interference.) -/
+def eventEffect (E : Fin m → Matrix (Fin d) (Fin d) ℂ)
+    (S : Finset (Fin n → Fin m)) : Matrix (Fin n → Fin d) (Fin n → Fin d) ℂ :=
+  ∑ ω ∈ S, kronN (fun t => E (ω t))
+
+/-- **The event weight is a genuine quantum probability** (no amplitude summing):
+    `tr( ρ^⊗ⁿ · F_S ) = ∑_{ω ∈ S} quantumWeight ρ E ω`, by trace linearity. -/
+theorem trace_eventEffect_eq_sum (ρ : Matrix (Fin d) (Fin d) ℂ)
+    (E : Fin m → Matrix (Fin d) (Fin d) ℂ) (S : Finset (Fin n → Fin m)) :
+    (kronN (fun _ : Fin n => ρ) * eventEffect E S).trace = ∑ ω ∈ S, quantumWeight ρ E ω := by
+  rw [eventEffect, Finset.mul_sum, Matrix.trace_sum]
+  rfl
+
+/-- **Quantum Born-typicality, event-effect form.**  The quantum probability
+    `tr(ρ^⊗ⁿ · F_bad)` of the coarse-grained bad-frequency POVM effect is
+    `≤ p k·(1−p k)/(n·ε²)` — manifestly a probability of a POVM event, not a
+    sum of amplitudes. -/
+theorem quantum_chebyshev_freq_event (ρ : Matrix (Fin d) (Fin d) ℂ)
+    (E : Fin m → Matrix (Fin d) (Fin d) ℂ) (hρ : ρ.IsHermitian) (hE : ∀ k, (E k).IsHermitian)
+    (hp0 : ∀ k, 0 ≤ bornProb ρ E k) (hp1 : ∑ k, bornProb ρ E k = 1)
+    (k : Fin m) {ε : ℝ} (hε : 0 < ε) (hn : 0 < n) :
+    (kronN (fun _ : Fin n => ρ) * eventEffect E ((univ : Finset (Fin n → Fin m)).filter
+        (fun ω => ((n : ℝ) * ε) ^ 2
+          ≤ (BornTypicalityFinite.count k ω - (n : ℝ) * bornProb ρ E k) ^ 2))).trace.re
+      ≤ bornProb ρ E k * (1 - bornProb ρ E k) / ((n : ℝ) * ε ^ 2) := by
+  rw [trace_eventEffect_eq_sum]
+  exact quantum_chebyshev_freq ρ E hρ hE hp0 hp1 k hε hn
+
+/-- **The Born weights sum to one** (`∑ₖ tr(ρ Eₖ) = tr(ρ·∑E) = tr ρ = 1`), from POVM
+    completeness `∑ E = 1` and unit trace `tr ρ = 1`. -/
+theorem bornProb_sum (ρ : Matrix (Fin d) (Fin d) ℂ) (E : Fin m → Matrix (Fin d) (Fin d) ℂ)
+    (hEsum : ∑ k, E k = 1) (hρtr : Matrix.trace ρ = 1) :
+    ∑ k, bornProb ρ E k = 1 := by
+  simp only [bornProb]
+  rw [← Complex.re_sum, ← Matrix.trace_sum, ← Finset.mul_sum, hEsum, Matrix.mul_one, hρtr,
+    Complex.one_re]
+
+/-- **Quantum Born-typicality for a density matrix + POVM.**  From `ρ` PSD with
+    unit trace and a POVM `E` (each `Eₖ` PSD, `∑ E = 1`), Hermiticity and the
+    normalization `∑ bornProb = 1` are discharged automatically.
+
+    The single residual hypothesis `hp0 : ∀ k, 0 ≤ bornProb ρ E k` (`tr(ρ Eₖ) ≥ 0`)
+    is mathematically a consequence of PSD-ness, but Mathlib (this snapshot) has no
+    direct "trace of a product of two PSD matrices is ≥ 0"; deriving it needs the
+    spectral/`vecMulVec` factorization in `Mathlib.Analysis` (a heavier import) — left
+    as the one residual, flagged honestly. -/
+theorem quantum_chebyshev_freq_density (ρ : Matrix (Fin d) (Fin d) ℂ)
+    (E : Fin m → Matrix (Fin d) (Fin d) ℂ) (hρ : ρ.PosSemidef) (hE : ∀ k, (E k).PosSemidef)
+    (hEsum : ∑ k, E k = 1) (hρtr : Matrix.trace ρ = 1)
+    (hp0 : ∀ k, 0 ≤ bornProb ρ E k)
+    (k : Fin m) {ε : ℝ} (hε : 0 < ε) (hn : 0 < n) :
+    (∑ ω ∈ (univ : Finset (Fin n → Fin m)).filter
+        (fun ω => ((n : ℝ) * ε) ^ 2
+          ≤ (BornTypicalityFinite.count k ω - (n : ℝ) * bornProb ρ E k) ^ 2),
+        quantumWeight ρ E ω).re
+      ≤ bornProb ρ E k * (1 - bornProb ρ E k) / ((n : ℝ) * ε ^ 2) :=
+  quantum_chebyshev_freq ρ E hρ.1 (fun k => (hE k).1) hp0 (bornProb_sum ρ E hEsum hρtr) k hε hn
 
 end BornTypicalityQuantum
 end QIQTH
