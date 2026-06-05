@@ -621,6 +621,9 @@ lemma hadS_sq : hadS * hadS = 1 / 2 := by
     Real.mul_self_sqrt h2]
   norm_num
 
+/-- `s² = 1/2` in `^`-form (matches `match_scalars`-normalized goals). -/
+lemma hadS_sq2 : hadS ^ 2 = 1 / 2 := by rw [pow_two, hadS_sq]
+
 attribute [irreducible] hadS
 
 /-- The custom `matrixUnit` is Mathlib's `Matrix.single i j 1`. -/
@@ -671,6 +674,23 @@ lemma hadamardU_mul_self (d : ℕ) {a b : Fin d} (hab : a ≠ b) :
 lemma hadamardU_unitary (d : ℕ) {a b : Fin d} (hab : a ≠ b) :
     hadamardU d a b * star (hadamardU d a b) = 1 := by
   rw [hadamardU_star]; exact hadamardU_mul_self d hab
+
+/-- **Conjugation of `E_aa` by `H`.**  `H · E_aa · H* = ½(E_aa+E_ab+E_ba+E_bb)`. -/
+lemma hadamardU_conj_Eaa (d : ℕ) {a b : Fin d} (hab : a ≠ b) :
+    hadamardU d a b * matrixUnit d a a * star (hadamardU d a b)
+      = (1 / 2 : ℂ) • (matrixUnit d a a + matrixUnit d a b
+          + matrixUnit d b a + matrixUnit d b b) := by
+  rw [hadamardU_star]
+  simp only [hadamardU, Matrix.add_mul, Matrix.mul_add, Matrix.one_mul, Matrix.mul_one,
+    Matrix.smul_mul, Matrix.mul_smul, matrixUnit_mul, hab, Ne.symm hab, if_true,
+    if_false, smul_zero, add_zero, zero_add, smul_smul]
+  match_scalars <;>
+    (first
+      | linear_combination hadS_sq
+      | linear_combination (2 : ℂ) * hadS_sq
+      | linear_combination (-1 : ℂ) * hadS_sq
+      | linear_combination (-2 : ℂ) * hadS_sq
+      | ring)
 
 /- ── Honest residual interface ────────────────────────────────────── -/
 
