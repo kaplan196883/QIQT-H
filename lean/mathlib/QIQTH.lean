@@ -115,6 +115,10 @@ import QIQTH.BornJoin
 -- Toward the REAL prize: DERIVE the single-trial Born law from NON-CONTEXTUALITY (effect-
 -- Gleason) instead of assuming it — μ(Pₐ) = tr(ρ Pₐ) forced for any non-contextual assignment:
 import QIQTH.OneSiteGleason
+-- Wiring non-contextuality into the join: the ensemble's single-trial law p is FORCED Born
+-- (no longer a free parameter); the representation with p DERIVED, only non-contextuality +
+-- independence assumed:
+import QIQTH.BornJoinGleason
 -- Tier B (GPT-5.5-pro review): the BRIDGE theorem via Spectrum Broadcast Structures.
 -- DERIVES the saturation premise cost>Q_max/2 from an objective record's redundancy +
 -- an INFORMATION cost R·log n (tensor/log, fixing the rank-model flaw): distinguishability

@@ -652,6 +652,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — non-contextual μ(Pₐ) = Re tr(ρ Pₐ) FORCED by effect-Gleason (not assumed)
 #print axioms QIQTH.OneSiteGleason.forced_isProbVector
 -- expected: standard only — the forced single-trial law is a probability vector
+#print axioms QIQTH.BornJoinGleason.ensemble_p_isBorn
+-- expected: standard only — non-contextual ensemble law p is FORCED Born (p = Re tr(ρ Pₐ))
+#print axioms QIQTH.BornJoinGleason.finite_noCollapseBorn_fromNoncontextuality
+-- expected: standard only — full representation with the single-trial law DERIVED (not assumed)
 
 -- QIQT-H TIER B: the bridge theorem (Spectrum Broadcast Structures, information cost).
 #print axioms QIQTH.SBSBridge.fragment_finrank_ge
