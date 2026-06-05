@@ -170,6 +170,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only
 #print axioms QIQTH.GoldsteinStruyveStep1.diag_coeff_collapse
 -- expected: standard only — D(E_ii) diagonal entries collapse to c_diag (at i,i) and c_rest
+#print axioms QIQTH.GoldsteinStruyveStep1.hadamardU_mul_self
+-- expected: standard only — H·H = 1 (2s²=1 normalization)
+#print axioms QIQTH.GoldsteinStruyveStep1.hadamardU_conj_Eaa
+-- expected: standard only — H·E_aa·H* = ½(E_aa+E_ab+E_ba+E_bb)
+#print axioms QIQTH.GoldsteinStruyveStep1.hadamardU_conj_entry_ab
+-- expected: standard only — general (a,b)-entry of H·M·H*
+#print axioms QIQTH.GoldsteinStruyveStep1.hadamard_relation
+-- expected: standard only — c_off = c_diag − c_rest (Hadamard step 1d)
 
 -- A4: Chebyshev concentration
 #print axioms QIQTH.BornConcentration.chebyshev_finite

@@ -647,6 +647,37 @@ lemma matrixUnit_mul (d : ℕ) (i j k l : Fin d) :
   · subst h; rw [Matrix.single_mul_single_same, mul_one, if_pos rfl]
   · rw [Matrix.single_mul_single_of_ne (h := h), if_neg h]
 
+/-- Entry of `E_ij · M`: row `i` is `M`'s row `j`, other rows zero. -/
+lemma matrixUnit_mul_apply (d : ℕ) (i j : Fin d) (M : Matrix (Fin d) (Fin d) ℂ) (a b : Fin d) :
+    (matrixUnit d i j * M) a b = if a = i then M j b else 0 := by
+  rw [Matrix.mul_apply]
+  by_cases h : a = i
+  · subst h; rw [if_pos rfl, Finset.sum_eq_single j]
+    · rw [matrixUnit_at_ij, one_mul]
+    · intro q _ hq; rw [matrixUnit_apply, if_neg (fun hc => hq hc.2), zero_mul]
+    · intro h; exact absurd (Finset.mem_univ j) h
+  · rw [if_neg h, Finset.sum_eq_zero]
+    intro q _; rw [matrixUnit_apply, if_neg (fun hc => h hc.1), zero_mul]
+
+/-- Entry of `M · E_kl`: column `l` is `M`'s column `k`, other columns zero. -/
+lemma mul_matrixUnit_apply (d : ℕ) (k l : Fin d) (M : Matrix (Fin d) (Fin d) ℂ) (a b : Fin d) :
+    (M * matrixUnit d k l) a b = if b = l then M a k else 0 := by
+  rw [Matrix.mul_apply]
+  by_cases h : b = l
+  · subst h; rw [if_pos rfl, Finset.sum_eq_single k]
+    · rw [matrixUnit_at_ij, mul_one]
+    · intro q _ hq; rw [matrixUnit_apply, if_neg (fun hc => hq hc.1), mul_zero]
+    · intro h; exact absurd (Finset.mem_univ k) h
+  · rw [if_neg h, Finset.sum_eq_zero]
+    intro q _; rw [matrixUnit_apply, if_neg (fun hc => h hc.2), mul_zero]
+
+/-- Entry of the sandwich `E_ij · M · E_kl = M_{jk} · E_il`. -/
+lemma matrixUnit_mul_mul_apply (d : ℕ) (i j k l : Fin d) (M : Matrix (Fin d) (Fin d) ℂ)
+    (a b : Fin d) :
+    (matrixUnit d i j * M * matrixUnit d k l) a b = if i = a ∧ l = b then M j k else 0 := by
+  rw [matrixUnit_eq_single, matrixUnit_eq_single, Matrix.single_mul_mul_single, one_mul, mul_one,
+    Matrix.single_apply]
+
 /-- The 2-level **Hadamard unitary** on indices `a, b`: identity outside the
     `{a,b}` block, `s·[[1,1],[1,-1]]` (with `s = 1/√2`) inside.  Written as
     `1 + A` with `A` supported on the four `{a,b}` matrix units. -/
@@ -675,6 +706,20 @@ lemma hadamardU_unitary (d : ℕ) {a b : Fin d} (hab : a ≠ b) :
     hadamardU d a b * star (hadamardU d a b) = 1 := by
   rw [hadamardU_star]; exact hadamardU_mul_self d hab
 
+/-- **General `(a,b)`-entry of the Hadamard conjugation.**
+    `(H · M · H*)_{ab} = ½(M_aa − M_ab + M_ba − M_bb)` for any `M`. -/
+lemma hadamardU_conj_entry_ab (d : ℕ) {a b : Fin d} (hab : a ≠ b)
+    (M : Matrix (Fin d) (Fin d) ℂ) :
+    (hadamardU d a b * M * star (hadamardU d a b)) a b
+      = (1 / 2 : ℂ) * (M a a - M a b + M b a - M b b) := by
+  rw [hadamardU_star]
+  simp only [hadamardU, add_mul, mul_add, one_mul, mul_one, Matrix.smul_mul, Matrix.mul_smul,
+    smul_smul, Matrix.add_apply, Matrix.smul_apply, matrixUnit_mul_apply, mul_matrixUnit_apply,
+    matrixUnit_mul_mul_apply, hab, Ne.symm hab, smul_eq_mul, mul_zero, zero_mul, mul_ite,
+    ite_mul, add_zero, zero_add, mul_one, and_self, and_true, true_and, and_false, false_and,
+    if_true, if_false, ↓reduceIte]
+  linear_combination (M a a - M a b + M b a - M b b) * hadS_sq
+
 /-- **Conjugation of `E_aa` by `H`.**  `H · E_aa · H* = ½(E_aa+E_ab+E_ba+E_bb)`. -/
 lemma hadamardU_conj_Eaa (d : ℕ) {a b : Fin d} (hab : a ≠ b) :
     hadamardU d a b * matrixUnit d a a * star (hadamardU d a b)
@@ -691,6 +736,46 @@ lemma hadamardU_conj_Eaa (d : ℕ) {a b : Fin d} (hab : a ≠ b) :
       | linear_combination (-1 : ℂ) * hadS_sq
       | linear_combination (-2 : ℂ) * hadS_sq
       | ring)
+
+/-- **PROVED — the Hadamard relation (step 1d).**  For a ℂ-linear,
+    unitary-equivariant `D` and `a ≠ b`, the off-diagonal coefficient
+    equals the difference of the two diagonal coefficients:
+    `D(E_ab) a b = D(E_aa) a a − D(E_aa) b b`  (i.e. `c_off = c_diag − c_rest`).
+
+    *Proof:* equivariance at the Hadamard `H` gives `D(H E_aa H*) = H D(E_aa) H*`.
+    The left side, via `hadamardU_conj_Eaa` and linearity, has `(a,b)`-entry
+    `½·D(E_ab) a b` (the other three matrix units vanish at `(a,b)` by the
+    support lemmas); the right side, via `hadamardU_conj_entry_ab`, has
+    `(a,b)`-entry `½·(D(E_aa) a a − D(E_aa) b b)` (the cross terms vanish
+    since `D(E_aa)` is diagonal).  Cancel the `½`. -/
+theorem hadamard_relation
+    {d : ℕ} (D : GoldsteinStruyveFinDim.DensityFunctional d)
+    (h_lin : GoldsteinStruyveFinDim.IsLinear D)
+    (h_uniteq : GoldsteinStruyveFinDim.IsUnitaryEquivariant D)
+    {a b : Fin d} (hab : a ≠ b) :
+    D (matrixUnit d a b) a b
+      = D (matrixUnit d a a) a a - D (matrixUnit d a a) b b := by
+  have hsmul : ∀ (c : ℂ) (X : Matrix (Fin d) (Fin d) ℂ), D (c • X) = c • D X := by
+    intro c X; have := h_lin c 0 X X; simpa using this
+  have hadd : ∀ X Y : Matrix (Fin d) (Fin d) ℂ, D (X + Y) = D X + D Y := by
+    intro X Y; have := h_lin 1 1 X Y; simpa using this
+  have hU : hadamardU d a b * star (hadamardU d a b) = 1 := hadamardU_unitary d hab
+  have heq := h_uniteq (hadamardU d a b) hU (matrixUnit d a a)
+  rw [hadamardU_conj_Eaa d hab, hsmul, hadd, hadd, hadd] at heq
+  have hpt := congrFun (congrFun heq a) b
+  rw [Matrix.smul_apply, smul_eq_mul, hadamardU_conj_entry_ab d hab,
+    Matrix.add_apply, Matrix.add_apply, Matrix.add_apply] at hpt
+  -- vanishing entries
+  have z1 : D (matrixUnit d a a) a b = 0 := diag_support_of_unitary_equivariant D h_uniteq hab
+  have z2 : D (matrixUnit d b a) a b = 0 :=
+    offdiag_support_of_unitary_equivariant D h_lin h_uniteq (Ne.symm hab)
+      (fun h => hab (congrArg Prod.fst h))
+  have z3 : D (matrixUnit d b b) a b = 0 := diag_support_of_unitary_equivariant D h_uniteq hab
+  have z4 : D (matrixUnit d a a) b a = 0 :=
+    diag_support_of_unitary_equivariant D h_uniteq (Ne.symm hab)
+  rw [z1, z2, z3, z4] at hpt
+  simp only [add_zero, zero_add, sub_zero] at hpt
+  exact mul_left_cancel₀ (by norm_num : (1 / 2 : ℂ) ≠ 0) hpt
 
 /- ── Honest residual interface ────────────────────────────────────── -/
 
