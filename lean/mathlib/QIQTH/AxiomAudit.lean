@@ -147,6 +147,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the canonical product weight is a probability distribution
 #print axioms QIQTH.BornTypicalityFinite.expectation_count
 -- expected: standard only — E[#{t: ω t = k}] = N·p k  (frequencies unbiased for Born weights)
+#print axioms QIQTH.BornTypicalityFinite.markov_le
+-- expected: standard only — finite Markov inequality for the product measure
+#print axioms QIQTH.BornTypicalityFinite.chebyshev_count
+-- expected: standard only — Chebyshev concentration: P((count−Np)² ≥ (Nε)²) ≤ E[(count−Np)²]/(Nε)²
 
 #print axioms QIQTH.FQEquivarianceUniqueness.canonical_ic_measure_principle
 -- expected: standard + 4 acknowledged sub-axioms

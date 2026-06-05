@@ -14,12 +14,22 @@
 
   For the QIQT-H reading, `p k = tr(ρ E_k)` (Born weights of a finite POVM):
   the canonical product measure assigns those weights as the expected
-  frequencies.  (The Chebyshev concentration bound — `P(|freq − p| ≥ ε) ≤
-  p(1−p)/(Nε²)` — is the next step; it needs the second moment.)
+  frequencies.  We also prove the CONCENTRATION direction:
+
+    • `markov_le`        finite Markov inequality for the product measure;
+    • `chebyshev_count`  Chebyshev: the weight of the deviation event
+                         `(count − N·p k)² ≥ (N·ε)²` (i.e. `|freq − p k| ≥ ε`)
+                         is `≤ E[(count − N·p k)²] / (N·ε)²`.
+
+  With `expectation_count` (`E[count] = N·p k`), the second-moment numerator is
+  the variance; computing it to `N·p k·(1 − p k)` (needs the two-coordinate
+  marginal) yields the standard `p(1−p)/(Nε²)` typicality bound — the last
+  remaining step.
 -/
 
 import Mathlib.Algebra.BigOperators.Ring.Finset
 import Mathlib.Algebra.Order.BigOperators.GroupWithZero.Finset
+import Mathlib.Algebra.Order.BigOperators.Group.Finset
 import Mathlib.Data.Fintype.BigOperators
 import Mathlib.Data.Complex.Basic
 
@@ -89,6 +99,42 @@ theorem expectation_count (p : Fin m → ℝ) (hp1 : ∑ i, p i = 1) (k : Fin m)
   rw [Finset.sum_comm]
   simp_rw [marginal p hp1 k]
   rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
+
+/-- **Finite Markov inequality** for the product measure: for a nonnegative
+    observable `g` and threshold `c > 0`, the weight of `{g ≥ c}` is at most
+    `E[g] / c`. -/
+theorem markov_le (p : Fin m → ℝ) (hp : ∀ i, 0 ≤ p i)
+    (g : (Fin N → Fin m) → ℝ) (hg : ∀ ω, 0 ≤ g ω) {c : ℝ} (hc : 0 < c) :
+    (∑ ω ∈ univ.filter (fun ω => c ≤ g ω), w p ω) ≤ (∑ ω, w p ω * g ω) / c := by
+  rw [le_div_iff₀ hc]
+  calc (∑ ω ∈ univ.filter (fun ω => c ≤ g ω), w p ω) * c
+      = ∑ ω ∈ univ.filter (fun ω => c ≤ g ω), w p ω * c := by rw [Finset.sum_mul]
+    _ ≤ ∑ ω ∈ univ.filter (fun ω => c ≤ g ω), w p ω * g ω := by
+        refine Finset.sum_le_sum (fun ω hω => ?_)
+        rw [Finset.mem_filter] at hω
+        exact mul_le_mul_of_nonneg_left hω.2 (w_nonneg p hp ω)
+    _ ≤ ∑ ω, w p ω * g ω :=
+        Finset.sum_le_sum_of_subset_of_nonneg (Finset.filter_subset _ _)
+          (fun ω _ _ => mul_nonneg (w_nonneg p hp ω) (hg ω))
+
+/-- **Chebyshev concentration for empirical counts.**  The weight of the
+    deviation event `(count − N·p k)² ≥ (N·ε)²` (equivalently `|freq − p k| ≥ ε`)
+    is bounded by the second moment over `(N·ε)²`.  Combined with
+    `expectation_count` (`E[count] = N·p k`), the second-moment numerator is the
+    variance `N·p k·(1−p k)`, giving the standard `p(1−p)/(Nε²)` typicality bound
+    once that variance is computed. -/
+theorem chebyshev_count (p : Fin m → ℝ) (hp : ∀ i, 0 ≤ p i) (k : Fin m)
+    {ε : ℝ} (hε : 0 < ε) (hN : 0 < N) :
+    (∑ ω ∈ (univ : Finset (Fin N → Fin m)).filter
+          (fun ω => ((N : ℝ) * ε) ^ 2 ≤ (count k ω - (N : ℝ) * p k) ^ 2), w p ω)
+      ≤ (∑ ω : Fin N → Fin m, w p ω * (count k ω - (N : ℝ) * p k) ^ 2) / ((N : ℝ) * ε) ^ 2 := by
+  -- (Markov inequality on the squared deviation, inlined to keep `N` concrete.)
+  rw [le_div_iff₀ (pow_pos (mul_pos (by exact_mod_cast hN) hε) 2), Finset.sum_mul]
+  refine (Finset.sum_le_sum fun ω hω => ?_).trans
+    (Finset.sum_le_sum_of_subset_of_nonneg (Finset.filter_subset _ _)
+      (fun ω _ _ => mul_nonneg (w_nonneg p hp ω) (sq_nonneg _)))
+  rw [Finset.mem_filter] at hω
+  exact mul_le_mul_of_nonneg_left hω.2 (w_nonneg p hp ω)
 
 end BornTypicalityFinite
 end QIQTH
