@@ -633,6 +633,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OneSiteBorn.bornVec_sum
 -- expected: standard only — Born weights are a probability vector (sum = 1)
 
+-- QIQT-H PRIZE (C3+C4): the JOIN — capacity-selected actual histories are Born.
+#print axioms QIQTH.BornJoin.ActualEnsemble.pushforward_eq_w
+-- expected: standard only — world-mass of a history = Born PRODUCT weight (from oneSite+indep)
+#print axioms QIQTH.BornJoin.ActualEnsemble.actualHistory_typical
+-- expected: standard only — atypical-frequency histories carry small total mass
+#print axioms QIQTH.BornJoin.ActualEnsemble.actualHistory_typical_world
+-- expected: standard only — world-mass form of typicality
+#print axioms QIQTH.BornJoin.ActualEnsemble.finite_noCollapseBornRepresentation
+-- expected: standard only — THE PRIZE: unique actual history + Born product law + typicality
+
 -- QIQT-H TIER B: the bridge theorem (Spectrum Broadcast Structures, information cost).
 #print axioms QIQTH.SBSBridge.fragment_finrank_ge
 -- expected: standard only — distinguishability ⇒ fragment dimension ≥ n (orthonormal).
