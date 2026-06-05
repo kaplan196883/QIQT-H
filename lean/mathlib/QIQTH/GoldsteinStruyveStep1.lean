@@ -35,11 +35,15 @@
 -/
 
 import Mathlib.Data.Matrix.Basic
+import Mathlib.Data.Matrix.Basis
 import Mathlib.LinearAlgebra.Matrix.Trace
+import Mathlib.LinearAlgebra.Matrix.ConjTranspose
 import Mathlib.Data.Complex.Basic
+import Mathlib.Data.Real.Sqrt
 import Mathlib.Logic.Equiv.Basic
 import Mathlib.GroupTheory.Perm.Basic
 import Mathlib.Tactic.FinCases
+import Mathlib.Tactic.LinearCombination
 import QIQTH.GoldsteinStruyveFinDim
 
 namespace QIQTH
@@ -600,6 +604,73 @@ theorem diag_coeff_collapse
       (∀ i k, i ≠ k → D (matrixUnit d i i) k k = c_rest) ∧
       (∀ i, D (matrixUnit d i i) i i = c_diag) :=
   step1c_collapse_of_perm_symmetric hd _ (diag_coeff_perm_symmetric D h_uniteq)
+
+/- ── PROVED: the Hadamard step (step 1d) ──────────────────────────── -/
+
+/-- The Hadamard amplitude `s = 1/√2` (as a complex scalar). -/
+noncomputable def hadS : ℂ := (Real.sqrt 2 / 2 : ℝ)
+
+/-- `s` is real, so it is its own conjugate. -/
+lemma hadS_star : star hadS = hadS := by simp [hadS]
+
+/-- `s² = 1/2`, hence `2 s² = 1` — the unitarity normalization. -/
+lemma hadS_sq : hadS * hadS = 1 / 2 := by
+  have h2 : (0 : ℝ) ≤ 2 := by norm_num
+  rw [hadS, ← Complex.ofReal_mul,
+    show (Real.sqrt 2 / 2) * (Real.sqrt 2 / 2) = (Real.sqrt 2 * Real.sqrt 2) / 4 by ring,
+    Real.mul_self_sqrt h2]
+  norm_num
+
+attribute [irreducible] hadS
+
+/-- The custom `matrixUnit` is Mathlib's `Matrix.single i j 1`. -/
+lemma matrixUnit_eq_single (d : ℕ) (i j : Fin d) :
+    matrixUnit d i j = Matrix.single i j 1 := by
+  funext k l
+  rw [matrixUnit_apply, Matrix.single_apply]
+  exact if_congr ⟨fun h => ⟨h.1.symm, h.2.symm⟩, fun h => ⟨h.1.symm, h.2.symm⟩⟩ rfl rfl
+
+/-- Conjugate-transpose of a matrix unit swaps its indices. -/
+lemma star_matrixUnit (d : ℕ) (i j : Fin d) :
+    star (matrixUnit d i j) = matrixUnit d j i := by
+  rw [matrixUnit_eq_single, matrixUnit_eq_single, Matrix.star_eq_conjTranspose,
+    Matrix.conjTranspose_single, star_one]
+
+/-- Matrix-unit multiplication: `E_ij · E_kl = δ_{jk} E_il`. -/
+lemma matrixUnit_mul (d : ℕ) (i j k l : Fin d) :
+    matrixUnit d i j * matrixUnit d k l = if j = k then matrixUnit d i l else 0 := by
+  simp only [matrixUnit_eq_single]
+  by_cases h : j = k
+  · subst h; rw [Matrix.single_mul_single_same, mul_one, if_pos rfl]
+  · rw [Matrix.single_mul_single_of_ne (h := h), if_neg h]
+
+/-- The 2-level **Hadamard unitary** on indices `a, b`: identity outside the
+    `{a,b}` block, `s·[[1,1],[1,-1]]` (with `s = 1/√2`) inside.  Written as
+    `1 + A` with `A` supported on the four `{a,b}` matrix units. -/
+noncomputable def hadamardU (d : ℕ) (a b : Fin d) : Matrix (Fin d) (Fin d) ℂ :=
+  1 + (hadS - 1) • matrixUnit d a a + hadS • matrixUnit d a b
+    + hadS • matrixUnit d b a + (-(hadS + 1)) • matrixUnit d b b
+
+/-- `H` is self-adjoint (real symmetric). -/
+lemma hadamardU_star (d : ℕ) (a b : Fin d) :
+    star (hadamardU d a b) = hadamardU d a b := by
+  simp only [hadamardU, star_add, star_smul, star_one, star_matrixUnit, hadS_star,
+    star_sub, star_neg]
+  abel
+
+/-- `H · H = 1`: the unitarity normalization, via `A² = −2A` (which uses
+    `2 s² = 1`). -/
+lemma hadamardU_mul_self (d : ℕ) {a b : Fin d} (hab : a ≠ b) :
+    hadamardU d a b * hadamardU d a b = 1 := by
+  simp only [hadamardU, Matrix.add_mul, Matrix.mul_add, Matrix.one_mul, Matrix.mul_one,
+    Matrix.smul_mul, Matrix.mul_smul, matrixUnit_mul, hab, Ne.symm hab, if_true,
+    if_false, smul_zero, add_zero, smul_smul]
+  match_scalars <;> (first | linear_combination (2 : ℂ) * hadS_sq | ring)
+
+/-- `H` is unitary: `H · H* = 1` (since `H* = H` and `H·H = 1`). -/
+lemma hadamardU_unitary (d : ℕ) {a b : Fin d} (hab : a ≠ b) :
+    hadamardU d a b * star (hadamardU d a b) = 1 := by
+  rw [hadamardU_star]; exact hadamardU_mul_self d hab
 
 /- ── Honest residual interface ────────────────────────────────────── -/
 
