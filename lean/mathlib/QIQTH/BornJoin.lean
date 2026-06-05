@@ -164,6 +164,32 @@ theorem finite_noCollapseBornRepresentation (k : Fin m) {ε : ℝ} (hε : 0 < ε
   ⟨fun ω => existsUnique_actualHistory (E.V ω), E.pushforward_eq_w,
     E.actualHistory_typical_world k hε hn⟩
 
+/-- **The world-measure carries NO observable freedom (toward b3).**  Any two capacity-limited
+    ensembles with the same single-trial law `p` have IDENTICAL history distributions — both equal
+    the product Born measure `w p` — regardless of their world-spaces `Ω` or probability masses
+    `P`.  So the posited `ProbMass` is not a fundamental extra input: the observable n-trial
+    outcome statistics are FORCED by `p` + independence; the world-measure beyond what fixes `p`
+    is observationally irrelevant.
+
+    This is the honest content behind "deriving the world-measure": one cannot derive a specific
+    probability from selector dynamics (Born is not the counting/uniform measure), but one CAN
+    show the world-measure adds no freedom — the outcome law is unique.  Combined with `p` forced
+    Born (non-contextuality, `BornJoinGleason`) and independence = product preparation
+    (`w_history_factorizes`), the ENTIRE observable content is fixed by non-contextuality +
+    product preparation; the `(Φ,λ)` dynamics generating individual runs remains physics, not a
+    further probabilistic posit. -/
+theorem history_law_unique (E₁ E₂ : ActualEnsemble m n)
+    (hp : E₁.p = E₂.p) (h : Fin n → Fin m) :
+    E₁.P.massSet ((univ : Finset E₁.Ω).filter (fun ω => E₁.actualHist ω = h))
+      = E₂.P.massSet ((univ : Finset E₂.Ω).filter (fun ω => E₂.actualHist ω = h)) := by
+  rw [E₁.pushforward_eq_w, E₂.pushforward_eq_w, hp]
+
+/-- The history distribution of ANY capacity-limited ensemble equals the product Born measure
+    `w p` — the outcome statistics are fixed independent of how the worlds/measure are modelled. -/
+theorem history_law_eq_w (E : ActualEnsemble m n) (h : Fin n → Fin m) :
+    E.P.massSet ((univ : Finset E.Ω).filter (fun ω => E.actualHist ω = h)) = w E.p h :=
+  E.pushforward_eq_w h
+
 end ActualEnsemble
 
 /- ── C6: a concrete i.i.d. Born witness (non-vacuity of the prize) ──

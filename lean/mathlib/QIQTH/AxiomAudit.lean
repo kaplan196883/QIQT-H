@@ -648,6 +648,8 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — concrete i.i.d. Born ensemble: oneSite+indep JOINTLY SATISFIABLE
 #print axioms QIQTH.BornJoin.iid_oneSite
 -- expected: standard only — single-trial marginal of the product Born weight is p (non-vacuity)
+#print axioms QIQTH.BornJoin.ActualEnsemble.history_law_unique
+-- expected: standard only — world-measure carries no observable freedom (outcome law forced)
 
 -- TOWARD THE REAL PRIZE: single-trial Born law DERIVED from non-contextuality.
 #print axioms QIQTH.OneSiteGleason.oneSite_forced
