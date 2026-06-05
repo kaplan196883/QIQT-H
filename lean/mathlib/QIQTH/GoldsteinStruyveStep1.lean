@@ -777,6 +777,32 @@ theorem hadamard_relation
   simp only [add_zero, zero_add, sub_zero] at hpt
   exact mul_left_cancel₀ (by norm_num : (1 / 2 : ℂ) ≠ 0) hpt
 
+/-- **PROVED.**  Image of a diagonal unit: for `d ≥ 2` and any `j ≠ i`,
+    `D(E_ii) = D(E_ii) j j · 1 + (D(E_ii) i i − D(E_ii) j j) · E_ii`.
+    (`D(E_ii)` is diagonal with one value at `(i,i)` and one value at every
+    other diagonal slot.) -/
+theorem diag_image_eq {d : ℕ} (D : GoldsteinStruyveFinDim.DensityFunctional d)
+    (h_uniteq : GoldsteinStruyveFinDim.IsUnitaryEquivariant D)
+    {i j : Fin d} (hji : j ≠ i) :
+    D (matrixUnit d i i)
+      = D (matrixUnit d i i) j j • (1 : Matrix (Fin d) (Fin d) ℂ)
+        + (D (matrixUnit d i i) i i - D (matrixUnit d i i) j j) • matrixUnit d i i := by
+  funext k l
+  rw [Matrix.add_apply, Matrix.smul_apply, Matrix.smul_apply, Matrix.one_apply, smul_eq_mul,
+    smul_eq_mul]
+  by_cases hkl : k = l
+  · subst hkl
+    rw [if_pos rfl, mul_one]
+    by_cases hki : k = i
+    · subst hki; rw [matrixUnit_at_ij, mul_one]; ring
+    · rw [matrixUnit_at_other d i i k k (fun hc => hki hc.1), mul_zero, add_zero]
+      have hsw := diag_coeff_perm_symmetric D h_uniteq (Equiv.swap k j) i k
+      rw [Equiv.swap_apply_of_ne_of_ne (Ne.symm hki) (Ne.symm hji), Equiv.swap_apply_left] at hsw
+      exact hsw.symm
+  · rw [if_neg hkl, mul_zero, zero_add,
+      matrixUnit_at_other d i i k l (fun hc => hkl (hc.1.trans hc.2.symm)), mul_zero]
+    exact diag_support_of_unitary_equivariant D h_uniteq hkl
+
 /- ── Honest residual interface ────────────────────────────────────── -/
 
 /-  The earlier version of this module carried five placeholder
