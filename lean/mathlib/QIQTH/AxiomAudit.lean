@@ -177,6 +177,16 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — 0 ≤ bornProb for PSD ρ + PSD effects
 #print axioms QIQTH.BornTypicalityQuantum.quantum_chebyshev_freq_density
 -- expected: standard only — density/POVM wrapper (Hermiticity + nonneg + ∑=1 ALL derived; no residual)
+#print axioms QIQTH.BornTypicalityFinite.chebyshev_freq_union
+-- expected: standard only — union bound over outcomes (∑ₖ p(1−p)/(Nε²))
+#print axioms QIQTH.BornTypicalityFinite.chebyshev_freq_union_le
+-- expected: standard only — global joint-typicality bound ≤ 1/(Nε²)
+#print axioms QIQTH.BornTypicalityQuantum.quantum_chebyshev_freq_union
+-- expected: standard only — quantum lift of the outcome union bound
+#print axioms QIQTH.BornTypicalityQuantum.quantum_chebyshev_freq_union_le
+-- expected: standard only — quantum global joint typicality ≤ 1/(nε²)
+#print axioms QIQTH.BornTypicalityQuantum.quantum_chebyshev_freq_union_density
+-- expected: standard only — density/POVM global joint typicality (all hyps derived)
 
 #print axioms QIQTH.FQEquivarianceUniqueness.canonical_ic_measure_principle
 -- expected: standard + 4 acknowledged sub-axioms

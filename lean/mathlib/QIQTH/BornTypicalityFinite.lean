@@ -249,5 +249,63 @@ theorem chebyshev_freq (p : Fin m → ℝ) (hp : ∀ i, 0 ≤ p i) (hp1 : ∑ i,
   have hNr : (N : ℝ) ≠ 0 := by exact_mod_cast hN.ne'
   rw [mul_pow]; field_simp
 
+/-- **Union bound over outcomes.**  The weight of the event "SOME outcome's empirical
+    frequency is `ε`-far from its Born weight `p k`" is at most the sum of the
+    per-outcome Chebyshev bounds, `(∑ₖ p k(1−p k)) / (N ε²)`.  (Standard union bound:
+    the bad set is `⋃ₖ Bₖ`, and `w(⋃ Bₖ) ≤ ∑ w(Bₖ)` since the weights are nonnegative.) -/
+theorem chebyshev_freq_union (p : Fin m → ℝ) (hp : ∀ i, 0 ≤ p i) (hp1 : ∑ i, p i = 1)
+    {ε : ℝ} (hε : 0 < ε) (hN : 0 < N) :
+    (∑ ω ∈ (univ : Finset (Fin N → Fin m)).filter
+        (fun ω => ∃ k, ((N : ℝ) * ε) ^ 2 ≤ (count k ω - (N : ℝ) * p k) ^ 2), w p ω)
+      ≤ (∑ k, p k * (1 - p k)) / ((N : ℝ) * ε ^ 2) := by
+  classical
+  set P : Fin m → (Fin N → Fin m) → Prop :=
+    fun k ω => ((N : ℝ) * ε) ^ 2 ≤ (count k ω - (N : ℝ) * p k) ^ 2 with hP
+  have hunion :
+      (∑ ω ∈ (univ : Finset (Fin N → Fin m)).filter (fun ω => ∃ k, P k ω), w p ω)
+        ≤ ∑ k : Fin m, ∑ ω ∈ (univ : Finset (Fin N → Fin m)).filter (fun ω => P k ω), w p ω := by
+    have hcomm :
+        (∑ k : Fin m, ∑ ω ∈ (univ : Finset (Fin N → Fin m)).filter (fun ω => P k ω), w p ω)
+          = ∑ ω : Fin N → Fin m, ∑ k : Fin m, (if P k ω then w p ω else 0) := by
+      simp_rw [Finset.sum_filter]
+      rw [Finset.sum_comm]
+    rw [hcomm]
+    calc (∑ ω ∈ (univ : Finset (Fin N → Fin m)).filter (fun ω => ∃ k, P k ω), w p ω)
+        ≤ ∑ ω ∈ (univ : Finset (Fin N → Fin m)).filter (fun ω => ∃ k, P k ω),
+            ∑ k : Fin m, (if P k ω then w p ω else 0) := by
+          refine Finset.sum_le_sum (fun ω hω => ?_)
+          rw [Finset.mem_filter] at hω
+          obtain ⟨k0, hk0⟩ := hω.2
+          conv_lhs => rw [show w p ω = (if P k0 ω then w p ω else 0) from (if_pos hk0).symm]
+          exact Finset.single_le_sum (f := fun k => if P k ω then w p ω else 0)
+            (fun k _ => by by_cases h : P k ω <;> simp [h, w_nonneg p hp ω]) (mem_univ k0)
+      _ ≤ ∑ ω : Fin N → Fin m, ∑ k : Fin m, (if P k ω then w p ω else 0) :=
+          Finset.sum_le_univ_sum_of_nonneg
+            (fun ω => Finset.sum_nonneg
+              (fun k _ => by by_cases h : P k ω <;> simp [h, w_nonneg p hp ω]))
+  refine hunion.trans ?_
+  rw [div_eq_mul_inv, Finset.sum_mul]
+  refine Finset.sum_le_sum (fun k _ => ?_)
+  rw [← div_eq_mul_inv]
+  exact chebyshev_freq p hp hp1 k hε hN
+
+/-- **Global union typicality bound.**  Since `∑ₖ p k(1−p k) = 1 − ∑ₖ p k² ≤ 1`, the
+    probability that ANY outcome's frequency deviates by `ε` is `≤ 1/(N ε²) → 0`.
+    Joint typicality: with high weight, ALL empirical frequencies match the Born
+    weights simultaneously. -/
+theorem chebyshev_freq_union_le (p : Fin m → ℝ) (hp : ∀ i, 0 ≤ p i) (hp1 : ∑ i, p i = 1)
+    {ε : ℝ} (hε : 0 < ε) (hN : 0 < N) :
+    (∑ ω ∈ (univ : Finset (Fin N → Fin m)).filter
+        (fun ω => ∃ k, ((N : ℝ) * ε) ^ 2 ≤ (count k ω - (N : ℝ) * p k) ^ 2), w p ω)
+      ≤ 1 / ((N : ℝ) * ε ^ 2) := by
+  refine (chebyshev_freq_union p hp hp1 hε hN).trans ?_
+  have hsum : (∑ k, p k * (1 - p k)) ≤ 1 := by
+    have heq : (∑ k, p k * (1 - p k)) = 1 - ∑ k, p k ^ 2 := by
+      simp_rw [mul_one_sub, sq]; rw [Finset.sum_sub_distrib, hp1]
+    rw [heq]
+    exact sub_le_self 1 (Finset.sum_nonneg (fun k _ => sq_nonneg _))
+  have hden : 0 < (N : ℝ) * ε ^ 2 := mul_pos (by exact_mod_cast hN) (pow_pos hε 2)
+  exact (div_le_div_iff_of_pos_right hden).mpr hsum
+
 end BornTypicalityFinite
 end QIQTH

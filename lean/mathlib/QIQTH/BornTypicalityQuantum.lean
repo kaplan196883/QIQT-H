@@ -123,6 +123,39 @@ theorem quantum_chebyshev_freq (ρ : Matrix (Fin d) (Fin d) ℂ)
   rw [hconv]
   exact BornTypicalityFinite.chebyshev_freq (bornProb ρ E) hp0 hp1 k hε hn
 
+/-- **Quantum Born-typicality, union over outcomes.**  The total quantum weight of
+    the event "SOME outcome's measured frequency is `ε`-far from its Born weight"
+    over `n` product copies is at most `(∑ₖ p k(1−p k))/(n·ε²)`. -/
+theorem quantum_chebyshev_freq_union (ρ : Matrix (Fin d) (Fin d) ℂ)
+    (E : Fin m → Matrix (Fin d) (Fin d) ℂ) (hρ : ρ.IsHermitian) (hE : ∀ k, (E k).IsHermitian)
+    (hp0 : ∀ k, 0 ≤ bornProb ρ E k) (hp1 : ∑ k, bornProb ρ E k = 1)
+    {ε : ℝ} (hε : 0 < ε) (hn : 0 < n) :
+    (∑ ω ∈ (univ : Finset (Fin n → Fin m)).filter
+        (fun ω => ∃ k, ((n : ℝ) * ε) ^ 2
+          ≤ (BornTypicalityFinite.count k ω - (n : ℝ) * bornProb ρ E k) ^ 2),
+        quantumWeight ρ E ω).re
+      ≤ (∑ k, bornProb ρ E k * (1 - bornProb ρ E k)) / ((n : ℝ) * ε ^ 2) := by
+  rw [Finset.sum_congr rfl (fun ω _ => quantumWeight_eq_w ρ E hρ hE ω),
+    ← Complex.ofReal_sum, Complex.ofReal_re]
+  exact BornTypicalityFinite.chebyshev_freq_union (bornProb ρ E) hp0 hp1 hε hn
+
+/-- **Quantum joint typicality (global bound).**  Since `∑ₖ p k(1−p k) ≤ 1`, the
+    quantum weight that ANY outcome's frequency deviates by `ε` is `≤ 1/(n·ε²) → 0`:
+    with high quantum weight, ALL measured frequencies match the Born weights
+    `tr(ρ Eₖ)` simultaneously. -/
+theorem quantum_chebyshev_freq_union_le (ρ : Matrix (Fin d) (Fin d) ℂ)
+    (E : Fin m → Matrix (Fin d) (Fin d) ℂ) (hρ : ρ.IsHermitian) (hE : ∀ k, (E k).IsHermitian)
+    (hp0 : ∀ k, 0 ≤ bornProb ρ E k) (hp1 : ∑ k, bornProb ρ E k = 1)
+    {ε : ℝ} (hε : 0 < ε) (hn : 0 < n) :
+    (∑ ω ∈ (univ : Finset (Fin n → Fin m)).filter
+        (fun ω => ∃ k, ((n : ℝ) * ε) ^ 2
+          ≤ (BornTypicalityFinite.count k ω - (n : ℝ) * bornProb ρ E k) ^ 2),
+        quantumWeight ρ E ω).re
+      ≤ 1 / ((n : ℝ) * ε ^ 2) := by
+  rw [Finset.sum_congr rfl (fun ω _ => quantumWeight_eq_w ρ E hρ hE ω),
+    ← Complex.ofReal_sum, Complex.ofReal_re]
+  exact BornTypicalityFinite.chebyshev_freq_union_le (bornProb ρ E) hp0 hp1 hε hn
+
 /-- The coarse-grained product POVM effect of an event `S` of histories:
     `F_S = ∑_{ω ∈ S} ⊗ₜ E(ωₜ)`.  (POVM outcomes are alternatives, so the effects
     ADD — no amplitude interference.) -/
@@ -204,6 +237,24 @@ theorem quantum_chebyshev_freq_density (ρ : Matrix (Fin d) (Fin d) ℂ)
       ≤ bornProb ρ E k * (1 - bornProb ρ E k) / ((n : ℝ) * ε ^ 2) :=
   quantum_chebyshev_freq ρ E hρ.1 (fun k => (hE k).1) (bornProb_nonneg hρ hE)
     (bornProb_sum ρ E hEsum hρtr) k hε hn
+
+/-- **Quantum joint typicality for a genuine density matrix + POVM (no residual).**
+    For PSD `ρ` with unit trace and a POVM `E`, the quantum weight that ANY outcome's
+    measured frequency over `n` product copies deviates from its Born weight by `ε`
+    is `≤ 1/(n·ε²) → 0`.  Hermiticity, nonnegativity and normalization are ALL
+    derived from PSD-ness + POVM completeness — the clean finite statement that
+    "the Born weights `tr(ρ Eₖ)` are the typical frequencies" with no free hypotheses. -/
+theorem quantum_chebyshev_freq_union_density (ρ : Matrix (Fin d) (Fin d) ℂ)
+    (E : Fin m → Matrix (Fin d) (Fin d) ℂ) (hρ : ρ.PosSemidef) (hE : ∀ k, (E k).PosSemidef)
+    (hEsum : ∑ k, E k = 1) (hρtr : Matrix.trace ρ = 1)
+    {ε : ℝ} (hε : 0 < ε) (hn : 0 < n) :
+    (∑ ω ∈ (univ : Finset (Fin n → Fin m)).filter
+        (fun ω => ∃ k, ((n : ℝ) * ε) ^ 2
+          ≤ (BornTypicalityFinite.count k ω - (n : ℝ) * bornProb ρ E k) ^ 2),
+        quantumWeight ρ E ω).re
+      ≤ 1 / ((n : ℝ) * ε ^ 2) :=
+  quantum_chebyshev_freq_union_le ρ E hρ.1 (fun k => (hE k).1) (bornProb_nonneg hρ hE)
+    (bornProb_sum ρ E hEsum hρtr) hε hn
 
 end BornTypicalityQuantum
 end QIQTH
