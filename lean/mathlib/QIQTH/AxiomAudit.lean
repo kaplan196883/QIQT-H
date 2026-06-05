@@ -592,6 +592,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — sequential Born = weight × conditional (chain rule).
 #print axioms QIQTH.CoreNoCollapse.pair_exceeds_of_cost_gt_half
 -- expected: standard only — cost_gt_half ⇒ the honest exact premise Qmax < cost r + cost s.
+#print axioms QIQTH.CoreNoCollapse.joint_coactual_subsingleton
+-- expected: standard only — SUBADDITIVITY-robust exclusion (monotone jointCost + pairwise overflow)
+#print axioms QIQTH.CoreNoCollapse.coactual_subsingleton_via_joint
+-- expected: standard only — additive core reproduced from the subadditive one
+#print axioms QIQTH.CoreNoCollapse.qiqth_single_outcome_joint
+-- expected: standard only — single-outcome capstone with NO additivity assumed
 
 -- QIQT-H CAPACITY MODEL: the finite-capacity bound DERIVED (not assumed).
 #print axioms QIQTH.CapacityModel.orthonormal_card_le_finrank
