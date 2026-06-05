@@ -166,6 +166,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — permutation symmetry of D(E_ij) i j
 #print axioms QIQTH.GoldsteinStruyveStep1.coeff_collapse
 -- expected: standard only — off-diagonal/diagonal coefficients each collapse to one scalar
+#print axioms QIQTH.GoldsteinStruyveStep1.diag_coeff_perm_symmetric
+-- expected: standard only
+#print axioms QIQTH.GoldsteinStruyveStep1.diag_coeff_collapse
+-- expected: standard only — D(E_ii) diagonal entries collapse to c_diag (at i,i) and c_rest
 
 -- A4: Chebyshev concentration
 #print axioms QIQTH.BornConcentration.chebyshev_finite

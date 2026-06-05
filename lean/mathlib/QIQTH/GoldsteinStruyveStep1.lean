@@ -573,6 +573,34 @@ theorem coeff_collapse
       (∀ i, D (matrixUnit d i i) i i = c_diag) :=
   step1c_collapse_of_perm_symmetric hd _ (coeff_perm_symmetric D h_uniteq)
 
+/-- **PROVED.**  The *diagonal* coefficient family `e i k := D(E_ii) k k`
+    (the `(k,k)` entry of the image of the diagonal unit `E_ii`) is
+    permutation-symmetric. -/
+theorem diag_coeff_perm_symmetric
+    {d : ℕ} (D : GoldsteinStruyveFinDim.DensityFunctional d)
+    (h_uniteq : GoldsteinStruyveFinDim.IsUnitaryEquivariant D) :
+    IsPermutationSymmetric (fun i k => D (matrixUnit d i i) k k) := by
+  intro σ i k
+  have hP : permMatrix d σ * star (permMatrix d σ) = 1 := permMatrix_unitary d σ
+  have heq := h_uniteq (permMatrix d σ) hP (matrixUnit d i i)
+  rw [permutation_conj_matrixUnit] at heq
+  have hpt := congrFun (congrFun heq (σ k)) (σ k)
+  rw [permMatrix_star, mul_permMatrix_apply, permMatrix_mul_apply,
+    Equiv.symm_apply_apply] at hpt
+  exact hpt
+
+/-- **PROVED.**  `D(E_ii)` is diagonal (`diag_support`) with a single
+    on-diagonal value `c_diag` at `(i,i)` and a single value `c_rest` at
+    every other diagonal slot `(k,k)`, `k ≠ i`.  Hence
+    `D(E_ii) = c_rest · I + (c_diag − c_rest) · E_ii`. -/
+theorem diag_coeff_collapse
+    {d : ℕ} (hd : 1 < d) (D : GoldsteinStruyveFinDim.DensityFunctional d)
+    (h_uniteq : GoldsteinStruyveFinDim.IsUnitaryEquivariant D) :
+    ∃ c_rest c_diag : ℂ,
+      (∀ i k, i ≠ k → D (matrixUnit d i i) k k = c_rest) ∧
+      (∀ i, D (matrixUnit d i i) i i = c_diag) :=
+  step1c_collapse_of_perm_symmetric hd _ (diag_coeff_perm_symmetric D h_uniteq)
+
 /- ── Honest residual interface ────────────────────────────────────── -/
 
 /-  The earlier version of this module carried five placeholder
