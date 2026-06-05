@@ -39,11 +39,35 @@ The division of labor is explicit. **Continuous, conserved amplitude:** the weig
 
 The framework is presented as a research program with rigorous scaffolding + clearly identified open theorems — not a completed mathematical theory.
 
+## Machine-checked finite core (Lean 4 / Mathlib)
+
+The load-bearing *finite* content is formalized **axiom-free** (only Lean's standard
+`propext, Classical.choice, Quot.sound`; project axiom budget **35**, all of them continuum /
+operator-algebra interface axioms — none in the finite core). The headline machine-checked
+result is a **finite no-collapse Born representation theorem**:
+
+> A finite information-capacity bound forces a **unique actual pointer value** per run (no
+> collapse map); a **non-contextual** outcome assignment is **forced** by finite effect-Gleason
+> to be the Born weight $\mathrm{tr}(\rho P_a)$ of a density matrix; **product preparation**
+> gives independent trials; and the actual-value histories then carry the **Born product law**
+> and are **Chebyshev-typical**. Born statistics are *not assumed* — only non-contextuality and
+> product preparation are; the world-measure is shown to carry no observable freedom.
+
+This is a *conditional representation theorem*, not a derivation of Born from $Q_R$ alone (two
+GPT-5.5-pro verification passes; honest scope and the full claim→theorem map are in
+**`FINITE_BORN_REPRESENTATION.md`**). It is the realized finite portion of the program; the
+**continuum, Lorentz-covariant** construction (the breakthrough μ) remains open
+(`PRIZE_ROADMAP.md`, `PROGRAM_STATUS.md`).
+
 ## Repository structure
 
 - `QIQT_Position_Paper.md`, `QIQT_Foundations_Paper.md`, `QIQT_Math.md` — the three papers
+- `PROGRAM_STATUS.md` — living honest status map (what's done, the prize, must-fix set)
+- `FINITE_BORN_REPRESENTATION.md` — scope + claim→theorem map for the machine-checked finite core
+- `PRIZE_ROADMAP.md`, `AXIOM_CONTRACTS.md`, `CORE_THEOREM_REFS.md` — roadmap, axiom audit, references
+- `lean/mathlib/QIQTH/` — the Lean 4 / Mathlib formalization (axiom-free finite core; `AxiomAudit.lean`)
 - `QIQT-H.md`, `QIQT-H_zapis_rozmowy.md` — original notes (Polish and English)
-- `paper_strategy/` — strategy documents and GPT-5.5 review rounds (1-28)
+- `paper_strategy/` — strategy documents and GPT-5.5 review rounds
 - `*.pdf` — source materials (Palmer 2025 PNAS supplement; original ChatGPT conversation)
 
 ## Author

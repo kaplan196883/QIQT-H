@@ -6,6 +6,24 @@ typicality measure μ over λ with Born marginals, consistent under coarse-grain
 composition, with NO per-measurement stipulation — the object that turns QIQT-H from a
 (b+) conditional program into a genuine breakthrough.*
 
+## 0a. Status (2026-06-06) — the FINITE portion of this route is realized, axiom-free
+
+The **finite-dimensional** stage of the Effect-Gleason route below is now machine-checked,
+axiom-free (budget 35, standard-three only). Built and joined this session: finite effect-Gleason
+(`EffectGleason.finite_effect_gleason` — Born from positivity+additivity); the single-trial Born
+law **forced from non-contextuality** (`OneSiteGleason.oneSite_forced`) with its converse
+(`traceEffectMeasure`); product-preparation independence (`BornTypicalityFinite.w_history_factorizes`);
+finite typicality (Chebyshev/union); product-measure uniqueness (`BornMeasureUniqueness`); and the
+**finite no-collapse Born representation** joining the capacity core to all of the above
+(`BornJoin.finite_noCollapseBornRepresentation`, `BornJoinGleason.finite_noCollapseBorn_fromNoncontextuality`).
+Two GPT-5.5-pro verification passes: *sound, non-vacuous, but a CONDITIONAL representation theorem*
+— Born **weights** + **factorization** are derived from non-contextuality + product preparation,
+NOT from `Q_max` alone. Full claim→theorem map + honest scope: **`FINITE_BORN_REPRESENTATION.md`**.
+
+**What this route's PRIZE still needs (continuum):** Stages 3–5 below — the Covariant
+Record-Completeness Lemma and the AQFT localization producing a single **Lorentz-covariant** μ.
+The 35 remaining axioms are exactly this continuum / Type III₁ interface (beyond current Mathlib).
+
 ## 0. The route we commit to (and what we reject)
 
 **Effect-Gleason + Kolmogorov — NOT the raw decoherence functional.**

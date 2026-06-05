@@ -88,3 +88,13 @@ form (`mackey_gleason_to_trace_density`/`HasTraceDensityForm`) are **vacuous pla
 genuine, axiom-free results are finite-dimensional (`EffectGleason`, the full Goldstein–Struyve
 chain). Any claim of a continuum Born derivation is unsupported until those two conclusions are
 given real content.
+
+**Update (2026-06-06).** The content-free *finite* placeholder `LLN_typicality_axiom` now has a
+genuine **axiom-free finite replacement**: `BornTypicalityFinite` (finite weak LLN, Chebyshev,
+union bound), `BornTypicalityQuantum` (quantum bridge), `BornMeasureUniqueness` (product-measure
+uniqueness), and the **finite no-collapse Born representation** joining them to the capacity core
+(`BornJoin` / `BornJoinGleason`, single-trial Born forced from non-contextuality via
+`OneSiteGleason.oneSite_forced`). All standard-three axioms; budget unchanged at 35. See
+`FINITE_BORN_REPRESENTATION.md` for the claim→theorem map and the GPT-5.5-pro-verified scope.
+`HasTraceDensityForm` (the *continuum* trace-density form) remains a content-free placeholder —
+the continuum punchline is still gated.

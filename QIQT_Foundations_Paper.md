@@ -1483,6 +1483,28 @@ The following table maps each major paper claim to its Lean theorem, with explic
 | Born single-trial frequency concentration | `BornConcentration.born_chebyshev_single_trial` | U | **NEW (A4):** single-trial bound; the $N$-trial scaling to full "Born frequencies" still rests on the LLN interface axiom |
 | Minimality witnesses for P1, P2, P3 | `BornMinimalityTable.{P1, P2, P3}_…_necessary` | N + U | **NEW (A6):** unified independence package showing each Born sub-axiom is necessary by concrete finite countermodel (minimality *relative to the current decomposition*) |
 | Locality (P4) is reducible | `BornMinimalityTable.P4_locality_reducible_to_equivariance` | U | **NEW (A6):** marginal-locality theoremized (modulo the named bridge axiom); not an independent Born-selection sub-axiom |
+| **GS Step 1 (Schur classification)** | `GoldsteinStruyveStep1.schur_classification_real` | U | **2026-06 UPDATE:** the former interface axiom `step1_schur_classification` is **RETIRED** — Step 1 is now fully proved axiom-free (Hadamard relation → linear assembly → reality via `IsHermitianPreserving`). Step 3 likewise proved. The finite Goldstein–Struyve chain is axiom-free; budget dropped to **35** |
+| Finite effect (Busch) Gleason | `EffectGleason.finite_effect_gleason` | U | normalized + positive + coexistent-additive functional on effects $=\mathrm{tr}(\rho\,\cdot)$ — Born from positivity, finite-dim |
+| Finite weak LLN (Chebyshev) | `BornTypicalityFinite.chebyshev_freq` / `chebyshev_freq_union_le` | U | $P(\lvert\mathrm{freq}-p_k\rvert\ge\varepsilon)\le p_k(1-p_k)/(N\varepsilon^2)$; union bound $\le 1/(N\varepsilon^2)$ |
+| Quantum bridge (tensor trace) | `BornTypicalityQuantum.quantumWeight_eq_w` | U | $N$-copy product-measurement weight $=$ classical product weight of the Born vector |
+| Product-measure uniqueness | `BornMeasureUniqueness.product_born_measure_unique` | U | the product Born measure is the unique additive history measure with the Born marginals (independence explicit) |
+| **C1** one record → one **value** | `PointerValue.existsUnique_actualValue` / `existsUnique_actualHistory` | U | capacity forbids two distinct-valued coactual records; many same-value records may coexist |
+| **C2** one-site Born (vector state) | `OneSiteBorn.vectorState_eq_weight` | U | $\mathrm{Re}\langle\psi,E_a\psi\rangle=\lVert E_a\psi\rVert^2$ on a PVM projection |
+| **Single-trial Born from non-contextuality** | `OneSiteGleason.oneSite_forced` | U | non-contextual `EffectMeasure` $\Rightarrow$ $\mu(P_a)=\mathrm{Re}\,\mathrm{tr}(\rho P_a)$, **forced** by effect-Gleason (strong premise; not Born by hand) |
+| Non-contextual $=$ Born (converse) | `OneSiteGleason.traceEffectMeasure` | U | every density matrix is a non-contextual `EffectMeasure` |
+| Subadditive capacity exclusion | `CoreNoCollapse.joint_coactual_subsingleton`; `OrthogonalCapacity.pair_exceeds` | U | monotone joint cost + pairwise overflow (overflow **derived** from orthogonality; no additivity assumed) |
+| **Finite no-collapse Born representation** | `BornJoin.finite_noCollapseBornRepresentation`; `BornJoinGleason.finite_noCollapseBorn_fromNoncontextuality` | U | **the join:** unique actual history + Born product law + Chebyshev typicality; single-trial law **forced Born** from non-contextuality. *Conditional representation theorem — assumes non-contextuality + product preparation, NOT Born from $Q_{\max}$.* See `FINITE_BORN_REPRESENTATION.md` |
+| Independence $=$ product preparation | `BornTypicalityFinite.w_history_factorizes` | U | product world-measure $\Rightarrow$ trial independence; independence is the irreducible product-preparation input |
+| World-measure observationally free | `BornJoin.ActualEnsemble.history_law_unique` | U | same single-trial law $\Rightarrow$ identical actual-history statistics, independent of the posited world-measure on $\Omega$ |
+
+**Finite no-collapse Born representation (2026-06).** The rows above marked C1/C2/non-contextuality/the
+join formalize, **axiom-free**, a finite no-collapse Born representation theorem: capacity forces a
+unique actual pointer value; finite effect-Gleason forces a non-contextual outcome assignment to be the
+Born weight $\mathrm{tr}(\rho P_a)$; product preparation gives independent trials; the actual-value
+histories carry the Born product law and are Chebyshev-typical. Two GPT-5.5-pro verification passes
+confirm it is **sound, non-vacuous, but a *conditional representation theorem*** — Born weights and
+factorization are *derived* from non-contextuality + product preparation, **not** from the capacity
+bound alone. Full claim→theorem map and honest scope caveats: `FINITE_BORN_REPRESENTATION.md`.
 
 **No-signaling clarification.** All "no-signaling" results in this paper are about *nonselective* CPTP instruments — the unconditional marginal probability after Bob's measurement, marginalized over outcomes (equivalently, the trace-preserving sum over Kraus operators). Selective post-measurement conditional states can change remotely once Bob's outcome is known; this is not "signaling" because the conditional update requires classical communication.
 

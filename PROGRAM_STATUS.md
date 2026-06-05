@@ -1,9 +1,16 @@
 # QIQT-H — Program Status: where we are, and what the breakthrough would be
 
-*Living status document. Last updated 2026-06-04, after a multi-round GPT-5.5-pro
-adversarial soundness review that produced a **strategic pivot** (§2a) and a new
-axiom-free **capacity-exclusion core** (§3c). This is the honest map: what is done,
+*Living status document. Last updated 2026-06-06, after a multi-round GPT-5.5-pro
+adversarial soundness review that produced a **strategic pivot** (§2a), a new
+axiom-free **capacity-exclusion core** (§3c), and a new axiom-free **finite no-collapse
+Born representation** joining the capacity core to the Born/typicality layer (§3d; full
+scope map in `FINITE_BORN_REPRESENTATION.md`). This is the honest map: what is done,
 what is the prize we are chasing, and what must be fixed before arXiv.*
+
+> **Update 2026-06-06.** The project axiom budget is now **35** (all 35 are continuum /
+> operator-algebra interface axioms; the entire finite core below is axiom-free —
+> `propext, Classical.choice, Quot.sound` only). References to "37" elsewhere in this
+> document predate the Goldstein–Struyve Step-1 / Step-3 discharges and should read 35.
 
 ---
 
@@ -100,8 +107,9 @@ attacked, not the source of the single-world result.
 - **Lean formalization + assumption audit** (*the strongest original component*):
   no-signaling, CHSH→Tsirelson 2√2 with rigorous singlet, microcausality,
   Donald's identity, `NoConcentration` (decoherence conserves |c_k|²),
-  support-preservation ≠ Born-equivariance, structural audits. **37 project
-  axioms** (down from 57). Publishable **as a formal dependency analysis**, NOT
+  support-preservation ≠ Born-equivariance, structural audits. **35 project
+  axioms** (down from 57; all continuum/operator-algebra interface). Publishable
+  **as a formal dependency analysis**, NOT
   as a completed Born derivation. Recent discharges (all machine-checked,
   standard Lean axioms only):
   - **Gleason/Born:** `GleasonSelector` is now **axiom-free** — Born is *derived
@@ -134,7 +142,7 @@ Sell it as the former (defensible); never as the latter (fails).
 The pivot (§2a) was accompanied by *building* the load-bearing chain as a
 machine-checked, axiom-free conditional theorem. Three new modules (standard Lean
 axioms only — `propext`, `Classical.choice`, `Quot.sound`; in the project budget
-of 37; verified by `AxiomAudit.lean`):
+of 35; verified by `AxiomAudit.lean`):
 
 - **`QIQTH/CoreNoCollapse.lean`** — the conditional representation theorem.
   Finite-capacity exclusion (`coactual_subsingleton`: a region whose record cost
@@ -219,6 +227,42 @@ Design notes, the block→reference map, and the closing assessment are in
 
 ---
 
+## 3d. THE FINITE NO-COLLAPSE BORN REPRESENTATION — capacity core joined to Born (2026-06)
+
+The capacity-exclusion core (§3c) delivers *unique outcomes*; the Gleason/typicality work
+delivers *Born statistics*; they were proved in separate towers. This session **joined them**
+into a single finite, axiom-free representation theorem and then reduced its assumptions as far
+as is honestly possible. Full claim→theorem map and the GPT-5.5-pro-verified scope caveats are
+in **`FINITE_BORN_REPRESENTATION.md`**; the one-paragraph version:
+
+> A finite information-capacity bound forces a **unique actual pointer value** per run, with no
+> collapse map (`CoreNoCollapse` → `PointerValue.existsUnique_actualValue`); a **non-contextual**
+> outcome assignment is **forced** to be the Born weight `tr(ρ Pₐ)` of a density matrix by finite
+> effect-Gleason (`OneSiteGleason.oneSite_forced`; converse `traceEffectMeasure`); **product
+> preparation** yields independent trials (`BornTypicalityFinite.w_history_factorizes`); and the
+> actual-value histories then carry the **Born product law** and are **Chebyshev-typical**
+> (`BornJoin.finite_noCollapseBornRepresentation`, `BornJoinGleason.finite_noCollapseBorn_fromNoncontextuality`).
+> The world-measure carries **no observable freedom** (`history_law_unique`). Born statistics are
+> **not assumed** — only non-contextuality and product preparation are.
+
+**Two GPT-5.5-pro verification passes (folded in, honest):** the join is *formally sound,
+non-vacuous, axiom-free*, but it is a **conditional representation theorem, not a derivation of
+Born from capacity.** Genuinely reduced: the single-trial Born **weights** are now a real
+effect-Gleason consequence of non-contextuality (not a bare assumption), and the **factorization**
+follows from product preparation. Honestly **not** removed: non-contextuality and product
+preparation are genuine (motivated, strong) inputs; the `ActualEnsemble` interface still names
+`oneSite`/`indep`; the trace-path theorem is an interface (circular as a standalone derivation);
+the no-collapse value-uniqueness is, relative to the probability layer, a wrapper. All docstrings
+carry these caveats. **Guardrail:** never write "Born derived from `Q_max`/from nothing"; the
+defensible headline is *"Born weights + factorization derived from non-contextuality + product
+preparation; world-measure shown observationally free; finite, axiom-free, machine-checked."*
+
+New axiom-free modules: `BornTypicalityFinite`, `BornTypicalityQuantum`, `BornMeasureUniqueness`,
+`ValueSelection`, `OneSiteBorn`, `OneSiteGleason`, `BornJoin`, `BornJoinGleason`,
+`OrthogonalCapacity` (all standard-three; budget 35).
+
+---
+
 ## 4. GAP RANKING (severity for publishability)
 
 Status legend: ✅ DONE (committed) · ◻ OPEN (research agenda).
@@ -271,7 +315,7 @@ Honest riders: 3–5 are genuine open theorems; the Lorentz-friendliness is *bou
 - the boosted effects are a **full PVM** (`E_cov_preserves_proj` + `unitary_preserves_resolution`) and the weights a **covariant probability distribution** (`upvm_covariant_probability`);
 - **non-trivial models exist** (`LorentzWitness` A: a spread 2-outcome Born distribution refuting the one-point net; B: a non-trivial group permuting two diamonds), settling vacuity.
 
-All machine-checked, standard Lean axioms only, project axiom budget 37. Reviewed across seven GPT-5.5-pro rounds (Red → "Green for the finite conditional interface"). **What remains is exactly the continuum:** producing such a `RecordedHistoryNet` *with its unitary Poincaré transport* from an actual relativistic Type III₁ QFT (Tomita–Takesaki / Haagerup-L^p, beyond current Mathlib) — the genuine, untouched hard problem. Proving the linchpin even for FREE FIELDS first remains the next real target.
+All machine-checked, standard Lean axioms only, project axiom budget 35. Reviewed across seven GPT-5.5-pro rounds (Red → "Green for the finite conditional interface"). **What remains is exactly the continuum:** producing such a `RecordedHistoryNet` *with its unitary Poincaré transport* from an actual relativistic Type III₁ QFT (Tomita–Takesaki / Haagerup-L^p, beyond current Mathlib) — the genuine, untouched hard problem. Proving the linchpin even for FREE FIELDS first remains the next real target.
 
 ---
 
