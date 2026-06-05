@@ -647,6 +647,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BornJoin.iid_oneSite
 -- expected: standard only — single-trial marginal of the product Born weight is p (non-vacuity)
 
+-- TOWARD THE REAL PRIZE: single-trial Born law DERIVED from non-contextuality.
+#print axioms QIQTH.OneSiteGleason.oneSite_forced
+-- expected: standard only — non-contextual μ(Pₐ) = Re tr(ρ Pₐ) FORCED by effect-Gleason (not assumed)
+#print axioms QIQTH.OneSiteGleason.forced_isProbVector
+-- expected: standard only — the forced single-trial law is a probability vector
+
 -- QIQT-H TIER B: the bridge theorem (Spectrum Broadcast Structures, information cost).
 #print axioms QIQTH.SBSBridge.fragment_finrank_ge
 -- expected: standard only — distinguishability ⇒ fragment dimension ≥ n (orthonormal).

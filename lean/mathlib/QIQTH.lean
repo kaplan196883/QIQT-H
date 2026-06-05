@@ -112,6 +112,9 @@ import QIQTH.OneSiteBorn
 -- THE PRIZE (C3+C4): join A and B — capacity-selected actual VALUE histories have the Born
 -- PRODUCT law (from one-site calibration + independence) and are Born-typical; no collapse:
 import QIQTH.BornJoin
+-- Toward the REAL prize: DERIVE the single-trial Born law from NON-CONTEXTUALITY (effect-
+-- Gleason) instead of assuming it — μ(Pₐ) = tr(ρ Pₐ) forced for any non-contextual assignment:
+import QIQTH.OneSiteGleason
 -- Tier B (GPT-5.5-pro review): the BRIDGE theorem via Spectrum Broadcast Structures.
 -- DERIVES the saturation premise cost>Q_max/2 from an objective record's redundancy +
 -- an INFORMATION cost R·log n (tensor/log, fixing the rank-model flaw): distinguishability
