@@ -48,6 +48,9 @@ import QIQTH.GoldsteinStruyveModels
 import QIQTH.BornTypicalityFinite
 -- Quantum bridge: product trace factorization connecting Born weights to the product measure:
 import QIQTH.BornTypicalityQuantum
+-- λ-identification: the product-history Born measure is the UNIQUE additive measure
+-- carrying the Born marginals, and equals the trace functional tr(ρ^⊗ⁿ · F_S):
+import QIQTH.BornMeasureUniqueness
 -- A1 strengthening: locality discharged from equivariance + local dynamics:
 import QIQTH.MarginalLocality
 -- A6 strengthening: minimality/independence table for Born premises:

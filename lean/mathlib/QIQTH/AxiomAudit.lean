@@ -188,6 +188,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BornTypicalityQuantum.quantum_chebyshev_freq_union_density
 -- expected: standard only — density/POVM global joint typicality (all hyps derived)
 
+#print axioms QIQTH.BornMeasureUniqueness.eventEffect_univ
+-- expected: standard only — product-history effects are a POVM (∑_ω F_ω = 1)
+#print axioms QIQTH.BornMeasureUniqueness.measure_unique_of_additive
+-- expected: standard only — additive measures agreeing on singletons are equal
+#print axioms QIQTH.BornMeasureUniqueness.bornMeasure_eq_trace
+-- expected: standard only — λ(S) = tr(ρ^⊗ⁿ · F_S).re
+#print axioms QIQTH.BornMeasureUniqueness.product_born_measure_unique
+-- expected: standard only — λ-IDENTIFICATION: product Born measure forced = trace functional
+#print axioms QIQTH.BornMeasureUniqueness.bornMeasure_satisfies_hyps
+-- expected: standard only — non-vacuity witness for the λ-identification
+
 #print axioms QIQTH.FQEquivarianceUniqueness.canonical_ic_measure_principle
 -- expected: standard + 4 acknowledged sub-axioms
 
