@@ -46,6 +46,8 @@ import QIQTH.GoldsteinStruyveStep1
 import QIQTH.GoldsteinStruyveModels
 -- Finite Born-typicality (non-vacuous replacement for the LLN placeholder content):
 import QIQTH.BornTypicalityFinite
+-- Quantum bridge: product trace factorization connecting Born weights to the product measure:
+import QIQTH.BornTypicalityQuantum
 -- A1 strengthening: locality discharged from equivariance + local dynamics:
 import QIQTH.MarginalLocality
 -- A6 strengthening: minimality/independence table for Born premises:
