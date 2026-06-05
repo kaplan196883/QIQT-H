@@ -100,6 +100,9 @@ import QIQTH.CoreNoCollapse
 -- (∑ recDim ≤ D = finrank). Removes the "cost > Q_max/2" assumption for this model:
 -- macroscopic_subsingleton is now a THEOREM. Grounds Strasberg et al. arXiv:2601.19703.
 import QIQTH.CapacityModel
+-- Grounding the subadditive core: pairwise overflow DERIVED from orthogonality of
+-- distinct records (span-dimension joint cost; no additivity assumed):
+import QIQTH.OrthogonalCapacity
 -- Tier B (GPT-5.5-pro review): the BRIDGE theorem via Spectrum Broadcast Structures.
 -- DERIVES the saturation premise cost>Q_max/2 from an objective record's redundancy +
 -- an INFORMATION cost R·log n (tensor/log, fixing the rank-model flaw): distinguishability
