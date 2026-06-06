@@ -569,6 +569,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — Φ(f) depends only on f (value = B_f), not on the bound proof.
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.integralSimple_product_eq
 -- expected: standard only — integralSimple over t×ˢs = product of the two (sum_product).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_simple_mul
+-- expected: standard only — MULTIPLICATIVITY ON SIMPLE FUNCTIONS: Φ((∑aᵢ𝟙_{Aᵢ})(∑bⱼ𝟙_{Bⱼ}))
+-- = (∑aᵢ E Aᵢ)(∑bⱼ E Bⱼ).  The base case for the bounded-Borel multiplicativity capstone.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

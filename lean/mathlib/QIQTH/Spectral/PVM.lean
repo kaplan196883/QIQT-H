@@ -1227,6 +1227,53 @@ theorem integralSimple_product_eq {ι κ : Type*} (t : Finset ι) (s : Finset κ
       = P.integralSimple t a A * P.integralSimple s b B := by
   rw [P.integralSimple_mul_eq t s a b A B hA hB, integralSimple, Finset.sum_product]
 
+/-- **Multiplicativity on simple functions:** `Φ(f·g) = Φ(f)·Φ(g)` for simple
+    `f = ∑ᵢ aᵢ 𝟙_{Aᵢ}`, `g = ∑ⱼ bⱼ 𝟙_{Bⱼ}`.  Stated with `Φ(f), Φ(g)` as the simple
+    integrals (`= Φ(f), Φ(g)` by `boundedFC_eq_integralSimple`).  Proof: the product
+    `f·g` reindexes pointwise to the `t ×ˢ s` simple function (`boundedFC_congr` +
+    `Finset.sum_mul_sum` + the indicator product `𝟙_A·𝟙_B = 𝟙_{A∩B}`), whose FC is
+    `integralSimple (t ×ˢ s) = (integralSimple t)·(integralSimple s)`. -/
+theorem boundedFC_simple_mul {ι κ : Type*} (t : Finset ι) (s : Finset κ)
+    (a : ι → ℂ) (b : κ → ℂ) (A : ι → Set Ω) (B : κ → Set Ω)
+    (hA : ∀ i ∈ t, MeasurableSet (A i)) (hB : ∀ j ∈ s, MeasurableSet (B j)) :
+    P.boundedFC
+        (f := fun ω => (∑ i ∈ t, a i * (A i).indicator (fun _ => (1 : ℂ)) ω)
+                      * (∑ j ∈ s, b j * (B j).indicator (fun _ => (1 : ℂ)) ω))
+        (C := (∑ i ∈ t, ‖a i‖) * ∑ j ∈ s, ‖b j‖)
+        ((Finset.measurable_sum t fun i hi =>
+            (measurable_const.indicator (hA i hi)).const_mul (a i)).mul
+          (Finset.measurable_sum s fun j hj =>
+            (measurable_const.indicator (hB j hj)).const_mul (b j)))
+        (mul_nonneg (Finset.sum_nonneg fun i _ => norm_nonneg (a i))
+          (Finset.sum_nonneg fun j _ => norm_nonneg (b j)))
+        (fun ω => by
+          rw [norm_mul]
+          refine mul_le_mul ?_ ?_ (norm_nonneg _)
+            (Finset.sum_nonneg fun i _ => norm_nonneg (a i))
+          · exact (norm_sum_le _ _).trans (Finset.sum_le_sum fun i _ => by
+              rw [norm_mul]
+              exact (mul_le_mul_of_nonneg_left (norm_indicatorOne_le _ ω)
+                (norm_nonneg _)).trans_eq (mul_one _))
+          · exact (norm_sum_le _ _).trans (Finset.sum_le_sum fun j _ => by
+              rw [norm_mul]
+              exact (mul_le_mul_of_nonneg_left (norm_indicatorOne_le _ ω)
+                (norm_nonneg _)).trans_eq (mul_one _)))
+      = P.integralSimple t a A * P.integralSimple s b B := by
+  rw [← P.integralSimple_product_eq t s a b A B hA hB,
+      ← P.boundedFC_eq_integralSimple (t ×ˢ s) (fun p => a p.1 * b p.2)
+        (fun p => A p.1 ∩ B p.2)
+        (fun p hp => (hA p.1 (Finset.mem_product.mp hp).1).inter
+          (hB p.2 (Finset.mem_product.mp hp).2))]
+  refine P.boundedFC_congr _ _ _ _ _ _ ?_
+  funext ω
+  rw [Finset.sum_mul_sum, Finset.sum_product]
+  refine Finset.sum_congr rfl (fun i hi => ?_)
+  refine Finset.sum_congr rfl (fun j hj => ?_)
+  rw [mul_mul_mul_comm]
+  congr 1
+  rw [← Set.inter_indicator_mul]
+  simp
+
 /- ── Bounded-convergence ("normality") continuity of the FC ─────────────────-/
 
 /-- **Dominated/bounded convergence for the diagonal functional:** if `fₙ → f`
