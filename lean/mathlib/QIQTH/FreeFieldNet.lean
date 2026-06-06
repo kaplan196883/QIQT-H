@@ -162,4 +162,12 @@ theorem bornNet_no_signaling (p : Fin m → ℝ) (hp1 : ∑ i, p i = 1) (y : Fin
     ∑ w ∈ univ.filter (fun w : Fin m × Fin m => w.1 = y), p w.1 * p w.2 = p y :=
   sum_filter_fst p hp1 y
 
+/-- **Mode-swap equivariance of the net's measure.**  Swapping the two modes leaves the product
+    Born measure invariant: `ω true (swap w) = ω true w`.  The finite "Lorentz"/exchange symmetry
+    of the typicality measure — the 2-mode instance of
+    `BornTypicalityFinite.w_perm_invariant` (permutation-equivariance of the product Born law). -/
+theorem Dω_swap_invariant (p : Fin m → ℝ) (w : Fin m × Fin m) :
+    Dω p true (Prod.swap w) = Dω p true w := by
+  simp only [Dω, Prod.fst_swap, Prod.snd_swap]; ring
+
 end QIQTH.FreeFieldNet

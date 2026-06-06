@@ -404,6 +404,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — no-signaling marginal DERIVED from the product Born measure
 #print axioms QIQTH.FreeFieldNet.bornNet_covariant_selection
 -- expected: standard only — covariant single-outcome selector over the non-toy net
+#print axioms QIQTH.BornTypicalityFinite.w_perm_invariant
+-- expected: standard only — permutation-equivariance of the product Born typicality measure
+#print axioms QIQTH.FreeFieldNet.Dω_swap_invariant
+-- expected: standard only — mode-swap equivariance of the net's product Born measure
 
 -- Infrastructure finite-discharge pass (Open Problems 6 & 9): the finite-
 -- classical axioms are now PROVED, not assumed.

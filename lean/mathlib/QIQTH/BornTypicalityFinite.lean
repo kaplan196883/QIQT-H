@@ -327,5 +327,14 @@ theorem w_history_factorizes (q : Fin m → ℝ) (hq1 : ∑ i, q i = 1) (h : Fin
   rw [Finset.prod_congr rfl (fun t _ => hmarg t)]
   rfl
 
+/-- **Permutation-equivariance of the product Born measure.**  Relabeling the trials/modes by
+    any permutation `σ` leaves the product weight invariant: `w p (ω ∘ σ) = w p ω`.  This is the
+    finite, exchange-symmetric content behind "the Born typicality measure is covariant under
+    relabeling the records" — the `(Φ,λ)`-program's mode-permutation ("finite Lorentz") symmetry
+    of the i.i.d. product measure.  (Reindexing a product by a bijection.) -/
+theorem w_perm_invariant (p : Fin m → ℝ) (σ : Equiv.Perm (Fin N)) (ω : Fin N → Fin m) :
+    w p (ω ∘ σ) = w p ω :=
+  Equiv.prod_comp σ (fun t => p (ω t))
+
 end BornTypicalityFinite
 end QIQTH
