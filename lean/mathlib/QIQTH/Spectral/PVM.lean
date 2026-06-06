@@ -1020,6 +1020,36 @@ theorem boundedFC_const (c : ℂ) :
   rw [P.inner_boundedFC, P.bilinDiag_const, ContinuousLinearMap.smul_apply,
     ContinuousLinearMap.one_apply, inner_smul_right]
 
+/-- Additivity of the diagonal functional in `f`: `D_{f+g} = D_f + D_g`. -/
+theorem diagInt_add {f g : Ω → ℂ} (hf : Measurable f) (hg : Measurable g)
+    {Cf Cg : ℝ} (hCf : ∀ ω, ‖f ω‖ ≤ Cf) (hCg : ∀ ω, ‖g ω‖ ≤ Cg) (z : H) :
+    P.diagInt (fun ω => f ω + g ω) z = P.diagInt f z + P.diagInt g z := by
+  simp only [diagInt]
+  exact MeasureTheory.integral_add (P.integrable_boundedMeasurable hf hCf z)
+    (P.integrable_boundedMeasurable hg hCg z)
+
+/-- Additivity of the polarized sesquilinear form in `f`: `B_{f+g} = B_f + B_g`. -/
+theorem bilinDiag_add_f {f g : Ω → ℂ} (hf : Measurable f) (hg : Measurable g)
+    {Cf Cg : ℝ} (hCf : ∀ ω, ‖f ω‖ ≤ Cf) (hCg : ∀ ω, ‖g ω‖ ≤ Cg) (x y : H) :
+    P.bilinDiag (fun ω => f ω + g ω) x y = P.bilinDiag f x y + P.bilinDiag g x y := by
+  simp only [bilinDiag]
+  rw [P.diagInt_add hf hg hCf hCg, P.diagInt_add hf hg hCf hCg,
+      P.diagInt_add hf hg hCf hCg, P.diagInt_add hf hg hCf hCg]
+  ring
+
+/-- **Additivity of the bounded-Borel FC in `f`:** `Φ(f+g) = Φ(f) + Φ(g)`. -/
+theorem boundedFC_add {f g : Ω → ℂ} (hf : Measurable f) (hg : Measurable g)
+    {Cf Cg : ℝ} (hCf0 : 0 ≤ Cf) (hCg0 : 0 ≤ Cg)
+    (hCf : ∀ ω, ‖f ω‖ ≤ Cf) (hCg : ∀ ω, ‖g ω‖ ≤ Cg) :
+    P.boundedFC (hf.add hg) (add_nonneg hCf0 hCg0)
+        (fun ω => (norm_add_le _ _).trans (add_le_add (hCf ω) (hCg ω)))
+      = P.boundedFC hf hCf0 hCf + P.boundedFC hg hCg0 hCg := by
+  refine ContinuousLinearMap.ext (fun y => ?_)
+  refine ext_inner_left ℂ (fun x => ?_)
+  rw [P.inner_boundedFC, ContinuousLinearMap.add_apply, inner_add_right,
+      P.inner_boundedFC, P.inner_boundedFC]
+  exact P.bilinDiag_add_f hf hg hCf hCg x y
+
 /-- **Operator-norm bound for the bounded-Borel FC:** `‖Φ(f)‖ ≤ 2C` for `‖f‖∞ ≤ C`.
     (`Φ(f)` is the adjoint of the Riesz operator `intBorel f`, and the adjoint is a
     linear isometry.)  This is the estimate that makes the simple→bounded-Borel
