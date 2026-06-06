@@ -543,6 +543,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_indicator_mul
 -- expected: standard only — multiplicativity of the FC on indicators: Φ(𝟙_{s∩t}) = E s·E t
 -- (the projection *-relation; Φ(f·g)=Φ(f)·Φ(g) on the generating subalgebra).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.tendsto_diagInt_of_dominated
+-- expected: standard only — DCT for the diagonal functional D_f against finite μ_z.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.tendsto_inner_boundedFC_of_dominated
+-- expected: standard only — bounded-convergence (WOT "normality") continuity of the FC:
+-- fₙ→f ptwise bounded ⟹ ⟪x,Φ(fₙ)y⟫→⟪x,Φ(f)y⟫.  Engine for simple→bounded-Borel extension.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

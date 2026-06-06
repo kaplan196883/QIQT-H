@@ -36,6 +36,7 @@ import Mathlib.MeasureTheory.Measure.MeasureSpace
 import Mathlib.MeasureTheory.Integral.Lebesgue.Add
 import Mathlib.MeasureTheory.Integral.Bochner.Basic
 import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+import Mathlib.MeasureTheory.Integral.DominatedConvergence
 import Mathlib.Topology.Algebra.InfiniteSum.Module
 import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
 import Mathlib.Tactic
@@ -1078,6 +1079,42 @@ theorem boundedFC_indicator_mul {s t : Set Ω} (hs : MeasurableSet s)
         (norm_indicatorOne_le _)
       = P.E s * P.E t := by
   rw [P.boundedFC_indicator (hs.inter ht), P.E_inter hs ht]
+
+/- ── Bounded-convergence ("normality") continuity of the FC ─────────────────-/
+
+/-- **Dominated/bounded convergence for the diagonal functional:** if `fₙ → f`
+    pointwise with a common bound `C`, then `D_{fₙ}(z) → D_f(z)`.  (DCT against the
+    finite measure `μ_z`.)  The engine for extending FC identities from simple to
+    all bounded Borel functions. -/
+theorem tendsto_diagInt_of_dominated {f : ℕ → Ω → ℂ} {g : Ω → ℂ} {C : ℝ}
+    (hf : ∀ n, Measurable (f n)) (hfb : ∀ n ω, ‖f n ω‖ ≤ C)
+    (hlim : ∀ ω, Filter.Tendsto (fun n => f n ω) Filter.atTop (nhds (g ω))) (z : H) :
+    Filter.Tendsto (fun n => P.diagInt (f n) z) Filter.atTop (nhds (P.diagInt g z)) := by
+  simp only [diagInt]
+  exact MeasureTheory.tendsto_integral_of_dominated_convergence (fun _ => C)
+    (fun n => (hf n).aestronglyMeasurable)
+    (MeasureTheory.integrable_const C)
+    (fun n => Filter.Eventually.of_forall (fun ω => hfb n ω))
+    (Filter.Eventually.of_forall hlim)
+
+/-- **Bounded-convergence continuity of the bounded-Borel FC** (weak-operator
+    "normality"): if `fₙ → f` pointwise with a common bound `C`, then
+    `⟪x, Φ(fₙ) y⟫ → ⟪x, Φ(f) y⟫`.  This is the limit principle that lets the
+    indicator/simple identities (e.g. multiplicativity) extend to all bounded
+    Borel `f`. -/
+theorem tendsto_inner_boundedFC_of_dominated {f : ℕ → Ω → ℂ} {g : Ω → ℂ} {C : ℝ}
+    (hC0 : 0 ≤ C) (hf : ∀ n, Measurable (f n)) (hg : Measurable g)
+    (hfb : ∀ n ω, ‖f n ω‖ ≤ C) (hgb : ∀ ω, ‖g ω‖ ≤ C)
+    (hlim : ∀ ω, Filter.Tendsto (fun n => f n ω) Filter.atTop (nhds (g ω))) (x y : H) :
+    Filter.Tendsto (fun n => inner ℂ x ((P.boundedFC (hf n) hC0 (hfb n)) y))
+      Filter.atTop (nhds (inner ℂ x ((P.boundedFC hg hC0 hgb) y))) := by
+  simp only [P.inner_boundedFC, bilinDiag]
+  have h1 := P.tendsto_diagInt_of_dominated hf hfb hlim (x + y)
+  have h2 := P.tendsto_diagInt_of_dominated hf hfb hlim (x - y)
+  have h3 := P.tendsto_diagInt_of_dominated hf hfb hlim (Complex.I • x + y)
+  have h4 := P.tendsto_diagInt_of_dominated hf hfb hlim (Complex.I • x - y)
+  exact (((h1.sub h2).add (h3.const_mul Complex.I)).sub
+    (h4.const_mul Complex.I)).const_mul (4⁻¹ : ℂ)
 
 end ProjectionValuedMeasure
 
