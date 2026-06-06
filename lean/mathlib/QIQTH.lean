@@ -105,6 +105,10 @@ import QIQTH.Spectral.PVM
 -- Pᵢ = U·diag(δᵢ)·U⋆ with ∑Pᵢ=1 (resolution of identity), Pᵢ²=Pᵢ, PᵢPⱼ=0, Pᵢ⋆=Pᵢ. The finite,
 -- axiom-free case of the bounded-spectral-theorem target (continuum stays open). Standard axioms:
 import QIQTH.SpectralPVM
+-- Prize Stage 3′ (Track B): free-field / standard-subspace modular theory via the bounded-operator
+-- approach of Rieffel–Van Daele (PJM 69, 1977). On Mathlib's StandardSubspace: the projections
+-- P,Q onto 𝒦,i𝒦, R=P+Q, and RvD Prop 2.2(1) ⟪Rξ,ξ⟫=‖Pξ‖²+‖Qξ‖² (engine for R injective). Standard axioms:
+import QIQTH.StandardSubspaceModular
 -- QIQT-H CORE (post-2026-06 GPT-5.5-pro strategic pivot): the conditional
 -- representation theorem for single-outcome-without-collapse. The non-circular
 -- finite-capacity exclusion (coactual_subsingleton) + actuality selector give

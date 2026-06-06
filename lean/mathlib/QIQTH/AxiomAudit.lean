@@ -549,6 +549,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — bounded-convergence (WOT "normality") continuity of the FC:
 -- fₙ→f ptwise bounded ⟹ ⟪x,Φ(fₙ)y⟫→⟪x,Φ(f)y⟫.  Engine for simple→bounded-Borel extension.
 
+-- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
+#print axioms QIQTH.StandardSubspaceModular.projK_idem
+-- expected: standard only — P = orthogonal projection onto 𝒦 is idempotent.
+#print axioms QIQTH.StandardSubspaceModular.rvdR_inner_self
+-- expected: standard only — RvD Prop 2.2(1): ⟪Rξ,ξ⟫ = ‖Pξ‖²+‖Qξ‖² (engine for R injective).
+#print axioms QIQTH.StandardSubspaceModular.rvdR_inner_self_nonneg
+-- expected: standard only — 0 ≤ ⟪Rξ,ξ⟫ (R is a positive operator, RvD 0 ≤ R ≤ 2).
+
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
 -- expected: standard only — σ_t is a *-endomorphism (⅟m * m cancels)
