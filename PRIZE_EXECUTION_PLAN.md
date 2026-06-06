@@ -58,9 +58,18 @@ finite-mode result. Effort: **M–L**. Builds directly on `FreeFieldRecord` + `R
 > **1.3 DONE (equivariance):** `BornTypicalityFinite.w_perm_invariant` (product Born measure is
 > permutation-invariant) + `FreeFieldNet.Dω_swap_invariant` (2-mode instance).
 >
-> **Still to do for full Stage 1:** ground the fibres/state in `FreeFieldRecord` sectors (1.1),
-> a NON-trivial mode-permutation action genuinely permuting diamonds (the 2-atom-diamond poset
-> `left,right ≤ top` GPT suggested), and instantiate the net's `p` with the IC-POVM Born weights.
+> **Diamond-permuting action DONE (commit 40f50b0, `QIQTH/DiamondSwapNet.lean`):** the 2-atom
+> diamond `left,right ≤ top` (a 2-mode region with two 1-mode sub-diamonds via `fst`/`snd`);
+> `swapIso` (left↔right swap is a genuine non-trivial order-iso), `swapAction` (a `PoincareAction`
+> that MOVES the geometry, `act left = right`, acting on the top fibre by `Prod.swap`, naturality
+> from `snd ∘ swap = fst`), `swap_covariant_selection` (covariant selector over the orbit — the
+> covariance machinery exercised over a real geometry permutation WITH a marginalizing
+> restriction, unlike `LorentzWitness`).
+>
+> **Still to do for full Stage 1:** ground the fibres/state in `FreeFieldRecord` sectors (1.1) and
+> unify the four pieces (FreeFieldNet ω + DiamondSwapNet action + QubitIC records + permutation
+> equivariance) into ONE net with the IC-POVM Born weights as `p`. Conceptual core of Stage 1 is
+> now in hand; next is **Stage 2** (sheaf / global-section / Roberts–DHR cohomology).
 
 - **1.1 (M) Finite-mode measurement POVM.** Define the `n`-mode number-basis / Gaussian PVM as a
   concrete `FinPVM` (or matrix POVM) on `⊗ⁿ ℂ^d`. Target: `freefield_pvm_complete` (∑ E = 1) and
