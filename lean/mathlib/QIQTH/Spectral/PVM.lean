@@ -1162,6 +1162,36 @@ theorem boundedFC_indicator_mul {s t : Set Ω} (hs : MeasurableSet s)
       = P.E s * P.E t := by
   rw [P.boundedFC_indicator (hs.inter ht), P.E_inter hs ht]
 
+/-- **The bounded-Borel FC of a simple function is its spectral integral:**
+    `Φ(∑ᵢ cᵢ 𝟙_{sᵢ}) = ∑ᵢ cᵢ E sᵢ = integralSimple`.  Proved at the sesquilinear-form
+    level: `B_{∑cᵢ𝟙_{sᵢ}} = ∑ cᵢ B_{𝟙_{sᵢ}} = ∑ cᵢ ⟪x, E sᵢ y⟫` (finset linearity +
+    smul-in-`f` + the indicator bridge). -/
+theorem boundedFC_eq_integralSimple {ι : Type*} (t : Finset ι) (c : ι → ℂ)
+    (sets : ι → Set Ω) (hm : ∀ i ∈ t, MeasurableSet (sets i)) :
+    P.boundedFC
+        (f := fun ω => ∑ i ∈ t, c i * (sets i).indicator (fun _ => (1 : ℂ)) ω)
+        (Finset.measurable_sum t fun i hi =>
+          (measurable_const.indicator (hm i hi)).const_mul (c i))
+        (Finset.sum_nonneg fun i _ => norm_nonneg (c i))
+        (fun ω => (norm_sum_le _ _).trans (Finset.sum_le_sum fun i _ => by
+          rw [norm_mul]
+          exact (mul_le_mul_of_nonneg_left (norm_indicatorOne_le _ ω)
+            (norm_nonneg _)).trans_eq (mul_one _)))
+      = P.integralSimple t c sets := by
+  refine ContinuousLinearMap.ext (fun y => ?_)
+  refine ext_inner_left ℂ (fun x => ?_)
+  rw [P.inner_boundedFC, P.inner_integralSimple_left,
+      P.bilinDiag_finsetSum t (fun i ω => c i * (sets i).indicator (fun _ => (1 : ℂ)) ω)
+        (fun z i hi => P.integrable_boundedMeasurable
+          ((measurable_const.indicator (hm i hi)).const_mul (c i))
+          (fun ω => by
+            rw [norm_mul]
+            exact (mul_le_mul_of_nonneg_left (norm_indicatorOne_le _ ω)
+              (norm_nonneg _)).trans_eq (mul_one _)) z) x y]
+  refine Finset.sum_congr rfl (fun i hi => ?_)
+  rw [P.bilinDiag_smul_f (c i) ((sets i).indicator (fun _ => (1 : ℂ))) x y,
+      P.bilinDiag_indicator (hm i hi)]
+
 /- ── Bounded-convergence ("normality") continuity of the FC ─────────────────-/
 
 /-- **Dominated/bounded convergence for the diagonal functional:** if `fₙ → f`

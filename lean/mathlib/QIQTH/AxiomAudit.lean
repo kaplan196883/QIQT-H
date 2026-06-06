@@ -559,6 +559,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — D_{∑Fᵢ}=∑D_{Fᵢ} (bound-free finset linearity of the diagonal functional).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_finsetSum
 -- expected: standard only — B_{∑Fᵢ}=∑B_{Fᵢ} (finset linearity of the polarized form).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_eq_integralSimple
+-- expected: standard only — Φ(∑cᵢ𝟙_{sᵢ}) = ∑cᵢ E sᵢ = integralSimple: the Riesz-form FC
+-- equals the constructive simple spectral integral on simple functions.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
