@@ -101,6 +101,10 @@ import QIQTH.SheafSection
 -- spectral theorem) is the named Phase-1 target. General Mathlib-bound material;
 -- ZERO project axioms:
 import QIQTH.Spectral.PVM
+-- Prize Stage 3.1 (finite case): the matrix spectral theorem packaged as a PVM — eigenprojections
+-- Pᵢ = U·diag(δᵢ)·U⋆ with ∑Pᵢ=1 (resolution of identity), Pᵢ²=Pᵢ, PᵢPⱼ=0, Pᵢ⋆=Pᵢ. The finite,
+-- axiom-free case of the bounded-spectral-theorem target (continuum stays open). Standard axioms:
+import QIQTH.SpectralPVM
 -- QIQT-H CORE (post-2026-06 GPT-5.5-pro strategic pivot): the conditional
 -- representation theorem for single-outcome-without-collapse. The non-circular
 -- finite-capacity exclusion (coactual_subsingleton) + actuality selector give

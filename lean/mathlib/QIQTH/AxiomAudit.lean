@@ -543,6 +543,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — KMS boundary identity from trace cyclicity.
 #print axioms QIQTH.FiniteModularTheory.modAut_stateOf_invariant
 -- expected: standard only — modular flow preserves its state (finite Tomita; Stage 3.2 shadow).
+#print axioms QIQTH.SpectralPVM.specProj_sum_eq_one
+-- expected: standard only — spectral PVM resolution of identity (∑ eigenprojections = 1; Stage 3.1).
+#print axioms QIQTH.SpectralPVM.specProj_orthogonal
+-- expected: standard only — distinct spectral eigenprojections are orthogonal.
 #print axioms QIQTH.FiniteModularTheory.sigmaDiag_comp
 -- expected: standard only — the GENUINE real-time modular flow's
 -- one-parameter group law σ_s∘σ_t=σ_{s+t} (diagonal case), via cpow_add.
