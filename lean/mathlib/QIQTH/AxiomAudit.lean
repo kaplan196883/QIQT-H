@@ -565,6 +565,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.integralSimple_mul_eq
 -- expected: standard only — (∑aᵢ E Aᵢ)(∑bⱼ E Bⱼ) = ∑ᵢⱼ aᵢbⱼ E(Aᵢ∩Bⱼ): operator
 -- multiplicativity core for simple functions (cross terms collapse by E_inter).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_congr
+-- expected: standard only — Φ(f) depends only on f (value = B_f), not on the bound proof.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.integralSimple_product_eq
+-- expected: standard only — integralSimple over t×ˢs = product of the two (sum_product).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

@@ -1102,6 +1102,17 @@ theorem boundedFC_norm_le {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (hC0 : 
   rw [boundedFC, LinearIsometryEquiv.norm_map]
   exact P.intBorel_norm_le hf hC0 hC
 
+/-- **`Φ(f)` depends only on `f`, not on the bound:** equal functions give equal
+    operators (the value is `⟪x,Φ(f)y⟫ = B_f(x,y)`, independent of the bound proof).
+    Lets us rewrite `f` to any pointwise-equal form (e.g. reindex a product). -/
+theorem boundedFC_congr {f f' : Ω → ℂ} {Cf Cf' : ℝ}
+    (hf : Measurable f) (hCf0 : 0 ≤ Cf) (hCf : ∀ ω, ‖f ω‖ ≤ Cf)
+    (hf' : Measurable f') (hCf0' : 0 ≤ Cf') (hCf' : ∀ ω, ‖f' ω‖ ≤ Cf')
+    (h : f = f') :
+    P.boundedFC hf hCf0 hCf = P.boundedFC hf' hCf0' hCf' := by
+  refine ContinuousLinearMap.ext (fun y => ext_inner_left ℂ (fun x => ?_))
+  rw [P.inner_boundedFC, P.inner_boundedFC, h]
+
 /- ── The indicator bridge: `Φ(𝟙_s) = E s` and multiplicativity on projections ─-/
 
 /-- The complex indicator `𝟙_s` is bounded by `1`. -/
@@ -1205,6 +1216,16 @@ theorem integralSimple_mul_eq {ι κ : Type*} (t : Finset ι) (s : Finset κ)
   refine Finset.sum_congr rfl (fun i hi => ?_)
   refine Finset.sum_congr rfl (fun j hj => ?_)
   rw [smul_mul_smul, ← P.E_inter (hA i hi) (hB j hj)]
+
+/-- The simple integral over the **product index** `t ×ˢ s` (weights `aᵢbⱼ`, sets
+    `Aᵢ ∩ Bⱼ`) equals the product of the two simple integrals.  Pure operator algebra
+    (`integralSimple_mul_eq` + `Finset.sum_product`). -/
+theorem integralSimple_product_eq {ι κ : Type*} (t : Finset ι) (s : Finset κ)
+    (a : ι → ℂ) (b : κ → ℂ) (A : ι → Set Ω) (B : κ → Set Ω)
+    (hA : ∀ i ∈ t, MeasurableSet (A i)) (hB : ∀ j ∈ s, MeasurableSet (B j)) :
+    P.integralSimple (t ×ˢ s) (fun p => a p.1 * b p.2) (fun p => A p.1 ∩ B p.2)
+      = P.integralSimple t a A * P.integralSimple s b B := by
+  rw [P.integralSimple_mul_eq t s a b A B hA hB, integralSimple, Finset.sum_product]
 
 /- ── Bounded-convergence ("normality") continuity of the FC ─────────────────-/
 
