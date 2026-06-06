@@ -1274,6 +1274,20 @@ theorem boundedFC_simple_mul {ι κ : Type*} (t : Finset ι) (s : Finset κ)
   rw [← Set.inter_indicator_mul]
   simp
 
+/-- **`SimpleFunc` as a sum of scaled indicators** (the bridge from Mathlib's
+    `SimpleFunc`, produced by `approxOn`, to the `∑ cᵢ 𝟙_{sᵢ}` form of our FC lemmas):
+    `φ a = ∑_{y ∈ φ.range} y · 𝟙_{φ⁻¹{y}}(a)`.  Exactly one range term is nonzero. -/
+theorem simpleFunc_eq_sum (φ : MeasureTheory.SimpleFunc Ω ℂ) (a : Ω) :
+    φ a = ∑ y ∈ φ.range, y * (φ ⁻¹' {y}).indicator (fun _ => (1 : ℂ)) a := by
+  rw [Finset.sum_eq_single (φ a)]
+  · rw [Set.indicator_of_mem (by simp), mul_one]
+  · intro y _ hne
+    rw [Set.indicator_of_notMem
+      (by simp only [Set.mem_preimage, Set.mem_singleton_iff]; exact fun h => hne h.symm),
+      mul_zero]
+  · intro h
+    exact absurd (φ.mem_range_self a) h
+
 /- ── Bounded-convergence ("normality") continuity of the FC ─────────────────-/
 
 /-- **Dominated/bounded convergence for the diagonal functional:** if `fₙ → f`
