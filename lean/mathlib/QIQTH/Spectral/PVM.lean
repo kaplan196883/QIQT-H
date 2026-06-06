@@ -1028,6 +1028,14 @@ theorem diagInt_add {f g : Ω → ℂ} (hf : Measurable f) (hg : Measurable g)
   exact MeasureTheory.integral_add (P.integrable_boundedMeasurable hf hCf z)
     (P.integrable_boundedMeasurable hg hCg z)
 
+/-- Linearity of the diagonal functional over finite sums:
+    `D_{∑ᵢ Fᵢ} = ∑ᵢ D_{Fᵢ}` (each `Fᵢ` integrable against `μ_z`).  Bound-free. -/
+theorem diagInt_finsetSum {ι : Type*} (t : Finset ι) (F : ι → Ω → ℂ) (z : H)
+    (hF : ∀ i ∈ t, MeasureTheory.Integrable (F i) (P.scalarMeasure z)) :
+    P.diagInt (fun ω => ∑ i ∈ t, F i ω) z = ∑ i ∈ t, P.diagInt (F i) z := by
+  simp only [diagInt]
+  exact MeasureTheory.integral_finsetSum t hF
+
 /-- Additivity of the polarized sesquilinear form in `f`: `B_{f+g} = B_f + B_g`. -/
 theorem bilinDiag_add_f {f g : Ω → ℂ} (hf : Measurable f) (hg : Measurable g)
     {Cf Cg : ℝ} (hCf : ∀ ω, ‖f ω‖ ≤ Cf) (hCg : ∀ ω, ‖g ω‖ ≤ Cg) (x y : H) :
@@ -1036,6 +1044,16 @@ theorem bilinDiag_add_f {f g : Ω → ℂ} (hf : Measurable f) (hg : Measurable 
   rw [P.diagInt_add hf hg hCf hCg, P.diagInt_add hf hg hCf hCg,
       P.diagInt_add hf hg hCf hCg, P.diagInt_add hf hg hCf hCg]
   ring
+
+/-- Linearity of the polarized form over finite sums: `B_{∑ᵢ Fᵢ} = ∑ᵢ B_{Fᵢ}`. -/
+theorem bilinDiag_finsetSum {ι : Type*} (t : Finset ι) (F : ι → Ω → ℂ)
+    (hF : ∀ z : H, ∀ i ∈ t, MeasureTheory.Integrable (F i) (P.scalarMeasure z))
+    (x y : H) :
+    P.bilinDiag (fun ω => ∑ i ∈ t, F i ω) x y = ∑ i ∈ t, P.bilinDiag (F i) x y := by
+  simp only [bilinDiag]
+  rw [P.diagInt_finsetSum t F _ (hF _), P.diagInt_finsetSum t F _ (hF _),
+      P.diagInt_finsetSum t F _ (hF _), P.diagInt_finsetSum t F _ (hF _)]
+  simp only [Finset.mul_sum, ← Finset.sum_sub_distrib, ← Finset.sum_add_distrib]
 
 /-- **Additivity of the bounded-Borel FC in `f`:** `Φ(f+g) = Φ(f) + Φ(g)`. -/
 theorem boundedFC_add {f g : Ω → ℂ} (hf : Measurable f) (hg : Measurable g)

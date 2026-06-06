@@ -555,6 +555,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — additivity of the bounded-Borel FC in f: Φ(f+g)=Φ(f)+Φ(g).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_smul
 -- expected: standard only — ℂ-homogeneity of the bounded-Borel FC in f: Φ(c·f)=c·Φ(f).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.diagInt_finsetSum
+-- expected: standard only — D_{∑Fᵢ}=∑D_{Fᵢ} (bound-free finset linearity of the diagonal functional).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_finsetSum
+-- expected: standard only — B_{∑Fᵢ}=∑B_{Fᵢ} (finset linearity of the polarized form).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
