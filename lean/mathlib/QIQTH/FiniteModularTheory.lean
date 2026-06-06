@@ -174,6 +174,19 @@ theorem kms_condition (ρ : Matrix n n ℂ) [Invertible ρ] (x y : Matrix n n �
   -- tr(y * (ρ*x)) = tr((ρ*x) * y) = tr(ρ * (x*y)) by associativity.
   rw [trace_mul_comm y (ρ * x), mul_assoc]
 
+/-- **The modular flow preserves its own state (finite Tomita–Takesaki).**  The KMS state
+    `ω(·) = tr(ρ ·)` is invariant under the modular automorphism `σ = modAut ρ`:
+    `ω(σ(x)) = ω(x)`.  This is the σ-invariance of the modular state — a defining property of the
+    Tomita–Takesaki modular flow (and, read for the Born/Gibbs state `ω`, the statement that the
+    modular dynamics conserves Born expectations).  Proof: `tr(ρ·ρx⅟ρ) = tr(ρx)` by cyclicity +
+    `⅟ρ·ρ = 1`.  (The continuum/Type-III₁ version is Stage 3.2 of `PRIZE_EXECUTION_PLAN.md`.) -/
+theorem modAut_stateOf_invariant (ρ : Matrix n n ℂ) [Invertible ρ] (x : Matrix n n ℂ) :
+    stateOf ρ (modAut ρ x) = stateOf ρ x := by
+  unfold stateOf modAut
+  rw [show ρ * (ρ * x * ⅟ρ) = (ρ * ρ * x) * ⅟ρ by noncomm_ring, trace_mul_comm,
+      show ⅟ρ * (ρ * ρ * x) = ρ * x by
+        rw [show ⅟ρ * (ρ * ρ * x) = (⅟ρ * ρ) * (ρ * x) by noncomm_ring, invOf_mul_self, one_mul]]
+
 /- ── 3b. The REAL-TIME modular flow σ_t, diagonal case (first installment) ─
 
     The genuine modular automorphism group is σ_t(x) = ρ^{it} x ρ^{-it}, a
