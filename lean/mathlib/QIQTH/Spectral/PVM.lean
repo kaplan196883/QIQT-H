@@ -1020,6 +1020,16 @@ theorem boundedFC_const (c : ℂ) :
   rw [P.inner_boundedFC, P.bilinDiag_const, ContinuousLinearMap.smul_apply,
     ContinuousLinearMap.one_apply, inner_smul_right]
 
+/-- **Operator-norm bound for the bounded-Borel FC:** `‖Φ(f)‖ ≤ 2C` for `‖f‖∞ ≤ C`.
+    (`Φ(f)` is the adjoint of the Riesz operator `intBorel f`, and the adjoint is a
+    linear isometry.)  This is the estimate that makes the simple→bounded-Borel
+    extension converge in OPERATOR NORM — the route to multiplicativity `Φ(fg)=Φ(f)Φ(g)`
+    that weak-operator convergence cannot deliver. -/
+theorem boundedFC_norm_le {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, ‖f ω‖ ≤ C) : ‖P.boundedFC hf hC0 hC‖ ≤ 2 * C := by
+  rw [boundedFC, LinearIsometryEquiv.norm_map]
+  exact P.intBorel_norm_le hf hC0 hC
+
 /- ── The indicator bridge: `Φ(𝟙_s) = E s` and multiplicativity on projections ─-/
 
 /-- The complex indicator `𝟙_s` is bounded by `1`. -/
