@@ -575,6 +575,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.simpleFunc_eq_sum
 -- expected: standard only — φ a = ∑_{y∈φ.range} y·𝟙_{φ⁻¹{y}}(a): the bridge from Mathlib's
 -- SimpleFunc (approxOn output) to the ∑cᵢ𝟙 form, for the bounded-Borel extension.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_simpleFunc
+-- expected: standard only — Φ(⇑φ) = ∑_{y∈φ.range} y·E(φ⁻¹{y}) for a SimpleFunc φ.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_simpleFunc_mul
+-- expected: standard only — Φ(⇑φ·⇑ψ)=Φ(⇑φ)·Φ(⇑ψ) for SimpleFuncs (multiplicativity, SimpleFunc form).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

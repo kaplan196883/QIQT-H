@@ -1288,6 +1288,31 @@ theorem simpleFunc_eq_sum (φ : MeasureTheory.SimpleFunc Ω ℂ) (a : Ω) :
   · intro h
     exact absurd (φ.mem_range_self a) h
 
+/-- **The FC of a `SimpleFunc`** equals the spectral integral over its range:
+    `Φ(⇑φ) = ∑_{y ∈ φ.range} y · E(φ⁻¹{y})`. -/
+theorem boundedFC_simpleFunc (φ : MeasureTheory.SimpleFunc Ω ℂ) {C : ℝ}
+    (hf : Measurable (⇑φ)) (hC0 : 0 ≤ C) (hC : ∀ ω, ‖φ ω‖ ≤ C) :
+    P.boundedFC hf hC0 hC = P.integralSimple φ.range id (fun y => φ ⁻¹' {y}) := by
+  rw [← P.boundedFC_eq_integralSimple φ.range id (fun y => φ ⁻¹' {y})
+        (fun y _ => φ.measurableSet_fiber y)]
+  exact P.boundedFC_congr _ _ _ _ _ _ (funext fun a => simpleFunc_eq_sum φ a)
+
+/-- **Multiplicativity on `SimpleFunc`s:** `Φ(⇑φ · ⇑ψ) = Φ(⇑φ)·Φ(⇑ψ)`.  Reduces to
+    `boundedFC_simple_mul` over the ranges of `φ, ψ` via `simpleFunc_eq_sum`. -/
+theorem boundedFC_simpleFunc_mul (φ ψ : MeasureTheory.SimpleFunc Ω ℂ) {Cφ Cψ Cp : ℝ}
+    (hfφ : Measurable (⇑φ)) (hC0φ : 0 ≤ Cφ) (hCφ : ∀ ω, ‖φ ω‖ ≤ Cφ)
+    (hfψ : Measurable (⇑ψ)) (hC0ψ : 0 ≤ Cψ) (hCψ : ∀ ω, ‖ψ ω‖ ≤ Cψ)
+    (hfp : Measurable (fun ω => φ ω * ψ ω)) (hC0p : 0 ≤ Cp)
+    (hCp : ∀ ω, ‖φ ω * ψ ω‖ ≤ Cp) :
+    P.boundedFC hfp hC0p hCp
+      = P.boundedFC hfφ hC0φ hCφ * P.boundedFC hfψ hC0ψ hCψ := by
+  rw [P.boundedFC_simpleFunc φ hfφ hC0φ hCφ, P.boundedFC_simpleFunc ψ hfψ hC0ψ hCψ,
+      ← P.boundedFC_simple_mul φ.range ψ.range id id (fun y => φ ⁻¹' {y})
+        (fun y => ψ ⁻¹' {y}) (fun y _ => φ.measurableSet_fiber y)
+        (fun y _ => ψ.measurableSet_fiber y)]
+  exact P.boundedFC_congr _ _ _ _ _ _
+    (funext fun ω => by simp only [simpleFunc_eq_sum φ ω, simpleFunc_eq_sum ψ ω, id_eq])
+
 /- ── Bounded-convergence ("normality") continuity of the FC ─────────────────-/
 
 /-- **Dominated/bounded convergence for the diagonal functional:** if `fₙ → f`
