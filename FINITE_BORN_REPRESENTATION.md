@@ -1,5 +1,9 @@
 # The Finite No-Collapse Born Representation — scope, theorems, honest claim
 
+> *This document details the Born-representation layer.  For the **complete** finite result
+> (no-collapse core + Born + typicality + the covariant recorded-history net + spectral/modular
+> groundwork), paper-ready, see the master consolidation **`FINITE_RESULT.md`**.*
+
 *Consolidation document for the finite, machine-checked core built 2026-06 (Lean 4 /
 Mathlib, `lean/mathlib/QIQTH/`). Every result below is **axiom-free**: it depends only on
 Lean's three standard foundational axioms `propext, Classical.choice, Quot.sound` (verified

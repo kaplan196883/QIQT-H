@@ -263,6 +263,17 @@ New axiom-free modules: `BornTypicalityFinite`, `BornTypicalityQuantum`, `BornMe
 `ValueSelection`, `OneSiteBorn`, `OneSiteGleason`, `BornJoin`, `BornJoinGleason`,
 `OrthogonalCapacity` (all standard-three; budget 33).
 
+**Prize finite stages (1–3) also done (2026-06-06), all axiom-free:** the covariant
+recorded-history architecture — `FreeFieldNet` (non-toy net + product-Born no-signaling theorem),
+`DiamondSwapNet` (genuine diamond-permuting covariant action; the unified net `diamondBornNet`),
+`QubitIC` (informationally-complete record POVM — finite Covariant Record-Completeness),
+`SheafSection` (global selectors exist + classified, gluing unobstructed), `SpectralPVM` (finite
+spectral theorem as a PVM), and `FiniteModularTheory.modAut_stateOf_invariant` (finite Tomita
+state-invariance).  The continuum (Type III₁ / bounded spectral theorem / Tomita–Takesaki / Bunce–
+Wright) is the open infrastructure problem (`PRIZE_EXECUTION_PLAN.md` Stage 3).  **The complete
+finite result is consolidated, paper-ready, in `FINITE_RESULT.md`** (full claim→theorem map, honest
+derived/assumed ledger, suggested paper structure and abstract).
+
 ---
 
 ## 4. GAP RANKING (severity for publishability)

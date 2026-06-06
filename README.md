@@ -63,7 +63,9 @@ GPT-5.5-pro verification passes; honest scope and the full claim→theorem map a
 
 - `QIQT_Position_Paper.md`, `QIQT_Foundations_Paper.md`, `QIQT_Math.md` — the three papers
 - `PROGRAM_STATUS.md` — living honest status map (what's done, the prize, must-fix set)
-- `FINITE_BORN_REPRESENTATION.md` — scope + claim→theorem map for the machine-checked finite core
+- `FINITE_RESULT.md` — **paper-ready master consolidation** of the whole finite, axiom-free formalization (claim→theorem map, honest ledger, suggested paper)
+- `FINITE_BORN_REPRESENTATION.md` — scope + claim→theorem map for the no-collapse Born representation
+- `PRIZE_EXECUTION_PLAN.md` — staged plan to the continuum prize (Stages 1–3; finite stages done)
 - `PRIZE_ROADMAP.md`, `AXIOM_CONTRACTS.md`, `CORE_THEOREM_REFS.md` — roadmap, axiom audit, references
 - `lean/mathlib/QIQTH/` — the Lean 4 / Mathlib formalization (axiom-free finite core; `AxiomAudit.lean`)
 - `QIQT-H.md`, `QIQT-H_zapis_rozmowy.md` — original notes (Polish and English)
