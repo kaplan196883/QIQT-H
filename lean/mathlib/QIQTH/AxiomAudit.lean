@@ -533,6 +533,16 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — orientation: intBorel(const c) = conj(c)•1 (the Riesz op is conjugated).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_const
 -- expected: standard only — oriented FC is unital: boundedFC(const c) = c•1, so Φ(1)=1.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.diagInt_indicator_eq_inner
+-- expected: standard only — diagonal of the indicator's form is ⟪z, E s z⟫ (= μ_z(s)).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_indicator
+-- expected: standard only — indicator bridge (polarized): B_{𝟙_s}(x,y) = ⟪x, E s y⟫.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_indicator
+-- expected: standard only — THE bounded-Borel FC of an indicator is the spectral
+-- projection: Φ(𝟙_s) = E s.  Anchors the abstract Borel FC to its PVM (Phase 1.1).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_indicator_mul
+-- expected: standard only — multiplicativity of the FC on indicators: Φ(𝟙_{s∩t}) = E s·E t
+-- (the projection *-relation; Φ(f·g)=Φ(f)·Φ(g) on the generating subalgebra).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

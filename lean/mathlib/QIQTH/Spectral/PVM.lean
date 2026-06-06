@@ -1019,6 +1019,66 @@ theorem boundedFC_const (c : ℂ) :
   rw [P.inner_boundedFC, P.bilinDiag_const, ContinuousLinearMap.smul_apply,
     ContinuousLinearMap.one_apply, inner_smul_right]
 
+/- ── The indicator bridge: `Φ(𝟙_s) = E s` and multiplicativity on projections ─-/
+
+/-- The complex indicator `𝟙_s` is bounded by `1`. -/
+theorem norm_indicatorOne_le (s : Set Ω) (ω : Ω) :
+    ‖(s.indicator (fun _ => (1 : ℂ))) ω‖ ≤ 1 := by
+  by_cases hω : ω ∈ s
+  · rw [Set.indicator_of_mem hω]; simp
+  · rw [Set.indicator_of_notMem hω]; simp
+
+/-- `D_{𝟙_s}(z) = μ_z(s)` — the diagonal functional of an indicator is the scalar
+    spectral mass. -/
+theorem diagInt_indicator {s : Set Ω} (hs : MeasurableSet s) (z : H) :
+    P.diagInt (s.indicator (fun _ => (1 : ℂ))) z = ((P.scalarMeasure z s).toReal : ℂ) := by
+  rw [diagInt, MeasureTheory.integral_indicator_const (1 : ℂ) hs, Complex.real_smul, mul_one,
+    MeasureTheory.measureReal_def]
+
+/-- `D_{𝟙_s}(z) = ⟪z, E s z⟫` — the diagonal of the indicator's form is the
+    projection's quadratic form. -/
+theorem diagInt_indicator_eq_inner {s : Set Ω} (hs : MeasurableSet s) (z : H) :
+    P.diagInt (s.indicator (fun _ => (1 : ℂ))) z = inner ℂ z (P.E s z) := by
+  rw [P.diagInt_indicator hs, P.scalarMeasure_toReal z hs, P.inner_E_self hs]
+  push_cast; ring
+
+/-- **Indicator bridge (polarized):** the bounded-Borel sesquilinear form of an
+    indicator is the spectral projection's form, `B_{𝟙_s}(x,y) = ⟪x, E s y⟫`.
+    Proved by reducing the four polarization points to `⟪z, E s z⟫` and expanding
+    by sesquilinearity (the same Jordan–von Neumann computation as
+    `inner_E_polarization`, with the `I•x ± y` convention of `bilinDiag`). -/
+theorem bilinDiag_indicator {s : Set Ω} (hs : MeasurableSet s) (x y : H) :
+    P.bilinDiag (s.indicator (fun _ => (1 : ℂ))) x y = inner ℂ x (P.E s y) := by
+  rw [bilinDiag, P.diagInt_indicator_eq_inner hs, P.diagInt_indicator_eq_inner hs,
+    P.diagInt_indicator_eq_inner hs, P.diagInt_indicator_eq_inner hs]
+  simp only [map_add, map_sub, map_smul, inner_add_left, inner_add_right,
+    inner_sub_left, inner_sub_right, inner_smul_left, inner_smul_right,
+    Complex.conj_I, ← pow_two, Complex.I_sq, mul_add, mul_sub, ← mul_assoc,
+    mul_neg, neg_neg, one_mul, neg_one_mul, sub_sub]
+  ring
+
+/-- **The bounded-Borel FC of an indicator is the spectral projection:** `Φ(𝟙_s) = E s`.
+    This anchors the abstract Borel functional calculus to the PVM it came from. -/
+theorem boundedFC_indicator {s : Set Ω} (hs : MeasurableSet s) :
+    P.boundedFC (f := s.indicator (fun _ => (1 : ℂ)))
+        (measurable_const.indicator hs) zero_le_one (norm_indicatorOne_le s)
+      = P.E s := by
+  refine ContinuousLinearMap.ext (fun y => ?_)
+  refine ext_inner_left ℂ (fun x => ?_)
+  rw [P.inner_boundedFC, P.bilinDiag_indicator hs]
+
+/-- **Multiplicativity of the FC on indicators** (the projection `*`-relation):
+    since `𝟙_s · 𝟙_t = 𝟙_{s∩t}` pointwise, `Φ(𝟙_{s∩t}) = E s · E t`.  This is the
+    multiplicative law `Φ(f·g) = Φ(f)·Φ(g)` verified on the indicator algebra — the
+    generating subalgebra of the bounded-Borel functions. -/
+theorem boundedFC_indicator_mul {s t : Set Ω} (hs : MeasurableSet s)
+    (ht : MeasurableSet t) :
+    P.boundedFC (f := (s ∩ t).indicator (fun _ => (1 : ℂ)))
+        (measurable_const.indicator (hs.inter ht)) zero_le_one
+        (norm_indicatorOne_le _)
+      = P.E s * P.E t := by
+  rw [P.boundedFC_indicator (hs.inter ht), P.E_inter hs ht]
+
 end ProjectionValuedMeasure
 
 /- ── Phase-1 analytic TARGETS (named, sound on `ProjectionValuedMeasure`) ──
