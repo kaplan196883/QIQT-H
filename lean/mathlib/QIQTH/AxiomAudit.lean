@@ -559,6 +559,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.rvdR_injective
 -- expected: standard only — RvD Prop 2.2(1): R=P+Q injective (Pξ=Qξ=0 ⟹ ξ⊥𝒦+i𝒦 dense
 -- ⟹ ξ=0, via IsCyclic).  Makes the modular operator well-defined.
+#print axioms QIQTH.StandardSubspaceModular.rvdPmQ_sq
+-- expected: standard only — RvD Prop 2.2(2): (P−Q)² = P+Q−(PQ+QP) = R(2−R) (idempotent
+-- algebra); whence T = R^½(2−R)^½ for the polar decomposition JT = P−Q.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

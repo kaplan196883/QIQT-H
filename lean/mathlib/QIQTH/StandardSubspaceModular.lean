@@ -117,4 +117,20 @@ theorem rvdR_injective (S : StandardSubspace H) : Function.Injective (rvdR S) :=
   have hz : rvdR S (a - b) = 0 := by rw [map_sub, hab, sub_self]
   exact sub_eq_zero.mp (rvdR_eq_zero S hz)
 
+/-- **RvD `P − Q`** — the self-adjoint operator whose polar decomposition `JT = P − Q`
+    (RvD Definition 2.1) yields the modular conjugation `J` and the positive `T`. -/
+noncomputable def rvdPmQ (S : StandardSubspace H) : H →L[ℝ] H := projK S - projIK S
+
+/-- **RvD Prop 2.2(2), the `T²` identity:** `(P − Q)² = P + Q − (P·Q + Q·P)`, which
+    is exactly `R(2 − R)`.  Pure idempotent algebra (`P² = P`, `Q² = Q`); since
+    `J T = P − Q` with `J² = 1`, this is `T² = R(2 − R)`, so `T = R^{1/2}(2 − R)^{1/2}`. -/
+theorem rvdPmQ_sq (S : StandardSubspace H) :
+    rvdPmQ S * rvdPmQ S
+      = projK S + projIK S - (projK S * projIK S + projIK S * projK S) := by
+  have hP : projK S * projK S = projK S := projK_idem S
+  have hQ : projIK S * projIK S = projIK S := projIK_idem S
+  simp only [rvdPmQ]
+  rw [mul_sub, sub_mul, sub_mul, hP, hQ]
+  abel
+
 end QIQTH.StandardSubspaceModular
