@@ -163,6 +163,11 @@ new Mathlib operator-algebra infrastructure. This discharges the remaining conti
   self-adjoint operators. *Exists:* `PVContent` structure + structural lemmas; the analytic core is
   the named Phase-1 target. *Path:* contribute to Mathlib `Analysis.InnerProductSpace.Spectrum`
   (finite-dim spectral theorem exists; bounded infinite-dim does not). *Dep:* none (parallel track).
+  > **FINITE CASE DONE (commit 4374c73, `QIQTH/SpectralPVM.lean`, axiom-free):** the matrix
+  > spectral theorem packaged as a PVM — `specProj` (eigenprojections `U·diag(δᵢ)·U⋆`),
+  > `specProj_sum_eq_one` (resolution of identity ∑P=1), `specProj_idem`/`specProj_orthogonal`/
+  > `specProj_selfAdjoint`, `A_eq_conj_diag`.  The discrete spectral measure is a finite PVM.
+  > The CONTINUUM (bounded Borel FC / PVM for Hilbert-space operators) is the open Mathlib target.
 - **3.2 (XL) Tomita–Takesaki at infinite dimension.** Extend `FiniteModularTheory` (which proves the
   finite-dim modular flow + KMS) to the Type III setting: modular operator Δ from a cyclic-separating
   vector, `σ_t = Δ^{it}·Δ^{-it}`, KMS. *Exists:* finite-dim `modAut`, `kms_condition`,
