@@ -556,6 +556,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — RvD Prop 2.2(1): ⟪Rξ,ξ⟫ = ‖Pξ‖²+‖Qξ‖² (engine for R injective).
 #print axioms QIQTH.StandardSubspaceModular.rvdR_inner_self_nonneg
 -- expected: standard only — 0 ≤ ⟪Rξ,ξ⟫ (R is a positive operator, RvD 0 ≤ R ≤ 2).
+#print axioms QIQTH.StandardSubspaceModular.rvdR_injective
+-- expected: standard only — RvD Prop 2.2(1): R=P+Q injective (Pξ=Qξ=0 ⟹ ξ⊥𝒦+i𝒦 dense
+-- ⟹ ξ=0, via IsCyclic).  Makes the modular operator well-defined.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

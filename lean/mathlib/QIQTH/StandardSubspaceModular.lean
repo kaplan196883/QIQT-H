@@ -76,4 +76,45 @@ theorem rvdR_inner_self_nonneg (S : StandardSubspace H) (ξ : H) :
     0 ≤ (inner ℝ (rvdR S ξ) ξ) := by
   rw [rvdR_inner_self]; positivity
 
+/-- **RvD Prop 2.2(1): `R` is injective.**  If `R ξ = 0` then `⟪R ξ, ξ⟫ = 0`, so by
+    `rvdR_inner_self` both `‖P ξ‖ = ‖Q ξ‖ = 0`; hence `ξ ⊥ 𝒦` and `ξ ⊥ i𝒦`, i.e.
+    `ξ ∈ 𝒦ᗮ ⊓ (i𝒦)ᗮ = (𝒦 ⊔ i𝒦)ᗮ = ⊤ᗮ = ⊥` using `S.IsCyclic` (`𝒦 + i𝒦` dense).
+    Injectivity of `R` is what makes the modular operator well-defined. -/
+theorem rvdR_eq_zero (S : StandardSubspace H) {ξ : H} (h : rvdR S ξ = 0) : ξ = 0 := by
+  have hquad : ‖projK S ξ‖ ^ 2 + ‖projIK S ξ‖ ^ 2 = 0 := by
+    have hi := rvdR_inner_self S ξ
+    rw [h, inner_zero_left] at hi
+    linarith
+  have hP2 : ‖projK S ξ‖ ^ 2 = 0 :=
+    le_antisymm (by linarith [sq_nonneg ‖projIK S ξ‖]) (sq_nonneg _)
+  have hQ2 : ‖projIK S ξ‖ ^ 2 = 0 :=
+    le_antisymm (by linarith [sq_nonneg ‖projK S ξ‖]) (sq_nonneg _)
+  have hPK0 : projK S ξ = 0 :=
+    norm_eq_zero.mp ((pow_eq_zero_iff (by norm_num)).mp hP2)
+  have hQK0 : projIK S ξ = 0 :=
+    norm_eq_zero.mp ((pow_eq_zero_iff (by norm_num)).mp hQ2)
+  have hmemK : ξ ∈ (S.toClosedSubmodule)ᗮ := by
+    rw [← ClosedSubmodule.mem_orthogonal_toSubmodule_iff,
+        ← Submodule.orthogonalProjection_eq_zero_iff]
+    have hh : (S.toClosedSubmodule.toSubmodule).starProjection ξ = 0 := hPK0
+    rw [Submodule.starProjection_apply] at hh
+    exact_mod_cast hh
+  have hmemIK : ξ ∈ (S.toClosedSubmodule.mulI)ᗮ := by
+    rw [← ClosedSubmodule.mem_orthogonal_toSubmodule_iff,
+        ← Submodule.orthogonalProjection_eq_zero_iff]
+    have hh : (S.toClosedSubmodule.mulI.toSubmodule).starProjection ξ = 0 := hQK0
+    rw [Submodule.starProjection_apply] at hh
+    exact_mod_cast hh
+  have hbot : ξ ∈ (⊥ : ClosedSubmodule ℝ H) := by
+    rw [← ClosedSubmodule.top_orthogonal_eq_bot, ← S.IsCyclic,
+        ← ClosedSubmodule.inf_orthogonal]
+    exact ⟨hmemK, hmemIK⟩
+  exact ClosedSubmodule.mem_bot.mp hbot
+
+/-- **`R = P + Q` is injective** (RvD Prop 2.2(1)). -/
+theorem rvdR_injective (S : StandardSubspace H) : Function.Injective (rvdR S) := by
+  intro a b hab
+  have hz : rvdR S (a - b) = 0 := by rw [map_sub, hab, sub_self]
+  exact sub_eq_zero.mp (rvdR_eq_zero S hz)
+
 end QIQTH.StandardSubspaceModular
