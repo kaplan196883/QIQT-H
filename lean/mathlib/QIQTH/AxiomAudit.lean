@@ -408,6 +408,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — permutation-equivariance of the product Born typicality measure
 #print axioms QIQTH.FreeFieldNet.Dω_swap_invariant
 -- expected: standard only — mode-swap equivariance of the net's product Born measure
+#print axioms QIQTH.QubitIC.qubitIC_sum
+-- expected: standard only — the four qubit record effects are a POVM (∑ = 1)
+#print axioms QIQTH.QubitIC.qubitIC_separating
+-- expected: standard only — RECORD-COMPLETENESS: four record traces separate density matrices (IC)
+#print axioms QIQTH.QubitIC.qubitIC_records_imply_all_effects
+-- expected: standard only — record statistics determine all effect statistics (bridge to Gleason)
 
 -- Infrastructure finite-discharge pass (Open Problems 6 & 9): the finite-
 -- classical axioms are now PROVED, not assumed.

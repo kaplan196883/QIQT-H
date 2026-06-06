@@ -146,3 +146,7 @@ import QIQTH.RecordGleason
 -- monotonicity, scaling-additivity. Will discharge the finite-dim Mackey-Gleason axiom and
 -- the Goldstein-Struyve Born-uniqueness axioms, and complete Stage 1. Axiom-free.
 import QIQTH.EffectGleason
+-- Prize Stage 1.2 (PRIZE_EXECUTION_PLAN.md): finite Covariant Record-Completeness, qubit case —
+-- an explicit rational IC-POVM on ℂ² whose four record traces SEPARATE density matrices
+-- (informationally complete), the finite case of the make-or-break lemma. Axiom-free:
+import QIQTH.QubitIC
