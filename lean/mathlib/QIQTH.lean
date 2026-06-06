@@ -91,6 +91,10 @@ import QIQTH.FreeFieldNet
 -- left↔right swap is a GENUINE non-trivial order-iso moving the geometry, exercising the
 -- covariance machinery over a real orbit with a marginalizing restriction. Axiom-free:
 import QIQTH.DiamondSwapNet
+-- Prize Stage 2 (sheaf / gluing layer): global sections λ ∈ Γ(X) exist and are CLASSIFIED by the
+-- top fibre for a poset directed to a greatest element — gluing unobstructed (Roberts–DHR cocycle
+-- trivial for the product/finite case); selectors over the diamond net = joint records. Axiom-free:
+import QIQTH.SheafSection
 -- Phase 1 of the Tomita–Takesaki roadmap (TOMITA_TAKESAKI_ROADMAP.md): the
 -- projection-valued-measure / bounded-spectral-theorem keystone. Structural PVM
 -- content proved axiom-free; the analytic core (σ-additivity, bounded-Borel FC,

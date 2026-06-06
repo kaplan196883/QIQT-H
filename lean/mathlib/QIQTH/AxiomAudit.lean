@@ -423,6 +423,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DiamondSwapNet.diamond_unified
 -- expected: standard only — Stage-1 capstone: net+section+action exist AND covariant over the orbit
 
+-- PRIZE STAGE 2: global-section existence + classification (gluing unobstructed, finite case).
+#print axioms QIQTH.SheafSection.topSection
+-- expected: standard only — every top record extends to a global section (gluing unobstructed)
+#print axioms QIQTH.SheafSection.globalSection_eq_top
+-- expected: standard only — every global section is determined by its top value (classification)
+#print axioms QIQTH.SheafSection.diamondSelector_classifies
+-- expected: standard only — selectors over the diamond net = joint records (cohomology trivial)
+
 -- Infrastructure finite-discharge pass (Open Problems 6 & 9): the finite-
 -- classical axioms are now PROVED, not assumed.
 #print axioms QIQTH.RelEntPositivity.KL_classical_nonneg
