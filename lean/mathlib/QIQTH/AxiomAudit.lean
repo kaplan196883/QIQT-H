@@ -414,6 +414,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — RECORD-COMPLETENESS: four record traces separate density matrices (IC)
 #print axioms QIQTH.QubitIC.qubitIC_records_imply_all_effects
 -- expected: standard only — record statistics determine all effect statistics (bridge to Gleason)
+#print axioms QIQTH.DiamondSwapNet.swapIso
+-- expected: standard only — left↔right swap is a genuine non-trivial diamond order-isomorphism
+#print axioms QIQTH.DiamondSwapNet.swap_covariant_selection
+-- expected: standard only — covariant selector over the diamond-permuting orbit (non-trivial action)
 
 -- Infrastructure finite-discharge pass (Open Problems 6 & 9): the finite-
 -- classical axioms are now PROVED, not assumed.

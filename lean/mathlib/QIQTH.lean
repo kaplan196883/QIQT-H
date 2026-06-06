@@ -87,6 +87,10 @@ import QIQTH.LorentzWitness
 -- marginalizing restriction and the product Born measure — the no-signaling marginal ω_marg is
 -- a THEOREM about the product Born measure (vs LorentzWitness's trivial restriction). Axiom-free:
 import QIQTH.FreeFieldNet
+-- Prize Stage 1 (diamond-permuting action): a 2-atom diamond net (left,right ≤ top) whose
+-- left↔right swap is a GENUINE non-trivial order-iso moving the geometry, exercising the
+-- covariance machinery over a real orbit with a marginalizing restriction. Axiom-free:
+import QIQTH.DiamondSwapNet
 -- Phase 1 of the Tomita–Takesaki roadmap (TOMITA_TAKESAKI_ROADMAP.md): the
 -- projection-valued-measure / bounded-spectral-theorem keystone. Structural PVM
 -- content proved axiom-free; the analytic core (σ-additivity, bounded-Borel FC,
