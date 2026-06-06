@@ -105,6 +105,16 @@ non-toy inhabitant of the covariant interface. Retires (in the finite-mode regim
 (λ exists) and Kolmogorov-consistent equivariant μ — the linchpin theorem of OP3b, proved for the
 free-field (finite-mode) net. Effort: **L–XL**. The genuine new math is net cohomology.*
 
+> **STATUS (2026-06-06, commit c6d00b6, `QIQTH/SheafSection.lean`): 2.1, 2.2 DONE and 2.3 settled
+> for the finite/product case — axiom-free (depends on NO axioms).** `topSection` (every ⊤-record
+> extends to a global section — gluing unobstructed, λ EXISTS), `globalSection_eq_top` (every
+> section is determined by its ⊤-value — `Γ(X) ≃ X⊤`, the Roberts–DHR cocycle vanishes trivially
+> because ⊤ is a global chart), instantiated on the diamond net (`diamondSelector` /
+> `diamondSelector_classifies`: selectors = joint 2-mode records). 2.5 (linchpin one-liner
+> `A_{gD}=g·A_D`) is `evaluation_covariance` / `swap_covariant_selection` (done in Stage 1).
+> **Remaining (genuinely XL, continuum-facing):** 2.3 for posets WITHOUT a global ⊤ chart (the
+> NON-trivial net cohomology) and 2.4 (Kolmogorov/Carathéodory for the σ-additive continuum μ).
+
 - **2.1 (M) Presheaf from the net.** Build `RecordPresheaf` over the causal-diamond poset from the
   Stage-1 net (functorial restriction = record coarse-graining). *Exists:* `RecordPresheaf` structure;
   `restrict_cast`. *Dep:* Stage 1.
