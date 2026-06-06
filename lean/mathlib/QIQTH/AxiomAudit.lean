@@ -418,6 +418,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — left↔right swap is a genuine non-trivial diamond order-isomorphism
 #print axioms QIQTH.DiamondSwapNet.swap_covariant_selection
 -- expected: standard only — covariant selector over the diamond-permuting orbit (non-trivial action)
+#print axioms QIQTH.DiamondSwapNet.diamondBornNet
+-- expected: standard only — UNIFIED net: product Born ω + both no-signaling marginals + swap action
+#print axioms QIQTH.DiamondSwapNet.diamond_unified
+-- expected: standard only — Stage-1 capstone: net+section+action exist AND covariant over the orbit
 
 -- Infrastructure finite-discharge pass (Open Problems 6 & 9): the finite-
 -- classical axioms are now PROVED, not assumed.

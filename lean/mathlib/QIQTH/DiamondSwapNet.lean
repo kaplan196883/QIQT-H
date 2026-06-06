@@ -14,11 +14,12 @@ non-trivial restriction (marginalization), and the product Born measure swap-equ
 Axiom-free (standard three only).
 -/
 import QIQTH.LorentzSelection
+import QIQTH.FreeFieldNet
 import Mathlib.Tactic
 
 namespace QIQTH.DiamondSwapNet
 
-open LorentzSelection
+open LorentzSelection Finset
 
 /-- Three causal diamonds: two 1-mode sub-regions `left`, `right` inside a 2-mode region `top`. -/
 inductive D3 | left | right | top
@@ -117,5 +118,95 @@ theorem swap_covariant_selection (m : ℕ) [NeZero m] (D : D3) :
     selector (actSection (swapAction m) (sec3 m)) ((swapAction m).act D)
       = (swapAction m).γ D (selector (sec3 m) D) :=
   evaluation_covariance (swapAction m) (sec3 m) D
+
+/- ── UNIFICATION: one D3 net carrying ω (product Born), no-signaling, AND the swap action ── -/
+
+instance instFintypeD3X (m : ℕ) : ∀ D, Fintype (D3X m D)
+  | left => inferInstanceAs (Fintype (Fin m))
+  | right => inferInstanceAs (Fintype (Fin m))
+  | top => inferInstanceAs (Fintype (Fin m × Fin m))
+
+instance instDecEqD3X (m : ℕ) : ∀ D, DecidableEq (D3X m D)
+  | left => inferInstanceAs (DecidableEq (Fin m))
+  | right => inferInstanceAs (DecidableEq (Fin m))
+  | top => inferInstanceAs (DecidableEq (Fin m × Fin m))
+
+/-- The product Born measure on the diamond net: `p` on each 1-mode sub-region, `p ⊗ p` on the
+    2-mode region. -/
+def Dω3 (p : Fin m → ℝ) : ∀ D, D3X m D → ℝ
+  | left => fun x => p x
+  | right => fun x => p x
+  | top => fun w => p w.1 * p w.2
+
+/-- The OTHER no-signaling marginal: marginalizing over the FIRST mode gives the second mode's
+    Born weight.  `∑_{w.2 = b} p w.1 · p w.2 = p b`. -/
+theorem sum_filter_snd (p : Fin m → ℝ) (hp1 : ∑ i, p i = 1) (b : Fin m) :
+    ∑ w ∈ univ.filter (fun w : Fin m × Fin m => w.2 = b), p w.1 * p w.2 = p b := by
+  rw [Finset.sum_filter, Fintype.sum_prod_type]
+  have hinner : ∀ a : Fin m,
+      (∑ c : Fin m, if (a, c).2 = b then p (a, c).1 * p (a, c).2 else 0) = p a * p b := by
+    intro a
+    rw [Finset.sum_eq_single b (fun c _ hc => by simp [hc]) (fun h => absurd (mem_univ b) h)]
+    simp
+  rw [Finset.sum_congr rfl (fun a _ => hinner a), ← Finset.sum_mul, hp1, one_mul]
+
+/-- **The unified diamond net.**  ONE `RecordedHistoryNet` over the 2-atom diamond carrying: the
+    marginalizing restriction (`fst`/`snd`), the product Born measure `ω`, and BOTH no-signaling
+    marginals (`ω_marg` on `top→left` and `top→right`) — and it admits the genuine diamond-
+    permuting swap action `swapAction` (proved separately) and the permutation-equivariance
+    `Dω_swap_invariant`.  The Stage-1 capstone: marginalization + no-signaling + product Born +
+    a non-trivial covariant action, all on one net. -/
+noncomputable def diamondBornNet (p : Fin m → ℝ) (hp0 : ∀ i, 0 ≤ p i) (hp1 : ∑ i, p i = 1) :
+    RecordedHistoryNet D3 where
+  P := Prec3 m
+  fin := instFintypeD3X m
+  deceq := instDecEqD3X m
+  N := fun D => Fintype.card (D3X m D)
+  card_le := fun _ => le_refl _
+  Pb := Prec3 m
+  recon := fun D => Equiv.refl (D3X m D)
+  recon_nat := fun _ _ => rfl
+  ω := Dω3 p
+  ω_nonneg := by
+    rintro (_ | _ | _) x
+    · exact hp0 x
+    · exact hp0 x
+    · exact mul_nonneg (hp0 _) (hp0 _)
+  ω_norm := by
+    rintro (_ | _ | _)
+    · exact hp1
+    · exact hp1
+    · exact FreeFieldNet.sum_prod_eq_one p hp1
+  ω_marg := by
+    rintro (_ | _ | _) (_ | _ | _) h y
+    · simp only [Prec3, D3restrict, Dω3]
+      rw [Finset.sum_filter,
+        Finset.sum_eq_single y (fun b _ hb => by simp [hb]) (fun h => absurd (mem_univ y) h)]; simp
+    · exact absurd h (by decide)
+    · simp only [Prec3, D3restrict, Dω3]; exact FreeFieldNet.sum_filter_fst p hp1 y
+    · exact absurd h (by decide)
+    · simp only [Prec3, D3restrict, Dω3]
+      rw [Finset.sum_filter,
+        Finset.sum_eq_single y (fun b _ hb => by simp [hb]) (fun h => absurd (mem_univ y) h)]; simp
+    · simp only [Prec3, D3restrict, Dω3]; exact sum_filter_snd p hp1 y
+    · exact absurd h (by decide)
+    · exact absurd h (by decide)
+    · simp only [Prec3, D3restrict, Dω3]
+      rw [Finset.sum_filter,
+        Finset.sum_eq_single y (fun b _ hb => by simp [hb]) (fun h => absurd (mem_univ y) h)]; simp
+
+/-- **Stage-1 capstone (unified).**  For any single-trial law `p`, the diamond net exists with a
+    global section and the genuine diamond-permuting Poincaré action — so a Lorentz-covariant
+    single-outcome selector exists over a net that ALSO has product-Born no-signaling on both
+    modes (`diamondBornNet.ω_marg`).  No-signaling, equivariance, marginalization, and a
+    non-trivial covariant action are unified on one net. -/
+theorem diamond_unified (m : ℕ) [NeZero m] (p : Fin m → ℝ) (hp0 : ∀ i, 0 ≤ p i)
+    (hp1 : ∑ i, p i = 1) :
+    (∃ (net : RecordedHistoryNet.{0, 0} D3) (_lam : GlobalSection net.P)
+        (_g : PoincareAction net.P), True)
+    ∧ (∀ D : D3, selector (actSection (swapAction m) (sec3 m)) ((swapAction m).act D)
+        = (swapAction m).γ D (selector (sec3 m) D)) :=
+  ⟨⟨diamondBornNet p hp0 hp1, sec3 m, swapAction m, trivial⟩,
+    swap_covariant_selection m⟩
 
 end QIQTH.DiamondSwapNet
