@@ -145,6 +145,19 @@ converts the Lorentz promissory note into a theorem.
 *Goal: replace "finite-mode" with genuine infinite-dim Type III₁ QFT. Effort: **XL** — requires
 new Mathlib operator-algebra infrastructure. This discharges the remaining continuum interface.*
 
+> **STATUS (2026-06-06): finite shadows in hand; continuum proper is the genuine wall.**  The
+> finite-dimensional groundwork for Stage 3 is axiom-free and built: `FiniteModularTheory`
+> (`modAut`/`kms_condition`/`modAut_stateOf_invariant` — finite Tomita–Takesaki: the modular flow
+> exists, satisfies KMS, and PRESERVES its state, commit 5c0d71d) and `Spectral/PVM` (structural
+> PVM content).  **The continuum Stage 3 (3.1 bounded spectral theorem, 3.2 infinite-dim
+> Tomita–Takesaki, 3.3 Type III₁ free-field net, 3.4 continuum Bunce–Wright) is NOT
+> session-achievable**: it needs Type III von Neumann algebra theory absent from Mathlib (the
+> bounded spectral theorem for self-adjoint operators on Hilbert space is itself an open Mathlib
+> target).  Honest options: (a) a multi-month Mathlib operator-algebra contribution; (b) accept
+> these as named cited-interface axioms (would re-grow the axiom budget — against the ratchet-down
+> discipline).  Until then, the finite prize (Stages 1+2, machine-checked axiom-free) stands on
+> its own; the continuum is openly gated.
+
 - **3.1 (XL) Bounded spectral theorem / PVM analytic core.** Complete `Spectral/PVM.lean`:
   σ-additivity of the PVM, bounded Borel functional calculus, the spectral theorem for bounded
   self-adjoint operators. *Exists:* `PVContent` structure + structural lemmas; the analytic core is
