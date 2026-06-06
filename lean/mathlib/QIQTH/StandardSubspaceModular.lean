@@ -71,10 +71,31 @@ theorem rvdR_inner_self (S : StandardSubspace H) (ξ : H) :
   · simpa [projIK] using
       Submodule.re_inner_starProjection_eq_normSq (S.toClosedSubmodule.mulI.toSubmodule) ξ
 
-/-- `0 ≤ ⟪R ξ, ξ⟫` — `R` is a positive operator (RvD: `0 ≤ R ≤ 2`). -/
+/-- `0 ≤ ⟪R ξ, ξ⟫` — the lower half of RvD's `0 ≤ R ≤ 2`. -/
 theorem rvdR_inner_self_nonneg (S : StandardSubspace H) (ξ : H) :
     0 ≤ (inner ℝ (rvdR S ξ) ξ) := by
   rw [rvdR_inner_self]; positivity
+
+/-- `P` is a contraction: `‖P ξ‖ ≤ ‖ξ‖`. -/
+theorem norm_projK_apply_le (S : StandardSubspace H) (ξ : H) : ‖projK S ξ‖ ≤ ‖ξ‖ :=
+  Submodule.norm_starProjection_apply_le _ ξ
+
+/-- `Q` is a contraction: `‖Q ξ‖ ≤ ‖ξ‖`. -/
+theorem norm_projIK_apply_le (S : StandardSubspace H) (ξ : H) : ‖projIK S ξ‖ ≤ ‖ξ‖ :=
+  Submodule.norm_starProjection_apply_le _ ξ
+
+/-- `⟪R ξ, ξ⟫ ≤ 2‖ξ‖²` — the upper half of RvD's `0 ≤ R ≤ 2` (each projection is a
+    contraction, so `‖P ξ‖² + ‖Q ξ‖² ≤ 2‖ξ‖²`). -/
+theorem rvdR_inner_self_le (S : StandardSubspace H) (ξ : H) :
+    (inner ℝ (rvdR S ξ) ξ) ≤ 2 * ‖ξ‖ ^ 2 := by
+  rw [rvdR_inner_self]
+  have hP : ‖projK S ξ‖ ^ 2 ≤ ‖ξ‖ ^ 2 := by
+    rw [pow_two, pow_two]
+    exact mul_self_le_mul_self (norm_nonneg _) (norm_projK_apply_le S ξ)
+  have hQ : ‖projIK S ξ‖ ^ 2 ≤ ‖ξ‖ ^ 2 := by
+    rw [pow_two, pow_two]
+    exact mul_self_le_mul_self (norm_nonneg _) (norm_projIK_apply_le S ξ)
+  linarith
 
 /-- **RvD Prop 2.2(1): `R` is injective.**  If `R ξ = 0` then `⟪R ξ, ξ⟫ = 0`, so by
     `rvdR_inner_self` both `‖P ξ‖ = ‖Q ξ‖ = 0`; hence `ξ ⊥ 𝒦` and `ξ ⊥ i𝒦`, i.e.
