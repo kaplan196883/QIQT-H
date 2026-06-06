@@ -553,6 +553,8 @@ namespace QIQTH.AxiomAudit
 -- the operator-norm estimate enabling the simple→bounded-Borel extension toward Φ(fg)=Φ(f)Φ(g).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_add
 -- expected: standard only — additivity of the bounded-Borel FC in f: Φ(f+g)=Φ(f)+Φ(g).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_smul
+-- expected: standard only — ℂ-homogeneity of the bounded-Borel FC in f: Φ(c·f)=c·Φ(f).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

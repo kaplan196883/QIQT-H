@@ -1050,6 +1050,30 @@ theorem boundedFC_add {f g : Ω → ℂ} (hf : Measurable f) (hg : Measurable g)
       P.inner_boundedFC, P.inner_boundedFC]
   exact P.bilinDiag_add_f hf hg hCf hCg x y
 
+/-- Scalar-homogeneity of the diagonal functional in `f`: `D_{c·f} = c·D_f`. -/
+theorem diagInt_smul_f (c : ℂ) (f : Ω → ℂ) (z : H) :
+    P.diagInt (fun ω => c * f ω) z = c * P.diagInt f z := by
+  simp only [diagInt]
+  exact MeasureTheory.integral_const_mul c f
+
+/-- Scalar-homogeneity of the polarized form in `f`: `B_{c·f} = c·B_f`. -/
+theorem bilinDiag_smul_f (c : ℂ) (f : Ω → ℂ) (x y : H) :
+    P.bilinDiag (fun ω => c * f ω) x y = c * P.bilinDiag f x y := by
+  simp only [bilinDiag]
+  rw [P.diagInt_smul_f, P.diagInt_smul_f, P.diagInt_smul_f, P.diagInt_smul_f]
+  ring
+
+/-- **ℂ-homogeneity of the bounded-Borel FC in `f`:** `Φ(c·f) = c·Φ(f)`. -/
+theorem boundedFC_smul (c : ℂ) {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, ‖f ω‖ ≤ C) :
+    P.boundedFC (hf.const_mul c) (mul_nonneg (norm_nonneg c) hC0)
+        (fun ω => by rw [norm_mul]; exact mul_le_mul_of_nonneg_left (hC ω) (norm_nonneg c))
+      = c • P.boundedFC hf hC0 hC := by
+  refine ContinuousLinearMap.ext (fun y => ?_)
+  refine ext_inner_left ℂ (fun x => ?_)
+  rw [P.inner_boundedFC, ContinuousLinearMap.smul_apply, inner_smul_right, P.inner_boundedFC]
+  exact P.bilinDiag_smul_f c f x y
+
 /-- **Operator-norm bound for the bounded-Borel FC:** `‖Φ(f)‖ ≤ 2C` for `‖f‖∞ ≤ C`.
     (`Φ(f)` is the adjoint of the Riesz operator `intBorel f`, and the adjoint is a
     linear isometry.)  This is the estimate that makes the simple→bounded-Borel
