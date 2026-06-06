@@ -47,9 +47,20 @@ finite-mode result. Effort: **M–L**. Builds directly on `FreeFieldRecord` + `R
 > Born measure `ω`, where the no-signaling marginal `ω_marg` is a real THEOREM (`bornNet`,
 > `bornNet_no_signaling`); `bornNet_covariant_selection` discharges `covariant_selection_exists`
 > for it. This realizes the heart of 1.4 for a 2-mode (`false ≤ true`) net with a TRIVIAL action.
+>
+> **1.2 DONE (commit 0b7a7d1, `QIQTH/QubitIC.lean`):** finite Covariant Record-Completeness for a
+> qubit — explicit rational IC-POVM `qubitIC` (mixed tetrahedron), `qubitIC_sum` (POVM),
+> `qubitIC_separating` (the four record traces tomographically SEPARATE density matrices —
+> informationally complete; the make-or-break lemma's finite case, NOT a restatement of
+> `trace_form_unique`), `qubitIC_records_imply_all_effects` (bridge into effect-Gleason). Residual:
+> PSD of each `Eₖ` deferred (tedious quadratic-form computation; not needed for separation).
+>
+> **1.3 DONE (equivariance):** `BornTypicalityFinite.w_perm_invariant` (product Born measure is
+> permutation-invariant) + `FreeFieldNet.Dω_swap_invariant` (2-mode instance).
+>
 > **Still to do for full Stage 1:** ground the fibres/state in `FreeFieldRecord` sectors (1.1),
-> the effect-completeness bridge via `EffectGleason.trace_form_unique` (1.2), and a NON-trivial
-> mode-permutation action with equivariant μ (1.3, `FreeFieldRecord.boost_*`).
+> a NON-trivial mode-permutation action genuinely permuting diamonds (the 2-atom-diamond poset
+> `left,right ≤ top` GPT suggested), and instantiate the net's `p` with the IC-POVM Born weights.
 
 - **1.1 (M) Finite-mode measurement POVM.** Define the `n`-mode number-basis / Gaussian PVM as a
   concrete `FinPVM` (or matrix POVM) on `⊗ⁿ ℂ^d`. Target: `freefield_pvm_complete` (∑ E = 1) and
