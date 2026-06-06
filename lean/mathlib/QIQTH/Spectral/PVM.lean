@@ -1192,6 +1192,20 @@ theorem boundedFC_eq_integralSimple {ι : Type*} (t : Finset ι) (c : ι → ℂ
   rw [P.bilinDiag_smul_f (c i) ((sets i).indicator (fun _ => (1 : ℂ))) x y,
       P.bilinDiag_indicator (hm i hi)]
 
+/-- **Operator product of two simple integrals** (the algebraic core of
+    multiplicativity `Φ(fg)=Φ(f)Φ(g)` for simple `f,g`): cross terms collapse by
+    `E Aᵢ · E Bⱼ = E(Aᵢ ∩ Bⱼ)`. -/
+theorem integralSimple_mul_eq {ι κ : Type*} (t : Finset ι) (s : Finset κ)
+    (a : ι → ℂ) (b : κ → ℂ) (A : ι → Set Ω) (B : κ → Set Ω)
+    (hA : ∀ i ∈ t, MeasurableSet (A i)) (hB : ∀ j ∈ s, MeasurableSet (B j)) :
+    P.integralSimple t a A * P.integralSimple s b B
+      = ∑ i ∈ t, ∑ j ∈ s, (a i * b j) • P.E (A i ∩ B j) := by
+  simp only [integralSimple]
+  rw [Finset.sum_mul_sum]
+  refine Finset.sum_congr rfl (fun i hi => ?_)
+  refine Finset.sum_congr rfl (fun j hj => ?_)
+  rw [smul_mul_smul, ← P.E_inter (hA i hi) (hB j hj)]
+
 /- ── Bounded-convergence ("normality") continuity of the FC ─────────────────-/
 
 /-- **Dominated/bounded convergence for the diagonal functional:** if `fₙ → f`

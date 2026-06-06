@@ -562,6 +562,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_eq_integralSimple
 -- expected: standard only — Φ(∑cᵢ𝟙_{sᵢ}) = ∑cᵢ E sᵢ = integralSimple: the Riesz-form FC
 -- equals the constructive simple spectral integral on simple functions.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.integralSimple_mul_eq
+-- expected: standard only — (∑aᵢ E Aᵢ)(∑bⱼ E Bⱼ) = ∑ᵢⱼ aᵢbⱼ E(Aᵢ∩Bⱼ): operator
+-- multiplicativity core for simple functions (cross terms collapse by E_inter).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
