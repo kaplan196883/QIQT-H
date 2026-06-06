@@ -97,6 +97,17 @@ theorem rvdR_inner_self_le (S : StandardSubspace H) (ξ : H) :
     exact mul_self_le_mul_self (norm_nonneg _) (norm_projIK_apply_le S ξ)
   linarith
 
+/-- **`R` is symmetric** (self-adjoint in the inner-product sense): `⟪R x, y⟫ = ⟪x, R y⟫`.
+    Each projection `P, Q` is self-adjoint (`inner_starProjection_left_eq_right`).  Stated
+    as the inner-product identity because the real operator algebra `H →L[ℝ] H` carries no
+    synthesized `Star`/adjoint instance under the scoped real inner product — the bounded
+    route still meets the operator-`*`-structure wall at the polar decomposition `JT = P−Q`. -/
+theorem rvdR_inner_symm (S : StandardSubspace H) (x y : H) :
+    (inner ℝ (rvdR S x) y) = inner ℝ x (rvdR S y) := by
+  simp only [rvdR_apply, projK, projIK, inner_add_left, inner_add_right]
+  rw [Submodule.inner_starProjection_left_eq_right,
+      Submodule.inner_starProjection_left_eq_right]
+
 /-- **RvD Prop 2.2(1): `R` is injective.**  If `R ξ = 0` then `⟪R ξ, ξ⟫ = 0`, so by
     `rvdR_inner_self` both `‖P ξ‖ = ‖Q ξ‖ = 0`; hence `ξ ⊥ 𝒦` and `ξ ⊥ i𝒦`, i.e.
     `ξ ∈ 𝒦ᗮ ⊓ (i𝒦)ᗮ = (𝒦 ⊔ i𝒦)ᗮ = ⊤ᗮ = ⊥` using `S.IsCyclic` (`𝒦 + i𝒦` dense).

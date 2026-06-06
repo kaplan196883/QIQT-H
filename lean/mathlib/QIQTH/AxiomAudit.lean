@@ -564,6 +564,9 @@ namespace QIQTH.AxiomAudit
 -- algebra); whence T = R^½(2−R)^½ for the polar decomposition JT = P−Q.
 #print axioms QIQTH.StandardSubspaceModular.rvdR_inner_self_le
 -- expected: standard only — RvD 0 ≤ R ≤ 2 (upper half): ⟪Rξ,ξ⟫ ≤ 2‖ξ‖² (P,Q contractions).
+#print axioms QIQTH.StandardSubspaceModular.rvdR_inner_symm
+-- expected: standard only — R symmetric: ⟪Rx,y⟫=⟪x,Ry⟫ (P,Q self-adjoint). Inner-product
+-- form, since H→L[ℝ]H has no synthesized Star instance under the scoped real inner product.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
