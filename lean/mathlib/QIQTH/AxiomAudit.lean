@@ -709,6 +709,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SpectralTheorem.specMeasure_setEngine_nonneg
 -- expected: standard only — set-level engine (g≥0): q_s(g(T)x+v)−q_s(g(T)x−v)=∫_s g dμ_{x+v}−
 -- ∫_s g dμ_{x−v} (eval specMeasure_engine_measure at s via .real). E_inter step (b), g≥0 case.
+#print axioms QIQTH.SpectralTheorem.specMeasure_setEngine
+-- expected: standard only — set-level engine, GENERAL continuous g (signed): same identity,
+-- via linearity (g=(g+‖g‖)−‖g‖; LHS=4·b_s(g(T)x,v) linear via bForm_add/sub_left+cfcHom, RHS by
+-- integral_add). E_inter step (b) complete.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

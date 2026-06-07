@@ -936,6 +936,54 @@ lemma specMeasure_setEngine_nonneg (ha : IsSelfAdjoint T) (g : C(spectrum ℝ T,
     withDensity_real_setIntegral T ha g hg0 _ hs, withDensity_real_setIntegral T ha g hg0 _ hs] at h
   linarith
 
+/-- `b_s` is subtractive in its left argument. -/
+lemma bForm_sub_left (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u w v : H) :
+    bForm T ha s (u - w) v = bForm T ha s u v - bForm T ha s w v := by
+  rw [bForm_comm, bForm_comm T ha s u v, bForm_comm T ha s w v, bForm_sub_right]
+
+open RCLike MeasureTheory in
+/-- **Set-level engine** (general continuous `g`): `q_s(g(T)x+v) − q_s(g(T)x−v) =
+    ∫_s g dμ_{x+v} − ∫_s g dμ_{x−v}`.  Both sides are linear in `g`; extend the `g≥0` case by
+    `g = (g+‖g‖) − ‖g‖`. -/
+lemma specMeasure_setEngine (ha : IsSelfAdjoint T) (g : C(spectrum ℝ T, ℝ)) (x v : H)
+    {s : Set (spectrum ℝ T)} (hs : MeasurableSet s) :
+    (specMeasure T ha (cfcHom ha g x + v)).real s
+        - (specMeasure T ha (cfcHom ha g x - v)).real s
+      = (∫ ω in s, g ω ∂(specMeasure T ha (x + v)))
+        - (∫ ω in s, g ω ∂(specMeasure T ha (x - v))) := by
+  have hLHS : ∀ g' : C(spectrum ℝ T, ℝ),
+      (specMeasure T ha (cfcHom ha g' x + v)).real s
+          - (specMeasure T ha (cfcHom ha g' x - v)).real s
+        = 4 * bForm T ha s (cfcHom ha g' x) v := by
+    intro g'; unfold bForm qForm; ring
+  set cC : C(spectrum ℝ T, ℝ) := ContinuousMap.const _ ‖g‖ with hcC
+  set gC : C(spectrum ℝ T, ℝ) := g + cC with hgC
+  have hgC0 : ∀ ω, 0 ≤ gC ω := by
+    intro ω
+    have hb := g.norm_coe_le_norm ω
+    rw [Real.norm_eq_abs] at hb
+    simp only [hgC, hcC, ContinuousMap.add_apply, ContinuousMap.const_apply]
+    have := (abs_le.mp hb).1
+    linarith
+  have hcC0 : ∀ ω, 0 ≤ cC ω := fun ω => by
+    simp only [hcC, ContinuousMap.const_apply]; exact norm_nonneg g
+  have e1 := specMeasure_setEngine_nonneg T ha gC hgC0 x v hs
+  have e2 := specMeasure_setEngine_nonneg T ha cC hcC0 x v hs
+  rw [hLHS] at e1 e2
+  have hcfc : cfcHom ha g x = cfcHom ha gC x - cfcHom ha cC x := by
+    rw [hgC, map_add, ContinuousLinearMap.add_apply]; abel
+  rw [hLHS, hcfc, bForm_sub_left, mul_sub, e1, e2]
+  have hadd : ∀ z : H, ∫ ω in s, gC ω ∂(specMeasure T ha z)
+      = (∫ ω in s, g ω ∂(specMeasure T ha z)) + ∫ ω in s, cC ω ∂(specMeasure T ha z) := by
+    intro z
+    rw [hgC]
+    simp only [ContinuousMap.add_apply]
+    exact integral_add
+      ((g.continuous.integrable_of_hasCompactSupport (HasCompactSupport.of_compactSpace _)).restrict)
+      ((cC.continuous.integrable_of_hasCompactSupport (HasCompactSupport.of_compactSpace _)).restrict)
+  rw [hadd, hadd]
+  ring
+
 /-! ### The `f`-weighted quadratic form `q_f(z) := ∫ f dμ_z` (toward `Φ(f)`)
 
 To build the bounded Borel functional calculus `Φ(f)` (with `Φ(𝟙_s)=E(s)`, `Φ(continuous)=cfcHom`)
