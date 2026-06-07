@@ -761,6 +761,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SpectralTheorem.modAut_vectorState_invariant
 -- expected: standard only — ω_ξ(σ_t x)=ω_ξ(x) when Δ^{it}ξ=ξ (fixed cyclic-separating vector). The
 -- first state-coupled continuum modular theorem; generalizes FiniteModularTheory.modAut_stateOf_invariant.
+#print axioms QIQTH.SpectralTheorem.modFlow_apply_eq_self_of_generator
+-- expected: standard only — A ξ=0 ⇒ U(t)ξ=ξ (generator fixes ⇒ flow fixes; exp series via map_tsum).
+#print axioms QIQTH.SpectralTheorem.modAut_vectorState_invariant_of_generator
+-- expected: standard only — A ξ=0 ⇒ ω_ξ(σ_t x)=ω_ξ(x). Checkable (infinitesimal) form of invariance.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

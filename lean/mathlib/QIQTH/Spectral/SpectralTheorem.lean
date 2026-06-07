@@ -1179,6 +1179,30 @@ theorem modFlow_continuous (A : H →L[ℂ] H) : Continuous (modFlow A) := by
   haveI : NormedAlgebra ℚ (H →L[ℂ] H) := NormedAlgebra.restrictScalars ℚ ℂ _
   exact NormedSpace.exp_continuous.comp (by fun_prop)
 
+/-- **Generator fixes the vector ⇒ the flow fixes it.**  If the generator annihilates `ξ`
+(`A ξ = 0`) then `U(t) ξ = ξ` for every `t`.  This is the infinitesimal form of the Tomita–Takesaki
+invariance of the cyclic separating vector: writing `Δ = exp A`, `A Ω = 0` gives `Δ^{it} Ω = Ω`.
+Proof: expand `exp((it)A) = ∑ ((it)A)ⁿ/n!`, evaluate at `ξ` (evaluation is a continuous linear map,
+so it commutes with the sum); every `n ≥ 1` term kills `ξ` since `((it)A) ξ = (it)(A ξ) = 0`, leaving
+the `n = 0` term `ξ`. -/
+theorem modFlow_apply_eq_self_of_generator (A : H →L[ℂ] H) {ξ : H} (hAξ : A ξ = 0) (t : ℝ) :
+    modFlow A t ξ = ξ := by
+  set B : H →L[ℂ] H := ((t : ℂ) * Complex.I) • A with hBdef
+  have hBξ : B ξ = 0 := by rw [hBdef, ContinuousLinearMap.smul_apply, hAξ, smul_zero]
+  have hpow : ∀ n : ℕ, (B ^ (n + 1)) ξ = 0 := by
+    intro n; rw [pow_succ, ContinuousLinearMap.mul_apply, hBξ, map_zero]
+  have happ : modFlow A t ξ = (ContinuousLinearMap.apply ℂ H ξ) (NormedSpace.exp B) :=
+    (ContinuousLinearMap.apply_apply ξ _).symm
+  rw [happ]
+  simp only [NormedSpace.exp_eq_tsum ℂ]
+  rw [ContinuousLinearMap.map_tsum _ (NormedSpace.expSeries_summable' (𝕂 := ℂ) B)]
+  simp only [map_smul, ContinuousLinearMap.apply_apply]
+  rw [tsum_eq_single 0]
+  · simp
+  · intro n hn
+    obtain ⟨m, rfl⟩ := Nat.exists_eq_succ_of_ne_zero hn
+    rw [hpow m, smul_zero]
+
 /-! ### Layer 2 — the modular automorphism group `σ_t(x) = U(t)·x·U(t)⁻¹`
 
 Conjugation by the modular flow gives a one-parameter group of `*`-automorphisms — the continuum
@@ -1241,6 +1265,16 @@ theorem modAut_vectorState_invariant (A : H →L[ℂ] H) (hA : IsSelfAdjoint A) 
   unfold vectorState modAut
   rw [ContinuousLinearMap.mul_apply, ContinuousLinearMap.mul_apply,
     ← ContinuousLinearMap.adjoint_inner_left, hadj, hξ]
+
+/-- **Modular invariance from the generator.**  If the generator annihilates `ξ` (`A ξ = 0` — i.e.
+`ξ` is in the kernel of the modular generator, the infinitesimal `Δ^{it} ξ = ξ`), then the modular
+automorphism preserves its vector state: `ω_ξ(σ_t x) = ω_ξ(x)`.  Combines
+`modFlow_apply_eq_self_of_generator` with `modAut_vectorState_invariant`; the directly checkable form
+of the continuum modular-invariance theorem. -/
+theorem modAut_vectorState_invariant_of_generator (A : H →L[ℂ] H) (hA : IsSelfAdjoint A) (t : ℝ)
+    {ξ : H} (hAξ : A ξ = 0) (x : H →L[ℂ] H) :
+    vectorState ξ (modAut A t x) = vectorState ξ x :=
+  modAut_vectorState_invariant A hA t (modFlow_apply_eq_self_of_generator A hAξ (-t)) x
 
 /-! ### The `f`-weighted quadratic form `q_f(z) := ∫ f dμ_z` (toward `Φ(f)`)
 
