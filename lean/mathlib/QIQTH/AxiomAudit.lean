@@ -746,6 +746,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SpectralTheorem.modFlow_unitary
 -- expected: standard only — U(t)⋆·U(t)=1 (unitary), from U(t)⋆=U(−t) (star_exp + A self-adjoint).
 -- The continuum modular flow Δ^it generalizing FiniteModularTheory.sigmaDiag to B(H).
+#print axioms QIQTH.SpectralTheorem.modFlow_continuous
+-- expected: standard only — t↦U(t) norm-continuous (exp_continuous). So U is a strongly-continuous
+-- one-parameter unitary group — the bounded-generator Stone's theorem.
 -- Layer 2: the modular automorphism group σ_t(x)=U(t)·x·U(t)⁻¹
 #print axioms QIQTH.SpectralTheorem.modAut_comp
 -- expected: standard only — σ_s∘σ_t = σ_{s+t} (one-parameter automorphism group law).

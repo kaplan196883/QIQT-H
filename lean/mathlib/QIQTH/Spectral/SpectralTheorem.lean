@@ -1173,6 +1173,12 @@ theorem modFlow_unitary (A : H →L[ℂ] H) (hA : IsSelfAdjoint A) (t : ℝ) :
     star (modFlow A t) * modFlow A t = 1 := by
   rw [modFlow_star A hA, ← modFlow_add, neg_add_cancel, modFlow_zero]
 
+/-- **Strong (norm) continuity**: `t ↦ U(t)` is continuous — so `U` is a strongly-continuous
+    one-parameter unitary group (the bounded-generator Stone's theorem). -/
+theorem modFlow_continuous (A : H →L[ℂ] H) : Continuous (modFlow A) := by
+  haveI : NormedAlgebra ℚ (H →L[ℂ] H) := NormedAlgebra.restrictScalars ℚ ℂ _
+  exact NormedSpace.exp_continuous.comp (by fun_prop)
+
 /-! ### Layer 2 — the modular automorphism group `σ_t(x) = U(t)·x·U(t)⁻¹`
 
 Conjugation by the modular flow gives a one-parameter group of `*`-automorphisms — the continuum
