@@ -40,6 +40,7 @@ import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Order
 import Mathlib.Analysis.InnerProductSpace.StarOrder
 import Mathlib.MeasureTheory.Integral.RieszMarkovKakutani.Real
 import Mathlib.Topology.ContinuousMap.CompactlySupported
+import QIQTH.Spectral.PVM
 import Mathlib.Tactic
 
 namespace QIQTH.SpectralTheorem
@@ -1070,6 +1071,22 @@ lemma specProj_inter (ha : IsSelfAdjoint T) {s t : Set (spectrum ℝ T)} (hs : M
   rw [show Complex.I • specProj T ha s y = specProj T ha s (Complex.I • y)
         from (map_smul (specProj T ha s) Complex.I y).symm,
     bForm_specProj T ha hs ht, bForm_specProj T ha hs ht]
+
+/-- **The bounded spectral theorem (PVM form)**: every bounded self-adjoint `T : H →L[ℂ] H`
+    induces a projection-valued measure on `spectrum ℝ T`, with `E(s) = specProj`.  All structure
+    fields are the lemmas proved above; `isIdem` is `E_inter` at `s = t`. -/
+noncomputable def PVM_of_selfAdjoint (ha : IsSelfAdjoint T) :
+    QIQTH.Spectral.ProjectionValuedMeasure (spectrum ℝ T) H where
+  E := specProj T ha
+  isSA := fun s _ => specProj_isSelfAdjoint T ha s
+  isIdem := fun s hs => by
+    have h := specProj_inter T ha hs hs
+    rw [Set.inter_self] at h
+    exact h.symm
+  E_empty := specProj_empty T ha
+  E_univ := specProj_univ T ha
+  E_inter := fun s t hs ht => specProj_inter T ha hs ht
+  hasSum_iUnion := fun hm hd x => specProj_hasSum T ha hm hd x
 
 /-! ### The `f`-weighted quadratic form `q_f(z) := ∫ f dμ_z` (toward `Φ(f)`)
 

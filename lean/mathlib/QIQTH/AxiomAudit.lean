@@ -725,6 +725,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SpectralTheorem.specProj_inter
 -- expected: standard only — ★ E_INTER: E(s∩t)=E(s)·E(t), the projection/multiplicativity property.
 -- The LAST ProjectionValuedMeasure field. E is now a genuine PVM ⟹ bounded spectral theorem.
+#print axioms QIQTH.SpectralTheorem.PVM_of_selfAdjoint
+-- expected: standard only — ★★ THE BOUNDED SPECTRAL THEOREM (PVM form): every bounded self-adjoint
+-- T : H →L[ℂ] H induces a ProjectionValuedMeasure on spectrum ℝ T (E = specProj). All fields proved
+-- axiom-free (isIdem from E_inter at s=t). THE Layer-1 keystone unlocking bounded Borel FC + Δ^it.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
