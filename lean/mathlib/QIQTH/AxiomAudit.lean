@@ -627,6 +627,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — b_s(u,u) = q_s(u) (polarization diagonal).
 #print axioms QIQTH.SpectralTheorem.bForm_add_right
 -- expected: standard only — b_s additive in right arg; with bForm_comm/add_left ⟹ biadditive.
+#print axioms QIQTH.SpectralTheorem.bForm_sq_le
+-- expected: standard only — CAUCHY–SCHWARZ b_s(u,v)² ≤ q_s(u)·q_s(v). Since q_s ≥ 0, the
+-- quadratic t↦q_s(u+t•v) is ≥0 on ℚ (ℚ-homog via bundled AddMonoidHom + map_ratCast_smul),
+-- hence on ℝ (Rat.denseRange_cast.induction_on), so discrim ≤ 0 (discrim_le_zero). The keystone
+-- delivering boundedness → continuity → ℝ-linearity → the spectral projection E(B).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

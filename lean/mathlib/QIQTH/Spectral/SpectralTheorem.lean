@@ -336,4 +336,51 @@ lemma bForm_add_left (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u v w : 
     bForm T ha s (u + v) w = bForm T ha s u w + bForm T ha s v w := by
   rw [bForm_comm, bForm_add_right, bForm_comm T ha s w u, bForm_comm T ha s w v]
 
+/-- Real-scalar version of the scaling law: `q_s(r•z) = r²·q_s(z)`. -/
+lemma qForm_real_smul (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (r : ℝ) (z : H) :
+    qForm T ha s (r • z) = r ^ 2 * qForm T ha s z := by
+  rw [RCLike.real_smul_eq_coe_smul (K := ℂ), qForm_smul, RCLike.norm_ofReal, sq_abs]
+
+lemma bForm_zero_right (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u : H) :
+    bForm T ha s u 0 = 0 := by
+  unfold bForm; simp
+
+/-- `b_s(u, ·)` bundled as an additive homomorphism (used for ℚ-homogeneity in Cauchy–Schwarz). -/
+noncomputable def bFormRight (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u : H) : H →+ ℝ where
+  toFun w := bForm T ha s u w
+  map_zero' := bForm_zero_right T ha s u
+  map_add' := bForm_add_right T ha s u
+
+/-- **Cauchy–Schwarz** for the spectral form: `b_s(u,v)² ≤ q_s(u)·q_s(v)`.
+    Because `q_s ≥ 0`, the quadratic `t ↦ q_s(u + t•v) = q_s(v)·t² + 2 b_s(u,v)·t + q_s(u)` is
+    nonnegative on `ℚ` (hence on `ℝ` by density), so its discriminant is `≤ 0`. -/
+lemma bForm_sq_le (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u v : H) :
+    bForm T ha s u v ^ 2 ≤ qForm T ha s u * qForm T ha s v := by
+  -- ℚ-homogeneity of `b_s(u, ·)`
+  have hq : ∀ q : ℚ, bForm T ha s u ((q : ℝ) • v) = (q : ℝ) * bForm T ha s u v := by
+    intro q
+    have h := map_ratCast_smul (bFormRight T ha s u) ℝ ℝ q v
+    simpa [bFormRight, smul_eq_mul] using h
+  -- nonnegativity of the quadratic at rational points
+  have hpoly : ∀ q : ℚ,
+      0 ≤ qForm T ha s v * ((q : ℝ) * (q : ℝ)) + 2 * bForm T ha s u v * (q : ℝ)
+        + qForm T ha s u := by
+    intro q
+    have hexp := qForm_add_expand T ha s u ((q : ℝ) • v)
+    rw [hq q, qForm_real_smul] at hexp
+    have hnn := qForm_nonneg T ha s (u + (q : ℝ) • v)
+    rw [hexp] at hnn
+    nlinarith [hnn]
+  -- extend to all reals by density of ℚ
+  have hreal : ∀ t : ℝ,
+      0 ≤ qForm T ha s v * (t * t) + 2 * bForm T ha s u v * t + qForm T ha s u := by
+    intro t
+    refine Rat.denseRange_cast.induction_on t ?_ hpoly
+    exact isClosed_le continuous_const (by fun_prop)
+  -- discriminant ≤ 0
+  have hd := discrim_le_zero (a := qForm T ha s v) (b := 2 * bForm T ha s u v)
+    (c := qForm T ha s u) (fun x => by nlinarith [hreal x])
+  unfold discrim at hd
+  nlinarith [hd]
+
 end QIQTH.SpectralTheorem
