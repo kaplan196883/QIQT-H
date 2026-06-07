@@ -30,6 +30,54 @@ dependencies, what already exists, and kill-criteria, is in **`PRIZE_EXECUTION_P
 Stages 1–2 (free fields, finite-mode) are the next concrete builds and would already convert the
 Lorentz promissory note into a result; Stage 3 (Type III₁ / Tomita–Takesaki) is the long pole.
 
+## 0a′. Status update (2026-06-08) — Stage-3 infrastructure built to the Mathlib frontier; honest distance-to-prize
+
+A full re-inspection of all 67 Lean files (axiom-ledger + four cluster audits) plus a session of
+continuum work updates the picture. The headline: **the "long pole" (Stage 3 operator-algebra
+infrastructure) is now substantially built and axiom-free** — it no longer sits at zero, but at three
+*named Mathlib-infrastructure walls*. The distance to the prize, by layer:
+
+- **Layer A — the no-collapse mechanism ("finite Q_max ⇒ single outcome, no collapse"): DONE.**
+  Axiom-free, non-vacuous, *derived* (not assumed): the capacity bound is a theorem from
+  orthonormality/dimension (`CapacityModel`, `OrthogonalCapacity`); saturation is derived from SBS
+  redundancy (`SBSBridge`); the one physical input γ<1 is derived from a toy QND Hamiltonian
+  (`CollisionalGamma`). `qiqth_single_outcome_no_collapse`, `ValueSelection`. **Distance ≈ 0.**
+- **Layer B — Born: a CONDITIONAL representation theorem, not "Born from nothing."**
+  Genuinely proved axiom-free: `EffectGleason.finite_effect_gleason` (finite Busch),
+  `GleasonSelector.born_is_forced` (Born from positivity + ray-certainty), tensor-multiplicativity,
+  Chebyshev typicality. **But** the load-bearing premises — non-contextuality, ray-support/positivity,
+  product independence, **measure equivariance** — are *assumed*, each *proved necessary* by
+  countermodels (`EquivarianceGap`, `NoBornFromNothing`, `BornMinimalityTable`) but not *forced* from
+  Q_max/holography alone. Honest claim: *"Born is the unique admissible measure given a named minimal
+  set of independent postulates."* **Distance = reduce those premises to first principles — a shared
+  open problem of every single-world program, not a coding gap.**
+- **Layer C — the covariant μ (OP3b, the prize proper): finite skeleton DONE & RIGID; continuum OPEN.**
+  `LorentzSelectionStrong` is axiom-free and rigid (external geometry, a *real* Poincaré group action
+  with consumed group laws, **covariance derived from unitarity**, normalization derived), with
+  non-trivial models incl. `DiamondSwapNet` (a genuine geometry-moving swap over a real orbit) and
+  `FreeFieldNet` (no-signaling *derived* from the product Born measure). The continuum **Type III₁
+  realization is open** — pinning geometry/Born-weights/dynamics to an actual relativistic QFT + the
+  N→∞ limit.
+- **Layer D — Stage-3 operator-algebra infrastructure (feeds Layer C): built to the frontier.**
+  NEW since the 2026-06-06 status: the **bounded spectral theorem** (`PVM_of_selfAdjoint`, `T=∫λ dE`)
+  and **bounded Borel FC** are COMPLETE (`QIQTH/Spectral/SpectralTheorem.lean`), superseding the
+  "Spectral/PVM lacks the analytic spectral theorem" line of the old inventory; the **continuum
+  modular flow** `Δ^{it}` is a strongly-continuous unitary group with its modular automorphism
+  `*`-group `σ_t`, state-invariance, and an entire complex-time flow; the **Rieffel–Van Daele
+  standard-subspace** objects are complete up to the analytic square root
+  (`QIQTH/StandardSubspaceModular.lean`: `0≤R≤2`, `R` ℂ-linear/positive `Rℂ`, `D=P−Q`
+  conjugate-linear ⇒ `J` antiunitary). **Three live walls remain**, each an independent upstream
+  Mathlib contribution: (1) the operator square root / `StarOrderedRing (B(H))` (circular with the
+  sqrt it would unlock — Mathlib-flagged future work); (2) unbounded antilinear Tomita `S`;
+  (3) genuine KMS (the identity is *false* for an arbitrary generator, so not claimed). Details:
+  `TOMITA_TAKESAKI_ROADMAP.md` §"CURRENT STATUS". All axiom-free; **budget held at 33** (all 33 are
+  honest named entropy/modular interface inputs — audit found no vacuous/illegitimate axiom).
+
+**Bottom line.** The *mechanism* (Layer A) is in hand and machine-checked. The two genuine open
+frontiers are the *unconditional* Born derivation (Layer B — discharge the named premises to deeper
+principles) and the *continuum* covariant μ (Layer C) — the latter gated on Layer-D infrastructure
+now built right up to three specific Mathlib walls. Nothing here is faked; the budget confirms it.
+
 ## 0. The route we commit to (and what we reject)
 
 **Effect-Gleason + Kolmogorov — NOT the raw decoherence functional.**

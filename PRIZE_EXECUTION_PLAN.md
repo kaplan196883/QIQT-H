@@ -22,15 +22,22 @@ hypothesis); the open problem is *inhabiting* them from a real field, plus the a
 | `BornJoin`/`BornJoinGleason`/`OneSiteGleason` | **finite no-collapse Born representation** (this thread) | continuum lift |
 | `FreeFieldRecord` | free-field **finite-mode** instance: record count ≤ `e^Q`, Gaussian decoherence decay `γ^L→0`, finite Lorentz action via mode permutations | genuine field modes (infinite); real Poincaré |
 | `FiniteModularTheory` | **finite-dim Tomita–Takesaki**: modular automorphism `σ_t`, KMS, `deltaConj_eq_modAut` | Type III / infinite dim |
-| `Spectral/PVM` | `PVContent` structure + structural lemmas (idempotent, adjoint, `mu_nonneg`, …) | the analytic spectral theorem (σ-additivity, bounded Borel FC) |
+| `Spectral/PVM` | `ProjectionValuedMeasure` structure + `boundedFC`, `scalarMeasure`, σ-additive POVM lemmas | — (feeds `SpectralTheorem`) |
+| `Spectral/SpectralTheorem` | **DONE (2026-06): bounded spectral theorem** `PVM_of_selfAdjoint`, `T=∫λ dE`; **bounded Borel FC** `borelFC`; **continuum modular flow** `Δ^{it}`=`modFlow` (unitary group, Stone), modular automorphism `*`-group `σ_t`=`modAut`, state-invariance, entire complex-time flow `modFlowC`/`modDelta` | KMS identity (needs genuine modular Δ); unbounded `T` |
+| `StandardSubspaceModular` | **DONE up to the analytic √ (2026-06)**: RvD `P,Q,R=P+Q`; `0≤R≤2`; **`R` ℂ-linear, positive `Rℂ`**; **`D=P−Q` conjugate-linear ⇒ `J` antiunitary** | `R^{1/2}`/polar decomp — blocked on missing Mathlib `StarOrderedRing (B(H))` (circular with the operator √) |
 | `LorentzSelection` | `RecordPresheaf` (functorial restriction), `GlobalSection` (=λ), `PoincareAction`, `RecordedHistoryNet`; `covariant_selection_exists`, `net_no_signaling` — covariance **derived** from the net | a non-toy `RecordedHistoryNet` instance |
 | `LorentzSelectionStrong` | genuine `GroupAction` on Γ(X), `group_evaluation_covariance`, equivariant total-mass/cell, Born link; `LorentzWitness` toy models | free-field instance, cohomology |
 
-**Net:** the finite case is done; the prize is (1) a real free-field instance of the
+**Net:** the finite case is done; the Stage-3 analytic core is now substantially built
+(`Spectral/SpectralTheorem` + `StandardSubspaceModular`, axiom-free, at three named Mathlib walls —
+see `TOMITA_TAKESAKI_ROADMAP.md`). The prize is (1) a real free-field instance of the
 `RecordedHistoryNet`/sheaf with an equivariant Born μ, (2) the global-section / cohomology layer,
-(3) the infinite-dim analytic core. The 33 remaining project axioms (Araki / Donald / DPI /
-EntropyBridge / Mackey–Gleason / `TypicalityMackeyGleason` / `FQEquivarianceUniqueness`) are the
-continuum interface those stages would retire.
+(3) the continuum Type III₁ realization closing the analytic core. The 33 remaining project axioms
+are entirely **honest named entropy/modular interface inputs** — ArakiInterface (11), Donald (8),
+DPI (4), EntropyBridge (6), RelEntPositivity (2), MarginalLocality (1) — standard Araki/
+Tomita–Takesaki facts beyond current Mathlib; a full-codebase audit (2026-06-08) confirmed none is
+vacuous or doing illegitimate load-bearing work, and that `tsirelson_bound` / Goldstein–Struyve
+Steps 1 & 3 / `FQEquivarianceUniqueness` are all now *discharged* (axiom-free).
 
 ---
 
