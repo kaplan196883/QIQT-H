@@ -765,6 +765,16 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — A ξ=0 ⇒ U(t)ξ=ξ (generator fixes ⇒ flow fixes; exp series via map_tsum).
 #print axioms QIQTH.SpectralTheorem.modAut_vectorState_invariant_of_generator
 -- expected: standard only — A ξ=0 ⇒ ω_ξ(σ_t x)=ω_ξ(x). Checkable (infinitesimal) form of invariance.
+-- Layer 2: complex-time (entire-analytic) modular flow σ_z = Δ^{iz}
+#print axioms QIQTH.SpectralTheorem.modFlowC_add
+-- expected: standard only — U(w+z)=U(w)U(z) for all complex w,z (analytic continuation; bounded gen).
+#print axioms QIQTH.SpectralTheorem.modFlowC_continuous
+-- expected: standard only — U(z) entire in z.
+#print axioms QIQTH.SpectralTheorem.modAutC_comp
+-- expected: standard only — σ_w∘σ_z=σ_{w+z} for complex w,z.
+#print axioms QIQTH.SpectralTheorem.modAutC_neg_I
+-- expected: standard only — σ_{-i}(x)=Δ·x·exp(-A): imaginary-time conjugation = conjugation by Δ.
+-- (Honest: the analytic infrastructure; the KMS *identity* needs the genuine modular Δ — Phase 3.)
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
@@ -782,8 +792,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.rvdR_inner_self_le
 -- expected: standard only — RvD 0 ≤ R ≤ 2 (upper half): ⟪Rξ,ξ⟫ ≤ 2‖ξ‖² (P,Q contractions).
 #print axioms QIQTH.StandardSubspaceModular.rvdR_inner_symm
--- expected: standard only — R symmetric: ⟪Rx,y⟫=⟪x,Ry⟫ (P,Q self-adjoint). Inner-product
--- form, since H→L[ℝ]H has no synthesized Star instance under the scoped real inner product.
+-- expected: standard only — R symmetric: ⟪Rx,y⟫=⟪x,Ry⟫ (P,Q self-adjoint). (Operator-level
+-- star R = R is rvdR_isSelfAdjoint below — H→L[ℝ]H DOES carry adjoint/Star via open ClosedSubmodule.)
+-- Operator-level adjoint structure (unblocking the polar decomposition; open ClosedSubmodule
+-- supplies InnerProductSpace ℝ H ⇒ H→L[ℝ]H has adjoint/Star after all):
+#print axioms QIQTH.StandardSubspaceModular.projK_isSelfAdjoint
+-- expected: standard only — P self-adjoint as a bounded operator (star P = P).
+#print axioms QIQTH.StandardSubspaceModular.rvdR_isSelfAdjoint
+-- expected: standard only — R = P+Q self-adjoint.
+#print axioms QIQTH.StandardSubspaceModular.rvdR_isPositive
+-- expected: standard only — R positive (0≤R), licensing the CFC square root R^{1/2} of the RvD
+-- polar decomposition T = R^{1/2}(2−R)^{1/2}.
+#print axioms QIQTH.StandardSubspaceModular.rvdPmQ_isSelfAdjoint
+-- expected: standard only — P−Q self-adjoint.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

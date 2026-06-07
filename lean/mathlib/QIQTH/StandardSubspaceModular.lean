@@ -27,6 +27,8 @@
 -/
 import Mathlib.Analysis.InnerProductSpace.StandardSubspace
 import Mathlib.Analysis.InnerProductSpace.Projection.Basic
+import Mathlib.Analysis.InnerProductSpace.Adjoint
+import Mathlib.Analysis.InnerProductSpace.Positive
 import Mathlib.Tactic
 
 namespace QIQTH.StandardSubspaceModular
@@ -98,10 +100,10 @@ theorem rvdR_inner_self_le (S : StandardSubspace H) (ξ : H) :
   linarith
 
 /-- **`R` is symmetric** (self-adjoint in the inner-product sense): `⟪R x, y⟫ = ⟪x, R y⟫`.
-    Each projection `P, Q` is self-adjoint (`inner_starProjection_left_eq_right`).  Stated
-    as the inner-product identity because the real operator algebra `H →L[ℝ] H` carries no
-    synthesized `Star`/adjoint instance under the scoped real inner product — the bounded
-    route still meets the operator-`*`-structure wall at the polar decomposition `JT = P−Q`. -/
+    Each projection `P, Q` is self-adjoint (`inner_starProjection_left_eq_right`).  (The stronger
+    *operator-level* statement `IsSelfAdjoint (rvdR S)` — `star R = R` — is `rvdR_isSelfAdjoint`
+    below, available now that `open ClosedSubmodule` supplies `InnerProductSpace ℝ H` and hence the
+    adjoint/`Star` on `H →L[ℝ] H`.) -/
 theorem rvdR_inner_symm (S : StandardSubspace H) (x y : H) :
     (inner ℝ (rvdR S x) y) = inner ℝ x (rvdR S y) := by
   simp only [rvdR_apply, projK, projIK, inner_add_left, inner_add_right]
@@ -149,9 +151,42 @@ theorem rvdR_injective (S : StandardSubspace H) : Function.Injective (rvdR S) :=
   have hz : rvdR S (a - b) = 0 := by rw [map_sub, hab, sub_self]
   exact sub_eq_zero.mp (rvdR_eq_zero S hz)
 
+/-! ### Operator-level adjoint structure (unblocking the polar decomposition)
+
+`open ClosedSubmodule` (above) supplies the scoped real inner product `InnerProductSpace ℝ H`
+(`⟪x,y⟫_ℝ = re⟪x,y⟫`); with `CompleteSpace H` this gives `H →L[ℝ] H` its adjoint / `Star` and
+`IsSelfAdjoint`/`IsPositive` API.  So the operators `P, Q, R, P−Q` are genuine self-adjoint bounded
+operators (not merely symmetric quadratic forms), and `R` is **positive** — the prerequisite for the
+square root `R^{1/2}` in the polar decomposition `T = R^{1/2}(2−R)^{1/2}` (RvD Prop 2.2(2)). -/
+
+/-- `P` is self-adjoint as a bounded operator (`star (projK S) = projK S`). -/
+theorem projK_isSelfAdjoint (S : StandardSubspace H) : IsSelfAdjoint (projK S) :=
+  isSelfAdjoint_starProjection _
+
+/-- `Q` is self-adjoint as a bounded operator. -/
+theorem projIK_isSelfAdjoint (S : StandardSubspace H) : IsSelfAdjoint (projIK S) :=
+  isSelfAdjoint_starProjection _
+
+/-- `R = P + Q` is self-adjoint. -/
+theorem rvdR_isSelfAdjoint (S : StandardSubspace H) : IsSelfAdjoint (rvdR S) :=
+  (projK_isSelfAdjoint S).add (projIK_isSelfAdjoint S)
+
+/-- **`R = P + Q` is a positive operator** (`0 ≤ R` in the Loewner order, RvD `0 ≤ R ≤ 2`).
+    Self-adjoint (`rvdR_isSelfAdjoint`) with `⟪R ξ, ξ⟫ ≥ 0` (`rvdR_inner_self_nonneg`).  This is what
+    licenses the continuous-functional-calculus square root `R^{1/2}`, the first analytic step of the
+    Rieffel–Van Daele polar decomposition `JT = P − Q`, `T = R^{1/2}(2−R)^{1/2}`. -/
+theorem rvdR_isPositive (S : StandardSubspace H) : (rvdR S).IsPositive := by
+  refine ⟨fun x y => ?_, fun x => ?_⟩
+  · exact rvdR_inner_symm S x y
+  · simpa [ContinuousLinearMap.reApplyInnerSelf] using rvdR_inner_self_nonneg S x
+
 /-- **RvD `P − Q`** — the self-adjoint operator whose polar decomposition `JT = P − Q`
     (RvD Definition 2.1) yields the modular conjugation `J` and the positive `T`. -/
 noncomputable def rvdPmQ (S : StandardSubspace H) : H →L[ℝ] H := projK S - projIK S
+
+/-- `P − Q` is self-adjoint (its polar decomposition `J·T` then has `J` self-adjoint, `T ≥ 0`). -/
+theorem rvdPmQ_isSelfAdjoint (S : StandardSubspace H) : IsSelfAdjoint (rvdPmQ S) :=
+  (projK_isSelfAdjoint S).sub (projIK_isSelfAdjoint S)
 
 /-- **RvD Prop 2.2(2), the `T²` identity:** `(P − Q)² = P + Q − (P·Q + Q·P)`, which
     is exactly `R(2 − R)`.  Pure idempotent algebra (`P² = P`, `Q² = Q`); since

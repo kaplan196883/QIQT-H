@@ -1276,6 +1276,101 @@ theorem modAut_vectorState_invariant_of_generator (A : H →L[ℂ] H) (hA : IsSe
     vectorState ξ (modAut A t x) = vectorState ξ x :=
   modAut_vectorState_invariant A hA t (modFlow_apply_eq_self_of_generator A hAξ (-t)) x
 
+/-! ### Layer 2 — the complex-time (entire-analytic) modular flow `U(z) = Δ^{iz}`
+
+Because the generator `A` is **bounded**, `exp((z·i)·A)` converges for *every* complex `z`: every
+algebra element is *entire* analytic for the modular flow.  This is exactly the analytic-element
+theory that is the hard ingredient of the *unbounded* Tomita–Takesaki theory (there σ_z is only
+defined on a dense set of analytic vectors) — and which the bounded/Type-I case gets for free.  We
+build the complex-time flow `modFlowC`/`modAutC`, recover the real unitary flow on `ℝ`, and identify
+the imaginary-time conjugation `σ_{-i}` with conjugation by the modular operator `Δ = exp A`.
+
+HONEST SCOPE: this is the analytic *infrastructure*.  The KMS *identity*
+`ω(x · σ_{-i} y) = ω(y · x)` itself holds only when `Δ` is the genuine modular operator of a pair
+`(M, Ω)` (Tomita's theorem) — it is FALSE for an arbitrary self-adjoint generator — so it is NOT
+claimed here; it stays gated on the Phase-3 modular-operator construction. -/
+
+/-- Complex-time modular flow `U(z) = exp((z·i)·A) = Δ^{iz}`, entire in `z` (bounded generator). -/
+noncomputable def modFlowC (A : H →L[ℂ] H) (z : ℂ) : H →L[ℂ] H :=
+  NormedSpace.exp ((z * Complex.I) • A)
+
+/-- On the real axis the complex-time flow is the unitary `modFlow`. -/
+@[simp] theorem modFlowC_ofReal (A : H →L[ℂ] H) (t : ℝ) :
+    modFlowC A (t : ℂ) = modFlow A t := rfl
+
+@[simp] theorem modFlowC_zero (A : H →L[ℂ] H) : modFlowC A 0 = 1 := by
+  simp [modFlowC]
+
+/-- **Complex one-parameter group law**: `U(w+z) = U(w)·U(z)` for all `w, z ∈ ℂ`. -/
+theorem modFlowC_add (A : H →L[ℂ] H) (w z : ℂ) :
+    modFlowC A (w + z) = modFlowC A w * modFlowC A z := by
+  haveI : NormedAlgebra ℚ (H →L[ℂ] H) := NormedAlgebra.restrictScalars ℚ ℂ _
+  rw [modFlowC, modFlowC, modFlowC,
+    ← NormedSpace.exp_add_of_commute (((Commute.refl A).smul_left _).smul_right _)]
+  congr 1
+  rw [← add_smul, ← add_mul]
+
+/-- The complex-time flow is **entire** (continuous on all of `ℂ`). -/
+theorem modFlowC_continuous (A : H →L[ℂ] H) : Continuous (modFlowC A) := by
+  haveI : NormedAlgebra ℚ (H →L[ℂ] H) := NormedAlgebra.restrictScalars ℚ ℂ _
+  exact NormedSpace.exp_continuous.comp (by fun_prop)
+
+/-- The **modular operator** `Δ = exp A` (so `U(z) = Δ^{iz}` and `U(-i) = Δ`). -/
+noncomputable def modDelta (A : H →L[ℂ] H) : H →L[ℂ] H := NormedSpace.exp A
+
+/-- `Δ · exp(-A) = 1` — `exp(-A)` is the inverse `Δ⁻¹`. -/
+theorem modDelta_mul_expNeg (A : H →L[ℂ] H) : modDelta A * NormedSpace.exp (-A) = 1 := by
+  haveI : NormedAlgebra ℚ (H →L[ℂ] H) := NormedAlgebra.restrictScalars ℚ ℂ _
+  rw [modDelta, ← NormedSpace.exp_add_of_commute ((Commute.refl A).neg_right), add_neg_cancel,
+    NormedSpace.exp_zero]
+
+/-- At imaginary time `z = -i`: `U(-i) = Δ`. -/
+@[simp] theorem modFlowC_neg_I (A : H →L[ℂ] H) : modFlowC A (-Complex.I) = modDelta A := by
+  rw [modFlowC, modDelta,
+    show ((-Complex.I) * Complex.I) = (1 : ℂ) by rw [neg_mul, Complex.I_mul_I]; ring, one_smul]
+
+/-- At imaginary time `z = i`: `U(i) = Δ⁻¹ = exp(-A)`. -/
+@[simp] theorem modFlowC_I (A : H →L[ℂ] H) : modFlowC A Complex.I = NormedSpace.exp (-A) := by
+  rw [modFlowC, show (Complex.I * Complex.I) = (-1 : ℂ) by rw [Complex.I_mul_I], neg_one_smul]
+
+/-- The complex-time modular automorphism `σ_z(x) = U(z)·x·U(-z)`. -/
+noncomputable def modAutC (A : H →L[ℂ] H) (z : ℂ) (x : H →L[ℂ] H) : H →L[ℂ] H :=
+  modFlowC A z * x * modFlowC A (-z)
+
+/-- On the real axis `σ_z` is the `*`-automorphism `modAut`. -/
+@[simp] theorem modAutC_ofReal (A : H →L[ℂ] H) (t : ℝ) (x : H →L[ℂ] H) :
+    modAutC A (t : ℂ) x = modAut A t x := by
+  unfold modAutC modAut
+  rw [modFlowC_ofReal, show (-(t : ℂ)) = ((-t : ℝ) : ℂ) by push_cast; ring, modFlowC_ofReal]
+
+/-- `σ_0 = id`. -/
+@[simp] theorem modAutC_zero (A : H →L[ℂ] H) (x : H →L[ℂ] H) : modAutC A 0 x = x := by
+  rw [modAutC, neg_zero, modFlowC_zero, mul_one, one_mul]
+
+/-- **Complex group law**: `σ_w ∘ σ_z = σ_{w+z}` for all `w, z ∈ ℂ` (the analytic continuation
+    of the modular automorphism group to complex time). -/
+theorem modAutC_comp (A : H →L[ℂ] H) (w z : ℂ) (x : H →L[ℂ] H) :
+    modAutC A w (modAutC A z x) = modAutC A (w + z) x := by
+  rw [modAutC, modAutC, modAutC, modFlowC_add, show -(w + z) = -z + -w by ring, modFlowC_add]
+  simp only [mul_assoc]
+
+/-- `σ_z(x·y) = σ_z(x)·σ_z(y)` (algebra homomorphism for every complex time). -/
+theorem modAutC_mul (A : H →L[ℂ] H) (z : ℂ) (x y : H →L[ℂ] H) :
+    modAutC A z (x * y) = modAutC A z x * modAutC A z y := by
+  have h1 : modFlowC A (-z) * modFlowC A z = 1 := by
+    rw [← modFlowC_add, neg_add_cancel, modFlowC_zero]
+  simp only [modAutC, mul_assoc]
+  rw [← mul_assoc (modFlowC A (-z)) (modFlowC A z), h1, one_mul]
+
+/-- **Imaginary-time modular conjugation = conjugation by Δ.**  At `z = -i` the complex modular flow
+    is conjugation by the modular operator `Δ = exp A`: `σ_{-i}(x) = Δ · x · Δ⁻¹` (`Δ⁻¹ = exp(-A)`,
+    `modDelta_mul_expNeg`).  This is the conjugation the KMS condition relates to `xy ↦ yx` — the
+    analytic ingredient, *entire* here because `A` is bounded.  (The KMS identity itself needs Δ to
+    be the genuine modular operator of `(M, Ω)`; see the section header.) -/
+theorem modAutC_neg_I (A : H →L[ℂ] H) (x : H →L[ℂ] H) :
+    modAutC A (-Complex.I) x = modDelta A * x * NormedSpace.exp (-A) := by
+  rw [modAutC, modFlowC_neg_I, neg_neg, modFlowC_I]
+
 /-! ### The `f`-weighted quadratic form `q_f(z) := ∫ f dμ_z` (toward `Φ(f)`)
 
 To build the bounded Borel functional calculus `Φ(f)` (with `Φ(𝟙_s)=E(s)`, `Φ(continuous)=cfcHom`)
