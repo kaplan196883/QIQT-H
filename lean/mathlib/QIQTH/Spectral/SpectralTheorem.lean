@@ -1088,6 +1088,19 @@ noncomputable def PVM_of_selfAdjoint (ha : IsSelfAdjoint T) :
   E_inter := fun s t hs ht => specProj_inter T ha hs ht
   hasSum_iUnion := fun hm hd x => specProj_hasSum T ha hm hd x
 
+open RCLike MeasureTheory in
+/-- **Spectral representation of `T` (diagonal form)**: `∫_{σ(T)} λ dμ_x(λ) = re ⟪x, T x⟫`.
+    Since `μ_x` is the scalar spectral measure of the `PVM_of_selfAdjoint` (`μ_x(s) = ⟪E(s)x,x⟫`),
+    this is the statement `T = ∫ λ dE(λ)` tested on the diagonal — `T` recovered from its PVM. -/
+theorem re_inner_T_eq_integral (ha : IsSelfAdjoint T) (x : H) :
+    ∫ ω, (ω : ℝ) ∂(specMeasure T ha x) = re ⟪x, T x⟫ := by
+  have h := integral_specMeasure T ha x
+    ⟨(ContinuousMap.id ℝ).restrict (spectrum ℝ T), HasCompactSupport.of_compactSpace _⟩
+  rw [show ((⟨(ContinuousMap.id ℝ).restrict (spectrum ℝ T), HasCompactSupport.of_compactSpace _⟩ :
+        C_c(spectrum ℝ T, ℝ)).toContinuousMap) = (ContinuousMap.id ℝ).restrict (spectrum ℝ T)
+      from rfl, cfcHom_id] at h
+  exact h
+
 /-! ### The `f`-weighted quadratic form `q_f(z) := ∫ f dμ_z` (toward `Φ(f)`)
 
 To build the bounded Borel functional calculus `Φ(f)` (with `Φ(𝟙_s)=E(s)`, `Φ(continuous)=cfcHom`)

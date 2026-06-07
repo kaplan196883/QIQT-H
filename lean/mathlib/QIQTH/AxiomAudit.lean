@@ -729,6 +729,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ THE BOUNDED SPECTRAL THEOREM (PVM form): every bounded self-adjoint
 -- T : H →L[ℂ] H induces a ProjectionValuedMeasure on spectrum ℝ T (E = specProj). All fields proved
 -- axiom-free (isIdem from E_inter at s=t). THE Layer-1 keystone unlocking bounded Borel FC + Δ^it.
+#print axioms QIQTH.SpectralTheorem.re_inner_T_eq_integral
+-- expected: standard only — spectral representation (diagonal): ∫_{σ(T)} λ dμ_x(λ) = re⟪x,Tx⟫,
+-- i.e. T = ∫λ dE on the diagonal (T recovered from its PVM). Via integral_specMeasure + cfcHom_id.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
