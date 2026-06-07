@@ -617,6 +617,16 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — additivity engine: μ_{x+a+b}+μ_{x−a}+μ_{x−b} = μ_{x−a−b}+μ_{x+a}+μ_{x+b}
 -- (both sides = 3q(x)+2q(a)+2q(b)+g(a,b)); gives additivity of the polarized form in y
 -- (apply with (a,b)=(y₁,y₂) and (I·y₁,I·y₂)). Via Riesz–Markov uniqueness + quadratic-form ring.
+#print axioms QIQTH.SpectralTheorem.qForm_smul
+-- expected: standard only — q_s(c•z) = ‖c‖²·q_s(z) (diagonal quadratic form scaling).
+#print axioms QIQTH.SpectralTheorem.qForm_parallelogram
+-- expected: standard only — q_s parallelogram (specMeasure_parallelogram pushed through .real).
+#print axioms QIQTH.SpectralTheorem.qForm_add
+-- expected: standard only — q_s second-difference identity (specMeasure_add through .real).
+#print axioms QIQTH.SpectralTheorem.bForm_self
+-- expected: standard only — b_s(u,u) = q_s(u) (polarization diagonal).
+#print axioms QIQTH.SpectralTheorem.bForm_add_right
+-- expected: standard only — b_s additive in right arg; with bForm_comm/add_left ⟹ biadditive.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

@@ -247,4 +247,93 @@ theorem specMeasure_add (ha : IsSelfAdjoint T) (x a b : H) :
   simp only [map_add, map_sub, inner_add_left, inner_add_right, inner_sub_left, inner_sub_right]
   ring
 
+/-! ### The diagonal quadratic form `q_s` and the polarized bilinear form `b_s`
+
+`q_s(z) := μ_z(s)` is a nonnegative real quadratic form; `b_s(u,v) := ¼(q_s(u+v) − q_s(u−v))`
+is its (symmetric, biadditive) polarization, with `b_s(u,u) = q_s(u)`.  Because `q_s ≥ 0`, the
+form satisfies Cauchy–Schwarz, which delivers boundedness, continuity, and hence ℝ-linearity. -/
+
+/-- The diagonal quadratic form `q_s(z) = μ_z(s)` (real, nonnegative). -/
+noncomputable def qForm (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (z : H) : ℝ :=
+  (specMeasure T ha z).real s
+
+lemma qForm_nonneg (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (z : H) :
+    0 ≤ qForm T ha s z := MeasureTheory.measureReal_nonneg
+
+/-- `μ_0 = 0` (the zero vector gives the zero measure). -/
+lemma specMeasure_zero (ha : IsSelfAdjoint T) : specMeasure T ha 0 = 0 := by
+  have h := specMeasure_smul T ha 0 0
+  simpa using h
+
+lemma qForm_zero (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) :
+    qForm T ha s 0 = 0 := by
+  rw [qForm, specMeasure_zero]; rfl
+
+lemma qForm_smul (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (c : ℂ) (z : H) :
+    qForm T ha s (c • z) = ‖c‖ ^ 2 * qForm T ha s z := by
+  rw [qForm, specMeasure_smul, MeasureTheory.measureReal_ennreal_smul_apply, qForm]
+  congr 1
+
+lemma qForm_neg (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (z : H) :
+    qForm T ha s (-z) = qForm T ha s z := by
+  have h := qForm_smul T ha s (-1) z
+  simpa using h
+
+lemma qForm_parallelogram (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x y : H) :
+    qForm T ha s (x + y) + qForm T ha s (x - y)
+      = 2 * qForm T ha s x + 2 * qForm T ha s y := by
+  haveI : MeasureTheory.IsFiniteMeasure ((2 : ℝ≥0∞) • specMeasure T ha x) :=
+    MeasureTheory.Measure.smul_finite _ (by simp)
+  haveI : MeasureTheory.IsFiniteMeasure ((2 : ℝ≥0∞) • specMeasure T ha y) :=
+    MeasureTheory.Measure.smul_finite _ (by simp)
+  unfold qForm
+  rw [← MeasureTheory.measureReal_add_apply, specMeasure_parallelogram,
+    MeasureTheory.measureReal_add_apply, MeasureTheory.measureReal_ennreal_smul_apply,
+    MeasureTheory.measureReal_ennreal_smul_apply, ENNReal.toReal_ofNat]
+
+lemma qForm_add (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x a b : H) :
+    qForm T ha s (x + a + b) + qForm T ha s (x - a) + qForm T ha s (x - b)
+      = qForm T ha s (x - a - b) + qForm T ha s (x + a) + qForm T ha s (x + b) := by
+  unfold qForm
+  rw [← MeasureTheory.measureReal_add_apply, ← MeasureTheory.measureReal_add_apply,
+    specMeasure_add, MeasureTheory.measureReal_add_apply, MeasureTheory.measureReal_add_apply]
+
+/-- The polarized bilinear form `b_s(u,v) = ¼(q_s(u+v) − q_s(u−v))`. -/
+noncomputable def bForm (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u v : H) : ℝ :=
+  (qForm T ha s (u + v) - qForm T ha s (u - v)) / 4
+
+/-- Expansion identity: `q_s(p+q) = q_s(p) + q_s(q) + 2 b_s(p,q)` (from the parallelogram law). -/
+lemma qForm_add_expand (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (p q : H) :
+    qForm T ha s (p + q) = qForm T ha s p + qForm T ha s q + 2 * bForm T ha s p q := by
+  unfold bForm
+  have hpar := qForm_parallelogram T ha s p q
+  linarith
+
+/-- `b_s(u,u) = q_s(u)`. -/
+lemma bForm_self (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u : H) :
+    bForm T ha s u u = qForm T ha s u := by
+  unfold bForm
+  rw [sub_self, qForm_zero, show u + u = (2 : ℂ) • u by rw [two_smul], qForm_smul]
+  simp
+  ring
+
+/-- `b_s` is symmetric. -/
+lemma bForm_comm (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u v : H) :
+    bForm T ha s u v = bForm T ha s v u := by
+  unfold bForm
+  rw [add_comm u v, show u - v = -(v - u) by abel, qForm_neg]
+
+/-- `b_s` is additive in its right argument. -/
+lemma bForm_add_right (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u v w : H) :
+    bForm T ha s u (v + w) = bForm T ha s u v + bForm T ha s u w := by
+  have h := qForm_add T ha s u v w
+  unfold bForm
+  rw [show u + (v + w) = u + v + w by abel, show u - (v + w) = u - v - w by abel]
+  linarith
+
+/-- `b_s` is additive in its left argument. -/
+lemma bForm_add_left (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u v w : H) :
+    bForm T ha s (u + v) w = bForm T ha s u w + bForm T ha s v w := by
+  rw [bForm_comm, bForm_add_right, bForm_comm T ha s w u, bForm_comm T ha s w v]
+
 end QIQTH.SpectralTheorem
