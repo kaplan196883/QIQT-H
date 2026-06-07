@@ -78,4 +78,39 @@ theorem coarse_povm_complete (E : Ω → Matrix n n ℂ) (E' : Ω' → Matrix n 
   rw [Finset.sum_fiberwise Finset.univ π E']
   exact hE'
 
+/-- **Pushforward of a cylinder event**: the pushforward measure of a set `A ⊆ Ω` is the original
+    measure of its preimage `π⁻¹(A)`.  `∑_{a∈A} (π_* μ)(a) = ∑_{b : π b ∈ A} μ b`.  (Used to show a
+    cylinder event's measure is stage-independent.) -/
+theorem sum_pushforward_eq (π : Ω' → Ω) (μ : Ω' → ℝ) (A : Finset Ω) :
+    ∑ a ∈ A, pushforward π μ a = ∑ b ∈ Finset.univ.filter (fun b => π b ∈ A), μ b := by
+  classical
+  unfold pushforward
+  simp only [Finset.sum_filter]
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl fun b _ => ?_
+  rw [Finset.sum_ite_eq A (π b) (fun _ => μ b)]
+
+/-! ### P2 — covariance of the Born kernel under a unitary symmetry -/
+
+/-- **Born-kernel unitary invariance (P2)**: conjugating both the state and the effect by a unitary
+    `U` (`Uᴴ U = 1`) leaves the Born weight unchanged: `bornW (U ρ Uᴴ) (U E Uᴴ) = bornW ρ E`.
+    Density-matrix form of `LorentzSelectionStrong.born_unitary_invariant`; proof = trace cyclicity
+    plus `Uᴴ U = 1`.  HONEST SCOPE: this is the *automatic* covariance of the Born kernel under
+    unitary transport — it does NOT force the actuality-selector law to be Born (see the Layer-B
+    equivariance caveat in `LorentzSelectionStrong`). -/
+theorem bornW_unitary_invariant (U ρ E : Matrix n n ℂ) (hU : Uᴴ * U = 1) :
+    bornW (U * ρ * Uᴴ) (U * E * Uᴴ) = bornW ρ E := by
+  have key : (U * ρ * Uᴴ) * (U * E * Uᴴ) = U * (ρ * E) * Uᴴ := by
+    have h1 : U * ρ * Uᴴ * (U * E * Uᴴ) = U * ρ * (Uᴴ * U) * E * Uᴴ := by noncomm_ring
+    rw [h1, hU]; noncomm_ring
+  unfold bornW; congr 1
+  rw [key, Matrix.trace_mul_comm, ← Matrix.mul_assoc, hU, Matrix.one_mul]
+
+/-- **Born-context covariance (P2)**: a unitary symmetry conjugating the state and every effect of a
+    measurement context leaves the whole Born probability vector pointwise unchanged. -/
+theorem bornW_context_covariant (U ρ : Matrix n n ℂ) (E : Ω → Matrix n n ℂ)
+    (hU : Uᴴ * U = 1) (a : Ω) :
+    bornW (U * ρ * Uᴴ) (U * E a * Uᴴ) = bornW ρ (E a) :=
+  bornW_unitary_invariant U ρ (E a) hU
+
 end QIQTH.CoarseGrainNaturality

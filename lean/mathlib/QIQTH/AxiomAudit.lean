@@ -243,6 +243,13 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — coarse Born measure sums to the fine one (normalization preserved).
 #print axioms QIQTH.CoarseGrainNaturality.coarse_povm_complete
 -- expected: standard only — a coarse-graining of a POVM is a POVM (∑E=1 preserved).
+-- P2: covariance of the Born kernel under a unitary symmetry
+#print axioms QIQTH.CoarseGrainNaturality.bornW_unitary_invariant
+-- expected: standard only — bornW (UρUᴴ)(UEUᴴ)=bornW ρ E (trace cyclicity + UᴴU=1).
+#print axioms QIQTH.CoarseGrainNaturality.bornW_context_covariant
+-- expected: standard only — whole Born vector covariant under unitary transport of state+effects.
+#print axioms QIQTH.CoarseGrainNaturality.sum_pushforward_eq
+-- expected: standard only — ∑_{a∈A}(π_*μ)(a)=∑_{π b∈A}μ b (cylinder event = preimage measure).
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
