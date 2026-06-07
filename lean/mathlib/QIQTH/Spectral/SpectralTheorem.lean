@@ -153,4 +153,12 @@ theorem inner_cfcHom_polarization (ha : IsSelfAdjoint T) (f : C_c(spectrum ℝ T
   simp only [ContinuousLinearMap.coe_coe] at hpol
   rw [hpol, diag, diag, diag, diag]
 
+/-- **Per-set bound** for the scalar spectral measure: `μ_z(B) ≤ ‖z‖²` for every set `B`
+    (monotonicity against the total mass `μ_z(univ) = ‖z‖²`).  This feeds the operator-norm
+    bound on the spectral projections `E(B)`. -/
+theorem specMeasure_real_le (ha : IsSelfAdjoint T) (z : H) (B : Set (spectrum ℝ T)) :
+    (specMeasure T ha z).real B ≤ ‖z‖ ^ 2 := by
+  rw [← specMeasure_real_univ T ha z]
+  exact MeasureTheory.measureReal_mono (Set.subset_univ B)
+
 end QIQTH.SpectralTheorem

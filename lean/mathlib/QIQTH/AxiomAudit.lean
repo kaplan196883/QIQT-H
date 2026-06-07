@@ -604,6 +604,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — complex polarization bridge: the off-diagonal ⟪f(T) x, y⟫ is the
 -- polarized combination of the diagonal scalar integrals ∫ f dμ_z (f(T) self-adjoint, diagonal
 -- real). The bridge from the scalar measures μ_z to the projection-valued E(B).
+#print axioms QIQTH.SpectralTheorem.specMeasure_real_le
+-- expected: standard only — per-set bound μ_z(B) ≤ ‖z‖² (monotone vs total mass); feeds the
+-- operator-norm bound on the spectral projections E(B).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
