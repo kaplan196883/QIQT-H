@@ -1215,6 +1215,33 @@ theorem modAut_star (A : H →L[ℂ] H) (hA : IsSelfAdjoint A) (t : ℝ) (x : H 
   rw [modAut, modAut, star_mul, star_mul, modFlow_star A hA, modFlow_star A hA, neg_neg,
     mul_assoc]
 
+/-! ### Layer 2 — modular invariance of the state `ω_ξ(x) = ⟪ξ, x ξ⟫`
+
+The continuum generalization of `FiniteModularTheory.modAut_stateOf_invariant`: the modular flow
+`σ_t` preserves the GNS vector state of any vector fixed by the flow.  In Tomita–Takesaki the cyclic
+separating vector `Ω` satisfies `Δ^{it} Ω = Ω` (it generates the state and is annihilated by the
+modular generator), so `ω_Ω ∘ σ_t = ω_Ω` is exactly the invariance of the modular state.  This is
+the first *state-coupled* (genuinely modular) continuum theorem; it rides on `modFlow_star`
+(`U(t)⋆ = U(−t)`), no analytic-continuation machinery. -/
+
+/-- The GNS **vector state** `ω_ξ(x) = ⟪ξ, x ξ⟫` induced by a vector `ξ` (a state when `‖ξ‖ = 1`). -/
+noncomputable def vectorState (ξ : H) (x : H →L[ℂ] H) : ℂ := inner ℂ ξ (x ξ)
+
+/-- **Modular invariance of the state.**  If `ξ` is fixed by the modular flow
+(`modFlow A (−t) ξ = ξ` — the continuum form of the Tomita–Takesaki axiom `Δ^{it} Ω = Ω`), then the
+modular automorphism `σ_t` preserves its vector state: `ω_ξ(σ_t x) = ω_ξ(x)`.  Generalizes
+`FiniteModularTheory.modAut_stateOf_invariant` from the finite trace state to the continuum.
+Proof: `⟪ξ, U(t) x U(−t) ξ⟫ = ⟪U(t)⋆ ξ, x U(−t) ξ⟫ = ⟪U(−t) ξ, x U(−t) ξ⟫ = ⟪ξ, x ξ⟫`, using
+`U(t)⋆ = U(−t)` (`modFlow_star`) and the fixed-vector hypothesis. -/
+theorem modAut_vectorState_invariant (A : H →L[ℂ] H) (hA : IsSelfAdjoint A) (t : ℝ)
+    {ξ : H} (hξ : modFlow A (-t) ξ = ξ) (x : H →L[ℂ] H) :
+    vectorState ξ (modAut A t x) = vectorState ξ x := by
+  have hadj : ContinuousLinearMap.adjoint (modFlow A t) = modFlow A (-t) := by
+    rw [← ContinuousLinearMap.star_eq_adjoint]; exact modFlow_star A hA t
+  unfold vectorState modAut
+  rw [ContinuousLinearMap.mul_apply, ContinuousLinearMap.mul_apply,
+    ← ContinuousLinearMap.adjoint_inner_left, hadj, hξ]
+
 /-! ### The `f`-weighted quadratic form `q_f(z) := ∫ f dμ_z` (toward `Φ(f)`)
 
 To build the bounded Borel functional calculus `Φ(f)` (with `Φ(𝟙_s)=E(s)`, `Φ(continuous)=cfcHom`)

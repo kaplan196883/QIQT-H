@@ -757,6 +757,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SpectralTheorem.modAut_star
 -- expected: standard only — σ_t(x⋆)=σ_t(x)⋆ (A self-adjoint). σ_t is a *-automorphism group — the
 -- continuum modular automorphism group, generalizing FiniteModularTheory.modAut to B(H).
+-- Layer 2: modular invariance of the vector state ω_ξ(x)=⟪ξ,xξ⟫
+#print axioms QIQTH.SpectralTheorem.modAut_vectorState_invariant
+-- expected: standard only — ω_ξ(σ_t x)=ω_ξ(x) when Δ^{it}ξ=ξ (fixed cyclic-separating vector). The
+-- first state-coupled continuum modular theorem; generalizes FiniteModularTheory.modAut_stateOf_invariant.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
