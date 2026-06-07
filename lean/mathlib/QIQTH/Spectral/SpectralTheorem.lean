@@ -984,6 +984,93 @@ lemma specMeasure_setEngine (ha : IsSelfAdjoint T) (g : C(spectrum ℝ T, ℝ)) 
   rw [hadd, hadd]
   ring
 
+open RCLike in
+/-- **Diagonal–`E(s)` identity**: `re ⟪x, h(T)(E(s)v)⟫ = b_s(h(T)x, v)` for continuous `h`.
+    (Move `h(T)` and `E(s)` across by self-adjointness; the imaginary part of `c_s` drops under `re`.) -/
+lemma re_inner_cfcHom_specProj (ha : IsSelfAdjoint T) (h : C(spectrum ℝ T, ℝ))
+    (s : Set (spectrum ℝ T)) (x v : H) :
+    re ⟪x, cfcHom ha h (specProj T ha s v)⟫ = bForm T ha s (cfcHom ha h x) v := by
+  have hsym := ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp
+    (show IsSelfAdjoint (cfcHom ha h) by rw [isSelfAdjoint_iff, ← map_star, star_trivial])
+  have hEsym := ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp (specProj_isSelfAdjoint T ha s)
+  rw [show (⟪x, cfcHom ha h (specProj T ha s v)⟫ : ℂ)
+        = ⟪cfcHom ha h x, specProj T ha s v⟫ from (hsym x _).symm,
+    show (⟪cfcHom ha h x, specProj T ha s v⟫ : ℂ)
+        = ⟪specProj T ha s (cfcHom ha h x), v⟫ from (hEsym _ v).symm,
+    inner_specProj]
+  show (((bForm T ha s (cfcHom ha h x) v : ℝ) : ℂ)
+    - Complex.I * ((bForm T ha s (cfcHom ha h x) (Complex.I • v) : ℝ) : ℂ)).re = _
+  simp [Complex.sub_re, Complex.mul_re]
+
+open RCLike MeasureTheory in
+/-- Polarization at the scalar-measure level: `∫f dμ_{w+u} − ∫f dμ_{w−u} = 4·re⟪w, f(T)u⟫`. -/
+lemma integral_specMeasure_polarization (ha : IsSelfAdjoint T) (f : C(spectrum ℝ T, ℝ)) (w u : H) :
+    (∫ ω, f ω ∂(specMeasure T ha (w + u))) - (∫ ω, f ω ∂(specMeasure T ha (w - u)))
+      = 4 * re ⟪w, cfcHom ha f u⟫ := by
+  have hsym := ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp
+    (show IsSelfAdjoint (cfcHom ha f) by rw [isSelfAdjoint_iff, ← map_star, star_trivial])
+  have hcross : re ⟪u, cfcHom ha f w⟫ = re ⟪w, cfcHom ha f u⟫ := by
+    rw [show (⟪u, cfcHom ha f w⟫ : ℂ) = ⟪cfcHom ha f u, w⟫ from (hsym u w).symm, inner_re_symm]
+  rw [integral_specMeasure_cont, integral_specMeasure_cont]
+  simp only [map_add, map_sub, inner_add_left, inner_add_right, inner_sub_left, inner_sub_right]
+  rw [hcross]
+  ring
+
+open RCLike MeasureTheory in
+/-- **Final measure identity**: `μ_{x+E(s)v} + (μ_{x−v})↾s = μ_{x−E(s)v} + (μ_{x+v})↾s`.
+    Proved by Riesz–Markov uniqueness: the test against continuous `f` reduces, via the
+    polarization + `re_inner_cfcHom_specProj` + `specMeasure_setEngine`, to an identity that holds. -/
+lemma specProj_engine_measure (ha : IsSelfAdjoint T) {s : Set (spectrum ℝ T)} (hs : MeasurableSet s)
+    (x v : H) :
+    specMeasure T ha (x + specProj T ha s v) + (specMeasure T ha (x - v)).restrict s
+      = specMeasure T ha (x - specProj T ha s v) + (specMeasure T ha (x + v)).restrict s := by
+  apply Measure.ext_of_integral_eq_on_compactlySupported
+  intro f
+  rw [integral_add_measure (CompactlySupportedContinuousMap.integrable f)
+        (CompactlySupportedContinuousMap.integrable f),
+      integral_add_measure (CompactlySupportedContinuousMap.integrable f)
+        (CompactlySupportedContinuousMap.integrable f)]
+  have hpol := integral_specMeasure_polarization T ha f.toContinuousMap x (specProj T ha s v)
+  rw [re_inner_cfcHom_specProj] at hpol
+  have hset := specMeasure_setEngine T ha f.toContinuousMap x v hs
+  have h4b : 4 * bForm T ha s (cfcHom ha f.toContinuousMap x) v
+      = (specMeasure T ha (cfcHom ha f.toContinuousMap x + v)).real s
+        - (specMeasure T ha (cfcHom ha f.toContinuousMap x - v)).real s := by
+    unfold bForm qForm; ring
+  simp only [CompactlySupportedContinuousMap.coe_toContinuousMap] at hpol hset h4b
+  rw [h4b] at hpol
+  -- hpol : ∫f dμ_{x+E(s)v} − ∫f dμ_{x−E(s)v} = (.real diff) ; hset : (.real diff) = ∫_s f dμ_{x+v} − ∫_s f dμ_{x−v}
+  linarith [hpol, hset]
+
+open MeasureTheory in
+/-- **The intersection identity at the form level**: `b_t(x, E(s)v) = b_{s∩t}(x, v)`
+    (evaluate `specProj_engine_measure` at `t` via `.real`). -/
+lemma bForm_specProj (ha : IsSelfAdjoint T) {s t : Set (spectrum ℝ T)} (hs : MeasurableSet s)
+    (ht : MeasurableSet t) (x v : H) :
+    bForm T ha t x (specProj T ha s v) = bForm T ha (s ∩ t) x v := by
+  have h := specProj_engine_measure T ha hs x v
+  apply_fun (fun μ => MeasureTheory.Measure.real μ t) at h
+  rw [measureReal_add_apply, measureReal_add_apply, measureReal_restrict_apply ht,
+    measureReal_restrict_apply ht, Set.inter_comm t s] at h
+  unfold bForm qForm
+  linarith [h]
+
+/-- **`E_inter`**: `E(s∩t) = E(s)·E(t)` — the projection / multiplicativity property, the final
+    `ProjectionValuedMeasure` field.  `E(s)·E(t)` tested against `⟪·x,y⟫` is `c_t(x,E(s)y)`, which
+    equals `c_{s∩t}(x,y)` by `bForm_specProj` (using `E(s)` ℂ-linear for the imaginary part). -/
+lemma specProj_inter (ha : IsSelfAdjoint T) {s t : Set (spectrum ℝ T)} (hs : MeasurableSet s)
+    (ht : MeasurableSet t) :
+    specProj T ha (s ∩ t) = specProj T ha s * specProj T ha t := by
+  refine ContinuousLinearMap.ext fun x => ext_inner_right ℂ fun y => ?_
+  rw [inner_specProj, ContinuousLinearMap.mul_apply]
+  have hEsym := ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp (specProj_isSelfAdjoint T ha s)
+  rw [show (⟪specProj T ha s (specProj T ha t x), y⟫ : ℂ)
+        = ⟪specProj T ha t x, specProj T ha s y⟫ from hEsym _ y, inner_specProj]
+  unfold cForm
+  rw [show Complex.I • specProj T ha s y = specProj T ha s (Complex.I • y)
+        from (map_smul (specProj T ha s) Complex.I y).symm,
+    bForm_specProj T ha hs ht, bForm_specProj T ha hs ht]
+
 /-! ### The `f`-weighted quadratic form `q_f(z) := ∫ f dμ_z` (toward `Φ(f)`)
 
 To build the bounded Borel functional calculus `Φ(f)` (with `Φ(𝟙_s)=E(s)`, `Φ(continuous)=cfcHom`)

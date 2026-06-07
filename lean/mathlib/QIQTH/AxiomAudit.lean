@@ -713,6 +713,18 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — set-level engine, GENERAL continuous g (signed): same identity,
 -- via linearity (g=(g+‖g‖)−‖g‖; LHS=4·b_s(g(T)x,v) linear via bForm_add/sub_left+cfcHom, RHS by
 -- integral_add). E_inter step (b) complete.
+#print axioms QIQTH.SpectralTheorem.re_inner_cfcHom_specProj
+-- expected: standard only — diagonal–E(s): re⟪x,h(T)(E(s)v)⟫ = b_s(h(T)x,v).
+#print axioms QIQTH.SpectralTheorem.integral_specMeasure_polarization
+-- expected: standard only — ∫f dμ_{w+u}−∫f dμ_{w−u} = 4·re⟪w,f(T)u⟫.
+#print axioms QIQTH.SpectralTheorem.specProj_engine_measure
+-- expected: standard only — final measure identity μ_{x+E(s)v}+(μ_{x−v})↾s = μ_{x−E(s)v}+(μ_{x+v})↾s
+-- (RMK uniqueness; test reduces via polarization+re_inner_cfcHom_specProj+specMeasure_setEngine).
+#print axioms QIQTH.SpectralTheorem.bForm_specProj
+-- expected: standard only — b_t(x,E(s)v) = b_{s∩t}(x,v) (evaluate the final measure identity at t).
+#print axioms QIQTH.SpectralTheorem.specProj_inter
+-- expected: standard only — ★ E_INTER: E(s∩t)=E(s)·E(t), the projection/multiplicativity property.
+-- The LAST ProjectionValuedMeasure field. E is now a genuine PVM ⟹ bounded spectral theorem.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
