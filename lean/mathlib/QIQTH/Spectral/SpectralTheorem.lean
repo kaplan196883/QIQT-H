@@ -684,4 +684,43 @@ lemma specProj_union_disjoint (ha : IsSelfAdjoint T) {s t : Set (spectrum ℝ T)
   rw [inner_specProj, cForm_union_disjoint T ha hd hmt, ContinuousLinearMap.add_apply,
     inner_add_left, inner_specProj, inner_specProj]
 
+/-- `E(s) ≤ 1` (the spectral projection is a contraction in the Loewner order): `1 − E(s)` is
+    positive since `re ⟪(1−E(s)) x, x⟫ = ‖x‖² − q_s(x) ≥ 0`. -/
+lemma specProj_le_one (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) :
+    specProj T ha s ≤ 1 := by
+  rw [ContinuousLinearMap.le_def]
+  have hsa : IsSelfAdjoint (1 - specProj T ha s) := by
+    show star (1 - specProj T ha s) = _
+    rw [star_sub, star_one, (specProj_isSelfAdjoint T ha s).star_eq]
+  refine ContinuousLinearMap.isPositive_def'.mpr ⟨hsa, fun x => ?_⟩
+  rw [ContinuousLinearMap.reApplyInnerSelf_apply, ContinuousLinearMap.sub_apply,
+    ContinuousLinearMap.one_apply, inner_sub_left, map_sub,
+    ← ContinuousLinearMap.reApplyInnerSelf_apply, reApplyInnerSelf_specProj,
+    inner_self_eq_norm_sq]
+  have hle : qForm T ha s x ≤ ‖x‖ ^ 2 := specMeasure_real_le T ha x s
+  linarith
+
+/-- **Effect estimate**: for the positive contraction `E(s)`, `‖E(s) x‖² ≤ q_s(x)`.
+    (From `E(s)² ≤ E(s)`, i.e. `E(s)·(1−E(s)) ≥ 0` for commuting positives.) -/
+lemma norm_specProj_sq_le (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x : H) :
+    ‖specProj T ha s x‖ ^ 2 ≤ qForm T ha s x := by
+  set A := specProj T ha s with hA
+  have hpos : (0 : H →L[ℂ] H) ≤ A :=
+    (ContinuousLinearMap.nonneg_iff_isPositive _).mpr (specProj_isPositive T ha s)
+  have h1mA : (0 : H →L[ℂ] H) ≤ 1 - A := by
+    rw [sub_nonneg]; exact specProj_le_one T ha s
+  have hcomm : Commute A (1 - A) := (Commute.one_right A).sub_right (Commute.refl A)
+  have hAsq : (0 : H →L[ℂ] H) ≤ A - A * A := by
+    have h := Commute.mul_nonneg hpos h1mA hcomm
+    rwa [mul_sub, mul_one] at h
+  have hsym := ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp (specProj_isSelfAdjoint T ha s)
+  have key := ((ContinuousLinearMap.nonneg_iff_isPositive _).mp hAsq).2 x
+  rw [ContinuousLinearMap.reApplyInnerSelf_apply, ContinuousLinearMap.sub_apply,
+    inner_sub_left, map_sub] at key
+  have hAA : RCLike.re ⟪(A * A) x, x⟫ = ‖A x‖ ^ 2 := by
+    rw [ContinuousLinearMap.mul_apply, show (⟪A (A x), x⟫ : ℂ) = ⟪A x, A x⟫ from hsym (A x) x,
+      inner_self_eq_norm_sq]
+  rw [hAA, ← ContinuousLinearMap.reApplyInnerSelf_apply, reApplyInnerSelf_specProj] at key
+  linarith
+
 end QIQTH.SpectralTheorem

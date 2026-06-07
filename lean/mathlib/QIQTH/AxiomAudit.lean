@@ -668,6 +668,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SpectralTheorem.specProj_union_disjoint
 -- expected: standard only — finite additivity E(s∪t)=E(s)+E(t) on disjoint measurable sets
 -- (measure additivity in the set argument).
+#print axioms QIQTH.SpectralTheorem.specProj_le_one
+-- expected: standard only — E(s) ≤ 1 (1−E(s) positive; re⟪(1−E(s))x,x⟫=‖x‖²−q_s(x)≥0).
+#print axioms QIQTH.SpectralTheorem.norm_specProj_sq_le
+-- expected: standard only — effect estimate ‖E(s)x‖²≤q_s(x) (E(s)²≤E(s) via Commute.mul_nonneg).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
