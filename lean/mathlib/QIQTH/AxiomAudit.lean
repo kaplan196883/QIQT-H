@@ -646,6 +646,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SpectralTheorem.cForm_smul_right
 -- expected: standard only — ℂ-homogeneity c_s(x,c•y)=c·c_s(x,y) (decompose c=re+im·i; combine
 -- ℝ-homog, the i-twist, additivity). c_s(x,·) is now fully ℂ-linear in y.
+#print axioms QIQTH.SpectralTheorem.cForm_conj_smul_left
+-- expected: standard only — conjugate-linearity c_s(c•x,y)=conj(c)·c_s(x,y). With cForm_add_left,
+-- c_s is now fully sesquilinear (conj-linear in x, ℂ-linear in y).
+#print axioms QIQTH.SpectralTheorem.cForm_norm_le
+-- expected: standard only — ‖c_s(x,y)‖ ≤ 2·‖x‖·‖y‖ (bounded sesquilinear form ⟹ E(s) via Riesz).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

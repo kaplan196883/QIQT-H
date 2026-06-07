@@ -484,4 +484,63 @@ lemma cForm_smul_right (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x : H)
   push_cast
   ring
 
+/-- ℝ-homogeneity in the left argument: `b_s(r•u, v) = r·b_s(u,v)`. -/
+lemma bForm_real_smul_left (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (r : ℝ) (u v : H) :
+    bForm T ha s (r • u) v = r * bForm T ha s u v := by
+  rw [bForm_comm, bForm_real_smul_right, bForm_comm T ha s v u]
+
+/-- `c_s` is additive in its left argument. -/
+lemma cForm_add_left (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x x' y : H) :
+    cForm T ha s (x + x') y = cForm T ha s x y + cForm T ha s x' y := by
+  unfold cForm
+  rw [bForm_add_left, bForm_add_left]
+  push_cast
+  ring
+
+/-- ℝ-homogeneity of `c_s` in the left argument. -/
+lemma cForm_real_smul_left (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (r : ℝ) (x y : H) :
+    cForm T ha s (r • x) y = (r : ℂ) * cForm T ha s x y := by
+  unfold cForm
+  rw [bForm_real_smul_left, bForm_real_smul_left]
+  push_cast
+  ring
+
+/-- The `i`-twist in the left argument: `c_s(I•x, y) = conj(i)·c_s(x,y) = −i·c_s(x,y)`. -/
+lemma cForm_I_left (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x y : H) :
+    cForm T ha s (Complex.I • x) y = -Complex.I * cForm T ha s x y := by
+  unfold cForm
+  rw [bForm_I_comm, bForm_I_smul]
+  push_cast
+  ring_nf
+  rw [Complex.I_sq]
+  ring
+
+/-- **Conjugate-linearity** of `c_s` in the left argument: `c_s(c•x, y) = conj(c)·c_s(x,y)`. -/
+lemma cForm_conj_smul_left (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (c : ℂ) (x y : H) :
+    cForm T ha s (c • x) y = (starRingEnd ℂ) c * cForm T ha s x y := by
+  have h0 : ((c.re : ℝ) : ℂ) • x + ((c.im : ℝ) : ℂ) • (Complex.I • x) = c • x := by
+    rw [smul_smul, ← add_smul, Complex.re_add_im]
+  have hc : (c.re : ℝ) • x + (c.im : ℝ) • (Complex.I • x) = c • x := by
+    rw [← h0]; congr 1 <;> exact (RCLike.real_smul_eq_coe_smul (K := ℂ) _ _).symm
+  rw [← hc, cForm_add_left, cForm_real_smul_left, cForm_real_smul_left, cForm_I_left]
+  conv_rhs => rw [← Complex.re_add_im ((starRingEnd ℂ) c), Complex.conj_re, Complex.conj_im]
+  push_cast
+  ring
+
+/-- **Norm bound**: `‖c_s(x,y)‖ ≤ 2·‖x‖·‖y‖`. -/
+lemma cForm_norm_le (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x y : H) :
+    ‖cForm T ha s x y‖ ≤ 2 * ‖x‖ * ‖y‖ := by
+  unfold cForm
+  have hb1 : ‖((bForm T ha s x y : ℝ) : ℂ)‖ ≤ ‖x‖ * ‖y‖ := by
+    rw [Complex.norm_real]; exact bForm_abs_le T ha s x y
+  have hb2 : ‖Complex.I * ((bForm T ha s x (Complex.I • y) : ℝ) : ℂ)‖ ≤ ‖x‖ * ‖y‖ := by
+    rw [norm_mul, Complex.norm_I, one_mul, Complex.norm_real]
+    refine (bForm_abs_le T ha s x (Complex.I • y)).trans ?_
+    rw [norm_smul, Complex.norm_I, one_mul]
+  calc ‖((bForm T ha s x y : ℝ) : ℂ) - Complex.I * ((bForm T ha s x (Complex.I • y) : ℝ) : ℂ)‖
+      ≤ ‖((bForm T ha s x y : ℝ) : ℂ)‖ + ‖Complex.I * ((bForm T ha s x (Complex.I • y) : ℝ) : ℂ)‖ :=
+        norm_sub_le _ _
+    _ ≤ ‖x‖ * ‖y‖ + ‖x‖ * ‖y‖ := add_le_add hb1 hb2
+    _ = 2 * ‖x‖ * ‖y‖ := by ring
+
 end QIQTH.SpectralTheorem
