@@ -1173,6 +1173,42 @@ theorem modFlow_unitary (A : H →L[ℂ] H) (hA : IsSelfAdjoint A) (t : ℝ) :
     star (modFlow A t) * modFlow A t = 1 := by
   rw [modFlow_star A hA, ← modFlow_add, neg_add_cancel, modFlow_zero]
 
+/-! ### Layer 2 — the modular automorphism group `σ_t(x) = U(t)·x·U(t)⁻¹`
+
+Conjugation by the modular flow gives a one-parameter group of `*`-automorphisms — the continuum
+modular automorphism group, generalizing `FiniteModularTheory.modAut`. -/
+
+/-- The modular automorphism `σ_t(x) = U(t)·x·U(t)⁻¹ = U(t)·x·U(−t)`. -/
+noncomputable def modAut (A : H →L[ℂ] H) (t : ℝ) (x : H →L[ℂ] H) : H →L[ℂ] H :=
+  modFlow A t * x * modFlow A (-t)
+
+@[simp] theorem modAut_zero (A : H →L[ℂ] H) (x : H →L[ℂ] H) : modAut A 0 x = x := by
+  rw [modAut, neg_zero, modFlow_zero, mul_one, one_mul]
+
+/-- **One-parameter group law**: `σ_s ∘ σ_t = σ_{s+t}`. -/
+theorem modAut_comp (A : H →L[ℂ] H) (s t : ℝ) (x : H →L[ℂ] H) :
+    modAut A s (modAut A t x) = modAut A (s + t) x := by
+  rw [modAut, modAut, modAut, modFlow_add, show -(s + t) = -t + -s by ring, modFlow_add]
+  simp only [mul_assoc]
+
+/-- `σ_t(1) = 1`. -/
+@[simp] theorem modAut_one (A : H →L[ℂ] H) (t : ℝ) : modAut A t 1 = 1 := by
+  rw [modAut, mul_one, ← modFlow_add, add_neg_cancel, modFlow_zero]
+
+/-- **Multiplicativity**: `σ_t(x·y) = σ_t(x)·σ_t(y)` (conjugation by a unitary). -/
+theorem modAut_mul (A : H →L[ℂ] H) (t : ℝ) (x y : H →L[ℂ] H) :
+    modAut A t (x * y) = modAut A t x * modAut A t y := by
+  have h1 : modFlow A (-t) * modFlow A t = 1 := by
+    rw [← modFlow_add, neg_add_cancel, modFlow_zero]
+  simp only [modAut, mul_assoc]
+  rw [← mul_assoc (modFlow A (-t)) (modFlow A t), h1, one_mul]
+
+/-- **`*`-compatibility**: `σ_t(x⋆) = σ_t(x)⋆` (uses `A` self-adjoint). -/
+theorem modAut_star (A : H →L[ℂ] H) (hA : IsSelfAdjoint A) (t : ℝ) (x : H →L[ℂ] H) :
+    star (modAut A t x) = modAut A t (star x) := by
+  rw [modAut, modAut, star_mul, star_mul, modFlow_star A hA, modFlow_star A hA, neg_neg,
+    mul_assoc]
+
 /-! ### The `f`-weighted quadratic form `q_f(z) := ∫ f dμ_z` (toward `Φ(f)`)
 
 To build the bounded Borel functional calculus `Φ(f)` (with `Φ(𝟙_s)=E(s)`, `Φ(continuous)=cfcHom`)
