@@ -651,6 +651,12 @@ namespace QIQTH.AxiomAudit
 -- c_s is now fully sesquilinear (conj-linear in x, ℂ-linear in y).
 #print axioms QIQTH.SpectralTheorem.cForm_norm_le
 -- expected: standard only — ‖c_s(x,y)‖ ≤ 2·‖x‖·‖y‖ (bounded sesquilinear form ⟹ E(s) via Riesz).
+#print axioms QIQTH.SpectralTheorem.specProj
+-- expected: standard only — THE SPECTRAL PROJECTION E(s):H→L[ℂ]H, Riesz rep of c_s via
+-- continuousLinearMapOfBilin (bundled H→L⋆[ℂ]H→L[ℂ]ℂ from mkContinuous per slot).
+#print axioms QIQTH.SpectralTheorem.inner_specProj
+-- expected: standard only — defining identity ⟪E(s) x, y⟫ = c_s(x,y). The operator E(s) now
+-- exists; remaining PVM laws (E_univ=1, E_inter, σ-additivity) build on this + the q/b engine.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

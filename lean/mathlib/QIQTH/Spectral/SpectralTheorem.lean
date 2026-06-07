@@ -543,4 +543,44 @@ lemma cForm_norm_le (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x y : H) 
     _ ≤ ‖x‖ * ‖y‖ + ‖x‖ * ‖y‖ := add_le_add hb1 hb2
     _ = 2 * ‖x‖ * ‖y‖ := by ring
 
+/-- `c_s(x, ·)` bundled as a continuous ℂ-linear functional `H →L[ℂ] ℂ`. -/
+noncomputable def cFormCLM (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x : H) : H →L[ℂ] ℂ :=
+  LinearMap.mkContinuous
+    { toFun := fun y => cForm T ha s x y
+      map_add' := cForm_add_right T ha s x
+      map_smul' := fun c y => by
+        simp only [RingHom.id_apply, smul_eq_mul]; exact cForm_smul_right T ha s x c y }
+    (2 * ‖x‖) (fun y => cForm_norm_le T ha s x y)
+
+@[simp] lemma cFormCLM_apply (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x y : H) :
+    cFormCLM T ha s x y = cForm T ha s x y := rfl
+
+lemma cFormCLM_norm_le (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x : H) :
+    ‖cFormCLM T ha s x‖ ≤ 2 * ‖x‖ := by
+  unfold cFormCLM
+  exact LinearMap.mkContinuous_norm_le _ (by positivity) _
+
+/-- The **spectral projection** `E(s) : H →L[ℂ] H`, obtained by Riesz-representing the bounded
+    sesquilinear form `c_s` (`⟪E(s) x, y⟫ = c_s(x,y)`). -/
+noncomputable def specProj (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) : H →L[ℂ] H :=
+  InnerProductSpace.continuousLinearMapOfBilin
+    (LinearMap.mkContinuous
+      ({ toFun := fun x => cFormCLM T ha s x
+         map_add' := fun x x' => by
+           ext y
+           simp only [ContinuousLinearMap.add_apply, cFormCLM_apply]
+           exact cForm_add_left T ha s x x' y
+         map_smul' := fun c x => by
+           ext y
+           simp only [ContinuousLinearMap.smul_apply, cFormCLM_apply, smul_eq_mul]
+           exact cForm_conj_smul_left T ha s c x y } :
+        H →ₛₗ[starRingEnd ℂ] (H →L[ℂ] ℂ))
+      2 (fun x => cFormCLM_norm_le T ha s x))
+
+/-- **Defining identity of the spectral projection**: `⟪E(s) x, y⟫ = c_s(x,y)`. -/
+lemma inner_specProj (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x y : H) :
+    ⟪specProj T ha s x, y⟫ = cForm T ha s x y := by
+  rw [specProj, InnerProductSpace.continuousLinearMapOfBilin_apply]
+  rfl
+
 end QIQTH.SpectralTheorem
