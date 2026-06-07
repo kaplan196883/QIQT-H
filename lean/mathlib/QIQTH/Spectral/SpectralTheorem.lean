@@ -640,4 +640,48 @@ lemma specProj_univ (ha : IsSelfAdjoint T) : specProj T ha Set.univ = 1 := by
   refine ext_inner_right ℂ (fun y => ?_)
   rw [inner_specProj, cForm_univ, ContinuousLinearMap.one_apply]
 
+/-- The diagonal of the spectral form is the (real, nonnegative) quadratic form:
+    `re ⟪E(s) x, x⟫ = q_s(x)`. -/
+lemma reApplyInnerSelf_specProj (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x : H) :
+    (specProj T ha s).reApplyInnerSelf x = qForm T ha s x := by
+  rw [ContinuousLinearMap.reApplyInnerSelf_apply, inner_specProj]
+  unfold cForm
+  rw [bForm_self]
+  show (((qForm T ha s x : ℝ) : ℂ) -
+    Complex.I * ((bForm T ha s x (Complex.I • x) : ℝ) : ℂ)).re = qForm T ha s x
+  simp [Complex.sub_re, Complex.mul_re]
+
+/-- `E(s)` is a positive operator. -/
+lemma specProj_isPositive (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) :
+    (specProj T ha s).IsPositive := by
+  refine ContinuousLinearMap.isPositive_def'.mpr ⟨specProj_isSelfAdjoint T ha s, fun x => ?_⟩
+  rw [reApplyInnerSelf_specProj]
+  exact qForm_nonneg T ha s x
+
+/-- Finite additivity of the diagonal form on disjoint sets. -/
+lemma qForm_union (ha : IsSelfAdjoint T) {s t : Set (spectrum ℝ T)} (hd : Disjoint s t)
+    (hmt : MeasurableSet t) (z : H) :
+    qForm T ha (s ∪ t) z = qForm T ha s z + qForm T ha t z :=
+  MeasureTheory.measureReal_union hd hmt
+
+/-- Finite additivity of the complex form on disjoint sets. -/
+lemma cForm_union_disjoint (ha : IsSelfAdjoint T) {s t : Set (spectrum ℝ T)} (hd : Disjoint s t)
+    (hmt : MeasurableSet t) (x y : H) :
+    cForm T ha (s ∪ t) x y = cForm T ha s x y + cForm T ha t x y := by
+  unfold cForm bForm
+  rw [qForm_union T ha hd hmt, qForm_union T ha hd hmt, qForm_union T ha hd hmt,
+    qForm_union T ha hd hmt]
+  push_cast
+  ring
+
+/-- **Finite additivity** of the spectral projection on disjoint measurable sets:
+    `E(s ∪ t) = E(s) + E(t)`. -/
+lemma specProj_union_disjoint (ha : IsSelfAdjoint T) {s t : Set (spectrum ℝ T)} (hd : Disjoint s t)
+    (hmt : MeasurableSet t) :
+    specProj T ha (s ∪ t) = specProj T ha s + specProj T ha t := by
+  ext x
+  refine ext_inner_right ℂ (fun y => ?_)
+  rw [inner_specProj, cForm_union_disjoint T ha hd hmt, ContinuousLinearMap.add_apply,
+    inner_add_left, inner_specProj, inner_specProj]
+
 end QIQTH.SpectralTheorem

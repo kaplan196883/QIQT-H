@@ -663,6 +663,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — E(s) self-adjoint (Hermitian symmetry c_s(y,x)conj = c_s(x,y)).
 #print axioms QIQTH.SpectralTheorem.specProj_univ
 -- expected: standard only — E(univ) = 1 (c_univ(x,y)=⟪x,y⟫ via norm polarization + μ_x(univ)=‖x‖²).
+#print axioms QIQTH.SpectralTheorem.specProj_isPositive
+-- expected: standard only — 0 ≤ E(s) (re⟪E(s)x,x⟫ = q_s(x) ≥ 0).
+#print axioms QIQTH.SpectralTheorem.specProj_union_disjoint
+-- expected: standard only — finite additivity E(s∪t)=E(s)+E(t) on disjoint measurable sets
+-- (measure additivity in the set argument).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
