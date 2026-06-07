@@ -20,11 +20,12 @@ import Mathlib.Analysis.CStarAlgebra.ContinuousLinearMap
 import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Order
 import Mathlib.Analysis.InnerProductSpace.StarOrder
 import Mathlib.MeasureTheory.Integral.RieszMarkovKakutani.Real
+import Mathlib.Topology.ContinuousMap.CompactlySupported
 import Mathlib.Tactic
 
 namespace QIQTH.SpectralTheorem
 
-open scoped ComplexInnerProductSpace
+open scoped ComplexInnerProductSpace CompactlySupported
 
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 
@@ -50,5 +51,55 @@ theorem re_inner_cfc_nonneg (T : H →L[ℂ] H) (x : H)
     0 ≤ re ⟪x, cfc f T x⟫ :=
   let hpos : (0 : H →L[ℂ] H) ≤ cfc f T := cfc_nonneg hf
   ((ContinuousLinearMap.nonneg_iff_isPositive _).mp hpos).re_inner_nonneg_right x
+
+/-! ### The scalar spectral functional `Λ_x` and the scalar spectral measure `μ_x`
+
+For a fixed vector `x`, `Λ_x : C_c(spectrum ℝ T, ℝ) →ₚ[ℝ] ℝ`, `f ↦ re ⟪x, f(T) x⟫`, is a
+positive linear functional (the `cfcHom` star-algebra hom makes it linear; the positivity
+bridge makes it positive).  Its Riesz–Markov measure is the scalar spectral measure `μ_x`,
+with defining property `∫ f dμ_x = re ⟪x, f(T) x⟫`. -/
+
+variable (T : H →L[ℂ] H)
+
+open RCLike in
+/-- The scalar spectral functional as an ℝ-linear map on compactly-supported continuous
+    functions on the spectrum: `f ↦ re ⟪x, f(T) x⟫`, where `f(T) := cfcHom ha f`. -/
+noncomputable def specFunctional (ha : IsSelfAdjoint T) (x : H) :
+    C_c(spectrum ℝ T, ℝ) →ₗ[ℝ] ℝ where
+  toFun f := re ⟪x, cfcHom ha f.toContinuousMap x⟫
+  map_add' f g := by
+    have h : (f + g).toContinuousMap = f.toContinuousMap + g.toContinuousMap := by
+      ext a; simp
+    rw [h, map_add, ContinuousLinearMap.add_apply, inner_add_right, map_add]
+  map_smul' c f := by
+    have h : (c • f).toContinuousMap = c • f.toContinuousMap := by
+      ext a; simp
+    rw [h, map_smul, ContinuousLinearMap.smul_apply, real_smul_eq_coe_smul (K := ℂ),
+      inner_smul_real_right, smul_re, RingHom.id_apply, smul_eq_mul]
+
+open RCLike in
+/-- The scalar spectral functional bundled as a **positive** linear functional
+    `Λ_x : C_c(spectrum ℝ T, ℝ) →ₚ[ℝ] ℝ`. -/
+noncomputable def specPLM (ha : IsSelfAdjoint T) (x : H) :
+    C_c(spectrum ℝ T, ℝ) →ₚ[ℝ] ℝ :=
+  PositiveLinearMap.mk₀ (specFunctional T ha x) fun f hf0 => by
+    have hle : (0 : C(spectrum ℝ T, ℝ)) ≤ f.toContinuousMap := by
+      intro a; simpa using CompactlySupportedContinuousMap.le_def.mp hf0 a
+    have hpos : (0 : H →L[ℂ] H) ≤ cfcHom ha f.toContinuousMap :=
+      (cfcHom_nonneg_iff ha).mpr hle
+    exact ((ContinuousLinearMap.nonneg_iff_isPositive _).mp hpos).re_inner_nonneg_right x
+
+/-- The **scalar spectral measure** `μ_x` of a self-adjoint `T` at a vector `x`: the
+    Riesz–Markov measure of the positive functional `Λ_x = specPLM`. -/
+noncomputable def specMeasure (ha : IsSelfAdjoint T) (x : H) :
+    MeasureTheory.Measure (spectrum ℝ T) :=
+  RealRMK.rieszMeasure (specPLM T ha x)
+
+open RCLike in
+/-- **Defining property of the scalar spectral measure** (Riesz–Markov representation):
+    `∫ f dμ_x = re ⟪x, f(T) x⟫` for every `f ∈ C_c(spectrum ℝ T, ℝ)`. -/
+theorem integral_specMeasure (ha : IsSelfAdjoint T) (x : H) (f : C_c(spectrum ℝ T, ℝ)) :
+    ∫ s, f s ∂(specMeasure T ha x) = re ⟪x, cfcHom ha f.toContinuousMap x⟫ :=
+  RealRMK.integral_rieszMeasure (specPLM T ha x) f
 
 end QIQTH.SpectralTheorem

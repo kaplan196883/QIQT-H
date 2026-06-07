@@ -593,6 +593,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — positivity bridge: f ≥ 0 on spectrum ⟹ 0 ≤ re⟪x, f(T) x⟫.
 -- The positivity of the scalar functional Λ_x f = re⟪x, cfc f T x⟫ seeding μ_x (cfc_nonneg
 -- in the C*-order of B(H), which coincides with the Loewner/IsPositive order).
+#print axioms QIQTH.SpectralTheorem.integral_specMeasure
+-- expected: standard only — defining property of the scalar spectral measure μ_x (Riesz–Markov):
+-- ∫ f dμ_x = re⟪x, f(T) x⟫.  μ_x := rieszMeasure of the positive functional Λ_x = specPLM;
+-- the scalar half of the bounded spectral theorem PVM_of_selfAdjoint.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
