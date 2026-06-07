@@ -820,4 +820,65 @@ lemma inner_cfcHom_conj (ha : IsSelfAdjoint T) (g h : C(spectrum ℝ T, ℝ)) (z
   congr 2
   ring
 
+/-! ### The `f`-weighted quadratic form `q_f(z) := ∫ f dμ_z` (toward `Φ(f)`)
+
+To build the bounded Borel functional calculus `Φ(f)` (with `Φ(𝟙_s)=E(s)`, `Φ(continuous)=cfcHom`)
+we replace `q_s(z)=μ_z(s)` by `q_f(z)=∫ f dμ_z` for bounded measurable `f`.  The whole `q`-engine
+descends from the *measure* identities (`specMeasure_smul/parallelogram/add`), so it transfers by
+integrating `f` against them. -/
+
+open MeasureTheory in
+/-- The `f`-weighted diagonal quadratic form `q_f(z) := ∫ f dμ_z`. -/
+noncomputable def qfForm (ha : IsSelfAdjoint T) (f : spectrum ℝ T → ℝ) (z : H) : ℝ :=
+  ∫ ω, f ω ∂(specMeasure T ha z)
+
+open MeasureTheory in
+/-- A bounded measurable `f` is integrable against every (finite) scalar spectral measure. -/
+lemma qf_integrable (ha : IsSelfAdjoint T) {f : spectrum ℝ T → ℝ} (hf : Measurable f) {M : ℝ}
+    (hfb : ∀ ω, |f ω| ≤ M) (μ : Measure (spectrum ℝ T)) [IsFiniteMeasure μ] :
+    Integrable f μ :=
+  Integrable.of_bound hf.aestronglyMeasurable M
+    (ae_of_all _ fun ω => by rw [Real.norm_eq_abs]; exact hfb ω)
+
+open MeasureTheory in
+/-- `q_f` is nonnegative for `f ≥ 0`. -/
+lemma qfForm_nonneg (ha : IsSelfAdjoint T) {f : spectrum ℝ T → ℝ} (hf0 : ∀ ω, 0 ≤ f ω) (z : H) :
+    0 ≤ qfForm T ha f z :=
+  integral_nonneg hf0
+
+open MeasureTheory in
+/-- Scaling law for `q_f`: `q_f(c•z) = ‖c‖²·q_f(z)`. -/
+lemma qfForm_smul (ha : IsSelfAdjoint T) (f : spectrum ℝ T → ℝ) (c : ℂ) (z : H) :
+    qfForm T ha f (c • z) = ‖c‖ ^ 2 * qfForm T ha f z := by
+  unfold qfForm
+  rw [specMeasure_smul, integral_smul_measure, smul_eq_mul]
+  congr 1
+
+open MeasureTheory in
+/-- Parallelogram law for `q_f`. -/
+lemma qfForm_parallelogram (ha : IsSelfAdjoint T) {f : spectrum ℝ T → ℝ} (hf : Measurable f)
+    {M : ℝ} (hfb : ∀ ω, |f ω| ≤ M) (x y : H) :
+    qfForm T ha f (x + y) + qfForm T ha f (x - y)
+      = 2 * qfForm T ha f x + 2 * qfForm T ha f y := by
+  haveI : IsFiniteMeasure ((2 : ℝ≥0∞) • specMeasure T ha x) := Measure.smul_finite _ (by simp)
+  haveI : IsFiniteMeasure ((2 : ℝ≥0∞) • specMeasure T ha y) := Measure.smul_finite _ (by simp)
+  unfold qfForm
+  rw [← integral_add_measure (qf_integrable T ha hf hfb _) (qf_integrable T ha hf hfb _),
+    specMeasure_parallelogram, integral_add_measure (qf_integrable T ha hf hfb _)
+      (qf_integrable T ha hf hfb _), integral_smul_measure, integral_smul_measure,
+    ENNReal.toReal_ofNat, smul_eq_mul, smul_eq_mul]
+
+open MeasureTheory in
+/-- The additivity engine for `q_f`. -/
+lemma qfForm_add (ha : IsSelfAdjoint T) {f : spectrum ℝ T → ℝ} (hf : Measurable f) {M : ℝ}
+    (hfb : ∀ ω, |f ω| ≤ M) (x a b : H) :
+    qfForm T ha f (x + a + b) + qfForm T ha f (x - a) + qfForm T ha f (x - b)
+      = qfForm T ha f (x - a - b) + qfForm T ha f (x + a) + qfForm T ha f (x + b) := by
+  unfold qfForm
+  rw [← integral_add_measure (qf_integrable T ha hf hfb _) (qf_integrable T ha hf hfb _),
+    ← integral_add_measure (qf_integrable T ha hf hfb _) (qf_integrable T ha hf hfb _),
+    specMeasure_add, integral_add_measure (qf_integrable T ha hf hfb _)
+      (qf_integrable T ha hf hfb _), integral_add_measure (qf_integrable T ha hf hfb _)
+      (qf_integrable T ha hf hfb _)]
+
 end QIQTH.SpectralTheorem

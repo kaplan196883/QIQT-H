@@ -684,6 +684,13 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — cfcHom-conjugation engine ⟪g(T)z, h(T)(g(T)z)⟫ = ⟪z, (h·g²)(T)z⟫
 -- (self-adjointness + cfcHom multiplicativity g·h·g=h·g²). First brick toward E_inter (the
 -- bounded-Borel-FC bridge: transport cfcHom multiplicativity to indicators via monotone class).
+#print axioms QIQTH.SpectralTheorem.qfForm_smul
+-- expected: standard only — q_f(c•z)=‖c‖²q_f(z) for the f-weighted form q_f(z):=∫f dμ_z.
+#print axioms QIQTH.SpectralTheorem.qfForm_parallelogram
+-- expected: standard only — parallelogram for q_f (descends from specMeasure_parallelogram).
+#print axioms QIQTH.SpectralTheorem.qfForm_add
+-- expected: standard only — additivity engine for q_f. The q-engine for the bounded Borel FC Φ(f):
+-- replacing q_s=∫𝟙_s by q_f=∫f, transferred from the measure identities by integration.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
