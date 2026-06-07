@@ -366,4 +366,14 @@ theorem rvdPmQ_sq (S : StandardSubspace H) :
   rw [mul_sub, sub_mul, sub_mul, hP, hQ]
   abel
 
+/-- **`D = P − Q` is conjugate-linear** (anti-ℂ-linear): `D(i·ξ) = −i·(D ξ)`.  In contrast to the
+    ℂ-linear `R = P + Q` (`rvdR_smul_I`), the difference `D` anticommutes with mult-by-`i` — this is
+    exactly the structural reason the modular conjugation `J` of the polar decomposition `J·T = P − Q`
+    is *antiunitary* (conjugate-linear) rather than unitary.  Immediate from the conjugation
+    identities `projK_smul_I`, `projIK_smul_I`. -/
+theorem rvdPmQ_smul_I (S : StandardSubspace H) (ξ : H) :
+    rvdPmQ S (Complex.I • ξ) = -(Complex.I • rvdPmQ S ξ) := by
+  simp only [rvdPmQ, ContinuousLinearMap.sub_apply, projK_smul_I, projIK_smul_I, smul_sub]
+  abel
+
 end QIQTH.StandardSubspaceModular

@@ -824,6 +824,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.rvdRC_nonneg
 -- expected: standard only — 0≤Rℂ (Loewner). The hypothesis CFC.sqrt will consume; the sqrt itself
 -- is blocked only on the missing Mathlib instance StarOrderedRing (H→L[ℂ]H) (flagged future work).
+#print axioms QIQTH.StandardSubspaceModular.rvdPmQ_smul_I
+-- expected: standard only — D=P−Q is conjugate-linear: D(i·ξ)=−i·(Dξ). The structural reason the
+-- modular conjugation J (of J·T=P−Q) is antiunitary, in contrast to the ℂ-linear R.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
