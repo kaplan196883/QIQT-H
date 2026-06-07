@@ -600,6 +600,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SpectralTheorem.specMeasure_real_univ
 -- expected: standard only — total mass μ_x(univ) = ‖x‖² (scalar-level E(univ)=1): 1(T)=1,
 -- re⟪x,x⟫=‖x‖². Uses the constant-1 C_c function (HasCompactSupport.of_compactSpace).
+#print axioms QIQTH.SpectralTheorem.inner_cfcHom_polarization
+-- expected: standard only — complex polarization bridge: the off-diagonal ⟪f(T) x, y⟫ is the
+-- polarized combination of the diagonal scalar integrals ∫ f dμ_z (f(T) self-adjoint, diagonal
+-- real). The bridge from the scalar measures μ_z to the projection-valued E(B).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

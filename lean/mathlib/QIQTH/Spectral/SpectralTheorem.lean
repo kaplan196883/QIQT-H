@@ -121,4 +121,36 @@ theorem specMeasure_real_univ (ha : IsSelfAdjoint T) (x : H) :
         = (1 : C(spectrum ℝ T, ℝ)) from rfl, map_one, ContinuousLinearMap.one_apply,
       inner_self_eq_norm_sq]
 
+/-! ### Off-diagonal: the complex polarization bridge
+
+The full complex inner product `⟪f(T) x, y⟫` is determined by the (positive, real) scalar
+measures `μ_z` via the complex polarization identity: writing `f(T) := cfcHom ha f` (which is
+self-adjoint, as `f` is real-valued), each diagonal term `⟪f(T) z, z⟫` is real and equals
+`∫ f dμ_z`.  This is the bridge that lets the projection `E(B)` be defined from the scalar
+measures: replacing `∫ f dμ_z` by `μ_z(B)` gives the sesquilinear form `⟪E(B) x, y⟫`. -/
+
+open RCLike MeasureTheory in
+/-- **Complex polarization bridge.**  For real `f`, the off-diagonal `⟪f(T) x, y⟫` is the
+    complex-polarized combination of the diagonal scalar integrals `∫ f dμ_z`. -/
+theorem inner_cfcHom_polarization (ha : IsSelfAdjoint T) (f : C_c(spectrum ℝ T, ℝ)) (x y : H) :
+    ⟪cfcHom ha f.toContinuousMap x, y⟫
+      = ((↑(∫ s, f s ∂(specMeasure T ha (x + y))) : ℂ)
+          - (↑(∫ s, f s ∂(specMeasure T ha (x - y))) : ℂ)
+          - Complex.I * (↑(∫ s, f s ∂(specMeasure T ha (x + Complex.I • y))) : ℂ)
+          + Complex.I * (↑(∫ s, f s ∂(specMeasure T ha (x - Complex.I • y))) : ℂ)) / 4 := by
+  -- `f(T)` is self-adjoint (f is real-valued, so `star f = f`).
+  have hSA : IsSelfAdjoint (cfcHom ha f.toContinuousMap) := by
+    rw [isSelfAdjoint_iff, ← map_star, star_trivial]
+  have hsym : LinearMap.IsSymmetric ((cfcHom ha f.toContinuousMap : H →L[ℂ] H) : H →ₗ[ℂ] H) :=
+    ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp hSA
+  -- Each diagonal term `⟪f(T) z, z⟫` is real and equals `∫ f dμ_z`.
+  have diag : ∀ z : H, ⟪cfcHom ha f.toContinuousMap z, z⟫
+      = ((∫ s, f s ∂(specMeasure T ha z) : ℝ) : ℂ) := fun z => by
+    rw [integral_specMeasure, inner_re_symm, ← ContinuousLinearMap.reApplyInnerSelf_apply]
+    exact (hsym.coe_reApplyInnerSelf_apply z).symm
+  have hpol := inner_map_polarization'
+    ((cfcHom ha f.toContinuousMap : H →L[ℂ] H) : H →ₗ[ℂ] H) x y
+  simp only [ContinuousLinearMap.coe_coe] at hpol
+  rw [hpol, diag, diag, diag, diag]
+
 end QIQTH.SpectralTheorem
