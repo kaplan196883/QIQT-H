@@ -250,6 +250,19 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — whole Born vector covariant under unitary transport of state+effects.
 #print axioms QIQTH.CoarseGrainNaturality.sum_pushforward_eq
 -- expected: standard only — ∑_{a∈A}(π_*μ)(a)=∑_{π b∈A}μ b (cylinder event = preimage measure).
+-- P3: cylinder typicality (pre)measure on a directed projective system (canonical finite-record μ)
+#print axioms QIQTH.CylinderTypicality.BornProjSystem.consistent
+-- expected: standard only — Kolmogorov consistency μ_i = (π)_* μ_j (projective system).
+#print axioms QIQTH.CylinderTypicality.BornProjSystem.μ_total
+-- expected: standard only — ∑_a μ_i(a) = 1 (each stage a probability measure; uses tr ρ=1).
+#print axioms QIQTH.CylinderTypicality.BornProjSystem.μ_nonneg
+-- expected: standard only — 0 ≤ μ_i(a) (PSD state + PSD effects).
+#print axioms QIQTH.CylinderTypicality.BornProjSystem.cylinder_refine
+-- expected: standard only — cylinder measure stage-independent (premeasure well-defined).
+#print axioms QIQTH.CylinderTypicality.BornProjSystem.cylinder_common_refine
+-- expected: standard only — global consistency via directedness (common refinement).
+#print axioms QIQTH.CylinderTypicality.BornProjSystem.μ_covariant
+-- expected: standard only — typicality measure invariant under a unitary symmetry of the system.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

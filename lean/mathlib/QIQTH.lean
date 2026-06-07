@@ -59,6 +59,9 @@ import QIQTH.NoSignalingGeneral
 -- P1 of the covariant-μ plan: coarse-graining naturality — the Born measures on a directed system
 -- of measurement contexts are Kolmogorov-consistent (coarse Born = pushforward of fine Born):
 import QIQTH.CoarseGrainNaturality
+-- P3: the cylinder typicality (pre)measure on a directed projective system of finite contexts — a
+-- canonical finite-record covariant μ (consistent, normalized, covariant) bypassing the TT walls:
+import QIQTH.CylinderTypicality
 -- A6 strengthening: minimality/independence table for Born premises:
 import QIQTH.BornMinimalityTable
 -- A4 strengthening: Chebyshev concentration upgrading Born means to frequencies:
