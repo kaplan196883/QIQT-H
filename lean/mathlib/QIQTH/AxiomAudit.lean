@@ -703,6 +703,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — engine MEASURE form (g≥0): μ_{g(T)x+v}+μ_{x−v}·g = μ_{g(T)x−v}+μ_{x+v}·g
 -- (·g = withDensity(ofReal g)), by Riesz–Markov uniqueness from specMeasure_engine
 -- (integral_withDensity_eq_integral_toReal_smul + isFiniteMeasure_withDensity). E_inter step (a).
+#print axioms QIQTH.SpectralTheorem.withDensity_real_setIntegral
+-- expected: standard only — ((μ_z)·g).real s = ∫_s g dμ_z for g≥0 (withDensity_apply +
+-- integral_eq_lintegral_of_nonneg_ae). The withDensity↔setIntegral bridge.
+#print axioms QIQTH.SpectralTheorem.specMeasure_setEngine_nonneg
+-- expected: standard only — set-level engine (g≥0): q_s(g(T)x+v)−q_s(g(T)x−v)=∫_s g dμ_{x+v}−
+-- ∫_s g dμ_{x−v} (eval specMeasure_engine_measure at s via .real). E_inter step (b), g≥0 case.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

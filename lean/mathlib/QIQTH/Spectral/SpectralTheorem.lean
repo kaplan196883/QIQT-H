@@ -902,6 +902,40 @@ lemma specMeasure_engine_measure (ha : IsSelfAdjoint T) (g : C(spectrum ℝ T, �
   simp only [CompactlySupportedContinuousMap.coe_toContinuousMap] at heng ⊢
   linarith
 
+open RCLike MeasureTheory in
+/-- `withDensity`-to-`setIntegral` bridge: `((μ_z)·g).real s = ∫_s g dμ_z` for `g ≥ 0`. -/
+lemma withDensity_real_setIntegral (ha : IsSelfAdjoint T) (g : C(spectrum ℝ T, ℝ))
+    (hg0 : ∀ ω, 0 ≤ g ω) (z : H) {s : Set (spectrum ℝ T)} (hs : MeasurableSet s) :
+    ((specMeasure T ha z).withDensity (fun ω => ENNReal.ofReal (g ω))).real s
+      = ∫ ω in s, g ω ∂(specMeasure T ha z) := by
+  rw [Measure.real, withDensity_apply _ hs,
+    integral_eq_lintegral_of_nonneg_ae (ae_of_all _ hg0)
+      (Continuous.aestronglyMeasurable (by fun_prop))]
+
+open RCLike MeasureTheory in
+/-- **Set-level engine** for `g ≥ 0`: `q_s(g(T)x+v) − q_s(g(T)x−v) = ∫_s g dμ_{x+v} − ∫_s g dμ_{x−v}`
+    (the `.real`-at-`s` evaluation of `specMeasure_engine_measure`). -/
+lemma specMeasure_setEngine_nonneg (ha : IsSelfAdjoint T) (g : C(spectrum ℝ T, ℝ))
+    (hg0 : ∀ ω, 0 ≤ g ω) (x v : H) {s : Set (spectrum ℝ T)} (hs : MeasurableSet s) :
+    (specMeasure T ha (cfcHom ha g x + v)).real s
+        - (specMeasure T ha (cfcHom ha g x - v)).real s
+      = (∫ ω in s, g ω ∂(specMeasure T ha (x + v)))
+        - (∫ ω in s, g ω ∂(specMeasure T ha (x - v))) := by
+  have hfin : ∀ z : H, (∫⁻ ω, ENNReal.ofReal (g ω) ∂(specMeasure T ha z)) ≠ ∞ := by
+    intro z
+    refine ne_of_lt (lt_of_le_of_lt (lintegral_mono (g := fun _ => ENNReal.ofReal ‖g‖) fun ω => ?_) ?_)
+    · exact ENNReal.ofReal_le_ofReal ((le_abs_self _).trans (g.norm_coe_le_norm ω))
+    · rw [lintegral_const]; exact ENNReal.mul_lt_top ENNReal.ofReal_lt_top (measure_lt_top _ _)
+  haveI : IsFiniteMeasure ((specMeasure T ha (x - v)).withDensity (fun ω => ENNReal.ofReal (g ω))) :=
+    isFiniteMeasure_withDensity (hfin _)
+  haveI : IsFiniteMeasure ((specMeasure T ha (x + v)).withDensity (fun ω => ENNReal.ofReal (g ω))) :=
+    isFiniteMeasure_withDensity (hfin _)
+  have h := specMeasure_engine_measure T ha g hg0 x v
+  apply_fun (fun μ => MeasureTheory.Measure.real μ s) at h
+  rw [measureReal_add_apply, measureReal_add_apply,
+    withDensity_real_setIntegral T ha g hg0 _ hs, withDensity_real_setIntegral T ha g hg0 _ hs] at h
+  linarith
+
 /-! ### The `f`-weighted quadratic form `q_f(z) := ∫ f dμ_z` (toward `Φ(f)`)
 
 To build the bounded Borel functional calculus `Φ(f)` (with `Φ(𝟙_s)=E(s)`, `Φ(continuous)=cfcHom`)
