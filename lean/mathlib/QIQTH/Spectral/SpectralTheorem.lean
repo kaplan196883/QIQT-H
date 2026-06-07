@@ -44,7 +44,7 @@ import Mathlib.Tactic
 
 namespace QIQTH.SpectralTheorem
 
-open scoped ComplexInnerProductSpace CompactlySupported
+open scoped ComplexInnerProductSpace CompactlySupported NNReal ENNReal
 
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 
@@ -179,5 +179,48 @@ theorem specMeasure_real_le (ha : IsSelfAdjoint T) (z : H) (B : Set (spectrum �
     (specMeasure T ha z).real B ≤ ‖z‖ ^ 2 := by
   rw [← specMeasure_real_univ T ha z]
   exact MeasureTheory.measureReal_mono (Set.subset_univ B)
+
+/-! ### Polarized-measure layer (toward the spectral projection `E(B)`)
+
+The scalar measures are determined by their `C_c`-integrals (`μ` is regular, being finite on a
+compact metric space), so algebraic identities for the quadratic form `z ↦ re ⟪z, f(T) z⟫`
+transport to identities between the *positive* measures `μ_z` via Riesz–Markov uniqueness
+(`Measure.ext_of_integral_eq_on_compactlySupported`).  These are the load-bearing identities
+that make the polarized form `(x,y) ↦ μ_{x,y}(B)` sesquilinear — bypassing the need for any
+complex-measure API. -/
+
+open RCLike MeasureTheory in
+/-- **Scaling law** of the scalar spectral measure: `μ_{c•x} = ‖c‖² · μ_x`. -/
+theorem specMeasure_smul (ha : IsSelfAdjoint T) (c : ℂ) (x : H) :
+    specMeasure T ha (c • x) = (‖c‖₊ ^ 2 : ℝ≥0∞) • specMeasure T ha x := by
+  haveI : IsFiniteMeasure ((‖c‖₊ ^ 2 : ℝ≥0∞) • specMeasure T ha x) :=
+    Measure.smul_finite _ (by simp)
+  apply Measure.ext_of_integral_eq_on_compactlySupported
+  intro f
+  rw [integral_specMeasure, integral_smul_measure, integral_specMeasure, smul_eq_mul,
+    map_smul, inner_smul_left, inner_smul_right, ← mul_assoc, RCLike.conj_mul,
+    ← RCLike.ofReal_pow, RCLike.re_ofReal_mul]
+  congr 1
+
+open RCLike MeasureTheory in
+/-- **Parallelogram law** of the scalar spectral measure:
+    `μ_{x+y} + μ_{x−y} = 2·μ_x + 2·μ_y` (the cross terms of the quadratic form cancel).
+    Holds for any operator; the engine for sesquilinearity of the polarized form. -/
+theorem specMeasure_parallelogram (ha : IsSelfAdjoint T) (x y : H) :
+    specMeasure T ha (x + y) + specMeasure T ha (x - y)
+      = (2 : ℝ≥0∞) • specMeasure T ha x + (2 : ℝ≥0∞) • specMeasure T ha y := by
+  haveI : IsFiniteMeasure ((2 : ℝ≥0∞) • specMeasure T ha x) := Measure.smul_finite _ (by simp)
+  haveI : IsFiniteMeasure ((2 : ℝ≥0∞) • specMeasure T ha y) := Measure.smul_finite _ (by simp)
+  apply Measure.ext_of_integral_eq_on_compactlySupported
+  intro f
+  rw [integral_add_measure (CompactlySupportedContinuousMap.integrable f)
+        (CompactlySupportedContinuousMap.integrable f),
+      integral_add_measure (CompactlySupportedContinuousMap.integrable f)
+        (CompactlySupportedContinuousMap.integrable f),
+      integral_smul_measure, integral_smul_measure,
+      integral_specMeasure, integral_specMeasure, integral_specMeasure, integral_specMeasure]
+  simp only [ENNReal.toReal_ofNat, smul_eq_mul, map_add, map_sub, inner_add_left,
+    inner_add_right, inner_sub_left, inner_sub_right]
+  ring
 
 end QIQTH.SpectralTheorem

@@ -607,6 +607,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SpectralTheorem.specMeasure_real_le
 -- expected: standard only — per-set bound μ_z(B) ≤ ‖z‖² (monotone vs total mass); feeds the
 -- operator-norm bound on the spectral projections E(B).
+#print axioms QIQTH.SpectralTheorem.specMeasure_smul
+-- expected: standard only — scaling law μ_{c•x} = ‖c‖²·μ_x (positive-measure identity via
+-- Riesz–Markov uniqueness Measure.ext_of_integral_eq_on_compactlySupported).
+#print axioms QIQTH.SpectralTheorem.specMeasure_parallelogram
+-- expected: standard only — parallelogram law μ_{x+y}+μ_{x−y} = 2μ_x+2μ_y (cross terms cancel);
+-- the engine for sesquilinearity of the polarized form (x,y)↦μ_{x,y}(B) toward E(B).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
