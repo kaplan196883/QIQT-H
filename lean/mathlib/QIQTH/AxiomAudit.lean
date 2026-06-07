@@ -632,6 +632,11 @@ namespace QIQTH.AxiomAudit
 -- quadratic t↦q_s(u+t•v) is ≥0 on ℚ (ℚ-homog via bundled AddMonoidHom + map_ratCast_smul),
 -- hence on ℝ (Rat.denseRange_cast.induction_on), so discrim ≤ 0 (discrim_le_zero). The keystone
 -- delivering boundedness → continuity → ℝ-linearity → the spectral projection E(B).
+#print axioms QIQTH.SpectralTheorem.bForm_abs_le
+-- expected: standard only — boundedness |b_s(u,v)| ≤ ‖u‖·‖v‖ (CS + q_s(z)≤‖z‖²).
+#print axioms QIQTH.SpectralTheorem.bForm_real_smul_right
+-- expected: standard only — ℝ-homogeneity b_s(u,r•v)=r·b_s(u,v) (continuity + map_real_smul);
+-- the Jordan–von Neumann analytic step, now discharged.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

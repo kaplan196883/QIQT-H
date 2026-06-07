@@ -383,4 +383,39 @@ lemma bForm_sq_le (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u v : H) :
   unfold discrim at hd
   nlinarith [hd]
 
+/-- `b_s` is subtractive in its right argument. -/
+lemma bForm_sub_right (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u v w : H) :
+    bForm T ha s u (v - w) = bForm T ha s u v - bForm T ha s u w := by
+  have h : bForm T ha s u v = bForm T ha s u (v - w) + bForm T ha s u w := by
+    rw [← bForm_add_right, sub_add_cancel]
+  linarith
+
+/-- **Boundedness** of the spectral form: `|b_s(u,v)| ≤ ‖u‖·‖v‖` (from Cauchy–Schwarz and
+    `q_s(z) ≤ ‖z‖²`). -/
+lemma bForm_abs_le (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u v : H) :
+    |bForm T ha s u v| ≤ ‖u‖ * ‖v‖ := by
+  have hcs := bForm_sq_le T ha s u v
+  have hu : qForm T ha s u ≤ ‖u‖ ^ 2 := specMeasure_real_le T ha u s
+  have hv : qForm T ha s v ≤ ‖v‖ ^ 2 := specMeasure_real_le T ha v s
+  have h2 : bForm T ha s u v ^ 2 ≤ (‖u‖ * ‖v‖) ^ 2 := by
+    nlinarith [hcs, hu, hv, qForm_nonneg T ha s u, qForm_nonneg T ha s v,
+      norm_nonneg u, norm_nonneg v]
+  rw [← Real.sqrt_sq_eq_abs]
+  calc Real.sqrt (bForm T ha s u v ^ 2) ≤ Real.sqrt ((‖u‖ * ‖v‖) ^ 2) := Real.sqrt_le_sqrt h2
+    _ = ‖u‖ * ‖v‖ := Real.sqrt_sq (by positivity)
+
+/-- `b_s(u, ·)` is continuous (Lipschitz with constant `‖u‖`). -/
+lemma bForm_continuous_right (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u : H) :
+    Continuous (fun v => bForm T ha s u v) := by
+  refine LipschitzWith.continuous (K := ‖u‖₊) (LipschitzWith.of_dist_le_mul fun v w => ?_)
+  rw [Real.dist_eq, ← bForm_sub_right]
+  refine (bForm_abs_le T ha s u (v - w)).trans ?_
+  rw [coe_nnnorm, dist_eq_norm]
+
+/-- **ℝ-homogeneity** of `b_s(u, ·)` (continuity + `map_real_smul`). -/
+lemma bForm_real_smul_right (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u : H)
+    (r : ℝ) (v : H) : bForm T ha s u (r • v) = r * bForm T ha s u v := by
+  have h := map_real_smul (bFormRight T ha s u) (bForm_continuous_right T ha s u) r v
+  simpa [bFormRight, smul_eq_mul] using h
+
 end QIQTH.SpectralTheorem
