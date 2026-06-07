@@ -831,6 +831,34 @@ lemma inner_cfcHom_mul (ha : IsSelfAdjoint T) (g h : C(spectrum ℝ T, ℝ)) (x 
   rw [show (⟪cfcHom ha g x, cfcHom ha h y⟫ : ℂ) = ⟪x, cfcHom ha g (cfcHom ha h y)⟫
         from hsym x _, ← ContinuousLinearMap.mul_apply, ← map_mul]
 
+open RCLike MeasureTheory in
+/-- Bridge: the scalar-measure integral of a *continuous* `h` is `re ⟪z, h(T) z⟫` (the `C_c`
+    version `integral_specMeasure` specialised via `HasCompactSupport.of_compactSpace`). -/
+lemma integral_specMeasure_cont (ha : IsSelfAdjoint T) (z : H) (h : C(spectrum ℝ T, ℝ)) :
+    ∫ ω, h ω ∂(specMeasure T ha z) = re ⟪z, cfcHom ha h z⟫ := by
+  have hk := integral_specMeasure T ha z ⟨h, HasCompactSupport.of_compactSpace h⟩
+  simpa using hk
+
+open RCLike MeasureTheory in
+/-- **Off-diagonal engine** (integral form): for continuous `g, h` and any vectors `x, v`,
+    `(∫h dμ_{g(T)x+v} − ∫h dμ_{g(T)x−v}) = (∫(h·g) dμ_{x+v} − ∫(h·g) dμ_{x−v})`.
+    Both sides equal `4·re⟪x, (h·g)(T) v⟫` (polarization + `inner_cfcHom_mul`). -/
+lemma specMeasure_engine (ha : IsSelfAdjoint T) (g h : C(spectrum ℝ T, ℝ)) (x v : H) :
+    (∫ ω, h ω ∂(specMeasure T ha (cfcHom ha g x + v)))
+        - (∫ ω, h ω ∂(specMeasure T ha (cfcHom ha g x - v)))
+      = (∫ ω, (h * g) ω ∂(specMeasure T ha (x + v)))
+        - (∫ ω, (h * g) ω ∂(specMeasure T ha (x - v))) := by
+  have key1 : (⟪cfcHom ha g x, cfcHom ha h v⟫ : ℂ) = ⟪x, cfcHom ha (h * g) v⟫ := by
+    rw [inner_cfcHom_mul, mul_comm g h]
+  have key2 : cfcHom ha h (cfcHom ha g x) = cfcHom ha (h * g) x := by
+    rw [← ContinuousLinearMap.mul_apply, ← map_mul, mul_comm h g]
+  rw [integral_specMeasure_cont, integral_specMeasure_cont, integral_specMeasure_cont,
+    integral_specMeasure_cont]
+  simp only [map_add, map_sub, key2, ContinuousLinearMap.add_apply, ContinuousLinearMap.sub_apply,
+    inner_add_left, inner_add_right, inner_sub_left, inner_sub_right]
+  rw [key1]
+  ring
+
 /-! ### The `f`-weighted quadratic form `q_f(z) := ∫ f dμ_z` (toward `Φ(f)`)
 
 To build the bounded Borel functional calculus `Φ(f)` (with `Φ(𝟙_s)=E(s)`, `Φ(continuous)=cfcHom`)

@@ -694,6 +694,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SpectralTheorem.inner_cfcHom_mul
 -- expected: standard only — ⟪g(T)x,h(T)y⟫=⟪x,(g·h)(T)y⟫ (self-adj + cfcHom algebra hom). The clean
 -- engine for the DIRECT E_inter route (off-diagonal identity ν_{g(T)x,y}=g·ν_{x,y}, no Φ/monotone class).
+#print axioms QIQTH.SpectralTheorem.integral_specMeasure_cont
+-- expected: standard only — ∫ h dμ_z = re⟪z, h(T)z⟫ for continuous h (C_c bridge on compact spectrum).
+#print axioms QIQTH.SpectralTheorem.specMeasure_engine
+-- expected: standard only — off-diagonal engine: ∫h dμ_{g(T)x+v}−∫h dμ_{g(T)x−v} = ∫(h·g)dμ_{x+v}−
+-- ∫(h·g)dμ_{x−v} (both = 4·re⟪x,(h·g)(T)v⟫). The integral form of ν_{g(T)x,y}=g·ν_{x,y}; crux of E_inter.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
