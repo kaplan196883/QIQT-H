@@ -672,6 +672,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — E(s) ≤ 1 (1−E(s) positive; re⟪(1−E(s))x,x⟫=‖x‖²−q_s(x)≥0).
 #print axioms QIQTH.SpectralTheorem.norm_specProj_sq_le
 -- expected: standard only — effect estimate ‖E(s)x‖²≤q_s(x) (E(s)²≤E(s) via Commute.mul_nonneg).
+#print axioms QIQTH.SpectralTheorem.specProj_finset_sum
+-- expected: standard only — finite Finset additivity ∑_{n∈F} E(A n) = E(⋃_{n∈F} A n) (induction
+-- on F via specProj_union_disjoint). The base for σ-additivity (norm-tail + effect estimate).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

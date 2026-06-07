@@ -723,4 +723,21 @@ lemma norm_specProj_sq_le (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x :
   rw [hAA, ← ContinuousLinearMap.reApplyInnerSelf_apply, reApplyInnerSelf_specProj] at key
   linarith
 
+/-- Finite (`Finset`) additivity of the spectral projection over pairwise-disjoint measurable
+    sets: `∑ n ∈ F, E(A n) = E(⋃ n ∈ F, A n)`. -/
+lemma specProj_finset_sum (ha : IsSelfAdjoint T) {A : ℕ → Set (spectrum ℝ T)}
+    (hm : ∀ n, MeasurableSet (A n)) (hd : Pairwise (fun m n => Disjoint (A m) (A n)))
+    (F : Finset ℕ) :
+    ∑ n ∈ F, specProj T ha (A n) = specProj T ha (⋃ n ∈ F, A n) := by
+  induction F using Finset.induction with
+  | empty => simp [specProj_empty]
+  | @insert a F haF ih =>
+    have hdisj : Disjoint (A a) (⋃ n ∈ F, A n) := by
+      simp only [Set.disjoint_iUnion_right]
+      exact fun n hn => hd (fun h => haF (h ▸ hn))
+    have hmu : MeasurableSet (⋃ n ∈ F, A n) :=
+      MeasurableSet.biUnion F.countable_toSet (fun n _ => hm n)
+    rw [Finset.sum_insert haF, ih, Finset.set_biUnion_insert,
+      specProj_union_disjoint T ha hdisj hmu]
+
 end QIQTH.SpectralTheorem
