@@ -188,6 +188,25 @@ noncomputable def rvdPmQ (S : StandardSubspace H) : H →L[ℝ] H := projK S - p
 theorem rvdPmQ_isSelfAdjoint (S : StandardSubspace H) : IsSelfAdjoint (rvdPmQ S) :=
   (projK_isSelfAdjoint S).sub (projIK_isSelfAdjoint S)
 
+/-- **RvD upper bound `R ≤ 2`** (operator form): `2·1 − R` is positive.  With `rvdR_isPositive`
+    (`0 ≤ R`) this is the complete RvD bound `0 ≤ R ≤ 2` at the operator level — `2 − R` is then also
+    positive, so BOTH `R^{1/2}` and `(2 − R)^{1/2}` exist by the continuous functional calculus, the
+    two factors of the polar decomposition `T = R^{1/2}(2 − R)^{1/2}` (RvD Prop 2.2(2)). -/
+theorem rvdR_le_two (S : StandardSubspace H) :
+    ((2 : ℝ) • (1 : H →L[ℝ] H) - rvdR S).IsPositive := by
+  refine ⟨fun x y => ?_, fun x => ?_⟩
+  · have h := rvdR_inner_symm S x y
+    simp only [ContinuousLinearMap.coe_coe, ContinuousLinearMap.sub_apply,
+      ContinuousLinearMap.smul_apply, ContinuousLinearMap.one_apply, inner_sub_left,
+      inner_sub_right, real_inner_smul_left, real_inner_smul_right]
+    linarith [h]
+  · have hle := rvdR_inner_self_le S x
+    have hxx : (inner ℝ x x : ℝ) = ‖x‖ ^ 2 := real_inner_self_eq_norm_sq x
+    have key : (0 : ℝ) ≤ 2 * ‖x‖ ^ 2 - inner ℝ (rvdR S x) x := by linarith
+    simpa [ContinuousLinearMap.reApplyInnerSelf, ContinuousLinearMap.sub_apply,
+      ContinuousLinearMap.smul_apply, ContinuousLinearMap.one_apply, inner_sub_left,
+      real_inner_smul_left, hxx] using key
+
 /-- **RvD Prop 2.2(2), the `T²` identity:** `(P − Q)² = P + Q − (P·Q + Q·P)`, which
     is exactly `R(2 − R)`.  Pure idempotent algebra (`P² = P`, `Q² = Q`); since
     `J T = P − Q` with `J² = 1`, this is `T² = R(2 − R)`, so `T = R^{1/2}(2 − R)^{1/2}`. -/
