@@ -699,6 +699,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SpectralTheorem.specMeasure_engine
 -- expected: standard only — off-diagonal engine: ∫h dμ_{g(T)x+v}−∫h dμ_{g(T)x−v} = ∫(h·g)dμ_{x+v}−
 -- ∫(h·g)dμ_{x−v} (both = 4·re⟪x,(h·g)(T)v⟫). The integral form of ν_{g(T)x,y}=g·ν_{x,y}; crux of E_inter.
+#print axioms QIQTH.SpectralTheorem.specMeasure_engine_measure
+-- expected: standard only — engine MEASURE form (g≥0): μ_{g(T)x+v}+μ_{x−v}·g = μ_{g(T)x−v}+μ_{x+v}·g
+-- (·g = withDensity(ofReal g)), by Riesz–Markov uniqueness from specMeasure_engine
+-- (integral_withDensity_eq_integral_toReal_smul + isFiniteMeasure_withDensity). E_inter step (a).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

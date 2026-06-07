@@ -859,6 +859,49 @@ lemma specMeasure_engine (ha : IsSelfAdjoint T) (g h : C(spectrum ℝ T, ℝ)) (
   rw [key1]
   ring
 
+open RCLike MeasureTheory in
+/-- **Engine, measure form** (`g ≥ 0`): `μ_{g(T)x+v} + (μ_{x−v}·g) = μ_{g(T)x−v} + (μ_{x+v}·g)`,
+    where `·g` is `withDensity (ENNReal.ofReal ∘ g)`.  Lifts `specMeasure_engine` to a measure
+    identity by Riesz–Markov uniqueness. -/
+lemma specMeasure_engine_measure (ha : IsSelfAdjoint T) (g : C(spectrum ℝ T, ℝ))
+    (hg0 : ∀ ω, 0 ≤ g ω) (x v : H) :
+    specMeasure T ha (cfcHom ha g x + v)
+        + (specMeasure T ha (x - v)).withDensity (fun ω => ENNReal.ofReal (g ω))
+      = specMeasure T ha (cfcHom ha g x - v)
+        + (specMeasure T ha (x + v)).withDensity (fun ω => ENNReal.ofReal (g ω)) := by
+  have hρmeas : Measurable (fun ω => ENNReal.ofReal (g ω)) :=
+    ENNReal.measurable_ofReal.comp g.continuous.measurable
+  have hρlt : ∀ z : H, ∀ᵐ ω ∂(specMeasure T ha z), (fun ω => ENNReal.ofReal (g ω)) ω < ∞ :=
+    fun z => ae_of_all _ fun ω => ENNReal.ofReal_lt_top
+  have hfin : ∀ z : H, (∫⁻ ω, ENNReal.ofReal (g ω) ∂(specMeasure T ha z)) ≠ ∞ := by
+    intro z
+    refine ne_of_lt (lt_of_le_of_lt (lintegral_mono (g := fun _ => ENNReal.ofReal ‖g‖) fun ω => ?_) ?_)
+    · exact ENNReal.ofReal_le_ofReal ((le_abs_self _).trans (g.norm_coe_le_norm ω))
+    · rw [lintegral_const]; exact ENNReal.mul_lt_top ENNReal.ofReal_lt_top (measure_lt_top _ _)
+  haveI : IsFiniteMeasure ((specMeasure T ha (x - v)).withDensity (fun ω => ENNReal.ofReal (g ω))) :=
+    isFiniteMeasure_withDensity (hfin _)
+  haveI : IsFiniteMeasure ((specMeasure T ha (x + v)).withDensity (fun ω => ENNReal.ofReal (g ω))) :=
+    isFiniteMeasure_withDensity (hfin _)
+  apply Measure.ext_of_integral_eq_on_compactlySupported
+  intro f
+  rw [integral_add_measure (CompactlySupportedContinuousMap.integrable f)
+        (CompactlySupportedContinuousMap.integrable f),
+      integral_add_measure (CompactlySupportedContinuousMap.integrable f)
+        (CompactlySupportedContinuousMap.integrable f),
+      integral_withDensity_eq_integral_toReal_smul hρmeas (hρlt _),
+      integral_withDensity_eq_integral_toReal_smul hρmeas (hρlt _)]
+  have hconv : ∀ z : H, ∫ ω, (ENNReal.ofReal (g ω)).toReal • f ω ∂(specMeasure T ha z)
+      = ∫ ω, (f.toContinuousMap * g) ω ∂(specMeasure T ha z) := by
+    intro z
+    refine integral_congr_ae (ae_of_all _ fun ω => ?_)
+    dsimp only
+    rw [ENNReal.toReal_ofReal (hg0 ω), smul_eq_mul]
+    simp [mul_comm]
+  rw [hconv, hconv]
+  have heng := specMeasure_engine T ha g f.toContinuousMap x v
+  simp only [CompactlySupportedContinuousMap.coe_toContinuousMap] at heng ⊢
+  linarith
+
 /-! ### The `f`-weighted quadratic form `q_f(z) := ∫ f dμ_z` (toward `Φ(f)`)
 
 To build the bounded Borel functional calculus `Φ(f)` (with `Φ(𝟙_s)=E(s)`, `Φ(continuous)=cfcHom`)
