@@ -814,6 +814,16 @@ namespace QIQTH.AxiomAudit
 -- variational characterization + mult-by-i is a real-orthogonal isometry.
 #print axioms QIQTH.StandardSubspaceModular.rvdR_smul_I
 -- expected: standard only — R(i·ξ)=i·(Rξ): R=P+Q is ℂ-linear (commutes with mult-by-i).
+-- Rℂ : H→L[ℂ]H — the complex-linear repackaging of R, and its positivity:
+#print axioms QIQTH.StandardSubspaceModular.rvdR_smul_complex
+-- expected: standard only — R(c·x)=c·(Rx) ∀c:ℂ (full ℂ-map_smul, via c=c.re+c.im·i).
+#print axioms QIQTH.StandardSubspaceModular.rvdRC_isSymmetric
+-- expected: standard only — Rℂ complex-symmetric (Re from rvdR_inner_symm, Im via i-twist).
+#print axioms QIQTH.StandardSubspaceModular.rvdRC_isPositive
+-- expected: standard only — Rℂ is a positive operator in the complex C*-algebra H→L[ℂ]H.
+#print axioms QIQTH.StandardSubspaceModular.rvdRC_nonneg
+-- expected: standard only — 0≤Rℂ (Loewner). The hypothesis CFC.sqrt will consume; the sqrt itself
+-- is blocked only on the missing Mathlib instance StarOrderedRing (H→L[ℂ]H) (flagged future work).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

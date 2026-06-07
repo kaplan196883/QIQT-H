@@ -256,6 +256,77 @@ theorem rvdR_smul_I (S : StandardSubspace H) (ξ : H) :
   rw [rvdR_apply, rvdR_apply, projK_smul_I, projIK_smul_I, smul_add]
   abel
 
+/-- **Full ℂ-`map_smul` for `R`**: `R(c·x) = c·(R x)` for every `c : ℂ`.  Decompose
+    `c = c.re + c.im·i`; the real part uses ℝ-linearity, the imaginary part `rvdR_smul_I`. -/
+theorem rvdR_smul_complex (S : StandardSubspace H) (c : ℂ) (x : H) :
+    rvdR S (c • x) = c • rvdR S x := by
+  have hre : ∀ (r : ℝ) (y : H), rvdR S ((r : ℂ) • y) = (r : ℂ) • rvdR S y := fun r y => by
+    rw [Complex.coe_smul, Complex.coe_smul, map_smul]
+  calc rvdR S (c • x)
+      = rvdR S (((c.re : ℂ) + (c.im : ℂ) * Complex.I) • x) := by rw [Complex.re_add_im]
+    _ = rvdR S ((c.re : ℂ) • x) + rvdR S ((c.im : ℂ) • (Complex.I • x)) := by
+          rw [add_smul, mul_smul, map_add]
+    _ = (c.re : ℂ) • rvdR S x + (c.im : ℂ) • (Complex.I • rvdR S x) := by
+          rw [hre, hre, rvdR_smul_I]
+    _ = ((c.re : ℂ) + (c.im : ℂ) * Complex.I) • rvdR S x := by rw [add_smul, mul_smul]
+    _ = c • rvdR S x := by rw [Complex.re_add_im]
+
+/-! ### `Rℂ : H →L[ℂ] H` — the complex-linear repackaging of `R`, and its positivity
+
+`rvdR_smul_I` makes `R` ℂ-linear, so it can be bundled as a genuine `H →L[ℂ] H`.  We transport the
+real symmetry to FULL complex symmetry (`Re` from `rvdR_inner_symm`, `Im` from the same via the
+`i`-twist `⟪a,b⟫.im = −⟪a, i·b⟫_ℝ` and ℂ-linearity) and the positivity, so `Rℂ` is a positive
+operator in the complex C\*-algebra `H →L[ℂ] H` — on which `CFC.sqrt` applies. -/
+
+/-- `R = P + Q` as a genuine **ℂ-linear** continuous operator (same underlying map as `rvdR S`). -/
+noncomputable def rvdRC (S : StandardSubspace H) : H →L[ℂ] H where
+  toFun := rvdR S
+  map_add' := map_add (rvdR S)
+  map_smul' c x := rvdR_smul_complex S c x
+  cont := (rvdR S).continuous
+
+@[simp] theorem rvdRC_apply (S : StandardSubspace H) (x : H) : rvdRC S x = rvdR S x := rfl
+
+/-- The imaginary part of the complex inner product via the `i`-twist:
+    `⟪a, b⟫_ℂ.im = −⟪a, i·b⟫_ℝ` (since `⟪a, i·b⟫ = i·⟪a,b⟫` and `(i·z).re = −z.im`). -/
+private lemma complex_inner_im (a b : H) :
+    (inner ℂ a b).im = -(inner ℝ a (Complex.I • b)) := by
+  show (inner ℂ a b).im = -((inner ℂ a (Complex.I • b)).re)
+  rw [inner_smul_right]
+  simp [Complex.mul_re, Complex.I_re, Complex.I_im]
+
+/-- `Rℂ` is **complex-symmetric**: `⟪Rℂ x, y⟫_ℂ = ⟪x, Rℂ y⟫_ℂ`.  `Re` is `rvdR_inner_symm`; `Im`
+    follows from it via the `i`-twist and ℂ-linearity (`rvdR_smul_I`). -/
+theorem rvdRC_isSymmetric (S : StandardSubspace H) : (rvdRC S).IsSymmetric := by
+  intro x y
+  simp only [ContinuousLinearMap.coe_coe, rvdRC_apply]
+  apply Complex.ext
+  · exact rvdR_inner_symm S x y
+  · rw [complex_inner_im, complex_inner_im]
+    congr 1
+    rw [rvdR_inner_symm, rvdR_smul_I]
+
+/-- **`Rℂ` is a positive operator** in the complex C\*-algebra `H →L[ℂ] H`.  Self-adjoint
+    (`rvdRC_isSymmetric`) with `0 ≤ Re⟪Rℂ x, x⟫ = ⟪R x, x⟫_ℝ` (`rvdR_inner_self_nonneg`).  Hence
+    `0 ≤ Rℂ` in the Loewner order and the continuous functional calculus square root `CFC.sqrt (Rℂ)`
+    — the `R^{1/2}` factor of the Rieffel–Van Daele polar decomposition — is available. -/
+theorem rvdRC_isPositive (S : StandardSubspace H) : (rvdRC S).IsPositive := by
+  refine ⟨rvdRC_isSymmetric S, fun x => ?_⟩
+  rw [ContinuousLinearMap.reApplyInnerSelf, rvdRC_apply]
+  exact rvdR_inner_self_nonneg S x
+
+/-- `0 ≤ Rℂ` in the Loewner order (operator nonnegativity), from `rvdRC_isPositive`.
+
+    This is the maximal honest step toward the RvD square root `R^{1/2}` right now: `Rℂ` is a genuine
+    positive operator, so `R^{1/2} = CFC.sqrt Rℂ` is *mathematically* available — but the Mathlib
+    `CFC.sqrt` requires `StarOrderedRing (H →L[ℂ] H)`, an instance Mathlib has NOT yet established for
+    operator algebras (it is flagged as future work in `InnerProductSpace/Positive.lean`: "when we
+    have `StarOrderedRing (E →L[𝕜] E)`").  So the polar-decomposition factor `R^{1/2}` is blocked on
+    that single missing instance, not on our construction; `rvdRC_isPositive`/`rvdRC_nonneg` is
+    exactly the hypothesis the square root will consume once it lands. -/
+theorem rvdRC_nonneg (S : StandardSubspace H) : 0 ≤ rvdRC S :=
+  (ContinuousLinearMap.nonneg_iff_isPositive _).mpr (rvdRC_isPositive S)
+
 /-- **RvD `P − Q`** — the self-adjoint operator whose polar decomposition `JT = P − Q`
     (RvD Definition 2.1) yields the modular conjugation `J` and the positive `T`. -/
 noncomputable def rvdPmQ (S : StandardSubspace H) : H →L[ℝ] H := projK S - projIK S
