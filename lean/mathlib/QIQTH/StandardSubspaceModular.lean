@@ -180,6 +180,82 @@ theorem rvdR_isPositive (S : StandardSubspace H) : (rvdR S).IsPositive := by
   · exact rvdR_inner_symm S x y
   · simpa [ContinuousLinearMap.reApplyInnerSelf] using rvdR_inner_self_nonneg S x
 
+/-! ### ℂ-linearity of `R = P + Q` (the gateway to the complex CFC square root)
+
+Although `P, Q` are only ℝ-linear, `R = P + Q` is genuinely **ℂ-linear**: it commutes with
+multiplication by `i`.  The geometric core is the conjugation identity `Q(i·ξ) = i·(P ξ)` — i.e.
+`Q = J·P·J⁻¹` with `J = ` mult-by-`i` (`projIK_smul_I`), proved from the variational
+characterization of the orthogonal projection (`eq_starProjection_of_mem_of_inner_eq_zero`) using
+that mult-by-`i` is a real-orthogonal isometry.  From it, `P(i·ξ) = i·(Q ξ)` and
+`R(i·ξ) = i·(R ξ)` follow by pure algebra.  This is what lets `R` be repackaged as
+`Rℂ : H →L[ℂ] H` and fed to the complex `CFC.sqrt` (real CFC being unavailable on `H →L[ℝ] H`). -/
+
+private lemma smul_I_mem_mulI {S : StandardSubspace H} {x : H}
+    (hx : x ∈ S.toClosedSubmodule) : Complex.I • x ∈ S.toClosedSubmodule.mulI := by
+  rw [mem_mapEquiv_iff]
+  have h : (scalarSMulCLE H Complex.UnitI).symm (Complex.I • x) = x := by
+    have hx' : Complex.I • x = scalarSMulCLE H Complex.UnitI x := by
+      rw [scalarSMulCLE_apply, Units.smul_def, show (↑Complex.UnitI : ℂ) = Complex.I from rfl]
+    rw [hx', ContinuousLinearEquiv.symm_apply_apply]
+  rw [h]; exact hx
+
+private lemma neg_I_smul_mem_of_mem_mulI {S : StandardSubspace H} {w : H}
+    (hw : w ∈ S.toClosedSubmodule.mulI) : (-Complex.I) • w ∈ S.toClosedSubmodule := by
+  rw [mem_mapEquiv_iff] at hw
+  have h : (scalarSMulCLE H Complex.UnitI).symm w = (-Complex.I) • w := by
+    apply (ContinuousLinearEquiv.symm_apply_eq _).mpr
+    rw [scalarSMulCLE_apply, Units.smul_def, show (↑Complex.UnitI : ℂ) = Complex.I from rfl,
+      smul_smul, mul_neg, Complex.I_mul_I, neg_neg, one_smul]
+  rwa [h] at hw
+
+/-- Mult-by-`i` preserves the real inner product: `⟪i·a, i·b⟫_ℝ = ⟪a, b⟫_ℝ`
+    (since `conj(i)·i = 1`). -/
+private lemma real_inner_smul_I (a b : H) :
+    inner ℝ (Complex.I • a) (Complex.I • b) = inner ℝ a b := by
+  show (inner ℂ (Complex.I • a) (Complex.I • b)).re = (inner ℂ a b).re
+  rw [inner_smul_left, inner_smul_right, Complex.conj_I, ← mul_assoc, neg_mul, Complex.I_mul_I,
+    neg_neg, one_mul]
+
+/-- **Conjugation identity (1)**: `Q(i·ξ) = i·(P ξ)` (`projIK = J·projK·J⁻¹`, `J =` mult-by-`i`).
+    Proved by the variational characterization: `i·(P ξ) ∈ i𝒦`, and `i·ξ − i·(P ξ) = i·(ξ − P ξ)`
+    is `⊥ᵣ i𝒦` because mult-by-`i` is an isometry and `ξ − P ξ ⊥ᵣ 𝒦`. -/
+theorem projIK_smul_I (S : StandardSubspace H) (ξ : H) :
+    projIK S (Complex.I • ξ) = Complex.I • projK S ξ := by
+  unfold projIK
+  apply Submodule.eq_starProjection_of_mem_of_inner_eq_zero
+  · rw [mem_toSubmodule_iff]
+    exact smul_I_mem_mulI
+      ((mem_toSubmodule_iff _ _).mp (Submodule.starProjection_apply_mem _ ξ))
+  · intro w hw
+    have hκ : (-Complex.I) • w ∈ S.toClosedSubmodule.toSubmodule := by
+      rw [mem_toSubmodule_iff]
+      exact neg_I_smul_mem_of_mem_mulI ((mem_toSubmodule_iff _ _).mp hw)
+    have hwκ : w = Complex.I • ((-Complex.I) • w) := by
+      rw [smul_smul, mul_neg, Complex.I_mul_I, neg_neg, one_smul]
+    have ho : ξ - projK S ξ ∈ (S.toClosedSubmodule.toSubmodule)ᗮ :=
+      Submodule.sub_starProjection_mem_orthogonal ξ
+    rw [← smul_sub, hwκ, real_inner_smul_I]
+    exact (Submodule.mem_orthogonal' _ _).mp ho _ hκ
+
+/-- **Conjugation identity (2)**: `P(i·ξ) = i·(Q ξ)`.  Algebraic consequence of (1)
+    (`projIK_smul_I`) via `i·(i··) = −·`. -/
+theorem projK_smul_I (S : StandardSubspace H) (ξ : H) :
+    projK S (Complex.I • ξ) = Complex.I • projIK S ξ := by
+  have h := projIK_smul_I S (Complex.I • ξ)
+  rw [smul_smul, Complex.I_mul_I, neg_one_smul, map_neg] at h
+  have h2 : Complex.I • (-projIK S ξ) = Complex.I • (Complex.I • projK S (Complex.I • ξ)) := by
+    rw [h]
+  rw [smul_smul, Complex.I_mul_I, neg_one_smul, smul_neg] at h2
+  exact (neg_injective h2).symm
+
+/-- **`R = P + Q` is ℂ-linear**: `R(i·ξ) = i·(R ξ)`.  Combines the two conjugation identities; this
+    is exactly the commutation with mult-by-`i` that lets `R` be viewed as a complex-linear operator
+    `Rℂ : H →L[ℂ] H`, on which the complex continuous functional calculus (`CFC.sqrt`) applies. -/
+theorem rvdR_smul_I (S : StandardSubspace H) (ξ : H) :
+    rvdR S (Complex.I • ξ) = Complex.I • rvdR S ξ := by
+  rw [rvdR_apply, rvdR_apply, projK_smul_I, projIK_smul_I, smul_add]
+  abel
+
 /-- **RvD `P − Q`** — the self-adjoint operator whose polar decomposition `JT = P − Q`
     (RvD Definition 2.1) yields the modular conjugation `J` and the positive `T`. -/
 noncomputable def rvdPmQ (S : StandardSubspace H) : H →L[ℝ] H := projK S - projIK S

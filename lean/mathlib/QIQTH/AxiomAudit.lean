@@ -808,6 +808,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.rvdR_le_two
 -- expected: standard only — 2·1−R positive (R≤2). With rvdR_isPositive: full RvD bound 0≤R≤2, so
 -- both R^{1/2} and (2−R)^{1/2} exist (the polar-decomposition factors T=R^{1/2}(2−R)^{1/2}).
+-- ℂ-linearity of R (gateway to repackaging R as H→L[ℂ]H for the complex CFC √):
+#print axioms QIQTH.StandardSubspaceModular.projIK_smul_I
+-- expected: standard only — conjugation identity Q(i·ξ)=i·(Pξ) (Q=J·P·J⁻¹, J=mult-by-i), via the
+-- variational characterization + mult-by-i is a real-orthogonal isometry.
+#print axioms QIQTH.StandardSubspaceModular.rvdR_smul_I
+-- expected: standard only — R(i·ξ)=i·(Rξ): R=P+Q is ℂ-linear (commutes with mult-by-i).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
