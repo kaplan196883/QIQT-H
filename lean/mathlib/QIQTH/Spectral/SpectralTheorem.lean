@@ -471,4 +471,17 @@ lemma cForm_I_right (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x y : H) 
   rw [Complex.I_sq]
   ring
 
+/-- **ℂ-homogeneity** of `c_s(x, ·)`: `c_s(x, c•y) = c·c_s(x,y)` (combine ℝ-homogeneity, the
+    i-twist, and additivity, decomposing `c = c.re + c.im·i`). -/
+lemma cForm_smul_right (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x : H) (c : ℂ) (y : H) :
+    cForm T ha s x (c • y) = c * cForm T ha s x y := by
+  have h0 : ((c.re : ℝ) : ℂ) • y + ((c.im : ℝ) : ℂ) • (Complex.I • y) = c • y := by
+    rw [smul_smul, ← add_smul, Complex.re_add_im]
+  have hc : (c.re : ℝ) • y + (c.im : ℝ) • (Complex.I • y) = c • y := by
+    rw [← h0]; congr 1 <;> exact (RCLike.real_smul_eq_coe_smul (K := ℂ) _ _).symm
+  rw [← hc, cForm_add_right, cForm_real_smul_right, cForm_real_smul_right, cForm_I_right]
+  conv_rhs => rw [← Complex.re_add_im c]
+  push_cast
+  ring
+
 end QIQTH.SpectralTheorem

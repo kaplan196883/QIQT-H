@@ -643,6 +643,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — complex form c_s additive in y.
 #print axioms QIQTH.SpectralTheorem.cForm_I_right
 -- expected: standard only — c_s(x,I•y) = i·c_s(x,y); with ℝ-homog+additivity ⟹ ℂ-linear in y.
+#print axioms QIQTH.SpectralTheorem.cForm_smul_right
+-- expected: standard only — ℂ-homogeneity c_s(x,c•y)=c·c_s(x,y) (decompose c=re+im·i; combine
+-- ℝ-homog, the i-twist, additivity). c_s(x,·) is now fully ℂ-linear in y.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
