@@ -18,6 +18,7 @@
 -/
 import Mathlib.Analysis.CStarAlgebra.ContinuousLinearMap
 import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Order
+import Mathlib.Analysis.InnerProductSpace.StarOrder
 import Mathlib.MeasureTheory.Integral.RieszMarkovKakutani.Real
 import Mathlib.Tactic
 
@@ -31,5 +32,23 @@ variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteS
     operator on a complex Hilbert space — `cfc id T = T`.  (Confirms the `cfc` instance
     resolves via `CStarAlgebra (H →L[ℂ] H)`, the entry point for the spectral theorem.) -/
 example (T : H →L[ℂ] H) (_hT : IsSelfAdjoint T) : cfc (id : ℝ → ℝ) T = T := cfc_id ℝ T
+
+/-! ### Scalar spectral measure: the positivity bridge
+
+The scalar spectral measure `μ_x` is the Riesz–Markov measure of the positive linear
+functional `Λ_x : C_c(spectrum ℝ T, ℝ) →ₚ[ℝ] ℝ`, `f ↦ re ⟪x, f(T) x⟫`.  Positivity of
+`Λ_x` is the first ingredient: if `f ≥ 0` on the spectrum, then `f(T) ≥ 0` in the C\*-order
+of `B(H)` (by `cfc_nonneg`), hence `re ⟪x, f(T) x⟫ ≥ 0` (since the C\*-order on `B(H)`
+coincides with the Loewner / `IsPositive` order). -/
+
+open RCLike in
+/-- **Positivity bridge.**  If `f ≥ 0` on the spectrum of `T`, then `re ⟪x, f(T) x⟫ ≥ 0`.
+    This is the positivity of the scalar functional `Λ_x f = re ⟪x, cfc f T x⟫`, the seed of
+    the scalar spectral measure `μ_x`. -/
+theorem re_inner_cfc_nonneg (T : H →L[ℂ] H) (x : H)
+    {f : ℝ → ℝ} (hf : ∀ r ∈ spectrum ℝ T, 0 ≤ f r) :
+    0 ≤ re ⟪x, cfc f T x⟫ :=
+  let hpos : (0 : H →L[ℂ] H) ≤ cfc f T := cfc_nonneg hf
+  ((ContinuousLinearMap.nonneg_iff_isPositive _).mp hpos).re_inner_nonneg_right x
 
 end QIQTH.SpectralTheorem

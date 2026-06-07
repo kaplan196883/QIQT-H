@@ -588,6 +588,12 @@ namespace QIQTH.AxiomAudit
 -- The bounded-Borel functional calculus is a multiplicative (hence unital *-algebra) hom.
 -- Closes Phase 1's multiplicativity; the analytic core unblocking PVM_of_selfAdjoint & Δ^it.
 
+-- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
+#print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
+-- expected: standard only — positivity bridge: f ≥ 0 on spectrum ⟹ 0 ≤ re⟪x, f(T) x⟫.
+-- The positivity of the scalar functional Λ_x f = re⟪x, cfc f T x⟫ seeding μ_x (cfc_nonneg
+-- in the C*-order of B(H), which coincides with the Loewner/IsPositive order).
+
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
 -- expected: standard only — P = orthogonal projection onto 𝒦 is idempotent.
