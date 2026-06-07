@@ -1099,6 +1099,41 @@ theorem re_inner_T_eq_integral (ha : IsSelfAdjoint T) (x : H) :
       from rfl, cfcHom_id] at h
   exact h
 
+/-! ### Layer 2 kickoff — the bounded Borel functional calculus of `T`
+
+With `PVM_of_selfAdjoint` in hand, `PVM.lean`'s `boundedFC` (proved a unital `*`-algebra hom)
+instantiates to the **bounded Borel functional calculus of `T`**: a bounded measurable
+`f : σ(T) → ℂ` (including discontinuous functions like the modular `λ ↦ ((2−λ)/λ)^{it}`) maps to
+an operator `f(T)`, multiplicatively.  This is the gateway to `Δ^{it}` and the continuum modular
+flow that continuous `cfc` cannot reach. -/
+
+/-- The **bounded Borel functional calculus** of a bounded self-adjoint `T`: `f(T)` for bounded
+    measurable `f : σ(T) → ℂ`. -/
+noncomputable def borelFC (ha : IsSelfAdjoint T) {f : spectrum ℝ T → ℂ} (hf : Measurable f)
+    {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ ω, ‖f ω‖ ≤ C) : H →L[ℂ] H :=
+  (PVM_of_selfAdjoint T ha).boundedFC hf hC0 hC
+
+/-- Defining property: `⟪x, f(T) y⟫ = B_f(x,y)` (the polarized scalar-measure form). -/
+theorem inner_borelFC (ha : IsSelfAdjoint T) {f : spectrum ℝ T → ℂ} (hf : Measurable f)
+    {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ ω, ‖f ω‖ ≤ C) (x y : H) :
+    inner ℂ x (borelFC T ha hf hC0 hC y) = (PVM_of_selfAdjoint T ha).bilinDiag f x y :=
+  (PVM_of_selfAdjoint T ha).inner_boundedFC hf hC0 hC x y
+
+/-- **Multiplicativity** of the bounded Borel FC: `(f·g)(T) = f(T)·g(T)`. -/
+theorem borelFC_mul (ha : IsSelfAdjoint T) {f g : spectrum ℝ T → ℂ} {Cf Cg Cp : ℝ}
+    (hf : Measurable f) (hC0f : 0 ≤ Cf) (hCf : ∀ ω, ‖f ω‖ ≤ Cf)
+    (hg : Measurable g) (hC0g : 0 ≤ Cg) (hCg : ∀ ω, ‖g ω‖ ≤ Cg)
+    (hfp : Measurable (fun ω => f ω * g ω)) (hC0p : 0 ≤ Cp) (hCp : ∀ ω, ‖f ω * g ω‖ ≤ Cp) :
+    borelFC T ha hfp hC0p hCp = borelFC T ha hf hC0f hCf * borelFC T ha hg hC0g hCg :=
+  (PVM_of_selfAdjoint T ha).boundedFC_mul hf hC0f hCf hg hC0g hCg hfp hC0p hCp
+
+/-- The bounded Borel FC is **unital**: `(fun _ => 1)(T) = 1`. -/
+theorem borelFC_one (ha : IsSelfAdjoint T) :
+    borelFC T ha (f := fun _ => (1 : ℂ)) measurable_const (norm_nonneg 1) (fun _ => le_rfl)
+      = 1 := by
+  rw [borelFC, (PVM_of_selfAdjoint T ha).boundedFC_const]
+  simp
+
 /-! ### The `f`-weighted quadratic form `q_f(z) := ∫ f dμ_z` (toward `Φ(f)`)
 
 To build the bounded Borel functional calculus `Φ(f)` (with `Φ(𝟙_s)=E(s)`, `Φ(continuous)=cfcHom`)

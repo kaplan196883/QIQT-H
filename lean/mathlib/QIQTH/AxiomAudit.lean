@@ -733,6 +733,13 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — spectral representation (diagonal): ∫_{σ(T)} λ dμ_x(λ) = re⟪x,Tx⟫,
 -- i.e. T = ∫λ dE on the diagonal (T recovered from its PVM). Via integral_specMeasure + cfcHom_id.
 
+-- Layer 2 kickoff: the bounded Borel functional calculus of T (via PVM_of_selfAdjoint)
+#print axioms QIQTH.SpectralTheorem.borelFC_mul
+-- expected: standard only — (f·g)(T)=f(T)·g(T) for bounded measurable f,g (the bounded Borel FC of T
+-- is multiplicative). Instantiates PVM.boundedFC_mul with PVM_of_selfAdjoint. Gateway to Δ^it.
+#print axioms QIQTH.SpectralTheorem.borelFC_one
+-- expected: standard only — bounded Borel FC unital ((fun _=>1)(T)=1).
+
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
 -- expected: standard only — P = orthogonal projection onto 𝒦 is idempotent.
