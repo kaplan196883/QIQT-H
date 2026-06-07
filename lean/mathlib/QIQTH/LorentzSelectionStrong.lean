@@ -346,10 +346,24 @@ theorem pvm_isProbability {P : RecordPresheaf Diam} (B : PVMData P) (D : Diam) :
 
 /- ── H. Measure covariance DERIVED from unitarity (hcov is now a theorem) ── -/
 
+/-  HONEST-SCOPE CAVEAT (2026-06-08, post GPT-5.5-pro review).  What is "derived
+    from unitarity" below is the COVARIANCE OF THE BORN KERNEL `(ψ,E) ↦ ⟨ψ,Eψ⟩`
+    under unitary transport of the state and effects (`born_unitary_invariant`,
+    consumed by `ubornω_covariant` GIVEN the `UnitaryCovariance` transport laws
+    `ψ_cov`/`E_cov`).  This is the *automatic* equivariance of the Born functional
+    — it is NOT, and must not be read as, a derivation that the actuality-selector
+    measure μ over λ MUST be Born, nor does it discharge the Layer-B measure-
+    EQUIVARIANCE premise.  That premise (the Born distribution is dynamically
+    preserved / is the typicality measure) remains an INDEPENDENT, provably-
+    necessary postulate: see `EquivarianceGap` (support-preservation ≠ measure-
+    preservation) and `BornMinimalityTable`.  In short: "covariance of the Born
+    candidate" (here, free) ≠ "the selector law is forced to be Born" (open). -/
+
 /-- **The Born functional is unitary-invariant** — the unconditional core fact:
     `⟨Uψ| U E Uᴴ |Uψ⟩ = ⟨ψ|E|ψ⟩` for `Uᴴ U = 1`.  This is a genuine theorem
-    (no hypotheses beyond unitarity), and it is the engine that lets us DERIVE
-    measure covariance instead of assuming it (`hcov` in the earlier theorems). -/
+    (no hypotheses beyond unitarity).  It lets us derive covariance of the Born
+    KERNEL given unitary transport (see the honest-scope caveat above — this does
+    NOT discharge the Layer-B equivariance premise). -/
 theorem born_unitary_invariant {n : Type*} [Fintype n] [DecidableEq n]
     (U : Matrix n n ℂ) (ψ : n → ℂ) (E : Matrix n n ℂ) (hU : Uᴴ * U = 1) :
     born (U *ᵥ ψ) (U * E * Uᴴ) = born ψ E := by

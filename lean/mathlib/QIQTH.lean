@@ -53,6 +53,9 @@ import QIQTH.BornTypicalityQuantum
 import QIQTH.BornMeasureUniqueness
 -- A1 strengthening: locality discharged from equivariance + local dynamics:
 import QIQTH.MarginalLocality
+-- General bipartite no-signaling for an ARBITRARY (possibly entangled) state — strengthens the
+-- product-state ("toy") no-signaling: the local marginal is independent of the remote POVM choice:
+import QIQTH.NoSignalingGeneral
 -- A6 strengthening: minimality/independence table for Born premises:
 import QIQTH.BornMinimalityTable
 -- A4 strengthening: Chebyshev concentration upgrading Born means to frequencies:

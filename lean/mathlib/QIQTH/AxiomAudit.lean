@@ -230,6 +230,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MarginalLocality.alice_marginal_unchanged_by_bob_dynamics
 -- expected: standard only
 
+-- General bipartite no-signaling for an ARBITRARY (entangled) state (P0 of the GPT-5.5-pro plan)
+#print axioms QIQTH.NoSignalingGeneral.bipartite_no_signaling
+-- expected: standard only — ∑_b tr(ρ(E⊗F_b)) = tr(ρ(E⊗1)); no separability assumption on ρ.
+#print axioms QIQTH.NoSignalingGeneral.local_marginal_indep_remote
+-- expected: standard only — local marginal independent of remote POVM choice (genuine no-signaling).
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation
