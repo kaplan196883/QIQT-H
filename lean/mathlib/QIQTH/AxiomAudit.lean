@@ -740,6 +740,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SpectralTheorem.borelFC_one
 -- expected: standard only — bounded Borel FC unital ((fun _=>1)(T)=1).
 
+-- Layer 2: the continuum one-parameter unitary group U(t)=exp(it·A)=Δ^it (modular flow)
+#print axioms QIQTH.SpectralTheorem.modFlow_add
+-- expected: standard only — one-parameter group law U(s+t)=U(s)·U(t) (commuting exponentials).
+#print axioms QIQTH.SpectralTheorem.modFlow_unitary
+-- expected: standard only — U(t)⋆·U(t)=1 (unitary), from U(t)⋆=U(−t) (star_exp + A self-adjoint).
+-- The continuum modular flow Δ^it generalizing FiniteModularTheory.sigmaDiag to B(H).
+
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem
 -- expected: standard only — P = orthogonal projection onto 𝒦 is idempotent.
