@@ -691,6 +691,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SpectralTheorem.qfForm_add
 -- expected: standard only — additivity engine for q_f. The q-engine for the bounded Borel FC Φ(f):
 -- replacing q_s=∫𝟙_s by q_f=∫f, transferred from the measure identities by integration.
+#print axioms QIQTH.SpectralTheorem.inner_cfcHom_mul
+-- expected: standard only — ⟪g(T)x,h(T)y⟫=⟪x,(g·h)(T)y⟫ (self-adj + cfcHom algebra hom). The clean
+-- engine for the DIRECT E_inter route (off-diagonal identity ν_{g(T)x,y}=g·ν_{x,y}, no Φ/monotone class).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

@@ -820,6 +820,17 @@ lemma inner_cfcHom_conj (ha : IsSelfAdjoint T) (g h : C(spectrum ℝ T, ℝ)) (z
   congr 2
   ring
 
+/-- **`cfcHom`-multiplicativity in the inner product**: `⟪g(T)x, h(T)y⟫ = ⟪x, (g·h)(T)y⟫`
+    (self-adjointness of `g(T)` + `cfcHom` is an algebra hom).  This is the clean engine for the
+    off-diagonal measure identity `ν_{g(T)x,y} = g·ν_{x,y}` that yields `E_inter` directly. -/
+lemma inner_cfcHom_mul (ha : IsSelfAdjoint T) (g h : C(spectrum ℝ T, ℝ)) (x y : H) :
+    inner ℂ (cfcHom ha g x) (cfcHom ha h y) = inner ℂ x (cfcHom ha (g * h) y) := by
+  have hsa : IsSelfAdjoint (cfcHom ha g) := by
+    rw [isSelfAdjoint_iff, ← map_star, star_trivial]
+  have hsym := ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp hsa
+  rw [show (⟪cfcHom ha g x, cfcHom ha h y⟫ : ℂ) = ⟪x, cfcHom ha g (cfcHom ha h y)⟫
+        from hsym x _, ← ContinuousLinearMap.mul_apply, ← map_mul]
+
 /-! ### The `f`-weighted quadratic form `q_f(z) := ∫ f dμ_z` (toward `Φ(f)`)
 
 To build the bounded Borel functional calculus `Φ(f)` (with `Φ(𝟙_s)=E(s)`, `Φ(continuous)=cfcHom`)
