@@ -657,6 +657,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SpectralTheorem.inner_specProj
 -- expected: standard only — defining identity ⟪E(s) x, y⟫ = c_s(x,y). The operator E(s) now
 -- exists; remaining PVM laws (E_univ=1, E_inter, σ-additivity) build on this + the q/b engine.
+#print axioms QIQTH.SpectralTheorem.specProj_empty
+-- expected: standard only — E(∅) = 0.
+#print axioms QIQTH.SpectralTheorem.specProj_isSelfAdjoint
+-- expected: standard only — E(s) self-adjoint (Hermitian symmetry c_s(y,x)conj = c_s(x,y)).
+#print axioms QIQTH.SpectralTheorem.specProj_univ
+-- expected: standard only — E(univ) = 1 (c_univ(x,y)=⟪x,y⟫ via norm polarization + μ_x(univ)=‖x‖²).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

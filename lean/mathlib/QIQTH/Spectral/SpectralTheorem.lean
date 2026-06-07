@@ -583,4 +583,61 @@ lemma inner_specProj (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x y : H)
   rw [specProj, InnerProductSpace.continuousLinearMapOfBilin_apply]
   rfl
 
+/-- `c_∅ = 0`. -/
+lemma cForm_empty (ha : IsSelfAdjoint T) (x y : H) : cForm T ha ∅ x y = 0 := by
+  unfold cForm bForm qForm
+  simp
+
+/-- `E(∅) = 0`. -/
+lemma specProj_empty (ha : IsSelfAdjoint T) : specProj T ha ∅ = 0 := by
+  ext x
+  rw [ContinuousLinearMap.zero_apply, ← inner_self_eq_zero (𝕜 := ℂ), inner_specProj, cForm_empty]
+
+/-- **Hermitian symmetry** of the form: `conj(c_s(y,x)) = c_s(x,y)`. -/
+lemma cForm_hermitian (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x y : H) :
+    (starRingEnd ℂ) (cForm T ha s y x) = cForm T ha s x y := by
+  unfold cForm
+  simp only [map_sub, map_mul, Complex.conj_I, Complex.conj_ofReal]
+  rw [bForm_comm T ha s y x, bForm_comm T ha s y (Complex.I • x), bForm_I_comm]
+  push_cast
+  ring
+
+/-- `E(s)` is self-adjoint. -/
+lemma specProj_isSelfAdjoint (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) :
+    IsSelfAdjoint (specProj T ha s) := by
+  rw [ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric]
+  intro x y
+  simp only [ContinuousLinearMap.coe_coe]
+  rw [inner_specProj, ← inner_conj_symm, inner_specProj, cForm_hermitian]
+
+/-- `q_univ(z) = ‖z‖²`. -/
+lemma qForm_univ (ha : IsSelfAdjoint T) (z : H) :
+    qForm T ha Set.univ z = ‖z‖ ^ 2 := specMeasure_real_univ T ha z
+
+/-- `b_univ(x,y) = re ⟪x,y⟫` (polarization of the norm). -/
+lemma bForm_univ (ha : IsSelfAdjoint T) (x y : H) :
+    bForm T ha Set.univ x y = RCLike.re (inner ℂ x y) := by
+  unfold bForm
+  rw [qForm_univ, qForm_univ, @norm_add_sq ℂ, @norm_sub_sq ℂ]
+  ring
+
+/-- `c_univ(x,y) = ⟪x,y⟫`. -/
+lemma cForm_univ (ha : IsSelfAdjoint T) (x y : H) :
+    cForm T ha Set.univ x y = inner ℂ x y := by
+  unfold cForm
+  rw [bForm_univ, bForm_univ, inner_smul_right,
+    show RCLike.re (inner ℂ x y) = (inner ℂ x y).re from rfl,
+    show RCLike.re (Complex.I * inner ℂ x y) = (Complex.I * inner ℂ x y).re from rfl,
+    Complex.mul_re]
+  simp only [Complex.I_re, Complex.I_im, zero_mul, one_mul, zero_sub]
+  conv_rhs => rw [← Complex.re_add_im (inner ℂ x y)]
+  push_cast
+  ring
+
+/-- `E(univ) = 1`. -/
+lemma specProj_univ (ha : IsSelfAdjoint T) : specProj T ha Set.univ = 1 := by
+  ext x
+  refine ext_inner_right ℂ (fun y => ?_)
+  rw [inner_specProj, cForm_univ, ContinuousLinearMap.one_apply]
+
 end QIQTH.SpectralTheorem
