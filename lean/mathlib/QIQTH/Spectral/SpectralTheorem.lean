@@ -24,16 +24,14 @@
     • `inner_cfcHom_polarization` — the off-diagonal complex bridge: `⟪f(T) x, y⟫` is the
       complex-polarized combination of the scalar integrals `∫ f dμ_z`.
 
-  NEXT (the projection `E(B)`): the subtle step is sesquilinearity of `(x,y) ↦ μ_{x,y}(B)`
-  for fixed Borel `B`.  Because the `rieszMeasure` content is NONLINEAR in the vector, this
-  does NOT follow by polarizing the real measures; it requires UNIQUENESS of the representing
-  (complex) measure (`RealRMK.rieszMeasure_integralPositiveLinearMap`): `f ↦ ⟪x, f(T) y⟫` is
-  sesquilinear, so the representing complex measures combine sesquilinearly, hence so does
-  `μ_{x,y}(B)`.  Then bound (via `specMeasure_real_le`) + `continuousLinearMapOfBilin`
-  (`Analysis/InnerProductSpace/Dual.lean`) gives `E(B)`; multiplicativity (`boundedFC_mul`
-  in `Spectral/PVM.lean`) gives `E(B)²=E(B)`, and assembly gives `ProjectionValuedMeasure`.
-
-  This file begins with a validation that `cfc` fires on a self-adjoint `B(H)` operator.
+  COMPLETE (Layer 1, axiom-free): the spectral projection `specProj` (`E(s)`) is Riesz-represented
+  from the bounded sesquilinear form `c_s` (built via the Cauchy–Schwarz/Jordan–von Neumann
+  kernel `bForm_sq_le`), shown to be a σ-additive normalized POVM, then PROJECTION-valued via
+  `specProj_inter` (`E(s∩t)=E(s)·E(t)`, the bounded-Borel-FC bridge through `cfcHom`
+  multiplicativity + Riesz–Markov uniqueness — no monotone operator convergence needed).
+  `PVM_of_selfAdjoint` assembles the `ProjectionValuedMeasure`; `re_inner_T_eq_integral`
+  recovers `T = ∫ λ dE(λ)` on the diagonal.  This is the keystone unlocking the bounded Borel
+  functional calculus (`Spectral/PVM.lean`), hence `Δ^{it}` and the modular tower.
 -/
 import Mathlib.Analysis.CStarAlgebra.ContinuousLinearMap
 import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Order
