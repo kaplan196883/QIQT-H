@@ -597,6 +597,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — defining property of the scalar spectral measure μ_x (Riesz–Markov):
 -- ∫ f dμ_x = re⟪x, f(T) x⟫.  μ_x := rieszMeasure of the positive functional Λ_x = specPLM;
 -- the scalar half of the bounded spectral theorem PVM_of_selfAdjoint.
+#print axioms QIQTH.SpectralTheorem.specMeasure_real_univ
+-- expected: standard only — total mass μ_x(univ) = ‖x‖² (scalar-level E(univ)=1): 1(T)=1,
+-- re⟪x,x⟫=‖x‖². Uses the constant-1 C_c function (HasCompactSupport.of_compactSpace).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

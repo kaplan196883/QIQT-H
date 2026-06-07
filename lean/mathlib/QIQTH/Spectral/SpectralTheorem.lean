@@ -102,4 +102,23 @@ theorem integral_specMeasure (ha : IsSelfAdjoint T) (x : H) (f : C_c(spectrum �
     ∫ s, f s ∂(specMeasure T ha x) = re ⟪x, cfcHom ha f.toContinuousMap x⟫ :=
   RealRMK.integral_rieszMeasure (specPLM T ha x) f
 
+/-- `μ_x` is a finite measure (the spectrum is compact). -/
+instance (ha : IsSelfAdjoint T) (x : H) :
+    MeasureTheory.IsFiniteMeasure (specMeasure T ha x) := by
+  unfold specMeasure; infer_instance
+
+open RCLike MeasureTheory in
+/-- **Total mass of the scalar spectral measure** — the scalar-level `E(univ) = 1`:
+    `μ_x(univ) = ‖x‖²` (as a real number), since `1(T) = 1` and `re ⟪x, x⟫ = ‖x‖²`. -/
+theorem specMeasure_real_univ (ha : IsSelfAdjoint T) (x : H) :
+    (specMeasure T ha x).real Set.univ = ‖x‖ ^ 2 := by
+  have key := integral_specMeasure T ha x ⟨1, HasCompactSupport.of_compactSpace 1⟩
+  have hint : ∫ s, (⟨1, HasCompactSupport.of_compactSpace 1⟩ : C_c(spectrum ℝ T, ℝ)) s
+      ∂(specMeasure T ha x) = (specMeasure T ha x).real Set.univ := by
+    simp [integral_const]
+  rw [hint] at key
+  rw [key, show ((⟨1, HasCompactSupport.of_compactSpace 1⟩ : C_c(spectrum ℝ T, ℝ)).toContinuousMap)
+        = (1 : C(spectrum ℝ T, ℝ)) from rfl, map_one, ContinuousLinearMap.one_apply,
+      inner_self_eq_norm_sq]
+
 end QIQTH.SpectralTheorem
