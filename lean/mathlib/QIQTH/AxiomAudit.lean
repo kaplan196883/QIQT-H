@@ -637,6 +637,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SpectralTheorem.bForm_real_smul_right
 -- expected: standard only — ℝ-homogeneity b_s(u,r•v)=r·b_s(u,v) (continuity + map_real_smul);
 -- the Jordan–von Neumann analytic step, now discharged.
+#print axioms QIQTH.SpectralTheorem.bForm_I_comm
+-- expected: standard only — i-twist b_s(I•x,y) = −b_s(x,I•y) (from i-invariance of q_s).
+#print axioms QIQTH.SpectralTheorem.cForm_add_right
+-- expected: standard only — complex form c_s additive in y.
+#print axioms QIQTH.SpectralTheorem.cForm_I_right
+-- expected: standard only — c_s(x,I•y) = i·c_s(x,y); with ℝ-homog+additivity ⟹ ℂ-linear in y.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

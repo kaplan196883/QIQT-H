@@ -418,4 +418,57 @@ lemma bForm_real_smul_right (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u
   have h := map_real_smul (bFormRight T ha s u) (bForm_continuous_right T ha s u) r v
   simpa [bFormRight, smul_eq_mul] using h
 
+lemma bForm_neg_right (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u v : H) :
+    bForm T ha s u (-v) = - bForm T ha s u v := by
+  have h := bForm_real_smul_right T ha s u (-1) v
+  simpa using h
+
+/-- `b_s` is invariant under simultaneous multiplication by `i`: `b_s(I•u, I•v) = b_s(u,v)`
+    (from the `i`-invariance `q_s(I•z) = q_s(z)`). -/
+lemma bForm_I_smul (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (u v : H) :
+    bForm T ha s (Complex.I • u) (Complex.I • v) = bForm T ha s u v := by
+  unfold bForm
+  rw [← smul_add, ← smul_sub, qForm_smul, qForm_smul, Complex.norm_I]
+  ring
+
+/-- The `i`-twist: `b_s(I•x, y) = − b_s(x, I•y)`. -/
+lemma bForm_I_comm (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x y : H) :
+    bForm T ha s (Complex.I • x) y = - bForm T ha s x (Complex.I • y) := by
+  have key := bForm_I_smul T ha s x (-(Complex.I • y))
+  rw [show Complex.I • (-(Complex.I • y)) = y by
+        rw [smul_neg, smul_smul, Complex.I_mul_I, neg_one_smul, neg_neg],
+      bForm_neg_right] at key
+  exact key
+
+/-- The complex spectral form `c_s(x,y) = b_s(x,y) − i·b_s(x, I•y)`; its Riesz representation
+    will be the spectral projection `E(s)`, with `⟪E(s) x, y⟫ = c_s(x,y)`. -/
+noncomputable def cForm (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x y : H) : ℂ :=
+  (bForm T ha s x y : ℂ) - Complex.I * (bForm T ha s x (Complex.I • y) : ℂ)
+
+lemma cForm_add_right (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x y z : H) :
+    cForm T ha s x (y + z) = cForm T ha s x y + cForm T ha s x z := by
+  unfold cForm
+  rw [bForm_add_right, smul_add, bForm_add_right]
+  push_cast
+  ring
+
+lemma cForm_real_smul_right (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x : H) (r : ℝ)
+    (y : H) : cForm T ha s x (r • y) = (r : ℂ) * cForm T ha s x y := by
+  unfold cForm
+  rw [bForm_real_smul_right, show Complex.I • (r • y) = r • (Complex.I • y) by
+        rw [smul_comm], bForm_real_smul_right]
+  push_cast
+  ring
+
+/-- The `i`-twist for the complex form: `c_s(x, I•y) = i·c_s(x,y)`. -/
+lemma cForm_I_right (ha : IsSelfAdjoint T) (s : Set (spectrum ℝ T)) (x y : H) :
+    cForm T ha s x (Complex.I • y) = Complex.I * cForm T ha s x y := by
+  unfold cForm
+  rw [show Complex.I • (Complex.I • y) = -y by
+        rw [smul_smul, Complex.I_mul_I, neg_one_smul], bForm_neg_right]
+  push_cast
+  ring_nf
+  rw [Complex.I_sq]
+  ring
+
 end QIQTH.SpectralTheorem
