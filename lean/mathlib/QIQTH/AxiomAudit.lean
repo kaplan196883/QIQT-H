@@ -675,6 +675,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SpectralTheorem.specProj_finset_sum
 -- expected: standard only — finite Finset additivity ∑_{n∈F} E(A n) = E(⋃_{n∈F} A n) (induction
 -- on F via specProj_union_disjoint). The base for σ-additivity (norm-tail + effect estimate).
+#print axioms QIQTH.SpectralTheorem.specProj_hasSum
+-- expected: standard only — σ-ADDITIVITY (strong/SOT): HasSum (E(A n) x) (E(⋃A) x) for disjoint
+-- measurable A. Norm-tail: ‖∑_s E(A n)x − E(⋃A)x‖² ≤ q_{⋃A}(x)−∑_s q_{A n}(x) → 0 (effect
+-- estimate + scalar measure σ-additivity via ENNReal.hasSum_toReal + squeeze_zero). E is now a
+-- complete σ-additive normalized POVM (0≤E(s)≤1, E(∅)=0, E(univ)=1, self-adjoint, σ-additive).
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

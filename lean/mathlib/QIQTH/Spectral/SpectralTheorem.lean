@@ -45,6 +45,7 @@ import Mathlib.Tactic
 namespace QIQTH.SpectralTheorem
 
 open scoped ComplexInnerProductSpace CompactlySupported NNReal ENNReal
+open Filter Topology
 
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 
@@ -739,5 +740,60 @@ lemma specProj_finset_sum (ha : IsSelfAdjoint T) {A : ℕ → Set (spectrum ℝ 
       MeasurableSet.biUnion F.countable_toSet (fun n _ => hm n)
     rw [Finset.sum_insert haF, ih, Finset.set_biUnion_insert,
       specProj_union_disjoint T ha hdisj hmu]
+
+/-- **σ-additivity** of the spectral projection (strong/SOT): for pairwise-disjoint measurable
+    `A`, `HasSum (fun n => E(A n) x) (E(⋃ n, A n) x)`.  Proved by a norm-tail estimate:
+    `‖∑_{n∈s} E(A n) x − E(⋃A) x‖² ≤ q_{(⋃A)∖(⋃_s)}(x) = q_{⋃A}(x) − ∑_{n∈s} q_{A n}(x) → 0`
+    (effect estimate + scalar measure σ-additivity). -/
+lemma specProj_hasSum (ha : IsSelfAdjoint T) {A : ℕ → Set (spectrum ℝ T)}
+    (hm : ∀ n, MeasurableSet (A n)) (hd : Pairwise (fun m n => Disjoint (A m) (A n))) (x : H) :
+    HasSum (fun n => specProj T ha (A n) x) (specProj T ha (⋃ n, A n) x) := by
+  set U := ⋃ n, A n with hU
+  have hmU : MeasurableSet U := MeasurableSet.iUnion hm
+  have hsum_ne : (∑' n, (specMeasure T ha x) (A n)) ≠ ∞ := by
+    rw [← MeasureTheory.measure_iUnion (μ := specMeasure T ha x) hd hm]
+    exact MeasureTheory.measure_ne_top _ _
+  have hval : qForm T ha U x = ∑' n, qForm T ha (A n) x := by
+    show ((specMeasure T ha x) U).toReal = _
+    rw [MeasureTheory.measure_iUnion (μ := specMeasure T ha x) hd hm,
+      ENNReal.tsum_toReal_eq (fun n => MeasureTheory.measure_ne_top _ _)]
+    rfl
+  have hscalar : HasSum (fun n => qForm T ha (A n) x) (qForm T ha U x) := by
+    rw [hval]; exact ENNReal.hasSum_toReal hsum_ne
+  have hbound : ∀ s : Finset ℕ,
+      ‖(∑ n ∈ s, specProj T ha (A n) x) - specProj T ha U x‖
+        ≤ Real.sqrt (qForm T ha U x - ∑ n ∈ s, qForm T ha (A n) x) := by
+    intro s
+    have hsub : (⋃ n ∈ s, A n) ⊆ U :=
+      Set.iUnion_subset fun n => Set.iUnion_subset fun _ => Set.subset_iUnion A n
+    have hms : MeasurableSet (⋃ n ∈ s, A n) :=
+      MeasurableSet.biUnion s.countable_toSet (fun n _ => hm n)
+    have hsumeq : ∑ n ∈ s, specProj T ha (A n) x = specProj T ha (⋃ n ∈ s, A n) x := by
+      rw [← ContinuousLinearMap.sum_apply, specProj_finset_sum T ha hm hd s]
+    have hUeq : specProj T ha U =
+        specProj T ha (⋃ n ∈ s, A n) + specProj T ha (U \ (⋃ n ∈ s, A n)) := by
+      rw [← specProj_union_disjoint T ha Set.disjoint_sdiff_right (hmU.diff hms)]
+      rw [Set.union_diff_cancel hsub]
+    have hdiff : (∑ n ∈ s, specProj T ha (A n) x) - specProj T ha U x
+        = - specProj T ha (U \ (⋃ n ∈ s, A n)) x := by
+      rw [hsumeq, hUeq]; simp
+    have hq : qForm T ha (U \ (⋃ n ∈ s, A n)) x
+        = qForm T ha U x - ∑ n ∈ s, qForm T ha (A n) x := by
+      unfold qForm
+      rw [MeasureTheory.measureReal_diff hsub hms,
+        ← MeasureTheory.measureReal_biUnion_finset (fun m _ n _ hmn => hd hmn) (fun n _ => hm n)]
+    rw [hdiff, norm_neg, ← hq, ← Real.sqrt_sq (norm_nonneg _)]
+    exact Real.sqrt_le_sqrt (norm_specProj_sq_le T ha (U \ (⋃ n ∈ s, A n)) x)
+  have htend0 : Tendsto
+      (fun s : Finset ℕ => Real.sqrt (qForm T ha U x - ∑ n ∈ s, qForm T ha (A n) x))
+      atTop (𝓝 0) := by
+    have h0 : Tendsto (fun s : Finset ℕ => qForm T ha U x - ∑ n ∈ s, qForm T ha (A n) x)
+        atTop (𝓝 0) := by
+      have := (tendsto_const_nhds (x := qForm T ha U x)).sub hscalar
+      simpa using this
+    have := (Real.continuous_sqrt.tendsto 0).comp h0
+    simpa using this
+  refine tendsto_iff_norm_sub_tendsto_zero.mpr ?_
+  exact squeeze_zero (fun s => norm_nonneg _) hbound htend0
 
 end QIQTH.SpectralTheorem
