@@ -56,6 +56,9 @@ import QIQTH.MarginalLocality
 -- General bipartite no-signaling for an ARBITRARY (possibly entangled) state — strengthens the
 -- product-state ("toy") no-signaling: the local marginal is independent of the remote POVM choice:
 import QIQTH.NoSignalingGeneral
+-- P1 of the covariant-μ plan: coarse-graining naturality — the Born measures on a directed system
+-- of measurement contexts are Kolmogorov-consistent (coarse Born = pushforward of fine Born):
+import QIQTH.CoarseGrainNaturality
 -- A6 strengthening: minimality/independence table for Born premises:
 import QIQTH.BornMinimalityTable
 -- A4 strengthening: Chebyshev concentration upgrading Born means to frequencies:

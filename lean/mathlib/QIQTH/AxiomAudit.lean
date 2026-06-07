@@ -236,6 +236,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.NoSignalingGeneral.local_marginal_indep_remote
 -- expected: standard only — local marginal independent of remote POVM choice (genuine no-signaling).
 
+-- P1: coarse-graining naturality — Born measures Kolmogorov-consistent under refinement
+#print axioms QIQTH.CoarseGrainNaturality.born_coarse_grain
+-- expected: standard only — bornW ρ (E a) = (π_* (bornW ρ ∘ E')) a when E a = ∑_{π b=a} E' b.
+#print axioms QIQTH.CoarseGrainNaturality.born_total_coarse
+-- expected: standard only — coarse Born measure sums to the fine one (normalization preserved).
+#print axioms QIQTH.CoarseGrainNaturality.coarse_povm_complete
+-- expected: standard only — a coarse-graining of a POVM is a POVM (∑E=1 preserved).
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation
