@@ -8,6 +8,82 @@ the roadmap is phased so each phase is a usable, axiom-free checkpoint, with the
 next layer's analytic input named as an explicit interface until it is built
 (the project's standard *interface-as-hypothesis* discipline).
 
+---
+
+## ⏱ CURRENT STATUS (2026-06-08) — Phase 1 DONE, Phase 2 core DONE, Track B at the Mathlib frontier
+
+The keystone and the continuum modular flow are **built and machine-checked,
+axiom-free** (`propext, Classical.choice, Quot.sound` only; project axiom budget
+held at **33**). The detailed phase plan below predates this and reads as the
+long-range plan; this section is the authoritative current state.
+
+**Layer 1 — bounded spectral theorem [A] — ✅ COMPLETE** (`QIQTH/Spectral/SpectralTheorem.lean`).
+- `PVM_of_selfAdjoint (T) (ha : IsSelfAdjoint T) : ProjectionValuedMeasure (spectrum ℝ T) H`
+  — every bounded self-adjoint `T : H →L[ℂ] H` induces a genuine σ-additive PVM.
+- `re_inner_T_eq_integral` — the spectral representation `∫ λ dE = T` (`re⟪x,Tx⟫ = ∫λ dμ_x`).
+- Route used (all axiom-free): scalar measures `μ_x = rieszMeasure` of `f ↦ re⟪x, cfcHom f x⟫`;
+  the Jordan–von Neumann / Cauchy–Schwarz analytic kernel (`bForm_sq_le`, provable because
+  `q_s ≥ 0` is a measure); `E(s)` via `continuousLinearMapOfBilin`; σ-additivity by norm-tail;
+  **`E_inter` (`E(s∩t)=E(s)E(t)`) via the DIRECT route** (cfcHom multiplicativity + RMK
+  uniqueness + `withDensity`/`restrict`), which sidesteps the monotone-operator-convergence
+  that Mathlib lacks. *(This is the T1/T2/T3 program of the plan below, now finished.)*
+
+**Layer 2 — continuum modular flow [B core] — ✅ COMPLETE** (same file).
+- `borelFC` — the bounded **Borel** functional calculus of `T` (multiplicative `borelFC_mul`,
+  unital), i.e. the discontinuous functions `λ ↦ λ^{it}` can be applied — the object the plan
+  flags as the real Phase-2 requirement.
+- `modFlow A t = exp(it·A) = Δ^{it}` — strongly-continuous one-parameter **unitary group**
+  (`modFlow_add` group law, `modFlow_unitary`, `modFlow_continuous` = bounded Stone's theorem),
+  with `modFlow_star : U(t)⋆ = U(−t)`.
+- `modAut A t x = U(t)·x·U(−t)` — the modular automorphism **\*-group** (`modAut_comp`,
+  `modAut_mul`, `modAut_star`).
+- **State coupling** (generalizing `FiniteModularTheory.modAut_stateOf_invariant`):
+  `vectorState ξ x = ⟪ξ,xξ⟫`; `modAut_vectorState_invariant` (`ω_ξ∘σ_t = ω_ξ` when `Δ^{it}ξ=ξ`);
+  `modFlow_apply_eq_self_of_generator` (`Aξ=0 ⇒ U(t)ξ=ξ`, the checkable infinitesimal form).
+- **Complex-time / entire-analytic flow**: `modFlowC A z = Δ^{iz}` entire (every element is
+  entire-analytic for the flow — the analytic-element theory that is *free* in the bounded case,
+  hard in the unbounded one); `modDelta A = exp A` with `Δ·exp(−A)=1`; and the imaginary-time
+  identity `modAutC_neg_I : σ_{−i}(x) = Δ·x·Δ⁻¹`.
+
+**Phase 3′ / Track B — RvD bounded modular objects on `StandardSubspace` — ✅ COMPLETE UP TO THE
+ANALYTIC SQUARE ROOT** (`QIQTH/StandardSubspaceModular.lean`).
+- `P,Q,R=P+Q` self-adjoint operators; `rvdR_injective`; `rvdR_isPositive` and `rvdR_le_two`
+  ⟹ the full RvD bound **`0 ≤ R ≤ 2`** at the operator level.
+- **`R` is ℂ-linear** (`rvdR_smul_I`, via the conjugation identity `projIK_smul_I : Q=J·P·J⁻¹`
+  proved from the variational characterization of the projection); repackaged as
+  `rvdRC : H →L[ℂ] H` with **`rvdRC_isPositive` / `rvdRC_nonneg`** (`0 ≤ Rℂ`).
+- **`D = P−Q` is conjugate-linear** (`rvdPmQ_smul_I : D(i·ξ)=−i·Dξ`) — the structural reason the
+  modular conjugation `J` of `J·T=P−Q` is *antiunitary*; plus `(P−Q)²=R(2−R)` (`rvdPmQ_sq`).
+
+### The three live Mathlib-infrastructure walls (honest blockers)
+
+Everything *algebraic/structural* up to the analytic square root is done; the next links each
+need a genuine piece of Mathlib that does not yet exist:
+
+1. **RvD `R^{1/2}` / polar decomposition (Track B).** `CFC.sqrt (rvdRC)` needs
+   `StarOrderedRing (H →L[ℂ] H)`, which **Mathlib has not instantiated** for operator algebras
+   (flagged future work in `InnerProductSpace/Positive.lean`: "when we have `StarOrderedRing
+   (E →L[𝕜] E)`"; only the Loewner `PartialOrder` exists). Proving it is **circular** — its
+   `le_iff` hard direction (`positive ⟹ star S · S`) *is* the operator square root it would
+   unlock; the general `CStarAlgebra.spectralOrderedRing` uses a *different* (non-Loewner) order.
+   `rvdRC_nonneg` is exactly the hypothesis the square root will consume once the instance lands.
+2. **Unbounded self-adjoint operators + abstract Tomita `S` (Phase 3, Route 1).** Needs closed
+   **antilinear** unbounded operators + their polar decomposition — beyond Mathlib's linear
+   `LinearPMap`.
+3. **KMS (Phase 4).** The genuine KMS *identity* `ω(x σ_{−i} y)=ω(yx)` holds only for the *true*
+   modular `Δ` of `(M,Ω)` (Tomita's theorem) — FALSE for an arbitrary generator (verified). It is
+   therefore **not** claimed; `modAutC_neg_I` is the honest analytic infrastructure, gated on the
+   genuine `Δ` (which is gated on wall 1 or 2).
+
+**Net.** We have reached the operator-algebra **infrastructure frontier of Mathlib v4.30**. Further
+breakthroughs require *contributing* one of the three pieces upstream (each an independent
+Mathlib-grade project — the operator square root via Riesz iteration is the highest-leverage, as it
+unblocks Track B and is itself a flagship contribution; note it in turn wants monotone-operator
+convergence, also currently missing). None of these can be faked with a project axiom; the budget
+stays at 33.
+
+---
+
 ## What Mathlib has today (verified, lean4 v4.30 vendored copy)
 
 | Component | Status |

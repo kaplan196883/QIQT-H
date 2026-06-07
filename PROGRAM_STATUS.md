@@ -1,6 +1,9 @@
 # QIQT-H — Program Status: where we are, and what the breakthrough would be
 
-*Living status document. Last updated 2026-06-06, after a multi-round GPT-5.5-pro
+*Living status document. Last updated 2026-06-08 (operator-algebra infrastructure
+note in §2a: bounded spectral theorem + continuum modular flow + RvD standard-subspace
+objects now built & axiom-free, program at the Mathlib frontier). Prior substantive
+revision 2026-06-06, after a multi-round GPT-5.5-pro
 adversarial soundness review that produced a **strategic pivot** (§2a), a new
 axiom-free **capacity-exclusion core** (§3c), and a new axiom-free **finite no-collapse
 Born representation** joining the capacity core to the Born/typicality layer (§3d; full
@@ -86,9 +89,20 @@ quietly distorting the priorities: **the Tomita–Takesaki / Type-III tower is
 infrastructure, not the load-bearing part of "finite Q_max removes the need for
 the collapse postulate."** Type III does not imply finite capacity, and modular
 flow is reversible — neither delivers the single-outcome content. The spectral /
-crossed-product machinery (`QIQTH/Spectral/PVM.lean`, the bounded-Borel functional
-calculus completed this session) is a correct and reusable mathematical home, but
+crossed-product machinery is a correct and reusable mathematical home, but
 it is *not* where the breakthrough claim is discharged.
+
+> **Infrastructure progress note (2026-06-08).** That said, the infrastructure is now
+> substantially built and axiom-free: the **bounded spectral theorem** (`PVM_of_selfAdjoint`,
+> `T=∫λ dE`), the **bounded Borel functional calculus** (`borelFC`), the **continuum modular
+> flow** `Δ^{it}` as a strongly-continuous unitary group with its modular automorphism `*`-group
+> `σ_t`, state-invariance, and the **complex-time/entire-analytic flow** are complete in
+> `QIQTH/Spectral/SpectralTheorem.lean`; the **Rieffel–Van Daele standard-subspace** modular
+> objects are complete up to the analytic square root in `QIQTH/StandardSubspaceModular.lean`
+> (`0≤R≤2`, `R` ℂ-linear/positive `Rℂ`, `D=P−Q` conjugate-linear ⇒ `J` antiunitary). The program
+> has reached the operator-algebra **infrastructure frontier of Mathlib v4.30**; the three live
+> walls (operator square root / `StarOrderedRing (B(H))`, unbounded antilinear Tomita `S`, genuine
+> KMS) are detailed in `TOMITA_TAKESAKI_ROADMAP.md` §"CURRENT STATUS". All axiom-free; budget 33.
 
 The load-bearing content is, instead, the chain **finite-capacity exclusion →
 actuality selector λ → Born/typicality → collapse-as-conditionalization**, plus a
