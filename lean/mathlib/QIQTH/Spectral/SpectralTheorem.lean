@@ -796,4 +796,28 @@ lemma specProj_hasSum (ha : IsSelfAdjoint T) {A : ℕ → Set (spectrum ℝ T)}
   refine tendsto_iff_norm_sub_tendsto_zero.mpr ?_
   exact squeeze_zero (fun s => norm_nonneg _) hbound htend0
 
+/-! ### Toward `E_inter` (the projection property): the `cfcHom`-multiplicativity engine
+
+`E(s∩t) = E(s)·E(t)` is the remaining `ProjectionValuedMeasure` field — the bounded Borel
+functional calculus bridge.  Its non-circular content comes from `cfcHom` being an algebra
+homomorphism, transported to indicators via a (weak/dominated-convergence) monotone-class
+argument.  The core algebraic mechanism is that `g(T)·h(T)·g(T) = (h·g²)(T)`: -/
+
+/-- **`cfcHom`-conjugation engine**: `⟪g(T) z, h(T) (g(T) z)⟫ = ⟪z, (h·g²)(T) z⟫` for continuous
+    real `g, h`.  (Self-adjointness of `g(T)` moves one factor across; `cfcHom`'s multiplicativity
+    collapses `g·h·g = h·g²`.)  This is the seed of the bounded-Borel-FC multiplicativity. -/
+lemma inner_cfcHom_conj (ha : IsSelfAdjoint T) (g h : C(spectrum ℝ T, ℝ)) (z : H) :
+    inner ℂ (cfcHom ha g z) (cfcHom ha h (cfcHom ha g z))
+      = inner ℂ z (cfcHom ha (h * g ^ 2) z) := by
+  have hsa : IsSelfAdjoint (cfcHom ha g) := by
+    rw [isSelfAdjoint_iff, ← map_star, star_trivial]
+  have hsym := ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp hsa
+  rw [show cfcHom ha h (cfcHom ha g z) = cfcHom ha (h * g) z by
+        rw [← ContinuousLinearMap.mul_apply, ← map_mul]]
+  rw [show (⟪cfcHom ha g z, cfcHom ha (h * g) z⟫ : ℂ)
+        = ⟪z, cfcHom ha g (cfcHom ha (h * g) z)⟫ from hsym z _]
+  rw [← ContinuousLinearMap.mul_apply, ← map_mul]
+  congr 2
+  ring
+
 end QIQTH.SpectralTheorem
