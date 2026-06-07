@@ -579,6 +579,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — Φ(⇑φ) = ∑_{y∈φ.range} y·E(φ⁻¹{y}) for a SimpleFunc φ.
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_simpleFunc_mul
 -- expected: standard only — Φ(⇑φ·⇑ψ)=Φ(⇑φ)·Φ(⇑ψ) for SimpleFuncs (multiplicativity, SimpleFunc form).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.tendsto_bilinDiag_of_dominated
+-- expected: standard only — bound-free normality: B_{fₙ}→B_f under bounded ptwise convergence.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_mul_simpleFunc_left
+-- expected: standard only — Stage 1: Φ(⇑φ·g)=Φ(⇑φ)·Φ(g) (SimpleFunc φ, bounded Borel g).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_mul
+-- expected: standard only — ★ KEYSTONE: Φ(f·g)=Φ(f)·Φ(g) for ALL bounded measurable f,g.
+-- The bounded-Borel functional calculus is a multiplicative (hence unital *-algebra) hom.
+-- Closes Phase 1's multiplicativity; the analytic core unblocking PVM_of_selfAdjoint & Δ^it.
 
 -- Phase 3′ (Track B): Rieffel–Van Daele bounded modular construction on StandardSubspace
 #print axioms QIQTH.StandardSubspaceModular.projK_idem

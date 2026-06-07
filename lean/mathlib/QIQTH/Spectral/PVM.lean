@@ -1349,6 +1349,124 @@ theorem tendsto_inner_boundedFC_of_dominated {f : ℕ → Ω → ℂ} {g : Ω �
   exact (((h1.sub h2).add (h3.const_mul Complex.I)).sub
     (h4.const_mul Complex.I)).const_mul (4⁻¹ : ℂ)
 
+/-- Bound-free form of the normality engine: `B_{fₙ}(x,y) → B_f(x,y)` under bounded
+    pointwise convergence (the limit `f` needs no bound — `bilinDiag` carries none).
+    This is the workhorse for the simple→bounded-Borel multiplicativity extension. -/
+theorem tendsto_bilinDiag_of_dominated {f : ℕ → Ω → ℂ} {g : Ω → ℂ} {C : ℝ}
+    (hf : ∀ n, Measurable (f n)) (hfb : ∀ n ω, ‖f n ω‖ ≤ C)
+    (hlim : ∀ ω, Filter.Tendsto (fun n => f n ω) Filter.atTop (nhds (g ω))) (x y : H) :
+    Filter.Tendsto (fun n => P.bilinDiag (f n) x y) Filter.atTop (nhds (P.bilinDiag g x y)) := by
+  simp only [bilinDiag]
+  have h1 := P.tendsto_diagInt_of_dominated hf hfb hlim (x + y)
+  have h2 := P.tendsto_diagInt_of_dominated hf hfb hlim (x - y)
+  have h3 := P.tendsto_diagInt_of_dominated hf hfb hlim (Complex.I • x + y)
+  have h4 := P.tendsto_diagInt_of_dominated hf hfb hlim (Complex.I • x - y)
+  exact (((h1.sub h2).add (h3.const_mul Complex.I)).sub
+    (h4.const_mul Complex.I)).const_mul (4⁻¹ : ℂ)
+
+/- ── The bounded-Borel approximating sequence (via `approxOn`) ───────────────-/
+
+/-- The `approxOn` simple-function sequence for a bounded measurable `f` (base point
+    `0`, set `univ`): `approxSeq f hf n` is a `SimpleFunc`, `→ f` pointwise, with
+    `‖approxSeq f hf n ω‖ ≤ 2‖f ω‖`. -/
+noncomputable def approxSeq (f : Ω → ℂ) (hf : Measurable f) (n : ℕ) :
+    MeasureTheory.SimpleFunc Ω ℂ :=
+  MeasureTheory.SimpleFunc.approxOn f hf Set.univ 0 (Set.mem_univ 0) n
+
+theorem approxSeq_tendsto {f : Ω → ℂ} (hf : Measurable f) (ω : Ω) :
+    Filter.Tendsto (fun n => approxSeq f hf n ω) Filter.atTop (nhds (f ω)) :=
+  MeasureTheory.SimpleFunc.tendsto_approxOn hf (Set.mem_univ 0)
+    (by simp)
+
+theorem approxSeq_norm_le {f : Ω → ℂ} (hf : Measurable f) (n : ℕ) (ω : Ω) :
+    ‖approxSeq f hf n ω‖ ≤ ‖f ω‖ + ‖f ω‖ :=
+  MeasureTheory.SimpleFunc.norm_approxOn_zero_le hf (Set.mem_univ 0) ω n
+
+theorem approxSeq_measurable {f : Ω → ℂ} (hf : Measurable f) (n : ℕ) :
+    Measurable (⇑(approxSeq f hf n)) :=
+  (approxSeq f hf n).measurable
+
+/- ── Multiplicativity capstone: `Φ(f·g) = Φ(f)·Φ(g)` for bounded Borel `f,g` ──-/
+
+/-- **Stage 1 (left simple):** `Φ(⇑φ · g) = Φ(⇑φ)·Φ(g)` for a `SimpleFunc φ` and a
+    bounded measurable `g`.  Approximate `g` by `SimpleFunc`s `gₘ → g` and pass to the
+    weak limit: `⟪x, Φ(φ·gₘ)y⟫ = ⟪Φ(φ)†x, Φ(gₘ)y⟫` (by `boundedFC_simpleFunc_mul`),
+    both sides converge (`tendsto_bilinDiag`), so the limits agree. -/
+theorem boundedFC_mul_simpleFunc_left (φ : MeasureTheory.SimpleFunc Ω ℂ)
+    {g : Ω → ℂ} {Cφ Cg Cp : ℝ}
+    (hfφ : Measurable (⇑φ)) (hC0φ : 0 ≤ Cφ) (hCφ : ∀ ω, ‖φ ω‖ ≤ Cφ)
+    (hg : Measurable g) (hC0g : 0 ≤ Cg) (hCg : ∀ ω, ‖g ω‖ ≤ Cg)
+    (hfp : Measurable (fun ω => φ ω * g ω)) (hC0p : 0 ≤ Cp)
+    (hCp : ∀ ω, ‖φ ω * g ω‖ ≤ Cp) :
+    P.boundedFC hfp hC0p hCp = P.boundedFC hfφ hC0φ hCφ * P.boundedFC hg hC0g hCg := by
+  -- abbreviations for the approximating SimpleFuncs gₘ → g and their bounds
+  have hgm_meas : ∀ m, Measurable (⇑(approxSeq g hg m)) := fun m => approxSeq_measurable hg m
+  have hgm_bd : ∀ m ω, ‖approxSeq g hg m ω‖ ≤ Cg + Cg := fun m ω =>
+    (approxSeq_norm_le hg m ω).trans (add_le_add (hCg ω) (hCg ω))
+  have hgm_lim : ∀ ω, Filter.Tendsto (fun m => approxSeq g hg m ω) Filter.atTop (nhds (g ω)) :=
+    fun ω => approxSeq_tendsto hg ω
+  have hpm_meas : ∀ m, Measurable (fun ω => φ ω * approxSeq g hg m ω) :=
+    fun m => hfφ.mul (hgm_meas m)
+  have hpm_bd : ∀ m ω, ‖φ ω * approxSeq g hg m ω‖ ≤ Cφ * (Cg + Cg) := fun m ω => by
+    rw [norm_mul]; exact mul_le_mul (hCφ ω) (hgm_bd m ω) (norm_nonneg _) hC0φ
+  refine ContinuousLinearMap.ext (fun y => ext_inner_left ℂ (fun x => ?_))
+  rw [P.inner_boundedFC, ContinuousLinearMap.mul_apply,
+      ← ContinuousLinearMap.adjoint_inner_left, P.inner_boundedFC]
+  -- goal: bilinDiag (φ·g) x y = bilinDiag g (Φ(φ)†x) y
+  -- per-m identity: bilinDiag (φ·gₘ) x y = bilinDiag gₘ (Φ(φ)†x) y
+  have hpm : ∀ m, P.bilinDiag (fun ω => φ ω * approxSeq g hg m ω) x y
+      = P.bilinDiag (⇑(approxSeq g hg m))
+          (ContinuousLinearMap.adjoint (P.boundedFC hfφ hC0φ hCφ) x) y := fun m => by
+    rw [← P.inner_boundedFC (hpm_meas m) (mul_nonneg hC0φ (add_nonneg hC0g hC0g)) (hpm_bd m),
+        P.boundedFC_simpleFunc_mul φ (approxSeq g hg m) hfφ hC0φ hCφ
+          (hgm_meas m) (add_nonneg hC0g hC0g) (hgm_bd m)
+          (hpm_meas m) (mul_nonneg hC0φ (add_nonneg hC0g hC0g)) (hpm_bd m),
+        ContinuousLinearMap.mul_apply, ← ContinuousLinearMap.adjoint_inner_left,
+        P.inner_boundedFC]
+  -- two weak limits, joined by uniqueness
+  have tA := P.tendsto_bilinDiag_of_dominated (C := Cφ * (Cg + Cg)) hpm_meas hpm_bd
+    (fun ω => (hgm_lim ω).const_mul (φ ω)) x y
+  have tB := P.tendsto_bilinDiag_of_dominated (C := Cg + Cg) hgm_meas hgm_bd hgm_lim
+    (ContinuousLinearMap.adjoint (P.boundedFC hfφ hC0φ hCφ) x) y
+  exact tendsto_nhds_unique (tA.congr hpm) tB
+
+/-- **MULTIPLICATIVITY OF THE BOUNDED-BOREL FUNCTIONAL CALCULUS** (the keystone):
+    `Φ(f·g) = Φ(f)·Φ(g)` for all bounded measurable `f, g`.  Approximate `f` by
+    `SimpleFunc`s `fₙ → f` and pass to the weak limit, using Stage 1 (left-simple
+    multiplicativity) for each `fₙ`: `⟪x, Φ(fₙ·g)y⟫ = ⟪x, Φ(fₙ)(Φ(g)y)⟫`, both sides
+    converge (`tendsto_bilinDiag`), so the limits agree.  Together with `boundedFC_add`,
+    `boundedFC_smul` and `boundedFC_const`, the FC `Φ : Bᵇ(Ω) → (H →L[ℂ] H)` is a
+    unital `*`-algebra homomorphism. -/
+theorem boundedFC_mul {f g : Ω → ℂ} {Cf Cg Cp : ℝ}
+    (hf : Measurable f) (hC0f : 0 ≤ Cf) (hCf : ∀ ω, ‖f ω‖ ≤ Cf)
+    (hg : Measurable g) (hC0g : 0 ≤ Cg) (hCg : ∀ ω, ‖g ω‖ ≤ Cg)
+    (hfp : Measurable (fun ω => f ω * g ω)) (hC0p : 0 ≤ Cp)
+    (hCp : ∀ ω, ‖f ω * g ω‖ ≤ Cp) :
+    P.boundedFC hfp hC0p hCp = P.boundedFC hf hC0f hCf * P.boundedFC hg hC0g hCg := by
+  have hfn_meas : ∀ n, Measurable (⇑(approxSeq f hf n)) := fun n => approxSeq_measurable hf n
+  have hfn_bd : ∀ n ω, ‖approxSeq f hf n ω‖ ≤ Cf + Cf := fun n ω =>
+    (approxSeq_norm_le hf n ω).trans (add_le_add (hCf ω) (hCf ω))
+  have hfn_lim : ∀ ω, Filter.Tendsto (fun n => approxSeq f hf n ω) Filter.atTop (nhds (f ω)) :=
+    fun ω => approxSeq_tendsto hf ω
+  have hpn_meas : ∀ n, Measurable (fun ω => approxSeq f hf n ω * g ω) :=
+    fun n => (hfn_meas n).mul hg
+  have hpn_bd : ∀ n ω, ‖approxSeq f hf n ω * g ω‖ ≤ (Cf + Cf) * Cg := fun n ω => by
+    rw [norm_mul]; exact mul_le_mul (hfn_bd n ω) (hCg ω) (norm_nonneg _) (add_nonneg hC0f hC0f)
+  refine ContinuousLinearMap.ext (fun y => ext_inner_left ℂ (fun x => ?_))
+  rw [P.inner_boundedFC, ContinuousLinearMap.mul_apply, P.inner_boundedFC]
+  -- goal: bilinDiag (f·g) x y = bilinDiag f x (Φ(g) y)
+  have hpn : ∀ n, P.bilinDiag (fun ω => approxSeq f hf n ω * g ω) x y
+      = P.bilinDiag (⇑(approxSeq f hf n)) x (P.boundedFC hg hC0g hCg y) := fun n => by
+    rw [← P.inner_boundedFC (hpn_meas n) (mul_nonneg (add_nonneg hC0f hC0f) hC0g) (hpn_bd n),
+        P.boundedFC_mul_simpleFunc_left (approxSeq f hf n) (hfn_meas n) (add_nonneg hC0f hC0f)
+          (hfn_bd n) hg hC0g hCg (hpn_meas n) (mul_nonneg (add_nonneg hC0f hC0f) hC0g) (hpn_bd n),
+        ContinuousLinearMap.mul_apply, P.inner_boundedFC]
+  have tA := P.tendsto_bilinDiag_of_dominated (C := (Cf + Cf) * Cg) hpn_meas hpn_bd
+    (fun ω => (hfn_lim ω).mul_const (g ω)) x y
+  have tB := P.tendsto_bilinDiag_of_dominated (C := Cf + Cf) hfn_meas hfn_bd hfn_lim
+    x (P.boundedFC hg hC0g hCg y)
+  exact tendsto_nhds_unique (tA.congr hpn) tB
+
 end ProjectionValuedMeasure
 
 /- ── Phase-1 analytic TARGETS (named, sound on `ProjectionValuedMeasure`) ──
