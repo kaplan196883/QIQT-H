@@ -11,8 +11,27 @@
     • multiplicativity of the bounded-Borel FC is proved (`Spectral/PVM.lean`,
       `boundedFC_mul`), giving the PVM laws.
 
-  Construction (in progress): scalar measure `μ_x := rieszMeasure (f ↦ ⟪x, cfc f x⟫)`
+  Construction roadmap: scalar measure `μ_x := rieszMeasure (f ↦ re ⟪x, cfc f x⟫)`
   → polarize → `E(B)` via the Riesz form → `ProjectionValuedMeasure` laws → `∫ id dE = T`.
+
+  STATUS (scalar foundation COMPLETE, axiom-free):
+    • `re_inner_cfc_nonneg`     — positivity bridge `0 ≤ re ⟪x, f(T) x⟫` for `f ≥ 0`.
+    • `specFunctional`/`specPLM`— the positive functional `Λ_x : C_c(σ(T),ℝ) →ₚ[ℝ] ℝ`.
+    • `specMeasure` (`μ_x`)     — its Riesz–Markov measure, finite, with
+      `integral_specMeasure : ∫ f dμ_x = re ⟪x, f(T) x⟫` and `specMeasure_real_univ`
+      (`μ_x(univ) = ‖x‖²`, scalar-level `E(univ)=1`) and `specMeasure_real_le`
+      (`μ_x(B) ≤ ‖x‖²`).
+    • `inner_cfcHom_polarization` — the off-diagonal complex bridge: `⟪f(T) x, y⟫` is the
+      complex-polarized combination of the scalar integrals `∫ f dμ_z`.
+
+  NEXT (the projection `E(B)`): the subtle step is sesquilinearity of `(x,y) ↦ μ_{x,y}(B)`
+  for fixed Borel `B`.  Because the `rieszMeasure` content is NONLINEAR in the vector, this
+  does NOT follow by polarizing the real measures; it requires UNIQUENESS of the representing
+  (complex) measure (`RealRMK.rieszMeasure_integralPositiveLinearMap`): `f ↦ ⟪x, f(T) y⟫` is
+  sesquilinear, so the representing complex measures combine sesquilinearly, hence so does
+  `μ_{x,y}(B)`.  Then bound (via `specMeasure_real_le`) + `continuousLinearMapOfBilin`
+  (`Analysis/InnerProductSpace/Dual.lean`) gives `E(B)`; multiplicativity (`boundedFC_mul`
+  in `Spectral/PVM.lean`) gives `E(B)²=E(B)`, and assembly gives `ProjectionValuedMeasure`.
 
   This file begins with a validation that `cfc` fires on a self-adjoint `B(H)` operator.
 -/
