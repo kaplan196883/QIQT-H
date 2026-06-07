@@ -223,4 +223,28 @@ theorem specMeasure_parallelogram (ha : IsSelfAdjoint T) (x y : H) :
     inner_add_right, inner_sub_left, inner_sub_right]
   ring
 
+open RCLike MeasureTheory in
+/-- **Additivity engine** (measure level): the second-difference identity
+    `μ_{x+a+b} + μ_{x−a} + μ_{x−b} = μ_{x−a−b} + μ_{x+a} + μ_{x+b}` (both sides expand to
+    `3q(x)+2q(a)+2q(b)+g(a,b)` for the quadratic form `q` and its symmetric bilinear part `g`).
+    Applied with `(a,b)=(y₁,y₂)` and `(a,b)=(I·y₁, I·y₂)` it yields additivity of the polarized
+    spectral form in `y`. -/
+theorem specMeasure_add (ha : IsSelfAdjoint T) (x a b : H) :
+    specMeasure T ha (x + a + b) + specMeasure T ha (x - a) + specMeasure T ha (x - b)
+      = specMeasure T ha (x - a - b) + specMeasure T ha (x + a) + specMeasure T ha (x + b) := by
+  apply Measure.ext_of_integral_eq_on_compactlySupported
+  intro f
+  rw [integral_add_measure (CompactlySupportedContinuousMap.integrable f)
+        (CompactlySupportedContinuousMap.integrable f),
+      integral_add_measure (CompactlySupportedContinuousMap.integrable f)
+        (CompactlySupportedContinuousMap.integrable f),
+      integral_add_measure (CompactlySupportedContinuousMap.integrable f)
+        (CompactlySupportedContinuousMap.integrable f),
+      integral_add_measure (CompactlySupportedContinuousMap.integrable f)
+        (CompactlySupportedContinuousMap.integrable f),
+      integral_specMeasure, integral_specMeasure, integral_specMeasure,
+      integral_specMeasure, integral_specMeasure, integral_specMeasure]
+  simp only [map_add, map_sub, inner_add_left, inner_add_right, inner_sub_left, inner_sub_right]
+  ring
+
 end QIQTH.SpectralTheorem
