@@ -424,6 +424,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.weyl_microcausality
 -- expected: standard only — W(u)∘W(v) = W(v)∘W(u) when Im⟪u,v⟫=0 (symplectic orthogonality, as
 -- spacelike-separated smearings give): spacelike Weyl observables COMMUTE — Einstein causality.
+-- Stage 1.1 (measure prize): the Weyl-bit norm-square Born law (positivity free, normalization).
+#print axioms QIQTH.Fock.bit_normSq_sum
+-- expected: standard only — ‖A(u,1)ψ‖²+‖A(u,−1)ψ‖²=‖ψ‖² (parallelogram + W isometric): the normalization
+-- engine. A(u,s)=(I+s·W(u))/2, the Weyl bit; E(u,s)=A(u,s)*A(u,s) so Born weights are norm-squares (≥0 free).
+#print axioms QIQTH.Fock.two_bit_normalization
+-- expected: standard only — the four two-bit Weyl-bit Born weights sum to 1 (a probability distribution).
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

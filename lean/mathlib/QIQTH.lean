@@ -213,3 +213,4 @@ import QIQTH.Fock.SecondQuant
 import QIQTH.Fock.WeylOp
 import QIQTH.Fock.WeylCovariance
 import QIQTH.Fock.WeylCCR
+import QIQTH.Fock.WeylBit
