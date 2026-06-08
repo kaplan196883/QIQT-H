@@ -62,4 +62,12 @@ theorem weylCoeff_vacuum_isometry_invariant (A : H →ₗᵢ[ℂ] H) (u : H) :
     weylCoeff (A u) (0 : H) = weylCoeff u (0 : H) := by
   rw [weylCoeff_vacuum, weylCoeff_vacuum, A.inner_map_map]
 
+/-- **`weylCoeff` is invariant under any one-particle isometry**: `weylCoeff (A u) (A v) = weylCoeff u v`
+    (it depends only on `⟪u,u⟫` and `⟪u,v⟫`, which `A` preserves).  The engine of boost-covariance of
+    every vacuum Weyl correlation. -/
+theorem weylCoeff_isometry_invariant (A : H →ₗᵢ[ℂ] H) (u v : H) :
+    weylCoeff (A u) (A v) = weylCoeff u v := by
+  unfold weylCoeff
+  rw [A.inner_map_map, A.inner_map_map]
+
 end QIQTH.Fock.Weyl

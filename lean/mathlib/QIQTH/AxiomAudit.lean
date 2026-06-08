@@ -408,6 +408,16 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — W(u) extends to a genuine isometry of the completed Fock Hilbert space.
 #print axioms QIQTH.Fock.fockInner_vacuum_weyl
 -- expected: standard only — ⟪Ω,W(u)Ω⟫ = exp(−½‖u‖²): the quasifree value, as an actual operator m.e.
+-- GPT Increment 2: the first NON-VACUOUS continuum boost-covariance (vacuum two-point Weyl function).
+#print axioms QIQTH.Fock.weyl2pt_eq
+-- expected: standard only — ⟪Ω,W(u)W(v)Ω⟫ = weylCoeff v 0 · weylCoeff u v (depends only on inner products).
+#print axioms QIQTH.Fock.weyl2pt_boost_invariant
+-- expected: standard only — ⟪Ω,W(U₁(t)u)W(U₁(t)v)Ω⟫ = ⟪Ω,W(u)W(v)Ω⟫: the vacuum two-point function is
+-- LORENTZ-BOOST INVARIANT — a genuinely non-vacuous continuum boost-covariance (tests quasifree
+-- correlations, unlike the deterministic typicality net).
+#print axioms QIQTH.Fock.weylBitWeight_mem_Ioo
+-- expected: standard only — the Weyl-bit Born weight (1+exp(−½‖u‖²))/2 ∈ (0,1) for u≠0: the would-be
+-- Weyl-bit POVM is a genuine non-degenerate effect (the non-vacuity the deterministic Fock net lacked).
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
