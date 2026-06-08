@@ -418,6 +418,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.weylBitWeight_mem_Ioo
 -- expected: standard only — the Weyl-bit Born weight (1+exp(−½‖u‖²))/2 ∈ (0,1) for u≠0: the would-be
 -- Weyl-bit POVM is a genuine non-degenerate effect (the non-vacuity the deterministic Fock net lacked).
+-- GPT Increment 3 core: MICROCAUSALITY (locality / no-signaling mechanism of the free field).
+#print axioms QIQTH.Fock.weylPre_comp_expVec
+-- expected: standard only — W(u)W(v) e(g) = c·e(g+v+u) (the composite on a coherent vector).
+#print axioms QIQTH.Fock.weyl_microcausality
+-- expected: standard only — W(u)∘W(v) = W(v)∘W(u) when Im⟪u,v⟫=0 (symplectic orthogonality, as
+-- spacelike-separated smearings give): spacelike Weyl observables COMMUTE — Einstein causality.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
