@@ -390,6 +390,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — Γ(U₁(t)) is an isometry of Fock(L²(ℝ)) (completion of the pre-level boost).
 #print axioms QIQTH.Fock.boostFockH_vacuum
 -- expected: standard only — Γ(U₁(t)) Ω = Ω in the completed Fock Hilbert space.
+-- Boost-invariance of the QUASIFREE VACUUM STATE on the Weyl observables (vacuum covariance).
+#print axioms QIQTH.Fock.Weyl.weylCoeff_vacuum_isometry_invariant
+-- expected: standard only — ⟪Ω,W(A u)Ω⟫ = ⟪Ω,W(u)Ω⟫ for any one-particle isometry A (depends only on ‖u‖²).
+#print axioms QIQTH.Fock.weylCoeff_vacuum_boost_invariant
+-- expected: standard only — ⟪Ω,W(U₁(t)u)Ω⟫ = ⟪Ω,W(u)Ω⟫: the quasifree vacuum state is LORENTZ-BOOST
+-- INVARIANT (the boost preserves ‖u‖) — the physical heart of boost-covariance.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

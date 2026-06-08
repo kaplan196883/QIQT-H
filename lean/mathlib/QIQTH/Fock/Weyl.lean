@@ -54,4 +54,12 @@ theorem weylCoeff_vacuum (u : H) :
   unfold weylCoeff
   simp [inner_zero_left]
 
+/-- **The quasifree vacuum value is invariant under any one-particle isometry**:
+    `⟪Ω, W(A u) Ω⟫ = ⟪Ω, W(u) Ω⟫` for a linear isometry `A`, because the value `exp(−½‖u‖²)` depends
+    only on `⟪u,u⟫`, which `A` preserves.  Specialized to the Lorentz boost `A = U₁(t)` this is the
+    **boost-invariance of the quasifree vacuum state** — the physical statement of vacuum covariance. -/
+theorem weylCoeff_vacuum_isometry_invariant (A : H →ₗᵢ[ℂ] H) (u : H) :
+    weylCoeff (A u) (0 : H) = weylCoeff u (0 : H) := by
+  rw [weylCoeff_vacuum, weylCoeff_vacuum, A.inner_map_map]
+
 end QIQTH.Fock.Weyl

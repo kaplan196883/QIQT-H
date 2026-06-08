@@ -20,6 +20,7 @@
 -/
 import QIQTH.Fock.FockSpace
 import QIQTH.Fock.OneParticle
+import QIQTH.Fock.Weyl
 import Mathlib.Analysis.InnerProductSpace.LinearMap
 import Mathlib.LinearAlgebra.Finsupp.Defs
 import Mathlib.Tactic
@@ -114,5 +115,16 @@ theorem boostFockH_vacuum (t : ℝ) : boostFockH t Fock.vacuum = Fock.vacuum := 
         ((FockPre.expVec 0 : FockPre (Lp ℂ 2 (volume : Measure ℝ))) : Fock _)
       = ((FockPre.expVec 0 : FockPre (Lp ℂ 2 (volume : Measure ℝ))) : Fock _)
   rw [UniformSpace.Completion.map_coe (boostFockₗᵢ t).isometry.uniformContinuous, hΩ]
+
+/-- **Boost-invariance of the quasifree vacuum state** (on the Weyl observables): the vacuum value
+    `⟪Ω, W(U₁(t) u) Ω⟫ = ⟪Ω, W(u) Ω⟫`.  The quasifree vacuum state is **Lorentz-boost invariant** —
+    because the boost preserves the one-particle norm (`‖U₁(t)u‖ = ‖u‖`), so `exp(−½‖u‖²)` is unchanged.
+    This is the physical heart of boost-covariance: the vacuum state of the relativistic free field is
+    Lorentz invariant. -/
+theorem weylCoeff_vacuum_boost_invariant (t : ℝ) (u : Lp ℂ 2 (volume : Measure ℝ)) :
+    Weyl.weylCoeff (QIQTH.Fock.OneParticle.boostUnitary t u) (0 : Lp ℂ 2 (volume : Measure ℝ))
+      = Weyl.weylCoeff u 0 :=
+  Weyl.weylCoeff_vacuum_isometry_invariant
+    (QIQTH.Fock.OneParticle.boostUnitary t).toLinearIsometry u
 
 end QIQTH.Fock
