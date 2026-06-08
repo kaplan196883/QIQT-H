@@ -56,6 +56,18 @@ theorem weylCoeff_adjoint (u g h : H) :
     inner_add_left, inner_sub_right, inner_neg_left, inner_neg_right]
   ring
 
+/-- **Weyl inverse identity** `W(−u) W(u) = I` at the coefficient level:
+    `weylCoeff u g · weylCoeff (−u) (g+u) = 1` (the two exponents cancel).  Hence `W(−u)` is the exact
+    two-sided inverse of `W(u)` (not merely up to a phase), so `W(u)` is unitary AND invertible. -/
+theorem weylCoeff_neg_cancel (u g : H) :
+    weylCoeff u g * weylCoeff (-u) (g + u) = 1 := by
+  unfold weylCoeff
+  rw [← Complex.exp_add]
+  rw [show -(1 / 2 : ℂ) * ⟪u, u⟫_ℂ - ⟪u, g⟫_ℂ
+        + (-(1 / 2 : ℂ) * ⟪-u, -u⟫_ℂ - ⟪-u, g + u⟫_ℂ) = 0 from by
+    simp only [inner_neg_left, inner_neg_right, inner_add_right]; ring]
+  exact Complex.exp_zero
+
 /-- The **quasifree vacuum value**: `W(u)Ω = exp(−½⟪u,u⟫)·e(u)`, so the vacuum expectation is
     `⟪Ω, W(u)Ω⟫ = weylCoeff u 0 = exp(−½‖u‖²)` — the value defining the quasifree state. -/
 theorem weylCoeff_vacuum (u : H) :

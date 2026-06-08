@@ -407,6 +407,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.fockInner_weyl_adjoint
 -- expected: standard only — W(u)* = W(−u): ⟪W(u)φ,ψ⟫=⟪φ,W(−u)ψ⟫ (weylCoeff_adjoint summed). W(u) is
 -- UNITARY (isometry + inverse W(−u)); the keystone for the Weyl-bit effects E(u,s)=A(u,s)*A(u,s).
+#print axioms QIQTH.Fock.weylPre_neg_cancel
+-- expected: standard only — W(−u) W(u) = id (weylCoeff_neg_cancel: the two exponents cancel), so W(−u) is
+-- the EXACT two-sided inverse of W(u) (not up to a phase); W(u) is invertible + unitary.
+#print axioms QIQTH.Fock.effOp_sum_eq_id
+-- expected: standard only — POVM COMPLETENESS E(u,+1)+E(u,−1)=I: {E(u,+1),E(u,−1)} is a genuine
+-- operator-valued POVM (resolution of identity via W(−u)W(u)=I), not just positive effects.
 #print axioms QIQTH.Fock.weylPre_zero
 -- expected: standard only — W(0) = id.
 #print axioms QIQTH.Fock.weylH_isometry

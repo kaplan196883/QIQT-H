@@ -46,6 +46,15 @@ theorem bitOp_adjoint_inner (u : H) (s : ℂ) (φ ψ : FockPre H) :
 /-- The **Weyl-bit EFFECT** `E(u,s) = A(u,s)* A(u,s)` — a positive operator (manifestly `T*T`). -/
 noncomputable def effOp (u : H) (s : ℂ) : FockPre H →ₗ[ℂ] FockPre H := bitAdj u s ∘ₗ bitOp u s
 
+/-- **POVM completeness for the two-outcome Weyl-bit measurement**: `E(u,+1) + E(u,−1) = I`.  Together
+    with positivity (`effOp_nonneg`), `{E(u,+1), E(u,−1)}` is a genuine operator-valued POVM (the resolution
+    of identity uses `W(−u) W(u) = I`, `weylPre_neg_cancel`). -/
+theorem effOp_sum_eq_id (u : H) : effOp u 1 + effOp u (-1) = LinearMap.id := by
+  ext ψ
+  simp only [LinearMap.add_apply, LinearMap.id_apply, effOp, LinearMap.comp_apply, bitAdj_apply,
+    bitOp_apply, map_smul, map_add, weylPre_neg_cancel, map_one, map_neg, smul_add, smul_smul]
+  module
+
 /-- **The Born weight is the expectation of the effect**: `⟪ψ, E(u,s) ψ⟫ = ‖A(u,s) ψ‖²` (real, ≥ 0).
     The norm-square Born weight is literally the quantum expectation value of the positive effect
     `E(u,s) = A(u,s)* A(u,s)` in the state `ψ`. -/

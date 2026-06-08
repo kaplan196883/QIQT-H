@@ -133,3 +133,17 @@ theorem fockInner_weyl_adjoint (u : H) (φ ψ : H →₀ ℂ) :
   have hw := Weyl.weylCoeff_adjoint u g h
   simp only [star_mul', RCLike.star_def, ← sub_eq_add_neg]
   linear_combination (starRingEnd ℂ (φ g) * ψ h) * hw
+
+/-- **`W(−u)` is the exact inverse of `W(u)`**: `W(−u) W(u) = id` (from `weylCoeff_neg_cancel`).  So
+    `W(u)` is invertible (and, with `fockInner_weyl_adjoint`, unitary). -/
+theorem weylPre_neg_cancel (u : H) (ψ : FockPre H) : weylPre (-u) (weylPre u ψ) = ψ := by
+  have key : (weylPre (-u) ∘ₗ weylPre u : FockPre H →ₗ[ℂ] FockPre H) = LinearMap.id := by
+    refine Finsupp.lhom_ext fun g b => ?_
+    show weylPre (-u) (weylPre u (Finsupp.single g b)) = Finsupp.single g b
+    have hb : (Finsupp.single g b : FockPre H) = b • FockPre.expVec g := by
+      show (Finsupp.single g b : H →₀ ℂ) = b • (Finsupp.single g 1 : H →₀ ℂ)
+      rw [Finsupp.smul_single, smul_eq_mul, mul_one]
+    rw [hb, map_smul, map_smul, weylPre_expVec, map_smul, weylPre_expVec,
+      show (g + u) + -u = g from by abel, smul_smul, smul_smul, mul_assoc,
+      Weyl.weylCoeff_neg_cancel u g, mul_one]
+  exact congrFun (congrArg DFunLike.coe key) ψ
