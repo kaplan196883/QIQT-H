@@ -375,6 +375,17 @@ namespace QIQTH.AxiomAudit
 -- σ-additive probability typicality measure μ∞ (via EffectStateNet + the Kolmogorov extension), on the
 -- genuine continuum free-field Fock space.  The continuum analogue of bh_typicalityMeasure_exists.
 
+-- F2-Γ: second quantization Γ(A)e(f)=e(Af) and the Lorentz boost on the Fock space.
+#print axioms QIQTH.Fock.secondQuantPre_expVec
+-- expected: standard only — Γ(A) e(f) = e(A f) (the pushforward Finsupp.mapDomain A).
+#print axioms QIQTH.Fock.fockInner_secondQuant
+-- expected: standard only — Γ(A) preserves the coherent-state inner product (A isometric) → Γ(A) isometric.
+#print axioms QIQTH.Fock.secondQuantPre_comp
+-- expected: standard only — functoriality Γ(A)∘Γ(B) = Γ(A∘B).
+#print axioms QIQTH.Fock.boostFock_vacuum
+-- expected: standard only — VACUUM INVARIANCE Γ(U₁(t))Ω = Ω: the boost fixes the Fock vacuum — the key
+-- input to boost-covariance of μ∞ (the full F6 prize).
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation
