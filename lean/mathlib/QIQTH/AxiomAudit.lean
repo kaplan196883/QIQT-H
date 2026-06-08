@@ -491,6 +491,16 @@ namespace QIQTH.AxiomAudit
 -- typicality measure μ∞ is invariant under U₁(t) (boostUnitary_preserves_isotropy supplies the boosted
 -- microcausality). The typicality measure is the same in every Lorentz frame.
 
+-- B.0: the Weyl-bit EFFECTS — Born weights are genuine vacuum-state POVM expectations.
+#print axioms QIQTH.Fock.bitOp_adjoint_inner
+-- expected: standard only — A(u,s) and A(u,s)*=(I+s̄W(−u))/2 are adjoint (from W(u)*=W(−u)).
+#print axioms QIQTH.Fock.bit_effect_expectation
+-- expected: standard only — ⟪ψ,E(u,s)ψ⟫ = ‖A(u,s)ψ‖²: the norm-square Born weight IS the vacuum/state
+-- expectation of the POSITIVE effect E(u,s)=A(u,s)*A(u,s) (positivity = norm-square, manifestly T*T).
+#print axioms QIQTH.Fock.bornWeight_singleton_eq_effect
+-- expected: standard only — the single-mode Weyl-bit Born weight = ⟪Ω,E(uᵢ,±)Ω⟫, a genuine two-outcome
+-- POVM {E(uᵢ,+1),E(uᵢ,−1)} expectation in the quasifree vacuum (the operational reading of the prize).
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation
