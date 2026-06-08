@@ -271,6 +271,13 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — limit restricts to the product Born marginal at every finite context.
 #print axioms QIQTH.HistoryMeasure.FiniteMarginals.limit_unique
 -- expected: standard only — the projective-limit typicality measure is unique (determined by marginals).
+-- XL Phase A: A3/A4/A5 properties of the history measure μ∞ (conditional on a limit)
+#print axioms QIQTH.HistoryMeasure.isLimit_marginal
+-- expected: standard only — A3: μ∞ restricts to the Born measure at every finite context.
+#print axioms QIQTH.HistoryMeasure.isLimit_marginal_mono
+-- expected: standard only — A5: local marginal = restriction of any larger-context marginal (no-signaling).
+#print axioms QIQTH.HistoryMeasure.isLimit_map_eq
+-- expected: standard only — A4: a marginal-preserving symmetry of the history space is measure-preserving.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

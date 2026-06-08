@@ -82,4 +82,28 @@ theorem productMarginals_isProbabilityMeasure (ν : ∀ i, Measure (α i))
     [∀ i, IsProbabilityMeasure (ν i)] :
     IsProbabilityMeasure (Measure.infinitePi ν) := inferInstance
 
+/-! ### A3/A4/A5 — properties of the typicality measure μ∞ (conditional on a limit; compose with A2b) -/
+
+/-- **A3 — Born marginals at the limit.**  The history measure restricts to the finite Born measure at
+    every context `J` — "Born for every finite decoherent record partition," at the continuum.  (This is
+    the defining property of the projective limit, isolated as the headline statement.) -/
+theorem isLimit_marginal {F : FiniteMarginals α} {μ : Measure (∀ i, α i)} (h : F.IsLimit μ)
+    (J : Finset ι) : μ.map J.restrict = F.μ J := h J
+
+/-- **A5 — no-signaling at the limit.**  The marginal on a sub-context `J ⊆ J'` is the restriction of
+    the larger context's marginal: `μ↾J = (μ↾J')↾J`.  So including remote measurements `J' ∖ J` cannot
+    change the local statistics — operational no-signaling for the whole history measure. -/
+theorem isLimit_marginal_mono {F : FiniteMarginals α} {μ : Measure (∀ i, α i)} (h : F.IsLimit μ)
+    {J J' : Finset ι} (hJ : J ⊆ J') :
+    μ.map J.restrict = (μ.map J'.restrict).map (Finset.restrict₂ hJ) := by
+  rw [h J, h J', ← F.proj J' J hJ]
+
+/-- **A4 — covariance of the typicality measure.**  A symmetry `e` of the history space under which the
+    pushforward `μ.map e` is again a projective limit of the SAME family is measure-preserving:
+    `μ.map e = μ`.  The hypothesis `F.IsLimit (μ.map e)` is exactly "the symmetry preserves every Born
+    marginal" (the family-level form of P2's `μ_covariant`); the conclusion follows from uniqueness. -/
+theorem isLimit_map_eq {F : FiniteMarginals α} {μ : Measure (∀ i, α i)} (h : F.IsLimit μ)
+    {e : (∀ i, α i) → (∀ i, α i)} (he : F.IsLimit (μ.map e)) : μ.map e = μ :=
+  F.limit_unique he h
+
 end QIQTH.HistoryMeasure
