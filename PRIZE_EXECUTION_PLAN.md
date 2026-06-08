@@ -39,6 +39,21 @@ Tomita–Takesaki facts beyond current Mathlib; a full-codebase audit (2026-06-0
 vacuous or doing illegitimate load-bearing work, and that `tsirelson_bound` / Goldstein–Struyve
 Steps 1 & 3 / `FQEquivarianceUniqueness` are all now *discharged* (axiom-free).
 
+**Update (2026-06-08b) — the continuum μ is built, the loop is closed on `B(H)`, and there is a
+free-field covariant instance (all axiom-free, budget 33).** New modules:
+`FiniteMarginals` + `KolmogorovFiniteFiber` (the σ-additive **Kolmogorov extension** — μ∞ on the
+projective limit of histories, correlated case, via finite-fiber compactness); `CoarseGrainNaturality`
++ `NoSignalingGeneral` (P0–P2: coarse-graining consistency, Born-kernel covariance, general
+no-signaling); `CylinderTypicality` (the cylinder premeasure); `StateNetMeasure` (`EffectStateNet` —
+the construction is **state-agnostic**); `NormalState` (a genuine normal state `Tr(ρ·)` on infinite-dim
+`B(H)`); `BHTypicalityMeasure` (the loop **closed end-to-end on `B(H)`**); `AbsoluteValue`
+(`|T|=√(T⋆T)`, the general-trace-class foundation, sidestepping `StarOrderedRing`); `FreeFieldTypicality`
+(the **free-field, finite-mode** covariant μ∞ — boost-invariant). So Stage-3's measure/state/covariance
+core is **machine-checked** and runs on a free-field net at finite mode number (Type I). The remaining
+gap is the **continuum** (Type III₁) field infrastructure — Fock / CCR / quasifree vacuum — a separate
+multi-year program (plan: `PHASE_B_INFRASTRUCTURE_PLAN.md`); wall-free but large, with every downstream
+measure-theoretic piece already proven.
+
 ---
 
 ## STAGE 1 — Free-field finite-mode instance (highest leverage; closest to existing code)

@@ -90,6 +90,32 @@ axiom-free, budget 33, Fine/Bell contextuality constraint enforced. The SOLE rem
 `B(H)` — bounded, Mathlib-contributable, the only piece μ needs) and **Part B** (Type III₁ /
 Buchholz–Wichmann — research-grade, multi-year, NOT needed for μ; characterizes the algebra type).
 
+**Update (2026-06-08b) — Phase-B Part A STARTED, the loop is CLOSED on `B(H)`, and a free-field
+covariant μ∞ is built (all axiom-free, budget 33).**
+- **Genuine normal state on infinite-dim `B(H)`** (`QIQTH/NormalState.lean`): the diagonal density
+  operator `ω(x)=Tr(ρ x)=∑ pₙ⟨bₙ,x bₙ⟩` — positive, normalized, additive (`diagStateHom`), bypassing
+  the (unbuilt) general Schatten theory.
+- **LOOP CLOSED end-to-end on `B(H)`** (`QIQTH/BHTypicalityMeasure.lean`, `bh_typicalityMeasure_exists`):
+  a real normal state on `B(H)` → `EffectStateNet` → finite-fiber Kolmogorov extension → a unique
+  σ-additive probability typicality measure μ∞ — the first fully **infinite-dimensional** instance of
+  the whole pipeline.
+- **General trace-class foundation** (`QIQTH/AbsoluteValue.lean`): the operator absolute value
+  `|T|=√(T⋆T)` (Simon §1.1) via `cfc` on the nonneg spectrum of `T⋆T` (`spectrum_star_mul_self_nonneg`
+  — sidesteps the missing `StarOrderedRing (B(H))`), with `|T|·|T|=T⋆T`, `‖|T|x‖=‖Tx‖`.
+- **FREE-FIELD covariant typicality measure** (`QIQTH/FreeFieldTypicality.lean`,
+  `freeFieldMeasure_boost_invariant`): the pipeline run on genuine free-field occupation sectors
+  `m → Bool`, with μ∞ **invariant under the geometry-moving mode-permutation boost** (the finite-mode
+  Lorentz action) — genuine covariance of the typicality measure, instantiated by field structure.
+
+So the entire measure / state / covariance apparatus is machine-checked AND now runs on a genuine
+**free-field net with a real boost symmetry** — at **finite mode number (Type I)**.  The one genuinely
+remaining frontier for the *continuum* (Type III₁) prize is the **Fock / CCR / quasifree-vacuum field
+infrastructure** (real symplectic test space → Weyl algebra → quasifree vacuum → Fock → local net →
+explicit second-quantized boost): a separate **multi-year, build-from-scratch** program (Mathlib has
+none of it), but **wall-free** — that route bypasses the Tomita/Type-III machinery (never forms `Δ^{1/2}`)
+— and **every downstream piece is already proven**, so it is "build the field net," not "redo the measure
+theory."
+
 ## 0. The route we commit to (and what we reject)
 
 **Effect-Gleason + Kolmogorov — NOT the raw decoherence functional.**
