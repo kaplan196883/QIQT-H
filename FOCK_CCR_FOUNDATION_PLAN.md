@@ -86,6 +86,15 @@ mass-shell measure + Poincaré one-particle rep, Haag–Kastler local nets, Biso
   **`boostFock t = Γ(boostUnitary t)`** = the Lorentz boost on the Fock space, with
   **`boostFock_vacuum`** proving `Γ(U₁(t))Ω = Ω` — the key input to boost-covariance.  The chain
   F1(one-particle boost) → F2(Fock) → boost-on-field is now complete with the vacuum fixed.
+- **Bounded boost on the Fock HILBERT space — DONE** (commit `556c94d`, axiom-free): `boostFockₗᵢ`
+  (boost as a `LinearIsometry` of `FockPre`), `boostFockH = Completion.map boostFockₗᵢ` (boost on the
+  completed `Fock(L²ℝ)`), `boostFockH_isometry` (it is an isometry of the Hilbert space), `boostFockH_vacuum`
+  (`Γ(U₁(t))Ω = Ω` in the completed space).  **The operator-side foundation is complete**: the Lorentz
+  boost is a bounded isometry of the genuine Fock Hilbert space fixing the vacuum.
+- **Genuine remaining gap to the literal prize:** the Haag–Kastler-style **local field-effect net** —
+  smeared field observables per spacelike region as the typicality records, with the boost permuting
+  regions, so `μ∞.map boost = μ∞`.  This (with Bisognano–Wichmann) is the multi-year remainder; the
+  Fock/operator/state/boost apparatus it sits on is now machine-checked and axiom-free.
 - **F4–F6:** unchanged below.
 
 ## The ladder (six phases F1–F6)
