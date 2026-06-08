@@ -61,12 +61,17 @@ mass-shell measure + Poincaré one-particle rep, Haag–Kastler local nets, Biso
 - **F2 infinite-index lift — DONE** (commit `64037c9`, axiom-free): `expKernel_posSemidef'` for an
   arbitrary (infinite-dim) family — the form the exponential-vector inner product / `RKHS.OfKernel`
   consume.
-- **F2 remaining (next):** assemble the Fock-space TYPE.  Two routes: (a) `RKHS.OfKernel` (Mathlib
-  Moore–Aronszajn; needs the operator-valued `Matrix H₁ H₁ (ℂ→L ℂ)` PosSemidef translated from
-  `expKernel_posSemidef'` via `posSemidef_tfae`), or (b) a direct scalar `PreInnerProductSpace.Core` on
-  a wrapper of `H₁ →₀ ℂ` (mirrors `OfKernel`'s `H₀` internals; `re_inner_nonneg` = `expKernel_posSemidef'`
-  verbatim).  Then vacuum `Ω=e(0)`, exponential vectors `e(f)`, `⟪e(f),e(g)⟫=exp⟪f,g⟫` (Moore), and `Γ`.
-- **F3–F6:** unchanged below.
+- **F2 Fock space — DONE** (commits `8220e6c`, `0888726`, axiom-free): `QIQTH/Fock/FockSpace.lean`.
+  Route (b) — direct scalar `PreInnerProductSpace.Core` on a `FockPre H` wrapper of `H₁ →₀ ℂ`
+  (`re_inner_nonneg` = `expKernel_posSemidef'` verbatim).  `Fock H := UniformSpace.Completion (FockPre H)`
+  is the genuine bosonic Fock Hilbert space; `Fock.expVec`/`Fock.vacuum` the coherent vectors and vacuum;
+  `Fock.inner_expVec` proves `⟪e(f),e(g)⟫ = exp⟪f,g⟫`; `Fock.inner_vacuum` proves `⟪Ω,Ω⟫ = 1`.
+- **F2 remaining (optional):** second quantization `Γ(A) e(f) = e(Af)` and its functoriality/unitarity
+  (lift the F1 boost `U₁(t)` to `Γ(U₁(t))` on Fock space — the continuum `diagBoost`).  Not on the
+  critical path to F6.
+- **F3 (next):** Weyl operators `W(f)`, the CCR relation, and the **quasifree vacuum state**
+  `ω₀(W f) = exp(−‖f‖²/4)` — the ω that plugs into `EffectStateNet` for F6.  Parthasarathy §20/§23.
+- **F4–F6:** unchanged below.
 
 ## The ladder (six phases F1–F6)
 
