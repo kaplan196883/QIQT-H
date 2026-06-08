@@ -402,6 +402,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.fockInner_weyl
 -- expected: standard only — W(u) preserves the coherent-state inner product (= weyl_isometry summed) →
 -- W(u) is an ISOMETRY of the Fock space; the algebraic content making W(u) unitary.
+#print axioms QIQTH.Fock.Weyl.weylCoeff_adjoint
+-- expected: standard only — the coefficient-level adjoint identity conj(c_g)·exp⟪g+u,h⟫=exp⟪g,h−u⟫·c'_h.
+#print axioms QIQTH.Fock.fockInner_weyl_adjoint
+-- expected: standard only — W(u)* = W(−u): ⟪W(u)φ,ψ⟫=⟪φ,W(−u)ψ⟫ (weylCoeff_adjoint summed). W(u) is
+-- UNITARY (isometry + inverse W(−u)); the keystone for the Weyl-bit effects E(u,s)=A(u,s)*A(u,s).
 #print axioms QIQTH.Fock.weylPre_zero
 -- expected: standard only — W(0) = id.
 #print axioms QIQTH.Fock.weylH_isometry

@@ -114,3 +114,22 @@ theorem fockInner_vacuum_weyl (u : H) :
   unfold fockInner
   rw [Finsupp.sum_single_index (by simp), Finsupp.sum_single_index (by simp), Weyl.weylCoeff_vacuum]
   simp [inner_zero_left]
+
+/-- **`W(u)` is unitary with adjoint `W(−u)`**: `⟪W(u) φ, ψ⟫ = ⟪φ, W(−u) ψ⟫`.  This is the
+    `weylCoeff_adjoint` identity summed over the coherent-vector expansion — the algebraic content of
+    `W(u)* = W(−u)`, the keystone for the Weyl-bit *effects* `E(u,s) = A(u,s)* A(u,s)`. -/
+theorem fockInner_weyl_adjoint (u : H) (φ ψ : H →₀ ℂ) :
+    fockInner (weylPre u φ) ψ = fockInner φ (weylPre (-u) ψ) := by
+  rw [weylPre_apply, weylPre_apply]
+  unfold fockInner
+  rw [sum_single_translate φ (· + u) (fun g a => a * Weyl.weylCoeff u g)
+        (fun p c => ψ.sum fun q d => star c * Complex.exp ⟪p, q⟫_ℂ * d)
+        (by intro q; simp) (by intro q c c'; simp [star_add, add_mul, ← Finsupp.sum_add])]
+  refine Finsupp.sum_congr fun g _ => ?_
+  rw [sum_single_translate ψ (· + -u) (fun h b => b * Weyl.weylCoeff (-u) h)
+        (fun q d => star (φ g) * Complex.exp ⟪g, q⟫_ℂ * d)
+        (by intro q; simp) (by intro q c c'; ring)]
+  refine Finsupp.sum_congr fun h _ => ?_
+  have hw := Weyl.weylCoeff_adjoint u g h
+  simp only [star_mul', RCLike.star_def, ← sub_eq_add_neg]
+  linear_combination (starRingEnd ℂ (φ g) * ψ h) * hw

@@ -42,6 +42,20 @@ theorem weyl_isometry (u g h : H) :
     inner_add_left, inner_add_right]
   ring
 
+/-- **Weyl adjoint identity** `W(u)* = W(−u)` at the coefficient level: the per-term identity behind
+    `⟪W(u) e(g), e(h)⟫ = ⟪e(g), W(−u) e(h)⟫`, namely
+    `conj(weylCoeff u g) · exp⟪g+u, h⟫ = exp⟪g, h−u⟫ · weylCoeff (−u) h`
+    (both sides reduce to `exp` of the SAME exponent).  Hence `W(u)` is unitary with inverse `W(−u)`. -/
+theorem weylCoeff_adjoint (u g h : H) :
+    conj (weylCoeff u g) * Complex.exp ⟪g + u, h⟫_ℂ
+      = Complex.exp ⟪g, h - u⟫_ℂ * weylCoeff (-u) h := by
+  unfold weylCoeff
+  rw [← Complex.exp_conj, ← Complex.exp_add, ← Complex.exp_add]
+  congr 1
+  simp only [map_sub, map_mul, map_neg, map_div₀, map_one, map_ofNat, inner_conj_symm,
+    inner_add_left, inner_sub_right, inner_neg_left, inner_neg_right]
+  ring
+
 /-- The **quasifree vacuum value**: `W(u)Ω = exp(−½⟪u,u⟫)·e(u)`, so the vacuum expectation is
     `⟪Ω, W(u)Ω⟫ = weylCoeff u 0 = exp(−½‖u‖²)` — the value defining the quasifree state. -/
 theorem weylCoeff_vacuum (u : H) :
