@@ -85,17 +85,20 @@ The corrected difficulties and the compatibility constraint are reflected inline
 
 ## Phase A — the σ-additive extension (Lean-tractable)
 
-> **PROGRESS (2026-06-08, all axiom-free, budget 33).** A2a/A3/A4/A5/A0 DONE; A2b is the sole remaining
-> crux. `QIQTH/FiniteMarginals.lean` (`QIQTH.HistoryMeasure`): `FiniteMarginals` shape + `IsLimit`/
+> **PHASE A COMPLETE (2026-06-08, all axiom-free, budget 33).** A0/A2a/A2b/A3/A4/A5 ALL DONE.
+> `QIQTH/FiniteMarginals.lean` (`QIQTH.HistoryMeasure`): `FiniteMarginals` shape + `IsLimit`/
 > `limit_unique`; **A2a** product case via `infinitePi` (`productMarginals_isProjectiveLimit/_marginal`);
 > **A3** `isLimit_marginal`, **A5** `isLimit_marginal_mono` (no-signaling), **A4** `isLimit_map_eq`
 > (covariance via uniqueness). `QIQTH/QuantumHistoryMeasure.lean`: **A0** `bornPMF` (matrix Born law =
-> PMF) + `quantumHistoryMeasure` (i.i.d. continuum quantum Born measure, σ-additive, Born marginals).
-> **A2b remaining** = existence for the correlated case ⇐ `(projectiveFamilyContent F.proj).IsSigmaSubadditive`
-> (then `MeasureTheory.AddContent.measure`); Mathlib has the Carathéodory machinery (`OfAddContent.lean`)
-> but NOT the general σ-subadditivity — for finite discrete fibers it follows from compactness/FIP
-> (`tendsto`-to-zero on decreasing empty-intersection cylinders), the analog of Mathlib's
-> `piContent_tendsto_zero` — a genuine multi-hundred-line Mathlib-grade contribution. Not faked.
+> PMF) + `quantumHistoryMeasure` (i.i.d. continuum quantum Born measure). **A2b DONE**
+> `QIQTH/KolmogorovFiniteFiber.lean`: the general (correlated/entangled, NO product assumption)
+> Kolmogorov extension for finite discrete fibers — `projectiveFamilyContent_tendsto_zero` (the crux:
+> compactness/FIP ⇒ antitone empty-⋂ cylinders have content→0), `kolmogorovMeasure`,
+> `kolmogorovMeasure_isProjectiveLimit`, and **`exists_isLimit`** (every finite-fiber `FiniteMarginals`
+> family has a unique σ-additive probability μ∞ realizing it).  With A2b, A3/A4/A5 are unconditional for
+> all finite-fiber families.  **Phase A — the σ-additive covariant typicality measure μ over histories/λ
+> — is fully built.**  Only **Phase B** (the continuum normal-state / Type III₁ realization) remains, and
+> stays cited.
 
 
 ### A0 — Abstract the state functional. **(S, do first.)**
