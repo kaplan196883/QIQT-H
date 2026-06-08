@@ -342,6 +342,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — KEYSTONE: exp⟪f,g⟫ is a positive-definite kernel (Gram PSD + Schur product
 -- theorem + exp = ∑ₖ ·ᵏ/k! with 1/k!≥0).  This is what RKHS.OfKernel turns into the symmetric Fock
 -- space whose kernel functions are the exponential vectors e(f) with ⟪e(f),e(g)⟫ = exp⟪f,g⟫.
+#print axioms QIQTH.Fock.ExpKernel.expKernel_posSemidef'
+-- expected: standard only — the INFINITE-index keystone (arbitrary, possibly inf-dim family), via
+-- support-restriction to the finite case.  The form the exponential-vector inner product consumes.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

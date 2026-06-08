@@ -171,4 +171,30 @@ theorem expKernel_posSemidef [Fintype ι] (f : ι → H) : (expKernel f).PosSemi
     rw [inv_nonneg]; exact_mod_cast (Nat.cast_nonneg k.factorial : (0:ℝ) ≤ _)
   exact mul_nonneg hk ((hPow_posSemidef (posSemidef_gram ℂ f) k).dotProduct_mulVec_nonneg x)
 
+/-- The Hermitian quadratic form of a matrix, unfolded as a double sum. -/
+theorem dotProduct_mulVec_eq [Fintype ι] (M : Matrix ι ι ℂ) (x : ι → ℂ) :
+    star x ⬝ᵥ M *ᵥ x = ∑ i, ∑ j, conj (x i) * M i j * x j := by
+  simp only [dotProduct, mulVec, Pi.star_apply, RCLike.star_def, Finset.mul_sum, mul_assoc]
+
+/-- **Infinite-index keystone.** The exponential kernel `K(f,g) = exp⟪f,g⟫` is positive semidefinite
+    for an *arbitrary* (possibly infinite-dimensional) family.  This is the form consumed by the
+    exponential-vector inner product / `RKHS.OfKernel`: `Matrix.PosSemidef` quantifies over
+    finitely-supported test vectors, so it reduces to the finite keystone on each support. -/
+theorem expKernel_posSemidef' (f : ι → H) : (expKernel f).PosSemidef := by
+  classical
+  refine ⟨expKernel_isHermitian f, fun x => ?_⟩
+  have hpos := (expKernel_posSemidef (fun i : x.support => f i)).dotProduct_mulVec_nonneg
+                  (fun i : x.support => x i)
+  rw [dotProduct_mulVec_eq] at hpos
+  have heq : (x.sum fun i xi => x.sum fun j xj => star xi * expKernel f i j * xj)
+      = ∑ i : x.support, ∑ j : x.support,
+          conj (x ↑i) * expKernel (fun i : x.support => f ↑i) i j * x ↑j := by
+    show (∑ i ∈ x.support, ∑ j ∈ x.support, star (x i) * expKernel f i j * x j) = _
+    rw [← Finset.sum_coe_sort x.support]
+    refine Finset.sum_congr rfl (fun i _ => ?_)
+    rw [← Finset.sum_coe_sort x.support]
+    refine Finset.sum_congr rfl (fun j _ => ?_)
+    simp only [expKernel_apply, RCLike.star_def]
+  rw [heq]; exact hpos
+
 end QIQTH.Fock.ExpKernel
