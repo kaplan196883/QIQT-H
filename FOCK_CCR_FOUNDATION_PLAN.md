@@ -80,6 +80,12 @@ mass-shell measure + Poincaré one-particle rep, Haag–Kastler local nets, Biso
 - **F3 remaining (optional):** the bounded Weyl operator `W(u)` as an actual `Fock H →L Fock H`
   (linear map on `FockPre` + bounded extension to the completion) and the CCR composition law.  Not on
   the critical path to F6 (which needs the vacuum state ω₀, already done).
+- **F2-Γ second quantization — DONE** (commit `d00c124`, axiom-free): `QIQTH/Fock/SecondQuant.lean`.
+  `secondQuantPre A = Finsupp.lmapDomain A` (Γ(A)e(f)=e(Af)); `fockInner_secondQuant` (Γ(A) isometric);
+  `secondQuantPre_vacuum`/`secondQuantPre_comp` (Γ(A)Ω=Ω, functoriality).  Specialized:
+  **`boostFock t = Γ(boostUnitary t)`** = the Lorentz boost on the Fock space, with
+  **`boostFock_vacuum`** proving `Γ(U₁(t))Ω = Ω` — the key input to boost-covariance.  The chain
+  F1(one-particle boost) → F2(Fock) → boost-on-field is now complete with the vacuum fixed.
 - **F4–F6:** unchanged below.
 
 ## The ladder (six phases F1–F6)
