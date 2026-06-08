@@ -89,4 +89,30 @@ theorem fockInner_boostFock (t : ℝ)
       = fockInner φ ψ :=
   fockInner_secondQuant (QIQTH.Fock.OneParticle.boostUnitary t).toLinearIsometry φ ψ
 
+/-- The boost as a **linear isometry** of the pre-Fock space (bundling `boostFock` with the
+    inner-product preservation `fockInner_boostFock`). -/
+noncomputable def boostFockₗᵢ (t : ℝ) :
+    FockPre (Lp ℂ 2 (volume : Measure ℝ)) →ₗᵢ[ℂ] FockPre (Lp ℂ 2 (volume : Measure ℝ)) :=
+  LinearMap.isometryOfInner (boostFock t) (fun φ ψ => fockInner_boostFock t φ ψ)
+
+/-- **The Lorentz boost as a genuine isometry of the Fock HILBERT space** `Fock (L²(ℝ))`: the unique
+    continuous extension of the pre-level boost to the completion (`UniformSpace.Completion.map`). -/
+noncomputable def boostFockH (t : ℝ) :
+    Fock (Lp ℂ 2 (volume : Measure ℝ)) → Fock (Lp ℂ 2 (volume : Measure ℝ)) :=
+  UniformSpace.Completion.map (boostFockₗᵢ t)
+
+/-- The boost is an **isometry of the Fock Hilbert space** (extension of an isometry to the
+    completion). -/
+theorem boostFockH_isometry (t : ℝ) : Isometry (boostFockH t) :=
+  (boostFockₗᵢ t).isometry.completion_map
+
+/-- **Vacuum invariance on the Fock Hilbert space:** the Lorentz boost fixes the vacuum,
+    `Γ(U₁(t)) Ω = Ω`, as a genuine identity in the completed Fock space `Fock (L²(ℝ))`. -/
+theorem boostFockH_vacuum (t : ℝ) : boostFockH t Fock.vacuum = Fock.vacuum := by
+  have hΩ : (boostFockₗᵢ t) (FockPre.expVec 0) = FockPre.expVec 0 := boostFock_vacuum t
+  show UniformSpace.Completion.map (boostFockₗᵢ t)
+        ((FockPre.expVec 0 : FockPre (Lp ℂ 2 (volume : Measure ℝ))) : Fock _)
+      = ((FockPre.expVec 0 : FockPre (Lp ℂ 2 (volume : Measure ℝ))) : Fock _)
+  rw [UniformSpace.Completion.map_coe (boostFockₗᵢ t).isometry.uniformContinuous, hΩ]
+
 end QIQTH.Fock

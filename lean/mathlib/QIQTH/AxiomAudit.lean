@@ -385,6 +385,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.boostFock_vacuum
 -- expected: standard only — VACUUM INVARIANCE Γ(U₁(t))Ω = Ω: the boost fixes the Fock vacuum — the key
 -- input to boost-covariance of μ∞ (the full F6 prize).
+-- The Lorentz boost as a genuine isometry of the completed Fock HILBERT space, fixing the vacuum.
+#print axioms QIQTH.Fock.boostFockH_isometry
+-- expected: standard only — Γ(U₁(t)) is an isometry of Fock(L²(ℝ)) (completion of the pre-level boost).
+#print axioms QIQTH.Fock.boostFockH_vacuum
+-- expected: standard only — Γ(U₁(t)) Ω = Ω in the completed Fock Hilbert space.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
