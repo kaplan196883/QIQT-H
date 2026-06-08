@@ -140,6 +140,18 @@ structure `bitOp_comm` (bits commute when `Im⟪u,v⟫=0`).
 This is Finset/`∀ j:J, Bool` function-sum bookkeeping — substantial but mathematically discharged; it does
 *not* need B.0 (the operator/CLM packaging), which GPT placed *after* 1.3.
 
+**Finding (2026-06-09), `bitOp_comm` done (commit `a469802`):** investigated the `total`/`coarse` discharge
+and confirmed it is a genuine custom build, not a quick finish.  *Every* existing typicality net in the
+project (`diagNet`, `fockVacuumNet`, …) uses **deterministic** effects, so its `total`/`coarse` collapse via
+`Finset.sum_ite_eq'` (one outcome has weight 1, the rest 0).  Ours is the **first genuinely-distributed
+(non-deterministic) net**: `total` is `∑_{σ:∀j:J,Bool} ‖bornVec σ‖² = 1` (a real sum of `2^|J|` weights) and
+`coarse` is a real marginalization — neither has a ready lemma in Mathlib *or* the project.  They require:
+(a) a **Pi-Finset telescoping** lemma — decompose `∑_{σ:↥(insert a J)→Bool}` via `(↥(insert a J)→Bool) ≃
+Bool × (↥J→Bool)` (`Equiv.piOptionEquivProd`-style) and collapse one coordinate per step with `bit_normSq_sum`;
+and (b) a `bornVec`-defined-to-compose-with-`insert` (prepend the new bit) or the `bitOp_comm` reordering to
+align the dropped coordinate.  ~150–250 lines, de-risked but real.  **The four ingredients + `bitOp_comm` are
+the complete mathematics; the remainder is this custom measure-combinatorics build.**
+
 ## F. Immediate next action (revised)
 
 Start **1.1**: on `FockPre`, define the bit vectors `A_i^s Ω = (Ω + s·weylPre(u_i)Ω)/2`, the two-bit law
