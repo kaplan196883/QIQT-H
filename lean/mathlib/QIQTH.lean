@@ -207,3 +207,4 @@ import QIQTH.Fock.OneParticle
 import QIQTH.Fock.ExpKernel
 import QIQTH.Fock.FockSpace
 import QIQTH.Fock.VacuumState
+import QIQTH.Fock.Weyl

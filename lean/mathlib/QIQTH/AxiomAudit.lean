@@ -364,6 +364,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ω₀ ≥ 0 on positive operators.
 #print axioms QIQTH.Fock.vacuumState_one
 -- expected: standard only — ω₀(1) = 1 (vacuum is a unit vector); so ω₀ is a genuine state on B(Fock).
+-- F3 (part): the Weyl/CCR algebraic core on exponential vectors.
+#print axioms QIQTH.Fock.Weyl.weyl_isometry
+-- expected: standard only — W(u) preserves the coherent-state inner product (CCR unitarity core).
+#print axioms QIQTH.Fock.Weyl.weylCoeff_vacuum
+-- expected: standard only — ⟪Ω,W(u)Ω⟫ = exp(−½‖u‖²): the defining value of the quasifree vacuum state.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
