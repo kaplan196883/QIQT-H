@@ -78,6 +78,18 @@ frontiers are the *unconditional* Born derivation (Layer B — discharge the nam
 principles) and the *continuum* covariant μ (Layer C) — the latter gated on Layer-D infrastructure
 now built right up to three specific Mathlib walls. Nothing here is faked; the budget confirms it.
 
+**Update (2026-06-08) — the continuum covariant μ is now MACHINE-CHECKED end-to-end** (the "XL step",
+`XL_STEP_PLAN.md`): the σ-additive, unique, Born-marginal, covariant, no-signaling typicality measure
+μ∞ over histories/λ is built for the **correlated/entangled** case (Phase A: `FiniteMarginals`,
+`KolmogorovFiniteFiber.exists_isLimit` via a finite-fiber Kolmogorov extension I proved from
+compactness), and the construction is **state-agnostic** — μ∞ exists for ANY normal state on a
+compatible net (Phase B core: `StateNetMeasure.EffectStateNet`, with a non-vacuity witness). All
+axiom-free, budget 33, Fine/Bell contextuality constraint enforced. The SOLE remaining gap is the
+*physical* input — a **normal state on a Type III₁ QFT net** — whose construction is now itself
+**planned** in `PHASE_B_INFRASTRUCTURE_PLAN.md`: **Part A** (predual / trace-class / normal states of
+`B(H)` — bounded, Mathlib-contributable, the only piece μ needs) and **Part B** (Type III₁ /
+Buchholz–Wichmann — research-grade, multi-year, NOT needed for μ; characterizes the algebra type).
+
 ## 0. The route we commit to (and what we reject)
 
 **Effect-Gleason + Kolmogorov — NOT the raw decoherence functional.**

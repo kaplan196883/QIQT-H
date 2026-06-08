@@ -174,6 +174,13 @@ Lift P0 (`NoSignalingGeneral.local_marginal_indep_remote`) to μ∞ marginals.
 > normal state on a **Type III₁** relativistic-QFT local net with Bisognano–Wichmann covariance —
 > Mathlib lacks normal states/predual; Type III₁-ness is Buchholz–Wichmann. The state-agnostic
 > CONSTRUCTION is machine-checked; the existence of the physical state is the honest cited gap.
+>
+> **Building that gap is now planned** — `PHASE_B_INFRASTRUCTURE_PLAN.md`, two separate parts:
+> **Part A** (predual / trace-class / normal states of `B(H)` — bounded functional analysis,
+> Mathlib-contributable, reuses our bounded spectral theorem + `CFC.sqrt`; the ONLY Phase-B piece the
+> measure μ actually needs; first move A1 = trace-class `|T|=√(T⋆T)` + trace) and **Part B** (Type III₁
+> via Buchholz–Wichmann — research-grade/multi-year, full Tomita–Takesaki + Connes + QFT axioms; NOT
+> required for μ — it characterizes the algebra type for the foundational narrative).
 
 ### B1 — Continuum state. **(M given the algebra; Mathlib gap on normal states.)**
 Replace matrices by a **normal state `ω`** on a net of local von Neumann algebras (`ω(E)`, NOT

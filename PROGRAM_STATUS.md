@@ -104,6 +104,18 @@ it is *not* where the breakthrough claim is discharged.
 > walls (operator square root / `StarOrderedRing (B(H))`, unbounded antilinear Tomita `S`, genuine
 > KMS) are detailed in `TOMITA_TAKESAKI_ROADMAP.md` §"CURRENT STATUS". All axiom-free; budget 33.
 
+> **Update 2026-06-08 — the continuum covariant typicality measure μ is now machine-checked.** The
+> "XL step" (`XL_STEP_PLAN.md`) is complete: a σ-additive, unique, Born-marginal, covariant,
+> no-signaling measure μ∞ over histories/λ for the **correlated/entangled** case (`FiniteMarginals` +
+> finite-fiber Kolmogorov extension `KolmogorovFiniteFiber.exists_isLimit`), shown **state-agnostic** —
+> μ∞ exists for ANY normal state on a compatible net (`StateNetMeasure.EffectStateNet`, with a
+> non-vacuity witness). Axiom-free, budget 33, Fine/Bell contextuality enforced. The sole remaining
+> gap is the *physical* input (a normal state on a **Type III₁** QFT net), now itself **planned** in
+> `PHASE_B_INFRASTRUCTURE_PLAN.md` — Part A (predual/normal states of `B(H)`: bounded, Mathlib-grade,
+> the only piece μ needs) + Part B (Type III₁ / Buchholz–Wichmann: research-grade, not needed for μ).
+> This does not change §1's verdict: the continuum is now *constructed* given a normal state, with the
+> QFT-state existence the honest cited/planned frontier.
+
 The load-bearing content is, instead, the chain **finite-capacity exclusion →
 actuality selector λ → Born/typicality → collapse-as-conditionalization**, plus a
 concrete *mechanism* that makes the capacity threshold non-circular. That chain is
