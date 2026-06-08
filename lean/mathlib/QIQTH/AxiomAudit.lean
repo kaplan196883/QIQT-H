@@ -346,6 +346,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the INFINITE-index keystone (arbitrary, possibly inf-dim family), via
 -- support-restriction to the finite case.  The form the exponential-vector inner product consumes.
 
+-- F2c: the symmetric (bosonic) Fock space, pre-Hilbert structure (exponential vectors).
+#print axioms QIQTH.Fock.fockInner_self_nonneg
+-- expected: standard only — ⟪φ,φ⟫ ≥ 0 (= the keystone expKernel_posSemidef').
+#print axioms QIQTH.Fock.FockPre.instCore
+-- expected: standard only — PreInnerProductSpace.Core ℂ on the exponential-vector pre-space: the
+-- pre-Hilbert symmetric Fock space (positive-semidefinite Hermitian inner product, conj-linear).
+#print axioms QIQTH.Fock.FockPre.inner_expVec
+-- expected: standard only — the DEFINING coherent-state identity ⟪e(f),e(g)⟫ = exp⟪f,g⟫.
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation
