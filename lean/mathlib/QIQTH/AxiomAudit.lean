@@ -459,6 +459,13 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — PROJECTIVITY (single-mode marginal): summing the free bit at a head mode a∉J'
 -- collapses bornWeight (insert a J') to bornWeight J' (bit_normSq_sum on the Finset Born weight). The
 -- inductive step for the general coarse-graining consistency of the joint Born law.
+#print axioms QIQTH.Fock.bornWeight_erase_marginal
+-- expected: standard only — projectivity peeling the free bit at ANY a∈J (erase form), via bornVecTot_erase.
+#print axioms QIQTH.Fock.bornWeight_coarse
+-- expected: standard only — COARSE-GRAINING CONSISTENCY (Kolmogorov projectivity) of the joint Weyl-bit
+-- Born law: for any I⊆J, bornWeight I y = ∑_{x↾I=y} bornWeight J x. Strong induction on J peeling one
+-- FREE mode a∈J\I at a time (bornWeight_erase_marginal). The `coarse` obligation of EffectStateNet —
+-- the last ingredient (with pos, total, boost-covariance) for the σ-additive boost-covariant μ∞.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
