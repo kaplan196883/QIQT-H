@@ -283,6 +283,13 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the single-measurement Born weights form a PMF (nonneg + sum 1).
 #print axioms QIQTH.QuantumHistoryMeasure.quantumHistoryMeasure_marginal
 -- expected: standard only — the i.i.d. quantum history measure restricts to the Born product marginal.
+-- XL Phase A, A2b: general (correlated) finite-fiber Kolmogorov extension
+#print axioms QIQTH.KolmogorovFiniteFiber.projectiveFamilyContent_tendsto_zero
+-- expected: standard only — the analytic crux: antitone cylinders, empty ⋂ ⇒ content→0 (compactness/FIP).
+#print axioms QIQTH.KolmogorovFiniteFiber.kolmogorovMeasure_isProjectiveLimit
+-- expected: standard only — the Kolmogorov measure IS the projective limit (correlated case, no product).
+#print axioms QIQTH.KolmogorovFiniteFiber.exists_isLimit
+-- expected: standard only — EXISTENCE: every finite-fiber FiniteMarginals family has a σ-additive μ∞.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

@@ -68,6 +68,9 @@ import QIQTH.FiniteMarginals
 -- XL-step A0: the matrix Born law as a PMF (bornPMF); the i.i.d. quantum history measure on ℕ→α
 -- (σ-additive, Born marginals) — the concrete quantum endpoint of the reachable part of Phase A:
 import QIQTH.QuantumHistoryMeasure
+-- XL-step A2b: the general (correlated/entangled) Kolmogorov extension for FINITE discrete fibers —
+-- every consistent finite-fiber marginal family has a σ-additive projective-limit measure μ∞:
+import QIQTH.KolmogorovFiniteFiber
 -- A6 strengthening: minimality/independence table for Born premises:
 import QIQTH.BornMinimalityTable
 -- A4 strengthening: Chebyshev concentration upgrading Born means to frequencies:
