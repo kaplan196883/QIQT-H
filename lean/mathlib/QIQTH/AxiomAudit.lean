@@ -333,6 +333,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.OneParticle.boostUnitary_zero_apply
 -- expected: standard only — boost at rapidity 0 is the identity.
 
+-- F2 keystone: the exponential kernel exp⟪f,g⟫ is positive semidefinite (builds the bosonic Fock space).
+#print axioms QIQTH.Fock.ExpKernel.hPow_posSemidef
+-- expected: standard only — entrywise (Hadamard) powers of a PSD matrix are PSD (Schur, iterated).
+#print axioms QIQTH.Fock.ExpKernel.expKernel_isHermitian
+-- expected: standard only — the exponential kernel is Hermitian.
+#print axioms QIQTH.Fock.ExpKernel.expKernel_posSemidef
+-- expected: standard only — KEYSTONE: exp⟪f,g⟫ is a positive-definite kernel (Gram PSD + Schur product
+-- theorem + exp = ∑ₖ ·ᵏ/k! with 1/k!≥0).  This is what RKHS.OfKernel turns into the symmetric Fock
+-- space whose kernel functions are the exponential vectors e(f) with ⟪e(f),e(g)⟫ = exp⟪f,g⟫.
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation

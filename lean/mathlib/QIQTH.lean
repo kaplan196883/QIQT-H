@@ -204,3 +204,4 @@ import QIQTH.EffectGleason
 -- (informationally complete), the finite case of the make-or-break lemma. Axiom-free:
 import QIQTH.QubitIC
 import QIQTH.Fock.OneParticle
+import QIQTH.Fock.ExpKernel
