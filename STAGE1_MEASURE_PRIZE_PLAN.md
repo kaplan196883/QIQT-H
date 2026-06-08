@@ -123,34 +123,29 @@ the **four Kolmogorov ingredients** are all machine-checked —
 (iv) boost-covariance `bornWeight_boost_invariant` (every Born weight Lorentz-invariant) — plus the abelian
 structure `bitOp_comm` (bits commute when `Im⟪u,v⟫=0`).
 
-**Remaining 1.3 = pure measure-theoretic PLUMBING (no new mathematics).** With
-`EffectStateNet (α := fun _ => Bool) (A := ℝ)`, `ω := AddMonoidHom.id ℝ`, `E J σ := bornWeight`, the whole
-`toFiniteMarginals` → `exists_typicalityMeasure` (PMF → Measure → σ-additive μ∞ via
-`KolmogorovFiniteFiber`) is **free**.  The only obligations are:
-- **`bornWeight u J σ`** (`J : Finset ι`, `σ : ∀ j:J, Bool`) := `‖histVec ((sorted J).map (u, ±sign σ)) Ω‖²`
-  (a fold over a canonical ordering of `J`);
-- **`pos`** — `0 ≤ bornWeight` (free);
-- **`total`** — `∑_{σ:∀j:J,Bool} bornWeight J σ = 1` (Finset induction, peeling a coordinate via the
-  function-sum decomposition + `bit_normSq_sum`);
-- **`coarse`** — `bornWeight I y = ∑_{x↾I=y} bornWeight J x` (marginalize `J∖I`: reorder via `bitOp_comm`
-  to put the dropped bits adjacent, then `histVec_marginal`);
-- **boost-covariance of μ∞** — `μ∞.map(historyBoost β t) = μ∞` from `bornWeight_boost_invariant` +
-  uniqueness of the Kolmogorov limit.
+**Stage 1.3 DONE = THE LITERAL MEASURE-LEVEL PRIZE (2026-06-09, `QIQTH/Fock/WeylBitMeasure.lean`,
+axiom-free, budget 33;** commits `a423503` total, `f0fbf07` marginal, `c7affe5` coarse, `0bc21b4`
+μ∞-exists, `7ecff93` boost-covariance, `4fda684` Lorentz corollary). The σ-additive boost-covariant
+typicality measure μ∞ on the continuum Fock space is built end-to-end:
+- **`bornWeight u hiso J σ`** := `‖bornVecTot u hiso (signExt J σ) J‖²`, where `bornVecTot` =
+  `J.noncommProd (fun i => bitOp (u i)(s i)) (bitOp_commute hiso)` applied to `vac` — the **order-independent**
+  product of the commuting bit ops (commutation from microcausality), so no canonical ordering is needed;
+- **`pos`** — free (`pow_nonneg (norm_nonneg _) 2`);
+- **`total`** `∑_σ bornWeight J σ = 1` — induction on `J` via the explicit **forward** bit-split equiv
+  `insertBoolSplit` (`σ ↦ (σ@a, σ↾J')`) + `bornWeight_insert` head-factoring + `bit_normSq_sum`
+  (the `e.symm` route times out at `whnf` — the forward map keeps the reindexed sum in projections);
+- **`coarse`** `bornWeight I y = ∑_{x↾I=y} bornWeight J x` — **strong induction on `J` peeling one FREE mode
+  `a∈J∖I`** via `bornWeight_erase_marginal` + `eraseBoolSplit` (the `a∈I` case can't use the IH since `bitOp`
+  is not an isometry — peel only free bits);
+- **`weylBitNet`** (the first genuinely non-deterministic net) → **`weylBit_typicalityMeasure_exists`** (μ∞);
+- **boost-covariance** — `bornVecTot_secondQuant` (Γ(A) push-through the `noncommProd`) →
+  `bornWeight_isometry_invariant` → `weylBit_marginals_boost_invariant` (whole family unchanged) →
+  **`weylBit_typicality_boost_invariant`** (`μ = ν` by `limit_unique`) + concrete
+  **`weylBit_typicality_lorentzBoost_invariant`** (`A := OneParticle.boostUnitary t`,
+  `boostUnitary_preserves_isotropy` via `inner_map_map`). **`μ∞` exists ∧ `(boost)_*μ∞ = μ∞`, machine-checked.**
 
-This is Finset/`∀ j:J, Bool` function-sum bookkeeping — substantial but mathematically discharged; it does
-*not* need B.0 (the operator/CLM packaging), which GPT placed *after* 1.3.
-
-**Finding (2026-06-09), `bitOp_comm` done (commit `a469802`):** investigated the `total`/`coarse` discharge
-and confirmed it is a genuine custom build, not a quick finish.  *Every* existing typicality net in the
-project (`diagNet`, `fockVacuumNet`, …) uses **deterministic** effects, so its `total`/`coarse` collapse via
-`Finset.sum_ite_eq'` (one outcome has weight 1, the rest 0).  Ours is the **first genuinely-distributed
-(non-deterministic) net**: `total` is `∑_{σ:∀j:J,Bool} ‖bornVec σ‖² = 1` (a real sum of `2^|J|` weights) and
-`coarse` is a real marginalization — neither has a ready lemma in Mathlib *or* the project.  They require:
-(a) a **Pi-Finset telescoping** lemma — decompose `∑_{σ:↥(insert a J)→Bool}` via `(↥(insert a J)→Bool) ≃
-Bool × (↥J→Bool)` (`Equiv.piOptionEquivProd`-style) and collapse one coordinate per step with `bit_normSq_sum`;
-and (b) a `bornVec`-defined-to-compose-with-`insert` (prepend the new bit) or the `bitOp_comm` reordering to
-align the dropped coordinate.  ~150–250 lines, de-risked but real.  **The four ingredients + `bitOp_comm` are
-the complete mathematics; the remainder is this custom measure-combinatorics build.**
+This did *not* need B.0 (the operator/CLM packaging), which GPT placed *after* 1.3. The custom
+measure-combinatorics build that earlier looked like ~150–250 lines is complete (`WeylBitMeasure.lean`).
 
 ## F. Immediate next action (revised)
 
