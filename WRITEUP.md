@@ -20,10 +20,14 @@ of operational premises). The program's "prize" — a **canonical, Lorentz-covar
 μ** yielding Born + no-signaling without per-measurement fiat — is now **built end-to-end as a
 σ-additive, unique, covariant, no-signaling measure**, machine-checked for the correlated/entangled
 case, shown state-agnostic, run on an infinite-dimensional `B(H)` normal state, and **instantiated on a
-genuine free-field net with a real boost symmetry at finite mode number**. The single remaining frontier
-for the *literal continuum (relativistic, Type III₁)* prize is the Fock/CCR/quasifree field
-infrastructure — a separate multi-year program that Mathlib does not yet support, but which is
-*wall-free* (it bypasses Tomita–Takesaki/Type-III machinery) and downstream of nothing unproven.
+genuine free-field net with a real boost symmetry at finite mode number**. Beyond the finite-mode case,
+the **continuum 1+1D bosonic free field is now itself machine-checked, axiom-free** (§6½): the symmetric
+Fock space, coherent states, the **quasifree vacuum state**, the Weyl/CCR core, second quantization, the
+**Lorentz boost as a Hilbert-space isometry fixing the vacuum**, and the **Lorentz-invariance of the
+vacuum state** — with μ∞ existing on the Fock space. The single remaining frontier for the *literal
+continuum (relativistic, Type III₁)* prize is now narrowed to one construction — the Haag–Kastler local
+field-effect net — which lifts the proven operator-level vacuum covariance to measure-level μ∞
+covariance; it sits atop a fully machine-checked field foundation and is downstream of nothing unproven.
 
 ---
 
@@ -165,6 +169,47 @@ symmetry at finite mode number (Type I)**. The prize is *proven for the finite-m
 
 ---
 
+## 6½. The continuum free field — the Fock/CCR foundation (machine-checked, axiom-free)
+
+Mathlib has **no** Fock-space / CCR / second-quantization theory. This layer builds the genuine
+**continuum 1+1D relativistic free field** from scratch — the operator/state/boost apparatus the
+*literal* (Type III₁) prize sits on — entirely axiom-free (`QIQTH/Fock/*`, plan
+`FOCK_CCR_FOUNDATION_PLAN.md`, grounded in Parthasarathy §§15/19/20):
+
+- **F1 — one-particle space + boost** (`Fock/OneParticle`): a measure-preserving flow → a one-parameter
+  **unitary group** on `L²`; the genuine 1+1D massive **Lorentz boost** `boostUnitary t` = translation
+  on `L²(ℝ)` in rapidity coordinates (no Jacobian, since `dΩ_m = ½dθ`).
+- **F2 — the symmetric (bosonic) Fock space** (`Fock/ExpKernel`, `Fock/FockSpace`): the **keystone**
+  `expKernel_posSemidef` — `exp⟪f,g⟫` is a **positive-definite kernel** (Gram-PSD + the **Schur product
+  theorem** iterated over Hadamard powers + the exp series) — the one hard analytic lemma. On it:
+  `Fock H = Completion(FockPre H)` is a genuine Hilbert space, with **exponential (coherent) vectors**
+  `e(f)`, the **vacuum** `Ω = e(0)`, and the defining identity **`⟪e(f),e(g)⟫ = exp⟪f,g⟫`**
+  (`Fock.inner_expVec`), `⟪Ω,Ω⟫ = 1`.
+- **F2-Γ — second quantization** (`Fock/SecondQuant`): `Γ(A) e(f) = e(Af)` (= `Finsupp.mapDomain A`),
+  **isometric** (`fockInner_secondQuant`), **functorial** (`secondQuantPre_comp`), vacuum-fixing. The
+  Lorentz boost lifts: `boostFockH t = Γ(U₁(t))` is a genuine **isometry of the Fock Hilbert space**
+  (`boostFockH_isometry`) with **`boostFockH_vacuum`: `Γ(U₁(t)) Ω = Ω`**.
+- **F3 — quasifree vacuum state + Weyl/CCR core** (`Fock/VacuumState`, `Fock/Weyl`): the **vacuum state**
+  `ω₀(T) = Re⟪Ω,TΩ⟫` (`vacuumStateHom`, positive, `ω₀(1)=1`) — the `ω` `EffectStateNet` consumes; the
+  **Weyl unitarity identity** `weyl_isometry` (the CCR-unitarity core) and the **quasifree value**
+  `⟪Ω,W(u)Ω⟫ = exp(−½‖u‖²)`.
+- **Vacuum covariance** — **`weylCoeff_vacuum_boost_invariant`: `⟪Ω,W(U₁(t)u)Ω⟫ = ⟪Ω,W(u)Ω⟫`** — the
+  **quasifree vacuum state is Lorentz-boost invariant** (the boost preserves `‖u‖`). With
+  `boostFockH_vacuum` this is the **operator-level boost-covariance of the vacuum state**.
+- **F6 (first increment)** (`Fock/FockTypicality`): `fock_typicalityMeasure_exists` — the whole prize
+  pipeline (`EffectStateNet` + Kolmogorov extension) runs **end-to-end on the genuine continuum Fock
+  space driven by `ω₀`**: a unique σ-additive μ∞ exists.
+
+**Verdict.** The entire operator/Fock/state/boost apparatus of the relativistic free field — Fock space,
+coherent states, quasifree vacuum, Weyl/CCR core, second quantization, the Lorentz boost as a
+Hilbert-space isometry fixing the vacuum, and the **Lorentz-invariance of the vacuum state** — is now
+machine-checked and axiom-free, with μ∞ existing on it. The one genuine remainder to *measure-level*
+boost-covariance (`μ∞.map boost = μ∞`) is the **Haag–Kastler local field-effect net** (field operators
+per spacelike region + the boost permuting regions; Bisognano–Wichmann) — a multi-year construction that
+now sits on a fully machine-checked foundation.
+
+---
+
 ## 7. The continuum operator-algebra infrastructure (built to / past the Mathlib frontier)
 
 Supporting machinery, machine-checked, that the continuum realization would feed on:
@@ -202,14 +247,16 @@ enforces the budget and scans for vacuous `:= True` bodies and `sorry`.
 1. **Unconditional Born** (Layer B). Deriving non-contextuality / equivariance / independence from
    deeper principles — the shared open problem of all single-world programs. *Likely a restatement of
    the measurement problem; not claimed.*
-2. **The continuum (Type III₁, relativistic) prize** (Layer C/Phase B). The only thing between the
-   current state and the literal continuum prize is the **Fock / CCR / quasifree-vacuum field
-   infrastructure**: real symplectic test space → Weyl/CCR algebra → quasifree vacuum → Fock space →
-   local net → explicit second-quantized boost. Mathlib has none of this — a **multi-year,
-   build-from-scratch program** (`PHASE_B_INFRASTRUCTURE_PLAN.md` Part-B route). It is **wall-free** (the
-   explicit-boost route bypasses Tomita–Takesaki / Type-III / `StarOrderedRing`, never forming `Δ^{1/2}`),
-   and **every downstream measure-theoretic piece is already proven** — so it is "build the field net,"
-   not "redo the measure theory."
+2. **The continuum (Type III₁, relativistic) prize** (Layer C/Phase B). The **Fock / CCR /
+   quasifree-vacuum field infrastructure is now built** (§6½, axiom-free): one-particle space + Lorentz
+   boost → symmetric Fock space → coherent states + vacuum → quasifree vacuum state → Weyl/CCR core →
+   second quantization → the boost as a Hilbert-space isometry fixing the vacuum → the **Lorentz-invariance
+   of the vacuum state** → μ∞ exists on the Fock space. The **one genuine remainder** is the
+   **Haag–Kastler local field-effect net** — bounded field operators per spacelike region as the
+   typicality records, with the boost permuting regions — which lifts the (done) *operator-level* vacuum
+   covariance to *measure-level* `μ∞.map boost = μ∞`. That net (with Bisognano–Wichmann) is a multi-year
+   construction; it now sits on a fully machine-checked, axiom-free Fock/operator/state/boost foundation,
+   so it is "build the local net," not "build the field."
    - *Cited, not needed for μ:* Type III₁-ness of local algebras (Buchholz–Wichmann 1986; Fredenhagen
      1985); Bisognano–Wichmann (modular flow = boost, 1975/76). These characterize the algebra *type*;
      μ only needs a normal state.
@@ -227,8 +274,13 @@ enforces the budget and scans for vacuous `:= True` bodies and `sorry`.
   real boost symmetry at finite mode number**. (Layers C + Phase B.)
 - All of the above **axiom-free**; the 33 remaining axioms are honest, audited continuum/entropy
   interface inputs.
-- The continuum (relativistic, Type III₁) prize is **fully reduced** to one large, wall-free, downstream-
-  of-nothing-unproven infrastructure program.
+- A **machine-checked, axiom-free construction of the continuum 1+1D bosonic free field** (§6½): the
+  symmetric Fock space, coherent states, the **quasifree vacuum state**, the Weyl/CCR unitarity core,
+  second quantization, the **Lorentz boost as a Hilbert-space isometry fixing the vacuum**, and the
+  **Lorentz-invariance of the vacuum state** — with μ∞ existing on the Fock space.
+- The continuum (relativistic, Type III₁) prize is now reduced to **one remaining construction** — the
+  Haag–Kastler local field-effect net — which lifts the proven operator-level vacuum covariance to
+  measure-level μ∞ covariance, atop a fully machine-checked field foundation.
 
 ---
 
@@ -241,6 +293,7 @@ enforces the budget and scans for vacuous `:= True` bodies and `sorry`.
 | Lorentz/μ finite (C) | `LorentzSelection`, `LorentzSelectionStrong`, `LorentzWitness`, `FreeFieldNet`, `DiamondSwapNet`, `SheafSection`, `FreeFieldRecord` |
 | Continuum measure (XL) | `NoSignalingGeneral`, `CoarseGrainNaturality`, `CylinderTypicality`, `FiniteMarginals`, `KolmogorovFiniteFiber`, `StateNetMeasure`, `QuantumHistoryMeasure` |
 | Normal state / B(H) / free field | `NormalState`, `BHTypicalityMeasure`, `AbsoluteValue`, `FreeFieldTypicality` |
+| Continuum Fock/CCR field (§6½) | `Fock/OneParticle`, `Fock/ExpKernel`, `Fock/FockSpace`, `Fock/SecondQuant`, `Fock/VacuumState`, `Fock/Weyl`, `Fock/FockTypicality` |
 | Continuum TT infra | `Spectral/SpectralTheorem`, `Spectral/PVM`, `StandardSubspaceModular`, `FiniteModularTheory`, `SpectralPVM` |
 | Audit | `AxiomAudit`, `scripts/axiom_budget_check.sh` |
 | Plans / status | `PRIZE_ROADMAP`, `PRIZE_EXECUTION_PLAN`, `XL_STEP_PLAN`, `PHASE_B_INFRASTRUCTURE_PLAN`, `TOMITA_TAKESAKI_ROADMAP`, `PROGRAM_STATUS`, `FINITE_BORN_REPRESENTATION` |
@@ -252,6 +305,9 @@ enforces the budget and scans for vacuous `:= True` bodies and `sorry`.
 - A. Conway, *A Course in Functional Analysis* (GTM 96) — bounded spectral theorem, functional calculus
   (`refs/`).
 - Rieffel–Van Daele, *A bounded operator approach to Tomita–Takesaki theory*, PJM 69 (1977) (`refs/`).
+- K. R. Parthasarathy, *An Introduction to Quantum Stochastic Calculus* — exponential vectors, Fock
+  space, Weyl operators, the positive-definite kernel `exp⟪f,g⟫` (§§15/19/20; the §6½ construction;
+  `refs/`).
 - Buchholz–Wichmann (1986), Fredenhagen (1985) — Type III₁ of local QFT algebras (cited).
 - Bisognano–Wichmann (1975/76) — modular flow of wedge algebras = boost (cited).
 - Busch / Bunce–Wright–Christensen–Yeadon — effect-Gleason (grounding Layer B).
