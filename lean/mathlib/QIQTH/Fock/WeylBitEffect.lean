@@ -75,4 +75,67 @@ theorem bornWeight_singleton_eq_effect {ι : Type*} [DecidableEq ι] (u : ι →
     rw [signExt, dif_pos (Finset.mem_singleton_self i)]
   rw [hs]
 
+/-! ### B.0.3 — the JOINT effect: the full multi-mode Born weight is a vacuum POVM expectation -/
+
+/-- The adjoint Weyl bits **commute** under isotropy (microcausality), so their order-independent product
+    is well-defined. -/
+theorem bitAdj_comm (u v : H) (s s' : ℂ) (huv : Complex.im ⟪u, v⟫_ℂ = 0) (ψ : FockPre H) :
+    bitAdj u s (bitAdj v s' ψ) = bitAdj v s' (bitAdj u s ψ) := by
+  have hw : weylPre (-u) (weylPre (-v) ψ) = weylPre (-v) (weylPre (-u) ψ) :=
+    congrFun (congrArg DFunLike.coe (weyl_microcausality (-u) (-v) (by
+      rw [inner_neg_neg]; exact huv))) ψ
+  simp only [bitAdj_apply, map_smul, map_add, smul_add, smul_smul]
+  rw [hw]
+  module
+
+theorem bitAdj_commute {ι : Type*} {u : ι → H}
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0) {i j : ι} (hij : i ≠ j) (s s' : ℂ) :
+    Commute (bitAdj (u i) s) (bitAdj (u j) s') := by
+  show bitAdj (u i) s * bitAdj (u j) s' = bitAdj (u j) s' * bitAdj (u i) s
+  ext ψ
+  exact bitAdj_comm (u i) (u j) s s' (hiso i j hij) ψ
+
+variable {ι : Type*} [DecidableEq ι]
+
+/-- **The product adjoint** `∏_{i∈J} A(uᵢ,sᵢ)*` (order-independent `noncommProd` of the adjoint bits). -/
+noncomputable def bornAdjOp (u : ι → H) (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0)
+    (s : ι → ℂ) (J : Finset ι) : FockPre H →ₗ[ℂ] FockPre H :=
+  J.noncommProd (fun i => bitAdj (u i) (s i)) (fun i _ j _ hij => bitAdj_commute hiso hij (s i) (s j))
+
+theorem bornAdjOp_insert (u : ι → H) (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0)
+    (s : ι → ℂ) {a : ι} {J : Finset ι} (ha : a ∉ J) (ψ : FockPre H) :
+    bornAdjOp u hiso s (insert a J) ψ = bitAdj (u a) (s a) (bornAdjOp u hiso s J ψ) := by
+  rw [bornAdjOp, bornAdjOp, Finset.noncommProd_insert_of_notMem _ _ _ _ ha]; rfl
+
+/-- **The history vector pairs against the product adjoint**: `⟪∏A(uᵢ,sᵢ) Ω, ψ⟫ = ⟪Ω, ∏A(uᵢ,sᵢ)* ψ⟫`.
+    By induction on `J`, peeling one bit with `bitOp_adjoint_inner` and commuting the head adjoint
+    `A(uₐ,sₐ)*` through the rest (`bitAdj_commute`, from microcausality). -/
+theorem bornVecTot_adjoint_inner (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0) (s : ι → ℂ) (J : Finset ι) :
+    ∀ ψ : FockPre H, ⟪bornVecTot u hiso s J, ψ⟫_ℂ = ⟪vac H, bornAdjOp u hiso s J ψ⟫_ℂ := by
+  classical
+  induction J using Finset.induction with
+  | empty => intro ψ; simp [bornVecTot_empty, bornAdjOp, Finset.noncommProd_empty]
+  | @insert a J' ha ih =>
+    intro ψ
+    rw [bornVecTot_insert u hiso s ha, bitOp_adjoint_inner, ih, bornAdjOp_insert u hiso s ha]
+    congr 1
+    have hcomm : Commute (bitAdj (u a) (s a)) (bornAdjOp u hiso s J') :=
+      Finset.noncommProd_commute _ _ _ _ fun j hj =>
+        bitAdj_commute hiso (by rintro rfl; exact ha hj) (s a) (s j)
+    exact (congrFun (congrArg DFunLike.coe hcomm) ψ).symm
+
+/-- **THE JOINT POVM expectation (B.0):** the full multi-mode Weyl-bit Born weight
+    `bornWeight u J σ = ⟪Ω, E_σ Ω⟫`, where `E_σ = (∏_{i∈J} A(uᵢ,σᵢ))* (∏_{i∈J} A(uᵢ,σᵢ))` is the positive
+    JOINT effect of the outcome `σ` on the commuting context `J`.  So every joint Born weight on the
+    continuum free field is a genuine vacuum-state expectation of a positive bounded effect — the
+    operational reading of the σ-additive boost-covariant prize measure μ∞. -/
+theorem bornWeight_eq_joint_effect (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0) (J : Finset ι) (σ : ∀ j : J, Bool) :
+    bornWeight u hiso J σ
+      = RCLike.re ⟪vac H,
+          bornAdjOp u hiso (signExt J σ) J (bornVecTot u hiso (signExt J σ) J)⟫_ℂ := by
+  rw [bornWeight, ← inner_self_eq_norm_sq (𝕜 := ℂ),
+    bornVecTot_adjoint_inner u hiso (signExt J σ) J (bornVecTot u hiso (signExt J σ) J)]
+
 end QIQTH.Fock

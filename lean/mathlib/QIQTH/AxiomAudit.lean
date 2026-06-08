@@ -500,6 +500,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.bornWeight_singleton_eq_effect
 -- expected: standard only — the single-mode Weyl-bit Born weight = ⟪Ω,E(uᵢ,±)Ω⟫, a genuine two-outcome
 -- POVM {E(uᵢ,+1),E(uᵢ,−1)} expectation in the quasifree vacuum (the operational reading of the prize).
+#print axioms QIQTH.Fock.bornVecTot_adjoint_inner
+-- expected: standard only — ⟪∏A(uᵢ,sᵢ)Ω,ψ⟫=⟪Ω,∏A(uᵢ,sᵢ)*ψ⟫ (product adjoint, induction peeling one bit
+-- via bitOp_adjoint_inner + commuting the head adjoint through the rest, bitAdj_commute/microcausality).
+#print axioms QIQTH.Fock.bornWeight_eq_joint_effect
+-- expected: standard only — THE JOINT POVM expectation: the full multi-mode Born weight bornWeight J σ =
+-- ⟪Ω, E_σ Ω⟫ with E_σ = (∏A(uᵢ,σᵢ))*(∏A(uᵢ,σᵢ)) the positive joint effect. Every joint Born weight on the
+-- continuum free field is a genuine vacuum-state expectation of a positive bounded effect (B.0 complete).
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
