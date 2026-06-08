@@ -278,6 +278,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — A5: local marginal = restriction of any larger-context marginal (no-signaling).
 #print axioms QIQTH.HistoryMeasure.isLimit_map_eq
 -- expected: standard only — A4: a marginal-preserving symmetry of the history space is measure-preserving.
+-- XL Phase A, A0: matrix Born law → PMF → i.i.d. quantum continuum history measure
+#print axioms QIQTH.QuantumHistoryMeasure.bornPMF
+-- expected: standard only — the single-measurement Born weights form a PMF (nonneg + sum 1).
+#print axioms QIQTH.QuantumHistoryMeasure.quantumHistoryMeasure_marginal
+-- expected: standard only — the i.i.d. quantum history measure restricts to the Born product marginal.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

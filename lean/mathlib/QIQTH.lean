@@ -65,6 +65,9 @@ import QIQTH.CylinderTypicality
 -- XL-step Phase A smoke test: the Finset ι projective-family shape validated against Mathlib's
 -- Kolmogorov extension — i.i.d. case gets a genuine σ-additive limit measure μ∞ via infinitePi:
 import QIQTH.FiniteMarginals
+-- XL-step A0: the matrix Born law as a PMF (bornPMF); the i.i.d. quantum history measure on ℕ→α
+-- (σ-additive, Born marginals) — the concrete quantum endpoint of the reachable part of Phase A:
+import QIQTH.QuantumHistoryMeasure
 -- A6 strengthening: minimality/independence table for Born premises:
 import QIQTH.BornMinimalityTable
 -- A4 strengthening: Chebyshev concentration upgrading Born means to frequencies:
