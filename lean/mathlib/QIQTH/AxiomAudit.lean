@@ -396,6 +396,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.weylCoeff_vacuum_boost_invariant
 -- expected: standard only — ⟪Ω,W(U₁(t)u)Ω⟫ = ⟪Ω,W(u)Ω⟫: the quasifree vacuum state is LORENTZ-BOOST
 -- INVARIANT (the boost preserves ‖u‖) — the physical heart of boost-covariance.
+-- The bounded WEYL OPERATOR W(u) on Fock (GPT-flagged keystone): W(u)e(g)=c·e(g+u), isometric, unitary.
+#print axioms QIQTH.Fock.weylPre_expVec
+-- expected: standard only — W(u) e(g) = weylCoeff u g · e(g+u) (the coherent-vector action).
+#print axioms QIQTH.Fock.fockInner_weyl
+-- expected: standard only — W(u) preserves the coherent-state inner product (= weyl_isometry summed) →
+-- W(u) is an ISOMETRY of the Fock space; the algebraic content making W(u) unitary.
+#print axioms QIQTH.Fock.weylPre_zero
+-- expected: standard only — W(0) = id.
+#print axioms QIQTH.Fock.weylH_isometry
+-- expected: standard only — W(u) extends to a genuine isometry of the completed Fock Hilbert space.
+#print axioms QIQTH.Fock.fockInner_vacuum_weyl
+-- expected: standard only — ⟪Ω,W(u)Ω⟫ = exp(−½‖u‖²): the quasifree value, as an actual operator m.e.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
