@@ -310,6 +310,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BHTypicalityMeasure.bh_typicalityMeasure_exists
 -- expected: standard only — END TO END on infinite-dim B(H): a genuine normal state ω=Tr(ρ·) yields a
 -- unique σ-additive probability typicality measure μ∞ on histories (via EffectStateNet + Kolmogorov ext).
+-- Phase B Part A — general trace-class step (Simon §1.1): operator absolute value |T|=√(T⋆T)
+#print axioms QIQTH.AbsoluteValue.absOp_mul_self
+-- expected: standard only — |T|·|T|=T⋆T (√x·√x=x on the nonneg spectrum of T⋆T; no StarOrderedRing needed).
+#print axioms QIQTH.AbsoluteValue.norm_absOp_apply
+-- expected: standard only — ‖|T|x‖=‖Tx‖ (the defining isometry property of the absolute value).
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

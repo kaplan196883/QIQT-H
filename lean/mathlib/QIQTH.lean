@@ -80,6 +80,9 @@ import QIQTH.NormalState
 -- Phase B Part A — CLOSING THE LOOP on B(H): the diagonal normal state drives the EffectStateNet →
 -- σ-additive μ∞ pipeline end-to-end (first fully infinite-dimensional instance of the prize):
 import QIQTH.BHTypicalityMeasure
+-- Phase B Part A — general trace-class step (Simon §1.1): the operator absolute value |T|=√(T⋆T) via
+-- cfc on the nonneg-spectrum T⋆T (|T| self-adjoint, |T|²=T⋆T, ‖|T|x‖=‖Tx‖) — foundation of trace-class:
+import QIQTH.AbsoluteValue
 -- A6 strengthening: minimality/independence table for Born premises:
 import QIQTH.BornMinimalityTable
 -- A4 strengthening: Chebyshev concentration upgrading Born means to frequencies:
