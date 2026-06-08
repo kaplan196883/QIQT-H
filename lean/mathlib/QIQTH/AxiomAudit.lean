@@ -445,6 +445,17 @@ namespace QIQTH.AxiomAudit
 -- with positivity (free), normalization (totalWeight_vac) and boost-covariance, the four Kolmogorov
 -- ingredients for the σ-additive boost-covariant μ∞ are now all proven.
 
+-- Stage 1.3: the Finset-context Born weight and its NORMALIZATION over an arbitrary finite context.
+#print axioms QIQTH.Fock.bornVecTot_insert
+-- expected: standard only — the order-independent history product ∏_{i∈J} A(uᵢ,sᵢ)Ω (Finset.noncommProd
+-- over the COMMUTING bit operators, bitOp_commute from microcausality); insert prepends a bit.
+#print axioms QIQTH.Fock.bornWeight_insert
+-- expected: standard only — the Finset Born weight ‖∏_{i∈J} A(uᵢ,σᵢ)Ω‖² factors a bit off the head.
+#print axioms QIQTH.Fock.bornWeight_total
+-- expected: standard only — NORMALIZATION over an arbitrary finite context: ∑_σ bornWeight J σ = 1, by
+-- induction on J (the explicit bit-splitting equiv insertBoolSplit reduces the inductive step to
+-- bit_normSq_sum). The σ-additive μ∞'s `total` Kolmogorov obligation, now proven for any finite J.
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation
