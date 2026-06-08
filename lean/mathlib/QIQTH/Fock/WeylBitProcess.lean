@@ -13,6 +13,7 @@
   per-outcome boost-covariance of the Weyl-bit Born law on the continuum free field.  Axiom-free.
 -/
 import QIQTH.Fock.WeylBit
+import QIQTH.Fock.WeylCCR
 import QIQTH.Fock.SecondQuant
 import QIQTH.Fock.Weyl
 import Mathlib.Tactic
@@ -81,5 +82,17 @@ theorem bornWeight_boost_invariant (t : ℝ)
 theorem histVec_marginal (u : H) (L : List (H × ℂ)) :
     ‖histVec ((u, 1) :: L)‖ ^ 2 + ‖histVec ((u, -1) :: L)‖ ^ 2 = ‖histVec L‖ ^ 2 := by
   rw [histVec, histVec, bit_normSq_sum]
+
+/-- **Commutativity of the Weyl bits**: for symplectically-orthogonal `u,v` (`Im⟪u,v⟫ = 0`, as
+    spacelike-separated / distinct mutually-isotropic modes are) the bit operators commute,
+    `A(u,s) ∘ A(v,s') = A(v,s') ∘ A(u,s)`.  This is the abelian structure (from microcausality) that
+    makes the joint Born law well-defined and projective under arbitrary coordinate marginalization. -/
+theorem bitOp_comm (u v : H) (s s' : ℂ) (huv : Complex.im ⟪u, v⟫_ℂ = 0) (ψ : FockPre H) :
+    bitOp u s (bitOp v s' ψ) = bitOp v s' (bitOp u s ψ) := by
+  have hw : weylPre u (weylPre v ψ) = weylPre v (weylPre u ψ) :=
+    congrFun (congrArg DFunLike.coe (weyl_microcausality u v huv)) ψ
+  simp only [bitOp_apply, map_smul, map_add, smul_add, smul_smul]
+  rw [hw]
+  module
 
 end QIQTH.Fock
