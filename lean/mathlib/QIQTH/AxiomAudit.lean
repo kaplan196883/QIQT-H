@@ -466,6 +466,10 @@ namespace QIQTH.AxiomAudit
 -- Born law: for any I⊆J, bornWeight I y = ∑_{x↾I=y} bornWeight J x. Strong induction on J peeling one
 -- FREE mode a∈J\I at a time (bornWeight_erase_marginal). The `coarse` obligation of EffectStateNet —
 -- the last ingredient (with pos, total, boost-covariance) for the σ-additive boost-covariant μ∞.
+#print axioms QIQTH.Fock.weylBit_typicalityMeasure_exists
+-- expected: standard only — THE FIRST NON-DETERMINISTIC TYPICALITY MEASURE on the continuum free field:
+-- the genuine Weyl-bit EffectStateNet (Born weights forming an actual 2^|J| probability distribution, not
+-- a point mass) yields a σ-additive probability μ∞ on the history space via the Kolmogorov extension.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

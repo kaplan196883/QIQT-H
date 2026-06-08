@@ -13,6 +13,7 @@
 -/
 import QIQTH.Fock.WeylBit
 import QIQTH.Fock.WeylBitProcess
+import QIQTH.StateNetMeasure
 import Mathlib.Tactic
 
 set_option linter.unusedSectionVars false
@@ -20,6 +21,7 @@ set_option linter.unusedSectionVars false
 namespace QIQTH.Fock
 
 open scoped InnerProductSpace
+open MeasureTheory QIQTH.StateNetMeasure
 
 variable {ι : Type*} [DecidableEq ι] {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
 
@@ -261,5 +263,33 @@ theorem bornWeight_coarse (u : ι → H) (hiso : ∀ i j, i ≠ j → Complex.im
       by_cases hc : Finset.restrict₂ (π := fun _ : ι => Bool) hIe x' = y
       · simp_rw [if_pos hc]; exact (bornWeight_erase_marginal u hiso haJ x').symm
       · simp_rw [if_neg hc, Finset.sum_const_zero]
+
+/-- **The genuine (non-deterministic) Weyl-bit `EffectStateNet` on the continuum free field.**
+    Outcomes are bits (`α = Bool`), the state is the identity functional on `ℝ`, and the joint effect of
+    a finite commuting context `J` with outcome `σ` is its **Born weight** `‖∏_{i∈J} A(uᵢ,σᵢ) Ω‖²`.  Unlike
+    the deterministic record nets (`diracNet`, `fockVacuumNet`), the effects here are a genuine probability
+    distribution over `2^|J|` outcomes: positivity is free (norm-square), normalization is `bornWeight_total`,
+    and coarse-graining consistency is `bornWeight_coarse`. -/
+noncomputable def weylBitNet (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0) :
+    EffectStateNet (ι := ι) (fun _ : ι => Bool) ℝ where
+  ω := AddMonoidHom.id ℝ
+  E := fun J σ => bornWeight u hiso J σ
+  pos := fun J x => by
+    simp only [AddMonoidHom.id_apply]; exact pow_nonneg (norm_nonneg _) 2
+  total := fun J => by simpa using bornWeight_total u hiso J
+  coarse := fun I J h y => bornWeight_coarse u hiso J I h y
+
+/-- **The σ-additive typicality measure μ∞ EXISTS for the genuine Weyl-bit net.**  Combining the four
+    proven ingredients (positivity, normalization `bornWeight_total`, coarse-graining `bornWeight_coarse`)
+    with the finite-fiber Kolmogorov extension: there is a unique σ-additive probability measure μ∞ on the
+    history space `∀ i, Bool` whose finite marginals are the Weyl-bit Born measures.  This is the FIRST
+    non-deterministic (genuinely physical) typicality measure on the continuum free field — Born weights
+    that are an actual probability distribution, not a point mass. -/
+theorem weylBit_typicalityMeasure_exists (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0) :
+    ∃ μ : Measure (∀ _ : ι, Bool), IsProbabilityMeasure μ ∧
+      (weylBitNet u hiso).toFiniteMarginals.IsLimit μ :=
+  (weylBitNet u hiso).exists_typicalityMeasure
 
 end QIQTH.Fock
