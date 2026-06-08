@@ -203,3 +203,4 @@ import QIQTH.EffectGleason
 -- an explicit rational IC-POVM on ℂ² whose four record traces SEPARATE density matrices
 -- (informationally complete), the finite case of the make-or-break lemma. Axiom-free:
 import QIQTH.QubitIC
+import QIQTH.Fock.OneParticle

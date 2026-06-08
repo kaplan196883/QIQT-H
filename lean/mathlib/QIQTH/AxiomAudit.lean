@@ -322,6 +322,17 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — μ∞ INVARIANT under the geometry-moving mode-permutation boost (covariance,
 -- finite-mode Lorentz action) when the per-region state is boost-invariant.
 
+-- F1 (Fock/CCR foundation): the one-particle space and the continuum boost UNITARY GROUP.
+#print axioms QIQTH.Fock.OneParticle.MPFlow.unitary_apply
+-- expected: standard only — the measure-preserving flow acts on L² by the unitary ψ ↦ ψ∘χ_{-t}.
+#print axioms QIQTH.Fock.OneParticle.MPFlow.unitary_add_apply
+-- expected: standard only — one-parameter group law U(s+t)=U(s)∘U(t) for the abstract flow unitary.
+#print axioms QIQTH.Fock.OneParticle.boostUnitary_add_apply
+-- expected: standard only — the 1+1D massive Lorentz boost (rapidity=translation on L²(ℝ)) is a
+-- one-parameter unitary GROUP: the genuine continuum replacement for the finite mode-permutation boost.
+#print axioms QIQTH.Fock.OneParticle.boostUnitary_zero_apply
+-- expected: standard only — boost at rapidity 0 is the identity.
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation
