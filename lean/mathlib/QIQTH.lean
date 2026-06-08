@@ -71,6 +71,9 @@ import QIQTH.QuantumHistoryMeasure
 -- XL-step A2b: the general (correlated/entangled) Kolmogorov extension for FINITE discrete fibers —
 -- every consistent finite-fiber marginal family has a σ-additive projective-limit measure μ∞:
 import QIQTH.KolmogorovFiniteFiber
+-- XL-step Phase B (formalizable core): the typicality measure is STATE-AGNOSTIC — any positive
+-- normalized linear state ω on a net of compatible effects yields μ∞ (Type III₁ realization cited):
+import QIQTH.StateNetMeasure
 -- A6 strengthening: minimality/independence table for Born premises:
 import QIQTH.BornMinimalityTable
 -- A4 strengthening: Chebyshev concentration upgrading Born means to frequencies:

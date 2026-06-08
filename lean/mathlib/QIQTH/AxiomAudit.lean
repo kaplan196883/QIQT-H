@@ -290,6 +290,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the Kolmogorov measure IS the projective limit (correlated case, no product).
 #print axioms QIQTH.KolmogorovFiniteFiber.exists_isLimit
 -- expected: standard only — EXISTENCE: every finite-fiber FiniteMarginals family has a σ-additive μ∞.
+-- XL Phase B (formalizable core): the typicality measure is STATE-AGNOSTIC
+#print axioms QIQTH.StateNetMeasure.EffectStateNet.toFiniteMarginals
+-- expected: standard only — B1: any state ω on a net of compatible effects ⇒ Kolmogorov-consistent Born family.
+#print axioms QIQTH.StateNetMeasure.EffectStateNet.exists_typicalityMeasure
+-- expected: standard only — μ∞ exists for ANY EffectStateNet (Type III₁ QFT realization of ω is the cited frontier).
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
