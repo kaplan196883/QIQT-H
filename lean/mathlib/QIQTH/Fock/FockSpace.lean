@@ -13,7 +13,10 @@
 -/
 import QIQTH.Fock.ExpKernel
 import Mathlib.Analysis.InnerProductSpace.Basic
+import Mathlib.Analysis.InnerProductSpace.Completion
 import Mathlib.Tactic
+
+set_option linter.dupNamespace false
 
 namespace QIQTH.Fock
 
@@ -85,6 +88,38 @@ theorem inner_expVec (f g : H) :
   simp only [fockInner, expVec, Finsupp.sum_single_index, star_one, one_mul, mul_one,
     mul_zero, zero_mul, star_zero]
 
+/-- The seminorm of the pre-Fock space, induced by the (positive-semidefinite) Fock inner product. -/
+noncomputable instance : SeminormedAddCommGroup (FockPre H) :=
+  InnerProductSpace.Core.toSeminormedAddCommGroup (𝕜 := ℂ)
+
+noncomputable instance : InnerProductSpace ℂ (FockPre H) := .ofCore _
+
 end FockPre
+
+/-- The symmetric (bosonic) **Fock space** over the one-particle space `H`: the completion of the
+    exponential-vector pre-Hilbert space.  A genuine (complex) Hilbert space. -/
+abbrev Fock (H : Type*) [NormedAddCommGroup H] [InnerProductSpace ℂ H] : Type _ :=
+  UniformSpace.Completion (FockPre H)
+
+namespace Fock
+
+/-- The **exponential (coherent) vector** `e(f)` in the Fock space. -/
+noncomputable def expVec (f : H) : Fock H := (FockPre.expVec f : Fock H)
+
+/-- The **vacuum** `Ω = e(0)`. -/
+noncomputable def vacuum : Fock H := expVec (0 : H)
+
+/-- **The coherent-state inner-product identity in the Fock space:** `⟪e(f), e(g)⟫ = exp⟪f,g⟫`. -/
+theorem inner_expVec (f g : H) :
+    (⟪expVec f, expVec g⟫_ℂ : ℂ) = Complex.exp ⟪f, g⟫_ℂ := by
+  rw [expVec, expVec, UniformSpace.Completion.inner_coe]
+  exact FockPre.inner_expVec f g
+
+/-- The vacuum is a unit vector: `⟪Ω, Ω⟫ = 1`. -/
+theorem inner_vacuum : (⟪(vacuum : Fock H), vacuum⟫_ℂ : ℂ) = 1 := by
+  rw [vacuum, inner_expVec]
+  simp
+
+end Fock
 
 end QIQTH.Fock

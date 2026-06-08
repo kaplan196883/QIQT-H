@@ -354,6 +354,11 @@ namespace QIQTH.AxiomAudit
 -- pre-Hilbert symmetric Fock space (positive-semidefinite Hermitian inner product, conj-linear).
 #print axioms QIQTH.Fock.FockPre.inner_expVec
 -- expected: standard only — the DEFINING coherent-state identity ⟪e(f),e(g)⟫ = exp⟪f,g⟫.
+-- F2c completion: the actual Fock HILBERT space (completion), vacuum, coherent-state identity.
+#print axioms QIQTH.Fock.Fock.inner_expVec
+-- expected: standard only — ⟪e(f),e(g)⟫ = exp⟪f,g⟫ in the completed Fock space (genuine Hilbert space).
+#print axioms QIQTH.Fock.Fock.inner_vacuum
+-- expected: standard only — the vacuum Ω = e(0) is a unit vector ⟪Ω,Ω⟫ = 1.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
