@@ -157,6 +157,18 @@ named axiom with an audit note; the budget records it explicitly. Everything in 
 axiom-free and does not depend on this beyond labelling the net's type.
 
 ### Phase F6 — The prize: covariant μ∞ on the continuum net
+
+> **F6 first increment — DONE** (commit `340c724`, axiom-free): `QIQTH/Fock/FockTypicality.lean`.
+> `fockVacuumNet` = an `EffectStateNet` on `B(Fock H)` driven by the quasifree vacuum state `ω₀`;
+> `fock_typicalityMeasure_exists` proves a unique σ-additive probability **μ∞ EXISTS** on the history
+> space (via `EffectStateNet` + the Kolmogorov extension) — the whole prize pipeline running on the
+> genuine continuum free-field Fock space with the vacuum state.  The continuum analogue of
+> `BHTypicalityMeasure.bh_typicalityMeasure_exists`.
+> **Remaining for the full prize: boost-COVARIANCE of μ∞** — needs the boost acting on the Fock space,
+> i.e. second quantization `Γ(U₁(t))` (the optional F2-Γ step) + `Γ(U₁(t))Ω = Ω` (vacuum invariance) +
+> the field effects transforming covariantly.  This is the continuum analogue of
+> `FreeFieldTypicality.freeFieldMeasure_boost_invariant`.
+
 *New file `QIQTH/Fock/ContinuumTypicality.lean`.* The promotion of `FreeFieldTypicality` to the continuum.
 1. **Effect net from the field.** Records = spectral data of a commuting family of smeared field
    observables in a spacelike region (a single **compatible/decoherent** framework per the Fine/Bell
