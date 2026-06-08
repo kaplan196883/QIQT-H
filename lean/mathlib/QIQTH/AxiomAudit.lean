@@ -299,6 +299,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — NON-VACUITY: a concrete deterministic net fires the whole state→μ∞ pipeline
 -- (the EffectStateNet hypotheses are jointly satisfiable; no soundness/vacuity hole).
 
+-- Phase B Part A (first brick): a genuine infinite-dim normal state on B(H) (diagonal density operator)
+#print axioms QIQTH.NormalState.diagState_add
+-- expected: standard only — ω(x+y)=ω(x)+ω(y): the diagonal state is additive (bundled diagStateHom).
+#print axioms QIQTH.NormalState.diagState_nonneg
+-- expected: standard only — 0 ≤ ω(x) for x ≥ 0 (positivity on positive operators).
+#print axioms QIQTH.NormalState.diagState_one
+-- expected: standard only — ω(1)=∑ pᵢ (=1 for a density operator): normalization. So ω is a state.
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation

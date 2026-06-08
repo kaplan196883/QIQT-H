@@ -74,6 +74,9 @@ import QIQTH.KolmogorovFiniteFiber
 -- XL-step Phase B (formalizable core): the typicality measure is STATE-AGNOSTIC — any positive
 -- normalized linear state ω on a net of compatible effects yields μ∞ (Type III₁ realization cited):
 import QIQTH.StateNetMeasure
+-- Phase B Part A (first brick): a genuine infinite-dim NORMAL STATE on B(H) — the diagonal density
+-- operator ω(x)=∑ pₙ⟨eₙ,x eₙ⟩ (positive, normalized, additive), bypassing general Schatten theory:
+import QIQTH.NormalState
 -- A6 strengthening: minimality/independence table for Born premises:
 import QIQTH.BornMinimalityTable
 -- A4 strengthening: Chebyshev concentration upgrading Born means to frequencies:
