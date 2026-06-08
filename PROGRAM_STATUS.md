@@ -16,6 +16,27 @@ what is the prize we are chasing, and what must be fixed before arXiv.*
 > Step-3 discharges; 35 → 33 by DELETING the two content-free placeholder axioms
 > (`LLN_typicality_axiom`, `mackey_gleason_to_trace_density`), both superseded by axiom-free
 > finite results. References to "37"/"35" elsewhere in this document predate these and read 33.
+>
+> **Update 2026-06-08 (the continuum Fock/CCR field foundation — built from scratch).** Mathlib
+> has *zero* Fock-space / CCR theory; this session machine-checked, axiom-free (budget still 33),
+> the entire operator/state apparatus of the continuum 1+1D bosonic free field (`QIQTH/Fock/*`,
+> master write-up `WRITEUP.md` §6½, plan `FOCK_CCR_FOUNDATION_PLAN.md`):
+> one-particle L²(ℝ) + the **Lorentz boost** as a one-parameter unitary group (rapidity);
+> the **symmetric Fock space** via the positive-definite-kernel keystone `exp⟪f,g⟫`
+> (Gram-PSD + Schur product theorem), with coherent vectors `e(f)`, vacuum `Ω`, `⟪e(f),e(g)⟫=exp⟪f,g⟫`;
+> **second quantization** Γ and the boost as a **Hilbert-space isometry fixing the vacuum**
+> (`boostFockH_vacuum`); the **quasifree vacuum state** `ω₀` (the `ω` `EffectStateNet` consumes);
+> the **bounded Weyl operators** `W(u)` with their isometry/CCR-unitarity (`fockInner_weyl`); the
+> **Lorentz-invariance of the vacuum state** (`weylCoeff_vacuum_boost_invariant`); the first
+> **non-vacuous boost-covariance** — the vacuum two-point function `⟪Ω,W(u)W(v)Ω⟫` is boost-invariant
+> (`weyl2pt_boost_invariant`); and **microcausality** — spacelike (symplectically orthogonal) Weyl
+> observables COMMUTE (`weyl_microcausality`).  A GPT-5.5-pro review put the *literal* prize at ~20%
+> and named the bounded Weyl operator as the keystone; that keystone and all three of its recommended
+> increments (Weyl op, non-vacuous covariance, microcausality) are now done.  **Honest remaining gap to
+> the literal `μ∞.map(boost)=μ∞`:** the spacetime **localization map** `K : TestFun → OneParticleH`
+> (Pauli–Jordan: spacelike supports ⇒ `Im⟪Kf,Kg⟫=0`; a separate Fourier/mass-shell construction) +
+> bundling `W(u)` as a `ContinuousLinearMap` for a genuine POVM.  The algebraic spine is complete; what
+> remains is the localization geometry + the measure/POVM bundling.
 
 ---
 

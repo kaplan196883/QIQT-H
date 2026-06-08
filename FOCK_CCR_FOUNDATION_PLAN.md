@@ -95,6 +95,20 @@ mass-shell measure + Poincaré one-particle rep, Haag–Kastler local nets, Biso
   smeared field observables per spacelike region as the typicality records, with the boost permuting
   regions, so `μ∞.map boost = μ∞`.  This (with Bisognano–Wichmann) is the multi-year remainder; the
   Fock/operator/state/boost apparatus it sits on is now machine-checked and axiom-free.
+- **GPT-5.5-pro increments (2026-06-08) — ALL THREE DONE** (axiom-free; the review put the literal prize
+  at ~20% and named the bounded Weyl operator the keystone):
+  - **Increment 1 — bounded Weyl operator** (commit `ebac330`): `QIQTH/Fock/WeylOp.lean` — `weylPre`
+    (`W(u)e(g)=weylCoeff u g·e(g+u)`), **`fockInner_weyl`** (the isometry — the keystone), `W(0)=id`,
+    `weylH`/`weylH_isometry` (Hilbert-space isometry), `fockInner_vacuum_weyl` (`⟪Ω,W(u)Ω⟫=exp(−½‖u‖²)`).
+  - **Increment 2 — first NON-VACUOUS boost-covariance** (commit `be40b78`): `QIQTH/Fock/WeylCovariance.lean`
+    — `weyl2pt` (`⟪Ω,W(u)W(v)Ω⟫`), **`weyl2pt_boost_invariant`** (Lorentz-invariant two-point function —
+    genuinely tests quasifree correlations, unlike the deterministic net), `weylBitWeight_mem_Ioo`
+    (non-degenerate Weyl-bit Born weight `∈(0,1)`).
+  - **Increment 3 — microcausality** (commit `821a87b`): `QIQTH/Fock/WeylCCR.lean` — **`weyl_microcausality`**
+    (`W(u)∘W(v)=W(v)∘W(u)` when `Im⟪u,v⟫=0`): spacelike Weyl observables commute — Einstein causality.
+  - **Genuine remaining gap to the literal `μ∞.map(boost)=μ∞`:** the **localization map** `K:TestFun→
+    OneParticleH` (Pauli–Jordan: spacelike ⇒ `Im⟪Kf,Kg⟫=0`; Fourier/mass-shell construction) + bundling
+    `W(u)` as a `ContinuousLinearMap` for a genuine POVM.  The algebraic spine is complete.
 - **F4–F6:** unchanged below.
 
 ## The ladder (six phases F1–F6)

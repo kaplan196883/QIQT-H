@@ -198,15 +198,32 @@ Mathlib has **no** Fock-space / CCR / second-quantization theory. This layer bui
   `boostFockH_vacuum` this is the **operator-level boost-covariance of the vacuum state**.
 - **F6 (first increment)** (`Fock/FockTypicality`): `fock_typicalityMeasure_exists` — the whole prize
   pipeline (`EffectStateNet` + Kolmogorov extension) runs **end-to-end on the genuine continuum Fock
-  space driven by `ω₀`**: a unique σ-additive μ∞ exists.
+  space driven by `ω₀`**: a unique σ-additive μ∞ exists.  *(Honest caveat, per the GPT-5.5-pro review:
+  this net uses deterministic record effects, so it is a plumbing/sanity check, not yet a non-trivial
+  field-history measure — see the non-vacuous results below.)*
+- **The bounded Weyl operators** (`Fock/WeylOp`): the actual unitaries `W(u) : Fock H → Fock H` with
+  `W(u) e(g) = weylCoeff u g · e(g+u)`, the **isometry** `fockInner_weyl` (the `weyl_isometry` identity
+  summed over the coherent-vector expansion — the CCR-unitarity content), `W(0)=id`, the Hilbert-space
+  extension `weylH_isometry`, and `⟪Ω,W(u)Ω⟫ = exp(−½‖u‖²)` as a genuine operator matrix element.
+- **First NON-VACUOUS boost-covariance** (`Fock/WeylCovariance`): the vacuum two-point Weyl function
+  `weyl2pt u v = ⟪Ω,W(u)W(v)Ω⟫` (`= weylCoeff v 0 · weylCoeff u v`) is **Lorentz-boost invariant**
+  (`weyl2pt_boost_invariant`) — a genuinely non-trivial, quasifree-correlation-dependent covariance (it
+  is *not* the deterministic-net triviality); plus the non-degenerate Weyl-bit Born weight
+  `(1+exp(−½‖u‖²))/2 ∈ (0,1)` (`weylBitWeight_mem_Ioo`).
+- **Microcausality** (`Fock/WeylCCR`): **`weyl_microcausality`** — `W(u) ∘ W(v) = W(v) ∘ W(u)` whenever
+  `Im⟪u,v⟫ = 0` (symplectic orthogonality, as spacelike-separated smearings give): **spacelike Weyl
+  observables commute** — Einstein causality / no-signaling, the locality mechanism of the local net.
 
-**Verdict.** The entire operator/Fock/state/boost apparatus of the relativistic free field — Fock space,
-coherent states, quasifree vacuum, Weyl/CCR core, second quantization, the Lorentz boost as a
-Hilbert-space isometry fixing the vacuum, and the **Lorentz-invariance of the vacuum state** — is now
-machine-checked and axiom-free, with μ∞ existing on it. The one genuine remainder to *measure-level*
-boost-covariance (`μ∞.map boost = μ∞`) is the **Haag–Kastler local field-effect net** (field operators
-per spacelike region + the boost permuting regions; Bisognano–Wichmann) — a multi-year construction that
-now sits on a fully machine-checked foundation.
+**Verdict.** The entire *algebraic spine* of the relativistic free field is now machine-checked and
+axiom-free: Fock space, coherent states, the **quasifree vacuum state**, the **bounded Weyl operators**
+with CCR-unitarity, second quantization, the Lorentz boost as a Hilbert-space isometry fixing the vacuum,
+**vacuum-state Lorentz-invariance**, a **non-vacuous boost-covariant two-point function**, and
+**microcausality**.  A GPT-5.5-pro review (2026-06-08) put the *literal* continuum prize at ~20% and named
+the bounded Weyl operator the keystone — that keystone and all three of its recommended increments are
+done.  The two genuine remainders to *measure-level* boost-covariance (`μ∞.map boost = μ∞`): the spacetime
+**localization map** `K : TestFun → OneParticleH` (Pauli–Jordan: spacelike ⇒ `Im⟪Kf,Kg⟫=0`; a separate
+Fourier/mass-shell construction) and bundling `W(u)` as a `ContinuousLinearMap` for a genuine POVM — the
+localization *geometry* + the measure/POVM bundling, atop a now-complete algebraic foundation.
 
 ---
 
@@ -293,7 +310,7 @@ enforces the budget and scans for vacuous `:= True` bodies and `sorry`.
 | Lorentz/μ finite (C) | `LorentzSelection`, `LorentzSelectionStrong`, `LorentzWitness`, `FreeFieldNet`, `DiamondSwapNet`, `SheafSection`, `FreeFieldRecord` |
 | Continuum measure (XL) | `NoSignalingGeneral`, `CoarseGrainNaturality`, `CylinderTypicality`, `FiniteMarginals`, `KolmogorovFiniteFiber`, `StateNetMeasure`, `QuantumHistoryMeasure` |
 | Normal state / B(H) / free field | `NormalState`, `BHTypicalityMeasure`, `AbsoluteValue`, `FreeFieldTypicality` |
-| Continuum Fock/CCR field (§6½) | `Fock/OneParticle`, `Fock/ExpKernel`, `Fock/FockSpace`, `Fock/SecondQuant`, `Fock/VacuumState`, `Fock/Weyl`, `Fock/FockTypicality` |
+| Continuum Fock/CCR field (§6½) | `Fock/OneParticle`, `Fock/ExpKernel`, `Fock/FockSpace`, `Fock/SecondQuant`, `Fock/VacuumState`, `Fock/Weyl`, `Fock/FockTypicality`, `Fock/WeylOp`, `Fock/WeylCovariance`, `Fock/WeylCCR` |
 | Continuum TT infra | `Spectral/SpectralTheorem`, `Spectral/PVM`, `StandardSubspaceModular`, `FiniteModularTheory`, `SpectralPVM` |
 | Audit | `AxiomAudit`, `scripts/axiom_budget_check.sh` |
 | Plans / status | `PRIZE_ROADMAP`, `PRIZE_EXECUTION_PLAN`, `XL_STEP_PLAN`, `PHASE_B_INFRASTRUCTURE_PLAN`, `TOMITA_TAKESAKI_ROADMAP`, `PROGRAM_STATUS`, `FINITE_BORN_REPRESENTATION` |

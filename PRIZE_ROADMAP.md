@@ -24,6 +24,28 @@ NOT from `Q_max` alone. Full claim→theorem map + honest scope: **`FINITE_BORN_
 Record-Completeness Lemma and the AQFT localization producing a single **Lorentz-covariant** μ.
 The 33 remaining axioms are exactly this continuum / Type III₁ interface (beyond current Mathlib).
 
+## 0b. Status (2026-06-08) — the CONTINUUM Fock/CCR field foundation is now built, axiom-free
+
+Mathlib has *no* Fock-space / CCR theory; this session machine-checked it from scratch (budget still
+33; `QIQTH/Fock/*`, master `WRITEUP.md` §6½, plan `FOCK_CCR_FOUNDATION_PLAN.md`).  The entire
+**operator/state/locality spine** of the continuum 1+1D bosonic free field is now axiom-free:
+
+- **one-particle space + Lorentz boost** (L²(ℝ), boost = rapidity translation, a one-parameter unitary group);
+- the **symmetric Fock space** from the positive-definite-kernel keystone `exp⟪f,g⟫` (Gram-PSD + Schur
+  product theorem) — coherent vectors `e(f)`, vacuum `Ω`, `⟪e(f),e(g)⟫ = exp⟪f,g⟫`;
+- **second quantization** Γ; the boost is a **Hilbert-space isometry fixing the vacuum**;
+- the **quasifree vacuum state** `ω₀` (the exact `ω` that `EffectStateNet` consumes);
+- the **bounded Weyl operators** `W(u)` (isometric, CCR-unitary);
+- **vacuum-state Lorentz-invariance**; the first **non-vacuous boost-covariance** (the vacuum two-point
+  function `⟪Ω,W(u)W(v)Ω⟫` is boost-invariant); and **microcausality** (spacelike Weyl observables commute).
+
+A GPT-5.5-pro review (2026-06-08) put the *literal* continuum prize at ~20% and named the bounded Weyl
+operator as the load-bearing keystone — **now built**, along with all three of its recommended increments.
+The honest remaining gap to `μ∞.map(boost) = μ∞`: the spacetime **localization map** `K : TestFun →
+OneParticleH` (Pauli–Jordan: spacelike ⇒ `Im⟪Kf,Kg⟫ = 0`; Fourier/mass-shell construction) + bundling
+`W(u)` as a `ContinuousLinearMap` for a genuine POVM.  **The algebraic spine is complete; the localization
+geometry + measure/POVM bundling remain.**
+
 **A concrete, Lean-grounded staged execution plan** (free-field finite-mode instance → sheaf /
 global-section / cohomology layer → continuum analytic infrastructure), with per-item difficulty,
 dependencies, what already exists, and kill-criteria, is in **`PRIZE_EXECUTION_PLAN.md`**. Headline:
