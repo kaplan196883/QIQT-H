@@ -43,55 +43,59 @@ the genuine quasifree field — but the abstract must be stated with the honest 
 
 ---
 
-## B. The crux: joint-law positivity, and the enabler it forces
+## B. The crux: joint-law positivity — solved by a NORM-SQUARE representation (GPT consult #2)
 
-The one genuinely hard sub-step is `P(a) = ω₀(∏ᵢ Bit(uᵢ, aᵢ)) ≥ 0`. Two routes:
+GPT-5.5-pro's key refinement (2026-06-08): **don't fight positivity with operator order or alternating
+arithmetic — make `P` a literal norm-square, and do all of Stage 1 on the pre-Fock space.** Define, for
+sign `s = ±1`,
+```
+A_i^s := (I + s·weylPre(u_i)) / 2.
+```
+Since `W(u)* = W(−u)`, the bit effect `E_i^s = (2I + s·W(u_i) + s·W(−u_i))/4 = (A_i^s)* A_i^s`, so for a
+commuting (isotropic) family
+```
+∏_{i∈F} E_i^{s_i} = (∏ A_i^{s_i})* (∏ A_i^{s_i}),   and   P_F(s) := ‖ ∏_{i∈F} A_i^{s_i} Ω ‖²  ≥ 0.
+```
+**Positivity is then FREE** (a norm-square), scales to all `n`, needs **no** operator-order theorem and
+**no `ContinuousLinearMap` bundling** — everything is `weylPre` + `fockInner`. The proof recipe:
 
-- **(a) Operator positivity (clean, recommended).** Each `Bit(u,a)` is a **positive contraction**
-  (`0 ≤ Bit ≤ I`): `Bit(u,T) = (2I + W(u) + W(−u))/4`, and `(W(u)+W(−u))/2 = Re W(u)` is self-adjoint
-  with norm ≤ 1, so `Bit(u,T) ∈ [0,I]`. For symplectically-orthogonal `u,v` the bits **commute**
-  (`weyl_microcausality`), so the product of commuting positives is positive, and `ω₀` is positive
-  (`vacuumState_nonneg`) ⇒ `P ≥ 0`. *This needs `W(u)` as a genuine bounded operator with self-adjoint
-  real part and an order/positivity API.*
-- **(b) Explicit arithmetic.** Expand `P(a)` into vacuum amplitudes (`weyl2pt`, vacuum values — all real
-  exponentials when `Im = 0`) and prove `≥ 0` directly. Direct check: `P(T,T) = (1/16)[4 + 4e^{−½‖v‖²} +
-  4e^{−½‖u‖²} + 4e^{−½‖u‖²−½‖v‖²}cosh⟪u,v⟫]` — manifestly positive. But `P(T,F) = weylBitWeight u −
-  P(T,T)` etc. need the marginal-dominates-joint inequalities, which get unwieldy for `n` bits.
+1. **Definition / positivity.** `A_{L,s} = ∏_k (I + s_k·weylPre(u_{i_k}))/2` on `FockPre`; `P_L(s) =
+   ‖A_{L,s} Ω‖² = fockInner (A_{L,s}Ω) (A_{L,s}Ω)`. `≥ 0` immediate.
+2. **Normalization (Σ = 1).** The isometry identity `‖(ψ+Wψ)/2‖² + ‖(ψ−Wψ)/2‖² = ‖ψ‖²` (uses only
+   `W` isometric), inducted over the list.
+3. **Projectivity (coarse-grain consistency).** Order the larger list with retained coordinates first,
+   forgotten last; sum forgotten signs one at a time via the same identity; pairwise commutation
+   (`weyl_microcausality`) gives order-independence.
+4. **Boost-covariance.** Expand `A_{L,s}Ω` as a finite combination of coherent vectors `W(∑_{i∈S}u_i)Ω`;
+   its Gram matrix is built from inner products / norms of *sums* of `u_i`, all preserved by `U₁(t)` +
+   equivariance `u_{β t i} = U₁(t) u_i`.
+5. **Kolmogorov.** Feed `P_F` into `KolmogorovFiniteFiber.exists_isLimit` → `μ∞` with `(β t)_*μ∞ = μ∞`.
 
-**Decision: route (a).** It scales to `n` bits and is the conceptually correct argument (state on a
-commutative subalgebra). It forces the **enabler**:
-
-### B.0 (enabler) — `W(u)` as a bounded operator + `Bit(u,a)` as a positive effect
-
-Currently `weylH u` is a *function* (`Completion.map`) + an isometry; `weylPre u` is a `LinearMap` on
-the dense pre-space. For route (a) I need:
-- `W(u)` (or at least `Re W(u)`) as a **`Fock H →L[ℂ] Fock H`** (bundle `Completion.map`'s linearity —
-  the additive/`ℝ`-linear extension is standard; or build `weylH` as a `LinearIsometryEquiv` directly).
-- `Bit(u,a) : Fock H →L Fock H`, with `IsSelfAdjoint`, `0 ≤ Bit`, `Bit ≤ 1` (a custom `Effect` structure
-  via quadratic-form inequalities `0 ≤ re⟪x, Bit x⟫ ≤ ‖x‖²` — GPT's suggested shortcut to dodge the
-  missing `StarOrderedRing (B(H))` C\*-order API).
-- `commute (Bit u a) (Bit v b)` from `weyl_microcausality` (lifted to `weylH`).
-- `0 ≤ ω₀(Bit(u,a) Bit(v,b))` from "product of commuting positives is positive" + `vacuumState_nonneg`.
-
-This is the real next increment and the gateway to the whole of Stage 1.
+`B.0` (bundle `W(u)` as a CLM, `E_i^s` as positive effects) is then **semantically nice but NOT
+logically required** — do it *after* Stage 1, to prove the equivalence `P_F(s) = ω₀(∏ E_i^{s_i})` and
+package the result in standard operator-state language.
 
 ---
 
-## C. The staged increments
+## C. The staged increments (revised per GPT consult #2 — B.0 deferred)
 
 | Step | Target | Builds on | Difficulty |
 |---|---|---|---|
-| **B.0** | `W(u)`/`Re W(u)` as a bounded `CLM`; `Bit(u,a)` as a positive `Effect`; commutation lifted; `ω₀(Bit·Bit) ≥ 0` | `weylH`, `weyl_microcausality`, `vacuumState_nonneg` | M (Completion linearity + a custom `Effect` struct) |
-| **1.1** | two-bit joint Born law `P(a,b) = ω₀(Bit(u,a)Bit(v,b))`: probability distribution (≥0, Σ=1) + **boost-covariant** | B.0, `weyl2pt_boost_invariant` | M |
-| **1.2** | `n`-bit joint law over a mutually-isotropic family; **projective** (coarse-grain consistent) + boost-covariant; the *compatible record framework* (Fine/Bell satisfied since all commute) | 1.1 | M–L |
-| **1.3** | feed the boost-covariant projective family into `KolmogorovFiniteFiber.exists_isLimit` → **`μ∞` with `μ∞.map(historyBoost β t) = μ∞`** | 1.2, existing Kolmogorov | M |
+| **1.1** | the bit vectors `A_i^s Ω` on `FockPre`; two-bit law `P(s,s') = ‖A_i^s A_j^{s'} Ω‖²` — prob. dist. (≥0 free, Σ=1 via the isometry identity) + the **non-product** law `E[S_iS_j]=e^{−(‖u_i‖²+‖u_j‖²)/2}cosh(Re⟪u_i,u_j⟫)` (kills "just a permutation") | `weylPre`, `fockInner`, `weyl_microcausality` | M |
+| **1.2** | `n`-bit law `P_F(s)=‖∏A_i^{s_i}Ω‖²`: probability + **projective** + **boost-covariant** (the recipe above) | 1.1 | M–L |
+| **1.3** | `KolmogorovFiniteFiber.exists_isLimit` → **`μ∞` on `{±1}^I` with `(β t)_*μ∞ = μ∞`** | 1.2, existing Kolmogorov | M |
+| **B.0** (after) | bundle `W(u)` as CLM, `E_i^s` as a positive `Effect`, prove `P_F = ω₀(∏ E_i^{s_i})` — operator-state packaging | Stage 1 done | M |
 
-**1.2 soundness note (the Fine/Bell gate).** A *mutually symplectic-orthogonal* family is an **isotropic
-subspace** of the one-particle space; the Weyl observables `{Φ(uᵢ)}` mutually commute, generating an
-**abelian CCR subalgebra**, on which `ω₀` restricts to a genuine **classical (Gaussian) probability
-measure** (Gelfand/Bochner). This is exactly the "single compatible/decoherent record framework" the
-soundness gate requires — Fine's theorem is *satisfied*, not violated, because there is no incompatibility
-in an isotropic family. (Cross-check this framing with GPT when reachable.)
+**Soundness gate (GPT-confirmed).** A mutually symplectic-orthogonal (isotropic) family generates an
+**abelian CCR subalgebra**; `ω₀` restricted to it is a genuine **classical Gaussian measure**
+(`C_ij = Re⟪u_i,u_j⟫`), so `P_F(s) = ∫ ∏ (1+s_i cos X_i)/2 dN(0,C_F)` — exactly the compatible/decoherent
+record framework the gate requires; Fine's theorem is *satisfied*, no trap for finite `n`. (Trap only if
+one were to put **noncommuting** Bell settings in a single global `I` — which we never do.)
+
+**Wording discipline (GPT):** call it a **boost-invariant abelian Weyl-bit *process***, not yet
+"Lorentz-covariant free-field typicality"; finite laws are **determined by** the quasifree two-point
+function / Gram covariance (do *not* claim the bit covariance *equals* the two-point function). Use
+`φ(T)=⟪Ω,TΩ⟫` (not the real-part `ω₀`) when speaking C\*/Bochner; real parts only on self-adjoint effects.
 
 ---
 
@@ -110,7 +114,18 @@ in an isotropic family. (Cross-check this framing with GPT when reachable.)
 > two-point function); the spacelike-local *instantiation* of the index by genuine spacetime regions
 > (Pauli–Jordan) remains."
 
-## F. Immediate next action
+## F. Immediate next action (revised)
 
-Start **B.0**: bundle `W(u)`/`Re W(u)` as a bounded operator on `Fock H` and define `Bit(u,a)` as a
-positive `Effect`, with `ω₀(Bit(u,a)Bit(v,b)) ≥ 0` for commuting bits. Then **1.1**.
+Start **1.1**: on `FockPre`, define the bit vectors `A_i^s Ω = (Ω + s·weylPre(u_i)Ω)/2`, the two-bit law
+`P(s,s') = ‖A_i^s A_j^{s'} Ω‖²` via `fockInner`; prove it's a probability distribution (≥0 free; Σ=1 via
+the isometry identity `‖(ψ+Wψ)/2‖²+‖(ψ−Wψ)/2‖²=‖ψ‖²`) and the **non-product** correlation
+`E[S_iS_j]=e^{−(‖u_i‖²+‖u_j‖²)/2}cosh(Re⟪u_i,u_j⟫)`. No CLM bundling (B.0 is deferred to after 1.3).
+
+## G. Honest distance (GPT consult #2)
+
+- **Abstract boost-invariant abelian Weyl-bit process** (the Stage-1 theorem): **~60–70%** via the
+  pre-Fock norm-square route (≤60% if one insists on the CLM/effect API first — hence defer it).
+- **Localized free-field record measure** (the full prize): **35–45%** now → **55–65%** after Stage 1 →
+  **80–90%** after Stage 1 + B.0 + Stage 2. (Never 100% without theorem packaging, concrete index
+  choices, and measurability details.)
+- **Stage 1 is the highest-value next target.**
