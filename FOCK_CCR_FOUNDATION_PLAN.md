@@ -50,6 +50,24 @@ mass-shell measure + Poincaré one-particle rep, Haag–Kastler local nets, Biso
 
 ---
 
+## Progress (live)
+
+- **F1 — DONE** (commit `822108b`, axiom-free): `QIQTH/Fock/OneParticle.lean`.  `MPFlow` →
+  `MPFlow.unitary t : L²(μ) ≃ₗᵢ[ℂ] L²(μ)` (one-parameter unitary group); `boostUnitary` = the 1+1D
+  massive Lorentz boost = translation on `L²(ℝ)` in rapidity coordinates (no Jacobian).
+- **F2 keystone — DONE** (commit `6d5a515`, axiom-free): `QIQTH/Fock/ExpKernel.lean`.
+  `expKernel_posSemidef` — `exp⟪f,g⟫` is a positive-definite kernel (Gram-PSD + Schur product theorem
+  iterated over Hadamard powers + the exp series).  **The one hard analytic lemma of F2.**
+- **F2 infinite-index lift — DONE** (commit `64037c9`, axiom-free): `expKernel_posSemidef'` for an
+  arbitrary (infinite-dim) family — the form the exponential-vector inner product / `RKHS.OfKernel`
+  consume.
+- **F2 remaining (next):** assemble the Fock-space TYPE.  Two routes: (a) `RKHS.OfKernel` (Mathlib
+  Moore–Aronszajn; needs the operator-valued `Matrix H₁ H₁ (ℂ→L ℂ)` PosSemidef translated from
+  `expKernel_posSemidef'` via `posSemidef_tfae`), or (b) a direct scalar `PreInnerProductSpace.Core` on
+  a wrapper of `H₁ →₀ ℂ` (mirrors `OfKernel`'s `H₀` internals; `re_inner_nonneg` = `expKernel_posSemidef'`
+  verbatim).  Then vacuum `Ω=e(0)`, exponential vectors `e(f)`, `⟪e(f),e(g)⟫=exp⟪f,g⟫` (Moore), and `Γ`.
+- **F3–F6:** unchanged below.
+
 ## The ladder (six phases F1–F6)
 
 Each phase is a self-contained, axiom-free, green-building Lean checkpoint. The arc is bottom-up so the
