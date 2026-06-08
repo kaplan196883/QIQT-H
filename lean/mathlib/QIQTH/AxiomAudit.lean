@@ -470,6 +470,17 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — THE FIRST NON-DETERMINISTIC TYPICALITY MEASURE on the continuum free field:
 -- the genuine Weyl-bit EffectStateNet (Born weights forming an actual 2^|J| probability distribution, not
 -- a point mass) yields a σ-additive probability μ∞ on the history space via the Kolmogorov extension.
+#print axioms QIQTH.Fock.bornWeight_isometry_invariant
+-- expected: standard only — the joint Born weight is invariant under boosting every mode uᵢ↦A uᵢ by a
+-- one-particle isometry A (Γ(A) push-through bornVecTot_secondQuant + Γ(A) unitary).
+#print axioms QIQTH.Fock.weylBit_marginals_boost_invariant
+-- expected: standard only — the ENTIRE projective family of finite Weyl-bit Born marginals is unchanged
+-- under boosting the modes by a one-particle isometry (the measure-level Lorentz-covariance statement).
+#print axioms QIQTH.Fock.weylBit_typicality_boost_invariant
+-- expected: standard only — THE PRIZE: the σ-additive typicality measure μ∞ on the continuum free field is
+-- LORENTZ-BOOST-COVARIANT. μ for modes u and ν for boosted modes A∘u realize the SAME projective family
+-- (weylBit_marginals_boost_invariant), so μ=ν by uniqueness of the Kolmogorov limit. Axiom-free (the
+-- standard three). The literal Open-Problem-3b deliverable on the relativistic free field, machine-checked.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

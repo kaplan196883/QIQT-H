@@ -264,6 +264,33 @@ theorem bornWeight_coarse (u : ι → H) (hiso : ∀ i j, i ≠ j → Complex.im
       · simp_rw [if_pos hc]; exact (bornWeight_erase_marginal u hiso haJ x').symm
       · simp_rw [if_neg hc, Finset.sum_const_zero]
 
+/-- **Second-quantization push-through**: `Γ(A)` carries the history vector of `u` to the history vector
+    of the boosted family `A∘u` — `Γ(A) (∏ A(uᵢ,sᵢ) Ω) = ∏ A(A uᵢ,sᵢ) Ω` — by pushing `Γ(A)` through the
+    `noncommProd` one bit at a time (`bitOp_secondQuant_comm`), using `Γ(A) Ω = Ω`. -/
+theorem bornVecTot_secondQuant (A : H →ₗᵢ[ℂ] H) (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0)
+    (hiso' : ∀ i j, i ≠ j → Complex.im ⟪A (u i), A (u j)⟫_ℂ = 0) (s : ι → ℂ) (J : Finset ι) :
+    secondQuantPre A (bornVecTot u hiso s J) = bornVecTot (fun i => A (u i)) hiso' s J := by
+  classical
+  induction J using Finset.induction with
+  | empty => simp [bornVecTot_empty, vac]
+  | @insert a J' ha ih =>
+    rw [bornVecTot_insert u hiso s ha, bornVecTot_insert (fun i => A (u i)) hiso' s ha, ← ih,
+      bitOp_secondQuant_comm]
+
+/-- **Isometry-invariance of the Weyl-bit Born weight**: for any one-particle isometry `A`, the joint
+    Born weight is unchanged under boosting every mode `uᵢ ↦ A uᵢ` — `Γ(A)` is unitary, so the
+    norm-square history weight is preserved.  (Specialized to the Lorentz boost `A = U₁(t)`, this is the
+    per-outcome boost-covariance underlying `μ∞.map(boost) = μ∞`.) -/
+theorem bornWeight_isometry_invariant (A : H →ₗᵢ[ℂ] H) (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0)
+    (hiso' : ∀ i j, i ≠ j → Complex.im ⟪A (u i), A (u j)⟫_ℂ = 0) (J : Finset ι) (σ : ∀ j : J, Bool) :
+    bornWeight (fun i => A (u i)) hiso' J σ = bornWeight u hiso J σ := by
+  rw [bornWeight, bornWeight, ← bornVecTot_secondQuant A u hiso hiso']
+  congr 1
+  exact (LinearMap.isometryOfInner (secondQuantPre A)
+    (fun φ ψ => fockInner_secondQuant A φ ψ)).norm_map _
+
 /-- **The genuine (non-deterministic) Weyl-bit `EffectStateNet` on the continuum free field.**
     Outcomes are bits (`α = Bool`), the state is the identity functional on `ℝ`, and the joint effect of
     a finite commuting context `J` with outcome `σ` is its **Born weight** `‖∏_{i∈J} A(uᵢ,σᵢ) Ω‖²`.  Unlike
@@ -291,5 +318,40 @@ theorem weylBit_typicalityMeasure_exists (u : ι → H)
     ∃ μ : Measure (∀ _ : ι, Bool), IsProbabilityMeasure μ ∧
       (weylBitNet u hiso).toFiniteMarginals.IsLimit μ :=
   (weylBitNet u hiso).exists_typicalityMeasure
+
+/-- **The Weyl-bit Born marginals are boost-invariant.**  Boosting every mode `uᵢ ↦ A uᵢ` by a
+    one-particle isometry `A` leaves the entire projective family of finite Born marginals unchanged
+    (`bornWeight_isometry_invariant` at each context).  This is the measure-level statement of
+    Lorentz-covariance: the typicality data does not depend on the boost frame. -/
+theorem weylBit_marginals_boost_invariant (A : H →ₗᵢ[ℂ] H) (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0)
+    (hiso' : ∀ i j, i ≠ j → Complex.im ⟪A (u i), A (u j)⟫_ℂ = 0) :
+    (weylBitNet (fun i => A (u i)) hiso').toFiniteMarginals.μ
+      = (weylBitNet u hiso).toFiniteMarginals.μ := by
+  have hbornPMF : ∀ (J : Finset ι) (x : ∀ j : J, Bool),
+      (weylBitNet (fun i => A (u i)) hiso').bornPMF J x = (weylBitNet u hiso).bornPMF J x := by
+    intro J x
+    simp only [weylBitNet, EffectStateNet.bornPMF_apply, AddMonoidHom.id_apply,
+      bornWeight_isometry_invariant A u hiso hiso']
+  funext J
+  exact congrArg PMF.toMeasure (PMF.ext (hbornPMF J))
+
+/-- **THE PRIZE (per-frame form): the σ-additive typicality measure μ∞ is Lorentz-boost-covariant.**
+    If `μ` realizes the Weyl-bit typicality family for the modes `u` and `ν` realizes it for the
+    boosted modes `A∘u` (any one-particle isometry `A` — in particular the Lorentz boost `U₁(t)`), then
+    `μ = ν`.  The two projective families coincide (`weylBit_marginals_boost_invariant`), so by uniqueness
+    of the Kolmogorov limit the typicality measure is the SAME — boosting the apparatus does not change
+    the typicality measure on the continuum free field.  Axiom-free. -/
+theorem weylBit_typicality_boost_invariant (A : H →ₗᵢ[ℂ] H) (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0)
+    (hiso' : ∀ i j, i ≠ j → Complex.im ⟪A (u i), A (u j)⟫_ℂ = 0)
+    {μ ν : Measure (∀ _ : ι, Bool)}
+    (hμ : (weylBitNet u hiso).toFiniteMarginals.IsLimit μ)
+    (hν : (weylBitNet (fun i => A (u i)) hiso').toFiniteMarginals.IsLimit ν) :
+    μ = ν := by
+  refine (weylBitNet u hiso).toFiniteMarginals.limit_unique hμ ?_
+  show MeasureTheory.IsProjectiveLimit ν ((weylBitNet u hiso).toFiniteMarginals.μ)
+  rw [← weylBit_marginals_boost_invariant A u hiso hiso']
+  exact hν
 
 end QIQTH.Fock
