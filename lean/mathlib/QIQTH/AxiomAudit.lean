@@ -369,6 +369,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — W(u) preserves the coherent-state inner product (CCR unitarity core).
 #print axioms QIQTH.Fock.Weyl.weylCoeff_vacuum
 -- expected: standard only — ⟪Ω,W(u)Ω⟫ = exp(−½‖u‖²): the defining value of the quasifree vacuum state.
+-- F6 (first increment): the prize pipeline runs on the genuine continuum Fock space + vacuum state.
+#print axioms QIQTH.Fock.fock_typicalityMeasure_exists
+-- expected: standard only — END-TO-END: the quasifree vacuum state ω₀ on B(Fock H) drives a unique
+-- σ-additive probability typicality measure μ∞ (via EffectStateNet + the Kolmogorov extension), on the
+-- genuine continuum free-field Fock space.  The continuum analogue of bh_typicalityMeasure_exists.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
