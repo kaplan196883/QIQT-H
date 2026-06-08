@@ -359,6 +359,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ⟪e(f),e(g)⟫ = exp⟪f,g⟫ in the completed Fock space (genuine Hilbert space).
 #print axioms QIQTH.Fock.Fock.inner_vacuum
 -- expected: standard only — the vacuum Ω = e(0) is a unit vector ⟪Ω,Ω⟫ = 1.
+-- F3 (part): the quasifree vacuum STATE ω₀(T)=Re⟪Ω,TΩ⟫ on B(Fock) — the ω that EffectStateNet consumes.
+#print axioms QIQTH.Fock.vacuumState_nonneg
+-- expected: standard only — ω₀ ≥ 0 on positive operators.
+#print axioms QIQTH.Fock.vacuumState_one
+-- expected: standard only — ω₀(1) = 1 (vacuum is a unit vector); so ω₀ is a genuine state on B(Fock).
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
