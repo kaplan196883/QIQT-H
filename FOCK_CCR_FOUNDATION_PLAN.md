@@ -69,8 +69,17 @@ mass-shell measure + Poincaré one-particle rep, Haag–Kastler local nets, Biso
 - **F2 remaining (optional):** second quantization `Γ(A) e(f) = e(Af)` and its functoriality/unitarity
   (lift the F1 boost `U₁(t)` to `Γ(U₁(t))` on Fock space — the continuum `diagBoost`).  Not on the
   critical path to F6.
-- **F3 (next):** Weyl operators `W(f)`, the CCR relation, and the **quasifree vacuum state**
-  `ω₀(W f) = exp(−‖f‖²/4)` — the ω that plugs into `EffectStateNet` for F6.  Parthasarathy §20/§23.
+- **F3 vacuum state — DONE** (commit `038fae4`, axiom-free): `QIQTH/Fock/VacuumState.lean`.
+  `vacuumState T = Re⟪Ω,TΩ⟫`, bundled `vacuumStateHom : (Fock H →L[ℂ] Fock H) →+ ℝ` with
+  `vacuumState_nonneg` (≥0 on positives) and `vacuumState_one` (`ω₀(1)=1`) — **the ω₀ that
+  `EffectStateNet` consumes for F6**, now on the genuine continuum free field.
+- **F3 Weyl core — DONE** (commit `2f07473`, axiom-free): `QIQTH/Fock/Weyl.lean`.
+  `weylCoeff u g = exp(−½⟪u,u⟫−⟪u,g⟫)`; `weyl_isometry` (the prescribed `W(u)` action preserves the
+  coherent-state inner product → `W(u)` unitary — the CCR-unitarity core); `weylCoeff_vacuum`
+  (`⟪Ω,W(u)Ω⟫ = exp(−½‖u‖²)` — the **quasifree** value).
+- **F3 remaining (optional):** the bounded Weyl operator `W(u)` as an actual `Fock H →L Fock H`
+  (linear map on `FockPre` + bounded extension to the completion) and the CCR composition law.  Not on
+  the critical path to F6 (which needs the vacuum state ω₀, already done).
 - **F4–F6:** unchanged below.
 
 ## The ladder (six phases F1–F6)
