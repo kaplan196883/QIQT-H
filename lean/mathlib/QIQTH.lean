@@ -62,6 +62,9 @@ import QIQTH.CoarseGrainNaturality
 -- P3: the cylinder typicality (pre)measure on a directed projective system of finite contexts — a
 -- canonical finite-record covariant μ (consistent, normalized, covariant) bypassing the TT walls:
 import QIQTH.CylinderTypicality
+-- XL-step Phase A smoke test: the Finset ι projective-family shape validated against Mathlib's
+-- Kolmogorov extension — i.i.d. case gets a genuine σ-additive limit measure μ∞ via infinitePi:
+import QIQTH.FiniteMarginals
 -- A6 strengthening: minimality/independence table for Born premises:
 import QIQTH.BornMinimalityTable
 -- A4 strengthening: Chebyshev concentration upgrading Born means to frequencies:

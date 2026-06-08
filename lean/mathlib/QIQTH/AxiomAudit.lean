@@ -264,6 +264,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CylinderTypicality.BornProjSystem.μ_covariant
 -- expected: standard only — typicality measure invariant under a unitary symmetry of the system.
 
+-- XL-step Phase A smoke test: Finset ι projective family + i.i.d. σ-additive limit via infinitePi
+#print axioms QIQTH.HistoryMeasure.productMarginals_isProjectiveLimit
+-- expected: standard only — the i.i.d. family's projective-limit measure exists (Mathlib infinitePi).
+#print axioms QIQTH.HistoryMeasure.productMarginals_marginal
+-- expected: standard only — limit restricts to the product Born marginal at every finite context.
+#print axioms QIQTH.HistoryMeasure.FiniteMarginals.limit_unique
+-- expected: standard only — the projective-limit typicality measure is unique (determined by marginals).
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation
