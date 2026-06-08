@@ -75,4 +75,11 @@ theorem bornWeight_boost_invariant (t : ℝ)
       = ‖histVec L‖ ^ 2 :=
   histVec_normSq_boost (QIQTH.Fock.OneParticle.boostUnitary t).toLinearIsometry L
 
+/-- **Projectivity (coarse-grain consistency)**: marginalizing one bit (summing its two signs) gives the
+    Born weight of the family with that bit removed.  This is `bit_normSq_sum` on the history vector — the
+    last of the four Kolmogorov ingredients (with positivity, normalization, boost-covariance). -/
+theorem histVec_marginal (u : H) (L : List (H × ℂ)) :
+    ‖histVec ((u, 1) :: L)‖ ^ 2 + ‖histVec ((u, -1) :: L)‖ ^ 2 = ‖histVec L‖ ^ 2 := by
+  rw [histVec, histVec, bit_normSq_sum]
+
 end QIQTH.Fock

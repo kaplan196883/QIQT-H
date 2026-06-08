@@ -440,6 +440,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.bornWeight_boost_invariant
 -- expected: standard only — ‖∏A(U₁(t)uᵢ,sᵢ)Ω‖² = ‖∏A(uᵢ,sᵢ)Ω‖²: every Weyl-bit joint Born weight is
 -- LORENTZ-BOOST INVARIANT on the continuum free field — the per-outcome measure-level covariance.
+#print axioms QIQTH.Fock.histVec_marginal
+-- expected: standard only — PROJECTIVITY: marginalizing a bit gives the smaller-family weight. Together
+-- with positivity (free), normalization (totalWeight_vac) and boost-covariance, the four Kolmogorov
+-- ingredients for the σ-additive boost-covariant μ∞ are now all proven.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
