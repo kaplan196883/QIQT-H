@@ -114,6 +114,32 @@ function / Gram covariance (do *not* claim the bit covariance *equals* the two-p
 > two-point function); the spacelike-local *instantiation* of the index by genuine spacetime regions
 > (Pauli–Jordan) remains."
 
+## E′. Build status (2026-06-09)
+
+**Stage 1.1 + 1.2 DONE, axiom-free, budget 33** (`QIQTH/Fock/WeylBit.lean`, `WeylBitProcess.lean`):
+the **four Kolmogorov ingredients** are all machine-checked —
+(i) positivity `bit_born_nonneg` (free, a norm-square); (ii) normalization `bit_normSq_sum` →
+`totalWeight_vac` (Σ over 2ⁿ signs = 1); (iii) projectivity `histVec_marginal` (coarse-grain consistency);
+(iv) boost-covariance `bornWeight_boost_invariant` (every Born weight Lorentz-invariant) — plus the abelian
+structure `bitOp_comm` (bits commute when `Im⟪u,v⟫=0`).
+
+**Remaining 1.3 = pure measure-theoretic PLUMBING (no new mathematics).** With
+`EffectStateNet (α := fun _ => Bool) (A := ℝ)`, `ω := AddMonoidHom.id ℝ`, `E J σ := bornWeight`, the whole
+`toFiniteMarginals` → `exists_typicalityMeasure` (PMF → Measure → σ-additive μ∞ via
+`KolmogorovFiniteFiber`) is **free**.  The only obligations are:
+- **`bornWeight u J σ`** (`J : Finset ι`, `σ : ∀ j:J, Bool`) := `‖histVec ((sorted J).map (u, ±sign σ)) Ω‖²`
+  (a fold over a canonical ordering of `J`);
+- **`pos`** — `0 ≤ bornWeight` (free);
+- **`total`** — `∑_{σ:∀j:J,Bool} bornWeight J σ = 1` (Finset induction, peeling a coordinate via the
+  function-sum decomposition + `bit_normSq_sum`);
+- **`coarse`** — `bornWeight I y = ∑_{x↾I=y} bornWeight J x` (marginalize `J∖I`: reorder via `bitOp_comm`
+  to put the dropped bits adjacent, then `histVec_marginal`);
+- **boost-covariance of μ∞** — `μ∞.map(historyBoost β t) = μ∞` from `bornWeight_boost_invariant` +
+  uniqueness of the Kolmogorov limit.
+
+This is Finset/`∀ j:J, Bool` function-sum bookkeeping — substantial but mathematically discharged; it does
+*not* need B.0 (the operator/CLM packaging), which GPT placed *after* 1.3.
+
 ## F. Immediate next action (revised)
 
 Start **1.1**: on `FockPre`, define the bit vectors `A_i^s Ω = (Ω + s·weylPre(u_i)Ω)/2`, the two-bit law
