@@ -134,4 +134,24 @@ theorem bornWeight_total (u : ι → H) (hiso : ∀ i j, i ≠ j → Complex.im 
     simp only [sgn, Bool.false_eq_true, reduceIte]
     rw [bornWeight, bit_normSq_sum]
 
+/-- **Projectivity (single-mode marginal)**: summing the *free* bit at a head mode `a ∉ J'` over its two
+    values collapses the Born weight on `insert a J'` to the Born weight on `J'`.  This is `bit_normSq_sum`
+    transported to the Finset-context Born weight — the inductive step for the general coarse-graining
+    consistency of the joint Born law. -/
+theorem bornWeight_marginal (u : ι → H) (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0)
+    {a : ι} {J' : Finset ι} (ha : a ∉ J') (y : ∀ j : J', Bool) :
+    ∑ b : Bool, bornWeight u hiso (insert a J') ((insertBoolSplit ha).symm (b, y))
+      = bornWeight u hiso J' y := by
+  have key : ∀ b : Bool, bornWeight u hiso (insert a J') ((insertBoolSplit ha).symm (b, y))
+      = ‖bitOp (u a) (sgn b) (bornVecTot u hiso (signExt J' y) J')‖ ^ 2 := by
+    intro b
+    have hsplit := (insertBoolSplit ha).apply_symm_apply (b, y)
+    have hb : (insertBoolSplit ha).symm (b, y) ⟨a, Finset.mem_insert_self a J'⟩ = b :=
+      congrArg Prod.fst hsplit
+    have hy : (fun j : J' => (insertBoolSplit ha).symm (b, y) ⟨j.1, Finset.mem_insert_of_mem j.2⟩) = y :=
+      congrArg Prod.snd hsplit
+    rw [bornWeight_insert u hiso ha, hb, hy]
+  simp_rw [key, Fintype.sum_bool, sgn, Bool.false_eq_true, reduceIte]
+  rw [bornWeight, bit_normSq_sum]
+
 end QIQTH.Fock

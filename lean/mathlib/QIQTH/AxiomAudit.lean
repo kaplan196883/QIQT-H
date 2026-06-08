@@ -455,6 +455,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — NORMALIZATION over an arbitrary finite context: ∑_σ bornWeight J σ = 1, by
 -- induction on J (the explicit bit-splitting equiv insertBoolSplit reduces the inductive step to
 -- bit_normSq_sum). The σ-additive μ∞'s `total` Kolmogorov obligation, now proven for any finite J.
+#print axioms QIQTH.Fock.bornWeight_marginal
+-- expected: standard only — PROJECTIVITY (single-mode marginal): summing the free bit at a head mode a∉J'
+-- collapses bornWeight (insert a J') to bornWeight J' (bit_normSq_sum on the Finset Born weight). The
+-- inductive step for the general coarse-graining consistency of the joint Born law.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
