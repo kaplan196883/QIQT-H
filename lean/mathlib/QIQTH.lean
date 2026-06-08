@@ -83,6 +83,9 @@ import QIQTH.BHTypicalityMeasure
 -- Phase B Part A — general trace-class step (Simon §1.1): the operator absolute value |T|=√(T⋆T) via
 -- cfc on the nonneg-spectrum T⋆T (|T| self-adjoint, |T|²=T⋆T, ‖|T|x‖=‖Tx‖) — foundation of trace-class:
 import QIQTH.AbsoluteValue
+-- Toward the prize: the FREE-FIELD (finite-mode) covariant typicality measure — μ∞ on occupation-sector
+-- histories, INVARIANT under the (geometry-moving) mode-permutation boost (finite-mode Lorentz action):
+import QIQTH.FreeFieldTypicality
 -- A6 strengthening: minimality/independence table for Born premises:
 import QIQTH.BornMinimalityTable
 -- A4 strengthening: Chebyshev concentration upgrading Born means to frequencies:

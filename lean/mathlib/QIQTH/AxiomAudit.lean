@@ -315,6 +315,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — |T|·|T|=T⋆T (√x·√x=x on the nonneg spectrum of T⋆T; no StarOrderedRing needed).
 #print axioms QIQTH.AbsoluteValue.norm_absOp_apply
 -- expected: standard only — ‖|T|x‖=‖Tx‖ (the defining isometry property of the absolute value).
+-- Toward the prize: free-field (finite-mode) covariant typicality measure
+#print axioms QIQTH.FreeFieldTypicality.freeFieldMeasure_marginal
+-- expected: standard only — the free-field history measure restricts to the product Born marginal.
+#print axioms QIQTH.FreeFieldTypicality.freeFieldMeasure_boost_invariant
+-- expected: standard only — μ∞ INVARIANT under the geometry-moving mode-permutation boost (covariance,
+-- finite-mode Lorentz action) when the per-region state is boost-invariant.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
