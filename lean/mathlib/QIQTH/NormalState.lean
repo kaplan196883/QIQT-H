@@ -85,4 +85,11 @@ theorem diagState_one (hb : Orthonormal ℂ b) :
     rw [ContinuousLinearMap.one_apply, inner_self_eq_norm_sq, hb.norm_eq_one i, one_pow]
   rw [h1, mul_one]
 
+/-- **The diagonal state is a STATE** (`ω(1) = 1`) when the weights are a probability distribution
+    (`∑ pᵢ = 1`, i.e. `Tr ρ = 1`). -/
+theorem diagStateHom_one (hb : Orthonormal ℂ b) (hp : ∀ i, 0 ≤ p i) (hsum : Summable p)
+    (hp1 : ∑' i, p i = 1) : diagStateHom hb hp hsum (1 : H →L[ℂ] H) = 1 := by
+  show diagState b p 1 = 1
+  rw [diagState_one hb, hp1]
+
 end QIQTH.NormalState

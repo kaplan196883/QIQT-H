@@ -306,6 +306,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — 0 ≤ ω(x) for x ≥ 0 (positivity on positive operators).
 #print axioms QIQTH.NormalState.diagState_one
 -- expected: standard only — ω(1)=∑ pᵢ (=1 for a density operator): normalization. So ω is a state.
+-- Phase B Part A — closing the loop on B(H): the normal state drives the EffectStateNet → μ∞ pipeline
+#print axioms QIQTH.BHTypicalityMeasure.bh_typicalityMeasure_exists
+-- expected: standard only — END TO END on infinite-dim B(H): a genuine normal state ω=Tr(ρ·) yields a
+-- unique σ-additive probability typicality measure μ∞ on histories (via EffectStateNet + Kolmogorov ext).
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

@@ -77,6 +77,9 @@ import QIQTH.StateNetMeasure
 -- Phase B Part A (first brick): a genuine infinite-dim NORMAL STATE on B(H) — the diagonal density
 -- operator ω(x)=∑ pₙ⟨eₙ,x eₙ⟩ (positive, normalized, additive), bypassing general Schatten theory:
 import QIQTH.NormalState
+-- Phase B Part A — CLOSING THE LOOP on B(H): the diagonal normal state drives the EffectStateNet →
+-- σ-additive μ∞ pipeline end-to-end (first fully infinite-dimensional instance of the prize):
+import QIQTH.BHTypicalityMeasure
 -- A6 strengthening: minimality/independence table for Born premises:
 import QIQTH.BornMinimalityTable
 -- A4 strengthening: Chebyshev concentration upgrading Born means to frequencies:
