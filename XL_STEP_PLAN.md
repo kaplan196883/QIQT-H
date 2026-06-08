@@ -165,6 +165,16 @@ Lift P0 (`NoSignalingGeneral.local_marginal_indep_remote`) to μ∞ marginals.
 
 ## Phase B — the physical realization (operator-algebra continuum; mostly cited)
 
+> **PHASE B FORMALIZABLE CORE DONE (2026-06-08, axiom-free, budget 33).** `QIQTH/StateNetMeasure.lean`:
+> `EffectStateNet` = an additive state `ω : A →+ ℝ` on an effect monoid + a `Finset ι` family of joint
+> effects with positivity, normalization, and coarse-graining; `toFiniteMarginals` (**B1**: linearity
+> of `ω` ⇒ the Born weights `ω(E_J·)` are Kolmogorov-consistent — the construction is STATE-AGNOSTIC,
+> not tied to matrices); `exists_typicalityMeasure` (with A2b ⇒ a unique σ-additive μ∞ exists for ANY
+> such state). **CITED frontier (B2, not formalized, not new axioms):** that `ω` actually arises as a
+> normal state on a **Type III₁** relativistic-QFT local net with Bisognano–Wichmann covariance —
+> Mathlib lacks normal states/predual; Type III₁-ness is Buchholz–Wichmann. The state-agnostic
+> CONSTRUCTION is machine-checked; the existence of the physical state is the honest cited gap.
+
 ### B1 — Continuum state. **(M given the algebra; Mathlib gap on normal states.)**
 Replace matrices by a **normal state `ω`** on a net of local von Neumann algebras (`ω(E)`, NOT
 `tr(ρE)`). The Born family `μ_J(a) = ω(E^J_a)` is *automatically* projective (ω linear), so Phase A
