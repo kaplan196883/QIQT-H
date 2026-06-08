@@ -514,6 +514,16 @@ namespace QIQTH.AxiomAudit
 -- ⟪Ω, E_σ Ω⟫ with E_σ = (∏A(uᵢ,σᵢ))*(∏A(uᵢ,σᵢ)) the positive joint effect. Every joint Born weight on the
 -- continuum free field is a genuine vacuum-state expectation of a positive bounded effect (B.0 complete).
 
+-- Increment 1: the abstract GEOMETRIC covariance interface (relabeling = boost via equivariance).
+#print axioms QIQTH.Fock.GeoCovariantModes.bornWeight_relabel
+-- expected: standard only — Born weight of the relabeled modes u∘π = Born weight of u (relabel = boost
+-- via equivariance u(πi)=A(ui), then Γ(A) isometric).
+#print axioms QIQTH.Fock.GeoCovariantModes.typicality_invariant
+-- expected: standard only — GEOMETRIC COVARIANCE OF μ∞: the typicality measure for the geometrically
+-- relabeled mode family u∘π equals the one for u. Abstract local-net covariance interface (GeoCovariantModes:
+-- π relabeling, A one-particle symmetry, equivariance, microcausality) — the obligations a concrete
+-- spacetime localization K would supply; specializes to Lorentz-boost frame-independence.
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation
