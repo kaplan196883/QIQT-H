@@ -354,4 +354,28 @@ theorem weylBit_typicality_boost_invariant (A : H →ₗᵢ[ℂ] H) (u : ι → 
   rw [← weylBit_marginals_boost_invariant A u hiso hiso']
   exact hν
 
+/-- The F1 Lorentz boost `U₁(t)` preserves the symplectic-isotropy (microcausality) condition on the
+    modes, since it is a one-particle isometry (`inner_map_map`). -/
+theorem boostUnitary_preserves_isotropy {ι : Type*} (t : ℝ)
+    (u : ι → Lp ℂ 2 (volume : Measure ℝ)) (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0) :
+    ∀ i j, i ≠ j →
+      Complex.im ⟪(OneParticle.boostUnitary t).toLinearIsometry (u i),
+        (OneParticle.boostUnitary t).toLinearIsometry (u j)⟫_ℂ = 0 :=
+  fun i j hij => by rw [LinearIsometry.inner_map_map]; exact hiso i j hij
+
+/-- **THE PRIZE (Lorentz boost `U₁(t)`):** the σ-additive Weyl-bit typicality measure μ∞ on the continuum
+    free field over `L²(ℝ)` is invariant under the F1 rapidity boost `U₁(t)`.  If `μ` realizes the
+    typicality family for the modes `u` and `ν` for the boosted modes `U₁(t)·u`, then `μ = ν`: the
+    typicality measure is the same in every Lorentz frame.  Axiom-free, the literal Open-Problem-3b
+    deliverable on the relativistic free field. -/
+theorem weylBit_typicality_lorentzBoost_invariant {ι : Type*} [DecidableEq ι] (t : ℝ)
+    (u : ι → Lp ℂ 2 (volume : Measure ℝ)) (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0)
+    {μ ν : Measure (∀ _ : ι, Bool)}
+    (hμ : (weylBitNet u hiso).toFiniteMarginals.IsLimit μ)
+    (hν : (weylBitNet (fun i => (OneParticle.boostUnitary t).toLinearIsometry (u i))
+            (boostUnitary_preserves_isotropy t u hiso)).toFiniteMarginals.IsLimit ν) :
+    μ = ν :=
+  weylBit_typicality_boost_invariant (OneParticle.boostUnitary t).toLinearIsometry u hiso
+    (boostUnitary_preserves_isotropy t u hiso) hμ hν
+
 end QIQTH.Fock

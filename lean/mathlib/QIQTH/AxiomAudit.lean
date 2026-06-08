@@ -481,6 +481,10 @@ namespace QIQTH.AxiomAudit
 -- LORENTZ-BOOST-COVARIANT. μ for modes u and ν for boosted modes A∘u realize the SAME projective family
 -- (weylBit_marginals_boost_invariant), so μ=ν by uniqueness of the Kolmogorov limit. Axiom-free (the
 -- standard three). The literal Open-Problem-3b deliverable on the relativistic free field, machine-checked.
+#print axioms QIQTH.Fock.weylBit_typicality_lorentzBoost_invariant
+-- expected: standard only — THE PRIZE specialized to the F1 Lorentz boost U₁(t) on L²(ℝ): the Weyl-bit
+-- typicality measure μ∞ is invariant under U₁(t) (boostUnitary_preserves_isotropy supplies the boosted
+-- microcausality). The typicality measure is the same in every Lorentz frame.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
