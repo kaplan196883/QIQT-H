@@ -77,4 +77,24 @@ theorem two_bit_normalization (u v : H) :
     bit_normSq_sum u (bitOp v 1 (vac H)), bit_normSq_sum u (bitOp v (-1) (vac H)),
     bit_normSq_sum v (vac H), norm_vac_sq]
 
+/-! ### Stage 1.2 — the n-bit Born law over a finite family -/
+
+/-- The **total Weyl-bit Born weight** over *all* `2ⁿ` sign assignments of a finite family `us`, applied
+    to `ψ` (recursive sum-over-signs). -/
+noncomputable def totalWeight : List H → FockPre H → ℝ
+  | [], ψ => ‖ψ‖ ^ 2
+  | u :: rest, ψ => totalWeight rest (bitOp u 1 ψ) + totalWeight rest (bitOp u (-1) ψ)
+
+/-- The total Born weight over all sign assignments collapses to `‖ψ‖²` — independent of the family,
+    by telescoping `bit_normSq_sum`. -/
+theorem totalWeight_eq (us : List H) (ψ : FockPre H) : totalWeight us ψ = ‖ψ‖ ^ 2 := by
+  induction us generalizing ψ with
+  | nil => rfl
+  | cons u rest ih => rw [totalWeight, ih (bitOp u 1 ψ), ih (bitOp u (-1) ψ), bit_normSq_sum]
+
+/-- **n-bit normalization**: the Weyl-bit Born weights of any finite family sum to 1 — so the joint
+    Born law of any finite commuting Weyl-bit family is a genuine probability distribution. -/
+theorem totalWeight_vac (us : List H) : totalWeight us (vac H) = 1 := by
+  rw [totalWeight_eq, norm_vac_sq]
+
 end QIQTH.Fock

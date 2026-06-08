@@ -430,6 +430,16 @@ namespace QIQTH.AxiomAudit
 -- engine. A(u,s)=(I+s·W(u))/2, the Weyl bit; E(u,s)=A(u,s)*A(u,s) so Born weights are norm-squares (≥0 free).
 #print axioms QIQTH.Fock.two_bit_normalization
 -- expected: standard only — the four two-bit Weyl-bit Born weights sum to 1 (a probability distribution).
+#print axioms QIQTH.Fock.totalWeight_vac
+-- expected: standard only — the n-bit Weyl-bit Born weights of any finite family sum to 1 (telescoping).
+-- Stage 1.2: boost-covariance — every Weyl-bit joint Born weight is Lorentz-invariant.
+#print axioms QIQTH.Fock.weylPre_secondQuant_comm
+-- expected: standard only — intertwining W(Au)∘Γ(A)=Γ(A)∘W(u) (from weylCoeff_isometry_invariant).
+#print axioms QIQTH.Fock.histVec_boost
+-- expected: standard only — histVec(A·family) = Γ(A)(histVec family) (boost equivariance of the history vector).
+#print axioms QIQTH.Fock.bornWeight_boost_invariant
+-- expected: standard only — ‖∏A(U₁(t)uᵢ,sᵢ)Ω‖² = ‖∏A(uᵢ,sᵢ)Ω‖²: every Weyl-bit joint Born weight is
+-- LORENTZ-BOOST INVARIANT on the continuum free field — the per-outcome measure-level covariance.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
