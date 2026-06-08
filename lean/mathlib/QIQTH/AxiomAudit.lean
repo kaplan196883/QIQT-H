@@ -295,6 +295,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — B1: any state ω on a net of compatible effects ⇒ Kolmogorov-consistent Born family.
 #print axioms QIQTH.StateNetMeasure.EffectStateNet.exists_typicalityMeasure
 -- expected: standard only — μ∞ exists for ANY EffectStateNet (Type III₁ QFT realization of ω is the cited frontier).
+#print axioms QIQTH.StateNetMeasure.EffectStateNet.diracNet_exists_typicalityMeasure
+-- expected: standard only — NON-VACUITY: a concrete deterministic net fires the whole state→μ∞ pipeline
+-- (the EffectStateNet hypotheses are jointly satisfiable; no soundness/vacuity hole).
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

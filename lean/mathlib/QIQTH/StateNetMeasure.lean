@@ -90,6 +90,31 @@ theorem exists_typicalityMeasure [∀ i, TopologicalSpace (α i)] [∀ i, Discre
     ∃ μ : Measure (∀ i, α i), IsProbabilityMeasure μ ∧ S.toFiniteMarginals.IsLimit μ :=
   QIQTH.KolmogorovFiniteFiber.exists_isLimit S.toFiniteMarginals
 
+/-- **Non-vacuity witness.**  The deterministic (Dirac) net at a fixed global history `g` is a genuine
+    `EffectStateNet` (effects in `A = ℝ`, state `ω = id`): its joint effects are the point masses
+    `E_J x = [x = g↾J]`.  This proves the `EffectStateNet` hypotheses are jointly satisfiable — the
+    abstraction (and `exists_typicalityMeasure`) are NOT vacuous.  (A genuinely physical instance would
+    take `ω` a normal state on a Type III₁ QFT net — the cited frontier; this witness only certifies the
+    abstraction is inhabited.) -/
+noncomputable def diracNet (g : ∀ i, α i) : EffectStateNet α ℝ where
+  ω := AddMonoidHom.id ℝ
+  E := fun J x => if x = J.restrict g then (1 : ℝ) else 0
+  pos := fun J x => by simp only [AddMonoidHom.id_apply]; split <;> norm_num
+  total := fun J => by simp [AddMonoidHom.id_apply, Finset.sum_ite_eq']
+  coarse := fun I J h y => by
+    have hcomp : Finset.restrict₂ h (J.restrict g) = I.restrict g :=
+      congrFun (Finset.restrict₂_comp_restrict h) g
+    simp only [AddMonoidHom.id_apply, Finset.sum_ite_eq', Finset.mem_filter, Finset.mem_univ,
+      true_and, hcomp]
+    exact if_congr eq_comm rfl rfl
+
+/-- The non-vacuity witness fires the full pipeline: the deterministic net yields a genuine σ-additive
+    probability typicality measure μ∞ on the history space (the point mass at `g`). -/
+theorem diracNet_exists_typicalityMeasure [∀ i, TopologicalSpace (α i)] [∀ i, DiscreteTopology (α i)]
+    [∀ i, Finite (α i)] (g : ∀ i, α i) :
+    ∃ μ : Measure (∀ i, α i), IsProbabilityMeasure μ ∧ (diracNet g).toFiniteMarginals.IsLimit μ :=
+  (diracNet g).exists_typicalityMeasure
+
 end EffectStateNet
 
 end QIQTH.StateNetMeasure
