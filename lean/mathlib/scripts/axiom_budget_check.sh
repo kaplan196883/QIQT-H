@@ -138,7 +138,18 @@ done
 # Replaced by a THEOREM exhibiting the concrete Tsirelson value `2√2 > 2`
 # (axiom-free); the deep "QM attains it" content already lives, non-vacuously,
 # in Tsirelson.lean.  Net 33 → 32.  Budget ratcheted to 32.
-AXIOM_BUDGET=32
+#
+# Audit note (2026-06-10, SOUNDNESS FIX — MarginalLocality): the axiom
+# `set_level_locality_from_unitary_dilation : … (h_alg : True) → IsLocalUnder r T`
+# was logically INCONSISTENT — over arbitrary `r, T` it asserts `∀ a, r (T a) = r a`
+# (the `True` hypothesis constrains nothing), which is false (`r = id, T = not` ⇒
+# `not a = a` ⇒ `False`).  It was used by no audited theorem and nothing downstream.
+# REMOVED; the one theorem using it (`born_marginal_local_under_bob_unitary`) now
+# takes `h_local : IsLocalUnder r T` as an explicit hypothesis (interface-as-
+# hypothesis pattern).  This both retires an axiom AND closes a soundness hole
+# (the axiom-budget check counts axioms + catches sorry, but does NOT detect a
+# false axiom — exactly this blind spot).  Net 32 → 31.  Budget ratcheted to 31.
+AXIOM_BUDGET=31
 AXIOM_COUNT="$(grep -rhE '^axiom ' QIQTH/ | wc -l | tr -d ' ')"
 echo "[axiom-budget] raw axiom count: $AXIOM_COUNT (budget $AXIOM_BUDGET)"
 if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then

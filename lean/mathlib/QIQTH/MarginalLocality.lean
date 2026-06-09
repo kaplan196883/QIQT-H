@@ -171,42 +171,36 @@ theorem alice_marginal_unchanged_by_bob_dynamics
 
 /- ── Instantiation: unitary-dilation special case ──────────────────── -/
 
-/-- **Bridge to UnitarityLocality.**  If the IC dynamics `T` corresponds
-    to conjugation by a Bob-local unitary `U` (in the algebraic sense
-    of `UnitarityLocality.locality_of_conjugation`), then the underlying
-    set-level map `T` automatically satisfies `IsLocalUnder r` for the
-    restriction-to-Alice map.
+/-- **Bridge to UnitarityLocality — as an explicit hypothesis, NOT an axiom.**
 
-    This is a *bridging* axiom — it says that the algebraic locality
-    proved in UnitarityLocality lifts to the IC set-level locality
-    needed here.  The bridge is essentially the statement "if the
-    Heisenberg-picture observable on Alice is fixed, then the
-    Schrödinger-picture marginal on Alice is fixed".  Standard in any
-    operational framework; named here so the dependency is explicit. -/
-axiom set_level_locality_from_unitary_dilation
-    {α β : Type*} (r : α → β) (T : α → α)
-    (h_alg : True)  -- placeholder for: T arises from a Bob-local unitary
-                     -- via the Heisenberg/Schrödinger duality
-    : IsLocalUnder r T
+    If the IC dynamics `T` corresponds to conjugation by a Bob-local unitary
+    (in the algebraic sense of `UnitarityLocality.locality_of_conjugation`),
+    the intended content is that this lifts to the *set-level* locality
+    `r ∘ T = r` (i.e. `IsLocalUnder r T`) for the restriction-to-Alice map —
+    the Heisenberg ↔ Schrödinger correspondence "if the Heisenberg-picture
+    observable on Alice is fixed, then the Schrödinger-picture marginal on
+    Alice is fixed".
 
-/-- **Combined: Born-marginal locality from unitary Bob-channel.**
+    That correspondence requires the IC representation map, which is not
+    formalized here.  We therefore take the set-level locality as an
+    **explicit hypothesis** `h_local : IsLocalUnder r T`, supplied by the
+    caller, following the project's "interface-as-hypothesis, not axiom"
+    discipline.
 
-    Given (i) Bob applies a local unitary giving IC-level dynamics T,
-    (ii) the IC measure μ is T-equivariant, and (iii) the set-level
-    locality bridge holds, then Alice's marginal is unchanged.
-
-    This is the deterministic / typicality-level analog of the
-    Heisenberg-picture statement in UnitarityLocality.  Combined with
-    Theorem 7's no-signaling, it discharges the *measure-level*
-    locality of the Canonical IC Measure Principle. -/
+    HISTORICAL / SOUNDNESS NOTE.  An earlier version stated this bridge as
+    `axiom set_level_locality_from_unitary_dilation … (h_alg : True) :
+    IsLocalUnder r T`.  Over arbitrary `r, T` that statement is **false**
+    (e.g. `α = β = Bool`, `r = id`, `T = not` gives `id (not a) = id a`, i.e.
+    `not a = a`), so the axiom was logically inconsistent — provable `False`.
+    It was used by no audited theorem and by nothing downstream; it has been
+    REMOVED and replaced by the honest explicit hypothesis below. -/
 theorem born_marginal_local_under_bob_unitary
     {α β : Type*} [Fintype α] [DecidableEq α] [DecidableEq β]
     (r : α → β) (T : α → α)
-    (h_alg : True)
+    (h_local : IsLocalUnder r T)
     (μ : α → ℝ) (h_equiv : IsEquivariant T μ) :
     pushForward r (pushForward T μ) = pushForward r μ :=
-  alice_marginal_unchanged_by_bob_dynamics r T
-    (set_level_locality_from_unitary_dilation (α := α) (β := β) r T h_alg) μ h_equiv
+  alice_marginal_unchanged_by_bob_dynamics r T h_local μ h_equiv
 
 /-- **Audit conclusion (carefully stated).**
 
@@ -221,22 +215,27 @@ theorem born_marginal_local_under_bob_unitary
           no-signaling content at the measure level, and it depends on
           no project axioms.
 
-      (2) **The Hilbert-to-set locality bridge — REMAINS an axiom.**
-          `set_level_locality_from_unitary_dilation`: that a Bob-local
+      (2) **The Hilbert-to-set locality bridge — an explicit HYPOTHESIS,
+          not an axiom.**  `born_marginal_local_under_bob_unitary` takes
+          `IsLocalUnder r T` (`r ∘ T = r`) as a premise.  That a Bob-local
           unitary's Heisenberg-picture locality (proved algebraically in
-          UnitarityLocality / KrausLocality / CompressionLocality) lifts
-          to set-level locality `r ∘ T = r` of the IC dynamics.  This is
-          a Heisenberg ↔ Schrödinger correspondence; it is named and
-          explicit, not eliminated.
+          UnitarityLocality / KrausLocality / CompressionLocality) lifts to
+          this set-level locality is the Heisenberg ↔ Schrödinger
+          correspondence; it is named, explicit, and supplied by the caller,
+          NOT asserted.  (An earlier version stated it as
+          `axiom … (h_alg : True) : IsLocalUnder r T`, which over arbitrary
+          `r, T` is FALSE — `r = id, T = not` forces `not a = a`; that unsound
+          axiom has been removed.)
 
     Net effect, stated honestly: the finite marginal-locality step is
     now a theorem (part 1), so locality is no longer an *independent*
     Canonical IC sub-axiom on the same footing as the canonical-measure
-    principle, operational sufficiency, and FQ-equivariance.  But the
-    reduction is *conditional* on the bridge axiom (part 2): locality
-    has been relocated into the (well-understood, standard) bridge, not
-    derived from nothing.  The irreducible *Born-selection* content is
-    {P1, P2, P3} relative to the current finite formal decomposition. -/
+    principle, operational sufficiency, and FQ-equivariance.  The reduction
+    is *conditional* on the bridge (part 2), now an explicit hypothesis rather
+    than an axiom: locality has been relocated into the (well-understood,
+    standard) Heisenberg ↔ Schrödinger bridge, not derived from nothing.  The
+    irreducible *Born-selection* content is {P1, P2, P3} relative to the
+    current finite formal decomposition. -/
 theorem audit_conclusion : True := trivial
 
 end MarginalLocality
