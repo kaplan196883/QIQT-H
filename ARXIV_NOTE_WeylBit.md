@@ -218,7 +218,12 @@ isometry, specialized to the 1+1 Lorentz boost.
    `K(f∘Λ⁻¹)=U(Λ)Kf` and the **Pauli–Jordan** property `Im⟪Kf,Kg⟫=0` for spacelike-separated supports. The
    Pauli–Jordan commutator-support theorem is the genuine analytic obstruction and is a separate,
    substantially larger project (tempered distributions / propagation of singularities, or an explicit
-   kernel-support argument).
+   kernel-support argument). We *do* package exactly these obligations as a reusable interface
+   (`SpacetimeLocalization`: a localization map `K`, region family, boost, equivariance, and Pauli–Jordan
+   microcausality as hypothesis fields) and prove that any such datum yields a `GeoCovariantModes`, hence the
+   existence + boost-covariance + single-measure pushforward-invariance of `μ∞` over the spacelike-local
+   field records (`SpacetimeLocalization.localized_typicality_pushforward_invariant`); a non-vacuity witness
+   shows the interface is inhabited. What remains is the construction of a *concrete, non-degenerate* `K`.
 
 2. **Single global measure vs. contextual family.** The global Kolmogorov measure `μ∞` is appropriate
    precisely because we fix a *commuting* (pairwise symplectically orthogonal, hence decoherent) mode
@@ -226,9 +231,13 @@ isometry, specialized to the 1+1 Lorentz boost.
    make commutativity an explicit hypothesis and do not violate it.
 
 3. **State functional.** `ω₀=Re⟪Ω,·Ω⟫` is a real Born-expectation functional, sufficient for effect
-   probabilities; we do not claim a complex-linear C\*-state, nor have we lifted the bit operators from the
-   pre-completion space `FockPre` to bounded operators on the completed Hilbert space (a bounded but
-   nontrivial functional-analytic step).
+   probabilities; we do not claim a complex-linear C\*-state. We *have* now lifted the Weyl operators from
+   the pre-completion space `FockPre` to bounded operators on the completed Hilbert space `Fock H`
+   (`weylCLM`, via `ContinuousLinearMap.extend`): `W(u)` is a CCR-unitary continuous linear map with the
+   genuine Hilbert-space two-point function `⟪Ω,W(u)Ω⟫=exp(−½⟪u,u⟫)`, and the single-mode Born weight is a
+   bona fide vacuum expectation of a bounded positive effect with operator POVM completeness
+   `E(u,+1)+E(u,−1)=1` (`vacuumState_weylBitEffectCLM_true`, `weylBitEffectCLM_complete`). Lifting the full
+   *joint* multi-mode effect to the completed space is the only residual functional-analytic step.
 
 4. **Non-triviality of correlations.** The process is genuinely non-i.i.d. when `Re⟪u_i,u_j⟫≠0`: the
    pair correlations are determined by the quasifree Gram covariance, not a product law. We say the finite
@@ -271,17 +280,25 @@ statements claimed.
 | geometric-covariance interface | `GeoCovariantModes.typicality_invariant` |
 | single-measure pushforward `(historyAct π)_* μ∞ = μ∞` | `GeoCovariantModes.typicality_pushforward_invariant` |
 | `noncommProd` reindex-by-bijection | `bornVecTot_map`, `bornWeight_map` |
+| spacetime-localization interface (Stage 2) | `SpacetimeLocalization`, `…toGeoCovariantModes` |
+| localized pushforward covariance | `SpacetimeLocalization.localized_typicality_pushforward_invariant` |
+| bounded Weyl unitary on `Fock H` | `weylCLM`, `weylCLM_neg_cancel` |
+| Hilbert-space two-point function | `weylCLM_vacuum_inner` |
+| Born weight = vacuum C\*-state expectation | `vacuumState_weylBitEffectCLM_true` |
+| operator POVM completeness on `Fock H` | `weylBitEffectCLM_complete` |
 
 ---
 
 ## 8. Outlook
 
-The natural next increments, in increasing difficulty: (i) lifting the Weyl-bit operators to bounded
-operators on the completed Fock space with the complex vacuum state; (ii) the concrete Poincaré-equivariant
-localization map `K` with Pauli–Jordan microcausality, which would upgrade the present abelian Weyl-bit
-process to a genuinely spacetime-local free field. Of these, (ii) is the real research program; (i) is
-bounded. (The literal single-measure pushforward `(historyAct π)_* μ∞ = μ∞`, previously listed here, is now
-proven — see §5.)
+The single remaining research program is the concrete Poincaré-equivariant localization map `K` with
+Pauli–Jordan microcausality, which would instantiate the `SpacetimeLocalization` interface (§6) with a
+genuine, non-degenerate datum and thereby upgrade the present abelian Weyl-bit process to a fully
+spacetime-local free field. The bounded-operator lift of the Weyl apparatus to the completed Hilbert space
+(§6.3) and the literal single-measure pushforward covariance (§5) — previously listed here as next steps —
+are now proven; the only residual functional-analytic increment is lifting the *joint* multi-mode effect to
+the completed space. The construction of `K` (the Pauli–Jordan commutator-support theorem) is the genuine
+multi-year frontier.
 
 ---
 
