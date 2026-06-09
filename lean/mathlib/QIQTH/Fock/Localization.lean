@@ -13,6 +13,8 @@
   `minkowskiDot_boost` (the pairing is boost-invariant).  Axiom-free.
 -/
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+import Mathlib.LinearAlgebra.Matrix.ToLin
+import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
 import Mathlib.Tactic
 
 namespace QIQTH.Fock.Localization
@@ -67,5 +69,34 @@ theorem minkowskiSq_boost (a : ℝ) (z : V) : minkowskiSq (lorentzBoost a z) = m
 theorem minkowskiSq_massShell (m θ : ℝ) : minkowskiSq (massShell m θ) = m ^ 2 := by
   simp only [minkowskiSq, minkowskiDot, massShell_zero, massShell_one]
   nlinarith [Real.cosh_sq_sub_sinh_sq θ]
+
+/-! ### The boost as a unimodular linear map (the Jacobian for the Fourier change of variables) -/
+
+/-- The boost matrix `[[cosh a, sinh a], [sinh a, cosh a]]`. -/
+noncomputable def lorentzBoostMat (a : ℝ) : Matrix (Fin 2) (Fin 2) ℝ :=
+  !![Real.cosh a, Real.sinh a; Real.sinh a, Real.cosh a]
+
+/-- The boost packaged as an `ℝ`-linear endomorphism of `V` (via its standard matrix). -/
+noncomputable def lorentzBoostₗ (a : ℝ) : V →ₗ[ℝ] V := Matrix.toLin' (lorentzBoostMat a)
+
+/-- A 2×2 `mulVec` expansion (local helper). -/
+private theorem mulVec_two (M : Matrix (Fin 2) (Fin 2) ℝ) (v : Fin 2 → ℝ) (i : Fin 2) :
+    Matrix.mulVec M v i = M i 0 * v 0 + M i 1 * v 1 := by
+  rw [Matrix.mulVec_eq_sum]
+  fin_cases i
+  · simp [Fin.sum_univ_two, Matrix.transpose_apply]; ring
+  · simp [Fin.sum_univ_two, Matrix.transpose_apply]; ring
+
+@[simp] theorem lorentzBoostₗ_apply (a : ℝ) (z : V) : lorentzBoostₗ a z = lorentzBoost a z := by
+  funext i
+  rw [lorentzBoostₗ, Matrix.toLin'_apply, mulVec_two, lorentzBoostMat]
+  fin_cases i <;>
+    simp [lorentzBoost_zero, lorentzBoost_one]
+
+/-- **The boost is unimodular**: `det Λ_a = cosh²a − sinh²a = 1` — the change of variables `y = Λ_a x`
+    in the spacetime Fourier integral has unit Jacobian (no measure correction). -/
+theorem det_lorentzBoost (a : ℝ) : LinearMap.det (lorentzBoostₗ a) = 1 := by
+  rw [lorentzBoostₗ, LinearMap.det_toLin', lorentzBoostMat, Matrix.det_fin_two_of]
+  linear_combination Real.cosh_sq_sub_sinh_sq a
 
 end QIQTH.Fock.Localization

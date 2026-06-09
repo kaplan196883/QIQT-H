@@ -593,6 +593,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the rapidity-a boost shifts the mass shell, Λa(p_m θ)=p_m(θ+a) (cosh/sinh add).
 #print axioms QIQTH.Fock.Localization.minkowskiDot_boost
 -- expected: standard only — the Minkowski pairing is boost-invariant, η(Λp,Λx)=η(p,x) (cosh²−sinh²=1).
+#print axioms QIQTH.Fock.Localization.det_lorentzBoost
+-- expected: standard only — the boost is unimodular, det Λa = cosh²a−sinh²a = 1 (unit Jacobian for the
+-- Fourier change of variables; via Matrix.toLin' + det_fin_two).
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
