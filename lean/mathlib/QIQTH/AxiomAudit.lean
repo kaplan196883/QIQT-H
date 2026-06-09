@@ -536,6 +536,20 @@ namespace QIQTH.AxiomAudit
 -- measure (strengthens typicality_invariant). Pushforward marginal = μ-marginal on J.map π reindexed back
 -- (singleton set identity) + π-invariance of Born weights ⇒ same projective family ⇒ uniqueness.
 
+-- Stage 2 skeleton: the spacetime-localization interface (K + Pauli-Jordan + Poincare equivariance).
+#print axioms QIQTH.Fock.SpacetimeLocalization.toGeoCovariantModes
+-- expected: standard only — a localization datum (K:TestFun→H, region/boostT/relabel, equivariance,
+-- Pauli-Jordan microcausality) yields a GeoCovariantModes datum (modes uᵢ=K(region i), isotropy from
+-- pauli_jordan + distinct_spacelike, equivariance from K_equivariant + region_equivariant).
+#print axioms QIQTH.Fock.SpacetimeLocalization.localized_typicality_exists
+-- expected: standard only — the σ-additive Weyl-bit μ∞ over the spacelike-local field records exists.
+#print axioms QIQTH.Fock.SpacetimeLocalization.localized_typicality_pushforward_invariant
+-- expected: standard only — THE LOCALIZED PRIZE (skeleton): (historyAct π)_* μ∞ = μ∞ for the local field,
+-- modulo the CITED concrete K (Pauli-Jordan/Wightman construction = the multi-month physics frontier).
+#print axioms QIQTH.Fock.trivialLocalization
+-- expected: standard only — non-vacuity witness: SpacetimeLocalization is inhabited (degenerate zero-mode
+-- instance; nontrivial K = cited physics program), certifying the interface hypotheses are satisfiable.
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation
