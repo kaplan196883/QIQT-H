@@ -775,6 +775,28 @@ namespace QIQTH.AxiomAudit
 -- ae_eq_iff_eq vs everywhere-positive ⇒ not a.e. 0), so the localized Weyl-bit Born outcome is genuinely
 -- non-deterministic, not the trivial 0 mode. Closes the "modes could be zero" honesty gap.
 
+-- A1d: FULL CONNECTED-POINCARÉ covariance — translations (the second generator) + the combined group
+#print axioms QIQTH.Fock.Localization.Krep_translate
+-- expected: standard only — the amplitude-level translation multiplier: K(τ_b f)(θ)=e^{−iη(p_mθ,b)}·Kf(θ).
+-- A change of variables (translation is volume-preserving) + additivity of the Minkowski pairing. The
+-- θ-DEPENDENT but UNIMODULAR phase that makes translations act as an L²(ℝ,dθ) multiplication isometry.
+#print axioms QIQTH.Fock.Localization.K_translate_equivariant
+-- expected: standard only — ★ K(τ_b f)=M_b(K f): translation equivariance, the SECOND Poincaré generator.
+-- M_b is the multiplication-by-e^{−iη(p_mθ,b)} isometry on L²(ℝ) (multiplierIsometry; isometry because the
+-- phase has modulus 1, multiplier_inner). Counterpart of K_boost_equivariant (the boost generator).
+#print axioms QIQTH.Fock.Localization.localized_typicality_translation_invariant
+-- expected: standard only — ★★ TRANSLATION-covariance of the localized typicality measure μ∞: the measure
+-- for {K(region i)} equals that for the translated family {M_b·K(region i)}={K(τ_b·region i)}. Same
+-- Gram-matrix/isometry-invariance route as the boost case (multiplier is unitary, |phase|=1).
+#print axioms QIQTH.Fock.Localization.K_poincare_equivariant
+-- expected: standard only — ★★★ FULL connected-Poincaré equivariance: K(τ_b·β_a·f)=U(a,b)(K f) with
+-- U(a,b)=M_b∘U₁(a). Boosts ∘ translations generate the connected Poincaré group of 1+1D Minkowski space.
+#print axioms QIQTH.Fock.Localization.localized_typicality_poincare_invariant
+-- expected: standard only — ★★★ THE FULL-POINCARÉ PRIZE: μ∞ is invariant under the WHOLE connected Poincaré
+-- group (boost a + translation b, U(a,b)=M_b∘U₁(a)), for a pairwise-spacelike microcausal localized family.
+-- Lorentz-covariant + translation-covariant + microcausal σ-additive typicality measure on the 1+1D free
+-- field — the literal Open-Problem-3b deliverable, axiom-free.
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation

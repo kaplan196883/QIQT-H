@@ -203,6 +203,52 @@ theorem Krep_boost (m a : ℝ) (f : V → ℂ) (θ : ℝ) :
     Krep m (boostTest a f) θ = Krep m f (θ + a) := by
   rw [Krep, Krep, minkowskiFourier_boost, massShell_boost]
 
+/-! ### Spacetime translations and the Fourier phase multiplier (Phase 2a′ — toward full Poincaré) -/
+
+/-- **The spacetime-translation action on test functions** `(τ_b f)(x) = f(x − b)` for a translation by
+    `b ∈ ℝ^{1+1}`.  Together with `boostTest`, the translations generate the connected Poincaré group. -/
+noncomputable def translateTest (b : V) (f : V → ℂ) : V → ℂ := fun x => f (x - b)
+
+/-- The Minkowski pairing is additive in its second argument: `η(p, x+y) = η(p,x) + η(p,y)`. -/
+theorem minkowskiDot_add_snd (p x y : V) :
+    minkowskiDot p (x + y) = minkowskiDot p x + minkowskiDot p y := by
+  simp only [minkowskiDot, Pi.add_apply]; ring
+
+/-- **Translation-equivariance of the localization (Fourier) map — the phase-multiplier identity.**
+    Translating the spacetime test by `b` multiplies the Minkowski-Fourier transform by the unit-modulus
+    phase `e^{−i η(p,b)}`:  `(τ_b f)^_M(p) = e^{−i η(p,b)} · f̂_M(p)`.  A clean change of variables
+    `y = x + b` (translation is volume-preserving) plus the additivity of the Minkowski pairing in its
+    second argument.  This is the translation counterpart of `minkowskiFourier_boost`: it intertwines the
+    spacetime translation with multiplication by a unimodular phase on the one-particle amplitudes. -/
+theorem minkowskiFourier_translate (b : V) (f : V → ℂ) (p : V) :
+    minkowskiFourier (translateTest b f) p
+      = Complex.exp (-Complex.I * ((minkowskiDot p b : ℝ) : ℂ)) * minkowskiFourier f p := by
+  have hmp := MeasureTheory.measurePreserving_add_right (volume : MeasureTheory.Measure V) b
+  have hme : MeasurableEmbedding (fun x : V => x + b) :=
+    (Homeomorph.addRight b).measurableEmbedding
+  have hcomp := hmp.integral_comp hme
+    (fun x => Complex.exp (-Complex.I * ((minkowskiDot p x : ℝ) : ℂ)) * f (x - b))
+  simp only [minkowskiFourier, translateTest]
+  rw [← hcomp, ← MeasureTheory.integral_const_mul]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun x => ?_)
+  simp only [add_sub_cancel_right]
+  rw [minkowskiDot_add_snd]
+  rw [show (-Complex.I * (((minkowskiDot p x + minkowskiDot p b : ℝ)) : ℂ))
+      = (-Complex.I * ((minkowskiDot p x : ℝ) : ℂ)) + (-Complex.I * ((minkowskiDot p b : ℝ) : ℂ))
+      from by push_cast; ring, Complex.exp_add]
+  ring
+
+/-- **The localized rapidity amplitude under a spacetime translation — the unimodular multiplier.**
+    `(K (τ_b f))(θ) = e^{−i η(p_m θ, b)} · (K f)(θ)`:  translating the spacetime test by `b` multiplies the
+    localized one-particle amplitude pointwise by the unit-modulus phase `e^{−i η(p_m θ, b)}`.  Immediate from
+    `minkowskiFourier_translate` and the shell embedding.  This is the second half of Poincaré covariance
+    (the first being the boost translation `Krep_boost`): the phase is `θ`-dependent but unimodular, so it
+    acts on `L²(ℝ, dθ)` as a multiplication isometry — preserving every inner product. -/
+theorem Krep_translate (m : ℝ) (b : V) (f : V → ℂ) (θ : ℝ) :
+    Krep m (translateTest b f) θ
+      = Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) b : ℝ) : ℂ)) * Krep m f θ := by
+  rw [Krep, Krep, minkowskiFourier_translate]; ring
+
 /-! ### Reality / both-frequencies structure (toward the Pauli–Jordan symplectic form, Phase 2b) -/
 
 /-- The Minkowski pairing is odd in its first argument: `η(−p, x) = −η(p, x)`. -/
