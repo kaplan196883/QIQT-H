@@ -616,6 +616,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — reality/both-frequencies: conj(f̂_M(p)) = (conj f)^_M(−p); for real f this gives
 -- conj(f̂_M(p))=f̂_M(−p), the relation making the full (both-frequency) Pauli–Jordan symplectic form emerge
 -- from the positive-mass-shell amplitude (Phase 2b foundation; soundness traps #4/#6).
+#print axioms QIQTH.Fock.Localization.Kform_im_antisymm
+-- expected: standard only — the localized symplectic form Im⟨Kf,Kg⟩ is ANTISYMMETRIC (= −Im⟨Kg,Kf⟩), the
+-- defining property of the Pauli–Jordan commutator form (NOT the symmetric Wightman 2-pt function; trap #6).
+-- Via Hermitian symmetry conj⟨Kf,Kg⟩=⟨Kg,Kf⟩ (Kform_conj, integral_conj + conj_conj).
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

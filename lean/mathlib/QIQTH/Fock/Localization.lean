@@ -216,4 +216,36 @@ theorem minkowskiFourier_conj (f : V → ℂ) (p : V) :
   simp only [map_mul, ← Complex.exp_conj, minkowskiDot_neg_left, map_neg, Complex.conj_I,
     Complex.conj_ofReal, Complex.ofReal_neg, mul_neg, neg_mul, neg_neg]
 
+/-! ### The (integral-level) symplectic form and its antisymmetry (Phase 2b) -/
+
+/-- **The localized sesquilinear form** `⟨Kf, Kg⟩ = ∫_ℝ conj(K f θ)·(K g θ) dθ` — the would-be `L²(ℝ)`
+    inner product of the localized rapidity amplitudes, written at the integral level (so it needs no `L²`
+    membership).  Its imaginary part is the localized symplectic form. -/
+noncomputable def Kform (m : ℝ) (f g : V → ℂ) : ℂ :=
+  ∫ θ, (starRingEnd ℂ) (Krep m f θ) * Krep m g θ
+
+/-- **Hermitian symmetry** of the localized form: `conj⟨Kf,Kg⟩ = ⟨Kg,Kf⟩`. -/
+theorem Kform_conj (m : ℝ) (f g : V → ℂ) :
+    (starRingEnd ℂ) (Kform m f g) = Kform m g f := by
+  rw [Kform, Kform, ← integral_conj]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
+  simp only [map_mul, Complex.conj_conj]
+  ring
+
+/-- **The localized symplectic form is ANTISYMMETRIC**: `Im⟨Kf,Kg⟩ = −Im⟨Kg,Kf⟩`.  This is the defining
+    property of the Pauli–Jordan *commutator* form — it distinguishes the genuine symplectic structure from
+    the symmetric Wightman two-point function (soundness trap #6: Wightman ≠ Pauli–Jordan).  Holds for all
+    `f, g`; together with `minkowskiFourier_conj` (the both-frequency reality relation) it identifies the
+    localized form as the mass-shell Pauli–Jordan bilinear. -/
+theorem Kform_im_antisymm (m : ℝ) (f g : V → ℂ) :
+    (Kform m f g).im = -(Kform m g f).im := by
+  have h := congrArg Complex.im (Kform_conj m f g)
+  rw [Complex.conj_im] at h
+  linarith
+
+/-- The localized symplectic form vanishes on the diagonal (`Im⟨Kf,Kf⟩ = 0`) — an immediate consequence of
+    antisymmetry, and the trivial self-consistency of microcausality. -/
+theorem Kform_im_self (m : ℝ) (f : V → ℂ) : (Kform m f f).im = 0 := by
+  have := Kform_im_antisymm m f f; linarith
+
 end QIQTH.Fock.Localization
