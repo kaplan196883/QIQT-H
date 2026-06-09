@@ -219,3 +219,4 @@ import QIQTH.Fock.WeylBitMeasure
 import QIQTH.Fock.WeylBitEffect
 import QIQTH.Fock.WeylBitGeoCovariance
 import QIQTH.Fock.LocalizationSkeleton
+import QIQTH.Fock.WeylCLM

@@ -550,6 +550,22 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — non-vacuity witness: SpacetimeLocalization is inhabited (degenerate zero-mode
 -- instance; nontrivial K = cited physics program), certifying the interface hypotheses are satisfiable.
 
+-- The completed-Fock / CLM lift: bounded Weyl operators on the Fock Hilbert space + Born weight as a
+-- genuine vacuum C*-state expectation of a bounded POVM effect.
+#print axioms QIQTH.Fock.clmLift_coe
+-- expected: standard only — bundled lift of a bounded FockPre operator to a CLM on Fock H (via
+-- ContinuousLinearMap.extend along the dense isometric embedding toComplL), agreeing on the dense subspace.
+#print axioms QIQTH.Fock.weylCLM_neg_cancel
+-- expected: standard only — CCR-unitarity W(-u)W(u)=1 of the bounded Weyl operator on the Fock Hilbert space.
+#print axioms QIQTH.Fock.weylCLM_vacuum_inner
+-- expected: standard only — the genuine vacuum two-point matrix element ⟪Ω,W(u)Ω⟫=exp(-½⟪u,u⟫) ON THE
+-- completed Hilbert space (GPT's single load-bearing operator-level theorem).
+#print axioms QIQTH.Fock.weylBitEffectCLM_complete
+-- expected: standard only — operator POVM completeness E(u,+1)+E(u,-1)=1 of bounded effects on Fock H.
+#print axioms QIQTH.Fock.vacuumState_weylBitEffectCLM_true
+-- expected: standard only — the single-mode Weyl-bit Born weight IS a genuine vacuum C*-state expectation
+-- of a bounded positive effect: vacuumState(E(u,+1)) = (1+exp(-½‖u‖²))/2 = weylBitWeight u.
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation
