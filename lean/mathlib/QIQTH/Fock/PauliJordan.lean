@@ -429,4 +429,15 @@ theorem exists_pos_lower_bound_slSq {K L : Set V} (hK : IsCompact K) (hL : IsCom
     have hsl : (p₀.1 - p₀.2) 0 ^ 2 < (p₀.1 - p₀.2) 1 ^ 2 := hsep p₀.1 hx₀ p₀.2 hy₀
     simp only [hg]; linarith
 
+/-! ### 9. The symmetric truncation limit (ingredient for the 5c assembly) -/
+
+/-- **Symmetric truncation limit**: for an integrable `G : ℝ → ℝ`, the symmetric interval integrals
+converge to the full-line integral, `∫_{−R}^{R} G → ∫_ℝ G` as `R → ∞`.  This is what reduces the
+absolutely-convergent localized form `Im(Kform)` to the `R → ∞` limit of finite-`R` truncations (where
+Fubini and the pointwise vanishing `pauliJordan_spacelike_tendsto_zero` apply) in the bilinear assembly
+(5c).  A direct application of `intervalIntegral_tendsto_integral`. -/
+theorem symm_intervalIntegral_tendsto_integral {G : ℝ → ℝ} (hG : Integrable G) :
+    Filter.Tendsto (fun R => ∫ x in (-R)..R, G x) Filter.atTop (nhds (∫ x, G x)) :=
+  intervalIntegral_tendsto_integral hG Filter.tendsto_neg_atTop_atBot Filter.tendsto_id
+
 end QIQTH.Fock.Localization

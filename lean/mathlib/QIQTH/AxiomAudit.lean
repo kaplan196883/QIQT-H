@@ -711,6 +711,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Localization.exists_pos_lower_bound_slSq
 -- expected: standard only — ★ the r₀>0 compactness bound: on compact spacelike-separated K,L the spacelike
 -- interval (x−y)₁²−(x−y)₀² ≥ ε>0 uniformly (extreme value theorem) — the 2nd ingredient for 5c's DCT.
+#print axioms QIQTH.Fock.Localization.symm_intervalIntegral_tendsto_integral
+-- expected: standard only — the symmetric truncation limit ∫_{−R}^R G → ∫_ℝ G (integrable G) — reduces
+-- the localized form to the R→∞ limit of finite-R truncations (5c ingredient).
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
