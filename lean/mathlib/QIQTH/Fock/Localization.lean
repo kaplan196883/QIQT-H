@@ -178,4 +178,22 @@ theorem minkowskiFourier_boost (a : ℝ) (f : V → ℂ) (p : V) :
   refine integral_congr_ae (Filter.Eventually.of_forall fun x => ?_)
   simp only [minkowskiDot_boost]
 
+/-! ### The localized rapidity amplitude and its boost-covariance (Phase 2a) -/
+
+/-- **The localized rapidity amplitude** `(K f)(θ) = 2^{-1/2} · f̂_M(p_m θ)` — the value of the localization
+    map on the positive mass shell, in rapidity coordinates (before the `L²` packaging).  The `1/√2` is the
+    invariant-measure normalization `dp/(2ω) = dθ/2` (soundness trap #1: omitting it scales the symplectic
+    form by 2). -/
+noncomputable def Krep (m : ℝ) (f : V → ℂ) (θ : ℝ) : ℂ :=
+  (1 / Real.sqrt 2 : ℂ) * minkowskiFourier f (massShell m θ)
+
+/-- **The localization is boost-covariant at the amplitude level**: boosting the spacetime test function
+    *translates* the localized rapidity amplitude, `(K (β_a f))(θ) = (K f)(θ + a)`.  So the Lorentz boost
+    acts on the localized one-particle amplitude as the rapidity translation `θ ↦ θ + a` — exactly the
+    action implemented by the one-particle unitary `OneParticle.boostUnitary`.  Immediate from the Phase-1c
+    keystone `minkowskiFourier_boost` and the shell geometry `massShell_boost`. -/
+theorem Krep_boost (m a : ℝ) (f : V → ℂ) (θ : ℝ) :
+    Krep m (boostTest a f) θ = Krep m f (θ + a) := by
+  rw [Krep, Krep, minkowskiFourier_boost, massShell_boost]
+
 end QIQTH.Fock.Localization

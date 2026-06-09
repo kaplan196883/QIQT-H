@@ -608,6 +608,10 @@ namespace QIQTH.AxiomAudit
 -- map, (β_a f)^_M(p) = f̂_M(Λa p), via the change of variables y=Λa x (MeasurePreserving.integral_comp +
 -- measurable embedding) + Minkowski-pairing boost-invariance. The localization intertwines the spacetime
 -- boost with the one-particle (rapidity-translation) action.
+#print axioms QIQTH.Fock.Localization.Krep_boost
+-- expected: standard only — the localized rapidity amplitude (K f)(θ)=2^{-1/2}f̂_M(p_m θ) is boost-covariant:
+-- (K(β_a f))(θ)=(K f)(θ+a), i.e. the Lorentz boost acts as the rapidity translation θ↦θ+a (the boostUnitary
+-- action). From minkowskiFourier_boost + massShell_boost. Phase 2a.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
