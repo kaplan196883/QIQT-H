@@ -111,12 +111,25 @@ symplectic form and resolves the both-frequencies issue — before any support a
 
 | Phase | Deliverable | Status / scope |
 |---|---|---|
-| **0** Convention lock | `V`, `minkowskiDot`, `minkowskiSq`, `massShell`, `lorentzBoost`, `boostTest` sign matched to `boostUnitary`; `massShell_boost`, `minkowskiDot_boost`, `det_lorentzBoost` | days |
-| **1** Test fns + Fourier wrapper | `LocalTest`, `minkowskiFourier`, `boostTest`; **`minkowskiFourier_boost`** | ~1–2 wk |
+| **0** Convention lock | `V`, `minkowskiDot`, `minkowskiSq`, `massShell`, `lorentzBoost`; `massShell_boost`, `minkowskiDot_boost`, `minkowskiSq_boost`, `minkowskiSq_massShell` | **DONE** 2026-06-09 (commit 914e656, `Localization.lean`, axiom-free) |
+| **1** Test fns + Fourier wrapper | `lorentzBoostₗ`+`det_lorentzBoost=1` (Jacobian); `measurePreserving_lorentzBoost`; `LocalTest`, `minkowskiFourier`, `boostTest`; **`minkowskiFourier_boost`** | ~1–2 wk — ⚠ see note |
 | **2** ★ Concrete `K` (FIRST increment) | `Krep`, `Krep_memLp`, `K`; **`K_boost`** (equivariance), **`inner_K_formula`**, **`two_im_inner_eq_full_mass_shell`** | the highest-value first increment; weeks |
 | **3** Conditional localized measure | instantiate `SpacetimeLocalization` from `(PJ : PauliJordanLocality m (K m))` ⇒ `concrete_localized_covariant_measure` (axiom-free, conditional) | short once 2 done |
 | **4** Kernel-certificate bridge | `PauliJordanKernelCert`, `locality_from_kernel` (support ⇒ locality, easy) | short |
 | **5** The wall | the 1+1 `Δ_m` Bessel kernel + `sigma_eq_kernel` (mass-shell Fourier rep) + `support_lightcone` | **multi-month** analytic (Bessel/oscillatory integrals); the genuine frontier |
+
+**⚠ Phase-1 representation finding (2026-06-09).** The boost's measure-preservation routes through
+`MeasureTheory.Measure.map_linearMap_addHaar_eq_smul_addHaar volume hdet` (with `det Λ_a = 1`, found and
+the algebra works), but that lemma needs `volume.IsAddHaarMeasure` on the spacetime type — which is
+**registered for `EuclideanSpace ℝ (Fin 2)` / `ℝⁿ` but NOT for the raw Pi type `Fin 2 → ℝ`**. DECISION for
+the next Phase-1 session: either (a) switch `V := EuclideanSpace ℝ (Fin 2)` (gets the Haar instance + the
+Fourier API for free; costs slightly more friction in `![·]` component access and the `minkowskiDot`
+definition — use `!₂[·]`/`EuclideanSpace.equiv` or coordinate projections), or (b) keep `Fin 2 → ℝ` and
+prove/locate the `IsAddHaarMeasure` instance for its `volume` (the pi measure is Haar, so this should exist
+or be one lemma). **(a) is recommended** — `EuclideanSpace` is where Mathlib's `fourierIntegral` +
+`EqHaar` both live, so Phases 1–2 ride existing API. `det_lorentzBoost=1` itself is clean once the matrix
+reduction uses `dotProduct` (root namespace, not `Matrix.dotProduct`) + `Matrix.vecHead/vecTail`. The
+Phase-0 geometry lemmas are representation-agnostic and port directly.
 
 **First increment = Phase 0–2**: a concrete, bounded, boost-equivariant `K` landing exactly in the existing
 `L²(ℝ)`, with the proven symplectic-form identity. After Phase 3, the *literal* OP3b statement holds
