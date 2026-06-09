@@ -225,3 +225,4 @@ import QIQTH.Fock.Localization
 import QIQTH.Fock.SchwartzDecay
 import QIQTH.Fock.PauliJordan
 import QIQTH.Fock.LocalizedCovariance
+import QIQTH.Fock.LocalizedWitness

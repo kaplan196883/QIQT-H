@@ -741,6 +741,13 @@ namespace QIQTH.AxiomAudit
 -- only on the Gram matrix (isometry-invariance, weylBit_typicality_boost_invariant) — no orbit needed.
 #print axioms QIQTH.Fock.Localization.localized_hiso_of_spacelike
 -- expected: standard only — a pairwise-spacelike regular region family gives microcausal localized modes.
+#print axioms QIQTH.Fock.Localization.localized_microcausality_nonvacuous
+-- expected: standard only — ★★★ NON-VACUITY WITNESS: two GENUINELY spacelike-separated localizable tests
+-- (smooth compact-support real bumps at (0,±5)) have Im⟪K Lf, K Lg⟫=0 — a non-vacuous pauli_jordan instance
+-- (NOT f=0). Every analytic hypothesis discharged: Krep∈L² (schwartz_Krep_memLp via toSchwartzMap), hKint
+-- (Cauchy–Schwarz MemLp.integrable_mul), spacelike supports (bump boxes, (Δx)²≥36>16≥(Δt)²). Seals the prize.
+#print axioms QIQTH.Fock.Localization.bumps_spacelike
+-- expected: standard only — the two bump record regions at (0,±5) are genuinely spacelike-separated.
 #print axioms QIQTH.Fock.Localization.K_boost_equivariant
 -- expected: standard only — ★ K(boost_a·f)=U₁(a)(K f): Poincaré equivariance, the SECOND physics input
 -- of the SpacetimeLocalization interface (K_equivariant), discharged for the concrete K. The Lorentz boost
