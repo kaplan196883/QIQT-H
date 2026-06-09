@@ -184,6 +184,19 @@ geometrically-relabeled family `u∘π` equals the one for `u`. A concrete space
 exactly what would supply `π`, `A`, the equivariance, and the microcausality from Poincaré covariance and
 Pauli–Jordan vanishing.
 
+**Literal single-measure pushforward.** The statements above equate the two measures realizing the `u` and
+`u∘π` families. We additionally prove the textbook form — that the *one* measure `μ∞` is fixed by the
+symmetry acting on the history space `∏_i {±1}` itself:
+
+> **Theorem (`GeoCovariantModes.typicality_pushforward_invariant`).** Let `historyAct π : (g_i) ↦ (g_{π i})`
+> be the relabeling of the history space induced by `π`. If `μ∞` realizes the Weyl-bit typicality family for
+> an equivariant `GeoCovariantModes` datum, then `(historyAct π)_* μ∞ = μ∞`.
+
+The proof reindexes the order-independent Born product along the index bijection — a `Finset.noncommProd`
+reindex-by-bijection lemma (`bornVecTot_map`, `bornWeight_map`) we supply by induction, absent from the
+present Mathlib — and shows the pushforward realizes the *same* projective family, so the conclusion follows
+from uniqueness of the Kolmogorov limit.
+
 ---
 
 ## 6. Honest scope: what is and is not established
@@ -256,17 +269,19 @@ statements claimed.
 | boost-covariance of `μ∞` | `weylBit_typicality_boost_invariant` |
 | Lorentz-boost corollary | `weylBit_typicality_lorentzBoost_invariant` |
 | geometric-covariance interface | `GeoCovariantModes.typicality_invariant` |
+| single-measure pushforward `(historyAct π)_* μ∞ = μ∞` | `GeoCovariantModes.typicality_pushforward_invariant` |
+| `noncommProd` reindex-by-bijection | `bornVecTot_map`, `bornWeight_map` |
 
 ---
 
 ## 8. Outlook
 
-The natural next increments, in increasing difficulty: (i) the literal single-measure pushforward
-`Measure.map(history-relabel) μ∞ = μ∞` (needs a `noncommProd` reindex-by-bijection lemma and routine
-measure plumbing); (ii) lifting the Weyl-bit operators to bounded operators on the completed Fock space with
-the complex vacuum state; (iii) the concrete Poincaré-equivariant localization map `K` with Pauli–Jordan
-microcausality, which would upgrade the present abelian Weyl-bit process to a genuinely spacetime-local free
-field. Of these, (iii) is the real research program; (i)–(ii) are bounded.
+The natural next increments, in increasing difficulty: (i) lifting the Weyl-bit operators to bounded
+operators on the completed Fock space with the complex vacuum state; (ii) the concrete Poincaré-equivariant
+localization map `K` with Pauli–Jordan microcausality, which would upgrade the present abelian Weyl-bit
+process to a genuinely spacetime-local free field. Of these, (ii) is the real research program; (i) is
+bounded. (The literal single-measure pushforward `(historyAct π)_* μ∞ = μ∞`, previously listed here, is now
+proven — see §5.)
 
 ---
 
