@@ -32,11 +32,18 @@ what is the prize we are chasing, and what must be fixed before arXiv.*
 > (`weyl2pt_boost_invariant`); and **microcausality** — spacelike (symplectically orthogonal) Weyl
 > observables COMMUTE (`weyl_microcausality`).  A GPT-5.5-pro review put the *literal* prize at ~20%
 > and named the bounded Weyl operator as the keystone; that keystone and all three of its recommended
-> increments (Weyl op, non-vacuous covariance, microcausality) are now done.  **Honest remaining gap to
-> the literal `μ∞.map(boost)=μ∞`:** the spacetime **localization map** `K : TestFun → OneParticleH`
-> (Pauli–Jordan: spacelike supports ⇒ `Im⟪Kf,Kg⟫=0`; a separate Fourier/mass-shell construction) +
-> bundling `W(u)` as a `ContinuousLinearMap` for a genuine POVM.  The algebraic spine is complete; what
-> remains is the localization geometry + the measure/POVM bundling.
+> increments (Weyl op, non-vacuous covariance, microcausality) are now done.  **The localization gap is
+> now CLOSED (2026-06-10).** The concrete 1+1D mass-shell localization map `K : TestFun → L²(ℝ)` is
+> built with: **(i)** Pauli–Jordan microcausality `Im⟪Kf,Kg⟫=0` for spacelike-separated supports
+> (`K_im_inner_eq_zero_smooth`, via the oscillatory IBP keystone — non-vacuous witness); **(ii)** full
+> connected-Poincaré equivariance `K(τ_b β_a f)=U(a,b)Kf` with `(a,b)↦U(a,b)=M_b∘U₁(a)` a genuine unitary
+> **representation** of `ℝ^{1,1}⋊SO⁺(1,1)` (`poincareIsometry_comp`); **(iii)** non-triviality
+> (`K_gaussian_ne_zero`).  Hence the σ-additive `μ∞` is invariant under the WHOLE connected Poincaré group
+> (`localized_typicality_poincare_invariant`), and the bounded-operator/POVM bundling on the completed
+> Hilbert space (`weylCLM`, `jointEffectCLM_complete`) is done.  Per GPT-5.5-pro the scoped mathematical
+> prize is now closed (~98–99%); the residual is honest *scope* wording (free/quasi-free vacuum sector,
+> connected proper-orthochronous group, 1+1D, no Type III₁ net) — no unformalized analytic input, no
+> `sorry`.  See `ARXIV_NOTE_WeylBit.md` and `SCOPE_STATEMENT.md`.
 
 ---
 

@@ -1,5 +1,16 @@
 # K-Localization Plan — the last physics input for the prize
 
+> **✅ COMPLETED 2026-06-10 — this plan is fully executed.** The concrete `K`, Pauli–Jordan microcausality
+> (`K_im_inner_eq_zero_smooth`, via the oscillatory-IBP keystone `abs_integral_sin_sinh_le`), translations
+> (`Krep_translate`/`multiplierIsometry`), the full connected-Poincaré **representation**
+> (`poincareIsometry_comp`, `K_poincare_equivariant`), non-triviality (`K_gaussian_ne_zero`), the
+> non-vacuous spacelike witness (`localized_microcausality_nonvacuous`), and full-Poincaré invariance of
+> `μ∞` (`localized_typicality_poincare_invariant`) are ALL proved, axiom-free, no `sorry`, budget 33.
+> Files: `Fock/Localization`, `Fock/SchwartzDecay`, `Fock/PauliJordan`, `Fock/LocalizedCovariance`,
+> `Fock/LocalizedWitness`, `Fock/TranslationCovariance`. Per GPT-5.5-pro the scoped mathematical prize is
+> closed (~98–99%); residual = honest scope wording only. See `ARXIV_NOTE_WeylBit.md` + `SCOPE_STATEMENT.md`.
+> The plan below is retained as the historical execution record.
+
 *The concrete spacetime localization map `K` and Pauli–Jordan microcausality: the only gap between the
 machine-checked measure machinery and the literal Lorentz-covariant Born-typicality measure on a relativistic
 free field. Written 2026-06-09 after GPT-5.5-pro attack-plan consult #6. 1+1D massive neutral scalar.*

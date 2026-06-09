@@ -41,10 +41,17 @@ Mathlib has *no* Fock-space / CCR theory; this session machine-checked it from s
 
 A GPT-5.5-pro review (2026-06-08) put the *literal* continuum prize at ~20% and named the bounded Weyl
 operator as the load-bearing keystone — **now built**, along with all three of its recommended increments.
-The honest remaining gap to `μ∞.map(boost) = μ∞`: the spacetime **localization map** `K : TestFun →
-OneParticleH` (Pauli–Jordan: spacelike ⇒ `Im⟪Kf,Kg⟫ = 0`; Fourier/mass-shell construction) + bundling
-`W(u)` as a `ContinuousLinearMap` for a genuine POVM.  **The algebraic spine is complete; the localization
-geometry + measure/POVM bundling remain.**
+**UPDATE 2026-06-10 — the localization gap is now CLOSED.** The concrete 1+1D mass-shell localization map
+`K : TestFun → L²(ℝ)` is built with Pauli–Jordan microcausality `Im⟪Kf,Kg⟫=0` for spacelike supports
+(`K_im_inner_eq_zero_smooth`, oscillatory-IBP keystone, non-vacuous witness), full connected-Poincaré
+equivariance `K(τ_b β_a f)=U(a,b)Kf` with `(a,b)↦U(a,b)=M_b∘U₁(a)` a genuine unitary **representation** of
+`ℝ^{1,1}⋊SO⁺(1,1)` (`poincareIsometry_comp`), and non-triviality (`K_gaussian_ne_zero`); hence `μ∞` is
+invariant under the WHOLE connected Poincaré group (`localized_typicality_poincare_invariant`), and `W(u)`
+is bundled as a `ContinuousLinearMap` with a genuine joint POVM (`weylCLM`, `jointEffectCLM_complete`).
+Per GPT-5.5-pro the scoped mathematical prize is now closed (~98–99%); the residual is honest *scope*
+wording only (free/quasi-free vacuum sector, connected proper-orthochronous group, 1+1D, no Type III₁ net) —
+no unformalized analytic input, no `sorry`.  Full statement of claims + boundaries: `ARXIV_NOTE_WeylBit.md`,
+`SCOPE_STATEMENT.md`.
 
 **A concrete, Lean-grounded staged execution plan** (free-field finite-mode instance → sheaf /
 global-section / cohomology layer → continuum analytic infrastructure), with per-item difficulty,
