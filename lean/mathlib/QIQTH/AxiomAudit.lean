@@ -714,6 +714,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Localization.symm_intervalIntegral_tendsto_integral
 -- expected: standard only — the symmetric truncation limit ∫_{−R}^R G → ∫_ℝ G (integrable G) — reduces
 -- the localized form to the R→∞ limit of finite-R truncations (5c ingredient).
+#print axioms QIQTH.Fock.Localization.im_exp_mul_of_real
+-- expected: standard only — Im(exp(iα)·w) = sin α · Re w when Im w = 0.
+#print axioms QIQTH.Fock.Localization.Krep_prod_im
+-- expected: standard only — ★★ part (a) of the bilinear assembly (5c): the fixed-θ DOUBLE-INTEGRAL
+-- representation Im(conj(K f θ)·K g θ) = ½∫∫ sin(η(p_mθ,x−y))·(f x·g y).re ∂(vol×vol), for real
+-- (conj f=f, conj g=g) continuous compact-support tests. Exposes the Pauli–Jordan kernel sin(η).
+-- Route: conj-real + integral_prod_mul (product=double integral) + integral_comp_comm (Im∘∫) + the
+-- pointwise im_exp_mul_of_real.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

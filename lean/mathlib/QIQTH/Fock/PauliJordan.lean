@@ -440,4 +440,103 @@ theorem symm_intervalIntegral_tendsto_integral {G : ℝ → ℝ} (hG : Integrabl
     Filter.Tendsto (fun R => ∫ x in (-R)..R, G x) Filter.atTop (nhds (∫ x, G x)) :=
   intervalIntegral_tendsto_integral hG Filter.tendsto_neg_atTop_atBot Filter.tendsto_id
 
+/-! ### 10. The fixed-θ double-integral representation (part (a) of the bilinear assembly) -/
+
+/-- The pointwise imaginary part of the phase-rotated product, for a real value `w`:
+`Im(exp(i α)·w) = sin α · Re w` when `Im w = 0`. -/
+theorem im_exp_mul_of_real (α : ℝ) (w : ℂ) (hw : w.im = 0) :
+    (Complex.exp (Complex.I * (α : ℂ)) * w).im = Real.sin α * w.re := by
+  rw [mul_comm Complex.I, Complex.exp_mul_I]
+  simp only [Complex.add_im, Complex.mul_im, Complex.cos_ofReal_re, Complex.cos_ofReal_im,
+    Complex.sin_ofReal_re, Complex.sin_ofReal_im, Complex.I_im, Complex.I_re, Complex.add_re,
+    Complex.mul_re, hw]
+  ring
+
+/-- **The localized form's integrand as a double space integral.**  For real-valued (`conj f = f`,
+`conj g = g`) continuous compactly-supported test functions, at each rapidity `θ` the imaginary part of the
+localized product is the smeared mass-shell kernel:
+`Im(conj(K f θ)·K g θ) = ½ ∫∫ sin(η(p_m θ, x−y))·(f x · g y).re ∂(vol×vol)`.
+This is part (a) of the bilinear assembly: it exposes the Pauli–Jordan kernel `sin(η(p_m θ, x−y))` whose
+spacelike vanishing (`pauliJordan_spacelike_tendsto_zero`) drives the microcausality of `K`. -/
+theorem Krep_prod_im (m θ : ℝ) {f g : V → ℂ}
+    (hf : Continuous f) (hfc : HasCompactSupport f)
+    (hg : Continuous g) (hgc : HasCompactSupport g)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x) :
+    ((starRingEnd ℂ) (Krep m f θ) * Krep m g θ).im
+      = (1 / 2) * ∫ z : V × V,
+          Real.sin (minkowskiDot (massShell m θ) (z.1 - z.2)) * (f z.1 * g z.2).re
+          ∂(volume.prod volume) := by
+  set p := massShell m θ with hp
+  -- the two phase-weighted integrands A, B (continuous, compact support ⇒ integrable)
+  set A : V → ℂ := fun x => Complex.exp (Complex.I * ((minkowskiDot p x : ℝ) : ℂ)) * f x with hAdef
+  set B : V → ℂ := fun y => Complex.exp (-Complex.I * ((minkowskiDot p y : ℝ) : ℂ)) * g y with hBdef
+  have hAcont : Continuous A := by
+    rw [hAdef]
+    exact (Complex.continuous_exp.comp
+      ((Complex.continuous_ofReal.comp (continuous_minkowskiDot_snd p)).const_mul Complex.I)).mul hf
+  have hBcont : Continuous B := by
+    rw [hBdef]
+    exact (Complex.continuous_exp.comp
+      ((Complex.continuous_ofReal.comp (continuous_minkowskiDot_snd p)).const_mul (-Complex.I))).mul hg
+  have hAcs : HasCompactSupport A := HasCompactSupport.mul_left hfc
+  have hBcs : HasCompactSupport B := HasCompactSupport.mul_left hgc
+  have hAint : Integrable A := hAcont.integrable_of_hasCompactSupport hAcs
+  have hBint : Integrable B := hBcont.integrable_of_hasCompactSupport hBcs
+  -- conj(mF f p) = ∫ A   (integral_conj + real f + conj of exp)
+  have hconj : (starRingEnd ℂ) (minkowskiFourier f p) = ∫ x, A x := by
+    rw [minkowskiFourier, ← integral_conj]
+    refine integral_congr_ae (Filter.Eventually.of_forall fun x => ?_)
+    simp only [hAdef, map_mul, ← Complex.exp_conj, map_neg, Complex.conj_I, Complex.conj_ofReal,
+      hfr, neg_mul, neg_neg]
+  have hmFg : minkowskiFourier g p = ∫ y, B y := rfl
+  -- conj(Krep f)·Krep g = (1/2)·(∫A)·(∫B)
+  have hroot : (starRingEnd ℂ) (1 / Real.sqrt 2 : ℂ) = (1 / Real.sqrt 2 : ℂ) := by
+    rw [map_div₀, map_one, Complex.conj_ofReal]
+  have h2 : (1 / Real.sqrt 2 : ℂ) * (1 / Real.sqrt 2 : ℂ) = 1 / 2 := by
+    rw [div_mul_div_comm, one_mul, ← Complex.ofReal_mul, Real.mul_self_sqrt (by norm_num)]
+    norm_num
+  have hprod : (starRingEnd ℂ) (Krep m f θ) * Krep m g θ
+      = (1 / 2 : ℂ) * ((∫ x, A x) * ∫ y, B y) := by
+    rw [Krep, Krep, map_mul, hconj, hroot, hmFg,
+      show (1 / Real.sqrt 2 : ℂ) * (∫ x, A x) * ((1 / Real.sqrt 2 : ℂ) * ∫ y, B y)
+         = ((1 / Real.sqrt 2 : ℂ) * (1 / Real.sqrt 2 : ℂ)) * ((∫ x, A x) * ∫ y, B y) by ring,
+      h2]
+  -- product of integrals = double integral
+  have hABint : Integrable (fun z : V × V => A z.1 * B z.2) (volume.prod volume) :=
+    hAint.mul_prod hBint
+  -- pointwise: (A z.1 · B z.2).im = sin(η(p, z.1 − z.2)) · (f z.1 · g z.2).re
+  have hpt : ∀ z : V × V,
+      (A z.1 * B z.2).im
+        = Real.sin (minkowskiDot p (z.1 - z.2)) * (f z.1 * g z.2).re := by
+    intro z
+    have hmd : minkowskiDot p (z.1 - z.2) = minkowskiDot p z.1 - minkowskiDot p z.2 := by
+      simp only [minkowskiDot, Pi.sub_apply]; ring
+    have hcombine : A z.1 * B z.2
+        = Complex.exp (Complex.I * ((minkowskiDot p (z.1 - z.2) : ℝ) : ℂ)) * (f z.1 * g z.2) := by
+      simp only [hAdef, hBdef]
+      rw [hmd,
+        show Complex.exp (Complex.I * (↑(minkowskiDot p z.1) : ℂ)) * f z.1
+            * (Complex.exp (-Complex.I * (↑(minkowskiDot p z.2) : ℂ)) * g z.2)
+          = (Complex.exp (Complex.I * (↑(minkowskiDot p z.1) : ℂ))
+              * Complex.exp (-Complex.I * (↑(minkowskiDot p z.2) : ℂ))) * (f z.1 * g z.2) by ring,
+        ← Complex.exp_add,
+        show Complex.I * (↑(minkowskiDot p z.1) : ℂ) + -Complex.I * (↑(minkowskiDot p z.2) : ℂ)
+          = Complex.I * (↑(minkowskiDot p z.1 - minkowskiDot p z.2) : ℂ) by push_cast; ring]
+    rw [hcombine]
+    refine im_exp_mul_of_real _ _ ?_
+    have hfi : (f z.1).im = 0 := by
+      have h := congrArg Complex.im (hfr z.1); rw [Complex.conj_im] at h; linarith
+    have hgi : (g z.2).im = 0 := by
+      have h := congrArg Complex.im (hgr z.2); rw [Complex.conj_im] at h; linarith
+    rw [Complex.mul_im, hfi, hgi]; ring
+  -- assemble
+  rw [hprod, ← integral_prod_mul A B,
+    show (1 / 2 : ℂ) = ((1 / 2 : ℝ) : ℂ) by norm_num]
+  simp only [Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, zero_mul, add_zero]
+  rw [← Complex.imCLM_apply, ← ContinuousLinearMap.integral_comp_comm Complex.imCLM hABint]
+  congr 1
+  refine integral_congr_ae (Filter.Eventually.of_forall fun z => ?_)
+  simp only [Complex.imCLM_apply]
+  exact hpt z
+
 end QIQTH.Fock.Localization
