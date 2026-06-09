@@ -566,6 +566,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the single-mode Weyl-bit Born weight IS a genuine vacuum C*-state expectation
 -- of a bounded positive effect: vacuumState(E(u,+1)) = (1+exp(-½‖u‖²))/2 = weylBitWeight u.
 
+-- Concrete non-degenerate boost-orbit instance (GPT's minimal pushforward-invariant K milestone).
+#print axioms QIQTH.Fock.boostOrbitModes
+-- expected: standard only — discrete boost orbit uₙ=U₁(nτ)u₀ on L²(ℝ) as a GeoCovariantModes: boost of
+-- rapidity τ acts by the shift n↦n+1 (equivariance from the boostUnitary group law), microcausality reduced
+-- to the single seed condition hiso0 (Im⟪u₀,U₁(kτ)u₀⟫=0, k≠0 — the residual Pauli-Jordan input).
+#print axioms QIQTH.Fock.boostOrbit_typicality_pushforward_invariant
+-- expected: standard only — μ∞ over the boost orbit is fixed by the boost-induced shift n↦n+1 on the
+-- history space ∏_{n:ℤ}{±1}: a non-degenerate continuum realization of the pushforward covariance.
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation
