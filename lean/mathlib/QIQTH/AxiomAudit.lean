@@ -524,6 +524,18 @@ namespace QIQTH.AxiomAudit
 -- π relabeling, A one-particle symmetry, equivariance, microcausality) — the obligations a concrete
 -- spacetime localization K would supply; specializes to Lorentz-boost frame-independence.
 
+-- Increment 2: the LITERAL single-measure pushforward (the noncommProd reindex-by-bijection Mathlib lacks).
+#print axioms QIQTH.Fock.bornVecTot_map
+-- expected: standard only — Born history vector reindexed by an index bijection π (∏ over J.map π of v's
+-- bits = ∏ over J of (v∘π)'s bits), by induction on the context.
+#print axioms QIQTH.Fock.bornWeight_map
+-- expected: standard only — Born weight reindexed by π: bornWeight v (J.map π) (outReindex σ) =
+-- bornWeight (v∘π) J σ (signExt congruence on the relabeled context).
+#print axioms QIQTH.Fock.GeoCovariantModes.typicality_pushforward_invariant
+-- expected: standard only — THE LITERAL PUSHFORWARD COVARIANCE: (historyAct π)_* μ∞ = μ∞ as a single
+-- measure (strengthens typicality_invariant). Pushforward marginal = μ-marginal on J.map π reindexed back
+-- (singleton set identity) + π-invariance of Born weights ⇒ same projective family ⇒ uniqueness.
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation
