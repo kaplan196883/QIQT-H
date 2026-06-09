@@ -20,6 +20,9 @@ import Mathlib.MeasureTheory.Integral.Bochner.Basic
 import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 import Mathlib.MeasureTheory.Function.L2Space
 import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
+import Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral
+import Mathlib.Analysis.SpecialFunctions.Gaussian.FourierTransform
+import Mathlib.MeasureTheory.Integral.Pi
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 import Mathlib.Tactic
 
@@ -377,5 +380,27 @@ theorem Krep_memLp_of_decay {m : ℝ} {f : V → ℂ} (hfint : Integrable f) {C 
     (Filter.Eventually.of_forall fun θ => ?_)
   rw [Real.norm_eq_abs, abs_of_pos (by positivity : (0 : ℝ) < (Real.cosh θ)⁻¹)]
   exact hbound θ
+
+/-! ### A concrete non-degenerate localizable test: the Gaussian -/
+
+/-- `θ² ≤ sinh²θ`. -/
+theorem sq_le_sinh_sq (θ : ℝ) : θ ^ 2 ≤ Real.sinh θ ^ 2 := by
+  rcases le_total 0 θ with h | h
+  · nlinarith [Real.self_le_sinh_iff.mpr h, Real.sinh_nonneg_iff.mpr h, h]
+  · nlinarith [Real.sinh_le_self_iff.mpr h, Real.sinh_nonpos_iff.mpr h, h]
+
+/-- The double-rapidity hyperbola dominates the parabola: `2θ² ≤ cosh(2θ)`. -/
+theorem two_sq_le_cosh_two_mul (θ : ℝ) : 2 * θ ^ 2 ≤ Real.cosh (2 * θ) := by
+  nlinarith [Real.cosh_two_mul θ, sq_le_sinh_sq θ, Real.cosh_sq_sub_sinh_sq θ]
+
+/-- `exp(−c·cosh(2θ))` is integrable on `ℝ` for `c > 0` (dominated by the Gaussian `exp(−2cθ²)`). -/
+theorem integrable_exp_neg_cosh_two_mul {c : ℝ} (hc : 0 < c) :
+    Integrable (fun θ : ℝ => Real.exp (-(c * Real.cosh (2 * θ)))) := by
+  have hcont : Continuous (fun θ : ℝ => Real.exp (-(c * Real.cosh (2 * θ)))) := by fun_prop
+  refine (integrable_exp_neg_mul_sq (show (0 : ℝ) < 2 * c by linarith)).mono'
+    hcont.aestronglyMeasurable (Filter.Eventually.of_forall fun θ => ?_)
+  rw [Real.norm_eq_abs, abs_of_pos (Real.exp_pos _)]
+  apply Real.exp_le_exp.mpr
+  nlinarith [two_sq_le_cosh_two_mul θ, hc]
 
 end QIQTH.Fock.Localization

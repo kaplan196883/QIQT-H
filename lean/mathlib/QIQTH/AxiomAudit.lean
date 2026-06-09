@@ -642,6 +642,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — BOUNDEDNESS REDUCED TO A DECAY BOUND: if ‖(K f)(θ)‖ ≤ C/cosh θ then K f ∈ L²
 -- (MemLp.of_le_mul against memLp_cosh_inv). All integrability discharged; the remaining obligation is the
 -- sharp pointwise Fourier-decay estimate (the Fourier transform of a smooth test decays on the mass shell).
+#print axioms QIQTH.Fock.Localization.two_sq_le_cosh_two_mul
+-- expected: standard only — 2θ² ≤ cosh(2θ) (cosh(2θ)=1+2sinh²θ, sinh²θ≥θ²).
+#print axioms QIQTH.Fock.Localization.integrable_exp_neg_cosh_two_mul
+-- expected: standard only — exp(−c·cosh 2θ) integrable on ℝ (c>0), dominated by the Gaussian exp(−2cθ²) —
+-- the integrability of the Gaussian test's |Krep|², toward a concrete non-degenerate LocalTest.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
