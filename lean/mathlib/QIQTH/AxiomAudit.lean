@@ -659,6 +659,22 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — a GENUINELY NON-DEGENERATE LocalTest (the Gaussian, m≠0): the boundedness
 -- obligation of LocalTest is satisfied non-trivially (vs the f=0 trivialLocalTest), machine-checked.
 
+-- K-localization: GENERAL SCHWARTZ 1/cosh decay (GPT-5.5-pro next-step #1 — widens the admissible
+-- test class from Gaussian-only to ALL Schwartz functions, the honest "local test class").
+#print axioms QIQTH.Fock.Localization.minkBilin_apply
+-- expected: standard only — the rescaled Minkowski bilinear form L v w = (v₀w₀−v₁w₁)/(2π).
+#print axioms QIQTH.Fock.Localization.minkowskiFourier_eq_fourierIntegral
+-- expected: standard only — ★ BRIDGE: the bespoke (no-2π Minkowski) transform IS a
+-- VectorFourier.fourierIntegral for L, importing Mathlib's Fourier-decay machinery.
+#print axioms QIQTH.Fock.Localization.abs_sinh_le_cosh
+-- expected: standard only — |sinh θ| ≤ cosh θ.
+#print axioms QIQTH.Fock.Localization.schwartz_Krep_memLp
+-- expected: standard only — ★ THE GENERAL DECAY: for ANY Schwartz f and m≠0, ‖Krep m f θ‖ ≤ C·(cosh θ)⁻¹
+-- via the test vector v=(p₀,−p₁) extracting L v p=(p₀²+p₁²)/(2π) and p₀²+p₁²≥m²cosh²θ on the shell;
+-- hence Krep m f ∈ L²(ℝ).  Closes GPT's prerequisite for "K is L²-bounded" as an operator statement.
+#print axioms QIQTH.Fock.Localization.schwartzLocalTest
+-- expected: standard only — every Schwartz spacetime test function is an L²-admissible LocalTest.
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation
