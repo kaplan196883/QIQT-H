@@ -248,4 +248,38 @@ theorem Kform_im_antisymm (m : ℝ) (f g : V → ℂ) :
 theorem Kform_im_self (m : ℝ) (f : V → ℂ) : (Kform m f f).im = 0 := by
   have := Kform_im_antisymm m f f; linarith
 
+/-! ### The L²-valued localization map (Phase 2b: the `H`-valued `K` for the Stage-2 interface) -/
+
+/-- The Minkowski-Fourier transform of the zero function is zero. -/
+@[simp] theorem minkowskiFourier_zero (p : V) : minkowskiFourier (fun _ => 0) p = 0 := by
+  simp [minkowskiFourier]
+
+/-- The localized amplitude of the zero function is the zero function. -/
+theorem Krep_zero (m : ℝ) : Krep m (fun _ => (0 : ℂ)) = 0 := by
+  funext θ; simp [Krep]
+
+/-- **A localizable test function**: a spacetime test function `f` whose localized rapidity amplitude
+    `Krep m f` is square-integrable, i.e. lands in the one-particle space `L²(ℝ)`.  The `memLp` field is the
+    honest *domain* condition; that every Schwartz function satisfies it (via Fourier decay on the mass
+    shell) is the isolated analytic refinement — multi-week Schwartz–Fourier work — not yet formalized, kept
+    as a field so the L²-valued localization map and the Stage-2 interface proceed axiom-free. -/
+structure LocalTest (m : ℝ) where
+  /-- the spacetime test function. -/
+  f : V → ℂ
+  /-- its localized rapidity amplitude is in `L²(ℝ)` (the one-particle space). -/
+  memLp : MeasureTheory.MemLp (Krep m f) 2 (volume : MeasureTheory.Measure ℝ)
+
+/-- **The L²-valued localization map** `K : LocalTest → L²(ℝ)` — the one-particle-Hilbert-space-valued
+    localization of a spacetime test function (the concrete `K` the `SpacetimeLocalization` interface
+    requires).  `K L` is the `L²` class of the localized rapidity amplitude `Krep m L.f`. -/
+noncomputable def K (m : ℝ) (L : LocalTest m) : Lp ℂ 2 (volume : MeasureTheory.Measure ℝ) :=
+  L.memLp.toLp _
+
+/-- **Non-vacuity witness**: the localizable-test class is inhabited (degenerately, by `f = 0`).  A
+    non-degenerate inhabitant — every Schwartz function — is the isolated Schwartz–Fourier analytic
+    obligation. -/
+noncomputable def trivialLocalTest (m : ℝ) : LocalTest m where
+  f := fun _ => 0
+  memLp := by rw [Krep_zero]; exact MeasureTheory.MemLp.zero
+
 end QIQTH.Fock.Localization

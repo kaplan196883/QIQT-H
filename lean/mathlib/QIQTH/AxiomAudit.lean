@@ -620,6 +620,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the localized symplectic form Im⟨Kf,Kg⟩ is ANTISYMMETRIC (= −Im⟨Kg,Kf⟩), the
 -- defining property of the Pauli–Jordan commutator form (NOT the symmetric Wightman 2-pt function; trap #6).
 -- Via Hermitian symmetry conj⟨Kf,Kg⟩=⟨Kg,Kf⟩ (Kform_conj, integral_conj + conj_conj).
+#print axioms QIQTH.Fock.Localization.K
+-- expected: standard only — the L²-valued localization map K : LocalTest → L²(ℝ) (the one-particle-Hilbert-
+-- space-valued localization; K L = the L² class of the rapidity amplitude Krep m L.f). The memLp domain
+-- condition is a structure field; the Schwartz⟹memLp proof is the isolated analytic refinement.
+#print axioms QIQTH.Fock.Localization.trivialLocalTest
+-- expected: standard only — non-vacuity: the localizable-test class is inhabited (degenerately, f=0).
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

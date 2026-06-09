@@ -231,12 +231,17 @@ machine-checked. In 1+1 Minkowski space `V = ℝ²` with pairing `η(p,x)=p₀x�
   **`Im⟨Kf,Kg⟩=−Im⟨Kg,Kf⟩`** (`Kform_im_antisymm`) — the defining antisymmetry of the Pauli–Jordan
   *commutator* form, distinguishing it from the symmetric Wightman two-point function.
 
-What remains for a complete `K` (and is *not* yet formalized): the `L²(ℝ)` boundedness `K f ∈ L²` from
-Schwartz decay (the Schwartz–Fourier convention-matching to Mathlib's `fourierIntegral` plus the mass-shell
-decay estimate), the lift of `Krep` to the genuine `L²` map intertwining `U₁`, and the analytic
-**Pauli–Jordan support theorem** `Im⟪Kf,Kg⟫=0` for spacelike-separated supports (the `Δ_m` light-cone
-support — the genuine multi-month wall). The latter is the single physics input the `SpacetimeLocalization`
-interface (§6) isolates as a hypothesis.
+We also package the **L²-valued localization map** itself: a `LocalTest` is a spacetime test function whose
+localized amplitude `Krep m f` lies in `L²(ℝ)` (the one-particle space), and `K : LocalTest → L²(ℝ)`
+(`K L = (Krep m L.f).toLp`) is the Hilbert-space-valued localization the Stage-2 interface requires. The
+square-integrability is carried as a domain field (the class is inhabited, `trivialLocalTest`).
+
+What remains *not* yet formalized for a complete `K`: (i) that every Schwartz `f` is a `LocalTest`, i.e. the
+boundedness `K f ∈ L²` from Schwartz decay (the Schwartz–Fourier convention-matching to Mathlib's `𝓕` plus
+the mass-shell decay estimate — a bounded but multi-week exercise), and (ii) the analytic **Pauli–Jordan
+support theorem** `Im⟪Kf,Kg⟫=0` for spacelike-separated supports (the `Δ_m` light-cone support — the genuine
+multi-month wall). The latter is the single physics input the `SpacetimeLocalization` interface (§6) isolates
+as a hypothesis.
 
 ---
 
