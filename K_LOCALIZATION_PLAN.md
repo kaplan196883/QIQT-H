@@ -113,7 +113,8 @@ symplectic form and resolves the both-frequencies issue — before any support a
 |---|---|---|
 | **0** Convention lock | `V`, `minkowskiDot`, `minkowskiSq`, `massShell`, `lorentzBoost`; `massShell_boost`, `minkowskiDot_boost`, `minkowskiSq_boost`, `minkowskiSq_massShell` | **DONE** 2026-06-09 (commit 914e656, `Localization.lean`, axiom-free) |
 | **1a** Unimodular linear map | `lorentzBoostMat`, `lorentzBoostₗ`, `lorentzBoostₗ_apply`, **`det_lorentzBoost=1`** | **DONE** 2026-06-09 (commit pending, `Localization.lean`, axiom-free) |
-| **1b** Volume-preservation + Fourier | `measurePreserving_lorentzBoost`; `LocalTest`, `minkowskiFourier`, `boostTest`; **`minkowskiFourier_boost`** | ~1–2 wk — ⚠ needs the EuclideanSpace migration (see note) |
+| **1b** Volume-preservation | **`measurePreserving_lorentzBoost`** | **DONE** 2026-06-09 (commit pending; NO EuclideanSpace migration needed — see note) |
+| **1c** Fourier wrapper | `LocalTest`, `minkowskiFourier`, `boostTest`; **`minkowskiFourier_boost`** | ~1–2 wk |
 | **2** ★ Concrete `K` (FIRST increment) | `Krep`, `Krep_memLp`, `K`; **`K_boost`** (equivariance), **`inner_K_formula`**, **`two_im_inner_eq_full_mass_shell`** | the highest-value first increment; weeks |
 | **3** Conditional localized measure | instantiate `SpacetimeLocalization` from `(PJ : PauliJordanLocality m (K m))` ⇒ `concrete_localized_covariant_measure` (axiom-free, conditional) | short once 2 done |
 | **4** Kernel-certificate bridge | `PauliJordanKernelCert`, `locality_from_kernel` (support ⇒ locality, easy) | short |
@@ -124,14 +125,16 @@ symplectic form and resolves the both-frequencies issue — before any support a
 `Matrix.det_fin_two_of` + `Matrix.mulVec_eq_sum` (a local `mulVec_two` 2×2 helper — `Matrix.mulVec_fin_two`
 lives in an unimported topology file, don't use it). **Phase 1b (volume-preservation) is BLOCKED on a
 measure-instance diamond:** `map_linearMap_addHaar_eq_smul_addHaar` needs `(volume).IsAddHaarMeasure`, and on
-the raw Pi type `Fin 2 → ℝ` this does NOT auto-synthesize (`inferInstance` fails) and
-`isAddHaarMeasure_volume_pi (Fin 2)` gives a `MeasureTheory.volume` vs `volume` mismatch — a `MeasureSpace`
-diamond, exactly the Pi-vs-Euclidean issue Mathlib's `OfBasis.lean` flags. **DECISION (confirmed): migrate
-`V := EuclideanSpace ℝ (Fin 2)` for Phase 1b onward** — it has the canonical single Haar measure-space (no
-diamond) and hosts Mathlib's `fourierIntegral` + `EqHaar`. Component access `x i` still works
-(`EuclideanSpace = PiLp 2`); build vectors via `!₂[·]` / `EuclideanSpace.equiv`. The Phase-0 geometry +
-Phase-1a `det` content is representation-agnostic and ports with minor `simp` adjustments. (Alternative:
-prove the Pi Haar instance by hand — but migration also unblocks the Fourier API, so it wins.)
+the raw Pi type `Fin 2 → ℝ` this initially appeared to fail. **RESOLVED 2026-06-09 — NO EuclideanSpace
+migration was needed.** Scratch tests showed `(volume : Measure (Fin 2 → ℝ)).IsAddHaarMeasure` synthesizes
+fine (`isAddHaarMeasure_volume_pi` / generic). The two REAL causes of the earlier failure: (1) `lorentzBoostₗ`
+was typed `V →ₗ[ℝ] V` with the **reducible abbrev `V`**, which blocks instance search when
+`map_linearMap_addHaar_eq_smul_addHaar` infers `E = V` (synth won't unfold the abbrev) — FIX: type
+`lorentzBoostₗ : (Fin 2 → ℝ) →ₗ[ℝ] (Fin 2 → ℝ)` directly; (2) the file was **missing `open MeasureTheory`**,
+without which the `volume` instance resolution differs — FIX: `open Real MeasureTheory`. With both, the boost
+stays on `Fin 2 → ℝ` (no migration) and `measurePreserving_lorentzBoost` proves cleanly via
+`map_linearMap_addHaar_eq_smul_addHaar volume hdet` + `det = 1`. (Lesson: prefer concrete types over reducible
+abbrevs in statements that drive instance search; remember `open MeasureTheory`.)
 
 **First increment = Phase 0–2**: a concrete, bounded, boost-equivariant `K` landing exactly in the existing
 `L²(ℝ)`, with the proven symplectic-form identity. After Phase 3, the *literal* OP3b statement holds

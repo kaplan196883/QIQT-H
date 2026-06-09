@@ -19,7 +19,7 @@ import Mathlib.Tactic
 
 namespace QIQTH.Fock.Localization
 
-open Real
+open Real MeasureTheory
 
 /-- 1+1D Minkowski spacetime (coordinates `(t, x) = (z 0, z 1)`). -/
 abbrev V : Type := Fin 2 → ℝ
@@ -76,8 +76,11 @@ theorem minkowskiSq_massShell (m θ : ℝ) : minkowskiSq (massShell m θ) = m ^ 
 noncomputable def lorentzBoostMat (a : ℝ) : Matrix (Fin 2) (Fin 2) ℝ :=
   !![Real.cosh a, Real.sinh a; Real.sinh a, Real.cosh a]
 
-/-- The boost packaged as an `ℝ`-linear endomorphism of `V` (via its standard matrix). -/
-noncomputable def lorentzBoostₗ (a : ℝ) : V →ₗ[ℝ] V := Matrix.toLin' (lorentzBoostMat a)
+/-- The boost packaged as an `ℝ`-linear endomorphism of `V` (via its standard matrix).  Typed on
+    `Fin 2 → ℝ` (rather than the abbrev `V`) so the `volume` Haar instance synthesizes for the measure
+    change-of-variables. -/
+noncomputable def lorentzBoostₗ (a : ℝ) : (Fin 2 → ℝ) →ₗ[ℝ] (Fin 2 → ℝ) :=
+  Matrix.toLin' (lorentzBoostMat a)
 
 /-- A 2×2 `mulVec` expansion (local helper). -/
 private theorem mulVec_two (M : Matrix (Fin 2) (Fin 2) ℝ) (v : Fin 2 → ℝ) (i : Fin 2) :
@@ -98,5 +101,20 @@ private theorem mulVec_two (M : Matrix (Fin 2) (Fin 2) ℝ) (v : Fin 2 → ℝ) 
 theorem det_lorentzBoost (a : ℝ) : LinearMap.det (lorentzBoostₗ a) = 1 := by
   rw [lorentzBoostₗ, LinearMap.det_toLin', lorentzBoostMat, Matrix.det_fin_two_of]
   linear_combination Real.cosh_sq_sub_sinh_sq a
+
+/-- **The boost preserves the Lebesgue volume** (unit Jacobian) — the measure-preservation needed for the
+    Fourier change of variables in boost-equivariance.  (Stated on `Fin 2 → ℝ` explicitly so the `volume`
+    Haar instance synthesizes; `V` is the same type but the reducible abbrev blocks instance search.) -/
+theorem measurePreserving_lorentzBoost (a : ℝ) :
+    MeasureTheory.MeasurePreserving (lorentzBoost a)
+      (volume : MeasureTheory.Measure (Fin 2 → ℝ)) volume := by
+  have hdet : LinearMap.det (lorentzBoostₗ a) ≠ 0 := by rw [det_lorentzBoost]; norm_num
+  have hmp : MeasureTheory.MeasurePreserving (lorentzBoostₗ a)
+      (volume : MeasureTheory.Measure (Fin 2 → ℝ)) volume := by
+    refine ⟨(lorentzBoostₗ a).continuous_of_finiteDimensional.measurable, ?_⟩
+    rw [MeasureTheory.Measure.map_linearMap_addHaar_eq_smul_addHaar volume hdet, det_lorentzBoost]
+    simp
+  have hfun : (lorentzBoost a) = ⇑(lorentzBoostₗ a) := by funext z; rw [lorentzBoostₗ_apply]
+  rw [hfun]; exact hmp
 
 end QIQTH.Fock.Localization

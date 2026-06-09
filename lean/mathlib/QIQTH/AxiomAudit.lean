@@ -596,6 +596,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Localization.det_lorentzBoost
 -- expected: standard only — the boost is unimodular, det Λa = cosh²a−sinh²a = 1 (unit Jacobian for the
 -- Fourier change of variables; via Matrix.toLin' + det_fin_two).
+#print axioms QIQTH.Fock.Localization.measurePreserving_lorentzBoost
+-- expected: standard only — the Lorentz boost preserves the Lebesgue volume on ℝ² (unit Jacobian, via
+-- map_linearMap_addHaar_eq_smul_addHaar + det = 1) — the measure-preservation for the Fourier change of
+-- variables in boost-equivariance. Phase 1b foundation.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
