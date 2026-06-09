@@ -708,6 +708,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Localization.abs_integral_sin_sinh_le_uniform
 -- expected: standard only — ★ the UNIFORM bound |∫_a^b sin(c·sinh u)du| ≤ 6/|c| (all a,b): the dominating
 -- function for the dominated-convergence step of the bilinear assembly (5c).
+#print axioms QIQTH.Fock.Localization.exists_pos_lower_bound_slSq
+-- expected: standard only — ★ the r₀>0 compactness bound: on compact spacelike-separated K,L the spacelike
+-- interval (x−y)₁²−(x−y)₀² ≥ ε>0 uniformly (extreme value theorem) — the 2nd ingredient for 5c's DCT.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

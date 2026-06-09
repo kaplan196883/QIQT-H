@@ -406,4 +406,27 @@ theorem abs_integral_sin_sinh_le_uniform (c a b : ℝ) :
   have h6 : (6 : ℝ) / |c| = 3 / |c| + 3 / |c| := by ring
   rw [h6]; linarith [ha0, h0t b]
 
+/-! ### 8. The `r₀ > 0` compactness bound (the other ingredient for the 5c assembly) -/
+
+/-- **Positive spacelike interval on compact separated supports.**  If `K, L` are compact and every
+`x ∈ K`, `y ∈ L` is spacelike-separated (`Spacelike (x − y)`), then the spacelike interval squared
+`(x−y)₁² − (x−y)₀²` is bounded below by a *uniform* `ε > 0`.  This is what makes the dominating function
+`6/|c(x−y)| = 6/(|m|·√((x−y)₁²−(x−y)₀²))` bounded (hence integrable) on `K × L` — the second ingredient
+the dominated-convergence step of the bilinear assembly (5c) needs.  Proof: the continuous function
+`(x,y) ↦ (x−y)₁² − (x−y)₀²` attains its (positive) minimum on the compact set `K × L`. -/
+theorem exists_pos_lower_bound_slSq {K L : Set V} (hK : IsCompact K) (hL : IsCompact L)
+    (hsep : ∀ x ∈ K, ∀ y ∈ L, Spacelike (x - y)) :
+    ∃ ε : ℝ, 0 < ε ∧ ∀ x ∈ K, ∀ y ∈ L, ε ≤ (x - y) 1 ^ 2 - (x - y) 0 ^ 2 := by
+  rcases (K ×ˢ L).eq_empty_or_nonempty with hemp | hne
+  · refine ⟨1, one_pos, fun x hx y hy => ?_⟩
+    rw [Set.eq_empty_iff_forall_notMem] at hemp
+    exact absurd (Set.mk_mem_prod hx hy) (hemp (x, y))
+  · set g : V × V → ℝ := fun p => (p.1 - p.2) 1 ^ 2 - (p.1 - p.2) 0 ^ 2 with hg
+    have hgcont : Continuous g := by rw [hg]; fun_prop
+    obtain ⟨p₀, hp₀mem, hp₀min⟩ := (hK.prod hL).exists_isMinOn hne hgcont.continuousOn
+    obtain ⟨hx₀, hy₀⟩ := Set.mem_prod.mp hp₀mem
+    refine ⟨g p₀, ?_, fun x hx y hy => isMinOn_iff.mp hp₀min (x, y) (Set.mk_mem_prod hx hy)⟩
+    have hsl : (p₀.1 - p₀.2) 0 ^ 2 < (p₀.1 - p₀.2) 1 ^ 2 := hsep p₀.1 hx₀ p₀.2 hy₀
+    simp only [hg]; linarith
+
 end QIQTH.Fock.Localization
