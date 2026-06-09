@@ -125,7 +125,8 @@ symplectic form and resolves the both-frequencies issue — before any support a
 | **2** ★ Concrete `K` (FIRST increment) | `Krep`, `Krep_memLp`, `K`; **`K_boost`** (equivariance), **`inner_K_formula`**, **`two_im_inner_eq_full_mass_shell`** | the highest-value first increment; weeks |
 | **3** Conditional localized measure | instantiate `SpacetimeLocalization` from `(PJ : PauliJordanLocality m (K m))` ⇒ `concrete_localized_covariant_measure` (axiom-free, conditional) | short once 2 done |
 | **4** Kernel-certificate bridge | `PauliJordanKernelCert`, `locality_from_kernel` (support ⇒ locality, easy) | short |
-| **5** The wall | the 1+1 `Δ_m` Bessel kernel + `sigma_eq_kernel` (mass-shell Fourier rep) + `support_lightcone` | **multi-month** analytic (Bessel/oscillatory integrals); the genuine frontier |
+| **5a** ★ Pauli–Jordan BACKBONE | **`Kform_boost_invariant`** (commutator form is boost-invariant), **`minkowskiDot_massShell`** (phase), **`minkowskiDot_massShell_spacelike`** (reparam η=c·sinh(θ−φ), ODD), **`pauliJordan_trunc_equalTime_zero`** (exact z₀=0 vanishing) | **DONE** 2026-06-09 (file `QIQTH/Fock/PauliJordan.lean`, axiom-free, no sorry) — the structural core of the wall: boost-invariance + the hyperbolic reparametrization exposing the odd-symmetry + the exact equal-time cancellation. |
+| **5b** The wall (remaining) | general-spacelike pointwise limit `lim_R ∫_{−R}^R sin(η)dθ=0` (odd symmetry via 5a + oscillatory `1/cosh` IBP tail bound) + bilinear assembly (finite-R Fubini on compact supports + DCT via `r≥r₀>0` on compact spacelike sets) | the genuine remaining frontier; hard-but-finite for compact support (not multi-year) |
 
 **⚠ Phase-1 finding (2026-06-09, CONFIRMED in code).** Phase 1a (the unimodular linear map +
 `det Λ_a = 1`) is DONE on `Fin 2 → ℝ`, clean via `Matrix.toLin'` + `LinearMap.det_toLin'` +

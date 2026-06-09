@@ -223,3 +223,4 @@ import QIQTH.Fock.WeylCLM
 import QIQTH.Fock.BoostOrbit
 import QIQTH.Fock.Localization
 import QIQTH.Fock.SchwartzDecay
+import QIQTH.Fock.PauliJordan

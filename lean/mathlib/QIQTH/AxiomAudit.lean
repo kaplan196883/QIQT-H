@@ -675,6 +675,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Localization.schwartzLocalTest
 -- expected: standard only — every Schwartz spacetime test function is an L²-admissible LocalTest.
 
+-- K-localization: PAULI–JORDAN BACKBONE (toward the single remaining input for the literal prize).
+#print axioms QIQTH.Fock.Localization.Kform_boost_invariant
+-- expected: standard only — ★ the localized symplectic (commutator) form is Lorentz-boost invariant:
+-- Kform m (β_a f)(β_a g) = Kform m f g.  Microcausality is a boost-invariant statement.
+#print axioms QIQTH.Fock.Localization.minkowskiDot_massShell
+-- expected: standard only — the mass-shell phase η(p_m θ, z) = m(z₀ cosh θ − z₁ sinh θ).
+#print axioms QIQTH.Fock.Localization.minkowskiDot_massShell_spacelike
+-- expected: standard only — ★ the hyperbolic reparametrization: for spacelike z, η(p_m θ,z)=c·sinh(θ−φ),
+-- so the kernel sin(η) is ODD in θ−φ (the source of the Pauli–Jordan cancellation).
+#print axioms QIQTH.Fock.Localization.pauliJordan_trunc_equalTime_zero
+-- expected: standard only — ★ the EXACT equal-time vanishing: ∫_{−R}^{R} sin(η(p_m θ,z))dθ = 0 for every
+-- R when z₀=0 (odd integrand).  Microcausality cancellation in cleanest form.
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation
