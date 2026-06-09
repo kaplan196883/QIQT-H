@@ -651,6 +651,13 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — EXPLICIT Minkowski-Fourier transform of the 2D Gaussian: a separable product of
 -- two 1D complex Gaussian Fourier integrals (Fubini via integral_fintype_prod_volume_eq_prod +
 -- fourierIntegral_gaussian). The crown-jewel computation toward a concrete non-degenerate Krep_memLp.
+#print axioms QIQTH.Fock.Localization.gaussian_Krep_memLp
+-- expected: standard only — ★ THE BOUNDEDNESS CLOSED for a concrete physical test: the Gaussian's
+-- localized amplitude is in L²(ℝ). ‖(K f)(θ)‖²=(π²/2)exp(−(m²/2)cosh 2θ), integrable. Krep_gaussian_eq
+-- (real-cast value via cpow_add + ofReal_exp + cosh_two_mul) + integrable_exp_neg_cosh_two_mul.
+#print axioms QIQTH.Fock.Localization.gaussianLocalTest
+-- expected: standard only — a GENUINELY NON-DEGENERATE LocalTest (the Gaussian, m≠0): the boundedness
+-- obligation of LocalTest is satisfied non-trivially (vs the f=0 trivialLocalTest), machine-checked.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

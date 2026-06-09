@@ -430,4 +430,65 @@ theorem minkowskiFourier_gaussian (p : V) :
   simp only [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons]
   rw [fourierIntegral_gaussian hb (-(p 0 : ℂ)), fourierIntegral_gaussian hb ((p 1 : ℂ))]
 
+/-- The localized Gaussian amplitude is a **real, positive** value: `(K f)(θ) = 2^{−1/2}·π·exp(−m²cosh(2θ)/4)`. -/
+theorem Krep_gaussian_eq (m θ : ℝ) :
+    Krep m gaussianTest θ
+      = ((1 / Real.sqrt 2 * (π * Real.exp (-(m ^ 2 * Real.cosh (2 * θ)) / 4)) : ℝ) : ℂ) := by
+  rw [Krep, minkowskiFourier_gaussian, massShell_zero, massShell_one]
+  simp only [div_one, mul_one]
+  have hπ : (π : ℂ) ≠ 0 := by exact_mod_cast Real.pi_ne_zero
+  have hcpow : (π : ℂ) ^ (1 / 2 : ℂ) * (π : ℂ) ^ (1 / 2 : ℂ) = (π : ℂ) := by
+    rw [← Complex.cpow_add _ _ hπ]; norm_num
+  have hexp : Complex.exp (-(-(↑(m * Real.cosh θ) : ℂ)) ^ 2 / 4)
+      * Complex.exp (-((↑(m * Real.sinh θ) : ℂ)) ^ 2 / 4)
+      = ((Real.exp (-(m ^ 2 * Real.cosh (2 * θ)) / 4) : ℝ) : ℂ) := by
+    rw [← Complex.exp_add, Complex.ofReal_exp]
+    congr 1
+    rw [Real.cosh_two_mul]
+    push_cast
+    ring
+  calc (1 / Real.sqrt 2 : ℂ)
+        * ((π : ℂ) ^ (1 / 2 : ℂ) * Complex.exp (-(-(↑(m * Real.cosh θ) : ℂ)) ^ 2 / 4)
+          * ((π : ℂ) ^ (1 / 2 : ℂ) * Complex.exp (-((↑(m * Real.sinh θ) : ℂ)) ^ 2 / 4)))
+      = (1 / Real.sqrt 2 : ℂ) * (((π : ℂ) ^ (1 / 2 : ℂ) * (π : ℂ) ^ (1 / 2 : ℂ))
+          * (Complex.exp (-(-(↑(m * Real.cosh θ) : ℂ)) ^ 2 / 4)
+            * Complex.exp (-((↑(m * Real.sinh θ) : ℂ)) ^ 2 / 4))) := by ring
+    _ = (1 / Real.sqrt 2 : ℂ) * ((π : ℂ) * ((Real.exp (-(m ^ 2 * Real.cosh (2 * θ)) / 4) : ℝ) : ℂ)) := by
+          rw [hcpow, hexp]
+    _ = ((1 / Real.sqrt 2 * (π * Real.exp (-(m ^ 2 * Real.cosh (2 * θ)) / 4)) : ℝ) : ℂ) := by
+          push_cast; ring
+
+/-- **A concrete non-degenerate localizable test: the Gaussian** (`m ≠ 0`).  Its localized amplitude lies in
+    `L²(ℝ)` — the boundedness `Krep_memLp` is genuinely satisfied by a real physical test function (not just
+    the `f = 0` witness).  `‖(K f)(θ)‖² = (π²/2)·exp(−(m²/2)·cosh 2θ)`, integrable. -/
+theorem gaussian_Krep_memLp {m : ℝ} (hm : m ≠ 0) :
+    MemLp (Krep m gaussianTest) 2 (volume : MeasureTheory.Measure ℝ) := by
+  have hmeas : MeasureTheory.AEStronglyMeasurable (Krep m gaussianTest)
+      (volume : MeasureTheory.Measure ℝ) := by
+    have : Continuous (Krep m gaussianTest) := by
+      rw [show Krep m gaussianTest = fun θ => ((1 / Real.sqrt 2
+        * (π * Real.exp (-(m ^ 2 * Real.cosh (2 * θ)) / 4)) : ℝ) : ℂ) from funext (Krep_gaussian_eq m)]
+      fun_prop
+    exact this.aestronglyMeasurable
+  rw [memLp_two_iff_integrable_sq_norm hmeas]
+  have hsq : (fun θ => ‖Krep m gaussianTest θ‖ ^ 2)
+      = fun θ => (1 / 2 * π ^ 2) * Real.exp (-(m ^ 2 / 2 * Real.cosh (2 * θ))) := by
+    funext θ
+    rw [Krep_gaussian_eq, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (by positivity)]
+    have hsqrt : (1 / Real.sqrt 2) ^ 2 = 1 / 2 := by
+      rw [div_pow, one_pow, Real.sq_sqrt (by norm_num : (0:ℝ) ≤ 2)]
+    have hexp : (Real.exp (-(m ^ 2 * Real.cosh (2 * θ)) / 4)) ^ 2
+        = Real.exp (-(m ^ 2 / 2 * Real.cosh (2 * θ))) := by
+      rw [← Real.exp_nat_mul]; congr 1; push_cast; ring
+    rw [mul_pow, mul_pow, hsqrt, hexp]; ring
+  rw [hsq]
+  exact (integrable_exp_neg_cosh_two_mul (c := m ^ 2 / 2) (by positivity)).const_mul _
+
+/-- **A genuinely non-degenerate localizable test** (`m ≠ 0`): the Gaussian.  Unlike `trivialLocalTest`
+    (`f=0`), this is a real physical test function whose localization `K` lies in `L²(ℝ)` — so the
+    boundedness obligation of `LocalTest` is satisfied non-trivially, machine-checked end to end. -/
+noncomputable def gaussianLocalTest {m : ℝ} (hm : m ≠ 0) : LocalTest m where
+  f := gaussianTest
+  memLp := gaussian_Krep_memLp hm
+
 end QIQTH.Fock.Localization
