@@ -768,4 +768,39 @@ theorem K_im_inner_eq_zero_of_spacelike (m : ℝ) (hm : m ≠ 0) (Lf Lg : LocalT
   rw [Kform_eq_inner]
   exact Kform_im_eq_zero_of_spacelike m hm hf hfc hg hgc hfr hgr hsep hKint
 
+/-! ### 15. Interface bridge: Poincaré equivariance (boost = translation isometry) -/
+
+/-- **The one-particle boost `U₁(a)`** — the rapidity-translation isometry on `L²(ℝ)`.  The Lorentz boost
+of rapidity `a` is implemented on the localized amplitudes by `θ ↦ θ + a` (a measure-preserving
+isometry). -/
+noncomputable def boostUnitary (a : ℝ) :
+    Lp ℂ 2 (volume : MeasureTheory.Measure ℝ) →ₗᵢ[ℂ] Lp ℂ 2 (volume : MeasureTheory.Measure ℝ) :=
+  MeasureTheory.Lp.compMeasurePreservingₗᵢ ℂ (· + a) (measurePreserving_add_right volume a)
+
+/-- The Lorentz boost acting on a localizable test function (the localized amplitude stays in `L²` because
+the translation `θ ↦ θ + a` is measure-preserving). -/
+noncomputable def boostLocalTest (m a : ℝ) (Lf : LocalTest m) : LocalTest m where
+  f := boostTest a Lf.f
+  memLp := by
+    rw [show Krep m (boostTest a Lf.f) = (Krep m Lf.f) ∘ (· + a) from
+      funext fun θ => Krep_boost m a Lf.f θ]
+    exact Lf.memLp.comp_measurePreserving (measurePreserving_add_right volume a)
+
+/-- **★ Poincaré equivariance of the localization map `K`.**  `K (boost_a · f) = U₁(a) (K f)`: the
+spacetime Lorentz boost of rapidity `a` is intertwined by `K` with the one-particle translation isometry
+`U₁(a)` on `L²(ℝ)`.  This is the second physics property the `SpacetimeLocalization` interface requires
+(the first being Pauli–Jordan microcausality, `K_im_inner_eq_zero_of_spacelike`).  Immediate from the
+amplitude-level boost-covariance `Krep_boost` and `Lp.toLp_compMeasurePreserving`. -/
+theorem K_boost_equivariant (m a : ℝ) (Lf : LocalTest m) :
+    K m (boostLocalTest m a Lf) = boostUnitary a (K m Lf) := by
+  have hmp := measurePreserving_add_right (volume : MeasureTheory.Measure ℝ) a
+  rw [boostUnitary]
+  show (boostLocalTest m a Lf).memLp.toLp _
+    = MeasureTheory.Lp.compMeasurePreservingₗᵢ ℂ (· + a) hmp (Lf.memLp.toLp _)
+  rw [show MeasureTheory.Lp.compMeasurePreservingₗᵢ ℂ (· + a) hmp (Lf.memLp.toLp (Krep m Lf.f))
+      = MeasureTheory.Lp.compMeasurePreserving (· + a) hmp (Lf.memLp.toLp (Krep m Lf.f)) from rfl,
+    MeasureTheory.Lp.toLp_compMeasurePreserving]
+  congr 1
+  exact funext fun θ => Krep_boost m a Lf.f θ
+
 end QIQTH.Fock.Localization

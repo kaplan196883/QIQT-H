@@ -734,6 +734,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Localization.K_im_inner_eq_zero_of_spacelike
 -- expected: standard only — ★ Im⟪K Lf, K Lg⟫_{L²}=0 for spacelike-separated real compact-support tests:
 -- LITERALLY the SpacetimeLocalization.pauli_jordan hypothesis field, discharged for the concrete K.
+#print axioms QIQTH.Fock.Localization.K_boost_equivariant
+-- expected: standard only — ★ K(boost_a·f)=U₁(a)(K f): Poincaré equivariance, the SECOND physics input
+-- of the SpacetimeLocalization interface (K_equivariant), discharged for the concrete K. The Lorentz boost
+-- of rapidity a is the L²(ℝ) translation isometry boostUnitary a (Lp.compMeasurePreservingₗᵢ ℂ (·+a)).
 #print axioms QIQTH.Fock.Localization.Kform_im_eq_zero_of_spacelike
 -- expected: standard only — ★★★ THE PAULI–JORDAN MICROCAUSALITY OF K: Im⟨Kf,Kg⟩=(Kform m f g).im=0 for
 -- real continuous compact-support f,g with spacelike-separated supports (m≠0, hKint convergence).
