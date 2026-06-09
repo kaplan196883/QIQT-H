@@ -362,4 +362,48 @@ theorem pauliJordan_spacelike_tendsto_zero (m : ℝ) {z : V} (hz : Spacelike z) 
   · filter_upwards [Filter.eventually_ge_atTop |φ|] with R hR
     exact (abs_le.mp (hbound R hR)).2
 
+/-! ### 7. The uniform dominating bound (ingredient for the dominated-convergence assembly, 5c) -/
+
+/-- The kernel reflection: `∫_{−q}^{−p} sin(c·sinh u) du = − ∫_p^q sin(c·sinh u) du` (oddness). -/
+theorem reflect_integral_sin_sinh (c p q : ℝ) :
+    (∫ u in (-q)..(-p), Real.sin (c * Real.sinh u))
+      = -∫ u in p..q, Real.sin (c * Real.sinh u) := by
+  have h := intervalIntegral.integral_comp_neg (a := p) (b := q)
+    (fun u => Real.sin (c * Real.sinh u))
+  simp only [Real.sinh_neg, mul_neg, Real.sin_neg, intervalIntegral.integral_neg] at h
+  exact h.symm
+
+/-- **The uniform oscillatory bound** — the dominating function for the dominated-convergence step of the
+bilinear assembly (5c).  For *all* `a, b`,
+`|∫_a^b sin(c·sinh u) du| ≤ 6/|c|`,
+uniformly: splitting at `0`, each half is `≤ 3/|c|` by the keystone `abs_integral_sin_sinh_le` (with the
+left endpoint `0`, `cosh 0 = 1`) together with the reflection for the negative half. -/
+theorem abs_integral_sin_sinh_le_uniform (c a b : ℝ) :
+    |∫ u in a..b, Real.sin (c * Real.sinh u)| ≤ 6 / |c| := by
+  rcases eq_or_ne c 0 with rfl | hc
+  · simp
+  have hcabs : 0 < |c| := abs_pos.mpr hc
+  have hcont : ∀ p q : ℝ, IntervalIntegrable (fun u => Real.sin (c * Real.sinh u)) volume p q :=
+    fun p q => (Real.continuous_sin.comp
+      (continuous_const.mul Real.continuous_sinh)).intervalIntegrable p q
+  -- |∫_0^t| ≤ 3/|c| for every t (both signs, via the keystone + reflection)
+  have h0t : ∀ t : ℝ, |∫ u in (0:ℝ)..t, Real.sin (c * Real.sinh u)| ≤ 3 / |c| := by
+    intro t
+    rcases le_total 0 t with ht | ht
+    · have h := abs_integral_sin_sinh_le c (le_refl (0:ℝ)) ht
+      rwa [Real.cosh_zero, mul_one] at h
+    · have hr := reflect_integral_sin_sinh c 0 (-t)
+      simp only [neg_neg, neg_zero] at hr
+      rw [intervalIntegral.integral_symm 0 t] at hr
+      rw [neg_injective hr]
+      have key0 := abs_integral_sin_sinh_le c (le_refl (0:ℝ)) (by linarith : (0:ℝ) ≤ -t)
+      rwa [Real.cosh_zero, mul_one] at key0
+  -- split at 0 and add
+  rw [← intervalIntegral.integral_add_adjacent_intervals (hcont a 0) (hcont 0 b)]
+  refine (abs_add_le _ _).trans ?_
+  have ha0 : |∫ u in a..(0:ℝ), Real.sin (c * Real.sinh u)| ≤ 3 / |c| := by
+    rw [intervalIntegral.integral_symm 0 a, abs_neg]; exact h0t a
+  have h6 : (6 : ℝ) / |c| = 3 / |c| + 3 / |c| := by ring
+  rw [h6]; linarith [ha0, h0t b]
+
 end QIQTH.Fock.Localization

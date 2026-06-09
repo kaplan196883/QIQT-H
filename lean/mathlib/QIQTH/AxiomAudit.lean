@@ -703,6 +703,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★★ THE SPACELIKE VANISHING OF Δ_m: for spacelike z,
 -- lim_R ∫_{−R}^{R} sin(η(p_m θ,z))dθ = 0.  The heart of microcausality, pointwise, machine-checked:
 -- reparametrization (odd kernel) + symmetric cancellation + the IBP keystone tail bound, squeezed to 0.
+#print axioms QIQTH.Fock.Localization.reflect_integral_sin_sinh
+-- expected: standard only — kernel reflection ∫_{−q}^{−p} sin(c·sinh) = −∫_p^q sin(c·sinh).
+#print axioms QIQTH.Fock.Localization.abs_integral_sin_sinh_le_uniform
+-- expected: standard only — ★ the UNIFORM bound |∫_a^b sin(c·sinh u)du| ≤ 6/|c| (all a,b): the dominating
+-- function for the dominated-convergence step of the bilinear assembly (5c).
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
