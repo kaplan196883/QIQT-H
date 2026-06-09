@@ -13,21 +13,35 @@ This gives the "both" deliverable:
 * **Browsable web artifact** — a website with a clickable dependency DAG showing the
   layered A / B / C / Phase-B structure, plus per-statement links to the Lean source.
 
+## Two editions
+
+Same statements and the same verified `\lean{...}` wiring, two levels of proof detail:
+
+* **Concise** (`content.tex`) — one- or two-sentence proof sketches. Best for an
+  overview or paper skeleton.
+* **Expanded** (`content-expanded.tex`) — fuller, structure-mirroring proofs that name
+  the actual Lean lemmas and follow the real case splits/reductions, so a reader can
+  reconstruct each argument without opening the Lean files.
+
+In both, the machine-checked Lean proof remains the source of truth; the prose is the
+map, not the territory.
+
 ## What's here
 
 ```
 blueprint/
   src/
-    content.tex        <- THE math (statements, proofs-as-sketches, \uses edges)
-    web.tex            <- plasTeX master for the web build
-    print.tex          <- xelatex master for the pdf build
-    plastex.cfg        <- web build config (renderer, dep-graph plugin, ...)
-    latexmkrc          <- pdf build config (uses xelatex)
-    extra_styles.css   <- web CSS tweaks
-    macros/            <- common.tex (shared), print.tex, web.tex
-  lean_decls           <- AUTO-GENERATED list of \lean{...} names (by the web build)
-  web/                 <- AUTO-GENERATED website (gitignored)
-  print/               <- AUTO-GENERATED pdf (gitignored)
+    content.tex          <- concise math (sketch proofs, \uses edges)
+    content-expanded.tex <- expanded math (full structure-mirroring proofs)
+    web.tex / print.tex                   <- masters for the concise edition
+    web-expanded.tex / print-expanded.tex <- masters for the expanded edition
+    plastex.cfg / plastex-expanded.cfg    <- web build configs (-> web/, web-expanded/)
+    latexmkrc            <- pdf build config (uses xelatex)
+    extra_styles.css     <- web CSS tweaks
+    macros/              <- common.tex (shared), print.tex, web.tex
+  lean_decls             <- AUTO-GENERATED list of \lean{...} names (by the web build)
+  web/  print/                       <- AUTO-GENERATED concise outputs (gitignored)
+  web-expanded/  print-expanded/     <- AUTO-GENERATED expanded outputs (gitignored)
 ```
 
 Only `src/` (and this README) is version-controlled; `web/`, `print/`, and the
@@ -41,15 +55,21 @@ not drive it directly. Use the wrapper script instead:
 
 ```bash
 # from lean/mathlib
-bash scripts/build_blueprint.sh all     # web + pdf + declaration check
-bash scripts/build_blueprint.sh web     # just the website
-bash scripts/build_blueprint.sh pdf     # just the pdf
-bash scripts/build_blueprint.sh check   # just verify \lean{...} names exist
+bash scripts/build_blueprint.sh all           # concise web + pdf + decl check
+bash scripts/build_blueprint.sh full          # concise + expanded + decl check
+bash scripts/build_blueprint.sh web           # concise website
+bash scripts/build_blueprint.sh pdf           # concise pdf
+bash scripts/build_blueprint.sh expanded      # expanded website + pdf
+bash scripts/build_blueprint.sh web-expanded  # expanded website only
+bash scripts/build_blueprint.sh pdf-expanded  # expanded pdf only
+bash scripts/build_blueprint.sh check         # verify \lean{...} names exist
 ```
 
 Outputs:
-* Website: `blueprint/web/index.html` (graph at `blueprint/web/dep_graph_document.html`)
-* PDF: `blueprint/print/print.pdf`
+* Concise website: `blueprint/web/index.html` (graph: `.../dep_graph_document.html`)
+* Concise PDF: `blueprint/print/print.pdf`
+* Expanded website: `blueprint/web-expanded/index.html`
+* Expanded PDF: `blueprint/print-expanded/print-expanded.pdf`
 
 The script sets the PATH for the three toolchains (Graphviz, the plasTeX conda env,
 MiKTeX); edit the paths at the top of the script if your install locations differ.
