@@ -635,4 +635,105 @@ theorem Krep_prod_im (m θ : ℝ) {f g : V → ℂ}
   simp only [Complex.imCLM_apply]
   exact hpt z
 
+/-! ### 12. The bilinear assembly — part (c): the finite-R mixed Fubini -/
+
+/-- **The finite-R Fubini (5c part c).**  For `0 < R`, the truncated localized form equals the smeared
+truncated kernel:
+`∫_{−R}^{R} Im(conj(K f θ)·K g θ) dθ = ½ ∫∫ (f x·g y).re · (∫_{−R}^{R} sin(η(p_m θ,x−y)) dθ)`.
+Combines `Krep_prod_im` (the fixed-θ double integral) with the interval×product-measure Fubini
+(`integral_integral_swap`), valid at finite `R` because the kernel is bounded by the integrable
+`‖f x‖·‖g y‖` over the *finite* measure `volume|_{(−R,R]} ⊗ (vol×vol)`. -/
+theorem Kform_im_trunc_eq (m : ℝ) {f g : V → ℂ}
+    (hf : Continuous f) (hfc : HasCompactSupport f)
+    (hg : Continuous g) (hgc : HasCompactSupport g)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    {R : ℝ} (hR : 0 < R) :
+    (∫ θ in (-R)..R, ((starRingEnd ℂ) (Krep m f θ) * Krep m g θ).im)
+      = (1 / 2) * ∫ z : V × V, (f z.1 * g z.2).re
+          * (∫ θ in (-R)..R, Real.sin (minkowskiDot (massShell m θ) (z.1 - z.2)))
+          ∂(volume.prod volume) := by
+  have hfint : Integrable f := hf.integrable_of_hasCompactSupport hfc
+  have hgint : Integrable g := hg.integrable_of_hasCompactSupport hgc
+  have hRle : (-R : ℝ) ≤ R := by linarith
+  set K : ℝ → (V × V) → ℝ := fun θ z =>
+    Real.sin (minkowskiDot (massShell m θ) (z.1 - z.2)) * (f z.1 * g z.2).re with hKdef
+  -- step 1: rewrite the θ-integrand via Krep_prod_im, pull ½ out
+  have hcong : (∫ θ in (-R)..R, ((starRingEnd ℂ) (Krep m f θ) * Krep m g θ).im)
+      = ∫ θ in (-R)..R, (1 / 2) * ∫ z, K θ z ∂(volume.prod volume) := by
+    apply intervalIntegral.integral_congr
+    intro θ _
+    exact Krep_prod_im m θ hf hfc hg hgc hfr hgr
+  rw [hcong, intervalIntegral.integral_const_mul]
+  congr 1
+  -- finite measure on the θ-interval
+  haveI hμfin : IsFiniteMeasure (volume.restrict (Set.Ioc (-R) R)) :=
+    ⟨by rw [Measure.restrict_apply_univ]; exact measure_Ioc_lt_top⟩
+  have hμne : (volume.restrict (Set.Ioc (-R) R)) ≠ 0 := by
+    rw [Ne, Measure.restrict_eq_zero, Real.volume_Ioc]
+    simp only [ENNReal.ofReal_eq_zero, not_le]
+    linarith
+  -- joint continuity of the kernel
+  have hkercont : Continuous (Function.uncurry K) := by
+    rw [hKdef]
+    simp only [Function.uncurry, minkowskiDot, massShell_zero, massShell_one, Pi.sub_apply]
+    fun_prop
+  -- integrability of the uncurried kernel over the product measure
+  have hKint : Integrable (Function.uncurry K)
+      ((volume.restrict (Set.Ioc (-R) R)).prod (volume.prod volume)) := by
+    refine Integrable.mono' (g := fun p : ℝ × (V × V) => ‖f p.2.1‖ * ‖g p.2.2‖)
+      ((Integrable.comp_snd_iff (ν := volume.prod volume) hμne).mpr
+        ((hfint.norm).mul_prod (hgint.norm)))
+      hkercont.aestronglyMeasurable (Filter.Eventually.of_forall fun p => ?_)
+    rw [hKdef]
+    simp only [Function.uncurry, Real.norm_eq_abs, abs_mul]
+    have hre_p : |(f p.2.1 * g p.2.2).re| ≤ ‖f p.2.1‖ * ‖g p.2.2‖ := by
+      rw [← norm_mul]; exact RCLike.abs_re_le_norm (f p.2.1 * g p.2.2)
+    calc |Real.sin (minkowskiDot (massShell m p.1) (p.2.1 - p.2.2))| * |(f p.2.1 * g p.2.2).re|
+        ≤ 1 * (‖f p.2.1‖ * ‖g p.2.2‖) :=
+          mul_le_mul (Real.abs_sin_le_one _) hre_p (abs_nonneg _) (by norm_num)
+      _ = ‖f p.2.1‖ * ‖g p.2.2‖ := one_mul _
+  -- step 2: Fubini swap, then pull (f·g).re out of the inner θ-integral
+  rw [intervalIntegral.integral_of_le hRle, MeasureTheory.integral_integral_swap hKint]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun z => ?_)
+  dsimp only
+  rw [← intervalIntegral.integral_of_le hRle, hKdef]
+  rw [intervalIntegral.integral_mul_const, mul_comm]
+
+/-! ### 13. The bilinear assembly — the Pauli–Jordan microcausality of `K` -/
+
+/-- **★★★ Pauli–Jordan microcausality of the localization map `K`.**  For real (`conj f = f`,
+`conj g = g`) continuous compactly-supported test functions `f, g` whose supports are spacelike
+separated (and `m ≠ 0`), the localized symplectic form vanishes:
+`Im⟨K f, K g⟩ = (Kform m f g).im = 0`.
+This is the literal microcausality / Einstein-causality statement for the concrete mass-shell
+localization — the single physics input the `SpacetimeLocalization` interface isolates, now
+machine-checked.  Carries `hKint` (the localized form is absolutely convergent), which holds for the
+physical Schwartz test class.  Proof: `Im(Kform) = ∫_θ Im(conj(K f θ)·K g θ)` (Im∘∫), which equals
+`lim_R ∫_{−R}^R …` (truncation); each finite-`R` truncation equals the smeared kernel
+`½∫∫ (fg).re·∫_{−R}^R sin(η)` (`Kform_im_trunc_eq`, finite-`R` Fubini), which tends to `0`
+(`Kform_im_trunc_tendsto_zero`, dominated convergence); uniqueness of limits closes it. -/
+theorem Kform_im_eq_zero_of_spacelike (m : ℝ) (hm : m ≠ 0) {f g : V → ℂ}
+    (hf : Continuous f) (hfc : HasCompactSupport f)
+    (hg : Continuous g) (hgc : HasCompactSupport g)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hsep : ∀ x ∈ tsupport f, ∀ y ∈ tsupport g, Spacelike (x - y))
+    (hKint : Integrable (fun θ => (starRingEnd ℂ) (Krep m f θ) * Krep m g θ)) :
+    (Kform m f g).im = 0 := by
+  have h1 : (Kform m f g).im = ∫ θ, ((starRingEnd ℂ) (Krep m f θ) * Krep m g θ).im := by
+    rw [Kform, ← Complex.imCLM_apply,
+      ← ContinuousLinearMap.integral_comp_comm Complex.imCLM hKint]
+    simp only [Complex.imCLM_apply]
+  have htrunc := symm_intervalIntegral_tendsto_integral hKint.im
+  have hzero : Filter.Tendsto
+      (fun R => ∫ θ in (-R)..R, ((starRingEnd ℂ) (Krep m f θ) * Krep m g θ).im)
+      Filter.atTop (nhds 0) := by
+    have hD := Kform_im_trunc_tendsto_zero m hm hf hfc hg hgc hsep
+    have hD' := (tendsto_const_nhds (x := (1 : ℝ) / 2)).mul hD
+    simp only [mul_zero] at hD'
+    refine hD'.congr' ?_
+    filter_upwards [Filter.eventually_gt_atTop 0] with R hR
+    exact (Kform_im_trunc_eq m hf hfc hg hgc hfr hgr hR).symm
+  rw [h1]
+  exact tendsto_nhds_unique htrunc hzero
+
 end QIQTH.Fock.Localization

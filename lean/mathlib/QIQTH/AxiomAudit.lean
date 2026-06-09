@@ -724,6 +724,16 @@ namespace QIQTH.AxiomAudit
 -- ∫∫ (f x·g y).re·(∫_{−R}^R sin(η(p_mθ,x−y))dθ) → 0 for real compact-support spacelike-separated f,g.
 -- DCT over V×V: dominating C·‖f‖‖g‖ (C=6/(|m|√ε), exists_pos_lower_bound_slSq), per-point bound
 -- abs_pauliJordan_trunc_le, pointwise limit pauliJordan_spacelike_tendsto_zero.
+#print axioms QIQTH.Fock.Localization.Kform_im_trunc_eq
+-- expected: standard only — ★★ part (c) of the bilinear assembly (5c): the finite-R MIXED FUBINI.
+-- ∫_{−R}^R Im(conj(K f θ)·K g θ)dθ = ½∫∫ (f x·g y).re·(∫_{−R}^R sin(η)) — interval×product-measure swap
+-- (integral_integral_swap) valid at finite R (kernel bounded by integrable ‖f‖‖g‖ over the finite measure).
+#print axioms QIQTH.Fock.Localization.Kform_im_eq_zero_of_spacelike
+-- expected: standard only — ★★★ THE PAULI–JORDAN MICROCAUSALITY OF K: Im⟨Kf,Kg⟩=(Kform m f g).im=0 for
+-- real continuous compact-support f,g with spacelike-separated supports (m≠0, hKint convergence).
+-- The literal Einstein-causality / microcausality input the SpacetimeLocalization interface isolates,
+-- now machine-checked. Im∘∫ + truncation + finite-R Fubini (Kform_im_trunc_eq) + DCT
+-- (Kform_im_trunc_tendsto_zero) + uniqueness of limits.
 #print axioms QIQTH.Fock.Localization.Krep_prod_im
 -- expected: standard only — ★★ part (a) of the bilinear assembly (5c): the fixed-θ DOUBLE-INTEGRAL
 -- representation Im(conj(K f θ)·K g θ) = ½∫∫ sin(η(p_mθ,x−y))·(f x·g y).re ∂(vol×vol), for real
