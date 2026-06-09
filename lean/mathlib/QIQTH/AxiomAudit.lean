@@ -575,6 +575,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — μ∞ over the boost orbit is fixed by the boost-induced shift n↦n+1 on the
 -- history space ∏_{n:ℤ}{±1}: a non-degenerate continuum realization of the pushforward covariance.
 
+-- Joint multi-mode effect lift (closing the pre-Hilbert gap) + sharp single-mode range.
+#print axioms QIQTH.Fock.weylBitWeight_mem_Ioo_half
+-- expected: standard only — sharp non-degeneracy: weylBitWeight u ∈ (1/2,1) for u≠0 (tightens (0,1)).
+#print axioms QIQTH.Fock.jointEffectCLM_isPositive
+-- expected: standard only — the joint Weyl-bit effect E_σ=(∏A)*(∏A) is a positive bounded operator on Fock H.
+#print axioms QIQTH.Fock.vacuumState_jointEffectCLM
+-- expected: standard only — the FULL multi-mode Born weight is a genuine vacuum C*-state expectation of a
+-- bounded positive Hilbert-space effect: vacuumState(E_σ)=bornWeight u J σ (closes the pre-Hilbert gap).
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation

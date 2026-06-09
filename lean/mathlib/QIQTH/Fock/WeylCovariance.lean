@@ -87,4 +87,18 @@ theorem weylBitWeight_mem_Ioo (u : H) (hu : u ≠ 0) : weylBitWeight u ∈ Set.I
   · unfold weylBitWeight; linarith
   · unfold weylBitWeight; linarith
 
+/-- **The sharp non-degeneracy range**: for `u ≠ 0`, `weylBitWeight u ∈ (1/2, 1)` — the `+` outcome is
+    strictly biased above one-half (since `exp(−‖u‖²/2) ∈ (0,1)`), tightening `weylBitWeight_mem_Ioo`. -/
+theorem weylBitWeight_mem_Ioo_half (u : H) (hu : u ≠ 0) :
+    weylBitWeight u ∈ Set.Ioo (1 / 2 : ℝ) 1 := by
+  have hpos : 0 < ‖u‖ := norm_pos_iff.mpr hu
+  have he1 : Real.exp (-(‖u‖ ^ 2) / 2) < 1 := by
+    rw [Real.exp_lt_one_iff]
+    have : 0 < ‖u‖ ^ 2 := by positivity
+    linarith
+  have he0 : 0 < Real.exp (-(‖u‖ ^ 2) / 2) := Real.exp_pos _
+  constructor
+  · unfold weylBitWeight; linarith
+  · unfold weylBitWeight; linarith
+
 end QIQTH.Fock

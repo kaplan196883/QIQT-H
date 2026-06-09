@@ -24,7 +24,10 @@
 import QIQTH.Fock.WeylOp
 import QIQTH.Fock.VacuumState
 import QIQTH.Fock.WeylCovariance
+import QIQTH.Fock.WeylBitMeasure
 import Mathlib.Analysis.Normed.Operator.Extend
+import Mathlib.Analysis.InnerProductSpace.Adjoint
+import Mathlib.Analysis.InnerProductSpace.Positive
 import Mathlib.Tactic
 
 set_option linter.unusedSectionVars false
@@ -176,5 +179,82 @@ theorem vacuumState_weylBitEffectCLM_true (u : H) :
     vacuumState (weylBitEffectCLM u 1) = weylBitWeight u := by
   rw [vacuumState, weylBitEffectCLM_true_inner]
   simp
+
+/-! ### The JOINT multi-mode effect on the Hilbert space (closing the pre-Hilbert gap) -/
+
+section Joint
+
+variable {ι : Type*} [DecidableEq ι]
+
+/-- The single-mode bit operator `A(u,s)=(I+s·W(u))/2` as a continuous linear map on `FockPre H`. -/
+noncomputable def bitOpCLM (u : H) (s : ℂ) : FockPre H →L[ℂ] FockPre H :=
+  (1 / 2 : ℂ) • (1 + s • (weylₗᵢ u).toContinuousLinearMap)
+
+theorem bitOpCLM_apply (u : H) (s : ℂ) (φ : FockPre H) : bitOpCLM u s φ = bitOp u s φ := by
+  rw [bitOp_apply]
+  simp only [bitOpCLM, ContinuousLinearMap.smul_apply, ContinuousLinearMap.add_apply,
+    ContinuousLinearMap.one_apply, LinearIsometry.coe_toContinuousLinearMap]
+  rfl
+
+/-- The bit CLMs commute under the isotropy (microcausality) condition. -/
+theorem bitOpCLM_commute {u : ι → H} (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0)
+    {i j : ι} (hij : i ≠ j) (s s' : ℂ) :
+    Commute (bitOpCLM (u i) s) (bitOpCLM (u j) s') := by
+  show bitOpCLM (u i) s * bitOpCLM (u j) s' = bitOpCLM (u j) s' * bitOpCLM (u i) s
+  ext φ
+  show bitOpCLM (u i) s (bitOpCLM (u j) s' φ) = bitOpCLM (u j) s' (bitOpCLM (u i) s φ)
+  rw [bitOpCLM_apply, bitOpCLM_apply, bitOpCLM_apply, bitOpCLM_apply]
+  exact bitOp_comm (u i) (u j) s s' (hiso i j hij) φ
+
+/-- The joint product operator `∏_{i∈J} A(uᵢ,sᵢ)` as a CLM on `FockPre H` (order-independent). -/
+noncomputable def bornProdOpCLM (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0) (s : ι → ℂ) (J : Finset ι) :
+    FockPre H →L[ℂ] FockPre H :=
+  J.noncommProd (fun i => bitOpCLM (u i) (s i))
+    (fun i _ j _ hij => bitOpCLM_commute hiso hij (s i) (s j))
+
+/-- The joint product CLM applied to the vacuum is the Born history vector `bornVecTot`. -/
+theorem bornProdOpCLM_vac (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0) (s : ι → ℂ) (J : Finset ι) :
+    bornProdOpCLM u hiso s J (vac H) = bornVecTot u hiso s J := by
+  classical
+  induction J using Finset.induction with
+  | empty =>
+    rw [bornProdOpCLM, Finset.noncommProd_empty, bornVecTot_empty, ContinuousLinearMap.one_apply]
+  | @insert a J' ha ih =>
+    rw [bornProdOpCLM, Finset.noncommProd_insert_of_notMem _ _ _ _ ha, bornVecTot_insert u hiso s ha,
+      ContinuousLinearMap.mul_apply, bitOpCLM_apply]
+    show bitOp (u a) (s a) (bornProdOpCLM u hiso s J' (vac H)) = _
+    rw [ih]
+
+/-- **The JOINT Weyl-bit effect** `E_σ = (∏ A(uᵢ,σᵢ))* (∏ A(uᵢ,σᵢ))` as a bounded operator on the completed
+    Fock Hilbert space. -/
+noncomputable def jointEffectCLM (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0) (J : Finset ι) (σ : ∀ j : J, Bool) :
+    Fock H →L[ℂ] Fock H :=
+  let P := clmLift (bornProdOpCLM u hiso (signExt J σ) J)
+  (ContinuousLinearMap.adjoint P) ∘L P
+
+/-- The joint effect is a positive bounded operator (it is `P*P`). -/
+theorem jointEffectCLM_isPositive (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0) (J : Finset ι) (σ : ∀ j : J, Bool) :
+    (jointEffectCLM u hiso J σ).IsPositive :=
+  ContinuousLinearMap.isPositive_adjoint_comp_self _
+
+/-- **The JOINT Born weight is a genuine vacuum C\*-state expectation of a bounded positive effect on the
+    completed Fock Hilbert space**: `vacuumState (E_σ) = bornWeight u J σ`.  This closes the pre-Hilbert gap —
+    the full multi-mode Born law (not just single-mode) is realized by bounded Hilbert-space POVM effects. -/
+theorem vacuumState_jointEffectCLM (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0) (J : Finset ι) (σ : ∀ j : J, Bool) :
+    vacuumState (jointEffectCLM u hiso J σ) = bornWeight u hiso J σ := by
+  have hP : (clmLift (bornProdOpCLM u hiso (signExt J σ) J)) (Fock.vacuum : Fock H)
+      = ((bornVecTot u hiso (signExt J σ) J : FockPre H) : Fock H) := by
+    have hv : (Fock.vacuum : Fock H) = ((vac H : FockPre H) : Fock H) := rfl
+    rw [hv, clmLift_coe, bornProdOpCLM_vac]
+  rw [vacuumState, jointEffectCLM, ContinuousLinearMap.comp_apply,
+    ContinuousLinearMap.adjoint_inner_right, hP, UniformSpace.Completion.inner_coe,
+    inner_self_eq_norm_sq, bornWeight]
+
+end Joint
 
 end QIQTH.Fock
