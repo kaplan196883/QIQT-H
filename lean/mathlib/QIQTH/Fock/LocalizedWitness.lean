@@ -74,6 +74,61 @@ theorem bumpC_hasCompactSupport (cT cX : ℝ) : HasCompactSupport (bumpC cT cX) 
     have := abs_sub_abs_le_abs_sub (x 1) cX
     linarith [hX, abs_nonneg cX, abs_nonneg cT]
 
+/-! ### The `hKint`-free corollary for smooth compactly-supported tests -/
+
+/-- A smooth compactly-supported function as a localizable test (`Krep ∈ L²` via `schwartz_Krep_memLp`). -/
+noncomputable def smoothLocalTest (m : ℝ) (hm : m ≠ 0) (f : V → ℂ)
+    (hcs : HasCompactSupport f) (hcd : ContDiff ℝ ∞ f) : LocalTest m where
+  f := f
+  memLp := schwartz_Krep_memLp (hcs.toSchwartzMap hcd) hm
+
+/-- The convergence hypothesis `hKint` is automatic for smooth compactly-supported tests (Cauchy–Schwarz). -/
+theorem smooth_hKint (m : ℝ) (hm : m ≠ 0) (f g : V → ℂ)
+    (hcsf : HasCompactSupport f) (hcdf : ContDiff ℝ ∞ f)
+    (hcsg : HasCompactSupport g) (hcdg : ContDiff ℝ ∞ g) :
+    Integrable (fun θ => (starRingEnd ℂ) (Krep m f θ) * Krep m g θ) := by
+  have h1 : MemLp (Krep m f) 2 volume := schwartz_Krep_memLp (hcsf.toSchwartzMap hcdf) hm
+  have h2 : MemLp (Krep m g) 2 volume := schwartz_Krep_memLp (hcsg.toSchwartzMap hcdg) hm
+  simpa only [Pi.mul_apply, Pi.star_apply, RCLike.star_def] using h1.star.integrable_mul h2
+
+/-- **★ Pauli–Jordan microcausality for smooth compactly-supported tests — NO extra hypothesis.**  For
+real (`conj f = f`) smooth compactly-supported `f, g` with spacelike-separated supports (`m ≠ 0`),
+`Im⟪K f, K g⟫_{L²} = 0`.  The convergence `hKint` is discharged from smoothness (Cauchy–Schwarz), so this is
+the clean, unconditional microcausality statement on the physical (`C_c^∞`) test class. -/
+theorem K_im_inner_eq_zero_smooth (m : ℝ) (hm : m ≠ 0) (f g : V → ℂ)
+    (hcsf : HasCompactSupport f) (hcdf : ContDiff ℝ ∞ f)
+    (hcsg : HasCompactSupport g) (hcdg : ContDiff ℝ ∞ g)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hsep : ∀ x ∈ tsupport f, ∀ y ∈ tsupport g, Spacelike (x - y)) :
+    Complex.im ⟪K m (smoothLocalTest m hm f hcsf hcdf),
+      K m (smoothLocalTest m hm g hcsg hcdg)⟫_ℂ = 0 :=
+  K_im_inner_eq_zero_of_spacelike m hm (smoothLocalTest m hm f hcsf hcdf)
+    (smoothLocalTest m hm g hcsg hcdg) hcdf.continuous hcsf hcdg.continuous hcsg hfr hgr hsep
+    (smooth_hKint m hm f g hcsf hcdf hcsg hcdg)
+
+/-- **★ Non-triviality of the localization map.**  The localized one-particle mode of the Gaussian test is
+NON-ZERO: `K (gaussianLocalTest) ≠ 0`.  (Its amplitude `Krep m gaussianTest θ = 2^{−1/2}π·exp(−m²cosh 2θ/4)`
+is everywhere strictly positive, hence not a.e. zero.)  So the localization is genuinely non-degenerate — the
+localized Weyl-bit Born outcome is non-deterministic, not the trivial `0` mode. -/
+theorem K_gaussian_ne_zero {m : ℝ} (hm : m ≠ 0) : K m (gaussianLocalTest hm) ≠ 0 := by
+  intro h
+  have hcont : Continuous (Krep m gaussianTest) := by
+    rw [show Krep m gaussianTest = fun θ => ((1 / Real.sqrt 2
+      * (Real.pi * Real.exp (-(m ^ 2 * Real.cosh (2 * θ)) / 4)) : ℝ) : ℂ) from funext (Krep_gaussian_eq m)]
+    fun_prop
+  have h2 : Krep m gaussianTest =ᵐ[volume] 0 := by
+    have hK : (⇑(K m (gaussianLocalTest hm)) : ℝ → ℂ) =ᵐ[volume] Krep m gaussianTest :=
+      (gaussianLocalTest hm).memLp.coeFn_toLp
+    rw [h] at hK
+    exact hK.symm.trans (Lp.coeFn_zero ℂ 2 volume)
+  have h3 : Krep m gaussianTest = 0 := (hcont.ae_eq_iff_eq volume continuous_zero).mp h2
+  have h0 := congrFun h3 0
+  rw [Krep_gaussian_eq] at h0
+  have hpos : (0 : ℝ) < 1 / Real.sqrt 2
+      * (Real.pi * Real.exp (-(m ^ 2 * Real.cosh (2 * 0)) / 4)) := by positivity
+  simp only [Pi.zero_apply, Complex.ofReal_eq_zero] at h0
+  linarith
+
 /-- The localized amplitude of a bump is in `L²(ℝ)` (smooth compact support ⊂ Schwartz). -/
 theorem bumpC_Krep_memLp (m cT cX : ℝ) (hm : m ≠ 0) :
     MemLp (Krep m (bumpC cT cX)) 2 (volume : Measure ℝ) :=

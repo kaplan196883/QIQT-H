@@ -764,6 +764,16 @@ namespace QIQTH.AxiomAudit
 -- (conj f=f, conj g=g) continuous compact-support tests. Exposes the Pauli–Jordan kernel sin(η).
 -- Route: conj-real + integral_prod_mul (product=double integral) + integral_comp_comm (Im∘∫) + the
 -- pointwise im_exp_mul_of_real.
+#print axioms QIQTH.Fock.Localization.K_im_inner_eq_zero_smooth
+-- expected: standard only — ★★ hKint-FREE top-level microcausality export: for smooth compact-support real
+-- tests with spacelike supports, Im⟨K Lf, K Lg⟩=0. The hKint convergence hypothesis is DISCHARGED internally
+-- (smooth_hKint via Cauchy–Schwarz on Schwartz L² amplitudes), so the statement has the exact intended scope
+-- with no analytic side-condition for the caller.
+#print axioms QIQTH.Fock.Localization.K_gaussian_ne_zero
+-- expected: standard only — ★★ NON-TRIVIALITY of the localization: K(gaussianLocalTest)≠0. The amplitude
+-- Krep m gaussianTest θ = 2^{−1/2}π·exp(−m²cosh(2θ)/4) is everywhere strictly positive (Continuous +
+-- ae_eq_iff_eq vs everywhere-positive ⇒ not a.e. 0), so the localized Weyl-bit Born outcome is genuinely
+-- non-deterministic, not the trivial 0 mode. Closes the "modes could be zero" honesty gap.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
