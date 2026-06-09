@@ -130,7 +130,15 @@ done
 # `EffectGleason`); the whole `TypicalityMackeyGleason` placeholder module was removed.  The
 # *continuum* LLN / Bunce–Wright generalizations remain genuinely open (they were never this
 # placeholder).  Net 35 → 33.  Budget ratcheted to 33; raise ONLY with an audit note.
-AXIOM_BUDGET=33
+#
+# Audit note (2026-06-10, Bell tsirelson_bound retired): `Bell.tsirelson_bound`
+# (`∃ qm:ℝ, 2 < |qm|`) was a near-vacuous existence axiom — superseded by the
+# axiom-free `Tsirelson.tsirelson_rigorous`/`singlet_chsh_abs_gt_two`/
+# `qiqth_violates_bell_rigorous` (explicit singlet + Pauli-tensor CHSH = 2√2).
+# Replaced by a THEOREM exhibiting the concrete Tsirelson value `2√2 > 2`
+# (axiom-free); the deep "QM attains it" content already lives, non-vacuously,
+# in Tsirelson.lean.  Net 33 → 32.  Budget ratcheted to 32.
+AXIOM_BUDGET=32
 AXIOM_COUNT="$(grep -rhE '^axiom ' QIQTH/ | wc -l | tr -d ' ')"
 echo "[axiom-budget] raw axiom count: $AXIOM_COUNT (budget $AXIOM_BUDGET)"
 if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then

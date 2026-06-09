@@ -28,6 +28,7 @@
 
 import QIQTH.Theorem7
 import Mathlib.Data.Real.Basic
+import Mathlib.Analysis.SpecialFunctions.Sqrt
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import Mathlib.Algebra.BigOperators.Ring.Finset
 import Mathlib.Algebra.Order.BigOperators.Group.Finset
@@ -151,14 +152,18 @@ theorem not_lhv_if_chsh_gt_two
   rw [h_reproduces] at hLHV
   linarith
 
-/-- The Tsirelson bound (axiomatized at this layer) — the maximum
-    QM-predicted CHSH value is 2√2 > 2.
+/-- The Tsirelson value `2√2 > 2` exceeds the classical CHSH bound `2`.
 
-    *This axiom is discharged by `Tsirelson.tsirelson_rigorous` via an
-    explicit singlet-state + Pauli-tensor construction in 4D real space.*
-    Kept here as an axiom so `Bell.lean` is self-contained; the rigorous
-    version lives in `Tsirelson.lean`. -/
-axiom tsirelson_bound : ∃ qm_prediction : ℝ, 2 < |qm_prediction|
+    Formerly an axiom at this layer; now a theorem exhibiting the concrete
+    Tsirelson bound `2√2`.  The *deep* content — that a quantum (singlet)
+    state actually attains this CHSH value — is proved separately and
+    axiom-free in `Tsirelson.lean` (`tsirelson_rigorous`,
+    `singlet_chsh_abs_gt_two`) via an explicit singlet-state + Pauli-tensor
+    construction; `qiqth_violates_bell_rigorous` is the non-vacuous form. -/
+theorem tsirelson_bound : ∃ qm_prediction : ℝ, 2 < |qm_prediction| :=
+  ⟨2 * Real.sqrt 2, by
+    rw [abs_of_pos (by positivity)]
+    nlinarith [Real.sq_sqrt (by norm_num : (0:ℝ) ≤ 2), Real.sqrt_nonneg 2]⟩
 
 /-- **Bell's theorem in QIQT-H form.**
 
