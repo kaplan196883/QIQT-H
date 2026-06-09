@@ -796,6 +796,15 @@ namespace QIQTH.AxiomAudit
 -- group (boost a + translation b, U(a,b)=M_b∘U₁(a)), for a pairwise-spacelike microcausal localized family.
 -- Lorentz-covariant + translation-covariant + microcausal σ-additive typicality measure on the 1+1D free
 -- field — the literal Open-Problem-3b deliverable, axiom-free.
+#print axioms QIQTH.Fock.Localization.boostUnitary_comp_multiplier
+-- expected: standard only — ★★ the nonabelian semidirect-product relation U₁(a)∘M_b=M_{Λ_{−a}b}∘U₁(a):
+-- boosting commutes a translation past it into the boosted translation. The heart of the Poincaré group law.
+#print axioms QIQTH.Fock.Localization.poincareIsometry_comp
+-- expected: standard only — ★★★ THE CONNECTED-POINCARÉ GROUP LAW: U(a,b)∘U(a',b')=U(a+a', b+Λ_{−a}b'), the
+-- semidirect-product composition of ℝ^{1,1}⋊SO⁺(1,1). With K_poincare_equivariant this makes (a,b)↦U(a,b) a
+-- genuine REPRESENTATION of the connected Poincaré group — not merely a parameterized family of isometries.
+-- Closes GPT-5.5-pro's last rigor item (group-homomorphism packaging). From the two subgroup laws +
+-- the intertwining boostUnitary_comp_multiplier.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

@@ -164,6 +164,101 @@ noncomputable def poincareIsometry (m a : ℝ) (b : V) :
     Lp ℂ 2 (volume : Measure ℝ) →ₗᵢ[ℂ] Lp ℂ 2 (volume : Measure ℝ) :=
   (multiplierIsometry m b).comp (boostUnitary a)
 
+/-! ### The group law: `(a,b) ↦ U(a,b)` is a homomorphism of the connected Poincaré group -/
+
+/-- The translation phase is additive in the translation: `φ_{b+b'} = φ_b · φ_{b'}` (from the additivity of
+the Minkowski pairing in its second argument). -/
+theorem translationPhase_add (m : ℝ) (b b' : V) (θ : ℝ) :
+    translationPhase m (b + b') θ = translationPhase m b θ * translationPhase m b' θ := by
+  rw [translationPhase, translationPhase, translationPhase, ← Complex.exp_add, minkowskiDot_add_snd]
+  congr 1; push_cast; ring
+
+/-- **Boost–translation intertwining (the semidirect-product relation)** `φ_b(θ+a) = φ_{Λ_{-a}b}(θ)`: the
+boost shifts the rapidity and, by Minkowski-pairing boost-invariance, the translation `b` gets boosted to
+`Λ_{-a} b`. -/
+theorem translationPhase_boost (m a : ℝ) (b : V) (θ : ℝ) :
+    translationPhase m b (θ + a) = translationPhase m (lorentzBoost (-a) b) θ := by
+  have h : minkowskiDot (massShell m (θ + a)) b
+      = minkowskiDot (massShell m θ) (lorentzBoost (-a) b) := by
+    rw [← massShell_boost m a θ]
+    conv_lhs => rw [← lorentzBoost_neg_right a b]
+    rw [minkowskiDot_boost]
+  rw [translationPhase, translationPhase, h]
+
+/-- The boost isometry acts pointwise by the rapidity translation: `⇑(U₁(a) g)(θ) =ᵐ g(θ + a)`. -/
+theorem boostUnitary_coeFn (a : ℝ) (g : Lp ℂ 2 (volume : Measure ℝ)) :
+    ⇑(boostUnitary a g) =ᵐ[volume] fun θ => g (θ + a) :=
+  Lp.coeFn_compMeasurePreserving g (measurePreserving_add_right (volume : Measure ℝ) a)
+
+/-- **The translation subgroup is represented faithfully**: `M_b ∘ M_{b'} = M_{b+b'}` (the multipliers
+multiply, phases add). -/
+theorem multiplierIsometry_comp (m : ℝ) (b b' : V) :
+    (multiplierIsometry m b).comp (multiplierIsometry m b') = multiplierIsometry m (b + b') := by
+  refine LinearIsometry.ext fun ψ => ?_
+  apply Lp.ext
+  have h1 : ⇑(multiplierIsometry m b (multiplierIsometry m b' ψ)) =ᵐ[volume]
+      fun θ => translationPhase m b θ * (translationPhase m b' θ * ψ θ) := by
+    refine (multiplierMap_coeFn m b (multiplierIsometry m b' ψ)).trans ?_
+    filter_upwards [multiplierMap_coeFn m b' ψ] with θ hθ
+    simp only [multiplierIsometry_apply] at hθ ⊢; rw [hθ]
+  refine h1.trans ?_
+  filter_upwards [multiplierMap_coeFn m (b + b') ψ] with θ hθ
+  simp only [multiplierIsometry_apply] at hθ ⊢
+  rw [hθ, translationPhase_add]; ring
+
+/-- **The boost subgroup is represented faithfully**: `U₁(a) ∘ U₁(a') = U₁(a+a')` (rapidity translations
+add). -/
+theorem boostUnitary_comp (a a' : ℝ) :
+    (boostUnitary a).comp (boostUnitary a') = boostUnitary (a + a') := by
+  refine LinearIsometry.ext fun ψ => ?_
+  apply Lp.ext
+  have e2 := (measurePreserving_add_right (volume : Measure ℝ) a).quasiMeasurePreserving.ae_eq_comp
+    (boostUnitary_coeFn a' ψ)
+  filter_upwards [boostUnitary_coeFn a (boostUnitary a' ψ), e2, boostUnitary_coeFn (a + a') ψ]
+    with θ h1 h2 h3
+  simp only [Function.comp_apply] at h2
+  show ⇑(boostUnitary a (boostUnitary a' ψ)) θ = _
+  rw [h1, h2, h3, add_assoc]
+
+/-- **★★ The boost–translation semidirect-product relation** `U₁(a) ∘ M_b = M_{Λ_{-a}b} ∘ U₁(a)`.  This is
+the nonabelian heart of the Poincaré group law: boosting commutes a translation past it into the boosted
+translation `Λ_{-a} b`.  From the pointwise intertwining `translationPhase_boost`. -/
+theorem boostUnitary_comp_multiplier (m a : ℝ) (b : V) :
+    (boostUnitary a).comp (multiplierIsometry m b)
+      = (multiplierIsometry m (lorentzBoost (-a) b)).comp (boostUnitary a) := by
+  refine LinearIsometry.ext fun ψ => ?_
+  apply Lp.ext
+  have hL : ⇑(boostUnitary a (multiplierIsometry m b ψ)) =ᵐ[volume]
+      fun θ => translationPhase m b (θ + a) * ψ (θ + a) := by
+    refine (boostUnitary_coeFn a (multiplierIsometry m b ψ)).trans ?_
+    exact (measurePreserving_add_right (volume : Measure ℝ) a).quasiMeasurePreserving.ae_eq_comp
+      (multiplierMap_coeFn m b ψ)
+  have hR : ⇑(multiplierIsometry m (lorentzBoost (-a) b) (boostUnitary a ψ)) =ᵐ[volume]
+      fun θ => translationPhase m (lorentzBoost (-a) b) θ * ψ (θ + a) := by
+    refine (multiplierMap_coeFn m (lorentzBoost (-a) b) (boostUnitary a ψ)).trans ?_
+    filter_upwards [boostUnitary_coeFn a ψ] with θ hθ
+    simp only [hθ]
+  calc ⇑(((boostUnitary a).comp (multiplierIsometry m b)) ψ)
+      =ᵐ[volume] (fun θ => translationPhase m b (θ + a) * ψ (θ + a)) := hL
+    _ = (fun θ => translationPhase m (lorentzBoost (-a) b) θ * ψ (θ + a)) := by
+        funext θ; rw [translationPhase_boost]
+    _ =ᵐ[volume] ⇑(((multiplierIsometry m (lorentzBoost (-a) b)).comp (boostUnitary a)) ψ) := hR.symm
+
+/-- **★★★ The connected Poincaré group law** `U(a,b) ∘ U(a',b') = U(a+a', b + Λ_{-a} b')` — the
+semidirect-product composition of `ℝ^{1,1} ⋊ SO⁺(1,1)`.  Together with `K_poincare_equivariant` this exhibits
+`(a,b) ↦ U(a,b) = M_b ∘ U₁(a)` as a genuine REPRESENTATION of the connected Poincaré group on the
+one-particle space — not merely a parameterized family of isometries.  From the subgroup laws
+(`boostUnitary_comp`, `multiplierIsometry_comp`) and the intertwining `boostUnitary_comp_multiplier`. -/
+theorem poincareIsometry_comp (m a a' : ℝ) (b b' : V) :
+    (poincareIsometry m a b).comp (poincareIsometry m a' b')
+      = poincareIsometry m (a + a') (b + lorentzBoost (-a) b') := by
+  simp only [poincareIsometry]
+  rw [LinearIsometry.comp_assoc, ← LinearIsometry.comp_assoc (boostUnitary a),
+    boostUnitary_comp_multiplier m a b',
+    LinearIsometry.comp_assoc (multiplierIsometry m (lorentzBoost (-a) b')),
+    boostUnitary_comp, ← LinearIsometry.comp_assoc (multiplierIsometry m b),
+    multiplierIsometry_comp]
+
 /-- **★★★ Full connected-Poincaré equivariance of `K`.**  `K (τ_b · β_a · f) = U(a,b) (K f)`: an arbitrary
 connected-Poincaré transformation (boost `a` then translation `b`) of the spacetime test is intertwined by
 `K` with the composite one-particle isometry `U(a,b) = M_b ∘ U₁(a)`.  Combines `K_boost_equivariant` and
