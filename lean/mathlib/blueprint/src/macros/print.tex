@@ -1,0 +1,20 @@
+% Macros used ONLY by the printed (pdf) version.
+% This file starts with dummy macros that ensure the pdf compiler ignores
+% web-only macros provided by plasTeX (dependency-graph macros etc.).
+
+% Dummy macros that make sense only for the web version.
+\newcommand{\lean}[1]{}
+\newcommand{\discussion}[1]{}
+\newcommand{\leanok}{}
+\newcommand{\mathlibok}{}
+\newcommand{\notready}{}
+% Make sure that arguments of \uses and \proves are real labels, by using invisible refs:
+% latex prints a warning if the label is not defined, but nothing is shown in the pdf file.
+\ExplSyntaxOn
+\NewDocumentCommand{\uses}{m}
+ {\clist_map_inline:nn{#1}{\vphantom{\ref{##1}}}%
+  \ignorespaces}
+\NewDocumentCommand{\proves}{m}
+ {\clist_map_inline:nn{#1}{\vphantom{\ref{##1}}}%
+  \ignorespaces}
+\ExplSyntaxOff

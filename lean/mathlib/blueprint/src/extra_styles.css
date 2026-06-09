@@ -1,0 +1,26 @@
+/* CSS tweaks for the QIQT-H blueprint: a vertical rule on the left of
+ * theorem statements and proofs. */
+
+div.theorem_thmcontent {
+	border-left: .15rem solid black;
+}
+
+div.proposition_thmcontent {
+	border-left: .15rem solid black;
+}
+
+div.lemma_thmcontent {
+	border-left: .1rem solid black;
+}
+
+div.corollary_thmcontent {
+	border-left: .1rem solid black;
+}
+
+div.definition_thmcontent {
+	border-left: .1rem solid #444;
+}
+
+div.proof_content {
+	border-left: .08rem solid grey;
+}

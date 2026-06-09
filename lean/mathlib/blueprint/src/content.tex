@@ -1,0 +1,323 @@
+% Actual content of the QIQT-H blueprint. Used by both the web and pdf versions.
+% Do NOT add \begin{document} here.
+
+\chapter{Overview}
+
+This blueprint presents, in ordinary mathematical language, the machine-checked
+core of \emph{QIQT-H} --- a single-world account of quantum measurement in which
+the appearance of a unique outcome, and the Born statistics of repeated trials,
+are \emph{derived} consequences rather than postulates. Every numbered statement
+below is linked to a Lean~4 / Mathlib declaration; the dependency graph shows how
+the results rest on one another.
+
+\medskip
+\noindent\textbf{How to read this document.}
+\begin{itemize}
+  \item A green ``Lean'' tag on a statement means the statement is formalized and
+        accepted by the Lean kernel (no \texttt{sorry}). A green proof bubble means
+        the proof, too, is fully checked.
+  \item The framework is layered. \textbf{Layer~A} derives a single actual outcome
+        from a finite-capacity record structure (no collapse postulate).
+        \textbf{Layer~B} establishes the Born rule as a \emph{conditional}
+        representation theorem. \textbf{Layer~C} builds a covariant typicality
+        measure over global selection histories. \textbf{Phase~B} supplies a genuine
+        normal state on $\BH$ and a relativistic free-field instance.
+  \item This blueprint is deliberately a \emph{representative cross-section}: it
+        seeds one flagship result per layer. The full formalization contains many
+        more lemmas; see the API documentation for the complete index.
+\end{itemize}
+
+\medskip
+\noindent\textbf{Honesty conventions.} A result tagged green is machine-checked at
+the stated generality --- finite-dimensional where the Lean statement is
+finite-dimensional, and conditional on explicitly listed hypotheses. Claims that
+are \emph{cited} from the literature rather than proved here (e.g.\ that specific
+local quantum field algebras are of type~III$_1$) are never tagged green and are
+flagged as such in the text.
+
+
+\chapter{Layer A: A Single Outcome Without Collapse}
+\label{chap:layerA}
+
+Layer~A models a measurement record as a finite \emph{record framework}~$C$ together
+with a \emph{selection} $S$ that marks which records are \emph{active} (realized).
+The capacity bound forbids two incompatible records from being jointly active; the
+selection guarantees at least one. The conclusion is that exactly one record is
+actual --- the single-outcome phenomenon --- with no collapse dynamics invoked.
+
+\begin{theorem}[Exactly one actual record]
+  \label{thm:exactly-one-actual}
+  \lean{QIQTH.CoreNoCollapse.exactly_one_actual}
+  \leanok
+  Let $C$ be a record framework and $S$ a selection over $C$. Then the set of active
+  records of $S$ has cardinality exactly one:
+  \[
+    \bigl|\, \mathrm{active}(S) \,\bigr| = 1 .
+  \]
+\end{theorem}
+
+\begin{proof}
+  \leanok
+  The capacity bound gives $|\mathrm{active}(S)| \le 1$ (a co-actuality argument:
+  two active records would exceed the framework's capacity), while the selection is
+  inhabited, giving $1 \le |\mathrm{active}(S)|$. Antisymmetry of $\le$ on
+  $\mathbb{N}$ concludes.
+\end{proof}
+
+\begin{corollary}[Single outcome, no collapse]
+  \label{thm:single-outcome}
+  \lean{QIQTH.CoreNoCollapse.qiqth_single_outcome_no_collapse}
+  \leanok
+  \uses{thm:exactly-one-actual}
+  For every selection $S$ there is a \emph{unique} record $r$ that is active:
+  \[
+    \exists!\, r \in \Rec(C), \quad r \in \mathrm{active}(S).
+  \]
+  In particular a definite outcome obtains without any collapse postulate.
+\end{corollary}
+
+\begin{proof}
+  \leanok
+  Existence-and-uniqueness is the cardinality-one statement of
+  Theorem~\ref{thm:exactly-one-actual} re-expressed as a unique-existence claim.
+\end{proof}
+
+
+\chapter{Layer B: The Born Rule as a Conditional Theorem}
+\label{chap:layerB}
+
+Layer~B treats the Born rule not as an axiom but as the \emph{unique} additive law
+compatible with the quantum weights, and shows that the empirical frequencies of a
+repeated measurement concentrate on the Born probabilities. Throughout, $\rho$ is a
+(Hermitian, positive-semidefinite, unit-trace) density matrix on $\mathbb{C}^d$ and
+$(E_k)_{k}$ is a POVM; $\Born(\rho,E)_k$ denotes the Born weight of outcome~$k$.
+
+\begin{theorem}[Frequency concentration (quantum Chebyshev bound)]
+  \label{thm:quantum-chebyshev}
+  \lean{QIQTH.BornTypicalityQuantum.quantum_chebyshev_freq}
+  \leanok
+  Fix an outcome $k$, a tolerance $\varepsilon>0$ and a trial count $n>0$. Writing
+  $p_k = \Born(\rho,E)_k$ and letting $\mathrm{count}_k(\omega)$ be the number of
+  times $k$ occurs in a length-$n$ outcome sequence $\omega$, the total quantum
+  weight of the \emph{atypical} sequences obeys
+  \[
+    \re \!\!\sum_{\substack{\omega \,:\, (n\varepsilon)^2 \,\le\,
+        (\mathrm{count}_k(\omega) - n p_k)^2}}
+    \! w_{\rho,E}(\omega)
+    \;\le\; \frac{p_k\,(1-p_k)}{n\,\varepsilon^{2}} .
+  \]
+  Hence the relative frequency of $k$ converges in probability to $p_k$ as
+  $n \to \infty$: Born statistics are an emergent across-run frequency.
+\end{theorem}
+
+\begin{proof}
+  \leanok
+  A Chebyshev/second-moment estimate applied to the product quantum weights
+  $w_{\rho,E}$, using that the per-trial weights are a genuine probability
+  distribution with mean $p_k$ and variance $p_k(1-p_k)$.
+\end{proof}
+
+\begin{theorem}[Uniqueness of the Born measure]
+  \label{thm:born-unique}
+  \lean{QIQTH.BornMeasureUniqueness.product_born_measure_unique}
+  \leanok
+  Suppose $\mu$ assigns a real number to every event (finite set of length-$n$
+  outcome sequences) and is \emph{additive} ($\mu(\varnothing)=0$ and
+  $\mu(\mathrm{insert}\,a\,S)=\mu\{a\}+\mu(S)$ for $a\notin S$), with single-sequence
+  weights given by the product law
+  $\mu\{\omega\} = \prod_{t} \Born(\rho,E)_{\omega_t}$. Then $\mu$ is forced to be the
+  quantum trace functional on the $n$-fold system:
+  \[
+    \mu(S) \;=\; \re \,\Tr\!\bigl( \rho^{\otimes n}\, F_S \bigr)
+    \qquad\text{for every event } S,
+  \]
+  where $F_S$ is the effect associated with $S$. The Born product law has no
+  competitor among additive assignments.
+\end{theorem}
+
+\begin{proof}
+  \leanok
+  Additivity reduces $\mu$ to its values on singletons; the product hypothesis fixes
+  those; and the trace functional is shown additive with matching singleton values,
+  so the two agree on all finite events by induction.
+\end{proof}
+
+
+\chapter{Layer C: A Covariant Typicality Measure}
+\label{chap:layerC}
+
+Layer~C lifts the finite Born marginals to a single $\sigma$-additive probability
+measure $\mu_\infty$ on the space of \emph{global selection histories}
+$\prod_i \alpha_i$, and shows it is consistent (a genuine projective limit),
+no-signaling, and state-agnostic.
+
+\begin{definition}[No-signaling, bipartite]
+  \label{def:no-signaling}
+  A family of local statistics is \emph{no-signaling} if a local marginal never
+  depends on the choice of a spacelike-remote measurement.
+\end{definition}
+
+\begin{theorem}[Bipartite no-signaling for arbitrary states]
+  \label{thm:no-signaling}
+  \lean{QIQTH.NoSignalingGeneral.bipartite_no_signaling}
+  \leanok
+  \uses{def:no-signaling}
+  Let $\rho$ be \emph{any} (possibly entangled) bipartite state on
+  $\mathbb{C}^{d_1}\otimes\mathbb{C}^{d_2}$, $E$ a local effect, and $(F_b)_b$ a
+  remote POVM with $\sum_b F_b = 1$. Then
+  \[
+    \sum_b \Tr\!\bigl(\rho\,(E\otimes F_b)\bigr)
+    \;=\; \Tr\!\bigl(\rho\,(E\otimes 1)\bigr) .
+  \]
+  The local marginal is computed from $E$ alone; no separability of $\rho$ is
+  assumed, so no remote measurement choice can influence the local statistics.
+\end{theorem}
+
+\begin{proof}
+  \leanok
+  Linearity of the trace and $\sum_b (E\otimes F_b) = E\otimes\bigl(\sum_b F_b\bigr)
+  = E\otimes 1$.
+\end{proof}
+
+\begin{theorem}[Existence of the history measure: Kolmogorov extension]
+  \label{thm:exists-islimit}
+  \lean{QIQTH.KolmogorovFiniteFiber.exists_isLimit}
+  \leanok
+  Let $(\alpha_i)_i$ be a family of finite outcome spaces and let $F$ be a
+  Kolmogorov-consistent family of finite marginals on them. Then there exists a
+  probability measure $\mu$ on the history space $\prod_i \alpha_i$ that is the
+  projective limit of $F$:
+  \[
+    \exists\, \mu \text{ on } {\textstyle\prod_i}\alpha_i, \quad
+    \mu \text{ is a probability measure and } F.\mathrm{IsLimit}(\mu).
+  \]
+  This is the correlated-case $\sigma$-additive extension (Carath\'eodory via
+  compact, finite-fiber cylinders), not merely the i.i.d.\ product.
+\end{theorem}
+
+\begin{proof}
+  \leanok
+  The finite cylinder content is $\sigma$-subadditive; finiteness of the fibers makes
+  the cylinders compact, so an antitone sequence of nonempty closed cylinders has
+  nonempty intersection (finite-intersection property). Hence the content is a
+  premeasure and Carath\'eodory's theorem extends it to $\mu$, which is checked to be
+  the projective limit.
+\end{proof}
+
+\begin{theorem}[State-agnostic typicality measure]
+  \label{thm:exists-typicality}
+  \lean{QIQTH.StateNetMeasure.EffectStateNet.exists_typicalityMeasure}
+  \leanok
+  \uses{thm:exists-islimit}
+  Let $S$ be an \emph{effect--state net}: a positive, normalized, additive functional
+  $\omega$ together with compatible effects coarse-graining consistently across a
+  directed system of measurement contexts. Then there is a probability measure $\mu$
+  on the global history space that realizes all of $S$'s finite Born marginals as a
+  projective limit. The construction needs only a normal state, not any particular
+  density matrix.
+\end{theorem}
+
+\begin{proof}
+  \leanok
+  The net's finite Born marginals form a Kolmogorov-consistent family
+  (\texttt{toFiniteMarginals}); apply Theorem~\ref{thm:exists-islimit}.
+\end{proof}
+
+
+\chapter{Phase B: Normal States on $\BH$ and a Free-Field Instance}
+\label{chap:phaseB}
+
+Phase~B discharges the abstract ``normal state'' input of Layer~C with a concrete
+construction on $\BH$ for separable $\HH$, closes the typicality loop end-to-end on
+$\BH$, and exhibits a relativistic free-field instance carrying a genuine boost
+symmetry.
+
+\begin{definition}[Diagonal normal state]
+  \label{def:diag-state}
+  Given an orthonormal basis $(b_i)$ of $\HH$ and a summable probability weight
+  $(p_i)$, define $\omega(x) = \sum_i p_i\,\re\langle b_i, x\,b_i\rangle$ for
+  $x \in \BH$.
+\end{definition}
+
+\begin{theorem}[The diagonal state is a normal state]
+  \label{thm:normal-state}
+  \lean{QIQTH.NormalState.diagStateHom_one}
+  \leanok
+  \uses{def:diag-state}
+  If $(b_i)$ is orthonormal, $p_i \ge 0$, $(p_i)$ is summable and $\sum_i p_i = 1$,
+  then $\omega$ of Definition~\ref{def:diag-state} is a positive, additive functional
+  on $\BH$ that is normalized:
+  \[
+    \omega(1) = 1 .
+  \]
+  Thus $\omega$ is a genuine normal state, supplying the input required by
+  Layer~C without any appeal to the general Schatten/predual theory.
+\end{theorem}
+
+\begin{proof}
+  \leanok
+  Additivity and positivity follow from those of $x \mapsto \re\langle b_i, x b_i\rangle$
+  together with summability bounds; normalization is
+  $\omega(1) = \sum_i p_i \,\|b_i\|^2 = \sum_i p_i = 1$ since the $b_i$ are unit
+  vectors.
+\end{proof}
+
+\begin{theorem}[Typicality measure on $\BH$, end to end]
+  \label{thm:bh-typicality}
+  \lean{QIQTH.BHTypicalityMeasure.bh_typicalityMeasure_exists}
+  \leanok
+  \uses{thm:normal-state, thm:exists-typicality}
+  For a diagonal normal state on $\BH$ and a family of finite, discrete record
+  spaces $(\alpha_i)$, there exists a probability measure $\mu$ on the history space
+  $\prod_i \alpha_i$ realizing the state's Born marginals as a projective limit.
+  The Layer-C construction is thereby instantiated on a genuine operator-algebraic
+  state.
+\end{theorem}
+
+\begin{proof}
+  \leanok
+  The diagonal state (Theorem~\ref{thm:normal-state}) assembles into an
+  effect--state net on $\BH$; apply Theorem~\ref{thm:exists-typicality}.
+\end{proof}
+
+\begin{theorem}[Boost invariance of the free-field measure]
+  \label{thm:freefield-boost}
+  \lean{QIQTH.FreeFieldTypicality.freeFieldMeasure_boost_invariant}
+  \leanok
+  \uses{thm:bh-typicality}
+  Model a free field by occupation sectors $m \to \mathrm{Bool}$ over a mode set $m$,
+  with a boost acting as a permutation $e : m \simeq m$ via
+  $(\mathrm{boost}_e\, s)(i) = s(e\,i)$. If the single-mode law $\nu$ is
+  boost-invariant ($\nu \circ \mathrm{boost}_e^{-1} = \nu$), then the global
+  history measure is boost-invariant:
+  \[
+    (\mu_\infty)\circ \mathrm{boost}_e^{-1} \;=\; \mu_\infty .
+  \]
+  The typicality measure carries a genuine relativistic symmetry on this
+  finite-mode net.
+\end{theorem}
+
+\begin{proof}
+  \leanok
+  The global measure is the product measure $\bigotimes \nu$; pushforward commutes
+  with the product structure under the mode permutation, and invariance of each
+  factor lifts to invariance of the product.
+\end{proof}
+
+
+\chapter{Scope and Open Frontiers}
+
+\noindent\textbf{What is \emph{not} claimed here.} Two boundaries are explicit:
+\begin{itemize}
+  \item \emph{Unconditional Born.} Layer~B proves the Born rule as a conditional
+        representation/typicality theorem and proves its premises necessary; it does
+        not derive probability from nothing. This is the shared foundational problem
+        of measurement theory.
+  \item \emph{The continuum (type~III$_1$) prize.} A fully relativistic, continuum
+        covariant typicality measure would run on local quantum field algebras of
+        type~III$_1$. The measure/state/covariance machinery above is complete and
+        runs on a finite-mode free-field net with a real boost symmetry; lifting it to
+        the continuum requires Fock/CCR/quasifree field infrastructure not yet in
+        Mathlib. That those specific local algebras are type~III$_1$
+        (Buchholz--Wichmann) is \emph{cited}, not proved.
+\end{itemize}
