@@ -25,7 +25,11 @@ depends only on Lean's three standard foundational axioms (`propext`, `Classical
 introduces no domain axioms and contains no `sorry`. We are careful to state precisely what is and is not
 established: this is a boost-covariant *abelian Weyl-bit process*, not yet a fully spacetime-localized
 relativistic field, the missing ingredient being a Poincaré-equivariant localization map satisfying
-Pauli–Jordan microcausality.
+Pauli–Jordan microcausality. Toward that ingredient we additionally machine-check the *covariance half* of a
+concrete mass-shell localization `K` for the 1+1D massive scalar — its boost-equivariance, volume-preserving
+unit Jacobian, both-frequency reality relation, and the antisymmetry of the induced (Pauli–Jordan, not
+Wightman) symplectic form — leaving the `L²` boundedness and the Pauli–Jordan support theorem as the
+explicitly isolated analytic remainder.
 
 ---
 
@@ -199,6 +203,43 @@ from uniqueness of the Kolmogorov limit.
 
 ---
 
+## 5½. Toward the concrete localization map `K` (1+1D massive scalar, `Fock/Localization`)
+
+The covariance above is stated for an *abstract* index symmetry. We have begun the concrete spacetime
+localization that would instantiate it for the genuine free field, and the entire **covariance half** is now
+machine-checked. In 1+1 Minkowski space `V = ℝ²` with pairing `η(p,x)=p₀x₀−p₁x₁`, mass shell
+`p_m(θ)=(m cosh θ, m sinh θ)` (rapidity `θ`), and the localization
+
+> `(K f)(θ) = 2^{−1/2}·f̂_M(p_m θ)`,  `f̂_M(p)=∫ e^{−iη(p,x)} f(x)\,dx`
+
+(the `2^{−1/2}` is the invariant-measure normalization `dp/2ω = dθ/2`), we prove, axiom-free:
+
+- **Geometry.** The boost `Λ_a` shifts the shell by rapidity, `Λ_a(p_m θ)=p_m(θ+a)` (`massShell_boost`), and
+  the pairing is boost-invariant, `η(Λp,Λx)=η(p,x)` (`minkowskiDot_boost`).
+- **Unimodularity + volume-preservation.** `det Λ_a = 1` (`det_lorentzBoost`) and `Λ_a` preserves the
+  Lebesgue measure (`measurePreserving_lorentzBoost`) — the unit Jacobian for the Fourier change of
+  variables.
+- **Equivariance (keystone).** `(β_a f)^_M(p)=f̂_M(Λ_a p)` (`minkowskiFourier_boost`, where `β_a f = f∘Λ_a`),
+  hence at the amplitude level `(K(β_a f))(θ)=(K f)(θ+a)` (`Krep_boost`): the spacetime Lorentz boost acts on
+  the localized one-particle amplitude as the rapidity translation `θ↦θ+a` — exactly the one-particle unitary
+  `U₁` of §5. So the localization *intertwines* the spacetime boost with the one-particle representation.
+- **Reality / both frequencies.** `conj(f̂_M(p))=(\bar f)^_M(−p)` (`minkowskiFourier_conj`); for a real test
+  function this is `conj(f̂_M(p))=f̂_M(−p)`, the relation that recovers the *full* (both-frequency) field from
+  the positive-mass-shell amplitude.
+- **Symplectic form is antisymmetric.** For the integral-level form `⟨Kf,Kg⟩=∫_ℝ \overline{(Kf)(θ)}(Kg)(θ)dθ`
+  we prove Hermitian symmetry `conj⟨Kf,Kg⟩=⟨Kg,Kf⟩` (`Kform_conj`) and hence
+  **`Im⟨Kf,Kg⟩=−Im⟨Kg,Kf⟩`** (`Kform_im_antisymm`) — the defining antisymmetry of the Pauli–Jordan
+  *commutator* form, distinguishing it from the symmetric Wightman two-point function.
+
+What remains for a complete `K` (and is *not* yet formalized): the `L²(ℝ)` boundedness `K f ∈ L²` from
+Schwartz decay (the Schwartz–Fourier convention-matching to Mathlib's `fourierIntegral` plus the mass-shell
+decay estimate), the lift of `Krep` to the genuine `L²` map intertwining `U₁`, and the analytic
+**Pauli–Jordan support theorem** `Im⟪Kf,Kg⟫=0` for spacelike-separated supports (the `Δ_m` light-cone
+support — the genuine multi-month wall). The latter is the single physics input the `SpacetimeLocalization`
+interface (§6) isolates as a hypothesis.
+
+---
+
 ## 6. Honest scope: what is and is not established
 
 We are explicit about the boundary, following internal and external (GPT-5.5-pro) adversarial review.
@@ -223,7 +264,10 @@ a Weyl–Kraus sequential-measurement family, which is what makes its consistenc
 1. **Spacetime localization.** The covariance proven is "boost the abstract one-particle modes
    `u_i ↦ U₁(t) u_i`," not "boost the spacetime region in which a measurement is localized." Bridging this
    requires a Poincaré-equivariant localization map `K : TestFun(Minkowski) → H` with
-   `K(f∘Λ⁻¹)=U(Λ)Kf` and the **Pauli–Jordan** property `Im⟪Kf,Kg⟫=0` for spacelike-separated supports. The
+   `K(f∘Λ⁻¹)=U(Λ)Kf` and the **Pauli–Jordan** property `Im⟪Kf,Kg⟫=0` for spacelike-separated supports.
+   The *covariance half* of this concrete `K` is now machine-checked for the 1+1D massive scalar (§5½:
+   equivariance, volume-preservation, and the antisymmetry of the localized symplectic form); what remains
+   unformalized is the `L²` boundedness from Schwartz decay and the Pauli–Jordan *support* theorem. The
    Pauli–Jordan commutator-support theorem is the genuine analytic obstruction and is a separate,
    substantially larger project (tempered distributions / propagation of singularities, or an explicit
    kernel-support argument). We *do* package exactly these obligations as a reusable interface
@@ -310,20 +354,29 @@ statements claimed.
 | joint Born weight = vacuum expectation | `vacuumState_jointEffectCLM` |
 | concrete boost-orbit instance (`n↦n+1`) | `boostOrbitModes`, `boostOrbit_typicality_pushforward_invariant` |
 | sharp single-mode range `(1/2,1)` | `weylBitWeight_mem_Ioo_half` |
+| mass-shell geometry: boost shifts rapidity | `massShell_boost`, `minkowskiDot_boost` |
+| boost unimodular + volume-preserving | `det_lorentzBoost`, `measurePreserving_lorentzBoost` |
+| localization equivariance `(β_a f)^_M(p)=f̂_M(Λ_a p)` | `minkowskiFourier_boost`, `Krep_boost` |
+| reality / both frequencies | `minkowskiFourier_conj` |
+| symplectic form antisymmetric (Pauli–Jordan) | `Kform_im_antisymm` |
 
 ---
 
 ## 8. Outlook
 
 The single remaining research program is the concrete Poincaré-equivariant localization map `K` with
-Pauli–Jordan microcausality. For the discrete-boost-orbit instance (§6.1) this reduces to one analytic fact —
-the seed symplectic-orthogonality `Im⟪u₀, U₁(kτ)u₀⟫=0` for `k≠0`, i.e. that the boost-translates of a single
-localized mode are mutually spacelike — which is exactly the Pauli–Jordan commutator-support statement. The
-bounded-operator lift of the Weyl apparatus to the completed Hilbert space (now including the *joint*
-multi-mode effect, §6.3), the literal single-measure pushforward covariance (§5), and a concrete
-non-degenerate boost-orbit realization (§6.1) — previously listed here as next steps — are all now proven.
-The construction of `K` (the Pauli–Jordan commutator-support theorem) is the genuine multi-year frontier;
-everything downstream of it is machine-checked.
+Pauli–Jordan microcausality. Its *covariance half* is now machine-checked for the 1+1D massive scalar (§5½):
+the mass-shell Fourier localization, boost-equivariance `(K(β_a f))(θ)=(K f)(θ+a)`, volume-preservation, the
+both-frequency reality relation, and the antisymmetry of the localized symplectic form. Two analytic pieces
+remain unformalized: (i) the `L²(ℝ)` boundedness `K f∈L²` from Schwartz–Fourier decay (a bounded
+convention-matching-plus-decay exercise), and (ii) the **Pauli–Jordan support theorem** — `Im⟪Kf,Kg⟫=0` for
+spacelike-separated supports, equivalently `supp Δ_m ⊆` the closed light cone (the `Δ_m` Bessel kernel
+argument) — the genuine multi-month/multi-year frontier. For the discrete-boost-orbit instance (§6.1) the
+latter reduces to the single seed fact `Im⟪u₀, U₁(kτ)u₀⟫=0` for `k≠0`. The bounded-operator lift of the Weyl
+apparatus to the completed Hilbert space (including the *joint* multi-mode effect, §6.3), the literal
+single-measure pushforward covariance (§5), a concrete non-degenerate boost-orbit realization (§6.1), and the
+localization covariance scaffolding (§5½) are all now proven; everything downstream of the cited Pauli–Jordan
+support input is machine-checked and axiom-free.
 
 ---
 
