@@ -626,6 +626,13 @@ namespace QIQTH.AxiomAudit
 -- condition is a structure field; the Schwartz⟹memLp proof is the isolated analytic refinement.
 #print axioms QIQTH.Fock.Localization.trivialLocalTest
 -- expected: standard only — non-vacuity: the localizable-test class is inhabited (degenerately, f=0).
+#print axioms QIQTH.Fock.Localization.minkowskiFourier_continuous
+-- expected: standard only — Fourier transform of an integrable function is continuous (Riemann–Lebesgue,
+-- dominated convergence + |exp|=1).
+#print axioms QIQTH.Fock.Localization.Krep_aestronglyMeasurable
+-- expected: standard only — part (a) of the boundedness MemLp: the localized amplitude Krep m f is
+-- continuous (hence AEStronglyMeasurable) for integrable f. Part (b) (the L² bound from Schwartz–Fourier
+-- mass-shell decay) is the isolated multi-week analytic core, carried as the LocalTest.memLp domain field.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

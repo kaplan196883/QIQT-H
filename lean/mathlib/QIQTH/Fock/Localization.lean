@@ -282,4 +282,49 @@ noncomputable def trivialLocalTest (m : ℝ) : LocalTest m where
   f := fun _ => 0
   memLp := by rw [Krep_zero]; exact MeasureTheory.MemLp.zero
 
+/-! ### Measurability of the localized amplitude (part (a) of the boundedness `MemLp`) -/
+
+/-- `p ↦ η(p,x)` is continuous. -/
+theorem continuous_minkowskiDot_fst (x : V) : Continuous (fun p : V => minkowskiDot p x) := by
+  unfold minkowskiDot; fun_prop
+
+/-- `x ↦ η(p,x)` is continuous. -/
+theorem continuous_minkowskiDot_snd (p : V) : Continuous (fun x : V => minkowskiDot p x) := by
+  unfold minkowskiDot; fun_prop
+
+/-- **The Minkowski-Fourier transform of an integrable function is continuous** (Riemann–Lebesgue
+    continuity, via dominated convergence; the exponential has modulus one and `f` dominates). -/
+theorem minkowskiFourier_continuous {f : V → ℂ} (hf : Integrable f) :
+    Continuous (minkowskiFourier f) := by
+  apply continuous_of_dominated (bound := fun x => ‖f x‖)
+  · intro p
+    refine AEStronglyMeasurable.mul ?_ hf.aestronglyMeasurable
+    exact ((Complex.continuous_ofReal.comp (continuous_minkowskiDot_snd p)).const_mul
+      (-Complex.I)).cexp.aestronglyMeasurable
+  · intro p
+    filter_upwards with x
+    rw [norm_mul, show (-Complex.I * ((minkowskiDot p x : ℝ) : ℂ))
+        = ((-(minkowskiDot p x) : ℝ) : ℂ) * Complex.I from by push_cast; ring,
+      Complex.norm_exp_ofReal_mul_I, one_mul]
+  · exact hf.norm
+  · filter_upwards with x
+    exact (((Complex.continuous_ofReal.comp (continuous_minkowskiDot_fst x)).const_mul
+      (-Complex.I)).cexp).mul continuous_const
+
+/-- The mass-shell embedding `θ ↦ p_m(θ)` is continuous. -/
+theorem continuous_massShell (m : ℝ) : Continuous (massShell m) := by
+  unfold massShell
+  refine continuous_pi (fun i => ?_)
+  fin_cases i <;> simp <;> fun_prop
+
+/-- **The localized rapidity amplitude is continuous** for an integrable test function, hence (part (a) of
+    `MemLp`) almost-everywhere strongly measurable.  The remaining part (b) — the `L²` bound from
+    Schwartz–Fourier decay on the mass shell — is the isolated multi-week analytic core. -/
+theorem Krep_continuous {m : ℝ} {f : V → ℂ} (hf : Integrable f) : Continuous (Krep m f) :=
+  (((minkowskiFourier_continuous hf).comp (continuous_massShell m)).const_mul _)
+
+theorem Krep_aestronglyMeasurable {m : ℝ} {f : V → ℂ} (hf : Integrable f) :
+    MeasureTheory.AEStronglyMeasurable (Krep m f) (volume : MeasureTheory.Measure ℝ) :=
+  (Krep_continuous hf).aestronglyMeasurable
+
 end QIQTH.Fock.Localization
