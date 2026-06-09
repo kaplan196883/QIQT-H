@@ -647,6 +647,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Localization.integrable_exp_neg_cosh_two_mul
 -- expected: standard only — exp(−c·cosh 2θ) integrable on ℝ (c>0), dominated by the Gaussian exp(−2cθ²) —
 -- the integrability of the Gaussian test's |Krep|², toward a concrete non-degenerate LocalTest.
+#print axioms QIQTH.Fock.Localization.minkowskiFourier_gaussian
+-- expected: standard only — EXPLICIT Minkowski-Fourier transform of the 2D Gaussian: a separable product of
+-- two 1D complex Gaussian Fourier integrals (Fubini via integral_fintype_prod_volume_eq_prod +
+-- fourierIntegral_gaussian). The crown-jewel computation toward a concrete non-degenerate Krep_memLp.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

@@ -403,4 +403,31 @@ theorem integrable_exp_neg_cosh_two_mul {c : ℝ} (hc : 0 < c) :
   apply Real.exp_le_exp.mpr
   nlinarith [two_sq_le_cosh_two_mul θ, hc]
 
+/-- The 2D Gaussian test function `f(x) = exp(−(x₀²+x₁²))`. -/
+noncomputable def gaussianTest : V → ℂ := fun x => Complex.exp (-((x 0 ^ 2 + x 1 ^ 2 : ℝ) : ℂ))
+
+/-- **Explicit Minkowski-Fourier transform of the Gaussian** (Fubini over `Fin 2 → ℝ` + the 1D complex
+    Gaussian Fourier integral): a separable product of two 1D Gaussian Fourier integrals. -/
+theorem minkowskiFourier_gaussian (p : V) :
+    minkowskiFourier gaussianTest p
+      = (((π : ℂ) / 1) ^ (1 / 2 : ℂ) * Complex.exp (-(-(p 0 : ℂ)) ^ 2 / (4 * 1)))
+        * (((π : ℂ) / 1) ^ (1 / 2 : ℂ) * Complex.exp (-((p 1 : ℂ)) ^ 2 / (4 * 1))) := by
+  have hb : (0 : ℝ) < (1 : ℂ).re := by norm_num
+  rw [minkowskiFourier]
+  have key : (fun x : V => Complex.exp (-Complex.I * ((minkowskiDot p x : ℝ) : ℂ)) * gaussianTest x)
+      = (fun x : V => ∏ i : Fin 2,
+          (![fun y : ℝ => Complex.exp (Complex.I * (-(p 0 : ℂ)) * y) * Complex.exp (-1 * (y : ℂ) ^ 2),
+             fun y : ℝ => Complex.exp (Complex.I * ((p 1 : ℂ)) * y) * Complex.exp (-1 * (y : ℂ) ^ 2)]
+            i) (x i)) := by
+    funext x
+    rw [Fin.prod_univ_two]
+    simp only [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons, gaussianTest,
+      minkowskiDot, ← Complex.exp_add]
+    congr 1
+    push_cast
+    ring
+  rw [key, integral_fintype_prod_volume_eq_prod, Fin.prod_univ_two]
+  simp only [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons]
+  rw [fourierIntegral_gaussian hb (-(p 0 : ℂ)), fourierIntegral_gaussian hb ((p 1 : ℂ))]
+
 end QIQTH.Fock.Localization
