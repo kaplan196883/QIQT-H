@@ -16,6 +16,7 @@ import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 import Mathlib.LinearAlgebra.Matrix.ToLin
 import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
 import Mathlib.MeasureTheory.Integral.Bochner.Basic
+import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 import Mathlib.Tactic
 
@@ -195,5 +196,24 @@ noncomputable def Krep (m : ℝ) (f : V → ℂ) (θ : ℝ) : ℂ :=
 theorem Krep_boost (m a : ℝ) (f : V → ℂ) (θ : ℝ) :
     Krep m (boostTest a f) θ = Krep m f (θ + a) := by
   rw [Krep, Krep, minkowskiFourier_boost, massShell_boost]
+
+/-! ### Reality / both-frequencies structure (toward the Pauli–Jordan symplectic form, Phase 2b) -/
+
+/-- The Minkowski pairing is odd in its first argument: `η(−p, x) = −η(p, x)`. -/
+theorem minkowskiDot_neg_left (p x : V) : minkowskiDot (-p) x = - minkowskiDot p x := by
+  simp only [minkowskiDot, Pi.neg_apply]; ring
+
+/-- **Conjugation ↔ frequency reflection** for the Minkowski-Fourier transform:
+    `conj(f̂_M(p)) = (conj f)^_M(−p)`.  For a REAL test function (`conj f = f`) this gives
+    `conj(f̂_M(p)) = f̂_M(−p)` — the relation that makes the *full* (both-frequency) Pauli–Jordan symplectic
+    form emerge from the positive-mass-shell amplitude (soundness traps #4/#6: positive shell only, both
+    frequencies via conjugation). -/
+theorem minkowskiFourier_conj (f : V → ℂ) (p : V) :
+    (starRingEnd ℂ) (minkowskiFourier f p)
+      = minkowskiFourier (fun x => (starRingEnd ℂ) (f x)) (-p) := by
+  rw [minkowskiFourier, minkowskiFourier, ← integral_conj]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun x => ?_)
+  simp only [map_mul, ← Complex.exp_conj, minkowskiDot_neg_left, map_neg, Complex.conj_I,
+    Complex.conj_ofReal, Complex.ofReal_neg, mul_neg, neg_mul, neg_neg]
 
 end QIQTH.Fock.Localization
