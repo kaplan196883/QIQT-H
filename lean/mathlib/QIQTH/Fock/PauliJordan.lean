@@ -462,6 +462,80 @@ theorem abs_pauliJordan_trunc_le (m : ℝ) {z : V} (hz : Spacelike z) (R : ℝ) 
   rw [hcong, hshift]
   exact (abs_integral_sin_sinh_le_uniform c (-R - φ) (R - φ)).trans_eq (by rw [hcabs])
 
+/-! ### 11. The bilinear assembly — part (d): dominated convergence -/
+
+/-- **The dominated-convergence step (5c part d).**  For real continuous compactly-supported `f, g` with
+spacelike-separated supports and `m ≠ 0`, the smeared truncated kernel tends to `0`:
+`∫∫ (f x · g y).re · (∫_{−R}^{R} sin(η(p_m θ, x−y)) dθ) ∂(vol×vol) → 0`.
+Proof: dominated convergence over `V×V` with dominating function `C·‖f x‖·‖g y‖` (`C = 6/(|m|√ε)`,
+`ε` the positive spacelike-interval lower bound on the compact supports, `exists_pos_lower_bound_slSq`);
+the per-point bound is `abs_pauliJordan_trunc_le` and the pointwise limit is
+`pauliJordan_spacelike_tendsto_zero`. -/
+theorem Kform_im_trunc_tendsto_zero (m : ℝ) (hm : m ≠ 0) {f g : V → ℂ}
+    (hf : Continuous f) (hfc : HasCompactSupport f)
+    (hg : Continuous g) (hgc : HasCompactSupport g)
+    (hsep : ∀ x ∈ tsupport f, ∀ y ∈ tsupport g, Spacelike (x - y)) :
+    Filter.Tendsto (fun R => ∫ z : V × V, (f z.1 * g z.2).re
+        * (∫ θ in (-R)..R, Real.sin (minkowskiDot (massShell m θ) (z.1 - z.2)))
+        ∂(volume.prod volume)) Filter.atTop (nhds 0) := by
+  obtain ⟨ε, hεpos, hε⟩ := exists_pos_lower_bound_slSq hfc hgc hsep
+  have hmpos : (0 : ℝ) < |m| := abs_pos.mpr hm
+  have hsqε : (0 : ℝ) < Real.sqrt ε := Real.sqrt_pos.mpr hεpos
+  set C : ℝ := 6 / (|m| * Real.sqrt ε) with hCdef
+  have hCnn : 0 ≤ C := by rw [hCdef]; positivity
+  have hfint : Integrable f := hf.integrable_of_hasCompactSupport hfc
+  have hgint : Integrable g := hg.integrable_of_hasCompactSupport hgc
+  -- joint continuity of the kernel
+  have hker : Continuous (Function.uncurry fun (z : V × V) (θ : ℝ) =>
+      Real.sin (minkowskiDot (massShell m θ) (z.1 - z.2))) := by
+    unfold Function.uncurry
+    simp only [minkowskiDot, massShell_zero, massShell_one, Pi.sub_apply]
+    fun_prop
+  have hDcont : ∀ R, Continuous (fun z : V × V =>
+      ∫ θ in (-R)..R, Real.sin (minkowskiDot (massShell m θ) (z.1 - z.2))) :=
+    fun R => intervalIntegral.continuous_parametric_intervalIntegral_of_continuous' hker (-R) R
+  have hbound_int : Integrable (fun z : V × V => C * (‖f z.1‖ * ‖g z.2‖)) (volume.prod volume) :=
+    ((hfint.norm).mul_prod (hgint.norm)).const_mul C
+  rw [show (0 : ℝ) = ∫ _z : V × V, (0 : ℝ) ∂(volume.prod volume) by simp]
+  refine tendsto_integral_filter_of_dominated_convergence
+    (fun z => C * (‖f z.1‖ * ‖g z.2‖)) ?_ ?_ hbound_int ?_
+  · -- measurability
+    refine Filter.Eventually.of_forall fun R => Continuous.aestronglyMeasurable ?_
+    exact (Complex.continuous_re.comp ((hf.comp continuous_fst).mul (hg.comp continuous_snd))).mul
+      (hDcont R)
+  · -- domination
+    refine Filter.Eventually.of_forall fun R => Filter.Eventually.of_forall fun z => ?_
+    rw [Real.norm_eq_abs, abs_mul]
+    rcases eq_or_ne (f z.1) 0 with h | h
+    · simp [h]
+    rcases eq_or_ne (g z.2) 0 with h2 | h2
+    · simp [h2]
+    have hms : z.1 ∈ tsupport f := subset_tsupport f (Function.mem_support.mpr h)
+    have hmt : z.2 ∈ tsupport g := subset_tsupport g (Function.mem_support.mpr h2)
+    have hsp : Spacelike (z.1 - z.2) := hsep z.1 hms z.2 hmt
+    have hslε : ε ≤ (z.1 - z.2) 1 ^ 2 - (z.1 - z.2) 0 ^ 2 := hε z.1 hms z.2 hmt
+    have hDbound : |∫ θ in (-R)..R, Real.sin (minkowskiDot (massShell m θ) (z.1 - z.2))| ≤ C := by
+      refine (abs_pauliJordan_trunc_le m hsp R).trans ?_
+      rw [hCdef]; gcongr
+    have hre : |(f z.1 * g z.2).re| ≤ ‖f z.1‖ * ‖g z.2‖ := by
+      rw [← norm_mul]; exact RCLike.abs_re_le_norm (f z.1 * g z.2)
+    calc |(f z.1 * g z.2).re| * |∫ θ in (-R)..R, Real.sin (minkowskiDot (massShell m θ) (z.1 - z.2))|
+        ≤ (‖f z.1‖ * ‖g z.2‖) * C := by gcongr
+      _ = C * (‖f z.1‖ * ‖g z.2‖) := by ring
+  · -- pointwise limit
+    refine Filter.Eventually.of_forall fun z => ?_
+    rcases eq_or_ne (f z.1) 0 with h | h
+    · simp only [h, zero_mul, Complex.zero_re]; exact tendsto_const_nhds
+    rcases eq_or_ne (g z.2) 0 with h2 | h2
+    · simp only [h2, mul_zero, zero_mul, Complex.zero_re]; exact tendsto_const_nhds
+    have hsp : Spacelike (z.1 - z.2) :=
+      hsep z.1 (subset_tsupport f (Function.mem_support.mpr h))
+           z.2 (subset_tsupport g (Function.mem_support.mpr h2))
+    have h0 := (tendsto_const_nhds (x := (f z.1 * g z.2).re)).mul
+      (pauliJordan_spacelike_tendsto_zero m hsp)
+    simp only [mul_zero] at h0
+    exact h0
+
 /-! ### 10. The fixed-θ double-integral representation (part (a) of the bilinear assembly) -/
 
 /-- The pointwise imaginary part of the phase-rotated product, for a real value `w`:

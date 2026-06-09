@@ -719,6 +719,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Localization.abs_pauliJordan_trunc_le
 -- expected: standard only — uniform-in-R bound |∫_{−R}^R sin(η(p_mθ,z))dθ| ≤ 6/(|m|√(z₁²−z₀²)) for
 -- spacelike z (reparam c²=m²(z₁²−z₀²) + the uniform oscillatory bound) — the per-point DCT dominating bound.
+#print axioms QIQTH.Fock.Localization.Kform_im_trunc_tendsto_zero
+-- expected: standard only — ★★ part (d) of the bilinear assembly (5c): the DOMINATED-CONVERGENCE step.
+-- ∫∫ (f x·g y).re·(∫_{−R}^R sin(η(p_mθ,x−y))dθ) → 0 for real compact-support spacelike-separated f,g.
+-- DCT over V×V: dominating C·‖f‖‖g‖ (C=6/(|m|√ε), exists_pos_lower_bound_slSq), per-point bound
+-- abs_pauliJordan_trunc_le, pointwise limit pauliJordan_spacelike_tendsto_zero.
 #print axioms QIQTH.Fock.Localization.Krep_prod_im
 -- expected: standard only — ★★ part (a) of the bilinear assembly (5c): the fixed-θ DOUBLE-INTEGRAL
 -- representation Im(conj(K f θ)·K g θ) = ½∫∫ sin(η(p_mθ,x−y))·(f x·g y).re ∂(vol×vol), for real
