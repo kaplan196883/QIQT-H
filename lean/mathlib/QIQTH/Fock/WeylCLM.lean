@@ -255,6 +255,102 @@ theorem vacuumState_jointEffectCLM (u : ι → H)
     ContinuousLinearMap.adjoint_inner_right, hP, UniformSpace.Completion.inner_coe,
     inner_self_eq_norm_sq, bornWeight]
 
+/-- `bornProdOpCLM` applied to a vector factors a bit off the head (insert form). -/
+theorem bornProdOpCLM_insert_apply (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0) (s : ι → ℂ) {a : ι} {J' : Finset ι}
+    (ha : a ∉ J') (φ : FockPre H) :
+    bornProdOpCLM u hiso s (insert a J') φ
+      = bitOp (u a) (s a) (bornProdOpCLM u hiso s J' φ) := by
+  rw [bornProdOpCLM, Finset.noncommProd_insert_of_notMem _ _ _ _ ha,
+    ContinuousLinearMap.mul_apply, bitOpCLM_apply]
+  rfl
+
+/-- `bornProdOpCLM` depends only on the signs on `J`. -/
+theorem bornProdOpCLM_congr (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0) {s₁ s₂ : ι → ℂ} {J : Finset ι}
+    (h : ∀ i ∈ J, s₁ i = s₂ i) (φ : FockPre H) :
+    bornProdOpCLM u hiso s₁ J φ = bornProdOpCLM u hiso s₂ J φ := by
+  have : bornProdOpCLM u hiso s₁ J = bornProdOpCLM u hiso s₂ J := by
+    unfold bornProdOpCLM
+    exact Finset.noncommProd_congr rfl (fun i hi => by rw [h i hi]) _
+  rw [this]
+
+/-- Insert form of the product-vector norm (factors a bit off the head; defeq-matches the split equiv). -/
+theorem bornProdOpCLM_normSq_insert (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0) {a : ι} {J' : Finset ι} (ha : a ∉ J')
+    (φ : FockPre H) (σ : ∀ j : (insert a J' : Finset ι), Bool) :
+    ‖bornProdOpCLM u hiso (signExt (insert a J') σ) (insert a J') φ‖ ^ 2
+      = ‖bitOp (u a) (sgn (σ ⟨a, Finset.mem_insert_self a J'⟩))
+          (bornProdOpCLM u hiso
+            (signExt J' (fun j => σ ⟨j.1, Finset.mem_insert_of_mem j.2⟩)) J' φ)‖ ^ 2 := by
+  have h1 : signExt (insert a J') σ a = sgn (σ ⟨a, Finset.mem_insert_self a J'⟩) := by
+    rw [signExt, dif_pos (Finset.mem_insert_self a J')]
+  have h2 : bornProdOpCLM u hiso (signExt (insert a J') σ) J' φ
+      = bornProdOpCLM u hiso (signExt J' (fun j => σ ⟨j.1, Finset.mem_insert_of_mem j.2⟩)) J' φ := by
+    refine bornProdOpCLM_congr u hiso (fun i hi => ?_) φ
+    have hi' : i ∈ insert a J' := Finset.mem_insert_of_mem hi
+    rw [signExt, signExt, dif_pos hi, dif_pos hi']
+  rw [bornProdOpCLM_insert_apply u hiso _ ha, h1, h2]
+
+/-- **Generalized normalization**: `∑_σ ‖(∏A(uᵢ,σᵢ)) φ‖² = ‖φ‖²` for ANY vector `φ` (not just the vacuum) —
+    the operator analogue of `bornWeight_total`, the ingredient for joint POVM completeness. -/
+theorem bornProdOpCLM_normSq_sum (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0) (J : Finset ι) (φ : FockPre H) :
+    ∑ σ : (∀ j : J, Bool), ‖bornProdOpCLM u hiso (signExt J σ) J φ‖ ^ 2 = ‖φ‖ ^ 2 := by
+  classical
+  induction J using Finset.induction with
+  | empty => simp [bornProdOpCLM, Finset.noncommProd_empty]
+  | @insert a J' ha ih =>
+    rw [Fintype.sum_equiv (insertBoolSplit ha)
+        (fun σ => ‖bornProdOpCLM u hiso (signExt (insert a J') σ) (insert a J') φ‖ ^ 2)
+        (fun p => ‖bitOp (u a) (sgn p.1)
+          (bornProdOpCLM u hiso (signExt J' p.2) J' φ)‖ ^ 2)
+        (fun σ => bornProdOpCLM_normSq_insert u hiso ha φ σ),
+      Fintype.sum_prod_type, Finset.sum_comm, ← ih]
+    refine Finset.sum_congr rfl fun τ _ => ?_
+    rw [Fintype.sum_bool]
+    simp only [sgn, Bool.false_eq_true, reduceIte]
+    exact bit_normSq_sum (u a) (bornProdOpCLM u hiso (signExt J' τ) J' φ)
+
+/-- The generalized normalization lifted to the completed Hilbert space: `∑_σ ‖P_σ x‖² = ‖x‖²`. -/
+theorem clmLift_bornProd_normSq_sum (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0) (J : Finset ι) (x : Fock H) :
+    ∑ σ : (∀ j : J, Bool),
+      ‖clmLift (bornProdOpCLM u hiso (signExt J σ) J) x‖ ^ 2 = ‖x‖ ^ 2 := by
+  refine Completion.induction_on x
+    (isClosed_eq (continuous_finset_sum _ fun σ _ =>
+      ((clmLift _).continuous.norm).pow 2) (continuous_norm.pow 2)) (fun φ => ?_)
+  simp only [clmLift_coe, Completion.norm_coe]
+  exact bornProdOpCLM_normSq_sum u hiso J φ
+
+/-- **JOINT POVM COMPLETENESS on the Hilbert space**: `∑_σ E_σ = 1`.  Together with
+    `jointEffectCLM_isPositive` and `vacuumState_jointEffectCLM`, this makes `{E_σ}` a genuine
+    operator-level POVM on the completed Fock Hilbert space whose vacuum expectations are the Born weights. -/
+theorem jointEffectCLM_complete (u : ι → H)
+    (hiso : ∀ i j, i ≠ j → Complex.im ⟪u i, u j⟫_ℂ = 0) (J : Finset ι) :
+    ∑ σ : (∀ j : J, Bool), jointEffectCLM u hiso J σ = 1 := by
+  have hterm : ∀ (x : Fock H) (σ : (∀ j : J, Bool)), ⟪jointEffectCLM u hiso J σ x, x⟫_ℂ
+      = ((‖clmLift (bornProdOpCLM u hiso (signExt J σ) J) x‖ ^ 2 : ℝ) : ℂ) := by
+    intro x σ
+    rw [jointEffectCLM, ContinuousLinearMap.comp_apply,
+      ContinuousLinearMap.adjoint_inner_left, inner_self_eq_norm_sq_to_K]
+    norm_cast
+  have key : ∀ x : Fock H,
+      ⟪((∑ σ : (∀ j : J, Bool), jointEffectCLM u hiso J σ) - 1) x, x⟫_ℂ = 0 := by
+    intro x
+    have hsum : ∑ σ : (∀ j : J, Bool), ⟪jointEffectCLM u hiso J σ x, x⟫_ℂ = ⟪x, x⟫_ℂ := by
+      rw [Finset.sum_congr rfl (fun σ _ => hterm x σ), ← Complex.ofReal_sum,
+        clmLift_bornProd_normSq_sum, inner_self_eq_norm_sq_to_K]
+      norm_cast
+    rw [ContinuousLinearMap.sub_apply, inner_sub_left, ContinuousLinearMap.sum_apply, sum_inner,
+      ContinuousLinearMap.one_apply, hsum, sub_self]
+  have h0 : ((∑ σ : (∀ j : J, Bool), jointEffectCLM u hiso J σ) - 1).toLinearMap = 0 :=
+    (inner_map_self_eq_zero _).mp key
+  have h1 : (∑ σ : (∀ j : J, Bool), jointEffectCLM u hiso J σ) - 1 = 0 := by
+    ext x
+    simpa using LinearMap.congr_fun h0 x
+  exact sub_eq_zero.mp h1
+
 end Joint
 
 end QIQTH.Fock

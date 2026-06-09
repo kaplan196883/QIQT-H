@@ -583,6 +583,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.vacuumState_jointEffectCLM
 -- expected: standard only — the FULL multi-mode Born weight is a genuine vacuum C*-state expectation of a
 -- bounded positive Hilbert-space effect: vacuumState(E_σ)=bornWeight u J σ (closes the pre-Hilbert gap).
+#print axioms QIQTH.Fock.jointEffectCLM_complete
+-- expected: standard only — JOINT POVM COMPLETENESS ∑_σ E_σ = 1 as an OPERATOR identity on Fock H (via the
+-- generalized ∑_σ‖(∏A)φ‖²=‖φ‖² lifted by density + inner_map_self_eq_zero). With _isPositive and
+-- vacuumState_jointEffectCLM, {E_σ} is a genuine operator POVM with vacuum Born weights — earns "POVM".
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

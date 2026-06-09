@@ -205,10 +205,18 @@ We are explicit about the boundary, following internal and external (GPT-5.5-pro
 
 **What is established.** A boost-covariant **abelian Weyl-bit process** on the genuine continuum bosonic
 Fock space over `L²(ℝ)`: the Fock/coherent/quasifree construction; unitarity `W(u)*=W(−u)` and
-`W(−u)W(u)=I`; algebraic microcausality; two-outcome POVM `{E(u,±1)}` with completeness; positive joint
-effects and the POVM reading of the Born weights; normalization and projectivity; existence and uniqueness
-of the σ-additive history measure `μ∞`; and its invariance under boosting the modes by a one-particle
-isometry, specialized to the 1+1 Lorentz boost.
+`W(−u)W(u)=I`; algebraic microcausality; the two-outcome POVM `{E(u,±1)}` and the **joint** POVM `{E_σ}`
+(positive bounded effects on the completed Hilbert space with operator completeness `∑_σ E_σ=I`) whose vacuum
+expectations are the Born weights; normalization and projectivity; existence and uniqueness of the σ-additive
+history measure `μ∞`; and its invariance under boosting the modes by a one-particle isometry, specialized to
+the 1+1 Lorentz boost.
+
+The finite weights are the **diagonal sequential-POVM (Weyl–Kraus) probabilities** `p_J(σ)=⟨Ω|C_σ†C_σ|Ω⟩`
+with class operators `C_σ=∏ᵢA(uᵢ,σᵢ)`; their Kolmogorov consistency comes from POVM completeness *at each
+mode* (`‖A(u,+)ψ‖²+‖A(u,−)ψ‖²=‖ψ‖²`), **not** from off-diagonal decoherence. We do **not** claim a
+Gell-Mann–Hartle consistent/decoherent-histories functional: the off-diagonal `D(σ,τ)=⟨C_τΩ,C_σΩ⟩` is not
+shown to vanish and generically does not when `Re⟪uᵢ,uⱼ⟫≠0`. The measure is thus the Kolmogorov extension of
+a Weyl–Kraus sequential-measurement family, which is what makes its consistency unconditional.
 
 **What is *not* established (the boundary).**
 
@@ -232,9 +240,10 @@ isometry, specialized to the 1+1 Lorentz boost.
    localization, i.e. the concrete `K`.
 
 2. **Single global measure vs. contextual family.** The global Kolmogorov measure `μ∞` is appropriate
-   precisely because we fix a *commuting* (pairwise symplectically orthogonal, hence decoherent) mode
-   family. For non-commuting observables a single classical history measure does not exist (Fine/Bell); we
-   make commutativity an explicit hypothesis and do not violate it.
+   precisely because we fix a *commuting* (pairwise symplectically orthogonal, i.e. compatible / jointly
+   measurable) mode family — *not* a claim of dynamical decoherence (see the Weyl–Kraus remark above). For
+   non-commuting observables a single classical history measure does not exist (Fine/Bell); we make
+   commutativity an explicit hypothesis and do not violate it.
 
 3. **State functional.** `ω₀=Re⟪Ω,·Ω⟫` is a real Born-expectation functional, sufficient for effect
    probabilities; we do not claim a complex-linear C\*-state. We *have* now lifted the Weyl operators from
@@ -243,10 +252,11 @@ isometry, specialized to the 1+1 Lorentz boost.
    genuine Hilbert-space two-point function `⟪Ω,W(u)Ω⟫=exp(−½⟪u,u⟫)`, and the single-mode Born weight is a
    bona fide vacuum expectation of a bounded positive effect with operator POVM completeness
    `E(u,+1)+E(u,−1)=1` (`vacuumState_weylBitEffectCLM_true`, `weylBitEffectCLM_complete`). The full *joint*
-   multi-mode effect `E_σ=(∏A(uᵢ,σᵢ))*(∏A(uᵢ,σᵢ))` is likewise now a bounded *positive* operator on the
-   completed Hilbert space with `vacuumState(E_σ)=bornWeight u J σ` (`jointEffectCLM_isPositive`,
-   `vacuumState_jointEffectCLM`): the entire multi-mode Born law is realized by bounded Hilbert-space POVM
-   effects, not pre-completion gadgets.
+   multi-mode effect `E_σ=(∏A(uᵢ,σᵢ))*(∏A(uᵢ,σᵢ))` is likewise a bounded *positive* operator on the completed
+   Hilbert space, with both operator-level **completeness** `∑_σ E_σ=I` (`jointEffectCLM_complete`) and
+   `vacuumState(E_σ)=bornWeight u J σ` (`jointEffectCLM_isPositive`, `vacuumState_jointEffectCLM`): the entire
+   multi-mode Born law is a genuine bounded Hilbert-space **POVM** read in the vacuum state, not a collection
+   of pre-completion gadgets. (This is the operator family; the *measure* `μ∞` is its Kolmogorov extension.)
 
 4. **Non-triviality of correlations.** The process is genuinely non-i.i.d. when `Re⟪u_i,u_j⟫≠0`: the
    pair correlations are determined by the quasifree Gram covariance, not a product law. We say the finite
@@ -296,7 +306,8 @@ statements claimed.
 | Born weight = vacuum C\*-state expectation | `vacuumState_weylBitEffectCLM_true` |
 | operator POVM completeness on `Fock H` | `weylBitEffectCLM_complete` |
 | joint multi-mode effect, positive on `Fock H` | `jointEffectCLM_isPositive` |
-| joint Born weight = vacuum C\*-state expectation | `vacuumState_jointEffectCLM` |
+| joint POVM completeness `∑_σ E_σ=I` on `Fock H` | `jointEffectCLM_complete` |
+| joint Born weight = vacuum expectation | `vacuumState_jointEffectCLM` |
 | concrete boost-orbit instance (`n↦n+1`) | `boostOrbitModes`, `boostOrbit_typicality_pushforward_invariant` |
 | sharp single-mode range `(1/2,1)` | `weylBitWeight_mem_Ioo_half` |
 
