@@ -588,6 +588,12 @@ namespace QIQTH.AxiomAudit
 -- generalized ∑_σ‖(∏A)φ‖²=‖φ‖² lifted by density + inner_map_self_eq_zero). With _isPositive and
 -- vacuumState_jointEffectCLM, {E_σ} is a genuine operator POVM with vacuum Born weights — earns "POVM".
 
+-- K-localization Phase 0: 1+1D Minkowski geometry (convention lock for the concrete localization map K).
+#print axioms QIQTH.Fock.Localization.massShell_boost
+-- expected: standard only — the rapidity-a boost shifts the mass shell, Λa(p_m θ)=p_m(θ+a) (cosh/sinh add).
+#print axioms QIQTH.Fock.Localization.minkowskiDot_boost
+-- expected: standard only — the Minkowski pairing is boost-invariant, η(Λp,Λx)=η(p,x) (cosh²−sinh²=1).
+
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
 -- expected: standard only — direct matrix-entry computation

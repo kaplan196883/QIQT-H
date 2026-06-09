@@ -221,3 +221,4 @@ import QIQTH.Fock.WeylBitGeoCovariance
 import QIQTH.Fock.LocalizationSkeleton
 import QIQTH.Fock.WeylCLM
 import QIQTH.Fock.BoostOrbit
+import QIQTH.Fock.Localization
