@@ -716,6 +716,9 @@ namespace QIQTH.AxiomAudit
 -- the localized form to the R→∞ limit of finite-R truncations (5c ingredient).
 #print axioms QIQTH.Fock.Localization.im_exp_mul_of_real
 -- expected: standard only — Im(exp(iα)·w) = sin α · Re w when Im w = 0.
+#print axioms QIQTH.Fock.Localization.abs_pauliJordan_trunc_le
+-- expected: standard only — uniform-in-R bound |∫_{−R}^R sin(η(p_mθ,z))dθ| ≤ 6/(|m|√(z₁²−z₀²)) for
+-- spacelike z (reparam c²=m²(z₁²−z₀²) + the uniform oscillatory bound) — the per-point DCT dominating bound.
 #print axioms QIQTH.Fock.Localization.Krep_prod_im
 -- expected: standard only — ★★ part (a) of the bilinear assembly (5c): the fixed-θ DOUBLE-INTEGRAL
 -- representation Im(conj(K f θ)·K g θ) = ½∫∫ sin(η(p_mθ,x−y))·(f x·g y).re ∂(vol×vol), for real

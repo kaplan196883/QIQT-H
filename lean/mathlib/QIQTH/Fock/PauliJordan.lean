@@ -61,7 +61,8 @@ sine: there are `c, φ` with `η(p_m θ, z) = c · sinh(θ − φ)` for all `θ`
 kernel `sin(η(p_m θ, z))` is ODD — the structural source of the Pauli–Jordan cancellation in the spacelike
 region.  (Here `c = − m √(z₁²−z₀²)·sign z₁` and `φ` is the rapidity with `tanh φ = z₀/z₁`.) -/
 theorem minkowskiDot_massShell_spacelike (m : ℝ) {z : V} (hz : Spacelike z) :
-    ∃ c φ : ℝ, ∀ θ, minkowskiDot (massShell m θ) z = c * Real.sinh (θ - φ) := by
+    ∃ c φ : ℝ, c ^ 2 = m ^ 2 * (z 1 ^ 2 - z 0 ^ 2) ∧
+      ∀ θ, minkowskiDot (massShell m θ) z = c * Real.sinh (θ - φ) := by
   have hz' : z 0 ^ 2 < z 1 ^ 2 := hz
   have hz1sq : 0 < z 1 ^ 2 := lt_of_le_of_lt (sq_nonneg _) hz'
   set r : ℝ := Real.sqrt (z 1 ^ 2 - z 0 ^ 2) with hrdef
@@ -87,7 +88,8 @@ theorem minkowskiDot_massShell_spacelike (m : ℝ) {z : V} (hz : Spacelike z) :
       Real.sqrt_sq_eq_abs, abs_div, abs_of_pos hrpos]
   have hrcosh : r * Real.cosh φ = |z 1| := by rw [hcoshφ]; field_simp
   have hrsinh : r * Real.sinh φ = s * z 0 := by rw [hsinhφ]; field_simp
-  refine ⟨-(m * s * r), φ, fun θ => ?_⟩
+  refine ⟨-(m * s * r), φ, ?_, fun θ => ?_⟩
+  · rw [neg_sq, mul_pow, mul_pow, hs2, hrsq]; ring
   rw [minkowskiDot_massShell, Real.sinh_sub,
     show -(m * s * r) * (Real.sinh θ * Real.cosh φ - Real.cosh θ * Real.sinh φ)
       = -(m * s) * (Real.sinh θ * (r * Real.cosh φ) - Real.cosh θ * (r * Real.sinh φ)) by ring,
@@ -315,7 +317,7 @@ the IBP keystone), so the whole integral is squeezed to `0`. -/
 theorem pauliJordan_spacelike_tendsto_zero (m : ℝ) {z : V} (hz : Spacelike z) :
     Filter.Tendsto (fun R => ∫ θ in (-R)..R, Real.sin (minkowskiDot (massShell m θ) z))
       Filter.atTop (nhds 0) := by
-  obtain ⟨c, φ, hcφ⟩ := minkowskiDot_massShell_spacelike m hz
+  obtain ⟨c, φ, _, hcφ⟩ := minkowskiDot_massShell_spacelike m hz
   have hcont : ∀ a b : ℝ, IntervalIntegrable (fun u => Real.sin (c * Real.sinh u)) volume a b :=
     fun a b => (Real.continuous_sin.comp
       (continuous_const.mul Real.continuous_sinh)).intervalIntegrable a b
@@ -439,6 +441,26 @@ Fubini and the pointwise vanishing `pauliJordan_spacelike_tendsto_zero` apply) i
 theorem symm_intervalIntegral_tendsto_integral {G : ℝ → ℝ} (hG : Integrable G) :
     Filter.Tendsto (fun R => ∫ x in (-R)..R, G x) Filter.atTop (nhds (∫ x, G x)) :=
   intervalIntegral_tendsto_integral hG Filter.tendsto_neg_atTop_atBot Filter.tendsto_id
+
+/-- **Uniform-in-R bound on the truncated Pauli–Jordan kernel** for a spacelike `z`:
+`|∫_{−R}^{R} sin(η(p_m θ, z)) dθ| ≤ 6/(|m|·√(z₁²−z₀²))`, for *every* `R`.  Combines the reparametrization
+(`η = c·sinh(θ−φ)`, `c² = m²(z₁²−z₀²)`) with the uniform oscillatory bound `abs_integral_sin_sinh_le_uniform`.
+This is the per-point dominating bound for the dominated-convergence step (the right side is independent of
+`R`, and bounded below away from the light cone via `exists_pos_lower_bound_slSq`). -/
+theorem abs_pauliJordan_trunc_le (m : ℝ) {z : V} (hz : Spacelike z) (R : ℝ) :
+    |∫ θ in (-R)..R, Real.sin (minkowskiDot (massShell m θ) z)|
+      ≤ 6 / (|m| * Real.sqrt (z 1 ^ 2 - z 0 ^ 2)) := by
+  obtain ⟨c, φ, hc2, hcφ⟩ := minkowskiDot_massShell_spacelike m hz
+  have hcong : (∫ θ in (-R)..R, Real.sin (minkowskiDot (massShell m θ) z))
+      = ∫ θ in (-R)..R, Real.sin (c * Real.sinh (θ - φ)) := by
+    apply intervalIntegral.integral_congr; intro θ _; exact congrArg Real.sin (hcφ θ)
+  have hcabs : |c| = |m| * Real.sqrt (z 1 ^ 2 - z 0 ^ 2) := by
+    rw [← Real.sqrt_sq_eq_abs c, hc2, Real.sqrt_mul (sq_nonneg m), Real.sqrt_sq_eq_abs]
+  have hshift : (∫ θ in (-R)..R, Real.sin (c * Real.sinh (θ - φ)))
+      = ∫ u in (-R - φ)..(R - φ), Real.sin (c * Real.sinh u) :=
+    intervalIntegral.integral_comp_sub_right (fun u => Real.sin (c * Real.sinh u)) φ
+  rw [hcong, hshift]
+  exact (abs_integral_sin_sinh_le_uniform c (-R - φ) (R - φ)).trans_eq (by rw [hcabs])
 
 /-! ### 10. The fixed-θ double-integral representation (part (a) of the bilinear assembly) -/
 
