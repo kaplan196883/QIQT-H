@@ -734,6 +734,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Localization.K_im_inner_eq_zero_of_spacelike
 -- expected: standard only — ★ Im⟪K Lf, K Lg⟫_{L²}=0 for spacelike-separated real compact-support tests:
 -- LITERALLY the SpacetimeLocalization.pauli_jordan hypothesis field, discharged for the concrete K.
+#print axioms QIQTH.Fock.Localization.localized_typicality_boost_invariant
+-- expected: standard only — ★★ BOOST-COVARIANCE of the localized typicality measure, RESOLVING the
+-- orbit/spacelike tension: for a pairwise-spacelike (NOT boost-closed) localized family {K(region i)},
+-- μ∞ for {K(region i)} = μ∞ for {U₁(a)·K(region i)} = μ∞ for {K(boost_a·region i)}. The measure depends
+-- only on the Gram matrix (isometry-invariance, weylBit_typicality_boost_invariant) — no orbit needed.
+#print axioms QIQTH.Fock.Localization.localized_hiso_of_spacelike
+-- expected: standard only — a pairwise-spacelike regular region family gives microcausal localized modes.
 #print axioms QIQTH.Fock.Localization.K_boost_equivariant
 -- expected: standard only — ★ K(boost_a·f)=U₁(a)(K f): Poincaré equivariance, the SECOND physics input
 -- of the SpacetimeLocalization interface (K_equivariant), discharged for the concrete K. The Lorentz boost
