@@ -23,6 +23,7 @@
 -/
 import QIQTH.Fock.Localization
 import Mathlib.Analysis.SpecialFunctions.Arsinh
+import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 
 noncomputable section
 
@@ -123,5 +124,142 @@ theorem pauliJordan_trunc_equalTime_zero (m R : ℝ) {z : V} (hz0 : z 0 = 0) :
   -- hence ∫ g = -∫ g, so ∫ g = 0
   have h3 : (∫ θ in (-R)..R, g θ) = -∫ θ in (-R)..R, g θ := h1.symm.trans h2
   linarith
+
+/-! ### 5. The oscillatory `1/cosh` decay bound (keystone of the general-spacelike limit) -/
+
+/-- A clean antiderivative computation: `∫_a^b sinh x / cosh² x dx = (cosh a)⁻¹ − (cosh b)⁻¹`
+(antiderivative `−(cosh x)⁻¹`). -/
+theorem integral_sinh_div_cosh_sq (a b : ℝ) :
+    (∫ x in a..b, Real.sinh x / Real.cosh x ^ 2) = (Real.cosh a)⁻¹ - (Real.cosh b)⁻¹ := by
+  have hd : ∀ x ∈ Set.uIcc a b,
+      HasDerivAt (fun x => -(Real.cosh x)⁻¹) (Real.sinh x / Real.cosh x ^ 2) x := by
+    intro x _
+    have h2 : HasDerivAt (fun x => (Real.cosh x)⁻¹)
+        (-Real.sinh x / Real.cosh x ^ 2) x := (Real.hasDerivAt_cosh x).inv (Real.cosh_pos x).ne'
+    have := h2.neg
+    convert this using 1
+    rw [neg_div, neg_neg]
+  have hint : IntervalIntegrable (fun x => Real.sinh x / Real.cosh x ^ 2) volume a b := by
+    apply Continuous.intervalIntegrable
+    exact Real.continuous_sinh.div (Real.continuous_cosh.pow 2)
+      (fun x => pow_ne_zero 2 (Real.cosh_pos x).ne')
+  rw [intervalIntegral.integral_eq_sub_of_hasDerivAt hd hint]
+  ring
+
+/-- **The oscillatory `1/cosh` integration-by-parts bound** — the keystone GPT-5.5-pro flagged.  For
+`0 ≤ a ≤ b`, the oscillatory integral of `sin(c·sinh u)` over `[a,b]` is controlled by `1/cosh a` despite
+the integrand never decaying:
+`|∫_a^b sin(c·sinh u) du| ≤ 3 / (|c|·cosh a)`.
+Proof: integrate by parts with `u = (c·cosh)⁻¹`, `v = −cos(c·sinh)`, so `u·v' = sin(c·sinh)`; the boundary
+terms are each `≤ 1/(|c|·cosh a)` and the remainder `∫ sinh·cos/(c·cosh²)` is `≤ 1/(|c|·cosh a)` via
+`integral_sinh_div_cosh_sq`.  This gives `Δ_m(z) = 0` for spacelike `z` once combined with the odd-symmetry
+of the reparametrized kernel. -/
+theorem abs_integral_sin_sinh_le (c : ℝ) {a b : ℝ} (ha : 0 ≤ a) (hab : a ≤ b) :
+    |∫ u in a..b, Real.sin (c * Real.sinh u)| ≤ 3 / (|c| * Real.cosh a) := by
+  rcases eq_or_ne c 0 with rfl | hc
+  · simp
+  have hb : 0 ≤ b := le_trans ha hab
+  have hca : 0 < Real.cosh a := Real.cosh_pos a
+  have hcb : 0 < Real.cosh b := Real.cosh_pos b
+  have hcabs : 0 < |c| := abs_pos.mpr hc
+  have hcab : Real.cosh a ≤ Real.cosh b :=
+    Real.cosh_le_cosh.mpr (by rw [abs_of_nonneg ha, abs_of_nonneg hb]; exact hab)
+  have hcc : ∀ x, c * Real.cosh x ≠ 0 := fun x => mul_ne_zero hc (Real.cosh_pos x).ne'
+  -- derivatives for integration by parts
+  have hu : ∀ x ∈ Set.uIcc a b,
+      HasDerivAt (fun x => (c * Real.cosh x)⁻¹)
+        (-(c * Real.sinh x) / (c * Real.cosh x) ^ 2) x := by
+    intro x _
+    exact ((Real.hasDerivAt_cosh x).const_mul c).inv (hcc x)
+  have hv : ∀ x ∈ Set.uIcc a b,
+      HasDerivAt (fun x => -Real.cos (c * Real.sinh x))
+        (Real.sin (c * Real.sinh x) * (c * Real.cosh x)) x := by
+    intro x _
+    have hg : HasDerivAt (fun x => c * Real.sinh x) (c * Real.cosh x) x :=
+      (Real.hasDerivAt_sinh x).const_mul c
+    have := ((Real.hasDerivAt_cos (c * Real.sinh x)).comp x hg).neg
+    convert this using 1
+    ring
+  have hint_u' : IntervalIntegrable (fun x => -(c * Real.sinh x) / (c * Real.cosh x) ^ 2) volume a b := by
+    apply Continuous.intervalIntegrable
+    exact ((continuous_const.mul Real.continuous_sinh).neg).div
+      ((continuous_const.mul Real.continuous_cosh).pow 2) (fun x => pow_ne_zero 2 (hcc x))
+  have hint_v' : IntervalIntegrable
+      (fun x => Real.sin (c * Real.sinh x) * (c * Real.cosh x)) volume a b := by
+    apply Continuous.intervalIntegrable
+    exact (Real.continuous_sin.comp (continuous_const.mul Real.continuous_sinh)).mul
+      (continuous_const.mul Real.continuous_cosh)
+  -- integration by parts
+  have key := intervalIntegral.integral_mul_deriv_eq_deriv_mul hu hv hint_u' hint_v'
+  -- the LHS integrand simplifies to sin(c sinh x)
+  have hLHS : (∫ x in a..b, (c * Real.cosh x)⁻¹ * (Real.sin (c * Real.sinh x) * (c * Real.cosh x)))
+      = ∫ x in a..b, Real.sin (c * Real.sinh x) := by
+    apply intervalIntegral.integral_congr
+    intro x _
+    field_simp
+  rw [hLHS] at key
+  -- name the remainder integral and bound it
+  set I : ℝ := ∫ x in a..b, -(c * Real.sinh x) / (c * Real.cosh x) ^ 2 * -Real.cos (c * Real.sinh x)
+    with hI
+  -- |I| ≤ ∫ |integrand| ≤ ∫ sinh/(|c| cosh²) = (1/|c|)((cosh a)⁻¹ - (cosh b)⁻¹)
+  have hIbound : |I| ≤ |c|⁻¹ * ((Real.cosh a)⁻¹ - (Real.cosh b)⁻¹) := by
+    have hbound1 : |I| ≤ ∫ x in a..b,
+        |(-(c * Real.sinh x) / (c * Real.cosh x) ^ 2 * -Real.cos (c * Real.sinh x))| :=
+      intervalIntegral.abs_integral_le_integral_abs hab
+    have hpt : ∀ x ∈ Set.Icc a b,
+        |(-(c * Real.sinh x) / (c * Real.cosh x) ^ 2 * -Real.cos (c * Real.sinh x))|
+          ≤ |c|⁻¹ * (Real.sinh x / Real.cosh x ^ 2) := by
+      intro x hx
+      have hx0 : 0 ≤ x := le_trans ha hx.1
+      rw [abs_mul, abs_div, abs_neg, abs_neg]
+      have hsinh : |c * Real.sinh x| = |c| * Real.sinh x := by
+        rw [abs_mul, abs_of_nonneg (Real.sinh_nonneg_iff.mpr hx0)]
+      have hcosh2 : |(c * Real.cosh x) ^ 2| = c ^ 2 * Real.cosh x ^ 2 := by
+        rw [abs_pow, abs_mul, abs_of_pos (Real.cosh_pos x), mul_pow, sq_abs]
+      rw [hsinh, hcosh2]
+      have hcoscalc : |Real.cos (c * Real.sinh x)| ≤ 1 := Real.abs_cos_le_one _
+      calc |c| * Real.sinh x / (c ^ 2 * Real.cosh x ^ 2) * |Real.cos (c * Real.sinh x)|
+          ≤ |c| * Real.sinh x / (c ^ 2 * Real.cosh x ^ 2) * 1 := by
+            gcongr
+        _ = |c|⁻¹ * (Real.sinh x / Real.cosh x ^ 2) := by
+            rw [mul_one, ← sq_abs c]
+            field_simp
+    have hmono : (∫ x in a..b,
+        |(-(c * Real.sinh x) / (c * Real.cosh x) ^ 2 * -Real.cos (c * Real.sinh x))|)
+        ≤ ∫ x in a..b, |c|⁻¹ * (Real.sinh x / Real.cosh x ^ 2) := by
+      apply intervalIntegral.integral_mono_on hab _ _ hpt
+      · apply Continuous.intervalIntegrable
+        fun_prop (disch := intro x; exact pow_ne_zero 2 (hcc x))
+      · apply Continuous.intervalIntegrable
+        exact continuous_const.mul (Real.continuous_sinh.div (Real.continuous_cosh.pow 2)
+          (fun x => pow_ne_zero 2 (Real.cosh_pos x).ne'))
+    rw [intervalIntegral.integral_const_mul, integral_sinh_div_cosh_sq] at hmono
+    exact le_trans hbound1 hmono
+  -- the boundary terms
+  have hbdry : ∀ t : ℝ, |(c * Real.cosh t)⁻¹ * -Real.cos (c * Real.sinh t)| ≤ (|c| * Real.cosh t)⁻¹ := by
+    intro t
+    rw [abs_mul, abs_neg, abs_inv, abs_mul, abs_of_pos (Real.cosh_pos t)]
+    calc (|c| * Real.cosh t)⁻¹ * |Real.cos (c * Real.sinh t)|
+        ≤ (|c| * Real.cosh t)⁻¹ * 1 := by gcongr; exact Real.abs_cos_le_one _
+      _ = (|c| * Real.cosh t)⁻¹ := mul_one _
+  -- assemble
+  rw [key]
+  have e1 : (|c| * Real.cosh b)⁻¹ ≤ (|c| * Real.cosh a)⁻¹ := by
+    gcongr
+  calc |(c * Real.cosh b)⁻¹ * -Real.cos (c * Real.sinh b)
+        - (c * Real.cosh a)⁻¹ * -Real.cos (c * Real.sinh a) - I|
+      ≤ |(c * Real.cosh b)⁻¹ * -Real.cos (c * Real.sinh b)|
+        + |(c * Real.cosh a)⁻¹ * -Real.cos (c * Real.sinh a)| + |I| := by
+        refine (abs_sub _ _).trans ?_
+        gcongr
+        exact abs_sub _ _
+    _ ≤ (|c| * Real.cosh a)⁻¹ + (|c| * Real.cosh a)⁻¹ + |c|⁻¹ * ((Real.cosh a)⁻¹ - (Real.cosh b)⁻¹) := by
+        gcongr
+        · exact le_trans (hbdry b) e1
+        · exact hbdry a
+    _ ≤ 3 / (|c| * Real.cosh a) := by
+        rw [div_eq_mul_inv, mul_inv]
+        have : (0:ℝ) ≤ (Real.cosh b)⁻¹ := by positivity
+        nlinarith [mul_inv_le_one (a := |c|), inv_nonneg.mpr hca.le, inv_nonneg.mpr hcabs.le, this]
 
 end QIQTH.Fock.Localization

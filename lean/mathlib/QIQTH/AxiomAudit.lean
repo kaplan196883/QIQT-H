@@ -687,6 +687,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Localization.pauliJordan_trunc_equalTime_zero
 -- expected: standard only — ★ the EXACT equal-time vanishing: ∫_{−R}^{R} sin(η(p_m θ,z))dθ = 0 for every
 -- R when z₀=0 (odd integrand).  Microcausality cancellation in cleanest form.
+#print axioms QIQTH.Fock.Localization.integral_sinh_div_cosh_sq
+-- expected: standard only — ∫_a^b sinh x/cosh²x dx = (cosh a)⁻¹ − (cosh b)⁻¹ (FTC, antiderivative −1/cosh).
+#print axioms QIQTH.Fock.Localization.abs_integral_sin_sinh_le
+-- expected: standard only — ★★ THE OSCILLATORY KEYSTONE (GPT-5.5-pro's flagged wall): for 0≤a≤b,
+-- |∫_a^b sin(c·sinh u)du| ≤ 3/(|c|·cosh a) — the oscillatory integral is controlled by 1/cosh a despite
+-- the integrand never decaying.  Integration by parts (u=(c cosh)⁻¹, v=−cos(c sinh)) + the FTC remainder.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit
