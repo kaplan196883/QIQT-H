@@ -600,6 +600,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the Lorentz boost preserves the Lebesgue volume on ℝ² (unit Jacobian, via
 -- map_linearMap_addHaar_eq_smul_addHaar + det = 1) — the measure-preservation for the Fourier change of
 -- variables in boost-equivariance. Phase 1b foundation.
+#print axioms QIQTH.Fock.Localization.measurableEmbedding_lorentzBoost
+-- expected: standard only — the boost is a measurable embedding (continuous linear equivalence Λa, inverse
+-- Λ(-a)).
+#print axioms QIQTH.Fock.Localization.minkowskiFourier_boost
+-- expected: standard only — PHASE 1c KEYSTONE: boost-equivariance of the localization (Minkowski-Fourier)
+-- map, (β_a f)^_M(p) = f̂_M(Λa p), via the change of variables y=Λa x (MeasurePreserving.integral_comp +
+-- measurable embedding) + Minkowski-pairing boost-invariance. The localization intertwines the spacetime
+-- boost with the one-particle (rapidity-translation) action.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

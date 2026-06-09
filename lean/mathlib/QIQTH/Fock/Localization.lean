@@ -15,6 +15,8 @@
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 import Mathlib.LinearAlgebra.Matrix.ToLin
 import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
+import Mathlib.MeasureTheory.Integral.Bochner.Basic
+import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 import Mathlib.Tactic
 
 namespace QIQTH.Fock.Localization
@@ -116,5 +118,64 @@ theorem measurePreserving_lorentzBoost (a : ℝ) :
     simp
   have hfun : (lorentzBoost a) = ⇑(lorentzBoostₗ a) := by funext z; rw [lorentzBoostₗ_apply]
   rw [hfun]; exact hmp
+
+/-- `Λ_{-a}` is a left inverse of `Λ_a`. -/
+theorem lorentzBoost_neg_left (a : ℝ) (z : V) : lorentzBoost (-a) (lorentzBoost a z) = z := by
+  funext i
+  fin_cases i
+  · show lorentzBoost (-a) (lorentzBoost a z) 0 = z 0
+    simp only [lorentzBoost_zero, lorentzBoost_one, Real.cosh_neg, Real.sinh_neg]
+    linear_combination (z 0) * Real.cosh_sq_sub_sinh_sq a
+  · show lorentzBoost (-a) (lorentzBoost a z) 1 = z 1
+    simp only [lorentzBoost_zero, lorentzBoost_one, Real.cosh_neg, Real.sinh_neg]
+    linear_combination (z 1) * Real.cosh_sq_sub_sinh_sq a
+
+/-- `Λ_{-a}` is a right inverse of `Λ_a` (apply the previous lemma at `-a`). -/
+theorem lorentzBoost_neg_right (a : ℝ) (z : V) : lorentzBoost a (lorentzBoost (-a) z) = z := by
+  have := lorentzBoost_neg_left (-a) z
+  rwa [neg_neg] at this
+
+/-- The boost as a (continuous) linear equivalence of `Fin 2 → ℝ` — gives a measurable embedding. -/
+noncomputable def lorentzBoostLE (a : ℝ) : (Fin 2 → ℝ) ≃ₗ[ℝ] (Fin 2 → ℝ) :=
+  LinearEquiv.ofLinear (lorentzBoostₗ a) (lorentzBoostₗ (-a))
+    (by ext z; simp only [LinearMap.comp_apply, lorentzBoostₗ_apply, LinearMap.id_apply,
+          lorentzBoost_neg_right])
+    (by ext z; simp only [LinearMap.comp_apply, lorentzBoostₗ_apply, LinearMap.id_apply,
+          lorentzBoost_neg_left])
+
+/-- The boost is a measurable embedding (it is a continuous linear equivalence). -/
+theorem measurableEmbedding_lorentzBoost (a : ℝ) :
+    MeasurableEmbedding (lorentzBoost a) := by
+  have hmem := ((lorentzBoostLE a).toContinuousLinearEquiv).toHomeomorph.measurableEmbedding
+  have h : ⇑((lorentzBoostLE a).toContinuousLinearEquiv.toHomeomorph) = lorentzBoost a := by
+    funext z
+    have hz : ((lorentzBoostLE a).toContinuousLinearEquiv.toHomeomorph) z = lorentzBoostₗ a z := rfl
+    rw [hz, lorentzBoostₗ_apply]
+  rwa [h] at hmem
+
+/-! ### The Minkowski-Fourier wrapper and boost-equivariance (Phase 1c) -/
+
+/-- **The Minkowski-space Fourier transform** `f̂_M(p) = ∫ e^{−i η(p,x)} f(x) dx`, with the Minkowski
+    pairing in the exponent (signature `(+,−)`; soundness trap #2). -/
+noncomputable def minkowskiFourier (f : V → ℂ) (p : V) : ℂ :=
+  ∫ x, Complex.exp (-Complex.I * ((minkowskiDot p x : ℝ) : ℂ)) * f x
+
+/-- **The boost action on test functions** `(β_a f)(x) = f(Λ_a x)`. -/
+noncomputable def boostTest (a : ℝ) (f : V → ℂ) : V → ℂ := fun x => f (lorentzBoost a x)
+
+/-- **Boost-equivariance of the localization (Fourier) map**: `f̂_M ∘ β_a = U_a ∘ f̂_M`, i.e.
+    `(β_a f)^_M(p) = f̂_M(Λ_a p)`.  A clean change of variables `y = Λ_a x` (unit Jacobian, the boost is
+    volume-preserving and a measurable embedding) plus the Minkowski-pairing boost-invariance.  This is the
+    Phase-1c keystone: it makes the localization intertwine the spacetime boost with the one-particle
+    action.  Holds for ANY `f` (no integrability hypothesis — `MeasurePreserving.integral_comp`). -/
+theorem minkowskiFourier_boost (a : ℝ) (f : V → ℂ) (p : V) :
+    minkowskiFourier (boostTest a f) p = minkowskiFourier f (lorentzBoost a p) := by
+  have hcomp := (measurePreserving_lorentzBoost a).integral_comp
+    (measurableEmbedding_lorentzBoost a)
+    (fun y => Complex.exp (-Complex.I * ((minkowskiDot (lorentzBoost a p) y : ℝ) : ℂ)) * f y)
+  simp only [minkowskiFourier, boostTest]
+  rw [← hcomp]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun x => ?_)
+  simp only [minkowskiDot_boost]
 
 end QIQTH.Fock.Localization

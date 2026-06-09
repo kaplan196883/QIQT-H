@@ -114,7 +114,8 @@ symplectic form and resolves the both-frequencies issue — before any support a
 | **0** Convention lock | `V`, `minkowskiDot`, `minkowskiSq`, `massShell`, `lorentzBoost`; `massShell_boost`, `minkowskiDot_boost`, `minkowskiSq_boost`, `minkowskiSq_massShell` | **DONE** 2026-06-09 (commit 914e656, `Localization.lean`, axiom-free) |
 | **1a** Unimodular linear map | `lorentzBoostMat`, `lorentzBoostₗ`, `lorentzBoostₗ_apply`, **`det_lorentzBoost=1`** | **DONE** 2026-06-09 (commit pending, `Localization.lean`, axiom-free) |
 | **1b** Volume-preservation | **`measurePreserving_lorentzBoost`** | **DONE** 2026-06-09 (commit pending; NO EuclideanSpace migration needed — see note) |
-| **1c** Fourier wrapper | `LocalTest`, `minkowskiFourier`, `boostTest`; **`minkowskiFourier_boost`** | ~1–2 wk |
+| **1c** Fourier wrapper + equivariance | `minkowskiFourier`, `boostTest`, `measurableEmbedding_lorentzBoost`, **`minkowskiFourier_boost`** | **DONE** 2026-06-09 (commit pending, axiom-free) |
+| **2** `K` bounded + symplectic identity | `LocalTest`, `Krep`/`K` (`1/√2`·f̂ on shell), `Krep_memLp`, `K_boost`, **`2·Im⟪Kf,Kg⟫ = Pauli–Jordan bilinear`** | ~weeks |
 | **2** ★ Concrete `K` (FIRST increment) | `Krep`, `Krep_memLp`, `K`; **`K_boost`** (equivariance), **`inner_K_formula`**, **`two_im_inner_eq_full_mass_shell`** | the highest-value first increment; weeks |
 | **3** Conditional localized measure | instantiate `SpacetimeLocalization` from `(PJ : PauliJordanLocality m (K m))` ⇒ `concrete_localized_covariant_measure` (axiom-free, conditional) | short once 2 done |
 | **4** Kernel-certificate bridge | `PauliJordanKernelCert`, `locality_from_kernel` (support ⇒ locality, easy) | short |
