@@ -633,6 +633,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — part (a) of the boundedness MemLp: the localized amplitude Krep m f is
 -- continuous (hence AEStronglyMeasurable) for integrable f. Part (b) (the L² bound from Schwartz–Fourier
 -- mass-shell decay) is the isolated multi-week analytic core, carried as the LocalTest.memLp domain field.
+#print axioms QIQTH.Fock.Localization.one_add_sq_le_cosh_sq
+-- expected: standard only — 1+θ² ≤ cosh²θ (cosh²=1+sinh², sinh²θ≥θ²).
+#print axioms QIQTH.Fock.Localization.memLp_cosh_inv
+-- expected: standard only — 1/cosh ∈ L²(ℝ): cosh⁻² dominated by the Cauchy density (1+θ²)⁻¹
+-- (integrable_inv_one_add_sq), the comparison function for the localized-amplitude boundedness.
+#print axioms QIQTH.Fock.Localization.Krep_memLp_of_decay
+-- expected: standard only — BOUNDEDNESS REDUCED TO A DECAY BOUND: if ‖(K f)(θ)‖ ≤ C/cosh θ then K f ∈ L²
+-- (MemLp.of_le_mul against memLp_cosh_inv). All integrability discharged; the remaining obligation is the
+-- sharp pointwise Fourier-decay estimate (the Fourier transform of a smooth test decays on the mass shell).
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

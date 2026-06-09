@@ -13,10 +13,13 @@
   `minkowskiDot_boost` (the pairing is boost-invariant).  Axiom-free.
 -/
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
 import Mathlib.LinearAlgebra.Matrix.ToLin
 import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
 import Mathlib.MeasureTheory.Integral.Bochner.Basic
 import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+import Mathlib.MeasureTheory.Function.L2Space
+import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 import Mathlib.Tactic
 
@@ -326,5 +329,53 @@ theorem Krep_continuous {m : ℝ} {f : V → ℂ} (hf : Integrable f) : Continuo
 theorem Krep_aestronglyMeasurable {m : ℝ} {f : V → ℂ} (hf : Integrable f) :
     MeasureTheory.AEStronglyMeasurable (Krep m f) (volume : MeasureTheory.Measure ℝ) :=
   (Krep_continuous hf).aestronglyMeasurable
+
+/-! ### Boundedness, part (b): decay ⟹ L² — reducing the obligation to a `1/cosh` Fourier-decay bound -/
+
+/-- The mass-shell hyperbola dominates the parabola: `1 + θ² ≤ cosh²θ` (since `cosh²=1+sinh²` and
+    `θ² ≤ sinh²θ`). -/
+theorem one_add_sq_le_cosh_sq (θ : ℝ) : 1 + θ ^ 2 ≤ Real.cosh θ ^ 2 := by
+  have h1 : θ ^ 2 ≤ Real.sinh θ ^ 2 := by
+    rcases le_total 0 θ with h | h
+    · have hθs : θ ≤ Real.sinh θ := Real.self_le_sinh_iff.mpr h
+      have hs : 0 ≤ Real.sinh θ := Real.sinh_nonneg_iff.mpr h
+      nlinarith [hθs, hs, h]
+    · have hsθ : Real.sinh θ ≤ θ := Real.sinh_le_self_iff.mpr h
+      have hs : Real.sinh θ ≤ 0 := Real.sinh_nonpos_iff.mpr h
+      nlinarith [hsθ, hs, h]
+  nlinarith [Real.cosh_sq_sub_sinh_sq θ, h1]
+
+/-- `1/cosh²` is integrable on `ℝ` (dominated by the Cauchy density `(1+θ²)⁻¹`). -/
+theorem integrable_cosh_inv_sq :
+    Integrable (fun θ : ℝ => (Real.cosh θ ^ 2)⁻¹) := by
+  have hcont : Continuous (fun θ : ℝ => (Real.cosh θ ^ 2)⁻¹) :=
+    (Real.continuous_cosh.pow 2).inv₀ (fun θ => by positivity)
+  refine integrable_inv_one_add_sq.mono hcont.aestronglyMeasurable ?_
+  filter_upwards with θ
+  rw [Real.norm_eq_abs, Real.norm_eq_abs, abs_of_pos (by positivity), abs_of_pos (by positivity)]
+  gcongr
+  exact one_add_sq_le_cosh_sq θ
+
+/-- `1/cosh ∈ L²(ℝ)` — the comparison function for the localized-amplitude boundedness. -/
+theorem memLp_cosh_inv : MemLp (fun θ : ℝ => (Real.cosh θ)⁻¹) 2 (volume : MeasureTheory.Measure ℝ) := by
+  have hcont : Continuous (fun θ : ℝ => (Real.cosh θ)⁻¹) :=
+    Real.continuous_cosh.inv₀ (fun θ => (Real.cosh_pos θ).ne')
+  rw [memLp_two_iff_integrable_sq_norm hcont.aestronglyMeasurable]
+  refine integrable_cosh_inv_sq.congr (Filter.Eventually.of_forall fun θ => ?_)
+  show (Real.cosh θ ^ 2)⁻¹ = ‖(Real.cosh θ)⁻¹‖ ^ 2
+  rw [Real.norm_eq_abs, abs_of_pos (by positivity), inv_pow]
+
+/-- **Boundedness from a `1/cosh` decay bound**: if the localized rapidity amplitude is dominated by
+    `C/cosh θ`, then it lies in `L²(ℝ)`.  This reduces the `MemLp` obligation of `LocalTest` to the sharp
+    pointwise Fourier-decay estimate `‖(K f)(θ)‖ ≤ C/cosh θ` — the genuine remaining analytic content (the
+    Fourier transform of a smooth test function decays on the mass shell).  The integrability is fully
+    discharged here. -/
+theorem Krep_memLp_of_decay {m : ℝ} {f : V → ℂ} (hfint : Integrable f) {C : ℝ}
+    (hbound : ∀ θ, ‖Krep m f θ‖ ≤ C * (Real.cosh θ)⁻¹) :
+    MemLp (Krep m f) 2 (volume : MeasureTheory.Measure ℝ) := by
+  refine MemLp.of_le_mul (c := C) memLp_cosh_inv (Krep_aestronglyMeasurable hfint)
+    (Filter.Eventually.of_forall fun θ => ?_)
+  rw [Real.norm_eq_abs, abs_of_pos (by positivity : (0 : ℝ) < (Real.cosh θ)⁻¹)]
+  exact hbound θ
 
 end QIQTH.Fock.Localization
