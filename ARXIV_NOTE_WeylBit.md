@@ -26,11 +26,14 @@ introduces no domain axioms and contains no `sorry`. We are careful to state pre
 established: this is a boost-covariant *abelian Weyl-bit process*, not yet a fully spacetime-localized
 relativistic field, the missing ingredient being a Poincaré-equivariant localization map satisfying
 Pauli–Jordan microcausality. Toward that ingredient we additionally machine-check a
-concrete mass-shell localization `K` for the 1+1D massive scalar — both its *covariance half*
+concrete mass-shell localization `K` for the 1+1D massive scalar — its *covariance half*
 (boost-equivariance, volume-preserving unit Jacobian, both-frequency reality relation, and the antisymmetry
-of the induced Pauli–Jordan, not Wightman, symplectic form) *and* its *`L²`-boundedness half* (the explicit
-Gaussian Fourier transform on the mass shell yields a genuinely non-degenerate `L²`-valued localization).
-The single remaining unformalized input is then the Pauli–Jordan spacelike-support theorem.
+of the induced mass-shell symplectic form, the commutator — not Wightman — bilinear) *and* an *`L²`-admissibility
+criterion* (a sharp `1/cosh` decay bound implies `L²` membership) instantiated non-trivially by the explicit
+Gaussian Fourier transform on the mass shell. We are explicit that this is an admissibility criterion plus one
+concrete inhabitant, **not** a uniform `𝒮(ℝ²)→L²` continuity estimate, and that the Gaussian witnesses
+non-degeneracy of `K`'s domain, **not** spacelike localization. Two inputs remain unformalized: a general
+(Schwartz / compact-support) `1/cosh` decay bound, and the Pauli–Jordan spacelike-support theorem.
 
 ---
 
@@ -230,14 +233,18 @@ localization that instantiates it for the genuine free field, and **both** its c
   the positive-mass-shell amplitude.
 - **Symplectic form is antisymmetric.** For the integral-level form `⟨Kf,Kg⟩=∫_ℝ \overline{(Kf)(θ)}(Kg)(θ)dθ`
   we prove Hermitian symmetry `conj⟨Kf,Kg⟩=⟨Kg,Kf⟩` (`Kform_conj`) and hence
-  **`Im⟨Kf,Kg⟩=−Im⟨Kg,Kf⟩`** (`Kform_im_antisymm`) — the defining antisymmetry of the Pauli–Jordan
-  *commutator* form, distinguishing it from the symmetric Wightman two-point function.
+  **`Im⟨Kf,Kg⟩=−Im⟨Kg,Kf⟩`** (`Kform_im_antisymm`). This antisymmetry is the *commutator*-type structure
+  (as opposed to the symmetric Wightman two-point function); we are careful **not** to over-read it: `Im⟨·,·⟩`
+  is antisymmetric for *any* complex inner product, so antisymmetry alone does not yet identify this as the
+  Pauli–Jordan distribution. It is the mass-shell symplectic form, and its identification with `Δ_m` is
+  established only once the spacelike-support theorem below is proven (and the normalization/sign audited).
 
 We also package the **L²-valued localization map** itself: a `LocalTest` is a spacetime test function whose
 localized amplitude `Krep m f` lies in `L²(ℝ)` (the one-particle space), and `K : LocalTest → L²(ℝ)`
 (`K L = (Krep m L.f).toLp`) is the Hilbert-space-valued localization the Stage-2 interface requires.
 
-**Boundedness (the `L²` membership).** This is now machine-checked, in two complementary forms:
+**`L²` admissibility (the membership criterion).** We do **not** claim a uniform operator bound
+`‖Kf‖_{L²} ≲ ‖f‖_{𝒮}`; what is machine-checked is an *admissibility criterion* plus a concrete inhabitant:
 
 - *Reduction to a decay bound.* All the measure-theoretic content is discharged: `1/cosh ∈ L²(ℝ)`
   (`memLp_cosh_inv` — `cosh²θ ≥ 1+θ²` so `cosh⁻²` is dominated by the Cauchy density `(1+θ²)⁻¹`), whence
@@ -248,16 +255,18 @@ localized amplitude `Krep m f` lies in `L²(ℝ)` (the one-particle space), and 
   explicitly: by Fubini over `ℝ²` and the complex Gaussian Fourier integral, `K f` is the real amplitude
   `(K f)(θ) = 2^{−1/2}·π·exp(−m²cosh(2θ)/4)` (`minkowskiFourier_gaussian`, `Krep_gaussian_eq`), so
   `‖(K f)(θ)‖² = (π²/2)·exp(−(m²/2)cosh 2θ)` is integrable and `K f ∈ L²(ℝ)` (`gaussian_Krep_memLp`).
-  Hence `gaussianLocalTest` is a **genuinely non-degenerate** localizable test — a real physical test
-  function whose Hilbert-space-valued localization is proven, end to end.
+  Hence `gaussianLocalTest` witnesses that `K`'s admissible domain is **non-empty and non-degenerate**. We
+  stress what it is *not*: the Gaussian's support is all of spacetime, so it witnesses domain non-degeneracy,
+  **not** spacelike localization — it is an analytic admissibility witness, not a local observable.
 
-So the localization map `K` now has *both* halves machine-checked: full covariance (above) and `L²`
-boundedness (a concrete non-degenerate inhabitant). What remains *not* yet formalized is **one** thing: the
-analytic **Pauli–Jordan support theorem** `Im⟪Kf,Kg⟫=0` for spacelike-separated supports (the `Δ_m`
-light-cone support — the genuine multi-month wall), the single physics input the `SpacetimeLocalization`
-interface (§6) isolates as a hypothesis. (The general-Schwartz `1/cosh` decay bound, which would upgrade the
-*class* of localizable tests from "Gaussian-and-the-like" to "all Schwartz," is an optional generalization,
-not a gap: boundedness is genuinely realized.)
+So the localization map `K` has its covariance half machine-checked, together with an `L²`-admissibility
+criterion realized by a concrete non-degenerate inhabitant. **Two** inputs remain *not* yet formalized:
+(1) a **general `1/cosh` decay bound** for Schwartz / compactly-supported tests — needed so that `K` is
+admitted on a genuine *local* test class rather than only on Gaussian-type tests (one integration by parts
+against `p₀∂₀−p₁∂₁` on the mass shell); and (2) the analytic **Pauli–Jordan support theorem** `Im⟪Kf,Kg⟫=0`
+for spacelike-separated supports (the `Δ_m` light-cone support — the genuine multi-month wall), the physics
+input the `SpacetimeLocalization` interface (§6) isolates as a hypothesis. Until (1), the claim "`K` is
+`L²`-bounded" should be read strictly as "the admissibility criterion holds and is non-vacuously inhabited."
 
 ---
 
@@ -286,10 +295,11 @@ a Weyl–Kraus sequential-measurement family, which is what makes its consistenc
    `u_i ↦ U₁(t) u_i`," not "boost the spacetime region in which a measurement is localized." Bridging this
    requires a Poincaré-equivariant localization map `K : TestFun(Minkowski) → H` with
    `K(f∘Λ⁻¹)=U(Λ)Kf` and the **Pauli–Jordan** property `Im⟪Kf,Kg⟫=0` for spacelike-separated supports.
-   Both the *covariance half* and the *`L²`-boundedness half* of this concrete `K` are now machine-checked
+   The *covariance half* and an *`L²`-admissibility criterion* for this concrete `K` are now machine-checked
    for the 1+1D massive scalar (§5½: equivariance, volume-preservation, symplectic antisymmetry, and a
-   genuinely non-degenerate `L²`-valued localization — the Gaussian); the single piece that remains
-   unformalized is the Pauli–Jordan *support* theorem. The
+   non-degenerate `L²` inhabitant — the Gaussian, which witnesses domain non-degeneracy, not localization);
+   two pieces remain unformalized: a general `1/cosh` decay bound (so `K` is admitted on a genuine *local*
+   test class) and the Pauli–Jordan *support* theorem. The
    Pauli–Jordan commutator-support theorem is the genuine analytic obstruction and is a separate,
    substantially larger project (tempered distributions / propagation of singularities, or an explicit
    kernel-support argument). We *do* package exactly these obligations as a reusable interface
@@ -380,31 +390,33 @@ statements claimed.
 | boost unimodular + volume-preserving | `det_lorentzBoost`, `measurePreserving_lorentzBoost` |
 | localization equivariance `(β_a f)^_M(p)=f̂_M(Λ_a p)` | `minkowskiFourier_boost`, `Krep_boost` |
 | reality / both frequencies | `minkowskiFourier_conj` |
-| symplectic form antisymmetric (Pauli–Jordan) | `Kform_im_antisymm` |
+| mass-shell symplectic form antisymmetric (commutator-type) | `Kform_im_antisymm` |
 | `L²`-valued localization `K : LocalTest → L²(ℝ)` | `LocalTest`, `Localization.K` |
-| boundedness reduced to a `1/cosh` decay bound | `memLp_cosh_inv`, `Krep_memLp_of_decay` |
+| `L²`-admissibility criterion (`1/cosh` decay ⟹ `L²`) | `memLp_cosh_inv`, `Krep_memLp_of_decay` |
 | explicit Gaussian Fourier on the shell | `minkowskiFourier_gaussian`, `Krep_gaussian_eq` |
-| boundedness CLOSED (Gaussian); non-degenerate test | `gaussian_Krep_memLp`, `gaussianLocalTest` |
+| admissibility non-vacuously inhabited (Gaussian) | `gaussian_Krep_memLp`, `gaussianLocalTest` |
 
 ---
 
 ## 8. Outlook
 
-The concrete mass-shell localization map `K` is now machine-checked in **both** halves for the 1+1D massive
-scalar (§5½): its *covariance* (boost-equivariance `(K(β_a f))(θ)=(K f)(θ+a)`, volume-preservation, the
-both-frequency reality relation, and the antisymmetry of the localized Pauli–Jordan symplectic form) and its
-*`L²` boundedness* (the boundedness reduced to a sharp `1/cosh` decay bound with all integrability discharged,
-and a genuinely non-degenerate inhabitant — the Gaussian — whose `L²`-valued localization is proven via the
-explicit Gaussian Fourier transform on the shell). The **single** remaining unformalized input is the
-**Pauli–Jordan support theorem** — `Im⟪Kf,Kg⟫=0` for spacelike-separated supports, equivalently
-`supp Δ_m ⊆` the closed light cone (the `Δ_m` Bessel-kernel argument) — the genuine multi-month/multi-year
-frontier; for the discrete-boost-orbit instance (§6.1) it reduces to the single seed fact
-`Im⟪u₀, U₁(kτ)u₀⟫=0` for `k≠0`. (An optional generalization, not a gap, is to upgrade the localizable-test
-class from the Gaussian-and-the-like to all Schwartz functions via the `1/cosh` decay bound.) The
+The concrete mass-shell localization map `K` now has its *covariance* half machine-checked for the 1+1D
+massive scalar (§5½: boost-equivariance `(K(β_a f))(θ)=(K f)(θ+a)`, volume-preservation, the both-frequency
+reality relation, and the antisymmetry of the localized mass-shell symplectic form), together with an
+*`L²`-admissibility criterion* (a sharp `1/cosh` decay bound implies `L²` membership, all integrability
+discharged) that is non-vacuously inhabited by the Gaussian via the explicit Gaussian Fourier transform on
+the shell. **Two** inputs remain unformalized. (1) A **general `1/cosh` decay bound** for Schwartz /
+compactly-supported tests (one integration by parts against `p₀∂₀−p₁∂₁` on the mass shell): this is what
+upgrades `K` from "admitted on Gaussian-type tests" to "admitted on a genuine *local* test class," and is the
+honest prerequisite for stating `K` is `L²`-bounded as an operator. (2) The **Pauli–Jordan support theorem** —
+`Im⟪Kf,Kg⟫=0` for spacelike-separated supports, equivalently `supp Δ_m ⊆` the closed light cone (the `Δ_m`
+Bessel-kernel argument) — the genuine multi-month/multi-year frontier, which must be proven distributionally
+(the pointwise `∫ sin(m(t cosh θ − x sinh θ)) dθ` is *not* absolutely convergent); for the discrete-boost-orbit
+instance (§6.1) it reduces to the single seed fact `Im⟪u₀, U₁(kτ)u₀⟫=0` for `k≠0`. The
 bounded-operator lift of the Weyl apparatus to the completed Hilbert space (including the *joint* multi-mode
 effect, §6.3), the literal single-measure pushforward covariance (§5), a concrete non-degenerate boost-orbit
-realization (§6.1), and the full localization scaffolding (covariance + boundedness, §5½) are all now proven;
-everything downstream of the cited Pauli–Jordan support input is machine-checked and axiom-free.
+realization (§6.1), and the localization scaffolding (covariance + the `L²`-admissibility criterion, §5½) are
+all proven; everything downstream of the two cited inputs above is machine-checked and axiom-free.
 
 ---
 

@@ -238,11 +238,12 @@ theorem Kform_conj (m : ℝ) (f g : V → ℂ) :
   simp only [map_mul, Complex.conj_conj]
   ring
 
-/-- **The localized symplectic form is ANTISYMMETRIC**: `Im⟨Kf,Kg⟩ = −Im⟨Kg,Kf⟩`.  This is the defining
-    property of the Pauli–Jordan *commutator* form — it distinguishes the genuine symplectic structure from
-    the symmetric Wightman two-point function (soundness trap #6: Wightman ≠ Pauli–Jordan).  Holds for all
-    `f, g`; together with `minkowskiFourier_conj` (the both-frequency reality relation) it identifies the
-    localized form as the mass-shell Pauli–Jordan bilinear. -/
+/-- **The localized symplectic form is ANTISYMMETRIC**: `Im⟨Kf,Kg⟩ = −Im⟨Kg,Kf⟩`.  This is the
+    commutator-type structure (as opposed to the symmetric Wightman two-point function).  CAVEAT — do not
+    over-read it: `Im⟨·,·⟩` is antisymmetric for *any* complex inner product, so antisymmetry ALONE does not
+    identify this form as the Pauli–Jordan distribution.  It is the mass-shell symplectic form; its
+    identification with `Δ_m` is established only once the spacelike-support theorem is proven (and the
+    `1/cosh`-normalization/sign audited).  Holds for all `f, g`. -/
 theorem Kform_im_antisymm (m : ℝ) (f g : V → ℂ) :
     (Kform m f g).im = -(Kform m g f).im := by
   have h := congrArg Complex.im (Kform_conj m f g)
@@ -264,11 +265,12 @@ theorem Kform_im_self (m : ℝ) (f : V → ℂ) : (Kform m f f).im = 0 := by
 theorem Krep_zero (m : ℝ) : Krep m (fun _ => (0 : ℂ)) = 0 := by
   funext θ; simp [Krep]
 
-/-- **A localizable test function**: a spacetime test function `f` whose localized rapidity amplitude
-    `Krep m f` is square-integrable, i.e. lands in the one-particle space `L²(ℝ)`.  The `memLp` field is the
-    honest *domain* condition; that every Schwartz function satisfies it (via Fourier decay on the mass
-    shell) is the isolated analytic refinement — multi-week Schwartz–Fourier work — not yet formalized, kept
-    as a field so the L²-valued localization map and the Stage-2 interface proceed axiom-free. -/
+/-- **An `L²`-admissible test function**: a spacetime test function `f` whose localized rapidity amplitude
+    `Krep m f` is square-integrable, i.e. lands in the one-particle space `L²(ℝ)`.  NOTE — "admissible" here
+    is the analytic *domain* condition (`Krep m f ∈ L²`); it does NOT assert spacelike localization.  The
+    `memLp` field is that domain condition; that every Schwartz / compactly-supported test satisfies it (via
+    the general `1/cosh` Fourier-decay bound on the mass shell) is the isolated analytic refinement — not yet
+    formalized — kept as a field so the `L²`-valued map and the Stage-2 interface proceed axiom-free. -/
 structure LocalTest (m : ℝ) where
   /-- the spacetime test function. -/
   f : V → ℂ
@@ -484,9 +486,12 @@ theorem gaussian_Krep_memLp {m : ℝ} (hm : m ≠ 0) :
   rw [hsq]
   exact (integrable_exp_neg_cosh_two_mul (c := m ^ 2 / 2) (by positivity)).const_mul _
 
-/-- **A genuinely non-degenerate localizable test** (`m ≠ 0`): the Gaussian.  Unlike `trivialLocalTest`
-    (`f=0`), this is a real physical test function whose localization `K` lies in `L²(ℝ)` — so the
-    boundedness obligation of `LocalTest` is satisfied non-trivially, machine-checked end to end. -/
+/-- **A non-degenerate inhabitant of the admissible-test domain** (`m ≠ 0`): the Gaussian.  Unlike
+    `trivialLocalTest` (`f=0`), this is a nonzero test whose localization `K` lies in `L²(ℝ)`, so the
+    `MemLp` obligation of `LocalTest` is satisfied non-vacuously, machine-checked end to end.
+    CAVEAT — this witnesses that the admissible domain is non-empty and non-degenerate; it is NOT a
+    spacelike-localized observable: the Gaussian's support is all of spacetime.  It is an analytic
+    admissibility witness, not a local test in the AQFT sense. -/
 noncomputable def gaussianLocalTest {m : ℝ} (hm : m ≠ 0) : LocalTest m where
   f := gaussianTest
   memLp := gaussian_Krep_memLp hm
