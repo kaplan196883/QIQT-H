@@ -736,4 +736,36 @@ theorem Kform_im_eq_zero_of_spacelike (m : ℝ) (hm : m ≠ 0) {f g : V → ℂ}
   rw [h1]
   exact tendsto_nhds_unique htrunc hzero
 
+/-! ### 14. Interface bridge: the localized form is the `L²` inner product -/
+
+open scoped InnerProductSpace in
+/-- **The localized symplectic form is the `L²(ℝ)` inner product of the localizations.**
+`⟪K Lf, K Lg⟫_{L²} = Kform m Lf.f Lg.f`.  This bridges the integral-level form `Kform` (on which the
+Pauli–Jordan vanishing is proved) to the genuine Hilbert-space inner product `⟪K·, K·⟫` that the
+`SpacetimeLocalization` interface consumes.  Immediate from `L2.inner_def`, the `toLp` coercion, and the
+`ℂ`-inner-product convention `⟪x,y⟫ = conj x · y`. -/
+theorem Kform_eq_inner (m : ℝ) (Lf Lg : LocalTest m) :
+    ⟪K m Lf, K m Lg⟫_ℂ = Kform m Lf.f Lg.f := by
+  rw [MeasureTheory.L2.inner_def, Kform]
+  refine integral_congr_ae ?_
+  filter_upwards [Lf.memLp.coeFn_toLp, Lg.memLp.coeFn_toLp] with θ hθf hθg
+  rw [RCLike.inner_apply', show (K m Lf : ℝ → ℂ) θ = Krep m Lf.f θ from hθf,
+    show (K m Lg : ℝ → ℂ) θ = Krep m Lg.f θ from hθg]
+
+open scoped InnerProductSpace in
+/-- **★ Pauli–Jordan microcausality in `SpacetimeLocalization` form.**  `Im⟪K Lf, K Lg⟫_{L²} = 0` for
+real continuous compactly-supported localizable tests `Lf, Lg` with spacelike-separated supports (`m ≠ 0`,
+`hKint` convergence).  This is *literally* the `pauli_jordan` hypothesis field of the
+`SpacetimeLocalization` interface, now discharged for the concrete mass-shell localization `K` by combining
+`Kform_eq_inner` with the microcausality theorem `Kform_im_eq_zero_of_spacelike`. -/
+theorem K_im_inner_eq_zero_of_spacelike (m : ℝ) (hm : m ≠ 0) (Lf Lg : LocalTest m)
+    (hf : Continuous Lf.f) (hfc : HasCompactSupport Lf.f)
+    (hg : Continuous Lg.f) (hgc : HasCompactSupport Lg.f)
+    (hfr : ∀ x, (starRingEnd ℂ) (Lf.f x) = Lf.f x) (hgr : ∀ x, (starRingEnd ℂ) (Lg.f x) = Lg.f x)
+    (hsep : ∀ x ∈ tsupport Lf.f, ∀ y ∈ tsupport Lg.f, Spacelike (x - y))
+    (hKint : Integrable (fun θ => (starRingEnd ℂ) (Krep m Lf.f θ) * Krep m Lg.f θ)) :
+    Complex.im ⟪K m Lf, K m Lg⟫_ℂ = 0 := by
+  rw [Kform_eq_inner]
+  exact Kform_im_eq_zero_of_spacelike m hm hf hfc hg hgc hfr hgr hsep hKint
+
 end QIQTH.Fock.Localization

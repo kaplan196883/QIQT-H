@@ -728,6 +728,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ part (c) of the bilinear assembly (5c): the finite-R MIXED FUBINI.
 -- ∫_{−R}^R Im(conj(K f θ)·K g θ)dθ = ½∫∫ (f x·g y).re·(∫_{−R}^R sin(η)) — interval×product-measure swap
 -- (integral_integral_swap) valid at finite R (kernel bounded by integrable ‖f‖‖g‖ over the finite measure).
+#print axioms QIQTH.Fock.Localization.Kform_eq_inner
+-- expected: standard only — the interface bridge: ⟪K Lf, K Lg⟫_{L²} = Kform m Lf.f Lg.f (L2.inner_def +
+-- toLp coercion + RCLike.inner_apply').  Connects the integral-level form to the Hilbert inner product.
+#print axioms QIQTH.Fock.Localization.K_im_inner_eq_zero_of_spacelike
+-- expected: standard only — ★ Im⟪K Lf, K Lg⟫_{L²}=0 for spacelike-separated real compact-support tests:
+-- LITERALLY the SpacetimeLocalization.pauli_jordan hypothesis field, discharged for the concrete K.
 #print axioms QIQTH.Fock.Localization.Kform_im_eq_zero_of_spacelike
 -- expected: standard only — ★★★ THE PAULI–JORDAN MICROCAUSALITY OF K: Im⟨Kf,Kg⟩=(Kform m f g).im=0 for
 -- real continuous compact-support f,g with spacelike-separated supports (m≠0, hKint convergence).
