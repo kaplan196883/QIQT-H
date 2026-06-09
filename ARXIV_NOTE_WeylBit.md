@@ -223,7 +223,13 @@ isometry, specialized to the 1+1 Lorentz boost.
    microcausality as hypothesis fields) and prove that any such datum yields a `GeoCovariantModes`, hence the
    existence + boost-covariance + single-measure pushforward-invariance of `μ∞` over the spacelike-local
    field records (`SpacetimeLocalization.localized_typicality_pushforward_invariant`); a non-vacuity witness
-   shows the interface is inhabited. What remains is the construction of a *concrete, non-degenerate* `K`.
+   shows the interface is inhabited. We further give a *genuinely non-degenerate* continuum instance
+   (`boostOrbitModes`): the discrete boost orbit `u_n = U₁(nτ)u₀` on `L²(ℝ)`, where the Lorentz boost of
+   rapidity `τ` acts on the records by the **shift** `n ↦ n+1` (equivariance proven from the one-parameter
+   group law), so `(historyAct (·+1))_* μ∞ = μ∞` (`boostOrbit_typicality_pushforward_invariant`). For this
+   instance microcausality reduces to the *single* seed condition `Im⟪u₀, U₁(kτ)u₀⟫=0` (`k≠0`) — the residual
+   Pauli–Jordan input. What remains is establishing that seed condition for a genuinely spacelike
+   localization, i.e. the concrete `K`.
 
 2. **Single global measure vs. contextual family.** The global Kolmogorov measure `μ∞` is appropriate
    precisely because we fix a *commuting* (pairwise symplectically orthogonal, hence decoherent) mode
@@ -236,8 +242,11 @@ isometry, specialized to the 1+1 Lorentz boost.
    (`weylCLM`, via `ContinuousLinearMap.extend`): `W(u)` is a CCR-unitary continuous linear map with the
    genuine Hilbert-space two-point function `⟪Ω,W(u)Ω⟫=exp(−½⟪u,u⟫)`, and the single-mode Born weight is a
    bona fide vacuum expectation of a bounded positive effect with operator POVM completeness
-   `E(u,+1)+E(u,−1)=1` (`vacuumState_weylBitEffectCLM_true`, `weylBitEffectCLM_complete`). Lifting the full
-   *joint* multi-mode effect to the completed space is the only residual functional-analytic step.
+   `E(u,+1)+E(u,−1)=1` (`vacuumState_weylBitEffectCLM_true`, `weylBitEffectCLM_complete`). The full *joint*
+   multi-mode effect `E_σ=(∏A(uᵢ,σᵢ))*(∏A(uᵢ,σᵢ))` is likewise now a bounded *positive* operator on the
+   completed Hilbert space with `vacuumState(E_σ)=bornWeight u J σ` (`jointEffectCLM_isPositive`,
+   `vacuumState_jointEffectCLM`): the entire multi-mode Born law is realized by bounded Hilbert-space POVM
+   effects, not pre-completion gadgets.
 
 4. **Non-triviality of correlations.** The process is genuinely non-i.i.d. when `Re⟪u_i,u_j⟫≠0`: the
    pair correlations are determined by the quasifree Gram covariance, not a product law. We say the finite
@@ -286,19 +295,24 @@ statements claimed.
 | Hilbert-space two-point function | `weylCLM_vacuum_inner` |
 | Born weight = vacuum C\*-state expectation | `vacuumState_weylBitEffectCLM_true` |
 | operator POVM completeness on `Fock H` | `weylBitEffectCLM_complete` |
+| joint multi-mode effect, positive on `Fock H` | `jointEffectCLM_isPositive` |
+| joint Born weight = vacuum C\*-state expectation | `vacuumState_jointEffectCLM` |
+| concrete boost-orbit instance (`n↦n+1`) | `boostOrbitModes`, `boostOrbit_typicality_pushforward_invariant` |
+| sharp single-mode range `(1/2,1)` | `weylBitWeight_mem_Ioo_half` |
 
 ---
 
 ## 8. Outlook
 
 The single remaining research program is the concrete Poincaré-equivariant localization map `K` with
-Pauli–Jordan microcausality, which would instantiate the `SpacetimeLocalization` interface (§6) with a
-genuine, non-degenerate datum and thereby upgrade the present abelian Weyl-bit process to a fully
-spacetime-local free field. The bounded-operator lift of the Weyl apparatus to the completed Hilbert space
-(§6.3) and the literal single-measure pushforward covariance (§5) — previously listed here as next steps —
-are now proven; the only residual functional-analytic increment is lifting the *joint* multi-mode effect to
-the completed space. The construction of `K` (the Pauli–Jordan commutator-support theorem) is the genuine
-multi-year frontier.
+Pauli–Jordan microcausality. For the discrete-boost-orbit instance (§6.1) this reduces to one analytic fact —
+the seed symplectic-orthogonality `Im⟪u₀, U₁(kτ)u₀⟫=0` for `k≠0`, i.e. that the boost-translates of a single
+localized mode are mutually spacelike — which is exactly the Pauli–Jordan commutator-support statement. The
+bounded-operator lift of the Weyl apparatus to the completed Hilbert space (now including the *joint*
+multi-mode effect, §6.3), the literal single-measure pushforward covariance (§5), and a concrete
+non-degenerate boost-orbit realization (§6.1) — previously listed here as next steps — are all now proven.
+The construction of `K` (the Pauli–Jordan commutator-support theorem) is the genuine multi-year frontier;
+everything downstream of it is machine-checked.
 
 ---
 
