@@ -693,6 +693,16 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ THE OSCILLATORY KEYSTONE (GPT-5.5-pro's flagged wall): for 0≤a≤b,
 -- |∫_a^b sin(c·sinh u)du| ≤ 3/(|c|·cosh a) — the oscillatory integral is controlled by 1/cosh a despite
 -- the integrand never decaying.  Integration by parts (u=(c cosh)⁻¹, v=−cos(c sinh)) + the FTC remainder.
+#print axioms QIQTH.Fock.Localization.integral_sin_sinh_symm_zero
+-- expected: standard only — ∫_{−T}^{T} sin(c·sinh u)du = 0 (odd integrand, exact).
+#print axioms QIQTH.Fock.Localization.abs_integral_shifted_le
+-- expected: standard only — the shifted-tail bound |∫_{R−φ}^{R+φ}| ≤ 3/(|c|·cosh(R−|φ|)).
+#print axioms QIQTH.Fock.Localization.tendsto_inv_cosh_atTop
+-- expected: standard only — (cosh ·)⁻¹ → 0 at +∞.
+#print axioms QIQTH.Fock.Localization.pauliJordan_spacelike_tendsto_zero
+-- expected: standard only — ★★★ THE SPACELIKE VANISHING OF Δ_m: for spacelike z,
+-- lim_R ∫_{−R}^{R} sin(η(p_m θ,z))dθ = 0.  The heart of microcausality, pointwise, machine-checked:
+-- reparametrization (odd kernel) + symmetric cancellation + the IBP keystone tail bound, squeezed to 0.
 
 -- A2: Goldstein-Struyve Step 1 — concrete sub-lemma proofs
 #print axioms QIQTH.GoldsteinStruyveStep1.permutation_conj_matrixUnit

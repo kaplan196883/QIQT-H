@@ -262,4 +262,104 @@ theorem abs_integral_sin_sinh_le (c : ℝ) {a b : ℝ} (ha : 0 ≤ a) (hab : a �
         have : (0:ℝ) ≤ (Real.cosh b)⁻¹ := by positivity
         nlinarith [mul_inv_le_one (a := |c|), inv_nonneg.mpr hca.le, inv_nonneg.mpr hcabs.le, this]
 
+/-! ### 6. The general-spacelike pointwise vanishing of the Pauli–Jordan kernel -/
+
+/-- The symmetric integral of the odd kernel vanishes exactly: `∫_{−T}^{T} sin(c·sinh u) du = 0`. -/
+theorem integral_sin_sinh_symm_zero (c T : ℝ) :
+    (∫ u in (-T)..T, Real.sin (c * Real.sinh u)) = 0 := by
+  have hodd : (fun u => Real.sin (c * Real.sinh (-u))) = fun u => -Real.sin (c * Real.sinh u) := by
+    funext u; rw [Real.sinh_neg, mul_neg, Real.sin_neg]
+  have h1 : (∫ u in (-T)..T, Real.sin (c * Real.sinh (-u)))
+      = ∫ u in (-T)..T, Real.sin (c * Real.sinh u) := by
+    have h := intervalIntegral.integral_comp_neg (a := -T) (b := T)
+      (fun u => Real.sin (c * Real.sinh u))
+    simp only [neg_neg] at h
+    exact h
+  have h2 : (∫ u in (-T)..T, Real.sin (c * Real.sinh (-u)))
+      = -∫ u in (-T)..T, Real.sin (c * Real.sinh u) := by
+    rw [hodd, intervalIntegral.integral_neg]
+  linarith [h1.symm.trans h2]
+
+/-- The shifted-endpoint oscillatory bound (the remainder after the symmetric part cancels):
+`|∫_{R−φ}^{R+φ} sin(c·sinh u) du| ≤ 3/(|c|·cosh(R−|φ|))` for `|φ| ≤ R`. -/
+theorem abs_integral_shifted_le (c φ : ℝ) {R : ℝ} (hR : |φ| ≤ R) :
+    |∫ u in (R - φ)..(R + φ), Real.sin (c * Real.sinh u)| ≤ 3 / (|c| * Real.cosh (R - |φ|)) := by
+  rcases le_total φ 0 with hφ | hφ
+  · rw [abs_of_nonpos hφ, sub_neg_eq_add]
+    have ha : 0 ≤ R + φ := by rw [abs_of_nonpos hφ] at hR; linarith
+    rw [intervalIntegral.integral_symm, abs_neg]
+    exact abs_integral_sin_sinh_le c ha (by linarith)
+  · rw [abs_of_nonneg hφ]
+    have ha : 0 ≤ R - φ := by rw [abs_of_nonneg hφ] at hR; linarith
+    exact abs_integral_sin_sinh_le c ha (by linarith)
+
+/-- `(cosh ·)⁻¹ → 0` at `+∞` (cosh dominates `exp/2`). -/
+theorem tendsto_inv_cosh_atTop :
+    Filter.Tendsto (fun t : ℝ => (Real.cosh t)⁻¹) Filter.atTop (nhds 0) := by
+  have hcoshtop : Filter.Tendsto Real.cosh Filter.atTop Filter.atTop := by
+    refine Filter.tendsto_atTop_mono (fun x => ?_)
+      (Real.tendsto_exp_atTop.atTop_div_const (by norm_num : (0:ℝ) < 2))
+    rw [Real.cosh_eq]
+    have := (Real.exp_pos (-x)).le
+    linarith
+  exact tendsto_inv_atTop_zero.comp hcoshtop
+
+/-- **The Pauli–Jordan kernel vanishes for spacelike separations** (pointwise, as the symmetric
+improper integral).  For a spacelike `z`,
+`lim_{R→∞} ∫_{−R}^{R} sin(η(p_m θ, z)) dθ = 0`.
+This is the genuine spacelike vanishing of `Δ_m` — the heart of microcausality.  Proof: the
+reparametrization (`minkowskiDot_massShell_spacelike`) makes the integrand `sin(c·sinh(θ−φ))`; after the
+shift `u = θ−φ` the symmetric part `∫_{−(R−φ)}^{R−φ}` is exactly `0` (odd, `integral_sin_sinh_symm_zero`),
+and the remaining length-`2|φ|` tail is bounded by `3/(|c|·cosh(R−|φ|)) → 0` (`abs_integral_shifted_le`,
+the IBP keystone), so the whole integral is squeezed to `0`. -/
+theorem pauliJordan_spacelike_tendsto_zero (m : ℝ) {z : V} (hz : Spacelike z) :
+    Filter.Tendsto (fun R => ∫ θ in (-R)..R, Real.sin (minkowskiDot (massShell m θ) z))
+      Filter.atTop (nhds 0) := by
+  obtain ⟨c, φ, hcφ⟩ := minkowskiDot_massShell_spacelike m hz
+  have hcont : ∀ a b : ℝ, IntervalIntegrable (fun u => Real.sin (c * Real.sinh u)) volume a b :=
+    fun a b => (Real.continuous_sin.comp
+      (continuous_const.mul Real.continuous_sinh)).intervalIntegrable a b
+  -- rewrite the integral as a shifted oscillatory integral
+  have hrw : ∀ R, (∫ θ in (-R)..R, Real.sin (minkowskiDot (massShell m θ) z))
+      = ∫ u in (-R - φ)..(R - φ), Real.sin (c * Real.sinh u) := by
+    intro R
+    rw [show (fun θ => Real.sin (minkowskiDot (massShell m θ) z))
+        = (fun θ => Real.sin (c * Real.sinh (θ - φ))) from funext fun θ => by rw [hcφ θ]]
+    rw [intervalIntegral.integral_comp_sub_right (fun u => Real.sin (c * Real.sinh u)) φ]
+  -- the uniform bound for R ≥ |φ|
+  have hbound : ∀ R, |φ| ≤ R →
+      |∫ u in (-R - φ)..(R - φ), Real.sin (c * Real.sinh u)| ≤ 3 / (|c| * Real.cosh (R - |φ|)) := by
+    intro R hR
+    have hneg : (∫ u in (-R - φ)..(-(R - φ)), Real.sin (c * Real.sinh u))
+        = -∫ u in (R - φ)..(R + φ), Real.sin (c * Real.sinh u) := by
+      have h := intervalIntegral.integral_comp_neg (a := R - φ) (b := R + φ)
+        (fun u => Real.sin (c * Real.sinh u))
+      simp only [Real.sinh_neg, mul_neg, Real.sin_neg, intervalIntegral.integral_neg] at h
+      rw [show (-R - φ : ℝ) = -(R + φ) by ring]
+      exact h.symm
+    rw [← intervalIntegral.integral_add_adjacent_intervals (hcont (-R - φ) (-(R - φ)))
+        (hcont (-(R - φ)) (R - φ)),
+      integral_sin_sinh_symm_zero c (R - φ), add_zero, hneg, abs_neg]
+    exact abs_integral_shifted_le c φ hR
+  -- the bound tends to 0
+  have hsub : Filter.Tendsto (fun R : ℝ => R - |φ|) Filter.atTop Filter.atTop := by
+    simpa [sub_eq_add_neg] using
+      Filter.tendsto_atTop_add_const_right Filter.atTop (-|φ|) Filter.tendsto_id
+  have hBtop : Filter.Tendsto (fun R => 3 / (|c| * Real.cosh (R - |φ|))) Filter.atTop (nhds 0) := by
+    have hc1 : Filter.Tendsto (fun R => (Real.cosh (R - |φ|))⁻¹) Filter.atTop (nhds 0) :=
+      tendsto_inv_cosh_atTop.comp hsub
+    have h2 := hc1.const_mul (3 * |c|⁻¹)
+    rw [mul_zero] at h2
+    refine h2.congr (fun R => ?_)
+    rw [div_eq_mul_inv, mul_inv]; ring
+  -- squeeze
+  simp only [hrw]
+  have hBneg : Filter.Tendsto (fun R => -(3 / (|c| * Real.cosh (R - |φ|)))) Filter.atTop (nhds 0) := by
+    simpa using hBtop.neg
+  refine tendsto_of_tendsto_of_tendsto_of_le_of_le' hBneg hBtop ?_ ?_
+  · filter_upwards [Filter.eventually_ge_atTop |φ|] with R hR
+    exact (abs_le.mp (hbound R hR)).1
+  · filter_upwards [Filter.eventually_ge_atTop |φ|] with R hR
+    exact (abs_le.mp (hbound R hR)).2
+
 end QIQTH.Fock.Localization
