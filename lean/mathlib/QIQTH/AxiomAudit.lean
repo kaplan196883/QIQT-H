@@ -1836,6 +1836,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — rpow_transpose: (A^t)ᵀ=(Aᵀ)^t (transpose = entrywise conj is an
 -- ℝ-star-alg-aut, map_cfc). trace_rpow_concave: ★★ the NO-TRANSPOSE Lieb (A,B)↦Tr(A^{1-t}·B^t)
 -- jointly concave — Lieb at K=1 with the Bᵀ removed via rpow_transpose; THE relative-entropy input.
+#print axioms QIQTH.Entropy.hasDerivAt_rpow_zero
+-- expected: standard only — d/dt(t↦B^t)|₀ = log B (matLog), for PosDef B. Differentiate the
+-- eigendecomposition B^t=U·diag(μᵢ^t)·Uᴴ (eigenvectors constant) → scalar deriv d/dt μ^t=μ^t log μ.
+-- Needs `open scoped Matrix.Norms.Frobenius` (Matrix has no canonical norm; Frobenius = a consistent
+-- NormedRing+NormedAlgebra so matrix-valued HasDerivAt composition + const_mul have aligned instances).
+-- First step of the relative-entropy joint convexity (Carlen §6.3): D = lim_{t→0}(Tr A−Tr(A^{1-t}Bᵗ))/t.
 -- expected: standard only — ★★★ THE LIEB INPUT: JOINT CONCAVITY of (A,B)↦A^{1-t}⊗B^t for t∈[0,1].
 -- wgmean_kronecker: wgmean t (A⊗I)(I⊗B) = A^{1-t}⊗B^t (commuting tensor weighted mean, via rpow_kronecker +
 -- final factor √A·(A⁻¹)^t·√A=A^{1-t} = sqrt_mul_rpow_inv_mul_sqrt with rpow_inv_eq (A⁻¹)^t=A^{-t}). Then
