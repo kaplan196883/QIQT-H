@@ -8,12 +8,13 @@
   dyadic weights, which `matrix_le_of_tendsto` lifts to all `t` — the continuity route to Lieb.
 -/
 import QIQTH.Entropy.GeometricMean
+import QIQTH.Entropy.OrderLimit
 import Mathlib.Topology.Instances.Matrix
 import Mathlib.Analysis.SpecialFunctions.Pow.Continuity
 
 namespace QIQTH.Entropy
 
-open Matrix CStarMatrix
+open Matrix CStarMatrix Filter
 open scoped MatrixOrder ComplexOrder Topology
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
@@ -156,7 +157,7 @@ lemma continuous_wgmean {A B : Matrix n n ℂ} (hA : A.PosDef) (hB : B.PosDef) :
 /-- `A #ₜ B` is jointly superadditive (concave) at the weight `t` — the two-point inequality on
     positive-definite arguments. -/
 def WgSuperadd (t : ℝ) : Prop :=
-  ∀ {A₀ A₁ B₀ B₁ : Matrix n n ℂ}, A₀.PosDef → A₁.PosDef → B₀.PosDef → B₁.PosDef →
+  ∀ (A₀ A₁ B₀ B₁ : Matrix n n ℂ), A₀.PosDef → A₁.PosDef → B₀.PosDef → B₁.PosDef →
     wgmean t A₀ B₀ + wgmean t A₁ B₁ ≤ wgmean t (A₀ + A₁) (B₀ + B₁)
 
 /-- Concavity at the left endpoint `t = 0` (where `A #_0 B = A`). -/
@@ -185,6 +186,66 @@ theorem wgSuperadd_midpoint {s t : ℝ} (hs : WgSuperadd (n := n) s) (ht : WgSup
   exact gmean_mono ((wgmean_posDef hA₀ hB₀ s).add (wgmean_posDef hA₁ hB₁ s))
     (wgmean_posDef (hA₀.add hA₁) (hB₀.add hB₁) s)
     (add_nonneg (wgmean_nonneg t) (wgmean_nonneg t))
-    (hs hA₀ hA₁ hB₀ hB₁) (ht hA₀ hA₁ hB₀ hB₁)
+    (hs A₀ A₁ B₀ B₁ hA₀ hA₁ hB₀ hB₁) (ht A₀ A₁ B₀ B₁ hA₀ hA₁ hB₀ hB₁)
+
+/-- **Closedness** — concavity is preserved under limits of the weight: if `WgSuperadd (u k)` for all
+    `k` and `u k → t`, then `WgSuperadd t`.  (Continuity of `t↦A#ₜB` + limit-stability of `≤`.) -/
+theorem wgSuperadd_of_tendsto {u : ℕ → ℝ} {t : ℝ} (hu : Tendsto u atTop (𝓝 t))
+    (h : ∀ k, WgSuperadd (n := n) (u k)) : WgSuperadd (n := n) t := by
+  intro A₀ A₁ B₀ B₁ hA₀ hA₁ hB₀ hB₁
+  exact add_le_of_tendsto (((continuous_wgmean hA₀ hB₀).tendsto t).comp hu)
+    (((continuous_wgmean hA₁ hB₁).tendsto t).comp hu)
+    (((continuous_wgmean (hA₀.add hA₁) (hB₀.add hB₁)).tendsto t).comp hu)
+    (fun k => h k A₀ A₁ B₀ B₁ hA₀ hA₁ hB₀ hB₁)
+
+/-- Joint concavity holds at **every dyadic weight** `k/2ⁿ ∈ [0,1]`, by induction on `n` (each odd
+    numerator is the midpoint of two level-`n` dyadics — `wgSuperadd_midpoint`). -/
+theorem wgSuperadd_dyadic : ∀ (m k : ℕ), k ≤ 2 ^ m → WgSuperadd (n := n) ((k : ℝ) / 2 ^ m) := by
+  intro m
+  induction m with
+  | zero =>
+    intro k hk
+    simp only [pow_zero] at hk
+    interval_cases k
+    · simpa using wgSuperadd_zero (n := n)
+    · simpa using wgSuperadd_one (n := n)
+  | succ p ih =>
+    intro k hk
+    have hp : (2 : ℝ) ^ (p + 1) = 2 ^ p * 2 := by rw [pow_succ]
+    obtain ⟨j, rfl | rfl⟩ := Nat.even_or_odd' k
+    · have hj : j ≤ 2 ^ p := by have := hk; rw [pow_succ] at this; omega
+      have he : ((2 * j : ℕ) : ℝ) / 2 ^ (p + 1) = (j : ℝ) / 2 ^ p := by
+        rw [hp]; push_cast; ring
+      rw [he]; exact ih j hj
+    · have hj : j ≤ 2 ^ p := by have := hk; rw [pow_succ] at this; omega
+      have hj1 : j + 1 ≤ 2 ^ p := by have := hk; rw [pow_succ] at this; omega
+      have ho : ((2 * j + 1 : ℕ) : ℝ) / 2 ^ (p + 1)
+          = ((j : ℝ) / 2 ^ p + ((j + 1 : ℕ) : ℝ) / 2 ^ p) / 2 := by
+        rw [hp]; push_cast; ring
+      rw [ho]; exact wgSuperadd_midpoint (ih j hj) (ih (j + 1) hj1)
+
+/-- **Joint concavity of the weighted geometric mean at EVERY `t ∈ [0,1]`** (Ando) — the conclusion of
+    the continuity argument.  The dyadic approximations `⌊t·2ʲ⌋/2ʲ → t` are each `WgSuperadd`
+    (`wgSuperadd_dyadic`), and concavity is closed under limits (`wgSuperadd_of_tendsto`). -/
+theorem wgSuperadd_mem_Icc {t : ℝ} (ht0 : 0 ≤ t) (ht1 : t ≤ 1) : WgSuperadd (n := n) t := by
+  refine wgSuperadd_of_tendsto (u := fun j => (⌊t * 2 ^ j⌋₊ : ℝ) / 2 ^ j) ?_ ?_
+  · have hpow : Tendsto (fun j : ℕ => ((1 : ℝ) / 2) ^ j) atTop (𝓝 0) :=
+      tendsto_pow_atTop_nhds_zero_of_lt_one (by norm_num) (by norm_num)
+    refine tendsto_of_tendsto_of_tendsto_of_le_of_le
+      (by simpa using tendsto_const_nhds.sub hpow) tendsto_const_nhds (fun j => ?_) (fun j => ?_)
+    · have h2 : (0 : ℝ) < 2 ^ j := by positivity
+      rw [le_div_iff₀ h2]
+      have hlt := Nat.lt_floor_add_one (t * 2 ^ j)
+      have hone : ((2 : ℝ) ^ j)⁻¹ * 2 ^ j = 1 := inv_mul_cancel₀ (by positivity)
+      rw [sub_mul, hone]
+      linarith [hlt]
+    · have h2 : (0 : ℝ) < 2 ^ j := by positivity
+      rw [div_le_iff₀ h2]
+      exact Nat.floor_le (by positivity)
+  · intro j
+    refine wgSuperadd_dyadic j ⌊t * 2 ^ j⌋₊ ?_
+    calc ⌊t * 2 ^ j⌋₊
+        ≤ ⌊((2 : ℝ) ^ j)⌋₊ := Nat.floor_le_floor (mul_le_of_le_one_left (by positivity) ht1)
+      _ = 2 ^ j := by rw [show ((2 : ℝ) ^ j) = ((2 ^ j : ℕ) : ℝ) by push_cast; ring, Nat.floor_natCast]
 
 end QIQTH.Entropy

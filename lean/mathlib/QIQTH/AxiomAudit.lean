@@ -1839,6 +1839,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Entropy.wgSuperadd_zero
 #print axioms QIQTH.Entropy.wgSuperadd_one
 #print axioms QIQTH.Entropy.wgSuperadd_midpoint
+#print axioms QIQTH.Entropy.wgSuperadd_of_tendsto
+#print axioms QIQTH.Entropy.wgSuperadd_dyadic
+#print axioms QIQTH.Entropy.wgSuperadd_mem_Icc
+-- expected: standard only — ★★★ CONTINUITY ARGUMENT COMPLETE: joint concavity of the weighted geometric
+-- mean A#ₜB at EVERY t∈[0,1] (wgSuperadd_mem_Icc). wgSuperadd_of_tendsto (closed under limits, via
+-- continuous_wgmean + matrix_le_of_tendsto) + wgSuperadd_dyadic (concavity at all dyadics k/2ⁿ by bisection
+-- induction) + density of dyadics (⌊t·2ʲ⌋/2ʲ→t). This is Ando's full result A#ₜB jointly concave ∀t — the
+-- last structural input to Lieb's concavity theorem (Carlen §6.1).
 -- expected: standard only — BISECTION to joint concavity at all dyadic weights. WgSuperadd t = the two-point
 -- superadditivity of A#ₜB; wgSuperadd_zero/one (endpoints A#_0B=A, A#_1B=B), wgSuperadd_midpoint (concavity
 -- at s,t ⟹ at (s+t)/2, via wgmean_midpoint + gmean_superadditive + gmean_mono + wgmean_posDef). Repeated
