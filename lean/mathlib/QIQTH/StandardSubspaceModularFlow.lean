@@ -171,4 +171,96 @@ theorem modUnitary_unitary (S : StandardSubspace H) (t : ℝ) :
   · rw [ContinuousLinearMap.star_eq_adjoint, modUnitary_adjoint, ← modUnitary_add,
         add_neg_cancel, modUnitary_zero]
 
+/-! ### Strong continuity of the modular flow `t ↦ U_t ξ`
+
+Strong (not norm — that fails: `‖u_t − u_s‖_∞ ↛ 0` near the endpoints) continuity, via the sequential
+criterion and the bounded-Borel-FC dominated-convergence engine
+(`tendsto_inner_boundedFC_of_dominated`): `u_t(r) → 1` pointwise as `t → 0`, all bounded by `1`. -/
+
+/-- `U_t` is an isometry (`‖U_t ξ‖ = ‖ξ‖`), from unitarity. -/
+theorem modUnitary_norm (S : StandardSubspace H) (t : ℝ) (ξ : H) :
+    ‖modUnitary S t ξ‖ = ‖ξ‖ := by
+  have hu := (Unitary.mem_iff.mp (modUnitary_unitary S t)).1
+  have key : inner ℂ (modUnitary S t ξ) (modUnitary S t ξ) = inner ℂ ξ ξ := by
+    rw [← ContinuousLinearMap.adjoint_inner_right (modUnitary S t) ξ (modUnitary S t ξ),
+        ← ContinuousLinearMap.mul_apply, ← ContinuousLinearMap.star_eq_adjoint, hu,
+        ContinuousLinearMap.one_apply]
+  have hre : ‖modUnitary S t ξ‖ ^ 2 = ‖ξ‖ ^ 2 := by
+    rw [← inner_self_eq_norm_sq (𝕜 := ℂ), ← inner_self_eq_norm_sq (𝕜 := ℂ), key]
+  rw [← Real.sqrt_sq (norm_nonneg (modUnitary S t ξ)), ← Real.sqrt_sq (norm_nonneg ξ), hre]
+
+/-- **Inner cocycle identity:** `⟪U_a ξ, U_b ξ⟫ = ⟪ξ, U_{b−a} ξ⟫`. -/
+theorem inner_modUnitary_modUnitary (S : StandardSubspace H) (a b : ℝ) (ξ : H) :
+    inner ℂ (modUnitary S a ξ) (modUnitary S b ξ) = inner ℂ ξ (modUnitary S (b - a) ξ) := by
+  have hop : ContinuousLinearMap.adjoint (modUnitary S a) * modUnitary S b
+      = modUnitary S (b - a) := by
+    rw [modUnitary_adjoint, ← modUnitary_add, neg_add_eq_sub]
+  rw [← ContinuousLinearMap.adjoint_inner_right (modUnitary S a) ξ (modUnitary S b ξ),
+      ← ContinuousLinearMap.mul_apply, hop]
+
+/-- `t ↦ u_t(r)` is continuous (for each fixed `r`) — the pointwise input to strong continuity. -/
+theorem modChar_continuous (r : ℝ) : Continuous (fun t => modChar t r) := by
+  unfold modChar
+  by_cases h : r ∈ Set.Ioo (0 : ℝ) 2
+  · simp only [Set.piecewise_eq_of_mem _ _ _ h]
+    exact Complex.continuous_exp.comp
+      ((continuous_const.mul Complex.continuous_ofReal).mul continuous_const)
+  · simp only [Set.piecewise_eq_of_notMem _ _ _ h]
+    exact continuous_const
+
+/-- **★ Strong continuity:** `t ↦ U_t ξ` is continuous — so `Δ^{it}` is a STRONGLY CONTINUOUS
+    one-parameter unitary group (the full textbook definition of the modular flow; note norm
+    continuity FAILS near the spectral endpoints).  Proof: sequential criterion + the bounded-Borel-FC
+    dominated-convergence engine, `‖U_{t_n}ξ − U_aξ‖² = 2‖ξ‖² − 2·Re⟪ξ, U_{a−t_n}ξ⟫ → 0` since
+    `u_{a−t_n} → 1` pointwise (bounded by 1). -/
+theorem modUnitary_stronglyContinuous (S : StandardSubspace H) (ξ : H) :
+    Continuous (fun t => modUnitary S t ξ) := by
+  rw [continuous_iff_seqContinuous]
+  intro u a hu
+  rw [tendsto_iff_norm_sub_tendsto_zero]
+  have ha : IsSelfAdjoint (rvdRC S) := rvdRC_isSelfAdjoint S
+  set P := PVM_of_selfAdjoint (rvdRC S) ha with hP
+  -- pointwise convergence `u_{a−u n} → 1`
+  have hptw : ∀ ω, Filter.Tendsto (fun n => modSpecFun S (a - u n) ω) Filter.atTop
+      (nhds ((fun _ => (1 : ℂ)) ω)) := by
+    intro ω
+    have h0 : Filter.Tendsto (fun n => a - u n) Filter.atTop (nhds 0) := by
+      simpa using hu.const_sub a
+    have hc := ((modChar_continuous ω.val).tendsto 0).comp h0
+    simpa [modSpecFun, modChar_zero] using hc
+  -- inner products converge: `⟪ξ, U_{a−u n}ξ⟫ → ⟪ξ, ξ⟫`
+  have hinner : Filter.Tendsto (fun n => inner ℂ ξ (modUnitary S (a - u n) ξ)) Filter.atTop
+      (nhds (inner ℂ ξ ξ)) := by
+    have heng := P.tendsto_inner_boundedFC_of_dominated (f := fun n => modSpecFun S (a - u n))
+      (g := fun _ => (1 : ℂ)) zero_le_one (fun n => modSpecFun_measurable S (a - u n))
+      measurable_const (fun n ω => modSpecFun_norm_le S (a - u n) ω)
+      (fun ω => le_of_eq norm_one) hptw ξ ξ
+    rw [P.inner_boundedFC, P.bilinDiag_const, one_mul] at heng
+    exact heng
+  -- the squared norm
+  have hform : ∀ n, ‖modUnitary S (u n) ξ - modUnitary S a ξ‖ ^ 2
+      = 2 * ‖ξ‖ ^ 2 - 2 * (inner ℂ ξ (modUnitary S (a - u n) ξ)).re := by
+    intro n
+    rw [norm_sub_sq_real, modUnitary_norm, modUnitary_norm]
+    have hib : (inner ℝ (modUnitary S (u n) ξ) (modUnitary S a ξ))
+        = (inner ℂ ξ (modUnitary S (a - u n) ξ)).re := by
+      show (inner ℂ (modUnitary S (u n) ξ) (modUnitary S a ξ)).re = _
+      rw [inner_modUnitary_modUnitary]
+    rw [hib]; ring
+  -- ‖·‖² → 0, then ‖·‖ → 0
+  have hself : (inner ℂ ξ ξ).re = ‖ξ‖ ^ 2 := inner_self_eq_norm_sq (𝕜 := ℂ) ξ
+  have hsq : Filter.Tendsto (fun n => ‖modUnitary S (u n) ξ - modUnitary S a ξ‖ ^ 2)
+      Filter.atTop (nhds 0) := by
+    have hg : Filter.Tendsto (fun n => (inner ℂ ξ (modUnitary S (a - u n) ξ)).re)
+        Filter.atTop (nhds ((inner ℂ ξ ξ).re)) := (Complex.continuous_re.tendsto _).comp hinner
+    have hlim : Filter.Tendsto
+        (fun n => 2 * ‖ξ‖ ^ 2 - 2 * (inner ℂ ξ (modUnitary S (a - u n) ξ)).re)
+        Filter.atTop (nhds (2 * ‖ξ‖ ^ 2 - 2 * (inner ℂ ξ ξ).re)) :=
+      (hg.const_mul 2).const_sub (2 * ‖ξ‖ ^ 2)
+    rw [hself, show (2 * ‖ξ‖ ^ 2 - 2 * ‖ξ‖ ^ 2) = 0 by ring] at hlim
+    simpa only [hform] using hlim
+  have hfin := (Real.continuous_sqrt.tendsto 0).comp hsq
+  simp only [Function.comp, Real.sqrt_zero] at hfin
+  exact Filter.Tendsto.congr (fun n => Real.sqrt_sq (norm_nonneg _)) hfin
+
 end QIQTH.StandardSubspaceModular

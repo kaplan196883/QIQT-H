@@ -1447,6 +1447,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.modUnitary_unitary
 -- expected: standard only — ★ U_t is UNITARY: the continuum one-parameter modular unitary group
 -- Δ^{it} of a standard subspace (one-particle level; NOT yet second-quantized free-field Γ(Δ^{it})).
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_norm
+-- expected: standard only — U_t is an isometry (‖U_t ξ‖=‖ξ‖).
+#print axioms QIQTH.StandardSubspaceModular.inner_modUnitary_modUnitary
+-- expected: standard only — cocycle inner identity ⟪U_a ξ, U_b ξ⟫=⟪ξ, U_{b−a} ξ⟫.
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_stronglyContinuous
+-- expected: standard only — ★★ STRONG continuity t↦U_t ξ. So Δ^{it} is a STRONGLY CONTINUOUS
+-- one-parameter unitary group — the full textbook modular flow (norm continuity fails near endpoints;
+-- proved via sequential criterion + bounded-Borel-FC dominated convergence).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
