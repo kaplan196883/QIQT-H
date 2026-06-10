@@ -97,4 +97,17 @@ theorem star_inv_subadditive {A₀ A₁ : Matrix m m ℂ} (hA₀ : A₀.PosDef) 
           from by rw [Matrix.fromBlocks_add, Matrix.conjTranspose_add]] at hsum
   exact star_inv_le_of_fromBlocks_posSemidef hA hblock
 
+/-- **Parallel-sum / harmonic-mean superadditivity** (Carlen §3.2), a direct corollary of Ando: for
+    positive-definite `A₀,A₁,B₀,B₁`,
+    `(B₀+B₁)⋆((A₀+A₁)+(B₀+B₁))⁻¹(B₀+B₁) ≤ B₀⋆(A₀+B₀)⁻¹B₀ + B₁⋆(A₁+B₁)⁻¹B₁`.
+    Apply `star_inv_subadditive` to `(A₀+B₀, B₀)` and `(A₁+B₁, B₁)`.  This expresses the joint convexity
+    of `(A,B) ↦ B⋆(A+B)⁻¹B`, equivalent to **joint concavity of the operator harmonic mean**
+    `M₋₁(A,B) = 2B − 2B(A+B)⁻¹B`. -/
+theorem parallel_sum_subadditive {A₀ A₁ B₀ B₁ : Matrix m m ℂ}
+    (hA₀ : A₀.PosDef) (hA₁ : A₁.PosDef) (hB₀ : B₀.PosDef) (hB₁ : B₁.PosDef) :
+    (B₀ + B₁)ᴴ * ((A₀ + A₁) + (B₀ + B₁))⁻¹ * (B₀ + B₁)
+      ≤ B₀ᴴ * (A₀ + B₀)⁻¹ * B₀ + B₁ᴴ * (A₁ + B₁)⁻¹ * B₁ := by
+  have h := star_inv_subadditive (hA₀.add hB₀) (hA₁.add hB₁) B₀ B₁
+  rwa [show (A₀ + B₀) + (A₁ + B₁) = (A₀ + A₁) + (B₀ + B₁) from by abel] at h
+
 end QIQTH.Entropy

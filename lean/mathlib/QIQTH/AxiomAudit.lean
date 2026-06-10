@@ -1774,5 +1774,9 @@ namespace QIQTH.AxiomAudit
 -- (B₀+B₁)⋆(A₀+A₁)⁻¹(B₀+B₁) ≤ B₀⋆A₀⁻¹B₀ + B₁⋆A₁⁻¹B₁ for PosDef A₀,A₁. Sum of two PSD Schur blocks is the
 -- combined block (fromBlocks_add), PSD; minimality (A₀+A₁ PosDef) gives the inequality. The key §3 result
 -- feeding the operator-mean concavities and Lieb's concavity theorem.
+#print axioms QIQTH.Entropy.parallel_sum_subadditive
+-- expected: standard only — operator HARMONIC-MEAN concavity (Carlen §3.2): (A,B)↦B⋆(A+B)⁻¹B is jointly
+-- convex (⟺ M₋₁(A,B)=2B−2B(A+B)⁻¹B concave), a direct corollary of Ando (star_inv_subadditive applied to
+-- (A₀+B₀,B₀),(A₁+B₁,B₁)). [The geometric-mean concavity / Lieb path needs fractional powers — not in Mathlib.]
 
 end QIQTH.AxiomAudit
