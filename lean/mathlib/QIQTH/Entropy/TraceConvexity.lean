@@ -83,4 +83,36 @@ theorem peierls_inequality {B : Matrix n n ℂ} (hB : B.IsHermitian) {f : ℝ �
     _ = ∑ k, f (hB.eigenvalues k) := by
         exact Finset.sum_congr rfl fun k _ => by rw [eigenvectorUnitary_col_sum hB k, one_mul]
 
+/-! ### Unitary-conjugation invariance of eigenvalue sums (foundation for 2.10–2.12 and DPI)
+
+Conjugate Hermitian matrices `A` and `V⋆AV` (V unitary) are similar, hence have the same characteristic
+polynomial (`charpoly_units_conj'`) and therefore the same eigenvalue multiset
+(`roots_charpoly_eq_eigenvalues`).  So `∑ᵢ f(λᵢ)` is invariant under unitary conjugation — equivalently
+`Tr(cfc f (V⋆AV)) = Tr(cfc f A)`. -/
+
+/-- **Eigenvalue sums are unitary-conjugation invariant**: for Hermitian `A`, unitary `V`
+    (`star V * V = 1`, `V * star V = 1`), and the Hermitian conjugate `V⋆AV`,
+    `∑ᵢ f((V⋆AV).λᵢ) = ∑ᵢ f(A.λᵢ)`.  Via equal characteristic polynomials ⇒ equal eigenvalue multisets. -/
+theorem eigenvalues_sum_conj_invariant {A V : Matrix n n ℂ} (hA : A.IsHermitian)
+    (hVl : star V * V = 1) (hVr : V * star V = 1)
+    (h2 : (star V * A * V).IsHermitian) (f : ℝ → ℝ) :
+    ∑ i, f (h2.eigenvalues i) = ∑ i, f (hA.eigenvalues i) := by
+  classical
+  have hchar : (star V * A * V).charpoly = A.charpoly := by
+    rw [Matrix.mul_assoc, Matrix.charpoly_mul_comm, Matrix.mul_assoc, hVr, mul_one]
+  have hroots : Multiset.map ((RCLike.ofReal : ℝ → ℂ) ∘ h2.eigenvalues) Finset.univ.val
+      = Multiset.map ((RCLike.ofReal : ℝ → ℂ) ∘ hA.eigenvalues) Finset.univ.val := by
+    rw [← h2.roots_charpoly_eq_eigenvalues, ← hA.roots_charpoly_eq_eigenvalues, hchar]
+  have heig : Multiset.map h2.eigenvalues Finset.univ.val
+      = Multiset.map hA.eigenvalues Finset.univ.val := by
+    refine Multiset.map_injective (RCLike.ofReal_injective (K := ℂ)) ?_
+    simpa only [Multiset.map_map] using hroots
+  have key : Multiset.map (f ∘ h2.eigenvalues) Finset.univ.val
+      = Multiset.map (f ∘ hA.eigenvalues) Finset.univ.val := by
+    rw [← Multiset.map_map, ← Multiset.map_map, heig]
+  calc ∑ i, f (h2.eigenvalues i)
+      = (Multiset.map (f ∘ h2.eigenvalues) Finset.univ.val).sum := rfl
+    _ = (Multiset.map (f ∘ hA.eigenvalues) Finset.univ.val).sum := by rw [key]
+    _ = ∑ i, f (hA.eigenvalues i) := rfl
+
 end QIQTH.Entropy

@@ -1744,5 +1744,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ Peierls' inequality (Carlen Thm 2.9): ∑ⱼ f(Re Bⱼⱼ) ≤ ∑ᵢ f(λᵢ) for Hermitian B,
 -- convex f. The diagonal entries are a doubly-stochastic average of eigenvalues (‖Vⱼₖ‖² overlap, row/col-
 -- stochastic) → Jensen. Foundation of the §2 trace-convexity toolkit (the bottom of the Lieb/DPI tower).
+#print axioms QIQTH.Entropy.eigenvalues_sum_conj_invariant
+-- expected: standard only — eigenvalue sums ∑ᵢ f(λᵢ) are invariant under unitary conjugation A ↦ V⋆AV
+-- (equal characteristic polynomials via charpoly_mul_comm ⇒ equal eigenvalue multisets via
+-- roots_charpoly_eq_eigenvalues). The conjugation-invariance foundation for Carlen 2.10–2.12 (which apply
+-- Peierls in the eigenbasis of (A+B)/2) and for the unitary invariance of relative entropy used in DPI.
 
 end QIQTH.AxiomAudit
