@@ -1403,6 +1403,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.rvdPmQ_smul_I
 -- expected: standard only — D=P−Q is conjugate-linear: D(i·ξ)=−i·(Dξ). The structural reason the
 -- modular conjugation J (of J·T=P−Q) is antiunitary, in contrast to the ℂ-linear R.
+-- The RvD square roots — UNBLOCKED: StarOrderedRing/CStarAlgebra (H→L[ℂ]H) have landed in Mathlib,
+-- so CFC.sqrt now applies to Rℂ. The polar-decomposition factors R^{1/2}, (2−R)^{1/2}, T, and the
+-- RvD Prop 2.2(2) identity T²=R(2−R):
+#print axioms QIQTH.StandardSubspaceModular.rvdTwoSubRC_isPositive
+-- expected: standard only — 0≤2−R (R≤2), the second positive factor; positivity transfers from the
+-- ℝ-side rvdR_le_two by defeq of reApplyInnerSelf.
+#print axioms QIQTH.StandardSubspaceModular.rvdSqrtR_mul_self
+-- expected: standard only — R^{1/2}·R^{1/2}=R (CFC.sqrt_mul_sqrt_self on the positive Rℂ).
+#print axioms QIQTH.StandardSubspaceModular.rvdSqrtTwoSubR_mul_self
+-- expected: standard only — (2−R)^{1/2}·(2−R)^{1/2}=2−R.
+#print axioms QIQTH.StandardSubspaceModular.rvdSqrtR_commute_rvdSqrtTwoSubR
+-- expected: standard only — √R and √(2−R) commute (both functions of R, via Commute.cfcₙ_nnreal).
+#print axioms QIQTH.StandardSubspaceModular.rvdT_sq
+-- expected: standard only — RvD Prop 2.2(2): T²=R(2−R) for T=R^{1/2}(2−R)^{1/2}. The analytic heart
+-- of the bounded-operator construction of the modular objects J and Δ.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

@@ -29,6 +29,10 @@ import Mathlib.Analysis.InnerProductSpace.StandardSubspace
 import Mathlib.Analysis.InnerProductSpace.Projection.Basic
 import Mathlib.Analysis.InnerProductSpace.Adjoint
 import Mathlib.Analysis.InnerProductSpace.Positive
+import Mathlib.Analysis.InnerProductSpace.StarOrder
+import Mathlib.Analysis.CStarAlgebra.ContinuousLinearMap
+import Mathlib.Analysis.SpecialFunctions.ContinuousFunctionalCalculus.Rpow.Basic
+import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Commute
 import Mathlib.Tactic
 
 namespace QIQTH.StandardSubspaceModular
@@ -375,5 +379,104 @@ theorem rvdPmQ_smul_I (S : StandardSubspace H) (ξ : H) :
     rvdPmQ S (Complex.I • ξ) = -(Complex.I • rvdPmQ S ξ) := by
   simp only [rvdPmQ, ContinuousLinearMap.sub_apply, projK_smul_I, projIK_smul_I, smul_sub]
   abel
+
+/-! ### The Rieffel–Van Daele square roots — UNBLOCKED (RvD Prop 2.2(2))
+
+The file previously stopped at `rvdRC_nonneg`, with `R^{1/2}` blocked on a missing Mathlib instance
+`StarOrderedRing (H →L[ℂ] H)`.  That instance — and the full `CStarAlgebra (H →L[ℂ] H)` structure —
+have since **landed** in Mathlib (`InnerProductSpace/StarOrder.lean`, `CStarAlgebra/ContinuousLinearMap.lean`),
+so the complex continuous functional calculus `CFC.sqrt` now applies directly to `Rℂ`.  This section
+constructs the two polar-decomposition factors `R^{1/2}` and `(2 − R)^{1/2}` and proves the RvD Prop 2.2(2)
+identity `T² = R(2 − R)` for `T = R^{1/2}(2 − R)^{1/2}` — the analytic heart of the bounded-operator
+construction of the modular objects `J` and `Δ`. -/
+
+/-- **RvD `2 − R`** as a ℂ-linear operator. With `0 ≤ R` (`rvdRC_nonneg`) and `R ≤ 2` this is the second
+    positive factor `(2 − R)` whose square root pairs with `R^{1/2}` in `T = R^{1/2}(2 − R)^{1/2}`. -/
+noncomputable def rvdTwoSubRC (S : StandardSubspace H) : H →L[ℂ] H :=
+  (2 : ℂ) • (1 : H →L[ℂ] H) - rvdRC S
+
+@[simp] theorem rvdTwoSubRC_apply (S : StandardSubspace H) (x : H) :
+    rvdTwoSubRC S x = (2 : ℂ) • x - rvdR S x := by
+  simp [rvdTwoSubRC, rvdRC_apply]
+
+/-- `2 − R` is complex-symmetric (`1` and `Rℂ` both are). -/
+theorem rvdTwoSubRC_isSymmetric (S : StandardSubspace H) : (rvdTwoSubRC S).IsSymmetric := by
+  intro x y
+  simp only [ContinuousLinearMap.coe_coe, rvdTwoSubRC_apply, inner_sub_left, inner_sub_right,
+    inner_smul_left, inner_smul_right]
+  have h : inner ℂ (rvdR S x) y = inner ℂ x (rvdR S y) := by
+    have hsym := rvdRC_isSymmetric S x y
+    simp only [ContinuousLinearMap.coe_coe, rvdRC_apply] at hsym
+    exact hsym
+  rw [h, show (starRingEnd ℂ) 2 = 2 from by
+          rw [show (2 : ℂ) = ((2 : ℝ) : ℂ) by norm_num, Complex.conj_ofReal]]
+
+/-- **`0 ≤ 2 − R`** (the upper RvD bound `R ≤ 2` in operator form).  The pointwise
+    `reApplyInnerSelf` of the ℂ-operator `(2:ℂ)•1 − Rℂ` is *definitionally* that of the ℝ-operator
+    `(2:ℝ)•1 − R` (both are `Re⟪(2 • x − R x), x⟫`, and `(2:ℂ)•x = (2:ℝ)•x`), so positivity transfers
+    directly from the already-proven `rvdR_le_two`. -/
+theorem rvdTwoSubRC_isPositive (S : StandardSubspace H) : (rvdTwoSubRC S).IsPositive := by
+  refine ⟨rvdTwoSubRC_isSymmetric S, fun x => ?_⟩
+  exact (rvdR_le_two S).2 x
+
+/-- `0 ≤ 2 − R` in the Loewner order. -/
+theorem rvdTwoSubRC_nonneg (S : StandardSubspace H) : 0 ≤ rvdTwoSubRC S :=
+  (ContinuousLinearMap.nonneg_iff_isPositive _).mpr (rvdTwoSubRC_isPositive S)
+
+/-- **RvD `R^{1/2}`** — the continuous-functional-calculus square root of `R`, now available. -/
+noncomputable def rvdSqrtR (S : StandardSubspace H) : H →L[ℂ] H := CFC.sqrt (rvdRC S)
+
+/-- **RvD `(2 − R)^{1/2}`**. -/
+noncomputable def rvdSqrtTwoSubR (S : StandardSubspace H) : H →L[ℂ] H := CFC.sqrt (rvdTwoSubRC S)
+
+/-- `0 ≤ R^{1/2}`. -/
+theorem rvdSqrtR_nonneg (S : StandardSubspace H) : 0 ≤ rvdSqrtR S := CFC.sqrt_nonneg _
+
+/-- `0 ≤ (2 − R)^{1/2}`. -/
+theorem rvdSqrtTwoSubR_nonneg (S : StandardSubspace H) : 0 ≤ rvdSqrtTwoSubR S := CFC.sqrt_nonneg _
+
+/-- `R^{1/2} · R^{1/2} = R`. -/
+theorem rvdSqrtR_mul_self (S : StandardSubspace H) : rvdSqrtR S * rvdSqrtR S = rvdRC S :=
+  CFC.sqrt_mul_sqrt_self _ (rvdRC_nonneg S)
+
+/-- `(2 − R)^{1/2} · (2 − R)^{1/2} = 2 − R`. -/
+theorem rvdSqrtTwoSubR_mul_self (S : StandardSubspace H) :
+    rvdSqrtTwoSubR S * rvdSqrtTwoSubR S = rvdTwoSubRC S :=
+  CFC.sqrt_mul_sqrt_self _ (rvdTwoSubRC_nonneg S)
+
+/-- `R` and `2 − R` commute (the second is `2·1 − R`, an affine function of the first). -/
+theorem rvdRC_commute_rvdTwoSubRC (S : StandardSubspace H) :
+    Commute (rvdRC S) (rvdTwoSubRC S) := by
+  rw [rvdTwoSubRC]
+  exact ((Commute.one_right (rvdRC S)).smul_right 2).sub_right (Commute.refl _)
+
+/-- The square roots commute: `√R = cfcₙ √ R` commutes with `2 − R` (a function of `R`), and then
+    with `√(2 − R) = cfcₙ √ (2 − R)`.  Both applications use `Commute.cfcₙ_nnreal`
+    (`CFC.sqrt = cfcₙ NNReal.sqrt`). -/
+theorem rvdSqrtR_commute_rvdSqrtTwoSubR (S : StandardSubspace H) :
+    Commute (rvdSqrtR S) (rvdSqrtTwoSubR S) := by
+  have h1 : Commute (rvdSqrtR S) (rvdTwoSubRC S) :=
+    (rvdRC_commute_rvdTwoSubRC S).cfcₙ_nnreal NNReal.sqrt
+  exact (h1.symm.cfcₙ_nnreal NNReal.sqrt).symm
+
+/-- **RvD `T`** — the positive part of the polar decomposition `J·T = P − Q`, `T = R^{1/2}(2 − R)^{1/2}`. -/
+noncomputable def rvdT (S : StandardSubspace H) : H →L[ℂ] H := rvdSqrtR S * rvdSqrtTwoSubR S
+
+/-- **RvD Prop 2.2(2): `T² = R(2 − R)`.**  Using that `R^{1/2}` and `(2 − R)^{1/2}` commute, the
+    product `T² = R^{1/2}(2−R)^{1/2}R^{1/2}(2−R)^{1/2}` regroups into `(R^{1/2})²((2−R)^{1/2})² = R(2−R)`.
+    With `J² = 1` and `JT = P − Q`, this is `(P − Q)² = R(2 − R)` — the modular-operator factorization. -/
+theorem rvdT_sq (S : StandardSubspace H) :
+    rvdT S * rvdT S = rvdRC S * rvdTwoSubRC S := by
+  have hcomm := rvdSqrtR_commute_rvdSqrtTwoSubR S
+  rw [rvdT]
+  calc rvdSqrtR S * rvdSqrtTwoSubR S * (rvdSqrtR S * rvdSqrtTwoSubR S)
+      = rvdSqrtR S * (rvdSqrtTwoSubR S * rvdSqrtR S) * rvdSqrtTwoSubR S := by
+        simp only [mul_assoc]
+    _ = rvdSqrtR S * (rvdSqrtR S * rvdSqrtTwoSubR S) * rvdSqrtTwoSubR S := by
+        rw [← hcomm.eq]
+    _ = (rvdSqrtR S * rvdSqrtR S) * (rvdSqrtTwoSubR S * rvdSqrtTwoSubR S) := by
+        simp only [mul_assoc]
+    _ = rvdRC S * rvdTwoSubRC S := by
+        rw [rvdSqrtR_mul_self, rvdSqrtTwoSubR_mul_self]
 
 end QIQTH.StandardSubspaceModular
