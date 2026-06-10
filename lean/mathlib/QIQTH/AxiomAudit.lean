@@ -1824,5 +1824,11 @@ namespace QIQTH.AxiomAudit
 -- inductively): nestGmean k A₀ B₀ + nestGmean k A₁ B₁ ≤ nestGmean k (A₀+A₁)(B₀+B₁), where
 -- nestGmean k = A #_{1/2ᵏ} B is the k-fold nested geometric mean. Induction on k via superadditivity +
 -- monotonicity-in-2nd-arg. Continuity in t then gives all t, i.e. A^{1-t}⊗B^t concavity → Lieb (§6.1).
+#print axioms QIQTH.Entropy.matrix_le_of_tendsto
+#print axioms QIQTH.Entropy.add_le_of_tendsto
+-- expected: standard only — LIMIT-STABILITY of the Loewner order (the continuity step's analytical core):
+-- fᵢ≤gᵢ, fᵢ→a, gᵢ→b ⟹ a≤b, and aᵢ+bᵢ≤cᵢ + tendsto ⟹ a+b≤c. Transferred from the OrderClosedTopology of
+-- the C⋆-algebra CStarMatrix across the bridge (ofMatrix_le_iff + ofMatrixL homeomorphism). Lets joint
+-- concavity at the dense dyadic weights extend to all t — the limit step of Ando's route to Lieb.
 
 end QIQTH.AxiomAudit

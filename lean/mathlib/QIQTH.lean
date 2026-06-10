@@ -20,6 +20,7 @@ import QIQTH.Entropy.CStarMatrixBridge
 import QIQTH.Entropy.MatrixOperatorMonotone
 import QIQTH.Entropy.GeometricMean
 import QIQTH.Entropy.TensorMean
+import QIQTH.Entropy.OrderLimit
 import QIQTH.HolevoCoarseGraining
 import QIQTH.DPI
 import QIQTH.ShannonFano
