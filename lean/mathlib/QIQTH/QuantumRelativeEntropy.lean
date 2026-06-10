@@ -34,6 +34,9 @@ import Mathlib.Analysis.Matrix.PosDef
 import Mathlib.Analysis.Matrix.Spectrum
 import Mathlib.Analysis.Matrix.HermitianFunctionalCalculus
 import Mathlib.Analysis.SpecialFunctions.Log.NegMulLog
+import Mathlib.Analysis.Convex.SpecificFunctions.Basic
+import Mathlib.Data.Complex.BigOperators
+import QIQTH.RelEntPositivity
 
 namespace QIQTH.QuantumEntropy
 
@@ -157,5 +160,190 @@ theorem trace_mul_matLog {ρ : Matrix n n ℂ} (hρ : ρ.PosDef) :
     rw [matLog, ← hρ.1.cfc_eq Real.log, ← hρ.1.cfc_eq (fun x => x * Real.log x),
       cfc_mul (fun x => x) Real.log ρ (by fun_prop) (continuousOn_log_spectrum hρ), cfc_id' ℝ ρ]
   rw [key, cfc_trace]
+
+/-! ### Stage 2 toward Klein: the cross-term `tr(ρ log σ) = ∑ᵢⱼ pᵢ Sᵢⱼ log qⱼ`
+
+`ρ = U diag(p) U⋆`, `log σ = V diag(log q) V⋆`; with `W = U⋆V` (unitary) and the overlap weights
+`S i j = ‖Wᵢⱼ‖² = normSq Wᵢⱼ`, trace cyclicity collapses the product to `∑ᵢⱼ pᵢ Sᵢⱼ log qⱼ`, and `S`
+is doubly stochastic (rows/cols sum to 1, from `W W⋆ = W⋆ W = 1`).  (Proof skeleton: GPT-5.5-pro.) -/
+
+/-- Spectral form `A = U·diag(λ)·U⋆` with the eigenvalue diagonal as a `ℂ`-valued function. -/
+lemma spectral_UDU {A : Matrix n n ℂ} (hA : A.IsHermitian) :
+    A = (hA.eigenvectorUnitary : Matrix n n ℂ)
+        * diagonal (fun i => (hA.eigenvalues i : ℂ))
+        * ((star hA.eigenvectorUnitary : Matrix n n ℂ)) := by
+  conv_lhs => rw [hA.spectral_theorem]
+  rw [conjStarAlgAut_apply]
+  rfl
+
+/-- Spectral form of the matrix logarithm `log A = U·diag(log λ)·U⋆`. -/
+lemma matLog_UDU {A : Matrix n n ℂ} (hA : A.IsHermitian) :
+    matLog hA = (hA.eigenvectorUnitary : Matrix n n ℂ)
+        * diagonal (fun j => (Real.log (hA.eigenvalues j) : ℂ))
+        * ((star hA.eigenvectorUnitary : Matrix n n ℂ)) := by
+  rw [matLog, Matrix.IsHermitian.cfc, conjStarAlgAut_apply]
+  rfl
+
+/-- **Trace of `diag(p)·W·diag(l)·W⋆`** = `∑ᵢⱼ pᵢ · normSq(Wᵢⱼ) · lⱼ`.  Pure index expansion
+    (`trace = ∑ diagonal`, `mul_apply`, `mul_diagonal`/`diagonal_mul`, `z·star z = normSq z`). -/
+lemma trace_diag_W_diag_starW (p l : n → ℝ) (W : Matrix n n ℂ) :
+    (diagonal (fun i => (p i : ℂ)) * W * diagonal (fun j => (l j : ℂ)) * star W).trace
+      = ∑ i, ∑ j, ((p i * Complex.normSq (W i j) * l j : ℝ) : ℂ) := by
+  classical
+  simp only [Matrix.trace, Matrix.diag_apply]
+  refine Finset.sum_congr rfl fun i _ => ?_
+  rw [Matrix.mul_apply]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [Matrix.mul_diagonal, Matrix.diagonal_mul, Matrix.star_apply]
+  rw [show (p i : ℂ) * W i j * (l j : ℂ) * star (W i j)
+        = (p i : ℂ) * (l j : ℂ) * (W i j * star (W i j)) from by ring,
+    show star (W i j) = (starRingEnd ℂ) (W i j) from rfl, Complex.mul_conj]
+  push_cast; ring
+
+/-- **The cross-term trace from two spectral decompositions.**  `tr(ρ·L) = ∑ᵢⱼ pᵢ · normSq(Wᵢⱼ) · lⱼ`
+    where `W = U⋆V`.  Pure trace cyclicity (`trace_mul_comm`) + the diagonal expansion above. -/
+lemma crossTerm_trace_of_spectral (ρ L U V : Matrix n n ℂ) (p l : n → ℝ)
+    (hρ : ρ = U * diagonal (fun i => (p i : ℂ)) * star U)
+    (hL : L = V * diagonal (fun j => (l j : ℂ)) * star V) :
+    (ρ * L).trace
+      = ∑ i, ∑ j, ((p i * Complex.normSq ((star U * V) i j) * l j : ℝ) : ℂ) := by
+  have hstar : star V * U = star (star U * V) := by rw [star_mul, star_star]
+  rw [hρ, hL,
+    show (U * diagonal (fun i => (p i : ℂ)) * star U) * (V * diagonal (fun j => (l j : ℂ)) * star V)
+      = U * (diagonal (fun i => (p i : ℂ)) * star U * V * diagonal (fun j => (l j : ℂ)) * star V)
+      from by simp only [Matrix.mul_assoc],
+    Matrix.trace_mul_comm,
+    show (diagonal (fun i => (p i : ℂ)) * star U * V * diagonal (fun j => (l j : ℂ)) * star V) * U
+      = diagonal (fun i => (p i : ℂ)) * (star U * V) * diagonal (fun j => (l j : ℂ)) * (star V * U)
+      from by simp only [Matrix.mul_assoc],
+    hstar, trace_diag_W_diag_starW]
+
+/-- **The cross-term `tr(ρ · log σ) = ∑ᵢⱼ pᵢ Sᵢⱼ log qⱼ`** with overlap weights
+    `S i j = normSq((U_ρ⋆ U_σ) i j)` — the off-diagonal term of the relative entropy. -/
+lemma crossTerm_trace {ρ σ : Matrix n n ℂ} (hρ : ρ.IsHermitian) (hσ : σ.IsHermitian) :
+    (ρ * matLog hσ).trace
+      = ∑ i, ∑ j, ((hρ.eigenvalues i
+          * Complex.normSq ((star (hρ.eigenvectorUnitary : Matrix n n ℂ)
+              * (hσ.eigenvectorUnitary : Matrix n n ℂ)) i j)
+          * Real.log (hσ.eigenvalues j) : ℝ) : ℂ) :=
+  crossTerm_trace_of_spectral ρ (matLog hσ) _ _ _ _ (spectral_UDU hρ) (matLog_UDU hσ)
+
+/-- The overlap weights `S i j = normSq(Wᵢⱼ)` are **row-stochastic** when `W W⋆ = 1`. -/
+lemma row_sum_normSq (W : Matrix n n ℂ) (hW : W * star W = 1) (i : n) :
+    ∑ j, Complex.normSq (W i j) = 1 := by
+  have hC : ((∑ j, Complex.normSq (W i j) : ℝ) : ℂ) = 1 := by
+    push_cast
+    rw [show (∑ j, (Complex.normSq (W i j) : ℂ)) = (W * star W) i i from by
+          rw [Matrix.mul_apply]
+          exact Finset.sum_congr rfl fun j _ => by
+            rw [Matrix.star_apply, show star (W i j) = (starRingEnd ℂ) (W i j) from rfl,
+              Complex.mul_conj], hW, Matrix.one_apply_eq]
+  exact_mod_cast hC
+
+/-- The overlap weights are **column-stochastic** when `W⋆ W = 1`. -/
+lemma col_sum_normSq (W : Matrix n n ℂ) (hW : star W * W = 1) (j : n) :
+    ∑ i, Complex.normSq (W i j) = 1 := by
+  have hC : ((∑ i, Complex.normSq (W i j) : ℝ) : ℂ) = 1 := by
+    push_cast
+    rw [show (∑ i, (Complex.normSq (W i j) : ℂ)) = (star W * W) j j from by
+          rw [Matrix.mul_apply]
+          exact Finset.sum_congr rfl fun i _ => by
+            rw [Matrix.star_apply, show star (W i j) = (starRingEnd ℂ) (W i j) from rfl, mul_comm,
+              Complex.mul_conj], hW, Matrix.one_apply_eq]
+  exact_mod_cast hC
+
+/-! ### Klein's inequality: `D(ρ‖σ) ≥ 0` -/
+
+/-- **★★ Klein's inequality (quantum relative entropy is nonnegative).**  For positive-definite density
+    matrices `ρ, σ` (unit trace), `D(ρ‖σ) = tr(ρ(log ρ − log σ)) ≥ 0`.  The finite-dimensional content of
+    the axiom `RelEntPositivity.D_nonneg` / `ArakiInterface.Akre_nonneg`.
+
+    Proof (doubly-stochastic / Jensen): the diagonal term is `∑ pᵢ log pᵢ` (`trace_mul_matLog`) and the
+    cross term is `∑ᵢⱼ pᵢ Sᵢⱼ log qⱼ` (`crossTerm_trace`) with `S` the doubly-stochastic overlap matrix.
+    Concavity of `log` (Jensen) gives `∑ⱼ Sᵢⱼ log qⱼ ≤ log rᵢ` with `rᵢ = ∑ⱼ Sᵢⱼ qⱼ` a probability vector,
+    so `D(ρ‖σ) ≥ ∑ᵢ pᵢ log(pᵢ/rᵢ) = KL(p‖r) ≥ 0` (Gibbs, `RelEntPositivity.KL_classical_nonneg`). -/
+theorem relEntropy_nonneg {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDef)
+    (hρ1 : ρ.trace = 1) (hσ1 : σ.trace = 1) :
+    0 ≤ relEntropy hρ.1 hσ.1 := by
+  set U := (hρ.1.eigenvectorUnitary : Matrix n n ℂ) with hUd
+  set V := (hσ.1.eigenvectorUnitary : Matrix n n ℂ) with hVd
+  set p := hρ.1.eigenvalues with hpd
+  set q := hσ.1.eigenvalues with hqd
+  set W := star U * V with hWdef
+  set S := fun i j => Complex.normSq (W i j) with hSdef
+  set r := fun i => ∑ j, S i j * q j with hrdef
+  -- positivity and unit sums of the spectra
+  have hp_pos : ∀ i, 0 < p i := hρ.eigenvalues_pos
+  have hq_pos : ∀ j, 0 < q j := hσ.eigenvalues_pos
+  have hp_sum : ∑ i, p i = 1 := by
+    have h : ρ.trace = ∑ i, ((p i : ℝ) : ℂ) := hρ.1.trace_eq_sum_eigenvalues
+    rw [hρ1] at h; exact_mod_cast h.symm
+  have hq_sum : ∑ j, q j = 1 := by
+    have h : σ.trace = ∑ j, ((q j : ℝ) : ℂ) := hσ.1.trace_eq_sum_eigenvalues
+    rw [hσ1] at h; exact_mod_cast h.symm
+  have hS_nn : ∀ i j, 0 ≤ S i j := fun i j => Complex.normSq_nonneg _
+  -- unitarity of the eigenbases
+  have hUstar : star U * U = 1 := by rw [hUd]; exact Unitary.coe_star_mul_self _
+  have hUstar' : U * star U = 1 := by rw [hUd]; exact Unitary.coe_mul_star_self _
+  have hVstar : star V * V = 1 := by rw [hVd]; exact Unitary.coe_star_mul_self _
+  have hVstar' : V * star V = 1 := by rw [hVd]; exact Unitary.coe_mul_star_self _
+  -- the overlap matrix is doubly stochastic
+  have hWWstar : W * star W = 1 := by
+    have h : (star U * V) * star (star U * V) = star U * (V * star V) * U := by
+      rw [star_mul, star_star]; simp only [Matrix.mul_assoc]
+    rw [hWdef, h, hVstar', mul_one, hUstar]
+  have hstarWW : star W * W = 1 := by
+    have h : star (star U * V) * (star U * V) = star V * (U * star U) * V := by
+      rw [star_mul, star_star]; simp only [Matrix.mul_assoc]
+    rw [hWdef, h, hUstar', mul_one, hVstar]
+  have hrow : ∀ i, ∑ j, S i j = 1 := fun i => row_sum_normSq W hWWstar i
+  have hcol : ∀ j, ∑ i, S i j = 1 := fun j => col_sum_normSq W hstarWW j
+  -- r is a probability vector
+  have hr_pos : ∀ i, 0 < r i := by
+    intro i
+    simp only [hrdef]
+    obtain ⟨j, _, hj⟩ : ∃ j ∈ Finset.univ, 0 < S i j := by
+      by_contra hc; push_neg at hc
+      have : ∑ j, S i j = 0 := Finset.sum_eq_zero fun j hj => le_antisymm (hc j hj) (hS_nn i j)
+      rw [hrow i] at this; norm_num at this
+    exact Finset.sum_pos' (fun k _ => mul_nonneg (hS_nn i k) (hq_pos k).le)
+      ⟨j, Finset.mem_univ j, mul_pos hj (hq_pos j)⟩
+  have hr_sum : ∑ i, r i = 1 := by
+    simp only [hrdef]
+    rw [Finset.sum_comm]
+    rw [show (∑ j, ∑ i, S i j * q j) = ∑ j, (∑ i, S i j) * q j from
+      Finset.sum_congr rfl fun j _ => by rw [Finset.sum_mul]]
+    simp only [hcol, one_mul, hq_sum]
+  -- relative entropy as diagonal − cross term
+  have hRE : relEntropy hρ.1 hσ.1
+      = (∑ i, p i * Real.log (p i)) - ∑ i, ∑ j, p i * S i j * Real.log (q j) := by
+    rw [relEntropy, mul_sub, Matrix.trace_sub, Complex.sub_re, trace_mul_matLog hρ,
+      crossTerm_trace hρ.1 hσ.1]
+    simp only [Complex.re_sum, Complex.ofReal_re]
+    rfl
+  -- Jensen: ∑ⱼ Sᵢⱼ log qⱼ ≤ log rᵢ
+  have hjensen : ∀ i, ∑ j, S i j * Real.log (q j) ≤ Real.log (r i) := by
+    intro i
+    have hJ := (strictConcaveOn_log_Ioi.concaveOn).le_map_sum
+      (t := Finset.univ) (w := S i) (p := q)
+      (fun j _ => hS_nn i j) (hrow i) (fun j _ => hq_pos j)
+    simpa only [smul_eq_mul, hrdef] using hJ
+  -- the cross term is ≤ ∑ pᵢ log rᵢ
+  have hcross_le : ∑ i, ∑ j, p i * S i j * Real.log (q j) ≤ ∑ i, p i * Real.log (r i) := by
+    refine Finset.sum_le_sum fun i _ => ?_
+    rw [show (∑ j, p i * S i j * Real.log (q j)) = p i * ∑ j, S i j * Real.log (q j) from by
+      rw [Finset.mul_sum]; exact Finset.sum_congr rfl fun j _ => by ring]
+    exact mul_le_mul_of_nonneg_left (hjensen i) (hp_pos i).le
+  -- KL(p‖r) ≥ 0 and split
+  have hKL : 0 ≤ ∑ i, p i * Real.log (p i / r i) := by
+    simpa only [RelEntPositivity.KL] using
+      RelEntPositivity.KL_classical_nonneg Finset.univ p r (fun i _ => (hp_pos i).le)
+        (fun i _ => hr_pos i) hp_sum hr_sum
+  have hsplit : ∑ i, p i * Real.log (p i / r i)
+      = (∑ i, p i * Real.log (p i)) - ∑ i, p i * Real.log (r i) := by
+    rw [← Finset.sum_sub_distrib]
+    exact Finset.sum_congr rfl fun i _ => by
+      rw [Real.log_div (hp_pos i).ne' (hr_pos i).ne', mul_sub]
+  rw [hRE]; linarith [hKL, hcross_le, hsplit.symm.le, hsplit.le]
 
 end QIQTH.QuantumEntropy

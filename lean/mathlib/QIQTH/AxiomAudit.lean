@@ -1711,7 +1711,15 @@ namespace QIQTH.AxiomAudit
 -- lacked, now in hand). Concrete realization of the opaque Donald.D / ArakiInterface.AkRelEnt.
 #print axioms QIQTH.QuantumEntropy.trace_mul_matLog
 -- expected: standard only — Stage 1 toward Klein: tr(ρ·log ρ)=∑ᵢ λᵢ log λᵢ for positive-definite ρ
--- (ρ·log ρ = (x↦x log x)(ρ) via cfc_mul, then cfc_trace). The diagonal term of D(ρ‖σ); gives the entropy
--- bridge S(ρ)=−tr(ρ log ρ).re. (Next stages: cross-term tr(ρ log σ)=∑ pᵢ Sᵢⱼ log qⱼ + Jensen/KL ⇒ Klein.)
+-- (ρ·log ρ = (x↦x log x)(ρ) via cfc_mul, then cfc_trace). The diagonal term of D(ρ‖σ).
+#print axioms QIQTH.QuantumEntropy.crossTerm_trace
+-- expected: standard only — Stage 2: the cross-term tr(ρ·log σ)=∑ᵢⱼ pᵢ Sᵢⱼ log qⱼ, S i j = normSq((U_ρ⋆U_σ)ᵢⱼ)
+-- the overlap matrix. Trace cyclicity + the diag(p)·W·diag(l)·W⋆ index expansion.
+#print axioms QIQTH.QuantumEntropy.relEntropy_nonneg
+-- expected: standard only — ★★ KLEIN'S INEQUALITY: D(ρ‖σ)=tr(ρ(log ρ−log σ))≥0 for positive-definite density
+-- matrices. The finite-dimensional content of the axiom RelEntPositivity.D_nonneg / ArakiInterface.Akre_nonneg.
+-- Doubly-stochastic/Jensen proof: diagonal term (trace_mul_matLog) − cross term (crossTerm_trace), the overlap
+-- matrix S doubly stochastic (row/col_sum_normSq), concavity of log (Jensen) ⇒ ≥ ∑pᵢlog(pᵢ/rᵢ)=KL(p‖r)≥0
+-- (RelEntPositivity.KL_classical_nonneg). Now PROVED, not assumed, in finite dimensions — axiom-free.
 
 end QIQTH.AxiomAudit
