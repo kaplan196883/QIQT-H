@@ -1709,6 +1709,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — D(ρ‖ρ)=0 for the concrete quantum relative entropy D(ρ‖σ)=tr(ρ(log ρ−log σ)),
 -- built on the Hermitian matrix logarithm matLog := IsHermitian.cfc Real.log (the gating primitive Mathlib
 -- lacked, now in hand). Concrete realization of the opaque Donald.D / ArakiInterface.AkRelEnt.
--- (Next: Klein's inequality D(ρ‖σ)≥0 retires RelEntPositivity.D_nonneg in finite dim.)
+#print axioms QIQTH.QuantumEntropy.trace_mul_matLog
+-- expected: standard only — Stage 1 toward Klein: tr(ρ·log ρ)=∑ᵢ λᵢ log λᵢ for positive-definite ρ
+-- (ρ·log ρ = (x↦x log x)(ρ) via cfc_mul, then cfc_trace). The diagonal term of D(ρ‖σ); gives the entropy
+-- bridge S(ρ)=−tr(ρ log ρ).re. (Next stages: cross-term tr(ρ log σ)=∑ pᵢ Sᵢⱼ log qⱼ + Jensen/KL ⇒ Klein.)
 
 end QIQTH.AxiomAudit

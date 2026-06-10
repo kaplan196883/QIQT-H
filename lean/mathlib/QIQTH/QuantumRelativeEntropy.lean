@@ -132,4 +132,30 @@ noncomputable def relEntropy {ρ σ : Matrix n n ℂ}
     relEntropy hρ hρ = 0 := by
   simp [relEntropy]
 
+/-! ### Stage 1 toward Klein: the diagonal trace `tr(ρ log ρ) = ∑ λᵢ log λᵢ`
+
+For a **positive-definite** `ρ` (all eigenvalues `> 0`, so `Real.log` is continuous on the spectrum),
+`ρ · log ρ = (x ↦ x log x)(ρ)` by `cfc_mul`, so its trace collapses to the eigenvalue sum via `cfc_trace`. -/
+
+/-- `Real.log` is continuous on the spectrum of a positive-definite matrix (eigenvalues `> 0`). -/
+lemma continuousOn_log_spectrum {ρ : Matrix n n ℂ} (hρ : ρ.PosDef) :
+    ContinuousOn Real.log (spectrum ℝ ρ) := by
+  refine Real.continuousOn_log.mono ?_
+  rw [hρ.1.spectrum_real_eq_range_eigenvalues]
+  rintro _ ⟨i, rfl⟩
+  simp only [Set.mem_compl_iff, Set.mem_singleton_iff]
+  exact (hρ.eigenvalues_pos i).ne'
+
+/-- **Diagonal trace formula** `tr(ρ · log ρ) = ∑ᵢ λᵢ log λᵢ` for positive-definite `ρ`.  Since `ρ` and
+    `log ρ` are both functions of `ρ`, `ρ · log ρ = (x ↦ x log x)(ρ)`; `cfc_trace` then gives the
+    eigenvalue sum.  Hence `S(ρ) = −tr(ρ log ρ).re` — the entropy bridge to the spectral definition. -/
+theorem trace_mul_matLog {ρ : Matrix n n ℂ} (hρ : ρ.PosDef) :
+    (ρ * matLog hρ.1).trace
+      = ∑ i, ((hρ.1.eigenvalues i * Real.log (hρ.1.eigenvalues i) : ℝ) : ℂ) := by
+  have hsa : IsSelfAdjoint ρ := hρ.1.isSelfAdjoint
+  have key : ρ * matLog hρ.1 = hρ.1.cfc (fun x => x * Real.log x) := by
+    rw [matLog, ← hρ.1.cfc_eq Real.log, ← hρ.1.cfc_eq (fun x => x * Real.log x),
+      cfc_mul (fun x => x) Real.log ρ (by fun_prop) (continuousOn_log_spectrum hρ), cfc_id' ℝ ρ]
+  rw [key, cfc_trace]
+
 end QIQTH.QuantumEntropy
