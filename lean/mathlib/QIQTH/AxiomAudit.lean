@@ -1808,10 +1808,13 @@ namespace QIQTH.AxiomAudit
 -- A₀#B₀+A₁#B₁ ≤ (A₀+A₁)#(B₀+B₁). The operator-mean input to Lieb's concavity theorem.
 #print axioms QIQTH.Entropy.posSemidef_mul_of_commute
 #print axioms QIQTH.Entropy.sqrt_mul_of_commute
--- expected: standard only — foundation for commuting-product rpow (the tensor-power obstacle): the product
--- of commuting PSD matrices is PSD (X*Y=√X·Y·√X congruence), and the commuting square root √(PQ)=√P·√Q
--- (via sqrt_unique + commuting cfc). Iterates to (PQ)^{1/2ⁿ}; continuity (continuous_matrix_rpow) + dyadic
--- density then give the general (PQ)^t=P^t·Q^t, hence (A⊗B)^t=A^t⊗B^t for Lieb.
+#print axioms QIQTH.Entropy.commute_rpow_dyadic
+#print axioms QIQTH.Entropy.commute_rpow_mul
+-- expected: standard only — ★★ COMMUTING-PRODUCT RPOW (the matrix fact Mathlib lacks, now PROVEN):
+-- (P*Q)^t = P^t·Q^t for commuting PosDef P,Q and 0≤t. Chain: commuting √ (sqrt_mul_of_commute, via
+-- sqrt_unique + commuting cfc) → 1/2ⁿ powers (commute_rpow_inv_two_pow, induction) → dyadic m/2ᵏ
+-- (commute_rpow_dyadic, via Commute.mul_pow) → all t (continuity continuous_matrix_rpow + dyadic density
+-- ⌊t·2ʲ⌋/2ʲ→t). This UNBLOCKS the tensor power (A⊗B)^t=A^t⊗B^t and the A^{1-t}⊗B^t form Lieb needs.
 #print axioms QIQTH.Entropy.rpow_kronecker_one
 -- expected: standard only — TENSOR POWER (right factor): (A⊗ₖ1)^t = A^t⊗ₖ1 for 0≤A, 0≤t. Via kroneckerRightHom
 -- (A↦A⊗ₖ1 as a continuous unital *-algebra hom) + StarAlgHomClass.map_cfc (cfc commutes with star alg homs).
