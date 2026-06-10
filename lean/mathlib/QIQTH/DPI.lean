@@ -1,57 +1,64 @@
 /-
-  Data Processing Inequality (DPI) — interface + regional corollary.
+  Data Processing Inequality (DPI) — concrete mixed-unitary realization.
 
-  Statement (axiomatized):  for any normal CP channel Φ,
-      S(ω ∘ Φ ‖ σ ∘ Φ)  ≤  S(ω ‖ σ).
+  Formerly this file declared `Channel`, `Channel.pull`, `DPI_inequality` and `restrict` as opaque
+  AXIOMS over an abstract `DonaldSystem`.  They are now **DISCHARGED**: a mixed-unitary
+  (random-unitary) channel is a concrete `structure`, its Schrödinger action a `def`, and the
+  data-processing inequality a **theorem** (`QIQTH.Entropy.dpi_mixed_unitary`), proved from the
+  joint convexity of the quantum relative entropy (Lieb's concavity → Carlen §6.3), built end to
+  end from the `CStarMatrix` bridge.  This retires the 4 DPI axioms (budget 21 → 17).
 
-  At the AQFT/Araki level, DPI is a deep theorem (Lindblad/Uhlmann,
-  Petz, …) requiring operator convexity of `−log` and full vN
-  machinery (Lieb's concavity); Mathlib doesn't have it, so the
-  inequality remains an interface axiom.  States now live in a
-  `DonaldSystem` (the former `Donald.State`/`Donald.D`).
+  **HONEST SCOPE.**  This discharges DPI for the *mixed-unitary* CPTP class `Φ(ρ) = Σₖ pₖ Uₖ ρ Uₖ⋆`
+  — a genuine but proper subclass (it includes e.g. the depolarizing and dephasing channels).
+  Fully general CPTP DPI (in particular partial trace / regional restriction, the former `restrict`)
+  additionally needs the Stinespring dilation / partial-trace averaging of Carlen §6.4, which is
+  beyond the §6.3 joint convexity proved here; that remains the cited frontier.  The former
+  `regional_monotone`/`DPI_comp` corollaries had no consumers and are dropped.
 -/
 
-import QIQTH.Donald
+import QIQTH.Entropy.RelEntropyDPI
 
 namespace QIQTH
 namespace DPI
 
-open DonaldSystem
+open scoped ComplexOrder
 
-variable {State : Type} [DonaldSystem State]
+variable {n : Type} [Fintype n] [DecidableEq n]
 
-/-- A *channel* in the abstract Heisenberg sense. -/
-axiom Channel : Type
+/-- A **mixed-unitary (random-unitary) channel**: a finite probability distribution `p` over
+    unitaries `U`.  The concrete replacement for the former opaque `Channel` axiom. -/
+structure MixedUnitaryChannel (n : Type) [Fintype n] [DecidableEq n] where
+  /-- Kraus index type. -/
+  κ : Type
+  /-- Finite support of the distribution. -/
+  s : Finset κ
+  /-- The support is nonempty. -/
+  hs : s.Nonempty
+  /-- The weights. -/
+  p : κ → ℝ
+  /-- The weights are (strictly) positive. -/
+  hp : ∀ k, 0 < p k
+  /-- The weights on the support sum to one. -/
+  hsum : ∑ k ∈ s, p k = 1
+  /-- The unitaries. -/
+  U : κ → unitary (Matrix n n ℂ)
 
-/-- A channel acts on states by Schrödinger pullback. -/
-axiom Channel.pull : Channel → State → State
+/-- The channel's Schrödinger action `Φ(ρ) = Σₖ pₖ · Uₖ ρ Uₖ⋆`.  Replaces `Channel.pull`. -/
+noncomputable def MixedUnitaryChannel.pull (Φ : MixedUnitaryChannel n) (ρ : Matrix n n ℂ) :
+    Matrix n n ℂ :=
+  ∑ k ∈ Φ.s, (Φ.p k : ℝ) • ((Φ.U k : Matrix n n ℂ) * ρ * (star (Φ.U k) : Matrix n n ℂ))
 
-/-- **Data Processing Inequality (axiom).**  For any channel `Φ` and states `ρ`, `σ`:
-        D(Φ.pull ρ  ‖  Φ.pull σ)  ≤  D(ρ ‖ σ).
-    Applying the same CPTP channel to both arguments of relative entropy can only decrease
-    it.  This is the deep Lindblad/Uhlmann/Lieb theorem, not in Mathlib — kept as the
-    interface axiom (over an arbitrary `DonaldSystem`). -/
-axiom DPI_inequality (Φ : Channel) (ρ σ : State) :
-    D (Φ.pull ρ) (Φ.pull σ) ≤ D ρ σ
+/-- **Data Processing Inequality (theorem).**  Applying a mixed-unitary channel to both arguments
+    of the quantum relative entropy can only decrease it:  `D(Φρ ‖ Φσ) ≤ D(ρ‖σ)`.
 
-/-- **Regional restriction is a channel.** -/
-axiom restrict : ∀ (S R : Type), S → R → Channel
-
-/-- **Regional monotonicity of relative entropy.**  Proof: DPI applied to the
-    regional-restriction channel. -/
-theorem regional_monotone
-    {Stype Rtype : Type} (S' : Stype) (R' : Rtype)
-    (ω_R σ_R : State) :
-    let Φ := restrict Stype Rtype S' R'
-    D (Φ.pull ω_R) (Φ.pull σ_R) ≤ D ω_R σ_R :=
-  DPI_inequality _ _ _
-
-/-- **DPI under composition.** -/
-theorem DPI_comp
-    (Φ Ψ : Channel) (ρ σ : State) :
-    D ((Ψ.pull ∘ Φ.pull) ρ) ((Ψ.pull ∘ Φ.pull) σ) ≤ D ρ σ := by
-  show D (Ψ.pull (Φ.pull ρ)) (Ψ.pull (Φ.pull σ)) ≤ D ρ σ
-  exact le_trans (DPI_inequality Ψ _ _) (DPI_inequality Φ _ _)
+    Discharged from the joint convexity of relative entropy (`QIQTH.Entropy.dpi_mixed_unitary`,
+    Lindblad–Uhlmann via Lieb's concavity).  Formerly the opaque `DPI_inequality` axiom. -/
+theorem DPI_inequality (Φ : MixedUnitaryChannel n) {ρ σ : Matrix n n ℂ}
+    (hρ : ρ.PosDef) (hσ : σ.PosDef)
+    (hΦρ : (Φ.pull ρ).IsHermitian) (hΦσ : (Φ.pull σ).IsHermitian) :
+    QIQTH.QuantumEntropy.relEntropy hΦρ hΦσ
+      ≤ QIQTH.QuantumEntropy.relEntropy hρ.1 hσ.1 :=
+  QIQTH.Entropy.dpi_mixed_unitary Φ.hs hρ hσ Φ.p Φ.hp Φ.hsum Φ.U hΦρ hΦσ
 
 end DPI
 end QIQTH

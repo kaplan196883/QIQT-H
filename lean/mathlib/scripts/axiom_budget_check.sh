@@ -168,9 +168,22 @@ done
 # `[DonaldSystem State]`.  The typeclass is DISCHARGED, axiom-free, by the concrete instance
 # `QuantumEntropy.instDonaldSystemHermitianMat` (Hermitian matrices; D/H/crossEnt = trace Umegaki forms;
 # A1/A3 rfl, A2 = crossEntropy_sum) — a genuine finite-dim model, so the former axioms are now derived facts
-# about a realizable interface.  (DPI's own 4 axioms — Channel/Channel.pull/DPI_inequality/restrict, the
-# Lieb-hard data-processing frontier — remain, re-based on the typeclass.)  Net 29 → 21.  Budget ratcheted to 21.
-AXIOM_BUDGET=21
+# about a realizable interface.  Net 29 → 21.
+#
+# Audit note (2026-06, DPI discharge −4 → 17): the 4 DPI axioms (Channel / Channel.pull /
+# DPI_inequality / restrict) are RETIRED.  DPI.lean now defines a concrete `MixedUnitaryChannel`
+# structure, its Schrödinger action `MixedUnitaryChannel.pull` (Φ(ρ)=Σₖ pₖ Uₖ ρ Uₖ⋆), and the
+# data-processing inequality `DPI_inequality` as a THEOREM = `QIQTH.Entropy.dpi_mixed_unitary`,
+# proved from the JOINT CONVEXITY of the quantum relative entropy (`relEntropy_subadditive`,
+# Carlen §6.3) — itself built end to end this session from the `CStarMatrix` bridge through
+# Lieb's concavity (§6.1), the matrix-calculus derivative of Tr(A^{1-t}Bᵗ), and the t→0 limit.
+# Assembly: subadditivity + finite-sum subadditivity + scaling D(c·ρ‖c·σ)=c·D(ρ‖σ) + unitary
+# invariance D(uρu⋆‖uσu⋆)=D(ρ‖σ).  HONEST SCOPE: this discharges DPI for the MIXED-UNITARY CPTP
+# class (depolarizing/dephasing/…); fully general CPTP DPI (partial trace / regional restriction,
+# the former `restrict`) needs the Stinespring/partial-trace averaging of §6.4, beyond the §6.3
+# joint convexity — the cited frontier.  The unused `regional_monotone`/`DPI_comp` corollaries are
+# dropped.  Net 21 → 17.  Budget ratcheted to 17.
+AXIOM_BUDGET=17
 AXIOM_COUNT="$(grep -rhE '^axiom ' QIQTH/ | wc -l | tr -d ' ')"
 echo "[axiom-budget] raw axiom count: $AXIOM_COUNT (budget $AXIOM_BUDGET)"
 if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then

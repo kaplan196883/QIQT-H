@@ -1860,6 +1860,10 @@ namespace QIQTH.AxiomAudit
 -- channels Φ(ρ)=Σₖ pₖ Uₖ ρ Uₖ⋆: D(Φρ‖Φσ) ≤ D(ρ‖σ). Proved from joint convexity via
 -- subadd_sum → relEntropy_smul (scaling) → relEntropy_unitary_invariant → Σpₖ=1. The concrete DPI
 -- that retires the abstract DPI axioms (see DPI.lean).
+#print axioms QIQTH.DPI.DPI_inequality
+-- expected: standard only — DPI_inequality is now a THEOREM (was an axiom): D(Φρ‖Φσ)≤D(ρ‖σ) for the
+-- concrete MixedUnitaryChannel, = dpi_mixed_unitary. The 4 DPI axioms (Channel/pull/DPI_inequality/
+-- restrict) RETIRED → budget 21→17. The DPI/Lieb tower is complete for the mixed-unitary class.
 -- toward DPI §6.4: cfc_log_conj/matLog_conj (log(uMu⋆)=u·log M·u⋆ via map_cfc on conjStarAlgAut),
 -- relEntropy_unitary_invariant (D(uρu⋆‖uσu⋆)=D(ρ‖σ)). matLog_smul (log(c·ρ)=(log c)·1+log ρ via
 -- cfc_comp_smul+cfc_const_add) + relEntropy_smul (D(c·ρ‖c·σ)=c·D(ρ‖σ), the log c terms cancel).
