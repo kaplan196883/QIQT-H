@@ -127,12 +127,17 @@ axiom IHol_le_Shannon {ι : Type} (s : Finset ι) (p : ι → ℝ)
 theorem AkRelEnt_self (ρ : NormalState n) : AkRelEnt ρ ρ = 0 := by
   rw [AkRelEnt_eq_relEntropy]; exact relEntropy_self ρ.2
 
-/-- **Klein equality case (faithful reference).**  `AkRelEnt(ω ‖ σ) = 0 ↔ ω = σ`.  Remains an axiom:
-    only the `←` direction is finite-dim immediate (`AkRelEnt_self`); the `→` direction is the
-    deeper Klein-equality milestone (strict concavity of `log`), the cited frontier. -/
-axiom AkRelEnt_eq_zero_iff
-    (ω σ : NormalState n) (hσ_faithful : IsFaithful σ) :
-    AkRelEnt ω σ = 0 ↔ ω = σ
+/-- **Klein equality case (theorem).**  For density matrices, `AkRelEnt(ω ‖ σ) = 0 ↔ ω = σ`.  The
+    former axiom, now discharged: the `←` direction is `AkRelEnt_self`, and the hard `→` direction
+    is `relEntropy_eq_zero` (Klein's equality case, via the strict concavity of `log`). -/
+theorem AkRelEnt_eq_zero_iff (ω σ : NormalState n)
+    (hω : ω.1.PosDef) (hσ : σ.1.PosDef) (hω1 : ω.1.trace = 1) (hσ1 : σ.1.trace = 1) :
+    AkRelEnt ω σ = 0 ↔ ω = σ := by
+  constructor
+  · intro h
+    rw [AkRelEnt_eq_relEntropy] at h
+    exact Subtype.ext (relEntropy_eq_zero hω hσ hω1 hσ1 h)
+  · rintro rfl; exact AkRelEnt_self _
 
 end ArakiInterface
 end QIQTH

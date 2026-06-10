@@ -197,7 +197,16 @@ done
 # `IHol_le_Shannon` (Holevo's theorem) and `AkRelEnt_eq_zero_iff` (Klein EQUALITY case — only the
 # trivial `ρ=σ⟹D=0` direction is finite-dim immediate, via the theorem `AkRelEnt_self`).  Net 17 → 8.
 # Budget ratcheted to 8.
-AXIOM_BUDGET=8
+#
+# Audit note (2026-06, Klein equality −1 → 7): `ArakiInterface.AkRelEnt_eq_zero_iff` is RETIRED — now
+# a THEOREM.  The hard direction `D(ρ‖σ)=0 ⟹ ρ=σ` is `QuantumEntropy.relEntropy_eq_zero` (Klein's
+# EQUALITY case), proved by tracking the equalities in the doubly-stochastic/Jensen proof of
+# `relEntropy_nonneg`: `D=0` forces `KL(p‖r)=0 ⟹ p=r` (Gibbs equality, via `log x < x−1` for `x≠1`)
+# and the strict-Jensen equality `∑ⱼ Sᵢⱼ log qⱼ = log rᵢ` (`StrictConcaveOn.map_sum_eq_iff'`), whence
+# `Wᵢⱼ·qⱼ = pᵢ·Wᵢⱼ`, i.e. `W·diag(q)=diag(p)·W`, hence `σ = V·diag(q)·V⋆ = U·diag(p)·U⋆ = ρ`.  Net
+# 8 → 7.  Budget ratcheted to 7.  Remaining 7: ArakiInterface 1 (IHol_le_Shannon = Holevo's theorem)
+# + EntropyBridge 6 (all genuine Tomita–Takesaki / Type II crossed-product modular theory).
+AXIOM_BUDGET=7
 AXIOM_COUNT="$(grep -rhE '^axiom ' QIQTH/ | wc -l | tr -d ' ')"
 echo "[axiom-budget] raw axiom count: $AXIOM_COUNT (budget $AXIOM_BUDGET)"
 if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then

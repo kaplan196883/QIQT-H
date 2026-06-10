@@ -1864,10 +1864,18 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — DPI_inequality is now a THEOREM (was an axiom): D(Φρ‖Φσ)≤D(ρ‖σ) for the
 -- concrete MixedUnitaryChannel, = dpi_mixed_unitary. The 4 DPI axioms (Channel/pull/DPI_inequality/
 -- restrict) RETIRED → budget 21→17. The DPI/Lieb tower is complete for the mixed-unitary class.
+#print axioms QIQTH.QuantumEntropy.relEntropy_eq_zero
+-- expected: standard only — ★★★★★ KLEIN'S EQUALITY CASE: D(ρ‖σ)=0 ⟹ ρ=σ for density matrices. The
+-- equality tracking of relEntropy_nonneg (doubly-stochastic/Jensen): KL(p‖r)=0⟹p=r (Gibbs, log x<x−1)
+-- + strict-Jensen ∑Sᵢⱼlog qⱼ=log rᵢ (map_sum_eq_iff') ⟹ W·diag(q)=diag(p)·W ⟹ σ=ρ. The hard direction.
 #print axioms QIQTH.ArakiInterface.Akre_nonneg
 #print axioms QIQTH.ArakiInterface.donald_araki
 #print axioms QIQTH.ArakiInterface.dpi_ucp
 #print axioms QIQTH.ArakiInterface.AkRelEnt_self
+#print axioms QIQTH.ArakiInterface.AkRelEnt_eq_zero_iff
+-- AkRelEnt_eq_zero_iff is now a THEOREM (was an axiom): D=0 ↔ ρ=σ, = relEntropy_eq_zero + AkRelEnt_self.
+-- 10 of 11 ArakiInterface axioms now retired → budget 8→7. Last ArakiInterface axiom: IHol_le_Shannon
+-- (Holevo). Remaining 7 axioms: ArakiInterface 1 + EntropyBridge 6 (Tomita–Takesaki frontier).
 -- expected: standard only — the former ArakiInterface AXIOMS, now THEOREMS in the finite-dim model
 -- (NormalState=HermitianMat): Akre_nonneg=Klein (relEntropy_nonneg), donald_araki=Donald's identity,
 -- dpi_ucp=DPI (DPI_inequality), AkRelEnt_self=relEntropy_self. 9 of 11 ArakiInterface axioms RETIRED

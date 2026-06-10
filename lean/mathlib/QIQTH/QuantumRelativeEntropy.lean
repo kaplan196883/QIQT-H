@@ -346,6 +346,165 @@ theorem relEntropy_nonneg {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.P
       rw [Real.log_div (hp_pos i).ne' (hr_pos i).ne', mul_sub]
   rw [hRE]; linarith [hKL, hcross_le, hsplit.symm.le, hsplit.le]
 
+/-- **Klein's equality case** (the hard direction): for positive-definite density matrices,
+    `D(ρ‖σ) = 0 ⟹ ρ = σ`.  Tracking the equalities in the doubly-stochastic / Jensen proof of
+    `relEntropy_nonneg`: `D = 0` forces (i) `KL(p‖r) = 0`, hence `p = r` (Gibbs equality, via
+    `log x < x − 1` for `x ≠ 1`), and (ii) the strict-Jensen equality `∑ⱼ Sᵢⱼ log qⱼ = log rᵢ`,
+    hence `qⱼ = rᵢ = pᵢ` whenever `Wᵢⱼ ≠ 0` (`StrictConcaveOn.map_sum_eq_iff'`).  Together these give
+    `Wᵢⱼ·qⱼ = pᵢ·Wᵢⱼ`, i.e. `W·diag(q) = diag(p)·W`, whence `σ = V·diag(q)·V⋆ = U·diag(p)·U⋆ = ρ`. -/
+theorem relEntropy_eq_zero {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDef)
+    (hρ1 : ρ.trace = 1) (hσ1 : σ.trace = 1) (hD : relEntropy hρ.1 hσ.1 = 0) :
+    ρ = σ := by
+  set U := (hρ.1.eigenvectorUnitary : Matrix n n ℂ) with hUd
+  set V := (hσ.1.eigenvectorUnitary : Matrix n n ℂ) with hVd
+  set p := hρ.1.eigenvalues with hpd
+  set q := hσ.1.eigenvalues with hqd
+  set W := star U * V with hWdef
+  set S := fun i j => Complex.normSq (W i j) with hSdef
+  set r := fun i => ∑ j, S i j * q j with hrdef
+  have hp_pos : ∀ i, 0 < p i := hρ.eigenvalues_pos
+  have hq_pos : ∀ j, 0 < q j := hσ.eigenvalues_pos
+  have hp_sum : ∑ i, p i = 1 := by
+    have h : ρ.trace = ∑ i, ((p i : ℝ) : ℂ) := hρ.1.trace_eq_sum_eigenvalues
+    rw [hρ1] at h; exact_mod_cast h.symm
+  have hq_sum : ∑ j, q j = 1 := by
+    have h : σ.trace = ∑ j, ((q j : ℝ) : ℂ) := hσ.1.trace_eq_sum_eigenvalues
+    rw [hσ1] at h; exact_mod_cast h.symm
+  have hS_nn : ∀ i j, 0 ≤ S i j := fun i j => Complex.normSq_nonneg _
+  have hUstar : star U * U = 1 := by rw [hUd]; exact Unitary.coe_star_mul_self _
+  have hUstar' : U * star U = 1 := by rw [hUd]; exact Unitary.coe_mul_star_self _
+  have hVstar : star V * V = 1 := by rw [hVd]; exact Unitary.coe_star_mul_self _
+  have hVstar' : V * star V = 1 := by rw [hVd]; exact Unitary.coe_mul_star_self _
+  have hWWstar : W * star W = 1 := by
+    have h : (star U * V) * star (star U * V) = star U * (V * star V) * U := by
+      rw [star_mul, star_star]; simp only [Matrix.mul_assoc]
+    rw [hWdef, h, hVstar', mul_one, hUstar]
+  have hstarWW : star W * W = 1 := by
+    have h : star (star U * V) * (star U * V) = star V * (U * star U) * V := by
+      rw [star_mul, star_star]; simp only [Matrix.mul_assoc]
+    rw [hWdef, h, hUstar', mul_one, hVstar]
+  have hrow : ∀ i, ∑ j, S i j = 1 := fun i => row_sum_normSq W hWWstar i
+  have hcol : ∀ j, ∑ i, S i j = 1 := fun j => col_sum_normSq W hstarWW j
+  have hr_pos : ∀ i, 0 < r i := by
+    intro i
+    simp only [hrdef]
+    obtain ⟨j, _, hj⟩ : ∃ j ∈ Finset.univ, 0 < S i j := by
+      by_contra hc; push_neg at hc
+      have : ∑ j, S i j = 0 := Finset.sum_eq_zero fun j hj => le_antisymm (hc j hj) (hS_nn i j)
+      rw [hrow i] at this; norm_num at this
+    exact Finset.sum_pos' (fun k _ => mul_nonneg (hS_nn i k) (hq_pos k).le)
+      ⟨j, Finset.mem_univ j, mul_pos hj (hq_pos j)⟩
+  have hr_sum : ∑ i, r i = 1 := by
+    simp only [hrdef]
+    rw [Finset.sum_comm,
+      show (∑ j, ∑ i, S i j * q j) = ∑ j, (∑ i, S i j) * q j from
+        Finset.sum_congr rfl fun j _ => by rw [Finset.sum_mul]]
+    simp only [hcol, one_mul, hq_sum]
+  have hRE : relEntropy hρ.1 hσ.1
+      = (∑ i, p i * Real.log (p i)) - ∑ i, ∑ j, p i * S i j * Real.log (q j) := by
+    rw [relEntropy, mul_sub, Matrix.trace_sub, Complex.sub_re, trace_mul_matLog hρ,
+      crossTerm_trace hρ.1 hσ.1]
+    simp only [Complex.re_sum, Complex.ofReal_re]
+    rfl
+  have hjensen : ∀ i, ∑ j, S i j * Real.log (q j) ≤ Real.log (r i) := by
+    intro i
+    have hJ := (strictConcaveOn_log_Ioi.concaveOn).le_map_sum
+      (t := Finset.univ) (w := S i) (p := q)
+      (fun j _ => hS_nn i j) (hrow i) (fun j _ => hq_pos j)
+    simpa only [smul_eq_mul, hrdef] using hJ
+  -- `D = 0` ⟹ the cross-term Jensen step and the Gibbs step are both equalities
+  rw [hRE] at hD
+  have hcrosseq : ∑ i, p i * (∑ j, S i j * Real.log (q j)) = ∑ i, p i * Real.log (r i) := by
+    have hKL : 0 ≤ ∑ i, p i * Real.log (p i / r i) :=
+      RelEntPositivity.KL_classical_nonneg Finset.univ p r (fun i _ => (hp_pos i).le)
+        (fun i _ => hr_pos i) hp_sum hr_sum
+    have hsplit : ∑ i, p i * Real.log (p i / r i)
+        = (∑ i, p i * Real.log (p i)) - ∑ i, p i * Real.log (r i) := by
+      rw [← Finset.sum_sub_distrib]
+      exact Finset.sum_congr rfl fun i _ => by
+        rw [Real.log_div (hp_pos i).ne' (hr_pos i).ne', mul_sub]
+    have hcross_le : ∑ i, p i * (∑ j, S i j * Real.log (q j)) ≤ ∑ i, p i * Real.log (r i) :=
+      Finset.sum_le_sum fun i _ => mul_le_mul_of_nonneg_left (hjensen i) (hp_pos i).le
+    have hBeq : (∑ i, ∑ j, p i * S i j * Real.log (q j))
+        = ∑ i, p i * (∑ j, S i j * Real.log (q j)) :=
+      Finset.sum_congr rfl fun i _ => by rw [Finset.mul_sum]; exact Finset.sum_congr rfl fun j _ => by ring
+    rw [hBeq] at hD
+    linarith [hKL, hsplit, hcross_le, hD]
+  -- (i) Gibbs equality ⟹ `p = r`
+  have hpr_sum : ∑ i, p i * Real.log (p i / r i) = 0 := by
+    have hsplit : ∑ i, p i * Real.log (p i / r i)
+        = (∑ i, p i * Real.log (p i)) - ∑ i, p i * Real.log (r i) := by
+      rw [← Finset.sum_sub_distrib]
+      exact Finset.sum_congr rfl fun i _ => by
+        rw [Real.log_div (hp_pos i).ne' (hr_pos i).ne', mul_sub]
+    have hBeq : (∑ i, ∑ j, p i * S i j * Real.log (q j))
+        = ∑ i, p i * (∑ j, S i j * Real.log (q j)) :=
+      Finset.sum_congr rfl fun i _ => by rw [Finset.mul_sum]; exact Finset.sum_congr rfl fun j _ => by ring
+    rw [hBeq] at hD; rw [hsplit]; linarith [hcrosseq, hD]
+  have heachG : ∀ i, p i * Real.log (p i / r i) = p i - r i := by
+    have hge : ∀ i ∈ (Finset.univ : Finset n), p i - r i ≤ p i * Real.log (p i / r i) := by
+      intro i _
+      have h2 : 1 - r i / p i ≤ Real.log (p i / r i) := by
+        have hlog := Real.log_le_sub_one_of_pos (div_pos (hr_pos i) (hp_pos i))
+        rw [show p i / r i = (r i / p i)⁻¹ by rw [inv_div], Real.log_inv]; linarith
+      have h3 : p i * (1 - r i / p i) = p i - r i := by
+        field_simp [(hp_pos i).ne']
+      nlinarith [mul_le_mul_of_nonneg_left h2 (hp_pos i).le, h3]
+    have hsumeq : ∑ i, (p i - r i) = ∑ i, p i * Real.log (p i / r i) := by
+      rw [hpr_sum, Finset.sum_sub_distrib, hp_sum, hr_sum]; ring
+    intro i
+    exact ((Finset.sum_eq_sum_iff_of_le hge).mp hsumeq i (Finset.mem_univ i)).symm
+  have hpr : ∀ i, p i = r i := by
+    intro i
+    by_contra hne
+    have hlt : 1 - r i / p i < Real.log (p i / r i) := by
+      have hlog := Real.log_lt_sub_one_of_pos (div_pos (hr_pos i) (hp_pos i)) (by
+        rw [Ne, div_eq_one_iff_eq (hp_pos i).ne']; exact fun h => hne h.symm)
+      rw [show p i / r i = (r i / p i)⁻¹ by rw [inv_div], Real.log_inv]; linarith
+    have h3 : p i * (1 - r i / p i) = p i - r i := by
+      field_simp [(hp_pos i).ne']
+    nlinarith [mul_lt_mul_of_pos_left hlt (hp_pos i), h3, heachG i]
+  -- (ii) strict-Jensen equality ⟹ `qⱼ = pᵢ` whenever `Wᵢⱼ ≠ 0`
+  have hjeq : ∀ i, ∑ j, S i j * Real.log (q j) = Real.log (r i) := by
+    have heach : ∀ i ∈ Finset.univ,
+        p i * (∑ j, S i j * Real.log (q j)) = p i * Real.log (r i) :=
+      (Finset.sum_eq_sum_iff_of_le
+        (fun i _ => mul_le_mul_of_nonneg_left (hjensen i) (hp_pos i).le)).mp hcrosseq
+    intro i
+    have := heach i (Finset.mem_univ i)
+    exact mul_left_cancel₀ (hp_pos i).ne' this
+  have hqp : ∀ i j, W i j ≠ 0 → q j = p i := by
+    intro i j hWij
+    have hSij : S i j ≠ 0 := by simp only [hSdef]; exact fun h => hWij (Complex.normSq_eq_zero.mp h)
+    have hjenseni : Real.log (∑ j, S i j • q j) = ∑ j, S i j • Real.log (q j) := by
+      simp only [smul_eq_mul]
+      rw [show (∑ j, S i j * q j) = r i from rfl, hjeq i]
+    have hthis := (strictConcaveOn_log_Ioi.map_sum_eq_iff' (t := Finset.univ)
+      (w := S i) (p := q) (fun j _ => hS_nn i j) (hrow i) (fun j _ => hq_pos j)).mp
+      hjenseni j (Finset.mem_univ j) hSij
+    simp only [smul_eq_mul] at hthis
+    rw [hthis]; exact (hpr i).symm
+  -- `W·diag(q) = diag(p)·W` and the spectral reconstruction `σ = ρ`
+  have hWmat : W * diagonal (fun j => (q j : ℂ)) = diagonal (fun i => (p i : ℂ)) * W := by
+    ext i j
+    rw [Matrix.mul_diagonal, Matrix.diagonal_mul]
+    by_cases hWij : W i j = 0
+    · simp [hWij]
+    · rw [hqp i j hWij]; ring
+  have key : V * diagonal (fun j => (q j : ℂ)) * star V
+      = U * diagonal (fun i => (p i : ℂ)) * star U := by
+    have h : U * (W * diagonal (fun j => (q j : ℂ))) * star V
+        = U * (diagonal (fun i => (p i : ℂ)) * W) * star V := by rw [hWmat]
+    rw [hWdef] at h
+    rw [show U * (star U * V * diagonal (fun j => (q j : ℂ))) * star V
+        = U * star U * (V * diagonal (fun j => (q j : ℂ)) * star V) by simp only [Matrix.mul_assoc],
+      hUstar', Matrix.one_mul,
+      show U * (diagonal (fun i => (p i : ℂ)) * (star U * V)) * star V
+        = U * diagonal (fun i => (p i : ℂ)) * star U * (V * star V) by simp only [Matrix.mul_assoc],
+      hVstar', Matrix.mul_one] at h
+    exact h
+  rw [spectral_UDU hρ.1, spectral_UDU hσ.1, ← hUd, ← hVd, ← hpd, ← hqd, key]
+
 /-! ### The Donald structural identities (concrete) -/
 
 /-- **Cross entropy** `crossEnt(ρ,σ) = −tr(ρ log σ)` — the concrete realization of the opaque
