@@ -159,4 +159,32 @@ lemma tendsto_relEntropy {A B : Matrix n n ℂ} (hA : A.PosDef) (hB : B.PosDef) 
   rw [hfun]
   exact hslope.neg
 
+open Filter Topology in
+/-- **Subadditivity of the quantum relative entropy** (≡ joint convexity, Carlen Thm 6.3):
+    `D(A₀+A₁ ‖ B₀+B₁) ≤ D(A₀‖B₀) + D(A₁‖B₁)` for positive-definite arguments.
+    The `t → 0` limit of the subadditive Lieb difference quotients (`trace_rpow_concave`). -/
+theorem relEntropy_subadditive {A₀ A₁ B₀ B₁ : Matrix n n ℂ}
+    (hA₀ : A₀.PosDef) (hA₁ : A₁.PosDef) (hB₀ : B₀.PosDef) (hB₁ : B₁.PosDef) :
+    QIQTH.QuantumEntropy.relEntropy (hA₀.add hA₁).1 (hB₀.add hB₁).1
+      ≤ QIQTH.QuantumEntropy.relEntropy hA₀.1 hB₀.1
+        + QIQTH.QuantumEntropy.relEntropy hA₁.1 hB₁.1 := by
+  have hsub : Set.Ioi (0 : ℝ) ⊆ {(0 : ℝ)}ᶜ := fun x hx =>
+    Set.mem_compl_singleton_iff.mpr (Set.mem_Ioi.mp hx).ne'
+  have hlimS := (tendsto_relEntropy (hA₀.add hA₁) (hB₀.add hB₁)).mono_left
+    (nhdsWithin_mono 0 hsub)
+  have hlimSum := ((tendsto_relEntropy hA₀ hB₀).add (tendsto_relEntropy hA₁ hB₁)).mono_left
+    (nhdsWithin_mono 0 hsub)
+  refine le_of_tendsto_of_tendsto hlimS hlimSum ?_
+  filter_upwards [Ioo_mem_nhdsGT (zero_lt_one)] with t ht
+  obtain ⟨ht0, ht1⟩ := ht
+  have hconc := trace_rpow_concave hA₀ hA₁ hB₀ hB₁ (le_of_lt ht0) (le_of_lt ht1)
+  have hre : (A₀ ^ (1 - t) * B₀ ^ t).trace.re + (A₁ ^ (1 - t) * B₁ ^ t).trace.re
+      ≤ ((A₀ + A₁) ^ (1 - t) * (B₀ + B₁) ^ t).trace.re := by
+    simpa [Complex.add_re] using (Complex.le_def.mp hconc).1
+  show ((A₀ + A₁).trace.re - ((A₀ + A₁) ^ (1 - t) * (B₀ + B₁) ^ t).trace.re) / t
+      ≤ (A₀.trace.re - (A₀ ^ (1 - t) * B₀ ^ t).trace.re) / t
+        + (A₁.trace.re - (A₁ ^ (1 - t) * B₁ ^ t).trace.re) / t
+  rw [Matrix.trace_add, Complex.add_re, ← add_div]
+  exact (div_le_div_iff_of_pos_right ht0).mpr (by linarith [hre])
+
 end QIQTH.Entropy
