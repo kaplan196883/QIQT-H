@@ -1836,6 +1836,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — rpow_transpose: (A^t)ᵀ=(Aᵀ)^t (transpose = entrywise conj is an
 -- ℝ-star-alg-aut, map_cfc). trace_rpow_concave: ★★ the NO-TRANSPOSE Lieb (A,B)↦Tr(A^{1-t}·B^t)
 -- jointly concave — Lieb at K=1 with the Bᵀ removed via rpow_transpose; THE relative-entropy input.
+#print axioms QIQTH.Entropy.mul_matLog_eq
+#print axioms QIQTH.Entropy.hasDerivAt_rpow_one_sub_zero
+-- mul_matLog_eq: A·log A = U·diag(λᵢ log λᵢ)·Uᴴ (conjStarAlgAut multiplicativity).
+-- hasDerivAt_rpow_one_sub_zero: d/dt(t↦A^{1-t})|₀ = -(A·log A). With hasDerivAt_rpow_zero these are
+-- the two derivatives feeding the product+trace rule for d/dt Tr(A^{1-t}Bᵗ)|₀ = -relEntropy.
 #print axioms QIQTH.Entropy.hasDerivAt_rpow_zero
 -- expected: standard only — d/dt(t↦B^t)|₀ = log B (matLog), for PosDef B. Differentiate the
 -- eigendecomposition B^t=U·diag(μᵢ^t)·Uᴴ (eigenvectors constant) → scalar deriv d/dt μ^t=μ^t log μ.

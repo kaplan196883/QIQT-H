@@ -51,4 +51,65 @@ lemma hasDerivAt_rpow_zero {B : Matrix n n ℂ} (hB : B.PosDef) :
   -- conjugate by the constant matrices `U`, `Uᴴ` (Frobenius is a normed algebra)
   exact (hdiag.const_mul U).mul_const Uᴴ
 
+/-- `A · log A = U · diag(λᵢ·log λᵢ) · Uᴴ` for positive-definite `A` (eigendecomposition product). -/
+lemma mul_matLog_eq {A : Matrix n n ℂ} (hA : A.PosDef) :
+    A * QIQTH.QuantumEntropy.matLog hA.1
+      = (hA.1.eigenvectorUnitary : Matrix n n ℂ)
+        * diagonal (fun i => (↑(hA.1.eigenvalues i * Real.log (hA.1.eigenvalues i)) : ℂ))
+        * (hA.1.eigenvectorUnitary : Matrix n n ℂ)ᴴ := by
+  set μ : n → ℝ := hA.1.eigenvalues with hμ
+  -- both `A` and `log A` are `conjStarAlgAut U (diagonal …)`; conjugation is multiplicative
+  have hAeq : A = Unitary.conjStarAlgAut ℂ (Matrix n n ℂ) hA.1.eigenvectorUnitary
+      (diagonal (fun i => (↑(μ i) : ℂ))) := hA.1.spectral_theorem
+  have hlog : QIQTH.QuantumEntropy.matLog hA.1
+      = Unitary.conjStarAlgAut ℂ (Matrix n n ℂ) hA.1.eigenvectorUnitary
+        (diagonal (fun i => (↑(Real.log (μ i)) : ℂ))) := rfl
+  rw [show A * QIQTH.QuantumEntropy.matLog hA.1
+        = Unitary.conjStarAlgAut ℂ (Matrix n n ℂ) hA.1.eigenvectorUnitary
+            (diagonal (fun i => (↑(μ i) : ℂ)))
+          * Unitary.conjStarAlgAut ℂ (Matrix n n ℂ) hA.1.eigenvectorUnitary
+            (diagonal (fun i => (↑(Real.log (μ i)) : ℂ))) from by rw [← hAeq, ← hlog],
+    ← map_mul, Matrix.diagonal_mul_diagonal, Unitary.conjStarAlgAut_apply,
+    Matrix.star_eq_conjTranspose]
+  congr 2
+  ext i
+  push_cast
+  ring
+
+/-- The derivative of `t ↦ A^{1-t}` at `t = 0` is `-(A · log A)`, for positive-definite `A`. -/
+lemma hasDerivAt_rpow_one_sub_zero {A : Matrix n n ℂ} (hA : A.PosDef) :
+    HasDerivAt (fun t : ℝ => A ^ (1 - t)) (-(A * QIQTH.QuantumEntropy.matLog hA.1)) 0 := by
+  set U : Matrix n n ℂ := (hA.1.eigenvectorUnitary : Matrix n n ℂ) with hU
+  set μ : n → ℝ := hA.1.eigenvalues with hμ
+  have hkey : (fun t : ℝ => A ^ (1 - t))
+      = fun t => U * diagonal (fun i => (↑(μ i ^ (1 - t)) : ℂ)) * Uᴴ := by
+    funext t
+    rw [CFC.rpow_eq_cfc_real hA.posSemidef.nonneg, Matrix.IsHermitian.cfc_eq hA.1,
+      Matrix.IsHermitian.cfc, Unitary.conjStarAlgAut_apply, Matrix.star_eq_conjTranspose]
+    rfl
+  rw [hkey, mul_matLog_eq hA]
+  -- entrywise scalar derivative `d/dt λᵢ^{1-t}|₀ = -(λᵢ log λᵢ)`
+  have hvec : HasDerivAt (fun t : ℝ => (fun i => (↑(μ i ^ (1 - t)) : ℂ)))
+      (fun i => (↑(-(μ i * Real.log (μ i))) : ℂ)) 0 := by
+    rw [hasDerivAt_pi]
+    intro i
+    have hconst : HasDerivAt (fun s : ℝ => μ i ^ s) (μ i ^ ((1 : ℝ) - 0) * Real.log (μ i)) (1 - 0) :=
+      (Real.hasStrictDerivAt_const_rpow (hA.eigenvalues_pos i) ((1 : ℝ) - 0)).hasDerivAt
+    have hinner : HasDerivAt (fun t : ℝ => 1 - t) (-1) 0 := (hasDerivAt_id (0 : ℝ)).const_sub 1
+    have hreal : HasDerivAt (fun t : ℝ => μ i ^ (1 - t)) (-(μ i * Real.log (μ i))) 0 := by
+      simpa [Real.rpow_one, mul_comm] using hconst.comp 0 hinner
+    exact hreal.ofReal_comp
+  have hdiag : HasDerivAt (fun t : ℝ => diagonal (fun i => (↑(μ i ^ (1 - t)) : ℂ)))
+      (diagonal (fun i => (↑(-(μ i * Real.log (μ i))) : ℂ))) 0 :=
+    (Matrix.diagonalLinearMap n ℝ ℂ).toContinuousLinearMap.hasFDerivAt.comp_hasDerivAt_of_eq 0 hvec rfl
+  have hconj := (hdiag.const_mul U).mul_const Uᴴ
+  have heq : U * diagonal (fun i => (↑(-(μ i * Real.log (μ i))) : ℂ)) * Uᴴ
+      = -(U * diagonal (fun i => (↑(μ i * Real.log (μ i)) : ℂ)) * Uᴴ) := by
+    have hd : (fun i => (↑(-(μ i * Real.log (μ i))) : ℂ))
+        = fun i => -(↑(μ i * Real.log (μ i)) : ℂ) := by
+      ext i; push_cast; ring
+    rw [hd, ← Matrix.diagonal_neg, Matrix.mul_neg, Matrix.neg_mul]
+  rw [heq] at hconj
+  exact hconj
+
 end QIQTH.Entropy
