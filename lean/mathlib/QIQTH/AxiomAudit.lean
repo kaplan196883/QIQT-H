@@ -1864,6 +1864,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — DPI_inequality is now a THEOREM (was an axiom): D(Φρ‖Φσ)≤D(ρ‖σ) for the
 -- concrete MixedUnitaryChannel, = dpi_mixed_unitary. The 4 DPI axioms (Channel/pull/DPI_inequality/
 -- restrict) RETIRED → budget 21→17. The DPI/Lieb tower is complete for the mixed-unitary class.
+#print axioms QIQTH.ArakiInterface.Akre_nonneg
+#print axioms QIQTH.ArakiInterface.donald_araki
+#print axioms QIQTH.ArakiInterface.dpi_ucp
+#print axioms QIQTH.ArakiInterface.AkRelEnt_self
+-- expected: standard only — the former ArakiInterface AXIOMS, now THEOREMS in the finite-dim model
+-- (NormalState=HermitianMat): Akre_nonneg=Klein (relEntropy_nonneg), donald_araki=Donald's identity,
+-- dpi_ucp=DPI (DPI_inequality), AkRelEnt_self=relEntropy_self. 9 of 11 ArakiInterface axioms RETIRED
+-- → budget 17→8. Remaining 8 axioms: ArakiInterface (Holevo + Klein-equality) 2 + EntropyBridge 6.
 -- toward DPI §6.4: cfc_log_conj/matLog_conj (log(uMu⋆)=u·log M·u⋆ via map_cfc on conjStarAlgAut),
 -- relEntropy_unitary_invariant (D(uρu⋆‖uσu⋆)=D(ρ‖σ)). matLog_smul (log(c·ρ)=(log c)·1+log ρ via
 -- cfc_comp_smul+cfc_const_add) + relEntropy_smul (D(c·ρ‖c·σ)=c·D(ρ‖σ), the log c terms cancel).

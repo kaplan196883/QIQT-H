@@ -183,7 +183,21 @@ done
 # the former `restrict`) needs the Stinespring/partial-trace averaging of §6.4, beyond the §6.3
 # joint convexity — the cited frontier.  The unused `regional_monotone`/`DPI_comp` corollaries are
 # dropped.  Net 21 → 17.  Budget ratcheted to 17.
-AXIOM_BUDGET=17
+#
+# Audit note (2026-06, ArakiInterface discharge −9 → 8): 9 of the 11 ArakiInterface axioms are
+# RETIRED.  ArakiInterface.lean now realizes the abstract interface in the finite-dim model
+# `NormalState := HermitianMat` (the DonaldSystem carrier): `AkRelEnt` := `DonaldSystem.D` (= the
+# Umegaki `relEntropy`); `Akre_nonneg` := **Klein's inequality** `relEntropy_nonneg`; `donald_araki`
+# := **Donald's identity** `Donald.donald_identity`; `dpi_ucp` := the **data-processing inequality**
+# `DPI.DPI_inequality` (mixed-unitary class) — all now THEOREMS, with the honest density-matrix
+# hypotheses Klein/DPI genuinely require (the abstract axioms were unconditional idealizations).
+# `NormalState`/`IsFaithful`/`mixture`/`NormalUCPChannel`/`pull` are now concrete defs.  HONEST SCOPE:
+# this is the finite-dim model; the genuine Araki/Type-III setting (unbounded cross-entropy, +∞
+# relative entropy) is NOT addressed.  Two results remain axioms as the cited frontier:
+# `IHol_le_Shannon` (Holevo's theorem) and `AkRelEnt_eq_zero_iff` (Klein EQUALITY case — only the
+# trivial `ρ=σ⟹D=0` direction is finite-dim immediate, via the theorem `AkRelEnt_self`).  Net 17 → 8.
+# Budget ratcheted to 8.
+AXIOM_BUDGET=8
 AXIOM_COUNT="$(grep -rhE '^axiom ' QIQTH/ | wc -l | tr -d ' ')"
 echo "[axiom-budget] raw axiom count: $AXIOM_COUNT (budget $AXIOM_BUDGET)"
 if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then
