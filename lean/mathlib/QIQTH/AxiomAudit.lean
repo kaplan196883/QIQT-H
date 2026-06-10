@@ -1816,10 +1816,11 @@ namespace QIQTH.AxiomAudit
 -- (commute_rpow_dyadic, via Commute.mul_pow) → all t (continuity continuous_matrix_rpow + dyadic density
 -- ⌊t·2ʲ⌋/2ʲ→t). This UNBLOCKS the tensor power (A⊗B)^t=A^t⊗B^t and the A^{1-t}⊗B^t form Lieb needs.
 #print axioms QIQTH.Entropy.rpow_kronecker_one
--- expected: standard only — TENSOR POWER (right factor): (A⊗ₖ1)^t = A^t⊗ₖ1 for 0≤A, 0≤t. Via kroneckerRightHom
--- (A↦A⊗ₖ1 as a continuous unital *-algebra hom) + StarAlgHomClass.map_cfc (cfc commutes with star alg homs).
--- Toward the tensor form A^{1-t}⊗B^t for Lieb; the general (A⊗B)^t=A^t⊗B^t additionally needs commuting-product
--- rpow (PQ)^t=P^tQ^t, a deep joint-cfc result not yet in Mathlib.
+#print axioms QIQTH.Entropy.rpow_one_kronecker
+#print axioms QIQTH.Entropy.rpow_kronecker
+-- expected: standard only — ★★ TENSOR POWER (A⊗ₖB)^t = A^t⊗ₖB^t for PosDef A,B and 0≤t. Factor identities
+-- (A⊗1)^t=A^t⊗1 and (1⊗B)^t=1⊗B^t via the ·⊗1 / 1⊗· star-algebra homs + StarAlgHomClass.map_cfc; the general
+-- product via A⊗B=(A⊗1)(1⊗B) (commuting) + commute_rpow_mul. THE tensor identity Lieb needs for A^{1-t}⊗B^t.
 #print axioms QIQTH.Entropy.gmean_kronecker
 #print axioms QIQTH.Entropy.tensor_sqrt_superadditive
 -- expected: standard only — TENSOR LIFT of the geometric mean (first step of Ando's tensor argument to Lieb):
