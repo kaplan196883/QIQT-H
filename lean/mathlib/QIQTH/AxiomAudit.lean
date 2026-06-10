@@ -1798,5 +1798,13 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — maximality reduction Z²≤C ⟹ Z≤√C (Z Hermitian): Z ≤ |Z| = √(Z·Z) via
 -- CFC.abs_sub_self (|Z|−Z = 2•Z⁻ ≥ 0), then √(Z·Z) ≤ √C by operator √-monotonicity. The engine of the
 -- operator geometric-mean maximality.
+#print axioms QIQTH.Entropy.gmean_mul_inv_mul_gmean
+#print axioms QIQTH.Entropy.gmean_fromBlocks_posSemidef
+#print axioms QIQTH.Entropy.le_gmean_of_fromBlocks_posSemidef
+#print axioms QIQTH.Entropy.gmean_superadditive
+-- expected: standard only — the OPERATOR GEOMETRIC MEAN A#B = √A·√(√A⁻¹ B √A⁻¹)·√A and its JOINT CONCAVITY
+-- (Carlen Thm 3.5, Ando): achievability ([[A,A#B],[A#B,B]] PSD via Schur with (A#B)A⁻¹(A#B)=B) + maximality
+-- ([[A,X],[X,B]] PSD ⟹ X ≤ A#B, via Z²≤C⟹Z≤√C after A^{-1/2}-conjugation) ⟹ superadditivity
+-- A₀#B₀+A₁#B₁ ≤ (A₀+A₁)#(B₀+B₁). The operator-mean input to Lieb's concavity theorem.
 
 end QIQTH.AxiomAudit
