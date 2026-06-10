@@ -1838,6 +1838,10 @@ namespace QIQTH.AxiomAudit
 -- jointly concave — Lieb at K=1 with the Bᵀ removed via rpow_transpose; THE relative-entropy input.
 #print axioms QIQTH.Entropy.mul_matLog_eq
 #print axioms QIQTH.Entropy.hasDerivAt_rpow_one_sub_zero
+#print axioms QIQTH.Entropy.hasDerivAt_trace_rpow_mul
+-- hasDerivAt_trace_rpow_mul: d/dt Tr(A^{1-t}·Bᵗ)|₀ = Tr(-(A·log A) + A·log B) = -D(A‖B). Product rule
+-- (Frobenius normed ring) on the two factor derivatives + the continuous linear trace. THE derivative
+-- whose negative real part is the Umegaki relative entropy — so D = lim_{t→0}(Tr A - Tr(A^{1-t}Bᵗ))/t.
 -- mul_matLog_eq: A·log A = U·diag(λᵢ log λᵢ)·Uᴴ (conjStarAlgAut multiplicativity).
 -- hasDerivAt_rpow_one_sub_zero: d/dt(t↦A^{1-t})|₀ = -(A·log A). With hasDerivAt_rpow_zero these are
 -- the two derivatives feeding the product+trace rule for d/dt Tr(A^{1-t}Bᵗ)|₀ = -relEntropy.

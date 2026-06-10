@@ -112,4 +112,19 @@ lemma hasDerivAt_rpow_one_sub_zero {A : Matrix n n ℂ} (hA : A.PosDef) :
   rw [heq] at hconj
   exact hconj
 
+/-- The derivative of `t ↦ Tr(A^{1-t}·B^t)` at `t = 0` is `Tr(-(A·log A) + A·log B) = -D(A‖B)`.
+    Product rule (matrices are a normed ring under the Frobenius norm) on the two factor derivatives,
+    composed with the (continuous, linear) trace. -/
+lemma hasDerivAt_trace_rpow_mul {A B : Matrix n n ℂ} (hA : A.PosDef) (hB : B.PosDef) :
+    HasDerivAt (fun t : ℝ => (A ^ (1 - t) * B ^ t).trace)
+      ((-(A * QIQTH.QuantumEntropy.matLog hA.1) + A * QIQTH.QuantumEntropy.matLog hB.1).trace) 0 := by
+  have hmul : HasDerivAt (fun t : ℝ => A ^ (1 - t) * B ^ t)
+      (-(A * QIQTH.QuantumEntropy.matLog hA.1) + A * QIQTH.QuantumEntropy.matLog hB.1) 0 := by
+    have h := (hasDerivAt_rpow_one_sub_zero hA).mul (hasDerivAt_rpow_zero hB)
+    rw [CFC.rpow_zero B hB.posSemidef.nonneg, Matrix.mul_one, show (1 : ℝ) - 0 = 1 by ring,
+      CFC.rpow_one A hA.posSemidef.nonneg] at h
+    exact h
+  exact (Matrix.traceLinearMap n ℝ ℂ).toContinuousLinearMap.hasFDerivAt.comp_hasDerivAt_of_eq
+    0 hmul rfl
+
 end QIQTH.Entropy
