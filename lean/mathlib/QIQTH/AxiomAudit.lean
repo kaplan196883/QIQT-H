@@ -1874,8 +1874,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ArakiInterface.AkRelEnt_self
 #print axioms QIQTH.ArakiInterface.AkRelEnt_eq_zero_iff
 -- AkRelEnt_eq_zero_iff is now a THEOREM (was an axiom): D=0 ↔ ρ=σ, = relEntropy_eq_zero + AkRelEnt_self.
--- 10 of 11 ArakiInterface axioms now retired → budget 8→7. Last ArakiInterface axiom: IHol_le_Shannon
--- (Holevo). Remaining 7 axioms: ArakiInterface 1 + EntropyBridge 6 (Tomita–Takesaki frontier).
+#print axioms QIQTH.ArakiInterface.matLog_le
+#print axioms QIQTH.ArakiInterface.IHol_le_Shannon
+-- matLog_le: ★ OPERATOR MONOTONICITY OF log (A⪯B⟹log A⪯log B), via Mathlib CFC.log_le_log transported
+-- through the CStarMatrix bridge. IHol_le_Shannon is now a THEOREM (was an axiom): ★★★★★ HOLEVO'S
+-- BOUND χ=Σpᵢ D(ρᵢ‖ρ̄)≤H(p), pointwise via pᵢρᵢ⪯ρ̄ + log monotonicity. ALL 11 ArakiInterface axioms
+-- now RETIRED → budget 7→6. Remaining 6 axioms: EntropyBridge (Tomita–Takesaki / Type II frontier).
 -- expected: standard only — the former ArakiInterface AXIOMS, now THEOREMS in the finite-dim model
 -- (NormalState=HermitianMat): Akre_nonneg=Klein (relEntropy_nonneg), donald_araki=Donald's identity,
 -- dpi_ucp=DPI (DPI_inequality), AkRelEnt_self=relEntropy_self. 9 of 11 ArakiInterface axioms RETIRED

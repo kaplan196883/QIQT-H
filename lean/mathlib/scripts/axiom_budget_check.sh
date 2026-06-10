@@ -204,9 +204,18 @@ done
 # `relEntropy_nonneg`: `D=0` forces `KL(p‖r)=0 ⟹ p=r` (Gibbs equality, via `log x < x−1` for `x≠1`)
 # and the strict-Jensen equality `∑ⱼ Sᵢⱼ log qⱼ = log rᵢ` (`StrictConcaveOn.map_sum_eq_iff'`), whence
 # `Wᵢⱼ·qⱼ = pᵢ·Wᵢⱼ`, i.e. `W·diag(q)=diag(p)·W`, hence `σ = V·diag(q)·V⋆ = U·diag(p)·U⋆ = ρ`.  Net
-# 8 → 7.  Budget ratcheted to 7.  Remaining 7: ArakiInterface 1 (IHol_le_Shannon = Holevo's theorem)
-# + EntropyBridge 6 (all genuine Tomita–Takesaki / Type II crossed-product modular theory).
-AXIOM_BUDGET=7
+# 8 → 7.  Budget ratcheted to 7.
+#
+# Audit note (2026-06, Holevo bound −1 → 6): `ArakiInterface.IHol_le_Shannon` is RETIRED — now a
+# THEOREM (and *without* the orthogonality hypothesis; the inequality is general).  Holevo's bound
+# `χ = Σᵢ pᵢ D(ρᵢ‖ρ̄) ≤ H(p)` is proved pointwise: `pᵢρᵢ ⪯ ρ̄`, so by **operator monotonicity of log**
+# (`matLog_le` — Mathlib's `CFC.log_le_log` transported through the CStarMatrix bridge), paired with
+# `ρᵢ ⪰ 0` and `log(pᵢρᵢ) = (log pᵢ)·1 + log ρᵢ`, gives `D(ρᵢ‖ρ̄) ≤ −log pᵢ` (`relEntropy_le_neg_log`);
+# summing yields `χ ≤ H(p)`.  This DISCHARGES ALL of ArakiInterface (11 → 0 axioms over the session).
+# Net 7 → 6.  Budget ratcheted to 6.  Remaining 6: the entire EntropyBridge module (RState, Sren_CPW,
+# chi_R, dK_modular, refState, bridge_identity) — genuine Tomita–Takesaki / Type II crossed-product
+# modular theory (CPW renormalized entropy, modular Hamiltonian), which Mathlib lacks entirely.
+AXIOM_BUDGET=6
 AXIOM_COUNT="$(grep -rhE '^axiom ' QIQTH/ | wc -l | tr -d ' ')"
 echo "[axiom-budget] raw axiom count: $AXIOM_COUNT (budget $AXIOM_BUDGET)"
 if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then
