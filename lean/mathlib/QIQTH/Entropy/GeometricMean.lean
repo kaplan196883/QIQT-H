@@ -168,4 +168,41 @@ theorem gmean_superadditive {A₀ A₁ B₀ B₁ : Matrix n n ℂ}
   exact le_gmean_of_fromBlocks_posSemidef (hA₀.add hA₁) (add_nonneg hB₀ hB₁)
     ((gmean_isHermitian A₀ B₀).add (gmean_isHermitian A₁ B₁)) hblock
 
+/-! ### Monotonicity and the dyadic ladder toward the general `A #ₜ B` family -/
+
+/-- `A # B` is positive semidefinite (a congruence of the positive `√(√A⁻¹ B √A⁻¹)`). -/
+lemma gmean_nonneg {A B : Matrix n n ℂ} (hB : 0 ≤ B) : 0 ≤ gmean A B := by
+  have h := (nonneg_iff_posSemidef.mp (CFC.sqrt_nonneg ((CFC.sqrt A)⁻¹ * B * (CFC.sqrt A)⁻¹))
+    ).mul_mul_conjTranspose_same (CFC.sqrt A)
+  rw [(sqrt_isHermitian A).eq] at h
+  exact nonneg_iff_posSemidef.mpr h
+
+/-- **Monotonicity in the second argument**: `B ≤ B' ⟹ A # B ≤ A # B'`.  Via conjugation
+    monotonicity and operator monotonicity of `√` — the ingredient that drives the dyadic ladder. -/
+theorem gmean_le_gmean_right {A B B' : Matrix n n ℂ} (hB : 0 ≤ B) (hBB' : B ≤ B') :
+    gmean A B ≤ gmean A B' := by
+  have hin : (CFC.sqrt A)⁻¹ * B * (CFC.sqrt A)⁻¹ ≤ (CFC.sqrt A)⁻¹ * B' * (CFC.sqrt A)⁻¹ := by
+    have := conjTranspose_mul_mul_le hBB' (CFC.sqrt A)⁻¹
+    rwa [(sqrt_inv_isHermitian A).eq] at this
+  have hsq := matrix_sqrt_le_sqrt (inner_conj_posSemidef hB) hin
+  have hconj := conjTranspose_mul_mul_le hsq (CFC.sqrt A)
+  rw [(sqrt_isHermitian A).eq] at hconj
+  exact hconj
+
+/-- **`t = 1/4` weighted geometric mean concavity** (one rung up the dyadic ladder).
+    `A #_{1/4} B = A # (A # B)` (composition identity), and its joint concavity follows from the
+    superadditivity of `#` (twice) and monotonicity in the second argument:
+    `A₀#(A₀#B₀) + A₁#(A₁#B₁) ≤ (A₀+A₁)#((A₀+A₁)#(B₀+B₁))`.
+    Iterating gives every dyadic weight, and continuity the full `A #ₜ B` (hence `A^{1-t} ⊗ B^t`)
+    family that feeds Lieb's concavity. -/
+theorem gmean_nested_superadditive {A₀ A₁ B₀ B₁ : Matrix n n ℂ}
+    (hA₀ : A₀.PosDef) (hA₁ : A₁.PosDef) (hB₀ : 0 ≤ B₀) (hB₁ : 0 ≤ B₁) :
+    gmean A₀ (gmean A₀ B₀) + gmean A₁ (gmean A₁ B₁)
+      ≤ gmean (A₀ + A₁) (gmean (A₀ + A₁) (B₀ + B₁)) := by
+  have h1 := gmean_superadditive hA₀ hA₁ (gmean_nonneg (A := A₀) hB₀) (gmean_nonneg (A := A₁) hB₁)
+  have h2 := gmean_superadditive hA₀ hA₁ hB₀ hB₁
+  have h3 := gmean_le_gmean_right (A := A₀ + A₁)
+    (add_nonneg (gmean_nonneg (A := A₀) hB₀) (gmean_nonneg (A := A₁) hB₁)) h2
+  exact h1.trans h3
+
 end QIQTH.Entropy

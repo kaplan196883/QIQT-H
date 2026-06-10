@@ -1812,5 +1812,12 @@ namespace QIQTH.AxiomAudit
 -- gmean(A⊗I)(I⊗B)=√A⊗√B (commuting tensor geometric mean, via sqrt_kronecker/inv_kronecker) ⟹
 -- JOINT CONCAVITY of (A,B)↦√A⊗√B: √A₀⊗√B₀+√A₁⊗√B₁ ≤ √(A₀+A₁)⊗√(B₀+B₁) (the p=q=1/2 case of A^p⊗B^q
 -- concavity, which with the vec/trace identity yields Lieb's concavity theorem, Carlen §6.1).
+#print axioms QIQTH.Entropy.gmean_le_gmean_right
+#print axioms QIQTH.Entropy.gmean_nested_superadditive
+-- expected: standard only — DYADIC LADDER toward the general A#ₜB (hence A^{1-t}⊗B^t) family:
+-- gmean_le_gmean_right (monotonicity in 2nd arg, via conjugation + operator √-monotonicity) +
+-- gmean_nested_superadditive (the t=1/4 weighted-mean concavity A₀#(A₀#B₀)+A₁#(A₁#B₁) ≤
+-- (A₀+A₁)#((A₀+A₁)#(B₀+B₁)), from superadditivity ×2 + monotonicity). Iterating gives all dyadic
+-- weights; continuity gives the full A#ₜB family feeding Lieb's concavity.
 
 end QIQTH.AxiomAudit
