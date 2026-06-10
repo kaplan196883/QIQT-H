@@ -205,4 +205,35 @@ theorem gmean_nested_superadditive {A₀ A₁ B₀ B₁ : Matrix n n ℂ}
     (add_nonneg (gmean_nonneg (A := A₀) hB₀) (gmean_nonneg (A := A₁) hB₁)) h2
   exact h1.trans h3
 
+/-- The `k`-fold nested geometric mean `nestGmean k A B = A #_{1/2ᵏ} B` (using the composition identity
+    `A # (A #ₜ B) = A #_{t/2} B`): `nestGmean 0 A B = B`, `nestGmean (k+1) A B = A # (nestGmean k A B)`. -/
+noncomputable def nestGmean : ℕ → Matrix n n ℂ → Matrix n n ℂ → Matrix n n ℂ
+  | 0, _, B => B
+  | (k + 1), A, B => gmean A (nestGmean k A B)
+
+/-- `0 ≤ nestGmean k A B`. -/
+lemma nestGmean_nonneg (k : ℕ) {A B : Matrix n n ℂ} (hB : 0 ≤ B) : 0 ≤ nestGmean k A B := by
+  induction k with
+  | zero => exact hB
+  | succ m ih => exact gmean_nonneg (A := A) ih
+
+/-- **Joint concavity of the weighted geometric mean at every dyadic weight `t = 1/2ᵏ`**: the nested
+    mean is superadditive,
+    `nestGmean k A₀ B₀ + nestGmean k A₁ B₁ ≤ nestGmean k (A₀+A₁) (B₀+B₁)`.
+    Proof by induction on `k`: each rung uses superadditivity of `#` and monotonicity in the second
+    argument (`gmean_le_gmean_right`), exactly as in the `k=2` (`t=1/4`) case.  Continuity in the weight
+    then yields the full `A #ₜ B` family — equivalently the joint concavity of `A^{1-t} ⊗ B^t` feeding
+    Lieb's concavity theorem. -/
+theorem nestGmean_superadditive (k : ℕ) {A₀ A₁ B₀ B₁ : Matrix n n ℂ}
+    (hA₀ : A₀.PosDef) (hA₁ : A₁.PosDef) (hB₀ : 0 ≤ B₀) (hB₁ : 0 ≤ B₁) :
+    nestGmean k A₀ B₀ + nestGmean k A₁ B₁ ≤ nestGmean k (A₀ + A₁) (B₀ + B₁) := by
+  induction k with
+  | zero => exact le_refl _
+  | succ m ih =>
+    have h1 := gmean_superadditive hA₀ hA₁ (nestGmean_nonneg m (A := A₀) hB₀)
+      (nestGmean_nonneg m (A := A₁) hB₁)
+    have h3 := gmean_le_gmean_right (A := A₀ + A₁)
+      (add_nonneg (nestGmean_nonneg m (A := A₀) hB₀) (nestGmean_nonneg m (A := A₁) hB₁)) ih
+    exact h1.trans h3
+
 end QIQTH.Entropy

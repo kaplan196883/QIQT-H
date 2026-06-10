@@ -1819,5 +1819,10 @@ namespace QIQTH.AxiomAudit
 -- gmean_nested_superadditive (the t=1/4 weighted-mean concavity A₀#(A₀#B₀)+A₁#(A₁#B₁) ≤
 -- (A₀+A₁)#((A₀+A₁)#(B₀+B₁)), from superadditivity ×2 + monotonicity). Iterating gives all dyadic
 -- weights; continuity gives the full A#ₜB family feeding Lieb's concavity.
+#print axioms QIQTH.Entropy.nestGmean_superadditive
+-- expected: standard only — JOINT CONCAVITY AT EVERY DYADIC WEIGHT t=1/2ᵏ (the general A#ₜB family,
+-- inductively): nestGmean k A₀ B₀ + nestGmean k A₁ B₁ ≤ nestGmean k (A₀+A₁)(B₀+B₁), where
+-- nestGmean k = A #_{1/2ᵏ} B is the k-fold nested geometric mean. Induction on k via superadditivity +
+-- monotonicity-in-2nd-arg. Continuity in t then gives all t, i.e. A^{1-t}⊗B^t concavity → Lieb (§6.1).
 
 end QIQTH.AxiomAudit
