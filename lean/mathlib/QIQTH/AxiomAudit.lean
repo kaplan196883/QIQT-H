@@ -1806,6 +1806,11 @@ namespace QIQTH.AxiomAudit
 -- (Carlen Thm 3.5, Ando): achievability ([[A,A#B],[A#B,B]] PSD via Schur with (A#B)A⁻¹(A#B)=B) + maximality
 -- ([[A,X],[X,B]] PSD ⟹ X ≤ A#B, via Z²≤C⟹Z≤√C after A^{-1/2}-conjugation) ⟹ superadditivity
 -- A₀#B₀+A₁#B₁ ≤ (A₀+A₁)#(B₀+B₁). The operator-mean input to Lieb's concavity theorem.
+#print axioms QIQTH.Entropy.rpow_kronecker_one
+-- expected: standard only — TENSOR POWER (right factor): (A⊗ₖ1)^t = A^t⊗ₖ1 for 0≤A, 0≤t. Via kroneckerRightHom
+-- (A↦A⊗ₖ1 as a continuous unital *-algebra hom) + StarAlgHomClass.map_cfc (cfc commutes with star alg homs).
+-- Toward the tensor form A^{1-t}⊗B^t for Lieb; the general (A⊗B)^t=A^t⊗B^t additionally needs commuting-product
+-- rpow (PQ)^t=P^tQ^t, a deep joint-cfc result not yet in Mathlib.
 #print axioms QIQTH.Entropy.gmean_kronecker
 #print axioms QIQTH.Entropy.tensor_sqrt_superadditive
 -- expected: standard only — TENSOR LIFT of the geometric mean (first step of Ando's tensor argument to Lieb):
