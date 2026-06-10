@@ -22,6 +22,7 @@ import QIQTH.Entropy.GeometricMean
 import QIQTH.Entropy.WeightedMean
 import QIQTH.Entropy.TensorMean
 import QIQTH.Entropy.TensorPower
+import QIQTH.Entropy.CommuteRpow
 import QIQTH.Entropy.OrderLimit
 import QIQTH.HolevoCoarseGraining
 import QIQTH.DPI

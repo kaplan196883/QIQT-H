@@ -1806,6 +1806,12 @@ namespace QIQTH.AxiomAudit
 -- (Carlen Thm 3.5, Ando): achievability ([[A,A#B],[A#B,B]] PSD via Schur with (A#B)A⁻¹(A#B)=B) + maximality
 -- ([[A,X],[X,B]] PSD ⟹ X ≤ A#B, via Z²≤C⟹Z≤√C after A^{-1/2}-conjugation) ⟹ superadditivity
 -- A₀#B₀+A₁#B₁ ≤ (A₀+A₁)#(B₀+B₁). The operator-mean input to Lieb's concavity theorem.
+#print axioms QIQTH.Entropy.posSemidef_mul_of_commute
+#print axioms QIQTH.Entropy.sqrt_mul_of_commute
+-- expected: standard only — foundation for commuting-product rpow (the tensor-power obstacle): the product
+-- of commuting PSD matrices is PSD (X*Y=√X·Y·√X congruence), and the commuting square root √(PQ)=√P·√Q
+-- (via sqrt_unique + commuting cfc). Iterates to (PQ)^{1/2ⁿ}; continuity (continuous_matrix_rpow) + dyadic
+-- density then give the general (PQ)^t=P^t·Q^t, hence (A⊗B)^t=A^t⊗B^t for Lieb.
 #print axioms QIQTH.Entropy.rpow_kronecker_one
 -- expected: standard only — TENSOR POWER (right factor): (A⊗ₖ1)^t = A^t⊗ₖ1 for 0≤A, 0≤t. Via kroneckerRightHom
 -- (A↦A⊗ₖ1 as a continuous unital *-algebra hom) + StarAlgHomClass.map_cfc (cfc commutes with star alg homs).
