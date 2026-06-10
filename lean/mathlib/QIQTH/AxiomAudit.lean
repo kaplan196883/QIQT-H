@@ -1693,4 +1693,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EffectGleason.maxMixed
 -- expected: standard only — non-vacuity: maximally-mixed EffectMeasure (0 < d).
 
+-- A3: Finite-dim quantum relative-entropy program (begins retiring the entropy axiom stack)
+#print axioms QIQTH.QuantumEntropy.IsDensity.sum_eigenvalues
+-- expected: standard only — eigenvalues of a finite density matrix sum to 1 (tr = ∑ eigenvalues).
+#print axioms QIQTH.QuantumEntropy.IsDensity.eigenvalues_le_one
+-- expected: standard only — each eigenvalue of a density matrix is ≤ 1 (bounded by the unit sum).
+#print axioms QIQTH.QuantumEntropy.vonNeumannEntropy_nonneg
+-- expected: standard only — ★ von Neumann entropy S(ρ)=∑ negMulLog(λᵢ) ≥ 0 for any density matrix:
+-- the concrete finite-dim content of the (currently opaque) entropy object Donald.H. First step of the
+-- program to replace the axiomatized quantum-entropy stack with theorems about concrete density matrices.
+-- (Next: Hermitian matrix log → relative entropy D(ρ‖σ) → Klein's inequality D_nonneg.)
+
 end QIQTH.AxiomAudit

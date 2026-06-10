@@ -13,6 +13,7 @@ import QIQTH.KrausLocality
 import QIQTH.ResolutionExt
 import QIQTH.CapacityPacking
 import QIQTH.RelEntPositivity
+import QIQTH.QuantumRelativeEntropy
 import QIQTH.HolevoCoarseGraining
 import QIQTH.DPI
 import QIQTH.ShannonFano
