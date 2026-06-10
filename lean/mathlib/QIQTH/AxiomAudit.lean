@@ -1818,6 +1818,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Entropy.rpow_kronecker_one
 #print axioms QIQTH.Entropy.rpow_one_kronecker
 #print axioms QIQTH.Entropy.rpow_kronecker
+#print axioms QIQTH.Entropy.wgmean_kronecker
+#print axioms QIQTH.Entropy.tensor_rpow_superadditive
+-- expected: standard only — ★★★ THE LIEB INPUT: JOINT CONCAVITY of (A,B)↦A^{1-t}⊗B^t for t∈[0,1].
+-- wgmean_kronecker: wgmean t (A⊗I)(I⊗B) = A^{1-t}⊗B^t (commuting tensor weighted mean, via rpow_kronecker +
+-- final factor √A·(A⁻¹)^t·√A=A^{1-t} = sqrt_mul_rpow_inv_mul_sqrt with rpow_inv_eq (A⁻¹)^t=A^{-t}). Then
+-- Ando's wgSuperadd_mem_Icc applied to (A⊗I,I⊗B) gives tensor_rpow_superadditive: A₀^{1-t}⊗B₀^t+A₁^{1-t}⊗B₁^t
+-- ≤ (A₀+A₁)^{1-t}⊗(B₀+B₁)^t. With the vec/trace identity this yields Lieb's concavity theorem (Carlen §6.1).
 -- expected: standard only — ★★ TENSOR POWER (A⊗ₖB)^t = A^t⊗ₖB^t for PosDef A,B and 0≤t. Factor identities
 -- (A⊗1)^t=A^t⊗1 and (1⊗B)^t=1⊗B^t via the ·⊗1 / 1⊗· star-algebra homs + StarAlgHomClass.map_cfc; the general
 -- product via A⊗B=(A⊗1)(1⊗B) (commuting) + commute_rpow_mul. THE tensor identity Lieb needs for A^{1-t}⊗B^t.
