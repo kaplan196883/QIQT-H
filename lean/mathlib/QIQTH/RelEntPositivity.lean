@@ -21,41 +21,43 @@ namespace RelEntPositivity
 
 open Donald
 
-/-- **Klein's inequality (axiom):  D(ρ ‖ σ) ≥ 0.**
+/-! ### Klein's inequality `D(ρ‖σ) ≥ 0` — interface hypothesis, DISCHARGED in finite dimensions.
 
-    At the Araki / vN-algebra level this is a deep theorem; we
-    axiomatize at the abstract-state level.  See `KL_classical_nonneg`
-    for the finite-classical version which *is* provable from
-    `Real.log` inequalities. -/
-axiom D_nonneg (ρ σ : State) : 0 ≤ D ρ σ
+Formerly two axioms `D_nonneg`/`D_eq_zero_iff_eq` over the opaque `Donald.D`.  At the Araki/vN level
+Klein's inequality is Lindblad–Uhlmann (operator convexity of `−log`); over the *uninterpreted* `D` it
+cannot be proved, so we no longer assert it as an axiom.  Instead the nonnegativity is carried as an
+explicit hypothesis `hD_nonneg` by the few theorems that need it (the "interface-as-hypothesis, not axiom"
+pattern), and it is **discharged for the genuine finite-dimensional model**:
+`QIQTH.QuantumEntropy.relEntropy_nonneg` proves `D(ρ‖σ) = tr(ρ(log ρ − log σ)) ≥ 0` for concrete
+positive-definite density matrices, axiom-free, by the doubly-stochastic/Jensen route (using
+`KL_classical_nonneg` below as the Gibbs step).  The equality case `D = 0 ↔ ρ = σ` (former
+`D_eq_zero_iff_eq`, used nowhere) is dropped — it is the strict-Jensen refinement, a later milestone. -/
 
-/-- **Klein equality case (axiom):  D(ρ ‖ σ) = 0  ⇔  ρ = σ.**
-
-    Under faithfulness assumptions on σ.  We state the forward
-    direction as an axiom at the abstract level. -/
-axiom D_eq_zero_iff_eq (ρ σ : State) : D ρ σ = 0 ↔ ρ = σ
-
-/-- A non-negativity corollary on a weighted sum of relative entropies. -/
+/-- A non-negativity corollary on a weighted sum of relative entropies, given relative-entropy
+    nonnegativity `hD_nonneg` (Klein's inequality — discharged for density matrices by
+    `QuantumEntropy.relEntropy_nonneg`). -/
 theorem D_weighted_nonneg
     {ι : Type*} (s : Finset ι) (p : ι → ℝ)
     (hp_nn : ∀ i ∈ s, 0 ≤ p i)
-    (ρ : ι → State) (σ : State) :
+    (ρ : ι → State) (σ : State)
+    (hD_nonneg : ∀ ρ' σ' : State, 0 ≤ D ρ' σ') :
     0 ≤ ∑ k ∈ s, p k * D (ρ k) σ := by
   apply Finset.sum_nonneg
   intro k hk
-  exact mul_nonneg (hp_nn k hk) (D_nonneg _ _)
+  exact mul_nonneg (hp_nn k hk) (hD_nonneg _ _)
 
 /-- Donald's identity rewritten as `D(ρ̄ ‖ σ) ≤ Σ p_k D(ρ_k ‖ σ)` —
     convexity of relative entropy in its first argument (Lindblad,
-    classical Gibbs). -/
+    classical Gibbs), given Klein nonnegativity `hD_nonneg`. -/
 theorem D_convex_in_first_arg
     {ι : Type*} (s : Finset ι) (p : ι → ℝ)
     (hp_nn : ∀ i ∈ s, 0 ≤ p i)
-    (ρ : ι → State) (σ : State) :
+    (ρ : ι → State) (σ : State)
+    (hD_nonneg : ∀ ρ' σ' : State, 0 ≤ D ρ' σ') :
     D (mixture s p ρ) σ ≤ ∑ k ∈ s, p k * D (ρ k) σ := by
   have hDonald := donald_identity s p ρ σ
   have hHol_nn : 0 ≤ ∑ k ∈ s, p k * D (ρ k) (mixture s p ρ) :=
-    D_weighted_nonneg s p hp_nn ρ (mixture s p ρ)
+    D_weighted_nonneg s p hp_nn ρ (mixture s p ρ) hD_nonneg
   linarith
 
 /-- **Classical KL non-negativity** — the finite-distribution version

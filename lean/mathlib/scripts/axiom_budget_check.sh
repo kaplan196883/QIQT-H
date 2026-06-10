@@ -149,7 +149,17 @@ done
 # hypothesis pattern).  This both retires an axiom AND closes a soundness hole
 # (the axiom-budget check counts axioms + catches sorry, but does NOT detect a
 # false axiom — exactly this blind spot).  Net 32 → 31.  Budget ratcheted to 31.
-AXIOM_BUDGET=31
+#
+# Audit note (2026-06-10, Klein's inequality DISCHARGED → RelEntPositivity axioms retired):
+# `QIQTH.QuantumEntropy.relEntropy_nonneg` PROVES Klein's inequality D(ρ‖σ)=tr(ρ(log ρ−log σ))≥0 for
+# concrete positive-definite density matrices, axiom-free (doubly-stochastic/Jensen, finishing with the
+# already-axiom-free KL_classical_nonneg).  Given that finite-dim discharge, the two abstract axioms in
+# RelEntPositivity were retired: `D_nonneg` (over the OPAQUE Donald.D — unprovable as stated) is now an
+# explicit hypothesis `hD_nonneg` on its 4 consumers (D_weighted_nonneg, D_convex_in_first_arg,
+# Holevo.I_Hol_nonneg, Holevo.saturation_rigidity), discharged for the genuine model by relEntropy_nonneg
+# (interface-as-hypothesis pattern); `D_eq_zero_iff_eq` (the Klein equality case, used by NOTHING) was
+# deleted.  Net 31 → 29.  Budget ratcheted to 29.
+AXIOM_BUDGET=29
 AXIOM_COUNT="$(grep -rhE '^axiom ' QIQTH/ | wc -l | tr -d ' ')"
 echo "[axiom-budget] raw axiom count: $AXIOM_COUNT (budget $AXIOM_BUDGET)"
 if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then

@@ -27,17 +27,17 @@ namespace QIQTH
 namespace HolevoCoarseGraining
 
 open Donald
-open RelEntPositivity (D_nonneg)
 
 /-- The Holographic mutual information in Donald's identity is
-    non-negative — it is a weighted sum of D(ρ_k ‖ ρ̄) terms. -/
+    non-negative — it is a weighted sum of D(ρ_k ‖ ρ̄) terms.  Uses Klein nonnegativity `hD_nonneg`
+    (discharged for density matrices by `QuantumEntropy.relEntropy_nonneg`). -/
 theorem I_Hol_nonneg
     {ι : Type*} (s : Finset ι) (p : ι → ℝ) (hp_nn : ∀ i ∈ s, 0 ≤ p i)
-    (ρ : ι → State) :
+    (ρ : ι → State) (hD_nonneg : ∀ ρ' σ' : State, 0 ≤ D ρ' σ') :
     0 ≤ ∑ k ∈ s, p k * D (ρ k) (mixture s p ρ) := by
   apply Finset.sum_nonneg
   intro k hk
-  exact mul_nonneg (hp_nn k hk) (D_nonneg _ _)
+  exact mul_nonneg (hp_nn k hk) (hD_nonneg _ _)
 
 /-- **Donald deficit formula.**
     Rearranging Donald's identity:
@@ -66,7 +66,8 @@ theorem saturation_rigidity
     {ι : Type*} (s : Finset ι) (p : ι → ℝ) (hp_nn : ∀ i ∈ s, 0 ≤ p i)
     (ρ : ι → State) (σ : State) (C : ℝ)
     (hSum_le_C : (∑ k ∈ s, p k * D (ρ k) σ) ≤ C)
-    (hSaturated : ∑ k ∈ s, p k * D (ρ k) (mixture s p ρ) = C) :
+    (hSaturated : ∑ k ∈ s, p k * D (ρ k) (mixture s p ρ) = C)
+    (hD_nonneg : ∀ ρ' σ' : State, 0 ≤ D ρ' σ') :
     D (mixture s p ρ) σ = 0 ∧
     (∑ k ∈ s, p k * D (ρ k) σ) = C := by
   have hDef := donald_deficit s p ρ σ C
@@ -75,7 +76,7 @@ theorem saturation_rigidity
   have hLHS_zero : C - (∑ k ∈ s, p k * D (ρ k) (mixture s p ρ)) = 0 := by
     linarith
   have hSum_term_nn : 0 ≤ C - ∑ k ∈ s, p k * D (ρ k) σ := by linarith
-  have hDbar_nn : 0 ≤ D (mixture s p ρ) σ := D_nonneg _ _
+  have hDbar_nn : 0 ≤ D (mixture s p ρ) σ := hD_nonneg _ _
   constructor
   · linarith
   · linarith
