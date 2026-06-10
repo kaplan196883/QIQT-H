@@ -1730,5 +1730,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.QuantumEntropy.crossEntropy_sum
 -- expected: standard only — Donald identity (A2) crossEnt linear in first arg, crossEnt(∑pₖρₖ,σ)=∑pₖcrossEnt(ρₖ,σ);
 -- concrete content of Donald.crossEnt_mixture. The three Donald structural identities now PROVED for the matrix model.
+#print axioms QIQTH.Donald.donald_identity
+-- expected: standard only — Donald's identity is now a THEOREM about any DonaldSystem typeclass (the former 8
+-- opaque Donald axioms — State/D/H/crossEnt/mixture + the 3 identities — are now class fields, NOT axioms).
+#print axioms QIQTH.QuantumEntropy.instDonaldSystemHermitianMat
+-- expected: standard only — ★★ the concrete DISCHARGE: Hermitian matrices form a DonaldSystem, axiom-free.
+-- D/H/crossEnt = the trace (Umegaki) forms; (A1),(A3) are rfl, (A2) is crossEntropy_sum (trace linearity).
+-- This retires the 8 former Donald axioms (budget 29→21): they are now derived facts about a realizable
+-- interface, with a genuine finite-dim model, rather than global assumptions.
 
 end QIQTH.AxiomAudit

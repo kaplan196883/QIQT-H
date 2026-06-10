@@ -159,7 +159,18 @@ done
 # Holevo.I_Hol_nonneg, Holevo.saturation_rigidity), discharged for the genuine model by relEntropy_nonneg
 # (interface-as-hypothesis pattern); `D_eq_zero_iff_eq` (the Klein equality case, used by NOTHING) was
 # deleted.  Net 31 → 29.  Budget ratcheted to 29.
-AXIOM_BUDGET=29
+#
+# Audit note (2026-06-10, DonaldSystem typeclass refactor — 8 Donald axioms retired):
+# `Donald.lean` formerly declared `State/D/H/crossEnt/mixture` (5 opaque carriers) + the 3 structural
+# identity axioms `D_eq_crossEnt_sub_H`/`crossEnt_mixture`/`crossEnt_self` = 8 axioms.  These are now the
+# FIELDS of a typeclass `QIQTH.DonaldSystem State` (not axioms), and `donald_identity` is a THEOREM about any
+# DonaldSystem.  Consumers (RelEntPositivity, HolevoCoarseGraining, DPI) are parametrized by
+# `[DonaldSystem State]`.  The typeclass is DISCHARGED, axiom-free, by the concrete instance
+# `QuantumEntropy.instDonaldSystemHermitianMat` (Hermitian matrices; D/H/crossEnt = trace Umegaki forms;
+# A1/A3 rfl, A2 = crossEntropy_sum) — a genuine finite-dim model, so the former axioms are now derived facts
+# about a realizable interface.  (DPI's own 4 axioms — Channel/Channel.pull/DPI_inequality/restrict, the
+# Lieb-hard data-processing frontier — remain, re-based on the typeclass.)  Net 29 → 21.  Budget ratcheted to 21.
+AXIOM_BUDGET=21
 AXIOM_COUNT="$(grep -rhE '^axiom ' QIQTH/ | wc -l | tr -d ' ')"
 echo "[axiom-budget] raw axiom count: $AXIOM_COUNT (budget $AXIOM_BUDGET)"
 if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then

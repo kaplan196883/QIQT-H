@@ -19,7 +19,9 @@ import Mathlib.Tactic.Positivity
 namespace QIQTH
 namespace RelEntPositivity
 
-open Donald
+open Donald DonaldSystem
+
+variable {State : Type} [DonaldSystem State]
 
 /-! ### Klein's inequality `D(ρ‖σ) ≥ 0` — interface hypothesis, DISCHARGED in finite dimensions.
 
@@ -37,7 +39,7 @@ positive-definite density matrices, axiom-free, by the doubly-stochastic/Jensen 
     nonnegativity `hD_nonneg` (Klein's inequality — discharged for density matrices by
     `QuantumEntropy.relEntropy_nonneg`). -/
 theorem D_weighted_nonneg
-    {ι : Type*} (s : Finset ι) (p : ι → ℝ)
+    {ι : Type} (s : Finset ι) (p : ι → ℝ)
     (hp_nn : ∀ i ∈ s, 0 ≤ p i)
     (ρ : ι → State) (σ : State)
     (hD_nonneg : ∀ ρ' σ' : State, 0 ≤ D ρ' σ') :
@@ -50,7 +52,7 @@ theorem D_weighted_nonneg
     convexity of relative entropy in its first argument (Lindblad,
     classical Gibbs), given Klein nonnegativity `hD_nonneg`. -/
 theorem D_convex_in_first_arg
-    {ι : Type*} (s : Finset ι) (p : ι → ℝ)
+    {ι : Type} (s : Finset ι) (p : ι → ℝ)
     (hp_nn : ∀ i ∈ s, 0 ≤ p i)
     (ρ : ι → State) (σ : State)
     (hD_nonneg : ∀ ρ' σ' : State, 0 ≤ D ρ' σ') :

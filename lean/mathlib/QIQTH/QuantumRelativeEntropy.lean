@@ -391,4 +391,33 @@ theorem crossEntropy_sum {ι : Type*} (s : Finset ι) (p : ι → ℝ) (ρ : ι 
   rw [Complex.re_sum, ← Finset.sum_neg_distrib]
   exact Finset.sum_congr rfl fun k _ => by rw [Complex.re_ofReal_mul]; ring
 
+/-! ### The concrete `DonaldSystem` instance (Hermitian matrices)
+
+This discharges the `DonaldSystem` typeclass — the former opaque `Donald` axioms (state type,
+relative entropy, entropy, cross-entropy, mixture, and the three structural identities) — for the
+genuine finite-dimensional model.  `D`, `H`, `crossEnt` are the trace forms; the three identities
+are `rfl` (A1, A3, definitional) and `crossEntropy_sum` (A2, trace linearity). -/
+
+/-- The state type for the concrete Donald system: Hermitian matrices of a fixed finite dimension. -/
+def HermitianMat (n : Type) [Fintype n] [DecidableEq n] : Type := {A : Matrix n n ℂ // A.IsHermitian}
+
+/-- **The Donald relative-entropy system on Hermitian matrices.**  Realizes the `DonaldSystem`
+    typeclass concretely, axiom-free — the witness that the former opaque `Donald` axioms hold for a
+    genuine model (the finite-dimensional Umegaki relative entropy). -/
+noncomputable instance instDonaldSystemHermitianMat {m : Type} [Fintype m] [DecidableEq m] :
+    DonaldSystem (HermitianMat m) where
+  D ρ σ := -((ρ.1 * matLog σ.2).trace.re) - -((ρ.1 * matLog ρ.2).trace.re)
+  H ρ := -((ρ.1 * matLog ρ.2).trace.re)
+  crossEnt ρ σ := -((ρ.1 * matLog σ.2).trace.re)
+  mixture s p ρ := ⟨∑ k ∈ s, (p k : ℂ) • (ρ k).1, by
+    show (∑ k ∈ s, (p k : ℂ) • (ρ k).1)ᴴ = ∑ k ∈ s, (p k : ℂ) • (ρ k).1
+    rw [Matrix.conjTranspose_sum]
+    refine Finset.sum_congr rfl fun k _ => ?_
+    rw [Matrix.conjTranspose_smul, (ρ k).2.eq]
+    congr 1
+    exact Complex.conj_ofReal (p k)⟩
+  D_eq_crossEnt_sub_H _ _ := rfl
+  crossEnt_mixture s p ρ σ := crossEntropy_sum s p (fun k => (ρ k).1) σ.2
+  crossEnt_self _ := rfl
+
 end QIQTH.QuantumEntropy

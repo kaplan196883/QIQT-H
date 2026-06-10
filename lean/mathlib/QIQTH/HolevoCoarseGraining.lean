@@ -26,13 +26,15 @@ import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 namespace QIQTH
 namespace HolevoCoarseGraining
 
-open Donald
+open Donald DonaldSystem
+
+variable {State : Type} [DonaldSystem State]
 
 /-- The Holographic mutual information in Donald's identity is
     non-negative — it is a weighted sum of D(ρ_k ‖ ρ̄) terms.  Uses Klein nonnegativity `hD_nonneg`
     (discharged for density matrices by `QuantumEntropy.relEntropy_nonneg`). -/
 theorem I_Hol_nonneg
-    {ι : Type*} (s : Finset ι) (p : ι → ℝ) (hp_nn : ∀ i ∈ s, 0 ≤ p i)
+    {ι : Type} (s : Finset ι) (p : ι → ℝ) (hp_nn : ∀ i ∈ s, 0 ≤ p i)
     (ρ : ι → State) (hD_nonneg : ∀ ρ' σ' : State, 0 ≤ D ρ' σ') :
     0 ≤ ∑ k ∈ s, p k * D (ρ k) (mixture s p ρ) := by
   apply Finset.sum_nonneg
@@ -47,7 +49,7 @@ theorem I_Hol_nonneg
     non-negativity, so saturation `I_Hol = C` forces them both to
     vanish — *rigidity* of saturation. -/
 theorem donald_deficit
-    {ι : Type*} (s : Finset ι) (p : ι → ℝ)
+    {ι : Type} (s : Finset ι) (p : ι → ℝ)
     (ρ : ι → State) (σ : State) (C : ℝ) :
     C - (∑ k ∈ s, p k * D (ρ k) (mixture s p ρ))
       = (C - ∑ k ∈ s, p k * D (ρ k) σ) + D (mixture s p ρ) σ := by
@@ -63,7 +65,7 @@ theorem donald_deficit
     mixed-state relative entropy `D(ρ̄ ‖ σ)` must vanish (and the
     weighted sum equals C exactly). -/
 theorem saturation_rigidity
-    {ι : Type*} (s : Finset ι) (p : ι → ℝ) (hp_nn : ∀ i ∈ s, 0 ≤ p i)
+    {ι : Type} (s : Finset ι) (p : ι → ℝ) (hp_nn : ∀ i ∈ s, 0 ≤ p i)
     (ρ : ι → State) (σ : State) (C : ℝ)
     (hSum_le_C : (∑ k ∈ s, p k * D (ρ k) σ) ≤ C)
     (hSaturated : ∑ k ∈ s, p k * D (ρ k) (mixture s p ρ) = C)
@@ -92,7 +94,7 @@ theorem saturation_rigidity
     detailed exercise.  Here we give the inequality form, which
     is what the framework consumes. -/
 theorem holevo_coarse_le_fine
-    {κ : Type*} (groups : Finset κ) (q : κ → ℝ) (hq_nn : ∀ g ∈ groups, 0 ≤ q g)
+    {κ : Type} (groups : Finset κ) (q : κ → ℝ) (hq_nn : ∀ g ∈ groups, 0 ≤ q g)
     (groupMean : κ → State)
     (I_coarse I_fine : ℝ)
     (hI_coarse : I_coarse = ∑ g ∈ groups, q g * D (groupMean g) (mixture groups q groupMean))
