@@ -12,29 +12,32 @@
   dimensions, so the axioms can be replaced by theorems about concrete density
   matrices.
 
-  THIS INCREMENT (the spectral entropy layer, axiom-free).  We define a finite
-  density matrix (`IsDensity`: positive semidefinite, unit trace), prove its
-  eigenvalues lie in `[0,1]` and sum to `1`, define the von Neumann entropy
-  `S(ρ) = ∑ᵢ negMulLog(λᵢ) = −∑ᵢ λᵢ log λᵢ`, and prove `S(ρ) ≥ 0` — the concrete
-  content of the (currently opaque) entropy object `H`.
+  DONE SO FAR (axiom-free).
+    * Spectral entropy layer: a finite density matrix (`IsDensity`: positive semidefinite,
+      unit trace), eigenvalues in `[0,1]` summing to `1`, the von Neumann entropy
+      `S(ρ) = ∑ᵢ negMulLog(λᵢ) = −∑ᵢ λᵢ log λᵢ`, and `S(ρ) ≥ 0` — the concrete content of
+      the (opaque) entropy object `Donald.H`.
+    * The gating primitive Mathlib lacked: the **Hermitian matrix logarithm** `matLog`,
+      built from the functional calculus `Matrix.IsHermitian.cfc Real.log` (`= U·diag(log∘λ)·U⋆`),
+      and the trace workhorse `cfc_trace : tr(f(A)) = ∑ᵢ f(λᵢ)`.
+    * The **quantum relative entropy** `D(ρ‖σ) = tr(ρ(log ρ − log σ))` (Umegaki) — the concrete
+      realization of the opaque `Donald.D` / `ArakiInterface.AkRelEnt` — with `D(ρ‖ρ) = 0`.
 
   NEXT MILESTONES (documented, not yet built).
-    * Hermitian matrix logarithm `log ρ := U · diag(log λ) · U⋆` from the spectral
-      theorem — the gating primitive Mathlib lacks.
-    * Cross entropy `crossEnt(ρ,σ) = −tr(ρ log σ)` and relative entropy
-      `D(ρ‖σ) = tr ρ(log ρ − log σ)`; the Donald structural identities
-      (`D = crossEnt − H`, `crossEnt(ρ,ρ) = H(ρ)`, linearity) then become direct.
-    * Klein's inequality `D(ρ‖σ) ≥ 0` (operator convexity of `x ↦ x log x`) — retires
-      `RelEntPositivity.D_nonneg` in the finite-dimensional case.
+    * `tr(ρ log ρ) = ∑ λᵢ log λᵢ` (cross-term spectral expansion via `cfc_mul` on positive-definite
+      states) → the entropy bridge `S(ρ) = −tr(ρ log ρ)` and the Donald structural identities.
+    * Klein's inequality `D(ρ‖σ) ≥ 0` (the doubly-stochastic / Jensen route, reducing to classical
+      `KL ≥ 0`) — retires `RelEntPositivity.D_nonneg` in the finite-dimensional case.
     The Araki / continuum / data-processing (Lieb) versions remain the cited frontier.
 -/
 import Mathlib.Analysis.Matrix.PosDef
 import Mathlib.Analysis.Matrix.Spectrum
+import Mathlib.Analysis.Matrix.HermitianFunctionalCalculus
 import Mathlib.Analysis.SpecialFunctions.Log.NegMulLog
 
 namespace QIQTH.QuantumEntropy
 
-open Matrix Real BigOperators
+open Matrix Real BigOperators Unitary
 open scoped ComplexOrder
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
@@ -92,5 +95,41 @@ theorem vonNeumannEntropy_nonneg {ρ : Matrix n n ℂ} (h : IsDensity ρ) :
     0 ≤ vonNeumannEntropy h :=
   Finset.sum_nonneg fun i _ =>
     Real.negMulLog_nonneg (h.eigenvalues_nonneg i) (h.eigenvalues_le_one i)
+
+/-! ### The Hermitian matrix logarithm and relative entropy
+
+The gating primitive Mathlib lacks for relative entropy is a matrix logarithm.  We take it from the
+Hermitian functional calculus `Matrix.IsHermitian.cfc Real.log` (`= U·diag(log∘λ)·U⋆`).  The workhorse
+is the trace formula `tr(f(A)) = ∑ᵢ f(λᵢ)`, from which the entropy/relative-entropy expressions reduce to
+sums over eigenvalues. -/
+
+/-- **Trace of a Hermitian functional-calculus image** equals the sum of `f` over the eigenvalues:
+    `tr(f(A)) = ∑ᵢ f(λᵢ)`.  Since `f(A) = U·diag(f∘λ)·U⋆` with `U` unitary, the trace is conjugation
+    invariant and collapses to the diagonal sum. -/
+lemma cfc_trace {A : Matrix n n ℂ} (hA : A.IsHermitian) (f : ℝ → ℝ) :
+    (hA.cfc f).trace = ∑ i, ((f (hA.eigenvalues i) : ℝ) : ℂ) := by
+  rw [Matrix.IsHermitian.cfc, conjStarAlgAut_apply, Matrix.trace_mul_cycle,
+    Unitary.coe_star_mul_self, one_mul, Matrix.trace_diagonal]
+  rfl
+
+/-- **The Hermitian matrix logarithm** `log A := U·diag(log∘λ)·U⋆`, from the functional calculus.
+    For a positive-definite `A` (all `λᵢ > 0`) this is the genuine operator logarithm. -/
+noncomputable def matLog {A : Matrix n n ℂ} (hA : A.IsHermitian) : Matrix n n ℂ :=
+  hA.cfc Real.log
+
+/-- **Quantum relative entropy** `D(ρ‖σ) = tr(ρ (log ρ − log σ))` (Umegaki), as a real number.
+    The concrete finite-dimensional realization of the opaque `Donald.D` / `ArakiInterface.AkRelEnt`.
+    (Well-behaved when `σ` is positive definite so `log σ` is genuine; the support condition
+    `supp ρ ⊆ supp σ` is the standard finiteness hypothesis.) -/
+noncomputable def relEntropy {ρ σ : Matrix n n ℂ}
+    (hρ : ρ.IsHermitian) (hσ : σ.IsHermitian) : ℝ :=
+  (ρ * (matLog hρ - matLog hσ)).trace.re
+
+/-- **Relative entropy of a state with itself vanishes**: `D(ρ‖ρ) = 0`.  Immediate, since
+    `log ρ − log ρ = 0`.  The `D(ρ‖σ) = 0 ↔ ρ = σ` direction (the hard, Klein-equality case) is a
+    later milestone. -/
+@[simp] theorem relEntropy_self {ρ : Matrix n n ℂ} (hρ : ρ.IsHermitian) :
+    relEntropy hρ hρ = 0 := by
+  simp [relEntropy]
 
 end QIQTH.QuantumEntropy

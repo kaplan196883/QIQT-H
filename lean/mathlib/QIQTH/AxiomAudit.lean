@@ -1702,6 +1702,13 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ von Neumann entropy S(ρ)=∑ negMulLog(λᵢ) ≥ 0 for any density matrix:
 -- the concrete finite-dim content of the (currently opaque) entropy object Donald.H. First step of the
 -- program to replace the axiomatized quantum-entropy stack with theorems about concrete density matrices.
--- (Next: Hermitian matrix log → relative entropy D(ρ‖σ) → Klein's inequality D_nonneg.)
+#print axioms QIQTH.QuantumEntropy.cfc_trace
+-- expected: standard only — the trace workhorse tr(f(A))=∑ᵢ f(λᵢ) for the Hermitian functional calculus
+-- (f(A)=U·diag(f∘λ)·U⋆, trace conjugation-invariant). Reduces entropy/relative-entropy to eigenvalue sums.
+#print axioms QIQTH.QuantumEntropy.relEntropy_self
+-- expected: standard only — D(ρ‖ρ)=0 for the concrete quantum relative entropy D(ρ‖σ)=tr(ρ(log ρ−log σ)),
+-- built on the Hermitian matrix logarithm matLog := IsHermitian.cfc Real.log (the gating primitive Mathlib
+-- lacked, now in hand). Concrete realization of the opaque Donald.D / ArakiInterface.AkRelEnt.
+-- (Next: Klein's inequality D(ρ‖σ)≥0 retires RelEntPositivity.D_nonneg in finite dim.)
 
 end QIQTH.AxiomAudit
