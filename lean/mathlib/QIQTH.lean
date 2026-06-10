@@ -15,6 +15,7 @@ import QIQTH.CapacityPacking
 import QIQTH.RelEntPositivity
 import QIQTH.QuantumRelativeEntropy
 import QIQTH.Entropy.TraceConvexity
+import QIQTH.Entropy.OperatorConvex
 import QIQTH.HolevoCoarseGraining
 import QIQTH.DPI
 import QIQTH.ShannonFano

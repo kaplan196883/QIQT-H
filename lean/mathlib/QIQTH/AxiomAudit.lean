@@ -1758,4 +1758,10 @@ namespace QIQTH.AxiomAudit
 -- Tr f(tA+(1−t)B) ≤ t·Tr f(A) + (1−t)·Tr f(B), t∈[0,1], convex f. The two §2 results the DPI/Lieb tower
 -- needs from §2 (Peierls + this convexity) are now complete and axiom-free.
 
+-- A4: DPI / Lieb program — Phase 2 kickoff (Carlen §2.1/§3 operator convexity, Loewner order)
+#print axioms QIQTH.Entropy.conjTranspose_mul_mul_le
+-- expected: standard only — congruence preserves the Loewner order: A ≤ B ⇒ V⋆AV ≤ V⋆BV (via
+-- PosSemidef.conjTranspose_mul_mul_same on B−A). The order-congruence foundation of the Schur/Ando route
+-- to Lieb's concavity (the deep Phase-2 crux). (Mathlib MatrixOrder: A ≤ B := (B−A).PosSemidef.)
+
 end QIQTH.AxiomAudit
