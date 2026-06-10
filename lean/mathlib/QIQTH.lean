@@ -17,6 +17,7 @@ import QIQTH.QuantumRelativeEntropy
 import QIQTH.Entropy.TraceConvexity
 import QIQTH.Entropy.OperatorConvex
 import QIQTH.Entropy.CStarMatrixBridge
+import QIQTH.Entropy.MatrixOperatorMonotone
 import QIQTH.HolevoCoarseGraining
 import QIQTH.DPI
 import QIQTH.ShannonFano

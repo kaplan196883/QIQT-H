@@ -1788,5 +1788,11 @@ namespace QIQTH.AxiomAudit
 -- CStarMatrix CFC instances Mathlib leaves un-synthesizable (FiniteDimensional + real-CFC + NonnegSpectrumClass),
 -- which makes the ENTIRE Löwner–Heinz toolkit (concaveOn_rpow, sqrt_le_sqrt, …) fire on CStarMatrix and hence
 -- transport to Matrix. Unblocks the geometric-mean / Lieb tower.
+#print axioms QIQTH.Entropy.matrix_sqrt_le_sqrt
+#print axioms QIQTH.Entropy.ofMatrix_sqrt
+-- expected: standard only — OPERATOR MONOTONICITY of √ on Matrix n n ℂ (Löwner–Heinz p=1/2): 0≤A≤B ⟹ √A≤√B.
+-- Transported from CFC.sqrt_le_sqrt across the CStarMatrix bridge (ofMatrix_sqrt = √ commutes with the equiv via
+-- ℝ≥0 cfc-naturality; ofMatrix_le_iff carries the inequality back). The maximality ingredient for the operator
+-- geometric mean (Carlen §3.3–3.5) → Lieb's concavity.
 
 end QIQTH.AxiomAudit
