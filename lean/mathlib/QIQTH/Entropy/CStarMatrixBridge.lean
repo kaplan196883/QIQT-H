@@ -44,7 +44,6 @@ variable {n : Type*} [Fintype n] [DecidableEq n]
 
 /-- **Order coincidence (Loewner order).**  The bundled `*`-algebra equivalence is an order
     isomorphism, so `e A ≤ e B ↔ A ≤ B`. -/
-omit [DecidableEq n] in
 lemma ofMatrix_le_iff {A B : Matrix n n ℂ} :
     ofMatrixStarAlgEquiv A ≤ ofMatrixStarAlgEquiv B ↔ A ≤ B :=
   map_le_map_iff (ofMatrixStarAlgEquiv (A := ℂ) (n := n))
