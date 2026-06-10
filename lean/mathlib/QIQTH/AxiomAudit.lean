@@ -1739,4 +1739,10 @@ namespace QIQTH.AxiomAudit
 -- This retires the 8 former Donald axioms (budget 29→21): they are now derived facts about a realizable
 -- interface, with a genuine finite-dim model, rather than global assumptions.
 
+-- A4: DPI / Lieb program (Carlen §2 toolkit), Phase 1 — toward retiring the DPI axioms
+#print axioms QIQTH.Entropy.peierls_inequality
+-- expected: standard only — ★ Peierls' inequality (Carlen Thm 2.9): ∑ⱼ f(Re Bⱼⱼ) ≤ ∑ᵢ f(λᵢ) for Hermitian B,
+-- convex f. The diagonal entries are a doubly-stochastic average of eigenvalues (‖Vⱼₖ‖² overlap, row/col-
+-- stochastic) → Jensen. Foundation of the §2 trace-convexity toolkit (the bottom of the Lieb/DPI tower).
+
 end QIQTH.AxiomAudit
