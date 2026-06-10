@@ -1820,6 +1820,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Entropy.rpow_kronecker
 #print axioms QIQTH.Entropy.wgmean_kronecker
 #print axioms QIQTH.Entropy.tensor_rpow_superadditive
+#print axioms QIQTH.Entropy.lieb_superadditive
+-- expected: standard only — ★★★★ LIEB'S CONCAVITY THEOREM (Carlen 6.1, q+r=1): (A,B)↦Tr(Kᴴ·A^{1-t}·K·(Bᵗ)ᵀ)
+-- jointly concave (superadditive), t∈[0,1]. The joint concavity of A^{1-t}⊗Bᵗ (tensor_rpow_superadditive)
+-- read through the vec/trace identity Tr(Kᴴ·A·K·Bᵀ)=⟨vecK,(B⊗ₖA)vecK⟩ (kronecker_mulVec_vec +
+-- star_vec_dotProduct_vec): the PSD operator inequality ⟹ scalar one since M↦⟨v,Mv⟩ is linear + monotone.
+-- One of the deepest results in quantum information theory, machine-checked from scratch.
 -- expected: standard only — ★★★ THE LIEB INPUT: JOINT CONCAVITY of (A,B)↦A^{1-t}⊗B^t for t∈[0,1].
 -- wgmean_kronecker: wgmean t (A⊗I)(I⊗B) = A^{1-t}⊗B^t (commuting tensor weighted mean, via rpow_kronecker +
 -- final factor √A·(A⁻¹)^t·√A=A^{1-t} = sqrt_mul_rpow_inv_mul_sqrt with rpow_inv_eq (A⁻¹)^t=A^{-t}). Then
