@@ -1777,6 +1777,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Entropy.parallel_sum_subadditive
 -- expected: standard only — operator HARMONIC-MEAN concavity (Carlen §3.2): (A,B)↦B⋆(A+B)⁻¹B is jointly
 -- convex (⟺ M₋₁(A,B)=2B−2B(A+B)⁻¹B concave), a direct corollary of Ando (star_inv_subadditive applied to
--- (A₀+B₀,B₀),(A₁+B₁,B₁)). [The geometric-mean concavity / Lieb path needs fractional powers — not in Mathlib.]
+-- (A₀+B₀,B₀),(A₁+B₁,B₁)).
+#print axioms QIQTH.Entropy.ofMatrix_le_iff
+#print axioms QIQTH.Entropy.ofMatrix_nonneg_iff
+-- expected: standard only — CStarMatrix bridge: the Matrix Loewner order and the CStarMatrix spectral order
+-- coincide across ofMatrixStarAlgEquiv (a StarRingEquiv is automatically an OrderIsoClass). Foundation for
+-- moving order facts across the synonym. [rpow-concavity transport is blocked by CStarMatrix's incomplete CFC
+-- instance stack; not on the Lieb critical path — geometric mean goes via Schur + CFC.sqrt, Matrix-native.]
 
 end QIQTH.AxiomAudit
