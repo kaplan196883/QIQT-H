@@ -49,4 +49,28 @@ lemma mul_mul_conjTranspose_le {A B : Matrix n n ℂ} (hAB : A ≤ B) (V : Matri
   rw [hsub]
   exact hAB.mul_mul_conjTranspose_same V
 
+/-! ### The Schur complement and the minimality of `B⋆A⁻¹B` (Carlen §3.1, Lemma 3.2)
+
+Mathlib already proves the **Schur complement** (`Matrix.PosDef.fromBlocks₁₁`):
+`fromBlocks A B B⋆ D` is PSD ⟺ `D − B⋆A⁻¹B ≥ 0` (for `A` positive definite).  This is exactly Carlen
+Lemma 3.2.  From it we get the **minimality** of `B⋆A⁻¹B` (the bottom-right block making the 2×2 block
+PSD), which is the engine of Ando's joint-convexity theorem (Thm 3.1, the next step toward Lieb). -/
+
+/-- **The block `[[A, B],[B⋆, B⋆A⁻¹B]]` is positive semidefinite** for positive-definite `A` — the
+    Schur-complement factorization (Carlen Lemma 3.2, ⟸ direction with zero Schur complement). -/
+lemma fromBlocks_star_inv_posSemidef {A : Matrix m m ℂ} (hA : A.PosDef) [Invertible A]
+    (B : Matrix m n ℂ) :
+    (Matrix.fromBlocks A B Bᴴ (Bᴴ * A⁻¹ * B)).PosSemidef := by
+  rw [Matrix.PosDef.fromBlocks₁₁ B (Bᴴ * A⁻¹ * B) hA, sub_self]
+  exact Matrix.PosSemidef.zero
+
+/-- **Minimality of `B⋆A⁻¹B`** (Carlen Lemma 3.2): if `fromBlocks A B B⋆ D` is PSD with `A` positive
+    definite, then `B⋆A⁻¹B ≤ D`.  This is the property that drives Ando's joint convexity of
+    `(A,B) ↦ B⋆A⁻¹B`. -/
+lemma star_inv_le_of_fromBlocks_posSemidef {A : Matrix m m ℂ} (hA : A.PosDef) [Invertible A]
+    {B : Matrix m n ℂ} {D : Matrix n n ℂ} (h : (Matrix.fromBlocks A B Bᴴ D).PosSemidef) :
+    Bᴴ * A⁻¹ * B ≤ D := by
+  rw [Matrix.le_iff]
+  exact (Matrix.PosDef.fromBlocks₁₁ B D hA).mp h
+
 end QIQTH.Entropy

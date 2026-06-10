@@ -1763,5 +1763,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — congruence preserves the Loewner order: A ≤ B ⇒ V⋆AV ≤ V⋆BV (via
 -- PosSemidef.conjTranspose_mul_mul_same on B−A). The order-congruence foundation of the Schur/Ando route
 -- to Lieb's concavity (the deep Phase-2 crux). (Mathlib MatrixOrder: A ≤ B := (B−A).PosSemidef.)
+#print axioms QIQTH.Entropy.fromBlocks_star_inv_posSemidef
+-- expected: standard only — the block [[A,B],[B⋆,B⋆A⁻¹B]] is PSD for A PosDef (Carlen Lemma 3.2 via the
+-- Schur complement Matrix.PosDef.fromBlocks₁₁, already in Mathlib). The minimality factorization.
+#print axioms QIQTH.Entropy.star_inv_le_of_fromBlocks_posSemidef
+-- expected: standard only — minimality: fromBlocks A B B⋆ D PSD (A PosDef) ⇒ B⋆A⁻¹B ≤ D. This is the
+-- engine of Ando's joint convexity of (A,B)↦B⋆A⁻¹B (Carlen Thm 3.1, next toward Lieb).
 
 end QIQTH.AxiomAudit
