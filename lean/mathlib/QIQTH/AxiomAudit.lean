@@ -1806,5 +1806,11 @@ namespace QIQTH.AxiomAudit
 -- (Carlen Thm 3.5, Ando): achievability ([[A,A#B],[A#B,B]] PSD via Schur with (A#B)A⁻¹(A#B)=B) + maximality
 -- ([[A,X],[X,B]] PSD ⟹ X ≤ A#B, via Z²≤C⟹Z≤√C after A^{-1/2}-conjugation) ⟹ superadditivity
 -- A₀#B₀+A₁#B₁ ≤ (A₀+A₁)#(B₀+B₁). The operator-mean input to Lieb's concavity theorem.
+#print axioms QIQTH.Entropy.gmean_kronecker
+#print axioms QIQTH.Entropy.tensor_sqrt_superadditive
+-- expected: standard only — TENSOR LIFT of the geometric mean (first step of Ando's tensor argument to Lieb):
+-- gmean(A⊗I)(I⊗B)=√A⊗√B (commuting tensor geometric mean, via sqrt_kronecker/inv_kronecker) ⟹
+-- JOINT CONCAVITY of (A,B)↦√A⊗√B: √A₀⊗√B₀+√A₁⊗√B₁ ≤ √(A₀+A₁)⊗√(B₀+B₁) (the p=q=1/2 case of A^p⊗B^q
+-- concavity, which with the vec/trace identity yields Lieb's concavity theorem, Carlen §6.1).
 
 end QIQTH.AxiomAudit
