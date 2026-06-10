@@ -1819,6 +1819,13 @@ namespace QIQTH.AxiomAudit
 -- gmean_nested_superadditive (the t=1/4 weighted-mean concavity A₀#(A₀#B₀)+A₁#(A₁#B₁) ≤
 -- (A₀+A₁)#((A₀+A₁)#(B₀+B₁)), from superadditivity ×2 + monotonicity). Iterating gives all dyadic
 -- weights; continuity gives the full A#ₜB family feeding Lieb's concavity.
+#print axioms QIQTH.Entropy.wgmean_half
+#print axioms QIQTH.Entropy.wgmean_zero
+#print axioms QIQTH.Entropy.wgmean_one
+-- expected: standard only — WEIGHTED operator geometric mean A#ₜB = A^{1/2}(A^{-1/2}BA^{-1/2})^t A^{1/2}
+-- (matrix rpow): endpoints wgmean_zero (=A), wgmean_one (=B), and wgmean_half (=A#B, the geometric mean,
+-- via sqrt_eq_rpow). The interpolating object whose weight-midpoint identity (from gmean_congr) gives the
+-- dense dyadic weights for the continuity argument toward Lieb.
 #print axioms QIQTH.Entropy.gmean_congr
 -- expected: standard only — CONGRUENCE COVARIANCE of the operator geometric mean (Ando): for invertible M,
 -- (M X Mᴴ)#(M Y Mᴴ) = M(X#Y)Mᴴ. Proved from the variational characterization by conjugating the 2×2 block
