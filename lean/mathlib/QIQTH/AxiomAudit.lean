@@ -1769,5 +1769,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Entropy.star_inv_le_of_fromBlocks_posSemidef
 -- expected: standard only — minimality: fromBlocks A B B⋆ D PSD (A PosDef) ⇒ B⋆A⁻¹B ≤ D. This is the
 -- engine of Ando's joint convexity of (A,B)↦B⋆A⁻¹B (Carlen Thm 3.1, next toward Lieb).
+#print axioms QIQTH.Entropy.star_inv_subadditive
+-- expected: standard only — ★★ ANDO's joint convexity of (A,B)↦B⋆A⁻¹B (Carlen Thm 3.1, subadditive form):
+-- (B₀+B₁)⋆(A₀+A₁)⁻¹(B₀+B₁) ≤ B₀⋆A₀⁻¹B₀ + B₁⋆A₁⁻¹B₁ for PosDef A₀,A₁. Sum of two PSD Schur blocks is the
+-- combined block (fromBlocks_add), PSD; minimality (A₀+A₁ PosDef) gives the inequality. The key §3 result
+-- feeding the operator-mean concavities and Lieb's concavity theorem.
 
 end QIQTH.AxiomAudit

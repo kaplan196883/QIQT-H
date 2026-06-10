@@ -73,4 +73,28 @@ lemma star_inv_le_of_fromBlocks_posSemidef {A : Matrix m m ℂ} (hA : A.PosDef) 
   rw [Matrix.le_iff]
   exact (Matrix.PosDef.fromBlocks₁₁ B D hA).mp h
 
+/-- **Ando's joint convexity of `(A,B) ↦ B⋆A⁻¹B`** (Carlen Thm 3.1, subadditive/superadditive form).
+    For positive-definite `A₀, A₁` and any `B₀, B₁`:
+    `(B₀+B₁)⋆(A₀+A₁)⁻¹(B₀+B₁) ≤ B₀⋆A₀⁻¹B₀ + B₁⋆A₁⁻¹B₁`.
+
+    Proof (Ando): the two blocks `[[Aᵢ,Bᵢ],[Bᵢ⋆,Bᵢ⋆Aᵢ⁻¹Bᵢ]]` are PSD; their sum is the block
+    `[[A₀+A₁, B₀+B₁],[(B₀+B₁)⋆, B₀⋆A₀⁻¹B₀+B₁⋆A₁⁻¹B₁]]`, also PSD; minimality of `B⋆A⁻¹B` (Schur) with
+    `A₀+A₁` positive definite gives the inequality.  This subadditive form is equivalent to joint
+    convexity (homogeneity) and is the form feeding the operator-mean concavities / Lieb. -/
+theorem star_inv_subadditive {A₀ A₁ : Matrix m m ℂ} (hA₀ : A₀.PosDef) (hA₁ : A₁.PosDef)
+    (B₀ B₁ : Matrix m n ℂ) :
+    (B₀ + B₁)ᴴ * (A₀ + A₁)⁻¹ * (B₀ + B₁) ≤ B₀ᴴ * A₀⁻¹ * B₀ + B₁ᴴ * A₁⁻¹ * B₁ := by
+  haveI : Invertible A₀ := hA₀.isUnit.invertible
+  haveI : Invertible A₁ := hA₁.isUnit.invertible
+  have hA : (A₀ + A₁).PosDef := hA₀.add hA₁
+  haveI : Invertible (A₀ + A₁) := hA.isUnit.invertible
+  have hblock : (Matrix.fromBlocks (A₀ + A₁) (B₀ + B₁) (B₀ + B₁)ᴴ
+      (B₀ᴴ * A₀⁻¹ * B₀ + B₁ᴴ * A₁⁻¹ * B₁)).PosSemidef := by
+    have hsum := (fromBlocks_star_inv_posSemidef hA₀ B₀).add (fromBlocks_star_inv_posSemidef hA₁ B₁)
+    rwa [show Matrix.fromBlocks A₀ B₀ B₀ᴴ (B₀ᴴ * A₀⁻¹ * B₀)
+          + Matrix.fromBlocks A₁ B₁ B₁ᴴ (B₁ᴴ * A₁⁻¹ * B₁)
+          = Matrix.fromBlocks (A₀ + A₁) (B₀ + B₁) (B₀ + B₁)ᴴ (B₀ᴴ * A₀⁻¹ * B₀ + B₁ᴴ * A₁⁻¹ * B₁)
+          from by rw [Matrix.fromBlocks_add, Matrix.conjTranspose_add]] at hsum
+  exact star_inv_le_of_fromBlocks_posSemidef hA hblock
+
 end QIQTH.Entropy
