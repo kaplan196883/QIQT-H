@@ -1749,5 +1749,10 @@ namespace QIQTH.AxiomAudit
 -- (equal characteristic polynomials via charpoly_mul_comm ⇒ equal eigenvalue multisets via
 -- roots_charpoly_eq_eigenvalues). The conjugation-invariance foundation for Carlen 2.10–2.12 (which apply
 -- Peierls in the eigenbasis of (A+B)/2) and for the unitary invariance of relative entropy used in DPI.
+#print axioms QIQTH.Entropy.trace_function_midpoint_convex
+-- expected: standard only — ★ convexity of trace functions (Carlen Thm 2.10): Tr f((A+B)/2) ≤
+-- (Tr f(A) + Tr f(B))/2 for convex f (eigenvalue-sum form). In M=(A+B)/2's eigenbasis the diagonal is
+-- λ(M) = (Re A'ᵢᵢ + Re B'ᵢᵢ)/2; midpoint convexity termwise + Peierls + conjugation invariance. The
+-- second §2 result of the trace-convexity toolkit (toward the Lieb/DPI tower).
 
 end QIQTH.AxiomAudit
