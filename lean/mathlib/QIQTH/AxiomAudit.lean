@@ -1780,9 +1780,13 @@ namespace QIQTH.AxiomAudit
 -- (A₀+B₀,B₀),(A₁+B₁,B₁)).
 #print axioms QIQTH.Entropy.ofMatrix_le_iff
 #print axioms QIQTH.Entropy.ofMatrix_nonneg_iff
--- expected: standard only — CStarMatrix bridge: the Matrix Loewner order and the CStarMatrix spectral order
--- coincide across ofMatrixStarAlgEquiv (a StarRingEquiv is automatically an OrderIsoClass). Foundation for
--- moving order facts across the synonym. [rpow-concavity transport is blocked by CStarMatrix's incomplete CFC
--- instance stack; not on the Lieb critical path — geometric mean goes via Schur + CFC.sqrt, Matrix-native.]
+#print axioms QIQTH.Entropy.ofMatrix_cfc
+-- expected: standard only — CStarMatrix↔Matrix BRIDGE (transport engine for the Löwner–Heinz toolkit).
+-- ofMatrix_le_iff/nonneg_iff: the Matrix Loewner order and CStarMatrix spectral order coincide across
+-- ofMatrixStarAlgEquiv (a StarRingEquiv is automatically an OrderIsoClass). ofMatrix_cfc: e (cfc f A) =
+-- cfc f (e A) (StarAlgHomClass.map_cfc, continuity from ofMatrixL). The bridge file ALSO supplies the three
+-- CStarMatrix CFC instances Mathlib leaves un-synthesizable (FiniteDimensional + real-CFC + NonnegSpectrumClass),
+-- which makes the ENTIRE Löwner–Heinz toolkit (concaveOn_rpow, sqrt_le_sqrt, …) fire on CStarMatrix and hence
+-- transport to Matrix. Unblocks the geometric-mean / Lieb tower.
 
 end QIQTH.AxiomAudit
