@@ -1794,5 +1794,9 @@ namespace QIQTH.AxiomAudit
 -- Transported from CFC.sqrt_le_sqrt across the CStarMatrix bridge (ofMatrix_sqrt = √ commutes with the equiv via
 -- ℝ≥0 cfc-naturality; ofMatrix_le_iff carries the inequality back). The maximality ingredient for the operator
 -- geometric mean (Carlen §3.3–3.5) → Lieb's concavity.
+#print axioms QIQTH.Entropy.matrix_le_sqrt_of_sq_le
+-- expected: standard only — maximality reduction Z²≤C ⟹ Z≤√C (Z Hermitian): Z ≤ |Z| = √(Z·Z) via
+-- CFC.abs_sub_self (|Z|−Z = 2•Z⁻ ≥ 0), then √(Z·Z) ≤ √C by operator √-monotonicity. The engine of the
+-- operator geometric-mean maximality.
 
 end QIQTH.AxiomAudit

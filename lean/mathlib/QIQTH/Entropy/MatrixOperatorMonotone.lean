@@ -12,6 +12,7 @@
   (Carlen §3.3–3.5) and hence the route to Lieb's concavity.
 -/
 import QIQTH.Entropy.CStarMatrixBridge
+import Mathlib.Analysis.SpecialFunctions.ContinuousFunctionalCalculus.Abs
 
 namespace QIQTH.Entropy
 
@@ -48,5 +49,20 @@ theorem matrix_sqrt_le_sqrt {A B : Matrix n n ℂ} (hA : 0 ≤ A) (hAB : A ≤ B
 theorem matrix_sqrt_monotoneOn :
     MonotoneOn (CFC.sqrt : Matrix n n ℂ → Matrix n n ℂ) {A | 0 ≤ A} :=
   fun _ hA _ _ hAB => matrix_sqrt_le_sqrt hA hAB
+
+/-- **The maximality reduction** `Z² ≤ C ⟹ Z ≤ √C` for Hermitian `Z` and `0 ≤ C`.
+
+    The engine of the operator geometric-mean maximality (Carlen §3.5): `Z ≤ |Z| = √(Z·Z)` because
+    `|Z| − Z = 2 • Z⁻ ≥ 0` (`CFC.abs_sub_self`), and `√(Z·Z) ≤ √C` by operator monotonicity of `√`. -/
+theorem matrix_le_sqrt_of_sq_le {Z C : Matrix n n ℂ} (hZ : Z.IsHermitian) (hC : 0 ≤ C)
+    (h : Z * Z ≤ C) : Z ≤ CFC.sqrt C := by
+  have hZsa : IsSelfAdjoint Z := hZ
+  have hZZ : (0 : Matrix n n ℂ) ≤ Z * Z := by
+    have := star_mul_self_nonneg Z; rwa [hZsa.star_eq] at this
+  have habs : CFC.abs Z = CFC.sqrt (Z * Z) := by rw [CFC.abs, hZsa.star_eq]
+  have h1 : Z ≤ CFC.sqrt (Z * Z) := by
+    rw [← habs, ← sub_nonneg, CFC.abs_sub_self Z hZsa]
+    exact smul_nonneg (by norm_num) (CFC.negPart_nonneg Z)
+  exact h1.trans (matrix_sqrt_le_sqrt hZZ h)
 
 end QIQTH.Entropy
