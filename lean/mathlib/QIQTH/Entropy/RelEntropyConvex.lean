@@ -127,4 +127,36 @@ lemma hasDerivAt_trace_rpow_mul {A B : Matrix n n ℂ} (hA : A.PosDef) (hB : B.P
   exact (Matrix.traceLinearMap n ℝ ℂ).toContinuousLinearMap.hasFDerivAt.comp_hasDerivAt_of_eq
     0 hmul rfl
 
+/-- The relative entropy is `-1` times the real part of the `t = 0` derivative of `Tr(A^{1-t}·Bᵗ)`:
+    `D(A‖B) = -Re d/dt Tr(A^{1-t}·Bᵗ)|₀`.  Pure trace algebra. -/
+lemma relEntropy_eq_neg_deriv {A B : Matrix n n ℂ} (hA : A.PosDef) (hB : B.PosDef) :
+    QIQTH.QuantumEntropy.relEntropy hA.1 hB.1
+      = -((-(A * QIQTH.QuantumEntropy.matLog hA.1)
+          + A * QIQTH.QuantumEntropy.matLog hB.1).trace).re := by
+  rw [QIQTH.QuantumEntropy.relEntropy, Matrix.mul_sub]
+  simp only [Matrix.mul_neg, Matrix.trace_sub, Matrix.trace_add, Matrix.trace_neg,
+    Complex.sub_re, Complex.add_re, Complex.neg_re]
+  ring
+
+open Filter Topology in
+/-- **The relative entropy as the `t → 0` limit of Lieb's difference quotient**:
+    `D(A‖B) = lim_{t→0} (Tr A − Tr(A^{1-t}·Bᵗ)) / t`. -/
+lemma tendsto_relEntropy {A B : Matrix n n ℂ} (hA : A.PosDef) (hB : B.PosDef) :
+    Tendsto (fun t : ℝ => (A.trace.re - (A ^ (1 - t) * B ^ t).trace.re) / t)
+      (𝓝[≠] 0) (𝓝 (QIQTH.QuantumEntropy.relEntropy hA.1 hB.1)) := by
+  set f : ℝ → ℝ := fun t => (A ^ (1 - t) * B ^ t).trace.re with hf
+  have hDre : HasDerivAt f ((-(A * QIQTH.QuantumEntropy.matLog hA.1)
+      + A * QIQTH.QuantumEntropy.matLog hB.1).trace.re) 0 :=
+    Complex.reCLM.hasFDerivAt.comp_hasDerivAt_of_eq 0 (hasDerivAt_trace_rpow_mul hA hB) rfl
+  have hf0 : f 0 = A.trace.re := by
+    simp only [hf, show (1 : ℝ) - 0 = 1 by ring, CFC.rpow_one A hA.posSemidef.nonneg,
+      CFC.rpow_zero B hB.posSemidef.nonneg, Matrix.mul_one]
+  have hslope := hasDerivAt_iff_tendsto_slope.mp hDre
+  rw [relEntropy_eq_neg_deriv hA hB]
+  have hfun : (fun t : ℝ => (A.trace.re - f t) / t) = fun t => -(slope f 0 t) := by
+    funext t; rw [slope_def_field, sub_zero, hf0]; ring
+  show Tendsto (fun t : ℝ => (A.trace.re - f t) / t) _ _
+  rw [hfun]
+  exact hslope.neg
+
 end QIQTH.Entropy
