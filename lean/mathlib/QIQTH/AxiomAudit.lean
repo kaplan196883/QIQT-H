@@ -1822,6 +1822,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Entropy.wgmean_half
 #print axioms QIQTH.Entropy.wgmean_zero
 #print axioms QIQTH.Entropy.wgmean_one
+#print axioms QIQTH.Entropy.gmean_rpow
+#print axioms QIQTH.Entropy.wgmean_midpoint
+-- expected: standard only — the WEIGHT-MIDPOINT IDENTITY (Ando), the structural key to dense dyadic weights:
+-- gmean_rpow (gmean(Cˢ)(Cᵗ)=C^{(s+t)/2}, the commuting collapse via rpow_add) ⟹ wgmean_midpoint
+-- ((A#ₛB)#½(A#ₜB)=A#_{(s+t)/2}B) via gmean_congr with M=√A. Bisecting {0,1} gives joint concavity at every
+-- dyadic weight k/2ⁿ (dense); matrix_le_of_tendsto then lifts it to all t∈[0,1] — the route to Lieb.
 -- expected: standard only — WEIGHTED operator geometric mean A#ₜB = A^{1/2}(A^{-1/2}BA^{-1/2})^t A^{1/2}
 -- (matrix rpow): endpoints wgmean_zero (=A), wgmean_one (=B), and wgmean_half (=A#B, the geometric mean,
 -- via sqrt_eq_rpow). The interpolating object whose weight-midpoint identity (from gmean_congr) gives the
