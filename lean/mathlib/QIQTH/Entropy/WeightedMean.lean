@@ -47,6 +47,23 @@ lemma wgmean_one {A B : Matrix n n ℂ} (hA : A.PosDef) (hB : 0 ≤ B) : wgmean 
       simp only [Matrix.mul_assoc],
     sqrt_mul_inv hA, sqrt_inv_mul hA, Matrix.one_mul, Matrix.mul_one]
 
+/-- `A #ₜ B` is positive **definite** when `A, B` are — so the geometric-mean lemmas (which need a
+    positive-definite first argument) apply to weighted-mean values. -/
+lemma wgmean_posDef {A B : Matrix n n ℂ} (hA : A.PosDef) (hB : B.PosDef) (t : ℝ) :
+    (wgmean t A B).PosDef := by
+  have hsqAU : IsUnit (CFC.sqrt A) := (Matrix.isUnit_iff_isUnit_det _).mpr (sqrt_isUnit_det hA)
+  have hsqAinvU : IsUnit ((CFC.sqrt A)⁻¹) := Matrix.isUnit_nonsing_inv_iff.mpr hsqAU
+  have hCpd : ((CFC.sqrt A)⁻¹ * B * (CFC.sqrt A)⁻¹).PosDef := by
+    have h := (Matrix.IsUnit.posDef_star_right_conjugate_iff (x := B) hsqAinvU).mpr hB
+    rwa [Matrix.star_eq_conjTranspose, (sqrt_inv_isHermitian A).eq] at h
+  have hCtpd : (((CFC.sqrt A)⁻¹ * B * (CFC.sqrt A)⁻¹) ^ t).PosDef :=
+    Matrix.isStrictlyPositive_iff_posDef.mp
+      (IsStrictlyPositive.rpow _ t (Matrix.isStrictlyPositive_iff_posDef.mpr hCpd))
+  have h := (Matrix.IsUnit.posDef_star_right_conjugate_iff
+    (x := ((CFC.sqrt A)⁻¹ * B * (CFC.sqrt A)⁻¹) ^ t) hsqAU).mpr hCtpd
+  rw [Matrix.star_eq_conjTranspose, (sqrt_isHermitian A).eq] at h
+  exact h
+
 /-! ### The commuting rpow identity and the weight-midpoint identity -/
 
 /-- `√(Cˣ) = C^{x/2}` for positive-definite `C` and any real `x`. -/
@@ -95,5 +112,41 @@ theorem wgmean_midpoint {A B : Matrix n n ℂ} (hA : A.PosDef) (hB : B.PosDef) (
     intro r; unfold wgmean; rw [(sqrt_isHermitian A).eq]
   rw [hwg s, hwg t, gmean_congr hCspd CFC.rpow_nonneg (sqrt_isUnit_det hA), gmean_rpow hCpd s t,
     hwg ((s + t) / 2)]
+
+/-! ### Joint concavity at all dyadic weights, by bisection -/
+
+/-- `A #ₜ B` is jointly superadditive (concave) at the weight `t` — the two-point inequality on
+    positive-definite arguments. -/
+def WgSuperadd (t : ℝ) : Prop :=
+  ∀ {A₀ A₁ B₀ B₁ : Matrix n n ℂ}, A₀.PosDef → A₁.PosDef → B₀.PosDef → B₁.PosDef →
+    wgmean t A₀ B₀ + wgmean t A₁ B₁ ≤ wgmean t (A₀ + A₁) (B₀ + B₁)
+
+/-- Concavity at the left endpoint `t = 0` (where `A #_0 B = A`). -/
+theorem wgSuperadd_zero : WgSuperadd (n := n) 0 := by
+  intro A₀ A₁ B₀ B₁ hA₀ hA₁ hB₀ hB₁
+  rw [wgmean_zero hA₀.posSemidef.nonneg hB₀.posSemidef.nonneg,
+    wgmean_zero hA₁.posSemidef.nonneg hB₁.posSemidef.nonneg,
+    wgmean_zero (hA₀.add hA₁).posSemidef.nonneg (hB₀.add hB₁).posSemidef.nonneg]
+
+/-- Concavity at the right endpoint `t = 1` (where `A #_1 B = B`). -/
+theorem wgSuperadd_one : WgSuperadd (n := n) 1 := by
+  intro A₀ A₁ B₀ B₁ hA₀ hA₁ hB₀ hB₁
+  rw [wgmean_one hA₀ hB₀.posSemidef.nonneg, wgmean_one hA₁ hB₁.posSemidef.nonneg,
+    wgmean_one (hA₀.add hA₁) (hB₀.add hB₁).posSemidef.nonneg]
+
+/-- **Bisection step**: concavity at `s` and `t` gives concavity at the midpoint `(s+t)/2`.  Via the
+    weight-midpoint identity `A#_{(s+t)/2}B = (A#ₛB)#½(A#ₜB)`, the superadditivity of `#`, and joint
+    monotonicity of `#`. -/
+theorem wgSuperadd_midpoint {s t : ℝ} (hs : WgSuperadd (n := n) s) (ht : WgSuperadd (n := n) t) :
+    WgSuperadd (n := n) ((s + t) / 2) := by
+  intro A₀ A₁ B₀ B₁ hA₀ hA₁ hB₀ hB₁
+  rw [← wgmean_midpoint hA₀ hB₀, ← wgmean_midpoint hA₁ hB₁,
+    ← wgmean_midpoint (hA₀.add hA₁) (hB₀.add hB₁)]
+  refine (gmean_superadditive (wgmean_posDef hA₀ hB₀ s) (wgmean_posDef hA₁ hB₁ s)
+    (wgmean_nonneg t) (wgmean_nonneg t)).trans ?_
+  exact gmean_mono ((wgmean_posDef hA₀ hB₀ s).add (wgmean_posDef hA₁ hB₁ s))
+    (wgmean_posDef (hA₀.add hA₁) (hB₀.add hB₁) s)
+    (add_nonneg (wgmean_nonneg t) (wgmean_nonneg t))
+    (hs hA₀ hA₁ hB₀ hB₁) (ht hA₀ hA₁ hB₀ hB₁)
 
 end QIQTH.Entropy

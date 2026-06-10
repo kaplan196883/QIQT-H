@@ -1830,6 +1830,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Entropy.wgmean_one
 #print axioms QIQTH.Entropy.gmean_rpow
 #print axioms QIQTH.Entropy.wgmean_midpoint
+#print axioms QIQTH.Entropy.wgSuperadd_zero
+#print axioms QIQTH.Entropy.wgSuperadd_one
+#print axioms QIQTH.Entropy.wgSuperadd_midpoint
+-- expected: standard only — BISECTION to joint concavity at all dyadic weights. WgSuperadd t = the two-point
+-- superadditivity of A#ₜB; wgSuperadd_zero/one (endpoints A#_0B=A, A#_1B=B), wgSuperadd_midpoint (concavity
+-- at s,t ⟹ at (s+t)/2, via wgmean_midpoint + gmean_superadditive + gmean_mono + wgmean_posDef). Repeated
+-- bisection from {0,1} gives concavity at every dyadic k/2ⁿ; matrix_le_of_tendsto + exponent-continuity lift
+-- to all t∈[0,1] — the joint concavity of A^{1-t}⊗B^t feeding Lieb (Carlen §6.1).
 -- expected: standard only — the WEIGHT-MIDPOINT IDENTITY (Ando), the structural key to dense dyadic weights:
 -- gmean_rpow (gmean(Cˢ)(Cᵗ)=C^{(s+t)/2}, the commuting collapse via rpow_add) ⟹ wgmean_midpoint
 -- ((A#ₛB)#½(A#ₜB)=A#_{(s+t)/2}B) via gmean_congr with M=√A. Bisecting {0,1} gives joint concavity at every
