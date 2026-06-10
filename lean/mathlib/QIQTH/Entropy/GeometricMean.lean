@@ -238,6 +238,32 @@ theorem gmean_congr {X Y M : Matrix n n ℂ} (hX : X.PosDef) (hY : 0 ≤ Y) (hM 
     exact hmono
   exact le_antisymm hrev hfwd
 
+/-- A block-diagonal matrix with positive-semidefinite diagonal blocks is positive semidefinite:
+    `[[D,0],[0,E]] ⪰ 0`.  (Factor as `MᴴM` with `M = [[√D,0],[0,√E]]`.) -/
+lemma fromBlocks_diag_posSemidef {D E : Matrix n n ℂ} (hD : D.PosSemidef) (hE : E.PosSemidef) :
+    (Matrix.fromBlocks D 0 0 E).PosSemidef := by
+  have hM : (Matrix.fromBlocks (CFC.sqrt D) (0 : Matrix n n ℂ) 0 (CFC.sqrt E))ᴴ
+      * Matrix.fromBlocks (CFC.sqrt D) 0 0 (CFC.sqrt E) = Matrix.fromBlocks D 0 0 E := by
+    rw [Matrix.fromBlocks_conjTranspose, Matrix.fromBlocks_multiply]
+    simp only [Matrix.conjTranspose_zero, Matrix.mul_zero, Matrix.zero_mul, add_zero, zero_add,
+      (sqrt_isHermitian D).eq, (sqrt_isHermitian E).eq, CFC.sqrt_mul_sqrt_self D hD.nonneg,
+      CFC.sqrt_mul_sqrt_self E hE.nonneg]
+  rw [← hM]
+  exact Matrix.posSemidef_conjTranspose_mul_self _
+
+/-- **Monotonicity in the first argument**: `A ≤ A' ⟹ A # B ≤ A' # B` (for positive-definite `A, A'`).
+    From the variational characterization: the achievability block at `A` plus the positive
+    block-diagonal `[[A'-A,0],[0,0]]` is the achievability block at `A'`, so `A # B ≤ A' # B`. -/
+theorem gmean_le_gmean_left {A A' B : Matrix n n ℂ} (hA : A.PosDef) (hA' : A'.PosDef) (hB : 0 ≤ B)
+    (hAA' : A ≤ A') : gmean A B ≤ gmean A' B := by
+  have hsum : (Matrix.fromBlocks A' (gmean A B) (gmean A B) B).PosSemidef := by
+    have hd := (gmean_fromBlocks_posSemidef hA hB).add
+      (fromBlocks_diag_posSemidef (Matrix.le_iff.mp hAA') Matrix.PosSemidef.zero)
+    rw [Matrix.fromBlocks_add] at hd
+    simp only [add_zero] at hd
+    rwa [show A + (A' - A) = A' by abel] at hd
+  exact le_gmean_of_fromBlocks_posSemidef hA' hB (gmean_isHermitian A B) hsum
+
 /-! ### Monotonicity and the dyadic ladder toward the general `A #ₜ B` family -/
 
 /-- `A # B` is positive semidefinite (a congruence of the positive `√(√A⁻¹ B √A⁻¹)`). -/
@@ -305,5 +331,10 @@ theorem nestGmean_superadditive (k : ℕ) {A₀ A₁ B₀ B₁ : Matrix n n ℂ}
     have h3 := gmean_le_gmean_right (A := A₀ + A₁)
       (add_nonneg (nestGmean_nonneg m (A := A₀) hB₀) (nestGmean_nonneg m (A := A₁) hB₁)) ih
     exact h1.trans h3
+
+/-- **Joint monotonicity** of the operator geometric mean: `A ≤ A'`, `B ≤ B' ⟹ A # B ≤ A' # B'`. -/
+theorem gmean_mono {A A' B B' : Matrix n n ℂ} (hA : A.PosDef) (hA' : A'.PosDef) (hB : 0 ≤ B)
+    (hAA' : A ≤ A') (hBB' : B ≤ B') : gmean A B ≤ gmean A' B' :=
+  (gmean_le_gmean_left hA hA' hB hAA').trans (gmean_le_gmean_right (A := A') hB hBB')
 
 end QIQTH.Entropy

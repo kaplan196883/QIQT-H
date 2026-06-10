@@ -1813,6 +1813,12 @@ namespace QIQTH.AxiomAudit
 -- JOINT CONCAVITY of (A,B)↦√A⊗√B: √A₀⊗√B₀+√A₁⊗√B₁ ≤ √(A₀+A₁)⊗√(B₀+B₁) (the p=q=1/2 case of A^p⊗B^q
 -- concavity, which with the vec/trace identity yields Lieb's concavity theorem, Carlen §6.1).
 #print axioms QIQTH.Entropy.gmean_le_gmean_right
+#print axioms QIQTH.Entropy.gmean_le_gmean_left
+#print axioms QIQTH.Entropy.gmean_mono
+#print axioms QIQTH.Entropy.fromBlocks_diag_posSemidef
+-- expected: standard only — FULL JOINT MONOTONICITY of A#B: monotone in B (conjugation + √-monotone) and
+-- in A (achievability block + positive block-diagonal [[A'-A,0],[0,0]] via fromBlocks_diag_posSemidef +
+-- maximality) ⟹ gmean_mono (A≤A',B≤B' ⟹ A#B≤A'#B'). The monotonicity needed for the dyadic bisection.
 #print axioms QIQTH.Entropy.gmean_nested_superadditive
 -- expected: standard only — DYADIC LADDER toward the general A#ₜB (hence A^{1-t}⊗B^t) family:
 -- gmean_le_gmean_right (monotonicity in 2nd arg, via conjugation + operator √-monotonicity) +
