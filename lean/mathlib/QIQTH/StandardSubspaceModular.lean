@@ -479,4 +479,71 @@ theorem rvdT_sq (S : StandardSubspace H) :
     _ = rvdRC S * rvdTwoSubRC S := by
         rw [rvdSqrtR_mul_self, rvdSqrtTwoSubR_mul_self]
 
+/-- `T = R^{1/2}(2−R)^{1/2}` is **positive** — a product of two commuting positive operators. -/
+theorem rvdT_nonneg (S : StandardSubspace H) : 0 ≤ rvdT S :=
+  Commute.mul_nonneg (rvdSqrtR_nonneg S) (rvdSqrtTwoSubR_nonneg S)
+    (rvdSqrtR_commute_rvdSqrtTwoSubR S)
+
+/-- `T` is self-adjoint (it is positive). -/
+theorem rvdT_isSelfAdjoint (S : StandardSubspace H) : IsSelfAdjoint (rvdT S) :=
+  IsSelfAdjoint.of_nonneg (rvdT_nonneg S)
+
+/-! ### The polar decomposition `J·T = P − Q` and the modular conjugation `J`
+
+`D = P − Q` is the **conjugate-linear** (antiunitary) part (`rvdPmQ_smul_I`: `D(i·ξ) = −i·Dξ`), and
+`T = R^{1/2}(2−R)^{1/2} = |D|` is its positive (ℂ-linear) modulus.  RvD recover the modular conjugation
+`J` from the polar decomposition `D = J·T`.  The structural prerequisite is the **isometry identity**
+`‖T ξ‖ = ‖D ξ‖` (so `J : T ξ ↦ D ξ` is a well-defined antiunitary on `range T`, extending to all of `H`
+since `R` injective makes `T` injective with dense range).  We prove it via `T² = D²` as maps:
+both equal `R − (PQ + QP)` (`rvdT_sq` ↔ `rvdPmQ_sq`). -/
+
+/-- **`T² = D²` as maps**: `(R(2−R)) ξ = (P − Q)((P − Q) ξ)`.  Both sides reduce to
+    `P ξ + Q ξ − P(Q ξ) − Q(P ξ)` by idempotency of `P, Q` (`R² = R + (PQ+QP)`, so `R(2−R) = 2R − R²
+    = R − (PQ+QP) = (P−Q)²`).  This is what transfers `‖T ξ‖ = ‖D ξ‖` (the modular conjugation is an
+    isometry from `T` to `D`). -/
+theorem rvdRC_mul_rvdTwoSubRC_apply (S : StandardSubspace H) (ξ : H) :
+    (rvdRC S * rvdTwoSubRC S) ξ = rvdPmQ S (rvdPmQ S ξ) := by
+  have hP : projK S (projK S ξ) = projK S ξ := by
+    have := DFunLike.congr_fun (projK_idem S) ξ
+    rwa [ContinuousLinearMap.mul_apply] at this
+  have hQ : projIK S (projIK S ξ) = projIK S ξ := by
+    have := DFunLike.congr_fun (projIK_idem S) ξ
+    rwa [ContinuousLinearMap.mul_apply] at this
+  simp only [ContinuousLinearMap.mul_apply, rvdTwoSubRC_apply, two_smul, rvdRC_apply, rvdR_apply,
+    rvdPmQ, ContinuousLinearMap.sub_apply, map_add, map_sub, hP, hQ]
+  abel
+
+/-- `‖A ξ‖² = ⟪ξ, A(A ξ)⟫_ℝ` for a self-adjoint ℂ-operator `A` (real inner product = `Re` of ℂ). -/
+private lemma re_inner_normsq_selfadjoint (A : H →L[ℂ] H) (hA : IsSelfAdjoint A) (ξ : H) :
+    ‖A ξ‖ ^ 2 = inner ℝ ξ (A (A ξ)) := by
+  rw [← real_inner_self_eq_norm_sq]
+  have hadj : ContinuousLinearMap.adjoint A = A := by
+    rw [← ContinuousLinearMap.star_eq_adjoint]; exact hA.star_eq
+  have hc : inner ℂ (A ξ) (A ξ) = inner ℂ ξ (A (A ξ)) := by
+    rw [← ContinuousLinearMap.adjoint_inner_right A ξ (A ξ), hadj]
+  show (inner ℂ (A ξ) (A ξ)).re = (inner ℂ ξ (A (A ξ))).re
+  rw [hc]
+
+/-- `‖A ξ‖² = ⟪ξ, A(A ξ)⟫_ℝ` for a self-adjoint ℝ-operator `A`. -/
+private lemma re_inner_normsq_selfadjoint_real (A : H →L[ℝ] H) (hA : IsSelfAdjoint A) (ξ : H) :
+    ‖A ξ‖ ^ 2 = inner ℝ ξ (A (A ξ)) := by
+  rw [← real_inner_self_eq_norm_sq, ← ContinuousLinearMap.adjoint_inner_right A ξ (A ξ)]
+  have hadj : ContinuousLinearMap.adjoint A = A := by
+    rw [← ContinuousLinearMap.star_eq_adjoint]; exact hA.star_eq
+  rw [hadj]
+
+/-- **The modular-conjugation isometry: `‖T ξ‖ = ‖D ξ‖`** (RvD polar decomposition `D = J·T`).
+    `D = P − Q` is conjugate-linear and `T = R^{1/2}(2−R)^{1/2}` is its positive modulus `|D|`; the map
+    `J : T ξ ↦ D ξ` is therefore a well-defined antiunitary (the modular conjugation).  Proved from
+    `T² = D²` (`rvdRC_mul_rvdTwoSubRC_apply` via `rvdT_sq`) and self-adjointness of both `T` and `D`. -/
+theorem rvdT_norm_eq (S : StandardSubspace H) (ξ : H) : ‖rvdT S ξ‖ = ‖rvdPmQ S ξ‖ := by
+  have key : rvdT S (rvdT S ξ) = rvdPmQ S (rvdPmQ S ξ) := by
+    have h := DFunLike.congr_fun (rvdT_sq S) ξ
+    rw [ContinuousLinearMap.mul_apply] at h
+    rw [h, rvdRC_mul_rvdTwoSubRC_apply]
+  have hsq : ‖rvdT S ξ‖ ^ 2 = ‖rvdPmQ S ξ‖ ^ 2 := by
+    rw [re_inner_normsq_selfadjoint (rvdT S) (rvdT_isSelfAdjoint S) ξ,
+        re_inner_normsq_selfadjoint_real (rvdPmQ S) (rvdPmQ_isSelfAdjoint S) ξ, key]
+  rw [← Real.sqrt_sq (norm_nonneg (rvdT S ξ)), ← Real.sqrt_sq (norm_nonneg (rvdPmQ S ξ)), hsq]
+
 end QIQTH.StandardSubspaceModular

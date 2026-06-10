@@ -1418,6 +1418,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.rvdT_sq
 -- expected: standard only — RvD Prop 2.2(2): T²=R(2−R) for T=R^{1/2}(2−R)^{1/2}. The analytic heart
 -- of the bounded-operator construction of the modular objects J and Δ.
+-- The modular conjugation J: polar decomposition D=J·T, via the isometry ‖Tξ‖=‖Dξ‖:
+#print axioms QIQTH.StandardSubspaceModular.rvdT_nonneg
+-- expected: standard only — T=√R·√(2−R)≥0 (product of commuting positives, Commute.mul_nonneg).
+#print axioms QIQTH.StandardSubspaceModular.rvdT_isSelfAdjoint
+-- expected: standard only — T self-adjoint (it is positive).
+#print axioms QIQTH.StandardSubspaceModular.rvdRC_mul_rvdTwoSubRC_apply
+-- expected: standard only — T²=D² as maps: (R(2−R))ξ=(P−Q)((P−Q)ξ), both = Pξ+Qξ−P(Qξ)−Q(Pξ).
+#print axioms QIQTH.StandardSubspaceModular.rvdT_norm_eq
+-- expected: standard only — ★ THE modular-conjugation isometry ‖Tξ‖=‖Dξ‖ (RvD polar decomp D=J·T).
+-- D=P−Q is antilinear, T=|D| its positive modulus; J:Tξ↦Dξ is thus a well-defined antiunitary.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
