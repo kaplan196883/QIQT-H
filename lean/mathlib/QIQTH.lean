@@ -161,6 +161,11 @@ import QIQTH.SpectralPVM
 -- approach of Rieffel–Van Daele (PJM 69, 1977). On Mathlib's StandardSubspace: the projections
 -- P,Q onto 𝒦,i𝒦, R=P+Q, and RvD Prop 2.2(1) ⟪Rξ,ξ⟫=‖Pξ‖²+‖Qξ‖² (engine for R injective). Standard axioms:
 import QIQTH.StandardSubspaceModular
+-- Track B continuation: the CONTINUUM MODULAR FLOW Δ^{it}=u_t(R) of a standard subspace, via the
+-- bounded BOREL functional calculus (boundedFC/PVM_of_selfAdjoint). u_t(r)=exp(it·log((2−r)/r)) is
+-- discontinuous at the spectral endpoints r=0,2 (continuous cfc cannot reach it). One-parameter
+-- unitary group: U_0=1, U_{s+t}=U_s·U_t, U_t⋆=U_{-t}, unitary. Standard axioms:
+import QIQTH.StandardSubspaceModularFlow
 -- QIQT-H CORE (post-2026-06 GPT-5.5-pro strategic pivot): the conditional
 -- representation theorem for single-outcome-without-collapse. The non-circular
 -- finite-capacity exclusion (coactual_subsingleton) + actuality selector give

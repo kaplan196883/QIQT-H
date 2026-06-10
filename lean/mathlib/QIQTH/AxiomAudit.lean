@@ -1433,6 +1433,20 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — D·R = (2−R)·D  (pure idempotent algebra).
 #print axioms QIQTH.StandardSubspaceModular.rvdR_mul_rvdPmQ
 -- expected: standard only — R·D = D·(2−R).
+-- ★★ THE CONTINUUM MODULAR FLOW Δ^{it}=u_t(R) via bounded BOREL FC (continuous cfc cannot reach it):
+#print axioms QIQTH.StandardSubspaceModular.modChar_norm
+-- expected: standard only — ‖u_t(r)‖=1 (the modular character is unimodular).
+#print axioms QIQTH.StandardSubspaceModular.borelFC_adjoint
+-- expected: standard only — f(T)⋆=(conj f)(T) (adjoint of the bounded Borel FC, via bilinDiag_conj_symm).
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_zero
+-- expected: standard only — U_0 = 1.
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_add
+-- expected: standard only — U_{s+t} = U_s·U_t (group law, via borelFC_mul + u_{s+t}=u_s·u_t).
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_adjoint
+-- expected: standard only — U_t⋆ = U_{-t}.
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_unitary
+-- expected: standard only — ★ U_t is UNITARY: the continuum one-parameter modular unitary group
+-- Δ^{it} of a standard subspace (one-particle level; NOT yet second-quantized free-field Γ(Δ^{it})).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
