@@ -1847,6 +1847,12 @@ namespace QIQTH.AxiomAudit
 -- relEntropy_eq_neg_deriv: D(A‖B) = -Re d/dt Tr(A^{1-t}Bᵗ)|₀ (trace algebra). tendsto_relEntropy:
 -- ★ D(A‖B) = lim_{t→0}(Tr A - Tr(A^{1-t}Bᵗ))/t — relative entropy AS the limit of Lieb's difference
 -- quotient (hasDerivAt + slope). The quotient is jointly convex (trace_rpow_concave) ⟹ D jointly convex.
+#print axioms QIQTH.Entropy.cfc_log_conj
+#print axioms QIQTH.Entropy.matLog_conj
+#print axioms QIQTH.Entropy.relEntropy_unitary_invariant
+-- toward DPI §6.4: cfc_log_conj/matLog_conj (log(uMu⋆)=u·log M·u⋆ via map_cfc on conjStarAlgAut),
+-- relEntropy_unitary_invariant (D(uρu⋆‖uσu⋆)=D(ρ‖σ)). With joint convexity + scaling these give DPI
+-- for mixed-unitary channels.
 #print axioms QIQTH.Entropy.relEntropy_subadditive
 -- expected: standard only — ★★★★★ JOINT CONVEXITY OF QUANTUM RELATIVE ENTROPY (Carlen Thm 6.3):
 -- D(A₀+A₁‖B₀+B₁) ≤ D(A₀‖B₀)+D(A₁‖B₁). The t→0 limit of the subadditive Lieb quotients

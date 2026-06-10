@@ -26,6 +26,7 @@ import QIQTH.Entropy.CommuteRpow
 import QIQTH.Entropy.Lieb
 import QIQTH.Entropy.RpowConj
 import QIQTH.Entropy.RelEntropyConvex
+import QIQTH.Entropy.RelEntropyDPI
 import QIQTH.Entropy.OrderLimit
 import QIQTH.HolevoCoarseGraining
 import QIQTH.DPI
