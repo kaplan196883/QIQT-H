@@ -1721,5 +1721,14 @@ namespace QIQTH.AxiomAudit
 -- Doubly-stochastic/Jensen proof: diagonal term (trace_mul_matLog) − cross term (crossTerm_trace), the overlap
 -- matrix S doubly stochastic (row/col_sum_normSq), concavity of log (Jensen) ⇒ ≥ ∑pᵢlog(pᵢ/rᵢ)=KL(p‖r)≥0
 -- (RelEntPositivity.KL_classical_nonneg). Now PROVED, not assumed, in finite dimensions — axiom-free.
+#print axioms QIQTH.QuantumEntropy.vonNeumannEntropy_eq_neg_trace
+-- expected: standard only — the entropy bridge S(ρ)=−tr(ρ log ρ) (spectral = operator form, via trace_mul_matLog).
+#print axioms QIQTH.QuantumEntropy.relEntropy_eq_crossEntropy_sub_entropy
+-- expected: standard only — Donald identity (A1) D(ρ‖σ)=crossEnt(ρ,σ)−H(ρ), concrete; content of Donald.D_eq_crossEnt_sub_H.
+#print axioms QIQTH.QuantumEntropy.crossEntropy_self
+-- expected: standard only — Donald identity (A3) crossEnt(ρ,ρ)=H(ρ), concrete; content of Donald.crossEnt_self.
+#print axioms QIQTH.QuantumEntropy.crossEntropy_sum
+-- expected: standard only — Donald identity (A2) crossEnt linear in first arg, crossEnt(∑pₖρₖ,σ)=∑pₖcrossEnt(ρₖ,σ);
+-- concrete content of Donald.crossEnt_mixture. The three Donald structural identities now PROVED for the matrix model.
 
 end QIQTH.AxiomAudit

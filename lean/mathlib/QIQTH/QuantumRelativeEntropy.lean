@@ -346,4 +346,49 @@ theorem relEntropy_nonneg {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.P
       rw [Real.log_div (hp_pos i).ne' (hr_pos i).ne', mul_sub]
   rw [hRE]; linarith [hKL, hcross_le, hsplit.symm.le, hsplit.le]
 
+/-! ### The Donald structural identities (concrete) -/
+
+/-- **Cross entropy** `crossEnt(ρ,σ) = −tr(ρ log σ)` — the concrete realization of the opaque
+    `Donald.crossEnt`.  The first argument is any matrix; the second is Hermitian (for `log`). -/
+noncomputable def crossEntropy (ρ : Matrix n n ℂ) {σ : Matrix n n ℂ} (hσ : σ.IsHermitian) : ℝ :=
+  -(ρ * matLog hσ).trace.re
+
+/-- **Entropy bridge** `S(ρ) = −tr(ρ log ρ)`: the spectral von Neumann entropy equals the operator form,
+    for a positive-definite density.  (`negMulLog λ = −λ log λ`, summed = `−tr(ρ log ρ)`.) -/
+theorem vonNeumannEntropy_eq_neg_trace {ρ : Matrix n n ℂ} (hρ : ρ.PosDef) (h : IsDensity ρ) :
+    vonNeumannEntropy h = -(ρ * matLog hρ.1).trace.re := by
+  rw [vonNeumannEntropy, trace_mul_matLog hρ, Complex.re_sum]
+  simp only [Complex.ofReal_re]
+  rw [← Finset.sum_neg_distrib]
+  refine Finset.sum_congr rfl fun i _ => ?_
+  show Real.negMulLog (hρ.1.eigenvalues i) = -(hρ.1.eigenvalues i * Real.log (hρ.1.eigenvalues i))
+  rw [Real.negMulLog_eq_neg]
+
+/-- **(A1) Donald identity `D(ρ‖σ) = crossEnt(ρ,σ) − H(ρ)`** — concrete; `D_eq_crossEnt_sub_H`. -/
+theorem relEntropy_eq_crossEntropy_sub_entropy {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDef)
+    (h : IsDensity ρ) :
+    relEntropy hρ.1 hσ.1 = crossEntropy ρ hσ.1 - vonNeumannEntropy h := by
+  rw [relEntropy, crossEntropy, vonNeumannEntropy_eq_neg_trace hρ h, mul_sub, Matrix.trace_sub,
+    Complex.sub_re]
+  ring
+
+/-- **(A3) Donald identity `crossEnt(ρ,ρ) = H(ρ)`** — concrete; `crossEnt_self`. -/
+theorem crossEntropy_self {ρ : Matrix n n ℂ} (hρ : ρ.PosDef) (h : IsDensity ρ) :
+    crossEntropy ρ hρ.1 = vonNeumannEntropy h := by
+  rw [crossEntropy, vonNeumannEntropy_eq_neg_trace hρ h]
+
+/-- **(A2) Cross entropy is linear in its first argument** — concrete; `crossEnt_mixture`.
+    `crossEnt(∑ pₖ ρₖ, σ) = ∑ pₖ crossEnt(ρₖ, σ)` (trace linearity), for ANY weights `p`. -/
+theorem crossEntropy_sum {ι : Type*} (s : Finset ι) (p : ι → ℝ) (ρ : ι → Matrix n n ℂ)
+    {σ : Matrix n n ℂ} (hσ : σ.IsHermitian) :
+    crossEntropy (∑ k ∈ s, (p k : ℂ) • ρ k) hσ = ∑ k ∈ s, p k * crossEntropy (ρ k) hσ := by
+  simp only [crossEntropy]
+  rw [Finset.sum_mul,
+    show (∑ k ∈ s, ((p k : ℂ) • ρ k) * matLog hσ) = ∑ k ∈ s, (p k : ℂ) • (ρ k * matLog hσ) from
+      Finset.sum_congr rfl fun k _ => smul_mul_assoc _ _ _,
+    Matrix.trace_sum]
+  simp only [Matrix.trace_smul, smul_eq_mul]
+  rw [Complex.re_sum, ← Finset.sum_neg_distrib]
+  exact Finset.sum_congr rfl fun k _ => by rw [Complex.re_ofReal_mul]; ring
+
 end QIQTH.QuantumEntropy
