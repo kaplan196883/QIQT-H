@@ -132,4 +132,39 @@ lemma relEntropy_subadd_sum {ι : Type*} {s : Finset ι} (hs : s.Nonempty)
         (Matrix.posDef_sum hs (fun i _ => hB i))) ?_)
     gcongr
 
+/-- **Data-processing inequality for mixed-unitary (random-unitary) channels**: for a probability
+    distribution `p` over unitaries `U`, the channel `Φ(ρ) = Σₖ pₖ · Uₖ ρ Uₖ⋆` satisfies
+    `D(Φρ ‖ Φσ) ≤ D(ρ‖σ)`.  This is the data-processing inequality (Lindblad–Uhlmann) for the
+    mixed-unitary CPTP class, proved from joint convexity + finite subadditivity + scaling + unitary
+    invariance of the relative entropy. -/
+theorem dpi_mixed_unitary {κ : Type*} {s : Finset κ} (hs : s.Nonempty)
+    {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDef)
+    (p : κ → ℝ) (hp : ∀ k, 0 < p k) (hsum : ∑ k ∈ s, p k = 1)
+    (U : κ → unitary (Matrix n n ℂ))
+    (hΦρ : (∑ k ∈ s, (p k : ℝ) •
+        ((U k : Matrix n n ℂ) * ρ * (star (U k) : Matrix n n ℂ))).IsHermitian)
+    (hΦσ : (∑ k ∈ s, (p k : ℝ) •
+        ((U k : Matrix n n ℂ) * σ * (star (U k) : Matrix n n ℂ))).IsHermitian) :
+    QIQTH.QuantumEntropy.relEntropy hΦρ hΦσ ≤ QIQTH.QuantumEntropy.relEntropy hρ.1 hσ.1 := by
+  -- the conjugated, scaled summands are positive definite
+  have hcρ : ∀ k, ((U k : Matrix n n ℂ) * ρ * (star (U k) : Matrix n n ℂ)).PosDef :=
+    fun k => ((Unitary.isUnit_coe (U := U k)).posDef_star_right_conjugate_iff).mpr hρ
+  have hcσ : ∀ k, ((U k : Matrix n n ℂ) * σ * (star (U k) : Matrix n n ℂ)).PosDef :=
+    fun k => ((Unitary.isUnit_coe (U := U k)).posDef_star_right_conjugate_iff).mpr hσ
+  have hAk : ∀ k, ((p k : ℝ) •
+      ((U k : Matrix n n ℂ) * ρ * (star (U k) : Matrix n n ℂ))).PosDef :=
+    fun k => (hcρ k).smul (hp k)
+  have hBk : ∀ k, ((p k : ℝ) •
+      ((U k : Matrix n n ℂ) * σ * (star (U k) : Matrix n n ℂ))).PosDef :=
+    fun k => (hcσ k).smul (hp k)
+  rw [relEntropy_congr hΦρ (Matrix.posDef_sum hs (fun k _ => hAk k)).1
+    hΦσ (Matrix.posDef_sum hs (fun k _ => hBk k)).1 rfl rfl]
+  refine le_trans (relEntropy_subadd_sum hs hAk hBk) ?_
+  have hterm : ∀ k ∈ s, QIQTH.QuantumEntropy.relEntropy (hAk k).1 (hBk k).1
+      = p k * QIQTH.QuantumEntropy.relEntropy hρ.1 hσ.1 := by
+    intro k _
+    rw [relEntropy_smul (hcρ k) (hcσ k) (hp k) (hAk k).1 (hBk k).1,
+      relEntropy_unitary_invariant hρ hσ (U k) (hcρ k).1 (hcσ k).1]
+  rw [Finset.sum_congr rfl hterm, ← Finset.sum_mul, hsum, one_mul]
+
 end QIQTH.Entropy
