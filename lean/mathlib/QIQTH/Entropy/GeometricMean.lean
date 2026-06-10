@@ -168,6 +168,76 @@ theorem gmean_superadditive {A₀ A₁ B₀ B₁ : Matrix n n ℂ}
   exact le_gmean_of_fromBlocks_posSemidef (hA₀.add hA₁) (add_nonneg hB₀ hB₁)
     ((gmean_isHermitian A₀ B₀).add (gmean_isHermitian A₁ B₁)) hblock
 
+/-! ### Congruence covariance (transformer invariance) -/
+
+/-- The conjugation of a 2×2 block by the block-diagonal `diag(M,M)`:
+    `diag(M,M) · [[X,W],[W,Y]] · diag(M,M)ᴴ = [[MXMᴴ, MWMᴴ],[MWMᴴ, MYMᴴ]]`. -/
+lemma fromBlocks_conj (M X W Y : Matrix n n ℂ) :
+    Matrix.fromBlocks M 0 0 M * Matrix.fromBlocks X W W Y * (Matrix.fromBlocks M 0 0 M)ᴴ
+      = Matrix.fromBlocks (M * X * Mᴴ) (M * W * Mᴴ) (M * W * Mᴴ) (M * Y * Mᴴ) := by
+  rw [Matrix.fromBlocks_conjTranspose, Matrix.fromBlocks_multiply, Matrix.fromBlocks_multiply]
+  simp only [Matrix.conjTranspose_zero, Matrix.mul_zero, Matrix.zero_mul, add_zero,
+    zero_add, Matrix.mul_assoc]
+
+/-- **Congruence covariance** of the operator geometric mean (Ando): for invertible `M`,
+    `(M X Mᴴ) # (M Y Mᴴ) = M (X # Y) Mᴴ`.  This is the geodesic/transformer invariance underlying the
+    weight-midpoint identity `(A#ₛB) #½ (A#ₜB) = A#_{(s+t)/2}B`, hence the dense dyadic weights. -/
+theorem gmean_congr {X Y M : Matrix n n ℂ} (hX : X.PosDef) (hY : 0 ≤ Y) (hM : IsUnit M.det) :
+    gmean (M * X * Mᴴ) (M * Y * Mᴴ) = M * gmean X Y * Mᴴ := by
+  have hMstar : (star M : Matrix n n ℂ) = Mᴴ := Matrix.star_eq_conjTranspose M
+  have hMX : (M * X * Mᴴ).PosDef := by
+    rw [← hMstar]; exact (Matrix.IsUnit.posDef_star_right_conjugate_iff
+      ((Matrix.isUnit_iff_isUnit_det M).mpr hM)).mpr hX
+  have hMY : (0 : Matrix n n ℂ) ≤ M * Y * Mᴴ := by
+    have := (nonneg_iff_posSemidef.mp hY).mul_mul_conjTranspose_same M
+    exact nonneg_iff_posSemidef.mpr this
+  have hMmul : M * M⁻¹ = 1 := Matrix.mul_nonsing_inv M hM
+  have hMmul' : M⁻¹ * M = 1 := Matrix.nonsing_inv_mul M hM
+  -- forward: M (X#Y) Mᴴ ≤ gmean(MXMᴴ)(MYMᴴ)
+  have hgHerm : (M * gmean X Y * Mᴴ).IsHermitian := by
+    show (M * gmean X Y * Mᴴ)ᴴ = M * gmean X Y * Mᴴ
+    rw [Matrix.conjTranspose_mul, Matrix.conjTranspose_mul, Matrix.conjTranspose_conjTranspose,
+      (gmean_isHermitian X Y).eq, Matrix.mul_assoc]
+  have hfwd : M * gmean X Y * Mᴴ ≤ gmean (M * X * Mᴴ) (M * Y * Mᴴ) := by
+    have hblk := (gmean_fromBlocks_posSemidef hX hY).mul_mul_conjTranspose_same
+      (Matrix.fromBlocks M 0 0 M)
+    rw [fromBlocks_conj] at hblk
+    exact le_gmean_of_fromBlocks_posSemidef hMX hMY hgHerm hblk
+  -- reverse: gmean(MXMᴴ)(MYMᴴ) ≤ M (X#Y) Mᴴ
+  have hrev : gmean (M * X * Mᴴ) (M * Y * Mᴴ) ≤ M * gmean X Y * Mᴴ := by
+    set G := gmean (M * X * Mᴴ) (M * Y * Mᴴ) with hG
+    have hGh : G.IsHermitian := gmean_isHermitian _ _
+    -- conjugate achievability block of (MXMᴴ,MYMᴴ) by diag(M⁻¹,M⁻¹) to land on (X,Y)
+    have hblk := (gmean_fromBlocks_posSemidef hMX hMY).mul_mul_conjTranspose_same
+      (Matrix.fromBlocks M⁻¹ 0 0 M⁻¹)
+    rw [fromBlocks_conj] at hblk
+    have hXeq : M⁻¹ * (M * X * Mᴴ) * (M⁻¹)ᴴ = X := by
+      have hr : M⁻¹ * (M * X * Mᴴ) * (M⁻¹)ᴴ = (M⁻¹ * M) * X * (Mᴴ * (M⁻¹)ᴴ) := by
+        simp only [Matrix.mul_assoc]
+      rw [hr, hMmul', ← Matrix.conjTranspose_mul, hMmul', Matrix.conjTranspose_one,
+        Matrix.one_mul, Matrix.mul_one]
+    have hYeq : M⁻¹ * (M * Y * Mᴴ) * (M⁻¹)ᴴ = Y := by
+      have hr : M⁻¹ * (M * Y * Mᴴ) * (M⁻¹)ᴴ = (M⁻¹ * M) * Y * (Mᴴ * (M⁻¹)ᴴ) := by
+        simp only [Matrix.mul_assoc]
+      rw [hr, hMmul', ← Matrix.conjTranspose_mul, hMmul', Matrix.conjTranspose_one,
+        Matrix.one_mul, Matrix.mul_one]
+    rw [hXeq, hYeq] at hblk
+    have hGHerm : (M⁻¹ * G * (M⁻¹)ᴴ).IsHermitian := by
+      show (M⁻¹ * G * (M⁻¹)ᴴ)ᴴ = M⁻¹ * G * (M⁻¹)ᴴ
+      rw [Matrix.conjTranspose_mul, Matrix.conjTranspose_mul, Matrix.conjTranspose_conjTranspose,
+        hGh.eq, Matrix.mul_assoc]
+    have hle := le_gmean_of_fromBlocks_posSemidef hX hY hGHerm hblk
+    -- conjugate back by M: G = M (M⁻¹ G (M⁻¹)ᴴ) Mᴴ ≤ M (X#Y) Mᴴ
+    have hmono := mul_mul_conjTranspose_le hle M
+    have hGeq : M * (M⁻¹ * G * (M⁻¹)ᴴ) * Mᴴ = G := by
+      have hr : M * (M⁻¹ * G * (M⁻¹)ᴴ) * Mᴴ = (M * M⁻¹) * G * ((M⁻¹)ᴴ * Mᴴ) := by
+        simp only [Matrix.mul_assoc]
+      rw [hr, hMmul, ← Matrix.conjTranspose_mul, hMmul, Matrix.conjTranspose_one,
+        Matrix.one_mul, Matrix.mul_one]
+    rw [hGeq] at hmono
+    exact hmono
+  exact le_antisymm hrev hfwd
+
 /-! ### Monotonicity and the dyadic ladder toward the general `A #ₜ B` family -/
 
 /-- `A # B` is positive semidefinite (a congruence of the positive `√(√A⁻¹ B √A⁻¹)`). -/

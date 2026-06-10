@@ -1819,6 +1819,11 @@ namespace QIQTH.AxiomAudit
 -- gmean_nested_superadditive (the t=1/4 weighted-mean concavity A₀#(A₀#B₀)+A₁#(A₁#B₁) ≤
 -- (A₀+A₁)#((A₀+A₁)#(B₀+B₁)), from superadditivity ×2 + monotonicity). Iterating gives all dyadic
 -- weights; continuity gives the full A#ₜB family feeding Lieb's concavity.
+#print axioms QIQTH.Entropy.gmean_congr
+-- expected: standard only — CONGRUENCE COVARIANCE of the operator geometric mean (Ando): for invertible M,
+-- (M X Mᴴ)#(M Y Mᴴ) = M(X#Y)Mᴴ. Proved from the variational characterization by conjugating the 2×2 block
+-- by diag(M,M) (fromBlocks_multiply) + achievability/maximality both directions + le_antisymm. This is the
+-- transformer invariance underlying the weight-midpoint identity (A#ₛB)#½(A#ₜB)=A#_{(s+t)/2}B → dense dyadics.
 #print axioms QIQTH.Entropy.nestGmean_superadditive
 -- expected: standard only — JOINT CONCAVITY AT EVERY DYADIC WEIGHT t=1/2ᵏ (the general A#ₜB family,
 -- inductively): nestGmean k A₀ B₀ + nestGmean k A₁ B₁ ≤ nestGmean k (A₀+A₁)(B₀+B₁), where
