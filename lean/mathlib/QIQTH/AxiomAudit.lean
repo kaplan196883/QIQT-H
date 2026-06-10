@@ -1852,6 +1852,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Entropy.relEntropy_unitary_invariant
 #print axioms QIQTH.Entropy.matLog_smul
 #print axioms QIQTH.Entropy.relEntropy_smul
+#print axioms QIQTH.Entropy.relEntropy_subadd_sum
+-- relEntropy_subadd_sum: D(Σᵢ Aᵢ ‖ Σᵢ Bᵢ) ≤ Σᵢ D(Aᵢ‖Bᵢ) (finite subadditivity, induction on
+-- relEntropy_subadditive). The 4th DPI ingredient: subadd + unitary inv + scaling ⟹ mixed-unitary DPI.
 -- toward DPI §6.4: cfc_log_conj/matLog_conj (log(uMu⋆)=u·log M·u⋆ via map_cfc on conjStarAlgAut),
 -- relEntropy_unitary_invariant (D(uρu⋆‖uσu⋆)=D(ρ‖σ)). matLog_smul (log(c·ρ)=(log c)·1+log ρ via
 -- cfc_comp_smul+cfc_const_add) + relEntropy_smul (D(c·ρ‖c·σ)=c·D(ρ‖σ), the log c terms cancel).

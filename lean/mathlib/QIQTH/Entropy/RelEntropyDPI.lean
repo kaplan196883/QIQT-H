@@ -105,4 +105,31 @@ lemma relEntropy_smul {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDe
       = QIQTH.QuantumEntropy.matLog hρ.1 - QIQTH.QuantumEntropy.matLog hσ.1 by abel,
     Matrix.smul_mul, Matrix.trace_smul, Complex.smul_re, smul_eq_mul]
 
+/-- Relative entropy depends only on the matrices (the Hermitian proofs are irrelevant). -/
+lemma relEntropy_congr {ρ₁ ρ₂ σ₁ σ₂ : Matrix n n ℂ} (h₁ρ : ρ₁.IsHermitian) (h₂ρ : ρ₂.IsHermitian)
+    (h₁σ : σ₁.IsHermitian) (h₂σ : σ₂.IsHermitian) (hρ : ρ₁ = ρ₂) (hσ : σ₁ = σ₂) :
+    QIQTH.QuantumEntropy.relEntropy h₁ρ h₁σ = QIQTH.QuantumEntropy.relEntropy h₂ρ h₂σ := by
+  subst hρ; subst hσ; rfl
+
+/-- **Finite subadditivity** of the relative entropy: `D(Σᵢ Aᵢ ‖ Σᵢ Bᵢ) ≤ Σᵢ D(Aᵢ‖Bᵢ)` over a
+    nonempty index set, from the binary `relEntropy_subadditive` by induction. -/
+lemma relEntropy_subadd_sum {ι : Type*} {s : Finset ι} (hs : s.Nonempty)
+    {A B : ι → Matrix n n ℂ} (hA : ∀ i, (A i).PosDef) (hB : ∀ i, (B i).PosDef) :
+    QIQTH.QuantumEntropy.relEntropy (Matrix.posDef_sum hs (fun i _ => hA i)).1
+        (Matrix.posDef_sum hs (fun i _ => hB i)).1
+      ≤ ∑ i ∈ s, QIQTH.QuantumEntropy.relEntropy (hA i).1 (hB i).1 := by
+  induction hs using Finset.Nonempty.cons_induction with
+  | singleton a =>
+    rw [show (∑ i ∈ ({a} : Finset ι), QIQTH.QuantumEntropy.relEntropy (hA i).1 (hB i).1)
+        = QIQTH.QuantumEntropy.relEntropy (hA a).1 (hB a).1 from Finset.sum_singleton _ a]
+    exact le_of_eq (relEntropy_congr _ _ _ _ (Finset.sum_singleton A a) (Finset.sum_singleton B a))
+  | cons a s ha hs ih =>
+    rw [show (∑ i ∈ Finset.cons a s ha, QIQTH.QuantumEntropy.relEntropy (hA i).1 (hB i).1)
+        = QIQTH.QuantumEntropy.relEntropy (hA a).1 (hB a).1
+          + ∑ i ∈ s, QIQTH.QuantumEntropy.relEntropy (hA i).1 (hB i).1 from Finset.sum_cons ha]
+    refine le_trans (le_of_eq (relEntropy_congr _ _ _ _ (Finset.sum_cons ha) (Finset.sum_cons ha)))
+      (le_trans (relEntropy_subadditive (hA a) (Matrix.posDef_sum hs (fun i _ => hA i)) (hB a)
+        (Matrix.posDef_sum hs (fun i _ => hB i))) ?_)
+    gcongr
+
 end QIQTH.Entropy
