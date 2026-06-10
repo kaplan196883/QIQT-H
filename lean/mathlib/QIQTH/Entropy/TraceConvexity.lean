@@ -191,4 +191,60 @@ theorem trace_function_midpoint_convex {A B : Matrix n n ℂ} (hA : A.IsHermitia
         gcongr
     _ = (∑ i, f (hA.eigenvalues i) + ∑ i, f (hB.eigenvalues i)) / 2 := by ring
 
+/-- **Convexity of the trace function (Carlen Thm 2.10), full two-point form.**  For Hermitian `A, B`,
+    convex `f`, and `t ∈ [0,1]`, with `M = tA + (1−t)B`:
+    `∑ᵢ f(λᵢ(M)) ≤ t·∑ᵢ f(λᵢ(A)) + (1−t)·∑ᵢ f(λᵢ(B))`  (`Tr f(tA+(1−t)B) ≤ t·Tr f(A) + (1−t)·Tr f(B)`).
+    Same proof as the midpoint form with weights `t, 1−t`. -/
+theorem trace_function_convex {A B : Matrix n n ℂ} (hA : A.IsHermitian) (hB : B.IsHermitian)
+    {t : ℝ} (ht0 : 0 ≤ t) (ht1 : t ≤ 1)
+    (hM : ((t : ℂ) • A + ((1 - t : ℝ) : ℂ) • B).IsHermitian) {f : ℝ → ℝ}
+    (hf : ConvexOn ℝ Set.univ f) :
+    ∑ i, f (hM.eigenvalues i)
+      ≤ t * ∑ i, f (hA.eigenvalues i) + (1 - t) * ∑ i, f (hB.eigenvalues i) := by
+  set V := (hM.eigenvectorUnitary : Matrix n n ℂ) with hVdef
+  have hVl : star V * V = 1 := Unitary.coe_star_mul_self _
+  have hVr : V * star V = 1 := Unitary.coe_mul_star_self _
+  have hA' : (star V * A * V).IsHermitian := isHermitian_conj hA
+  have hB' : (star V * B * V).IsHermitian := isHermitian_conj hB
+  have hsmulre : ∀ (s : ℝ) (z : ℂ), ((s : ℂ) * z).re = s * z.re := fun s z => Complex.re_ofReal_mul s z
+  have hMconj : star V * ((t : ℂ) • A + ((1 - t : ℝ) : ℂ) • B) * V
+      = diagonal (fun i => (hM.eigenvalues i : ℂ)) := by
+    conv_lhs => rw [spectral_UDU hM]
+    rw [show star V * (V * diagonal (fun i => (hM.eigenvalues i : ℂ)) * star V) * V
+        = (star V * V) * diagonal (fun i => (hM.eigenvalues i : ℂ)) * (star V * V)
+        from by simp only [Matrix.mul_assoc], hVl, Matrix.one_mul, Matrix.mul_one]
+  have hsplit : star V * ((t : ℂ) • A + ((1 - t : ℝ) : ℂ) • B) * V
+      = (t : ℂ) • (star V * A * V) + ((1 - t : ℝ) : ℂ) • (star V * B * V) := by
+    rw [Matrix.mul_add, Matrix.add_mul, mul_smul_comm, mul_smul_comm, smul_mul_assoc,
+      smul_mul_assoc]
+  have hdiag : ∀ i, (hM.eigenvalues i : ℝ)
+      = t * ((star V * A * V) i i).re + (1 - t) * ((star V * B * V) i i).re := by
+    intro i
+    have hC : (hM.eigenvalues i : ℂ)
+        = (t : ℂ) * (star V * A * V) i i + ((1 - t : ℝ) : ℂ) * (star V * B * V) i i := by
+      have hen := Matrix.diagonal_apply_eq (fun i => (hM.eigenvalues i : ℂ)) i
+      rw [← hen, ← hMconj, hsplit, Matrix.add_apply, Matrix.smul_apply, Matrix.smul_apply,
+        smul_eq_mul, smul_eq_mul]
+    have hre := congrArg Complex.re hC
+    rw [Complex.ofReal_re, Complex.add_re, hsmulre, hsmulre] at hre
+    exact hre
+  have hcvx : ∀ i, f (hM.eigenvalues i)
+      ≤ t * f (((star V * A * V) i i).re) + (1 - t) * f (((star V * B * V) i i).re) := by
+    intro i
+    rw [hdiag i]
+    have h := hf.2 (Set.mem_univ ((star V * A * V) i i).re)
+      (Set.mem_univ ((star V * B * V) i i).re) ht0 (by linarith : (0:ℝ) ≤ 1 - t) (by ring)
+    simpa only [smul_eq_mul] using h
+  calc ∑ i, f (hM.eigenvalues i)
+      ≤ ∑ i, (t * f (((star V * A * V) i i).re) + (1 - t) * f (((star V * B * V) i i).re)) :=
+        Finset.sum_le_sum fun i _ => hcvx i
+    _ = t * (∑ i, f (((star V * A * V) i i).re)) + (1 - t) * (∑ i, f (((star V * B * V) i i).re)) := by
+        rw [Finset.sum_add_distrib, ← Finset.mul_sum, ← Finset.mul_sum]
+    _ ≤ t * (∑ i, f (hA.eigenvalues i)) + (1 - t) * (∑ i, f (hB.eigenvalues i)) := by
+        have hPA : ∑ i, f (((star V * A * V) i i).re) ≤ ∑ i, f (hA.eigenvalues i) :=
+          (peierls_inequality hA' hf).trans_eq (eigenvalues_sum_conj_invariant hA hVl hVr hA' f)
+        have hPB : ∑ i, f (((star V * B * V) i i).re) ≤ ∑ i, f (hB.eigenvalues i) :=
+          (peierls_inequality hB' hf).trans_eq (eigenvalues_sum_conj_invariant hB hVl hVr hB' f)
+        gcongr
+
 end QIQTH.Entropy

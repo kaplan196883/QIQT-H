@@ -1752,7 +1752,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Entropy.trace_function_midpoint_convex
 -- expected: standard only — ★ convexity of trace functions (Carlen Thm 2.10): Tr f((A+B)/2) ≤
 -- (Tr f(A) + Tr f(B))/2 for convex f (eigenvalue-sum form). In M=(A+B)/2's eigenbasis the diagonal is
--- λ(M) = (Re A'ᵢᵢ + Re B'ᵢᵢ)/2; midpoint convexity termwise + Peierls + conjugation invariance. The
--- second §2 result of the trace-convexity toolkit (toward the Lieb/DPI tower).
+-- λ(M) = (Re A'ᵢᵢ + Re B'ᵢᵢ)/2; midpoint convexity termwise + Peierls + conjugation invariance.
+#print axioms QIQTH.Entropy.trace_function_convex
+-- expected: standard only — ★ convexity of trace functions (Carlen Thm 2.10, FULL two-point form):
+-- Tr f(tA+(1−t)B) ≤ t·Tr f(A) + (1−t)·Tr f(B), t∈[0,1], convex f. The two §2 results the DPI/Lieb tower
+-- needs from §2 (Peierls + this convexity) are now complete and axiom-free.
 
 end QIQTH.AxiomAudit
