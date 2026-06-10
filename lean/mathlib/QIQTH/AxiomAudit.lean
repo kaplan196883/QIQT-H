@@ -1428,6 +1428,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.rvdT_norm_eq
 -- expected: standard only — ★ THE modular-conjugation isometry ‖Tξ‖=‖Dξ‖ (RvD polar decomp D=J·T).
 -- D=P−Q is antilinear, T=|D| its positive modulus; J:Tξ↦Dξ is thus a well-defined antiunitary.
+-- RvD intertwiners (engine for both J²=1 via D·T=T·D, and modular-flow invariance U_t𝒦=𝒦 via D·U_t=U_t·D):
+#print axioms QIQTH.StandardSubspaceModular.rvdPmQ_mul_rvdR
+-- expected: standard only — D·R = (2−R)·D  (pure idempotent algebra).
+#print axioms QIQTH.StandardSubspaceModular.rvdR_mul_rvdPmQ
+-- expected: standard only — R·D = D·(2−R).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

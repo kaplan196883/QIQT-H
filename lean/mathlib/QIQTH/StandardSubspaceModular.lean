@@ -546,4 +546,28 @@ theorem rvdT_norm_eq (S : StandardSubspace H) (ξ : H) : ‖rvdT S ξ‖ = ‖rv
         re_inner_normsq_selfadjoint_real (rvdPmQ S) (rvdPmQ_isSelfAdjoint S) ξ, key]
   rw [← Real.sqrt_sq (norm_nonneg (rvdT S ξ)), ← Real.sqrt_sq (norm_nonneg (rvdPmQ S ξ)), hsq]
 
+/-! ### RvD intertwining identities `D·R = (2−R)·D`, `R·D = D·(2−R)`
+
+These are the algebraic engine for both `J² = 1` (via `D·T = T·D`, since `D` then commutes with
+`R(2−R) = T²` hence with `T = √(T²)`) and the modular-flow invariance `U_t 𝒦 = 𝒦` (via `D·U_t = U_t·D`).
+Pure idempotent algebra: `(P−Q)(P+Q) = (2−P−Q)(P−Q) = P − Q + PQ − QP` and the mirror. -/
+
+/-- **RvD intertwiner `D·R = (2−R)·D`.** -/
+theorem rvdPmQ_mul_rvdR (S : StandardSubspace H) :
+    rvdPmQ S * rvdR S = ((2 : ℝ) • (1 : H →L[ℝ] H) - rvdR S) * rvdPmQ S := by
+  have hP : projK S * projK S = projK S := projK_idem S
+  have hQ : projIK S * projIK S = projIK S := projIK_idem S
+  simp only [rvdPmQ, rvdR, sub_mul, mul_add, add_mul, mul_sub, smul_mul_assoc, one_mul,
+    two_smul, smul_sub, hP, hQ]
+  abel
+
+/-- **RvD intertwiner `R·D = D·(2−R)`.** -/
+theorem rvdR_mul_rvdPmQ (S : StandardSubspace H) :
+    rvdR S * rvdPmQ S = rvdPmQ S * ((2 : ℝ) • (1 : H →L[ℝ] H) - rvdR S) := by
+  have hP : projK S * projK S = projK S := projK_idem S
+  have hQ : projIK S * projIK S = projIK S := projIK_idem S
+  simp only [rvdPmQ, rvdR, sub_mul, mul_add, add_mul, mul_sub, mul_smul_comm, mul_one,
+    two_smul, smul_sub, hP, hQ]
+  abel
+
 end QIQTH.StandardSubspaceModular
