@@ -1850,9 +1850,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Entropy.cfc_log_conj
 #print axioms QIQTH.Entropy.matLog_conj
 #print axioms QIQTH.Entropy.relEntropy_unitary_invariant
+#print axioms QIQTH.Entropy.matLog_smul
+#print axioms QIQTH.Entropy.relEntropy_smul
 -- toward DPI §6.4: cfc_log_conj/matLog_conj (log(uMu⋆)=u·log M·u⋆ via map_cfc on conjStarAlgAut),
--- relEntropy_unitary_invariant (D(uρu⋆‖uσu⋆)=D(ρ‖σ)). With joint convexity + scaling these give DPI
--- for mixed-unitary channels.
+-- relEntropy_unitary_invariant (D(uρu⋆‖uσu⋆)=D(ρ‖σ)). matLog_smul (log(c·ρ)=(log c)·1+log ρ via
+-- cfc_comp_smul+cfc_const_add) + relEntropy_smul (D(c·ρ‖c·σ)=c·D(ρ‖σ), the log c terms cancel).
+-- With joint convexity these give DPI for mixed-unitary channels Φ(ρ)=Σₖ pₖ Uₖ ρ Uₖ⋆.
 #print axioms QIQTH.Entropy.relEntropy_subadditive
 -- expected: standard only — ★★★★★ JOINT CONVEXITY OF QUANTUM RELATIVE ENTROPY (Carlen Thm 6.3):
 -- D(A₀+A₁‖B₀+B₁) ≤ D(A₀‖B₀)+D(A₁‖B₁). The t→0 limit of the subadditive Lieb quotients

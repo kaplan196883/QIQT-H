@@ -71,4 +71,38 @@ lemma relEntropy_unitary_invariant {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (h
           * (star u : Matrix n n ℂ) by rw [Matrix.mul_sub, Matrix.sub_mul],
     htr]
 
+/-- `log(c·ρ) = (log c)·1 + log ρ` for a positive scalar `c` and positive-definite `ρ`. -/
+lemma matLog_smul {ρ : Matrix n n ℂ} (hρ : ρ.PosDef) {c : ℝ} (hc : 0 < c)
+    (h : ((c : ℝ) • ρ).IsHermitian) :
+    QIQTH.QuantumEntropy.matLog h
+      = (Real.log c) • (1 : Matrix n n ℂ) + QIQTH.QuantumEntropy.matLog hρ.1 := by
+  have hspec : ∀ x ∈ spectrum ℝ ρ, 0 < x := by
+    intro x hx
+    rw [hρ.1.spectrum_real_eq_range_eigenvalues] at hx
+    obtain ⟨i, rfl⟩ := hx
+    exact hρ.eigenvalues_pos i
+  have hcont_img : ContinuousOn Real.log ((c • ·) '' spectrum ℝ ρ) := by
+    apply Real.continuousOn_log.mono
+    rintro _ ⟨x, hx, rfl⟩
+    exact (mul_pos hc (hspec x hx)).ne'
+  unfold QIQTH.QuantumEntropy.matLog
+  rw [← h.cfc_eq Real.log, ← cfc_comp_smul c Real.log ρ hcont_img]
+  rw [cfc_congr (g := fun x => Real.log c + Real.log x)
+      (fun x hx => by simp only [smul_eq_mul]; exact Real.log_mul hc.ne' (hspec x hx).ne')]
+  rw [cfc_const_add (Real.log c) Real.log ρ
+      (QIQTH.QuantumEntropy.continuousOn_log_spectrum hρ) hρ.1.isSelfAdjoint]
+  rw [Algebra.algebraMap_eq_smul_one, hρ.1.cfc_eq Real.log]
+
+/-- **Scaling of the relative entropy**: `D(c·ρ ‖ c·σ) = c·D(ρ‖σ)` for `c > 0` (the `(log c)·1`
+    terms cancel in `log(c·ρ) − log(c·σ)`). -/
+lemma relEntropy_smul {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDef) {c : ℝ} (hc : 0 < c)
+    (hρ' : ((c : ℝ) • ρ).IsHermitian) (hσ' : ((c : ℝ) • σ).IsHermitian) :
+    QIQTH.QuantumEntropy.relEntropy hρ' hσ' = c * QIQTH.QuantumEntropy.relEntropy hρ.1 hσ.1 := by
+  rw [QIQTH.QuantumEntropy.relEntropy, QIQTH.QuantumEntropy.relEntropy,
+    matLog_smul hρ hc hρ', matLog_smul hσ hc hσ',
+    show (Real.log c • (1 : Matrix n n ℂ) + QIQTH.QuantumEntropy.matLog hρ.1)
+        - (Real.log c • (1 : Matrix n n ℂ) + QIQTH.QuantumEntropy.matLog hσ.1)
+      = QIQTH.QuantumEntropy.matLog hρ.1 - QIQTH.QuantumEntropy.matLog hσ.1 by abel,
+    Matrix.smul_mul, Matrix.trace_smul, Complex.smul_re, smul_eq_mul]
+
 end QIQTH.Entropy
