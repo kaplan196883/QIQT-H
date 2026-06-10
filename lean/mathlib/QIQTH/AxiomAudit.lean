@@ -1830,6 +1830,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Entropy.wgmean_one
 #print axioms QIQTH.Entropy.gmean_rpow
 #print axioms QIQTH.Entropy.wgmean_midpoint
+#print axioms QIQTH.Entropy.continuous_matrix_rpow
+#print axioms QIQTH.Entropy.continuous_wgmean
+-- expected: standard only — EXPONENT CONTINUITY (the one Mathlib gap, now closed): t ↦ A^t continuous for
+-- PosDef A, via the spectral formula A^t = V·diag(λᵢ^t)·Vᴴ (IsHermitian.cfc + rpow_eq_cfc_real), reducing to
+-- scalar Real.continuous_const_rpow (λᵢ>0). Hence continuous_wgmean: t ↦ A#ₜB continuous. The last analysis
+-- ingredient for lifting dyadic concavity to all t∈[0,1] via matrix_le_of_tendsto.
 #print axioms QIQTH.Entropy.wgSuperadd_zero
 #print axioms QIQTH.Entropy.wgSuperadd_one
 #print axioms QIQTH.Entropy.wgSuperadd_midpoint

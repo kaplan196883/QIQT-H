@@ -8,11 +8,13 @@
   dyadic weights, which `matrix_le_of_tendsto` lifts to all `t` — the continuity route to Lieb.
 -/
 import QIQTH.Entropy.GeometricMean
+import Mathlib.Topology.Instances.Matrix
+import Mathlib.Analysis.SpecialFunctions.Pow.Continuity
 
 namespace QIQTH.Entropy
 
 open Matrix CStarMatrix
-open scoped MatrixOrder ComplexOrder
+open scoped MatrixOrder ComplexOrder Topology
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
@@ -112,6 +114,42 @@ theorem wgmean_midpoint {A B : Matrix n n ℂ} (hA : A.PosDef) (hB : B.PosDef) (
     intro r; unfold wgmean; rw [(sqrt_isHermitian A).eq]
   rw [hwg s, hwg t, gmean_congr hCspd CFC.rpow_nonneg (sqrt_isUnit_det hA), gmean_rpow hCpd s t,
     hwg ((s + t) / 2)]
+
+/-! ### Exponent continuity (the analysis lemma) -/
+
+/-- **Continuity of the matrix power in the exponent**: `t ↦ A^t` is continuous for positive-definite
+    `A`.  Via the spectral formula `A^t = V · diag(λᵢ^t) · Vᴴ`, this reduces to scalar continuity of
+    `t ↦ λᵢ^t` (each `λᵢ > 0`).  (Mathlib has continuity of `rpow` only in the base, not the exponent.) -/
+lemma continuous_matrix_rpow {A : Matrix n n ℂ} (hA : A.PosDef) :
+    Continuous (fun t : ℝ => A ^ t) := by
+  have hHerm := hA.isHermitian
+  have key : (fun t : ℝ => A ^ t)
+      = fun t => (hHerm.eigenvectorUnitary : Matrix n n ℂ)
+          * Matrix.diagonal (fun i => (RCLike.ofReal (hHerm.eigenvalues i ^ t) : ℂ))
+          * (hHerm.eigenvectorUnitary : Matrix n n ℂ)ᴴ := by
+    funext t
+    rw [CFC.rpow_eq_cfc_real hA.posSemidef.nonneg, Matrix.IsHermitian.cfc_eq hHerm,
+      Matrix.IsHermitian.cfc, Unitary.conjStarAlgAut_apply, Matrix.star_eq_conjTranspose]
+    rfl
+  rw [key]
+  refine Continuous.matrix_mul (Continuous.matrix_mul continuous_const ?_) continuous_const
+  refine Continuous.matrix_diagonal (continuous_pi fun i => ?_)
+  exact RCLike.continuous_ofReal.comp (Real.continuous_const_rpow (ne_of_gt (hA.eigenvalues_pos i)))
+
+/-- The inner conjugate `(√A)⁻¹ B (√A)⁻¹` is positive definite for positive-definite `A, B`. -/
+lemma inner_conj_posDef {A B : Matrix n n ℂ} (hA : A.PosDef) (hB : B.PosDef) :
+    ((CFC.sqrt A)⁻¹ * B * (CFC.sqrt A)⁻¹).PosDef := by
+  have hsqAU : IsUnit (CFC.sqrt A) := (Matrix.isUnit_iff_isUnit_det _).mpr (sqrt_isUnit_det hA)
+  have h := (Matrix.IsUnit.posDef_star_right_conjugate_iff (x := B)
+    (Matrix.isUnit_nonsing_inv_iff.mpr hsqAU)).mpr hB
+  rwa [Matrix.star_eq_conjTranspose, (sqrt_inv_isHermitian A).eq] at h
+
+/-- **Continuity of the weighted mean in its weight**: `t ↦ A #ₜ B` is continuous (for PosDef `A,B`).
+    From `continuous_matrix_rpow` applied to `(√A)⁻¹ B (√A)⁻¹` and continuity of matrix multiplication. -/
+lemma continuous_wgmean {A B : Matrix n n ℂ} (hA : A.PosDef) (hB : B.PosDef) :
+    Continuous (fun t : ℝ => wgmean t A B) :=
+  (continuous_const.matrix_mul (continuous_matrix_rpow (inner_conj_posDef hA hB))).matrix_mul
+    continuous_const
 
 /-! ### Joint concavity at all dyadic weights, by bisection -/
 
