@@ -643,4 +643,17 @@ theorem rvdPmQ_commute_I_rvdRC_sub_one (S : StandardSubspace H) :
     rvdRC_apply, rvdPmQ_smul_I, map_sub]
   rw [hanti, smul_neg, neg_neg]
 
+/-- **`D` is conjugate-(ℂ-)linear:** `D(c•ξ) = conj(c)·Dξ` for every `c : ℂ`.  From ℝ-linearity plus
+    the `i`-case `rvdPmQ_smul_I` (`D(i•ξ)=−i•Dξ`), expanding `c = c.re + c.im·i`. -/
+theorem rvdPmQ_smul_conj (S : StandardSubspace H) (c : ℂ) (ξ : H) :
+    rvdPmQ S (c • ξ) = (starRingEnd ℂ) c • rvdPmQ S ξ := by
+  have key : ∀ (r : ℝ) (v : H), rvdPmQ S ((r : ℂ) • v) = (r : ℂ) • rvdPmQ S v := fun r v => by
+    rw [Complex.coe_smul, Complex.coe_smul, map_smul]
+  have hconj : (starRingEnd ℂ) c = (c.re : ℂ) - (c.im : ℂ) * Complex.I := by
+    apply Complex.ext <;> simp
+  rw [show c • ξ = (c.re : ℂ) • ξ + (c.im : ℂ) • (Complex.I • ξ) by
+        rw [smul_smul, ← add_smul, Complex.re_add_im],
+      map_add, key, key, rvdPmQ_smul_I, hconj, sub_smul, mul_smul, smul_neg]
+  abel
+
 end QIQTH.StandardSubspaceModular
