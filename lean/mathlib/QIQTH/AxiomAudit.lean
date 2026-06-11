@@ -2265,5 +2265,11 @@ namespace QIQTH.AxiomAudit
 -- Δ_rel^{is}Δ_rel^{it}=Δ_rel^{i(s+t)}, the inner W(f)⋆W(f) cancels), and the Connes cocycle satisfies the
 -- CHAIN RULE u_{s+t}=u_s·σ_s(u_t) (σ_s=Ad Γ(Δ^{is}); Connes' Radon–Nikodym) — both immediate from the Tomita
 -- covariance + group law. Confirms relModFlowH/connesCocycleH are GENUINE modular flow / Connes cocycle objects.
+#print axioms QIQTH.Fock.relModFlow_vacuum_char
+-- expected: standard only — PHASE C: THE VACUUM CHARACTERISTIC FUNCTION of the relative modular flow,
+-- ⟨Ω,Δ_{W(f)Ω|Ω}^{it}Ω⟩ = exp(⟨f,Δ^{it}f⟩−⟨f,f⟩). The bounded generating function of the coherent-state
+-- relative entropy: its t-derivative at 0 = i·cgpEntropy(f) (= ∫(u_t−1)dμ^R_f, d/dt|0 u_t = i·entropyDensity).
+-- Proof: push relModFlowH to pre-Fock (map_coe) ⟹ coherent vector weylCoeff(−f,0)·weylCoeff(f,−Δ^{it}f)·
+-- e(f−Δ^{it}f), then fockInner + Weyl-coeff collapse. The bounded bridge to cgpEntropy (deriv step = remaining).
 
 end QIQTH.AxiomAudit

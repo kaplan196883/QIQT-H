@@ -32,6 +32,7 @@ import QIQTH.Fock.SecondQuantModularFlow
 namespace QIQTH.Fock
 
 open QIQTH.StandardSubspaceModular
+open scoped InnerProductSpace
 
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 
@@ -106,5 +107,41 @@ theorem connesCocycleH_chain (S : StandardSubspace H) (s t : ℝ) (f : H) (x : F
   rw [secondQuantModFlowH_weylH, secondQuantModFlowH_weylH, secondQuantModFlowH_add,
       add_neg_cancel, secondQuantModFlowH_zero, map_neg, ← ContinuousLinearMap.mul_apply,
       ← modUnitary_add, weylH_neg_cancel']
+
+/-! ### The vacuum characteristic function — the generating function of the relative entropy
+
+  The relative entropy `S(ω_{W(f)Ω} ‖ ω_Ω)` of the coherent state is encoded in the bounded vacuum matrix
+  element of the relative modular flow.  This is the genuine bridge to the one-particle `cgpEntropy`: the
+  `t`-derivative of the characteristic function at `t = 0` is `i · cgpEntropy(f)`. -/
+
+/-- **★ THE VACUUM CHARACTERISTIC FUNCTION of the relative modular flow:**
+        `⟨Ω, Δ_{W(f)Ω|Ω}^{it} Ω⟩ = exp( ⟨f, Δ^{it} f⟩ − ⟨f, f⟩ )`.
+    A bounded, exact, computable generating function for the coherent-state relative entropy: since
+    `⟨f, Δ^{it}f⟩ − ⟨f,f⟩ = ∫ (u_t(r) − 1) dμ^R_f` and `d/dt|₀ u_t(r) = i·log((2−r)/r) = i·entropyDensity(r)`,
+    its derivative is `i·d/dt|₀ ⟨Ω,Δ_rel^{it}Ω⟩ = −∫ entropyDensity dμ^R_f = cgpEntropy(f)` — the one-particle
+    relative entropy proved `≥ 0` in `ModularRelativeEntropy`.  Proof: push `relModFlowH` to the pre-Fock
+    level (`map_coe`), where the coherent vector is `weylCoeff(−f,0)·weylCoeff(f,−Δ^{it}f)·e(f−Δ^{it}f)`, then
+    evaluate `⟨Ω, ·⟩ = fockInner` and collapse the Weyl coefficients. -/
+theorem relModFlow_vacuum_char (S : StandardSubspace H) (t : ℝ) (f : H) :
+    inner ℂ (Fock.vacuum : Fock H) (relModFlowH S t f Fock.vacuum)
+      = Complex.exp (⟪f, modUnitary S t f⟫_ℂ - ⟪f, f⟫_ℂ) := by
+  have hexp : ∀ a b : H, inner ℂ (FockPre.expVec a : FockPre H) (FockPre.expVec b)
+      = Complex.exp ⟪a, b⟫_ℂ := fun a b => FockPre.inner_expVec a b
+  have h1 : relModFlowH S t f Fock.vacuum
+      = ((weylPre f (secondQuantModFlow S t (weylPre (-f) (FockPre.expVec 0))) : FockPre H) : Fock H) := by
+    simp only [relModFlowH, Fock.vacuum, Fock.expVec, weylH, secondQuantModFlowH]
+    rw [UniformSpace.Completion.map_coe (weylₗᵢ (-f)).isometry.uniformContinuous,
+        UniformSpace.Completion.map_coe (secondQuantModFlowₗᵢ S t).isometry.uniformContinuous,
+        UniformSpace.Completion.map_coe (weylₗᵢ f).isometry.uniformContinuous]
+    simp only [weylₗᵢ, secondQuantModFlowₗᵢ, LinearMap.coe_isometryOfInner]
+  rw [h1, Fock.vacuum, Fock.expVec, UniformSpace.Completion.inner_coe,
+      weylPre_expVec, zero_add, map_smul, secondQuantModFlow_expVec, map_neg, map_smul,
+      weylPre_expVec, inner_smul_right, inner_smul_right, hexp, inner_zero_left, Complex.exp_zero,
+      mul_one]
+  unfold Weyl.weylCoeff
+  rw [← Complex.exp_add]
+  congr 1
+  simp only [inner_neg_left, inner_neg_right, inner_zero_right]
+  ring
 
 end QIQTH.Fock
