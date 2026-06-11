@@ -2220,5 +2220,12 @@ namespace QIQTH.AxiomAudit
 -- with the measure reflection μ_{Jη}=(2−·)_*μ_η (rvdSpec_reflect) + bounded Tomita fixedness (2−R)ξ=J(Tξ)
 -- (modConj_rvdT_of_mem_K). R, 2−R realized as cfcΩ-images of real coordinates (rvdRC_eq_cfcΩ,
 -- rvdTwoSubRC_eq_cfcΩ). This is the heart of the CGP relative-entropy positivity for localized states.
+#print axioms QIQTH.cgpEntropy_nonneg
+-- expected: standard only — ★★★ THE CGP RELATIVE-ENTROPY POSITIVITY: 0 ≤ S(ξ) for ξ∈𝒦 (projK ξ = ξ) in
+-- the regular regime σ(R)⊆[a,2−a]. The localized one-particle instance of S(ρ‖σ)≥0, axiom-free from RvD
+-- bounded Tomita–Takesaki. From rvdSpec_balance at the clamped representative of g/(2−r)² (clampF) ⟹ divided
+-- balance ∫g dμ = −∫((2−r)/r)g dμ ⟹ S(ξ)=∫((1−r)/r)·log((2−r)/r) dμ, integrand ≥0 on all of (0,2) (no
+-- (0,1)-split). Localization essential (point mass at r<1 gives S<0). Full vN-algebra S(ρ‖σ) via Γ(Δ^{it})
+-- second quantization = cited Phase C frontier.
 
 end QIQTH.AxiomAudit

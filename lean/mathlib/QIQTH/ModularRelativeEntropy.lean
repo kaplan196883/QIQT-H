@@ -412,4 +412,119 @@ theorem rvdSpec_balance (S : StandardSubspace H) (F : C(Set.Icc (-covM S) (2 + c
   rw [← rvdSpec_twoSubR S F ξ, ← modConj_rvdT_of_mem_K S hξ, rvdSpec_reflect S F (rvdT S ξ)]
   exact rvdSpec_T S (F.comp (tauΩ S)) ξ
 
+/-! ### ★★★ The CGP relative-entropy positivity `S(ξ) ≥ 0`
+
+  The headline theorem.  For a localized one-particle state (`ξ ∈ 𝒦`) in the regular regime
+  (`σ(R) ⊆ [a, 2−a]`, so the entropy is finite), the spectral balance forces
+
+      `S(ξ) = ∫ ((1−r)/r)·log((2−r)/r) dμ^R_ξ`,
+
+  whose integrand is `≥ 0` on ALL of `(0,2)` (for `r < 1` both factors are `> 0`; for `r > 1` both are
+  `< 0`).  No `(0,1)`-split or indicator functions are needed.  Derivation: applying `rvdSpec_balance` to the
+  clamped representative of `g/(2−r)²` yields the divided balance `∫ g dμ = −∫ ((2−r)/r) g dμ`, and averaging
+  gives `S(ξ) = ∫ ((1−r)/r) g dμ ≥ 0`. -/
+
+open QIQTH.StandardSubspaceModular in
+/-- The clamped representative of `g(r)/(2−r)²` on the whole spectral interval: continuous everywhere,
+    and equal to `g/(2−r)²` on the regular spectral window `[a, 2−a]`.  (`g = entropyDensity` diverges at
+    `{0,2}`, so the clamp `r ↦ min(max(r,a), 2−a)` is what makes a globally-continuous representative whose
+    spectral integrals agree with the divided balance on `σ(R) ⊆ [a,2−a]`.) -/
+noncomputable def clampF (S : StandardSubspace H) (a : ℝ) (ha : 0 < a) (ha1 : a ≤ 1) :
+    C(Set.Icc (-covM S) (2 + covM S), ℝ) where
+  toFun x := entropyDensity (min (max x.1 a) (2 - a)) / (2 - min (max x.1 a) (2 - a))^2
+  continuous_toFun := by
+    have hcl : Continuous (fun x : Set.Icc (-covM S) (2 + covM S) => min (max x.1 a) (2 - a)) :=
+      (continuous_subtype_val.max continuous_const).min continuous_const
+    have hmem : ∀ x : Set.Icc (-covM S) (2 + covM S),
+        (min (max x.1 a) (2 - a)) ∈ Set.Icc a (2 - a) := fun x =>
+      ⟨le_min (le_max_right _ _) (by linarith), min_le_right _ _⟩
+    have hpr : ∀ r ∈ Set.Icc a (2 - a), (0:ℝ) < r := fun r hr => lt_of_lt_of_le ha hr.1
+    have hp2r : ∀ r ∈ Set.Icc a (2 - a), (0:ℝ) < 2 - r := fun r hr => by have := hr.2; linarith
+    have hinner : ContinuousOn (fun r => (2 - r) / r) (Set.Icc a (2 - a)) :=
+      (continuousOn_const.sub continuousOn_id).div continuousOn_id (fun r hr => (hpr r hr).ne')
+    have hlog : ContinuousOn entropyDensity (Set.Icc a (2 - a)) :=
+      Real.continuousOn_log.comp hinner (fun r hr => (div_pos (hp2r r hr) (hpr r hr)).ne')
+    have hden : ContinuousOn (fun r => (2 - r)^2) (Set.Icc a (2 - a)) :=
+      (continuousOn_const.sub continuousOn_id).pow 2
+    exact (hlog.div hden (fun r hr => (pow_pos (hp2r r hr) 2).ne')).comp_continuous hcl hmem
+
+@[simp] theorem clampF_apply (S : StandardSubspace H) (a : ℝ) (ha : 0 < a) (ha1 : a ≤ 1)
+    (x : Set.Icc (-covM S) (2 + covM S)) :
+    clampF S a ha ha1 x = entropyDensity (min (max x.1 a) (2 - a)) / (2 - min (max x.1 a) (2 - a))^2 :=
+  rfl
+
+open QIQTH.StandardSubspaceModular in
+/-- **★★★ THE CGP RELATIVE-ENTROPY POSITIVITY.**  For a one-particle state localized in the standard
+    subspace (`ξ ∈ 𝒦`, i.e. `projK S ξ = ξ`) with modular spectrum away from the endpoints
+    (`σ(R) ⊆ [a, 2−a]`, the finite-entropy regime), the modular relative entropy is nonnegative:
+        `0 ≤ S(ξ)`.
+    This is the localized (one-particle) instance of positivity of relative entropy `S(ρ‖σ) ≥ 0`, proved
+    here axiom-free from the bounded RvD Tomita–Takesaki data via the CGP spectral balance.  (Localization
+    is ESSENTIAL: for a general vector a point mass at `r < 1` gives `S = −log((2−r)/r) < 0`.) -/
+theorem cgpEntropy_nonneg (S : StandardSubspace H) {ξ : H} (hξ : projK S ξ = ξ)
+    {a : ℝ} (ha : 0 < a) (ha1 : a ≤ 1)
+    (hspec : ∀ ω : spectrum ℝ (rvdRC S), a ≤ (ω : ℝ) ∧ (ω : ℝ) ≤ 2 - a) :
+    0 ≤ cgpEntropy S ξ := by
+  haveI : IsFiniteMeasure (rvdSpecMeasure S ξ) := by unfold rvdSpecMeasure; infer_instance
+  have hpr : ∀ ω : spectrum ℝ (rvdRC S), (0:ℝ) < (ω:ℝ) := fun ω => lt_of_lt_of_le ha (hspec ω).1
+  have hp2r : ∀ ω : spectrum ℝ (rvdRC S), (0:ℝ) < 2 - (ω:ℝ) := fun ω => by
+    have := (hspec ω).2; linarith
+  have hincl : ∀ ω : spectrum ℝ (rvdRC S),
+      ((inclΩ S ω : Set.Icc (-covM S) (2 + covM S)) : ℝ) = (ω:ℝ) := fun _ => rfl
+  have hcl : ∀ ω : spectrum ℝ (rvdRC S), min (max (ω:ℝ) a) (2 - a) = (ω:ℝ) := fun ω => by
+    rw [max_eq_left (hspec ω).1, min_eq_left (hspec ω).2]
+  have hcl2 : ∀ ω : spectrum ℝ (rvdRC S), min (max (2 - (ω:ℝ)) a) (2 - a) = 2 - (ω:ℝ) := fun ω => by
+    rw [max_eq_left (by linarith [(hspec ω).2]), min_eq_left (by linarith [(hspec ω).1])]
+  have hgfun_int : Integrable (fun ω : spectrum ℝ (rvdRC S) => entropyDensity (ω:ℝ))
+      (rvdSpecMeasure S ξ) := hasFiniteEntropy_of_mem_Icc S ξ ha hspec
+  -- the manifestly-nonpositive density `((r−1)/r)·g` is integrable (bounded × integrable)
+  have hpfun_int : Integrable (fun ω : spectrum ℝ (rvdRC S) =>
+      (((ω:ℝ) - 1)/(ω:ℝ)) * entropyDensity (ω:ℝ)) (rvdSpecMeasure S ξ) := by
+    refine hgfun_int.bdd_mul
+      (((measurable_subtype_coe.sub measurable_const).div measurable_subtype_coe).aestronglyMeasurable)
+      (c := 1/a) (Filter.Eventually.of_forall (fun ω => ?_))
+    rw [Real.norm_eq_abs, abs_div, abs_of_pos (hpr ω), div_le_div_iff₀ (hpr ω) ha]
+    have h1 : |(ω:ℝ) - 1| ≤ 1 := abs_le.mpr ⟨by linarith [(hspec ω).1], by linarith [(hspec ω).2]⟩
+    nlinarith [h1, (hspec ω).1, ha, abs_nonneg ((ω:ℝ) - 1)]
+  -- the spectral balance at the clamped representative, evaluated pointwise on `σ(R)`
+  have hbal := rvdSpec_balance S (clampF S a ha ha1) hξ
+  have hL : ∀ ω : spectrum ℝ (rvdRC S),
+      ((twoSubCoordReal S * twoSubCoordReal S) * clampF S a ha ha1) (inclΩ S ω)
+        = entropyDensity (ω:ℝ) := by
+    intro ω
+    simp only [ContinuousMap.mul_apply, twoSubCoordReal, ContinuousMap.coe_mk, clampF_apply, hincl, hcl]
+    have hne : (2 - (ω:ℝ)) ≠ 0 := (hp2r ω).ne'
+    field_simp
+  have hR : ∀ ω : spectrum ℝ (rvdRC S),
+      ((coordReal S * twoSubCoordReal S) * (clampF S a ha ha1).comp (tauΩ S)) (inclΩ S ω)
+        = -((2 - (ω:ℝ))/(ω:ℝ)) * entropyDensity (ω:ℝ) := by
+    intro ω
+    simp only [ContinuousMap.mul_apply, ContinuousMap.comp_apply, coordReal, twoSubCoordReal,
+      ContinuousMap.coe_mk, clampF_apply, tauΩ, hincl]
+    rw [hcl2, entropyDensity_reflect, show (2:ℝ) - (2 - (ω:ℝ)) = (ω:ℝ) by ring]
+    have hne : (ω:ℝ) ≠ 0 := (hpr ω).ne'
+    field_simp
+  rw [integral_congr_ae (Filter.Eventually.of_forall hL),
+      integral_congr_ae (Filter.Eventually.of_forall hR)] at hbal
+  -- algebra:  ∫g = ∫(−Δg) = 2∫p − ∫g  ⟹  ∫g = ∫p ≤ 0  ⟹  S(ξ) = −∫g ≥ 0
+  have hrp : ∀ ω : spectrum ℝ (rvdRC S),
+      -((2 - (ω:ℝ))/(ω:ℝ)) * entropyDensity (ω:ℝ)
+        = 2 * ((((ω:ℝ) - 1)/(ω:ℝ)) * entropyDensity (ω:ℝ)) - entropyDensity (ω:ℝ) := by
+    intro ω; have hne : (ω:ℝ) ≠ 0 := (hpr ω).ne'; field_simp; ring
+  rw [integral_congr_ae (Filter.Eventually.of_forall hrp),
+      integral_sub (hpfun_int.const_mul 2) hgfun_int, integral_const_mul] at hbal
+  have hp_nonpos : ∫ ω, (((ω:ℝ) - 1)/(ω:ℝ)) * entropyDensity (ω:ℝ) ∂(rvdSpecMeasure S ξ) ≤ 0 := by
+    refine integral_nonpos (fun ω => ?_)
+    rcases le_total (ω:ℝ) 1 with h | h
+    · refine mul_nonpos_iff.mpr (Or.inr ⟨div_nonpos_iff.mpr (Or.inr ⟨by linarith, (hpr ω).le⟩), ?_⟩)
+      exact Real.log_nonneg (by rw [le_div_iff₀ (hpr ω)]; linarith)
+    · refine mul_nonpos_iff.mpr (Or.inl ⟨div_nonneg (by linarith) (hpr ω).le, ?_⟩)
+      exact Real.log_nonpos (div_nonneg (hp2r ω).le (hpr ω).le)
+        ((div_le_one (hpr ω)).mpr (by linarith))
+  have key : ∫ ω, entropyDensity (ω:ℝ) ∂(rvdSpecMeasure S ξ)
+      = ∫ ω, (((ω:ℝ) - 1)/(ω:ℝ)) * entropyDensity (ω:ℝ) ∂(rvdSpecMeasure S ξ) := by linarith
+  rw [cgpEntropy]
+  show (0:ℝ) ≤ -∫ ω, entropyDensity (ω:ℝ) ∂(rvdSpecMeasure S ξ)
+  linarith [key, hp_nonpos]
+
 end QIQTH
