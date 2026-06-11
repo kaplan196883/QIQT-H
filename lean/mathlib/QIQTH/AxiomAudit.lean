@@ -2210,5 +2210,15 @@ namespace QIQTH.AxiomAudit
 -- (spectral measure at h(R)ξ is h² times that at ξ). Via h(R) self-adjoint (cfcΩ_ofRealΩ_adjoint) +
 -- adjoint_inner_right + multiplicativity h(R)F(R)h(R)=(h²F)(R) (cfcΩ_mul + ofRealΩ_mul). The second
 -- measure ingredient of the CGP balance; with the reflection + (2−R)ξ=J(Tξ) ⟹ ∫(2−r)²F dμ=∫r(2−r)F(2−r)dμ.
+#print axioms QIQTH.rvdSpec_twoSubR
+#print axioms QIQTH.rvdSpec_T
+#print axioms QIQTH.rvdSpec_balance
+-- expected: standard only — ★★ THE CGP POLYNOMIAL SPECTRAL BALANCE for ξ∈𝒦: ∫(2−r)²F(r)dμ_ξ =
+-- ∫r(2−r)F(2−r)dμ_ξ. The bounded (cleared-denominator) form of the Tomita spectral balance. Assembles the
+-- two measure engines — μ_{(2−R)ξ}=(2−r)²μ_ξ (rvdSpec_twoSubR, the h(R)-weighting at h=2−R) and
+-- μ_{Tξ}=r(2−r)μ_ξ (rvdSpec_T, via T self-adjoint + T²=R(2−R) by rvdT_sq, NO √-functional-calculus) —
+-- with the measure reflection μ_{Jη}=(2−·)_*μ_η (rvdSpec_reflect) + bounded Tomita fixedness (2−R)ξ=J(Tξ)
+-- (modConj_rvdT_of_mem_K). R, 2−R realized as cfcΩ-images of real coordinates (rvdRC_eq_cfcΩ,
+-- rvdTwoSubRC_eq_cfcΩ). This is the heart of the CGP relative-entropy positivity for localized states.
 
 end QIQTH.AxiomAudit

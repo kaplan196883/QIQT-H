@@ -340,4 +340,76 @@ theorem cfcΩ_weight (S : StandardSubspace H)
   congr 2
   ring
 
+/-! ### The CGP polynomial spectral balance `∫(2−r)²F(r) dμ_ξ = ∫r(2−r)F(2−r) dμ_ξ`  (`ξ ∈ 𝒦`)
+
+  Assembling the two measure engines (the reflection `μ_{Jη}=(2−·)_*μ_η` and the `h(R)`-weighting
+  `μ_{h(R)ξ}=h²μ_ξ`) with the bounded Tomita fixedness `(2−R)ξ = J(Tξ)` yields the spectral balance in
+  cleared-denominator (polynomial) form.  `R` and `2−R` are realized as `cfcΩ`-images of real coordinate
+  functions; `T = √(R(2−R))` is handled via `rvdT_sq` (`T² = R(2−R)`), which AVOIDS the `CFC.sqrt↔cfcΩ`
+  identification entirely. -/
+
+open QIQTH.StandardSubspaceModular
+
+/-- The real coordinate function `r` on the spectral interval. -/
+def coordReal (S : StandardSubspace H) : C(Set.Icc (-covM S) (2 + covM S), ℝ) :=
+  ⟨fun x => x.1, continuous_subtype_val⟩
+
+/-- The reflected real coordinate `2 − r` on the spectral interval. -/
+def twoSubCoordReal (S : StandardSubspace H) : C(Set.Icc (-covM S) (2 + covM S), ℝ) :=
+  ⟨fun x => 2 - x.1, continuous_const.sub continuous_subtype_val⟩
+
+/-- The complex coordinate is the ℂ-lift of the real coordinate. -/
+theorem coordΩ_eq (S : StandardSubspace H) : coordΩ S = ofRealΩ S (coordReal S) := by ext x; rfl
+
+/-- `R = r(R)` as a `cfcΩ`-image of the (lifted) real coordinate. -/
+theorem rvdRC_eq_cfcΩ (S : StandardSubspace H) : rvdRC S = cfcΩ S (ofRealΩ S (coordReal S)) := by
+  rw [← coordΩ_eq, cfcΩ_coordΩ]
+
+/-- `2−R = (2−r)(R)` as a `cfcΩ`-image of the (lifted) reflected coordinate. -/
+theorem rvdTwoSubRC_eq_cfcΩ (S : StandardSubspace H) :
+    rvdTwoSubRC S = cfcΩ S (ofRealΩ S (twoSubCoordReal S)) := by
+  have h : ofRealΩ S (twoSubCoordReal S) = (2 : ℂ) • 1 - coordΩ S := by
+    ext x; simp only [ofRealΩ, twoSubCoordReal, coordΩ, ContinuousMap.sub_apply,
+      ContinuousMap.smul_apply, ContinuousMap.one_apply, ContinuousMap.coe_mk, smul_eq_mul, mul_one,
+      Complex.ofReal_sub, Complex.ofReal_ofNat]
+  rw [h, cfcΩ_sub, cfcΩ_smul, cfcΩ_one, cfcΩ_coordΩ, rvdTwoSubRC]
+
+/-- **Spectral measure at `(2−R)ξ`:** `μ^R_{(2−R)ξ} = (2−r)²·μ^R_ξ` — the `h(R)`-weighting at `h = 2−R`. -/
+theorem rvdSpec_twoSubR (S : StandardSubspace H) (F : C(Set.Icc (-covM S) (2 + covM S), ℝ)) (ξ : H) :
+    ∫ ω, F (inclΩ S ω) ∂(rvdSpecMeasure S (rvdTwoSubRC S ξ))
+      = ∫ ω, ((twoSubCoordReal S * twoSubCoordReal S) * F) (inclΩ S ω) ∂(rvdSpecMeasure S ξ) := by
+  rw [rvdTwoSubRC_eq_cfcΩ]; exact cfcΩ_weight S (twoSubCoordReal S) F ξ
+
+/-- **Spectral measure at `Tξ`:** `μ^R_{Tξ} = r(2−r)·μ^R_ξ` — via `T` self-adjoint, `T` commuting with
+    `F(R)`, and `T² = R(2−R)` (`rvdT_sq`), so no square-root functional calculus is needed. -/
+theorem rvdSpec_T (S : StandardSubspace H) (F : C(Set.Icc (-covM S) (2 + covM S), ℝ)) (ξ : H) :
+    ∫ ω, F (inclΩ S ω) ∂(rvdSpecMeasure S (rvdT S ξ))
+      = ∫ ω, ((coordReal S * twoSubCoordReal S) * F) (inclΩ S ω) ∂(rvdSpecMeasure S ξ) := by
+  have hop : rvdT S * cfcΩ S (ofRealΩ S F) * rvdT S
+      = cfcΩ S (ofRealΩ S ((coordReal S * twoSubCoordReal S) * F)) := by
+    rw [(cfcΩ_commute_rvdT S (ofRealΩ S F)).symm.eq, mul_assoc, rvdT_sq, rvdRC_eq_cfcΩ,
+        rvdTwoSubRC_eq_cfcΩ, ← cfcΩ_mul, ← cfcΩ_mul, ← ofRealΩ_mul, ← ofRealΩ_mul]
+    congr 2; ring
+  rw [← cfcΩ_reInner_eq_integral S F,
+      ← cfcΩ_reInner_eq_integral S ((coordReal S * twoSubCoordReal S) * F)]
+  congr 1
+  rw [← ContinuousLinearMap.adjoint_inner_right (rvdT S) ξ (cfcΩ S (ofRealΩ S F) (rvdT S ξ)),
+      show ContinuousLinearMap.adjoint (rvdT S) = rvdT S by
+        rw [← ContinuousLinearMap.star_eq_adjoint]; exact (rvdT_isSelfAdjoint S).star_eq]
+  congr 1
+  rw [← ContinuousLinearMap.mul_apply, ← ContinuousLinearMap.mul_apply, hop]
+
+/-- **★★ THE CGP POLYNOMIAL SPECTRAL BALANCE** for a localized one-particle state `ξ ∈ 𝒦`:
+        `∫ (2−r)²·F(r) dμ^R_ξ = ∫ r(2−r)·F(2−r) dμ^R_ξ`.
+    The bounded (cleared-denominator) form of the Tomita spectral balance `∫F dμ = ∫((2−r)/r)F(2−r) dμ`.
+    Chain: `μ_{(2−R)ξ}=(2−r)²μ_ξ` (`rvdSpec_twoSubR`) → `(2−R)ξ = J(Tξ)` (`modConj_rvdT_of_mem_K`) →
+    `μ_{Jη}=(2−·)_*μ_η` (`rvdSpec_reflect`) → `μ_{Tξ}=r(2−r)μ_ξ` (`rvdSpec_T`). -/
+theorem rvdSpec_balance (S : StandardSubspace H) (F : C(Set.Icc (-covM S) (2 + covM S), ℝ))
+    {ξ : H} (hξ : projK S ξ = ξ) :
+    ∫ ω, ((twoSubCoordReal S * twoSubCoordReal S) * F) (inclΩ S ω) ∂(rvdSpecMeasure S ξ)
+      = ∫ ω, ((coordReal S * twoSubCoordReal S) * (F.comp (tauΩ S))) (inclΩ S ω)
+          ∂(rvdSpecMeasure S ξ) := by
+  rw [← rvdSpec_twoSubR S F ξ, ← modConj_rvdT_of_mem_K S hξ, rvdSpec_reflect S F (rvdT S ξ)]
+  exact rvdSpec_T S (F.comp (tauΩ S)) ξ
+
 end QIQTH
