@@ -2205,5 +2205,10 @@ namespace QIQTH.AxiomAudit
 -- measure via the cfcΩ↔borelFC bridge (cfcΩ_eq_borelFC: cfcΩ is literally borelFC∘inclΩ, by cfcCont's
 -- definition + bound-independence) + cfcΩ_reInner_eq_integral (re⟪ξ,f(R)ξ⟫=∫F∘inclΩ dμ, via the operator-
 -- expectation bridge) + twΩ_ofRealΩ. The first measure-theoretic step of the CGP spectral balance.
+#print axioms QIQTH.cfcΩ_weight
+-- expected: standard only — ★ THE h(R)-WEIGHTING: ∫F dμ^R_{h(R)ξ} = ∫h²·F dμ^R_ξ for real continuous h,F
+-- (spectral measure at h(R)ξ is h² times that at ξ). Via h(R) self-adjoint (cfcΩ_ofRealΩ_adjoint) +
+-- adjoint_inner_right + multiplicativity h(R)F(R)h(R)=(h²F)(R) (cfcΩ_mul + ofRealΩ_mul). The second
+-- measure ingredient of the CGP balance; with the reflection + (2−R)ξ=J(Tξ) ⟹ ∫(2−r)²F dμ=∫r(2−r)F(2−r)dμ.
 
 end QIQTH.AxiomAudit

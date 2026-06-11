@@ -296,4 +296,48 @@ theorem rvdSpec_reflect (S : StandardSubspace H)
       ← cfcΩ_reInner_eq_integral S (F.comp (tauΩ S)), ← twΩ_ofRealΩ]
   exact reInner_modConj_cfcΩ S (ofRealΩ S F) η
 
+/-! ### The `h(R)`-weighting of the spectral measure
+
+  The second measure-theoretic ingredient of the CGP balance: the spectral measure at `h(R)ξ` is `h²·`
+  the spectral measure at `ξ`.  Together with the measure reflection and the bounded Tomita fixedness
+  `(2−R)ξ = J(Tξ)` (for `ξ∈𝒦`), this yields the polynomial balance `∫(2−r)²F dμ_ξ = ∫r(2−r)F(2−r) dμ_ξ`. -/
+
+open QIQTH.StandardSubspaceModular in
+/-- The ℂ-lift of a real continuous map is self-adjoint (real-valued). -/
+theorem ofRealΩ_star (S : StandardSubspace H) (F : C(Set.Icc (-covM S) (2 + covM S), ℝ)) :
+    star (ofRealΩ S F) = ofRealΩ S F := by
+  ext x; simp only [ofRealΩ, ContinuousMap.star_apply, ContinuousMap.coe_mk, RCLike.star_def,
+    Complex.conj_ofReal]
+
+open QIQTH.StandardSubspaceModular in
+/-- The ℂ-lift is multiplicative. -/
+theorem ofRealΩ_mul (S : StandardSubspace H) (F G : C(Set.Icc (-covM S) (2 + covM S), ℝ)) :
+    ofRealΩ S (F * G) = ofRealΩ S F * ofRealΩ S G := by
+  ext x; simp only [ofRealΩ, ContinuousMap.mul_apply, ContinuousMap.coe_mk, Complex.ofReal_mul]
+
+open QIQTH.StandardSubspaceModular in
+/-- `f(R)` is self-adjoint for real continuous `f`. -/
+theorem cfcΩ_ofRealΩ_adjoint (S : StandardSubspace H)
+    (hΩ : C(Set.Icc (-covM S) (2 + covM S), ℝ)) :
+    ContinuousLinearMap.adjoint (cfcΩ S (ofRealΩ S hΩ)) = cfcΩ S (ofRealΩ S hΩ) := by
+  rw [← ContinuousLinearMap.star_eq_adjoint, ← cfcΩ_star, ofRealΩ_star]
+
+open QIQTH.StandardSubspaceModular in
+/-- **★ The `h(R)`-weighting:** `∫ F dμ^R_{h(R)ξ} = ∫ h²·F dμ^R_ξ` for real continuous `h, F` —
+    the spectral measure at `h(R)ξ` is `h²` times that at `ξ`.  By `h(R)` self-adjoint + the
+    multiplicativity `h(R)·F(R)·h(R) = (h²F)(R)`. -/
+theorem cfcΩ_weight (S : StandardSubspace H)
+    (hΩ F : C(Set.Icc (-covM S) (2 + covM S), ℝ)) (ξ : H) :
+    ∫ ω, F (inclΩ S ω) ∂(rvdSpecMeasure S (cfcΩ S (ofRealΩ S hΩ) ξ))
+      = ∫ ω, ((hΩ * hΩ) * F) (inclΩ S ω) ∂(rvdSpecMeasure S ξ) := by
+  rw [← cfcΩ_reInner_eq_integral S F, ← cfcΩ_reInner_eq_integral S ((hΩ * hΩ) * F)]
+  congr 1
+  rw [← ContinuousLinearMap.adjoint_inner_right (cfcΩ S (ofRealΩ S hΩ)) ξ
+        (cfcΩ S (ofRealΩ S F) (cfcΩ S (ofRealΩ S hΩ) ξ)), cfcΩ_ofRealΩ_adjoint]
+  congr 1
+  rw [← ContinuousLinearMap.mul_apply, ← ContinuousLinearMap.mul_apply, ← cfcΩ_mul, ← cfcΩ_mul,
+      ← ofRealΩ_mul, ← ofRealΩ_mul]
+  congr 2
+  ring
+
 end QIQTH
