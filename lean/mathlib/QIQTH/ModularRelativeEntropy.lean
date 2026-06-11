@@ -240,4 +240,60 @@ theorem cgpDensity_nonneg (r : ℝ) : 0 ≤ cgpDensity r := by
     exact mul_nonneg (by linarith) hg
   · exact le_refl 0
 
+/-! ### The measure reflection `μ^R_{Jη} = (2−·)_* μ^R_η`
+
+  The first measure-theoretic step of the CGP spectral balance: the spectral measure of `R` at `Jη` is
+  the pushforward of `μ^R_η` under the modular reflection `r ↦ 2−r`.  This lifts the inner-product
+  reflection `reInner_modConj_cfcΩ` (`⟪Jη, f(R) Jη⟫_ℝ = ⟪η, (twΩ f)(R) η⟫_ℝ`) to the measure via the
+  cfcΩ↔borelFC bridge (`cfcΩ` is literally `borelFC` of the restricted function, by `cfcCont`'s definition)
+  + the operator-expectation bridge `rvdSpec_integral_eq_re_inner`. -/
+
+open QIQTH.StandardSubspaceModular in
+/-- **The cfcΩ↔borelFC bridge (operator level):** `cfcΩ f = borelFC (f∘inclΩ)`, immediate from the
+    definition `cfcCont = borelFC` and its bound-independence. -/
+theorem cfcΩ_eq_borelFC (S : StandardSubspace H) (f : C(Set.Icc (-covM S) (2 + covM S), ℂ))
+    (hf : Measurable (fun ω : spectrum ℝ (rvdRC S) => f (inclΩ S ω))) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, ‖f (inclΩ S ω)‖ ≤ C) :
+    cfcΩ S f = borelFC (rvdRC S) (rvdRC_isSelfAdjoint S) hf hC0 hC := by
+  rw [cfcΩ]; exact cfcCont_eq S (f.comp (inclΩ S)) hf hC0 hC
+
+open QIQTH.StandardSubspaceModular in
+/-- ℂ-lift of a real continuous map on the spectral interval. -/
+noncomputable def ofRealΩ (S : StandardSubspace H) (F : C(Set.Icc (-covM S) (2 + covM S), ℝ)) :
+    C(Set.Icc (-covM S) (2 + covM S), ℂ) :=
+  ⟨fun x => (F x : ℂ), Complex.continuous_ofReal.comp F.continuous⟩
+
+open QIQTH.StandardSubspaceModular in
+/-- **The cfcΩ↔measure bridge:** `re⟪ξ, f(R) ξ⟫ = ∫ (F∘inclΩ) dμ^R_ξ` for real continuous `F`. -/
+theorem cfcΩ_reInner_eq_integral (S : StandardSubspace H)
+    (F : C(Set.Icc (-covM S) (2 + covM S), ℝ)) (ξ : H) :
+    Complex.re (inner ℂ ξ (cfcΩ S (ofRealΩ S F) ξ)) = ∫ ω, F (inclΩ S ω) ∂(rvdSpecMeasure S ξ) := by
+  have hf : Measurable (fun ω : spectrum ℝ (rvdRC S) => F (inclΩ S ω)) :=
+    (F.comp (inclΩ S)).continuous.measurable
+  have hC : ∀ ω : spectrum ℝ (rvdRC S), ‖((F (inclΩ S ω) : ℝ) : ℂ)‖ ≤ ‖F.comp (inclΩ S)‖ := fun ω => by
+    rw [Complex.norm_real]; exact (F.comp (inclΩ S)).norm_coe_le_norm ω
+  rw [rvdSpec_integral_eq_re_inner S ξ hf (norm_nonneg _) hC]
+  exact congrArg (fun T : H →L[ℂ] H => Complex.re (inner ℂ ξ (T ξ)))
+    (cfcΩ_eq_borelFC S (ofRealΩ S F) (Complex.measurable_ofReal.comp hf) (norm_nonneg _) hC)
+
+open QIQTH.StandardSubspaceModular in
+/-- `twΩ` of a real-lifted function is the real-lift of its reflection: `twΩ(ofRealΩ F) = ofRealΩ(F∘τ)`. -/
+theorem twΩ_ofRealΩ (S : StandardSubspace H) (F : C(Set.Icc (-covM S) (2 + covM S), ℝ)) :
+    twΩ S (ofRealΩ S F) = ofRealΩ S (F.comp (tauΩ S)) := by
+  ext x; simp only [twΩ, ofRealΩ, ContinuousMap.star_apply, ContinuousMap.comp_apply,
+    ContinuousMap.coe_mk, RCLike.star_def, Complex.conj_ofReal]
+
+open QIQTH.StandardSubspaceModular in
+/-- **★ The measure reflection** `∫ F∘inclΩ dμ^R_{Jη} = ∫ F∘(2−·)∘inclΩ dμ^R_η` for continuous `F` —
+    the spectral measure of `R` at `Jη` is the modular reflection of `μ^R_η`.  The first measure-theoretic
+    step of the CGP spectral balance. -/
+theorem rvdSpec_reflect (S : StandardSubspace H)
+    (F : C(Set.Icc (-covM S) (2 + covM S), ℝ)) (η : H) :
+    ∫ ω, F (inclΩ S ω) ∂(rvdSpecMeasure S (modConj S η))
+      = ∫ ω, F (tauΩ S (inclΩ S ω)) ∂(rvdSpecMeasure S η) := by
+  rw [← cfcΩ_reInner_eq_integral S F, show (fun ω => F (tauΩ S (inclΩ S ω)))
+        = (fun ω => (F.comp (tauΩ S)) (inclΩ S ω)) from rfl,
+      ← cfcΩ_reInner_eq_integral S (F.comp (tauΩ S)), ← twΩ_ofRealΩ]
+  exact reInner_modConj_cfcΩ S (ofRealΩ S F) η
+
 end QIQTH

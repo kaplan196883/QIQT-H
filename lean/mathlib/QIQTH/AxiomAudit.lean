@@ -2198,5 +2198,12 @@ namespace QIQTH.AxiomAudit
 -- continuous FC, via cfcΩ_intertwine D·f(R)=(twΩ f)(R)·D + J(Tξ)=Dξ on dense range T) and its inner-product
 -- form ⟪Jη,f(R)Jη⟫_ℝ=⟪η,(twΩ f)(R)η⟫_ℝ (the SPECTRAL REFLECTION, = the measure reflection μ_{Jη}=(2−·)_*μ_η
 -- at the real-bilinear level). The operator+inner-product engine of the CGP measure reflection.
+#print axioms QIQTH.cfcΩ_reInner_eq_integral
+#print axioms QIQTH.rvdSpec_reflect
+-- expected: standard only — ★★ THE MEASURE REFLECTION μ^R_{Jη} = (2−·)_* μ^R_η: ∫F∘inclΩ dμ_{Jη} =
+-- ∫F∘(2−·)∘inclΩ dμ_η for continuous F. Lifts the inner-product reflection (reInner_modConj_cfcΩ) to the
+-- measure via the cfcΩ↔borelFC bridge (cfcΩ_eq_borelFC: cfcΩ is literally borelFC∘inclΩ, by cfcCont's
+-- definition + bound-independence) + cfcΩ_reInner_eq_integral (re⟪ξ,f(R)ξ⟫=∫F∘inclΩ dμ, via the operator-
+-- expectation bridge) + twΩ_ofRealΩ. The first measure-theoretic step of the CGP spectral balance.
 
 end QIQTH.AxiomAudit
