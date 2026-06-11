@@ -1474,6 +1474,17 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — bridge scalarMeasure(PVM_of_selfAdjoint)=specMeasure (‖E(s)x‖²=qForm via
 -- E projection). Connects the bounded-Borel-FC layer (diagInt/bilinDiag) to re_inner_T_eq_integral;
 -- the keystone toward R=∫λ dE (R=borelFC(id)) hence the literal pointwise [U_t,R]=0.
+-- ★★ THE LITERAL [U_t,R]=0 — obligation (R) of 𝒦-invariance, FULLY DISCHARGED:
+#print axioms QIQTH.StandardSubspaceModular.rvdRC_eq_borelFC
+-- expected: standard only — R = borelFC(coord) = ∫λ dE, the OPERATOR spectral theorem for R, via
+-- diagInt(coord)=⟪·,R·⟫ (the bridge) + the 4-term polarization.
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_commute_rvdRC
+-- expected: standard only — ★ [U_t,R]=0 operator form (U_t=Φ(u_t), R=Φ(coord), borelFC_comm).
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_commute_rvdR
+-- expected: standard only — [U_t,R]=0 pointwise: U_t(Rξ)=R(U_t ξ).
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_mapsTo_K_of_commute_D
+-- expected: standard only — ★ U_t𝒦⊆𝒦 now needs ONLY the covariance [U_t,D]=0 (obligation R discharged).
+-- The single remaining gate to full standard-subspace invariance is the antilinear covariance.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

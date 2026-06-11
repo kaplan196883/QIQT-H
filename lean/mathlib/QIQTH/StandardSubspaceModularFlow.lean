@@ -368,4 +368,102 @@ theorem modUnitary_commute_specProj (S : StandardSubspace H) (t : ℝ)
   exact P.boundedFC_congr ((modSpecFun_measurable S t).mul hi) zero_le_one hfg
     (hi.mul (modSpecFun_measurable S t)) zero_le_one hgf (funext fun ω => mul_comm _ _)
 
+/-! ### `R = ∫λ dE` and the literal `[U_t, R] = 0` -/
+
+/-- Two values of the bounded Borel FC commute (multiplicative + scalar functions commute). -/
+theorem borelFC_comm (T : H →L[ℂ] H) (ha : IsSelfAdjoint T) {f g : spectrum ℝ T → ℂ}
+    {Cf Cg Cfg Cgf : ℝ}
+    (hf : Measurable f) (hC0f : 0 ≤ Cf) (hCf : ∀ ω, ‖f ω‖ ≤ Cf)
+    (hg : Measurable g) (hC0g : 0 ≤ Cg) (hCg : ∀ ω, ‖g ω‖ ≤ Cg)
+    (hfg : Measurable (fun ω => f ω * g ω)) (hC0fg : 0 ≤ Cfg) (hCfg : ∀ ω, ‖f ω * g ω‖ ≤ Cfg)
+    (hgf : Measurable (fun ω => g ω * f ω)) (hC0gf : 0 ≤ Cgf) (hCgf : ∀ ω, ‖g ω * f ω‖ ≤ Cgf) :
+    borelFC T ha hf hC0f hCf * borelFC T ha hg hC0g hCg
+      = borelFC T ha hg hC0g hCg * borelFC T ha hf hC0f hCf := by
+  rw [← borelFC_mul T ha hf hC0f hCf hg hC0g hCg hfg hC0fg hCfg,
+      ← borelFC_mul T ha hg hC0g hCg hf hC0f hCf hgf hC0gf hCgf]
+  exact borelFC_congr T ha hfg hC0fg hCfg hgf hC0gf hCgf (funext fun ω => mul_comm _ _)
+
+/-- The coordinate function `λ ↦ λ` on `σ(R)` — the integrand of `R = ∫λ dE`. -/
+noncomputable def specCoord (S : StandardSubspace H) : spectrum ℝ (rvdRC S) → ℂ :=
+  fun ω => ((ω : ℝ) : ℂ)
+
+theorem specCoord_measurable (S : StandardSubspace H) : Measurable (specCoord S) :=
+  Complex.continuous_ofReal.measurable.comp measurable_subtype_coe
+
+theorem specCoord_norm_le (S : StandardSubspace H) (ω : spectrum ℝ (rvdRC S)) :
+    ‖specCoord S ω‖ ≤ ‖rvdRC S‖ * ‖(1 : H →L[ℂ] H)‖ := by
+  rw [specCoord, Complex.norm_real]
+  exact spectrum.norm_le_norm_mul_of_mem ω.2
+
+/-- `diagInt(coord) z = ⟪z, R z⟫` (the `scalarMeasure=specMeasure` bridge + `re_inner_T_eq_integral`
+    + self-adjoint realness). -/
+theorem diagInt_specCoord (S : StandardSubspace H) (z : H) :
+    (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).diagInt (specCoord S) z
+      = inner ℂ z (rvdRC S z) := by
+  rw [show (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).diagInt (specCoord S) z
+        = ∫ ω, ((ω : ℝ) : ℂ)
+            ∂((PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).scalarMeasure z)
+      from rfl, scalarMeasure_eq_specMeasure,
+      show (∫ ω, ((ω : ℝ) : ℂ) ∂(specMeasure (rvdRC S) (rvdRC_isSelfAdjoint S) z))
+        = (((∫ ω, (ω : ℝ) ∂(specMeasure (rvdRC S) (rvdRC_isSelfAdjoint S) z)) : ℝ) : ℂ)
+      from integral_ofReal, re_inner_T_eq_integral]
+  have hreal : (starRingEnd ℂ) (inner ℂ z (rvdRC S z)) = inner ℂ z (rvdRC S z) := by
+    rw [inner_conj_symm]; exact rvdRC_isSymmetric S z z
+  exact Complex.conj_eq_iff_re.mp hreal
+
+/-- **`R = borelFC(coord) = ∫λ dE`** — the operator spectral theorem for `R`, via polarization. -/
+theorem rvdRC_eq_borelFC (S : StandardSubspace H) :
+    rvdRC S = borelFC (rvdRC S) (rvdRC_isSelfAdjoint S) (specCoord_measurable S)
+      (mul_nonneg (norm_nonneg _) (norm_nonneg _)) (specCoord_norm_le S) := by
+  refine ContinuousLinearMap.ext (fun y => ext_inner_left ℂ (fun x => ?_))
+  rw [inner_borelFC,
+      show (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).bilinDiag (specCoord S) x y
+        = 4⁻¹ * ((PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).diagInt (specCoord S) (x + y)
+          - (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).diagInt (specCoord S) (x - y)
+          + Complex.I *
+              (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).diagInt (specCoord S)
+                (Complex.I • x + y)
+          - Complex.I *
+              (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).diagInt (specCoord S)
+                (Complex.I • x - y)) from rfl,
+      diagInt_specCoord, diagInt_specCoord, diagInt_specCoord, diagInt_specCoord]
+  simp only [map_add, map_sub, map_smul, inner_add_left, inner_add_right, inner_sub_left,
+    inner_sub_right, inner_smul_left, inner_smul_right, Complex.conj_I]
+  ring_nf
+  simp only [Complex.I_sq]
+  ring
+
+/-- **★ `[U_t, R] = 0`** (operator form): the modular flow commutes with `R`. -/
+theorem modUnitary_commute_rvdRC (S : StandardSubspace H) (t : ℝ) :
+    modUnitary S t * rvdRC S = rvdRC S * modUnitary S t := by
+  have hfg : ∀ ω, ‖modSpecFun S t ω * specCoord S ω‖ ≤ 1 * (‖rvdRC S‖ * ‖(1 : H →L[ℂ] H)‖) :=
+    fun ω => by
+      rw [norm_mul]
+      exact mul_le_mul (modSpecFun_norm_le S t ω) (specCoord_norm_le S ω) (norm_nonneg _) zero_le_one
+  have hgf : ∀ ω, ‖specCoord S ω * modSpecFun S t ω‖ ≤ (‖rvdRC S‖ * ‖(1 : H →L[ℂ] H)‖) * 1 :=
+    fun ω => by
+      rw [norm_mul]
+      exact mul_le_mul (specCoord_norm_le S ω) (modSpecFun_norm_le S t ω) (norm_nonneg _)
+        (mul_nonneg (norm_nonneg _) (norm_nonneg _))
+  have h := borelFC_comm (rvdRC S) (rvdRC_isSelfAdjoint S)
+    (modSpecFun_measurable S t) zero_le_one (modSpecFun_norm_le S t)
+    (specCoord_measurable S) (mul_nonneg (norm_nonneg _) (norm_nonneg _)) (specCoord_norm_le S)
+    ((modSpecFun_measurable S t).mul (specCoord_measurable S)) (by positivity) hfg
+    ((specCoord_measurable S).mul (modSpecFun_measurable S t)) (by positivity) hgf
+  rwa [← rvdRC_eq_borelFC S] at h
+
+/-- **`[U_t, R] = 0`** (pointwise on `rvdR`): `U_t(R ξ) = R(U_t ξ)`. -/
+theorem modUnitary_commute_rvdR (S : StandardSubspace H) (t : ℝ) (ξ : H) :
+    modUnitary S t (rvdR S ξ) = rvdR S (modUnitary S t ξ) := by
+  have h := DFunLike.congr_fun (modUnitary_commute_rvdRC S t) ξ
+  simp only [ContinuousLinearMap.mul_apply, rvdRC_apply] at h
+  exact h
+
+/-- **Standard-subspace invariance modulo the covariance:** with `[U_t,R]=0` discharged,
+    `U_t 𝒦 ⊆ 𝒦` follows from the SINGLE remaining obligation `[U_t, D] = 0` (the covariance). -/
+theorem modUnitary_mapsTo_K_of_commute_D (S : StandardSubspace H) (t : ℝ)
+    (hD : ∀ ξ, modUnitary S t (rvdPmQ S ξ) = rvdPmQ S (modUnitary S t ξ)) :
+    ∀ ξ ∈ S.toClosedSubmodule, modUnitary S t ξ ∈ S.toClosedSubmodule :=
+  modUnitary_mapsTo_K_of_commute S t (modUnitary_commute_rvdR S t) hD
+
 end QIQTH.StandardSubspaceModular
