@@ -1470,6 +1470,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ U_t commutes with EVERY spectral projection E(s) of R (both are
 -- borelFC values; multiplicative + u_t·𝟙_s=𝟙_s·u_t). So Δ^{it} ∈ vN(R) — the operator-level statement
 -- that the modular flow is a function of R (unconditional; [U_t,R]=0 then needs only R=∫λ dE).
+#print axioms QIQTH.StandardSubspaceModular.scalarMeasure_eq_specMeasure
+-- expected: standard only — bridge scalarMeasure(PVM_of_selfAdjoint)=specMeasure (‖E(s)x‖²=qForm via
+-- E projection). Connects the bounded-Borel-FC layer (diagInt/bilinDiag) to re_inner_T_eq_integral;
+-- the keystone toward R=∫λ dE (R=borelFC(id)) hence the literal pointwise [U_t,R]=0.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

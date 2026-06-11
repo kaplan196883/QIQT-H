@@ -82,6 +82,40 @@ theorem modChar_conj (t r : ℝ) : (starRingEnd ℂ) (modChar t r) = modChar (-t
     ring
   · rw [Set.piecewise_eq_of_notMem _ _ _ h, Set.piecewise_eq_of_notMem _ _ _ h, map_one]
 
+/-! ### Bridge: the PVM scalar measure equals the construction's spectral measure -/
+
+set_option maxHeartbeats 1000000 in
+/-- **`scalarMeasure(PVM_of_selfAdjoint) = specMeasure`.**  The PVM's scalar measure
+    `μ_x(s) = ‖E(s)x‖²` (with `E = specProj` a projection, so `‖E(s)x‖² = re⟪E(s)x,x⟫ = qForm = μ_x^{spec}(s)`)
+    agrees with the Riesz–Markov spectral measure.  This connects the bounded-Borel-FC layer
+    (`diagInt`/`bilinDiag`, on `scalarMeasure`) to the integral spectral theorem
+    `re_inner_T_eq_integral` (on `specMeasure`). -/
+theorem scalarMeasure_eq_specMeasure (T : H →L[ℂ] H) (ha : IsSelfAdjoint T) (x : H) :
+    (PVM_of_selfAdjoint T ha).scalarMeasure x = specMeasure T ha x := by
+  apply MeasureTheory.Measure.ext
+  intro s hs
+  have hErfl : (PVM_of_selfAdjoint T ha).E s = specProj T ha s := rfl
+  have hidem : specProj T ha s * specProj T ha s = specProj T ha s := by
+    have h := specProj_inter T ha hs hs
+    rw [Set.inter_self] at h
+    exact h.symm
+  have hi : specProj T ha s (specProj T ha s x) = specProj T ha s x := by
+    have := DFunLike.congr_fun hidem x
+    rwa [ContinuousLinearMap.mul_apply] at this
+  have hadj : ContinuousLinearMap.adjoint (specProj T ha s) = specProj T ha s := by
+    rw [← ContinuousLinearMap.star_eq_adjoint]; exact (specProj_isSelfAdjoint T ha s).star_eq
+  have hee : inner ℂ (specProj T ha s x) (specProj T ha s x)
+      = inner ℂ (specProj T ha s x) x := by
+    have h := ContinuousLinearMap.adjoint_inner_right (specProj T ha s) (specProj T ha s x) x
+    rw [hadj, hi] at h
+    exact h
+  have hnorm : ‖specProj T ha s x‖ ^ 2 = qForm T ha s x := by
+    rw [← reApplyInnerSelf_specProj T ha s x, ContinuousLinearMap.reApplyInnerSelf_apply,
+        ← inner_self_eq_norm_sq (𝕜 := ℂ), hee]
+  rw [(PVM_of_selfAdjoint T ha).scalarMeasure_apply x hs, hErfl, hnorm, qForm,
+      MeasureTheory.measureReal_def,
+      ENNReal.ofReal_toReal (MeasureTheory.measure_ne_top (specMeasure T ha x) s)]
+
 /-! ### `borelFC` helpers (congruence + adjoint) -/
 
 /-- `borelFC` depends only on the function (not the bound proofs). -/
