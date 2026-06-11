@@ -20,10 +20,12 @@
 
 import QIQTH.QuantumRelativeEntropy
 import Mathlib.Analysis.Matrix.Order
+import Mathlib.Analysis.CStarAlgebra.Matrix
+import Mathlib.Analysis.SpecialFunctions.ContinuousFunctionalCalculus.ExpLog.Basic
 
 namespace QIQTH.Araki
 
-open scoped Matrix ComplexOrder
+open scoped Matrix ComplexOrder Matrix.Norms.L2Operator
 
 variable {n : Type} [Fintype n] [DecidableEq n]
 
@@ -52,6 +54,7 @@ def ofMat (X : Matrix n n ℂ) : HSMat n := X
 
 @[simp] theorem toMat_ofMat (X : Matrix n n ℂ) : toMat (ofMat X) = X := rfl
 @[simp] theorem ofMat_toMat (X : HSMat n) : ofMat (toMat X) = X := rfl
+@[simp] theorem toMat_zero : toMat (0 : HSMat n) = 0 := rfl
 
 /-- The inner product on `HSMat` is the Frobenius/HS one: `⟪x, y⟫ = tr(y · xᴴ)`. -/
 theorem hsInner_eq (x y : HSMat n) :
@@ -134,6 +137,76 @@ theorem Rmul_adjoint (A : Matrix n n ℂ) :
   intro x y
   rw [hsInner_eq, hsInner_eq, Rmul_apply, Rmul_apply, Matrix.conjTranspose_mul,
       Matrix.conjTranspose_conjTranspose, Matrix.mul_assoc]
+
+/-! ### `L`/`R` as algebra homomorphisms, and exponential naturality
+
+  To compute `log(L_σ R_ρ⁻¹)` we need `exp` to commute with `Lmul`/`Rmul`.  `Lmul` is a unital
+  algebra hom; `Rmul` is *anti*-multiplicative, so it is a hom out of the opposite algebra.  Both
+  are continuous (finite dimension), so `map_exp` gives the naturality. -/
+
+@[simp] theorem toMat_add (x y : HSMat n) : toMat (x + y) = toMat x + toMat y := rfl
+@[simp] theorem toMat_smul (c : ℂ) (x : HSMat n) : toMat (c • x) = c • toMat x := rfl
+
+theorem Lmul_add (A B : Matrix n n ℂ) : Lmul (A + B) = Lmul A + Lmul B := by
+  ext X; apply toMat_injective; simp [ContinuousLinearMap.add_apply, Matrix.add_mul]
+
+theorem Lmul_smul (c : ℂ) (A : Matrix n n ℂ) : Lmul (c • A) = c • Lmul A := by
+  ext X; apply toMat_injective; simp [ContinuousLinearMap.smul_apply, smul_mul_assoc]
+
+theorem Rmul_add (A B : Matrix n n ℂ) : Rmul (A + B) = Rmul A + Rmul B := by
+  ext X; apply toMat_injective; simp [ContinuousLinearMap.add_apply, Matrix.mul_add]
+
+theorem Rmul_smul (c : ℂ) (A : Matrix n n ℂ) : Rmul (c • A) = c • Rmul A := by
+  ext X; apply toMat_injective; simp [ContinuousLinearMap.smul_apply, mul_smul_comm]
+
+/-- `Lmul` bundled as a unital ℂ-algebra homomorphism `Matrix → 𝓛(HS)`. -/
+noncomputable def Lmulₐ : Matrix n n ℂ →ₐ[ℂ] (HSMat n →L[ℂ] HSMat n) where
+  toFun := Lmul
+  map_one' := Lmul_one
+  map_mul' := Lmul_mul
+  map_zero' := by ext X; apply toMat_injective; simp
+  map_add' := Lmul_add
+  commutes' c := by
+    rw [Algebra.algebraMap_eq_smul_one, Algebra.algebraMap_eq_smul_one, Lmul_smul, Lmul_one]
+
+/-- `Rmul` bundled as a unital ℂ-algebra homomorphism out of the *opposite* algebra
+    (`Rmul` is anti-multiplicative). -/
+noncomputable def Rmulₐ : (Matrix n n ℂ)ᵐᵒᵖ →ₐ[ℂ] (HSMat n →L[ℂ] HSMat n) where
+  toFun A := Rmul A.unop
+  map_one' := Rmul_one
+  map_mul' x y := by rw [MulOpposite.unop_mul, Rmul_mul]
+  map_zero' := by ext X; apply toMat_injective; simp
+  map_add' x y := by rw [MulOpposite.unop_add, Rmul_add]
+  commutes' c := by
+    rw [Algebra.algebraMap_eq_smul_one, Algebra.algebraMap_eq_smul_one, MulOpposite.unop_smul,
+        MulOpposite.unop_one, Rmul_smul, Rmul_one]
+
+theorem Lmulₐ_continuous : Continuous (Lmulₐ : Matrix n n ℂ → (HSMat n →L[ℂ] HSMat n)) := by
+  have h : Continuous (Lmulₐ (n := n)).toLinearMap := LinearMap.continuous_of_finiteDimensional _
+  exact h
+
+theorem Rmulₐ_continuous :
+    Continuous (Rmulₐ : (Matrix n n ℂ)ᵐᵒᵖ → (HSMat n →L[ℂ] HSMat n)) := by
+  have h : Continuous (Rmulₐ (n := n)).toLinearMap := LinearMap.continuous_of_finiteDimensional _
+  exact h
+
+/-- Every point lies in the exp-convergence ball of a complex Banach algebra (radius `∞`). -/
+private theorem mem_expBall_C {𝔸 : Type*} [NormedRing 𝔸] [NormedAlgebra ℂ 𝔸] [CompleteSpace 𝔸]
+    (x : 𝔸) : x ∈ Metric.eball (0 : 𝔸) (NormedSpace.expSeries ℂ 𝔸).radius :=
+  (NormedSpace.expSeries_radius_eq_top ℂ 𝔸).symm ▸ edist_lt_top _ _
+
+/-- **Exponential naturality for `Lmul`:** `exp(L_A) = L_{exp A}`. -/
+theorem exp_Lmul (A : Matrix n n ℂ) :
+    NormedSpace.exp (Lmul A) = Lmul (NormedSpace.exp A) :=
+  (NormedSpace.map_exp_of_mem_ball (𝕂 := ℂ) Lmulₐ Lmulₐ_continuous A (mem_expBall_C A)).symm
+
+/-- **Exponential naturality for `Rmul`:** `exp(R_A) = R_{exp A}` (via the opposite algebra). -/
+theorem exp_Rmul (A : Matrix n n ℂ) :
+    NormedSpace.exp (Rmul A) = Rmul (NormedSpace.exp A) := by
+  have h := (NormedSpace.map_exp_of_mem_ball (𝕂 := ℂ) Rmulₐ Rmulₐ_continuous (MulOpposite.op A)
+    (mem_expBall_C (MulOpposite.op A))).symm
+  rw [NormedSpace.exp_op] at h
+  exact h
 
 /-! ### The relative modular operator `Δ = L_σ R_ρ⁻¹` -/
 
