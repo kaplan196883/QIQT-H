@@ -26,6 +26,7 @@
 -/
 
 import QIQTH.Fock.SecondQuant
+import QIQTH.Fock.WeylOp
 import QIQTH.StandardSubspaceModularFlow
 
 namespace QIQTH.Fock
@@ -128,6 +129,55 @@ theorem secondQuantModFlowH_add (S : StandardSubspace H) (s t : ℝ) (x : Fock H
   rw [secondQuantModFlowH, secondQuantModFlowH, secondQuantModFlowH,
       ← Function.comp_apply (f := UniformSpace.Completion.map (secondQuantModFlowₗᵢ S s)),
       UniformSpace.Completion.map_comp (secondQuantModFlowₗᵢ S s).isometry.uniformContinuous
+        (secondQuantModFlowₗᵢ S t).isometry.uniformContinuous, hfun]
+
+/-! ### Tomita's theorem at the field level: the modular flow acts on the CCR / Weyl algebra
+
+  `σ_t(W(u)) = Γ(Δ^{it}) W(u) Γ(Δ^{-it}) = W(Δ^{it} u)`.  The second-quantized modular flow maps the Weyl
+  (CCR) algebra of the standard subspace onto itself, transporting the one-particle test function by the
+  modular flow — exactly the content of Tomita's theorem (`σ_t(M) = M`) for the free-field von Neumann
+  algebra.  The engine is the isometry-invariance of the Weyl coefficient (`weylCoeff_isometry_invariant`). -/
+
+/-- **Covariance of the Weyl operator under second quantization:** `Γ(A) W(u) = W(A u) Γ(A)` for any
+    one-particle linear isometry `A`. -/
+theorem secondQuantPre_weylPre (A : H →ₗᵢ[ℂ] H) (u : H) (φ : FockPre H) :
+    secondQuantPre A (weylPre u φ) = weylPre (A u) (secondQuantPre A φ) := by
+  have key : (secondQuantPre A).comp (weylPre u) = (weylPre (A u)).comp (secondQuantPre A) := by
+    refine Finsupp.lhom_ext (fun g b => ?_)
+    show secondQuantPre A (weylPre u (Finsupp.single g b))
+        = weylPre (A u) (secondQuantPre A (Finsupp.single g b))
+    have hb : (Finsupp.single g b : FockPre H) = b • FockPre.expVec g := by
+      show (Finsupp.single g b : H →₀ ℂ) = b • (Finsupp.single g 1 : H →₀ ℂ)
+      rw [Finsupp.smul_single, smul_eq_mul, mul_one]
+    simp only [hb, map_smul, weylPre_expVec, secondQuantPre_expVec, map_add,
+      Weyl.weylCoeff_isometry_invariant]
+  exact congrFun (congrArg DFunLike.coe key) φ
+
+/-- **The modular automorphism on the Weyl/CCR algebra (pre-Fock level):** `Γ(Δ^{it}) W(u) =
+    W(Δ^{it} u) Γ(Δ^{it})`, i.e. `σ_t(W(u)) = W(Δ^{it} u)` — Tomita's theorem at the free-field level. -/
+theorem secondQuantModFlow_weyl (S : StandardSubspace H) (t : ℝ) (u : H) (φ : FockPre H) :
+    secondQuantModFlow S t (weylPre u φ)
+      = weylPre (modUnitary S t u) (secondQuantModFlow S t φ) :=
+  secondQuantPre_weylPre (modUnitaryₗᵢ S t) u φ
+
+/-- **The modular Weyl covariance on the Fock HILBERT space:** `Γ(Δ^{it}) W(u) = W(Δ^{it} u) Γ(Δ^{it})`
+    as a genuine identity of operators on `Fock H` — the modular automorphism group transports the
+    field-level Weyl operators by the one-particle modular flow. -/
+theorem secondQuantModFlowH_weylH (S : StandardSubspace H) (t : ℝ) (u : H) (x : Fock H) :
+    secondQuantModFlowH S t (weylH u x)
+      = weylH (modUnitary S t u) (secondQuantModFlowH S t x) := by
+  have hfun : (⇑(secondQuantModFlowₗᵢ S t)) ∘ (⇑(weylₗᵢ u))
+      = (⇑(weylₗᵢ (modUnitary S t u))) ∘ (⇑(secondQuantModFlowₗᵢ S t)) :=
+    funext fun φ => secondQuantModFlow_weyl S t u φ
+  show UniformSpace.Completion.map (secondQuantModFlowₗᵢ S t)
+        (UniformSpace.Completion.map (weylₗᵢ u) x)
+      = UniformSpace.Completion.map (weylₗᵢ (modUnitary S t u))
+        (UniformSpace.Completion.map (secondQuantModFlowₗᵢ S t) x)
+  rw [← Function.comp_apply (f := UniformSpace.Completion.map (secondQuantModFlowₗᵢ S t)),
+      ← Function.comp_apply (f := UniformSpace.Completion.map (weylₗᵢ (modUnitary S t u))),
+      UniformSpace.Completion.map_comp (secondQuantModFlowₗᵢ S t).isometry.uniformContinuous
+        (weylₗᵢ u).isometry.uniformContinuous,
+      UniformSpace.Completion.map_comp (weylₗᵢ (modUnitary S t u)).isometry.uniformContinuous
         (secondQuantModFlowₗᵢ S t).isometry.uniformContinuous, hfun]
 
 end QIQTH.Fock

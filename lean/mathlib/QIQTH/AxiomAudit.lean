@@ -2238,5 +2238,11 @@ namespace QIQTH.AxiomAudit
 -- free-field local algebra's modular op IS Γ(Δ) of the standard-subspace modular op). Full vN-algebra
 -- relative ENTROPY additionally needs the relative modular operator for two states (CGP reduces it to the
 -- one-particle cgpEntropy, already proved ≥0).
+#print axioms QIQTH.Fock.secondQuantModFlow_weyl
+#print axioms QIQTH.Fock.secondQuantModFlowH_weylH
+-- expected: standard only — PHASE C: TOMITA'S THEOREM AT THE FIELD LEVEL. σ_t(W(u))=Γ(Δ^{it})W(u)Γ(Δ^{-it})=
+-- W(Δ^{it}u): the second-quantized modular flow maps the CCR/Weyl algebra onto itself, transporting the test
+-- function by the one-particle modular flow (σ_t(M)=M). Engine = weylCoeff_isometry_invariant (Γ(A)W(u)=
+-- W(Au)Γ(A)) specialized to A=Δ^{it}. Both pre-Fock and Fock-Hilbert (via Completion.map_comp) levels.
 
 end QIQTH.AxiomAudit
