@@ -783,4 +783,62 @@ noncomputable def cfcContₗ : C(spectrum ℝ (rvdRC S), ℂ) →ₗ[ℂ] (H →
 theorem cfcCont_continuous : Continuous (cfcCont S) :=
   (LinearMap.mkContinuous (cfcContₗ S) 2 (fun f => cfcCont_norm_le S f)).continuous
 
+/-! ### The symmetric domain `Ω = [−M, 2+M]` and `cfcΩ`
+
+The Stone–Weierstrass twist `f ↦ conj(f(2−·))` needs a domain SYMMETRIC under `r ↦ 2−r`.  The
+spectrum `σℝ R` need not be symmetric, so we work on `Ω = [−M, 2+M]` (`M = ‖R‖·‖1‖`), which IS
+symmetric (`r ↦ 2−r` swaps the endpoints) and contains `σℝ R` (norm bound).  `cfcΩ f := cfcCont S
+(f ∘ incl)` restricts a continuous function on `Ω` to `σℝ R` and applies the FC. -/
+
+/-- The radius `M = ‖R‖·‖1‖` bounding the spectrum. -/
+noncomputable def covM : ℝ := ‖rvdRC S‖ * ‖(1 : H →L[ℂ] H)‖
+
+theorem covM_nonneg : 0 ≤ covM S := mul_nonneg (norm_nonneg _) (norm_nonneg _)
+
+theorem spectrum_subset_covΩ :
+    spectrum ℝ (rvdRC S) ⊆ Set.Icc (-covM S) (2 + covM S) := by
+  intro ω hω
+  have h : |ω| ≤ covM S := by
+    simpa [covM, Real.norm_eq_abs] using spectrum.norm_le_norm_mul_of_mem (𝕜 := ℝ) hω
+  rw [abs_le] at h
+  exact ⟨h.1, by linarith [h.2, covM_nonneg S]⟩
+
+/-- The inclusion `σℝ R ↪ Ω` as a continuous map. -/
+def inclΩ : C(spectrum ℝ (rvdRC S), Set.Icc (-covM S) (2 + covM S)) where
+  toFun := Set.inclusion (spectrum_subset_covΩ S)
+  continuous_toFun := continuous_inclusion (spectrum_subset_covΩ S)
+
+/-- The involution `τ(r) = 2 − r` on the symmetric `Ω`. -/
+def tauΩ : C(Set.Icc (-covM S) (2 + covM S), Set.Icc (-covM S) (2 + covM S)) where
+  toFun x := ⟨2 - x.1, by obtain ⟨h1, h2⟩ := x.2; constructor <;> linarith⟩
+  continuous_toFun := Continuous.subtype_mk (continuous_const.sub continuous_subtype_val)
+    (fun x => by obtain ⟨h1, h2⟩ := x.2; constructor <;> linarith)
+
+/-- `cfcΩ f = f(R)` for `f` continuous on the symmetric domain `Ω`. -/
+noncomputable def cfcΩ (f : C(Set.Icc (-covM S) (2 + covM S), ℂ)) : H →L[ℂ] H :=
+  cfcCont S (f.comp (inclΩ S))
+
+theorem cfcΩ_one : cfcΩ S 1 = 1 := by
+  rw [cfcΩ, ContinuousMap.one_comp, cfcCont_one]
+
+theorem cfcΩ_mul (f g : C(Set.Icc (-covM S) (2 + covM S), ℂ)) :
+    cfcΩ S (f * g) = cfcΩ S f * cfcΩ S g := by
+  rw [cfcΩ, cfcΩ, cfcΩ, ContinuousMap.mul_comp, cfcCont_mul]
+
+theorem cfcΩ_add (f g : C(Set.Icc (-covM S) (2 + covM S), ℂ)) :
+    cfcΩ S (f + g) = cfcΩ S f + cfcΩ S g := by
+  rw [cfcΩ, cfcΩ, cfcΩ, ContinuousMap.add_comp, cfcCont_add]
+
+theorem cfcΩ_smul (c : ℂ) (f : C(Set.Icc (-covM S) (2 + covM S), ℂ)) :
+    cfcΩ S (c • f) = c • cfcΩ S f := by
+  rw [cfcΩ, cfcΩ, ContinuousMap.smul_comp, cfcCont_smul]
+
+theorem cfcΩ_star (f : C(Set.Icc (-covM S) (2 + covM S), ℂ)) :
+    cfcΩ S (star f) = star (cfcΩ S f) := by
+  have h : (star f).comp (inclΩ S) = star (f.comp (inclΩ S)) := rfl
+  rw [cfcΩ, cfcΩ, h, cfcCont_star]
+
+theorem cfcΩ_continuous : Continuous (cfcΩ S) :=
+  (cfcCont_continuous S).comp (ContinuousMap.continuous_precomp (inclΩ S))
+
 end QIQTH.StandardSubspaceModular
