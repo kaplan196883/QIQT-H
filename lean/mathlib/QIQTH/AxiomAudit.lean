@@ -1517,8 +1517,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.modConj_norm
 -- expected: standard only — ‖Jη‖=‖η‖ (J isometric, by density from ‖Tξ‖=‖Dξ‖).
 #print axioms QIQTH.StandardSubspaceModular.modConj_inner_map
--- expected: standard only — ⟪Jη,Jζ⟫=⟪η,ζ⟫ (J inner-preserving). J²=1 reduces to J self-adjoint, blocked
--- ONLY by a Mathlib perf wall (scoped ℝ-inner adjoint isDefEq timeout in the density argument).
+-- expected: standard only — ⟪Jη,Jζ⟫=⟪η,ζ⟫ (J inner-preserving).
+#print axioms QIQTH.StandardSubspaceModular.modConj_isSelfAdjoint
+-- expected: standard only — J self-adjoint ⟪Jη,ζ⟫=⟪η,Jζ⟫ (density from D·T=T·D; fast symmetry via
+-- ℂ-self-adjoint+re for T and projection symmetry for D, avoiding the scoped-ℝ adjoint perf wall).
+#print axioms QIQTH.StandardSubspaceModular.modConj_sq
+-- expected: standard only — ★★ J² = 1. THE MODULAR CONJUGATION IS A FULL ANTIUNITARY INVOLUTION.
+-- Tomita–Takesaki S=JΔ^{1/2} complete at the one-particle level: Δ^{it} (strongly cts unitary group)
+-- + J (J²=1) both axiom-free for a standard subspace.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

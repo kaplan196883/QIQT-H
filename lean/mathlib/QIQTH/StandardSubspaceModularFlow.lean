@@ -619,13 +619,49 @@ theorem modConj_inner_map (S : StandardSubspace H) (η ζ : H) :
     inner ℝ (modConj S η) (modConj S ζ) = inner ℝ η ζ :=
   (⟨(modConj S).toLinearMap, modConj_norm S⟩ : H →ₗᵢ[ℝ] H).inner_map_map η ζ
 
-/- The modular conjugation `J` is now a bounded ℝ-linear ISOMETRY with `J(Tξ) = Dξ` (`modConj`,
-   `modConj_rvdT`, `modConj_norm`, `modConj_inner_map`).  The remaining structural fact `J² = 1`
-   reduces to `J` self-adjoint (`⟪Jη,ζ⟫=⟪η,Jζ⟫`, which holds on the dense `range T` from `D·T=T·D` +
-   `D,T` self-adjoint) extended by density.  That density proof is blocked only by a Mathlib
-   PERFORMANCE wall — the scoped real inner product's `adjoint` instance is prohibitively expensive
-   to resolve inside the two-variable density argument (deterministic `isDefEq` timeout even at 10⁶
-   heartbeats).  It is not a mathematical gap: the on-`range T` identity
-   `⟪J(Ta),Tb⟫ = ⟪Da,Tb⟫ = ⟪a,D(Tb)⟫ = ⟪a,T(Db)⟫ = ⟪Ta,Db⟫ = ⟪Ta,J(Tb)⟫` is elementary. -/
+/-- `T` is real-symmetric — via ℂ-self-adjointness (fast: primary ℂ instance, no scoped-ℝ adjoint). -/
+theorem rvdT_real_inner_symm (S : StandardSubspace H) (x y : H) :
+    inner ℝ (rvdT S x) y = inner ℝ x (rvdT S y) := by
+  have hadj : ContinuousLinearMap.adjoint (rvdT S) = rvdT S := by
+    rw [← ContinuousLinearMap.star_eq_adjoint, (rvdT_isSelfAdjoint S).star_eq]
+  have hc : inner ℂ (rvdT S x) y = inner ℂ x (rvdT S y) := by
+    conv_lhs => rw [← hadj]
+    exact ContinuousLinearMap.adjoint_inner_left (rvdT S) y x
+  show (inner ℂ (rvdT S x) y).re = (inner ℂ x (rvdT S y)).re
+  rw [hc]
+
+/-- `D = P − Q` is real-symmetric — via the projection symmetry (fast, no adjoint). -/
+theorem rvdPmQ_real_inner_symm (S : StandardSubspace H) (x y : H) :
+    inner ℝ (rvdPmQ S x) y = inner ℝ x (rvdPmQ S y) := by
+  simp only [rvdPmQ, ContinuousLinearMap.sub_apply, inner_sub_left, inner_sub_right, projK, projIK]
+  rw [Submodule.inner_starProjection_left_eq_right, Submodule.inner_starProjection_left_eq_right]
+
+/-- `J` is self-adjoint (`⟪J η, ζ⟫ = ⟪η, J ζ⟫`), by density from `D·T=T·D` (using the fast symmetry
+    lemmas above — avoids the scoped-ℝ adjoint that times out). -/
+theorem modConj_isSelfAdjoint (S : StandardSubspace H) (η ζ : H) :
+    inner ℝ (modConj S η) ζ = inner ℝ η (modConj S ζ) := by
+  have hT : ∀ a b : H, inner ℝ (modConj S (rvdT S a)) (rvdT S b)
+      = inner ℝ (rvdT S a) (modConj S (rvdT S b)) := fun a b => by
+    rw [modConj_rvdT, modConj_rvdT, rvdPmQ_real_inner_symm, rvdPmQ_commute_rvdT_apply,
+        ← rvdT_real_inner_symm]
+  have hηT : ∀ b : H, inner ℝ (modConj S η) (rvdT S b) = inner ℝ η (modConj S (rvdT S b)) := by
+    intro b
+    refine congrFun (Continuous.ext_on (rvdT_restrictScalars_denseRange S)
+      ((modConj S).continuous.inner continuous_const) (continuous_id.inner continuous_const)
+      ?_) η
+    rintro v ⟨a, rfl⟩
+    show inner ℝ (modConj S (rvdT S a)) (rvdT S b) = inner ℝ (rvdT S a) (modConj S (rvdT S b))
+    exact hT a b
+  refine congrFun (Continuous.ext_on (rvdT_restrictScalars_denseRange S)
+    (continuous_const.inner continuous_id)
+    (continuous_const.inner (modConj S).continuous) ?_) ζ
+  rintro v ⟨b, rfl⟩
+  show inner ℝ (modConj S η) (rvdT S b) = inner ℝ η (modConj S (rvdT S b))
+  exact hηT b
+
+/-- **★ `J² = 1`** — the modular conjugation is an involution (`⟪ζ, J²η⟫ = ⟪Jζ, Jη⟫ = ⟪ζ, η⟫`). -/
+theorem modConj_sq (S : StandardSubspace H) (η : H) : modConj S (modConj S η) = η := by
+  refine ext_inner_left ℝ fun ζ => ?_
+  rw [← modConj_isSelfAdjoint S ζ (modConj S η), modConj_inner_map]
 
 end QIQTH.StandardSubspaceModular
