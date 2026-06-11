@@ -28,6 +28,7 @@
 -/
 
 import QIQTH.Fock.SecondQuantModularFlow
+import QIQTH.ModularRelativeEntropy
 
 namespace QIQTH.Fock
 
@@ -143,5 +144,33 @@ theorem relModFlow_vacuum_char (S : StandardSubspace H) (t : ℝ) (f : H) :
   congr 1
   simp only [inner_neg_left, inner_neg_right, inner_zero_right]
   ring
+
+open MeasureTheory in
+/-- **★★★ THE ENTROPY REDUCTION** `S(ω_{W(f)Ω} ‖ ω_Ω) = cgpEntropy(f)`, as a derivative theorem.
+    In the regular regime (`σ(R) ⊆ [a,2−a]`), the vacuum matrix element of the relative modular flow has
+    `t`-derivative `−i·cgpEntropy(f)` at `0`:
+        `d/dt|₀ ⟨Ω, Δ_{W(f)Ω|Ω}^{it} Ω⟩ = −i·cgpEntropy(f)`,
+    so the coherent-state Araki relative entropy `S = i·d/dt|₀ ⟨Ω, Δ_rel^{it} Ω⟩ = cgpEntropy(f)` — the
+    one-particle CGP relative entropy, already proved `≥ 0` (`cgpEntropy_nonneg`).  This CLOSES the loop:
+    the Fock-level relative entropy of a coherent excitation IS the one-particle entropy.  Chain rule on the
+    characteristic function (`relModFlow_vacuum_char`) + differentiation of the matrix element
+    (`hasDerivAt_inner_modUnitary`) + `∫ entropyDensity dμ = −cgpEntropy`. -/
+theorem hasDerivAt_relModFlow_vacuum (S : StandardSubspace H) (f : H) {a : ℝ} (ha : 0 < a) (ha2 : a < 2)
+    (hspec : ∀ ω : spectrum ℝ (rvdRC S), a ≤ (ω : ℝ) ∧ (ω : ℝ) ≤ 2 - a) :
+    HasDerivAt (fun t => inner ℂ (Fock.vacuum : Fock H) (relModFlowH S t f Fock.vacuum))
+      (-Complex.I * (cgpEntropy S f : ℂ)) 0 := by
+  have hd := hasDerivAt_inner_modUnitary S f ha ha2 hspec
+  have hcgp : (∫ ω, (entropyDensity ((ω : spectrum ℝ (rvdRC S)) : ℝ) : ℂ) ∂(rvdSpecMeasure S f))
+      = -(cgpEntropy S f : ℂ) := by
+    rw [cgpEntropy, integral_complex_ofReal]; push_cast; ring
+  rw [hcgp] at hd
+  have hd2 : HasDerivAt (fun t => inner ℂ f (modUnitary S t f) - inner ℂ f f)
+      (Complex.I * -(cgpEntropy S f : ℂ)) 0 := hd.sub_const _
+  simp only [relModFlow_vacuum_char]
+  have heq : -Complex.I * (cgpEntropy S f : ℂ)
+      = Complex.exp (inner ℂ f (modUnitary S 0 f) - inner ℂ f f) * (Complex.I * -(cgpEntropy S f : ℂ)) := by
+    rw [modUnitary_zero, ContinuousLinearMap.one_apply, sub_self, Complex.exp_zero, one_mul]; ring
+  rw [heq]
+  exact hd2.cexp
 
 end QIQTH.Fock

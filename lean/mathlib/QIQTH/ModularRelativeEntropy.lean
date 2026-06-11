@@ -20,6 +20,7 @@
 -/
 
 import QIQTH.StandardSubspaceModularFlow
+import Mathlib.Analysis.Calculus.ParametricIntegral
 
 namespace QIQTH
 
@@ -446,6 +447,46 @@ theorem rvdSpec_balance (S : StandardSubspace H) (F : C(Set.Icc (-covM S) (2 + c
           ∂(rvdSpecMeasure S ξ) := by
   rw [← rvdSpec_twoSubR S F ξ, ← modConj_rvdT_of_mem_K S hξ, rvdSpec_reflect S F (rvdT S ξ)]
   exact rvdSpec_T S (F.comp (tauΩ S)) ξ
+
+open MeasureTheory in
+/-- **★ Differentiation of the modular-flow matrix element:** in the regular regime (`σ(R) ⊆ [a,2−a]`),
+    `d/dt|₀ ⟨ξ, U_t ξ⟩ = i·∫ entropyDensity dμ^R_ξ`.  Differentiation under the spectral integral
+    (`hasDerivAt_integral_of_dominated_loc_of_deriv_le`): the `t`-derivative `∂_t u_t = i·g·u_t` is bounded by
+    the constant `log((2−a)/a)` (`g` bounded, `|u_t|=1`), the dominating function on the finite spectral
+    measure.  This is the operator-theoretic Stone-generator step, done at the scalar-integral level. -/
+theorem hasDerivAt_inner_modUnitary (S : StandardSubspace H) (ξ : H) {a : ℝ} (ha : 0 < a) (ha2 : a < 2)
+    (hspec : ∀ ω : spectrum ℝ (rvdRC S), a ≤ (ω : ℝ) ∧ (ω : ℝ) ≤ 2 - a) :
+    HasDerivAt (fun t => inner ℂ ξ (modUnitary S t ξ))
+      (Complex.I * ∫ ω, (entropyDensity (ω : ℝ) : ℂ) ∂(rvdSpecMeasure S ξ)) 0 := by
+  haveI : IsFiniteMeasure (rvdSpecMeasure S ξ) := by unfold rvdSpecMeasure; infer_instance
+  simp only [rvdSpec_modUnitary]
+  have hpos : ∀ ω : spectrum ℝ (rvdRC S), (ω : ℝ) ∈ Set.Ioo (0 : ℝ) 2 := fun ω =>
+    ⟨lt_of_lt_of_le ha (hspec ω).1, lt_of_le_of_lt (hspec ω).2 (by linarith)⟩
+  have hconv : (Complex.I * ∫ ω, (entropyDensity ((ω : spectrum ℝ (rvdRC S)) : ℝ) : ℂ)
+        ∂(rvdSpecMeasure S ξ))
+      = ∫ ω, Complex.I * (entropyDensity (ω : ℝ) : ℂ) * modSpecFun S 0 ω ∂(rvdSpecMeasure S ξ) := by
+    rw [← integral_const_mul]
+    refine integral_congr_ae (Filter.Eventually.of_forall (fun ω => ?_))
+    show Complex.I * (entropyDensity (ω : ℝ) : ℂ)
+      = Complex.I * (entropyDensity (ω : ℝ) : ℂ) * modSpecFun S 0 ω
+    rw [show modSpecFun S 0 ω = 1 from modChar_zero (ω : ℝ), mul_one]
+  rw [hconv]
+  refine (hasDerivAt_integral_of_dominated_loc_of_deriv_le (𝕜 := ℝ)
+    (F := fun t ω => modSpecFun S t ω)
+    (F' := fun t ω => Complex.I * (entropyDensity (ω : ℝ) : ℂ) * modSpecFun S t ω)
+    (bound := fun _ => Real.log ((2 - a) / a)) (s := Set.univ) Filter.univ_mem
+    (Filter.Eventually.of_forall (fun t => (modSpecFun_measurable S t).aestronglyMeasurable))
+    ((integrable_const (1 : ℝ)).mono' (modSpecFun_measurable S 0).aestronglyMeasurable
+      (Filter.Eventually.of_forall (fun ω => modSpecFun_norm_le S 0 ω)))
+    (((measurable_const.mul (Complex.measurable_ofReal.comp entropyDensity_measurable)).mul
+        (modSpecFun_measurable S 0)).aestronglyMeasurable)
+    (Filter.Eventually.of_forall (fun ω t _ => ?_))
+    (integrable_const _)
+    (Filter.Eventually.of_forall (fun ω t _ => hasDerivAt_modChar t (hpos ω)))).2
+  show ‖Complex.I * (entropyDensity (ω : ℝ) : ℂ) * modSpecFun S t ω‖ ≤ Real.log ((2 - a) / a)
+  rw [norm_mul, norm_mul, Complex.norm_I, Complex.norm_real, one_mul,
+      show ‖modSpecFun S t ω‖ = 1 from modChar_norm t (ω : ℝ), mul_one]
+  exact entropyDensity_abs_le ha (hspec ω).1 (hspec ω).2
 
 /-! ### ★★★ The CGP relative-entropy positivity `S(ξ) ≥ 0`
 

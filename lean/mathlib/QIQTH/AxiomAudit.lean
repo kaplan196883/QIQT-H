@@ -2278,5 +2278,12 @@ namespace QIQTH.AxiomAudit
 -- relative entropy: its t-derivative at 0 = i·cgpEntropy(f) (= ∫(u_t−1)dμ^R_f, d/dt|0 u_t = i·entropyDensity).
 -- Proof: push relModFlowH to pre-Fock (map_coe) ⟹ coherent vector weylCoeff(−f,0)·weylCoeff(f,−Δ^{it}f)·
 -- e(f−Δ^{it}f), then fockInner + Weyl-coeff collapse. The bounded bridge to cgpEntropy (deriv step = remaining).
+#print axioms QIQTH.Fock.hasDerivAt_relModFlow_vacuum
+-- expected: standard only — ★★★ THE ENTROPY REDUCTION (loop CLOSED): d/dt|₀ ⟨Ω,Δ_{W(f)Ω|Ω}^{it}Ω⟩ =
+-- −i·cgpEntropy(f), so S(ω_{W(f)Ω}‖ω_Ω) = i·d/dt|₀⟨Ω,Δ_rel^{it}Ω⟩ = cgpEntropy(f) — the Fock-level coherent-
+-- state Araki relative entropy IS the one-particle CGP entropy (proved ≥0). Chain rule on the characteristic
+-- function (relModFlow_vacuum_char) + hasDerivAt_inner_modUnitary (differentiation under the spectral integral,
+-- via Mathlib hasDerivAt_integral_of_dominated_loc_of_deriv_le with constant dominating bound log((2−a)/a)) +
+-- ∫entropyDensity dμ = −cgpEntropy. Regular regime σ(R)⊆[a,2−a]. Full coherent-state Araki entropy DONE.
 
 end QIQTH.AxiomAudit
