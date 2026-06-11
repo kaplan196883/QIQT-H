@@ -39,6 +39,9 @@ noncomputable instance : NormedAddCommGroup (HSMat n) :=
 noncomputable instance : InnerProductSpace ℂ (HSMat n) :=
   Matrix.toMatrixInnerProductSpace (1 : Matrix n n ℂ) Matrix.PosDef.one.posSemidef
 
+instance : FiniteDimensional ℂ (HSMat n) :=
+  inferInstanceAs (FiniteDimensional ℂ (Matrix n n ℂ))
+
 /-- The identification of `HSMat n` with `Matrix n n ℂ` (definitional). -/
 def toMat (X : HSMat n) : Matrix n n ℂ := X
 
@@ -53,5 +56,63 @@ theorem hsInner_eq (x y : HSMat n) :
     (inner ℂ x y : ℂ) = (toMat y * (toMat x)ᴴ).trace := by
   show (toMat y * (1 : Matrix n n ℂ) * (toMat x)ᴴ).trace = _
   rw [Matrix.mul_one]
+
+/-- The linear identification `HSMat n ≃ₗ[ℂ] Matrix n n ℂ` (definitional; the modules coincide). -/
+def hsEquiv : HSMat n ≃ₗ[ℂ] Matrix n n ℂ where
+  toFun := toMat
+  invFun := ofMat
+  left_inv := ofMat_toMat
+  right_inv := toMat_ofMat
+  map_add' _ _ := rfl
+  map_smul' _ _ := rfl
+
+/-! ### The relative-modular building blocks: left/right multiplication on HS -/
+
+/-- Left multiplication `X ↦ A · X` as a continuous ℂ-linear map on `HSMat`. -/
+noncomputable def Lmul (A : Matrix n n ℂ) : HSMat n →L[ℂ] HSMat n :=
+  (hsEquiv.symm.toLinearMap ∘ₗ LinearMap.mulLeft ℂ A ∘ₗ hsEquiv.toLinearMap).toContinuousLinearMap
+
+/-- Right multiplication `X ↦ X · A` as a continuous ℂ-linear map on `HSMat`. -/
+noncomputable def Rmul (A : Matrix n n ℂ) : HSMat n →L[ℂ] HSMat n :=
+  (hsEquiv.symm.toLinearMap ∘ₗ LinearMap.mulRight ℂ A ∘ₗ hsEquiv.toLinearMap).toContinuousLinearMap
+
+@[simp] theorem Lmul_apply (A : Matrix n n ℂ) (X : HSMat n) :
+    toMat (Lmul A X) = A * toMat X := by
+  simp only [Lmul, LinearMap.coe_toContinuousLinearMap, LinearMap.comp_apply,
+    LinearEquiv.coe_coe, LinearMap.mulLeft_apply]
+  rfl
+
+@[simp] theorem Rmul_apply (A : Matrix n n ℂ) (X : HSMat n) :
+    toMat (Rmul A X) = toMat X * A := by
+  simp only [Rmul, LinearMap.coe_toContinuousLinearMap, LinearMap.comp_apply,
+    LinearEquiv.coe_coe, LinearMap.mulRight_apply]
+  rfl
+
+theorem toMat_injective : Function.Injective (toMat : HSMat n → Matrix n n ℂ) := fun _ _ h => h
+
+/-- `L` is multiplicative: `Lmul (A·B) = Lmul A · Lmul B`. -/
+theorem Lmul_mul (A B : Matrix n n ℂ) : Lmul (A * B) = Lmul A * Lmul B := by
+  ext X; apply toMat_injective
+  simp [ContinuousLinearMap.mul_apply, Matrix.mul_assoc]
+
+/-- `R` is anti-multiplicative: `Rmul (A·B) = Rmul B · Rmul A`. -/
+theorem Rmul_mul (A B : Matrix n n ℂ) : Rmul (A * B) = Rmul B * Rmul A := by
+  ext X; apply toMat_injective
+  simp [ContinuousLinearMap.mul_apply, Matrix.mul_assoc]
+
+/-- Left and right multiplications commute. -/
+theorem Lmul_commute_Rmul (A B : Matrix n n ℂ) : Commute (Lmul A) (Rmul B) := by
+  ext X; apply toMat_injective
+  simp [ContinuousLinearMap.mul_apply, Matrix.mul_assoc]
+
+/-- `Lmul` is unital. -/
+@[simp] theorem Lmul_one : (Lmul (1 : Matrix n n ℂ) : HSMat n →L[ℂ] HSMat n) = 1 := by
+  ext X; apply toMat_injective
+  simp [ContinuousLinearMap.one_apply]
+
+/-- `Rmul` is unital. -/
+@[simp] theorem Rmul_one : (Rmul (1 : Matrix n n ℂ) : HSMat n →L[ℂ] HSMat n) = 1 := by
+  ext X; apply toMat_injective
+  simp [ContinuousLinearMap.one_apply]
 
 end QIQTH.Araki
