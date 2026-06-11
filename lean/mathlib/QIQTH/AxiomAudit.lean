@@ -1466,6 +1466,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — CONDITIONAL U_t𝒦⊆𝒦 given the two commutators. The remaining obligations:
 -- [U_t,R]=0 (reachable, R=borelFC(id) via polarizing inner_cfcHom_polarization) and the COVARIANCE
 -- [U_t,D]=0 (D antilinear conjugates spec(R) by r↦2−r; the genuine frontier, no Mathlib infra).
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_commute_specProj
+-- expected: standard only — ★ U_t commutes with EVERY spectral projection E(s) of R (both are
+-- borelFC values; multiplicative + u_t·𝟙_s=𝟙_s·u_t). So Δ^{it} ∈ vN(R) — the operator-level statement
+-- that the modular flow is a function of R (unconditional; [U_t,R]=0 then needs only R=∫λ dE).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
