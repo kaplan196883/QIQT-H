@@ -2177,5 +2177,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — FINITE-ENTROPY REGIME: HasFiniteEntropy S ξ := Integrable g μ^R_ξ (g diverges
 -- at the endpoints {0,2}, so finiteness ⟺ μ^R_ξ not concentrating there). Regular regime σ(R)⊆[a,2−a] ⟹
 -- finite (bounded g on finite measure, Integrable.mono'); vacuum finite; scale-invariant in the wavefunction.
+#print axioms QIQTH.entropyDensity_reflect
+#print axioms QIQTH.cgpDensity_nonneg
+-- expected: standard only — CGP SUM-RULE scalar skeleton: g(2−r)=−g(r) (reflection symmetry, spectral
+-- shadow of JΔJ=Δ⁻¹) + the manifestly-nonnegative CGP density 1_{(0,1)}((2−r)/r−1)g. The full sum rule
+-- cgpEntropy=∫cgpDensity≥0 (for ξ∈𝒦) is GATED on the spectral balance (JRJ=2−R + Tomita fixedness ξ=JΔ^½ξ).
 
 end QIQTH.AxiomAudit

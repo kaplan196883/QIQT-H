@@ -202,4 +202,42 @@ theorem hasFiniteEntropy_smul (S : StandardSubspace H) {c : ℂ} (hc : c ≠ 0) 
   exact integrable_smul_measure
     (ENNReal.ofReal_pos.mpr (pow_pos (norm_pos_iff.mpr hc) 2)).ne' ENNReal.ofReal_ne_top
 
+/-! ### Toward the Casini–Grillo–Pontello sum rule (scalar skeleton)
+
+  For a one-particle vector localized in the standard subspace (`ξ ∈ 𝒦`, i.e. `P ξ = ξ`), CGP give the
+  manifestly-nonnegative form of the relative entropy
+        `S(ξ) = ∫_{(0,1)} ((2−r)/r − 1)·log((2−r)/r) dμ^R_ξ ≥ 0`.
+  The scalar ingredients — the reflection symmetry of the density and the pointwise nonnegativity of the
+  CGP integrand — are proved here.
+
+  GATE (the genuine Tomita content, NOT yet in the stack): the measure-theoretic step is the **spectral
+  balance** `∫ F dμ^R_ξ = ∫ ((2−r)/r)·F(2−r) dμ^R_ξ` for `ξ ∈ 𝒦`, which follows from `J R J = 2 − R`
+  (modular reflection of `R`) and the Tomita fixedness `ξ = J Δ^{1/2} ξ`.  Only `J U_t = U_t J`, `J T = D`,
+  `J² = 1` are currently available, so `J R J = 2 − R` and the fixedness are the next standard-subspace
+  theorems to build.  Note (GPT-5.5 counterexample): all-vector positivity is FALSE — a point mass at
+  `r < 1` gives `cgpEntropy = −log((2−r)/r) < 0`; localization `ξ ∈ 𝒦` is essential. -/
+
+/-- **Reflection symmetry of the entropy density:** `g(2−r) = −g(r)`.  This oddness under the modular
+    reflection `r ↦ 2−r` (the spectral shadow of `J Δ J = Δ⁻¹`) is the symmetry driving the CGP sum rule. -/
+theorem entropyDensity_reflect (r : ℝ) : entropyDensity (2 - r) = -entropyDensity r := by
+  unfold entropyDensity
+  rw [show (2 : ℝ) - (2 - r) = r by ring, ← Real.log_inv, inv_div]
+
+/-- **The CGP positive density** `φ(r) = 1_{(0,1)}(r)·((2−r)/r − 1)·log((2−r)/r)` — the manifestly
+    nonnegative integrand of the sum rule (on `(0,1)`: `(2−r)/r > 1` and `g(r) > 0`). -/
+noncomputable def cgpDensity (r : ℝ) : ℝ :=
+  Set.indicator (Set.Ioo 0 1) (fun r => ((2 - r) / r - 1) * entropyDensity r) r
+
+/-- The CGP density is pointwise nonnegative. -/
+theorem cgpDensity_nonneg (r : ℝ) : 0 ≤ cgpDensity r := by
+  unfold cgpDensity
+  rw [Set.indicator_apply]
+  split_ifs with h
+  · obtain ⟨h0, h1⟩ := h
+    have h2r : 0 < 2 - r := by linarith
+    have hgt : 1 < (2 - r) / r := by rw [lt_div_iff₀ h0]; linarith
+    have hg : 0 ≤ entropyDensity r := by unfold entropyDensity; exact Real.log_nonneg hgt.le
+    exact mul_nonneg (by linarith) hg
+  · exact le_refl 0
+
 end QIQTH
