@@ -31,7 +31,7 @@ import Mathlib.Algebra.Star.UnitaryStarAlgAut
 namespace QIQTH.Araki
 
 open QIQTH.QuantumEntropy Unitary
-open scoped Matrix ComplexOrder Matrix.Norms.L2Operator
+open scoped Matrix ComplexOrder Matrix.Norms.L2Operator MatrixOrder
 
 variable {n : Type} [Fintype n] [DecidableEq n]
 
@@ -306,5 +306,41 @@ theorem log_relMod {σ ρ : Matrix n n ℂ} (hσ : σ.PosDef) (hρ : ρ.PosDef) 
   have hBsa : IsSelfAdjoint (Lmul (matLog hσ.1) - Rmul (matLog hρ.1)) :=
     (Lmul_isSelfAdjoint (matLog_isHermitian hσ.1)).sub (Rmul_isSelfAdjoint (matLog_isHermitian hρ.1))
   rw [relMod_eq_exp hσ hρ, CFC.log_exp _ hBsa]
+
+/-! ### The Araki relative entropy and the Umegaki convention lock -/
+
+/-- `⟪ξ, L_A ξ⟫_HS = tr(A · ξξᴴ)`. -/
+theorem inner_ofMat_Lmul (s A : Matrix n n ℂ) :
+    (inner ℂ (ofMat s) (Lmul A (ofMat s)) : ℂ) = (A * (s * sᴴ)).trace := by
+  rw [hsInner_eq, Lmul_apply]; simp only [toMat_ofMat]; rw [Matrix.mul_assoc]
+
+/-- `⟪ξ, R_A ξ⟫_HS = tr(ξ A ξᴴ)`. -/
+theorem inner_ofMat_Rmul (s A : Matrix n n ℂ) :
+    (inner ℂ (ofMat s) (Rmul A (ofMat s)) : ℂ) = (s * A * sᴴ).trace := by
+  rw [hsInner_eq, Rmul_apply]; simp only [toMat_ofMat]
+
+/-- **The (finite-dimensional) Araki relative entropy** `S(ρ‖σ) = −⟪ξ_ρ, log Δ_{σ|ρ} ξ_ρ⟩`,
+    with the GNS vector `ξ_ρ = ρ^½` in the Hilbert–Schmidt representation. -/
+noncomputable def arakiEntropy {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDef) : ℝ :=
+  -(inner ℂ (ofMat (CFC.sqrt ρ)) ((CFC.log (relMod σ ρ)) (ofMat (CFC.sqrt ρ))) : ℂ).re
+
+/-- **CONVENTION LOCK — the genuine Araki object reduces to Umegaki:**
+    `S_Araki(ρ‖σ) = D(ρ‖σ) = tr(ρ(log ρ − log σ))`.  This is what certifies that the relative
+    modular operator `Δ = L_σ R_ρ⁻¹` (σ numerator, ρ denominator) carries the correct convention. -/
+theorem arakiEntropy_eq_relEntropy {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDef) :
+    arakiEntropy hρ hσ = relEntropy hρ.1 hσ.1 := by
+  have hρ0 : (0 : Matrix n n ℂ) ≤ ρ := Matrix.nonneg_iff_posSemidef.mpr hρ.posSemidef
+  have hsq : CFC.sqrt ρ * CFC.sqrt ρ = ρ := CFC.sqrt_mul_sqrt_self ρ hρ0
+  have hsH : (CFC.sqrt ρ)ᴴ = CFC.sqrt ρ :=
+    ((Matrix.nonneg_iff_posSemidef.mp (CFC.sqrt_nonneg ρ)).isHermitian).eq
+  have key : -(inner ℂ (ofMat (CFC.sqrt ρ)) ((CFC.log (relMod σ ρ)) (ofMat (CFC.sqrt ρ))) : ℂ)
+      = (ρ * (matLog hρ.1 - matLog hσ.1)).trace := by
+    rw [log_relMod hσ hρ, ContinuousLinearMap.sub_apply, inner_sub_right,
+        inner_ofMat_Lmul, inner_ofMat_Rmul, hsH, hsq, Matrix.mul_sub, Matrix.trace_sub,
+        Matrix.trace_mul_cycle (CFC.sqrt ρ) (matLog hρ.1), hsq,
+        Matrix.trace_mul_comm ρ (matLog hρ.1), Matrix.trace_mul_comm ρ (matLog hσ.1)]
+    ring
+  unfold arakiEntropy relEntropy
+  rw [← Complex.neg_re, key]
 
 end QIQTH.Araki

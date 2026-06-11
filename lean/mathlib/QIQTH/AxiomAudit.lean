@@ -2136,4 +2136,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EntropyBridge.fq_ambiguity_counterexample
 -- expected: standard only — the χ vs S_ren counterexample (already axiom-free).
 
+-- ARAKI RELATIVE ENTROPY via the relative modular operator (genuine object, finite-dim instance).
+#print axioms QIQTH.Araki.exp_Lmul
+#print axioms QIQTH.Araki.exp_Rmul
+-- expected: standard only — exp naturality of L/R: exp(L_A)=L_{exp A}, exp(R_A)=R_{exp A} (R via the
+-- opposite algebra), the engine for the operator log.
+#print axioms QIQTH.Araki.exp_matLog
+-- expected: standard only — exp(matLog A)=A through the EIGENVALUE cfc (matLog_UDU + Matrix.exp_conj/
+-- exp_diagonal), dodging the L2-operator-norm-vs-eigenvalue-CFC instance diamond on Matrix.
+#print axioms QIQTH.Araki.log_relMod
+-- expected: standard only — ★ the operator log identity log Δ_{σ|ρ} = L_{log σ} − R_{log ρ} for the
+-- relative modular operator Δ = L_σ R_ρ⁻¹, via relMod = exp(L_{logσ}−R_{logρ}) + CFC.log_exp.
+#print axioms QIQTH.Araki.arakiEntropy_eq_relEntropy
+-- expected: standard only — ★★ CONVENTION LOCK: the genuine Araki relative entropy
+-- S(ρ‖σ) = −⟪ρ^½, log Δ_{σ|ρ} ρ^½⟫ reduces to the finite Umegaki entropy tr(ρ(log ρ − log σ)).
+-- Certifies the σ-numerator/ρ-denominator convention. (Finite-dim Type I instance; continuum is the frontier.)
+
 end QIQTH.AxiomAudit
