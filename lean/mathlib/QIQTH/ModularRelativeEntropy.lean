@@ -164,4 +164,42 @@ theorem cgpEntropy_eq_neg_re_inner (S : StandardSubspace H) (ξ : H) {a : ℝ} (
           exact entropyDensity_abs_le ha (hspec ω).1 (hspec ω).2) ξ)) := by
   rw [cgpEntropy, rvdSpec_integral_eq_re_inner S ξ entropyDensity_measurable]
 
+/-! ### Finite-entropy regime (endpoint integrability)
+
+  The density `g` diverges at the spectral endpoints (`g → +∞` as `r → 0`, `g → −∞` as `r → 2`), so the
+  coherent state has FINITE relative entropy exactly when `g` is integrable against the spectral measure
+  `μ^R_ξ` — i.e. when `μ^R_ξ` does not concentrate too much mass at the modular endpoints `{0,2}`. -/
+
+/-- **Finite relative entropy:** the modular Hamiltonian density `g` is integrable against the spectral
+    measure `μ^R_ξ`, so the Bochner integral defining `cgpEntropy` is a genuine finite real number. -/
+def HasFiniteEntropy (S : StandardSubspace H) (ξ : H) : Prop :=
+  Integrable (fun ω : spectrum ℝ (rvdRC S) => entropyDensity ω.val) (rvdSpecMeasure S ξ)
+
+/-- **The regular regime has finite entropy:** if the modular spectrum stays away from the endpoints
+    (`σ(R) ⊆ [a, 2−a]`, `0 < a`), the density `g` is bounded there, hence integrable on the finite
+    spectral measure — the relative entropy is a genuine finite quantity. -/
+theorem hasFiniteEntropy_of_mem_Icc (S : StandardSubspace H) (ξ : H) {a : ℝ} (ha : 0 < a)
+    (hspec : ∀ ω : spectrum ℝ (rvdRC S), a ≤ (ω : ℝ) ∧ (ω : ℝ) ≤ 2 - a) :
+    HasFiniteEntropy S ξ := by
+  haveI : IsFiniteMeasure (rvdSpecMeasure S ξ) := by
+    unfold rvdSpecMeasure; infer_instance
+  refine (integrable_const (Real.log ((2 - a) / a))).mono'
+    entropyDensity_measurable.aestronglyMeasurable
+    (Filter.Eventually.of_forall (fun ω => ?_))
+  rw [Real.norm_eq_abs]
+  exact entropyDensity_abs_le ha (hspec ω).1 (hspec ω).2
+
+/-- The vacuum (`ξ = 0`) has finite (zero) relative entropy. -/
+@[simp] theorem hasFiniteEntropy_zero (S : StandardSubspace H) : HasFiniteEntropy S (0 : H) := by
+  rw [HasFiniteEntropy, rvdSpecMeasure_zero]; exact integrable_zero_measure
+
+/-- **Finite entropy is scale-invariant** in the one-particle wavefunction: `S(c·ξ)` is finite iff
+    `S(ξ)` is (for `c ≠ 0`).  Finiteness is a property of the direction, not the amplitude. -/
+theorem hasFiniteEntropy_smul (S : StandardSubspace H) {c : ℂ} (hc : c ≠ 0) (ξ : H) :
+    HasFiniteEntropy S (c • ξ) ↔ HasFiniteEntropy S ξ := by
+  rw [HasFiniteEntropy, HasFiniteEntropy, rvdSpecMeasure, rvdSpecMeasure,
+      (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).scalarMeasure_smul c ξ]
+  exact integrable_smul_measure
+    (ENNReal.ofReal_pos.mpr (pow_pos (norm_pos_iff.mpr hc) 2)).ne' ENNReal.ofReal_ne_top
+
 end QIQTH

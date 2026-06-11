@@ -2172,5 +2172,10 @@ namespace QIQTH.AxiomAudit
 -- {0,2} (0<a≤1), the one-particle modular relative entropy IS the operator expectation
 -- S(ξ) = −⟪ξ, g(R) ξ⟫ of the bounded self-adjoint modular Hamiltonian g(R)=log((2−R)/R). Via the bridge
 -- + entropyDensity_abs_le (|log((2−r)/r)| ≤ log((2−a)/a) on [a,2−a], by log-monotonicity cross-mult).
+#print axioms QIQTH.hasFiniteEntropy_of_mem_Icc
+#print axioms QIQTH.hasFiniteEntropy_smul
+-- expected: standard only — FINITE-ENTROPY REGIME: HasFiniteEntropy S ξ := Integrable g μ^R_ξ (g diverges
+-- at the endpoints {0,2}, so finiteness ⟺ μ^R_ξ not concentrating there). Regular regime σ(R)⊆[a,2−a] ⟹
+-- finite (bounded g on finite measure, Integrable.mono'); vacuum finite; scale-invariant in the wavefunction.
 
 end QIQTH.AxiomAudit
