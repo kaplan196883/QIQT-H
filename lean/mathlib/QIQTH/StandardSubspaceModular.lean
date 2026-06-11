@@ -617,4 +617,13 @@ theorem rvdR_mul_rvdPmQ (S : StandardSubspace H) :
     two_smul, smul_sub, hP, hQ]
   abel
 
+/-- **`D` ANTICOMMUTES with `R − 1`:** `D·(R−1) = −(R−1)·D`.  Because `D·R = (2−R)·D`
+    (`rvdPmQ_mul_rvdR`), so `D·(R−1) = (2−R)·D − D = (1−R)·D = −(R−1)·D`.  This is the engine for the
+    modular **covariance** `[U_t, D] = 0`: `D` antilinear + `D·(R−1)=−(R−1)·D` makes `D` COMMUTE with
+    `i·(R−1)`, and `U_t = u_t(R)` is (a Borel function) of `i·(R−1)` with `conj(u_t(2−r)) = u_t(r)`. -/
+theorem rvdPmQ_anticommute_rvdR_sub_one (S : StandardSubspace H) :
+    rvdPmQ S * (rvdR S - 1) = -((rvdR S - 1) * rvdPmQ S) := by
+  rw [mul_sub, rvdPmQ_mul_rvdR, sub_mul, sub_mul, smul_mul_assoc, mul_one, one_mul, two_smul]
+  abel
+
 end QIQTH.StandardSubspaceModular

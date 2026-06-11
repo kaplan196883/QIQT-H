@@ -1443,6 +1443,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — D·R = (2−R)·D  (pure idempotent algebra).
 #print axioms QIQTH.StandardSubspaceModular.rvdR_mul_rvdPmQ
 -- expected: standard only — R·D = D·(2−R).
+#print axioms QIQTH.StandardSubspaceModular.rvdPmQ_anticommute_rvdR_sub_one
+-- expected: standard only — D·(R−1) = −(R−1)·D (D ANTIcommutes with R−1). Engine for the covariance
+-- [U_t,D]=0: D antilinear + this ⟹ D commutes with i(R−1); U_t=u_t(R) is a fn of i(R−1) with
+-- conj(u_t(2−r))=u_t(r). (Full covariance needs the Borel/vN-SOT lift — U_t discontinuous, not norm-elemental.)
 -- ★★ THE CONTINUUM MODULAR FLOW Δ^{it}=u_t(R) via bounded BOREL FC (continuous cfc cannot reach it):
 #print axioms QIQTH.StandardSubspaceModular.modChar_norm
 -- expected: standard only — ‖u_t(r)‖=1 (the modular character is unimodular).
