@@ -1381,6 +1381,9 @@ namespace QIQTH.AxiomAudit
 -- polar decomposition T = R^{1/2}(2−R)^{1/2}.
 #print axioms QIQTH.StandardSubspaceModular.rvdPmQ_isSelfAdjoint
 -- expected: standard only — P−Q self-adjoint.
+#print axioms QIQTH.StandardSubspaceModular.rvdPmQ_injective
+-- expected: standard only — ★ D=P−Q INJECTIVE (Dξ=0 ⟹ Pξ=Qξ∈𝒦∩i𝒦=⊥ ⟹ Rξ=0 ⟹ ξ=0). Kernel-free D
+-- ⟹ the modular conjugation J (of D=J·T) is a FULL involution J²=1 (J foundation).
 #print axioms QIQTH.StandardSubspaceModular.rvdR_le_two
 -- expected: standard only — 2·1−R positive (R≤2). With rvdR_isPositive: full RvD bound 0≤R≤2, so
 -- both R^{1/2} and (2−R)^{1/2} exist (the polar-decomposition factors T=R^{1/2}(2−R)^{1/2}).

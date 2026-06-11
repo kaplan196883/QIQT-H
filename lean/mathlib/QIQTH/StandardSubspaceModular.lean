@@ -339,6 +339,32 @@ noncomputable def rvdPmQ (S : StandardSubspace H) : H →L[ℝ] H := projK S - p
 theorem rvdPmQ_isSelfAdjoint (S : StandardSubspace H) : IsSelfAdjoint (rvdPmQ S) :=
   (projK_isSelfAdjoint S).sub (projIK_isSelfAdjoint S)
 
+/-- **`D = P − Q` is injective** (kernel-free).  `Dξ = 0 ⟹ Pξ = Qξ ∈ 𝒦 ∩ i𝒦 = {0}`
+    (`IsSeparating`), so `Pξ = Qξ = 0`, whence `Rξ = Pξ + Qξ = 0` and `ξ = 0` (`rvdR_eq_zero`).
+    Injectivity of `D` is what makes the modular conjugation `J` (of `D = J·T`) a full involution
+    `J² = 1` rather than a partial isometry. -/
+theorem rvdPmQ_eq_zero (S : StandardSubspace H) {ξ : H} (h : rvdPmQ S ξ = 0) : ξ = 0 := by
+  have hPQ : projK S ξ = projIK S ξ := by
+    rw [rvdPmQ, ContinuousLinearMap.sub_apply, sub_eq_zero] at h
+    exact h
+  have hmem1 : projK S ξ ∈ S.toClosedSubmodule :=
+    (mem_toSubmodule_iff _ _).mp (Submodule.starProjection_apply_mem _ ξ)
+  have hmem2 : projK S ξ ∈ S.toClosedSubmodule.mulI := by
+    rw [hPQ]
+    exact (mem_toSubmodule_iff _ _).mp (Submodule.starProjection_apply_mem _ ξ)
+  have hP0 : projK S ξ = 0 := by
+    have hb : projK S ξ ∈ (⊥ : ClosedSubmodule ℝ H) := by
+      rw [← S.IsSeparating]; exact ⟨hmem1, hmem2⟩
+    exact ClosedSubmodule.mem_bot.mp hb
+  have hQ0 : projIK S ξ = 0 := hPQ ▸ hP0
+  exact rvdR_eq_zero S (by rw [rvdR_apply, hP0, hQ0, add_zero])
+
+/-- **`D = P − Q` is injective.** -/
+theorem rvdPmQ_injective (S : StandardSubspace H) : Function.Injective (rvdPmQ S) := by
+  intro a b hab
+  have hz : rvdPmQ S (a - b) = 0 := by rw [map_sub, hab, sub_self]
+  exact sub_eq_zero.mp (rvdPmQ_eq_zero S hz)
+
 /-- **RvD upper bound `R ≤ 2`** (operator form): `2·1 − R` is positive.  With `rvdR_isPositive`
     (`0 ≤ R`) this is the complete RvD bound `0 ≤ R ≤ 2` at the operator level — `2 − R` is then also
     positive, so BOTH `R^{1/2}` and `(2 − R)^{1/2}` exist by the continuous functional calculus, the
