@@ -1031,6 +1031,55 @@ theorem cfcΩ_intertwine (f : C(Set.Icc (-covM S) (2 + covM S), ℂ)) :
           ← mul_assoc, ihx, mul_assoc, ihy, ← mul_assoc]
   exact congrFun (Continuous.ext_on hdense hL hR hEq) f
 
+/-! ### The J-conjugation of the continuous functional calculus, and the spectral reflection
+
+  Toward the CGP spectral balance: the modular conjugation `J` conjugates a continuous function of `R`
+  by the reflection `r ↦ 2−r`, `J·f(R)·J = (twΩ f)(R)`.  This extends `J R J = 2 − R` to the whole
+  continuous FC, via the `D`-intertwiner `cfcΩ_intertwine` (`D·f(R) = (twΩ f)(R)·D`) transported through
+  `J(Tξ)=Dξ` on the dense range of `T`.  Its inner-product form is the spectral reflection
+  `⟪Jη, f(R) Jη⟫_ℝ = ⟪η, (twΩ f)(R) η⟫_ℝ` — the engine of the measure reflection `μ_{Jη} = (2−·)_* μ_η`. -/
+
+/-- A continuous function of `R` commutes with `R` (the `cfcΩ` image is commutative). -/
+theorem cfcΩ_commute_rvdRC (f : C(Set.Icc (-covM S) (2 + covM S), ℂ)) :
+    Commute (cfcΩ S f) (rvdRC S) := by
+  rw [← cfcΩ_coordΩ S, Commute, SemiconjBy, ← cfcΩ_mul, ← cfcΩ_mul, mul_comm]
+
+/-- A continuous function of `R` commutes with `T`. -/
+theorem cfcΩ_commute_rvdT (f : C(Set.Icc (-covM S) (2 + covM S), ℂ)) :
+    Commute (cfcΩ S f) (rvdT S) := by
+  have hcR : Commute (cfcΩ S f) (rvdRC S) := cfcΩ_commute_rvdRC S f
+  have hc2R : Commute (cfcΩ S f) (rvdTwoSubRC S) := by
+    rw [rvdTwoSubRC]
+    exact ((Commute.one_right (cfcΩ S f)).smul_right (2 : ℂ)).sub_right hcR
+  have hSR : Commute (cfcΩ S f) (rvdSqrtR S) := (hcR.symm.cfcₙ_nnreal NNReal.sqrt).symm
+  have hST : Commute (cfcΩ S f) (rvdSqrtTwoSubR S) := (hc2R.symm.cfcₙ_nnreal NNReal.sqrt).symm
+  rw [rvdT]; exact hSR.mul_right hST
+
+/-- **★ Continuous operator `J`-conjugation:** `J·f(R) = (twΩ f)(R)·J` (`twΩ f = conj(f∘(2−·))`).
+    The extension of `J R J = 2 − R` to the whole continuous functional calculus. -/
+theorem modConj_cfcΩ (f : C(Set.Icc (-covM S) (2 + covM S), ℂ)) (η : H) :
+    modConj S (cfcΩ S f η) = cfcΩ S (twΩ S f) (modConj S η) := by
+  refine congrFun (Continuous.ext_on (rvdT_restrictScalars_denseRange S)
+    ((modConj S).continuous.comp (cfcΩ S f).continuous)
+    ((cfcΩ S (twΩ S f)).continuous.comp (modConj S).continuous) ?_) η
+  rintro v ⟨x, rfl⟩
+  show modConj S (cfcΩ S f (rvdT S x)) = cfcΩ S (twΩ S f) (modConj S (rvdT S x))
+  have hcomm : cfcΩ S f (rvdT S x) = rvdT S (cfcΩ S f x) :=
+    DFunLike.congr_fun (cfcΩ_commute_rvdT S f).eq x
+  rw [hcomm, modConj_rvdT, modConj_rvdT]
+  simpa using DFunLike.congr_fun (cfcΩ_intertwine S f) x
+
+/-- **★ Spectral reflection (inner-product form):** `⟪Jη, f(R) Jη⟫_ℝ = ⟪η, (twΩ f)(R) η⟫_ℝ`.  This is
+    the measure reflection `∫ f dμ_{Jη} = ∫ (twΩ f) dμ_η` at the level of the real bilinear form, from the
+    `J`-conjugation of `f(R)` and the `J`-invariance of the real inner product. -/
+theorem reInner_modConj_cfcΩ (f : C(Set.Icc (-covM S) (2 + covM S), ℂ)) (η : H) :
+    inner ℝ (modConj S η) (cfcΩ S f (modConj S η)) = inner ℝ η (cfcΩ S (twΩ S f) η) := by
+  have key : modConj S (cfcΩ S f (modConj S η)) = cfcΩ S (twΩ S f) η := by
+    rw [modConj_cfcΩ, modConj_sq]
+  have key2 : cfcΩ S f (modConj S η) = modConj S (cfcΩ S (twΩ S f) η) := by
+    rw [← key, modConj_sq]
+  rw [key2, modConj_inner_map]
+
 /-! ### The covariance `[U_t, D] = 0` — apply the intertwiner to the damped modular function -/
 
 /-- The **damped modular function** `r ↦ u_t(r)·r·(2−r)` is CONTINUOUS on `ℝ`: `u_t` is bounded and

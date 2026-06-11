@@ -2192,5 +2192,11 @@ namespace QIQTH.AxiomAudit
 -- The bounded encoding of the Tomita fixedness ξ=JΔ^{1/2}ξ (𝒦 = +1 eigenspace of S=JΔ^{1/2}), avoiding the
 -- unbounded Δ^{1/2}: from R=P+Q, D=P−Q, Pξ=ξ ⟹ Qξ=Rξ−ξ ⟹ Dξ=2ξ−Rξ. CGP prerequisite 2 of 2 — BOTH NOW
 -- DONE; the spectral balance ∫(2−r)²F dμ_ξ=∫r(2−r)F(2−r)dμ_ξ (then ÷r²) is now fully bounded.
+#print axioms QIQTH.StandardSubspaceModular.modConj_cfcΩ
+#print axioms QIQTH.StandardSubspaceModular.reInner_modConj_cfcΩ
+-- expected: standard only — ★ CONTINUOUS J-CONJUGATION J·f(R)=(twΩ f)(R)·J (extends JRJ=2−R to the whole
+-- continuous FC, via cfcΩ_intertwine D·f(R)=(twΩ f)(R)·D + J(Tξ)=Dξ on dense range T) and its inner-product
+-- form ⟪Jη,f(R)Jη⟫_ℝ=⟪η,(twΩ f)(R)η⟫_ℝ (the SPECTRAL REFLECTION, = the measure reflection μ_{Jη}=(2−·)_*μ_η
+-- at the real-bilinear level). The operator+inner-product engine of the CGP measure reflection.
 
 end QIQTH.AxiomAudit
