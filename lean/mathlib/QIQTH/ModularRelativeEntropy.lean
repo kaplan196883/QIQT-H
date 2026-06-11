@@ -72,4 +72,12 @@ noncomputable def cgpEntropy (S : StandardSubspace H) (ξ : H) : ℝ :=
 @[simp] theorem cgpEntropy_zero (S : StandardSubspace H) : cgpEntropy S (0 : H) = 0 := by
   simp [cgpEntropy]
 
+/-- **Degree-2 homogeneity** `S(c·ξ) = ‖c‖²·S(ξ)` — the one-particle scaling of the spectral measure
+    `μ^R_{c·ξ} = ‖c‖²·μ^R_ξ`, the hallmark of the coherent/one-particle structure. -/
+theorem cgpEntropy_smul (S : StandardSubspace H) (c : ℂ) (ξ : H) :
+    cgpEntropy S (c • ξ) = ‖c‖ ^ 2 * cgpEntropy S ξ := by
+  rw [cgpEntropy, cgpEntropy, rvdSpecMeasure, rvdSpecMeasure,
+      (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).scalarMeasure_smul c ξ,
+      integral_smul_measure, ENNReal.toReal_ofReal (sq_nonneg _), smul_eq_mul, mul_neg]
+
 end QIQTH
