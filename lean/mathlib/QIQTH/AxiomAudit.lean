@@ -1507,6 +1507,18 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★★ D·T = T·D. The antilinear modular conjugation D commutes with the
 -- positive modulus T=√(R(2−R)). Applied to A=T² (D·A=A·D trivial) ⟹ D commutes with √A=T. This is
 -- THE keystone: J=D·T⁻¹ self-adjoint ⟹ J²=1; same machinery gives the covariance [U_t,D]=0.
+-- ★ THE MODULAR CONJUGATION J — constructed as a bounded ℝ-linear isometry (J²=1 perf-blocked, see file):
+#print axioms QIQTH.StandardSubspaceModular.rvdT_restrictScalars_denseRange
+-- expected: standard only — range T dense ((range T)ᗮ=ker T=⊥, T inj self-adj).
+#print axioms QIQTH.StandardSubspaceModular.modConj
+-- expected: standard only — J = LinearMap.extendOfNorm of Tξ↦Dξ (the modular conjugation).
+#print axioms QIQTH.StandardSubspaceModular.modConj_rvdT
+-- expected: standard only — J(Tξ) = Dξ (D = J·T, the polar decomposition).
+#print axioms QIQTH.StandardSubspaceModular.modConj_norm
+-- expected: standard only — ‖Jη‖=‖η‖ (J isometric, by density from ‖Tξ‖=‖Dξ‖).
+#print axioms QIQTH.StandardSubspaceModular.modConj_inner_map
+-- expected: standard only — ⟪Jη,Jζ⟫=⟪η,ζ⟫ (J inner-preserving). J²=1 reduces to J self-adjoint, blocked
+-- ONLY by a Mathlib perf wall (scoped ℝ-inner adjoint isDefEq timeout in the density argument).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

@@ -566,4 +566,66 @@ theorem rvdPmQ_commute_rvdT_apply (S : StandardSubspace H) (ξ : H) :
   have h := DFunLike.congr_fun (rvdPmQ_commute_rvdT S) ξ
   simpa [ContinuousLinearMap.mul_apply] using h
 
+/-! ### ★ The modular conjugation `J` and `J² = 1`
+
+`D = J·T` (polar decomposition).  `J : T ξ ↦ D ξ` is a well-defined ℝ-linear isometry on the dense
+`range T` (`‖Tξ‖=‖Dξ‖`, `T` injective ⟹ `range T` dense), extending to all of `H` via
+`LinearMap.extendOfNorm`.  `J² = 1` from `J` self-adjoint (`D·T=T·D`) + isometric. -/
+
+/-- `range T` is dense (`T` injective self-adjoint ⟹ `(range T)ᗮ = ker T = ⊥`). -/
+theorem rvdT_restrictScalars_denseRange (S : StandardSubspace H) :
+    DenseRange ((rvdT S).restrictScalars ℝ) := by
+  have hadj : ContinuousLinearMap.adjoint ((rvdT S).restrictScalars ℝ)
+      = (rvdT S).restrictScalars ℝ := by
+    rw [← ContinuousLinearMap.star_eq_adjoint, ← restrictScalars_star, (rvdT_isSelfAdjoint S).star_eq]
+  have hbot : (LinearMap.range ((rvdT S).restrictScalars ℝ).toLinearMap)ᗮ = ⊥ := by
+    rw [ContinuousLinearMap.orthogonal_range, hadj, LinearMap.ker_eq_bot]
+    intro a b hab; exact rvdT_injective S hab
+  have hdense : Dense (↑(LinearMap.range ((rvdT S).restrictScalars ℝ).toLinearMap) : Set H) := by
+    rw [Submodule.dense_iff_topologicalClosure_eq_top,
+        ← Submodule.orthogonal_orthogonal_eq_closure, hbot, Submodule.bot_orthogonal_eq_top]
+  rw [DenseRange, ← ContinuousLinearMap.coe_coe, ← LinearMap.coe_range]
+  exact hdense
+
+/-- `D` and `T` are self-adjoint w.r.t. the real inner product. -/
+private theorem real_inner_selfAdjoint (A : H →L[ℝ] H) (hA : IsSelfAdjoint A) (x y : H) :
+    inner ℝ (A x) y = inner ℝ x (A y) := by
+  have hadj : ContinuousLinearMap.adjoint A = A := by
+    rw [← ContinuousLinearMap.star_eq_adjoint, hA.star_eq]
+  conv_lhs => rw [← hadj]
+  exact ContinuousLinearMap.adjoint_inner_left A y x
+
+/-- **The modular conjugation `J`** — the ℝ-linear extension of `T ξ ↦ D ξ`. -/
+@[irreducible] noncomputable def modConj (S : StandardSubspace H) : H →L[ℝ] H :=
+  LinearMap.extendOfNorm (rvdPmQ S).toLinearMap ((rvdT S).restrictScalars ℝ).toLinearMap
+
+theorem modConj_rvdT (S : StandardSubspace H) (ξ : H) :
+    modConj S (rvdT S ξ) = rvdPmQ S ξ := by
+  rw [modConj]
+  exact LinearMap.extendOfNorm_eq (rvdT_restrictScalars_denseRange S)
+    ⟨1, fun x => by simp [rvdT_norm_eq]⟩ ξ
+
+/-- `J` is an isometry (`‖J η‖ = ‖η‖`), by density from `‖J(Tξ)‖ = ‖Dξ‖ = ‖Tξ‖`. -/
+theorem modConj_norm (S : StandardSubspace H) (η : H) : ‖modConj S η‖ = ‖η‖ := by
+  refine congrFun (Continuous.ext_on (rvdT_restrictScalars_denseRange S)
+    (modConj S).continuous.norm continuous_norm ?_) η
+  rintro v ⟨ξ, rfl⟩
+  show ‖modConj S (rvdT S ξ)‖ = ‖rvdT S ξ‖
+  rw [modConj_rvdT]
+  exact (rvdT_norm_eq S ξ).symm
+
+/-- **`J` preserves the real inner product** (it is an isometry): `⟪J η, J ζ⟫ = ⟪η, ζ⟫`. -/
+theorem modConj_inner_map (S : StandardSubspace H) (η ζ : H) :
+    inner ℝ (modConj S η) (modConj S ζ) = inner ℝ η ζ :=
+  (⟨(modConj S).toLinearMap, modConj_norm S⟩ : H →ₗᵢ[ℝ] H).inner_map_map η ζ
+
+/- The modular conjugation `J` is now a bounded ℝ-linear ISOMETRY with `J(Tξ) = Dξ` (`modConj`,
+   `modConj_rvdT`, `modConj_norm`, `modConj_inner_map`).  The remaining structural fact `J² = 1`
+   reduces to `J` self-adjoint (`⟪Jη,ζ⟫=⟪η,Jζ⟫`, which holds on the dense `range T` from `D·T=T·D` +
+   `D,T` self-adjoint) extended by density.  That density proof is blocked only by a Mathlib
+   PERFORMANCE wall — the scoped real inner product's `adjoint` instance is prohibitively expensive
+   to resolve inside the two-variable density argument (deterministic `isDefEq` timeout even at 10⁶
+   heartbeats).  It is not a mathematical gap: the on-`range T` identity
+   `⟪J(Ta),Tb⟫ = ⟪Da,Tb⟫ = ⟪a,D(Tb)⟫ = ⟪a,T(Db)⟫ = ⟪Ta,Db⟫ = ⟪Ta,J(Tb)⟫` is elementary. -/
+
 end QIQTH.StandardSubspaceModular
