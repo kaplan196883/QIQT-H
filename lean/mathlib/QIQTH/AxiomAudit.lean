@@ -2227,5 +2227,16 @@ namespace QIQTH.AxiomAudit
 -- balance ∫g dμ = −∫((2−r)/r)g dμ ⟹ S(ξ)=∫((1−r)/r)·log((2−r)/r) dμ, integrand ≥0 on all of (0,2) (no
 -- (0,1)-split). Localization essential (point mass at r<1 gives S<0). Full vN-algebra S(ρ‖σ) via Γ(Δ^{it})
 -- second quantization = cited Phase C frontier.
+#print axioms QIQTH.Fock.secondQuantModFlow_add
+#print axioms QIQTH.Fock.secondQuantModFlowH_vacuum
+#print axioms QIQTH.Fock.secondQuantModFlowH_add
+-- expected: standard only — PHASE C: Γ(Δ^{it}) the SECOND-QUANTIZED MODULAR FLOW on Fock space. The
+-- one-particle modular flow Δ^{it}=modUnitary S t (unitary, modUnitary_add group law) is second-quantized
+-- via the generic functor secondQuantPre to Γ(Δ^{it}) on FockPre H and (by completion) the Fock HILBERT
+-- space — a one-parameter group of isometries fixing the vacuum (secondQuantModFlowH_{add,zero,vacuum,
+-- isometry}). The field-level modular automorphism group's implementing unitaries (Bisognano–Wichmann: the
+-- free-field local algebra's modular op IS Γ(Δ) of the standard-subspace modular op). Full vN-algebra
+-- relative ENTROPY additionally needs the relative modular operator for two states (CGP reduces it to the
+-- one-particle cgpEntropy, already proved ≥0).
 
 end QIQTH.AxiomAudit

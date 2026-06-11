@@ -1,0 +1,133 @@
+/-
+  Phase C — second quantization of the modular flow:  Γ(Δ^{it}) on the Fock space.
+
+  The one-particle continuum modular flow `Δ^{it} = U_t = u_t(R)` (`StandardSubspaceModularFlow`)
+  is a strongly-continuous one-parameter UNITARY group on the one-particle space `H`.  Its second
+  quantization `Γ(Δ^{it})` (built on the existing generic functor `secondQuantPre`, Parthasarathy §19)
+  is the modular flow at the FIELD / Fock level — the implementing unitaries of the modular automorphism
+  group `σ_t(·) = Γ(Δ^{it})·Γ(Δ^{it})⋆` of the free-field von Neumann algebra (for the second-quantized
+  free field, the local algebra's modular operator IS `Γ(Δ)` of the standard-subspace modular operator,
+  Bisognano–Wichmann / the standard-subspace structure).
+
+  Results (axiom-free):
+    * `modUnitaryₗᵢ` — `Δ^{it}` repackaged as a one-particle linear isometry (from `modUnitary_unitary`);
+    * `secondQuantModFlow` — `Γ(Δ^{it})` on the pre-Fock space, with `_expVec` (`Γ(Δ^{it}) e(f)=e(Δ^{it}f)`),
+      `_vacuum` (`Γ(Δ^{it}) Ω = Ω`), `_zero` (`Γ(Δ^{i·0}) = id`), and the GROUP LAW `_add`
+      (`Γ(Δ^{is})∘Γ(Δ^{it}) = Γ(Δ^{i(s+t)})`, from `modUnitary_add` + functoriality of `Γ`);
+    * `fockInner_secondQuantModFlow` — `Γ(Δ^{it})` preserves the Fock inner product (it is isometric);
+    * `secondQuantModFlowH` — `Γ(Δ^{it})` extended to the Fock HILBERT space, a genuine one-parameter
+      group of isometries (`_isometry`, `_vacuum`, `_zero`, `_add`) — the continuum field-level modular flow.
+
+  HONEST SCOPE: this builds the second-quantized modular FLOW (the field-level modular automorphism
+  group's implementing unitaries) — the heart of Tomita–Takesaki at the field level, axiom-free.  The full
+  von-Neumann-algebra relative ENTROPY `S(ρ‖σ)` additionally needs the RELATIVE modular operator of two
+  states; for the free field, the Casini–Grillo–Pontello result reduces that to the one-particle entropy
+  `cgpEntropy` already proved nonnegative in `ModularRelativeEntropy`.
+-/
+
+import QIQTH.Fock.SecondQuant
+import QIQTH.StandardSubspaceModularFlow
+
+namespace QIQTH.Fock
+
+open QIQTH.StandardSubspaceModular
+
+variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
+
+/-- **`Δ^{it}` as a one-particle linear isometry**, from unitarity of the modular flow
+    (`⟪Δ^{it} x, Δ^{it} y⟫ = ⟪x, (Δ^{it})⋆ Δ^{it} y⟫ = ⟪x, y⟫`). -/
+noncomputable def modUnitaryₗᵢ (S : StandardSubspace H) (t : ℝ) : H →ₗᵢ[ℂ] H :=
+  LinearMap.isometryOfInner (modUnitary S t).toLinearMap (fun x y => by
+    have hu : ContinuousLinearMap.adjoint (modUnitary S t) * modUnitary S t = 1 := by
+      rw [← ContinuousLinearMap.star_eq_adjoint]
+      exact (Unitary.mem_iff.mp (modUnitary_unitary S t)).1
+    show inner ℂ (modUnitary S t x) (modUnitary S t y) = inner ℂ x y
+    rw [← ContinuousLinearMap.adjoint_inner_right (modUnitary S t) x (modUnitary S t y),
+        ← ContinuousLinearMap.mul_apply, hu, ContinuousLinearMap.one_apply])
+
+@[simp] theorem modUnitaryₗᵢ_apply (S : StandardSubspace H) (t : ℝ) (x : H) :
+    modUnitaryₗᵢ S t x = modUnitary S t x := rfl
+
+/-- **Γ(Δ^{it})** — the second quantization of the one-particle modular flow, on the pre-Fock space:
+    `Γ(Δ^{it}) e(f) = e(Δ^{it} f)`. -/
+noncomputable def secondQuantModFlow (S : StandardSubspace H) (t : ℝ) :
+    FockPre H →ₗ[ℂ] FockPre H :=
+  secondQuantPre (modUnitaryₗᵢ S t)
+
+@[simp] theorem secondQuantModFlow_expVec (S : StandardSubspace H) (t : ℝ) (f : H) :
+    secondQuantModFlow S t (FockPre.expVec f) = FockPre.expVec (modUnitary S t f) :=
+  secondQuantPre_expVec _ f
+
+/-- **Vacuum invariance** `Γ(Δ^{it}) Ω = Ω` (the modular flow fixes the vacuum). -/
+@[simp] theorem secondQuantModFlow_vacuum (S : StandardSubspace H) (t : ℝ) :
+    secondQuantModFlow S t (FockPre.expVec (0 : H)) = FockPre.expVec (0 : H) := by
+  rw [secondQuantModFlow_expVec, map_zero]
+
+/-- **`Γ(Δ^{i·0}) = id`.** -/
+theorem secondQuantModFlow_zero (S : StandardSubspace H) (φ : FockPre H) :
+    secondQuantModFlow S 0 φ = φ := by
+  rw [secondQuantModFlow]
+  show Finsupp.mapDomain (⇑(modUnitaryₗᵢ S 0)) φ = φ
+  rw [show (⇑(modUnitaryₗᵢ S 0) : H → H) = id from
+    funext fun x => by show modUnitary S 0 x = x; rw [modUnitary_zero]; rfl]
+  exact Finsupp.mapDomain_id
+
+/-- **The one-parameter group law** `Γ(Δ^{is}) ∘ Γ(Δ^{it}) = Γ(Δ^{i(s+t)})` — from the group law of the
+    one-particle modular flow (`modUnitary_add`) and the functoriality of second quantization. -/
+theorem secondQuantModFlow_add (S : StandardSubspace H) (s t : ℝ) (φ : FockPre H) :
+    secondQuantModFlow S s (secondQuantModFlow S t φ) = secondQuantModFlow S (s + t) φ := by
+  have hcomp : (modUnitaryₗᵢ S s).comp (modUnitaryₗᵢ S t) = modUnitaryₗᵢ S (s + t) := by
+    refine LinearIsometry.ext (fun x => ?_)
+    show modUnitary S s (modUnitary S t x) = modUnitary S (s + t) x
+    rw [modUnitary_add]; rfl
+  rw [secondQuantModFlow, secondQuantModFlow, secondQuantModFlow, secondQuantPre_comp, hcomp]
+
+/-- **`Γ(Δ^{it})` is isometric** on the pre-Fock space — it preserves the coherent-state inner product. -/
+theorem fockInner_secondQuantModFlow (S : StandardSubspace H) (t : ℝ) (φ ψ : FockPre H) :
+    fockInner (secondQuantModFlow S t φ : H →₀ ℂ) (secondQuantModFlow S t ψ : H →₀ ℂ)
+      = fockInner (φ : H →₀ ℂ) (ψ : H →₀ ℂ) :=
+  fockInner_secondQuant (modUnitaryₗᵢ S t) φ ψ
+
+/-- `Γ(Δ^{it})` as a linear isometry of the pre-Fock space. -/
+noncomputable def secondQuantModFlowₗᵢ (S : StandardSubspace H) (t : ℝ) :
+    FockPre H →ₗᵢ[ℂ] FockPre H :=
+  LinearMap.isometryOfInner (secondQuantModFlow S t)
+    (fun φ ψ => fockInner_secondQuant (modUnitaryₗᵢ S t) φ ψ)
+
+/-- **Γ(Δ^{it}) on the Fock HILBERT space** — the continuum field-level modular flow (the unique
+    isometric extension of the pre-level flow to the completion). -/
+noncomputable def secondQuantModFlowH (S : StandardSubspace H) (t : ℝ) : Fock H → Fock H :=
+  UniformSpace.Completion.map (secondQuantModFlowₗᵢ S t)
+
+theorem secondQuantModFlowH_isometry (S : StandardSubspace H) (t : ℝ) :
+    Isometry (secondQuantModFlowH S t) :=
+  (secondQuantModFlowₗᵢ S t).isometry.completion_map
+
+/-- **Vacuum invariance** `Γ(Δ^{it}) Ω = Ω` on the Fock Hilbert space. -/
+theorem secondQuantModFlowH_vacuum (S : StandardSubspace H) (t : ℝ) :
+    secondQuantModFlowH S t Fock.vacuum = Fock.vacuum := by
+  have hΩ : (secondQuantModFlowₗᵢ S t) (FockPre.expVec 0) = FockPre.expVec 0 :=
+    secondQuantModFlow_vacuum S t
+  show UniformSpace.Completion.map (secondQuantModFlowₗᵢ S t)
+      ((FockPre.expVec 0 : FockPre H) : Fock H) = ((FockPre.expVec 0 : FockPre H) : Fock H)
+  rw [UniformSpace.Completion.map_coe (secondQuantModFlowₗᵢ S t).isometry.uniformContinuous, hΩ]
+
+/-- **`Γ(Δ^{i·0}) = id`** on the Fock Hilbert space. -/
+theorem secondQuantModFlowH_zero (S : StandardSubspace H) (x : Fock H) :
+    secondQuantModFlowH S 0 x = x := by
+  rw [secondQuantModFlowH, show (⇑(secondQuantModFlowₗᵢ S 0) : FockPre H → FockPre H) = id from
+    funext fun φ => secondQuantModFlow_zero S φ]
+  exact congrFun UniformSpace.Completion.map_id x
+
+/-- **The one-parameter group law on the Fock Hilbert space** `Γ(Δ^{is}) ∘ Γ(Δ^{it}) = Γ(Δ^{i(s+t)})`. -/
+theorem secondQuantModFlowH_add (S : StandardSubspace H) (s t : ℝ) (x : Fock H) :
+    secondQuantModFlowH S s (secondQuantModFlowH S t x) = secondQuantModFlowH S (s + t) x := by
+  have hfun : (⇑(secondQuantModFlowₗᵢ S s)) ∘ (⇑(secondQuantModFlowₗᵢ S t))
+      = ⇑(secondQuantModFlowₗᵢ S (s + t)) :=
+    funext fun φ => secondQuantModFlow_add S s t φ
+  rw [secondQuantModFlowH, secondQuantModFlowH, secondQuantModFlowH,
+      ← Function.comp_apply (f := UniformSpace.Completion.map (secondQuantModFlowₗᵢ S s)),
+      UniformSpace.Completion.map_comp (secondQuantModFlowₗᵢ S s).isometry.uniformContinuous
+        (secondQuantModFlowₗᵢ S t).isometry.uniformContinuous, hfun]
+
+end QIQTH.Fock
