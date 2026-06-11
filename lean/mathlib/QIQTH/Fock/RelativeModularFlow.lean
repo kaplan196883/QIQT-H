@@ -70,4 +70,41 @@ theorem connesCocycle_eq (S : StandardSubspace H) (t : ℝ) (f : H) (x : Fock H)
   congr 2
   rw [secondQuantModFlowH_add, add_neg_cancel, secondQuantModFlowH_zero]
 
+/-! ### The relative modular flow is a one-parameter group, and the Connes-cocycle chain rule -/
+
+/-- **`W(−f) W(f) = id`** on the Fock Hilbert space. -/
+theorem weylH_neg_cancel' (f : H) (x : Fock H) : weylH (-f) (weylH f x) = x := by
+  have h := weylH_neg_cancel (-f) x
+  rwa [neg_neg] at h
+
+/-- **The relative modular flow is a one-parameter group:** `Δ_rel^{is} ∘ Δ_rel^{it} = Δ_rel^{i(s+t)}`.
+    With `relModFlowH_zero` (`Δ_rel^{i·0} = id`), this makes `relModFlowH` a genuine one-parameter modular
+    flow — the conjugate `W(f) Γ(Δ^{i·}) W(f)⋆` of the vacuum modular flow (the inner `W(f)⋆ W(f)` cancels). -/
+theorem relModFlowH_add (S : StandardSubspace H) (s t : ℝ) (f : H) (x : Fock H) :
+    relModFlowH S s f (relModFlowH S t f x) = relModFlowH S (s + t) f x := by
+  rw [relModFlowH, relModFlowH, relModFlowH, weylH_neg_cancel', secondQuantModFlowH_add]
+
+/-- **The Connes cocycle** `u_t = (D ω_{W(f)Ω} : D ω_Ω)_t = W(f) W(−Δ^{it} f)` in closed Weyl-product form
+    (`= connesCocycle_eq`). -/
+noncomputable def connesCocycleH (S : StandardSubspace H) (t : ℝ) (f : H) : Fock H → Fock H :=
+  fun x => weylH f (weylH (-(modUnitary S t f)) x)
+
+/-- **`u_0 = id`** — the Connes cocycle at `t = 0` is the identity. -/
+theorem connesCocycleH_zero (S : StandardSubspace H) (f : H) (x : Fock H) :
+    connesCocycleH S 0 f x = x := by
+  rw [connesCocycleH, modUnitary_zero, ContinuousLinearMap.one_apply, weylH_neg_cancel]
+
+/-- **★ THE CONNES-COCYCLE CHAIN RULE** `u_{s+t} = u_s · σ_s(u_t)`, where `σ_s = Ad(Γ(Δ^{is}))` is the
+    vacuum modular automorphism — the defining identity of a genuine Connes cocycle (Connes' Radon–Nikodym
+    theorem).  Here it is a clean algebraic consequence of the Tomita covariance and the group law: the
+    middle `W(Δ^{is}f)⋆ W(Δ^{is}f)` cancels and `Δ^{is}Δ^{it}f = Δ^{i(s+t)}f`. -/
+theorem connesCocycleH_chain (S : StandardSubspace H) (s t : ℝ) (f : H) (x : Fock H) :
+    connesCocycleH S (s + t) f x
+      = connesCocycleH S s f
+          (secondQuantModFlowH S s (connesCocycleH S t f (secondQuantModFlowH S (-s) x))) := by
+  simp only [connesCocycleH]
+  rw [secondQuantModFlowH_weylH, secondQuantModFlowH_weylH, secondQuantModFlowH_add,
+      add_neg_cancel, secondQuantModFlowH_zero, map_neg, ← ContinuousLinearMap.mul_apply,
+      ← modUnitary_add, weylH_neg_cancel']
+
 end QIQTH.Fock

@@ -2259,5 +2259,11 @@ namespace QIQTH.AxiomAudit
 -- a PRODUCT OF WEYL OPERATORS — the Araki/Connes formula for a coherent excitation, immediate from the Tomita
 -- covariance secondQuantModFlowH_weylH + group law. The full relative entropy S(ω_{W(f)Ω}‖ω_Ω) reduces (CGP)
 -- to the one-particle cgpEntropy already proved ≥0. General two-state relative modular ops = unbounded-GNS frontier.
+#print axioms QIQTH.Fock.relModFlowH_add
+#print axioms QIQTH.Fock.connesCocycleH_chain
+-- expected: standard only — PHASE C: the relative modular flow is a ONE-PARAMETER GROUP (relModFlowH_add:
+-- Δ_rel^{is}Δ_rel^{it}=Δ_rel^{i(s+t)}, the inner W(f)⋆W(f) cancels), and the Connes cocycle satisfies the
+-- CHAIN RULE u_{s+t}=u_s·σ_s(u_t) (σ_s=Ad Γ(Δ^{is}); Connes' Radon–Nikodym) — both immediate from the Tomita
+-- covariance + group law. Confirms relModFlowH/connesCocycleH are GENUINE modular flow / Connes cocycle objects.
 
 end QIQTH.AxiomAudit
