@@ -22,6 +22,7 @@ import QIQTH.Spectral.SpectralTheorem
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Analysis.SpecialFunctions.Complex.Log
 import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Range
+import Mathlib.Topology.ContinuousMap.StoneWeierstrass
 
 namespace QIQTH.StandardSubspaceModular
 
@@ -663,5 +664,123 @@ theorem modConj_isSelfAdjoint (S : StandardSubspace H) (η ζ : H) :
 theorem modConj_sq (S : StandardSubspace H) (η : H) : modConj S (modConj S η) = η := by
   refine ext_inner_left ℝ fun ζ => ?_
   rw [← modConj_isSelfAdjoint S ζ (modConj S η), modConj_inner_map]
+
+/-! ### `cfcCont` — the continuous-function bounded FC of `R`, bundled for Stone–Weierstrass
+
+`U_t = u_t(R)` is discontinuous at the spectral endpoints `r = 0, 2`, but `U_t·A` with `A = R(2−R)`
+is CONTINUOUS — the `r(2−r)` factor kills the endpoint singularity.  To exploit that for the
+covariance `[U_t, D] = 0`, we package the bounded Borel FC restricted to CONTINUOUS functions as a
+continuous, `ℂ`-linear, multiplicative, `*`-preserving map `cfcCont : C(σℝ R, ℂ) → (H →L[ℂ] H)`, on
+which the (complex) Stone–Weierstrass theorem applies. -/
+
+/-- `borelFC` is additive in `f` (lift of `boundedFC_add`). -/
+theorem borelFC_add (T : H →L[ℂ] H) (ha : IsSelfAdjoint T) {f g : spectrum ℝ T → ℂ}
+    {Cf Cg : ℝ} (hf : Measurable f) (hg : Measurable g) (hCf0 : 0 ≤ Cf) (hCg0 : 0 ≤ Cg)
+    (hCf : ∀ ω, ‖f ω‖ ≤ Cf) (hCg : ∀ ω, ‖g ω‖ ≤ Cg) :
+    borelFC T ha (hf.add hg) (add_nonneg hCf0 hCg0)
+        (fun ω => (norm_add_le _ _).trans (add_le_add (hCf ω) (hCg ω)))
+      = borelFC T ha hf hCf0 hCf + borelFC T ha hg hCg0 hCg :=
+  (PVM_of_selfAdjoint T ha).boundedFC_add hf hg hCf0 hCg0 hCf hCg
+
+/-- `borelFC` is ℂ-homogeneous in `f` (lift of `boundedFC_smul`). -/
+theorem borelFC_smul (T : H →L[ℂ] H) (ha : IsSelfAdjoint T) (c : ℂ) {f : spectrum ℝ T → ℂ}
+    (hf : Measurable f) {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ ω, ‖f ω‖ ≤ C) :
+    borelFC T ha (hf.const_mul c) (mul_nonneg (norm_nonneg c) hC0)
+        (fun ω => by rw [norm_mul]; exact mul_le_mul_of_nonneg_left (hC ω) (norm_nonneg c))
+      = c • borelFC T ha hf hC0 hC :=
+  (PVM_of_selfAdjoint T ha).boundedFC_smul c hf hC0 hC
+
+variable (S : StandardSubspace H)
+
+/-- The bounded Borel FC of `R = rvdRC S` on a continuous function, with the automatic compact-sup
+    bound `‖f ω‖ ≤ ‖f‖`. -/
+noncomputable def cfcCont (f : C(spectrum ℝ (rvdRC S), ℂ)) : H →L[ℂ] H :=
+  borelFC (rvdRC S) (rvdRC_isSelfAdjoint S) (map_continuous f).measurable
+    (norm_nonneg f) (fun ω => ContinuousMap.norm_coe_le_norm f ω)
+
+/-- `cfcCont` depends only on the underlying function (bound-independence). -/
+theorem cfcCont_eq (f : C(spectrum ℝ (rvdRC S), ℂ)) {C : ℝ}
+    (hf : Measurable (f : spectrum ℝ (rvdRC S) → ℂ)) (hC0 : 0 ≤ C) (hC : ∀ ω, ‖f ω‖ ≤ C) :
+    cfcCont S f = borelFC (rvdRC S) (rvdRC_isSelfAdjoint S) hf hC0 hC := by
+  rw [cfcCont]
+  exact borelFC_congr (rvdRC S) (rvdRC_isSelfAdjoint S) _ _ _ hf hC0 hC rfl
+
+theorem cfcCont_norm_le (f : C(spectrum ℝ (rvdRC S), ℂ)) : ‖cfcCont S f‖ ≤ 2 * ‖f‖ := by
+  rw [cfcCont, borelFC]
+  exact (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).boundedFC_norm_le _ _ _
+
+theorem cfcCont_one : cfcCont S 1 = 1 := by
+  rw [cfcCont, borelFC_congr (rvdRC S) (rvdRC_isSelfAdjoint S)
+      (map_continuous (1 : C(spectrum ℝ (rvdRC S), ℂ))).measurable (norm_nonneg _) _
+      measurable_const (norm_nonneg (1 : ℂ)) (fun _ => le_rfl) (by ext ω; simp)]
+  exact borelFC_one (rvdRC S) (rvdRC_isSelfAdjoint S)
+
+theorem cfcCont_mul (f g : C(spectrum ℝ (rvdRC S), ℂ)) :
+    cfcCont S (f * g) = cfcCont S f * cfcCont S g := by
+  have hb : ∀ ω, ‖f ω * g ω‖ ≤ ‖f‖ * ‖g‖ := fun ω => by
+    rw [norm_mul]
+    exact mul_le_mul (ContinuousMap.norm_coe_le_norm f ω) (ContinuousMap.norm_coe_le_norm g ω)
+      (norm_nonneg _) (norm_nonneg _)
+  rw [cfcCont, cfcCont, cfcCont,
+      borelFC_congr (rvdRC S) (rvdRC_isSelfAdjoint S)
+        (map_continuous (f * g)).measurable (norm_nonneg _) _
+        ((map_continuous f).measurable.mul (map_continuous g).measurable)
+        (mul_nonneg (norm_nonneg _) (norm_nonneg _)) hb (by ext ω; simp),
+      borelFC_mul (rvdRC S) (rvdRC_isSelfAdjoint S)
+        (map_continuous f).measurable (norm_nonneg f) (fun ω => ContinuousMap.norm_coe_le_norm f ω)
+        (map_continuous g).measurable (norm_nonneg g) (fun ω => ContinuousMap.norm_coe_le_norm g ω)
+        ((map_continuous f).measurable.mul (map_continuous g).measurable)
+        (mul_nonneg (norm_nonneg _) (norm_nonneg _)) hb]
+
+theorem cfcCont_add (f g : C(spectrum ℝ (rvdRC S), ℂ)) :
+    cfcCont S (f + g) = cfcCont S f + cfcCont S g := by
+  rw [cfcCont, cfcCont, cfcCont,
+      borelFC_congr (rvdRC S) (rvdRC_isSelfAdjoint S)
+        (map_continuous (f + g)).measurable (norm_nonneg _) _
+        ((map_continuous f).measurable.add (map_continuous g).measurable)
+        (add_nonneg (norm_nonneg _) (norm_nonneg _))
+        (fun ω => (norm_add_le _ _).trans
+          (add_le_add (ContinuousMap.norm_coe_le_norm f ω) (ContinuousMap.norm_coe_le_norm g ω)))
+        (by ext ω; simp),
+      borelFC_add (rvdRC S) (rvdRC_isSelfAdjoint S)
+        (map_continuous f).measurable (map_continuous g).measurable (norm_nonneg f) (norm_nonneg g)
+        (fun ω => ContinuousMap.norm_coe_le_norm f ω) (fun ω => ContinuousMap.norm_coe_le_norm g ω)]
+
+theorem cfcCont_smul (c : ℂ) (f : C(spectrum ℝ (rvdRC S), ℂ)) :
+    cfcCont S (c • f) = c • cfcCont S f := by
+  rw [cfcCont, cfcCont,
+      borelFC_congr (rvdRC S) (rvdRC_isSelfAdjoint S)
+        (map_continuous (c • f)).measurable (norm_nonneg _) _
+        ((map_continuous f).measurable.const_mul c) (mul_nonneg (norm_nonneg c) (norm_nonneg f))
+        (fun ω => by rw [norm_mul]
+                     exact mul_le_mul_of_nonneg_left (ContinuousMap.norm_coe_le_norm f ω)
+                       (norm_nonneg c)) (by ext ω; simp),
+      borelFC_smul (rvdRC S) (rvdRC_isSelfAdjoint S) c
+        (map_continuous f).measurable (norm_nonneg f) (fun ω => ContinuousMap.norm_coe_le_norm f ω)]
+
+theorem cfcCont_star (f : C(spectrum ℝ (rvdRC S), ℂ)) :
+    cfcCont S (star f) = star (cfcCont S f) := by
+  rw [ContinuousLinearMap.star_eq_adjoint, cfcCont, cfcCont,
+      borelFC_adjoint (rvdRC S) (rvdRC_isSelfAdjoint S)
+        (map_continuous f).measurable (norm_nonneg f) (fun ω => ContinuousMap.norm_coe_le_norm f ω)
+        (Complex.continuous_conj.measurable.comp (map_continuous f).measurable) (norm_nonneg f)
+        (fun ω => by rw [RCLike.norm_conj]; exact ContinuousMap.norm_coe_le_norm f ω)]
+  exact borelFC_congr (rvdRC S) (rvdRC_isSelfAdjoint S) _ _ _ _ _ _ (by ext ω; simp)
+
+/-- `cfcCont` sends the coordinate function to `R`. -/
+theorem cfcCont_coord :
+    cfcCont S ⟨specCoord S, Complex.continuous_ofReal.comp continuous_subtype_val⟩ = rvdRC S := by
+  conv_rhs => rw [rvdRC_eq_borelFC S]
+  rw [cfcCont]
+  exact borelFC_congr (rvdRC S) (rvdRC_isSelfAdjoint S) _ _ _ _ _ _ rfl
+
+/-- `cfcCont` as a ℂ-linear map (for the continuity bound). -/
+noncomputable def cfcContₗ : C(spectrum ℝ (rvdRC S), ℂ) →ₗ[ℂ] (H →L[ℂ] H) where
+  toFun := cfcCont S
+  map_add' := cfcCont_add S
+  map_smul' c f := by simp [cfcCont_smul]
+
+theorem cfcCont_continuous : Continuous (cfcCont S) :=
+  (LinearMap.mkContinuous (cfcContₗ S) 2 (fun f => cfcCont_norm_le S f)).continuous
 
 end QIQTH.StandardSubspaceModular
