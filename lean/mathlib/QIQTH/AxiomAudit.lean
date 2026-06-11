@@ -1538,6 +1538,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.modUnitary_mapsTo_K
 -- expected: standard only — ★★★ FULL standard-subspace invariance U_t 𝒦 ⊆ 𝒦. Both obligations
 -- ([U_t,R]=0 and [U_t,D]=0) discharged: the continuum modular flow preserves the standard subspace.
+#print axioms QIQTH.StandardSubspaceModular.modConj_commute_modUnitary
+-- expected: standard only — ★ J Δ^{it} = Δ^{it} J (modular conjugation commutes with the flow), a
+-- canonical TT relation. UNBLOCKED by [U_t,D]=0: D=J·T, U_t commutes both D and T (via Commute.cfcₙ_nnreal),
+-- so J commutes U_t on dense range T.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

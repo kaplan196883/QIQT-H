@@ -1147,4 +1147,33 @@ theorem modUnitary_mapsTo_K (S : StandardSubspace H) (t : ℝ) :
     ∀ ξ ∈ S.toClosedSubmodule, modUnitary S t ξ ∈ S.toClosedSubmodule :=
   modUnitary_mapsTo_K_of_commute_D S t (modUnitary_commute_rvdPmQ S t)
 
+/-! ### `J Δ^{it} = Δ^{it} J` — the modular conjugation commutes with the flow (unblocked by `[U_t,D]=0`) -/
+
+/-- `U_t` commutes with `T = √(R(2−R))` (both functions of `R`; via `[U_t,R]=0` and `Commute.cfc_real`). -/
+theorem modUnitary_commute_rvdT (t : ℝ) : Commute (modUnitary S t) (rvdT S) := by
+  have hcomm_R : Commute (modUnitary S t) (rvdRC S) := modUnitary_commute_rvdRC S t
+  have hcomm_2R : Commute (modUnitary S t) (rvdTwoSubRC S) := by
+    rw [rvdTwoSubRC]
+    exact ((Commute.one_right (modUnitary S t)).smul_right (2 : ℂ)).sub_right hcomm_R
+  have hSR : Commute (modUnitary S t) (rvdSqrtR S) :=
+    (hcomm_R.symm.cfcₙ_nnreal NNReal.sqrt).symm
+  have hST : Commute (modUnitary S t) (rvdSqrtTwoSubR S) :=
+    (hcomm_2R.symm.cfcₙ_nnreal NNReal.sqrt).symm
+  rw [rvdT]
+  exact hSR.mul_right hST
+
+/-- **★ `J Δ^{it} = Δ^{it} J`** — the modular conjugation `J` commutes with the modular flow.  Now
+    UNBLOCKED by the covariance `[U_t,D]=0`: since `D = J·T` and `U_t` commutes with both `D` and `T`,
+    `J` commutes with `U_t` on the dense `range T`.  (One of the canonical Tomita–Takesaki relations.) -/
+theorem modConj_commute_modUnitary (t : ℝ) (η : H) :
+    modConj S (modUnitary S t η) = modUnitary S t (modConj S η) := by
+  refine congrFun (Continuous.ext_on (rvdT_restrictScalars_denseRange S)
+    ((modConj S).continuous.comp (modUnitary S t).continuous)
+    ((modUnitary S t).continuous.comp (modConj S).continuous) ?_) η
+  rintro v ⟨ξ, rfl⟩
+  show modConj S (modUnitary S t (rvdT S ξ)) = modUnitary S t (modConj S (rvdT S ξ))
+  have hUT := DFunLike.congr_fun (modUnitary_commute_rvdT S t) ξ
+  simp only [ContinuousLinearMap.mul_apply] at hUT
+  rw [hUT, modConj_rvdT, modConj_rvdT, modUnitary_commute_rvdPmQ]
+
 end QIQTH.StandardSubspaceModular
