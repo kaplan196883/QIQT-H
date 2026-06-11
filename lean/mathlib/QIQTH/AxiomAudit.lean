@@ -2244,5 +2244,12 @@ namespace QIQTH.AxiomAudit
 -- W(Δ^{it}u): the second-quantized modular flow maps the CCR/Weyl algebra onto itself, transporting the test
 -- function by the one-particle modular flow (σ_t(M)=M). Engine = weylCoeff_isometry_invariant (Γ(A)W(u)=
 -- W(Au)Γ(A)) specialized to A=Δ^{it}. Both pre-Fock and Fock-Hilbert (via Completion.map_comp) levels.
+#print axioms QIQTH.Fock.weylVacuum_modFlow_invariant
+#print axioms QIQTH.Fock.secondQuantModFlowH_continuous_expVec
+-- expected: standard only — PHASE C: (a) the VACUUM IS THE MODULAR STATE: ⟪Ω,W(Δ^{it}u)Ω⟫=⟪Ω,W(u)Ω⟫ (the
+-- quasifree vacuum state is σ_t-invariant, since ⟪Ω,W(v)Ω⟫=exp(−½⟪v,v⟫) and Δ^{it} preserves ⟪v,v⟫); (b)
+-- STRONG CONTINUITY of Γ(Δ^{it}) on coherent vectors: t↦Γ(Δ^{it})e(f) continuous = continuous_FockExpVec
+-- (coherent map f↦e(f) continuous, from ⟪e(f),e(g)⟫=exp⟪f,g⟫) ∘ modUnitary_stronglyContinuous — the
+-- second-quantized lift of the one-particle Stone generator. Γ(Δ^{it}) is a genuine modular flow.
 
 end QIQTH.AxiomAudit
