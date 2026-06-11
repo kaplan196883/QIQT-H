@@ -168,6 +168,12 @@ import QIQTH.StandardSubspaceModular
 -- discontinuous at the spectral endpoints r=0,2 (continuous cfc cannot reach it). One-parameter
 -- unitary group: U_0=1, U_{s+t}=U_s·U_t, U_t⋆=U_{-t}, unitary. Standard axioms:
 import QIQTH.StandardSubspaceModularFlow
+-- MODULAR RELATIVE ENTROPY (Phase B, one-particle / standard-subspace continuum object): the
+-- Casini–Grillo–Pontello relative entropy of a coherent state vs vacuum, as the SCALAR spectral
+-- integral S(ξ)=−∫log((2−r)/r)dμ^R_ξ over the bounded RvD operator R=P+Q (no unbounded log Δ).
+-- entropyDensity = the modular-flow generator (modChar t r = exp(i t·g(r))); cgpEntropy + total
+-- mass ‖ξ‖² + zero. Genuine continuum one-particle object (full vN-algebra needs Γ(Δ^{it}), cited).
+import QIQTH.ModularRelativeEntropy
 -- QIQT-H CORE (post-2026-06 GPT-5.5-pro strategic pivot): the conditional
 -- representation theorem for single-outcome-without-collapse. The non-circular
 -- finite-capacity exclusion (coactual_subsingleton) + actuality selector give

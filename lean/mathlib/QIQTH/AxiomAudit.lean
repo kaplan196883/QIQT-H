@@ -2152,4 +2152,15 @@ namespace QIQTH.AxiomAudit
 -- S(ρ‖σ) = −⟪ρ^½, log Δ_{σ|ρ} ρ^½⟫ reduces to the finite Umegaki entropy tr(ρ(log ρ − log σ)).
 -- Certifies the σ-numerator/ρ-denominator convention. (Finite-dim Type I instance; continuum is the frontier.)
 
+-- MODULAR RELATIVE ENTROPY (Phase B): the continuum one-particle (standard-subspace) relative-entropy
+-- functional, built from the bounded RvD operator R=P+Q (NO unbounded log Δ).
+#print axioms QIQTH.modChar_eq_exp_entropyDensity
+-- expected: standard only — entropyDensity g(r)=log((2−r)/r) IS the modular-flow generator:
+-- u_t(r)=exp(i·t·g(r)) on the spectrum interior. Identifies g as the modular Hamiltonian.
+#print axioms QIQTH.cgpEntropy_zero
+#print axioms QIQTH.rvdSpecMeasure_univ
+-- expected: standard only — the one-particle modular relative entropy S(ξ)=−∫log((2−r)/r)dμ^R_ξ
+-- (cgpEntropy) over the scalar spectral measure of R; total mass ‖ξ‖²; vanishes at the vacuum ξ=0.
+-- Genuine continuum object (one-particle); full vN-algebra relative entropy needs Γ(Δ^{it}) (cited frontier).
+
 end QIQTH.AxiomAudit
