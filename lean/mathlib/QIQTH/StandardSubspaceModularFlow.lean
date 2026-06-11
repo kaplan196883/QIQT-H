@@ -1010,4 +1010,141 @@ theorem modChar_damp_continuous (t : ℝ) :
         rw [Set.piecewise_eq_of_notMem _ _ _ hni]
   exact hmc.mul hdamp.continuousAt
 
+/-- **`u_t` is θ-fixed:** `conj(u_t(2−r)) = u_t(r)`.  (`u_t(2−r)=exp(it·log(r/(2−r)))=conj(u_t(r))`.) -/
+theorem modChar_reflect (t r : ℝ) : (starRingEnd ℂ) (modChar t (2 - r)) = modChar t r := by
+  unfold modChar
+  by_cases h : r ∈ Set.Ioo (0 : ℝ) 2
+  · have h' : 2 - r ∈ Set.Ioo (0 : ℝ) 2 := ⟨by linarith [h.2], by linarith [h.1]⟩
+    rw [Set.piecewise_eq_of_mem _ _ _ h', Set.piecewise_eq_of_mem _ _ _ h, ← Complex.exp_conj]
+    congr 1
+    have hlog : Real.log ((2 - (2 - r)) / (2 - r)) = -Real.log ((2 - r) / r) := by
+      rw [show (2 : ℝ) - (2 - r) = r by ring, ← Real.log_inv, inv_div]
+    rw [map_mul, map_mul, Complex.conj_I, Complex.conj_ofReal, Complex.conj_ofReal, hlog]
+    push_cast
+    ring
+  · have h' : 2 - r ∉ Set.Ioo (0 : ℝ) 2 :=
+      fun hm => h ⟨by linarith [hm.2], by linarith [hm.1]⟩
+    rw [Set.piecewise_eq_of_notMem _ _ _ h', Set.piecewise_eq_of_notMem _ _ _ h, map_one]
+
+/-- The **damped modular function** as a continuous map on `Ω`. -/
+noncomputable def hΩ (t : ℝ) : C(Set.Icc (-covM S) (2 + covM S), ℂ) where
+  toFun x := modChar t x.1 * ((x.1 : ℂ) * ((2 : ℂ) - (x.1 : ℂ)))
+  continuous_toFun := (modChar_damp_continuous t).comp continuous_subtype_val
+
+/-- `hΩ` is θ-fixed: `twΩ (hΩ) = hΩ` (the damped modular function is invariant under `r↦2−r` + conj). -/
+theorem twΩ_hΩ (t : ℝ) : twΩ S (hΩ S t) = hΩ S t := by
+  ext x
+  show (starRingEnd ℂ) (modChar t (2 - x.1) *
+      ((↑(2 - x.1) : ℂ) * ((2 : ℂ) - (↑(2 - x.1) : ℂ))))
+    = modChar t x.1 * ((↑x.1 : ℂ) * ((2 : ℂ) - (↑x.1 : ℂ)))
+  rw [map_mul, modChar_reflect, map_mul, Complex.conj_ofReal, map_sub, map_ofNat,
+      Complex.conj_ofReal]
+  push_cast
+  ring
+
+/-- `cfcΩ(hΩ) = U_t · A` with `A = R(2−R)` — the damped FC factors as the modular unitary times the
+    polynomial damping (`borelFC_mul`). -/
+theorem cfcΩ_hΩ (t : ℝ) :
+    cfcΩ S (hΩ S t) = modUnitary S t * (rvdRC S * rvdTwoSubRC S) := by
+  have hgA : rvdRC S * rvdTwoSubRC S = cfcΩ S (coordΩ S * twΩ S (coordΩ S)) := by
+    rw [cfcΩ_mul, cfcΩ_coordΩ, cfcΩ_twΩ_coordΩ]
+  have hfeq : (fun ω => modSpecFun S t ω *
+        (((coordΩ S * twΩ S (coordΩ S)).comp (inclΩ S)) ω))
+      = (((hΩ S t).comp (inclΩ S)) : spectrum ℝ (rvdRC S) → ℂ) := by
+    funext ω
+    show modChar t ω.1 * ((coordΩ S) (inclΩ S ω) * (twΩ S (coordΩ S)) (inclΩ S ω))
+      = modChar t ω.1 * ((↑ω.1 : ℂ) * ((2 : ℂ) - (↑ω.1 : ℂ)))
+    rw [show (coordΩ S) (inclΩ S ω) = (↑ω.1 : ℂ) from rfl,
+        show (twΩ S (coordΩ S)) (inclΩ S ω) = (2 : ℂ) - (↑ω.1 : ℂ) by
+          show (starRingEnd ℂ) ((coordΩ S) (tauΩ S (inclΩ S ω))) = (2 : ℂ) - (↑ω.1 : ℂ)
+          rw [show (coordΩ S) (tauΩ S (inclΩ S ω)) = (↑(2 - ω.1) : ℂ) from rfl,
+              Complex.conj_ofReal, Complex.ofReal_sub, Complex.ofReal_ofNat]]
+  have hbound : ∀ ω, ‖modSpecFun S t ω *
+        (((coordΩ S * twΩ S (coordΩ S)).comp (inclΩ S)) ω)‖
+      ≤ ‖(coordΩ S * twΩ S (coordΩ S)).comp (inclΩ S)‖ := fun ω => by
+    rw [norm_mul]
+    calc ‖modSpecFun S t ω‖ * ‖((coordΩ S * twΩ S (coordΩ S)).comp (inclΩ S)) ω‖
+        ≤ 1 * ‖(coordΩ S * twΩ S (coordΩ S)).comp (inclΩ S)‖ :=
+          mul_le_mul (modSpecFun_norm_le S t ω) (ContinuousMap.norm_coe_le_norm _ ω)
+            (norm_nonneg _) zero_le_one
+      _ = ‖(coordΩ S * twΩ S (coordΩ S)).comp (inclΩ S)‖ := one_mul _
+  have hmul := borelFC_mul (rvdRC S) (rvdRC_isSelfAdjoint S)
+    (modSpecFun_measurable S t) zero_le_one (modSpecFun_norm_le S t)
+    (map_continuous ((coordΩ S * twΩ S (coordΩ S)).comp (inclΩ S))).measurable
+    (norm_nonneg ((coordΩ S * twΩ S (coordΩ S)).comp (inclΩ S)))
+    (fun ω => ContinuousMap.norm_coe_le_norm ((coordΩ S * twΩ S (coordΩ S)).comp (inclΩ S)) ω)
+    ((modSpecFun_measurable S t).mul
+      (map_continuous ((coordΩ S * twΩ S (coordΩ S)).comp (inclΩ S))).measurable)
+    (norm_nonneg ((coordΩ S * twΩ S (coordΩ S)).comp (inclΩ S))) hbound
+  rw [hgA, cfcΩ, cfcΩ, cfcCont, cfcCont, modUnitary, ← hmul]
+  exact borelFC_congr (rvdRC S) (rvdRC_isSelfAdjoint S) _ _ _ _ _ _ hfeq.symm
+
+/-- `A = R(2−R)` is self-adjoint. -/
+theorem rvdRC_mul_rvdTwoSubRC_isSelfAdjoint : IsSelfAdjoint (rvdRC S * rvdTwoSubRC S) := by
+  have h2 : IsSelfAdjoint (rvdTwoSubRC S) := by
+    have : star (rvdTwoSubRC S) = rvdTwoSubRC S := by
+      simp [rvdTwoSubRC, star_sub, star_smul, (rvdRC_isSelfAdjoint S).star_eq]
+    exact this
+  show star (rvdRC S * rvdTwoSubRC S) = rvdRC S * rvdTwoSubRC S
+  rw [star_mul, h2.star_eq, (rvdRC_isSelfAdjoint S).star_eq]
+  exact (rvdRC_commute_rvdTwoSubRC S).symm
+
+/-- `A = R(2−R) = D²` is injective (`D` injective). -/
+theorem rvdRC_mul_rvdTwoSubRC_injective :
+    Function.Injective (rvdRC S * rvdTwoSubRC S) := by
+  intro a b hab
+  rw [rvdRC_mul_rvdTwoSubRC_apply, rvdRC_mul_rvdTwoSubRC_apply] at hab
+  exact rvdPmQ_injective S (rvdPmQ_injective S hab)
+
+/-- `A.restrictScalars ℝ` has dense range (self-adjoint + injective). -/
+theorem rvdRC_mul_rvdTwoSubRC_denseRange :
+    DenseRange ((rvdRC S * rvdTwoSubRC S).restrictScalars ℝ) := by
+  have hadj : ContinuousLinearMap.adjoint ((rvdRC S * rvdTwoSubRC S).restrictScalars ℝ)
+      = (rvdRC S * rvdTwoSubRC S).restrictScalars ℝ := by
+    rw [← ContinuousLinearMap.star_eq_adjoint, ← restrictScalars_star,
+        (rvdRC_mul_rvdTwoSubRC_isSelfAdjoint S).star_eq]
+  have hbot : (LinearMap.range ((rvdRC S * rvdTwoSubRC S).restrictScalars ℝ).toLinearMap)ᗮ = ⊥ := by
+    rw [ContinuousLinearMap.orthogonal_range, hadj, LinearMap.ker_eq_bot]
+    intro a b hab; exact rvdRC_mul_rvdTwoSubRC_injective S hab
+  have hdense : Dense (↑(LinearMap.range
+      ((rvdRC S * rvdTwoSubRC S).restrictScalars ℝ).toLinearMap) : Set H) := by
+    rw [Submodule.dense_iff_topologicalClosure_eq_top,
+        ← Submodule.orthogonal_orthogonal_eq_closure, hbot, Submodule.bot_orthogonal_eq_top]
+  rw [DenseRange, ← ContinuousLinearMap.coe_coe, ← LinearMap.coe_range]
+  exact hdense
+
+/-- **★ The modular covariance `[U_t, D] = 0`** (operator form): the modular flow commutes with the
+    antilinear `D = P−Q`.  From the intertwiner applied to the θ-fixed damped function `hΩ`
+    (`D·(U_t·A)=(U_t·A)·D`), `D·A=A·D`, and cancelling `A` by its dense range. -/
+theorem modUnitary_commute_rvdPmQ_rs (t : ℝ) :
+    rvdPmQ S * (modUnitary S t).restrictScalars ℝ
+      = (modUnitary S t).restrictScalars ℝ * rvdPmQ S := by
+  -- the intertwiner at `hΩ`, with `twΩ hΩ = hΩ` and `cfcΩ hΩ = U_t·A`
+  have hint := cfcΩ_intertwine S (hΩ S t)
+  rw [twΩ_hΩ, cfcΩ_hΩ] at hint
+  -- both operators agree on the (dense) range of `A.restrictScalars ℝ`, so they are equal
+  refine ContinuousLinearMap.ext fun η =>
+    congrFun (Continuous.ext_on (rvdRC_mul_rvdTwoSubRC_denseRange S)
+      (rvdPmQ S * (modUnitary S t).restrictScalars ℝ).continuous
+      ((modUnitary S t).restrictScalars ℝ * rvdPmQ S).continuous ?_) η
+  rintro v ⟨ξ, rfl⟩
+  have h1 := DFunLike.congr_fun hint ξ
+  simp only [ContinuousLinearMap.mul_apply, ContinuousLinearMap.coe_restrictScalars'] at h1 ⊢
+  rw [h1]
+  congr 1
+  simpa [ContinuousLinearMap.mul_apply] using (rvdPmQ_commute_A S ξ).symm
+
+/-- **★ The modular covariance `[U_t, D] = 0`** (pointwise): `U_t(D ξ) = D(U_t ξ)`.  Combined with
+    `[U_t, R] = 0` this gives full standard-subspace invariance `U_t 𝒦 = 𝒦`. -/
+theorem modUnitary_commute_rvdPmQ (t : ℝ) (ξ : H) :
+    modUnitary S t (rvdPmQ S ξ) = rvdPmQ S (modUnitary S t ξ) := by
+  have h := DFunLike.congr_fun (modUnitary_commute_rvdPmQ_rs S t) ξ
+  simpa [ContinuousLinearMap.mul_apply] using h.symm
+
+/-- **★ Full standard-subspace invariance `U_t 𝒦 ⊆ 𝒦`** — both obligations (`[U_t,R]=0` and the
+    covariance `[U_t,D]=0`) now discharged. -/
+theorem modUnitary_mapsTo_K (S : StandardSubspace H) (t : ℝ) :
+    ∀ ξ ∈ S.toClosedSubmodule, modUnitary S t ξ ∈ S.toClosedSubmodule :=
+  modUnitary_mapsTo_K_of_commute_D S t (modUnitary_commute_rvdPmQ S t)
+
 end QIQTH.StandardSubspaceModular

@@ -1529,6 +1529,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ J² = 1. THE MODULAR CONJUGATION IS A FULL ANTIUNITARY INVOLUTION.
 -- Tomita–Takesaki S=JΔ^{1/2} complete at the one-particle level: Δ^{it} (strongly cts unitary group)
 -- + J (J²=1) both axiom-free for a standard subspace.
+#print axioms QIQTH.StandardSubspaceModular.cfcΩ_intertwine
+-- expected: standard only — ★ the antilinear continuous-FC Stone–Weierstrass intertwiner
+-- D·f(R) = conj(f(2−·))(R)·D for EVERY continuous f. The heart of the covariance.
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_commute_rvdPmQ
+-- expected: standard only — ★★ the modular COVARIANCE [U_t, D] = 0 (U_t commutes with the antilinear
+-- D=P−Q). Via the intertwiner at the θ-fixed damped fn hΩ=u_t·r(2−r), D·A=A·D, cancel A by dense range.
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_mapsTo_K
+-- expected: standard only — ★★★ FULL standard-subspace invariance U_t 𝒦 ⊆ 𝒦. Both obligations
+-- ([U_t,R]=0 and [U_t,D]=0) discharged: the continuum modular flow preserves the standard subspace.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
