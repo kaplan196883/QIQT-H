@@ -2185,7 +2185,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.modConj_rvdRC_modConj
 -- expected: standard only — ★ J R J = 2 − R: the modular conjugation REFLECTS R (bounded shadow of the
 -- canonical Tomita relation JΔJ=Δ⁻¹). From D(R−1)=−(R−1)D ⟹ DR=(2−R)D, transported to J via J(Tξ)=Dξ on
--- the dense range of T (T,R commute). One of the TWO CGP spectral-balance prerequisites — NOW DONE
--- (remaining: Tomita fixedness ξ=JΔ^{1/2}ξ for ξ∈𝒦).
+-- the dense range of T (T,R commute). CGP spectral-balance prerequisite 1 of 2.
+#print axioms QIQTH.StandardSubspaceModular.rvdPmQ_eq_of_mem_K
+#print axioms QIQTH.StandardSubspaceModular.modConj_rvdT_of_mem_K
+-- expected: standard only — ★ BOUNDED TOMITA FIXEDNESS: for ξ∈𝒦 (Pξ=ξ), D ξ = (2−R) ξ (and J(Tξ)=(2−R)ξ).
+-- The bounded encoding of the Tomita fixedness ξ=JΔ^{1/2}ξ (𝒦 = +1 eigenspace of S=JΔ^{1/2}), avoiding the
+-- unbounded Δ^{1/2}: from R=P+Q, D=P−Q, Pξ=ξ ⟹ Qξ=Rξ−ξ ⟹ Dξ=2ξ−Rξ. CGP prerequisite 2 of 2 — BOTH NOW
+-- DONE; the spectral balance ∫(2−r)²F dμ_ξ=∫r(2−r)F(2−r)dμ_ξ (then ÷r²) is now fully bounded.
 
 end QIQTH.AxiomAudit

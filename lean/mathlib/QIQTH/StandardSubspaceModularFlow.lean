@@ -713,6 +713,31 @@ theorem modConj_rvdRC_modConj (S : StandardSubspace H) (ξ : H) :
     modConj S (rvdRC S (modConj S ξ)) = rvdTwoSubRC S ξ := by
   rw [modConj_rvdRC_reflect, modConj_sq]
 
+/-! ### Bounded Tomita fixedness for `ξ ∈ 𝒦`
+
+  The second CGP spectral-balance prerequisite, in bounded form.  The Tomita operator `S = J Δ^{1/2}`
+  fixes the standard subspace `𝒦` (`ξ = J Δ^{1/2} ξ` for `ξ ∈ 𝒦`); since `Δ^{1/2}` is unbounded, we use
+  the equivalent BOUNDED relation `D ξ = (2 − R) ξ`, immediate from `R = P + Q`, `D = P − Q` and `P ξ = ξ`
+  (so `Q ξ = R ξ − ξ` and `D ξ = ξ − Q ξ = 2ξ − R ξ`).  Together with `J R J = 2 − R` this makes the whole
+  CGP spectral balance bounded: from `(2−R) ξ = J(T ξ)` one gets `μ_{(2−R)ξ} = μ_{J(Tξ)}`, i.e.
+  `∫ (2−r)² F dμ_ξ = ∫ r(2−r) F(2−r) dμ_ξ`, whose `÷r²` is the balance — no `Δ^{1/2}` ever. -/
+
+/-- **Bounded Tomita fixedness:** for `ξ ∈ 𝒦` (`P ξ = ξ`), `D ξ = (2 − R) ξ`. -/
+theorem rvdPmQ_eq_of_mem_K (S : StandardSubspace H) {ξ : H} (hξ : projK S ξ = ξ) :
+    rvdPmQ S ξ = rvdTwoSubRC S ξ := by
+  rw [rvdPmQ, rvdTwoSubRC]
+  simp only [ContinuousLinearMap.sub_apply, ContinuousLinearMap.smul_apply,
+    ContinuousLinearMap.one_apply]
+  show projK S ξ - projIK S ξ = (2 : ℂ) • ξ - rvdR S ξ
+  rw [rvdR, ContinuousLinearMap.add_apply, hξ, two_smul]
+  abel
+
+/-- For `ξ ∈ 𝒦`, `J(T ξ) = (2 − R) ξ` — the modular form of the bounded Tomita fixedness, equating the
+    two bounded objects whose `R`-spectral measures drive the CGP balance. -/
+theorem modConj_rvdT_of_mem_K (S : StandardSubspace H) {ξ : H} (hξ : projK S ξ = ξ) :
+    modConj S (rvdT S ξ) = rvdTwoSubRC S ξ := by
+  rw [modConj_rvdT, rvdPmQ_eq_of_mem_K S hξ]
+
 /-! ### `cfcCont` — the continuous-function bounded FC of `R`, bundled for Stone–Weierstrass
 
 `U_t = u_t(R)` is discontinuous at the spectral endpoints `r = 0, 2`, but `U_t·A` with `A = R(2−R)`
