@@ -21,10 +21,16 @@
 import QIQTH.QuantumRelativeEntropy
 import Mathlib.Analysis.Matrix.Order
 import Mathlib.Analysis.CStarAlgebra.Matrix
+import Mathlib.Analysis.CStarAlgebra.ContinuousLinearMap
+import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Basic
+import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Instances
 import Mathlib.Analysis.SpecialFunctions.ContinuousFunctionalCalculus.ExpLog.Basic
+import Mathlib.Analysis.Normed.Algebra.MatrixExponential
+import Mathlib.Algebra.Star.UnitaryStarAlgAut
 
 namespace QIQTH.Araki
 
+open QIQTH.QuantumEntropy Unitary
 open scoped Matrix ComplexOrder Matrix.Norms.L2Operator
 
 variable {n : Type} [Fintype n] [DecidableEq n]
@@ -55,6 +61,7 @@ def ofMat (X : Matrix n n ℂ) : HSMat n := X
 @[simp] theorem toMat_ofMat (X : Matrix n n ℂ) : toMat (ofMat X) = X := rfl
 @[simp] theorem ofMat_toMat (X : HSMat n) : ofMat (toMat X) = X := rfl
 @[simp] theorem toMat_zero : toMat (0 : HSMat n) = 0 := rfl
+@[simp] theorem toMat_neg (x : HSMat n) : toMat (-x) = -toMat x := rfl
 
 /-- The inner product on `HSMat` is the Frobenius/HS one: `⟪x, y⟫ = tr(y · xᴴ)`. -/
 theorem hsInner_eq (x y : HSMat n) :
@@ -156,6 +163,9 @@ theorem Lmul_smul (c : ℂ) (A : Matrix n n ℂ) : Lmul (c • A) = c • Lmul A
 theorem Rmul_add (A B : Matrix n n ℂ) : Rmul (A + B) = Rmul A + Rmul B := by
   ext X; apply toMat_injective; simp [ContinuousLinearMap.add_apply, Matrix.mul_add]
 
+theorem Rmul_neg (A : Matrix n n ℂ) : Rmul (-A) = -Rmul A := by
+  ext X; apply toMat_injective; simp [ContinuousLinearMap.neg_apply, Matrix.mul_neg]
+
 theorem Rmul_smul (c : ℂ) (A : Matrix n n ℂ) : Rmul (c • A) = c • Rmul A := by
   ext X; apply toMat_injective; simp [ContinuousLinearMap.smul_apply, mul_smul_comm]
 
@@ -222,5 +232,79 @@ theorem relMod_isSelfAdjoint {σ ρ : Matrix n n ℂ} (hσ : σ.IsHermitian) (h�
   rw [relMod, star_mul, ContinuousLinearMap.star_eq_adjoint, ContinuousLinearMap.star_eq_adjoint,
       Lmul_adjoint, Rmul_adjoint, hσ.eq, Matrix.conjTranspose_nonsing_inv, hρ.eq]
   exact (Lmul_commute_Rmul σ ρ⁻¹).symm.eq
+
+/-! ### The operator logarithm identity `log Δ = L_{log σ} − R_{log ρ}`
+
+  The crux of the finite Umegaki reduction.  We prove it via the operator exponential:
+  `Δ_{σ|ρ} = exp(L_{log σ} − R_{log ρ})`, then apply `CFC.log_exp`.  The matrix fact
+  `exp(matLog A) = A` is proved through the EIGENVALUE functional calculus (`matLog_UDU` +
+  `Matrix.exp_conj`/`exp_diagonal`), NOT the general `cfc` — this deliberately avoids the
+  L2-operator-norm-vs-eigenvalue-CFC instance clash on `Matrix n n ℂ`. -/
+
+/-- `matLog` of a Hermitian matrix is Hermitian (it is `U · diag(real) · Uᴴ`). -/
+theorem matLog_isHermitian {A : Matrix n n ℂ} (hA : A.IsHermitian) : (matLog hA).IsHermitian := by
+  have hDherm : (Matrix.diagonal (fun j => (Real.log (hA.eigenvalues j) : ℂ)))ᴴ
+      = Matrix.diagonal (fun j => (Real.log (hA.eigenvalues j) : ℂ)) := by
+    rw [Matrix.diagonal_conjTranspose]; congr 1; funext j; simp
+  rw [Matrix.IsHermitian, matLog_UDU hA, Matrix.conjTranspose_mul, Matrix.conjTranspose_mul, hDherm]
+  simp only [Matrix.star_eq_conjTranspose, Matrix.conjTranspose_conjTranspose, mul_assoc]
+
+/-- `L_H` is self-adjoint for Hermitian `H`. -/
+theorem Lmul_isSelfAdjoint {H : Matrix n n ℂ} (hH : H.IsHermitian) : IsSelfAdjoint (Lmul H) := by
+  show star (Lmul H) = Lmul H
+  rw [ContinuousLinearMap.star_eq_adjoint, Lmul_adjoint, hH.eq]
+
+/-- `R_H` is self-adjoint for Hermitian `H`. -/
+theorem Rmul_isSelfAdjoint {H : Matrix n n ℂ} (hH : H.IsHermitian) : IsSelfAdjoint (Rmul H) := by
+  show star (Rmul H) = Rmul H
+  rw [ContinuousLinearMap.star_eq_adjoint, Rmul_adjoint, hH.eq]
+
+/-- **`exp(log A) = A` at the matrix level** for positive-definite `A`, via the eigenvalue
+    functional calculus (`exp(U·diag(log λ)·Uᴴ) = U·diag(λ)·Uᴴ = A`). -/
+theorem exp_matLog {A : Matrix n n ℂ} (hA : A.PosDef) :
+    NormedSpace.exp (matLog hA.1) = A := by
+  have hsmul : star (hA.1.eigenvectorUnitary : Matrix n n ℂ)
+      * (hA.1.eigenvectorUnitary : Matrix n n ℂ) = 1 := Matrix.UnitaryGroup.star_mul_self _
+  have hms : (hA.1.eigenvectorUnitary : Matrix n n ℂ)
+      * star (hA.1.eigenvectorUnitary : Matrix n n ℂ) = 1 :=
+    Matrix.mem_unitaryGroup_iff.mp (hA.1.eigenvectorUnitary).2
+  have hcoe : star (hA.1.eigenvectorUnitary : Matrix n n ℂ)
+      = (hA.1.eigenvectorUnitary : Matrix n n ℂ)⁻¹ := (Matrix.inv_eq_left_inv hsmul).symm
+  have hunit : IsUnit (hA.1.eigenvectorUnitary : Matrix n n ℂ) := ⟨⟨_, _, hms, hsmul⟩, rfl⟩
+  have hD : NormedSpace.exp (fun j => (Real.log (hA.1.eigenvalues j) : ℂ))
+      = RCLike.ofReal ∘ hA.1.eigenvalues := by
+    rw [Pi.exp_def]; funext j
+    simp only [Function.comp_apply]
+    rw [← Complex.exp_eq_exp_ℂ, ← Complex.ofReal_exp, Real.exp_log (hA.eigenvalues_pos j)]
+    rfl
+  rw [matLog_UDU hA.1, hcoe, Matrix.exp_conj _ _ hunit, Matrix.exp_diagonal, hD]
+  conv_rhs => rw [hA.1.spectral_theorem, conjStarAlgAut_apply, hcoe]
+
+/-- **The relative modular operator is an honest operator exponential:**
+    `Δ_{σ|ρ} = exp(L_{log σ} − R_{log ρ})`. -/
+theorem relMod_eq_exp {σ ρ : Matrix n n ℂ} (hσ : σ.PosDef) (hρ : ρ.PosDef) :
+    relMod σ ρ = NormedSpace.exp (Lmul (matLog hσ.1) - Rmul (matLog hρ.1)) := by
+  have hinvρ : NormedSpace.exp (-matLog hρ.1) = ρ⁻¹ := by
+    have hsum : NormedSpace.exp (-matLog hρ.1) * NormedSpace.exp (matLog hρ.1) = 1 := by
+      have h := NormedSpace.exp_add_of_commute_of_mem_ball (𝕂 := ℂ)
+        ((Commute.refl (matLog hρ.1)).neg_left)
+        (mem_expBall_C (-matLog hρ.1)) (mem_expBall_C (matLog hρ.1))
+      rw [neg_add_cancel, NormedSpace.exp_zero] at h
+      exact h.symm
+    rw [exp_matLog hρ] at hsum
+    exact (Matrix.inv_eq_left_inv hsum).symm
+  have hcomm : Commute (Lmul (matLog hσ.1)) (-(Rmul (matLog hρ.1))) :=
+    (Lmul_commute_Rmul (matLog hσ.1) (matLog hρ.1)).neg_right
+  rw [relMod, sub_eq_add_neg,
+      NormedSpace.exp_add_of_commute_of_mem_ball (𝕂 := ℂ) hcomm (mem_expBall_C _) (mem_expBall_C _),
+      exp_Lmul, exp_matLog hσ, ← Rmul_neg, exp_Rmul, hinvρ]
+
+/-- **The operator logarithm identity** (finite-dimensional core of Araki's relative entropy):
+    `log Δ_{σ|ρ} = L_{log σ} − R_{log ρ}`.  This is what makes `−⟪ξ_ρ, log Δ ξ_ρ⟩` reduce to Umegaki. -/
+theorem log_relMod {σ ρ : Matrix n n ℂ} (hσ : σ.PosDef) (hρ : ρ.PosDef) :
+    CFC.log (relMod σ ρ) = Lmul (matLog hσ.1) - Rmul (matLog hρ.1) := by
+  have hBsa : IsSelfAdjoint (Lmul (matLog hσ.1) - Rmul (matLog hρ.1)) :=
+    (Lmul_isSelfAdjoint (matLog_isHermitian hσ.1)).sub (Rmul_isSelfAdjoint (matLog_isHermitian hρ.1))
+  rw [relMod_eq_exp hσ hρ, CFC.log_exp _ hBsa]
 
 end QIQTH.Araki
