@@ -841,4 +841,52 @@ theorem cfcΩ_star (f : C(Set.Icc (-covM S) (2 + covM S), ℂ)) :
 theorem cfcΩ_continuous : Continuous (cfcΩ S) :=
   (cfcCont_continuous S).comp (ContinuousMap.continuous_precomp (inclΩ S))
 
+/-! ### The Stone–Weierstrass intertwiner `D·f(R) = conj(f(2−·))(R)·D` -/
+
+/-- The coordinate function `x ↦ x.1` on `Ω` (real-valued ⟹ self-adjoint, the SW generator). -/
+def coordΩ : C(Set.Icc (-covM S) (2 + covM S), ℂ) where
+  toFun x := (x.1 : ℂ)
+  continuous_toFun := Complex.continuous_ofReal.comp continuous_subtype_val
+
+theorem coordΩ_star : star (coordΩ S) = coordΩ S := by
+  ext x; simp [coordΩ, ContinuousMap.star_apply, Complex.conj_ofReal]
+
+/-- The twist `(twΩ f)(r) = conj(f(2−r))`. -/
+noncomputable def twΩ (f : C(Set.Icc (-covM S) (2 + covM S), ℂ)) :
+    C(Set.Icc (-covM S) (2 + covM S), ℂ) := star (f.comp (tauΩ S))
+
+theorem twΩ_add (f g : C(Set.Icc (-covM S) (2 + covM S), ℂ)) :
+    twΩ S (f + g) = twΩ S f + twΩ S g := by
+  rw [twΩ, twΩ, twΩ, ContinuousMap.add_comp, star_add]
+
+theorem twΩ_mul (f g : C(Set.Icc (-covM S) (2 + covM S), ℂ)) :
+    twΩ S (f * g) = twΩ S f * twΩ S g := by
+  rw [twΩ, twΩ, twΩ, ContinuousMap.mul_comp, star_mul, mul_comm]
+
+theorem cfcΩ_coordΩ : cfcΩ S (coordΩ S) = rvdRC S := by
+  conv_rhs => rw [rvdRC_eq_borelFC S]
+  rw [cfcΩ, cfcCont]
+  exact borelFC_congr (rvdRC S) (rvdRC_isSelfAdjoint S) _ _ _ _ _ _ rfl
+
+theorem cfcΩ_sub (f g : C(Set.Icc (-covM S) (2 + covM S), ℂ)) :
+    cfcΩ S (f - g) = cfcΩ S f - cfcΩ S g := by
+  rw [sub_eq_add_neg, cfcΩ_add, ← neg_one_smul ℂ g, cfcΩ_smul, neg_one_smul, ← sub_eq_add_neg]
+
+theorem cfcΩ_twΩ_coordΩ : cfcΩ S (twΩ S (coordΩ S)) = rvdTwoSubRC S := by
+  have h : twΩ S (coordΩ S)
+      = (2 : ℂ) • (1 : C(Set.Icc (-covM S) (2 + covM S), ℂ)) - coordΩ S := by
+    ext x
+    simp [twΩ, coordΩ, tauΩ, ContinuousMap.star_apply, Complex.conj_ofReal, Complex.ofReal_sub]
+  rw [h, cfcΩ_sub, cfcΩ_smul, cfcΩ_one, cfcΩ_coordΩ, rvdTwoSubRC]
+
+/-- The base case of the intertwiner: `D·R = (2−R)·D` in `restrictScalars` form. -/
+theorem rvdPmQ_mul_rvdRC_rs :
+    rvdPmQ S * (rvdRC S).restrictScalars ℝ = (rvdTwoSubRC S).restrictScalars ℝ * rvdPmQ S := by
+  refine ContinuousLinearMap.ext fun ξ => ?_
+  have h := DFunLike.congr_fun (rvdPmQ_mul_rvdR S) ξ
+  simp only [ContinuousLinearMap.mul_apply, ContinuousLinearMap.coe_restrictScalars',
+    rvdRC_apply, rvdTwoSubRC_apply, ContinuousLinearMap.sub_apply, ContinuousLinearMap.smul_apply,
+    ContinuousLinearMap.one_apply] at h ⊢
+  exact h
+
 end QIQTH.StandardSubspaceModular
