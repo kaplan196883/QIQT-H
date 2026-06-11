@@ -110,6 +110,41 @@ theorem rvdSpec_integral_eq_re_inner (S : StandardSubspace H) (ξ : H)
   simp only [Function.comp_apply]
   rw [integral_complex_ofReal, Complex.ofReal_re]
 
+/-! ### The derivative bridge — the modular Hamiltonian as `∂_t` of the modular flow
+
+  Toward the entropy reduction `S(ω_{W(f)Ω}‖ω_Ω) = cgpEntropy(f)`: the vacuum characteristic function's
+  `t`-derivative is the relative entropy.  Two ingredients: the pointwise `t`-derivative of the modular
+  character (`∂_t u_t = i·g·u_t`, the modular Hamiltonian `g = entropyDensity` emerging as the generator),
+  and the complex operator-expectation bridge `⟨ξ, U_t ξ⟩ = ∫ u_t dμ^R_ξ` connecting the flow to the
+  spectral measure. -/
+
+/-- **The pointwise `t`-derivative of the modular character:** `∂_t u_t(r) = i·log((2−r)/r)·u_t(r) =
+    i·entropyDensity(r)·u_t(r)` for `r ∈ (0,2)`.  The modular Hamiltonian density `g = entropyDensity` is the
+    generator of the modular character flow. -/
+theorem hasDerivAt_modChar (t : ℝ) {r : ℝ} (hr : r ∈ Set.Ioo (0 : ℝ) 2) :
+    HasDerivAt (fun s : ℝ => modChar s r)
+      (Complex.I * (entropyDensity r : ℂ) * modChar t r) t := by
+  have heq : (fun s : ℝ => modChar s r)
+      = fun s : ℝ => Complex.exp (Complex.I * (s : ℂ) * (entropyDensity r : ℂ)) := by
+    funext s; exact modChar_eq_exp_entropyDensity s hr
+  rw [heq]
+  have h1 : HasDerivAt (fun s : ℝ => (s : ℂ)) 1 t := Complex.ofRealCLM.hasDerivAt
+  have hg : HasDerivAt (fun s : ℝ => Complex.I * (s : ℂ) * (entropyDensity r : ℂ))
+      (Complex.I * (entropyDensity r : ℂ)) t := by
+    have h2 := (h1.const_mul Complex.I).mul_const (entropyDensity r : ℂ)
+    simpa using h2
+  rw [show Complex.I * (entropyDensity r : ℂ) * modChar t r
+        = Complex.exp (Complex.I * (t : ℂ) * (entropyDensity r : ℂ)) * (Complex.I * (entropyDensity r : ℂ))
+      from by rw [modChar_eq_exp_entropyDensity t hr]; ring]
+  exact hg.cexp
+
+/-- **The complex operator-expectation bridge for the modular flow:** `⟨ξ, U_t ξ⟩ = ∫ u_t dμ^R_ξ` — the
+    matrix element of the bounded modular unitary `U_t = Δ^{it}` is the (complex) spectral integral of the
+    modular character against the scalar spectral measure of `R` at `ξ`. -/
+theorem rvdSpec_modUnitary (S : StandardSubspace H) (ξ : H) (t : ℝ) :
+    inner ℂ ξ (modUnitary S t ξ) = ∫ ω, modSpecFun S t ω ∂(rvdSpecMeasure S ξ) := by
+  rw [modUnitary, inner_borelFC, bilinDiag_self, ProjectionValuedMeasure.diagInt, rvdSpecMeasure]
+
 /-- The vacuum coherent state (`ξ = 0`) has zero relative entropy with itself. -/
 @[simp] theorem cgpEntropy_zero (S : StandardSubspace H) : cgpEntropy S (0 : H) = 0 := by
   simp [cgpEntropy]

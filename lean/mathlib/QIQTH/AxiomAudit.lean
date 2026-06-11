@@ -2167,6 +2167,13 @@ namespace QIQTH.AxiomAudit
 -- ∫f dμ^R_ξ = re⟪ξ, f(R)ξ⟫ (f(R) = bounded Borel FC). Makes the (regularized) modular relative entropy
 -- a genuine quantum expectation −re⟪ξ, K ξ⟫ of a bounded self-adjoint modular Hamiltonian, via the
 -- diagonal reduction bilinDiag_self + inner_borelFC + diagInt + integral_ofReal.
+#print axioms QIQTH.hasDerivAt_modChar
+#print axioms QIQTH.rvdSpec_modUnitary
+-- expected: standard only — DERIVATIVE BRIDGE (toward S=cgpEntropy): hasDerivAt_modChar (∂_t u_t(r) =
+-- i·entropyDensity(r)·u_t(r), r∈(0,2) — the modular Hamiltonian g=entropyDensity is the flow generator, via
+-- modChar_eq_exp_entropyDensity + HasDerivAt.cexp) and rvdSpec_modUnitary (the complex operator-expectation
+-- bridge ⟨ξ,U_t ξ⟩=∫u_t dμ^R_ξ, via inner_borelFC + bilinDiag_self + diagInt). These feed differentiation
+-- under the spectral integral to land S(ω_{W(f)Ω}‖ω_Ω)=cgpEntropy(f).
 #print axioms QIQTH.cgpEntropy_eq_neg_re_inner
 -- expected: standard only — ★★ BOUNDED-SPECTRUM CASE: when σ(R) ⊆ [a,2−a] stays away from the endpoints
 -- {0,2} (0<a≤1), the one-particle modular relative entropy IS the operator expectation
