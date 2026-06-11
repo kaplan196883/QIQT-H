@@ -39,6 +39,8 @@ import QIQTH.H1H2Audit
 import QIQTH.NoConcentration
 -- Entropy-focused audits from second GPT-5.5-pro consultation:
 import QIQTH.EntropyBridge
+-- Araki relative entropy via the relative modular operator (Phase A foundation):
+import QIQTH.ArakiEntropy
 import QIQTH.BranchLedger
 import QIQTH.ArakiInterface
 -- Final non-entropy audits proposed by GPT-5.5-pro:
