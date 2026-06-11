@@ -1492,6 +1492,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.modUnitary_mapsTo_K_of_commute_D
 -- expected: standard only — ★ U_t𝒦⊆𝒦 now needs ONLY the covariance [U_t,D]=0 (obligation R discharged).
 -- The single remaining gate to full standard-subspace invariance is the antilinear covariance.
+-- ★★★ THE ANTILINEAR-CFC COMMUTATION D·T=T·D — the J²=1 keystone, FULLY PROVEN:
+#print axioms QIQTH.StandardSubspaceModular.restrictScalars_star
+-- expected: standard only — ℂ-adjoint-restricted = ℝ-adjoint (no Mathlib lemma; by ext_inner).
+#print axioms QIQTH.StandardSubspaceModular.commute_of_mem_elemental
+-- expected: standard only — D (self-adj ℝ-op) commuting with B commutes with all of elemental ℝ B
+-- (the closed real *-subalgebra realCommutant, via StarAlgebra.elemental.le_of_mem).
+#print axioms QIQTH.StandardSubspaceModular.sqrt_mem_elemental
+-- expected: standard only — CFC.sqrt B ∈ elemental ℝ B (CFC.sqrt=cfcₙ Real.sqrt=cfc Real.sqrt).
+#print axioms QIQTH.StandardSubspaceModular.rvdPmQ_commute_rvdT
+-- expected: standard only — ★★★ D·T = T·D. The antilinear modular conjugation D commutes with the
+-- positive modulus T=√(R(2−R)). Applied to A=T² (D·A=A·D trivial) ⟹ D commutes with √A=T. This is
+-- THE keystone: J=D·T⁻¹ self-adjoint ⟹ J²=1; same machinery gives the covariance [U_t,D]=0.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul

@@ -21,6 +21,7 @@ import QIQTH.StandardSubspaceModular
 import QIQTH.Spectral.SpectralTheorem
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Analysis.SpecialFunctions.Complex.Log
+import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Range
 
 namespace QIQTH.StandardSubspaceModular
 
@@ -465,5 +466,104 @@ theorem modUnitary_mapsTo_K_of_commute_D (S : StandardSubspace H) (t : ℝ)
     (hD : ∀ ξ, modUnitary S t (rvdPmQ S ξ) = rvdPmQ S (modUnitary S t ξ)) :
     ∀ ξ ∈ S.toClosedSubmodule, modUnitary S t ξ ∈ S.toClosedSubmodule :=
   modUnitary_mapsTo_K_of_commute S t (modUnitary_commute_rvdR S t) hD
+
+/-! ### ★ The antilinear-CFC commutation `D·T = T·D` (the `J²=1` / covariance keystone)
+
+`D = P−Q` is an antilinear (ℝ-linear) bounded self-adjoint operator.  The **real commutant**
+`{Y : H→L[ℂ]H | D∘Y = Y∘D}` (composition as ℝ-maps) is a closed real `*`-subalgebra; if it contains
+a self-adjoint `B` it contains `elemental ℝ B`, hence `√B = CFC.sqrt B`.  Applied to `B = A = T²`
+(which `D` commutes with trivially, `A = D²`), this gives `D·T = T·D`. -/
+
+/-- ℂ-adjoint restricted to ℝ equals the ℝ-adjoint (no direct Mathlib lemma). -/
+theorem restrictScalars_star (Y : H →L[ℂ] H) :
+    (star Y).restrictScalars ℝ = star (Y.restrictScalars ℝ) := by
+  rw [ContinuousLinearMap.star_eq_adjoint, ContinuousLinearMap.star_eq_adjoint]
+  refine ContinuousLinearMap.ext fun x => ext_inner_left ℝ fun y => ?_
+  rw [ContinuousLinearMap.adjoint_inner_right]
+  change (inner ℂ y ((ContinuousLinearMap.adjoint Y) x)).re = (inner ℂ (Y y) x).re
+  rw [ContinuousLinearMap.adjoint_inner_right]
+
+/-- The **real commutant** of a self-adjoint `D : H →L[ℝ] H`, as a real `*`-subalgebra of
+    `H →L[ℂ] H` (over `ℝ` only, since `D` is antilinear). -/
+noncomputable def realCommutant (D : H →L[ℝ] H) (hD : IsSelfAdjoint D) :
+    StarSubalgebra ℝ (H →L[ℂ] H) where
+  carrier := {Y | D * Y.restrictScalars ℝ = Y.restrictScalars ℝ * D}
+  mul_mem' := fun {Y₁ Y₂} h₁ h₂ => by
+    simp only [Set.mem_setOf_eq] at h₁ h₂ ⊢
+    rw [show (Y₁ * Y₂).restrictScalars ℝ = Y₁.restrictScalars ℝ * Y₂.restrictScalars ℝ from rfl,
+        ← mul_assoc, h₁, mul_assoc, h₂, ← mul_assoc]
+  one_mem' := by
+    simp only [Set.mem_setOf_eq]
+    rw [show (1 : H →L[ℂ] H).restrictScalars ℝ = 1 from rfl, mul_one, one_mul]
+  add_mem' := fun {Y₁ Y₂} h₁ h₂ => by
+    simp only [Set.mem_setOf_eq] at h₁ h₂ ⊢
+    rw [show (Y₁ + Y₂).restrictScalars ℝ = Y₁.restrictScalars ℝ + Y₂.restrictScalars ℝ from rfl,
+        mul_add, h₁, h₂, add_mul]
+  zero_mem' := by simp
+  algebraMap_mem' := fun r => by
+    simp only [Set.mem_setOf_eq]
+    rw [show (algebraMap ℝ (H →L[ℂ] H) r).restrictScalars ℝ = algebraMap ℝ (H →L[ℝ] H) r from rfl,
+        Algebra.commutes]
+  star_mem' := fun {Y} h => by
+    simp only [Set.mem_setOf_eq] at h ⊢
+    rw [restrictScalars_star]
+    have hs := congrArg star h
+    rw [star_mul, star_mul, hD.star_eq] at hs
+    exact hs.symm
+
+theorem realCommutant_isClosed (D : H →L[ℝ] H) (hD : IsSelfAdjoint D) :
+    IsClosed ((realCommutant D hD : StarSubalgebra ℝ (H →L[ℂ] H)) : Set (H →L[ℂ] H)) := by
+  have hcont : Continuous
+      (fun Y : H →L[ℂ] H => D * Y.restrictScalars ℝ - Y.restrictScalars ℝ * D) := by
+    have hrs : Continuous (fun Y : H →L[ℂ] H => Y.restrictScalars ℝ) := by
+      have h := (ContinuousLinearMap.restrictScalarsL ℂ H H ℝ ℝ).continuous
+      rwa [ContinuousLinearMap.coe_restrict_scalarsL'] at h
+    exact ((continuous_const.mul hrs).sub (hrs.mul continuous_const))
+  have hset : ((realCommutant D hD : StarSubalgebra ℝ (H →L[ℂ] H)) : Set (H →L[ℂ] H))
+      = (fun Y : H →L[ℂ] H => D * Y.restrictScalars ℝ - Y.restrictScalars ℝ * D) ⁻¹' {0} := by
+    ext Y
+    simp only [realCommutant, Set.mem_setOf_eq, Set.mem_preimage, Set.mem_singleton_iff,
+      sub_eq_zero]
+    rfl
+  rw [hset]
+  exact isClosed_singleton.preimage hcont
+
+/-- **Antilinear-CFC commutation:** `D` (self-adjoint, ℝ-linear) commuting with `B` commutes with
+    everything in `elemental ℝ B`. -/
+theorem commute_of_mem_elemental (B : H →L[ℂ] H) (D : H →L[ℝ] H) (hD : IsSelfAdjoint D)
+    (hc : D * B.restrictScalars ℝ = B.restrictScalars ℝ * D) {Y : H →L[ℂ] H}
+    (hY : Y ∈ StarAlgebra.elemental ℝ B) :
+    D * Y.restrictScalars ℝ = Y.restrictScalars ℝ * D :=
+  StarAlgebra.elemental.le_of_mem (realCommutant_isClosed D hD) hc hY
+
+/-- `CFC.sqrt B ∈ elemental ℝ B` for `0 ≤ B` (via `CFC.sqrt = cfcₙ Real.sqrt = cfc Real.sqrt`). -/
+theorem sqrt_mem_elemental (B : H →L[ℂ] H) (hB : 0 ≤ B) :
+    CFC.sqrt B ∈ StarAlgebra.elemental ℝ B := by
+  rw [CFC.sqrt_eq_real_sqrt B, cfcₙ_eq_cfc]
+  exact cfc_mem_elemental Real.sqrt B
+
+/-- **★ `D·T = T·D`** (operator form): the antilinear modular conjugation `D` commutes with the
+    positive modulus `T = √(R(2−R))`.  Whence `J = D·T⁻¹` is self-adjoint and `J² = 1`. -/
+theorem rvdPmQ_commute_rvdT (S : StandardSubspace H) :
+    rvdPmQ S * (rvdT S).restrictScalars ℝ = (rvdT S).restrictScalars ℝ * rvdPmQ S := by
+  have hsqrt : CFC.sqrt (rvdRC S * rvdTwoSubRC S) = rvdT S :=
+    CFC.sqrt_unique (rvdT_sq S) (rvdT_nonneg S)
+  have hApos : (0 : H →L[ℂ] H) ≤ rvdRC S * rvdTwoSubRC S :=
+    Commute.mul_nonneg (rvdRC_nonneg S) (rvdTwoSubRC_nonneg S) (rvdRC_commute_rvdTwoSubRC S)
+  have hbase : rvdPmQ S * (rvdRC S * rvdTwoSubRC S).restrictScalars ℝ
+      = (rvdRC S * rvdTwoSubRC S).restrictScalars ℝ * rvdPmQ S := by
+    refine ContinuousLinearMap.ext fun ξ => ?_
+    simpa [ContinuousLinearMap.mul_apply] using rvdPmQ_commute_A S ξ
+  have hmem : CFC.sqrt (rvdRC S * rvdTwoSubRC S) ∈ StarAlgebra.elemental ℝ (rvdRC S * rvdTwoSubRC S) :=
+    sqrt_mem_elemental _ hApos
+  have := commute_of_mem_elemental (rvdRC S * rvdTwoSubRC S) (rvdPmQ S) (rvdPmQ_isSelfAdjoint S)
+    hbase hmem
+  rwa [hsqrt] at this
+
+/-- **★ `D·T = T·D`** (pointwise): `D(T ξ) = T(D ξ)`. -/
+theorem rvdPmQ_commute_rvdT_apply (S : StandardSubspace H) (ξ : H) :
+    rvdPmQ S (rvdT S ξ) = rvdT S (rvdPmQ S ξ) := by
+  have h := DFunLike.congr_fun (rvdPmQ_commute_rvdT S) ξ
+  simpa [ContinuousLinearMap.mul_apply] using h
 
 end QIQTH.StandardSubspaceModular
