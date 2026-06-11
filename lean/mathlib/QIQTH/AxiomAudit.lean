@@ -2182,5 +2182,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — CGP SUM-RULE scalar skeleton: g(2−r)=−g(r) (reflection symmetry, spectral
 -- shadow of JΔJ=Δ⁻¹) + the manifestly-nonnegative CGP density 1_{(0,1)}((2−r)/r−1)g. The full sum rule
 -- cgpEntropy=∫cgpDensity≥0 (for ξ∈𝒦) is GATED on the spectral balance (JRJ=2−R + Tomita fixedness ξ=JΔ^½ξ).
+#print axioms QIQTH.StandardSubspaceModular.modConj_rvdRC_modConj
+-- expected: standard only — ★ J R J = 2 − R: the modular conjugation REFLECTS R (bounded shadow of the
+-- canonical Tomita relation JΔJ=Δ⁻¹). From D(R−1)=−(R−1)D ⟹ DR=(2−R)D, transported to J via J(Tξ)=Dξ on
+-- the dense range of T (T,R commute). One of the TWO CGP spectral-balance prerequisites — NOW DONE
+-- (remaining: Tomita fixedness ξ=JΔ^{1/2}ξ for ξ∈𝒦).
 
 end QIQTH.AxiomAudit

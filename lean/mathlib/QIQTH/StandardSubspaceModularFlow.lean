@@ -665,6 +665,54 @@ theorem modConj_sq (S : StandardSubspace H) (η : H) : modConj S (modConj S η) 
   refine ext_inner_left ℝ fun ζ => ?_
   rw [← modConj_isSelfAdjoint S ζ (modConj S η), modConj_inner_map]
 
+/-! ### Modular reflection of `R`: `J R J = 2 − R`
+
+  The bounded shadow of the canonical Tomita–Takesaki relation `J Δ J = Δ⁻¹` (with `Δ = (2−R)R⁻¹`):
+  the modular conjugation `J` reflects `R` to `2 − R`.  The engine is the anticommutation
+  `D(R−1) = −(R−1)D` (`rvdPmQ_anticommute_rvdR_sub_one`), giving `D R = (2−R) D`, transported to `J`
+  through `J(Tξ) = Dξ` on the dense range of `T` (using `T,R` commute). -/
+
+/-- `T` commutes with `R` (both are continuous functions of `R`). -/
+theorem rvdRC_commute_rvdT (S : StandardSubspace H) : Commute (rvdRC S) (rvdT S) := by
+  have hcomm_2R : Commute (rvdRC S) (rvdTwoSubRC S) := rvdRC_commute_rvdTwoSubRC S
+  have hSR : Commute (rvdRC S) (rvdSqrtR S) :=
+    ((Commute.refl (rvdRC S)).symm.cfcₙ_nnreal NNReal.sqrt).symm
+  have hST : Commute (rvdRC S) (rvdSqrtTwoSubR S) :=
+    (hcomm_2R.symm.cfcₙ_nnreal NNReal.sqrt).symm
+  rw [rvdT]; exact hSR.mul_right hST
+
+/-- `D R = (2 − R) D` pointwise — from the anticommutation `D(R−1) = −(R−1)D`. -/
+theorem rvdPmQ_rvdRC (S : StandardSubspace H) (ξ : H) :
+    rvdPmQ S (rvdRC S ξ) = rvdTwoSubRC S (rvdPmQ S ξ) := by
+  have h := DFunLike.congr_fun (rvdPmQ_anticommute_rvdR_sub_one S) ξ
+  simp only [ContinuousLinearMap.mul_apply, ContinuousLinearMap.sub_apply,
+    ContinuousLinearMap.one_apply, ContinuousLinearMap.neg_apply, map_sub] at h
+  rw [rvdTwoSubRC]
+  simp only [ContinuousLinearMap.sub_apply, ContinuousLinearMap.smul_apply,
+    ContinuousLinearMap.one_apply]
+  show rvdPmQ S (rvdR S ξ) = _
+  rw [two_smul]
+  have hRC : rvdRC S (rvdPmQ S ξ) = rvdR S (rvdPmQ S ξ) := rfl
+  rw [hRC]; linear_combination (norm := module) h
+
+/-- `J R = (2 − R) J` pointwise (the reflection intertwiner), by density from `range T`. -/
+theorem modConj_rvdRC_reflect (S : StandardSubspace H) (ξ : H) :
+    modConj S (rvdRC S ξ) = rvdTwoSubRC S (modConj S ξ) := by
+  refine congrFun (Continuous.ext_on (rvdT_restrictScalars_denseRange S)
+    ((modConj S).continuous.comp (rvdRC S).continuous)
+    ((rvdTwoSubRC S).continuous.comp (modConj S).continuous) ?_) ξ
+  rintro v ⟨x, rfl⟩
+  show modConj S (rvdRC S (rvdT S x)) = rvdTwoSubRC S (modConj S (rvdT S x))
+  have hcomm : rvdRC S (rvdT S x) = rvdT S (rvdRC S x) :=
+    DFunLike.congr_fun (rvdRC_commute_rvdT S).eq x
+  rw [hcomm, modConj_rvdT, modConj_rvdT, rvdPmQ_rvdRC]
+
+/-- **★ `J R J = 2 − R`** — the modular conjugation reflects `R` (the bounded shadow of `J Δ J = Δ⁻¹`).
+    One of the canonical Tomita–Takesaki relations, and a prerequisite for the CGP spectral balance. -/
+theorem modConj_rvdRC_modConj (S : StandardSubspace H) (ξ : H) :
+    modConj S (rvdRC S (modConj S ξ)) = rvdTwoSubRC S ξ := by
+  rw [modConj_rvdRC_reflect, modConj_sq]
+
 /-! ### `cfcCont` — the continuous-function bounded FC of `R`, bundled for Stone–Weierstrass
 
 `U_t = u_t(R)` is discontinuous at the spectral endpoints `r = 0, 2`, but `U_t·A` with `A = R(2−R)`
