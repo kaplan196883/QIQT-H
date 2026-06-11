@@ -1384,6 +1384,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.rvdPmQ_injective
 -- expected: standard only — ★ D=P−Q INJECTIVE (Dξ=0 ⟹ Pξ=Qξ∈𝒦∩i𝒦=⊥ ⟹ Rξ=0 ⟹ ξ=0). Kernel-free D
 -- ⟹ the modular conjugation J (of D=J·T) is a FULL involution J²=1 (J foundation).
+#print axioms QIQTH.StandardSubspaceModular.rvdPmQ_commute_A
+-- expected: standard only — D commutes with A=R(2−R)=T² (trivial: A=D², D·D²=D²·D). The inductive
+-- BASE for D·T=T·D (D·√A=√A·D), which lifts by the closed real-commutant argument
+-- ({Y|D∘Y=Y∘D} closed ℝ-*-subalgebra ⊇ elemental ℝ A ∋ √A) — the remaining J/covariance frontier.
 #print axioms QIQTH.StandardSubspaceModular.rvdR_le_two
 -- expected: standard only — 2·1−R positive (R≤2). With rvdR_isPositive: full RvD bound 0≤R≤2, so
 -- both R^{1/2} and (2−R)^{1/2} exist (the polar-decomposition factors T=R^{1/2}(2−R)^{1/2}).

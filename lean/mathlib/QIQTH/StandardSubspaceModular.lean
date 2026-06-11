@@ -539,6 +539,14 @@ theorem rvdRC_mul_rvdTwoSubRC_apply (S : StandardSubspace H) (ξ : H) :
     rvdPmQ, ContinuousLinearMap.sub_apply, map_add, map_sub, hP, hQ]
   abel
 
+/-- **`D` commutes with `A = R(2−R) = T²`** (the inductive base for `D·T = T·D`).  Trivial because
+    `A = D²` as maps (`rvdRC_mul_rvdTwoSubRC_apply`): `D·D² = D³ = D²·D`.  The full `D·√A = √A·D`
+    (the antilinear modular-conjugation commutation, whence `J² = 1`) follows from this base by the
+    closed-commutant argument — `{Y | D∘Y = Y∘D}` is a closed real *-subalgebra ⊇ `elemental ℝ A ∋ √A`. -/
+theorem rvdPmQ_commute_A (S : StandardSubspace H) (ξ : H) :
+    rvdPmQ S ((rvdRC S * rvdTwoSubRC S) ξ) = (rvdRC S * rvdTwoSubRC S) (rvdPmQ S ξ) := by
+  rw [rvdRC_mul_rvdTwoSubRC_apply, rvdRC_mul_rvdTwoSubRC_apply]
+
 /-- `‖A ξ‖² = ⟪ξ, A(A ξ)⟫_ℝ` for a self-adjoint ℂ-operator `A` (real inner product = `Re` of ℂ). -/
 private lemma re_inner_normsq_selfadjoint (A : H →L[ℂ] H) (hA : IsSelfAdjoint A) (ξ : H) :
     ‖A ξ‖ ^ 2 = inner ℝ ξ (A (A ξ)) := by
