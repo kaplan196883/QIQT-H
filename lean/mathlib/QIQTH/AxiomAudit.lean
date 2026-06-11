@@ -2251,5 +2251,13 @@ namespace QIQTH.AxiomAudit
 -- STRONG CONTINUITY of Γ(Δ^{it}) on coherent vectors: t↦Γ(Δ^{it})e(f) continuous = continuous_FockExpVec
 -- (coherent map f↦e(f) continuous, from ⟪e(f),e(g)⟫=exp⟪f,g⟫) ∘ modUnitary_stronglyContinuous — the
 -- second-quantized lift of the one-particle Stone generator. Γ(Δ^{it}) is a genuine modular flow.
+#print axioms QIQTH.Fock.relModFlowH_zero
+#print axioms QIQTH.Fock.connesCocycle_eq
+-- expected: standard only — PHASE C: the RELATIVE MODULAR OPERATOR of a coherent state W(f)Ω relative to the
+-- vacuum, Δ_{W(f)Ω|Ω}^{it}=W(f)Γ(Δ^{it})W(f)⋆ (relModFlowH, bounded Weyl conjugate — Araki Δ_{uΩ|Ω}=uΔ_Ω u⋆).
+-- HEADLINE connesCocycle_eq: the Connes cocycle (Dω_{W(f)Ω}:Dω_Ω)_t = Δ_{rel}^{it}Δ_Ω^{-it} = W(f)W(−Δ^{it}f),
+-- a PRODUCT OF WEYL OPERATORS — the Araki/Connes formula for a coherent excitation, immediate from the Tomita
+-- covariance secondQuantModFlowH_weylH + group law. The full relative entropy S(ω_{W(f)Ω}‖ω_Ω) reduces (CGP)
+-- to the one-particle cgpEntropy already proved ≥0. General two-state relative modular ops = unbounded-GNS frontier.
 
 end QIQTH.AxiomAudit
