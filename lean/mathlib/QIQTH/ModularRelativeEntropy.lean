@@ -122,4 +122,46 @@ theorem cgpEntropy_smul (S : StandardSubspace H) (c : ℂ) (ξ : H) :
       (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).scalarMeasure_smul c ξ,
       integral_smul_measure, ENNReal.toReal_ofReal (sq_nonneg _), smul_eq_mul, mul_neg]
 
+/-! ### The bounded-spectrum case: entropy as a modular-Hamiltonian expectation -/
+
+/-- The entropy density `ω ↦ g(ω) = log((2−ω)/ω)` is measurable on the spectrum (everywhere, with the
+    junk value of `Real.log` at the endpoints). -/
+theorem entropyDensity_measurable {S : StandardSubspace H} :
+    Measurable (fun ω : spectrum ℝ (rvdRC S) => entropyDensity ω.val) :=
+  Real.measurable_log.comp
+    ((measurable_const.sub measurable_subtype_coe).div measurable_subtype_coe)
+
+/-- **Uniform bound on the entropy density away from the spectral endpoints:** for `r ∈ [a, 2−a]`
+    (`0 < a`), `|log((2−r)/r)| ≤ log((2−a)/a)`.  This is what makes `g` bounded on a modular spectrum
+    that stays away from `{0, 2}` (the "regular" / finite-entropy regime). -/
+theorem entropyDensity_abs_le {a r : ℝ} (ha : 0 < a) (har : a ≤ r) (hr2 : r ≤ 2 - a) :
+    |entropyDensity r| ≤ Real.log ((2 - a) / a) := by
+  have hr : 0 < r := lt_of_lt_of_le ha har
+  have h2r : 0 < 2 - r := by linarith
+  have h2a : 0 < 2 - a := by linarith
+  rw [entropyDensity, abs_le]
+  refine ⟨?_, ?_⟩
+  · rw [← Real.log_inv, inv_div]
+    exact (Real.log_le_log_iff (div_pos ha h2a) (div_pos h2r hr)).mpr
+      ((div_le_div_iff₀ h2a hr).mpr (by nlinarith))
+  · exact (Real.log_le_log_iff (div_pos h2r hr) (div_pos h2a ha)).mpr
+      ((div_le_div_iff₀ hr ha).mpr (by nlinarith))
+
+/-- **The bounded-spectrum case — the modular relative entropy IS an operator expectation:**
+    when the modular spectrum `σ(R) ⊆ [a, 2−a]` stays away from the endpoints `{0,2}` (`0 < a ≤ 1`),
+    the entropy density `g` is bounded on `σ(R)`, so the one-particle relative entropy equals
+        `S(ξ) = −⟪ξ, g(R) ξ⟫`,
+    the expectation value of the bounded self-adjoint modular Hamiltonian `g(R) = log((2−R)/R)`. -/
+theorem cgpEntropy_eq_neg_re_inner (S : StandardSubspace H) (ξ : H) {a : ℝ} (ha : 0 < a) (ha1 : a ≤ 1)
+    (hspec : ∀ ω : spectrum ℝ (rvdRC S), a ≤ (ω : ℝ) ∧ (ω : ℝ) ≤ 2 - a) :
+    cgpEntropy S ξ = -Complex.re (inner ℂ ξ
+      (borelFC (rvdRC S) (rvdRC_isSelfAdjoint S) (C := Real.log ((2 - a) / a))
+        (Complex.measurable_ofReal.comp entropyDensity_measurable)
+        (Real.log_nonneg ((one_le_div ha).mpr (by linarith)))
+        (fun ω => by
+          simp only [Function.comp_apply]
+          rw [Complex.norm_real, Real.norm_eq_abs]
+          exact entropyDensity_abs_le ha (hspec ω).1 (hspec ω).2) ξ)) := by
+  rw [cgpEntropy, rvdSpec_integral_eq_re_inner S ξ entropyDensity_measurable]
+
 end QIQTH
