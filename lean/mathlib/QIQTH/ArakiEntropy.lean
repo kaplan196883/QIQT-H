@@ -42,6 +42,8 @@ noncomputable instance : InnerProductSpace ℂ (HSMat n) :=
 instance : FiniteDimensional ℂ (HSMat n) :=
   inferInstanceAs (FiniteDimensional ℂ (Matrix n n ℂ))
 
+instance : CompleteSpace (HSMat n) := FiniteDimensional.complete ℂ (HSMat n)
+
 /-- The identification of `HSMat n` with `Matrix n n ℂ` (definitional). -/
 def toMat (X : HSMat n) : Matrix n n ℂ := X
 
@@ -114,5 +116,38 @@ theorem Lmul_commute_Rmul (A B : Matrix n n ℂ) : Commute (Lmul A) (Rmul B) := 
 @[simp] theorem Rmul_one : (Rmul (1 : Matrix n n ℂ) : HSMat n →L[ℂ] HSMat n) = 1 := by
   ext X; apply toMat_injective
   simp [ContinuousLinearMap.one_apply]
+
+/-- **Adjoint of `Lmul`:** `(Lmul A)⋆ = Lmul Aᴴ` (w.r.t. the HS inner product). -/
+theorem Lmul_adjoint (A : Matrix n n ℂ) :
+    ContinuousLinearMap.adjoint (Lmul A) = Lmul Aᴴ := by
+  symm
+  rw [ContinuousLinearMap.eq_adjoint_iff]
+  intro x y
+  rw [hsInner_eq, hsInner_eq, Lmul_apply, Lmul_apply, Matrix.conjTranspose_mul,
+      Matrix.conjTranspose_conjTranspose, ← Matrix.mul_assoc, Matrix.trace_mul_cycle]
+
+/-- **Adjoint of `Rmul`:** `(Rmul A)⋆ = Rmul Aᴴ`. -/
+theorem Rmul_adjoint (A : Matrix n n ℂ) :
+    ContinuousLinearMap.adjoint (Rmul A) = Rmul Aᴴ := by
+  symm
+  rw [ContinuousLinearMap.eq_adjoint_iff]
+  intro x y
+  rw [hsInner_eq, hsInner_eq, Rmul_apply, Rmul_apply, Matrix.conjTranspose_mul,
+      Matrix.conjTranspose_conjTranspose, Matrix.mul_assoc]
+
+/-! ### The relative modular operator `Δ = L_σ R_ρ⁻¹` -/
+
+/-- **The (finite-dim) relative modular operator** `Δ_{σ|ρ} = L_σ · R_ρ⁻¹` on Hilbert–Schmidt space —
+    `σ` in the numerator, `ρ` in the denominator (the convention giving Umegaki with the `−` sign). -/
+noncomputable def relMod (σ ρ : Matrix n n ℂ) : HSMat n →L[ℂ] HSMat n :=
+  Lmul σ * Rmul ρ⁻¹
+
+/-- `Δ_{σ|ρ}` is self-adjoint for Hermitian `σ, ρ`. -/
+theorem relMod_isSelfAdjoint {σ ρ : Matrix n n ℂ} (hσ : σ.IsHermitian) (hρ : ρ.IsHermitian) :
+    IsSelfAdjoint (relMod σ ρ) := by
+  show star (relMod σ ρ) = relMod σ ρ
+  rw [relMod, star_mul, ContinuousLinearMap.star_eq_adjoint, ContinuousLinearMap.star_eq_adjoint,
+      Lmul_adjoint, Rmul_adjoint, hσ.eq, Matrix.conjTranspose_nonsing_inv, hρ.eq]
+  exact (Lmul_commute_Rmul σ ρ⁻¹).symm.eq
 
 end QIQTH.Araki
