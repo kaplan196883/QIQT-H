@@ -95,18 +95,19 @@ theorem born_mean_conditional
   rw [expectedIndicator_eq_marginal]
   exact h_born_marg k
 
-/-- A **canonical IC measure** for a Born distribution: structurally
-    distinguished (we leave WHAT makes it canonical to the framework's
-    physics axiom) AND pushes forward to Born weights. -/
+/-- An **IC measure pushing forward to Born weights**: a probability measure `μ` on the microscopic
+    IC space whose outcome-marginal is the Born distribution `|c_k|²`.
+
+    (The structure formerly carried a vacuous `isCanonical : True` placeholder field; it has been
+    REMOVED — it was inert (used by no proof) and `: True` encodes no constraint.  WHICH measure is
+    physically "canonical" remains the genuine open problem, stated honestly in `audit_summary`
+    below, not smuggled in as a trivial field.) -/
 structure CanonicalIcMeasure
     (Γ Outcome : Type*) [Fintype Γ]
     (outcome : Γ → Outcome) (c : Outcome → ℝ) where
   μ : Γ → ℝ
   nn : ∀ γ, 0 ≤ μ γ
   sum_one : ∑ γ, μ γ = 1
-  /-- The canonical-measure axiom is left abstract at this layer; the
-      framework must supply a concrete physical justification. -/
-  isCanonical : True
   /-- The pushforward of μ under the outcome map equals Born weights. -/
   born_marginal : ∀ k, outcomeMarginal outcome μ k = (c k)^2
 
