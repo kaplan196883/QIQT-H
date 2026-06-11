@@ -263,4 +263,49 @@ theorem modUnitary_stronglyContinuous (S : StandardSubspace H) (ξ : H) :
   simp only [Function.comp, Real.sqrt_zero] at hfin
   exact Filter.Tendsto.congr (fun n => Real.sqrt_sq (norm_nonneg _)) hfin
 
+/-! ### Toward standard-subspace invariance `U_t 𝒦 = 𝒦`
+
+`𝒦`'s real-orthogonal projection is `P = ½(R + D)` (RvD: `P = (1+Δ)⁻¹ + JΔ^{1/2}(1+Δ)⁻¹`).  So
+`U_t` preserves `𝒦` as soon as it commutes with both `R` and `D`.  The structural reduction is done
+here; the two commutators are the remaining analytic obligations:
+  • `[U_t, R] = 0` — `U_t` is a function of `R`; reachable once `R = borelFC(id)` (polarize
+    `re_inner_T_eq_integral`).
+  • `[U_t, D] = 0` — the **covariance** `D·f(R) = conj(f(2−·))(R)·D` (here `conj(u_t(2−r)) = u_t(r)`).
+    `D` is antilinear and conjugates the spectrum of `R` via `r ↦ 2−r` (`rvdPmQ_mul_rvdR`); this needs
+    antilinear conjugation of the bounded Borel FC — the genuine frontier (no Mathlib infrastructure). -/
+
+/-- **`R + D = 2·P`** (RvD `P = ½(R+D)`): `(P+Q) + (P−Q) = 2P`. -/
+theorem rvdR_add_rvdPmQ_eq (S : StandardSubspace H) :
+    rvdR S + rvdPmQ S = (2 : ℝ) • projK S := by
+  rw [rvdR, rvdPmQ, two_smul]
+  abel
+
+/-- `𝒦`-membership via its projection: `ξ ∈ 𝒦 ↔ P ξ = ξ`. -/
+theorem mem_K_iff_projK (S : StandardSubspace H) (ξ : H) :
+    ξ ∈ S.toClosedSubmodule ↔ projK S ξ = ξ := by
+  rw [projK, Submodule.starProjection_eq_self_iff, mem_toSubmodule_iff]
+
+/-- **Reduction of `[U_t, P] = 0` to `[U_t, R] = 0 ∧ [U_t, D] = 0`** via `P = ½(R+D)`. -/
+theorem modUnitary_commute_projK_of (S : StandardSubspace H) (t : ℝ) (ξ : H)
+    (hR : modUnitary S t (rvdR S ξ) = rvdR S (modUnitary S t ξ))
+    (hD : modUnitary S t (rvdPmQ S ξ) = rvdPmQ S (modUnitary S t ξ)) :
+    modUnitary S t (projK S ξ) = projK S (modUnitary S t ξ) := by
+  have hP : ∀ η, (2 : ℝ) • projK S η = rvdR S η + rvdPmQ S η := fun η => by
+    have h := congrArg (fun A => (A : H →L[ℝ] H) η) (rvdR_add_rvdPmQ_eq S)
+    simpa using h.symm
+  have key : (2 : ℝ) • projK S (modUnitary S t ξ) = (2 : ℝ) • modUnitary S t (projK S ξ) := by
+    rw [hP, ← hR, ← hD, ← map_add, ← hP, ContinuousLinearMap.map_smul_of_tower]
+  exact (smul_right_injective H (two_ne_zero) key).symm
+
+/-- **Conditional standard-subspace invariance:** if `U_t` commutes with `R` and `D` (pointwise),
+    then `U_t 𝒦 ⊆ 𝒦`.  With unitarity this gives `U_t 𝒦 = 𝒦` — the property certifying `Δ^{it}` is the
+    modular flow OF `𝒦`.  The hypotheses are the two commutators isolated above. -/
+theorem modUnitary_mapsTo_K_of_commute (S : StandardSubspace H) (t : ℝ)
+    (hR : ∀ ξ, modUnitary S t (rvdR S ξ) = rvdR S (modUnitary S t ξ))
+    (hD : ∀ ξ, modUnitary S t (rvdPmQ S ξ) = rvdPmQ S (modUnitary S t ξ)) :
+    ∀ ξ ∈ S.toClosedSubmodule, modUnitary S t ξ ∈ S.toClosedSubmodule := by
+  intro ξ hξ
+  rw [mem_K_iff_projK] at hξ ⊢
+  rw [← modUnitary_commute_projK_of S t ξ (hR ξ) (hD ξ), hξ]
+
 end QIQTH.StandardSubspaceModular

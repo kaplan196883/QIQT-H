@@ -1455,6 +1455,17 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ STRONG continuity t↦U_t ξ. So Δ^{it} is a STRONGLY CONTINUOUS
 -- one-parameter unitary group — the full textbook modular flow (norm continuity fails near endpoints;
 -- proved via sequential criterion + bounded-Borel-FC dominated convergence).
+-- Toward U_t𝒦=𝒦: structural reduction P=½(R+D) ⟹ [U_t,P]=0 from [U_t,R]=0 ∧ [U_t,D]=0:
+#print axioms QIQTH.StandardSubspaceModular.rvdR_add_rvdPmQ_eq
+-- expected: standard only — R+D=2P (RvD P=½(R+D)), pure projection algebra.
+#print axioms QIQTH.StandardSubspaceModular.mem_K_iff_projK
+-- expected: standard only — ξ∈𝒦 ↔ Pξ=ξ.
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_commute_projK_of
+-- expected: standard only — [U_t,P]=0 reduced to [U_t,R]=0 ∧ [U_t,D]=0 via P=½(R+D).
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_mapsTo_K_of_commute
+-- expected: standard only — CONDITIONAL U_t𝒦⊆𝒦 given the two commutators. The remaining obligations:
+-- [U_t,R]=0 (reachable, R=borelFC(id) via polarizing inner_cfcHom_polarization) and the COVARIANCE
+-- [U_t,D]=0 (D antilinear conjugates spec(R) by r↦2−r; the genuine frontier, no Mathlib infra).
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
