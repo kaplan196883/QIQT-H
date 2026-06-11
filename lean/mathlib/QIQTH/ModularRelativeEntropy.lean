@@ -23,7 +23,7 @@ import QIQTH.StandardSubspaceModularFlow
 
 namespace QIQTH
 
-open MeasureTheory QIQTH.StandardSubspaceModular QIQTH.SpectralTheorem
+open MeasureTheory QIQTH.StandardSubspaceModular QIQTH.SpectralTheorem QIQTH.Spectral
 open scoped ENNReal
 
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
@@ -67,6 +67,48 @@ theorem rvdSpecMeasure_univ (S : StandardSubspace H) (ξ : H) :
     those of finite entropy, for which `g` is `μ^R_ξ`-integrable.) -/
 noncomputable def cgpEntropy (S : StandardSubspace H) (ξ : H) : ℝ :=
   -∫ ω, entropyDensity ω.val ∂(rvdSpecMeasure S ξ)
+
+/-- **Diagonal reduction of the polarized bounded-Borel form:** `B_f(x,x) = D_f(x) = ∫ f dμ_x`.
+    The `x = y` case of the sesquilinear `bilinDiag`, via the degree-2 homogeneity of `diagInt`. -/
+private theorem bilinDiag_self {Ω : Type*} [MeasurableSpace Ω]
+    (P : ProjectionValuedMeasure Ω H) (f : Ω → ℂ) (x : H) :
+    P.bilinDiag f x x = P.diagInt f x := by
+  have e2 : x + x = (2 : ℂ) • x := (two_smul ℂ x).symm
+  have e0 : x - x = (0 : ℂ) • x := by rw [sub_self, zero_smul]
+  have ep : Complex.I • x + x = (Complex.I + 1) • x := by rw [add_smul, one_smul]
+  have em : Complex.I • x - x = (Complex.I - 1) • x := by rw [sub_smul, one_smul]
+  have c2 : ((‖(2 : ℂ)‖ ^ 2 : ℝ) : ℂ) = 4 := by norm_num
+  have c0 : ((‖(0 : ℂ)‖ ^ 2 : ℝ) : ℂ) = 0 := by norm_num
+  have cp : ((‖(Complex.I + 1)‖ ^ 2 : ℝ) : ℂ) = 2 := by
+    have : (‖(Complex.I + 1)‖ ^ 2 : ℝ) = 2 := by
+      rw [← Complex.normSq_eq_norm_sq]
+      norm_num [Complex.normSq_apply, Complex.add_re, Complex.add_im, Complex.I_re, Complex.I_im,
+        Complex.one_re, Complex.one_im]
+    rw [this]; norm_num
+  have cm : ((‖(Complex.I - 1)‖ ^ 2 : ℝ) : ℂ) = 2 := by
+    have : (‖(Complex.I - 1)‖ ^ 2 : ℝ) = 2 := by
+      rw [← Complex.normSq_eq_norm_sq]
+      norm_num [Complex.normSq_apply, Complex.sub_re, Complex.sub_im, Complex.I_re, Complex.I_im,
+        Complex.one_re, Complex.one_im]
+    rw [this]; norm_num
+  rw [ProjectionValuedMeasure.bilinDiag, e2, e0, ep, em,
+      P.diagInt_smul, P.diagInt_smul, P.diagInt_smul, P.diagInt_smul, c2, c0, cp, cm]
+  ring
+
+/-- **Operator-expectation bridge:** for any *bounded* measurable real modular observable `f` on the
+    spectrum of `R`, its scalar spectral average equals the quantum expectation `re⟪ξ, f(R) ξ⟫`, where
+    `f(R)` is the bounded Borel functional calculus.  In particular a bounded (regularized) modular
+    Hamiltonian density gives `−∫ f dμ^R_ξ = re⟪ξ, (−f(R)) ξ⟫` — the entropy as a genuine expectation
+    value of a bounded self-adjoint operator. -/
+theorem rvdSpec_integral_eq_re_inner (S : StandardSubspace H) (ξ : H)
+    {f : spectrum ℝ (rvdRC S) → ℝ} (hf : Measurable f) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, ‖(f ω : ℂ)‖ ≤ C) :
+    ∫ ω, f ω ∂(rvdSpecMeasure S ξ)
+      = Complex.re (inner ℂ ξ (borelFC (rvdRC S) (rvdRC_isSelfAdjoint S)
+          (Complex.measurable_ofReal.comp hf) hC0 hC ξ)) := by
+  rw [inner_borelFC, bilinDiag_self, ProjectionValuedMeasure.diagInt, rvdSpecMeasure]
+  simp only [Function.comp_apply]
+  rw [integral_complex_ofReal, Complex.ofReal_re]
 
 /-- The vacuum coherent state (`ξ = 0`) has zero relative entropy with itself. -/
 @[simp] theorem cgpEntropy_zero (S : StandardSubspace H) : cgpEntropy S (0 : H) = 0 := by

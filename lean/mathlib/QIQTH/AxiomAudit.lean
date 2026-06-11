@@ -2162,5 +2162,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the one-particle modular relative entropy S(ξ)=−∫log((2−r)/r)dμ^R_ξ
 -- (cgpEntropy) over the scalar spectral measure of R; total mass ‖ξ‖²; vanishes at the vacuum ξ=0.
 -- Genuine continuum object (one-particle); full vN-algebra relative entropy needs Γ(Δ^{it}) (cited frontier).
+#print axioms QIQTH.rvdSpec_integral_eq_re_inner
+-- expected: standard only — ★ OPERATOR-EXPECTATION BRIDGE: for bounded measurable modular observable f,
+-- ∫f dμ^R_ξ = re⟪ξ, f(R)ξ⟫ (f(R) = bounded Borel FC). Makes the (regularized) modular relative entropy
+-- a genuine quantum expectation −re⟪ξ, K ξ⟫ of a bounded self-adjoint modular Hamiltonian, via the
+-- diagonal reduction bilinDiag_self + inner_borelFC + diagInt + integral_ofReal.
 
 end QIQTH.AxiomAudit
