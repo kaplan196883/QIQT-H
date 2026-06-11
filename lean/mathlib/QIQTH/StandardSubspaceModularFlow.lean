@@ -889,4 +889,73 @@ theorem rvdPmQ_mul_rvdRC_rs :
     ContinuousLinearMap.one_apply] at h ⊢
   exact h
 
+/-- **★ The continuous intertwiner `D·f(R) = conj(f(2−·))(R)·D`** for every CONTINUOUS `f` on the
+    symmetric domain `Ω`.  Proved by complex Stone–Weierstrass: both sides are continuous in `f`, the
+    `coordΩ`-generated subalgebra is dense, and they agree there (base case `D·R=(2−R)·D` + the
+    algebra structure).  `D` is antilinear, so the relation is conjugate-linear — hence the "good set"
+    is a plain `Subalgebra` (not a `*`-subalgebra), but `coordΩ` is self-adjoint so the generated
+    subalgebra still has dense closure. -/
+theorem cfcΩ_intertwine (f : C(Set.Icc (-covM S) (2 + covM S), ℂ)) :
+    rvdPmQ S * (cfcΩ S f).restrictScalars ℝ
+      = (cfcΩ S (twΩ S f)).restrictScalars ℝ * rvdPmQ S := by
+  have hrs : Continuous (fun Y : H →L[ℂ] H => Y.restrictScalars ℝ) := by
+    have h := (ContinuousLinearMap.restrictScalarsL ℂ H H ℝ ℝ).continuous
+    rwa [ContinuousLinearMap.coe_restrict_scalarsL'] at h
+  have hL : Continuous fun f : C(Set.Icc (-covM S) (2 + covM S), ℂ) =>
+      rvdPmQ S * (cfcΩ S f).restrictScalars ℝ :=
+    continuous_const.mul (hrs.comp (cfcΩ_continuous S))
+  have htw : Continuous (twΩ S) :=
+    continuous_star.comp (ContinuousMap.continuous_precomp (tauΩ S))
+  have hR : Continuous fun f : C(Set.Icc (-covM S) (2 + covM S), ℂ) =>
+      (cfcΩ S (twΩ S f)).restrictScalars ℝ * rvdPmQ S :=
+    (hrs.comp ((cfcΩ_continuous S).comp htw)).mul continuous_const
+  have hsep : (StarAlgebra.adjoin ℂ {coordΩ S}).SeparatesPoints := by
+    intro x y hxy
+    refine ⟨_, ⟨coordΩ S, StarAlgebra.self_mem_adjoin_singleton ℂ (coordΩ S), rfl⟩, ?_⟩
+    intro hc
+    exact hxy (Subtype.ext (Complex.ofReal_injective hc))
+  have hcarr : (StarAlgebra.adjoin ℂ {coordΩ S} : Set C(Set.Icc (-covM S) (2 + covM S), ℂ))
+      = (Algebra.adjoin ℂ {coordΩ S} : Set C(Set.Icc (-covM S) (2 + covM S), ℂ)) := by
+    rw [← StarSubalgebra.coe_toSubalgebra, StarAlgebra.adjoin_toSubalgebra, Set.star_singleton,
+        coordΩ_star, Set.union_self]
+  have hdense : Dense (Algebra.adjoin ℂ {coordΩ S} : Set C(Set.Icc (-covM S) (2 + covM S), ℂ)) := by
+    rw [dense_iff_closure_eq, ← hcarr, ← StarSubalgebra.topologicalClosure_coe,
+        ContinuousMap.starSubalgebra_topologicalClosure_eq_top_of_separatesPoints _ hsep,
+        StarSubalgebra.coe_top]
+  have hEq : Set.EqOn (fun f => rvdPmQ S * (cfcΩ S f).restrictScalars ℝ)
+      (fun f => (cfcΩ S (twΩ S f)).restrictScalars ℝ * rvdPmQ S)
+      (Algebra.adjoin ℂ {coordΩ S} : Set _) := by
+    intro g hg
+    induction hg using Algebra.adjoin_induction with
+    | mem x hx =>
+      rw [Set.mem_singleton_iff] at hx; subst hx
+      simp only [cfcΩ_coordΩ, cfcΩ_twΩ_coordΩ]
+      exact rvdPmQ_mul_rvdRC_rs S
+    | algebraMap r =>
+      simp only
+      rw [Algebra.algebraMap_eq_smul_one, cfcΩ_smul, cfcΩ_one,
+          show twΩ S (r • (1 : C(Set.Icc (-covM S) (2 + covM S), ℂ))) = (starRingEnd ℂ) r • 1 by
+            rw [twΩ, ContinuousMap.smul_comp, ContinuousMap.one_comp, star_smul, star_one]; rfl,
+          cfcΩ_smul, cfcΩ_one]
+      refine ContinuousLinearMap.ext fun ξ => ?_
+      simp only [ContinuousLinearMap.mul_apply, ContinuousLinearMap.coe_restrictScalars',
+        ContinuousLinearMap.smul_apply, ContinuousLinearMap.one_apply, rvdPmQ_smul_conj]
+    | add x y hx hy ihx ihy =>
+      simp only at ihx ihy ⊢
+      rw [cfcΩ_add, twΩ_add, cfcΩ_add,
+          show ((cfcΩ S x + cfcΩ S y).restrictScalars ℝ)
+            = (cfcΩ S x).restrictScalars ℝ + (cfcΩ S y).restrictScalars ℝ from rfl,
+          show ((cfcΩ S (twΩ S x) + cfcΩ S (twΩ S y)).restrictScalars ℝ)
+            = (cfcΩ S (twΩ S x)).restrictScalars ℝ + (cfcΩ S (twΩ S y)).restrictScalars ℝ from rfl,
+          mul_add, add_mul, ihx, ihy]
+    | mul x y hx hy ihx ihy =>
+      simp only at ihx ihy ⊢
+      rw [cfcΩ_mul, twΩ_mul, cfcΩ_mul,
+          show ((cfcΩ S x * cfcΩ S y).restrictScalars ℝ)
+            = (cfcΩ S x).restrictScalars ℝ * (cfcΩ S y).restrictScalars ℝ from rfl,
+          show ((cfcΩ S (twΩ S x) * cfcΩ S (twΩ S y)).restrictScalars ℝ)
+            = (cfcΩ S (twΩ S x)).restrictScalars ℝ * (cfcΩ S (twΩ S y)).restrictScalars ℝ from rfl,
+          ← mul_assoc, ihx, mul_assoc, ihy, ← mul_assoc]
+  exact congrFun (Continuous.ext_on hdense hL hR hEq) f
+
 end QIQTH.StandardSubspaceModular
