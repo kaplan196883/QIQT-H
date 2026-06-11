@@ -1176,4 +1176,15 @@ theorem modConj_commute_modUnitary (t : ℝ) (η : H) :
   simp only [ContinuousLinearMap.mul_apply] at hUT
   rw [hUT, modConj_rvdT, modConj_rvdT, modUnitary_commute_rvdPmQ]
 
+/-- **★★★ `Δ^{it} 𝒦 = 𝒦`** — the modular flow PRESERVES the standard subspace, both ways.  The
+    inclusion `U_t 𝒦 ⊆ 𝒦` (`modUnitary_mapsTo_K`) plus the group law (`U_{-t}` is the inverse) upgrades
+    to the membership equivalence `U_t ξ ∈ 𝒦 ↔ ξ ∈ 𝒦`. -/
+theorem modUnitary_mem_K_iff (t : ℝ) (ξ : H) :
+    modUnitary S t ξ ∈ S.toClosedSubmodule ↔ ξ ∈ S.toClosedSubmodule := by
+  refine ⟨fun h => ?_, fun h => modUnitary_mapsTo_K S t ξ h⟩
+  have h2 := modUnitary_mapsTo_K S (-t) (modUnitary S t ξ) h
+  rwa [show modUnitary S (-t) (modUnitary S t ξ) = ξ by
+        rw [← ContinuousLinearMap.mul_apply, ← modUnitary_add, neg_add_cancel, modUnitary_zero,
+            ContinuousLinearMap.one_apply]] at h2
+
 end QIQTH.StandardSubspaceModular

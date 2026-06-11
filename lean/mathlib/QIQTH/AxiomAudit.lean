@@ -1542,6 +1542,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ J Δ^{it} = Δ^{it} J (modular conjugation commutes with the flow), a
 -- canonical TT relation. UNBLOCKED by [U_t,D]=0: D=J·T, U_t commutes both D and T (via Commute.cfcₙ_nnreal),
 -- so J commutes U_t on dense range T.
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_mem_K_iff
+-- expected: standard only — ★★★ Δ^{it} 𝒦 = 𝒦 (membership iff): the modular flow preserves the standard
+-- subspace BOTH ways. Inclusion U_t𝒦⊆𝒦 + group law (U_{-t} inverse) ⟹ U_t ξ ∈ 𝒦 ↔ ξ ∈ 𝒦.
 
 -- Finite-dimensional Tomita–Takesaki (the modular engine)
 #print axioms QIQTH.FiniteModularTheory.modAut_mul
