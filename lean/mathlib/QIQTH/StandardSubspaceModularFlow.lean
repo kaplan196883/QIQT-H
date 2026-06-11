@@ -958,4 +958,56 @@ theorem cfcΩ_intertwine (f : C(Set.Icc (-covM S) (2 + covM S), ℂ)) :
           ← mul_assoc, ihx, mul_assoc, ihy, ← mul_assoc]
   exact congrFun (Continuous.ext_on hdense hL hR hEq) f
 
+/-! ### The covariance `[U_t, D] = 0` — apply the intertwiner to the damped modular function -/
+
+/-- The **damped modular function** `r ↦ u_t(r)·r·(2−r)` is CONTINUOUS on `ℝ`: `u_t` is bounded and
+    discontinuous only at the endpoints `r = 0, 2`, where the factor `r·(2−r)` vanishes — so the
+    product is continuous (squeeze at the endpoints; `u_t` continuous on `(0,2)` and `≡ 1` outside). -/
+theorem modChar_damp_continuous (t : ℝ) :
+    Continuous (fun r : ℝ => modChar t r * ((r : ℂ) * ((2 : ℂ) - (r : ℂ)))) := by
+  refine continuous_iff_continuousAt.mpr fun r₀ => ?_
+  have hdamp : Continuous (fun r : ℝ => (r : ℂ) * ((2 : ℂ) - (r : ℂ))) := by fun_prop
+  have hsqueeze : ∀ a : ℝ, ((a : ℂ) * ((2 : ℂ) - (a : ℂ))) = 0 →
+      ContinuousAt (fun r : ℝ => modChar t r * ((r : ℂ) * ((2 : ℂ) - (r : ℂ)))) a := by
+    intro a ha
+    rw [ContinuousAt, show modChar t a * ((a : ℂ) * ((2 : ℂ) - (a : ℂ))) = 0 by rw [ha, mul_zero]]
+    refine squeeze_zero_norm (fun r => le_of_eq (show
+        ‖modChar t r * ((r : ℂ) * ((2 : ℂ) - (r : ℂ)))‖ = ‖(r : ℂ) * ((2 : ℂ) - (r : ℂ))‖ by
+        rw [norm_mul, modChar_norm, one_mul])) ?_
+    have hc : Filter.Tendsto (fun r : ℝ => ‖(r : ℂ) * ((2 : ℂ) - (r : ℂ))‖) (nhds a)
+        (nhds ‖(a : ℂ) * ((2 : ℂ) - (a : ℂ))‖) := (hdamp.norm).continuousAt
+    rwa [ha, norm_zero] at hc
+  rcases eq_or_ne r₀ 0 with h0 | h0
+  · exact hsqueeze r₀ (by rw [h0]; simp)
+  rcases eq_or_ne r₀ 2 with h2 | h2
+  · exact hsqueeze r₀ (by rw [h2]; simp)
+  have hmc : ContinuousAt (modChar t) r₀ := by
+    by_cases hI : r₀ ∈ Set.Ioo (0 : ℝ) 2
+    · refine ContinuousAt.congr (f := fun r : ℝ =>
+        Complex.exp (Complex.I * (t : ℂ) * (Real.log ((2 - r) / r) : ℂ))) ?_ ?_
+      · refine Complex.continuous_exp.continuousAt.comp (continuousAt_const.mul ?_)
+        refine Complex.continuous_ofReal.continuousAt.comp ?_
+        exact ((continuousAt_const.sub continuousAt_id).div continuousAt_id (ne_of_gt hI.1)).log
+          (div_pos (sub_pos.mpr hI.2) hI.1).ne'
+      · filter_upwards [Ioo_mem_nhds hI.1 hI.2] with r hr
+        simp only [modChar]
+        rw [Set.piecewise_eq_of_mem _ _ _ hr]
+    · refine ContinuousAt.congr (f := fun _ : ℝ => (1 : ℂ)) continuousAt_const ?_
+      have hr0 : r₀ < 0 ∨ 2 < r₀ := by
+        rcases not_and_or.mp hI with h | h
+        · exact Or.inl (lt_of_le_of_ne (not_lt.mp h) h0)
+        · exact Or.inr (lt_of_le_of_ne (not_lt.mp h) (Ne.symm h2))
+      rcases hr0 with hlt | hgt
+      · filter_upwards [Iio_mem_nhds hlt] with r hr
+        have hni : r ∉ Set.Ioo (0 : ℝ) 2 :=
+          fun hm => absurd hm.1 (not_lt.mpr (Set.mem_Iio.mp hr).le)
+        simp only [modChar]
+        rw [Set.piecewise_eq_of_notMem _ _ _ hni]
+      · filter_upwards [Ioi_mem_nhds hgt] with r hr
+        have hni : r ∉ Set.Ioo (0 : ℝ) 2 :=
+          fun hm => absurd hm.2 (not_lt.mpr (Set.mem_Ioi.mp hr).le)
+        simp only [modChar]
+        rw [Set.piecewise_eq_of_notMem _ _ _ hni]
+  exact hmc.mul hdamp.continuousAt
+
 end QIQTH.StandardSubspaceModular
