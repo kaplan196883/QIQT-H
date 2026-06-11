@@ -547,6 +547,19 @@ theorem rvdPmQ_commute_A (S : StandardSubspace H) (ξ : H) :
     rvdPmQ S ((rvdRC S * rvdTwoSubRC S) ξ) = (rvdRC S * rvdTwoSubRC S) (rvdPmQ S ξ) := by
   rw [rvdRC_mul_rvdTwoSubRC_apply, rvdRC_mul_rvdTwoSubRC_apply]
 
+/-- **`T = R^{1/2}(2−R)^{1/2}` is injective.**  `T² = R(2−R) = D²` (`rvdT_sq`,
+    `rvdRC_mul_rvdTwoSubRC_apply`) is injective because `D = P−Q` is (`rvdPmQ_injective`), and `T`
+    injective follows.  `T` injective ⟹ `range T` dense (`(range T)‾ = (ker T)ᗮ = H`), which is what
+    makes the modular conjugation `J : T ξ ↦ D ξ` extend to all of `H`. -/
+theorem rvdT_injective (S : StandardSubspace H) : Function.Injective (rvdT S) := by
+  have hAinj : Function.Injective (rvdRC S * rvdTwoSubRC S) := fun a b hab => by
+    rw [rvdRC_mul_rvdTwoSubRC_apply, rvdRC_mul_rvdTwoSubRC_apply] at hab
+    exact rvdPmQ_injective S (rvdPmQ_injective S hab)
+  intro a b hab
+  apply hAinj
+  rw [show rvdRC S * rvdTwoSubRC S = rvdT S * rvdT S from (rvdT_sq S).symm,
+      ContinuousLinearMap.mul_apply, ContinuousLinearMap.mul_apply, hab]
+
 /-- `‖A ξ‖² = ⟪ξ, A(A ξ)⟫_ℝ` for a self-adjoint ℂ-operator `A` (real inner product = `Re` of ℂ). -/
 private lemma re_inner_normsq_selfadjoint (A : H →L[ℂ] H) (hA : IsSelfAdjoint A) (ξ : H) :
     ‖A ξ‖ ^ 2 = inner ℝ ξ (A (A ξ)) := by
