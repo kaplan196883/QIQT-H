@@ -212,10 +212,14 @@ done
 # (`matLog_le` — Mathlib's `CFC.log_le_log` transported through the CStarMatrix bridge), paired with
 # `ρᵢ ⪰ 0` and `log(pᵢρᵢ) = (log pᵢ)·1 + log ρᵢ`, gives `D(ρᵢ‖ρ̄) ≤ −log pᵢ` (`relEntropy_le_neg_log`);
 # summing yields `χ ≤ H(p)`.  This DISCHARGES ALL of ArakiInterface (11 → 0 axioms over the session).
-# Net 7 → 6.  Budget ratcheted to 6.  Remaining 6: the entire EntropyBridge module (RState, Sren_CPW,
-# chi_R, dK_modular, refState, bridge_identity) — genuine Tomita–Takesaki / Type II crossed-product
-# modular theory (CPW renormalized entropy, modular Hamiltonian), which Mathlib lacks entirely.
-AXIOM_BUDGET=6
+# Net 7 → 6.  Then the FINAL retirement: the entire EntropyBridge module (RState, Sren_CPW, chi_R,
+# dK_modular, refState, bridge_identity — 6 axioms) replaced by the `EntropyBridgeSystem` typeclass +
+# the concrete Hermitian-matrix instance (`instEntropyBridgeHermitianMat`), where `bridge_identity` is
+# the algebraic THEOREM `χ = D(ρ‖σ) = crossEnt(ρ,σ) − H(ρ)` (Donald A1).  Mirrors the DonaldSystem move:
+# the finite-dim (Type I) realization makes the bridge a conditional theorem about a genuine model; the
+# continuum Type II crossed-product statement remains the cited frontier (the StandardSubspace tower).
+# Net 6 → 0.  ★ THE QIQT-H FINITE CORE IS NOW AXIOM-FREE (standard three only).
+AXIOM_BUDGET=0
 AXIOM_COUNT="$(grep -rhE '^axiom ' QIQTH/ | wc -l | tr -d ' ')"
 echo "[axiom-budget] raw axiom count: $AXIOM_COUNT (budget $AXIOM_BUDGET)"
 if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then

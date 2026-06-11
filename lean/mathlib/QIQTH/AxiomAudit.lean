@@ -2123,4 +2123,17 @@ namespace QIQTH.AxiomAudit
 -- the C⋆-algebra CStarMatrix across the bridge (ofMatrix_le_iff + ofMatrixL homeomorphism). Lets joint
 -- concavity at the dense dyadic weights extend to all t — the limit step of Ando's route to Lieb.
 
+/-! ### ★ EntropyBridge RETIRED — the final 6 axioms discharged (budget 6 → 0) -/
+
+#print axioms QIQTH.EntropyBridge.bBridge
+-- expected: standard only — ★ the bridge identity χ = ΔK − (S_ren(ω)−S_ren(σ)) as a THEOREM for the
+-- concrete model (= Donald A1: D(ρ‖σ)=crossEnt(ρ,σ)−H(ρ), a `ring` identity in the trace terms).
+#print axioms QIQTH.EntropyBridge.instEntropyBridgeHermitianMat
+-- expected: standard only — the concrete Hermitian-matrix EntropyBridgeSystem instance; the witness
+-- discharging the former 6 EntropyBridge axioms (RState/Sren_CPW/chi_R/dK_modular/refState/bridge_identity).
+#print axioms QIQTH.EntropyBridge.EntropyBridgeSystem.chi_bound_from_dK_and_Sren_lower
+-- expected: standard only — the transfer lemma, now a theorem over any EntropyBridgeSystem.
+#print axioms QIQTH.EntropyBridge.fq_ambiguity_counterexample
+-- expected: standard only — the χ vs S_ren counterexample (already axiom-free).
+
 end QIQTH.AxiomAudit
