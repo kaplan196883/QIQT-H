@@ -626,4 +626,21 @@ theorem rvdPmQ_anticommute_rvdR_sub_one (S : StandardSubspace H) :
   rw [mul_sub, rvdPmQ_mul_rvdR, sub_mul, sub_mul, smul_mul_assoc, mul_one, one_mul, two_smul]
   abel
 
+/-- **`D` COMMUTES with `B := i·(R − 1)`** (the ℂ-linear, skew-adjoint generator).  Because `D` is
+    ANTILINEAR (`D(i•v) = −i•Dv`) and `D` anticommutes with `R − 1`, the two minus signs cancel:
+    `D·(i(R−1)) = −i·D(R−1) = −i·(−(R−1)D) = i(R−1)·D`.  This is `B ∈ realCommutant D` — the base
+    point from which `elemental ℝ B` (all θ-fixed continuous functions of `R`) commutes with `D`,
+    the engine of the modular covariance `[U_t, D] = 0`. -/
+theorem rvdPmQ_commute_I_rvdRC_sub_one (S : StandardSubspace H) :
+    rvdPmQ S * (Complex.I • (rvdRC S - 1)).restrictScalars ℝ
+      = (Complex.I • (rvdRC S - 1)).restrictScalars ℝ * rvdPmQ S := by
+  refine ContinuousLinearMap.ext fun ξ => ?_
+  have hanti := DFunLike.congr_fun (rvdPmQ_anticommute_rvdR_sub_one S) ξ
+  simp only [ContinuousLinearMap.mul_apply, ContinuousLinearMap.neg_apply,
+    ContinuousLinearMap.sub_apply, ContinuousLinearMap.one_apply, map_sub] at hanti
+  simp only [ContinuousLinearMap.mul_apply, ContinuousLinearMap.coe_restrictScalars',
+    ContinuousLinearMap.smul_apply, ContinuousLinearMap.sub_apply, ContinuousLinearMap.one_apply,
+    rvdRC_apply, rvdPmQ_smul_I, map_sub]
+  rw [hanti, smul_neg, neg_neg]
+
 end QIQTH.StandardSubspaceModular
