@@ -1,15 +1,24 @@
 ---
+import katex from 'katex';
+// Render each label's math to HTML at build time (robust — no client-side dependency).
+const m = (tex) => katex.renderToString(tex, { throwOnError: false });
+
 // The argument in five links. Each link carries its honest status colour.
 const links = [
-  { n: '1 · Holography', t: 'A bounded region R has finite capacity Q_R = A/4ℓ_P².',
+  { n: '1 · Holography',
+    t: `A bounded region ${m('R')} has finite capacity ${m('Q_R = A/4\\ell_P^2')}.`,
     cls: 's-postulate', tag: 'Postulate (FQ)' },
-  { n: '2 · Regional cost', t: 'Regional content is a state on the Type II algebra; cost = Araki relative entropy χ_R.',
+  { n: '2 · Regional cost',
+    t: `Regional content is a state on the Type II algebra; cost = Araki relative entropy ${m('\\chi_R')}.`,
     cls: 's-verified', tag: 'Calculus verified' },
-  { n: '3 · The crux', t: 'A ≥2-record content exceeds Q_R (Macroscopic Definiteness).',
+  { n: '3 · The crux',
+    t: `A ≥2-record content exceeds ${m('Q_R')} (Macroscopic Definiteness).`,
     cls: 's-conditional', tag: 'Conjecture' },
-  { n: '4 · Single record', t: '∴ ≥2-record states aren’t instantiable; per-run content is single-record.',
+  { n: '4 · Single record',
+    t: '∴ ≥2-record states aren’t instantiable; per-run content is single-record.',
     cls: 's-conditional', tag: 'Conditional' },
-  { n: '5 · Born', t: 'Probabilities |c_k|² from typicality of microscopic initial conditions.',
+  { n: '5 · Born',
+    t: `Probabilities ${m('|c_k|^2')} from typicality of microscopic initial conditions.`,
     cls: 's-open', tag: 'Open' },
 ];
 ---
@@ -17,7 +26,7 @@ const links = [
   {links.map((l) => (
     <div class="link">
       <div class="n">{l.n}</div>
-      <div class="t">{l.t}</div>
+      <div class="t" set:html={l.t}></div>
       <span class={`pill ${l.cls}`}><span class="dot"></span>{l.tag}</span>
     </div>
   ))}

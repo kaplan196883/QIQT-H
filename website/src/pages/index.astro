@@ -1,7 +1,9 @@
 ---
+import katex from 'katex';
 import Base from '../layouts/Base.astro';
 import Chain from '../components/Chain.astro';
 import StatusTable from '../components/StatusTable.astro';
+const chiR = katex.renderToString('\\chi_R', { throwOnError: false });
 ---
 <Base legend={true}>
   <header class="hero"><div class="wrap">
@@ -34,8 +36,8 @@ import StatusTable from '../components/StatusTable.astro';
   <section class="section"><div class="wrap">
     <h2>What is proven, what is open</h2>
     <p class="sub">Honesty is the point. The Lean development verifies the standard modular and
-      relative-entropy <em>calculus</em> underlying the regional cost \(\chi_R\), not the holographic
-      axiom, not the central conjecture, not the Born rule.</p>
+      relative-entropy <em>calculus</em> underlying the regional cost <span set:html={chiR} />, not the
+      holographic axiom, not the central conjecture, not the Born rule.</p>
     <StatusTable />
   </div></section>
 
@@ -46,7 +48,7 @@ import StatusTable from '../components/StatusTable.astro';
         <p>The measurement problem, finite information, and single outcomes, in plain language.</p>
         <span class="arrow">Start here →</span></a>
       <a class="card" href="/theory"><h3>The Theory</h3>
-        <p>The (FQ) axiom, \(\chi_R\), Type&nbsp;II algebras, and the conditional single-record theorem.</p>
+        <p>The (FQ) axiom, <span set:html={chiR} />, Type&nbsp;II algebras, and the conditional single-record theorem.</p>
         <span class="arrow">Read the math →</span></a>
       <a class="card" href="/formalization"><h3>Formalization</h3>
         <p>The Lean&nbsp;4 / Mathlib machine-checked substrate, theorem index, reproducible build.</p>
