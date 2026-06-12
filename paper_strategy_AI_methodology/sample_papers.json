@@ -1,0 +1,112 @@
+[
+  {
+    "title": "Ax-Prover: A Deep Reasoning Agentic Framework for Theorem Proving in Mathematics and Quantum Physics",
+    "authors": "Benjamin Breen; Marco Del Tredici; Jacob McCarran; Javier Aspuru Mijares; Kfir Sulimany; Jacob M. Taylor; Dirk Englund",
+    "publication_date": "2025-10-14",
+    "doi_or_url": "https://arxiv.org/abs/2510.12787",
+    "relevance_score": 10,
+    "selection_reason": "Nearest neighbor: multi-agent LLM+Lean (via MCP) theorem proving across math and quantum physics, autonomous or human-collaborative.",
+    "time_category": "current",
+    "quality_indicators": {"has_doi": true, "complete_abstract": true, "proper_citations": true, "platform_match": true},
+    "extracted_features": {"abstract_structure": "Problem-Method-Benchmarks-CaseStudy", "chapter_organization": "Intro/Related/System/Eval/CaseStudy/Limitations", "citation_style": "numeric", "language_style": "first-person-plural", "average_section_length": "medium"}
+  },
+  {
+    "title": "MerLean: An Agentic Framework for Autoformalization in Quantum Computation",
+    "authors": "Yuanjie Ren; Jinzheng Li; Yidi Qi",
+    "publication_date": "2026-02-18",
+    "doi_or_url": "https://arxiv.org/abs/2602.16554",
+    "relevance_score": 9,
+    "selection_reason": "Agentic LaTeX->Lean4/Mathlib autoformalization with back-translation for semantic review; quantum domain.",
+    "time_category": "recent",
+    "quality_indicators": {"has_doi": true, "complete_abstract": true, "proper_citations": true, "platform_match": true},
+    "extracted_features": {"abstract_structure": "Problem-Method-Results", "chapter_organization": "Intro/Pipeline/Eval", "citation_style": "numeric", "language_style": "first-person-plural", "average_section_length": "medium"}
+  },
+  {
+    "title": "Autoformalization in the Era of Large Language Models: A Survey",
+    "authors": "Ke Weng; et al.",
+    "publication_date": "2025-05-29",
+    "doi_or_url": "https://arxiv.org/abs/2505.23486",
+    "relevance_score": 8,
+    "selection_reason": "Comprehensive survey establishing terminology and workflow norms for LLM autoformalization; sets framing conventions.",
+    "time_category": "current",
+    "quality_indicators": {"has_doi": true, "complete_abstract": true, "proper_citations": true, "platform_match": true},
+    "extracted_features": {"abstract_structure": "Scope-Taxonomy-Workflow-Open", "chapter_organization": "survey", "citation_style": "numeric", "language_style": "passive-mixed", "average_section_length": "long"}
+  },
+  {
+    "title": "LeanArchitect: Automating Blueprint Generation for Humans and AI",
+    "authors": "LeanArchitect authors (arXiv:2601.22554)",
+    "publication_date": "2026-01-26",
+    "doi_or_url": "https://arxiv.org/abs/2601.22554",
+    "relevance_score": 9,
+    "selection_reason": "Directly relevant: automated Lean blueprint generation bridging human-readable math and machine-checked proofs.",
+    "time_category": "recent",
+    "quality_indicators": {"has_doi": true, "complete_abstract": true, "proper_citations": true, "platform_match": true},
+    "extracted_features": {"abstract_structure": "Problem-Method-Eval", "chapter_organization": "Intro/Method/Eval", "citation_style": "numeric", "language_style": "first-person-plural", "average_section_length": "medium"}
+  },
+  {
+    "title": "LeanMarathon: Toward Reliable AI Co-Mathematicians through Long-Horizon Lean Autoformalization",
+    "authors": "LeanMarathon authors (arXiv:2606.05400)",
+    "publication_date": "2026-06-05",
+    "doi_or_url": "https://arxiv.org/abs/2606.05400",
+    "relevance_score": 9,
+    "selection_reason": "Multi-agent harness for long-horizon Lean autoformalization, emphasizing legibility, recoverability, drift-resistance.",
+    "time_category": "recent",
+    "quality_indicators": {"has_doi": true, "complete_abstract": true, "proper_citations": true, "platform_match": true},
+    "extracted_features": {"abstract_structure": "Problem-Harness-Eval", "chapter_organization": "Intro/Harness/Eval/Discussion", "citation_style": "numeric", "language_style": "first-person-plural", "average_section_length": "medium"}
+  },
+  {
+    "title": "The Agentic Researcher: A Practical Guide to AI-Assisted Research in Mathematics and Machine Learning",
+    "authors": "Agentic Researcher authors (arXiv:2603.15914)",
+    "publication_date": "2026-03-19",
+    "doi_or_url": "https://arxiv.org/abs/2603.15914",
+    "relevance_score": 8,
+    "selection_reason": "Methodology/experience paper on AI-assisted research workflow; close in genre to the human-AI methodology framing.",
+    "time_category": "recent",
+    "quality_indicators": {"has_doi": true, "complete_abstract": true, "proper_citations": true, "platform_match": true},
+    "extracted_features": {"abstract_structure": "Practice-Guide", "chapter_organization": "Intro/Workflow/Lessons", "citation_style": "numeric", "language_style": "first-person", "average_section_length": "medium"}
+  },
+  {
+    "title": "Formal Mathematical Reasoning: A New Frontier in AI",
+    "authors": "Kaiyu Yang; et al.",
+    "publication_date": "2024-12-20",
+    "doi_or_url": "https://arxiv.org/abs/2412.16075",
+    "relevance_score": 8,
+    "selection_reason": "Position/agenda paper framing formal reasoning + AI; models how to situate a formalization contribution for cs.AI.",
+    "time_category": "current",
+    "quality_indicators": {"has_doi": true, "complete_abstract": true, "proper_citations": true, "platform_match": true},
+    "extracted_features": {"abstract_structure": "Position-Agenda", "chapter_organization": "Intro/Landscape/Challenges/Directions", "citation_style": "numeric", "language_style": "first-person-plural", "average_section_length": "long"}
+  },
+  {
+    "title": "The AI Scientist-v2: Workshop-Level Automated Scientific Discovery via Agentic Tree Search",
+    "authors": "Yutaro Yamada; et al.",
+    "publication_date": "2025-04-10",
+    "doi_or_url": "https://arxiv.org/abs/2504.08066",
+    "relevance_score": 7,
+    "selection_reason": "Flagship autonomous-discovery agent paper; sets the 'AI does research' genre conventions and evaluation framing.",
+    "time_category": "current",
+    "quality_indicators": {"has_doi": true, "complete_abstract": true, "proper_citations": true, "platform_match": true},
+    "extracted_features": {"abstract_structure": "System-Pipeline-Eval", "chapter_organization": "Intro/System/Experiments/Discussion", "citation_style": "numeric", "language_style": "first-person-plural", "average_section_length": "long"}
+  },
+  {
+    "title": "Draft, Sketch, and Prove: Guiding Formal Theorem Provers with Informal Proofs",
+    "authors": "Albert Q. Jiang; Sean Welleck; et al.",
+    "publication_date": "2022-10-21",
+    "doi_or_url": "https://arxiv.org/abs/2210.12283",
+    "relevance_score": 8,
+    "selection_reason": "Foundational autoformalization-to-proof method (draft->sketch->prove); a benchmark for the genre.",
+    "time_category": "classic",
+    "quality_indicators": {"has_doi": true, "complete_abstract": true, "proper_citations": true, "platform_match": true},
+    "extracted_features": {"abstract_structure": "Problem-Method-Results", "chapter_organization": "Intro/Method/Experiments", "citation_style": "numeric", "language_style": "first-person-plural", "average_section_length": "medium"}
+  },
+  {
+    "title": "Autoformalization with Large Language Models",
+    "authors": "Yuhuai Wu; Albert Q. Jiang; et al.",
+    "publication_date": "2022-05-25",
+    "doi_or_url": "https://arxiv.org/abs/2205.12615",
+    "relevance_score": 8,
+    "selection_reason": "Seminal paper coining the modern LLM-autoformalization program; foundational citation for the field.",
+    "time_category": "classic",
+    "quality_indicators": {"has_doi": true, "complete_abstract": true, "proper_citations": true, "platform_match": true},
+    "extracted_features": {"abstract_structure": "Problem-Method-Results", "chapter_organization": "Intro/Method/Experiments", "citation_style": "numeric", "language_style": "first-person-plural", "average_section_length": "medium"}
+  }
+]

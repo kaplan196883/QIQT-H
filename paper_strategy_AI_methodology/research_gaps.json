@@ -1,0 +1,153 @@
+[
+  {
+    "gap_id": "GAP-001",
+    "title": "Formalizing a researcher's own NEW foundational theory end-to-end (not benchmarks or existing literature)",
+    "type": "partial",
+    "definition": "Existing agentic-formalization systems target known, externally-fixed mathematics: competition benchmarks, theorems from published papers, or established axiom systems. None take a researcher's own novel, still-contested foundational framework and drive its entire deductive core through a proof assistant, where the contribution is the architecture of a new theory rather than reproducing a known result. This end-to-end formalization of an original research program is largely unexplored as a methodology.",
+    "evidence": [
+      {
+        "citation": "Breen et al., Ax-Prover (arXiv:2510.12787, 2025)",
+        "quote": "A multi-agent LLM+Lean system that proves theorems on public benchmarks and new benchmarks in abstract algebra and quantum theory, and assists experts in formalizing individual known theorems.",
+        "context": "Proves discrete, externally-specified theorems; does not formalize an entire new foundational framework authored by the user."
+      },
+      {
+        "citation": "Ren, Li, Qi, MerLean (arXiv:2602.16554, 2026)",
+        "quote": "Extracts mathematical statements from existing LaTeX papers and formalizes them into Lean4/Mathlib, then back-translates for semantic review.",
+        "context": "Formalizes statements from already-published work, not a researcher's own unpublished, novel theory and its derivations."
+      },
+      {
+        "citation": "Formalization of QFT (arXiv:2603.15770, 2026)",
+        "quote": "Constructs free bosonic QFT and proves it satisfies the established Osterwalder-Schrader/Glimm-Jaffe axioms in Lean4/Mathlib.",
+        "context": "Formalizes a known, settled result of mathematical physics rather than a new, interpretively contested foundational proposal."
+      },
+      {
+        "citation": "Jiang, Welleck et al., Draft-Sketch-Prove (arXiv:2210.12283, 2022)",
+        "quote": "Autoformalizes informal proofs of pre-existing theorems into formal sketches completed by a prover.",
+        "context": "The target theorems pre-exist; the method does not build out a novel theory's architecture."
+      }
+    ],
+    "significance": "high",
+    "feasibility": "Directly demonstrated: the QIQT-H core (no-collapse mechanism, covariant typicality measure, normal state on B(H)) was formalized in Lean4/Mathlib as an original framework, with the build green and an axiom audit.",
+    "why_matters": "If AI-assisted formal methods can only certify mathematics that humans have already settled, their value to live research is bounded to checking and search. The harder and more consequential question is whether a human-directed AI loop can take a brand-new, philosophically contested theory and force its deductive skeleton to be explicit, consistent, and machine-checked, surfacing exactly which claims are derived, which are assumed, and which are merely asserted. Demonstrating this on a foundations-of-physics framework shows AI formalization as an instrument of theory construction, not just verification, which is a qualitatively larger claim about AI's role in basic science and the natural payload for a cs.AI audience.",
+    "user_approach": "Formalize QIQT-H's deductive core end-to-end and report the artifact (theorem modules, axiom audit, blueprint) as the evaluation."
+  },
+  {
+    "gap_id": "GAP-002",
+    "title": "A closed human-directed loop pairing a self-correcting formalizer agent with an INDEPENDENT adversarial AI reviewer",
+    "type": "partial",
+    "definition": "Self-correction against a compiler/verifier and LLM-as-judge evaluation both exist, but as separate lines. No characterized methodology wires a coding-agent formalizer that self-repairs against the proof-assistant compiler together with a second, architecturally-independent AI acting as an adversarial scientific reviewer of the conceptual design, whose critiques are fed back into the formalization loop under human direction. The division of labor between mechanical correctness and conceptual soundness across two heterogeneous models is unstudied.",
+    "evidence": [
+      {
+        "citation": "MA-LoT / ProofNet++ (multi-agent Lean proving, 2025)",
+        "quote": "One agent generates a proof while another corrects errors against the Lean4 verifier (verifier-in-the-loop self-correction).",
+        "context": "Self-correction is internal to the proving system and targets proof errors, not adversarial review of a theory's conceptual design."
+      },
+      {
+        "citation": "When AIs Judge AIs / Multi-Agent Debate for LLM Judges (arXiv:2508.02994; 2510.12697, 2025)",
+        "quote": "LLM-as-judge and multi-agent debate frameworks evaluate and critique model outputs, with debate shown to amplify correctness.",
+        "context": "Judges evaluate outputs in the abstract; they are not embedded as design reviewers inside a formalization pipeline feeding corrections back."
+      },
+      {
+        "citation": "Breen et al., Ax-Prover (arXiv:2510.12787, 2025)",
+        "quote": "Operates autonomously or collaboratively with human experts via LLM reasoning plus Lean tools over MCP.",
+        "context": "Human-collaborative, but no described second independent AI reviewing the scientific design and returning feedback into the loop."
+      },
+      {
+        "citation": "Yamada et al., The AI Scientist-v2 (arXiv:2504.08066, 2025)",
+        "quote": "Automated discovery via agentic tree search with automated reviewing of generated papers.",
+        "context": "Automated review targets generated ML papers, not formal-proof correctness plus foundational-design soundness in a verifier-backed loop."
+      }
+    ],
+    "significance": "high",
+    "feasibility": "Already instantiated: Claude Code as the formalizer self-correcting against lake/Lean, GPT-5.5 Pro as the recurring adversarial reviewer after each significant step, human directing scope and adjudicating.",
+    "why_matters": "The reliability of AI-assisted science turns on catching two different failure modes: mechanical errors (a proof that does not compile) and conceptual errors (a proof that compiles but rests on a vacuous or wrong premise). A single agent, however capable, tends to be blind to its own conceptual commitments. Separating the roles across heterogeneous models, one bound to a compiler for mechanical truth and one tasked with attacking the design for conceptual truth, is a concrete architecture for trustworthy AI formalization. Characterizing this loop, including how often the reviewer caught soundness problems the formalizer missed, gives the AI community a transferable pattern rather than a one-off result, and speaks directly to current calls for verification in AI-driven discovery."
+  },
+  {
+    "gap_id": "GAP-003",
+    "title": "An explicit axiom budget / proved-conditional-cited audit as a first-class output of AI formalization",
+    "type": "partial",
+    "definition": "AI-formalization papers typically report success as 'it compiles' or benchmark pass rates. They rarely instrument the deeper soundness question: which named, non-standard axioms the headline results actually depend on, whether any hypotheses are vacuous, and how that dependency shrinks over time. A disciplined, machine-emitted audit that ratchets a tracked axiom budget downward and forces an honest proved/conditional/cited classification is not established as a methodological deliverable.",
+    "evidence": [
+      {
+        "citation": "The Need for Verification in AI-Driven Scientific Discovery (arXiv:2509.01398, 2025)",
+        "quote": "Without rigorous verification, the flood of generated hypotheses risks overwhelming science with plausible but superficial results.",
+        "context": "Argues for verification as an essential filter but does not provide a concrete axiom-level soundness-accounting discipline."
+      },
+      {
+        "citation": "Self-Consistency-Based Hallucination Detection (arXiv:2504.09440, 2025)",
+        "quote": "Detects hallucinated steps in mathematical reasoning via self-consistency.",
+        "context": "Targets surface reasoning errors, not whether a machine-checked theorem secretly rests on a vacuous or overly-strong named axiom."
+      },
+      {
+        "citation": "Tool Receipts, Not Zero-Knowledge Proofs (arXiv:2603.10060, 2026)",
+        "quote": "Proposes practical hallucination detection for AI agents via tool-use receipts.",
+        "context": "Operational provenance for tool calls, not a logical audit of the axiom base a formal result depends on."
+      },
+      {
+        "citation": "Breen et al., Ax-Prover; Formalization of QFT (2025-2026)",
+        "quote": "Report formalization success by compilation and benchmark performance; initial unproven assumptions are later discharged.",
+        "context": "Soundness is tracked informally per project; no transferable axiom-budget instrument is offered as methodology."
+      }
+    ],
+    "significance": "high",
+    "feasibility": "Implemented as QIQTH/AxiomAudit.lean plus a budget-ratchet check; every headline theorem's #print axioms is recorded and the count only decreases.",
+    "why_matters": "A machine-checked proof is only as trustworthy as the axioms beneath it; an LLM that quietly introduces a vacuous hypothesis or an over-strong interface axiom can produce a green build that proves nothing. The discipline of continuously auditing exactly which named axioms the load-bearing theorems use, refusing to raise the budget without written justification, and publishing the proved/conditional/cited split, converts 'the AI's proof compiles' into 'here is precisely what has and has not been established.' For an AI audience worried about overclaiming and hallucination, this is a concrete, reusable trust mechanism, and it is arguably the single most defensible methodological contribution of the project."
+  },
+  {
+    "gap_id": "GAP-004",
+    "title": "Machine-checked formalization in the foundations/interpretation-of-QM domain (vs established mathematical physics)",
+    "type": "partial",
+    "definition": "Recent Lean physics formalizations target settled results: constructive QFT axioms, known quantum-information theorems, catalogued physical laws. The foundations of quantum mechanics, the measurement problem, collapse, interpretation, where the contribution is conceptual and contested rather than a known theorem, has not been a target for machine-checked formalization. Formalizing a measurement-problem proposal as a conditional theorem with explicit premises is a distinct and unexplored application.",
+    "evidence": [
+      {
+        "citation": "Formalization of QFT (arXiv:2603.15770, 2026)",
+        "quote": "Machine-checks the construction of free bosonic QFT and the Osterwalder-Schrader/Glimm-Jaffe axioms.",
+        "context": "A celebrated but settled mathematical-physics result, not an interpretive/foundational claim about measurement."
+      },
+      {
+        "citation": "Formalization of the Generalized Quantum Stein's Lemma in Lean (arXiv:2510.08672, 2025)",
+        "quote": "Formalizes a known theorem of quantum information theory.",
+        "context": "A fixed theorem with an accepted proof, not a contested foundational mechanism."
+      },
+      {
+        "citation": "PhysProver / PhysLean (arXiv:2601.15737; physlib, 2024-2026)",
+        "quote": "Builds datasets and provers for physical theorems across sub-domains such as QFT.",
+        "context": "Catalogues and proves established physics results; does not engage interpretation-of-QM or the measurement problem."
+      },
+      {
+        "citation": "Tooby-Smith, Perspective on Interactive Theorem Provers in Physics (Adv. Sci., 2026)",
+        "quote": "Surveys the nascent use of theorem provers in physics, focused on translating known physics into Lean.",
+        "context": "Frames the field around digitalizing established physics, leaving foundations/interpretation untouched."
+      }
+    ],
+    "significance": "medium",
+    "feasibility": "Demonstrated: QIQT-H's single-outcome mechanism and Born-as-conditional-theorem are formalized as conditional theorems with explicit, audited premises.",
+    "why_matters": "Foundations of physics is exactly the kind of area where informal arguments hide their assumptions and where disputes persist for decades partly because premises are never made fully explicit. Bringing a proof assistant to bear forces a measurement-problem proposal to declare its hypotheses and lets a reader see which conclusions truly follow. Showing that an interpretive, contested proposal, not just settled theorems, can be rendered as an honest conditional theorem widens the remit of formal methods in physics and gives the AI-for-science community a template for engaging conceptual, not merely computational, scientific questions."
+  },
+  {
+    "gap_id": "GAP-005",
+    "title": "A verified human-readable bridge (blueprint) integrated into the AI theory-building loop",
+    "type": "partial",
+    "definition": "Communicating an AI-assisted formalization back to domain experts who do not read Lean is an acknowledged bottleneck. Tools to generate blueprints exist, but as standalone artifacts rather than as an integral, continuously-verified bridge within a human-AI theory-building methodology, where each human-readable statement is mechanically linked to its machine-checked proof so the exposition cannot silently drift from what was proved.",
+    "evidence": [
+      {
+        "citation": "LeanArchitect: Automating Blueprint Generation for Humans and AI (arXiv:2601.22554, 2026)",
+        "quote": "Automates generation of Lean blueprints bridging human-readable math and machine-checked proofs.",
+        "context": "Provides blueprint generation as a tool, not as a verified, drift-proof bridge embedded in a theory-construction loop with an audit."
+      },
+      {
+        "citation": "Ren, Li, Qi, MerLean (arXiv:2602.16554, 2026)",
+        "quote": "Back-translates formalized Lean into human-readable LaTeX for semantic review.",
+        "context": "Round-trips statements for review but does not maintain a mechanically-checked statement-to-proof linkage as a published artifact."
+      },
+      {
+        "citation": "Yang et al., Formal Mathematical Reasoning: A New Frontier in AI (arXiv:2412.16075, 2024)",
+        "quote": "Identifies communication and human-AI legibility as open challenges for formal reasoning systems.",
+        "context": "Names the legibility gap but does not supply an integrated verified-bridge methodology."
+      }
+    ],
+    "significance": "medium",
+    "feasibility": "Implemented: a leanblueprint deliverable with a verified dependency graph linking each statement to its Lean declaration, plus doc-gen4 API docs, in concise and expanded editions.",
+    "why_matters": "An AI-formalized theory that only Lean experts can read fails the people who must evaluate it, here, physicists. A blueprint whose green tags are mechanically tied to kernel-checked proofs lets a domain expert read ordinary mathematics while guaranteeing the exposition matches what was actually proved, neutralizing the 'AI slop' objection because every claim is clickable down to its proof. Treating this verified bridge as part of the methodology, not an afterthought, addresses a recognized human-AI communication gap and is what makes an AI-assisted foundational result auditable by the community it targets."
+  }
+]
