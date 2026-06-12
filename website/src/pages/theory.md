@@ -76,9 +76,9 @@ realizes is therefore one definite macroscopic world, with no collapse term adde
 This is worth stating carefully, because "one outcome" and "unitary evolution" sound contradictory. The
 global wave function evolves unitarily throughout; what the finite-capacity constraint does is render
 multi-record *regional* content inadmissible. Which single admissible record is the *actual* one is then a
-selection among the unitarily-evolved alternatives, not a dynamical modification of the Schrödinger
-equation. Making that selection precise, and deriving its statistics, is the dynamical-realization and Born
-problem below.
+[selection](/selection) among the unitarily-evolved alternatives, not a dynamical modification of the
+Schrödinger equation — the [(Φ, λ) account](/selection). Making that selection precise, and deriving its
+statistics, is the dynamical-realization and Born problem below.
 
 Two honest caveats. First, the theorem as formalized is a **static exclusion**: it says two-record content
 is not instantiable, not yet that the unitary dynamics *drives* an initial superposition to a single

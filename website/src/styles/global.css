@@ -130,8 +130,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.18;letter-spa
 .tag.post{background:rgba(183,121,31,.14);color:var(--st-postulate)}
 
 /* ---- entry cards ---- */
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-@media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
 @media(max-width:520px){.cards{grid-template-columns:1fr}}
 .card{display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;transition:.15s}
 .card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none;
