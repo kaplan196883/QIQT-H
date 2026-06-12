@@ -1,0 +1,36 @@
+---
+import '../styles/global.css';
+import 'katex/dist/katex.min.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+// Markdown pages pass their frontmatter under `frontmatter`; .astro pages pass props directly.
+const fm = Astro.props.frontmatter ?? Astro.props;
+const { title, description, eyebrow } = fm;
+const path = Astro.url.pathname;
+const fullTitle = title ? `${title} — QIQT-H` : 'QIQT-H';
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  {description && <meta name="description" content={description} />}
+  <link rel="canonical" href={Astro.url.href} />
+  <meta property="og:title" content={fullTitle} />
+  {description && <meta property="og:description" content={description} />}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet" />
+</head>
+<body class="deep">
+  <Nav path={path} />
+  <main>
+    {eyebrow && <div class="eyebrow">{eyebrow}</div>}
+    {title && <h1>{title}</h1>}
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

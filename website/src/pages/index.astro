@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import Chain from '../components/Chain.astro';
+import StatusTable from '../components/StatusTable.astro';
+---
+<Base legend={true}>
+  <header class="hero"><div class="wrap">
+    <div class="kicker">Quantized Information Quantum Theory — Holographic</div>
+    <h1>One wave function, one world.</h1>
+    <p class="lede">Bounded spacetime regions hold only finite physical information. So a region cannot
+      <em>instantiate</em> a wave function carrying two macroscopically distinct records, and after
+      decoherence the per-run state is already single-record, with no collapse added and global unitarity
+      left exactly intact.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="/idea">Read the idea</a>
+      <a class="btn btn-ghost" href="/theory">The mathematics</a>
+      <a class="btn btn-ghost" href="/papers">Papers &amp; arXiv</a>
+    </div>
+    <div class="chips">
+      <span class="chip"><span class="dot" style="background:var(--st-conditional)"></span>
+        <b>A research program</b>, not a finished theory — conditional, Born open</span>
+      <span class="chip"><span class="dot" style="background:var(--st-verified)"></span>
+        <b>Machine-verified</b> in Lean&nbsp;4 / Mathlib · no <code>sorry</code> · reproducible</span>
+    </div>
+  </div></header>
+
+  <section class="section"><div class="wrap">
+    <h2>The argument in five links</h2>
+    <p class="sub">The whole thesis is one chain. Two links are postulates, one is the machine-verified
+      mathematical substrate, one is a conditional theorem, and one is open. Each is labelled honestly.</p>
+    <Chain />
+  </div></section>
+
+  <section class="section"><div class="wrap">
+    <h2>What is proven, what is open</h2>
+    <p class="sub">Honesty is the point. The Lean development verifies the standard modular and
+      relative-entropy <em>calculus</em> underlying the regional cost \(\chi_R\), not the holographic
+      axiom, not the central conjecture, not the Born rule.</p>
+    <StatusTable />
+  </div></section>
+
+  <section class="section"><div class="wrap">
+    <h2>Explore</h2>
+    <div class="cards" style="margin-top:18px">
+      <a class="card" href="/idea"><h3>The Idea</h3>
+        <p>The measurement problem, finite information, and single outcomes, in plain language.</p>
+        <span class="arrow">Start here →</span></a>
+      <a class="card" href="/theory"><h3>The Theory</h3>
+        <p>The (FQ) axiom, \(\chi_R\), Type&nbsp;II algebras, and the conditional single-record theorem.</p>
+        <span class="arrow">Read the math →</span></a>
+      <a class="card" href="/formalization"><h3>Formalization</h3>
+        <p>The Lean&nbsp;4 / Mathlib machine-checked substrate, theorem index, reproducible build.</p>
+        <span class="arrow">See the proofs →</span></a>
+      <a class="card" href="/open-problems"><h3>Open Problems</h3>
+        <p>The four gaps between a research program and a theory, and what closing each buys.</p>
+        <span class="arrow">The frontier →</span></a>
+    </div>
+  </div></section>
+</Base>

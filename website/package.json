@@ -1,0 +1,19 @@
+{
+  "name": "qiqt-org",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "qiqt.org — the QIQT-H research program site",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "astro": "^4.16.0",
+    "katex": "^0.16.11",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0"
+  }
+}

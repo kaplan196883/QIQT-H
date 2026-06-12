@@ -1,0 +1,19 @@
+---
+// `legend` shows the status colour key (used on the landing page only).
+const { legend = false } = Astro.props;
+---
+<footer class="foot">
+  <div class="wrap">
+    <div>© 2026 Paweł Kapłański · <a href="/about">About</a> · <a href="/papers">Papers</a> ·
+      <a href="https://github.com/kaplan196883/QIQT-H">Source</a></div>
+    <div>QIQT-H is presented as a research program, not a completed interpretation.</div>
+  </div>
+  {legend && (
+    <div class="wrap"><div class="legend">
+      <span><span class="dot" style="background:var(--st-postulate)"></span>postulate</span>
+      <span><span class="dot" style="background:var(--st-verified)"></span>machine-verified</span>
+      <span><span class="dot" style="background:var(--st-conditional)"></span>conditional</span>
+      <span><span class="dot" style="background:var(--st-open)"></span>open</span>
+    </div></div>
+  )}
+</footer>

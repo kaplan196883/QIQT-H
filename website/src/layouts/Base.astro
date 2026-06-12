@@ -1,0 +1,47 @@
+---
+import '../styles/global.css';
+import 'katex/dist/katex.min.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const {
+  title = 'QIQT-H — One Wave Function, One World',
+  description = 'A foundational research program: bounded regions hold finite physical information, so a region cannot instantiate two macroscopic records. No collapse, global unitarity exact. Deductive substrate machine-verified in Lean 4 / Mathlib.',
+  legend = false,
+} = Astro.props;
+const path = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={Astro.url.href} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <Nav path={path} />
+  <slot />
+  <Footer legend={legend} />
+
+  <script>
+    // Render inline \( ... \) and display $$ ... $$ that live in .astro markup
+    // (Markdown pages are pre-rendered at build by rehype-katex and skip this).
+    import renderMathInElement from 'katex/contrib/auto-render';
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '\\(', right: '\\)', display: false },
+        { left: '$$', right: '$$', display: true },
+      ],
+      throwOnError: false,
+    });
+  </script>
+</body>
+</html>

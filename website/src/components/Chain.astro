@@ -1,0 +1,24 @@
+---
+// The argument in five links. Each link carries its honest status colour.
+const links = [
+  { n: '1 · Holography', t: 'A bounded region R has finite capacity Q_R = A/4ℓ_P².',
+    cls: 's-postulate', tag: 'Postulate (FQ)' },
+  { n: '2 · Regional cost', t: 'Regional content is a state on the Type II algebra; cost = Araki relative entropy χ_R.',
+    cls: 's-verified', tag: 'Calculus verified' },
+  { n: '3 · The crux', t: 'A ≥2-record content exceeds Q_R (Macroscopic Definiteness).',
+    cls: 's-conditional', tag: 'Conjecture' },
+  { n: '4 · Single record', t: '∴ ≥2-record states aren’t instantiable; per-run content is single-record.',
+    cls: 's-conditional', tag: 'Conditional' },
+  { n: '5 · Born', t: 'Probabilities |c_k|² from typicality of microscopic initial conditions.',
+    cls: 's-open', tag: 'Open' },
+];
+---
+<div class="chain">
+  {links.map((l) => (
+    <div class="link">
+      <div class="n">{l.n}</div>
+      <div class="t">{l.t}</div>
+      <span class={`pill ${l.cls}`}><span class="dot"></span>{l.tag}</span>
+    </div>
+  ))}
+</div>

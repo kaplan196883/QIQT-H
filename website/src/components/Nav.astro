@@ -1,0 +1,21 @@
+---
+// Sticky top nav. `path` is the current pathname so we can mark the active link.
+const { path = '' } = Astro.props;
+const links = [
+  { href: '/idea',          label: 'The Idea' },
+  { href: '/theory',        label: 'Theory' },
+  { href: '/formalization', label: 'Formalization' },
+  { href: '/open-problems', label: 'Open Problems' },
+  { href: '/papers',        label: 'Papers' },
+  { href: '/about',         label: 'About' },
+];
+const isActive = (href) => path === href || path === href + '/';
+---
+<nav class="nav"><div class="wrap">
+  <a class="brand" href="/">QIQT<span>-H</span></a>
+  <div class="nav-links">
+    {links.map((l) => (
+      <a class="link" href={l.href} aria-current={isActive(l.href) ? 'page' : undefined}>{l.label}</a>
+    ))}
+  </div>
+</div></nav>

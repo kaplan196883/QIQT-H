@@ -1,0 +1,25 @@
+---
+// What is proven vs. what is open. KaTeX in cells is rendered client-side by Base layout's
+// auto-render call, so we pass raw \( ... \) strings via set:html.
+const rows = [
+  ['Araki relative entropy = Umegaki (finite case)', 'ok', 'machine-checked'],
+  ['Bounded Tomita–Takesaki: \\(J\\), \\(JRJ=2-R\\), \\(\\Delta^{it}\\), strong continuity', 'ok', 'machine-checked'],
+  ['One-particle CGP relative entropy + positivity \\(S(\\xi)\\ge 0\\)', 'ok', 'machine-checked'],
+  ['Free-field modular flow \\(\\Gamma(\\Delta^{it})\\), \\(\\sigma_t(W(u))=W(\\Delta^{it}u)\\)', 'ok', 'machine-checked'],
+  ['Coherent-state relative modular operator, Connes cocycle, entropy reduction', 'ok', 'machine-checked'],
+  ['Holographic capacity axiom (FQ): \\(S_{\\rm ren}\\le Q_R\\)', 'post', 'postulated'],
+  ['Macroscopic Definiteness Conjecture (H2)', 'open', 'open · the crux'],
+  ['Born statistics from typicality', 'open', 'open'],
+];
+---
+<table class="tbl">
+  <thead><tr><th>Component</th><th>Status</th></tr></thead>
+  <tbody>
+    {rows.map(([label, tag, text]) => (
+      <tr>
+        <td set:html={label}></td>
+        <td><span class={`tag ${tag}`}>{text}</span></td>
+      </tr>
+    ))}
+  </tbody>
+</table>

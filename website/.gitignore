@@ -1,0 +1,18 @@
+# build output
+dist/
+.output/
+
+# astro
+.astro/
+
+# deps
+node_modules/
+
+# env
+.env
+.env.production
+
+# os / editor
+.DS_Store
+Thumbs.db
+*.log

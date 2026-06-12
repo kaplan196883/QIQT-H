@@ -1,0 +1,136 @@
+/* QIQT-H — qiqt.org  ·  Hybrid design system
+   Accessible landing register + austere deep-page register.
+   Astro build: imported once from the Base/Deep layouts. KaTeX CSS imported alongside. */
+
+:root{
+  --paper:#fbfaf7; --paper-2:#f4f2ec; --ink:#1b1d22; --muted:#5c616b;
+  --line:#e6e2d8; --accent:#0e7c86; --accent-ink:#0a5b63;
+  /* status palette (used for the five-link chain + the proven/open table) */
+  --st-postulate:#b7791f; --st-verified:#2f7a4f; --st-conditional:#2b6cb0; --st-open:#c2410c;
+  --serif:"Newsreader",Charter,"Iowan Old Style",Georgia,"Times New Roman",serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --maxw:1080px; --readw:720px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-ink);text-decoration:underline;text-underline-offset:2px}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.18;letter-spacing:-.01em}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+/* ---- nav ---- */
+.nav{position:sticky;top:0;z-index:20;background:rgba(251,250,247,.9);
+  backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{font-family:var(--serif);font-weight:600;font-size:1.15rem;letter-spacing:.01em;color:var(--ink)}
+.brand span{color:var(--accent)}
+.nav a.link{color:var(--muted);font-size:.95rem;margin-left:22px}
+.nav a.link:hover{color:var(--ink);text-decoration:none}
+.nav a.link[aria-current="page"]{color:var(--ink);font-weight:600}
+.nav-links{display:flex;align-items:center}
+@media(max-width:720px){.nav-links{display:none}}
+
+/* ---- hero (accessible register) ---- */
+.hero{background:
+  radial-gradient(1200px 380px at 70% -10%, rgba(14,124,134,.10), transparent 60%),
+  linear-gradient(180deg,var(--paper),var(--paper));
+  border-bottom:1px solid var(--line)}
+.hero .wrap{padding:74px 24px 56px}
+.kicker{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink);font-weight:600}
+.hero h1{font-size:clamp(2.1rem,5vw,3.4rem);margin:.5rem 0 .2rem;max-width:18ch}
+.lede{font-size:clamp(1.05rem,2.3vw,1.3rem);color:var(--muted);max-width:54ch;margin:.4rem 0 1.6rem}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:22px}
+.btn{display:inline-block;padding:11px 18px;border-radius:8px;font-weight:600;font-size:.96rem}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-ink);color:#fff;text-decoration:none}
+.btn-ghost{border:1px solid var(--line);color:var(--ink);background:#fff}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent-ink);text-decoration:none}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:.86rem;color:var(--muted);
+  background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 13px}
+.chip b{color:var(--ink);font-weight:600}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+
+/* ---- section scaffolding ---- */
+.section{padding:56px 0;border-bottom:1px solid var(--line)}
+.section h2{font-size:clamp(1.5rem,3.2vw,2rem);margin:0 0 6px}
+.section .sub{color:var(--muted);margin:0 0 28px;max-width:60ch}
+
+/* ---- five-link chain ---- */
+.chain{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+@media(max-width:820px){.chain{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:460px){.chain{grid-template-columns:1fr}}
+.link{position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 14px}
+.link .n{font-family:var(--serif);font-size:.9rem;color:var(--muted)}
+.link .t{font-weight:600;margin:4px 0 10px;font-size:.98rem;line-height:1.35}
+.pill{display:inline-flex;align-items:center;gap:7px;font-size:.74rem;font-weight:600;
+  letter-spacing:.02em;text-transform:uppercase;padding:4px 9px;border-radius:999px;
+  background:var(--paper-2);color:var(--muted)}
+.pill .dot{width:7px;height:7px}
+.s-postulate{color:var(--st-postulate)} .s-postulate .dot{background:var(--st-postulate)}
+.s-verified{color:var(--st-verified)} .s-verified .dot{background:var(--st-verified)}
+.s-conditional{color:var(--st-conditional)} .s-conditional .dot{background:var(--st-conditional)}
+.s-open{color:var(--st-open)} .s-open .dot{background:var(--st-open)}
+
+/* ---- proven / open table (utility class on landing) ---- */
+.tbl{width:100%;border-collapse:collapse;font-size:.95rem;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.tbl th,.tbl td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line)}
+.tbl thead th{background:var(--paper-2);font-family:var(--sans);font-weight:600;font-size:.8rem;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tbl tr:last-child td{border-bottom:none}
+.tag{font-size:.78rem;font-weight:600;padding:3px 9px;border-radius:6px;white-space:nowrap}
+.tag.ok{background:rgba(47,122,79,.12);color:var(--st-verified)}
+.tag.open{background:rgba(194,65,12,.12);color:var(--st-open)}
+.tag.post{background:rgba(183,121,31,.14);color:var(--st-postulate)}
+
+/* ---- entry cards ---- */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.cards{grid-template-columns:1fr}}
+.card{display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;transition:.15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none;
+  box-shadow:0 8px 24px -16px rgba(0,0,0,.3)}
+.card h3{margin:0 0 6px;font-size:1.12rem;color:var(--ink)}
+.card p{margin:0;color:var(--muted);font-size:.92rem}
+.card .arrow{color:var(--accent);font-weight:600;margin-top:10px;display:inline-block;font-size:.9rem}
+
+/* ---- deep-page register (austere) — wraps Markdown-rendered prose ---- */
+.deep{background:var(--paper)}
+.deep main{max-width:var(--readw);margin:0 auto;padding:48px 24px 80px}
+.deep main h1{font-size:clamp(1.8rem,4vw,2.6rem);margin:.2rem 0 .2rem}
+.deep .eyebrow{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink);font-weight:600}
+.deep main h2{font-size:1.45rem;margin:2.2rem 0 .4rem;padding-top:.4rem}
+.deep main h3{font-size:1.12rem;margin:1.6rem 0 .2rem}
+.deep main p,.deep main li{font-size:1.02rem}
+.deep main p{margin:.7rem 0}
+.deep main ul,.deep main ol{padding-left:1.3rem}
+.deep main li{margin:.3rem 0}
+.deep main strong{color:var(--ink);font-weight:600}
+.deep blockquote{margin:1.2rem 0;padding:.6rem 1.1rem;border-left:3px solid var(--accent);
+  background:var(--paper-2);color:var(--ink);border-radius:0 8px 8px 0}
+.deep blockquote p{margin:.3rem 0}
+/* Markdown tables in deep pages get the same card-table treatment */
+.deep main table{width:100%;border-collapse:collapse;font-size:.95rem;background:#fff;
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:1.2rem 0}
+.deep main th,.deep main td{text-align:left;padding:11px 15px;border-bottom:1px solid var(--line);vertical-align:top}
+.deep main thead th{background:var(--paper-2);font-family:var(--sans);font-weight:600;font-size:.78rem;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.deep main tbody tr:last-child td{border-bottom:none}
+.note{background:#fff;border:1px solid var(--line);border-left:3px solid var(--st-postulate);
+  border-radius:0 8px 8px 0;padding:14px 16px;margin:1.2rem 0;font-size:.95rem;color:var(--muted)}
+.note strong,.note b{color:var(--ink)}
+code,.mono{font-family:"SFMono-Regular",ui-monospace,"Cascadia Code",Consolas,monospace;
+  font-size:.88em;background:var(--paper-2);padding:1px 6px;border-radius:5px;color:#334}
+pre{background:#1b1d22;color:#e6e2d8;padding:16px 18px;border-radius:10px;overflow:auto;font-size:.86rem}
+pre code{background:none;color:inherit;padding:0}
+/* KaTeX display blocks shouldn't overflow narrow screens */
+.katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0}
+
+/* ---- footer ---- */
+.foot{padding:40px 0;color:var(--muted);font-size:.9rem}
+.foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
+.foot a{color:var(--muted)} .foot a:hover{color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:14px;font-size:.84rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
