@@ -29,5 +29,5 @@ This site is written to a standard of honest scope. Three commitments govern it:
 
 ## Contact
 
-Paweł Kapłański — [pawel.kaplanski@cognitum.eu](mailto:pawel.kaplanski@cognitum.eu).
+Paweł Kapłański — [pawel@kaplanski.ai](mailto:pawel@kaplanski.ai).
 Source and issues: [github.com/kaplan196883/QIQT-H](https://github.com/kaplan196883/QIQT-H).
