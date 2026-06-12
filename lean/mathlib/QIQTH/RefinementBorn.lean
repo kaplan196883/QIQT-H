@@ -84,4 +84,32 @@ theorem additive_fMeasure_eq_born (f : ℝ →+ ℝ) (h1 : f 1 ≠ 0)
     rw [← Finset.sum_mul, hsum, one_mul]
   rw [hden, hlin, mul_div_assoc, div_self h1, mul_one]
 
+/-- The coarse α=2 probability of the weight-`2/3` outcome on `(1/3, 2/3)` is `4/5`. -/
+theorem alphaSq_coarse_one :
+    alphaSqMeasure (![1/3, 2/3] : Fin 2 → ℝ) 1 = 4/5 := by
+  simp only [alphaSqMeasure, fMeasure, Fin.sum_univ_two,
+    Matrix.cons_val_zero, Matrix.cons_val_one]
+  norm_num
+
+/-- On the uniform triple `(1/3,1/3,1/3)` (the refinement of the `2/3` outcome into two equal
+`1/3` sub-records) the α=2 measure is uniform: each fine outcome has probability `1/3`. -/
+theorem alphaSq_fine (k : Fin 3) :
+    alphaSqMeasure (fun _ => (1/3 : ℝ)) k = 1/3 := by
+  simp only [alphaSqMeasure, fMeasure, Finset.sum_const, Finset.card_univ,
+    Fintype.card_fin, nsmul_eq_mul]
+  norm_num
+
+/-- **α=2 violates refinement indifference — the precise mechanism.** Refining the weight-`2/3`
+outcome of `(1/3, 2/3)` into two equal `1/3` sub-records gives the uniform triple `(1/3,1/3,1/3)`.
+Refinement indifference would require the coarse probability of that outcome to equal the sum of
+the two fine probabilities; but the coarse α=2 value is `4/5` while the fine sum is `2/3`, and
+`4/5 ≠ 2/3`. So α=2 is refinement-inconsistent — it fails exactly the additivity premise that
+`additive_fMeasure_eq_born` shows fixes Born. -/
+theorem alphaSq_refinement_violation :
+    alphaSqMeasure (![1/3, 2/3] : Fin 2 → ℝ) 1
+      ≠ alphaSqMeasure (fun _ => (1/3 : ℝ)) (1 : Fin 3)
+        + alphaSqMeasure (fun _ => (1/3 : ℝ)) (2 : Fin 3) := by
+  rw [alphaSq_coarse_one, alphaSq_fine 1, alphaSq_fine 2]
+  norm_num
+
 end QIQTH.RefinementBorn

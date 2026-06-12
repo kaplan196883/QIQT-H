@@ -2297,5 +2297,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RefinementBorn.additive_fMeasure_eq_born
 -- expected: standard only — ★ refinement additivity (f : ℝ →+ ℝ) ⇒ Born on rational weights. Additivity IS the
 -- exponent-fixer; records do not supply it. Whether finite capacity/H2 motivates it is the open physics question.
+#print axioms QIQTH.RefinementBorn.alphaSq_refinement_violation
+-- expected: standard only — ★ the precise mechanism: refining (1/3,2/3)'s 2/3 outcome into two equal 1/3 sub-records
+-- (uniform triple), coarse μ₂ = 4/5 but fine sum = 2/3; 4/5 ≠ 2/3 ⇒ α=2 violates refinement indifference exactly.
 
 end QIQTH.AxiomAudit
