@@ -21,12 +21,15 @@ on; it does not close the <a href="/open-problems">open problems</a>.</div>
 The coherent-state Araki relative entropy equals the one-particle Casini–Grillo–Pontello entropy, as a
 literal machine-checked derivative theorem:
 
-$$ \frac{d}{dt}\Big|_{0}\,\big\langle\Omega,\ \Delta_{W(f)\Omega\,\mid\,\Omega}^{\,it}\,\Omega\big\rangle
-   \;=\; -\,i\,S_{\mathrm{CGP}}(f), $$
+$$
+\frac{d}{dt}\Big|_{0}\,\big\langle\Omega,\ \Delta_{W(f)\Omega\,\mid\,\Omega}^{\,it}\,\Omega\big\rangle = -\,i\,S_{\mathrm{CGP}}(f),
+$$
 
 so that
 
-$$ S_{\mathrm{Araki}}\big(\omega_{W(f)\Omega}\,\Vert\,\omega_\Omega\big) \;=\; S_{\mathrm{CGP}}(f) \;\ge\; 0. $$
+$$
+S_{\mathrm{Araki}}\big(\omega_{W(f)\Omega}\,\Vert\,\omega_\Omega\big) = S_{\mathrm{CGP}}(f) \ge 0.
+$$
 
 ## Index of machine-checked results
 

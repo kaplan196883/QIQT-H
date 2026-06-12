@@ -14,7 +14,9 @@ The primary statement of the program: the finite-information premise, the region
 $\chi_R$, the Macroscopic Definiteness Conjecture, the conditional single-record theorem, and an honest
 account of what remains [open](/open-problems). Prepared for arXiv (quant-ph; cross-listed math-ph, gr-qc).
 
-> *Status:* arXiv-ready preprint. The link will be posted here on submission.
+**[Read the PDF](https://github.com/kaplan196883/QIQT-H/blob/main/build/QIQT_Foundations_Paper.pdf)**
+&nbsp;·&nbsp; arXiv-ready preprint. The arXiv link will be posted here on submission; for now the current
+build is hosted in the repository.
 
 ## Formalization companion
 
