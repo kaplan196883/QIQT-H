@@ -38,7 +38,7 @@ $S_{\mathrm{CGP}}(f)$, and **this entire calculus is what the Lean development c
 the bounded modular operators to the entropy-reduction identity.
 
 <div class="note"><strong>Scope.</strong> What is verified is the modular and relative-entropy
-<em>calculus</em> for the free-field coherent sector, the bookkeeping machine for $\chi_R$. The verified
+<em>calculus</em> for the free-field coherent sector, the bookkeeping machine for <em>χ<sub>R</sub></em>. The verified
 part does <strong>not</strong> include the Type&nbsp;II regional construction itself, the (FQ) axiom, or
 the conjecture below.</div>
 
