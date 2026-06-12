@@ -14,9 +14,9 @@ multiverse. Both are answers to the same question: why one world?
 ## The hypothesis
 
 QIQT-H starts from a single physical premise drawn from black-hole thermodynamics and holography:
-**a bounded region of space holds only a finite amount of physical information**, on the order of its
-boundary area in Planck units, $Q_R = A/4\ell_P^2$ (in natural entropy units). Finite, as a postulate of
-the program.
+**a bounded region of space has only a finite amount of operational information capacity**, on the order of
+its boundary area in Planck units, $Q_R = A/4\ell_P^2$ (in natural entropy units). Finite, as a postulate
+of the program.
 
 A wave function that recorded two macroscopically distinct outcomes at once, pointer-left *and*
 pointer-right with all their correlated environmental traces, would be a far richer object than one
@@ -29,8 +29,8 @@ more information than its bound allows, so the two-record state is inadmissible 
 <div class="note"><strong>The move.</strong> Collapse is not added as a new law. Conditional on the
 conjecture, multi-record regional states are inadmissible because they would exceed the region's
 information capacity. After ordinary decoherence has made the records redundant and stable, only
-single-record content fits — so the per-run state is a single world, with no collapse term added to the
-global dynamics.</div>
+single-record content fits — so the per-run *actual* content is single-record, one world, with no collapse
+term added to the global dynamics.</div>
 
 ## What this buys, and what it doesn't
 

@@ -9,8 +9,10 @@ There is an apparent paradox at the heart of the [conditional theorem](/theory):
 unitary, yet each run yields *one* outcome. Unitary evolution and a single result sound incompatible — it
 is exactly the tension that pushed the textbook to a collapse postulate and pushed Everett to many worlds.
 
-QIQT-H dissolves it by separating two questions that the measurement problem usually runs together:
-**what is constituted** and **what is actual**. The first is answered by $\Phi$, the second by $\lambda$.
+QIQT-H aims to dissolve it — not with a new law, but by separating two questions the measurement problem
+usually runs together: **what is constituted** and **what is actual**. The first is answered by $\Phi$,
+the second by $\lambda$. To be honest about it, this *relocates* the tension into $\lambda$ rather than
+making it vanish; whether the relocation succeeds turns on the open problems below.
 
 ## Φ — the global wave function constitutes everything
 
@@ -34,9 +36,10 @@ misnames "collapse" — but here it is not a dynamical event. $\lambda$ adds not
 equation, exerts no force, and leaves $\Phi$ untouched. It is a fact about *which* of the constituted,
 unitarily-evolved alternatives we find realized, not a physical process that edits the state.
 
-<div class="note"><strong>Two layers, not two laws.</strong> $\Phi$ is constitution: it says what there is
-and how it evolves (unitarily). $\lambda$ is actuality: it says which admissible record obtains. Keeping
-these apart is what lets "exact unitarity" and "one outcome" both be true without contradiction.</div>
+<div class="note"><strong>Two layers.</strong> $\Phi$ is constitution — what there is, evolving unitarily.
+$\lambda$ is actuality — which admissible record obtains. This is one dynamical law <em>plus</em> an
+actuality postulate, not a cost-free relabeling: keeping the layers apart is what lets "exact unitarity"
+and "one outcome" coexist, but giving $\lambda$ a precise, dynamically-consistent form is still open.</div>
 
 ## No fundamental probability, no chooser
 
@@ -47,21 +50,36 @@ microscopic initial conditions. What looks like a probability is the typicality 
 record like us finds itself to be — not a die that $\Phi$ rolls.
 
 That this typicality reproduces the Born weights is **not yet derived**; it is the
-[Born-from-typicality problem](/open-problems). And making $\lambda$ precise as a selection compatible with
-the unitary dynamics — that exactly one admissible record obtains, not zero, and that the admissible space
-is dynamically invariant — is the [dynamical-realization problem](/open-problems). The ontology here is
-coherent; these two pieces of it are open.
+[Born-from-typicality problem](/open-problems). And it carries a real risk of circularity: until the
+typicality measure $\mu$ — over uncontrolled microscopic initial conditions, or over admissible
+$\lambda$-histories — is specified *independently* of the Born weights, this is a target, not a derivation.
+Likewise, making $\lambda$ precise as a selection compatible with the unitary dynamics — that exactly one
+admissible record obtains, not zero, and that the admissible space is dynamically invariant — is the
+[dynamical-realization problem](/open-problems). The ontology here is coherent; these pieces of it are open.
 
 ## How this differs from the usual answers
 
 - **Collapse interpretations** make the selection a *dynamical* event that breaks unitarity. Here $\lambda$
   is not dynamical and breaks nothing; $\Phi$ stays exactly unitary.
-- **Many-worlds** keeps every branch as an existing world. Here there are no branches to keep: a region
-  admits only one macroscopic record, so the alternatives are mutually-exclusive *candidates* for
-  actuality, not coexisting worlds.
-- **Bohmian mechanics** adds hidden particle trajectories as the actual configuration. Here there is no
-  hidden variable beneath $\Phi$; $\lambda$ selects among records the state already constitutes, not among
-  trajectories it does not.
+- **Many-worlds** keeps every decohered branch as an existing world. Here the unselected components of
+  $\Phi$ are *not* actual worlds: a region admits only one macroscopic record, so the alternatives are
+  mutually-exclusive *candidates* for actuality that remain unactualized, not coexisting worlds.
+- **Bohmian mechanics** adds hidden particle trajectories as the actual configuration. In the broad
+  (Bell / modal) sense $\lambda$ is *also* an extra actuality variable beyond $\Phi$ — but it is not
+  Bohmian: it is a record-valued selector over decoherence-defined alternatives, not a trajectory in
+  configuration space.
+
+## Locality and Bell — and why this is not superdeterminism
+
+A single-world ontology has to face Bell. QIQT-H is **not superdeterministic**: it does not correlate the
+measurement settings with $\lambda$, and it does not deny measurement independence. The Bell correlations
+come from the *nonlocal global state* $\Phi$ — entanglement — exactly the source they have in Everett,
+together with a **contextual** actuality selection (which record is actual can depend on what is actually
+measured). The settings stay free; the price for Bell is contextuality and a global consistency condition
+on $\lambda$ across overlapping regions, **not** a conspiracy between past and future. The one place
+superdeterminism could sneak in is the typicality measure — so it must be over the *uncontrolled*
+microstate in the ordinary, setting-independent sense (as in Bohmian quantum equilibrium or Everett
+typicality), never a measure tuned to the settings.
 
 ## Honest scope
 
@@ -70,3 +88,9 @@ This page is the **interpretive layer** of QIQT-H, and it is more speculative th
 removes the external observer and the collapse law — but $\lambda$ is only as well-defined as the
 [open problems](/open-problems) that pin it down. Treat it as the program's proposed picture of what a
 single world *is*, not as a result.
+
+In the broad hidden-variable sense, $\lambda$ *is* an additional actuality variable beyond $\Phi$ — but it
+is not a local, noncontextual preassignment of all outcomes. A completed version must define $\lambda$ only
+on decoherence-selected record algebras, keep it consistent across overlapping regions, recover the Bell
+correlations without signalling, and justify a typicality measure not secretly chosen to encode the Born
+rule. Those are the bills the program still has to pay.
