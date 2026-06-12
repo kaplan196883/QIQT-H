@@ -177,7 +177,13 @@ This makes the contribution sharp and unattackable: *we prove which extra axiom 
 indifference), that the QIQT-H record structure does not supply it, and that with it Born follows.* Lean
 file: `QIQTH/RefinementBorn.lean`.
 
-### Status of step 2 (this date)
-`QIQTH/RefinementBorn.lean` started — the `α=2` countermodel and the additivity ⇒ Born positive theorem;
-see that file. The conceptual residue (whether capacity motivates refinement indifference) is the genuine
-open problem.
+### Status (this date) — Steps 1–3 done, axiom-free
+- **Step 1** `QIQTH/SBSBoolean.lean` — layer-1 objectivity, Born-free (orthogonality only):
+  `record_unique` (a nonzero state can't lie in two orthogonal sectors) ⇒ `fragments_co_referential`
+  (redundant SBS readouts agree ⇒ functions of one classical pointer `K₀`). Definiteness, no Born weights.
+- **Steps 2–3** `QIQTH/RefinementBorn.lean` — `alphaSq_ne_born` (records ⇏ Born), `additive_fMeasure_eq_born`
+  (refinement additivity ⇒ Born), `alphaSq_refinement_violation` (the exact failing premise).
+
+All built green, `#print axioms` = standard-three. The genuine open problem is now sharply isolated and
+*conceptual*, not a Lean gap: **does finite capacity / H2 motivate refinement additivity?** (Step 4 — a
+Hilbert-level envariance swap identity — is optional and does not change this.)
