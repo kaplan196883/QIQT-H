@@ -2301,4 +2301,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ the precise mechanism: refining (1/3,2/3)'s 2/3 outcome into two equal 1/3 sub-records
 -- (uniform triple), coarse μ₂ = 4/5 but fine sum = 2/3; 4/5 ≠ 2/3 ⇒ α=2 violates refinement indifference exactly.
 
+-- ★ BORN layer 1 — SBS ⇒ Boolean record algebra / objectivity, Born-free (SBSBoolean.lean):
+#print axioms QIQTH.SBSBoolean.record_unique
+-- expected: standard only — a nonzero state can't lie in two orthogonal pointer sectors (records unambiguous).
+#print axioms QIQTH.SBSBoolean.fragments_co_referential
+-- expected: standard only — ★ redundant SBS readouts agree ⇒ all functions of one classical pointer K₀
+-- (definiteness, NO Born weights — only orthogonality/support, nothing Born-flavoured smuggled in).
+
 end QIQTH.AxiomAudit
