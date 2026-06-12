@@ -16,7 +16,8 @@ A bounded region $R$ with boundary area $A$ carries a finite information capacit
 
 $$ Q_R \;=\; \frac{A}{4\ell_P^2}, $$
 
-the holographic / Bekenstein–Hawking bound. In QIQT-H this enters as a **postulate** about physically
+the holographic / Bekenstein–Hawking bound, with $A$ the boundary area of the region and $Q_R$ in natural
+entropy units (divide by $\ln 2$ for bits). In QIQT-H this enters as a **postulate** about physically
 instantiable content, not merely about thermodynamic entropy: the renormalized information of any state the
 region actually realizes obeys $S_{\mathrm{ren}} \le Q_R$. Grounding this bound from a more primitive
 principle, and stating it cleanly in the continuum, is one of the [open problems](/open-problems).
@@ -26,16 +27,21 @@ principle, and stating it cleanly in the continuum, is one of the [open problems
 To compare "how much information" two regional states carry, QIQT-H uses the **Araki relative entropy**
 $S(\omega \,\|\, \omega_0)$ of a state $\omega$ against a reference $\omega_0$ (the local vacuum). For a
 bounded region the local algebra is not the familiar Type I factor of ordinary quantum mechanics; in
-relativistic field theory it is a **Type III$_1$** von Neumann algebra, and after dressing it becomes
-**Type II**, where a renormalized entropy is well defined. The regional cost functional is
+relativistic field theory it is a **Type III$_1$** von Neumann algebra. Araki relative entropy is already
+well defined there. The **Type II** "dressed" algebras — which carry a trace-like *generalized* entropy —
+come from the gravitational crossed-product construction of Chandrasekaran–Penington–Witten and Witten;
+QIQT-H borrows that picture as motivation, it is not something established here. The regional cost
+functional is
 
 $$ \chi_R(\omega) \;=\; S\big(\omega \,\|\, \omega_0\big), $$
 
 computed through Tomita–Takesaki modular theory: the modular operator $\Delta$, the modular conjugation
-$J$, and the modular flow $\Delta^{it}$ of the reference state. For coherent excitations $W(f)\Omega$ of a
-free field this reduces to an explicit one-particle expression, the Casini–Grillo–Pontello entropy
-$S_{\mathrm{CGP}}(f)$, and **this entire calculus is what the Lean development checks**, end to end, from
-the bounded modular operators to the entropy-reduction identity.
+$J$, and the modular flow $\Delta^{it}$ of the reference state. (Identifying this vacuum-relative
+distinguishability functional with the *cost to instantiate* regional content is itself part of the
+QIQT-H hypothesis, not a theorem.) For coherent excitations $W(f)\Omega$ of a free field this reduces to an
+explicit one-particle expression, the Casini–Grillo–Pontello entropy $S_{\mathrm{CGP}}(f)$, and **this
+coherent-state reduction is what the Lean development checks**, end to end, from the bounded modular
+operators to the entropy-reduction identity.
 
 <div class="note"><strong>Scope.</strong> What is verified is the modular and relative-entropy
 <em>calculus</em> for the free-field coherent sector, the bookkeeping machine for <em>χ<sub>R</sub></em>. The verified
@@ -53,15 +59,26 @@ Conjecture** states:
 
 This is the step that does the real work, and it is a **conjecture**. It asserts that the information cost
 of genuine macroscopic multiplicity is not merely large but specifically larger than the holographic
-ledger allows. Establishing it, even in a model, is the central [open problem](/open-problems).
+ledger allows. One subtlety is load-bearing: the cost in this inequality need not be the same $\chi_R$ the
+Lean development computes. A plain relative-entropy or data-processing estimate of two readable records
+yields only about $\log 2$ of classical information, not an area-scale $Q_R$. The conjecture is precisely
+that the right *instantiation* cost of genuine macroscopic multiplicity is area-scale — and identifying
+that cost measure is itself part of the problem. Establishing H2, even in a model, is the central
+[open problem](/open-problems).
 
 ## 4. The conditional theorem: single record
 
 Granting (FQ) and the conjecture, the conclusion follows as a **conditional theorem**. If a $\ge 2$-record
 state cannot be instantiated in $R$, then the only regional content compatible with the bound is
 single-record. After decoherence has stabilized and proliferated the records, the per-run state the region
-realizes is therefore one definite macroscopic world, with no collapse term added to the dynamics and
-global unitarity exactly preserved.
+realizes is therefore one definite macroscopic world, with no collapse term added to the global dynamics.
+
+This is worth stating carefully, because "one outcome" and "unitary evolution" sound contradictory. The
+global wave function evolves unitarily throughout; what the finite-capacity constraint does is render
+multi-record *regional* content inadmissible. Which single admissible record is the *actual* one is then a
+selection among the unitarily-evolved alternatives, not a dynamical modification of the Schrödinger
+equation. Making that selection precise, and deriving its statistics, is the dynamical-realization and Born
+problem below.
 
 Two honest caveats. First, the theorem as formalized is a **static exclusion**: it says two-record content
 is not instantiable, not yet that the unitary dynamics *drives* an initial superposition to a single
