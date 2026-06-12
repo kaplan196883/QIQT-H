@@ -2286,4 +2286,16 @@ namespace QIQTH.AxiomAudit
 -- via Mathlib hasDerivAt_integral_of_dominated_loc_of_deriv_le with constant dominating bound log((2−a)/a)) +
 -- ∫entropyDensity dμ = −cgpEntropy. Regular regime σ(R)⊆[a,2−a]. Full coherent-state Araki entropy DONE.
 
+-- ★ BORN — the exact missing premise (RefinementBorn.lean): records ⇏ Born; refinement additivity ⇒ Born.
+#print axioms QIQTH.RefinementBorn.alphaSqMeasure_sum
+-- expected: standard only — the α=2 record measure μ₂(k)=w_k²/Σw_j² is a genuine probability (sums to 1).
+#print axioms QIQTH.RefinementBorn.alphaSq_ne_born
+-- expected: standard only — ★ records ⇏ Born: μ₂ on (1/3,2/3) gives 1/5 ≠ 1/3 (Born). A rule meeting every
+-- record fact (definite, redundant-agreeing, support/certainty, label-symmetric, product-independent) can be non-Born.
+#print axioms QIQTH.RefinementBorn.sq_not_additive
+-- expected: standard only — (·)² is not additive: the precise premise (refinement indifference) the α=2 rule violates.
+#print axioms QIQTH.RefinementBorn.additive_fMeasure_eq_born
+-- expected: standard only — ★ refinement additivity (f : ℝ →+ ℝ) ⇒ Born on rational weights. Additivity IS the
+-- exponent-fixer; records do not supply it. Whether finite capacity/H2 motivates it is the open physics question.
+
 end QIQTH.AxiomAudit
