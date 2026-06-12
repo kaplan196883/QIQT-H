@@ -12,12 +12,19 @@ Usage:
 from __future__ import annotations
 
 import re
+import shutil
 import subprocess
 import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 OUT_DIR = REPO / "build"
+
+# Built PDFs to mirror into the qiqt.org site so they are served directly
+# (the website's "Read the PDF" link points at /<name>.pdf). Keyed by source
+# markdown filename; the same-stem PDF is copied into website/public/.
+WEBSITE_PUBLIC = REPO / "website" / "public"
+WEB_MIRRORED = {"QIQT_Foundations_Paper.md"}
 
 DOCS = [
     REPO / "TUTORIAL.md",
@@ -752,6 +759,11 @@ def build_one(src: Path) -> bool:
     if out_pdf.exists():
         sz = out_pdf.stat().st_size
         print(f"  SUCCESS: {out_pdf.relative_to(REPO)} ({sz/1024:.1f} KB)")
+        if src.name in WEB_MIRRORED:
+            WEBSITE_PUBLIC.mkdir(parents=True, exist_ok=True)
+            mirror = WEBSITE_PUBLIC / out_pdf.name
+            shutil.copyfile(out_pdf, mirror)
+            print(f"  mirrored -> {mirror.relative_to(REPO)}")
         return True
     print(f"  ERROR: {out_pdf.relative_to(REPO)} not produced")
     return False
