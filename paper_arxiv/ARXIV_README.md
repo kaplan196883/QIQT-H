@@ -38,5 +38,4 @@ amsmath, amssymb, booktabs, array, tikz (+arrows.meta, positioning), hyperref.
 ## Remaining pre-submission items (optional, non-blocking)
 - All 45 references were verified to exist via web search (2026-06-12); arXiv IDs and venues are filled in. References [42] (companion foundations paper) and [43] (project repository) are the author's own work.
 - Consider mirroring the exact commit on Zenodo for a DOI (no endorsement needed).
-- Paper size is US `letter`; switch `\documentclass[11pt]{article}` margins to `a4paper` via
-  `\usepackage[a4paper,margin=1in]{geometry}` if you prefer A4 (arXiv accepts either).
+- Paper size is A4 (`\usepackage[a4paper,margin=1in]{geometry}`).
