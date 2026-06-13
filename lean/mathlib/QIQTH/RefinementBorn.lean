@@ -144,6 +144,15 @@ theorem refinementNatural_additive (f : ℝ → ℝ) (hf : ∀ t, 0 < t → 0 < 
   have key : f (x + y) * f z = (f x + f y) * f z := by linear_combination h
   exact mul_right_cancel₀ (ne_of_gt hc) key
 
+/-- **The Born rule (f = id) IS refinement-natural** — the easy direction. This is the abstract
+counterpart of the existing physical microcausality results (`NoSignalingGeneral.bipartite_no_signaling`,
+`FreeFieldNet.bornNet_no_signaling`): the Born/trace functional is no-signaling *because it is linear*.
+Together with `refinementNatural_additive` (the converse: no-signaling ⇒ additive ⇒ Born) this is the iff —
+among rules `p ∝ f`, **refinement-natural ⟺ Born**. (The existing theorems give only this easy direction;
+the converse — no-signaling forcing Born — is the genuinely load-bearing route-4 content here.) -/
+theorem id_refinementNatural : RefinementNatural id := by
+  intro x y z _ _ _; simp only [id_eq]
+
 /-- **The α=2 record rule is NOT refinement-natural** — i.e. it signals under refinement. (If it were,
 `refinementNatural_additive` would force `(·)²` to be additive, contradicting `sq_not_additive` at
 `x=y=1`.) So the `α`-family is exactly excluded by the no-signaling premise. -/

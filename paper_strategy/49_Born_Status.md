@@ -203,8 +203,21 @@ operational signaling. Machine-checked (`QIQTH/RefinementBorn.lean`, axiom-free)
 - `sq_not_refinementNatural` — the `α=2` rule is **not** refinement-natural (it would signal); the
   `α`-family is exactly excluded by no-signaling.
 
+Also machine-checked: `id_refinementNatural` (Born *is* refinement-natural) — completing the **iff: among
+rules `p ∝ f`, refinement-natural ⟺ Born.**
+
 **Net honest claim:** QIQT-H reduces Born to **no-signaling under record refinement** — an independently
 mandatory relativistic principle, not an ad-hoc measure postulate — and machine-checks that it suffices and
-that nothing weaker (capacity/χ_R/determinism) does. The genuine open question is whether this no-signaling
-premise can itself be derived in QIQT-H from microcausality of the local net (it has no-signaling theorems
-already — `NoSignalingGeneral`, `bornNet_no_signaling`); if so, Born is genuinely derived.
+that nothing weaker (capacity/χ_R/determinism) does.
+
+### Does the existing microcausality discharge it? — investigated, NO (directionality finding)
+The corpus's no-signaling theorems (`NoSignalingGeneral.bipartite_no_signaling`: `∑_b tr(ρ(E⊗F_b)) =
+tr(ρ(E⊗1))`; `FreeFieldNet.bornNet_no_signaling`: the product-Born marginal `∑ p(y)p(·) = p(y)`) are the
+**converse direction** — `Born ⇒ no-signaling`. They *presuppose* the Born/trace functional and show it is
+no-signaling **because the trace is linear / the measure normalised**. They do **not** constrain the
+candidate `f`-family, so they do **not** discharge the route-4 premise (`no-signaling ⇒ Born`), which is the
+genuinely load-bearing converse. `id_refinementNatural` is their abstract counterpart (easy direction);
+`refinementNatural_additive` is the hard one they do not give. So a genuine derivation must impose
+no-signaling on the **selector `λ`'s marginals** (not on the already-Born functional) — i.e. show the actual
+`(Φ,λ)` outcome statistics are remote-refinement-invariant from microcausality of the net. That is the real
+remaining target; the existing theorems confirm consistency but cannot close it.

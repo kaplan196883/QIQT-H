@@ -2312,6 +2312,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RefinementBorn.refinementNatural_additive
 -- expected: standard only — ★ refinement-naturality (coarse prob = sum of fine probs; = no-signaling under
 -- remote record refinement) + f>0 ⇒ f(x+y)=f x+f y. Compose with additive_fMeasure_eq_born ⇒ Born.
+#print axioms QIQTH.RefinementBorn.id_refinementNatural
+-- expected: standard only — Born (f=id) IS refinement-natural (easy direction; abstract counterpart of
+-- bipartite_no_signaling / bornNet_no_signaling). With refinementNatural_additive: natural ⟺ Born (the iff).
 #print axioms QIQTH.RefinementBorn.sq_not_refinementNatural
 -- expected: standard only — the α=2 rule is NOT refinement-natural (it would signal); the α-family is
 -- exactly excluded by no-signaling. So: no-signaling under refinement ⇒ Born; without it, every α survives.
