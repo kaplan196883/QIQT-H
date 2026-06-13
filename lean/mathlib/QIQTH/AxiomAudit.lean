@@ -2365,4 +2365,12 @@ namespace QIQTH.AxiomAudit
 -- selection step (the martingale-increment condition); discharges born_from_martingale's hmart in the
 -- equivariant model, collapsing the open content to "the (Φ,λ) dynamics preserves a Born-agnostic μ".
 
+-- Envariance.lean — Zurek's equal-amplitude Born half (companion to born_from_uniform).
+#print axioms QIQTH.Envariance.envariance_equal_marg
+-- expected: standard only — a μ-preserving swap implementing the a↔b label swap ⇒ equal marginals
+-- (equal-amplitude branches equiprobable), with no Born assumption.
+#print axioms QIQTH.Envariance.envariance_forces_uniform
+-- expected: standard only — total transposition-envariance ⇒ μ constant; DERIVES the uniform
+-- Born-agnostic measure that born_from_uniform had to assume.
+
 end QIQTH.AxiomAudit

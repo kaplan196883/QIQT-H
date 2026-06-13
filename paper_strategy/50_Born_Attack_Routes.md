@@ -70,6 +70,21 @@ from QIQT-H dynamics rather than assumed?*
 | `born_from_martingale` | Martingale + absorbing 0/1 + initial `w_k` ⇒ `μ(outcome k)=w_k`. |
 | `sqRule_refinement_signals` | Meta no-go witness: α=2 signals under `[2,2]→[1,1,2]` (1/2 vs 1/3); Born invariant. |
 | `SelectionModel.expectation_conserved` | **Bridge**: equivariance ⇒ `E_μ[W∘R]=E_μ[W]` for every `W` — the martingale-increment condition, *derived* not assumed in the equivariant model. |
+| `Envariance.envariance_equal_marg` | **Zurek equal-amplitude Born**: a μ-preserving swap implementing the `a↔b` label swap ⇒ `marg a = marg b`. Equal-amplitude branches equiprobable, no Born assumption. |
+| `Envariance.envariance_forces_uniform` | Total transposition-envariance ⇒ `μ` constant — *derives* the uniform Born-agnostic measure `born_from_uniform` had to assume. |
+
+### The two halves of Born, both now machine-checked
+
+Zurek's envariance route is now complete as a pair of axiom-free theorems over a **Born-agnostic** measure:
+- **Equal amplitudes** → `envariance_equal_marg`: swap-symmetric branches are equiprobable (a system swap
+  undone by a μ-preserving remote action cannot change the local marginal — pure no-signaling symmetry).
+- **Unequal amplitudes** → `born_from_uniform`: fine-grain outcome `k` into `M·w_k` equal sub-records;
+  all sub-records are pairwise swap-symmetric, so `envariance_forces_uniform` makes them equiprobable
+  (`1/M` each), and outcome `k` collects `M·w_k·(1/M) = w_k` — Born on the rational grid.
+`envariance_forces_uniform` closes the "why uniform?" gap that `born_from_uniform` left open: uniformity
+is *derived* from swap-symmetry, not assumed. The sole remaining residual is unchanged and purely
+physical — that the actual global state's `(Φ,λ)` dynamics furnishes these μ-preserving swaps for
+genuinely equal-amplitude branches (the envariance symmetry of the entangled state, established by Zurek).
 
 ### The bridge that unifies the routes
 
