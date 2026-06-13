@@ -82,4 +82,37 @@ theorem alphaSq_selector_signals : cell lamC 0 ≠ cell lamF 0 + cell lamF 1 := 
 
 end Countermodel
 
+/-! ### Milestone 1 of the Gap-2 attack: selector-locality ⇒ remote no-signaling
+(per GPT-5.5-pro's corrected sketch, 2026-06-13)
+
+**Selector-locality** = the local marginal factors through the LOCAL reduced state `ρ_A`. Combined with the
+fact that a remote refinement preserves `ρ_A` (bipartite no-signaling *at the state level*), the local
+marginal is remote-invariant — i.e. selector no-signaling. This is the clean "remote" half.
+
+Two honest caveats (pro):
+* Selector-locality is **not** derivable from operator-net microcausality alone — that gives `ρ_A`-invariance
+  and Born-*linear* expectations, not invariance of the deterministic selector's μ-measure. It is an extra
+  equilibrium/screening condition on `(Φ,λ)` (Bohmian-quantum-equilibrium analogue) — the real Gap-2 content.
+* Selector-locality does **not** by itself give Born: e.g. `g(ρ,P)=tr(ρ²/tr(ρ²)·P)` is selector-local and
+  remote-no-signaling but non-Born. Born additionally needs **local Gleason/Busch additivity** ⇒
+  `g(ρ,P)=tr(σ(ρ)P)`, plus **state-anchoring** (affinity + pure-state certainty ⇒ `σ(ρ)=ρ`).
+
+So the corrected reduction is `Born ⟸ selector-locality + local Gleason + state-anchoring`. -/
+
+/-- Selector-locality: the local marginal `localMarg ρ k` is a functional `g` of the local reduced state
+`reducedA ρ` only. -/
+def SelectorLocal {G L K : Type*} (reducedA : G → L) (localMarg : G → K → ℝ) (g : L → K → ℝ) : Prop :=
+  ∀ ρ k, localMarg ρ k = g (reducedA ρ) k
+
+/-- **Milestone 1 — selector-locality + `ρ_A`-preservation ⇒ remote no-signaling.** If the local marginal
+factors through the local reduced state, and a remote refinement `R` preserves that reduced state (the
+state-level content of `NoSignalingGeneral.bipartite_no_signaling`), then the local marginal is invariant
+under `R`. The "remote" half of the Gap-2 bridge; the load-bearing hypothesis is `SelectorLocal`. -/
+theorem local_factor_remote_invariant {G L K : Type*}
+    (reducedA : G → L) (localMarg : G → K → ℝ) (g : L → K → ℝ)
+    (hloc : SelectorLocal reducedA localMarg g)
+    (R : G → G) (hR : ∀ ρ, reducedA (R ρ) = reducedA ρ) (ρ : G) (k : K) :
+    localMarg (R ρ) k = localMarg ρ k := by
+  rw [hloc (R ρ) k, hR ρ, ← hloc ρ k]
+
 end QIQTH.SelectorRefinement

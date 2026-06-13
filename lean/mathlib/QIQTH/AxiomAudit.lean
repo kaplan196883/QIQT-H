@@ -2324,6 +2324,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ SEPARATION: a deterministic α=2 selector over a fixed uniform measure on 15
 -- microstates has coarse cell 12 ≠ 5+5=10 merged fine cells ⇒ selector no-signaling FAILS while the trace
 -- no-signaling theorem holds ⇒ existing microcausality does NOT force selector no-signaling (Gap 3 ⇏ closed).
+#print axioms QIQTH.SelectorRefinement.local_factor_remote_invariant
+-- expected: standard only — Gap-2 milestone 1: selector-locality (local marginal factors through ρ_A) +
+-- ρ_A-preservation under remote refinement ⇒ local marginal remote-invariant (the "remote" half of the bridge).
 #print axioms QIQTH.RefinementBorn.sq_not_refinementNatural
 -- expected: standard only — the α=2 rule is NOT refinement-natural (it would signal); the α-family is
 -- exactly excluded by no-signaling. So: no-signaling under refinement ⇒ Born; without it, every α survives.

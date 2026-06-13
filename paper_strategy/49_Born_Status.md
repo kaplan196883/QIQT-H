@@ -245,3 +245,51 @@ Gap-2 (dynamical-realization) condition**, and that reduction is now axiom-free 
 only hold at the *averaged-marginal* level, not as a pointwise local valuation — consistent with
 QIQT-H being contextual-but-no-signaling, [[qiqth_observer_is_wavefunction]] / the not-superdeterministic
 stance).
+
+## 6. The Gap-2 roadmap — how the dynamics could deliver the bridge (GPT-5.5-pro, 2026-06-13)
+
+**Corrected reduction (three premises, not two):**
+> **Born ⟸ selector-locality + local Gleason/Busch additivity + state-anchoring/affinity.**
+
+The two-refinement decomposition (verified non-circular by pro):
+- **Remote refinement** (Bob splits his outcome): Alice's marginal unchanged ⟸ **selector-locality** — the
+  local marginal factors through the local reduced state `ρ_A`. Machine-checked: `local_factor_remote_invariant`
+  (`SelectorRefinement.lean`, milestone 1) — selector-locality + `ρ_A`-preservation ⇒ remote no-signaling.
+- **Local refinement** (Alice splits her own outcome): additivity over Alice's orthogonal local projectors =
+  **Gleason/Busch** on `A(O_A)` ⇒ `g(ρ_A,P) = tr(σ(ρ_A)P)`.
+
+**Two failure modes pro flagged (the corrections to the naive sketch):**
+1. **Microcausality ⇏ selector-locality.** Operator-net locality gives `ρ_A`-invariance and Born-*linear*
+   expectations, **not** invariance of the deterministic selector's μ-measure. Selector-locality is an extra
+   *equilibrium/screening* condition on `(Φ,λ)` (a Bohmian-quantum-equilibrium analogue) — the genuine Gap-2
+   content, not free from microcausality. And it is **not** Born by itself: `g(ρ)=tr(ρ²/tr(ρ²)·P)` is
+   selector-local but non-Born.
+2. **Local Gleason ⇏ Born.** It gives `tr(σ(ρ)·)` for *some* density-op map `σ`, not `σ(ρ)=ρ`. **State-anchoring**
+   (affinity under classical mixtures + pure-state certainty) is the extra step forcing `σ(ρ)=ρ`.
+
+**Weak vs strong locality (the Bell guardrail).** "Alice's record reads only local data" has two meanings:
+the **weak/marginal** form (`μ`-marginal factors through `ρ_A`) is Bell-compatible and is what we want; the
+**strong/pointwise** form (the actual outcome is a local function of local hidden data) is Bell-*forbidden*
+(deterministic pointwise locality + measurement independence ⇒ CHSH ≤ 2, violated by QM). So the target is the
+weak μ-pushforward form; `λ` stays *ontically contextual*, only the marginals are local. (Same structure as
+Bohm/DGZ: equilibrium no-signaling at the marginal level, nonlocal individual outcomes.)
+
+**Corrected Lean ladder:**
+1. `selector-locality ⇒ remote no-signaling` — **done** (`local_factor_remote_invariant`).
+2. local additivity ⇒ `g(ρ,E)=tr(σ(ρ)E)` (reuse `OneSiteGleason.oneSite_forced`); **then** affinity +
+   pure-state certainty ⇒ `σ(ρ)=ρ` (state-anchoring) — medium, reuses existing effect-Gleason.
+3. **derive selector-locality from a `(Φ,λ)` λ-dynamics model**, as an exact μ-pushforward / cylinder-event
+   theorem `(π_A)_* μ_{ρ_AB,y} = ν_{ρ_A}` — the real Gap-2 build (a Lean model of the selection dynamics
+   respecting the local-algebra/causal structure). Plus a **Bell guardrail** theorem (pointwise-local
+   deterministic selector + measurement independence ⇒ CHSH ≤ 2) so the derivation can't accidentally prove a
+   locality too strong to reproduce quantum correlations.
+
+**Honest status of the literature (pro):** there is **no** known theorem "microcausal deterministic HV +
+fixed equivariant μ ⇒ Born local marginals." The closest is Bohm/DGZ (equivariant `|Ψ|²` ⇒ equilibrium
+no-signaling — but `|Ψ|²` *is* Born) and Valentini (non-equilibrium ⇒ signaling, so equilibrium is essential);
+relativistic collapse (Tumulka rGRWf, Bedingham) builds Born in by construction. So step 3 is genuine new
+territory, not a citation away.
+
+**Net:** the global "measure principle" is now **localized** — to local operational non-contextuality
+(Gleason, its most defensible form) plus a *derivable-in-principle* selector-locality (μ-equilibrium) plus
+state-anchoring. Steps 1 done, 2 reuses existing machinery, 3 is the real Gap-2 frontier.
