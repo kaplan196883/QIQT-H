@@ -3,6 +3,15 @@
 **As of:** 2026-06-13. **Scope:** the precise state of "Born from typicality" (GAP 3 of
 `48_GAP_PRIZE_List.md`), what is machine-checked, and exactly what remains.
 
+> **Latest (see `50_Born_Attack_Routes.md` for the canonical, current map).** Since this doc's body was
+> written, the reduction was completed: the full attack-route layer + a finite H-theorem, then three brackets
+> on the exponent — meta no-go, rank-count no-go (`RankCountNoGo`), and rotation/Banach–Lamperti uniqueness
+> (`RotationBorn`); Gleason uniqueness assembled in `BornChain`; and the symmetry round (`SymmetrySquare`):
+> the bell curve shares Born's square (Maxwell–Herschel) and a Lorentz boost admits no positive norm. Net:
+> Born is reduced to one Hilbert-typicality posit, made unique by Gleason, bracketed three ways. Plain-English
+> account at qiqt.org/born; standalone paper `QIQT_Born_Reduction.md`. The sections below are the earlier
+> milestone record.
+
 **Lean verification re-run this date (definitive):** `lake build QIQTH.AxiomAudit` → **exit 0, "Build
 completed successfully (3829 jobs)", zero `error:` lines**. The named theorems below exist with the stated
 signatures; the files carry **no `sorry`/`admit`** (`sorryAx` count 0); the **raw project-axiom count is 0**
