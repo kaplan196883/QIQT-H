@@ -63,6 +63,16 @@ assignment at all — every yes/no question gets a probability, and compatible q
 amplitude is the *unique* possibility. You do not get to choose the power $\alpha$. Asking for a coherent
 probability *at all* already forces Born.
 
+There is an even more visceral way to see *why the exponent is 2*. Quantum evolution **mixes** amplitudes —
+it continuously rotates one into another (that is what a superposition is). Now ask: which power
+$\sum_k |c_k|^\alpha$ stays fixed under that mixing? Only the square. Rotate the simplest pair $(1,0)$ by
+$45°$ and you land on $(\tfrac{1}{\sqrt2},\tfrac{1}{\sqrt2})$; the total $|c|^\alpha$ comes out
+$2^{\,1-\alpha/2}$, which equals the original $1$ **only when $\alpha=2$**. Every other exponent is *rigid* —
+it tolerates relabelling and rephasing, but the instant amplitudes genuinely blend it changes. This is the
+finite core of the Banach–Lamperti theorem, and it is the deepest "why 2": **the square is the only weight
+the existence of continuous quantum evolution allows.** (It is also why, in every wave theory, energy goes
+as amplitude *squared* — same conserved quadratic.) This is [machine-checked](/papers) too.
+
 And it is stable on top of that: even if you started with the *wrong*, non-Born weighting, the dynamics
 relaxes it back to Born — the same way a gas out of equilibrium settles down (a finite **H-theorem**, also
 machine-checked). Born is not a fragile choice; it is the equilibrium the dynamics is pulled toward.
