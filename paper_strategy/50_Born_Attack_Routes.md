@@ -200,6 +200,32 @@ This sharpens the picture past the two no-gos: the square is not merely the irre
 (GPT-5.5): this is close to Gleason in symmetry language, not a deeper non-circular principle ("unitary"
 already means inner-product-preserving) — but it is the cleanest statement of *where the 2 comes from*.
 
+## Two more faces of the square — bell curve & boost (GPT-5.5-pro consult, 2026-06-13)
+
+Pro confirmed both hypotheses and turned them into machine-checked theorems (`QIQTH/SymmetrySquare.lean`,
+axiom-free):
+
+**Aspect 1 — the bell curve's square IS Born's square (Maxwell–Herschel).** A product density invariant under
+the rotation/unitary group is forced Gaussian, with the rotation-invariant quadratic `|z|²` in the exponent —
+the same square Born uses. In squared-radius coordinates `U(2)`-invariance reads `P(a)P(b)=P(a+b)P(0)`, so the
+radial profile is **multiplicative** and hence exponential: the exact multiplicative mirror of the additive
+`f(x+y)=f(x)+f(y) ⇒ Born` bridge. Theorems: `rotation_product_multiplicative`, `multiplicative_pow`,
+`gaussian_exponent`, `gaussian_profile_from_rotation`. (CLT governs *fluctuations* of already-Born
+frequencies; it does not produce the Born weights — pro.)
+
+**Aspect 2 — a Lorentzian boost cannot carry a probability (sharp no-go).** A boost is a rotation by
+imaginary rapidity preserving the *indefinite* `t²−x²`; the light-cone vector `(1,1)` is an eigenvector with
+eigenvalue `eᵡ`, so any homogeneous boost-invariant `F≥0` obeys `F(1,1)=e^{χα}F(1,1)` ⇒ `F(1,1)=0`. Hence
+**no boost-invariant positive probability norm exists** (`no_boost_invariant_positive_norm`); relativistic
+Born comes from the *unitary* (Wigner) rep preserving `Σ|c|²`, never from spacetime-boost invariance. The
+mirror of `RotationBorn`: compact rotation *forces* α=2; non-compact boost *forbids* any positive norm.
+
+**Unifying fact (pro, precise).** Born `Σ|z_i|²`, the Gaussian `e^{−‖x‖²}`, the free action `⟨φ,Aφ⟩`, and the
+interval `t²−x²` are all the degree-2 invariant of their symmetry group; rotations (compact) and boosts
+(non-compact) are real forms of one complexified group, Wick-related — but **only the positive-definite cases
+support a probability norm.** Honest caveat: this confirms the square is the degree-2 invariant; it does not
+derive Born from nothing (rotation/unitarity already imports the quadratic).
+
 ## Honest status
 
 These are **conditional theorems**: each makes its one Born-strength premise fully explicit and

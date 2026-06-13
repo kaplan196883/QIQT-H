@@ -268,3 +268,4 @@ import QIQTH.Relaxation
 import QIQTH.RankCountNoGo
 import QIQTH.BornChain
 import QIQTH.RotationBorn
+import QIQTH.SymmetrySquare

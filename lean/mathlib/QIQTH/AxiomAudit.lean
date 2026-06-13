@@ -2411,4 +2411,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RotationBorn.lpow_rotation_invariant_forces_two
 -- expected: standard only — the no-go half: α≠2 is broken by the explicit 45° rotation witness on (1,0).
 
+-- SymmetrySquare.lean — GPT-5.5-pro consult 2026-06-13: bell curve = Born's square (Maxwell–Herschel) +
+-- boost no-go.
+#print axioms QIQTH.SymmetrySquare.gaussian_profile_from_rotation
+-- expected: standard only — rotation/U(2)-product invariance ⇒ Gaussian profile with the |z|² quadratic =
+-- the same square Born uses (the bell-curve↔Born bridge, integer radial values).
+#print axioms QIQTH.SymmetrySquare.no_boost_invariant_positive_norm
+-- expected: standard only — no boost-invariant positive probability norm exists (indefinite signature);
+-- relativistic Born comes from the unitary (Wigner) rep, not spacetime-boost invariance.
+
 end QIQTH.AxiomAudit
