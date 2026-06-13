@@ -47,7 +47,8 @@ $\lambda$ is not a random draw made by a privileged agent, and it is not an extr
 There is no fundamental chance and no fundamental choice in QIQT-H. Probability is meant to *emerge*: across
 many runs, the actual records distribute with frequency $|c_k|^2 = \omega_\Phi(P_k)$ for *typical*
 microscopic initial conditions. What looks like a probability is the typicality of which realization a
-record like us finds itself to be — not a die that $\Phi$ rolls.
+record like us finds itself to be — not a die that $\Phi$ rolls. For the plain-language account of how this
+yields $|c_k|^2$, see [How the Born rule emerges](/born).
 
 That this typicality reproduces the Born weights is **not yet derived**; it is the
 [Born-from-typicality problem](/open-problems). And it carries a real risk of circularity: until the
