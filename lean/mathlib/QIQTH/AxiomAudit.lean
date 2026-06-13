@@ -2315,6 +2315,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RefinementBorn.id_refinementNatural
 -- expected: standard only — Born (f=id) IS refinement-natural (easy direction; abstract counterpart of
 -- bipartite_no_signaling / bornNet_no_signaling). With refinementNatural_additive: natural ⟺ Born (the iff).
+
+-- ★ BORN selector (λ) layer — Gap 3 reduces to a Gap-2 bridge (SelectorRefinement.lean, per GPT-5.5-pro):
+#print axioms QIQTH.SelectorRefinement.readout_invariant_marg
+-- expected: standard only — Born-free bridge: remote refinement leaving the local readout unchanged
+-- (XL∘R=XL, selector-level microcausality) ⇒ local marginal invariant (selector no-signaling). The Gap-2 input.
+#print axioms QIQTH.SelectorRefinement.Countermodel.alphaSq_selector_signals
+-- expected: standard only — ★ SEPARATION: a deterministic α=2 selector over a fixed uniform measure on 15
+-- microstates has coarse cell 12 ≠ 5+5=10 merged fine cells ⇒ selector no-signaling FAILS while the trace
+-- no-signaling theorem holds ⇒ existing microcausality does NOT force selector no-signaling (Gap 3 ⇏ closed).
 #print axioms QIQTH.RefinementBorn.sq_not_refinementNatural
 -- expected: standard only — the α=2 rule is NOT refinement-natural (it would signal); the α-family is
 -- exactly excluded by no-signaling. So: no-signaling under refinement ⇒ Born; without it, every α survives.

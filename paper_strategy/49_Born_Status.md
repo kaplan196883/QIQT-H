@@ -221,3 +221,27 @@ genuinely load-bearing converse. `id_refinementNatural` is their abstract counte
 no-signaling on the **selector `λ`'s marginals** (not on the already-Born functional) — i.e. show the actual
 `(Φ,λ)` outcome statistics are remote-refinement-invariant from microcausality of the net. That is the real
 remaining target; the existing theorems confirm consistency but cannot close it.
+
+### The selector (λ) layer — machine-checked (`QIQTH/SelectorRefinement.lean`, axiom-free)
+Formalises the marginal of a deterministic selector over a fixed, Born-agnostic typicality measure `μ`
+(`marg μ sel k = μ`-mass of `{ω : sel ω = k}`), and proves the two pieces GPT-5.5-pro identified:
+- **The Born-free bridge** `readout_invariant_marg`: if a remote refinement `R` leaves the local readout
+  unchanged (`XL ∘ R = XL` — selector-level microcausality), the local marginal is invariant — selector
+  no-signaling, with **no** Born/trace input. **This `XL∘R=XL` is exactly the Gap-2 bridge a genuine
+  derivation needs**; it does not follow from operator-net microcausality automatically (one must show the
+  actual *selector* commutes, not just the observables). No Bell/Fine obstruction (context + its refinement
+  are compatible).
+- **The separation / independence result** `Countermodel.alphaSq_selector_signals` (by `decide`): a
+  deterministic α=2 selector over a fixed **uniform** measure on 15 microstates has coarse cell `12` for a
+  merged outcome but fine cells `5,5` (total `10`); `12 ≠ 10`, so selector no-signaling **fails** — while the
+  trace no-signaling theorem is untouched. **Proves existing microcausality does NOT force selector
+  no-signaling**, so Gap 3 is genuinely *not* already closed; it reduces to the `XL∘R=XL` bridge (Gap 2).
+
+**Bottom line:** `Born ⟺ selector-marginal no-signaling` (machine-checked iff at the rule level), and
+selector no-signaling `⟸` the microcausal bridge `XL∘R=XL`, which is **not** supplied by the operator net
+alone — it is a statement about the actual `(Φ,λ)` dynamics. **Gap 3 (Born) thus reduces to a precise
+Gap-2 (dynamical-realization) condition**, and that reduction is now axiom-free in Lean. Whether the
+`(Φ,λ)` dynamics actually delivers `XL∘R=XL` is the open frontier (and, per the Bell/Fine caveat, it can
+only hold at the *averaged-marginal* level, not as a pointwise local valuation — consistent with
+QIQT-H being contextual-but-no-signaling, [[qiqth_observer_is_wavefunction]] / the not-superdeterministic
+stance).
