@@ -125,4 +125,63 @@ theorem uniform_stationary_of_colStochastic (T : Ω → Ω → ℝ) (hcol : ∀ 
   simp only [push]
   rw [← Finset.mul_sum, hcol y, mul_one]
 
+/-! ### Relaxation — the mixing premise that makes Born the ATTRACTING equilibrium (Doeblin) -/
+
+/-- **Doeblin contraction (the H-theorem's relaxation half).** If a row-stochastic kernel `T` is
+ε-minorized (`T x y ≥ ε` for all `x, y` — a finite mixing / molecular-chaos premise), then it contracts
+the ℓ¹ distance between any two probability measures by the factor `1 − |Ω|·ε`:
+`‖μT − νT‖₁ ≤ (1 − |Ω|ε)·‖μ − ν‖₁`. Iterating drives every `μ` to the kernel's fixed point geometrically.
+This is the relaxation pro flagged as missing from `uniform_stationary_*` (stationarity alone is not
+attraction). Proof: subtract the floor `ε` (free, since `∑(μ−ν)=0`), bound the absolute value of the sum
+by the sum of absolute values over the now-nonnegative `T x y − ε`, and swap the order of summation. -/
+theorem doeblin_contraction (T : Ω → Ω → ℝ) (ε : ℝ)
+    (hrow : ∀ x, ∑ y, T x y = 1) (hmin : ∀ x y, ε ≤ T x y)
+    (μ ν : Ω → ℝ) (hμ : ∑ x, μ x = 1) (hν : ∑ x, ν x = 1) :
+    (∑ y, |push μ T y - push ν T y|) ≤ (1 - (Fintype.card Ω : ℝ) * ε) * ∑ x, |μ x - ν x| := by
+  set φ := fun x => μ x - ν x with hφ
+  have hsum0 : ∑ x, φ x = 0 := by
+    simp only [hφ]; rw [Finset.sum_sub_distrib, hμ, hν, sub_self]
+  have key : ∀ y, push μ T y - push ν T y = ∑ x, φ x * (T x y - ε) := by
+    intro y
+    have e1 : push μ T y - push ν T y = ∑ x, φ x * T x y := by
+      simp only [push, hφ, sub_mul]; rw [Finset.sum_sub_distrib]
+    have e2 : (∑ x, φ x * (T x y - ε)) = ∑ x, φ x * T x y := by
+      simp only [mul_sub]
+      rw [Finset.sum_sub_distrib, ← Finset.sum_mul, hsum0, zero_mul, sub_zero]
+    rw [e1, ← e2]
+  calc ∑ y, |push μ T y - push ν T y|
+      = ∑ y, |∑ x, φ x * (T x y - ε)| := Finset.sum_congr rfl (fun y _ => by rw [key y])
+    _ ≤ ∑ y, ∑ x, |φ x| * (T x y - ε) := by
+        refine Finset.sum_le_sum (fun y _ => ?_)
+        refine (Finset.abs_sum_le_sum_abs _ _).trans (le_of_eq ?_)
+        refine Finset.sum_congr rfl (fun x _ => ?_)
+        rw [abs_mul, abs_of_nonneg (by linarith [hmin x y] : (0 : ℝ) ≤ T x y - ε)]
+    _ = ∑ x, |φ x| * ∑ y, (T x y - ε) := by
+        rw [Finset.sum_comm]; exact Finset.sum_congr rfl (fun x _ => by rw [Finset.mul_sum])
+    _ = ∑ x, |φ x| * (1 - (Fintype.card Ω : ℝ) * ε) := by
+        refine Finset.sum_congr rfl (fun x _ => ?_)
+        congr 1
+        rw [Finset.sum_sub_distrib, hrow x, Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+    _ = (1 - (Fintype.card Ω : ℝ) * ε) * ∑ x, |φ x| := by rw [← Finset.sum_mul, mul_comm]
+
+/-- **Relaxation to Born.** Combining the two halves: an ε-minorized (mixing) kernel that is also
+column-stochastic (reversible uniform bath, `inducedKernel_col`) drives every `μ` to the uniform
+(= Born-counting) measure geometrically — `‖μT − π‖₁ ≤ (1 − |Ω|ε)·‖μ − π‖₁`. With `1 − |Ω|ε < 1`
+(genuine mixing), iterating gives `μ → π = Born`. This is the finite H-theorem with every premise
+explicit: reversibility (column-stochastic) + a uniform bath + mixing (ε-minorization). -/
+theorem relaxation_to_uniform [Nonempty Ω] (T : Ω → Ω → ℝ) (ε : ℝ)
+    (hrow : ∀ x, ∑ y, T x y = 1) (hcol : ∀ y, ∑ x, T x y = 1) (hmin : ∀ x y, ε ≤ T x y)
+    (μ : Ω → ℝ) (hμ : ∑ x, μ x = 1) :
+    (∑ y, |push μ T y - 1 / (Fintype.card Ω : ℝ)|)
+      ≤ (1 - (Fintype.card Ω : ℝ) * ε) * ∑ x, |μ x - 1 / (Fintype.card Ω : ℝ)| := by
+  have hcard : (Fintype.card Ω : ℝ) ≠ 0 := by exact_mod_cast Fintype.card_ne_zero
+  have hπ : ∑ _x : Ω, (1 / (Fintype.card Ω : ℝ)) = 1 := by
+    rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul, mul_one_div, div_self hcard]
+  have hstat := uniform_stationary_of_colStochastic T hcol
+  calc ∑ y, |push μ T y - 1 / (Fintype.card Ω : ℝ)|
+      = ∑ y, |push μ T y - push (fun _ => 1 / (Fintype.card Ω : ℝ)) T y| :=
+        Finset.sum_congr rfl (fun y _ => by rw [hstat y])
+    _ ≤ (1 - (Fintype.card Ω : ℝ) * ε) * ∑ x, |μ x - 1 / (Fintype.card Ω : ℝ)| :=
+        doeblin_contraction T ε hrow hmin μ _ hμ hπ
+
 end QIQTH.Relaxation

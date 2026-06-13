@@ -108,16 +108,27 @@ uniform bath genuinely *forces* bistochasticity. Two machine-checked theorems:
 | `resetKernel_reaches` | **No-go**: the reset kernel `K_ν(x,y)=ν y` is row-stochastic, strictly positive, and sends every μ to `ν` in one step — so for ANY full-support `ν`, "Markov + positive + relaxes to a unique equilibrium" holds yet does *not* select Born. Relaxation alone is Born-agnostic. |
 | `inducedKernel_col` | **The advance**: a reversible closed update `F : S×E ≃ S×E` over a uniform bath induces a *column*-stochastic selector kernel — bistochasticity is **derived from `F` being a bijection** (finite Liouville / unitarity shadow), not assumed. |
 | `uniform_stationary_of_colStochastic` | column-stochastic ⇒ the uniform (= Born-counting, via `born_from_uniform`) measure is stationary. |
+| `doeblin_contraction` | an ε-minorized kernel contracts ℓ¹ distance by `(1−|Ω|ε)`: the **relaxation** half (stationarity → attraction). |
+| `relaxation_to_uniform` | **the finite H-theorem, all premises explicit**: reversibility (col-stochastic) + uniform bath + mixing (ε-minorization) ⇒ every μ relaxes geometrically to uniform = Born. |
 
 **What this buys.** The irreducible input is sharpened from *"assume μ is |Ψ|²-equivariant"* to *"assume the
 closed dynamics is reversible and the inaccessible bath is uniform in counting measure"* — a finite
 Liouville + molecular-chaos premise, more structural and more physically forced. The no-go proves you
 cannot drop it (relaxation alone gives any ν).
 
-**Honest residual (pro).** Stationarity ≠ relaxation: that the Born measure is the *attracting* fixed point
-needs a separate primitivity/mixing premise (identity and permutations are bistochastic and do not mix);
-and the uniform-bath premise is itself a typicality postulate, not pure logic. So Born is now the
-equilibrium *forced by reversibility*; full closure still rests on a (sharper, more physical) input.
+**The relaxation half is now also closed.** `doeblin_contraction` + `relaxation_to_uniform` supply the
+mixing that turns "Born is a fixed point" into "Born is the *attracting* fixed point": an ε-minorized
+(mixing) reversible-uniform-bath kernel drives every μ to Born geometrically, `‖μT−π‖₁ ≤ (1−|Ω|ε)‖μ−π‖₁`.
+So the finite H-theorem is complete with **every premise explicit**: reversibility (column-stochastic, from
+the bijection) + uniform bath + mixing (ε-minorization).
+
+**Honest residual (pro), now sharply localised.** The Born rule, in this route, follows from three finite
+premises about the inaccessible degrees of freedom: (i) the closed update is *reversible* (a bijection —
+the finite shadow of unitarity, which QIQT-H asserts globally), (ii) the inaccessible *bath is uniform* in
+counting measure, (iii) the dynamics is *mixing* (ε-minorized). (i) is essentially given by QIQT-H's exact
+unitarity; (ii) and (iii) are a finite Liouville + molecular-chaos typicality postulate — not pure logic,
+but a far weaker and more physical input than "assume μ = |Ψ|²". That postulate is the genuine irreducible
+residual, and the meta no-go (`sqRule_refinement_signals`) proves nothing Born-free can replace it.
 
 ## Honest status
 

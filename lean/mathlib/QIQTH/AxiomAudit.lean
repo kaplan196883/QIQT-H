@@ -2383,5 +2383,10 @@ namespace QIQTH.AxiomAudit
 -- induces a COLUMN-stochastic selector kernel; bistochasticity is derived from the bijection, not assumed.
 #print axioms QIQTH.Relaxation.uniform_stationary_of_colStochastic
 -- expected: standard only — column-stochastic ⇒ uniform (Born-counting) measure is stationary.
+#print axioms QIQTH.Relaxation.doeblin_contraction
+-- expected: standard only — ε-minorized kernel contracts ℓ¹ distance by (1−|Ω|ε): the relaxation half.
+#print axioms QIQTH.Relaxation.relaxation_to_uniform
+-- expected: standard only — reversibility (col-stochastic) + uniform bath + mixing (ε-minorization) ⇒
+-- every μ relaxes geometrically to uniform = Born. The finite H-theorem, all premises explicit.
 
 end QIQTH.AxiomAudit
