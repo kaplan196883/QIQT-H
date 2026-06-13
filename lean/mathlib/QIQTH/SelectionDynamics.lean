@@ -60,6 +60,21 @@ theorem uniformModel_no_signaling (sel : Ω → K) (R : Ω ≃ Ω) (k : K) :
     marg (uniformModel sel R).μ (fun ω => sel (R ω)) k = marg (uniformModel sel R).μ sel k :=
   (uniformModel sel R).no_signaling k
 
+/-- **Equivariance ⇒ the martingale conservation law.** In an equivariant selection model the
+μ-expectation of *every* observable `W` is conserved under one selection step `R`:
+`E_μ[W ∘ R] = E_μ[W]`. This is exactly the martingale-increment condition that
+`BornRoutes.born_from_martingale` takes as its Born-strength premise (`hmart`): so in this model class
+the conservation needed for the optional-stopping Born derivation is **not an extra assumption** — it
+is the equivariance of the typicality measure. The open content collapses to a single physical claim:
+that the actual `(Φ,λ)` dynamics preserves a Born-agnostic `μ`. (Proof: rewrite the weight by
+equivariance `μ ω = μ(R ω)` then reindex the sum by the bijection `R`.) -/
+theorem SelectionModel.expectation_conserved (M : SelectionModel Ω K) (W : Ω → ℝ) :
+    ∑ ω, M.μ ω * W (M.R ω) = ∑ ω, M.μ ω * W ω := by
+  calc ∑ ω, M.μ ω * W (M.R ω)
+      = ∑ ω, M.μ (M.R ω) * W (M.R ω) := by
+        refine Finset.sum_congr rfl (fun ω _ => ?_); rw [M.equivariant ω]
+    _ = ∑ ω, M.μ ω * W ω := Equiv.sum_comp M.R (fun ω => M.μ ω * W ω)
+
 /-! ### First concrete instance where uniform typicality REPRODUCES Born (the Zurek envariance route)
 
 Building on the scaffold: a model where the *Born-agnostic* uniform measure actually yields Born marginals.

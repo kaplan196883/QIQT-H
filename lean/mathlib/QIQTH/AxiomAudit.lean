@@ -2360,4 +2360,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — meta no-go witness: the α=2 rule signals under [2,2]→[1,1,2] refinement
 -- (1/2 vs 1/3) while Born stays 1/2; so any premise the whole power-family obeys cannot entail Born.
 
+#print axioms QIQTH.SelectionDynamics.SelectionModel.expectation_conserved
+-- expected: standard only — equivariance ⇒ μ-expectation of every observable conserved under the
+-- selection step (the martingale-increment condition); discharges born_from_martingale's hmart in the
+-- equivariant model, collapsing the open content to "the (Φ,λ) dynamics preserves a Born-agnostic μ".
+
 end QIQTH.AxiomAudit

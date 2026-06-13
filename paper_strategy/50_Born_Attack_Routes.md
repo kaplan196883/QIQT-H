@@ -69,6 +69,18 @@ from QIQT-H dynamics rather than assumed?*
 | `additive_nat_linear` | Route C core: additive count `F` ⇒ `F(n)=n·F(1)` ⇒ Born weights `n_i/M`. |
 | `born_from_martingale` | Martingale + absorbing 0/1 + initial `w_k` ⇒ `μ(outcome k)=w_k`. |
 | `sqRule_refinement_signals` | Meta no-go witness: α=2 signals under `[2,2]→[1,1,2]` (1/2 vs 1/3); Born invariant. |
+| `SelectionModel.expectation_conserved` | **Bridge**: equivariance ⇒ `E_μ[W∘R]=E_μ[W]` for every `W` — the martingale-increment condition, *derived* not assumed in the equivariant model. |
+
+### The bridge that unifies the routes
+
+`SelectionModel.expectation_conserved` (in `SelectionDynamics.lean`) shows the **martingale conservation
+and the equivariance condition are the same thing**: for an equivariant typicality measure, the
+μ-expectation of every observable is conserved under the selection step `R`. This discharges
+`born_from_martingale`'s Born-strength premise (`hmart`) *inside the equivariant model class* — so the
+no-signaling route (equivariance) and the martingale route are two faces of one condition. The entire
+open problem then collapses to a single physical claim: **the actual `(Φ,λ)` dynamics preserves a
+Born-agnostic typicality measure `μ`** (the Valentini-style relaxation hope, vs. the circularity risk
+that the only equivariant `μ` is `|Ψ|²` itself).
 
 ## Honest status
 
