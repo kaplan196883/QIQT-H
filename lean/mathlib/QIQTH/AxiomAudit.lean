@@ -2350,4 +2350,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the α=2 rule is NOT refinement-natural (it would signal); the α-family is
 -- exactly excluded by no-signaling. So: no-signaling under refinement ⇒ Born; without it, every α survives.
 
+-- BornRoutes.lean — GPT-5.5-pro 2026-06-13 attack routes (see paper_strategy/50_Born_Attack_Routes.md).
+#print axioms QIQTH.BornRoutes.additive_nat_linear
+-- expected: standard only — Route C core: additive count F ⇒ F(n)=n·F(1) ⇒ Born weights on the grid.
+#print axioms QIQTH.BornRoutes.born_from_martingale
+-- expected: standard only — martingale/optional-stopping Born: μ-conserved squared weight + absorbing
+-- 0/1 record + initial w_k ⇒ μ(outcome k) = w_k. Born-strength premise = the martingale conservation.
+#print axioms QIQTH.BornRoutes.sqRule_refinement_signals
+-- expected: standard only — meta no-go witness: the α=2 rule signals under [2,2]→[1,1,2] refinement
+-- (1/2 vs 1/3) while Born stays 1/2; so any premise the whole power-family obeys cannot entail Born.
+
 end QIQTH.AxiomAudit
