@@ -92,8 +92,14 @@ what is the prize we are chasing, and what must be fixed before arXiv.*
 > we can show, an **interpretation, not new physics**, unless an independent principle fixes `Q^eff`. This has
 > been propagated honestly: `08_Neutrino_Decoherence_Prediction.md` (downgraded header), `QIQT_Foundations_Paper.md`
 > ("Honest empirical status" + item 13 caveat), `PUBLICATION_STRATEGY.md`, and qiqt.org/idea. The one path to
-> falsifiability is deriving `Q^eff` non-circularly (no current candidate; GPT-5.5 thinks unlikely to survive
-> existing bounds). This does not change §1's verdict — it sharpens it on the empirical axis.
+> falsifiability is deriving `Q^eff` non-circularly. **Attempted and failed (`51_Qeff_Derivation_Attempt.md`,
+> stress-tested 2026-06-13):** all information capacities (holographic area, Bekenstein, entanglement) are far
+> too large; the one gravitational candidate (capacity→Diósi–Penrose) is a **category error** — a kinematic
+> capacity bound gives no rate, finite capacity does not even forbid superpositions (`|1⟩+|2⟩` needs no second
+> capacity = the known H2 gap), and the holographic area-difference does not scale like the DP self-energy
+> `E_Δ`; DP itself is largely excluded (Donadi et al. 2021). So **no non-circular testable channel survives**:
+> finite `Q_max` is, as far as we can show, empirically equivalent to QM (an interpretation) unless an explicit
+> collapse dynamics `𝓛_grav` is *added* as a new postulate. This sharpens §1's verdict on the empirical axis.
 
 > **Update 2026-06-06.** The project axiom budget is now **33** (all 33 are continuum /
 > operator-algebra interface axioms; the entire finite core below is axiom-free —

@@ -7,6 +7,36 @@ empirically equivalent to QM. (Context: `50_Born_Attack_Routes.md`, the empirica
 `08`/`PUBLICATION_STRATEGY`/`PROGRAM_STATUS` — GPT-5.5 verdict that finite `Q_max` alone is empirically
 equivalent to QM.)
 
+## ⚠ STRESS-TEST RESULT (2026-06-13): the gravitational candidate FAILS — category error
+
+The "one candidate that survives" below (the gravitational / geometry-distinction `Q^eff` → Diósi–Penrose
+rate) was stress-tested and **does not hold**. It is a **category error**, for three independent reasons —
+each standard physics, cross-checked, not mere opinion:
+
+1. **A kinematic capacity bound gives no rate.** `log dim H_R ≲ A/4ℓ_P²` limits the *size of the state space*,
+   not a timescale, Lindblad operator, or collapse rate. The DP rate `τ~ℏ/E_Δ` is a *dynamical* law
+   (branch-dependent gravitational fields whose self-energy difference drives decoherence). It is not
+   contained in "finite capacity"; deriving it would require *adding* the DP energy functional as dynamics —
+   i.e. importing the answer, not deriving it.
+2. **Finite capacity does not even forbid superpositions.** A Hilbert space that stores two orthogonal
+   records `|1⟩,|2⟩` also stores `|1⟩+|2⟩` — the superposition lives in the *same* space, needing no "second
+   capacity". So "two branches = two capacities = forbidden" is false. (This is exactly the known gap: finite
+   `Q_max` ⇏ the Macroscopic Definiteness Conjecture — H2 is a *separate, unproven* postulate, per
+   `48_GAP_PRIZE_List`.)
+3. **The holographic area-difference doesn't scale like `E_Δ`.** Screen-entropy differences go as `mc·Δx/ℏ`
+   (Verlinde) or `Gm²/ℏc` (Bekenstein–Hawking), not DP's `Gm²Δx²/R³`. Entropy is dimensionless; `E_Δ` is an
+   energy; converting requires a temperature *and* a dynamics — extra assumptions, not consequences.
+
+And independently: **Diósi–Penrose is already strongly constrained** — Donadi et al. (Nature Physics 2021)
+spontaneous-radiation bounds exclude the parameter-free Diósi model at a nuclear cutoff and push
+`R₀ ≳ 10⁻¹⁰ m`. So even if the link held, the natural DP rate is largely excluded.
+
+**Net:** no non-circular `Q^eff` survives. The honest verdict is reinforced: finite `Q_max` is **empirically
+equivalent to standard QM (an interpretation)**; a testable version would require *adding* an explicit
+collapse/noise dynamics `𝓛_grav` (a new postulate, with a definite cutoff/heating/radiation prediction) —
+which is not a consequence of the capacity bound and, in its standard DP form, is largely ruled out. The
+sections below are retained as the record of the attempt; the gravitational "survivor" is **withdrawn**.
+
 ## Candidates that fail (all confirm empirical equivalence)
 
 | candidate `Q^eff` | magnitude | verdict |
