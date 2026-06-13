@@ -181,6 +181,25 @@ nothing Born-free entails it and (ii) no amplitude-independent counting supplies
 true statement available — the same posit every single-world program (Everett, Bohm–DGZ, Deutsch–Wallace)
 ultimately needs.
 
+## Why the exponent is 2 — the rotation/Banach–Lamperti core (GPT-5.5 consult, 2026-06-13)
+
+The sharpest answer to "why $|c|^2$ and not $|c|^\alpha$" is the finite core of **Banach–Lamperti** (isometries
+of $\ell^p$): for $p\neq2$ the only norm-preserving maps are permutations + phases (rigid relabelling); **only
+$p=2$ admits the continuous rotation/mixing group** — and unitary dynamics *is* continuous amplitude-mixing.
+So the square is the unique power-law normalization compatible with unitary evolution. Machine-checked
+(`QIQTH/RotationBorn.lean`, axiom-free):
+
+| theorem | content |
+|---|---|
+| `born_exponent_rotation_invariant` | α=2: the square is preserved by **every** rotation of two amplitudes (Pythagoras). |
+| `lpow_rotation_invariant_forces_two` | α≠2: the 45° rotation of $(1,0)$ is an explicit witness — invariance there forces $2^{1-\alpha/2}=1$, i.e. α=2. |
+| `rotation_invariant_iff_exponent_two` | the iff: $\sum|c_k|^\alpha$ is rotation- (mixing-) invariant **iff** α=2. |
+
+This sharpens the picture past the two no-gos: the square is not merely the irreducible posit, it is the
+**only** power-law normalization the existence of continuous unitary evolution permits. Honest caveat
+(GPT-5.5): this is close to Gleason in symmetry language, not a deeper non-circular principle ("unitary"
+already means inner-product-preserving) — but it is the cleanest statement of *where the 2 comes from*.
+
 ## Honest status
 
 These are **conditional theorems**: each makes its one Born-strength premise fully explicit and

@@ -2404,4 +2404,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — converse: every density matrix yields such a noncontextual assignment; so the
 -- noncontextual functionals are exactly the Born functionals (the axiom pins Born uniquely).
 
+-- RotationBorn.lean — GPT-5.5 consult 2026-06-13: why exponent 2 (Banach–Lamperti core).
+#print axioms QIQTH.RotationBorn.rotation_invariant_iff_exponent_two
+-- expected: standard only — Σ|c_k|^α is rotation- (mixing-) invariant iff α=2; the square is the unique
+-- power-law normalization preserved by continuous unitary mixing.
+#print axioms QIQTH.RotationBorn.lpow_rotation_invariant_forces_two
+-- expected: standard only — the no-go half: α≠2 is broken by the explicit 45° rotation witness on (1,0).
+
 end QIQTH.AxiomAudit
