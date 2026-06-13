@@ -2373,4 +2373,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — total transposition-envariance ⇒ μ constant; DERIVES the uniform
 -- Born-agnostic measure that born_from_uniform had to assume.
 
+-- Relaxation.lean — the swing at the physics (GPT-5.5-pro 2026-06-13): derive measure-preservation
+-- from reversibility, plus the circularity no-go.
+#print axioms QIQTH.Relaxation.resetKernel_reaches
+-- expected: standard only — NO-GO: any full-support ν is the unique attracting equilibrium of the
+-- reset kernel, so relaxation alone does NOT select Born (the H-theorem circularity detector).
+#print axioms QIQTH.Relaxation.inducedKernel_col
+-- expected: standard only — THE ADVANCE: a reversible closed update F:S×E≃S×E over a uniform bath
+-- induces a COLUMN-stochastic selector kernel; bistochasticity is derived from the bijection, not assumed.
+#print axioms QIQTH.Relaxation.uniform_stationary_of_colStochastic
+-- expected: standard only — column-stochastic ⇒ uniform (Born-counting) measure is stationary.
+
 end QIQTH.AxiomAudit
