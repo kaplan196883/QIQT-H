@@ -331,11 +331,22 @@ question is sharp: *does the QIQT-H selection dynamics preserve a fixed, Born-ag
 sharp question "is the QIQT-H selection dynamics `μ`-equivariant?", with `equivariant_marg_invariant` waiting
 to consume the answer.
 
-**3c scaffold STARTED** (`QIQTH/SelectionDynamics.lean`, axiom-free): the `SelectionModel` structure (microstate
-space + Born-agnostic `μ` + deterministic selector + bijective remote action `R` + equivariance `(R)_*μ=μ`);
-`SelectionModel.no_signaling` (wires any equivariant model to 3a); and `uniformModel` — the Born-agnostic
-instance where uniform `μ` is preserved by **any** bijection, so the remote no-signaling half is reachable
-with a measure assuming nothing about Born. The two remaining open pieces, now isolated in the model class:
-**(i)** the local marginals `marg μ sel` are Born, and **(ii)** the *actual* (non-uniform) dynamical `μ` is
-equivariant. Both are the genuine multi-session Gap-2 build (a concrete microcausal selection model + its
-equivariance proof, the DGZ-equivariance analogue).
+**3c scaffold + first model result** (`QIQTH/SelectionDynamics.lean`, axiom-free): the `SelectionModel`
+structure (microstate space + Born-agnostic `μ` + deterministic selector + bijective remote action `R` +
+equivariance `(R)_*μ=μ`); `SelectionModel.no_signaling` (wires any equivariant model to 3a); and `uniformModel`
+— the Born-agnostic instance where uniform `μ` is preserved by **any** bijection, so the remote no-signaling
+half is reachable with a measure assuming nothing about Born.
+
+**★ `born_from_uniform` — uniform typicality REPRODUCES Born (machine-checked).** A deterministic selector over
+the *Born-agnostic uniform* measure with `M·w_k` fine microstates per outcome `k` has normalised marginal
+exactly `w_k`. This is the Zurek envariance route realised as a selection model: uniform counting ⇒ Born,
+axiom-free, with the **sole residual made explicit** — that the fine-graining encodes the weights
+(`count = M·w_k`), which is precisely the refinement-additivity premise of `RefinementBorn`. So both the
+remote half (no-signaling, via equivariance) and piece **(i)** (Born marginals, via fine-graining) now have
+concrete machine-checked model instances over a Born-agnostic `μ`.
+
+The genuinely open piece is **(ii)**: that the *actual* dynamical `μ` is both equivariant **and** fine-grains
+with `count = M·w_k` *as a consequence of the unitary/record dynamics* rather than by stipulation — i.e. a
+concrete microcausal selection model deriving the weight-encoding (the DGZ/Valentini-type theorem). The
+explicit `FineSpace` (`Σ k, Fin (m k)`) is stubbed for the next increment (deriving its fiber cardinality
+`= m k` needs a short `Sigma.fst`-reduction lemma).

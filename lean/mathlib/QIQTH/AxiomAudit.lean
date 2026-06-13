@@ -2339,6 +2339,13 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — Born-agnostic instance: uniform μ preserved by ANY bijective remote action ⇒
 -- equivariant ⇒ no-signaling for free, with a measure assuming nothing about Born. Open core = Born marginals
 -- + equivariance of the ACTUAL non-uniform dynamical μ (the Gap-2 frontier).
+#print axioms QIQTH.SelectionDynamics.marg_uniform_eq_card
+-- expected: standard only — over uniform μ the marginal of k = the number of fine microstates selecting k.
+#print axioms QIQTH.SelectionDynamics.born_from_uniform
+-- expected: standard only — ★★ UNIFORM TYPICALITY REPRODUCES BORN: a deterministic selector over the
+-- Born-agnostic uniform measure with M·w_k microstates per outcome k has normalised marginal = w_k (Born).
+-- The Zurek envariance route as a selection model; sole residual = the fine-graining encodes the weights
+-- (= the refinement-additivity premise of RefinementBorn). Born-agnostic μ + that residual ⇒ Born.
 #print axioms QIQTH.RefinementBorn.sq_not_refinementNatural
 -- expected: standard only — the α=2 rule is NOT refinement-natural (it would signal); the α-family is
 -- exactly excluded by no-signaling. So: no-signaling under refinement ⇒ Born; without it, every α survives.
