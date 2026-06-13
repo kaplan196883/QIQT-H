@@ -158,6 +158,29 @@ weighted by squared amplitude. Born requires an **irreducible Hilbert-typicality
 **Path B, the honest ceiling**: Born reduced to one maximally-natural typicality posit, with machine-checked
 no-gos proving (i) nothing Born-free can replace it and (ii) no amplitude-independent counting can supply it.
 
+## The assembled Path-B chain (capstone, `QIQTH/BornChain.lean`)
+
+The Gleason-uniqueness link is now wired into the chain end-to-end (axiom-free):
+
+> **META NO-GO** (`sqRule_refinement_signals`) — nothing Born-free entails Born; some Born-strength input is
+> forced. **⟹ RANK-COUNT NO-GO** (`no_multiplicity_rule_is_born`) — no amplitude-independent counting
+> supplies it. **⟹ the input is irreducible**; its thinnest form is a **noncontextual probability assignment**
+> on effects (the finite Hilbert-typicality axiom, an `EffectMeasure`). **⟹ GLEASON-UNIQUENESS**
+> (`BornChain.noncontextual_forces_born` + `born_is_noncontextual`) — that axiom is forced to `μ(E)=Re tr(ρE)`
+> and conversely every density matrix realizes it, so the noncontextual functionals are **exactly** the Born
+> functionals: the axiom pins Born uniquely.
+
+| theorem | content |
+|---|---|
+| `noncontextual_forces_born` | a noncontextual assignment (`EffectMeasure`) is forced to the Born trace form on every effect — Gleason, forward. |
+| `born_is_noncontextual` | converse: every density matrix yields such a noncontextual assignment — the axiom is consistent and Born-unique. |
+
+**Net (the ceiling, assembled).** Born is reduced to a single, maximally-natural typicality posit
+(noncontextuality / Hilbert measure), made **unique** by Gleason, and **bracketed by two no-gos** proving (i)
+nothing Born-free entails it and (ii) no amplitude-independent counting supplies it. This is the strongest
+true statement available — the same posit every single-world program (Everett, Bohm–DGZ, Deutsch–Wallace)
+ultimately needs.
+
 ## Honest status
 
 These are **conditional theorems**: each makes its one Born-strength premise fully explicit and

@@ -2396,4 +2396,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RankCountNoGo.multRule_ne_born_of_differs
 -- expected: standard only — the core: a state-independent rule can't match Born across two differing states.
 
+-- BornChain.lean — the Path-B capstone: Gleason makes the irreducible noncontextual-typicality axiom = Born.
+#print axioms QIQTH.BornChain.noncontextual_forces_born
+-- expected: standard only — a noncontextual probability assignment (EffectMeasure) is FORCED to the Born
+-- trace form Re tr(ρE) on every effect (finite effect-Gleason). The Gleason-uniqueness link, forward.
+#print axioms QIQTH.BornChain.born_is_noncontextual
+-- expected: standard only — converse: every density matrix yields such a noncontextual assignment; so the
+-- noncontextual functionals are exactly the Born functionals (the axiom pins Born uniquely).
+
 end QIQTH.AxiomAudit

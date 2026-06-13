@@ -266,3 +266,4 @@ import QIQTH.BornRoutes
 import QIQTH.Envariance
 import QIQTH.Relaxation
 import QIQTH.RankCountNoGo
+import QIQTH.BornChain
