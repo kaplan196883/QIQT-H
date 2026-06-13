@@ -31,6 +31,7 @@ DOCS = [
     REPO / "QIQT_Position_Paper.md",
     REPO / "QIQT_Math.md",
     REPO / "QIQT_Foundations_Paper.md",
+    REPO / "QIQT_Born_Reduction.md",
 ]
 
 # Per-document fallback metadata for files without YAML frontmatter.
