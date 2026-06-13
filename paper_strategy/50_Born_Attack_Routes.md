@@ -130,6 +130,34 @@ unitarity; (ii) and (iii) are a finite Liouville + molecular-chaos typicality po
 but a far weaker and more physical input than "assume μ = |Ψ|²". That postulate is the genuine irreducible
 residual, and the meta no-go (`sqRule_refinement_signals`) proves nothing Born-free can replace it.
 
+## The weight-encoding question — settled NO (GPT-5.5 consult, 2026-06-13)
+
+The one way to upgrade "reduction" → "derivation" was Path A: derive the weight-encoding from the dynamics
+(does decoherence make the Born-agnostic record multiplicity of branch `k` `∝ w_k`?). The consult verdict is
+a clean **impossibility**, with a structural reason:
+
+> Multiplicity is integer/discrete/**support-like** (the rank of the orthogonal environment record subspace,
+> fixed by the interaction/bath); the Born weight `‖P_kψ‖²` is continuous/**amplitude-like**. Scaling a branch
+> by a nonzero `c_k` changes its norm but **not** its support rank — so the count is locally constant in the
+> amplitude and cannot be `∝ w_k` on any open set.
+
+Mechanism by mechanism (none scale with `w_k` without smuggling `|Ψ|²`): einselection picks the basis not the
+weights; quantum-Darwinism redundancy is set by the environment; ETH/typicality is defined w.r.t. a Hilbert
+measure (already Born-type); large-deviation `e^{-ND}` needs a base measure that itself comes from amplitudes.
+
+Machine-checked (`QIQTH/RankCountNoGo.lean`, axiom-free):
+
+| theorem | content |
+|---|---|
+| `multRule_ne_born_of_differs` | a state-independent multiplicity rule can't match Born across two states with different Born values — the core obstruction. |
+| `no_multiplicity_rule_is_born` | **no amplitude-independent record-multiplicity rule equals Born** (multiplicity state-independent, Born state-dependent). |
+
+**So Path A is closed**, and that is a result: decoherence explains classical records, not why they are
+weighted by squared amplitude. Born requires an **irreducible Hilbert-typicality axiom** — thinnest form
+`μ(k)=⟨Ψ|P_k|Ψ⟩` (decoherent-history measure `‖C_hΨ‖²`), which Gleason then makes essentially unique. That is
+**Path B, the honest ceiling**: Born reduced to one maximally-natural typicality posit, with machine-checked
+no-gos proving (i) nothing Born-free can replace it and (ii) no amplitude-independent counting can supply it.
+
 ## Honest status
 
 These are **conditional theorems**: each makes its one Born-strength premise fully explicit and

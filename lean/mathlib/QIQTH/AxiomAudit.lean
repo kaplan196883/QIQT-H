@@ -2389,4 +2389,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — reversibility (col-stochastic) + uniform bath + mixing (ε-minorization) ⇒
 -- every μ relaxes geometrically to uniform = Born. The finite H-theorem, all premises explicit.
 
+-- RankCountNoGo.lean — GPT-5.5 consult 2026-06-13: decoherence cannot encode the weights in record counts.
+#print axioms QIQTH.RankCountNoGo.no_multiplicity_rule_is_born
+-- expected: standard only — no amplitude-independent record-multiplicity rule equals Born (multiplicity is
+-- state-independent, Born is state-dependent). Closes Path A; Born needs an irreducible Hilbert-typicality axiom.
+#print axioms QIQTH.RankCountNoGo.multRule_ne_born_of_differs
+-- expected: standard only — the core: a state-independent rule can't match Born across two differing states.
+
 end QIQTH.AxiomAudit
