@@ -220,7 +220,7 @@ kernel-checked proof is the antidote to "AI-generated" skepticism.
 | **"AI slop" perception** | Lead with the reproducible Lean artifact + verified blueprint; disclose AI honestly as *method*. |
 | **Endorsement block in quant-ph** | Publish via cs.AI/cs.LO first; cross-list; pursue endorser after traction. |
 | **Physics community pushback on the (FQ) premise** | Be explicit that the *mechanism* is verified and the *premise's field-theoretic origin* is the open input; invite scrutiny of exactly that. |
-| **Empirical untestability** | Foreground the `I_0` boundary-scale prediction and its relation to CSL/cat-state bounds as the falsifiable handle. |
+| **Empirical untestability** | **Own it honestly (2026-06-13, GPT-5.5 assessment):** the finite-capacity postulate is kinematic and `Q_R ~ A/4ℓ_P²` is far too large (~10⁶⁶ bits/cm²) to deviate from QM at accessible scales — absent an *added* dynamical law with a small (currently free-parameter) effective capacity `Q^eff`, the framework is **empirically equivalent to standard QM**, i.e. an interpretation. Do NOT advertise the `I_0`/neutrino signature as a derived falsifiable prediction; present it as a *conditional dynamical extension* whose `Q^eff` is the open requirement. Honesty here is the credibility play. |
 
 ---
 

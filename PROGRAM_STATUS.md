@@ -81,6 +81,20 @@ what is the prize we are chasing, and what must be fixed before arXiv.*
 > square" quartet — `RotationBorn`, `RankCountNoGo`, `BornChain`, `SymmetrySquare` — is on qiqt.org/born.
 > Full root build green (3840 jobs), budget 0.
 
+> **Update 2026-06-13 — EMPIRICAL STATUS owned honestly (GPT-5.5 assessment).** Asked whether finite `Q_max`
+> predicts any observable deviation from standard QM, the honest verdict is **probably empirically equivalent**:
+> the bound is *kinematic*, and `Q_R = A/4ℓ_P²` is far too large (~10⁶⁶ bits/cm², vs record costs ~10²⁵ bits)
+> to be approached at any accessible scale. A genuine deviation (neutrino-oscillation decoherence; a
+> macroscopic-superposition cutoff) requires an **added dynamical law** with a small effective capacity
+> `Q^eff` along the coherence-relevant degrees — and `Q^eff` is currently a **free parameter**, not derived
+> (the causal-diamond/tube capacity is itself ~10⁶⁰–10⁸² bits). So the neutrino "prediction" (`08_Neutrino_…`)
+> is **not** a derived prediction; it is a *conditional dynamical extension*. Net: finite `Q_max` is, as far as
+> we can show, an **interpretation, not new physics**, unless an independent principle fixes `Q^eff`. This has
+> been propagated honestly: `08_Neutrino_Decoherence_Prediction.md` (downgraded header), `QIQT_Foundations_Paper.md`
+> ("Honest empirical status" + item 13 caveat), `PUBLICATION_STRATEGY.md`, and qiqt.org/idea. The one path to
+> falsifiability is deriving `Q^eff` non-circularly (no current candidate; GPT-5.5 thinks unlikely to survive
+> existing bounds). This does not change §1's verdict — it sharpens it on the empirical axis.
+
 > **Update 2026-06-06.** The project axiom budget is now **33** (all 33 are continuum /
 > operator-algebra interface axioms; the entire finite core below is axiom-free —
 > `propext, Classical.choice, Quot.sound` only). 37 → 35 via the Goldstein–Struyve Step-1 /

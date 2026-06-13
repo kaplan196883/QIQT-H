@@ -45,9 +45,15 @@ frequency.
 
 ## Where it stands
 
-This is a research program with a sharp core, not a finished interpretation. It stakes itself on a
-falsifiable claim: that a region cannot be held in a coherent superposition of two macroscopically
-distinct records once instantiating them would exceed its holographic budget. The mathematical *substrate*
+This is a research program with a sharp core, not a finished interpretation. Its central physical conjecture
+— that a region cannot hold a coherent superposition of two macroscopically distinct records once
+instantiating them would exceed its holographic budget — is *in principle* falsifiable. Honestly, though,
+that budget (the boundary area in Planck units) is so vast — about $10^{66}$ bits for a cm² boundary,
+against record costs of perhaps $10^{25}$ bits — that it is never approached at accessible scales. Absent an
+*additional* dynamical law with a much smaller effective capacity (a new postulate with a free parameter,
+not a consequence of the bound), the framework is **empirically equivalent to standard quantum mechanics** —
+an interpretation, not new physics, which we state plainly rather than advertise a near-term test. The
+mathematical *substrate*
 it borrows — modular theory and relative entropy, the bookkeeping of regional information cost — is
 [machine-verified in Lean&nbsp;4](/formalization). The load-bearing physical conjecture, that two records
 genuinely overflow the bound, is stated precisely and remains to be proved. Read on for the
