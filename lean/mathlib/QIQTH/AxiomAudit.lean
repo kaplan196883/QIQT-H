@@ -2308,4 +2308,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ redundant SBS readouts agree ⇒ all functions of one classical pointer K₀
 -- (definiteness, NO Born weights — only orthogonality/support, nothing Born-flavoured smuggled in).
 
+-- ★ BORN route 4 — no-signaling under refinement ⇒ Born (RefinementBorn.lean, per GPT-5.5-pro):
+#print axioms QIQTH.RefinementBorn.refinementNatural_additive
+-- expected: standard only — ★ refinement-naturality (coarse prob = sum of fine probs; = no-signaling under
+-- remote record refinement) + f>0 ⇒ f(x+y)=f x+f y. Compose with additive_fMeasure_eq_born ⇒ Born.
+#print axioms QIQTH.RefinementBorn.sq_not_refinementNatural
+-- expected: standard only — the α=2 rule is NOT refinement-natural (it would signal); the α-family is
+-- exactly excluded by no-signaling. So: no-signaling under refinement ⇒ Born; without it, every α survives.
+
 end QIQTH.AxiomAudit

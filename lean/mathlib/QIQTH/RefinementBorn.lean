@@ -112,4 +112,45 @@ theorem alphaSq_refinement_violation :
   rw [alphaSq_coarse_one, alphaSq_fine 1, alphaSq_fine 2]
   norm_num
 
+/-! ### No-signaling under refinement ⇒ Born (route 4, per GPT-5.5-pro 2026-06-13)
+
+The cleanest physical form of the missing premise: **chance is invariant under refining a record**.
+Refining a coarse outcome of weight `x+y` (against the rest, of total weight `z`) into two sub-records
+of weights `x,y` must leave the coarse outcome's probability unchanged — equal to the sum of the two
+fine probabilities. If a *spacelike-separated* choice to refine could change a local coarse frequency,
+that would be operational **signaling**; so this is no-signaling under remote refinement, not an ad-hoc
+postulate. For the rule `p ∝ f(weight)` it reads `f(x+y)/(f(x+y)+f z) = (f x + f y)/(f x + f y + f z)`. -/
+
+/-- No-signaling under refinement (binary-split form) for the rule `p_k ∝ f(w_k)`: the coarse
+probability of a merged outcome of weight `x+y` against remainder `z` equals the sum of the two fine
+probabilities. -/
+def RefinementNatural (f : ℝ → ℝ) : Prop :=
+  ∀ x y z : ℝ, 0 < x → 0 < y → 0 < z →
+    f (x + y) / (f (x + y) + f z) = (f x + f y) / (f x + f y + f z)
+
+/-- **No-signaling under refinement ⇒ additivity of `f`.** If the `f`-rule is refinement-natural and
+`f` is positive on positive weights, then `f(x+y) = f x + f y`. Composed with
+`additive_fMeasure_eq_born` (additivity ⇒ Born), this is the route-4 chain
+*no-signaling ⇒ refinement additivity ⇒ Born*. -/
+theorem refinementNatural_additive (f : ℝ → ℝ) (hf : ∀ t, 0 < t → 0 < f t)
+    (hnat : RefinementNatural f) {x y z : ℝ} (hx : 0 < x) (hy : 0 < y) (hz : 0 < z) :
+    f (x + y) = f x + f y := by
+  have ha : 0 < f (x + y) := hf _ (by linarith)
+  have hb1 : 0 < f x := hf _ hx
+  have hb2 : 0 < f y := hf _ hy
+  have hc : 0 < f z := hf _ hz
+  have h := hnat x y z hx hy hz
+  rw [div_eq_div_iff (ne_of_gt (by linarith)) (ne_of_gt (by linarith))] at h
+  have key : f (x + y) * f z = (f x + f y) * f z := by linear_combination h
+  exact mul_right_cancel₀ (ne_of_gt hc) key
+
+/-- **The α=2 record rule is NOT refinement-natural** — i.e. it signals under refinement. (If it were,
+`refinementNatural_additive` would force `(·)²` to be additive, contradicting `sq_not_additive` at
+`x=y=1`.) So the `α`-family is exactly excluded by the no-signaling premise. -/
+theorem sq_not_refinementNatural : ¬ RefinementNatural (fun t => t ^ 2) := by
+  intro hnat
+  have h := refinementNatural_additive (fun t => t ^ 2) (fun t ht => pow_pos ht 2) hnat
+    (x := 1) (y := 1) (z := 1) one_pos one_pos one_pos
+  norm_num at h
+
 end QIQTH.RefinementBorn

@@ -184,6 +184,27 @@ file: `QIQTH/RefinementBorn.lean`.
 - **Steps 2–3** `QIQTH/RefinementBorn.lean` — `alphaSq_ne_born` (records ⇏ Born), `additive_fMeasure_eq_born`
   (refinement additivity ⇒ Born), `alphaSq_refinement_violation` (the exact failing premise).
 
-All built green, `#print axioms` = standard-three. The genuine open problem is now sharply isolated and
-*conceptual*, not a Lean gap: **does finite capacity / H2 motivate refinement additivity?** (Step 4 — a
-Hilbert-level envariance swap identity — is optional and does not change this.)
+All built green, `#print axioms` = standard-three.
+
+### Route 4 — no-signaling under refinement (this date, GPT-5.5-pro cross-check)
+Both gpt-5.5 and gpt-5.5-pro independently confirmed: capacity / H2 / χ_R do **not** force refinement
+additivity (the `α`-family can be decorated with *every* QIQT-H structure — capacity saturation, SBS,
+definiteness, *and* product independence, since `(w_i v_j)^α = w_i^α v_j^α`). The χ_R route is a dead end:
+relative entropy gives `D = Σ w_k χ_R^k − H(w) ≈ Q_R − H(w)`, a Shannon/KL (`w·log w`) term, not Born-linear;
+and a low-weight branch still holds a capacity-saturated record (`χ_R^k ≈ Q_R` independent of `w_k`). The
+`(Φ,λ)` *determinism makes it worse* (a `λ∈[0,1]` interval-partition realises any `α` deterministically).
+
+The cleanest, least-ad-hoc form of the missing premise is **no-signaling under remote refinement**: if a
+spacelike-separated choice to refine an ancillary record could change a local coarse frequency, that is
+operational signaling. Machine-checked (`QIQTH/RefinementBorn.lean`, axiom-free):
+- `RefinementNatural f` — the coarse prob of a merged outcome = sum of the fine probs (`p ∝ f`).
+- `refinementNatural_additive` — **no-signaling + `f>0` ⇒ `f(x+y)=f x+f y`**; compose with
+  `additive_fMeasure_eq_born` ⇒ Born. So *no-signaling under refinement ⇒ Born*.
+- `sq_not_refinementNatural` — the `α=2` rule is **not** refinement-natural (it would signal); the
+  `α`-family is exactly excluded by no-signaling.
+
+**Net honest claim:** QIQT-H reduces Born to **no-signaling under record refinement** — an independently
+mandatory relativistic principle, not an ad-hoc measure postulate — and machine-checks that it suffices and
+that nothing weaker (capacity/χ_R/determinism) does. The genuine open question is whether this no-signaling
+premise can itself be derived in QIQT-H from microcausality of the local net (it has no-signaling theorems
+already — `NoSignalingGeneral`, `bornNet_no_signaling`); if so, Born is genuinely derived.
