@@ -220,7 +220,9 @@ done
 # continuum Type II crossed-product statement remains the cited frontier (the StandardSubspace tower).
 # Net 6 → 0.  ★ THE QIQT-H FINITE CORE IS NOW AXIOM-FREE (standard three only).
 AXIOM_BUDGET=0
-AXIOM_COUNT="$(grep -rhE '^axiom ' QIQTH/ | wc -l | tr -d ' ')"
+# NB: at budget 0 `grep` matches nothing and exits 1; `|| true` keeps the pipeline
+# from aborting the script under `set -euo pipefail` (zero axioms is the SUCCESS state).
+AXIOM_COUNT="$( { grep -rhE '^axiom ' QIQTH/ || true; } | wc -l | tr -d ' ')"
 echo "[axiom-budget] raw axiom count: $AXIOM_COUNT (budget $AXIOM_BUDGET)"
 if [ "$AXIOM_COUNT" -gt "$AXIOM_BUDGET" ]; then
   echo "[axiom-budget] axioms by file:" >&2
