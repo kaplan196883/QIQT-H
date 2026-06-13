@@ -293,3 +293,40 @@ territory, not a citation away.
 **Net:** the global "measure principle" is now **localized** — to local operational non-contextuality
 (Gleason, its most defensible form) plus a *derivable-in-principle* selector-locality (μ-equilibrium) plus
 state-anchoring. Steps 1 done, 2 reuses existing machinery, 3 is the real Gap-2 frontier.
+
+## 7. Milestone-3 plan + first attack (this date)
+
+Milestone 3 = "derive selector-locality from `(Φ,λ)` dynamics" is the real Gap-2 program. Planned in phases,
+each an axiom-free Lean checkpoint:
+
+**Phase 3a — the equilibrium core (DONE).** The honest re-statement of the bridge: the Bell-compatible route
+asks not for pointwise readout-locality (`XL∘R=XL`, which Bell forbids — see 3b) but for the remote dynamics
+to **preserve the typicality measure** (equivariance). Machine-checked: `equivariant_marg_invariant`
+(`SelectorRefinement.lean`) — a `μ`-preserving bijection `R` (the remote refinement) leaves **every**
+local-readout marginal invariant, with `λ` allowed to be globally correlated. **This isolates the exact
+load-bearing Gap-2 input: `(R)_*μ = μ`** (Bohmian-quantum-equilibrium / DGZ equivariance; Valentini:
+non-equilibrium ⇒ signaling, so equivariance is essential). It does *not* follow from operator-net
+microcausality (which is about commuting observables, not the measure).
+
+**Phase 3b — the Bell guardrail (ALREADY IN THE CORPUS).** `Bell.chsh_pointwise` + the CHSH-LHV bound
+`|CHSH| ≤ 2` (`Bell.lean`) vs. the quantum violation `2√2` (`Tsirelson.lean`) make the guardrail precise: a
+*pointwise-local deterministic* selector is a local hidden-variable model, hence `|CHSH| ≤ 2`, hence cannot
+reproduce QM. So the derivation **must** use the weak/equivariance route (3a), never strong factorization.
+`λ` is ontically contextual; only its marginals are local. No new build needed — cite these.
+
+**Phase 3c — derive equivariance from a concrete `(Φ,λ)` dynamics (THE FRONTIER, multi-step).** The remaining
+question is sharp: *does the QIQT-H selection dynamics preserve a fixed, Born-agnostic `μ`?* Sub-steps:
+1. A finite Lean model of the selection map: global state, microstate space `Ω`, a deterministic selector
+   built from the unitary evolution + the record/SBS structure, and a remote-refinement action `R` on `Ω`.
+2. Prove the action `R` is `μ`-preserving for the *intended* dynamical `μ` — i.e. exhibit the equivariance
+   `(R)_*μ = μ` from the unitarity + microcausality of the model (the analogue of DGZ's equivariance proof
+   for `|Ψ|²`, but for the QIQT-H selector). **This is the load-bearing, genuinely-open step.**
+3. Feed it through `equivariant_marg_invariant` ⇒ selector no-signaling ⇒ (with §6's local-Gleason +
+   state-anchoring) Born.
+   The honest risk (pro): if the only available equivariant `μ` is `|Ψ|²` itself (as in Bohm), step 2 is
+   circular; the non-circular hope is a Valentini-style relaxation of a Born-agnostic `μ` to equivariance
+   under the dynamics — itself contested and a research program.
+
+**Status:** 3a done (axiom-free), 3b in corpus, 3c is the open Gap-2 frontier — now reduced to the single
+sharp question "is the QIQT-H selection dynamics `μ`-equivariant?", with `equivariant_marg_invariant` waiting
+to consume the answer.

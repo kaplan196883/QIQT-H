@@ -115,4 +115,29 @@ theorem local_factor_remote_invariant {G L K : Type*}
     localMarg (R ρ) k = localMarg ρ k := by
   rw [hloc (R ρ) k, hR ρ, ← hloc ρ k]
 
+/-! ### Milestone 3a — the equilibrium core: EQUIVARIANCE ⇒ selector no-signaling
+
+The deeper, Bell-compatible route to the Gap-2 bridge. `readout_invariant_marg` used pointwise
+readout-commutation `XL∘R=XL` — but pro's Bell/Fine caveat says a *pointwise* local valuation is too strong
+(a deterministic pointwise-local selector is a local hidden-variable model, hence `Bell.chsh_lhv`-bounded
+`|CHSH|≤2`, contradicting the quantum violation `Tsirelson`). The weak/Bell-compatible route instead asks only
+that the remote refinement dynamics **preserve the typicality measure `μ`** (equivariance) — then *every*
+local-readout marginal is invariant, with `λ` allowed to be globally correlated/contextual. This isolates the
+exact Gap-2 input: `(R)_*μ = μ` (the Bohmian-quantum-equilibrium / Dürr–Goldstein–Zanghì equivariance
+condition; Valentini: non-equilibrium measures signal, so equivariance is essential). It does NOT follow from
+operator-net microcausality, which concerns commuting observables, not the measure. -/
+
+/-- **Equivariance ⇒ selector no-signaling.** If the remote refinement dynamics is a `μ`-preserving bijection
+`R` of the microstate space, then every local-readout marginal is invariant under `R` — selector
+no-signaling — with no readout-commutation and no Born input. The load-bearing hypothesis is measure
+preservation `hR`, the equilibrium/equivariance condition; the proof is just reindexing the cell sum by the
+measure-preserving bijection, so no pointwise locality (hence Bell-compatible). -/
+theorem equivariant_marg_invariant {Ω K : Type*} [Fintype Ω] [DecidableEq K]
+    (μ : Ω → ℝ) (XL : Ω → K) (R : Ω ≃ Ω) (hR : ∀ ω, μ (R ω) = μ ω) (k : K) :
+    marg μ (fun ω => XL (R ω)) k = marg μ XL k := by
+  unfold marg
+  rw [← Equiv.sum_comp R (fun ω => if XL ω = k then μ ω else 0)]
+  refine Finset.sum_congr rfl (fun ω _ => ?_)
+  rw [hR ω]
+
 end QIQTH.SelectorRefinement

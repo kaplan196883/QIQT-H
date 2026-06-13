@@ -2327,6 +2327,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SelectorRefinement.local_factor_remote_invariant
 -- expected: standard only — Gap-2 milestone 1: selector-locality (local marginal factors through ρ_A) +
 -- ρ_A-preservation under remote refinement ⇒ local marginal remote-invariant (the "remote" half of the bridge).
+#print axioms QIQTH.SelectorRefinement.equivariant_marg_invariant
+-- expected: standard only — ★ Gap-2 milestone 3a (equilibrium core): EQUIVARIANCE (μ-preserving remote
+-- dynamics R) ⇒ every local marginal R-invariant = selector no-signaling, Bell-compatibly (no pointwise
+-- locality, which Bell.chsh_lhv would cap at |CHSH|≤2). Isolates the load-bearing Gap-2 input: (R)_*μ=μ.
 #print axioms QIQTH.RefinementBorn.sq_not_refinementNatural
 -- expected: standard only — the α=2 rule is NOT refinement-natural (it would signal); the α-family is
 -- exactly excluded by no-signaling. So: no-signaling under refinement ⇒ Born; without it, every α survives.
