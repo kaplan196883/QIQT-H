@@ -57,6 +57,16 @@ Likewise, making $\lambda$ precise as a selection compatible with the unitary dy
 admissible record obtains, not zero, and that the admissible space is dynamically invariant — is the
 [dynamical-realization problem](/open-problems). The ontology here is coherent; these pieces of it are open.
 
+<div class="note"><strong>How far this is pinned down.</strong> The Born-from-typicality claim above is
+backed by a machine-checked reduction (the <a href="/papers">Born-rule formalization paper</a>): records
+give definite outcomes but no weights; among rules <em>p</em>&nbsp;&prop;&nbsp;<em>f</em>(<em>w</em>),
+refinement-additivity, no-signalling under remote refinement, and Born are <em>equivalent</em>; and a
+<em>no-go</em> proves the squared-weight family <em>w</em><sup>2</sup> obeys every Born-free premise — so an
+extra principle is unavoidable, which is the circularity worry made precise rather than waved away. A finite
+H-theorem then reduces the residual to a Born-agnostic typicality postulate (reversibility over a uniform
+bath, plus mixing) instead of to <em>|Ψ|</em><sup>2</sup> itself. It sharpens the open problem; it does not
+yet close it.</div>
+
 ## How this differs from the usual answers
 
 - **Collapse interpretations** make the selection a *dynamical* event that breaks unitarity. Here $\lambda$

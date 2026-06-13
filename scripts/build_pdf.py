@@ -24,7 +24,7 @@ OUT_DIR = REPO / "build"
 # (the website's "Read the PDF" link points at /<name>.pdf). Keyed by source
 # markdown filename; the same-stem PDF is copied into website/public/.
 WEBSITE_PUBLIC = REPO / "website" / "public"
-WEB_MIRRORED = {"QIQT_Foundations_Paper.md"}
+WEB_MIRRORED = {"QIQT_Foundations_Paper.md", "QIQT_Born_Reduction.md"}
 
 DOCS = [
     REPO / "TUTORIAL.md",

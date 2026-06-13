@@ -28,6 +28,23 @@ objects, the one-particle CGP relative entropy and its positivity, the free-fiel
 coherent-state entropy-reduction identity — with the full theorem index and the reproducible build. See the
 [formalization](/formalization) page for the result list.
 
+## Born-rule formalization
+
+**Machine-Checked Reductions of the Born Rule: Conditional Theorems, a No-Go, and a Finite H-Theorem.**
+Paweł Kapłański.
+
+The rigorous companion to the [Φ&nbsp;and&nbsp;λ](/selection) account of Born-from-typicality. It isolates,
+as Lean&nbsp;4 theorems, exactly what the Born rule needs beyond a no-collapse, single-record dynamics: the
+record layer gives definite outcomes but no weights; among rules $p_k \propto f(w_k)$, refinement-additivity
+$\Leftrightarrow$ Born $\Leftrightarrow$ no-signaling under remote refinement; a **meta no-go** shows the
+power-law family $w^\alpha$ satisfies every Born-free premise, so some extra input is unavoidable; and a
+finite **H-theorem** derives the residual measure-preservation from reversibility over a uniform bath plus
+mixing. An honest reduction to a sharply-stated typicality postulate — not a derivation from nothing.
+
+**[Read the PDF](/QIQT_Born_Reduction.pdf)**
+&nbsp;·&nbsp; No `sorry`; depends only on the standard classical foundations (`propext`, `Classical.choice`,
+`Quot.sound`).
+
 ## The Lean corpus
 
 The machine-checked substrate lives in the project repository. Every theorem is audited with
