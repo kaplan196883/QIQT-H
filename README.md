@@ -60,13 +60,18 @@ GPT-5.5-pro verification passes; honest scope and the full claim→theorem map a
 **continuum, Lorentz-covariant** construction (the breakthrough μ) remains open
 (`PRIZE_ROADMAP.md`, `PROGRAM_STATUS.md`).
 
-A further axiom-free **Born-reduction layer** (2026-06) sharpens *which* extra principle Born needs: among
-rules $p_k \propto f(w_k)$, refinement-additivity, no-signaling under remote refinement, and Born are
-equivalent; a **meta no-go** shows the power-law family $w^\alpha$ obeys every Born-free premise (so some
-extra input is unavoidable); and a finite **H-theorem** derives the residual measure-preservation from
-reversibility over a uniform bath plus mixing. Written up in **`QIQT_Born_Reduction.md`** (built PDF);
-modules `RefinementBorn`, `SelectorRefinement`, `SelectionDynamics`, `BornRoutes`, `Envariance`,
-`Relaxation`; route map in `paper_strategy/50_Born_Attack_Routes.md`.
+A further axiom-free **Born-reduction layer** (2026-06) sharpens *which* extra principle Born needs and
+brackets it from three directions. Among rules $p_k \propto f(w_k)$, refinement-additivity, no-signaling
+under remote refinement, and Born are equivalent; a finite **H-theorem** derives the residual
+measure-preservation from reversibility over a uniform bath plus mixing. The honest verdict is that Born
+reduces to **one** maximally-natural posit (noncontextuality / the Hilbert measure), made *unique* by
+**Gleason** and bracketed by three machine-checked results: nothing Born-free entails it (**meta no-go**, the
+$w^\alpha$ family obeys every Born-free premise); no amplitude-independent counting supplies it
+(**rank-count no-go** — decoherence can't encode the weights in record multiplicity); and only $\alpha=2$
+survives continuous unitary mixing (**rotation / Banach–Lamperti** core). Written up in
+**`QIQT_Born_Reduction.md`** (built PDF) with a plain-English account at [qiqt.org/born](https://qiqt.org/born);
+modules `RefinementBorn`, `SelectorRefinement`, `SelectionDynamics`, `BornRoutes`, `Envariance`, `Relaxation`,
+`RankCountNoGo`, `BornChain`, `RotationBorn`; route map in `paper_strategy/50_Born_Attack_Routes.md`.
 
 ## Repository structure
 

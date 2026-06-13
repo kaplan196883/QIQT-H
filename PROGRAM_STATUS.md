@@ -40,6 +40,33 @@ what is the prize we are chasing, and what must be fixed before arXiv.*
 > conditional reduction, not a from-nothing derivation) — it localizes Gap #2's residual as precisely as the
 > finite combinatorial core can. Full route map: `paper_strategy/50_Born_Attack_Routes.md`,
 > `paper_strategy/49_Born_Status.md`.
+>
+> **Update 2026-06-13 (cont.) — Born now bracketed by THREE machine-checked results + the chain assembled.**
+> After the reduction layer above, three more axiom-free pieces close the honest picture of Gap #2:
+> **(1) Rank-count no-go** (`RankCountNoGo.no_multiplicity_rule_is_born`): no amplitude-INDEPENDENT record
+> multiplicity rule equals Born (multiplicity = rank of the environment record subspace, fixed by the
+> dynamics, *constant* in the amplitude; Born is continuous in it) — so decoherence/einselection/Darwinism
+> cannot encode the weights by counting copies (GPT-5.5 consult: einselection picks the basis not the
+> weights; Darwinism redundancy is set by the environment; ETH/typicality is already a Hilbert measure).
+> **Path A (derive the weight-encoding from dynamics) is therefore closed.**
+> **(2) Gleason-uniqueness capstone** (`BornChain.noncontextual_forces_born` + `born_is_noncontextual`): the
+> irreducible input — a noncontextual probability assignment on effects (the finite Hilbert-typicality
+> axiom) — is *forced* to the Born/trace form `Re tr(ρE)` and conversely every density matrix realizes it, so
+> the noncontextual functionals are EXACTLY the Born functionals (the axiom pins Born uniquely). The
+> end-to-end chain is assembled in `QIQTH/BornChain.lean`.
+> **(3) "Why exponent 2" — rotation/Banach–Lamperti core** (`RotationBorn.rotation_invariant_iff_exponent_two`):
+> `Σ|c_k|^α` is invariant under continuous amplitude-mixing (a 2-coordinate rotation = the elementary
+> unitary) **iff α = 2**; α≠2 is broken by the explicit 45° witness. The square is the unique power-law
+> normalization the existence of continuous unitary evolution permits (same conserved quadratic as wave
+> energy ∝ amplitude²). Honest caveat (GPT-5.5): close to Gleason in symmetry language, not a deeper
+> non-circular principle — but the cleanest statement of where the 2 comes from.
+> **Assembled verdict:** Born is reduced to ONE maximally-natural posit (noncontextuality / the Hilbert
+> measure), made *unique* by Gleason, and *bracketed by three no-gos/uniqueness results*: nothing Born-free
+> entails it (meta no-go), no amplitude-independent counting supplies it (rank-count no-go), and only α=2
+> survives unitary mixing (rotation uniqueness). This is the honest ceiling — the same posit every
+> single-world program (Everett, Bohm–DGZ, Deutsch–Wallace) needs, now *proven* to be the residual, unique,
+> and irreducible from three directions. Plain-English account at qiqt.org/born; homepage status updated to
+> "open · reduced". Full root build green (3839 jobs), budget 0.
 
 > **Update 2026-06-06.** The project axiom budget is now **33** (all 33 are continuum /
 > operator-algebra interface axioms; the entire finite core below is axiom-free —
