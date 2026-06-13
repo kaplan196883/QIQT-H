@@ -41,9 +41,10 @@ The framework is presented as a research program with rigorous scaffolding + cle
 
 ## Machine-checked finite core (Lean 4 / Mathlib)
 
-The load-bearing *finite* content is formalized **axiom-free** (only Lean's standard
-`propext, Classical.choice, Quot.sound`; project axiom budget **33**, all of them continuum /
-operator-algebra interface axioms — none in the finite core). The headline machine-checked
+The whole development is formalized **axiom-free** — every audited theorem depends only on Lean's standard
+`propext, Classical.choice, Quot.sound`, with **project axiom budget 0** (the 33 continuum/operator-algebra
+interface axioms have all since been retired; CI-guarded by `scripts/axiom_budget_check.sh`, audit trail in
+`lean/mathlib/QIQTH/AxiomAudit.lean`). The headline machine-checked
 result is a **finite no-collapse Born representation theorem**:
 
 > A finite information-capacity bound forces a **unique actual pointer value** per run (no
@@ -58,6 +59,14 @@ GPT-5.5-pro verification passes; honest scope and the full claim→theorem map a
 **`FINITE_BORN_REPRESENTATION.md`**). It is the realized finite portion of the program; the
 **continuum, Lorentz-covariant** construction (the breakthrough μ) remains open
 (`PRIZE_ROADMAP.md`, `PROGRAM_STATUS.md`).
+
+A further axiom-free **Born-reduction layer** (2026-06) sharpens *which* extra principle Born needs: among
+rules $p_k \propto f(w_k)$, refinement-additivity, no-signaling under remote refinement, and Born are
+equivalent; a **meta no-go** shows the power-law family $w^\alpha$ obeys every Born-free premise (so some
+extra input is unavoidable); and a finite **H-theorem** derives the residual measure-preservation from
+reversibility over a uniform bath plus mixing. Written up in **`QIQT_Born_Reduction.md`** (built PDF);
+modules `RefinementBorn`, `SelectorRefinement`, `SelectionDynamics`, `BornRoutes`, `Envariance`,
+`Relaxation`; route map in `paper_strategy/50_Born_Attack_Routes.md`.
 
 ## Repository structure
 

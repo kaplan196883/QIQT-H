@@ -1,14 +1,45 @@
 # QIQT-H — Program Status: where we are, and what the breakthrough would be
 
-*Living status document. Last updated 2026-06-08 (operator-algebra infrastructure
+*Living status document. Last updated 2026-06-13 (the whole development is now **axiom-free, budget 0** —
+all 33 continuum/operator-algebra interface axioms have since been retired; and the Born/μ prize gap (§2,
+Gap #2) has its residual **sharply localized** by a new machine-checked Born-reduction layer + a finite
+H-theorem — see the 2026-06-13 update block below. References to "budget 33" elsewhere in this document
+predate the axiom-free milestone and now read 0.) Prior 2026-06-08 update (operator-algebra infrastructure
 note in §2a: bounded spectral theorem + continuum modular flow + RvD standard-subspace
-objects now built & axiom-free, program at the Mathlib frontier). Prior substantive
+objects built & axiom-free, program at the Mathlib frontier). Prior substantive
 revision 2026-06-06, after a multi-round GPT-5.5-pro
 adversarial soundness review that produced a **strategic pivot** (§2a), a new
 axiom-free **capacity-exclusion core** (§3c), and a new axiom-free **finite no-collapse
 Born representation** joining the capacity core to the Born/typicality layer (§3d; full
 scope map in `FINITE_BORN_REPRESENTATION.md`). This is the honest map: what is done,
 what is the prize we are chasing, and what must be fixed before arXiv.*
+
+> **Update 2026-06-13 — axiom-free milestone + the Born/μ residual sharply localized.** Two things changed
+> since the 06-08 note. **(a) Budget 0.** All 33 continuum/operator-algebra interface axioms have been
+> retired (EntropyBridge/Donald/DPI/Araki/RelEnt typeclass-and-instance discharges); the **entire** project
+> is now axiom-free — `lake build QIQTH.AxiomAudit` reports raw axiom count **0**, no `sorry`, standard three
+> only, enforced by `scripts/axiom_budget_check.sh` (now also fixed to pass at budget 0). **(b) The Born/μ
+> prize gap (§2, Gap #2) is now reduced to a single, sharply-stated typicality postulate** by a new
+> machine-checked Born-reduction layer, all axiom-free (`RefinementBorn`, `SelectorRefinement`,
+> `SelectionDynamics`, `BornRoutes`, `Envariance`, `Relaxation`):
+> records give definite outcomes but **no weights**; among rules `p_k ∝ f(w_k)`, **refinement-additivity ⇔
+> Born ⇔ no-signaling under remote refinement** (`refinementNatural_additive`, `id_refinementNatural`); a
+> **meta no-go** (`sqRule_refinement_signals`) proves the power-law family `w^α` obeys every Born-free
+> premise — so some extra principle is unavoidable; **Zurek envariance, both halves** (equal amplitudes
+> `envariance_equal_marg`; envariance forces the uniform measure `envariance_forces_uniform`; unequal
+> amplitudes via fine-graining `born_from_uniform`); the equivariance/no-signaling and martingale routes are
+> **the same condition** (`SelectionModel.expectation_conserved`); and a **finite H-theorem** that *derives*
+> the residual measure-preservation — a reset-kernel **no-go** (`resetKernel_reaches`: relaxation alone is
+> Born-agnostic), then **reversibility over a uniform bath ⇒ bistochastic** with column-stochasticity proved
+> from the bijection (`inducedKernel_col`), and **Doeblin contraction** (`doeblin_contraction`,
+> `relaxation_to_uniform`: ε-mixing ⇒ geometric relaxation to Born). **Net:** the irreducible input is
+> sharpened from "assume μ = |Ψ|²-equivariant" to **reversibility + uniform bath + mixing** (a finite
+> Liouville + molecular-chaos typicality postulate), and the meta no-go proves nothing Born-free can replace
+> it. Written up as a standalone paper **`QIQT_Born_Reduction.md`** (built PDF, theorem↔Lean index) and wired
+> into qiqt.org (`/papers` entry + `/selection` cross-link). This does **not** change §1's verdict (still a
+> conditional reduction, not a from-nothing derivation) — it localizes Gap #2's residual as precisely as the
+> finite combinatorial core can. Full route map: `paper_strategy/50_Born_Attack_Routes.md`,
+> `paper_strategy/49_Born_Status.md`.
 
 > **Update 2026-06-06.** The project axiom budget is now **33** (all 33 are continuum /
 > operator-algebra interface axioms; the entire finite core below is axiom-free —
