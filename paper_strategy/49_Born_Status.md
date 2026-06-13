@@ -330,3 +330,12 @@ question is sharp: *does the QIQT-H selection dynamics preserve a fixed, Born-ag
 **Status:** 3a done (axiom-free), 3b in corpus, 3c is the open Gap-2 frontier — now reduced to the single
 sharp question "is the QIQT-H selection dynamics `μ`-equivariant?", with `equivariant_marg_invariant` waiting
 to consume the answer.
+
+**3c scaffold STARTED** (`QIQTH/SelectionDynamics.lean`, axiom-free): the `SelectionModel` structure (microstate
+space + Born-agnostic `μ` + deterministic selector + bijective remote action `R` + equivariance `(R)_*μ=μ`);
+`SelectionModel.no_signaling` (wires any equivariant model to 3a); and `uniformModel` — the Born-agnostic
+instance where uniform `μ` is preserved by **any** bijection, so the remote no-signaling half is reachable
+with a measure assuming nothing about Born. The two remaining open pieces, now isolated in the model class:
+**(i)** the local marginals `marg μ sel` are Born, and **(ii)** the *actual* (non-uniform) dynamical `μ` is
+equivariant. Both are the genuine multi-session Gap-2 build (a concrete microcausal selection model + its
+equivariance proof, the DGZ-equivariance analogue).

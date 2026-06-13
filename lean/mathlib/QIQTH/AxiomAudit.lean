@@ -2331,6 +2331,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ Gap-2 milestone 3a (equilibrium core): EQUIVARIANCE (μ-preserving remote
 -- dynamics R) ⇒ every local marginal R-invariant = selector no-signaling, Bell-compatibly (no pointwise
 -- locality, which Bell.chsh_lhv would cap at |CHSH|≤2). Isolates the load-bearing Gap-2 input: (R)_*μ=μ.
+
+-- ★ BORN Gap-2 Phase 3c SCAFFOLD — the (Φ,λ) selection-dynamics model (SelectionDynamics.lean):
+#print axioms QIQTH.SelectionDynamics.SelectionModel.no_signaling
+-- expected: standard only — any equivariant SelectionModel has selector no-signaling (wires the model to 3a).
+#print axioms QIQTH.SelectionDynamics.uniformModel_no_signaling
+-- expected: standard only — Born-agnostic instance: uniform μ preserved by ANY bijective remote action ⇒
+-- equivariant ⇒ no-signaling for free, with a measure assuming nothing about Born. Open core = Born marginals
+-- + equivariance of the ACTUAL non-uniform dynamical μ (the Gap-2 frontier).
 #print axioms QIQTH.RefinementBorn.sq_not_refinementNatural
 -- expected: standard only — the α=2 rule is NOT refinement-natural (it would signal); the α-family is
 -- exactly excluded by no-signaling. So: no-signaling under refinement ⇒ Born; without it, every α survives.
