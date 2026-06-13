@@ -68,10 +68,15 @@ reduces to **one** maximally-natural posit (noncontextuality / the Hilbert measu
 **Gleason** and bracketed by three machine-checked results: nothing Born-free entails it (**meta no-go**, the
 $w^\alpha$ family obeys every Born-free premise); no amplitude-independent counting supplies it
 (**rank-count no-go** — decoherence can't encode the weights in record multiplicity); and only $\alpha=2$
-survives continuous unitary mixing (**rotation / Banach–Lamperti** core). Written up in
+survives continuous unitary mixing (**rotation / Banach–Lamperti** core). Two further symmetry results
+(`SymmetrySquare`) place the same square in context: **Maxwell–Herschel** (rotation + independence ⇒ Gaussian
+with the $|z|^2$ exponent — the *bell curve's* square is Born's square), and a **boost no-go** (a Lorentz
+boost preserves the indefinite $t^2-x^2$ and so admits no positive probability norm — relativistic Born comes
+from the unitary Wigner representation, not from spacetime geometry). Written up in
 **`QIQT_Born_Reduction.md`** (built PDF) with a plain-English account at [qiqt.org/born](https://qiqt.org/born);
 modules `RefinementBorn`, `SelectorRefinement`, `SelectionDynamics`, `BornRoutes`, `Envariance`, `Relaxation`,
-`RankCountNoGo`, `BornChain`, `RotationBorn`; route map in `paper_strategy/50_Born_Attack_Routes.md`.
+`RankCountNoGo`, `BornChain`, `RotationBorn`, `SymmetrySquare`; route map in
+`paper_strategy/50_Born_Attack_Routes.md`.
 
 ## Repository structure
 

@@ -67,6 +67,19 @@ what is the prize we are chasing, and what must be fixed before arXiv.*
 > single-world program (Everett, Bohm–DGZ, Deutsch–Wallace) needs, now *proven* to be the residual, unique,
 > and irreducible from three directions. Plain-English account at qiqt.org/born; homepage status updated to
 > "open · reduced". Full root build green (3839 jobs), budget 0.
+> **(4) Symmetry round (`QIQTH/SymmetrySquare.lean`):** two more faces of the square. *Bell curve* —
+> Maxwell–Herschel: a rotation/U(2)-invariant product density is forced Gaussian with the rotation-invariant
+> `|z|²` in the exponent = the SAME square Born uses (squared-radius `U(2)`-invariance ⇒ multiplicative radial
+> profile ⇒ Gaussian; the multiplicative mirror of additive⇒Born). *Boost no-go* — a Lorentz boost is a
+> rotation by imaginary rapidity preserving the indefinite `t²−x²`; the light-cone `(1,1)` is an eigenvector
+> with eigenvalue `eᵡ`, so any homogeneous boost-invariant `F≥0` vanishes there ⇒ NO boost-invariant positive
+> probability norm. Relativistic Born comes from the *unitary* (Wigner) rep preserving `Σ|c|²`, never from
+> spacetime-boost invariance — the mirror of `RotationBorn` (compact rotation forces α=2; non-compact boost
+> forbids any positive norm). Pro's unifying fact: Born `Σ|z|²`, Gaussian `e^{−‖x‖²}`, action `⟨φ,Aφ⟩`,
+> interval `t²−x²` are all the degree-2 invariant of their group (rotations/boosts = real forms of one
+> complexified group, Wick-related); only positive-definite cases carry a probability. The full "why the
+> square" quartet — `RotationBorn`, `RankCountNoGo`, `BornChain`, `SymmetrySquare` — is on qiqt.org/born.
+> Full root build green (3840 jobs), budget 0.
 
 > **Update 2026-06-06.** The project axiom budget is now **33** (all 33 are continuum /
 > operator-algebra interface axioms; the entire finite core below is axiom-free —

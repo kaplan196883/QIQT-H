@@ -274,12 +274,13 @@ The contribution is fourfold:
   \item a Born-free \textbf{objectivity} layer: redundant records force one classical pointer variable, with no weights (§3);
   \item the \textbf{exponent-fixer iff}: among rules $p\propto f(w)$, refinement-additivity $\Leftrightarrow$ Born $\Leftrightarrow$ remote-refinement no-signaling (§5), together with the $\alpha$-family countermodel (§4);
   \item a \textbf{meta no-go}: any premise satisfied by the whole $\alpha$-family cannot entail Born (§6);
-  \item a \textbf{finite H-theorem} that derives the residual measure-preservation from reversibility over a uniform bath plus mixing, with a reset-kernel no-go showing relaxation alone is insufficient (§§7–9).
+  \item a \textbf{finite H-theorem} that derives the residual measure-preservation from reversibility over a uniform bath plus mixing, with a reset-kernel no-go showing relaxation alone is insufficient (§§7–9);
+  \item \textbf{three brackets on the exponent} (§10): a rank-count no-go (records can't count the weights), the rotation/Banach–Lamperti uniqueness (only the square survives unitary mixing — the same square as the Gaussian bell curve, while a Lorentz boost admits no positive norm), and Gleason (the noncontextual functionals are exactly the Born functionals).
 \end{enumerate}
 
 We are explicit throughout about what is \emph{not} done: this is a finite, non-relativistic combinatorial core;
 no continuum field theory, no Type III algebra, and no QIQT-H physical postulate enters the theorems. The
-residual premise (§10) is a genuine physical input, not a missing lemma.
+residual premise (§11) is a genuine physical input, not a missing lemma.
 
 \section{Setting and reduction target}
 
@@ -463,6 +464,41 @@ geometrically to uniform $=$ Born (\texttt{relaxation\_to\_uniform}).
 This is the finite H-theorem with \textbf{every premise explicit}: reversibility (column-stochastic), a uniform
 bath, and mixing ($\varepsilon$-minorization).
 
+\section{Why the exponent is 2: counting, symmetry, and uniqueness}
+
+Granting that the weight must be assumed, the reader will press: \emph{why the square}? Four further
+machine-checked results sharpen this and bracket the Born posit from independent directions.
+
+\textbf{Records cannot count the weights.} One might hope the multiplicity of environment records of a branch
+scales with its weight, so uniform counting reproduces Born from the dynamics. It cannot: record multiplicity
+is the rank of the orthogonal environment record subspace — fixed by the dynamics and *independent of the
+amplitude* (scaling a branch by a nonzero scalar preserves its support rank), whereas the Born weight is
+continuous in the amplitude. So no amplitude-independent multiplicity rule equals Born
+(\texttt{RankCountNoGo.no\_multiplicity\_rule\_is\_born}). Decoherence delivers definite records, not their weights.
+
+\textbf{Only the square survives mixing.} Unitary evolution continuously mixes amplitudes; ask which normalization
+$\sum_k|c_k|^\alpha$ is preserved. Exactly $\alpha=2$: the elementary two-coordinate rotation preserves
+$|c|^2$ (Pythagoras), while for $\alpha\ne2$ the $45°$ rotation of $(1,0)$ changes the total
+($2^{1-\alpha/2}\ne1$). This is the finite core of the Banach–Lamperti theorem on $\ell^p$ isometries — for
+$p\ne2$ the only isometries are permutations and phases; only $p=2$ admits the continuous rotation group
+(\texttt{RotationBorn.rotation\_invariant\_iff\_exponent\_two}). The \textbf{same square} governs the bell curve: a
+rotation-invariant product density is forced Gaussian with $|z|^2$ in the exponent (Maxwell–Herschel;
+\texttt{SymmetrySquare.gaussian\_profile\_from\_rotation}) — the Gaussian's square and Born's square are one and the
+same rotation invariant. A \textbf{Lorentzian boost}, by contrast, preserves the indefinite $t^2-x^2$ and so admits
+\emph{no} positive probability norm — it must vanish on the light cone (\texttt{SymmetrySquare.no\_boost\_invariant\_positive\_norm}).
+Relativistic Born therefore descends from the unitary Wigner representation on the positive-definite Hilbert
+space, never from spacetime geometry (compact rotation \emph{forces} $\alpha=2$; the non-compact boost \emph{forbids}
+any positive norm).
+
+\textbf{Gleason makes the posit unique.} The irreducible input — a noncontextual probability assignment on effects
+— is forced to the Born/trace form $\operatorname{Re}\operatorname{tr}(\rho E)$ and conversely realized by
+every density matrix (\texttt{BornChain.noncontextual\_forces\_born}, \texttt{born\_is\_noncontextual}), so the noncontextual
+functionals are \emph{exactly} the Born functionals. With the meta no-go (§6) and the rank-count no-go above, this
+is the honest ceiling: Born reduces to one maximally-natural posit, made unique by Gleason and proven
+irreducible from three directions. \emph{Honest caveat:} the rotation/symmetry results confirm the square is the
+degree-2 invariant of the unitary group — they do not derive Born from nothing, since unitary invariance
+already carries the quadratic form.
+
 \section{The irreducible residual and honest scope}
 
 After the H-theorem, the Born rule in this development follows from three finite premises about the
@@ -544,6 +580,16 @@ reversible ⇒ bistochastic & \texttt{inducedKernel\_col} & \texttt{Relaxation.l
 Doeblin contraction & \texttt{doeblin\_contraction} & \texttt{Relaxation.lean} \\
 \hline
 relaxation to Born & \texttt{relaxation\_to\_uniform} & \texttt{Relaxation.lean} \\
+\hline
+records ⇏ Born by counting & \texttt{no\_multiplicity\_rule\_is\_born} & \texttt{RankCountNoGo.lean} \\
+\hline
+noncontextual ⇒ Born (Gleason) & \texttt{noncontextual\_forces\_born}, \texttt{born\_is\_noncontextual} & \texttt{BornChain.lean} \\
+\hline
+only α=2 survives mixing & \texttt{rotation\_invariant\_iff\_exponent\_two} & \texttt{RotationBorn.lean} \\
+\hline
+bell curve = Born's square & \texttt{gaussian\_profile\_from\_rotation} & \texttt{SymmetrySquare.lean} \\
+\hline
+boost no-go (no positive norm) & \texttt{no\_boost\_invariant\_positive\_norm} & \texttt{SymmetrySquare.lean} \\
 \hline
 CHSH guardrail & \texttt{chsh\_pointwise} & \texttt{Bell.lean} \\
 \hline

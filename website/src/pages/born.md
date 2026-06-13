@@ -77,6 +77,35 @@ And it is stable on top of that: even if you started with the *wrong*, non-Born 
 relaxes it back to Born — the same way a gas out of equilibrium settles down (a finite **H-theorem**, also
 machine-checked). Born is not a fragile choice; it is the equilibrium the dynamics is pulled toward.
 
+## The same square as the bell curve
+
+You have met this square before — in the **bell curve**. Maxwell's 1860 derivation of how gas velocities are
+distributed used exactly one assumption beyond independence: that the distribution looks the same in every
+direction (rotational symmetry). Rotational symmetry *plus* independence forces the Gaussian
+$e^{-(x^2+y^2)/2\sigma^2}$ — and the quantity sitting in the exponent is the rotation-invariant
+$x^2+y^2$, the **very same square**. So the bell curve's square and Born's square are not a coincidence: both
+are the unique quantity left unchanged by rotation/mixing. (Machine-checked: a rotation-invariant product
+measure is forced to be Gaussian, the multiplicative mirror of the additivity that forces Born.) The honest
+caveat is the same as always — "rotational symmetry" already carries the quadratic; it explains why the
+Gaussian and Born wear the *same* square, not where the square ultimately comes from.
+
+A footnote worth keeping: the law of large numbers (many runs converging to $|c_k|^2$) is a *consequence* of
+the square, not its source. The bell-curve fluctuations around the Born frequencies presuppose the Born
+probabilities; they don't create them.
+
+## What about relativity? The boost
+
+A natural worry: relativity mixes space and time with a **Lorentz boost**, which is itself a kind of rotation
+— by an *imaginary* angle. Does that change the exponent? The answer is sharp, and it reveals something:
+**Born must be quantum, not geometric.** A boost preserves the spacetime interval $t^2-x^2$ — but that carries
+a minus sign, so it *vanishes on the light cone* and cannot be a probability (a probability can't be zero on a
+real state). In fact any boost-invariant weight is forced to vanish on the light-cone direction
+(machine-checked). So relativity does **not** carry Born through spacetime geometry. It carries it through a
+different fact: in quantum theory a boost acts as a *unitary* rotation on the **state**, which still preserves
+the positive $\sum|c|^2$. Born survives relativity precisely because it lives on the (positive-definite)
+Hilbert space, never on the (indefinite) spacetime. Compact rotation *forces* the square; the non-compact
+boost *forbids* any positive weight but the square — two sides of one coin.
+
 ## The bottom line, honestly
 
 Born emerges like this:

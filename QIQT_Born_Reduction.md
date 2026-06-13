@@ -48,11 +48,12 @@ The contribution is fourfold:
 1. a Born-free **objectivity** layer: redundant records force one classical pointer variable, with no weights (§3);
 2. the **exponent-fixer iff**: among rules $p\propto f(w)$, refinement-additivity $\Leftrightarrow$ Born $\Leftrightarrow$ remote-refinement no-signaling (§5), together with the $\alpha$-family countermodel (§4);
 3. a **meta no-go**: any premise satisfied by the whole $\alpha$-family cannot entail Born (§6);
-4. a **finite H-theorem** that derives the residual measure-preservation from reversibility over a uniform bath plus mixing, with a reset-kernel no-go showing relaxation alone is insufficient (§§7–9).
+4. a **finite H-theorem** that derives the residual measure-preservation from reversibility over a uniform bath plus mixing, with a reset-kernel no-go showing relaxation alone is insufficient (§§7–9);
+5. **three brackets on the exponent** (§10): a rank-count no-go (records can't count the weights), the rotation/Banach–Lamperti uniqueness (only the square survives unitary mixing — the same square as the Gaussian bell curve, while a Lorentz boost admits no positive norm), and Gleason (the noncontextual functionals are exactly the Born functionals).
 
 We are explicit throughout about what is *not* done: this is a finite, non-relativistic combinatorial core;
 no continuum field theory, no Type III algebra, and no QIQT-H physical postulate enters the theorems. The
-residual premise (§10) is a genuine physical input, not a missing lemma.
+residual premise (§11) is a genuine physical input, not a missing lemma.
 
 ## 2. Setting and reduction target
 
@@ -212,7 +213,42 @@ not mix. A Doeblin minorization supplies the mixing.
 This is the finite H-theorem with **every premise explicit**: reversibility (column-stochastic), a uniform
 bath, and mixing ($\varepsilon$-minorization).
 
-## 10. The irreducible residual and honest scope
+## 10. Why the exponent is 2: counting, symmetry, and uniqueness
+
+Granting that the weight must be assumed, the reader will press: *why the square*? Four further
+machine-checked results sharpen this and bracket the Born posit from independent directions.
+
+**Records cannot count the weights.** One might hope the multiplicity of environment records of a branch
+scales with its weight, so uniform counting reproduces Born from the dynamics. It cannot: record multiplicity
+is the rank of the orthogonal environment record subspace — fixed by the dynamics and *independent of the
+amplitude* (scaling a branch by a nonzero scalar preserves its support rank), whereas the Born weight is
+continuous in the amplitude. So no amplitude-independent multiplicity rule equals Born
+(`RankCountNoGo.no_multiplicity_rule_is_born`). Decoherence delivers definite records, not their weights.
+
+**Only the square survives mixing.** Unitary evolution continuously mixes amplitudes; ask which normalization
+$\sum_k|c_k|^\alpha$ is preserved. Exactly $\alpha=2$: the elementary two-coordinate rotation preserves
+$|c|^2$ (Pythagoras), while for $\alpha\ne2$ the $45°$ rotation of $(1,0)$ changes the total
+($2^{1-\alpha/2}\ne1$). This is the finite core of the Banach–Lamperti theorem on $\ell^p$ isometries — for
+$p\ne2$ the only isometries are permutations and phases; only $p=2$ admits the continuous rotation group
+(`RotationBorn.rotation_invariant_iff_exponent_two`). The **same square** governs the bell curve: a
+rotation-invariant product density is forced Gaussian with $|z|^2$ in the exponent (Maxwell–Herschel;
+`SymmetrySquare.gaussian_profile_from_rotation`) — the Gaussian's square and Born's square are one and the
+same rotation invariant. A **Lorentzian boost**, by contrast, preserves the indefinite $t^2-x^2$ and so admits
+*no* positive probability norm — it must vanish on the light cone (`SymmetrySquare.no_boost_invariant_positive_norm`).
+Relativistic Born therefore descends from the unitary Wigner representation on the positive-definite Hilbert
+space, never from spacetime geometry (compact rotation *forces* $\alpha=2$; the non-compact boost *forbids*
+any positive norm).
+
+**Gleason makes the posit unique.** The irreducible input — a noncontextual probability assignment on effects
+— is forced to the Born/trace form $\operatorname{Re}\operatorname{tr}(\rho E)$ and conversely realized by
+every density matrix (`BornChain.noncontextual_forces_born`, `born_is_noncontextual`), so the noncontextual
+functionals are *exactly* the Born functionals. With the meta no-go (§6) and the rank-count no-go above, this
+is the honest ceiling: Born reduces to one maximally-natural posit, made unique by Gleason and proven
+irreducible from three directions. *Honest caveat:* the rotation/symmetry results confirm the square is the
+degree-2 invariant of the unitary group — they do not derive Born from nothing, since unitary invariance
+already carries the quadratic form.
+
+## 11. The irreducible residual and honest scope
 
 After the H-theorem, the Born rule in this development follows from three finite premises about the
 inaccessible degrees of freedom:
@@ -235,7 +271,7 @@ named premises, the premises are individually motivated, the meta no-go shows so
 unavoidable, and the H-theorem reduces the measure-theoretic premise to reversibility plus mixing. It is not
 a derivation of Born from no assumptions, and we make no such claim.
 
-## 11. Verification and reproducibility
+## 12. Verification and reproducibility
 
 All theorems named above are part of a single Lean 4 aggregator (`QIQTH`). The development builds with no
 `sorry`/`admit` (`sorryAx` count $0$) and a raw project-axiom count of $0$; every cited theorem carries a
@@ -268,6 +304,11 @@ Mathlib development.
 | reversible ⇒ bistochastic | `inducedKernel_col` | `Relaxation.lean` |
 | Doeblin contraction | `doeblin_contraction` | `Relaxation.lean` |
 | relaxation to Born | `relaxation_to_uniform` | `Relaxation.lean` |
+| records ⇏ Born by counting | `no_multiplicity_rule_is_born` | `RankCountNoGo.lean` |
+| noncontextual ⇒ Born (Gleason) | `noncontextual_forces_born`, `born_is_noncontextual` | `BornChain.lean` |
+| only α=2 survives mixing | `rotation_invariant_iff_exponent_two` | `RotationBorn.lean` |
+| bell curve = Born's square | `gaussian_profile_from_rotation` | `SymmetrySquare.lean` |
+| boost no-go (no positive norm) | `no_boost_invariant_positive_norm` | `SymmetrySquare.lean` |
 | CHSH guardrail | `chsh_pointwise` | `Bell.lean` |
 
 ## Appendix B — Reproducibility
