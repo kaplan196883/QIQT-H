@@ -2420,4 +2420,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — no boost-invariant positive probability norm exists (indefinite signature);
 -- relativistic Born comes from the unitary (Wigner) rep, not spacetime-boost invariance.
 
+-- RealmSelection.lean — does Q_max select a unique realm? No alone; yes with einselection (2026-06-15).
+#print axioms QIQTH.RealmSelection.capacity_underdetermines_realm
+-- expected: standard only — the NO-GO: two distinct orthogonal 2-record realms in ℂ² (standard vs Hadamard),
+-- both capacity-maximal ⇒ a capacity (cardinality) bound does NOT pick a unique realm.
+#print axioms QIQTH.RealmSelection.realm_unique_of_einselection
+-- expected: standard only — conditional: given the einselected pointer family, the realm is determined
+-- (unique); Q_max then makes it finite + single-macroscopic (CapacityModel).
+
 end QIQTH.AxiomAudit

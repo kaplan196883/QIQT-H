@@ -101,6 +101,31 @@ what is the prize we are chasing, and what must be fixed before arXiv.*
 > finite `Q_max` is, as far as we can show, empirically equivalent to QM (an interpretation) unless an explicit
 > collapse dynamics `𝓛_grav` is *added* as a new postulate. This sharpens §1's verdict on the empirical axis.
 
+> **Update 2026-06-15 — the λ construction, where Q_max actually sits, and the realm-selection result.** (Full
+> detail: `paper_strategy/55`–`57`.) **(a) Q_max is on ACTUALITY, not Φ** (`55`): the capacity exclusion
+> (`CoreNoCollapse`/`CapacityModel`) is Φ-INDEPENDENT — it bounds the *actual* record content; Φ stays exactly
+> unitary (a superposition of records is one vector at no extra cost, `RankCountNoGo`). Slogan corrected
+> everywhere (paper Theorem 4 + conclusion, site `/idea` `/theory` `/selection` `/index`): "Q_max does not
+> constrain the wavefunction; it constrains actuality — λ selects which record is actual." **(b) The λ
+> construction** (`57`): λ = a μ-typical complete 4D actual-record history, a compatible global section of the
+> decohered-record net over the causal-diamond poset, **sampled** from the Poincaré-covariant
+> decoherence-functional measure `μ_Φ(α)=‖C_α Φ‖²` (Born by construction). KEY (`56`): a covariant *measure* ≠
+> a covariant *selector* (S²: invariant measure, no invariant point) — λ is a SAMPLE, individually
+> symmetry-breaking, law covariant. The decisive object (covariant σ-additive Born measure on actual-record
+> histories) is **already machine-checked for the 1+1D free field** (`KolmogorovFiniteFiber`+`StateNetMeasure`+
+> `localized_typicality_poincare_invariant`+no-signaling). **Where Q_max sits in it:** the STAGE — the record
+> algebra `B_Φ(D)`: finiteness (≤e^{Q_R}, = the finite fibers that make the measure constructible), area-grain,
+> single-macroscopic, and the realm grain. NOT the measure (Born), NOT the single-world (sampling). **(c)
+> Realm-selection result** (`QIQTH/RealmSelection.lean`, axiom-free): Q_max ALONE does NOT select a unique
+> realm — `capacity_underdetermines_realm` (standard vs Hadamard ℂ² decompositions are both capacity-maximal,
+> distinct); it selects it only WITH einselection (`realm_unique_of_einselection`). Same pattern: capacity =
+> finiteness/structure, selection needs an extra input (here einselection, as actuality needed λ). **(d)
+> CORRECTION to §4a:** the OP3b "Roberts net cohomology / covariant global section" framing is **mis-targeted**
+> (`56`) — λ is a sample from a covariant measure, not a covariant section; the obstruction to a global
+> actuality assignment is **contextuality** (Bell/Fine/Kochen–Specker / Abramsky–Brandenburger), dodged by
+> assigning values only to ACTUAL decohered records in the ACTUAL context (not a counterfactual value-map),
+> NOT Roberts cohomology (which classifies DHR charges). Treat §4a's Roberts/Ȟ¹ language as superseded.
+
 > **Update 2026-06-06.** The project axiom budget is now **33** (all 33 are continuum /
 > operator-algebra interface axioms; the entire finite core below is axiom-free —
 > `propext, Classical.choice, Quot.sound` only). 37 → 35 via the Goldstein–Struyve Step-1 /
