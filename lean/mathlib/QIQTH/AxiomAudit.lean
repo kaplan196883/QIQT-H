@@ -2431,6 +2431,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the Bell two-record wing marginal obeys the Born sum rule (consistency
 -- made operational: the marginal probability is well-defined).
 
+-- WeylBitStrongDecoherence.lean — STRONG decoherence; the multi-bit-differing residual (2026-06-15).
+#print axioms QIQTH.Fock.vacuum_bit_strong_decoherence
+-- expected: standard only — single Weyl bit on the vacuum is EXACTLY orthogonal (D=0, not just Re D=0),
+-- because the vacuum Weyl one-point function is real.
+#print axioms QIQTH.Fock.bell_two_bit_strong_decoherence
+-- expected: standard only — for orthogonal record modes ⟪u,v⟫=0, the maximally-different Bell history
+-- vectors vec(+,+) and vec(−,−) are exactly orthogonal: closes the multi-bit-differing residual with
+-- STRONG (D=0) decoherence. NON-orthogonal modes give a nonzero overlap correction (SBS-suppressed, cited).
+
 -- RealmSelection.lean — does Q_max select a unique realm? No alone; yes with einselection (2026-06-15).
 #print axioms QIQTH.RealmSelection.capacity_underdetermines_realm
 -- expected: standard only — the NO-GO: two distinct orthogonal 2-record realms in ℂ² (standard vs Hadamard),

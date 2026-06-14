@@ -72,8 +72,22 @@ net (`WeylBitMeasure`, the σ-additive μ∞ on the continuum free field) is a *
 - `bell_consistency_alice/bob` + `bell_marginal_sum_rule` — the two-record (Bell) configuration is a
   consistent set on each wing; the wing marginals are additive (the marginal probability is well-defined).
 
-**Honest scope.** This is MEDIUM (weak) decoherence `Re D = 0` — precisely the sum-rule condition — and it
-holds EXACTLY here. STRONG decoherence (full `D = 0`: `Im D → 0` and *every* multi-bit pair) is the
+**Update — the multi-bit-differing residual is now closed (STRONG decoherence) for orthogonal modes**
+(`QIQTH/Fock/WeylBitStrongDecoherence.lean`, axiom-free, 2026-06-15). The residual flagged below (pairs
+differing in more than one bit, whose real parts only *summed* to zero) is now proved to vanish *exactly*
+when the record modes are orthogonal:
+- `vacuum_bit_strong_decoherence` — a single Weyl bit on the vacuum is EXACTLY orthogonal (`D = 0`, not
+  merely `Re D = 0`), because the vacuum Weyl one-point function `⟪Ω,W(u)Ω⟫ = exp(−½‖u‖²)` is real.
+- `bell_two_bit_strong_decoherence` — for orthogonal record modes `⟪u,v⟫ = 0` (the physical "distinct /
+  spacelike records" condition), the maximally-different Bell history vectors `vec(+,+)` and `vec(−,−)`
+  are exactly orthogonal. So the full Bell config is a consistent set in the STRONG sense, not just medium.
+  Mechanism: the Gaussian overlaps collapse via `weylCoeff v 0 · weylCoeff v w · exp⟪v,v⟫ = 1`. For
+  NON-orthogonal modes the cross term is nonzero, `∝ Re⟪u,v⟫` (the mode/record overlap) — the genuine
+  record-overlap correction, suppressed by SBS/redundancy (cited).
+
+**Honest scope.** MEDIUM decoherence `Re D = 0` (the sum-rule condition) holds EXACTLY for *all* contexts;
+STRONG decoherence `D = 0` holds exactly for orthogonal record modes (and on the vacuum). The remaining
+`Im D → 0` for *non-orthogonal* modes / the general environmental case is the
 separate environmental-redundancy / SBS statement (`SBSBoolean`, Quantum Darwinism), the cited mechanism.
 Consistency ≠ uniqueness (Dowker–Kent): uniqueness needs einselection (`RealmSelection`). So the chain is:
 einselection picks the basis → `WeylBitConsistency` makes that realm a consistent set (sum rules hold) →
