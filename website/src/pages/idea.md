@@ -18,19 +18,23 @@ QIQT-H starts from a single physical premise drawn from black-hole thermodynamic
 its boundary area in Planck units, $Q_R = A/4\ell_P^2$ (in natural entropy units). Finite, as a postulate
 of the program.
 
-A wave function that recorded two macroscopically distinct outcomes at once, pointer-left *and*
-pointer-right with all their correlated environmental traces, would be a far richer object than one
-recording a single outcome. Now, finite capacity *by itself* does **not** forbid the superposition — a
-finite-dimensional space still contains plenty of superposed distinguishable states. The load-bearing,
-nonstandard claim is sharper: *physically instantiating* two macroscopic records in a region would cost
-more information than its bound allows, so the two-record state is inadmissible there. That claim — the
-**Macroscopic Definiteness Conjecture** — is the crux of the whole program, and it is unproven.
+Here is the sharp point — and getting it right took the program a while. Finite capacity *by itself* does
+**not** forbid a superposition in the wave function $\Phi$: a superposition of two records is one vector in
+the same finite-dimensional space, costing no more room than either record alone, and $\Phi$ evolves
+exactly unitarily, keeping every branch. So $Q_{\max}$ is **not** a constraint on the wave function. What it
+constrains is **actuality**. Two rival macroscopic records being *actual at once* would be two definite,
+classical configurations — and classical, distinguishable contents **add up**, so realizing both would
+exceed the region's budget $Q_R$. Hence at most one record can be *actual* per region; the actuality
+selector $\lambda$ picks which one. The unrealized records remain in $\Phi$ — they are simply not actualized.
 
-<div class="note"><strong>The move.</strong> Collapse is not added as a new law. Conditional on the
-conjecture, multi-record regional states are inadmissible because they would exceed the region's
-information capacity. After ordinary decoherence has made the records redundant and stable, only
-single-record content fits — so the per-run *actual* content is single-record, one world, with no collapse
-term added to the global dynamics.</div>
+<div class="note"><strong>The move.</strong> Collapse is not added as a new law, and the wave function is
+never touched. Q<sub>max</sub> constrains <em>actuality</em>, not Φ: because realizing two rival macroscopic
+records would exceed the region's information budget, at most one is actual — and λ selects which.
+This capacity exclusion is machine-checked at the actuality layer; Φ stays exactly unitary, with no
+collapse term. What remains a conjecture — the <strong>Macroscopic Definiteness Conjecture</strong>, the
+crux of the program — is that a genuine macroscopic record really costs near the full budget (so two rival
+ones overflow); and the genuinely hard open piece is stitching the per-region actualities into one global,
+Lorentz-covariant λ.</div>
 
 ## What this buys, and what it doesn't
 

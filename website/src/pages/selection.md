@@ -27,19 +27,20 @@ of *record* the [theory](/theory) is about. We do not look at $\Phi$ from outsid
 ## λ — which admissible record is actual
 
 Granting the finite-capacity postulate and the [Macroscopic Definiteness Conjecture](/theory), a bounded
-region cannot *instantiate* two macroscopic records at once. So after decoherence the admissible regional
-content is single-record: the unitarily-evolved $\Phi$ offers several mutually-exclusive records, but only
-one of them *fits* the region's information budget at a time.
+region cannot make two rival macroscopic records *actual* at once — two definite, classical record-contents
+would together exceed its information budget. So the region's *actual* content is single-record: the
+unitarily-evolved $\Phi$ offers several mutually-exclusive records, but only one can be *actual* at a time.
+The finite capacity bounds *actuality*, not $\Phi$ (which keeps every branch, exactly unitary).
 
 $\lambda$ is the **selection** of which admissible record is the actual one. It is the move the textbook
 misnames "collapse" — but here it is not a dynamical event. $\lambda$ adds nothing to the Schrödinger
 equation, exerts no force, and leaves $\Phi$ untouched. It is a fact about *which* of the constituted,
 unitarily-evolved alternatives we find realized, not a physical process that edits the state.
 
-<div class="note"><strong>Two layers.</strong> $\Phi$ is constitution — what there is, evolving unitarily.
-$\lambda$ is actuality — which admissible record obtains. This is one dynamical law <em>plus</em> an
+<div class="note"><strong>Two layers.</strong> Φ is constitution — what there is, evolving unitarily.
+λ is actuality — which admissible record obtains. This is one dynamical law <em>plus</em> an
 actuality postulate, not a cost-free relabeling: keeping the layers apart is what lets "exact unitarity"
-and "one outcome" coexist, but giving $\lambda$ a precise, dynamically-consistent form is still open.</div>
+and "one outcome" coexist, but giving λ a precise, dynamically-consistent form is still open.</div>
 
 ## No fundamental probability, no chooser
 

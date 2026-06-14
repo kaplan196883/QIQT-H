@@ -54,8 +54,9 @@ Here is the load-bearing physical claim. Let a "record" be a stable, redundantly
 distinguishable pointer state of the form decoherence leaves behind. The **Macroscopic Definiteness
 Conjecture** states:
 
-> A regional state carrying two or more distinct macroscopic records has $\chi_R$ exceeding the capacity
-> $Q_R$ of any region that would have to host it.
+> Two or more distinct macroscopic records being *actual* together in a region would have joint cost
+> $\chi_R$ exceeding the region's capacity $Q_R$. (This bounds the region's *actual* content — not the wave
+> function $\Phi$, which keeps every branch; a superposition of records is one vector and costs no extra.)
 
 This is the step that does the real work, and it is a **conjecture**. It asserts that the information cost
 of genuine macroscopic multiplicity is not merely large but specifically larger than the holographic
@@ -68,14 +69,17 @@ that cost measure is itself part of the problem. Establishing H2, even in a mode
 
 ## 4. The conditional theorem: single record
 
-Granting (FQ) and the conjecture, the conclusion follows as a **conditional theorem**. If a $\ge 2$-record
-state cannot be instantiated in $R$, then the only regional content compatible with the bound is
-single-record. After decoherence has stabilized and proliferated the records, the per-run state the region
-realizes is therefore one definite macroscopic world, with no collapse term added to the global dynamics.
+Granting (FQ) and the conjecture, the conclusion follows as a **conditional theorem**. If two rival
+macroscopic records cannot be *actual* together (their joint cost would exceed $Q_R$), then the *actual*
+regional content is single-record. After decoherence has stabilized and proliferated the records, the
+content the region *realizes* is one definite macroscopic world — while $\Phi$ keeps all branches and
+evolves exactly unitarily, with no collapse term. The capacity exclusion is machine-checked at this
+*actuality* layer (it never constrains $\Phi$): a finite, additive-or-monotone-cost family of actual
+records admits at most one macroscopic member, and $\lambda$ supplies which.
 
 This is worth stating carefully, because "one outcome" and "unitary evolution" sound contradictory. The
-global wave function evolves unitarily throughout; what the finite-capacity constraint does is render
-multi-record *regional* content inadmissible. Which single admissible record is the *actual* one is then a
+global wave function evolves unitarily throughout; what the finite-capacity constraint bounds is the
+region's *actual* content — two rival actual records would exceed $Q_R$. Which single record is the *actual* one is then a
 [selection](/selection) among the unitarily-evolved alternatives, not a dynamical modification of the
 Schrödinger equation — the [(Φ, λ) account](/selection). Making that selection precise, and deriving its
 statistics, is the dynamical-realization and Born problem below.
