@@ -1,20 +1,24 @@
 /-
 WeylBitStrongDecoherence.lean — STRONG decoherence of the free-field Born histories (2026-06-15)
 
-`WeylBitConsistency` proved MEDIUM decoherence (`Re D = 0`) for all single-bit coarse-grainings — the
-exact Gell-Mann–Hartle condition the Born sum rules need.  The residual flagged there: the
-*multi-bit-differing* pairs (e.g. `vec(+,+)` vs `vec(−,−)` in the Bell config), whose real parts only
-*sum* to zero by normalization but were not shown to vanish individually.
+TERMINOLOGY (Gell-Mann–Hartle hierarchy): `Re D = 0` is **weak** decoherence (consistency); `D = 0`
+(real AND imaginary off-diagonals vanish) is **medium** decoherence; **strong** decoherence additionally
+requires *records* (orthogonal record states). `WeylBitConsistency` proved the WEAK condition for all
+single-bit coarse-grainings. The residual flagged there: the *multi-bit-differing* pairs (e.g. `vec(+,+)`
+vs `vec(−,−)` in the Bell config), whose real parts only *sum* to zero by normalization but were not
+shown to vanish individually.
 
-Here we close that residual for **orthogonal record modes** — and get more than medium: the pairs vanish
-*exactly* (STRONG decoherence, `D = 0`, not just `Re D = 0`).  The mechanism: on the vacuum the Weyl
-two-point function `⟪Ω, W(u)Ω⟫ = weylCoeff u 0 = exp(−½‖u‖²)` is REAL, and for orthogonal modes
-`⟪u,v⟫ = 0` the Gaussian overlaps collapse via the identity `weylCoeff v 0 · weylCoeff v w · exp⟪v,v⟫ = 1`.
+Here we close that residual for **orthogonal record modes** — and get full `D = 0` (GMH **medium**), not
+just `Re D = 0`. Moreover the history vectors come out mutually *orthogonal* — record states exist — so it
+also realizes the GMH **strong** (records) condition. ("Strong" in the names below means: off-diagonals
+vanish entirely, with orthogonal records.) The mechanism: on the vacuum the Weyl two-point function
+`⟪Ω, W(u)Ω⟫ = weylCoeff u 0 = exp(−½‖u‖²)` is REAL, and for orthogonal modes `⟪u,v⟫ = 0` the Gaussian
+overlaps collapse via the identity `weylCoeff v 0 · weylCoeff v w · exp⟪v,v⟫ = 1`.
 
 - `bitOp_vac_expVec_cross` — the engine: `⟪A(v,1)Ω, A(v,−1) e(w)⟫ = 0` whenever `⟪v,w⟫ = 0`.
 - `vacuum_bit_strong_decoherence` — single Weyl bit on the vacuum is *exactly* orthogonal (`w = 0`
-  instance): `⟪A(u,1)Ω, A(u,−1)Ω⟫ = 0`.  Upgrades medium → strong on the vacuum, the state histories
-  are built on.
+  instance): `⟪A(u,1)Ω, A(u,−1)Ω⟫ = 0`.  Upgrades weak → full `D = 0` on the vacuum, which the state
+  histories are built on.
 
 HONEST SCOPE: the orthogonal-mode hypothesis `⟪u,v⟫ = 0` is exactly the physical "distinct / spacelike
 record" condition (disjoint mode supports).  For NON-orthogonal modes the multi-bit cross term does not
@@ -40,7 +44,7 @@ private theorem inner_eVec (a b : H) :
   exact FockPre.inner_expVec a b
 
 /-- `weylCoeff v 0 = exp(−½⟪v,v⟫)` is REAL — the vacuum Weyl one-point function is real (it is what makes
-even the *single* bit strongly, not just medium, decoherent on the vacuum). -/
+even the *single* bit fully `D = 0`, not just weakly `Re D = 0`, decoherent on the vacuum). -/
 private theorem conj_weylCoeff_vac (v : H) :
     (starRingEnd ℂ) (Weyl.weylCoeff v 0) = Weyl.weylCoeff v 0 := by
   unfold Weyl.weylCoeff
@@ -121,8 +125,9 @@ private theorem cross_weyl_vanishes (v w : H) (hvw : ⟪v, w⟫_ℂ = 0) (hwv : 
 `⟪u,v⟫ = 0` (the physical "distinct / spacelike records" condition), the maximally-different history
 vectors `vec(+,+)` and `vec(−,−)` — differing in BOTH bits — are *exactly orthogonal*:
 `⟪A(u,1)A(v,1)Ω, A(u,−1)A(v,−1)Ω⟫ = 0`.  This closes the multi-bit-differing residual left open by
-`WeylBitConsistency` — and gives strong (`D = 0`), not merely medium (`Re D = 0`), decoherence.
-Peel `A(u,±1)` (`W(u)` isometry + `W(u)* = W(−u)`), reducing to two `cross_weyl_vanishes` terms. -/
+`WeylBitConsistency` — full `D = 0` (GMH *medium*; with orthogonal records, also *strong*), not merely
+weak `Re D = 0`.  Peel `A(u,±1)` (`W(u)` isometry + `W(u)* = W(−u)`), reducing to two
+`cross_weyl_vanishes` terms. -/
 theorem bell_two_bit_strong_decoherence (u v : H) (huv : ⟪u, v⟫_ℂ = 0) :
     ⟪bitOp u 1 (bitOp v 1 (vac H)), bitOp u (-1) (bitOp v (-1) (vac H))⟫_ℂ = 0 := by
   have him : Complex.im ⟪u, v⟫_ℂ = 0 := by rw [huv]; simp

@@ -2421,24 +2421,25 @@ namespace QIQTH.AxiomAudit
 -- relativistic Born comes from the unitary (Wigner) rep, not spacetime-boost invariance.
 
 -- WeylBitConsistency.lean — the free-field Born histories are a CONSISTENT SET (2026-06-15).
-#print axioms QIQTH.Fock.medium_decoherence_bit
+#print axioms QIQTH.Fock.weak_decoherence_bit
 -- expected: standard only — the consistency atom: Re D(α,β)=0 for the two outcomes of one Weyl bit
--- (Gell-Mann–Hartle medium decoherence), proved EXACTLY (no N→∞), equivalent to bit_normSq_sum.
-#print axioms QIQTH.Fock.medium_decoherence_context
--- expected: standard only — medium decoherence in any commuting context (single-bit coarse-graining):
+-- (Gell-Mann–Hartle WEAK decoherence / consistency), proved EXACTLY (no N→∞), = bit_normSq_sum.
+#print axioms QIQTH.Fock.weak_decoherence_context
+-- expected: standard only — weak decoherence in any commuting context (single-bit coarse-graining):
 -- the whole projective Born family μ∞ rests on a consistent set.
 #print axioms QIQTH.Fock.bell_marginal_sum_rule
 -- expected: standard only — the Bell two-record wing marginal obeys the Born sum rule (consistency
 -- made operational: the marginal probability is well-defined).
 
--- WeylBitStrongDecoherence.lean — STRONG decoherence; the multi-bit-differing residual (2026-06-15).
+-- WeylBitStrongDecoherence.lean — full D=0 (GMH medium; with orthogonal records, strong) (2026-06-15).
 #print axioms QIQTH.Fock.vacuum_bit_strong_decoherence
--- expected: standard only — single Weyl bit on the vacuum is EXACTLY orthogonal (D=0, not just Re D=0),
--- because the vacuum Weyl one-point function is real.
+-- expected: standard only — single Weyl bit on the vacuum is EXACTLY orthogonal (full D=0, not just
+-- weak Re D=0), because the vacuum Weyl one-point function is real.
 #print axioms QIQTH.Fock.bell_two_bit_strong_decoherence
 -- expected: standard only — for orthogonal record modes ⟪u,v⟫=0, the maximally-different Bell history
 -- vectors vec(+,+) and vec(−,−) are exactly orthogonal: closes the multi-bit-differing residual with
--- STRONG (D=0) decoherence. NON-orthogonal modes give a nonzero overlap correction (SBS-suppressed, cited).
+-- full D=0 (GMH medium + orthogonal records). NON-orthogonal modes give a nonzero overlap correction
+-- (record-overlap term ∝ Re⟪u,v⟫, SBS-suppressed, cited).
 #print axioms QIQTH.Fock.bitOp_vac_expVec_cross_eq
 -- expected: standard only — the EXACT overlap-correction formula: cross term = weylCoeff(v,0)·
 -- (exp⟪v,w⟫ − exp(−⟪v,w⟫))/4; vanishes iff ⟪v,w⟫=0 (the strong-decoherence orthogonality condition).
