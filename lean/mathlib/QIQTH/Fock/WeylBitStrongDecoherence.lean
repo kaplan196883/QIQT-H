@@ -148,4 +148,56 @@ theorem bell_two_bit_strong_decoherence (u v : H) (huv : ⟪u, v⟫_ℂ = 0) :
   rw [key, hA, hB]
   ring
 
+/-! ### The overlap-correction formula, and a witness that orthogonality is NECESSARY -/
+
+/-- **The exact overlap-correction formula.**  Without any orthogonality assumption, the Weyl-bit cross
+term on the vacuum vs a coherent state `e(w)` is
+`⟪A(v,1)Ω, A(v,−1) e(w)⟫ = weylCoeff(v,0) · (exp⟪v,w⟫ − exp(−⟪v,w⟫)) / 4`
+( `= ½·exp(−½‖v‖²)·sinh⟪v,w⟫` ).  It vanishes **iff** `⟪v,w⟫ ∈ {nπi}` — in particular iff the modes are
+orthogonal — so `bitOp_vac_expVec_cross` is exactly its `⟪v,w⟫ = 0` special case.  The nonzero value for
+overlapping modes is the genuine record-overlap correction (governed by `Re⟪v,w⟫`). -/
+theorem bitOp_vac_expVec_cross_eq (v w : H) :
+    ⟪bitOp v 1 (vac H), bitOp v (-1) (FockPre.expVec w)⟫_ℂ
+      = Weyl.weylCoeff v 0 * (Complex.exp ⟪v, w⟫_ℂ - Complex.exp (-⟪v, w⟫_ℂ)) / 4 := by
+  have hb1 : bitOp v 1 (vac H)
+      = (1 / 2 : ℂ) • (FockPre.expVec (0 : H) + (Weyl.weylCoeff v 0) • FockPre.expVec v) := by
+    rw [show vac H = FockPre.expVec (0 : H) from rfl, bitOp_apply, one_smul, weylPre_expVec, zero_add]
+  have hb2 : bitOp v (-1) (FockPre.expVec w)
+      = (1 / 2 : ℂ) • (FockPre.expVec w
+          + (-1 : ℂ) • (Weyl.weylCoeff v w • FockPre.expVec (w + v))) := by
+    rw [bitOp_apply, weylPre_expVec]
+  have hcvw : Weyl.weylCoeff v w = Weyl.weylCoeff v 0 * Complex.exp (-⟪v, w⟫_ℂ) := by
+    simp only [Weyl.weylCoeff]; rw [inner_zero_right, ← Complex.exp_add]; congr 1; ring
+  have hlast : Weyl.weylCoeff v 0 * Weyl.weylCoeff v w * Complex.exp ⟪v, w + v⟫_ℂ = 1 := by
+    simp only [Weyl.weylCoeff]
+    rw [inner_zero_right, inner_add_right, ← Complex.exp_add, ← Complex.exp_add]
+    conv_rhs => rw [← Complex.exp_zero]
+    congr 1; ring
+  have e1 : Complex.exp ⟪(0 : H), w⟫_ℂ = 1 := by rw [inner_zero_left, Complex.exp_zero]
+  have e2 : Complex.exp ⟪(0 : H), w + v⟫_ℂ = 1 := by rw [inner_zero_left, Complex.exp_zero]
+  rw [hb1, hb2]
+  simp only [inner_smul_left, inner_smul_right, inner_add_left, inner_add_right]
+  simp only [inner_eVec, map_div₀, map_one, map_ofNat, conj_weylCoeff_vac]
+  rw [e1, e2]
+  linear_combination (-1 / 4 : ℂ) * hlast + (-1 / 4 : ℂ) * hcvw
+
+/-- **Orthogonality is NECESSARY for strong decoherence — a witnessed countermodel.**  Over `H = ℂ`, the
+non-orthogonal modes `v = w = 1` (`⟪v,w⟫ = 1 ≠ 0`) give a *nonzero* cross term
+`exp(−½)·(exp 1 − exp(−1))/4 ≠ 0`.  So the orthogonality hypothesis of `bell_two_bit_strong_decoherence`
+cannot be dropped: overlapping records are NOT strongly decoherent (the residual `∝ Re⟪v,w⟫` is real). -/
+theorem strong_decoherence_needs_orthogonality :
+    ∃ v w : ℂ, ⟪bitOp v 1 (vac ℂ), bitOp v (-1) (FockPre.expVec w)⟫_ℂ ≠ 0 := by
+  refine ⟨1, 1, ?_⟩
+  have hvv : ⟪(1 : ℂ), (1 : ℂ)⟫_ℂ = 1 := by simp [RCLike.inner_apply]
+  rw [bitOp_vac_expVec_cross_eq, hvv]
+  refine div_ne_zero (mul_ne_zero ?_ ?_) (by norm_num)
+  · simp only [Weyl.weylCoeff]; exact Complex.exp_ne_zero _
+  · have he1 : Complex.exp (1 : ℂ) = ((Real.exp 1 : ℝ) : ℂ) := by
+      rw [← Complex.ofReal_one, ← Complex.ofReal_exp]
+    have he2 : Complex.exp (-1 : ℂ) = ((Real.exp (-1) : ℝ) : ℂ) := by
+      rw [show (-1 : ℂ) = ((-1 : ℝ) : ℂ) by norm_num, ← Complex.ofReal_exp]
+    rw [he1, he2, ← Complex.ofReal_sub, Ne, Complex.ofReal_eq_zero]
+    have : Real.exp (-1) < Real.exp 1 := Real.exp_lt_exp.2 (by norm_num)
+    linarith
+
 end QIQTH.Fock

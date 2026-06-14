@@ -85,10 +85,28 @@ when the record modes are orthogonal:
   NON-orthogonal modes the cross term is nonzero, `∝ Re⟪u,v⟫` (the mode/record overlap) — the genuine
   record-overlap correction, suppressed by SBS/redundancy (cited).
 
+**The overlap correction is now an EXACT formula + a witnessed countermodel** (same file):
+- `bitOp_vac_expVec_cross_eq` — the exact value with NO orthogonality assumption:
+  `⟪A(v,1)Ω, A(v,−1) e(w)⟫ = weylCoeff(v,0)·(exp⟪v,w⟫ − exp(−⟪v,w⟫))/4 = ½ exp(−½‖v‖²) sinh⟪v,w⟫`. It
+  vanishes iff `⟪v,w⟫ = 0`, so the `=0` lemma is exactly its orthogonal special case; the nonzero value is
+  the record-overlap correction `∝ Re⟪v,w⟫`.
+- `strong_decoherence_needs_orthogonality` — a witnessed countermodel over `H = ℂ` (`v = w = 1`): the cross
+  term `= exp(−½)(exp 1 − exp(−1))/4 ≠ 0`. So orthogonality is **necessary**: overlapping records are NOT
+  strongly decoherent.
+
+**Redundancy restores strong decoherence (the SBS / Quantum-Darwinism limit)** — `QIQTH/SBSSuppression.lean`,
+axiom-free. A macroscopic pointer is redundantly imprinted on `N` fragments, each with per-fragment overlap
+of modulus `≤ r < 1`; the joint off-diagonal FACTORS as `∏ z k` and is suppressed:
+- `offdiagonal_norm_le` — `‖∏ z k‖ ≤ rᴺ` (exponential bound).
+- `offdiagonal_tendsto_zero` — the joint off-diagonal → 0 as redundancy `N → ∞`. So records only partially
+  resolved per fragment become *fully* (strongly) decohered once broadcast macroscopically (`D → 0`).
+
 **Honest scope.** MEDIUM decoherence `Re D = 0` (the sum-rule condition) holds EXACTLY for *all* contexts;
-STRONG decoherence `D = 0` holds exactly for orthogonal record modes (and on the vacuum). The remaining
-`Im D → 0` for *non-orthogonal* modes / the general environmental case is the
-separate environmental-redundancy / SBS statement (`SBSBoolean`, Quantum Darwinism), the cited mechanism.
+STRONG decoherence `D = 0` holds exactly for orthogonal record modes (and on the vacuum), with the exact
+overlap correction known for the non-orthogonal case. The remaining `Im D → 0` for *non-orthogonal* records
+is then delivered by **redundancy** (the `rᴺ → 0` suppression law): the abstract Quantum-Darwinism mechanism
+is now machine-checked; its physical input (macroscopic records ARE redundantly broadcast with bounded
+per-fragment overlap `r < 1`) remains the cited assumption.
 Consistency ≠ uniqueness (Dowker–Kent): uniqueness needs einselection (`RealmSelection`). So the chain is:
 einselection picks the basis → `WeylBitConsistency` makes that realm a consistent set (sum rules hold) →
 Q_max makes it finite + single-macroscopic → μ∞ is a genuine covariant Born probability → λ is a sample.

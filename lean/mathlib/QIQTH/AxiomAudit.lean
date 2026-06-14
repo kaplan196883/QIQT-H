@@ -2439,6 +2439,19 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — for orthogonal record modes ⟪u,v⟫=0, the maximally-different Bell history
 -- vectors vec(+,+) and vec(−,−) are exactly orthogonal: closes the multi-bit-differing residual with
 -- STRONG (D=0) decoherence. NON-orthogonal modes give a nonzero overlap correction (SBS-suppressed, cited).
+#print axioms QIQTH.Fock.bitOp_vac_expVec_cross_eq
+-- expected: standard only — the EXACT overlap-correction formula: cross term = weylCoeff(v,0)·
+-- (exp⟪v,w⟫ − exp(−⟪v,w⟫))/4; vanishes iff ⟪v,w⟫=0 (the strong-decoherence orthogonality condition).
+#print axioms QIQTH.Fock.strong_decoherence_needs_orthogonality
+-- expected: standard only — witnessed countermodel over H=ℂ (v=w=1): the cross term is nonzero, so the
+-- orthogonality hypothesis of bell_two_bit_strong_decoherence is NECESSARY (overlapping records ≠ strong).
+
+-- SBSSuppression.lean — redundancy (Quantum Darwinism) restores strong decoherence in the limit (2026-06-15).
+#print axioms QIQTH.SBSSuppression.offdiagonal_norm_le
+-- expected: standard only — the exponential bound ‖∏ z k‖ ≤ rᴺ on the joint off-diagonal of N fragments.
+#print axioms QIQTH.SBSSuppression.offdiagonal_tendsto_zero
+-- expected: standard only — per-fragment overlap ≤ r < 1 ⇒ joint off-diagonal → 0 as redundancy N → ∞:
+-- redundant broadcast drives FULL (strong) decoherence even when no single fragment fully resolves.
 
 -- RealmSelection.lean — does Q_max select a unique realm? No alone; yes with einselection (2026-06-15).
 #print axioms QIQTH.RealmSelection.capacity_underdetermines_realm
