@@ -53,6 +53,32 @@ needs an extra input (here einselection, exactly as actuality needed λ). The pr
 CONDITIONAL — given the einselected pointer basis, the capacity-bounded realm is unique. Status: see
 `QIQTH/RealmSelection.lean`.
 
+## Is the λ-measure CONSISTENT? (the decoherent-histories sense) — now machine-checked for the free field
+
+"Consistent" is overloaded; the load-bearing sense is the decoherent-histories one: a family of
+histories is a **consistent set** (Gell-Mann–Hartle) iff the decoherence functional
+`D(α,β) = ⟪vec α, vec β⟫` obeys `Re D(α,β) = 0` for `α ≠ β` — exactly the condition that makes the
+Born weights `D(α,α) = ‖vec α‖²` satisfy the probability **sum rules** (additivity under coarse-graining).
+
+**Result (`QIQTH/Fock/WeylBitConsistency.lean`, axiom-free, 2026-06-15):** the genuine Weyl-bit Born
+net (`WeylBitMeasure`, the σ-additive μ∞ on the continuum free field) is a **consistent set**, proved
+*exactly* — no `N → ∞` environment limit:
+- `medium_decoherence_bit` — the atom: `Re⟪A(u,1)ψ, A(u,−1)ψ⟫ = 0` for one Weyl bit. The bit operators
+  `A(u,s)=(I+sW(u))/2` are NOT orthogonal projectors, so the *full* `D` does not vanish — only its real
+  part, which is exactly medium decoherence. It is the SAME content as the normalization `bit_normSq_sum`
+  (since `A(u,1)ψ + A(u,−1)ψ = ψ`, Pythagoras forces the cross term to zero).
+- `medium_decoherence_context` — the same in any commuting context (single-bit coarse-graining): the whole
+  projective Born family `bornWeight_*_marginal`/`bornWeight_coarse` rests on a consistent set.
+- `bell_consistency_alice/bob` + `bell_marginal_sum_rule` — the two-record (Bell) configuration is a
+  consistent set on each wing; the wing marginals are additive (the marginal probability is well-defined).
+
+**Honest scope.** This is MEDIUM (weak) decoherence `Re D = 0` — precisely the sum-rule condition — and it
+holds EXACTLY here. STRONG decoherence (full `D = 0`: `Im D → 0` and *every* multi-bit pair) is the
+separate environmental-redundancy / SBS statement (`SBSBoolean`, Quantum Darwinism), the cited mechanism.
+Consistency ≠ uniqueness (Dowker–Kent): uniqueness needs einselection (`RealmSelection`). So the chain is:
+einselection picks the basis → `WeylBitConsistency` makes that realm a consistent set (sum rules hold) →
+Q_max makes it finite + single-macroscopic → μ∞ is a genuine covariant Born probability → λ is a sample.
+
 ## Corrections propagated
 
 - The OP3b "Roberts net cohomology / covariant global section" framing (PROGRAM_STATUS §4a) is **mis-targeted**

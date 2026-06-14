@@ -246,6 +246,7 @@ import QIQTH.Fock.WeylCCR
 import QIQTH.Fock.WeylBit
 import QIQTH.Fock.WeylBitProcess
 import QIQTH.Fock.WeylBitMeasure
+import QIQTH.Fock.WeylBitConsistency
 import QIQTH.Fock.WeylBitEffect
 import QIQTH.Fock.WeylBitGeoCovariance
 import QIQTH.Fock.LocalizationSkeleton

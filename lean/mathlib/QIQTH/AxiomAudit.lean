@@ -2420,6 +2420,17 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — no boost-invariant positive probability norm exists (indefinite signature);
 -- relativistic Born comes from the unitary (Wigner) rep, not spacetime-boost invariance.
 
+-- WeylBitConsistency.lean — the free-field Born histories are a CONSISTENT SET (2026-06-15).
+#print axioms QIQTH.Fock.medium_decoherence_bit
+-- expected: standard only — the consistency atom: Re D(α,β)=0 for the two outcomes of one Weyl bit
+-- (Gell-Mann–Hartle medium decoherence), proved EXACTLY (no N→∞), equivalent to bit_normSq_sum.
+#print axioms QIQTH.Fock.medium_decoherence_context
+-- expected: standard only — medium decoherence in any commuting context (single-bit coarse-graining):
+-- the whole projective Born family μ∞ rests on a consistent set.
+#print axioms QIQTH.Fock.bell_marginal_sum_rule
+-- expected: standard only — the Bell two-record wing marginal obeys the Born sum rule (consistency
+-- made operational: the marginal probability is well-defined).
+
 -- RealmSelection.lean — does Q_max select a unique realm? No alone; yes with einselection (2026-06-15).
 #print axioms QIQTH.RealmSelection.capacity_underdetermines_realm
 -- expected: standard only — the NO-GO: two distinct orthogonal 2-record realms in ℂ² (standard vs Hadamard),
