@@ -69,6 +69,41 @@ H-theorem then reduces the residual to a Born-agnostic typicality postulate (rev
 bath, plus mixing) instead of to <em>|Ψ|</em><sup>2</sup> itself. It sharpens the open problem; it does not
 yet close it.</div>
 
+## The λ construction, made precise
+
+Stated sharply, $\lambda$ is **a single sample from a Lorentz-covariant probability law on record
+histories** — four pieces:
+
+1. **Stage** — the causal-diamond poset; for each region a finite set of decohered, redundantly-broadcast
+   **candidate record alternatives** (not yet "actual"). The capacity bound is *posited* to limit their
+   number — an actuality-layer assumption, not something the holographic entropy bound proves on its own.
+2. **Histories** — compatible global assignments (one record per region, agreeing on overlaps), each a
+   complete 4D history with no preferred time-slice.
+3. **Law** — the Born weight $\mu_\Phi(\alpha)=\lVert C_\alpha\Phi\rVert^2$ (Born is **input** here),
+   $\sigma$-additively extended, and *covariant as a law*: $\mu_{U_g\Phi}(g\alpha)=\mu_\Phi(\alpha)$.
+4. **λ** — one history drawn from $\mu_\Phi$.
+
+The key move: **a covariant measure is not a covariant selector.** Just as the rotation group has an
+invariant measure on the sphere but no invariant point, the *law* $\mu_\Phi$ is Poincaré-covariant while a
+*sampled* $\lambda$ generally is not a fixed point of the symmetry — ordinary sample non-invariance, not a
+hidden preferred frame. So $\lambda$ need not be (and cannot be) an equivariant function of $\Phi$; it is a
+contingent draw.
+
+<div class="note"><strong>Now machine-checked (free-field sector).</strong> For the 1+1D free field this
+covariant Born law is verified in Lean: a <em>σ-additive</em> measure exists (finite-fiber Kolmogorov
+extension — the finiteness is the capacity bound), it is the same in <em>every Lorentz frame</em>, and it
+satisfies the decoherent-histories <em>consistency</em> condition <em>Re D(α,β) = 0</em> exactly (this is
+what makes the Born weights obey the probability sum rules). For <em>orthogonal</em> records the full
+off-diagonal <em>D = 0</em> (strong), with an exact overlap-correction formula off orthogonality and a
+redundancy law by which broadcasting drives <em>D → 0</em> (Quantum Darwinism). See the
+<a href="/formalization">theorem index</a>. Born itself remains an <em>input</em>, not a derivation.</div>
+
+<div class="note"><strong>Realm selection — the honest status.</strong> Picking <em>which</em> consistent
+set of records (the realm) is the classic decoherent-histories gap (Dowker–Kent). Machine-checked:
+capacity <em>alone</em> does <strong>not</strong> select a unique realm (distinct capacity-maximal record
+bases exist); capacity <em>plus einselection</em> (the decoherence-selected pointer basis) does. Einselection
+is an input, not yet derived — so realm uniqueness is reduced to it, not closed.</div>
+
 ## How this differs from the usual answers
 
 - **Collapse interpretations** make the selection a *dynamical* event that breaks unitarity. Here $\lambda$
@@ -83,12 +118,20 @@ yet close it.</div>
 
 ## Locality and Bell — and why this is not superdeterminism
 
-A single-world ontology has to face Bell. QIQT-H is **not superdeterministic**: it does not correlate the
-measurement settings with $\lambda$, and it does not deny measurement independence. The Bell correlations
-come from the *nonlocal global state* $\Phi$ — entanglement — exactly the source they have in Everett,
-together with a **contextual** actuality selection (which record is actual can depend on what is actually
-measured). The settings stay free; the price for Bell is contextuality and a global consistency condition
-on $\lambda$ across overlapping regions, **not** a conspiracy between past and future. The one place
+A single-world ontology has to face Bell. To be explicit: QIQT-H **is Bell-nonlocal** — like every
+single-world theory that reproduces quantum statistics, the global law on $\lambda$ violates Bell *local
+causality* ($P(a,b\mid x,y,\lambda_{\text{past}})\ne P(a\mid\dots)\,P(b\mid\dots)$). No-signalling and
+microcausality *do* hold, but those are weaker, *operational* constraints; they do **not** rescue local
+causality, and treating them as if they did would be a category error.
+
+What QIQT-H is **not** is superdeterministic: it does not correlate the measurement settings with $\lambda$,
+and it does not deny measurement independence. The Bell correlations come from the *nonlocal global state*
+$\Phi$ — entanglement — exactly the source they have in Everett, together with a **contextual** actuality
+selection (which record is actual can depend on what is actually measured). Assigning values only to the
+records that are actually decohered in the actual context is also what dodges Kochen–Specker / Fine (no
+noncontextual value-map over all counterfactual settings) — but it does *not* make Bell go away; the model
+is irreducibly global/contextual. The settings stay free; the price for Bell is contextuality and a global
+consistency condition on $\lambda$ across overlapping regions, **not** a conspiracy between past and future. The one place
 superdeterminism could sneak in is the typicality measure — so it must be over the *uncontrolled*
 microstate in the ordinary, setting-independent sense (as in Bohmian quantum equilibrium or Everett
 typicality), never a measure tuned to the settings.

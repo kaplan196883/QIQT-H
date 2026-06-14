@@ -72,6 +72,33 @@ Toolchain `leanprover/lean4:v4.30.0` · verified in `QIQTH/AxiomAudit.lean`.
 | `connesCocycleH_chain` | $[D\omega_{W(f)\Omega}:D\omega_\Omega]_t=W(f)W(-\Delta^{it}f)$ + chain rule |
 | `hasDerivAt_relModFlow_vacuum` | $S_{\mathrm{Araki}}(\omega_{W(f)\Omega}\Vert\omega_\Omega)=S_{\mathrm{CGP}}(f)$ |
 
+### Free-field Born measure & decoherent-histories consistency
+
+A genuine (non-deterministic) Born probability measure on the continuum free field, its Lorentz-covariance,
+and the decoherent-histories *consistency* (sum-rule) conditions. Born is the **input** weight
+$\mu_\Phi(\alpha)=\lVert C_\alpha\Phi\rVert^2$; these theorems establish that it is a *consistent*,
+$\sigma$-additive, covariant probability — not a derivation of Born.
+
+| theorem | statement |
+| --- | --- |
+| `weylBit_typicalityMeasure_exists` | a $\sigma$-additive Born probability measure $\mu_\infty$ exists (finite-fiber Kolmogorov extension; the finiteness is the capacity bound) |
+| `weylBit_typicality_lorentzBoost_invariant` | $\mu_\infty$ is the same in every Lorentz frame (covariant *as a law*) |
+| `weak_decoherence_bit` | $\mathrm{Re}\,D(\alpha,\beta)=0$ — weak decoherence / consistency (the Born sum-rule condition), exact |
+| `weak_decoherence_context` | the same for every single-bit coarse-graining: the whole projective family is a consistent set |
+| `bell_two_bit_strong_decoherence` | for orthogonal records $\langle u,v\rangle=0$, full $D=0$ (incl. the maximally-different Bell pair) |
+| `bitOp_vac_expVec_cross_eq` | exact overlap correction $\tfrac12 e^{-\lVert v\rVert^2/2}\sinh\langle v,w\rangle$; vanishes iff $\langle v,w\rangle=0$ |
+| `strong_decoherence_needs_orthogonality` | witnessed countermodel: overlapping records are *not* strongly decoherent |
+| `offdiagonal_tendsto_zero` | SBS / Quantum-Darwinism: redundancy $N\to\infty$ drives the joint off-diagonal $\to 0$ |
+| `realm_unique_of_einselection` | given the einselected pointer family the realm is unique… |
+| `capacity_underdetermines_realm` | …but capacity *alone* does not pin it (a no-go: distinct capacity-maximal realms) |
+
+<div class="note"><strong>Terminology (Gell-Mann–Hartle).</strong> <em>Re D = 0</em> is <em>weak</em>
+decoherence / consistency (it is what makes the Born weights obey the probability sum rules); full
+<em>D = 0</em> is <em>medium</em>, and with orthogonal record states also <em>strong</em>. The Weyl-bit
+operators <em>A(u,s) = (I + sW(u))/2</em> are <em>effects</em>, not projectors, so this is a
+generalized-measurement history; the projector/Boolean-record content is separate. These are exact algebraic
+consistency results for the free/coherent sector — not a proof of macroscopic classicality.</div>
+
 ## Reproduce the verification
 
 ```bash
