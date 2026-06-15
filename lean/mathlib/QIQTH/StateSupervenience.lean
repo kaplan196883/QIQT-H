@@ -20,15 +20,27 @@ From naturality alone:
   typicality is `g`-invariant on outcomes: `T Φ (g • a) = T Φ a`.
 - `NaturalTypicality.envariance_equiprob` — composed with an envariance symmetry (`g • Φ = Φ` and `g • a = b`,
   supplied by `EnvarianceJustification.envariance_swap_invariant` for equal amplitudes) this gives
-  `T Φ a = T Φ b`: equal-amplitude outcomes are equiprobable. With `BornEquiprobable` this closes the Born
-  circularity, the only remaining premise being naturality itself.
+  `T Φ a = T Φ b`: equal-amplitude outcomes are equiprobable. This is the SYMMETRY fragment of the Born
+  derivation — one premise among several.
 
-HONEST SCOPE: naturality (state-supervenience under relabelling) is the irreducible input. `NoBornFromNothing`
-proves Born cannot come from literally nothing, so *some* premise must remain — the achievement is that it is
-now this single, Born-free, ontologically-motivated parsimony principle, not Born, not a counting rule, and
-not the envariance symmetry (which is now a theorem). Whether the (Φ,λ) ontology truly *entails* naturality
-(rather than merely motivating it) is a philosophical claim this file makes precise but does not adjudicate.
-Axiom-free; non-vacuous (a witnessing instance is provided).
+HONEST SCOPE (sharpened after a 2026-06-15 GPT-5.5-pro review, checked against the program's own findings).
+Naturality is **necessary but NOT sufficient** for Born. The α-family `T_q(Φ,k) = wₖ^q / ∑ⱼ wⱼ^q`
+(`wₖ = ‖PₖΦ‖²`, any `q>0`) is state-supervenient, permutation-natural, AND equiprobable on equal-amplitude
+branches — yet is non-Born for `q≠1`. (This is exactly the `RankCountNoGo`/`RefinementBorn` α-countermodel.)
+So naturality does NOT by itself pin Born. The Born conclusion of the chain additionally requires:
+  • REFINEMENT / coarse-graining ADDITIVITY (a macro-outcome's weight = ∑ of its fine equal-norm subbranch
+    weights, implementation-independent) — exactly what excludes the α-family; characterized in
+    `RefinementBorn` as ⇔ Born, and baked into `outcomeMarginal` (a sum over the sector);
+  • CANONICITY of the equal-NORM fine-graining (that λ is uniform over the equal-norm atoms — without
+    "equal-norm", arbitrary refinements restore the `RankCountNoGo` freedom; the `CanonicalIcMeasure` NAME
+    does not prove this);
+  • CONTINUITY in the state for irrational `wₖ` (the rational case is exact, irrational needs a limit);
+  • PRODUCT / independence of runs for the LLN (a single-run marginal does not give frequencies).
+So the honest endpoint is a CONDITIONAL UNIQUENESS statement (any normalized, additive, refinement-invariant,
+unitary-natural, state-continuous typicality assigns `‖PₖΦ‖²`); naturality is the symmetry hypothesis in it,
+not the sole premise. And "λ is a fact about Φ ⇒ the typicality LAW supervenes on Φ" is a MOTIVATION, not an
+entailment: the domain of λ being about Φ does not fix a measure over λ; envariance gives symmetries of Φ,
+not frequencies of λ. `NoBornFromNothing` proves some premise is irreducible. Axiom-free; non-vacuous.
 -/
 import Mathlib.Tactic
 

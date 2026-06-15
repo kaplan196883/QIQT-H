@@ -20,10 +20,17 @@ premise is no longer assumed, it is forced. We package this as a `CanonicalIcMea
 field is PROVED, and feed it to `qiqth_born_typicality_conditional`: symmetric equiprobability over an
 equal-amplitude orthonormal decomposition yields Born empirical frequencies.
 
-HONEST RESIDUAL (now minimal, both Born-free): (i) ENVARIANCE — equal-amplitude branches carry equal
-selection probability (Zurek's symmetry; `Envariance.envariance_forces_uniform`); (ii) EXISTENCE of an
-equal-amplitude orthonormal fine-graining reproducing the actual state (exact for rational `|c_k|²`, then by
-density). This removes the counting-rule posit; it does not remove the envariance symmetry. Axiom-free.
+HONEST RESIDUAL (sharpened after a 2026-06-15 GPT-5.5-pro review). The IDENTITY `‖ψ_k‖²/‖ψ‖² = count/|I|` is
+non-circular linear algebra (Pythagoras + equal norms). But "orthonormality FORCES `count = M·w_k`" is only
+true for an **equal-NORM** fine-graining with fixed sectors — arbitrary (unequal-norm) refinements restore the
+`RankCountNoGo` freedom. So the load-bearing premise is the CANONICITY of the equal-norm decomposition (that λ
+is uniform over the equal-norm atoms); the Lean structure being NAMED `CanonicalIcMeasure` does not prove it.
+Remaining premises, none eliminated here, all needed for Born: (i) ENVARIANCE (equal-amplitude ⇒ equiprobable;
+`EnvarianceJustification`); (ii) the equal-norm fine-graining is canonical (= refinement/coarse-graining
+ADDITIVITY, `RefinementBorn` ⇔ Born — what excludes the α-family `w_k^q`); (iii) EXISTENCE of the
+fine-graining (exact for rational `|c_k|²`, irrational needs continuity); (iv) PRODUCT independence for the
+LLN. What this file genuinely does: replace the *naked posited* `count = M·w_k` with the orthonormality
+identity, given an equal-norm decomposition — not derive Born from nothing. Axiom-free.
 -/
 import QIQTH.BornTypicality
 import Mathlib.Analysis.InnerProductSpace.Basic

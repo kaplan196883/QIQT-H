@@ -20,11 +20,15 @@ the `eₖ`), so `(U_S ⊗ U_E) ψ = ψ` — but only if `c` is permutation-invar
   exhibited as a unitary, not posited.
 
 So the envariance premise of `Envariance.envariance_equal_marg` (a μ-preserving swap of the equal-amplitude
-branches) is now grounded: the swap is `U_S ⊗ U_E`, which provably fixes the state. The ONLY remaining
-input collapses to **state-supervenience** — that the typicality measure of a system outcome depends only on
-the state (equivalently the reduced state, which `U_E` leaves untouched). That is a Gleason/non-contextuality
-premise, strictly weaker than Born. `U_S, U_E` exist as honest unitaries for orthonormal `{sₖ}, {eₖ}`
-(basis permutations); here they enter as the linear maps realising the relabelling. Axiom-free.
+branches) is grounded at the level of the STATE SYMMETRY: the swap is `U_S ⊗ U_E`, which provably fixes the
+state. What is NOT proved here (and must not be claimed): the inference from "the state has this symmetry" to
+"the typicality is invariant under it" — that is a separate premise (state-supervenience / naturality, handled
+in `StateSupervenience`), which is necessary but NOT sufficient for Born (the α-family `w_k^q` is natural and
+respects this symmetry yet is non-Born; Born also needs refinement-additivity — see `StateSupervenience`,
+`RefinementBorn`). `U_S, U_E` exist as honest unitaries for orthonormal `{sₖ}, {eₖ}` (basis permutations).
+SCOPE caveat (GPT-5.5-pro, 2026-06-15): the condition proved is `c a = c b` (exact complex equality, i.e. the
+aligned / positive-Schmidt case); the general equal-MODULUS envariance (`|c a| = |c b|`, phases absorbed into
+`U_E`) needs an additional phase argument, and irrational/limit cases need continuity. Axiom-free.
 -/
 import Mathlib.LinearAlgebra.TensorProduct.Basic
 import Mathlib.Tactic

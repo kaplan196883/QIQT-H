@@ -2470,8 +2470,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StateSupervenience.NaturalTypicality.stabilizer_invariant
 -- expected: standard only — a relabelling-natural typicality is invariant under state-fixing symmetries.
 #print axioms QIQTH.StateSupervenience.NaturalTypicality.envariance_equiprob
--- expected: standard only — naturality + an envariance symmetry (g•Φ=Φ, g•a=b) ⇒ T Φ a = T Φ b. Closes the
--- Born circularity modulo naturality (state-supervenience), the single remaining Born-free ontological premise.
+-- expected: standard only — naturality + an envariance symmetry (g•Φ=Φ, g•a=b) ⇒ T Φ a = T Φ b. The SYMMETRY
+-- fragment of Born; naturality is necessary but NOT sufficient (α-family T_q is natural+equiprob, non-Born) —
+-- Born also needs refinement-additivity (RefinementBorn), equal-norm canonicity, continuity, independence.
 
 -- SBSSuppression.lean — redundancy (Quantum Darwinism) restores strong decoherence in the limit (2026-06-15).
 #print axioms QIQTH.SBSSuppression.offdiagonal_norm_le
