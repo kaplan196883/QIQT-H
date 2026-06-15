@@ -52,9 +52,17 @@ record value `2√2`), and `contextuality_safe` (a correlation `> 2` exists with
 with `NoSignalingGeneral.bipartite_no_signaling` (per-compatible-context marginals no-signal, arbitrary ρ):
 assigning values only to the ACTUAL context is *forced* (no global noncontextual joint exists) and *consistent*
 (no-signaling). So λ dodges the Fine/Bell global-distribution obstruction by being actual-context-only, not by
-smuggling a non-quantum assumption — the mandatory CHSH/Fine guardrail is satisfied. REMAINING: the concrete
-embedding of a Bell experiment inside the Weyl-bit *record net* (deriving these marginals from the λ-measure
-itself, not the abstract CHSH theorems); the global consistent-set gluing without a ⊤-chart; interacting/Type III₁.
+smuggling a non-quantum assumption — the mandatory CHSH/Fine guardrail is satisfied.
+
+**★★ Concrete embedding now machine-checked too (2026-06-15, `QIQTH/Fock/WeylBitBell.lean`, axiom-free).** The
+no-signaling marginal is now derived FROM the actual Weyl-bit record measure (not the abstract CHSH theorems):
+for spacelike modes (`Im⟪u,v⟫=0`), `∑_{σ_B} ‖A(u,σ_A)A(v,σ_B)Ω‖² = ‖A(u,σ_A)Ω‖²` — Alice's marginal,
+independent of Bob's mode `v` (`bell_no_signaling_alice`); two Bob settings give the same Alice marginal
+(`bell_no_signaling_setting_indep`); symmetric for Bob. Mechanism: spacelike bits commute (`bitOp_comm`,
+microcausality) so Bob's bit moves outermost and sums via `bit_normSq_sum`. So the genuine record measure IS
+no-signaling. REMAINING: record correlations that ATTAIN a CHSH/Tsirelson violation within this commuting-bit
+free-field model (vs. the cited singlet `Tsirelson.lean`); the global consistent-set gluing without a ⊤-chart;
+interacting/Type III₁.
 
 ## The decisive object — and it's largely DONE for 1+1D (good news)
 
