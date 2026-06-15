@@ -221,7 +221,74 @@ theorem bornWeight_modAut_invariant (ρ : Matrix n n ℂ) [Invertible ρ]
     bornWeight ρ (modAut ρ x) = bornWeight ρ x :=
   modAut_stateOf_invariant ρ x
 
-/- ── 5. Audit conclusion ─────────────────────────────────────────────────-/
+/- ── 5. Real-time persistence: the genuine one-parameter flow, ∀ t ─────────
+
+    Section 4 proved persistence for the flow at a *fixed* generator `m`.  Here
+    we prove it for the genuine REAL-TIME modular flow σ_t(x)=ρ^{it} x ρ^{-it}
+    (diagonal density `ρ = diagonal p`, `ρ^{it} = diagPow p t`) — a real
+    one-parameter group (`sigmaDiag_comp`, `sigmaDiag_zero` in
+    `FiniteModularTheory`) — and we prove it **for every t**.  This upgrades
+    "the selection is stable at one instant" to "the selection is stable for all
+    time": coherence between pointer sectors never regenerates under the entire
+    modular history.  In the einselected (density-eigenbasis) case the pointers
+    are diagonal, so the stability is *unconditional* — that is the corollary. -/
+
+/-- If `B` is a two-sided inverse of `A` and `A` commutes with `P`, so does
+    `B`.  (The explicit-inverse analogue of `invOf_comm_of_comm`, for
+    `diagPow p (-t)` as the inverse of `diagPow p t`.) -/
+theorem comm_of_two_sided_inv (A B P : Matrix n n ℂ) (hAB : A * B = 1)
+    (hBA : B * A = 1) (h : A * P = P * A) : B * P = P * B := by
+  calc B * P = B * P * (A * B) := by rw [hAB, mul_one]
+    _ = B * (P * A) * B := by noncomm_ring
+    _ = B * (A * P) * B := by rw [h]
+    _ = (B * A) * P * B := by noncomm_ring
+    _ = P * B := by rw [hBA, one_mul]
+
+/-- **Real-time persistence, for every `t`.**  For the genuine real-time modular
+    flow `σ_t = sigmaDiag p t` and pointers that commute with the generator
+    `ρ^{it} = diagPow p t`, the decoherence map commutes with the flow:
+    `E(σ_t x) = σ_t(E x)`.  Holds for all `t` — the pointer structure is a
+    constant of the *entire* modular motion, not just at one instant. -/
+theorem dephase_sigmaDiag_commute {ι : Type*} [Fintype ι] (p : n → ℝ)
+    (hp : ∀ i, (p i : ℂ) ≠ 0) (t : ℝ) (P : ι → Matrix n n ℂ)
+    (hcomm : ∀ i, diagPow p t * P i = P i * diagPow p t) (x : Matrix n n ℂ) :
+    dephase P (sigmaDiag p t x) = sigmaDiag p t (dephase P x) := by
+  have hAB : diagPow p t * diagPow p (-t) = 1 := by
+    rw [diagPow_mul p hp, show t + -t = 0 by ring, diagPow_zero]
+  have hBA : diagPow p (-t) * diagPow p t = 1 := by
+    rw [diagPow_mul p hp, show -t + t = 0 by ring, diagPow_zero]
+  have hinv : ∀ i, diagPow p (-t) * P i = P i * diagPow p (-t) := fun i =>
+    comm_of_two_sided_inv _ _ _ hAB hBA (hcomm i)
+  unfold dephase sigmaDiag
+  rw [Finset.mul_sum, Finset.sum_mul]
+  apply Finset.sum_congr rfl
+  intro i _
+  rw [show P i * (diagPow p t * x * diagPow p (-t)) * P i
+        = (P i * diagPow p t) * x * (diagPow p (-t) * P i) by noncomm_ring,
+      ← hcomm i, hinv i,
+      show diagPow p t * P i * x * (P i * diagPow p (-t))
+        = diagPow p t * (P i * x * P i) * diagPow p (-t) by noncomm_ring]
+
+/-- **Unconditional real-time persistence in the pointer eigenbasis.**  When the
+    pointer projections are diagonal in the density's eigenbasis (the
+    einselected case), they commute with every `ρ^{it}` automatically (diagonal
+    matrices commute), so the decoherence map commutes with the real-time
+    modular flow `σ_t` for **all `t`, with no further hypothesis**.  This is the
+    fully dynamical statement of λ's stability: in the einselected basis the
+    selected record persists for all time. -/
+theorem dephase_sigmaDiag_commute_diagonal {ι : Type*} [Fintype ι] (p : n → ℝ)
+    (hp : ∀ i, (p i : ℂ) ≠ 0) (t : ℝ) (q : ι → (n → ℂ)) (x : Matrix n n ℂ) :
+    dephase (fun i => diagonal (q i)) (sigmaDiag p t x)
+      = sigmaDiag p t (dephase (fun i => diagonal (q i)) x) := by
+  apply dephase_sigmaDiag_commute p hp t
+  intro i
+  unfold diagPow
+  rw [diagonal_mul_diagonal, diagonal_mul_diagonal]
+  congr 1
+  funext j
+  exact mul_comm _ _
+
+/- ── 6. Audit conclusion ─────────────────────────────────────────────────-/
 
 /-- **Audit conclusion.**  The finite (Type I) shadow of λ's pointer law,
     proved from matrix algebra + trace cyclicity, NO project axioms:
@@ -238,7 +305,12 @@ theorem bornWeight_modAut_invariant (ρ : Matrix n n ℂ) [Invertible ρ]
         brick — a dephased state stays dephased, coherence does not regenerate);
       * `modAut_fixes_pointer`, `bornWeight_modAut_invariant` — each selected
         record is a fixed point of the flow, and the Born weights are constants
-        of the motion.
+        of the motion;
+      * `dephase_sigmaDiag_commute` — REAL-TIME persistence for **every t**: E
+        commutes with the genuine one-parameter modular flow σ_t (=ρ^{it}·ρ^{-it});
+      * `dephase_sigmaDiag_commute_diagonal` — in the einselected (diagonal)
+        pointer basis this is UNCONDITIONAL for all t: the selected record
+        persists for all time.
 
     Honest scope: Type I (finite n).  The Type III₁ continuum version —
     algebraic Born rule via the standard form / natural cone, and the genuine

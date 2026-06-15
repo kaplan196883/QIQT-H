@@ -1581,6 +1581,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — each selected record is a fixed point of the modular flow.
 #print axioms QIQTH.LambdaPointer.bornWeight_modAut_invariant
 -- expected: standard only — Born weights are constants of the modular motion (KMS invariance).
+#print axioms QIQTH.LambdaPointer.dephase_sigmaDiag_commute
+-- expected: standard only — REAL-TIME persistence ∀t: E commutes with the genuine one-parameter modular flow σ_t.
+#print axioms QIQTH.LambdaPointer.dephase_sigmaDiag_commute_diagonal
+-- expected: standard only — unconditional real-time persistence in the einselected (diagonal) pointer basis, ∀t.
 
 -- Free-field finite-mode instance (a, b, c)
 #print axioms QIQTH.FreeFieldRecord.holographic_bound
