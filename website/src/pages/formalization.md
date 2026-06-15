@@ -139,6 +139,8 @@ selection is stable under the modular dynamics.
 | `LambdaPointer.dephase_sigmaDiag_commute` | **persistence, $\forall t$**: $E$ commutes with the genuine real-time modular flow $\sigma_t(x)=\rho^{it}x\rho^{-it}$ — a dephased state stays dephased for all time, coherence never regenerates |
 | `LambdaPointer.dephase_sigmaDiag_commute_diagonal` | in the einselected (density-eigenbasis) pointer basis the persistence is **unconditional** for all $t$ — the selected record persists for all time |
 | `LambdaPointer.modAut_fixes_pointer` / `bornWeight_modAut_invariant` | each selected record is a **fixed point** of the flow, and the Born weights are **constants of the modular motion** |
+| `SelectionEvent.selects_exists_unique` | the **selection event**: an inverse-CDF selector from an actuality seed $s\in[0,1)$ picks **exactly one** record per seed (totality + uniqueness — single-world consistency) |
+| `SelectionEvent.volume_selects` | the uniform seed measure of record $k$ equals its Born weight $p_k$ — the selection **realizes Born** as an across-run frequency (the seed is λ; the selector is order-dependent, not equivariant, as the no-covariant-selector result requires) |
 
 <div class="note"><strong>What these add.</strong> They settle λ's law at the foundational level: Born reduces to
 state-supervenience (not capacity, not a counting rule); the covariance + contextuality structure is verified

@@ -97,10 +97,17 @@ density (exact decoherence). The decoherence map is then the $\omega$-preserving
 selection **persists for all time**: the decoherence map commutes with the real-time modular flow $\sigma_t$ for
 every $t$, so a records-definite state stays definite and coherence between pointer sectors never regenerates.
 
-Two honest caveats remain. First, persistence shows the actual record does not *un*-select under the dynamics,
-but not yet *why one* (rather than zero or two) record becomes actual in the first place — a constructor for the
-**selection event** is still open. Second, the theorem yields *that* there is one outcome, not *which*, and the
-derivation of the weights as across-run **frequencies** rests on an irreducible premise (the Born no-go).
+The **selection event** itself now has an explicit constructor too (`SelectionEvent.lean`): an inverse-CDF
+selector from an "actuality seed" $s\in[0,1)$ picks **exactly one** record per seed (totality "not zero" +
+uniqueness "not two" — the single-world consistency that separates this from Everett and from an inconsistent
+selector), and the uniform seed measure of record $k$ equals its Born weight $p_k$, so the selection *realizes*
+Born as an across-run frequency. The selector is order-dependent, not equivariant (as the no-covariant-selector
+result requires); the seed measure is order-blind.
+
+Two honest caveats remain — now in their *irreducible* form. First, the construction reduces the whole selection
+to one datum: *which seed is actual*. The seed **is** λ — the one primitive a non-dynamical single-world theory
+must take as given; its origin is not, and arguably cannot be, derived. Second, the weights enter as an input
+here; deriving them as across-run **frequencies** rests on a premise the Born no-go proves unremovable.
 
 ## 5. Born statistics
 

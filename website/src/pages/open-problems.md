@@ -56,14 +56,23 @@ single-world hidden-variable/modal *completion* of QM, genuine only once λ has 
   in the einselected basis, `dephase_sigmaDiag_commute_diagonal`). So a dephased, records-definite state **stays**
   dephased for all time — coherence between pointer sectors never regenerates, and the selected record is a fixed
   point of the dynamics with constant Born weights.
+- **The selection event has an explicit constructor** (`SelectionEvent.lean`): an inverse-CDF selector from an
+  "actuality seed" $s\in[0,1)$ that picks **exactly one** record per seed (`selects_exists_unique` — totality
+  "not zero" + uniqueness "not two", the single-world consistency that separates this from Everett and from an
+  inconsistent selector), with the uniform seed measure of record $k$ equal to its Born weight $p_k$
+  (`volume_selects`) — so the selection *realizes* Born as an across-run frequency. The selector is
+  deliberately order-dependent, not equivariant (exactly as the no-covariant-selector result requires), while
+  the seed measure is order-blind (covariant).
 
-**What is open.** Two residuals, both honestly hard. (i) The **selection event** itself — persistence shows the
-actual record does not *un*-select, but not *why one* (rather than zero or two) becomes actual; there is still
-no constructor that *produces* the single history. (ii) The derivation of the stable weights as genuine
-**across-run frequencies**, which the Born no-go (Gap 2) shows must rest on an irreducible premise.
+**What is open.** The two residuals are now sharply minimal. (i) The selection event is **constructed** — what
+remains irreducible is only *which seed is actual*: the seed **is** λ, the one primitive a non-dynamical
+single-world theory must take as given (its origin/actuality is not, and arguably cannot be, derived). (ii) The
+derivation of the weights as genuine **across-run frequencies** rests on an irreducible premise by the Born
+no-go (Gap 2). Both residuals are now pinned to their minimal, provably-unremovable form, not open hand-waves.
 
-**Difficulty.** The covariance/contextuality structure *and* the kinematic + persistence law are now done
-(finite); the selection-event constructor and the continuum realization (Gap 3) are the medium-to-hard residual.
+**Difficulty.** The covariance/contextuality structure, the kinematic + persistence law, *and* an explicit
+single-world Born-realizing selector are now done (finite); what is left is genuinely irreducible (the seed = λ;
+the strong Born premise) or the continuum realization (Gap 3).
 
 ## Gap 2 — Born from typicality (reduced, not closed)
 
@@ -120,10 +129,11 @@ that Mathlib lacks). Not a blocker for the conditional interpretation; the hones
 The original crux (H2 — capacity forbids records) is **retired as a category error**; the single outcome is
 λ's. λ is now **Type-III-native** (no forced trace), and its *kinematic* law is machine-checked: Takesaki's
 criterion fixes which pointer algebra carries the $\omega$-preserving conditional expectation, the Born weights
-are a genuine probability, and — the first dynamical piece — that selection **persists for all time** under the
-real-time modular flow (coherence never regenerates). What remains for λ to make QIQT-H a *theory* rather than
-a conditional completion: a constructor for the **selection event** (why *one* record becomes actual) and the
-derivation of the weights as **across-run frequencies**. **Born** is reduced (axiom-free) to a single
+are a genuine probability, the selection **persists for all time** under the real-time modular flow (coherence
+never regenerates), and the **selection event has an explicit single-world constructor** (exactly one record per
+actuality seed, with the seed measure realizing Born). What remains is now *irreducible* rather than open: the
+actuality seed itself **is** λ (the one primitive a non-dynamical single-world theory must take as given), and
+the weights-as-**across-run-frequencies** rest on a premise the no-go proves unremovable. **Born** is reduced (axiom-free) to a single
 state-supervenience premise with a no-go that some premise is unavoidable. The **continuum** (Type III₁,
 now via the standard form for λ) is the honestly-cited multi-year wall. The
 [machine-checked substrate](/formalization) is axiom-free and settles the covariance/contextuality/Born and
