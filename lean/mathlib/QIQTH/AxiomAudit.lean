@@ -2447,6 +2447,16 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — witnessed countermodel over H=ℂ (v=w=1): the cross term is nonzero, so the
 -- orthogonality hypothesis of bell_two_bit_strong_decoherence is NECESSARY (overlapping records ≠ strong).
 
+-- BornEquiprobable.lean — Born from symmetric equiprobability (audit candidate ii) (2026-06-15).
+#print axioms QIQTH.BornEquiprobable.norm_sum_orthonormal_sq
+-- expected: standard only — ‖∑_{i∈s} fᵢ‖² = |s| for an orthonormal family (the amplitude↔count identity).
+#print axioms QIQTH.BornEquiprobable.uniform_marginal_eq_sectorAmp_sq
+-- expected: standard only — the Zurek amplitude→count bridge: uniform-measure outcome marginal = squared
+-- sector amplitude (= Born weight); discharges the posited count=M·w_k of SelectionDynamics.born_from_uniform.
+#print axioms QIQTH.BornEquiprobable.born_from_equiprobability
+-- expected: standard only — symmetric equiprobability over an equal-amplitude orthonormal fine-graining gives
+-- Born empirical frequencies; residual = envariance symmetry + existence of the fine-graining (both Born-free).
+
 -- SBSSuppression.lean — redundancy (Quantum Darwinism) restores strong decoherence in the limit (2026-06-15).
 #print axioms QIQTH.SBSSuppression.offdiagonal_norm_le
 -- expected: standard only — the exponential bound ‖∏ z k‖ ≤ rᴺ on the joint off-diagonal of N fragments.

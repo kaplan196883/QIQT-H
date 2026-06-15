@@ -154,12 +154,20 @@ theorem qiqth_born_typicality_conditional
     audit):
       (i)   Canonical tracial typicality from CPW Type II structure.
       (ii)  Symmetric equiprobability on a natural decomposition of
-            the IC space.
+            the IC space.  *** NOW REALIZED *** in `QIQTH.BornEquiprobable`:
+            the uniform measure on an equal-amplitude orthonormal
+            fine-graining is a `CanonicalIcMeasure` whose `born_marginal`
+            is PROVED (the Zurek amplitude→count bridge, from
+            orthonormality) — discharging the previously-posited
+            `count = M·w_k`.  Residual: the envariance symmetry
+            (`Envariance`) + existence of the fine-graining; both Born-free.
       (iii) Holographic / modular construction from the canonical
             sector reference state σ_R.
 
-    The framework's open Born problem is to justify (i), (ii), or (iii)
-    — none of which is derivable from FQ + AQFT + holography alone. -/
+    With (ii) realized, the open Born problem narrows to: justify the
+    envariance symmetry (equal-amplitude ⇒ equiprobable) as physically
+    forced, or supply (i)/(iii) — none derivable from FQ + AQFT +
+    holography alone. -/
 theorem audit_summary : True := trivial
 
 end BornTypicality

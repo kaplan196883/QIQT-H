@@ -50,6 +50,8 @@ import QIQTH.CompressionLocality
 import QIQTH.NoBornFromNothing
 import QIQTH.EquivarianceGap
 import QIQTH.BornTypicality
+-- Born from symmetric equiprobability (audit candidate ii): the Zurek amplitude→count bridge:
+import QIQTH.BornEquiprobable
 -- Sub-theorems B, C for the Canonical IC Measure Principle (sub-theorem A — the content-free
 -- `TypicalityMackeyGleason` placeholder — was DELETED 2026-06, superseded by `EffectGleason`):
 import QIQTH.OperationalNoGo
