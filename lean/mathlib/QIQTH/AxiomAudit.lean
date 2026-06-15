@@ -1586,6 +1586,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LambdaPointer.dephase_sigmaDiag_commute_diagonal
 -- expected: standard only — unconditional real-time persistence in the einselected (diagonal) pointer basis, ∀t.
 
+-- WeakStrongSplit.lean — weak/strong decomposition of state-supervenience (2026-06-15).
+#print axioms QIQTH.WeakStrongSplit.weight_naturality
+-- expected: standard only — WEAK premise (naturality) holds for every f, hence is f-blind: cannot force Born.
+#print axioms QIQTH.WeakStrongSplit.weak_underdetermines_born
+-- expected: standard only — the α-family (id vs (·)²) witnesses weak ⇏ Born (disagree at p=(3/4,1/4)).
+#print axioms QIQTH.WeakStrongSplit.sq_not_refinementAdditive
+-- expected: standard only — STRONG premise (refinement-additivity) discriminates Born from the α-family witness.
+#print axioms QIQTH.WeakStrongSplit.refinementAdditive_nsmul
+-- expected: standard only — refinement-additivity linearizes f(n·x)=n·f(x): the mechanism selecting Born.
+
 -- Free-field finite-mode instance (a, b, c)
 #print axioms QIQTH.FreeFieldRecord.holographic_bound
 -- expected: standard only — (a) N free-fermion modes ⇒ log₂ #Atoms = N ≤ Q_R

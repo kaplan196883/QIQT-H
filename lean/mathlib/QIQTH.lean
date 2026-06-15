@@ -122,6 +122,10 @@ import QIQTH.FiniteModularTheory
 -- probability, the dephasing map is the ω-preserving conditional expectation;
 -- NO axioms beyond the standard three:
 import QIQTH.LambdaPointer
+-- The weak/strong split of state-supervenience: naturality is f-blind (cannot
+-- force Born), the α-family witnesses it, refinement-additivity is the strong
+-- discriminating premise that linearizes; NO axioms beyond the standard three:
+import QIQTH.WeakStrongSplit
 -- Free-field finite-mode instance: (a) holographic record count, (b) Gaussian
 -- decoherence decay, (c) finite-mode Lorentz action — concrete theorems
 -- instantiating parts of the LorentzSelection AQFT axioms; standard axioms only:
