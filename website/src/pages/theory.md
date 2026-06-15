@@ -2,7 +2,7 @@
 layout: ../layouts/Deep.astro
 title: The theory
 eyebrow: The mathematics
-description: The finite-information axiom (FQ), the regional cost functional χ_R as Araki relative entropy, Type II regional algebras, and the conditional single-record theorem.
+description: The finite-information axiom (FQ) as a record stage, the regional cost functional χ_R as Araki relative entropy, Type II regional algebras, the retirement of the H2 conjecture, and single outcomes by λ-selection.
 ---
 
 The framework has three moving parts: a capacity axiom (the finite record *stage*), a cost functional for
@@ -50,24 +50,23 @@ operators to the entropy-reduction identity.
 part does <strong>not</strong> include the Type&nbsp;II regional construction itself, the (FQ) axiom, or
 the conjecture below.</div>
 
-## 3. The crux: macroscopic definiteness (H2)
+## 3. The retired conjecture: macroscopic definiteness (H2)
 
-Here is the load-bearing physical claim. Let a "record" be a stable, redundantly-copied, macroscopically
-distinguishable pointer state of the form decoherence leaves behind. The **Macroscopic Definiteness
-Conjecture** states:
+The program's original load-bearing claim — the **Macroscopic Definiteness Conjecture** — was that two or
+more distinct macroscopic records being *actual* together in a region would have joint cost exceeding the
+capacity $Q_R$, so finite capacity itself forces a single outcome. **This is now retired as a category
+error** (2026-06-15), and we record the retirement plainly rather than keep it as "the crux."
 
-> Two or more distinct macroscopic records being *actual* together in a region would have joint cost
-> $\chi_R$ exceeding the region's capacity $Q_R$. (This bounds the region's *actual* content — not the wave
-> function $\Phi$, which keeps every branch; a superposition of records is one vector and costs no extra.)
-
-This is the step that does the real work, and it is a **conjecture**. It asserts that the information cost
-of genuine macroscopic multiplicity is not merely large but specifically larger than the holographic
-ledger allows. One subtlety is load-bearing: the cost in this inequality need not be the same $\chi_R$ the
-Lean development computes. A plain relative-entropy or data-processing estimate of two readable records
-yields only about $\log 2$ of classical information, not an area-scale $Q_R$. The conjecture is precisely
-that the right *instantiation* cost of genuine macroscopic multiplicity is area-scale — and identifying
-that cost measure is itself part of the problem. Establishing H2, even in a model, is the central
-[open problem](/open-problems).
+Why it fails: a holographic bound counts *independent* degrees of freedom (joint entropy / code dimension),
+**not** a sum of redundant classical records — $R$ redundant copies of one fact carry joint entropy $H(X)$,
+not $R\,H(X)$ (machine-checked). Ordinary, weakly-gravitating record entropy is moreover capped at
+$\sim(A/\ell_P^2)^{3/4}$, parametrically *below* $A/4\ell_P^2$ (only a black hole saturates $A/4$, and it has
+no records); for the observable universe that is $\sim 10^{91}$ against $\sim 10^{122}$ — a permanent ~31-order
+gap, and the universe runs at $\sim 10^{-18}$ of its holographic capacity. And the $\log 2$ data-processing
+estimate confirms two records cost about *one bit* more than one, not an area-scale $Q_R$. Finally, by exact
+unitary linearity, finite capacity can neither forbid a superposition nor select a branch. So $Q_R$ does
+**not** do the single-outcome work; it is the finite record *stage* (a cardinality bound). The single
+outcome is supplied by $\lambda$ — the next section.
 
 ## 4. Single record — by selection, not by capacity
 
@@ -76,16 +75,12 @@ redundantly objective), the content the region *realizes* is one definite macros
 keeps all branches and evolves exactly unitarily, with no collapse term. **The single record is supplied by
 the non-dynamical selector $\lambda$**, an Everett-like selection among the unitarily-evolved alternatives.
 
-<div class="note"><strong>Correction (2026): the "capacity forbids two records" exclusion is withdrawn.</strong>
-An earlier version drew the single-record conclusion from a capacity <em>exclusion</em> — two actual records
-"exceeding $Q_R$." That is a <strong>category error</strong>: the holographic bound counts independent
-degrees of freedom, not a sum of redundant classical records (R copies of one fact carry H(X), not R·H(X)),
-and ordinary record entropy is capped at ~$A^{3/4}$ (~$10^{91}$) versus ~$10^{122}$ for the bound — a
-permanent ~31-order gap; the universe runs at ~$10^{-18}$ of capacity. So capacity does not exclude a second
-actual record. The exclusion of two <em>actual</em> records reduces to local single-valuedness (a classical
-carrier holds one value), itself supplied by λ. What the Lean development machine-checks is a finite,
-additive-cost <em>counting</em> bound (at most one member of a saturating family) — an honest <em>finite
-stage</em>, not a derivation that capacity overflows on two macroscopic records.</div>
+<div class="note"><strong>Where the exclusion really comes from.</strong> Since capacity does not forbid two
+records (§3), what makes a region's <em>actual</em> content single-valued is just that a classical carrier
+holds <em>one</em> value — local single-valuedness — and which value is the actual one is supplied by λ. The
+Lean development machine-checks a finite, additive-cost <em>counting</em> bound (at most one member of a
+saturating family), an honest <em>finite stage</em>; it does <strong>not</strong> derive that capacity
+overflows on two macroscopic records.</div>
 
 This is worth stating carefully, because "one outcome" and "unitary evolution" sound contradictory. The
 global wave function evolves unitarily throughout; the single *actual* record is a [selection](/selection)
@@ -101,15 +96,21 @@ is one outcome, not *which*, and with what frequency.
 
 ## 5. Born statistics
 
-That outcome $k$ occurs across runs with frequency $|c_k|^2$ is the **Born rule**. QIQT-H aims to recover
-it from typicality: over the measure of microscopic initial conditions compatible with a given preparation,
-the realized single-record outcome has frequency $|c_k|^2$ for *typical* initial data. A Lorentz-covariant
-such measure for free fields is the linchpin, and it is **open**. Born statistics are not assumed, but they
-are not yet derived either.
+That outcome $k$ occurs across runs with frequency $|c_k|^2$ is the **Born rule**. QIQT-H recovers it from
+typicality: over the measure of microscopic initial conditions compatible with a given preparation, the
+realized single-record outcome has frequency $|c_k|^2$ for *typical* initial data. Substantial progress is now
+machine-checked (axiom-free): a Lorentz-covariant, σ-additive, decoherent-histories-*consistent* Born measure
+on the free-field record net **exists and is verified**, and Born is **reduced** to a single
+*state-supervenience* premise — via the Zurek envariance symmetry (proved) and an orthonormality bridge — with
+a [no-go](/born) showing some such premise is unavoidable (naturality alone is not enough; refinement-additivity
+is what fixes the square). What remains: justifying that premise as *forced* rather than merely motivated, and
+the continuum/interacting realization. Born is an honest *reduction*, not yet a derivation from nothing.
 
 ---
 
-The four-link status, at a glance: **(FQ)** postulate · **$\chi_R$ calculus** machine-verified ·
-**H2 conjecture** the crux, open · **single record** conditional theorem (+ dynamical-realization gap) ·
-**Born** open. The [formalization](/formalization) page documents exactly which pieces are checked; the
-[open problems](/open-problems) page lays out the four gaps and what each one buys.
+The status, at a glance: **(FQ)** postulate · **$\chi_R$ calculus** machine-verified · **H2** *retired*
+(category error — capacity does not forbid records) · **single record** supplied by λ (selection postulate;
+covariance + contextuality + no-signaling machine-checked; dynamical-realization gap open) · **Born** reduced
+(axiom-free) to a state-supervenience premise. The whole development is **axiom-free**. The
+[formalization](/formalization) page documents exactly which pieces are checked; the
+[open problems](/open-problems) page lays out the remaining frontier (λ's law, the continuum).

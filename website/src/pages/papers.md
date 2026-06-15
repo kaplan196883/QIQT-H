@@ -10,9 +10,12 @@ description: The QIQT-H foundations paper, the formalization companion in prepar
 **One Wave Function, One World: Finite-Information Regional Algebras and the Macroscopic World from
 Holographic Constraint.** Paweł Kapłański.
 
-The primary statement of the program: the finite-information premise, the regional cost functional
-$\chi_R$, the Macroscopic Definiteness Conjecture, the conditional single-record theorem, and an honest
-account of what remains [open](/open-problems). Prepared for arXiv (quant-ph; cross-listed math-ph, gr-qc).
+The primary statement of the program: the $(\Phi,\lambda)$ single-world no-collapse ontology, the
+finite-information premise as a record *stage*, the regional cost functional $\chi_R$, and an honest account
+of what remains [open](/open-problems). It includes the **retirement of the Macroscopic Definiteness
+Conjecture** (capacity does not forbid records — a category error) and reframes the single outcome as λ's, with
+the machine-checked covariant Born / consistency results as the substantive contribution. Prepared for arXiv
+(quant-ph; cross-listed math-ph, gr-qc).
 
 **[Read the PDF](/QIQT_Foundations_Paper.pdf)**
 &nbsp;·&nbsp; arXiv-ready preprint. The arXiv link will be posted here on submission; for now the current

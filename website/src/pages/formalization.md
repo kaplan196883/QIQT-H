@@ -10,11 +10,14 @@ machine-verified for the free-field coherent-state sector. The development carri
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
 (`propext`, `Classical.choice`, `Quot.sound`).
 
-<div class="note"><strong>Scope.</strong> What is verified is the standard borrowed mathematics,
-Tomita–Takesaki modular theory and Araki relative entropy in the free-field coherent sector,
-<strong>not</strong> the dressed Type&nbsp;II regional framework, the holographic axiom (FQ), the
-Macroscopic Definiteness Conjecture, or Born-from-typicality. It strengthens the floor the argument stands
-on; it does not close the <a href="/open-problems">open problems</a>.</div>
+<div class="note"><strong>Scope.</strong> The verified, axiom-free corpus now covers both the borrowed
+mathematics (Tomita–Takesaki modular theory and Araki = CGP relative entropy, free-field coherent sector) and
+the program's own results: the covariant σ-additive <em>consistent</em> Born measure on the record net, the
+Born-from-typicality reduction (to a state-supervenience premise, with a no-go), and λ's
+covariance/contextuality structure. What it does <strong>not</strong> establish: the holographic axiom (FQ),
+λ's <em>dynamical</em> law, or the continuum (Type III₁). It does not close the
+<a href="/open-problems">open problems</a>. (The original Macroscopic Definiteness Conjecture is
+<a href="/open-problems">retired</a> as a category error, not a pending verification target.)</div>
 
 ## The headline result
 

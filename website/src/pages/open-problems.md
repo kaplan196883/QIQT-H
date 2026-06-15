@@ -2,93 +2,95 @@
 layout: ../layouts/Deep.astro
 title: Open problems
 eyebrow: The frontier
-description: The four gaps between a research program and a theory — the H2 crux, dynamical realization, Born from typicality, and FQ grounding — and what closing each one buys.
+description: The honest frontier after H2 was retired — λ's law (the central problem), Born from typicality (reduced to one premise), and the continuum (Type III₁). What is closed, what is reduced, and what is a wall.
 ---
 
-QIQT-H is a coherent, *conditional* research program. The [formalization](/formalization) strengthens the
-floor it stands on; it closes none of the gaps below. There are four, in load-bearing order. The first is
-decisive: the no-collapse conclusion has no bite until it holds.
+QIQT-H is a coherent, *conditional* single-world interpretation. This page is current as of the **2026-06-15
+correction**, in which the program's original headline — that finite holographic capacity *forbids* two
+macroscopic records — was **retired as a category error** (see the note below). The remaining gaps are about
+giving the actuality selector **λ** a precise law and reaching the continuum. The
+[formalization](/formalization) is now axiom-free and settles several pieces; the rest is named honestly.
 
-## Gap 1 — Macroscopic definiteness (H2): the crux
+<div class="note"><strong>Retired: H2 / "capacity forbids two records" (the former crux).</strong> The old
+Gap 1 — that a $\ge 2$-record content costs more than $Q_R$, so finite capacity selects a single outcome —
+is <strong>withdrawn as a category error</strong>. A holographic bound counts <em>independent</em> degrees of
+freedom (joint entropy / code dimension), not a sum of redundant classical records ($R$ copies of one fact
+carry $H(X)$, not $R\,H(X)$ — machine-checked); ordinary record entropy is capped at $\sim A^{3/4}$,
+parametrically below $A/4$ (the universe runs at $\sim 10^{-18}$ of capacity); and finite capacity with exact
+unitary linearity cannot select a branch. The single outcome is supplied by <strong>λ</strong>, not by
+capacity; $Q_R$ is the finite record <em>stage</em> (a cardinality bound), and is even
+<a href="/formalization">machine-checked</a> to be optional for λ's measure (which needs only finiteness, not
+the area-bound). So H2 is no longer an open problem to establish — it is a resolved (negative) result.</div>
 
-**Claim to establish.** A regional content carrying two or more operationally distinct macroscopic records
-has cost $\chi_R > Q_R$, exceeding the holographic capacity of any region that would host it.
+## Gap 1 — λ's law: the central open problem
 
-**Why decisive.** Finite capacity *alone* does not forbid two-record superpositions: a finite-dimensional
-Hilbert space happily contains superpositions of many distinguishable vectors. H2 is the nonstandard extra
-claim that physically *instantiating* a two-record state costs strictly more than $Q_R$. Until this holds,
-the conclusion is empty.
+**Claim to establish.** Give the non-dynamical actuality selector λ a precise *law*: a Poincaré-covariant
+typicality measure on record histories, together with a *dynamical realization* showing that actual unitary
+measurement evolution yields exactly one admissible record (not zero, not two), with the admissible space
+dynamically invariant.
 
-**What is done toward it.** Essentially nothing direct. The CGP calculus gives a *calculable* cost for
-coherent excitations but no macroscopic lower bound. A data-processing / readout-channel route yields only
-about $\log 2$ of classical information, not an area-scale violation.
+**Why decisive.** With H2 retired, λ *is* the single-outcome mechanism. As a bare primitive it makes QIQT-H a
+single-world hidden-variable/modal *completion* of QM, genuine only once λ has a law — otherwise it is
+"Everett minus the unrealized branches, via a primitive λ."
 
-**What it buys.** This turns the thesis from a conditional program into a genuine no-collapse *result*. It
-is the headline.
+**What is done toward it.** A great deal, and machine-checked (axiom-free):
 
-**Difficulty.** Hard — genuine new physics. Likely a distinguishability-volume or modular-Hamiltonian
-estimate rather than a data-processing argument. Formalizable only once a concrete cost model exists.
+- The covariant **typicality measure exists** — a Poincaré-covariant, σ-additive, decoherent-histories-*consistent*
+  Born measure on the free-field record net (`weylBit_typicalityMeasure_exists`, Lorentz-invariant).
+- **OP3b (covariant gluing) resolved conceptually**: a covariant *measure* exists but no covariant *selector*
+  (the S² obstruction) — so λ is necessarily a symmetry-breaking *sample*, not an equivariant function; and the
+  construction is **contextuality-safe** with **state-independent no-signaling** (holds for entangled states).
 
-## Gap 2 — Dynamical realization
+**What is open.** λ's *selection* is still a primitive — there is no constructor and no dynamical law that
+*produces* the one actual history; the **dynamical realization** (one record, not zero/two, from the actual
+unitary dynamics, on a dynamically-invariant admissible space) is the load-bearing residual.
 
-**Claim to establish.** Even granting H2, actual *unitary* measurement evolution produces exactly one
-admissible record (not zero), and the admissible-state space is invariant under the dynamics.
+**Difficulty.** The conceptual covariance/contextuality structure is done; the dynamical-realization core is
+medium–hard and **partly formalizable in finite dimensions** — the best near-term target.
 
-**Why it matters.** The conditional theorem is a *static exclusion*: it rules out two-record states, but it
-does not show the measurement dynamics *lands on* a single-record state, nor that one rather than zero
-records appears, nor that a concrete interaction maps microscopic initial conditions to a single record.
+## Gap 2 — Born from typicality (reduced, not closed)
 
-**What is done toward it.** The finite-dimensional no-collapse representation and the record-net skeleton
-are the finite shadow; $U_t\,\mathcal{K}\subseteq\mathcal{K}$ (`modUnitary_mapsTo_K`, the modular flow
-preserves the standard subspace) is a continuum invariance fragment.
+**Claim to establish.** Among admissible microscopic initial conditions, the outcome-$i$ subset carries Born
+weight $|c_i|^2$.
 
-**What it buys.** Closes the loop from *constraint* to *mechanism* — makes "no collapse" a dynamical
-statement, not just a kinematic exclusion.
+**What is done toward it.** This is now **reduced to a single premise**, axiom-free: the Born weight is derived
+from **state-supervenience** via the Zurek envariance symmetry (*proved*, not assumed) and an orthonormality
+bridge that forces the branch count to track the amplitudes (`StateSupervenience`, `EnvarianceJustification`,
+`BornEquiprobable`), with a finite law of large numbers (`BornTypicalityFinite`). Naturality alone is
+*necessary but not sufficient* — an amplitude-power family also respects it — so Born additionally needs
+**refinement-additivity** (exactly what distinguishes the square). A **no-go** (`NoBornFromNothing`) proves
+that *some* such premise is unavoidable.
 
-**Difficulty.** Medium–hard, and **partly formalizable in finite dimensions now** — the best near-term Lean
-target.
+**What is open.** Whether state-supervenience is *forced* by the (Φ,λ) ontology rather than merely motivated
+(a genuine philosophical question, not a formal gap), and the continuum/interacting realization of the measure.
 
-## Gap 3 — Born from typicality
+**Difficulty.** The finite reduction is done; the residual is interpretive + continuum.
 
-**Claim to establish.** Among admissible microscopic initial conditions, the outcome-$i$ subset carries
-Born weight $|c_i|^2 = \omega_\Phi(P_i)$.
+## Gap 3 — The continuum (Type III₁) and FQ grounding
 
-**Why it matters.** H2 and Gap 2 give *single outcomes* but no *statistics*, so the theory is not yet
-empirically adequate. This is logically independent of H2 — single-outcome exclusion does not need Born —
-but it is mandatory for predictions.
+**Claims.** (a) Extend the modular/entropy and record-measure results from the free-field coherent sector to
+*general* states and the Type III $\to$ Type II continuum; (b) *ground* the bound $S_{\mathrm{ren}}\le Q_R$
+rather than postulate it.
 
-**What is done toward it.** A finite typicality skeleton (`BornTypicalityFinite`: a finite weak law of
-large numbers / Chebyshev bound) plus the finite Born representation, machine-checked. But the bare
-*existence* of a recorded-history net is trivially true; the genuine problem is the **realization**: a
-measure extracted from a fixed relativistic field theory and geometry, Born-pinned to an actual global
-state, equivariant under a genuine Poincaré action, and Lorentz-invariant.
+**What is done toward it.** The finite and free-field constructions are complete and axiom-free; the Type II
+crossed-product *entropy* (CLPW) is the borrowed substrate.
 
-**What it buys.** Makes the theory predictive. This is the prize-aligned continuum track.
+**What is open.** The interacting / general-state Type III₁ realization — and note that holography is now
+machine-checked to be **scaffolding**: λ's covariant measure needs only *finiteness*, not the area-bound, so a
+genuinely load-bearing role for the holographic *grading* (beyond grounding the finiteness physically and
+supplying the Type II substrate) would have to be demonstrated.
 
-**Difficulty.** Hard (continuum). The finite track is done; the continuum realization is the cited frontier.
-
-## Gap 4 — FQ grounding and the continuum
-
-**Claims.** (a) *Ground* the bound $S_{\mathrm{ren}}\le Q_R$ rather than postulate it; (b) extend the
-modular and entropy results from free-field coherent states to *general* states and the Type III $\to$
-Type II continuum.
-
-**Why it matters.** (FQ) is currently a postulate — the crossed-product construction gives the Type II
-*entropy*, not the *bound* — and the formalization is free-field and coherent only.
-
-**What it buys.** Weakens the central assumption; the Type III / unbounded-modular formalization would be a
-Mathlib-grade contribution in its own right.
-
-**Difficulty.** Very hard — it needs unbounded operator theory that Mathlib currently lacks (general
-two-state relative modular operators require unbounded GNS). The cited frontier; not a blocker for the
-conditional paper.
+**Difficulty.** Very hard — a multi-year Mathlib-grade wall (unbounded operator theory, Type III classification
+that Mathlib lacks). Not a blocker for the conditional interpretation; the honestly-cited frontier.
 
 ---
 
 ## In one paragraph
 
-QIQT-H becomes a *theory*, rather than a conditional program, exactly when three things land: **H2**, that
-a $\ge 2$-record regional content exceeds the holographic capacity, is quantitatively established; the
-**dynamical realization** connects that static exclusion to actual single-outcome unitary evolution; and
-**Born statistics** are derived from typicality. The [machine-checked substrate](/formalization)
-strengthens the floor; it closes none of these.
+The original crux (H2 — capacity forbids records) is **retired as a category error**; the single outcome is
+λ's. QIQT-H becomes a *theory* rather than a conditional completion when **λ gets a law** — its covariance and
+contextuality structure are already machine-checked, but its *selection* is still primitive and the
+*dynamical realization* is open. **Born** is reduced (axiom-free) to a single state-supervenience premise with
+a no-go that some premise is unavoidable. The **continuum** (Type III₁) is the honestly-cited multi-year wall.
+The [machine-checked substrate](/formalization) is axiom-free and settles the covariance/contextuality/Born
+pieces; it does not close λ's law or the continuum.
