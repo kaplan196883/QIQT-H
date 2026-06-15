@@ -1602,6 +1602,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SelectionEvent.volume_selects
 -- expected: standard only — uniform seed measure of record k = its Born weight (selection realizes Born frequency).
 
+-- ContinuumLambda.lean — Stage 1 of the continuum λ-law (2026-06-15): on the genuine RvD Δ^{it} flow.
+#print axioms QIQTH.ContinuumLambda.modAutOp_add
+-- expected: standard only — modular automorphism σ_t = Ad(Δ^{it}) is a one-parameter group.
+#print axioms QIQTH.ContinuumLambda.modAutOp_fixes_iff_commute
+-- expected: standard only — continuum Takesaki criterion σ_t(A)=A ⟺ A commutes with Δ^{it}.
+#print axioms QIQTH.ContinuumLambda.modAutOp_fixes_specProj
+-- expected: standard only — spectral pointer projections are fixed by the continuum modular flow ∀t.
+#print axioms QIQTH.ContinuumLambda.dephaseOp_specProj_commute
+-- expected: standard only — CONTINUUM PERSISTENCE: decoherence map commutes with σ_t ∀t (spectral pointers, unconditional).
+
 -- Free-field finite-mode instance (a, b, c)
 #print axioms QIQTH.FreeFieldRecord.holographic_bound
 -- expected: standard only — (a) N free-fermion modes ⇒ log₂ #Atoms = N ≤ Q_R

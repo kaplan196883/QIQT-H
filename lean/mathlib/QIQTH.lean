@@ -130,6 +130,11 @@ import QIQTH.WeakStrongSplit
 -- actuality seed — exactly one record per seed (single-world consistency) and
 -- the uniform seed measure pushes to Born; NO axioms beyond the standard three:
 import QIQTH.SelectionEvent
+-- Continuum λ-law (Stage 1 of CONTINUUM_LAMBDA_ROADMAP): the modular automorphism
+-- σ_t = Ad(Δ^{it}) on the genuine continuum modular flow, the continuum Takesaki
+-- criterion, and continuum persistence (decoherence map commutes with σ_t ∀t,
+-- unconditional for spectral pointers); NO axioms beyond the standard three:
+import QIQTH.ContinuumLambda
 -- Free-field finite-mode instance: (a) holographic record count, (b) Gaussian
 -- decoherence decay, (c) finite-mode Lorentz action — concrete theorems
 -- instantiating parts of the LorentzSelection AQFT axioms; standard axioms only:
