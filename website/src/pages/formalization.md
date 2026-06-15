@@ -99,6 +99,33 @@ operators <em>A(u,s) = (I + sW(u))/2</em> are <em>effects</em>, not projectors, 
 generalized-measurement history; the projector/Boolean-record content is separate. These are exact algebraic
 consistency results for the free/coherent sector — not a proof of macroscopic classicality.</div>
 
+### Born from typicality — the symmetry / state-supervenience reduction
+
+The Born weights reduced from typicality to a single state-supervenience premise (with a no-go that *some*
+premise is unavoidable). Born is **input**, not derived; these establish what it reduces to.
+
+| theorem | statement |
+| --- | --- |
+| `RedundancyCompressible.card_redundantCodewords` | $R$ redundant copies of a record are distinguishable in $\lvert X\rvert$ ways, not $\lvert X\rvert^R$ — redundancy is compressible (the category-error core) |
+| `RedundancyCompressible.naive_overcounts` | the naive $R\log\lvert X\rvert$ strictly exceeds the true $\log\lvert X\rvert$ |
+| `EnvarianceJustification.envariance_swap_invariant` | the system swap, undone by the environment counter-swap, fixes the state **iff** the swapped amplitudes are equal (Zurek envariance, *proved* not assumed) |
+| `BornEquiprobable.born_eq_equiprob` | for an equal-amplitude orthonormal fine-graining, the Born weight $=$ the equiprobable branch-count fraction (the amplitude→count bridge) |
+| `StateSupervenience.NaturalTypicality.envariance_equiprob` | naturality $+$ a state-fixing symmetry $\Rightarrow$ equal-amplitude outcomes are equiprobable |
+
+### λ's law: covariance & contextuality (OP3b)
+
+| theorem | statement |
+| --- | --- |
+| `CovariantGluing.no_covariant_selector` | no equivariant $\Phi\mapsto\lambda$ selector when the symmetric state's histories form a nontrivial orbit (the S² obstruction) — so $\lambda$ is a symmetry-breaking *sample* of the covariant law, not a covariant function |
+| `ContextualitySafe.contextuality_safe` | a quantum/record correlation $>2$ (Tsirelson) has **no** global value-map — assigning values only to the actual context is forced |
+| `Fock.bell_no_signaling_state` | no-signaling is **state-independent**: for *any* (entangled) global state, summing Bob's record outcome leaves Alice's marginal independent of Bob's setting |
+
+<div class="note"><strong>What these add.</strong> They settle λ's law at the foundational level: Born reduces to
+state-supervenience (not capacity, not a counting rule), and the covariance + contextuality structure is
+verified (covariant measure, no covariant selector; no global value-map; state-independent no-signaling). The
+single outcome is λ's; the holographic bound is the finite record <em>stage</em> only. The remaining gaps are
+the continuum (Type III₁) and the interacting case — hard mathematics, not foundational coherence.</div>
+
 ## Reproduce the verification
 
 ```bash

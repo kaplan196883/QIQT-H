@@ -5,13 +5,16 @@ eyebrow: The interpretation, in plain language
 description: Probabilities |c_k|² as typicality, not a dice-roll — the one ingredient Born needs, why it cannot be avoided, and why it is nonetheless unique and forced. The honest version.
 ---
 
-There is one wave function, it never collapses, and it just keeps evolving smoothly. The twist that lets a
-*single* world survive: a bounded region of space holds only finite information, so it physically cannot
-carry two macroscopically distinct records at once. After decoherence, only one record fits. So each run,
-**you** — who are just a large, redundant record inside the wave function — end up *being* one outcome. Not
-because the universe reached in and picked one, but because there is only room for you to be one. (That this
-finite-capacity bound really forbids the two-record state is the program's [open crux](/theory), the
-Macroscopic Definiteness Conjecture — assumed here.)
+There is one wave function, it never collapses, and it just keeps evolving smoothly. Decoherence makes the
+macroscopic records non-interfering and redundantly objective — but that does **not** make one of them
+*actual*. What does is a single non-dynamical fact, $\lambda$: of the many records the wave function carries,
+$\lambda$ marks exactly one as the actual world. So each run, **you** — a large, redundant record inside the
+wave function — *are* one outcome. Not because the universe reached in and collapsed it, and not (a 2026
+correction we make honestly) because finite capacity *forbids* the others: the holographic bound only limits
+how *many* distinguishable records a region can hold, not whether two can be actual — it is vastly too loose
+for that (the universe runs at $\sim 10^{-18}$ of its capacity; see [the idea](/idea)). The "finite capacity
+forbids two records" conjecture is **retired** as a category error. The single outcome is $\lambda$'s; the
+wave function keeps every branch, exactly unitarily.
 
 ## So what is a "probability"?
 
@@ -128,4 +131,10 @@ The squared-amplitude measure is an irreducible posit — and we <em>prove</em> 
 weakness peculiar to this program: Everett, Bohmian mechanics, and the decision-theoretic approaches all need
 exactly this one ingredient. What the <a href="/papers">machine-checked work</a> adds is precision — that this
 single, natural assumption is <em>all</em> you need, that nothing weaker works, and that it makes Born unique.
-The status on the chain is <a href="/open-problems">open · reduced</a>, not closed.</div>
+<strong>2026 update.</strong> The posit has now been driven one level deeper, axiom-free: the squared-amplitude
+weight is itself reduced to <em>state-supervenience</em> (the typicality of an outcome depends only on the
+state) — via the Zurek envariance symmetry (proved, not assumed) and an orthonormality bridge that forces the
+branch count to track the amplitudes. Naturality alone is necessary but <em>not</em> sufficient (an
+amplitude-power family also respects it); Born additionally needs refinement-additivity, exactly what
+distinguishes the square. And a no-go (you cannot get Born from nothing) shows <em>some</em> such premise is
+unavoidable. The status on the chain is <a href="/open-problems">open · reduced</a>, not closed.</div>

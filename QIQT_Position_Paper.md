@@ -7,6 +7,20 @@ keywords: [foundations of quantum mechanics, holographic principle, Bekenstein-B
 
 # One Wave Function, One World: How the Holographic Information Bound Selects the Macroscopic World
 
+> **SUPERSEDED (2026-06-15).** This position paper predates the retirement of the central conjecture. Its
+> framing — that the holographic bound *selects*, or that a region "cannot carry two macroscopically distinct
+> records," or that a $\ge 2$-record content "exceeds $Q_R$ and is not instantiable" — has been **withdrawn as
+> a category error**: a holographic bound counts *independent* degrees of freedom (joint entropy / code
+> dimension), not a sum of redundant classical records ($R$ redundant copies of one fact carry $H(X)$, not
+> $R\,H(X)$ — machine-checked); ordinary record entropy is capped at $\sim (A/\ell_P^2)^{3/4}$, parametrically
+> below $A/4\ell_P^2$ (the universe runs at $\sim 10^{-18}$ of capacity); and finite capacity with exact
+> unitary linearity cannot select a branch. **The single outcome is supplied by $\lambda$ alone; $Q_R$ is the
+> finite record *stage* (a cardinality bound), not a selection or exclusion mechanism.** The current, honest
+> treatment is in **`QIQT_Foundations_Paper.md`** (abstract; §1.2–1.3; §7.6 — the $A^{3/4}$ Lemma and the
+> retirement of Open Problem 3). Read this document only as a historical snapshot of the pre-retirement
+> framework; the abstract below is already partly corrected (it disavows the naive "two records exceed $Q_R$"
+> argument), but the body retains the superseded "selects/forbids" language throughout.
+
 *A note on the title.* The word **"selects"** states the program's **target**, not an established theorem. At the present stage the holographic bound provably does the weaker, non-redundant job of *constraining* the macroscopic world — it bounds the number of mutually distinguishable regional records ($\# \le e^{Q_R}$) — while *which* single record is actual is supplied by a separate non-dynamical actuality fact $\lambda$ (the honest division of labor set out below). The bound would *select* the macroscopic world in the full sense only if the finite-capacity constraint, together with einselection, can be strengthened into a genuine macroscopic *superselection rule* consistent with exact unitarity — the central open conjecture (Open Problem 3; companion paper §7.6). We keep the stronger word in the title because it names the thesis the program is built to establish; the body is scrupulous about the gap between target and theorem.
 
 ## Abstract
