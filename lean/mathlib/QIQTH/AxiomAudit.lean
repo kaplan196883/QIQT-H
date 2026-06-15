@@ -2474,6 +2474,13 @@ namespace QIQTH.AxiomAudit
 -- fragment of Born; naturality is necessary but NOT sufficient (α-family T_q is natural+equiprob, non-Born) —
 -- Born also needs refinement-additivity (RefinementBorn), equal-norm canonicity, continuity, independence.
 
+-- HolographyScaffolding.lean — how much holography λ's law needs: only finiteness, not the area-bound (2026-06-15).
+#print axioms QIQTH.HolographyScaffolding.measure_needs_only_finiteness
+-- expected: standard only — λ's law (the σ-additive Born measure) exists for any finite-fiber net, with NO
+-- area/ℓ_P/Q_R in hypothesis or proof; holography is sufficient grounding for the finiteness, not required.
+#print axioms QIQTH.HolographyScaffolding.records_finite_of_holographic_bound
+-- expected: standard only — the holographic count bound (inject into Fin ⌊e^{Q_R}⌋) ⇒ finiteness (sufficiency).
+
 -- WeylBitBell.lean — OP3b concrete Bell embedding: no-signaling FROM the record measure (2026-06-15).
 #print axioms QIQTH.Fock.bell_no_signaling_state
 -- expected: standard only — no-signaling is STATE-INDEPENDENT: for ANY global state ψ (entangled included),
