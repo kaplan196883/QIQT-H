@@ -111,6 +111,36 @@ capacity <em>alone</em> does <strong>not</strong> select a unique realm (distinc
 bases exist); capacity <em>plus einselection</em> (the decoherence-selected pointer basis) does. Einselection
 is an input, not yet derived — so realm uniqueness is reduced to it, not closed.</div>
 
+## The λ-law, now machine-checked
+
+What was, a year ago, a bare actuality postulate is now a *law whose every checkable piece is machine-verified*
+(Lean&nbsp;4&nbsp;/&nbsp;Mathlib, axiom-free), at the **finite**, the **one-particle continuum** (the bounded
+modular flow $\Delta^{it}$), *and* the **second-quantized free-field** ($\Gamma(\Delta^{it})$, a unitary group)
+levels. The crossed-product "Type&nbsp;II dressing" idea for λ is retired as a category error; λ is
+**Type-III-native**, riding the standard form and the modular automorphism. The verified law:
+
+1. **Which records (kinematics).** *Which* pointer algebra carries λ's records is fixed by **Takesaki's
+   criterion** — the modular flow fixes a pointer projection iff it commutes with the state ($[\rho,P]=0$),
+   i.e. iff there is no coherence between the pointer sectors: *exact decoherence*. The decoherence map is then
+   the state-preserving conditional expectation onto that algebra.
+2. **Born weights.** Each record's weight is the algebraic state value $\omega(P_\alpha)=\lVert P_\alpha\Phi\rVert^2$
+   — via the natural cone / vacuum state, *no trace* — and over a record family these are a genuine probability
+   (on the genuine Fock vacuum state the single-mode record gives $(1\pm e^{-\lVert u\rVert^2/2})/2$).
+3. **Persistence.** The decoherence map **commutes with the modular flow for all time**: a records-definite
+   state stays definite, coherence never regenerates, the selected record is a fixed point of the dynamics. The
+   selection does not un-select under evolution — the first genuinely dynamical result.
+4. **The selection event.** An explicit constructor takes an actuality "seed" $s\in[0,1)$ to **exactly one**
+   record (not zero, not two — single-world consistency), and the uniform seed measure of a record equals its
+   Born weight, so the selection *realizes* Born as an across-run frequency.
+
+<div class="note"><strong>The honest residual.</strong> The constructor reduces the whole selection to one
+datum — <em>which seed is actual</em> — and that seed <strong>is</strong> λ: the single primitive a
+non-dynamical single-world theory must take as given. Its dynamical origin is not derived (and arguably cannot
+be, λ being non-dynamical by construction). Beyond the free-field sector the remaining mathematics is two cited
+research walls — the Haagerup natural-cone <em>existence</em> in Mathlib, and the interacting case. So λ's law
+is precise and verified where it can be; what is left is either <em>provably irreducible</em> (the seed; the
+strong Born premise) or <em>genuine multi-year mathematics</em>.</div>
+
 ## How this differs from the usual answers
 
 - **Collapse interpretations** make the selection a *dynamical* event that breaks unitarity. Here $\lambda$
@@ -145,11 +175,13 @@ typicality), never a measure tuned to the settings.
 
 ## Honest scope
 
-This page is the **interpretive layer** of QIQT-H, and it is more speculative than the
-[machine-verified substrate](/formalization). The $(\Phi, \lambda)$ reading is a coherent ontology that
-removes the external observer and the collapse law — but $\lambda$ is only as well-defined as the
-[open problems](/open-problems) that pin it down. Treat it as the program's proposed picture of what a
-single world *is*, not as a result.
+This page is the **interpretive layer** of QIQT-H, and the *reading* of the machinery — what a single world
+*is* — is more speculative than the [machine-verified substrate](/formalization). But $\lambda$ is no longer
+just a picture: as recorded above, its **kinematic law, persistence, Born form, and single-outcome selection
+are machine-checked** (finite through free-field, axiom-free). What stays genuinely open is narrower than it
+once was — the *dynamical origin* of the actuality datum (the seed, which is λ itself; arguably irreducible for
+a non-dynamical selector) and the cited continuum walls beyond the free field. Treat the *ontological reading*
+as the program's proposed picture; treat the *law* as verified where it can be.
 
 In the broad hidden-variable sense, $\lambda$ *is* an additional actuality variable beyond $\Phi$ — but it
 is not a local, noncontextual preassignment of all outcomes. A completed version must define $\lambda$ only

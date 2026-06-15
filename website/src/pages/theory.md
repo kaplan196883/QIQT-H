@@ -89,13 +89,17 @@ by λ among the unitarily-evolved alternatives, not a dynamical modification of 
 dynamical-realization and Born problem below. Q<sub>max</sub>'s role is the finite record *stage* (how many
 distinguishable records exist), not the selection.
 
-Recent progress has made λ's law precise where it can be (finite/Type I, machine-checked, axiom-free). λ is
-**Type-III-native**: the records it selects come from a chosen abelian *pointer* algebra 𝔄, and **Takesaki's
-criterion** fixes which 𝔄 is consistent — the modular flow fixes a pointer projection iff it commutes with the
-density (exact decoherence). The decoherence map is then the $\omega$-preserving conditional expectation onto
-𝔄, the Born weights $\omega(P_\alpha)$ are a genuine probability, and — the first *dynamical* result — that
-selection **persists for all time**: the decoherence map commutes with the real-time modular flow $\sigma_t$ for
-every $t$, so a records-definite state stays definite and coherence between pointer sectors never regenerates.
+Recent progress has made λ's law precise where it can be — machine-checked, axiom-free, at the **finite**, the
+**one-particle continuum** (the bounded modular flow $\Delta^{it}$), *and* the **second-quantized free-field**
+($\Gamma(\Delta^{it})$, a unitary group) levels. λ is **Type-III-native**: the records it selects come from a
+chosen abelian *pointer* algebra 𝔄, and **Takesaki's criterion** fixes which 𝔄 is consistent — the modular
+flow fixes a pointer projection iff it commutes with the density (exact decoherence). The decoherence map is
+then the $\omega$-preserving conditional expectation onto 𝔄, the Born weights $\omega(P_\alpha)$ are a genuine
+probability (Type-independent — on the genuine Fock vacuum state the single-mode record gives
+$(1\pm e^{-\lVert u\rVert^2/2})/2$), and — the first *dynamical* result — that selection **persists for all
+time**: the decoherence map commutes with the real-time modular flow $\sigma_t$ for every $t$, so a
+records-definite state stays definite and coherence between pointer sectors never regenerates (at all three
+levels).
 
 The **selection event** itself now has an explicit constructor too (`SelectionEvent.lean`): an inverse-CDF
 selector from an "actuality seed" $s\in[0,1)$ picks **exactly one** record per seed (totality "not zero" +
