@@ -1640,6 +1640,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.secondQuantModCLM_unitary
 -- expected: standard only — Γ(Δ^{it}) is UNITARY on the Fock Hilbert space (the free-field modular unitary group).
 
+-- ContinuumLambdaField.lean — the continuum λ-persistence at the genuine free-field level.
+#print axioms QIQTH.Fock.modAutFock_fixes_iff_commute
+-- expected: standard only — field-level Takesaki criterion: σ_t(A)=A ⟺ A commutes with Γ(Δ^{it}).
+#print axioms QIQTH.Fock.dephaseFock_modAutFock_commute
+-- expected: standard only — FIELD-LEVEL PERSISTENCE: decoherence map commutes with σ_t=Ad(Γ(Δ^{it})) ∀t.
+
 -- Free-field finite-mode instance (a, b, c)
 #print axioms QIQTH.FreeFieldRecord.holographic_bound
 -- expected: standard only — (a) N free-fermion modes ⇒ log₂ #Atoms = N ≤ Q_R

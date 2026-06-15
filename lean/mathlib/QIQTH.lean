@@ -153,6 +153,11 @@ import QIQTH.ContinuumLambdaFock
 -- ContinuousLinearMap one-parameter group), the substrate for field-level
 -- Ad(Γ) persistence; NO axioms beyond the standard three:
 import QIQTH.Fock.SecondQuantCLM
+-- The continuum λ-persistence at the genuine FREE-FIELD level: the modular
+-- automorphism σ_t = Ad(Γ(Δ^{it})), the field-level Takesaki criterion, and
+-- field-level persistence (decoherence map commutes with σ_t ∀t) on the
+-- second-quantized modular flow; NO axioms beyond the standard three:
+import QIQTH.Fock.ContinuumLambdaField
 -- Free-field finite-mode instance: (a) holographic record count, (b) Gaussian
 -- decoherence decay, (c) finite-mode Lorentz action — concrete theorems
 -- instantiating parts of the LorentzSelection AQFT axioms; standard axioms only:
