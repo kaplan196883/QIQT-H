@@ -1612,6 +1612,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ContinuumLambda.dephaseOp_specProj_commute
 -- expected: standard only — CONTINUUM PERSISTENCE: decoherence map commutes with σ_t ∀t (spectral pointers, unconditional).
 
+-- NaturalConeBorn.lean — Stage 2 of the continuum λ-law: the Type-independent algebraic Born rule.
+#print axioms QIQTH.NaturalConeBorn.bornWeights_sum
+-- expected: standard only — spectral-measure Born weights over a partition sum to ‖ξ‖² (a genuine probability, no trace).
+#print axioms QIQTH.NaturalConeBorn.modBornWeights_sum_unit
+-- expected: standard only — continuum modular pointer Born weights are a probability (unit state).
+
 -- Free-field finite-mode instance (a, b, c)
 #print axioms QIQTH.FreeFieldRecord.holographic_bound
 -- expected: standard only — (a) N free-fermion modes ⇒ log₂ #Atoms = N ≤ Q_R

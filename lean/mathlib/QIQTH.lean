@@ -135,6 +135,10 @@ import QIQTH.SelectionEvent
 -- criterion, and continuum persistence (decoherence map commutes with σ_t ∀t,
 -- unconditional for spectral pointers); NO axioms beyond the standard three:
 import QIQTH.ContinuumLambda
+-- Continuum λ-law Stage 2: the Type-independent algebraic Born rule via the
+-- scalar spectral measure — the spectral measure of pointer Borel sets is a
+-- genuine probability (no trace); NO axioms beyond the standard three:
+import QIQTH.NaturalConeBorn
 -- Free-field finite-mode instance: (a) holographic record count, (b) Gaussian
 -- decoherence decay, (c) finite-mode Lorentz action — concrete theorems
 -- instantiating parts of the LorentzSelection AQFT axioms; standard axioms only:
