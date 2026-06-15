@@ -1602,6 +1602,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SelectionEvent.volume_selects
 -- expected: standard only — uniform seed measure of record k = its Born weight (selection realizes Born frequency).
 
+-- FiniteInfoLambda.lean — a finite-information actuality selector (N cells ≤ e^{Q_R}), 2026-06-16.
+#print axioms QIQTH.FiniteInfoLambda.gridWeight_sum
+-- expected: standard only — finite-information weights are a genuine probability (Σ = 1, finite seed measure).
+#print axioms QIQTH.FiniteInfoLambda.gridWeight_near_born
+-- expected: standard only — Born up to the resolution: |gridWeight − pₐ| < 1/N.
+#print axioms QIQTH.FiniteInfoLambda.gridWeight_tendsto_born
+-- expected: standard only — exact Born is the N→∞ (infinite-capacity) limit.
+#print axioms QIQTH.FiniteInfoLambda.resolution_floor
+-- expected: standard only — a minimum actualizable weight: a positive-weight record gets 0 cells below the resolution.
+
 -- ContinuumLambda.lean — Stage 1 of the continuum λ-law (2026-06-15): on the genuine RvD Δ^{it} flow.
 #print axioms QIQTH.ContinuumLambda.modAutOp_add
 -- expected: standard only — modular automorphism σ_t = Ad(Δ^{it}) is a one-parameter group.
