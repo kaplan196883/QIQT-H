@@ -81,11 +81,14 @@ its *strong* half — **refinement-additivity** — is what discriminates the sq
 and *linearizes* into equiprobability (`refinementAdditive_nsmul`), hence Born. A **no-go** (`NoBornFromNothing`)
 proves that strong half is unavoidable.
 
-**What is open.** Only one thing, now sharply isolated: whether the **weak** half (state-dependence) is itself
-*forced* by the (Φ,λ) ontology rather than merely motivated — a genuine philosophical question (the reasoned
-case: the ψ-monist ontology contains nothing but the state for the law to depend on). The **strong** half is
-proven *not* forcible (the no-go), so it is the named irreducible premise, not an open gap. Plus the
-continuum/interacting realization of the measure.
+**What is open.** One philosophical question, now sharply isolated and resolved into a *dependency*: whether the
+**weak** half (state-dependence) is forced turns on how rich a notion of "state" one assumes. On **thin**
+ψ-monism (only Φ has dynamics; λ a bare actuality fact) it is *not* forced — the measure is extra structure, and
+because λ has no guidance law there is no Bohm-/Liouville-style equivariance to single one out (a DGZ-typicality
+disanalogy). On **thick** Hilbert-space ψ-monism (inner product + symmetries + no primitive labels) it is
+essentially *constitutive*. Either way the **strong** half (refinement-additivity) is proven *not* forcible (the
+no-go) — it is the named irreducible premise, in every reading. Plus the continuum/interacting realization of
+the measure.
 
 **Difficulty.** The finite reduction *and* its forced/free split are done; the residual is one philosophy-of-the-premise
 question + the continuum.

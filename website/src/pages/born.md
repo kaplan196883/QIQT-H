@@ -127,11 +127,15 @@ The 2026 work pushed the posit one level deeper and then drew a sharp line throu
   *linearizes* — $f(n\,x)=n\,f(x)$ — which on a refinement into $n$ equal sub-records forces them to share
   weight equally. That equiprobability, run through the orthonormality bridge, **is** Born.
 
-So the honest answer to "is state-supervenience forced by the $(\Phi,\lambda)$ ontology?" is: the **weak** half
-plausibly is — the law can only be a function of the state, because the ontology contains nothing else for it to
-depend on — but the **strong**, Born-selecting half is **not** forced; it is the refinement-additivity /
-indifference premise, and the no-go proves you cannot do without it. That gap is the whole irreducible content
-of Born, isolated and named.
+Is even the *weak* half forced by the bare ontology? The honest answer is that it depends on what you take a
+"state" to *be* — and that dependency is the answer, not a dodge. On a **thin** reading (only $\Phi$ has
+dynamics; $\lambda$ is a bare actuality fact), the weak half is **not** forced: the typicality measure is extra
+structure, and because $\lambda$ has no guidance law there is no Bohm-/Liouville-style equivariance to single
+one out. On a **thick** reading ($\Phi$ = a ray in Hilbert space with its inner product and symmetries, no
+primitive labels), the weak half is essentially **built in** — constitutive, not a free lunch. But in **neither**
+reading do you get Born: the **strong**, Born-selecting half — refinement-additivity — is unforced regardless,
+and the no-go proves you cannot do without it. *That* is the whole irreducible content of Born, isolated and
+named; the rest is a question about how much you pack into the word "state."
 
 ## The bottom line, honestly
 
@@ -160,6 +164,7 @@ exactly (see "What is forced, and what is free" above): the squared-amplitude we
 <em>state-supervenience</em>, whose <em>weak</em> half (naturality) is machine-checked to be blind to the
 exponent — it cannot force Born — while the <em>strong</em> half (refinement-additivity) is the genuine
 Born-selecting content, proved to discriminate the square and to linearize into equiprobability. A no-go (you
-cannot get Born from nothing) shows that strong half is <em>unavoidable</em>. So the $(\Phi,\lambda)$ ontology
-forces <em>that</em> the law is a function of the state, never <em>which</em>; the residue is one named,
-irreducible premise. The status on the chain is <a href="/open-problems">open · reduced</a>, not closed.</div>
+cannot get Born from nothing) shows that strong half is <em>unavoidable</em>. Whether even the <em>weak</em>
+half is forced turns out to depend on how rich a notion of "state" you assume (thin vs thick ψ-monism; see
+above) — but the irreducible premise is the <em>strong</em> half either way. The status on the chain is
+<a href="/open-problems">open · reduced</a>, not closed.</div>
