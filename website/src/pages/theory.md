@@ -89,24 +89,27 @@ by λ among the unitarily-evolved alternatives, not a dynamical modification of 
 dynamical-realization and Born problem below. Q<sub>max</sub>'s role is the finite record *stage* (how many
 distinguishable records exist), not the selection.
 
-Recent progress has made λ's law precise where it can be — machine-checked, axiom-free, at the **finite**, the
-**one-particle continuum** (the bounded modular flow $\Delta^{it}$), *and* the **second-quantized free-field**
-($\Gamma(\Delta^{it})$, a unitary group) levels. λ is **Type-III-native**: the records it selects come from a
-chosen abelian *pointer* algebra 𝔄, and **Takesaki's criterion** fixes which 𝔄 is consistent — the modular
-flow fixes a pointer projection iff it commutes with the density (exact decoherence). The decoherence map is
-then the $\omega$-preserving conditional expectation onto 𝔄, the Born weights $\omega(P_\alpha)$ are a genuine
-probability (Type-independent — on the genuine Fock vacuum state the single-mode record gives
-$(1\pm e^{-\lVert u\rVert^2/2})/2$), and — the first *dynamical* result — that selection **persists for all
-time**: the decoherence map commutes with the real-time modular flow $\sigma_t$ for every $t$, so a
-records-definite state stays definite and coherence between pointer sectors never regenerates (at all three
-levels).
+Recent progress has made λ's *selection schema* precise where it can be — machine-checked, axiom-free, at the
+**finite**, the **one-particle continuum** (the bounded modular flow $\Delta^{it}$), *and* the
+**second-quantized free-field** ($\Gamma(\Delta^{it})$, a unitary group) levels. (We say *schema*, not *law*:
+"axiom-free in Lean" means no extra Lean axioms, not no physical postulates — those are the hypotheses below.)
+The records come from a chosen abelian coarse-graining *associated with* the Type&nbsp;III$_1$ algebra (it has
+no atoms), and **Takesaki's criterion** fixes which record context is consistent — the modular flow fixes a
+projection iff it commutes with the (faithful, reduced) state, $[\rho,P]=0$, *exact decoherence*. The dephasing
+map is then the state-preserving conditional expectation onto the (generally nonabelian) block-diagonal algebra,
+and the Born weights $\omega(P_\alpha)$ are a genuine probability (on the Fock vacuum state the single-mode
+Weyl-bit effect gives $(1\pm e^{-\lVert u\rVert^2/2})/2$). One *consistency* result: the dephasing map commutes
+with the modular flow $\sigma_t$ for every $t$ — no *modular* recoherence in the chosen invariant algebra. But
+the modular flow is **not** the physical Hamiltonian evolution (they agree only in special KMS /
+Bisognano–Wichmann cases), so this is modular-invariance, *not* a proof that real records never recohere under
+the actual dynamics.
 
-The **selection event** itself now has an explicit constructor too (`SelectionEvent.lean`): an inverse-CDF
-selector from an "actuality seed" $s\in[0,1)$ picks **exactly one** record per seed (totality "not zero" +
-uniqueness "not two" — the single-world consistency that separates this from Everett and from an inconsistent
-selector), and the uniform seed measure of record $k$ equals its Born weight $p_k$, so the selection *realizes*
-Born as an across-run frequency. The selector is order-dependent, not equivariant (as the no-covariant-selector
-result requires); the seed measure is order-blind.
+The **selection event** has an explicit constructor too (`SelectionEvent.lean`): an **inverse-CDF** selector
+from an "actuality seed" $s\in[0,1)$ picks **exactly one** record per seed (totality + uniqueness of a sampling
+map), and the *single-shot* seed measure of record $k$ equals its Born weight $p_k$. It adds no actualization
+*mechanism*, and a single-shot measure is *not yet* an across-run frequency (that needs a product measure + a
+law of large numbers). The selector is order-dependent, not equivariant (as the no-covariant-selector result
+requires); the seed measure is order-blind.
 
 Two honest caveats remain — now in their *irreducible* form. First, the construction reduces the whole selection
 to one datum: *which seed is actual*. The seed **is** λ — the one primitive a non-dynamical single-world theory

@@ -46,33 +46,36 @@ single-world hidden-variable/modal *completion* of QM, genuine only once λ has 
   *also* have no minimal projections, so the records λ selects come from a chosen abelian *pointer* subalgebra
   𝔄, which already lives inside Type III₁. λ needs no forced trace: the Born weights are the algebraic
   $\omega(P_\alpha)=\lVert P_\alpha\Phi\rVert^2$ (the natural-cone state, Type-independent).
-- **λ's kinematic law is now machine-checked** (finite/Type I shadow, `LambdaPointer.lean`): *which* pointer
-  algebra is fixed by **Takesaki's criterion** $\sigma_t^\omega(\mathfrak A)=\mathfrak A \Leftrightarrow [\rho,P_\alpha]=0$
-  (exact decoherence — `modAut_fixes_iff_commute`); the decoherence map $E(x)=\sum_\alpha P_\alpha x P_\alpha$ **is**
-  the unital, $\omega$-preserving conditional expectation onto 𝔄 (`dephase_preserves_state`); and the Born
-  weights are a genuine probability (`bornWeights_sum`).
-- **Dynamical persistence is machine-checked** — the first real piece of the dynamical realization: $E$ commutes
-  with the genuine real-time modular flow $\sigma_t$ for **every $t$** (`dephase_sigmaDiag_commute`; unconditional
-  in the einselected basis, `dephase_sigmaDiag_commute_diagonal`). So a dephased, records-definite state **stays**
-  dephased for all time — coherence between pointer sectors never regenerates, and the selected record is a fixed
-  point of the dynamics with constant Born weights.
-- **The selection event has an explicit constructor** (`SelectionEvent.lean`): an inverse-CDF selector from an
-  "actuality seed" $s\in[0,1)$ that picks **exactly one** record per seed (`selects_exists_unique` — totality
-  "not zero" + uniqueness "not two", the single-world consistency that separates this from Everett and from an
-  inconsistent selector), with the uniform seed measure of record $k$ equal to its Born weight $p_k$
-  (`volume_selects`) — so the selection *realizes* Born as an across-run frequency. The selector is
-  deliberately order-dependent, not equivariant (exactly as the no-covariant-selector result requires), while
-  the seed measure is order-blind (covariant).
+- **λ's kinematic criterion is machine-checked** (finite/Type I shadow, `LambdaPointer.lean`): *which* record
+  context is consistent is fixed by **Takesaki's criterion** $\sigma_t^\omega(\mathfrak A)=\mathfrak A \Leftrightarrow [\rho,P_\alpha]=0$
+  (exact decoherence — `modAut_fixes_iff_commute`); the dephasing map $E(x)=\sum_\alpha P_\alpha x P_\alpha$ is the
+  $\omega$-preserving conditional expectation onto the (generally nonabelian) block-diagonal algebra
+  (`dephase_preserves_state`); and the Born weights are a genuine probability (`bornWeights_sum`). ($\rho$ here is
+  faithful/reduced, not the global pure $\Phi$; exact $[\rho,P]=0$ is an idealization.)
+- **Modular invariance is machine-checked** — a *consistency* result, not physical dynamics: $E$ commutes with
+  the modular flow $\sigma_t$ for **every $t$** (`dephase_sigmaDiag_commute`; unconditional in the einselected
+  basis). So there is no *modular* recoherence in the chosen invariant algebra — but the **modular flow is not the
+  physical Hamiltonian evolution** (they agree only in special KMS / Bisognano–Wichmann cases), so this is *not* a
+  proof that real records never recohere under the actual dynamics, and is essentially a functional-calculus fact.
+- **The selection event has an explicit constructor** (`SelectionEvent.lean`): an **inverse-CDF** selector from
+  an "actuality seed" $s\in[0,1)$ that picks **exactly one** record per seed (`selects_exists_unique` — totality +
+  uniqueness of a sampling map), with the *single-shot* seed measure of record $k$ equal to its Born weight $p_k$
+  (`volume_selects`). It adds no actualization *mechanism*, and a single-shot measure is *not yet* an across-run
+  frequency (that needs a product measure + a law of large numbers). The selector is order-dependent, not
+  equivariant (as the no-covariant-selector result requires); the seed measure is order-blind.
 
-**What is open.** The two residuals are now sharply minimal. (i) The selection event is **constructed** — what
-remains irreducible is only *which seed is actual*: the seed **is** λ, the one primitive a non-dynamical
-single-world theory must take as given (its origin/actuality is not, and arguably cannot be, derived). (ii) The
-derivation of the weights as genuine **across-run frequencies** rests on an irreducible premise by the Born
-no-go (Gap 2). Both residuals are now pinned to their minimal, provably-unremovable form, not open hand-waves.
+**What is open.** The residuals, honestly. (i) The selection is a *representation*, not a mechanism — its content
+reduces to *which seed is actual*, and the seed **is** λ, the one primitive a non-dynamical single-world theory
+must take as given (its origin is not, and arguably cannot be, derived). (ii) The weights enter as an input; an
+across-run **frequency** theorem (and the strong Born premise it rests on, Gap 2) is separate and unavoidable.
+(iii) "Modular invariance" is not physical irreversibility; an *approximate* version and a **global
+decoherent-history** selector (one coherent world, not one atom of one finite resolution) are the genuine
+content-adding next targets. The scheme is, as it stands, operationally equivalent to standard QM.
 
-**Difficulty.** The covariance/contextuality structure, the kinematic + persistence law, *and* an explicit
-single-world Born-realizing selector are now done (finite); what is left is genuinely irreducible (the seed = λ;
-the strong Born premise) or the continuum realization (Gap 3).
+**Difficulty.** The covariance/contextuality structure, the kinematic criterion + modular-invariance, *and* the
+inverse-CDF selection representation are now done (finite → free field); what is left is genuinely irreducible
+(the seed = λ; the strong Born premise), or genuine content-adding work (an across-run frequency theorem; a
+global-history selector; approximate decoherence), or the continuum walls (Gap 3).
 
 ## Gap 2 — Born from typicality (reduced, not closed)
 
@@ -109,19 +112,20 @@ question + the continuum.
 rather than postulate it.
 
 **What is done toward it.** The finite and free-field constructions are complete and axiom-free; the Type II
-crossed-product *entropy* (CLPW) is the borrowed substrate. And, as of **2026-06-16**, the **continuum λ-law is
-machine-checked for the free-field / standard-subspace sector**: lifted onto the genuine continuum modular flow
-$\Delta^{it}$ (the Rieffel–Van Daele bounded `modUnitary`), the modular automorphism $\sigma_t=\mathrm{Ad}(\Delta^{it})$,
-the **continuum Takesaki criterion**, **continuum persistence** (the decoherence map commutes with $\sigma_t$ for
-every $t$), the **Type-independent algebraic Born rule** (the spectral measure of pointer Borel sets is a genuine
-probability), and the **Type-blind selection event** (one record per seed, realizing Born) are all axiom-free
-(`ContinuumLambda`, `NaturalConeBorn`, `ContinuumSelection`). And the whole λ-law is also lifted to the
-**second-quantized free field**: $\Gamma(\Delta^{it})$ as a unitary one-parameter group of bounded operators on
-the Fock Hilbert space, with the field-level automorphism, persistence, Born rule (on the genuine Fock *vacuum
-state* — the Weyl-bit record gives $(1\pm e^{-\lVert u\rVert^2/2})/2$), and selection event all axiom-free
-(`SecondQuantCLM`, `ContinuumLambdaField`, `FieldBorn`, `FieldSelection`).
+crossed-product *entropy* (CLPW) is the borrowed substrate. And, as of **2026-06-16**, the **continuum λ
+selection schema is machine-checked for the free-field / standard-subspace sector**: lifted onto the genuine
+continuum modular flow $\Delta^{it}$ (the Rieffel–Van Daele bounded `modUnitary`), the modular automorphism
+$\sigma_t=\mathrm{Ad}(\Delta^{it})$, the **continuum Takesaki criterion**, **continuum modular-invariance** (the
+dephasing map commutes with $\sigma_t$ for every $t$ — a consistency fact, *not* physical persistence: the
+modular flow ≠ physical time), the **Type-independent algebraic Born rule**, and the **inverse-CDF selection
+event** (one record per seed; single-shot seed-measure = Born weight) are all axiom-free (`ContinuumLambda`,
+`NaturalConeBorn`, `ContinuumSelection`). And the whole schema is also lifted to the **second-quantized free
+field**: $\Gamma(\Delta^{it})$ as a unitary one-parameter group on Fock, with the field-level automorphism,
+modular-invariance, Born rule (on the genuine Fock *vacuum state* — the Weyl-bit record gives
+$(1\pm e^{-\lVert u\rVert^2/2})/2$), and selection event all axiom-free (`SecondQuantCLM`, `ContinuumLambdaField`,
+`FieldBorn`, `FieldSelection`).
 
-**What is open.** With the continuum λ-law now built (above), the residual walls are sharply two: the
+**What is open.** With the continuum schema now built (above), the residual walls are sharply two: the
 **Haagerup natural-cone existence** in Mathlib (we state the Born rule directly on vector states; the canonical
 state↦vector identification is cited, not yet formalized) and the **interacting / general-state** case (the free
 field is done). Two further notes. (a) Holography is machine-checked to be **scaffolding**: λ's covariant measure
@@ -139,13 +143,14 @@ that Mathlib lacks). Not a blocker for the conditional interpretation; the hones
 ## In one paragraph
 
 The original crux (H2 — capacity forbids records) is **retired as a category error**; the single outcome is
-λ's. λ is now **Type-III-native** (no forced trace), and its *kinematic* law is machine-checked: Takesaki's
-criterion fixes which pointer algebra carries the $\omega$-preserving conditional expectation, the Born weights
-are a genuine probability, the selection **persists for all time** under the real-time modular flow (coherence
-never regenerates), and the **selection event has an explicit single-world constructor** (exactly one record per
-actuality seed, with the seed measure realizing Born). What remains is now *irreducible* rather than open: the
-actuality seed itself **is** λ (the one primitive a non-dynamical single-world theory must take as given), and
-the weights-as-**across-run-frequencies** rest on a premise the no-go proves unremovable. **Born** is reduced (axiom-free) to a single
+λ's, by stipulation. λ's *selection schema* is machine-checked (not a law): Takesaki's criterion fixes which
+record context admits the conditional expectation, the Born weights are a genuine probability, the dephasing map
+is **modular-invariant** (a consistency fact — *not* physical irreversibility; the modular flow is not physical
+time), and the **selection event has an explicit inverse-CDF constructor** (exactly one record per seed,
+single-shot seed-measure = Born weight). What is verified is a consistency scaffold *conditional on a primitive
+seed and a Born premise*: the seed itself **is** λ (the one primitive a non-dynamical single-world theory must
+take as given), and the weights-as-**across-run-frequencies** rest on a premise the no-go proves unremovable —
+so, as it stands, the scheme is operationally equivalent to standard QM. **Born** is reduced (axiom-free) to a single
 state-supervenience premise with a no-go that some premise is unavoidable. The **continuum** (Type III₁,
 now via the standard form for λ) is the honestly-cited multi-year wall. The
 [machine-checked substrate](/formalization) is axiom-free and settles the covariance/contextuality/Born and
