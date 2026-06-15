@@ -21,19 +21,25 @@ of the program.
 Here is the sharp point — and getting it right took the program a while. Finite capacity *by itself* does
 **not** forbid a superposition in the wave function $\Phi$: a superposition of two records is one vector in
 the same finite-dimensional space, costing no more room than either record alone, and $\Phi$ evolves
-exactly unitarily, keeping every branch. So $Q_{\max}$ is **not** a constraint on the wave function. What it
-constrains is **actuality**. Two rival macroscopic records being *actual at once* would be two definite,
-classical configurations — and classical, distinguishable contents **add up**, so realizing both would
-exceed the region's budget $Q_R$. Hence at most one record can be *actual* per region; the actuality
-selector $\lambda$ picks which one. The unrealized records remain in $\Phi$ — they are simply not actualized.
+exactly unitarily, keeping every branch. So $Q_{\max}$ is **not** a constraint on the wave function — but
+(a correction we make honestly, 2026) it does **not force a single outcome either**. Decoherence makes the
+macroscopic records non-interfering and redundantly objective, yet that removes *interference*; it does not
+make one record *actual*. The single actual record is supplied by a non-dynamical selector $\lambda$ — an
+Everett-like selection in which $\Phi$ keeps every branch and $\lambda$ marks exactly one as the actual
+world. $Q_{\max}$'s honest role is the finite record **stage**: it bounds how *many* distinguishable records
+a region can hold ($\le e^{Q_R}$), not whether two of them can be actual.
 
-<div class="note"><strong>The move.</strong> Collapse is not added as a new law, and the wave function is
-never touched. Q<sub>max</sub> constrains <em>actuality</em>, not Φ: because realizing two rival macroscopic
-records would exceed the region's information budget, at most one is actual — and λ selects which.
-This capacity exclusion is machine-checked at the actuality layer; Φ stays exactly unitary, with no
-collapse term. What remains a conjecture — the <strong>Macroscopic Definiteness Conjecture</strong>, the
-crux of the program — is that a genuine macroscopic record really costs near the full budget (so two rival
-ones overflow); and the genuinely hard open piece is stitching the per-region actualities into one global,
+<div class="note"><strong>The move.</strong> Collapse is not added as a new law and the wave function is
+never touched: Φ stays exactly unitary, and a non-dynamical λ marks the one actual record.
+<strong>Correction (2026).</strong> An earlier framing claimed the capacity bound <em>forbids</em> two
+actual records because "classical record-contents add up" — that is a <strong>category error</strong>. The
+holographic bound counts <em>independent</em> degrees of freedom, not a sum of redundant classical records
+(R redundant copies of one fact carry H(X), not R·H(X)); and ordinary record entropy is capped at
+~A<sup>3/4</sup>, about 10<sup>91</sup> for the observable universe against ~10<sup>122</sup> for the bound
+— a permanent ~31-order gap (only black holes saturate A/4, and a black hole has no records). So capacity
+never counts records out of existence; the single outcome is λ's, and "two actual records can't coexist"
+reduces to a classical carrier holding one value (local single-valuedness) — itself supplied by λ, not by
+the bound. The genuinely hard open piece is stitching the per-region actualities into one global,
 Lorentz-covariant λ.</div>
 
 ## What this buys, and what it doesn't
@@ -49,16 +55,17 @@ frequency.
 
 ## Where it stands
 
-This is a research program with a sharp core, not a finished interpretation. Its central physical conjecture
-— that a region cannot hold a coherent superposition of two macroscopically distinct records once
-instantiating them would exceed its holographic budget — is *in principle* falsifiable. Honestly, though,
-that budget (the boundary area in Planck units) is so vast — about $10^{66}$ bits for a cm² boundary,
-against record costs of perhaps $10^{25}$ bits — that it is never approached at accessible scales. Absent an
-*additional* dynamical law with a much smaller effective capacity (a new postulate with a free parameter,
-not a consequence of the bound), the framework is **empirically equivalent to standard quantum mechanics** —
-an interpretation, not new physics, which we state plainly rather than advertise a near-term test. The
-mathematical *substrate*
-it borrows — modular theory and relative entropy, the bookkeeping of regional information cost — is
-[machine-verified in Lean&nbsp;4](/formalization). The load-bearing physical conjecture, that two records
-genuinely overflow the bound, is stated precisely and remains to be proved. Read on for the
+This is a research program with a sharp core, not a finished interpretation. An earlier version leaned on a
+*capacity-exclusion* conjecture — that a region cannot hold two macroscopically distinct *actual* records
+because their information would overflow its holographic budget. We now regard that as a **category error**
+(see the correction above), and the numbers make the point vivid: the budget is so vast — about $10^{66}$
+bits for a cm² boundary, $\sim 10^{122}$ for the cosmological horizon — against record costs of $\sim
+10^{25}$–$10^{104}$ bits, capped structurally at $\sim A^{3/4}$, that it is never even remotely approached.
+The universe runs at $\sim 10^{-18}$ of its holographic capacity. So capacity is *not* what gives single
+outcomes; **λ is**. What survives — and is genuinely distinctive — is the no-collapse single-world ontology:
+Φ exactly unitary, one non-dynamical actuality selector λ, the holographic bound supplying only the finite
+record stage. Absent an *additional* dynamical law (a new postulate with a free parameter), the framework is
+**empirically equivalent to standard quantum mechanics** — an interpretation, not new physics, stated
+plainly. The mathematical *substrate* it borrows — modular theory and relative entropy, the bookkeeping of
+regional information cost — is [machine-verified in Lean&nbsp;4](/formalization). Read on for the
 [mathematics](/theory) or the [open problems](/open-problems).

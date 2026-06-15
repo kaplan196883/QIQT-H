@@ -5,10 +5,12 @@ eyebrow: The mathematics
 description: The finite-information axiom (FQ), the regional cost functional χ_R as Araki relative entropy, Type II regional algebras, and the conditional single-record theorem.
 ---
 
-The framework has four moving parts: a capacity axiom, a cost functional for regional information, a
-conjecture that ties two records to an overflow of that capacity, and a conditional theorem that draws the
-single-world conclusion. Only the cost functional's underlying calculus is
-[machine-verified](/formalization); the rest is stated honestly as postulate, conjecture, or open.
+The framework has three moving parts: a capacity axiom (the finite record *stage*), a cost functional for
+regional information, and a non-dynamical actuality selector λ that draws the single-world conclusion. (A
+fourth, earlier part — a conjecture tying *two actual records* to a capacity *overflow* — has been withdrawn
+as a category error; see below. Capacity bounds the *number* of records, not whether two can be actual.)
+Only the cost functional's underlying calculus is [machine-verified](/formalization); the rest is stated
+honestly as postulate or open.
 
 ## 1. Finite regional capacity (FQ)
 
@@ -67,22 +69,30 @@ that the right *instantiation* cost of genuine macroscopic multiplicity is area-
 that cost measure is itself part of the problem. Establishing H2, even in a model, is the central
 [open problem](/open-problems).
 
-## 4. The conditional theorem: single record
+## 4. Single record — by selection, not by capacity
 
-Granting (FQ) and the conjecture, the conclusion follows as a **conditional theorem**. If two rival
-macroscopic records cannot be *actual* together (their joint cost would exceed $Q_R$), then the *actual*
-regional content is single-record. After decoherence has stabilized and proliferated the records, the
-content the region *realizes* is one definite macroscopic world — while $\Phi$ keeps all branches and
-evolves exactly unitarily, with no collapse term. The capacity exclusion is machine-checked at this
-*actuality* layer (it never constrains $\Phi$): a finite, additive-or-monotone-cost family of actual
-records admits at most one macroscopic member, and $\lambda$ supplies which.
+After decoherence has stabilized and proliferated the macroscopic records (making them non-interfering and
+redundantly objective), the content the region *realizes* is one definite macroscopic world — while $\Phi$
+keeps all branches and evolves exactly unitarily, with no collapse term. **The single record is supplied by
+the non-dynamical selector $\lambda$**, an Everett-like selection among the unitarily-evolved alternatives.
+
+<div class="note"><strong>Correction (2026): the "capacity forbids two records" exclusion is withdrawn.</strong>
+An earlier version drew the single-record conclusion from a capacity <em>exclusion</em> — two actual records
+"exceeding $Q_R$." That is a <strong>category error</strong>: the holographic bound counts independent
+degrees of freedom, not a sum of redundant classical records (R copies of one fact carry H(X), not R·H(X)),
+and ordinary record entropy is capped at ~$A^{3/4}$ (~$10^{91}$) versus ~$10^{122}$ for the bound — a
+permanent ~31-order gap; the universe runs at ~$10^{-18}$ of capacity. So capacity does not exclude a second
+actual record. The exclusion of two <em>actual</em> records reduces to local single-valuedness (a classical
+carrier holds one value), itself supplied by λ. What the Lean development machine-checks is a finite,
+additive-cost <em>counting</em> bound (at most one member of a saturating family) — an honest <em>finite
+stage</em>, not a derivation that capacity overflows on two macroscopic records.</div>
 
 This is worth stating carefully, because "one outcome" and "unitary evolution" sound contradictory. The
-global wave function evolves unitarily throughout; what the finite-capacity constraint bounds is the
-region's *actual* content — two rival actual records would exceed $Q_R$. Which single record is the *actual* one is then a
-[selection](/selection) among the unitarily-evolved alternatives, not a dynamical modification of the
-Schrödinger equation — the [(Φ, λ) account](/selection). Making that selection precise, and deriving its
-statistics, is the dynamical-realization and Born problem below.
+global wave function evolves unitarily throughout; the single *actual* record is a [selection](/selection)
+by λ among the unitarily-evolved alternatives, not a dynamical modification of the Schrödinger equation — the
+[(Φ, λ) account](/selection). Making that selection precise, and deriving its statistics, is the
+dynamical-realization and Born problem below. Q<sub>max</sub>'s role is the finite record *stage* (how many
+distinguishable records exist), not the selection.
 
 Two honest caveats. First, the theorem as formalized is a **static exclusion**: it says two-record content
 is not instantiable, not yet that the unitary dynamics *drives* an initial superposition to a single

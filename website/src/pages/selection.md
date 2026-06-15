@@ -26,11 +26,18 @@ of *record* the [theory](/theory) is about. We do not look at $\Phi$ from outsid
 
 ## λ — which admissible record is actual
 
-Granting the finite-capacity postulate and the [Macroscopic Definiteness Conjecture](/theory), a bounded
-region cannot make two rival macroscopic records *actual* at once — two definite, classical record-contents
-would together exceed its information budget. So the region's *actual* content is single-record: the
-unitarily-evolved $\Phi$ offers several mutually-exclusive records, but only one can be *actual* at a time.
-The finite capacity bounds *actuality*, not $\Phi$ (which keeps every branch, exactly unitary).
+The unitarily-evolved $\Phi$ offers several mutually-exclusive macroscopic records; $\lambda$ marks exactly
+one as *actual*. Decoherence first makes those records non-interfering and redundantly objective — but that
+removes interference, it does not make one of them actual. The single actual record is $\lambda$'s doing.
+
+<div class="note"><strong>Correction (2026).</strong> An earlier version said the finite capacity itself
+<em>forbids</em> two actual records (their classical contents "would together exceed the budget"). That is a
+<strong>category error</strong>: the holographic bound counts independent degrees of freedom, not a sum of
+redundant classical records, and ordinary record entropy is capped at ~A<sup>3/4</sup> (~10<sup>91</sup>)
+far below the bound (~10<sup>122</sup>) — a permanent ~31-order gap. So capacity does <em>not</em> exclude a
+second actual record; "two actual records can't coexist" reduces to a classical carrier holding one value,
+which is itself supplied by λ. Q<sub>max</sub>'s honest role is the finite record <em>stage</em> (how many
+distinguishable records exist, $\le e^{Q_R}$), not the single-outcome selection.</div>
 
 $\lambda$ is the **selection** of which admissible record is the actual one. It is the move the textbook
 misnames "collapse" — but here it is not a dynamical event. $\lambda$ adds nothing to the Schrödinger

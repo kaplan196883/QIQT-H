@@ -35,11 +35,13 @@ Machine-checked for the 1+1D free field: `KolmogorovFiniteFiber` (σ-additive ex
 
 - **NOT in the measure** — Born comes from the decoherence functional (pure QM).
 - **NOT in "one outcome per run"** — the histories framework gives that for free (sampling one history).
-- **Q_max is in the STAGE — the record algebra `B_Φ(D)`.** Its three jobs there:
+- **Q_max is in the STAGE — the record algebra `B_Φ(D)`.** Its jobs there:
   1. **Finiteness** — at most `e^{Q_R}` distinguishable records/diamond; this is what makes the σ-additive
      measure *constructible* (the machine-checked `KolmogorovFiniteFiber` uses **finite fibers**).
   2. **Area-grain / covariance** — records resolvable within the boundary capacity (holographic, covariant).
-  3. **Single-macroscopic-per-diamond** — the actuality capacity exclusion (`CoreNoCollapse`/`CapacityModel`).
+  - **NOT a single-macroscopic *exclusion*** — see the 2026-06-15 correction below. Q_max does NOT forbid two
+    actual records by information-counting; that "records add ⇒ overflow Q_R" claim is a category error.
+    Single-macroscopic-ness is supplied by **λ + local single-valuedness**, not by the capacity bound.
 - **Distinctive role: realm-selection grain.** Decoherent histories' biggest open problem is realm selection
   (Dowker–Kent: wildly many consistent sets, no selection rule). Q_max offers a physical grain — the realm is
   the holographically-resolvable, finitely-many, area-bounded records. This is a genuine contribution to the
@@ -132,7 +134,30 @@ is now machine-checked; its physical input (macroscopic records ARE redundantly 
 per-fragment overlap `r < 1`) remains the cited assumption.
 Consistency ≠ uniqueness (Dowker–Kent): uniqueness needs einselection (`RealmSelection`). So the chain is:
 einselection picks the basis → `WeylBitConsistency` makes that realm a consistent set (sum rules hold) →
-Q_max makes it finite + single-macroscopic → μ∞ is a genuine covariant Born probability → λ is a sample.
+Q_max makes the record set **finite** (NOT single-macroscopic by itself — see correction below) → μ∞ is a
+genuine covariant Born probability → λ is a sample (and λ + local single-valuedness gives single-macroscopic).
+
+## ★ Correction 2026-06-15 — "Q_max single-macroscopic exclusion" is a CATEGORY ERROR
+
+Two GPT-5.5-pro consults (checked vs Bousso/Bekenstein + decoherence theory). Wherever this note said Q_max
+provides a "single-macroscopic exclusion" / "actuality capacity exclusion," that is **withdrawn**. Q_max does
+NOT forbid two actual records:
+- **Category error:** the holographic bound counts independent d.o.f. (joint entropy / code-dimension), NOT a
+  sum of redundant classical records — R redundant Quantum-Darwinism imprints of one fact have joint entropy
+  `H(X)`, not `R·H(X)` (compressible). So "actual classical records add ⇒ overflow Q_R" is invalid.
+- **A^{3/4} structural gap:** ordinary record-carrier entropy is capped at `S ~ (A/ℓ_P²)^{3/4}` (max thermal
+  entropy before BH collapse), `≈10^91.5` vs `Q_max ~10^122` — a permanent ~31-order gap (only black holes
+  reach `A/4`, and a BH has no records); `I₀ ≈ Q_R` is false by ~31 orders; the universe runs at `~10^-18`
+  of capacity even cosmologically (`2×10^104 ≪ 10^122`).
+- **The exclusion is λ + local single-valuedness**, not capacity: a classical carrier holds ONE value, and
+  "one value" is the single-world claim supplied by λ (decoherence ≠ definiteness; it gives branch structure +
+  suppressed interference, not actuality). Theorem-level: unitary linearity + finite capacity can't select a
+  branch.
+
+So Q_max's role here is the **finite stage only** (finiteness, area-grain, realm grain) — *not* the
+single-macroscopic exclusion. The realm-grain contribution (a physical Dowker–Kent grain via finiteness)
+stands; the *exclusion* claim does not. Propagated to memory, PROGRAM_STATUS, the foundations paper §7.6 +
+Theorem 4, and qiqt.org.
 
 ## Corrections propagated
 

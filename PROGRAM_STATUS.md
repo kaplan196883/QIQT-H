@@ -126,6 +126,25 @@ what is the prize we are chasing, and what must be fixed before arXiv.*
 > assigning values only to ACTUAL decohered records in the ACTUAL context (not a counterfactual value-map),
 > NOT Roberts cohomology (which classifies DHR charges). Treat §4a's Roberts/Ȟ¹ language as superseded.
 
+> **CORRECTION 2026-06-15b — the actuality-layer "records ADD ⇒ overflow Q_max" is a CATEGORY ERROR**
+> (two GPT-5.5-pro consults, checked vs Bousso/Bekenstein + decoherence theory; supersedes the "(a) Q_max on
+> actuality" claim above as a *mechanism*). Charging the holographic bound for the *sum* of actual classical
+> records is not valid: (1) the bound counts independent d.o.f. = joint entropy/code-dimension, NOT a sum of
+> redundant marginals — R redundant Quantum-Darwinism imprints of one classical fact have joint entropy
+> `H(X)`, not `R·H(X)` (compressible); (2) ordinary weakly-gravitating record entropy is capped at
+> `S ~ (A/ℓ_P²)^{3/4}` (max thermal entropy before BH collapse), `≈10^91.5` for the observable universe vs
+> `Q_max ~10^122` — a **permanent ~31-order gap** (power 3/4 vs 1; only black holes reach `A/4`, and a BH has
+> no records); so `I₀ ≈ Q_R` ("one macro record ≈ full budget") is false by ~31 orders, the universe runs at
+> `~10^-18` of capacity. (3) The exclusion of two actual records traces to **local single-valuedness** (a
+> classical carrier holds ONE value) + **λ** — and "a carrier has one value" is itself the single-world claim
+> supplied by λ, not by Q_max and not by decoherence (decoherence gives branch structure + suppressed
+> interference, NOT actuality/definiteness). Theorem-level: unitary linearity + finite capacity CANNOT select
+> one branch. NET: **Q_max is the finite STAGE only** (record-count bound `≤e^{Q_R}`, finite-trace Type III→II
+> record algebra, decoherence-redundancy regulator, area-grain) — NOT an exclusion mechanism; **λ does the
+> single-outcome work**. This reinstates the `paper_strategy/54` selection-MDC conclusion and retracts "Q_max
+> load-bearing on actuality" (`55`). The foundations paper §7.6 already disavows the naive joint-info argument;
+> Theorem 4's "classical record-contents add" parenthetical is corrected accordingly.
+
 > **Update 2026-06-06.** The project axiom budget is now **33** (all 33 are continuum /
 > operator-algebra interface axioms; the entire finite core below is axiom-free —
 > `propext, Classical.choice, Quot.sound` only). 37 → 35 via the Goldstein–Struyve Step-1 /
