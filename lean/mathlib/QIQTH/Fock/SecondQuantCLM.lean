@@ -60,11 +60,56 @@ theorem secondQuantModCLM_mul (S : StandardSubspace H) (s t : ℝ) :
   rw [ContinuousLinearMap.mul_apply, secondQuantModCLM_apply, secondQuantModCLM_apply,
       secondQuantModCLM_apply, secondQuantModFlowH_add]
 
+/- ── Operator unitarity: Γ(Δ^{it})⋆ = Γ(Δ^{-it}) ───────────────────────────-/
+
+/-- `Γ(Δ^{it})` preserves the norm (it is the bundled lift of an isometric flow). -/
+theorem secondQuantModCLM_norm (S : StandardSubspace H) (t : ℝ) (x : Fock H) :
+    ‖secondQuantModCLM S t x‖ = ‖x‖ := by
+  have h0 : secondQuantModFlowH S t 0 = 0 := by
+    rw [← secondQuantModCLM_apply]; exact map_zero _
+  have hd := (secondQuantModFlowH_isometry S t).dist_eq x 0
+  rw [dist_eq_norm, dist_eq_norm, h0, sub_zero, sub_zero, ← secondQuantModCLM_apply] at hd
+  exact hd
+
+/-- `Γ(Δ^{it})` bundled as a `LinearIsometry` on the Fock Hilbert space — so it
+    preserves the inner product. -/
+noncomputable def secondQuantModLI (S : StandardSubspace H) (t : ℝ) :
+    Fock H →ₗᵢ[ℂ] Fock H where
+  toLinearMap := (secondQuantModCLM S t).toLinearMap
+  norm_map' := secondQuantModCLM_norm S t
+
+/-- **`Γ(Δ^{it})⋆ = Γ(Δ^{-it})`.**  The adjoint of the free-field modular flow is
+    the inverse flow — derived from inner-product preservation and
+    `Γ(Δ^{it})∘Γ(Δ^{-it}) = id`. -/
+theorem secondQuantModCLM_adjoint (S : StandardSubspace H) (t : ℝ) :
+    ContinuousLinearMap.adjoint (secondQuantModCLM S t) = secondQuantModCLM S (-t) := by
+  symm
+  rw [ContinuousLinearMap.eq_adjoint_iff]
+  intro x y
+  have hLI : ∀ a, (secondQuantModLI S t) a = secondQuantModCLM S t a := fun _ => rfl
+  have hinv : secondQuantModCLM S t (secondQuantModCLM S (-t) x) = x := by
+    rw [secondQuantModCLM_apply, secondQuantModCLM_apply, secondQuantModFlowH_rightInv]
+  have hpres := (secondQuantModLI S t).inner_map_map (secondQuantModCLM S (-t) x) y
+  rw [hLI, hLI, hinv] at hpres
+  exact hpres.symm
+
+/-- **`Γ(Δ^{it})` is unitary** on the Fock Hilbert space — the genuine free-field
+    modular unitary group. -/
+theorem secondQuantModCLM_unitary (S : StandardSubspace H) (t : ℝ) :
+    secondQuantModCLM S t ∈ unitary (Fock H →L[ℂ] Fock H) := by
+  rw [Unitary.mem_iff]
+  refine ⟨?_, ?_⟩
+  · rw [ContinuousLinearMap.star_eq_adjoint, secondQuantModCLM_adjoint,
+        secondQuantModCLM_mul, neg_add_cancel, secondQuantModCLM_zero]
+  · rw [ContinuousLinearMap.star_eq_adjoint, secondQuantModCLM_adjoint,
+        secondQuantModCLM_mul, add_neg_cancel, secondQuantModCLM_zero]
+
 /-- **Audit conclusion.**  `Γ(Δ^{it})` repackaged as a bounded operator on the
-    Fock Hilbert space, a one-parameter group (`secondQuantModCLM_zero/_mul`),
-    agreeing with the function `secondQuantModFlowH`.  NO project axioms.  Next:
-    the adjoint relation `Γ(Δ^{it})⋆ = Γ(Δ^{-it})` (unitarity) and the field-level
-    `Ad(Γ)` persistence. -/
+    Fock Hilbert space — a one-parameter group (`secondQuantModCLM_zero/_mul`),
+    UNITARY (`secondQuantModCLM_adjoint`: `Γ⋆ = Γ(-t)`; `secondQuantModCLM_unitary`),
+    agreeing with the function `secondQuantModFlowH`.  NO project axioms.  This is
+    the genuine free-field modular unitary group; next, the field-level `Ad(Γ)`
+    persistence replays the `ContinuumLambda` `modAutOp` machinery. -/
 theorem secondQuantModCLM_audit : True := trivial
 
 end QIQTH.Fock

@@ -1635,6 +1635,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the bounded operator Γ(Δ^{it}) agrees with the function secondQuantModFlowH.
 #print axioms QIQTH.Fock.secondQuantModCLM_mul
 -- expected: standard only — Γ(Δ^{it}) is a one-parameter group of bounded operators on Fock.
+#print axioms QIQTH.Fock.secondQuantModCLM_adjoint
+-- expected: standard only — Γ(Δ^{it})⋆ = Γ(Δ^{-it}) (the adjoint is the inverse flow).
+#print axioms QIQTH.Fock.secondQuantModCLM_unitary
+-- expected: standard only — Γ(Δ^{it}) is UNITARY on the Fock Hilbert space (the free-field modular unitary group).
 
 -- Free-field finite-mode instance (a, b, c)
 #print axioms QIQTH.FreeFieldRecord.holographic_bound
