@@ -1630,6 +1630,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.secondQuantModFlowH_weyl_fixed
 -- expected: standard only — Γ-level persistence: Weyl records on modular-fixed modes commute with Γ(Δ^{it}).
 
+-- SecondQuantCLM.lean — Γ(Δ^{it}) as a bounded operator (the field-level Ad-persistence substrate).
+#print axioms QIQTH.Fock.secondQuantModCLM_apply
+-- expected: standard only — the bounded operator Γ(Δ^{it}) agrees with the function secondQuantModFlowH.
+#print axioms QIQTH.Fock.secondQuantModCLM_mul
+-- expected: standard only — Γ(Δ^{it}) is a one-parameter group of bounded operators on Fock.
+
 -- Free-field finite-mode instance (a, b, c)
 #print axioms QIQTH.FreeFieldRecord.holographic_bound
 -- expected: standard only — (a) N free-fermion modes ⇒ log₂ #Atoms = N ≤ Q_R

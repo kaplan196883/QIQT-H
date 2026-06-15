@@ -149,6 +149,10 @@ import QIQTH.ContinuumSelection
 -- Weyl records on modular-fixed modes commute with it (Γ-level persistence); NO
 -- axioms beyond the standard three:
 import QIQTH.ContinuumLambdaFock
+-- Γ(Δ^{it}) repackaged as a bounded operator on the Fock Hilbert space (the
+-- ContinuousLinearMap one-parameter group), the substrate for field-level
+-- Ad(Γ) persistence; NO axioms beyond the standard three:
+import QIQTH.Fock.SecondQuantCLM
 -- Free-field finite-mode instance: (a) holographic record count, (b) Gaussian
 -- decoherence decay, (c) finite-mode Lorentz action — concrete theorems
 -- instantiating parts of the LorentzSelection AQFT axioms; standard axioms only:
