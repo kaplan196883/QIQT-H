@@ -1646,6 +1646,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.dephaseFock_modAutFock_commute
 -- expected: standard only — FIELD-LEVEL PERSISTENCE: decoherence map commutes with σ_t=Ad(Γ(Δ^{it})) ∀t.
 
+-- FieldBorn.lean — the Born rule at the genuine free-field level (Fock vacuum state).
+#print axioms QIQTH.Fock.vacuumState_povm_sum
+-- expected: standard only — vacuum-state weights of a POVM sum to 1 (field-level Born probability).
+#print axioms QIQTH.Fock.vacuumState_weylBit_sum
+-- expected: standard only — the Weyl-bit record POVM's vacuum-state weights are a probability (free-field two-outcome Born).
+
 -- Free-field finite-mode instance (a, b, c)
 #print axioms QIQTH.FreeFieldRecord.holographic_bound
 -- expected: standard only — (a) N free-fermion modes ⇒ log₂ #Atoms = N ≤ Q_R

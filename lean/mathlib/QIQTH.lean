@@ -158,6 +158,10 @@ import QIQTH.Fock.SecondQuantCLM
 -- field-level persistence (decoherence map commutes with σ_t ∀t) on the
 -- second-quantized modular flow; NO axioms beyond the standard three:
 import QIQTH.Fock.ContinuumLambdaField
+-- The Born rule at the genuine free-field level: vacuum-state weights of a POVM
+-- are a probability (instantiated at the Weyl-bit record POVM) — the Born layer
+-- on the real Fock vacuum state; NO axioms beyond the standard three:
+import QIQTH.Fock.FieldBorn
 -- Free-field finite-mode instance: (a) holographic record count, (b) Gaussian
 -- decoherence decay, (c) finite-mode Lorentz action — concrete theorems
 -- instantiating parts of the LorentzSelection AQFT axioms; standard axioms only:
