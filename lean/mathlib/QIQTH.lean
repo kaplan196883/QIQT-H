@@ -162,6 +162,10 @@ import QIQTH.Fock.ContinuumLambdaField
 -- are a probability (instantiated at the Weyl-bit record POVM) — the Born layer
 -- on the real Fock vacuum state; NO axioms beyond the standard three:
 import QIQTH.Fock.FieldBorn
+-- The selection event at the genuine free-field level: exactly one Weyl-bit
+-- record per actuality seed, realizing the Fock-vacuum-state Born weights; NO
+-- axioms beyond the standard three:
+import QIQTH.Fock.FieldSelection
 -- Free-field finite-mode instance: (a) holographic record count, (b) Gaussian
 -- decoherence decay, (c) finite-mode Lorentz action — concrete theorems
 -- instantiating parts of the LorentzSelection AQFT axioms; standard axioms only:

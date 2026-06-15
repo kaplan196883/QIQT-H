@@ -1652,6 +1652,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.vacuumState_weylBit_sum
 -- expected: standard only — the Weyl-bit record POVM's vacuum-state weights are a probability (free-field two-outcome Born).
 
+-- FieldSelection.lean — the selection event at the genuine free-field level.
+#print axioms QIQTH.Fock.field_selects_exists_unique
+-- expected: standard only — exactly one Weyl-bit record per seed, driven by the Fock-vacuum-state Born weights.
+#print axioms QIQTH.Fock.field_volume_selects
+-- expected: standard only — uniform seed measure of a record = its free-field Born weight (realizes Born).
+
 -- Free-field finite-mode instance (a, b, c)
 #print axioms QIQTH.FreeFieldRecord.holographic_bound
 -- expected: standard only — (a) N free-fermion modes ⇒ log₂ #Atoms = N ≤ Q_R
