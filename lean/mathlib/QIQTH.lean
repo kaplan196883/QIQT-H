@@ -266,6 +266,7 @@ import QIQTH.RefinementBorn
 import QIQTH.SBSBoolean
 import QIQTH.SBSSuppression
 import QIQTH.RedundancyCompressible
+import QIQTH.CovariantGluing
 import QIQTH.SelectorRefinement
 import QIQTH.SelectionDynamics
 import QIQTH.BornRoutes

@@ -25,6 +25,16 @@ Lorentz symmetry — the **law** is covariant, the **realization** is not. So:
 > world). λ is a **sample** from a covariant law, not an equivariant function. An individual actual world is
 > not Lorentz-invariant (no actual world is); only the law is. This dissolves the "no covariant section" worry.
 
+**★ Now machine-checked (2026-06-15, `QIQTH/CovariantGluing.lean`, NO axioms at all).** Both halves of the
+dichotomy are formal: the covariant MEASURE exists (`Fock.weylBit_typicality_lorentzBoost_invariant`, 1+1D
+free field), and a covariant SELECTOR cannot (`no_covariant_selector`: an equivariant `σ : Φ ↦ λ` sends a
+symmetry-fixed state to a symmetry-fixed history, so if the symmetric state's actual histories form a
+nontrivial orbit — no fixed history — no covariant selector exists; finite S²-analog witness
+`bool_swap_no_selector`). So OP3b's conceptual core is settled: λ is necessarily a symmetry-breaking *sample*
+of a covariant law, not a covariant function — that's forced, not a defect. Still open (the genuine
+frontier): the global *consistent-set/realm* gluing over a poset without a ⊤-chart (net cohomology) and the
+interacting/Type III₁ case; the contextuality-safety (Bell-embedded marginals) check.
+
 ## CORRECTION 2: the obstruction is CONTEXTUALITY, not Roberts cohomology
 
 The real obstruction to a global actuality assignment is **Bell/Fine/Kochen–Specker / Abramsky–Brandenburger
