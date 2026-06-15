@@ -60,9 +60,24 @@ for spacelike modes (`Im⟪u,v⟫=0`), `∑_{σ_B} ‖A(u,σ_A)A(v,σ_B)Ω‖² 
 independent of Bob's mode `v` (`bell_no_signaling_alice`); two Bob settings give the same Alice marginal
 (`bell_no_signaling_setting_indep`); symmetric for Bob. Mechanism: spacelike bits commute (`bitOp_comm`,
 microcausality) so Bob's bit moves outermost and sums via `bit_normSq_sum`. So the genuine record measure IS
-no-signaling. REMAINING: record correlations that ATTAIN a CHSH/Tsirelson violation within this commuting-bit
-free-field model (vs. the cited singlet `Tsirelson.lean`); the global consistent-set gluing without a ⊤-chart;
-interacting/Type III₁.
+no-signaling.
+
+**★★★ STATE-INDEPENDENT (frontier push, 2026-06-15, `bell_no_signaling_state`).** The proof uses only
+microcausality + normalization, neither of which depends on the state — so no-signaling holds for **ANY**
+global state `ψ`, **entangled ones included**. This is the honest "causality always, Bell-violation iff
+entangled" split: relativistic no-signaling is a state-independent property of the record dynamics, while Bell
+*violation* enters purely through the state's entanglement (state-dependent, via the abstract Tsirelson —
+never through signaling). So no entangled choice of `Φ` ever lets the record net signal.
+
+FRONTIER STATUS: (a) the global gluing over a no-⊤ poset is ALREADY done at the measure level
+(`KolmogorovFiniteFiber.exists_isLimit`, arbitrary index `Finset ι` directed by ⊆ — no top needed); the
+"net cohomology" worry was dissolved by the measure-not-section correction. (b) Type III₁ / continuum is a
+genuine multi-year Mathlib wall (no unbounded-operator / Type-III infrastructure; prior consults: do NOT
+expand the TT tower); not pushed — would need decades of infra or axioms against the ratchet. (c) The one
+remaining achievable-but-substantial piece: record correlations ATTAINING a CHSH/Tsirelson violation for an
+entangled `Φ` within the Fock/record framework (the cited singlet `Tsirelson.lean` reaches 2√2; connecting it
+to the record net is the open increment). The no-signaling side (this file) is now complete and
+state-independent.
 
 ## The decisive object — and it's largely DONE for 1+1D (good news)
 

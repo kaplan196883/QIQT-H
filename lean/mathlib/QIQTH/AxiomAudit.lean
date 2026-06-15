@@ -2475,11 +2475,12 @@ namespace QIQTH.AxiomAudit
 -- Born also needs refinement-additivity (RefinementBorn), equal-norm canonicity, continuity, independence.
 
 -- WeylBitBell.lean — OP3b concrete Bell embedding: no-signaling FROM the record measure (2026-06-15).
-#print axioms QIQTH.Fock.bell_no_signaling_alice
--- expected: standard only — summing Bob's record outcome gives Alice's marginal ‖A(u,σ_A)Ω‖², independent of
--- Bob's mode v; derived from microcausality (bitOp_comm) + bit_normSq_sum, on the actual weylBitNet measure.
+#print axioms QIQTH.Fock.bell_no_signaling_state
+-- expected: standard only — no-signaling is STATE-INDEPENDENT: for ANY global state ψ (entangled included),
+-- summing Bob's record outcome gives Alice's marginal ‖A(u,σ_A)ψ‖², independent of Bob's mode v. Causality
+-- always; Bell-violation iff the state is entangled (state-dependent, via the abstract Tsirelson).
 #print axioms QIQTH.Fock.bell_no_signaling_setting_indep
--- expected: standard only — operational no-signaling: two Bob settings v,v' give the SAME Alice marginal.
+-- expected: standard only — operational no-signaling (any state): two Bob settings v,v' give the SAME Alice marginal.
 
 -- ContextualitySafe.lean — OP3b Bell-marginal check: λ-measure is contextuality-safe (2026-06-15).
 #print axioms QIQTH.ContextualitySafe.no_global_record_valuemap
