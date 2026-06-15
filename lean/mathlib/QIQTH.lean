@@ -126,6 +126,10 @@ import QIQTH.LambdaPointer
 -- force Born), the α-family witnesses it, refinement-additivity is the strong
 -- discriminating premise that linearizes; NO axioms beyond the standard three:
 import QIQTH.WeakStrongSplit
+-- λ's selection-event constructor: an explicit inverse-CDF selector from an
+-- actuality seed — exactly one record per seed (single-world consistency) and
+-- the uniform seed measure pushes to Born; NO axioms beyond the standard three:
+import QIQTH.SelectionEvent
 -- Free-field finite-mode instance: (a) holographic record count, (b) Gaussian
 -- decoherence decay, (c) finite-mode Lorentz action — concrete theorems
 -- instantiating parts of the LorentzSelection AQFT axioms; standard axioms only:

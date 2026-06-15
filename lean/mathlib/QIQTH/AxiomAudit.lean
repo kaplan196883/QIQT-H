@@ -1596,6 +1596,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WeakStrongSplit.refinementAdditive_nsmul
 -- expected: standard only — refinement-additivity linearizes f(n·x)=n·f(x): the mechanism selecting Born.
 
+-- SelectionEvent.lean — λ's selection-event constructor (inverse-CDF; 2026-06-15).
+#print axioms QIQTH.SelectionEvent.selects_exists_unique
+-- expected: standard only — EXACTLY ONE record per actuality seed (single-world: not zero, not two).
+#print axioms QIQTH.SelectionEvent.volume_selects
+-- expected: standard only — uniform seed measure of record k = its Born weight (selection realizes Born frequency).
+
 -- Free-field finite-mode instance (a, b, c)
 #print axioms QIQTH.FreeFieldRecord.holographic_bound
 -- expected: standard only — (a) N free-fermion modes ⇒ log₂ #Atoms = N ≤ Q_R
