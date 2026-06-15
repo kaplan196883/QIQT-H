@@ -1575,6 +1575,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — dephasing E(x)=Σ Pₐ x Pₐ is the ω-preserving conditional expectation when [ρ,Pₐ]=0.
 #print axioms QIQTH.LambdaPointer.dephase_one
 -- expected: standard only — the dephasing conditional expectation is unital, E(1)=1.
+#print axioms QIQTH.LambdaPointer.dephase_modAut_commute
+-- expected: standard only — PERSISTENCE: E∘σ=σ∘E, the decoherence map commutes with the modular flow (static→dynamical).
+#print axioms QIQTH.LambdaPointer.modAut_fixes_pointer
+-- expected: standard only — each selected record is a fixed point of the modular flow.
+#print axioms QIQTH.LambdaPointer.bornWeight_modAut_invariant
+-- expected: standard only — Born weights are constants of the modular motion (KMS invariance).
 
 -- Free-field finite-mode instance (a, b, c)
 #print axioms QIQTH.FreeFieldRecord.holographic_bound
