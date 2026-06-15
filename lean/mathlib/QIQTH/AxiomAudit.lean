@@ -2474,6 +2474,15 @@ namespace QIQTH.AxiomAudit
 -- fragment of Born; naturality is necessary but NOT sufficient (α-family T_q is natural+equiprob, non-Born) —
 -- Born also needs refinement-additivity (RefinementBorn), equal-norm canonicity, continuity, independence.
 
+-- RedundancyCompressible.lean — redundant records are compressible: the category-error core (2026-06-15).
+#print axioms QIQTH.RedundancyCompressible.card_redundantCodewords
+-- expected: standard only — # distinguishable R-fold redundant records = |X| (R-independent), NOT |X|^R.
+#print axioms QIQTH.RedundancyCompressible.naive_overcounts
+-- expected: standard only — the naive "R copies cost R·log|X|" strictly exceeds the true log|X|: charging
+-- a holographic bound per redundant imprint overcounts the same information R-fold (the category error).
+#print axioms QIQTH.RedundancyCompressible.code_subspace_dim
+-- expected: standard only — orthonormal redundant-copy states span a subspace of dim |X|, not exp(R).
+
 -- SBSSuppression.lean — redundancy (Quantum Darwinism) restores strong decoherence in the limit (2026-06-15).
 #print axioms QIQTH.SBSSuppression.offdiagonal_norm_le
 -- expected: standard only — the exponential bound ‖∏ z k‖ ≤ rᴺ on the joint off-diagonal of N fragments.
