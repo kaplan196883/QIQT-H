@@ -115,7 +115,11 @@ $\Delta^{it}$ (the Rieffel–Van Daele bounded `modUnitary`), the modular automo
 the **continuum Takesaki criterion**, **continuum persistence** (the decoherence map commutes with $\sigma_t$ for
 every $t$), the **Type-independent algebraic Born rule** (the spectral measure of pointer Borel sets is a genuine
 probability), and the **Type-blind selection event** (one record per seed, realizing Born) are all axiom-free
-(`ContinuumLambda`, `NaturalConeBorn`, `ContinuumSelection`).
+(`ContinuumLambda`, `NaturalConeBorn`, `ContinuumSelection`). And the whole λ-law is also lifted to the
+**second-quantized free field**: $\Gamma(\Delta^{it})$ as a unitary one-parameter group of bounded operators on
+the Fock Hilbert space, with the field-level automorphism, persistence, Born rule (on the genuine Fock *vacuum
+state* — the Weyl-bit record gives $(1\pm e^{-\lVert u\rVert^2/2})/2$), and selection event all axiom-free
+(`SecondQuantCLM`, `ContinuumLambdaField`, `FieldBorn`, `FieldSelection`).
 
 **What is open.** With the continuum λ-law now built (above), the residual walls are sharply two: the
 **Haagerup natural-cone existence** in Mathlib (we state the Born rule directly on vector states; the canonical
