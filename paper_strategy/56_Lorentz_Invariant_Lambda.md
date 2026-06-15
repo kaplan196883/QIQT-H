@@ -45,6 +45,17 @@ Bell/Fine/KS instantly). ⇒ The OP3b "Roberts Ȟ¹ / covariant global section" 
 an earlier consult) is **mis-targeted** and should be corrected to: covariant σ-additive measure on
 compatible *actual-record* histories.
 
+**★ Now machine-checked (2026-06-15, `QIQTH/ContextualitySafe.lean`, axiom-free) — the Bell-marginal check
+passes.** Assembled from the verified CHSH/no-signaling machinery: `no_global_record_valuemap` (a global
+value-map = `LHVModel` over all four incompatible settings has `|CHSH| ≤ 2`, so none reaches the quantum
+record value `2√2`), and `contextuality_safe` (a correlation `> 2` exists with NO global value-map). Combined
+with `NoSignalingGeneral.bipartite_no_signaling` (per-compatible-context marginals no-signal, arbitrary ρ):
+assigning values only to the ACTUAL context is *forced* (no global noncontextual joint exists) and *consistent*
+(no-signaling). So λ dodges the Fine/Bell global-distribution obstruction by being actual-context-only, not by
+smuggling a non-quantum assumption — the mandatory CHSH/Fine guardrail is satisfied. REMAINING: the concrete
+embedding of a Bell experiment inside the Weyl-bit *record net* (deriving these marginals from the λ-measure
+itself, not the abstract CHSH theorems); the global consistent-set gluing without a ⊤-chart; interacting/Type III₁.
+
 ## The decisive object — and it's largely DONE for 1+1D (good news)
 
 The right target (pro): a genuine **Poincaré-covariant σ-additive Kolmogorov measure** ℙ on Γ(𝓡), the space

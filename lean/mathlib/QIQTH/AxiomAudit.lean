@@ -2474,6 +2474,15 @@ namespace QIQTH.AxiomAudit
 -- fragment of Born; naturality is necessary but NOT sufficient (α-family T_q is natural+equiprob, non-Born) —
 -- Born also needs refinement-additivity (RefinementBorn), equal-norm canonicity, continuity, independence.
 
+-- ContextualitySafe.lean — OP3b Bell-marginal check: λ-measure is contextuality-safe (2026-06-15).
+#print axioms QIQTH.ContextualitySafe.no_global_record_valuemap
+-- expected: standard only — no global value-map (LHVModel over all 4 settings) reaches |CHSH|>2; so λ is not
+-- a noncontextual value-map over incompatible settings.
+#print axioms QIQTH.ContextualitySafe.contextuality_safe
+-- expected: standard only — a quantum/record correlation >2 (Tsirelson) has no global value-map; combined
+-- with per-context no-signaling (NoSignalingGeneral.bipartite_no_signaling), actual-context-only is forced
+-- and consistent — dodging the Fine/Bell global-distribution obstruction without smuggling non-quantum input.
+
 -- CovariantGluing.lean — OP3b: covariant MEASURE exists, covariant SELECTOR cannot (2026-06-15).
 #print axioms QIQTH.CovariantGluing.no_covariant_selector
 -- expected: NO axioms at all — no equivariant Φ↦λ selector exists when the symmetric state's actual histories
