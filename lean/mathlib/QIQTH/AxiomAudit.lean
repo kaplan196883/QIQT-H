@@ -1618,6 +1618,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.NaturalConeBorn.modBornWeights_sum_unit
 -- expected: standard only — continuum modular pointer Born weights are a probability (unit state).
 
+-- ContinuumSelection.lean — Stage 3 of the continuum λ-law: the (Type-blind) selection event.
+#print axioms QIQTH.ContinuumSelection.continuum_selects_exists_unique
+-- expected: standard only — exactly one record per seed, driven by the continuum Born weights.
+#print axioms QIQTH.ContinuumSelection.continuum_volume_selects
+-- expected: standard only — uniform seed measure of record k = its continuum Born weight (realizes Born).
+
 -- Free-field finite-mode instance (a, b, c)
 #print axioms QIQTH.FreeFieldRecord.holographic_bound
 -- expected: standard only — (a) N free-fermion modes ⇒ log₂ #Atoms = N ≤ Q_R

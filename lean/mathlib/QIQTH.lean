@@ -139,6 +139,11 @@ import QIQTH.ContinuumLambda
 -- scalar spectral measure — the spectral measure of pointer Borel sets is a
 -- genuine probability (no trace); NO axioms beyond the standard three:
 import QIQTH.NaturalConeBorn
+-- Continuum λ-law Stage 3: the continuum selection event — exactly one record per
+-- actuality seed driven by the continuum Born weights, realizing Born; the
+-- selection event is Type-blind (needs only the finite record structure). NO
+-- axioms beyond the standard three:
+import QIQTH.ContinuumSelection
 -- Free-field finite-mode instance: (a) holographic record count, (b) Gaussian
 -- decoherence decay, (c) finite-mode Lorentz action — concrete theorems
 -- instantiating parts of the LorentzSelection AQFT axioms; standard axioms only:
