@@ -2457,6 +2457,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — symmetric equiprobability over an equal-amplitude orthonormal fine-graining gives
 -- Born empirical frequencies; residual = envariance symmetry + existence of the fine-graining (both Born-free).
 
+-- EnvarianceJustification.lean — the envariance symmetry is structurally forced for equal amplitudes (2026-06-15).
+#print axioms QIQTH.EnvarianceJustification.joint_perm_coeff
+-- expected: standard only — the joint permutation U_S⊗U_E relabels amplitudes by c ↦ c∘σ⁻¹ (so it fixes
+-- the entangled state iff c is σ-invariant).
+#print axioms QIQTH.EnvarianceJustification.envariance_swap_invariant
+-- expected: standard only — the a↔b swap (undone by the environment counter-swap) fixes ψ iff c a = c b:
+-- "equal amplitudes ⇒ envariant", with the symmetry exhibited as a unitary, not posited. Reduces the
+-- envariance residual of BornEquiprobable to state-supervenience (probabilities depend only on the state).
+
 -- SBSSuppression.lean — redundancy (Quantum Darwinism) restores strong decoherence in the limit (2026-06-15).
 #print axioms QIQTH.SBSSuppression.offdiagonal_norm_le
 -- expected: standard only — the exponential bound ‖∏ z k‖ ≤ rᴺ on the joint off-diagonal of N fragments.
