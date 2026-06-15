@@ -40,13 +40,30 @@ single-world hidden-variable/modal *completion* of QM, genuine only once λ has 
 - **OP3b (covariant gluing) resolved conceptually**: a covariant *measure* exists but no covariant *selector*
   (the S² obstruction) — so λ is necessarily a symmetry-breaking *sample*, not an equivariant function; and the
   construction is **contextuality-safe** with **state-independent no-signaling** (holds for entangled states).
+- **λ is Type-III-native** (a 2026-06-15 correction, after a red-team that checked the operator algebra): the
+  earlier idea of "dressing" the Type III₁ local algebra into a Type II algebra via the gravitational crossed
+  product to recover atoms and a trace was a **category error** for the selection problem — Type II factors
+  *also* have no minimal projections, so the records λ selects come from a chosen abelian *pointer* subalgebra
+  𝔄, which already lives inside Type III₁. λ needs no forced trace: the Born weights are the algebraic
+  $\omega(P_\alpha)=\lVert P_\alpha\Phi\rVert^2$ (the natural-cone state, Type-independent).
+- **λ's kinematic law is now machine-checked** (finite/Type I shadow, `LambdaPointer.lean`): *which* pointer
+  algebra is fixed by **Takesaki's criterion** $\sigma_t^\omega(\mathfrak A)=\mathfrak A \Leftrightarrow [\rho,P_\alpha]=0$
+  (exact decoherence — `modAut_fixes_iff_commute`); the decoherence map $E(x)=\sum_\alpha P_\alpha x P_\alpha$ **is**
+  the unital, $\omega$-preserving conditional expectation onto 𝔄 (`dephase_preserves_state`); and the Born
+  weights are a genuine probability (`bornWeights_sum`).
+- **Dynamical persistence is machine-checked** — the first real piece of the dynamical realization: $E$ commutes
+  with the genuine real-time modular flow $\sigma_t$ for **every $t$** (`dephase_sigmaDiag_commute`; unconditional
+  in the einselected basis, `dephase_sigmaDiag_commute_diagonal`). So a dephased, records-definite state **stays**
+  dephased for all time — coherence between pointer sectors never regenerates, and the selected record is a fixed
+  point of the dynamics with constant Born weights.
 
-**What is open.** λ's *selection* is still a primitive — there is no constructor and no dynamical law that
-*produces* the one actual history; the **dynamical realization** (one record, not zero/two, from the actual
-unitary dynamics, on a dynamically-invariant admissible space) is the load-bearing residual.
+**What is open.** Two residuals, both honestly hard. (i) The **selection event** itself — persistence shows the
+actual record does not *un*-select, but not *why one* (rather than zero or two) becomes actual; there is still
+no constructor that *produces* the single history. (ii) The derivation of the stable weights as genuine
+**across-run frequencies**, which the Born no-go (Gap 2) shows must rest on an irreducible premise.
 
-**Difficulty.** The conceptual covariance/contextuality structure is done; the dynamical-realization core is
-medium–hard and **partly formalizable in finite dimensions** — the best near-term target.
+**Difficulty.** The covariance/contextuality structure *and* the kinematic + persistence law are now done
+(finite); the selection-event constructor and the continuum realization (Gap 3) are the medium-to-hard residual.
 
 ## Gap 2 — Born from typicality (reduced, not closed)
 
@@ -75,10 +92,13 @@ rather than postulate it.
 **What is done toward it.** The finite and free-field constructions are complete and axiom-free; the Type II
 crossed-product *entropy* (CLPW) is the borrowed substrate.
 
-**What is open.** The interacting / general-state Type III₁ realization — and note that holography is now
-machine-checked to be **scaffolding**: λ's covariant measure needs only *finiteness*, not the area-bound, so a
-genuinely load-bearing role for the holographic *grading* (beyond grounding the finiteness physically and
-supplying the Type II substrate) would have to be demonstrated.
+**What is open.** The interacting / general-state Type III₁ realization. Two notes on what changed. (a)
+Holography is now machine-checked to be **scaffolding**: λ's covariant measure needs only *finiteness*, not the
+area-bound, so a genuinely load-bearing role for the holographic *grading* would have to be demonstrated. (b)
+For **λ specifically** the continuum target is now the **standard form / natural cone** (the Type-independent
+state↦vector correspondence carrying the algebraic Born rule) together with the modular $\sigma_t^\omega$ via
+Connes cocycles — *not* the Type II crossed product, which the red-team retired as doing no work for selection.
+That is a more tractable continuum entry point than the abandoned crossed-product tower, though still a wall.
 
 **Difficulty.** Very hard — a multi-year Mathlib-grade wall (unbounded operator theory, Type III classification
 that Mathlib lacks). Not a blocker for the conditional interpretation; the honestly-cited frontier.
@@ -88,9 +108,13 @@ that Mathlib lacks). Not a blocker for the conditional interpretation; the hones
 ## In one paragraph
 
 The original crux (H2 — capacity forbids records) is **retired as a category error**; the single outcome is
-λ's. QIQT-H becomes a *theory* rather than a conditional completion when **λ gets a law** — its covariance and
-contextuality structure are already machine-checked, but its *selection* is still primitive and the
-*dynamical realization* is open. **Born** is reduced (axiom-free) to a single state-supervenience premise with
-a no-go that some premise is unavoidable. The **continuum** (Type III₁) is the honestly-cited multi-year wall.
-The [machine-checked substrate](/formalization) is axiom-free and settles the covariance/contextuality/Born
-pieces; it does not close λ's law or the continuum.
+λ's. λ is now **Type-III-native** (no forced trace), and its *kinematic* law is machine-checked: Takesaki's
+criterion fixes which pointer algebra carries the $\omega$-preserving conditional expectation, the Born weights
+are a genuine probability, and — the first dynamical piece — that selection **persists for all time** under the
+real-time modular flow (coherence never regenerates). What remains for λ to make QIQT-H a *theory* rather than
+a conditional completion: a constructor for the **selection event** (why *one* record becomes actual) and the
+derivation of the weights as **across-run frequencies**. **Born** is reduced (axiom-free) to a single
+state-supervenience premise with a no-go that some premise is unavoidable. The **continuum** (Type III₁,
+now via the standard form for λ) is the honestly-cited multi-year wall. The
+[machine-checked substrate](/formalization) is axiom-free and settles the covariance/contextuality/Born and
+λ-kinematics/persistence pieces; it does not close the selection event or the continuum.

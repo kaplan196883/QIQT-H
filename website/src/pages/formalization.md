@@ -123,11 +123,32 @@ premise is unavoidable). Born is **input**, not derived; these establish what it
 | `ContextualitySafe.contextuality_safe` | a quantum/record correlation $>2$ (Tsirelson) has **no** global value-map — assigning values only to the actual context is forced |
 | `Fock.bell_no_signaling_state` | no-signaling is **state-independent**: for *any* (entangled) global state, summing Bob's record outcome leaves Alice's marginal independent of Bob's setting |
 
+### λ's pointer law: the finite Takesaki criterion + dynamical persistence
+
+The finite (Type I) shadow of λ's kinematic-and-dynamical law. λ is **Type-III-native** — the records it selects
+come from a chosen abelian *pointer* subalgebra 𝔄 (which exists already inside a Type III₁ factor), and the
+Born weights are the algebraic state value $\omega(P_\alpha)$, needing no trace. These theorems make precise
+*which* 𝔄 is consistent, that the decoherence map is the conditional expectation onto it, and that the
+selection is stable under the modular dynamics.
+
+| theorem | statement |
+| --- | --- |
+| `LambdaPointer.modAut_fixes_iff_commute` | **Takesaki criterion**: the modular flow fixes a pointer projection $\sigma(P)=P$ **iff** $[\rho,P]=0$ — i.e. iff the state has no coherence between pointer sectors (exact decoherence selects 𝔄) |
+| `LambdaPointer.bornWeights_sum` | the algebraic Born weights $\omega(P_\alpha)=\operatorname{tr}(\rho P_\alpha)$ of a resolution of unity sum to $\operatorname{tr}\rho$ — a genuine probability |
+| `LambdaPointer.dephase_preserves_state` | the decoherence map $E(x)=\sum_\alpha P_\alpha x P_\alpha$ is the unital, $\omega$-preserving **conditional expectation** onto 𝔄 (exactly when the criterion holds) |
+| `LambdaPointer.dephase_sigmaDiag_commute` | **persistence, $\forall t$**: $E$ commutes with the genuine real-time modular flow $\sigma_t(x)=\rho^{it}x\rho^{-it}$ — a dephased state stays dephased for all time, coherence never regenerates |
+| `LambdaPointer.dephase_sigmaDiag_commute_diagonal` | in the einselected (density-eigenbasis) pointer basis the persistence is **unconditional** for all $t$ — the selected record persists for all time |
+| `LambdaPointer.modAut_fixes_pointer` / `bornWeight_modAut_invariant` | each selected record is a **fixed point** of the flow, and the Born weights are **constants of the modular motion** |
+
 <div class="note"><strong>What these add.</strong> They settle λ's law at the foundational level: Born reduces to
-state-supervenience (not capacity, not a counting rule), and the covariance + contextuality structure is
-verified (covariant measure, no covariant selector; no global value-map; state-independent no-signaling). The
-single outcome is λ's; the holographic bound is the finite record <em>stage</em> only. The remaining gaps are
-the continuum (Type III₁) and the interacting case — hard mathematics, not foundational coherence.</div>
+state-supervenience (not capacity, not a counting rule); the covariance + contextuality structure is verified
+(covariant measure, no covariant selector; no global value-map; state-independent no-signaling); and λ's
+<em>kinematic</em> law is pinned down — the Takesaki criterion fixes which pointer algebra is consistent, the
+decoherence map is its conditional expectation, and (the first dynamical result) the selection <em>persists for
+all time</em> under the real-time modular flow. The single outcome is λ's; the holographic bound is the finite
+record <em>stage</em> only. The remaining gaps are the <em>selection event</em> itself (why one record becomes
+actual), the across-run <em>frequency</em> derivation (an irreducible premise, by the Born no-go), and the
+continuum (Type III₁, via the standard form for λ) — hard mathematics, not foundational incoherence.</div>
 
 ## Reproduce the verification
 

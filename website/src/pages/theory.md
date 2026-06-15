@@ -89,10 +89,18 @@ by λ among the unitarily-evolved alternatives, not a dynamical modification of 
 dynamical-realization and Born problem below. Q<sub>max</sub>'s role is the finite record *stage* (how many
 distinguishable records exist), not the selection.
 
-Two honest caveats. First, the theorem as formalized is a **static exclusion**: it says two-record content
-is not instantiable, not yet that the unitary dynamics *drives* an initial superposition to a single
-realized record. Closing that "dynamical realization" gap is open. Second, the theorem yields *that* there
-is one outcome, not *which*, and with what frequency.
+Recent progress has made λ's law precise where it can be (finite/Type I, machine-checked, axiom-free). λ is
+**Type-III-native**: the records it selects come from a chosen abelian *pointer* algebra 𝔄, and **Takesaki's
+criterion** fixes which 𝔄 is consistent — the modular flow fixes a pointer projection iff it commutes with the
+density (exact decoherence). The decoherence map is then the $\omega$-preserving conditional expectation onto
+𝔄, the Born weights $\omega(P_\alpha)$ are a genuine probability, and — the first *dynamical* result — that
+selection **persists for all time**: the decoherence map commutes with the real-time modular flow $\sigma_t$ for
+every $t$, so a records-definite state stays definite and coherence between pointer sectors never regenerates.
+
+Two honest caveats remain. First, persistence shows the actual record does not *un*-select under the dynamics,
+but not yet *why one* (rather than zero or two) record becomes actual in the first place — a constructor for the
+**selection event** is still open. Second, the theorem yields *that* there is one outcome, not *which*, and the
+derivation of the weights as across-run **frequencies** rests on an irreducible premise (the Born no-go).
 
 ## 5. Born statistics
 
