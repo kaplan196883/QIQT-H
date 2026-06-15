@@ -270,6 +270,7 @@ import QIQTH.SelectionDynamics
 import QIQTH.BornRoutes
 import QIQTH.Envariance
 import QIQTH.EnvarianceJustification
+import QIQTH.StateSupervenience
 import QIQTH.Relaxation
 import QIQTH.RankCountNoGo
 import QIQTH.BornChain

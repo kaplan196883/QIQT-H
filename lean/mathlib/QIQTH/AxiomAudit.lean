@@ -2466,6 +2466,13 @@ namespace QIQTH.AxiomAudit
 -- "equal amplitudes ⇒ envariant", with the symmetry exhibited as a unitary, not posited. Reduces the
 -- envariance residual of BornEquiprobable to state-supervenience (probabilities depend only on the state).
 
+-- StateSupervenience.lean — argument (a): the (Φ,λ) ontology forces state-supervenience (2026-06-15).
+#print axioms QIQTH.StateSupervenience.NaturalTypicality.stabilizer_invariant
+-- expected: standard only — a relabelling-natural typicality is invariant under state-fixing symmetries.
+#print axioms QIQTH.StateSupervenience.NaturalTypicality.envariance_equiprob
+-- expected: standard only — naturality + an envariance symmetry (g•Φ=Φ, g•a=b) ⇒ T Φ a = T Φ b. Closes the
+-- Born circularity modulo naturality (state-supervenience), the single remaining Born-free ontological premise.
+
 -- SBSSuppression.lean — redundancy (Quantum Darwinism) restores strong decoherence in the limit (2026-06-15).
 #print axioms QIQTH.SBSSuppression.offdiagonal_norm_le
 -- expected: standard only — the exponential bound ‖∏ z k‖ ≤ rᴺ on the joint off-diagonal of N fragments.
