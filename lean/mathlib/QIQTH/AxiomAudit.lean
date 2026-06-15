@@ -1624,6 +1624,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ContinuumSelection.continuum_volume_selects
 -- expected: standard only — uniform seed measure of record k = its continuum Born weight (realizes Born).
 
+-- ContinuumLambdaFock.lean — Stage 4 capstone foundation: Γ(Δ^{it}) at the Fock level.
+#print axioms QIQTH.Fock.secondQuantModFlowH_bijective
+-- expected: standard only — the free-field modular flow is a bijective isometry (vector-level unitarity).
+#print axioms QIQTH.Fock.secondQuantModFlowH_weyl_fixed
+-- expected: standard only — Γ-level persistence: Weyl records on modular-fixed modes commute with Γ(Δ^{it}).
+
 -- Free-field finite-mode instance (a, b, c)
 #print axioms QIQTH.FreeFieldRecord.holographic_bound
 -- expected: standard only — (a) N free-fermion modes ⇒ log₂ #Atoms = N ≤ Q_R

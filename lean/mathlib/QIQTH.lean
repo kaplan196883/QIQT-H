@@ -144,6 +144,11 @@ import QIQTH.NaturalConeBorn
 -- selection event is Type-blind (needs only the finite record structure). NO
 -- axioms beyond the standard three:
 import QIQTH.ContinuumSelection
+-- Continuum λ-law Stage 4 capstone foundation: the second-quantized free-field
+-- modular flow Γ(Δ^{it}) is a bijective isometry (vector-level unitarity), and
+-- Weyl records on modular-fixed modes commute with it (Γ-level persistence); NO
+-- axioms beyond the standard three:
+import QIQTH.ContinuumLambdaFock
 -- Free-field finite-mode instance: (a) holographic record count, (b) Gaussian
 -- decoherence decay, (c) finite-mode Lorentz action — concrete theorems
 -- instantiating parts of the LorentzSelection AQFT axioms; standard axioms only:
