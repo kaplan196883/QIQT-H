@@ -109,13 +109,21 @@ question + the continuum.
 rather than postulate it.
 
 **What is done toward it.** The finite and free-field constructions are complete and axiom-free; the Type II
-crossed-product *entropy* (CLPW) is the borrowed substrate.
+crossed-product *entropy* (CLPW) is the borrowed substrate. And, as of **2026-06-16**, the **continuum λ-law is
+machine-checked for the free-field / standard-subspace sector**: lifted onto the genuine continuum modular flow
+$\Delta^{it}$ (the Rieffel–Van Daele bounded `modUnitary`), the modular automorphism $\sigma_t=\mathrm{Ad}(\Delta^{it})$,
+the **continuum Takesaki criterion**, **continuum persistence** (the decoherence map commutes with $\sigma_t$ for
+every $t$), the **Type-independent algebraic Born rule** (the spectral measure of pointer Borel sets is a genuine
+probability), and the **Type-blind selection event** (one record per seed, realizing Born) are all axiom-free
+(`ContinuumLambda`, `NaturalConeBorn`, `ContinuumSelection`).
 
-**What is open.** The interacting / general-state Type III₁ realization. Two notes on what changed. (a)
-Holography is now machine-checked to be **scaffolding**: λ's covariant measure needs only *finiteness*, not the
-area-bound, so a genuinely load-bearing role for the holographic *grading* would have to be demonstrated. (b)
-For **λ specifically** the continuum target is now the **standard form / natural cone** (the Type-independent
-state↦vector correspondence carrying the algebraic Born rule) together with the modular $\sigma_t^\omega$ via
+**What is open.** With the continuum λ-law now built (above), the residual walls are sharply two: the
+**Haagerup natural-cone existence** in Mathlib (we state the Born rule directly on vector states; the canonical
+state↦vector identification is cited, not yet formalized) and the **interacting / general-state** case (the free
+field is done). Two further notes. (a) Holography is machine-checked to be **scaffolding**: λ's covariant measure
+needs only *finiteness*, not the area-bound, so a genuinely load-bearing role for the holographic *grading* would
+have to be demonstrated. (b) For **λ specifically** the continuum target is the **standard form / natural cone**
+(the Type-independent state↦vector correspondence carrying the algebraic Born rule) together with the modular $\sigma_t^\omega$ via
 Connes cocycles — *not* the Type II crossed product, which the red-team retired as doing no work for selection.
 That is a more tractable continuum entry point than the abandoned crossed-product tower, though still a wall.
 

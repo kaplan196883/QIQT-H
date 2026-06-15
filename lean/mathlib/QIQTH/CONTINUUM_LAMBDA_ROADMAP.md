@@ -1,5 +1,10 @@
 # Continuum λ-law roadmap — lifting the finite λ-law to the standard-subspace / free-field modular flow
 
+> **STATUS (2026-06-16): Stages 1–3 DONE (axiom-free, budget 0).** `ContinuumLambda` (modular automorphism +
+> Takesaki criterion + persistence), `NaturalConeBorn` (algebraic Born rule), `ContinuumSelection` (Type-blind
+> selection event) all built on the genuine `Δ^{it}`. Stage 4 = the honest closure (Type III₁ cited; residual
+> walls = Haagerup natural-cone existence + interacting case) — recorded in `PROGRAM_STATUS.md` and below.
+
 **Goal.** Lift the finite (Type I) λ-law — `LambdaPointer.lean` (Takesaki criterion, conditional
 expectation, persistence) and `SelectionEvent.lean` (one record per seed, Born frequency) — to the
 **genuine continuum** modular flow `Δ^{it}` already built axiom-free in this repo. This is the

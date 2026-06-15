@@ -14,6 +14,21 @@ Born representation** joining the capacity core to the Born/typicality layer (§
 scope map in `FINITE_BORN_REPRESENTATION.md`). This is the honest map: what is done,
 what is the prize we are chasing, and what must be fixed before arXiv.*
 
+> **Update 2026-06-16 — the continuum λ-law is machine-checked (free-field / standard-subspace sector).**
+> The Type-III-native λ-law (the 2026-06-15 redirect: λ rides the standard form + modular automorphism, NOT
+> the retired gravitational crossed product) is now lifted from the finite shadow onto the **genuine continuum
+> modular flow** `Δ^{it}` (the RvD bounded `modUnitary`), axiom-free, in three staged modules:
+> `ContinuumLambda` (the modular automorphism `σ_t = Ad(Δ^{it})` as a one-parameter ⋆-automorphism group; the
+> **continuum Takesaki criterion** `σ_t(A)=A ⟺ [A,Δ^{it}]=0`; **continuum persistence** — the decoherence map
+> commutes with `σ_t` for every `t`, unconditional for spectral pointer projections); `NaturalConeBorn` (the
+> **Type-independent algebraic Born rule** — the scalar spectral measure of pointer Borel sets is a genuine
+> probability, no trace); `ContinuumSelection` (the **Type-blind selection event** — exactly one record per
+> actuality seed, realizing the continuum Born frequencies, reusing the inverse-CDF constructor). So Takesaki
+> criterion + persistence + Born rule + selection event all hold on the real `Δ^{it}`. **Cited, not proved**
+> (the honest boundary): local algebras are Type III₁ (Buchholz–Wichmann); the genuine residual walls are the
+> *Haagerup natural-cone existence* in Mathlib and the *interacting (non-free) case*. Roadmap:
+> `lean/mathlib/QIQTH/CONTINUUM_LAMBDA_ROADMAP.md`.
+>
 > **Update 2026-06-13 — axiom-free milestone + the Born/μ residual sharply localized.** Two things changed
 > since the 06-08 note. **(a) Budget 0.** All 33 continuum/operator-algebra interface axioms have been
 > retired (EntropyBridge/Donald/DPI/Araki/RelEnt typeclass-and-instance discharges); the **entire** project

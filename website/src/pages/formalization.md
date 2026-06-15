@@ -142,6 +142,21 @@ selection is stable under the modular dynamics.
 | `SelectionEvent.selects_exists_unique` | the **selection event**: an inverse-CDF selector from an actuality seed $s\in[0,1)$ picks **exactly one** record per seed (totality + uniqueness — single-world consistency) |
 | `SelectionEvent.volume_selects` | the uniform seed measure of record $k$ equals its Born weight $p_k$ — the selection **realizes Born** as an across-run frequency (the seed is λ; the selector is order-dependent, not equivariant, as the no-covariant-selector result requires) |
 
+### λ's law in the continuum (free-field / standard-subspace sector)
+
+The finite λ-law above, lifted onto the **genuine continuum modular flow** $\Delta^{it}$ (the Rieffel–Van Daele
+bounded `modUnitary` of a standard subspace) — axiom-free. The local algebra's Type III₁-ness (Buchholz–Wichmann)
+is cited; the residual walls are the Haagerup natural-cone existence in Mathlib and the interacting case.
+
+| theorem | statement |
+| --- | --- |
+| `ContinuumLambda.modAutOp_add` / `_mul` / `_star` | the modular automorphism $\sigma_t=\mathrm{Ad}(\Delta^{it})$ is a one-parameter group of unital $\star$-automorphisms |
+| `ContinuumLambda.modAutOp_fixes_iff_commute` | **continuum Takesaki criterion**: $\sigma_t(A)=A \Leftrightarrow A$ commutes with $\Delta^{it}$ |
+| `ContinuumLambda.dephaseOp_specProj_commute` | **continuum persistence**: the decoherence map commutes with $\sigma_t$ for **every $t$** (unconditional for spectral pointer projections) — a dephased state stays dephased under the real continuum modular flow |
+| `NaturalConeBorn.bornWeights_sum` | the **Type-independent algebraic Born rule**: the scalar spectral measure of a finite pointer partition sums to $\lVert\xi\rVert^2$ (a genuine probability, no trace) |
+| `ContinuumSelection.continuum_selects_exists_unique` | the **Type-blind selection event**: exactly one record per actuality seed, driven by the continuum Born weights |
+| `ContinuumSelection.continuum_volume_selects` | the uniform seed measure of record $k$ equals its continuum Born weight — the selection realizes the continuum Born frequencies |
+
 <div class="note"><strong>What these add.</strong> They settle λ's law at the foundational level: Born reduces to
 state-supervenience (not capacity, not a counting rule); the covariance + contextuality structure is verified
 (covariant measure, no covariant selector; no global value-map; state-independent no-signaling); and λ's
