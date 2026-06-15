@@ -73,15 +73,22 @@ weight $|c_i|^2$.
 **What is done toward it.** This is now **reduced to a single premise**, axiom-free: the Born weight is derived
 from **state-supervenience** via the Zurek envariance symmetry (*proved*, not assumed) and an orthonormality
 bridge that forces the branch count to track the amplitudes (`StateSupervenience`, `EnvarianceJustification`,
-`BornEquiprobable`), with a finite law of large numbers (`BornTypicalityFinite`). Naturality alone is
-*necessary but not sufficient* — an amplitude-power family also respects it — so Born additionally needs
-**refinement-additivity** (exactly what distinguishes the square). A **no-go** (`NoBornFromNothing`) proves
-that *some* such premise is unavoidable.
+`BornEquiprobable`), with a finite law of large numbers (`BornTypicalityFinite`). And the premise has now been
+**split exactly** (`WeakStrongSplit`): its *weak* half — naturality / state-supervenience — is machine-checked
+to be **blind to the exponent** (`weight_naturality` holds for *every* reprocessing $f$; the $f=w^2$ rule is a
+natural, normalized probability that disagrees with Born — `weak_underdetermines_born`), so it cannot force Born;
+its *strong* half — **refinement-additivity** — is what discriminates the square (`sq_not_refinementAdditive`)
+and *linearizes* into equiprobability (`refinementAdditive_nsmul`), hence Born. A **no-go** (`NoBornFromNothing`)
+proves that strong half is unavoidable.
 
-**What is open.** Whether state-supervenience is *forced* by the (Φ,λ) ontology rather than merely motivated
-(a genuine philosophical question, not a formal gap), and the continuum/interacting realization of the measure.
+**What is open.** Only one thing, now sharply isolated: whether the **weak** half (state-dependence) is itself
+*forced* by the (Φ,λ) ontology rather than merely motivated — a genuine philosophical question (the reasoned
+case: the ψ-monist ontology contains nothing but the state for the law to depend on). The **strong** half is
+proven *not* forcible (the no-go), so it is the named irreducible premise, not an open gap. Plus the
+continuum/interacting realization of the measure.
 
-**Difficulty.** The finite reduction is done; the residual is interpretive + continuum.
+**Difficulty.** The finite reduction *and* its forced/free split are done; the residual is one philosophy-of-the-premise
+question + the continuum.
 
 ## Gap 3 — The continuum (Type III₁) and FQ grounding
 

@@ -109,6 +109,30 @@ the positive $\sum|c|^2$. Born survives relativity precisely because it lives on
 Hilbert space, never on the (indefinite) spacetime. Compact rotation *forces* the square; the non-compact
 boost *forbids* any positive weight but the square — two sides of one coin.
 
+## What is forced, and what is free — the exact split
+
+The 2026 work pushed the posit one level deeper and then drew a sharp line through it. State-supervenience —
+"the typicality of an outcome depends only on the state" — comes in two strengths, and they **come apart**
+(this is now [machine-checked](/papers), axiom-free):
+
+- **The weak half — naturality — is *blind*.** If the rule reprocesses the weights through *any* fixed function
+  $f$ (probability $\propto f(|c_k|^2)$), relabelling the outcomes always permutes the weights the same way.
+  Naturality holds for **every** $f$ — so by itself it cannot pick out the square. We prove the witness: the rule
+  with $f(w)=w^2$ is a perfectly good natural, normalized probability, and it **disagrees** with Born on a
+  concrete state (on $(\tfrac34,\tfrac14)$ it gives $\tfrac9{10}$, not $\tfrac34$). Weak supervenience does
+  *not* force Born.
+- **The strong half — refinement-additivity — is what bites.** Demand instead that splitting one outcome into
+  sub-outcomes whose weights add be consistent — $f(a+b)=f(a)+f(b)$ — and the witness $f(w)=w^2$ is killed
+  immediately ($(1{+}1)^2\neq 1^2{+}1^2$), while the identity ($f(w)=w$, i.e. Born) passes. And additivity
+  *linearizes* — $f(n\,x)=n\,f(x)$ — which on a refinement into $n$ equal sub-records forces them to share
+  weight equally. That equiprobability, run through the orthonormality bridge, **is** Born.
+
+So the honest answer to "is state-supervenience forced by the $(\Phi,\lambda)$ ontology?" is: the **weak** half
+plausibly is — the law can only be a function of the state, because the ontology contains nothing else for it to
+depend on — but the **strong**, Born-selecting half is **not** forced; it is the refinement-additivity /
+indifference premise, and the no-go proves you cannot do without it. That gap is the whole irreducible content
+of Born, isolated and named.
+
 ## The bottom line, honestly
 
 Born emerges like this:
@@ -131,10 +155,11 @@ The squared-amplitude measure is an irreducible posit — and we <em>prove</em> 
 weakness peculiar to this program: Everett, Bohmian mechanics, and the decision-theoretic approaches all need
 exactly this one ingredient. What the <a href="/papers">machine-checked work</a> adds is precision — that this
 single, natural assumption is <em>all</em> you need, that nothing weaker works, and that it makes Born unique.
-<strong>2026 update.</strong> The posit has now been driven one level deeper, axiom-free: the squared-amplitude
-weight is itself reduced to <em>state-supervenience</em> (the typicality of an outcome depends only on the
-state) — via the Zurek envariance symmetry (proved, not assumed) and an orthonormality bridge that forces the
-branch count to track the amplitudes. Naturality alone is necessary but <em>not</em> sufficient (an
-amplitude-power family also respects it); Born additionally needs refinement-additivity, exactly what
-distinguishes the square. And a no-go (you cannot get Born from nothing) shows <em>some</em> such premise is
-unavoidable. The status on the chain is <a href="/open-problems">open · reduced</a>, not closed.</div>
+<strong>2026 update.</strong> The posit has now been driven one level deeper, axiom-free, and then split
+exactly (see "What is forced, and what is free" above): the squared-amplitude weight reduces to
+<em>state-supervenience</em>, whose <em>weak</em> half (naturality) is machine-checked to be blind to the
+exponent — it cannot force Born — while the <em>strong</em> half (refinement-additivity) is the genuine
+Born-selecting content, proved to discriminate the square and to linearize into equiprobability. A no-go (you
+cannot get Born from nothing) shows that strong half is <em>unavoidable</em>. So the $(\Phi,\lambda)$ ontology
+forces <em>that</em> the law is a function of the state, never <em>which</em>; the residue is one named,
+irreducible premise. The status on the chain is <a href="/open-problems">open · reduced</a>, not closed.</div>
