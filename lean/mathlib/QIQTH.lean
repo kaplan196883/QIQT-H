@@ -117,6 +117,11 @@ import QIQTH.LorentzSelection
 -- matrix algebra + trace cyclicity — engine for the free-field finite-mode
 -- record instance; NO axioms beyond the standard three:
 import QIQTH.FiniteModularTheory
+-- λ's pointer law, finite (Type I) shadow of Takesaki's conditional-expectation
+-- criterion: σ(P)=P ⟺ [ρ,P]=0 (exact decoherence), algebraic Born weights are a
+-- probability, the dephasing map is the ω-preserving conditional expectation;
+-- NO axioms beyond the standard three:
+import QIQTH.LambdaPointer
 -- Free-field finite-mode instance: (a) holographic record count, (b) Gaussian
 -- decoherence decay, (c) finite-mode Lorentz action — concrete theorems
 -- instantiating parts of the LorentzSelection AQFT axioms; standard axioms only:

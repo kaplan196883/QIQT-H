@@ -1565,6 +1565,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FiniteModularTheory.diagPow_mul
 -- expected: standard only — (p i)^{is}·(p i)^{it} = (p i)^{i(s+t)}.
 
+-- LambdaPointer.lean — λ's pointer law, finite (Type I) shadow of Takesaki's
+-- conditional-expectation criterion (2026-06-15; the Type-III-native redirect).
+#print axioms QIQTH.LambdaPointer.modAut_fixes_iff_commute
+-- expected: standard only — finite Takesaki criterion σ(P)=P ⟺ [ρ,P]=0 (exact decoherence).
+#print axioms QIQTH.LambdaPointer.bornWeights_sum
+-- expected: standard only — algebraic Born weights ω(Pₐ)=tr(ρPₐ) sum to tr ρ (a probability).
+#print axioms QIQTH.LambdaPointer.dephase_preserves_state
+-- expected: standard only — dephasing E(x)=Σ Pₐ x Pₐ is the ω-preserving conditional expectation when [ρ,Pₐ]=0.
+#print axioms QIQTH.LambdaPointer.dephase_one
+-- expected: standard only — the dephasing conditional expectation is unital, E(1)=1.
+
 -- Free-field finite-mode instance (a, b, c)
 #print axioms QIQTH.FreeFieldRecord.holographic_bound
 -- expected: standard only — (a) N free-fermion modes ⇒ log₂ #Atoms = N ≤ Q_R
