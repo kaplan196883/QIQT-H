@@ -51,9 +51,17 @@ is identified as the open infrastructure problem.
 ## 2. The complete claim → theorem map (all axiom-free)
 
 ### A. No-collapse core
+
+> **Retirement note (2026-06-15):** the "finite capacity ⇒ ≤1 coactual record" row is a *conditional* theorem
+> under a posited monotone joint-cost model; that premise is **retired as a category error** (the holographic
+> bound counts independent d.o.f., not a sum of redundant records — `RedundancyCompressible`). Capacity is the
+> finite record *stage*, not the single-outcome mechanism; the single outcome is the **actuality selector
+> λ**'s, whose law (Takesaki + persistence + Born + selection) is machine-checked finite → free field (§11.2b
+> of the foundations paper; `CONTINUUM_LAMBDA_ROADMAP.md`).
+
 | Claim | Lean (`QIQTH/…`) |
 |---|---|
-| Finite capacity ⇒ ≤1 coactual record (subadditivity-robust: monotone jointCost + pairwise overflow) | `CoreNoCollapse.joint_coactual_subsingleton` |
+| Finite capacity ⇒ ≤1 coactual record (subadditivity-robust: monotone jointCost + pairwise overflow) — *conditional theorem; premise retired, see note above* | `CoreNoCollapse.joint_coactual_subsingleton` |
 | Pairwise overflow DERIVED from orthogonality (distinguishability) | `OrthogonalCapacity.pair_exceeds` |
 | Capacity + selector ⇒ EXACTLY one actual record (no collapse) | `CoreNoCollapse.qiqth_single_outcome_joint`, `OrthogonalCapacity.orthogonal_single_outcome` |
 | Genuine PVM; Born normalization `∑‖Eᵣψ‖²=1` a theorem | `CoreNoCollapse.FinPVM`, `weight_sum_eq_one` |
