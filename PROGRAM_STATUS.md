@@ -24,10 +24,17 @@ what is the prize we are chasing, and what must be fixed before arXiv.*
 > **Type-independent algebraic Born rule** — the scalar spectral measure of pointer Borel sets is a genuine
 > probability, no trace); `ContinuumSelection` (the **Type-blind selection event** — exactly one record per
 > actuality seed, realizing the continuum Born frequencies, reusing the inverse-CDF constructor). So Takesaki
-> criterion + persistence + Born rule + selection event all hold on the real `Δ^{it}`. **Cited, not proved**
-> (the honest boundary): local algebras are Type III₁ (Buchholz–Wichmann); the genuine residual walls are the
-> *Haagerup natural-cone existence* in Mathlib and the *interacting (non-free) case*. Roadmap:
-> `lean/mathlib/QIQTH/CONTINUUM_LAMBDA_ROADMAP.md`.
+> criterion + persistence + Born rule + selection event all hold on the real `Δ^{it}`. **And the whole λ-law
+> is now also lifted to the SECOND-QUANTIZED FREE FIELD**: `Γ(Δ^{it})` is repackaged as a unitary one-parameter
+> group of bounded operators on the Fock Hilbert space (`SecondQuantCLM`: `Γ⋆=Γ(-t)`, unitary), the field-level
+> modular automorphism `Ad(Γ(Δ^{it}))` + Takesaki criterion + **field-level persistence** (decoherence map
+> commutes with `σ_t` ∀t) hold (`ContinuumLambdaField`), the **Born rule** holds on the genuine Fock vacuum
+> state (`FieldBorn`: vacuum-state POVM weights are a probability; the Weyl-bit record gives `(1±exp(−½‖u‖²))/2`),
+> and the **selection event** picks exactly one Weyl-bit record per seed realizing those weights (`FieldSelection`).
+> So the continuum λ-law — modular automorphism + Takesaki + persistence + Born + selection — is machine-checked
+> at BOTH the one-particle and free-field levels, axiom-free. **Cited, not proved** (the honest boundary): local
+> algebras are Type III₁ (Buchholz–Wichmann); the genuine residual walls are the *Haagerup natural-cone existence*
+> in Mathlib and the *interacting (non-free) case*. Roadmap: `lean/mathlib/QIQTH/CONTINUUM_LAMBDA_ROADMAP.md`.
 >
 > **Update 2026-06-13 — axiom-free milestone + the Born/μ residual sharply localized.** Two things changed
 > since the 06-08 note. **(a) Budget 0.** All 33 continuum/operator-algebra interface axioms have been

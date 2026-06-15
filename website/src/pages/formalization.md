@@ -157,6 +157,17 @@ is cited; the residual walls are the Haagerup natural-cone existence in Mathlib 
 | `ContinuumSelection.continuum_selects_exists_unique` | the **Type-blind selection event**: exactly one record per actuality seed, driven by the continuum Born weights |
 | `ContinuumSelection.continuum_volume_selects` | the uniform seed measure of record $k$ equals its continuum Born weight — the selection realizes the continuum Born frequencies |
 
+And the **whole λ-law lifted to the second-quantized free field**: $\Gamma(\Delta^{it})$ as a unitary one-parameter
+group of bounded operators on the Fock Hilbert space, with the field-level automorphism, persistence, Born rule
+(on the genuine Fock vacuum state) and selection event.
+
+| theorem | statement |
+| --- | --- |
+| `secondQuantModCLM_unitary` | $\Gamma(\Delta^{it})$ is **unitary** on the Fock Hilbert space ($\Gamma^\star=\Gamma(-t)$) — the free-field modular unitary group |
+| `dephaseFock_modAutFock_commute` | **field-level persistence**: the decoherence map commutes with $\sigma_t=\mathrm{Ad}(\Gamma(\Delta^{it}))$ for every $t$ |
+| `vacuumState_povm_sum` / `vacuumState_weylBit_sum` | **field-level Born rule**: vacuum-state weights of a POVM are a probability; the Weyl-bit record gives $(1\pm e^{-\lVert u\rVert^2/2})/2$ |
+| `field_selects_exists_unique` / `field_volume_selects` | the **free-field selection event**: exactly one Weyl-bit record per actuality seed, realizing the Fock-vacuum-state Born frequencies |
+
 <div class="note"><strong>What these add.</strong> They settle λ's law at the foundational level: Born reduces to
 state-supervenience (not capacity, not a counting rule); the covariance + contextuality structure is verified
 (covariant measure, no covariant selector; no global value-map; state-independent no-signaling); and λ's
