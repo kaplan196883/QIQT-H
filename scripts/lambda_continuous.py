@@ -111,6 +111,21 @@ def husimi(name):
                 ov = (cmath.exp(-abs(b) ** 2 / 2 - abs(a) ** 2 / 2 + b.conjugate() * a)
                       + cmath.exp(-abs(b) ** 2 / 2 - abs(a) ** 2 / 2 - b.conjugate() * a))
                 grid[i][j] = abs(ov / math.sqrt(norm)) ** 2 / math.pi
+    elif name.startswith("squeezed"):
+        # squeezed vacuum, real squeeze r: Husimi is an area-PRESERVING ellipse
+        #   Q ∝ sech(r) exp[ -u²(1-tanh r) - v²(1+tanh r) ]   (u=x-quad anti-squeezed, v=p-quad squeezed)
+        r = 1.1; t = math.tanh(r)
+        for i in range(NB):
+            for j in range(NB):
+                u = -R + (i + .5) * db; v = -R + (j + .5) * db
+                grid[i][j] = (1.0 / math.cosh(r)) * math.exp(-u * u * (1 - t) - v * v * (1 + t)) / math.pi
+    elif name.startswith("thermal"):
+        # thermal (mixed) state, mean photon number nbar: Q = exp(-|β|²/(1+nbar)) / (π(1+nbar))
+        nbar = 2.0
+        for i in range(NB):
+            for j in range(NB):
+                b = complex(-R + (i + .5) * db, -R + (j + .5) * db)
+                grid[i][j] = math.exp(-abs(b) ** 2 / (1 + nbar)) / (math.pi * (1 + nbar))
     # renormalize on the (finite) grid
     Z = sum(sum(row) for row in grid) * db * db
     return [[v / Z for v in row] for row in grid]
@@ -149,7 +164,7 @@ def run_ho():
     print("HARMONIC OSCILLATOR — phase-space (coherent-state) records, Husimi Q.")
     print("(Expect H_B to SATURATE at the ℏ-cell: uncertainty gives a minimum cell 2πℏ.)")
     print("=" * 78)
-    states = ["coherent α=1.6", "Fock |5>", "cat |2>+|-2>"]
+    states = ["coherent α=1.6", "squeezed r=1.1", "thermal n̄=2", "Fock |5>", "cat |2>+|-2>"]
     # cells_per_axis values; the ℏ floor is where cell area ≈ 2πℏ (=π in β)
     cpa_list = [1, 2, 4, 8, 16, 32]
     # bits B = log2(total cells) = log2(cpa^2)
@@ -162,14 +177,21 @@ def run_ho():
         Q = husimi(name)
         hs = [ho_coarse_entropy(Q, c) for c in cpa_list]
         print("  {:<16}".format(name) + "".join("{:<8.2f}".format(h) for h in hs))
-    print("  note: cells with area/2πℏ < 1 (right of the '1.27' column) are SUB-ℏ — they are")
-    print("        NOT distinguishable records (coherent states there overlap), so that extra")
-    print("        entropy is unphysical over-counting. Read the record entropy AT the ℏ floor")
-    print("        (area ≈ 2πℏ): coherent ≈ 2 b (compact blob), Fock|5> ≈ 3.7 b (a √n ring),")
-    print("        cat ≈ 3 b (two blobs). The bit budget caps the # of ℏ-cells = accessible")
-    print("        phase-space area = the energy range. THAT is the uncertainty floor on λ.")
+    print("  note: cells with area/2πℏ < 1 are SUB-ℏ — not distinguishable records (states")
+    print("        there overlap), so that growth is unphysical over-counting. Read AT the ℏ")
+    print("        floor (area ≈ 2πℏ, the '1.27' column):")
+    print("          coherent ≈ 2.0 b — one compact ℏ-cell (the floor case)")
+    print("          squeezed ≈ 2.7 b — AREA-PRESERVING ellipse: squeezing REDISTRIBUTES bits")
+    print("                             between quadratures (narrow p ⇒ fewer p-bits, wide x ⇒")
+    print("                             more x-bits); same intrinsic area — reshapes, doesn't add")
+    print("          thermal  ≈ 3.0 b — MIXED: footprint GROWS with T, area ≈ (1+n̄) cells, so")
+    print("                             H ≈ coherent + log2(1+n̄) — heating genuinely ADDS records")
+    print("          Fock|5>  ≈ 3.7 b — a √n ring of cells;   cat ≈ 3.0 b — two blobs")
+    print("        The bit budget caps the # of ℏ-cells = accessible phase-space area = the")
+    print("        energy range — the uncertainty floor on λ. Squeezing reshapes the records;")
+    print("        temperature adds them; the holographic Q_R is the (slack) outer cap.")
     print()
-    for name in ["coherent α=1.6", "Fock |5>", "cat |2>+|-2>"]:
+    for name in ["coherent α=1.6", "squeezed r=1.1", "thermal n̄=2", "Fock |5>", "cat |2>+|-2>"]:
         heatmap(husimi(name), name)
         print()
 

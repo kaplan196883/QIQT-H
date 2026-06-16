@@ -19,14 +19,23 @@ HARMONIC OSCILLATOR — phase-space (coherent-state) records, Husimi Q.
   cell area / 2πℏ   20.37   5.09    1.27    0.32    0.08    0.02    
   ----------------------------------------------------------------------
   coherent α=1.6  0.00    1.09    1.99    3.31    5.15    7.25    
+  squeezed r=1.1  0.00    2.00    2.72    3.97    5.81    7.87    
+  thermal n̄=2    -0.00   2.00    2.95    4.73    6.68    8.81    
   Fock |5>        0.00    2.00    3.68    5.11    6.96    9.06    
   cat |2>+|-2>    0.00    2.00    3.04    4.28    6.12    8.18    
-  note: cells with area/2πℏ < 1 (right of the '1.27' column) are SUB-ℏ — they are
-        NOT distinguishable records (coherent states there overlap), so that extra
-        entropy is unphysical over-counting. Read the record entropy AT the ℏ floor
-        (area ≈ 2πℏ): coherent ≈ 2 b (compact blob), Fock|5> ≈ 3.7 b (a √n ring),
-        cat ≈ 3 b (two blobs). The bit budget caps the # of ℏ-cells = accessible
-        phase-space area = the energy range. THAT is the uncertainty floor on λ.
+  note: cells with area/2πℏ < 1 are SUB-ℏ — not distinguishable records (states
+        there overlap), so that growth is unphysical over-counting. Read AT the ℏ
+        floor (area ≈ 2πℏ, the '1.27' column):
+          coherent ≈ 2.0 b — one compact ℏ-cell (the floor case)
+          squeezed ≈ 2.7 b — AREA-PRESERVING ellipse: squeezing REDISTRIBUTES bits
+                             between quadratures (narrow p ⇒ fewer p-bits, wide x ⇒
+                             more x-bits); same intrinsic area — reshapes, doesn't add
+          thermal  ≈ 3.0 b — MIXED: footprint GROWS with T, area ≈ (1+n̄) cells, so
+                             H ≈ coherent + log2(1+n̄) — heating genuinely ADDS records
+          Fock|5>  ≈ 3.7 b — a √n ring of cells;   cat ≈ 3.0 b — two blobs
+        The bit budget caps the # of ℏ-cells = accessible phase-space area = the
+        energy range — the uncertainty floor on λ. Squeezing reshapes the records;
+        temperature adds them; the holographic Q_R is the (slack) outer cap.
 
   Husimi Q — coherent α=1.6  (x→, p↑; one ℏ-cell ≈ 5×5 chars)
                             
@@ -49,6 +58,58 @@ HARMONIC OSCILLATOR — phase-space (coherent-state) records, Husimi Q.
                             
                             
                             
+                            
+                            
+                            
+                            
+
+  Husimi Q — squeezed r=1.1  (x→, p↑; one ℏ-cell ≈ 5×5 chars)
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+            .........       
+        ...::--===--::...   
+       ..:-=+**###**+=-:..  
+      ..:-=+*#%%@%%#*+-::.  
+       ..:-=++*###*++=-:..  
+         ..::-------::..    
+             .......        
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+
+  Husimi Q — thermal n̄=2  (x→, p↑; one ℏ-cell ≈ 5×5 chars)
+                            
+                            
+                            
+                            
+                            
+             .......        
+            ..:::::..       
+           .::-----:..      
+          .::-==+==-:..     
+         ..:-=+***+=-:..    
+         .:-=+*###*+=-:.    
+         .:-=*#%%%#*=-:.    
+         .:-+*#%@%#*=-:.    
+         .:-=*#%%%#*=-:.    
+         .:-=+*###*+=:..    
+         ..:-=+***+=-:..    
+          ..:-=====-:..     
+           ..:----::..      
+            ..::::...       
+             .......        
                             
                             
                             
