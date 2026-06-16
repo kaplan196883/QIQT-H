@@ -155,6 +155,12 @@ import QIQTH.TwoBitUniverse
 -- full per-record law) + the GHZ entropy ceiling (8 records but supported on 2, so even a
 -- 2/3-bit λ reveals 1 bit; dimension ≠ information). NO axioms beyond the standard three:
 import QIQTH.ThreeQubitUniverse
+-- The (Φ,λ) record/area CONTRACT (labeled scaffold, NOT new physics): the four explicit
+-- inputs (factorization → einselection → area-cap → λ), coarse-graining as a capacity-
+-- non-increasing pushforward, and the area bridge in BOTH versions (Bousso entropy vs the
+-- stronger dim-capacity postulate, kept distinct), threading postulates as HYPOTHESES (no
+-- axioms). Metaselector = einselection, NOT capacity; operationally = Everett. Standard three:
+import QIQTH.RecordContract
 -- Continuum λ-law (Stage 1 of CONTINUUM_LAMBDA_ROADMAP): the modular automorphism
 -- σ_t = Ad(Δ^{it}) on the genuine continuum modular flow, the continuum Takesaki
 -- criterion, and continuum persistence (decoherence map commutes with σ_t ∀t,

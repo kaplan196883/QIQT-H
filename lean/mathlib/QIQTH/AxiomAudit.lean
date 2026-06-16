@@ -1652,6 +1652,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ThreeQubitUniverse.ghz_2bit_collapse
 -- expected: standard only — 2 bits don't separate GHZ's A,B (the A≠B block has weight 0): extra budget is slack.
 
+-- RecordContract.lean — the (Φ,λ) record/area CONTRACT (labeled scaffold; postulates as hypotheses, no axioms).
+#print axioms QIQTH.RecordContract.coarsen_sum
+-- expected: standard only — coarse-graining pushes the record law forward to a probability (blocks partition records).
+#print axioms QIQTH.RecordContract.coarsen_card_le
+-- expected: standard only — capacity non-increasing under coarse-graining: |coarse records| ≤ |fine records|.
+#print axioms QIQTH.RecordContract.area_entropy_bridge
+-- expected: standard only — area bridge (entropy version): I(λ;R) ≤ H(R) ≤ S_area threads the Bousso postulate.
+#print axioms QIQTH.RecordContract.area_capacity_bridge
+-- expected: standard only — area bridge (capacity version): I(λ;R) ≤ log|R| ≤ S_area, the STRONGER dim postulate (≠ Bousso).
+
 -- ContinuumLambda.lean — Stage 1 of the continuum λ-law (2026-06-15): on the genuine RvD Δ^{it} flow.
 #print axioms QIQTH.ContinuumLambda.modAutOp_add
 -- expected: standard only — modular automorphism σ_t = Ad(Δ^{it}) is a one-parameter group.
