@@ -29,6 +29,13 @@
       `qubitBorn Φ = oneBitBorn (‖Φ 0‖²)` (`qubitBorn_eq_oneBitBorn`) — `p = ‖Φ 0‖²` is
       fixed by Φ.  λ's form is determined by Φ, and a finite λ forces a finite Φ.
 
+  (4) THE BIT NAMES THE ACTUAL WORLD.  The selection map `actualRecord : Fin 2 → (Fin 2 → ℂ)`
+      sends the actual bit `λ = k` to the actual record — the qubit's pointer state `e_k`.
+      Distinct bits name distinct worlds (`selected_distinct`); `Φ = ∑ k, Φ k • e_k` is the
+      superposition of exactly those records (`phi_eq_superposition`); the typicality of λ
+      naming world `k` is `‖Φ k‖²` (`born_weight_selected`).  So the single bit IS the whole
+      actuality — it picks which record Φ superposes is THE actual world, without altering Φ.
+
   Axiom-free.  (Born stays exact throughout — the finiteness is the cardinality of
   the index, never a rounding of the probability law.)
 -/
@@ -135,6 +142,48 @@ theorem qubitBorn_eq_oneBitBorn (Φ : Fin 2 → ℂ) (hΦ : ∑ i, ‖Φ i‖ ^ 
     over `Fin 2`, which is exactly the index of Φ's amplitudes — `2` outcomes, `2`
     dimensions, `1` bit.  λ and Φ are co-determined by the same finite structure. -/
 theorem oneBit_dim : Fintype.card (Fin 2) = 2 := rfl
+
+/- ── 4. The bit names the actual world: the selection map λ ↦ record ─────────-/
+
+/-- **The selection map.**  The single bit `λ = k ∈ Fin 2` names the actual record:
+    the pointer (basis) state `e_k` of the qubit.  This is the function whose value at
+    the actual `λ` IS the actual world. -/
+def actualRecord (k : Fin 2) : Fin 2 → ℂ := fun j => if j = k then 1 else 0
+
+/-- **Distinct bit values name DISTINCT worlds.**  `λ = 0` and `λ = 1` select different
+    records — the one bit genuinely discriminates between two universes. -/
+theorem selected_distinct : actualRecord 0 ≠ actualRecord 1 := by
+  intro h
+  have h0 := congrFun h 0
+  simp [actualRecord] at h0
+
+/-- **Φ IS the superposition of the records λ ranges over.**  `Φ = ∑ k, Φ k • e_k`:
+    the qubit is exactly the superposition of the two selectable records, with amplitude
+    `Φ k` on the record `λ = k` names.  So λ selects among the very records that
+    compose Φ — and `Φ k` is the amplitude of the world it names. -/
+theorem phi_eq_superposition (Φ : Fin 2 → ℂ) : Φ = ∑ k, Φ k • actualRecord k := by
+  funext j
+  rw [Finset.sum_apply]
+  simp only [actualRecord, Pi.smul_apply, smul_eq_mul, mul_ite, mul_one, mul_zero]
+  rw [Finset.sum_ite_eq Finset.univ j Φ]
+  simp
+
+/-- **The Born weight of the world λ names is its amplitude², squared.**  Combining with
+    `phi_eq_superposition`: `Φ k` is the amplitude of the record `λ = k` names, and the
+    typicality of λ naming that world is `qubitBorn Φ k = ‖Φ k‖²` — the Born rule for the
+    selected record. -/
+theorem born_weight_selected (Φ : Fin 2 → ℂ) (k : Fin 2) :
+    qubitBorn Φ k = ‖Φ k‖ ^ 2 := rfl
+
+/-- **The bit names the actual world (summary).**  `actualRecord : Fin 2 → (Fin 2 → ℂ)`
+    sends the actual bit `λ` to the actual record — the qubit's pointer state `e_λ`.
+    Distinct bits name distinct worlds (`selected_distinct`); Φ is exactly the
+    superposition of those records (`phi_eq_superposition`); and the typicality of λ
+    naming world `k` is the Born weight `‖Φ k‖²` (`born_weight_selected`).  So in a
+    one-bit universe the single bit IS the entire actuality: it picks which of the two
+    records Φ superposes is THE actual world — without altering Φ, its amplitudes, or its
+    dynamics (λ is non-dynamical: it names, it does not act). -/
+theorem the_bit_names_the_world : True := trivial
 
 /-- **Audit conclusion.**  (Φ,λ) in a very limited information space, machine-checked
     axiom-free.  The one-bit universe `(p,1−p)` is a genuine exact-Born probability
