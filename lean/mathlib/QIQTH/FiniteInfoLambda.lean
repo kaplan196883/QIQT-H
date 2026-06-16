@@ -1,37 +1,42 @@
 /-
-  FiniteInfoLambda — a finite-information actuality selector λ, worked out.
+  FiniteInfoLambda — a particular finite inverse-CDF sampler.  (Correct arithmetic;
+  its physical INTERPRETATION as "finite-information λ" did NOT survive red-team.)
 
-  The honest finding (this session) was that λ does NOT require finite information:
-  the inverse-CDF selector of `SelectionEvent` uses a continuum seed `s∈[0,1)` (an
-  infinite-information real) and works on infinite-dimensional spaces.  This module
-  works out the alternative the program is *named* for: **force λ to be finite**.
+  STATUS / CAVEAT (2026-06-16, after a GPT-5.5-pro red-team, verified by direct
+  computation).  The theorems below are correct, but they certify ONE arbitrary
+  finite sampler — a deterministic uniform-`N`-cell inverse-CDF grid in a fixed
+  record ORDERING — NOT a physical consequence of "finite information".  The
+  conceptual payoffs first claimed for this module are RETRACTED:
 
-  MODEL.  Bound the selector's resolving power to a finite number `N` of equal
-  actuality cells — `N ≤ e^{Q_R}`, i.e. `log₂ N` bits, capped by the regional
-  holographic capacity (the principled "forcing": λ is physically instantiated in
-  a region that holds `≤ Q_R` information, so it cannot resolve more finely).  The
-  finite-information seed is then `j ∈ {0,…,N-1}` (seed value `j/N`), and record α
-  is selected iff its Born cell `[loₐ, loₐ+pₐ)` contains `j/N` — i.e. the count is
+    • "Finite information ⇒ this grid" is FALSE.  A finite-VALUED selector
+      `λ ∈ {1,…,M}` with the exact Born law `μ(α)=pₐ` carries only `log M ≤ Q_R`
+      realized bits and reproduces Born EXACTLY (no deviation, no floor).  The
+      deviation is an artifact of the extra "uniform-seed + deterministic-CDF"
+      assumption, not of finiteness.  (Dithering the grid restores exact Born in
+      expectation.)
+    • The "minimum actualizable weight / grain of actuality" is NOT a physical
+      threshold — it is ORDERING-dependent.  Same Born `(3/4,1/4)`, `N=2`: ordering
+      `(3/4,1/4) → (1,0)` excludes the `1/4` record; ordering `(1/4,3/4) → (1/2,1/2)`
+      does not.  The only honest content is "nonzero gridWeight is a multiple of
+      `1/N`" — a property of the SELECTOR measure, not a Born threshold.
+    • The grid CONTRADICTS two of QIQT-H's own machine-checked results: it breaks
+      **envariance** (equal-weight records get unequal grid weights, e.g.
+      `(1/3,1/3,1/3), N=2 → (1/2,1/2,0)`), and it breaks **operational
+      no-signaling** (rounding joint records makes a remote marginal depend on the
+      correlation, an order-`1/N` signal).  So the grid is NOT viable as physics.
+    • "Finite-λ forces contextuality" is FALSE (contextuality is forced by
+      Kochen–Specker/Bell, not by a bit budget); the forcing argument
+      (`λ` instantiated in `R` ⇒ bounded by `Q_R`) is incoherent for a
+      non-dynamical λ.  See `paper_strategy/49_Finite_Information_Lambda.md`.
 
-      gridCount(α) = #{ j<N : loₐ ≤ j/N < loₐ+pₐ } = ⌈N·lo_{α+1}⌉ − ⌈N·loₐ⌉,
-
-  and the realized (finite-information) weight is `gridWeight(α) = gridCount(α)/N`.
-
-  WHAT IS DERIVED (machine-checked, axiom-free):
-    * `gridCount_sum` / `gridWeight_sum` — every actuality seed selects exactly one
-      record: `Σ gridCount = N`, so `Σ gridWeight = 1` (a genuine probability over a
-      FINITE, uniform seed measure — no infinite-information seed).
-    * `gridWeight_near_born` — **Born up to the resolution**: `|gridWeight − pₐ| < 1/N`.
-      Finite λ reproduces Born to precision `1/N ≈ e^{−Q_R}`; the deviation is a
-      calculable, capacity-controlled signature (testable for a small effective N).
-    * `gridWeight_tendsto_born` — exact Born is the `N→∞` (infinite-capacity) limit.
-    * `resolution_floor` — a **minimum actualizable weight**: a record with `pₐ` below
-      the resolution gets ZERO cells (never actualized), unlike Everett where every
-      branch is real.  This is the genuine ontological/empirical difference: finite λ
-      has a smallest grain of actuality.
-
-  Postulated (NOT derived): (FQ) the region holds ≤ Q_R info; λ instantiated within
-  the region, so `N ≤ e^{Q_R}`; the uniform measure on the N seeds (typicality).
+  WHAT THE THEOREMS ACTUALLY SAY (correct, axiom-free), about THIS sampler only:
+  with `gridCount(α) = ⌈N·lo_{α+1}⌉ − ⌈N·loₐ⌉` and `gridWeight = gridCount/N`,
+    * `gridCount_sum`/`gridWeight_sum` — the `N` cells partition the seeds; the grid
+      weights are a probability on the lattice `k/N`;
+    * `gridWeight_near_born` — `|gridWeight − pₐ| < 1/N` (lattice rounding error);
+    * `gridWeight_tendsto_born` — `gridWeight → pₐ` as `N→∞`;
+    * `resolution_floor` — for SOME ordering and `N`, a positive-weight record gets
+      `0` cells (ordering-dependent; NOT a physical Born threshold — see caveat).
 -/
 
 import QIQTH.SelectionEvent
@@ -101,8 +106,9 @@ theorem gridCount_near_born (p : ℕ → ℝ) (N α : ℕ) :
     have h2 := Int.le_ceil ((N : ℝ) * lo p α)
     linarith
 
-/-- **Born up to the resolution**: the realized finite-information weight is within
-    `1/N` of the Born weight.  Finite λ reproduces Born to precision `1/N`. -/
+/-- **Lattice rounding error**: the grid weight is within `1/N` of the Born weight,
+    `|gridWeight − pₐ| < 1/N`.  (This is the rounding error of the `k/N` lattice, not
+    a physical "Born deviation" — see the module caveat.) -/
 theorem gridWeight_near_born (p : ℕ → ℝ) (N α : ℕ) (hN : 0 < N) :
     |gridWeight p N α - p α| < 1 / N := by
   have hNR : (0 : ℝ) < N := Nat.cast_pos.mpr hN
@@ -143,11 +149,13 @@ theorem gridWeight_tendsto_born (p : ℕ → ℝ) (α : ℕ) :
 
 /- ── 3. The resolution floor: a minimum actualizable weight ─────────────────-/
 
-/-- **A minimum actualizable weight.**  There is a Born distribution and a finite
-    resolution `N` at which a positive-weight record gets ZERO actuality cells — it
-    is *below the resolution* and is never actualized.  (Here `p = (3/4, 1/4)` at
-    `N = 2`: the weight-`1/4` record falls below the one-bit resolution `1/2`.)  This
-    is the structural difference from Everett, where every branch is real. -/
+/-- **An ordering-dependent zero (NOT a physical threshold).**  For SOME record
+    ordering and resolution `N`, a positive-weight record gets ZERO grid cells (here
+    `p = (3/4, 1/4)`, `N = 2`).  CAVEAT (see module header): this is *not* a "minimum
+    actualizable Born weight" — it is an artifact of the grid + the chosen ordering.
+    The same Born distribution in the order `(1/4, 3/4)` gives `(1/2, 1/2)`, with the
+    `1/4` record *not* excluded.  The only honest content is that nonzero grid weights
+    are multiples of `1/N`. -/
 theorem resolution_floor :
     ∃ (p : ℕ → ℝ) (N α : ℕ),
       (∑ i ∈ Finset.range 2, p i = 1) ∧ 0 < p α ∧ gridCount p N α = 0 := by
@@ -163,14 +171,14 @@ theorem resolution_floor :
         show (⌈(3 / 2 : ℝ)⌉ : ℤ) = 2 by rw [Int.ceil_eq_iff] <;> norm_num]
     norm_num
 
-/-- **Audit conclusion.**  A finite-information actuality selector, worked out and
-    machine-checked (axiom-free).  DERIVED: every seed selects exactly one record
-    (`gridCount_sum`); the weights are a genuine probability over a FINITE seed
-    measure (`gridWeight_sum`); Born holds up to the resolution `1/N`
-    (`gridWeight_near_born`), exact in the `N→∞` limit (`gridWeight_tendsto_born`);
-    and there is a minimum actualizable weight (`resolution_floor`) — a smallest
-    grain of actuality that Everett lacks.  POSTULATED: (FQ), λ's instantiation
-    within the region (so `N ≤ e^{Q_R}`), and the uniform seed measure. -/
+/-- **Audit conclusion.**  Correct, axiom-free arithmetic for ONE finite inverse-CDF
+    sampler: the `N` cells partition the seeds (`gridCount_sum`), the grid weights are
+    a probability on the `k/N` lattice (`gridWeight_sum`) within `1/N` of Born
+    (`gridWeight_near_born`), exact as `N→∞` (`gridWeight_tendsto_born`), with an
+    ordering-dependent zero (`resolution_floor`).  Its INTERPRETATION as a physical
+    "finite-information λ" is RETRACTED (see module header): finite *value-space* λ
+    reproduces Born exactly with no deviation; this particular grid is an artifact and
+    moreover breaks QIQT-H's own envariance and no-signaling.  Not viable as physics. -/
 theorem audit_conclusion : True := trivial
 
 end QIQTH.FiniteInfoLambda

@@ -130,10 +130,10 @@ import QIQTH.WeakStrongSplit
 -- actuality seed — exactly one record per seed (single-world consistency) and
 -- the uniform seed measure pushes to Born; NO axioms beyond the standard three:
 import QIQTH.SelectionEvent
--- A FINITE-INFORMATION actuality selector: bound λ's resolving power to N cells
--- (N ≤ e^{Q_R}); derives Born up to the resolution 1/N, exact in the N→∞ limit,
--- and a minimum-actualizable-weight (resolution floor) that Everett lacks. NO
--- axioms beyond the standard three:
+-- A particular finite inverse-CDF sampler (correct axiom-free arithmetic). Its
+-- interpretation as a physical "finite-information λ" is RETRACTED after red-team
+-- (the grid is ordering-dependent and breaks QIQT-H's own envariance + no-signaling;
+-- finite value-space λ reproduces Born exactly with no deviation). See its header:
 import QIQTH.FiniteInfoLambda
 -- Continuum λ-law (Stage 1 of CONTINUUM_LAMBDA_ROADMAP): the modular automorphism
 -- σ_t = Ad(Δ^{it}) on the genuine continuum modular flow, the continuum Takesaki
