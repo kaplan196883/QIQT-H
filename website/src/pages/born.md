@@ -37,9 +37,13 @@ record like us finds itself to be.
 To count "the fraction of ways things could be," you need a measure — a notion of which microscopic
 configurations carry how much weight. The single ingredient Born needs is this:
 
-<div class="note"><strong>The one posit.</strong> The natural weight of a microscopic configuration is its
+<div class="note">
+
+<strong>The one posit.</strong> The natural weight of a microscopic configuration is its
 <em>squared amplitude</em> — the |Ψ|² (Hilbert-space) measure. That is the entire input. Everything else
-is a theorem.</div>
+is a theorem.
+
+</div>
 
 ## Why you cannot get around adding it
 
@@ -154,7 +158,9 @@ squared-amplitude yardstick — and that yardstick is the single thing every sin
 mechanics must assume, which, the moment you assume any sensible probability at all, is forced to be exactly
 squared amplitude and nothing else.**
 
-<div class="note"><strong>Honest scope.</strong> This is a <em>reduction</em>, not a derivation from nothing.
+<div class="note">
+
+<strong>Honest scope.</strong> This is a <em>reduction</em>, not a derivation from nothing.
 The squared-amplitude measure is an irreducible posit — and we <em>prove</em> it has to be one. That is not a
 weakness peculiar to this program: Everett, Bohmian mechanics, and the decision-theoretic approaches all need
 exactly this one ingredient. What the <a href="/papers">machine-checked work</a> adds is precision — that this
@@ -167,4 +173,6 @@ Born-selecting content, proved to discriminate the square and to linearize into 
 cannot get Born from nothing) shows that strong half is <em>unavoidable</em>. Whether even the <em>weak</em>
 half is forced turns out to depend on how rich a notion of "state" you assume (thin vs thick ψ-monism; see
 above) — but the irreducible premise is the <em>strong</em> half either way. The status on the chain is
-<a href="/open-problems">open · reduced</a>, not closed.</div>
+<a href="/open-problems">open · reduced</a>, not closed.
+
+</div>

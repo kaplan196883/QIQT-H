@@ -30,24 +30,32 @@ The unitarily-evolved $\Phi$ offers several mutually-exclusive macroscopic recor
 one as *actual*. Decoherence first makes those records non-interfering and redundantly objective — but that
 removes interference, it does not make one of them actual. The single actual record is $\lambda$'s doing.
 
-<div class="note"><strong>Correction (2026).</strong> An earlier version said the finite capacity itself
+<div class="note">
+
+<strong>Correction (2026).</strong> An earlier version said the finite capacity itself
 <em>forbids</em> two actual records (their classical contents "would together exceed the budget"). That is a
 <strong>category error</strong>: the holographic bound counts independent degrees of freedom, not a sum of
 redundant classical records, and ordinary record entropy is capped at ~A<sup>3/4</sup> (~10<sup>91</sup>)
 far below the bound (~10<sup>122</sup>) — a permanent ~31-order gap. So capacity does <em>not</em> exclude a
 second actual record; "two actual records can't coexist" reduces to a classical carrier holding one value,
 which is itself supplied by λ. Q<sub>max</sub>'s honest role is the finite record <em>stage</em> (how many
-distinguishable records exist, $\le e^{Q_R}$), not the single-outcome selection.</div>
+distinguishable records exist, $\le e^{Q_R}$), not the single-outcome selection.
+
+</div>
 
 $\lambda$ is the **selection** of which admissible record is the actual one. It is the move the textbook
 misnames "collapse" — but here it is not a dynamical event. $\lambda$ adds nothing to the Schrödinger
 equation, exerts no force, and leaves $\Phi$ untouched. It is a fact about *which* of the constituted,
 unitarily-evolved alternatives we find realized, not a physical process that edits the state.
 
-<div class="note"><strong>Two layers.</strong> Φ is constitution — what there is, evolving unitarily.
+<div class="note">
+
+<strong>Two layers.</strong> Φ is constitution — what there is, evolving unitarily.
 λ is actuality — which admissible record obtains. This is one dynamical law <em>plus</em> an
 actuality postulate, not a cost-free relabeling: keeping the layers apart is what lets "exact unitarity"
-and "one outcome" coexist, but giving λ a precise, dynamically-consistent form is still open.</div>
+and "one outcome" coexist, but giving λ a precise, dynamically-consistent form is still open.
+
+</div>
 
 ## No fundamental probability, no chooser
 
@@ -66,7 +74,9 @@ Likewise, making $\lambda$ precise as a selection compatible with the unitary dy
 admissible record obtains, not zero, and that the admissible space is dynamically invariant — is the
 [dynamical-realization problem](/open-problems). The ontology here is coherent; these pieces of it are open.
 
-<div class="note"><strong>How far this is pinned down.</strong> The Born-from-typicality claim above is
+<div class="note">
+
+<strong>How far this is pinned down.</strong> The Born-from-typicality claim above is
 backed by a machine-checked reduction (the <a href="/papers">Born-rule formalization paper</a>): records
 give definite outcomes but no weights; among rules <em>p</em>&nbsp;&prop;&nbsp;<em>f</em>(<em>w</em>),
 refinement-additivity, no-signalling under remote refinement, and Born are <em>equivalent</em>; and a
@@ -74,7 +84,9 @@ refinement-additivity, no-signalling under remote refinement, and Born are <em>e
 extra principle is unavoidable, which is the circularity worry made precise rather than waved away. A finite
 H-theorem then reduces the residual to a Born-agnostic typicality postulate (reversibility over a uniform
 bath, plus mixing) instead of to <em>|Ψ|</em><sup>2</sup> itself. It sharpens the open problem; it does not
-yet close it.</div>
+yet close it.
+
+</div>
 
 ## The λ construction, made precise
 
@@ -96,16 +108,22 @@ invariant measure on the sphere but no invariant point, the *law* $\mu_\Phi$ is 
 hidden preferred frame. So $\lambda$ need not be (and cannot be) an equivariant function of $\Phi$; it is a
 contingent draw.
 
-<div class="note"><strong>Now machine-checked (free-field sector).</strong> For the 1+1D free field this
+<div class="note">
+
+<strong>Now machine-checked (free-field sector).</strong> For the 1+1D free field this
 covariant Born law is verified in Lean: a <em>σ-additive</em> measure exists (finite-fiber Kolmogorov
 extension — the finiteness is the capacity bound), it is the same in <em>every Lorentz frame</em>, and it
 satisfies the decoherent-histories <em>consistency</em> condition <em>Re D(α,β) = 0</em> exactly (this is
 what makes the Born weights obey the probability sum rules). For <em>orthogonal</em> records the full
 off-diagonal <em>D = 0</em> (strong), with an exact overlap-correction formula off orthogonality and a
 redundancy law by which broadcasting drives <em>D → 0</em> (Quantum Darwinism). See the
-<a href="/formalization">theorem index</a>. Born itself remains an <em>input</em>, not a derivation.</div>
+<a href="/formalization">theorem index</a>. Born itself remains an <em>input</em>, not a derivation.
 
-<div class="note"><strong>Realm selection (the "metaselector") — now a machine-checked trilogy.</strong>
+</div>
+
+<div class="note">
+
+<strong>Realm selection (the "metaselector") — now a machine-checked trilogy.</strong>
 Picking <em>which</em> record framework $\{P_\alpha\}$ is actual (the realm) is the classic
 decoherent-histories gap (Dowker–Kent). It is now resolved as a <strong>no-go trilogy plus a positive
 selector</strong>, all machine-checked: <em>capacity</em> does not select it (distinct capacity-maximal
@@ -117,7 +135,9 @@ observable $A$ commutes with the interaction $A\otimes B$, so it is decoherence-
 a system–environment cut (the residual Dowker–Kent input) — so the metaselector is the interaction
 Hamiltonian, reduced to that cut, not derived from nothing. This whole layer is <em>verified scaffold</em>:
 $\lambda$ stays inert, so the scheme remains operationally Everett. See the
-<a href="/formalization">theorem index</a>.</div>
+<a href="/formalization">theorem index</a>.
+
+</div>
 
 ## The λ-selection schema, now machine-checked
 
@@ -150,7 +170,9 @@ it has none). What is verified:
    single-shot measure is *not yet* an across-run frequency (that needs a product measure + a law of large
    numbers).
 
-<div class="note"><strong>What this is, honestly.</strong> Because λ has no back-reaction and the Born weights
+<div class="note">
+
+<strong>What this is, honestly.</strong> Because λ has no back-reaction and the Born weights
 are assumed, the scheme is <strong>operationally equivalent to standard (Everettian / orthodox) quantum
 mechanics</strong> — λ is unobservable, and it makes no prediction beyond Born statistics. Its content is
 interpretive: a single actual record by stipulation, no collapse, no second substance — the modal /
@@ -160,7 +182,9 @@ must take as given (its dynamical origin is not derived, and arguably cannot be)
 <em>provably irreducible</em> (the seed; the strong Born premise) or <em>genuine multi-year mathematics</em>
 (the Haagerup natural-cone <em>existence</em>; the interacting case). The honest next content-adding targets are
 a <em>global decoherent-history</em> selector (one coherent world, not one atom of one finite resolution) and
-an explicit across-run frequency theorem.</div>
+an explicit across-run frequency theorem.
+
+</div>
 
 ## How this differs from the usual answers
 

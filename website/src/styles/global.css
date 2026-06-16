@@ -164,6 +164,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.18;letter-spa
 .note{background:#fff;border:1px solid var(--line);border-left:3px solid var(--st-postulate);
   border-radius:0 8px 8px 0;padding:14px 16px;margin:1.2rem 0;font-size:.95rem;color:var(--muted)}
 .note strong,.note b{color:var(--ink)}
+.note p{margin:.55em 0}.note p:first-child{margin-top:0}.note p:last-child{margin-bottom:0}
 code,.mono{font-family:"SFMono-Regular",ui-monospace,"Cascadia Code",Consolas,monospace;
   font-size:.88em;background:var(--paper-2);padding:1px 6px;border-radius:5px;color:#334}
 pre{background:#1b1d22;color:#e6e2d8;padding:16px 18px;border-radius:10px;overflow:auto;font-size:.86rem}

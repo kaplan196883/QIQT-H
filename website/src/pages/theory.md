@@ -45,10 +45,14 @@ explicit one-particle expression, the Casini–Grillo–Pontello entropy $S_{\ma
 coherent-state reduction is what the Lean development checks**, end to end, from the bounded modular
 operators to the entropy-reduction identity.
 
-<div class="note"><strong>Scope.</strong> What is verified is the modular and relative-entropy
+<div class="note">
+
+<strong>Scope.</strong> What is verified is the modular and relative-entropy
 <em>calculus</em> for the free-field coherent sector, the bookkeeping machine for <em>χ<sub>R</sub></em>. The verified
 part does <strong>not</strong> include the Type&nbsp;II regional construction itself, the (FQ) axiom, or
-the conjecture below.</div>
+the conjecture below.
+
+</div>
 
 ## 3. The retired conjecture: macroscopic definiteness (H2)
 
@@ -75,12 +79,16 @@ redundantly objective), the content the region *realizes* is one definite macros
 keeps all branches and evolves exactly unitarily, with no collapse term. **The single record is supplied by
 the non-dynamical selector $\lambda$**, an Everett-like selection among the unitarily-evolved alternatives.
 
-<div class="note"><strong>Where the exclusion really comes from.</strong> Since capacity does not forbid two
+<div class="note">
+
+<strong>Where the exclusion really comes from.</strong> Since capacity does not forbid two
 records (§3), what makes a region's <em>actual</em> content single-valued is just that a classical carrier
 holds <em>one</em> value — local single-valuedness — and which value is the actual one is supplied by λ. The
 Lean development machine-checks a finite, additive-cost <em>counting</em> bound (at most one member of a
 saturating family), an honest <em>finite stage</em>; it does <strong>not</strong> derive that capacity
-overflows on two macroscopic records.</div>
+overflows on two macroscopic records.
+
+</div>
 
 This is worth stating carefully, because "one outcome" and "unitary evolution" sound contradictory. The
 global wave function evolves unitarily throughout; the single *actual* record is a [selection](/selection)

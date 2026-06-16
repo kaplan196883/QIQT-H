@@ -10,7 +10,9 @@ machine-verified for the free-field coherent-state sector. The development carri
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
 (`propext`, `Classical.choice`, `Quot.sound`).
 
-<div class="note"><strong>Scope.</strong> The verified, axiom-free corpus now covers both the borrowed
+<div class="note">
+
+<strong>Scope.</strong> The verified, axiom-free corpus now covers both the borrowed
 mathematics (Tomita–Takesaki modular theory and Araki = CGP relative entropy, free-field coherent sector) and
 the program's own results: the covariant σ-additive <em>consistent</em> Born measure on the record net, the
 Born-from-typicality reduction (to a state-supervenience premise, with a no-go), λ's
@@ -20,7 +22,9 @@ covariance/contextuality structure, and the <em>metaselector</em> layer — a ma
 on Born-from-projectors. What it does <strong>not</strong> establish: the holographic axiom (FQ),
 λ's <em>dynamical</em> law, or the continuum (Type III₁). It does not close the
 <a href="/open-problems">open problems</a>. (The original Macroscopic Definiteness Conjecture is
-<a href="/open-problems">retired</a> as a category error, not a pending verification target.)</div>
+<a href="/open-problems">retired</a> as a category error, not a pending verification target.)
+
+</div>
 
 ## The headline result
 
@@ -115,12 +119,16 @@ scheme remains operationally Everett (`everett_equivalence`).
 | `RecordContract.shannon_le_log_card` | the record information bound $H(R)\le\log\lvert R\rvert$ (Jensen) — the entropy/capacity bridges thread the postulated Bousso bound |
 | `MetaselectorSelection.finite_budget_forces_overlap` | a $D$-dim record space cannot hold $M>D$ orthonormal records — a finite holographic budget forces a residual-interference floor |
 
-<div class="note"><strong>Terminology (Gell-Mann–Hartle).</strong> <em>Re D = 0</em> is <em>weak</em>
+<div class="note">
+
+<strong>Terminology (Gell-Mann–Hartle).</strong> <em>Re D = 0</em> is <em>weak</em>
 decoherence / consistency (it is what makes the Born weights obey the probability sum rules); full
 <em>D = 0</em> is <em>medium</em>, and with orthogonal record states also <em>strong</em>. The Weyl-bit
 operators <em>A(u,s) = (I + sW(u))/2</em> are <em>effects</em>, not projectors, so this is a
 generalized-measurement history; the projector/Boolean-record content is separate. These are exact algebraic
-consistency results for the free/coherent sector — not a proof of macroscopic classicality.</div>
+consistency results for the free/coherent sector — not a proof of macroscopic classicality.
+
+</div>
 
 ### Born from typicality — the symmetry / state-supervenience reduction
 
@@ -188,7 +196,9 @@ group of bounded operators on the Fock Hilbert space, with the field-level autom
 | `vacuumState_povm_sum` / `vacuumState_weylBit_sum` | **field-level Born rule**: vacuum-state weights of a POVM are a probability; the Weyl-bit record gives $(1\pm e^{-\lVert u\rVert^2/2})/2$ |
 | `field_selects_exists_unique` / `field_volume_selects` | the **free-field selection event**: exactly one Weyl-bit record per actuality seed, single-shot seed-measure = the Fock-vacuum-state Born weight |
 
-<div class="note"><strong>What these add (and don't).</strong> They pin down λ's <em>selection schema</em>, not a
+<div class="note">
+
+<strong>What these add (and don't).</strong> They pin down λ's <em>selection schema</em>, not a
 law: Born reduces to state-supervenience (not capacity, not a counting rule); the covariance + contextuality
 structure is verified (covariant measure, no covariant point-selector; no global value-map; state-independent
 no-signaling — operationally weaker than Bell local causality); the Takesaki criterion fixes which record
@@ -198,7 +208,9 @@ inverse-CDF selection is a sampling representation (single-shot seed-measure = B
 mechanism or an across-run frequency. So the single outcome is λ's by stipulation; the holographic bound is the
 finite record <em>stage</em> only; and the scheme is operationally equivalent to standard QM. The honest
 residual: the seed's <em>origin</em> (a primitive), an across-run <em>frequency</em> theorem, a <em>global
-decoherent-history</em> selector, and the continuum walls (Haagerup natural-cone existence; interacting case).</div>
+decoherent-history</em> selector, and the continuum walls (Haagerup natural-cone existence; interacting case).
+
+</div>
 
 ## Reproduce the verification
 

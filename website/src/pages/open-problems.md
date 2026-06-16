@@ -11,7 +11,9 @@ macroscopic records — was **retired as a category error** (see the note below)
 giving the actuality selector **λ** a precise law and reaching the continuum. The
 [formalization](/formalization) is now axiom-free and settles several pieces; the rest is named honestly.
 
-<div class="note"><strong>Retired: H2 / "capacity forbids two records" (the former crux).</strong> The old
+<div class="note">
+
+<strong>Retired: H2 / "capacity forbids two records" (the former crux).</strong> The old
 Gap 1 — that a $\ge 2$-record content costs more than $Q_R$, so finite capacity selects a single outcome —
 is <strong>withdrawn as a category error</strong>. A holographic bound counts <em>independent</em> degrees of
 freedom (joint entropy / code dimension), not a sum of redundant classical records ($R$ copies of one fact
@@ -20,7 +22,9 @@ parametrically below $A/4$ (the universe runs at $\sim 10^{-18}$ of capacity); a
 unitary linearity cannot select a branch. The single outcome is supplied by <strong>λ</strong>, not by
 capacity; $Q_R$ is the finite record <em>stage</em> (a cardinality bound), and is even
 <a href="/formalization">machine-checked</a> to be optional for λ's measure (which needs only finiteness, not
-the area-bound). So H2 is no longer an open problem to establish — it is a resolved (negative) result.</div>
+the area-bound). So H2 is no longer an open problem to establish — it is a resolved (negative) result.
+
+</div>
 
 ## Gap 1 — λ's law: the central open problem
 

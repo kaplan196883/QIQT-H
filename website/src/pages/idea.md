@@ -29,7 +29,9 @@ Everett-like selection in which $\Phi$ keeps every branch and $\lambda$ marks ex
 world. $Q_{\max}$'s honest role is the finite record **stage**: it bounds how *many* distinguishable records
 a region can hold ($\le e^{Q_R}$), not whether two of them can be actual.
 
-<div class="note"><strong>The move.</strong> Collapse is not added as a new law and the wave function is
+<div class="note">
+
+<strong>The move.</strong> Collapse is not added as a new law and the wave function is
 never touched: Φ stays exactly unitary, and a non-dynamical λ marks the one actual record.
 <strong>Correction (2026).</strong> An earlier framing claimed the capacity bound <em>forbids</em> two
 actual records because "classical record-contents add up" — that is a <strong>category error</strong>. The
@@ -40,7 +42,9 @@ holographic bound counts <em>independent</em> degrees of freedom, not a sum of r
 never counts records out of existence; the single outcome is λ's, and "two actual records can't coexist"
 reduces to a classical carrier holding one value (local single-valuedness) — itself supplied by λ, not by
 the bound. The genuinely hard open piece is stitching the per-region actualities into one global,
-Lorentz-covariant λ.</div>
+Lorentz-covariant λ.
+
+</div>
 
 ## What this buys, and what it doesn't
 

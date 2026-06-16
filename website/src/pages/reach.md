@@ -22,11 +22,15 @@ What is *true* is gentler, and more interesting: QIQT-H's founding premise — t
 **holographically finite** (bounded by surface area, not volume) — is shared by serious programs that *do* take
 aim at the dark universe.
 
-<div class="note"><strong>The right neighborhood.</strong> Erik Verlinde's <em>emergent gravity</em> treats
+<div class="note">
+
+<strong>The right neighborhood.</strong> Erik Verlinde's <em>emergent gravity</em> treats
 gravity itself as an entropy/information effect; in a universe with dark energy, the holographic bookkeeping
 leaves an extra pull that mimics dark matter, reproducing flat galaxy rotation curves with no dark-matter
 particle. And <em>holographic dark energy</em> uses the same finite-information premise to get a dark-energy
-density of roughly the observed size.</div>
+density of roughly the observed size.
+
+</div>
 
 But two honest catches. Those are theories of *gravity*; QIQT-H is a theory of *measurement* — the same
 building, a different floor. And even the best holographic attempt (Verlinde's) is **contested**: it struggles
@@ -58,12 +62,16 @@ nature of local observables): acting on the vacuum with operators from any small
 entire infinite space. So "just make each region finite-dimensional" is not merely hard; in the continuum it is
 forbidden.
 
-<div class="note"><strong>One real win — borrowed.</strong> Recent work (Chandrasekaran–Longo–Penington–Witten)
+<div class="note">
+
+<strong>One real win — borrowed.</strong> Recent work (Chandrasekaran–Longo–Penington–Witten)
 shows that including gravity and an observer turns a region's algebra of observables from "Type III" (no
 well-defined entropy — everything divergent) into "Type II" (finite, well-defined entropy). That genuinely
 removes <em>one</em> infinity — the divergence in regional <em>entropy</em> — and QIQT-H is built on it. But it
 makes <em>entropy</em> finite; it does not renormalize gravity or cure singularities. And it is their result,
-not QIQT-H's.</div>
+not QIQT-H's.
+
+</div>
 
 To actually quantize gravity you would have to *add* a real **holographic dynamics** — a covariant law for
 finite regions, a short-distance mechanism replacing the usual field products, and the right low-energy limits
@@ -76,10 +84,14 @@ Notice the pattern. Dark matter, the infinities of quantum gravity, decoherence 
 ceiling — every one of these is about **dynamics**: forces, rates, short-distance behaviour. QIQT-H's
 finiteness is **kinematic**: a counting principle, about how much information a region can hold.
 
-<div class="note"><strong>Counting is not dynamics.</strong> Finiteness of <em>information</em> tells you how
+<div class="note">
+
+<strong>Counting is not dynamics.</strong> Finiteness of <em>information</em> tells you how
 much can be stored; it does not, by itself, give you a force, a rate, or a short-distance cutoff. Turning the
 premise into any of those means <em>adding</em> a holographic dynamics — a new theory of gravity, and the
-genuine unsolved problem.</div>
+genuine unsolved problem.
+
+</div>
 
 So the honest verdict across cosmology and quantum gravity is one sentence: **QIQT-H lives in the right
 neighbourhood — holography, finiteness, the very premises serious people use to attack the dark universe and
