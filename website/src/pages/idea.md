@@ -63,8 +63,9 @@ This is a research program with a sharp core, not a finished interpretation. An 
 *capacity-exclusion* conjecture — that a region cannot hold two macroscopically distinct *actual* records
 because their information would overflow its holographic budget. We now regard that as a **category error**
 (see the correction above), and the numbers make the point vivid: the budget is so vast — about $10^{66}$
-bits for a cm² boundary, $\sim 10^{122}$ for the cosmological horizon — against record costs of $\sim
-10^{25}$–$10^{104}$ bits, capped structurally at $\sim A^{3/4}$, that it is never even remotely approached.
+bits for a cm² boundary, $\sim 10^{122}$ for the cosmological horizon — against ordinary record entropy of
+$\sim 10^{25}$ bits and a structural ceiling of $\sim A^{3/4}\approx 10^{91}$ (for the whole observable
+universe), parametrically below the $\sim 10^{122}$ bound, so the budget is never even remotely approached.
 The universe runs at $\sim 10^{-18}$ of its holographic capacity. So capacity is *not* what gives single
 outcomes; **λ is**. What survives — and is genuinely distinctive — is the no-collapse single-world ontology:
 Φ exactly unitary, one non-dynamical actuality selector λ, the holographic bound supplying only the finite

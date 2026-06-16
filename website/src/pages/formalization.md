@@ -107,7 +107,7 @@ $\sigma$-additive, covariant probability — not a derivation of Born.
 The choice of abelian record framework $\{P_\alpha\}$ resolved as a **no-go trilogy** (neither capacity, nor
 symmetry, nor the state $\Phi$ selects it) **plus a positive selector** (einselection), with a
 category-error-proof record/area "contract." Verified scaffold, not new physics: $\lambda$ stays inert, so the
-scheme remains operationally Everett (`everett_equivalence`).
+scheme remains operationally Everett (an ontological reading, with no formal-content claim attached).
 
 | theorem | statement |
 | --- | --- |
@@ -140,7 +140,7 @@ premise is unavoidable). Born is **input**, not derived; these establish what it
 | `RedundancyCompressible.card_redundantCodewords` | $R$ redundant copies of a record are distinguishable in $\lvert X\rvert$ ways, not $\lvert X\rvert^R$ — redundancy is compressible (the category-error core) |
 | `RedundancyCompressible.naive_overcounts` | the naive $R\log\lvert X\rvert$ strictly exceeds the true $\log\lvert X\rvert$ |
 | `EnvarianceJustification.envariance_swap_invariant` | the system swap, undone by the environment counter-swap, fixes the state **iff** the swapped amplitudes are equal (Zurek envariance, *proved* not assumed) |
-| `BornEquiprobable.born_eq_equiprob` | for an equal-amplitude orthonormal fine-graining, the Born weight $=$ the equiprobable branch-count fraction (the amplitude→count bridge) |
+| `BornEquiprobable.born_from_equiprobability` | for an equal-amplitude orthonormal fine-graining, the Born weight $=$ the equiprobable branch-count fraction (the amplitude→count bridge) |
 | `StateSupervenience.NaturalTypicality.envariance_equiprob` | naturality $+$ a state-fixing symmetry $\Rightarrow$ equal-amplitude outcomes are equiprobable |
 
 ### λ's selection schema: covariance & contextuality (OP3b)

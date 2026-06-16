@@ -50,6 +50,15 @@ single-world hidden-variable/modal *completion* of QM, genuine only once λ has 
   *also* have no minimal projections, so the records λ selects come from a chosen abelian *pointer* subalgebra
   𝔄, which already lives inside Type III₁. λ needs no forced trace: the Born weights are the algebraic
   $\omega(P_\alpha)=\lVert P_\alpha\Phi\rVert^2$ (the natural-cone state, Type-independent).
+- **The metaselector — *which* framework 𝔄 — is substantially resolved** (a machine-checked no-go trilogy + a
+  positive selector): neither **capacity** (`capacity_underdetermines_realm`), nor **symmetry** (the unitary
+  group acts transitively on frameworks, so any invariant typicality score is constant —
+  `SymmetryNoGo.unitary_invariant_score_constant`), nor the **state Φ alone** (a single projection generates
+  only the trivial $\{0,P,1-P,1\}$ — `StateAloneNoGo.state_records_trivial`) selects the framework; **einselection**
+  does (Zurek's commutativity criterion — a record commuting with the monitored observable $A$ commutes with the
+  interaction $A\otimes B$ — `MetaselectorSelection.pointer_commutes`). So the framework is the spectral algebra
+  of the interaction Hamiltonian; this is the classic decoherent-histories set-selection question (Dowker–Kent)
+  answered up to its one residual input (below).
 - **λ's kinematic criterion is machine-checked** (finite/Type I shadow, `LambdaPointer.lean`): *which* record
   context is consistent is fixed by **Takesaki's criterion** $\sigma_t^\omega(\mathfrak A)=\mathfrak A \Leftrightarrow [\rho,P_\alpha]=0$
   (exact decoherence — `modAut_fixes_iff_commute`); the dephasing map $E(x)=\sum_\alpha P_\alpha x P_\alpha$ is the
@@ -74,7 +83,10 @@ must take as given (its origin is not, and arguably cannot be, derived). (ii) Th
 across-run **frequency** theorem (and the strong Born premise it rests on, Gap 2) is separate and unavoidable.
 (iii) "Modular invariance" is not physical irreversibility; an *approximate* version and a **global
 decoherent-history** selector (one coherent world, not one atom of one finite resolution) are the genuine
-content-adding next targets. The scheme is, as it stands, operationally equivalent to standard QM.
+content-adding next targets. (iv) The metaselector reduces *which* framework to **einselection**, which itself
+presupposes a system–environment factorization / Heisenberg cut — the residual **Dowker–Kent** input; einselection
+is the empirically-correct but *conditional* selector, so the framework problem is answered up to that cut, not
+from nothing. The scheme is, as it stands, operationally equivalent to standard QM.
 
 **Difficulty.** The covariance/contextuality structure, the kinematic criterion + modular-invariance, *and* the
 inverse-CDF selection representation are now done (finite → free field); what is left is genuinely irreducible

@@ -12,7 +12,9 @@ answering plainly, because the honest answer is the same in each case, and it co
 ## Does it explain dark matter?
 
 No — and it matters not to pretend otherwise. QIQT-H is an interpretation of quantum *measurement*: it
-reproduces every prediction of ordinary quantum mechanics ([why](/idea)). Dark matter is the opposite kind of
+reproduces every prediction of ordinary quantum mechanics ([why](/idea)) — the selector λ is non-dynamical and
+unobservable, so the framework is **operationally equivalent to Everett**, with no new measurable claim; its
+content is ontological (one actual world), not empirical. Dark matter is the opposite kind of
 problem — a stubborn anomaly in *gravity*: galaxies spin too fast, light bends too much, and the early-universe
 pattern only fits with about five times more gravitating stuff than we can see. Fixing that needs new *matter*
 or a new law of *gravity* — exactly the sort of new, measurable claim an empirically-equivalent interpretation

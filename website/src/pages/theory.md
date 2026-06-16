@@ -78,6 +78,9 @@ After decoherence has stabilized and proliferated the macroscopic records (makin
 redundantly objective), the content the region *realizes* is one definite macroscopic world — while $\Phi$
 keeps all branches and evolves exactly unitarily, with no collapse term. **The single record is supplied by
 the non-dynamical selector $\lambda$**, an Everett-like selection among the unitarily-evolved alternatives.
+Because $\lambda$ has no back-reaction and the Born weights are assumed, the scheme is **operationally
+equivalent to standard (Everettian) quantum mechanics** — $\lambda$ is unobservable; its content is
+interpretive (a single actual world), not a new prediction.
 
 <div class="note">
 
@@ -94,7 +97,7 @@ This is worth stating carefully, because "one outcome" and "unitary evolution" s
 global wave function evolves unitarily throughout; the single *actual* record is a [selection](/selection)
 by λ among the unitarily-evolved alternatives, not a dynamical modification of the Schrödinger equation — the
 [(Φ, λ) account](/selection). Making that selection precise, and deriving its statistics, is the
-dynamical-realization and Born problem below. Q<sub>max</sub>'s role is the finite record *stage* (how many
+dynamical-realization and Born problem below. $Q_R$'s role is the finite record *stage* (how many
 distinguishable records exist), not the selection.
 
 Recent progress has made λ's *selection schema* precise where it can be — machine-checked, axiom-free, at the

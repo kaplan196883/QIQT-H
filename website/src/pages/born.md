@@ -76,13 +76,18 @@ $\sum_k |c_k|^\alpha$ stays fixed under that mixing? Only the square. Rotate the
 $45°$ and you land on $(\tfrac{1}{\sqrt2},\tfrac{1}{\sqrt2})$; the total $|c|^\alpha$ comes out
 $2^{\,1-\alpha/2}$, which equals the original $1$ **only when $\alpha=2$**. Every other exponent is *rigid* —
 it tolerates relabelling and rephasing, but the instant amplitudes genuinely blend it changes. This is the
-finite core of the Banach–Lamperti theorem, and it is the deepest "why 2": **the square is the only weight
-the existence of continuous quantum evolution allows.** (It is also why, in every wave theory, energy goes
-as amplitude *squared* — same conserved quadratic.) This is [machine-checked](/papers) too.
+finite core of the Banach–Lamperti theorem, and it is a sharp "why 2": **the square is the only weight that
+continuous (norm-preserving) quantum evolution leaves invariant.** (It is also why, in every wave theory,
+energy goes as amplitude *squared* — same conserved quadratic.) This is [machine-checked](/papers) too — with
+one honesty: "continuous quantum evolution" means *unitary*, and unitarity already carries the inner product,
+so this is Born stated in symmetry language, not a deeper non-circular principle.
 
-And it is stable on top of that: even if you started with the *wrong*, non-Born weighting, the dynamics
-relaxes it back to Born — the same way a gas out of equilibrium settles down (a finite **H-theorem**, also
-machine-checked). Born is not a fragile choice; it is the equilibrium the dynamics is pulled toward.
+And Born is the **stationary** weighting on top of that: it is the fixed point of a reversible, uniform-bath
+update (a finite **H-theorem**, machine-checked). One honest caveat the proof itself flags: *stationarity is
+not attraction* — that a wrong weighting actually **relaxes** to Born needs a separate mixing premise (the
+update must be genuinely mixing, and the uniform-bath assumption is itself a typicality postulate). So Born is
+the equilibrium the dynamics *fixes*, and — given mixing — is pulled toward; bare reversibility gives only the
+fixed point.
 
 ## The same square as the bell curve
 
@@ -149,8 +154,8 @@ Born emerges like this:
 2. "Probability" means **typicality**: the fraction of microscopic possibilities that make you that outcome.
 3. You weight those possibilities by **squared amplitude** — the one irreducible ingredient.
 4. That ingredient is **not optional and not derivable from less** (both proved), **but it is unique** the
-   instant you ask for any consistent probability at all (Gleason), and it is the **attractor** the dynamics
-   relaxes to (H-theorem).
+   instant you ask for any consistent probability at all (Gleason, given positivity), and it is the **stationary
+   fixed point** of the dynamics (H-theorem) — the *attractor* too, given a separate mixing premise.
 5. So across many runs, typical starting conditions show frequencies exactly $|c_k|^2$. That is Born.
 
 In one sentence: **Born is what "typical" looks like when you measure microscopic possibilities with the
