@@ -13,8 +13,11 @@ reported by `#print axioms`, depends only on the standard classical foundations 
 <div class="note"><strong>Scope.</strong> The verified, axiom-free corpus now covers both the borrowed
 mathematics (Tomita–Takesaki modular theory and Araki = CGP relative entropy, free-field coherent sector) and
 the program's own results: the covariant σ-additive <em>consistent</em> Born measure on the record net, the
-Born-from-typicality reduction (to a state-supervenience premise, with a no-go), and λ's
-covariance/contextuality structure. What it does <strong>not</strong> establish: the holographic axiom (FQ),
+Born-from-typicality reduction (to a state-supervenience premise, with a no-go), λ's
+covariance/contextuality structure, and the <em>metaselector</em> layer — a machine-checked no-go trilogy
+(neither capacity, nor symmetry, nor the state Φ selects the record framework) with the positive answer
+(einselection, Zurek's commutativity criterion), plus a category-error-proof record/area "contract" resting
+on Born-from-projectors. What it does <strong>not</strong> establish: the holographic axiom (FQ),
 λ's <em>dynamical</em> law, or the continuum (Type III₁). It does not close the
 <a href="/open-problems">open problems</a>. (The original Macroscopic Definiteness Conjecture is
 <a href="/open-problems">retired</a> as a category error, not a pending verification target.)</div>
@@ -94,6 +97,23 @@ $\sigma$-additive, covariant probability — not a derivation of Born.
 | `offdiagonal_tendsto_zero` | SBS / Quantum-Darwinism: redundancy $N\to\infty$ drives the joint off-diagonal $\to 0$ |
 | `realm_unique_of_einselection` | given the einselected pointer family the realm is unique… |
 | `capacity_underdetermines_realm` | …but capacity *alone* does not pin it (a no-go: distinct capacity-maximal realms) |
+
+### The metaselector — what fixes the record framework
+
+The choice of abelian record framework $\{P_\alpha\}$ resolved as a **no-go trilogy** (neither capacity, nor
+symmetry, nor the state $\Phi$ selects it) **plus a positive selector** (einselection), with a
+category-error-proof record/area "contract." Verified scaffold, not new physics: $\lambda$ stays inert, so the
+scheme remains operationally Everett (`everett_equivalence`).
+
+| theorem | statement |
+| --- | --- |
+| `SymmetryNoGo.unitary_invariant_score_constant` | the unitary group acts **transitively** on frameworks (orthonormal bases), so any unitarily-invariant typicality score is constant — symmetry selects *no* framework |
+| `StateAloneNoGo.state_records_trivial` | a single projection $P=\lvert\Phi\rangle\langle\Phi\rvert$ generates only the trivial framework $\{0,P,1-P,1\}$ — the state alone selects nothing finer (Bub–Clifton) |
+| `MetaselectorSelection.pointer_commutes` | Zurek's criterion: a record commuting with the monitored $A$ commutes with the interaction $A\otimes B$ — einselected (decoherence-free) |
+| `MetaselectorSelection.pointer_invariant` | an $A$-eigenstate stays a *product* under the $A\otimes B$ coupling: pointer states do not decohere |
+| `BornProjBridge.bornRecordLaw` | Born-from-projectors: for a finite orthogonal PVM and normalized $\Phi$, $\mu(r)=\lVert P_r\Phi\rVert^2=\langle\Phi,P_r\Phi\rangle$ is a genuine record law |
+| `RecordContract.shannon_le_log_card` | the record information bound $H(R)\le\log\lvert R\rvert$ (Jensen) — the entropy/capacity bridges thread the postulated Bousso bound |
+| `MetaselectorSelection.finite_budget_forces_overlap` | a $D$-dim record space cannot hold $M>D$ orthonormal records — a finite holographic budget forces a residual-interference floor |
 
 <div class="note"><strong>Terminology (Gell-Mann–Hartle).</strong> <em>Re D = 0</em> is <em>weak</em>
 decoherence / consistency (it is what makes the Born weights obey the probability sum rules); full

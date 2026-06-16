@@ -105,11 +105,19 @@ off-diagonal <em>D = 0</em> (strong), with an exact overlap-correction formula o
 redundancy law by which broadcasting drives <em>D → 0</em> (Quantum Darwinism). See the
 <a href="/formalization">theorem index</a>. Born itself remains an <em>input</em>, not a derivation.</div>
 
-<div class="note"><strong>Realm selection — the honest status.</strong> Picking <em>which</em> consistent
-set of records (the realm) is the classic decoherent-histories gap (Dowker–Kent). Machine-checked:
-capacity <em>alone</em> does <strong>not</strong> select a unique realm (distinct capacity-maximal record
-bases exist); capacity <em>plus einselection</em> (the decoherence-selected pointer basis) does. Einselection
-is an input, not yet derived — so realm uniqueness is reduced to it, not closed.</div>
+<div class="note"><strong>Realm selection (the "metaselector") — now a machine-checked trilogy.</strong>
+Picking <em>which</em> record framework $\{P_\alpha\}$ is actual (the realm) is the classic
+decoherent-histories gap (Dowker–Kent). It is now resolved as a <strong>no-go trilogy plus a positive
+selector</strong>, all machine-checked: <em>capacity</em> does not select it (distinct capacity-maximal
+realms exist), <em>symmetry/typicality</em> does not (the unitary group acts transitively on frameworks, so
+any invariant score is constant — closing the "most typical framework" route), and <em>the state Φ alone</em>
+does not (a single projection generates only the trivial $\{0,P,1-P,1\}$). What <em>does</em> select it is
+<strong>einselection</strong> — Zurek's commutativity criterion: a record commuting with the monitored
+observable $A$ commutes with the interaction $A\otimes B$, so it is decoherence-free. Einselection presupposes
+a system–environment cut (the residual Dowker–Kent input) — so the metaselector is the interaction
+Hamiltonian, reduced to that cut, not derived from nothing. This whole layer is <em>verified scaffold</em>:
+$\lambda$ stays inert, so the scheme remains operationally Everett. See the
+<a href="/formalization">theorem index</a>.</div>
 
 ## The λ-selection schema, now machine-checked
 
