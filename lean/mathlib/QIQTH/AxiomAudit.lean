@@ -1664,6 +1664,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RecordContract.shannon_le_log_card
 -- expected: standard only — the info bound H(R) ≤ log|R| (Gibbs/Jensen on concave negMulLog): discharges hinfo concretely.
 
+-- BornProjBridge.lean — Born FROM PROJECTORS: μ(r)=‖P_r Φ‖²=⟨Φ,P_rΦ⟩ is a RecordContract.RecordLaw.
+#print axioms QIQTH.BornProjBridge.bornProj_sum
+-- expected: standard only — ∑_r ‖P_r Φ‖² = ‖Φ‖² = 1 for a normalized Φ over a finite orthogonal PVM (∑ P_r = 1).
+#print axioms QIQTH.BornProjBridge.bornRecordLaw
+-- expected: standard only — the bridge: Born-from-projectors weights form a genuine RecordLaw (contract rests on Born-from-Φ).
+
 -- ContinuumLambda.lean — Stage 1 of the continuum λ-law (2026-06-15): on the genuine RvD Δ^{it} flow.
 #print axioms QIQTH.ContinuumLambda.modAutOp_add
 -- expected: standard only — modular automorphism σ_t = Ad(Δ^{it}) is a one-parameter group.
