@@ -249,6 +249,55 @@ def run_truncation():
     bars(2, "truncating budget")   # B=2, N=4 < S: tail cut, mass piles at the cutoff
 
 # ======================================================================
+#  (B, n̄) PHASE DIAGRAM — where the budget bites a thermal oscillator
+# ======================================================================
+def _Sfull(nbar):
+    if nbar <= 0: return 0.0
+    return (1 + nbar) * math.log2(1 + nbar) - nbar * math.log2(nbar)
+
+def _trunc(B, nbar):
+    """Closed-form ⟨n⟩_N and S_N (bits) for a thermal level distribution truncated to N=2^B."""
+    r = nbar / (1 + nbar)
+    N = 2 ** B
+    rN = r ** N
+    if rN >= 1.0 - 1e-15:        # r→1, N small: nearly uniform over N levels
+        meanN = (N - 1) / 2.0
+        S_N = math.log2(N)
+        return meanN, S_N
+    meanN = r * (1 - N * r ** (N - 1) + (N - 1) * rN) / ((1 - r) * (1 - rN))
+    S_N = -math.log2(1 - r) + math.log2(1 - rN) - meanN * math.log2(r)
+    return meanN, S_N
+
+def _classify(B, nbar):
+    meanN, S_N = _trunc(B, nbar)
+    S_full = _Sfull(nbar)
+    dE = (nbar - meanN) / nbar if nbar > 0 else 0.0
+    if dE < 0.01 and abs(S_N - S_full) < 0.05:
+        return "."      # slack: no effect
+    if S_N >= B - 0.15:
+        return "#"      # saturated: entropy capped at the budget (S → B)
+    return "T"          # truncated: ⟨n⟩ and S suppressed
+
+def run_phase_diagram():
+    print("\n" + "=" * 78)
+    print("(B, n̄) PHASE DIAGRAM — where the bit budget BITES a thermal oscillator.")
+    print("  '.' slack (B ≫ S: no effect)   'T' truncated (⟨n⟩,S suppressed)   '#' saturated (S → B)")
+    print("=" * 78)
+    ks = list(range(0, 17))          # n̄ = 2^k  (1 … 65536)
+    print("  log2(n̄):       " + "".join("{:<3}".format(k) for k in ks))
+    for B in range(16, 0, -1):
+        row = "".join(" {} ".format(_classify(B, 2.0 ** k)) for k in ks)
+        print("  B={:<2}          {}".format(B, row))
+    print("  S_full(n̄)≈:    " + "".join("{:<3.0f}".format(_Sfull(2.0 ** k)) for k in ks))
+    print("  → boundary: B ≈ S_full(n̄) ≈ log₂(n̄)+1.4 (the diagonal). Above it the budget is")
+    print("    slack (no effect); on/below it the thermal state is truncated, S capped at B.")
+    print("  → REAL thermal systems sit at astronomically LARGE B (Q_R ≈ 1e65…1e122 bits) —")
+    print("    far off the TOP of this chart, deep in the '.' slack region. The '#'/'T' bite-")
+    print("    zone is reached only by (i) an artificially tiny budget, or (ii) n̄ pushed up to")
+    print("    the holographic entropy (black-hole / horizon saturation) — where it IS")
+    print("    Bekenstein–Hawking finiteness, NOT λ. λ inert ⇒ no observable effect either way.")
+
+# ======================================================================
 #  HOLOGRAPHIC REALITY CHECK
 # ======================================================================
 def run_reality():
@@ -273,4 +322,5 @@ if __name__ == "__main__":
     run_box()
     run_ho()
     run_truncation()
+    run_phase_diagram()
     run_reality()

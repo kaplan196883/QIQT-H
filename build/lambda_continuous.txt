@@ -217,6 +217,36 @@ Budget B ⇒ only N = 2^B levels exist; the high-energy tail is CUT and renormal
       | 1>  #####################0.268
       | 2>  ##################0.224
       | 3>  ###############0.186
+
+==============================================================================
+(B, n̄) PHASE DIAGRAM — where the bit budget BITES a thermal oscillator.
+  '.' slack (B ≫ S: no effect)   'T' truncated (⟨n⟩,S suppressed)   '#' saturated (S → B)
+==============================================================================
+  log2(n̄):       0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 
+  B=16           .  .  .  .  .  .  .  .  .  .  .  .  .  .  T  T  # 
+  B=15           .  .  .  .  .  .  .  .  .  .  .  .  .  T  T  #  # 
+  B=14           .  .  .  .  .  .  .  .  .  .  .  .  T  T  #  #  # 
+  B=13           .  .  .  .  .  .  .  .  .  .  .  T  T  #  #  #  # 
+  B=12           .  .  .  .  .  .  .  .  .  .  T  T  #  #  #  #  # 
+  B=11           .  .  .  .  .  .  .  .  .  T  T  #  #  #  #  #  # 
+  B=10           .  .  .  .  .  .  .  .  T  T  #  #  #  #  #  #  # 
+  B=9            .  .  .  .  .  .  .  T  T  #  #  #  #  #  #  #  # 
+  B=8            .  .  .  .  .  .  T  T  #  #  #  #  #  #  #  #  # 
+  B=7            .  .  .  .  .  T  T  #  #  #  #  #  #  #  #  #  # 
+  B=6            .  .  .  .  T  T  #  #  #  #  #  #  #  #  #  #  # 
+  B=5            .  .  .  T  T  #  #  #  #  #  #  #  #  #  #  #  # 
+  B=4            .  T  T  T  #  #  #  #  #  #  #  #  #  #  #  #  # 
+  B=3            T  T  T  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+  B=2            T  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+  B=1            #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+  S_full(n̄)≈:    2  3  4  5  5  6  7  8  9  10 11 12 13 14 15 16 17 
+  → boundary: B ≈ S_full(n̄) ≈ log₂(n̄)+1.4 (the diagonal). Above it the budget is
+    slack (no effect); on/below it the thermal state is truncated, S capped at B.
+  → REAL thermal systems sit at astronomically LARGE B (Q_R ≈ 1e65…1e122 bits) —
+    far off the TOP of this chart, deep in the '.' slack region. The '#'/'T' bite-
+    zone is reached only by (i) an artificially tiny budget, or (ii) n̄ pushed up to
+    the holographic entropy (black-hole / horizon saturation) — where it IS
+    Bekenstein–Hawking finiteness, NOT λ. λ inert ⇒ no observable effect either way.
 ==============================================================================
 REALITY CHECK — where λ's holographic bit limit actually sits.
 ==============================================================================
