@@ -269,6 +269,46 @@ ADDING G — the bit budget is GRAVITATIONAL: Q_R = A/(4ℓ_P²),  ℓ_P² = ℏ
     (standard quantum gravity). G anchors the bit-limit to spacetime — it does NOT make
     λ observable: λ stays inert ⇒ still = Everett. (A genuine λ-effect would need λ to
     couple dynamically — abandoning inert-λ — which is the speculative, non-Born route.)
+
+==============================================================================
+REAL SYSTEMS on the (S_demand vs B=budget) plane — the (B,n̄) diagram, generalised.
+  x = log₁₀(S the system WANTS, bits)   y = log₁₀(B = holographic budget for its size)
+  boundary B = S (the bite line): ONLY black holes & horizons sit there (saturated).
+==============================================================================
+     system                R (m)      log10 S_sys  log10 B      phase
+  a  trapped-ion qubit     1.0e-04    0.0          62.2         slack: 62 orders → no effect
+  b  1 cm³ gas (300 K)     1.0e-02    20.8         66.2         slack: 45 orders → no effect
+  c  the Earth             6.4e+06    44.0         83.8         slack: 40 orders → no effect
+  d  the Sun               7.0e+08    58.0         87.9         slack: 30 orders → no effect
+  e  CMB photons (obs.univ)1.3e+26    88.5         122.5        slack: 34 orders → no effect
+  f  obs-universe matter   1.3e+26    104.0        122.5        slack: 18 orders → no effect
+  g  solar-mass black hole 3.0e+03    77.2         77.2         SATURATED — on the bite line
+  h  10⁹ M_sun SMBH        3.0e+12    95.2         95.2         SATURATED — on the bite line
+  i  de Sitter horizon     1.3e+26    122.5        122.5        SATURATED — on the bite line
+  --------------------------------------------------------------------------
+  log10 B
+   130 |             \
+   120 |         ef i 
+   110 |           \  
+   100 |          h   
+    90 |      d  \    
+    80 |    c   g     
+    70 |  b    \      
+    60 |a     \       
+    50 |     \        
+    40 |    \         
+    30 |   \          
+    20 |  \           
+    10 | \            
+     0 |\             
+       +--------------
+        01234567890123  (log10 S_sys, ×10)
+  legend: a=trapped-ion qubit b=1 cm³ gas (300 K) c=the Earth d=the Sun e=CMB photons (obs.univ) f=obs-universe matter g=solar-mass black hole h=10⁹ M_sun SMBH i=de Sitter horizon
+  → '\' is the bite line B = S. Every system sits ON it (g,h,i = black holes /
+    horizon — SATURATED, Bekenstein–Hawking) or far ABOVE it (a…f — slack by 18–62
+    orders, NO effect). Even the SMBH-dominated universe (f) is ~18 orders slack
+    (~10⁻¹⁸ of capacity). The bite line is reached only by gravity, set by G; the
+    effect there is standard QG, not λ. λ inert ⇒ = Everett everywhere on this chart.
 ==============================================================================
 REALITY CHECK — where λ's holographic bit limit actually sits.
 ==============================================================================

@@ -333,6 +333,69 @@ def run_gravity():
     print("    couple dynamically — abandoning inert-λ — which is the speculative, non-Born route.)")
 
 # ======================================================================
+#  REAL SYSTEMS overlaid on the (entropy-demand vs budget) plane
+# ======================================================================
+def run_overlay():
+    hbar, c, G = 1.0546e-34, 2.998e8, 6.674e-11
+    lP2 = hbar * G / c ** 3
+    ln2 = math.log(2)
+    def Smax_bits(R):                       # holographic budget for a region of radius R (bits)
+        return math.pi * R * R / (lP2 * ln2)
+    print("\n" + "=" * 78)
+    print("REAL SYSTEMS on the (S_demand vs B=budget) plane — the (B,n̄) diagram, generalised.")
+    print("  x = log₁₀(S the system WANTS, bits)   y = log₁₀(B = holographic budget for its size)")
+    print("  boundary B = S (the bite line): ONLY black holes & horizons sit there (saturated).")
+    print("=" * 78)
+    # (marker, name, radius_m, S_sys_bits  [None ⇒ saturating: S = B])
+    systems = [
+        ("a", "trapped-ion qubit",      1e-4,   1.0),
+        ("b", "1 cm³ gas (300 K)",      1e-2,   7e20),
+        ("c", "the Earth",              6.37e6, 1e44),
+        ("d", "the Sun",                6.96e8, 1e58),
+        ("e", "CMB photons (obs.univ)", 1.3e26, 3e88),
+        ("f", "obs-universe matter",    1.3e26, 1e104),
+        ("g", "solar-mass black hole",  2953.0, None),
+        ("h", "10⁹ M_sun SMBH",         2.95e12, None),
+        ("i", "de Sitter horizon",      1.3e26, None),
+    ]
+    rows = []
+    print("  {:<3}{:<22}{:<11}{:<13}{:<13}{}".format("", "system", "R (m)", "log10 S_sys", "log10 B", "phase"))
+    for mk, name, R, Ssys in systems:
+        B = Smax_bits(R)
+        if Ssys is None:
+            Ssys = B
+        slack = math.log10(B / Ssys) if Ssys > 0 else 0
+        phase = "SATURATED — on the bite line" if slack < 0.3 else "slack: {:>2.0f} orders → no effect".format(slack)
+        rows.append((mk, math.log10(Ssys), math.log10(B)))
+        print("  {:<3}{:<22}{:<11.1e}{:<13.1f}{:<13.1f}{}".format(mk, name, R, math.log10(Ssys), math.log10(B), phase))
+    # ASCII scatter: y=log10 B (budget) up, x=log10 S (demand) right; diagonal = bite line
+    print("  " + "-" * 74)
+    print("  log10 B")
+    HI, STEP = 130, 10
+    nrow = HI // STEP + 1
+    for ri in range(nrow - 1, -1, -1):
+        yv = ri * STEP
+        line = "  {:>4} |".format(yv)
+        for ci in range(nrow):
+            xv = ci * STEP
+            ch = " "
+            if abs(yv - xv) <= STEP / 2:
+                ch = "\\"                      # the B = S bite line
+            for mk, xs, ys in rows:
+                if round(xs / STEP) == ci and round(ys / STEP) == ri:
+                    ch = mk
+            line += ch
+        print(line)
+    print("       +" + "-" * nrow)
+    print("        " + "".join(str((ci * STEP) // 10 % 10) for ci in range(nrow)) + "  (log10 S_sys, ×10)")
+    print("  legend: " + " ".join("{}={}".format(mk, nm) for mk, nm, _, _ in systems))
+    print("  → '\\' is the bite line B = S. Every system sits ON it (g,h,i = black holes /")
+    print("    horizon — SATURATED, Bekenstein–Hawking) or far ABOVE it (a…f — slack by 18–62")
+    print("    orders, NO effect). Even the SMBH-dominated universe (f) is ~18 orders slack")
+    print("    (~10⁻¹⁸ of capacity). The bite line is reached only by gravity, set by G; the")
+    print("    effect there is standard QG, not λ. λ inert ⇒ = Everett everywhere on this chart.")
+
+# ======================================================================
 #  HOLOGRAPHIC REALITY CHECK
 # ======================================================================
 def run_reality():
@@ -359,4 +422,5 @@ if __name__ == "__main__":
     run_truncation()
     run_phase_diagram()
     run_gravity()
+    run_overlay()
     run_reality()
