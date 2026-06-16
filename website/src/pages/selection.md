@@ -139,6 +139,26 @@ $\lambda$ stays inert, so the scheme remains operationally Everett. See the
 
 </div>
 
+<div class="note">
+
+<strong>The finite-information core — only one construction survives.</strong> Where can λ's
+<em>finiteness</em> actually live? There is a machine-checked <strong>dividing line</strong>. Finiteness in the
+<em>actuality domain</em> works: λ is a finite <strong>index</strong> over a finite set of record-histories,
+carrying the <em>exact</em> Born weights $\mu_\Phi(\alpha)=\lVert C_\alpha\Phi\rVert^2$ (a real number computed
+from Φ, not rounded). This is <em>Born-transparent</em> — it preserves the marginals (operational no-signaling)
+and equal weights (Zurek envariance). The tempting alternative — putting the finiteness in the
+<em>probability law</em> (a "grid" that rounds the weights to a finite resolution) — provably <strong>fails</strong>:
+it breaks the program's own envariance and no-signaling, and is retired. So there is exactly <strong>one</strong>
+viable finite-information λ: the finite index with exact Born. The holographic budget then bounds the
+<em>index cardinality</em> (how many distinguishable record-histories, $\le e^{S}$) via the mutual-information
+identity $H(\lambda)=I(\lambda;R)\le H(R)\le S$ — λ's information <em>is</em> the record information it indexes,
+no new beable. The one/two/three-qubit "universes" in the <a href="/formalization">Lean development</a> are the
+concrete toys of this construction. <strong>Honest caveat:</strong> because it keeps Born <em>exact</em>, this
+finite-information λ is still operationally Everett — finiteness is "Quantized Information" made honest (the
+actual record-history is a finite object), not a route to out-predict Everett.
+
+</div>
+
 ## The λ-selection schema, now machine-checked
 
 What was, a year ago, a bare actuality postulate is now a *verified consistency-and-selection schema* —
