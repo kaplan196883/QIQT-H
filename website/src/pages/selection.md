@@ -198,6 +198,27 @@ an explicit across-run frequency theorem.
   Bohmian: it is a record-valued selector over decoherence-defined alternatives, not a trajectory in
   configuration space.
 
+<div class="note">
+
+<strong>What λ adds to Everett — and what it doesn't.</strong> QIQT-H shares Everett's <em>dynamics</em>
+exactly: $\Phi$ is the same unitarily-evolving wave function. What pure Everett deliberately lacks is an
+<em>actuality selector</em> — every branch is equally real, with no fact about which is "the" actual one.
+$\lambda$ <em>is</em> that fact, so QIQT-H is a genuinely different, <strong>single-world</strong>
+interpretation (not many-worlds). Three honesties keep this from overclaiming. <strong>(i) The difference is
+ontological, not empirical:</strong> $\lambda$ is inert (no back-reaction, unobservable), so QIQT-H is
+<em>operationally identical</em> to Everett — it makes no new prediction. <strong>(ii) Positing a selector is
+not new:</strong> it is the <em>modal</em> family's move (Kochen–Dieks, Bub) and structurally Bohm's (the
+particle configuration as the actuality), so the <em>idea</em> of an actuality tag is not ours.
+<strong>(iii) What is ours is the verified <em>selection schema</em>:</strong> machine-checked kinematics
+including <em>what fixes the record framework</em> — einselection, via the
+<a href="/formalization">metaselector no-go trilogy</a> (neither capacity, nor symmetry, nor the state $\Phi$
+selects it) — while $\lambda$'s actual value (the seed) and the typicality measure $\mu$ remain the two open
+primitives. So we define the selector's <em>structure</em>; we do not <em>derive</em> $\lambda$. "More than
+Everett" therefore means <em>a different (single-world) ontology with a machine-checked selection schema</em>,
+not a theory that out-predicts Everett — which is exactly why we keep saying "operationally = Everett."
+
+</div>
+
 ## Locality and Bell — and why this is not superdeterminism
 
 A single-world ontology has to face Bell. To be explicit: QIQT-H **is Bell-nonlocal** — like every
