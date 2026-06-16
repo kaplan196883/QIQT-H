@@ -167,6 +167,56 @@ HARMONIC OSCILLATOR — phase-space (coherent-state) records, Husimi Q.
                             
                             
 
+
+==============================================================================
+TRUNCATION — a thermal oscillator vs a deliberately SMALL bit budget B.
+Records = energy levels |n>, thermal weights p_n = n̄^n / (1+n̄)^(n+1).
+Budget B ⇒ only N = 2^B levels exist; the high-energy tail is CUT and renormalised.
+==============================================================================
+  thermal n̄ = 5:  untruncated ⟨n⟩ = 5.00,  entropy S = 3.90 bits
+  → it 'wants' ~2^S = 15 records. Truncation bites once the budget B drops below S.
+  --------------------------------------------------------------------------
+  B   N=2^B   ⟨n⟩_N     S_N (bits)  ⟨E⟩/ℏω      effect
+  1   2       0.455     0.994       0.955       SATURATED: S capped at B
+  2   4       1.274     1.970       1.774       SATURATED: S capped at B
+  3   8       2.576     2.881       3.076       truncated: ⟨n⟩,S suppressed
+  4   16      4.085     3.579       4.585       truncated: ⟨n⟩,S suppressed
+  5   32      4.906     3.871       5.406       truncated: ⟨n⟩,S suppressed
+  6   64      4.999     3.900       5.499       slack — no effect
+  7   128     5.000     3.900       5.500       slack — no effect
+  8   256     5.000     3.900       5.500       slack — no effect
+  → S_N → min(S_full, B): the budget CAPS the entropy (this is the Bekenstein–Hawking
+    statement S ≤ A/4). For B ≫ S (lab thermal systems) it is slack — ⟨n⟩,S unchanged;
+    it only bites at saturation B ≲ S (horizons), and there it is QG, not λ.
+  --- record distribution p_n ---
+    slack budget (B=7, N=128):
+      | 0>  #############0.167
+      | 1>  ###########0.139
+      | 2>  #########0.116
+      | 3>  ########0.096
+      | 4>  ######0.080
+      | 5>  #####0.067
+      | 6>  ####0.056
+      | 7>  ####0.047
+      | 8>  ###0.039
+      | 9>  ###0.032
+      |10>  ##0.027
+      |11>  ##0.022
+      |12>  #0.019
+      |13>  #0.016
+      |14>  #0.013
+      |15>  #0.011
+      |16>  #0.009
+      |17>  #0.008
+      |18>  #0.006
+      |19>  0.005
+      |20>  0.004
+      |21>  0.004
+    truncating budget (B=2, N=4):
+      | 0>  ##########################0.322
+      | 1>  #####################0.268
+      | 2>  ##################0.224
+      | 3>  ###############0.186
 ==============================================================================
 REALITY CHECK — where λ's holographic bit limit actually sits.
 ==============================================================================

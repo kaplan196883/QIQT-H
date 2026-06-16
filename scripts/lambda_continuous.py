@@ -196,6 +196,59 @@ def run_ho():
         print()
 
 # ======================================================================
+#  TRUNCATION — thermal records pushed against a SMALL budget
+# ======================================================================
+def run_truncation():
+    print("\n" + "=" * 78)
+    print("TRUNCATION — a thermal oscillator vs a deliberately SMALL bit budget B.")
+    print("Records = energy levels |n>, thermal weights p_n = n̄^n / (1+n̄)^(n+1).")
+    print("Budget B ⇒ only N = 2^B levels exist; the high-energy tail is CUT and renormalised.")
+    print("=" * 78)
+    nbar = 5.0
+    S_full = ((1 + nbar) * math.log(1 + nbar) - nbar * math.log(nbar)) / math.log(2)
+    print("  thermal n̄ = {:.0f}:  untruncated ⟨n⟩ = {:.2f},  entropy S = {:.2f} bits"
+          .format(nbar, nbar, S_full))
+    print("  → it 'wants' ~2^S = {:.0f} records. Truncation bites once the budget B drops below S."
+          .format(2 ** S_full))
+    print("  " + "-" * 74)
+    print("  {:<4}{:<8}{:<10}{:<12}{:<12}{}".format(
+        "B", "N=2^B", "⟨n⟩_N", "S_N (bits)", "⟨E⟩/ℏω", "effect"))
+
+    def thermal_p(n):
+        return nbar ** n / (1 + nbar) ** (n + 1)
+
+    for B in range(1, 9):
+        N = 2 ** B
+        ps = [thermal_p(n) for n in range(N)]
+        Z = sum(ps)
+        ps = [p / Z for p in ps]
+        mean_n = sum(n * p for n, p in enumerate(ps))
+        S_N = entropy_bits(ps)
+        E = mean_n + 0.5
+        if abs(mean_n - nbar) / nbar < 0.01 and abs(S_N - S_full) < 0.05:
+            eff = "slack — no effect"
+        elif S_N >= B - 0.05:
+            eff = "SATURATED: S capped at B"
+        else:
+            eff = "truncated: ⟨n⟩,S suppressed"
+        print("  {:<4}{:<8}{:<10.3f}{:<12.3f}{:<12.3f}{}".format(B, N, mean_n, S_N, E, eff))
+    print("  → S_N → min(S_full, B): the budget CAPS the entropy (this is the Bekenstein–Hawking")
+    print("    statement S ≤ A/4). For B ≫ S (lab thermal systems) it is slack — ⟨n⟩,S unchanged;")
+    print("    it only bites at saturation B ≲ S (horizons), and there it is QG, not λ.")
+
+    # show the distribution: slack budget vs truncating budget
+    def bars(B, tag):
+        N = 2 ** B
+        ps = [thermal_p(n) for n in range(N)]
+        Z = sum(ps); ps = [p / Z for p in ps]
+        print("    {} (B={}, N={}):".format(tag, B, N))
+        for n in range(min(N, 22)):
+            print("      |{:>2}>  {}{:.3f}".format(n, "#" * int(round(ps[n] * 80)), ps[n]))
+    print("  --- record distribution p_n ---")
+    bars(7, "slack budget")        # B=7, N=128 ≫ S: full thermal tail
+    bars(2, "truncating budget")   # B=2, N=4 < S: tail cut, mass piles at the cutoff
+
+# ======================================================================
 #  HOLOGRAPHIC REALITY CHECK
 # ======================================================================
 def run_reality():
@@ -219,4 +272,5 @@ def run_reality():
 if __name__ == "__main__":
     run_box()
     run_ho()
+    run_truncation()
     run_reality()
