@@ -247,6 +247,28 @@ Budget B ⇒ only N = 2^B levels exist; the high-energy tail is CUT and renormal
     zone is reached only by (i) an artificially tiny budget, or (ii) n̄ pushed up to
     the holographic entropy (black-hole / horizon saturation) — where it IS
     Bekenstein–Hawking finiteness, NOT λ. λ inert ⇒ no observable effect either way.
+
+==============================================================================
+ADDING G — the bit budget is GRAVITATIONAL: Q_R = A/(4ℓ_P²),  ℓ_P² = ℏG/c³ ∝ G.
+==============================================================================
+  So Q_R = A c³/(4ℏG)  ∝  1/G.  Gravity is WHAT makes the budget finite:
+    G → 0  ⇒  ℓ_P → 0  ⇒  Q_R → ∞  ⇒  infinite records, no truncation — pure QM
+    continuum, and the whole finite-λ thesis has no anchor. The bound is gravity's.
+  ℓ_P = 1.616e-35 m,   Planck mass m_P = 2.177e-08 kg
+  Q_R for a 1 m² patch:  with G → 1.38e+69 bits;   with 2G → 6.90e+68 bits  (halves ∝ 1/G)
+  --------------------------------------------------------------------------
+  A BLACK HOLE is the thermal system whose entropy EQUALS its budget — it sits
+  exactly ON the saturation boundary (B = S), and G sets where that is:
+  object            R_s (m)      S_BH (bits)   T_Hawking (K) phase
+  Planck-mass BH    3.23e-35     1.81e+01      5.64e+30      SATURATED (S = A/4)
+  1 kg BH           1.49e-27     3.83e+16      1.23e+23      SATURATED (S = A/4)
+  solar-mass BH     2.95e+03     1.51e+77      6.17e-08      SATURATED (S = A/4)
+  10⁹ M_sun SMBH    2.95e+12     1.51e+95      6.17e-17      SATURATED (S = A/4)
+  → S_BH = A/(4ℓ_P²) = Q_R(horizon): the black hole is exactly at saturation, set by G;
+    its Hawking radiation is the truncated thermal spectrum. This is Bekenstein–Hawking
+    (standard quantum gravity). G anchors the bit-limit to spacetime — it does NOT make
+    λ observable: λ stays inert ⇒ still = Everett. (A genuine λ-effect would need λ to
+    couple dynamically — abandoning inert-λ — which is the speculative, non-Born route.)
 ==============================================================================
 REALITY CHECK — where λ's holographic bit limit actually sits.
 ==============================================================================

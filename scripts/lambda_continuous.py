@@ -298,6 +298,41 @@ def run_phase_diagram():
     print("    Bekenstein–Hawking finiteness, NOT λ. λ inert ⇒ no observable effect either way.")
 
 # ======================================================================
+#  ADDING G — the bit budget IS gravitational (Q_R = A/4ℓ_P² ∝ 1/G)
+# ======================================================================
+def run_gravity():
+    hbar, c, G, kB = 1.0546e-34, 2.998e8, 6.674e-11, 1.381e-23
+    lP2 = hbar * G / c ** 3
+    mP = math.sqrt(hbar * c / G)
+    print("\n" + "=" * 78)
+    print("ADDING G — the bit budget is GRAVITATIONAL: Q_R = A/(4ℓ_P²),  ℓ_P² = ℏG/c³ ∝ G.")
+    print("=" * 78)
+    print("  So Q_R = A c³/(4ℏG)  ∝  1/G.  Gravity is WHAT makes the budget finite:")
+    print("    G → 0  ⇒  ℓ_P → 0  ⇒  Q_R → ∞  ⇒  infinite records, no truncation — pure QM")
+    print("    continuum, and the whole finite-λ thesis has no anchor. The bound is gravity's.")
+    print("  ℓ_P = {:.3e} m,   Planck mass m_P = {:.3e} kg".format(math.sqrt(lP2), mP))
+    # Q_R ∝ 1/G demonstration on a 1 m² patch
+    A1 = 1.0
+    print("  Q_R for a 1 m² patch:  with G → {:.2e} bits;   with 2G → {:.2e} bits  (halves ∝ 1/G)"
+          .format(A1 / (4 * lP2) / math.log(2), A1 / (4 * hbar * 2 * G / c ** 3) / math.log(2)))
+    print("  " + "-" * 74)
+    print("  A BLACK HOLE is the thermal system whose entropy EQUALS its budget — it sits")
+    print("  exactly ON the saturation boundary (B = S), and G sets where that is:")
+    print("  {:<18}{:<13}{:<14}{:<14}{}".format("object", "R_s (m)", "S_BH (bits)", "T_Hawking (K)", "phase"))
+    for label, M in [("Planck-mass BH", mP), ("1 kg BH", 1.0),
+                     ("solar-mass BH", 1.989e30), ("10⁹ M_sun SMBH", 1.989e39)]:
+        Rs = 2 * G * M / c ** 2
+        A = 4 * math.pi * Rs ** 2
+        S_bits = A / (4 * lP2) / math.log(2)
+        TH = hbar * c ** 3 / (8 * math.pi * G * M * kB)
+        print("  {:<18}{:<13.2e}{:<14.2e}{:<14.2e}{}".format(label, Rs, S_bits, TH, "SATURATED (S = A/4)"))
+    print("  → S_BH = A/(4ℓ_P²) = Q_R(horizon): the black hole is exactly at saturation, set by G;")
+    print("    its Hawking radiation is the truncated thermal spectrum. This is Bekenstein–Hawking")
+    print("    (standard quantum gravity). G anchors the bit-limit to spacetime — it does NOT make")
+    print("    λ observable: λ stays inert ⇒ still = Everett. (A genuine λ-effect would need λ to")
+    print("    couple dynamically — abandoning inert-λ — which is the speculative, non-Born route.)")
+
+# ======================================================================
 #  HOLOGRAPHIC REALITY CHECK
 # ======================================================================
 def run_reality():
@@ -323,4 +358,5 @@ if __name__ == "__main__":
     run_ho()
     run_truncation()
     run_phase_diagram()
+    run_gravity()
     run_reality()
