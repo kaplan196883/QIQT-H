@@ -145,6 +145,11 @@ import QIQTH.FiniteIndexLambda
 -- pre-statistical→statistical transition (Born as finite-sample frequency,
 -- 1/(4Kε²)→0 as the number of actual records K→∞). NO axioms beyond standard three:
 import QIQTH.TinyUniverse
+-- (Φ,λ) at TWO bits: the actuality factors into two sub-bits λ=(λ_A,λ_B). New structure:
+-- entanglement (product Φ → independent bits, joint = product of marginals; Bell Φ →
+-- perfectly correlated bits with uniform marginals, joint ≠ product) + marginal/no-signaling.
+-- NO axioms beyond the standard three:
+import QIQTH.TwoBitUniverse
 -- Continuum λ-law (Stage 1 of CONTINUUM_LAMBDA_ROADMAP): the modular automorphism
 -- σ_t = Ad(Δ^{it}) on the genuine continuum modular flow, the continuum Takesaki
 -- criterion, and continuum persistence (decoherence map commutes with σ_t ∀t,

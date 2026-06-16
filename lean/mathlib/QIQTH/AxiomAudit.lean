@@ -1632,6 +1632,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TinyUniverse.phi_eq_superposition
 -- expected: standard only — the bit names the actual world: Φ = ∑ k, Φ k • e_k, λ selects one of the records composing Φ.
 
+-- TwoBitUniverse.lean — (Φ,λ) at two bits: entanglement + marginal/no-signaling structure.
+#print axioms QIQTH.TwoBitUniverse.product_independent
+-- expected: standard only — product (unentangled) Φ: the two bits are independent, joint Born = product of marginals.
+#print axioms QIQTH.TwoBitUniverse.bell_correlated
+-- expected: standard only — entangled Bell Φ: uniform marginals (½) yet joint ≠ product (P(0,1)=0 ≠ ¼): genuine correlation.
+#print axioms QIQTH.TwoBitUniverse.bell_perfect_correlation
+-- expected: standard only — the Bell bits are never unequal (P(a,b)=0 for a≠b): knowing λ_A fixes λ_B.
+
 -- ContinuumLambda.lean — Stage 1 of the continuum λ-law (2026-06-15): on the genuine RvD Δ^{it} flow.
 #print axioms QIQTH.ContinuumLambda.modAutOp_add
 -- expected: standard only — modular automorphism σ_t = Ad(Δ^{it}) is a one-parameter group.
