@@ -1669,6 +1669,8 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ∑_r ‖P_r Φ‖² = ‖Φ‖² = 1 for a normalized Φ over a finite orthogonal PVM (∑ P_r = 1).
 #print axioms QIQTH.BornProjBridge.bornRecordLaw
 -- expected: standard only — the bridge: Born-from-projectors weights form a genuine RecordLaw (contract rests on Born-from-Φ).
+#print axioms QIQTH.RecordContract.eventProb_le_one
+-- expected: standard only — the selector's event measure IS the Born measure (a genuine probability ≤ 1): λ's whole empirical content.
 
 -- ContinuumLambda.lean — Stage 1 of the continuum λ-law (2026-06-15): on the genuine RvD Δ^{it} flow.
 #print axioms QIQTH.ContinuumLambda.modAutOp_add

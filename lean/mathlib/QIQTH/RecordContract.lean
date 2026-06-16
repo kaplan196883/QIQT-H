@@ -173,6 +173,24 @@ theorem capacity_is_not_the_metaselector :
 
 /- ── 4. Everett-equivalence (the honest capstone) ───────────────────────────-/
 
+/-- The operational probability of an event (a set of records) under λ-selection: the Born
+    measure of the set.  This is the ENTIRE empirical content of λ — and it is exactly the
+    standard Born / Everett branch-weight measure on the records. -/
+noncomputable def eventProb (μ : RecordLaw R) (E : Finset R) : ℝ := ∑ r ∈ E, μ.p r
+
+theorem eventProb_nonneg (μ : RecordLaw R) (E : Finset R) : 0 ≤ eventProb μ E :=
+  Finset.sum_nonneg (fun r _ => μ.nonneg r)
+
+/-- The whole record space is certain: `P(λ ∈ R) = 1`. -/
+theorem eventProb_univ (μ : RecordLaw R) : eventProb μ Finset.univ = 1 := μ.sum_one
+
+/-- Every event has probability `≤ 1` — `eventProb` is a genuine (Born) probability measure. -/
+theorem eventProb_le_one (μ : RecordLaw R) (E : Finset R) : eventProb μ E ≤ 1 := by
+  simp only [eventProb]
+  rw [← μ.sum_one]
+  exact Finset.sum_le_sum_of_subset_of_nonneg (Finset.subset_univ E) (fun r _ _ => μ.nonneg r)
+
+
 /-- **Everett-equivalence — zero empirical content.**  Φ evolves unitarily exactly as in
     Everett; λ is non-dynamical, Born-distributed, and accessible only AS the selected
     record (no backreaction).  Hence every operational/record statistic equals standard
