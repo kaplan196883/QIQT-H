@@ -1620,6 +1620,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FiniteIndexLambda.grid_breaks_no_signaling
 -- expected: standard only — the GRID law breaks no-signaling (same Born marginal, different grid marginal: order-1/N signal).
 
+-- TinyUniverse.lean — (Φ,λ) in a very limited information space (one-bit universe + statistical emergence).
+#print axioms QIQTH.TinyUniverse.oneBit_grid_distorts
+-- expected: standard only — one-bit universe: index keeps (1/3,2/3) exact; grid forces (1/2,1/2) at N=2.
+#print axioms QIQTH.TinyUniverse.born_finite_sample_bound
+-- expected: standard only — Born as finite-sample typicality: Pr(|p̂−p|≥ε) ≤ 1/(4Kε²).
+#print axioms QIQTH.TinyUniverse.statistical_emergence
+-- expected: standard only — the bound 1/(4Kε²) → 0 as K→∞ (statistical Born emerges in the large-info limit).
+
 -- ContinuumLambda.lean — Stage 1 of the continuum λ-law (2026-06-15): on the genuine RvD Δ^{it} flow.
 #print axioms QIQTH.ContinuumLambda.modAutOp_add
 -- expected: standard only — modular automorphism σ_t = Ad(Δ^{it}) is a one-parameter group.

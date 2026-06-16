@@ -140,6 +140,11 @@ import QIQTH.FiniteInfoLambda
 -- line: the index preserves marginals + equal-weights, while the grid provably
 -- BREAKS envariance and no-signaling. NO axioms beyond the standard three:
 import QIQTH.FiniteIndexLambda
+-- (Φ,λ) in a VERY LIMITED information space: the one-bit universe (M=2, exact
+-- Born (p,1-p); the grid distorts it to (1/2,1/2) at N=2) and the
+-- pre-statistical→statistical transition (Born as finite-sample frequency,
+-- 1/(4Kε²)→0 as the number of actual records K→∞). NO axioms beyond standard three:
+import QIQTH.TinyUniverse
 -- Continuum λ-law (Stage 1 of CONTINUUM_LAMBDA_ROADMAP): the modular automorphism
 -- σ_t = Ad(Δ^{it}) on the genuine continuum modular flow, the continuum Takesaki
 -- criterion, and continuum persistence (decoherence map commutes with σ_t ∀t,
