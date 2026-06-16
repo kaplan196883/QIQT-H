@@ -1688,6 +1688,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MetaselectorSelection.finite_budget_forces_overlap
 -- expected: standard only — a D-dim record space cannot hold M>D orthonormal records: finite budget forces overlap (interference floor).
 
+-- StateAloneNoGo.lean — a state alone selects only the trivial framework (completes the no-go trilogy).
+#print axioms QIQTH.StateAloneNoGo.state_records_trivial
+-- expected: standard only — a single projection P=|Φ⟩⟨Φ| generates only {0,P,1−P,1}: Φ alone selects no finer framework.
+
 -- ContinuumLambda.lean — Stage 1 of the continuum λ-law (2026-06-15): on the genuine RvD Δ^{it} flow.
 #print axioms QIQTH.ContinuumLambda.modAutOp_add
 -- expected: standard only — modular automorphism σ_t = Ad(Δ^{it}) is a one-parameter group.

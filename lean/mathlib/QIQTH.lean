@@ -176,6 +176,10 @@ import QIQTH.SymmetryNoGo
 -- the interaction A⊗B (decoherence-free); plus the finite-budget overlap floor (a holographic
 -- dimension cap forces record overlap above D records). Complements the symmetry/capacity no-gos.
 import QIQTH.MetaselectorSelection
+-- STATE-ALONE no-go (completes the trilogy): a single projection P=|Φ⟩⟨Φ| generates only the
+-- trivial framework {0,P,1−P,1} — a state alone cannot select a finer record basis. So neither
+-- capacity, nor symmetry, nor Φ selects the framework: the metaselector is einselection.
+import QIQTH.StateAloneNoGo
 -- Continuum λ-law (Stage 1 of CONTINUUM_LAMBDA_ROADMAP): the modular automorphism
 -- σ_t = Ad(Δ^{it}) on the genuine continuum modular flow, the continuum Takesaki
 -- criterion, and continuum persistence (decoherence map commutes with σ_t ∀t,
