@@ -1639,6 +1639,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — entangled Bell Φ: uniform marginals (½) yet joint ≠ product (P(0,1)=0 ≠ ¼): genuine correlation.
 #print axioms QIQTH.TwoBitUniverse.bell_perfect_correlation
 -- expected: standard only — the Bell bits are never unequal (P(a,b)=0 for a≠b): knowing λ_A fixes λ_B.
+#print axioms QIQTH.TwoBitUniverse.coarse_is_oneBit
+-- expected: standard only — ONE bit in a two-qubit world: a binary coarse-graining; the coarse law IS a one-bit universe.
+#print axioms QIQTH.TwoBitUniverse.bell_parity_zero
+-- expected: standard only — entanglement makes the parity bit DEFINITE (2‖c‖²=1 on aligned block); a local bit on the same Φ is uniform.
 
 -- ContinuumLambda.lean — Stage 1 of the continuum λ-law (2026-06-15): on the genuine RvD Δ^{it} flow.
 #print axioms QIQTH.ContinuumLambda.modAutOp_add
