@@ -46,6 +46,8 @@
 
 import QIQTH.BranchLedger
 import QIQTH.RealmSelection
+import Mathlib.Analysis.SpecialFunctions.Log.NegMulLog
+import Mathlib.Analysis.Convex.Jensen
 import Mathlib.Tactic
 
 namespace QIQTH.RecordContract
@@ -114,6 +116,49 @@ theorem area_capacity_bridge (I_lambda S_area : ℝ) (n : ℕ)
     (hinfo : I_lambda ≤ Real.log n) (hCap : Real.log n ≤ S_area) :
     I_lambda ≤ S_area :=
   le_trans hinfo hCap
+
+/- ── 2b. The info bound, made concrete (discharges hinfo: H(R) ≤ log|R|) ────-/
+
+/-- Shannon entropy is a sum of `negMulLog` of the weights. -/
+theorem shannon_eq_sum_negMulLog {ι : Type*} (s : Finset ι) (p : ι → ℝ) :
+    QIQTH.BranchLedger.Shannon s p = ∑ i ∈ s, Real.negMulLog (p i) := by
+  rw [QIQTH.BranchLedger.Shannon, ← neg_one_mul, Finset.mul_sum]
+  exact Finset.sum_congr rfl (fun i _ => by rw [Real.negMulLog_def]; ring)
+
+/-- **The information bound `H(R) ≤ log|R|` (Gibbs/Jensen), machine-checked.**  For any
+    finite Born record law, the Shannon entropy is at most the log of the record count.
+    This discharges the `hinfo` hypothesis of `area_capacity_bridge` concretely — the only
+    genuinely-mathematical (still textbook) step in the contract. -/
+theorem shannon_le_log_card {ι : Type*} [Fintype ι] (p : ι → ℝ)
+    (hp : ∀ i, 0 ≤ p i) (h1 : ∑ i, p i = 1) :
+    QIQTH.BranchLedger.Shannon Finset.univ p ≤ Real.log (Fintype.card ι) := by
+  have hn : 0 < Fintype.card ι := by
+    rcases Nat.eq_zero_or_pos (Fintype.card ι) with h0 | h0
+    · haveI : IsEmpty ι := Fintype.card_eq_zero_iff.mp h0
+      simp only [Finset.univ_eq_empty, Finset.sum_empty] at h1
+      exact absurd h1 (by norm_num)
+    · exact h0
+  have hnpos : (0 : ℝ) < (Fintype.card ι : ℝ) := by exact_mod_cast hn
+  have hne : (Fintype.card ι : ℝ) ≠ 0 := ne_of_gt hnpos
+  -- Jensen for the concave negMulLog with uniform weights 1/n
+  have key := Real.concaveOn_negMulLog.le_map_sum (t := Finset.univ)
+    (w := fun _ => (Fintype.card ι : ℝ)⁻¹) (p := p)
+    (fun i _ => by positivity)
+    (by rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]; exact mul_inv_cancel₀ hne)
+    (fun i _ => Set.mem_Ici.mpr (hp i))
+  simp only [smul_eq_mul] at key
+  rw [← Finset.mul_sum, ← Finset.mul_sum, h1, mul_one] at key
+  -- key : n⁻¹ * ∑ negMulLog (p i) ≤ negMulLog n⁻¹
+  have hneg : Real.negMulLog (Fintype.card ι : ℝ)⁻¹ = (Fintype.card ι : ℝ)⁻¹ * Real.log (Fintype.card ι) := by
+    simp only [Real.negMulLog_def, Real.log_inv]; ring
+  rw [hneg] at key
+  rw [shannon_eq_sum_negMulLog]
+  exact le_of_mul_le_mul_left key (inv_pos.mpr hnpos)
+
+/-- **Concrete capacity bound for a record law.**  `H(R) ≤ log|R|` for any `RecordLaw`. -/
+theorem record_info_le_log_card (μ : RecordLaw R) :
+    QIQTH.BranchLedger.Shannon Finset.univ μ.p ≤ Real.log (Fintype.card R) :=
+  shannon_le_log_card μ.p μ.nonneg μ.sum_one
 
 /- ── 3. Guardrails (the metaselector is einselection, NOT capacity) ─────────-/
 

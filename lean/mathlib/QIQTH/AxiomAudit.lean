@@ -1661,6 +1661,8 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — area bridge (entropy version): I(λ;R) ≤ H(R) ≤ S_area threads the Bousso postulate.
 #print axioms QIQTH.RecordContract.area_capacity_bridge
 -- expected: standard only — area bridge (capacity version): I(λ;R) ≤ log|R| ≤ S_area, the STRONGER dim postulate (≠ Bousso).
+#print axioms QIQTH.RecordContract.shannon_le_log_card
+-- expected: standard only — the info bound H(R) ≤ log|R| (Gibbs/Jensen on concave negMulLog): discharges hinfo concretely.
 
 -- ContinuumLambda.lean — Stage 1 of the continuum λ-law (2026-06-15): on the genuine RvD Δ^{it} flow.
 #print axioms QIQTH.ContinuumLambda.modAutOp_add
