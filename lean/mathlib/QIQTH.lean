@@ -150,6 +150,11 @@ import QIQTH.TinyUniverse
 -- perfectly correlated bits with uniform marginals, joint ≠ product) + marginal/no-signaling.
 -- NO axioms beyond the standard three:
 import QIQTH.TwoBitUniverse
+-- (Φ,λ) in an EIGHT-record (three-qubit) world with 1/2/3 bits of actuality: the
+-- resolution hierarchy (k bits → 2^k-block coarse-graining, exact partial Born; 3 bits =
+-- full per-record law) + the GHZ entropy ceiling (8 records but supported on 2, so even a
+-- 2/3-bit λ reveals 1 bit; dimension ≠ information). NO axioms beyond the standard three:
+import QIQTH.ThreeQubitUniverse
 -- Continuum λ-law (Stage 1 of CONTINUUM_LAMBDA_ROADMAP): the modular automorphism
 -- σ_t = Ad(Δ^{it}) on the genuine continuum modular flow, the continuum Takesaki
 -- criterion, and continuum persistence (decoherence map commutes with σ_t ∀t,

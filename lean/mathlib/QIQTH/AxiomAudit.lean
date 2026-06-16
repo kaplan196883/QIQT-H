@@ -1644,6 +1644,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TwoBitUniverse.bell_parity_zero
 -- expected: standard only — entanglement makes the parity bit DEFINITE (2‖c‖²=1 on aligned block); a local bit on the same Φ is uniform.
 
+-- ThreeQubitUniverse.lean — 8-record world with 1/2/3 bits: resolution hierarchy + GHZ entropy ceiling.
+#print axioms QIQTH.ThreeQubitUniverse.blockBorn_full_eq_triBorn
+-- expected: standard only — 3 bits = full resolution: the 2^k-block coarse law collapses to the per-record Born law.
+#print axioms QIQTH.ThreeQubitUniverse.ghz_supported_on_diagonal
+-- expected: standard only — GHZ lives in 8 records but only 2 carry weight (000/111): Born entropy 1 bit, not log(dim)=3.
+#print axioms QIQTH.ThreeQubitUniverse.ghz_2bit_collapse
+-- expected: standard only — 2 bits don't separate GHZ's A,B (the A≠B block has weight 0): extra budget is slack.
+
 -- ContinuumLambda.lean — Stage 1 of the continuum λ-law (2026-06-15): on the genuine RvD Δ^{it} flow.
 #print axioms QIQTH.ContinuumLambda.modAutOp_add
 -- expected: standard only — modular automorphism σ_t = Ad(Δ^{it}) is a one-parameter group.
