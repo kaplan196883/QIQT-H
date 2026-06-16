@@ -1612,6 +1612,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FiniteInfoLambda.resolution_floor
 -- expected: standard only — for SOME ordering/N a positive-weight record gets 0 cells (ordering-dependent, not a threshold).
 
+-- FiniteIndexLambda.lean — the SURVIVING finite-info λ (finite index, exact Born) + the dividing line.
+#print axioms QIQTH.FiniteIndexLambda.indexWeight_marginal
+-- expected: standard only — the finite-INDEX law preserves marginals (no-signaling-transparent).
+#print axioms QIQTH.FiniteIndexLambda.grid_breaks_envariance
+-- expected: standard only — the GRID law breaks envariance ((1/3,1/3,1/3) N=2 → (1/2,1/2,0)).
+#print axioms QIQTH.FiniteIndexLambda.grid_breaks_no_signaling
+-- expected: standard only — the GRID law breaks no-signaling (same Born marginal, different grid marginal: order-1/N signal).
+
 -- ContinuumLambda.lean — Stage 1 of the continuum λ-law (2026-06-15): on the genuine RvD Δ^{it} flow.
 #print axioms QIQTH.ContinuumLambda.modAutOp_add
 -- expected: standard only — modular automorphism σ_t = Ad(Δ^{it}) is a one-parameter group.

@@ -135,6 +135,11 @@ import QIQTH.SelectionEvent
 -- (the grid is ordering-dependent and breaks QIQT-H's own envariance + no-signaling;
 -- finite value-space λ reproduces Born exactly with no deviation). See its header:
 import QIQTH.FiniteInfoLambda
+-- The finite-information λ that SURVIVES: a finite INDEX over a finite record
+-- space with the EXACT Born law (Born-transparent). Machine-checks the dividing
+-- line: the index preserves marginals + equal-weights, while the grid provably
+-- BREAKS envariance and no-signaling. NO axioms beyond the standard three:
+import QIQTH.FiniteIndexLambda
 -- Continuum λ-law (Stage 1 of CONTINUUM_LAMBDA_ROADMAP): the modular automorphism
 -- σ_t = Ad(Δ^{it}) on the genuine continuum modular flow, the continuum Takesaki
 -- criterion, and continuum persistence (decoherence map commutes with σ_t ∀t,
