@@ -38,6 +38,15 @@
 
   Axiom-free.  (Born stays exact throughout — the finiteness is the cardinality of
   the index, never a rounding of the probability law.)
+
+  CAVEAT (honesty, post GPT-5.5-pro review).  These are single-system facts in a FIXED
+  computational basis with no decoherence — pedagogy, not research.  Read the slogans
+  PRECISELY: "λ enforces Φ" means only "Φ FIXES λ's Born law" (`qubitBorn_eq_oneBitBorn`
+  proves Φ→λ, NOT backreaction); "the bit names the actual world" presupposes a preferred
+  record basis (here ASSUMED, not derived — the einselection/preferred-basis input lives in
+  `RecordContract`/`RealmSelection`); "statistical Born emerges" ASSUMES the iid variance
+  (`born_finite_sample_bound` takes `Var ≤ 1/(4K)` as a hypothesis) — it packages Chebyshev,
+  it does NOT derive Born.  The honest record/area layer is `QIQTH/RecordContract`.
 -/
 
 import QIQTH.FiniteIndexLambda

@@ -24,6 +24,13 @@
 
   Axiom-free.  Born stays exact; the finiteness is the four-record index, never a
   rounding of the probability law.
+
+  CAVEAT (honesty, post GPT-5.5-pro review).  "Entanglement" here is OVERSTATED: every
+  result is in the FIXED computational basis, and `bell_correlated` (joint ≠ product of
+  marginals) is NOT an entanglement witness — the SEPARABLE mixture ½|00⟩⟨00|+½|11⟩⟨11|
+  has the identical computational distribution.  Read it as "single-basis correlation".
+  A genuine entanglement/nonclassicality witness needs MULTIPLE incompatible measurement
+  contexts (CHSH/Mermin), which this module does not have.  Pedagogy, not a Bell theorem.
 -/
 
 import QIQTH.TinyUniverse

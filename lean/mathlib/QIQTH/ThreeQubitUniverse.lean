@@ -22,6 +22,15 @@
   the budget.
 
   Axiom-free.  Born stays exact; the finiteness is the (coarse-grained) index.
+
+  CAVEAT (honesty, post GPT-5.5-pro review).  "GHZ wastes the budget / dimension ≠
+  information" must be read with the qualifier: the "1 bit" is the COMPUTATIONAL-BASIS
+  OUTCOME (Shannon) entropy.  It is basis-dependent — pure GHZ has von Neumann entropy 0
+  and 1|23 entanglement entropy 1, and the coherent GHZ and the incoherent 000/111 mixture
+  share this computational distribution (the phase is invisible to `blockBorn`).  And
+  redundant correlated records are not literally "waste" — that redundancy is exactly what
+  decoherence / quantum Darwinism USE.  Single-basis pedagogy; the honest entropy/capacity
+  bound (entropy vs cardinality, kept distinct) lives in `QIQTH/RecordContract`.
 -/
 
 import QIQTH.TwoBitUniverse
