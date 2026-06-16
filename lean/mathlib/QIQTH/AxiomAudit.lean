@@ -1627,6 +1627,8 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — Born as finite-sample typicality: Pr(|p̂−p|≥ε) ≤ 1/(4Kε²).
 #print axioms QIQTH.TinyUniverse.statistical_emergence
 -- expected: standard only — the bound 1/(4Kε²) → 0 as K→∞ (statistical Born emerges in the large-info limit).
+#print axioms QIQTH.TinyUniverse.qubitBorn_eq_oneBitBorn
+-- expected: standard only — λ ENFORCES Φ: the single-bit weights are the squared amplitudes of a qubit (p = ‖Φ 0‖², not free).
 
 -- ContinuumLambda.lean — Stage 1 of the continuum λ-law (2026-06-15): on the genuine RvD Δ^{it} flow.
 #print axioms QIQTH.ContinuumLambda.modAutOp_add

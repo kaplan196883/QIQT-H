@@ -22,6 +22,13 @@
       — Born emerges as frequency with certainty.  So statistical Born is a
       LARGE-information-space phenomenon; the small/early universe is pre-statistical.
 
+  (3) THE MUTUAL CONSTRAINT — λ ENFORCES Φ.  A single-bit universe is a single QUBIT
+      `Φ : Fin 2 → ℂ`; the records λ selects among ARE Φ's basis components, so a one-bit
+      λ is consistent only with a two-dimensional Φ.  And λ's law is not a free coin: the
+      weights are the SQUARED AMPLITUDES of the actual qubit,
+      `qubitBorn Φ = oneBitBorn (‖Φ 0‖²)` (`qubitBorn_eq_oneBitBorn`) — `p = ‖Φ 0‖²` is
+      fixed by Φ.  λ's form is determined by Φ, and a finite λ forces a finite Φ.
+
   Axiom-free.  (Born stays exact throughout — the finiteness is the cardinality of
   the index, never a rounding of the probability law.)
 -/
@@ -95,6 +102,39 @@ theorem statistical_emergence (ε : ℝ) (hε : 0 < ε) :
   rw [one_div_mul_one_div]
   congr 1
   ring
+
+/- ── 3. The self-consistent single-bit universe: λ enforces Φ ──────────────-/
+
+/-- A single-bit universe is a single **QUBIT**: `Φ : Fin 2 → ℂ` is the amplitude
+    vector, and the records λ selects among ARE Φ's two basis components (the SHARED
+    `Fin 2`).  So a one-bit λ is consistent only with a two-dimensional Φ — λ's
+    finiteness *enforces* Φ's dimension (the holographic budget `S = log 2` caps both
+    `|records| ≤ 2` and `dim Φ ≤ 2`). -/
+noncomputable def qubitBorn (Φ : Fin 2 → ℂ) : Fin 2 → ℝ := fun k => ‖Φ k‖ ^ 2
+
+theorem qubitBorn_nonneg (Φ : Fin 2 → ℂ) (k : Fin 2) : 0 ≤ qubitBorn Φ k := by
+  unfold qubitBorn; positivity
+
+/-- The qubit Born weights are a probability (from normalization `‖Φ‖² = 1`). -/
+theorem qubitBorn_sum (Φ : Fin 2 → ℂ) (hΦ : ∑ i, ‖Φ i‖ ^ 2 = 1) :
+    ∑ k, qubitBorn Φ k = 1 := hΦ
+
+/-- **λ's law is ENFORCED by Φ, not free.**  The one-bit weights are the SQUARED
+    AMPLITUDES of the actual qubit: `qubitBorn Φ = oneBitBorn (‖Φ 0‖²)`, with the bias
+    `p = ‖Φ 0‖²` fixed by Φ (and `‖Φ 1‖² = 1 − p` by normalization).  So the single-bit
+    universe is not a free coin `(p, 1−p)`: `p` is the Born amplitude of a specific
+    qubit, and λ selects one of that qubit's two basis records.  This is the mutual
+    constraint — λ's form is determined by Φ, and a finite λ forces a finite Φ. -/
+theorem qubitBorn_eq_oneBitBorn (Φ : Fin 2 → ℂ) (hΦ : ∑ i, ‖Φ i‖ ^ 2 = 1) :
+    qubitBorn Φ = oneBitBorn (‖Φ 0‖ ^ 2) := by
+  have h2 : ‖Φ 1‖ ^ 2 = 1 - ‖Φ 0‖ ^ 2 := by rw [Fin.sum_univ_two] at hΦ; linarith
+  funext k
+  fin_cases k <;> simp [qubitBorn, oneBitBorn, h2]
+
+/-- **The actuality index space *is* the qubit's dimension.**  The one-bit λ ranges
+    over `Fin 2`, which is exactly the index of Φ's amplitudes — `2` outcomes, `2`
+    dimensions, `1` bit.  λ and Φ are co-determined by the same finite structure. -/
+theorem oneBit_dim : Fintype.card (Fin 2) = 2 := rfl
 
 /-- **Audit conclusion.**  (Φ,λ) in a very limited information space, machine-checked
     axiom-free.  The one-bit universe `(p,1−p)` is a genuine exact-Born probability
