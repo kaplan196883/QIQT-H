@@ -166,6 +166,11 @@ import QIQTH.RecordContract
 -- RecordContract.RecordLaw — so the contract rests on Born-from-Φ, not a toy distribution.
 -- First concrete piece of the decoherent record algebra. Standard three:
 import QIQTH.BornProjBridge
+-- SYMMETRY CANNOT BE THE METASELECTOR: the unitary group acts transitively on frameworks
+-- (orthonormal bases), so any unitarily-invariant typicality score is CONSTANT — selects no
+-- preferred framework. The continuous form of capacity_underdetermines_realm; closes the
+-- "select the most typical framework by symmetry" route. The metaselector must be einselection.
+import QIQTH.SymmetryNoGo
 -- Continuum λ-law (Stage 1 of CONTINUUM_LAMBDA_ROADMAP): the modular automorphism
 -- σ_t = Ad(Δ^{it}) on the genuine continuum modular flow, the continuum Takesaki
 -- criterion, and continuum persistence (decoherence map commutes with σ_t ∀t,

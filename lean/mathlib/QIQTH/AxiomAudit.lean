@@ -1672,6 +1672,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RecordContract.eventProb_le_one
 -- expected: standard only — the selector's event measure IS the Born measure (a genuine probability ≤ 1): λ's whole empirical content.
 
+-- SymmetryNoGo.lean — symmetry cannot select a preferred framework (the metaselector must be einselection).
+#print axioms QIQTH.SymmetryNoGo.invariant_of_pretransitive_constant
+-- expected: NO axioms at all — a transitive group action makes any invariant score constant (selects nothing).
+#print axioms QIQTH.SymmetryNoGo.unitary_invariant_score_constant
+-- expected: standard only — THE NO-GO: unitary group transitive on frameworks ⇒ any unitarily-invariant score is constant.
+#print axioms QIQTH.SymmetryNoGo.exists_unitary_map
+-- expected: standard only — any two orthonormal bases (frameworks) are related by a unitary: the framework space is one orbit.
+
 -- ContinuumLambda.lean — Stage 1 of the continuum λ-law (2026-06-15): on the genuine RvD Δ^{it} flow.
 #print axioms QIQTH.ContinuumLambda.modAutOp_add
 -- expected: standard only — modular automorphism σ_t = Ad(Δ^{it}) is a one-parameter group.
