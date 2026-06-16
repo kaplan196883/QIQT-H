@@ -171,6 +171,11 @@ import QIQTH.BornProjBridge
 -- preferred framework. The continuous form of capacity_underdetermines_realm; closes the
 -- "select the most typical framework by symmetry" route. The metaselector must be einselection.
 import QIQTH.SymmetryNoGo
+-- What DOES select the framework (the positive answer): EINSELECTION via Zurek's
+-- commutativity criterion — a record commuting with the monitored observable A commutes with
+-- the interaction A⊗B (decoherence-free); plus the finite-budget overlap floor (a holographic
+-- dimension cap forces record overlap above D records). Complements the symmetry/capacity no-gos.
+import QIQTH.MetaselectorSelection
 -- Continuum λ-law (Stage 1 of CONTINUUM_LAMBDA_ROADMAP): the modular automorphism
 -- σ_t = Ad(Δ^{it}) on the genuine continuum modular flow, the continuum Takesaki
 -- criterion, and continuum persistence (decoherence map commutes with σ_t ∀t,

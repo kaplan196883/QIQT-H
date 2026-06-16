@@ -1680,6 +1680,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SymmetryNoGo.exists_unitary_map
 -- expected: standard only — any two orthonormal bases (frameworks) are related by a unitary: the framework space is one orbit.
 
+-- MetaselectorSelection.lean — the POSITIVE selector (einselection) + the finite-budget overlap floor.
+#print axioms QIQTH.MetaselectorSelection.pointer_commutes
+-- expected: standard only — Zurek criterion: a record commuting with monitored A commutes with the interaction A⊗B (einselected).
+#print axioms QIQTH.MetaselectorSelection.pointer_invariant
+-- expected: standard only — an A-eigenstate stays a PRODUCT under A⊗B coupling: pointer states are decoherence-free.
+#print axioms QIQTH.MetaselectorSelection.finite_budget_forces_overlap
+-- expected: standard only — a D-dim record space cannot hold M>D orthonormal records: finite budget forces overlap (interference floor).
+
 -- ContinuumLambda.lean — Stage 1 of the continuum λ-law (2026-06-15): on the genuine RvD Δ^{it} flow.
 #print axioms QIQTH.ContinuumLambda.modAutOp_add
 -- expected: standard only — modular automorphism σ_t = Ad(Δ^{it}) is a one-parameter group.
