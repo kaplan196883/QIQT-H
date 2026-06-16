@@ -73,10 +73,23 @@ Eight records. A $k$-bit λ resolves a $2^k$-block coarse-graining with exact pa
 **resolution dial**: 1 bit → 2 blocks, 2 bits → 4 blocks, 3 bits → 8 records.
 
 The lesson is the **entropy ceiling**. The GHZ state $c(\lvert000\rangle+\lvert111\rangle)$ lives in 8 records
-but only $000$ and $111$ carry weight (`ghz_supported_on_diagonal`): its Born entropy is **1 bit, not
-$\log\dim = 3$**. So no budget reveals more than one bit — a two-bit reading never even separates A from B
-(`ghz_2bit_collapse`). **Dimension is not information**: a maximally-correlated Φ compresses the actual record
-content far below the naive count.
+but only $000$ and $111$ carry weight (`ghz_supported_on_diagonal`): its computational-basis Born entropy is
+**1 bit, not $\log\dim = 3$**. So no budget reveals more than one bit — a two-bit reading never even separates
+A from B (`ghz_2bit_collapse`). In short, **$H(R)$ can sit far below $\log\dim$** — record information is the
+*support entropy* of the Born distribution, not the Hilbert dimension.
+
+<div class="note">
+
+<strong>What this is and isn't (honest scope).</strong> This is a <em>standard Shannon / data-processing</em>
+fact — a sparse Born distribution has $H(R)<\log\dim$ — and it is <strong>basis-fixed</strong>: GHZ's "1 bit"
+is the <em>computational-outcome</em> entropy (in the GHZ's own basis it is 0; in the $X$ basis it is $\sim$2
+bits), and the <em>incoherent</em> mixture $\tfrac12\lvert000\rangle\langle000\rvert+\tfrac12\lvert111\rangle\langle111\rvert$
+gives the <em>identical</em> table. So this is <strong>not</strong> a coherence/entanglement effect, and it is
+<strong>not evidence for holography</strong>: it illustrates the trivial $H(R)\le\log\dim$, not the holographic
+$H(R)\le S$ (which stays a postulate — see below). This whole ladder is a sanity-check / pedagogy tool, not
+evidence: every number here is what any Everettian computes from the same Born distribution.
+
+</div>
 
 ## The metaselector — what fixes the framework
 
@@ -102,10 +115,12 @@ $$
 
 So the **horizon area is the boundary condition on λ's finiteness**: it bounds the cardinality of the index
 (how many actual records can coexist, $\le e^{S}$), per causal diamond — *not* Φ's superpositions (that was
-the retired "capacity forbids records" error), and *not* the probability law (the retired "grid"). And the
-GHZ rung sharpens it: the budget that actually bites is $H(R)$, **not** $\log\dim$ — correlated/redundant
-records compress below the area bound, so a region can carry a high-dimensional Φ while its actual record
-content stays within the horizon budget.
+the retired "capacity forbids records" error), and *not* the probability law (the retired "grid"). The
+quantity the bound caps is $H(R)$, **not** $\log\dim$ — a sparse Born distribution can have $H(R)\ll\log\dim$
+(the entropy ceiling above), so a region can carry a high-dimensional Φ while its actual record content stays
+within the horizon budget. Two honest qualifications: the **$H(R)\le S$ step is the postulate** (the only place
+holography enters — the enumeration neither tests nor supports it; it shows only the trivial $H(R)\le\log\dim$),
+and $H(\lambda)=I(\lambda;R)$ holds because λ *is* the record (a deterministic function of $R$).
 
 <div class="note">
 
