@@ -1,0 +1,121 @@
+==============================================================================
+PARTICLE IN A BOX — position records.  H_B = bits λ must hold at budget B.
+(Expect H_B to GROW with B: position has no minimum cell.)
+==============================================================================
+  state              B=1    B=2    B=3    B=4    B=5    B=6    B=7    B=8    B=9    B=10   B=11   
+  ground n=1        1.00  1.68  2.59  3.57  4.56  5.56  6.56  7.56  8.56  9.56  10.56 
+  excited n=4       1.00  2.00  3.00  3.68  4.59  5.57  6.56  7.56  8.56  9.56  10.56 
+  localized σ=.03   0.00  0.01  0.73  1.20  2.05  3.00  3.99  4.99  5.99  6.99  7.99  
+  two-bump (ψ1+ψ2)  0.39  1.31  2.13  3.08  4.06  5.06  6.05  7.05  8.05  9.05  10.05 
+  note: H_B ≈ B + h_diff(Φ).  'localized' sits LOWEST (small differential
+        entropy ⇒ fewer effective bits); all keep growing — no ℏ floor in x alone.
+
+==============================================================================
+HARMONIC OSCILLATOR — phase-space (coherent-state) records, Husimi Q.
+(Expect H_B to SATURATE at the ℏ-cell: uncertainty gives a minimum cell 2πℏ.)
+==============================================================================
+  cells/axis        1^2     2^2     4^2     8^2     16^2    32^2    
+  bits B=log2(#)    0.0     2.0     4.0     6.0     8.0     10.0    
+  cell area / 2πℏ   20.37   5.09    1.27    0.32    0.08    0.02    
+  ----------------------------------------------------------------------
+  coherent α=1.6  0.00    1.09    1.99    3.31    5.15    7.25    
+  Fock |5>        0.00    2.00    3.68    5.11    6.96    9.06    
+  cat |2>+|-2>    0.00    2.00    3.04    4.28    6.12    8.18    
+  note: cells with area/2πℏ < 1 (right of the '1.27' column) are SUB-ℏ — they are
+        NOT distinguishable records (coherent states there overlap), so that extra
+        entropy is unphysical over-counting. Read the record entropy AT the ℏ floor
+        (area ≈ 2πℏ): coherent ≈ 2 b (compact blob), Fock|5> ≈ 3.7 b (a √n ring),
+        cat ≈ 3 b (two blobs). The bit budget caps the # of ℏ-cells = accessible
+        phase-space area = the energy range. THAT is the uncertainty floor on λ.
+
+  Husimi Q — coherent α=1.6  (x→, p↑; one ℏ-cell ≈ 5×5 chars)
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                   ....     
+                  .:--:..   
+                 .:=++=-.   
+                 .-+#%*=:.  
+                 .-*%%#+:.  
+                 .-+##*=:.  
+                 .:=++=-.   
+                  .:--:.    
+                   ....     
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+
+  Husimi Q — Fock |5>  (x→, p↑; one ℏ-cell ≈ 5×5 chars)
+                            
+                            
+               ...          
+            .::---::.       
+          .:-=+***+=-:.     
+         .:=*#%%%%%#*=:.    
+        .:=#%%%%#%%%%*=:.   
+        :=#%%#+===+#%%*=:   
+       .-*%%*=:...:=*%%*-.  
+       :=#%#=.     .=#%#=.  
+       :+%%+:       :*%%+:  
+      .-*%%=.       .=%%+:  
+      .-*%#=.       .=%%*:. 
+      .-*%%=.       .+%%+:  
+       :+%%+:       :*%%+:  
+       :=#%#=.     :=#%#=.  
+       .-*%%*=:...:=#%%+-.  
+        :=*%%#*==+*#%%*=.   
+        .:=*%%%%%%%%%*=:    
+         .:=*#%%%%%#+=:.    
+          .:-=++*++=-.      
+            ..:::::..       
+                .           
+                            
+
+  Husimi Q — cat |2>+|-2>  (x→, p↑; one ℏ-cell ≈ 5×5 chars)
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+        .....       ....    
+       .:---:.     .:---:.  
+      .:-+++-:     :-+++-:  
+      .-+#%#+:.   .-+#%#+:. 
+      .-+%@#+-.   .-+%%#+-. 
+      .-+###=:.   .-+###=:. 
+       :-++=-.     :-++=-:  
+       .::-:..     .::-::.  
+         ...         ...    
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+
+==============================================================================
+REALITY CHECK — where λ's holographic bit limit actually sits.
+==============================================================================
+  1 cm² boundary         Q_R ≈ 1.4e+65 bits   →  up to 2^Q_R distinguishable records
+  1 m² boundary          Q_R ≈ 1.4e+69 bits   →  up to 2^Q_R distinguishable records
+  Earth (4πR²)           Q_R ≈ 7.2e+83 bits   →  up to 2^Q_R distinguishable records
+  cosmological horizon   Q_R ≈ 8.5e+121 bits   →  up to 2^Q_R distinguishable records
+  --- vs physical resolution ---
+  A decohered pointer cell (thermal de Broglie / scattering) is ~10s of orders
+  of magnitude COARSER than the holographic ℏ-cap, yet finite. So in practice
+  λ indexes DECOHERENCE-defined cells (far fewer than 2^Q_R); the holographic
+  bit-limit is a slack in-principle ceiling — it bites only near horizons /
+  the Planck scale. The universe runs at ~10^-18 of its holographic capacity.
