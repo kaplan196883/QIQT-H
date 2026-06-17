@@ -80,6 +80,36 @@ finite regions, a short-distance mechanism replacing the usual field products, a
 (Einstein's gravity plus the Standard Model). The frameworks that *do* UV-complete gravity (AdS/CFT, matrix
 models) achieve it with **nonlocal** holographic degrees of freedom — never a finite-dimensional local box.
 
+## Where the finite budget actually bites
+
+It is worth making this quantitative, because the conclusion is sharp and easy to mis-state. Holography gives
+a region of area $A$ a finite record budget $Q_R = A/4\ell_P^2$ bits; a system only *feels* that ceiling when
+the information it wants to lay down approaches $Q_R$. Place real systems on that plane — what they demand
+versus what the horizon allows — and a clean pattern appears.
+
+<div class="note">
+
+<strong>Everything observable is slack; only horizons saturate.</strong> A trapped-ion qubit, a cubic
+centimetre of gas, the Earth, the Sun, the cosmic microwave background — every ordinary system sits
+<strong>30–60 orders of magnitude below</strong> its holographic budget. Even the <em>whole observable
+universe</em> (its entropy dominated by supermassive black holes, $\sim 10^{104}$ bits) runs at about
+<strong>$10^{-18}$ of capacity</strong> ($\sim 10^{122}$ bits). The only systems that reach the ceiling
+$S = A/4\ell_P^2$ are <strong>black holes and cosmological horizons</strong> — the maximal-entropy
+gravitational objects, which sit on the line <em>by construction</em>.
+
+</div>
+
+And here is the honest punchline. We modelled the finite budget in concrete continuous systems — a particle in
+a box, a harmonic oscillator in coherent, squeezed, thermal, and Fock states — to see whether the selector λ
+leaves any fingerprint. It does not. The budget caps phase-space resolution exactly as ordinary semiclassical
+state-counting already does; there is **no λ-specific correction anywhere**, and reading the energy-level
+cutoff as "Bekenstein–Hawking" only re-labels the holographic bound rather than deriving a new effect. On the
+one line where the budget *is* saturated — the horizon — the physics is **standard black-hole thermodynamics
+(Bekenstein–Hawking)**, which every approach shares, not λ. Because λ is non-dynamical and Born-transparent, it
+cannot produce a resolution cap, a cooling, or a deviation. So the map says, cleanly: **slack everywhere you
+can measure, standard quantum gravity where it saturates, and λ inert throughout — operationally Everett across
+the whole chart.**
+
 ## The one wall, every time
 
 Notice the pattern. Dark matter, the infinities of quantum gravity, decoherence rates, a quantum-computing

@@ -1006,6 +1006,15 @@ Long-baseline neutrino oscillation and other extended-coherence systems may appr
 
 The de Sitter static patch and black-hole horizon regions are the natural arenas where Type II$_1$ algebras (with finite trace $\tau(\mathbf{1}) < \infty$) directly apply. CPW developed the Type II$_1$ structure precisely for de Sitter. The cosmological extensions of (FQ) are the natural next step and are deferred to companion papers.
 
+### 9.4 Where the finite budget bites: a kinematic map, and why $\lambda$ stays inert
+
+It is worth making the reach of (FQ) quantitative across systems, because the honest conclusion is sharp and easily mis-stated. For a region of bounding area $A$ the holographic budget is $Q_R = A/4\ell_P^2$ bits, and a system "feels" the bound only when the record information it demands, $S_{\text{demand}}$, approaches $Q_R$. Placing real systems on the $(S_{\text{demand}}, Q_R)$ plane gives a clean separation:
+
+- **Ordinary matter sits far below the line.** A trapped-ion qubit, a cubic centimetre of gas, the Earth, the Sun, the cosmic microwave background all lie $30$–$60$ orders of magnitude below their holographic budgets. Even the entire observable universe, whose entropy is dominated by supermassive black holes ($\sim 10^{104}$ bits), runs at $\sim 10^{-18}$ of its holographic capacity ($\sim 10^{122}$ bits). For every such system the budget is slack, decoherence sets the operative resolution, and the framework predicts exactly standard quantum mechanics (consistent with §9.1).
+- **Only horizons saturate.** The systems that reach $S_{\text{demand}} = Q_R$ are precisely black holes and cosmological horizons, the maximal-entropy gravitational objects, which lie on the boundary $S = A/4\ell_P^2$ by construction. This is the regime of §9.3.
+
+Two honest qualifications fix what this does and does not show. First, the bound is **kinematic**: it caps how much record information a region can carry, not any rate or force; a finite budget is not a finite dynamics. Second — and decisively — **the saturation regime is governed by standard black-hole thermodynamics (Bekenstein–Hawking), not by $\lambda$.** Modelling the finite budget in concrete continuous systems (a particle in a box; a harmonic oscillator in coherent, squeezed, thermal, and Fock states) confirms this in detail: the budget caps phase-space resolution exactly as semiclassical state-counting already does, with no $\lambda$-specific correction anywhere, and the apparent "truncation = Bekenstein–Hawking" reading is a re-labelling of the holographic bound, not an independent effect. Because $\lambda$ is non-dynamical and Born-transparent, it cannot produce a resolution cap, a cooling, or a deviation; on the horizon line the physics is the gravitational entropy bound that every approach shares. The framework therefore remains operationally equivalent to Everett across the entire chart: slack everywhere observable, and standard quantum gravity where it saturates.
+
 ---
 
 ## 10. Comparison with Existing Approaches
