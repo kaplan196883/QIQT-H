@@ -1,0 +1,44 @@
+============================================================================================
+Candidate lengths vs the working R_0 ~ 1 Å = 1e-10 m
+============================================================================================
+  candidate                                       length (m)      ratio to 1 Å
+  --------------------------------------------------------------------------------------
+  Planck length ℓ_P  (Q_R's own quantum)          1.616e-35       1.6e-25  (off by 25 orders)
+  holographic resolution  R/√Q_R = ℓ_P/√π         9.119e-36       9.1e-26  (off by 25 orders)
+  info-position resolution  R·2^(−Q_R)            1.000e-300      ≈ 0 (underflow)
+  nucleon Compton  ℏ/m_p c  (naive DP R_0 — EXCLUDED)2.103e-16       2.1e-06  (off by 6 orders)
+  electron Compton  ℏ/m_e c                       3.862e-13       3.9e-03  (off by 2 orders)
+  Bohr radius  a_0 = λ_C(e)/α  (atomic/EM)        5.292e-11       5.3e-01  (MATCH)
+  working R_0  (Donadi-allowed, ~1 Å)             1.000e-10       1.0e+00  (MATCH)
+
+  Bohr radius check:  a_0 = λ_C(e)/α = 5.292e-11 m  vs CODATA 5.292e-11 m  ✓
+  The ONLY candidate at ~1 Å is the Bohr radius — and it is built from m_e and α (electromagnetism),
+  NOT from Q_R. Every finite-information / holographic length is Planck-scale (ℓ_P ~ 1.6e-35 m, ~25
+  orders too small) or exponentially small (info-position resolution ~ 0).
+
+  chart written: build/QR_derive_R0.png
+
+============================================================================================
+VERDICT — does Q_R derive R_0 ~ 1 Å?
+============================================================================================
+  NO.  The working regularization length R_0 ~ 1 Å is the ATOMIC scale — the Bohr radius
+  a_0 = λ_C(e)/α ≈ 5.29e-11 m — set by the electron mass and the fine-structure constant
+  (electromagnetism). It is the length over which real matter's mass density is actually smeared
+  (nuclei held in atomic-scale electron clouds). It has NOTHING to do with the holographic budget.
+
+  Every finite-information / holographic length misses by ~25 orders:
+   • ℓ_P (Q_R's own quantum) ≈ 1.6e-35 m  — 25 orders too small;
+   • holographic boundary resolution R/√Q_R = ℓ_P/√π — also Planck-scale (R-independent);
+   • information-position resolution R·2^(−Q_R) — exponentially small, ≈ 0  (the exponential again).
+  Q_R is dimensionless; the only lengths it natively carries are ℓ_P and R, so it cannot manufacture an
+  intrinsic 1 Å without injecting m_e and α — i.e. without ADMITTING the scale is atomic/EM, not holographic.
+
+  CONSEQUENCE FOR THE PROGRAM. In the gravitational-collapse fork, R_0 is fixed by ATOMIC PHYSICS, not by
+  finite information. So the working Bekenstein/gravitational rate is exactly Diósi–Penrose with an
+  atomic R_0 — inherited, already-constrained collapse phenomenology — and finite information contributes
+  NOTHING to its one free length. The hoped-for QIQT-H prediction does not materialise here: Q_R does not
+  pick out R_0. This is the null the prior anticipated, now demonstrated rather than asserted.
+
+  (The honest residue: 'R_0 = atomic scale' is itself well-motivated physics — matter IS atomic — so the
+  regulated DP rate stands on its own as a testable collapse model. It is just not a finite-information
+  result, and adopting it still costs Φ's exact unitarity. The inert-λ thesis remains = Everett.)
