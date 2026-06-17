@@ -1,0 +1,48 @@
+====================================================================================
+PART 1 — the Bekenstein flow: B_Bek ∝ ρR⁴ rises until it hits B_holo ∝ R² (BH collapse)
+====================================================================================
+  density ρ (kg/m³)       R* (m)        B at R* (bits)  what R* is
+  --------------------------------------------------------------------------
+  1.2e+00 (air)           1.157e+13     2.324e+96       Schwarzschild radius ⇒ BH
+  1.0e+03 (water)         4.009e+11     2.789e+93       Schwarzschild radius ⇒ BH
+  5.5e+03 (Earth-avg)     1.710e+11     5.071e+92       Schwarzschild radius ⇒ BH
+  1.6e+05 (Sun-core)      3.170e+10     1.743e+91       Schwarzschild radius ⇒ BH
+  4.0e+17 (neutron-star)  2.005e+04     6.973e+78       Schwarzschild radius ⇒ BH
+  5.2e+96 (Planck)        5.560e-36     5.364e-01       Schwarzschild radius ⇒ BH
+
+  Denser matter collapses at a SMALLER radius: a water-density ball would become a black hole at
+  R* ~ 4×10¹¹ m (a few AU), neutron-star matter at ~20 km. At R* the energy (R⁴) and area (R²) bounds
+  meet — the ball saturates the holographic bound and is a black hole. Below R* it is energy-limited
+  (R⁴); it can never exceed the area bound without collapsing. The area law is the collapse envelope.
+
+====================================================================================
+PART 2 — real objects: Bekenstein bound vs holographic bound (BHs saturate)
+====================================================================================
+  object          R (m)       B_Bek (bits)   B_holo (bits)  B_Bek/B_holo
+  ----------------------------------------------------------------------------
+  H atom          5.30e-11    2.28e+06       4.87e+49       4.68e-44
+  human           5.00e-01    9.02e+44       4.34e+69       2.08e-25
+  Earth           6.37e+06    9.80e+74       7.04e+83       1.39e-09
+  Sun             6.96e+08    3.57e+82       8.41e+87       4.24e-06
+  white dwarf     7.00e+06    5.02e+80       8.50e+83       5.91e-04
+  neutron star    1.20e+04    8.61e+77       2.50e+78       3.45e-01
+  solar BH        2.95e+03    1.51e+77       1.51e+77       1.00e+00
+  Sgr A* (SMBH)   1.20e+10    2.64e+90       2.50e+90       1.06e+00
+  Milky Way       5.00e+20    1.93e+106      4.34e+111      4.46e-06
+
+  Every ordinary object sits BELOW the holographic line (B_Bek/B_holo < 1); black holes sit ON it
+  (ratio = 1, saturated). The ratio B_Bek/B_holo = R_s/R is the object's 'closeness to collapse'.
+
+====================================================================================
+PART 4 — plot saved + impact on the λ-generator
+====================================================================================
+  plot → build/bekenstein_flow.png
+
+  The flow is the answer to 'why area, not volume'. A generator that tried to source the world's
+  randomness from VOLUME-much information (∝R⁴, energy-limited) would drive the region to its
+  Schwarzschild radius and COLLAPSE — the holographic (∝R²) line is the collapse envelope it cannot
+  cross. So the λ-generator's budget is forced onto the AREA: the boundary is the seed, the bulk its
+  hologram (consistent with bekenstein_flow_generator.py). The black-hole points where the R⁴ lines
+  meet the R² envelope are exactly the saturated regime — the one place a finite budget genuinely
+  bites — and there it is standard Bekenstein–Hawking, not λ. Everywhere below the envelope the budget
+  is slack, the faking window 2^B is astronomically large, and the generator is observably = QM.
