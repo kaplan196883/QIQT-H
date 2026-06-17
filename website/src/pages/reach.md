@@ -154,6 +154,29 @@ genuine unsolved problem.
 
 </div>
 
+But it is worth being concrete about what that *added* dynamics would actually do — because in genuinely
+limited bit space the effects are sharp and computable, and they pinpoint exactly what QIQT-H would have to
+become to be testable.
+
+<div class="note">
+
+<strong>What a <em>dynamical</em> bit-limit would do — and why we don't see it.</strong> Make the finiteness
+<em>dynamical</em> (a genuine cutoff $Q_{\text{eff}}$, a real minimum length) rather than an inert tag, and the
+impact is concrete: the canonical commutator $[x,p]=i\hbar$ becomes <em>impossible</em> — a finite Hilbert
+space forces $\operatorname{Tr}[x,p]=0\neq\operatorname{Tr}(i\hbar\mathbf{1})$, so the Heisenberg algebra
+<em>must</em> deform; position turns <em>discrete and bounded</em> (a finite lattice with a hard edge — a
+built-in UV cutoff); and a minimum length gives a <em>generalized uncertainty principle</em> that shifts every
+bound spectrum. But the size of each is the ratio $(\Delta x_{\min}/L)^2$, so it is order one only when the
+floor is comparable to the system — a tiny-budget toy, or a <em>saturated horizon</em> (where it simply
+<em>is</em> Bekenstein–Hawking). For an atom the only real floor is the Compton length, and its impact —
+$\alpha^2$, the fine structure — is plain relativistic QM; anything Planckian is $\gtrsim$45 orders below
+measurement. Crucially, <strong>QIQT-H's λ is inert and produces none of this</strong>: to predict any of it you
+must <em>add</em> the dynamical $Q_{\text{eff}}$ — a free parameter, not a consequence of the bound. That added
+postulate is exactly what would turn the interpretation into testable physics, and exactly what it does not yet
+contain.
+
+</div>
+
 So the honest verdict across cosmology and quantum gravity is one sentence: **QIQT-H lives in the right
 neighbourhood — holography, finiteness, the very premises serious people use to attack the dark universe and
 the infinities — but a counting principle is not a theory of dynamics, and turning it into one is exactly the
