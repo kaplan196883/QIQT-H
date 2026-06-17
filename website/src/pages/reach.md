@@ -205,6 +205,20 @@ correlating with measurement settings) and still owes an account of <em>why</em>
 Born measure. So it is not a free prediction — but it is the one place the finite-information idea becomes a
 genuine, testable-in-principle claim rather than an interpretation.
 
+<strong>Pushed to its end — the wall is the Poincaré recurrence.</strong> A sharper look closes the testability
+question with a <em>fact</em>, not a free parameter. The generating <em>code</em> — the laws of physics plus a
+simple initial state — can be tiny, so the universe may well be a <em>simple</em> deterministic program. But a
+program's repeat-time is set by the <em>state</em> it evolves, not by the size of its code: it cycles only when
+its full microstate recurs. That state carries the universe's realized <em>entropy</em>, $\sim 10^{104}$ bits,
+and ordinary thermalizing dynamics wanders through all of it — so the generator would only "repeat" at the
+<strong>Poincaré recurrence time</strong>, $\sim 2^{10^{104}}$, longer than the age of the universe by some
+$10^{103}$ orders of magnitude. Nothing shrinks that: the universe's high entropy is a measured fact. So "the
+world is a simple generator" can be <em>true and holographically motivated</em>, yet its one fingerprint — the
+randomness eventually repeating — is buried at the recurrence time, forever out of reach. What is left is then
+not an experiment but a <em>choice of picture</em>: a simple deterministic program whose randomness is the
+ergodic unfolding of a low-complexity seed, versus an inert λ on Everett — two descriptions of exactly the same
+observations.
+
 </div>
 
 So the honest verdict across cosmology and quantum gravity is one sentence: **QIQT-H lives in the right
