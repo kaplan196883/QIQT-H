@@ -12,7 +12,7 @@ $\lambda$ marks exactly one as the actual world. So each run, **you** — a larg
 wave function — *are* one outcome. Not because the universe reached in and collapsed it, and not (a 2026
 correction we make honestly) because finite capacity *forbids* the others: the holographic bound only limits
 how *many* distinguishable records a region can hold, not whether two can be actual — it is vastly too loose
-for that (the universe runs at $\sim 10^{-18}$ of its capacity; see [the idea](/idea)). The "finite capacity
+for that (even the *total* entropy of the observable universe is only $\sim 10^{-18}$ of its capacity; see [the idea](/idea)). The "finite capacity
 forbids two records" conjecture is **retired** as a category error. The single outcome is $\lambda$'s; the
 wave function keeps every branch, exactly unitarily.
 

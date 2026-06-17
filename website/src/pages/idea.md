@@ -66,7 +66,8 @@ because their information would overflow its holographic budget. We now regard t
 bits for a cm² boundary, $\sim 10^{122}$ for the cosmological horizon — against ordinary record entropy of
 $\sim 10^{25}$ bits and a structural ceiling of $\sim A^{3/4}\approx 10^{91}$ (for the whole observable
 universe), parametrically below the $\sim 10^{122}$ bound, so the budget is never even remotely approached.
-The universe runs at $\sim 10^{-18}$ of its holographic capacity. So capacity is *not* what gives single
+Even the universe's *total* realized entropy — black-hole-dominated, $\sim 10^{104}$ bits, which carries no
+records — is only $\sim 10^{-18}$ of its holographic capacity. So capacity is *not* what gives single
 outcomes; **λ is**. What survives — and is genuinely distinctive — is the no-collapse single-world ontology:
 Φ exactly unitary, one non-dynamical actuality selector λ, the holographic bound supplying only the finite
 record stage. Absent an *additional* dynamical law (a new postulate with a free parameter), the framework is

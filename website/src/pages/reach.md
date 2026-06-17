@@ -92,10 +92,12 @@ versus what the horizon allows — and a clean pattern appears.
 <strong>Everything observable is slack; only horizons saturate.</strong> A trapped-ion qubit, a cubic
 centimetre of gas, the Earth, the Sun, the cosmic microwave background — every ordinary system sits
 <strong>30–60 orders of magnitude below</strong> its holographic budget. Even the <em>whole observable
-universe</em> (its entropy dominated by supermassive black holes, $\sim 10^{104}$ bits) runs at about
-<strong>$10^{-18}$ of capacity</strong> ($\sim 10^{122}$ bits). The only systems that reach the ceiling
-$S = A/4\ell_P^2$ are <strong>black holes and cosmological horizons</strong> — the maximal-entropy
-gravitational objects, which sit on the line <em>by construction</em>.
+universe</em> runs far below the ceiling: its <em>total</em> entropy, dominated by supermassive black holes
+($\sim 10^{104}$ bits), is about <strong>$10^{-18}$ of capacity</strong> ($\sim 10^{122}$ bits) — and its
+ordinary <em>record</em> content is smaller still ($\sim A^{3/4}\approx 10^{91}$, a $\sim$31-order gap; see
+<a href="/idea">the capacity argument</a>). The only systems that reach the ceiling $S = A/4\ell_P^2$ are
+<strong>black holes and cosmological horizons</strong> — the maximal-entropy gravitational objects, which sit
+on the line <em>by construction</em>.
 
 </div>
 

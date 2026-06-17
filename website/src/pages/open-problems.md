@@ -18,7 +18,8 @@ Gap 1 — that a $\ge 2$-record content costs more than $Q_R$, so finite capacit
 is <strong>withdrawn as a category error</strong>. A holographic bound counts <em>independent</em> degrees of
 freedom (joint entropy / code dimension), not a sum of redundant classical records ($R$ copies of one fact
 carry $H(X)$, not $R\,H(X)$ — machine-checked); ordinary record entropy is capped at $\sim A^{3/4}$,
-parametrically below $A/4$ (the universe runs at $\sim 10^{-18}$ of capacity); and finite capacity with exact
+parametrically below $A/4$ (and even the total black-hole-dominated entropy, $\sim 10^{104}$, is only
+$\sim 10^{-18}$ of capacity); and finite capacity with exact
 unitary linearity cannot select a branch. The single outcome is supplied by <strong>λ</strong>, not by
 capacity; $Q_R$ is the finite record <em>stage</em> (a cardinality bound), and is even
 <a href="/formalization">machine-checked</a> to be optional for λ's measure (which needs only finiteness, not

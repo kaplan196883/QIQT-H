@@ -66,7 +66,8 @@ Why it fails: a holographic bound counts *independent* degrees of freedom (joint
 not $R\,H(X)$ (machine-checked). Ordinary, weakly-gravitating record entropy is moreover capped at
 $\sim(A/\ell_P^2)^{3/4}$, parametrically *below* $A/4\ell_P^2$ (only a black hole saturates $A/4$, and it has
 no records); for the observable universe that is $\sim 10^{91}$ against $\sim 10^{122}$ — a permanent ~31-order
-gap, and the universe runs at $\sim 10^{-18}$ of its holographic capacity. And the $\log 2$ data-processing
+gap. Even the total *realized* entropy (black-hole-dominated, $\sim 10^{104}$) is only $\sim 10^{-18}$ of the
+holographic capacity. And the $\log 2$ data-processing
 estimate confirms two records cost about *one bit* more than one, not an area-scale $Q_R$. Finally, by exact
 unitary linearity, finite capacity can neither forbid a superposition nor select a branch. So $Q_R$ does
 **not** do the single-outcome work; it is the finite record *stage* (a cardinality bound). The single
