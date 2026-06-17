@@ -114,17 +114,28 @@ the whole chart.**
 
 <div class="note">
 
-<strong>The relativistic rung — the Dirac equation.</strong> The study extends cleanly to the relativistic
-case, and it is the richest of the three. A particle in a box has <em>no</em> position floor (you can localise
-it arbitrarily); the oscillator has a floor in <em>phase space</em> (the $2\pi\hbar$ cell); the Dirac equation
-has a floor in <em>position itself</em>, set by the mass — the Compton wavelength $\lambda_C = \hbar/mc$. Try
-to localise an electron below it and the energy cost exceeds $2mc^2$, so the vacuum makes electron–positron
-pairs and the single-particle position <em>record</em> dissolves. The record resolution saturates at
-$\lambda_C$ ($\sim$35 bits in a centimetre), and the 4-spinor adds a clean <em>2-qubit internal</em> record
-(spin ⊗ particle/antiparticle) — the <a href="/ladder">bit → qubit ladder</a> realised in a real relativistic
-equation. Yet the verdict is identical: the floor is <strong>pair production</strong> (set by the mass —
+<strong>The relativistic rungs — Dirac and Klein–Gordon.</strong> The study extends cleanly to the relativistic
+case. A particle in a box has <em>no</em> position floor (you can localise it arbitrarily); the oscillator has
+a floor in <em>phase space</em> (the $2\pi\hbar$ cell); the <strong>Dirac equation</strong> — the richest in
+structure — has a floor in <em>position itself</em>, set by the mass: the Compton wavelength
+$\lambda_C = \hbar/mc$. Try to localise an electron below it and the energy cost exceeds $2mc^2$, so the vacuum
+makes electron–positron pairs and the single-particle position <em>record</em> dissolves. The resolution
+saturates at $\lambda_C$ ($\sim$35 bits in a centimetre), and the 4-spinor adds a clean <em>2-qubit internal</em>
+record (spin ⊗ particle/antiparticle) — the <a href="/ladder">bit → qubit ladder</a> realised in a real
+relativistic equation.
+
+<strong>Klein–Gordon</strong>, the spin-0 case, is the minimal rung — and the one that teaches the most. It
+shares the same Compton floor but strips the record to its smallest: no spin, just a single charge/sign qubit
+(and <em>zero</em> for a neutral scalar). It also exposes an obstruction Dirac avoids — its conserved density
+is <em>indefinite</em> (it can go negative), so $|\phi|^2$ is not a record law at all and single-particle
+position records are ill-defined. The honest fix is the field: Klein–Gordon is a <em>tower of oscillators</em>
+(one per mode), whose records are particle-occupation numbers — looping the relativistic ladder straight back
+to the oscillator rung.
+
+Yet for both the verdict is identical: the floor is <strong>particle creation</strong> (set by the mass —
 standard relativistic QFT), not λ and not holography (the budget stays $\sim$70 orders slack); λ inert ⇒ still
-operationally Everett. The richest case, and still thesis-empty.
+operationally Everett. The richest rung and the minimal one teach real physics and add no λ — thesis-empty,
+like the rest.
 
 </div>
 
