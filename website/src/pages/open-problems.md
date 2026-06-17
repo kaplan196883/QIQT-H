@@ -183,17 +183,35 @@ $2\sqrt2$ forces it to be nonlocal or **superdeterministic** (its seed correlate
 untestable. (An earlier claim that single-quantum data already *excludes* the small case was **withdrawn** as an
 overclaim — it mis-assigned the budget to the bare particle.)
 
-**What is open (the decisive question).** *Why would the seed be small?* Faking $N$ outcomes needs only
-$\sim\log_2 N$ bits of state, so a small seed is information-theoretically *sufficient* — but nothing in known
-physics forces the deterministic substrate to use a small fraction of its holographic capacity rather than all of
-it. Absent a principle that motivates a small seed, "the seed is small" is a free parameter set by hand and the
-break sits at $\sim 2^{Q_R}$ (untestable). Finding such a principle — a minimal-information / algorithmic-simplicity
-law for actuality — is the make-or-break, and is not answerable from current physics.
+**The decisive question — and its resolution (two steps).** *Why would the seed be small?* Faking $N$ outcomes
+needs only $\sim\log_2 N$ bits, so a small seed is information-theoretically *sufficient* — the question is whether
+anything *forces* the used information far below the holographic capacity, down to a testable level.
 
-**Difficulty / status.** Speculative; a *different* (deterministic, superdeterministic) ontology from the
-conditional interpretation above; falsifiable in principle, currently consistent with all data. Included as an
-honest exploration of whether λ could be given empirical content — not as a claim of the program. See the
-[reach](/reach) page for the same idea in plain language.
+*Step 1 — the holographic flow (a partial rescue + a motivation).* Grow a region and its information grows with
+the boundary **area** ($\propto R^2$), not the **volume** ($\propto R^3$): the bulk is the *hologram* of its
+boundary. So the **boundary** carries the incompressible (Born-random) information and the **bulk is its
+compressible image**. This **dissolves the Martin–Löf wall** — the incompressible randomness lives on the
+boundary, and the bulk is *generated* from it — and gives the generator a physical identity: it **is** the
+holographic boundary, with budget $=Q_R$ now *motivated* (sub-volume, by holography) rather than assumed. Its
+observable face is the entanglement **area law** (Ryu–Takayanagi) — already standard physics, not a new signature.
+
+*Step 2 — but the seed still cannot be forced small (the real wall).* A distinction settles it: the generating
+**code** (the laws + a simple initial state) *can* be tiny — $\sim$ a few thousand bits; the universe is
+plausibly algorithmically simple. But a deterministic program's faking window is $2^{M}$, where $M$ is the
+**state** entropy it evolves — *not* $2^{\text{code}}$. For the universe $M\approx$ the realized entropy
+$\sim 10^{104}$ bits, and generic (ergodic / thermalizing) dynamics explores the full state space, so the period
+is the **Poincaré recurrence** $\sim 2^{10^{104}}$ — beyond the age of the universe by $\sim 10^{103}$ orders. No
+principle makes $M$ small: the universe's high entropy is a *physical fact*, and thermalization excludes confining
+the actual trajectory to a testable ($\sim 50$-bit) subspace.
+
+**Net (status).** "The universe is a simple deterministic generator" is **viable and motivated** (small code,
+holographically grounded) — but it is **observably indistinguishable from true randomness**, not because the seed
+is large, but because its only deviation (the generator repeating) sits at the **Poincaré recurrence time**, set
+by the universe's entropy, not its code. So the *testability* question is closed by a **fact, not a free
+parameter**; what remains is purely **ontological** — whether one prefers "a simple deterministic program whose
+randomness is ergodic unfolding" to "inert λ on Everett," two empirically identical pictures. Speculative, a
+*different* (deterministic/superdeterministic) ontology from Gaps 1–3; included as an honest exploration, not a
+claim of the program. See the [reach](/reach) page for the same idea in plain language.
 
 ---
 
