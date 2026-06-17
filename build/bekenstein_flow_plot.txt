@@ -16,22 +16,26 @@ PART 1 — the Bekenstein flow: B_Bek ∝ ρR⁴ rises until it hits B_holo ∝ 
   (R⁴); it can never exceed the area bound without collapsing. The area law is the collapse envelope.
 
 ====================================================================================
-PART 2 — real objects: Bekenstein bound vs holographic bound (BHs saturate)
+PART 2 — capacity (holographic) vs max info (Bekenstein) vs REALIZED entropy
 ====================================================================================
-  object          R (m)       B_Bek (bits)   B_holo (bits)  B_Bek/B_holo
-  ----------------------------------------------------------------------------
-  H atom          5.30e-11    2.28e+06       4.87e+49       4.68e-44
-  human           5.00e-01    9.02e+44       4.34e+69       2.08e-25
-  Earth           6.37e+06    9.80e+74       7.04e+83       1.39e-09
-  Sun             6.96e+08    3.57e+82       8.41e+87       4.24e-06
-  white dwarf     7.00e+06    5.02e+80       8.50e+83       5.91e-04
-  neutron star    1.20e+04    8.61e+77       2.50e+78       3.45e-01
-  solar BH        2.95e+03    1.51e+77       1.51e+77       1.00e+00
-  Sgr A* (SMBH)   1.20e+10    2.64e+90       2.50e+90       1.06e+00
-  Milky Way       5.00e+20    1.93e+106      4.34e+111      4.46e-06
+  object         B_holo       B_Bek        S_realized    realized/holo note
+  --------------------------------------------------------------------------------
+  H atom         4.9e+49      2.3e+06      1.0e+00       2.0e-50       
+  human          4.3e+69      9.0e+44      4.2e+28       9.6e-42       
+  Earth          7.0e+83      9.8e+74      3.6e+51       5.1e-33       
+  Sun            8.4e+87      3.6e+82      1.2e+57       1.4e-31       
+  white dwarf    8.5e+83      5.0e+80      1.7e+57       2.0e-27       
+  neutron star   2.5e+78      8.6e+77      1.7e+57       6.7e-22       
+  solar BH       1.5e+77      1.5e+77      1.5e+77       1.0e+00       BLACK HOLE — saturated
+  Sgr A* (SMBH)  2.5e+90      2.6e+90      2.5e+90       1.0e+00       BLACK HOLE — saturated
+  Milky Way      4.3e+111     1.9e+106     9.0e+68       2.1e-43       
 
-  Every ordinary object sits BELOW the holographic line (B_Bek/B_holo < 1); black holes sit ON it
-  (ratio = 1, saturated). The ratio B_Bek/B_holo = R_s/R is the object's 'closeness to collapse'.
+  Three very different quantities. CAPACITY (holographic, ∝R²) is the absolute ceiling; MAX INFO
+  (Bekenstein, ∝R⁴) is what the energy could in principle encode; REALIZED entropy (∝R³ ≈ particle
+  number N) is what is ACTUALLY there. For ordinary matter realized ≪ Bekenstein ≪ holographic — the
+  Sun realizes ~10⁵⁷ of its ~10⁸⁸-bit capacity, i.e. ~10⁻³¹ of it. Black holes are the exception:
+  realized = capacity (they saturate), which is why collapse JUMPS the entropy up by ~20 orders
+  (a stellar core's ~10⁵⁷ → its black hole's ~10⁷⁷).
 
 ====================================================================================
 PART 4 — plot saved + impact on the λ-generator
