@@ -1,0 +1,86 @@
+================================================================================
+FACT 1 — a Born-typical record is algorithmically RANDOM (incompressible)
+  Qubit, q=|b|²=0.3.  N iid copies. A frequency-r record needs −log₂μ/N = H₂(r)+D(r‖q)
+  bits/symbol to specify; a TYPICAL one of that frequency has complexity rate K/N ≈ H₂(r).
+  Born weight concentrates at r=q (D=0); there the complexity rate is H₂(q) — HIGH.
+================================================================================
+  frequency r   complexity rate K/N≈H₂(r)   Born exponent D(r‖q)   note
+  ------------------------------------------------------------------------
+  0.00          0.000                      0.515                  compressible BUT Born-negligible
+  0.05          0.286                      0.289                  atypical
+  0.30          0.881                      0.000                  ← BORN-TYPICAL: incompressible
+  0.50          1.000                      0.126                  max-complexity, atypical
+  1.00          0.000                      1.737                  compressible BUT Born-negligible
+
+  The compressible records (r=0 all-0s, r=1 all-1s, complexity rate 0) carry essentially NO Born
+  weight (D large). The Born-typical record (r=q) has complexity rate H₂(q) ≈ 0.881 — it is
+  algorithmically RANDOM. 'Short rule → intricate fractal' is LOW complexity; a real outcome
+  sequence is HIGH complexity. They are opposites. That is why 'compressible actuality' fails.
+
+================================================================================
+FACT 2 — NO-GO: ν(h) ∝ Born(h)·F(K(h)) preserves Born only if F is constant
+================================================================================
+  HARD cutoff F=1[K/N ≤ α]: dominant allowed frequency r_α = H₂⁻¹(α) (the KL-nearest
+  admissible freq). Below α=H₂(q)=0.881 it leaves q; → 0 as α→0.
+    budget α (bits/sym)   dominant r_α    Born?
+    0.931                 0.3000          yes (=q, slack/inert)
+    0.881                 0.3000          yes (=q, slack/inert)
+    0.600                 0.1461          NO — distorted toward 0
+    0.400                 0.0794          NO — distorted toward 0
+    0.200                 0.0311          NO — distorted toward 0
+
+  SOFT penalty F=2^{-βK}: dominant r_β solves r/(1-r) = (q/(1-q))^{1/(1-β)}.
+    temperature β        dominant r_β    Born?
+    0.00                 0.3000          yes (=q)
+    0.10                 0.2806          NO — distorted toward 0
+    0.50                 0.1552          NO — distorted toward 0
+    0.90                 0.0002          NO — distorted toward 0
+
+  Both are non-constant in K, so both move the typical frequency off q: the hard cutoff abruptly
+  once it bites (α < H₂(q)), the soft penalty CONTINUOUSLY for any β>0. There is no complexity-
+  weighted law that both DOES something and keeps Born. (Levin–Schnorr is the reason: weighting by
+  K is weighting AGAINST randomness, and Born-typical = random.)
+
+================================================================================
+FACT 3 — the consistent characterization: bounded RANDOMNESS DEFICIENCY
+  δ(x) = −log₂μ(x) − K(x) ≈ N·D(f‖q):  how far x is from Born-random. δ=0 ⟺ Born freq.
+================================================================================
+  frequency r   deficiency rate δ/N = D(r‖q)   Martin-Löf-typical?
+  ----------------------------------------------------------------
+  0.00          0.5146                        δ large: ATYPICAL (excluded)
+  0.10          0.1678                        δ large: ATYPICAL (excluded)
+  0.20          0.0371                        δ small: near-typical
+  0.30          0.0000                        ← δ=0: BORN-TYPICAL (admissible)
+  0.40          0.0326                        δ small: near-typical
+  0.50          0.1258                        δ large: ATYPICAL (excluded)
+
+  Deficiency is minimized (=0) EXACTLY at the Born frequency r=q, and grows with |r−q|. So the rule
+  'λ designates a history of bounded randomness deficiency (Martin-Löf-random w.r.t. Born)' selects
+  precisely the Born-typical histories — it PRESERVES Born by construction (it is not a reweighting
+  of Born; it is the support of Born's typical set). And those histories are INCOMPRESSIBLE
+  (K ≈ −log₂μ), not simple. This is the correct algorithmic form of the typicality premise.
+
+================================================================================
+TAKEAWAY — the durable result of the algorithmic-λ thread
+================================================================================
+  The chain bit-limit → combinations → permutations → algorithmic information ends here, and
+  it leaves exactly ONE thing standing:
+
+    λ designates a history that is MARTIN-LÖF RANDOM with respect to the Born measure —
+    i.e. of bounded randomness deficiency, hence algorithmically INCOMPRESSIBLE (maximally typical).
+
+  • This is the rigorous form of the program's standing premise 'λ picks a TYPICAL history' — it
+    gives 'typical' a precise, measure-theoretic-free definition (passes all Born randomness tests).
+  • It PRESERVES Born by construction (the bounded-deficiency set IS Born's typical set), so it adds
+    no deviation: λ stays inert ⇒ operationally = Everett. It is a sharper statement of the SAME
+    theory, not new physics.
+  • It is the INVERSE of the seductive but false 'compressible actuality': a real, Born-distributed
+    record is incompressible. The finite RULE can still generate unbounded structure (that part was
+    always fine), but the ACTUAL history is random, not simple.
+  • It does NOT derive Born (the Born measure is still the input that defines 'typical'); it sharpens
+    the premise, consistent with the established 'Born reduced to typicality, not derived'.
+
+  HONEST STATUS: a conceptual sharpening, machine-illustrated here with large-N rate formulas (the
+  underlying facts are the Levin–Schnorr theorem and Shannon–McMillan–Breiman, cited not proved).
+  The 'finite information, infinite complexity' intuition was RIGHT about the rule and WRONG about
+  the record: λ ≈ a finite specification of a TYPICAL (random) history, not a compressible one.

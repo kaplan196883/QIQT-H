@@ -33,8 +33,15 @@ VERDICT — the make-or-break answer
   inert constraint = Everett) OR (biting constraint, broken Born). You cannot get both from K ≤ Q_R.
   That is a genuine no-go for 'a Born-preserving compressibility law' in this hard-cutoff form.
 
-  HONEST caveats / the one escape worth trying: (a) LZ is a proxy for K; (b) this is the HARD cutoff
-  — a SOFT version (weight histories by 2^{-βK} alongside Born, a complexity 'temperature') need not
-  collapse Born and is the only formulation that might thread the needle; (c) the biting regime is
-  horizons (QG), where a Born deviation is at least conceptually where one COULD live. Net: the
-  clean hard-cutoff law is killed; the soft-penalty variant is the only survivor to test next.
+  UPDATE (11th GPT-5.5-pro consult): the SOFT penalty FAILS TOO. Weighting by 2^{-βK} alongside Born
+  breaks Born for ANY β>0 — it just breaks it continuously. Large-N saddle point: the dominant
+  frequency solves r_β/(1−r_β) = (q/(1−q))^{1/(1−β)}, so for q=0.3: β=0.1→r≈0.28, 0.5→0.16, 0.9→2e-4.
+  GENERAL NO-GO: any law ν(h) ∝ Born(h)·F(K(h)) preserves Born only if F is constant μ-a.e. (i.e. does
+  nothing). Hard cutoff F=1[K≤Q] and soft F=2^{-βK} are both non-constant ⇒ both non-Born.
+
+  WHY (the deep reason, standard AIT — Levin–Schnorr/Martin-Löf): a Born-typical record is
+  algorithmically RANDOM (K ≈ −log₂μ ≈ N·H₂(q), incompressible) — the OPPOSITE of a compressible
+  fractal. So 'low-K actuality' necessarily excludes the typical records. The CONSISTENT algorithmic
+  characterization is the inverse: actuality is Born-Martin-Löf-RANDOM (bounded randomness deficiency)
+  = the rigorous form of 'λ designates a TYPICAL history'. See scripts/martin_lof_typicality.py.
+  (LZ is a proxy; the conclusions rest on the AIT theorems.)

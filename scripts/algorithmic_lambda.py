@@ -153,10 +153,17 @@ def run_classicality():
     print("  compression ratio:  classical {:.0f}× vs generic {:.2f}×".format(raw_bits/kc, raw_bits/kg))
     print("""
   The redundant CLASSICAL record collapses to ~H(X) under compression — exactly the machine-checked
-  RedundancyCompressible fact (R copies carry H(X), not R·H(X)) — so it is ADMISSIBLE under a finite
-  Q_R. The generic state is incompressible and is NOT. Decohered/classical records ARE the redundant,
-  Quantum-Darwinism-imprinted ones — so 'compressible ⇒ admissible' coincides with 'classical /
-  einselected'. Information-finiteness and classicality are the same condition seen two ways.""")
+  RedundancyCompressible fact (R copies carry H(X), not R·H(X)) — so the REDUNDANCY is admissible
+  under a finite Q_R; the generic state's redundancy is not.
+
+  CORRECTION (11th GPT-5.5-pro consult): 'compressible ⇒ classical actuality' is TOO STRONG. Only the
+  REDUNDANCY of a classical record compresses (the same fact copied R times). The underlying outcome
+  itself — which fact X, and across many measurement events the full sequence of distinct outcomes —
+  still carries ~H(X) (resp. ~N·H₂(q)) of IRREDUCIBLE, incompressible information. So a classical
+  measurement RECORD is NOT algorithmically simple; it is Born-random (incompressible). 'Information-
+  finiteness = classicality' conflated 'redundant copies compress' with 'the outcome is compressible'
+  — they are different. See scripts/martin_lof_typicality.py: actuality is incompressible-relative-to-
+  Born (maximally typical), NOT compressible.""")
 
 # ======================================================================
 #  PART 5 — unbounded DEPTH at constant generating size ≤ Q_R
@@ -189,24 +196,25 @@ def run_verdict():
   the unfolded structure. A fractal proves it (Parts 1, 5). The bound caps complexity in the sense
   of Kolmogorov K, not raw size (Part 2).
 
-  The substantive content is a CONSTRAINT (Part 3): under a finite Q_R on K, only algorithmically
-  SIMPLE (compressible) histories can be actual — basis-independent, not weight-truncation, not a
-  Hilbert cut. And that condition COINCIDES with classicality (Part 4): decohered, redundantly
-  imprinted (Quantum-Darwinism) records are exactly the compressible ones, so 'admissible under Q_R'
-  ≈ 'classical/einselected'. This is the most promising bridge in the whole thread — it would
-  EXPLAIN why actuality is classical (because only compressible histories fit) and tie the finiteness
-  directly to the machine-checked RedundancyCompressible core.
+  The idea was to make this a CONSTRAINT (Part 3): under a finite Q_R on K, only algorithmically
+  SIMPLE (compressible) histories can be actual. THAT LAW IS NOW KILLED — see
+  scripts/compressibility_born.py (make-or-break test) and the 11th GPT-5.5-pro consult:
 
-  HONEST STATUS (unchanged fork):
-   • As a DESCRIPTION of already-decohered records: inert, inherited from Φ ⇒ = Everett (the records
-     are already compressible; λ just indexes one). No new prediction.
-   • As a CONSTRAINT ('only K ≤ Q_R histories are actual'): genuine new content — the candidate
-     basis-independent law — but with the standing PRICE: one must prove Born and no-signaling
-     survive the restriction, and check the claim 'actual histories are compressible' where needed
-     (suggestive, since classical = compressible, but not yet a theorem here).
-   • zlib is only a PROXY (upper bound on K); the rigorous object is Kolmogorov complexity /
-     the generating program. Don't conflate unfolded complexity with information — that distinction
-     is the whole point.""")
+  ** NO-GO (verified by standard algorithmic-information theory — Levin–Schnorr / Martin-Löf):
+     a Born-TYPICAL measurement record is algorithmically RANDOM / INCOMPRESSIBLE (K ≈ N·H₂(q),
+     grows with N) — the OPPOSITE of a compressible fractal. So conditioning Born on low K excludes
+     exactly the typical records: any law ν(h) ∝ Born(h)·F(K(h)) preserves Born only if F is constant
+     (does nothing). Hard cutoff ⇒ Born distorted when it bites; soft penalty 2^{-βK} ⇒ Born distorted
+     for ANY β>0. 'Compressible actuality' contradicts 'Born actuality'. **
+
+  HONEST STATUS:
+   • The 'finite RULE ⇒ unbounded fractal' point (Parts 1, 5) stands — finite algorithmic info can
+     DESIGNATE an unboundedly complex structure. That part is fine and was never the problem.
+   • The CONSTRAINT 'actuality is compressible' is FALSE: actual histories are Born-random, i.e.
+     incompressible-relative-to-Born (maximally typical), not simple. The correct algorithmic
+     characterization is the INVERSE — Martin-Löf typicality — built in martin_lof_typicality.py.
+   • zlib/LZ are only PROXIES (and not in bits); K is uncomputable. The conclusions rest on the AIT
+     theorems, not the proxy. Don't conflate unfolded complexity with information.""")
 
 def main():
     run_finite_rule()
