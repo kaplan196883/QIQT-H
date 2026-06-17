@@ -1,0 +1,57 @@
+======================================================================================
+CASE A — scaling factor DERIVED from finite information:  ε ~ 2^(-Q_R),  Q_R = A/4ℓ_P²
+======================================================================================
+  region                radius R (m)    Q_R (bits)          ε = 2^(-Q_R)  (amplitude floor)
+  ----------------------------------------------------------------------------------
+  atom-scale (1 nm)     1.00e-09        1.74e+52            10^(-5.2e+51)
+  lab (1 m)             1.00e+00        1.74e+70            10^(-5.2e+69)
+  Earth                 6.40e+06        7.11e+83            10^(-2.1e+83)
+  observable universe   8.80e+26        1.34e+124           10^(-4.0e+123)
+
+  The derived scaling factor exists but is pinned to ~10^(-5x10^69) already at 1 metre — it can never
+  reach a real amplitude. So 'finite-information' as a scaling factor gives EXACTLY zero observable
+  effect on any accessible scale: this is the off-chart verdict, now as a computed number. = Everett.
+
+======================================================================================
+CASE B — scaling factor ADDED (collapse model):  Γ ≈ λ_CSL · N²   (N = nucleons in the superposition)
+  Benchmarks: GRW λ=1e-16 s^-1 ; Adler (enhanced) λ=1e-8 s^-1.  Collapse time τ = 1/Γ.
+======================================================================================
+  system                    N (nucleons)  Γ_GRW (s^-1)        τ_GRW = 1/Γ
+  --------------------------------------------------------------------------------
+  single nucleon            1e0           1.0e-16             1.0e+16 s
+  fullerene C60             7e2           5.2e-11             1.9e+10 s
+  interferometry macromol.  1e6           1.0e-04             1.0e+04 s
+  large virus               1e+10         1.0e+04             1.0e-04 s  (instant — definite)
+  dust grain (~ng)          1e+15         1.0e+14             1.0e-14 s  (instant — definite)
+  housefly (~10 mg)         6e+21         3.6e+27             2.8e-28 s  (instant — definite)
+  cat (~1 kg)               6e+26         3.6e+37             2.8e-38 s  (instant — definite)
+
+  At the GRW scaling factor a single nucleon localizes only once per ~1e+16 s (~3e+08 yr)
+  — negligible for any experiment, so micro-superpositions stay coherent in practice; but objects with
+  N > ~3e+08 nucleons collapse within ~0.1 s (a definite outcome). The N² amplification IS the
+  scaling factor that bridges the two regimes — ~17 orders of N from micro-survival to macro-collapse.
+
+======================================================================================
+CHART — the scaling factor in action:  collapse rate Γ vs system size N
+======================================================================================
+  chart written: build/collapse_scaling_factor.png
+
+======================================================================================
+VERDICT — what 'the scaling factor' actually is
+======================================================================================
+  Computed, both readings:
+
+   • DERIVED from finite information: ε ~ 2^(-Q_R) ~ 10^(-5x10^69) already at 1 metre ⇒ Γ ≈ 0, no
+     collapse at any size. The scaling factor is REAL but its value is PINNED by Q_R to be unobservable.
+     This is the inert-λ thesis: = Everett. No free knob, no prediction.
+
+   • ADDED by hand (a collapse model): Γ = λ_CSL·N². The N² amplification IS exactly 'the scaling
+     factor' that makes micro-superpositions survive and macro ones collapse — and it WORKS as physics
+     (it is the GRW/CSL mechanism). But: (i) λ_CSL is a FREE parameter, not derived from Q_R; (ii) it
+     makes λ DYNAMICAL and breaks Φ's exact unitarity (a different ontology); (iii) it is already
+     BOUNDED BY EXPERIMENT — Adler's 10^-8 is excluded, the GRW 10^-16 window is shrinking.
+
+  SO: you can compute a scaling factor that gives predictive power — but only the ADDED CSL one does,
+  and it is no longer QIQT-H's inert λ; it is a dynamical collapse theory with an experimentally
+  constrained parameter. The factor finite information actually DERIVES is ~10^(-10^70): a rigorous zero.
+  There is no scaling factor that is both derived-from-finiteness AND large enough to see.
