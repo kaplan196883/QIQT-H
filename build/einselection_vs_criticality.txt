@@ -1,0 +1,56 @@
+================================================================================
+PART 1 — Quantum-Darwinism partial information I(S:E_f) vs fragment size, vs scrambling g
+  Classical PLATEAU at H(S)=1 bit for small f ⇒ redundant, OBJECTIVE record. No plateau ⇒
+  the bit is scrambled/encrypted ⇒ no objective record.
+================================================================================
+  g (scramble)   I(S:E_f) for f = 1..8
+  ----------------------------------------------------------------------
+  0.0 (record)  1.00 1.00 1.00 1.00 1.00 1.00 1.00 2.00
+  0.3 (edge)    0.91 0.94 0.97 1.00 1.04 1.06 1.09 2.00
+  1.0 (scrambling)0.48 0.61 0.76 1.02 1.28 1.40 1.53 2.00
+  3.0 (chaotic) 0.02 0.08 0.33 1.02 1.77 1.95 1.99 2.00
+
+  g=0 (record): I jumps to ~1 bit at f=1 and stays — every single qubit holds the full classical bit,
+  a flat PLATEAU = maximal redundancy = an objective record (the σ_z value broadcast N times). As g
+  grows the early-fragment information COLLAPSES: at g=3 (chaotic) small fragments know almost nothing
+  and the bit appears only near f=N — the record is scrambled, no objectivity.
+
+================================================================================
+PART 2 — which basis is recorded? (einselection) — and does scrambling change it?
+================================================================================
+  record state: I(σ_z of S : one env qubit) = 1.000 bit  (the recorded/pointer basis)
+  the environment qubits are |0> (when S=0) or |1> (when S=1): they store σ_z, not σ_x.
+
+  Einselection picks σ_z — the basis the interaction copies — and every env qubit is a redundant copy
+  of exactly that value (Part 1's plateau). So the EINSELECTED basis and the BROADCAST (redundantly
+  recorded) basis are the SAME basis. Scrambling (Part 1) does not rotate this basis — it DESTROYS the
+  redundancy of whatever basis was recorded. Criticality is about WHETHER the record is objective, not
+  about choosing a different basis.
+
+================================================================================
+PART 3 — honest verdict: do einselection and criticality pick the same basis?
+================================================================================
+  YES — and the relationship is complementary, not competitive (this is the Quantum-Darwinism
+  picture; the Brandão–Piani–Horodecki objectivity theorem):
+
+   • EINSELECTION fixes WHICH basis: the pointer basis is the one the interaction records / commutes
+     with (here σ_z). The environment qubits are redundant copies of exactly that observable.
+
+   • CRITICALITY (edge of chaos) fixes WHETHER the record is OBJECTIVE: the redundant 'classical
+     plateau' exists only when the dynamics is SUB-SCRAMBLING. As the scrambling knob g rises, the
+     plateau collapses (Part 1) — a fast scrambler delocalises the bit and destroys objectivity.
+     There is a hard ceiling: the Maldacena–Shenker–Stanford chaos bound λ_L ≤ 2πk_BT/ℏ, saturated by
+     black holes (fast scramblers) — which is exactly why black holes carry no classical records.
+
+   • So the two criteria AGREE on the basis (the einselected basis IS the broadcast one), and the
+     edge-of-chaos contributes the DYNAMICAL CONDITION under which einselection's records become
+     objective: sub-scrambling, the 'edge' between frozen (no recording) and chaotic (no redundancy).
+
+  WHAT THIS DOES AND DOES NOT BUY QIQT-H. Real and modest: it confirms the metaselector's pointer
+  basis (Zurek einselection) is the same object as the broadcast/objective basis, and it adds a
+  quantitatively-anchored DYNAMICAL condition (sub-scrambling / the MSS bound) for records to exist —
+  a genuine, physics-grounded sharpening of Gap 1 (the einselection criterion gains a chaos-bound
+  side-condition). It does NOT give a new basis, does NOT touch the Born CONTENT (which outcome = λ's
+  brute fact), and does NOT change the = QM verdict. So the edge-of-chaos residue resolves cleanly:
+  not a rival to einselection, but the criticality condition that makes einselection's records
+  objective — and that is the honest, bounded payoff of the whole edge-of-chaos lead.
