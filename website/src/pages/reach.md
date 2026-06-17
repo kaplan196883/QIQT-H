@@ -181,6 +181,32 @@ contain.
 
 </div>
 
+There is, however, one reading of the finiteness that *is* falsifiable — and it is worth stating plainly, with
+its price.
+
+<div class="note">
+
+<strong>The one falsifiable version — λ as a finite-information generator.</strong> Instead of an inert tag, let
+λ be a finite-information deterministic <em>generator</em> of the actual history — a finite rule, in the spirit
+of 't Hooft's deterministic quantum mechanics. Then the finiteness has teeth. A generator with a budget of $B$
+bits can reproduce Born statistics only up to a data size $\sim 2^B$: beyond that its output must repeat or
+reveal structure, so quantum 'randomness' would carry finite-information signatures — periodicity,
+compressibility, faint correlations — at large enough scales. Unlike the inert reading, this is a
+<strong>concrete, falsifiable prediction</strong>: quantum randomness is pseudo-random. So far every test of
+quantum random-number generators finds <em>no</em> such structure — fully consistent with a very large budget,
+but a genuine ongoing test.
+
+Two honest catches keep it grounded. The break is at $\sim 2^{Q_R}$; for the holographic budget
+$Q_R \sim 10^{70}$ that is $2^{10^{70}}$ events — never reached (the observable universe holds
+$\sim 10^{120}$), so it stays <em>operationally = QM</em> in practice, becoming observable only near a horizon,
+or if quantum randomness is far more information-limited than holography suggests. And it is a <em>different,
+deterministic</em> ontology: it must pay Bell's price (nonlocality or superdeterminism — the generator's seed
+correlating with measurement settings) and still owes an account of <em>why</em> the generator reproduces the
+Born measure. So it is not a free prediction — but it is the one place the finite-information idea becomes a
+genuine, testable-in-principle claim rather than an interpretation.
+
+</div>
+
 So the honest verdict across cosmology and quantum gravity is one sentence: **QIQT-H lives in the right
 neighbourhood — holography, finiteness, the very premises serious people use to attack the dark universe and
 the infinities — but a counting principle is not a theory of dynamics, and turning it into one is exactly the
