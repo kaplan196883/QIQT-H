@@ -1,0 +1,97 @@
+==============================================================================
+PART 1 — the Dirac 4-spinor as a 2-qubit INTERNAL record (spin ⊗ sign)
+  basis = {↑upper, ↓upper, ↑lower, ↓lower};  record law = |component|²;  H ≤ 2 bits
+==============================================================================
+  state Φ                         H (bits)  record law |ψ_i|²  (↑u,↓u,↑l,↓l)
+  --------------------------------------------------------------------------
+  rest electron  u(0,↑)           0.000     (1.000, 0.000, 0.000, 0.000)
+  slow  e⁻  u(0.1ẑ,↑)             0.025     (0.998, 0.000, 0.002, 0.000)
+  fast  e⁻  u(1.0ẑ,↑)  (p=mc)     0.601     (0.854, 0.000, 0.146, 0.000)
+  ultra e⁻  u(5.0ẑ,↑)             0.972     (0.598, 0.000, 0.402, 0.000)
+  spin x-superpos (↑+↓)/√2        1.000     (0.500, 0.500, 0.000, 0.000)
+  zitterbewegung (u+v)/√2 @p=ẑ    1.000     (0.500, 0.000, 0.500, 0.000)
+
+  Reading: a rest electron is a DEFINITE internal record (0 bits — pure ↑upper). Boosting
+  populates the lower components (σ·p/(E+1)) → the spin and sign records mix, but H stays ≤ 2
+  bits: the internal record space is finite and exactly 2 qubits, no matter the momentum. The
+  ±energy (u+v) superposition spreads across upper+lower — this interference is zitterbewegung
+  (Part 3). All exact, all single-basis — the 2-qubit rung of the ladder in a real equation.
+
+==============================================================================
+PART 2 — POSITION records and the COMPTON FLOOR  λ_C = ℏ/mc
+  Box: H_pos ≈ B grows forever. Dirac: localising below λ_C makes pairs ⇒ the single-
+  particle position record SATURATES at resolution Δx_min ≈ λ_C. Floor set by MASS.
+==============================================================================
+  λ_C(e⁻) = 3.862e-13 m   (the position-record grain)
+  region L = 1e-02 m → max distinguishable position records = L/λ_C = 2.590e+10
+  → position-bit CEILING  log2(L/λ_C) = 34.59 bits  (finite — unlike the box)
+
+  budget B   Δx=L/2^B (m)   Δx/λ_C       behaviour
+  ------------------------------------------------------------------
+  10         9.766e-06      2.529e+07    Schrödinger-like: record tracks the budget
+  20         9.537e-09      2.470e+04    Schrödinger-like: record tracks the budget
+  30         9.313e-12      2.412e+01    Schrödinger-like: record tracks the budget
+  34         5.821e-13      1.507e+00    approaching the Compton grain
+  35         2.910e-13      7.537e-01    SUB-λ_C: pairs created ⇒ record dissolves (capped)
+  40         9.095e-15      2.355e-02    SUB-λ_C: pairs created ⇒ record dissolves (capped)
+  45         2.842e-16      7.360e-04    SUB-λ_C: pairs created ⇒ record dissolves (capped)
+
+  So H_pos(Dirac) = min(B, log2(L/λ_C)): it tracks the budget like the box until Δx hits λ_C,
+  then SATURATES — exactly the role the 2πℏ cell played for the oscillator, now in POSITION and
+  fixed by the mass. The grain is pair production, i.e. standard relativistic QFT, not λ.
+
+==============================================================================
+PART 3 — ZITTERBEWEGUNG: the internal Compton clock (time-domain record bits)
+==============================================================================
+  ω_zb = 2mc²/ℏ = 1.553e+21 rad/s ;  period T_zb = 4.047e-21 s ;  amplitude ≈ λ_C/2 = 1.931e-13 m
+  The (u+v) interference (Part 1) oscillates ⟨x⟩ at ω_zb — an internal 'clock'.
+
+  proper time τ      # cycles ω_zb·τ/2π     clock bits log2(#)
+  ------------------------------------------------------------
+  ~T_zb              2.471e-01             0.00
+  1 as               2.471e+02             7.95
+  1 fs               2.471e+05             17.91
+  1 ps               2.471e+08             27.88
+  1 ns               2.471e+11             37.85
+
+  The Compton clock is a real, fast (1.6e21 rad/s) internal oscillation; its resolvable phase
+  is a time-domain record count log2(ω_zb·τ/2π). It is standard Dirac interference between ±E
+  components — never observed as free-particle motion (it averages out; only the mass-set scale
+  λ_C survives). No λ here either: it is the time-domain face of the same Compton grain.
+
+==============================================================================
+PART 4 — energy cost of localising a Dirac particle: the pair-production line
+  E(Δx) ≈ √[(ℏc/Δx)² + (mc²)²].  Δx = λ_C ⇒ E = √2·mc².  E > 2mc² ⇒ a pair is cheaper.
+==============================================================================
+  Δx/λ_C      E/mc²        verdict
+  --------------------------------------------------
+  100         1.000        single particle OK
+  10          1.005        single particle OK
+  3           1.054        single particle OK
+  1.0         1.414        single particle OK
+  0.5         2.236        ΔE > 2mc² ⇒ PAIR PRODUCTION (record dissolves)
+  0.2         5.099        ΔE > 2mc² ⇒ PAIR PRODUCTION (record dissolves)
+  0.1         10.050       ΔE > 2mc² ⇒ PAIR PRODUCTION (record dissolves)
+
+  Below Δx ≈ λ_C the localisation energy exceeds the 2mc² pair threshold: you can no longer
+  hold one electron at a sharper position — the vacuum makes e⁺e⁻ pairs and the single-particle
+  position record loses meaning. THIS is the physical mechanism behind the Part-2 floor.
+
+==============================================================================
+PART 5 — holographic slack and the honest verdict
+==============================================================================
+  region 1 cm   Q_R ≈ 1.74e+66 bits   single-e⁻ record ≈ 37 bits   slack ≈ 65 orders
+  region 1 m    Q_R ≈ 1.74e+70 bits   single-e⁻ record ≈ 43 bits   slack ≈ 69 orders
+
+  VERDICT (consistent with box/oscillator, GPT-5.5-pro-checked):
+  • The Dirac equation gives, for the FIRST time in this ladder, a PHYSICAL position-space bit
+    floor — the Compton wavelength λ_C = ℏ/mc — completing box (no floor) → oscillator
+    (phase-space ℏ-floor) → Dirac (position floor, mass-set). Plus a clean 2-qubit internal
+    (spin ⊗ sign) record. Richest rung pedagogically.
+  • But every effect is STANDARD relativistic QM/QFT: the floor is pair production (set by the
+    mass m, via ΔE > 2mc²), NOT λ and NOT the holographic Q_R; the internal bits are ordinary
+    single-basis spinor bookkeeping; zitterbewegung is ±E interference. The holographic budget
+    is ~70 orders slack for any lab region, so finiteness never bites.
+  • λ is non-dynamical and Born-transparent ⇒ it produces no resolution cap, no deviation.
+    The Compton floor would be there with or without λ. So, exactly as before: thesis-empty,
+    operationally = Everett. The mass-set grain is real physics; the λ part adds nothing.
