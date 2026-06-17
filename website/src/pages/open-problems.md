@@ -155,6 +155,46 @@ That is a more tractable continuum entry point than the abandoned crossed-produc
 **Difficulty.** Very hard — a multi-year Mathlib-grade wall (unbounded operator theory, Type III classification
 that Mathlib lacks). Not a blocker for the conditional interpretation; the honestly-cited frontier.
 
+## Exploratory — is λ a *fact* or a *generator*? (a falsifiable alternative)
+
+This is a distinct, **speculative** direction, separate from Gaps 1–3, and it *changes the ontology* — so it is
+flagged as exploration, not a claim of the program.
+
+**The question.** In the main thesis λ is a *fact*: a placeless, non-dynamical stamp of actuality — *which*
+complete branch of Φ is real — Born-typical and inert ($=$ Everett). The alternative is to ask whether that fact
+is *raw* or *generated*: whether the actual history is the output of a **finite-information deterministic
+generator** (a small seed + a rule), in the spirit of 't Hooft's deterministic quantum mechanics.
+
+**The fork (a proved distinction).** The two readings differ on one provable property — *is the actual history
+compressible?* A Born-typical history is algorithmically **incompressible** (Martin–Löf random; machine-illustrated).
+So a *truly* random history has **no** finite generator (no short description) ⇒ inert λ, exact Born forever,
+**unfalsifiable**, $=$ Everett; a *pseudo*-random history **is** a generator (a seed of $B$ bits) ⇒ it can fake
+Born only up to $\sim 2^B$ outcomes, then reveals finite-information structure (periodicity, compressibility).
+
+**Why interesting.** Unlike the inert reading, the generator version is **falsifiable** — a concrete prediction
+that quantum randomness is pseudo-random and would show structure in long datasets at $\sim 2^B$. Every test of
+quantum random-number generators so far finds *none*, consistent with a large (or absent) seed.
+
+**What it costs.** (i) **Bell** — a finite *local* generator is capped at CHSH $=2$, so reproducing the quantum
+$2\sqrt2$ forces it to be nonlocal or **superdeterministic** (its seed correlated with the measurement settings).
+(ii) **A location** — λ stops being placeless and must live *somewhere* (a physical substrate / the causal past).
+(iii) **The budget** — the **Bekenstein** (energy × size) bound gives a small budget (~10–100 bits) only for the
+*toy* case of a generator confined to a bare quantum; a real apparatus / causal-past budget is enormous and
+untestable. (An earlier claim that single-quantum data already *excludes* the small case was **withdrawn** as an
+overclaim — it mis-assigned the budget to the bare particle.)
+
+**What is open (the decisive question).** *Why would the seed be small?* Faking $N$ outcomes needs only
+$\sim\log_2 N$ bits of state, so a small seed is information-theoretically *sufficient* — but nothing in known
+physics forces the deterministic substrate to use a small fraction of its holographic capacity rather than all of
+it. Absent a principle that motivates a small seed, "the seed is small" is a free parameter set by hand and the
+break sits at $\sim 2^{Q_R}$ (untestable). Finding such a principle — a minimal-information / algorithmic-simplicity
+law for actuality — is the make-or-break, and is not answerable from current physics.
+
+**Difficulty / status.** Speculative; a *different* (deterministic, superdeterministic) ontology from the
+conditional interpretation above; falsifiable in principle, currently consistent with all data. Included as an
+honest exploration of whether λ could be given empirical content — not as a claim of the program. See the
+[reach](/reach) page for the same idea in plain language.
+
 ---
 
 ## In one paragraph
