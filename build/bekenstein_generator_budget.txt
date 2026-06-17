@@ -1,0 +1,81 @@
+======================================================================================
+PART 1 — Bekenstein budget I = 2πRE/(ℏc·ln2) for real systems (energy × size)
+======================================================================================
+  system                    R (m)        E (J)        Bekenstein (bits)  note
+  ------------------------------------------------------------------------------------
+  electron @ Compton λ_C    3.86e-13     8.19e-14     9.065e+00      = 2π/ln2 ≈ 9
+  single optical photon     5.00e-07     3.97e-19     5.696e+01      = 4π²/ln2 ≈ 57
+  single radio photon 1m    1.00e+00     1.99e-25     5.696e+01      same 57 (R·E=ℏc fixed)
+  electron in an atom       5.29e-11     8.19e-14     1.242e+03      rest energy, atomic size
+  Na atom (rest energy)     1.90e-10     3.43e-09     1.869e+08      
+  1 µm trapped-ion qubit    1.00e-06     3.20e-19     9.188e+01      optical transition energy
+  dust grain (1 µg)         1.00e-05     8.99e+07     2.577e+29      
+
+  Single elementary quanta carry an astonishingly SMALL Bekenstein budget: ~9 bits (electron),
+  ~57 bits (any single photon — wavelength-independent, since R·E = ℏc is fixed). Energy×size, not
+  area, makes it tiny. THIS is the budget that would limit a generator whose hidden state lives in
+  the quantum source.
+
+======================================================================================
+PART 2 — Bekenstein (energy) vs Holographic (area): Bekenstein is far tighter
+======================================================================================
+  system (size, energy) Bekenstein (bits) Holographic (bits)ratio Bek/Holo
+  --------------------------------------------------------------------------------
+  photon, R=λ=500nm     5.696e+01         4.338e+57         1.31e-56
+  electron, R=λ_C       9.065e+00         2.587e+45         3.50e-45
+  atom, R=a0            1.242e+03         4.856e+49         2.56e-47
+  1 cm cube, ~1 J       2.867e+24         1.735e+66         1.65e-42
+  solar-mass BH         1.514e+77         1.514e+77         1.00e+00
+
+  For ordinary matter the Bekenstein (energy) budget is many orders BELOW the holographic (area)
+  budget; they coincide only at a black hole, where E = Mc² and R = R_s make 2πRE/ℏc = A/4ℓ_P²
+  (the bound is saturated). So Bekenstein is the operative, much smaller budget for a finite-energy
+  generator — and it is what could make the prediction observable.
+
+======================================================================================
+PART 3 — the finite-generator prediction meets data: Born breaks at ~2^B
+======================================================================================
+  A generator whose state has Bekenstein budget B bits fakes Born only up to ~2^B outcomes.
+  Quantum-RNG data tested for structure ≈ 10^15 bits (≈ 2^50); none found.
+
+  source (if it holds λ-state)B (bits)      break at 2^B          vs ~10^15 tested?
+  ------------------------------------------------------------------------------------
+  single electron           9.065         5.35e+02              ALREADY EXCLUDED (break ≪ tested)
+  single photon             56.96         1.40e+17              AT THE FRONTIER (break ≈ tested)
+  1 µm ion qubit            91.88         4.54e+27              safe (break ≫ tested)
+  electron in atom          1242          > 10^300              safe (break ≫ tested)
+  dust grain (1 µg)         2.577e+29     > 10^300              safe (break ≫ tested)
+
+  The punchline: the bare single-ELECTRON budget (~9 bits ⇒ break at ~500 outcomes) is WILDLY
+  excluded — electron-based randomness has produced far more than 2^9 bits with no structure. The
+  single-PHOTON budget (~57 bits ⇒ break at ~10^17) sits right at the frontier of what has been
+  tested. So a finite generator whose hidden state lives in the bare quantum SOURCE is already
+  disfavoured (electron) or about to be tested (photon).
+
+======================================================================================
+PART 4 — honest verdict
+======================================================================================
+  Bekenstein is the first thing in this whole thread to make the finite-λ-generator idea TOUCH
+  DATA. Where the holographic budget gave an untestable 2^(10^70), the Bekenstein (energy×size)
+  budget of a single quantum is only ~9–57 bits, so:
+
+   • If the generator's hidden state lives in the quantum SOURCE itself, its faking window is just
+     ~2^9 … 2^57 outcomes. The electron case (~500) is ALREADY EXCLUDED by quantum-RNG data; the
+     photon case (~10^17) is at the current experimental frontier. So this version is testable —
+     and the smallest budgets are already ruled out.
+
+   • That forces a fork. EITHER the λ-generator's state is NOT the bare quantum but a much larger
+     system (the apparatus, the environment, the causal diamond) whose Bekenstein/holographic budget
+     is large again ⇒ back to untestable, but with a clear physical question ('what holds the
+     state?'). OR one takes the small-source budget seriously, in which case single-quantum
+     randomness ALREADY disfavours a Bekenstein-limited finite generator — i.e. the data favours
+     true Born / inert-λ over a finite generator for those degrees of freedom.
+
+   • Either way this is genuine progress: a concrete, energy-based, system-specific budget; a real
+     (already partly excluded) prediction; and a sharp open question — WHERE does the generator's
+     state live, and therefore what is its energy and Bekenstein budget?
+
+  CAVEATS (unchanged): still the speculative deterministic/superdeterministic GENERATOR fork (owes
+  Bell its price); 'how much has been tested for structure' is an order-of-magnitude estimate; and
+  the choice of E for a system (transition energy vs total rest energy) shifts B and is part of the
+  open question above.
