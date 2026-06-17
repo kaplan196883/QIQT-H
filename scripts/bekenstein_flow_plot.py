@@ -14,8 +14,15 @@ capacity is
 
         B(R) = min(B_Bek, B_holo):   ∝ R⁴ (energy-limited) until BH collapse, then ∝ R² (area-limited).
 
-That is WHY information scales with area, not volume: matter that tries to pack volume-much information
-collapses to a black hole, whose entropy is the area. The holographic bound is the collapse ENVELOPE.
+This is the standard spherical-entropy argument (Bekenstein/Susskind): the most entropy a region can hold
+is that of the black hole that fits inside it, so black holes/horizons are the area-scaling upper ENVELOPE.
+
+CAVEATS (14th GPT-5.5-pro consult, verified): B_Bek is an UPPER BOUND (not realized info); the weak-gravity
+form 2πRE/ℏc pushed to R_s is a FORMAL extrapolation (a Schwarzschild BH happens to saturate the same
+expression); static matter destabilizes BEFORE R_s (Buchdahl R>9R_s/8), so 'collapse exactly at R_s' is
+heuristic; and ordinary weakly-gravitating matter does NOT saturate the area law — it maxes at ~A^{3/4}, not
+A (only horizons saturate). So the framing is: horizons are the upper envelope; ordinary matter sits far
+below; pushing energy toward the envelope triggers collapse. The R⁴ lines are truncated at R_s (formal beyond).
 
 This script tabulates the flow, overlays real objects, makes a log–log plot (build/bekenstein_flow.png),
 and reads off the impact on the λ-generator. Needs numpy + matplotlib.
