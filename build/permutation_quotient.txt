@@ -1,0 +1,110 @@
+==============================================================================
+PART 1 — distinguishable configurations = configuration space / permutations
+  N constituents in M single-particle states (modes).
+    distinguishable : M^N            (full tensor product — no quotient)
+    bosons          : C(N+M-1, N)    (symmetric: combinations WITH repetition)
+    fermions        : C(M, N)        (antisymmetric: combinations WITHOUT repetition)
+==============================================================================
+  (N, M)        distinguishable bosons          fermions        dist/bosons
+  --------------------------------------------------------------------------
+  (2,4)         1.600e+01       1.000e+01       6.000e+00       1.600e+00
+  (3,6)         2.160e+02       5.600e+01       2.000e+01       3.857e+00
+  (5,10)        1.000e+05       2.002e+03       2.520e+02       4.995e+01
+  (10,20)       1.024e+13       2.003e+07       1.848e+05       5.112e+05
+  (10,1000)     1.000e+30       2.882e+23       2.634e+23       3.470e+06
+  (20,50)       9.537e+33       1.156e+17       4.713e+13       8.248e+16
+
+  The quotient is enormous and basis-independent: relabelling identical constituents does not make
+  a new configuration. In the dilute limit M ≫ N (few particles, many modes) the reduction
+  approaches exactly N!  (each of the N! orderings collapses to one combination) — the Gibbs factor.
+  This is the real 'limit on combinations': not which configs exist, but how many are DISTINCT.
+
+==============================================================================
+PART 2 — Pauli exclusion: antisymmetry makes the combination limit HARD
+  Fermions: C(M, N) = 0 once N > M — you cannot place two in the same state.
+==============================================================================
+  M = 6 fermionic states; put N fermions in:
+  N      C(M,N) distinct combinations
+  ----------------------------------------
+  0      1
+  1      6
+  2      15
+  3      20
+  4      15
+  5      6
+  6      1
+  7      0   ← N>M: IMPOSSIBLE (Pauli)
+  8      0   ← N>M: IMPOSSIBLE (Pauli)
+
+  This is a genuine, OBSERVED limit on combinations, straight from permutation antisymmetry: at
+  most M fermions in M states. It builds the periodic table (shell filling), holds up white dwarfs
+  and neutron stars (degeneracy pressure), and forbids two electrons in one quantum state. The
+  'combinatorial bit-limit' is not exotic — for fermions it is Pauli, and we see it everywhere.
+  (Standard QM, a property of Φ's antisymmetry — not λ.)
+
+==============================================================================
+PART 3 — the permutation quotient in the entropy: the Gibbs N! (no paradox)
+==============================================================================
+  log2(counts) in bits, and the indistinguishability saving log2(N!):
+  (N, M)      dist (bits)     bose (bits)     log2(N!) saving
+  ----------------------------------------------------------------
+  (5,1000)    49.83           42.94           6.91
+  (10,1000)   99.66           77.93           21.79
+  (20,5000)   245.75          184.73          61.08
+  (50,100000) 830.48          616.29          214.21
+
+  Counting distinguishable arrangements (M^N) overcounts the entropy by ~log2(N!); modding out
+  permutations removes exactly that excess and resolves the Gibbs paradox (entropy stays extensive
+  on mixing identical gases). The holographic record count is the DISTINGUISHABLE one — already the
+  permutation quotient — so 'redundant relabelings' never spend budget. (This is the entropy face
+  of RedundancyCompressible: R copies of a fact carry H(X), not R·H(X).)
+
+==============================================================================
+PART 4 — permutation orbits ⇒ Born: typicality over the quotient
+  Qubit |ψ> = √p|0> + √q|1>, q=1−p.  N iid copies.  Permutation symmetry sorts the 2^N
+  bit-string configs into ORBITS labelled by the frequency f = w/N (w = # of 1s).
+==============================================================================
+  p=|a|²=0.7, q=|b|²=0.3.  Orbit of weight w has C(N,w) configs (the permutation count);
+  its Born weight (|amplitude|² in |ψ>^⊗N) is C(N,w) p^(N−w) q^w — a binomial in w.
+
+  N        typical freq ⟨w/N⟩   std(w/N)        peak orbit at f =   → Born |b|²?
+  ----------------------------------------------------------------------
+  10       0.3000              0.1449          0.3000              ✓ → 0.300
+  100      0.3000              0.0458          0.3000              ✓ → 0.300
+  1000     0.3000              0.0145          0.3000              ✓ → 0.300
+  10000    0.3000              0.0046          0.3000              ✓ → 0.300
+
+  As N grows the frequency concentrates: std(w/N) = √(q(1−q)/N) → 0, and the typical orbit sits at
+  f = q = |b|² — the Born frequency. So the TYPICAL actual record (the typical permutation orbit)
+  shows Born statistics. Permutation symmetry supplies the structure — the orbits ARE the frequency
+  records, the quotient makes 'how many ways' = C(N,w) — and the |amplitude|² measure makes the
+  Born-frequency orbit typical.
+
+  HONEST CAVEAT (unchanged): the |amplitude|² weighting of the orbits is the irreducible TYPICALITY
+  PREMISE — permutation symmetry organises the configurations into frequency classes but does not,
+  by itself, hand you the p^(N−w)q^w measure. So this ILLUSTRATES how the permutation quotient +
+  the typicality premise ⇒ Born; it does not derive the premise (Born stays 'reduced, not derived').
+
+==============================================================================
+PART 5 — honest verdict
+==============================================================================
+  'The limit on combinations is permutations' — correct, and it is the cleanest, most
+  basis-independent form of the finiteness:
+
+   • distinguishable configurations = configuration space / S_N — a huge, basis-independent
+     quotient (Part 1), with the Gibbs N! as its entropy face (Part 3);
+   • for fermions the quotient is a HARD, OBSERVED limit — Pauli exclusion, the periodic table,
+     degeneracy pressure (Part 2);
+   • and it is where the finiteness meets the Born rule: permutation orbits are the frequency
+     records, and the typicality premise on them yields Born (Part 4).
+
+  But the placement is the same as everywhere on the ladder. Bose/Fermi statistics and Pauli are
+  REAL, observed physics — and they are the standard symmetrization postulate on Φ, a property of
+  the wavefunction, NOT a new effect of λ. λ inert ⇒ it merely indexes the permutation-quotiented
+  records; the statistics would be identical with or without it ⇒ operationally = Everett.
+
+  What permutations DO add is structural clarity: the QIQT-H finiteness is combinatorial — a
+  quotient by relabelings — which is basis-independent, ties directly to the machine-checked core
+  (RedundancyCompressible, GoldsteinStruyve), and explains why the holographic record count is the
+  DISTINGUISHABLE count. That is the honest gain: not a new empirical effect, but the right
+  mathematical shape for the finiteness — permutations — and the node where it meets Born.
