@@ -1,0 +1,49 @@
+==========================================================================================
+PART 1 — the Bekenstein-side (gravitational / Diósi–Penrose) collapse rate, parameter-free
+  Γ_grav = GM²/(ℏR) = ΔS_Bek · c/(2πR)   (gravitational self-information × holographic rate)
+  fixed density ⇒ Γ_grav ∝ R⁵.   Compare the Bekenstein flow's capacity ∝R², realized ∝R³.
+==========================================================================================
+  object          R (m)        ΔS_Bek (bits, grav)   Γ_grav (s^-1)   τ = 1/Γ
+  --------------------------------------------------------------------------------------
+  atom (1 Å)      1.0e-10      3.36e-37              1.11e-19        9.0e+18 s (>age univ.)
+  C60             7.0e-10      3.95e-32              1.87e-15        5.4e+14 s
+  100 nm cluster  1.0e-07      3.36e-19              1.11e-04        9.0e+03 s
+  1 µm grain      1.0e-06      3.36e-13              1.11e+01        9.0e-02 s (instant)
+  10 µm           1.0e-05      3.36e-07              1.11e+06        9.0e-07 s (instant)
+  sand (0.5 mm)   5.0e-04      5.25e+03              3.47e+14        2.9e-15 s (instant)
+  cat (0.3 m)     3.0e-01      2.45e+20              2.70e+28        3.7e-29 s (instant)
+
+  The gravitational rate is a clean R⁵ power law. Its micro/macro boundary (Γ = 1/0.1 s) sits at
+  R ≈ 9.8e-07 m (~a µm grain): atoms/molecules stay coherent (Γ≈0), µm-and-larger objects become
+  definite — in the right ballpark, WITHOUT any fitted parameter (set by G alone). Contrast the
+  finite-information DERIVED factor, which is exponential 2^(-R²) ≈ 0 at every R.
+
+==========================================================================================
+PART 2 — chart: the Bekenstein-side collapse rate Γ_grav(R) ∝ R⁵ and the working limit
+==========================================================================================
+  chart written: build/bekenstein_collapse_rate.png
+
+==========================================================================================
+PART 3 — verdict: the 'working' Bekenstein limit that fits QIQT-H to the data
+==========================================================================================
+  MOVING THE POWER LAW TO THE BEKENSTEIN SIDE gives the GRAVITATIONAL (Diósi–Penrose) collapse rate
+  Γ_grav = GM²/(ℏR) = ΔS_Bek·c/(2πR) ∝ R⁵ — gravitational self-information processed at the holographic
+  rate. This is the Bekenstein-side analogue of the capacity power laws (R², R³), and crucially it is
+  PARAMETER-FREE (set by G), and NON-ZERO — landing its micro/macro boundary at ~1 µm, the right ballpark.
+  (The finite-information DERIVED factor, by contrast, is the exponential 2^(-R²) ≈ 0.)
+
+  THE WORKING LIMIT. The fully parameter-free version is EXCLUDED by spontaneous X-ray data (Donadi 2021);
+  it survives only regulated at a length R_0 ≳ 10^-10 m (atomic). So:
+
+     working Bekenstein/gravitational limit  =  Γ_grav = GM²/(ℏR),  regulated at  R_0 ~ 1 Å.
+
+  This IS a concrete, observationally-viable rate — but three honest flags:
+   (1) It is the Diósi–Penrose GRAVITATIONAL collapse model; in this fork QIQT-H INHERITS it rather than
+       predicting something new — and it makes λ dynamical, breaking Φ's exact unitarity (different ontology).
+   (2) R_0 is a residual free length; it becomes a QIQT-H PREDICTION only if finite-info Q_R derives R_0 —
+       which is NOT done (the open lead). Until then it is a fit, not a derivation.
+   (3) Even the regulated rate is being squeezed by the same experiments; the surviving window is narrow.
+
+  SO: the 'working' Bekenstein limit is gravitational (DP) collapse with an atomic R_0. It is the only
+  place finite-size physics gives a non-zero, in-the-ballpark, testable rate — but it is borrowed DP
+  phenomenology with one free length, not a finite-information prediction, and it costs exact unitarity.
