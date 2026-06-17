@@ -427,6 +427,15 @@ def _restore_inline_code(text: str, blocks: list[str]) -> str:
                 .replace("$", r"\$").replace("#", r"\#")
                 .replace("_", r"\_").replace("{", r"\{").replace("}", r"\}")
                 .replace("~", r"\textasciitilde{}").replace("^", r"\textasciicircum{}"))
+        # Let long code identifiers wrap at their natural segment boundaries (_ and .)
+        # inside narrow table cells. \allowbreak only breaks when a line is overfull and
+        # inserts no hyphen, so short inline code in prose is unaffected.
+        body = (body.replace(r"\_", r"\_\allowbreak{}")
+                .replace(".", r".\allowbreak{}")
+                .replace("/", r"/\allowbreak{}"))
+        # ...and at camelCase humps, so long single-segment identifiers
+        # (e.g. noCollapseBornRepresentation) can wrap too.
+        body = re.sub(r"([a-z0-9])([A-Z])", r"\1\\allowbreak{}\2", body)
         return r"\texttt{" + body + r"}"
     return re.sub(r"@@INLINECODE(\d+)@@", _restore, text)
 
