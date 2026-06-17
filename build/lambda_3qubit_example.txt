@@ -1,0 +1,45 @@
+==============================================================================
+A TOY 3-QUBIT UNIVERSE — an explicit λ
+  Φ = (√0.9|0>+√0.1|1>) ⊗ (√0.6|0>+√0.4|1>) ⊗ (√0.7|0>+√0.3|1>)   (qubits A,B,C)
+==============================================================================
+
+  THE 8 RECORDS (the leaves) — Born weight = |amplitude|², and their CDF intervals:
+    record ABC   Born weight   CDF interval
+    ----------------------------------------------
+    000          0.378         [0.000, 0.378)
+    001          0.162         [0.378, 0.540)
+    010          0.252         [0.540, 0.792)
+    011          0.108         [0.792, 0.900)
+    100          0.042         [0.900, 0.942)
+    101          0.018         [0.942, 0.960)
+    110          0.028         [0.960, 0.988)
+    111          0.012         [0.988, 1.000)
+    (sum)        1.000
+
+  THE SCAFFOLD — the coarse-graining REFINEMENT TREE (each node splits in two):
+    1 bit  (2 blocks):  0**=0.900   1**=0.100
+    2 bits (4 blocks):  00*=0.540   01*=0.360   10*=0.060   11*=0.040
+    3 bits (8 records): the leaves above
+
+  λ — the ACTUAL history, read off the single seed s = 0.42 (deterministic):
+    budget 1 bit :  s ∈ [0.000,0.900) ⇒ block 0**   (A = 0)
+    budget 2 bits:  s ∈ [0.000,0.540) ⇒ block 00*   (A,B = 0,0)
+    budget 3 bits:  s ∈ [0.378,0.540) ⇒ record 001 ← THE ACTUAL WORLD
+    ⇒ λ traces ONE path:  root → 0** → 00* → 001   (A=0, B=0, C=1)
+    The coarse λ is always CONSISTENT with the fine λ (nesting): 0** ⊃ 00* ⊃ 001.
+
+  BORN, as a frequency across many universes (each with its own definite seed):
+    spread seeds uniformly over [0,1); the fraction landing in each leaf's interval
+    equals its Born weight — so leaf frequencies reproduce |amplitude|² exactly.
+    (Each universe still has ONE definite λ; 'probability' is the across-universe count.)
+
+  WHAT THIS SHOWS (the whole discussion, in one toy):
+   • λ is a finite INDEX — here exactly 3 bits (the leaf 001), or 3 binary choices down the tree.
+   • DEFINITE, NO RANDOMNESS: λ = inverse-CDF(seed). The one brute fact is which seed s is actual;
+     given s, the entire path is fixed. There is no dice and no process anywhere in λ.
+   • The SCAFFOLD (the refinement tree) is self-similar — every node splits in two; this is the
+     'fractal' part. λ is ONE definite PATH through it, not a random walk on it.
+   • Φ keeps all 8 branches (exactly unitary); λ only marks 001 as ACTUAL ⇒ inert ⇒ = Everett.
+   • PATTERNLESS only shows up for LONG histories: one 3-bit λ is trivially simple, but the leaf
+     SEQUENCE of many independent runs is Born-typical = incompressible (the Martin-Löf point) —
+     definite, yet with no short description. Here, with N=1 'run', that is not yet visible.
