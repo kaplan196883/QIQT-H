@@ -37,6 +37,14 @@ CHART — the scaling factor in action:  collapse rate Γ vs system size N
   chart written: build/collapse_scaling_factor.png
 
 ======================================================================================
+CHART (R) — the scaling factor as a POWER LAW over length scale R, with the r_C crossover
+  R < r_C : object is one coherent patch  ⇒  Γ ∝ N² ∝ R^6   (steep)
+  R > r_C : many incoherent patches        ⇒  Γ ∝ N  ∝ R^3   (mass-proportional, gentler)
+======================================================================================
+  density ρ=1000 kg/m³, r_C=1e-07 m, λ_CSL=1e-16 s^-1  ⇒  N_C≈2.5e+09 nucleons, Γ(r_C)≈6.4e+02 s^-1
+  chart written: build/collapse_scaling_factor_vs_R.png
+
+======================================================================================
 VERDICT — what 'the scaling factor' actually is
 ======================================================================================
   Computed, both readings:
