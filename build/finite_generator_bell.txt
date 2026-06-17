@@ -1,0 +1,34 @@
+================================================================================
+PART 1 — finite information ⇒ Born frequencies that pass statistical tests
+  generator = splitmix64 (64-bit state) ; seed = 0xc0ffee ; target Born freq q = 0.3
+================================================================================
+  frequency test:        f̂ = 0.2992   (target q = 0.3)   |f̂−q| = 0.0008
+  4-bit block χ² test:   χ² = 9.4  (df=15, 5% crit ≈ 25.0)  → PASS (looks iid-Bernoulli(q))
+  lag-1 autocorrelation: r₁ = +0.0002   (≈ 0 ⇒ no serial pattern)  → PASS
+  zlib on the output:    0.896 (compressed/raw) ⇒ looks INCOMPRESSIBLE to zlib
+  PRNG detector:         regenerate from the 64-bit seed → identical? True
+                         ⇒ true K ≈ 64-bit seed + tiny program ≪ N. LOW complexity.
+
+  VERDICT (Part 1): the inventor is RIGHT. ~16 bytes of generator+seed emit a sequence with the
+  Born frequency q that passes frequency, block-χ², and autocorrelation tests and is even
+  zlib-incompressible — yet it is reproducible from the seed, so its algorithmic complexity is
+  tiny. 'Finite information ⇒ Born FREQUENCIES (passing any finite test)' holds. zlib-incompressible
+  ≠ high K: a good PRNG is the gap between them.
+
+================================================================================
+PART 2 — the Bell wall: frequencies are easy, CORRELATIONS are not
+================================================================================
+  (1) QUANTUM (singlet, optimal angles):  CHSH = 2.8284  ≈ 2√2 = 2.8284
+  (2) LOCAL DETERMINISTIC (all 16 strategies):  max|CHSH| = 2.0   (Bell bound = 2)
+  (3) finite-info LOCAL generator (shared λ, local responses):  CHSH = 2.000  ≤ 2  ⇒
+      reproduces frequencies but CANNOT reach the quantum 2.83. The Bell ceiling is hard.
+  (4) SUPERDETERMINISTIC generator (λ sees the settings a,b):  CHSH = 2.832  ≈ 2√2  ⇒
+      it REACHES the quantum value — but only by letting the generator depend on the
+      measurement settings (the 'free choice' / statistical-independence assumption fails).
+
+  VERDICT (Part 2): a finite generator gives Born FREQUENCIES (Part 1) but a LOCAL one is capped at
+  CHSH = 2; QM needs 2√2. To reproduce quantum CORRELATIONS the generator must be NONLOCAL or
+  SUPERDETERMINISTIC (its seed correlates with the detector settings). That is the real, famous price
+  of any deterministic-QM / 't Hooft-style program — not compressibility, but Bell. So: 'finite info
+  ⇒ Born' is viable as PSEUDO-Born for everything we actually measure, but it buys a deterministic
+  theory that must either go nonlocal or abandon measurement free-choice. That is the honest cost.
