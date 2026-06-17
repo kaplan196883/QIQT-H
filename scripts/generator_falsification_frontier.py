@@ -103,61 +103,75 @@ def run_chart():
     print(f"  Actual universe gen : B ≈ 10^104 bits  (period = Poincaré recurrence 2^(10^104) ≈ 10^(3x10^103) orders)")
     print(f"  Bell/CHSH          : finite LOCAL generator ≤ 2 ; observed 2√2 ≈ 2.83 ⇒ local EXCLUDED at every B")
 
-    # the curve: dataset to falsify (in orders of magnitude, log10 N) = log10(2^B) = 0.301 * B
-    B = np.logspace(0, 104, 1200)                 # generator size, 1 bit .. 1e104 bits
-    orders = LN2_LOG10 * B                         # log10(measurements to guarantee the period shows)
+    # ZOOMED to the testable window (0..440 bits) so the regimes are actually visible;
+    # the real universe (B~10^104) is off the right edge by ~10^101 and is drawn as an arrow.
+    B = np.linspace(1, 440, 800)                  # generator size, bits (testable-scale zoom)
+    N = 2.0 ** B                                   # dataset to falsify ≈ 2^B outcomes (fits float to ~10^132)
 
     fig, ax = plt.subplots(figsize=(10.5, 6.6))
-    ax.set_xscale("log"); ax.set_yscale("log")
+    ax.set_yscale("log")
 
-    # falsification curve, coloured by regime (segments by generator size B)
+    # regime shading (now WIDE and visible because x is zoomed to the testable scale)
+    ax.axvspan(0, B_QRNG, color="#d62728", alpha=0.16)
+    ax.axvspan(B_QRNG, B_LLOYD, color="#2ca02c", alpha=0.16)
+    ax.axvspan(B_LLOYD, 440, color="#7f7f7f", alpha=0.16)
+
+    # the falsification curve, coloured by regime
     seg_excl = B <= B_QRNG
     seg_test = (B > B_QRNG) & (B <= B_LLOYD)
     seg_untest = B > B_LLOYD
-    ax.plot(B[seg_excl],   orders[seg_excl],   color="#d62728", lw=4.0, zorder=5, solid_capstyle="round")
-    ax.plot(B[seg_test],   orders[seg_test],   color="#2ca02c", lw=4.0, zorder=5, solid_capstyle="round")
-    ax.plot(B[seg_untest], orders[seg_untest], color="#7f7f7f", lw=2.6, zorder=4)
+    ax.plot(B[seg_excl],   N[seg_excl],   color="#d62728", lw=3.4, zorder=5, solid_capstyle="round")
+    ax.plot(B[seg_test],   N[seg_test],   color="#2ca02c", lw=3.4, zorder=5, solid_capstyle="round")
+    ax.plot(B[seg_untest], N[seg_untest], color="#7f7f7f", lw=3.0, zorder=5)
 
-    # milestone markers ON the curve
-    ax.scatter([B_QRNG], [QRNG_ORDERS], color="#d62728", s=55, zorder=7, ec="white", lw=0.8)
-    ax.scatter([B_LLOYD], [LLOYD_ORDERS], color="#2ca02c", s=55, zorder=7, ec="white", lw=0.8)
-    ax.scatter([M_UNIVERSE], [LN2_LOG10 * M_UNIVERSE], color="black", s=130, zorder=7, marker="*")
+    # horizontal experimental reference lines (now well separated on the zoomed y)
+    ax.axhline(2.0**B_QRNG,  color="#d62728", ls=":", lw=1.2)
+    ax.axhline(2.0**B_LLOYD, color="#7f7f7f", ls=":", lw=1.2)
 
-    # annotations placed in open space, arrows to the markers
-    ax.annotate("QRNG frontier\ntested to ~$10^{15}$ bits, NULL\n⇒ $B\\lesssim50$ bits EXCLUDED",
-                xy=(B_QRNG, QRNG_ORDERS), xytext=(6e1, 1e9),
-                fontsize=8.6, ha="left", color="#d62728",
-                arrowprops=dict(arrowstyle="->", color="#d62728", lw=1.1))
-    ax.annotate("Lloyd cosmic-computation ceiling\n$10^{120}$ ops — the absolute limit of\nany conceivable test ($B\\approx400$ bits)",
-                xy=(B_LLOYD, LLOYD_ORDERS), xytext=(2e3, 3e6),
-                fontsize=8.6, ha="left", color="#2c7a2c",
-                arrowprops=dict(arrowstyle="->", color="#2ca02c", lw=1.1))
-    ax.annotate("the universe's ACTUAL generator\n$B\\sim10^{104}$ bits (realized entropy)\nperiod = Poincaré recurrence $2^{10^{104}}$\n→ untestable forever",
-                xy=(M_UNIVERSE, LN2_LOG10 * M_UNIVERSE), xytext=(1e58, 1e30),
-                fontsize=9, ha="center", color="black",
-                arrowprops=dict(arrowstyle="->", color="black", lw=1.1))
+    # milestone markers
+    ax.scatter([B_QRNG],  [2.0**B_QRNG],  color="#d62728", s=70, zorder=7, ec="white", lw=1)
+    ax.scatter([B_LLOYD], [2.0**B_LLOYD], color="#444",    s=70, zorder=7, ec="white", lw=1)
 
-    # Bell note (orthogonal exclusion) — upper-left open area
-    ax.text(2.2, 10**70,
-            "Bell / CHSH (a second, orthogonal test):\nfinite LOCAL generator ≤ 2,\nobserved $2\\sqrt{2}\\approx2.83$\n⇒ LOCAL generators EXCLUDED at every $B$\n(any survivor must be nonlocal /\nsuperdeterministic)",
-            fontsize=8.4, ha="left", va="top",
+    ax.annotate("QRNG frontier — already tested to ~$10^{15}$ outcomes (NULL)\n"
+                "⇒ every generator with $B\\lesssim50$ bits is EXCLUDED",
+                xy=(B_QRNG, 2.0**B_QRNG), xytext=(70, 1e6),
+                fontsize=9, ha="left", color="#b01d1d",
+                arrowprops=dict(arrowstyle="->", color="#d62728", lw=1.2))
+    ax.annotate("Lloyd ceiling — $10^{120}$ ops, the MOST any experiment\n"
+                "in the whole observable universe could ever collect ($B\\approx400$ bits)",
+                xy=(B_LLOYD, 2.0**B_LLOYD), xytext=(40, 1e95),
+                fontsize=9, ha="left", color="#333",
+                arrowprops=dict(arrowstyle="->", color="#555", lw=1.2))
+
+    # the real universe: OFF THE RIGHT EDGE
+    ax.annotate("the universe's ACTUAL generator:\n$B\\sim10^{104}$ bits  →  OFF THIS CHART\n"
+                "($10^{101}\\times$ past the right edge);\nperiod $2^{10^{104}}$ — untestable forever",
+                xy=(439, 2.0**435), xytext=(250, 1e40),
+                fontsize=9.2, ha="center", color="black", fontweight="bold",
+                arrowprops=dict(arrowstyle="-|>", color="black", lw=1.6))
+
+    # Bell note (orthogonal exclusion)
+    ax.text(8, 1e125,
+            "Bell / CHSH (a 2nd, orthogonal test): a finite LOCAL generator is capped at\n"
+            "$2$; experiment measures $2\\sqrt{2}\\approx2.83$  ⇒  LOCAL generators EXCLUDED at every $B$.",
+            fontsize=8.6, ha="left", va="top",
             bbox=dict(boxstyle="round,pad=0.45", fc="#fff6cc", ec="#caa700", lw=1.1))
 
-    ax.set_xlabel("generator information  $B$  (bits of seed + state)", fontsize=11)
-    ax.set_ylabel("dataset needed to falsify  ($\\log_{10}N$, i.e. orders of magnitude)", fontsize=11)
-    ax.set_title("The limited-information effect (generator fork): the falsification frontier",
+    ax.set_xlabel("generator information  $B$  (bits of seed + state)   —   zoomed to the testable scale", fontsize=10.5)
+    ax.set_ylabel("dataset needed to falsify,  $N \\approx 2^{B}$  (outcomes)", fontsize=11)
+    ax.set_title("Where the limited-information effect can — and cannot — be tested (generator fork)",
                  fontsize=12.5, pad=12)
-    ax.set_xlim(1, 1e104); ax.set_ylim(1, 1e104)
+    ax.set_xlim(0, 440); ax.set_ylim(1, 1e140)
 
     legend_handles = [
-        plt.Line2D([], [], color="#d62728", lw=4, label="already EXCLUDED by QRNG data ($B\\lesssim50$ bits)"),
-        plt.Line2D([], [], color="#2ca02c", lw=4, label="testable in principle ($50\\lesssim B\\lesssim400$ bits)"),
-        plt.Line2D([], [], color="#7f7f7f", lw=2.6, label="forever untestable ($B\\gtrsim400$ bits) — incl. the real universe"),
+        Patch(facecolor="#d62728", alpha=0.35, label="already EXCLUDED by QRNG data ($B\\lesssim50$ bits)"),
+        Patch(facecolor="#2ca02c", alpha=0.35, label="testable in principle ($50\\lesssim B\\lesssim400$ bits)"),
+        Patch(facecolor="#7f7f7f", alpha=0.35, label="untestable ($B\\gtrsim400$) — where the real universe sits, far off-chart"),
     ]
-    ax.legend(handles=legend_handles, fontsize=8.8, loc="lower right", framealpha=0.96, title="dataset to falsify $\\approx 2^{B}$")
+    ax.legend(handles=legend_handles, fontsize=8.8, loc="lower right", framealpha=0.96)
 
     fig.text(0.5, 0.004,
-             "Main QIQT-H thesis (inert λ): no effect, = Everett. This chart is the EXPLORATORY generator fork only — "
+             "Main QIQT-H thesis (inert λ): no effect, = Everett. This is the EXPLORATORY generator fork only — "
              "a different (deterministic / superdeterministic) ontology.",
              ha="center", fontsize=7.9, style="italic", color="#555")
 
