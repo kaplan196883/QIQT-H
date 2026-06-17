@@ -153,6 +153,19 @@ def make_plot(path="build/bekenstein_flow.png"):
     ax.annotate("collapse:\nentropy jumps\n~20 orders", (ns[1]*3, ns[2]/M_P*1e8),
                 fontsize=7, color="darkorange")
 
+    # COSMOLOGICAL HORIZON: like a black-hole horizon, it SATURATES the holographic bound
+    # (de Sitter / Hubble entropy ~10^122); the universe's REALIZED entropy ~10^104 sits 10^-18 below.
+    R_H = 1.32e26                     # Hubble radius c/H0
+    S_univ = 1.0e104                  # realized entropy of the observable universe (Egan–Lineweaver)
+    ax.plot(R_H, B_holo(R_H), "*", color="black", ms=15, zorder=5)
+    ax.annotate("cosmological horizon\n(saturated, $\\sim 10^{122}$)", (R_H, B_holo(R_H)),
+                textcoords="offset points", xytext=(-118, -30), fontsize=7)
+    ax.plot(R_H, S_univ, "v", color="tab:purple", ms=9, zorder=5)
+    ax.annotate("universe realized\n$\\sim 10^{104}$  ($10^{-18}$ of capacity)", (R_H, S_univ),
+                textcoords="offset points", xytext=(-60, -22), fontsize=7, color="tab:purple")
+    ax.annotate("", xy=(R_H, B_holo(R_H)), xytext=(R_H, S_univ),
+                arrowprops=dict(arrowstyle="<->", color="gray", lw=1.1, ls=":"))
+
     ax.set_xscale("log"); ax.set_yscale("log")
     ax.set_xlabel("region radius  R  (m)")
     ax.set_ylabel("information  (bits)")
@@ -160,6 +173,7 @@ def make_plot(path="build/bekenstein_flow.png"):
     ax.set_xlim(1e-15, 1e27); ax.set_ylim(1, 1e125)
     ax.plot([], [], "ks", ms=5, label="object's Bekenstein bound")
     ax.plot([], [], "v", color="tab:purple", ms=6, label="object's realized entropy ($\\approx N$)")
+    ax.plot([], [], "*", color="black", ms=12, label="horizon (saturates: BH / cosmological)")
     ax.legend(loc="upper left", fontsize=7.5, framealpha=0.9)
     ax.grid(True, which="major", ls=":", alpha=0.4)
     fig.tight_layout()
