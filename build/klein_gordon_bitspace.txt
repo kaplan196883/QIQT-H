@@ -1,0 +1,77 @@
+==============================================================================
+PART 1 — the conserved KG density is INDEFINITE:  |φ|² is NOT a record law
+  ρ = (ℏ/2mc²) i(φ*∂_tφ − φ∂_tφ*).  Per mode of energy E:  ρ = (E/mc²)|φ|².
+  ⇒ a NEGATIVE-energy mode carries NEGATIVE 'probability'. (Dirac's ψ†ψ≥0 does not.)
+==============================================================================
+  mode energies (units mc²):  +E1 = 1.166   -E2 = -1.640
+  ρ(x) over the sample:  min = -0.263   max = +0.496   (mean +0.091)
+  fraction of space with ρ < 0:  42.9%
+
+  ρ goes negative over a finite fraction of space — so it cannot be normalised to a record
+  law. The single-particle KG 'position record' is ILL-DEFINED: there is no positive density
+  to read |φ|² as 'which cell is actual'. This is the genuine KG obstruction (absent in Dirac).
+  The fix is not a better single-particle reading — it is the field (Part 4).
+
+==============================================================================
+PART 2 — Feshbach–Villars: the MINIMAL internal record (charge/sign, ≤ 1 qubit)
+  No spin: the only internal structure is particle vs antiparticle (η, χ).
+  record law = (|η|², |χ|²) normalised;  H ≤ 1 bit  (Dirac had ≤ 2; neutral scalar: 0).
+==============================================================================
+  state Φ (mode energy)     H (bits)  record (|η|², |χ|²)
+  ----------------------------------------------------------------
+  rest        p=0           0.000     (1.000, 0.000)
+  slow        p=0.1mc       0.000     (1.000, 0.000)
+  fast        p=mc          0.187     (0.971, 0.029)
+  ultra       p=5mc         0.894     (0.689, 0.311)
+
+  A rest scalar is a definite record (pure particle, 0 bits). Boosting mixes in the
+  antiparticle component, but H stays ≤ 1 bit — half the Dirac internal record (no spin
+  qubit). For a NEUTRAL real scalar even the charge qubit is absent: 0 internal bits, the
+  minimal record in the whole ladder.
+
+==============================================================================
+PART 3 — the COMPTON floor λ_C = ℏ/mc  (same mass-set grain as Dirac)
+==============================================================================
+  λ_C = 3.862e-13 m ;  region L = 1 cm ⇒ position-bit ceiling log2(L/λ_C) = 34.59 bits
+  Localising below λ_C costs ΔE > 2mc² ⇒ particle creation ⇒ the single-quantum record
+  dissolves — identical to Dirac. H_pos = min(B, log2(L/λ_C)). The floor is the mass,
+  not the spin: KG (spin 0) and Dirac (spin ½) share the SAME Compton position grain.
+
+==============================================================================
+PART 4 — the resolution: KG = a TOWER OF OSCILLATORS; records = Fock occupations
+  ω_k = c√(k² + (mc/ℏ)²).  Each mode is an oscillator; the well-defined records are
+  the occupation numbers n_k — and each mode is exactly the OSCILLATOR rung.
+==============================================================================
+  lowest mode  ω_0 = mc²/ℏ = 7.763e+20 rad/s  (the rest-mass / Compton frequency)
+  mode k (units mc/ℏ)   ω_k/ω_0 = √(1+(k/kc)²)
+  ----------------------------------------------
+  0.0                   1.000
+  0.5                   1.118
+  1.0                   1.414
+  2.0                   2.236
+  5.0                   5.099
+
+  The free KG field is a product of independent oscillators, one per mode; the vacuum is the
+  product of their ground states and a 'particle' is one quantum of excitation. So the genuine
+  record structure is occupation numbers {n_k}, and the per-mode bit content is the oscillator's
+  phase-space floor (the 2πℏ cell) — KG adds no new floor beyond mass (Part 3) and oscillator.
+  This is also where the indefinite density of Part 1 is cured: positive Fock norms replace the
+  indefinite single-particle ρ.
+
+==============================================================================
+PART 5 — holographic slack and the honest verdict
+==============================================================================
+  region 1 cm   Q_R ≈ 1.74e+66 bits   single-quantum record ≈ 36 bits   slack ≈ 65 orders
+  region 1 m    Q_R ≈ 1.74e+70 bits   single-quantum record ≈ 42 bits   slack ≈ 69 orders
+
+  VERDICT (consistent with box/oscillator/Dirac, pro-checked):
+  • KG is the MINIMAL relativistic rung — no spin, the smallest internal record (≤1 sign-qubit;
+    0 for a neutral scalar) — and the one that EXPOSES a real obstruction: its conserved density
+    is indefinite, so single-particle position records are ill-defined. The honest fix is the
+    field: KG = a tower of oscillators, records = Fock occupations (back to the oscillator rung).
+  • Yet every effect is STANDARD relativistic QM / free scalar QFT: the position floor is the
+    mass-set Compton grain (particle creation), shared with Dirac; the indefinite density and
+    Fock turn are textbook; the holographic budget is ~70 orders slack. None of it is λ.
+  • λ non-dynamical and Born-transparent ⇒ no resolution cap, no deviation. The obstruction and
+    its field cure are there with or without λ. So, like the whole ladder: thesis-empty,
+    operationally = Everett. The minimal rung teaches the most physics and adds the least λ.
