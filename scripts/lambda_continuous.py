@@ -11,10 +11,18 @@ qualitatively different behaviours:
   • BOX (position records): no natural floor — you can localise position arbitrarily
     (paying in momentum), so H_B ≈ B + h_diff(Φ) grows with the budget. The bit limit
     just caps the position resolution Δx ≳ L/2^B.
-  • OSCILLATOR (phase-space records): the uncertainty principle gives a minimum cell
-    of area 2πℏ, so H_B SATURATES at the ℏ-cell entropy — extra bits buy nothing once
-    you resolve to ℏ. A coherent state IS one cell (needs ~0 bits); a Fock |n> spreads
-    over a ring of ~√n cells.
+  • OSCILLATOR (phase-space records): the EFFECTIVE semiclassical cell has area 2πℏ
+    (the Weyl density of states), so H_B SATURATES near the ℏ-cell entropy — extra
+    bits buy nothing once you resolve to ℏ. A coherent state is ~one cell; a Fock |n>
+    spreads over a ring of ~√n cells.
+
+CAVEAT (per GPT-5.5-pro consult, verified): the 2πℏ Husimi cell is an EFFECTIVE
+semiclassical cell, NOT an exact distinguishable record. Coherent states are
+non-orthogonal (|⟨α|β⟩|² = e^{-|α-β|²}); the Husimi Q is a POVM (heterodyne) smoothing,
+not a projective branch decomposition; and a pure coherent state has von Neumann
+entropy 0 — its ≈1.44-bit Wehrl entropy is measurement coarse-graining, not intrinsic
+branch content (Lieb's Wehrl bound). So these H_B are "effective/typical bits," not
+exact index cardinality. The exact finite-index bound is on support, log2|R| ≤ B.
 
 Honest frame: standard decoherence/phase-space counting in (Φ,λ) language; the
 holographic Q_R cap is astronomically slack for everyday systems (decoherence sets
@@ -112,7 +120,10 @@ def husimi(name):
                       + cmath.exp(-abs(b) ** 2 / 2 - abs(a) ** 2 / 2 - b.conjugate() * a))
                 grid[i][j] = abs(ov / math.sqrt(norm)) ** 2 / math.pi
     elif name.startswith("squeezed"):
-        # squeezed vacuum, real squeeze r: Husimi is an area-PRESERVING ellipse
+        # squeezed vacuum, real squeeze r. The WIGNER symplectic area is preserved
+        # (ΔxΔp = ℏ/2), but the HUSIMI footprint is NOT: heterodyne adds vacuum noise,
+        # so W_Q(r) = log2 e + log2(cosh r) bits — squeezing COSTS net record bits here
+        # (the anti-squeezed quadrature dominates). The 2.7 > 2.0 b below shows exactly this.
         #   Q ∝ sech(r) exp[ -u²(1-tanh r) - v²(1+tanh r) ]   (u=x-quad anti-squeezed, v=p-quad squeezed)
         r = 1.1; t = math.tanh(r)
         for i in range(NB):
@@ -181,15 +192,15 @@ def run_ho():
     print("        there overlap), so that growth is unphysical over-counting. Read AT the ℏ")
     print("        floor (area ≈ 2πℏ, the '1.27' column):")
     print("          coherent ≈ 2.0 b — one compact ℏ-cell (the floor case)")
-    print("          squeezed ≈ 2.7 b — AREA-PRESERVING ellipse: squeezing REDISTRIBUTES bits")
-    print("                             between quadratures (narrow p ⇒ fewer p-bits, wide x ⇒")
-    print("                             more x-bits); same intrinsic area — reshapes, doesn't add")
+    print("          squeezed ≈ 2.7 b — WIGNER area preserved (ΔxΔp=ℏ/2), but the HUSIMI readout")
+    print("                             COSTS net bits: W_Q(r)=log2 e+log2(cosh r); the anti-squeezed")
+    print("                             quadrature dominates (2.7 > coherent's 2.0). Not free.")
     print("          thermal  ≈ 3.0 b — MIXED: footprint GROWS with T, area ≈ (1+n̄) cells, so")
     print("                             H ≈ coherent + log2(1+n̄) — heating genuinely ADDS records")
     print("          Fock|5>  ≈ 3.7 b — a √n ring of cells;   cat ≈ 3.0 b — two blobs")
     print("        The bit budget caps the # of ℏ-cells = accessible phase-space area = the")
-    print("        energy range — the uncertainty floor on λ. Squeezing reshapes the records;")
-    print("        temperature adds them; the holographic Q_R is the (slack) outer cap.")
+    print("        energy range — the uncertainty floor on λ. Squeezing COSTS bits under this")
+    print("        readout; temperature adds them; the holographic Q_R is the (slack) outer cap.")
     print()
     for name in ["coherent α=1.6", "squeezed r=1.1", "thermal n̄=2", "Fock |5>", "cat |2>+|-2>"]:
         heatmap(husimi(name), name)
@@ -232,8 +243,10 @@ def run_truncation():
         else:
             eff = "truncated: ⟨n⟩,S suppressed"
         print("  {:<4}{:<8}{:<10.3f}{:<12.3f}{:<12.3f}{}".format(B, N, mean_n, S_N, E, eff))
-    print("  → S_N → min(S_full, B): the budget CAPS the entropy (this is the Bekenstein–Hawking")
-    print("    statement S ≤ A/4). For B ≫ S (lab thermal systems) it is slack — ⟨n⟩,S unchanged;")
+    print("  → S_N → min(S_full, B) (a cartoon envelope): the budget CAPS the entropy — the SAME")
+    print("    abstract form as Bekenstein–Hawking S ≤ A/4, but NOT BH physics (this cutoff is a")
+    print("    modified Hilbert space, not λ; S_BH counts gravitational microstates, not a thermal")
+    print("    oscillator's n̄). For B ≫ S (lab thermal systems) it is slack — ⟨n⟩,S unchanged;")
     print("    it only bites at saturation B ≲ S (horizons), and there it is QG, not λ.")
 
     # show the distribution: slack budget vs truncating budget
@@ -326,9 +339,11 @@ def run_gravity():
         S_bits = A / (4 * lP2) / math.log(2)
         TH = hbar * c ** 3 / (8 * math.pi * G * M * kB)
         print("  {:<18}{:<13.2e}{:<14.2e}{:<14.2e}{}".format(label, Rs, S_bits, TH, "SATURATED (S = A/4)"))
-    print("  → S_BH = A/(4ℓ_P²) = Q_R(horizon): the black hole is exactly at saturation, set by G;")
-    print("    its Hawking radiation is the truncated thermal spectrum. This is Bekenstein–Hawking")
-    print("    (standard quantum gravity). G anchors the bit-limit to spacetime — it does NOT make")
+    print("  → S_BH = A/(4ℓ_P²) = Q_R(horizon): the black hole is exactly at saturation, set by G.")
+    print("    (Units note: Q_R ∝ 1/G holds at FIXED AREA; at fixed MASS, S_BH ∝ G M². And the toy")
+    print("    truncation only MIMICS the abstract finite-dim cap — Hawking radiation is NOT literally")
+    print("    this oscillator's truncated spectrum; S_BH is gravitational microstate count.) This is")
+    print("    Bekenstein–Hawking (standard quantum gravity). G anchors the bit-limit — it does NOT make")
     print("    λ observable: λ stays inert ⇒ still = Everett. (A genuine λ-effect would need λ to")
     print("    couple dynamically — abandoning inert-λ — which is the speculative, non-Born route.)")
 

@@ -27,15 +27,15 @@ HARMONIC OSCILLATOR — phase-space (coherent-state) records, Husimi Q.
         there overlap), so that growth is unphysical over-counting. Read AT the ℏ
         floor (area ≈ 2πℏ, the '1.27' column):
           coherent ≈ 2.0 b — one compact ℏ-cell (the floor case)
-          squeezed ≈ 2.7 b — AREA-PRESERVING ellipse: squeezing REDISTRIBUTES bits
-                             between quadratures (narrow p ⇒ fewer p-bits, wide x ⇒
-                             more x-bits); same intrinsic area — reshapes, doesn't add
+          squeezed ≈ 2.7 b — WIGNER area preserved (ΔxΔp=ℏ/2), but the HUSIMI readout
+                             COSTS net bits: W_Q(r)=log2 e+log2(cosh r); the anti-squeezed
+                             quadrature dominates (2.7 > coherent's 2.0). Not free.
           thermal  ≈ 3.0 b — MIXED: footprint GROWS with T, area ≈ (1+n̄) cells, so
                              H ≈ coherent + log2(1+n̄) — heating genuinely ADDS records
           Fock|5>  ≈ 3.7 b — a √n ring of cells;   cat ≈ 3.0 b — two blobs
         The bit budget caps the # of ℏ-cells = accessible phase-space area = the
-        energy range — the uncertainty floor on λ. Squeezing reshapes the records;
-        temperature adds them; the holographic Q_R is the (slack) outer cap.
+        energy range — the uncertainty floor on λ. Squeezing COSTS bits under this
+        readout; temperature adds them; the holographic Q_R is the (slack) outer cap.
 
   Husimi Q — coherent α=1.6  (x→, p↑; one ℏ-cell ≈ 5×5 chars)
                             
@@ -185,8 +185,10 @@ Budget B ⇒ only N = 2^B levels exist; the high-energy tail is CUT and renormal
   6   64      4.999     3.900       5.499       slack — no effect
   7   128     5.000     3.900       5.500       slack — no effect
   8   256     5.000     3.900       5.500       slack — no effect
-  → S_N → min(S_full, B): the budget CAPS the entropy (this is the Bekenstein–Hawking
-    statement S ≤ A/4). For B ≫ S (lab thermal systems) it is slack — ⟨n⟩,S unchanged;
+  → S_N → min(S_full, B) (a cartoon envelope): the budget CAPS the entropy — the SAME
+    abstract form as Bekenstein–Hawking S ≤ A/4, but NOT BH physics (this cutoff is a
+    modified Hilbert space, not λ; S_BH counts gravitational microstates, not a thermal
+    oscillator's n̄). For B ≫ S (lab thermal systems) it is slack — ⟨n⟩,S unchanged;
     it only bites at saturation B ≲ S (horizons), and there it is QG, not λ.
   --- record distribution p_n ---
     slack budget (B=7, N=128):
@@ -264,9 +266,11 @@ ADDING G — the bit budget is GRAVITATIONAL: Q_R = A/(4ℓ_P²),  ℓ_P² = ℏ
   1 kg BH           1.49e-27     3.83e+16      1.23e+23      SATURATED (S = A/4)
   solar-mass BH     2.95e+03     1.51e+77      6.17e-08      SATURATED (S = A/4)
   10⁹ M_sun SMBH    2.95e+12     1.51e+95      6.17e-17      SATURATED (S = A/4)
-  → S_BH = A/(4ℓ_P²) = Q_R(horizon): the black hole is exactly at saturation, set by G;
-    its Hawking radiation is the truncated thermal spectrum. This is Bekenstein–Hawking
-    (standard quantum gravity). G anchors the bit-limit to spacetime — it does NOT make
+  → S_BH = A/(4ℓ_P²) = Q_R(horizon): the black hole is exactly at saturation, set by G.
+    (Units note: Q_R ∝ 1/G holds at FIXED AREA; at fixed MASS, S_BH ∝ G M². And the toy
+    truncation only MIMICS the abstract finite-dim cap — Hawking radiation is NOT literally
+    this oscillator's truncated spectrum; S_BH is gravitational microstate count.) This is
+    Bekenstein–Hawking (standard quantum gravity). G anchors the bit-limit — it does NOT make
     λ observable: λ stays inert ⇒ still = Everett. (A genuine λ-effect would need λ to
     couple dynamically — abandoning inert-λ — which is the speculative, non-Born route.)
 
