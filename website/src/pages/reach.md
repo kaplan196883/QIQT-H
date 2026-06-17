@@ -112,6 +112,22 @@ cannot produce a resolution cap, a cooling, or a deviation. So the map says, cle
 can measure, standard quantum gravity where it saturates, and λ inert throughout — operationally Everett across
 the whole chart.**
 
+<div class="note">
+
+<strong>The relativistic rung — the Dirac equation.</strong> The study extends cleanly to the relativistic
+case, and it is the richest of the three. A particle in a box has <em>no</em> position floor (you can localise
+it arbitrarily); the oscillator has a floor in <em>phase space</em> (the $2\pi\hbar$ cell); the Dirac equation
+has a floor in <em>position itself</em>, set by the mass — the Compton wavelength $\lambda_C = \hbar/mc$. Try
+to localise an electron below it and the energy cost exceeds $2mc^2$, so the vacuum makes electron–positron
+pairs and the single-particle position <em>record</em> dissolves. The record resolution saturates at
+$\lambda_C$ ($\sim$35 bits in a centimetre), and the 4-spinor adds a clean <em>2-qubit internal</em> record
+(spin ⊗ particle/antiparticle) — the <a href="/ladder">bit → qubit ladder</a> realised in a real relativistic
+equation. Yet the verdict is identical: the floor is <strong>pair production</strong> (set by the mass —
+standard relativistic QFT), not λ and not holography (the budget stays $\sim$70 orders slack); λ inert ⇒ still
+operationally Everett. The richest case, and still thesis-empty.
+
+</div>
+
 ## The one wall, every time
 
 Notice the pattern. Dark matter, the infinities of quantum gravity, decoherence rates, a quantum-computing
