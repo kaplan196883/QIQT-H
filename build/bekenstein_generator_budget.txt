@@ -11,10 +11,12 @@ PART 1 — Bekenstein budget I = 2πRE/(ℏc·ln2) for real systems (energy × s
   1 µm trapped-ion qubit    1.00e-06     3.20e-19     9.188e+01      optical transition energy
   dust grain (1 µg)         1.00e-05     8.99e+07     2.577e+29      
 
-  Single elementary quanta carry an astonishingly SMALL Bekenstein budget: ~9 bits (electron),
-  ~57 bits (any single photon — wavelength-independent, since R·E = ℏc is fixed). Energy×size, not
-  area, makes it tiny. THIS is the budget that would limit a generator whose hidden state lives in
-  the quantum source.
+  A MINIMALLY-LOCALIZED elementary quantum has a small Bekenstein budget — O(10–100) bits. (The
+  exact number is convention-dependent: 2π/ln2≈9 with the reduced wavelength, 4π²/ln2≈57 with the
+  full wavelength; the electron-9-vs-photon-57 split above is that 2π artifact, NOT a clean
+  invariant. A quantum spread over many wavelengths / a larger orbit has a proportionally larger
+  budget.) This small budget bounds a generator ONLY IF its whole persistent state is confined to
+  that bare quantum — a strong, probably-false assumption (see Part 4).
 
 ======================================================================================
 PART 2 — Bekenstein (energy) vs Holographic (area): Bekenstein is far tighter
@@ -35,47 +37,47 @@ PART 2 — Bekenstein (energy) vs Holographic (area): Bekenstein is far tighter
 ======================================================================================
 PART 3 — the finite-generator prediction meets data: Born breaks at ~2^B
 ======================================================================================
+  *** TOY MODEL ONLY: assumes the generator's WHOLE persistent state is confined to the bare
+  quantum source. This is probably false (real QRNGs are apparatus-scale — see Part 4). ***
   A generator whose state has Bekenstein budget B bits fakes Born only up to ~2^B outcomes.
   Quantum-RNG data tested for structure ≈ 10^15 bits (≈ 2^50); none found.
 
-  source (if it holds λ-state)B (bits)      break at 2^B          vs ~10^15 tested?
+  source (if it held λ-state)B (bits)      break at 2^B          vs ~10^15 tested?
   ------------------------------------------------------------------------------------
-  single electron           9.065         5.35e+02              ALREADY EXCLUDED (break ≪ tested)
-  single photon             56.96         1.40e+17              AT THE FRONTIER (break ≈ tested)
-  1 µm ion qubit            91.88         4.54e+27              safe (break ≫ tested)
-  electron in atom          1242          > 10^300              safe (break ≫ tested)
-  dust grain (1 µg)         2.577e+29     > 10^300              safe (break ≫ tested)
+  single electron           9.065         5.35e+02              excluded — but ONLY this toy
+  single photon             56.96         1.40e+17              toy at the frontier
+  1 µm ion qubit            91.88         4.54e+27              toy safe (break ≫ tested)
+  electron in atom          1242          > 10^300              toy safe (break ≫ tested)
+  dust grain (1 µg)         2.577e+29     > 10^300              toy safe (break ≫ tested)
 
-  The punchline: the bare single-ELECTRON budget (~9 bits ⇒ break at ~500 outcomes) is WILDLY
-  excluded — electron-based randomness has produced far more than 2^9 bits with no structure. The
-  single-PHOTON budget (~57 bits ⇒ break at ~10^17) sits right at the frontier of what has been
-  tested. So a finite generator whose hidden state lives in the bare quantum SOURCE is already
-  disfavoured (electron) or about to be tested (photon).
+  Read this ONLY as 'the toy source-local automaton is testable': a generator that is genuinely an
+  isolated ~9-bit electron-automaton would repeat within ~500 outcomes and is trivially out. But a
+  real QRNG amplifies the quantum event through a macroscopic apparatus, so the relevant state is
+  apparatus-scale (Part 4), NOT 9 bits. So these rows do NOT exclude real deterministic models —
+  they only kill the artificial 'one tiny isolated automaton makes the whole stream' caricature.
 
 ======================================================================================
 PART 4 — honest verdict
 ======================================================================================
-  Bekenstein is the first thing in this whole thread to make the finite-λ-generator idea TOUCH
-  DATA. Where the holographic budget gave an untestable 2^(10^70), the Bekenstein (energy×size)
-  budget of a single quantum is only ~9–57 bits, so:
+  HONEST VERDICT (after the 13th GPT-5.5-pro consult, which deflated the strong claim):
 
-   • If the generator's hidden state lives in the quantum SOURCE itself, its faking window is just
-     ~2^9 … 2^57 outcomes. The electron case (~500) is ALREADY EXCLUDED by quantum-RNG data; the
-     photon case (~10^17) is at the current experimental frontier. So this version is testable —
-     and the smallest budgets are already ruled out.
+   • Bekenstein gives a small budget (O(10–100) bits) ONLY for an autonomous generator whose entire
+     persistent state is confined to a minimally-localized elementary quantum. That toy source-local
+     model IS testable, and for B ≲ 50 is already incompatible with long QRNG records.
 
-   • That forces a fork. EITHER the λ-generator's state is NOT the bare quantum but a much larger
-     system (the apparatus, the environment, the causal diamond) whose Bekenstein/holographic budget
-     is large again ⇒ back to untestable, but with a clear physical question ('what holds the
-     state?'). OR one takes the small-source budget seriously, in which case single-quantum
-     randomness ALREADY disfavours a Bekenstein-limited finite generator — i.e. the data favours
-     true Born / inert-λ over a finite generator for those degrees of freedom.
+   • But that is a strawman for real physics. Bekenstein bounds the COMPLETE system, not a chosen
+     subsystem; quantum outcomes depend on source + apparatus + detector + environment, and
+     deterministic hidden-variable theories are normally contextual/global (Bell/Kochen–Specker), so
+     λ's state naturally lives in the apparatus/environment/causal past. A gram-scale apparatus at
+     R~0.1 m has a Bekenstein budget ~10^39 bits ⇒ a faking window ~2^(10^39) ⇒ UNTESTABLE again.
 
-   • Either way this is genuine progress: a concrete, energy-based, system-specific budget; a real
-     (already partly excluded) prediction; and a sharp open question — WHERE does the generator's
-     state live, and therefore what is its energy and Bekenstein budget?
+   • So Bekenstein does NOT give a real 'first contact with data'. The 'electron already excluded'
+     line was an ARTIFACT of mis-assigning the generator's state to the bare particle. It excludes
+     only the caricature, not deterministic/contextual models.
 
-  CAVEATS (unchanged): still the speculative deterministic/superdeterministic GENERATOR fork (owes
-  Bell its price); 'how much has been tested for structure' is an order-of-magnitude estimate; and
-  the choice of E for a system (transition energy vs total rest energy) shifts B and is part of the
-  open question above.
+  WHAT SURVIVES (the honest, modest gain): Bekenstein is the right, energy-based way to ASK 'how
+  small could the relevant budget be?', and it sharpens the genuine open question — WHERE does the
+  λ-generator's state physically live? If one could argue, physically, that it is confined to a small
+  system (against the Bell/KS pressure to make it contextual), the prediction would become testable.
+  Absent that argument, the budget is apparatus/causal-past-scale and the prediction stays untestable.
+  This does NOT belong on the public site as a testable claim — it would overclaim.
