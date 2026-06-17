@@ -219,15 +219,18 @@ simple → fractal (Rule 90 = Sierpiński) → chaos (Rule 30, a known pseudo-ra
 (Rule 110, Turing-complete). This *sharpens* the wall rather than evading it: a fractal is the *compressible*
 extreme (low Kolmogorov complexity) — the **opposite** of a Born-random record — so a few-bit machine can supply
 the **scaffold** of λ (self-similar record geometry) and **pseudo-random frequencies** (chaotic rules), but not the
-incompressible Born **content**. Even Rule 110's universality does not rescue the idea — it *proves* it closed. By the
-**invariance theorem** of algorithmic information ($K_U(x) = K_V(x) + O(1)$ for any universal machines $U,V$),
-all universal rules are equivalent up to a constant, so *which* rule is irrelevant, and universality means the
-rule is **content-free**: it can run anything, hence carries no specific information. The world's information is
-therefore entirely in the **initial condition** — $K(\text{output}) \le K(\text{rule}) + K(\text{IC})$ with
-$K(\text{rule}) = O(1)$, so $K(\text{IC}) \gtrsim K(\text{output})$. To compute the actual, incompressible
-(Born-random) history the IC must itself be incompressible ($\sim$ the cosmic entropy); the few-bit universal rule
-contributes nothing. Universality is precisely the proof that the few bits were never going to hold the world's
-information — it is in the input. The one genuinely suggestive residue is a *texture* observation, not a generator:
+incompressible Born **content**. Rule 110's universality does not rescue the idea — but the honest reason is more general than universality
+(14th–15th GPT-5.5-pro consults). For *any* fixed computable rule $R$ and decoder, a finite decoded history
+$h_n$ from initial data $i$ obeys $K(h_n) \le K(i) + K(n) + O(1)$: a fixed deterministic map cannot add more than
+a constant to the algorithmic complexity. The **invariance theorem** ($K_U = K_V + O(1)$) then makes the *choice*
+of universal rule irrelevant, and universality only lets Rule 110 act as an *interpreter* once the input is
+supplied — it does not remove the need for that input. So *if* the actual single branch is Born / Martin–Löf
+random — its prefixes having complexity of order their Born *surprisal* (Levin–Schnorr) — that information must
+live in the **initial condition** (or some other counted boundary/selection datum), and an incompressible branch
+needs an incompressible IC. A few-bit rule plus a *genuinely few-bit* input can yield only a *computable or
+pseudo-random-looking* history, never an algorithmically random one. (The pseudo-random / bounded-observer escape
+is exactly the untestable generator fork above, not a refutation; and $K(\text{IC})$ is an uncomputable lower
+bound, not a certifiable count.) The one genuinely suggestive residue is a *texture* observation, not a generator:
 the actual world (persistent structure in a quasi-random background) resembles Wolfram **Class 4, the "edge of
 chaos"**; whether the record net being critical / Class-4 *constrains* admissible Born content is the single open
 lead this opened.
