@@ -1,0 +1,74 @@
+================================================================================
+PART 1 — Rule 110: Turing-complete, Class 4 (edge of chaos). From a SINGLE seed:
+================================================================================
+  width 401, 220 steps from one seed cell.
+  frequency = 0.158 ;  zlib compress-ratio = 0.183  ⇒  structured (low-K), NOT random.
+
+  a 60×24 window of the evolution (· = 0, █ = 1) — note the regular background + structures:
+    ······························█·····························
+    ····························███·····························
+    ··························█████·····························
+    ························███··██·····························
+    ······················███████·█·····························
+    ····················███····██·█·····························
+    ··················█████··██···█·····························
+    ················███··████·█·███·····························
+    ··············████████·██···███·····························
+    ············███·····██··█·█████·····························
+    ··········█████···██·███··█··██·····························
+    ········███··██·██···████████·█·····························
+    ······███████····█·███·····██·█·····························
+    ····███····██··██··███···██···█·····························
+    ··█████··██·███·██████·██·█·███·····························
+    ███··████···███·█···██······███·····························
+    ██████·██·█████·█·██·█····█████·····························
+    ····██····█··██······█··███··██·····························
+    ··██·█··█████·█····██████████·█·····························
+    ██···████··██·█··███·······██·█·····························
+    ·█·███·████···██████·····██···█·····························
+    █··███·█·██·███···██···██·█·███·····························
+    ██████······███·██·█·██·····███·····························
+    █···██····█████·······█···█████·····························
+
+  Rule 110 makes genuine COMPLEXITY from one seed — a regular striped background with persistent
+  diagonal 'gliders' that collide and interact (this is what makes it Turing-complete). But the
+  pattern is still COMPRESSIBLE (low Kolmogorov K): structured, not Born-random.
+
+================================================================================
+PART 2 — the apparent randomness comes from the INITIAL CONDITION, not the 8-bit rule
+================================================================================
+  initial condition         output frequency   output zlib-ratio   apparent character
+  ----------------------------------------------------------------------------
+  single seed (≈0 bits)     0.158              0.183               structured / low-K
+  random IC (W random bits) 0.574              0.712               looks RANDOM (to a bounded observer)
+
+  Same 8-bit rule. A simple IC gives structured output; a RANDOM IC gives output that LOOKS random.
+  So the rule does not CREATE randomness — it PROPAGATES the input's. (True Kolmogorov K of the
+  random-IC run is still only ~W bits — the IC — but zlib, a bounded observer, cannot reverse the CA
+  and so sees it as incompressible: the pseudo-random regime.) To make the output truly incompressible
+  to EVERY observer, the IC itself must be truly incompressible.
+
+================================================================================
+PART 3 — verdict: universality is the strongest few-bit machine, and it CLOSES the line
+================================================================================
+  Rule 110 is the strongest possible 'fractal machine from few bits' — 8 bits, Turing-complete,
+  able to compute ANY computable output. And precisely because it is universal, it settles the idea:
+
+   • The MACHINE (the 8-bit rule ≈ simple universal laws) can be minimal. But what it computes lives
+     in the INITIAL CONDITION (the program/input) — universality moves the information to the IC, it
+     does not compress it. K(output) ≤ K(rule) + K(IC), and for an incompressible output K(IC) must be
+     ~K(output). So a Born-random (incompressible) world needs an incompressible IC; the few-bit rule
+     buys nothing there.
+
+   • A few-bit IC + a universal rule gives PSEUDO-random output — looks random to bounded observers
+     (us), low-K, the generator fork (Bell ⇒ superdeterminism; period ⇒ Poincaré recurrence ⇒
+     untestable). Exactly the status we mapped; Rule 110 makes it sharpest.
+
+  THE CONSTRUCTIVE RESIDUE (a real idea, not a generator). Rule 110 is CLASS 4 — the edge of chaos,
+  where complex structures emerge and compute. The actual world's TEXTURE is like this: persistent
+  structure (atoms, galaxies, life, records) in a quasi-random background (quantum outcomes) — neither
+  a boring fractal nor structureless chaos. That 'edge of chaos' character is the genuinely suggestive
+  thing the fractal-machine idea points at — but it is an observation about the TEXTURE of actuality,
+  not a few-bit GENERATOR of the incompressible Born content. The laws can be Rule-110-simple and
+  universal; the actual history's information is in the initial condition; and the true-random Born
+  part is, as ever, the brute incompressible λ of the paper — the Martin–Löf wall, seen from the top.
