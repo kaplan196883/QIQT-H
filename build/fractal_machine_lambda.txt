@@ -1,0 +1,70 @@
+================================================================================
+PART 1 — the 8-bit 'fact' space: 256 elementary CA rules, each a fractal machine
+================================================================================
+  Of 256 rules (8-bit facts), the unfolded patterns sort by compressibility (zlib ratio):
+    SIMPLE  (ratio<0.06, near-trivial/periodic):  180 rules
+    FRACTAL (0.06–0.45, self-similar, low-K):      69 rules
+    CHAOTIC (>=0.45, random-LOOKING):              7 rules
+
+  Notable rules (rule : frequency : compress-ratio : character):
+      0 : f=0.000 : ratio=0.004 : all-0 (trivial)
+     90 : f=0.047 : ratio=0.072 : Sierpiński triangle (FRACTAL)
+     18 : f=0.047 : ratio=0.072 : fractal
+     22 : f=0.062 : ratio=0.072 : fractal
+    110 : f=0.145 : ratio=0.177 : universal / complex
+     30 : f=0.254 : ratio=0.406 : CHAOTIC — used as a PRNG
+     45 : f=0.495 : ratio=0.606 : chaotic
+    255 : f=0.995 : ratio=0.004 : all-1 (trivial)
+
+  The same 8-bit machine spans the whole spectrum: most rules give COMPRESSIBLE structure (simple or
+  fractal, low Kolmogorov complexity), and a few (Rule 30, 45…) give CHAOTIC, random-LOOKING output
+  that zlib cannot compress. So 'λ = a fractal from few bits' is a real, finite construction — the
+  fact is 8 bits, the unfolding is unbounded.
+
+================================================================================
+PART 2 — what a few-bit fractal machine can and cannot supply for λ
+================================================================================
+  source                          frequency   compress-ratio   reproducible from 8 bits?
+  ----------------------------------------------------------------------------
+  Rule 90 (Sierpiński, fractal)   0.047       0.072            YES (low K)
+  Rule 30 (chaotic, PRNG-like)    0.254       0.406            YES (low K)
+  true random (reference)         0.499       1.001            no (incompressible)
+
+  Rule 90 is a FRACTAL: highly compressible, visibly structured — it does NOT look random (it fails
+  Born-frequency/randomness tests immediately). It is the OPPOSITE of random. Rule 30 is CHAOTIC: it
+  LOOKS random (zlib barely compresses it) and is even used as a PRNG — but it is still generated from
+  8 bits, so its true Kolmogorov complexity is tiny and it is exactly reproducible. Only the true-random
+  reference is genuinely incompressible.
+
+  So a few-bit fractal machine gives you TWO things, neither of which is the Born content:
+   • FRACTAL rules → COMPRESSIBLE STRUCTURE = the SCAFFOLD of λ (the self-similar record/holographic
+     geometry). Real and useful — but structure, not outcomes.
+   • CHAOTIC rules → PSEUDO-RANDOM frequencies = fakes Born up to ~2^(8 bits) before its determinism
+     shows. This is the generator fork (Rule 30 ≈ a tiny 't Hooft machine).
+
+================================================================================
+PART 3 — honest verdict: where the fractal-machine λ fits
+================================================================================
+  'λ = a fractal from a few-bit fact' is a genuine, concrete construction — the 8-bit CA rule IS
+  the fact, the unfolded pattern IS λ. It makes 'few bits → λ' tangible. But it lands exactly where
+  the whole generator thread did, and the fractal framing actually sharpens WHY:
+
+   1. A fractal is the COMPRESSIBLE / structured extreme (low Kolmogorov complexity). A Born-typical
+      actual record is INCOMPRESSIBLE (Martin–Löf random). So a fractal-generated outcome sequence is
+      detectably NON-Born — it fails randomness tests immediately. A fractal cannot BE the Born content.
+
+   2. What a few-bit machine CAN supply: (a) the SCAFFOLD — the self-similar record/holographic
+      geometry of λ (fractal rules); (b) PSEUDO-random frequencies — chaotic rules (Rule 30) fake Born
+      up to ~2^(seed) before repeating. Both are low-K (the generator fork), with its costs: Bell ⇒
+      superdeterminism, and the period buried at the Poincaré recurrence ⇒ untestable.
+
+   3. The 'space of all few-bit fractals' is a FINITE actuality-structure space (256 here; 2^B in
+      general). That is the genuine 'Quantized Information' content — a finite menu of possible λ
+      STRUCTURES. But the actual high-entropy world cannot be a low-K fractal: its incompressible Born
+      content must be filled in on top of whatever scaffold the machine provides.
+
+  NET: the fractal machine beautifully realises 'few bits → λ' for the STRUCTURE of actuality (the
+  scaffold, and pseudo-random frequencies), but the true-random, incompressible Born CONTENT is not
+  something a few-bit fractal machine can generate — that is the Martin–Löf wall, seen one more way.
+  It is the same honest fork: structure/pseudo-Born from few bits (inert or untestable), vs the brute
+  true-random λ of the paper.
