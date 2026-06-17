@@ -1,0 +1,117 @@
+================================================================================
+PART 1 — a finite RULE (1 byte) generates an UNBOUNDED self-similar structure
+  Rule 90 (new = left XOR right) from one seed cell ⇒ the Sierpiński triangle.
+  The RULE is constant (1 byte); the unfolded pattern grows without limit.
+================================================================================
+  depth D    unfolded cells (~2D²)    rule size (bits, constant)
+  ------------------------------------------------------------
+  8          136                     ≈ 8 (rule) + ~log2(D) (depth) + 1 (seed)
+  32         2,080                   ≈ 8 (rule) + ~log2(D) (depth) + 1 (seed)
+  128        32,896                  ≈ 8 (rule) + ~log2(D) (depth) + 1 (seed)
+  512        524,800                 ≈ 8 (rule) + ~log2(D) (depth) + 1 (seed)
+
+  The whole infinitely-detailed fractal is regenerated, to ANY depth, from the SAME ~12 bits:
+  'Rule 90, single seed, run D steps'. Unbounded structure, finite generating information. This is
+  the existence proof for 'infinitely complex structure that fits in a finite λ': the information
+  is in the RULE, not in the unfolded structure.
+
+================================================================================
+PART 2 — compressed (≈ algorithmic) size vs raw size: fractal vs random
+  zlib-compressed bits = practical upper bound on Kolmogorov K. Fractal: K ≪ raw and
+  grows slowly; random: K ≈ raw (incompressible).
+================================================================================
+  depth D   raw bits     fractal K (bits)   random K (bits)   fractal/raw
+  ------------------------------------------------------------------
+  16        528          336                616               0.636
+  32        2,080        608                2,168             0.292
+  64        8,256        1,352              8,344             0.164
+  128       32,896       3,136              32,984            0.095
+  256       131,328      7,504              131,440           0.057
+
+  The fractal's compressed size is a small FRACTION of its raw size and that fraction SHRINKS as the
+  structure grows (self-similarity = redundancy = compressibility). The random structure does not
+  compress at all (K ≈ raw). The true algorithmic bound for the fractal is even smaller — the ~12-bit
+  generating program of Part 1 — which zlib only approaches. So: structured ⇒ finite information;
+  random ⇒ information = size.
+
+================================================================================
+PART 3 — the CONSTRAINT: under a finite Q_R (on the COMPRESSED description),
+  only COMPRESSIBLE histories are admissible as actual
+================================================================================
+  Q_R = 4096 bits (budget on the compressed/algorithmic description).
+  history (unfolded)         raw bits     compressed K     fits in Q_R?
+  --------------------------------------------------------------------
+  fractal depth 64           8,256        1,352            YES — admissible
+  fractal depth 128          32,896       3,136            YES — admissible
+  fractal depth 256          131,328      7,504            no — too complex
+  fractal depth 512          524,800      17,384           no — too complex
+  random 2048 bits           2,048        2,136            YES
+  random 8192 bits           8,192        8,280            no — INCOMPRESSIBLE, exceeds Q_R
+  random 32768 bits          32,768       32,856           no — INCOMPRESSIBLE, exceeds Q_R
+
+  So a finite Q_R on the COMPRESSED description does NOT cap the unfolded complexity (deep fractals
+  pass) — it caps the ALGORITHMIC complexity. The admissible actual histories are exactly the
+  algorithmically SIMPLE (compressible) ones; random/incompressible histories are excluded once they
+  exceed Q_R. THIS is the substantive constraint: 'actuality is low-complexity', basis-independent,
+  not a weight-truncation and not a literal Hilbert cut.
+
+================================================================================
+PART 4 — compressibility ↔ CLASSICALITY: redundant records compress, random don't
+  Classical record = one value X imprinted R times (Quantum Darwinism). Generic state =
+  R independent random values. Compressed size: H(X) vs R·H(X).
+================================================================================
+  one fact X = 64 bytes (H(X) = 512 bits);  R = 2000 redundant imprints
+  record type               raw bits      compressed K    ≈
+  ----------------------------------------------------------------
+  classical (R copies of X) 1,024,000     3,896           H(X)-scale: ≪ R·H(X)=1,024,000; true K~523 (+zlib overhead)
+  generic (R random values) 1,024,000     1,024,368       ≈ R·H(X) — incompressible
+  compression ratio:  classical 263× vs generic 1.00×
+
+  The redundant CLASSICAL record collapses to ~H(X) under compression — exactly the machine-checked
+  RedundancyCompressible fact (R copies carry H(X), not R·H(X)) — so it is ADMISSIBLE under a finite
+  Q_R. The generic state is incompressible and is NOT. Decohered/classical records ARE the redundant,
+  Quantum-Darwinism-imprinted ones — so 'compressible ⇒ admissible' coincides with 'classical /
+  einselected'. Information-finiteness and classicality are the same condition seen two ways.
+
+================================================================================
+PART 5 — unbounded DEPTH, constant generating information (the fractal-λ picture)
+================================================================================
+  The generating program 'Rule 90, seed, D steps' has size ~ 8 + log2(D) + 1 bits:
+  depth D            generating size (bits)   unfolded cells
+  ------------------------------------------------------------
+  2^10              19                       ~ 2·D² (astronomically large)
+  2^20              29                       ~ 2·D² (astronomically large)
+  2^40              49                       ~ 2·D² (astronomically large)
+  2^80              89                       ~ 2·D² (astronomically large)
+
+  Depth (apparent complexity) grows without limit; the generating size grows like log2(D) — so for
+  any realistic Q_R the rule fits with room to spare while the designated structure is unbounded.
+  That is exactly 'λ is information-finite, yet designates an infinitely complex (fractal) actuality':
+  λ ≈ the finite RULE; the actuality ≈ its unbounded unfolding.
+
+================================================================================
+PART 6 — honest verdict
+================================================================================
+  'Finite information, infinitely complex structure in λ' — coherent and correct, via
+  ALGORITHMIC information: the Q_R bound is on the generating RULE (compressed description), not on
+  the unfolded structure. A fractal proves it (Parts 1, 5). The bound caps complexity in the sense
+  of Kolmogorov K, not raw size (Part 2).
+
+  The substantive content is a CONSTRAINT (Part 3): under a finite Q_R on K, only algorithmically
+  SIMPLE (compressible) histories can be actual — basis-independent, not weight-truncation, not a
+  Hilbert cut. And that condition COINCIDES with classicality (Part 4): decohered, redundantly
+  imprinted (Quantum-Darwinism) records are exactly the compressible ones, so 'admissible under Q_R'
+  ≈ 'classical/einselected'. This is the most promising bridge in the whole thread — it would
+  EXPLAIN why actuality is classical (because only compressible histories fit) and tie the finiteness
+  directly to the machine-checked RedundancyCompressible core.
+
+  HONEST STATUS (unchanged fork):
+   • As a DESCRIPTION of already-decohered records: inert, inherited from Φ ⇒ = Everett (the records
+     are already compressible; λ just indexes one). No new prediction.
+   • As a CONSTRAINT ('only K ≤ Q_R histories are actual'): genuine new content — the candidate
+     basis-independent law — but with the standing PRICE: one must prove Born and no-signaling
+     survive the restriction, and check the claim 'actual histories are compressible' where needed
+     (suggestive, since classical = compressible, but not yet a theorem here).
+   • zlib is only a PROXY (upper bound on K); the rigorous object is Kolmogorov complexity /
+     the generating program. Don't conflate unfolded complexity with information — that distinction
+     is the whole point.
