@@ -1,0 +1,61 @@
+================================================================================
+PART 1 — a B-bit λ-generator fakes Born up to N ~ 2^B, then BREAKS (exact period)
+  target Born frequency q = 0.3 ;  generator = full-period LCG with 2^B state
+================================================================================
+  B bits   period 2^B   f̂ over 1 period   N=3·period: exactly periodic?   detectable?
+  ----------------------------------------------------------------------------
+  8        256          0.2969            YES — repeats every 2^B        non-Born for N > 2^B
+  12       4,096        0.2998            YES — repeats every 2^B        non-Born for N > 2^B
+  16       65,536       0.3000            YES — repeats every 2^B        non-Born for N > 2^B
+  20       1,048,576    0.3000            YES — repeats every 2^B        non-Born for N > 2^B
+
+  Within one period (N < 2^B) the output has the right Born frequency and passes finite tests — it
+  'looks Born'. But the sequence is EXACTLY periodic with period 2^B: observe more than 2^B outcomes
+  and the 'quantum randomness' literally repeats. A finite-information generator cannot fake Born
+  forever — its faking window is ~2^B, set by its information budget. THAT is the real difference.
+
+================================================================================
+PART 2 — the output's algorithmic content is ~B bits (≪ N): compressible in principle
+================================================================================
+  B=16 generator; compress N bits (zlib finds the 2^B period once N exceeds it):
+    N (bits)     compressed bits   ratio   note
+    --------------------------------------------------------
+    32,768       29,528            0.901   looks random (N ≤ period)
+    65,536       58,456            0.892   looks random (N ≤ period)
+    131,072      59,312            0.453   COMPRESSES — period detected
+    393,216      61,704            0.157   COMPRESSES — period detected
+
+  Below the budget the output is incompressible (looks Born). Above it, the finite structure shows:
+  the compressed size saturates (the whole sequence is regenerable from the ~B-bit state), so the
+  ratio → 0 as N grows. A true-Born sequence would stay incompressible at every N. (zlib detects the
+  period once it exceeds the budget; an ideal observer sees compressibility for any N ≫ B.)
+
+================================================================================
+PART 3 — the scale of the break, and the honest verdict
+================================================================================
+  break data-size ≈ 2^B, set by the generator's information budget B:
+    budget B (bits)     break at N ≈ 2^B           status
+    ----------------------------------------------------------------
+    20 (toy)            ~10^6 events               BREAKS in a lab-scale dataset — observable
+    80 (~atom Planck)   ~10^24 events              beyond any experiment, but finite
+    Q_R ~ 10^70 (holo)  ~2^(10^70) events          never (universe has ~10^120 events) ⇒ = QM
+    S_BH (horizon)      saturated                  the one place a small budget could bite
+
+  THE PAYOFF (and it is the real one):
+   • You are RIGHT — limiting the λ-generator's information is exactly where a genuine, in-principle
+     OBSERVABLE difference from true Born appears: quantum randomness would show finite-information
+     structure (periodicity / compressibility / correlations) at data sizes approaching the budget.
+   • This is the program's actual EMPIRICAL CONTENT, and unlike the inert-λ reading it is FALSIFIABLE:
+     a concrete prediction — 'quantum randomness is finite-information pseudo-randomness'. (So far
+     every test of quantum RNGs finds NO structure — consistent with a very large budget.)
+   • THE CATCH is the scale: the break is at N ~ 2^B. For the holographic budget B ~ 10^70 that is
+     2^(10^70) events — unreachable — so it stays operationally = QM for everything we can measure.
+     A difference is observable only if the budget is SMALL: horizons, or quantum randomness being
+     far more information-limited than holography says (a bold, testable-in-principle hypothesis).
+   • HONEST COST: this is the deterministic/superdeterministic GENERATOR ontology, not inert-λ-Everett.
+     It still owes Bell its price (global superdeterminism, previous model) and an account of WHY the
+     generator reproduces the Born measure (the typicality premise, relocated into the algorithm).
+
+  So the finite-λ-generator is the most empirically meaningful version in the whole thread: a real,
+  falsifiable claim (Born breaks at N ~ 2^Q_R), currently consistent with all data, distinguishing
+  it IN PRINCIPLE from standard QM — at the price of a superdeterministic, finite-information ontology.
