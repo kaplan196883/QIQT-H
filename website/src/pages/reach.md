@@ -122,7 +122,11 @@ $\lambda_C = \hbar/mc$. Try to localise an electron below it and the energy cost
 makes electron–positron pairs and the single-particle position <em>record</em> dissolves. The resolution
 saturates at $\lambda_C$ ($\sim$35 bits in a centimetre), and the 4-spinor adds a clean <em>2-qubit internal</em>
 record (spin ⊗ particle/antiparticle) — the <a href="/ladder">bit → qubit ladder</a> realised in a real
-relativistic equation.
+relativistic equation. Strikingly, that handoff is not arbitrary: in limited bit space the non-relativistic
+Schrödinger equation already acquires a maximum signal speed $v_{\max} = \hbar/ma$ on its position grid (a
+lattice 'light cone'), and that speed reaches the true light speed $c$ <em>exactly</em> at $a = \lambda_C$ — so
+the bit-limited Schrödinger picture runs out of room and gives way to Dirac and Klein–Gordon precisely at the
+Compton wavelength.
 
 <strong>Klein–Gordon</strong>, the spin-0 case, is the minimal rung — and the one that teaches the most. It
 shares the same Compton floor but strips the record to its smallest: no spin, just a single charge/sign qubit
