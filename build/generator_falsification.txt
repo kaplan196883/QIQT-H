@@ -1,0 +1,48 @@
+====================================================================================
+PART 1 — the effect is REAL: finite Rule 110 is deterministic and PERIODIC (it repeats)
+  A width-W run has a state in {0,1}^W, so it MUST cycle within 2^W steps. The extracted
+  'measurement' bitstream (cell 0) inherits that period — i.e. it fakes randomness, then repeats.
+====================================================================================
+  W (bits)state space 2^Wmeasured period transient         fakes random for...
+  --------------------------------------------------------------------------------
+  6       64            9               0                 ~9 bits then repeats
+  8       256           2               2                 ~2 bits then repeats
+  10      1,024         25              4                 ~25 bits then repeats
+  12      4,096         9               25                ~9 bits then repeats
+  14      16,384        7               34                ~7 bits then repeats
+  16      65,536        32              57                ~32 bits then repeats
+
+  The period grows with the seed size W: a small generator betrays itself in a SHORT dataset, a large one
+  in a long one. That IS the visible effect — structure (a repeat) at ~the period. The only question is
+  whether the universe's generator is small enough for the period to fall inside a reachable dataset.
+
+====================================================================================
+PART 2 — the falsification frontier: generator size B vs dataset needed to falsify it
+====================================================================================
+  QRNG frontier      : B ≈    50 bits  (period 2^B ≈ 10^15; tested, null ⇒ smaller B EXCLUDED)
+  Lloyd cosmic ceiling: B ≈   399 bits  (period 2^B ≈ 10^120; max ops in the universe)
+  Actual universe gen : B ≈ 10^104 bits  (period = Poincaré recurrence 2^(10^104) ≈ 10^(3x10^103) orders)
+  Bell/CHSH          : finite LOCAL generator ≤ 2 ; observed 2√2 ≈ 2.83 ⇒ local EXCLUDED at every B
+
+  chart written: build/generator_falsification.png
+
+====================================================================================
+PART 3 — honest verdict: yes there is a visible effect — and it has already been tested
+====================================================================================
+  THE EFFECT IS REAL AND FALSIFIABLE (generator fork only). A finite-information generator (Rule 110
+  or any B-bit machine) cannot fake randomness past its period ~2^B; it then repeats / shows structure.
+  Two existing experiments already test this:
+   • Bell/CHSH excludes finite LOCAL generators outright (observed 2√2 > local cap 2).
+   • QRNG statistical testing (~10^15 bits, null) excludes generators with B ≲ 50 bits.
+
+  WHAT THE DATA SAY. The small and local versions are GONE — that is a genuine empirical result, not a
+  dodge. What survives is only a generator that is (a) nonlocal/superdeterministic (to evade Bell) and
+  (b) large, B above the ~400-bit Lloyd ceiling — and the real universe's state is B ~ 10^104, whose
+  period is the Poincaré recurrence ~2^(10^104), ~10^103 orders beyond anything observable.
+
+  SO: the limited-information idea DOES predict a visible effect; experiment has pushed it into the only
+  surviving corner, where the effect (the period repeat) sits past the recurrence wall — observationally
+  indistinguishable from true randomness, i.e. = Everett. The honest 'effect chart' is therefore a
+  FALSIFICATION-FRONTIER chart (this one), not a deviation curve: it shows the effect is real, where it
+  has been ruled out, and where the surviving version hides. This is the exploratory generator fork (a
+  different ontology), NOT the main inert-λ thesis — which remains effect-free by construction.
