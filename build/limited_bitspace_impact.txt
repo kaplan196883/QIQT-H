@@ -1,0 +1,103 @@
+==============================================================================
+IMPACT 1 — [x,p] = iℏ is IMPOSSIBLE in finite bit space (the fundamental one)
+  Trace theorem: Tr[x,p] = 0 always, but Tr(iℏ·𝟙) = iℏN ≠ 0. So a finite Hilbert
+  space CANNOT represent the Heisenberg algebra: the CCR must break somewhere.
+==============================================================================
+  B bits  N=2^B   ‖[x,p] − i𝟙‖   Tr[x,p]   where it breaks
+  ------------------------------------------------------------------
+  1       2       2.000          0.0e+00   all of it on the top level |N−1⟩
+  2       4       4.000          0.0e+00   all of it on the top level |N−1⟩
+  3       8       8.000          4.4e-16   all of it on the top level |N−1⟩
+  4       16      16.000         1.8e-15   all of it on the top level |N−1⟩
+  6       64      64.000         1.4e-14   all of it on the top level |N−1⟩
+  8       256     256.000        1.3e-13   all of it on the top level |N−1⟩
+
+  [x,p] = i𝟙 − iN|N−1⟩⟨N−1|: the commutator is exactly correct in the BULK (value +i) but the
+  entire deficit −iN piles onto the single top state (so the trace can stay 0), giving
+  ‖[x,p] − i𝟙‖ = N. This is not an approximation artefact — it is forced. Any genuinely finite-bit
+  quantum system has a DEFORMED Heisenberg algebra. That deformation IS the impact; the rest follows.
+
+==============================================================================
+IMPACT 2 — no continuum: position spectrum becomes a DISCRETE, finite grid
+  Finite bits ⇒ x has N eigenvalues (Gauss–Hermite nodes), p likewise bounded.
+  The continuous line is replaced by 2^B points; there is a largest representable x.
+==============================================================================
+  B=2 (N= 4):  x ∈ [-1.65, +1.65],  4 levels,  min gap Δx = 1.049
+            eigen-positions: -1.65 -0.52 +0.52 +1.65
+  B=3 (N= 8):  x ∈ [-2.93, +2.93],  8 levels,  min gap Δx = 0.762
+            eigen-positions: -2.93 -1.98 -1.16 -0.38 +0.38 +1.16 +1.98 +2.93
+  B=4 (N=16):  x ∈ [-4.69, +4.69],  16 levels,  min gap Δx = 0.547
+            eigen-positions: -4.69 -3.87 -3.18 -2.55 -1.95 -1.38 -0.82 -0.27 +0.27 +0.82 +1.38 +1.95 +2.55 +3.18 +3.87 +4.69
+
+  A bit-limited particle lives on a finite lattice of allowed positions with a hard outer edge
+  and a minimum spacing Δx_min — exactly the 'records are discrete cells' picture, now forced by
+  the dimension. Momentum is dually bounded (a Brillouin-zone-like cutoff). No true continuum,
+  no arbitrarily sharp localisation, a built-in UV cutoff.
+
+==============================================================================
+IMPACT 3 — a minimum length ⇒ GENERALIZED UNCERTAINTY PRINCIPLE and level shifts
+  A floor Δx_min deforms Δx·Δp ≥ (ℏ/2)(1 + β Δp²). Every bound spectrum shifts by a
+  fractional ~ (Δx_min/L_sys)². The size of the impact is ONE honest ratio: floor/system.
+==============================================================================
+  TOY — region L resolved by only B bits, Δx_min = L/2^B:
+    B bits     Δx_min/L      impact (Δx_min/L)²
+    2         2.500e-01     6.250e-02
+    4         6.250e-02     3.906e-03
+    8         3.906e-03     1.526e-05
+    16        1.526e-05     2.328e-10
+  PHYSICAL minimum lengths, on an ATOM (L = a₀ = 5.3e-11 m):
+    floor Δx_min            Δx_min/a₀     impact (Δx_min/a₀)²
+    Compton  λ_C=ℏ/mc       7.297e-03     5.325e-05   ← = α² : OBSERVED as fine structure (but standard Dirac QM)
+    Planck   ℓ_P            3.054e-25     9.329e-50   ← genuine QG minimum-length shift — far below detection
+
+  The whole impact is the ratio (floor/system)². For a TOY with only a few resolution bits it is
+  ORDER ONE — spectrum, hydrogen levels and density of states all visibly modified. For the real
+  physical floors: the Compton length on an atom gives exactly α² ≈ 5e-5 — which we DO see, as
+  relativistic fine structure, but that is standard Dirac QM, not λ; the Planck length gives
+  ~10^-49 — the genuine quantum-gravity minimum-length signature, ~45 orders below measurement.
+
+==============================================================================
+IMPACT 4 — where the impact is O(1): comparable scales, or a SATURATED horizon
+  Impact = (Δx_min/L)². It is O(1) only when the floor is comparable to the system.
+==============================================================================
+  regime                      Δx_min / L            impact & status
+  --------------------------------------------------------------------------
+  few-bit toy universe        ~1/2 … 1/8            O(1) — deformed CCR, discrete x, recurrences
+  atom, Compton floor         α ≈ 7e-3              α² ≈ 5e-5 — SEEN = fine structure (Dirac, not λ)
+  atom, Planck floor          ℓ_P/a₀ ≈ 3e-25        ~1e-49 — unobserved (QG minimum length)
+  1 m region, Planck floor    ℓ_P/L ≈ 2e-35         ~3e-70 — unobserved
+  black-hole horizon          ~1 (saturated)        O(1) — IS Bekenstein–Hawking holography
+
+  The impact of limited bit space is REAL and computable — a deformed Heisenberg algebra, a
+  discrete bounded spectrum, a minimum-length GUP with shifted levels and a UV cutoff. Its size is
+  (floor/system)², so it is O(1) only when the two are comparable: a genuinely tiny-budget toy, or
+  a horizon where the holographic bound is SATURATED — and there it is standard Bekenstein–Hawking
+  holography (area law, Hawking spectrum, the information puzzle). For ordinary matter the only
+  'floor' visible at all is the Compton length, and its impact (α², fine structure) is plain
+  relativistic QM. Everything genuinely bit-limit / Planckian is ≥45 orders below measurement.
+
+==============================================================================
+THE HONEST ANSWER
+==============================================================================
+  'In very limited bit space we should see the impact' — yes, and here it is, concretely:
+    (1) the canonical commutator [x,p]=iℏ becomes impossible — the Heisenberg algebra is forced
+        to deform (a theorem, not an approximation);
+    (2) position/momentum become discrete and bounded — a finite lattice with a minimum cell and
+        a hard edge, i.e. a built-in UV cutoff (no true continuum, no arbitrarily sharp records);
+    (3) a minimum length ⇒ a Generalized Uncertainty Principle: every bound spectrum shifts,
+        the density of states is modified — standard minimum-length / quantum-gravity signatures;
+    (4) the size of every one of these is (Δx_min/L_system)², so it is O(1) only when the floor is
+        comparable to the system — a tiny-budget toy, or a SATURATED horizon. For an atom the only
+        real floor, the Compton length, gives α² (fine structure — seen, but plain Dirac QM);
+        anything Planckian/bit-limit is ≥45 orders below measurement.
+
+  TWO honest caveats that keep this consistent with everything prior:
+    • These are the impacts of DYNAMICAL finiteness — a real cutoff Q_eff. QIQT-H's λ is INERT
+      and produces NONE of them; to predict any of (1)–(3) you must ADD a dynamical-finiteness
+      postulate (a small Q_eff), which is at present a free parameter, not a consequence of the
+      holographic bound. With only inert λ + the huge holographic Q_R, the framework stays
+      operationally = Everett (no impact), as established.
+    • Where the impact is genuinely O(1) — the horizon — it is standard quantum-gravity
+      holography, not λ. So 'very limited bit space' has real, dramatic physics; it just lives at
+      horizons (and in hypothetical tiny-Q_eff toys), not in the inert-λ reading of ordinary
+      laboratory systems.
