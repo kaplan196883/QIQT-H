@@ -1,0 +1,87 @@
+==============================================================================
+PART 1 — finite grid ⇒ bounded kinetic energy ⇒ an emergent MAXIMUM SPEED v_max=ℏ/ma
+  E(k) = (2ℏ²/ma²) sin²(ka/2)  (lattice Laplacian) replaces ℏ²k²/2m; group velocity
+  caps at v_max = ℏ/(ma).  v_max = c  ⟺  a = ℏ/mc = λ_C  ⇒ handoff to Dirac/KG.
+==============================================================================
+  electron in L = 1 nm;  λ_C = 3.862e-13 m
+  B bits   a=L/2^B (m)     v_max=ℏ/ma (m/s)   v_max/c       note
+  ----------------------------------------------------------------------
+  4       6.250e-11       1.852e+06          6.179e-03     non-relativistic — Schrödinger fine
+  8       3.906e-12       2.964e+07          9.886e-02     non-relativistic — Schrödinger fine
+  12      2.441e-13       4.742e+08          1.582e+00     v_max ≥ c ⇒ Schrödinger INVALID, go to Dirac/KG
+  16      1.526e-14       7.587e+09          2.531e+01     v_max ≥ c ⇒ Schrödinger INVALID, go to Dirac/KG
+  20      9.537e-16       1.214e+11          4.049e+02     v_max ≥ c ⇒ Schrödinger INVALID, go to Dirac/KG
+  28      3.725e-18       3.108e+13          1.037e+05     v_max ≥ c ⇒ Schrödinger INVALID, go to Dirac/KG
+
+  v_max = c exactly at a = λ_C = 3.86e-13 m  (B = log2(L/λ_C) = 11.3 bits for this L).
+
+  So in limited bit space the Schrödinger equation acquires a finite signal speed — wavepackets
+  cannot spread faster than v_max = ℏ/(ma) (a Lieb–Robinson bound on the lattice). Refining the
+  resolution raises v_max, and it reaches the true light speed c PRECISELY at the Compton grid
+  a = λ_C — exactly where the single-particle picture fails and the relativistic rungs (Dirac,
+  Klein–Gordon) take over. The bit-limited non-relativistic ladder dovetails into the relativistic
+  one at the Compton wavelength. (This is kinematics of the lattice, standard — not λ.)
+
+==============================================================================
+PART 2 — finite bits ⇒ POINCARÉ RECURRENCE: ψ(t) returns to ψ(0)
+==============================================================================
+  (a) GENERIC spectrum (energies in [0,1], equal weights): first GENUINE recurrence
+      (after the state has decayed) to |⟨ψ(0)|ψ(t)⟩|² > 0.9 — median over 9 random
+      spectra, scanned to T=2e5.  Climbs steeply with the bit count.
+      B bits   N=2^B    fraction recurring     median t_rec
+      ----------------------------------------------------------
+      2       4       9/9                   1.664e+02
+      3       8       9/9                   4.035e+04
+      4       16      0/9                   > 2e5 (window)
+      5       32      0/9                   > 2e5 (window)
+
+  (b) BOX spectrum E_n ∝ n² (commensurate): EXACT revival at t = 2π, any N
+      B=2 (N= 4):  return prob at t=2π = 1.0000 ;  min on (0,2π) = 0.0000  (genuine revival)
+      B=4 (N=16):  return prob at t=2π = 1.0000 ;  min on (0,2π) = 0.0000  (genuine revival)
+      B=6 (N=64):  return prob at t=2π = 1.0000 ;  min on (0,2π) = 0.0000  (genuine revival)
+
+  Two regimes. GENERIC systems do not recur in the continuum, but ANY finite truncation does — and
+  the recurrence time climbs steeply with the bit count (already unreachable by a handful of bits),
+  so the continuum limit is recurrence-free. COMMENSURATE systems (the box E_n∝n², the oscillator
+  E_n∝n) revive exactly even with few levels — the clean 'finite bits ⇒ the wavefunction comes
+  back' picture. Either way, a genuinely small-bit world is quasi-periodic: no true irreversibility,
+  guaranteed revivals. The more bits, the longer the wait — vanishing in the continuum.
+
+==============================================================================
+PART 3 — two more finite-bit dynamical consequences
+==============================================================================
+  • DEFORMED KINETIC TERM. The Schrödinger H = p²/2m + V needs [x,p]=iℏ, which a finite
+    Hilbert space cannot represent (Tr[x,p]=0≠iℏN). So the kinetic operator is FORCED to be a
+    bounded lattice Laplacian — which is exactly the bounded dispersion of Part 1. The emergent
+    speed limit is the dynamical face of the deformed Heisenberg algebra.
+
+  • ENERGY ALIASING (if TIME is also bit-limited). Evolving in finite steps Δt (a time-bit
+    budget) makes phases e^{-iEΔt} periodic in E: energies above the Nyquist value π/Δt FOLD
+    back (alias). So a finite time-resolution imposes a MAXIMUM representable energy — the
+    time-domain dual of the position cutoff. Together: bounded x-grid ⇒ bounded momentum;
+    bounded t-grid ⇒ bounded energy. A fully bit-limited Schrödinger world is a finite torus in
+    phase space and in time.
+
+==============================================================================
+PART 4 — honest verdict
+==============================================================================
+  recurrence-time and speed-limit scaling (electron, region L):
+    • v_max = ℏ/(ma): for L=1 m and the holographic-scale grid it is astronomically
+      large; it only drops to c at a = λ_C (the relativistic handoff), never below.
+    • t_rec grows ~ exponentially in the bit count, so for any macroscopic budget it
+      exceeds the age of the universe by enormous margins.
+
+  VERDICT (consistent with box/oscillator/Dirac/KG, pro-checked):
+  • The Schrödinger EQUATION in limited bit space gains two real dynamical features: an emergent
+    maximum speed v_max=ℏ/ma (a lattice light cone that hits c exactly at the Compton grain λ_C,
+    dovetailing into the Dirac/KG rungs) and Poincaré recurrence/revivals (a discrete bounded
+    spectrum makes ψ(t) return). Both are genuine and computable.
+  • Both are STANDARD physics of finite/lattice quantum systems — Lieb–Robinson bounds, quantum
+    revivals — not λ. Their size is set by the budget: v_max ≫ c and t_rec ≫ age-of-universe for
+    any real system, so nothing is observable. They are O(1) only for a tiny-Q_eff toy or at a
+    saturated horizon.
+  • λ is non-dynamical and Born-transparent ⇒ it produces neither effect. With inert λ + the huge
+    holographic Q_R the dynamics is exactly ordinary Schrödinger evolution ⇒ operationally Everett.
+    Real lattice dynamics, but not λ — thesis-empty, like the rest of the ladder. The added value
+    here is the CONNECTION: the bit-limited Schrödinger speed limit meets c at λ_C, stitching the
+    non-relativistic and relativistic rungs into one ladder.
