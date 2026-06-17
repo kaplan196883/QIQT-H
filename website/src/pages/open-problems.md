@@ -219,12 +219,18 @@ simple → fractal (Rule 90 = Sierpiński) → chaos (Rule 30, a known pseudo-ra
 (Rule 110, Turing-complete). This *sharpens* the wall rather than evading it: a fractal is the *compressible*
 extreme (low Kolmogorov complexity) — the **opposite** of a Born-random record — so a few-bit machine can supply
 the **scaffold** of λ (self-similar record geometry) and **pseudo-random frequencies** (chaotic rules), but not the
-incompressible Born **content**. Even Rule 110's universality does not help: it moves the information into the
-*initial condition* ($K(\text{output}) \le K(\text{rule}) + K(\text{IC})$), so an incompressible world still needs
-an incompressible IC. The one genuinely suggestive residue is a *texture* observation, not a generator — the actual
-world (persistent structure in a quasi-random background) resembles Wolfram **Class 4, the "edge of chaos"**;
-whether the record net being critical / Class-4 *constrains* admissible Born content is the single open lead this
-opened.
+incompressible Born **content**. Even Rule 110's universality does not rescue the idea — it *proves* it closed. By the
+**invariance theorem** of algorithmic information ($K_U(x) = K_V(x) + O(1)$ for any universal machines $U,V$),
+all universal rules are equivalent up to a constant, so *which* rule is irrelevant, and universality means the
+rule is **content-free**: it can run anything, hence carries no specific information. The world's information is
+therefore entirely in the **initial condition** — $K(\text{output}) \le K(\text{rule}) + K(\text{IC})$ with
+$K(\text{rule}) = O(1)$, so $K(\text{IC}) \gtrsim K(\text{output})$. To compute the actual, incompressible
+(Born-random) history the IC must itself be incompressible ($\sim$ the cosmic entropy); the few-bit universal rule
+contributes nothing. Universality is precisely the proof that the few bits were never going to hold the world's
+information — it is in the input. The one genuinely suggestive residue is a *texture* observation, not a generator:
+the actual world (persistent structure in a quasi-random background) resembles Wolfram **Class 4, the "edge of
+chaos"**; whether the record net being critical / Class-4 *constrains* admissible Born content is the single open
+lead this opened.
 
 ---
 
