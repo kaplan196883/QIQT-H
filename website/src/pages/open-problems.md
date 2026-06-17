@@ -213,6 +213,19 @@ randomness is ergodic unfolding" to "inert λ on Everett," two empirically ident
 *different* (deterministic/superdeterministic) ontology from Gaps 1–3; included as an honest exploration, not a
 claim of the program. See the [reach](/reach) page for the same idea in plain language.
 
+**A concrete realization, and what survives.** Made concrete, the few-bit generator is a *fractal machine* — an
+elementary cellular automaton, where an 8-bit rule is the "fact" and its unfolding is λ. The 256-rule space spans
+simple → fractal (Rule 90 = Sierpiński) → chaos (Rule 30, a known pseudo-random generator) → universal computation
+(Rule 110, Turing-complete). This *sharpens* the wall rather than evading it: a fractal is the *compressible*
+extreme (low Kolmogorov complexity) — the **opposite** of a Born-random record — so a few-bit machine can supply
+the **scaffold** of λ (self-similar record geometry) and **pseudo-random frequencies** (chaotic rules), but not the
+incompressible Born **content**. Even Rule 110's universality does not help: it moves the information into the
+*initial condition* ($K(\text{output}) \le K(\text{rule}) + K(\text{IC})$), so an incompressible world still needs
+an incompressible IC. The one genuinely suggestive residue is a *texture* observation, not a generator — the actual
+world (persistent structure in a quasi-random background) resembles Wolfram **Class 4, the "edge of chaos"**;
+whether the record net being critical / Class-4 *constrains* admissible Born content is the single open lead this
+opened.
+
 ---
 
 ## In one paragraph
