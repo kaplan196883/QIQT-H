@@ -235,6 +235,25 @@ the actual world (persistent structure in a quasi-random background) resembles W
 chaos"**; whether the record net being critical / Class-4 *constrains* admissible Born content is the single open
 lead this opened.
 
+**A horizon contrast (where stable records are expected — not which is actual).** Pushing the edge-of-chaos lead
+toward the [Bekenstein flow](/theory) gives a physically-grounded *organizing contrast* (qualitative, **not** a
+theorem — GPT-5.5-pro referee, 2026-06-17). A black-hole horizon jointly realizes two **distinct** sharp limits:
+its Bekenstein–Hawking entropy $A/4\ell_P^2$ saturates the holographic *capacity* bound, and — in semiclassical
+Einstein gravity — its chaotic dynamics saturate the **Maldacena–Shenker–Stanford** chaos bound, with the
+Schwarzschild rate $\lambda_L = 2\pi k_B T_H/\hbar = c/2R_s$ and scrambling time $t_*\sim\lambda_L^{-1}\ln S$
+(Sekino–Susskind fast scramblers). These are different quantities (an entropy vs. a Lyapunov *rate*) tied to the
+same horizon thermodynamics — a juxtaposition, **not an identity** (larger holes have *more* capacity yet a
+*slower* $\lambda_L$). At the maximally-scrambling horizon the fine-grained microstate information is delocalised —
+unitarily preserved and (Page / Hayden–Preskill) decodable only from large radiation subsystems by nontrivial
+decoding — **not** redundantly broadcast as Quantum-Darwinism pointer records (though macroscopic $M,Q,J$ records
+remain). So stable redundant classical records — what λ indexes — are *expected* in ordinary **sub-holographic,
+non-maximally-scrambling** open-system environments (the realized-entropy bulk), where decoherence + einselection
++ Quantum Darwinism operate. This is a qualitative contrast organizing *where* records arise (the record stage,
+Gap 3, and the einselection metaselector, Gap 1) — there is **no** proven link from $S/S_{\rm holo}<1$ to
+$\lambda_L/(2\pi T/\hbar)<1$ to redundancy, it does **not** touch the Born *content* (which record is actual),
+and it selects no Everett branch. λ stays inert; $=$ Everett. (Machine-illustrated:
+`scripts/holographic_scrambling_records.py`, `einselection_vs_criticality.py`.)
+
 ---
 
 ## In one paragraph

@@ -9,16 +9,22 @@ Two threads, one boundary:
     dynamics is SUB-SCRAMBLING; a fast scrambler destroys them. The ceiling is the Maldacena–Shenker–
     Stanford chaos bound λ_L ≤ 2πk_BT/ℏ, and BLACK HOLES SATURATE it (Sekino–Susskind fast scramblers).
 
-THE UNIFICATION: the black hole saturates BOTH bounds — it is simultaneously the information-capacity
-maximum (Bekenstein) and the scrambling maximum (MSS). So the holographic ENVELOPE of the Bekenstein
-flow IS the scrambling CEILING of the records picture — the boundary beyond which records cease to
-exist. λ's records therefore live in the SUB-SATURATION BULK (the realized-entropy slack, far below
-the envelope, where the dynamics is sub-scrambling); at the horizon the information is maximal (A/4)
-but MAXIMALLY SCRAMBLED — present yet not classical/redundant. The realized-entropy track of the
-Bekenstein-flow plot is exactly the record-supporting region; the envelope is record-free.
+THE JUXTAPOSITION (de-hyped per GPT-5.5-pro referee, 2026-06-17): the black hole saturates BOTH bounds
+— it is at once the information-capacity maximum (Bekenstein) and, in semiclassical Einstein gravity,
+the chaos maximum (MSS). These are TWO DISTINCT bounds (an entropy vs. a Lyapunov RATE — different
+dimensions, no general map between "fraction of capacity used" and "fraction of chaos bound used";
+indeed bigger holes have MORE capacity but SLOWER λ_L = c/2R_s), both tied to horizon thermodynamics —
+NOT a single identity, and NOT "the envelope IS the scrambling ceiling." What is defensible is a
+QUALITATIVE CONTRAST: at the maximally-scrambling horizon the FINE-GRAINED microstate information is
+delocalised (Page/Hayden–Preskill: unitarily preserved, decodable only from large radiation subsystems
+with nontrivial decoding) — NOT redundantly broadcast as Quantum-Darwinism pointer records. (Black holes
+DO still carry macroscopic records: M, Q, J, location, accretion history — large entropy ≠ many objective
+records.) So stable redundant classical records are EXPECTED in ordinary sub-holographic, non-maximally-
+scrambling open-system environments — a qualitative physical expectation, NOT a theorem linking
+S/S_holo<1 to λ_L/(2πT/ℏ)<1 to QD redundancy.
 
 This script computes the black-hole numbers (Hawking T, the MSS Lyapunov bound, the fast-scrambling
-time) to show the double saturation, and reads off the honest fit. Needs only the standard library.
+time) to show the double saturation, and reads off the honest (de-hyped) fit. Needs only the std library.
 """
 import math
 
@@ -67,21 +73,23 @@ def run_where_records():
     print("\n" + "=" * 84)
     print("PART 2 — where records live: the sub-saturation slack (sub-scrambling), not the envelope")
     print("=" * 84)
-    print("""  Putting the two threads on the SAME plot (the Bekenstein flow):
+    print("""  Putting the two threads on the SAME plot (the Bekenstein flow) — as a CONTRAST, not an identity:
 
-    holographic ENVELOPE  (∝R², black, BH-saturated)  =  the CHAOS CEILING (MSS bound, BH-saturated)
-                                                       =  the boundary where RECORDS CEASE to exist.
+    holographic ENVELOPE  (∝R², black, BH-saturated)   ~  the regime of MAXIMAL SCRAMBLING (horizons)
+                                                          where fine-grained info is delocalised,
+                                                          NOT redundantly broadcast as QD records.
 
-    realized-entropy TRACK (∝R³, purple, ≪ envelope)  =  the SUB-SCRAMBLING bulk
-                                                       =  exactly where OBJECTIVE RECORDS live.
+    realized-entropy TRACK (∝R³, purple, ≪ envelope)   ~  the sub-holographic, non-maximally-scrambling
+                                                          bulk where stable REDUNDANT records are expected.
 
-  • Ordinary matter sits deep in the slack (universe ~10⁻¹⁸ of capacity) AND far below the chaos bound
-    (decoherence imprints redundant records far faster than any scrambling erases them) ⇒ the regime
-    of stable, broadcast, classical records — the edge of chaos, where λ's records exist.
-  • A black hole / horizon saturates BOTH: its information is maximal (A/4) but MAXIMALLY SCRAMBLED —
-    present, yet not redundant, not classical, not a record. This is *why* black holes carry no
-    classical records, and why the one place a finite budget 'bites' (the horizon, in every earlier
-    model) is exactly the place λ has nothing to index.""")
+  • Ordinary matter sits deep in the slack (universe ~10⁻¹⁸ of capacity) and is a weak/slow scrambler
+    (decoherence imprints redundant records far faster than its dynamics could delocalise them) ⇒ the
+    regime of stable, broadcast, classical records where λ's records live.
+  • A black hole / horizon saturates BOTH bounds: its fine-grained information is maximal (A/4) but
+    maximally SCRAMBLED — delocalised, decodable only nonlocally (Page/Hayden–Preskill), NOT a redundant
+    Quantum-Darwinism record. (It still carries macroscopic M, Q, J records.) This is a qualitative
+    reason the horizon — the one place a finite budget 'bites' in every earlier model — is record-POOR
+    in the redundant-broadcast sense, NOT a theorem that it is record-free.""")
 
 # ======================================================================
 #  PART 3 — honest verdict: the fit
@@ -90,29 +98,33 @@ def run_verdict():
     print("\n" + "=" * 84)
     print("PART 3 — honest verdict: how the edge of chaos fits the Bekenstein flow")
     print("=" * 84)
-    print("""  THE FIT (real, and rather elegant). The Bekenstein flow's holographic ENVELOPE and the records
-  picture's SCRAMBLING CEILING are the SAME boundary — both saturated by the black hole, which is at
-  once the information-capacity maximum (Bekenstein) and the scrambling maximum (MSS). So:
+    print("""  THE FIT (a qualitative contrast, signed off by the referee — NOT a unification). The black hole
+  jointly saturates two SHARP but DISTINCT limits: its Bekenstein–Hawking entropy A/4ℓ_P² saturates the
+  capacity bound, and (in semiclassical Einstein gravity) its chaotic dynamics saturate the MSS bound
+  (λ_L = 2πk_BT_H/ℏ = c/2R_s, t_* ~ λ_L⁻¹ ln S). These are different quantities tied to the same horizon
+  thermodynamics — a juxtaposition, not an identity (there is no general map between fraction-of-capacity
+  and fraction-of-chaos-bound; larger holes have more capacity yet slower λ_L). So:
 
-   • λ's records (the scaffold it indexes) inhabit the SUB-SATURATION BULK — the realized-entropy track
-     far below the holographic envelope — because that is the sub-scrambling, edge-of-chaos regime
-     where decoherence + einselection + Quantum Darwinism produce stable, redundant, classical records.
-   • The horizon (BH, cosmological) saturates both bounds: maximal information, maximal scrambling, NO
-     records. It is the record-free boundary. This dovetails with every earlier result that the finite
-     budget only 'bites' at horizons — and now we can say *why* λ has nothing to index there: the
-     information is maximally scrambled.
+   • At the maximally-scrambling horizon the fine-grained microstate information is delocalised — present
+     and (Page/Hayden–Preskill) decodable only from large radiation subsystems by nontrivial decoding —
+     NOT redundantly broadcast as Quantum-Darwinism pointer records. (Macroscopic M, Q, J records remain.)
+   • Therefore stable redundant classical records — what λ indexes — are EXPECTED in ordinary
+     sub-holographic, non-maximally-scrambling open-system environments (the realized-entropy bulk), where
+     decoherence + einselection + Quantum Darwinism operate, NOT at the horizon limit.
 
-  WHAT IT BUYS, HONESTLY. It unifies two strands of the program — the holographic finiteness (the
-  record STAGE / Q_R) and the metaselector (which records / einselection) — under one boundary: the
-  black hole, saturating capacity and chaos together. It gives a physical reason WHY the realized
-  (record-bearing) world sits far below the holographic envelope: records require sub-scrambling. This
-  is a genuine, quantitatively-anchored sharpening of the SCAFFOLD (the record stage + the metaselector,
-  Gaps 1 and 3).
+  WHAT IT BUYS, HONESTLY. A physically-grounded ORGANIZING CONTRAST linking two strands of the program —
+  the holographic record STAGE (Q_R) and the metaselector (which records / einselection): both the
+  capacity limit and the record-destroying scrambling limit are realised at the black-hole horizon, so
+  ordinary record-bearing matter sits doubly far from that limit. It constrains WHERE stable objective
+  records are expected to arise.
 
-  WHAT IT DOES NOT BUY. It still does not touch the Born CONTENT (which record is actual = λ's brute
-  fact), gives no generator, no testability, no deviation from QM. The synthesis is about WHERE and
-  WHETHER records exist (capacity + criticality), not WHICH outcome is selected. The honest status is
-  unchanged: a clarified, unified scaffold; λ inert; = Everett.""")
+  WHAT IT DOES NOT BUY (the referee's cut). It is NOT a theorem: there is no proven link from S/S_holo<1
+  to λ_L/(2πT/ℏ)<1 to QD redundancy, and 'realized-entropy ∝R³ = the record-supporting region' is glib
+  (record formation depends on dynamics/locality/decoherence, not volume entropy; and BH entropy already
+  dominates the cosmic budget). It does not touch the Born CONTENT (which record is actual = λ's brute
+  fact), gives no generator, no testability, no deviation from QM, and does NOT select which Everett
+  branch is actual. Honest status: a qualitative physical contrast organizing the SCAFFOLD; λ inert;
+  = Everett.""")
 
 def main():
     run_double_saturation()
