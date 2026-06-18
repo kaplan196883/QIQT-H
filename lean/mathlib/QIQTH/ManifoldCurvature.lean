@@ -140,4 +140,28 @@ theorem curvature_add_right [CompleteSpace E] [IsManifold I 2 M]
     curvature_add_left cov hcov Y Y' X σ x hY hY' hcovσY hcovσY',
     curvature_antisymm cov X Y σ x, curvature_antisymm cov X Y' σ x, neg_add]
 
+/-- **Additivity of the curvature in the section slot:** `R(X,Y)(σ+σ')= R(X,Y)σ + R(X,Y)σ'`.
+With `σ,σ'` differentiable everywhere the inner `∇(σ+σ') = ∇σ + ∇σ'` is a plain `funext`+`cov.add`
+(no germ-localisation needed); the Lie-bracket term is untouched. -/
+theorem curvature_add_section
+    (cov : (Π x : M, V x) → (Π x : M, TangentSpace I x →L[𝕜] V x))
+    (hcov : IsCovariantDerivativeOn F cov Set.univ)
+    (X Y : Π x : M, TangentSpace I x) (σ σ' : Π x : M, V x) (x : M)
+    (hσ : ∀ z, MDiffAt (T% σ) z) (hσ' : ∀ z, MDiffAt (T% σ') z)
+    (hcovσY : MDiffAt (T% fun x' => cov σ x' (Y x')) x)
+    (hcovσ'Y : MDiffAt (T% fun x' => cov σ' x' (Y x')) x)
+    (hcovσX : MDiffAt (T% fun x' => cov σ x' (X x')) x)
+    (hcovσ'X : MDiffAt (T% fun x' => cov σ' x' (X x')) x) :
+    curvature cov X Y (σ + σ') x = curvature cov X Y σ x + curvature cov X Y σ' x := by
+  have hsecY : (fun x' => cov (σ + σ') x' (Y x'))
+      = (fun x' => cov σ x' (Y x')) + (fun x' => cov σ' x' (Y x')) := by
+    funext x'; simp only [Pi.add_apply, hcov.add (hσ x') (hσ' x'), ContinuousLinearMap.add_apply]
+  have hsecX : (fun x' => cov (σ + σ') x' (X x'))
+      = (fun x' => cov σ x' (X x')) + (fun x' => cov σ' x' (X x')) := by
+    funext x'; simp only [Pi.add_apply, hcov.add (hσ x') (hσ' x'), ContinuousLinearMap.add_apply]
+  simp only [curvature]
+  rw [hsecY, hsecX, hcov.add hcovσY hcovσ'Y, hcov.add hcovσX hcovσ'X, hcov.add (hσ x) (hσ' x)]
+  simp only [ContinuousLinearMap.add_apply]
+  abel
+
 end QIQTH.ManifoldGR

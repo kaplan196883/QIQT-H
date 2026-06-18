@@ -40,9 +40,12 @@ Each step = its own axiom-free file/lemma, green `lake build`, `#print axioms` c
     `d% f x (Y x)`). Needs `[CompleteSpace E] [IsManifold I 2 M]` + section/field differentiability. Axiom-free.
   - ✅ **Additivity in `X`,`Y`** — `curvature_add_left`/`_right`. With tensoriality, `R` is now
     bilinear+tensorial in its two vector-field slots. Axiom-free.
-  - NEXT: fibrewise additivity + `C∞`-linearity in the section slot `σ` (needs `hcov.add`/Leibniz with
-    germ-dependence `congr_of_eventuallyEq`); then **P2 first Bianchi** (Mathlib has the Jacobi identity
-    `leibniz_identity_mlieBracket` + `torsion`, so the torsion-free cyclic sum is reachable).
+  - ✅ **Additivity in the section slot** — `curvature_add_section` (`R(X,Y)(σ+σ')=R(X,Y)σ+R(X,Y)σ'`),
+    via `funext`+`cov.add` (global differentiability of `σ,σ'` avoids germ-localisation). Curvature now
+    additive in all three slots + tensorial in the two vector-field slots. **P1 structural core DONE.**
+  - NEXT: `C∞`-linearity in the section slot `R(X,Y)(fσ)=f·R(X,Y)σ` (Leibniz again, deferrable); then
+    **P2 first Bianchi** (Mathlib has the Jacobi identity `leibniz_identity_mlieBracket` + `torsion`, so
+    the torsion-free cyclic sum `∑_cyc R(X,Y)Z=0` is reachable).
 - **P2 — Algebraic (first) Bianchi.** For a *torsion-free* connection (Mathlib `torsion`), the cyclic
   sum `∑_cyc R(X,Y)Z = 0`. Needs torsion-free + Jacobi identity of `mlieBracket` (check Mathlib has it).
 - **P3 — Pseudo-Riemannian / Lorentzian metric.** Mathlib's metric is positive-definite; define a

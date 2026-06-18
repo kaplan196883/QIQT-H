@@ -2905,5 +2905,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ManifoldGR.curvature_add_right
 -- expected: standard only — ADDITIVITY R(X+X',Y)σ=R(X,Y)σ+R(X',Y)σ and R(X,Y+Y')σ=R(X,Y)σ+R(X,Y')σ.
 -- With tensoriality above, the curvature is bilinear+tensorial in its two vector-field slots. Axiom-free.
+#print axioms QIQTH.ManifoldGR.curvature_add_section
+-- expected: standard only — additivity in the SECTION slot R(X,Y)(σ+σ')=R(X,Y)σ+R(X,Y)σ' (funext+cov.add,
+-- no germ-localisation). Curvature now additive in all three slots. Axiom-free.
 
 end QIQTH.AxiomAudit
