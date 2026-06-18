@@ -104,4 +104,41 @@ theorem mfderiv_apply_mlieBracket_model
   rw [hL, hR1, hR2]
   exact fderiv_apply_lieBracket_of_isSymmSndFDerivAt hf hsymm hY hX
 
+/-! ## Toward the general-manifold commutator (chart transport)
+
+The general manifold case is standard differential geometry (Lee, *Smooth Manifolds* §8) but Mathlib
+lacks it, so we build it through the chart. First foundational block: the **directional-derivative
+chart-covariance** — `(Yf)(x)` computed on `M` equals the normed-space directional derivative of the
+chart representative `f ∘ e⁻¹` along the pushed-forward field, via the chain rule for `f = (f∘e⁻¹)∘e`.
+-/
+section GeneralManifold
+variable {H : Type*} [TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} [I.Boundaryless]
+  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I 2 M]
+
+/-- **Directional-derivative chart-covariance.** The directional derivative `(Yf)(x)` on `M` equals
+the normed-space directional derivative of the chart representative `f ∘ e⁻¹` at `e x`, evaluated on
+the pushed-forward vector `(de)_x (Y x)`. Pure chain rule for `f = (f ∘ e⁻¹) ∘ e` near `x`. -/
+theorem dirDeriv_eq_chart (f : M → 𝕜) (Y : Π z : M, TangentSpace I z) (x : M)
+    (hf : MDifferentiableAt I 𝓘(𝕜) f x) :
+    dirDeriv I Y f x
+      = fderiv 𝕜 (f ∘ (extChartAt I x).symm) (extChartAt I x x)
+          (mfderiv I 𝓘(𝕜, E) (extChartAt I x) x (Y x)) := by
+  have hee : MDifferentiableAt I 𝓘(𝕜, E) (extChartAt I x) x :=
+    mdifferentiableAt_extChartAt (mem_chart_source H x)
+  haveI : IsManifold I 1 M := IsManifold.of_le (n := 2) (by norm_num)
+  have hes : MDifferentiableAt 𝓘(𝕜, E) 𝓘(𝕜) (f ∘ (extChartAt I x).symm) (extChartAt I x x) := by
+    rw [mdifferentiableAt_iff_differentiableAt]
+    have h := (hf.mdifferentiableWithinAt (s := Set.univ)).differentiableWithinAt_comp_extChartAt_symm
+    simpa [I.range_eq_univ, differentiableWithinAt_univ] using h
+  have heq : (f ∘ (extChartAt I x).symm) ∘ (extChartAt I x) =ᶠ[𝓝 x] f := by
+    filter_upwards [extChartAt_source_mem_nhds (I := I) x] with z hz
+    simp only [Function.comp_apply, (extChartAt I x).left_inv hz]
+  show mfderiv I 𝓘(𝕜) f x (Y x) = _
+  rw [← heq.mfderiv_eq, mfderiv_comp x hes hee]
+  exact DFunLike.congr_fun
+    (mfderiv_eq_fderiv (f := f ∘ ⇑(extChartAt I x).symm) (x := extChartAt I x x))
+    (mfderiv I 𝓘(𝕜, E) (extChartAt I x) x (Y x))
+
+end GeneralManifold
+
 end QIQTH.ManifoldGR

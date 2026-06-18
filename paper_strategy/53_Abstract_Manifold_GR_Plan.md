@@ -67,7 +67,15 @@ Each step = its own axiom-free file/lemma, green `lake build`, `#print axioms` c
     - ✅ `dirDeriv` linearity API: additive + 𝕜-homogeneous in the vector field, additive in the function
       (the directional-derivative algebra the Bianchi/Ricci proofs consume). All via `map_*` /
       `DFunLike.congr_fun` to dodge the `𝕜`-vs-`TangentSpace` synonym friction.
-    - **NEXT (dedicated effort — the hard keystone):** the **general-manifold** commutator via
+    - ✅ **UN-PARKED & STARTED** (user push: it's standard math — Lee §8 — so grind it, don't park).
+      `dirDeriv_eq_chart` (axiom-free): the **directional-derivative chart-covariance** `(Yf)(x) =
+      ∂(f∘e⁻¹)(e x)·(de_x·Y x)`, the chain rule for `f=(f∘e⁻¹)∘e`, for boundaryless `M`. The transport
+      that lifts the model-space commutator to general manifolds. CONFIRMED: the "wall" was pure Mathlib
+      plumbing (the `ChartedSpace H M` vs self-chart instance ambiguity — pin `I`; `mfderiv→fderiv` synonym
+      — use `DFunLike.congr_fun`; `range I=univ` from `Boundaryless`), NOT mathematics.
+    - NEXT: the second-order version (`X(Yf)`), the bracket chart-transport (`[X,Y]` via `mpullback`),
+      then assemble `df([X,Y]) = X(Yf)−Y(Xf)` on general manifolds from the model-space commutator.
+    - *(superseded note)* the prior "general-manifold commutator via
       chart/pullback transport. Both `mfderiv` and `mlieBracket` are defined through charts (`extChartAt`),
       so there is no shortcut: transport `f`, `X`, `Y` to the chart (`f∘e⁻¹`, pullback fields), apply the
       model-space `mfderiv_apply_mlieBracket_model`, transport back via the chain rule + Mathlib's

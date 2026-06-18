@@ -2918,6 +2918,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ManifoldGR.dirDeriv_add_fun
 -- expected: standard only — dirDeriv linearity (additive + 𝕜-homogeneous in the vector field, additive
 -- in the function), the directional-derivative API the Bianchi cyclic sum / Ricci traces consume. Axiom-free.
+#print axioms QIQTH.ManifoldGR.dirDeriv_eq_chart
+-- expected: standard only — GENERAL-MANIFOLD COMMUTATOR, foundational block. Directional-derivative
+-- chart-covariance: (Yf)(x) on M = normed-space directional deriv of the chart rep f∘e⁻¹ along the
+-- pushed-forward vector, via the chain rule for f=(f∘e⁻¹)∘e. The transport that lifts the model-space
+-- commutator to general (boundaryless) manifolds. Axiom-free. (The 'wall' was Mathlib plumbing, not math.)
 #print axioms QIQTH.ManifoldGR.PseudoRiemannianMetric.lower_injective
 #print axioms QIQTH.ManifoldGR.PseudoRiemannianMetric.lower_symm
 -- expected: standard only — P3 (Lorentzian metric, which Mathlib lacks — its metric infra is
