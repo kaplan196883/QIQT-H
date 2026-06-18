@@ -53,6 +53,25 @@ theorem pd_const_mul (c : ℝ) (f : Point n → ℝ) (i : Fin n) (x : Point n)
     pd (fun y => c * f y) i x = c * pd f i x := by
   simp only [pd]; exact deriv_const_mul c hf
 
+/-- A smooth field is partially differentiable in every direction at every point. -/
+theorem PdiffAt_of_contDiff (f : Point n → ℝ) (hf : ContDiff ℝ ⊤ f) (i : Fin n) (x : Point n) :
+    PdiffAt f i x := by
+  have hg : DifferentiableAt ℝ f ((Function.update x i) (x i)) := by
+    rw [Function.update_eq_self]; exact (hf.differentiable (by simp)).differentiableAt
+  exact hg.comp (x i) (hasDerivAt_update x i (x i)).differentiableAt
+
+/-- A product of partially-differentiable fields is partially differentiable. -/
+theorem PdiffAt.mul {f g : Point n → ℝ} {i : Fin n} {x : Point n}
+    (hf : PdiffAt f i x) (hg : PdiffAt g i x) : PdiffAt (fun y => f y * g y) i x :=
+  DifferentiableAt.mul hf hg
+
+/-- `∂ᵢ` commutes with finite sums: `∂ᵢ(∑ₖ fₖ) = ∑ₖ ∂ᵢfₖ`. -/
+theorem pd_sum {ι : Type*} (s : Finset ι) (F : ι → Point n → ℝ) (i : Fin n) (x : Point n)
+    (hF : ∀ k ∈ s, PdiffAt (F k) i x) :
+    pd (fun y => ∑ k ∈ s, F k y) i x = ∑ k ∈ s, pd (F k) i x := by
+  simp only [pd]
+  exact deriv_fun_sum (fun k hk => hF k hk)
+
 /-- **Leibniz rule** `∂ᵢ(f·g) = (∂ᵢf)·g + f·(∂ᵢg)`. -/
 theorem pd_mul (f g : Point n → ℝ) (i : Fin n) (x : Point n)
     (hf : PdiffAt f i x) (hg : PdiffAt g i x) :
@@ -329,5 +348,15 @@ theorem second_bianchi_deriv_part
       pd_comm (fun w => christoffel g gi ρ mu σ w) lam ν x (hC ρ mu σ),
       pd_comm (fun w => christoffel g gi ρ lam σ w) mu ν x (hC ρ lam σ)]
   ring
+
+/-- **Covariant derivative of the (1,3) Riemann tensor** `∇_λ R^ρ_{σμν} = ∂_λ R^ρ_{σμν}
+    + Γ^ρ_{λκ}R^κ_{σμν} − Γ^κ_{λσ}R^ρ_{κμν} − Γ^κ_{λμ}R^ρ_{σκν} − Γ^κ_{λν}R^ρ_{σμκ}`. -/
+noncomputable def covDerivRiem (g gi : Point n → Fin n → Fin n → ℝ)
+    (lam ρ σ μ ν : Fin n) (x : Point n) : ℝ :=
+  pd (fun y => riemann g gi ρ σ μ ν y) lam x
+    + (∑ κ, christoffel g gi ρ lam κ x * riemann g gi κ σ μ ν x)
+    - (∑ κ, christoffel g gi κ lam σ x * riemann g gi ρ κ μ ν x)
+    - (∑ κ, christoffel g gi κ lam μ x * riemann g gi ρ σ κ ν x)
+    - (∑ κ, christoffel g gi κ lam ν x * riemann g gi ρ σ μ κ x)
 
 end QIQTH.Curvature

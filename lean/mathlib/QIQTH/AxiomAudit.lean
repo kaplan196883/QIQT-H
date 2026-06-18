@@ -2802,5 +2802,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the DERIVATIVE part of the second Bianchi cyclic sum vanishes: the six ∂∂Γ
 -- terms cancel in pairs via Schwarz (pd_comm). (The full second Bianchi additionally needs the ΓΓ/Γ·R
 -- cancellation — the long general-coordinate remainder; see note 51.)
+-- Scaffolding for the FULL second Bianchi: ∂ commutes with sums, PdiffAt of smooth fields + products.
+#print axioms QIQTH.Curvature.pd_sum
+#print axioms QIQTH.Curvature.PdiffAt_of_contDiff
+#print axioms QIQTH.Curvature.PdiffAt.mul
 
 end QIQTH.AxiomAudit
