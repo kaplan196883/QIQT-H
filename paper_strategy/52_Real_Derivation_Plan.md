@@ -76,15 +76,23 @@ is machine-checked.
 remaining hypotheses are the cited PHYSICS (`crux` = post-null Clausius relation, `conserv`). Everything
 geometric is proven. **Pro's two main hits are closed.**
 
-## Phase 3 — Wire the null-cone crux  *(ties physics to the proven algebraic step)*  ≈ moderate
+## Phase 3 — Wire the null-cone crux — ✅ DONE, axiom-free
 
-Replace the `crux` *tensor* hypothesis by the more primitive **per-null Clausius relation** + the
-machine-checked `symmTensor_eq_smul_metric_of_null`. FRAMEWORK BRIDGE (honest subtlety): the null-cone
-lemma is Fin 4 *Minkowski*; the curvature tower is general `Point n`/general `g`. Options:
-- (a) **Local inertial frame**: specialize to `n=4` with `g(x)` = Minkowski at the point (Jacobson's
-  argument is local — at each point pick a frame where `g(x)=η`). Cleanest; states the honest locality.
-- (b) Generalize the null-cone lemma to a general Lorentzian metric (harder; deferrable).
-Pick (a). This makes the physics input the *per-null heat relation*, exactly Jacobson's premise.
+Took option **(b)** (the cleaner, frame-independent route) and it landed:
+- **`symmTensor_eq_smul_metric_of_null_general`** (EinsteinEquationOfState.lean): the null-cone crux for a
+  GENERAL Lorentzian `g`, proved by **congruence reduction** `g = Pᵀ·η·P` (Sylvester's law as a labeled
+  hypothesis) to the Minkowski lemma — transform `C` by `Pinv`, apply the Minkowski crux, transform back.
+  Supporting: `BL` (bilinear form), `QF_eq_BL`, `BL_transform` (Fin-4 rearrangement, closed by `ring`).
+- **`crux_of_pernull`** (EinsteinFieldEquation.lean): DERIVES the tensor `crux` (`a·T=R+f·g`) from the
+  genuinely primitive **per-null Clausius relation** — `a·T−R` vanishing on the whole null cone of `g x`
+  in each point's local inertial frame, exactly Jacobson's premise. `f` produced pointwise (via `choose`);
+  its smoothness is the one honest analytic residual (not derivable from the per-null relation alone).
+
+Both `#print axioms`-clean, full project builds (8646 jobs), budget 0. **The chain is now end-to-end:**
+per-null Clausius → tensor crux → `G+Λg = a·T` with genuine `G`, genuine constant `Λ`, all geometry
+machine-checked; only the cited physics (per-null Clausius + conservation) and `f`-regularity remain as
+labeled hypotheses. *(LESSON: option (a)'s pointwise local-inertial frame is frame-dependent per point and
+fights the `∀y` tensor `crux`; option (b)'s congruence is the clean, frame-independent statement.)*
 
 ## Phase 4 — Global cosmological constant — ✅ DONE, axiom-free
 
