@@ -2721,6 +2721,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EinsteinEOS.symmTensor_eq_smul_metric_of_null
 -- expected: standard only — a symmetric tensor vanishing on the entire null cone of Minkowski
 -- is a scalar multiple of the metric (the step turning per-null-direction Clausius into a tensor eq).
+#print axioms QIQTH.EinsteinEOS.QF_eq_BL
+#print axioms QIQTH.EinsteinEOS.symmTensor_eq_smul_metric_of_null_general
+-- expected: standard only — PHASE 3. The null-cone crux for a GENERAL Lorentzian metric (not just
+-- Minkowski), via congruence reduction g=Pᵀ·η·P (Sylvester's law as a labeled hypothesis) to the
+-- Minkowski lemma. This is the linear algebra that lets the per-null Clausius relation be stated in
+-- each point's own local inertial frame and still yield a tensor field equation.
 #print axioms QIQTH.EinsteinEOS.einstein_tensor_eq_of_state
 -- expected: standard only — given a·T(k,k)=E(k,k) for all null k (Raychaudhuri supplies this, as
 -- HYPOTHESIS), the tensors obey a·T = E + f·g; conservation+Bianchi fixing f=-½R+Λ is cited.
@@ -2871,6 +2877,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Curvature.einstein_field_equation_real_global
 -- expected: standard only — the field equation with a GENUINE cosmological constant Λ (true constant,
 -- not just covariantly constant at a point), via const_of_pd_zero on connected Point n. Phase 4. Axiom-free.
+#print axioms QIQTH.Curvature.crux_of_pernull
+-- expected: standard only — PHASE 3 WIRING. DERIVES the tensor `crux` (a·T=R+f·g) from the genuinely
+-- primitive per-null Clausius relation (a·T−R vanishes on the whole null cone of g x, in each point's
+-- local inertial frame), via symmTensor_eq_smul_metric_of_null_general + pointwise congruence to
+-- Minkowski. Closes the chain from Jacobson's heat premise to the field equation; f's smoothness is the
+-- one honest analytic residual. Axiom-free.
 -- expected: standard only — THE EINSTEIN FIELD EQUATION as equation of state: from the post-crux Clausius
 -- relation a·T=R+f·g + conservation ∇^μ(aT)=0 + contracted Bianchi ∇^μR=½∂R + metric compat, derive
 -- a·T_{μν}=G_{μν}+Λg_{μν} with Λ=f+½R covariantly constant (cosmological constant = integration constant).

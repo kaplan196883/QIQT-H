@@ -101,4 +101,100 @@ theorem einstein_tensor_eq_of_state
   simp only [hC] at h2
   linarith
 
+/-- The bilinear form `∑_{ij} C_{ij} v^i v^j` of a tensor on a vector — the coordinate-free shape of `QF`. -/
+def BL (C : Fin 4 → Fin 4 → ℝ) (v : Fin 4 → ℝ) : ℝ := ∑ i, ∑ j, C i j * v i * v j
+
+/-- `QF` is the bilinear form on the explicit 4-vector (for a symmetric tensor). -/
+theorem QF_eq_BL (C : Fin 4 → Fin 4 → ℝ) (hC : ∀ i j, C i j = C j i) (x0 x1 x2 x3 : ℝ) :
+    QF C x0 x1 x2 x3 = BL C ![x0, x1, x2, x3] := by
+  simp only [BL, QF, Fin.sum_univ_four, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+    Matrix.cons_val_two, Matrix.cons_val_three, Matrix.tail_cons]
+  rw [hC 1 0, hC 2 0, hC 3 0, hC 2 1, hC 3 1, hC 3 2]; ring
+
+/-- **The algebraic crux for a GENERAL Lorentzian metric** (Phase 3 — the framework bridge).
+    A symmetric tensor `C` whose bilinear form vanishes on the *entire null cone* of an arbitrary
+    Lorentzian metric `g` is a scalar multiple of `g`. The Lorentzian hypothesis enters as Sylvester's
+    law of inertia: `g` is congruent to Minkowski, `g = Pᵀ·η·P` for an invertible `P` (`hcong` with
+    `P`, `Pinv` a two-sided inverse). The proof is a **congruence reduction** to the proven
+    Minkowski case `symmTensor_eq_smul_metric_of_null`: transform `C` by `Pinv`, apply the Minkowski
+    lemma, transform back. This is exactly what upgrades Jacobson's per-null Clausius relation
+    (stated in each point's local inertial frame) into the tensor field equation. -/
+theorem symmTensor_eq_smul_metric_of_null_general
+    (C g : Fin 4 → Fin 4 → ℝ) (hCsymm : ∀ i j, C i j = C j i)
+    (P Pinv : Fin 4 → Fin 4 → ℝ)
+    (hPP : ∀ i j, (∑ k, P i k * Pinv k j) = if i = j then (1:ℝ) else 0)
+    (hPP' : ∀ i j, (∑ k, Pinv i k * P k j) = if i = j then (1:ℝ) else 0)
+    (hcong : ∀ i j, g i j = ∑ k, ∑ l, P k i * gm k l * P l j)
+    (hnull : ∀ v : Fin 4 → ℝ, BL g v = 0 → BL C v = 0) :
+    ∃ c : ℝ, ∀ i j, C i j = c * g i j := by
+  -- A `Q`-congruence of a tensor, read off through its bilinear form (pure Fin-4 rearrangement).
+  have BL_transform : ∀ (M Q : Fin 4 → Fin 4 → ℝ) (w : Fin 4 → ℝ),
+      BL M (fun a => ∑ k, Q a k * w k)
+        = ∑ k, ∑ l, (∑ i, ∑ j, Q i k * M i j * Q j l) * w k * w l := by
+    intro M Q w; simp only [BL, Fin.sum_univ_four]; ring
+  -- Minkowski bilinear form, explicit.
+  have BL_gm : ∀ w : Fin 4 → ℝ, BL gm w = - (w 0)^2 + (w 1)^2 + (w 2)^2 + (w 3)^2 := by
+    intro w; simp only [BL, gm, Fin.sum_univ_four, Fin.reduceEq, reduceIte]; ring
+  -- `g` is the `P`-congruence of `gm`.
+  have hg_eq : ∀ v : Fin 4 → ℝ, BL g v = BL gm (fun a => ∑ k, P a k * v k) := by
+    intro v
+    rw [BL_transform gm P v, BL]
+    refine Finset.sum_congr rfl (fun k _ => Finset.sum_congr rfl (fun l _ => ?_))
+    rw [hcong k l]
+  -- `P` undoes `Pinv` on vectors.
+  have hPu : ∀ (w : Fin 4 → ℝ) (a : Fin 4),
+      (∑ k, P a k * (∑ m, Pinv k m * w m)) = w a := by
+    intro w a
+    have step : (∑ k, P a k * (∑ m, Pinv k m * w m)) = ∑ k, ∑ m, P a k * Pinv k m * w m := by
+      refine Finset.sum_congr rfl (fun k _ => ?_)
+      rw [Finset.mul_sum]; exact Finset.sum_congr rfl (fun m _ => by ring)
+    rw [step, Finset.sum_comm]
+    have step2 : ∀ m, (∑ k, P a k * Pinv k m * w m) = (if a = m then (1:ℝ) else 0) * w m := by
+      intro m; rw [← hPP a m, Finset.sum_mul]
+    simp_rw [step2]; simp
+  -- the `Pinv`-congruence of `C` is symmetric.
+  have hC'symm : ∀ k l, (∑ i, ∑ j, Pinv i k * C i j * Pinv j l)
+      = (∑ i, ∑ j, Pinv i l * C i j * Pinv j k) := by
+    intro k l
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl (fun p _ => Finset.sum_congr rfl (fun q _ => ?_))
+    rw [hCsymm q p]; ring
+  -- apply the Minkowski crux to the transformed tensor `C' = Pinvᵀ C Pinv`.
+  obtain ⟨c, hc⟩ := symmTensor_eq_smul_metric_of_null
+    (fun k l => ∑ i, ∑ j, Pinv i k * C i j * Pinv j l) hC'symm
+    (by
+      intro x0 x1 x2 x3 hn
+      rw [QF_eq_BL _ hC'symm]
+      have key : BL (fun k l => ∑ i, ∑ j, Pinv i k * C i j * Pinv j l) ![x0, x1, x2, x3]
+          = BL C (fun a => ∑ k, Pinv a k * (![x0, x1, x2, x3] : Fin 4 → ℝ) k) :=
+        (BL_transform C Pinv ![x0, x1, x2, x3]).symm
+      rw [key]
+      apply hnull
+      rw [hg_eq]
+      have hPid : (fun a => ∑ k, P a k * (∑ m, Pinv k m * (![x0, x1, x2, x3] : Fin 4 → ℝ) m))
+          = (![x0, x1, x2, x3] : Fin 4 → ℝ) := by
+        funext a; exact hPu _ a
+      rw [hPid, BL_gm]
+      simp only [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+        Matrix.cons_val_two, Matrix.cons_val_three, Matrix.tail_cons]
+      linarith [hn])
+  -- transform back: `C = Pᵀ C' P = c·g`.
+  have hCrecon : ∀ i j, C i j
+      = ∑ k, ∑ l, P k i * (∑ a, ∑ b, Pinv a k * C a b * Pinv b l) * P l j := by
+    intro i j
+    have h1 : (∑ a, ∑ b, C a b * (∑ k, Pinv a k * P k i) * (∑ l, Pinv b l * P l j)) = C i j := by
+      simp only [hPP']
+      simp [Finset.sum_ite_eq', mul_ite]
+    have h2 : (∑ a, ∑ b, C a b * (∑ k, Pinv a k * P k i) * (∑ l, Pinv b l * P l j))
+        = ∑ k, ∑ l, P k i * (∑ a, ∑ b, Pinv a k * C a b * Pinv b l) * P l j := by
+      simp only [Fin.sum_univ_four]; ring
+    exact h1.symm.trans h2
+  refine ⟨c, fun i j => ?_⟩
+  rw [hCrecon i j]
+  simp only [hc]
+  rw [hcong i j, Finset.mul_sum]
+  refine Finset.sum_congr rfl (fun k _ => ?_)
+  rw [Finset.mul_sum]
+  exact Finset.sum_congr rfl (fun l _ => by ring)
+
 end QIQTH.EinsteinEOS

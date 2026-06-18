@@ -1,4 +1,5 @@
 import QIQTH.Curvature
+import QIQTH.EinsteinEquationOfState
 
 /-!
 # The Einstein field equation from the thermodynamic equation of state
@@ -251,5 +252,38 @@ theorem einstein_field_equation_real_global (g gi : Point n → Fin n → Fin n 
     const_of_pd_zero (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y) hFdiff hzero x 0
   rw [(einstein_field_equation_real g gi hsymm hsymm_gi hinv hCg hCgi hC T f a x (hf x) crux
         (conserv x)).1 μ ν, hc]
+
+/-- **Phase 3 — wire the per-null Clausius relation to the tensor crux.** This *derives* the `crux`
+    hypothesis (`a·T = R + f·g`) used everywhere above, from the genuinely primitive **per-null
+    Clausius relation**: at each point, the heat tensor `a·T − R` vanishes on the *entire null cone*
+    of the metric `g x`. That per-null relation is exactly Jacobson's premise (the Clausius relation
+    `δQ = TδS` imposed on every local Rindler horizon, with horizon entropy `∝` area). The upgrade
+    from per-null-direction to a tensor is the algebraic crux, here for the **general (curved)
+    Lorentzian metric** via `symmTensor_eq_smul_metric_of_null_general` — the Lorentzian structure
+    enters as the pointwise congruence to Minkowski `g x = Pᵀ·η·P` (Sylvester's law). The scalar
+    field `f` is produced pointwise; its smoothness (needed to run the field-equation closure) is the
+    one honest analytic residual, not derivable from the per-null relation alone. Axiom-free. -/
+theorem crux_of_pernull (g gi : Point 4 → Fin 4 → Fin 4 → ℝ)
+    (T : Point 4 → Fin 4 → Fin 4 → ℝ) (a : ℝ)
+    (hT_symm : ∀ x a' b, T x a' b = T x b a')
+    (hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x)
+    (P Pinv : Point 4 → Fin 4 → Fin 4 → ℝ)
+    (hPP : ∀ x i j, (∑ k, P x i k * Pinv x k j) = if i = j then (1:ℝ) else 0)
+    (hPP' : ∀ x i j, (∑ k, Pinv x i k * P x k j) = if i = j then (1:ℝ) else 0)
+    (hcong : ∀ x i j, g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j)
+    (pernull : ∀ (x : Point 4) (v : Fin 4 → ℝ),
+        QIQTH.EinsteinEOS.BL (g x) v = 0 →
+        QIQTH.EinsteinEOS.BL (fun a' b => a * T x a' b - ricci g gi a' b x) v = 0) :
+    ∃ f : Point 4 → ℝ, ∀ x a' b, a * T x a' b = ricci g gi a' b x + f x * g x a' b := by
+  have hpt : ∀ x : Point 4, ∃ c : ℝ, ∀ a' b,
+      a * T x a' b - ricci g gi a' b x = c * g x a' b := by
+    intro x
+    have hCsymm : ∀ i j, (a * T x i j - ricci g gi i j x) = (a * T x j i - ricci g gi j i x) := by
+      intro i j; rw [hT_symm x i j, hric_symm x i j]
+    exact QIQTH.EinsteinEOS.symmTensor_eq_smul_metric_of_null_general
+      (fun a' b => a * T x a' b - ricci g gi a' b x) (g x) hCsymm
+      (P x) (Pinv x) (hPP x) (hPP' x) (hcong x) (pernull x)
+  choose f hf using hpt
+  exact ⟨f, fun x a' b => by have := hf x a' b; linarith⟩
 
 end QIQTH.Curvature
