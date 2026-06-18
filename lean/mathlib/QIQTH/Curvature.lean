@@ -158,4 +158,72 @@ theorem covDeriv02_symm (g gi : Point n → Fin n → Fin n → ℝ)
     apply Finset.sum_congr rfl; intro σ _; rw [hT x μ σ]
   rw [e1, e2, e3]; ring
 
+/-! ### Toward metric compatibility ∇g = 0 (the defining Levi-Civita property) -/
+
+/-- **Inverse-metric contraction.** For `gi` a right-inverse of the (symmetric) metric `g` at `x`,
+    lowering an upper index then contracting returns the original: `∑σ g_{σν} (∑α g^{σα} w_α) = w_ν`. -/
+theorem inv_contract (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (x : Point n)
+    (hinv : ∀ a b, (∑ σ, g x a σ * gi x σ b) = if a = b then 1 else 0)
+    (ν : Fin n) (w : Fin n → ℝ) :
+    (∑ σ, g x σ ν * (∑ α, gi x σ α * w α)) = w ν := by
+  have hginv : ∀ α, (∑ σ, g x σ ν * gi x σ α) = (if ν = α then 1 else 0) := by
+    intro α
+    have h2 : (∑ σ, g x σ ν * gi x σ α) = ∑ σ, g x ν σ * gi x σ α :=
+      Finset.sum_congr rfl (fun σ _ => by rw [hsymm x σ ν])
+    rw [h2, hinv ν α]
+  calc (∑ σ, g x σ ν * (∑ α, gi x σ α * w α))
+      = ∑ σ, ∑ α, g x σ ν * (gi x σ α * w α) := by
+        apply Finset.sum_congr rfl; intro σ _; rw [Finset.mul_sum]
+    _ = ∑ α, ∑ σ, g x σ ν * (gi x σ α * w α) := Finset.sum_comm
+    _ = ∑ α, (∑ σ, g x σ ν * gi x σ α) * w α := by
+        apply Finset.sum_congr rfl; intro α _
+        rw [Finset.sum_mul]; apply Finset.sum_congr rfl; intro σ _; ring
+    _ = ∑ α, (if ν = α then 1 else 0) * w α := by
+        apply Finset.sum_congr rfl; intro α _; rw [hginv α]
+    _ = w ν := by
+        simp only [ite_mul, one_mul, zero_mul, Finset.sum_ite_eq, Finset.mem_univ, if_true]
+
+/-- **Lowered Christoffel symbol** `Γ_{νλμ} = ∑σ g_{σν} Γ^σ_{λμ} = ½(∂_λ g_{νμ} + ∂_μ g_{νλ} − ∂_ν g_{λμ})`
+    — the inverse metric in Γ is cancelled by the lowering, via `inv_contract`. -/
+theorem christoffel_lower (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (x : Point n)
+    (hinv : ∀ a b, (∑ σ, g x a σ * gi x σ b) = if a = b then 1 else 0)
+    (ν lam mu : Fin n) :
+    (∑ σ, g x σ ν * christoffel g gi σ lam mu x)
+      = (1 / 2) * (pd (fun y => g y ν mu) lam x + pd (fun y => g y ν lam) mu x
+               - pd (fun y => g y lam mu) ν x) := by
+  simp only [christoffel]
+  rw [show (∑ σ, g x σ ν * ((1 / 2) * ∑ α, gi x σ α *
+            (pd (fun y => g y α mu) lam x + pd (fun y => g y α lam) mu x
+              - pd (fun y => g y lam mu) α x)))
+        = (1 / 2) * (∑ σ, g x σ ν * (∑ α, gi x σ α *
+            (pd (fun y => g y α mu) lam x + pd (fun y => g y α lam) mu x
+              - pd (fun y => g y lam mu) α x)))
+      from by rw [Finset.mul_sum]; exact Finset.sum_congr rfl (fun σ _ => by ring)]
+  congr 1
+  exact inv_contract g gi hsymm x hinv ν _
+
+/-- **Metric compatibility `∇_λ g_{μν} = 0`** — the defining property of the Levi-Civita connection,
+    now a THEOREM from the Christoffel definition (via `christoffel_lower`) + metric symmetry. (Needs only
+    that `gi` is the inverse and `g` is symmetric — no smoothness, since `∇g` is algebraic in the `∂g`.) -/
+theorem metric_compat (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (x : Point n)
+    (hinv : ∀ a b, (∑ σ, g x a σ * gi x σ b) = if a = b then 1 else 0)
+    (lam mu ν : Fin n) :
+    covDeriv02 g gi g lam mu ν x = 0 := by
+  simp only [covDeriv02]
+  rw [show (∑ σ, christoffel g gi σ lam mu x * g x σ ν)
+        = ∑ σ, g x σ ν * christoffel g gi σ lam mu x
+      from Finset.sum_congr rfl (fun σ _ => mul_comm _ _)]
+  rw [show (∑ σ, christoffel g gi σ lam ν x * g x mu σ)
+        = ∑ σ, g x σ mu * christoffel g gi σ lam ν x
+      from Finset.sum_congr rfl (fun σ _ => by rw [mul_comm]; rw [hsymm x mu σ])]
+  rw [christoffel_lower g gi hsymm x hinv ν lam mu,
+      christoffel_lower g gi hsymm x hinv mu lam ν]
+  rw [show (fun y => g y ν mu) = (fun y => g y mu ν) from funext (fun y => hsymm y ν mu),
+      show (fun y => g y ν lam) = (fun y => g y lam ν) from funext (fun y => hsymm y ν lam),
+      show (fun y => g y lam mu) = (fun y => g y mu lam) from funext (fun y => hsymm y lam mu)]
+  ring
+
 end QIQTH.Curvature

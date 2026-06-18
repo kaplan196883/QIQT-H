@@ -2783,5 +2783,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Curvature.pd_const_mul
 #print axioms QIQTH.Curvature.pd_mul
 -- expected: standard only — ∂ᵢ(f+g)=∂ᵢf+∂ᵢg, ∂ᵢ(f−g), ∂ᵢ(c·f)=c·∂ᵢf, Leibniz ∂ᵢ(fg)=(∂ᵢf)g+f(∂ᵢg).
+-- Layer 1: metric compatibility ∇g=0 (the defining Levi-Civita property).
+#print axioms QIQTH.Curvature.inv_contract
+-- expected: standard only — ∑σ g_{σν}(∑α g^{σα} w_α)=w_ν (inverse-metric collapse; double sum + δ).
+#print axioms QIQTH.Curvature.christoffel_lower
+-- expected: standard only — Γ_{νλμ}=½(∂_λg_{νμ}+∂_μg_{νλ}−∂_νg_{λμ}) (lowered Christoffel, via inv_contract).
+#print axioms QIQTH.Curvature.metric_compat
+-- expected: standard only — ∇_λ g_{μν}=0: the Levi-Civita defining property, a THEOREM from the
+-- Christoffel definition + metric symmetry. (Closes a Layer-1 target feeding Jacobson's Bianchi step.)
 
 end QIQTH.AxiomAudit
