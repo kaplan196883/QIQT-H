@@ -1182,4 +1182,82 @@ theorem gi_trace_covDerivRiem (g gi : Point n → Fin n → Fin n → ℝ)
     Finset.sum_sub_distrib]
   rw [hpd_S, hS_gipd, hAC, hBD]; ring
 
+/-- **T3 core with `S` substituted to `−`(raised Ricci)** (via `ricci_gi_raise`): for fixed `ρ`,
+    `∑_{σν} g^{σν} ∇_ρ R^ρ_{σνλ} = −∑_β g^{ρβ}∂_ρ Ric_{βλ} + ∑_{βκ} Γ^β_{ρκ}g^{ρκ}Ric_{βλ}
+    + ∑_{βκ} Γ^κ_{ρλ}g^{ρβ}Ric_{βκ}`. The `Γ^ρ_{ρκ}` terms from `∂g` cancel the `∑Γ^ρ_{ρκ}S^κ` spectator. -/
+theorem gi_trace_covDerivRiem_ricci (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (ρ lam : Fin n) (x : Point n) :
+    (∑ σ, ∑ ν, gi x σ ν * covDerivRiem g gi ρ ρ σ ν lam x)
+      = - (∑ β, gi x ρ β * pd (fun y => ricci g gi β lam y) ρ x)
+        + (∑ β, ∑ κ, christoffel g gi β ρ κ x * gi x ρ κ * ricci g gi β lam x)
+        + (∑ β, ∑ κ, christoffel g gi κ ρ lam x * gi x ρ β * ricci g gi β κ x) := by
+  have hgd : ∀ a b, PdiffAt (fun y => g y a b) ρ x := fun a b =>
+    PdiffAt_of_contDiff _ (hCg a b) ρ x
+  have hgid : ∀ a b, PdiffAt (fun y => gi y a b) ρ x := fun a b =>
+    PdiffAt_of_contDiff _ (hCgi a b) ρ x
+  have hRic : ∀ a b, PdiffAt (fun y => ricci g gi a b y) ρ x := fun a b =>
+    PdiffAt_ricci g gi hC a b ρ x
+  have moveκ : ∀ (F : Fin n → Fin n → Fin n → ℝ),
+      (∑ σ, ∑ ν, ∑ κ, F σ ν κ) = ∑ κ, ∑ σ, ∑ ν, F σ ν κ := by
+    intro F
+    rw [Finset.sum_congr rfl (fun σ _ => Finset.sum_comm), Finset.sum_comm]
+  have hpd_gi : ∀ a b, pd (fun y => gi y a b) ρ x
+      = -(∑ κ, christoffel g gi a ρ κ x * gi x κ b) - (∑ κ, christoffel g gi b ρ κ x * gi x a κ) := by
+    intro a b
+    have hm := inv_metric_compat g gi hsymm hsymm_gi hinv ρ x hgd hgid a b
+    simp only [covDeriv20] at hm; linarith [hm]
+  have hSfun : (fun y => ∑ σ, ∑ ν, gi y σ ν * riemann g gi ρ σ ν lam y)
+             = (fun y => (-1 : ℝ) * ∑ β, gi y ρ β * ricci g gi β lam y) := by
+    funext y; rw [ricci_gi_raise g gi hsymm hsymm_gi hinv hCg hC ρ lam y]; ring
+  have hpd_S : pd (fun y => ∑ σ, ∑ ν, gi y σ ν * riemann g gi ρ σ ν lam y) ρ x
+      = -(∑ β, pd (fun y => gi y ρ β) ρ x * ricci g gi β lam x)
+        - (∑ β, gi x ρ β * pd (fun y => ricci g gi β lam y) ρ x) := by
+    rw [hSfun, pd_const_mul (-1) _ ρ x
+          (PdiffAt_sum _ _ ρ x (fun β _ => (hgid ρ β).mul (hRic β lam))),
+        pd_sum Finset.univ (fun β y => gi y ρ β * ricci g gi β lam y) ρ x
+          (fun β _ => (hgid ρ β).mul (hRic β lam)),
+        Finset.sum_congr rfl (fun β (_ : β ∈ Finset.univ) =>
+          pd_mul (fun y => gi y ρ β) (fun y => ricci g gi β lam y) ρ x (hgid ρ β) (hRic β lam)),
+        Finset.sum_add_distrib]
+    ring
+  have hspect1 : (∑ σ, ∑ ν, ∑ κ, gi x σ ν * (christoffel g gi ρ ρ κ x * riemann g gi κ σ ν lam x))
+      = - ∑ β, ∑ κ, christoffel g gi ρ ρ κ x * gi x κ β * ricci g gi β lam x := by
+    rw [moveκ (fun σ ν κ => gi x σ ν * (christoffel g gi ρ ρ κ x * riemann g gi κ σ ν lam x)),
+        Finset.sum_congr rfl (fun κ (_ : κ ∈ Finset.univ) => by
+          rw [show (∑ σ, ∑ ν, gi x σ ν * (christoffel g gi ρ ρ κ x * riemann g gi κ σ ν lam x))
+                = christoffel g gi ρ ρ κ x * (∑ σ, ∑ ν, gi x σ ν * riemann g gi κ σ ν lam x) from by
+              rw [Finset.mul_sum]; apply Finset.sum_congr rfl; intro σ _
+              rw [Finset.mul_sum]; apply Finset.sum_congr rfl; intro ν _; ring,
+            ricci_gi_raise g gi hsymm hsymm_gi hinv hCg hC κ lam x])]
+    simp only [Finset.mul_sum, mul_neg, Finset.sum_neg_distrib]
+    congr 1
+    rw [Finset.sum_comm]
+    apply Finset.sum_congr rfl; intro β _; apply Finset.sum_congr rfl; intro κ _; ring
+  have hspect2 : (∑ σ, ∑ ν, ∑ κ, gi x σ ν * (christoffel g gi κ ρ lam x * riemann g gi ρ σ ν κ x))
+      = - ∑ β, ∑ κ, christoffel g gi κ ρ lam x * gi x ρ β * ricci g gi β κ x := by
+    rw [moveκ (fun σ ν κ => gi x σ ν * (christoffel g gi κ ρ lam x * riemann g gi ρ σ ν κ x)),
+        Finset.sum_congr rfl (fun κ (_ : κ ∈ Finset.univ) => by
+          rw [show (∑ σ, ∑ ν, gi x σ ν * (christoffel g gi κ ρ lam x * riemann g gi ρ σ ν κ x))
+                = christoffel g gi κ ρ lam x * (∑ σ, ∑ ν, gi x σ ν * riemann g gi ρ σ ν κ x) from by
+              rw [Finset.mul_sum]; apply Finset.sum_congr rfl; intro σ _
+              rw [Finset.mul_sum]; apply Finset.sum_congr rfl; intro ν _; ring,
+            ricci_gi_raise g gi hsymm hsymm_gi hinv hCg hC ρ κ x])]
+    simp only [Finset.mul_sum, mul_neg, Finset.sum_neg_distrib]
+    congr 1
+    rw [Finset.sum_comm]
+    apply Finset.sum_congr rfl; intro β _; apply Finset.sum_congr rfl; intro κ _; ring
+  rw [gi_trace_covDerivRiem g gi hsymm hsymm_gi hinv hCg hCgi hC ρ lam x, hpd_S, hspect1, hspect2,
+      Finset.sum_congr rfl (fun β (_ : β ∈ Finset.univ) => by
+        rw [show pd (fun y => gi y ρ β) ρ x * ricci g gi β lam x
+              = (-(∑ κ, christoffel g gi ρ ρ κ x * gi x κ β)
+                  - (∑ κ, christoffel g gi β ρ κ x * gi x ρ κ)) * ricci g gi β lam x from by
+            rw [hpd_gi ρ β]])]
+  simp only [sub_mul, neg_mul, Finset.sum_mul, Finset.sum_sub_distrib, Finset.sum_neg_distrib]
+  ring
+
 end QIQTH.Curvature
