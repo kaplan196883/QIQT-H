@@ -63,12 +63,18 @@ obtained by contracting `second_bianchi_contracted` with `g^{σν}`. Three terms
 Needs `ricci`/`gi`/`g` differentiability (= `PdiffAt_riemann` lifted to `ricci`; `gi` smoothness hyp).
 Also needs `hsymm_gi` (gi symmetric) for the `gi·g=δ` collapses. **~230 ln, the bulk of the work.**
 
-## Phase 2 — Instantiate to the actual curvature  *(closes pro's main hit)* ≈30 ln
+**✅ PHASE 1 DONE, axiom-free** (`twice_contracted_bianchi`): `∇^μRic_{μλ}=½∂_λR`. Steps: `ricci_gi_raise`
+(1.1) · `gi_trace_covDeriv_ricci` (T1) · `gi_trace_covDerivRiem` (T3 core) · `gi_trace_covDerivRiem_ricci`
+(T3 substituted) · `divRiemann_trace_eq` (∑ρ T3 = −div02) · assemble. The whole twice-contracted Bianchi
+is machine-checked.
 
-`einstein_field_equation_inst`: re-state `einstein_field_equation` with `Ric := ricci g gi`,
-`tr := scalarCurv g gi`, and **discharge `bianchi`** with Phase-1's `twice_contracted_bianchi`. Now the
-first conjunct is the *genuine* Einstein tensor, and the theorem depends only on `crux` + `conserv`
-(physics) + proven geometry. (`a≠0` recorded; conservation of `a·T` ⟺ of `T`.)
+## Phase 2 — Instantiate to the actual curvature  *(closes pro's main hit)* — ✅ DONE, axiom-free
+
+`einstein_field_equation_real`: `einstein_field_equation` instantiated at `Ric := ricci g gi`,
+`R := scalarCurv g gi`, `bianchi` **discharged** by `twice_contracted_bianchi`. Conclusion now features the
+**genuine `einsteinTensor`**: `a·T_{μν} = G_{μν} + Λg_{μν}`, `Λ = f+½R` covariantly constant. The ONLY
+remaining hypotheses are the cited PHYSICS (`crux` = post-null Clausius relation, `conserv`). Everything
+geometric is proven. **Pro's two main hits are closed.**
 
 ## Phase 3 — Wire the null-cone crux  *(ties physics to the proven algebraic step)*  ≈ moderate
 
