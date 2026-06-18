@@ -213,15 +213,19 @@ multivariable calculus + algebra, NOT the multi-year abstract-manifold library.
   `inv_contract` (the inverse-metric collapse ∑σ g_{σν}(∑α g^{σα}w_α)=w_ν); `christoffel_lower`
   (Γ_{νλμ}=½(∂_λg_{νμ}+∂_μg_{νλ}−∂_νg_{λμ})); and **`metric_compat` — `∇_λ g_{μν}=0`**, the defining
   Levi-Civita property, now a THEOREM from the Christoffel definition + metric symmetry.
-- **Layer 2 (mostly DONE, axiom-free):** the **first Bianchi** identity `riemann_first_bianchi`
-  (R^ρ_{σμν}+R^ρ_{μνσ}+R^ρ_{νσμ}=0, algebraic — `christoffel_symm` only); the pd↔fderiv bridge
-  `pd_eq_fderiv`; and **Schwarz `pd_comm`** (∂ᵢ∂ⱼf=∂ⱼ∂ᵢf for smooth f, via `pd_pd_eq` +
-  `IsSymmSndFDerivAt`) — the analytic keystone. **Remaining:** the **second Bianchi** identity (the long
-  general-coordinate computation — covariant derivative of Riemann, cyclic sum, cancellations using
-  Schwarz + first Bianchi + Christoffel symmetry; achievable now that Schwarz is in hand) → the
-  **contracted Bianchi `∇^μ G_{μν}=0`** = Jacobson's conservation+Bianchi step (Route A step 5).
-  *Status: everything up to and including Schwarz is machine-checked; the second Bianchi is the one deep
-  remaining piece — a long but no-longer-blocked computation.*
+- **Layer 2 (DONE through the Schwarz keystone, axiom-free):** the **first Bianchi** identity
+  `riemann_first_bianchi` (R^ρ_{σμν}+R^ρ_{μνσ}+R^ρ_{νσμ}=0, algebraic — `christoffel_symm` only); the
+  pd↔fderiv bridge `pd_eq_fderiv`; **Schwarz `pd_comm`** (∂ᵢ∂ⱼf=∂ⱼ∂ᵢf for smooth f, via `pd_pd_eq` +
+  `IsSymmSndFDerivAt`) — the analytic keystone; and **`second_bianchi_deriv_part`** — the *derivative
+  part* of the second Bianchi cyclic sum vanishes (the six ∂∂Γ terms cancel in pairs via Schwarz).
+- **THE WALL (honest frontier):** the **full second Bianchi** additionally needs the **ΓΓ / Γ·R terms**
+  to cancel — a ~60+ term combinatorial cancellation (first Bianchi + Christoffel symmetry across the
+  covariant-derivative-of-Riemann expansion) that is **impractical to brute-force in general coordinates**.
+  The clean route is **normal coordinates** (Γ=0 at a point), a separate large construction Mathlib lacks.
+  So the contracted Bianchi `∇^μ G_{μν}=0` (Jacobson's conservation+Bianchi step) is the one piece still
+  cited. *Net: connection + all curvature tensors + metric compatibility + first Bianchi + Schwarz + the
+  second-Bianchi derivative part are ALL machine-checked, far inside where the "cited" line sat before; the
+  remaining gap is the second-Bianchi ΓΓ remainder, needing normal-coordinate machinery.*
 - **Honest scale:** Layer 0 is a clean foundation; Layers 1–2 are the genuine multi-month effort (the
   differentiability propagation through Γ/Riemann is where the cost lives). This is the START of the tower,
   not its completion — and per pro, its marginal value for QIQT-H is bounded (it recertifies textbook DG),
