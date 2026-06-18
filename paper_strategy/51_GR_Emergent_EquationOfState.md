@@ -209,11 +209,14 @@ multivariable calculus + algebra, NOT the multi-year abstract-manifold library.
   (R^ρ_{σμν}) + `riemann_antisymm` (antisymmetry in the last two indices); `ricci`, `scalarCurv`,
   `einsteinTensor` (G=Ric−½Rg); `covDerivVec/Cov/02` (the covariant derivative) + `covDeriv02_symm`. These
   are the definitions + the structural identities that need **no** analytic input.
-- **Layer 1 (NEXT, harder — needs the differentiability bookkeeping):** `pd` algebra (linearity, Leibniz)
-  with smoothness hypotheses; the inverse-metric derivative `∂g⁻¹ = −g⁻¹(∂g)g⁻¹`; **metric compatibility
-  `∇_λ g_{μν}=0`** (the defining Levi-Civita property).
-- **Layer 2 (deep):** the first and **second Bianchi identities**, and the **contracted Bianchi**
-  `∇^μ G_{μν}=0` — which is exactly Jacobson's conservation+Bianchi step (closes Route A's step 5).
+- **Layer 1 (DONE, axiom-free):** the `pd` algebra (`pd_add/sub/const_mul/mul` — linearity + Leibniz);
+  `inv_contract` (the inverse-metric collapse ∑σ g_{σν}(∑α g^{σα}w_α)=w_ν); `christoffel_lower`
+  (Γ_{νλμ}=½(∂_λg_{νμ}+∂_μg_{νλ}−∂_νg_{λμ})); and **`metric_compat` — `∇_λ g_{μν}=0`**, the defining
+  Levi-Civita property, now a THEOREM from the Christoffel definition + metric symmetry.
+- **Layer 2 (NEXT, deep):** the **first Bianchi** identity (algebraic — needs only `christoffel_symm`, no
+  Schwarz; achievable) and the **second Bianchi** (needs mixed-partial symmetry / Schwarz — the hard one),
+  contracting to the **contracted Bianchi `∇^μ G_{μν}=0`** — exactly Jacobson's conservation+Bianchi step
+  (closes Route A's step 5).
 - **Honest scale:** Layer 0 is a clean foundation; Layers 1–2 are the genuine multi-month effort (the
   differentiability propagation through Γ/Riemann is where the cost lives). This is the START of the tower,
   not its completion — and per pro, its marginal value for QIQT-H is bounded (it recertifies textbook DG),
