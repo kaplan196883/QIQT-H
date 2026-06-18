@@ -71,6 +71,26 @@ theorem pd_eq_fderiv (g : Point n → ℝ) (i : Fin n) (x : Point n) (hg : Diffe
   have h := (hg'.comp_hasDerivAt (x i) hu).deriv
   simpa only [pd, Function.comp] using h
 
+/-- A mixed second partial equals the second Fréchet derivative bilinear form on the basis vectors. -/
+theorem pd_pd_eq (f : Point n → ℝ) (i j : Fin n) (x : Point n) (hf : ContDiff ℝ ⊤ f) :
+    pd (fun y => pd f j y) i x
+      = fderiv ℝ (fderiv ℝ f) x (Pi.single i 1) (Pi.single j 1) := by
+  have hfd : Differentiable ℝ f := hf.differentiable (by simp)
+  have hfd2 : Differentiable ℝ (fderiv ℝ f) :=
+    (hf.fderiv_right (m := ⊤) le_top).differentiable (by simp)
+  have e1 : (fun y => pd f j y) = (fun y => (fderiv ℝ f y) (Pi.single j 1)) :=
+    funext (fun y => pd_eq_fderiv f j y (hfd y))
+  rw [e1, pd_eq_fderiv _ i x ((hfd2 x).clm_apply (differentiableAt_const _)),
+      fderiv_clm_apply (hfd2 x) (differentiableAt_const _)]
+  simp [fderiv_const]
+
+/-- **Schwarz: mixed partial derivatives commute** `∂ᵢ∂ⱼ f = ∂ⱼ∂ᵢ f` for smooth `f`. The analytic
+    keystone for the second Bianchi identity. -/
+theorem pd_comm (f : Point n → ℝ) (i j : Fin n) (x : Point n) (hf : ContDiff ℝ ⊤ f) :
+    pd (fun y => pd f j y) i x = pd (fun y => pd f i y) j x := by
+  rw [pd_pd_eq f i j x hf, pd_pd_eq f j i x hf]
+  exact (hf.contDiffAt.isSymmSndFDerivAt le_top).eq _ _
+
 /-- **Christoffel symbols** `Γ^μ_{νρ} = ½ g^{μα}(∂_ν g_{αρ} + ∂_ρ g_{αν} − ∂_α g_{νρ})`. -/
 noncomputable def christoffel (g gi : Point n → Fin n → Fin n → ℝ)
     (μ ν ρ : Fin n) (x : Point n) : ℝ :=

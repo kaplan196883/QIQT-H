@@ -2793,5 +2793,10 @@ namespace QIQTH.AxiomAudit
 -- Christoffel definition + metric symmetry. (Closes a Layer-1 target feeding Jacobson's Bianchi step.)
 #print axioms QIQTH.Curvature.riemann_first_bianchi
 -- expected: standard only — first Bianchi R^ρ_{σμν}+R^ρ_{μνσ}+R^ρ_{νσμ}=0 (algebraic, christoffel_symm only).
+-- The Schwarz keystone for the second Bianchi (mixed partials commute), via the pd↔fderiv bridge.
+#print axioms QIQTH.Curvature.pd_eq_fderiv
+-- expected: standard only — ∂ᵢg(x)=Dg(x)[eᵢ] (coordinate partial = directional fderiv, chain rule).
+#print axioms QIQTH.Curvature.pd_comm
+-- expected: standard only — Schwarz ∂ᵢ∂ⱼf=∂ⱼ∂ᵢf for smooth f (via IsSymmSndFDerivAt + pd_eq_fderiv).
 
 end QIQTH.AxiomAudit
