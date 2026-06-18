@@ -656,4 +656,66 @@ theorem covDerivRiem_contract (g gi : Point n → Fin n → Fin n → ℝ)
   simp only [covDerivRiem, covDeriv02, Finset.sum_add_distrib, Finset.sum_sub_distrib]
   linarith [h_a, h_bd, h_c, h_e]
 
+/-- **`∇R` inherits Riemann's antisymmetry in the last two indices**:
+    `∇_λ R^ρ_{σμν} + ∇_λ R^ρ_{σνμ} = 0`. Each of the five constituent terms pairs off via
+    `riemann_antisymm` (the `∂∂` term via `pd_const_mul`). -/
+theorem covDerivRiem_antisymm (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (lam ρ σ μ ν : Fin n) (x : Point n) :
+    covDerivRiem g gi lam ρ σ μ ν x + covDerivRiem g gi lam ρ σ ν μ x = 0 := by
+  have hpd : pd (fun y => riemann g gi ρ σ μ ν y) lam x
+      + pd (fun y => riemann g gi ρ σ ν μ y) lam x = 0 := by
+    have hfun : (fun y => riemann g gi ρ σ μ ν y) = (fun y => (-1 : ℝ) * riemann g gi ρ σ ν μ y) := by
+      funext y; rw [riemann_antisymm g gi ρ σ μ ν y]; ring
+    rw [hfun, pd_const_mul (-1) _ lam x (PdiffAt_riemann g gi hC ρ σ ν μ lam x)]; ring
+  have h2 : (∑ κ, christoffel g gi ρ lam κ x * riemann g gi κ σ μ ν x)
+      + (∑ κ, christoffel g gi ρ lam κ x * riemann g gi κ σ ν μ x) = 0 := by
+    rw [← Finset.sum_add_distrib]; apply Finset.sum_eq_zero; intro κ _
+    rw [riemann_antisymm g gi κ σ μ ν x]; ring
+  have h3 : (∑ κ, christoffel g gi κ lam σ x * riemann g gi ρ κ μ ν x)
+      + (∑ κ, christoffel g gi κ lam σ x * riemann g gi ρ κ ν μ x) = 0 := by
+    rw [← Finset.sum_add_distrib]; apply Finset.sum_eq_zero; intro κ _
+    rw [riemann_antisymm g gi ρ κ μ ν x]; ring
+  have h45 : (∑ κ, christoffel g gi κ lam μ x * riemann g gi ρ σ κ ν x)
+      + (∑ κ, christoffel g gi κ lam μ x * riemann g gi ρ σ ν κ x) = 0 := by
+    rw [← Finset.sum_add_distrib]; apply Finset.sum_eq_zero; intro κ _
+    rw [riemann_antisymm g gi ρ σ κ ν x]; ring
+  have h54 : (∑ κ, christoffel g gi κ lam ν x * riemann g gi ρ σ μ κ x)
+      + (∑ κ, christoffel g gi κ lam ν x * riemann g gi ρ σ κ μ x) = 0 := by
+    rw [← Finset.sum_add_distrib]; apply Finset.sum_eq_zero; intro κ _
+    rw [riemann_antisymm g gi ρ σ μ κ x]; ring
+  simp only [covDerivRiem]
+  linarith [hpd, h2, h3, h45, h54]
+
+/-- The Ricci trace via the *other* contraction (antisymmetry): `∑_ρ R^ρ_{σμρ} = −R_{σμ}`. Helper not
+    needed standalone — folded into the `(ρ,ν)`-slot contraction below. -/
+theorem covDerivRiem_contract' (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (dir σ μ : Fin n) (x : Point n) :
+    (∑ ρ, covDerivRiem g gi dir ρ σ μ ρ x)
+      = - covDeriv02 g gi (fun y a b => ricci g gi a b y) dir σ μ x := by
+  have key : (∑ ρ, covDerivRiem g gi dir ρ σ μ ρ x) + (∑ ρ, covDerivRiem g gi dir ρ σ ρ μ x) = 0 := by
+    rw [← Finset.sum_add_distrib]; apply Finset.sum_eq_zero; intro ρ _
+    exact covDerivRiem_antisymm g gi hC dir ρ σ μ ρ x
+  have hcontract := covDerivRiem_contract g gi hC dir σ μ x
+  linarith [key, hcontract]
+
+/-- **The once-contracted (second) Bianchi identity** `∇_λ R_{σν} − ∇_ν R_{σλ} + ∇_ρ R^ρ_{σνλ} = 0`,
+    obtained by tracing the second Bianchi over `(ρ,μ)` (`covDerivRiem_contract`/`'`). The remaining
+    divergence term `∑_ρ ∇_ρ R^ρ_{σνλ}` is the Riemann divergence; contracting once more with `g^{μν}`
+    yields `∇^μ G_{μν}=0`. Established mathematics, machine-checked component-level and axiom-free. -/
+theorem second_bianchi_contracted (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (lam σ ν : Fin n) (x : Point n) :
+    covDeriv02 g gi (fun y a b => ricci g gi a b y) lam σ ν x
+      - covDeriv02 g gi (fun y a b => ricci g gi a b y) ν σ lam x
+      + (∑ ρ, covDerivRiem g gi ρ ρ σ ν lam x) = 0 := by
+  have hsum : (∑ ρ, (covDerivRiem g gi lam ρ σ ρ ν x + covDerivRiem g gi ρ ρ σ ν lam x
+                    + covDerivRiem g gi ν ρ σ lam ρ x)) = 0 :=
+    Finset.sum_eq_zero (fun ρ _ => second_bianchi g gi hsymm hC ρ σ lam ρ ν x)
+  rw [Finset.sum_add_distrib, Finset.sum_add_distrib,
+      covDerivRiem_contract g gi hC lam σ ν, covDerivRiem_contract' g gi hC ν σ lam] at hsum
+  linarith [hsum]
+
 end QIQTH.Curvature

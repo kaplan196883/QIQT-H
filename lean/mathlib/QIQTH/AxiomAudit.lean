@@ -2828,4 +2828,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ∇ commutes with contraction: ∑_ρ ∇_λR^ρ_{σρν} = ∇_λ Ric_{σν} (the contracted
 -- index pair's connection corrections cancel via sum_comm). The bridge from second Bianchi to ∇^μG_{μν}=0.
 
+#print axioms QIQTH.Curvature.covDerivRiem_antisymm
+-- expected: standard only — ∇R inherits Riemann's last-two-index antisymmetry (per-term via riemann_antisymm).
+#print axioms QIQTH.Curvature.covDerivRiem_contract'
+#print axioms QIQTH.Curvature.second_bianchi_contracted
+-- expected: standard only — the ONCE-CONTRACTED Bianchi ∇_λR_{σν} − ∇_νR_{σλ} + ∇_ρR^ρ_{σνλ} = 0 (trace of
+-- the second Bianchi over (ρ,μ)). One contraction with g^{μν} away from ∇^μG_{μν}=0. Axiom-free.
+
 end QIQTH.AxiomAudit
