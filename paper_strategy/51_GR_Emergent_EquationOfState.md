@@ -235,12 +235,19 @@ multivariable calculus + algebra, NOT the multi-year abstract-manifold library.
   (axiom-free): `covDerivRiem_contract` (**∇ commutes with contraction**, `∑_ρ∇_λR^ρ_{σρν}=∇_λRic_{σν}` — the
   contracted-pair connection corrections cancel via `sum_comm`); `covDerivRiem_antisymm` (∇R inherits
   Riemann's last-two-index antisymmetry); `covDerivRiem_contract'` (the other-slot trace = `−∇Ric`).
-- **NEXT (last DG step):** contract once more with `g^{μν}` to reach `∇^μ G_{μν}=0` (Jacobson's conservation
-  step). Needs `∇g^{μν}=0` (inverse-metric covariant constancy from `metric_compat`+`inv_contract`), Ricci
-  symmetry, index raising, scalar-curvature `∇R=∂R`. Substantial but mechanical — no wall. *Net: connection
-  + all curvature tensors + metric compatibility + first Bianchi + Schwarz + the FULL second Bianchi + the
-  ONCE-CONTRACTED Bianchi are ALL machine-checked; only the final `g^{μν}`-contraction to `∇^μG_{μν}=0`
-  remains.*
+- **METRIC-RAISING TOWER (toward `∇^μ G_{μν}=0`) — piece A machine-checked, axiom-free**
+  (`inv_metric_compat`, `∇_λ g^{μρ}=0`): the raised-index companion of `metric_compat`, by differentiating
+  the inverse relation + substituting `metric_compat` + inverting `g`. Adds `covDeriv20`, `pd_const`. This
+  is the tool that lets the metric pass through `∇` in the `g^{μν}`-contractions.
+- **REMAINING (crux = piece B):** the **first-pair antisymmetry of the lowered Riemann** `R_{ρσμν}=−R_{σρμν}`
+  — needed because `g^{σν}R^ρ_{σνλ}` is *not* pinned by the first Bianchi + antisymmetry alone (verified
+  circular). Worked-out route: explicit "Riemann in terms of the metric" (`∂∂g` part `(ρσ)`-antisym via
+  Schwarz + `g`-symmetry; `ΓΓ` part via the symmetric pairing `⟨ab,cd⟩=∑g_{κβ}Γ^κ_{ab}Γ^β_{cd}`). Then
+  pieces C–E: `ricci`=`g`-contraction of lowered Riemann, the contraction identity `g^{σν}R^ρ_{σνλ}=−Ric^ρ_λ`,
+  scalar `∇R=∂R` (trivial), and the assembly (contract `second_bianchi_contracted` once more with `g^{σν}`
+  ⟹ `2∇^μR_{μν}=∂_νR` ⟹ `∇^μG_{μν}=0`). *Net: connection + all curvature + metric compatibility (both
+  indices) + first Bianchi + Schwarz + FULL second Bianchi + ONCE-CONTRACTED Bianchi are ALL machine-checked;
+  the metric-raising tower is started (piece A done), crux = lowered-Riemann first-pair antisymmetry.*
 - **Honest scale:** Layer 0 is a clean foundation; Layers 1–2 are the genuine multi-month effort (the
   differentiability propagation through Γ/Riemann is where the cost lives). This is the START of the tower,
   not its completion — and per pro, its marginal value for QIQT-H is bounded (it recertifies textbook DG),

@@ -2835,4 +2835,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the ONCE-CONTRACTED Bianchi ∇_λR_{σν} − ∇_νR_{σλ} + ∇_ρR^ρ_{σνλ} = 0 (trace of
 -- the second Bianchi over (ρ,μ)). One contraction with g^{μν} away from ∇^μG_{μν}=0. Axiom-free.
 
+#print axioms QIQTH.Curvature.pd_const
+#print axioms QIQTH.Curvature.inv_metric_compat
+-- expected: standard only — ∇_λ g^{μρ}=0 (raised-index metric compatibility): differentiate the inverse
+-- relation, substitute metric_compat, cancel connection terms, invert. Metric-raising tower, piece A.
+
 end QIQTH.AxiomAudit
