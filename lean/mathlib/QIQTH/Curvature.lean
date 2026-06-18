@@ -287,4 +287,47 @@ theorem riemann_first_bianchi (g gi : Point n → Fin n → Fin n → ℝ)
         from funext (fun y => christoffel_symm g gi hsymm ρ μ ν y)]
   linarith [hsum]
 
+/-- **The derivative ("principal") part of the Riemann tensor** — `∂_μ Γ^ρ_{νσ} − ∂_ν Γ^ρ_{μσ}`, the
+    part of `R^ρ_{σμν}` linear in `∂Γ` (the ΓΓ part dropped). -/
+noncomputable def riemannLin (g gi : Point n → Fin n → Fin n → ℝ)
+    (ρ σ μ ν : Fin n) (x : Point n) : ℝ :=
+  pd (fun y => christoffel g gi ρ ν σ y) μ x - pd (fun y => christoffel g gi ρ μ σ y) ν x
+
+/-- **The derivative part of the second Bianchi cyclic sum vanishes** — `∂_λ Rlin^ρ_{σμν} +
+    ∂_μ Rlin^ρ_{σνλ} + ∂_ν Rlin^ρ_{σλμ} = 0` for smooth Christoffel symbols. This is the part of the
+    second Bianchi identity that the SCHWARZ keystone (`pd_comm`) handles: the six second-derivative
+    `∂∂Γ` terms cancel in pairs once mixed partials commute. (The full second Bianchi additionally needs
+    the ΓΓ / Γ·R terms to cancel via the first Bianchi + Christoffel symmetry — the long general-coordinate
+    remainder; see note 51.) -/
+theorem second_bianchi_deriv_part
+    (g gi : Point n → Fin n → Fin n → ℝ) (ρ σ lam mu ν : Fin n) (x : Point n)
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y)) :
+    pd (fun y => riemannLin g gi ρ σ mu ν y) lam x
+      + pd (fun y => riemannLin g gi ρ σ ν lam y) mu x
+      + pd (fun y => riemannLin g gi ρ σ lam mu y) ν x = 0 := by
+  -- `∂_d Γ^a_{bc}` is partially differentiable in any direction at any point (Γ is smooth).
+  have hpd : ∀ a b c d e (z : Point n),
+      PdiffAt (fun y => pd (fun w => christoffel g gi a b c w) d y) e z := by
+    intro a b c d e z
+    have hfd2 : Differentiable ℝ (fderiv ℝ (fun w => christoffel g gi a b c w)) :=
+      ((hC a b c).fderiv_right (m := ⊤) le_top).differentiable (by simp)
+    have hrw : (fun y => pd (fun w => christoffel g gi a b c w) d y)
+             = (fun y => fderiv ℝ (fun w => christoffel g gi a b c w) y (Pi.single d 1)) :=
+      funext (fun y => pd_eq_fderiv _ d y ((hC a b c).differentiable (by simp) y))
+    have hu : DifferentiableAt ℝ (Function.update z e) (z e) :=
+      (hasDerivAt_update z e (z e)).differentiableAt
+    have hg : DifferentiableAt ℝ (fderiv ℝ (fun w => christoffel g gi a b c w))
+        ((Function.update z e) (z e)) := by
+      rw [Function.update_eq_self]; exact hfd2 z
+    rw [hrw]
+    exact (hg.comp (z e) hu).clm_apply (differentiableAt_const _)
+  simp only [riemannLin]
+  rw [pd_sub _ _ lam x (hpd ρ ν σ mu lam x) (hpd ρ mu σ ν lam x),
+      pd_sub _ _ mu x (hpd ρ lam σ ν mu x) (hpd ρ ν σ lam mu x),
+      pd_sub _ _ ν x (hpd ρ mu σ lam ν x) (hpd ρ lam σ mu ν x)]
+  rw [pd_comm (fun w => christoffel g gi ρ ν σ w) lam mu x (hC ρ ν σ),
+      pd_comm (fun w => christoffel g gi ρ mu σ w) lam ν x (hC ρ mu σ),
+      pd_comm (fun w => christoffel g gi ρ lam σ w) mu ν x (hC ρ lam σ)]
+  ring
+
 end QIQTH.Curvature

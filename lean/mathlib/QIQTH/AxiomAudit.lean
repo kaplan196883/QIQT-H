@@ -2798,5 +2798,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ∂ᵢg(x)=Dg(x)[eᵢ] (coordinate partial = directional fderiv, chain rule).
 #print axioms QIQTH.Curvature.pd_comm
 -- expected: standard only — Schwarz ∂ᵢ∂ⱼf=∂ⱼ∂ᵢf for smooth f (via IsSymmSndFDerivAt + pd_eq_fderiv).
+#print axioms QIQTH.Curvature.second_bianchi_deriv_part
+-- expected: standard only — the DERIVATIVE part of the second Bianchi cyclic sum vanishes: the six ∂∂Γ
+-- terms cancel in pairs via Schwarz (pd_comm). (The full second Bianchi additionally needs the ΓΓ/Γ·R
+-- cancellation — the long general-coordinate remainder; see note 51.)
 
 end QIQTH.AxiomAudit
