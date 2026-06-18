@@ -108,4 +108,36 @@ theorem curvature_smul_right [CompleteSpace E] [IsManifold I 2 M]
     curvature_smul_left cov hcov f Y X σ x hf hY hcovσY,
     curvature_antisymm cov X Y σ x, smul_neg]
 
+/-- **Additivity of the curvature in its first vector-field slot:** `R(X+X',Y)σ = R(X,Y)σ + R(X',Y)σ`.
+Uses only fibrewise additivity of `∇` and of the Lie bracket — no Leibniz cancellation. -/
+theorem curvature_add_left [CompleteSpace E] [IsManifold I 2 M]
+    (cov : (Π x : M, V x) → (Π x : M, TangentSpace I x →L[𝕜] V x))
+    (hcov : IsCovariantDerivativeOn F cov Set.univ)
+    (X X' Y : Π x : M, TangentSpace I x) (σ : Π x : M, V x) (x : M)
+    (hX : MDiffAt (T% X) x) (hX' : MDiffAt (T% X') x)
+    (hcovσX : MDiffAt (T% fun x' => cov σ x' (X x')) x)
+    (hcovσX' : MDiffAt (T% fun x' => cov σ x' (X' x')) x) :
+    curvature cov (X + X') Y σ x = curvature cov X Y σ x + curvature cov X' Y σ x := by
+  have hsec : (fun x' => cov σ x' ((X + X') x'))
+      = (fun x' => cov σ x' (X x')) + (fun x' => cov σ x' (X' x')) := by
+    funext x'; simp only [Pi.add_apply, map_add]
+  simp only [curvature]
+  rw [hsec, hcov.add hcovσX hcovσX']
+  simp only [Pi.add_apply, map_add, mlieBracket_add_left hX hX', ContinuousLinearMap.add_apply]
+  abel
+
+/-- **Additivity in the second vector-field slot:** `R(X,Y+Y')σ = R(X,Y)σ + R(X,Y')σ`, from
+slot-one additivity and antisymmetry. -/
+theorem curvature_add_right [CompleteSpace E] [IsManifold I 2 M]
+    (cov : (Π x : M, V x) → (Π x : M, TangentSpace I x →L[𝕜] V x))
+    (hcov : IsCovariantDerivativeOn F cov Set.univ)
+    (X Y Y' : Π x : M, TangentSpace I x) (σ : Π x : M, V x) (x : M)
+    (hY : MDiffAt (T% Y) x) (hY' : MDiffAt (T% Y') x)
+    (hcovσY : MDiffAt (T% fun x' => cov σ x' (Y x')) x)
+    (hcovσY' : MDiffAt (T% fun x' => cov σ x' (Y' x')) x) :
+    curvature cov X (Y + Y') σ x = curvature cov X Y σ x + curvature cov X Y' σ x := by
+  rw [curvature_antisymm cov X (Y + Y') σ x,
+    curvature_add_left cov hcov Y Y' X σ x hY hY' hcovσY hcovσY',
+    curvature_antisymm cov X Y σ x, curvature_antisymm cov X Y' σ x, neg_add]
+
 end QIQTH.ManifoldGR

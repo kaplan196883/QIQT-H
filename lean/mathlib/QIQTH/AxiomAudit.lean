@@ -2901,5 +2901,9 @@ namespace QIQTH.AxiomAudit
 -- that makes the curvature a genuine TENSOR in the vector-field slots: the Leibniz term from ∇_{fX}=f∇_X
 -- cancels exactly against the −(Yf)X term in the Lie-bracket product rule [fX,Y]=f[X,Y]−(Yf)X (both are
 -- the same directional derivative d% f x (Y x)). Axiom-free.
+#print axioms QIQTH.ManifoldGR.curvature_add_left
+#print axioms QIQTH.ManifoldGR.curvature_add_right
+-- expected: standard only — ADDITIVITY R(X+X',Y)σ=R(X,Y)σ+R(X',Y)σ and R(X,Y+Y')σ=R(X,Y)σ+R(X,Y')σ.
+-- With tensoriality above, the curvature is bilinear+tensorial in its two vector-field slots. Axiom-free.
 
 end QIQTH.AxiomAudit
