@@ -120,6 +120,24 @@ theorem spectralEntropy_deriv {m : Type*} [Fintype m] (p : ℝ → m → ℝ)
   intro i _
   exact (Real.hasDerivAt_negMulLog (hpos i)).comp 0 (hp i).hasDerivAt
 
+open QIQTH.QuantumEntropy in
+/-- **The von Neumann entropy is differentiable when its eigenvalues are.** For a family of densities
+    `ρ(ε)` with density proofs `h ε`, `vonNeumannEntropy (h ε) = ∑ᵢ negMulLog((h ε).eigenvalues i)` *by
+    definition*, so the entropy is differentiable at `0` whenever each eigenvalue `(h ε).eigenvalues i` is
+    differentiable and nonzero there. This lifts `spectralEntropy_differentiableAt` onto the actual von
+    Neumann entropy and discharges `hS` for the first law — reducing the wall to exactly the
+    eigenvalue-perturbation hypothesis `hev`. (Discharging `hev` itself for a concrete family is the
+    residual gap: `IsDensity.eigenvalues` is the *sorted spectral data*, and Mathlib has no lemma
+    relating it to an external diagonal `p`, nor analytic eigenvalue perturbation — and in general the
+    sorted eigenvalues even have kinks at level crossings. So `hev` is mathematically trivial for a
+    fixed-eigenbasis family but Lean-blocked on the eigenvalue API; it is honestly the cited gap.) -/
+theorem vonNeumannEntropy_differentiableAt {n : Type*} [Fintype n] [DecidableEq n]
+    (ρ : ℝ → Matrix n n ℂ) (h : (ε : ℝ) → IsDensity (ρ ε))
+    (hev : ∀ i, DifferentiableAt ℝ (fun ε => (h ε).eigenvalues i) 0)
+    (hpos : ∀ i, (h 0).eigenvalues i ≠ 0) :
+    DifferentiableAt ℝ (fun ε => vonNeumannEntropy (h ε)) 0 :=
+  spectralEntropy_differentiableAt (fun ε i => (h ε).eigenvalues i) hev hpos
+
 /-! ### The integrated (finite) first law — no differentiability needed
 
 The *differential* first law `δS = δ⟨K⟩` needs the smoothness of the family (the matrix-log /

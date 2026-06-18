@@ -176,13 +176,21 @@ QIQT-H derives it), RT/HRT + AdS/CFT, Iyer–Wald, the all-balls integral-geomet
     `negMulLog`, differentiable away from `0` (Mathlib `Real.differentiableAt_negMulLog`, `deriv = −log−1`).
     `spectralEntropy_differentiableAt` + `spectralEntropy_deriv` (axiom-free) machine-check that the entropy is
     differentiable in its eigenvalues, with the explicit first variation `δS = ∑ᵢ(−log pᵢ−1)·pᵢ'(0)`.
-  - **What remains is purely the eigenvalue-perturbation map `ρ ↦ eigenvalues`** — confirmed a genuine Mathlib
-    gap (`grep`: no eigenvalue continuity/differentiability, no Kato/Hellmann–Feynman). It is **trivial for a
-    fixed-eigenbasis family** `ρ(ε)=U diag(p ε) U†` (eigenvalues = the smooth diagonal `p`, unitary conjugation
-    preserving spectrum) — so there `hS` is fully dischargeable, modulo Lean eigenvalue-plumbing — and is the
-    **deeper, separate gap** only for general basis-rotating families. **Honest status: the differential first
-    law is machine-checked, the matrix-log derivative is done, and the residual gap is narrowed to analytic
-    eigenvalue perturbation (Mathlib infrastructure), trivial in the fixed-basis case.**
+  - **Lifted onto the actual entropy:** `vonNeumannEntropy_differentiableAt` (axiom-free) — since
+    `vonNeumannEntropy (h ε) = ∑ᵢ negMulLog((h ε).eigenvalues i)` *by definition*, the real von Neumann entropy
+    is differentiable at `0` whenever each eigenvalue `(h ε).eigenvalues i` is differentiable and nonzero. So
+    `hS` for the first law is now machine-checked **modulo exactly the eigenvalue-perturbation hypothesis `hev`**
+    — on the actual entropy, not an abstract `S`.
+  - **The residual gap = discharging `hev` (eigenvalues differentiable).** *Honest correction* (the fixed-basis
+    case is NOT Lean-trivial, contrary to an earlier note): `IsDensity.eigenvalues` is the **sorted spectral
+    data**, and Mathlib has **no** lemma relating it to an external diagonal `p` of a family `ρ(ε)=U diag(p ε)U†`,
+    nor analytic eigenvalue perturbation; in general the sorted eigenvalues even have **kinks at level
+    crossings**. So `hev` is *mathematically* trivial for a fixed-eigenbasis family but **Lean-blocked on the
+    eigenvalue API** — it is honestly the same eigenvalue-perturbation Mathlib-infrastructure gap, uniformly for
+    all families. **Net status: the Route-B chain is machine-checked end-to-end — first law, RT bridge,
+    all-balls energy, integrated Gibbs law, the matrix-log/spectral derivative, AND the lift onto the real von
+    Neumann entropy — down to ONE cited input (`hev` = eigenvalues differentiable) plus the standard cited
+    physics (RT, ball modular Hamiltonian, all-balls ⇒ linearized Einstein).**
 
 ## 5. Honest bottom line
 

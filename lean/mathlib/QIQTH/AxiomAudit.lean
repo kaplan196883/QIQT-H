@@ -2745,5 +2745,9 @@ namespace QIQTH.AxiomAudit
 -- eigenvalues are smooth (trivial for fixed-basis families; eigenvalue perturbation is the deeper gap).
 #print axioms QIQTH.EntanglementFirstLaw.spectralEntropy_deriv
 -- expected: standard only — explicit δS = ∑ᵢ(−log pᵢ−1)·pᵢ'(0), the entropy first variation.
+#print axioms QIQTH.EntanglementFirstLaw.vonNeumannEntropy_differentiableAt
+-- expected: standard only — lifts the spectral lemma onto the ACTUAL von Neumann entropy:
+-- S(ρ(ε)) = ∑negMulLog((h ε).eigenvalues i) by def, differentiable given eigenvalue-differentiability.
+-- Reduces hS to exactly the eigenvalue-perturbation hypothesis (the cited Mathlib gap).
 
 end QIQTH.AxiomAudit
