@@ -153,6 +153,17 @@ theorem dirDeriv_eq_chart (f : M → 𝕜) (Y : Π z : M, TangentSpace I z) (x :
           (mfderiv I 𝓘(𝕜, E) (extChartAt I x) x (Y x)) :=
   dirDeriv_eq_chartAt f Y x x (mem_extChartAt_source x) hf
 
+/-- **Neighborhood form.** Near `x`, the directional derivative `Yf` *agrees as a function* with its
+fixed-chart representative `z ↦ ∂(f∘e⁻¹)(e z)·(de_z·Y z)`. This is what lets the *second* directional
+derivative `X(Yf)` be computed by differentiating the chart representative. -/
+theorem dirDeriv_eventuallyEq_chart (f : M → 𝕜) (Y : Π z : M, TangentSpace I z) (x : M)
+    (hf : ∀ z, MDifferentiableAt I 𝓘(𝕜) f z) :
+    dirDeriv I Y f =ᶠ[𝓝 x]
+      fun z => fderiv 𝕜 (f ∘ (extChartAt I x).symm) (extChartAt I x z)
+        (mfderiv I 𝓘(𝕜, E) (extChartAt I x) z (Y z)) := by
+  filter_upwards [extChartAt_source_mem_nhds (I := I) x] with z hz
+  exact dirDeriv_eq_chartAt f Y x z hz (hf z)
+
 end GeneralManifold
 
 end QIQTH.ManifoldGR

@@ -2920,8 +2920,10 @@ namespace QIQTH.AxiomAudit
 -- in the function), the directional-derivative API the Bianchi cyclic sum / Ricci traces consume. Axiom-free.
 #print axioms QIQTH.ManifoldGR.dirDeriv_eq_chartAt
 #print axioms QIQTH.ManifoldGR.dirDeriv_eq_chart
+#print axioms QIQTH.ManifoldGR.dirDeriv_eventuallyEq_chart
 -- dirDeriv_eq_chartAt: the FIXED-chart covariance (eval at nearby z ∈ source) — enables the SECOND
--- directional derivative; dirDeriv_eq_chart is the z=x₀ corollary.
+-- directional derivative; dirDeriv_eq_chart is the z=x₀ corollary. dirDeriv_eventuallyEq_chart: the
+-- neighborhood form (Yf agrees as a FUNCTION near x with its chart rep) — the setup to differentiate it.
 -- expected: standard only — GENERAL-MANIFOLD COMMUTATOR, foundational block. Directional-derivative
 -- chart-covariance: (Yf)(x) on M = normed-space directional deriv of the chart rep f∘e⁻¹ along the
 -- pushed-forward vector, via the chain rule for f=(f∘e⁻¹)∘e. The transport that lifts the model-space
