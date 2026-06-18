@@ -40,10 +40,15 @@ obtained by contracting `second_bianchi_contracted` with `g^{σν}`. Three terms
   - **✅ CORE DONE, axiom-free** (`gi_trace_covDerivRiem`): for fixed ρ, `∑_{σν}g^{σν}∇_ρR^ρ_{σνλ}
     = ∂_ρS^ρ_λ + Γ^ρ_{ρκ}S^κ_λ − Γ^κ_{ρλ}S^ρ_κ` (the (1,1) divergence of `S^a_b=∑g^{σν}R^a_{σνb}`).
     Copied T1's shape (`swap13`/`swap23`+`inv_metric_compat`) — compiled first try.
-  - **REMAINING (∑ρ assembly, ~60–80 ln):** sum over ρ + substitute `S=−`(raised Ricci)
-    [`ricci_gi_raise`, function level] + `∇g=0`. The (1,1) divergence of `S^ρ_λ=−g^{ρβ}Ric_{βλ}` equals
-    `div02(S_lowered)` with `S_lowered=−Ric` (`g_{μρ}g^{ρβ}=δ`) ⟹ `−div02(ricci)`. Refactor distributed
-    spectators `∑σνκ gΓR→∑κ Γ S`; Leibniz `∇_ρ(g^{ρβ}Ric)=g^{ρβ}∇_ρRic` via `inv_metric_compat`.
+  - **REMAINING (∑ρ assembly, ~110 ln, 2 lemmas):** **Lemma 1** `gi_trace_covDerivRiem_ricci` (per ρ):
+    substitute `S=−`(raised Ricci) [`ricci_gi_raise`, function level via `funext`] into `gi_trace_covDerivRiem`,
+    expand `pd(S)` (`pd_const_mul (-1)`+`pd_sum`+`pd_mul`+`inv_metric_compat`), the `Γ^ρ_{ρκ}` terms cancel the
+    `∑Γ^ρ_{ρκ}S^κ` spectator ⟹ `−∑g^{ρβ}∂_ρRic_{βλ} + ∑Γ^β_{ρκ}g^{ρκ}Ric_{βλ} + ∑Γ^κ_{ρλ}g^{ρβ}Ric_{βκ}`.
+    **Lemma 2** sum over ρ + match `−div02(ricci)` (via `hsymm_gi` + reindexing).
+    **⚠ LESSON (1 reverted attempt):** Lemma 1's final `ring` only closes if EVERY `Γ·g·Ric` double-sum is in
+    the SAME nesting order (use `∑β∑κ` throughout). Add `moveκ : ∑σ∑ν∑κ F = ∑κ∑σ∑ν F`
+    (`sum_congr(sum_comm)`+`sum_comm`) for the spectator refactor `∑σνκ gΓR→∑κ Γ(∑σν gR)`, then `Finset.sum_comm`
+    each refactored spectator into `∑β∑κ` order before combining. Math is verified; it's purely sum-order bookkeeping.
 - **1.3 T1 = scalar-curvature derivative — ✅ DONE, axiom-free** (`gi_trace_covDeriv_ricci`).
   `∑_{σν} g^{σν} ∇_λ Ric_{σν} = ∂_λ R`. Product rule (`pd_sum`+`pd_mul`) + `inv_metric_compat` + the
   triple-sum swaps `swap13`/`swap23` (the `Γ·g·Ric` cancellation `A=C`, `B=D`). Added `PdiffAt_ricci`.
