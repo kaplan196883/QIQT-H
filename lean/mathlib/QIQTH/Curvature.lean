@@ -559,4 +559,61 @@ noncomputable def covDerivRiem (g gi : Point n → Fin n → Fin n → ℝ)
     - (∑ κ, christoffel g gi κ lam μ x * riemann g gi ρ σ κ ν x)
     - (∑ κ, christoffel g gi κ lam ν x * riemann g gi ρ σ μ κ x)
 
+/-- **The second Bianchi identity** (differential Bianchi): for the Levi-Civita connection of a smooth
+    metric, the cyclic sum of covariant derivatives of the Riemann tensor vanishes,
+    `∇_λ R^ρ_{σμν} + ∇_μ R^ρ_{σνλ} + ∇_ν R^ρ_{σλμ} = 0`. Proved by decomposing each `∇R` into four
+    pieces — `∂∂Γ` (cancels via Schwarz, `second_bianchi_deriv_part`), `∂Γ·Γ` (`bianchi_dGamma`),
+    the cubic `ΓΓΓ`/Jacobi part (`bianchi_GGG`), and the lower-index "extra" terms
+    (`bianchi_extra_terms`) — each of whose cyclic sum is zero. This is the conservation identity behind
+    `∇^μ G_{μν}=0` (Jacobson's contracted-Bianchi step). Established mathematics, here machine-checked
+    component-level and axiom-free. -/
+theorem second_bianchi (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (ρ σ lam mu ν : Fin n) (x : Point n) :
+    covDerivRiem g gi lam ρ σ mu ν x
+      + covDerivRiem g gi mu ρ σ ν lam x
+      + covDerivRiem g gi ν ρ σ lam mu x = 0 := by
+  have riemann_split : ∀ a b c d : Fin n,
+      riemann g gi a b c d x = riemannLin g gi a b c d x + riemannQuad g gi a b c d x :=
+    fun _ _ _ _ => rfl
+  have decomp : ∀ a b c : Fin n, covDerivRiem g gi a ρ σ b c x
+      = pd (fun y => riemannLin g gi ρ σ b c y) a x
+        + (pd (fun y => riemannQuad g gi ρ σ b c y) a x
+            + (∑ κ, christoffel g gi ρ a κ x * riemannLin g gi κ σ b c x)
+            - (∑ κ, christoffel g gi κ a σ x * riemannLin g gi ρ κ b c x))
+        + ((∑ κ, christoffel g gi ρ a κ x * riemannQuad g gi κ σ b c x)
+            - (∑ κ, christoffel g gi κ a σ x * riemannQuad g gi ρ κ b c x))
+        + (- (∑ κ, christoffel g gi κ a b x * riemann g gi ρ σ κ c x)
+            - (∑ κ, christoffel g gi κ a c x * riemann g gi ρ σ b κ x)) := by
+    intro a b c
+    have hLin : PdiffAt (fun y => riemannLin g gi ρ σ b c y) a x :=
+      (PdiffAt_pd _ (hC ρ c σ) b a x).sub (PdiffAt_pd _ (hC ρ b σ) c a x)
+    have hQuad : PdiffAt (fun y => riemannQuad g gi ρ σ b c y) a x :=
+      PdiffAt_sum _ _ a x (fun l _ =>
+        ((PdiffAt_of_contDiff _ (hC ρ b l) a x).mul (PdiffAt_of_contDiff _ (hC l c σ) a x)).sub
+        ((PdiffAt_of_contDiff _ (hC ρ c l) a x).mul (PdiffAt_of_contDiff _ (hC l b σ) a x)))
+    have hpd : pd (fun y => riemann g gi ρ σ b c y) a x
+        = pd (fun y => riemannLin g gi ρ σ b c y) a x
+          + pd (fun y => riemannQuad g gi ρ σ b c y) a x :=
+      pd_add _ _ a x hLin hQuad
+    have hs1 : (∑ κ, christoffel g gi ρ a κ x * riemann g gi κ σ b c x)
+        = (∑ κ, christoffel g gi ρ a κ x * riemannLin g gi κ σ b c x)
+          + (∑ κ, christoffel g gi ρ a κ x * riemannQuad g gi κ σ b c x) := by
+      rw [← Finset.sum_add_distrib]; apply Finset.sum_congr rfl; intro κ _
+      rw [riemann_split κ σ b c]; ring
+    have hs2 : (∑ κ, christoffel g gi κ a σ x * riemann g gi ρ κ b c x)
+        = (∑ κ, christoffel g gi κ a σ x * riemannLin g gi ρ κ b c x)
+          + (∑ κ, christoffel g gi κ a σ x * riemannQuad g gi ρ κ b c x) := by
+      rw [← Finset.sum_add_distrib]; apply Finset.sum_congr rfl; intro κ _
+      rw [riemann_split ρ κ b c]; ring
+    simp only [covDerivRiem]
+    rw [hpd, hs1, hs2]; ring
+  rw [decomp lam mu ν, decomp mu ν lam, decomp ν lam mu]
+  have ha := second_bianchi_deriv_part g gi ρ σ lam mu ν x hC
+  have hb := bianchi_dGamma g gi hC ρ σ lam mu ν x
+  have hc := bianchi_GGG g gi ρ σ lam mu ν x
+  have hd := bianchi_extra_terms g gi hsymm ρ σ lam mu ν x
+  linarith [ha, hb, hc, hd]
+
 end QIQTH.Curvature

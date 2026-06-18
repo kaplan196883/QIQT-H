@@ -2811,4 +2811,16 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ∂_λR^ρ_{σμν} expanded (∂∂Γ terms + ∑_l Leibniz ∂Γ·Γ terms); the workhorse
 -- for the full second Bianchi, with differentiability discharged by the PdiffAt_* helpers.
 
+#print axioms QIQTH.Curvature.bianchi_extra_terms
+-- expected: standard only — the (1,3) → matrix-form reduction (lower-index Γ·R terms cancel cyclically).
+#print axioms QIQTH.Curvature.bianchi_GGG
+-- expected: standard only — the cubic ΓΓΓ part = Jacobi identity ∑_cyclic[Γ_λ,[Γ_μ,Γ_ν]]=0 (κ↔e swap).
+#print axioms QIQTH.Curvature.pd_riemannQuad
+#print axioms QIQTH.Curvature.bianchi_dGamma
+-- expected: standard only — the ∂Γ·Γ part cancels as identical sums up to renaming the contracted index.
+#print axioms QIQTH.Curvature.second_bianchi
+-- expected: standard only — the FULL second Bianchi identity ∇_λR^ρ_{σμν}+∇_μR^ρ_{σνλ}+∇_νR^ρ_{σλμ}=0,
+-- assembled from the four cyclic-cancellation lemmas (∂∂Γ Schwarz + ∂Γ·Γ + ΓΓΓ Jacobi + extra terms).
+-- The conservation identity behind ∇^μG_{μν}=0 (Jacobson's contracted-Bianchi step). Axiom-free.
+
 end QIQTH.AxiomAudit
