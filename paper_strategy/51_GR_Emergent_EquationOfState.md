@@ -218,14 +218,18 @@ multivariable calculus + algebra, NOT the multi-year abstract-manifold library.
   pd↔fderiv bridge `pd_eq_fderiv`; **Schwarz `pd_comm`** (∂ᵢ∂ⱼf=∂ⱼ∂ᵢf for smooth f, via `pd_pd_eq` +
   `IsSymmSndFDerivAt`) — the analytic keystone; and **`second_bianchi_deriv_part`** — the *derivative
   part* of the second Bianchi cyclic sum vanishes (the six ∂∂Γ terms cancel in pairs via Schwarz).
-- **THE WALL (honest frontier):** the **full second Bianchi** additionally needs the **ΓΓ / Γ·R terms**
-  to cancel — a ~60+ term combinatorial cancellation (first Bianchi + Christoffel symmetry across the
-  covariant-derivative-of-Riemann expansion) that is **impractical to brute-force in general coordinates**.
-  The clean route is **normal coordinates** (Γ=0 at a point), a separate large construction Mathlib lacks.
-  So the contracted Bianchi `∇^μ G_{μν}=0` (Jacobson's conservation+Bianchi step) is the one piece still
-  cited. *Net: connection + all curvature tensors + metric compatibility + first Bianchi + Schwarz + the
-  second-Bianchi derivative part are ALL machine-checked, far inside where the "cited" line sat before; the
-  remaining gap is the second-Bianchi ΓΓ remainder, needing normal-coordinate machinery.*
+- **Also built (axiom-free):** the differentiability suite (`pd_sum`, `PdiffAt.mul/.sub`, `PdiffAt_sum`,
+  `PdiffAt_pd`, `PdiffAt_of_contDiff`); `covDerivRiem` (covariant derivative of the (1,3) Riemann tensor);
+  and **`pd_riemann`** — the *full* `∂_λ R^ρ_{σμν}` expansion (∂∂Γ + ∑_l Leibniz ∂Γ·Γ terms), the workhorse.
+- **THE WALL (web-searched + concretely attempted):** with `pd_riemann` + `second_bianchi_deriv_part`
+  (∂∂Γ→0 via Schwarz), the full second Bianchi reduces to cancelling the **∂Γ·Γ** and **ΓΓΓ** parts
+  separately. The ΓΓΓ part is a cyclic sum of **double sums ∑κ∑e of ΓΓΓ products** cancelling via index
+  reindexing + Christoffel symmetry — a ~24-term Finset double-sum reindexing. **Concretely attempted and
+  confirmed it is not a quick win** — a large, intricate manual Finset computation (the clean alternative,
+  normal coordinates, is a separate large construction). So `∇^μ G_{μν}=0` (Jacobson's conservation step) is
+  the one piece still cited. *Net: connection + all curvature tensors + metric compatibility + first Bianchi
+  + Schwarz + the ∂R expansion + the second-Bianchi derivative part are ALL machine-checked — far inside
+  where the "cited" line sat before; the remaining gap is purely the ΓΓΓ/∂Γ·Γ mechanical cancellation.*
 - **Honest scale:** Layer 0 is a clean foundation; Layers 1–2 are the genuine multi-month effort (the
   differentiability propagation through Γ/Riemann is where the cost lives). This is the START of the tower,
   not its completion — and per pro, its marginal value for QIQT-H is bounded (it recertifies textbook DG),
