@@ -2888,4 +2888,12 @@ namespace QIQTH.AxiomAudit
 -- a·T_{μν}=G_{μν}+Λg_{μν} with Λ=f+½R covariantly constant (cosmological constant = integration constant).
 -- Completes Jacobson's f-fixing step deferred by EinsteinEquationOfState.lean. Cited physics = labeled hyps.
 
+-- ABSTRACT-MANIFOLD GR STACK (gap 3: lift off the single coordinate patch onto genuine manifolds).
+#print axioms QIQTH.ManifoldGR.curvature_antisymm
+#print axioms QIQTH.ManifoldGR.curvature_self
+-- expected: standard only — the Riemann curvature endomorphism R(X,Y)σ = ∇_X∇_Yσ − ∇_Y∇_Xσ − ∇_[X,Y]σ
+-- of an ARBITRARY covariant derivative on an ARBITRARY vector bundle over a manifold (Mathlib has the
+-- 2025 CovariantDerivative + mlieBracket but NO curvature). Antisymmetry R(X,Y)=−R(Y,X) + R(X,X)=0.
+-- First increment of the abstract-manifold stack. Axiom-free.
+
 end QIQTH.AxiomAudit
