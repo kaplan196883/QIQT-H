@@ -1043,4 +1043,77 @@ theorem ricci_gi_raise (g gi : Point n → Fin n → Fin n → ℝ)
   rw [Finset.sum_congr rfl (fun β (_ : β ∈ Finset.univ) => by rw [hlow β])]
   simp [mul_neg]
 
+/-- `Ric_{σν}` is partially differentiable in any direction (Γ smooth). -/
+theorem PdiffAt_ricci (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (σ ν lam : Fin n) (x : Point n) : PdiffAt (fun y => ricci g gi σ ν y) lam x :=
+  PdiffAt_sum _ _ lam x (fun μ _ => PdiffAt_riemann g gi hC μ σ μ ν lam x)
+
+/-- **T1 of the twice-contracted Bianchi — the scalar-curvature derivative**:
+    `∑_{σν} g^{σν} ∇_λ Ric_{σν} = ∂_λ R`. Product rule on `R = ∑g^{σν}Ric_{σν}` (`pd_sum`+`pd_mul`)
+    plus `inv_metric_compat` (`∂g^{σν} = −Γg−Γg`) cancels the connection terms by index swaps. -/
+theorem gi_trace_covDeriv_ricci (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (lam : Fin n) (x : Point n) :
+    (∑ σ, ∑ ν, gi x σ ν * covDeriv02 g gi (fun y a b => ricci g gi a b y) lam σ ν x)
+      = pd (fun y => scalarCurv g gi y) lam x := by
+  have hgd : ∀ a b, PdiffAt (fun y => g y a b) lam x := fun a b =>
+    PdiffAt_of_contDiff _ (hCg a b) lam x
+  have hgid : ∀ a b, PdiffAt (fun y => gi y a b) lam x := fun a b =>
+    PdiffAt_of_contDiff _ (hCgi a b) lam x
+  have hRic : ∀ σ ν, PdiffAt (fun y => ricci g gi σ ν y) lam x := fun σ ν =>
+    PdiffAt_ricci g gi hC σ ν lam x
+  -- triple-sum index swaps
+  have swap13 : ∀ (F : Fin n → Fin n → Fin n → ℝ),
+      (∑ σ, ∑ ν, ∑ κ, F σ ν κ) = ∑ σ, ∑ ν, ∑ κ, F κ ν σ := by
+    intro F
+    rw [Finset.sum_comm, Finset.sum_congr rfl (fun ν _ => Finset.sum_comm), Finset.sum_comm]
+  have swap23 : ∀ (F : Fin n → Fin n → Fin n → ℝ),
+      (∑ σ, ∑ ν, ∑ κ, F σ ν κ) = ∑ σ, ∑ ν, ∑ κ, F σ κ ν := by
+    intro F
+    apply Finset.sum_congr rfl; intro σ _; rw [Finset.sum_comm]
+  -- product rule on the scalar curvature
+  have hpd_scalar : pd (fun y => scalarCurv g gi y) lam x
+      = (∑ σ, ∑ ν, pd (fun y => gi y σ ν) lam x * ricci g gi σ ν x)
+        + (∑ σ, ∑ ν, gi x σ ν * pd (fun y => ricci g gi σ ν y) lam x) := by
+    rw [show (fun y => scalarCurv g gi y) = (fun y => ∑ σ, ∑ ν, gi y σ ν * ricci g gi σ ν y) from rfl,
+        pd_sum Finset.univ (fun σ y => ∑ ν, gi y σ ν * ricci g gi σ ν y) lam x
+          (fun σ _ => PdiffAt_sum _ _ lam x (fun ν _ => (hgid σ ν).mul (hRic σ ν))),
+        ← Finset.sum_add_distrib]
+    apply Finset.sum_congr rfl; intro σ _
+    rw [pd_sum Finset.univ (fun ν y => gi y σ ν * ricci g gi σ ν y) lam x
+          (fun ν _ => (hgid σ ν).mul (hRic σ ν)), ← Finset.sum_add_distrib]
+    apply Finset.sum_congr rfl; intro ν _
+    exact pd_mul (fun y => gi y σ ν) (fun y => ricci g gi σ ν y) lam x (hgid σ ν) (hRic σ ν)
+  -- ∂g^{σν} from inverse-metric compatibility
+  have hpd_gi : ∀ σ ν, pd (fun y => gi y σ ν) lam x
+      = -(∑ κ, christoffel g gi σ lam κ x * gi x κ ν)
+        - (∑ κ, christoffel g gi ν lam κ x * gi x σ κ) := by
+    intro σ ν
+    have hm := inv_metric_compat g gi hsymm hsymm_gi hinv lam x hgd hgid σ ν
+    simp only [covDeriv20] at hm; linarith [hm]
+  -- substitute `∂g` and collect the two connection sums `−C − D`
+  have hS_gipd : (∑ σ, ∑ ν, pd (fun y => gi y σ ν) lam x * ricci g gi σ ν x)
+      = -(∑ σ, ∑ ν, ∑ κ, christoffel g gi σ lam κ x * gi x κ ν * ricci g gi σ ν x)
+        - (∑ σ, ∑ ν, ∑ κ, christoffel g gi ν lam κ x * gi x σ κ * ricci g gi σ ν x) := by
+    rw [Finset.sum_congr rfl (fun σ _ => Finset.sum_congr rfl (fun ν _ => by rw [hpd_gi σ ν]))]
+    simp only [sub_mul, neg_mul, Finset.sum_mul, Finset.sum_sub_distrib, Finset.sum_neg_distrib]
+  -- the two `Γ·g·Ric` cancellations (A=C via swap13, B=D via swap23)
+  have hAC : (∑ σ, ∑ ν, ∑ κ, gi x σ ν * (christoffel g gi κ lam σ x * ricci g gi κ ν x))
+      = ∑ σ, ∑ ν, ∑ κ, christoffel g gi σ lam κ x * gi x κ ν * ricci g gi σ ν x := by
+    rw [swap13 (fun σ ν κ => gi x σ ν * (christoffel g gi κ lam σ x * ricci g gi κ ν x))]
+    apply Finset.sum_congr rfl; intro σ _; apply Finset.sum_congr rfl; intro ν _
+    apply Finset.sum_congr rfl; intro κ _; ring
+  have hBD : (∑ σ, ∑ ν, ∑ κ, gi x σ ν * (christoffel g gi κ lam ν x * ricci g gi σ κ x))
+      = ∑ σ, ∑ ν, ∑ κ, christoffel g gi ν lam κ x * gi x σ κ * ricci g gi σ ν x := by
+    rw [swap23 (fun σ ν κ => gi x σ ν * (christoffel g gi κ lam ν x * ricci g gi σ κ x))]
+    apply Finset.sum_congr rfl; intro σ _; apply Finset.sum_congr rfl; intro ν _
+    apply Finset.sum_congr rfl; intro κ _; ring
+  simp only [covDeriv02, mul_sub, Finset.mul_sum, Finset.sum_sub_distrib]
+  rw [hpd_scalar, hS_gipd, hAC, hBD]; ring
+
 end QIQTH.Curvature
