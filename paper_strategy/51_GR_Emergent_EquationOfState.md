@@ -198,6 +198,28 @@ QIQT-H derives it), RT/HRT + AdS/CFT, Iyer–Wald, the all-balls integral-geomet
     the only remaining inputs the standard cited physics (RT, ball modular Hamiltonian, all-balls ⇒ linearized
     Einstein) plus, for basis-rotating families, eigenvalue-perturbation theory.**
 
+## 4c. The curvature/connection tower (`QIQTH/Curvature.lean`) — Layer 0 done (2026-06-18)
+
+The one thing both routes ultimately need is the differential-geometry tower Mathlib lacks. Building it the
+tractable way (pro's advice): **component-level in a coordinate patch** `Point n = Fin n → ℝ`, as
+multivariable calculus + algebra, NOT the multi-year abstract-manifold library.
+
+- **Layer 0 (DONE, axiom-free, builds):** `pd` (partial derivative); `christoffel` (the Levi-Civita
+  connection Γ from the metric) + `christoffel_symm` (torsion-free, Γ^μ_{νρ}=Γ^μ_{ρν}); `riemann`
+  (R^ρ_{σμν}) + `riemann_antisymm` (antisymmetry in the last two indices); `ricci`, `scalarCurv`,
+  `einsteinTensor` (G=Ric−½Rg); `covDerivVec/Cov/02` (the covariant derivative) + `covDeriv02_symm`. These
+  are the definitions + the structural identities that need **no** analytic input.
+- **Layer 1 (NEXT, harder — needs the differentiability bookkeeping):** `pd` algebra (linearity, Leibniz)
+  with smoothness hypotheses; the inverse-metric derivative `∂g⁻¹ = −g⁻¹(∂g)g⁻¹`; **metric compatibility
+  `∇_λ g_{μν}=0`** (the defining Levi-Civita property).
+- **Layer 2 (deep):** the first and **second Bianchi identities**, and the **contracted Bianchi**
+  `∇^μ G_{μν}=0` — which is exactly Jacobson's conservation+Bianchi step (closes Route A's step 5).
+- **Honest scale:** Layer 0 is a clean foundation; Layers 1–2 are the genuine multi-month effort (the
+  differentiability propagation through Γ/Riemann is where the cost lives). This is the START of the tower,
+  not its completion — and per pro, its marginal value for QIQT-H is bounded (it recertifies textbook DG),
+  so it is pursued as honest infrastructure, with the information-theoretic Route-B side being the
+  higher-leverage QIQT-H-native work.
+
 ## 5. Honest bottom line
 
 GR fits QIQT-H as an **emergent equation of state**: the field equations are recoverable from the area-law
