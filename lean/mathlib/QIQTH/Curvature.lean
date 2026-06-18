@@ -1260,4 +1260,21 @@ theorem gi_trace_covDerivRiem_ricci (g gi : Point n → Fin n → Fin n → ℝ)
   simp only [sub_mul, neg_mul, Finset.sum_mul, Finset.sum_sub_distrib, Finset.sum_neg_distrib]
   ring
 
+/-- **A field with vanishing partial derivatives everywhere is constant** (on `Point n = Fin n → ℝ`,
+    which is connected). All `∂ᵢ F = 0` ⇒ `fderiv F = 0` (the partials span the differential) ⇒ `F` is
+    constant by `is_const_of_fderiv_eq_zero`. Upgrades "covariantly constant at a point" to a genuine
+    constant — e.g. the cosmological constant `Λ`. -/
+theorem const_of_pd_zero (F : Point n → ℝ) (hF : Differentiable ℝ F)
+    (h : ∀ x ν, pd F ν x = 0) (x y : Point n) : F x = F y := by
+  have hsingle : ∀ (z : Point n) (ν : Fin n),
+      Pi.single ν (z ν) = z ν • Pi.single ν (1 : ℝ) := by
+    intro z ν; funext i; by_cases hi : i = ν <;> simp [Pi.single_apply, Pi.smul_apply, hi]
+  have hfd : ∀ p, fderiv ℝ F p = 0 := by
+    intro p
+    ext v
+    rw [ContinuousLinearMap.zero_apply, ← Finset.univ_sum_single v, map_sum]
+    apply Finset.sum_eq_zero; intro ν _
+    rw [hsingle v ν, map_smul, ← pd_eq_fderiv F ν p (hF p), h p ν, smul_zero]
+  exact is_const_of_fderiv_eq_zero hF hfd x y
+
 end QIQTH.Curvature
