@@ -61,6 +61,16 @@ theorem pd_mul (f g : Point n → ℝ) (i : Fin n) (x : Point n)
   simp only [Function.update_eq_self] at h
   simpa only [pd] using h
 
+/-- **`pd` as a directional `fderiv`**: `∂ᵢ g (x) = Dg(x)[eᵢ]` for `g` differentiable at `x`. The bridge
+    from the coordinate partial derivative to the Fréchet derivative (chain rule through `update`). -/
+theorem pd_eq_fderiv (g : Point n → ℝ) (i : Fin n) (x : Point n) (hg : DifferentiableAt ℝ g x) :
+    pd g i x = fderiv ℝ g x (Pi.single i 1) := by
+  have hu : HasDerivAt (Function.update x i) (Pi.single i (1 : ℝ)) (x i) := hasDerivAt_update x i (x i)
+  have hg' : HasFDerivAt g (fderiv ℝ g x) ((Function.update x i) (x i)) := by
+    rw [Function.update_eq_self]; exact hg.hasFDerivAt
+  have h := (hg'.comp_hasDerivAt (x i) hu).deriv
+  simpa only [pd, Function.comp] using h
+
 /-- **Christoffel symbols** `Γ^μ_{νρ} = ½ g^{μα}(∂_ν g_{αρ} + ∂_ρ g_{αν} − ∂_α g_{νρ})`. -/
 noncomputable def christoffel (g gi : Point n → Fin n → Fin n → ℝ)
     (μ ν ρ : Fin n) (x : Point n) : ℝ :=
