@@ -995,4 +995,52 @@ theorem lowered_riemann_gi_trace (g gi : Point n → Fin n → Fin n → ℝ)
     rw [← mul_add, lowered_riemann_antisymm g gi hsymm hinv hCg hC β σ ν lam x, mul_zero]
   linarith [hPos, hzero]
 
+/-- **Raised metric trace of Riemann → raised Ricci** (metric-raising tower, piece C raised):
+    `∑_{σν} g^{σν} R^ρ_{σνλ} = −∑_β g^{ρβ} Ric_{βλ}`. Raises `lowered_riemann_gi_trace` through the
+    `g⁻¹·g = δ` inversion. -/
+theorem ricci_gi_raise (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (ρ lam : Fin n) (x : Point n) :
+    (∑ σ, ∑ ν, gi x σ ν * riemann g gi ρ σ ν lam x) = - ∑ β, gi x ρ β * ricci g gi β lam x := by
+  have hinv_pt : ∀ a b, (∑ σ, g x a σ * gi x σ b) = if a = b then 1 else 0 := fun a b => hinv x a b
+  -- lowered trace `∑_{ρ'} g_{βρ'} (∑_{σν} g^{σν} R^{ρ'}_{σνλ}) = −Ric_{βλ}`.
+  have hlow : ∀ β : Fin n,
+      (∑ ρ', g x β ρ' * (∑ σ, ∑ ν, gi x σ ν * riemann g gi ρ' σ ν lam x)) = - ricci g gi β lam x := by
+    intro β
+    have hswap : (∑ ρ', g x β ρ' * (∑ σ, ∑ ν, gi x σ ν * riemann g gi ρ' σ ν lam x))
+        = ∑ σ, ∑ ν, gi x σ ν * (∑ ρ', g x β ρ' * riemann g gi ρ' σ ν lam x) := by
+      simp only [Finset.mul_sum]
+      rw [Finset.sum_comm]
+      apply Finset.sum_congr rfl; intro σ _
+      rw [Finset.sum_comm]
+      apply Finset.sum_congr rfl; intro ν _
+      apply Finset.sum_congr rfl; intro ρ' _; ring
+    rw [hswap]; exact lowered_riemann_gi_trace g gi hsymm hsymm_gi hinv hCg hC β lam x
+  -- left inverse `g⁻¹·g = δ`.
+  have hleft : ∀ a b : Fin n, (∑ β, gi x a β * g x β b) = if a = b then (1 : ℝ) else 0 := by
+    intro a b
+    rw [show (∑ β, gi x a β * g x β b) = ∑ β, g x b β * gi x β a from by
+          apply Finset.sum_congr rfl; intro β _; rw [hsymm_gi x a β, hsymm x β b]; ring]
+    rw [hinv_pt b a]
+    by_cases h : a = b
+    · rw [if_pos h, if_pos h.symm]
+    · rw [if_neg h, if_neg (fun he => h he.symm)]
+  -- invert: `Q^ρ = ∑_β g^{ρβ} (∑_{ρ'} g_{βρ'} Q^{ρ'})` for any vector `Q` (left-inverse `g⁻¹·g=δ`).
+  have hinvert : ∀ Q : Fin n → ℝ, Q ρ = ∑ β, gi x ρ β * (∑ ρ', g x β ρ' * Q ρ') := by
+    intro Q
+    rw [show (∑ β, gi x ρ β * (∑ ρ', g x β ρ' * Q ρ'))
+          = ∑ ρ', (∑ β, gi x ρ β * g x β ρ') * Q ρ' from by
+        simp only [Finset.mul_sum, Finset.sum_mul]; rw [Finset.sum_comm]
+        apply Finset.sum_congr rfl; intro ρ' _; apply Finset.sum_congr rfl; intro β _; ring]
+    rw [Finset.sum_congr rfl (fun ρ' (_ : ρ' ∈ Finset.univ) => by rw [hleft ρ ρ'])]
+    simp [Finset.sum_ite_eq, ite_mul]
+  rw [show (∑ σ, ∑ ν, gi x σ ν * riemann g gi ρ σ ν lam x)
+        = ∑ β, gi x ρ β * (∑ ρ', g x β ρ' * (∑ σ, ∑ ν, gi x σ ν * riemann g gi ρ' σ ν lam x))
+      from hinvert (fun ρ' => ∑ σ, ∑ ν, gi x σ ν * riemann g gi ρ' σ ν lam x)]
+  rw [Finset.sum_congr rfl (fun β (_ : β ∈ Finset.univ) => by rw [hlow β])]
+  simp [mul_neg]
+
 end QIQTH.Curvature
