@@ -384,3 +384,4 @@ import QIQTH.RealmSelection
 import QIQTH.EinsteinEquationOfState
 import QIQTH.SpectralSum
 import QIQTH.EntanglementFirstLaw
+import QIQTH.Curvature

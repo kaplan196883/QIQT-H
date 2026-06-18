@@ -2767,4 +2767,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — hS DISCHARGED (theorem, no hev) for ANY fixed-eigenbasis family
 -- ρ(ε)=U diag(p ε) U†. Closes the ENTIRE fixed-basis eigenvalue-perturbation wall (residual: basis-rotating).
 
+-- Curvature.lean — the connection/curvature tower, component-level in a coordinate patch (2026-06-18).
+-- Layer 0: Christoffel / Riemann / Ricci / scalar / Einstein tensor + covariant derivative, with the
+-- structural identities that need no analytic input. (Bianchi/conservation = later, need differentiability.)
+#print axioms QIQTH.Curvature.christoffel_symm
+-- expected: standard only — Γ^μ_{νρ}=Γ^μ_{ρν} (torsion-free), from the definition + metric symmetry.
+#print axioms QIQTH.Curvature.riemann_antisymm
+-- expected: standard only — R^ρ_{σμν}=−R^ρ_{σνμ} (antisymmetry in the last two indices).
+#print axioms QIQTH.Curvature.covDeriv02_symm
+-- expected: standard only — ∇ preserves the lower-index symmetry of a (0,2) tensor.
+
 end QIQTH.AxiomAudit
