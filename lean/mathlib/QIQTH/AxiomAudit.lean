@@ -2760,5 +2760,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EntanglementFirstLaw.vonNeumannEntropy_diagonal_differentiableAt
 -- expected: standard only — hS DISCHARGED (a theorem, no hev) for a diagonal fixed-basis family:
 -- S(ρ(ε))=∑negMulLog(pᵢ(ε)) differentiable. Closes the fixed-basis (U=I) eigenvalue-perturbation wall.
+#print axioms QIQTH.SpectralSum.vonNeumannEntropy_unitaryConj
+-- expected: standard only — S(U diag(p) U†)=∑negMulLog(pᵢ) for any unitary U: eigenvalues = permutation
+-- of p via charpoly conjugation-invariance (charpoly_mul_comm). The GENERAL fixed-basis case.
+#print axioms QIQTH.EntanglementFirstLaw.vonNeumannEntropy_unitaryConj_differentiableAt
+-- expected: standard only — hS DISCHARGED (theorem, no hev) for ANY fixed-eigenbasis family
+-- ρ(ε)=U diag(p ε) U†. Closes the ENTIRE fixed-basis eigenvalue-perturbation wall (residual: basis-rotating).
 
 end QIQTH.AxiomAudit

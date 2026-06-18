@@ -155,6 +155,24 @@ theorem vonNeumannEntropy_diagonal_differentiableAt {n : Type*} [Fintype n] [Dec
   rw [hconv]
   exact spectralEntropy_differentiableAt p hp hpos
 
+open QIQTH.QuantumEntropy in
+/-- **`hS` DISCHARGED for the GENERAL fixed-basis family.** For a family `ρ(ε) = U diag(p(ε)) U†` in a
+    *fixed* eigenbasis `U` (`star U·U = 1`) with each `pᵢ` differentiable and nonzero at `0`, the von
+    Neumann entropy is differentiable at `0` — *no `hev` assumption*: `vonNeumannEntropy(h ε) =
+    ∑ᵢ negMulLog(pᵢ(ε))` by `SpectralSum.vonNeumannEntropy_unitaryConj` (eigenvalues = permutation of `p`
+    via charpoly conjugation-invariance), then `spectralEntropy_differentiableAt`. This closes the
+    **entire fixed-eigenbasis** case of the eigenvalue-perturbation wall (the diagonal lemma is `U = 1`);
+    the only residual is genuinely basis-ROTATING families (where eigenvalues can cross). -/
+theorem vonNeumannEntropy_unitaryConj_differentiableAt {n : Type*} [Fintype n] [DecidableEq n]
+    (U : Matrix n n ℂ) (hU : star U * U = 1) (p : ℝ → n → ℝ)
+    (h : (ε : ℝ) → IsDensity (U * Matrix.diagonal (fun i => (p ε i : ℂ)) * star U))
+    (hp : ∀ i, DifferentiableAt ℝ (fun ε => p ε i) 0) (hpos : ∀ i, p 0 i ≠ 0) :
+    DifferentiableAt ℝ (fun ε => vonNeumannEntropy (h ε)) 0 := by
+  have hconv : (fun ε => vonNeumannEntropy (h ε)) = (fun ε => ∑ i, Real.negMulLog (p ε i)) :=
+    funext fun ε => QIQTH.SpectralSum.vonNeumannEntropy_unitaryConj (p ε) U hU (h ε)
+  rw [hconv]
+  exact spectralEntropy_differentiableAt p hp hpos
+
 /-! ### The integrated (finite) first law — no differentiability needed
 
 The *differential* first law `δS = δ⟨K⟩` needs the smoothness of the family (the matrix-log /

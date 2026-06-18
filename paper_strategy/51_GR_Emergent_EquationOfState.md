@@ -181,16 +181,22 @@ QIQT-H derives it), RT/HRT + AdS/CFT, Iyer–Wald, the all-balls integral-geomet
     is differentiable at `0` whenever each eigenvalue `(h ε).eigenvalues i` is differentiable and nonzero. So
     `hS` for the first law is now machine-checked **modulo exactly the eigenvalue-perturbation hypothesis `hev`**
     — on the actual entropy, not an abstract `S`.
-  - **The residual gap = discharging `hev` (eigenvalues differentiable).** *Honest correction* (the fixed-basis
-    case is NOT Lean-trivial, contrary to an earlier note): `IsDensity.eigenvalues` is the **sorted spectral
-    data**, and Mathlib has **no** lemma relating it to an external diagonal `p` of a family `ρ(ε)=U diag(p ε)U†`,
-    nor analytic eigenvalue perturbation; in general the sorted eigenvalues even have **kinks at level
-    crossings**. So `hev` is *mathematically* trivial for a fixed-eigenbasis family but **Lean-blocked on the
-    eigenvalue API** — it is honestly the same eigenvalue-perturbation Mathlib-infrastructure gap, uniformly for
-    all families. **Net status: the Route-B chain is machine-checked end-to-end — first law, RT bridge,
-    all-balls energy, integrated Gibbs law, the matrix-log/spectral derivative, AND the lift onto the real von
-    Neumann entropy — down to ONE cited input (`hev` = eigenvalues differentiable) plus the standard cited
-    physics (RT, ball modular Hamiltonian, all-balls ⇒ linearized Einstein).**
+  - **The fixed-basis case `hev` is now DISCHARGED (a theorem, not assumed) — `QIQTH/SpectralSum.lean`.** The
+    obstacle (`IsDensity.eigenvalues` = sorted spectral data, no Mathlib lemma to an external diagonal) is
+    bypassed through the **characteristic polynomial**, which is sorting- and conjugation-invariant:
+    `sum_eq_of_prod_X_sub_C_eq` (∏(X−aᵢ)=∏(X−bᵢ) ⇒ ∑f(aᵢ)=∑f(bᵢ), via the roots multiset) ⟹
+    `vonNeumannEntropy_diagonal` (S(diag d)=∑negMulLog dᵢ, charpoly_diagonal vs IsHermitian.charpoly_eq) ⟹
+    `vonNeumannEntropy_unitaryConj` (S(U diag(p)U†)=∑negMulLog pᵢ for any unitary U, via `charpoly_mul_comm`).
+    The family capstones `vonNeumannEntropy_{diagonal,unitaryConj}_differentiableAt` then prove `hS` for any
+    **fixed-eigenbasis** family `ρ(ε)=U diag(p ε)U†` with `pᵢ` smooth+nonzero — **no `hev` assumption**. All
+    axiom-free.
+  - **Residual:** only genuinely **basis-ROTATING** families remain (eigenvalues can cross, where the sorted
+    eigenvalues are non-differentiable) — a fundamental analytic frontier (Kato perturbation theory), not just
+    missing infrastructure, and not unconditionally true. **Net status: the Route-B chain is machine-checked
+    end-to-end — first law, RT bridge, all-balls energy, integrated Gibbs law, the spectral/matrix-log
+    derivative, the lift onto the real von Neumann entropy, AND `hS` for the entire fixed-eigenbasis case — with
+    the only remaining inputs the standard cited physics (RT, ball modular Hamiltonian, all-balls ⇒ linearized
+    Einstein) plus, for basis-rotating families, eigenvalue-perturbation theory.**
 
 ## 5. Honest bottom line
 

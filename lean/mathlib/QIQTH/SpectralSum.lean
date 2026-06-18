@@ -64,4 +64,22 @@ theorem vonNeumannEntropy_diagonal {n : Type*} [Fintype n] [DecidableEq n] (d : 
   have key := sum_eq_of_prod_X_sub_C_eq hH.eigenvalues d Real.negMulLog heq
   simpa [vonNeumannEntropy, IsDensity.eigenvalues] using key
 
+open QIQTH.QuantumEntropy in
+/-- **Von Neumann entropy is basis-independent: `S(U diag(p) U†) = ∑ᵢ negMulLog(pᵢ)`** for any unitary
+    `U` (`star U · U = 1`). The eigenvalues of `U diag(p) U†` are a permutation of `p` because
+    conjugation preserves the characteristic polynomial: `charpoly(U·diag·U†) = charpoly((U†·U)·diag) =
+    charpoly(diag)` (cyclic `charpoly_mul_comm`). This closes the GENERAL fixed-basis case — any fixed
+    eigenbasis, not just the diagonal one. -/
+theorem vonNeumannEntropy_unitaryConj {n : Type*} [Fintype n] [DecidableEq n] (p : n → ℝ)
+    (U : Matrix n n ℂ) (hU : star U * U = 1)
+    (h : IsDensity (U * Matrix.diagonal (fun i => (p i : ℂ)) * star U)) :
+    vonNeumannEntropy h = ∑ i, Real.negMulLog (p i) := by
+  have hH := h.posSemidef.1
+  have hcp : (U * Matrix.diagonal (fun i => (p i : ℂ)) * star U).charpoly
+      = ∏ i, (X - C ((p i : ℂ))) := by
+    rw [Matrix.charpoly_mul_comm, ← mul_assoc, hU, one_mul, Matrix.charpoly_diagonal]
+  have heq := hH.charpoly_eq.symm.trans hcp
+  have key := sum_eq_of_prod_X_sub_C_eq hH.eigenvalues p Real.negMulLog heq
+  simpa [vonNeumannEntropy, IsDensity.eigenvalues] using key
+
 end QIQTH.SpectralSum
