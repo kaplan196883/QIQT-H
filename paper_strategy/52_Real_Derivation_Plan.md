@@ -36,11 +36,14 @@ obtained by contracting `second_bianchi_contracted` with `g^{σν}`. Three terms
 - **1.1 `ricci_gi_raise` (piece C, raised) — ✅ DONE, axiom-free (commit on `main`).**
   `∑_{σν} g^{σν} R^ρ_{σνλ} = −∑_β g^{ρβ} Ric_{βλ}`. Built via `lowered_riemann_gi_trace` + a triple-sum
   swap (`hswap`) + an abstract-`Q` inversion (`hinvert ∀Q`, `g⁻¹·g=δ` via `hleft`). Landed in 2 iters.
-- **1.2 T3 = contraction-commutes + raise** ≈80 ln (HARDEST). `∑_{σν} g^{σν} ∑_ρ covDerivRiem ρ ρ σ ν λ
-  = −div02(ricci)λ`. Mechanism: pulling `g^{σν}` through `∇_ρ` — the σ,ν index corrections of
-  `covDerivRiem` cancel `∂g^{σν}` via `inv_metric_compat` (`∂gi=−Γgi−Γgi`); the result is `∑_ρ ∇_ρ S^ρ_λ`
-  with `S^ρ_λ = ∑g^{σν}R^ρ_{σνλ} = −∑g^{ρβ}Ric_{βλ}` (1.1) ⟹ `−div02(ricci)`. RISK: high — triple-sum
-  reindexing + the σ,ν correction cancellation. Same flavor as `inv_metric_compat`'s `hkey`.
+- **1.2 T3 = contraction-commutes + raise.** `∑_{σν} g^{σν} ∑_ρ covDerivRiem ρ ρ σ ν λ = −div02(ricci)λ`.
+  - **✅ CORE DONE, axiom-free** (`gi_trace_covDerivRiem`): for fixed ρ, `∑_{σν}g^{σν}∇_ρR^ρ_{σνλ}
+    = ∂_ρS^ρ_λ + Γ^ρ_{ρκ}S^κ_λ − Γ^κ_{ρλ}S^ρ_κ` (the (1,1) divergence of `S^a_b=∑g^{σν}R^a_{σνb}`).
+    Copied T1's shape (`swap13`/`swap23`+`inv_metric_compat`) — compiled first try.
+  - **REMAINING (∑ρ assembly, ~60–80 ln):** sum over ρ + substitute `S=−`(raised Ricci)
+    [`ricci_gi_raise`, function level] + `∇g=0`. The (1,1) divergence of `S^ρ_λ=−g^{ρβ}Ric_{βλ}` equals
+    `div02(S_lowered)` with `S_lowered=−Ric` (`g_{μρ}g^{ρβ}=δ`) ⟹ `−div02(ricci)`. Refactor distributed
+    spectators `∑σνκ gΓR→∑κ Γ S`; Leibniz `∇_ρ(g^{ρβ}Ric)=g^{ρβ}∇_ρRic` via `inv_metric_compat`.
 - **1.3 T1 = scalar-curvature derivative — ✅ DONE, axiom-free** (`gi_trace_covDeriv_ricci`).
   `∑_{σν} g^{σν} ∇_λ Ric_{σν} = ∂_λ R`. Product rule (`pd_sum`+`pd_mul`) + `inv_metric_compat` + the
   triple-sum swaps `swap13`/`swap23` (the `Γ·g·Ric` cancellation `A=C`, `B=D`). Added `PdiffAt_ricci`.
