@@ -429,6 +429,79 @@ theorem bianchi_extra_terms (g gi : Point n → Fin n → Fin n → ℝ)
       riemann_antisymm g gi ρ σ lam κ x]
   ring
 
+/-- The quadratic (`ΓΓ`) part of the Riemann tensor: `R^ρ_{σμν}|_quad = ∑_l (Γ^ρ_{μl}Γ^l_{νσ} − Γ^ρ_{νl}Γ^l_{μσ})`.
+    As a matrix in the `(ρ,σ)` indices this is the commutator `[Γ_μ, Γ_ν]`. -/
+noncomputable def riemannQuad (g gi : Point n → Fin n → Fin n → ℝ)
+    (ρ σ μ ν : Fin n) (x : Point n) : ℝ :=
+  ∑ l, (christoffel g gi ρ μ l x * christoffel g gi l ν σ x
+      - christoffel g gi ρ ν l x * christoffel g gi l μ σ x)
+
+/-- **The ΓΓΓ part of the second Bianchi cyclic sum vanishes — the Jacobi identity.** In the matrix-form
+    `DF=0`, the cubic part is `∑_cyclic [Γ_λ, [Γ_μ, Γ_ν]] = 0` (Jacobi). In components every matrix
+    triple-product appears once with each sign, matched pairwise by a single `κ ↔ e` swap of the two
+    contracted indices (`Finset.sum_comm`) — no Christoffel symmetry needed. -/
+theorem bianchi_GGG (g gi : Point n → Fin n → Fin n → ℝ)
+    (ρ σ lam mu ν : Fin n) (x : Point n) :
+    ((∑ κ, christoffel g gi ρ lam κ x * riemannQuad g gi κ σ mu ν x)
+      - (∑ κ, christoffel g gi κ lam σ x * riemannQuad g gi ρ κ mu ν x))
+    + ((∑ κ, christoffel g gi ρ mu κ x * riemannQuad g gi κ σ ν lam x)
+      - (∑ κ, christoffel g gi κ mu σ x * riemannQuad g gi ρ κ ν lam x))
+    + ((∑ κ, christoffel g gi ρ ν κ x * riemannQuad g gi κ σ lam mu x)
+      - (∑ κ, christoffel g gi κ ν σ x * riemannQuad g gi ρ κ lam mu x)) = 0 := by
+  -- The three left-multiplied terms (Γ^ρ_{·κ} R_quad^κ) collected as one ∑_κ∑_e integrand.
+  have hL : (∑ κ, christoffel g gi ρ lam κ x * riemannQuad g gi κ σ mu ν x)
+            + (∑ κ, christoffel g gi ρ mu κ x * riemannQuad g gi κ σ ν lam x)
+            + (∑ κ, christoffel g gi ρ ν κ x * riemannQuad g gi κ σ lam mu x)
+          = ∑ κ, ∑ e,
+              (christoffel g gi ρ lam κ x * (christoffel g gi κ mu e x * christoffel g gi e ν σ x
+                                            - christoffel g gi κ ν e x * christoffel g gi e mu σ x)
+              + christoffel g gi ρ mu κ x * (christoffel g gi κ ν e x * christoffel g gi e lam σ x
+                                            - christoffel g gi κ lam e x * christoffel g gi e ν σ x)
+              + christoffel g gi ρ ν κ x * (christoffel g gi κ lam e x * christoffel g gi e mu σ x
+                                            - christoffel g gi κ mu e x * christoffel g gi e lam σ x)) := by
+    rw [← Finset.sum_add_distrib, ← Finset.sum_add_distrib]
+    apply Finset.sum_congr rfl; intro κ _
+    simp only [riemannQuad, Finset.mul_sum, ← Finset.sum_add_distrib]
+  -- The three right-multiplied terms (Γ^κ_{·σ} R_quad^ρ_κ) collected as one ∑_κ∑_e integrand.
+  have hR : (∑ κ, christoffel g gi κ lam σ x * riemannQuad g gi ρ κ mu ν x)
+            + (∑ κ, christoffel g gi κ mu σ x * riemannQuad g gi ρ κ ν lam x)
+            + (∑ κ, christoffel g gi κ ν σ x * riemannQuad g gi ρ κ lam mu x)
+          = ∑ κ, ∑ e,
+              (christoffel g gi κ lam σ x * (christoffel g gi ρ mu e x * christoffel g gi e ν κ x
+                                            - christoffel g gi ρ ν e x * christoffel g gi e mu κ x)
+              + christoffel g gi κ mu σ x * (christoffel g gi ρ ν e x * christoffel g gi e lam κ x
+                                            - christoffel g gi ρ lam e x * christoffel g gi e ν κ x)
+              + christoffel g gi κ ν σ x * (christoffel g gi ρ lam e x * christoffel g gi e mu κ x
+                                            - christoffel g gi ρ mu e x * christoffel g gi e lam κ x)) := by
+    rw [← Finset.sum_add_distrib, ← Finset.sum_add_distrib]
+    apply Finset.sum_congr rfl; intro κ _
+    simp only [riemannQuad, Finset.mul_sum, ← Finset.sum_add_distrib]
+  -- Goal = Lgroup − Rgroup; swap κ↔e in Rgroup (Finset.sum_comm); integrands then match pointwise.
+  have key : ((∑ κ, christoffel g gi ρ lam κ x * riemannQuad g gi κ σ mu ν x)
+      - (∑ κ, christoffel g gi κ lam σ x * riemannQuad g gi ρ κ mu ν x))
+    + ((∑ κ, christoffel g gi ρ mu κ x * riemannQuad g gi κ σ ν lam x)
+      - (∑ κ, christoffel g gi κ mu σ x * riemannQuad g gi ρ κ ν lam x))
+    + ((∑ κ, christoffel g gi ρ ν κ x * riemannQuad g gi κ σ lam mu x)
+      - (∑ κ, christoffel g gi κ ν σ x * riemannQuad g gi ρ κ lam mu x))
+    = ((∑ κ, christoffel g gi ρ lam κ x * riemannQuad g gi κ σ mu ν x)
+        + (∑ κ, christoffel g gi ρ mu κ x * riemannQuad g gi κ σ ν lam x)
+        + (∑ κ, christoffel g gi ρ ν κ x * riemannQuad g gi κ σ lam mu x))
+      - ((∑ κ, christoffel g gi κ lam σ x * riemannQuad g gi ρ κ mu ν x)
+        + (∑ κ, christoffel g gi κ mu σ x * riemannQuad g gi ρ κ ν lam x)
+        + (∑ κ, christoffel g gi κ ν σ x * riemannQuad g gi ρ κ lam mu x)) := by ring
+  rw [key, hL, hR, Finset.sum_comm (f := fun κ e =>
+        christoffel g gi κ lam σ x * (christoffel g gi ρ mu e x * christoffel g gi e ν κ x
+                                      - christoffel g gi ρ ν e x * christoffel g gi e mu κ x)
+        + christoffel g gi κ mu σ x * (christoffel g gi ρ ν e x * christoffel g gi e lam κ x
+                                      - christoffel g gi ρ lam e x * christoffel g gi e ν κ x)
+        + christoffel g gi κ ν σ x * (christoffel g gi ρ lam e x * christoffel g gi e mu κ x
+                                      - christoffel g gi ρ mu e x * christoffel g gi e lam κ x))]
+  rw [← Finset.sum_sub_distrib]
+  apply Finset.sum_eq_zero; intro κ _
+  rw [← Finset.sum_sub_distrib]
+  apply Finset.sum_eq_zero; intro e _
+  ring
+
 /-- **Covariant derivative of the (1,3) Riemann tensor** `∇_λ R^ρ_{σμν} = ∂_λ R^ρ_{σμν}
     + Γ^ρ_{λκ}R^κ_{σμν} − Γ^κ_{λσ}R^ρ_{κμν} − Γ^κ_{λμ}R^ρ_{σκν} − Γ^κ_{λν}R^ρ_{σμκ}`. -/
 noncomputable def covDerivRiem (g gi : Point n → Fin n → Fin n → ℝ)
