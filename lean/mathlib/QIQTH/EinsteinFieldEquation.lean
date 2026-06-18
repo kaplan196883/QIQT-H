@@ -89,6 +89,43 @@ theorem div02_scalar_metric (g gi : Point n → Fin n → Fin n → ℝ)
   rw [Finset.sum_congr rfl (fun ρ (_ : ρ ∈ Finset.univ) => by rw [hcol ρ])]
   simp [Finset.sum_ite_eq, mul_ite]
 
+/-- **T3 of the twice-contracted Bianchi**: `∑_ρ ∑_{σν} g^{σν} ∇_ρ R^ρ_{σνλ} = −∇^μ Ric_{μλ}`.
+    Sum `gi_trace_covDerivRiem_ricci` over `ρ` and match `−div02(ricci)` (raised Ricci divergence)
+    term-by-term via `sum_comm` + metric symmetry. -/
+theorem divRiemann_trace_eq (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (lam : Fin n) (x : Point n) :
+    (∑ ρ, ∑ σ, ∑ ν, gi x σ ν * covDerivRiem g gi ρ ρ σ ν lam x)
+      = - div02 g gi (fun y a b => ricci g gi a b y) lam x := by
+  have hL1 : (∑ μ, ∑ ρ, gi x μ ρ * pd (fun y => ricci g gi μ lam y) ρ x)
+      = ∑ ρ, ∑ β, gi x ρ β * pd (fun y => ricci g gi β lam y) ρ x := by
+    rw [Finset.sum_comm]; apply Finset.sum_congr rfl; intro ρ _
+    apply Finset.sum_congr rfl; intro β _; rw [hsymm_gi x β ρ]
+  have hL2 : (∑ μ, ∑ ρ, ∑ κ, gi x μ ρ * (christoffel g gi κ ρ μ x * ricci g gi κ lam x))
+      = ∑ ρ, ∑ β, ∑ κ, christoffel g gi β ρ κ x * gi x ρ κ * ricci g gi β lam x := by
+    rw [Finset.sum_comm]
+    apply Finset.sum_congr rfl; intro ρ _
+    rw [Finset.sum_comm]
+    apply Finset.sum_congr rfl; intro κ _
+    apply Finset.sum_congr rfl; intro μ _
+    rw [hsymm_gi x μ ρ]; ring
+  have hL3 : (∑ μ, ∑ ρ, ∑ κ, gi x μ ρ * (christoffel g gi κ ρ lam x * ricci g gi μ κ x))
+      = ∑ ρ, ∑ β, ∑ κ, christoffel g gi κ ρ lam x * gi x ρ β * ricci g gi β κ x := by
+    rw [Finset.sum_comm]
+    apply Finset.sum_congr rfl; intro ρ _
+    apply Finset.sum_congr rfl; intro β _
+    apply Finset.sum_congr rfl; intro κ _
+    rw [hsymm_gi x β ρ]; ring
+  rw [Finset.sum_congr rfl (fun ρ (_ : ρ ∈ Finset.univ) =>
+        gi_trace_covDerivRiem_ricci g gi hsymm hsymm_gi hinv hCg hCgi hC ρ lam x)]
+  simp only [div02, covDeriv02, mul_sub, Finset.mul_sum, Finset.sum_add_distrib,
+    Finset.sum_sub_distrib, Finset.sum_neg_distrib, neg_sub, neg_add]
+  rw [← hL1, ← hL2, ← hL3]; ring
+
 /-- **The Einstein field equation as the thermodynamic equation of state** (Jacobson, PRL 1995),
     completed: from the post-crux relation + conservation + contracted Bianchi + metric
     compatibility, `a·T_{μν} = G_{μν} + Λ·g_{μν}` with `Λ := f + ½R` **covariantly constant**.
