@@ -230,11 +230,17 @@ multivariable calculus + algebra, NOT the multi-year abstract-manifold library.
   swap, `Finset.sum_comm`); and the lower-index **extra terms** via `bianchi_extra_terms`
   (`christoffel_symm`+`riemann_antisymm`). Glued by a per-term decomposition + `linarith`. Helpers:
   `pd_riemann`, `pd_riemannQuad`, the `PdiffAt_*` suite. AxiomAudit updated, budget guard green.
-- **NEXT (the actual frontier):** the **contracted Bianchi `∇^μ G_{μν}=0`** (Jacobson's conservation step)
-  — needs contraction-commutes-with-∇ + index raising with `g^{μν}`/`∇g^{μν}=0` + `G=Ric−½gR`. Substantial
-  but no longer a wall. *Net: connection + all curvature tensors + metric compatibility + first Bianchi +
-  Schwarz + the FULL second Bianchi are ALL machine-checked — the only remaining DG piece is the
-  contraction to `∇^μG_{μν}=0`.*
+- **ONCE-CONTRACTED BIANCHI — machine-checked, axiom-free** (`second_bianchi_contracted`):
+  `∇_λR_{σν}−∇_νR_{σλ}+∇_ρR^ρ_{σνλ}=0`, by tracing the full second Bianchi over `(ρ,μ)`. Supporting lemmas
+  (axiom-free): `covDerivRiem_contract` (**∇ commutes with contraction**, `∑_ρ∇_λR^ρ_{σρν}=∇_λRic_{σν}` — the
+  contracted-pair connection corrections cancel via `sum_comm`); `covDerivRiem_antisymm` (∇R inherits
+  Riemann's last-two-index antisymmetry); `covDerivRiem_contract'` (the other-slot trace = `−∇Ric`).
+- **NEXT (last DG step):** contract once more with `g^{μν}` to reach `∇^μ G_{μν}=0` (Jacobson's conservation
+  step). Needs `∇g^{μν}=0` (inverse-metric covariant constancy from `metric_compat`+`inv_contract`), Ricci
+  symmetry, index raising, scalar-curvature `∇R=∂R`. Substantial but mechanical — no wall. *Net: connection
+  + all curvature tensors + metric compatibility + first Bianchi + Schwarz + the FULL second Bianchi + the
+  ONCE-CONTRACTED Bianchi are ALL machine-checked; only the final `g^{μν}`-contraction to `∇^μG_{μν}=0`
+  remains.*
 - **Honest scale:** Layer 0 is a clean foundation; Layers 1–2 are the genuine multi-month effort (the
   differentiability propagation through Γ/Riemann is where the cost lives). This is the START of the tower,
   not its completion — and per pro, its marginal value for QIQT-H is bounded (it recertifies textbook DG),
