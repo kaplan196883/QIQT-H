@@ -2913,5 +2913,9 @@ namespace QIQTH.AxiomAudit
 -- the commutator of directional derivatives df([X,Y])=X(Yf)−Y(Xf), for the model-space manifold (M=E):
 -- mfderiv→fderiv, mlieBracket→lieBracket, reduces to Mathlib's normed-space fderiv_apply_lieBracket. The
 -- unblocker for section-tensoriality + Bianchi + Ricci; general-manifold case (charts) builds on it. Axiom-free.
+#print axioms QIQTH.ManifoldGR.dirDeriv_add_vectorField
+#print axioms QIQTH.ManifoldGR.dirDeriv_smul_vectorField
+-- expected: standard only — dirDeriv linearity in the vector field (additive + 𝕜-homogeneous), the
+-- directional-derivative API the Bianchi cyclic sum / Ricci traces consume. Axiom-free.
 
 end QIQTH.AxiomAudit

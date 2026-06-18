@@ -39,6 +39,28 @@ noncomputable def dirDeriv {H : Type*} [TopologicalSpace H] (I : ModelWithCorner
     (X : Π z : M, TangentSpace I z) (f : M → 𝕜) (z : M) : 𝕜 :=
   mfderiv I 𝓘(𝕜) f z (X z)
 
+section dirDerivAPI
+variable {H : Type*} [TopologicalSpace H] {I : ModelWithCorners 𝕜 E H}
+  {M : Type*} [TopologicalSpace M] [ChartedSpace H M]
+
+/-- The directional derivative is **additive in the vector field** — pure fibrewise linearity of the
+differential, no differentiability of the field needed. -/
+@[simp] theorem dirDeriv_add_vectorField (X X' : Π z : M, TangentSpace I z) (f : M → 𝕜) :
+    dirDeriv I (X + X') f = dirDeriv I X f + dirDeriv I X' f := by
+  funext z; exact map_add (mfderiv I 𝓘(𝕜) f z) (X z) (X' z)
+
+/-- The directional derivative is **homogeneous in the vector field** over scalars. -/
+@[simp] theorem dirDeriv_smul_vectorField (c : 𝕜) (X : Π z : M, TangentSpace I z) (f : M → 𝕜) :
+    dirDeriv I (c • X) f = c • dirDeriv I X f := by
+  funext z; exact map_smul (mfderiv I 𝓘(𝕜) f z) c (X z)
+
+/-- The directional derivative along the zero field vanishes. -/
+@[simp] theorem dirDeriv_zero_vectorField (f : M → 𝕜) :
+    dirDeriv I (0 : Π z : M, TangentSpace I z) f = 0 := by
+  funext z; exact map_zero (mfderiv I 𝓘(𝕜) f z)
+
+end dirDerivAPI
+
 /-- **Base case (model space):** the Lie bracket acts on a scalar as the commutator of directional
 derivatives, `df([X,Y]) = X(Yf) − Y(Xf)`, when the manifold is its own model space `E`. Reduces
 `mfderiv → fderiv`, `mlieBracket → lieBracket` and applies Mathlib's normed-space
