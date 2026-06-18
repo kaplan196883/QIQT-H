@@ -502,6 +502,53 @@ theorem bianchi_GGG (g gi : Point n → Fin n → Fin n → ℝ)
   apply Finset.sum_eq_zero; intro e _
   ring
 
+/-- **Expansion of `∂_λ (R_quad)^ρ_{σμν}`** via `pd_sum` + Leibniz: the `∑_l (∂Γ·Γ + Γ·∂Γ)` terms. -/
+theorem pd_riemannQuad (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (lam ρ σ μ ν : Fin n) (x : Point n) :
+    pd (fun y => riemannQuad g gi ρ σ μ ν y) lam x
+      = ∑ l, (pd (fun w => christoffel g gi ρ μ l w) lam x * christoffel g gi l ν σ x
+            + christoffel g gi ρ μ l x * pd (fun w => christoffel g gi l ν σ w) lam x
+            - pd (fun w => christoffel g gi ρ ν l w) lam x * christoffel g gi l μ σ x
+            - christoffel g gi ρ ν l x * pd (fun w => christoffel g gi l μ σ w) lam x) := by
+  have hsumand : ∀ l : Fin n, PdiffAt (fun y => christoffel g gi ρ μ l y * christoffel g gi l ν σ y
+                      - christoffel g gi ρ ν l y * christoffel g gi l μ σ y) lam x := fun l =>
+    ((PdiffAt_of_contDiff _ (hC ρ μ l) lam x).mul (PdiffAt_of_contDiff _ (hC l ν σ) lam x)).sub
+     ((PdiffAt_of_contDiff _ (hC ρ ν l) lam x).mul (PdiffAt_of_contDiff _ (hC l μ σ) lam x))
+  simp only [riemannQuad]
+  rw [pd_sum _ _ lam x (fun l _ => hsumand l)]
+  apply Finset.sum_congr rfl
+  intro l _
+  rw [pd_sub _ _ lam x
+        ((PdiffAt_of_contDiff _ (hC ρ μ l) lam x).mul (PdiffAt_of_contDiff _ (hC l ν σ) lam x))
+        ((PdiffAt_of_contDiff _ (hC ρ ν l) lam x).mul (PdiffAt_of_contDiff _ (hC l μ σ) lam x)),
+      pd_mul _ _ lam x (PdiffAt_of_contDiff _ (hC ρ μ l) lam x) (PdiffAt_of_contDiff _ (hC l ν σ) lam x),
+      pd_mul _ _ lam x (PdiffAt_of_contDiff _ (hC ρ ν l) lam x) (PdiffAt_of_contDiff _ (hC l μ σ) lam x)]
+  ring
+
+/-- **The ∂Γ·Γ part of the second Bianchi cyclic sum vanishes.** The first-derivative-of-`Γ` terms come
+    from two places — the Leibniz derivative of `R_quad` (`pd_riemannQuad`) and the linear part of the
+    `Γ·R` terms (`Γ·R_lin`). Under the cyclic sum they cancel as *identical sums up to renaming the
+    contracted index* (no Christoffel symmetry, no index swap) — closed by `ring`. -/
+theorem bianchi_dGamma (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (ρ σ lam mu ν : Fin n) (x : Point n) :
+    (pd (fun y => riemannQuad g gi ρ σ mu ν y) lam x
+      + (∑ κ, christoffel g gi ρ lam κ x * riemannLin g gi κ σ mu ν x)
+      - (∑ κ, christoffel g gi κ lam σ x * riemannLin g gi ρ κ mu ν x))
+    + (pd (fun y => riemannQuad g gi ρ σ ν lam y) mu x
+      + (∑ κ, christoffel g gi ρ mu κ x * riemannLin g gi κ σ ν lam x)
+      - (∑ κ, christoffel g gi κ mu σ x * riemannLin g gi ρ κ ν lam x))
+    + (pd (fun y => riemannQuad g gi ρ σ lam mu y) ν x
+      + (∑ κ, christoffel g gi ρ ν κ x * riemannLin g gi κ σ lam mu x)
+      - (∑ κ, christoffel g gi κ ν σ x * riemannLin g gi ρ κ lam mu x)) = 0 := by
+  rw [pd_riemannQuad g gi hC lam ρ σ mu ν, pd_riemannQuad g gi hC mu ρ σ ν lam,
+      pd_riemannQuad g gi hC ν ρ σ lam mu]
+  simp only [riemannLin, ← Finset.sum_add_distrib, ← Finset.sum_sub_distrib]
+  apply Finset.sum_eq_zero
+  intro x _
+  ring
+
 /-- **Covariant derivative of the (1,3) Riemann tensor** `∇_λ R^ρ_{σμν} = ∂_λ R^ρ_{σμν}
     + Γ^ρ_{λκ}R^κ_{σμν} − Γ^κ_{λσ}R^ρ_{κμν} − Γ^κ_{λμ}R^ρ_{σκν} − Γ^κ_{λν}R^ρ_{σμκ}`. -/
 noncomputable def covDerivRiem (g gi : Point n → Fin n → Fin n → ℝ)
