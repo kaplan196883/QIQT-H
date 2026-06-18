@@ -30,6 +30,37 @@ abbrev Point (n : ℕ) := Fin n → ℝ
 noncomputable def pd (f : Point n → ℝ) (i : Fin n) (x : Point n) : ℝ :=
   deriv (fun t => f (Function.update x i t)) (x i)
 
+/-- Partial differentiability of `f` at `x` along coordinate `i` (the analytic hypothesis for the
+    `pd` algebra below). -/
+def PdiffAt (f : Point n → ℝ) (i : Fin n) (x : Point n) : Prop :=
+  DifferentiableAt ℝ (fun t => f (Function.update x i t)) (x i)
+
+/-- `∂ᵢ(f+g) = ∂ᵢf + ∂ᵢg`. -/
+theorem pd_add (f g : Point n → ℝ) (i : Fin n) (x : Point n)
+    (hf : PdiffAt f i x) (hg : PdiffAt g i x) :
+    pd (fun y => f y + g y) i x = pd f i x + pd g i x := by
+  simp only [pd]; exact deriv_add hf hg
+
+/-- `∂ᵢ(f−g) = ∂ᵢf − ∂ᵢg`. -/
+theorem pd_sub (f g : Point n → ℝ) (i : Fin n) (x : Point n)
+    (hf : PdiffAt f i x) (hg : PdiffAt g i x) :
+    pd (fun y => f y - g y) i x = pd f i x - pd g i x := by
+  simp only [pd]; exact deriv_sub hf hg
+
+/-- `∂ᵢ(c·f) = c·∂ᵢf`. -/
+theorem pd_const_mul (c : ℝ) (f : Point n → ℝ) (i : Fin n) (x : Point n)
+    (hf : PdiffAt f i x) :
+    pd (fun y => c * f y) i x = c * pd f i x := by
+  simp only [pd]; exact deriv_const_mul c hf
+
+/-- **Leibniz rule** `∂ᵢ(f·g) = (∂ᵢf)·g + f·(∂ᵢg)`. -/
+theorem pd_mul (f g : Point n → ℝ) (i : Fin n) (x : Point n)
+    (hf : PdiffAt f i x) (hg : PdiffAt g i x) :
+    pd (fun y => f y * g y) i x = pd f i x * g x + f x * pd g i x := by
+  have h := deriv_mul hf hg
+  simp only [Function.update_eq_self] at h
+  simpa only [pd] using h
+
 /-- **Christoffel symbols** `Γ^μ_{νρ} = ½ g^{μα}(∂_ν g_{αρ} + ∂_ρ g_{αν} − ∂_α g_{νρ})`. -/
 noncomputable def christoffel (g gi : Point n → Fin n → Fin n → ℝ)
     (μ ν ρ : Fin n) (x : Point n) : ℝ :=

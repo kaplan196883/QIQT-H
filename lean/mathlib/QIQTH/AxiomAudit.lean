@@ -2776,5 +2776,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — R^ρ_{σμν}=−R^ρ_{σνμ} (antisymmetry in the last two indices).
 #print axioms QIQTH.Curvature.covDeriv02_symm
 -- expected: standard only — ∇ preserves the lower-index symmetry of a (0,2) tensor.
+-- Layer 1 (analytic): the partial-derivative algebra (linearity + Leibniz), the foundation for the
+-- metric-compatibility and Bianchi identities.
+#print axioms QIQTH.Curvature.pd_add
+#print axioms QIQTH.Curvature.pd_sub
+#print axioms QIQTH.Curvature.pd_const_mul
+#print axioms QIQTH.Curvature.pd_mul
+-- expected: standard only — ∂ᵢ(f+g)=∂ᵢf+∂ᵢg, ∂ᵢ(f−g), ∂ᵢ(c·f)=c·∂ᵢf, Leibniz ∂ᵢ(fg)=(∂ᵢf)g+f(∂ᵢg).
 
 end QIQTH.AxiomAudit
