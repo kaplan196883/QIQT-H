@@ -115,29 +115,43 @@ section GeneralManifold
 variable {H : Type*} [TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} [I.Boundaryless]
   {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I 2 M]
 
-/-- **Directional-derivative chart-covariance.** The directional derivative `(Yf)(x)` on `M` equals
-the normed-space directional derivative of the chart representative `f ∘ e⁻¹` at `e x`, evaluated on
-the pushed-forward vector `(de)_x (Y x)`. Pure chain rule for `f = (f ∘ e⁻¹) ∘ e` near `x`. -/
+/-- **Directional-derivative chart-covariance (fixed chart, nearby point).** Using the *fixed* chart
+`e := extChartAt I x₀`, the directional derivative `(Yf)(z)` at any point `z ∈ e.source` equals the
+normed-space directional derivative of the chart representative `f ∘ e⁻¹` at `e z`, evaluated on the
+pushed-forward vector `(de)_z (Y z)`. Chain rule for `f = (f ∘ e⁻¹) ∘ e` near `z`. The fixed-chart
+form (vs `dirDeriv_eq_chart`) is what lets the *second* directional derivative be taken. -/
+theorem dirDeriv_eq_chartAt (f : M → 𝕜) (Y : Π z : M, TangentSpace I z) (x₀ z : M)
+    (hz : z ∈ (extChartAt I x₀).source) (hf : MDifferentiableAt I 𝓘(𝕜) f z) :
+    dirDeriv I Y f z
+      = fderiv 𝕜 (f ∘ (extChartAt I x₀).symm) (extChartAt I x₀ z)
+          (mfderiv I 𝓘(𝕜, E) (extChartAt I x₀) z (Y z)) := by
+  haveI : IsManifold I 1 M := IsManifold.of_le (n := 2) (by norm_num)
+  have hee : MDifferentiableAt I 𝓘(𝕜, E) (extChartAt I x₀) z :=
+    mdifferentiableAt_extChartAt (by rwa [extChartAt_source] at hz)
+  have hsymm_diff : MDifferentiableAt 𝓘(𝕜, E) I (extChartAt I x₀).symm (extChartAt I x₀ z) := by
+    have h : MDifferentiableWithinAt 𝓘(𝕜, E) I (extChartAt I x₀).symm (Set.range I)
+        (extChartAt I x₀ z) :=
+      mdifferentiableWithinAt_extChartAt_symm (I := I) ((extChartAt I x₀).map_source hz)
+    rwa [I.range_eq_univ, mdifferentiableWithinAt_univ] at h
+  have hes : MDifferentiableAt 𝓘(𝕜, E) 𝓘(𝕜) (f ∘ (extChartAt I x₀).symm) (extChartAt I x₀ z) := by
+    apply MDifferentiableAt.comp (extChartAt I x₀ z) _ hsymm_diff
+    rw [(extChartAt I x₀).left_inv hz]; exact hf
+  have heq : (f ∘ (extChartAt I x₀).symm) ∘ (extChartAt I x₀) =ᶠ[𝓝 z] f := by
+    filter_upwards [extChartAt_source_mem_nhds' hz] with w hw
+    simp only [Function.comp_apply, (extChartAt I x₀).left_inv hw]
+  show mfderiv I 𝓘(𝕜) f z (Y z) = _
+  rw [← heq.mfderiv_eq, mfderiv_comp z hes hee]
+  exact DFunLike.congr_fun
+    (mfderiv_eq_fderiv (f := f ∘ ⇑(extChartAt I x₀).symm) (x := extChartAt I x₀ z))
+    (mfderiv I 𝓘(𝕜, E) (extChartAt I x₀) z (Y z))
+
+/-- **Directional-derivative chart-covariance** (at the base point) — the `z = x₀` case. -/
 theorem dirDeriv_eq_chart (f : M → 𝕜) (Y : Π z : M, TangentSpace I z) (x : M)
     (hf : MDifferentiableAt I 𝓘(𝕜) f x) :
     dirDeriv I Y f x
       = fderiv 𝕜 (f ∘ (extChartAt I x).symm) (extChartAt I x x)
-          (mfderiv I 𝓘(𝕜, E) (extChartAt I x) x (Y x)) := by
-  have hee : MDifferentiableAt I 𝓘(𝕜, E) (extChartAt I x) x :=
-    mdifferentiableAt_extChartAt (mem_chart_source H x)
-  haveI : IsManifold I 1 M := IsManifold.of_le (n := 2) (by norm_num)
-  have hes : MDifferentiableAt 𝓘(𝕜, E) 𝓘(𝕜) (f ∘ (extChartAt I x).symm) (extChartAt I x x) := by
-    rw [mdifferentiableAt_iff_differentiableAt]
-    have h := (hf.mdifferentiableWithinAt (s := Set.univ)).differentiableWithinAt_comp_extChartAt_symm
-    simpa [I.range_eq_univ, differentiableWithinAt_univ] using h
-  have heq : (f ∘ (extChartAt I x).symm) ∘ (extChartAt I x) =ᶠ[𝓝 x] f := by
-    filter_upwards [extChartAt_source_mem_nhds (I := I) x] with z hz
-    simp only [Function.comp_apply, (extChartAt I x).left_inv hz]
-  show mfderiv I 𝓘(𝕜) f x (Y x) = _
-  rw [← heq.mfderiv_eq, mfderiv_comp x hes hee]
-  exact DFunLike.congr_fun
-    (mfderiv_eq_fderiv (f := f ∘ ⇑(extChartAt I x).symm) (x := extChartAt I x x))
-    (mfderiv I 𝓘(𝕜, E) (extChartAt I x) x (Y x))
+          (mfderiv I 𝓘(𝕜, E) (extChartAt I x) x (Y x)) :=
+  dirDeriv_eq_chartAt f Y x x (mem_extChartAt_source x) hf
 
 end GeneralManifold
 
