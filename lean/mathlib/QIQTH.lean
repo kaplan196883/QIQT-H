@@ -381,3 +381,4 @@ import QIQTH.BornChain
 import QIQTH.RotationBorn
 import QIQTH.SymmetrySquare
 import QIQTH.RealmSelection
+import QIQTH.EinsteinEquationOfState

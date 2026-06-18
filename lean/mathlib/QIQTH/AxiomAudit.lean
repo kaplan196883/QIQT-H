@@ -2714,4 +2714,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — conditional: given the einselected pointer family, the realm is determined
 -- (unique); Q_max then makes it finite + single-macroscopic (CapacityModel).
 
+-- EinsteinEquationOfState.lean — the linear-algebraic crux of Jacobson's equation-of-state
+-- derivation of GR (2026-06-18). NOT a derivation of the Einstein equation: the differential
+-- geometry (Raychaudhuri focusing, local Rindler horizons, Unruh temperature, local-equilibrium
+-- θ=σ=0) and the conservation+Bianchi step are CITED, not checked. Only the algebra is here.
+#print axioms QIQTH.EinsteinEOS.symmTensor_eq_smul_metric_of_null
+-- expected: standard only — a symmetric tensor vanishing on the entire null cone of Minkowski
+-- is a scalar multiple of the metric (the step turning per-null-direction Clausius into a tensor eq).
+#print axioms QIQTH.EinsteinEOS.einstein_tensor_eq_of_state
+-- expected: standard only — given a·T(k,k)=E(k,k) for all null k (Raychaudhuri supplies this, as
+-- HYPOTHESIS), the tensors obey a·T = E + f·g; conservation+Bianchi fixing f=-½R+Λ is cited.
+
 end QIQTH.AxiomAudit
