@@ -1,0 +1,34 @@
+==============================================================================================
+Entanglement door: realized I(A:B) vs the holographic bound 2Q_R  (ratio ~ (ℓ_P/R)²)
+  realized: UV-finite free-field MI, ≲ O(1) bit (conservative ceiling). bound: 2Q_R = 2πR²/ℓ_P².
+==============================================================================================
+  region R      R (m)       I_realized (bits)   I_bound=2Q_R (bits) I_real/I_bound ~ (ℓ_P/R)²
+  ------------------------------------------------------------------------------------------
+  atom          1.0e-10     6.25e-02            3.47e+50            1.80e-52   ((ℓ_P/R)²=2.6e-50)
+  virus         1.0e-07     6.25e-02            3.47e+56            1.80e-58   ((ℓ_P/R)²=2.6e-56)
+  dust grain    1.0e-04     6.25e-02            3.47e+62            1.80e-64   ((ℓ_P/R)²=2.6e-62)
+  human         5.0e-01     6.25e-02            8.68e+69            7.20e-72   ((ℓ_P/R)²=1.0e-69)
+  Earth         6.4e+06     6.25e-02            1.41e+84            4.44e-86   ((ℓ_P/R)²=6.4e-84)
+  Sun           7.0e+08     6.25e-02            1.68e+88            3.72e-90   ((ℓ_P/R)²=5.4e-88)
+
+  Realized mutual information is ≤ O(1) bit; the holographic bound is ~R²/ℓ_P² (10^50 for an atom-sized
+  region, 10^70 at a metre). The realized MI uses a fraction ~1/(2Q_R) ~ (ℓ_P/R)² of the cap — ~10^-50
+  at the atomic scale. So the finite cap is inert in the entanglement channel: it bounds I(A:B) far
+  above any realized value, and the correction to the OBSERVABLE (UV-finite) mutual information is
+  e^{−Q_R}- or Planck-power-suppressed (inertness theorem). The entanglement door CLOSES.
+  chart written: build/mutual_info_door.png
+
+==============================================================================================
+VERDICT — the entanglement door
+==============================================================================================
+  CLOSED. Mutual information I(A:B) is the UV-finite, regulator-independent entanglement observable —
+  pro's "cleanest place a finite record net could show." It shows nothing: the realized free-field
+  I(A:B) (≲ O(1) bit, power-law-decaying in separation) is a fraction ~1/(2Q_R) ~ (ℓ_P/R)² of the
+  holographic bound 2Q_R, ~10^-50 at the atomic scale. So the cap is inert in the entanglement channel,
+  exactly as in the modular channel (χ_R/Q_R = R_s/R) and the operational channel (S_eff ≪ Q_R). The
+  finite-Q_R correction to the observable mutual information is e^{−Q_R}- or Planck-power-suppressed.
+
+  This is the THIRD independent channel (operational, modular, entanglement) confirming the same
+  inertness theorem — finite holographic information is empirically invisible below horizon saturation.
+  The one regime pro identified where finiteness could in principle act (UV-finite entanglement) is now
+  explicitly checked and closed. No observable signature below saturation. = Everett.
