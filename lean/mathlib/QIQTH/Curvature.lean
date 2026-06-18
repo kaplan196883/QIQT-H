@@ -408,6 +408,27 @@ theorem pd_riemann (g gi : Point n → Fin n → Fin n → ℝ)
       pd_mul _ _ lam x (PdiffAt_of_contDiff _ (hC ρ ν l) lam x) (PdiffAt_of_contDiff _ (hC l μ σ) lam x)]
   ring
 
+/-- **The "extra" lower-index connection terms cancel under the cyclic sum.** `∇R` (as a (1,3) tensor)
+    has four `Γ·R` terms; the curvature-2-form `DF=0` proof needs only the two acting on the `ρ,σ` matrix
+    indices. The other two (acting on the antisymmetric form indices `μ,ν`) cancel cyclically, by Christoffel
+    symmetry + Riemann antisymmetry — reducing the second Bianchi to the clean matrix-form `DF=0`. -/
+theorem bianchi_extra_terms (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (ρ σ lam mu ν : Fin n) (x : Point n) :
+    (∑ κ, christoffel g gi κ lam mu x * riemann g gi ρ σ κ ν x)
+    + (∑ κ, christoffel g gi κ lam ν x * riemann g gi ρ σ mu κ x)
+    + (∑ κ, christoffel g gi κ mu ν x * riemann g gi ρ σ κ lam x)
+    + (∑ κ, christoffel g gi κ mu lam x * riemann g gi ρ σ ν κ x)
+    + (∑ κ, christoffel g gi κ ν lam x * riemann g gi ρ σ κ mu x)
+    + (∑ κ, christoffel g gi κ ν mu x * riemann g gi ρ σ lam κ x) = 0 := by
+  simp only [← Finset.sum_add_distrib]
+  apply Finset.sum_eq_zero
+  intro κ _
+  rw [christoffel_symm g gi hsymm κ mu lam x, christoffel_symm g gi hsymm κ ν lam x,
+      christoffel_symm g gi hsymm κ ν mu x,
+      riemann_antisymm g gi ρ σ ν κ x, riemann_antisymm g gi ρ σ κ mu x,
+      riemann_antisymm g gi ρ σ lam κ x]
+  ring
+
 /-- **Covariant derivative of the (1,3) Riemann tensor** `∇_λ R^ρ_{σμν} = ∂_λ R^ρ_{σμν}
     + Γ^ρ_{λκ}R^κ_{σμν} − Γ^κ_{λσ}R^ρ_{κμν} − Γ^κ_{λμ}R^ρ_{σκν} − Γ^κ_{λν}R^ρ_{σμκ}`. -/
 noncomputable def covDerivRiem (g gi : Point n → Fin n → Fin n → ℝ)
