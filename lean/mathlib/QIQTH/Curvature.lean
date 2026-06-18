@@ -953,4 +953,46 @@ theorem lowered_riemann_antisymm (g gi : Point n → Fin n → Fin n → ℝ)
     pd_comm (fun z => g z ρ σ) μ ν x (hCg ρ σ)
   linarith [hpd1, hpd2, hschwarz, hP μ ρ ν σ, hP ν ρ μ σ]
 
+/-- **Metric trace of the lowered Riemann tensor → Ricci**: `∑_{σν} g^{σν}(g_{βρ}R^ρ_{σνλ}) = −R_{βλ}`.
+    The contraction over the *first two* lower slots, via first-pair antisymmetry
+    (`lowered_riemann_antisymm`) turns into the contraction over the (1,3)-Ricci slots, and the `g^{σν}g_{σρ}=δ`
+    collapse reproduces `ricci β λ = ∑_ν R^ν_{βνλ}`. The core of metric-raising tower piece C (the contraction
+    identity behind `g^{σν}R^ρ_{σνλ}` in `∇^μ G_{μν}=0`). -/
+theorem lowered_riemann_gi_trace (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (β lam : Fin n) (x : Point n) :
+    (∑ σ, ∑ ν, gi x σ ν * (∑ ρ, g x β ρ * riemann g gi ρ σ ν lam x)) = - ricci g gi β lam x := by
+  have hinv_pt : ∀ a b, (∑ σ, g x a σ * gi x σ b) = if a = b then 1 else 0 := fun a b => hinv x a b
+  have hcollapse : ∀ ρ ν : Fin n, (∑ σ, gi x σ ν * g x σ ρ) = if ρ = ν then (1:ℝ) else 0 := by
+    intro ρ ν
+    rw [show (∑ σ, gi x σ ν * g x σ ρ) = ∑ σ, g x ρ σ * gi x σ ν from by
+          apply Finset.sum_congr rfl; intro σ _; rw [hsymm x σ ρ, hsymm_gi x σ ν]; ring]
+    exact hinv_pt ρ ν
+  -- For each ν, the σ-trace collapses to a single Riemann component.
+  have hpv : ∀ ν : Fin n,
+      (∑ σ, gi x σ ν * (∑ ρ, g x σ ρ * riemann g gi ρ β ν lam x)) = riemann g gi ν β ν lam x := by
+    intro ν
+    rw [show (∑ σ, gi x σ ν * (∑ ρ, g x σ ρ * riemann g gi ρ β ν lam x))
+          = ∑ ρ, (∑ σ, gi x σ ν * g x σ ρ) * riemann g gi ρ β ν lam x from by
+        simp only [Finset.mul_sum, Finset.sum_mul]; rw [Finset.sum_comm]
+        apply Finset.sum_congr rfl; intro ρ _; apply Finset.sum_congr rfl; intro σ _; ring]
+    rw [Finset.sum_congr rfl (fun ρ (_ : ρ ∈ Finset.univ) => by rw [hcollapse ρ ν])]
+    simp [Finset.sum_ite_eq]
+  -- The `g_σρ`-contracted trace gives `+ricci`.
+  have hPos : (∑ σ, ∑ ν, gi x σ ν * (∑ ρ, g x σ ρ * riemann g gi ρ β ν lam x))
+      = ricci g gi β lam x := by
+    rw [Finset.sum_comm, Finset.sum_congr rfl (fun ν (_ : ν ∈ Finset.univ) => hpv ν), ricci]
+  -- The target trace + the `g_σρ` trace vanish (first-pair antisymmetry termwise).
+  have hzero : (∑ σ, ∑ ν, gi x σ ν * (∑ ρ, g x β ρ * riemann g gi ρ σ ν lam x))
+             + (∑ σ, ∑ ν, gi x σ ν * (∑ ρ, g x σ ρ * riemann g gi ρ β ν lam x)) = 0 := by
+    rw [← Finset.sum_add_distrib]
+    apply Finset.sum_eq_zero; intro σ _
+    rw [← Finset.sum_add_distrib]
+    apply Finset.sum_eq_zero; intro ν _
+    rw [← mul_add, lowered_riemann_antisymm g gi hsymm hinv hCg hC β σ ν lam x, mul_zero]
+  linarith [hPos, hzero]
+
 end QIQTH.Curvature
