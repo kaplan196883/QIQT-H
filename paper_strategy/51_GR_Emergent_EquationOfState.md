@@ -154,6 +154,19 @@ QIQT-H), the null-cone algebra (done), tensor inference, constant bookkeeping, o
 as conditional algebra. *Cite* — Raychaudhuri, local Rindler horizons, Unruh/BW, Clausius, the area law (unless
 QIQT-H derives it), RT/HRT + AdS/CFT, Iyer–Wald, the all-balls integral-geometry step.
 
+**STATUS — Route B bridge DELIVERED (2026-06-18), `QIQTH/EntanglementFirstLaw.lean` (builds, axiom-free):**
+- `firstLaw_of_stationary` — the entanglement **first law** `δS = δ⟨K⟩`, proved as a clean real-analysis
+  consequence of relative-entropy **stationarity** (`D ≥ 0` and `D 0 = 0` ⇒ `IsLocalMin` ⇒ `deriv D 0 = 0`;
+  with `D = ⟨K⟩ − S` this gives `deriv S 0 = deriv KE 0`). **The inputs are QIQT-H's OWN machine-checked
+  facts** — `relEntropy_nonneg` (Klein), `relEntropy_eq_crossEntropy_sub_entropy`, `relEntropy_self` (`#check`ed
+  in the file). The *only* granted input is the smoothness `DifferentiableAt` of the family ε↦ρ(ε).
+- `rt_bridge` — + cited RT (`S = A/4G`) ⇒ `δ(A/4G) = δ⟨K⟩`.
+- `rt_all_balls_energy` — + cited ball modular Hamiltonian (`δ⟨K⟩ = W`, the weighted boundary energy) ⇒
+  `δ(A/4G) = W` for all balls. The gravitational all-balls ⇒ linearized-Einstein step remains **cited**.
+- **Open next:** discharge the smoothness analytically by plumbing a proof-carrying matrix family
+  `ε ↦ ρ(ε)` into `vonNeumannEntropy`/`crossEntropy` and proving differentiability (the deferred analytic
+  frontier), so `hS`/`hKE` are derived rather than assumed.
+
 ## 5. Honest bottom line
 
 GR fits QIQT-H as an **emergent equation of state**: the field equations are recoverable from the area-law

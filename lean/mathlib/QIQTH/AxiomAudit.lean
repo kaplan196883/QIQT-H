@@ -2725,4 +2725,16 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — given a·T(k,k)=E(k,k) for all null k (Raychaudhuri supplies this, as
 -- HYPOTHESIS), the tensors obey a·T = E + f·g; conservation+Bianchi fixing f=-½R+Λ is cited.
 
+-- EntanglementFirstLaw.lean — Route B: the entanglement first law δS=δ⟨K⟩ from relative-entropy
+-- stationarity, and the Ryu–Takayanagi bridge δ(A/4G)=δ⟨K⟩ (2026-06-18). The first-law INPUTS are
+-- QIQT-H's own machine-checked relEntropy facts (nonneg=Klein; =cross−vN; self=0); RT, the ball
+-- modular Hamiltonian, and the gravitational all-balls⇒linearized-Einstein step are CITED.
+#print axioms QIQTH.EntanglementFirstLaw.firstLaw_of_stationary
+-- expected: standard only — δS=δ⟨K⟩: relative entropy ≥0 and =0 at the reference ⇒ stationary ⇒
+-- (via D=⟨K⟩−S) the first variations of entropy and modular energy agree.
+#print axioms QIQTH.EntanglementFirstLaw.rt_bridge
+-- expected: standard only — first law + (cited) RT S=A/4G ⇒ δ(A/4G)=δ⟨K⟩.
+#print axioms QIQTH.EntanglementFirstLaw.rt_all_balls_energy
+-- expected: standard only — + (cited) ball modular Hamiltonian ⇒ δ(A/4G)=W (weighted boundary energy).
+
 end QIQTH.AxiomAudit
