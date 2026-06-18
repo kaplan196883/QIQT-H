@@ -53,6 +53,10 @@ theorem pd_const_mul (c : ℝ) (f : Point n → ℝ) (i : Fin n) (x : Point n)
     pd (fun y => c * f y) i x = c * pd f i x := by
   simp only [pd]; exact deriv_const_mul c hf
 
+/-- `∂ᵢ(const) = 0`. -/
+theorem pd_const (c : ℝ) (i : Fin n) (x : Point n) : pd (fun _ => c) i x = 0 := by
+  simp only [pd]; exact deriv_const _ _
+
 /-- A smooth field is partially differentiable in every direction at every point. -/
 theorem PdiffAt_of_contDiff (f : Point n → ℝ) (hf : ContDiff ℝ ⊤ f) (i : Fin n) (x : Point n) :
     PdiffAt f i x := by
@@ -220,6 +224,14 @@ noncomputable def covDeriv02 (g gi : Point n → Fin n → Fin n → ℝ)
   pd (fun y => T y μ ρ) ν x
     - ∑ σ, christoffel g gi σ ν μ x * T x σ ρ
     - ∑ σ, christoffel g gi σ ν ρ x * T x μ σ
+
+/-- **Covariant derivative of a (2,0) tensor** `T^{μρ}`:
+    `∇_ν T^{μρ} = ∂_ν T^{μρ} + Γ^μ_{νκ} T^{κρ} + Γ^ρ_{νκ} T^{μκ}`. -/
+noncomputable def covDeriv20 (g gi : Point n → Fin n → Fin n → ℝ)
+    (T : Point n → Fin n → Fin n → ℝ) (ν μ ρ : Fin n) (x : Point n) : ℝ :=
+  pd (fun y => T y μ ρ) ν x
+    + ∑ κ, christoffel g gi μ ν κ x * T x κ ρ
+    + ∑ κ, christoffel g gi ρ ν κ x * T x μ κ
 
 /-- **The covariant derivative of a (0,2) tensor is symmetric in `μ,ρ` when the tensor is** — the
     lower-index symmetry is preserved (uses `christoffel_symm`). A structural check, no analytic input. -/
@@ -717,5 +729,105 @@ theorem second_bianchi_contracted (g gi : Point n → Fin n → Fin n → ℝ)
   rw [Finset.sum_add_distrib, Finset.sum_add_distrib,
       covDerivRiem_contract g gi hC lam σ ν, covDerivRiem_contract' g gi hC ν σ lam] at hsum
   linarith [hsum]
+
+/-- **Inverse-metric covariant constancy `∇_λ g^{μρ} = 0`** — the raised-index companion of
+    `metric_compat`. Derived by differentiating the inverse relation `∑_σ g_{aσ}g^{σb}=δ` (so
+    `∑_σ g_{aσ}∂_λ g^{σρ} = −∑_σ (∂_λ g_{aσ})g^{σρ}`), substituting `∂g` from `metric_compat`, and
+    cancelling the connection terms; the contraction with `g` is then removed by invertibility.
+    The tool that lets the metric pass through `∇` in the `g^{μν}`-contractions of `∇^μ G_{μν}=0`. -/
+theorem inv_metric_compat (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (lam : Fin n) (x : Point n)
+    (hgd : ∀ a b, PdiffAt (fun y => g y a b) lam x)
+    (hgid : ∀ a b, PdiffAt (fun y => gi y a b) lam x)
+    (μ ρ : Fin n) :
+    covDeriv20 g gi gi lam μ ρ x = 0 := by
+  have hinv_pt : ∀ a b, (∑ σ, g x a σ * gi x σ b) = if a = b then 1 else 0 := fun a b => hinv x a b
+  -- Two metric/inverse contraction identities used repeatedly below.
+  have contract : ∀ (ν : Fin n) (c : Fin n → ℝ),
+      (∑ μ', g x ν μ' * (∑ κ, c κ * gi x μ' κ)) = c ν := by
+    intro ν c
+    have hswap : (∑ μ', g x ν μ' * (∑ κ, c κ * gi x μ' κ))
+        = ∑ κ, c κ * (∑ μ', g x ν μ' * gi x μ' κ) := by
+      simp only [Finset.mul_sum]; rw [Finset.sum_comm]
+      apply Finset.sum_congr rfl; intro κ _; apply Finset.sum_congr rfl; intro μ' _; ring
+    rw [hswap, Finset.sum_congr rfl (fun κ (_ : κ ∈ Finset.univ) => by rw [hinv_pt ν κ])]
+    simp [Finset.sum_ite_eq, mul_ite]
+  have contract2 : ∀ (A : Fin n → ℝ) (b : Fin n),
+      (∑ σ, (∑ κ, A κ * g x κ σ) * gi x σ b) = A b := by
+    intro A b
+    have hswap : (∑ σ, (∑ κ, A κ * g x κ σ) * gi x σ b)
+        = ∑ κ, A κ * (∑ σ, g x κ σ * gi x σ b) := by
+      simp only [Finset.sum_mul]; rw [Finset.sum_comm]
+      apply Finset.sum_congr rfl; intro κ _; rw [Finset.mul_sum]
+      apply Finset.sum_congr rfl; intro σ _; ring
+    rw [hswap, Finset.sum_congr rfl (fun κ (_ : κ ∈ Finset.univ) => by rw [hinv_pt κ b])]
+    simp [Finset.sum_ite_eq, mul_ite]
+  -- ∂g from metric compatibility.
+  have hmc : ∀ a b : Fin n, pd (fun y => g y a b) lam x
+      = (∑ σ, christoffel g gi σ lam a x * g x σ b) + (∑ σ, christoffel g gi σ lam b x * g x a σ) := by
+    intro a b
+    have hm := metric_compat g gi hsymm x hinv_pt lam a b
+    simp only [covDeriv02] at hm; linarith [hm]
+  -- Differentiated inverse relation: ∑_σ g_{aσ} ∂_λ g^{σρ} = −∑_σ (∂_λ g_{aσ}) g^{σρ}.
+  have hD : ∀ a : Fin n, (∑ σ, g x a σ * pd (fun y => gi y σ ρ) lam x)
+      = - ∑ σ, pd (fun y => g y a σ) lam x * gi x σ ρ := by
+    intro a
+    have hconst : pd (fun y => ∑ σ, g y a σ * gi y σ ρ) lam x = 0 := by
+      rw [show (fun y => ∑ σ, g y a σ * gi y σ ρ) = (fun _ => (if a = ρ then (1:ℝ) else 0))
+            from funext (fun y => hinv y a ρ)]
+      exact pd_const _ _ _
+    rw [pd_sum Finset.univ (fun σ y => g y a σ * gi y σ ρ) lam x
+          (fun σ _ => (hgd a σ).mul (hgid σ ρ))] at hconst
+    rw [Finset.sum_congr rfl (fun σ (_ : σ ∈ Finset.univ) =>
+          pd_mul (fun y => g y a σ) (fun y => gi y σ ρ) lam x (hgd a σ) (hgid σ ρ)),
+        Finset.sum_add_distrib] at hconst
+    linarith [hconst]
+  -- Contract the claim with g_{νμ}; show it vanishes for every ν.
+  have hkey : ∀ ν : Fin n, (∑ μ', g x ν μ' * covDeriv20 g gi gi lam μ' ρ x) = 0 := by
+    intro ν
+    have hP3 : (∑ μ', g x ν μ' * (∑ κ, christoffel g gi ρ lam κ x * gi x μ' κ))
+        = christoffel g gi ρ lam ν x := contract ν (fun κ => christoffel g gi ρ lam κ x)
+    have hP1 : (∑ μ', g x ν μ' * pd (fun y => gi y μ' ρ) lam x)
+        = - christoffel g gi ρ lam ν x
+          - ∑ σ, (∑ κ, g x ν κ * christoffel g gi κ lam σ x) * gi x σ ρ := by
+      rw [hD ν, Finset.sum_congr rfl (fun σ (_ : σ ∈ Finset.univ) => by
+            rw [hmc ν σ, add_mul]), Finset.sum_add_distrib]
+      have e1 : (∑ σ, (∑ κ, christoffel g gi κ lam ν x * g x κ σ) * gi x σ ρ)
+          = christoffel g gi ρ lam ν x := contract2 (fun κ => christoffel g gi κ lam ν x) ρ
+      have e2 : (∑ σ, (∑ κ, christoffel g gi κ lam σ x * g x ν κ) * gi x σ ρ)
+          = ∑ σ, (∑ κ, g x ν κ * christoffel g gi κ lam σ x) * gi x σ ρ := by
+        apply Finset.sum_congr rfl; intro σ _; congr 1
+        apply Finset.sum_congr rfl; intro κ _; ring
+      rw [e1, e2]; ring
+    have hP2 : (∑ μ', g x ν μ' * (∑ κ, christoffel g gi μ' lam κ x * gi x κ ρ))
+        = ∑ σ, (∑ κ, g x ν κ * christoffel g gi κ lam σ x) * gi x σ ρ := by
+      have hswap : (∑ μ', g x ν μ' * (∑ κ, christoffel g gi μ' lam κ x * gi x κ ρ))
+          = ∑ κ, (∑ μ', g x ν μ' * christoffel g gi μ' lam κ x) * gi x κ ρ := by
+        simp only [Finset.mul_sum, Finset.sum_mul]; rw [Finset.sum_comm]
+        apply Finset.sum_congr rfl; intro κ _; apply Finset.sum_congr rfl; intro μ' _; ring
+      rw [hswap]
+    simp only [covDeriv20, mul_add, Finset.sum_add_distrib]
+    rw [hP1, hP2, hP3]; ring
+  -- Invertibility (left inverse) removes the contraction.
+  have hleft : ∀ b m : Fin n, (∑ ν, gi x b ν * g x ν m) = if b = m then (1:ℝ) else 0 := by
+    intro b m
+    rw [show (∑ ν, gi x b ν * g x ν m) = ∑ ν, g x m ν * gi x ν b from by
+          apply Finset.sum_congr rfl; intro ν _; rw [hsymm_gi x b ν, hsymm x ν m]; ring]
+    rw [hinv_pt m b]
+    by_cases h : b = m
+    · rw [if_pos h, if_pos h.symm]
+    · rw [if_neg h, if_neg (fun he => h he.symm)]
+  have hinvert : covDeriv20 g gi gi lam μ ρ x
+      = ∑ ν, gi x μ ν * (∑ m, g x ν m * covDeriv20 g gi gi lam m ρ x) := by
+    rw [show (∑ ν, gi x μ ν * (∑ m, g x ν m * covDeriv20 g gi gi lam m ρ x))
+          = ∑ m, (∑ ν, gi x μ ν * g x ν m) * covDeriv20 g gi gi lam m ρ x from by
+        simp only [Finset.mul_sum, Finset.sum_mul]; rw [Finset.sum_comm]
+        apply Finset.sum_congr rfl; intro m _; apply Finset.sum_congr rfl; intro ν _; ring]
+    rw [Finset.sum_congr rfl (fun m (_ : m ∈ Finset.univ) => by rw [hleft μ m])]
+    simp [Finset.sum_ite_eq, ite_mul]
+  rw [hinvert, Finset.sum_congr rfl (fun ν (_ : ν ∈ Finset.univ) => by rw [hkey ν, mul_zero])]
+  simp
 
 end QIQTH.Curvature
