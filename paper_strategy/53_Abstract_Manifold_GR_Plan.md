@@ -64,9 +64,20 @@ Each step = its own axiom-free file/lemma, green `lake build`, `#print axioms` c
       `fderiv_apply_lieBracket_of_isSymmSndFDerivAt`. Axiom-free. (Friction solved: apply the CLM equality
       pointwise via `DFunLike.congr_fun` so the goal is E-native, dodging the `TangentSpace` synonym in
       application nodes.)
-    - NEXT: the **general-manifold** commutator via chart/pullback transport (Mathlib's
-      `mpullbackWithin_mlieBracketWithin_of_isSymmSndFDerivWithinAt`), then feed it into section-slot
-      tensoriality + the first Bianchi.
+    - ✅ `dirDeriv` linearity API: additive + 𝕜-homogeneous in the vector field, additive in the function
+      (the directional-derivative algebra the Bianchi/Ricci proofs consume). All via `map_*` /
+      `DFunLike.congr_fun` to dodge the `𝕜`-vs-`TangentSpace` synonym friction.
+    - **NEXT (dedicated effort — the hard keystone):** the **general-manifold** commutator via
+      chart/pullback transport. Both `mfderiv` and `mlieBracket` are defined through charts (`extChartAt`),
+      so there is no shortcut: transport `f`, `X`, `Y` to the chart (`f∘e⁻¹`, pullback fields), apply the
+      model-space `mfderiv_apply_mlieBracket_model`, transport back via the chain rule + Mathlib's
+      `mpullbackWithin_mlieBracketWithin_of_isSymmSndFDerivWithinAt`. Genuinely multi-turn Mathlib
+      bookkeeping (chart-derivative composition + `IsSymmSndFDerivWithinAt` on chart compositions). NOTE:
+      since Jacobson's physics is *local* (local Rindler horizons / local inertial frames), the
+      model-space commutator already covers the physically-relevant chart-local setting; the
+      general-manifold transport is the mathematical-generality (true coordinate-freedom) step that makes
+      gap 3 strictly stronger than the component-level theory.
+    - Then feed the commutator into section-slot tensoriality + the first Bianchi + Ricci.
 - **P2 — Algebraic (first) Bianchi.** For a *torsion-free* connection (Mathlib `torsion`), the cyclic
   sum `∑_cyc R(X,Y)Z = 0`. Needs torsion-free + Jacobi identity of `mlieBracket` (check Mathlib has it).
 - **P3 — Pseudo-Riemannian / Lorentzian metric.** Mathlib's metric is positive-definite; define a

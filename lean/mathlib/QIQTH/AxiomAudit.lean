@@ -2915,7 +2915,8 @@ namespace QIQTH.AxiomAudit
 -- unblocker for section-tensoriality + Bianchi + Ricci; general-manifold case (charts) builds on it. Axiom-free.
 #print axioms QIQTH.ManifoldGR.dirDeriv_add_vectorField
 #print axioms QIQTH.ManifoldGR.dirDeriv_smul_vectorField
--- expected: standard only — dirDeriv linearity in the vector field (additive + 𝕜-homogeneous), the
--- directional-derivative API the Bianchi cyclic sum / Ricci traces consume. Axiom-free.
+#print axioms QIQTH.ManifoldGR.dirDeriv_add_fun
+-- expected: standard only — dirDeriv linearity (additive + 𝕜-homogeneous in the vector field, additive
+-- in the function), the directional-derivative API the Bianchi cyclic sum / Ricci traces consume. Axiom-free.
 
 end QIQTH.AxiomAudit

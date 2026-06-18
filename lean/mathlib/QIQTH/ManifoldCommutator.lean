@@ -59,6 +59,13 @@ differential, no differentiability of the field needed. -/
     dirDeriv I (0 : Π z : M, TangentSpace I z) f = 0 := by
   funext z; exact map_zero (mfderiv I 𝓘(𝕜) f z)
 
+/-- The directional derivative is **additive in the function** (for differentiable functions). -/
+theorem dirDeriv_add_fun (X : Π z : M, TangentSpace I z) (f g : M → 𝕜)
+    (hf : ∀ z, MDifferentiableAt I 𝓘(𝕜) f z) (hg : ∀ z, MDifferentiableAt I 𝓘(𝕜) g z) :
+    dirDeriv I X (f + g) = dirDeriv I X f + dirDeriv I X g := by
+  funext z
+  exact DFunLike.congr_fun (mfderiv_add (hf z) (hg z)) (X z)
+
 end dirDerivAPI
 
 /-- **Base case (model space):** the Lie bracket acts on a scalar as the commutator of directional
