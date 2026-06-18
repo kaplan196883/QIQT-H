@@ -126,6 +126,38 @@ theorem divRiemann_trace_eq (g gi : Point n → Fin n → Fin n → ℝ)
     Finset.sum_sub_distrib, Finset.sum_neg_distrib, neg_sub, neg_add]
   rw [← hL1, ← hL2, ← hL3]; ring
 
+/-- **The twice-contracted (second) Bianchi identity** `∇^μ Ric_{μλ} = ½ ∂_λ R` — the contracted Bianchi
+    `∇^μ G_{μλ}=0` in trace form. Obtained by contracting `second_bianchi_contracted` with `g^{σν}`:
+    the three traced terms are `∂_λR` (`gi_trace_covDeriv_ricci`), `div02(ricci)` (the Ricci divergence),
+    and `−div02(ricci)` (`divRiemann_trace_eq`), giving `∂_λR − div02 − div02 = 0`. Machine-checked,
+    axiom-free — this **discharges the `bianchi` hypothesis** of `einstein_field_equation`. -/
+theorem twice_contracted_bianchi (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (lam : Fin n) (x : Point n) :
+    div02 g gi (fun y a b => ricci g gi a b y) lam x
+      = (1 / 2 : ℝ) * pd (fun y => scalarCurv g gi y) lam x := by
+  have hsum : (∑ σ, ∑ ν, gi x σ ν *
+      (covDeriv02 g gi (fun y a b => ricci g gi a b y) lam σ ν x
+        - covDeriv02 g gi (fun y a b => ricci g gi a b y) ν σ lam x
+        + (∑ ρ, covDerivRiem g gi ρ ρ σ ν lam x))) = 0 := by
+    apply Finset.sum_eq_zero; intro σ _; apply Finset.sum_eq_zero; intro ν _
+    rw [second_bianchi_contracted g gi hsymm hC lam σ ν x, mul_zero]
+  have hT2 : (∑ σ, ∑ ν, gi x σ ν * covDeriv02 g gi (fun y a b => ricci g gi a b y) ν σ lam x)
+      = div02 g gi (fun y a b => ricci g gi a b y) lam x := by
+    simp only [div02]
+  have hT3 : (∑ σ, ∑ ν, gi x σ ν * (∑ ρ, covDerivRiem g gi ρ ρ σ ν lam x))
+      = - div02 g gi (fun y a b => ricci g gi a b y) lam x := by
+    rw [← divRiemann_trace_eq g gi hsymm hsymm_gi hinv hCg hCgi hC lam x]
+    simp only [Finset.mul_sum]
+    rw [Finset.sum_congr rfl (fun σ _ => Finset.sum_comm), Finset.sum_comm]
+  simp only [mul_sub, mul_add, Finset.sum_add_distrib, Finset.sum_sub_distrib] at hsum
+  rw [gi_trace_covDeriv_ricci g gi hsymm hsymm_gi hinv hCg hCgi hC lam x, hT2, hT3] at hsum
+  linarith [hsum]
+
 /-- **The Einstein field equation as the thermodynamic equation of state** (Jacobson, PRL 1995),
     completed: from the post-crux relation + conservation + contracted Bianchi + metric
     compatibility, `a·T_{μν} = G_{μν} + Λ·g_{μν}` with `Λ := f + ½R` **covariantly constant**.
