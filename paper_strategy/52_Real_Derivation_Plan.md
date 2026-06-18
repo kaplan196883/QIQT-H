@@ -33,9 +33,9 @@ Everything between (1)+(2) and the conclusion is machine-checked, axiom-free.
 Target: **`twice_contracted_bianchi`** : `div02 g gi (ricci g gi) ν x = ½ · pd (scalarCurv g gi) ν x`,
 obtained by contracting `second_bianchi_contracted` with `g^{σν}`. Three terms:
 
-- **1.1 `ricci_gi_raise` (piece C, raised)** ≈40 ln. `∑_{σν} g^{σν} R^ρ_{σνλ} = −∑_β g^{ρβ} Ric_{βλ}`.
-  From `lowered_riemann_gi_trace` (have) + the `gi·g=δ` inversion (reuse the `hleft`/`hinvert` pattern
-  from `inv_metric_compat`). RISK: low — it's the raising of a done lemma.
+- **1.1 `ricci_gi_raise` (piece C, raised) — ✅ DONE, axiom-free (commit on `main`).**
+  `∑_{σν} g^{σν} R^ρ_{σνλ} = −∑_β g^{ρβ} Ric_{βλ}`. Built via `lowered_riemann_gi_trace` + a triple-sum
+  swap (`hswap`) + an abstract-`Q` inversion (`hinvert ∀Q`, `g⁻¹·g=δ` via `hleft`). Landed in 2 iters.
 - **1.2 T3 = contraction-commutes + raise** ≈80 ln (HARDEST). `∑_{σν} g^{σν} ∑_ρ covDerivRiem ρ ρ σ ν λ
   = −div02(ricci)λ`. Mechanism: pulling `g^{σν}` through `∇_ρ` — the σ,ν index corrections of
   `covDerivRiem` cancel `∂g^{σν}` via `inv_metric_compat` (`∂gi=−Γgi−Γgi`); the result is `∑_ρ ∇_ρ S^ρ_λ`
