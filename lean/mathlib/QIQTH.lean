@@ -385,3 +385,4 @@ import QIQTH.EinsteinEquationOfState
 import QIQTH.SpectralSum
 import QIQTH.EntanglementFirstLaw
 import QIQTH.Curvature
+import QIQTH.EinsteinFieldEquation

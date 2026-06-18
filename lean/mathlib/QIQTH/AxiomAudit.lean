@@ -2850,4 +2850,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ∑g^{σν}(g_{βρ}R^ρ_{σνλ}) = −Ric_{βλ} (metric trace of lowered Riemann → Ricci,
 -- via piece B + the gi·g=δ collapse). Metric-raising tower piece C (core).
 
+#print axioms QIQTH.Curvature.div02_scalar_metric
+#print axioms QIQTH.Curvature.div02_add
+#print axioms QIQTH.Curvature.einstein_field_equation
+-- expected: standard only — THE EINSTEIN FIELD EQUATION as equation of state: from the post-crux Clausius
+-- relation a·T=R+f·g + conservation ∇^μ(aT)=0 + contracted Bianchi ∇^μR=½∂R + metric compat, derive
+-- a·T_{μν}=G_{μν}+Λg_{μν} with Λ=f+½R covariantly constant (cosmological constant = integration constant).
+-- Completes Jacobson's f-fixing step deferred by EinsteinEquationOfState.lean. Cited physics = labeled hyps.
+
 end QIQTH.AxiomAudit
