@@ -247,14 +247,18 @@ multivariable calculus + algebra, NOT the multi-year abstract-manifold library.
 - **Piece C core — machine-checked, axiom-free** (`lowered_riemann_gi_trace`):
   `∑_{σν}g^{σν}(g_{βρ}R^ρ_{σνλ})=−Ric_{βλ}` (metric trace of the lowered Riemann → Ricci, via piece B + the
   `gi·g=δ` collapse).
-- **REMAINING — the twice-contraction assembly (`~200 lines, fully derived, not yet built`):** contract
-  `second_bianchi_contracted` with `g^{σν}` ⟹ **T1**=`∂_λ scalarCurv` (product rule + `inv_metric_compat`),
-  **T2,T3**=`−∇^μRic_{μλ}` each (T3 via contraction-commutes + the raised form of piece C) ⟹
-  `2∇^μRic_{μλ}=∂_λR`; then **step E** (`G=Ric−½gR`, `∇g=0`, `g^{μκ}g_{μλ}=δ`) ⟹ `∇^μG_{μλ}=0`. *Net:
-  connection + all curvature + metric compatibility (both indices) + first Bianchi + Schwarz + FULL second
-  Bianchi + ONCE-CONTRACTED Bianchi + the metric-raising tower's three hard lemmas (`∇g^{μν}=0`,
-  lowered-Riemann first-pair antisymmetry, the Riemann→Ricci trace) are ALL machine-checked, axiom-free. The
-  remaining assembly is mechanical `inv_metric_compat`+reindexing computation.*
+- **TWICE-CONTRACTED BIANCHI — DONE, machine-checked, axiom-free** (`twice_contracted_bianchi`,
+  `EinsteinFieldEquation.lean`): `∇^μRic_{μλ}=½∂_λR` (the contracted Bianchi `∇^μG_{μλ}=0` in trace form),
+  by contracting `second_bianchi_contracted` with `g^{σν}`: T1=`∂R` (`gi_trace_covDeriv_ricci`) − T2=`div02`
+  − T3=`div02` (`divRiemann_trace_eq`, via `ricci_gi_raise` + `gi_trace_covDerivRiem` + `…_ricci`).
+- **THE FIELD EQUATION — DONE, axiom-free.** `einstein_field_equation` (the `f`-fixing closure: post-crux
+  Clausius + conservation + contracted Bianchi + `∇g=0` ⟹ `a·T=G+Λg`, `Λ=f+½R` covariantly constant) and
+  **`einstein_field_equation_real`** = the same with the GENUINE `einsteinTensor` (`Ric=ricci`,`R=scalarCurv`)
+  and `bianchi` **discharged** by `twice_contracted_bianchi`. *Net: the entire geometric path to
+  `G_{μν}+Λg_{μν}=a·T_{μν}` — full/once-/twice-contracted Bianchi, `∇g^{μν}=0`, lowered-Riemann first-pair
+  antisymmetry, Riemann→Ricci trace, the cosmological constant as integration constant — is ALL machine-checked,
+  axiom-free. The ONLY remaining hypotheses are the cited PHYSICS (per-null Clausius relation + conservation).
+  Plan/status: `paper_strategy/52`. Pro red-team's two main hits (free Ric/tr; assumed Bianchi) both CLOSED.*
 - **Honest scale:** Layer 0 is a clean foundation; Layers 1–2 are the genuine multi-month effort (the
   differentiability propagation through Γ/Riemann is where the cost lives). This is the START of the tower,
   not its completion — and per pro, its marginal value for QIQT-H is bounded (it recertifies textbook DG),
