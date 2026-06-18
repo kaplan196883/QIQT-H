@@ -86,12 +86,12 @@ lemma is Fin 4 *Minkowski*; the curvature tower is general `Point n`/general `g`
 - (b) Generalize the null-cone lemma to a general Lorentzian metric (harder; deferrable).
 Pick (a). This makes the physics input the *per-null heat relation*, exactly Jacobson's premise.
 
-## Phase 4 — Polish the honest statement  ≈40 ln
+## Phase 4 — Global cosmological constant — ✅ DONE, axiom-free
 
-`n=4`, Lorentzian signature noted; `a≠0`; **global Λ**: add `zero_gradient_imp_const` (on connected
-`ℝ^n`, `∀ν ∂_νΛ=0` everywhere ⟹ `Λ` constant — a small analysis lemma) to upgrade "covariantly
-constant at `x`" → "cosmological constant", *if* hypotheses hold at all points. Final docstring states
-EXACTLY: the two irreducible cited-physics hypotheses, that everything else is proven, and the residual
+`const_of_pd_zero` (zero partials everywhere ⟹ constant, via `is_const_of_fderiv_eq_zero` + the
+`Pi.single` basis decomposition) + **`einstein_field_equation_real_global`**: if the cited physics holds
+at every point, `Λ := f+½R` is a TRUE constant, and `a·T_{μν} = G_{μν} + Λ·g_{μν}` globally for a single
+`Λ`. *(Original Phase-4 polish note follows.)* `n=4`, Lorentzian signature noted; `a≠0`. Final docstring states
 boundary (below).
 
 ## Honest residual even the "real derivation" cannot close (state plainly)
