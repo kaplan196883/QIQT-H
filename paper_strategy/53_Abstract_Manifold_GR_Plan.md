@@ -35,8 +35,11 @@ Each step = its own axiom-free file/lemma, green `lake build`, `#print axioms` c
 - **P1 — Curvature of a connection** *(STARTED — `QIQTH/ManifoldCurvature.lean`)*.
   - ✅ `curvature cov X Y σ x = ∇_X∇_Yσ − ∇_Y∇_Xσ − ∇_[X,Y]σ`; ✅ `curvature_antisymm` (R(X,Y)=−R(Y,X));
     ✅ `curvature_self` (R(X,X)=0). Axiom-free.
-  - NEXT: fibrewise additivity in `σ`; `C∞`-linearity / **tensoriality** in `X`, `Y`, `σ` (the key
-    structural fact — uses Leibniz + `mlieBracket_smul`); additivity in `X`,`Y`.
+  - ✅ **Tensoriality in `X`,`Y`** — `curvature_smul_left` (`R(fX,Y)σ=f·R(X,Y)σ`) + `curvature_smul_right`.
+    The Leibniz term from `∇_{fX}=f∇_X` cancels the `−(Yf)X` term of `[fX,Y]=f[X,Y]−(Yf)X` (both the same
+    `d% f x (Y x)`). Needs `[CompleteSpace E] [IsManifold I 2 M]` + section/field differentiability. Axiom-free.
+  - NEXT: fibrewise additivity in `σ` and `C∞`-linearity in `σ` (tensoriality in the section slot);
+    additivity in `X`,`Y`.
 - **P2 — Algebraic (first) Bianchi.** For a *torsion-free* connection (Mathlib `torsion`), the cyclic
   sum `∑_cyc R(X,Y)Z = 0`. Needs torsion-free + Jacobi identity of `mlieBracket` (check Mathlib has it).
 - **P3 — Pseudo-Riemannian / Lorentzian metric.** Mathlib's metric is positive-definite; define a

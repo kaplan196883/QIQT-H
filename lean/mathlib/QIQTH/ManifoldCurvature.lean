@@ -72,4 +72,40 @@ theorem curvature_self
     curvature cov X X σ x = 0 := by
   simp only [curvature, sub_self, mlieBracket_self, Pi.zero_apply, map_zero]
 
+/-- **Tensoriality of the curvature in its first vector-field slot:** `R(fX,Y)σ = f·R(X,Y)σ` for a
+scalar function `f`. This is the property that makes `curvature` a genuine tensor (pointwise in `X`):
+the Leibniz term produced by `∇_{fX} = f∇_X` (the `(df·Y)∇_Xσ` piece) cancels *exactly* against the
+`−(df·Y)X` term in the product rule `[fX,Y] = f[X,Y] − (Yf)X` for the Lie bracket — both are the same
+directional derivative `d% f x (Y x)`. -/
+theorem curvature_smul_left [CompleteSpace E] [IsManifold I 2 M]
+    (cov : (Π x : M, V x) → (Π x : M, TangentSpace I x →L[𝕜] V x))
+    (hcov : IsCovariantDerivativeOn F cov Set.univ)
+    (f : M → 𝕜) (X Y : Π x : M, TangentSpace I x) (σ : Π x : M, V x) (x : M)
+    (hf : MDiffAt f x) (hX : MDiffAt (T% X) x)
+    (hcovσX : MDiffAt (T% fun x' => cov σ x' (X x')) x) :
+    curvature cov (f • X) Y σ x = f x • curvature cov X Y σ x := by
+  have hsec : (fun x' => cov σ x' ((f • X) x')) = f • (fun x' => cov σ x' (X x')) := by
+    funext x'; exact (cov σ x').map_smul (f x') (X x')
+  have hT1 : (cov (fun x' => cov σ x' (Y x')) x) ((f • X) x)
+      = f x • (cov (fun x' => cov σ x' (Y x')) x) (X x) := by
+    rw [show (f • X) x = f x • X x from rfl]; exact map_smul _ _ _
+  simp only [curvature, hsec, hT1,
+    hcov.leibniz hcovσX hf, mlieBracket_smul_left hf hX,
+    ContinuousLinearMap.add_apply, ContinuousLinearMap.coe_smul', Pi.smul_apply,
+    ContinuousLinearMap.smulRight_apply, map_add, map_smul]
+  module
+
+/-- **Tensoriality in the second vector-field slot:** `R(X,fY)σ = f·R(X,Y)σ` — a clean corollary of
+slot-one tensoriality and antisymmetry. -/
+theorem curvature_smul_right [CompleteSpace E] [IsManifold I 2 M]
+    (cov : (Π x : M, V x) → (Π x : M, TangentSpace I x →L[𝕜] V x))
+    (hcov : IsCovariantDerivativeOn F cov Set.univ)
+    (f : M → 𝕜) (X Y : Π x : M, TangentSpace I x) (σ : Π x : M, V x) (x : M)
+    (hf : MDiffAt f x) (hY : MDiffAt (T% Y) x)
+    (hcovσY : MDiffAt (T% fun x' => cov σ x' (Y x')) x) :
+    curvature cov X (f • Y) σ x = f x • curvature cov X Y σ x := by
+  rw [curvature_antisymm cov X (f • Y) σ x,
+    curvature_smul_left cov hcov f Y X σ x hf hY hcovσY,
+    curvature_antisymm cov X Y σ x, smul_neg]
+
 end QIQTH.ManifoldGR

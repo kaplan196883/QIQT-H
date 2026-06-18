@@ -2895,5 +2895,11 @@ namespace QIQTH.AxiomAudit
 -- of an ARBITRARY covariant derivative on an ARBITRARY vector bundle over a manifold (Mathlib has the
 -- 2025 CovariantDerivative + mlieBracket but NO curvature). Antisymmetry R(X,Y)=−R(Y,X) + R(X,X)=0.
 -- First increment of the abstract-manifold stack. Axiom-free.
+#print axioms QIQTH.ManifoldGR.curvature_smul_left
+#print axioms QIQTH.ManifoldGR.curvature_smul_right
+-- expected: standard only — TENSORIALITY: R(fX,Y)σ = f·R(X,Y)σ and R(X,fY)σ = f·R(X,Y)σ. The property
+-- that makes the curvature a genuine TENSOR in the vector-field slots: the Leibniz term from ∇_{fX}=f∇_X
+-- cancels exactly against the −(Yf)X term in the Lie-bracket product rule [fX,Y]=f[X,Y]−(Yf)X (both are
+-- the same directional derivative d% f x (Y x)). Axiom-free.
 
 end QIQTH.AxiomAudit
