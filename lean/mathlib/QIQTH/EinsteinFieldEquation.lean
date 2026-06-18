@@ -224,4 +224,32 @@ theorem einstein_field_equation_real (g gi : Point n → Fin n → Fin n → ℝ
     (fun ν => twice_contracted_bianchi g gi hsymm hsymm_gi hinv hCg hCgi hC ν x)
   exact ⟨fun μ ν => by rw [einsteinTensor]; exact hmain.1 μ ν, hmain.2⟩
 
+/-- **The Einstein field equation with a GENUINE cosmological constant.** If the cited physics holds at
+    *every* point (`crux` everywhere — it already is — and `conserv` everywhere), then `Λ := f + ½R` is a
+    true **constant** (not just covariantly constant at a point), by `const_of_pd_zero` on the connected
+    domain `Point n`. The Einstein field equation holds globally:
+        `a·T_{μν} = G_{μν} + Λ·g_{μν}`   for a single constant `Λ`.
+    Axiom-free; the only hypotheses are the cited physics + smoothness of `f + ½R`. -/
+theorem einstein_field_equation_real_global (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (T : Point n → Fin n → Fin n → ℝ) (f : Point n → ℝ) (a : ℝ)
+    (hf : ∀ x ρ, PdiffAt f ρ x)
+    (hFdiff : Differentiable ℝ (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y))
+    (crux : ∀ y a' b, a * T y a' b = ricci g gi a' b y + f y * g y a' b)
+    (conserv : ∀ x ν, div02 g gi (fun y a' b => a * T y a' b) ν x = 0) :
+    ∃ Λ : ℝ, ∀ x μ ν, a * T x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν := by
+  have hzero : ∀ x ν, pd (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y) ν x = 0 := fun x ν =>
+    (einstein_field_equation_real g gi hsymm hsymm_gi hinv hCg hCgi hC T f a x (hf x) crux
+      (conserv x)).2 ν
+  refine ⟨f (0 : Point n) + (1 / 2 : ℝ) * scalarCurv g gi (0 : Point n), fun x μ ν => ?_⟩
+  have hc : f x + (1 / 2 : ℝ) * scalarCurv g gi x
+      = f (0 : Point n) + (1 / 2 : ℝ) * scalarCurv g gi (0 : Point n) :=
+    const_of_pd_zero (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y) hFdiff hzero x 0
+  rw [(einstein_field_equation_real g gi hsymm hsymm_gi hinv hCg hCgi hC T f a x (hf x) crux
+        (conserv x)).1 μ ν, hc]
+
 end QIQTH.Curvature
