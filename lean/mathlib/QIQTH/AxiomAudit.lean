@@ -2908,5 +2908,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ManifoldGR.curvature_add_section
 -- expected: standard only — additivity in the SECTION slot R(X,Y)(σ+σ')=R(X,Y)σ+R(X,Y)σ' (funext+cov.add,
 -- no germ-localisation). Curvature now additive in all three slots. Axiom-free.
+#print axioms QIQTH.ManifoldGR.mfderiv_apply_mlieBracket_model
+-- expected: standard only — COMMUTATOR INFRASTRUCTURE (base case). The Lie bracket acts on a scalar as
+-- the commutator of directional derivatives df([X,Y])=X(Yf)−Y(Xf), for the model-space manifold (M=E):
+-- mfderiv→fderiv, mlieBracket→lieBracket, reduces to Mathlib's normed-space fderiv_apply_lieBracket. The
+-- unblocker for section-tensoriality + Bianchi + Ricci; general-manifold case (charts) builds on it. Axiom-free.
 
 end QIQTH.AxiomAudit

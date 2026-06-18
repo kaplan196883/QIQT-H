@@ -387,3 +387,4 @@ import QIQTH.EntanglementFirstLaw
 import QIQTH.Curvature
 import QIQTH.EinsteinFieldEquation
 import QIQTH.ManifoldCurvature
+import QIQTH.ManifoldCommutator

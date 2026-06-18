@@ -55,6 +55,18 @@ Each step = its own axiom-free file/lemma, green `lake build`, `#print axioms` c
     and finish σ-tensoriality + Bianchi modulo it; (c) pivot to **P3 (Lorentzian metric)**, which is
     wall-free but a fresh design task. P1's structural core (curvature + antisymmetry + X,Y-tensoriality +
     all-slot additivity, all axiom-free) stands as the clean checkpoint regardless.
+  - **DECISION (user, 2026-06-19): option (a) — build the commutator infrastructure** so the stack stays
+    genuinely axiom-free. `QIQTH/ManifoldCommutator.lean` STARTED:
+    - ✅ `dirDeriv I X f` — the directional-derivative operator `(Xf)(z)=df_z(X z)` as a clean `M→𝕜`
+      function (codomain pinned to `𝕜`, collapsing the dependent tangent-space typing).
+    - ✅ `mfderiv_apply_mlieBracket_model` — the commutator `df([X,Y])=X(Yf)−Y(Xf)` for the **model-space**
+      base case (`M=E`), reducing `mfderiv→fderiv`/`mlieBracket→lieBracket` to Mathlib's normed-space
+      `fderiv_apply_lieBracket_of_isSymmSndFDerivAt`. Axiom-free. (Friction solved: apply the CLM equality
+      pointwise via `DFunLike.congr_fun` so the goal is E-native, dodging the `TangentSpace` synonym in
+      application nodes.)
+    - NEXT: the **general-manifold** commutator via chart/pullback transport (Mathlib's
+      `mpullbackWithin_mlieBracketWithin_of_isSymmSndFDerivWithinAt`), then feed it into section-slot
+      tensoriality + the first Bianchi.
 - **P2 — Algebraic (first) Bianchi.** For a *torsion-free* connection (Mathlib `torsion`), the cyclic
   sum `∑_cyc R(X,Y)Z = 0`. Needs torsion-free + Jacobi identity of `mlieBracket` (check Mathlib has it).
 - **P3 — Pseudo-Riemannian / Lorentzian metric.** Mathlib's metric is positive-definite; define a
