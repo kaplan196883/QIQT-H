@@ -2823,4 +2823,9 @@ namespace QIQTH.AxiomAudit
 -- assembled from the four cyclic-cancellation lemmas (∂∂Γ Schwarz + ∂Γ·Γ + ΓΓΓ Jacobi + extra terms).
 -- The conservation identity behind ∇^μG_{μν}=0 (Jacobson's contracted-Bianchi step). Axiom-free.
 
+#print axioms QIQTH.Curvature.PdiffAt_riemann
+#print axioms QIQTH.Curvature.covDerivRiem_contract
+-- expected: standard only — ∇ commutes with contraction: ∑_ρ ∇_λR^ρ_{σρν} = ∇_λ Ric_{σν} (the contracted
+-- index pair's connection corrections cancel via sum_comm). The bridge from second Bianchi to ∇^μG_{μν}=0.
+
 end QIQTH.AxiomAudit

@@ -70,6 +70,11 @@ theorem PdiffAt.sub {f g : Point n → ℝ} {i : Fin n} {x : Point n}
     (hf : PdiffAt f i x) (hg : PdiffAt g i x) : PdiffAt (fun y => f y - g y) i x :=
   DifferentiableAt.sub hf hg
 
+/-- Sum of partially-differentiable fields. -/
+theorem PdiffAt.add {f g : Point n → ℝ} {i : Fin n} {x : Point n}
+    (hf : PdiffAt f i x) (hg : PdiffAt g i x) : PdiffAt (fun y => f y + g y) i x :=
+  DifferentiableAt.add hf hg
+
 /-- A finite sum of partially-differentiable fields is partially differentiable. -/
 theorem PdiffAt_sum {ι : Type*} (s : Finset ι) (F : ι → Point n → ℝ) (i : Fin n) (x : Point n)
     (hF : ∀ k ∈ s, PdiffAt (F k) i x) : PdiffAt (fun y => ∑ k ∈ s, F k y) i x :=
@@ -615,5 +620,40 @@ theorem second_bianchi (g gi : Point n → Fin n → Fin n → ℝ)
   have hc := bianchi_GGG g gi ρ σ lam mu ν x
   have hd := bianchi_extra_terms g gi hsymm ρ σ lam mu ν x
   linarith [ha, hb, hc, hd]
+
+/-- `R^ρ_{σμν}` is partially differentiable in any direction (Γ smooth). -/
+theorem PdiffAt_riemann (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (ρ σ μ ν lam : Fin n) (x : Point n) :
+    PdiffAt (fun y => riemann g gi ρ σ μ ν y) lam x :=
+  ((PdiffAt_pd _ (hC ρ ν σ) μ lam x).sub (PdiffAt_pd _ (hC ρ μ σ) ν lam x)).add
+    (PdiffAt_sum _ _ lam x (fun l _ =>
+      ((PdiffAt_of_contDiff _ (hC ρ μ l) lam x).mul (PdiffAt_of_contDiff _ (hC l ν σ) lam x)).sub
+      ((PdiffAt_of_contDiff _ (hC ρ ν l) lam x).mul (PdiffAt_of_contDiff _ (hC l μ σ) lam x))))
+
+/-- **The covariant derivative commutes with contraction** (the `(ρ,μ)`-trace giving Ricci):
+    `∑_ρ ∇_λ R^ρ_{σρν} = ∇_λ R_{σν}`. The connection corrections for the contracted index pair cancel
+    (`Finset.sum_comm`), and the remaining two assemble into the `(0,2)` covariant derivative of `Ric`.
+    The key step that turns the second Bianchi into the contracted Bianchi `∇^μ G_{μν}=0`. -/
+theorem covDerivRiem_contract (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (lam σ ν : Fin n) (x : Point n) :
+    (∑ ρ, covDerivRiem g gi lam ρ σ ρ ν x)
+      = covDeriv02 g gi (fun y a b => ricci g gi a b y) lam σ ν x := by
+  have h_a : (∑ ρ, pd (fun y => riemann g gi ρ σ ρ ν y) lam x)
+      = pd (fun y => ricci g gi σ ν y) lam x := by
+    rw [← pd_sum Finset.univ (fun ρ y => riemann g gi ρ σ ρ ν y) lam x
+          (fun ρ _ => PdiffAt_riemann g gi hC ρ σ ρ ν lam x)]
+    rfl
+  have h_bd : (∑ ρ, ∑ κ, christoffel g gi ρ lam κ x * riemann g gi κ σ ρ ν x)
+      = (∑ ρ, ∑ κ, christoffel g gi κ lam ρ x * riemann g gi ρ σ κ ν x) := Finset.sum_comm
+  have h_c : (∑ ρ, ∑ κ, christoffel g gi κ lam σ x * riemann g gi ρ κ ρ ν x)
+      = (∑ κ, christoffel g gi κ lam σ x * ricci g gi κ ν x) := by
+    rw [Finset.sum_comm]; simp only [ricci, Finset.mul_sum]
+  have h_e : (∑ ρ, ∑ κ, christoffel g gi κ lam ν x * riemann g gi ρ σ ρ κ x)
+      = (∑ κ, christoffel g gi κ lam ν x * ricci g gi σ κ x) := by
+    rw [Finset.sum_comm]; simp only [ricci, Finset.mul_sum]
+  simp only [covDerivRiem, covDeriv02, Finset.sum_add_distrib, Finset.sum_sub_distrib]
+  linarith [h_a, h_bd, h_c, h_e]
 
 end QIQTH.Curvature
