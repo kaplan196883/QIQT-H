@@ -221,15 +221,20 @@ multivariable calculus + algebra, NOT the multi-year abstract-manifold library.
 - **Also built (axiom-free):** the differentiability suite (`pd_sum`, `PdiffAt.mul/.sub`, `PdiffAt_sum`,
   `PdiffAt_pd`, `PdiffAt_of_contDiff`); `covDerivRiem` (covariant derivative of the (1,3) Riemann tensor);
   and **`pd_riemann`** — the *full* `∂_λ R^ρ_{σμν}` expansion (∂∂Γ + ∑_l Leibniz ∂Γ·Γ terms), the workhorse.
-- **THE WALL (web-searched + concretely attempted):** with `pd_riemann` + `second_bianchi_deriv_part`
-  (∂∂Γ→0 via Schwarz), the full second Bianchi reduces to cancelling the **∂Γ·Γ** and **ΓΓΓ** parts
-  separately. The ΓΓΓ part is a cyclic sum of **double sums ∑κ∑e of ΓΓΓ products** cancelling via index
-  reindexing + Christoffel symmetry — a ~24-term Finset double-sum reindexing. **Concretely attempted and
-  confirmed it is not a quick win** — a large, intricate manual Finset computation (the clean alternative,
-  normal coordinates, is a separate large construction). So `∇^μ G_{μν}=0` (Jacobson's conservation step) is
-  the one piece still cited. *Net: connection + all curvature tensors + metric compatibility + first Bianchi
-  + Schwarz + the ∂R expansion + the second-Bianchi derivative part are ALL machine-checked — far inside
-  where the "cited" line sat before; the remaining gap is purely the ΓΓΓ/∂Γ·Γ mechanical cancellation.*
+- **FULL SECOND BIANCHI IDENTITY — machine-checked, axiom-free** (`second_bianchi`):
+  `∇_λR^ρ_{σμν}+∇_μR^ρ_{σνλ}+∇_νR^ρ_{σλμ}=0`. The "wall" framing was wrong: the **matrix/connection-form**
+  reformulation (`F=dΓ+Γ²`, `DF=0`) cracks it. Each `covDerivRiem` splits into four pieces, each cyclic
+  sum vanishing by a clean, separate mechanism — **∂∂Γ** via Schwarz (`second_bianchi_deriv_part`);
+  **∂Γ·Γ** via `bianchi_dGamma` (identical sums up to index renaming — merge into one sum, pointwise `ring`);
+  the cubic **ΓΓΓ** via `bianchi_GGG` = the **Jacobi identity** `∑_cyclic[Γ_λ,[Γ_μ,Γ_ν]]=0` (single `κ↔e`
+  swap, `Finset.sum_comm`); and the lower-index **extra terms** via `bianchi_extra_terms`
+  (`christoffel_symm`+`riemann_antisymm`). Glued by a per-term decomposition + `linarith`. Helpers:
+  `pd_riemann`, `pd_riemannQuad`, the `PdiffAt_*` suite. AxiomAudit updated, budget guard green.
+- **NEXT (the actual frontier):** the **contracted Bianchi `∇^μ G_{μν}=0`** (Jacobson's conservation step)
+  — needs contraction-commutes-with-∇ + index raising with `g^{μν}`/`∇g^{μν}=0` + `G=Ric−½gR`. Substantial
+  but no longer a wall. *Net: connection + all curvature tensors + metric compatibility + first Bianchi +
+  Schwarz + the FULL second Bianchi are ALL machine-checked — the only remaining DG piece is the
+  contraction to `∇^μG_{μν}=0`.*
 - **Honest scale:** Layer 0 is a clean foundation; Layers 1–2 are the genuine multi-month effort (the
   differentiability propagation through Γ/Riemann is where the cost lives). This is the START of the tower,
   not its completion — and per pro, its marginal value for QIQT-H is bounded (it recertifies textbook DG),
