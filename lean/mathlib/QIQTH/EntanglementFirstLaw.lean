@@ -28,6 +28,8 @@
 -/
 import QIQTH.QuantumRelativeEntropy
 
+open scoped ComplexOrder
+
 namespace QIQTH.EntanglementFirstLaw
 
 /-- **The entanglement first law** `δS = δ⟨K⟩`, as a consequence of relative-entropy stationarity.
@@ -86,5 +88,26 @@ theorem rt_all_balls_energy
 #check @QIQTH.QuantumEntropy.relEntropy_nonneg                 -- discharges `hpos`
 #check @QIQTH.QuantumEntropy.relEntropy_eq_crossEntropy_sub_entropy  -- discharges `hident`
 #check @QIQTH.QuantumEntropy.relEntropy_self                   -- discharges `hzero`
+
+/-! ### The integrated (finite) first law — no differentiability needed
+
+The *differential* first law `δS = δ⟨K⟩` needs the smoothness of the family (the matrix-log /
+eigenvalue-perturbation derivative — a genuine Mathlib gap). But the **integrated** form — the Gibbs /
+Klein inequality `S(ρ) ≤ ⟨K⟩` with equality at the reference — needs no differentiation and is fully
+grounded in QIQT-H's verified relative-entropy facts. It is the finite shadow of the first law:
+entropy is bounded by modular energy, saturated exactly at `ρ = σ`. -/
+
+open QIQTH.QuantumEntropy in
+/-- **Integrated first law (Gibbs/Klein inequality).** The von Neumann entropy of any density `ρ` is at
+    most its modular energy (cross entropy) against a reference `σ`: `S(ρ) ≤ ⟨K⟩ = crossEntropy ρ σ`,
+    with equality iff `ρ = σ`. This is `relEntropy ≥ 0` (Klein) + `relEntropy = crossEntropy − S`, both
+    machine-checked. No differentiability is used — the finite shadow of `δS = δ⟨K⟩`. -/
+theorem gibbs_first_law {n : Type*} [Fintype n] [DecidableEq n] {ρ σ : Matrix n n ℂ}
+    (hρ : ρ.PosDef) (hσ : σ.PosDef) (hρ1 : ρ.trace = 1) (hσ1 : σ.trace = 1) (h : IsDensity ρ) :
+    vonNeumannEntropy h ≤ crossEntropy ρ hσ.1 := by
+  have hpos := relEntropy_nonneg hρ hσ hρ1 hσ1
+  have hid := relEntropy_eq_crossEntropy_sub_entropy hρ hσ h
+  rw [hid] at hpos
+  linarith
 
 end QIQTH.EntanglementFirstLaw

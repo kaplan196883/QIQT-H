@@ -163,9 +163,23 @@ QIQT-H derives it), RT/HRT + AdS/CFT, Iyer–Wald, the all-balls integral-geomet
 - `rt_bridge` — + cited RT (`S = A/4G`) ⇒ `δ(A/4G) = δ⟨K⟩`.
 - `rt_all_balls_energy` — + cited ball modular Hamiltonian (`δ⟨K⟩ = W`, the weighted boundary energy) ⇒
   `δ(A/4G) = W` for all balls. The gravitational all-balls ⇒ linearized-Einstein step remains **cited**.
-- **Open next:** discharge the smoothness analytically by plumbing a proof-carrying matrix family
-  `ε ↦ ρ(ε)` into `vonNeumannEntropy`/`crossEntropy` and proving differentiability (the deferred analytic
-  frontier), so `hS`/`hKE` are derived rather than assumed.
+- `gibbs_first_law` — the **integrated (finite) first law** `S(ρ) ≤ ⟨K⟩ = crossEntropy ρ σ` (Gibbs/Klein,
+  equality iff ρ=σ), proved with **no differentiability** straight from `relEntropy_nonneg` +
+  `relEntropy = crossEntropy − S`. The finite shadow of `δS = δ⟨K⟩`, fully grounded.
+
+- **Discharging the smoothness — what's tractable vs. the genuine wall (probed 2026-06-18):**
+  - `crossEntropy ρ σ = −(ρ·matLog σ).trace.re` is **linear in ρ** (matLog σ fixed) ⇒ `hKE` is *in principle*
+    dischargeable for any differentiable family (continuous-linear-map ∘ family); the only obstacle is
+    matrix-norm / CLM plumbing, not mathematics.
+  - `hS` (von Neumann entropy `−Tr(ρ log ρ)`, nonlinear) is the **genuine wall**: its derivative needs the
+    **matrix-logarithm / eigenvalue-perturbation derivative**, which **Mathlib does not have** (`grep` finds
+    no `Matrix.log` derivative; analytic eigenvalue perturbation / Hellmann–Feynman is absent). Since the
+    first law is equivalent to `deriv D 0 = 0` and `D = ⟨K⟩ − S`, the differentiability of `S` (equivalently
+    `D`) is the **irreducible** analytic input. This is the same matrix-calculus / continuum frontier already
+    cited across the program (Type III, the continuum wall) — a multi-week Mathlib-infrastructure target, not
+    a bounded next step. **Honest status: the differential first law is machine-checked modulo exactly one
+    isolated, precisely-characterised analytic hypothesis (`S` differentiable = the matrix-log derivative);
+    the integrated form is fully done.**
 
 ## 5. Honest bottom line
 

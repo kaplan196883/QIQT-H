@@ -2736,5 +2736,8 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — first law + (cited) RT S=A/4G ⇒ δ(A/4G)=δ⟨K⟩.
 #print axioms QIQTH.EntanglementFirstLaw.rt_all_balls_energy
 -- expected: standard only — + (cited) ball modular Hamiltonian ⇒ δ(A/4G)=W (weighted boundary energy).
+#print axioms QIQTH.EntanglementFirstLaw.gibbs_first_law
+-- expected: standard only — the INTEGRATED first law S(ρ)≤⟨K⟩ (Gibbs/Klein), no differentiability:
+-- relEntropy≥0 (Klein) + relEntropy=crossEntropy−S. The finite shadow of δS=δ⟨K⟩.
 
 end QIQTH.AxiomAudit
