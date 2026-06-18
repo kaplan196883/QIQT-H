@@ -89,6 +89,37 @@ theorem rt_all_balls_energy
 #check @QIQTH.QuantumEntropy.relEntropy_eq_crossEntropy_sub_entropy  -- discharges `hident`
 #check @QIQTH.QuantumEntropy.relEntropy_self                   -- discharges `hzero`
 
+/-! ### Discharging the entropy smoothness at the SPECTRAL level (the matrix-log "eigen" derivative)
+
+The genuine analytic content of `hS` is "the von Neumann entropy is smooth." Since
+`S = ∑ᵢ negMulLog(λᵢ)` (eigenvalues), the matrix-`log` derivative lives entirely in `negMulLog`,
+which Mathlib knows is differentiable away from `0` (`Real.differentiableAt_negMulLog`) with
+`deriv = −log − 1`. So the entropy is differentiable along ANY family of eigenvalue vectors `p(ε)`
+whose components are differentiable and nonzero — this is the spectral half of the wall, now CHECKED.
+What remains is purely the eigenvalue-perturbation map `ρ ↦ eigenvalues` (immediate for a
+fixed-eigenbasis family `ρ(ε)=U diag(p ε) U†`; the general case is the separate, deeper gap). -/
+
+/-- **Entropy is differentiable in its eigenvalues.** For an eigenvalue (probability) family `p(ε)`
+    with each component differentiable at `0` and nonzero there, the spectral entropy
+    `∑ᵢ negMulLog(pᵢ(ε))` is differentiable at `0`. Discharges `hS` at the spectral level. -/
+theorem spectralEntropy_differentiableAt {m : Type*} [Fintype m] (p : ℝ → m → ℝ)
+    (hp : ∀ i, DifferentiableAt ℝ (fun ε => p ε i) 0) (hpos : ∀ i, p 0 i ≠ 0) :
+    DifferentiableAt ℝ (fun ε => ∑ i, Real.negMulLog (p ε i)) 0 := by
+  apply DifferentiableAt.fun_sum
+  intro i _
+  exact (Real.differentiableAt_negMulLog (hpos i)).comp 0 (hp i)
+
+/-- **The spectral entropy derivative (explicit).** With each `pᵢ` differentiable and nonzero at `0`,
+    `δS = ∑ᵢ (−log pᵢ(0) − 1)·pᵢ'(0)`. (For a trace-preserving family `∑ᵢ pᵢ'(0)=0` this reduces to
+    `−∑ᵢ log pᵢ(0)·pᵢ'(0)` — the standard entropy first variation.) -/
+theorem spectralEntropy_deriv {m : Type*} [Fintype m] (p : ℝ → m → ℝ)
+    (hp : ∀ i, DifferentiableAt ℝ (fun ε => p ε i) 0) (hpos : ∀ i, p 0 i ≠ 0) :
+    deriv (fun ε => ∑ i, Real.negMulLog (p ε i)) 0
+      = ∑ i, (- Real.log (p 0 i) - 1) * deriv (fun ε => p ε i) 0 := by
+  refine (HasDerivAt.fun_sum ?_).deriv
+  intro i _
+  exact (Real.hasDerivAt_negMulLog (hpos i)).comp 0 (hp i).hasDerivAt
+
 /-! ### The integrated (finite) first law — no differentiability needed
 
 The *differential* first law `δS = δ⟨K⟩` needs the smoothness of the family (the matrix-log /

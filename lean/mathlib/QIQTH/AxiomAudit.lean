@@ -2739,5 +2739,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EntanglementFirstLaw.gibbs_first_law
 -- expected: standard only — the INTEGRATED first law S(ρ)≤⟨K⟩ (Gibbs/Klein), no differentiability:
 -- relEntropy≥0 (Klein) + relEntropy=crossEntropy−S. The finite shadow of δS=δ⟨K⟩.
+#print axioms QIQTH.EntanglementFirstLaw.spectralEntropy_differentiableAt
+-- expected: standard only — the MATRIX-LOG derivative at the spectral level: S=∑negMulLog(λᵢ) is
+-- differentiable in its eigenvalues (negMulLog differentiable away from 0). Discharges hS once the
+-- eigenvalues are smooth (trivial for fixed-basis families; eigenvalue perturbation is the deeper gap).
+#print axioms QIQTH.EntanglementFirstLaw.spectralEntropy_deriv
+-- expected: standard only — explicit δS = ∑ᵢ(−log pᵢ−1)·pᵢ'(0), the entropy first variation.
 
 end QIQTH.AxiomAudit

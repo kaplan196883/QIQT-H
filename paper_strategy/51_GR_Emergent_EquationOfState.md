@@ -171,15 +171,18 @@ QIQT-H derives it), RT/HRT + AdS/CFT, Iyer–Wald, the all-balls integral-geomet
   - `crossEntropy ρ σ = −(ρ·matLog σ).trace.re` is **linear in ρ** (matLog σ fixed) ⇒ `hKE` is *in principle*
     dischargeable for any differentiable family (continuous-linear-map ∘ family); the only obstacle is
     matrix-norm / CLM plumbing, not mathematics.
-  - `hS` (von Neumann entropy `−Tr(ρ log ρ)`, nonlinear) is the **genuine wall**: its derivative needs the
-    **matrix-logarithm / eigenvalue-perturbation derivative**, which **Mathlib does not have** (`grep` finds
-    no `Matrix.log` derivative; analytic eigenvalue perturbation / Hellmann–Feynman is absent). Since the
-    first law is equivalent to `deriv D 0 = 0` and `D = ⟨K⟩ − S`, the differentiability of `S` (equivalently
-    `D`) is the **irreducible** analytic input. This is the same matrix-calculus / continuum frontier already
-    cited across the program (Type III, the continuum wall) — a multi-week Mathlib-infrastructure target, not
-    a bounded next step. **Honest status: the differential first law is machine-checked modulo exactly one
-    isolated, precisely-characterised analytic hypothesis (`S` differentiable = the matrix-log derivative);
-    the integrated form is fully done.**
+  - `hS` (von Neumann entropy `−Tr(ρ log ρ)`, nonlinear) splits into two halves, and the **matrix-log half is
+    now DONE** (commit pending): since `S = ∑ᵢ negMulLog(λᵢ)`, the `log`-derivative lives entirely in
+    `negMulLog`, differentiable away from `0` (Mathlib `Real.differentiableAt_negMulLog`, `deriv = −log−1`).
+    `spectralEntropy_differentiableAt` + `spectralEntropy_deriv` (axiom-free) machine-check that the entropy is
+    differentiable in its eigenvalues, with the explicit first variation `δS = ∑ᵢ(−log pᵢ−1)·pᵢ'(0)`.
+  - **What remains is purely the eigenvalue-perturbation map `ρ ↦ eigenvalues`** — confirmed a genuine Mathlib
+    gap (`grep`: no eigenvalue continuity/differentiability, no Kato/Hellmann–Feynman). It is **trivial for a
+    fixed-eigenbasis family** `ρ(ε)=U diag(p ε) U†` (eigenvalues = the smooth diagonal `p`, unitary conjugation
+    preserving spectrum) — so there `hS` is fully dischargeable, modulo Lean eigenvalue-plumbing — and is the
+    **deeper, separate gap** only for general basis-rotating families. **Honest status: the differential first
+    law is machine-checked, the matrix-log derivative is done, and the residual gap is narrowed to analytic
+    eigenvalue perturbation (Mathlib infrastructure), trivial in the fixed-basis case.**
 
 ## 5. Honest bottom line
 
