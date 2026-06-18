@@ -27,6 +27,7 @@
   variation. See paper_strategy/51_GR_Emergent_EquationOfState.md §2, §4b.
 -/
 import QIQTH.QuantumRelativeEntropy
+import QIQTH.SpectralSum
 
 open scoped ComplexOrder
 
@@ -137,6 +138,22 @@ theorem vonNeumannEntropy_differentiableAt {n : Type*} [Fintype n] [DecidableEq 
     (hpos : ∀ i, (h 0).eigenvalues i ≠ 0) :
     DifferentiableAt ℝ (fun ε => vonNeumannEntropy (h ε)) 0 :=
   spectralEntropy_differentiableAt (fun ε i => (h ε).eigenvalues i) hev hpos
+
+open QIQTH.QuantumEntropy in
+/-- **`hS` DISCHARGED for a diagonal fixed-basis family.** For a family of *diagonal* densities
+    `ρ(ε) = diagonal(p(ε))` with each `pᵢ` differentiable and nonzero at `0`, the von Neumann entropy is
+    differentiable at `0` — *no `hev` assumption needed*: `vonNeumannEntropy(h ε) = ∑ᵢ negMulLog(pᵢ(ε))`
+    by `SpectralSum.vonNeumannEntropy_diagonal` (the eigenvalue ordering eliminated through the
+    characteristic polynomial), and then `spectralEntropy_differentiableAt`. This closes the fixed-basis
+    (U = I) case of the eigenvalue-perturbation wall: the first law's `hS` is now a THEOREM here. -/
+theorem vonNeumannEntropy_diagonal_differentiableAt {n : Type*} [Fintype n] [DecidableEq n]
+    (p : ℝ → n → ℝ) (h : (ε : ℝ) → IsDensity (Matrix.diagonal (fun i => (p ε i : ℂ))))
+    (hp : ∀ i, DifferentiableAt ℝ (fun ε => p ε i) 0) (hpos : ∀ i, p 0 i ≠ 0) :
+    DifferentiableAt ℝ (fun ε => vonNeumannEntropy (h ε)) 0 := by
+  have hconv : (fun ε => vonNeumannEntropy (h ε)) = (fun ε => ∑ i, Real.negMulLog (p ε i)) :=
+    funext fun ε => QIQTH.SpectralSum.vonNeumannEntropy_diagonal (p ε) (h ε)
+  rw [hconv]
+  exact spectralEntropy_differentiableAt p hp hpos
 
 /-! ### The integrated (finite) first law — no differentiability needed
 

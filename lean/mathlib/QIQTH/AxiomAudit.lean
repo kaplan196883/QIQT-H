@@ -2750,4 +2750,15 @@ namespace QIQTH.AxiomAudit
 -- S(ρ(ε)) = ∑negMulLog((h ε).eigenvalues i) by def, differentiable given eigenvalue-differentiability.
 -- Reduces hS to exactly the eigenvalue-perturbation hypothesis (the cited Mathlib gap).
 
+-- SpectralSum.lean — eigenvalue-perturbation infrastructure, DIAGONAL fixed-basis case (2026-06-18).
+-- Closes hev/hS for diagonal families: the eigenvalue ORDERING is eliminated through the charpoly.
+#print axioms QIQTH.SpectralSum.sum_eq_of_prod_X_sub_C_eq
+-- expected: standard only — ∏(X−aᵢ)=∏(X−bᵢ) ⇒ ∑f(aᵢ)=∑f(bᵢ): symmetric sums are charpoly-determined
+-- (roots multiset). The core that relates IsHermitian.eigenvalues to an external diagonal.
+#print axioms QIQTH.SpectralSum.vonNeumannEntropy_diagonal
+-- expected: standard only — S(diagonal d) = ∑ negMulLog(dᵢ) via charpoly_diagonal vs IsHermitian.charpoly_eq.
+#print axioms QIQTH.EntanglementFirstLaw.vonNeumannEntropy_diagonal_differentiableAt
+-- expected: standard only — hS DISCHARGED (a theorem, no hev) for a diagonal fixed-basis family:
+-- S(ρ(ε))=∑negMulLog(pᵢ(ε)) differentiable. Closes the fixed-basis (U=I) eigenvalue-perturbation wall.
+
 end QIQTH.AxiomAudit

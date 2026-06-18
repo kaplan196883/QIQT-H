@@ -382,4 +382,5 @@ import QIQTH.RotationBorn
 import QIQTH.SymmetrySquare
 import QIQTH.RealmSelection
 import QIQTH.EinsteinEquationOfState
+import QIQTH.SpectralSum
 import QIQTH.EntanglementFirstLaw
