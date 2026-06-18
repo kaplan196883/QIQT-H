@@ -2918,5 +2918,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ManifoldGR.dirDeriv_add_fun
 -- expected: standard only — dirDeriv linearity (additive + 𝕜-homogeneous in the vector field, additive
 -- in the function), the directional-derivative API the Bianchi cyclic sum / Ricci traces consume. Axiom-free.
+#print axioms QIQTH.ManifoldGR.PseudoRiemannianMetric.lower_injective
+#print axioms QIQTH.ManifoldGR.PseudoRiemannianMetric.lower_symm
+-- expected: standard only — P3 (Lorentzian metric, which Mathlib lacks — its metric infra is
+-- positive-definite only). The pseudo-Riemannian metric structure (symmetric, nondegenerate bilinear
+-- form field) + the index-lowering musical ♭ map, injective from nondegeneracy (first half of the
+-- musical isomorphism). Foundation for Levi-Civita → Ricci → Einstein. Axiom-free.
 
 end QIQTH.AxiomAudit

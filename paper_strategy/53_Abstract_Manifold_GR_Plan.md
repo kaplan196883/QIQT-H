@@ -83,6 +83,16 @@ Each step = its own axiom-free file/lemma, green `lake build`, `#print axioms` c
 - **P3 — Pseudo-Riemannian / Lorentzian metric.** Mathlib's metric is positive-definite; define a
   bundle of **nondegenerate symmetric bilinear forms** on `TM` (arbitrary signature), smooth, with the
   musical isomorphism `♭/♯` from nondegeneracy. The genuinely new foundation Mathlib lacks.
+  - ✅ STARTED (`QIQTH/PseudoRiemannian.lean`, axiom-free): `PseudoRiemannianMetric` structure
+    (symmetric + nondegenerate bilinear-form field), `lower` (musical `♭`) map, `lower_symm`,
+    `lower_injective` (first half of the musical iso, from nondegeneracy). NEXT: smoothness of the field;
+    `♯` / full musical iso (needs `FiniteDimensional` + Mathlib `BilinForm` nondegenerate→dual iso).
+  - **CHART-TRANSPORT ASSESSMENT (2026-06-19):** mapped the Mathlib internals — `mlieBracket` is
+    `mpullback I 𝓘(𝕜,E) (extChartAt I x) (lieBracket …)`, i.e. inverse-chart-derivative applied; the
+    bracket's own properties are proven via intricate `extChartAt`/`mpullbackWithin`/`fderivWithin (f∘e⁻¹)`
+    bookkeeping (e.g. `mlieBracketWithin_smul_right`). The general-manifold commutator would replicate
+    that machinery — it is genuine Mathlib-*internals* work, best landed as a Mathlib PR, not a quick
+    increment. Parked as the heavy keystone; the model-space commutator already covers the local physics.
 - **P4 — Levi-Civita connection.** The unique torsion-free metric-compatible `CovariantDerivative` via
   the **Koszul formula**; prove existence (it IS a covariant derivative — Leibniz/add) and uniqueness.
   Heaviest analytic step.
