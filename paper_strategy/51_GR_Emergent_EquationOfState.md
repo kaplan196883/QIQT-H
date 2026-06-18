@@ -244,13 +244,17 @@ multivariable calculus + algebra, NOT the multi-year abstract-manifold library.
   alone (verified circular). Via `lowered_riemann_eq` ("Riemann in terms of the metric"): the `∂Γ_lower`
   pairs combine into `∂∂g_{ρσ}` (metric_compat as a *function* identity) and cancel by **Schwarz**; the `ΓΓ`
   pairs cancel by the symmetric pairing `⟨ab,cd⟩=⟨cd,ab⟩`.
-- **REMAINING — pieces C–E (assembly, now unblocked):** (C) the contraction identity
-  `∑g^{σν}R^ρ_{σνλ}=−∑g^{ρβ}Ric_{βλ}` (derived from B: lower `ρ`, first-pair antisym, `gi·g=δ` collapse to
-  `ricci`); (D) scalar `∇R=∂R` (trivial); (E) contract `second_bianchi_contracted` once more with `g^{σν}`
-  (Leibniz + `inv_metric_compat`) ⟹ `2∇^μRic_{μλ}=∂_λR` ⟹ `∇^μG_{μλ}=0`. *Net: connection + all curvature
-  + metric compatibility (both indices) + first Bianchi + Schwarz + FULL second Bianchi + ONCE-CONTRACTED
-  Bianchi + the metric-raising tower's two crux lemmas (`∇g^{μν}=0`, lowered-Riemann first-pair antisymmetry)
-  are ALL machine-checked, axiom-free. Only the C–E assembly remains to close `∇^μG_{μν}=0`.*
+- **Piece C core — machine-checked, axiom-free** (`lowered_riemann_gi_trace`):
+  `∑_{σν}g^{σν}(g_{βρ}R^ρ_{σνλ})=−Ric_{βλ}` (metric trace of the lowered Riemann → Ricci, via piece B + the
+  `gi·g=δ` collapse).
+- **REMAINING — the twice-contraction assembly (`~200 lines, fully derived, not yet built`):** contract
+  `second_bianchi_contracted` with `g^{σν}` ⟹ **T1**=`∂_λ scalarCurv` (product rule + `inv_metric_compat`),
+  **T2,T3**=`−∇^μRic_{μλ}` each (T3 via contraction-commutes + the raised form of piece C) ⟹
+  `2∇^μRic_{μλ}=∂_λR`; then **step E** (`G=Ric−½gR`, `∇g=0`, `g^{μκ}g_{μλ}=δ`) ⟹ `∇^μG_{μλ}=0`. *Net:
+  connection + all curvature + metric compatibility (both indices) + first Bianchi + Schwarz + FULL second
+  Bianchi + ONCE-CONTRACTED Bianchi + the metric-raising tower's three hard lemmas (`∇g^{μν}=0`,
+  lowered-Riemann first-pair antisymmetry, the Riemann→Ricci trace) are ALL machine-checked, axiom-free. The
+  remaining assembly is mechanical `inv_metric_compat`+reindexing computation.*
 - **Honest scale:** Layer 0 is a clean foundation; Layers 1–2 are the genuine multi-month effort (the
   differentiability propagation through Γ/Riemann is where the cost lives). This is the START of the tower,
   not its completion — and per pro, its marginal value for QIQT-H is bounded (it recertifies textbook DG),

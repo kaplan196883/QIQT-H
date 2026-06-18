@@ -2846,4 +2846,8 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — first-pair antisymmetry R_{ρσμν}=−R_{σρμν} (∂∂g cancels by Schwarz, ΓΓ by the
 -- symmetric pairing). Metric-raising tower piece B — the CRUX, needed for g^{σν}R^ρ_{σνλ} in ∇^μG_{μν}=0.
 
+#print axioms QIQTH.Curvature.lowered_riemann_gi_trace
+-- expected: standard only — ∑g^{σν}(g_{βρ}R^ρ_{σνλ}) = −Ric_{βλ} (metric trace of lowered Riemann → Ricci,
+-- via piece B + the gi·g=δ collapse). Metric-raising tower piece C (core).
+
 end QIQTH.AxiomAudit
