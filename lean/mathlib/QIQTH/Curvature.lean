@@ -1116,4 +1116,70 @@ theorem gi_trace_covDeriv_ricci (g gi : Point n → Fin n → Fin n → ℝ)
   simp only [covDeriv02, mul_sub, Finset.mul_sum, Finset.sum_sub_distrib]
   rw [hpd_scalar, hS_gipd, hAC, hBD]; ring
 
+/-- **T3 core — contraction commutes with the Riemann divergence**: for fixed `ρ`,
+    `∑_{σν} g^{σν} ∇_ρ R^ρ_{σνλ}` equals `∂_ρ S^ρ_λ + Γ^ρ_{ρκ}S^κ_λ − Γ^κ_{ρλ}S^ρ_κ`, the `(1,1)`
+    covariant divergence of `S^a_b := ∑_{σν} g^{σν} R^a_{σνb}` — the `σ,ν` connection corrections of
+    `covDerivRiem` cancel `∂g^{σν}` (`inv_metric_compat`) by the same swaps as T1. -/
+theorem gi_trace_covDerivRiem (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (ρ lam : Fin n) (x : Point n) :
+    (∑ σ, ∑ ν, gi x σ ν * covDerivRiem g gi ρ ρ σ ν lam x)
+      = pd (fun y => ∑ σ, ∑ ν, gi y σ ν * riemann g gi ρ σ ν lam y) ρ x
+        + (∑ σ, ∑ ν, ∑ κ, gi x σ ν * (christoffel g gi ρ ρ κ x * riemann g gi κ σ ν lam x))
+        - (∑ σ, ∑ ν, ∑ κ, gi x σ ν * (christoffel g gi κ ρ lam x * riemann g gi ρ σ ν κ x)) := by
+  have hgd : ∀ a b, PdiffAt (fun y => g y a b) ρ x := fun a b =>
+    PdiffAt_of_contDiff _ (hCg a b) ρ x
+  have hgid : ∀ a b, PdiffAt (fun y => gi y a b) ρ x := fun a b =>
+    PdiffAt_of_contDiff _ (hCgi a b) ρ x
+  have hRiem : ∀ a b c d, PdiffAt (fun y => riemann g gi a b c d y) ρ x := fun a b c d =>
+    PdiffAt_riemann g gi hC a b c d ρ x
+  have swap13 : ∀ (F : Fin n → Fin n → Fin n → ℝ),
+      (∑ σ, ∑ ν, ∑ κ, F σ ν κ) = ∑ σ, ∑ ν, ∑ κ, F κ ν σ := by
+    intro F
+    rw [Finset.sum_comm, Finset.sum_congr rfl (fun ν _ => Finset.sum_comm), Finset.sum_comm]
+  have swap23 : ∀ (F : Fin n → Fin n → Fin n → ℝ),
+      (∑ σ, ∑ ν, ∑ κ, F σ ν κ) = ∑ σ, ∑ ν, ∑ κ, F σ κ ν := by
+    intro F
+    apply Finset.sum_congr rfl; intro σ _; rw [Finset.sum_comm]
+  have hpd_S : pd (fun y => ∑ σ, ∑ ν, gi y σ ν * riemann g gi ρ σ ν lam y) ρ x
+      = (∑ σ, ∑ ν, pd (fun y => gi y σ ν) ρ x * riemann g gi ρ σ ν lam x)
+        + (∑ σ, ∑ ν, gi x σ ν * pd (fun y => riemann g gi ρ σ ν lam y) ρ x) := by
+    rw [pd_sum Finset.univ (fun σ y => ∑ ν, gi y σ ν * riemann g gi ρ σ ν lam y) ρ x
+          (fun σ _ => PdiffAt_sum _ _ ρ x (fun ν _ => (hgid σ ν).mul (hRiem ρ σ ν lam))),
+        ← Finset.sum_add_distrib]
+    apply Finset.sum_congr rfl; intro σ _
+    rw [pd_sum Finset.univ (fun ν y => gi y σ ν * riemann g gi ρ σ ν lam y) ρ x
+          (fun ν _ => (hgid σ ν).mul (hRiem ρ σ ν lam)), ← Finset.sum_add_distrib]
+    apply Finset.sum_congr rfl; intro ν _
+    exact pd_mul (fun y => gi y σ ν) (fun y => riemann g gi ρ σ ν lam y) ρ x (hgid σ ν)
+      (hRiem ρ σ ν lam)
+  have hpd_gi : ∀ σ ν, pd (fun y => gi y σ ν) ρ x
+      = -(∑ κ, christoffel g gi σ ρ κ x * gi x κ ν)
+        - (∑ κ, christoffel g gi ν ρ κ x * gi x σ κ) := by
+    intro σ ν
+    have hm := inv_metric_compat g gi hsymm hsymm_gi hinv ρ x hgd hgid σ ν
+    simp only [covDeriv20] at hm; linarith [hm]
+  have hS_gipd : (∑ σ, ∑ ν, pd (fun y => gi y σ ν) ρ x * riemann g gi ρ σ ν lam x)
+      = -(∑ σ, ∑ ν, ∑ κ, christoffel g gi σ ρ κ x * gi x κ ν * riemann g gi ρ σ ν lam x)
+        - (∑ σ, ∑ ν, ∑ κ, christoffel g gi ν ρ κ x * gi x σ κ * riemann g gi ρ σ ν lam x) := by
+    rw [Finset.sum_congr rfl (fun σ _ => Finset.sum_congr rfl (fun ν _ => by rw [hpd_gi σ ν]))]
+    simp only [sub_mul, neg_mul, Finset.sum_mul, Finset.sum_sub_distrib, Finset.sum_neg_distrib]
+  have hAC : (∑ σ, ∑ ν, ∑ κ, gi x σ ν * (christoffel g gi κ ρ σ x * riemann g gi ρ κ ν lam x))
+      = ∑ σ, ∑ ν, ∑ κ, christoffel g gi σ ρ κ x * gi x κ ν * riemann g gi ρ σ ν lam x := by
+    rw [swap13 (fun σ ν κ => gi x σ ν * (christoffel g gi κ ρ σ x * riemann g gi ρ κ ν lam x))]
+    apply Finset.sum_congr rfl; intro σ _; apply Finset.sum_congr rfl; intro ν _
+    apply Finset.sum_congr rfl; intro κ _; ring
+  have hBD : (∑ σ, ∑ ν, ∑ κ, gi x σ ν * (christoffel g gi κ ρ ν x * riemann g gi ρ σ κ lam x))
+      = ∑ σ, ∑ ν, ∑ κ, christoffel g gi ν ρ κ x * gi x σ κ * riemann g gi ρ σ ν lam x := by
+    rw [swap23 (fun σ ν κ => gi x σ ν * (christoffel g gi κ ρ ν x * riemann g gi ρ σ κ lam x))]
+    apply Finset.sum_congr rfl; intro σ _; apply Finset.sum_congr rfl; intro ν _
+    apply Finset.sum_congr rfl; intro κ _; ring
+  simp only [covDerivRiem, mul_add, mul_sub, Finset.mul_sum, Finset.sum_add_distrib,
+    Finset.sum_sub_distrib]
+  rw [hpd_S, hS_gipd, hAC, hBD]; ring
+
 end QIQTH.Curvature
