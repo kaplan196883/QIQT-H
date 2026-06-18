@@ -41,9 +41,12 @@ obtained by contracting `second_bianchi_contracted` with `g^{σν}`. Three terms
   `covDerivRiem` cancel `∂g^{σν}` via `inv_metric_compat` (`∂gi=−Γgi−Γgi`); the result is `∑_ρ ∇_ρ S^ρ_λ`
   with `S^ρ_λ = ∑g^{σν}R^ρ_{σνλ} = −∑g^{ρβ}Ric_{βλ}` (1.1) ⟹ `−div02(ricci)`. RISK: high — triple-sum
   reindexing + the σ,ν correction cancellation. Same flavor as `inv_metric_compat`'s `hkey`.
-- **1.3 T1 = scalar-curvature derivative** ≈60 ln. `∑_{σν} g^{σν} covDeriv02(ricci) λ σ ν
-  = pd(scalarCurv)λ`. Product rule on `scalarCurv = ∑g^{σν}Ric_{σν}` (`pd_sum`+`pd_mul`, needs
-  `ricci`/`gi` differentiable) + `inv_metric_compat` cancels the Γ·Ric terms by reindexing. RISK: med.
+- **1.3 T1 = scalar-curvature derivative — ✅ DONE, axiom-free** (`gi_trace_covDeriv_ricci`).
+  `∑_{σν} g^{σν} ∇_λ Ric_{σν} = ∂_λ R`. Product rule (`pd_sum`+`pd_mul`) + `inv_metric_compat` + the
+  triple-sum swaps `swap13`/`swap23` (the `Γ·g·Ric` cancellation `A=C`, `B=D`). Added `PdiffAt_ricci`.
+  NOTE for T3: the contraction-commutes step `gi_trace_covDerivRiem` is STRUCTURALLY IDENTICAL — same
+  product rule + `inv_metric_compat` + `swap13`/`swap23` cancellation, with `riemann ρ·· λ` in place of
+  `ricci`, plus two spectator terms `+∑Γ^ρ_{ρκ}S^κ − ∑Γ^κ_{ρλ}S^ρ_κ` that pass through. Copy T1's shape.
 - **1.4 T2 = the divergence** ≈20 ln. `∑_{σν} g^{σν} covDeriv02(ricci) ν σ λ = div02(ricci)λ`
   (reindex σ→μ, ν→ρ — `div02` *is* this contraction). RISK: low.
 - **1.5 Assemble** ≈30 ln. Contract `second_bianchi_contracted` with `g^{σν}`: `T1 − T2 + T3 = 0` ⟹
