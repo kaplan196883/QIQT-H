@@ -2840,4 +2840,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ∇_λ g^{μρ}=0 (raised-index metric compatibility): differentiate the inverse
 -- relation, substitute metric_compat, cancel connection terms, invert. Metric-raising tower, piece A.
 
+#print axioms QIQTH.Curvature.lowered_riemann_eq
+-- expected: standard only — g_{ρα}R^α_{σμν} = ∂Γ_lower − ΓΓ_lower (Riemann in terms of the metric).
+#print axioms QIQTH.Curvature.lowered_riemann_antisymm
+-- expected: standard only — first-pair antisymmetry R_{ρσμν}=−R_{σρμν} (∂∂g cancels by Schwarz, ΓΓ by the
+-- symmetric pairing). Metric-raising tower piece B — the CRUX, needed for g^{σν}R^ρ_{σνλ} in ∇^μG_{μν}=0.
+
 end QIQTH.AxiomAudit

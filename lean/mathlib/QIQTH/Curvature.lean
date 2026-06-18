@@ -830,4 +830,127 @@ theorem inv_metric_compat (g gi : Point n → Fin n → Fin n → ℝ)
   rw [hinvert, Finset.sum_congr rfl (fun ν (_ : ν ∈ Finset.univ) => by rw [hkey ν, mul_zero])]
   simp
 
+/-- **Riemann in terms of the metric** (lowered first index): `g_{ρα} R^α_{σμν}` equals
+    `∂_μ Γ_{ρνσ} − ∂_ν Γ_{ρμσ} − Γ^κ_{μρ}Γ_{κνσ} + Γ^κ_{νρ}Γ_{κμσ}`, where `Γ_{ρνσ}=∑_α g_{ρα}Γ^α_{νσ}`
+    is the lowered Christoffel (written here as the contraction `g_{ακ}` for the connection terms). The
+    `g·ΓΓ` terms produced by differentiating `g` (`metric_compat`) cancel the Riemann `ΓΓ` terms. -/
+theorem lowered_riemann_eq (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (ρ σ μ ν : Fin n) (x : Point n) :
+    (∑ α, g x ρ α * riemann g gi α σ μ ν x)
+      = pd (fun y => ∑ α, g y ρ α * christoffel g gi α ν σ y) μ x
+        - pd (fun y => ∑ α, g y ρ α * christoffel g gi α μ σ y) ν x
+        - (∑ κ, christoffel g gi κ μ ρ x * (∑ α, g x α κ * christoffel g gi α ν σ x))
+        + (∑ κ, christoffel g gi κ ν ρ x * (∑ α, g x α κ * christoffel g gi α μ σ x)) := by
+  -- Product rule: ∑_α g_{ρα} ∂_e Γ^α_{cd} = ∂_e(∑_α g_{ρα}Γ^α_{cd}) − ∑_α (∂_e g_{ρα})Γ^α_{cd}.
+  have prod : ∀ (c d e : Fin n), (∑ α, g x ρ α * pd (fun y => christoffel g gi α c d y) e x)
+      = pd (fun y => ∑ α, g y ρ α * christoffel g gi α c d y) e x
+        - ∑ α, pd (fun y => g y ρ α) e x * christoffel g gi α c d x := by
+    intro c d e
+    have hexp : pd (fun y => ∑ α, g y ρ α * christoffel g gi α c d y) e x
+        = (∑ α, pd (fun y => g y ρ α) e x * christoffel g gi α c d x)
+          + (∑ α, g x ρ α * pd (fun y => christoffel g gi α c d y) e x) := by
+      rw [pd_sum Finset.univ (fun α y => g y ρ α * christoffel g gi α c d y) e x
+            (fun α _ => (PdiffAt_of_contDiff _ (hCg ρ α) e x).mul (PdiffAt_of_contDiff _ (hC α c d) e x)),
+          Finset.sum_congr rfl (fun α (_ : α ∈ Finset.univ) =>
+            pd_mul (fun y => g y ρ α) (fun y => christoffel g gi α c d y) e x
+              (PdiffAt_of_contDiff _ (hCg ρ α) e x) (PdiffAt_of_contDiff _ (hC α c d) e x)),
+          Finset.sum_add_distrib]
+    linarith [hexp]
+  -- ∂g from metric compatibility, in the form `∂_c g_{ρa} = ∑_κ g_{aκ}Γ^κ_{cρ} + ∑_κ g_{ρκ}Γ^κ_{ca}`.
+  have hmc : ∀ (a c : Fin n), pd (fun y => g y ρ a) c x
+      = (∑ κ, g x a κ * christoffel g gi κ c ρ x) + (∑ κ, g x ρ κ * christoffel g gi κ c a x) := by
+    intro a c
+    have hm := metric_compat g gi hsymm x (fun p q => hinv x p q) c ρ a
+    simp only [covDeriv02] at hm
+    have h1 : (∑ τ, christoffel g gi τ c ρ x * g x τ a) = ∑ κ, g x a κ * christoffel g gi κ c ρ x := by
+      apply Finset.sum_congr rfl; intro τ _; rw [hsymm x τ a]; ring
+    have h2 : (∑ τ, christoffel g gi τ c a x * g x ρ τ) = ∑ κ, g x ρ κ * christoffel g gi κ c a x := by
+      apply Finset.sum_congr rfl; intro τ _; ring
+    linarith [hm, h1, h2]
+  -- Expand `g_{ρα}` over the Riemann tensor.
+  have hexpand : (∑ α, g x ρ α * riemann g gi α σ μ ν x)
+      = (∑ α, g x ρ α * pd (fun y => christoffel g gi α ν σ y) μ x)
+        - (∑ α, g x ρ α * pd (fun y => christoffel g gi α μ σ y) ν x)
+        + (∑ α, g x ρ α * (∑ l, (christoffel g gi α μ l x * christoffel g gi l ν σ x
+                                  - christoffel g gi α ν l x * christoffel g gi l μ σ x))) := by
+    rw [← Finset.sum_sub_distrib, ← Finset.sum_add_distrib]
+    apply Finset.sum_congr rfl; intro α _; simp only [riemann]; ring
+  -- Reindexing identities (each = `Finset.sum_comm` + a per-term `ring`).
+  have hThirdμ : (∑ α, (∑ κ, g x α κ * christoffel g gi κ μ ρ x) * christoffel g gi α ν σ x)
+      = ∑ κ, christoffel g gi κ μ ρ x * (∑ α, g x α κ * christoffel g gi α ν σ x) := by
+    simp only [Finset.sum_mul, Finset.mul_sum]; rw [Finset.sum_comm]
+    apply Finset.sum_congr rfl; intro κ _; apply Finset.sum_congr rfl; intro α _; ring
+  have hThirdν : (∑ α, (∑ κ, g x α κ * christoffel g gi κ ν ρ x) * christoffel g gi α μ σ x)
+      = ∑ κ, christoffel g gi κ ν ρ x * (∑ α, g x α κ * christoffel g gi α μ σ x) := by
+    simp only [Finset.sum_mul, Finset.mul_sum]; rw [Finset.sum_comm]
+    apply Finset.sum_congr rfl; intro κ _; apply Finset.sum_congr rfl; intro α _; ring
+  have hSum3a : (∑ α, (∑ κ, g x ρ κ * christoffel g gi κ μ α x) * christoffel g gi α ν σ x)
+      = ∑ α, g x ρ α * (∑ l, christoffel g gi α μ l x * christoffel g gi l ν σ x) := by
+    simp only [Finset.sum_mul, Finset.mul_sum]; rw [Finset.sum_comm]
+    apply Finset.sum_congr rfl; intro α _; apply Finset.sum_congr rfl; intro κ _; ring
+  have hSum3b : (∑ α, (∑ κ, g x ρ κ * christoffel g gi κ ν α x) * christoffel g gi α μ σ x)
+      = ∑ α, g x ρ α * (∑ l, christoffel g gi α ν l x * christoffel g gi l μ σ x) := by
+    simp only [Finset.sum_mul, Finset.mul_sum]; rw [Finset.sum_comm]
+    apply Finset.sum_congr rfl; intro α _; apply Finset.sum_congr rfl; intro κ _; ring
+  rw [hexpand, prod ν σ μ, prod μ σ ν]
+  simp only [hmc, add_mul, Finset.sum_add_distrib]
+  rw [hThirdμ, hThirdν, hSum3a, hSum3b]
+  simp only [mul_sub, Finset.sum_sub_distrib]
+  ring
+
+/-- **First-pair antisymmetry of the lowered Riemann tensor**: `g_{ρα}R^α_{σμν} + g_{σα}R^α_{ρμν} = 0`,
+    i.e. `R_{ρσμν}=−R_{σρμν}`. From `lowered_riemann_eq`: the `∂Γ_lower` pairs combine (via `metric_compat`
+    as a *function* identity) into `∂∂g_{ρσ}` and cancel by **Schwarz** (`pd_comm`); the `ΓΓ` pairs cancel
+    by the symmetry of `⟨ab,cd⟩=∑_{κα}g_{ακ}Γ^κ_{ab}Γ^α_{cd}` under `(ab)↔(cd)`. The crux of the
+    metric-raising tower (piece B) — required for `g^{σν}R^ρ_{σνλ}` in `∇^μ G_{μν}=0`. -/
+theorem lowered_riemann_antisymm (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (ρ σ μ ν : Fin n) (x : Point n) :
+    (∑ α, g x ρ α * riemann g gi α σ μ ν x) + (∑ α, g x σ α * riemann g gi α ρ μ ν x) = 0 := by
+  -- `∑_α g_{aα}Γ^α_{cb} + ∑_α g_{bα}Γ^α_{ca} = ∂_c g_{ab}` as functions (metric_compat at every point).
+  have hGLsum : ∀ (a b c : Fin n),
+      (fun y => (∑ α, g y a α * christoffel g gi α c b y) + (∑ α, g y b α * christoffel g gi α c a y))
+      = (fun y => pd (fun z => g z a b) c y) := by
+    intro a b c; funext y
+    have hm := metric_compat g gi hsymm y (fun p q => hinv y p q) c a b
+    simp only [covDeriv02] at hm
+    have h1 : (∑ α, g y b α * christoffel g gi α c a y) = ∑ κ, christoffel g gi κ c a y * g y κ b := by
+      apply Finset.sum_congr rfl; intro α _; rw [hsymm y b α]; ring
+    have h2 : (∑ α, g y a α * christoffel g gi α c b y) = ∑ κ, christoffel g gi κ c b y * g y a κ := by
+      apply Finset.sum_congr rfl; intro α _; ring
+    rw [h1, h2]; linarith [hm]
+  have hPdiffGL : ∀ (a c d e : Fin n),
+      PdiffAt (fun y => ∑ α, g y a α * christoffel g gi α c d y) e x := fun a c d e =>
+    PdiffAt_sum _ _ e x (fun α _ =>
+      (PdiffAt_of_contDiff _ (hCg a α) e x).mul (PdiffAt_of_contDiff _ (hC α c d) e x))
+  -- Symmetry of the `ΓΓ` pairing under `(ab)↔(cd)`.
+  have hP : ∀ (a b c d : Fin n),
+      (∑ κ, christoffel g gi κ a b x * (∑ α, g x α κ * christoffel g gi α c d x))
+      = (∑ κ, christoffel g gi κ c d x * (∑ α, g x α κ * christoffel g gi α a b x)) := by
+    intro a b c d
+    simp only [Finset.mul_sum]; rw [Finset.sum_comm]
+    apply Finset.sum_congr rfl; intro i _; apply Finset.sum_congr rfl; intro j _
+    rw [hsymm x i j]; ring
+  rw [lowered_riemann_eq g gi hsymm hinv hCg hC ρ σ μ ν,
+      lowered_riemann_eq g gi hsymm hinv hCg hC σ ρ μ ν]
+  have hpd1 : pd (fun y => ∑ α, g y ρ α * christoffel g gi α ν σ y) μ x
+            + pd (fun y => ∑ α, g y σ α * christoffel g gi α ν ρ y) μ x
+          = pd (fun y => pd (fun z => g z ρ σ) ν y) μ x := by
+    rw [← pd_add _ _ μ x (hPdiffGL ρ ν σ μ) (hPdiffGL σ ν ρ μ), hGLsum ρ σ ν]
+  have hpd2 : pd (fun y => ∑ α, g y ρ α * christoffel g gi α μ σ y) ν x
+            + pd (fun y => ∑ α, g y σ α * christoffel g gi α μ ρ y) ν x
+          = pd (fun y => pd (fun z => g z ρ σ) μ y) ν x := by
+    rw [← pd_add _ _ ν x (hPdiffGL ρ μ σ ν) (hPdiffGL σ μ ρ ν), hGLsum ρ σ μ]
+  have hschwarz : pd (fun y => pd (fun z => g z ρ σ) ν y) μ x
+      = pd (fun y => pd (fun z => g z ρ σ) μ y) ν x :=
+    pd_comm (fun z => g z ρ σ) μ ν x (hCg ρ σ)
+  linarith [hpd1, hpd2, hschwarz, hP μ ρ ν σ, hP ν ρ μ σ]
+
 end QIQTH.Curvature
