@@ -213,10 +213,15 @@ multivariable calculus + algebra, NOT the multi-year abstract-manifold library.
   `inv_contract` (the inverse-metric collapse ∑σ g_{σν}(∑α g^{σα}w_α)=w_ν); `christoffel_lower`
   (Γ_{νλμ}=½(∂_λg_{νμ}+∂_μg_{νλ}−∂_νg_{λμ})); and **`metric_compat` — `∇_λ g_{μν}=0`**, the defining
   Levi-Civita property, now a THEOREM from the Christoffel definition + metric symmetry.
-- **Layer 2 (NEXT, deep):** the **first Bianchi** identity (algebraic — needs only `christoffel_symm`, no
-  Schwarz; achievable) and the **second Bianchi** (needs mixed-partial symmetry / Schwarz — the hard one),
-  contracting to the **contracted Bianchi `∇^μ G_{μν}=0`** — exactly Jacobson's conservation+Bianchi step
-  (closes Route A's step 5).
+- **Layer 2 (mostly DONE, axiom-free):** the **first Bianchi** identity `riemann_first_bianchi`
+  (R^ρ_{σμν}+R^ρ_{μνσ}+R^ρ_{νσμ}=0, algebraic — `christoffel_symm` only); the pd↔fderiv bridge
+  `pd_eq_fderiv`; and **Schwarz `pd_comm`** (∂ᵢ∂ⱼf=∂ⱼ∂ᵢf for smooth f, via `pd_pd_eq` +
+  `IsSymmSndFDerivAt`) — the analytic keystone. **Remaining:** the **second Bianchi** identity (the long
+  general-coordinate computation — covariant derivative of Riemann, cyclic sum, cancellations using
+  Schwarz + first Bianchi + Christoffel symmetry; achievable now that Schwarz is in hand) → the
+  **contracted Bianchi `∇^μ G_{μν}=0`** = Jacobson's conservation+Bianchi step (Route A step 5).
+  *Status: everything up to and including Schwarz is machine-checked; the second Bianchi is the one deep
+  remaining piece — a long but no-longer-blocked computation.*
 - **Honest scale:** Layer 0 is a clean foundation; Layers 1–2 are the genuine multi-month effort (the
   differentiability propagation through Γ/Riemann is where the cost lives). This is the START of the tower,
   not its completion — and per pro, its marginal value for QIQT-H is bounded (it recertifies textbook DG),
