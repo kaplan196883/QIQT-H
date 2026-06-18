@@ -2791,5 +2791,7 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Curvature.metric_compat
 -- expected: standard only — ∇_λ g_{μν}=0: the Levi-Civita defining property, a THEOREM from the
 -- Christoffel definition + metric symmetry. (Closes a Layer-1 target feeding Jacobson's Bianchi step.)
+#print axioms QIQTH.Curvature.riemann_first_bianchi
+-- expected: standard only — first Bianchi R^ρ_{σμν}+R^ρ_{μνσ}+R^ρ_{νσμ}=0 (algebraic, christoffel_symm only).
 
 end QIQTH.AxiomAudit

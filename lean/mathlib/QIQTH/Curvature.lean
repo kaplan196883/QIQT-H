@@ -226,4 +226,35 @@ theorem metric_compat (g gi : Point n → Fin n → Fin n → ℝ)
       show (fun y => g y lam mu) = (fun y => g y mu lam) from funext (fun y => hsymm y lam mu)]
   ring
 
+/-! ### Layer 2 — the Bianchi identities -/
+
+/-- **First Bianchi identity** (the algebraic/cyclic one): `R^ρ_{σμν} + R^ρ_{μνσ} + R^ρ_{νσμ} = 0`,
+    for the torsion-free (Levi-Civita) connection. Purely algebraic — the derivative terms cancel
+    pairwise by Christoffel lower-symmetry (no Schwarz / mixed partials needed), and the quadratic ΓΓ
+    sums cancel termwise. -/
+theorem riemann_first_bianchi (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (ρ σ μ ν : Fin n) (x : Point n) :
+    riemann g gi ρ σ μ ν x + riemann g gi ρ μ ν σ x + riemann g gi ρ ν σ μ x = 0 := by
+  have hsum :
+      (∑ l, (christoffel g gi ρ μ l x * christoffel g gi l ν σ x
+           - christoffel g gi ρ ν l x * christoffel g gi l μ σ x))
+    + (∑ l, (christoffel g gi ρ ν l x * christoffel g gi l σ μ x
+           - christoffel g gi ρ σ l x * christoffel g gi l ν μ x))
+    + (∑ l, (christoffel g gi ρ σ l x * christoffel g gi l μ ν x
+           - christoffel g gi ρ μ l x * christoffel g gi l σ ν x)) = 0 := by
+    rw [← Finset.sum_add_distrib, ← Finset.sum_add_distrib]
+    apply Finset.sum_eq_zero
+    intro l _
+    rw [christoffel_symm g gi hsymm l ν σ x, christoffel_symm g gi hsymm l μ σ x,
+        christoffel_symm g gi hsymm l ν μ x]
+    ring
+  simp only [riemann]
+  rw [show (fun y => christoffel g gi ρ ν σ y) = (fun y => christoffel g gi ρ σ ν y)
+        from funext (fun y => christoffel_symm g gi hsymm ρ ν σ y),
+      show (fun y => christoffel g gi ρ σ μ y) = (fun y => christoffel g gi ρ μ σ y)
+        from funext (fun y => christoffel_symm g gi hsymm ρ σ μ y),
+      show (fun y => christoffel g gi ρ μ ν y) = (fun y => christoffel g gi ρ ν μ y)
+        from funext (fun y => christoffel_symm g gi hsymm ρ μ ν y)]
+  linarith [hsum]
+
 end QIQTH.Curvature
