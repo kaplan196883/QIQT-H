@@ -65,6 +65,16 @@ theorem PdiffAt.mul {f g : Point n → ℝ} {i : Fin n} {x : Point n}
     (hf : PdiffAt f i x) (hg : PdiffAt g i x) : PdiffAt (fun y => f y * g y) i x :=
   DifferentiableAt.mul hf hg
 
+/-- Difference of partially-differentiable fields. -/
+theorem PdiffAt.sub {f g : Point n → ℝ} {i : Fin n} {x : Point n}
+    (hf : PdiffAt f i x) (hg : PdiffAt g i x) : PdiffAt (fun y => f y - g y) i x :=
+  DifferentiableAt.sub hf hg
+
+/-- A finite sum of partially-differentiable fields is partially differentiable. -/
+theorem PdiffAt_sum {ι : Type*} (s : Finset ι) (F : ι → Point n → ℝ) (i : Fin n) (x : Point n)
+    (hF : ∀ k ∈ s, PdiffAt (F k) i x) : PdiffAt (fun y => ∑ k ∈ s, F k y) i x :=
+  DifferentiableAt.fun_sum (fun k hk => hF k hk)
+
 /-- `∂ᵢ` commutes with finite sums: `∂ᵢ(∑ₖ fₖ) = ∑ₖ ∂ᵢfₖ`. -/
 theorem pd_sum {ι : Type*} (s : Finset ι) (F : ι → Point n → ℝ) (i : Fin n) (x : Point n)
     (hF : ∀ k ∈ s, PdiffAt (F k) i x) :
@@ -109,6 +119,21 @@ theorem pd_comm (f : Point n → ℝ) (i j : Fin n) (x : Point n) (hf : ContDiff
     pd (fun y => pd f j y) i x = pd (fun y => pd f i y) j x := by
   rw [pd_pd_eq f i j x hf, pd_pd_eq f j i x hf]
   exact (hf.contDiffAt.isSymmSndFDerivAt le_top).eq _ _
+
+/-- The partial derivative `∂_d f` of a smooth field is itself partially differentiable in any
+    direction (`f ∈ C^∞` ⇒ `∂_d f ∈ C^∞` ⇒ differentiable). -/
+theorem PdiffAt_pd (f : Point n → ℝ) (hf : ContDiff ℝ ⊤ f) (d e : Fin n) (z : Point n) :
+    PdiffAt (fun y => pd f d y) e z := by
+  have hfd2 : Differentiable ℝ (fderiv ℝ f) :=
+    (hf.fderiv_right (m := ⊤) le_top).differentiable (by simp)
+  have hrw : (fun y => pd f d y) = (fun y => fderiv ℝ f y (Pi.single d 1)) :=
+    funext (fun y => pd_eq_fderiv _ d y (hf.differentiable (by simp) y))
+  have hu : DifferentiableAt ℝ (Function.update z e) (z e) :=
+    (hasDerivAt_update z e (z e)).differentiableAt
+  have hg : DifferentiableAt ℝ (fderiv ℝ f) ((Function.update z e) (z e)) := by
+    rw [Function.update_eq_self]; exact hfd2 z
+  rw [hrw]
+  exact (hg.comp (z e) hu).clm_apply (differentiableAt_const _)
 
 /-- **Christoffel symbols** `Γ^μ_{νρ} = ½ g^{μα}(∂_ν g_{αρ} + ∂_ρ g_{αν} − ∂_α g_{νρ})`. -/
 noncomputable def christoffel (g gi : Point n → Fin n → Fin n → ℝ)
@@ -347,6 +372,40 @@ theorem second_bianchi_deriv_part
   rw [pd_comm (fun w => christoffel g gi ρ ν σ w) lam mu x (hC ρ ν σ),
       pd_comm (fun w => christoffel g gi ρ mu σ w) lam ν x (hC ρ mu σ),
       pd_comm (fun w => christoffel g gi ρ lam σ w) mu ν x (hC ρ lam σ)]
+  ring
+
+/-- **Expansion of `∂_λ R^ρ_{σμν}`** via linearity + Leibniz: the two `∂∂Γ` terms plus the
+    `∑_l (∂Γ·Γ + Γ·∂Γ)` Leibniz terms. The differentiability side-conditions are discharged by the
+    `PdiffAt_*` helpers (Γ smooth). -/
+theorem pd_riemann (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (lam ρ σ μ ν : Fin n) (x : Point n) :
+    pd (fun y => riemann g gi ρ σ μ ν y) lam x
+      = pd (fun y => pd (fun w => christoffel g gi ρ ν σ w) μ y) lam x
+        - pd (fun y => pd (fun w => christoffel g gi ρ μ σ w) ν y) lam x
+        + ∑ l, (pd (fun w => christoffel g gi ρ μ l w) lam x * christoffel g gi l ν σ x
+              + christoffel g gi ρ μ l x * pd (fun w => christoffel g gi l ν σ w) lam x
+              - pd (fun w => christoffel g gi ρ ν l w) lam x * christoffel g gi l μ σ x
+              - christoffel g gi ρ ν l x * pd (fun w => christoffel g gi l μ σ w) lam x) := by
+  have hAB : PdiffAt (fun y => pd (fun w => christoffel g gi ρ ν σ w) μ y
+                      - pd (fun w => christoffel g gi ρ μ σ w) ν y) lam x :=
+    (PdiffAt_pd _ (hC ρ ν σ) μ lam x).sub (PdiffAt_pd _ (hC ρ μ σ) ν lam x)
+  have hsumand : ∀ l : Fin n, PdiffAt (fun y => christoffel g gi ρ μ l y * christoffel g gi l ν σ y
+                      - christoffel g gi ρ ν l y * christoffel g gi l μ σ y) lam x := fun l =>
+    ((PdiffAt_of_contDiff _ (hC ρ μ l) lam x).mul (PdiffAt_of_contDiff _ (hC l ν σ) lam x)).sub
+     ((PdiffAt_of_contDiff _ (hC ρ ν l) lam x).mul (PdiffAt_of_contDiff _ (hC l μ σ) lam x))
+  simp only [riemann]
+  rw [pd_add _ _ lam x hAB (PdiffAt_sum _ _ lam x (fun l _ => hsumand l)),
+      pd_sub _ _ lam x (PdiffAt_pd _ (hC ρ ν σ) μ lam x) (PdiffAt_pd _ (hC ρ μ σ) ν lam x),
+      pd_sum _ _ lam x (fun l _ => hsumand l)]
+  congr 1
+  apply Finset.sum_congr rfl
+  intro l _
+  rw [pd_sub _ _ lam x
+        ((PdiffAt_of_contDiff _ (hC ρ μ l) lam x).mul (PdiffAt_of_contDiff _ (hC l ν σ) lam x))
+        ((PdiffAt_of_contDiff _ (hC ρ ν l) lam x).mul (PdiffAt_of_contDiff _ (hC l μ σ) lam x)),
+      pd_mul _ _ lam x (PdiffAt_of_contDiff _ (hC ρ μ l) lam x) (PdiffAt_of_contDiff _ (hC l ν σ) lam x),
+      pd_mul _ _ lam x (PdiffAt_of_contDiff _ (hC ρ ν l) lam x) (PdiffAt_of_contDiff _ (hC l μ σ) lam x)]
   ring
 
 /-- **Covariant derivative of the (1,3) Riemann tensor** `∇_λ R^ρ_{σμν} = ∂_λ R^ρ_{σμν}

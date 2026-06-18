@@ -2806,5 +2806,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Curvature.pd_sum
 #print axioms QIQTH.Curvature.PdiffAt_of_contDiff
 #print axioms QIQTH.Curvature.PdiffAt.mul
+#print axioms QIQTH.Curvature.PdiffAt_pd
+#print axioms QIQTH.Curvature.pd_riemann
+-- expected: standard only — ∂_λR^ρ_{σμν} expanded (∂∂Γ terms + ∑_l Leibniz ∂Γ·Γ terms); the workhorse
+-- for the full second Bianchi, with differentiability discharged by the PdiffAt_* helpers.
 
 end QIQTH.AxiomAudit
