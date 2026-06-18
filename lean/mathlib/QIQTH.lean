@@ -389,3 +389,4 @@ import QIQTH.EinsteinFieldEquation
 import QIQTH.ManifoldCurvature
 import QIQTH.ManifoldCommutator
 import QIQTH.PseudoRiemannian
+import QIQTH.Raychaudhuri

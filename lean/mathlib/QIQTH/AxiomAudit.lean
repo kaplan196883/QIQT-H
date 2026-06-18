@@ -2918,6 +2918,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ManifoldGR.dirDeriv_add_fun
 -- expected: standard only — dirDeriv linearity (additive + 𝕜-homogeneous in the vector field, additive
 -- in the function), the directional-derivative API the Bianchi cyclic sum / Ricci traces consume. Axiom-free.
+#print axioms QIQTH.Curvature.pd_covDerivVec
+-- expected: standard only — RAYCHAUDHURI FOCUSING (geometry of Jacobson's front half). The pd-expansion
+-- of the covariant derivative ∂_μ(∇_ν V^ρ) via the product rule — foundation for the second covariant
+-- derivative covDeriv2Vec and the Ricci identity (∇_μ∇_ν−∇_ν∇_μ)V^ρ=R^ρ_σμν V^σ, whose ρ=μ contraction
+-- gives the −R_μν k^μ k^ν focusing term. Axiom-free.
 #print axioms QIQTH.ManifoldGR.dirDeriv_eq_chartAt
 #print axioms QIQTH.ManifoldGR.dirDeriv_eq_chart
 #print axioms QIQTH.ManifoldGR.dirDeriv_eventuallyEq_chart
