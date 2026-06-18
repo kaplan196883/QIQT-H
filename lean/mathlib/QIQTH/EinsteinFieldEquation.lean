@@ -193,4 +193,35 @@ theorem einstein_field_equation (g gi : Point n → Fin n → Fin n → ℝ)
       pd_const_mul (1 / 2 : ℝ) tr ν x (htr ν)]
   linarith [h1]
 
+/-- **The Einstein field equation from the thermodynamic equation of state — with the ACTUAL curvature.**
+    Instantiating `einstein_field_equation` at `Ric = ricci g gi`, `R = scalarCurv g gi`, and discharging
+    the `bianchi` hypothesis with the machine-checked `twice_contracted_bianchi` (`∇^μRic=½∂R`). The
+    conclusion now features the **genuine Einstein tensor** `einsteinTensor = Ric − ½R·g`:
+        `a·T_{μν} = G_{μν} + Λ·g_{μν}`,  `Λ := f + ½R` covariantly constant.
+    The ONLY remaining hypotheses are the **cited physics** — the post-crux Clausius relation
+    `a·T = Ric + f·g` (area law + Unruh + Raychaudhuri, supplied as `crux`) and local conservation
+    `∇^μ(aT)=0` (`conserv`). Everything geometric is now proven; axiom-free. -/
+theorem einstein_field_equation_real (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (T : Point n → Fin n → Fin n → ℝ) (f : Point n → ℝ) (a : ℝ) (x : Point n)
+    (hf : ∀ ρ, PdiffAt f ρ x)
+    (crux : ∀ y a' b, a * T y a' b = ricci g gi a' b y + f y * g y a' b)
+    (conserv : ∀ ν, div02 g gi (fun y a' b => a * T y a' b) ν x = 0) :
+    (∀ μ ν, a * T x μ ν
+        = einsteinTensor g gi μ ν x + (f x + (1 / 2 : ℝ) * scalarCurv g gi x) * g x μ ν)
+    ∧ (∀ ν, pd (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y) ν x = 0) := by
+  have htr : ∀ ρ, PdiffAt (fun y => scalarCurv g gi y) ρ x := fun ρ =>
+    PdiffAt_sum _ _ ρ x (fun σ _ => PdiffAt_sum _ _ ρ x (fun ν _ =>
+      (PdiffAt_of_contDiff _ (hCgi σ ν) ρ x).mul (PdiffAt_ricci g gi hC σ ν ρ x)))
+  have hmain := einstein_field_equation g gi hsymm hinv T (fun y a' b => ricci g gi a' b y)
+    f (fun y => scalarCurv g gi y) a x hf htr
+    (fun a' b ρ => PdiffAt_of_contDiff _ (hCg a' b) ρ x)
+    (fun a' b ρ => PdiffAt_ricci g gi hC a' b ρ x) crux conserv
+    (fun ν => twice_contracted_bianchi g gi hsymm hsymm_gi hinv hCg hCgi hC ν x)
+  exact ⟨fun μ ν => by rw [einsteinTensor]; exact hmain.1 μ ν, hmain.2⟩
+
 end QIQTH.Curvature

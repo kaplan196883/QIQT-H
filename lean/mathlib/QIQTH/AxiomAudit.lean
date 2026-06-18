@@ -2863,6 +2863,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Curvature.div02_scalar_metric
 #print axioms QIQTH.Curvature.div02_add
 #print axioms QIQTH.Curvature.einstein_field_equation
+#print axioms QIQTH.Curvature.einstein_field_equation_real
+-- expected: standard only — THE EINSTEIN FIELD EQUATION with the ACTUAL Einstein tensor (Ric=ricci,
+-- R=scalarCurv), `bianchi` discharged by twice_contracted_bianchi. Only hypotheses = cited physics
+-- (post-crux Clausius relation + conservation). Phase 2 of the real derivation. Axiom-free.
 -- expected: standard only — THE EINSTEIN FIELD EQUATION as equation of state: from the post-crux Clausius
 -- relation a·T=R+f·g + conservation ∇^μ(aT)=0 + contracted Bianchi ∇^μR=½∂R + metric compat, derive
 -- a·T_{μν}=G_{μν}+Λg_{μν} with Λ=f+½R covariantly constant (cosmological constant = integration constant).
