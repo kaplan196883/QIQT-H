@@ -138,4 +138,38 @@ theorem clock_char_orthogonality {ω : ℂ} (hω : IsPrimitiveRoot ω m) (j k : 
         _ = w * ω ^ k.val := by rw [hwdef]; ring
         _ = ω ^ k.val := by rw [hw1, one_mul]
 
+/-- The `k`-th power of the clock is the diagonal of `k`-fold characters: `Z^k = diag(ω^{i·k})`. -/
+theorem clock_pow {ω : ℂ} (k : ℕ) :
+    (clock ω m) ^ k = diagonal (fun i : Fin m => ω ^ (i.val * k)) := by
+  rw [clock, diagonal_pow]
+  refine congrArg _ (funext fun i => ?_)
+  rw [Pi.pow_apply, ← pow_mul]
+
+/-- **The clock twirl is the dephasing channel.** Averaging `M` over conjugation by all clock powers
+projects `M` onto its diagonal: `(1/m) Σ_b Z^b M (Z^b)⋆ = diag(M)`. This is a **mixed-unitary channel**
+(uniform weights `1/m` over the clock unitaries `Z^b`), and it kills every off-diagonal entry by clock
+character orthogonality — the first half of the Weyl twirl (the shift twirl then mixes the diagonal to
+maximally mixed, completing the depolarization `ρ ↦ (Tr₂ρ)⊗(I/m)`). -/
+theorem clock_twirl {ω : ℂ} (hω : IsPrimitiveRoot ω m) (M : Matrix (Fin m) (Fin m) ℂ) :
+    ∑ b : Fin m, (m : ℂ)⁻¹ • ((clock ω m) ^ b.val * M * ((clock ω m) ^ b.val)ᴴ)
+      = diagonal (fun j => M j j) := by
+  have hm : (m : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr (NeZero.ne m)
+  ext j k
+  rw [Matrix.sum_apply, diagonal_apply]
+  -- each conjugated entry is `ω^{j·b}·M_{jk}·conj(ω^{k·b})`
+  have hentry : ∀ b : Fin m,
+      ((m : ℂ)⁻¹ • ((clock ω m) ^ b.val * M * ((clock ω m) ^ b.val)ᴴ)) j k
+        = (m : ℂ)⁻¹ * (M j k * (ω ^ (j.val * b.val) * (starRingEnd ℂ) (ω ^ (k.val * b.val)))) := by
+    intro b
+    rw [Matrix.smul_apply]
+    simp only [clock_pow]
+    rw [diagonal_conjTranspose, mul_diagonal, diagonal_mul, smul_eq_mul]
+    simp only [Pi.star_apply, starRingEnd_apply]
+    ring
+  simp_rw [hentry]
+  rw [← Finset.mul_sum, ← Finset.mul_sum, clock_char_orthogonality hω j k]
+  by_cases hjk : j = k
+  · subst hjk; rw [if_pos rfl, if_pos rfl]; field_simp
+  · rw [if_neg hjk, if_neg hjk, mul_zero, mul_zero]
+
 end QIQTH.Entropy

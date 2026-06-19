@@ -2220,6 +2220,13 @@ namespace QIQTH.AxiomAudit
 -- of unity that is 1 iff j=k (primitive-root injectivity pow_inj). Diagonal → m; off-diagonal → 0
 -- (geom_sum_root_eq_zero: m-th root ≠1 ⟹ geometric sum telescopes to 0). This is exactly what makes the
 -- clock twirl (1/m)Σ_b Z^b M (Z^b)⋆ project M onto its diagonal (dephasing) → toward partial-trace DPI.
+#print axioms QIQTH.Entropy.clock_pow
+#print axioms QIQTH.Entropy.clock_twirl
+-- expected: standard only — THE CLOCK TWIRL = DEPHASING CHANNEL: (1/m)Σ_b Z^b M (Z^b)⋆ = diag(M).
+-- clock_pow: Z^k = diag(ω^{i·k}). clock_twirl assembles it entrywise: (Z^b M (Z^b)⋆)_{jk} =
+-- ω^{j·b}M_{jk}conj(ω^{k·b}), summed over b and scaled by 1/m gives M_{jk}·[j=k] (clock_char_orthogonality
+-- (1/m)·m=1 on diagonal, 0 off) = diag(M). A genuine mixed-unitary channel (uniform 1/m weights over the
+-- clock unitaries Z^b) — the dephasing half of the Weyl twirl → ρ↦(Tr₂ρ)⊗(I/m) → partial-trace DPI. Axiom-free.
 #print axioms QIQTH.QuantumEntropy.relEntropy_eq_zero
 -- expected: standard only — ★★★★★ KLEIN'S EQUALITY CASE: D(ρ‖σ)=0 ⟹ ρ=σ for density matrices. The
 -- equality tracking of relEntropy_nonneg (doubly-stochastic/Jensen): KL(p‖r)=0⟹p=r (Gibbs, log x<x−1)
