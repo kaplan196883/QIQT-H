@@ -285,6 +285,17 @@ theorem einsteinForm_eq (gm : PseudoRiemannianMetric I M) (x : M)
     einsteinForm gm x ricciForm
       = ricciForm - ((1 / 2 : 𝕜) * scalarCurvature gm x ricciForm) • gm.g x := rfl
 
+/-- **The Einstein tensor is symmetric** — `G(v,w) = G(w,v)` — whenever the Ricci form is symmetric
+(it is, for the Levi-Civita connection). The metric term is symmetric by `gm.symm'`. -/
+theorem einsteinForm_symm (gm : PseudoRiemannianMetric I M) (x : M)
+    (ricciForm : TangentSpace I x →L[𝕜] TangentSpace I x →L[𝕜] 𝕜)
+    (hric : ∀ v w : TangentSpace I x, ricciForm v w = ricciForm w v)
+    (v w : TangentSpace I x) :
+    einsteinForm gm x ricciForm v w = einsteinForm gm x ricciForm w v := by
+  simp only [einsteinForm, ContinuousLinearMap.sub_apply, ContinuousLinearMap.smul_apply,
+    smul_eq_mul]
+  rw [hric v w, gm.symm' x v w]
+
 end Einstein
 
 end QIQTH.ManifoldGR
