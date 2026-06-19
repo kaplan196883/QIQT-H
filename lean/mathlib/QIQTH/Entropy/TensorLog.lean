@@ -123,4 +123,24 @@ theorem trace_mul_kron_one (ρ : Matrix (n × m) (n × m) ℂ) (M : Matrix n n �
   refine Finset.sum_congr rfl (fun i _ => ?_)
   rw [Finset.sum_comm]
 
+/-- **Partial trace over the first tensor factor** `Tr₁`: `(Tr₁ρ)_{ab} = Σ_i ρ_{(i,a)(i,b)}` — the
+reduced state on the second subsystem (the left-factor mirror of `partialTraceRight`). -/
+noncomputable def partialTraceLeft (ρ : Matrix (n × m) (n × m) ℂ) : Matrix m m ℂ :=
+  fun a b => ∑ i, ρ (i, a) (i, b)
+
+@[simp] lemma partialTraceLeft_apply (ρ : Matrix (n × m) (n × m) ℂ) (a b : m) :
+    partialTraceLeft ρ a b = ∑ i, ρ (i, a) (i, b) := rfl
+
+/-- **The left partial-trace adjoint**: `Tr(ρ · (I ⊗ N)) = Tr((Tr₁ρ) · N)`. The mirror of
+`trace_mul_kron_one`: a factor-2 observable sees only the reduced state `Tr₁ρ`. -/
+theorem trace_mul_one_kron (ρ : Matrix (n × m) (n × m) ℂ) (N : Matrix m m ℂ) :
+    (ρ * ((1 : Matrix n n ℂ) ⊗ₖ N)).trace = (partialTraceLeft ρ * N).trace := by
+  simp only [Matrix.trace, Matrix.diag_apply, Matrix.mul_apply, Fintype.sum_prod_type,
+    kronecker_apply, Matrix.one_apply, partialTraceLeft_apply, ite_mul, zero_mul, mul_ite, mul_zero,
+    Finset.sum_ite_irrel, Finset.sum_const_zero, Finset.sum_ite_eq, Finset.sum_ite_eq',
+    Finset.mem_univ, if_true, Finset.sum_mul, one_mul]
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl (fun a _ => ?_)
+  rw [Finset.sum_comm]
+
 end QIQTH.Entropy
