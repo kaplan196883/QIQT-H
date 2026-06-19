@@ -452,6 +452,19 @@ theorem relModFlow_fix_gns {ρ : Matrix n n ℂ} (hρ : ρ.PosDef) (t : ℝ) :
     exact h.symm
   rw [hce.eq, Matrix.mul_assoc, hinv, Matrix.mul_one]
 
+/-- **The factored form of the modular flow**: `Δ_{σ|ρ}^{it} = L_{σ^{it}} · R_{ρ^{−it}}` on
+    Hilbert–Schmidt space (left multiplication by `σ^{it}`, right multiplication by `ρ^{−it}`).
+    Since the generator splits as `L_{log σ} − R_{log ρ}` with commuting `L`, `R` parts. -/
+theorem relModFlow_eq_Lmul_Rmul (hσ : σ.PosDef) (hρ : ρ.PosDef) (t : ℝ) :
+    relModFlow hσ hρ t
+      = Lmul (NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hσ.1))
+        * Rmul (NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1))) := by
+  have hcomm : Commute (Lmul ((Complex.I * (t : ℂ)) • matLog hσ.1))
+      (Rmul (-((Complex.I * (t : ℂ)) • matLog hρ.1))) := Lmul_commute_Rmul _ _
+  rw [relModFlow, relModGen, smul_sub, ← Lmul_smul, ← Rmul_smul, sub_eq_add_neg, ← Rmul_neg,
+    NormedSpace.exp_add_of_commute_of_mem_ball (𝕂 := ℂ) hcomm (mem_expBall_C _) (mem_expBall_C _),
+    exp_Lmul, exp_Rmul]
+
 end ModularFlow
 
 end QIQTH.Araki
