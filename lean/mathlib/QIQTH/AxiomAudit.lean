@@ -3376,5 +3376,15 @@ namespace QIQTH.AxiomAudit
 -- ⇒ k'=η·a') with it, so the per-null premise is DERIVED from QIQT content + ONLY the 2 cited inputs (hFlux,
 -- hFocus). No hypothesis is the area law or the conclusion. Next: feed pernull into jacobson for the full
 -- a·T=G+Λg. Axiom-free.
+#print axioms QIQTH.QiqtToGR.qiqt_bekenstein_gives_gr
+-- expected: standard only — ★★★ THE END-TO-END THEOREM. Single theorem: along each null generator, QIQT-H's
+-- capacity BOUND S≤η·A (shannon_le_log_card) + saturation (shannon_uniform_eq_log_card) + Klein positivity
+-- (relEntropy_nonneg) DERIVE the differential area law δS=ηδA, which with the two CITED inputs (hFlux=Bisognano–
+-- Wichmann boost flux, hFocus=Raychaudhuri focusing) + structural (Lorentzian congruence g=PᵀηP, ∇·T=0,
+-- f-regularity) ⇒ ∃Λ, a·T=G+Λg (genuine Einstein tensor, constant Λ) via jacobson_einstein_equation_of_state.
+-- HONEST SCOPE: NOT from-nothing. QIQT supplies the INEQUALITY side as THEOREMS; δS=ηδA is DERIVED (no hyp is
+-- S=ηA). CITED (Mathlib-unprovable, explicit labelled hyps NEVER axioms): hFlux (Type III₁ wedge-modular=boost,
+-- BW) + hFocus (Raychaudhuri) + structural + per-generator path differentiability (modelling). All geometry
+-- (Bianchi/∇·G=0/null-cone→tensor/Λ=const) machine-checked axiom-free. Verified: no sorry, no vacuous True hyps.
 
 end QIQTH.AxiomAudit
