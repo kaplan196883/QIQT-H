@@ -2980,6 +2980,16 @@ namespace QIQTH.AxiomAudit
 -- nondegenerate metric (a bundle iso T≅T*), avoiding a finite-dimensionality commitment; the left
 -- inverse (raise_lower) follows from ♭-injectivity (nondeg'). lowerEquiv bundles it as a ≃L. This is
 -- the index-raising iso the Levi-Civita Koszul formula needs to solve g(∇_X Y,·)=ω for ∇_X Y. Axiom-free.
+#print axioms QIQTH.ManifoldGR.koszul_metric_compat
+#print axioms QIQTH.ManifoldGR.koszul_torsion_free
+-- expected: standard only — THE KOSZUL FORMULA + the two DEFINING Levi-Civita properties.
+-- koszul = the RHS of 2g(∇_X Y,Z) = X·g(Y,Z)+Y·g(X,Z)−Z·g(X,Y)+g([X,Y],Z)−g([Y,Z],X)+g([Z,X],Y).
+-- koszul_metric_compat: koszul X Y Z + koszul X Z Y = 2·X·g(Y,Z)  (≡ ∇g=0, metric compatibility).
+-- koszul_torsion_free:  koszul X Y Z − koszul Y X Z = 2·g([X,Y],Z) (≡ ∇_X Y−∇_Y X=[X,Y], torsion-free).
+-- Both are PURE ALGEBRA from metric symmetry + Lie-bracket antisymmetry — NO differentiability; the
+-- dirDeriv terms cancel/merge and the bracket terms cancel via mlieBracket_swap (linear_combination, since
+-- 𝕜 has no order so linarith is unavailable). The algebraic heart of Levi-Civita existence+uniqueness; the
+-- remaining step is dualising koszul to ∇_X Y via the musical ♯ (lowerEquiv) + the connection axioms. Axiom-free.
 
 #print axioms QIQTH.Unruh.sinh_cosh_diff_sq
 #print axioms QIQTH.Unruh.rindler_interval
