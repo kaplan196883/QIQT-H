@@ -54,4 +54,40 @@ theorem pd_covDerivVec (g gi : Point n → Fin n → Fin n → ℝ) (V : Point n
   intro σ _
   exact pd_mul _ _ μ x (PdiffAt_of_contDiff _ (hC ρ ν σ) μ x) (PdiffAt_of_contDiff _ (hVC σ) μ x)
 
+/-- **The Ricci identity** — the commutator of covariant derivatives is the Riemann curvature:
+`(∇_μ ∇_ν − ∇_ν ∇_μ) V^ρ = R^ρ_{σμν} V^σ`. The geometric heart of Raychaudhuri focusing. -/
+theorem ricci_identity (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (V : Point n → Fin n → ℝ)
+    (hVC : ∀ μ, ContDiff ℝ ⊤ (fun y => V y μ))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (μ ν ρ : Fin n) (x : Point n) :
+    covDeriv2Vec g gi V μ ν ρ x - covDeriv2Vec g gi V ν μ ρ x
+      = ∑ σ, riemann g gi ρ σ μ ν x * V x σ := by
+  rw [covDeriv2Vec, covDeriv2Vec, pd_covDerivVec g gi V hVC hC μ ν ρ x,
+      pd_covDerivVec g gi V hVC hC ν μ ρ x, pd_comm (fun z => V z ρ) ν μ x (hVC ρ)]
+  simp only [covDerivVec, riemann, Finset.mul_sum, mul_add, sub_mul, add_mul,
+    Finset.sum_add_distrib, Finset.sum_sub_distrib]
+  -- geodesic-direction Γ terms cancel by torsion-freeness `Γ^σ_νμ = Γ^σ_μν`
+  have hF1 : (∑ x_1, christoffel g gi x_1 ν μ x * pd (fun z => V z ρ) x_1 x)
+           = (∑ x_1, christoffel g gi x_1 μ ν x * pd (fun z => V z ρ) x_1 x) :=
+    Finset.sum_congr rfl (fun x_1 _ => by rw [christoffel_symm g gi hsymm x_1 ν μ x])
+  have hF2 : (∑ x_1, ∑ i, christoffel g gi x_1 ν μ x * (christoffel g gi ρ x_1 i x * V x i))
+           = (∑ x_1, ∑ i, christoffel g gi x_1 μ ν x * (christoffel g gi ρ x_1 i x * V x i)) :=
+    Finset.sum_congr rfl (fun x_1 _ => Finset.sum_congr rfl (fun i _ => by
+      rw [christoffel_symm g gi hsymm x_1 ν μ x]))
+  -- the `ΓΓ` curvature terms reassemble into the Riemann quadratic part (reindex via `sum_comm`)
+  have h5 : (∑ x_1, ∑ i, christoffel g gi ρ μ x_1 x * (christoffel g gi x_1 ν i x * V x i))
+          = (∑ x_1, (∑ x_2, christoffel g gi ρ μ x_2 x * christoffel g gi x_2 ν x_1 x) * V x x_1) := by
+    rw [Finset.sum_comm]
+    exact Finset.sum_congr rfl (fun i _ => by
+      rw [Finset.sum_mul]; exact Finset.sum_congr rfl (fun x_1 _ => by ring))
+  have h12 : (∑ x_1, ∑ i, christoffel g gi ρ ν x_1 x * (christoffel g gi x_1 μ i x * V x i))
+           = (∑ x_1, (∑ x_2, christoffel g gi ρ ν x_2 x * christoffel g gi x_2 μ x_1 x) * V x x_1) := by
+    rw [Finset.sum_comm]
+    exact Finset.sum_congr rfl (fun i _ => by
+      rw [Finset.sum_mul]; exact Finset.sum_congr rfl (fun x_1 _ => by ring))
+  rw [hF1, hF2, h5, h12]
+  ring
+
 end QIQTH.Curvature
