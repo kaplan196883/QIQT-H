@@ -2981,11 +2981,13 @@ namespace QIQTH.AxiomAudit
 -- constant Λ. All geometry discharged internally; cited residual = area law (gap 1), Clausius, the
 -- free-field correlator form behind Unruh, and the integral matching bundled into `pernull`. Axiom-free.
 
+#print axioms QIQTH.ManifoldGR.mpullbackWithin_extChartAt_symm_apply
 #print axioms QIQTH.ManifoldGR.mpullbackWithin_extChartAt_symm_self
--- expected: standard only — abstract-manifold thread (gap 3). The field-side base-point chart
--- identification: the chart pullback of a vector field X (the model representative used inside
--- Mathlib's mlieBracket I X Y x) evaluates to X x at the chart point, since (de⁻¹)⁻¹ = id there.
--- Field analogue of dirDeriv_eq_chart; a base-point identification the manifold-commutator assembly
--- rests on. Axiom-free.
+-- expected: standard only — abstract-manifold thread (gap 3). Field-side chart identification: the
+-- chart pullback of a vector field X (the model representative used inside Mathlib's mlieBracket
+-- I X Y x) evaluated at chart point e z equals the pushforward (de)_z (X z). _apply is the
+-- NEIGHBORHOOD version (any z ∈ e.source, via (de⁻¹)⁻¹ = de from the chart-derivative composition
+-- identities) — what the SECOND directional derivative in the commutator assembly needs; _self is the
+-- base-point corollary (de_x = id ⟹ = X x). Field analogues of dirDeriv_eq_chart. Axiom-free.
 
 end QIQTH.AxiomAudit

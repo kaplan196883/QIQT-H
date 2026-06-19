@@ -164,16 +164,33 @@ theorem dirDeriv_eventuallyEq_chart (f : M → 𝕜) (Y : Π z : M, TangentSpace
   filter_upwards [extChartAt_source_mem_nhds (I := I) x] with z hz
   exact dirDeriv_eq_chartAt f Y x z hz (hf z)
 
-/-- **Field-side chart identification at the base point.** The model-space representative of a vector
-field `X` used inside `mlieBracket I X Y x` — namely its chart pullback `mpullbackWithin 𝓘 I e⁻¹ X
-(range I)` (with `e = extChartAt I x`) — takes the value `X x` at the chart point `e x`. This is the
-field-side analogue of the function-side `dirDeriv_eq_chart`, and is one of the base-point
-identifications the manifold-commutator assembly rests on. It holds because the inverse of `de⁻¹` at
-the chart point is the identity (`mfderivWithin_extChartAt_symm_inverse_apply`). -/
+/-- **Field-side chart identification (neighborhood version).** With `e = extChartAt I x`, the
+model-space representative of a vector field `X` used inside `mlieBracket I X Y x` — its chart
+pullback `mpullbackWithin 𝓘 I e⁻¹ X (range I)` — evaluated at any chart point `e z` (`z ∈ e.source`),
+equals the pushforward `(de)_z (X z)`. This is the field-side analogue of `dirDeriv_eq_chart`, valid
+on a whole neighborhood (not just the base point), which is what the *second* directional derivative
+in the commutator assembly needs. The proof identifies `(de⁻¹)⁻¹ = de` via the chart-derivative
+composition identities (`ContinuousLinearMap.inverse_eq`). -/
+theorem mpullbackWithin_extChartAt_symm_apply (X : Π z : M, TangentSpace I z) (x z : M)
+    (hz : z ∈ (extChartAt I x).source) :
+    mpullbackWithin 𝓘(𝕜, E) I (extChartAt I x).symm X (Set.range I) (extChartAt I x z)
+      = mfderiv I 𝓘(𝕜, E) (extChartAt I x) z (X z) := by
+  have hinv :
+      (mfderivWithin 𝓘(𝕜, E) I (extChartAt I x).symm (Set.range I) (extChartAt I x z)).inverse
+        = mfderiv I 𝓘(𝕜, E) (extChartAt I x) z :=
+    ContinuousLinearMap.inverse_eq
+      (mfderivWithin_extChartAt_symm_comp_mfderiv_extChartAt' hz)
+      (mfderiv_extChartAt_comp_mfderivWithin_extChartAt_symm' hz)
+  rw [VectorField.mpullbackWithin_apply, (extChartAt I x).left_inv hz]
+  exact DFunLike.congr_fun hinv (X z)
+
+/-- **Field-side chart identification at the base point** (corollary of the neighborhood version).
+At `z = x` the pushforward `(de)_x` is the identity (`mfderiv_extChartAt_self`), so the chart pullback
+of `X` evaluates to `X x` at the chart point `e x`. -/
 theorem mpullbackWithin_extChartAt_symm_self (X : Π z : M, TangentSpace I z) (x : M) :
     mpullbackWithin 𝓘(𝕜, E) I (extChartAt I x).symm X (Set.range I) (extChartAt I x x) = X x := by
-  rw [VectorField.mpullbackWithin_apply, mfderivWithin_extChartAt_symm_inverse_apply,
-    (extChartAt I x).left_inv (mem_extChartAt_source x)]
+  rw [mpullbackWithin_extChartAt_symm_apply X x x (mem_extChartAt_source x), mfderiv_extChartAt_self]
+  rfl
 
 end GeneralManifold
 
