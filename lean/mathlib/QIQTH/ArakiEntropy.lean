@@ -698,6 +698,30 @@ theorem modAut_conjTranspose (hρ : ρ.PosDef) (t : ℝ) (B : Matrix n n ℂ) :
   simp only [modAut, Complex.ofReal_zero, mul_zero, zero_smul, neg_zero, NormedSpace.exp_zero,
     Matrix.one_mul, Matrix.mul_one]
 
+/-- **The one-parameter group law**: `σ_{s+t} = σ_s ∘ σ_t`. -/
+theorem modAut_add (hρ : ρ.PosDef) (s t : ℝ) (B : Matrix n n ℂ) :
+    modAut hρ (s + t) B = modAut hρ s (modAut hρ t B) := by
+  have hcomb : ∀ a b : ℂ, NormedSpace.exp (a • matLog hρ.1) * NormedSpace.exp (b • matLog hρ.1)
+      = NormedSpace.exp ((a + b) • matLog hρ.1) := fun a b => by
+    have h := NormedSpace.exp_add_of_commute_of_mem_ball (𝕂 := ℂ)
+      (((Commute.refl (matLog hρ.1)).smul_left a).smul_right b)
+      (mem_expBall_C (a • matLog hρ.1)) (mem_expBall_C (b • matLog hρ.1))
+    rw [← add_smul] at h
+    exact h.symm
+  have hfront : NormedSpace.exp ((Complex.I * (s : ℂ)) • matLog hρ.1)
+      * NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1)
+      = NormedSpace.exp ((Complex.I * ((s + t : ℝ) : ℂ)) • matLog hρ.1) := by
+    rw [hcomb, show Complex.I * (s : ℂ) + Complex.I * (t : ℂ) = Complex.I * ((s + t : ℝ) : ℂ) by
+      push_cast; ring]
+  have hback : NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1))
+      * NormedSpace.exp (-((Complex.I * (s : ℂ)) • matLog hρ.1))
+      = NormedSpace.exp (-((Complex.I * ((s + t : ℝ) : ℂ)) • matLog hρ.1)) := by
+    rw [← neg_smul, ← neg_smul, hcomb,
+      show -(Complex.I * (t : ℂ)) + -(Complex.I * (s : ℂ)) = -(Complex.I * ((s + t : ℝ) : ℂ)) by
+        push_cast; ring, neg_smul]
+  simp only [modAut, Matrix.mul_assoc]
+  rw [hback, ← Matrix.mul_assoc (NormedSpace.exp ((Complex.I * (s : ℂ)) • matLog hρ.1)), hfront]
+
 end ModularFlow
 
 end QIQTH.Araki
