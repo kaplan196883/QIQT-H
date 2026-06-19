@@ -2466,6 +2466,7 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Araki.modAut_add
 #print axioms QIQTH.Araki.modAut_fix
 #print axioms QIQTH.Araki.modAut_state_invariant
+#print axioms QIQTH.Araki.relEntropy_modAut_invariant
 #print axioms QIQTH.Araki.relEntropy_eq_neg_modGen
 -- expected (ALL): standard only [propext, Classical.choice, Quot.sound]. Δ^{it} one-param unitary group
 -- + GNS-invariance + Δ^{it}=L_{σ^{it}}R_{ρ^{-it}} + Tomita σ_t(M)=M / σ_t(M')=M' / JMJ=M' (J antiunitary)

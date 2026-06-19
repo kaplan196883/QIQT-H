@@ -663,7 +663,7 @@ theorem kms_condition (hρ : ρ.PosDef) (A B : Matrix n n ℂ) :
 
 /-! ### The modular automorphism group `σ_t` on the matrix algebra -/
 
-private theorem expIt_mul_expNegIt (hρ : ρ.PosDef) (t : ℝ) :
+theorem expIt_mul_expNegIt (hρ : ρ.PosDef) (t : ℝ) :
     NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1)
       * NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1)) = 1 := by
   have h := NormedSpace.exp_add_of_commute_of_mem_ball (𝕂 := ℂ)
@@ -672,7 +672,7 @@ private theorem expIt_mul_expNegIt (hρ : ρ.PosDef) (t : ℝ) :
   rw [add_neg_cancel, NormedSpace.exp_zero] at h
   exact h.symm
 
-private theorem expNegIt_mul_expIt (hρ : ρ.PosDef) (t : ℝ) :
+theorem expNegIt_mul_expIt (hρ : ρ.PosDef) (t : ℝ) :
     NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1))
       * NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1) = 1 := by
   have h := NormedSpace.exp_add_of_commute_of_mem_ball (𝕂 := ℂ)
@@ -681,7 +681,7 @@ private theorem expNegIt_mul_expIt (hρ : ρ.PosDef) (t : ℝ) :
   rw [neg_add_cancel, NormedSpace.exp_zero] at h
   exact h.symm
 
-private theorem conjTranspose_expIt (hρ : ρ.PosDef) (t : ℝ) :
+theorem conjTranspose_expIt (hρ : ρ.PosDef) (t : ℝ) :
     (NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1))ᴴ
       = NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1)) := by
   rw [← Matrix.star_eq_conjTranspose, NormedSpace.star_exp, star_smul,
@@ -690,7 +690,7 @@ private theorem conjTranspose_expIt (hρ : ρ.PosDef) (t : ℝ) :
     show star (Complex.I * (t : ℂ)) = -(Complex.I * (t : ℂ)) by
       simp [Complex.conj_I, Complex.conj_ofReal], neg_smul]
 
-private theorem conjTranspose_expNegIt (hρ : ρ.PosDef) (t : ℝ) :
+theorem conjTranspose_expNegIt (hρ : ρ.PosDef) (t : ℝ) :
     (NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1)))ᴴ
       = NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1) := by
   rw [← conjTranspose_expIt hρ t, Matrix.conjTranspose_conjTranspose]
