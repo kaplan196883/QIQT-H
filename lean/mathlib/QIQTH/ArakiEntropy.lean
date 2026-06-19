@@ -421,6 +421,37 @@ theorem relModFlow_apply (hσ : σ.PosDef) (hρ : ρ.PosDef) (t : ℝ) (A : Matr
     exp_Lmul, exp_Rmul, ContinuousLinearMap.mul_apply, Lmul_apply, Rmul_apply, toMat_ofMat,
     toMat_ofMat, Matrix.mul_assoc]
 
+/-- **The modular flow fixes the GNS vector** — the defining Tomita–Takesaki property of the cyclic &
+    separating vector: for the standard modular operator `Δ_ρ = Δ_{ρ|ρ}`, `Δ_ρ^{it} ξ_ρ = ξ_ρ` with the
+    GNS vector `ξ_ρ = ρ^½`.  Equivalently, the state `ρ` is invariant under its own modular automorphism
+    group (`ρ` is a KMS state for `σ_t`).  Since `Δ_ρ^{it}` acts by `ρ^{it}·ρ^½·ρ^{−it}` and `ρ^{it}`,
+    `ρ^½` are commuting functions of `ρ`, the conjugation is trivial. -/
+theorem relModFlow_fix_gns {ρ : Matrix n n ℂ} (hρ : ρ.PosDef) (t : ℝ) :
+    relModFlow hρ hρ t (ofMat (CFC.sqrt ρ)) = ofMat (CFC.sqrt ρ) := by
+  have hsa : IsSelfAdjoint ρ := hρ.1
+  have hρ0 : (0 : Matrix n n ℂ) ≤ ρ := Matrix.nonneg_iff_posSemidef.mpr hρ.posSemidef
+  have h0 : Commute ρ (CFC.sqrt ρ) := by
+    have hsq : CFC.sqrt ρ * CFC.sqrt ρ = ρ := CFC.sqrt_mul_sqrt_self ρ hρ0
+    nth_rewrite 1 [← hsq]
+    exact (Commute.refl (CFC.sqrt ρ)).mul_left (Commute.refl (CFC.sqrt ρ))
+  have hc : Commute (matLog hρ.1) (CFC.sqrt ρ) := by
+    have hlog : matLog hρ.1 = cfc Real.log ρ := (hρ.1.cfc_eq Real.log).symm
+    rw [hlog]
+    exact hsa.commute_cfc h0 Real.log
+  rw [relModFlow_apply]
+  congr 1
+  have hce : Commute (NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1)) (CFC.sqrt ρ) :=
+    (hc.smul_left _).exp_left
+  have hinv : NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1)
+      * NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1)) = 1 := by
+    have h := NormedSpace.exp_add_of_commute_of_mem_ball (𝕂 := ℂ)
+      ((Commute.refl ((Complex.I * (t : ℂ)) • matLog hρ.1)).neg_right)
+      (mem_expBall_C ((Complex.I * (t : ℂ)) • matLog hρ.1))
+      (mem_expBall_C (-((Complex.I * (t : ℂ)) • matLog hρ.1)))
+    rw [add_neg_cancel, NormedSpace.exp_zero] at h
+    exact h.symm
+  rw [hce.eq, Matrix.mul_assoc, hinv, Matrix.mul_one]
+
 end ModularFlow
 
 end QIQTH.Araki
