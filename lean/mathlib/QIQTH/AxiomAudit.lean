@@ -2464,6 +2464,10 @@ namespace QIQTH.AxiomAudit
 -- expected (ALL): standard only [propext, Classical.choice, Quot.sound]. Δ^{it} one-param unitary group
 -- + GNS-invariance + Δ^{it}=L_{σ^{it}}R_{ρ^{-it}} + Tomita σ_t(M)=M / σ_t(M')=M' / JMJ=M' (J antiunitary)
 -- + Connes cocycle (Dσ:Dρ)_t + chain rule + KMS + σ_t *-automorphism group + S(ρ‖σ)=−⟪ξ_ρ,(logΔ)ξ_ρ⟫.
+#print axioms QIQTH.Araki.relEntropy_add_vonNeumann
+#print axioms QIQTH.Araki.vonNeumann_le_modEnergy
+-- expected: standard only — FIRST LAW: S(ρ‖σ)+S(ρ)=⟪K_σ⟫_ρ (modular energy, K_σ=−logσ) and the
+-- first-law inequality S(ρ)≤⟪K_σ⟫_ρ (von Neumann entropy ≤ modular energy, = at ρ=σ). Axiom-free.
 
 -- MODULAR RELATIVE ENTROPY (Phase B): the continuum one-particle (standard-subspace) relative-entropy
 -- functional, built from the bounded RvD operator R=P+Q (NO unbounded log Δ).

@@ -734,6 +734,29 @@ theorem relEntropy_eq_neg_modGen (hσ : σ.PosDef) (hρ : ρ.PosDef) :
   unfold arakiEntropy relModGen
   rw [log_relMod hσ hρ]
 
+/-- **The first-law decomposition:** `S(ρ‖σ) + S(ρ) = ⟪K_σ⟫_ρ`, where `S(ρ)` is the von Neumann
+    entropy, `K_σ = −log σ` is the modular Hamiltonian of `σ`, and `⟪K_σ⟫_ρ = tr(ρ K_σ) =
+    −tr(ρ log σ)`.  Equivalently `S(ρ‖σ) = Δ⟪K_σ⟫ − ΔS` (modular energy change minus entropy change);
+    positivity of `S(ρ‖σ)` then yields the **first-law inequality** `ΔS ≤ Δ⟪K⟫`, saturated (the
+    first law `δS = δ⟪K⟫`) to first order since `S(ρ‖σ)` is second-order in `ρ − σ`. -/
+theorem relEntropy_add_vonNeumann (hσ : σ.PosDef) (hρ : ρ.PosDef)
+    (hd : QIQTH.QuantumEntropy.IsDensity ρ) :
+    QIQTH.QuantumEntropy.relEntropy hρ.1 hσ.1 + QIQTH.QuantumEntropy.vonNeumannEntropy hd
+      = -(ρ * matLog hσ.1).trace.re := by
+  rw [QIQTH.QuantumEntropy.relEntropy, QIQTH.QuantumEntropy.vonNeumannEntropy_eq_neg_trace hρ hd,
+    Matrix.mul_sub, Matrix.trace_sub, Complex.sub_re]
+  ring
+
+/-- **The first-law inequality:** `S(ρ) ≤ ⟪K_σ⟫_ρ` — the von Neumann entropy is bounded by the modular
+    energy `tr(ρ K_σ) = −tr(ρ log σ)`, with equality iff `ρ = σ`.  Immediate from the decomposition
+    `S(ρ‖σ) + S(ρ) = ⟪K_σ⟫_ρ` and the positivity of the relative entropy (Klein). -/
+theorem vonNeumann_le_modEnergy (hσ : σ.PosDef) (hρ : ρ.PosDef)
+    (hd : QIQTH.QuantumEntropy.IsDensity ρ) (hρ1 : ρ.trace = 1) (hσ1 : σ.trace = 1) :
+    QIQTH.QuantumEntropy.vonNeumannEntropy hd ≤ -(ρ * matLog hσ.1).trace.re := by
+  have h := relEntropy_add_vonNeumann hσ hρ hd
+  have hpos := QIQTH.QuantumEntropy.relEntropy_nonneg hρ hσ hρ1 hσ1
+  linarith
+
 end ModularFlow
 
 end QIQTH.Araki
