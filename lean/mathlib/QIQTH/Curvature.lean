@@ -162,6 +162,38 @@ theorem christoffel_symm (g gi : Point n → Fin n → Fin n → ℝ)
   have h3 : (fun y => g y ν ρ) = (fun y => g y ρ ν) := funext fun y => hsymm y ν ρ
   rw [h3]; ring
 
+/-- **Contracted Christoffel identity** `Γ^b_{ab} = ½ g^{bα} ∂_a g_{bα}` (summed over `b, α`).  The two
+    "extra" derivative terms in `Γ^b_{ab}` cancel under the `b ↔ α` relabelling (using metric and
+    inverse-metric symmetry), leaving only the `∂_a g` trace.  This contracted connection is the object
+    `∂_a log√|g|` whose closedness `∂_c(Γ^b_{ab}) = ∂_a(Γ^b_{cb})` underlies Ricci symmetry. -/
+theorem christoffel_contracted (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (a : Fin n) (x : Point n) :
+    (∑ b, christoffel g gi b a b x)
+      = (1 / 2) * ∑ b, ∑ α, gi x b α * pd (fun y => g y α b) a x := by
+  have hS : (∑ b, ∑ α, gi x b α * pd (fun y => g y α a) b x)
+      = (∑ b, ∑ α, gi x b α * pd (fun y => g y a b) α x) := by
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl (fun i _ => Finset.sum_congr rfl (fun j _ => ?_))
+    rw [hsymm_gi x j i, show (fun y => g y i a) = (fun y => g y a i) from
+      funext (fun y => hsymm y i a)]
+  simp only [christoffel]
+  rw [← Finset.mul_sum]
+  congr 1
+  have hsplit : ∀ b, (∑ α, gi x b α * (pd (fun y => g y α b) a x + pd (fun y => g y α a) b x
+        - pd (fun y => g y a b) α x))
+      = (∑ α, gi x b α * pd (fun y => g y α b) a x)
+        + (∑ α, gi x b α * (pd (fun y => g y α a) b x - pd (fun y => g y a b) α x)) := fun b => by
+    rw [← Finset.sum_add_distrib]; exact Finset.sum_congr rfl (fun α _ => by ring)
+  have hzero : (∑ b, ∑ α, gi x b α * (pd (fun y => g y α a) b x - pd (fun y => g y a b) α x)) = 0 := by
+    rw [show (∑ b, ∑ α, gi x b α * (pd (fun y => g y α a) b x - pd (fun y => g y a b) α x))
+        = (∑ b, ∑ α, gi x b α * pd (fun y => g y α a) b x)
+          - (∑ b, ∑ α, gi x b α * pd (fun y => g y a b) α x) from by
+        rw [← Finset.sum_sub_distrib]; refine Finset.sum_congr rfl (fun b _ => ?_)
+        rw [← Finset.sum_sub_distrib]; exact Finset.sum_congr rfl (fun α _ => by ring),
+      hS, sub_self]
+  rw [Finset.sum_congr rfl (fun b _ => hsplit b), Finset.sum_add_distrib, hzero, add_zero]
+
 /-- **Riemann curvature tensor** (type (1,3)),
     `R^ρ_{σμν} = ∂_μ Γ^ρ_{νσ} − ∂_ν Γ^ρ_{μσ} + Σ_λ (Γ^ρ_{μλ} Γ^λ_{νσ} − Γ^ρ_{νλ} Γ^λ_{μσ})`. -/
 noncomputable def riemann (g gi : Point n → Fin n → Fin n → ℝ)

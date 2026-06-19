@@ -2949,6 +2949,10 @@ namespace QIQTH.AxiomAudit
 -- structural identities that need no analytic input. (Bianchi/conservation = later, need differentiability.)
 #print axioms QIQTH.Curvature.christoffel_symm
 -- expected: standard only — Γ^μ_{νρ}=Γ^μ_{ρν} (torsion-free), from the definition + metric symmetry.
+#print axioms QIQTH.Curvature.christoffel_contracted
+-- expected: standard only — CONTRACTED CHRISTOFFEL Γ^b_{ab}=½ g^{bα}∂_a g_{bα}: the two extra ∂g terms
+-- cancel under b↔α relabelling (metric + inverse-metric symmetry, via Finset.sum_comm). This contracted
+-- connection (=∂_a log√|g|) is the object whose closedness ∂_c(Γ^b_{ab})=∂_a(Γ^b_{cb}) underlies Ricci symmetry.
 #print axioms QIQTH.Curvature.riemann_antisymm
 -- expected: standard only — R^ρ_{σμν}=−R^ρ_{σνμ} (antisymmetry in the last two indices).
 #print axioms QIQTH.Curvature.covDeriv02_symm
