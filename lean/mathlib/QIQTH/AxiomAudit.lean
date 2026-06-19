@@ -2255,6 +2255,11 @@ namespace QIQTH.AxiomAudit
 -- Σ_{a,b} (1/m²)·W_{a,b} M W_{a,b}⋆ = (Tr M/m)·I, W_{a,b}=X^aZ^b (uniform 1/m² weights). Same content as
 -- weyl_depolarization with the inner clock average pulled out of the shift conjugation
 -- ((X^aZ^b)⋆=Z^b⋆X^a⋆, X^a·(–)·X^a⋆ through the b-sum). Feeds dpi_mixed_unitary. Axiom-free.
+#print axioms QIQTH.Entropy.one_kron_mem_unitary
+-- expected: standard only — I_n⊗W is UNITARY when W is (PartialTraceDPI.lean) — the conjugating unitaries
+-- of the factor-2 Weyl twirl. Via Kronecker mixed-product (I⊗W)⋆(I⊗W)=(I⋆I)⊗(W⋆W)=I⊗I=I
+-- (conjTranspose_kronecker + ← mul_kronecker_mul + one_kronecker_one). First brick of the factor-2 lift
+-- ρ↦(Tr₂ρ)⊗(I/m) toward partial-trace DPI D(Tr₂ρ‖Tr₂σ)≤D(ρ‖σ) (Carlen §5.7). Axiom-free.
 #print axioms QIQTH.QuantumEntropy.relEntropy_eq_zero
 -- expected: standard only — ★★★★★ KLEIN'S EQUALITY CASE: D(ρ‖σ)=0 ⟹ ρ=σ for density matrices. The
 -- equality tracking of relEntropy_nonneg (doubly-stochastic/Jensen): KL(p‖r)=0⟹p=r (Gibbs, log x<x−1)
