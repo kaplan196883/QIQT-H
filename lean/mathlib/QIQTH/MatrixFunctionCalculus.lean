@@ -123,3 +123,34 @@ theorem hasDerivAt_trace_matrixPow_at (A H : Matrix n n ℂ) (m : ℕ) (t₀ : �
     rw [add_assoc, ← add_smul, show t₀ + (t - t₀) = t from by ring]
   rw [Function.comp_def] at h
   rwa [hfun] at h
+
+/-- **Frobenius entrywise bound** `‖M i j‖ ≤ ‖M‖` — each entry is dominated by the Frobenius norm
+    `‖M‖ = (∑ ‖M i j‖²)^{1/2}` (a single summand under the square root).  Mathlib has this for the
+    entrywise *sup* norm but not (by a named lemma) for Frobenius. -/
+theorem norm_entry_le_frobenius (M : Matrix n n ℂ) (i j : n) : ‖M i j‖ ≤ ‖M‖ := by
+  rw [frobenius_norm_def]
+  have h1 : ‖M i j‖ ^ (2 : ℝ) ≤ ∑ i', ∑ j', ‖M i' j'‖ ^ (2 : ℝ) := by
+    calc ‖M i j‖ ^ (2 : ℝ)
+        ≤ ∑ j', ‖M i j'‖ ^ (2 : ℝ) :=
+          Finset.single_le_sum (f := fun j' => ‖M i j'‖ ^ (2 : ℝ))
+            (fun k _ => Real.rpow_nonneg (norm_nonneg _) 2) (Finset.mem_univ j)
+      _ ≤ ∑ i', ∑ j', ‖M i' j'‖ ^ (2 : ℝ) :=
+          Finset.single_le_sum (f := fun i' => ∑ j', ‖M i' j'‖ ^ (2 : ℝ))
+            (fun k _ => Finset.sum_nonneg fun _ _ => Real.rpow_nonneg (norm_nonneg _) 2)
+            (Finset.mem_univ i)
+  calc ‖M i j‖
+      = (‖M i j‖ ^ (2 : ℝ)) ^ (1 / 2 : ℝ) := by
+        rw [← Real.rpow_mul (norm_nonneg _)]; norm_num
+    _ ≤ (∑ i', ∑ j', ‖M i' j'‖ ^ (2 : ℝ)) ^ (1 / 2 : ℝ) :=
+        Real.rpow_le_rpow (Real.rpow_nonneg (norm_nonneg _) 2) h1 (by norm_num)
+
+/-- **Trace norm bound** `‖Tr M‖ ≤ (card n) · ‖M‖` (Frobenius) — the trace is a sum of `card n`
+    diagonal entries, each bounded by `‖M‖`.  The finite constant the entire-function summability needs. -/
+theorem norm_trace_le_card (M : Matrix n n ℂ) :
+    ‖M.trace‖ ≤ (Fintype.card n : ℝ) * ‖M‖ := by
+  calc ‖M.trace‖
+      = ‖∑ i, M i i‖ := by rw [Matrix.trace]; rfl
+    _ ≤ ∑ i, ‖M i i‖ := norm_sum_le _ _
+    _ ≤ ∑ _i, ‖M‖ := Finset.sum_le_sum fun i _ => norm_entry_le_frobenius M i i
+    _ = (Fintype.card n : ℝ) * ‖M‖ := by
+        rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]

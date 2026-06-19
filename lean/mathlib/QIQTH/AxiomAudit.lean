@@ -3334,5 +3334,11 @@ namespace QIQTH.AxiomAudit
 -- = m·Tr((A+t₀·H)^{m-1} H) — holds everywhere, not just at 0, via the affine shift t↦t−t₀
 -- (HasDerivAt.scomp_of_eq) reducing to the base-0 rule with A↦A+t₀·H. The form the entire-function
 -- (power-series exp) case consumes via hasDerivAt_tsum. Axiom-free.
+#print axioms QIQTH.MatrixCalculus.norm_entry_le_frobenius
+#print axioms QIQTH.MatrixCalculus.norm_trace_le_card
+-- expected: standard only — Frobenius bounds (the summability input for the entire-function trace-derivative).
+-- norm_entry_le_frobenius: ‖M i j‖≤‖M‖ (entry ≤ Frobenius norm, single summand under the sqrt via
+-- frobenius_norm_def + Real.rpow_le_rpow; Mathlib has this only for the sup norm). norm_trace_le_card:
+-- ‖Tr M‖≤(card n)·‖M‖ (trace = sum of card diagonal entries, each ≤‖M‖). Axiom-free.
 
 end QIQTH.AxiomAudit
