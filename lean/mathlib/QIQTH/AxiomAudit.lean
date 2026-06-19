@@ -2996,6 +2996,14 @@ namespace QIQTH.AxiomAudit
 -- (hence define ∇_X Y via ♯). dirDeriv terms split (additive in function via dirDeriv_add_fun, in field via
 -- dirDeriv_add_vectorField); bracket terms via mlieBracket_add_left/right ([CompleteSpace E]); metric
 -- bilinear. Needs [IsManifold I 2 M] + differentiability of the metric-paired functions/fields. Axiom-free.
+#print axioms QIQTH.ManifoldGR.dirDeriv_mul
+#print axioms QIQTH.ManifoldGR.koszul_smul_right_Z
+-- expected: standard only — HOMOGENEITY of koszul in Z (koszul X Y (f•Z) = f·koszul X Y Z); with
+-- additivity this is the FULL C∞-LINEARITY making koszul a covector in Z — hence ∇_X Y := ♯(½·koszul).
+-- The Leibniz cross-terms (X·f)·g(Y,Z), (Y·f)·g(X,Z) (from dirDeriv_mul, product rule via HasMFDerivAt.mul)
+-- cancel EXACTLY against −(X·f)·g(Z,Y), −(Y·f)·g(Z,X) (from mlieBracket_smul_left/right) by METRIC SYMMETRY
+-- — the cancellation that makes Levi-Civita well-defined. Helpers: dirDeriv_mul (CLM-apply closed by defeq
+-- rfl past the TangentSpace 𝓘(𝕜) codomain synonym), dirDeriv_smul_field. linear_combination (𝕜 unordered).
 
 #print axioms QIQTH.Unruh.sinh_cosh_diff_sq
 #print axioms QIQTH.Unruh.rindler_interval

@@ -118,4 +118,61 @@ theorem koszul_add_right_Z [CompleteSpace E] [IsManifold I 2 M]
     Pi.add_apply, map_add, ContinuousLinearMap.add_apply]
   ring
 
+/-- **Product (Leibniz) rule for the directional derivative** of a product of scalar functions:
+`W·(f·h) = f·(W·h) + (W·f)·h`. From the manifold product rule `HasMFDerivAt.mul` (whose derivative
+is `f x • dh + h x • df` with ordinary smul into `𝕜`, avoiding the opposite-action form). -/
+theorem dirDeriv_mul (W : Π z : M, TangentSpace I z) (f h : M → 𝕜) (x : M)
+    (hf : MDifferentiableAt I 𝓘(𝕜) f x) (hh : MDifferentiableAt I 𝓘(𝕜) h x) :
+    dirDeriv I W (f * h) x = f x * dirDeriv I W h x + dirDeriv I W f x * h x := by
+  have key : dirDeriv I W (f * h) x = f x • dirDeriv I W h x + h x • dirDeriv I W f x := by
+    show mfderiv I 𝓘(𝕜) (f * h) x (W x) = _
+    rw [(hf.hasMFDerivAt.mul hh.hasMFDerivAt).mfderiv]
+    rfl
+  rw [key]; simp only [smul_eq_mul]; ring
+
+/-- The directional derivative is homogeneous in the field under a scalar function:
+`(f•Z)·h = f·(Z·h)`. -/
+theorem dirDeriv_smul_field (Z : Π z : M, TangentSpace I z) (f : M → 𝕜) (h : M → 𝕜) (x : M) :
+    dirDeriv I (f • Z) h x = f x • dirDeriv I Z h x := by
+  show mfderiv I 𝓘(𝕜) h x ((f • Z) x) = f x • mfderiv I 𝓘(𝕜) h x (Z x)
+  exact map_smul (mfderiv I 𝓘(𝕜) h x) (f x) (Z x)
+
+/-- **Homogeneity of `koszul` in the `Z` slot** under a scalar function: `koszul X Y (f•Z) =
+f·koszul X Y Z`. Together with `koszul_add_right_Z` this is the full `C∞`-linearity making the Koszul
+form a covector in `Z` — hence `∇_X Y := ♯(½·koszul)`. The Leibniz cross-terms `(X·f)·g(Y,Z)` and
+`(Y·f)·g(X,Z)` (from the product rule) are cancelled **exactly** by `−(X·f)·g(Z,Y)` and `−(Y·f)·g(Z,X)`
+(from the bracket Leibniz) **via metric symmetry** — the cancellation that makes the Levi-Civita
+connection well-defined. -/
+theorem koszul_smul_right_Z [CompleteSpace E] [IsManifold I 2 M]
+    (gm : PseudoRiemannianMetric I M) (X Y Z : Π x : M, TangentSpace I x) (f : M → 𝕜) (x : M)
+    (hf : ∀ z, MDifferentiableAt I 𝓘(𝕜) f z)
+    (hgYZ : ∀ z, MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (Y x') (Z x')) z)
+    (hgXZ : ∀ z, MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (X x') (Z x')) z)
+    (hX : MDiffAt (T% X) x) (hZ : MDiffAt (T% Z) x) :
+    koszul gm X Y (f • Z) x = f x * koszul gm X Y Z x := by
+  have eYZ : (fun x' => gm.g x' (Y x') ((f • Z) x')) = f * fun x' => gm.g x' (Y x') (Z x') := by
+    funext x'; simp [Pi.smul_apply, Pi.mul_apply, map_smul, smul_eq_mul]
+  have eXZ : (fun x' => gm.g x' (X x') ((f • Z) x')) = f * fun x' => gm.g x' (X x') (Z x') := by
+    funext x'; simp [Pi.smul_apply, Pi.mul_apply, map_smul, smul_eq_mul]
+  have hbR : gm.g x (mlieBracket I Y (f • Z) x) (X x)
+      = dirDeriv I Y f x * gm.g x (Z x) (X x) + f x * gm.g x (mlieBracket I Y Z x) (X x) := by
+    rw [mlieBracket_smul_right (hf x) hZ]
+    simp only [map_add, map_smul, ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,
+      smul_eq_mul]
+    rfl
+  have hbL : gm.g x (mlieBracket I (f • Z) X x) (Y x)
+      = - (dirDeriv I X f x) * gm.g x (Z x) (Y x) + f x * gm.g x (mlieBracket I Z X x) (Y x) := by
+    rw [mlieBracket_smul_left (hf x) hZ]
+    simp only [map_add, map_neg, ContinuousLinearMap.add_apply, ContinuousLinearMap.neg_apply,
+      map_smul, ContinuousLinearMap.smul_apply, smul_eq_mul, neg_mul]
+    rfl
+  have h4 : gm.g x (mlieBracket I X Y x) ((f • Z) x) = f x * gm.g x (mlieBracket I X Y x) (Z x) := by
+    show gm.g x (mlieBracket I X Y x) (f x • Z x) = f x * gm.g x (mlieBracket I X Y x) (Z x)
+    rw [map_smul, smul_eq_mul]
+  have sYZ : gm.g x (Y x) (Z x) = gm.g x (Z x) (Y x) := gm.symm' x (Y x) (Z x)
+  have sXZ : gm.g x (X x) (Z x) = gm.g x (Z x) (X x) := gm.symm' x (X x) (Z x)
+  simp only [koszul, eYZ, eXZ, dirDeriv_mul X f _ x (hf x) (hgYZ x),
+    dirDeriv_mul Y f _ x (hf x) (hgXZ x), dirDeriv_smul_field, h4, smul_eq_mul, hbR, hbL]
+  linear_combination (dirDeriv I X f x) * sYZ + (dirDeriv I Y f x) * sXZ
+
 end QIQTH.ManifoldGR
