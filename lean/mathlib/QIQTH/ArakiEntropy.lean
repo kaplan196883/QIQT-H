@@ -405,6 +405,22 @@ theorem relModFlow_mem_unitary (hσ : σ.PosDef) (hρ : ρ.PosDef) (t : ℝ) :
       ((Commute.refl _).neg_right) (mem_expBall_C _) (mem_expBall_C _),
       add_neg_cancel, NormedSpace.exp_zero]
 
+/-- **The concrete action of the modular flow** (the relative modular automorphism):
+    `Δ_{σ|ρ}^{it} ξ = σ^{it} · ξ · ρ^{−it}`, with `σ^{it} = exp(it log σ)`, `ρ^{−it} = exp(−it log ρ)`.
+    This is the Hilbert–Schmidt incarnation of the modular automorphism group; for `σ = ρ` it is the
+    Connes cocycle's diagonal, `σ_t(A) = ρ^{it} A ρ^{-it}`. -/
+theorem relModFlow_apply (hσ : σ.PosDef) (hρ : ρ.PosDef) (t : ℝ) (A : Matrix n n ℂ) :
+    relModFlow hσ hρ t (ofMat A)
+      = ofMat (NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hσ.1) * A
+          * NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1))) := by
+  have hcomm : Commute (Lmul ((Complex.I * (t : ℂ)) • matLog hσ.1))
+      (Rmul (-((Complex.I * (t : ℂ)) • matLog hρ.1))) := Lmul_commute_Rmul _ _
+  apply toMat_injective
+  rw [relModFlow, relModGen, smul_sub, ← Lmul_smul, ← Rmul_smul, sub_eq_add_neg, ← Rmul_neg,
+    NormedSpace.exp_add_of_commute_of_mem_ball (𝕂 := ℂ) hcomm (mem_expBall_C _) (mem_expBall_C _),
+    exp_Lmul, exp_Rmul, ContinuousLinearMap.mul_apply, Lmul_apply, Rmul_apply, toMat_ofMat,
+    toMat_ofMat, Matrix.mul_assoc]
+
 end ModularFlow
 
 end QIQTH.Araki
