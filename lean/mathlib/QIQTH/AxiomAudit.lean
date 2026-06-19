@@ -2634,6 +2634,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RefinementBorn.additive_fMeasure_eq_born
 -- expected: standard only — ★ refinement additivity (f : ℝ →+ ℝ) ⇒ Born on rational weights. Additivity IS the
 -- exponent-fixer; records do not supply it. Whether finite capacity/H2 motivates it is the open physics question.
+#print axioms QIQTH.RefinementBorn.continuous_additive_fMeasure_eq_born
+-- expected: standard only — ★ additivity + CONTINUITY ⇒ Born on ALL REAL weights (closes the "irrational |c_k|²"
+-- residual). additive_fMeasure_eq_born only reaches RATIONAL weights — additivity forces f(x)=x·f(1) on ℚ alone
+-- (pathological Hamel-basis additive fns disagree on irrationals). The physically-natural continuity premise
+-- excludes them: a continuous additive f:ℝ→+ℝ is ℝ-linear (AddMonoidHom.toRealLinearMap), so f(x)=x·f(1) ∀x∈ℝ.
+-- GOTCHA: hlin matches f at ANY arg incl f 1, so simp_rw[hlin] loops — use Finset.sum_congr + hlin(w j) instead.
 #print axioms QIQTH.RefinementBorn.alphaSq_refinement_violation
 -- expected: standard only — ★ the precise mechanism: refining (1/3,2/3)'s 2/3 outcome into two equal 1/3 sub-records
 -- (uniform triple), coarse μ₂ = 4/5 but fine sum = 2/3; 4/5 ≠ 2/3 ⇒ α=2 violates refinement indifference exactly.

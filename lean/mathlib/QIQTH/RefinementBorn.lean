@@ -25,6 +25,7 @@ physics question — it is NOT settled here.
 import Mathlib.Tactic
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.Fin.VecNotation
+import Mathlib.Topology.Instances.RealVectorSpace
 
 open scoped BigOperators
 
@@ -83,6 +84,26 @@ theorem additive_fMeasure_eq_born (f : ℝ →+ ℝ) (h1 : f 1 ≠ 0)
     simp_rw [hlin]
     rw [← Finset.sum_mul, hsum, one_mul]
   rw [hden, hlin, mul_div_assoc, div_self h1, mul_one]
+
+/-- **Refinement additivity + CONTINUITY ⇒ Born on ALL real weights.**  `additive_fMeasure_eq_born`
+    gives Born only on *rational* weights — additivity alone forces `f(x) = x·f(1)` solely on `ℚ`, since
+    pathological (non-measurable, Hamel-basis) additive functions disagree on irrationals.  Adding the
+    physically-natural premise that the rule is **continuous** in the amplitudes excludes those: a
+    continuous additive `f : ℝ →+ ℝ` is ℝ-linear (`AddMonoidHom.toRealLinearMap`), so `f(x) = x·f(1)` for
+    *every* real `x`, and the rule is Born on any real weights summing to `1`.  This closes the
+    "continuity for irrational `|c_k|²`" residual with the natural continuity premise. -/
+theorem continuous_additive_fMeasure_eq_born (f : ℝ →+ ℝ) (hf : Continuous f) (h1 : f 1 ≠ 0)
+    {w : Fin n → ℝ} (hsum : ∑ j, w j = 1) (k : Fin n) :
+    fMeasure f w k = w k := by
+  have hlin : ∀ x : ℝ, f x = x * f 1 := by
+    intro x
+    have hmap := map_smul (f.toRealLinearMap hf) x (1 : ℝ)
+    rw [AddMonoidHom.coe_toRealLinearMap, smul_eq_mul, mul_one, smul_eq_mul] at hmap
+    exact hmap
+  unfold fMeasure
+  have hden : ∑ j, f (w j) = f 1 := by
+    rw [Finset.sum_congr rfl (fun j _ => hlin (w j)), ← Finset.sum_mul, hsum, one_mul]
+  rw [hden, hlin (w k), mul_div_assoc, div_self h1, mul_one]
 
 /-- The coarse α=2 probability of the weight-`2/3` outcome on `(1/3, 2/3)` is `4/5`. -/
 theorem alphaSq_coarse_one :
