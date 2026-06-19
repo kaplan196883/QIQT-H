@@ -722,6 +722,18 @@ theorem modAut_add (hρ : ρ.PosDef) (s t : ℝ) (B : Matrix n n ℂ) :
   simp only [modAut, Matrix.mul_assoc]
   rw [hback, ← Matrix.mul_assoc (NormedSpace.exp ((Complex.I * (s : ℂ)) • matLog hρ.1)), hfront]
 
+/-- **The relative entropy is the modular-Hamiltonian expectation:** `S(ρ‖σ) = −⟪ξ_ρ, K ξ_ρ⟫`, where
+    `K = log Δ_{σ|ρ} = relModGen` is the generator of the modular flow (the "modular Hamiltonian") and
+    `ξ_ρ = ρ^½` the GNS vector.  This is exactly the Araki definition, now phrased via the modular flow's
+    generator — the bridge between the modular flow and the relative entropy (the basis of the
+    entanglement "first law"). -/
+theorem relEntropy_eq_neg_modGen (hσ : σ.PosDef) (hρ : ρ.PosDef) :
+    QIQTH.QuantumEntropy.relEntropy hρ.1 hσ.1
+      = -(inner ℂ (ofMat (CFC.sqrt ρ)) (relModGen hσ hρ (ofMat (CFC.sqrt ρ))) : ℂ).re := by
+  rw [← arakiEntropy_eq_relEntropy hρ hσ]
+  unfold arakiEntropy relModGen
+  rw [log_relMod hσ hρ]
+
 end ModularFlow
 
 end QIQTH.Araki
