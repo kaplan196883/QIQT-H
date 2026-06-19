@@ -2260,6 +2260,14 @@ namespace QIQTH.AxiomAudit
 -- of the factor-2 Weyl twirl. Via Kronecker mixed-product (I⊗W)⋆(I⊗W)=(I⋆I)⊗(W⋆W)=I⊗I=I
 -- (conjTranspose_kronecker + ← mul_kronecker_mul + one_kronecker_one). First brick of the factor-2 lift
 -- ρ↦(Tr₂ρ)⊗(I/m) toward partial-trace DPI D(Tr₂ρ‖Tr₂σ)≤D(ρ‖σ) (Carlen §5.7). Axiom-free.
+#print axioms QIQTH.Entropy.kron_conj_block
+#print axioms QIQTH.Entropy.factor2_depolarization
+-- expected: standard only — THE FACTOR-2 WEYL TWIRL = COMPLETE DEPOLARIZATION OF FACTOR 2:
+-- Σ_{a,b}(1/N²)•((I⊗W_ab)ρ(I⊗W_ab)ᴴ)=(Tr₂ρ)⊗ₖ(I_N/N). kron_conj_block: ((I⊗W)ρ(I⊗W)ᴴ)_{(i,a')(j,b')}
+-- =(W·blockᵢⱼρ·Wᴴ)_{a'b'} (entrywise Kronecker reduction — I on factor 1 selects the (i,j)-block, W
+-- conjugates factor 2). factor2_depolarization: per-block weyl_depolarization_flat gives
+-- (Tr(blockᵢⱼρ)/N)·[a'=b'], and Tr(blockᵢⱼρ)=(Tr₂ρ)ᵢⱼ (=partialTraceRight, defeq), = (Tr₂ρ)⊗(I/N). This is
+-- a mixed-unitary channel (one_kron_mem_unitary) ⟹ dpi_mixed_unitary ⟹ partial-trace DPI. Axiom-free.
 #print axioms QIQTH.QuantumEntropy.relEntropy_eq_zero
 -- expected: standard only — ★★★★★ KLEIN'S EQUALITY CASE: D(ρ‖σ)=0 ⟹ ρ=σ for density matrices. The
 -- equality tracking of relEntropy_nonneg (doubly-stochastic/Jensen): KL(p‖r)=0⟹p=r (Gibbs, log x<x−1)
