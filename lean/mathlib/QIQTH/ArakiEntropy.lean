@@ -501,6 +501,42 @@ theorem relModFlow_conj_Lmul (hσ : σ.PosDef) (hρ : ρ.PosDef) (t : ℝ) (A : 
   rw [← ofMat_toMat X]
   exact key (toMat X)
 
+/-- **Tomita's theorem on the commutant (finite-dimensional, right algebra):** the modular flow also
+    maps the *right* multiplication algebra (the commutant of `L(Matrix)`) onto itself —
+    `σ_t(R_B) = Δ^{it} R_B Δ^{−it} = R_{ρ^{it} B ρ^{−it}}`.  Here the `σ`-factors cancel
+    (`σ^{it}σ^{−it}=1`), leaving the `ρ`-inner automorphism `B ↦ ρ^{it} B ρ^{−it}`.  Together with
+    `relModFlow_conj_Lmul` this is `σ_t(M)=M` and `σ_t(M')=M'`. -/
+theorem relModFlow_conj_Rmul (hσ : σ.PosDef) (hρ : ρ.PosDef) (t : ℝ) (B : Matrix n n ℂ) :
+    relModFlow hσ hρ t * Rmul B * relModFlow hσ hρ (-t)
+      = Rmul (NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1) * B
+          * NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1))) := by
+  have hRof : ∀ C M : Matrix n n ℂ, Rmul C (ofMat M) = ofMat (M * C) := fun C M =>
+    toMat_injective (by rw [Rmul_apply, toMat_ofMat, toMat_ofMat])
+  have hσinv : NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hσ.1)
+      * NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hσ.1)) = 1 := by
+    have h := NormedSpace.exp_add_of_commute_of_mem_ball (𝕂 := ℂ)
+      ((Commute.refl ((Complex.I * (t : ℂ)) • matLog hσ.1)).neg_right)
+      (mem_expBall_C _) (mem_expBall_C _)
+    rw [add_neg_cancel, NormedSpace.exp_zero] at h
+    exact h.symm
+  have key : ∀ Y : Matrix n n ℂ,
+      (relModFlow hσ hρ t * Rmul B * relModFlow hσ hρ (-t)) (ofMat Y)
+        = Rmul (NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1) * B
+            * NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1))) (ofMat Y) := by
+    intro Y
+    rw [ContinuousLinearMap.mul_apply, ContinuousLinearMap.mul_apply,
+      relModFlow_apply, hRof, relModFlow_apply, hRof,
+      show (Complex.I * ((-t : ℝ) : ℂ)) • matLog hσ.1 = -((Complex.I * (t : ℂ)) • matLog hσ.1) by
+        rw [Complex.ofReal_neg, mul_neg, neg_smul],
+      show -((Complex.I * ((-t : ℝ) : ℂ)) • matLog hρ.1) = (Complex.I * (t : ℂ)) • matLog hρ.1 by
+        rw [Complex.ofReal_neg, mul_neg, neg_smul, neg_neg]]
+    congr 1
+    simp only [Matrix.mul_assoc]
+    rw [← Matrix.mul_assoc, hσinv, Matrix.one_mul]
+  ext X
+  rw [← ofMat_toMat X]
+  exact key (toMat X)
+
 end ModularFlow
 
 end QIQTH.Araki
