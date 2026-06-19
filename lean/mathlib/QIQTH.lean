@@ -28,6 +28,7 @@ import QIQTH.Entropy.RpowConj
 import QIQTH.Entropy.RelEntropyConvex
 import QIQTH.Entropy.RelEntropyDPI
 import QIQTH.Entropy.OrderLimit
+import QIQTH.Entropy.PartialTrace
 import QIQTH.HolevoCoarseGraining
 import QIQTH.DPI
 import QIQTH.ShannonFano
