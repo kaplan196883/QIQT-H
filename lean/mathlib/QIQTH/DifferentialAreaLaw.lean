@@ -1,6 +1,7 @@
 import QIQTH.RecordContract
 import Mathlib.Analysis.Calculus.LocalExtr.Basic
 import Mathlib.Analysis.Calculus.Deriv.Add
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 
 /-!
 # The differential area law `δS = η δA`, DERIVED (not assumed) from a saturated capacity bound
@@ -89,5 +90,32 @@ theorem differential_area_law_of_relEntropy {S KE A : ℝ → ℝ} {s' k' a' η 
     show KE 0 - S 0 ≤ KE t - S t
     rw [hD0]; exact hDnn t
   exact differential_area_law hS hK hA hbound hsat hfl
+
+/-- **Phase B — the per-null Clausius premise from the DERIVED modular relation + the CITED AQFT inputs.**
+    `differential_area_law` derives `δ⟨K⟩ = η δA` (here `k' = η·a'`) from QIQT-H's content.  This lemma
+    chains it with the three inputs Mathlib cannot prove (so they are explicit *labelled hypotheses*,
+    never Lean axioms):
+
+    * `hBWflux` — **Bisognano–Wichmann + boost heat flux**: the modular energy variation equals the
+      boost-energy flux, `δ⟨K⟩ = (2π/ℏ)·F_T` with `F_T = ∫λ T_kk` (BW: `K_mod = (2π/ℏ)K_boost`);
+    * `hRay` — **Raychaudhuri leading-order** focusing: `δA = −G_R` with `G_R = ∫λ R_kk`.
+
+    With `a = 2π/(ℏη)` these force the per-null relation `a·F_T = −G_R` — exactly the proportionality of the
+    boost-energy flux and the Ricci focusing that `pernull_of_clausius_integral` consumes en route to the
+    Einstein equation.  The point: the modular relation is DERIVED from QIQT-H; only `hBWflux`/`hRay`
+    (the wedge-algebra and geometric facts Mathlib lacks) are cited, and they are kept SEPARATE — neither
+    is the area law, and neither presupposes Einstein. -/
+theorem pernull_premise_of_modular {k' a' η F_T G_R hbar a : ℝ}
+    (hbar0 : hbar ≠ 0) (heta : η ≠ 0) (ha : a = 2 * Real.pi / (hbar * η))
+    (hModular : k' = η * a')
+    (hBWflux : k' = 2 * Real.pi / hbar * F_T)
+    (hRay : a' = - G_R) :
+    a * F_T = - G_R := by
+  have h1 : η * a' = 2 * Real.pi / hbar * F_T := hModular.symm.trans hBWflux
+  rw [hRay] at h1
+  rw [ha]
+  have key : 2 * Real.pi / (hbar * η) * F_T = η⁻¹ * (2 * Real.pi / hbar * F_T) := by
+    field_simp
+  rw [key, ← h1, ← mul_assoc, inv_mul_cancel₀ heta, one_mul]
 
 end QIQTH.DifferentialAreaLaw

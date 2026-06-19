@@ -3358,5 +3358,12 @@ namespace QIQTH.AxiomAudit
 -- bare hAreaLaw of jacobson_einstein_from_area_law (threading = follow-up; jacobson's chain only uses the
 -- leading-ε² coefficient, so the derivative form suffices). Cited inputs (BW K=2πK_boost, boost-flux,
 -- Raychaudhuri) stay as separate labelled hyps, NOT mixed into the area law.
+#print axioms QIQTH.DifferentialAreaLaw.pernull_premise_of_modular
+-- expected: standard only — PHASE B: the per-null premise from DERIVED modular relation + CITED AQFT inputs.
+-- Chains the derived δ⟨K⟩=ηδA (k'=η·a') with hBWflux (Bisognano–Wichmann + boost heat flux: δ⟨K⟩=(2π/ℏ)F_T,
+-- F_T=∫λT_kk) and hRay (Raychaudhuri leading order: δA=−G_R, G_R=∫λR_kk); with a=2π/(ℏη) these force the
+-- per-null relation a·F_T=−G_R (boost-flux ∝ Ricci focusing) that pernull_of_clausius_integral consumes.
+-- The modular relation is DERIVED from QIQT; ONLY hBWflux/hRay (the Type III₁ wedge-algebra + geometry
+-- Mathlib lacks) are cited, kept SEPARATE — neither is the area law, neither presupposes Einstein. Axiom-free.
 
 end QIQTH.AxiomAudit
