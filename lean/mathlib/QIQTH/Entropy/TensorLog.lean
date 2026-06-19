@@ -131,6 +131,24 @@ noncomputable def partialTraceLeft (ρ : Matrix (n × m) (n × m) ℂ) : Matrix 
 @[simp] lemma partialTraceLeft_apply (ρ : Matrix (n × m) (n × m) ℂ) (a b : m) :
     partialTraceLeft ρ a b = ∑ i, ρ (i, a) (i, b) := rfl
 
+/-- **Partial trace of a tensor product factors** (right factor): `Tr₂(A ⊗ B) = (Tr B) · A`. Tracing out
+the second subsystem of an uncorrelated state returns the first marginal scaled by the trace of the
+discarded factor. The clean form of `Tr₁(ρ₁₂⊗ρ₃) = ρ₂⊗ρ₃` used in strong subadditivity. -/
+@[simp] theorem partialTraceRight_kronecker (A : Matrix n n ℂ) (B : Matrix m m ℂ) :
+    partialTraceRight (A ⊗ₖ B) = B.trace • A := by
+  ext i j
+  simp only [partialTraceRight_apply, kronecker_apply, Matrix.smul_apply, smul_eq_mul]
+  rw [← Finset.mul_sum, mul_comm]
+  rfl
+
+/-- **Partial trace of a tensor product factors** (left factor): `Tr₁(A ⊗ B) = (Tr A) · B`. The mirror of
+`partialTraceRight_kronecker`. -/
+@[simp] theorem partialTraceLeft_kronecker (A : Matrix n n ℂ) (B : Matrix m m ℂ) :
+    partialTraceLeft (A ⊗ₖ B) = A.trace • B := by
+  ext a b
+  simp only [partialTraceLeft_apply, kronecker_apply, Matrix.smul_apply, Matrix.trace,
+    Matrix.diag_apply, smul_eq_mul, Finset.sum_mul]
+
 /-- **The left partial-trace adjoint**: `Tr(ρ · (I ⊗ N)) = Tr((Tr₁ρ) · N)`. The mirror of
 `trace_mul_kron_one`: a factor-2 observable sees only the reduced state `Tr₁ρ`. -/
 theorem trace_mul_one_kron (ρ : Matrix (n × m) (n × m) ℂ) (N : Matrix m m ℂ) :
@@ -214,5 +232,29 @@ theorem subadditivity {N : ℕ} [NeZero N] [Nonempty n]
     QIQTH.QuantumEntropy.vonNeumannEntropy_eq_neg_trace hρ1pd hd1,
     QIQTH.QuantumEntropy.vonNeumannEntropy_eq_neg_trace hρ2pd hd2]
   linarith [hnn]
+
+/-- **The relative-entropy ↔ entropy decomposition** `D(σ ‖ σ_A ⊗ σ_B) = −S(σ) + S(σ_A) + S(σ_B)`,
+where `σ_A = Tr₂σ`, `σ_B = Tr₁σ` are the reduced states. This is the equality at the heart of
+subadditivity (its `≥ 0` instance), and the building block of strong subadditivity (applied to the two
+bipartitions of a three-factor system). Axiom-free. -/
+theorem relEntropy_marginals_eq {N : ℕ} [NeZero N] [Nonempty n]
+    {σ : Matrix (n × Fin N) (n × Fin N) ℂ} (hσ : σ.PosDef)
+    (hd : QIQTH.QuantumEntropy.IsDensity σ)
+    (hd1 : QIQTH.QuantumEntropy.IsDensity (partialTraceRight σ))
+    (hd2 : QIQTH.QuantumEntropy.IsDensity (partialTraceLeft σ)) :
+    QIQTH.QuantumEntropy.relEntropy hσ.1
+        ((partialTraceRight_posDef hσ).kronecker (partialTraceLeft_posDef hσ)).1
+      = - QIQTH.QuantumEntropy.vonNeumannEntropy hd
+        + QIQTH.QuantumEntropy.vonNeumannEntropy hd1
+        + QIQTH.QuantumEntropy.vonNeumannEntropy hd2 := by
+  haveI : Nonempty (Fin N) := ⟨⟨0, Nat.pos_of_ne_zero (NeZero.ne N)⟩⟩
+  rw [QIQTH.QuantumEntropy.relEntropy,
+    matLog_kronecker (partialTraceRight_posDef hσ) (partialTraceLeft_posDef hσ),
+    mul_sub, mul_add, Matrix.trace_sub, Matrix.trace_add, trace_mul_kron_one, trace_mul_one_kron,
+    Complex.sub_re, Complex.add_re,
+    QIQTH.QuantumEntropy.vonNeumannEntropy_eq_neg_trace hσ hd,
+    QIQTH.QuantumEntropy.vonNeumannEntropy_eq_neg_trace (partialTraceRight_posDef hσ) hd1,
+    QIQTH.QuantumEntropy.vonNeumannEntropy_eq_neg_trace (partialTraceLeft_posDef hσ) hd2]
+  ring
 
 end QIQTH.Entropy
