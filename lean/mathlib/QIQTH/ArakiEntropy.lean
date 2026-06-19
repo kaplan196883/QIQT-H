@@ -635,6 +635,69 @@ theorem kms_condition (hρ : ρ.PosDef) (A B : Matrix n n ℂ) :
   congr 1
   rw [Matrix.mul_assoc (ρ * B) ρ⁻¹ ρ, hinv, Matrix.mul_one]
 
+/-! ### The modular automorphism group `σ_t` on the matrix algebra -/
+
+private theorem expIt_mul_expNegIt (hρ : ρ.PosDef) (t : ℝ) :
+    NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1)
+      * NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1)) = 1 := by
+  have h := NormedSpace.exp_add_of_commute_of_mem_ball (𝕂 := ℂ)
+    ((Commute.refl ((Complex.I * (t : ℂ)) • matLog hρ.1)).neg_right)
+    (mem_expBall_C _) (mem_expBall_C _)
+  rw [add_neg_cancel, NormedSpace.exp_zero] at h
+  exact h.symm
+
+private theorem expNegIt_mul_expIt (hρ : ρ.PosDef) (t : ℝ) :
+    NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1))
+      * NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1) = 1 := by
+  have h := NormedSpace.exp_add_of_commute_of_mem_ball (𝕂 := ℂ)
+    ((Commute.refl ((Complex.I * (t : ℂ)) • matLog hρ.1)).neg_left)
+    (mem_expBall_C _) (mem_expBall_C _)
+  rw [neg_add_cancel, NormedSpace.exp_zero] at h
+  exact h.symm
+
+private theorem conjTranspose_expIt (hρ : ρ.PosDef) (t : ℝ) :
+    (NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1))ᴴ
+      = NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1)) := by
+  rw [← Matrix.star_eq_conjTranspose, NormedSpace.star_exp, star_smul,
+    show star (matLog hρ.1) = matLog hρ.1 from
+      (Matrix.star_eq_conjTranspose _).trans (matLog_isHermitian hρ.1),
+    show star (Complex.I * (t : ℂ)) = -(Complex.I * (t : ℂ)) by
+      simp [Complex.conj_I, Complex.conj_ofReal], neg_smul]
+
+private theorem conjTranspose_expNegIt (hρ : ρ.PosDef) (t : ℝ) :
+    (NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1)))ᴴ
+      = NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1) := by
+  rw [← conjTranspose_expIt hρ t, Matrix.conjTranspose_conjTranspose]
+
+/-- The **modular automorphism** `σ_t(B) = ρ^{it} B ρ^{−it}` of the matrix algebra — the inner
+    automorphism implementing the `ρ`-modular flow (cf. `relModFlow_conj_Lmul` with `σ = ρ`). -/
+noncomputable def modAut (hρ : ρ.PosDef) (t : ℝ) (B : Matrix n n ℂ) : Matrix n n ℂ :=
+  NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1) * B
+    * NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1))
+
+/-- `σ_t` is **unital**: `σ_t(1) = 1`. -/
+@[simp] theorem modAut_one (hρ : ρ.PosDef) (t : ℝ) : modAut hρ t 1 = 1 := by
+  rw [modAut, Matrix.mul_one, expIt_mul_expNegIt hρ t]
+
+/-- `σ_t` is **multiplicative**: `σ_t(BC) = σ_t(B) σ_t(C)`. -/
+theorem modAut_mul (hρ : ρ.PosDef) (t : ℝ) (B C : Matrix n n ℂ) :
+    modAut hρ t (B * C) = modAut hρ t B * modAut hρ t C := by
+  simp only [modAut, Matrix.mul_assoc]
+  rw [← Matrix.mul_assoc (NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1)))
+    (NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1)), expNegIt_mul_expIt hρ t,
+    Matrix.one_mul]
+
+/-- `σ_t` is **`*`-preserving**: `σ_t(Bᴴ) = σ_t(B)ᴴ`. -/
+theorem modAut_conjTranspose (hρ : ρ.PosDef) (t : ℝ) (B : Matrix n n ℂ) :
+    modAut hρ t Bᴴ = (modAut hρ t B)ᴴ := by
+  rw [modAut, modAut, Matrix.conjTranspose_mul, Matrix.conjTranspose_mul,
+    conjTranspose_expNegIt hρ t, conjTranspose_expIt hρ t, Matrix.mul_assoc]
+
+/-- `σ_0 = id`. -/
+@[simp] theorem modAut_zero (hρ : ρ.PosDef) (B : Matrix n n ℂ) : modAut hρ 0 B = B := by
+  simp only [modAut, Complex.ofReal_zero, mul_zero, zero_smul, neg_zero, NormedSpace.exp_zero,
+    Matrix.one_mul, Matrix.mul_one]
+
 end ModularFlow
 
 end QIQTH.Araki
