@@ -3403,6 +3403,12 @@ namespace QIQTH.AxiomAudit
 -- boostUnitary a (𝒦_W) ⊆ 𝒦_W — the boost-invariance the GPT-5-pro KMS-uniqueness route needs (pro re-scope:
 -- KMS route = days-weeks, vs R=fermi(P) = months; honest endpoint = conditional BW with ONE labelled strip/
 -- KMS input Hyp_strip_Krep). Axiom-free.
+#print axioms QIQTH.Fock.OneParticleBW.boostUnitary_mapsTo_closure_span
+-- expected: standard only — Layer-1 invariance COMPLETE: if S (one-particle vectors) is boost-closed, then
+-- 𝒦_W=closure(span ℝ S) is boost-invariant: boostUnitary a (𝒦_W)⊆𝒦_W. mapsTo_closure_span specialized to
+-- boostUnitary via toContinuousLinearEquiv.toContinuousLinearMap.restrictScalars ℝ. This is the V(a)𝒦=𝒦
+-- the KMS-uniqueness route consumes. Axiom-free. (Remaining: KMS-uniqueness lemma [real functional analysis]
+-- + wedge generating set + the labelled strip input Hyp_strip_Krep [irreducible AQFT, BGL §4].)
 -- (relEntropy_nonneg) DERIVE the differential area law δS=ηδA, which with the two CITED inputs (hFlux=Bisognano–
 -- Wichmann boost flux, hFocus=Raychaudhuri focusing) + structural (Lorentzian congruence g=PᵀηP, ∇·T=0,
 -- f-regularity) ⇒ ∃Λ, a·T=G+Λg (genuine Einstein tensor, constant Λ) via jacobson_einstein_equation_of_state.

@@ -102,4 +102,16 @@ theorem mapsTo_closure_span {M : Type*} [NormedAddCommGroup M] [NormedSpace ℝ 
   intro ψ hψ
   exact closure_mono hsub (image_closure_subset_closure_image L.continuous ⟨ψ, hψ, rfl⟩)
 
+/-- **Boost-invariance of a physically-defined wedge subspace.**  If a set `S` of one-particle vectors is
+    closed under the boost (`boostUnitary a` maps `S` into `S` — true for `S` = the `KrepL2` of a
+    boost-closed family of wedge test functions, via `boostUnitary_KrepL2`), then the wedge standard
+    subspace `𝒦_W := closure (span_ℝ S)` is boost-invariant: `boostUnitary a (𝒦_W) ⊆ 𝒦_W`.  This is the
+    invariance the GPT-5-pro KMS-uniqueness route consumes (`V(a)𝒦 = 𝒦`). -/
+theorem boostUnitary_mapsTo_closure_span (a : ℝ) {S : Set (Lp ℂ 2 (volume : Measure ℝ))}
+    (hS : Set.MapsTo (boostUnitary a) S S) :
+    Set.MapsTo (boostUnitary a)
+      (closure (Submodule.span ℝ S : Set _)) (closure (Submodule.span ℝ S : Set _)) :=
+  mapsTo_closure_span
+    ((boostUnitary a).toContinuousLinearEquiv.toContinuousLinearMap.restrictScalars ℝ) hS
+
 end QIQTH.Fock.OneParticleBW
