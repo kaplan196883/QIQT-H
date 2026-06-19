@@ -159,6 +159,38 @@ theorem twice_contracted_bianchi (g gi : Point n → Fin n → Fin n → ℝ)
   rw [gi_trace_covDeriv_ricci g gi hsymm hsymm_gi hinv hCg hCgi hC lam x, hT2, hT3] at hsum
   linarith [hsum]
 
+/-- **The Einstein tensor is divergence-free: `∇^μ G_{μν} = 0`.**  The contracted-Bianchi identity in
+    its most physically-famous form — the *geometric* origin of local energy–momentum conservation
+    (it is exactly why `∇^μ(a·T_{μν}) = 0` is consistent with `a·T = G + Λg`).  Immediate from
+    `twice_contracted_bianchi` (`∇^μ Ric_{μν} = ½∂_ν R`) and `div02_scalar_metric`
+    (`∇^μ(f·g_{μν}) = ∂_ν f`): writing `G = Ric + (−½R)·g`, its divergence is `½∂_ν R − ½∂_ν R = 0`.
+    Machine-checked, axiom-free. -/
+theorem einsteinTensor_divergence_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (ν : Fin n) (x : Point n) :
+    div02 g gi (fun y a b => einsteinTensor g gi a b y) ν x = 0 := by
+  have htr : ∀ ρ, PdiffAt (fun y => scalarCurv g gi y) ρ x := fun ρ =>
+    PdiffAt_sum _ _ ρ x (fun σ _ => PdiffAt_sum _ _ ρ x (fun μ _ =>
+      (PdiffAt_of_contDiff _ (hCgi σ μ) ρ x).mul (PdiffAt_ricci g gi hC σ μ ρ x)))
+  have hf : ∀ ρ, PdiffAt (fun y => -(1 / 2 : ℝ) * scalarCurv g gi y) ρ x := fun ρ =>
+    (differentiableAt_const _).mul (htr ρ)
+  have hsplit : (fun y a b => einsteinTensor g gi a b y)
+      = fun y a b => ricci g gi a b y + (-(1 / 2 : ℝ) * scalarCurv g gi y) * g y a b := by
+    funext y a b; simp only [einsteinTensor]; ring
+  rw [hsplit, div02_add g gi (fun y a b => ricci g gi a b y)
+        (fun y a b => (-(1 / 2 : ℝ) * scalarCurv g gi y) * g y a b) x
+        (fun a b ρ => PdiffAt_ricci g gi hC a b ρ x)
+        (fun a b ρ => (hf ρ).mul (PdiffAt_of_contDiff _ (hCg a b) ρ x)) ν,
+      twice_contracted_bianchi g gi hsymm hsymm_gi hinv hCg hCgi hC ν x,
+      div02_scalar_metric g gi hsymm hinv (fun y => -(1 / 2 : ℝ) * scalarCurv g gi y) x hf
+        (fun a b ρ => PdiffAt_of_contDiff _ (hCg a b) ρ x) ν,
+      pd_const_mul (-(1 / 2 : ℝ)) (fun y => scalarCurv g gi y) ν x (htr ν)]
+  ring
+
 /-- **The Einstein field equation as the thermodynamic equation of state** (Jacobson, PRL 1995),
     completed: from the post-crux relation + conservation + contracted Bianchi + metric
     compatibility, `a·T_{μν} = G_{μν} + Λ·g_{μν}` with `Λ := f + ½R` **covariantly constant**.

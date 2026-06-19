@@ -3036,6 +3036,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Curvature.twice_contracted_bianchi
 -- expected: standard only — ∇^μ Ric_{μλ} = ½ ∂_λ R (the contracted Bianchi ∇^μG_{μλ}=0 in trace form),
 -- by contracting second_bianchi_contracted with g^{σν}: ∂R (T1) − div02 (T2) − div02 (T3) = 0. Axiom-free.
+#print axioms QIQTH.Curvature.einsteinTensor_divergence_zero
+-- expected: standard only — ★ ∇^μ G_{μν} = 0: THE EINSTEIN TENSOR IS DIVERGENCE-FREE (the physically-famous
+-- form of contracted Bianchi; the geometric ORIGIN of local energy-momentum conservation — why ∇^μ(a·T)=0 is
+-- consistent with a·T=G+Λg). Writing G=Ric+(−½R)·g: div02(G)=twice_contracted_bianchi(½∂R)+div02_scalar_metric
+-- (pd(−½R)=−½∂R)=0. Standalone named theorem (was only implicit inside einstein_field_equation). Axiom-free.
 
 #print axioms QIQTH.Curvature.div02_scalar_metric
 #print axioms QIQTH.Curvature.div02_add
