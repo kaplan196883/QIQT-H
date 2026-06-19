@@ -1,6 +1,8 @@
 import Mathlib.RingTheory.RootsOfUnity.Complex
 import Mathlib.Algebra.Field.GeomSum
 import Mathlib.Algebra.BigOperators.Fin
+import Mathlib.LinearAlgebra.Matrix.Permutation
+import Mathlib.Analysis.Matrix.PosDef
 
 /-!
 # Character orthogonality — the engine of the discrete-Weyl 1-design
@@ -52,5 +54,40 @@ theorem weyl_char_sum {ω : ℂ} (hω : IsPrimitiveRoot ω m) (c : Fin m) :
   · subst hc
     simp
   · rw [if_neg hc, weyl_char_sum_eq_zero hω c hc]
+
+/-! ## The clock and shift Weyl unitaries -/
+
+open Matrix
+
+/-- **The clock operator** `Z = diag(1, ω, ω², …, ω^{m−1})` on `ℂ^m`. -/
+noncomputable def clock (ω : ℂ) (m : ℕ) : Matrix (Fin m) (Fin m) ℂ :=
+  diagonal (fun j => ω ^ j.val)
+
+/-- **The shift operator** `X : |j⟩ ↦ |j+1 mod m⟩`, the cyclic permutation matrix. -/
+noncomputable def shift (m : ℕ) : Matrix (Fin m) (Fin m) ℂ :=
+  (finRotate m).permMatrix ℂ
+
+/-- The clock operator is **unitary** (a diagonal of unit-modulus roots of unity). -/
+theorem clock_mem_unitary {ω : ℂ} (hω : IsPrimitiveRoot ω m) :
+    clock ω m ∈ unitary (Matrix (Fin m) (Fin m) ℂ) := by
+  have hnsq : Complex.normSq ω = 1 := by
+    rw [Complex.normSq_eq_norm_sq, hω.norm'_eq_one (NeZero.ne m), one_pow]
+  have hdiag : ∀ j : Fin m, star (ω ^ j.val) * ω ^ j.val = 1 := by
+    intro j
+    rw [← starRingEnd_apply, ← Complex.normSq_eq_conj_mul_self, map_pow, hnsq, one_pow,
+      Complex.ofReal_one]
+  rw [Unitary.mem_iff]
+  refine ⟨?_, ?_⟩ <;>
+  · rw [clock, star_eq_conjTranspose, diagonal_conjTranspose, diagonal_mul_diagonal,
+      ← diagonal_one]
+    refine congrArg _ (funext fun j => ?_)
+    first
+      | exact hdiag j
+      | (rw [mul_comm]; exact hdiag j)
+
+/-- The shift operator is **unitary** (a permutation matrix). -/
+theorem shift_mem_unitary : shift m ∈ unitary (Matrix (Fin m) (Fin m) ℂ) := by
+  rw [Unitary.mem_iff, shift, star_eq_conjTranspose, conjTranspose_permMatrix]
+  refine ⟨?_, ?_⟩ <;> simp [← permMatrix_mul, permMatrix_one]
 
 end QIQTH.Entropy

@@ -2207,6 +2207,12 @@ namespace QIQTH.AxiomAudit
 -- (toward partial-trace DPI). Σ_{b<m} ω^{b·c} = m·[c=0] for ω a primitive m-th root: off-diagonal (c≠0)
 -- vanishes since ω^c is an m-th root ≠1 so geom_sum_eq telescopes (ω^{cm}−1)/(ω^c−1)=0; diagonal (c=0)
 -- sums m ones. Feeds the clock-twirl Σ_b Z^b M Z^{-b}=diag M → Weyl 1-design → ρ↦(Tr₂ρ)⊗(I/m). Axiom-free.
+#print axioms QIQTH.Entropy.clock_mem_unitary
+#print axioms QIQTH.Entropy.shift_mem_unitary
+-- expected: standard only — THE CLOCK & SHIFT WEYL UNITARIES (toward partial-trace DPI). clock ω m =
+-- diag(1,ω,…,ω^{m−1}) is unitary (diagonal of unit-modulus roots, conj·self=normSq=‖ω‖²=1); shift m =
+-- (finRotate m).permMatrix is unitary (permutation matrix, via conjTranspose_permMatrix + permMatrix_mul
+-- group cancellation). These are the conjugating unitaries of the clock-twirl / Weyl 1-design. Axiom-free.
 #print axioms QIQTH.QuantumEntropy.relEntropy_eq_zero
 -- expected: standard only — ★★★★★ KLEIN'S EQUALITY CASE: D(ρ‖σ)=0 ⟹ ρ=σ for density matrices. The
 -- equality tracking of relEntropy_nonneg (doubly-stochastic/Jensen): KL(p‖r)=0⟹p=r (Gibbs, log x<x−1)
