@@ -298,6 +298,19 @@ theorem curvature_tensorialAt_left [CompleteSpace E] [IsManifold I 2 M] [VectorB
   add {X X'} hX hX' :=
     curvature_add_left cov hcov X X' Y σ x hX hX' (hcovσ X hX) (hcovσ X' hX')
 
+/-- **The covariant derivative of the Riemann curvature** `(∇_W R)(X,Y)Z` on the tangent bundle:
+the connection-corrected derivative of the curvature `(1,3)`-tensor,
+`∇_W(R(X,Y)Z) − R(∇_W X, Y)Z − R(X, ∇_W Y)Z − R(X,Y)(∇_W Z)`. This is the object whose cyclic sum over
+`(W,X,Y)` is the **second (differential) Bianchi identity**, whose double contraction gives `∇^μG = 0`.
+(Here `∇_W X = fun x' => cov X x' (W x')` is the tangent connection applied to the direction fields.) -/
+noncomputable def covCurvature
+    (cov : (Π x : M, TangentSpace I x) → (Π x : M, TangentSpace I x →L[𝕜] TangentSpace I x))
+    (W X Y Z : Π x : M, TangentSpace I x) (x : M) : TangentSpace I x :=
+  cov (fun x' => curvature cov X Y Z x') x (W x)
+    - curvature cov (fun x' => cov X x' (W x')) Y Z x
+    - curvature cov X (fun x' => cov Y x' (W x')) Z x
+    - curvature cov X Y (fun x' => cov Z x' (W x')) x
+
 section Ricci
 
 open Bundle
