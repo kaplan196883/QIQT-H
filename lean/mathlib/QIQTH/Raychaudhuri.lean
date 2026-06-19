@@ -183,4 +183,11 @@ theorem geodesic_divergence_leibniz (g gi : Point n → Fin n → Fin n → ℝ)
   exact Finset.sum_congr rfl
     (fun ν _ => (pd_mul _ _ μ x (PdiffAt_of_contDiff _ (hVC ν) μ x) (hpdcov ν)).symm)
 
+-- NEXT (optional polish): `geodesic_leibniz` — for a geodesic field,
+-- `Σ_{νμ} V^ν ∇_μ∇_ν V^μ = − Σ_{μν} (∇_μV^ν)(∇_νV^μ)`, completing the textbook Raychaudhuri form
+-- `V^ν∂_νθ = −(∇_μV^ν)(∇_νV^μ) − R(V,V)`. The key sub-lemma `geodesic_divergence_leibniz` is done; the
+-- remaining assembly is three sum-reindexing steps (hP + geodesic T1=0 + torsion-free T2=T3). This is the
+-- `−½θ²−σ²` shear term JACOBSON NEGLECTS at the focusing point — the focusing term `−R(V,V)` is already
+-- machine-checked in `raychaudhuri_focusing`, so this is completionist polish, not new physics.
+
 end QIQTH.Curvature
