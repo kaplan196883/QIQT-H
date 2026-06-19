@@ -613,6 +613,12 @@ theorem J_Rmul_J (B : Matrix n n ℂ) (X : HSMat n) : J (Rmul B (J X)) = Lmul B�
   simp only [toMat_J, Lmul_apply, Rmul_apply, Matrix.conjTranspose_mul,
     Matrix.conjTranspose_conjTranspose]
 
+/-- `J` is **antiunitary**: `⟪J X, J Y⟫ = ⟪Y, X⟫` — it reverses the Hilbert–Schmidt inner product
+    (an antilinear isometric involution). -/
+theorem J_inner (X Y : HSMat n) : (inner ℂ (J X) (J Y) : ℂ) = inner ℂ Y X := by
+  rw [hsInner_eq, hsInner_eq, toMat_J, toMat_J, Matrix.conjTranspose_conjTranspose,
+    Matrix.trace_mul_comm]
+
 end ModularFlow
 
 end QIQTH.Araki
