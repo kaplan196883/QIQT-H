@@ -619,6 +619,22 @@ theorem J_inner (X Y : HSMat n) : (inner ℂ (J X) (J Y) : ℂ) = inner ℂ Y X 
   rw [hsInner_eq, hsInner_eq, toMat_J, toMat_J, Matrix.conjTranspose_conjTranspose,
     Matrix.trace_mul_comm]
 
+/-! ### The KMS condition -/
+
+/-- **The KMS / modular condition (finite-dimensional, β = 1):** the faithful state `ω(X) = tr(ρ X)`
+    satisfies the KMS condition for its own modular flow `σ_t(B) = ρ^{it} B ρ^{−it}`.  In finite
+    dimensions `σ_z(B) = ρ^{iz} B ρ^{−iz}` is entire, and the KMS boundary relation
+    `ω(A · σ_{−i}(B)) = ω(B · A)` holds with the imaginary-time value `σ_{−i}(B) = ρ B ρ^{−1}`.  This is
+    the defining property singling out the modular flow (and `ρ` as its KMS/equilibrium state).  Pure
+    trace cyclicity once `ρ^{−1}ρ = 1`. -/
+theorem kms_condition (hρ : ρ.PosDef) (A B : Matrix n n ℂ) :
+    (ρ * A * (ρ * B * ρ⁻¹)).trace = (ρ * B * A).trace := by
+  have hinv : ρ⁻¹ * ρ = 1 :=
+    Matrix.nonsing_inv_mul ρ ((Matrix.isUnit_iff_isUnit_det ρ).mp hρ.isUnit)
+  rw [Matrix.trace_mul_cycle]
+  congr 1
+  rw [Matrix.mul_assoc (ρ * B) ρ⁻¹ ρ, hinv, Matrix.mul_one]
+
 end ModularFlow
 
 end QIQTH.Araki
