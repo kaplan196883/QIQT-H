@@ -2920,6 +2920,15 @@ namespace QIQTH.AxiomAudit
 -- in the function), the directional-derivative API the Bianchi cyclic sum / Ricci traces consume. Axiom-free.
 #print axioms QIQTH.Curvature.pd_covDerivVec
 #print axioms QIQTH.Curvature.ricci_identity
+#print axioms QIQTH.Curvature.ricci_identity_contracted
+-- ricci_identity_contracted: tracing the commutator on the upper index gives the Ricci tensor,
+-- ∑_μ(∇_μ∇_ν−∇_ν∇_μ)V^μ = R_σν V^σ — the step that puts R_μν into the focusing. Axiom-free.
+#print axioms QIQTH.Curvature.covDeriv2Vec_trace
+#print axioms QIQTH.Curvature.raychaudhuri_focusing
+-- covDeriv2Vec_trace: covariant derivative commutes with contraction, ∑_μ∇_ν∇_μV^μ = ∂_ν θ (geodesic-
+-- direction Γ cancels by torsion-freeness). raychaudhuri_focusing: THE RAYCHAUDHURI FOCUSING EQUATION,
+-- V^ν∂_νθ = Σ V^ν∇_μ∇_νV^μ − R_σν V^σV^ν — Jacobson's focusing step with the Ricci term −R_σνV^σV^ν
+-- explicit. The GEOMETRY of Jacobson's front half is now machine-checked. Axiom-free.
 -- expected: standard only — RAYCHAUDHURI FOCUSING (geometry of Jacobson's front half). pd_covDerivVec:
 -- the product-rule expansion of ∂_μ(∇_ν V^ρ). ricci_identity: THE COMMUTATOR OF COVARIANT DERIVATIVES
 -- IS THE RIEMANN TENSOR, (∇_μ∇_ν−∇_ν∇_μ)V^ρ=R^ρ_σμν V^σ — Bianchi-scale index computation (Schwarz

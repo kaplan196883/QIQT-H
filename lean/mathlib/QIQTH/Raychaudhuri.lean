@@ -90,4 +90,73 @@ theorem ricci_identity (g gi : Point n → Fin n → Fin n → ℝ)
   rw [hF1, hF2, h5, h12]
   ring
 
+/-- **The contracted Ricci identity** — tracing the commutator on the upper index (`ρ = μ`, summed)
+turns the Riemann tensor into the **Ricci tensor**: `∑_μ (∇_μ∇_ν − ∇_ν∇_μ) V^μ = R_{σν} V^σ`. This is
+exactly the step that introduces the `R_{μν}` focusing term into the expansion evolution. -/
+theorem ricci_identity_contracted (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (V : Point n → Fin n → ℝ)
+    (hVC : ∀ μ, ContDiff ℝ ⊤ (fun y => V y μ))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (ν : Fin n) (x : Point n) :
+    ∑ μ, (covDeriv2Vec g gi V μ ν μ x - covDeriv2Vec g gi V ν μ μ x)
+      = ∑ σ, ricci g gi σ ν x * V x σ := by
+  have hstep : (∑ μ, (covDeriv2Vec g gi V μ ν μ x - covDeriv2Vec g gi V ν μ μ x))
+             = ∑ μ, ∑ σ, riemann g gi μ σ μ ν x * V x σ :=
+    Finset.sum_congr rfl (fun μ _ => ricci_identity g gi hsymm V hVC hC μ ν μ x)
+  rw [hstep, Finset.sum_comm]
+  exact Finset.sum_congr rfl (fun σ _ => by simp only [ricci, Finset.sum_mul])
+
+/-- **The expansion** `θ = ∇_μ V^μ` — the covariant divergence of a vector field. -/
+noncomputable def expansion (g gi : Point n → Fin n → Fin n → ℝ)
+    (V : Point n → Fin n → ℝ) (x : Point n) : ℝ :=
+  ∑ μ, covDerivVec g gi V μ μ x
+
+/-- **Covariant derivative commutes with contraction** (the geodesic-direction Γ terms cancel by
+torsion-freeness): the trace `∑_μ ∇_ν ∇_μ V^μ` is just the ordinary derivative of the expansion,
+`∂_ν θ`. This is what turns `∇_ν(∇_μ V^μ)` into `∂_ν θ` in the Raychaudhuri derivation. -/
+theorem covDeriv2Vec_trace (g gi : Point n → Fin n → Fin n → ℝ) (V : Point n → Fin n → ℝ)
+    (hVC : ∀ μ, ContDiff ℝ ⊤ (fun y => V y μ))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (ν : Fin n) (x : Point n) :
+    ∑ μ, covDeriv2Vec g gi V ν μ μ x = pd (fun y => expansion g gi V y) ν x := by
+  have hpd : ∀ μ, PdiffAt (fun y => covDerivVec g gi V μ μ y) ν x := fun μ => by
+    unfold covDerivVec
+    exact (PdiffAt_pd (fun z => V z μ) (hVC μ) μ ν x).add (PdiffAt_sum _ _ ν x (fun σ _ =>
+      (PdiffAt_of_contDiff _ (hC μ μ σ) ν x).mul (PdiffAt_of_contDiff _ (hVC σ) ν x)))
+  have hcancel : (∑ μ, ∑ σ, christoffel g gi μ ν σ x * covDerivVec g gi V μ σ x)
+               = (∑ μ, ∑ σ, christoffel g gi σ ν μ x * covDerivVec g gi V σ μ x) :=
+    Finset.sum_comm
+  simp only [covDeriv2Vec, expansion]
+  rw [Finset.sum_sub_distrib, Finset.sum_add_distrib, hcancel, add_sub_cancel_right]
+  exact (pd_sum _ (fun μ y => covDerivVec g gi V μ μ y) ν x (fun μ _ => hpd μ)).symm
+
+/-- **The Raychaudhuri focusing equation.** Contracting the (contracted) Ricci identity with `V`
+gives the evolution of the expansion `θ` along `V`, with the **Ricci focusing term `−R_{σν}V^σV^ν`**
+made explicit:
+
+  `V^ν ∂_ν θ = Σ_{μν} V^ν ∇_μ∇_ν V^μ − R_{σν} V^σ V^ν`.
+
+This is Jacobson's focusing step (the geometry of his front half). For a *geodesic* `V`
+(`V^σ∇_σV^μ=0`) the first right-hand term equals `−(∇_μV^ν)(∇_νV^μ)` (the `−½θ²−σ²` shear part);
+that geodesic simplification is the remaining (Leibniz) polish. Holds for any vector field. -/
+theorem raychaudhuri_focusing (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (V : Point n → Fin n → ℝ)
+    (hVC : ∀ μ, ContDiff ℝ ⊤ (fun y => V y μ))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (x : Point n) :
+    ∑ ν, V x ν * pd (fun y => expansion g gi V y) ν x
+      = (∑ ν, ∑ μ, V x ν * covDeriv2Vec g gi V μ ν μ x)
+        - ∑ ν, ∑ σ, ricci g gi σ ν x * V x σ * V x ν := by
+  have key : ∀ ν, pd (fun y => expansion g gi V y) ν x
+               = (∑ μ, covDeriv2Vec g gi V μ ν μ x) - ∑ σ, ricci g gi σ ν x * V x σ := by
+    intro ν
+    have h := ricci_identity_contracted g gi hsymm V hVC hC ν x
+    rw [Finset.sum_sub_distrib, covDeriv2Vec_trace g gi V hVC hC ν x] at h
+    linarith [h]
+  simp only [key, mul_sub, Finset.mul_sum, Finset.sum_sub_distrib]
+  congr 1
+  exact Finset.sum_congr rfl (fun ν _ => Finset.sum_congr rfl (fun σ _ => by ring))
+
 end QIQTH.Curvature
