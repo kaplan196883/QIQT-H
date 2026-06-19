@@ -257,4 +257,82 @@ theorem relEntropy_marginals_eq {N : ℕ} [NeZero N] [Nonempty n]
     QIQTH.QuantumEntropy.vonNeumannEntropy_eq_neg_trace (partialTraceLeft_posDef hσ) hd2]
   ring
 
+/-! ## Reindex naturality: relabeling the tensor factors
+
+Strong subadditivity needs to relate states living in *different* product bracketings
+(`ρ₁₂` on `(n₁×n₂)`, `ρ₂₃` on `(n₂×n₃)`, …). The bridge is **reindexing** by a type-changing
+equivalence `e : α ≃ β`, under which `matLog`, `trace`, and the relative entropy are all natural.
+Since `reindex e e` is a continuous unital ⋆-algebra homomorphism, CFC naturality (`map_cfc`) gives
+`matLog (reindex e e M) = reindex e e (matLog M)` — the exact analogue of `matLog_one_kron`. -/
+
+/-- `M ↦ reindex e e M` (relabel both indices by `e : n ≃ m`) as a unital ⋆-algebra homomorphism
+`Matrix n n ℂ →⋆ₐ Matrix m m ℂ`. The algebra structure is `Matrix.reindexAlgEquiv`; we add
+`map_star` (`conjTranspose_reindex`) and bundle as a `StarAlgHom` so `map_cfc` applies. -/
+@[simps]
+noncomputable def reindexStarHom (e : n ≃ m) : Matrix n n ℂ →⋆ₐ[ℂ] Matrix m m ℂ where
+  toFun := reindex e e
+  map_one' := by
+    ext i j; simp only [reindex_apply, submatrix_apply, Matrix.one_apply, e.symm.injective.eq_iff]
+  map_mul' A B := by
+    ext i j
+    simp only [reindex_apply, submatrix_apply, Matrix.mul_apply]
+    exact (Equiv.sum_comp e.symm (fun k => A (e.symm i) k * B k (e.symm j))).symm
+  map_zero' := by ext i j; simp only [reindex_apply, submatrix_apply, Matrix.zero_apply]
+  map_add' A B := by ext i j; simp only [reindex_apply, submatrix_apply, Matrix.add_apply]
+  commutes' r := by
+    ext i j
+    simp only [reindex_apply, submatrix_apply, Algebra.algebraMap_eq_smul_one, Matrix.smul_apply,
+      Matrix.one_apply, smul_eq_mul, e.symm.injective.eq_iff]
+  map_star' A := (conjTranspose_reindex e e A).symm
+
+lemma continuous_reindexStarHom (e : n ≃ m) :
+    Continuous (reindexStarHom e : Matrix n n ℂ → Matrix m m ℂ) := by
+  apply continuous_matrix
+  intro i j
+  simp only [reindexStarHom_apply, reindex_apply, submatrix_apply]
+  exact continuous_id.matrix_elem _ _
+
+/-- **`trace` is reindex-invariant**: `Tr (reindex e e M) = Tr M`. -/
+@[simp] lemma trace_reindex (e : n ≃ m) (M : Matrix n n ℂ) :
+    (reindex e e M).trace = M.trace := by
+  simp only [Matrix.trace, Matrix.diag_apply, reindex_apply, submatrix_apply]
+  exact Equiv.sum_comp e.symm (fun k => M k k)
+
+/-- **`matLog` is natural under reindexing**: `log (reindex e e M) = reindex e e (log M)` for
+positive-definite `M`. CFC naturality (`map_cfc`) under the ⋆-hom `reindexStarHom e`. -/
+lemma matLog_reindex (e : n ≃ m) {M : Matrix n n ℂ} (hM : M.PosDef)
+    (h : (reindex e e M).IsHermitian) :
+    QIQTH.QuantumEntropy.matLog h = reindex e e (QIQTH.QuantumEntropy.matLog hM.1) := by
+  unfold QIQTH.QuantumEntropy.matLog
+  have hf : ContinuousOn Real.log (spectrum ℝ M) :=
+    QIQTH.QuantumEntropy.continuousOn_log_spectrum hM
+  rw [← h.cfc_eq Real.log, show reindex e e M = reindexStarHom e M from rfl,
+    ← StarAlgHomClass.map_cfc (reindexStarHom e) Real.log M hf (continuous_reindexStarHom e)
+      (ha := hM.1), reindexStarHom_apply]
+  exact congrArg (reindex e e) (hM.1.cfc_eq Real.log)
+
+/-- **The relative entropy is reindex-invariant**: `D(reindex e e ρ ‖ reindex e e σ) = D(ρ ‖ σ)`.
+Relabeling the index set leaves `S(·‖·)` unchanged — the bridge between the different product
+bracketings in strong subadditivity. From `matLog_reindex`, `map_mul`/`map_sub` of `reindexStarHom`,
+and `trace_reindex`. -/
+lemma relEntropy_reindex (e : n ≃ m) {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDef)
+    (hρ' : (reindex e e ρ).IsHermitian) (hσ' : (reindex e e σ).IsHermitian) :
+    QIQTH.QuantumEntropy.relEntropy hρ' hσ' = QIQTH.QuantumEntropy.relEntropy hρ.1 hσ.1 := by
+  rw [QIQTH.QuantumEntropy.relEntropy, QIQTH.QuantumEntropy.relEntropy,
+    matLog_reindex e hρ hρ', matLog_reindex e hσ hσ']
+  have hpush : reindex e e ρ
+        * (reindex e e (QIQTH.QuantumEntropy.matLog hρ.1)
+          - reindex e e (QIQTH.QuantumEntropy.matLog hσ.1))
+      = reindex e e (ρ * (QIQTH.QuantumEntropy.matLog hρ.1 - QIQTH.QuantumEntropy.matLog hσ.1)) := by
+    rw [show reindex e e ρ = reindexStarHom e ρ from rfl,
+      show reindex e e (QIQTH.QuantumEntropy.matLog hρ.1)
+          = reindexStarHom e (QIQTH.QuantumEntropy.matLog hρ.1) from rfl,
+      show reindex e e (QIQTH.QuantumEntropy.matLog hσ.1)
+          = reindexStarHom e (QIQTH.QuantumEntropy.matLog hσ.1) from rfl,
+      show reindex e e (ρ * (QIQTH.QuantumEntropy.matLog hρ.1 - QIQTH.QuantumEntropy.matLog hσ.1))
+          = reindexStarHom e (ρ * (QIQTH.QuantumEntropy.matLog hρ.1
+            - QIQTH.QuantumEntropy.matLog hσ.1)) from rfl,
+      ← map_sub, ← map_mul]
+  rw [hpush, trace_reindex]
+
 end QIQTH.Entropy
