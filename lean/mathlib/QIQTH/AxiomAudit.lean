@@ -2961,4 +2961,16 @@ namespace QIQTH.AxiomAudit
 -- form field) + the index-lowering musical ♭ map, injective from nondegeneracy (first half of the
 -- musical isomorphism). Foundation for Levi-Civita → Ricci → Einstein. Axiom-free.
 
+#print axioms QIQTH.Unruh.sinh_cosh_diff_sq
+#print axioms QIQTH.Unruh.rindler_interval
+-- expected: standard only — UNRUH EFFECT (geometric kernel; cited physics being formalized, plan 55).
+-- The Lorentzian interval along a uniformly accelerated (Rindler) worldline is (Δt)²−(Δx)² =
+-- (4/a²)sinh²(aΔτ/2). This sinh² is the entire reason the accelerated two-point function is thermal —
+-- its imaginary-time periodicity (NEXT: complex KMS) is the KMS condition at β=2π/a, i.e. T=a/2π. Axiom-free.
+#print axioms QIQTH.Unruh.sinh_sq_periodic
+#print axioms QIQTH.Unruh.kms_periodicity
+-- sinh_sq_periodic: THE KMS PERIODICITY (load-bearing complex analysis) — sinh² has imaginary period iπ,
+-- sinh(w−iπ)²=sinh(w)². kms_periodicity: in proper time, 1/sinh²(aΔτ/2) is periodic under Δτ→Δτ−2πi/a.
+-- This IS the KMS condition at β=2π/a ⟹ thermal at the Unruh temperature T=a/2π=ℏκ/2π. Axiom-free.
+
 end QIQTH.AxiomAudit
