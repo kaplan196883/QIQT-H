@@ -1,4 +1,6 @@
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+import Mathlib.Analysis.Calculus.LHopital
+import Mathlib.Analysis.Calculus.Deriv.Pow
 
 /-!
 # The integrand-matching kernel of Jacobson's Clausius argument
@@ -27,7 +29,32 @@ tensor equation feeding `jacobson_einstein_equation_of_state`.)
 
 namespace QIQTH.ClausiusIntegral
 
-open MeasureTheory
+open MeasureTheory Filter Topology
+
+/-- **Leading coefficient of an affine-weighted integral.** For continuous `φ`, the local horizon
+integral `∫₀^ε λ·φ(λ) dλ` behaves like `½φ(0)·ε²` as `ε → 0⁺`: `(∫₀^ε λ·φ)/ε² → φ(0)/2`. This is the
+*leading-order* form of the integral-to-point bridge that Jacobson's argument actually uses — both the
+heat flux `δQ = −κ∫λT_{kk}` and the area change `δS ∝ ∫λR_{kk}` (via Raychaudhuri `θ = −λR_{kk}`) have
+this `ε²` leading behaviour, and matching their coefficients gives `T_{kk}(0) ∝ R_{kk}(0)` *at the
+horizon point*. Proved by l'Hôpital: `(∫₀^ε λφ)'/(ε²)' = (ε·φ(ε))/(2ε) = φ(ε)/2 → φ(0)/2`. -/
+theorem weighted_integral_div_sq_tendsto {φ : ℝ → ℝ} (hφ : Continuous φ) :
+    Tendsto (fun ε => (∫ l in (0:ℝ)..ε, l * φ l) / ε ^ 2) (𝓝[>] 0) (𝓝 (φ 0 / 2)) := by
+  have hcφ : Continuous (fun l : ℝ => l * φ l) := continuous_id.mul hφ
+  have hF' : ∀ x : ℝ, HasDerivAt (fun ε => ∫ l in (0:ℝ)..ε, l * φ l) (x * φ x) x := fun x =>
+    intervalIntegral.integral_hasDerivAt_right (hcφ.intervalIntegrable _ _)
+      (hcφ.stronglyMeasurableAtFilter _ _) hcφ.continuousAt
+  have hg' : ∀ x : ℝ, HasDerivAt (fun ε => ε ^ 2) (2 * x) x := fun x => by
+    simpa using hasDerivAt_pow 2 x
+  refine HasDerivAt.lhopital_zero_right_on_Ioo (a := 0) (b := 1) one_pos
+    (fun x _ => hF' x) (fun x _ => hg' x) (fun x hx => mul_ne_zero two_ne_zero (ne_of_gt hx.1))
+    ?_ ?_ ?_
+  · simpa using tendsto_nhdsWithin_of_tendsto_nhds ((hF' 0).continuousAt.tendsto)
+  · simpa using tendsto_nhdsWithin_of_tendsto_nhds ((hg' 0).continuousAt.tendsto)
+  · have hev : (fun x => (x * φ x) / (2 * x)) =ᶠ[𝓝[>] 0] fun x => φ x / 2 := by
+      filter_upwards [self_mem_nhdsWithin] with x hx
+      rw [mul_comm (2 : ℝ) x, mul_div_mul_left (φ x) 2 (ne_of_gt hx)]
+    rw [tendsto_congr' hev]
+    exact tendsto_nhdsWithin_of_tendsto_nhds (hφ.continuousAt.tendsto.div_const 2)
 
 /-- **Integrand matching (FTC kernel of the Clausius step).** If the affine-parameter-weighted
 integrals `∫₀^ε λ·f(λ) dλ` and `∫₀^ε λ·g(λ) dλ` coincide for *every* upper limit `ε` — as Clausius
@@ -63,5 +90,26 @@ theorem integrand_proportional_of_weighted_integral_eq {f g : ℝ → ℝ} (c : 
   rw [h ε, ← intervalIntegral.integral_const_mul]
   refine intervalIntegral.integral_congr (fun l _ => ?_)
   ring
+
+/-- **Jacobson's conclusion at the horizon point (leading-order Clausius matching).** If the local
+horizon integrals satisfy `∫₀^ε λ·f = c·∫₀^ε λ·g` for every `ε` — the Clausius condition `δQ = TδS`
+along the generator, with `f = T_{ab}k^ak^b`, `g = R_{ab}k^ak^b`, `c = ℏη/2π` — then the **values at
+the horizon point agree**: `f(0) = c·g(0)`, i.e. `T_{ab}k^ak^b = (ℏη/2π)·R_{ab}k^ak^b` *at the point*.
+Obtained by matching the `ε²` leading coefficients (`weighted_integral_div_sq_tendsto`) of the two
+sides. This is the pointwise null-cone relation that, ranging over all null `k`, the Sylvester lemma
+turns into the tensor equation `a·T_{ab} = R_{ab} + φ·g_{ab}` feeding the field equation. -/
+theorem value_at_zero_of_weighted_integral_proportional {f g : ℝ → ℝ} (c : ℝ)
+    (hf : Continuous f) (hg : Continuous g)
+    (h : ∀ ε : ℝ, (∫ l in (0:ℝ)..ε, l * f l) = c * ∫ l in (0:ℝ)..ε, l * g l) :
+    f 0 = c * g 0 := by
+  have hf2 := weighted_integral_div_sq_tendsto hf
+  have hg2 := (weighted_integral_div_sq_tendsto hg).const_mul c
+  have hev : (fun ε => (∫ l in (0:ℝ)..ε, l * f l) / ε ^ 2)
+      =ᶠ[𝓝[>] 0] fun ε => c * ((∫ l in (0:ℝ)..ε, l * g l) / ε ^ 2) :=
+    Eventually.of_forall (fun ε => by
+      show (∫ l in (0:ℝ)..ε, l * f l) / ε ^ 2 = c * ((∫ l in (0:ℝ)..ε, l * g l) / ε ^ 2)
+      rw [h ε, mul_div_assoc])
+  have hval : f 0 / 2 = c * (g 0 / 2) := tendsto_nhds_unique_of_eventuallyEq hf2 hg2 hev
+  linarith
 
 end QIQTH.ClausiusIntegral
