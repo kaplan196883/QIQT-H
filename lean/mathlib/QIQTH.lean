@@ -391,5 +391,6 @@ import QIQTH.ManifoldCommutator
 import QIQTH.PseudoRiemannian
 import QIQTH.LeviCivita
 import QIQTH.ClausiusIntegral
+import QIQTH.ClausiusToPernull
 import QIQTH.Raychaudhuri
 import QIQTH.Unruh

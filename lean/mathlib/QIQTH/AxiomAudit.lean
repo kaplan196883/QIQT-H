@@ -3064,6 +3064,20 @@ namespace QIQTH.AxiomAudit
 -- constant Λ. All geometry discharged internally; cited residual = area law (gap 1), Clausius, the
 -- free-field correlator form behind Unruh, and the integral matching bundled into `pernull`. Axiom-free.
 
+#print axioms QIQTH.Curvature.BL_smul_sub
+#print axioms QIQTH.Curvature.pernull_of_clausius_integral
+#print axioms QIQTH.Curvature.jacobson_einstein_from_clausius_integral
+-- expected: standard only — WIRING THE INTEGRAL CLAUSIUS STEP INTO THE END-TO-END THEOREM (plan 56,
+-- ClausiusToPernull.lean). pernull_of_clausius_integral DERIVES the `pernull` premise of
+-- jacobson_einstein_equation_of_state from Jacobson's RAW integral Clausius relation: given the affine-
+-- weighted heat-flux integral ∫₀^ε λ·(a·T_{kk}) dλ = the area-change integral ∫₀^ε λ·R_{kk} dλ along every
+-- local Rindler generator (= his eq. dQ = eq. dA, i.e. δQ=TδS with κ cancelled and a=2π/ℏη folded in), the
+-- leading-ε² coefficients must match (value_at_zero_of_weighted_integral_proportional, FTC+l'Hôpital),
+-- giving a·T_{kk}(0)=R_{kk}(0) per null direction = BL(a·T−Ric)v=0 (via BL_smul_sub). jacobson_einstein_
+-- from_clausius_integral plugs this into the end-to-end theorem, so the premise is now LITERALLY Jacobson's
+-- eq.(dQ)=eq.(dA) — the integral→point step is no longer an assumed gap. Cited residual now = exactly the
+-- area law (gap 1), the Unruh temperature, and δQ=TδS. Axiom-free. Verified against gr-qc/9504004 in refs/.
+
 #print axioms QIQTH.ManifoldGR.mpullbackWithin_extChartAt_symm_apply
 #print axioms QIQTH.ManifoldGR.mpullbackWithin_extChartAt_symm_self
 -- expected: standard only — abstract-manifold thread (gap 3). Field-side chart identification: the
