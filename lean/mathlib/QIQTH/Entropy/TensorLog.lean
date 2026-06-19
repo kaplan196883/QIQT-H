@@ -149,6 +149,15 @@ discarded factor. The clean form of `Tr₁(ρ₁₂⊗ρ₃) = ρ₂⊗ρ₃` us
   simp only [partialTraceLeft_apply, kronecker_apply, Matrix.smul_apply, Matrix.trace,
     Matrix.diag_apply, smul_eq_mul, Finset.sum_mul]
 
+/-- **Tracing the first factor = swapping then tracing the second**:
+`Tr₂(reindex (prodComm) Y) = Tr₁ Y`. Lets the second-factor `partial_trace_dpi` discharge a
+first-factor trace after a `prodComm` relabel — the form used in strong subadditivity. -/
+@[simp] lemma partialTraceRight_reindex_prodComm (Y : Matrix (n × m) (n × m) ℂ) :
+    partialTraceRight (reindex (Equiv.prodComm n m) (Equiv.prodComm n m) Y) = partialTraceLeft Y := by
+  ext a b
+  simp only [partialTraceRight_apply, partialTraceLeft_apply, reindex_apply, submatrix_apply,
+    Equiv.prodComm_symm, Equiv.prodComm_apply, Prod.swap_prod_mk]
+
 /-- **The left partial-trace adjoint**: `Tr(ρ · (I ⊗ N)) = Tr((Tr₁ρ) · N)`. The mirror of
 `trace_mul_kron_one`: a factor-2 observable sees only the reduced state `Tr₁ρ`. -/
 theorem trace_mul_one_kron (ρ : Matrix (n × m) (n × m) ℂ) (N : Matrix m m ℂ) :
