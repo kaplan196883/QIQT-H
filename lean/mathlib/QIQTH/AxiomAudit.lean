@@ -2933,6 +2933,12 @@ namespace QIQTH.AxiomAudit
 -- geodesic_divergence_leibniz: for a geodesic field, the product-rule divergence of the acceleration
 -- vanishes — the sub-step toward rewriting Σ V^ν∇_μ∇_νV^μ as −(∇_μV^ν)(∇_νV^μ) (the shear part Jacobson
 -- neglects at the focusing point). Axiom-free.
+#print axioms QIQTH.Curvature.geodesic_leibniz
+#print axioms QIQTH.Curvature.raychaudhuri_geodesic
+-- geodesic_leibniz: Σ V^ν∇_μ∇_νV^μ = −(∇_μV^ν)(∇_νV^μ) for a geodesic field (hP + geodesic T1=0 +
+-- index-permutation T2=T3). raychaudhuri_geodesic: THE FULL RAYCHAUDHURI EQUATION in Jacobson's exact
+-- form V^ν∂_νθ = −(∇_μV^ν)(∇_νV^μ) − R_σν V^σV^ν. The ENTIRE GEOMETRY of Jacobson's front half is now
+-- machine-checked, axiom-free.
 -- expected: standard only — RAYCHAUDHURI FOCUSING (geometry of Jacobson's front half). pd_covDerivVec:
 -- the product-rule expansion of ∂_μ(∇_ν V^ρ). ricci_identity: THE COMMUTATOR OF COVARIANT DERIVATIVES
 -- IS THE RIEMANN TENSOR, (∇_μ∇_ν−∇_ν∇_μ)V^ρ=R^ρ_σμν V^σ — Bianchi-scale index computation (Schwarz

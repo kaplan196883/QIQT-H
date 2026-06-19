@@ -183,11 +183,77 @@ theorem geodesic_divergence_leibniz (g gi : Point n → Fin n → Fin n → ℝ)
   exact Finset.sum_congr rfl
     (fun ν _ => (pd_mul _ _ μ x (PdiffAt_of_contDiff _ (hVC ν) μ x) (hpdcov ν)).symm)
 
--- NEXT (optional polish): `geodesic_leibniz` — for a geodesic field,
--- `Σ_{νμ} V^ν ∇_μ∇_ν V^μ = − Σ_{μν} (∇_μV^ν)(∇_νV^μ)`, completing the textbook Raychaudhuri form
--- `V^ν∂_νθ = −(∇_μV^ν)(∇_νV^μ) − R(V,V)`. The key sub-lemma `geodesic_divergence_leibniz` is done; the
--- remaining assembly is three sum-reindexing steps (hP + geodesic T1=0 + torsion-free T2=T3). This is the
--- `−½θ²−σ²` shear term JACOBSON NEGLECTS at the focusing point — the focusing term `−R(V,V)` is already
--- machine-checked in `raychaudhuri_focusing`, so this is completionist polish, not new physics.
+/-- **Geodesic Leibniz identity.** For a geodesic field `V`, the Raychaudhuri second-derivative term
+is the shear/expansion quadratic: `Σ_{νμ} V^ν ∇_μ∇_ν V^μ = − Σ_{μν} (∇_μ V^ν)(∇_ν V^μ)`. -/
+theorem geodesic_leibniz (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (V : Point n → Fin n → ℝ)
+    (hVC : ∀ μ, ContDiff ℝ ⊤ (fun y => V y μ))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (hgeo : ∀ y μ, ∑ ν, V y ν * covDerivVec g gi V ν μ y = 0)
+    (x : Point n) :
+    ∑ ν, ∑ μ, V x ν * covDeriv2Vec g gi V μ ν μ x
+      = - ∑ μ, ∑ ν, covDerivVec g gi V μ ν x * covDerivVec g gi V ν μ x := by
+  rw [eq_neg_iff_add_eq_zero]
+  simp only [covDeriv2Vec]
+  rw [show (∑ μ, ∑ ν, covDerivVec g gi V μ ν x * covDerivVec g gi V ν μ x)
+        = ∑ μ, ∑ ν, (pd (fun y => V y ν) μ x + ∑ σ, christoffel g gi ν μ σ x * V x σ)
+            * covDerivVec g gi V ν μ x
+      from Finset.sum_congr rfl (fun μ _ => Finset.sum_congr rfl (fun ν _ => rfl))]
+  simp only [mul_add, mul_sub, add_mul, Finset.mul_sum, Finset.sum_mul, Finset.sum_add_distrib,
+    Finset.sum_sub_distrib]
+  -- P1 + P2 = Σ_μ (geodesic_divergence_leibniz μ) = 0
+  have hP12 : (∑ x_1, ∑ x_2, V x x_1 * pd (fun y => covDerivVec g gi V x_1 x_2 y) x_2 x)
+            + (∑ x_1, ∑ x_2, pd (fun y => V y x_2) x_1 x * covDerivVec g gi V x_2 x_1 x) = 0 := by
+    rw [Finset.sum_comm (f := fun x_1 x_2 =>
+          V x x_1 * pd (fun y => covDerivVec g gi V x_1 x_2 y) x_2 x), ← Finset.sum_add_distrib]
+    refine Finset.sum_eq_zero (fun μ _ => ?_)
+    rw [← Finset.sum_add_distrib, ← geodesic_divergence_leibniz g gi V hVC hC hgeo μ x]
+    exact Finset.sum_congr rfl (fun ν _ => by ring)
+  -- T1 = Σ_{μσ} Γ^μ_{μσ} (Σ_ν V^ν ∇_ν V^σ) = 0 by the geodesic equation
+  have hT1 : (∑ x_1, ∑ x_2, ∑ i,
+        V x x_1 * (christoffel g gi x_2 x_2 i x * covDerivVec g gi V x_1 i x)) = 0 := by
+    rw [Finset.sum_comm]
+    refine Finset.sum_eq_zero (fun μ _ => ?_)
+    rw [Finset.sum_comm]
+    refine Finset.sum_eq_zero (fun σ _ => ?_)
+    rw [show (∑ x_1, V x x_1 * (christoffel g gi μ μ σ x * covDerivVec g gi V x_1 σ x))
+          = christoffel g gi μ μ σ x * ∑ x_1, V x x_1 * covDerivVec g gi V x_1 σ x from by
+        rw [Finset.mul_sum]; exact Finset.sum_congr rfl (fun ν _ => by ring), hgeo x σ, mul_zero]
+  -- T2' = T3' by permuting the three summation indices (a,b,c) ↦ (b,c,a)
+  have hT23 : (∑ x_1, ∑ x_2, ∑ i,
+        V x x_1 * (christoffel g gi i x_2 x_1 x * covDerivVec g gi V i x_2 x))
+            = (∑ x_1, ∑ x_2, ∑ i,
+        christoffel g gi x_2 x_1 i x * V x i * covDerivVec g gi V x_2 x_1 x) := by
+    rw [show (∑ x_1, ∑ x_2, ∑ i,
+          V x x_1 * (christoffel g gi i x_2 x_1 x * covDerivVec g gi V i x_2 x))
+        = ∑ a, ∑ b, ∑ c,
+          christoffel g gi c b a x * V x a * covDerivVec g gi V c b x from
+      Finset.sum_congr rfl (fun a _ => Finset.sum_congr rfl (fun b _ =>
+        Finset.sum_congr rfl (fun c _ => by ring)))]
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl (fun b _ => ?_)
+    rw [Finset.sum_comm]
+  linarith [hP12, hT1, hT23]
+
+/-- **The Raychaudhuri equation** (geodesic congruence), in Jacobson's exact form:
+
+  `V^ν ∂_ν θ = − (∇_μ V^ν)(∇_ν V^μ) − R_{σν} V^σ V^ν`.
+
+The expansion `θ` of a geodesic congruence focuses, driven by the shear/expansion quadratic
+`−(∇V)(∇V)` (Jacobson's `−½θ²−σ²`, the term he *neglects* near a stationary horizon) and the
+**Ricci focusing term `−R(V,V)`** (the term he *uses*). Assembled from `raychaudhuri_focusing` and
+`geodesic_leibniz`. **The full geometry of Jacobson's front half is now machine-checked, axiom-free.** -/
+theorem raychaudhuri_geodesic (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (V : Point n → Fin n → ℝ)
+    (hVC : ∀ μ, ContDiff ℝ ⊤ (fun y => V y μ))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (hgeo : ∀ y μ, ∑ ν, V y ν * covDerivVec g gi V ν μ y = 0)
+    (x : Point n) :
+    ∑ ν, V x ν * pd (fun y => expansion g gi V y) ν x
+      = - (∑ μ, ∑ ν, covDerivVec g gi V μ ν x * covDerivVec g gi V ν μ x)
+        - ∑ ν, ∑ σ, ricci g gi σ ν x * V x σ * V x ν := by
+  rw [raychaudhuri_focusing g gi hsymm V hVC hC x, geodesic_leibniz g gi hsymm V hVC hC hgeo x]
 
 end QIQTH.Curvature
