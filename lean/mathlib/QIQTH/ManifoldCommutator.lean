@@ -164,6 +164,17 @@ theorem dirDeriv_eventuallyEq_chart (f : M → 𝕜) (Y : Π z : M, TangentSpace
   filter_upwards [extChartAt_source_mem_nhds (I := I) x] with z hz
   exact dirDeriv_eq_chartAt f Y x z hz (hf z)
 
+/-- **Field-side chart identification at the base point.** The model-space representative of a vector
+field `X` used inside `mlieBracket I X Y x` — namely its chart pullback `mpullbackWithin 𝓘 I e⁻¹ X
+(range I)` (with `e = extChartAt I x`) — takes the value `X x` at the chart point `e x`. This is the
+field-side analogue of the function-side `dirDeriv_eq_chart`, and is one of the base-point
+identifications the manifold-commutator assembly rests on. It holds because the inverse of `de⁻¹` at
+the chart point is the identity (`mfderivWithin_extChartAt_symm_inverse_apply`). -/
+theorem mpullbackWithin_extChartAt_symm_self (X : Π z : M, TangentSpace I z) (x : M) :
+    mpullbackWithin 𝓘(𝕜, E) I (extChartAt I x).symm X (Set.range I) (extChartAt I x x) = X x := by
+  rw [VectorField.mpullbackWithin_apply, mfderivWithin_extChartAt_symm_inverse_apply,
+    (extChartAt I x).left_inv (mem_extChartAt_source x)]
+
 end GeneralManifold
 
 end QIQTH.ManifoldGR
