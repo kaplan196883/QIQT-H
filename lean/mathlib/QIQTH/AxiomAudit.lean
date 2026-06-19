@@ -3003,6 +3003,12 @@ namespace QIQTH.AxiomAudit
 -- identities) — what the SECOND directional derivative in the commutator assembly needs; _self is the
 -- base-point corollary (de_x = id ⟹ = X x). Field analogues of dirDeriv_eq_chart. Axiom-free.
 
+#print axioms QIQTH.ManifoldGR.tangent_eq_zero_of_forall_mfderiv
+-- expected: standard only — NON-DEGENERACY of the tangent–cotangent pairing: if df_x(v)=0 for every
+-- scalar f, then v=0. Tested against f = ℓ∘extChartAt for ℓ in the dual; since de_x=id, df_x(v)=ℓ(v),
+-- so all duals vanish on v ⟹ v=0 by Hahn–Banach (SeparatingDual 𝕜 E, e.g. 𝕜=ℝ). This upgrades
+-- "holds against every function" identities to genuine vector-field identities — the device that turns
+-- the functional Jacobi (a corollary of the commutator) into the vector Jacobi `first_bianchi` needs.
 #print axioms QIQTH.ManifoldGR.dirDeriv_model_apply
 #print axioms QIQTH.ManifoldGR.dirDeriv_dirDeriv_eq_chart
 #print axioms QIQTH.ManifoldGR.mfderiv_apply_mlieBracket

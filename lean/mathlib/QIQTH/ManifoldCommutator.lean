@@ -1,7 +1,9 @@
 import Mathlib.Geometry.Manifold.VectorField.LieBracket
 import Mathlib.Geometry.Manifold.MFDeriv.FDeriv
+import Mathlib.Geometry.Manifold.ContMDiff.NormedSpace
 import Mathlib.Analysis.Calculus.VectorField
 import Mathlib.Analysis.Calculus.FDeriv.Symmetric
+import Mathlib.Analysis.LocallyConvex.SeparatingDual
 
 /-!
 # The Lie-bracket-as-commutator on functions (manifold infrastructure)
@@ -285,6 +287,31 @@ theorem mfderiv_apply_mlieBracket
   rw [hbracket, hbr]
   exact (DFunLike.congr_fun
     (mfderiv_eq_fderiv (f := f ∘ (extChartAt I x).symm) (x := extChartAt I x x)) _).symm
+
+/-- **Non-degeneracy of the tangent–cotangent pairing.** A tangent vector annihilated by the
+differential of *every* scalar function is zero: if `mfderiv f x v = 0` for all `f : M → 𝕜`, then
+`v = 0`. Proof: test against `f = ℓ ∘ extChartAt I x` for `ℓ` in the (strong) dual of the model space;
+since `de_x = id`, `mfderiv f x v = ℓ v`, so `ℓ v = 0` for every `ℓ`, whence `v = 0` by Hahn–Banach
+(`SeparatingDual`). This is the device that upgrades identities holding "against every function" to
+genuine vector-field identities — e.g. it turns the functional Jacobi identity (a direct corollary of
+the commutator `mfderiv_apply_mlieBracket`) into the vector-field Jacobi identity that
+`first_bianchi` consumes. -/
+theorem tangent_eq_zero_of_forall_mfderiv [SeparatingDual 𝕜 E]
+    (x : M) (v : TangentSpace I x)
+    (h : ∀ f : M → 𝕜, mfderiv I 𝓘(𝕜) f x v = 0) : v = 0 := by
+  -- work with a genuinely `E`-typed vector to avoid the `TangentSpace I x = E` synonym friction
+  suffices h0 : ∀ w : E, (∀ f : M → 𝕜, mfderiv I 𝓘(𝕜) f x w = 0) → w = 0 from h0 v h
+  intro w hw
+  refine SeparatingDual.eq_zero_of_forall_dual_eq_zero (R := 𝕜) (fun ℓ => ?_)
+  have he : MDifferentiableAt I 𝓘(𝕜, E) (extChartAt I x) x :=
+    mdifferentiableAt_extChartAt (mem_chart_source H x)
+  have hℓ : MDifferentiableAt 𝓘(𝕜, E) 𝓘(𝕜) (⇑ℓ) (extChartAt I x x) :=
+    (ℓ.contMDiffAt (n := 1)).mdifferentiableAt (by norm_num)
+  have key : mfderiv I 𝓘(𝕜) ((⇑ℓ) ∘ ⇑(extChartAt I x)) x w = ℓ w := by
+    rw [mfderiv_comp x hℓ he, mfderiv_extChartAt_self, mfderiv_eq_fderiv, ℓ.fderiv]
+    rfl
+  have := hw ((⇑ℓ) ∘ ⇑(extChartAt I x))
+  rwa [key] at this
 
 end GeneralManifold
 
