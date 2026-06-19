@@ -10,12 +10,12 @@ With partial-trace data processing in hand (`partial_trace_dpi`), the next headl
 `S(ρ₁₃)+S(ρ₂₃) ≥ S(ρ₁₂₃)+S(ρ₃)` (§6.6) of the von Neumann entropy. Both rest on the **tensor logarithm**
 identity `log(ρ₁ ⊗ ρ₂) = log ρ₁ ⊗ I + I ⊗ log ρ₂`.
 
-`matLog_kron_one` (in `PartialTraceDPI.lean`) already gives the right-factor half `log(A ⊗ 1) = (log A)⊗1`.
-This file supplies the **left-factor half** `log(1 ⊗ B) = 1 ⊗ (log B)`, via the two-type left Kronecker
-homomorphism `kronLeftHom` and CFC naturality — the exact mirror of `kronRightHom`/`matLog_kron_one`.
-The remaining ingredient for the full identity (the commuting-product log rule
-`log(PQ) = log P + log Q` for commuting positive `P, Q`, applied to `P = A⊗1`, `Q = 1⊗B`) is the cited
-next brick. Axiom-free.
+This file builds the full tensor logarithm and uses it to prove **subadditivity** `S(ρ) ≤ S(ρ₁) + S(ρ₂)`:
+the left-factor half `log(1⊗B)=1⊗logB` (`matLog_one_kron`, mirror of `matLog_kron_one`), the
+commuting-product log rule `log(PQ)=logP+logQ` (`matLog_mul_of_commute`), the general tensor log
+`log(A⊗B)=logA⊗I+I⊗logB` (`matLog_kronecker`), the two partial-trace adjoints `Tr(ρ(M⊗I))=Tr((Tr₂ρ)M)`
+and `Tr(ρ(I⊗N))=Tr((Tr₁ρ)N)`, the partial trace `Tr₁` (`partialTraceLeft`) with its trace/positivity
+preservation, and the capstone `subadditivity`. Axiom-free.
 -/
 
 namespace QIQTH.Entropy
@@ -187,5 +187,32 @@ theorem partialTraceLeft_posDef [Nonempty n] {ρ : Matrix (n × m) (n × m) ℂ}
     exact Finset.sum_pos (fun i _ => hρ.dotProduct_mulVec_pos (by
       obtain ⟨a, ha⟩ := Function.ne_iff.mp hv
       exact Function.ne_iff.mpr ⟨(i, a), by simpa using ha⟩)) Finset.univ_nonempty
+
+/-- # SUBADDITIVITY of the von Neumann entropy (Carlen §6.5): `S(ρ) ≤ S(ρ₁) + S(ρ₂)`, where
+`ρ₁ = Tr₂ρ` and `ρ₂ = Tr₁ρ` are the reduced states. From Klein's inequality
+`S(ρ ‖ ρ₁⊗ρ₂) ≥ 0` and the computation `S(ρ‖ρ₁⊗ρ₂) = −S(ρ) + S(ρ₁) + S(ρ₂)`, which uses the general
+tensor logarithm `log(ρ₁⊗ρ₂) = logρ₁⊗I + I⊗logρ₂` and the two partial-trace adjoints. Axiom-free. -/
+theorem subadditivity {N : ℕ} [NeZero N] [Nonempty n]
+    {ρ : Matrix (n × Fin N) (n × Fin N) ℂ} (hρ : ρ.PosDef) (hρ1 : ρ.trace = 1)
+    (hd : QIQTH.QuantumEntropy.IsDensity ρ)
+    (hd1 : QIQTH.QuantumEntropy.IsDensity (partialTraceRight ρ))
+    (hd2 : QIQTH.QuantumEntropy.IsDensity (partialTraceLeft ρ)) :
+    QIQTH.QuantumEntropy.vonNeumannEntropy hd
+      ≤ QIQTH.QuantumEntropy.vonNeumannEntropy hd1
+        + QIQTH.QuantumEntropy.vonNeumannEntropy hd2 := by
+  haveI : Nonempty (Fin N) := ⟨⟨0, Nat.pos_of_ne_zero (NeZero.ne N)⟩⟩
+  have hρ1pd : (partialTraceRight ρ).PosDef := partialTraceRight_posDef hρ
+  have hρ2pd : (partialTraceLeft ρ).PosDef := partialTraceLeft_posDef hρ
+  have hσpd : (partialTraceRight ρ ⊗ₖ partialTraceLeft ρ).PosDef := hρ1pd.kronecker hρ2pd
+  have hσ1 : (partialTraceRight ρ ⊗ₖ partialTraceLeft ρ).trace = 1 := by
+    rw [trace_kronecker, trace_partialTraceRight, trace_partialTraceLeft, hρ1, mul_one]
+  have hnn := QIQTH.QuantumEntropy.relEntropy_nonneg hρ hσpd hρ1 hσ1
+  rw [QIQTH.QuantumEntropy.relEntropy, matLog_kronecker hρ1pd hρ2pd, mul_sub, mul_add,
+    Matrix.trace_sub, Matrix.trace_add, trace_mul_kron_one, trace_mul_one_kron,
+    Complex.sub_re, Complex.add_re] at hnn
+  rw [QIQTH.QuantumEntropy.vonNeumannEntropy_eq_neg_trace hρ hd,
+    QIQTH.QuantumEntropy.vonNeumannEntropy_eq_neg_trace hρ1pd hd1,
+    QIQTH.QuantumEntropy.vonNeumannEntropy_eq_neg_trace hρ2pd hd2]
+  linarith [hnn]
 
 end QIQTH.Entropy
