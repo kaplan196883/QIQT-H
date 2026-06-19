@@ -51,4 +51,17 @@ theorem integrand_eq_of_weighted_integral_eq {f g : ℝ → ℝ}
   have hmul : ε * f ε = ε * g ε := hF.unique hG
   exact mul_left_cancel₀ (by simpa using hε) hmul
 
+/-- **Proportional integrand matching** — the form used in the Clausius step, with the physical
+constant `c = ℏη/2π`. If `∫₀^ε λ·f = c·∫₀^ε λ·g` for every `ε` (i.e. `δQ = T δS` along every local
+horizon, with `f = T_{ab}k^ak^b`, `g = R_{ab}k^ak^b`), then `f = c·g` pointwise — Jacobson's
+conclusion `T_{ab}k^ak^b = (ℏη/2π)·R_{ab}k^ak^b`. -/
+theorem integrand_proportional_of_weighted_integral_eq {f g : ℝ → ℝ} (c : ℝ)
+    (hf : Continuous f) (hg : Continuous g)
+    (h : ∀ ε : ℝ, (∫ l in (0:ℝ)..ε, l * f l) = c * ∫ l in (0:ℝ)..ε, l * g l) :
+    f = fun x => c * g x := by
+  refine integrand_eq_of_weighted_integral_eq hf (continuous_const.mul hg) (fun ε => ?_)
+  rw [h ε, ← intervalIntegral.integral_const_mul]
+  refine intervalIntegral.integral_congr (fun l _ => ?_)
+  ring
+
 end QIQTH.ClausiusIntegral
