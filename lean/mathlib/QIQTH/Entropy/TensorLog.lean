@@ -343,6 +343,27 @@ lemma relEntropy_reindex (e : n ≃ m) {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef
       ← map_sub, ← map_mul]
   rw [hpush, trace_reindex]
 
+/-- **Data processing under the LEFT partial trace**: `D(Tr₁ρ ‖ Tr₁σ) ≤ D(ρ ‖ σ)`. The mirror of
+`partial_trace_dpi`, obtained by swapping the factors (`prodComm`) and invoking the right-factor
+version on the relabelled states — the reindex leaves the relative entropy unchanged
+(`relEntropy_reindex`), and `partialTraceRight_reindex_prodComm` identifies the discarded factor. -/
+theorem partial_trace_left_dpi {N : ℕ} [NeZero N] {ω : ℂ} (hω : IsPrimitiveRoot ω N)
+    {ρ σ : Matrix (Fin N × m) (Fin N × m) ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDef) :
+    QIQTH.QuantumEntropy.relEntropy (partialTraceLeft_posDef hρ).1
+        (partialTraceLeft_posDef hσ).1
+      ≤ QIQTH.QuantumEntropy.relEntropy hρ.1 hσ.1 := by
+  haveI : Nonempty (Fin N) := ⟨⟨0, Nat.pos_of_ne_zero (NeZero.ne N)⟩⟩
+  have hρr : (reindex (Equiv.prodComm (Fin N) m) (Equiv.prodComm (Fin N) m) ρ).PosDef :=
+    hρ.submatrix (Equiv.prodComm (Fin N) m).symm.injective
+  have hσr : (reindex (Equiv.prodComm (Fin N) m) (Equiv.prodComm (Fin N) m) σ).PosDef :=
+    hσ.submatrix (Equiv.prodComm (Fin N) m).symm.injective
+  have hdpi := partial_trace_dpi hω hρr hσr
+  rw [relEntropy_reindex (Equiv.prodComm (Fin N) m) hρ hσ hρr.1 hσr.1,
+    relEntropy_congr (partialTraceRight_posDef hρr).1 (partialTraceLeft_posDef hρ).1
+      (partialTraceRight_posDef hσr).1 (partialTraceLeft_posDef hσ).1
+      (partialTraceRight_reindex_prodComm ρ) (partialTraceRight_reindex_prodComm σ)] at hdpi
+  exact hdpi
+
 /-- **The von Neumann entropy is reindex-invariant**: `S(reindex e e ρ) = S(ρ)`. The entropy terms in
 strong subadditivity are unchanged by relabeling the index set across product bracketings. -/
 lemma vonNeumannEntropy_reindex (e : n ≃ m) {ρ : Matrix n n ℂ} (hρ : ρ.PosDef)
