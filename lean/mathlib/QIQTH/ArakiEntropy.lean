@@ -586,6 +586,33 @@ theorem connesCocycle_chain (hσ : σ.PosDef) (hρ : ρ.PosDef) (s t : ℝ) :
   simp only [mul_assoc]
   rw [← mul_assoc (relModFlow hρ hρ (-s)) (relModFlow hρ hρ s), hcancel, one_mul]
 
+/-! ### The modular conjugation `J` and `JMJ = M'` -/
+
+/-- The **modular conjugation** `J : HSMat → HSMat`, `J(X) = X†` (conjugate transpose).  For the
+    standard form on Hilbert–Schmidt space this is Tomita's antiunitary `J` — the polar part of the
+    Tomita operator `S = J Δ^{1/2}`.  (It is conjugate-linear, so kept as a plain map.) -/
+noncomputable def J (X : HSMat n) : HSMat n := ofMat ((toMat X)ᴴ)
+
+@[simp] theorem toMat_J (X : HSMat n) : toMat (J X) = (toMat X)ᴴ := rfl
+
+/-- `J` is an involution: `J² = id`. -/
+theorem J_involutive (X : HSMat n) : J (J X) = X := by
+  apply toMat_injective
+  simp only [toMat_J, Matrix.conjTranspose_conjTranspose]
+
+/-- **Tomita's `J M J = M'` (left → right):** `J L_A J = R_{A†}` — the modular conjugation maps the
+    left multiplication algebra `M = L(Matrix)` onto its commutant `M' = R(Matrix)`. -/
+theorem J_Lmul_J (A : Matrix n n ℂ) (X : HSMat n) : J (Lmul A (J X)) = Rmul Aᴴ X := by
+  apply toMat_injective
+  simp only [toMat_J, Lmul_apply, Rmul_apply, Matrix.conjTranspose_mul,
+    Matrix.conjTranspose_conjTranspose]
+
+/-- **Tomita's `J M J = M'` (right → left):** `J R_B J = L_{B†}`. -/
+theorem J_Rmul_J (B : Matrix n n ℂ) (X : HSMat n) : J (Rmul B (J X)) = Lmul Bᴴ X := by
+  apply toMat_injective
+  simp only [toMat_J, Lmul_apply, Rmul_apply, Matrix.conjTranspose_mul,
+    Matrix.conjTranspose_conjTranspose]
+
 end ModularFlow
 
 end QIQTH.Araki
