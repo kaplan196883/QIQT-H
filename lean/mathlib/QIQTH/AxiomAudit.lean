@@ -2438,6 +2438,33 @@ namespace QIQTH.AxiomAudit
 -- S(ρ‖σ) = −⟪ρ^½, log Δ_{σ|ρ} ρ^½⟫ reduces to the finite Umegaki entropy tr(ρ(log ρ − log σ)).
 -- Certifies the σ-numerator/ρ-denominator convention. (Finite-dim Type I instance; continuum is the frontier.)
 
+-- ★★★ FINITE TOMITA–TAKESAKI + CONNES MODULAR THEORY (2026-06-20, all axiom-free / standard only).
+-- The relative modular flow Δ^{it}, its algebra action, Tomita σ_t(M)=M & JMJ=M', the Connes cocycle,
+-- KMS, and the modular automorphism group — the complete finite modular theory on Hilbert–Schmidt space.
+#print axioms QIQTH.Araki.arakiEntropy_nonneg
+#print axioms QIQTH.Araki.relModFlow_add
+#print axioms QIQTH.Araki.relModFlow_mem_unitary
+#print axioms QIQTH.Araki.relModFlow_apply
+#print axioms QIQTH.Araki.relModFlow_fix_gns
+#print axioms QIQTH.Araki.relModFlow_eq_Lmul_Rmul
+#print axioms QIQTH.Araki.relModFlow_conj_Lmul
+#print axioms QIQTH.Araki.relModFlow_conj_Rmul
+#print axioms QIQTH.Araki.connesCocycle
+#print axioms QIQTH.Araki.connesCocycle_chain
+#print axioms QIQTH.Araki.J_involutive
+#print axioms QIQTH.Araki.J_Lmul_J
+#print axioms QIQTH.Araki.J_Rmul_J
+#print axioms QIQTH.Araki.J_inner
+#print axioms QIQTH.Araki.kms_condition
+#print axioms QIQTH.Araki.modAut_one
+#print axioms QIQTH.Araki.modAut_mul
+#print axioms QIQTH.Araki.modAut_conjTranspose
+#print axioms QIQTH.Araki.modAut_add
+#print axioms QIQTH.Araki.relEntropy_eq_neg_modGen
+-- expected (ALL): standard only [propext, Classical.choice, Quot.sound]. Δ^{it} one-param unitary group
+-- + GNS-invariance + Δ^{it}=L_{σ^{it}}R_{ρ^{-it}} + Tomita σ_t(M)=M / σ_t(M')=M' / JMJ=M' (J antiunitary)
+-- + Connes cocycle (Dσ:Dρ)_t + chain rule + KMS + σ_t *-automorphism group + S(ρ‖σ)=−⟪ξ_ρ,(logΔ)ξ_ρ⟫.
+
 -- MODULAR RELATIVE ENTROPY (Phase B): the continuum one-particle (standard-subspace) relative-entropy
 -- functional, built from the bounded RvD operator R=P+Q (NO unbounded log Δ).
 #print axioms QIQTH.modChar_eq_exp_entropyDensity
