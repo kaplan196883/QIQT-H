@@ -49,21 +49,27 @@ theorem partialTraceRight_isHermitian {ρ : Matrix (n × m) (n × m) ℂ} (hρ :
   refine Finset.sum_congr rfl (fun a _ => ?_)
   exact hρ.apply (i, a) (j, a)
 
-/-- **The partial trace is positivity-preserving** (Carlen Thm 5.6): `ρ ≥ 0 ⟹ Tr₂ ρ ≥ 0`. For any
-`v : n → ℂ`, `⟨v, (Tr₂ρ) v⟩ = Σ_a ⟨w_a, ρ w_a⟩` with `w_a` the vector supported on the `a`-slice of the
-second factor (`w_a(k,b) = [b=a] v_k`), so the quadratic form is a sum of the nonnegative quadratic forms
-of `ρ`. -/
-theorem partialTraceRight_posSemidef {ρ : Matrix (n × m) (n × m) ℂ} (hρ : ρ.PosSemidef) :
-    (partialTraceRight ρ).PosSemidef := by
-  refine Matrix.PosSemidef.of_dotProduct_mulVec_nonneg (partialTraceRight_isHermitian hρ.1)
-    (fun v => ?_)
-  -- the slice vectors `w_a (k,b) = [b = a] v_k`
-  set w : m → (n × m) → ℂ := fun a p => if p.2 = a then v p.1 else 0 with hw
-  -- the quadratic form of `ρ` on `w a` is the `a`-summand of the partial-trace quadratic form
-  have term : ∀ a : m, star (w a) ⬝ᵥ (ρ *ᵥ (w a))
+/-- The **`a`-slice vector** `w_a (k,b) = [b = a] v_k` — `v` placed on the `a`-fibre of the second
+factor, zero elsewhere. The partial-trace quadratic form decomposes as a sum of `ρ`'s quadratic forms
+over these. -/
+def sliceVec (v : n → ℂ) (a : m) : (n × m) → ℂ := fun p => if p.2 = a then v p.1 else 0
+
+/-- A slice vector of a nonzero `v` is nonzero (its `a`-fibre carries `v`). -/
+lemma sliceVec_ne_zero {v : n → ℂ} (hv : v ≠ 0) (a : m) : sliceVec v a ≠ 0 := by
+  obtain ⟨k, hk⟩ := Function.ne_iff.mp hv
+  refine Function.ne_iff.mpr ⟨(k, a), ?_⟩
+  simpa [sliceVec] using hk
+
+/-- **The partial-trace quadratic-form decomposition.** `⟨v, (Tr₂ρ) v⟩ = Σ_a ⟨w_a, ρ w_a⟩` with `w_a`
+the `a`-slice of `v`. This is the heart of both the positivity statements: the partial-trace quadratic
+form is a sum of `ρ`'s quadratic forms over the fibres. -/
+theorem partialTraceRight_quadForm (ρ : Matrix (n × m) (n × m) ℂ) (v : n → ℂ) :
+    star v ⬝ᵥ (partialTraceRight ρ *ᵥ v)
+      = ∑ a : m, star (sliceVec v a) ⬝ᵥ (ρ *ᵥ (sliceVec v a)) := by
+  have term : ∀ a : m, star (sliceVec v a) ⬝ᵥ (ρ *ᵥ (sliceVec v a))
       = ∑ i, ∑ j, star (v i) * (ρ (i, a) (j, a) * v j) := by
     intro a
-    simp only [dotProduct, mulVec, hw, Pi.star_apply, Fintype.sum_prod_type,
+    simp only [dotProduct, mulVec, sliceVec, Pi.star_apply, Fintype.sum_prod_type,
       apply_ite (star : ℂ → ℂ), star_zero, mul_ite, mul_zero, ite_mul, zero_mul, Finset.mul_sum,
       Finset.sum_ite_irrel, Finset.sum_const_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true]
   -- LHS in canonical `∑ i ∑ j ∑ a` order, by hand (avoids simp's variable reshuffle)
@@ -74,16 +80,31 @@ theorem partialTraceRight_posSemidef {ρ : Matrix (n × m) (n × m) ℂ} (hρ : 
     rw [Finset.mul_sum]
     refine Finset.sum_congr rfl (fun j _ => ?_)
     rw [Finset.sum_mul, Finset.mul_sum]
-  have rhs_eq : (∑ a : m, star (w a) ⬝ᵥ (ρ *ᵥ (w a)))
-      = ∑ a, ∑ i, ∑ j, star (v i) * (ρ (i, a) (j, a) * v j) :=
-    Finset.sum_congr rfl (fun a _ => term a)
-  have key : star v ⬝ᵥ (partialTraceRight ρ *ᵥ v) = ∑ a : m, star (w a) ⬝ᵥ (ρ *ᵥ (w a)) := by
-    rw [lhs_eq, rhs_eq,
-      show (∑ i, ∑ j, ∑ a, star (v i) * (ρ (i, a) (j, a) * v j))
-          = ∑ i, ∑ a, ∑ j, star (v i) * (ρ (i, a) (j, a) * v j) from
-        Finset.sum_congr rfl (fun i _ => Finset.sum_comm)]
-    exact Finset.sum_comm
-  rw [key]
-  exact Finset.sum_nonneg (fun a _ => hρ.dotProduct_mulVec_nonneg (w a))
+  rw [lhs_eq, Finset.sum_congr rfl (fun a _ => term a),
+    show (∑ i, ∑ j, ∑ a, star (v i) * (ρ (i, a) (j, a) * v j))
+        = ∑ i, ∑ a, ∑ j, star (v i) * (ρ (i, a) (j, a) * v j) from
+      Finset.sum_congr rfl (fun i _ => Finset.sum_comm)]
+  exact Finset.sum_comm
+
+/-- **The partial trace is positivity-preserving** (Carlen Thm 5.6): `ρ ≥ 0 ⟹ Tr₂ ρ ≥ 0`. The
+quadratic form is a sum (over the fibres) of the nonnegative quadratic forms of `ρ`. -/
+theorem partialTraceRight_posSemidef {ρ : Matrix (n × m) (n × m) ℂ} (hρ : ρ.PosSemidef) :
+    (partialTraceRight ρ).PosSemidef := by
+  refine Matrix.PosSemidef.of_dotProduct_mulVec_nonneg (partialTraceRight_isHermitian hρ.1)
+    (fun v => ?_)
+  rw [partialTraceRight_quadForm]
+  exact Finset.sum_nonneg (fun a _ => hρ.dotProduct_mulVec_nonneg (sliceVec v a))
+
+/-- **The partial trace preserves strict positivity** (over a nonempty traced-out factor): `ρ > 0 ⟹
+Tr₂ ρ > 0`. Needed because the Umegaki relative entropy `D(·‖·)` is defined for positive-definite
+states — so partial-trace data processing `D(Tr₂ρ ‖ Tr₂σ) ≤ D(ρ‖σ)` requires `Tr₂` to land in
+`PosDef`. For `v ≠ 0` every slice `w_a ≠ 0`, so every summand `⟨w_a, ρ w_a⟩ > 0`. -/
+theorem partialTraceRight_posDef [Nonempty m] {ρ : Matrix (n × m) (n × m) ℂ} (hρ : ρ.PosDef) :
+    (partialTraceRight ρ).PosDef := by
+  refine Matrix.PosDef.of_dotProduct_mulVec_pos (partialTraceRight_isHermitian hρ.1)
+    (fun v hv => ?_)
+  rw [partialTraceRight_quadForm]
+  exact Finset.sum_pos (fun a _ => hρ.dotProduct_mulVec_pos (sliceVec_ne_zero hv a))
+    Finset.univ_nonempty
 
 end QIQTH.Entropy

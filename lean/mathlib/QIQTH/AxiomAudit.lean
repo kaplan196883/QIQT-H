@@ -2191,12 +2191,16 @@ namespace QIQTH.AxiomAudit
 -- restrict) RETIRED → budget 21→17. The DPI/Lieb tower is complete for the mixed-unitary class.
 #print axioms QIQTH.Entropy.trace_partialTraceRight
 #print axioms QIQTH.Entropy.partialTraceRight_isHermitian
+#print axioms QIQTH.Entropy.partialTraceRight_quadForm
 #print axioms QIQTH.Entropy.partialTraceRight_posSemidef
+#print axioms QIQTH.Entropy.partialTraceRight_posDef
 -- expected: standard only — PARTIAL TRACE Tr₂ + its structural properties (Carlen Thm 5.6), toward
 -- FULLY-GENERAL CPTP DPI beyond the mixed-unitary class. (Tr₂ρ)_{ij}=Σ_a ρ_{(i,a)(j,a)} is trace-
--- preserving and positivity-preserving (⟨v,Tr₂ρ v⟩=Σ_a⟨w_a,ρ w_a⟩ with w_a the a-slice vector, a sum
--- of ρ's nonneg quadratic forms), hence Hermitian-preserving. The reusable foundation; the discrete-
--- Weyl 1-design realizing ρ↦(Tr₂ρ)⊗(I/m) as mixed-unitary + the DPI assembly are next. Axiom-free.
+-- preserving and positivity-preserving — the quadratic-form decomposition ⟨v,Tr₂ρ v⟩=Σ_a⟨w_a,ρ w_a⟩
+-- (partialTraceRight_quadForm, w_a the a-slice of v) makes Tr₂ both PSD-preserving and (over a nonempty
+-- traced factor) PosDef-preserving (each ⟨w_a,ρ w_a⟩>0 for v≠0) — the latter needed since the Umegaki
+-- relative entropy D(·‖·) is PosDef-only. Hence Hermitian-preserving. The reusable foundation; the
+-- discrete-Weyl 1-design realizing ρ↦(Tr₂ρ)⊗(I/m) as mixed-unitary + the DPI assembly are next. Axiom-free.
 #print axioms QIQTH.QuantumEntropy.relEntropy_eq_zero
 -- expected: standard only — ★★★★★ KLEIN'S EQUALITY CASE: D(ρ‖σ)=0 ⟹ ρ=σ for density matrices. The
 -- equality tracking of relEntropy_nonneg (doubly-stochastic/Jensen): KL(p‖r)=0⟹p=r (Gibbs, log x<x−1)
