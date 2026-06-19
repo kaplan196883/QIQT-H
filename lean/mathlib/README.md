@@ -25,7 +25,8 @@ facts they consume.  This variant discharges those axioms against
 | `QIQTH.CapacityPacking` | `N · I_0 ≤ Q_R ⇒ N ≤ ⌊Q_R / I_0⌋` + Markov-style suppression bounds |
 | `QIQTH.RelEntPositivity` | `D(ρ ‖ σ) ≥ 0` (Klein, axiomatized) + convexity of `D` in first argument (derived from Donald) |
 | `QIQTH.HolevoCoarseGraining` | Donald deficit formula + saturation rigidity + coarse-graining inequality |
-| `QIQTH.DPI` | Data Processing Inequality interface + regional monotonicity + composition |
+| `QIQTH.DPI` | Data Processing Inequality for mixed-unitary CPTP channels — a **theorem** (`dpi_mixed_unitary`, from Lieb/§6.3 joint convexity), no longer an axiom |
+| `QIQTH.Entropy.*` | **Quantum entropy-inequality family (Carlen §6), complete & axiom-free.** `partial_trace_dpi` / `partial_trace_left_dpi`: monotonicity of relative entropy under partial trace `D(Trρ‖Trσ) ≤ D(ρ‖σ)` (discrete Heisenberg–Weyl 1-design route). `subadditivity`: `S(ρ) ≤ S(ρ₁)+S(ρ₂)`. **`strong_subadditivity`** (Lieb–Ruskai 1973): `S(ρ_ABC)+S(ρ_B) ≤ S(ρ_AB)+S(ρ_BC)`. Supporting tower: the general tensor logarithm `log(A⊗B)=logA⊗I+I⊗logB`, reindex naturality of `matLog`/`trace`/relative entropy/von Neumann entropy, and the tensor/partial-trace calculus |
 | `QIQTH.ShannonFano` | Finite Shannon entropy + single-record certainty bridge from `H_ε ≤ 0` |
 | `QIQTH.BellMarginal` | Algebraic Bell/POVM marginalization identity |
 | `QIQTH.Bell` | **CHSH-LHV bound** `\|chsh\| ≤ 2` for any local-hidden-variable model + **QIQT-H corollary** (no LHV model reproduces QIQT-H's quantum-level CHSH violations, yet QIQT-H still satisfies no-signaling) |
