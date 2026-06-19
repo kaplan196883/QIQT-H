@@ -570,6 +570,22 @@ theorem connesCocycle (hσ : σ.PosDef) (hρ : ρ.PosDef) (t : ℝ) :
   rw [← ofMat_toMat X]
   exact key (toMat X)
 
+/-- **The Connes cocycle chain rule (1-cocycle identity):** `u_{s+t} = u_s · σ_s(u_t)`, where
+    `u_t = Δ_{σ|ρ}^{it} Δ_ρ^{−it}` (= `L_{σ^{it}ρ^{−it}}`, the cocycle operator, cf. `connesCocycle`) and
+    `σ_s(·) = Δ_ρ^{is} · Δ_ρ^{−is}` is the `ρ`-modular flow.  This is what makes `t ↦ (Dσ:Dρ)_t` a genuine
+    `σ`-cocycle.  Proof is pure one-parameter-group algebra: the inner `Δ_ρ^{−is}Δ_ρ^{is}` cancels and the
+    remaining `Δ`'s combine by `relModFlow_add`. -/
+theorem connesCocycle_chain (hσ : σ.PosDef) (hρ : ρ.PosDef) (s t : ℝ) :
+    relModFlow hσ hρ (s + t) * relModFlow hρ hρ (-(s + t))
+      = (relModFlow hσ hρ s * relModFlow hρ hρ (-s))
+        * (relModFlow hρ hρ s * (relModFlow hσ hρ t * relModFlow hρ hρ (-t))
+            * relModFlow hρ hρ (-s)) := by
+  have hcancel : relModFlow hρ hρ (-s) * relModFlow hρ hρ s = 1 := by
+    rw [← relModFlow_add, neg_add_cancel, relModFlow_zero]
+  rw [relModFlow_add hσ hρ s t, show -(s + t) = (-t) + (-s) by ring, relModFlow_add hρ hρ (-t) (-s)]
+  simp only [mul_assoc]
+  rw [← mul_assoc (relModFlow hρ hρ (-s)) (relModFlow hρ hρ s), hcancel, one_mul]
+
 end ModularFlow
 
 end QIQTH.Araki
