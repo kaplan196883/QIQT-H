@@ -722,6 +722,19 @@ theorem modAut_add (hρ : ρ.PosDef) (s t : ℝ) (B : Matrix n n ℂ) :
   simp only [modAut, Matrix.mul_assoc]
   rw [hback, ← Matrix.mul_assoc (NormedSpace.exp ((Complex.I * (s : ℂ)) • matLog hρ.1)), hfront]
 
+/-- **The modular flow fixes its equilibrium state:** `σ_t(ρ) = ρ` — `ρ` is invariant under its own
+    modular automorphism group (the algebra-level statement of the KMS/equilibrium property,
+    complementing `relModFlow_fix_gns` for the GNS vector and `kms_condition`).  Since `ρ` commutes
+    with `ρ^{it}`, the conjugation is trivial. -/
+@[simp] theorem modAut_fix (hρ : ρ.PosDef) (t : ℝ) : modAut hρ t ρ = ρ := by
+  have hc : Commute (matLog hρ.1) ρ := by
+    have hlog : matLog hρ.1 = cfc Real.log ρ := (hρ.1.cfc_eq Real.log).symm
+    rw [hlog]
+    exact (show IsSelfAdjoint ρ from hρ.1).commute_cfc (Commute.refl ρ) Real.log
+  have hce : Commute (NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1)) ρ :=
+    (hc.smul_left _).exp_left
+  rw [modAut, hce.eq, Matrix.mul_assoc, expIt_mul_expNegIt hρ t, Matrix.mul_one]
+
 /-- **The relative entropy is the modular-Hamiltonian expectation:** `S(ρ‖σ) = −⟪ξ_ρ, K ξ_ρ⟫`, where
     `K = log Δ_{σ|ρ} = relModGen` is the generator of the modular flow (the "modular Hamiltonian") and
     `ξ_ρ = ρ^½` the GNS vector.  This is exactly the Araki definition, now phrased via the modular flow's
