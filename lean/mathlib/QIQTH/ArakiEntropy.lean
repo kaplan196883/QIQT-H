@@ -343,4 +343,68 @@ theorem arakiEntropy_eq_relEntropy {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (h
   unfold arakiEntropy relEntropy
   rw [← Complex.neg_re, key]
 
+/-- **Non-negativity of the Araki relative entropy** (Klein, transported to the modular object):
+    `S_Araki(ρ‖σ) ≥ 0` for normalized states. -/
+theorem arakiEntropy_nonneg {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDef)
+    (hρ1 : ρ.trace = 1) (hσ1 : σ.trace = 1) : 0 ≤ arakiEntropy hρ hσ := by
+  rw [arakiEntropy_eq_relEntropy]
+  exact relEntropy_nonneg hρ hσ hρ1 hσ1
+
+/-! ### The relative modular flow `Δ^{it}` (finite-dimensional Tomita–Takesaki) -/
+
+section ModularFlow
+
+variable {σ ρ : Matrix n n ℂ}
+
+/-- The **relative modular generator** `K_{σ|ρ} = L_{log σ} − R_{log ρ}` (self-adjoint), i.e.
+    `log Δ_{σ|ρ}` (cf. `log_relMod`); the modular flow is `exp(it·K)`. -/
+noncomputable def relModGen (hσ : σ.PosDef) (hρ : ρ.PosDef) : HSMat n →L[ℂ] HSMat n :=
+  Lmul (matLog hσ.1) - Rmul (matLog hρ.1)
+
+theorem relModGen_isSelfAdjoint (hσ : σ.PosDef) (hρ : ρ.PosDef) :
+    IsSelfAdjoint (relModGen hσ hρ) :=
+  (Lmul_isSelfAdjoint (matLog_isHermitian hσ.1)).sub (Rmul_isSelfAdjoint (matLog_isHermitian hρ.1))
+
+/-- The **relative modular flow** `Δ_{σ|ρ}^{it} = exp(it · K_{σ|ρ})` — a one-parameter group of
+    unitaries on Hilbert–Schmidt space, the finite-dimensional Tomita–Takesaki modular flow of the
+    relative modular operator `Δ_{σ|ρ} = L_σ R_ρ⁻¹`. -/
+noncomputable def relModFlow (hσ : σ.PosDef) (hρ : ρ.PosDef) (t : ℝ) : HSMat n →L[ℂ] HSMat n :=
+  NormedSpace.exp ((Complex.I * (t : ℂ)) • relModGen hσ hρ)
+
+@[simp] theorem relModFlow_zero (hσ : σ.PosDef) (hρ : ρ.PosDef) :
+    relModFlow hσ hρ 0 = 1 := by
+  simp only [relModFlow, Complex.ofReal_zero, mul_zero, zero_smul, NormedSpace.exp_zero]
+
+/-- **The modular flow is a one-parameter group**: `Δ^{i(s+t)} = Δ^{is} · Δ^{it}`. -/
+theorem relModFlow_add (hσ : σ.PosDef) (hρ : ρ.PosDef) (s t : ℝ) :
+    relModFlow hσ hρ (s + t) = relModFlow hσ hρ s * relModFlow hσ hρ t := by
+  have hc : Commute ((Complex.I * (s : ℂ)) • relModGen hσ hρ)
+      ((Complex.I * (t : ℂ)) • relModGen hσ hρ) :=
+    ((Commute.refl (relModGen hσ hρ)).smul_left _).smul_right _
+  rw [relModFlow, relModFlow, relModFlow,
+    ← NormedSpace.exp_add_of_commute_of_mem_ball (𝕂 := ℂ) hc (mem_expBall_C _) (mem_expBall_C _),
+    ← add_smul]
+  congr 2
+  push_cast; ring
+
+/-- **The modular flow is unitary**: `Δ_{σ|ρ}^{it} ∈ U(HS)`. The generator `it·K` is skew-adjoint
+    (real `t`, self-adjoint `K`), so its exponential lands in the unitary group. -/
+theorem relModFlow_mem_unitary (hσ : σ.PosDef) (hρ : ρ.PosDef) (t : ℝ) :
+    relModFlow hσ hρ t ∈ unitary (HSMat n →L[ℂ] HSMat n) := by
+  have hskew : star ((Complex.I * (t : ℂ)) • relModGen hσ hρ)
+      = -((Complex.I * (t : ℂ)) • relModGen hσ hρ) := by
+    rw [star_smul, (relModGen_isSelfAdjoint hσ hρ).star_eq,
+      show star (Complex.I * (t : ℂ)) = -(Complex.I * (t : ℂ)) by
+        simp [Complex.conj_I, Complex.conj_ofReal], neg_smul]
+  rw [relModFlow, Unitary.mem_iff, NormedSpace.star_exp, hskew]
+  refine ⟨?_, ?_⟩
+  · rw [← NormedSpace.exp_add_of_commute_of_mem_ball (𝕂 := ℂ)
+      ((Commute.refl _).neg_left) (mem_expBall_C _) (mem_expBall_C _),
+      neg_add_cancel, NormedSpace.exp_zero]
+  · rw [← NormedSpace.exp_add_of_commute_of_mem_ball (𝕂 := ℂ)
+      ((Commute.refl _).neg_right) (mem_expBall_C _) (mem_expBall_C _),
+      add_neg_cancel, NormedSpace.exp_zero]
+
+end ModularFlow
+
 end QIQTH.Araki
