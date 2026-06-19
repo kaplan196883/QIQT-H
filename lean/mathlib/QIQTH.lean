@@ -47,6 +47,8 @@ import QIQTH.EntropyBridge
 -- Araki relative entropy via the relative modular operator (Phase A foundation):
 import QIQTH.ArakiEntropy
 import QIQTH.ArakiModularEntropy
+-- Non-commutative matrix function calculus (the matrix power/trace derivative Mathlib lacks):
+import QIQTH.MatrixFunctionCalculus
 import QIQTH.BranchLedger
 import QIQTH.ArakiInterface
 -- Final non-entropy audits proposed by GPT-5.5-pro:

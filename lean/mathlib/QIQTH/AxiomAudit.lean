@@ -3259,4 +3259,19 @@ namespace QIQTH.AxiomAudit
 -- + the neighborhood field identification), (c) the normed-space commutator mfderiv_apply_mlieBracket_model.
 -- dirDeriv_model_apply: in the model, dirDeriv = fderiv-apply. All axiom-free.
 
+-- NON-COMMUTATIVE MATRIX FUNCTION CALCULUS (QIQTH/MatrixFunctionCalculus.lean): the matrix
+-- power/trace derivative that Mathlib lacks (its `hasFDerivAt_exp`/`log` are commutative-algebra only).
+#print axioms QIQTH.MatrixCalculus.hasDerivAt_matrixPow
+-- expected: standard only — THE MATRIX POWER RULE: d/dt (A+t·H)^m|₀ = Σ_{k<m} A^k·H·A^{m-1-k}, the
+-- non-commutative Leibniz expansion along an affine path. By induction on m via HasDerivAt.mul (the
+-- product rule), with the succ-case sum reindexed by Finset.sum_range_succ'. Axiom-free.
+#print axioms QIQTH.MatrixCalculus.trace_leibniz_sum
+-- expected: standard only — TRACE COLLAPSE: Tr(Σ_{k<m} A^k H A^{m-1-k}) = m·Tr(A^{m-1} H); by trace
+-- cyclicity every term equals Tr(A^{m-1}H). The non-commutative sum becomes a scalar multiple.
+#print axioms QIQTH.MatrixCalculus.hasDerivAt_trace_matrixPow
+-- expected: standard only — ★ THE TRACE POWER RULE: d/dt Tr((A+t·H)^m)|₀ = m·Tr(A^{m-1} H), the
+-- polynomial case of the trace-derivative d/dt Tr g(A+tH)|₀ = Tr(g'(A)H) underlying the first-order
+-- entanglement first law δS=δ⟨K⟩. Composes hasDerivAt_matrixPow with the continuous-linear trace
+-- (restrictScalars ℝ, via HasFDerivAt.comp_hasDerivAt_of_eq) and collapses via trace_leibniz_sum.
+
 end QIQTH.AxiomAudit
