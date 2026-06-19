@@ -3035,6 +3035,15 @@ namespace QIQTH.AxiomAudit
 -- stress-energy in Jacobson's eq of state. Takes the Ricci bilinear form as input; the bridge ricci(scalar)
 -- → Ricci form (via mkHom₂) and the contracted Bianchi ∇^μG=0 are the remaining pieces. Axiom-free.
 
+#print axioms QIQTH.ClausiusIntegral.integrand_eq_of_weighted_integral_eq
+-- expected: standard only — THE INTEGRAND-MATCHING KERNEL of Jacobson's Clausius step (delivering part of
+-- the per-null premise, gap "integral matching"). If ∫₀^ε λ·f = ∫₀^ε λ·g for every ε (as δQ=TδS forces
+-- for the affine-weighted heat-flux and area-change integrands along every local horizon generator), then
+-- f=g. Proof: FTC differentiates both integrals → ε·f(ε)=ε·g(ε), cancel ε≠0, extend to 0 by continuity
+-- ({0}ᶜ dense). The bridge "Clausius integrals match" ⟹ "T_{kk} ∝ R_{kk} on the null cone"; the Sylvester
+-- null-cone lemma then gives the pointwise tensor equation feeding jacobson_einstein_equation_of_state.
+-- The remaining (horizon measure-theory + Unruh correlator) are the larger pieces. Axiom-free.
+
 #print axioms QIQTH.Unruh.sinh_cosh_diff_sq
 #print axioms QIQTH.Unruh.rindler_interval
 -- expected: standard only — UNRUH EFFECT (geometric kernel; cited physics being formalized, plan 55).

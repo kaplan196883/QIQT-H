@@ -390,5 +390,6 @@ import QIQTH.ManifoldCurvature
 import QIQTH.ManifoldCommutator
 import QIQTH.PseudoRiemannian
 import QIQTH.LeviCivita
+import QIQTH.ClausiusIntegral
 import QIQTH.Raychaudhuri
 import QIQTH.Unruh
