@@ -2802,6 +2802,17 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the a↔b swap (undone by the environment counter-swap) fixes ψ iff c a = c b:
 -- "equal amplitudes ⇒ envariant", with the symmetry exhibited as a unitary, not posited. Reduces the
 -- envariance residual of BornEquiprobable to state-supervenience (probabilities depend only on the state).
+#print axioms QIQTH.EnvarianceJustification.phase_perm_coeff
+#print axioms QIQTH.EnvarianceJustification.envariance_phase_swap_invariant
+#print axioms QIQTH.EnvarianceJustification.phase_compensation_unitary_iff
+-- expected: standard only — ★ EQUAL-MODULUS ENVARIANCE (closes the named "only c_a=c_b, not |c_a|=|c_b|"
+-- gap). phase_perm_coeff: phase-weighted env permutation UE(e_k)=φ_k•e_{σk} relabels-and-rephases
+-- amplitudes by c_k↦c_{σ⁻¹k}·φ_{σ⁻¹k}. envariance_phase_swap_invariant: the PHASE-COMPENSATED swap
+-- UE(e_a)=(c_b/c_a)•e_b, UE(e_b)=(c_a/c_b)•e_b fixes ψ for ANY non-zero c_a,c_b (the phases cancel the
+-- mismatch) — generalising envariance_swap_invariant beyond the aligned case. phase_compensation_unitary_iff:
+-- the phase factor c_b/c_a has modulus 1 (⇒ UE unitary on orthonormal records = a GENUINE symmetry) EXACTLY
+-- when ‖c_a‖=‖c_b‖. HONEST: the fixing is algebraic; legitimacy (unitarity) holds iff equal modulus, so this
+-- does NOT permit swapping unequal-probability branches. Closes Born envariance to equal-modulus (was: aligned).
 
 -- StateSupervenience.lean — argument (a): the (Φ,λ) ontology forces state-supervenience (2026-06-15).
 #print axioms QIQTH.StateSupervenience.NaturalTypicality.stabilizer_invariant

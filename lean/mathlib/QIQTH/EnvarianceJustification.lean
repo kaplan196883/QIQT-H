@@ -86,4 +86,57 @@ theorem envariance_swap_invariant (a b : K) (s : K → S) (e : K → E) (c : K �
     · rw [Equiv.swap_apply_right]; exact hab
     · rw [Equiv.swap_apply_of_ne_of_ne hka hkb]
 
+/-- **The phase-permutation coefficient transformation.**  Generalises `joint_perm_coeff` to a
+    *phase-weighted* environment permutation `UE(eₖ) = φₖ • e_{σk}` (the system map stays a plain
+    permutation): the joint map relabels-and-rephases the amplitudes by `cₖ ↦ c_{σ⁻¹k}·φ_{σ⁻¹k}`. -/
+theorem phase_perm_coeff (σ : K ≃ K) (s : K → S) (e : K → E) (c φ : K → ℂ)
+    (US : S →ₗ[ℂ] S) (UE : E →ₗ[ℂ] E)
+    (hUS : ∀ k, US (s k) = s (σ k)) (hUE : ∀ k, UE (e k) = φ k • e (σ k)) :
+    (TensorProduct.map US UE) (∑ k, c k • (s k ⊗ₜ[ℂ] e k))
+      = ∑ k, (c (σ.symm k) * φ (σ.symm k)) • (s k ⊗ₜ[ℂ] e k) := by
+  rw [map_sum]
+  simp_rw [map_smul, TensorProduct.map_tmul, hUS, hUE, TensorProduct.tmul_smul, smul_smul]
+  rw [← Equiv.sum_comp σ (fun k => (c (σ.symm k) * φ (σ.symm k)) • (s k ⊗ₜ[ℂ] e k))]
+  refine Finset.sum_congr rfl (fun k _ => ?_)
+  rw [Equiv.symm_apply_apply]
+
+variable [DecidableEq K] in
+/-- **Equal-MODULUS envariance — the phase-compensated swap fixes the state.**  Generalises
+    `envariance_swap_invariant` from the *aligned* case `c a = c b` to *arbitrary* non-zero amplitudes:
+    the system swap `a↔b` together with the **phase-compensated environment swap**
+    `UE(eₐ) = (c_b/c_a)•e_b`, `UE(e_b) = (c_a/c_b)•e_a` (identity elsewhere) fixes
+    `ψ = ∑ₖ cₖ sₖ⊗eₖ`.  The compensating phases `c_b/c_a`, `c_a/c_b` cancel the amplitude mismatch.
+
+    HONESTY: this fixing identity is *algebraic* (any `c a, c b ≠ 0`).  It is a **legitimate envariance
+    symmetry only when `UE` is unitary**, i.e. when the phase factor has modulus one — which (for
+    orthonormal environment records) holds *exactly* at **equal modulus `‖c a‖ = ‖c b‖`**, the content
+    of `phase_compensation_unitary_iff` below.  For unequal modulus the map exists but is non-unitary,
+    hence NOT a physical symmetry — so this does NOT let unequal-probability branches be swapped. -/
+theorem envariance_phase_swap_invariant (a b : K) (s : K → S) (e : K → E) (c φ : K → ℂ)
+    (US : S →ₗ[ℂ] S) (UE : E →ₗ[ℂ] E)
+    (hca : c a ≠ 0) (hcb : c b ≠ 0)
+    (hUS : ∀ k, US (s k) = s (Equiv.swap a b k))
+    (hUE : ∀ k, UE (e k) = φ k • e (Equiv.swap a b k))
+    (hφa : φ a = c b / c a) (hφb : φ b = c a / c b)
+    (hφk : ∀ k, k ≠ a → k ≠ b → φ k = 1) :
+    (TensorProduct.map US UE) (∑ k, c k • (s k ⊗ₜ[ℂ] e k)) = ∑ k, c k • (s k ⊗ₜ[ℂ] e k) := by
+  rw [phase_perm_coeff (Equiv.swap a b) s e c φ US UE hUS hUE]
+  refine Finset.sum_congr rfl (fun k _ => ?_)
+  rw [Equiv.symm_swap]
+  rcases eq_or_ne k a with rfl | hka
+  · rw [Equiv.swap_apply_left, hφb]; congr 1; field_simp
+  · rcases eq_or_ne k b with rfl | hkb
+    · rw [Equiv.swap_apply_right, hφa]; congr 1; field_simp
+    · rw [Equiv.swap_apply_of_ne_of_ne hka hkb, hφk k hka hkb, mul_one]
+
+/-- **The phase compensation is unitary iff the moduli are equal.**  The compensating phase factor
+    `c_b/c_a` of `envariance_phase_swap_invariant` has modulus one — making the environment swap an
+    isometry on orthonormal records, hence a *genuine* (unitary) envariance symmetry — exactly when
+    `‖c a‖ = ‖c b‖`.  This is the precise condition separating legitimate equal-modulus envariance from
+    the non-physical unequal-modulus case. -/
+theorem phase_compensation_unitary_iff (ca cb : ℂ) (hca : ca ≠ 0) :
+    ‖cb / ca‖ = 1 ↔ ‖ca‖ = ‖cb‖ := by
+  rw [norm_div, div_eq_one_iff_eq (norm_ne_zero_iff.mpr hca)]
+  exact eq_comm
+
 end QIQTH.EnvarianceJustification
