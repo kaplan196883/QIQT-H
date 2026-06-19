@@ -111,6 +111,30 @@ theorem perm_conj_diagonal (σ : Equiv.Perm (Fin m)) (d : Fin m → ℂ) :
     show ((σ⁻¹ : Equiv.Perm (Fin m)).symm) = σ from Equiv.symm_symm σ, submatrix_diagonal_equiv]
   rfl
 
+/-- **Orbit sum over the cyclic shift.** Since `finRotate m` is an `m`-cycle, the powers
+`σ⁰j, σ¹j, …, σ^{m-1}j` enumerate every index exactly once, so summing any `d` along the orbit of `j`
+equals the full sum: `Σ_{a<m} d(σ^a j) = Σ_p d_p`. The orbit-covering fact behind the shift twirl. -/
+theorem shift_orbit_sum (j : Fin m) (d : Fin m → ℂ) :
+    ∑ a : Fin m, d ((finRotate m ^ a.val) j) = ∑ p, d p := by
+  have hinj : Function.Injective (fun a : Fin m => (finRotate m ^ a.val) j) := by
+    intro a b hab
+    simp only at hab
+    by_cases hm2 : 2 ≤ m
+    · have hcyc := isCycle_finRotate_of_le hm2
+      have hsupp : (finRotate m) j ≠ j := by
+        rw [← Equiv.Perm.mem_support, support_finRotate_of_le hm2]; exact Finset.mem_univ j
+      have hpow : finRotate m ^ a.val = finRotate m ^ b.val :=
+        hcyc.pow_eq_pow_iff.mpr ⟨j, hsupp, hab⟩
+      have hord : orderOf (finRotate m) = m := by
+        rw [hcyc.orderOf, support_finRotate_of_le hm2, Finset.card_univ, Fintype.card_fin]
+      exact Fin.ext (pow_injOn_Iio_orderOf (Set.mem_Iio.mpr (hord.symm ▸ a.isLt))
+        (Set.mem_Iio.mpr (hord.symm ▸ b.isLt)) hpow)
+    · have hm1 : m = 1 := by
+        have := Nat.one_le_iff_ne_zero.mpr (NeZero.ne m); omega
+      subst hm1; exact Subsingleton.elim a b
+  exact Fintype.sum_bijective _ (Finite.injective_iff_bijective.mp hinj)
+    (fun a => d ((finRotate m ^ a.val) j)) d (fun _ => rfl)
+
 /-- **Clock character orthogonality** — the entrywise engine of the clock (dephasing) twirl:
 `Σ_b ω^{j·b}·conj(ω^{k·b}) = m·[j=k]`. Each summand factors as `w^b` with `w = ω^j·conj(ω^k)`, an
 `m`-th root of unity that is `1` iff `j = k` (primitive-root injectivity). On the diagonal the sum is
@@ -185,5 +209,25 @@ theorem clock_twirl {ω : ℂ} (hω : IsPrimitiveRoot ω m) (M : Matrix (Fin m) 
   by_cases hjk : j = k
   · subst hjk; rw [if_pos rfl, if_pos rfl]; field_simp
   · rw [if_neg hjk, if_neg hjk, mul_zero, mul_zero]
+
+/-- **The shift twirl mixes a diagonal to the maximally-mixed state.** Averaging a diagonal `diag d`
+over conjugation by all cyclic-shift powers gives the uniform diagonal: `(1/m) Σ_a X^a (diag d) (X^a)⋆
+= ((Σ_j d_j)/m) · I`. Each conjugation relabels the diagonal cyclically (`perm_conj_diagonal`), and
+summing over the full cycle replaces every diagonal entry by the orbit sum `Σ_p d_p`
+(`shift_orbit_sum`). Composing this with the clock twirl (dephasing) gives the complete depolarization
+`M ↦ (Tr M/m)·I` — the full discrete-Weyl 1-design, a mixed-unitary channel. -/
+theorem shift_twirl (d : Fin m → ℂ) :
+    ∑ a : Fin m, (m : ℂ)⁻¹ • (((finRotate m) ^ a.val).permMatrix ℂ * diagonal d
+        * (((finRotate m) ^ a.val).permMatrix ℂ)ᴴ)
+      = ((m : ℂ)⁻¹ * ∑ p, d p) • (1 : Matrix (Fin m) (Fin m) ℂ) := by
+  simp_rw [perm_conj_diagonal]
+  ext i k
+  rw [Matrix.sum_apply, Matrix.smul_apply, Matrix.one_apply, smul_eq_mul]
+  simp_rw [Matrix.smul_apply, diagonal_apply, smul_eq_mul]
+  by_cases hik : i = k
+  · subst hik
+    simp only [if_true, mul_one]
+    rw [← Finset.mul_sum, shift_orbit_sum]
+  · simp [hik]
 
 end QIQTH.Entropy

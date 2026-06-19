@@ -2234,6 +2234,15 @@ namespace QIQTH.AxiomAudit
 -- cyclically relabeled). Proved by reading the conjugation as a double submatrix relabeling of diag d
 -- (PEquiv.toMatrix_toPEquiv_mul / mul_toMatrix_toPEquiv + submatrix_diagonal_equiv). General (any σ),
 -- reusable. Remaining for shift_twirl: orbit sum Σ_{a:Fin m} d(σ^a j)=Σ_p d_p (cycle bijection). Axiom-free.
+#print axioms QIQTH.Entropy.shift_orbit_sum
+#print axioms QIQTH.Entropy.shift_twirl
+-- expected: standard only — THE SHIFT TWIRL = MAXIMALLY-MIXING CHANNEL: (1/m)Σ_a X^a (diag d) (X^a)⋆ =
+-- ((Σ_j d_j)/m)·I. shift_orbit_sum: since finRotate is an m-cycle, a↦σ^a j enumerates Fin m
+-- (injective via IsCycle.pow_eq_pow_iff + pow_injOn_Iio_orderOf, orderOf=m=support card; m=1 subsingleton),
+-- so Σ_{a:Fin m} d(σ^a j)=Σ_p d_p. shift_twirl: each conjugation relabels the diagonal cyclically
+-- (perm_conj_diagonal), summing over the full cycle replaces every diagonal entry by the orbit sum =
+-- maximally mixed. Composing clock_twirl (dephasing) ∘ shift_twirl (mixing) = complete depolarization
+-- M↦(Tr M/m)·I = the full discrete-Weyl 1-design (mixed-unitary). → factor-2 lift → partial-trace DPI. Axiom-free.
 #print axioms QIQTH.QuantumEntropy.relEntropy_eq_zero
 -- expected: standard only — ★★★★★ KLEIN'S EQUALITY CASE: D(ρ‖σ)=0 ⟹ ρ=σ for density matrices. The
 -- equality tracking of relEntropy_nonneg (doubly-stochastic/Jensen): KL(p‖r)=0⟹p=r (Gibbs, log x<x−1)
