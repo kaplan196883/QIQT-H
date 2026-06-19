@@ -204,4 +204,57 @@ theorem koszul_tensorialAt [CompleteSpace E] [IsManifold I 2 M]
     koszul_add_right_Z gm X Y σ σ' x (hsmooth Y σ hY hσ) (hsmooth Y σ' hY hσ')
       (hsmooth X σ hX hσ) (hsmooth X σ' hX hσ') hσ hσ'
 
+section LeviCivitaConnection
+
+open Bundle
+
+variable [CompleteSpace 𝕜] [CompleteSpace E] [FiniteDimensional 𝕜 E] [IsManifold I 2 M]
+
+/-- **The Koszul 1-form** `Z ↦ ½ g(∇_X Y, Z)` as a genuine covector `T_xM →L[𝕜] 𝕜`, obtained from the
+tensorial Koszul scalar via Mathlib's `TensorialAt.mkHom`. (Carries the smoothness/regularity data
+`hX, hY, hsmooth` the tensoriality needs.) -/
+noncomputable def koszulForm
+    (gm : PseudoRiemannianMetric I M) (X Y : Π x : M, TangentSpace I x) (x : M)
+    (hX : MDiffAt (T% X) x) (hY : MDiffAt (T% Y) x)
+    (hsmooth : ∀ A B : Π z : M, TangentSpace I z, MDiffAt (T% A) x → MDiffAt (T% B) x →
+      MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (A x') (B x')) x) :
+    TangentSpace I x →L[𝕜] 𝕜 :=
+  TensorialAt.mkHom (fun σ => koszul gm X Y σ x) x (koszul_tensorialAt gm X Y x hX hY hsmooth)
+
+/-- The Koszul 1-form, evaluated on a differentiable field's value, returns the Koszul scalar. -/
+theorem koszulForm_apply
+    (gm : PseudoRiemannianMetric I M) (X Y : Π x : M, TangentSpace I x) (x : M)
+    (hX : MDiffAt (T% X) x) (hY : MDiffAt (T% Y) x)
+    (hsmooth : ∀ A B : Π z : M, TangentSpace I z, MDiffAt (T% A) x → MDiffAt (T% B) x →
+      MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (A x') (B x')) x)
+    (Z : Π z : M, TangentSpace I z) (hZ : MDiffAt (T% Z) x) :
+    koszulForm gm X Y x hX hY hsmooth (Z x) = koszul gm X Y Z x :=
+  TensorialAt.mkHom_apply (koszul_tensorialAt gm X Y x hX hY hsmooth) hZ
+
+/-- **The Levi-Civita connection vector** `∇_X Y` at `x`: the metric-dual (musical `♯`) of half the
+Koszul 1-form. This is *the* vector characterised by the Koszul formula. -/
+noncomputable def leviCivita
+    (gm : PseudoRiemannianMetric I M) (X Y : Π x : M, TangentSpace I x) (x : M)
+    (hX : MDiffAt (T% X) x) (hY : MDiffAt (T% Y) x)
+    (hsmooth : ∀ A B : Π z : M, TangentSpace I z, MDiffAt (T% A) x → MDiffAt (T% B) x →
+      MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (A x') (B x')) x) :
+    TangentSpace I x :=
+  gm.raise x ((1 / 2 : 𝕜) • koszulForm gm X Y x hX hY hsmooth)
+
+/-- **The Levi-Civita connection satisfies the Koszul formula:** `g(∇_X Y, Z) = ½·koszul X Y Z`.
+This is the realisation of the defining equation — `∇_X Y` is exactly the vector whose metric pairing
+reproduces the Koszul scalar. Combined with `koszul_metric_compat`/`koszul_torsion_free`, it certifies
+`∇` as metric-compatible and torsion-free. -/
+theorem leviCivita_koszul
+    (gm : PseudoRiemannianMetric I M) (X Y : Π x : M, TangentSpace I x) (x : M)
+    (hX : MDiffAt (T% X) x) (hY : MDiffAt (T% Y) x)
+    (hsmooth : ∀ A B : Π z : M, TangentSpace I z, MDiffAt (T% A) x → MDiffAt (T% B) x →
+      MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (A x') (B x')) x)
+    (Z : Π z : M, TangentSpace I z) (hZ : MDiffAt (T% Z) x) :
+    gm.g x (leviCivita gm X Y x hX hY hsmooth) (Z x) = (1 / 2 : 𝕜) * koszul gm X Y Z x := by
+  rw [leviCivita, ← PseudoRiemannianMetric.lower_apply, gm.lower_raise]
+  rw [ContinuousLinearMap.smul_apply, koszulForm_apply gm X Y x hX hY hsmooth Z hZ, smul_eq_mul]
+
+end LeviCivitaConnection
+
 end QIQTH.ManifoldGR

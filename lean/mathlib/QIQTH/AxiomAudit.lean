@@ -3012,6 +3012,14 @@ namespace QIQTH.AxiomAudit
 -- mkHom supplies the hard locality/bump-function step. The linearity lemmas were refactored to at-x hyps
 -- (dirDeriv_add_fun_at = pointwise additivity via mfderiv_add) so TensorialAt's at-x fields are satisfied;
 -- hsmooth = metric smoothness (a labeled hypothesis until a smooth-metric field is added). Axiom-free.
+#print axioms QIQTH.ManifoldGR.koszulForm_apply
+#print axioms QIQTH.ManifoldGR.leviCivita_koszul
+-- expected: standard only — THE LEVI-CIVITA CONNECTION VECTOR exists on an abstract manifold and
+-- satisfies the Koszul formula. koszulForm = the Koszul 1-form (covector T_xM→L𝕜) via TensorialAt.mkHom;
+-- leviCivita ∇_X Y := ♯(½·koszulForm) (musical raise of half the Koszul form); leviCivita_koszul:
+-- g(∇_X Y, Z) = ½·koszul X Y Z (the DEFINING equation realized) — via lower_raise (♭♯=id) + koszulForm_apply
+-- (mkHom_apply). With koszul_metric_compat/koszul_torsion_free this certifies ∇ metric-compatible +
+-- torsion-free. Needs [FiniteDimensional 𝕜 E][CompleteSpace 𝕜/E][IsManifold I 2 M]; hsmooth labeled. Axiom-free.
 
 #print axioms QIQTH.Unruh.sinh_cosh_diff_sq
 #print axioms QIQTH.Unruh.rindler_interval
