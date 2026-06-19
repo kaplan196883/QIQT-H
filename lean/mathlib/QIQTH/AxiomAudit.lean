@@ -3365,5 +3365,16 @@ namespace QIQTH.AxiomAudit
 -- per-null relation a·F_T=−G_R (boost-flux ∝ Ricci focusing) that pernull_of_clausius_integral consumes.
 -- The modular relation is DERIVED from QIQT; ONLY hBWflux/hRay (the Type III₁ wedge-algebra + geometry
 -- Mathlib lacks) are cited, kept SEPARATE — neither is the area law, neither presupposes Einstein. Axiom-free.
+-- ASSEMBLY toward QIQT+Bekenstein⇒GR (QiqtToGR.lean):
+#print axioms QIQTH.QiqtToGR.bl_pernull_of_modular
+#print axioms QIQTH.QiqtToGR.bl_pernull_of_qiqt
+-- expected: standard only — turns the derived modular relation into Jacobson's POINTWISE per-null premise
+-- BL(a·T−Ric)v=0 (the exact `pernull` hyp of jacobson_einstein_equation_of_state), bypassing the affine-
+-- integral layer. bl_pernull_of_modular: from k'=η·a' (DERIVED δ⟨K⟩=ηδA) + hFlux (BW boost flux
+-- δ⟨K⟩=(2π/ℏ)BL(T)v) + hFocus (Raychaudhuri a'=BL(Ric)v) + a=2π/ℏη ⇒ a·BL(T)v=BL(Ric)v ⇒ BL(a·T−Ric)v=0
+-- (via BL_smul_sub). bl_pernull_of_qiqt: COMPOSES differential_area_law_of_relEntropy (QIQT bound+sat+Klein
+-- ⇒ k'=η·a') with it, so the per-null premise is DERIVED from QIQT content + ONLY the 2 cited inputs (hFlux,
+-- hFocus). No hypothesis is the area law or the conclusion. Next: feed pernull into jacobson for the full
+-- a·T=G+Λg. Axiom-free.
 
 end QIQTH.AxiomAudit
