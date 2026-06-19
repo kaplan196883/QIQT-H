@@ -97,6 +97,20 @@ theorem shift_mem_unitary : shift m ∈ unitary (Matrix (Fin m) (Fin m) ℂ) := 
   rw [Unitary.mem_iff, shift, star_eq_conjTranspose, conjTranspose_permMatrix]
   refine ⟨?_, ?_⟩ <;> simp [← permMatrix_mul, permMatrix_one]
 
+/-- **Permutation conjugation of a diagonal is the relabeled diagonal**: `P_σ · diag d · P_σ⋆ =
+diag(d ∘ σ)`. Conjugating a diagonal matrix by a permutation matrix permutes its diagonal entries —
+the structural fact behind the shift twirl (the shift `X = P_{finRotate}` conjugation keeps a diagonal
+diagonal, just cyclically relabeled). Proved by reading the conjugation as a double `submatrix`
+relabeling (`toMatrix_toPEquiv_mul` / `mul_toMatrix_toPEquiv`) of `diag d`. -/
+theorem perm_conj_diagonal (σ : Equiv.Perm (Fin m)) (d : Fin m → ℂ) :
+    σ.permMatrix ℂ * diagonal d * (σ.permMatrix ℂ)ᴴ = diagonal (fun i => d (σ i)) := by
+  rw [conjTranspose_permMatrix]
+  simp only [Equiv.Perm.permMatrix]
+  rw [PEquiv.toMatrix_toPEquiv_mul, PEquiv.mul_toMatrix_toPEquiv, submatrix_submatrix,
+    Function.comp_id, Function.id_comp,
+    show ((σ⁻¹ : Equiv.Perm (Fin m)).symm) = σ from Equiv.symm_symm σ, submatrix_diagonal_equiv]
+  rfl
+
 /-- **Clock character orthogonality** — the entrywise engine of the clock (dephasing) twirl:
 `Σ_b ω^{j·b}·conj(ω^{k·b}) = m·[j=k]`. Each summand factors as `w^b` with `w = ω^j·conj(ω^k)`, an
 `m`-th root of unity that is `1` iff `j = k` (primitive-root injectivity). On the diagonal the sum is

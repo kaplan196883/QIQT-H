@@ -2227,6 +2227,13 @@ namespace QIQTH.AxiomAudit
 -- ω^{j·b}M_{jk}conj(ω^{k·b}), summed over b and scaled by 1/m gives M_{jk}·[j=k] (clock_char_orthogonality
 -- (1/m)·m=1 on diagonal, 0 off) = diag(M). A genuine mixed-unitary channel (uniform 1/m weights over the
 -- clock unitaries Z^b) — the dephasing half of the Weyl twirl → ρ↦(Tr₂ρ)⊗(I/m) → partial-trace DPI. Axiom-free.
+#print axioms QIQTH.Entropy.perm_conj_diagonal
+-- expected: standard only — PERMUTATION CONJUGATION OF A DIAGONAL = relabeled diagonal: P_σ·diag d·P_σ⋆
+-- = diag(d∘σ). Conjugating a diagonal by a permutation matrix permutes its diagonal entries — the
+-- structural fact behind the shift twirl (X=P_{finRotate} conjugation keeps a diagonal diagonal, just
+-- cyclically relabeled). Proved by reading the conjugation as a double submatrix relabeling of diag d
+-- (PEquiv.toMatrix_toPEquiv_mul / mul_toMatrix_toPEquiv + submatrix_diagonal_equiv). General (any σ),
+-- reusable. Remaining for shift_twirl: orbit sum Σ_{a:Fin m} d(σ^a j)=Σ_p d_p (cycle bijection). Axiom-free.
 #print axioms QIQTH.QuantumEntropy.relEntropy_eq_zero
 -- expected: standard only — ★★★★★ KLEIN'S EQUALITY CASE: D(ρ‖σ)=0 ⟹ ρ=σ for density matrices. The
 -- equality tracking of relEntropy_nonneg (doubly-stochastic/Jensen): KL(p‖r)=0⟹p=r (Gibbs, log x<x−1)
