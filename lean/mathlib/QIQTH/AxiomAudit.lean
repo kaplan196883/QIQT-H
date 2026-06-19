@@ -3004,6 +3004,14 @@ namespace QIQTH.AxiomAudit
 -- cancel EXACTLY against −(X·f)·g(Z,Y), −(Y·f)·g(Z,X) (from mlieBracket_smul_left/right) by METRIC SYMMETRY
 -- — the cancellation that makes Levi-Civita well-defined. Helpers: dirDeriv_mul (CLM-apply closed by defeq
 -- rfl past the TangentSpace 𝓘(𝕜) codomain synonym), dirDeriv_smul_field. linear_combination (𝕜 unordered).
+#print axioms QIQTH.ManifoldGR.dirDeriv_add_fun_at
+#print axioms QIQTH.ManifoldGR.koszul_tensorialAt
+-- expected: standard only — KOSZUL IS TENSORIAL IN Z. Packages the at-x additivity + homogeneity into
+-- Mathlib's `TensorialAt` criterion (σ ↦ koszul X Y σ x is tensorial at x). By `TensorialAt.mkHom` this
+-- defines the Koszul COVECTOR T_xM →L 𝕜, whose ♯-dual (lowerEquiv⁻¹) is the Levi-Civita ∇_X Y — Mathlib's
+-- mkHom supplies the hard locality/bump-function step. The linearity lemmas were refactored to at-x hyps
+-- (dirDeriv_add_fun_at = pointwise additivity via mfderiv_add) so TensorialAt's at-x fields are satisfied;
+-- hsmooth = metric smoothness (a labeled hypothesis until a smooth-metric field is added). Axiom-free.
 
 #print axioms QIQTH.Unruh.sinh_cosh_diff_sq
 #print axioms QIQTH.Unruh.rindler_interval

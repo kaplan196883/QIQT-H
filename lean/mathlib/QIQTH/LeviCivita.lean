@@ -1,5 +1,6 @@
 import QIQTH.PseudoRiemannian
 import QIQTH.ManifoldCommutator
+import Mathlib.Geometry.Manifold.VectorBundle.Tensoriality
 
 /-!
 # Toward the Levi-Civita connection: the Koszul formula
@@ -92,32 +93,6 @@ theorem koszul_torsion_free :
     g_mlieBracket_swap gm Y Z X x
   linear_combination -b1 + b2 - b3
 
-/-- **Additivity of `koszul` in the `Z` slot** — half of the `C∞`-linearity that lets the Koszul
-formula descend to a covector `Z ↦ koszul X Y Z` (hence define `∇_X Y` via the musical `♯`). The
-directional-derivative terms split via `dirDeriv` additivity (in the function and in the field) and
-the bracket terms via `mlieBracket` additivity; the metric is bilinear. (The `h…` are the
-differentiabilities those splits consume.) -/
-theorem koszul_add_right_Z [CompleteSpace E] [IsManifold I 2 M]
-    (gm : PseudoRiemannianMetric I M) (X Y Z Z' : Π x : M, TangentSpace I x) (x : M)
-    (hgYZ : ∀ z, MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (Y x') (Z x')) z)
-    (hgYZ' : ∀ z, MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (Y x') (Z' x')) z)
-    (hgXZ : ∀ z, MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (X x') (Z x')) z)
-    (hgXZ' : ∀ z, MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (X x') (Z' x')) z)
-    (hX : MDiffAt (T% X) x) (hY : MDiffAt (T% Y) x)
-    (hZ : MDiffAt (T% Z) x) (hZ' : MDiffAt (T% Z') x) :
-    koszul gm X Y (Z + Z') x = koszul gm X Y Z x + koszul gm X Y Z' x := by
-  have e1 : (fun x' => gm.g x' (Y x') ((Z + Z') x'))
-      = (fun x' => gm.g x' (Y x') (Z x')) + (fun x' => gm.g x' (Y x') (Z' x')) := by
-    funext x'; simp [Pi.add_apply, map_add]
-  have e2 : (fun x' => gm.g x' (X x') ((Z + Z') x'))
-      = (fun x' => gm.g x' (X x') (Z x')) + (fun x' => gm.g x' (X x') (Z' x')) := by
-    funext x'; simp [Pi.add_apply, map_add]
-  simp only [koszul, e1, e2]
-  rw [dirDeriv_add_fun X _ _ hgYZ hgYZ', dirDeriv_add_fun Y _ _ hgXZ hgXZ']
-  simp only [dirDeriv_add_vectorField, mlieBracket_add_right hZ hZ', mlieBracket_add_left hZ hZ',
-    Pi.add_apply, map_add, ContinuousLinearMap.add_apply]
-  ring
-
 /-- **Product (Leibniz) rule for the directional derivative** of a product of scalar functions:
 `W·(f·h) = f·(W·h) + (W·f)·h`. From the manifold product rule `HasMFDerivAt.mul` (whose derivative
 is `f x • dh + h x • df` with ordinary smul into `𝕜`, avoiding the opposite-action form). -/
@@ -137,6 +112,42 @@ theorem dirDeriv_smul_field (Z : Π z : M, TangentSpace I z) (f : M → 𝕜) (h
   show mfderiv I 𝓘(𝕜) h x ((f • Z) x) = f x • mfderiv I 𝓘(𝕜) h x (Z x)
   exact map_smul (mfderiv I 𝓘(𝕜) h x) (f x) (Z x)
 
+/-- **Pointwise** additivity of the directional derivative in the function slot: `W·(f+g) = W·f + W·g`
+at a single point `x`, needing only differentiability *at* `x` (unlike `dirDeriv_add_fun`, the
+function-level version, which needs differentiability everywhere). This is the form the tensoriality
+criterion (`TensorialAt`) consumes. -/
+theorem dirDeriv_add_fun_at (W : Π z : M, TangentSpace I z) (f g : M → 𝕜) (x : M)
+    (hf : MDifferentiableAt I 𝓘(𝕜) f x) (hg : MDifferentiableAt I 𝓘(𝕜) g x) :
+    dirDeriv I W (f + g) x = dirDeriv I W f x + dirDeriv I W g x := by
+  show mfderiv I 𝓘(𝕜) (f + g) x (W x) = _
+  rw [mfderiv_add hf hg]
+  rfl
+
+/-- **Additivity of `koszul` in the `Z` slot** — half of the `C∞`-linearity that lets the Koszul
+formula descend to a covector `Z ↦ koszul X Y Z` (hence define `∇_X Y` via the musical `♯`). The
+directional-derivative terms split via `dirDeriv` additivity (in the function and in the field) and
+the bracket terms via `mlieBracket` additivity; the metric is bilinear. (The `h…` are the
+differentiabilities those splits consume.) -/
+theorem koszul_add_right_Z [CompleteSpace E] [IsManifold I 2 M]
+    (gm : PseudoRiemannianMetric I M) (X Y Z Z' : Π x : M, TangentSpace I x) (x : M)
+    (hgYZ : MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (Y x') (Z x')) x)
+    (hgYZ' : MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (Y x') (Z' x')) x)
+    (hgXZ : MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (X x') (Z x')) x)
+    (hgXZ' : MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (X x') (Z' x')) x)
+    (hZ : MDiffAt (T% Z) x) (hZ' : MDiffAt (T% Z') x) :
+    koszul gm X Y (Z + Z') x = koszul gm X Y Z x + koszul gm X Y Z' x := by
+  have e1 : (fun x' => gm.g x' (Y x') ((Z + Z') x'))
+      = (fun x' => gm.g x' (Y x') (Z x')) + (fun x' => gm.g x' (Y x') (Z' x')) := by
+    funext x'; simp [Pi.add_apply, map_add]
+  have e2 : (fun x' => gm.g x' (X x') ((Z + Z') x'))
+      = (fun x' => gm.g x' (X x') (Z x')) + (fun x' => gm.g x' (X x') (Z' x')) := by
+    funext x'; simp [Pi.add_apply, map_add]
+  simp only [koszul, e1, e2]
+  rw [dirDeriv_add_fun_at X _ _ x hgYZ hgYZ', dirDeriv_add_fun_at Y _ _ x hgXZ hgXZ']
+  simp only [dirDeriv_add_vectorField, mlieBracket_add_right hZ hZ', mlieBracket_add_left hZ hZ',
+    Pi.add_apply, map_add, ContinuousLinearMap.add_apply]
+  ring
+
 /-- **Homogeneity of `koszul` in the `Z` slot** under a scalar function: `koszul X Y (f•Z) =
 f·koszul X Y Z`. Together with `koszul_add_right_Z` this is the full `C∞`-linearity making the Koszul
 form a covector in `Z` — hence `∇_X Y := ♯(½·koszul)`. The Leibniz cross-terms `(X·f)·g(Y,Z)` and
@@ -145,10 +156,10 @@ form a covector in `Z` — hence `∇_X Y := ♯(½·koszul)`. The Leibniz cross
 connection well-defined. -/
 theorem koszul_smul_right_Z [CompleteSpace E] [IsManifold I 2 M]
     (gm : PseudoRiemannianMetric I M) (X Y Z : Π x : M, TangentSpace I x) (f : M → 𝕜) (x : M)
-    (hf : ∀ z, MDifferentiableAt I 𝓘(𝕜) f z)
-    (hgYZ : ∀ z, MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (Y x') (Z x')) z)
-    (hgXZ : ∀ z, MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (X x') (Z x')) z)
-    (hX : MDiffAt (T% X) x) (hZ : MDiffAt (T% Z) x) :
+    (hf : MDifferentiableAt I 𝓘(𝕜) f x)
+    (hgYZ : MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (Y x') (Z x')) x)
+    (hgXZ : MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (X x') (Z x')) x)
+    (hZ : MDiffAt (T% Z) x) :
     koszul gm X Y (f • Z) x = f x * koszul gm X Y Z x := by
   have eYZ : (fun x' => gm.g x' (Y x') ((f • Z) x')) = f * fun x' => gm.g x' (Y x') (Z x') := by
     funext x'; simp [Pi.smul_apply, Pi.mul_apply, map_smul, smul_eq_mul]
@@ -156,13 +167,13 @@ theorem koszul_smul_right_Z [CompleteSpace E] [IsManifold I 2 M]
     funext x'; simp [Pi.smul_apply, Pi.mul_apply, map_smul, smul_eq_mul]
   have hbR : gm.g x (mlieBracket I Y (f • Z) x) (X x)
       = dirDeriv I Y f x * gm.g x (Z x) (X x) + f x * gm.g x (mlieBracket I Y Z x) (X x) := by
-    rw [mlieBracket_smul_right (hf x) hZ]
+    rw [mlieBracket_smul_right hf hZ]
     simp only [map_add, map_smul, ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,
       smul_eq_mul]
     rfl
   have hbL : gm.g x (mlieBracket I (f • Z) X x) (Y x)
       = - (dirDeriv I X f x) * gm.g x (Z x) (Y x) + f x * gm.g x (mlieBracket I Z X x) (Y x) := by
-    rw [mlieBracket_smul_left (hf x) hZ]
+    rw [mlieBracket_smul_left hf hZ]
     simp only [map_add, map_neg, ContinuousLinearMap.add_apply, ContinuousLinearMap.neg_apply,
       map_smul, ContinuousLinearMap.smul_apply, smul_eq_mul, neg_mul]
     rfl
@@ -171,8 +182,26 @@ theorem koszul_smul_right_Z [CompleteSpace E] [IsManifold I 2 M]
     rw [map_smul, smul_eq_mul]
   have sYZ : gm.g x (Y x) (Z x) = gm.g x (Z x) (Y x) := gm.symm' x (Y x) (Z x)
   have sXZ : gm.g x (X x) (Z x) = gm.g x (Z x) (X x) := gm.symm' x (X x) (Z x)
-  simp only [koszul, eYZ, eXZ, dirDeriv_mul X f _ x (hf x) (hgYZ x),
-    dirDeriv_mul Y f _ x (hf x) (hgXZ x), dirDeriv_smul_field, h4, smul_eq_mul, hbR, hbL]
+  simp only [koszul, eYZ, eXZ, dirDeriv_mul X f _ x hf hgYZ,
+    dirDeriv_mul Y f _ x hf hgXZ, dirDeriv_smul_field, h4, smul_eq_mul, hbR, hbL]
   linear_combination (dirDeriv I X f x) * sYZ + (dirDeriv I Y f x) * sXZ
+
+open Bundle in
+/-- **The Koszul form is tensorial in `Z`.** Packaging the additivity (`koszul_add_right_Z`) and
+homogeneity (`koszul_smul_right_Z`) as Mathlib's `TensorialAt` criterion: `σ ↦ koszul X Y σ x` is a
+tensorial operation at `x`. By `TensorialAt.mkHom` this defines a *covector* `T_xM →L 𝕜` — the Koszul
+1-form — whose metric-dual (`♯`) is the Levi-Civita `∇_X Y`. `hsmooth` is metric smoothness (a smooth
+metric pairs smooth fields to a smooth function); over `ℝ`/`ℂ` with a smooth metric it is automatic. -/
+theorem koszul_tensorialAt [CompleteSpace E] [IsManifold I 2 M]
+    (gm : PseudoRiemannianMetric I M) (X Y : Π x : M, TangentSpace I x) (x : M)
+    (hX : MDiffAt (T% X) x) (hY : MDiffAt (T% Y) x)
+    (hsmooth : ∀ A B : Π z : M, TangentSpace I z, MDiffAt (T% A) x → MDiffAt (T% B) x →
+      MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (A x') (B x')) x) :
+    TensorialAt I E (fun σ => koszul gm X Y σ x) x where
+  smul {f σ} hf hσ :=
+    koszul_smul_right_Z gm X Y σ f x hf (hsmooth Y σ hY hσ) (hsmooth X σ hX hσ) hσ
+  add {σ σ'} hσ hσ' :=
+    koszul_add_right_Z gm X Y σ σ' x (hsmooth Y σ hY hσ) (hsmooth Y σ' hY hσ')
+      (hsmooth X σ hX hσ) (hsmooth X σ' hX hσ') hσ hσ'
 
 end QIQTH.ManifoldGR
