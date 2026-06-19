@@ -1,5 +1,7 @@
 import Mathlib.Geometry.Manifold.VectorBundle.CovariantDerivative.Basic
 import Mathlib.Geometry.Manifold.VectorField.LieBracket
+import Mathlib.Geometry.Manifold.VectorBundle.Tensoriality
+import Mathlib.LinearAlgebra.Trace
 import QIQTH.ManifoldCommutator
 
 /-!
@@ -278,5 +280,52 @@ theorem first_bianchi [IsManifold I 2 M]
       = mlieBracket I X (mlieBracket I Y Z) x + mlieBracket I Y (mlieBracket I Z X) x
         + mlieBracket I Z (mlieBracket I X Y) x from hjac.symm]
   abel
+
+open Bundle in
+/-- **The curvature is tensorial in its first vector-field slot.** Packaging `curvature_smul_left`
+(homogeneity) and `curvature_add_left` (additivity) as Mathlib's `TensorialAt`: `X ↦ R(X,Y)σ` is a
+tensorial operation at `x`. By `TensorialAt.mkHom` this defines the endomorphism `T_xM →L V x`,
+`v ↦ R(v,Y)σ`, whose **trace is the Ricci tensor** `Ric(Y,σ)` (when `V = TangentSpace I`). `hcovσ` is
+connection-smoothness (the connection sends a smooth field to a smooth `∇_X σ`). -/
+theorem curvature_tensorialAt_left [CompleteSpace E] [IsManifold I 2 M] [VectorBundle 𝕜 F V]
+    (cov : (Π x : M, V x) → (Π x : M, TangentSpace I x →L[𝕜] V x))
+    (hcov : IsCovariantDerivativeOn F cov Set.univ)
+    (Y : Π x : M, TangentSpace I x) (σ : Π x : M, V x) (x : M)
+    (hcovσ : ∀ X : Π x : M, TangentSpace I x, MDiffAt (T% X) x →
+      MDiffAt (T% fun x' => cov σ x' (X x')) x) :
+    TensorialAt I E (fun X => curvature cov X Y σ x) x where
+  smul {f X} hf hX := curvature_smul_left cov hcov f X Y σ x hf hX (hcovσ X hX)
+  add {X X'} hX hX' :=
+    curvature_add_left cov hcov X X' Y σ x hX hX' (hcovσ X hX) (hcovσ X' hX')
+
+section Ricci
+
+open Bundle
+
+variable [CompleteSpace 𝕜] [CompleteSpace E] [FiniteDimensional 𝕜 E] [IsManifold I 2 M]
+
+/-- **The curvature endomorphism** `v ↦ R(v,Y)Z : T_xM →L[𝕜] T_xM` of a connection on the tangent
+bundle, obtained from `curvature_tensorialAt_left` via `TensorialAt.mkHom`. -/
+noncomputable def curvatureEndo
+    (cov : (Π x : M, TangentSpace I x) → (Π x : M, TangentSpace I x →L[𝕜] TangentSpace I x))
+    (Y Z : Π x : M, TangentSpace I x) (x : M)
+    (hcov : IsCovariantDerivativeOn E cov Set.univ)
+    (hcovσ : ∀ X : Π x : M, TangentSpace I x, MDiffAt (T% X) x →
+      MDiffAt (T% fun x' => cov Z x' (X x')) x) :
+    TangentSpace I x →L[𝕜] TangentSpace I x :=
+  TensorialAt.mkHom (fun X => curvature cov X Y Z x) x
+    (curvature_tensorialAt_left cov hcov Y Z x hcovσ)
+
+/-- **The Ricci tensor** `Ric(Y,Z) = tr(v ↦ R(v,Y)Z)` on an abstract manifold: the trace of the
+curvature endomorphism in its first slot. This is the contraction that feeds the Einstein tensor. -/
+noncomputable def ricci
+    (cov : (Π x : M, TangentSpace I x) → (Π x : M, TangentSpace I x →L[𝕜] TangentSpace I x))
+    (Y Z : Π x : M, TangentSpace I x) (x : M)
+    (hcov : IsCovariantDerivativeOn E cov Set.univ)
+    (hcovσ : ∀ X : Π x : M, TangentSpace I x, MDiffAt (T% X) x →
+      MDiffAt (T% fun x' => cov Z x' (X x')) x) : 𝕜 :=
+  LinearMap.trace 𝕜 (TangentSpace I x) (curvatureEndo cov Y Z x hcov hcovσ).toLinearMap
+
+end Ricci
 
 end QIQTH.ManifoldGR

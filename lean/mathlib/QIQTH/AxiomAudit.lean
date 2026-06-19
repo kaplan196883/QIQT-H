@@ -2921,6 +2921,13 @@ namespace QIQTH.AxiomAudit
 -- a second use turns ∇_X[Y,Z]−∇_{[Y,Z]}X into [X,[Y,Z]], cyclic sum = 0 by JACOBI. Mathlib has the
 -- model-space Jacobi (leibniz_identity_lieBracket) but no mlieBracket version, so the manifold Jacobi is
 -- a labeled hypothesis (its chart-transport is the remaining input). Companion def: `torsion`. Axiom-free.
+#print axioms QIQTH.ManifoldGR.curvature_tensorialAt_left
+#print axioms QIQTH.ManifoldGR.ricci
+-- expected: standard only — THE RICCI TENSOR on an abstract manifold. curvature_tensorialAt_left:
+-- X ↦ R(X,Y)σ is tensorial (curvature_smul_left + curvature_add_left → Mathlib TensorialAt). curvatureEndo:
+-- the endomorphism v ↦ R(v,Y)Z : T_xM →L T_xM via mkHom. ricci: Ric(Y,Z) = LinearMap.trace of that
+-- endomorphism = tr(v ↦ R(v,Y)Z). Needs [FiniteDimensional 𝕜 E][CompleteSpace 𝕜/E][IsManifold I 2 M];
+-- hcovσ = connection-smoothness (∇_X Z smooth for smooth X). Feeds scalar curvature → Einstein. Axiom-free.
 #print axioms QIQTH.ManifoldGR.mfderiv_apply_mlieBracket_model
 -- expected: standard only — COMMUTATOR INFRASTRUCTURE (base case). The Lie bracket acts on a scalar as
 -- the commutator of directional derivatives df([X,Y])=X(Yf)−Y(Xf), for the model-space manifold (M=E):
