@@ -2275,6 +2275,12 @@ namespace QIQTH.AxiomAudit
 -- Matrix n n→⋆ₐ Matrix(n×p)(n×p)); matLog_kron_one = CFC naturality (IsHermitian.cfc_eq bridge +
 -- StarAlgHomClass.map_cfc, same pattern as matLog_conj for unitary conjugation). Key infrastructure for
 -- relative-entropy ⊗-additivity (maximally-mixed factor) → partial-trace DPI. Axiom-free.
+#print axioms QIQTH.Entropy.relEntropy_kron_one
+-- expected: standard only — RELATIVE-ENTROPY ⊗-ADDITIVITY (scalar-identity 2nd factor):
+-- D(A⊗(c·1_m)‖B⊗(c·1_m))=(c·dim m)·D(A‖B). The common c·1 factor's log cancels in logρ−logσ=(logA−logB)⊗1
+-- (matLog_smul+matLog_kron_one), and trace factors Tr((A(logA−logB))⊗(c·1))=Tr(A(logA−logB))·(c·dim m)
+-- (trace_kronecker). For maximally-mixed c=1/dim m this is exactly D(A‖B) — the last step before the
+-- partial-trace DPI assembly. Axiom-free.
 #print axioms QIQTH.QuantumEntropy.relEntropy_eq_zero
 -- expected: standard only — ★★★★★ KLEIN'S EQUALITY CASE: D(ρ‖σ)=0 ⟹ ρ=σ for density matrices. The
 -- equality tracking of relEntropy_nonneg (doubly-stochastic/Jensen): KL(p‖r)=0⟹p=r (Gibbs, log x<x−1)

@@ -121,4 +121,29 @@ lemma matLog_kron_one {A : Matrix n n ℂ} (hA : A.PosDef)
     kronRightHom_apply]
   exact congrArg (· ⊗ₖ (1 : Matrix m m ℂ)) (hA.1.cfc_eq Real.log)
 
+/-- **Relative-entropy ⊗-additivity with a scalar identity second factor**:
+`D(A ⊗ (c·1_m) ‖ B ⊗ (c·1_m)) = (c·dim m)·D(A‖B)`. The `c·1` factor is common to both arguments, so its
+`log` cancels in `log ρ − log σ = (log A − log B)⊗1` (`matLog_smul` + `matLog_kron_one`); the trace then
+factors as `Tr((A(logA−logB))⊗(c·1)) = Tr(A(logA−logB))·(c·dim m)` (`trace_kronecker`). For the
+maximally-mixed factor `c = 1/dim m` this is just `D(A‖B)`. -/
+theorem relEntropy_kron_one {A B : Matrix n n ℂ} (hA : A.PosDef) (hB : B.PosDef) {c : ℝ} (hc : 0 < c)
+    (hAC : (c • (A ⊗ₖ (1 : Matrix m m ℂ))).IsHermitian)
+    (hBC : (c • (B ⊗ₖ (1 : Matrix m m ℂ))).IsHermitian) :
+    QIQTH.QuantumEntropy.relEntropy hAC hBC
+      = (c * (Fintype.card m : ℝ)) * QIQTH.QuantumEntropy.relEntropy hA.1 hB.1 := by
+  have hA1 : (A ⊗ₖ (1 : Matrix m m ℂ)).PosDef := hA.kronecker Matrix.PosDef.one
+  have hB1 : (B ⊗ₖ (1 : Matrix m m ℂ)).PosDef := hB.kronecker Matrix.PosDef.one
+  have hdiff : QIQTH.QuantumEntropy.matLog hAC - QIQTH.QuantumEntropy.matLog hBC
+      = (QIQTH.QuantumEntropy.matLog hA.1 - QIQTH.QuantumEntropy.matLog hB.1)
+        ⊗ₖ (1 : Matrix m m ℂ) := by
+    rw [matLog_smul hA1 hc hAC, matLog_smul hB1 hc hBC, matLog_kron_one hA, matLog_kron_one hB]
+    ext ⟨p1, p2⟩ ⟨q1, q2⟩
+    simp only [Matrix.sub_apply, Matrix.add_apply, Matrix.smul_apply, kronecker_apply, smul_eq_mul]
+    ring
+  unfold QIQTH.QuantumEntropy.relEntropy
+  rw [hdiff, Matrix.smul_mul, ← mul_kronecker_mul, Matrix.mul_one, Matrix.trace_smul,
+    trace_kronecker, Matrix.trace_one, Complex.smul_re]
+  simp only [Complex.mul_re, Complex.natCast_re, Complex.natCast_im, mul_zero, sub_zero]
+  ring
+
 end QIQTH.Entropy
