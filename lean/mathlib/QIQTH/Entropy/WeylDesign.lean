@@ -26,6 +26,13 @@ open Finset
 
 variable {m : ℕ} [NeZero m]
 
+/-- **Geometric sum of an `m`-th root of unity `≠ 1` vanishes**: `Σ_{b<m} w^b = 0`. The arithmetic
+heart of every character-orthogonality relation: `geom_sum_eq` telescopes the sum to `(w^m−1)/(w−1)`,
+and `w^m = 1` kills the numerator. -/
+theorem geom_sum_root_eq_zero {w : ℂ} (hwm : w ^ m = 1) (hw1 : w ≠ 1) :
+    ∑ b : Fin m, w ^ b.val = 0 := by
+  rw [Fin.sum_univ_eq_sum_range (fun i => w ^ i) m, geom_sum_eq hw1 m, hwm, sub_self, zero_div]
+
 /-- **Character orthogonality, off-diagonal case.** For a primitive `m`-th root of unity `ω` and a
 nonzero residue `c : Fin m`, the character sum `Σ_{b<m} ω^{b·c}` vanishes. (`ω^c` is an `m`-th root of
 unity `≠ 1`, so the geometric sum telescopes to `(ω^{cm}-1)/(ω^c-1) = 0`.) -/
@@ -89,5 +96,46 @@ theorem clock_mem_unitary {ω : ℂ} (hω : IsPrimitiveRoot ω m) :
 theorem shift_mem_unitary : shift m ∈ unitary (Matrix (Fin m) (Fin m) ℂ) := by
   rw [Unitary.mem_iff, shift, star_eq_conjTranspose, conjTranspose_permMatrix]
   refine ⟨?_, ?_⟩ <;> simp [← permMatrix_mul, permMatrix_one]
+
+/-- **Clock character orthogonality** — the entrywise engine of the clock (dephasing) twirl:
+`Σ_b ω^{j·b}·conj(ω^{k·b}) = m·[j=k]`. Each summand factors as `w^b` with `w = ω^j·conj(ω^k)`, an
+`m`-th root of unity that is `1` iff `j = k` (primitive-root injectivity). On the diagonal the sum is
+`m`; off-diagonal it vanishes (`geom_sum_root_eq_zero`). This is exactly the relation that makes the
+clock twirl `(1/m)Σ_b Z^b M (Z^b)⋆` project `M` onto its diagonal. -/
+theorem clock_char_orthogonality {ω : ℂ} (hω : IsPrimitiveRoot ω m) (j k : Fin m) :
+    ∑ b : Fin m, ω ^ (j.val * b.val) * (starRingEnd ℂ) (ω ^ (k.val * b.val))
+      = if j = k then (m : ℂ) else 0 := by
+  have hnsq : Complex.normSq ω = 1 := by
+    rw [Complex.normSq_eq_norm_sq, hω.norm'_eq_one (NeZero.ne m), one_pow]
+  -- each summand is `w^b` for `w = ω^j · conj(ω^k)`
+  set w : ℂ := ω ^ j.val * (starRingEnd ℂ) (ω ^ k.val) with hwdef
+  have hfac : ∀ b : Fin m,
+      ω ^ (j.val * b.val) * (starRingEnd ℂ) (ω ^ (k.val * b.val)) = w ^ b.val := by
+    intro b
+    rw [hwdef, mul_pow, ← pow_mul, ← map_pow, ← pow_mul]
+  simp_rw [hfac]
+  by_cases hjk : j = k
+  · subst hjk
+    have hw1 : w = 1 := by
+      rw [hwdef, mul_comm, ← Complex.normSq_eq_conj_mul_self, map_pow, hnsq, one_pow,
+        Complex.ofReal_one]
+    simp [hw1]
+  · rw [if_neg hjk]
+    refine geom_sum_root_eq_zero ?_ ?_
+    · -- `w^m = 1`
+      rw [hwdef, mul_pow, ← map_pow, ← pow_mul, ← pow_mul, mul_comm j.val m, mul_comm k.val m,
+        pow_mul, pow_mul]
+      simp only [hω.pow_eq_one, one_pow, map_one, mul_one]
+    · -- `w ≠ 1`: else `ω^j = ω^k`, forcing `j = k` by primitive-root injectivity
+      intro hw1
+      apply hjk
+      apply Fin.ext
+      apply hω.pow_inj j.isLt k.isLt
+      have hk1 : (starRingEnd ℂ) (ω ^ k.val) * ω ^ k.val = 1 := by
+        rw [← Complex.normSq_eq_conj_mul_self, map_pow, hnsq, one_pow, Complex.ofReal_one]
+      calc ω ^ j.val
+          = ω ^ j.val * ((starRingEnd ℂ) (ω ^ k.val) * ω ^ k.val) := by rw [hk1, mul_one]
+        _ = w * ω ^ k.val := by rw [hwdef]; ring
+        _ = ω ^ k.val := by rw [hw1, one_mul]
 
 end QIQTH.Entropy

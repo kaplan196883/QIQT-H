@@ -2213,6 +2213,13 @@ namespace QIQTH.AxiomAudit
 -- diag(1,ω,…,ω^{m−1}) is unitary (diagonal of unit-modulus roots, conj·self=normSq=‖ω‖²=1); shift m =
 -- (finRotate m).permMatrix is unitary (permutation matrix, via conjTranspose_permMatrix + permMatrix_mul
 -- group cancellation). These are the conjugating unitaries of the clock-twirl / Weyl 1-design. Axiom-free.
+#print axioms QIQTH.Entropy.geom_sum_root_eq_zero
+#print axioms QIQTH.Entropy.clock_char_orthogonality
+-- expected: standard only — CLOCK CHARACTER ORTHOGONALITY (the entrywise engine of the dephasing twirl).
+-- Σ_b ω^{j·b}·conj(ω^{k·b}) = m·[j=k]: each summand factors as w^b with w=ω^j·conj(ω^k), an m-th root
+-- of unity that is 1 iff j=k (primitive-root injectivity pow_inj). Diagonal → m; off-diagonal → 0
+-- (geom_sum_root_eq_zero: m-th root ≠1 ⟹ geometric sum telescopes to 0). This is exactly what makes the
+-- clock twirl (1/m)Σ_b Z^b M (Z^b)⋆ project M onto its diagonal (dephasing) → toward partial-trace DPI.
 #print axioms QIQTH.QuantumEntropy.relEntropy_eq_zero
 -- expected: standard only — ★★★★★ KLEIN'S EQUALITY CASE: D(ρ‖σ)=0 ⟹ ρ=σ for density matrices. The
 -- equality tracking of relEntropy_nonneg (doubly-stochastic/Jensen): KL(p‖r)=0⟹p=r (Gibbs, log x<x−1)
