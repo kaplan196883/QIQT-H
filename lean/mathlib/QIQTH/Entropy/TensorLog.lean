@@ -335,4 +335,19 @@ lemma relEntropy_reindex (e : n ≃ m) {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef
       ← map_sub, ← map_mul]
   rw [hpush, trace_reindex]
 
+/-- **The von Neumann entropy is reindex-invariant**: `S(reindex e e ρ) = S(ρ)`. The entropy terms in
+strong subadditivity are unchanged by relabeling the index set across product bracketings. -/
+lemma vonNeumannEntropy_reindex (e : n ≃ m) {ρ : Matrix n n ℂ} (hρ : ρ.PosDef)
+    (hd : QIQTH.QuantumEntropy.IsDensity ρ)
+    (hd' : QIQTH.QuantumEntropy.IsDensity (reindex e e ρ)) :
+    QIQTH.QuantumEntropy.vonNeumannEntropy hd' = QIQTH.QuantumEntropy.vonNeumannEntropy hd := by
+  have hρ' : (reindex e e ρ).PosDef := hρ.submatrix e.symm.injective
+  rw [QIQTH.QuantumEntropy.vonNeumannEntropy_eq_neg_trace hρ' hd',
+    QIQTH.QuantumEntropy.vonNeumannEntropy_eq_neg_trace hρ hd, matLog_reindex e hρ hρ'.1]
+  congr 2
+  rw [show reindex e e ρ = reindexStarHom e ρ from rfl,
+    show reindex e e (QIQTH.QuantumEntropy.matLog hρ.1)
+        = reindexStarHom e (QIQTH.QuantumEntropy.matLog hρ.1) from rfl,
+    ← map_mul, reindexStarHom_apply, trace_reindex]
+
 end QIQTH.Entropy
