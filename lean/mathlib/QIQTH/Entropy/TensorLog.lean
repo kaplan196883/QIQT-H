@@ -112,4 +112,15 @@ theorem matLog_kronecker {A : Matrix n n ℂ} {B : Matrix m m ℂ} (hA : A.PosDe
   rw [← hmul]
   congr 1
 
+/-- **The partial-trace adjoint** (the defining duality of `Tr₂`): `Tr(ρ · (M ⊗ I)) = Tr((Tr₂ρ) · M)`.
+Pairing a state with an observable acting only on the first factor sees only the reduced state `Tr₂ρ`.
+This is the step that turns `Tr(ρ · (log ρ₁ ⊗ I))` into `Tr(ρ₁ log ρ₁)` in the subadditivity argument. -/
+theorem trace_mul_kron_one (ρ : Matrix (n × m) (n × m) ℂ) (M : Matrix n n ℂ) :
+    (ρ * (M ⊗ₖ (1 : Matrix m m ℂ))).trace = (partialTraceRight ρ * M).trace := by
+  simp only [Matrix.trace, Matrix.diag_apply, Matrix.mul_apply, Fintype.sum_prod_type,
+    kronecker_apply, Matrix.one_apply, partialTraceRight_apply, mul_ite, mul_zero,
+    Finset.sum_ite_eq', Finset.mem_univ, if_true, Finset.sum_mul, mul_one]
+  refine Finset.sum_congr rfl (fun i _ => ?_)
+  rw [Finset.sum_comm]
+
 end QIQTH.Entropy
