@@ -192,6 +192,100 @@ theorem mpullbackWithin_extChartAt_symm_self (X : Π z : M, TangentSpace I z) (x
   rw [mpullbackWithin_extChartAt_symm_apply X x x (mem_extChartAt_source x), mfderiv_extChartAt_self]
   rfl
 
+/-- In the model space `E`, the directional derivative is literally `fderiv` applied to the field
+value (`mfderiv` collapses to `fderiv`). -/
+theorem dirDeriv_model_apply (Z : Π y : E, TangentSpace 𝓘(𝕜, E) y) (h : E → 𝕜) (y : E) :
+    dirDeriv 𝓘(𝕜, E) Z h y = fderiv 𝕜 h y (Z y) :=
+  DFunLike.congr_fun (mfderiv_eq_fderiv (f := h) (x := y)) (Z y)
+
+/-- **Second directional derivative transports to the model (at the base point).** With
+`e = extChartAt I x`, `g = f ∘ e⁻¹`, and `Ỹ, X̃` the chart pullbacks of the fields, the manifold
+iterated directional derivative `X(Yf)` at `x` equals the *model* iterated directional derivative
+`X̃(Ỹ g)` at `e x`. This is the function-side heart of the manifold commutator: it is what lets the
+normed-space commutator lemma `mfderiv_apply_mlieBracket_model` transport to a general manifold. The
+proof factors `X(Yf)` through the chart at the base point (`de_x = id`), then rewrites the chart
+representative of `Yf` to the model directional derivative `Ỹ g` on a neighborhood (via
+`dirDeriv_eventuallyEq_chart` and the neighborhood field identification). -/
+theorem dirDeriv_dirDeriv_eq_chart (f : M → 𝕜) (X Y : Π z : M, TangentSpace I z) (x : M)
+    (hf : ∀ z, MDifferentiableAt I 𝓘(𝕜) f z)
+    (hYf : MDifferentiableAt I 𝓘(𝕜) (dirDeriv I Y f) x) :
+    dirDeriv I X (dirDeriv I Y f) x
+      = dirDeriv 𝓘(𝕜, E)
+          (mpullbackWithin 𝓘(𝕜, E) I (extChartAt I x).symm X (Set.range I))
+          (dirDeriv 𝓘(𝕜, E)
+            (mpullbackWithin 𝓘(𝕜, E) I (extChartAt I x).symm Y (Set.range I))
+            (f ∘ (extChartAt I x).symm))
+          (extChartAt I x x) := by
+  have hL : dirDeriv I X (dirDeriv I Y f) x
+      = fderiv 𝕜 ((dirDeriv I Y f) ∘ (extChartAt I x).symm) (extChartAt I x x) (X x) := by
+    rw [dirDeriv_eq_chart (dirDeriv I Y f) X x hYf, mfderiv_extChartAt_self]; rfl
+  have hev : (dirDeriv I Y f) ∘ (extChartAt I x).symm
+      =ᶠ[𝓝 (extChartAt I x x)]
+        dirDeriv 𝓘(𝕜, E) (mpullbackWithin 𝓘(𝕜, E) I (extChartAt I x).symm Y (Set.range I))
+          (f ∘ (extChartAt I x).symm) := by
+    have htend : Filter.Tendsto (extChartAt I x).symm (𝓝 (extChartAt I x x)) (𝓝 x) := by
+      have h := (continuousAt_extChartAt_symm (I := I) x).tendsto
+      rwa [(extChartAt I x).left_inv (mem_extChartAt_source x)] at h
+    have h2 := htend.eventually (dirDeriv_eventuallyEq_chart f Y x hf)
+    filter_upwards [h2, extChartAt_target_mem_nhds (I := I) x] with y hy hyt
+    simp only [Function.comp_apply] at hy ⊢
+    rw [hy, (extChartAt I x).right_inv hyt, dirDeriv_model_apply]
+    have key := mpullbackWithin_extChartAt_symm_apply Y x ((extChartAt I x).symm y)
+      ((extChartAt I x).map_target hyt)
+    rw [(extChartAt I x).right_inv hyt] at key
+    rw [key]
+  rw [hL, hev.fderiv_eq, dirDeriv_model_apply, mpullbackWithin_extChartAt_symm_self]
+
+/-- **The general-manifold commutator.** On any (boundaryless) `C²` manifold, the Lie bracket of two
+vector fields acts on a scalar function as the *commutator of directional derivatives*:
+`df([X,Y]) = X(Yf) − Y(Xf)`. This is the geometric content underlying manifold curvature (the
+`Point n` component-level version `ricci_identity` is the chart-free shadow of this). The proof
+composes three machine-checked pieces: the bracket-side chart factorization (`dirDeriv_eq_chart` at
+the base point, where `de_x = id`), the function-side second-derivative transport
+(`dirDeriv_dirDeriv_eq_chart`), and the normed-space commutator `mfderiv_apply_mlieBracket_model`.
+The model-space regularity of the chart representative `g = f∘e⁻¹` and of the pushforward fields
+(`hg, hsymm, hXt, hYt`) are the analytic side-conditions; over `ℝ`/`ℂ` they hold for any `C²` data. -/
+theorem mfderiv_apply_mlieBracket
+    (f : M → 𝕜) (X Y : Π z : M, TangentSpace I z) (x : M)
+    (hf : ∀ z, MDifferentiableAt I 𝓘(𝕜) f z)
+    (hYf : MDifferentiableAt I 𝓘(𝕜) (dirDeriv I Y f) x)
+    (hXf : MDifferentiableAt I 𝓘(𝕜) (dirDeriv I X f) x)
+    (hg : ContDiffAt 𝕜 2 (f ∘ (extChartAt I x).symm) (extChartAt I x x))
+    (hsymm : IsSymmSndFDerivAt 𝕜 (f ∘ (extChartAt I x).symm) (extChartAt I x x))
+    (hXt : DifferentiableAt 𝕜
+      (mpullbackWithin 𝓘(𝕜, E) I (extChartAt I x).symm X (Set.range I)) (extChartAt I x x))
+    (hYt : DifferentiableAt 𝕜
+      (mpullbackWithin 𝓘(𝕜, E) I (extChartAt I x).symm Y (Set.range I)) (extChartAt I x x)) :
+    mfderiv I 𝓘(𝕜) f x (mlieBracket I X Y x)
+      = dirDeriv I X (dirDeriv I Y f) x - dirDeriv I Y (dirDeriv I X f) x := by
+  -- the model-space commutator for the chart representative `g` and the pushforward fields
+  have hmodel := mfderiv_apply_mlieBracket_model (f := f ∘ (extChartAt I x).symm)
+    (X := mpullbackWithin 𝓘(𝕜, E) I (extChartAt I x).symm X (Set.range I))
+    (Y := mpullbackWithin 𝓘(𝕜, E) I (extChartAt I x).symm Y (Set.range I))
+    (x := extChartAt I x x) hg hsymm hXt hYt
+  -- transport both manifold second-derivatives to the model
+  rw [dirDeriv_dirDeriv_eq_chart f X Y x hf hYf, dirDeriv_dirDeriv_eq_chart f Y X x hf hXf,
+    ← hmodel]
+  -- bracket side: factor `df([X,Y])` through the chart at the base point (`de_x = id`)
+  have hbracket : mfderiv I 𝓘(𝕜) f x (mlieBracket I X Y x)
+      = fderiv 𝕜 (f ∘ (extChartAt I x).symm) (extChartAt I x x) (mlieBracket I X Y x) := by
+    have h := dirDeriv_eq_chart f (mlieBracket I X Y) x (hf x)
+    rw [mfderiv_extChartAt_self] at h
+    exact h
+  -- the manifold bracket value equals the model bracket value at the base point
+  have hbr : mlieBracket I X Y x
+      = mlieBracket 𝓘(𝕜, E) (mpullbackWithin 𝓘(𝕜, E) I (extChartAt I x).symm X (Set.range I))
+          (mpullbackWithin 𝓘(𝕜, E) I (extChartAt I x).symm Y (Set.range I)) (extChartAt I x x) := by
+    rw [mlieBracket, mlieBracketWithin_apply,
+      (isInvertible_mfderiv_extChartAt (mem_extChartAt_source x)).inverse_apply_eq,
+      mfderiv_extChartAt_self, ← mlieBracketWithin_univ (I := 𝓘(𝕜, E)),
+      mlieBracketWithin_eq_lieBracketWithin]
+    simp only [Set.preimage_univ, Set.univ_inter, I.range_eq_univ, lieBracketWithin_univ]
+    rfl
+  rw [hbracket, hbr]
+  exact (DFunLike.congr_fun
+    (mfderiv_eq_fderiv (f := f ∘ (extChartAt I x).symm) (x := extChartAt I x x)) _).symm
+
 end GeneralManifold
 
 end QIQTH.ManifoldGR

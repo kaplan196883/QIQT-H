@@ -2990,4 +2990,16 @@ namespace QIQTH.AxiomAudit
 -- identities) — what the SECOND directional derivative in the commutator assembly needs; _self is the
 -- base-point corollary (de_x = id ⟹ = X x). Field analogues of dirDeriv_eq_chart. Axiom-free.
 
+#print axioms QIQTH.ManifoldGR.dirDeriv_model_apply
+#print axioms QIQTH.ManifoldGR.dirDeriv_dirDeriv_eq_chart
+#print axioms QIQTH.ManifoldGR.mfderiv_apply_mlieBracket
+-- expected: standard only — THE GENERAL-MANIFOLD COMMUTATOR (abstract-manifold thread, gap 3).
+-- mfderiv_apply_mlieBracket: on any boundaryless C² manifold the Lie bracket acts on a scalar as the
+-- commutator of directional derivatives, df([X,Y]) = X(Yf) − Y(Xf). This is the chart-free statement
+-- whose Point-n component shadow is `ricci_identity`. Composes (a) bracket-side chart factorization
+-- (dirDeriv_eq_chart at base, de_x=id), (b) function-side second-derivative transport
+-- (dirDeriv_dirDeriv_eq_chart, the crux — manifold X(Yf) = model X̃(Ỹg) via dirDeriv_eventuallyEq_chart
+-- + the neighborhood field identification), (c) the normed-space commutator mfderiv_apply_mlieBracket_model.
+-- dirDeriv_model_apply: in the model, dirDeriv = fderiv-apply. All axiom-free.
+
 end QIQTH.AxiomAudit
