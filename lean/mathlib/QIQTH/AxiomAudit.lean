@@ -3273,5 +3273,9 @@ namespace QIQTH.AxiomAudit
 -- polynomial case of the trace-derivative d/dt Tr g(A+tH)|₀ = Tr(g'(A)H) underlying the first-order
 -- entanglement first law δS=δ⟨K⟩. Composes hasDerivAt_matrixPow with the continuous-linear trace
 -- (restrictScalars ℝ, via HasFDerivAt.comp_hasDerivAt_of_eq) and collapses via trace_leibniz_sum.
+#print axioms QIQTH.MatrixCalculus.hasDerivAt_trace_sumPow
+-- expected: standard only — THE TRACE POLYNOMIAL RULE (linearity lift): for any finite ℂ-combination
+-- of powers p(M)=Σ_{m<N} c_m M^m (= any polynomial), d/dt Tr(p(A+t·H))|₀ = Σ_{m<N} c_m·m·Tr(A^{m-1}H)
+-- = Tr(p'(A)H). From HasDerivAt.sum + const_smul over the trace power rule. Axiom-free.
 
 end QIQTH.AxiomAudit

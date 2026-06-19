@@ -1,4 +1,5 @@
 import Mathlib.Analysis.Matrix.Normed
+import Mathlib.Analysis.Calculus.Deriv.Add
 import Mathlib.Analysis.Calculus.Deriv.Mul
 import Mathlib.Analysis.Calculus.Deriv.Pow
 import Mathlib.Analysis.Calculus.Deriv.Comp
@@ -87,3 +88,20 @@ theorem hasDerivAt_trace_matrixPow (A H : Matrix n n ℂ) (m : ℕ) :
       = (m : ℂ) * (A ^ (m - 1) * H).trace := trace_leibniz_sum A H m
   rw [← hval]
   exact h
+
+/-- **The trace polynomial rule** (linearity lift of `hasDerivAt_trace_matrixPow`): for any finite
+    ℂ-combination of powers `p(M) = Σ_{m<N} c_m M^m` (i.e. any polynomial),
+    `d/dt Tr(p(A + t·H))|_{t=0} = Σ_{m<N} c_m · m · Tr(A^{m-1} H) = Tr(p'(A) H)`.  Immediate from
+    `HasDerivAt.sum` + `const_smul` over the trace power rule. -/
+theorem hasDerivAt_trace_sumPow (A H : Matrix n n ℂ) (c : ℕ → ℂ) (N : ℕ) :
+    HasDerivAt (fun t : ℝ => (∑ m ∈ Finset.range N, c m • (A + t • H) ^ m).trace)
+      (∑ m ∈ Finset.range N, c m * ((m : ℂ) * (A ^ (m - 1) * H).trace)) 0 := by
+  have hfun : (fun t : ℝ => (∑ m ∈ Finset.range N, c m • (A + t • H) ^ m).trace)
+      = ∑ m ∈ Finset.range N, (fun t : ℝ => c m • ((A + t • H) ^ m).trace) := by
+    funext t
+    simp only [Finset.sum_apply, Matrix.trace_sum, Matrix.trace_smul]
+  rw [hfun]
+  have h : HasDerivAt (∑ m ∈ Finset.range N, (fun t : ℝ => c m • ((A + t • H) ^ m).trace))
+      (∑ m ∈ Finset.range N, c m • ((m : ℂ) * (A ^ (m - 1) * H).trace)) 0 :=
+    HasDerivAt.sum (fun m _ => (hasDerivAt_trace_matrixPow A H m).const_smul (c m))
+  simpa only [smul_eq_mul] using h
