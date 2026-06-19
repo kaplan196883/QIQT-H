@@ -32,6 +32,7 @@ import QIQTH.Entropy.PartialTrace
 import QIQTH.Entropy.WeylDesign
 import QIQTH.Entropy.PartialTraceDPI
 import QIQTH.Entropy.TensorLog
+import QIQTH.Entropy.StrongSubadditivity
 import QIQTH.HolevoCoarseGraining
 import QIQTH.DPI
 import QIQTH.ShannonFano
