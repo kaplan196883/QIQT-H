@@ -2281,6 +2281,9 @@ namespace QIQTH.AxiomAudit
 -- (matLog_smul+matLog_kron_one), and trace factors Tr((A(logA−logB))⊗(c·1))=Tr(A(logA−logB))·(c·dim m)
 -- (trace_kronecker). For maximally-mixed c=1/dim m this is exactly D(A‖B) — the last step before the
 -- partial-trace DPI assembly. Axiom-free.
+#print axioms QIQTH.Entropy.perm_mem_unitary
+-- expected: standard only — any permutation matrix is unitary (general form of shift_mem_unitary, for the
+-- factor-2 Weyl unitaries X^a=((finRotate)^a).permMatrix in the partial-trace DPI capstone). Axiom-free.
 #print axioms QIQTH.QuantumEntropy.relEntropy_eq_zero
 -- expected: standard only — ★★★★★ KLEIN'S EQUALITY CASE: D(ρ‖σ)=0 ⟹ ρ=σ for density matrices. The
 -- equality tracking of relEntropy_nonneg (doubly-stochastic/Jensen): KL(p‖r)=0⟹p=r (Gibbs, log x<x−1)

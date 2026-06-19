@@ -146,4 +146,10 @@ theorem relEntropy_kron_one {A B : Matrix n n ℂ} (hA : A.PosDef) (hB : B.PosDe
   simp only [Complex.mul_re, Complex.natCast_re, Complex.natCast_im, mul_zero, sub_zero]
   ring
 
+/-- Any permutation matrix is unitary. -/
+theorem perm_mem_unitary {N : ℕ} (σ : Equiv.Perm (Fin N)) :
+    σ.permMatrix ℂ ∈ unitary (Matrix (Fin N) (Fin N) ℂ) := by
+  rw [Unitary.mem_iff, star_eq_conjTranspose, conjTranspose_permMatrix]
+  refine ⟨?_, ?_⟩ <;> simp [← permMatrix_mul, permMatrix_one]
+
 end QIQTH.Entropy
