@@ -3379,6 +3379,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.QiqtToGR.qiqt_bekenstein_gives_gr
 -- expected: standard only — ★★★ THE END-TO-END THEOREM. Single theorem: along each null generator, QIQT-H's
 -- capacity BOUND S≤η·A (shannon_le_log_card) + saturation (shannon_uniform_eq_log_card) + Klein positivity
+-- ONE-PARTICLE BISOGNANO–WICHMANN — Phase 0 (OneParticleBW.lean): toward DERIVING hFlux (replacing the cited BW).
+#print axioms QIQTH.Fock.OneParticleBW.modChar_fermi
+#print axioms QIQTH.Fock.OneParticleBW.fermi_mem_Ioo
+-- expected: standard only — the SCALAR spectral core of the one-particle BW (modular flow = boost). modChar_fermi:
+-- modChar t (fermi x) = exp(i·t·2π x), where fermi x = 2/(1+e^{2π x}) is the spectral form of the wedge RvD R in
+-- the boost-momentum (P=−i d/dθ) representation. Since g(r)=log((2−r)/r) and (2−fermi x)/fermi x = e^{2π x}, the
+-- modular generator g(fermi x)=2π x — the pointwise core of modUnitary(t)=exp(i·t·2π P)=boostUnitary(−2π t).
+-- GPT-5.5 Route C; the physical wedge subspace + standardness + operator identity rvdRC 𝒦=fermi(2π P) are the
+-- genuinely analytic inputs (one-particle Reeh–Schlieder/strip-KMS), to be ISOLATED as labelled conditional
+-- hypotheses (never axioms). This UPGRADES hFlux from cited toward derived (free field). Axiom-free.
 -- (relEntropy_nonneg) DERIVE the differential area law δS=ηδA, which with the two CITED inputs (hFlux=Bisognano–
 -- Wichmann boost flux, hFocus=Raychaudhuri focusing) + structural (Lorentzian congruence g=PᵀηP, ∇·T=0,
 -- f-regularity) ⇒ ∃Λ, a·T=G+Λg (genuine Einstein tensor, constant Λ) via jacobson_einstein_equation_of_state.

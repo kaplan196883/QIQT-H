@@ -351,6 +351,7 @@ import QIQTH.Fock.Weyl
 import QIQTH.Fock.FockTypicality
 import QIQTH.Fock.SecondQuant
 import QIQTH.Fock.SecondQuantModularFlow
+import QIQTH.Fock.OneParticleBW
 import QIQTH.Fock.RelativeModularFlow
 import QIQTH.Fock.WeylOp
 import QIQTH.Fock.WeylCovariance
