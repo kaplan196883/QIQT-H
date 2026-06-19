@@ -3027,6 +3027,13 @@ namespace QIQTH.AxiomAudit
 -- g(∇_X Y, Z) = ½·koszul X Y Z (the DEFINING equation realized) — via lower_raise (♭♯=id) + koszulForm_apply
 -- (mkHom_apply). With koszul_metric_compat/koszul_torsion_free this certifies ∇ metric-compatible +
 -- torsion-free. Needs [FiniteDimensional 𝕜 E][CompleteSpace 𝕜/E][IsManifold I 2 M]; hsmooth labeled. Axiom-free.
+#print axioms QIQTH.ManifoldGR.scalarCurvature
+#print axioms QIQTH.ManifoldGR.einsteinForm
+-- expected: standard only — SCALAR CURVATURE + EINSTEIN TENSOR (bilinear-form level). scalarCurvature
+-- R = g^{YZ}Ric(Y,Z) = LinearMap.trace of the Ricci operator ♯∘Ric (metric ♯=gm.raise composed with Ric).
+-- einsteinForm G = Ric − ½·R·g, the combination whose covariant divergence vanishes and which equals the
+-- stress-energy in Jacobson's eq of state. Takes the Ricci bilinear form as input; the bridge ricci(scalar)
+-- → Ricci form (via mkHom₂) and the contracted Bianchi ∇^μG=0 are the remaining pieces. Axiom-free.
 
 #print axioms QIQTH.Unruh.sinh_cosh_diff_sq
 #print axioms QIQTH.Unruh.rindler_interval

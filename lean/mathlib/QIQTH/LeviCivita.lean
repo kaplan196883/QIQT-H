@@ -1,6 +1,7 @@
 import QIQTH.PseudoRiemannian
 import QIQTH.ManifoldCommutator
 import Mathlib.Geometry.Manifold.VectorBundle.Tensoriality
+import Mathlib.LinearAlgebra.Trace
 
 /-!
 # Toward the Levi-Civita connection: the Koszul formula
@@ -256,5 +257,34 @@ theorem leviCivita_koszul
   rw [ContinuousLinearMap.smul_apply, koszulForm_apply gm X Y x hX hY hsmooth Z hZ, smul_eq_mul]
 
 end LeviCivitaConnection
+
+section Einstein
+
+open Bundle
+
+variable [CompleteSpace 𝕜] [CompleteSpace E] [FiniteDimensional 𝕜 E] [IsManifold I 2 M]
+
+/-- **Scalar curvature** as the metric trace of a Ricci bilinear form `Ric`:
+`R = g^{YZ} Ric(Y,Z) = tr(♯ ∘ Ric)`. (`♯ ∘ Ric : T_xM →L T_xM` is the Ricci operator; its trace is the
+metric contraction.) -/
+noncomputable def scalarCurvature (gm : PseudoRiemannianMetric I M) (x : M)
+    (ricciForm : TangentSpace I x →L[𝕜] TangentSpace I x →L[𝕜] 𝕜) : 𝕜 :=
+  LinearMap.trace 𝕜 (TangentSpace I x) ((gm.raise x).comp ricciForm).toLinearMap
+
+/-- **The Einstein tensor** as a bilinear form on `T_xM`: `G = Ric − ½·R·g`, the combination whose
+covariant divergence vanishes (contracted Bianchi) and which equals the stress-energy tensor in
+Jacobson's equation of state. -/
+noncomputable def einsteinForm (gm : PseudoRiemannianMetric I M) (x : M)
+    (ricciForm : TangentSpace I x →L[𝕜] TangentSpace I x →L[𝕜] 𝕜) :
+    TangentSpace I x →L[𝕜] TangentSpace I x →L[𝕜] 𝕜 :=
+  ricciForm - ((1 / 2 : 𝕜) * scalarCurvature gm x ricciForm) • gm.g x
+
+/-- The Einstein tensor unfolds to `Ric − ½·R·g` (definitional restatement, for downstream rewriting). -/
+theorem einsteinForm_eq (gm : PseudoRiemannianMetric I M) (x : M)
+    (ricciForm : TangentSpace I x →L[𝕜] TangentSpace I x →L[𝕜] 𝕜) :
+    einsteinForm gm x ricciForm
+      = ricciForm - ((1 / 2 : 𝕜) * scalarCurvature gm x ricciForm) • gm.g x := rfl
+
+end Einstein
 
 end QIQTH.ManifoldGR
