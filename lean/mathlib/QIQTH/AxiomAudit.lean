@@ -2201,6 +2201,12 @@ namespace QIQTH.AxiomAudit
 -- traced factor) PosDef-preserving (each ⟨w_a,ρ w_a⟩>0 for v≠0) — the latter needed since the Umegaki
 -- relative entropy D(·‖·) is PosDef-only. Hence Hermitian-preserving. The reusable foundation; the
 -- discrete-Weyl 1-design realizing ρ↦(Tr₂ρ)⊗(I/m) as mixed-unitary + the DPI assembly are next. Axiom-free.
+#print axioms QIQTH.Entropy.weyl_char_sum_eq_zero
+#print axioms QIQTH.Entropy.weyl_char_sum
+-- expected: standard only — CHARACTER ORTHOGONALITY, the arithmetic engine of the discrete-Weyl 1-design
+-- (toward partial-trace DPI). Σ_{b<m} ω^{b·c} = m·[c=0] for ω a primitive m-th root: off-diagonal (c≠0)
+-- vanishes since ω^c is an m-th root ≠1 so geom_sum_eq telescopes (ω^{cm}−1)/(ω^c−1)=0; diagonal (c=0)
+-- sums m ones. Feeds the clock-twirl Σ_b Z^b M Z^{-b}=diag M → Weyl 1-design → ρ↦(Tr₂ρ)⊗(I/m). Axiom-free.
 #print axioms QIQTH.QuantumEntropy.relEntropy_eq_zero
 -- expected: standard only — ★★★★★ KLEIN'S EQUALITY CASE: D(ρ‖σ)=0 ⟹ ρ=σ for density matrices. The
 -- equality tracking of relEntropy_nonneg (doubly-stochastic/Jensen): KL(p‖r)=0⟹p=r (Gibbs, log x<x−1)
