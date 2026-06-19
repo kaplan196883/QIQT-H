@@ -2275,6 +2275,14 @@ namespace QIQTH.AxiomAudit
 -- Matrix n n→⋆ₐ Matrix(n×p)(n×p)); matLog_kron_one = CFC naturality (IsHermitian.cfc_eq bridge +
 -- StarAlgHomClass.map_cfc, same pattern as matLog_conj for unitary conjugation). Key infrastructure for
 -- relative-entropy ⊗-additivity (maximally-mixed factor) → partial-trace DPI. Axiom-free.
+#print axioms QIQTH.Entropy.partial_trace_dpi
+-- expected: standard only — ★★★★★ PARTIAL-TRACE DATA PROCESSING: D(Tr₂ρ‖Tr₂σ) ≤ D(ρ‖σ). Tracing out a
+-- subsystem can only DECREASE the quantum relative entropy — extends DPI from the mixed-unitary class to
+-- the partial trace (the central CPTP map), exactly Carlen §6.4+§5.7, fully machine-checked & axiom-free.
+-- The factor-2 Weyl twirl (I⊗W_ab, weights 1/N²) is mixed-unitary (dpi_mixed_unitary) and = (Tr₂ρ)⊗(I/N)
+-- (factor2_depolarization); relEntropy_kron_one (N⁻¹·N=1) closes it. NOTE the IsHermitian of the
+-- depolarized states is built DIRECTLY (isHermitian_kronecker) NOT via PosDef.kronecker — the latter's
+-- Fintype.ofFinite blows up whnf. This completes the partial-trace DPI tower (Weyl 1-design from scratch).
 #print axioms QIQTH.Entropy.relEntropy_kron_one
 -- expected: standard only — RELATIVE-ENTROPY ⊗-ADDITIVITY (scalar-identity 2nd factor):
 -- D(A⊗(c·1_m)‖B⊗(c·1_m))=(c·dim m)·D(A‖B). The common c·1 factor's log cancels in logρ−logσ=(logA−logB)⊗1

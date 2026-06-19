@@ -152,4 +152,102 @@ theorem perm_mem_unitary {N : ℕ} (σ : Equiv.Perm (Fin N)) :
   rw [Unitary.mem_iff, star_eq_conjTranspose, conjTranspose_permMatrix]
   refine ⟨?_, ?_⟩ <;> simp [← permMatrix_mul, permMatrix_one]
 
+
+lemma isHermitian_kronecker {A : Matrix n n ℂ} {B : Matrix m m ℂ}
+    (hA : A.IsHermitian) (hB : B.IsHermitian) : (A ⊗ₖ B).IsHermitian := by
+  show (A ⊗ₖ B)ᴴ = A ⊗ₖ B
+  rw [conjTranspose_kronecker, hA, hB]
+
+lemma isHermitian_invNat_smul {p : Type*} [Fintype p] {M : Matrix p p ℂ} (hM : M.IsHermitian)
+    {N : ℕ} : ((N : ℂ)⁻¹ • M).IsHermitian := by
+  show ((N : ℂ)⁻¹ • M)ᴴ = (N : ℂ)⁻¹ • M
+  rw [conjTranspose_smul, star_inv₀, star_natCast, hM]
+
+noncomputable def weylU {N : ℕ} [NeZero N] {ω : ℂ} (hω : IsPrimitiveRoot ω N) (k : Fin N × Fin N) :
+    unitary (Matrix (n × Fin N) (n × Fin N) ℂ) :=
+  ⟨(1 : Matrix n n ℂ) ⊗ₖ (((finRotate N) ^ k.1.val).permMatrix ℂ * (clock ω N) ^ k.2.val),
+    one_kron_mem_unitary (mul_mem (perm_mem_unitary _) (pow_mem (clock_mem_unitary hω) _))⟩
+
+@[simp] lemma weylU_coe {N : ℕ} [NeZero N] {ω : ℂ} (hω : IsPrimitiveRoot ω N) (k : Fin N × Fin N) :
+    (weylU (n := n) hω k : Matrix (n × Fin N) (n × Fin N) ℂ)
+      = (1 : Matrix n n ℂ) ⊗ₖ (((finRotate N) ^ k.1.val).permMatrix ℂ * (clock ω N) ^ k.2.val) := rfl
+
+lemma realCast_smul {α : Type*} [Fintype α] [DecidableEq α] (r : ℝ) (M : Matrix α α ℂ) :
+    (r : ℝ) • M = (↑r : ℂ) • M := by
+  rw [← algebraMap_smul (A := ℂ) r M, Complex.coe_algebraMap]
+
+lemma isHermitian_real_smul {α : Type*} [Fintype α] {M : Matrix α α ℂ} (hM : M.IsHermitian)
+    (c : ℝ) : ((c : ℝ) • M).IsHermitian := by
+  show ((c : ℝ) • M)ᴴ = (c : ℝ) • M
+  rw [conjTranspose_smul, star_trivial, hM]
+
+
+/-- # PARTIAL-TRACE DATA PROCESSING — `D(Tr₂ρ ‖ Tr₂σ) ≤ D(ρ‖σ)` (Carlen §6.4 + §5.7). Axiom-free. -/
+theorem partial_trace_dpi {N : ℕ} [NeZero N] {ω : ℂ} (hω : IsPrimitiveRoot ω N)
+    {ρ σ : Matrix (n × Fin N) (n × Fin N) ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDef) :
+    QIQTH.QuantumEntropy.relEntropy (partialTraceRight_posDef hρ).1
+        (partialTraceRight_posDef hσ).1
+      ≤ QIQTH.QuantumEntropy.relEntropy hρ.1 hσ.1 := by
+  have hsc : ∀ X : Matrix (n × Fin N) (n × Fin N) ℂ,
+      ((N : ℝ)⁻¹ * (N : ℝ)⁻¹ : ℝ) • X = ((N : ℂ)⁻¹ * (N : ℂ)⁻¹) • X := by
+    intro X
+    rw [← algebraMap_smul (A := ℂ) ((N : ℝ)⁻¹ * (N : ℝ)⁻¹) X]
+    congr 1
+    rw [Complex.coe_algebraMap]
+    push_cast
+    ring
+  have hchan : ∀ τ : Matrix (n × Fin N) (n × Fin N) ℂ,
+      (∑ k ∈ (Finset.univ : Finset (Fin N × Fin N)), ((N : ℝ)⁻¹ * (N : ℝ)⁻¹ : ℝ) •
+          ((weylU (n := n) hω k : Matrix (n × Fin N) (n × Fin N) ℂ) * τ
+            * (star (weylU (n := n) hω k) : Matrix (n × Fin N) (n × Fin N) ℂ)))
+        = partialTraceRight τ ⊗ₖ ((N : ℂ)⁻¹ • (1 : Matrix (Fin N) (Fin N) ℂ)) := by
+    intro τ
+    simp only [Unitary.coe_star, weylU_coe, star_eq_conjTranspose]
+    rw [← Finset.univ_product_univ, Finset.sum_product]
+    simp_rw [hsc]
+    exact factor2_depolarization hω τ
+  have hkron : ∀ τ : Matrix (n × Fin N) (n × Fin N) ℂ, τ.IsHermitian →
+      (partialTraceRight τ ⊗ₖ ((N : ℂ)⁻¹ • (1 : Matrix (Fin N) (Fin N) ℂ))).IsHermitian :=
+    fun τ hτ => isHermitian_kronecker (partialTraceRight_isHermitian hτ)
+      (isHermitian_invNat_smul Matrix.isHermitian_one)
+  have hΦρ : (∑ k ∈ (Finset.univ : Finset (Fin N × Fin N)), ((N : ℝ)⁻¹ * (N : ℝ)⁻¹ : ℝ) •
+      ((weylU (n := n) hω k : Matrix (n × Fin N) (n × Fin N) ℂ) * ρ
+        * (star (weylU (n := n) hω k) : Matrix (n × Fin N) (n × Fin N) ℂ))).IsHermitian := by
+    rw [hchan ρ]; exact hkron ρ hρ.1
+  have hΦσ : (∑ k ∈ (Finset.univ : Finset (Fin N × Fin N)), ((N : ℝ)⁻¹ * (N : ℝ)⁻¹ : ℝ) •
+      ((weylU (n := n) hω k : Matrix (n × Fin N) (n × Fin N) ℂ) * σ
+        * (star (weylU (n := n) hω k) : Matrix (n × Fin N) (n × Fin N) ℂ))).IsHermitian := by
+    rw [hchan σ]; exact hkron σ hσ.1
+  have hNpos : (0:ℝ) < (N:ℝ)⁻¹ := by
+    have : (0:ℝ) < (N:ℝ) := by exact_mod_cast Nat.pos_of_ne_zero (NeZero.ne N)
+    positivity
+  have hsum1 : ∑ _k ∈ (Finset.univ : Finset (Fin N × Fin N)), ((N : ℝ)⁻¹ * (N : ℝ)⁻¹) = 1 := by
+    rw [Finset.sum_const, Finset.card_univ, Fintype.card_prod, Fintype.card_fin, nsmul_eq_mul]
+    have hN : (N:ℝ) ≠ 0 := by exact_mod_cast NeZero.ne N
+    push_cast; field_simp
+  have hdpi := dpi_mixed_unitary (s := (Finset.univ : Finset (Fin N × Fin N)))
+    Finset.univ_nonempty hρ hσ (fun _ => (N : ℝ)⁻¹ * (N : ℝ)⁻¹) (fun _ => mul_pos hNpos hNpos)
+    hsum1 (weylU (n := n) hω) hΦρ hΦσ
+  rw [relEntropy_congr hΦρ (hkron ρ hρ.1) hΦσ (hkron σ hσ.1) (hchan ρ) (hchan σ)] at hdpi
+  refine le_of_eq_of_le ?_ hdpi
+  have hsmul : ∀ τ : Matrix (n × Fin N) (n × Fin N) ℂ,
+      partialTraceRight τ ⊗ₖ ((N : ℂ)⁻¹ • (1 : Matrix (Fin N) (Fin N) ℂ))
+        = ((N : ℝ)⁻¹ : ℝ) • (partialTraceRight τ ⊗ₖ (1 : Matrix (Fin N) (Fin N) ℂ)) := by
+    intro τ
+    rw [kronecker_smul, realCast_smul]
+    congr 1
+    push_cast
+    ring
+  have hH1 : (((N : ℝ)⁻¹ : ℝ) • (partialTraceRight ρ ⊗ₖ (1 : Matrix (Fin N) (Fin N) ℂ))).IsHermitian :=
+    isHermitian_real_smul (isHermitian_kronecker (partialTraceRight_isHermitian hρ.1)
+      Matrix.isHermitian_one) _
+  have hH2 : (((N : ℝ)⁻¹ : ℝ) • (partialTraceRight σ ⊗ₖ (1 : Matrix (Fin N) (Fin N) ℂ))).IsHermitian :=
+    isHermitian_real_smul (isHermitian_kronecker (partialTraceRight_isHermitian hσ.1)
+      Matrix.isHermitian_one) _
+  rw [relEntropy_congr (hkron ρ hρ.1) hH1 (hkron σ hσ.1) hH2 (hsmul ρ) (hsmul σ),
+    relEntropy_kron_one (partialTraceRight_posDef hρ) (partialTraceRight_posDef hσ) hNpos,
+    Fintype.card_fin]
+  have hN : (N:ℝ) ≠ 0 := by exact_mod_cast NeZero.ne N
+  rw [inv_mul_cancel₀ hN, one_mul]
+
 end QIQTH.Entropy
