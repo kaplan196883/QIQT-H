@@ -85,4 +85,21 @@ theorem boostUnitary_KrepL2 (m a : ℝ) (f : V → ℂ)
     rw [Krep_boost]
   exact Lp.ext (hae.trans h'.coeFn_toLp.symm)
 
+/-- **Invariance engine** (for the boost-invariance of the wedge standard subspace): a continuous
+    `ℝ`-linear map `L` that maps a set `W` into itself also maps `closure (span ℝ W)` into itself.
+    Applied with `L = boostUnitary a` and `W` = the (boost-closed) wedge generating set, this gives
+    `boostUnitary a (𝒦_W) ⊆ 𝒦_W` — the boost-invariance the KMS-uniqueness route needs. -/
+theorem mapsTo_closure_span {M : Type*} [NormedAddCommGroup M] [NormedSpace ℝ M]
+    (L : M →L[ℝ] M) {W : Set M} (hW : Set.MapsTo L W W) :
+    Set.MapsTo L (closure (Submodule.span ℝ W : Set M)) (closure (Submodule.span ℝ W : Set M)) := by
+  have hsub : (L : M → M) '' (Submodule.span ℝ W : Set M) ⊆ (Submodule.span ℝ W : Set M) := by
+    rintro _ ⟨x, hx, rfl⟩
+    induction hx using Submodule.span_induction with
+    | mem w hw => exact Submodule.subset_span (hW hw)
+    | zero => simpa using (Submodule.span ℝ W).zero_mem
+    | add x _ y _ hx hy => rw [map_add]; exact (Submodule.span ℝ W).add_mem hx hy
+    | smul r x _ hx => rw [map_smul]; exact (Submodule.span ℝ W).smul_mem r hx
+  intro ψ hψ
+  exact closure_mono hsub (image_closure_subset_closure_image L.continuous ⟨ψ, hψ, rfl⟩)
+
 end QIQTH.Fock.OneParticleBW
