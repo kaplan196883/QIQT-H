@@ -537,6 +537,39 @@ theorem relModFlow_conj_Rmul (hσ : σ.PosDef) (hρ : ρ.PosDef) (t : ℝ) (B : 
   rw [← ofMat_toMat X]
   exact key (toMat X)
 
+/-- **The Connes cocycle (finite-dimensional Radon–Nikodym derivative):**
+    `(Dσ : Dρ)_t = Δ_{σ|ρ}^{it} · Δ_ρ^{−it} = L_{σ^{it} ρ^{−it}}` — the relative modular flow against the
+    `ρ`-modular flow is left multiplication by the cocycle `u_t = σ^{it} ρ^{−it}`.  This is Connes'
+    Radon–Nikodym derivative of the state `σ` with respect to `ρ`; the `ρ^{it}ρ^{−it}` right factors
+    cancel, leaving an element of the left algebra. -/
+theorem connesCocycle (hσ : σ.PosDef) (hρ : ρ.PosDef) (t : ℝ) :
+    relModFlow hσ hρ t * relModFlow hρ hρ (-t)
+      = Lmul (NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hσ.1)
+          * NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1))) := by
+  have hLof : ∀ B M : Matrix n n ℂ, Lmul B (ofMat M) = ofMat (B * M) := fun B M =>
+    toMat_injective (by rw [Lmul_apply, toMat_ofMat, toMat_ofMat])
+  have hρinv : NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1)
+      * NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1)) = 1 := by
+    have h := NormedSpace.exp_add_of_commute_of_mem_ball (𝕂 := ℂ)
+      ((Commute.refl ((Complex.I * (t : ℂ)) • matLog hρ.1)).neg_right)
+      (mem_expBall_C _) (mem_expBall_C _)
+    rw [add_neg_cancel, NormedSpace.exp_zero] at h
+    exact h.symm
+  have key : ∀ Y : Matrix n n ℂ,
+      (relModFlow hσ hρ t * relModFlow hρ hρ (-t)) (ofMat Y)
+        = Lmul (NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hσ.1)
+            * NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1))) (ofMat Y) := by
+    intro Y
+    rw [ContinuousLinearMap.mul_apply, relModFlow_apply, relModFlow_apply, hLof,
+      show (Complex.I * ((-t : ℝ) : ℂ)) • matLog hρ.1 = -((Complex.I * (t : ℂ)) • matLog hρ.1) by
+        rw [Complex.ofReal_neg, mul_neg, neg_smul], neg_neg]
+    congr 1
+    simp only [Matrix.mul_assoc]
+    rw [hρinv, Matrix.mul_one]
+  ext X
+  rw [← ofMat_toMat X]
+  exact key (toMat X)
+
 end ModularFlow
 
 end QIQTH.Araki
