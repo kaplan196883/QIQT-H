@@ -191,6 +191,46 @@ theorem einsteinTensor_divergence_zero (g gi : Point n → Fin n → Fin n → �
       pd_const_mul (-(1 / 2 : ℝ)) (fun y => scalarCurv g gi y) ν x (htr ν)]
   ring
 
+/-- **The metric–inverse-metric trace is the dimension: `g^{μν} g_{μν} = n`.**  Contracting the metric
+    with its inverse over both indices yields `∑_μ δ^μ_μ = n` (the number of dimensions). -/
+theorem metric_contraction_trace (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (x : Point n) :
+    (∑ μ, ∑ ν, gi x μ ν * g x μ ν) = (n : ℝ) := by
+  have hrow : ∀ μ, (∑ ν, gi x μ ν * g x μ ν) = 1 := by
+    intro μ
+    rw [show (∑ ν, gi x μ ν * g x μ ν) = ∑ ν, g x μ ν * gi x ν μ from
+      Finset.sum_congr rfl (fun ν _ => by rw [hsymm_gi x μ ν]; ring)]
+    simpa using hinv x μ μ
+  rw [Finset.sum_congr rfl (fun μ _ => hrow μ), Finset.sum_const, Finset.card_univ,
+    Fintype.card_fin, nsmul_eq_mul, mul_one]
+
+/-- **The trace of the Einstein tensor: `g^{μν} G_{μν} = (1 − n/2)·R`.**  Taking the metric trace of
+    `G = Ric − ½R·g` gives `R − ½R·n = (1 − n/2)R` — in `n = 4` dimensions this is `−R` (the
+    "trace-reversed" relation: the trace of `a·T = G + Λg` reads `a·g^{μν}T_{μν} = (1 − n/2)R + nΛ`).
+    Uses `metric_contraction_trace` (`g^{μν}g_{μν}=n`) and the definition `R = g^{σν}R_{σν}`. -/
+theorem einstein_trace_eq (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (x : Point n) :
+    (∑ σ, ∑ ν, gi x σ ν * einsteinTensor g gi σ ν x)
+      = (1 - (n : ℝ) / 2) * scalarCurv g gi x := by
+  have key : ∀ σ ν, gi x σ ν * einsteinTensor g gi σ ν x
+      = gi x σ ν * ricci g gi σ ν x
+        - (1 / 2 * scalarCurv g gi x) * (gi x σ ν * g x σ ν) := by
+    intro σ ν; simp only [einsteinTensor]; ring
+  have hsplit : (∑ σ, ∑ ν, gi x σ ν * einsteinTensor g gi σ ν x)
+      = (∑ σ, ∑ ν, gi x σ ν * ricci g gi σ ν x)
+        - (1 / 2 * scalarCurv g gi x) * (∑ σ, ∑ ν, gi x σ ν * g x σ ν) := by
+    rw [Finset.mul_sum, ← Finset.sum_sub_distrib]
+    refine Finset.sum_congr rfl (fun σ _ => ?_)
+    rw [Finset.mul_sum, ← Finset.sum_sub_distrib]
+    exact Finset.sum_congr rfl (fun ν _ => key σ ν)
+  rw [hsplit, metric_contraction_trace g gi hsymm_gi hinv x]
+  show scalarCurv g gi x - (1 / 2 * scalarCurv g gi x) * (n : ℝ) = (1 - (n : ℝ) / 2) * scalarCurv g gi x
+  ring
+
 /-- **The Einstein field equation as the thermodynamic equation of state** (Jacobson, PRL 1995),
     completed: from the post-crux relation + conservation + contracted Bianchi + metric
     compatibility, `a·T_{μν} = G_{μν} + Λ·g_{μν}` with `Λ := f + ½R` **covariantly constant**.

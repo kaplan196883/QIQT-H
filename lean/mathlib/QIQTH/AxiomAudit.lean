@@ -3041,6 +3041,12 @@ namespace QIQTH.AxiomAudit
 -- form of contracted Bianchi; the geometric ORIGIN of local energy-momentum conservation — why ∇^μ(a·T)=0 is
 -- consistent with a·T=G+Λg). Writing G=Ric+(−½R)·g: div02(G)=twice_contracted_bianchi(½∂R)+div02_scalar_metric
 -- (pd(−½R)=−½∂R)=0. Standalone named theorem (was only implicit inside einstein_field_equation). Axiom-free.
+#print axioms QIQTH.Curvature.metric_contraction_trace
+#print axioms QIQTH.Curvature.einstein_trace_eq
+-- expected: standard only — metric_contraction_trace: g^{μν}g_{μν}=n (∑_μ δ^μ_μ, via hinv+gi symmetry).
+-- ★ einstein_trace_eq: g^{μν}G_{μν}=(1−n/2)·R — THE TRACE OF THE EINSTEIN TENSOR (trace-reversed relation;
+-- trace of a·T=G+Λg reads a·g^{μν}T_{μν}=(1−n/2)R+nΛ; in n=4 it is −R). From G=Ric−½R·g + g^{μν}g_{μν}=n
+-- + the def R=g^{σν}R_{σν}. Axiom-free.
 
 #print axioms QIQTH.Curvature.div02_scalar_metric
 #print axioms QIQTH.Curvature.div02_add
