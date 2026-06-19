@@ -2243,6 +2243,13 @@ namespace QIQTH.AxiomAudit
 -- (perm_conj_diagonal), summing over the full cycle replaces every diagonal entry by the orbit sum =
 -- maximally mixed. Composing clock_twirl (dephasing) ∘ shift_twirl (mixing) = complete depolarization
 -- M↦(Tr M/m)·I = the full discrete-Weyl 1-design (mixed-unitary). → factor-2 lift → partial-trace DPI. Axiom-free.
+#print axioms QIQTH.Entropy.weyl_depolarization
+-- expected: standard only — THE COMPLETE DEPOLARIZING CHANNEL = Weyl twirl (clock dephasing ∘ shift
+-- mixing): averaging M over conjugation by every Weyl unitary W_{a,b}=X^aZ^b maps M↦(Tr M/m)·I. Composes
+-- clock_twirl (inner b-sum → diag M) then shift_twirl (outer a-sum of diag M → maximally mixed); the proof
+-- is simp_rw[clock_twirl];rw[shift_twirl];rfl (M.trace=Σ_j M_jj defeq). The full discrete-Weyl 1-design as
+-- a mixed-unitary channel — the single-factor depolarization underlying the factor-2 twirl
+-- ρ↦(Tr₂ρ)⊗(I/m) of partial-trace DPI. Axiom-free.
 #print axioms QIQTH.QuantumEntropy.relEntropy_eq_zero
 -- expected: standard only — ★★★★★ KLEIN'S EQUALITY CASE: D(ρ‖σ)=0 ⟹ ρ=σ for density matrices. The
 -- equality tracking of relEntropy_nonneg (doubly-stochastic/Jensen): KL(p‖r)=0⟹p=r (Gibbs, log x<x−1)

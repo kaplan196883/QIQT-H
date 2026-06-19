@@ -230,4 +230,19 @@ theorem shift_twirl (d : Fin m → ℂ) :
     rw [← Finset.mul_sum, shift_orbit_sum]
   · simp [hik]
 
+/-- **The complete depolarizing channel as the Weyl twirl** (clock dephasing ∘ shift mixing). Averaging
+`M` over conjugation by every Weyl unitary `W_{a,b} = X^a Z^b` — first dephasing by the clock
+(`Σ_b Z^b M (Z^b)⋆ /m = diag M`), then mixing the resulting diagonal by the shift
+(`Σ_a X^a (diag M) (X^a)⋆ /m = (Tr M/m)·I`) — maps `M` to the maximally-mixed `(Tr M/m)·I`. This is the
+full discrete-Weyl 1-design (a mixed-unitary channel), the single-factor depolarization underlying the
+factor-2 twirl `ρ ↦ (Tr₂ρ)⊗(I/m)` of the partial-trace DPI. -/
+theorem weyl_depolarization {ω : ℂ} (hω : IsPrimitiveRoot ω m) (M : Matrix (Fin m) (Fin m) ℂ) :
+    ∑ a : Fin m, (m : ℂ)⁻¹ • (((finRotate m) ^ a.val).permMatrix ℂ
+        * (∑ b : Fin m, (m : ℂ)⁻¹ • ((clock ω m) ^ b.val * M * ((clock ω m) ^ b.val)ᴴ))
+        * (((finRotate m) ^ a.val).permMatrix ℂ)ᴴ)
+      = ((m : ℂ)⁻¹ * M.trace) • (1 : Matrix (Fin m) (Fin m) ℂ) := by
+  simp_rw [clock_twirl hω]
+  rw [shift_twirl]
+  rfl
+
 end QIQTH.Entropy
