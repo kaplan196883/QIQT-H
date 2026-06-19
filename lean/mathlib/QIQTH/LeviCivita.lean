@@ -92,4 +92,30 @@ theorem koszul_torsion_free :
     g_mlieBracket_swap gm Y Z X x
   linear_combination -b1 + b2 - b3
 
+/-- **Additivity of `koszul` in the `Z` slot** — half of the `C∞`-linearity that lets the Koszul
+formula descend to a covector `Z ↦ koszul X Y Z` (hence define `∇_X Y` via the musical `♯`). The
+directional-derivative terms split via `dirDeriv` additivity (in the function and in the field) and
+the bracket terms via `mlieBracket` additivity; the metric is bilinear. (The `h…` are the
+differentiabilities those splits consume.) -/
+theorem koszul_add_right_Z [CompleteSpace E] [IsManifold I 2 M]
+    (gm : PseudoRiemannianMetric I M) (X Y Z Z' : Π x : M, TangentSpace I x) (x : M)
+    (hgYZ : ∀ z, MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (Y x') (Z x')) z)
+    (hgYZ' : ∀ z, MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (Y x') (Z' x')) z)
+    (hgXZ : ∀ z, MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (X x') (Z x')) z)
+    (hgXZ' : ∀ z, MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (X x') (Z' x')) z)
+    (hX : MDiffAt (T% X) x) (hY : MDiffAt (T% Y) x)
+    (hZ : MDiffAt (T% Z) x) (hZ' : MDiffAt (T% Z') x) :
+    koszul gm X Y (Z + Z') x = koszul gm X Y Z x + koszul gm X Y Z' x := by
+  have e1 : (fun x' => gm.g x' (Y x') ((Z + Z') x'))
+      = (fun x' => gm.g x' (Y x') (Z x')) + (fun x' => gm.g x' (Y x') (Z' x')) := by
+    funext x'; simp [Pi.add_apply, map_add]
+  have e2 : (fun x' => gm.g x' (X x') ((Z + Z') x'))
+      = (fun x' => gm.g x' (X x') (Z x')) + (fun x' => gm.g x' (X x') (Z' x')) := by
+    funext x'; simp [Pi.add_apply, map_add]
+  simp only [koszul, e1, e2]
+  rw [dirDeriv_add_fun X _ _ hgYZ hgYZ', dirDeriv_add_fun Y _ _ hgXZ hgXZ']
+  simp only [dirDeriv_add_vectorField, mlieBracket_add_right hZ hZ', mlieBracket_add_left hZ hZ',
+    Pi.add_apply, map_add, ContinuousLinearMap.add_apply]
+  ring
+
 end QIQTH.ManifoldGR

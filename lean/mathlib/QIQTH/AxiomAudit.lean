@@ -2990,6 +2990,12 @@ namespace QIQTH.AxiomAudit
 -- dirDeriv terms cancel/merge and the bracket terms cancel via mlieBracket_swap (linear_combination, since
 -- 𝕜 has no order so linarith is unavailable). The algebraic heart of Levi-Civita existence+uniqueness; the
 -- remaining step is dualising koszul to ∇_X Y via the musical ♯ (lowerEquiv) + the connection axioms. Axiom-free.
+#print axioms QIQTH.ManifoldGR.koszul_add_right_Z
+-- expected: standard only — ADDITIVITY of koszul in the Z slot (koszul X Y (Z+Z') = koszul X Y Z +
+-- koszul X Y Z'), half of the C∞-linearity that lets the Koszul RHS descend to a covector Z↦koszul X Y Z
+-- (hence define ∇_X Y via ♯). dirDeriv terms split (additive in function via dirDeriv_add_fun, in field via
+-- dirDeriv_add_vectorField); bracket terms via mlieBracket_add_left/right ([CompleteSpace E]); metric
+-- bilinear. Needs [IsManifold I 2 M] + differentiability of the metric-paired functions/fields. Axiom-free.
 
 #print axioms QIQTH.Unruh.sinh_cosh_diff_sq
 #print axioms QIQTH.Unruh.rindler_interval
