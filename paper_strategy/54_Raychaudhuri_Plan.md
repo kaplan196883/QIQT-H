@@ -45,8 +45,16 @@ The geometric heart of steps 1–2 is the **Ricci identity** + the **raw Raychau
 - ✅ **`raychaudhuri_focusing`** — `V^ν∂_νθ = Σ V^ν∇_μ∇_νV^μ − R_{σν}V^σV^ν`, the focusing equation with
   the Ricci term explicit. **Jacobson's focusing step (steps 1–3) is machine-checked.**
 - Plus the contracted Bianchi (step 9) was ALREADY machine-checked (`twice_contracted_bianchi`).
-- OPTIONAL remaining polish: the geodesic Leibniz `Σ V^ν∇_μ∇_νV^μ → −(∇_μV^ν)(∇_νV^μ)` (the `−½θ²−σ²`
-  shear form); pure packaging, the focusing term is already done.
+- ✅ `geodesic_divergence_leibniz` + `geodesic_leibniz` — `Σ V^ν∇_μ∇_νV^μ = −(∇_μV^ν)(∇_νV^μ)` for a
+  geodesic field (hP + geodesic T1=0 + index-permutation T2=T3).
+- ✅ **`raychaudhuri_geodesic`** — THE FULL RAYCHAUDHURI EQUATION, Jacobson's exact form
+  `V^ν∂_νθ = −(∇_μV^ν)(∇_νV^μ) − R_{σν}V^σV^ν`. **The entire geometry of Jacobson's front half (steps
+  1–3) is machine-checked, axiom-free.** Nothing geometric remains cited.
+
+## COMPLETE: the geometry of Jacobson's derivation is now Lean-checked end to end
+front half (full Raychaudhuri) + back half (contracted Bianchi `twice_contracted_bianchi`) + field
+equation closure (`einstein_field_equation_real_global`). Cited inputs = exactly the irreducible
+non-geometry physics: **Unruh temperature** (QFT) and the **area law** (the postulate / gap 1).
 
 ## Honest scope
 This closes the **geometry** of Jacobson's front half. It does **not** make `Bekenstein+QIQT-H ⟹ GR`
