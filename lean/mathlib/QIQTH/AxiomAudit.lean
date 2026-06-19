@@ -3389,6 +3389,13 @@ namespace QIQTH.AxiomAudit
 -- GPT-5.5 Route C; the physical wedge subspace + standardness + operator identity rvdRC 𝒦=fermi(2π P) are the
 -- genuinely analytic inputs (one-particle Reeh–Schlieder/strip-KMS), to be ISOLATED as labelled conditional
 -- hypotheses (never axioms). This UPGRADES hFlux from cited toward derived (free field). Axiom-free.
+#print axioms QIQTH.Fock.OneParticleBW.boostUnitary_KrepL2
+-- expected: standard only — LAYER 1 foundation (GPT-5.5's first Layer-1 brick): L² boost-covariance
+-- boostUnitary a (KrepL2 f) = KrepL2 (boostTest(−a) f). The geometric boost acts on the one-particle
+-- wavefunction Krep f∈L²(rapidity) exactly as the spacetime boost boostTest(−a) on the test function —
+-- the engine for boost-INVARIANCE of the physically-defined wedge subspace 𝒦 (NOT defined from modular
+-- data, per the anti-circularity red-team). From Krep_boost + flow θ↦θ−a, via Lp.coeFn_compMeasurePreserving
+-- + QuasiMeasurePreserving.tendsto_ae + Lp.ext. Axiom-free.
 -- (relEntropy_nonneg) DERIVE the differential area law δS=ηδA, which with the two CITED inputs (hFlux=Bisognano–
 -- Wichmann boost flux, hFocus=Raychaudhuri focusing) + structural (Lorentzian congruence g=PᵀηP, ∇·T=0,
 -- f-regularity) ⇒ ∃Λ, a·T=G+Λg (genuine Einstein tensor, constant Λ) via jacobson_einstein_equation_of_state.

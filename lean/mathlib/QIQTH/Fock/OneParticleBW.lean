@@ -1,4 +1,6 @@
 import QIQTH.StandardSubspaceModularFlow
+import QIQTH.Fock.Localization
+import QIQTH.Fock.OneParticle
 
 /-!
 # One-particle Bisognano–Wichmann — Phase 0: the scalar spectral identity
@@ -50,5 +52,37 @@ theorem modChar_fermi (t x : ℝ) :
     rw [hratio, Real.log_exp]
   unfold modChar
   rw [Set.piecewise_eq_of_mem _ _ _ (fermi_mem_Ioo x), hlog]
+
+/-! ### Layer 1 — the physical wedge subspace (boost covariance at the L² level) -/
+
+open MeasureTheory QIQTH.Fock.Localization QIQTH.Fock.OneParticle
+
+/-- **L² boost-covariance of the localization** (GPT-5.5's first Layer-1 brick, the sign check):
+    `boostUnitary a (KrepL2 f) = KrepL2 (boostTest (−a) f)`.  The geometric boost acts on the
+    one-particle wavefunction `Krep f ∈ L²(rapidity)` exactly as the spacetime boost `boostTest (−a)`
+    on the test function.  This is the engine for boost-invariance of the physically-defined wedge
+    subspace (`𝒦 := closure of {KrepL2 f : f real, supp f ⊆ right wedge}`).  Axiom-free; from
+    `Krep_boost` + the flow `θ ↦ θ + (−a) = θ − a`. -/
+theorem boostUnitary_KrepL2 (m a : ℝ) (f : V → ℂ)
+    (h : MemLp (Krep m f) 2 (volume : Measure ℝ))
+    (h' : MemLp (Krep m (boostTest (-a) f)) 2 (volume : Measure ℝ)) :
+    boostUnitary a (h.toLp (Krep m f)) = h'.toLp (Krep m (boostTest (-a) f)) := by
+  have hae : ⇑(boostUnitary a (h.toLp (Krep m f)))
+      =ᵐ[volume] Krep m (boostTest (-a) f) := by
+    have h1 := Lp.coeFn_compMeasurePreserving (h.toLp (Krep m f)) (boostFlow.mp (-a))
+    have htend : Filter.Tendsto (boostFlow.flow (-a)) (ae volume) (ae volume) :=
+      (boostFlow.mp (-a)).quasiMeasurePreserving.tendsto_ae
+    have h2 : (⇑(h.toLp (Krep m f)) ∘ boostFlow.flow (-a))
+        =ᵐ[volume] (Krep m f ∘ boostFlow.flow (-a)) :=
+      htend.eventually h.coeFn_toLp
+    have h3 : boostUnitary a (h.toLp (Krep m f))
+        = Lp.compMeasurePreserving (boostFlow.flow (-a)) (boostFlow.mp (-a)) (h.toLp (Krep m f)) :=
+      MPFlow.unitary_apply boostFlow a (h.toLp (Krep m f))
+    rw [h3]
+    refine h1.trans (h2.trans ?_)
+    filter_upwards with θ
+    show Krep m f (θ + (-a)) = Krep m (boostTest (-a) f) θ
+    rw [Krep_boost]
+  exact Lp.ext (hae.trans h'.coeFn_toLp.symm)
 
 end QIQTH.Fock.OneParticleBW
