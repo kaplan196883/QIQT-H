@@ -1,5 +1,6 @@
 import QIQTH.Entropy.WeylDesign
 import QIQTH.Entropy.PartialTrace
+import QIQTH.Entropy.RelEntropyDPI
 import Mathlib.LinearAlgebra.Matrix.Kronecker
 
 /-!
@@ -23,7 +24,7 @@ unitaries of the factor-2 twirl. Axiom-free.
 namespace QIQTH.Entropy
 
 open Matrix
-open scoped Kronecker
+open scoped Kronecker ComplexOrder
 
 variable {n m : Type*} [Fintype n] [DecidableEq n] [Fintype m] [DecidableEq m]
 
@@ -82,5 +83,42 @@ theorem factor2_depolarization {N : ℕ} [NeZero N] {ω : ℂ} (hω : IsPrimitiv
   simp only [kronecker_apply, Matrix.smul_apply, Matrix.one_apply, smul_eq_mul]
   rw [show (block ρ i j).trace = partialTraceRight ρ i j from rfl]
   ring
+
+/-! ## Relative-entropy ⊗-additivity (maximally-mixed second factor) -/
+
+/-- `A ↦ A ⊗ₖ 1_p` as a unital ⋆-algebra homomorphism `Matrix n n ℂ →⋆ₐ Matrix (n×p)(n×p) ℂ`, for a
+general second factor `p` (the two-type generalization of `TensorPower.kroneckerRightHom`). -/
+@[simps]
+noncomputable def kronRightHom (n p : Type*) [Fintype n] [DecidableEq n] [Fintype p]
+    [DecidableEq p] : Matrix n n ℂ →⋆ₐ[ℂ] Matrix (n × p) (n × p) ℂ where
+  toFun A := A ⊗ₖ (1 : Matrix p p ℂ)
+  map_one' := one_kronecker_one
+  map_mul' A B := by rw [← mul_kronecker_mul, Matrix.mul_one]
+  map_zero' := zero_kronecker 1
+  map_add' A B := add_kronecker A B 1
+  commutes' r := by simp only [Algebra.algebraMap_eq_smul_one, smul_kronecker, one_kronecker_one]
+  map_star' A := by
+    simp only [Matrix.star_eq_conjTranspose, conjTranspose_kronecker, Matrix.conjTranspose_one]
+
+lemma continuous_kronRightHom :
+    Continuous (kronRightHom n m : Matrix n n ℂ → Matrix (n × m) (n × m) ℂ) := by
+  apply continuous_matrix
+  rintro ⟨i₁, i₂⟩ ⟨j₁, j₂⟩
+  simp only [kronRightHom_apply, Matrix.kroneckerMap_apply]
+  exact (continuous_id.matrix_elem i₁ j₁).mul continuous_const
+
+/-- **The matrix logarithm of `A ⊗ 1` factors**: `log(A ⊗ 1_m) = (log A) ⊗ 1_m`. CFC naturality
+(`map_cfc`) under the ⋆-algebra hom `kronRightHom` — the same pattern as `matLog_conj` for unitary
+conjugation. -/
+lemma matLog_kron_one {A : Matrix n n ℂ} (hA : A.PosDef)
+    (h : (A ⊗ₖ (1 : Matrix m m ℂ)).IsHermitian) :
+    QIQTH.QuantumEntropy.matLog h = (QIQTH.QuantumEntropy.matLog hA.1) ⊗ₖ (1 : Matrix m m ℂ) := by
+  unfold QIQTH.QuantumEntropy.matLog
+  have hf : ContinuousOn Real.log (spectrum ℝ A) :=
+    QIQTH.QuantumEntropy.continuousOn_log_spectrum hA
+  rw [← h.cfc_eq Real.log, show (A ⊗ₖ (1 : Matrix m m ℂ)) = kronRightHom n m A from rfl,
+    ← StarAlgHomClass.map_cfc (kronRightHom n m) Real.log A hf continuous_kronRightHom (ha := hA.1),
+    kronRightHom_apply]
+  exact congrArg (· ⊗ₖ (1 : Matrix m m ℂ)) (hA.1.cfc_eq Real.log)
 
 end QIQTH.Entropy

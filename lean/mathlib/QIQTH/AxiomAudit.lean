@@ -2268,6 +2268,13 @@ namespace QIQTH.AxiomAudit
 -- conjugates factor 2). factor2_depolarization: per-block weyl_depolarization_flat gives
 -- (Tr(blockᵢⱼρ)/N)·[a'=b'], and Tr(blockᵢⱼρ)=(Tr₂ρ)ᵢⱼ (=partialTraceRight, defeq), = (Tr₂ρ)⊗(I/N). This is
 -- a mixed-unitary channel (one_kron_mem_unitary) ⟹ dpi_mixed_unitary ⟹ partial-trace DPI. Axiom-free.
+#print axioms QIQTH.Entropy.kronRightHom
+#print axioms QIQTH.Entropy.matLog_kron_one
+-- expected: standard only — MATRIX-LOG FACTORS THROUGH ⊗1: log(A⊗1_m)=(log A)⊗1_m. kronRightHom = the
+-- two-type generalization of TensorPower.kroneckerRightHom (A↦A⊗ₖ1_p, unital ⋆-alg-hom
+-- Matrix n n→⋆ₐ Matrix(n×p)(n×p)); matLog_kron_one = CFC naturality (IsHermitian.cfc_eq bridge +
+-- StarAlgHomClass.map_cfc, same pattern as matLog_conj for unitary conjugation). Key infrastructure for
+-- relative-entropy ⊗-additivity (maximally-mixed factor) → partial-trace DPI. Axiom-free.
 #print axioms QIQTH.QuantumEntropy.relEntropy_eq_zero
 -- expected: standard only — ★★★★★ KLEIN'S EQUALITY CASE: D(ρ‖σ)=0 ⟹ ρ=σ for density matrices. The
 -- equality tracking of relEntropy_nonneg (doubly-stochastic/Jensen): KL(p‖r)=0⟹p=r (Gibbs, log x<x−1)
