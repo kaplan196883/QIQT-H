@@ -3345,13 +3345,18 @@ namespace QIQTH.AxiomAudit
 -- QIQT-H⇒GR chain (GPT-5-pro architecture; the wedge-modular-bridge Phase 1).
 #print axioms QIQTH.DifferentialAreaLaw.deriv_eq_of_le_of_eq
 #print axioms QIQTH.DifferentialAreaLaw.differential_area_law
+#print axioms QIQTH.DifferentialAreaLaw.differential_area_law_of_relEntropy
 -- expected: standard only — ★ δS=ηδA DERIVED, not assumed. deriv_eq_of_le_of_eq: a bound f≤g near 0
 -- saturated at 0 (f 0=g 0) forces EQUAL first variations f'=g' (0 is a local max of f−g ⇒ deriv=0) — WITHOUT
 -- assuming f=g. differential_area_law: from the capacity BOUND S≤η·A (= QIQT-H's shannon_le_log_card, a
 -- THEOREM) + saturation S 0=η·A 0 (shannon_uniform_eq_log_card) + entanglement first law IsLocalMin(KE−S) 0
--- + differentiability ⇒ δS=ηδA AND δ⟨K⟩=ηδA. ANTI-CIRCULARITY: no hypothesis is S=ηA or δS=ηδA; the inputs
--- are the INEQUALITY (QIQT's bound) + point-saturation + first law, which ENTAIL the area law, not presuppose
--- it. Replaces the bare hAreaLaw of jacobson_einstein_from_area_law (threading = follow-up). Cited inputs
--- (BW K=2πK_boost, boost-flux, Raychaudhuri) stay as separate labelled hyps, NOT mixed into the area law.
+-- + differentiability ⇒ δS=ηδA AND δ⟨K⟩=ηδA. differential_area_law_of_relEntropy: GROUNDS the first-law datum
+-- hfl in QIQT's own theorem — IsLocalMin(KE−S) 0 IS relative-entropy positivity D=KE−S≥0, D 0=0 (Klein =
+-- QuantumEntropy.relEntropy_nonneg + relEntropy_self), so the inputs reduce to {capacity bound, point-
+-- saturation, Klein positivity, differentiability}. ANTI-CIRCULARITY: no hypothesis is S=ηA or δS=ηδA; the
+-- INEQUALITY (QIQT's bound) + point-saturation + first law ENTAIL the area law, not presuppose it. Replaces the
+-- bare hAreaLaw of jacobson_einstein_from_area_law (threading = follow-up; jacobson's chain only uses the
+-- leading-ε² coefficient, so the derivative form suffices). Cited inputs (BW K=2πK_boost, boost-flux,
+-- Raychaudhuri) stay as separate labelled hyps, NOT mixed into the area law.
 
 end QIQTH.AxiomAudit

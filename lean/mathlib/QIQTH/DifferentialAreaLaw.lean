@@ -71,4 +71,23 @@ theorem differential_area_law {S KE A : ℝ → ℝ} {s' k' a' η : ℝ}
   have hz : k' - s' = 0 := hfl.hasDerivAt_eq_zero hsub
   exact ⟨h1, by linarith⟩
 
+/-- **The differential area law from RELATIVE-ENTROPY POSITIVITY** — grounding the first-law datum `hfl`
+    in QIQT-H's own theorem.  The entanglement first law's premise (`IsLocalMin (KE − S) 0`) is not an
+    extra assumption: it is exactly *relative-entropy non-negativity with equality at the reference*,
+    `D = KE − S ≥ 0` and `D 0 = 0` — which QIQT-H proves as `QuantumEntropy.relEntropy_nonneg` (Klein's
+    inequality) and `relEntropy_self`.  So the inputs reduce to: the capacity bound `S ≤ η·A` (QIQT's
+    `shannon_le_log_card`), saturation at the reference, relative-entropy positivity (Klein), and
+    differentiability — and these DERIVE `δS = η δA` and `δ⟨K⟩ = η δA`. -/
+theorem differential_area_law_of_relEntropy {S KE A : ℝ → ℝ} {s' k' a' η : ℝ}
+    (hS : HasDerivAt S s' 0) (hK : HasDerivAt KE k' 0) (hA : HasDerivAt A a' 0)
+    (hbound : ∀ᶠ t in 𝓝 0, S t ≤ η * A t) (hsat : S 0 = η * A 0)
+    (hDnn : ∀ t, 0 ≤ KE t - S t) (hD0 : KE 0 - S 0 = 0) :
+    s' = η * a' ∧ k' = η * a' := by
+  have hfl : IsLocalMin (fun t => KE t - S t) 0 := by
+    apply Filter.Eventually.of_forall
+    intro t
+    show KE 0 - S 0 ≤ KE t - S t
+    rw [hD0]; exact hDnn t
+  exact differential_area_law hS hK hA hbound hsat hfl
+
 end QIQTH.DifferentialAreaLaw
