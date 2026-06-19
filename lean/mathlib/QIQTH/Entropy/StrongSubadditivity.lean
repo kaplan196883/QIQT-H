@@ -138,5 +138,37 @@ theorem strong_subadditivity {N : ℕ} [NeZero N] {ω : ℂ} (hω : IsPrimitiveR
     vonNeumannEntropy_congr hdC' hdC (ptL_ptR_rot ρ)
   linarith [hdpi, hCeq]
 
+/-- The **quantum conditional mutual information** `I(A : C | B) := S(ρ_AB) + S(ρ_BC) − S(ρ_ABC) − S(ρ_B)`
+of a three-party state. The quantity whose non-negativity is the operational content of strong
+subadditivity and the cornerstone of the entanglement-entropy / Ryu–Takayanagi calculus. -/
+noncomputable def condMutualInfo {N : ℕ}
+    {ρ : Matrix ((Fin N × p) × q) ((Fin N × p) × q) ℂ}
+    (hdρ : QIQTH.QuantumEntropy.IsDensity ρ)
+    (hdAB : QIQTH.QuantumEntropy.IsDensity (partialTraceRight ρ))
+    (hdBC : QIQTH.QuantumEntropy.IsDensity
+      (partialTraceRight (reindex (rotAssoc N) (rotAssoc N) ρ)))
+    (hdB : QIQTH.QuantumEntropy.IsDensity
+      (partialTraceRight (partialTraceRight (reindex (rotAssoc N) (rotAssoc N) ρ)))) : ℝ :=
+  QIQTH.QuantumEntropy.vonNeumannEntropy hdAB + QIQTH.QuantumEntropy.vonNeumannEntropy hdBC
+    - QIQTH.QuantumEntropy.vonNeumannEntropy hdρ - QIQTH.QuantumEntropy.vonNeumannEntropy hdB
+
+/-- **Non-negativity of the quantum conditional mutual information** `I(A : C | B) ≥ 0` — the
+operational form of strong subadditivity. Equivalently, conditioning never makes `A` and `C` more
+correlated than strong subadditivity allows; `= 0` characterizes quantum Markov chains. Axiom-free. -/
+theorem condMutualInfo_nonneg {N : ℕ} [NeZero N] {ω : ℂ} (hω : IsPrimitiveRoot ω N)
+    [Nonempty p] [Nonempty q]
+    {ρ : Matrix ((Fin N × p) × q) ((Fin N × p) × q) ℂ} (hρ : ρ.PosDef) (hρ1 : ρ.trace = 1)
+    (hdρ : QIQTH.QuantumEntropy.IsDensity ρ)
+    (hdAB : QIQTH.QuantumEntropy.IsDensity (partialTraceRight ρ))
+    (hdBC : QIQTH.QuantumEntropy.IsDensity
+      (partialTraceRight (reindex (rotAssoc N) (rotAssoc N) ρ)))
+    (hdB : QIQTH.QuantumEntropy.IsDensity
+      (partialTraceRight (partialTraceRight (reindex (rotAssoc N) (rotAssoc N) ρ)))) :
+    0 ≤ condMutualInfo hdρ hdAB hdBC hdB := by
+  have h := strong_subadditivity hω hρ hρ1 hdρ hdAB hdBC hdB
+  unfold condMutualInfo
+  linarith
+
 end QIQTH.Entropy
+
 
