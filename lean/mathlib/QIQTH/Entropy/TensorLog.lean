@@ -143,4 +143,49 @@ theorem trace_mul_one_kron (ρ : Matrix (n × m) (n × m) ℂ) (N : Matrix m m �
   refine Finset.sum_congr rfl (fun a _ => ?_)
   rw [Finset.sum_comm]
 
+/-- `Tr₁` is trace-preserving: `Tr(Tr₁ρ) = Tr ρ`. -/
+theorem trace_partialTraceLeft (ρ : Matrix (n × m) (n × m) ℂ) :
+    (partialTraceLeft ρ).trace = ρ.trace := by
+  simp only [Matrix.trace, Matrix.diag_apply, partialTraceLeft_apply]
+  rw [Fintype.sum_prod_type]
+  exact Finset.sum_comm
+
+/-- `Tr₁` quadratic-form decomposition: `⟨v, (Tr₁ρ)v⟩ = Σ_i ⟨w_i, ρ w_i⟩` with `w_i` the `i`-slice of
+`v` on the first factor. -/
+theorem partialTraceLeft_quadForm (ρ : Matrix (n × m) (n × m) ℂ) (v : m → ℂ) :
+    star v ⬝ᵥ (partialTraceLeft ρ *ᵥ v)
+      = ∑ i : n, star (fun p : n × m => if p.1 = i then v p.2 else 0)
+          ⬝ᵥ (ρ *ᵥ (fun p : n × m => if p.1 = i then v p.2 else 0)) := by
+  have term : ∀ i : n, star (fun p : n × m => if p.1 = i then v p.2 else 0)
+      ⬝ᵥ (ρ *ᵥ (fun p : n × m => if p.1 = i then v p.2 else 0))
+        = ∑ a, ∑ b, star (v a) * (ρ (i, a) (i, b) * v b) := by
+    intro i
+    simp only [dotProduct, mulVec, Pi.star_apply, Fintype.sum_prod_type,
+      apply_ite (star : ℂ → ℂ), star_zero, mul_ite, mul_zero, ite_mul, zero_mul, Finset.mul_sum,
+      Finset.sum_ite_irrel, Finset.sum_const_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+  have lhs_eq : star v ⬝ᵥ (partialTraceLeft ρ *ᵥ v)
+      = ∑ a, ∑ b, ∑ i, star (v a) * (ρ (i, a) (i, b) * v b) := by
+    simp only [dotProduct, mulVec, partialTraceLeft_apply, Pi.star_apply]
+    refine Finset.sum_congr rfl (fun a _ => ?_)
+    rw [Finset.mul_sum]
+    refine Finset.sum_congr rfl (fun b _ => ?_)
+    rw [Finset.sum_mul, Finset.mul_sum]
+  rw [lhs_eq, Finset.sum_congr rfl (fun i _ => term i),
+    show (∑ a, ∑ b, ∑ i, star (v a) * (ρ (i, a) (i, b) * v b))
+        = ∑ a, ∑ i, ∑ b, star (v a) * (ρ (i, a) (i, b) * v b) from
+      Finset.sum_congr rfl (fun a _ => Finset.sum_comm)]
+  exact Finset.sum_comm
+
+/-- `Tr₁` preserves positive-definiteness (over a nonempty traced-out first factor). -/
+theorem partialTraceLeft_posDef [Nonempty n] {ρ : Matrix (n × m) (n × m) ℂ} (hρ : ρ.PosDef) :
+    (partialTraceLeft ρ).PosDef := by
+  refine Matrix.PosDef.of_dotProduct_mulVec_pos (?_) (fun v hv => ?_)
+  · ext a b
+    simp only [Matrix.conjTranspose_apply, partialTraceLeft_apply, star_sum]
+    exact Finset.sum_congr rfl (fun i _ => hρ.1.apply (i, a) (i, b))
+  · rw [partialTraceLeft_quadForm]
+    exact Finset.sum_pos (fun i _ => hρ.dotProduct_mulVec_pos (by
+      obtain ⟨a, ha⟩ := Function.ne_iff.mp hv
+      exact Function.ne_iff.mpr ⟨(i, a), by simpa using ha⟩)) Finset.univ_nonempty
+
 end QIQTH.Entropy
