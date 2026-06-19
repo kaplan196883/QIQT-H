@@ -112,4 +112,17 @@ theorem value_at_zero_of_weighted_integral_proportional {f g : ℝ → ℝ} (c :
   have hval : f 0 / 2 = c * (g 0 / 2) := tendsto_nhds_unique_of_eventuallyEq hf2 hg2 hev
   linarith
 
+/-- **Raychaudhuri expansion at a local horizon.** The Raychaudhuri focusing equation for a null
+geodesic congruence is `θ'(λ) = −½θ(λ)² − σ(λ)² − R_{ab}k^ak^b`. At the *local* Rindler horizon point
+(`λ = 0`) the congruence is chosen instantaneously stationary and shear-free, `θ(0) = σ(0) = 0`, so
+the leading expansion rate is `θ'(0) = −R_{ab}k^ak^b` — i.e. near the horizon `θ(λ) ≈ −λ·R_{ab}k^ak^b`,
+which is what puts the area change `δA = ∫θ dλ` into the affine-weighted form `−∫λ·R_{ab}k^ak^b`
+matched against the heat flux `−κ∫λ·T_{ab}k^ak^b` by Clausius. -/
+theorem raychaudhuri_rate_at_horizon {θ σ r : ℝ → ℝ}
+    (hfocus : HasDerivAt θ (-(1 / 2) * θ 0 ^ 2 - σ 0 ^ 2 - r 0) 0)
+    (hθ0 : θ 0 = 0) (hσ0 : σ 0 = 0) :
+    HasDerivAt θ (- r 0) 0 := by
+  rw [hθ0, hσ0] at hfocus
+  simpa using hfocus
+
 end QIQTH.ClausiusIntegral
