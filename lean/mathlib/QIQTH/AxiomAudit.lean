@@ -2929,6 +2929,10 @@ namespace QIQTH.AxiomAudit
 -- direction Γ cancels by torsion-freeness). raychaudhuri_focusing: THE RAYCHAUDHURI FOCUSING EQUATION,
 -- V^ν∂_νθ = Σ V^ν∇_μ∇_νV^μ − R_σν V^σV^ν — Jacobson's focusing step with the Ricci term −R_σνV^σV^ν
 -- explicit. The GEOMETRY of Jacobson's front half is now machine-checked. Axiom-free.
+#print axioms QIQTH.Curvature.geodesic_divergence_leibniz
+-- geodesic_divergence_leibniz: for a geodesic field, the product-rule divergence of the acceleration
+-- vanishes — the sub-step toward rewriting Σ V^ν∇_μ∇_νV^μ as −(∇_μV^ν)(∇_νV^μ) (the shear part Jacobson
+-- neglects at the focusing point). Axiom-free.
 -- expected: standard only — RAYCHAUDHURI FOCUSING (geometry of Jacobson's front half). pd_covDerivVec:
 -- the product-rule expansion of ∂_μ(∇_ν V^ρ). ricci_identity: THE COMMUTATOR OF COVARIANT DERIVATIVES
 -- IS THE RIEMANN TENSOR, (∇_μ∇_ν−∇_ν∇_μ)V^ρ=R^ρ_σμν V^σ — Bianchi-scale index computation (Schwarz

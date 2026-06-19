@@ -159,4 +159,28 @@ theorem raychaudhuri_focusing (g gi : Point n → Fin n → Fin n → ℝ)
   congr 1
   exact Finset.sum_congr rfl (fun ν _ => Finset.sum_congr rfl (fun σ _ => by ring))
 
+/-- **Partial-Leibniz of the geodesic acceleration.** For a geodesic vector field `V`
+(`Σ_ν V^ν ∇_ν V^μ = 0` as a field), the divergence of the acceleration vanishes, expanded by the
+product rule: `Σ_ν (∂_μ V^ν · ∇_ν V^μ + V^ν · ∂_μ(∇_ν V^μ)) = 0`. The step that lets
+`Σ V^ν∇_μ∇_νV^μ` be rewritten as `−(∇_μV^ν)(∇_νV^μ)` (the `−½θ²−σ²` shear part). -/
+theorem geodesic_divergence_leibniz (g gi : Point n → Fin n → Fin n → ℝ)
+    (V : Point n → Fin n → ℝ)
+    (hVC : ∀ μ, ContDiff ℝ ⊤ (fun y => V y μ))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (hgeo : ∀ y μ, ∑ ν, V y ν * covDerivVec g gi V ν μ y = 0)
+    (μ : Fin n) (x : Point n) :
+    ∑ ν, (pd (fun y => V y ν) μ x * covDerivVec g gi V ν μ x
+        + V x ν * pd (fun y => covDerivVec g gi V ν μ y) μ x) = 0 := by
+  have hpdcov : ∀ ν, PdiffAt (fun y => covDerivVec g gi V ν μ y) μ x := fun ν => by
+    unfold covDerivVec
+    exact (PdiffAt_pd (fun z => V z μ) (hVC μ) ν μ x).add (PdiffAt_sum _ _ μ x (fun σ _ =>
+      (PdiffAt_of_contDiff _ (hC μ ν σ) μ x).mul (PdiffAt_of_contDiff _ (hVC σ) μ x)))
+  have hzero : pd (fun y => ∑ ν, V y ν * covDerivVec g gi V ν μ y) μ x = 0 := by
+    have heq : (fun y => ∑ ν, V y ν * covDerivVec g gi V ν μ y) = fun _ => (0 : ℝ) :=
+      funext (fun y => hgeo y μ)
+    rw [heq, pd_const]
+  rw [← hzero, pd_sum _ _ μ x (fun ν _ => (PdiffAt_of_contDiff _ (hVC ν) μ x).mul (hpdcov ν))]
+  exact Finset.sum_congr rfl
+    (fun ν _ => (pd_mul _ _ μ x (PdiffAt_of_contDiff _ (hVC ν) μ x) (hpdcov ν)).symm)
+
 end QIQTH.Curvature
