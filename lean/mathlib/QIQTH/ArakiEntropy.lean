@@ -735,6 +735,27 @@ theorem modAut_add (hρ : ρ.PosDef) (s t : ℝ) (B : Matrix n n ℂ) :
     (hc.smul_left _).exp_left
   rw [modAut, hce.eq, Matrix.mul_assoc, expIt_mul_expNegIt hρ t, Matrix.mul_one]
 
+/-- **The equilibrium state is `σ_t`-invariant:** `ω ∘ σ_t = ω`, i.e. `tr(ρ · σ_t(B)) = tr(ρ · B)` —
+    the state `ω(·) = tr(ρ ·)` is stationary under its own modular flow (the functional-level KMS
+    invariance, complementing `modAut_fix`'s `σ_t(ρ) = ρ`). -/
+theorem modAut_state_invariant (hρ : ρ.PosDef) (t : ℝ) (B : Matrix n n ℂ) :
+    (ρ * modAut hρ t B).trace = (ρ * B).trace := by
+  have hc : Commute (matLog hρ.1) ρ := by
+    have hlog : matLog hρ.1 = cfc Real.log ρ := (hρ.1.cfc_eq Real.log).symm
+    rw [hlog]
+    exact (show IsSelfAdjoint ρ from hρ.1).commute_cfc (Commute.refl ρ) Real.log
+  have hce : Commute (NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1)) ρ :=
+    (hc.smul_left _).exp_left
+  have hfix : NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1)) * ρ
+      * NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1) = ρ := by
+    rw [Matrix.mul_assoc, ← hce.eq, ← Matrix.mul_assoc, expNegIt_mul_expIt hρ t, Matrix.one_mul]
+  rw [modAut, show ρ * (NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1) * B
+        * NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1)))
+      = (ρ * NormedSpace.exp ((Complex.I * (t : ℂ)) • matLog hρ.1) * B)
+        * NormedSpace.exp (-((Complex.I * (t : ℂ)) • matLog hρ.1)) by
+      rw [Matrix.mul_assoc, Matrix.mul_assoc, Matrix.mul_assoc],
+    Matrix.trace_mul_comm, ← Matrix.mul_assoc, ← Matrix.mul_assoc, hfix]
+
 /-- **The relative entropy is the modular-Hamiltonian expectation:** `S(ρ‖σ) = −⟪ξ_ρ, K ξ_ρ⟫`, where
     `K = log Δ_{σ|ρ} = relModGen` is the generator of the modular flow (the "modular Hamiltonian") and
     `ξ_ρ = ρ^½` the GNS vector.  This is exactly the Araki definition, now phrased via the modular flow's
