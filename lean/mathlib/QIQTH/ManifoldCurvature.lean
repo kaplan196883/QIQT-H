@@ -222,4 +222,61 @@ theorem curvature_smul_section [CompleteSpace E] [I.Boundaryless] [IsManifold I 
     Pi.add_apply, hd1, hd2, hd3, hd4, hd5, hcomm]
   module
 
+/-- **The torsion of a covariant derivative on the tangent bundle**, `T(X,Y) = ∇_X Y − ∇_Y X − [X,Y]`
+(here `V = TangentSpace I`, so `∇_X Y = cov Y x (X x)` is again a tangent vector). A connection is
+*torsion-free* (e.g. the Levi-Civita connection) when this vanishes identically. -/
+noncomputable def torsion
+    (cov : (Π x : M, TangentSpace I x) → (Π x : M, TangentSpace I x →L[𝕜] TangentSpace I x))
+    (X Y : Π x : M, TangentSpace I x) (x : M) : TangentSpace I x :=
+  cov Y x (X x) - cov X x (Y x) - mlieBracket I X Y x
+
+/-- **The first (algebraic) Bianchi identity** for a torsion-free connection on the tangent bundle:
+the cyclic sum of the curvature vanishes, `R(X,Y)Z + R(Y,Z)X + R(Z,X)Y = 0`.
+
+The proof is the classical one: torsion-freeness (in the form `∇_A B = ∇_B A + [A,B]`) lets the six
+second-derivative terms regroup, by direction, into `∇_X[Y,Z] + ∇_Y[Z,X] + ∇_Z[X,Y]` with the
+opposite-order `∇∇` terms cancelling pairwise; applying torsion-freeness once more turns
+`∇_X[Y,Z] − ∇_{[Y,Z]}X` into the iterated bracket `[X,[Y,Z]]`, and the cyclic sum of those is `0` by
+the **Jacobi identity** for the vector-field Lie bracket. Mathlib has the model-space Jacobi/Leibniz
+identity (`VectorField.leibniz_identity_lieBracket`) but no `mlieBracket` (manifold) version, so the
+manifold Jacobi identity `hjac` is taken here as a labeled hypothesis — its chart-transport (à la the
+commutator) is the remaining input. `htf` is torsion-freeness; the `h…` are the section
+differentiabilities the connection's additivity (`hcov.add`) consumes. -/
+theorem first_bianchi [IsManifold I 2 M]
+    (cov : (Π x : M, TangentSpace I x) → (Π x : M, TangentSpace I x →L[𝕜] TangentSpace I x))
+    (hcov : IsCovariantDerivativeOn E cov Set.univ)
+    (X Y Z : Π x : M, TangentSpace I x) (x : M)
+    (htf : ∀ (A B : Π x : M, TangentSpace I x) (x' : M),
+      cov B x' (A x') = cov A x' (B x') + mlieBracket I A B x')
+    (hjac : mlieBracket I X (mlieBracket I Y Z) x + mlieBracket I Y (mlieBracket I Z X) x
+        + mlieBracket I Z (mlieBracket I X Y) x = 0)
+    (hZY : MDiffAt (T% fun x' => cov Y x' (Z x')) x)
+    (hXZ : MDiffAt (T% fun x' => cov Z x' (X x')) x)
+    (hYX : MDiffAt (T% fun x' => cov X x' (Y x')) x)
+    (hYZb : MDiffAt (T% fun x' => mlieBracket I Y Z x') x)
+    (hZXb : MDiffAt (T% fun x' => mlieBracket I Z X x') x)
+    (hXYb : MDiffAt (T% fun x' => mlieBracket I X Y x') x) :
+    curvature cov X Y Z x + curvature cov Y Z X x + curvature cov Z X Y x = 0 := by
+  -- torsion-free at the section level for the three "first" derivatives
+  have hsYZ : (fun x' => cov Z x' (Y x'))
+      = (fun x' => cov Y x' (Z x')) + mlieBracket I Y Z := by
+    funext x'; exact htf Y Z x'
+  have hsZX : (fun x' => cov X x' (Z x'))
+      = (fun x' => cov Z x' (X x')) + mlieBracket I Z X := by
+    funext x'; exact htf Z X x'
+  have hsXY : (fun x' => cov Y x' (X x'))
+      = (fun x' => cov X x' (Y x')) + mlieBracket I X Y := by
+    funext x'; exact htf X Y x'
+  simp only [curvature]
+  rw [hsYZ, hsZX, hsXY,
+    hcov.add hZY hYZb (Set.mem_univ x), hcov.add hXZ hZXb (Set.mem_univ x),
+    hcov.add hYX hXYb (Set.mem_univ x)]
+  simp only [ContinuousLinearMap.add_apply]
+  -- regroup the iterated brackets via torsion-free once more, then Jacobi
+  rw [htf X (mlieBracket I Y Z) x, htf Y (mlieBracket I Z X) x, htf Z (mlieBracket I X Y) x]
+  rw [show (0 : TangentSpace I x)
+      = mlieBracket I X (mlieBracket I Y Z) x + mlieBracket I Y (mlieBracket I Z X) x
+        + mlieBracket I Z (mlieBracket I X Y) x from hjac.symm]
+  abel
+
 end QIQTH.ManifoldGR

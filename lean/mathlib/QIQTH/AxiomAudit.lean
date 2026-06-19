@@ -2914,6 +2914,13 @@ namespace QIQTH.AxiomAudit
 -- (X(Yf)−Y(Xf))·σ and the bracket term gives −([X,Y]f)·σ; they cancel EXACTLY by the general-manifold
 -- commutator mfderiv_apply_mlieBracket ([X,Y]f = X(Yf)−Y(Xf)). The concrete payoff of that commutator —
 -- abstract-manifold Riemann curvature is now fully tensorial in all three slots. Axiom-free.
+#print axioms QIQTH.ManifoldGR.first_bianchi
+-- expected: standard only — FIRST (algebraic) BIANCHI on the tangent bundle: for a torsion-free
+-- connection, R(X,Y)Z + R(Y,Z)X + R(Z,X)Y = 0. Classical proof: torsion-freeness (∇_A B = ∇_B A + [A,B])
+-- regroups the six ∇∇ terms by direction into ∇_X[Y,Z]+cyclic with opposite-order terms cancelling;
+-- a second use turns ∇_X[Y,Z]−∇_{[Y,Z]}X into [X,[Y,Z]], cyclic sum = 0 by JACOBI. Mathlib has the
+-- model-space Jacobi (leibniz_identity_lieBracket) but no mlieBracket version, so the manifold Jacobi is
+-- a labeled hypothesis (its chart-transport is the remaining input). Companion def: `torsion`. Axiom-free.
 #print axioms QIQTH.ManifoldGR.mfderiv_apply_mlieBracket_model
 -- expected: standard only — COMMUTATOR INFRASTRUCTURE (base case). The Lie bracket acts on a scalar as
 -- the commutator of directional derivatives df([X,Y])=X(Yf)−Y(Xf), for the model-space manifold (M=E):
