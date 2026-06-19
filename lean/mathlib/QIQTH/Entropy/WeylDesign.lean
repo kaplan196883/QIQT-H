@@ -245,4 +245,21 @@ theorem weyl_depolarization {ω : ℂ} (hω : IsPrimitiveRoot ω m) (M : Matrix 
   rw [shift_twirl]
   rfl
 
+/-- **The complete depolarization as a flat Weyl average** — the form a mixed-unitary channel consumes:
+`Σ_{a,b} (1/m²)·W_{a,b} M W_{a,b}⋆ = (Tr M/m)·I`, with `W_{a,b} = X^a Z^b` the Weyl unitaries (uniform
+weights `1/m²`). Same content as `weyl_depolarization`, with the inner clock average unfolded out of the
+shift conjugation (`(X^aZ^b)⋆ = Z^b⋆ X^a⋆`, pulling `X^a·(–)·X^a⋆` through the `b`-sum). -/
+theorem weyl_depolarization_flat {ω : ℂ} (hω : IsPrimitiveRoot ω m) (M : Matrix (Fin m) (Fin m) ℂ) :
+    ∑ a : Fin m, ∑ b : Fin m, ((m : ℂ)⁻¹ * (m : ℂ)⁻¹) •
+        ((((finRotate m) ^ a.val).permMatrix ℂ * (clock ω m) ^ b.val) * M
+          * ((((finRotate m) ^ a.val).permMatrix ℂ * (clock ω m) ^ b.val))ᴴ)
+      = ((m : ℂ)⁻¹ * M.trace) • (1 : Matrix (Fin m) (Fin m) ℂ) := by
+  rw [← weyl_depolarization hω]
+  refine Finset.sum_congr rfl (fun a _ => ?_)
+  rw [Matrix.mul_sum, Matrix.sum_mul, Finset.smul_sum]
+  refine Finset.sum_congr rfl (fun b _ => ?_)
+  rw [conjTranspose_mul, Matrix.mul_smul, Matrix.smul_mul, smul_smul]
+  congr 1
+  simp only [Matrix.mul_assoc]
+
 end QIQTH.Entropy

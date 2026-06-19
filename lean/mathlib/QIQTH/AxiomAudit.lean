@@ -2250,6 +2250,11 @@ namespace QIQTH.AxiomAudit
 -- is simp_rw[clock_twirl];rw[shift_twirl];rfl (M.trace=Σ_j M_jj defeq). The full discrete-Weyl 1-design as
 -- a mixed-unitary channel — the single-factor depolarization underlying the factor-2 twirl
 -- ρ↦(Tr₂ρ)⊗(I/m) of partial-trace DPI. Axiom-free.
+#print axioms QIQTH.Entropy.weyl_depolarization_flat
+-- expected: standard only — the FLAT Weyl-average form the mixed-unitary channel consumes:
+-- Σ_{a,b} (1/m²)·W_{a,b} M W_{a,b}⋆ = (Tr M/m)·I, W_{a,b}=X^aZ^b (uniform 1/m² weights). Same content as
+-- weyl_depolarization with the inner clock average pulled out of the shift conjugation
+-- ((X^aZ^b)⋆=Z^b⋆X^a⋆, X^a·(–)·X^a⋆ through the b-sum). Feeds dpi_mixed_unitary. Axiom-free.
 #print axioms QIQTH.QuantumEntropy.relEntropy_eq_zero
 -- expected: standard only — ★★★★★ KLEIN'S EQUALITY CASE: D(ρ‖σ)=0 ⟹ ρ=σ for density matrices. The
 -- equality tracking of relEntropy_nonneg (doubly-stochastic/Jensen): KL(p‖r)=0⟹p=r (Gibbs, log x<x−1)
