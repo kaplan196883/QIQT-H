@@ -160,6 +160,35 @@ theorem record_info_le_log_card (μ : RecordLaw R) :
     QIQTH.BranchLedger.Shannon Finset.univ μ.p ≤ Real.log (Fintype.card R) :=
   shannon_le_log_card μ.p μ.nonneg μ.sum_one
 
+/- ── 2c. Capacity saturation: the entropy-area EQUALITY in the equilibrium regime ──────-/
+
+/-- **Capacity saturation `H(R) = log|R|` at the maximally-mixed (equilibrium) record.** The
+    Jensen/Gibbs bound `shannon_le_log_card` is an EQUALITY exactly at the uniform distribution
+    `p i = 1/|R|` — the maximum-entropy state.  There the record's Shannon entropy SATURATES its
+    capacity `log|R|`.  This is the regime where a horizon is in local equilibrium, the state Jacobson
+    assumes when positing the area law.  Machine-checked: `∑_{i} negMulLog(1/n) = n·(1/n)·log n = log n`. -/
+theorem shannon_uniform_eq_log_card {ι : Type*} [Fintype ι] [Nonempty ι] :
+    QIQTH.BranchLedger.Shannon Finset.univ (fun _ : ι => (Fintype.card ι : ℝ)⁻¹)
+      = Real.log (Fintype.card ι) := by
+  have hne : (Fintype.card ι : ℝ) ≠ 0 := by
+    exact_mod_cast (Fintype.card_pos).ne'
+  rw [shannon_eq_sum_negMulLog, Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+  simp only [Real.negMulLog_def, Real.log_inv]
+  field_simp
+
+/-- **★ The area law `S = S_area` as an EQUALITY at capacity saturation — QIQT-H's structural origin
+    of `S = ηA`.**  Combining the saturation equality (above) with the holographic **capacity
+    postulate** `log|R| = S_area` (the record dimension is exactly `e^{area}`, i.e. `Q_R ∝ A`), the
+    maximally-mixed record's entropy EQUALS the boundary area.  This *decomposes* the area-law
+    postulate `hAreaLaw` of `jacobson_einstein_from_area_law` into two cleaner pieces: (i) **maximum
+    entropy / equilibrium** — which QIQT-H's finite-record structure DERIVES as the Jensen saturation,
+    and (ii) **capacity = area** — the one genuinely-holographic input that remains postulated.  So the
+    "entropy" half of `S = ηA` is QIQT-H's saturation; only `log|R| = S_area` is irreducibly assumed. -/
+theorem shannon_eq_area_at_saturation {ι : Type*} [Fintype ι] [Nonempty ι] (S_area : ℝ)
+    (hCap : Real.log (Fintype.card ι) = S_area) :
+    QIQTH.BranchLedger.Shannon Finset.univ (fun _ : ι => (Fintype.card ι : ℝ)⁻¹) = S_area := by
+  rw [shannon_uniform_eq_log_card, hCap]
+
 /- ── 3. Guardrails (the metaselector is einselection, NOT capacity) ─────────-/
 
 /-- **The area budget is NOT the metaselector.**  Re-exported from `RealmSelection`: a

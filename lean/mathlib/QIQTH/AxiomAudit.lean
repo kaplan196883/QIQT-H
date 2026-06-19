@@ -1663,6 +1663,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — area bridge (capacity version): I(λ;R) ≤ log|R| ≤ S_area, the STRONGER dim postulate (≠ Bousso).
 #print axioms QIQTH.RecordContract.shannon_le_log_card
 -- expected: standard only — the info bound H(R) ≤ log|R| (Gibbs/Jensen on concave negMulLog): discharges hinfo concretely.
+#print axioms QIQTH.RecordContract.shannon_uniform_eq_log_card
+#print axioms QIQTH.RecordContract.shannon_eq_area_at_saturation
+-- expected: standard only — ★ CAPACITY SATURATION (the entropy-area EQUALITY). shannon_uniform_eq_log_card:
+-- H(R)=log|R| at the uniform/maximally-mixed record (Jensen bound SATURATED; ∑negMulLog(1/n)=log n) — the
+-- equilibrium regime Jacobson assumes. shannon_eq_area_at_saturation: + the holographic capacity postulate
+-- log|R|=S_area (record dim = e^{area}, Q_R∝A) ⟹ H(R)=S_area. DECOMPOSES the area-law postulate into (i)
+-- maximum-entropy/equilibrium — which QIQT-H's finite-record structure DERIVES (the saturation), and (ii)
+-- capacity=area — the one genuinely-holographic input still postulated. So the entropy half of S=ηA is QIQT-H's
+-- saturation; only log|R|=S_area is irreducibly assumed. Feeds the hAreaLaw premise of jacobson_einstein_from_area_law.
 
 -- BornProjBridge.lean — Born FROM PROJECTORS: μ(r)=‖P_r Φ‖²=⟨Φ,P_rΦ⟩ is a RecordContract.RecordLaw.
 #print axioms QIQTH.BornProjBridge.bornProj_sum
