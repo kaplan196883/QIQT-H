@@ -3341,4 +3341,17 @@ namespace QIQTH.AxiomAudit
 -- frobenius_norm_def + Real.rpow_le_rpow; Mathlib has this only for the sup norm). norm_trace_le_card:
 -- ‖Tr M‖≤(card n)·‖M‖ (trace = sum of card diagonal entries, each ≤‖M‖). Axiom-free.
 
+-- DIFFERENTIAL AREA LAW DERIVED (DifferentialAreaLaw.lean) — removing δS=ηδA as a bare assumption of the
+-- QIQT-H⇒GR chain (GPT-5-pro architecture; the wedge-modular-bridge Phase 1).
+#print axioms QIQTH.DifferentialAreaLaw.deriv_eq_of_le_of_eq
+#print axioms QIQTH.DifferentialAreaLaw.differential_area_law
+-- expected: standard only — ★ δS=ηδA DERIVED, not assumed. deriv_eq_of_le_of_eq: a bound f≤g near 0
+-- saturated at 0 (f 0=g 0) forces EQUAL first variations f'=g' (0 is a local max of f−g ⇒ deriv=0) — WITHOUT
+-- assuming f=g. differential_area_law: from the capacity BOUND S≤η·A (= QIQT-H's shannon_le_log_card, a
+-- THEOREM) + saturation S 0=η·A 0 (shannon_uniform_eq_log_card) + entanglement first law IsLocalMin(KE−S) 0
+-- + differentiability ⇒ δS=ηδA AND δ⟨K⟩=ηδA. ANTI-CIRCULARITY: no hypothesis is S=ηA or δS=ηδA; the inputs
+-- are the INEQUALITY (QIQT's bound) + point-saturation + first law, which ENTAIL the area law, not presuppose
+-- it. Replaces the bare hAreaLaw of jacobson_einstein_from_area_law (threading = follow-up). Cited inputs
+-- (BW K=2πK_boost, boost-flux, Raychaudhuri) stay as separate labelled hyps, NOT mixed into the area law.
+
 end QIQTH.AxiomAudit
