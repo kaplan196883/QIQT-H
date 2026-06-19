@@ -2468,6 +2468,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Araki.vonNeumann_le_modEnergy
 -- expected: standard only — FIRST LAW: S(ρ‖σ)+S(ρ)=⟪K_σ⟫_ρ (modular energy, K_σ=−logσ) and the
 -- first-law inequality S(ρ)≤⟪K_σ⟫_ρ (von Neumann entropy ≤ modular energy, = at ρ=σ). Axiom-free.
+#print axioms QIQTH.Araki.firstLaw_saturation
+-- expected: standard only — FIRST-LAW RIGIDITY: S(ρ)=⟪K_σ⟫_ρ ⟹ ρ=σ (saturated iff equilibrium),
+-- from the decomposition + relEntropy_eq_zero (faithfulness). Axiom-free.
 
 -- MODULAR RELATIVE ENTROPY (Phase B): the continuum one-particle (standard-subspace) relative-entropy
 -- functional, built from the bounded RvD operator R=P+Q (NO unbounded log Δ).

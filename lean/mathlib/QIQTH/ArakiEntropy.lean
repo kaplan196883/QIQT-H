@@ -757,6 +757,17 @@ theorem vonNeumann_le_modEnergy (hσ : σ.PosDef) (hρ : ρ.PosDef)
   have hpos := QIQTH.QuantumEntropy.relEntropy_nonneg hρ hσ hρ1 hσ1
   linarith
 
+/-- **First-law rigidity:** the first-law inequality `S(ρ) ≤ ⟪K_σ⟫_ρ` is **saturated iff `ρ = σ`** —
+    equality of entropy and modular energy holds exactly at the equilibrium state.  Immediate from the
+    decomposition `S(ρ‖σ) + S(ρ) = ⟪K_σ⟫_ρ` and the faithfulness of the relative entropy
+    (`relEntropy = 0 ⟺ ρ = σ`). -/
+theorem firstLaw_saturation (hσ : σ.PosDef) (hρ : ρ.PosDef)
+    (hd : QIQTH.QuantumEntropy.IsDensity ρ) (hρ1 : ρ.trace = 1) (hσ1 : σ.trace = 1)
+    (hsat : QIQTH.QuantumEntropy.vonNeumannEntropy hd = -(ρ * matLog hσ.1).trace.re) : ρ = σ := by
+  have h := relEntropy_add_vonNeumann hσ hρ hd
+  rw [hsat] at h
+  exact QIQTH.QuantumEntropy.relEntropy_eq_zero hρ hσ hρ1 hσ1 (by linarith)
+
 end ModularFlow
 
 end QIQTH.Araki
