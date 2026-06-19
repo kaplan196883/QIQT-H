@@ -2973,6 +2973,13 @@ namespace QIQTH.AxiomAudit
 -- positive-definite only). The pseudo-Riemannian metric structure (symmetric, nondegenerate bilinear
 -- form field) + the index-lowering musical ♭ map, injective from nondegeneracy (first half of the
 -- musical isomorphism). Foundation for Levi-Civita → Ricci → Einstein. Axiom-free.
+#print axioms QIQTH.ManifoldGR.PseudoRiemannianMetric.raise_lower
+#print axioms QIQTH.ManifoldGR.PseudoRiemannianMetric.lowerEquiv
+-- expected: standard only — THE FULL MUSICAL ISOMORPHISM ♭ : TM ≅ T*M (with inverse ♯, index raising).
+-- The metric carries ♯ (raise') + the right-inverse law (lower_raise') as data — standard for a
+-- nondegenerate metric (a bundle iso T≅T*), avoiding a finite-dimensionality commitment; the left
+-- inverse (raise_lower) follows from ♭-injectivity (nondeg'). lowerEquiv bundles it as a ≃L. This is
+-- the index-raising iso the Levi-Civita Koszul formula needs to solve g(∇_X Y,·)=ω for ∇_X Y. Axiom-free.
 
 #print axioms QIQTH.Unruh.sinh_cosh_diff_sq
 #print axioms QIQTH.Unruh.rindler_interval

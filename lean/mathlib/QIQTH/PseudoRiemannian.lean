@@ -35,6 +35,14 @@ structure PseudoRiemannianMetric (I : ModelWithCorners 𝕜 E H)
   symm' : ∀ (x : M) (v w : TangentSpace I x), g x v w = g x w v
   /-- The metric is nondegenerate: a vector orthogonal to everything is zero. -/
   nondeg' : ∀ (x : M) (v : TangentSpace I x), (∀ w, g x v w = 0) → v = 0
+  /-- The **index-raising (musical `♯`) map**, the inverse of the lowering map `v ↦ g(v, ·)`, carried
+  as data. In finite dimensions it is *determined* by `nondeg'` (the injective `♭` is then bijective);
+  packaging it as a field makes the metric a genuine bundle isomorphism `TM ≅ T*M` without committing
+  to finite-dimensionality of the model. -/
+  raise' : Π x : M, (TangentSpace I x →L[𝕜] 𝕜) →L[𝕜] TangentSpace I x
+  /-- The raising map is a right inverse of lowering: `g(♯ω, ·) = ω`. Together with `nondeg'` this
+  makes `♭` and `♯` mutually inverse. -/
+  lower_raise' : ∀ (x : M) (ω : TangentSpace I x →L[𝕜] 𝕜), g x (raise' x ω) = ω
 
 namespace PseudoRiemannianMetric
 
@@ -60,6 +68,36 @@ theorem lower_injective (x : M) : Function.Injective (gm.lower x) := by
     simp only [map_sub, ContinuousLinearMap.sub_apply, this, sub_self]
   have := gm.nondeg' x (v - w) hz
   rwa [sub_eq_zero] at this
+
+/-- The **index-raising (musical `♯`) map** `ω ↦ g⁻¹(ω, ·)`, the inverse of `♭`. -/
+def raise (x : M) : (TangentSpace I x →L[𝕜] 𝕜) →L[𝕜] TangentSpace I x := gm.raise' x
+
+/-- `♯` is a right inverse of `♭`: lowering the raised vector recovers the covector, `♭(♯ω) = ω`. -/
+@[simp] theorem lower_raise (x : M) (ω : TangentSpace I x →L[𝕜] 𝕜) :
+    gm.lower x (gm.raise x ω) = ω := gm.lower_raise' x ω
+
+/-- `♯` is a left inverse of `♭`: raising the lowered vector recovers the vector, `♯(♭v) = v`. Follows
+from the right-inverse law `lower_raise` together with injectivity of `♭` (nondegeneracy). -/
+@[simp] theorem raise_lower (x : M) (v : TangentSpace I x) :
+    gm.raise x (gm.lower x v) = v :=
+  gm.lower_injective x (by rw [lower_raise])
+
+/-- **The full musical isomorphism `♭ : TM ≅ T*M`** as a continuous linear equivalence at each point,
+with inverse `♯`. This is the index-raising/lowering iso that the Levi-Civita connection's Koszul
+formula needs (to solve `g(∇_X Y, ·) = (Koszul 1-form)` for `∇_X Y`). -/
+def lowerEquiv (x : M) : TangentSpace I x ≃L[𝕜] (TangentSpace I x →L[𝕜] 𝕜) where
+  toFun := gm.lower x
+  invFun := gm.raise x
+  left_inv := gm.raise_lower x
+  right_inv := gm.lower_raise x
+  map_add' := map_add _
+  map_smul' := map_smul _
+
+@[simp] theorem lowerEquiv_apply (x : M) (v : TangentSpace I x) :
+    gm.lowerEquiv x v = gm.lower x v := rfl
+
+@[simp] theorem lowerEquiv_symm_apply (x : M) (ω : TangentSpace I x →L[𝕜] 𝕜) :
+    (gm.lowerEquiv x).symm ω = gm.raise x ω := rfl
 
 end PseudoRiemannianMetric
 
