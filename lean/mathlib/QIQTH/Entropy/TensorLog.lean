@@ -246,8 +246,8 @@ theorem subadditivity {N : ℕ} [NeZero N] [Nonempty n]
 where `σ_A = Tr₂σ`, `σ_B = Tr₁σ` are the reduced states. This is the equality at the heart of
 subadditivity (its `≥ 0` instance), and the building block of strong subadditivity (applied to the two
 bipartitions of a three-factor system). Axiom-free. -/
-theorem relEntropy_marginals_eq {N : ℕ} [NeZero N] [Nonempty n]
-    {σ : Matrix (n × Fin N) (n × Fin N) ℂ} (hσ : σ.PosDef)
+theorem relEntropy_marginals_eq [Nonempty n] [Nonempty m]
+    {σ : Matrix (n × m) (n × m) ℂ} (hσ : σ.PosDef)
     (hd : QIQTH.QuantumEntropy.IsDensity σ)
     (hd1 : QIQTH.QuantumEntropy.IsDensity (partialTraceRight σ))
     (hd2 : QIQTH.QuantumEntropy.IsDensity (partialTraceLeft σ)) :
@@ -256,7 +256,6 @@ theorem relEntropy_marginals_eq {N : ℕ} [NeZero N] [Nonempty n]
       = - QIQTH.QuantumEntropy.vonNeumannEntropy hd
         + QIQTH.QuantumEntropy.vonNeumannEntropy hd1
         + QIQTH.QuantumEntropy.vonNeumannEntropy hd2 := by
-  haveI : Nonempty (Fin N) := ⟨⟨0, Nat.pos_of_ne_zero (NeZero.ne N)⟩⟩
   rw [QIQTH.QuantumEntropy.relEntropy,
     matLog_kronecker (partialTraceRight_posDef hσ) (partialTraceLeft_posDef hσ),
     mul_sub, mul_add, Matrix.trace_sub, Matrix.trace_add, trace_mul_kron_one, trace_mul_one_kron,
