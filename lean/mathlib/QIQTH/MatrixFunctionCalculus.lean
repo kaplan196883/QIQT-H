@@ -105,3 +105,21 @@ theorem hasDerivAt_trace_sumPow (A H : Matrix n n ℂ) (c : ℕ → ℂ) (N : �
       (∑ m ∈ Finset.range N, c m • ((m : ℂ) * (A ^ (m - 1) * H).trace)) 0 :=
     HasDerivAt.sum (fun m _ => (hasDerivAt_trace_matrixPow A H m).const_smul (c m))
   simpa only [smul_eq_mul] using h
+
+/-- **The trace power rule at a general base point** `d/dt Tr((A + t·H)^m)|_{t=t₀} =
+    m · Tr((A + t₀·H)^{m-1} H)` — the derivative holds *everywhere*, not just at `0`.  By the affine
+    shift `t ↦ t − t₀` reducing to the base-point-`0` rule with `A ↦ A + t₀·H`.  This is the form the
+    entire-function (power-series) case `d/dt Tr(exp(A+tH))` consumes via `hasDerivAt_tsum`. -/
+theorem hasDerivAt_trace_matrixPow_at (A H : Matrix n n ℂ) (m : ℕ) (t₀ : ℝ) :
+    HasDerivAt (fun t : ℝ => ((A + t • H) ^ m).trace)
+      ((m : ℂ) * ((A + t₀ • H) ^ (m - 1) * H).trace) t₀ := by
+  have key := hasDerivAt_trace_matrixPow (A + t₀ • H) H m
+  have hshift : HasDerivAt (fun t : ℝ => t - t₀) 1 t₀ := (hasDerivAt_id t₀).sub_const t₀
+  have h := key.scomp_of_eq t₀ hshift (sub_self t₀).symm
+  simp only [one_smul] at h
+  have hfun : (fun t : ℝ => ((A + t₀ • H + (t - t₀) • H) ^ m).trace)
+      = fun t : ℝ => ((A + t • H) ^ m).trace := by
+    funext t
+    rw [add_assoc, ← add_smul, show t₀ + (t - t₀) = t from by ring]
+  rw [Function.comp_def] at h
+  rwa [hfun] at h

@@ -3277,5 +3277,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — THE TRACE POLYNOMIAL RULE (linearity lift): for any finite ℂ-combination
 -- of powers p(M)=Σ_{m<N} c_m M^m (= any polynomial), d/dt Tr(p(A+t·H))|₀ = Σ_{m<N} c_m·m·Tr(A^{m-1}H)
 -- = Tr(p'(A)H). From HasDerivAt.sum + const_smul over the trace power rule. Axiom-free.
+#print axioms QIQTH.MatrixCalculus.hasDerivAt_trace_matrixPow_at
+-- expected: standard only — THE TRACE POWER RULE AT A GENERAL BASE POINT: d/dt Tr((A+t·H)^m)|_{t=t₀}
+-- = m·Tr((A+t₀·H)^{m-1} H) — holds everywhere, not just at 0, via the affine shift t↦t−t₀
+-- (HasDerivAt.scomp_of_eq) reducing to the base-0 rule with A↦A+t₀·H. The form the entire-function
+-- (power-series exp) case consumes via hasDerivAt_tsum. Axiom-free.
 
 end QIQTH.AxiomAudit
