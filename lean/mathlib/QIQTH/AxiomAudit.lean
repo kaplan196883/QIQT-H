@@ -2973,4 +2973,12 @@ namespace QIQTH.AxiomAudit
 -- sinh(w−iπ)²=sinh(w)². kms_periodicity: in proper time, 1/sinh²(aΔτ/2) is periodic under Δτ→Δτ−2πi/a.
 -- This IS the KMS condition at β=2π/a ⟹ thermal at the Unruh temperature T=a/2π=ℏκ/2π. Axiom-free.
 
+#print axioms QIQTH.Curvature.jacobson_einstein_equation_of_state
+-- expected: standard only — THE END-TO-END THEOREM (plan 56). Composes the two halves —
+-- crux_of_pernull (per-null Clausius relation ⟹ a·T=R+f·g, via the Sylvester null-cone lemma) and
+-- einstein_field_equation_real_global (crux + conservation + contracted Bianchi ⟹ G+Λg=a·T) — into ONE
+-- theorem: from Jacobson's per-null Clausius premise to the Einstein field equation with a genuine
+-- constant Λ. All geometry discharged internally; cited residual = area law (gap 1), Clausius, the
+-- free-field correlator form behind Unruh, and the integral matching bundled into `pernull`. Axiom-free.
+
 end QIQTH.AxiomAudit

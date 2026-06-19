@@ -286,4 +286,62 @@ theorem crux_of_pernull (g gi : Point 4 → Fin 4 → Fin 4 → ℝ)
   choose f hf using hpt
   exact ⟨f, fun x a' b => by have := hf x a' b; linarith⟩
 
+/-- # THE END-TO-END THEOREM — Jacobson's Einstein equation of state, wired together
+
+`jacobson_einstein_equation_of_state` is the **single** theorem assembling the whole derivation:
+from the per-null Clausius relation (Jacobson's one physics premise) to the **Einstein field equation
+with a genuine cosmological constant**, `a·T_{μν} = G_{μν} + Λ·g_{μν}`. It composes the two halves —
+`crux_of_pernull` (front) and `einstein_field_equation_real_global` (back) — through the
+proportionality scalar `f`. **All geometry is discharged internally and is axiom-free.**
+
+## Provenance of each hypothesis / discharged step
+
+* `pernull` — **the per-null Clausius relation** `a·T(k,k) = R(k,k)` for all null `k` (Jacobson's
+  premise). Its own provenance, machine-checked elsewhere in this project, is:
+    - the Ricci focusing term `R_{σν}k^σk^ν` ⟸ **Raychaudhuri** (`raychaudhuri_geodesic`, axiom-free);
+    - the temperature `T = ℏκ/2π` ⟸ **Unruh** (`QIQTH.Unruh.kms_periodicity`: the accelerated
+      two-point function is KMS at `β = 2π/a`, axiom-free);
+    - and, *cited* (not geometry): the **area law** `δS = ηδA` (gap 1 — the holographic postulate) and
+      the **Clausius** relation `δQ = TδS`. The integral step that combines these into `pernull` is the
+      one physics gluing bundled into this premise.
+* `P, Pinv, hcong, …` — the **Lorentzian structure** (`g = Pᵀ·η·P`, Sylvester's law).
+* `pernull ⟹ a·T = R + f·g` — the **null-cone tensor lemma** (`crux_of_pernull` /
+  `symmTensor_eq_smul_metric_of_null_general`), discharged here.
+* `hreg` — the **one analytic residual**: the proportionality scalar `f` is regular (the only thing the
+  per-null relation alone does not give).
+* `conserv` + the **contracted Bianchi** `∇^μG_{μν}=0` (`twice_contracted_bianchi`, axiom-free) fix
+  `f = −R/2 + Λ` and make `Λ` a genuine constant — discharged via `einstein_field_equation_real_global`.
+
+Net: **modulo exactly the cited physics — the area law (gap 1), Clausius, and the form of the
+free-field correlator behind Unruh — the entire chain from the Clausius premise to `G+Λg=a·T` is one
+machine-checked, axiom-free theorem.** -/
+theorem jacobson_einstein_equation_of_state
+    (g gi : Point 4 → Fin 4 → Fin 4 → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (T : Point 4 → Fin 4 → Fin 4 → ℝ) (a : ℝ)
+    (hT_symm : ∀ x a' b, T x a' b = T x b a')
+    (hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x)
+    (P Pinv : Point 4 → Fin 4 → Fin 4 → ℝ)
+    (hPP : ∀ x i j, (∑ k, P x i k * Pinv x k j) = if i = j then (1 : ℝ) else 0)
+    (hPP' : ∀ x i j, (∑ k, Pinv x i k * P x k j) = if i = j then (1 : ℝ) else 0)
+    (hcong : ∀ x i j, g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j)
+    (pernull : ∀ (x : Point 4) (v : Fin 4 → ℝ),
+        QIQTH.EinsteinEOS.BL (g x) v = 0 →
+        QIQTH.EinsteinEOS.BL (fun a' b => a * T x a' b - ricci g gi a' b x) v = 0)
+    (hreg : ∀ f : Point 4 → ℝ,
+        (∀ y a' b, a * T y a' b = ricci g gi a' b y + f y * g y a' b) →
+        (∀ x ρ, PdiffAt f ρ x) ∧
+          Differentiable ℝ (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y))
+    (conserv : ∀ x ν, div02 g gi (fun y a' b => a * T y a' b) ν x = 0) :
+    ∃ Λ : ℝ, ∀ x μ ν, a * T x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν := by
+  obtain ⟨f, hf_real⟩ :=
+    crux_of_pernull g gi T a hT_symm hric_symm P Pinv hPP hPP' hcong pernull
+  obtain ⟨hf, hFdiff⟩ := hreg f hf_real
+  exact einstein_field_equation_real_global g gi hsymm hsymm_gi hinv hCg hCgi hC
+    T f a hf hFdiff hf_real conserv
+
 end QIQTH.Curvature
