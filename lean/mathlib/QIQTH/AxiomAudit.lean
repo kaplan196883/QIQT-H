@@ -2908,6 +2908,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ManifoldGR.curvature_add_section
 -- expected: standard only — additivity in the SECTION slot R(X,Y)(σ+σ')=R(X,Y)σ+R(X,Y)σ' (funext+cov.add,
 -- no germ-localisation). Curvature now additive in all three slots. Axiom-free.
+#print axioms QIQTH.ManifoldGR.curvature_smul_section
+-- expected: standard only — SECTION-SLOT TENSORIALITY R(X,Y)(fσ)=f·R(X,Y)σ, the deepest tensoriality
+-- (makes R a genuine pointwise (1,3)-tensor in the section). Leibniz on the two ∇∇ terms leaves
+-- (X(Yf)−Y(Xf))·σ and the bracket term gives −([X,Y]f)·σ; they cancel EXACTLY by the general-manifold
+-- commutator mfderiv_apply_mlieBracket ([X,Y]f = X(Yf)−Y(Xf)). The concrete payoff of that commutator —
+-- abstract-manifold Riemann curvature is now fully tensorial in all three slots. Axiom-free.
 #print axioms QIQTH.ManifoldGR.mfderiv_apply_mlieBracket_model
 -- expected: standard only — COMMUTATOR INFRASTRUCTURE (base case). The Lie bracket acts on a scalar as
 -- the commutator of directional derivatives df([X,Y])=X(Yf)−Y(Xf), for the model-space manifold (M=E):

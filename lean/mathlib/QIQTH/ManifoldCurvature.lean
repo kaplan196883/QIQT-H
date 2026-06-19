@@ -1,5 +1,6 @@
 import Mathlib.Geometry.Manifold.VectorBundle.CovariantDerivative.Basic
 import Mathlib.Geometry.Manifold.VectorField.LieBracket
+import QIQTH.ManifoldCommutator
 
 /-!
 # Curvature of a covariant derivative on an abstract manifold
@@ -163,5 +164,62 @@ theorem curvature_add_section
   rw [hsecY, hsecX, hcov.add hcovσY hcovσ'Y, hcov.add hcovσX hcovσ'X, hcov.add (hσ x) (hσ' x)]
   simp only [ContinuousLinearMap.add_apply]
   abel
+
+/-- **Section-slot tensoriality (`C∞`-linearity) of the curvature:** `R(X,Y)(fσ) = f · R(X,Y)σ`.
+This is the deepest tensoriality — it makes `R` a genuine pointwise tensor in the section slot, not
+merely a differential operator. Leibniz-expanding the two second-derivative terms leaves a scalar
+`(X(Yf) − Y(Xf))·σ`, and the Lie-bracket term contributes `−([X,Y]f)·σ`; these cancel **exactly** by
+the general-manifold commutator `mfderiv_apply_mlieBracket` (`[X,Y]f = X(Yf) − Y(Xf)`). The curvature
+"is a tensor" *because* the bracket measures the non-commutation of the directional derivatives — this
+theorem is the concrete payoff of that commutator. The hypotheses `hg, hsymm, hXt, hYt` are the
+chart-representative regularity feeding the commutator (over `ℝ`/`ℂ`, automatic for `C²` data). -/
+theorem curvature_smul_section [CompleteSpace E] [I.Boundaryless] [IsManifold I 2 M]
+    [VectorBundle 𝕜 F V]
+    (cov : (Π x : M, V x) → (Π x : M, TangentSpace I x →L[𝕜] V x))
+    (hcov : IsCovariantDerivativeOn F cov Set.univ)
+    (f : M → 𝕜) (X Y : Π x : M, TangentSpace I x) (σ : Π x : M, V x) (x : M)
+    (hf : ∀ z, MDiffAt f z)
+    (hYf : MDiffAt (dirDeriv I Y f) x) (hXf : MDiffAt (dirDeriv I X f) x)
+    (hσ : ∀ z, MDiffAt (T% σ) z)
+    (hcovσX : MDiffAt (T% fun x' => cov σ x' (X x')) x)
+    (hcovσY : MDiffAt (T% fun x' => cov σ x' (Y x')) x)
+    (hg : ContDiffAt 𝕜 2 (f ∘ (extChartAt I x).symm) (extChartAt I x x))
+    (hsymm : IsSymmSndFDerivAt 𝕜 (f ∘ (extChartAt I x).symm) (extChartAt I x x))
+    (hXt : DifferentiableAt 𝕜
+      (mpullbackWithin 𝓘(𝕜, E) I (extChartAt I x).symm X (Set.range I)) (extChartAt I x x))
+    (hYt : DifferentiableAt 𝕜
+      (mpullbackWithin 𝓘(𝕜, E) I (extChartAt I x).symm Y (Set.range I)) (extChartAt I x x)) :
+    curvature cov X Y (f • σ) x = f x • curvature cov X Y σ x := by
+  -- inner sections, Leibniz-expanded: ∇_Y(fσ) = f·∇_Yσ + (Yf)·σ, and likewise for X
+  have hIY : (fun x' => cov (f • σ) x' (Y x'))
+      = f • (fun x' => cov σ x' (Y x')) + (dirDeriv I Y f) • σ := by
+    funext x'
+    simp only [hcov.leibniz (hσ x') (hf x') (Set.mem_univ x'), ContinuousLinearMap.add_apply,
+      ContinuousLinearMap.coe_smul', Pi.smul_apply, ContinuousLinearMap.smulRight_apply,
+      Pi.add_apply]
+    rfl
+  have hIX : (fun x' => cov (f • σ) x' (X x'))
+      = f • (fun x' => cov σ x' (X x')) + (dirDeriv I X f) • σ := by
+    funext x'
+    simp only [hcov.leibniz (hσ x') (hf x') (Set.mem_univ x'), ContinuousLinearMap.add_apply,
+      ContinuousLinearMap.coe_smul', Pi.smul_apply, ContinuousLinearMap.smulRight_apply,
+      Pi.add_apply]
+    rfl
+  -- the commutator: the leftover scalar coefficient of σ vanishes
+  have hcomm := mfderiv_apply_mlieBracket f X Y x hf hYf hXf hg hsymm hXt hYt
+  -- defeq bridges d% (= mvfderiv, fromTangentSpace = id) to mfderiv/dirDeriv
+  have hd1 : (d% f x) (X x) = dirDeriv I X f x := rfl
+  have hd2 : (d% f x) (Y x) = dirDeriv I Y f x := rfl
+  have hd3 : (d% (dirDeriv I Y f) x) (X x) = dirDeriv I X (dirDeriv I Y f) x := rfl
+  have hd4 : (d% (dirDeriv I X f) x) (Y x) = dirDeriv I Y (dirDeriv I X f) x := rfl
+  have hd5 : (d% f x) (mlieBracket I X Y x) = mfderiv I 𝓘(𝕜) f x (mlieBracket I X Y x) := rfl
+  simp only [curvature, hIY, hIX, hcov.add ((hf x).smul_section hcovσY) (hYf.smul_section (hσ x)),
+    hcov.add ((hf x).smul_section hcovσX) (hXf.smul_section (hσ x)),
+    hcov.leibniz hcovσY (hf x) (Set.mem_univ x), hcov.leibniz (hσ x) hYf (Set.mem_univ x),
+    hcov.leibniz hcovσX (hf x) (Set.mem_univ x), hcov.leibniz (hσ x) hXf (Set.mem_univ x),
+    hcov.leibniz (hσ x) (hf x) (Set.mem_univ x), ContinuousLinearMap.add_apply,
+    ContinuousLinearMap.coe_smul', Pi.smul_apply, ContinuousLinearMap.smulRight_apply,
+    Pi.add_apply, hd1, hd2, hd3, hd4, hd5, hcomm]
+  module
 
 end QIQTH.ManifoldGR
