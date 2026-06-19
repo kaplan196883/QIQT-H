@@ -3231,6 +3231,17 @@ namespace QIQTH.AxiomAudit
 -- from_clausius_integral plugs this into the end-to-end theorem, so the premise is now LITERALLY Jacobson's
 -- eq.(dQ)=eq.(dA) — the integral→point step is no longer an assumed gap. Cited residual now = exactly the
 -- area law (gap 1), the Unruh temperature, and δQ=TδS. Axiom-free. Verified against gr-qc/9504004 in refs/.
+#print axioms QIQTH.Curvature.clausius_integral_of_area_law
+#print axioms QIQTH.Curvature.jacobson_einstein_from_area_law
+-- expected: standard only — ★ THE AREA LAW ISOLATED AS A SINGLE POSTULATE. clausius_integral_of_area_law
+-- DERIVES the bundled integral-Clausius premise ∫λ(a·T_kk)=∫λR_kk from its constituents presented as
+-- SEPARATE labelled hypotheses: boost heat flux δQ=−κ∫λT_kk (hQ), Raychaudhuri δA=−∫λR_kk (hRay), the
+-- ★ AREA LAW δS=ηδA (hAreaLaw — the QIQT-H holographic postulate), the ★ Unruh temperature T=ℏκ/2π (htemp),
+-- and Clausius δQ=TδS (hClausius); with a=2π/ℏη the κ cancels (constant identity a·temp·η=κ, via field_simp)
+-- and integral_const_mul pulls a out ⟹ the relation. jacobson_einstein_from_area_law then composes this with
+-- jacobson_einstein_from_clausius_integral: the SINGLE axiom-free chain from the area-law postulate (+ Unruh,
+-- Clausius, flux/Raychaudhuri integral forms, Lorentzian structure, conservation, f-regularity) to the genuine
+-- Einstein field equation a·T=G+Λg with constant Λ. The area law now appears as ONE isolated, explicit premise.
 
 #print axioms QIQTH.ManifoldGR.mpullbackWithin_extChartAt_symm_apply
 #print axioms QIQTH.ManifoldGR.mpullbackWithin_extChartAt_symm_self
