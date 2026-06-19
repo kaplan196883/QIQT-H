@@ -3064,6 +3064,15 @@ namespace QIQTH.AxiomAudit
 -- constant Λ. All geometry discharged internally; cited residual = area law (gap 1), Clausius, the
 -- free-field correlator form behind Unruh, and the integral matching bundled into `pernull`. Axiom-free.
 
+#print axioms QIQTH.ClausiusIntegral.area_integral_div_sq_tendsto
+#print axioms QIQTH.ClausiusIntegral.area_leadingCoeff_eq_neg_ricci
+-- expected: standard only — JACOBSON'S SUBSTITUTION STEP (TeX 275-282, gr-qc/9504004 in refs/). The area
+-- change δA(ε)=∫₀^ε θ dλ (Jacobson's δA=∫θ) has ε² leading coefficient ½θ'(0): (∫₀^ε θ)/ε²→θ'(0)/2 by
+-- l'Hôpital (θ(ε)/(2ε)=½·slope(θ;0,ε)→½θ'(0)). At a local horizon θ(0)=σ(0)=0, so by the Raychaudhuri
+-- rate θ'(0)=−R_kk(0), giving δA leading coeff −½R_kk(0) = the leading coeff of −∫₀^ε λR_kk (via
+-- weighted_integral_div_sq_tendsto). That is EXACTLY Jacobson's "integration yields θ=−λR_kk, substituting
+-- into δA gives δA=−∫λR_kk." Closes the area-integral half of the Clausius matching. Axiom-free.
+
 #print axioms QIQTH.Curvature.BL_smul_sub
 #print axioms QIQTH.Curvature.pernull_of_clausius_integral
 #print axioms QIQTH.Curvature.jacobson_einstein_from_clausius_integral

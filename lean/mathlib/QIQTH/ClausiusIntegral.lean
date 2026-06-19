@@ -125,4 +125,60 @@ theorem raychaudhuri_rate_at_horizon {θ σ r : ℝ → ℝ}
   rw [hθ0, hσ0] at hfocus
   simpa using hfocus
 
+/-- **Leading coefficient of the area integral.** The cross-sectional area change of a pencil of
+horizon generators is `δA(ε) = ∫₀^ε θ(λ) dλ` (Jacobson's `δA = ∫θ dλ dA`). If the expansion `θ`
+vanishes at the horizon point (`θ(0) = 0`, the local-equilibrium condition) and has rate `θ'(0) = d`
+there, then the area change behaves like `½d·ε²`: `(∫₀^ε θ)/ε² → d/2`. Proof by l'Hôpital:
+`(∫₀^ε θ)'/(ε²)' = θ(ε)/(2ε) = ½·slope(θ;0,ε) → ½θ'(0) = d/2`. -/
+theorem area_integral_div_sq_tendsto {θ : ℝ → ℝ} (hθc : Continuous θ) {d : ℝ}
+    (hθ0 : θ 0 = 0) (hθ' : HasDerivAt θ d 0) :
+    Tendsto (fun ε => (∫ l in (0:ℝ)..ε, θ l) / ε ^ 2) (𝓝[>] 0) (𝓝 (d / 2)) := by
+  have hF' : ∀ x : ℝ, HasDerivAt (fun ε => ∫ l in (0:ℝ)..ε, θ l) (θ x) x := fun x =>
+    intervalIntegral.integral_hasDerivAt_right (hθc.intervalIntegrable _ _)
+      (hθc.stronglyMeasurableAtFilter _ _) hθc.continuousAt
+  have hg' : ∀ x : ℝ, HasDerivAt (fun ε => ε ^ 2) (2 * x) x := fun x => by
+    simpa using hasDerivAt_pow 2 x
+  refine HasDerivAt.lhopital_zero_right_on_Ioo (a := 0) (b := 1) one_pos
+    (fun x _ => hF' x) (fun x _ => hg' x) (fun x hx => mul_ne_zero two_ne_zero (ne_of_gt hx.1))
+    ?_ ?_ ?_
+  · simpa using tendsto_nhdsWithin_of_tendsto_nhds ((hF' 0).continuousAt.tendsto)
+  · simpa using tendsto_nhdsWithin_of_tendsto_nhds ((hg' 0).continuousAt.tendsto)
+  · -- θ(x)/(2x) = ½·slope(θ;0,x) → ½·θ'(0) = d/2
+    have hslope : Tendsto (slope θ 0) (𝓝[>] 0) (𝓝 d) :=
+      (hasDerivAt_iff_tendsto_slope.mp hθ').mono_left
+        (nhdsWithin_mono 0 (fun x hx => ne_of_gt hx))
+    have hev : (fun x => θ x / (2 * x)) =ᶠ[𝓝[>] 0] fun x => (1 / 2 : ℝ) * slope θ 0 x := by
+      filter_upwards [self_mem_nhdsWithin] with x hx
+      rw [slope_def_field, hθ0, sub_zero, sub_zero]
+      field_simp
+    rw [tendsto_congr' hev]
+    have h := hslope.const_mul (1 / 2 : ℝ)
+    rwa [show (1 / 2 : ℝ) * d = d / 2 from by ring] at h
+
+/-- **Jacobson's substitution step (the area integral equals `−∫λR_kk` to leading order).** At a local
+Rindler horizon with `θ(0) = σ(0) = 0`, the Raychaudhuri focusing equation forces the area change
+`δA(ε) = ∫₀^ε θ dλ` and the affine-weighted Ricci integral `−∫₀^ε λ·R_{ab}k^ak^b dλ` to have the
+**same `ε²` leading coefficient** `−½R_{ab}k^ak^b(0)` — which is exactly Jacobson's "the integration
+yields `θ = −λR_{ab}k^ak^b`, substituting into `δA` gives `δA = −∫λR_{ab}k^ak^b`" (PRL 1995, eqs.
+between `δA = ∫θ` and `dA`). Both `δA/ε²` and `(−∫λR_kk)/ε²` tend to the same limit, so the two area
+expressions agree at the leading order that Clausius matching uses. Axiom-free; combines
+`area_integral_div_sq_tendsto` (with the rate from `raychaudhuri_rate_at_horizon`) and
+`weighted_integral_div_sq_tendsto`. -/
+theorem area_leadingCoeff_eq_neg_ricci {θ σ r : ℝ → ℝ}
+    (hθc : Continuous θ) (hrc : Continuous r)
+    (hfocus : HasDerivAt θ (-(1 / 2) * θ 0 ^ 2 - σ 0 ^ 2 - r 0) 0)
+    (hθ0 : θ 0 = 0) (hσ0 : σ 0 = 0) :
+    Tendsto (fun ε => (∫ l in (0:ℝ)..ε, θ l) / ε ^ 2) (𝓝[>] 0) (𝓝 (- r 0 / 2))
+      ∧ Tendsto (fun ε => (-(∫ l in (0:ℝ)..ε, l * r l)) / ε ^ 2) (𝓝[>] 0) (𝓝 (- r 0 / 2)) := by
+  refine ⟨?_, ?_⟩
+  · have hrate := raychaudhuri_rate_at_horizon hfocus hθ0 hσ0
+    have := area_integral_div_sq_tendsto hθc hθ0 hrate
+    simpa using this
+  · have hw := (weighted_integral_div_sq_tendsto hrc).neg
+    have hfun : (fun ε => (-(∫ l in (0:ℝ)..ε, l * r l)) / ε ^ 2)
+        = (fun ε => -((∫ l in (0:ℝ)..ε, l * r l) / ε ^ 2)) := by
+      funext ε; rw [neg_div]
+    rw [hfun]
+    simpa [neg_div] using hw
+
 end QIQTH.ClausiusIntegral
