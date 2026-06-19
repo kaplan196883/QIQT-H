@@ -401,6 +401,13 @@ theorem hasDerivAt_relModFlow' (hσ : σ.PosDef) (hρ : ρ.PosDef) (t₀ : ℝ) 
   rw [(funext hfun : (fun t : ℝ => relModFlow hσ hρ t) = _), hfun t₀]
   exact hasDerivAt_exp_smul_const (Complex.I • relModGen hσ hρ) t₀
 
+/-- **Strong continuity of the modular flow:** `t ↦ Δ_{σ|ρ}^{it}` is continuous — so `Δ^{it}` is a
+    *strongly continuous* one-parameter unitary group (the hypothesis of Stone's theorem), whose
+    generator `i·log Δ` is supplied by `hasDerivAt_relModFlow`.  Immediate from differentiability. -/
+theorem continuous_relModFlow (hσ : σ.PosDef) (hρ : ρ.PosDef) :
+    Continuous (fun t : ℝ => relModFlow hσ hρ t) :=
+  continuous_iff_continuousAt.mpr fun t => (hasDerivAt_relModFlow' hσ hρ t).continuousAt
+
 /-- **The modular flow is a one-parameter group**: `Δ^{i(s+t)} = Δ^{is} · Δ^{it}`. -/
 theorem relModFlow_add (hσ : σ.PosDef) (hρ : ρ.PosDef) (s t : ℝ) :
     relModFlow hσ hρ (s + t) = relModFlow hσ hρ s * relModFlow hσ hρ t := by

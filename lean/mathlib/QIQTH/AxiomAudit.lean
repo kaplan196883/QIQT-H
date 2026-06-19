@@ -2445,6 +2445,7 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Araki.relModFlow_add
 #print axioms QIQTH.Araki.hasDerivAt_relModFlow
 #print axioms QIQTH.Araki.hasDerivAt_relModFlow'
+#print axioms QIQTH.Araki.continuous_relModFlow
 -- expected: standard only — STONE GENERATOR d/dt Δ^{it}|₀ = i·K + FLOW (Heisenberg) EQUATION
 -- d/dt Δ^{it} = Δ^{it}·(i·K) ∀t (K=logΔ=relModGen the modular Hamiltonian). Axiom-free.
 #print axioms QIQTH.Araki.relModFlow_mem_unitary
