@@ -37,12 +37,16 @@ The geometric heart of steps 1–2 is the **Ricci identity** + the **raw Raychau
   `k^σ ∂_σ θ = −(∇_μ k^σ)(∇_σ k^μ) − R_{σρ}k^σ k^ρ`. The `−(∇k)(∇k)` term decomposes into Jacobson's
   `−½θ²−σ²+ω²` (ω=0 hypersurface-orthogonal) — the shear/trace decomposition is optional polish.
 
-## Status / build order
-- ✅ `covDeriv2Vec` (second covariant derivative `∇_μ∇_ν V^ρ`) + `pd_covDerivVec` (the ∂(∇V) product-rule
-  expansion). Axiom-free, builds.
-- NEXT: **`ricci_identity`** (the commutator = Riemann) — the big index computation.
-- THEN: contracted version → `ricci`; geodesic + divergence → raw Raychaudhuri; (optional) shear/trace
-  decomposition to Jacobson's exact `−½θ²−σ²` form.
+## Status / build order — ✅ GEOMETRY OF THE FRONT HALF DONE (axiom-free)
+- ✅ `covDeriv2Vec` + `pd_covDerivVec` — second covariant derivative & its ∂-expansion.
+- ✅ `ricci_identity` — `(∇_μ∇_ν−∇_ν∇_μ)V^ρ = R^ρ_{σμν}V^σ` (Bianchi-scale index computation).
+- ✅ `ricci_identity_contracted` — trace → Ricci, `∑_μ(∇_μ∇_ν−∇_ν∇_μ)V^μ = R_{σν}V^σ`.
+- ✅ `expansion` (θ=∇_μV^μ) + `covDeriv2Vec_trace` (∇ commutes with contraction, `∑_μ∇_ν∇_μV^μ=∂_νθ`).
+- ✅ **`raychaudhuri_focusing`** — `V^ν∂_νθ = Σ V^ν∇_μ∇_νV^μ − R_{σν}V^σV^ν`, the focusing equation with
+  the Ricci term explicit. **Jacobson's focusing step (steps 1–3) is machine-checked.**
+- Plus the contracted Bianchi (step 9) was ALREADY machine-checked (`twice_contracted_bianchi`).
+- OPTIONAL remaining polish: the geodesic Leibniz `Σ V^ν∇_μ∇_νV^μ → −(∇_μV^ν)(∇_νV^μ)` (the `−½θ²−σ²`
+  shear form); pure packaging, the focusing term is already done.
 
 ## Honest scope
 This closes the **geometry** of Jacobson's front half. It does **not** make `Bekenstein+QIQT-H ⟹ GR`
