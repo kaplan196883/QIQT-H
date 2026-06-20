@@ -2151,6 +2151,19 @@ theorem modCharC_of_mem {r : ℝ} (hr : r ∈ Set.Ioo (0 : ℝ) 2) (z : ℂ) :
 /-- On the real axis the complexification recovers `modChar`. -/
 theorem modCharC_ofReal (t : ℝ) (r : ℝ) : modCharC (t : ℂ) r = modChar t r := rfl
 
+/-- **The complexified modular character is an exponential homomorphism in `z`**: `u_{z+w}(r) = u_z(r)·u_w(r)`.
+    On `(0,2)` it is `exp(i(z+w)L) = exp(izL)·exp(iwL)` (`Complex.exp_add`, `L = log((2−r)/r)`); off `(0,2)`
+    both sides are `1`.  This drives the device's `t`-translation `d_{(t:ℂ)+z}(r) = u_t(r)·d_z(r)` — e.g. the
+    bottom-edge factorization `deviceOpC(t−i/2) = Δ^{it}·deviceOpC(−i/2)`. -/
+theorem modCharC_add (z w : ℂ) (r : ℝ) :
+    modCharC (z + w) r = modCharC z r * modCharC w r := by
+  by_cases h : r ∈ Set.Ioo (0 : ℝ) 2
+  · rw [modCharC_of_mem h, modCharC_of_mem h, modCharC_of_mem h, ← Complex.exp_add]
+    congr 1; ring
+  · rw [show modCharC (z + w) r = 1 from Set.piecewise_eq_of_notMem _ _ _ h,
+      show modCharC z r = 1 from Set.piecewise_eq_of_notMem _ _ _ h,
+      show modCharC w r = 1 from Set.piecewise_eq_of_notMem _ _ _ h, one_mul]
+
 /-- **The complexified modular character is entire** in `z` for each fixed `r`. -/
 theorem differentiable_modCharC (r : ℝ) : Differentiable ℂ (fun z => modCharC z r) := by
   by_cases hr : r ∈ Set.Ioo (0 : ℝ) 2

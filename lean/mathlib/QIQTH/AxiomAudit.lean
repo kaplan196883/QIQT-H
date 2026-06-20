@@ -3594,6 +3594,9 @@ namespace QIQTH.AxiomAudit
 -- by its real-axis values F(t) and its KMS-flipped top-edge values F(t+i). This is the analytic heart of
 -- one-particle KMS-uniqueness; the remaining hUniq discharge is the Borchers/Florig group-equality reduction.
 -- MODULAR CHARACTER continuation (StandardSubspaceModularFlow.lean): the modular flow's OWN KMS strip seed.
+#print axioms QIQTH.StandardSubspaceModular.modCharC_add
+-- modCharC_add: u_{z+w}(r)=u_z(r)·u_w(r) (exp homomorphism in z; exp_add on (0,2), 1·1 off it). Drives the
+-- device t-translation d_{(↑t)+z}=u_t·d_z ⇒ bottom-edge factorization deviceOpC(t−i/2)=Δ^{it}·deviceOpC(−i/2).
 #print axioms QIQTH.StandardSubspaceModular.differentiable_modCharC
 #print axioms QIQTH.StandardSubspaceModular.modCharC_kms_flip
 #print axioms QIQTH.StandardSubspaceModular.modCharC_ofReal
