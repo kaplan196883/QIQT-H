@@ -1,6 +1,7 @@
 import QIQTH.StandardSubspaceModularFlow
 import QIQTH.Fock.Localization
 import QIQTH.Fock.OneParticle
+import QIQTH.Fock.SecondQuantModularFlow
 
 /-!
 # One-particle Bisognano–Wichmann — Phase 0: the scalar spectral identity
@@ -277,5 +278,19 @@ theorem oneParticleBW_wedge (m : ℝ)
   intro t x hx
   rw [hVboost t x, hcarrier] at *
   exact boostUnitary_mapsTo_wedgeSubspace m (-(2 * Real.pi * t)) hx
+
+/-! ### The field-level BW: the second-quantized modular flow IS Γ of the boost -/
+
+/-- **★ The field-level Bisognano–Wichmann (functorial lift).**  Once the one-particle BW
+    `modUnitary S t = V t` holds at the isometry level (`hbw`), the second-quantized modular flow
+    `Γ(Δ^{it}) = secondQuantModFlow S t` equals `Γ(V t) = secondQuantPre (V t)` — the field-level
+    modular automorphism IS `Γ` of the boost.  This carries the BW identification from the one-particle
+    space to the Fock/field algebra, the first step of the stress-flux bridge (the field modular
+    Hamiltonian = the field boost generator). -/
+theorem secondQuantModFlow_eq_of_bw {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
+    [CompleteSpace H] {S : StandardSubspace H} (W : ℝ → (H →ₗᵢ[ℂ] H))
+    (hbw : ∀ t, QIQTH.Fock.modUnitaryₗᵢ S t = W t) :
+    ∀ t, QIQTH.Fock.secondQuantModFlow S t = QIQTH.Fock.secondQuantPre (W t) := fun t => by
+  rw [QIQTH.Fock.secondQuantModFlow, hbw t]
 
 end QIQTH.Fock.OneParticleBW
