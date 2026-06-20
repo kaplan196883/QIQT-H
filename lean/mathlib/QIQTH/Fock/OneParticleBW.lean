@@ -308,6 +308,31 @@ theorem hasDerivAt_inner_boostUnitary_imaginary
   rw [hDeq] at hD
   exact hD
 
+/-- **★★★ The `WedgeKMSFlux` boost-charge slot, DERIVED — only the scalar stress-flux identification stays
+    labelled.**  The `hBoostCharge` component of the wedge-KMS bundle (the labelled input of
+    `qiqt_gr_from_wedge_kms`) demands exactly
+    `HasDerivAt (t ↦ ⟪ξ, boostUnitary(−2π t) ξ⟫) (i·(2π/ℏ)·T_kk) 0`.
+    For any smooth wedge state `ξ = f.toLp`, `hasDerivAt_inner_boostUnitary_imaginary` *derives* this — the
+    derivative is `i·(boost energy)` — so the ENTIRE boost-charge slot reduces to the single scalar physics
+    identification `hTkk : (2π/ℏ)·T_kk = boost energy` (the conserved boost Killing charge equals the
+    stress-tensor flux).  This pins the irreducible labelled remainder of input #1 to one real equation —
+    everything operator/analytic is machine-checked.  Axiom-free. -/
+theorem wedge_hBoostCharge_of_smooth
+    (f f' : ℝ → ℂ) (hf2 : MemLp f 2 (volume : Measure ℝ))
+    (hf_int : Integrable f (volume : Measure ℝ))
+    (hF0_int : Integrable (fun θ => (starRingEnd ℂ) (f θ) * f θ) (volume : Measure ℝ))
+    (hf_meas : AEStronglyMeasurable f (volume : Measure ℝ))
+    (hfd : ∀ x, HasDerivAt f (f' x) x)
+    (hf'_meas : AEStronglyMeasurable f' (volume : Measure ℝ))
+    (B : ℝ) (hB : ∀ x, ‖f' x‖ ≤ B) (hbar Tkk : ℝ)
+    (hTkk : 2 * Real.pi / hbar * Tkk
+        = (2 * Real.pi * ∫ θ, (starRingEnd ℂ) (f θ) * f' θ ∂(volume : Measure ℝ)).im) :
+    HasDerivAt
+      (fun t : ℝ => inner ℂ (hf2.toLp f) (boostUnitary (-(2 * Real.pi * t)) (hf2.toLp f)))
+      (Complex.I * ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ)) 0 := by
+  rw [hTkk]
+  exact hasDerivAt_inner_boostUnitary_imaginary f f' hf2 hf_int hF0_int hf_meas hfd hf'_meas B hB
+
 /-- **Invariance engine** (for the boost-invariance of the wedge standard subspace): a continuous
     `ℝ`-linear map `L` that maps a set `W` into itself also maps `closure (span ℝ W)` into itself.
     Applied with `L = boostUnitary a` and `W` = the (boost-closed) wedge generating set, this gives

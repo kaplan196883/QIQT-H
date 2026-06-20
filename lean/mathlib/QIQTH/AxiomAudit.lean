@@ -3478,6 +3478,12 @@ namespace QIQTH.AxiomAudit
 -- Schwarz norm_inner_le_norm + isometry LinearIsometryEquiv.norm_map), equality at 0 (inner_self_eq_norm_mul_norm)
 -- ⇒ Re-correlation has a max at 0 ⇒ IsLocalMax.hasDerivAt_eq_zero ⇒ Re(deriv)=0 ⇒ deriv=I·(deriv.im). So
 -- hBoostCharge is DERIVED for any smooth wedge state; only the stress-tensor identification 2π⟪ξ,pξ⟫=(2π/ℏ)T_kk stays labelled.
+#print axioms QIQTH.Fock.OneParticleBW.wedge_hBoostCharge_of_smooth
+-- expected: standard only — ★★★ the WedgeKMSFlux boost-charge SLOT derived: the bundle's hBoostCharge demand
+-- HasDerivAt(⟪ξ,boostUnitary(−2πt)ξ⟫)(i·(2π/ℏ)T_kk) is, for any smooth wedge state ξ=f.toLp, exactly
+-- hasDerivAt_inner_boostUnitary_imaginary modulo the SINGLE scalar identification hTkk:(2π/ℏ)T_kk=boost energy
+-- (conserved boost Killing charge = stress-tensor flux). So the whole boost-charge slot reduces to ONE real
+-- equation; everything operator/analytic is machine-checked. Pins the irreducible labelled remainder of input #1.
 -- expected: standard only — boostUnitary_eq_vadd: boostUnitary t = DomAddAct.mk(−t)+ᵥ· (the project boost group IS
 -- Mathlib's canonical Lp domain-translation; unitary_apply precomposes with flow(−t) ⇒ ξ(x−t), matches mk(−t)+ᵥξ via
 -- add_comm + Equiv.symm_apply_apply). continuous_boostUnitary_apply: ★ STRONG CONTINUITY t↦boostUnitary t ξ, from
