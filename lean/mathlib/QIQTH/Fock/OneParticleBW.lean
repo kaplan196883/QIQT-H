@@ -3,6 +3,7 @@ import QIQTH.Fock.Localization
 import QIQTH.Fock.OneParticle
 import QIQTH.Fock.SecondQuantModularFlow
 import Mathlib.MeasureTheory.Function.LpSpace.DomAct.Continuous
+import Mathlib.Analysis.Calculus.ParametricIntegral
 
 /-!
 # One-particle Bisognano–Wichmann — Phase 0: the scalar spectral identity
@@ -186,6 +187,72 @@ theorem inner_boostUnitary_toLp (f : ℝ → ℂ) (hf2 : MemLp f 2 (volume : Mea
   show inner ℂ (⇑(hf2.toLp f) θ) (⇑(boostUnitary s (hf2.toLp f)) θ)
       = (starRingEnd ℂ) (f θ) * f (θ - s)
   rw [hbθ, hθ, hθs, RCLike.inner_apply, mul_comm]
+
+/-- **★★ The boost-charge derivative (the analytic core of `hBoostCharge`).**  For a one-particle state
+    `ξ = f.toLp` with `f` smooth enough (differentiable with derivative `f'`, with `f`, `|f|²` integrable and
+    `‖f'‖` globally bounded — all satisfied by any Schwartz / compactly-supported-`C¹` `f`), the boost
+    correlation `t ↦ ⟪ξ, boostUnitary(−2π t) ξ⟫` is differentiable at `0` with derivative
+    `2π·∫ conj(f)·f'`.  This is the **rapidity-momentum expectation** `2π⟪ξ, −i∂_θ ξ⟫` — the boost charge —
+    obtained by differentiating the cross-correlation integral under the integral sign
+    (`hasDerivAt_integral_of_dominated_loc_of_deriv_le`, dominating function `2π·B·|f|`).  Composed with the
+    unitarity fact that this derivative is purely imaginary, it is exactly `hBoostCharge` modulo the single
+    physical identification `2π⟪ξ,pξ⟫ = (2π/ℏ)·T_kk` (the stress tensor).  Axiom-free. -/
+theorem hasDerivAt_inner_boostUnitary_wedge
+    (f f' : ℝ → ℂ) (hf2 : MemLp f 2 (volume : Measure ℝ))
+    (hf_int : Integrable f (volume : Measure ℝ))
+    (hF0_int : Integrable (fun θ => (starRingEnd ℂ) (f θ) * f θ) (volume : Measure ℝ))
+    (hf_meas : AEStronglyMeasurable f (volume : Measure ℝ))
+    (hfd : ∀ x, HasDerivAt f (f' x) x)
+    (hf'_meas : AEStronglyMeasurable f' (volume : Measure ℝ))
+    (B : ℝ) (hB : ∀ x, ‖f' x‖ ≤ B) :
+    HasDerivAt
+      (fun t : ℝ => inner ℂ (hf2.toLp f) (boostUnitary (-(2 * Real.pi * t)) (hf2.toLp f)))
+      (2 * Real.pi * ∫ θ, (starRingEnd ℂ) (f θ) * f' θ ∂(volume : Measure ℝ)) 0 := by
+  have hcorr : (fun t : ℝ => inner ℂ (hf2.toLp f) (boostUnitary (-(2 * Real.pi * t)) (hf2.toLp f)))
+      = fun t : ℝ => ∫ θ, (starRingEnd ℂ) (f θ) * f (θ + 2 * Real.pi * t) ∂(volume : Measure ℝ) := by
+    funext t
+    rw [inner_boostUnitary_toLp f hf2 (-(2 * Real.pi * t))]
+    simp only [sub_neg_eq_add]
+  rw [hcorr]
+  have hconj : AEStronglyMeasurable (fun θ => (starRingEnd ℂ) (f θ)) (volume : Measure ℝ) :=
+    Complex.continuous_conj.comp_aestronglyMeasurable hf_meas
+  set F : ℝ → ℝ → ℂ := fun t θ => (starRingEnd ℂ) (f θ) * f (θ + 2 * Real.pi * t) with hF
+  set F' : ℝ → ℝ → ℂ :=
+    fun t θ => (starRingEnd ℂ) (f θ) * ((2 * Real.pi : ℝ) • f' (θ + 2 * Real.pi * t)) with hF'
+  have key := (hasDerivAt_integral_of_dominated_loc_of_deriv_le (𝕜 := ℝ) (x₀ := (0 : ℝ))
+    (F := F) (F' := F') (bound := fun θ => 2 * Real.pi * B * ‖f θ‖)
+    (s := Set.univ) Filter.univ_mem
+    (Filter.Eventually.of_forall (fun t => hconj.mul
+      (hf_meas.comp_quasiMeasurePreserving
+        (measurePreserving_add_right volume (2 * Real.pi * t)).quasiMeasurePreserving)))
+    (by simpa only [hF, mul_zero, add_zero] using hF0_int)
+    (hconj.mul ((hf'_meas.comp_quasiMeasurePreserving
+        (measurePreserving_add_right volume (2 * Real.pi * 0)).quasiMeasurePreserving).const_smul
+        (2 * Real.pi : ℝ)))
+    (Filter.Eventually.of_forall (fun θ x _ => ?_))
+    (hf_int.norm.const_mul (2 * Real.pi * B))
+    (Filter.Eventually.of_forall (fun θ x _ => ?_))).2
+  · have hvaleq : (∫ θ, F' 0 θ ∂(volume : Measure ℝ))
+        = 2 * Real.pi * ∫ θ, (starRingEnd ℂ) (f θ) * f' θ ∂(volume : Measure ℝ) := by
+      have hpt : (fun θ => F' 0 θ)
+          = fun θ => ((2 * Real.pi : ℝ) : ℂ) * ((starRingEnd ℂ) (f θ) * f' θ) := by
+        funext θ; simp only [hF', mul_zero, add_zero, Complex.real_smul]; ring
+      rw [hpt, integral_const_mul]; push_cast; ring
+    rw [← hvaleq]; exact key
+  · rw [hF', norm_mul, RCLike.norm_conj, norm_smul, Real.norm_eq_abs,
+      abs_of_nonneg (by positivity : (0:ℝ) ≤ 2 * Real.pi)]
+    calc ‖f θ‖ * (2 * Real.pi * ‖f' (θ + 2 * Real.pi * x)‖)
+        ≤ ‖f θ‖ * (2 * Real.pi * B) := by
+          apply mul_le_mul_of_nonneg_left _ (norm_nonneg _)
+          exact mul_le_mul_of_nonneg_left (hB _) (by positivity)
+      _ = 2 * Real.pi * B * ‖f θ‖ := by ring
+  · rw [hF, hF']
+    have hlin : HasDerivAt (fun t : ℝ => θ + 2 * Real.pi * t) (2 * Real.pi) x := by
+      simpa using ((hasDerivAt_id x).const_mul (2 * Real.pi)).const_add θ
+    have hcomp : HasDerivAt (fun t : ℝ => f (θ + 2 * Real.pi * t))
+        ((2 * Real.pi : ℝ) • f' (θ + 2 * Real.pi * x)) x :=
+      (hfd (θ + 2 * Real.pi * x)).scomp x hlin
+    exact hcomp.const_mul ((starRingEnd ℂ) (f θ))
 
 /-- **Invariance engine** (for the boost-invariance of the wedge standard subspace): a continuous
     `ℝ`-linear map `L` that maps a set `W` into itself also maps `closure (span ℝ W)` into itself.

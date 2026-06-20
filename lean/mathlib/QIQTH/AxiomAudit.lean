@@ -3463,6 +3463,14 @@ namespace QIQTH.AxiomAudit
 -- coefficient ⟪f.toLp, boostUnitary s (f.toLp)⟫ = ∫ conj(f θ)·f(θ−s) dθ — the inner-product-to-integral bridge
 -- (L2.inner_def + MemLp.coeFn_toLp + coeFn_boostUnitary + measure-preserving shift) turning the abstract boost
 -- correlation into an analyzable cross-correlation integral. Setup for the boost-charge derivative (→ hBoostCharge).
+#print axioms QIQTH.Fock.OneParticleBW.hasDerivAt_inner_boostUnitary_wedge
+-- expected: standard only — ★★ THE BOOST-CHARGE DERIVATIVE (analytic core of hBoostCharge). For ξ=f.toLp with f
+-- smooth enough (differentiable f', f & |f|² integrable, ‖f'‖≤B — all satisfied by any Schwartz/C¹-compact-support
+-- f), d/dt⟪ξ,boostUnitary(−2πt)ξ⟫|₀ = 2π·∫conj(f)·f' = the RAPIDITY-MOMENTUM expectation 2π⟪ξ,−i∂_θξ⟫ (the boost
+-- charge). Differentiation under the integral (hasDerivAt_integral_of_dominated_loc_of_deriv_le, dominating fn
+-- 2π·B·|f|) on the bridge integral; chain rule via HasDerivAt.scomp (ℝ→ℂ). So hBoostCharge's ANALYTIC content is
+-- DERIVED; with unitarity (derivative purely imaginary) it is hBoostCharge modulo only 2π⟪ξ,pξ⟫=(2π/ℏ)T_kk (stress
+-- tensor). Mathlib has NO Stone's theorem for unitary groups (checked), so this direct H¹ route is the grounding.
 -- expected: standard only — boostUnitary_eq_vadd: boostUnitary t = DomAddAct.mk(−t)+ᵥ· (the project boost group IS
 -- Mathlib's canonical Lp domain-translation; unitary_apply precomposes with flow(−t) ⇒ ξ(x−t), matches mk(−t)+ᵥξ via
 -- add_comm + Equiv.symm_apply_apply). continuous_boostUnitary_apply: ★ STRONG CONTINUITY t↦boostUnitary t ξ, from
