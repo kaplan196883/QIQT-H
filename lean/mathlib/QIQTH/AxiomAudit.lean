@@ -3552,6 +3552,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the mollifier error form η_n−η = √(n/π)•∫ e^{−n t²}•(V_t η−η) dt (subtract the
 -- normalised constant η=√(n/π)•∫e^{−n t²}•η; integral_sub + integral_smul_const + the normalization). Setup for
 -- the density η_n→η (Gaussian concentrates at t=0 where V_t η→η by strong continuity).
+#print axioms QIQTH.StandardSubspaceModular.entireVec_sub_norm_le
+-- expected: standard only — ‖η_n−η‖ ≤ √(n/π)·∫ e^{−n t²}·‖V_t η−η‖ dt (norm_integral_le_integral_norm on the
+-- mollifier form), reducing the VECTOR density to a SCALAR Gaussian-mollifier limit of t↦‖V_t η−η‖ (bounded,
+-- continuous, =0 at t=0). The convergence of that scalar mollifier is the remaining density brick.
 -- expected: standard only — gaussSmear V n η = ∫ e^{−n t²}•V_t η dt. gaussSmear_integrable: Bochner-integrable
 -- (dominated by the Gaussian e^{−n t²}·‖η‖ via integrable_exp_neg_mul_sq, V_t norm-non-increasing + orbit
 -- continuous). gaussSmear_mem_K: ★ the smeared vector lands in the real subspace K — the ℝ-linear projection

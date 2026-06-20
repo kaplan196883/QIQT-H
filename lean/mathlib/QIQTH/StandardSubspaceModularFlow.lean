@@ -1404,6 +1404,22 @@ theorem entireVec_sub {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η :
       funext (fun t => smul_sub _ _ _),
     integral_sub hint1 hint2, smul_sub, ← hη]
 
+open MeasureTheory in
+/-- **The density error bound** `‖η_n − η‖ ≤ √(n/π)·∫ e^{−n t²}·‖V_t η − η‖ dt`.  Reduces the vector density
+    to a *scalar* Gaussian-mollifier limit of `t ↦ ‖V_t η − η‖`, a bounded continuous function vanishing at
+    `t = 0` (`V_0 η = η` + strong continuity).  From `entireVec_sub` + `norm_integral_le_integral_norm`. -/
+theorem entireVec_sub_norm_le {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖) :
+    ‖entireVec V n η - η‖
+      ≤ Real.sqrt (n / Real.pi) * ∫ t : ℝ, Real.exp (-n * t ^ 2) * ‖V t η - η‖ := by
+  rw [entireVec_sub hn η hcont hbd, norm_smul, Real.norm_eq_abs,
+    abs_of_nonneg (Real.sqrt_nonneg _)]
+  refine mul_le_mul_of_nonneg_left ((norm_integral_le_integral_norm _).trans (le_of_eq ?_))
+    (Real.sqrt_nonneg _)
+  refine integral_congr_ae (Filter.Eventually.of_forall (fun t => ?_))
+  show ‖Real.exp (-n * t ^ 2) • (V t η - η)‖ = Real.exp (-n * t ^ 2) * ‖V t η - η‖
+  rw [norm_smul, Real.norm_eq_abs, abs_of_pos (Real.exp_pos _)]
+
 /-! ### Analytic continuation of the modular character to the KMS strip
 
 The modular character `u_t(r) = exp(i·t·log((2−r)/r))` continues to an entire function of a *complex*
