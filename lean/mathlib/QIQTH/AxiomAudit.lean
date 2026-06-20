@@ -3747,6 +3747,15 @@ namespace QIQTH.AxiomAudit
 -- V and Δ^{it}=modUnitary both preserve 𝒦 AND both satisfy ⟨w,·_t η⟩=⟨w,η⟩ ∀η∈𝒦,∀w⊥i𝒦 ⇒ Δ^{it}=V_t.
 -- ⟨w,Δ^{it}η⟩=⟨w,η⟩=⟨w,V_t η⟩ + both∈𝒦 ⇒ (eq_of_mem_K_of_inner_perp_IK, IsSeparating) Δ^{it}η=V_t η on 𝒦 ⇒
 -- (clm_eq_of_eqOn_K, IsCyclic) Δ^{it}=V_t. Orbit identities = output of the KMS chain; 𝒦-inv = hUniq hyp.
+-- ⚠ FRAMEWORK CAVEAT (2026-06-21, honest correction): these corrC FULL-strip "orbit-identity" lemmas
+-- (corrC_orbit_eq_of_kms_function, corrC_orbit_eq_of_edges_real, corrC_eq_at_real_of_const,
+-- modUnitary_eq_of_orbit_inner, orbit_inner_eq_of_entire) MIS-MODEL RvD Thm 3.8. They are individually-correct
+-- CONDITIONAL theorems, but their top-edge hypothesis (corrC_top_edge_real_of_kms_match's "real top edge on
+-- Im=1") is UNSATISFIABLE for nontrivial V: the chain's conclusion ⟨w,V_t smear⟩=⟨w,smear⟩ ∀w⊥i𝒦 forces
+-- V_t=id (⊥(i𝒦)^⊥ ⇒ ∈i𝒦; ∈𝒦; 𝒦∩i𝒦=0), FALSE for Δ^{it}. RvD instead uses the HALF-strip {−1/2≤Im≤0} +
+-- half-shift Δ^{1/2}=J (g(t−i/2)=⟨h,Jξ⟩, (2−R)^{½}ζ=Jξ) + KMS-matching that brings Δ in. So the hUniq
+-- discharge does NOT go through via this chain; a faithful redo needs the half-strip + J-twisted w + R^{−½}
+-- device. The J-algebra (J𝒦=(i𝒦)^⊥ etc.), entire vectors, Hadamard one-edge, StripUniqueness are UNAFFECTED.
 #print axioms QIQTH.StandardSubspaceModular.orbit_inner_eq_of_entire
 -- expected: standard only — ★★ DENSITY EXTENSION: ⟨w,V_t(gaussSmear V n η)⟩=⟨w,gaussSmear V n η⟩ ∀n>0 ⇒
 -- ⟨w,V_t η⟩=⟨w,η⟩. Scale by √(n/π) to entireVec, entireVec_tendsto (→η) + continuity of V_t,⟨w,·⟩. Resolves
