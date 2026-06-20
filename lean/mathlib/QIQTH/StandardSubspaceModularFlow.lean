@@ -759,6 +759,35 @@ theorem inner_real_of_mem_K_perp_IK (S : StandardSubspace H) {x y : H}
     rw [← ContinuousLinearMap.star_eq_adjoint]; exact projIK_isSelfAdjoint S
   rw [← hmem, ← hadj, ContinuousLinearMap.adjoint_inner_left, hy, inner_zero_right]
 
+/-- **Totality of `(i𝒦)^⊥` against `𝒦`** (RvD Theorem 3.8 closeout): two vectors of `𝒦` with equal
+    inner products against *every* `w ⊥ i𝒦` (`projIK w = 0`) are equal.  Their difference `d ∈ 𝒦` is
+    orthogonal to all of `(i𝒦)^⊥`: taking `w = d − Q d ∈ (i𝒦)^⊥` gives `‖d − Q d‖² = Re⟨w, d⟩ = 0`, so
+    `d = Q d ∈ i𝒦`; then `d ∈ 𝒦 ⊓ i𝒦 = {0}` (`IsSeparating`).  This is the totality step: combined with
+    `orbit_inner_eq_of_entire` for `V` and `Δ^{it}` (both giving `⟨w, ·_t η⟩ = ⟨w, η⟩`) it yields
+    `V_t η = Δ^{it} η` on `𝒦`. -/
+theorem eq_of_mem_K_of_inner_perp_IK (S : StandardSubspace H) {a b : H}
+    (ha : projK S a = a) (hb : projK S b = b)
+    (h : ∀ w, projIK S w = 0 → inner ℂ w a = inner ℂ w b) : a = b := by
+  rw [← sub_eq_zero]
+  have hperp : projIK S ((a - b) - projIK S (a - b)) = 0 := by
+    rw [map_sub, ← ContinuousLinearMap.mul_apply, (projIK_idem S).eq, sub_self]
+  have hcr : inner ℝ ((a - b) - projIK S (a - b)) (a - b) = 0 := by
+    show (inner ℂ ((a - b) - projIK S (a - b)) (a - b)).re = 0
+    rw [inner_sub_right, h _ hperp, sub_self, Complex.zero_re]
+  have horth : inner ℝ ((a - b) - projIK S (a - b)) (projIK S (a - b)) = 0 :=
+    Submodule.inner_left_of_mem_orthogonal (Submodule.starProjection_apply_mem _ (a - b))
+      (Submodule.sub_starProjection_mem_orthogonal (a - b))
+  have hnorm : inner ℝ ((a - b) - projIK S (a - b)) ((a - b) - projIK S (a - b)) = 0 := by
+    rw [inner_sub_right, hcr, horth, sub_zero]
+  have hw0 : (a - b) - projIK S (a - b) = 0 := inner_self_eq_zero.mp hnorm
+  have hiK : (a - b) ∈ S.toClosedSubmodule.mulI := by
+    have hd : a - b = projIK S (a - b) := by rw [sub_eq_zero] at hw0; exact hw0
+    rw [hd]; exact (mem_toSubmodule_iff _ _).mp (Submodule.starProjection_apply_mem _ (a - b))
+  have hK : (a - b) ∈ S.toClosedSubmodule := by
+    have hpk : projK S (a - b) = a - b := by rw [map_sub, ha, hb]
+    rw [← hpk]; exact (mem_toSubmodule_iff _ _).mp (Submodule.starProjection_apply_mem _ (a - b))
+  exact ClosedSubmodule.mem_bot.mp (by rw [← S.IsSeparating]; exact ⟨hK, hiK⟩)
+
 /-! ### `cfcCont` — the continuous-function bounded FC of `R`, bundled for Stone–Weierstrass
 
 `U_t = u_t(R)` is discontinuous at the spectral endpoints `r = 0, 2`, but `U_t·A` with `A = R(2−R)`

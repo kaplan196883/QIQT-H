@@ -3616,6 +3616,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.corrC_ofReal
 -- expected: standard only — real-axis value corrC ξ V n η ↑s = ⟨ξ,V_s(gaussSmear V n η)⟩: on ℝ the
 -- correlation is the genuine matrix element of the flow (gaussSmearC_ofReal). Boundary data for Thm 3.8.
+#print axioms QIQTH.StandardSubspaceModular.eq_of_mem_K_of_inner_perp_IK
+-- expected: standard only — ★★ TOTALITY/⊥-TO-EQUALITY (RvD Thm 3.8 closeout): a,b∈𝒦 with ⟨w,a⟩=⟨w,b⟩ ∀w⊥i𝒦
+-- (projIK w=0) ⇒ a=b. d=a−b∈𝒦 ⊥ all (i𝒦)^⊥: w=d−Qd gives ‖d−Qd‖²=Re⟨w,d⟩=0 ⇒ d=Qd∈i𝒦; d∈𝒦⊓i𝒦=⊥
+-- (IsSeparating). With orbit_inner_eq_of_entire for V and Δ^{it} (both ⟨w,·_t η⟩=⟨w,η⟩) ⇒ V_t η=Δ^{it}η on 𝒦.
 #print axioms QIQTH.StandardSubspaceModular.corrC_real_on_axis
 -- expected: standard only — ★ g REAL ON THE REAL AXIS (RvD Thm 3.8 step 4): with w⊥i𝒦 (projIK w=0) and the
 -- orbit V_t(gaussSmear) staying in 𝒦, corrC w V n η ↑t = ⟨w,V_t(smear)⟩ is real ∀t (conj of the 𝒦–(i𝒦)^⊥
