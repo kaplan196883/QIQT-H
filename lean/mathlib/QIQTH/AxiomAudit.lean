@@ -3787,6 +3787,16 @@ namespace QIQTH.AxiomAudit
 -- The J-twisted faithful replacement for the discredited full-strip corrC_real_on_axis@generic-w. Resolves the
 -- paradox: J𝒦=(i𝒦)^{⊥ℝ} is REAL-orthogonal, so ⟨v,Jξ⟩=0∀ξ does NOT give v∈i𝒦; consistent conclusion is the
 -- U-vs-Δ comparison (modUnitary_eq_of_orbit_compare), shared constant ⟨η,Jξ⟩ cancelling between U and Δ sides.
+#print axioms QIQTH.StandardSubspaceModular.clm_eq_of_inner_self_eq
+-- expected: standard only — ★★ POLARIZATION BRIDGE (non-vacuous discharge closeout): over ℂ, ⟨Aξ,ξ⟩=⟨Bξ,ξ⟩ ∀ξ
+-- ⇒ A=B. Apply inner_map_self_eq_zero to A−B (⟨(A−B)ξ,ξ⟩=0 ∀ξ ⇒ (A−B).toLinearMap=0). Converts the SCALAR
+-- diagonal-correlation equality that strip-uniqueness (modCorrExt vs a KMS competitor) delivers into the
+-- OPERATOR identity Δ^{it}=V_t. The correct, non-vacuous closeout (vs the discredited corrC(Jξ) constancy route).
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_eq_of_diag_corr
+-- expected: standard only — ★ DIAGONAL-CORRELATION RvD Thm 3.8 CLOSEOUT: ⟨ξ,V ξ⟩=⟨ξ,Δ^{it}ξ⟩ ∀ξ ⇒ V=Δ^{it}
+-- (modCorrExt convention, ξ first slot; conjugate both sides + clm_eq_of_inner_self_eq). The operator-level
+-- target of modCorrExt_eq_of_boundary: once a KMS competitor's correlation is pinned to the Δ-side modCorrExt
+-- on the strip (hence on the real axis ⟨ξ,V_tξ⟩=⟨ξ,Δ^{it}ξ⟩), this gives V_t=Δ^{it}.
 #print axioms QIQTH.StandardSubspaceModular.corrJ_bottom_edge_real_of_kms
 -- expected: standard only — ⚠⚠ VACUOUS PREMISE (honest correction 2026-06-21, total honesty). True conditional,
 -- but its hypothesis (a bdd-holo f matching g=corrC(Jξ) on the real axis AND real on the bottom edge Im=−1/2)

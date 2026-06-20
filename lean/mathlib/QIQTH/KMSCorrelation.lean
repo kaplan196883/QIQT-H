@@ -304,6 +304,35 @@ theorem modUnitary_eq_of_orbit_compare (S : StandardSubspace H) {V : ℝ → (H 
   exact eq_of_mem_K_of_inner_perp_IK S ((mem_K_iff_projK S _).mp (hΔK η hη))
     ((mem_K_iff_projK S _).mp (hVK η hη)) (fun w hw => (hcompare η hη w hw).symm)
 
+/-- **Polarization bridge: diagonal quadratic forms pin a bounded operator** (final step of the
+    *diagonal-correlation* route to the `hUniq` discharge).  Over `ℂ`, two bounded operators with equal
+    diagonal forms `⟨ξ, A ξ⟩ = ⟨ξ, B ξ⟩` for all `ξ` are equal — the polarization identity packaged as
+    `inner_map_self_eq_zero` applied to `A − B`.  This converts the SCALAR correlation equality that
+    strip-uniqueness delivers (`modCorrExt`, the `Δ`-side `⟨ξ, Δ^{iz} ξ⟩`, against a competitor's KMS
+    extension `F`) into the operator identity `Δ^{it} = V_t`.  Unlike the discredited `corrC(Jξ)` constancy
+    route, this bridge is non-vacuous: it is the standard, correct closeout once the diagonal correlations
+    `⟨ξ, V_t ξ⟩ = ⟨ξ, Δ^{it} ξ⟩` are shown equal for every `ξ`. -/
+theorem clm_eq_of_inner_self_eq {A B : H →L[ℂ] H}
+    (h : ∀ ξ : H, inner ℂ (A ξ) ξ = inner ℂ (B ξ) ξ) : A = B := by
+  have key : ∀ ξ : H, inner ℂ ((A - B) ξ) ξ = 0 := by
+    intro ξ
+    rw [ContinuousLinearMap.sub_apply, inner_sub_left, h ξ, sub_self]
+  have h0 : (A - B).toLinearMap = 0 := (inner_map_self_eq_zero _).mp key
+  ext x
+  exact sub_eq_zero.mp (by simpa using LinearMap.congr_fun h0 x)
+
+/-- **Diagonal-correlation form of the RvD Theorem 3.8 closeout**: if the modular correlations agree,
+    `⟨ξ, V_t ξ⟩ = ⟨ξ, Δ^{it} ξ⟩` for every `ξ`, then `V_t = Δ^{it}` (stated with `ξ` in the first slot, the
+    `modCorrExt` convention).  This is the operator-level conclusion that the `modCorrExt` strip-uniqueness
+    comparison (`modCorrExt_eq_of_boundary`) targets: once a KMS competitor's correlation is forced to equal
+    the `Δ`-side `modCorrExt` on the whole strip — in particular on the real axis — this upgrades the scalar
+    equality to the operator identity (`clm_eq_of_inner_self_eq` after conjugating both sides). -/
+theorem modUnitary_eq_of_diag_corr (S : StandardSubspace H) {V : H →L[ℂ] H} (t : ℝ)
+    (h : ∀ ξ : H, inner ℂ ξ (V ξ) = inner ℂ ξ (modUnitary S t ξ)) : V = modUnitary S t := by
+  refine clm_eq_of_inner_self_eq (fun ξ => ?_)
+  have hc := congrArg (starRingEnd ℂ) (h ξ)
+  rwa [inner_conj_symm, inner_conj_symm] at hc
+
 /-- **Faithful RvD `g`-function, top-edge reality** (RvD Thm 3.8, *p. 198*, the "`g(t) = ⟨U_t η, Jξ⟩` is
     real" step — verified against the clean PDF text, not the earlier garbled scan).  The genuine RvD
     half-strip function is `g(z) = ⟨Jξ, h(z)⟩` with the vector `Jξ = modConj S ξ` for `ξ ∈ 𝒦`.  RvD write
