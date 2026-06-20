@@ -1513,6 +1513,66 @@ theorem entireVec_tendsto {V : ℝ → (H →L[ℂ] H)} (η : H)
   filter_upwards [eventually_gt_atTop (0 : ℝ)] with n hn
   exact entireVec_sub_norm_le hn η hcont hbd
 
+/-! ### The complex orbit of an entire vector (toward RvD Theorem 3.8 operator assembly)
+
+The smeared vector `gaussSmear V n η` is *entire* for `V`: the orbit `s ↦ V_s(gaussSmear V n η)`,
+which on the real axis equals `∫ e^{−n(u−s)²}·V_u η du` (change of variables in `gaussSmear_smul_left`),
+extends to a holomorphic `H`-valued function of a **complex** time `z` because the Gaussian kernel
+`e^{−n(u−z)²}` is entire in `z` and damps the orbit.  This `gaussSmearC` is the analytic continuation;
+on the KMS strip it makes the correlation `z ↦ ⟨gaussSmearC … z, η'⟩` holomorphic, which (with
+`StripUniqueness`) is what forces `U_t = Δ^{it}` in `hUniq`. -/
+
+open MeasureTheory in
+/-- The **complex orbit** of the smeared vector: `G(z) = ∫ e^{−n(u−z)²}·V_u η du`, an `H`-valued function
+    of complex time `z`.  On the real axis it is `V_s(gaussSmear V n η)`; it is entire in `z`. -/
+noncomputable def gaussSmearC (V : ℝ → (H →L[ℂ] H)) (n : ℝ) (η : H) (z : ℂ) : H :=
+  ∫ u : ℝ, Complex.exp (-(n : ℂ) * ((u : ℂ) - z) ^ 2) • V u η
+
+open MeasureTheory in
+/-- The complex-orbit integrand is Bochner-integrable for every fixed `z`: dominated by the shifted Gaussian
+    `e^{n·(Im z)²}·e^{−n(u−Re z)²}·‖η‖` (since `Re(−n(u−z)²) = −n(u−Re z)² + n(Im z)²`). -/
+theorem gaussSmearC_integrable {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖) (z : ℂ) :
+    Integrable (fun u : ℝ => Complex.exp (-(n : ℂ) * ((u : ℂ) - z) ^ 2) • V u η) := by
+  have hscal : Continuous (fun u : ℝ => Complex.exp (-(n : ℂ) * ((u : ℂ) - z) ^ 2)) := by fun_prop
+  refine Integrable.mono'
+    (((integrable_exp_neg_mul_sq hn).comp_sub_right z.re).mul_const
+      (Real.exp (n * z.im ^ 2) * ‖η‖))
+    (hscal.smul hcont).aestronglyMeasurable ?_
+  filter_upwards with u
+  have hre : (-(n : ℂ) * ((u : ℂ) - z) ^ 2).re = -n * (u - z.re) ^ 2 + n * z.im ^ 2 := by
+    simp only [pow_two, Complex.mul_re, Complex.mul_im, Complex.neg_re, Complex.neg_im,
+      Complex.sub_re, Complex.sub_im, Complex.ofReal_re, Complex.ofReal_im]
+    ring
+  rw [norm_smul, Complex.norm_exp, hre, Real.exp_add]
+  calc Real.exp (-n * (u - z.re) ^ 2) * Real.exp (n * z.im ^ 2) * ‖V u η‖
+      ≤ Real.exp (-n * (u - z.re) ^ 2) * Real.exp (n * z.im ^ 2) * ‖η‖ :=
+        mul_le_mul_of_nonneg_left (hbd u) (by positivity)
+    _ = Real.exp (-n * (u - z.re) ^ 2) * (Real.exp (n * z.im ^ 2) * ‖η‖) := by ring
+
+open MeasureTheory in
+/-- **Real-axis agreement** `gaussSmearC V n η ↑s = V_s(gaussSmear V n η)`.  On the real axis the complex
+    orbit reduces to the genuine unitary-group orbit of the smeared vector: the complex Gaussian kernel
+    `e^{−n(u−s)²}` collapses to its real value and, after the translation `u = s + t`, equals
+    `∫ e^{−n t²}·V_{s+t} η dt = V_s(gaussSmear V n η)` (`gaussSmear_smul_left`).  This anchors the entire
+    extension `gaussSmearC` to the actual flow `V`. -/
+theorem gaussSmearC_ofReal {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hgrp : ∀ s t, V s (V t η) = V (s + t) η) (s : ℝ) :
+    gaussSmearC V n η (s : ℂ) = V s (gaussSmear V n η) := by
+  rw [gaussSmear_smul_left hn η hcont hbd hgrp s, gaussSmearC]
+  have hcoe : ∀ u : ℝ, Complex.exp (-(n : ℂ) * ((u : ℂ) - (s : ℂ)) ^ 2) • V u η
+      = Real.exp (-n * (u - s) ^ 2) • V u η := by
+    intro u
+    rw [show (-(n : ℂ) * ((u : ℂ) - (s : ℂ)) ^ 2) = ((-n * (u - s) ^ 2 : ℝ) : ℂ) by push_cast; ring,
+      ← Complex.ofReal_exp, ← algebraMap_smul ℂ (Real.exp (-n * (u - s) ^ 2)) (V u η),
+      Complex.coe_algebraMap]
+  simp_rw [hcoe]
+  rw [← integral_add_left_eq_self (fun u : ℝ => Real.exp (-n * (u - s) ^ 2) • V u η) s]
+  refine integral_congr_ae (Filter.Eventually.of_forall (fun t => ?_))
+  show Real.exp (-n * (s + t - s) ^ 2) • V (s + t) η = Real.exp (-n * t ^ 2) • V (s + t) η
+  rw [add_sub_cancel_left]
+
 /-! ### Analytic continuation of the modular character to the KMS strip
 
 The modular character `u_t(r) = exp(i·t·log((2−r)/r))` continues to an entire function of a *complex*

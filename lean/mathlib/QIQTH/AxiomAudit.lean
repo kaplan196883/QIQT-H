@@ -3576,6 +3576,15 @@ namespace QIQTH.AxiomAudit
 -- 0 ≤ ‖η_n−η‖ ≤ √(n/π)∫e^{−nt²}‖V_t η−η‖ → ‖V_0 η−η‖=0 (entireVec_sub_norm_le + gauss_density_tendsto on
 -- t↦‖V_t η−η‖, bounded by 2‖η‖). With entireVec_mem_K ⇒ entire vectors DENSE in K — the totality input
 -- for RvD Theorem 3.8 KMS-uniqueness (hUniq). The analytic density backbone is now COMPLETE.
+#print axioms QIQTH.StandardSubspaceModular.gaussSmearC_integrable
+-- expected: standard only — the COMPLEX ORBIT gaussSmearC V n η z = ∫ e^{−n((u)−z)²}•V_u η du (H-valued,
+-- complex time z) is Bochner-integrable ∀z: dominated by e^{n(Im z)²}·e^{−n(u−Re z)²}·‖η‖
+-- (Re(−n(u−z)²)=−n(u−Re z)²+n(Im z)², shifted Gaussian via integrable_exp_neg_mul_sq.comp_sub_right).
+#print axioms QIQTH.StandardSubspaceModular.gaussSmearC_ofReal
+-- expected: standard only — ★ REAL-AXIS AGREEMENT gaussSmearC V n η ↑s = V_s(gaussSmear V n η): the complex
+-- orbit restricted to ℝ is the genuine unitary-group orbit of the smeared vector (complex kernel collapses
+-- to real e^{−n(u−s)²}, translation u=s+t via integral_add_left_eq_self + gaussSmear_smul_left). Anchors the
+-- entire extension gaussSmearC to the actual flow V — toward the RvD Thm 3.8 operator assembly.
 -- expected: standard only — gaussSmear V n η = ∫ e^{−n t²}•V_t η dt. gaussSmear_integrable: Bochner-integrable
 -- (dominated by the Gaussian e^{−n t²}·‖η‖ via integrable_exp_neg_mul_sq, V_t norm-non-increasing + orbit
 -- continuous). gaussSmear_mem_K: ★ the smeared vector lands in the real subspace K — the ℝ-linear projection
