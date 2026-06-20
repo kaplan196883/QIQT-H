@@ -13,6 +13,7 @@ All results axiom-free (standard three only).
 -/
 import QIQTH.StandardSubspaceModularFlow
 import QIQTH.StripUniqueness
+import QIQTH.ModularRelativeEntropy
 
 namespace QIQTH.StandardSubspaceModular
 
@@ -141,5 +142,26 @@ theorem operator_ext_inner_dense {A B : H →L[ℂ] H} {Dw Dx : Set H}
   apply DFunLike.coe_injective
   exact Continuous.ext_on hDx A.continuous B.continuous
     (fun x hx => key (A x) (B x) (fun w hw => h w hw x hx))
+
+/-- **The Δ-side modular correlation is pinned by its boundary data** (RvD Theorem 3.8, the comparison
+    target).  In the regular spectral regime `σ(R) ⊆ [a, 2−a]`, the strip extension `modCorrExt S ξ`
+    (`= ⟨ξ, Δ^{it} ξ⟩` continued to the KMS strip) is bounded-holomorphic (`diffContOnCl_modCorrExt`,
+    `modCorrExt_norm_le`); hence any competitor `F` that is bounded-holomorphic on the strip and shares
+    `modCorrExt`'s real-axis values *and* its KMS top-edge values coincides with it on the whole closed
+    strip.  This is the concrete RvD comparison: the modular correlation, and any KMS competitor's, are
+    pinned by the same two edges — the `Δ`-side dual of `corrC_eqOn_strip_of_boundary_eq`. -/
+theorem modCorrExt_eq_of_boundary (S : StandardSubspace H) (ξ : H) {a : ℝ} (ha0 : 0 < a) (ha1 : a ≤ 1)
+    (hspec : ∀ ω : spectrum ℝ (rvdRC S),
+      a ≤ (ω : spectrum ℝ (rvdRC S)).val ∧ (ω : spectrum ℝ (rvdRC S)).val ≤ 2 - a)
+    {F : ℂ → ℂ} {M : ℝ} (hF : DiffContOnCl ℂ F StripUniqueness.kmsStripOpen)
+    (hFb : ∀ z ∈ StripUniqueness.kmsStripOpen, ‖F z‖ ≤ M)
+    (hreal : ∀ t : ℝ, F (t : ℂ) = modCorrExt S ξ (t : ℂ))
+    (htop : ∀ t : ℝ, F ((t : ℂ) + Complex.I) = modCorrExt S ξ ((t : ℂ) + Complex.I)) :
+    Set.EqOn F (modCorrExt S ξ) StripUniqueness.kmsStrip := by
+  refine StripUniqueness.kms_correlation_boundary_determined (M := max M ((2 - a) / a * ‖ξ‖ ^ 2))
+    hF (diffContOnCl_modCorrExt S ξ ha0 ha1 hspec)
+    (fun z hz => le_trans (hFb z hz) (le_max_left _ _)) (fun z hz => ?_) hreal htop
+  simp only [StripUniqueness.kmsStripOpen, Set.mem_preimage, Set.mem_Ioo] at hz
+  exact le_trans (modCorrExt_norm_le S ξ ha0 ha1 hspec (le_of_lt hz.1) (le_of_lt hz.2)) (le_max_right _ _)
 
 end QIQTH.StandardSubspaceModular

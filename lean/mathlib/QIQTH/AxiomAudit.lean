@@ -3658,6 +3658,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ STEP 6e WIRING: continuous A,B with ⟨w,A x⟩=⟨w,B x⟩ for w in dense Dw + x in
 -- dense Dx ⇒ A=B (ext_inner_left over dense Dw, then Continuous.ext_on over dense Dx). The final operator-
 -- equality step: Dw=total {J(2−R)^½R^{−½}ζ}, Dx=dense entire vectors, equality=corrC_orbit_eq_of_edges_real.
+#print axioms QIQTH.StandardSubspaceModular.modCorrExt_eq_of_boundary
+-- expected: standard only — ★ Δ-SIDE comparison target: in the regular regime σ(R)⊆[a,2−a] the modular
+-- correlation modCorrExt S ξ (=⟨ξ,Δ^{it}ξ⟩ continued) is bounded-holomorphic (diffContOnCl_modCorrExt +
+-- modCorrExt_norm_le), so any competitor F bounded-holomorphic on the strip sharing its real-axis AND KMS
+-- top-edge values coincides with it on the closed strip (kms_correlation_boundary_determined). The Δ-side
+-- dual of corrC_eqOn_strip_of_boundary_eq — both correlation sides now pinned by their boundary data.
 -- expected: standard only — gaussSmear V n η = ∫ e^{−n t²}•V_t η dt. gaussSmear_integrable: Bochner-integrable
 -- (dominated by the Gaussian e^{−n t²}·‖η‖ via integrable_exp_neg_mul_sq, V_t norm-non-increasing + orbit
 -- continuous). gaussSmear_mem_K: ★ the smeared vector lands in the real subspace K — the ℝ-linear projection
