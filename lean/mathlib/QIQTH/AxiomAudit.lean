@@ -3669,6 +3669,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ STEP 6e WIRING: continuous A,B with ⟨w,A x⟩=⟨w,B x⟩ for w in dense Dw + x in
 -- dense Dx ⇒ A=B (ext_inner_left over dense Dw, then Continuous.ext_on over dense Dx). The final operator-
 -- equality step: Dw=total {J(2−R)^½R^{−½}ζ}, Dx=dense entire vectors, equality=corrC_orbit_eq_of_edges_real.
+#print axioms QIQTH.StandardSubspaceModular.corrC_bdd_closed_strip
+-- expected: standard only — corrC closed-strip bound ‖corrC ξ z‖ ≤ ‖ξ‖·e^n·‖η‖·√(π/n) on kmsStrip (Im z∈[0,1]
+-- ⇒ (Im z)²≤1). The bound hypothesis of eqOn_of_im_zero_edge.
+#print axioms QIQTH.StandardSubspaceModular.corrC_top_edge_real_of_kms_match
+-- expected: standard only — ★★ STEP-5 REALITY TRANSFER: a KMS function f (from StripKMSrvd) bounded-holo on
+-- the strip, agreeing with the orbit correlation g=corrC w on the REAL AXIS and with REAL top edge
+-- (Im f(t+i)=0) ⇒ g's top edge is real (Im g(t+i)=0). Via eqOn_of_im_zero_edge (Hadamard one-edge): f=g on
+-- the strip ⇒ g(t+i)=f(t+i) real. The last analytic input (h1) of corrC_orbit_eq_of_edges_real, from the KMS.
 #print axioms QIQTH.StandardSubspaceModular.modCorrExt_eq_of_boundary
 -- expected: standard only — ★ Δ-SIDE comparison target: in the regular regime σ(R)⊆[a,2−a] the modular
 -- correlation modCorrExt S ξ (=⟨ξ,Δ^{it}ξ⟩ continued) is bounded-holomorphic (diffContOnCl_modCorrExt +

@@ -47,6 +47,53 @@ theorem corrC_bdd_strip {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η
   nlinarith [hz.1, hz.2, hn.le,
     mul_pos (by linarith [hz.2] : (0:ℝ) < 1 - z.im) (by linarith [hz.1] : (0:ℝ) < 1 + z.im)]
 
+/-- **Uniform bound of the KMS correlation on the CLOSED strip**: for `0 ≤ Im z ≤ 1`,
+    `‖corrC ξ V n η z‖ ≤ ‖ξ‖·e^{n}·‖η‖·√(π/n)`.  Same as `corrC_bdd_strip` but on the closed `kmsStrip`
+    (`(Im z)² ≤ 1` there).  The bound hypothesis of `eqOn_of_im_zero_edge`. -/
+theorem corrC_bdd_closed_strip {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η ξ : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖) :
+    ∀ z ∈ StripUniqueness.kmsStrip,
+      ‖corrC ξ V n η z‖ ≤ ‖ξ‖ * (Real.exp n * ‖η‖ * Real.sqrt (Real.pi / n)) := by
+  intro z hz
+  simp only [StripUniqueness.kmsStrip, Set.mem_preimage, Set.mem_Icc] at hz
+  refine (corrC_norm_le hn η ξ hcont hbd z).trans ?_
+  refine mul_le_mul_of_nonneg_left ?_ (norm_nonneg _)
+  refine mul_le_mul_of_nonneg_right ?_ (Real.sqrt_nonneg _)
+  refine mul_le_mul_of_nonneg_right ?_ (norm_nonneg _)
+  refine Real.exp_le_exp.mpr ?_
+  nlinarith [hz.1, hz.2, hn.le, mul_nonneg hn.le
+    (mul_nonneg (by linarith [hz.2] : (0:ℝ) ≤ 1 - z.im) (by linarith [hz.1] : (0:ℝ) ≤ 1 + z.im))]
+
+/-- **Step-5 reality transfer** (RvD Theorem 3.8): the KMS top-edge reality transfers to the orbit
+    correlation.  Suppose a function `f` (the KMS function produced by `StripKMSrvd`) is bounded-holomorphic
+    on the strip, agrees with the orbit correlation `g = corrC w V n η` on the *real axis*, and has *real*
+    top-edge values `Im f(t+i) = 0`.  Then `g`'s top edge is also real: `Im g(t+i) = 0`.  By
+    `eqOn_of_im_zero_edge` (one-edge determination via Hadamard three-lines), `f = g` on the closed strip,
+    so `g(t+i) = f(t+i)` is real.  This is exactly the `Im=1` edge hypothesis `h1` of
+    `corrC_orbit_eq_of_edges_real` — the last analytic input, supplied from the labelled KMS condition. -/
+theorem corrC_top_edge_real_of_kms_match {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η w : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    {f : ℂ → ℂ} {M : ℝ} (hf : DiffContOnCl ℂ f StripUniqueness.kmsStripOpen)
+    (hfb : ∀ z ∈ StripUniqueness.kmsStrip, ‖f z‖ ≤ M)
+    (hmatch : ∀ t : ℝ, f (t : ℂ) = corrC w V n η (t : ℂ))
+    (hftop : ∀ t : ℝ, (f ((t : ℂ) + Complex.I)).im = 0) (t : ℝ) :
+    (corrC w V n η ((t : ℂ) + Complex.I)).im = 0 := by
+  have heq : Set.EqOn f (corrC w V n η) StripUniqueness.kmsStrip :=
+    StripUniqueness.eqOn_of_im_zero_edge
+      (M := max M (‖w‖ * (Real.exp n * ‖η‖ * Real.sqrt (Real.pi / n))))
+      hf (diffContOnCl_corrC hn η w hcont hbd)
+      (fun z hz => le_trans (hfb z hz) (le_max_left _ _))
+      (fun z hz => le_trans (corrC_bdd_closed_strip hn η w hcont hbd z hz) (le_max_right _ _))
+      (fun z hz0 => by
+        have hz' : z = ((z.re : ℝ) : ℂ) := Complex.ext (by simp) (by simp [hz0])
+        rw [hz']; exact hmatch z.re)
+  have hmem : ((t : ℂ) + Complex.I) ∈ StripUniqueness.kmsStrip := by
+    simp only [StripUniqueness.kmsStrip, Set.mem_preimage, Set.mem_Icc, Complex.add_im,
+      Complex.ofReal_im, Complex.I_im, zero_add]
+    exact ⟨zero_le_one, le_rfl⟩
+  rw [← heq hmem]
+  exact hftop t
+
 /-- **Strip-uniqueness comparison for two KMS correlations** — the structural core of the `hUniq` discharge.
     If two strongly-continuous contraction flows `V`, `V'` produce correlations `corrC ξ V n η` and
     `corrC ξ V' n η` that agree on the **real axis** and on the **KMS top edge** `t + i`, then the
