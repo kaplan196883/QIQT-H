@@ -146,6 +146,41 @@ theorem rvdSpec_modUnitary (S : StandardSubspace H) (ξ : H) (t : ℝ) :
     inner ℂ ξ (modUnitary S t ξ) = ∫ ω, modSpecFun S t ω ∂(rvdSpecMeasure S ξ) := by
   rw [modUnitary, inner_borelFC, bilinDiag_self, ProjectionValuedMeasure.diagInt, rvdSpecMeasure]
 
+/-- **The strip extension of the modular correlation** `F_ξ(z) = ∫ u_z(ω) dμ^R_ξ(ω)` — the candidate
+    bounded-holomorphic extension of `t ↦ ⟪ξ, Δ^{it} ξ⟫` to the KMS strip, obtained by integrating the
+    complexified modular character `modCharC` against the scalar spectral measure of `R` at `ξ`.  Toward
+    discharging the labelled one-particle KMS-uniqueness (`hUniq`), this is the function that strip-uniqueness
+    (`QIQTH.StripUniqueness`) compares against any competitor's correlation. -/
+noncomputable def modCorrExt (S : StandardSubspace H) (ξ : H) (z : ℂ) : ℂ :=
+  ∫ ω, modCharC z (ω : spectrum ℝ (rvdRC S)).val ∂(rvdSpecMeasure S ξ)
+
+/-- **The strip extension restricts to the modular correlation on the real axis**:
+    `F_ξ(t) = ⟪ξ, Δ^{it} ξ⟫`.  Immediate from `modCharC_ofReal` (`u_{(t:ℂ)} = u_t = modChar t`) and the
+    spectral form `rvdSpec_modUnitary`. -/
+theorem modCorrExt_ofReal (S : StandardSubspace H) (ξ : H) (t : ℝ) :
+    modCorrExt S ξ (t : ℂ) = inner ℂ ξ (modUnitary S t ξ) := by
+  rw [modCorrExt, rvdSpec_modUnitary]
+  refine integral_congr_ae (Filter.Eventually.of_forall (fun ω => ?_))
+  exact modCharC_ofReal t ω.val
+
+/-- **The KMS boundary flip of the strip extension** (regular regime).  On the top edge `Im z = 1` of the
+    KMS strip the extension is the modular correlation weighted by `ω/(2−ω)`:
+    `F_ξ(t + i) = ∫ modChar t (ω) · (ω/(2−ω)) dμ^R_ξ`.  Together with `modCorrExt_ofReal` (the bottom edge,
+    `F_ξ(t) = ⟪ξ, Δ^{it} ξ⟫`) this is the boundary data the strip-uniqueness principle consumes — the two
+    edges that pin the extension.  Requires the spectrum of `R` to lie in `(0,2)` (the regular regime, where
+    the modular weight is finite). -/
+theorem modCorrExt_kms_flip (S : StandardSubspace H) (ξ : H) (t : ℝ)
+    (hspec : ∀ ω : spectrum ℝ (rvdRC S), (ω : spectrum ℝ (rvdRC S)).val ∈ Set.Ioo (0 : ℝ) 2) :
+    modCorrExt S ξ ((t : ℂ) + Complex.I)
+      = ∫ ω, modChar t (ω : spectrum ℝ (rvdRC S)).val
+          * (((ω : spectrum ℝ (rvdRC S)).val / (2 - (ω : spectrum ℝ (rvdRC S)).val) : ℝ) : ℂ)
+          ∂(rvdSpecMeasure S ξ) := by
+  rw [modCorrExt]
+  refine integral_congr_ae (Filter.Eventually.of_forall (fun ω => ?_))
+  have h := modCharC_kms_flip (hspec ω) (t : ℂ)
+  rw [modCharC_ofReal] at h
+  exact h
+
 /-- The vacuum coherent state (`ξ = 0`) has zero relative entropy with itself. -/
 @[simp] theorem cgpEntropy_zero (S : StandardSubspace H) : cgpEntropy S (0 : H) = 0 := by
   simp [cgpEntropy]

@@ -3522,6 +3522,14 @@ namespace QIQTH.AxiomAudit
 -- real axis). modCharC_norm_le: in the REGULAR regime r∈[a,2−a] (0<a≤1) and z in the strip (0≤Im z≤1),
 -- ‖u_z(r)‖≤(2−a)/a — the uniform BOUND that makes z↦∫u_z dμ^R_ξ a BOUNDED holomorphic strip extension of
 -- ⟪ξ,Δ^{it}ξ⟫ (the hypothesis strip-uniqueness consumes). Boundedness seed for the spectral-integral lift.
+-- SPECTRAL-INTEGRAL STRIP EXTENSION (ModularRelativeEntropy.lean): F_ξ(z)=∫u_z dμ^R_ξ + its boundary data.
+#print axioms QIQTH.modCorrExt_ofReal
+#print axioms QIQTH.modCorrExt_kms_flip
+-- expected: standard only — modCorrExt S ξ z = ∫ modCharC z ω.val dμ^R_ξ, the candidate bounded-holomorphic
+-- strip extension of t↦⟪ξ,Δ^{it}ξ⟫. modCorrExt_ofReal: BOTTOM edge F_ξ(t)=⟪ξ,Δ^{it}ξ⟫ (modCharC_ofReal +
+-- rvdSpec_modUnitary). modCorrExt_kms_flip: TOP edge F_ξ(t+i)=∫ modChar t (ω)·(ω/(2−ω)) dμ (the KMS weight),
+-- in the regular regime σ(R)⊆(0,2). These are the two BOUNDARY conditions strip-uniqueness consumes — the
+-- extension's edges now pinned. Remaining for hUniq: holomorphy under ∫ (boundedness done) + Borchers reduction.
 -- expected: standard only — boostUnitary_eq_vadd: boostUnitary t = DomAddAct.mk(−t)+ᵥ· (the project boost group IS
 -- Mathlib's canonical Lp domain-translation; unitary_apply precomposes with flow(−t) ⇒ ξ(x−t), matches mk(−t)+ᵥξ via
 -- add_comm + Equiv.symm_apply_apply). continuous_boostUnitary_apply: ★ STRONG CONTINUITY t↦boostUnitary t ξ, from
