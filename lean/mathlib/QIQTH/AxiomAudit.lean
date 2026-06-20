@@ -3524,6 +3524,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — two bdd-holo F,G on {−1/2≤Im≤0} agreeing on the top edge Im=0 agree on the
 -- half-strip (eqZero_of_im_zero_edge_halfStrip on F−G). The correct-strip matching step: orbit correlation
 -- ⟨h(z),w⟩ and the KMS function share Im=0 values ⟨U_t ξ,η⟩ ⇒ coincide ⇒ KMS lower-edge (Im=−1/2) reality transfers.
+#print axioms QIQTH.StripUniqueness.real_on_midline_of_conj_flip
+-- expected: standard only — ★★★ RvD PROPOSITION 3.5 (reality on the mid-line): bdd-holo f on {−1<Im<0} with the
+-- conjugate-flip f(t−i)=conj(f(t)) ⇒ Im f(t−i/2)=0. Reflection g(z)=conj(f(conj z−i)) is holo (DifferentiableAt.
+-- conj_conj), bounded, =f on Im=0 (g(t)=conj(f(t−i))=conj(conj(f t))=f t by flip) ⇒ (eqOn_of_im_zero_edge_negStrip)
+-- g=f on the strip ⇒ f(t−i/2)=conj(f(t−i/2)). The bridge from RvD Def 3.4's full-strip KMS to the half-strip
+-- reality Thm 3.8 uses (Δ^{1/2}=J on the standard subspace). NON-GARBLED, faithful to the clean source.
 #print axioms QIQTH.StripUniqueness.eqZero_of_im_zero_edge_negStrip
 #print axioms QIQTH.StripUniqueness.eqOn_of_im_zero_edge_negStrip
 -- expected: standard only — ★ UNIT-strip {−1≤Im≤0} one-edge uniqueness (full-width companion of the halfStrip

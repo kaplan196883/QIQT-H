@@ -1,6 +1,7 @@
 import Mathlib.Analysis.Complex.PhragmenLindelof
 import Mathlib.Analysis.Complex.OpenMapping
 import Mathlib.Analysis.Complex.Hadamard
+import Mathlib.Analysis.Calculus.Deriv.Star
 
 /-!
 # The KMS strip-uniqueness principle (analytic core of one-particle KMS-uniqueness)
@@ -403,5 +404,70 @@ theorem eqOn_of_im_zero_edge_negStrip {F G : ℂ → ℂ} {M : ℝ}
   sub_eq_zero.mp (eqZero_of_im_zero_edge_negStrip (hF.sub hG)
     (fun w hw => (norm_sub_le _ _).trans (add_le_add (hFb w hw) (hGb w hw)))
     (fun w hw => by rw [Pi.sub_apply, h0 w hw, sub_self]) z hz)
+
+/-- **RvD Proposition 3.5 — reality on the mid-line.**  A bounded-holomorphic `f` on the unit strip
+    `{−1 < Im z < 0}` (`DiffContOnCl`), satisfying the *conjugate-flip* boundary relation
+    `f(t − i) = conj(f(t))` on the real axis, is **real on the mid-line** `Im z = −1/2`:
+    `Im f(t − i/2) = 0` for all real `t`.  This is RvD's reflection argument: the reflected function
+    `g(z) = conj(f(conj z − i))` is holomorphic (`DifferentiableAt.conj_conj`), bounded, and agrees with `f`
+    on the edge `Im = 0` (`g(t) = conj(f(t − i)) = conj(conj(f(t))) = f(t)` by the flip), so `g = f` on the
+    strip (`eqOn_of_im_zero_edge_negStrip`); evaluating at `t − i/2` gives `f(t − i/2) = conj(f(t − i/2))`.
+    This is the bridge from RvD Definition 3.4's full-strip KMS condition to the half-strip reality that
+    Theorem 3.8 uses (`Δ^{1/2} = J` on the standard subspace). -/
+theorem real_on_midline_of_conj_flip {f : ℂ → ℂ} {M : ℝ}
+    (hf : DiffContOnCl ℂ f negStripOpen) (hfb : ∀ z ∈ negStrip, ‖f z‖ ≤ M)
+    (hflip : ∀ t : ℝ, f ((t : ℂ) - Complex.I) = (starRingEnd ℂ) (f (t : ℂ))) (t : ℝ) :
+    (f ((t : ℂ) - Complex.I / 2)).im = 0 := by
+  have hopen : IsOpen negStripOpen := Complex.continuous_im.isOpen_preimage _ isOpen_Ioo
+  have hclos : closure negStripOpen = negStrip := by
+    rw [negStripOpen, negStrip, Complex.closure_preimage_im, closure_Ioo (by norm_num : (-1 : ℝ) ≠ 0)]
+  have hrefl_open : ∀ z ∈ negStripOpen, (starRingEnd ℂ) z - Complex.I ∈ negStripOpen := by
+    intro z hz
+    rw [negStripOpen, Set.mem_preimage, Set.mem_Ioo] at hz ⊢
+    rw [Complex.sub_im, Complex.conj_im, Complex.I_im]; constructor <;> linarith [hz.1, hz.2]
+  have hrefl_closed : ∀ z ∈ negStrip, (starRingEnd ℂ) z - Complex.I ∈ negStrip := by
+    intro z hz
+    rw [negStrip, Set.mem_preimage, Set.mem_Icc] at hz ⊢
+    rw [Complex.sub_im, Complex.conj_im, Complex.I_im]; constructor <;> linarith [hz.1, hz.2]
+  set g : ℂ → ℂ := fun z => (starRingEnd ℂ) (f ((starRingEnd ℂ) z - Complex.I)) with hgdef
+  have hg_diffon : DifferentiableOn ℂ g negStripOpen := by
+    intro z hz
+    have hfat : DifferentiableAt ℂ f ((starRingEnd ℂ) z - Complex.I) :=
+      hf.1.differentiableAt (hopen.mem_nhds (hrefl_open z hz))
+    have hshift : DifferentiableAt ℂ (fun w => f (w - Complex.I)) ((starRingEnd ℂ) z) :=
+      hfat.comp ((starRingEnd ℂ) z) (differentiableAt_id.sub_const Complex.I)
+    have hcc := DifferentiableAt.conj_conj hshift
+    rw [Complex.conj_conj] at hcc
+    exact hcc.differentiableWithinAt
+  have hg_conton : ContinuousOn g negStrip := by
+    have hfcont : ContinuousOn f negStrip := hclos ▸ hf.2
+    exact Complex.continuous_conj.comp_continuousOn
+      (hfcont.comp ((Complex.continuous_conj.continuousOn).sub continuousOn_const) hrefl_closed)
+  have hg_dcc : DiffContOnCl ℂ g negStripOpen := ⟨hg_diffon, hclos ▸ hg_conton⟩
+  have hg_bd : ∀ z ∈ negStrip, ‖g z‖ ≤ M := by
+    intro z hz
+    rw [hgdef]
+    simp only [RCLike.norm_conj]
+    exact hfb _ (hrefl_closed z hz)
+  have hg_eq_edge : ∀ z : ℂ, z.im = 0 → g z = f z := by
+    intro z hz0
+    have hz : z = ((z.re : ℝ) : ℂ) := Complex.ext (by simp) (by simp [hz0])
+    rw [hz, hgdef]
+    simp only [Complex.conj_ofReal]
+    rw [hflip z.re, Complex.conj_conj]
+  have heqon : Set.EqOn g f negStrip :=
+    eqOn_of_im_zero_edge_negStrip hg_dcc hf hg_bd hfb hg_eq_edge
+  have hmem : ((t : ℂ) - Complex.I / 2) ∈ negStrip := by
+    rw [negStrip, Set.mem_preimage,
+      show ((t : ℂ) - Complex.I / 2).im = -(1 / 2) from by
+        simp [Complex.sub_im, Complex.I_im], Set.mem_Icc]
+    constructor <;> norm_num
+  have harg : (starRingEnd ℂ) ((t : ℂ) - Complex.I / 2) - Complex.I = (t : ℂ) - Complex.I / 2 := by
+    rw [map_sub, map_div₀, Complex.conj_I, Complex.conj_ofReal, map_ofNat]; ring
+  have hkey : f ((t : ℂ) - Complex.I / 2) = (starRingEnd ℂ) (f ((t : ℂ) - Complex.I / 2)) := by
+    have h1 := (heqon hmem).symm
+    simp only [hgdef, harg] at h1
+    exact h1
+  exact Complex.conj_eq_iff_im.mp hkey.symm
 
 end QIQTH.StripUniqueness
