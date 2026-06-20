@@ -844,6 +844,24 @@ theorem modConj_rvdSqrtTwoSubR_modConj (S : StandardSubspace H) (ξ : H) :
   rw [modConj_sq] at h
   rw [← h, modConj_sq]
 
+/-- **The "moved" sqrt-reflection** `J R^{1/2} = (2−R)^{1/2} J`: `J(R^{1/2} y) = (2−R)^{1/2}(J y)`.
+    (`modConj_rvdSqrtR_modConj` at `J y` + `J² = 1`.) -/
+theorem modConj_rvdSqrtR (S : StandardSubspace H) (y : H) :
+    modConj S (rvdSqrtR S y) = rvdSqrtTwoSubR S (modConj S y) := by
+  have h := modConj_rvdSqrtR_modConj S (modConj S y)
+  rwa [modConj_sq] at h
+
+/-- **`J T J = T`** — the modular conjugation commutes with the polar radius `T = R^{1/2}(2−R)^{1/2}`.
+    `J T J = (J R^{1/2} J)(J (2−R)^{1/2} J) = (2−R)^{1/2} R^{1/2} = R^{1/2}(2−R)^{1/2} = T`, using both
+    sqrt-reflections and that the square roots commute (`rvdSqrtR_commute_rvdSqrtTwoSubR`).  Hence
+    `[J, T] = 0`, the keystone giving `J D J = D` and thence `J P J = 1 − Q` (`J𝒦 = (i𝒦)^⊥`). -/
+theorem modConj_rvdT_modConj (S : StandardSubspace H) (ξ : H) :
+    modConj S (rvdT S (modConj S ξ)) = rvdT S ξ := by
+  have hL : rvdT S (modConj S ξ) = rvdSqrtR S (rvdSqrtTwoSubR S (modConj S ξ)) := by
+    rw [rvdT, ContinuousLinearMap.mul_apply]
+  rw [hL, modConj_rvdSqrtR, modConj_rvdSqrtTwoSubR_modConj, rvdT]
+  exact (DFunLike.congr_fun (rvdSqrtR_commute_rvdSqrtTwoSubR S).eq ξ).symm
+
 /-! ### Bounded Tomita fixedness for `ξ ∈ 𝒦`
 
   The second CGP spectral-balance prerequisite, in bounded form.  The Tomita operator `S = J Δ^{1/2}`

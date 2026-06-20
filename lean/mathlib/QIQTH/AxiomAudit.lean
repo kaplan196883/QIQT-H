@@ -3632,6 +3632,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.modConj_rvdSqrtTwoSubR_modConj
 -- expected: standard only — symmetric sqrt-reflection J(2−R)^{½}J=R^{½}: immediate from J R^{½}J=(2−R)^{½}
 -- by sandwiching with J + J²=1. Toward JTJ=T ⇒ [J,T]=0 ⇒ JDJ=D ⇒ JPJ=1−Q ⇒ J𝒦=(i𝒦)^⊥.
+#print axioms QIQTH.StandardSubspaceModular.modConj_rvdT_modConj
+-- expected: standard only — ★ JTJ=T: J commutes with the polar radius T=R^{½}(2−R)^{½}. JTJ=(J R^{½}J)(J(2−R)^{½}J)
+-- =(2−R)^{½}R^{½}=R^{½}(2−R)^{½}=T (both sqrt-reflections + sqrts commute). Keystone ⇒ [J,T]=0 ⇒ JDJ=D ⇒ JPJ=1−Q.
+-- (modConj_rvdSqrtR = the "moved" reflection J R^{½}=(2−R)^{½}J used here.)
 #print axioms QIQTH.StandardSubspaceModular.modConjSqrtR_sq
 -- expected: standard only — ★ B·B=2−R for B=J R^{½}J: B(Bξ)=(2−R)ξ. Inner J²=1 collapses
 -- J R^{½}(JJ)R^{½}J = J R^{½}R^{½}J = JRJ = 2−R (rvdSqrtR_mul_self + modConj_rvdRC_modConj). The b·b=a input
