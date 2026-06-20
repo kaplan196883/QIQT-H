@@ -3683,6 +3683,11 @@ namespace QIQTH.AxiomAudit
 -- ⟨w,V_t(gaussSmear)⟩=⟨w,gaussSmear⟩ ∀t. Chains corrC_real_on_axis (bottom) + corrC_top_edge_real_of_kms_match
 -- (top, Hadamard) ⟹ corrC_orbit_eq_of_edges_real. The ENTIRE analytic chain is now one axiom-free theorem;
 -- only producing f from StripKMSrvd at the RvD vectors (the labelled physics input) remains for V=Δ.
+#print axioms QIQTH.StandardSubspaceModular.orbit_inner_eq_of_entire
+-- expected: standard only — ★★ DENSITY EXTENSION: ⟨w,V_t(gaussSmear V n η)⟩=⟨w,gaussSmear V n η⟩ ∀n>0 ⇒
+-- ⟨w,V_t η⟩=⟨w,η⟩. Scale by √(n/π) to entireVec, entireVec_tendsto (→η) + continuity of V_t,⟨w,·⟩. Resolves
+-- the V-vs-Δ smearing mismatch: both flows give ⟨w,·_t η⟩=⟨w,η⟩ on the SAME η ⇒ V_t η−Δ^{it}η ⊥ total{w}⊆(i𝒦)^⊥
+-- ⇒ ∈i𝒦; both in 𝒦 + 𝒦∩i𝒦={0} ⇒ V_t η=Δ^{it}η. The comparison closes correctly.
 #print axioms QIQTH.StandardSubspaceModular.modCorrExt_eq_of_boundary
 -- expected: standard only — ★ Δ-SIDE comparison target: in the regular regime σ(R)⊆[a,2−a] the modular
 -- correlation modCorrExt S ξ (=⟨ξ,Δ^{it}ξ⟩ continued) is bounded-holomorphic (diffContOnCl_modCorrExt +

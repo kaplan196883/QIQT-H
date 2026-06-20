@@ -196,6 +196,34 @@ theorem corrC_orbit_eq_of_kms_function (S : StandardSubspace H) {V : ℝ → (H 
     rw [hz']
     exact corrC_top_edge_real_of_kms_match hn η w hcont hbd hf hfb hmatch hftop z.re
 
+/-- **Density extension of the orbit identity** (RvD Theorem 3.8): from the smeared identity to the vector
+    identity.  If `⟨w, V_t(gaussSmear V n η)⟩ = ⟨w, gaussSmear V n η⟩` holds for every `n > 0` (the output of
+    `corrC_orbit_eq_of_kms_function`), then `⟨w, V_t η⟩ = ⟨w, η⟩`.  Scaling by `√(n/π)` turns `gaussSmear`
+    into the *normalised* entire vector `entireVec V n η`, which converges to `η` (`entireVec_tendsto`);
+    continuity of `V_t` and `⟨w, ·⟩` passes to the limit.  Resolves the smearing mismatch in the `V`-vs-`Δ`
+    comparison: applying this to both flows gives `⟨w, V_t η⟩ = ⟨w, η⟩ = ⟨w, Δ^{it} η⟩` on the same `η ∈ 𝒦`,
+    so `V_t η − Δ^{it} η ⊥` (the total set `{w}` ⊆ `(i𝒦)^⊥`) ⟹ `∈ i𝒦`; with both in `𝒦` and `𝒦 ∩ i𝒦 = {0}`,
+    `V_t η = Δ^{it} η`. -/
+theorem orbit_inner_eq_of_entire {V : ℝ → (H →L[ℂ] H)} (η w : H) (t : ℝ)
+    (hcont : Continuous (fun s => V s η)) (hbd : ∀ s, ‖V s η‖ ≤ ‖η‖) (hV0 : V 0 η = η)
+    (hconc : ∀ n : ℝ, 0 < n →
+      innerSL ℂ w (V t (gaussSmear V n η)) = innerSL ℂ w (gaussSmear V n η)) :
+    innerSL ℂ w (V t η) = innerSL ℂ w η := by
+  have hsc : ∀ n : ℝ, 0 < n →
+      innerSL ℂ w (V t (entireVec V n η)) = innerSL ℂ w (entireVec V n η) := by
+    intro n hn
+    rw [entireVec, (V t).map_smul_of_tower, (innerSL ℂ w).map_smul_of_tower,
+      (innerSL ℂ w).map_smul_of_tower, hconc n hn]
+  have hlhs : Filter.Tendsto (fun n => innerSL ℂ w (V t (entireVec V n η))) Filter.atTop
+      (nhds (innerSL ℂ w (V t η))) :=
+    ((innerSL ℂ w).continuous.tendsto _).comp
+      (((V t).continuous.tendsto _).comp (entireVec_tendsto η hcont hbd hV0))
+  have hrhs : Filter.Tendsto (fun n => innerSL ℂ w (entireVec V n η)) Filter.atTop
+      (nhds (innerSL ℂ w η)) :=
+    ((innerSL ℂ w).continuous.tendsto _).comp (entireVec_tendsto η hcont hbd hV0)
+  exact tendsto_nhds_unique
+    (hlhs.congr' ((Filter.eventually_gt_atTop 0).mono (fun n hn => hsc n hn))) hrhs
+
 /-- **Operator equality from matrix elements on dense sets** (RvD Theorem 3.8, the totality + density
     wiring, step 6e).  If two continuous operators `A, B` have equal matrix elements `⟨w, A x⟩ = ⟨w, B x⟩`
     for `w` ranging over a dense (total) set `Dw` and `x` over a dense set `Dx`, then `A = B`.  For fixed
