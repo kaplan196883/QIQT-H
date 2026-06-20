@@ -862,6 +862,21 @@ theorem modConj_rvdT_modConj (S : StandardSubspace H) (ξ : H) :
   rw [hL, modConj_rvdSqrtR, modConj_rvdSqrtTwoSubR_modConj, rvdT]
   exact (DFunLike.congr_fun (rvdSqrtR_commute_rvdSqrtTwoSubR S).eq ξ).symm
 
+/-- **`T J = D`** — combining `[J, T] = 0` (`J T J = T`) with `J T = D` (`modConj_rvdT`).
+    `T(J η) = J(T η) = D η`. -/
+theorem rvdT_modConj (S : StandardSubspace H) (η : H) :
+    rvdT S (modConj S η) = rvdPmQ S η := by
+  have hcomm : modConj S (rvdT S η) = rvdT S (modConj S η) := by
+    have h := modConj_rvdT_modConj S (modConj S η)
+    rwa [modConj_sq] at h
+  rw [← hcomm, modConj_rvdT]
+
+/-- **`J D J = D`** — the modular conjugation commutes with `D = P − Q`.  From `T J = D` (`rvdT_modConj`):
+    `J(D(J ξ)) = J(T(J(J ξ))) = J(T ξ) = D ξ`.  With `J R J = 2 − R` this gives `J P J = 1 − Q`. -/
+theorem modConj_rvdPmQ_modConj (S : StandardSubspace H) (ξ : H) :
+    modConj S (rvdPmQ S (modConj S ξ)) = rvdPmQ S ξ := by
+  rw [← rvdT_modConj S (modConj S ξ), modConj_sq, modConj_rvdT]
+
 /-! ### Bounded Tomita fixedness for `ξ ∈ 𝒦`
 
   The second CGP spectral-balance prerequisite, in bounded form.  The Tomita operator `S = J Δ^{1/2}`

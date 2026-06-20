@@ -3636,6 +3636,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ JTJ=T: J commutes with the polar radius T=R^{½}(2−R)^{½}. JTJ=(J R^{½}J)(J(2−R)^{½}J)
 -- =(2−R)^{½}R^{½}=R^{½}(2−R)^{½}=T (both sqrt-reflections + sqrts commute). Keystone ⇒ [J,T]=0 ⇒ JDJ=D ⇒ JPJ=1−Q.
 -- (modConj_rvdSqrtR = the "moved" reflection J R^{½}=(2−R)^{½}J used here.)
+#print axioms QIQTH.StandardSubspaceModular.rvdT_modConj
+-- expected: standard only — TJ=D: rvdT(modConj η)=rvdPmQ η. Combine [J,T]=0 (from JTJ=T) with JT=D (modConj_rvdT).
+#print axioms QIQTH.StandardSubspaceModular.modConj_rvdPmQ_modConj
+-- expected: standard only — ★ JDJ=D: modConj(rvdPmQ(modConj ξ))=rvdPmQ ξ. From TJ=D: J(D(Jξ))=J(T ξ)=D ξ.
+-- With JRJ=2−R this gives JPJ=(JRJ+JDJ)/2=((2−R)+D)/2=1−Q ⇒ J𝒦=(i𝒦)^⊥.
 #print axioms QIQTH.StandardSubspaceModular.modConjSqrtR_sq
 -- expected: standard only — ★ B·B=2−R for B=J R^{½}J: B(Bξ)=(2−R)ξ. Inner J²=1 collapses
 -- J R^{½}(JJ)R^{½}J = J R^{½}R^{½}J = JRJ = 2−R (rvdSqrtR_mul_self + modConj_rvdRC_modConj). The b·b=a input
