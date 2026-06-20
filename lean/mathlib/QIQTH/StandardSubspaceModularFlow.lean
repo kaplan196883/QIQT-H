@@ -685,6 +685,13 @@ theorem modConj_smul_I (S : StandardSubspace H) (η : H) :
     smul_sub, neg_smul, neg_smul]
   abel
 
+/-- **`J · D = T`** (the dual of `J · T = D`): `J(D ξ) = T ξ`.  Apply `J` to `J(T ξ) = D ξ`
+    (`modConj_rvdT`) and use `J² = 1` (`modConj_sq`).  Together with `modConj_rvdT` this is the bounded
+    Tomita polar relation `D = J T`, `T = J D`, `J² = 1`. -/
+theorem modConj_rvdPmQ (S : StandardSubspace H) (ξ : H) :
+    modConj S (rvdPmQ S ξ) = rvdT S ξ := by
+  rw [← modConj_rvdT, modConj_sq]
+
 /-- A bookkeeping identity: the imaginary part of a complex inner product as a real inner product,
     `Im⟪x, y⟫ = ⟪i·x, y⟫_ℝ`.  (`inner_smul_left` + `conj i = −i`.) -/
 private theorem im_inner_eq_real_inner_smul_I (x y : H) :
