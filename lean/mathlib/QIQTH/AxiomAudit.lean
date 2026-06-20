@@ -3677,6 +3677,12 @@ namespace QIQTH.AxiomAudit
 -- the strip, agreeing with the orbit correlation g=corrC w on the REAL AXIS and with REAL top edge
 -- (Im f(t+i)=0) ⇒ g's top edge is real (Im g(t+i)=0). Via eqOn_of_im_zero_edge (Hadamard one-edge): f=g on
 -- the strip ⇒ g(t+i)=f(t+i) real. The last analytic input (h1) of corrC_orbit_eq_of_edges_real, from the KMS.
+#print axioms QIQTH.StandardSubspaceModular.corrC_orbit_eq_of_kms_function
+-- expected: standard only — ★★★ ANALYTIC CAPSTONE of RvD Thm 3.8: given the labelled KMS function f (the
+-- StripKMSrvd output: bdd-holo, =g on real axis, real top edge) + geometric facts (w⊥i𝒦, orbit in 𝒦),
+-- ⟨w,V_t(gaussSmear)⟩=⟨w,gaussSmear⟩ ∀t. Chains corrC_real_on_axis (bottom) + corrC_top_edge_real_of_kms_match
+-- (top, Hadamard) ⟹ corrC_orbit_eq_of_edges_real. The ENTIRE analytic chain is now one axiom-free theorem;
+-- only producing f from StripKMSrvd at the RvD vectors (the labelled physics input) remains for V=Δ.
 #print axioms QIQTH.StandardSubspaceModular.modCorrExt_eq_of_boundary
 -- expected: standard only — ★ Δ-SIDE comparison target: in the regular regime σ(R)⊆[a,2−a] the modular
 -- correlation modCorrExt S ξ (=⟨ξ,Δ^{it}ξ⟩ continued) is bounded-holomorphic (diffContOnCl_modCorrExt +

@@ -170,6 +170,32 @@ theorem corrC_orbit_eq_of_edges_real {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn
   corrC_eq_at_real_of_const hn η w hcont hbd hgrp
     (corrC_const_on_strip_of_edges hn η w hcont hbd h0 h1) t
 
+/-- **Analytic capstone of the KMS-uniqueness proof** (RvD Theorem 3.8): given the labelled KMS function,
+    the orbit matrix element is `t`-independent.  Assembles the whole verified analytic chain.  Inputs: the
+    *geometric* facts (`w ⊥ i𝒦`, the orbit `V_t(gaussSmear)` stays in `𝒦`) and the *labelled KMS input* — a
+    function `f` (the `StripKMSrvd` output) bounded-holomorphic on the strip, agreeing with the orbit
+    correlation `g = corrC w V n η` on the real axis, with real top-edge values `Im f(t+i) = 0`.  Conclusion:
+    `⟨w, V_t(gaussSmear)⟩ = ⟨w, gaussSmear⟩` for all real `t`.  Chain: `corrC_real_on_axis` (bottom edge) +
+    `corrC_top_edge_real_of_kms_match` (top edge, via the Hadamard one-edge matching) ⟹
+    `corrC_orbit_eq_of_edges_real`.  Comparing this for `V` and `Δ^{it}` + totality of `w` + density of the
+    entire vectors (`operator_ext_inner_dense`) discharges `hUniq`; the only non-machine-checked content is
+    producing `f` from `StripKMSrvd` at the RvD vectors (the labelled physics input). -/
+theorem corrC_orbit_eq_of_kms_function (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ}
+    (hn : 0 < n) (η w : H) (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hgrp : ∀ s t, V s (V t η) = V (s + t) η) (hw : projIK S w = 0)
+    (hKinv : ∀ s : ℝ, projK S (V s (gaussSmear V n η)) = V s (gaussSmear V n η))
+    {f : ℂ → ℂ} {M : ℝ} (hf : DiffContOnCl ℂ f StripUniqueness.kmsStripOpen)
+    (hfb : ∀ z ∈ StripUniqueness.kmsStrip, ‖f z‖ ≤ M)
+    (hmatch : ∀ t : ℝ, f (t : ℂ) = corrC w V n η (t : ℂ))
+    (hftop : ∀ t : ℝ, (f ((t : ℂ) + Complex.I)).im = 0) (t : ℝ) :
+    innerSL ℂ w (V t (gaussSmear V n η)) = innerSL ℂ w (gaussSmear V n η) := by
+  refine corrC_orbit_eq_of_edges_real hn η w hcont hbd hgrp (fun z hz0 => ?_) (fun z hz1 => ?_) t
+  · have hz' : z = ((z.re : ℝ) : ℂ) := Complex.ext (by simp) (by simp [hz0])
+    rw [hz']; exact corrC_real_on_axis S hn η w hcont hbd hgrp hw hKinv z.re
+  · have hz' : z = ((z.re : ℝ) : ℂ) + Complex.I := Complex.ext (by simp) (by simp [hz1])
+    rw [hz']
+    exact corrC_top_edge_real_of_kms_match hn η w hcont hbd hf hfb hmatch hftop z.re
+
 /-- **Operator equality from matrix elements on dense sets** (RvD Theorem 3.8, the totality + density
     wiring, step 6e).  If two continuous operators `A, B` have equal matrix elements `⟨w, A x⟩ = ⟨w, B x⟩`
     for `w` ranging over a dense (total) set `Dw` and `x` over a dense set `Dx`, then `A = B`.  For fixed
