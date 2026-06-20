@@ -836,6 +836,14 @@ theorem modConj_rvdSqrtR_modConj (S : StandardSubspace H) (ξ : H) :
   have hBeq : rvdSqrtTwoSubR S = B := by rw [rvdSqrtTwoSubR]; exact CFC.sqrt_unique hsq hpos
   exact (congrFun (congrArg DFunLike.coe hBeq) ξ).symm
 
+/-- **The symmetric sqrt-reflection `J (2−R)^{1/2} J = R^{1/2}`** — immediate from `J R^{1/2} J = (2−R)^{1/2}`
+    (`modConj_rvdSqrtR_modConj`) by sandwiching with `J` and using `J² = 1` (`modConj_sq`). -/
+theorem modConj_rvdSqrtTwoSubR_modConj (S : StandardSubspace H) (ξ : H) :
+    modConj S (rvdSqrtTwoSubR S (modConj S ξ)) = rvdSqrtR S ξ := by
+  have h := modConj_rvdSqrtR_modConj S (modConj S ξ)
+  rw [modConj_sq] at h
+  rw [← h, modConj_sq]
+
 /-! ### Bounded Tomita fixedness for `ξ ∈ 𝒦`
 
   The second CGP spectral-balance prerequisite, in bounded form.  The Tomita operator `S = J Δ^{1/2}`

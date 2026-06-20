@@ -3629,6 +3629,9 @@ namespace QIQTH.AxiomAudit
 -- around via CFC.sqrt_unique — NOT general antilinear CFC). Bundle B ξ=J(R^{½}(Jξ)) as ℂ-linear
 -- (modConj_smul_conj×2), self-adjoint+positive (antiunitary modConj_inner_conj reduces ⟨Bx,y⟩ to
 -- conj⟨R^{½}Jx,Jy⟩, R^{½}≥0), B·B=2−R (modConjSqrtR_sq) ⇒ sqrt_unique ⇒ B=(2−R)^{½}. Unblocks JPJ=1−Q ⇒ J𝒦=(i𝒦)^⊥.
+#print axioms QIQTH.StandardSubspaceModular.modConj_rvdSqrtTwoSubR_modConj
+-- expected: standard only — symmetric sqrt-reflection J(2−R)^{½}J=R^{½}: immediate from J R^{½}J=(2−R)^{½}
+-- by sandwiching with J + J²=1. Toward JTJ=T ⇒ [J,T]=0 ⇒ JDJ=D ⇒ JPJ=1−Q ⇒ J𝒦=(i𝒦)^⊥.
 #print axioms QIQTH.StandardSubspaceModular.modConjSqrtR_sq
 -- expected: standard only — ★ B·B=2−R for B=J R^{½}J: B(Bξ)=(2−R)ξ. Inner J²=1 collapses
 -- J R^{½}(JJ)R^{½}J = J R^{½}R^{½}J = JRJ = 2−R (rvdSqrtR_mul_self + modConj_rvdRC_modConj). The b·b=a input
