@@ -23,6 +23,8 @@ import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Analysis.SpecialFunctions.Complex.Log
 import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Range
 import Mathlib.Topology.ContinuousMap.StoneWeierstrass
+import Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral
+import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 
 namespace QIQTH.StandardSubspaceModular
 
@@ -1308,6 +1310,42 @@ theorem modUnitary_mem_K_iff (t : ℝ) (ξ : H) :
   rwa [show modUnitary S (-t) (modUnitary S t ξ) = ξ by
         rw [← ContinuousLinearMap.mul_apply, ← modUnitary_add, neg_add_cancel, modUnitary_zero,
             ContinuousLinearMap.one_apply]] at h2
+
+/-! ### Entire-vector smearing (toward RvD Theorem 3.8 KMS-uniqueness) -/
+
+open MeasureTheory in
+/-- The **Gaussian-smeared vector** `(n/π)^{1/2}∫ e^{−n t²} V_t η dt` (without the normalisation constant):
+    the construction RvD use to produce a dense set of entire vectors inside the real subspace `K`. -/
+noncomputable def gaussSmear (V : ℝ → (H →L[ℂ] H)) (n : ℝ) (η : H) : H :=
+  ∫ t : ℝ, Real.exp (-n * t ^ 2) • V t η
+
+open MeasureTheory in
+/-- The smeared integrand is Bochner-integrable: dominated by `e^{−n t²}·‖η‖` (a Gaussian), since `V_t` is
+    norm-non-increasing and the orbit is continuous. -/
+theorem gaussSmear_integrable {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖) :
+    Integrable (fun t : ℝ => Real.exp (-n * t ^ 2) • V t η) := by
+  have hexp : Continuous (fun t : ℝ => Real.exp (-n * t ^ 2)) := by fun_prop
+  refine Integrable.mono' ((integrable_exp_neg_mul_sq hn).mul_const ‖η‖)
+    (hexp.smul hcont).aestronglyMeasurable ?_
+  filter_upwards with t
+  rw [norm_smul, Real.norm_eq_abs, abs_of_pos (Real.exp_pos _)]
+  exact mul_le_mul_of_nonneg_left (hbd t) (Real.exp_pos _).le
+
+open MeasureTheory in
+/-- **★ The smeared vector lands in `K`.**  Since `e^{−n t²} ≥ 0` is a real scalar and `V_t η ∈ K`
+    (real-subspace invariance), the Bochner integral stays in the closed real subspace `K` — because the
+    `ℝ`-linear orthogonal projection `projK` commutes with the integral and fixes the integrand
+    (`ContinuousLinearMap.integral_comp_comm`).  First brick of the entire-vector construction. -/
+theorem gaussSmear_mem_K (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) {η : H}
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hinv : ∀ t, V t η ∈ S.toClosedSubmodule) :
+    gaussSmear V n η ∈ S.toClosedSubmodule := by
+  rw [mem_K_iff_projK, gaussSmear,
+    ← ContinuousLinearMap.integral_comp_comm (projK S) (gaussSmear_integrable hn η hcont hbd)]
+  refine integral_congr_ae (Filter.Eventually.of_forall (fun t => ?_))
+  show projK S (Real.exp (-n * t ^ 2) • V t η) = Real.exp (-n * t ^ 2) • V t η
+  rw [map_smul, (mem_K_iff_projK S (V t η)).mp (hinv t)]
 
 /-! ### Analytic continuation of the modular character to the KMS strip
 

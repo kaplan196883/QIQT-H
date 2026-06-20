@@ -3535,6 +3535,14 @@ namespace QIQTH.AxiomAudit
 -- u_{z+i}(r)=u_z(r)·(r/(2−r)) — shifting Im by β=1 multiplies by the modular weight exp(−log((2−r)/r)). This is
 -- the scalar core of Δ^{it}'s own strip/KMS property, the regularity needed to enter the strip-uniqueness
 -- comparison toward discharging hUniq. (Next: lift to the spectral-integral correlation ⟪ξ,Δ^{it}ξ⟫.)
+-- ENTIRE-VECTOR construction (RvD Thm 3.8 operator half): Gaussian smearing into K.
+#print axioms QIQTH.StandardSubspaceModular.gaussSmear_integrable
+#print axioms QIQTH.StandardSubspaceModular.gaussSmear_mem_K
+-- expected: standard only — gaussSmear V n η = ∫ e^{−n t²}•V_t η dt. gaussSmear_integrable: Bochner-integrable
+-- (dominated by the Gaussian e^{−n t²}·‖η‖ via integrable_exp_neg_mul_sq, V_t norm-non-increasing + orbit
+-- continuous). gaussSmear_mem_K: ★ the smeared vector lands in the real subspace K — the ℝ-linear projection
+-- projK commutes with the Bochner integral (ContinuousLinearMap.integral_comp_comm) and fixes V_t η∈K. First
+-- brick of RvD's dense-entire-vectors construction toward discharging hUniq (the operator/integral half).
 #print axioms QIQTH.StandardSubspaceModular.hasDerivAt_modCharC
 #print axioms QIQTH.StandardSubspaceModular.measurable_modCharC
 #print axioms QIQTH.StandardSubspaceModular.abs_log_div_le
