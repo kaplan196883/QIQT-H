@@ -328,4 +328,24 @@ theorem hasDerivAt_modularEnergy_of_boost
     funext t; rw [hbw t ξ]
   rw [heq]; exact h
 
+/-- **★ One-particle `hFlux`: the modular energy IS `(2π/ℏ)·(stress flux)`** — `hFlux` derived from the BW
+    plus the labelled boost-charge identity.  `hBoostCharge` is the single remaining labelled input on
+    this path: the **boost-charge = stress-flux** identity `δ⟨boost⟩ = (2π/ℏ)·T_kk` (the conserved
+    Killing charge of the boost equals the stress-tensor flux — standard field theory, needs the field
+    stress tensor which the project has not built, so labelled).  Composed with the *proved*
+    `hasDerivAt_modularEnergy_of_boost` (modular energy = boost energy, via BW), it gives the modular
+    energy derivative `= (2π/ℏ)·T_kk` — exactly the `hFlux` of `qiqt_bekenstein_gives_gr` at the
+    one-particle (Hilbert) level.  So `hFlux`'s modular content is DERIVED; only the Killing-charge
+    identity (and the one-particle↔component `Krep` bridge) remain labelled. -/
+theorem modularEnergy_eq_stressFlux
+    (S : StandardSubspace (Lp ℂ 2 (volume : Measure ℝ)))
+    (hbw : ∀ (t : ℝ) (u : Lp ℂ 2 (volume : Measure ℝ)),
+        QIQTH.StandardSubspaceModular.modUnitary S t u = boostUnitary (-(2 * Real.pi * t)) u)
+    (ξ : Lp ℂ 2 (volume : Measure ℝ)) (hbar Tkk : ℝ)
+    (hBoostCharge : HasDerivAt (fun t : ℝ => inner ℂ ξ (boostUnitary (-(2 * Real.pi * t)) ξ))
+        ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ) 0) :
+    HasDerivAt (fun t : ℝ => inner ℂ ξ (QIQTH.StandardSubspaceModular.modUnitary S t ξ))
+        ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ) 0 :=
+  hasDerivAt_modularEnergy_of_boost S hbw ξ _ hBoostCharge
+
 end QIQTH.Fock.OneParticleBW
