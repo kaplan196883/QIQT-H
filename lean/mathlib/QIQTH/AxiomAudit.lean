@@ -3920,6 +3920,16 @@ namespace QIQTH.AxiomAudit
 -- rvdSpec_modUnitary). modCorrExt_kms_flip: TOP edge F_ξ(t+i)=∫ modChar t (ω)·(ω/(2−ω)) dμ (the KMS weight),
 -- in the regular regime σ(R)⊆(0,2). These are the two BOUNDARY conditions strip-uniqueness consumes — the
 -- extension's edges now pinned. Remaining for hUniq: holomorphy under ∫ (boundedness done) + Borchers reduction.
+#print axioms QIQTH.diffContOnCl_devCorrExt
+-- expected: standard only — ★★ DEVICE bdd-HOLO on the CLOSED half-strip, NO regular window. DiffContOnCl =
+-- differentiableOn (holomorphic) + continuousOn up to {−1/2≤Im≤0}. Edge continuity = dominated convergence under
+-- ∫ (‖d_z‖≤√2 on the closed half-strip via devChar_norm_le_Icc+rvdRC_spectrum_mem_Icc; z↦d_z continuous, entire).
+-- The exact DiffContOnCl input eqOn_of_im_zero_edge_halfStrip consumes — for EVERY standard subspace.
+#print axioms QIQTH.StandardSubspaceModular.devCorrExt_eqOn_of_boundary
+-- expected: standard only — ★★ DEVICE Δ-side STRIP-UNIQUENESS (no regular window): any bdd-holo F on the half-
+-- strip agreeing with devCorrExt on the real axis Im=0 coincides with it on the whole closed half-strip
+-- (eqOn_of_im_zero_edge_halfStrip + diffContOnCl_devCorrExt + devCorrExt_norm_le). The device analogue of
+-- modCorrExt_eq_of_boundary, available for ANY standard subspace. Δ-side half of the strip-uniqueness comparison.
 #print axioms QIQTH.devCorrExt_ofReal
 -- expected: standard only — REAL-AXIS value (scalar): D_ξ(t)=∫ u_t·√ω dμ^R_ξ (devChar_ofReal under ∫). The
 -- √r-weighted modular correlation = ⟪ξ,Δ^{it}√R ξ⟫ as operator expectation (operator id needs borelFC↔CFC.sqrt

@@ -446,4 +446,24 @@ theorem modCorrExt_eq_of_boundary (S : StandardSubspace H) (ξ : H) {a : ℝ} (h
   simp only [StripUniqueness.kmsStripOpen, Set.mem_preimage, Set.mem_Ioo] at hz
   exact le_trans (modCorrExt_norm_le S ξ ha0 ha1 hspec (le_of_lt hz.1) (le_of_lt hz.2)) (le_max_right _ _)
 
+/-- **The device strip extension is pinned by its real-axis edge** (device Δ-side strip-uniqueness, NO regular
+    window).  Any competitor `F` that is bounded-holomorphic on the half-strip and agrees with `devCorrExt` on
+    the real axis `Im z = 0` coincides with it on the whole closed half-strip — by the half-strip one-edge
+    uniqueness `eqOn_of_im_zero_edge_halfStrip` (Hadamard three-lines), with `devCorrExt` supplying the second
+    bounded-holomorphic function (`diffContOnCl_devCorrExt`, `devCorrExt_norm_le`).  Available for EVERY
+    standard subspace, unlike the `modCorrExt` analogue (`modCorrExt_eq_of_boundary`) which needs the regular
+    regime.  The Δ-side half of the strip-uniqueness comparison; pinning a U-side competitor then transfers. -/
+theorem devCorrExt_eqOn_of_boundary (S : StandardSubspace H) (ξ : H) {F : ℂ → ℂ} {M : ℝ}
+    (hF : DiffContOnCl ℂ F (Complex.im ⁻¹' Set.Ioo (-(1 / 2) : ℝ) 0))
+    (hFb : ∀ z ∈ StripUniqueness.kmsHalfStrip, ‖F z‖ ≤ M)
+    (hreal : ∀ t : ℝ, F (t : ℂ) = devCorrExt S ξ (t : ℂ)) :
+    Set.EqOn F (devCorrExt S ξ) StripUniqueness.kmsHalfStrip :=
+  StripUniqueness.eqOn_of_im_zero_edge_halfStrip (M := max M (Real.sqrt 2 * ‖ξ‖ ^ 2)) hF
+    (diffContOnCl_devCorrExt S ξ)
+    (fun z hz => le_trans (hFb z hz) (le_max_left _ _))
+    (fun z hz => le_trans (devCorrExt_norm_le S ξ hz.2 hz.1) (le_max_right _ _))
+    (fun z hz0 => by
+      have hz' : z = ((z.re : ℝ) : ℂ) := Complex.ext (by simp) (by simp [hz0])
+      rw [hz']; exact hreal z.re)
+
 end QIQTH.StandardSubspaceModular

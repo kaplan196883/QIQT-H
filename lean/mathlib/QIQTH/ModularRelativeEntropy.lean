@@ -438,6 +438,29 @@ theorem differentiableOn_devCorrExt (S : StandardSubspace H) (ξ : H) :
     DifferentiableOn ℂ (devCorrExt S ξ) (Complex.im ⁻¹' Set.Ioo (-(1 / 2) : ℝ) 0) := fun z hz =>
   (hasDerivAt_devCorrExt S ξ (by simpa using hz)).differentiableAt.differentiableWithinAt
 
+open MeasureTheory in
+/-- **The device strip extension is bounded-holomorphic on the CLOSED half-strip** (no regular window):
+    holomorphic on the open half-strip (`differentiableOn_devCorrExt`) and continuous up to the closed
+    half-strip `{−1/2 ≤ Im z ≤ 0}`.  Continuity at the edges is dominated convergence under the spectral
+    integral: `‖d_z(ω)‖ ≤ √2` uniformly on the closed half-strip (`devChar_norm_le_Icc` +
+    `rvdRC_spectrum_mem_Icc`), and `z ↦ d_z(ω)` is continuous (entire, `differentiable_devChar`).  This is the
+    exact `DiffContOnCl` input that the half-strip one-edge uniqueness (`eqOn_of_im_zero_edge_halfStrip`)
+    consumes — now available for EVERY standard subspace (the device's regular-window-free advantage). -/
+theorem diffContOnCl_devCorrExt (S : StandardSubspace H) (ξ : H) :
+    DiffContOnCl ℂ (devCorrExt S ξ) (Complex.im ⁻¹' Set.Ioo (-(1 / 2) : ℝ) 0) := by
+  haveI : IsFiniteMeasure (rvdSpecMeasure S ξ) := by unfold rvdSpecMeasure; infer_instance
+  refine ⟨differentiableOn_devCorrExt S ξ, ?_⟩
+  rw [Complex.closure_preimage_im, closure_Ioo (by norm_num : (-(1 / 2) : ℝ) ≠ 0)]
+  have hmeasC : ∀ z : ℂ, AEStronglyMeasurable
+      (fun ω : spectrum ℝ (rvdRC S) => devChar z (ω : spectrum ℝ (rvdRC S)).val)
+      (rvdSpecMeasure S ξ) :=
+    fun z => ((measurable_devChar z).comp measurable_subtype_coe).aestronglyMeasurable
+  exact continuousOn_of_dominated (fun x _ => hmeasC x)
+    (fun x hx => Filter.Eventually.of_forall (fun ω =>
+      devChar_norm_le_Icc hx.2 hx.1 (rvdRC_spectrum_mem_Icc S ω)))
+    (integrable_const (Real.sqrt 2))
+    (Filter.Eventually.of_forall (fun ω => (differentiable_devChar _).continuous.continuousOn))
+
 /-- The vacuum coherent state (`ξ = 0`) has zero relative entropy with itself. -/
 @[simp] theorem cgpEntropy_zero (S : StandardSubspace H) : cgpEntropy S (0 : H) = 0 := by
   simp [cgpEntropy]
