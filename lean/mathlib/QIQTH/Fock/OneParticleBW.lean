@@ -475,6 +475,28 @@ def StripKMS (V : ℝ → (H →L[ℂ] H)) (D : Set H) : Prop :=
     (∀ t : ℝ, F t = inner ℂ ξ (V t η)) ∧
     (∀ t : ℝ, F ((t : ℂ) + Complex.I) = inner ℂ η (V t ξ))
 
+/-- **The CORRECT one-particle KMS condition — Rieffel–Van Daele (1977), Definition 3.4.**  Faithful to the
+    source (refs/RieffelVanDaele): a strongly-continuous unitary group `V` satisfies the KMS condition w.r.t.
+    the **real subspace** `K` (`= 𝒦`) iff for every `ξ, η ∈ K` there is `f`
+    * **bounded and continuous on the closed strip `{−1 ≤ Im z ≤ 0}`, analytic in the interior**
+      (`DiffContOnCl` on the open strip `{−1 < Im < 0}` + a uniform bound `M`), with boundary values
+    * `f(t)   = ⟪V(t) ξ, η⟫`   (bottom edge `Im = 0`),
+    * `f(t−i) = ⟪η, V(t) ξ⟫`   (top edge `Im = −1`, the plain flip).
+
+    This is the fix for the defect `stripKMS_trivial` exposes in `StripKMS`: the boundedness +
+    continuity-to-the-closure (absent from `StripKMS`) is exactly what makes the extension **unique**
+    (RvD's Schwarz-reflection remark) and the condition a genuine constraint.  RvD **Theorem 3.8** then proves
+    `Δ^{it}` is the *unique* such group carrying `K` onto `K` — i.e. this `StripKMSrvd` discharges `hUniq`,
+    and crucially RvD prove it with **bounded operators only** (entire vectors + Schwarz reflection), so it is
+    NOT blocked on Stone's theorem / unbounded Tomita.  The plain flip is correct here precisely because
+    `ξ, η ∈ K` are *real-subspace* vectors (`Δ^{1/2}ξ = Jξ`), per RvD Prop 3.7. -/
+def StripKMSrvd (V : ℝ → (H →L[ℂ] H)) (K : Set H) : Prop :=
+  ∀ ξ ∈ K, ∀ η ∈ K, ∃ f : ℂ → ℂ,
+    DiffContOnCl ℂ f (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) ∧
+    (∃ M : ℝ, ∀ z : ℂ, ‖f z‖ ≤ M) ∧
+    (∀ t : ℝ, f t = inner ℂ (V t ξ) η) ∧
+    (∀ t : ℝ, f ((t : ℂ) - Complex.I) = inner ℂ η (V t ξ))
+
 /-- **★ SOUNDNESS AUDIT — `StripKMS` as defined is TRIVIALLY satisfiable, hence too weak to be the KMS
     condition.**  Because the witness `F` is required to be holomorphic only on the *open* strip while the
     boundary values at `Im = 0` and `Im = 1` are imposed *pointwise* (with no continuity linking interior to
