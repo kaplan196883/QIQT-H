@@ -141,6 +141,17 @@ theorem tendsto_boostUnitary_wedge (ξ : Lp ℂ 2 (volume : Measure ℝ)) :
       (nhds ((fun t : ℝ => boostUnitary (-(2 * Real.pi * t)) ξ) 0)) := hc.continuousAt.tendsto
   rwa [hval] at h0
 
+/-- **★ Matrix-element continuity of the boost group** — the boundary regularity the strip/KMS property
+    rests on.  For every pair of one-particle states, the correlation `t ↦ ⟪η, boostUnitary t ξ⟫` is
+    continuous on the real axis.  This is the real-axis regularity of the matrix element `F_{η,ξ}(t)` whose
+    holomorphic strip extension is asserted by `StripKMS` — so it is a genuine, derived ingredient of the
+    wedge-KMS input (the boundary function it constrains is itself continuous), and the scalar shadow of the
+    boost group's strong continuity (`continuous_boostUnitary_apply` composed with the continuous inner
+    product).  Axiom-free. -/
+theorem continuous_inner_boostUnitary (η ξ : Lp ℂ 2 (volume : Measure ℝ)) :
+    Continuous (fun t : ℝ => inner ℂ η (boostUnitary t ξ)) :=
+  continuous_const.inner (continuous_boostUnitary_apply ξ)
+
 /-- **Invariance engine** (for the boost-invariance of the wedge standard subspace): a continuous
     `ℝ`-linear map `L` that maps a set `W` into itself also maps `closure (span ℝ W)` into itself.
     Applied with `L = boostUnitary a` and `W` = the (boost-closed) wedge generating set, this gives

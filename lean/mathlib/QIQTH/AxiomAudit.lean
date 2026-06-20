@@ -3452,6 +3452,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.OneParticleBW.boostUnitary_eq_vadd
 #print axioms QIQTH.Fock.OneParticleBW.continuous_boostUnitary_apply
 #print axioms QIQTH.Fock.OneParticleBW.tendsto_boostUnitary_wedge
+#print axioms QIQTH.Fock.OneParticleBW.continuous_inner_boostUnitary
+-- expected: standard only — continuous_inner_boostUnitary: ★ matrix-element continuity t↦⟪η,boostUnitary t ξ⟫,
+-- the real-axis boundary regularity of the correlation F_{η,ξ}(t) whose strip extension StripKMS asserts (a
+-- derived ingredient of the wedge-KMS input) = scalar shadow of strong continuity ∘ continuous inner product.
 -- expected: standard only — boostUnitary_eq_vadd: boostUnitary t = DomAddAct.mk(−t)+ᵥ· (the project boost group IS
 -- Mathlib's canonical Lp domain-translation; unitary_apply precomposes with flow(−t) ⇒ ξ(x−t), matches mk(−t)+ᵥξ via
 -- add_comm + Equiv.symm_apply_apply). continuous_boostUnitary_apply: ★ STRONG CONTINUITY t↦boostUnitary t ξ, from
