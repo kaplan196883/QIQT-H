@@ -2286,6 +2286,38 @@ theorem devChar_ofReal (t : ℝ) (r : ℝ) : devChar (t : ℂ) r = modChar t r *
 theorem differentiable_devChar (r : ℝ) : Differentiable ℂ (fun z => devChar z r) :=
   fun z => ((differentiable_modCharC r z).mul_const _)
 
+/-- The modular character at `z = 0` is `1` (`exp(0) = 1` on `(0,2)`, `1` off it). -/
+theorem modCharC_zero (r : ℝ) : modCharC 0 r = 1 := by
+  by_cases h : r ∈ Set.Ioo (0 : ℝ) 2
+  · rw [modCharC_of_mem h]; simp
+  · exact Set.piecewise_eq_of_notMem _ _ _ h
+
+/-- **Device character at `z = 0` is `√r`** (`= R^{1/2}` at the operator level): `d_0(r) = √r`.  The device
+    interpolation starts at `√R` (so `deviceOpC 0 ζ = R^{1/2}ζ = ξ`, giving the g-function value
+    `g(0) = ⟨η, Jξ⟩`). -/
+theorem devChar_zero (r : ℝ) : devChar 0 r = (Real.sqrt r : ℂ) := by
+  rw [devChar, modCharC_zero, one_mul]
+
+/-- **Device character at the bottom edge `z = −i/2` is `√(2−r)`** (`= (2−R)^{1/2}` at the operator level):
+    `d_{−i/2}(r) = √(2−r)` for `r ∈ (0,2)`.  The device interpolation ends at `(2−R)^{1/2}` (so
+    `deviceOpC (−i/2) ζ = (2−R)^{1/2}ζ = Jξ`, the half-modular-shift `Δ^{1/2} = J` on `𝒦`).  Computed from
+    `Complex.exp(I·(−I/2)·log((2−r)/r))·√r = √((2−r)/r)·√r = √(2−r)`. -/
+theorem devChar_neg_half_I {r : ℝ} (hr : r ∈ Set.Ioo (0 : ℝ) 2) :
+    devChar (-(Complex.I / 2)) r = (Real.sqrt (2 - r) : ℂ) := by
+  obtain ⟨hr0, hr2⟩ := hr
+  have h2r : (0 : ℝ) < 2 - r := by linarith
+  have hposx : (0 : ℝ) < (2 - r) / r := by positivity
+  rw [devChar, modCharC_of_mem ⟨hr0, hr2⟩]
+  have hexp : Complex.I * (-(Complex.I / 2)) * (Real.log ((2 - r) / r) : ℂ)
+      = ((1 / 2 * Real.log ((2 - r) / r) : ℝ) : ℂ) := by
+    push_cast
+    linear_combination (-(1 : ℂ) / 2 * (Real.log ((2 - r) / r) : ℂ)) * Complex.I_mul_I
+  rw [hexp, ← Complex.ofReal_exp, ← Complex.ofReal_mul]
+  congr 1
+  rw [show (1 / 2 * Real.log ((2 - r) / r)) = Real.log ((2 - r) / r) * (1 / 2) from by ring,
+    ← Real.rpow_def_of_pos hposx, ← Real.sqrt_eq_rpow, ← Real.sqrt_mul (le_of_lt hposx),
+    div_mul_cancel₀ _ (ne_of_gt hr0)]
+
 /-- **The device character is bounded by `√2` on the half-strip** `{−1/2 ≤ Im z ≤ 0}`, uniformly over the
     spectrum `r ∈ (0,2)` — with NO regular-window assumption (RvD Lemma 3.6 / Prop 3.7).  Writing `b = −Im z ∈
     [0, 1/2]`, `‖d_z(r)‖ = exp(b·log((2−r)/r))·√r`; in log form `b·log(2−r) + (1/2 − b)·log r ≤ (1/2)·log 2`
