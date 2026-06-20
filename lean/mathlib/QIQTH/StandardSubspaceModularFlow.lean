@@ -685,6 +685,26 @@ theorem modConj_smul_I (S : StandardSubspace H) (η : H) :
     smul_sub, neg_smul, neg_smul]
   abel
 
+/-- A bookkeeping identity: the imaginary part of a complex inner product as a real inner product,
+    `Im⟪x, y⟫ = ⟪i·x, y⟫_ℝ`.  (`inner_smul_left` + `conj i = −i`.) -/
+private theorem im_inner_eq_real_inner_smul_I (x y : H) :
+    (inner ℂ x y).im = inner ℝ (Complex.I • x) y := by
+  show (inner ℂ x y).im = (inner ℂ (Complex.I • x) y).re
+  rw [inner_smul_left, Complex.conj_I, Complex.mul_re]; simp
+
+/-- **The modular conjugation `J` is antiunitary**: `⟪J η, J ζ⟫ = conj⟪η, ζ⟫`.  The real part is
+    `modConj_inner_map` (`J` is a real isometry); the imaginary part flips sign because `J` is antilinear
+    (`modConj_smul_I`): `Im⟪Jη, Jζ⟫ = ⟪i·Jη, Jζ⟫_ℝ = −⟪J(i·η), Jζ⟫_ℝ = −⟪i·η, ζ⟫_ℝ = −Im⟪η, ζ⟫`.  This is
+    the full Tomita reality of `J`, the engine behind `J𝒦 = (i𝒦)^⊥` (RvD Prop 2.2(5)). -/
+theorem modConj_inner_conj (S : StandardSubspace H) (η ζ : H) :
+    inner ℂ (modConj S η) (modConj S ζ) = (starRingEnd ℂ) (inner ℂ η ζ) := by
+  apply Complex.ext
+  · rw [Complex.conj_re]; exact modConj_inner_map S η ζ
+  · rw [Complex.conj_im, im_inner_eq_real_inner_smul_I,
+      show Complex.I • modConj S η = -modConj S (Complex.I • η) by
+        rw [modConj_smul_I, neg_smul, neg_neg],
+      inner_neg_left, modConj_isSelfAdjoint, modConj_sq, ← im_inner_eq_real_inner_smul_I]
+
 /-! ### Modular reflection of `R`: `J R J = 2 − R`
 
   The bounded shadow of the canonical Tomita–Takesaki relation `J Δ J = Δ⁻¹` (with `Δ = (2−R)R⁻¹`):

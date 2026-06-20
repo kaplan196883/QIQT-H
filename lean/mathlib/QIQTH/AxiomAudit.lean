@@ -3620,6 +3620,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ 𝒦→H CAPSTONE: two continuous ℂ-linear A,B agreeing on 𝒦 agree everywhere.
 -- By ℂ-linearity also agree on i𝒦 (q∈i𝒦 ⇒ −i·q∈𝒦), hence on 𝒦+i𝒦 which is DENSE (IsCyclic 𝒦⊔i𝒦=⊤);
 -- continuity (Continuous.ext_on). Lifts V_t η=Δ^{it}η on 𝒦 (eq_of_mem_K_of_inner_perp_IK) to V_t=Δ^{it}.
+#print axioms QIQTH.StandardSubspaceModular.modConj_inner_conj
+-- expected: standard only — ★ J IS ANTIUNITARY: ⟨Jη,Jζ⟩=conj⟨η,ζ⟩. Re part = modConj_inner_map (J real
+-- isometry); Im part flips by antilinearity (modConj_smul_I): Im⟨Jη,Jζ⟩=⟨i·Jη,Jζ⟩_ℝ=−⟨J(i·η),Jζ⟩_ℝ=
+-- −⟨i·η,ζ⟩_ℝ=−Im⟨η,ζ⟩. The full Tomita reality of J, engine behind J𝒦=(i𝒦)^⊥ (RvD Prop 2.2(5)).
 #print axioms QIQTH.StandardSubspaceModular.modConj_smul_I
 -- expected: standard only — ★ J IS ANTILINEAR: modConj(i·η)=−i·(modConj η). On the dense range of T (ℂ-linear):
 -- J(i·T x)=J(T(i·x))=D(i·x)=(P−Q)(i·x)=i·(Q−P)x=−i·Dx=−i·J(Tx) (projK_smul_I/projIK_smul_I), continuity extends.
