@@ -256,4 +256,29 @@ theorem raychaudhuri_geodesic (g gi : Point n → Fin n → Fin n → ℝ)
         - ∑ ν, ∑ σ, ricci g gi σ ν x * V x σ * V x ν := by
   rw [raychaudhuri_focusing g gi hsymm V hVC hC x, geodesic_leibniz g gi hsymm V hVC hC hgeo x]
 
+/-- **★ Leading-order Raychaudhuri focusing at equilibrium — the geometric content of Jacobson's
+`hFocus`.**  At a moment of *local equilibrium* (a stationary/bifurcation horizon, where the
+shear–expansion quadratic `(∇_μV^ν)(∇_νV^μ)` vanishes — `θ = σ = ω = 0`, the condition Jacobson
+imposes), the Raychaudhuri equation collapses to **pure Ricci focusing**:
+
+  `V^ν ∂_ν θ = − R_{σν} V^σ V^ν`   (i.e. `dθ/dλ = − R_kk`).
+
+So the focusing rate of a null geodesic congruence equals minus the contracted Ricci `R_kk` — exactly
+the area-rate ↔ `R_kk` content of the `hFocus` input of `qiqt_bekenstein_gives_gr` / `qiqt_gr_from_wedge_kms`
+(input #3, "standard structural regularity").  This is the kinematics of null congruences, derived from
+the machine-checked `raychaudhuri_geodesic`; it presupposes no Einstein equation.  The only remaining
+modelling step in `hFocus` is the identification of the abstract area first-variation rate with the
+congruence expansion `θ` (the area-vs-`θ` correspondence).  Axiom-free. -/
+theorem raychaudhuri_focusing_at_equilibrium (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (V : Point n → Fin n → ℝ)
+    (hVC : ∀ μ, ContDiff ℝ ⊤ (fun y => V y μ))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (hgeo : ∀ y μ, ∑ ν, V y ν * covDerivVec g gi V ν μ y = 0)
+    (x : Point n)
+    (hequil : (∑ μ, ∑ ν, covDerivVec g gi V μ ν x * covDerivVec g gi V ν μ x) = 0) :
+    ∑ ν, V x ν * pd (fun y => expansion g gi V y) ν x
+      = - ∑ ν, ∑ σ, ricci g gi σ ν x * V x σ * V x ν := by
+  rw [raychaudhuri_geodesic g gi hsymm V hVC hC hgeo x, hequil, neg_zero, zero_sub]
+
 end QIQTH.Curvature
