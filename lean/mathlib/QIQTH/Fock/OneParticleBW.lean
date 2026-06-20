@@ -567,6 +567,34 @@ theorem oneParticleBW_of_kms (S : StandardSubspace H)
     ∀ t, modUnitary S t = V t :=
   hUniq hInv hStrip
 
+/-- The **half-strip reality form** of the KMS condition (the output of RvD Proposition 3.5): for `ξ, η ∈ K`,
+    a bounded-holomorphic `f` on `{−1 < Im z < 0}` with `f(t) = ⟪V_t ξ, η⟫` and `f(t − i/2)` REAL.  This is the
+    reality input RvD Theorem 3.8 actually consumes; it is PROVABLE from `StripKMSrvd`
+    (`stripKMSrvd_halfStripReal`, via Prop 3.5), so labelling it instead of all of `StripKMS` shrinks the
+    unproven surface to exactly the Theorem-3.8 core. -/
+def HalfStripReal (V : ℝ → (H →L[ℂ] H)) (K : Set H) : Prop :=
+  ∀ ξ ∈ K, ∀ η ∈ K, ∃ f : ℂ → ℂ, DiffContOnCl ℂ f (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) ∧
+    (∀ t : ℝ, f (t : ℂ) = inner ℂ (V t ξ) η) ∧ (∀ t : ℝ, (f ((t : ℂ) - Complex.I / 2)).im = 0)
+
+/-- **`StripKMSrvd` ⟹ `HalfStripReal`** — RvD Proposition 3.5, packaged: the correct full-strip KMS condition
+    yields the half-strip reality form (each pair's witness made real on the mid-line). -/
+theorem stripKMSrvd_halfStripReal {V : ℝ → (H →L[ℂ] H)} {K : Set H} (hV : StripKMSrvd V K) :
+    HalfStripReal V K := fun ξ hξ η hη => stripKMSrvd_real_midline hV hξ hη
+
+/-- **★ Conditional one-particle Bisognano–Wichmann via the CORRECT RvD KMS condition (narrowed core).**
+    Replaces the vacuous `StripKMS` of `oneParticleBW_of_kms` with the genuine `StripKMSrvd` (RvD Def 3.4), and
+    narrows the single labelled hypothesis to the **RvD Theorem 3.8 core** `hThm38` (half-strip reality +
+    `𝒦`-invariance ⟹ modular flow).  The Proposition-3.5 reduction (`StripKMSrvd ⟹ HalfStripReal`) is now
+    DISCHARGED axiom-free (`stripKMSrvd_halfStripReal`), so the unproven surface is exactly the Theorem-3.8
+    g-function assembly — strictly smaller and more honest than the `StripKMS`/`hUniq` formulation. -/
+theorem oneParticleBW_of_stripKMSrvd (S : StandardSubspace H) (V : ℝ → (H →L[ℂ] H))
+    (hThm38 : (∀ t, Set.MapsTo (V t) (S.toClosedSubmodule : Set H) (S.toClosedSubmodule : Set H)) →
+              HalfStripReal V (S.toClosedSubmodule : Set H) → ∀ t, modUnitary S t = V t)
+    (hInv : ∀ t, Set.MapsTo (V t) (S.toClosedSubmodule : Set H) (S.toClosedSubmodule : Set H))
+    (hKMS : StripKMSrvd V (S.toClosedSubmodule : Set H)) :
+    ∀ t, modUnitary S t = V t :=
+  hThm38 hInv (stripKMSrvd_halfStripReal hKMS)
+
 end ConditionalBW
 
 /-- **★ One-particle Bisognano–Wichmann for the WEDGE subspace (boost-invariance supplied from the

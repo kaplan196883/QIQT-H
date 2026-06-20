@@ -3448,6 +3448,13 @@ namespace QIQTH.AxiomAudit
 -- (⟪η,V_tξ⟫=conj⟪V_tξ,η⟫ by inner_conj_symm, f(t)=⟪V_tξ,η⟫) ⇒ real_on_midline_of_conj_flip gives the half-strip
 -- KMS form: bdd-holo f, f(t)=⟪V_tξ,η⟫, f(t−i/2) REAL. The reality input RvD Thm 3.8 consumes — axiom-free, the
 -- genuine Prop-3.5 brick on the hUniq discharge spine (Thm 3.8's remaining g-pairing/device step still labelled).
+#print axioms QIQTH.Fock.OneParticleBW.stripKMSrvd_halfStripReal
+#print axioms QIQTH.Fock.OneParticleBW.oneParticleBW_of_stripKMSrvd
+-- expected: standard only — ★★ NARROWED conditional BW (honest fix of the StripKMS soundness defect): uses the
+-- CORRECT StripKMSrvd (RvD Def 3.4) instead of the vacuous StripKMS, and labels only the RvD Thm 3.8 CORE
+-- hThm38 (HalfStripReal + 𝒦-invariance ⟹ modUnitary=V). The Prop-3.5 reduction StripKMSrvd⟹HalfStripReal is
+-- DISCHARGED axiom-free (stripKMSrvd_halfStripReal = stripKMSrvd_real_midline per pair). So the unproven surface
+-- shrinks from "all of Thm 3.8 + a vacuous StripKMS" to "just the Thm 3.8 g-function assembly". Strictly more honest.
 #print axioms QIQTH.Fock.OneParticleBW.oneParticleBW_of_kms
 -- expected: standard only — ★ CONDITIONAL ONE-PARTICLE BISOGNANO–WICHMANN (KMS-uniqueness route, gpt-5-pro
 -- verdict: KMS-uniqueness is NOT provable in current Mathlib — needs unbounded Tomita/Hardy-strip, months —
