@@ -260,6 +260,31 @@ theorem rvdR_smul_I (S : StandardSubspace H) (ξ : H) :
   rw [rvdR_apply, rvdR_apply, projK_smul_I, projIK_smul_I, smul_add]
   abel
 
+/-- **Operator equality from equality on `𝒦`** (RvD Theorem 3.8 capstone): two continuous `ℂ`-linear
+    operators that agree on the standard subspace `𝒦` agree everywhere.  By `ℂ`-linearity they then agree on
+    `i𝒦` (`q ∈ i𝒦 ⟹ −i·q ∈ 𝒦`), hence on the algebraic sum `𝒦 + i𝒦`, which is **dense** (`IsCyclic`,
+    `𝒦 ⊔ i𝒦 = ⊤`); continuity finishes.  This lifts the per-vector identity `V_t η = Δ^{it} η` on `𝒦`
+    (from `eq_of_mem_K_of_inner_perp_IK`) to the operator identity `V_t = Δ^{it}` discharging `hUniq`. -/
+theorem clm_eq_of_eqOn_K (S : StandardSubspace H) {A B : H →L[ℂ] H}
+    (h : ∀ x ∈ S.toClosedSubmodule, A x = B x) : A = B := by
+  have hiK : ∀ q ∈ S.toClosedSubmodule.mulI, A q = B q := by
+    intro q hq
+    have hk := h _ (neg_I_smul_mem_of_mem_mulI hq)
+    rw [map_smul, map_smul] at hk
+    exact smul_right_injective H (neg_ne_zero.2 Complex.I_ne_zero) hk
+  have hdense : Dense ((S.toClosedSubmodule.toSubmodule ⊔ S.toClosedSubmodule.mulI.toSubmodule
+      : Submodule ℝ H) : Set H) := by
+    have h1 : ((S.toClosedSubmodule ⊔ S.toClosedSubmodule.mulI : ClosedSubmodule ℝ H) : Set H)
+        = Set.univ := by rw [S.IsCyclic]; exact ClosedSubmodule.coe_top
+    rw [ClosedSubmodule.coe_sup] at h1
+    exact dense_iff_closure_eq.mpr h1
+  apply DFunLike.coe_injective
+  refine Continuous.ext_on hdense A.continuous B.continuous (fun x hx => ?_)
+  obtain ⟨p, hp, q, hq, rfl⟩ := Submodule.mem_sup.mp hx
+  show A (p + q) = B (p + q)
+  rw [map_add, map_add, h p ((mem_toSubmodule_iff _ _).mp hp),
+    hiK q ((mem_toSubmodule_iff _ _).mp hq)]
+
 /-- **Full ℂ-`map_smul` for `R`**: `R(c·x) = c·(R x)` for every `c : ℂ`.  Decompose
     `c = c.re + c.im·i`; the real part uses ℝ-linearity, the imaginary part `rvdR_smul_I`. -/
 theorem rvdR_smul_complex (S : StandardSubspace H) (c : ℂ) (x : H) :

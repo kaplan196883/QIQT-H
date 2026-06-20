@@ -3616,6 +3616,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.corrC_ofReal
 -- expected: standard only — real-axis value corrC ξ V n η ↑s = ⟨ξ,V_s(gaussSmear V n η)⟩: on ℝ the
 -- correlation is the genuine matrix element of the flow (gaussSmearC_ofReal). Boundary data for Thm 3.8.
+#print axioms QIQTH.StandardSubspaceModular.clm_eq_of_eqOn_K
+-- expected: standard only — ★★ 𝒦→H CAPSTONE: two continuous ℂ-linear A,B agreeing on 𝒦 agree everywhere.
+-- By ℂ-linearity also agree on i𝒦 (q∈i𝒦 ⇒ −i·q∈𝒦), hence on 𝒦+i𝒦 which is DENSE (IsCyclic 𝒦⊔i𝒦=⊤);
+-- continuity (Continuous.ext_on). Lifts V_t η=Δ^{it}η on 𝒦 (eq_of_mem_K_of_inner_perp_IK) to V_t=Δ^{it}.
 #print axioms QIQTH.StandardSubspaceModular.eq_of_mem_K_of_inner_perp_IK
 -- expected: standard only — ★★ TOTALITY/⊥-TO-EQUALITY (RvD Thm 3.8 closeout): a,b∈𝒦 with ⟨w,a⟩=⟨w,b⟩ ∀w⊥i𝒦
 -- (projIK w=0) ⇒ a=b. d=a−b∈𝒦 ⊥ all (i𝒦)^⊥: w=d−Qd gives ‖d−Qd‖²=Re⟨w,d⟩=0 ⇒ d=Qd∈i𝒦; d∈𝒦⊓i𝒦=⊥
