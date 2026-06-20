@@ -304,6 +304,28 @@ theorem modUnitary_eq_of_orbit_compare (S : StandardSubspace H) {V : ℝ → (H 
   exact eq_of_mem_K_of_inner_perp_IK S ((mem_K_iff_projK S _).mp (hΔK η hη))
     ((mem_K_iff_projK S _).mp (hVK η hη)) (fun w hw => (hcompare η hη w hw).symm)
 
+/-- **Faithful RvD `g`-function, top-edge reality** (RvD Thm 3.8, *p. 198*, the "`g(t) = ⟨U_t η, Jξ⟩` is
+    real" step — verified against the clean PDF text, not the earlier garbled scan).  The genuine RvD
+    half-strip function is `g(z) = ⟨Jξ, h(z)⟩` with the vector `Jξ = modConj S ξ` for `ξ ∈ 𝒦`.  RvD write
+    that vector as `(2−R)^{1/2} R^{−1/2} ξ`, but their *own* identity `(2−R)^{1/2} R^{−1/2} ξ = Jξ`
+    (the `modConj` sqrt-algebra, `modConj_rvdSqrtR` etc.) shows it equals the **bounded** `Jξ`: the
+    unbounded `R^{−1/2}` is only motivation and is entirely AVOIDED here.  On the real axis
+    `g(t) = ⟨Jξ, V_t(gaussSmear)⟩` is real because `Jξ ⊥ i𝒦` (`projIK (Jξ) = 0`, via
+    `projIK_modConj_eq_zero_of_mem_K`, RvD Prop 2.3) while the smeared orbit stays in `𝒦`
+    (`inner_real_of_mem_K_perp_IK`).  This is the **J-twisted** half-strip top edge — the faithful
+    replacement for the discredited full-strip `corrC_real_on_axis` taken at a generic `w`.  (The
+    paradox flagged earlier dissolves: `J𝒦 = (i𝒦)^{⊥ℝ}` is a *real*-orthogonal complement, so
+    `⟨v, Jξ⟩ = 0 ∀ξ` does NOT place `v ∈ i𝒦`; the consistent conclusion is the U-vs-Δ comparison of
+    `modUnitary_eq_of_orbit_compare`, the shared constant `⟨η, Jξ⟩` cancelling between the U- and Δ-sides.) -/
+theorem corrJ_real_on_axis (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n)
+    (η : H) {ξ : H} (hξ : projK S ξ = ξ)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hgrp : ∀ s t, V s (V t η) = V (s + t) η)
+    (hKinv : ∀ s : ℝ, projK S (V s (gaussSmear V n η)) = V s (gaussSmear V n η)) (t : ℝ) :
+    (corrC (modConj S ξ) V n η (t : ℂ)).im = 0 :=
+  corrC_real_on_axis S hn η (modConj S ξ) hcont hbd hgrp
+    (projIK_modConj_eq_zero_of_mem_K S hξ) hKinv t
+
 /-- **The Δ-side modular correlation is pinned by its boundary data** (RvD Theorem 3.8, the comparison
     target).  In the regular spectral regime `σ(R) ⊆ [a, 2−a]`, the strip extension `modCorrExt S ξ`
     (`= ⟨ξ, Δ^{it} ξ⟩` continued to the KMS strip) is bounded-holomorphic (`diffContOnCl_modCorrExt`,

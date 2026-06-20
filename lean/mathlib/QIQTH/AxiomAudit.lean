@@ -3779,6 +3779,14 @@ namespace QIQTH.AxiomAudit
 -- eq_of_mem_K_of_inner_perp_IK (IsSeparating) ⇒ V_t η=Δ^{it}η on 𝒦 ⇒ clm_eq_of_eqOn_K (IsCyclic) ⇒ Δ^{it}=V_t.
 -- Remaining gap = producing the comparison datum from StripKMSrvd via the half-strip g-fn (RvD R^{−½} ζ-device,
 -- Prop 3.7, garbled in the scan — NOT fabricated). This is the correct top-level structure of the discharge.
+#print axioms QIQTH.StandardSubspaceModular.corrJ_real_on_axis
+-- expected: standard only — ★★ FAITHFUL RvD g-function TOP EDGE (RvD Thm 3.8, p.198, clean PDF). The real
+-- RvD half-strip function g(z)=⟨Jξ,h(z)⟩ uses the BOUNDED vector Jξ=modConj S ξ (ξ∈𝒦); RvD's written
+-- (2−R)^{½}R^{−½}ξ EQUALS Jξ by their own sqrt-identity, so the unbounded R^{−½} is AVOIDED entirely. Top
+-- edge real: Jξ⊥i𝒦 (projIK(Jξ)=0, projIK_modConj_eq_zero_of_mem_K) + V_t(smear)∈𝒦 ⇒ inner_real_of_mem_K_perp_IK.
+-- The J-twisted faithful replacement for the discredited full-strip corrC_real_on_axis@generic-w. Resolves the
+-- paradox: J𝒦=(i𝒦)^{⊥ℝ} is REAL-orthogonal, so ⟨v,Jξ⟩=0∀ξ does NOT give v∈i𝒦; consistent conclusion is the
+-- U-vs-Δ comparison (modUnitary_eq_of_orbit_compare), shared constant ⟨η,Jξ⟩ cancelling between U and Δ sides.
 #print axioms QIQTH.StandardSubspaceModular.orbit_inner_eq_of_entire
 -- expected: standard only — ★★ DENSITY EXTENSION: ⟨w,V_t(gaussSmear V n η)⟩=⟨w,gaussSmear V n η⟩ ∀n>0 ⇒
 -- ⟨w,V_t η⟩=⟨w,η⟩. Scale by √(n/π) to entireVec, entireVec_tendsto (→η) + continuity of V_t,⟨w,·⟩. Resolves
