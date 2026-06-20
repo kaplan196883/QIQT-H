@@ -26,6 +26,7 @@ import Mathlib.Topology.ContinuousMap.StoneWeierstrass
 import Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral
 import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 import Mathlib.MeasureTheory.Measure.Haar.NormedSpace
+import Mathlib.Analysis.Calculus.ParametricIntegral
 
 namespace QIQTH.StandardSubspaceModular
 
@@ -1590,6 +1591,144 @@ theorem integrable_abs_add_mul_exp_neg_mul_sq {b c : ℝ} (hb : 0 < b) :
   refine (h1.add h2).congr (Filter.Eventually.of_forall (fun u => ?_))
   show |u| * Real.exp (-b * u ^ 2) + c * Real.exp (-b * u ^ 2) = (|u| + c) * Real.exp (-b * u ^ 2)
   ring
+
+open MeasureTheory Filter Topology in
+/-- **The complex orbit is entire**: `gaussSmearC V n η` is complex-differentiable at every `z₀`, with
+    `HasDerivAt` given by differentiation under the integral sign,
+    `(gaussSmearC V n η)'(z₀) = ∫ (2n(u−z₀)·e^{−n(u−z₀)²})·V_u η du`.  The derivative integrand is
+    dominated, uniformly for `z` in a unit ball around `z₀`, by the integrable linear×Gaussian
+    `2n·C₁·‖η‖·(|u−Re z₀|+|Im z₀|+2)·e^{−(n/2)(u−Re z₀)²}` — using `Re(−n(u−z)²) = −n(u−Re z)²+n(Im z)²`,
+    the AM-GM bound `(u−Re z)² ≥ (u−Re z₀)²/2 − 2`, and `|Im z| ≤ |Im z₀|+1`.  This entirety is what makes
+    the KMS correlation `z ↦ ⟨gaussSmearC … z, ·⟩` holomorphic on the strip (RvD Theorem 3.8). -/
+theorem hasDerivAt_gaussSmearC {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖) (z₀ : ℂ) :
+    HasDerivAt (gaussSmearC V n η)
+      (∫ u : ℝ, (2 * (n : ℂ) * ((u : ℂ) - z₀) * Complex.exp (-(n : ℂ) * ((u : ℂ) - z₀) ^ 2)) • V u η)
+      z₀ := by
+  have hFmeas : ∀ x : ℂ, AEStronglyMeasurable
+      (fun u : ℝ => Complex.exp (-(n : ℂ) * ((u : ℂ) - x) ^ 2) • V u η) volume := fun x =>
+    ((by fun_prop : Continuous fun u : ℝ =>
+      Complex.exp (-(n : ℂ) * ((u : ℂ) - x) ^ 2)).smul hcont).aestronglyMeasurable
+  have hF'meas : AEStronglyMeasurable
+      (fun u : ℝ => (2 * (n : ℂ) * ((u : ℂ) - z₀) *
+        Complex.exp (-(n : ℂ) * ((u : ℂ) - z₀) ^ 2)) • V u η) volume :=
+    ((by fun_prop : Continuous fun u : ℝ =>
+      2 * (n : ℂ) * ((u : ℂ) - z₀) *
+        Complex.exp (-(n : ℂ) * ((u : ℂ) - z₀) ^ 2)).smul hcont).aestronglyMeasurable
+  -- the derivative under the integral
+  have hdiff : ∀ u : ℝ, ∀ x : ℂ, HasDerivAt
+      (fun y : ℂ => Complex.exp (-(n : ℂ) * ((u : ℂ) - y) ^ 2) • V u η)
+      ((2 * (n : ℂ) * ((u : ℂ) - x) *
+        Complex.exp (-(n : ℂ) * ((u : ℂ) - x) ^ 2)) • V u η) x := by
+    intro u x
+    have h1 : HasDerivAt (fun y : ℂ => (u : ℂ) - y) (-1) x := by
+      simpa using (hasDerivAt_id x).const_sub (u : ℂ)
+    have h2 := ((h1.pow 2).const_mul (-(n : ℂ))).cexp.smul_const (V u η)
+    simp only [Pi.pow_apply] at h2
+    convert h2 using 2
+    push_cast
+    ring
+  -- the uniform integrable bound
+  set C₁ : ℝ := Real.exp (2 * n + n * (|z₀.im| + 1) ^ 2) with hC₁
+  have hbound_int : Integrable
+      (fun u : ℝ => (2 * n * C₁ * ‖η‖) *
+        ((|u - z₀.re| + (|z₀.im| + 2)) * Real.exp (-(n / 2) * (u - z₀.re) ^ 2))) volume :=
+    ((integrable_abs_add_mul_exp_neg_mul_sq (b := n / 2) (c := |z₀.im| + 2)
+      (by positivity)).comp_sub_right z₀.re).const_mul _
+  have hbd_ineq : ∀ᵐ u : ℝ, ∀ x ∈ Metric.ball z₀ 1,
+      ‖(2 * (n : ℂ) * ((u : ℂ) - x) *
+        Complex.exp (-(n : ℂ) * ((u : ℂ) - x) ^ 2)) • V u η‖
+        ≤ (2 * n * C₁ * ‖η‖) *
+          ((|u - z₀.re| + (|z₀.im| + 2)) * Real.exp (-(n / 2) * (u - z₀.re) ^ 2)) := by
+    refine Filter.Eventually.of_forall (fun u x hx => ?_)
+    rw [Metric.mem_ball, Complex.dist_eq] at hx
+    have hre : |x.re - z₀.re| ≤ 1 := le_of_lt (lt_of_le_of_lt (by
+      simpa using Complex.abs_re_le_norm (x - z₀)) hx)
+    have him : |x.im - z₀.im| ≤ 1 := le_of_lt (lt_of_le_of_lt (by
+      simpa using Complex.abs_im_le_norm (x - z₀)) hx)
+    -- norm of the scalar coefficient
+    have hw : (-(n : ℂ) * ((u : ℂ) - x) ^ 2).re = -n * (u - x.re) ^ 2 + n * x.im ^ 2 := by
+      simp only [pow_two, Complex.mul_re, Complex.mul_im, Complex.neg_re, Complex.neg_im,
+        Complex.sub_re, Complex.sub_im, Complex.ofReal_re, Complex.ofReal_im]
+      ring
+    rw [norm_smul, norm_mul, norm_mul, norm_mul, Complex.norm_exp, hw]
+    have h2n : ‖(2 : ℂ)‖ * ‖(n : ℂ)‖ = 2 * n := by
+      simp [abs_of_pos hn]
+    -- bound the pieces
+    have hnorm_ux : ‖(u : ℂ) - x‖ ≤ |u - z₀.re| + (|z₀.im| + 2) := by
+      refine (Complex.norm_le_abs_re_add_abs_im _).trans ?_
+      have e1 : ((u : ℂ) - x).re = u - x.re := by simp
+      have e2 : ((u : ℂ) - x).im = -x.im := by simp
+      rw [e1, e2, abs_neg]
+      have hb1 : |u - x.re| ≤ |u - z₀.re| + 1 := by
+        calc |u - x.re| = |(u - z₀.re) + (z₀.re - x.re)| := by ring_nf
+          _ ≤ |u - z₀.re| + |z₀.re - x.re| := abs_add_le _ _
+          _ ≤ |u - z₀.re| + 1 := by rw [abs_sub_comm z₀.re x.re]; linarith [hre]
+      have hb2 : |x.im| ≤ |z₀.im| + 1 := by
+        calc |x.im| = |z₀.im + (x.im - z₀.im)| := by ring_nf
+          _ ≤ |z₀.im| + |x.im - z₀.im| := abs_add_le _ _
+          _ ≤ |z₀.im| + 1 := by linarith [him]
+      linarith [hb1, hb2]
+    have hC1pos : 0 < C₁ := by rw [hC₁]; positivity
+    have hdle := abs_le.mp hre
+    have hexp_bound : Real.exp (-n * (u - x.re) ^ 2 + n * x.im ^ 2)
+        ≤ C₁ * Real.exp (-(n / 2) * (u - z₀.re) ^ 2) := by
+      rw [hC₁, ← Real.exp_add]
+      apply Real.exp_le_exp.mpr
+      have hamgm : (u - x.re) ^ 2 ≥ (u - z₀.re) ^ 2 / 2 - 2 := by
+        nlinarith [sq_nonneg (u - 2 * x.re + z₀.re),
+          mul_nonneg (by linarith [hdle.1] : (0:ℝ) ≤ 1 + (x.re - z₀.re))
+            (by linarith [hdle.2] : (0:ℝ) ≤ 1 - (x.re - z₀.re)), hdle.1, hdle.2]
+      have himsq : x.im ^ 2 ≤ (|z₀.im| + 1) ^ 2 := by
+        have habs : |x.im| ≤ |z₀.im| + 1 := by
+          calc |x.im| = |z₀.im + (x.im - z₀.im)| := by ring_nf
+            _ ≤ |z₀.im| + |x.im - z₀.im| := abs_add_le _ _
+            _ ≤ |z₀.im| + 1 := by linarith [him]
+        nlinarith [sq_abs x.im, habs, abs_nonneg x.im, abs_nonneg z₀.im]
+      have e1 : -n * (u - x.re) ^ 2 ≤ -(n / 2) * (u - z₀.re) ^ 2 + 2 * n := by
+        nlinarith [mul_nonneg hn.le
+          (by linarith [hamgm] : (0:ℝ) ≤ (u - x.re) ^ 2 - ((u - z₀.re) ^ 2 / 2 - 2))]
+      have e2 : n * x.im ^ 2 ≤ n * (|z₀.im| + 1) ^ 2 := by
+        nlinarith [mul_nonneg hn.le (by linarith [himsq] : (0:ℝ) ≤ (|z₀.im| + 1) ^ 2 - x.im ^ 2)]
+      linarith [e1, e2]
+    -- assemble
+    rw [h2n]
+    have hVu : ‖V u η‖ ≤ ‖η‖ := hbd u
+    have h2n0 : (0 : ℝ) ≤ 2 * n := by linarith
+    have hd_nn : (0:ℝ) ≤ C₁ * Real.exp (-(n / 2) * (u - z₀.re) ^ 2) :=
+      mul_nonneg hC1pos.le (Real.exp_pos _).le
+    have hinner : ‖(u : ℂ) - x‖ * Real.exp (-n * (u - x.re) ^ 2 + n * x.im ^ 2) * ‖V u η‖
+        ≤ (|u - z₀.re| + (|z₀.im| + 2)) *
+            (C₁ * Real.exp (-(n / 2) * (u - z₀.re) ^ 2)) * ‖η‖ := by
+      refine mul_le_mul ?_ hVu (norm_nonneg _) (mul_nonneg (by positivity) hd_nn)
+      exact mul_le_mul hnorm_ux hexp_bound (Real.exp_pos _).le (by positivity)
+    calc 2 * n * ‖(u : ℂ) - x‖ * Real.exp (-n * (u - x.re) ^ 2 + n * x.im ^ 2) * ‖V u η‖
+        = 2 * n * (‖(u : ℂ) - x‖ * Real.exp (-n * (u - x.re) ^ 2 + n * x.im ^ 2) * ‖V u η‖) := by
+          ring
+      _ ≤ 2 * n * ((|u - z₀.re| + (|z₀.im| + 2)) *
+            (C₁ * Real.exp (-(n / 2) * (u - z₀.re) ^ 2)) * ‖η‖) :=
+          mul_le_mul_of_nonneg_left hinner h2n0
+      _ = (2 * n * C₁ * ‖η‖) *
+            ((|u - z₀.re| + (|z₀.im| + 2)) * Real.exp (-(n / 2) * (u - z₀.re) ^ 2)) := by ring
+  have key := hasDerivAt_integral_of_dominated_loc_of_deriv_le (μ := volume)
+    (F := fun x u => Complex.exp (-(n : ℂ) * ((u : ℂ) - x) ^ 2) • V u η)
+    (bound := fun u : ℝ => (2 * n * C₁ * ‖η‖) *
+      ((|u - z₀.re| + (|z₀.im| + 2)) * Real.exp (-(n / 2) * (u - z₀.re) ^ 2)))
+    (Metric.ball_mem_nhds z₀ one_pos)
+    (Filter.Eventually.of_forall hFmeas)
+    (gaussSmearC_integrable hn η hcont hbd z₀)
+    hF'meas hbd_ineq hbound_int
+    (Filter.Eventually.of_forall (fun u x _ => hdiff u x))
+  exact key.2
+
+open MeasureTheory in
+/-- **The complex orbit is entire.**  `gaussSmearC V n η` is complex-differentiable on all of `ℂ`
+    (`HasDerivAt` at every point, `hasDerivAt_gaussSmearC`).  Composed with a continuous-linear functional
+    this gives the entire KMS correlation needed for the strip-uniqueness step of RvD Theorem 3.8. -/
+theorem differentiable_gaussSmearC {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖) :
+    Differentiable ℂ (gaussSmearC V n η) :=
+  fun z₀ => (hasDerivAt_gaussSmearC hn η hcont hbd z₀).differentiableAt
 
 /-! ### Analytic continuation of the modular character to the KMS strip
 

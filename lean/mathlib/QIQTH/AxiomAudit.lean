@@ -3589,6 +3589,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — LINEAR×GAUSSIAN integrability Integrable(u↦(|u|+c)·e^{−b u²}), b>0:
 -- |u|·e^{−bu²} (= ‖u·e^{−bu²}‖, integrable_mul_exp_neg_mul_sq) + c·e^{−bu²}. The integrable DOMINATING
 -- function for the holomorphy of gaussSmearC (bounds ‖2n(u−z)·e^{−n(u−z)²}‖ uniformly on a ball).
+#print axioms QIQTH.StandardSubspaceModular.hasDerivAt_gaussSmearC
+-- expected: standard only — ★★★ THE COMPLEX ORBIT IS ENTIRE (differentiation under the integral):
+-- HasDerivAt (gaussSmearC V n η) (∫ 2n(u−z₀)·e^{−n(u−z₀)²}·V_u η) z₀. Derivative integrand dominated
+-- uniformly on a unit ball by 2n·C₁·‖η‖·(|u−Re z₀|+|Im z₀|+2)·e^{−(n/2)(u−Re z₀)²}
+-- (hasDerivAt_integral_of_dominated_loc_of_deriv_le; Re(−n(u−z)²)=−n(u−Re z)²+n(Im z)², AM-GM
+-- (u−Re z)²≥(u−Re z₀)²/2−2, |Im z|≤|Im z₀|+1). The load-bearing RvD Thm 3.8 operator-assembly piece.
+#print axioms QIQTH.StandardSubspaceModular.differentiable_gaussSmearC
+-- expected: standard only — gaussSmearC V n η is Differentiable ℂ everywhere (entire). Composed with a
+-- continuous-linear functional ⇒ the entire KMS correlation for the strip-uniqueness step of Thm 3.8.
 -- expected: standard only — gaussSmear V n η = ∫ e^{−n t²}•V_t η dt. gaussSmear_integrable: Bochner-integrable
 -- (dominated by the Gaussian e^{−n t²}·‖η‖ via integrable_exp_neg_mul_sq, V_t norm-non-increasing + orbit
 -- continuous). gaussSmear_mem_K: ★ the smeared vector lands in the real subspace K — the ℝ-linear projection
