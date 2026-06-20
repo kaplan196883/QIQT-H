@@ -273,6 +273,28 @@ theorem diffContOnCl_modCorrExt (S : StandardSubspace H) (ξ : H) {a : ℝ} (ha0
     (integrable_const _)
     (Filter.Eventually.of_forall (fun ω => (differentiable_modCharC _).continuous.continuousOn))
 
+open MeasureTheory in
+/-- **Uniform bound on the strip extension** (regular regime): `‖F_ξ(z)‖ ≤ ((2−a)/a)·‖ξ‖²` for `z` in the
+    closed KMS strip.  Integrating the character bound `modCharC_norm_le` against the finite spectral measure
+    (`μ^R_ξ(univ) = ‖ξ‖²`).  This is the `‖·‖`-bound hypothesis the strip-uniqueness principle consumes
+    alongside `diffContOnCl_modCorrExt`. -/
+theorem modCorrExt_norm_le (S : StandardSubspace H) (ξ : H) {a : ℝ} (ha0 : 0 < a) (ha1 : a ≤ 1)
+    (hspec : ∀ ω : spectrum ℝ (rvdRC S), a ≤ (ω : spectrum ℝ (rvdRC S)).val
+      ∧ (ω : spectrum ℝ (rvdRC S)).val ≤ 2 - a)
+    {z : ℂ} (hz0 : 0 ≤ z.im) (hz1 : z.im ≤ 1) :
+    ‖modCorrExt S ξ z‖ ≤ (2 - a) / a * ‖ξ‖ ^ 2 := by
+  haveI : IsFiniteMeasure (rvdSpecMeasure S ξ) := by unfold rvdSpecMeasure; infer_instance
+  rw [modCorrExt]
+  calc ‖∫ ω, modCharC z (ω : spectrum ℝ (rvdRC S)).val ∂(rvdSpecMeasure S ξ)‖
+      ≤ ∫ ω, (2 - a) / a ∂(rvdSpecMeasure S ξ) := by
+        refine (norm_integral_le_integral_norm _).trans ?_
+        refine integral_mono_of_nonneg (Filter.Eventually.of_forall (fun _ => norm_nonneg _))
+          (integrable_const _) (Filter.Eventually.of_forall (fun ω => ?_))
+        exact modCharC_norm_le ha0 ha1 (hspec ω).1 (hspec ω).2 hz0 hz1
+    _ = (2 - a) / a * ‖ξ‖ ^ 2 := by
+        rw [MeasureTheory.integral_const, smul_eq_mul, MeasureTheory.measureReal_def,
+          rvdSpecMeasure_univ, ENNReal.toReal_ofReal (sq_nonneg ‖ξ‖), mul_comm]
+
 /-- The vacuum coherent state (`ξ = 0`) has zero relative entropy with itself. -/
 @[simp] theorem cgpEntropy_zero (S : StandardSubspace H) : cgpEntropy S (0 : H) = 0 := by
   simp [cgpEntropy]

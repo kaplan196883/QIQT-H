@@ -3538,6 +3538,10 @@ namespace QIQTH.AxiomAudit
 -- This is the EXACT regularity QIQTH.StripUniqueness.eqOn_of_bdd_holomorphic_strip consumes — the bounded-
 -- holomorphic strip extension of the modular correlation, fully assembled. Remaining for hUniq: the Borchers
 -- group-equality reduction (V=Δ^{it} from boundary-value uniqueness) — the conceptual step, not yet started.
+#print axioms QIQTH.modCorrExt_norm_le
+-- expected: standard only — the uniform ‖·‖-bound ‖F_ξ(z)‖≤((2−a)/a)·‖ξ‖² on the closed strip (integrate
+-- modCharC_norm_le against the finite spectral measure, μ^R_ξ(univ)=‖ξ‖²). The boundedness hypothesis that,
+-- with diffContOnCl_modCorrExt, completes the input to strip-uniqueness. Analytic substrate for hUniq COMPLETE.
 #print axioms QIQTH.StandardSubspaceModular.modCharC_norm
 #print axioms QIQTH.StandardSubspaceModular.modCharC_norm_le
 -- expected: standard only — modCharC_norm: EXACT modulus ‖u_z(r)‖=exp(−Im(z)·log((2−r)/r)) on (0,2) (=1 on the
