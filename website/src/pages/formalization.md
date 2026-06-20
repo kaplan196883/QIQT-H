@@ -85,7 +85,9 @@ What is genuinely *derived* inside the chain (no hypothesis smuggles in the conc
 rigorous, axiom-free, <em>conditional</em> derivation: the chain still rests on three labelled inputs that are
 kept as explicit hypotheses and <strong>never</strong> as Lean axioms. The wedge KMS property bottoms out in
 cited algebraic-QFT facts (KMS-uniqueness, the strip property, standardness — the Bisognano–Wichmann package),
-which current Mathlib cannot prove; the boost-charge's final identification needs the free-field stress tensor
+which we <em>cite rather than formalize</em>: they are standard, true theorems, but a Lean proof would require
+operator-algebra infrastructure (unbounded Tomita–Takesaki theory, Hardy-strip methods) that Mathlib does not
+yet have — a substantial separate undertaking, not an impossibility. The boost-charge's final identification needs the free-field stress tensor
 (one scalar identity, not yet built); and matter conservation $\nabla^\mu T_{\mu\nu}=0$ is a physical
 postulate. What QIQT-H supplies as <em>theorems</em> is the inequality side of the area law; what makes the
 output <em>general relativity</em> is Jacobson's argument, here machine-checked end to end. The work this
