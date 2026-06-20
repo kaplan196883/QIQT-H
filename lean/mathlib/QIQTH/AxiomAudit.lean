@@ -3514,6 +3514,12 @@ namespace QIQTH.AxiomAudit
 -- edge (Im=0) ⇒ f=0 on the closed strip. Rotate horizontal→vertical strip (w↦I·w) + Hadamard
 -- norm_le_interp_of_mem_verticalClosedStrip' with edge bounds a=0,b=M ⇒ ‖f‖≤0^{1−θ}M^θ=0 interior;
 -- Set.EqOn.of_subset_closure to the closure. THE step-5 matching tool — removes the perceived reflection wall.
+#print axioms QIQTH.StripUniqueness.eqZero_of_im_zero_edge_halfStrip
+-- expected: standard only — ★ CORRECT-STRIP analytic core: one-edge uniqueness on the HALF strip {−1/2≤Im≤0}
+-- (the strip RvD Thm 3.8 / Prop 3.5 ACTUALLY use, lower edge Im=−1/2 = half-shift Δ^{½}=J). f bdd-holo +
+-- f=0 on top edge Im=0 ⇒ f=0 (Hadamard three-lines, rotate to re⁻¹'[−1/2,0], zero edge u=0 ⇒ M^{1−θ}·0^θ=0).
+-- Replaces the full-strip modeling the corrC framework got wrong (see FRAMEWORK CAVEAT above). Correct-
+-- direction infrastructure; the faithful half-strip g-function rebuild still needs RvD's R^{−½} ζ-device.
 #print axioms QIQTH.StripUniqueness.eqOn_of_im_zero_edge
 -- expected: standard only — ★ one-edge determination: two bounded-holomorphic F,G agreeing on the bottom edge
 -- (Im=0) agree on the closed strip (eqZero_of_im_zero_edge on F−G). RvD Thm 3.8 step-5 matching: the entire
