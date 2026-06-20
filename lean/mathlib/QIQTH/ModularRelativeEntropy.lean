@@ -450,6 +450,23 @@ noncomputable def deviceOpReal (S : StandardSubspace H) (t : ℝ) : H →L[ℂ] 
   borelFC (rvdRC S) (rvdRC_isSelfAdjoint S) (devSpecReal_measurable S t) (Real.sqrt_nonneg 2)
     (devSpecReal_norm_le S t)
 
+/-- The **complex-`z` device operator** `d_z(R) = (2−R)^{iz} R^{−iz+1/2}` for `z` in the half-strip
+    `−1/2 ≤ Im z ≤ 0`, where `‖d_z‖ ≤ √2` on `σ(R) ⊆ [0,2]` (no regular window, `devChar_norm_le_Icc` +
+    `rvdRC_spectrum_mem_Icc`).  This is RvD's Proposition 3.7 *device* (verified against the rendered source):
+    the operator whose `J`-image `J·(d_z(R) ζ)` is the (anti-holomorphic, since `J` is antilinear) second-slot
+    vector of the Theorem 3.8 g-function `g(z) = ⟨h(z), J d_z(R) ζ⟩`.  Generalizes `deviceOpReal` (the `z = t`
+    real-axis case) to the whole half-strip. -/
+noncomputable def deviceOpC (S : StandardSubspace H) (z : ℂ) (hz2 : z.im ≤ 0)
+    (hz1 : -(1 / 2 : ℝ) ≤ z.im) : H →L[ℂ] H :=
+  borelFC (rvdRC S) (rvdRC_isSelfAdjoint S)
+    ((measurable_devChar z).comp measurable_subtype_coe) (Real.sqrt_nonneg 2)
+    (fun ω => devChar_norm_le_Icc hz2 hz1 (rvdRC_spectrum_mem_Icc S ω))
+
+/-- **`deviceOpC` at a real point is `deviceOpReal`** (`d_{(t:ℂ)} = d_t`): the half-strip device operator
+    restricts to the real-axis device operator `Δ^{it}·√R` on the boundary `Im z = 0`. -/
+theorem deviceOpC_ofReal (S : StandardSubspace H) (t : ℝ) :
+    deviceOpC S (t : ℂ) (by simp) (by norm_num [Complex.ofReal_im]) = deviceOpReal S t := rfl
+
 /-- **Spectral bridge for the real-axis device operator**: `⟪ξ, (Δ^{it}·√R) ξ⟫ = ∫ d_t dμ^R_ξ` (mirrors
     `rvdSpec_modUnitary`, via `inner_borelFC`). -/
 theorem rvdSpec_deviceOpReal (S : StandardSubspace H) (ξ : H) (t : ℝ) :

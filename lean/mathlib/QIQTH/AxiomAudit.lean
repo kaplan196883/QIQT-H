@@ -3966,6 +3966,12 @@ namespace QIQTH.AxiomAudit
 -- strip agreeing with devCorrExt on the real axis Im=0 coincides with it on the whole closed half-strip
 -- (eqOn_of_im_zero_edge_halfStrip + diffContOnCl_devCorrExt + devCorrExt_norm_le). The device analogue of
 -- modCorrExt_eq_of_boundary, available for ANY standard subspace. Δ-side half of the strip-uniqueness comparison.
+#print axioms QIQTH.deviceOpC
+#print axioms QIQTH.deviceOpC_ofReal
+-- expected: standard only — ★★ COMPLEX-z DEVICE OPERATOR d_z(R)=(2−R)^{iz}R^{−iz+1/2} for z in the half-strip
+-- {−1/2≤Im z≤0} (borelFC of devChar z; ‖d_z‖≤√2 on σ(R)⊆[0,2], NO regular window). EXACTLY RvD Prop 3.7's
+-- device (verified vs the rendered source). J·(d_z(R)ζ) is the anti-holo 2nd-slot vector of the Thm 3.8
+-- g-function g(z)=⟨h(z),J d_z(R)ζ⟩. deviceOpC_ofReal: restricts to deviceOpReal (Δ^{it}√R) on Im z=0.
 #print axioms QIQTH.devCorrExt_ofReal_inner
 #print axioms QIQTH.rvdSpec_deviceOpReal
 -- expected: standard only — OPERATOR-FORM real-axis value: D_ξ(t)=⟪ξ,(Δ^{it}·√R)ξ⟫. deviceOpReal S t :=
