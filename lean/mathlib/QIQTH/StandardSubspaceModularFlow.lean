@@ -1768,6 +1768,19 @@ theorem corrC_ofReal {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η ξ
     corrC ξ V n η (s : ℂ) = innerSL ℂ ξ (V s (gaussSmear V n η)) := by
   rw [corrC, gaussSmearC_ofReal hn η hcont hbd hgrp s]
 
+/-- **The KMS correlation is real on the real axis** (RvD Theorem 3.8, the `g(t) = ⟨U_t η, Jξ'⟩` real step).
+    With `w = J(2−R)^{1/2}R^{−1/2}ζ ⊥ i𝒦` (`projIK w = 0`) and the orbit `V_t(gaussSmear)` staying in `𝒦`,
+    the correlation `corrC w V n η ↑t = ⟨w, V_t(gaussSmear)⟩` is real for every real `t`: it is the conjugate
+    of `⟨V_t(gaussSmear), w⟩` (a `𝒦`–`(i𝒦)^⊥` pairing, real by `inner_real_of_mem_K_perp_IK`).  This is the
+    real-axis-edge input to "real on both edges ⟹ constant". -/
+theorem corrC_real_on_axis (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n)
+    (η w : H) (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hgrp : ∀ s t, V s (V t η) = V (s + t) η) (hw : projIK S w = 0)
+    (hKinv : ∀ s : ℝ, projK S (V s (gaussSmear V n η)) = V s (gaussSmear V n η)) (t : ℝ) :
+    (corrC w V n η (t : ℂ)).im = 0 := by
+  rw [corrC_ofReal hn η w hcont hbd hgrp t, innerSL_apply_apply, ← inner_conj_symm, Complex.conj_im,
+    inner_real_of_mem_K_perp_IK S (hKinv t) hw, neg_zero]
+
 open MeasureTheory in
 /-- **Group factorization of the complex orbit** (RvD Theorem 3.8, the `h(z+t) = U_t h(z)` step):
     `V_t (gaussSmearC V n η z) = gaussSmearC V n η (z + t)` for real `t`.  Pulling `V_t` through the

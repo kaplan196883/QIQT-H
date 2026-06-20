@@ -3605,6 +3605,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.corrC_ofReal
 -- expected: standard only — real-axis value corrC ξ V n η ↑s = ⟨ξ,V_s(gaussSmear V n η)⟩: on ℝ the
 -- correlation is the genuine matrix element of the flow (gaussSmearC_ofReal). Boundary data for Thm 3.8.
+#print axioms QIQTH.StandardSubspaceModular.corrC_real_on_axis
+-- expected: standard only — ★ g REAL ON THE REAL AXIS (RvD Thm 3.8 step 4): with w⊥i𝒦 (projIK w=0) and the
+-- orbit V_t(gaussSmear) staying in 𝒦, corrC w V n η ↑t = ⟨w,V_t(smear)⟩ is real ∀t (conj of the 𝒦–(i𝒦)^⊥
+-- pairing, inner_real_of_mem_K_perp_IK). The real-axis-edge input to "real on both edges ⟹ constant".
 #print axioms QIQTH.StandardSubspaceModular.inner_real_of_mem_K_perp_IK
 -- expected: standard only — ★ RvD PROP 2.3 REALITY: x∈𝒦 (projK x=x) ∧ y⊥i𝒦 (projIK y=0) ⇒ ⟨x,y⟩_ℂ real
 -- (Im⟨x,y⟩=⟨i·x,y⟩_ℝ, i·x∈i𝒦 ⊥ y). The reality making g(t)=⟨U_t η, J(2−R)^½R^{−½}ζ⟩ real on the strip
