@@ -295,6 +295,36 @@ theorem modCorrExt_norm_le (S : StandardSubspace H) (ξ : H) {a : ℝ} (ha0 : 0 
         rw [MeasureTheory.integral_const, smul_eq_mul, MeasureTheory.measureReal_def,
           rvdSpecMeasure_univ, ENNReal.toReal_ofReal (sq_nonneg ‖ξ‖), mul_comm]
 
+/-- The **device strip extension** `D_ξ(z) = ∫ d_z(ω) dμ^R_ξ(ω)` — the RvD Proposition 3.7 *device* analogue
+    of `modCorrExt`, integrating the device character `devChar` (`= u_z(r)·√r`) against the scalar spectral
+    measure of `R` at `ξ`.  Where `modCorrExt = ∫ u_z dμ` is bounded-holomorphic on the KMS strip ONLY in the
+    regular regime `σ(R) ⊆ [a, 2−a]`, the `√r` factor tames the singularity so this device extension is bounded
+    on the half-strip for EVERY standard subspace (see `devCorrExt_norm_le`). -/
+noncomputable def devCorrExt (S : StandardSubspace H) (ξ : H) (z : ℂ) : ℂ :=
+  ∫ ω, devChar z (ω : spectrum ℝ (rvdRC S)).val ∂(rvdSpecMeasure S ξ)
+
+open MeasureTheory in
+/-- **Uniform bound of the device strip extension on the half-strip — with NO regular-window assumption**:
+    `‖D_ξ(z)‖ ≤ √2·‖ξ‖²` for every `z` with `−1/2 ≤ Im z ≤ 0`, for ANY standard subspace.  The device character
+    is bounded by `√2` over the WHOLE spectrum `σ(R) ⊆ [0,2]` (`devChar_norm_le_Icc` + `rvdRC_spectrum_mem_Icc`)
+    — no `σ(R) ⊆ [a,2−a]` hypothesis — integrated against the finite spectral measure (`μ^R_ξ(univ) = ‖ξ‖²`).
+    This is the decisive advantage of RvD's Prop 3.7 device over the bare modular character `modCorrExt`: the
+    bounded-holomorphic half-strip input the strip-uniqueness comparison needs exists for every standard
+    subspace, not just the regular ones. -/
+theorem devCorrExt_norm_le (S : StandardSubspace H) (ξ : H) {z : ℂ} (hz2 : z.im ≤ 0)
+    (hz1 : -(1 / 2 : ℝ) ≤ z.im) : ‖devCorrExt S ξ z‖ ≤ Real.sqrt 2 * ‖ξ‖ ^ 2 := by
+  haveI : IsFiniteMeasure (rvdSpecMeasure S ξ) := by unfold rvdSpecMeasure; infer_instance
+  rw [devCorrExt]
+  calc ‖∫ ω, devChar z (ω : spectrum ℝ (rvdRC S)).val ∂(rvdSpecMeasure S ξ)‖
+      ≤ ∫ _ω, Real.sqrt 2 ∂(rvdSpecMeasure S ξ) := by
+        refine (norm_integral_le_integral_norm _).trans ?_
+        refine integral_mono_of_nonneg (Filter.Eventually.of_forall (fun _ => norm_nonneg _))
+          (integrable_const _) (Filter.Eventually.of_forall (fun ω => ?_))
+        exact devChar_norm_le_Icc hz2 hz1 (rvdRC_spectrum_mem_Icc S ω)
+    _ = Real.sqrt 2 * ‖ξ‖ ^ 2 := by
+        rw [MeasureTheory.integral_const, smul_eq_mul, MeasureTheory.measureReal_def,
+          rvdSpecMeasure_univ, ENNReal.toReal_ofReal (sq_nonneg ‖ξ‖), mul_comm]
+
 /-- The vacuum coherent state (`ξ = 0`) has zero relative entropy with itself. -/
 @[simp] theorem cgpEntropy_zero (S : StandardSubspace H) : cgpEntropy S (0 : H) = 0 := by
   simp [cgpEntropy]

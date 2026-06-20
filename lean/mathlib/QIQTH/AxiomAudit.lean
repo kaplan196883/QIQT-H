@@ -3896,6 +3896,12 @@ namespace QIQTH.AxiomAudit
 -- rvdSpec_modUnitary). modCorrExt_kms_flip: TOP edge F_ξ(t+i)=∫ modChar t (ω)·(ω/(2−ω)) dμ (the KMS weight),
 -- in the regular regime σ(R)⊆(0,2). These are the two BOUNDARY conditions strip-uniqueness consumes — the
 -- extension's edges now pinned. Remaining for hUniq: holomorphy under ∫ (boundedness done) + Borchers reduction.
+#print axioms QIQTH.devCorrExt_norm_le
+-- expected: standard only — ★★★ DEVICE strip extension bound, NO regular window. devCorrExt S ξ z = ∫ devChar z
+-- dμ^R_ξ (RvD Prop 3.7 device analogue of modCorrExt). ‖D_ξ(z)‖ ≤ √2·‖ξ‖² for ALL z with −1/2≤Im z≤0, for ANY
+-- standard subspace — the √r factor bounds devChar by √2 over the WHOLE σ(R)⊆[0,2] (devChar_norm_le_Icc +
+-- rvdRC_spectrum_mem_Icc), integrated against the finite μ^R_ξ (univ=‖ξ‖²). DECISIVE advantage over modCorrExt
+-- (which needs σ(R)⊆[a,2−a]): the bounded-holomorphic half-strip input exists for EVERY standard subspace.
 -- expected: standard only — boostUnitary_eq_vadd: boostUnitary t = DomAddAct.mk(−t)+ᵥ· (the project boost group IS
 -- Mathlib's canonical Lp domain-translation; unitary_apply precomposes with flow(−t) ⇒ ξ(x−t), matches mk(−t)+ᵥξ via
 -- add_comm + Equiv.symm_apply_apply). continuous_boostUnitary_apply: ★ STRONG CONTINUITY t↦boostUnitary t ξ, from
