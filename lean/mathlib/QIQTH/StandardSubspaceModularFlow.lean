@@ -877,6 +877,32 @@ theorem modConj_rvdPmQ_modConj (S : StandardSubspace H) (ξ : H) :
     modConj S (rvdPmQ S (modConj S ξ)) = rvdPmQ S ξ := by
   rw [← rvdT_modConj S (modConj S ξ), modConj_sq, modConj_rvdT]
 
+/-- **`J Q J = 1 − P`** — the modular conjugation reflects the projection `Q = projIK` onto `1 − P`.
+    `J Q J = (J R J − J D J)/2 = ((2−R) − D)/2 = 1 − P` (`J R J = 2−R`, `J D J = D`).  Concretely
+    `J(Q(J ξ)) = ξ − P ξ`.  This is RvD Prop 2.2(5): `J` carries `i𝒦` onto `𝒦^⊥` and `𝒦` onto `(i𝒦)^⊥`. -/
+theorem modConj_projIK_modConj (S : StandardSubspace H) (ξ : H) :
+    modConj S (projIK S (modConj S ξ)) = ξ - projK S ξ := by
+  have key : (2 : ℝ) • modConj S (projIK S (modConj S ξ)) = (2 : ℝ) • (ξ - projK S ξ) := by
+    rw [← map_smul]
+    have h2pIK : (2 : ℝ) • projIK S (modConj S ξ)
+        = rvdR S (modConj S ξ) - rvdPmQ S (modConj S ξ) := by
+      rw [rvdR_apply, rvdPmQ, ContinuousLinearMap.sub_apply]; module
+    rw [h2pIK, map_sub, ← rvdRC_apply, modConj_rvdRC_modConj, modConj_rvdPmQ_modConj,
+      rvdTwoSubRC_apply, rvdPmQ, ContinuousLinearMap.sub_apply, rvdR_apply]
+    module
+  exact smul_right_injective H two_ne_zero key
+
+/-- **`J 𝒦 ⊆ (i𝒦)^⊥`** (RvD Prop 2.2(5)): for `ξ ∈ 𝒦` (`P ξ = ξ`), `J ξ ⊥ i𝒦` (`projIK (J ξ) = 0`).
+    From `J Q J = 1 − P` (`modConj_projIK_modConj`): `J(Q(J ξ)) = ξ − P ξ = 0`, and `J` is injective
+    (`J² = 1`), so `Q(J ξ) = 0`.  This places the modular-conjugated standard-subspace vectors — the
+    `J`-twisted `w`-vectors of RvD Theorem 3.8's `g`-function — in `(i𝒦)^⊥`. -/
+theorem projIK_modConj_eq_zero_of_mem_K (S : StandardSubspace H) {ξ : H} (hξ : projK S ξ = ξ) :
+    projIK S (modConj S ξ) = 0 := by
+  have h := modConj_projIK_modConj S ξ
+  rw [hξ, sub_self] at h
+  have h2 := congrArg (modConj S) h
+  rwa [modConj_sq, map_zero] at h2
+
 /-! ### Bounded Tomita fixedness for `ξ ∈ 𝒦`
 
   The second CGP spectral-balance prerequisite, in bounded form.  The Tomita operator `S = J Δ^{1/2}`
