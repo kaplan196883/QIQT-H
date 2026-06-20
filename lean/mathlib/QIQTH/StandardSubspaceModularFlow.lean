@@ -2454,4 +2454,27 @@ theorem hasDerivAt_devChar {r : ℝ} (hr : r ∈ Set.Ioo (0 : ℝ) 2) (z : ℂ) 
   convert h using 1
   rw [devChar]; ring
 
+/-- **The device-character `z`-derivative on the CLOSED interval `[0,2]`** (covering the spectrum endpoints).
+    On `(0,2)` this is `hasDerivAt_devChar`.  At `r ∈ {0,2}` the modular character collapses to `1`, so
+    `d_z(r) = √r` is `z`-constant (derivative `0`), and the formula's coefficient also vanishes because
+    `(2−r)/r = 0` there (`2/0 = 0` at `r=0`, `0/2 = 0` at `r=2`) gives `log 0 = 0`.  So the same
+    `HasDerivAt` statement holds across `[0,2]` — the form the differentiate-under-the-spectral-integral
+    holomorphy of `devCorrExt` needs (the spectrum `σ(R) ⊆ [0,2]` may include the endpoints). -/
+theorem hasDerivAt_devChar_Icc {r : ℝ} (hr : r ∈ Set.Icc (0 : ℝ) 2) (z : ℂ) :
+    HasDerivAt (fun z => devChar z r)
+      (Complex.I * (Real.log ((2 - r) / r) : ℂ) * devChar z r) z := by
+  by_cases h : r ∈ Set.Ioo (0 : ℝ) 2
+  · exact hasDerivAt_devChar h z
+  · have hconst : (fun w => devChar w r) = fun _ => (Real.sqrt r : ℂ) :=
+      funext fun w => by
+        rw [devChar, show modCharC w r = 1 from Set.piecewise_eq_of_notMem _ _ _ h, one_mul]
+    have hr02 : r = 0 ∨ r = 2 := by
+      obtain ⟨hr0, hr2⟩ := Set.mem_Icc.mp hr
+      rw [Set.mem_Ioo, not_and_or, not_lt, not_lt] at h
+      exact h.imp (fun hle => le_antisymm hle hr0) (fun hge => le_antisymm hr2 hge)
+    have hlog0 : Real.log ((2 - r) / r) = 0 := by rcases hr02 with rfl | rfl <;> simp
+    rw [hconst, show Complex.I * (Real.log ((2 - r) / r) : ℂ) * devChar z r = 0 from by
+      rw [hlog0]; simp]
+    exact hasDerivAt_const z _
+
 end QIQTH.StandardSubspaceModular

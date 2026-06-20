@@ -3895,6 +3895,11 @@ namespace QIQTH.AxiomAudit
 -- x∈(0,2], δ∈(0,1], x^δ·|log x| ≤ 2/δ + log2. (0,1]: log x⁻¹≤(x⁻¹)^{δ/2}/(δ/2) (Real.log_le_rpow_div) ⇒
 -- x^δ·|log x|≤2·x^{δ/2}/δ≤2/δ. [1,2]: log x≤log2, x^δ≤2. Tames the log((2−r)/r) factor of the device z-derivative
 -- against the r^{1/2±·} of ‖d_z‖ ⇒ the integrable CONSTANT dominator for holomorphy of devCorrExt.
+#print axioms QIQTH.StandardSubspaceModular.hasDerivAt_devChar_Icc
+-- expected: standard only — ★ device z-derivative on CLOSED [0,2] (covers the spectrum endpoints σ(R)⊆[0,2]).
+-- (0,2): hasDerivAt_devChar. r∈{0,2}: modCharC=1 ⇒ d_z(r)=√r z-constant (deriv 0), and the formula coefficient
+-- vanishes since (2−r)/r=0 (2/0=0 at r=0, 0/2=0 at r=2) ⇒ log 0=0. The HasDerivAt form the differentiate-under-
+-- the-spectral-integral holomorphy of devCorrExt needs (μ may give mass to the endpoints).
 #print axioms QIQTH.StandardSubspaceModular.hasDerivAt_devChar
 -- expected: standard only — ★ POINTWISE z-derivative of the device character: d/dz d_z(r)=i·log((2−r)/r)·d_z(r)
 -- (same modular frequency as modCharC; √r is z-constant, so product rule via hasDerivAt_modCharC.mul_const).
