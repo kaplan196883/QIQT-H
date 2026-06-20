@@ -3516,6 +3516,10 @@ namespace QIQTH.AxiomAudit
 -- u_{z+i}(r)=u_z(r)·(r/(2−r)) — shifting Im by β=1 multiplies by the modular weight exp(−log((2−r)/r)). This is
 -- the scalar core of Δ^{it}'s own strip/KMS property, the regularity needed to enter the strip-uniqueness
 -- comparison toward discharging hUniq. (Next: lift to the spectral-integral correlation ⟪ξ,Δ^{it}ξ⟫.)
+#print axioms QIQTH.StandardSubspaceModular.hasDerivAt_modCharC
+-- expected: standard only — the pointwise COMPLEX z-derivative d/dz u_z(r) = i·log((2−r)/r)·u_z(r) (via
+-- HasDerivAt.cexp on exp(i·z·L)). This is the integrand-derivative that, dominated in the regular regime,
+-- gives holomorphy of the strip extension z↦∫u_z dμ under the integral sign (next brick).
 #print axioms QIQTH.StandardSubspaceModular.modCharC_norm
 #print axioms QIQTH.StandardSubspaceModular.modCharC_norm_le
 -- expected: standard only — modCharC_norm: EXACT modulus ‖u_z(r)‖=exp(−Im(z)·log((2−r)/r)) on (0,2) (=1 on the

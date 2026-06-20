@@ -1345,6 +1345,23 @@ theorem differentiable_modCharC (r : ℝ) : Differentiable ℂ (fun z => modChar
       funext (fun z => Set.piecewise_eq_of_notMem _ _ _ hr)
     rw [h]; exact differentiable_const _
 
+/-- **The complex `z`-derivative of the modular character**: `d/dz u_z(r) = i·log((2−r)/r)·u_z(r)`.  This is
+    the pointwise derivative that, integrated against the spectral measure and dominated in the regular
+    regime, gives holomorphy of the strip extension `z ↦ ∫ u_z dμ` under the integral sign. -/
+theorem hasDerivAt_modCharC {r : ℝ} (hr : r ∈ Set.Ioo (0 : ℝ) 2) (z : ℂ) :
+    HasDerivAt (fun z => modCharC z r)
+      (Complex.I * (Real.log ((2 - r) / r) : ℂ) * modCharC z r) z := by
+  have hfun : (fun z => modCharC z r)
+      = fun z => Complex.exp (Complex.I * z * (Real.log ((2 - r) / r) : ℂ)) :=
+    funext (fun z => modCharC_of_mem hr z)
+  rw [hfun, modCharC_of_mem hr]
+  have hlin : HasDerivAt (fun z => Complex.I * z * (Real.log ((2 - r) / r) : ℂ))
+      (Complex.I * (Real.log ((2 - r) / r) : ℂ)) z := by
+    simpa using (((hasDerivAt_id z).const_mul Complex.I).mul_const (Real.log ((2 - r) / r) : ℂ))
+  have hexp := hlin.cexp
+  convert hexp using 1
+  ring
+
 /-- **The KMS boundary flip** `u_{z+i}(r) = u_z(r)·(r/(2−r))`: shifting the imaginary part by the inverse
     temperature `β = 1` multiplies by the modular weight `r/(2−r) = exp(−log((2−r)/r))`.  This is the scalar
     core of the modular KMS condition. -/
