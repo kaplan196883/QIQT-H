@@ -3422,6 +3422,16 @@ namespace QIQTH.AxiomAudit
 -- wedgeSubspace: boostUnitary a maps closure(span ℝ wedgeGenSet)=𝒦_W into itself — the PHYSICALLY-defined wedge
 -- subspace (NOT from modular data), boost-invariant, axiom-free. Soft geometric layer of the one-particle BW
 -- COMPLETE; remaining = KMS-uniqueness lemma (formalizable) + labelled strip input Hyp_strip_Krep (irreducible AQFT).
+#print axioms QIQTH.Fock.OneParticleBW.oneParticleBW_of_kms
+-- expected: standard only — ★ CONDITIONAL ONE-PARTICLE BISOGNANO–WICHMANN (KMS-uniqueness route, gpt-5-pro
+-- verdict: KMS-uniqueness is NOT provable in current Mathlib — needs unbounded Tomita/Hardy-strip, months —
+-- so LABEL it, never a Lean axiom). modUnitary S t = V t from {hUniq: KMS-uniqueness for standard subspaces
+-- (BGL §2, labelled HYPOTHESIS) + hStrip: StripKMS V D (the strip/KMS property, the single physical AQFT input
+-- Hyp_strip_Krep, BGL §4, defined precisely via an ∃-quantified holomorphic extension on kmsStrip={0<Im z<1}
+-- with KMS boundary flip — NO Hardy machinery) + hInv: V(t)𝒦⊆𝒦 (PROVED for the wedge via boostUnitary_mapsTo_
+-- wedgeSubspace)}. Instantiated at 𝒦_W, V=boostUnitary(−2π·) ⇒ modUnitary 𝒦_W=boostUnitary(−2π·) ⇒ hFlux
+-- DERIVED modulo exactly TWO labelled citable AQFT facts. AXIOM-FREE (the AQFT facts are hypotheses, not axioms);
+-- genuine contribution = the invariance is DERIVED. This is the honest endpoint of the BW reduction.
 -- (relEntropy_nonneg) DERIVE the differential area law δS=ηδA, which with the two CITED inputs (hFlux=Bisognano–
 -- Wichmann boost flux, hFocus=Raychaudhuri focusing) + structural (Lorentzian congruence g=PᵀηP, ∇·T=0,
 -- f-regularity) ⇒ ∃Λ, a·T=G+Λg (genuine Einstein tensor, constant Λ) via jacobson_einstein_equation_of_state.

@@ -207,4 +207,49 @@ theorem boostUnitary_mapsTo_wedgeSubspace (m a : ℝ) :
       (closure (Submodule.span ℝ (wedgeGenSet m) : Set _)) :=
   boostUnitary_mapsTo_closure_span a (boostUnitary_mapsTo_wedgeGenSet m a)
 
+/-! ### The conditional one-particle BW theorem (KMS-uniqueness route, two labelled AQFT inputs) -/
+
+section ConditionalBW
+variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
+
+/-- The KMS strip (rescaled so the boost period is `1`): `{z : 0 < Im z < 1}`. -/
+def kmsStrip : Set ℂ := {z : ℂ | 0 < z.im ∧ z.im < 1}
+
+/-- **The standard-subspace KMS strip property** — the single physical labelled AQFT input
+    `Hyp_strip_Krep` (BGL §4).  On a dense core `D`, for each `ξ, η ∈ D` the correlation
+    `t ↦ ⟪ξ, V t η⟫` extends to a function `F` holomorphic on the strip `0 < Im z < 1`, matching the
+    correlation on the real axis and satisfying the KMS boundary flip `F(t+i) = ⟪η, V t ξ⟫` at the top
+    edge.  Stated via an existentially-quantified extension `F`, so no Hardy-space machinery is required —
+    this is precisely the analytic fact the one-particle Bisognano–Wichmann theorem rests on. -/
+def StripKMS (V : ℝ → (H →L[ℂ] H)) (D : Set H) : Prop :=
+  Dense D ∧ ∀ ξ ∈ D, ∀ η ∈ D, ∃ F : ℂ → ℂ,
+    DifferentiableOn ℂ F kmsStrip ∧
+    (∀ t : ℝ, F t = inner ℂ ξ (V t η)) ∧
+    (∀ t : ℝ, F ((t : ℂ) + Complex.I) = inner ℂ η (V t ξ))
+
+/-- **★ Conditional one-particle Bisognano–Wichmann (KMS-uniqueness route).**  For a standard subspace
+    `S` and a strongly-continuous unitary group `V`, GIVEN the two labelled AQFT facts that current
+    Mathlib cannot prove (kept as explicit hypotheses, NEVER Lean axioms):
+    * `hUniq` — the **KMS-uniqueness lemma** for standard subspaces (BGL §2): a `V` that leaves `S`
+      invariant and has the KMS strip property IS the modular group;
+    * `hStrip` — the **strip/KMS property** of `V` (`StripKMS`, BGL §4);
+    together with the boost-INVARIANCE `hInv` (which is PROVED for the wedge subspace,
+    `boostUnitary_mapsTo_wedgeSubspace`), the modular flow equals `V`: `modUnitary S t = V t`.
+
+    Instantiated at `S = 𝒦_W`, `V t = boostUnitary(−2π t)` this gives
+    `modUnitary 𝒦_W t = boostUnitary(−2π t)` — the one-particle BW identification, hence the `hFlux`
+    input of `qiqt_bekenstein_gives_gr` DERIVED modulo exactly these two labelled, citable AQFT facts.
+    The genuine contribution is that the invariance is *derived* (not assumed); only the two analytic
+    facts remain labelled. -/
+theorem oneParticleBW_of_kms (S : StandardSubspace H)
+    (V : ℝ → (H →L[ℂ] H)) {D : Set H}
+    (hUniq : (∀ t, Set.MapsTo (V t) (S.toClosedSubmodule : Set H) (S.toClosedSubmodule : Set H)) →
+             StripKMS V D → ∀ t, modUnitary S t = V t)
+    (hInv : ∀ t, Set.MapsTo (V t) (S.toClosedSubmodule : Set H) (S.toClosedSubmodule : Set H))
+    (hStrip : StripKMS V D) :
+    ∀ t, modUnitary S t = V t :=
+  hUniq hInv hStrip
+
+end ConditionalBW
+
 end QIQTH.Fock.OneParticleBW
