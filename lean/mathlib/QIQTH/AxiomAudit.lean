@@ -3561,6 +3561,11 @@ namespace QIQTH.AxiomAudit
 -- (Measure.integral_comp_div + the exponent identity n·(u/√n)²=u²). Turns the CONCENTRATING Gaussian kernel into
 -- a FIXED e^{−u²} against the rescaled f(u/√n), so the mollifier limit → f(0) follows by dominated convergence
 -- (f(u/√n)→f(0)). Foundation for the scalar density convergence.
+#print axioms QIQTH.StandardSubspaceModular.gauss_mollifier_integral_tendsto
+-- expected: standard only — ★ the fixed-Gaussian mollifier LIMIT (dominated convergence): ∫e^{−u²}·f(u/√n)du →
+-- ∫e^{−u²}·f(0)du as n→∞ for bounded continuous f. f(u/√n)→f(0) (u/√n→0 via Real.tendsto_sqrt_atTop + f cont),
+-- dominated by e^{−u²}·M (tendsto_integral_filter_of_dominated_convergence). With change_of_var this gives
+-- √(n/π)∫e^{−n t²}f → f(0) — the scalar density. Combined with entireVec_sub_norm_le ⇒ η_n → η (RvD density).
 -- expected: standard only — gaussSmear V n η = ∫ e^{−n t²}•V_t η dt. gaussSmear_integrable: Bochner-integrable
 -- (dominated by the Gaussian e^{−n t²}·‖η‖ via integrable_exp_neg_mul_sq, V_t norm-non-increasing + orbit
 -- continuous). gaussSmear_mem_K: ★ the smeared vector lands in the real subspace K — the ℝ-linear projection

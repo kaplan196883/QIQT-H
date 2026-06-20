@@ -1439,6 +1439,26 @@ theorem gauss_mollifier_change_of_var {n : ℝ} (hn : 0 < n) (f : ℝ → ℝ) :
       = Real.exp (-n * (u / Real.sqrt n) ^ 2) * f (u / Real.sqrt n)
   rw [harg]
 
+open MeasureTheory Filter Topology in
+/-- **The fixed-Gaussian mollifier limit** (dominated convergence): for bounded continuous `f`,
+    `∫ e^{−u²}·f(u/√n) du → ∫ e^{−u²}·f(0) du` as `n → ∞`.  Since `u/√n → 0` and `f` is continuous,
+    `f(u/√n) → f(0)` pointwise, dominated by `e^{−u²}·M`. -/
+theorem gauss_mollifier_integral_tendsto {f : ℝ → ℝ} {M : ℝ} (hf : Continuous f) (hM : ∀ t, |f t| ≤ M) :
+    Tendsto (fun n : ℝ => ∫ u, Real.exp (-u ^ 2) * f (u / Real.sqrt n)) atTop
+      (𝓝 (∫ u, Real.exp (-u ^ 2) * f 0)) := by
+  refine tendsto_integral_filter_of_dominated_convergence (fun u => Real.exp (-u ^ 2) * M)
+    (Filter.Eventually.of_forall (fun n => (by fun_prop : Continuous fun u : ℝ =>
+      Real.exp (-u ^ 2) * f (u / Real.sqrt n)).aestronglyMeasurable))
+    (Filter.Eventually.of_forall (fun n => Filter.Eventually.of_forall (fun u => ?_)))
+    (by simpa only [neg_one_mul] using
+      (integrable_exp_neg_mul_sq (by norm_num : (0:ℝ) < 1)).mul_const M)
+    (Filter.Eventually.of_forall (fun u => ?_))
+  · rw [Real.norm_eq_abs, abs_mul, abs_of_pos (Real.exp_pos _)]
+    exact mul_le_mul_of_nonneg_left (hM _) (Real.exp_pos _).le
+  · have h0 : Tendsto (fun n : ℝ => u / Real.sqrt n) atTop (𝓝 0) :=
+      tendsto_const_nhds.div_atTop Real.tendsto_sqrt_atTop
+    exact (hf.continuousAt.tendsto.comp h0).const_mul (Real.exp (-u ^ 2))
+
 /-! ### Analytic continuation of the modular character to the KMS strip
 
 The modular character `u_t(r) = exp(i·t·log((2−r)/r))` continues to an entire function of a *complex*
