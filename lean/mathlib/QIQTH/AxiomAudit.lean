@@ -3648,6 +3648,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ J𝒦 ⊆ (i𝒦)^⊥ (RvD Prop 2.2(5)): ξ∈𝒦 (projK ξ=ξ) ⇒ projIK(modConj ξ)=0. From
 -- JQJ=1−P: J(Q(Jξ))=ξ−Pξ=0, J injective (J²=1) ⇒ Q(Jξ)=0. PLACES the J-twisted w-vectors of Thm 3.8's
 -- g-function in (i𝒦)^⊥ — the w-construction's subspace geometry COMPLETE. (antilinear-CFC "frontier" route done.)
+#print axioms QIQTH.StandardSubspaceModular.modConj_projK_modConj
+-- expected: standard only — JPJ=1−Q: modConj(projK(modConj ξ))=ξ−projIK ξ =(JRJ+JDJ)/2=((2−R)+D)/2=1−Q. Symmetric to JQJ=1−P.
+#print axioms QIQTH.StandardSubspaceModular.projK_modConj_eq_self_of_perp_IK
+-- expected: standard only — ★ (i𝒦)^⊥ ⊆ J𝒦 (reverse incl ⇒ J𝒦=(i𝒦)^⊥): w⊥i𝒦 ⇒ projK(modConj w)=modConj w
+-- (Jw∈𝒦). From JPJ=1−Q: J(P(Jw))=w−Qw=w, J injective ⇒ P(Jw)=Jw. So the (i𝒦)^⊥ w-supply is EXACTLY J𝒦.
 #print axioms QIQTH.StandardSubspaceModular.modConjSqrtR_sq
 -- expected: standard only — ★ B·B=2−R for B=J R^{½}J: B(Bξ)=(2−R)ξ. Inner J²=1 collapses
 -- J R^{½}(JJ)R^{½}J = J R^{½}R^{½}J = JRJ = 2−R (rvdSqrtR_mul_self + modConj_rvdRC_modConj). The b·b=a input

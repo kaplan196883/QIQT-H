@@ -903,6 +903,32 @@ theorem projIK_modConj_eq_zero_of_mem_K (S : StandardSubspace H) {ξ : H} (hξ :
   have h2 := congrArg (modConj S) h
   rwa [modConj_sq, map_zero] at h2
 
+/-- **`J P J = 1 − Q`** — the symmetric reflection: `J(P(J ξ)) = ξ − Q ξ`.  `J P J = (J R J + J D J)/2 =
+    ((2−R) + D)/2 = 1 − Q` (`J R J = 2−R`, `J D J = D`).  With `J Q J = 1 − P` this is the full RvD
+    Prop 2.2(5): `J` swaps `(𝒦, i𝒦)` with `((i𝒦)^⊥, 𝒦^⊥)`. -/
+theorem modConj_projK_modConj (S : StandardSubspace H) (ξ : H) :
+    modConj S (projK S (modConj S ξ)) = ξ - projIK S ξ := by
+  have key : (2 : ℝ) • modConj S (projK S (modConj S ξ)) = (2 : ℝ) • (ξ - projIK S ξ) := by
+    rw [← map_smul]
+    have h2pK : (2 : ℝ) • projK S (modConj S ξ)
+        = rvdR S (modConj S ξ) + rvdPmQ S (modConj S ξ) := by
+      rw [rvdR_apply, rvdPmQ, ContinuousLinearMap.sub_apply]; module
+    rw [h2pK, map_add, ← rvdRC_apply, modConj_rvdRC_modConj, modConj_rvdPmQ_modConj,
+      rvdTwoSubRC_apply, rvdPmQ, ContinuousLinearMap.sub_apply, rvdR_apply]
+    module
+  exact smul_right_injective H two_ne_zero key
+
+/-- **`(i𝒦)^⊥ ⊆ J𝒦`** — the reverse inclusion, giving the equality `J𝒦 = (i𝒦)^⊥`.  For `w ⊥ i𝒦`
+    (`projIK w = 0`), `J P J` at `w` gives `J(P(J w)) = w − Q w = w`, and `J²=1` injectivity yields
+    `P(J w) = J w`, i.e. `J w ∈ 𝒦`; hence `w = J(J w) ∈ J𝒦`.  So the `(i𝒦)^⊥` `w`-supply of the
+    orbit-identity framework is *exactly* the `J`-images of `𝒦`. -/
+theorem projK_modConj_eq_self_of_perp_IK (S : StandardSubspace H) {w : H}
+    (hw : projIK S w = 0) : projK S (modConj S w) = modConj S w := by
+  have h := modConj_projK_modConj S w
+  rw [hw, sub_zero] at h
+  have h2 := congrArg (modConj S) h
+  rwa [modConj_sq] at h2
+
 /-! ### Bounded Tomita fixedness for `ξ ∈ 𝒦`
 
   The second CGP spectral-balance prerequisite, in bounded form.  The Tomita operator `S = J Δ^{1/2}`
