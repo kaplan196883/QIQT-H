@@ -3881,6 +3881,11 @@ namespace QIQTH.AxiomAudit
 -- the scalar core of the genuine U-side continuation (2−R)^{iz}R^{−iz+1/2}ζ=d_z(R)ζ, bounded-holomorphic on
 -- the half-strip for ANY standard subspace (unlike modCorrExt which needs σ(R)⊆[a,2−a]). devChar/measurable_devChar/
 -- devChar_ofReal/differentiable_devChar: the device char is entire in z, Borel in r, =modChar t·√r on the axis.
+#print axioms QIQTH.StandardSubspaceModular.rpow_mul_abs_log_le
+-- expected: standard only — ★★ POLYNOMIAL-BEATS-LOG bound (heart of the device-derivative domination): for
+-- x∈(0,2], δ∈(0,1], x^δ·|log x| ≤ 2/δ + log2. (0,1]: log x⁻¹≤(x⁻¹)^{δ/2}/(δ/2) (Real.log_le_rpow_div) ⇒
+-- x^δ·|log x|≤2·x^{δ/2}/δ≤2/δ. [1,2]: log x≤log2, x^δ≤2. Tames the log((2−r)/r) factor of the device z-derivative
+-- against the r^{1/2±·} of ‖d_z‖ ⇒ the integrable CONSTANT dominator for holomorphy of devCorrExt.
 #print axioms QIQTH.StandardSubspaceModular.hasDerivAt_devChar
 -- expected: standard only — ★ POINTWISE z-derivative of the device character: d/dz d_z(r)=i·log((2−r)/r)·d_z(r)
 -- (same modular frequency as modCharC; √r is z-constant, so product rule via hasDerivAt_modCharC.mul_const).

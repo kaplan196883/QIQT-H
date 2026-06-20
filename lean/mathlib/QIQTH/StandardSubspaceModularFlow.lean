@@ -2324,6 +2324,48 @@ theorem devChar_norm_le_Icc {z : ℂ} (hz2 : z.im ≤ 0) (hz1 : -(1 / 2 : ℝ) �
       abs_of_nonneg (Real.sqrt_nonneg r)]
     exact Real.sqrt_le_sqrt hr.2
 
+/-- **Uniform `x^δ·|log x|` bound** (the heart of the device-derivative domination): for `x ∈ (0,2]` and
+    `δ ∈ (0,1]`, `x^δ·|log x| ≤ 2/δ + log 2`.  On `(0,1]` use `log x⁻¹ ≤ (x⁻¹)^{δ/2}/(δ/2)`
+    (`Real.log_le_rpow_div`) so `x^δ·|log x| ≤ 2·x^{δ/2}/δ ≤ 2/δ`; on `[1,2]` use `log x ≤ log 2`,
+    `x^δ ≤ 2`.  This is the polynomial-beats-log estimate that tames the `log((2−r)/r)` factor of the device
+    `z`-derivative against the `r^{1/2±·}` factors of `‖d_z‖`, giving the integrable constant dominator. -/
+theorem rpow_mul_abs_log_le {x δ : ℝ} (hx0 : 0 < x) (hx2 : x ≤ 2) (hδ0 : 0 < δ) (hδ1 : δ ≤ 1) :
+    x ^ δ * |Real.log x| ≤ 2 / δ + Real.log 2 := by
+  have hlog2 : (0 : ℝ) ≤ Real.log 2 := Real.log_nonneg (by norm_num)
+  have hδ0' : δ ≠ 0 := hδ0.ne'
+  by_cases hx1 : x ≤ 1
+  · have hxδ_nonneg : (0 : ℝ) ≤ x ^ δ := Real.rpow_nonneg hx0.le δ
+    have hbound : |Real.log x| ≤ 2 * x ^ (-(δ / 2)) / δ := by
+      have h1 : Real.log x⁻¹ ≤ (x⁻¹) ^ (δ / 2) / (δ / 2) :=
+        Real.log_le_rpow_div (by positivity) (by positivity)
+      rw [Real.log_inv] at h1
+      rw [abs_of_nonpos (Real.log_nonpos hx0.le hx1)]
+      calc -Real.log x ≤ (x⁻¹) ^ (δ / 2) / (δ / 2) := h1
+        _ = 2 * x ^ (-(δ / 2)) / δ := by
+            rw [Real.inv_rpow hx0.le, ← Real.rpow_neg hx0.le]; field_simp
+    calc x ^ δ * |Real.log x|
+        ≤ x ^ δ * (2 * x ^ (-(δ / 2)) / δ) := mul_le_mul_of_nonneg_left hbound hxδ_nonneg
+      _ = 2 / δ * x ^ (δ / 2) := by
+          rw [show x ^ δ * (2 * x ^ (-(δ / 2)) / δ) = 2 / δ * (x ^ δ * x ^ (-(δ / 2))) from by ring,
+            ← Real.rpow_add hx0, show δ + -(δ / 2) = δ / 2 from by ring]
+      _ ≤ 2 / δ * 1 :=
+          mul_le_mul_of_nonneg_left (Real.rpow_le_one hx0.le hx1 (by positivity)) (by positivity)
+      _ = 2 / δ := mul_one _
+      _ ≤ 2 / δ + Real.log 2 := le_add_of_nonneg_right hlog2
+  · rw [not_le] at hx1
+    rw [abs_of_nonneg (Real.log_nonneg hx1.le)]
+    have hxδ : x ^ δ ≤ 2 :=
+      calc x ^ δ ≤ (2 : ℝ) ^ δ := Real.rpow_le_rpow hx0.le hx2 hδ0.le
+        _ ≤ (2 : ℝ) ^ (1 : ℝ) := Real.rpow_le_rpow_of_exponent_le (by norm_num) hδ1
+        _ = 2 := by norm_num
+    have hlogxle : Real.log x ≤ Real.log 2 := Real.log_le_log hx0 hx2
+    have hlog2le1 : Real.log 2 ≤ 1 := by
+      linarith [Real.log_le_sub_one_of_pos (show (0 : ℝ) < 2 by norm_num)]
+    have h2δ : (2 : ℝ) ≤ 2 / δ := by rw [le_div_iff₀ hδ0]; nlinarith
+    calc x ^ δ * Real.log x
+        ≤ 2 * Real.log 2 := mul_le_mul hxδ hlogxle (Real.log_nonneg hx1.le) (by norm_num)
+      _ ≤ 2 / δ + Real.log 2 := by linarith
+
 /-- **The complex `z`-derivative of the device character**: `d/dz d_z(r) = i·log((2−r)/r)·d_z(r)` (same modular
     frequency as `modCharC`, since the `√r` factor is `z`-constant).  This is the pointwise derivative that,
     integrated against the spectral measure and dominated on the *open* half-strip (where `−Im z ∈ (0,1/2)`, so
