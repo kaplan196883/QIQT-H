@@ -3993,6 +3993,11 @@ namespace QIQTH.AxiomAudit
 -- g-function g(z)=⟨h(z),J d_z(R)ζ⟩. deviceOpC_ofReal: restricts to deviceOpReal (Δ^{it}√R) on Im z=0.
 #print axioms QIQTH.deviceOpC_norm_le
 -- deviceOpC_norm_le: ‖d_z(R)‖≤2√2 uniformly on the half-strip (borelFC norm ≤2·sup‖f‖, devChar bound √2).
+#print axioms QIQTH.deviceOpC_bottomEdge_eq
+-- expected: standard only — ★★ BOTTOM-EDGE t-translation: deviceOpC(t−i/2) = Δ^{it}·deviceOpC(−i/2) (bottom-edge
+-- analogue of deviceOpReal_eq). devChar(↑t−i/2)=u_t·devChar(−i/2) EVERYWHERE (modCharC_add, no endpoint issue) ⇒
+-- borelFC_mul ⇒ modUnitary t · deviceOpC(−i/2). So deviceVec(t−i/2)=Δ^{it}·deviceVec(−i/2): the modular flow
+-- translates the fixed bottom-edge vector. Both g-function device edges now factor through Δ^{it}.
 #print axioms QIQTH.deviceOpReal_eq
 -- expected: standard only — ★★ DEVICE OPERATOR FACTORS as Δ^{it}·√R: deviceOpReal t = modUnitary t · rvdSqrtR
 -- (general top-edge identity; deviceOpReal_zero is t=0). devChar(↑t)=u_t·√· ⇒ borelFC(devChar ↑t)=borelFC(u_t)·

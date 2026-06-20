@@ -549,6 +549,46 @@ theorem deviceOpReal_eq (S : StandardSubspace H) (t : ℝ) :
   show devSpecReal S t ω = modSpecFun S t ω * devSpecReal S 0 ω
   simp only [devSpecReal, modSpecFun, devChar_ofReal, Complex.ofReal_zero, devChar_zero]
 
+open QIQTH.StandardSubspaceModular in
+/-- **Bottom-edge `t`-translation of the device operator**: `deviceOpC(t − i/2) = Δ^{it}·deviceOpC(−i/2)`
+    (the bottom-edge analogue of `deviceOpReal_eq`).  `devChar(↑t − i/2) = u_t·devChar(−i/2)` EVERYWHERE (via
+    `modCharC_add`: `u_{↑t + (−i/2)} = u_{↑t}·u_{−i/2}`, no endpoint issue), so `borelFC` factors through
+    `borelFC_mul` into `modUnitary t · deviceOpC(−i/2)`.  Hence the device vector along the bottom edge is
+    `deviceVec(t − i/2) = Δ^{it}·deviceVec(−i/2)` — the modular flow translating the fixed bottom-edge vector. -/
+theorem deviceOpC_bottomEdge_eq (S : StandardSubspace H) (t : ℝ) :
+    deviceOpC S ((t : ℂ) - Complex.I / 2)
+        (by simp [Complex.sub_im, Complex.div_im, Complex.I_im])
+        (by rw [show ((t : ℂ) - Complex.I / 2).im = -(1 / 2) from by
+              simp [Complex.sub_im, Complex.div_im, Complex.I_im]])
+      = modUnitary S t * deviceOpC S (-(Complex.I / 2))
+        (by simp [Complex.neg_im, Complex.div_im, Complex.I_im])
+        (by rw [show (-(Complex.I / 2)).im = -(1 / 2) from by
+              simp [Complex.neg_im, Complex.div_im, Complex.I_im]]) := by
+  rw [deviceOpC, deviceOpC, modUnitary]
+  have hpm : Measurable
+      (fun ω : spectrum ℝ (rvdRC S) => modSpecFun S t ω * devChar (-(Complex.I / 2)) (ω : ℝ)) :=
+    (modSpecFun_measurable S t).mul ((measurable_devChar _).comp measurable_subtype_coe)
+  have hib : ∀ z : ℂ, z.im = -(1 / 2) → ∀ ω : spectrum ℝ (rvdRC S),
+      ‖devChar z (ω : ℝ)‖ ≤ Real.sqrt 2 := fun z hz ω =>
+    devChar_norm_le_Icc (by rw [hz]; norm_num) (by rw [hz]) (rvdRC_spectrum_mem_Icc S ω)
+  have him : (-(Complex.I / 2)).im = -(1 / 2) := by simp [Complex.neg_im, Complex.div_im, Complex.I_im]
+  have hpb : ∀ ω, ‖modSpecFun S t ω * devChar (-(Complex.I / 2)) (ω : ℝ)‖ ≤ Real.sqrt 2 := fun ω => by
+    rw [norm_mul]
+    calc ‖modSpecFun S t ω‖ * ‖devChar (-(Complex.I / 2)) (ω : ℝ)‖
+        ≤ 1 * Real.sqrt 2 :=
+          mul_le_mul (modSpecFun_norm_le S t ω) (hib _ him ω) (norm_nonneg _) zero_le_one
+      _ = Real.sqrt 2 := one_mul _
+  rw [← borelFC_mul (rvdRC S) (rvdRC_isSelfAdjoint S)
+        (modSpecFun_measurable S t) zero_le_one (modSpecFun_norm_le S t)
+        ((measurable_devChar _).comp measurable_subtype_coe) (Real.sqrt_nonneg 2) (hib _ him)
+        hpm (Real.sqrt_nonneg 2) hpb]
+  refine borelFC_congr (rvdRC S) (rvdRC_isSelfAdjoint S) _ (Real.sqrt_nonneg 2) _ hpm
+    (Real.sqrt_nonneg 2) hpb (funext fun ω => ?_)
+  show devChar ((t : ℂ) - Complex.I / 2) (ω : ℝ)
+    = modSpecFun S t ω * devChar (-(Complex.I / 2)) (ω : ℝ)
+  rw [devChar, devChar, modSpecFun, ← modCharC_ofReal t, ← mul_assoc, ← modCharC_add,
+    show (t : ℂ) + -(Complex.I / 2) = (t : ℂ) - Complex.I / 2 from by ring]
+
 /-- **Spectral bridge for the real-axis device operator**: `⟪ξ, (Δ^{it}·√R) ξ⟫ = ∫ d_t dμ^R_ξ` (mirrors
     `rvdSpec_modUnitary`, via `inner_borelFC`). -/
 theorem rvdSpec_deviceOpReal (S : StandardSubspace H) (ξ : H) (t : ℝ) :
