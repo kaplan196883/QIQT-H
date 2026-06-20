@@ -3508,6 +3508,10 @@ namespace QIQTH.AxiomAudit
 -- "Hardy-strip infrastructure Mathlib does not yet have," now assembled from Mathlib's Phragmén–Lindelöf.
 #print axioms QIQTH.StripUniqueness.eqOn_of_bdd_holomorphic_strip
 #print axioms QIQTH.StripUniqueness.kms_correlation_boundary_determined
+#print axioms QIQTH.StripUniqueness.eqConst_of_im_zero_strip
+-- expected: standard only — ★★ bounded-holomorphic g with Im g=0 on BOTH strip edges ⇒ g CONSTANT. Combines
+-- im_zero_on_strip (Im g=0 throughout) with AnalyticOnNhd.eq_const_of_re_eq_const (Re(i·g)=−Im g=0 const ⇒ i·g
+-- const ⇒ g const). = RvD Theorem 3.8's "real on both edges ⇒ constant" conclusion, reflection-free.
 #print axioms QIQTH.StripUniqueness.im_zero_on_strip
 -- expected: standard only — ★ MAX-MODULUS on the strip: if g is bounded-holomorphic on the KMS strip
 -- (DiffContOnCl+bound) and Im g=0 on BOTH edges, then Im g=0 throughout. Via |exp(±i·g)|=exp(∓Im g)=1 on the

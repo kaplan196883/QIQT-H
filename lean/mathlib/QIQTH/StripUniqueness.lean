@@ -1,4 +1,5 @@
 import Mathlib.Analysis.Complex.PhragmenLindelof
+import Mathlib.Analysis.Complex.OpenMapping
 
 /-!
 # The KMS strip-uniqueness principle (analytic core of one-particle KMS-uniqueness)
@@ -140,5 +141,33 @@ theorem im_zero_on_strip {g : ℂ → ℂ} {M : ℝ}
     have : Real.exp ((g z).im) ≤ Real.exp 0 := by rw [Real.exp_zero]; exact hneg
     exact Real.exp_le_exp.mp this
   linarith
+
+/-- **★★ Bounded-holomorphic with imaginary part zero on both strip edges ⟹ constant.**  Combining the
+    max-modulus propagation `im_zero_on_strip` (`Im g = 0` throughout) with the open-mapping corollary
+    `AnalyticOnNhd.eq_const_of_re_eq_const` (a holomorphic function with constant real part is constant):
+    since `Re(i·g) = −Im g = 0` on the (open, connected) strip, `i·g` is constant, hence `g` is constant.
+    This is RvD Theorem 3.8's "real on both edges ⇒ constant" conclusion, obtained reflection-free. -/
+theorem eqConst_of_im_zero_strip {g : ℂ → ℂ} {M : ℝ}
+    (hg : DiffContOnCl ℂ g kmsStripOpen) (hgb : ∀ z ∈ kmsStripOpen, ‖g z‖ ≤ M)
+    (h0 : ∀ z : ℂ, z.im = 0 → (g z).im = 0) (h1 : ∀ z : ℂ, z.im = 1 → (g z).im = 0) :
+    ∃ c : ℂ, ∀ z ∈ kmsStripOpen, g z = c := by
+  have himz : ∀ z ∈ kmsStrip, (g z).im = 0 := im_zero_on_strip hg hgb h0 h1
+  have hopen : IsOpen kmsStripOpen :=
+    Complex.continuous_im.isOpen_preimage _ isOpen_Ioo
+  have hconv : Convex ℝ kmsStripOpen :=
+    (convex_Ioo (0 : ℝ) 1).linear_preimage Complex.imCLM.toLinearMap
+  have hne : kmsStripOpen.Nonempty :=
+    ⟨Complex.I / 2, by simp [kmsStripOpen, Complex.div_im]; norm_num⟩
+  have hsub : kmsStripOpen ⊆ kmsStrip := fun z hz => ⟨le_of_lt hz.1, le_of_lt hz.2⟩
+  have hana : AnalyticOnNhd ℂ (fun z => Complex.I * g z) kmsStripOpen :=
+    (hg.differentiableOn.const_mul Complex.I).analyticOnNhd hopen
+  have hre : ∀ z ∈ kmsStripOpen, (Complex.I * g z).re = 0 := by
+    intro z hz
+    rw [Complex.mul_re, Complex.I_re, Complex.I_im, zero_mul, one_mul, zero_sub, neg_eq_zero]
+    exact himz z (hsub hz)
+  obtain ⟨c, hc⟩ :=
+    AnalyticOnNhd.eq_const_of_re_eq_const hana hre hopen ⟨hne, hconv.isPreconnected⟩
+  refine ⟨-Complex.I * c, fun z hz => ?_⟩
+  rw [← hc z hz, ← mul_assoc, neg_mul, Complex.I_mul_I, neg_neg, one_mul]
 
 end QIQTH.StripUniqueness
