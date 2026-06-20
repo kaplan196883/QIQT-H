@@ -1,5 +1,6 @@
 import Mathlib.Analysis.Complex.PhragmenLindelof
 import Mathlib.Analysis.Complex.OpenMapping
+import Mathlib.Analysis.Complex.Hadamard
 
 /-!
 # The KMS strip-uniqueness principle (analytic core of one-particle KMS-uniqueness)
@@ -169,5 +170,80 @@ theorem eqConst_of_im_zero_strip {g : ℂ → ℂ} {M : ℝ}
     AnalyticOnNhd.eq_const_of_re_eq_const hana hre hopen ⟨hne, hconv.isPreconnected⟩
   refine ⟨-Complex.I * c, fun z hz => ?_⟩
   rw [← hc z hz, ← mul_assoc, neg_mul, Complex.I_mul_I, neg_neg, one_mul]
+
+open Complex.HadamardThreeLines in
+/-- **One-edge boundary uniqueness** (Hadamard three-lines — the Schwarz-reflection-free substitute).  A
+    function bounded-holomorphic on the KMS strip and *vanishing on the bottom edge* `Im z = 0` vanishes on
+    the whole closed strip.  Rotating the horizontal strip to the vertical strip `re⁻¹'[0,1]` (`w ↦ I·w`) and
+    applying Hadamard's three-lines theorem with edge bounds `a = 0`, `b = M` gives `‖f‖ ≤ 0^{1−θ}·M^θ = 0` on
+    the interior; continuity (`Set.EqOn.of_subset_closure`) propagates the zero to the closed strip.  This is
+    the analytic-continuation step RvD Theorem 3.8 obtains via Schwarz reflection (absent in Mathlib) — here
+    via three-lines instead.  It pins the orbit correlation against the KMS function in the step-5 matching. -/
+theorem eqZero_of_im_zero_edge {f : ℂ → ℂ} {M : ℝ}
+    (hf : DiffContOnCl ℂ f kmsStripOpen) (hfb : ∀ z ∈ kmsStrip, ‖f z‖ ≤ M)
+    (h0 : ∀ z : ℂ, z.im = 0 → f z = 0) :
+    ∀ z ∈ kmsStrip, f z = 0 := by
+  have hφim : ∀ w : ℂ, (Complex.I * w).im = w.re := fun w => by
+    rw [Complex.mul_im, Complex.I_re, Complex.I_im, zero_mul, one_mul, zero_add]
+  have hmaps_open : Set.MapsTo (fun w => Complex.I * w) (verticalStrip 0 1) kmsStripOpen := by
+    intro w hw
+    rw [verticalStrip, Set.mem_preimage] at hw
+    rw [kmsStripOpen, Set.mem_preimage, hφim]; exact hw
+  have hmaps_closed : Set.MapsTo (fun w => Complex.I * w) (verticalClosedStrip 0 1) kmsStrip := by
+    intro w hw
+    rw [verticalClosedStrip, Set.mem_preimage] at hw
+    rw [kmsStrip, Set.mem_preimage, hφim]; exact hw
+  have hclos_v : closure (verticalStrip 0 1) = verticalClosedStrip 0 1 := by
+    rw [verticalStrip, verticalClosedStrip, Complex.closure_preimage_re,
+      closure_Ioo (by norm_num : (0 : ℝ) ≠ 1)]
+  have hclos_k : closure kmsStripOpen = kmsStrip := by
+    rw [kmsStripOpen, kmsStrip, Complex.closure_preimage_im, closure_Ioo (by norm_num : (0 : ℝ) ≠ 1)]
+  have hgdiff : DiffContOnCl ℂ (fun w => f (Complex.I * w)) (verticalStrip 0 1) := by
+    refine ⟨hf.1.comp ((differentiable_id.const_mul Complex.I).differentiableOn) hmaps_open, ?_⟩
+    rw [hclos_v]
+    refine hf.2.comp ((continuous_const.mul continuous_id).continuousOn) ?_
+    rw [hclos_k]; exact hmaps_closed
+  have hgbdd : BddAbove ((norm ∘ fun w => f (Complex.I * w)) '' verticalClosedStrip 0 1) :=
+    ⟨M, by rintro _ ⟨w, hw, rfl⟩; exact hfb _ (hmaps_closed hw)⟩
+  have hre' : ∀ z : ℂ, (-Complex.I * z).re = z.im := fun z => by
+    rw [Complex.mul_re]; simp
+  have ha : ∀ w ∈ Complex.re ⁻¹' {(0 : ℝ)}, ‖f (Complex.I * w)‖ ≤ 0 := by
+    intro w hw
+    rw [Set.mem_preimage, Set.mem_singleton_iff] at hw
+    rw [h0 _ (by rw [hφim]; exact hw)]; simp
+  have hb : ∀ w ∈ Complex.re ⁻¹' {(1 : ℝ)}, ‖f (Complex.I * w)‖ ≤ M := by
+    intro w hw
+    rw [Set.mem_preimage, Set.mem_singleton_iff] at hw
+    exact hfb _ (by rw [kmsStrip, Set.mem_preimage, hφim, hw]; exact ⟨zero_le_one, le_rfl⟩)
+  have hopen : ∀ z ∈ kmsStripOpen, f z = 0 := by
+    intro z hz
+    rw [kmsStripOpen, Set.mem_preimage, Set.mem_Ioo] at hz
+    have hw : (-Complex.I * z) ∈ verticalClosedStrip 0 1 := by
+      rw [verticalClosedStrip, Set.mem_preimage, hre', Set.mem_Icc]
+      exact ⟨le_of_lt hz.1, le_of_lt hz.2⟩
+    have hbound := norm_le_interp_of_mem_verticalClosedStrip' (f := fun w => f (Complex.I * w))
+      (z := -Complex.I * z) zero_lt_one hw hgdiff hgbdd ha hb
+    simp only [hre'] at hbound
+    rw [show Complex.I * (-Complex.I * z) = z by
+        rw [← mul_assoc, mul_neg, Complex.I_mul_I, neg_neg, one_mul]] at hbound
+    rw [Real.zero_rpow (by simp only [sub_zero, div_one]; exact sub_ne_zero.mpr (ne_of_lt hz.2).symm),
+      zero_mul] at hbound
+    exact norm_le_zero_iff.mp hbound
+  refine Set.EqOn.of_subset_closure hopen (hclos_k ▸ hf.2) continuousOn_const
+    (Set.preimage_mono Set.Ioo_subset_Icc_self) (le_of_eq hclos_k.symm)
+
+/-- **One-edge determination** (Hadamard form): two bounded-holomorphic functions on the KMS strip that
+    agree on the *bottom edge* `Im z = 0` agree on the whole closed strip.  Apply `eqZero_of_im_zero_edge`
+    to `F − G`.  This is the analytic-continuation matching of RvD Theorem 3.8 step 5: the orbit correlation
+    `⟨h(z), b⟩` (entire) and the KMS function from `StripKMSrvd` (which exist on the strip with the same
+    real-axis values) coincide on the strip, so the KMS function's *top-edge* reality transfers to the orbit
+    correlation — the `Im = 1` edge input of `corrC_orbit_eq_of_edges_real`. -/
+theorem eqOn_of_im_zero_edge {F G : ℂ → ℂ} {M : ℝ}
+    (hF : DiffContOnCl ℂ F kmsStripOpen) (hG : DiffContOnCl ℂ G kmsStripOpen)
+    (hFb : ∀ z ∈ kmsStrip, ‖F z‖ ≤ M) (hGb : ∀ z ∈ kmsStrip, ‖G z‖ ≤ M)
+    (h0 : ∀ z : ℂ, z.im = 0 → F z = G z) : Set.EqOn F G kmsStrip := fun z hz =>
+  sub_eq_zero.mp (eqZero_of_im_zero_edge (hF.sub hG)
+    (fun w hw => (norm_sub_le _ _).trans (add_le_add (hFb w hw) (hGb w hw)))
+    (fun w hw => by rw [Pi.sub_apply, h0 w hw, sub_self]) z hz)
 
 end QIQTH.StripUniqueness

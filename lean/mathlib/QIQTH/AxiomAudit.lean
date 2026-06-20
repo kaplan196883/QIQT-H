@@ -3508,6 +3508,17 @@ namespace QIQTH.AxiomAudit
 -- "Hardy-strip infrastructure Mathlib does not yet have," now assembled from Mathlib's Phragmén–Lindelöf.
 #print axioms QIQTH.StripUniqueness.eqOn_of_bdd_holomorphic_strip
 #print axioms QIQTH.StripUniqueness.kms_correlation_boundary_determined
+#print axioms QIQTH.StripUniqueness.eqZero_of_im_zero_edge
+-- expected: standard only — ★★★ ONE-EDGE BOUNDARY UNIQUENESS (Hadamard three-lines, the Schwarz-reflection-
+-- free substitute Mathlib was thought to lack): f bounded-holomorphic on the KMS strip + f=0 on the BOTTOM
+-- edge (Im=0) ⇒ f=0 on the closed strip. Rotate horizontal→vertical strip (w↦I·w) + Hadamard
+-- norm_le_interp_of_mem_verticalClosedStrip' with edge bounds a=0,b=M ⇒ ‖f‖≤0^{1−θ}M^θ=0 interior;
+-- Set.EqOn.of_subset_closure to the closure. THE step-5 matching tool — removes the perceived reflection wall.
+#print axioms QIQTH.StripUniqueness.eqOn_of_im_zero_edge
+-- expected: standard only — ★ one-edge determination: two bounded-holomorphic F,G agreeing on the bottom edge
+-- (Im=0) agree on the closed strip (eqZero_of_im_zero_edge on F−G). RvD Thm 3.8 step-5 matching: the entire
+-- orbit correlation ⟨h(z),b⟩ and the StripKMSrvd KMS function agree on the real axis ⇒ on the strip ⇒ the KMS
+-- top-edge reality transfers to the orbit correlation (the Im=1 input of corrC_orbit_eq_of_edges_real).
 #print axioms QIQTH.StripUniqueness.eqConst_of_im_zero_strip
 -- expected: standard only — ★★ bounded-holomorphic g with Im g=0 on BOTH strip edges ⇒ g CONSTANT. Combines
 -- im_zero_on_strip (Im g=0 throughout) with AnalyticOnNhd.eq_const_of_re_eq_const (Re(i·g)=−Im g=0 const ⇒ i·g
