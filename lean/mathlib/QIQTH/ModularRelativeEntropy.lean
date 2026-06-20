@@ -431,6 +431,39 @@ theorem devCorrExt_ofReal (S : StandardSubspace H) (ξ : H) (t : ℝ) :
   exact integral_congr_ae (Filter.Eventually.of_forall
     (fun ω => devChar_ofReal t (ω : spectrum ℝ (rvdRC S)).val))
 
+/-- The **device spectral symbol on the real axis** `ω ↦ d_t(ω) = u_t(ω)·√ω`, the bounded measurable
+    function of `R` whose functional calculus is the real-axis device operator `Δ^{it}·√R`. -/
+noncomputable def devSpecReal (S : StandardSubspace H) (t : ℝ) : spectrum ℝ (rvdRC S) → ℂ :=
+  fun ω => devChar (t : ℂ) (ω : spectrum ℝ (rvdRC S)).val
+
+theorem devSpecReal_measurable (S : StandardSubspace H) (t : ℝ) : Measurable (devSpecReal S t) :=
+  (measurable_devChar (t : ℂ)).comp measurable_subtype_coe
+
+theorem devSpecReal_norm_le (S : StandardSubspace H) (t : ℝ) (ω : spectrum ℝ (rvdRC S)) :
+    ‖devSpecReal S t ω‖ ≤ Real.sqrt 2 :=
+  devChar_norm_le_Icc (by norm_num [Complex.ofReal_im]) (by norm_num [Complex.ofReal_im])
+    (rvdRC_spectrum_mem_Icc S ω)
+
+/-- The **real-axis device operator** `Δ^{it}·√R = d_t(R)`, the bounded Borel functional calculus of `R` at
+    the device symbol `devSpecReal` (`‖d_t‖ ≤ √2` on the spectrum, no regular window). -/
+noncomputable def deviceOpReal (S : StandardSubspace H) (t : ℝ) : H →L[ℂ] H :=
+  borelFC (rvdRC S) (rvdRC_isSelfAdjoint S) (devSpecReal_measurable S t) (Real.sqrt_nonneg 2)
+    (devSpecReal_norm_le S t)
+
+/-- **Spectral bridge for the real-axis device operator**: `⟪ξ, (Δ^{it}·√R) ξ⟫ = ∫ d_t dμ^R_ξ` (mirrors
+    `rvdSpec_modUnitary`, via `inner_borelFC`). -/
+theorem rvdSpec_deviceOpReal (S : StandardSubspace H) (ξ : H) (t : ℝ) :
+    inner ℂ ξ (deviceOpReal S t ξ) = ∫ ω, devSpecReal S t ω ∂(rvdSpecMeasure S ξ) := by
+  rw [deviceOpReal, inner_borelFC, bilinDiag_self, ProjectionValuedMeasure.diagInt, rvdSpecMeasure]
+
+/-- **The device strip extension as an operator expectation on the real axis**:
+    `D_ξ(t) = ⟪ξ, (Δ^{it}·√R) ξ⟫` — the matrix element of the bounded real-axis device operator, the device's
+    `√R`-regularized analogue of the modular bridge `rvdSpec_modUnitary` (`⟪ξ, Δ^{it} ξ⟫ = ∫ u_t dμ`). -/
+theorem devCorrExt_ofReal_inner (S : StandardSubspace H) (ξ : H) (t : ℝ) :
+    devCorrExt S ξ (t : ℂ) = inner ℂ ξ (deviceOpReal S t ξ) := by
+  rw [rvdSpec_deviceOpReal, devCorrExt]
+  rfl
+
 /-- **The device strip extension is differentiable on the open half-strip** (no regular window): immediate
     from `hasDerivAt_devCorrExt` at every interior point.  The differentiability half of the
     bounded-holomorphic half-strip extension that strip-uniqueness consumes, for ANY standard subspace. -/

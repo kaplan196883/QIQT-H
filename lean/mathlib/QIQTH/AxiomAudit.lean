@@ -3930,6 +3930,12 @@ namespace QIQTH.AxiomAudit
 -- strip agreeing with devCorrExt on the real axis Im=0 coincides with it on the whole closed half-strip
 -- (eqOn_of_im_zero_edge_halfStrip + diffContOnCl_devCorrExt + devCorrExt_norm_le). The device analogue of
 -- modCorrExt_eq_of_boundary, available for ANY standard subspace. Δ-side half of the strip-uniqueness comparison.
+#print axioms QIQTH.devCorrExt_ofReal_inner
+#print axioms QIQTH.rvdSpec_deviceOpReal
+-- expected: standard only — OPERATOR-FORM real-axis value: D_ξ(t)=⟪ξ,(Δ^{it}·√R)ξ⟫. deviceOpReal S t :=
+-- borelFC(rvdRC)(devSpecReal) is the bounded real-axis device operator (devSpecReal ω=d_t(ω)=u_t·√ω, ‖·‖≤√2
+-- on σ(R)⊆[0,2], NO regular window); rvdSpec_deviceOpReal = inner_borelFC bridge ⟪ξ,deviceOpReal ξ⟫=∫d_t dμ,
+-- the device √R-regularized analogue of rvdSpec_modUnitary (⟪ξ,Δ^{it}ξ⟫=∫u_t dμ). Operator-level Δ-side edge.
 #print axioms QIQTH.devCorrExt_ofReal
 -- expected: standard only — REAL-AXIS value (scalar): D_ξ(t)=∫ u_t·√ω dμ^R_ξ (devChar_ofReal under ∫). The
 -- √r-weighted modular correlation = ⟪ξ,Δ^{it}√R ξ⟫ as operator expectation (operator id needs borelFC↔CFC.sqrt
