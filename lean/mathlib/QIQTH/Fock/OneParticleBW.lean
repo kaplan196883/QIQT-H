@@ -632,6 +632,39 @@ theorem oneParticleBW_of_comparison (S : StandardSubspace H) (V : ℝ → (H →
 theorem comparisonDatum_modUnitary (S : StandardSubspace H) :
     ComparisonDatum S (modUnitary S) := fun _ _ _ _ _ => rfl
 
+/-- The **g-function constancy output** (RvD Theorem 3.8, the analytic conclusion): for `ξ, η ∈ 𝒦`,
+    `⟪V_t η, Δ^{it} J ξ⟫ = ⟪η, J ξ⟫`.  This is exactly what the (analytic) g-function
+    `g(z) = ⟨h(z), J d_z(R) ζ⟩` produces by being constant on the half-strip — `g(t) = ⟨U_t η, JΔ^{it}ξ⟩`
+    (top edge, real), `g(0) = ⟨η, Jξ⟩` — using `Δ^{it}J = JΔ^{it}` (`modConj_commute_modUnitary`). -/
+def GConstancy (S : StandardSubspace H) (V : ℝ → (H →L[ℂ] H)) : Prop :=
+  ∀ t : ℝ, ∀ η ∈ (S.toClosedSubmodule : Set H), ∀ ξ ∈ (S.toClosedSubmodule : Set H),
+    inner ℂ (V t η) (modUnitary S t (modConj S ξ)) = inner ℂ η (modConj S ξ)
+
+/-- **The g-function constancy output yields `ComparisonDatum`** — the operator-algebra wrapper of RvD
+    Theorem 3.8, reducing the discharge to the *analytic* g-constancy alone.  Given `⟪V_t η, Δ^{it} J ξ⟫ =
+    ⟪η, J ξ⟫` (∀ξ,η∈𝒦): for `w ⊥ i𝒦` set `ξ = Δ^{−it}(J w) ∈ 𝒦` (`J w ∈ 𝒦` since `J𝒦 = (i𝒦)^⊥`,
+    `Δ^{−it}` preserves `𝒦`).  Then `J ξ = Δ^{−it} w` and `Δ^{it} J ξ = w` (`JΔ^{it}=Δ^{it}J` + group law), so
+    g-constancy reads `⟪V_t η, w⟫ = ⟪η, Δ^{−it} w⟫ = ⟪Δ^{it} η, w⟫` (adjoint); conjugating gives
+    `⟪w, V_t η⟫ = ⟪w, Δ^{it} η⟫`.  The `⟪η,Jξ⟫` right-hand side carries the `Δ`-side automatically — no
+    separate `Δ`-version needed.  So the ONLY remaining unproven step is the analytic g-constancy itself. -/
+theorem comparisonDatum_of_gConstancy (S : StandardSubspace H) (V : ℝ → (H →L[ℂ] H))
+    (hG : GConstancy S V) : ComparisonDatum S V := by
+  intro t η hη w hw
+  have hJwK : projK S (modConj S w) = modConj S w :=
+    projK_modConj_eq_self_of_perp_IK S hw
+  set ξ := modUnitary S (-t) (modConj S w) with hξdef
+  have hξmem : ξ ∈ (S.toClosedSubmodule : Set H) :=
+    modUnitary_mapsTo_K S (-t) _ ((mem_K_iff_projK S _).mpr hJwK)
+  have hmc : modConj S ξ = modUnitary S (-t) w := by
+    rw [hξdef, modConj_commute_modUnitary S (-t) (modConj S w), modConj_sq]
+  have hkey : modUnitary S t (modConj S ξ) = w := by
+    rw [hmc, ← ContinuousLinearMap.mul_apply, ← modUnitary_add S t (-t), add_neg_cancel,
+      modUnitary_zero, ContinuousLinearMap.one_apply]
+  have hg := hG t η hη ξ hξmem
+  rw [hkey, hmc, ← modUnitary_adjoint S t, ContinuousLinearMap.adjoint_inner_right] at hg
+  rw [← inner_conj_symm w (V t η), ← inner_conj_symm w (modUnitary S t η)]
+  exact congrArg (starRingEnd ℂ) hg
+
 end ConditionalBW
 
 /-- **★ One-particle Bisognano–Wichmann for the WEDGE subspace (boost-invariance supplied from the
