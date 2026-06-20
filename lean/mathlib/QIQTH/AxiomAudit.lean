@@ -3787,6 +3787,13 @@ namespace QIQTH.AxiomAudit
 -- The J-twisted faithful replacement for the discredited full-strip corrC_real_on_axis@generic-w. Resolves the
 -- paradox: J𝒦=(i𝒦)^{⊥ℝ} is REAL-orthogonal, so ⟨v,Jξ⟩=0∀ξ does NOT give v∈i𝒦; consistent conclusion is the
 -- U-vs-Δ comparison (modUnitary_eq_of_orbit_compare), shared constant ⟨η,Jξ⟩ cancelling between U and Δ sides.
+#print axioms QIQTH.StandardSubspaceModular.corrJ_bottom_edge_real_of_kms
+-- expected: standard only — ★★ FAITHFUL RvD g-function BOTTOM EDGE (RvD Thm 3.8, p.198, KMS-matching step;
+-- correct-strip counterpart of the discredited full-strip corrC_top_edge_real_of_kms_match). g=corrC(Jξ) on
+-- HALF strip {−1/2≤Im≤0}; bottom edge Im=−1/2 (= half-shift Δ^{1/2}=J) is where Δ enters: KMS for U on pair
+-- (η,Δ^{it}ξ) gives f bdd-holo on half-strip, =g on real axis, real lower edge ⇒ (eqOn_of_im_zero_edge_halfStrip,
+-- Hadamard) f=g on half-strip ⇒ g(t−i/2) real. f = the labelled StripKMSrvd/hUniq function (the ONE genuinely
+-- KMS-dependent input); rest discharged. With corrJ_real_on_axis (top), g real on BOTH edges of the half-strip.
 #print axioms QIQTH.StandardSubspaceModular.orbit_inner_eq_of_entire
 -- expected: standard only — ★★ DENSITY EXTENSION: ⟨w,V_t(gaussSmear V n η)⟩=⟨w,gaussSmear V n η⟩ ∀n>0 ⇒
 -- ⟨w,V_t η⟩=⟨w,η⟩. Scale by √(n/π) to entireVec, entireVec_tendsto (→η) + continuity of V_t,⟨w,·⟩. Resolves

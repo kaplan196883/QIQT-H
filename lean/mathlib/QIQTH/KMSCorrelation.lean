@@ -326,6 +326,43 @@ theorem corrJ_real_on_axis (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)
   corrC_real_on_axis S hn η (modConj S ξ) hcont hbd hgrp
     (projIK_modConj_eq_zero_of_mem_K S hξ) hKinv t
 
+/-- **Faithful RvD `g`-function, BOTTOM-edge reality** (RvD Thm 3.8, *p. 198*, the KMS-matching step — the
+    correct-strip counterpart of the discredited full-strip `corrC_top_edge_real_of_kms_match`).  The genuine
+    RvD function `g(z) = ⟨Jξ, h(z)⟩ = corrC (Jξ) V n η z` lives on the HALF strip `{−1/2 ≤ Im z ≤ 0}`.  Its
+    *bottom* edge `Im z = −1/2` (the half-modular shift `Δ^{1/2} = J`) is where RvD bring `Δ` in: applying the
+    KMS condition for `{U_t}` to the pair `(η, Δ^{it}ξ)` yields a function `f`, bounded-holomorphic on the
+    half-strip, matching `g` on the real axis (`Im = 0`), with *real* lower edge.  Then by
+    `eqOn_of_im_zero_edge_halfStrip` (one-edge half-strip determination via Hadamard three-lines) `f = g` on the
+    whole half-strip, so `g`'s lower edge `g(t − i/2)` inherits the reality.  This is the genuinely
+    KMS-dependent input (`f` = the labelled `StripKMSrvd`/`hUniq` function); everything else is discharged.
+    Together with `corrJ_real_on_axis` (top edge), `g` is real on BOTH edges of the half-strip. -/
+theorem corrJ_bottom_edge_real_of_kms (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ}
+    (hn : 0 < n) (η : H) {ξ : H}
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    {f : ℂ → ℂ} {M : ℝ} (hf : DiffContOnCl ℂ f StripUniqueness.kmsHalfStripOpen)
+    (hfb : ∀ z ∈ StripUniqueness.kmsHalfStrip, ‖f z‖ ≤ M)
+    (hmatch : ∀ t : ℝ, f (t : ℂ) = corrC (modConj S ξ) V n η (t : ℂ))
+    (hfbot : ∀ t : ℝ, (f ((t : ℂ) - Complex.I / 2)).im = 0) (t : ℝ) :
+    (corrC (modConj S ξ) V n η ((t : ℂ) - Complex.I / 2)).im = 0 := by
+  have hg : DiffContOnCl ℂ (corrC (modConj S ξ) V n η) StripUniqueness.kmsHalfStripOpen :=
+    (differentiable_corrC hn η (modConj S ξ) hcont hbd).diffContOnCl
+  have heq : Set.EqOn f (corrC (modConj S ξ) V n η) StripUniqueness.kmsHalfStrip :=
+    StripUniqueness.eqOn_of_im_zero_edge_halfStrip
+      (M := max M (‖modConj S ξ‖ * (Real.exp (n / 4) * ‖η‖ * Real.sqrt (Real.pi / n))))
+      hf hg
+      (fun z hz => le_trans (hfb z hz) (le_max_left _ _))
+      (fun z hz => le_trans (corrC_bdd_halfStrip hn η (modConj S ξ) hcont hbd z hz) (le_max_right _ _))
+      (fun z hz0 => by
+        have hz' : z = ((z.re : ℝ) : ℂ) := Complex.ext (by simp) (by simp [hz0])
+        rw [hz']; exact hmatch z.re)
+  have hmem : ((t : ℂ) - Complex.I / 2) ∈ StripUniqueness.kmsHalfStrip := by
+    have him : ((t : ℂ) - Complex.I / 2).im = -(1 / 2) := by
+      simp [Complex.sub_im, Complex.div_im, Complex.I_im]
+    simp only [StripUniqueness.kmsHalfStrip, Set.mem_preimage, Set.mem_Icc, him]
+    norm_num
+  rw [← heq hmem]
+  exact hfbot t
+
 /-- **The Δ-side modular correlation is pinned by its boundary data** (RvD Theorem 3.8, the comparison
     target).  In the regular spectral regime `σ(R) ⊆ [a, 2−a]`, the strip extension `modCorrExt S ξ`
     (`= ⟨ξ, Δ^{it} ξ⟩` continued to the KMS strip) is bounded-holomorphic (`diffContOnCl_modCorrExt`,
