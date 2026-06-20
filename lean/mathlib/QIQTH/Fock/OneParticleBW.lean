@@ -145,4 +145,27 @@ theorem lorentzBoost_mapsTo_rightWedge (a : ℝ) :
     have := Real.exp_pos a
     positivity
 
+/-- **The boost is invertible**: `lorentzBoost (−a) ∘ lorentzBoost a = id` (`cosh²−sinh²=1`). -/
+theorem lorentzBoost_neg_boost (a : ℝ) (z : V) : lorentzBoost (-a) (lorentzBoost a z) = z := by
+  funext i
+  fin_cases i
+  · show lorentzBoost (-a) (lorentzBoost a z) 0 = z 0
+    simp only [lorentzBoost_zero, lorentzBoost_one, Real.cosh_neg, Real.sinh_neg]
+    linear_combination z 0 * Real.cosh_sq_sub_sinh_sq a
+  · show lorentzBoost (-a) (lorentzBoost a z) 1 = z 1
+    simp only [lorentzBoost_zero, lorentzBoost_one, Real.cosh_neg, Real.sinh_neg]
+    linear_combination z 1 * Real.cosh_sq_sub_sinh_sq a
+
+/-- **Boost preserves wedge support**: if `f` is supported in the right wedge, so is its boost
+    `boostTest a f = f ∘ lorentzBoost a`.  (From `lorentzBoost_mapsTo_rightWedge` + the boost inverse.)
+    This makes the wedge generating set `{KrepL2 f : supp f ⊆ W_R}` boost-closed. -/
+theorem support_boostTest_subset (a : ℝ) {f : V → ℂ}
+    (hf : Function.support f ⊆ rightWedge) :
+    Function.support (boostTest a f) ⊆ rightWedge := by
+  intro x hx
+  rw [Function.mem_support] at hx
+  have hmem : lorentzBoost a x ∈ Function.support f := Function.mem_support.mpr hx
+  have h1 := lorentzBoost_mapsTo_rightWedge (-a) (hf hmem)
+  rwa [lorentzBoost_neg_boost] at h1
+
 end QIQTH.Fock.OneParticleBW
