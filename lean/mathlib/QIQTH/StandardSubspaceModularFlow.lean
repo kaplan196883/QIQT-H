@@ -700,6 +700,21 @@ theorem modConj_rvdPmQ (S : StandardSubspace H) (ξ : H) :
     modConj S (rvdPmQ S ξ) = rvdT S ξ := by
   rw [← modConj_rvdT, modConj_sq]
 
+/-- The real decomposition of a complex scalar action: `c • η = (Re c)•η + (Im c)•(i·η)`. -/
+private theorem smul_eq_re_add_im (c : ℂ) (η : H) :
+    c • η = (c.re : ℝ) • η + (c.im : ℝ) • (Complex.I • η) := by
+  have hc : c • η = ((c.re : ℂ) + (c.im : ℂ) * Complex.I) • η := by rw [Complex.re_add_im]
+  rw [hc, add_smul, mul_smul]; norm_cast
+
+/-- **`J` is conjugate-linear**: `J(c·η) = conj(c)·(J η)`.  Extends the antilinearity `modConj_smul_I`
+    (`c = i`) to all complex scalars via the real decomposition `c = Re c + i·Im c` and `J`'s ℝ-linearity.
+    This is the clean statement that bundles `J R^{1/2} J` (and similar `J`-sandwiches) as ℂ-linear. -/
+theorem modConj_smul_conj (S : StandardSubspace H) (c : ℂ) (η : H) :
+    modConj S (c • η) = (starRingEnd ℂ c) • modConj S η := by
+  rw [smul_eq_re_add_im c η, map_add, (modConj S).map_smul, (modConj S).map_smul, modConj_smul_I,
+    smul_eq_re_add_im (starRingEnd ℂ c) (modConj S η), Complex.conj_re, Complex.conj_im]
+  simp only [neg_smul, smul_neg]
+
 /-- A bookkeeping identity: the imaginary part of a complex inner product as a real inner product,
     `Im⟪x, y⟫ = ⟪i·x, y⟫_ℝ`.  (`inner_smul_left` + `conj i = −i`.) -/
 private theorem im_inner_eq_real_inner_smul_I (x y : H) :

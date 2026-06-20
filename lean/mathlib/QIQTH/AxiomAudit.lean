@@ -3620,6 +3620,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ 𝒦→H CAPSTONE: two continuous ℂ-linear A,B agreeing on 𝒦 agree everywhere.
 -- By ℂ-linearity also agree on i𝒦 (q∈i𝒦 ⇒ −i·q∈𝒦), hence on 𝒦+i𝒦 which is DENSE (IsCyclic 𝒦⊔i𝒦=⊤);
 -- continuity (Continuous.ext_on). Lifts V_t η=Δ^{it}η on 𝒦 (eq_of_mem_K_of_inner_perp_IK) to V_t=Δ^{it}.
+#print axioms QIQTH.StandardSubspaceModular.modConj_smul_conj
+-- expected: standard only — ★ J IS CONJUGATE-LINEAR: modConj(c•η)=conj(c)•modConj η. Extends antilinearity
+-- (c=i) to all c via c=Re c+i·Im c + J's ℝ-linearity. Bundles J R^{½}J (J-sandwiches) as ℂ-linear — the
+-- clean foundation for the B-bundling toward J R^{½}J=(2−R)^{½} (sqrt_unique).
 #print axioms QIQTH.StandardSubspaceModular.modConjSqrtR_sq
 -- expected: standard only — ★ B·B=2−R for B=J R^{½}J: B(Bξ)=(2−R)ξ. Inner J²=1 collapses
 -- J R^{½}(JJ)R^{½}J = J R^{½}R^{½}J = JRJ = 2−R (rvdSqrtR_mul_self + modConj_rvdRC_modConj). The b·b=a input
