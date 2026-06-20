@@ -3624,6 +3624,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ J IS CONJUGATE-LINEAR: modConj(c•η)=conj(c)•modConj η. Extends antilinearity
 -- (c=i) to all c via c=Re c+i·Im c + J's ℝ-linearity. Bundles J R^{½}J (J-sandwiches) as ℂ-linear — the
 -- clean foundation for the B-bundling toward J R^{½}J=(2−R)^{½} (sqrt_unique).
+#print axioms QIQTH.StandardSubspaceModular.modConj_rvdSqrtR_modConj
+-- expected: standard only — ★★★ SQRT-REFLECTION J R^{½}J=(2−R)^{½} (the "antilinear-CFC frontier", routed
+-- around via CFC.sqrt_unique — NOT general antilinear CFC). Bundle B ξ=J(R^{½}(Jξ)) as ℂ-linear
+-- (modConj_smul_conj×2), self-adjoint+positive (antiunitary modConj_inner_conj reduces ⟨Bx,y⟩ to
+-- conj⟨R^{½}Jx,Jy⟩, R^{½}≥0), B·B=2−R (modConjSqrtR_sq) ⇒ sqrt_unique ⇒ B=(2−R)^{½}. Unblocks JPJ=1−Q ⇒ J𝒦=(i𝒦)^⊥.
 #print axioms QIQTH.StandardSubspaceModular.modConjSqrtR_sq
 -- expected: standard only — ★ B·B=2−R for B=J R^{½}J: B(Bξ)=(2−R)ξ. Inner J²=1 collapses
 -- J R^{½}(JJ)R^{½}J = J R^{½}R^{½}J = JRJ = 2−R (rvdSqrtR_mul_self + modConj_rvdRC_modConj). The b·b=a input

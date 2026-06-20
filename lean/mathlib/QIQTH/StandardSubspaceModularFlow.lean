@@ -793,6 +793,49 @@ theorem modConjSqrtR_sq (S : StandardSubspace H) (ξ : H) :
     modConj S (rvdSqrtR S (modConj S (modConj S (rvdSqrtR S (modConj S ξ))))) = rvdTwoSubRC S ξ := by
   rw [modConj_sq, ← ContinuousLinearMap.mul_apply, rvdSqrtR_mul_self, modConj_rvdRC_modConj]
 
+/-- **★★ The sqrt-reflection `J R^{1/2} J = (2−R)^{1/2}`** (RvD Prop 2.2(5) engine), reached via square-root
+    UNIQUENESS — NOT general antilinear CFC.  Bundle `B ξ = J(R^{1/2}(J ξ))` as a ℂ-linear operator (ℂ-linear
+    by `modConj_smul_conj` applied twice), self-adjoint and positive (the antiunitary `modConj_inner_conj`
+    reduces `⟨B x, y⟩` to `conj⟨R^{1/2}(J x), J y⟩`, and `R^{1/2} ≥ 0`), with `B·B = 2−R` (`modConjSqrtR_sq`).
+    `CFC.sqrt_unique` then identifies `B` with `(2−R)^{1/2} = rvdSqrtTwoSubR`. -/
+theorem modConj_rvdSqrtR_modConj (S : StandardSubspace H) (ξ : H) :
+    modConj S (rvdSqrtR S (modConj S ξ)) = rvdSqrtTwoSubR S ξ := by
+  have hadjconj : ∀ a y : H,
+      inner ℂ (modConj S a) y = (starRingEnd ℂ) (inner ℂ a (modConj S y)) := by
+    intro a y
+    conv_lhs => rw [← modConj_sq S y]
+    rw [modConj_inner_conj]
+  have hsymm_sqrt : ∀ u v : H, inner ℂ (rvdSqrtR S u) v = inner ℂ u (rvdSqrtR S v) := by
+    intro u v
+    exact ((ContinuousLinearMap.nonneg_iff_isPositive _).mp (rvdSqrtR_nonneg S)).1 u v
+  let Bₗ : H →ₗ[ℂ] H :=
+    { toFun := fun η => modConj S (rvdSqrtR S (modConj S η))
+      map_add' := fun x y => by simp only [map_add]
+      map_smul' := fun c η => by
+        simp only [RingHom.id_apply]
+        rw [modConj_smul_conj, map_smul, modConj_smul_conj, Complex.conj_conj] }
+  let B : H →L[ℂ] H := ⟨Bₗ, (modConj S).continuous.comp
+    ((rvdSqrtR S).continuous.comp (modConj S).continuous)⟩
+  have hsymm : ∀ x y : H, inner ℂ (B x) y = inner ℂ x (B y) := by
+    intro x y
+    show inner ℂ (modConj S (rvdSqrtR S (modConj S x))) y
+      = inner ℂ x (modConj S (rvdSqrtR S (modConj S y)))
+    rw [hadjconj (rvdSqrtR S (modConj S x)) y, hsymm_sqrt (modConj S x) (modConj S y),
+      hadjconj x (rvdSqrtR S (modConj S y)), Complex.conj_conj]
+  have hpos : 0 ≤ B := by
+    rw [ContinuousLinearMap.nonneg_iff_isPositive]
+    refine ⟨hsymm, fun x => ?_⟩
+    show 0 ≤ (inner ℂ (modConj S (rvdSqrtR S (modConj S x))) x).re
+    rw [hadjconj (rvdSqrtR S (modConj S x)) x, Complex.conj_re]
+    have hposR := ((ContinuousLinearMap.nonneg_iff_isPositive _).mp (rvdSqrtR_nonneg S)).2 (modConj S x)
+    rwa [ContinuousLinearMap.reApplyInnerSelf_apply] at hposR
+  have hsq : B * B = rvdTwoSubRC S := by
+    ext η
+    show modConj S (rvdSqrtR S (modConj S (modConj S (rvdSqrtR S (modConj S η))))) = rvdTwoSubRC S η
+    exact modConjSqrtR_sq S η
+  have hBeq : rvdSqrtTwoSubR S = B := by rw [rvdSqrtTwoSubR]; exact CFC.sqrt_unique hsq hpos
+  exact (congrFun (congrArg DFunLike.coe hBeq) ξ).symm
+
 /-! ### Bounded Tomita fixedness for `ξ ∈ 𝒦`
 
   The second CGP spectral-balance prerequisite, in bounded form.  The Tomita operator `S = J Δ^{1/2}`
