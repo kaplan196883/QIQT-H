@@ -1,5 +1,6 @@
 import QIQTH.ClausiusToPernull
 import QIQTH.DifferentialAreaLaw
+import QIQTH.Raychaudhuri
 
 /-!
 # Assembling QIQT-H + Bekenstein ⇒ GR: the per-null tensor premise from the DERIVED modular relation
@@ -25,6 +26,29 @@ namespace QIQTH.QiqtToGR
 
 open QIQTH.EinsteinEOS QIQTH.Curvature QIQTH.DifferentialAreaLaw
 open Filter Topology
+
+/-- **★ The `hFocus` input DERIVED from the machine-checked Raychaudhuri equation — only the area↔θ
+    modelling identification remains.**  `hFocus` (input #3 of `qiqt_gr_from_wedge_kms`) demands that the area
+    first-variation rate `ad` equals the contracted Ricci `R_kk = BL(Ric) v`.  Given the equilibrium condition
+    `hequil` (the shear–expansion quadratic vanishes — a stationary/bifurcation horizon, Jacobson's setup) and
+    the single **modelling identification** `harea` (the abstract area rate is minus the congruence expansion
+    rate `−V^ν∂_νθ`), `raychaudhuri_focusing_at_equilibrium` *derives* `ad = R_kk`.  So the geometric content of
+    `hFocus` is machine-checked (the kinematics of null congruences, no Einstein presupposed); the only
+    remaining labelled step is the area-vs-`θ` identification `harea`.  Mirrors `wedge_hBoostCharge_of_smooth`
+    for input #1.  Axiom-free. -/
+theorem hFocus_of_raychaudhuri
+    (g gi : Point 4 → Fin 4 → Fin 4 → ℝ) (hsymm : ∀ y a b, g y a b = g y b a)
+    (V : Point 4 → Fin 4 → ℝ)
+    (hVC : ∀ μ, ContDiff ℝ ⊤ (fun y => V y μ))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (hgeo : ∀ y μ, ∑ ν, V y ν * covDerivVec g gi V ν μ y = 0)
+    (x : Point 4)
+    (hequil : (∑ μ, ∑ ν, covDerivVec g gi V μ ν x * covDerivVec g gi V ν μ x) = 0)
+    (ad : ℝ)
+    (harea : ad = - ∑ ν, V x ν * pd (fun y => expansion g gi V y) ν x) :
+    ad = BL (fun i j => ricci g gi i j x) (V x) := by
+  rw [harea, raychaudhuri_focusing_at_equilibrium g gi hsymm V hVC hC hgeo x hequil, neg_neg, BL,
+    Finset.sum_comm]
 
 /-- **The pointwise per-null premise from the derived modular relation + cited AQFT/geometry.**
     From `δ⟨K⟩ = η δA` (`hModular`, DERIVED) together with the cited boost-flux (`hFlux`,

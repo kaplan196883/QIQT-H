@@ -3373,6 +3373,12 @@ namespace QIQTH.AxiomAudit
 -- Mathlib lacks) are cited, kept SEPARATE — neither is the area law, neither presupposes Einstein. Axiom-free.
 -- ASSEMBLY toward QIQT+Bekenstein⇒GR (QiqtToGR.lean):
 #print axioms QIQTH.QiqtToGR.bl_pernull_of_modular
+#print axioms QIQTH.QiqtToGR.hFocus_of_raychaudhuri
+-- expected: standard only — ★ the hFocus input (#3) DERIVED from the machine-checked Raychaudhuri: given
+-- equilibrium hequil (shear-expansion quadratic=0, Jacobson's horizon) + the modelling identification harea
+-- (area rate = −V^ν∂_νθ), raychaudhuri_focusing_at_equilibrium gives ad=R_kk=BL(Ric)v (BL via Finset.sum_comm).
+-- So hFocus's geometric content is machine-checked (null-congruence kinematics, no Einstein); only the area↔θ
+-- identification harea stays labelled. Mirrors wedge_hBoostCharge_of_smooth for input #1. Axiom-free.
 #print axioms QIQTH.QiqtToGR.bl_pernull_of_qiqt
 -- expected: standard only — turns the derived modular relation into Jacobson's POINTWISE per-null premise
 -- BL(a·T−Ric)v=0 (the exact `pernull` hyp of jacobson_einstein_equation_of_state), bypassing the affine-
