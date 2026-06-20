@@ -3920,6 +3920,10 @@ namespace QIQTH.AxiomAudit
 -- rvdSpec_modUnitary). modCorrExt_kms_flip: TOP edge F_ξ(t+i)=∫ modChar t (ω)·(ω/(2−ω)) dμ (the KMS weight),
 -- in the regular regime σ(R)⊆(0,2). These are the two BOUNDARY conditions strip-uniqueness consumes — the
 -- extension's edges now pinned. Remaining for hUniq: holomorphy under ∫ (boundedness done) + Borchers reduction.
+#print axioms QIQTH.devCorrExt_ofReal
+-- expected: standard only — REAL-AXIS value (scalar): D_ξ(t)=∫ u_t·√ω dμ^R_ξ (devChar_ofReal under ∫). The
+-- √r-weighted modular correlation = ⟪ξ,Δ^{it}√R ξ⟫ as operator expectation (operator id needs borelFC↔CFC.sqrt
+-- product bridge, deferred). The Δ-side device edge data; U-side pairing (RvD's ⟨U-orbit, R-device-vector⟩) open.
 #print axioms QIQTH.hasDerivAt_devCorrExt
 #print axioms QIQTH.differentiableOn_devCorrExt
 -- expected: standard only — ★★★ DEVICE strip extension HOLOMORPHIC on the open half-strip, NO regular window.

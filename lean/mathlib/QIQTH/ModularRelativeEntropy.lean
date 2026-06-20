@@ -418,6 +418,19 @@ theorem hasDerivAt_devCorrExt (S : StandardSubspace H) (ξ : H)
     (integrable_const _)
     (Filter.Eventually.of_forall (fun ω z _ => hasDerivAt_devChar_Icc (hspec ω) z))).2
 
+/-- **Real-axis value of the device strip extension** (scalar form): `D_ξ(t) = ∫ u_t(ω)·√ω dμ^R_ξ`, the
+    `√r`-weighted modular correlation.  Immediate from `devChar_ofReal` (`d_{(t:ℂ)}(r) = u_t(r)·√r`) under the
+    integral.  As an operator expectation this is `⟪ξ, Δ^{it}·√R ξ⟫` (the device's `√R` regularization of the
+    bare modular correlation `modCorrExt`); the operator identification needs the `borelFC`↔`CFC.sqrt` product
+    bridge, deferred. -/
+theorem devCorrExt_ofReal (S : StandardSubspace H) (ξ : H) (t : ℝ) :
+    devCorrExt S ξ (t : ℂ)
+      = ∫ ω, modChar t (ω : spectrum ℝ (rvdRC S)).val
+          * (Real.sqrt (ω : spectrum ℝ (rvdRC S)).val : ℂ) ∂(rvdSpecMeasure S ξ) := by
+  rw [devCorrExt]
+  exact integral_congr_ae (Filter.Eventually.of_forall
+    (fun ω => devChar_ofReal t (ω : spectrum ℝ (rvdRC S)).val))
+
 /-- **The device strip extension is differentiable on the open half-strip** (no regular window): immediate
     from `hasDerivAt_devCorrExt` at every interior point.  The differentiability half of the
     bounded-holomorphic half-strip extension that strip-uniqueness consumes, for ANY standard subspace. -/
