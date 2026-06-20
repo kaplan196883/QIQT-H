@@ -2,6 +2,7 @@ import QIQTH.StandardSubspaceModularFlow
 import QIQTH.Fock.Localization
 import QIQTH.Fock.OneParticle
 import QIQTH.Fock.SecondQuantModularFlow
+import QIQTH.StripUniqueness
 import Mathlib.MeasureTheory.Function.LpSpace.DomAct.Continuous
 import Mathlib.Analysis.Calculus.ParametricIntegral
 
@@ -496,6 +497,23 @@ def StripKMSrvd (V : ℝ → (H →L[ℂ] H)) (K : Set H) : Prop :=
     (∃ M : ℝ, ∀ z : ℂ, ‖f z‖ ≤ M) ∧
     (∀ t : ℝ, f t = inner ℂ (V t ξ) η) ∧
     (∀ t : ℝ, f ((t : ℂ) - Complex.I) = inner ℂ η (V t ξ))
+
+/-- **From RvD Definition 3.4 to the half-strip reality** (RvD Proposition 3.5 applied to `StripKMSrvd`).
+    The plain-flip top-edge value `f(t − i) = ⟪η, V_t ξ⟫` of `StripKMSrvd` is automatically `conj(f(t))`:
+    by conjugate symmetry `⟪η, V_t ξ⟫ = conj⟪V_t ξ, η⟫`, and `f(t) = ⟪V_t ξ, η⟫`.  So
+    `real_on_midline_of_conj_flip` (RvD Prop 3.5) upgrades the witness to the *half-strip KMS form*: a
+    bounded-holomorphic `f` with real-axis value `f(t) = ⟪V_t ξ, η⟫` **and** `f(t − i/2)` REAL — exactly the
+    reality input RvD Theorem 3.8 consumes (`Δ^{1/2} = J` on the standard subspace).  This discharges the
+    Prop-3.5 step of the `hUniq` proof from the labelled `StripKMSrvd`, axiom-free. -/
+theorem stripKMSrvd_real_midline {V : ℝ → (H →L[ℂ] H)} {K : Set H} (hV : StripKMSrvd V K)
+    {ξ η : H} (hξ : ξ ∈ K) (hη : η ∈ K) :
+    ∃ f : ℂ → ℂ, DiffContOnCl ℂ f (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) ∧
+      (∀ t : ℝ, f (t : ℂ) = inner ℂ (V t ξ) η) ∧ (∀ t : ℝ, (f ((t : ℂ) - Complex.I / 2)).im = 0) := by
+  obtain ⟨f, hfdcc, ⟨M, hfM⟩, hfreal, hfflip⟩ := hV ξ hξ η hη
+  refine ⟨f, hfdcc, hfreal, fun t => ?_⟩
+  refine QIQTH.StripUniqueness.real_on_midline_of_conj_flip hfdcc (fun z _ => hfM z) (fun s => ?_) t
+  rw [hfflip s, hfreal s]
+  exact (inner_conj_symm (𝕜 := ℂ) η (V s ξ)).symm
 
 /-- **★ SOUNDNESS AUDIT — `StripKMS` as defined is TRIVIALLY satisfiable, hence too weak to be the KMS
     condition.**  Because the witness `F` is required to be holomorphic only on the *open* strip while the
