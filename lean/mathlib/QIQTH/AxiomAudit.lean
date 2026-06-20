@@ -3548,6 +3548,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — gaussian_normalization: √(n/π)·∫e^{−n t²}=1 (integral_gaussian + sqrt algebra), so
 -- √(n/π) is the approximate-identity constant. entireVec V n η = √(n/π)•gaussSmear V n η = RvD's normalised
 -- dense entire vector; entireVec_mem_K: it lands in K (real-scalar smul of gaussSmear_mem_K).
+#print axioms QIQTH.StandardSubspaceModular.entireVec_sub
+-- expected: standard only — the mollifier error form η_n−η = √(n/π)•∫ e^{−n t²}•(V_t η−η) dt (subtract the
+-- normalised constant η=√(n/π)•∫e^{−n t²}•η; integral_sub + integral_smul_const + the normalization). Setup for
+-- the density η_n→η (Gaussian concentrates at t=0 where V_t η→η by strong continuity).
 -- expected: standard only — gaussSmear V n η = ∫ e^{−n t²}•V_t η dt. gaussSmear_integrable: Bochner-integrable
 -- (dominated by the Gaussian e^{−n t²}·‖η‖ via integrable_exp_neg_mul_sq, V_t norm-non-increasing + orbit
 -- continuous). gaussSmear_mem_K: ★ the smeared vector lands in the real subspace K — the ℝ-linear projection

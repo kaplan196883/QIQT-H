@@ -1382,6 +1382,28 @@ theorem entireVec_mem_K (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} {
     entireVec V n η ∈ S.toClosedSubmodule :=
   Submodule.smul_mem _ _ (gaussSmear_mem_K S hn hcont hbd hinv)
 
+open MeasureTheory in
+/-- **Mollifier form of the error** `η_n − η = √(n/π)·∫ e^{−n t²}·(V_t η − η) dt`.  Subtracting the
+    normalised constant `η = √(n/π)·∫ e^{−n t²}·η dt` (Gaussian normalisation) from the smeared vector.  This
+    is the setup for the density `η_n → η`: as `n → ∞` the Gaussian concentrates at `t = 0`, where
+    `V_t η → η` by strong continuity. -/
+theorem entireVec_sub {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖) :
+    entireVec V n η - η
+      = Real.sqrt (n / Real.pi) • ∫ t : ℝ, Real.exp (-n * t ^ 2) • (V t η - η) := by
+  have hint1 : Integrable (fun t : ℝ => Real.exp (-n * t ^ 2) • V t η) :=
+    gaussSmear_integrable hn η hcont hbd
+  have hint2 : Integrable (fun t : ℝ => Real.exp (-n * t ^ 2) • η) :=
+    (integrable_exp_neg_mul_sq hn).smul_const η
+  have hη : η = Real.sqrt (n / Real.pi) • ∫ t : ℝ, Real.exp (-n * t ^ 2) • η := by
+    rw [integral_smul_const, integral_gaussian, smul_smul, ← Real.sqrt_mul (by positivity),
+      div_mul_div_comm, mul_comm Real.pi n, div_self (by positivity), Real.sqrt_one, one_smul]
+  rw [entireVec, gaussSmear,
+    show (fun t : ℝ => Real.exp (-n * t ^ 2) • (V t η - η))
+        = fun t => Real.exp (-n * t ^ 2) • V t η - Real.exp (-n * t ^ 2) • η from
+      funext (fun t => smul_sub _ _ _),
+    integral_sub hint1 hint2, smul_sub, ← hη]
+
 /-! ### Analytic continuation of the modular character to the KMS strip
 
 The modular character `u_t(r) = exp(i·t·log((2−r)/r))` continues to an entire function of a *complex*
