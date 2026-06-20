@@ -665,6 +665,19 @@ theorem comparisonDatum_of_gConstancy (S : StandardSubspace H) (V : ℝ → (H �
   rw [← inner_conj_symm w (V t η), ← inner_conj_symm w (modUnitary S t η)]
   exact congrArg (starRingEnd ℂ) hg
 
+/-- **Top-edge reality of the g-function** (RvD Theorem 3.8, the real-axis edge `g(t) = ⟪U_t η, Δ^{it} J ξ⟫`
+    is real).  For `ξ, η ∈ 𝒦` with `V_t η ∈ 𝒦`: `Δ^{it} J ξ = J(Δ^{it} ξ)` (`modConj_commute_modUnitary`)
+    lies in `(i𝒦)^⊥` (since `Δ^{it}ξ ∈ 𝒦` and `J𝒦 = (i𝒦)^⊥`), so pairing it against `V_t η ∈ 𝒦` is real
+    (`inner_real_of_mem_K_perp_IK`, RvD Prop 2.3).  This is geometric — no analysis; it is the real-axis edge
+    of the genuine *device-vector* g-function `g(z) = ⟨h(z), J d_z(R) ζ⟩` (unlike the discredited fixed-`Jξ`
+    `corrJ`, here the second-slot vector is the `z`-varying `Δ^{it}Jξ`). -/
+theorem gTopEdge_real (S : StandardSubspace H) (V : ℝ → (H →L[ℂ] H)) (t : ℝ) {ξ η : H}
+    (hξ : projK S ξ = ξ) (hVη : projK S (V t η) = V t η) :
+    (inner ℂ (V t η) (modUnitary S t (modConj S ξ))).im = 0 := by
+  rw [(modConj_commute_modUnitary S t ξ).symm]
+  exact inner_real_of_mem_K_perp_IK S hVη (projIK_modConj_eq_zero_of_mem_K S
+    ((mem_K_iff_projK S _).mp (modUnitary_mapsTo_K S t ξ ((mem_K_iff_projK S ξ).mpr hξ))))
+
 end ConditionalBW
 
 /-- **★ One-particle Bisognano–Wichmann for the WEDGE subspace (boost-invariance supplied from the

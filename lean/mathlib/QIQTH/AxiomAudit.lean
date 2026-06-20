@@ -3465,6 +3465,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — NON-VACUITY CHECK: Δ^{it} (modUnitary S) satisfies ComparisonDatum trivially
 -- (⟪w,Δ^{it}η⟫=⟪w,Δ^{it}η⟫, rfl). Confirms the narrowed conditional oneParticleBW_of_comparison is NOT a
 -- vacuous-premise artifact — Δ is a model of hCompare's conclusion; the content is genuine UNIQUENESS.
+#print axioms QIQTH.Fock.OneParticleBW.gTopEdge_real
+-- expected: standard only — ★ g-FUNCTION TOP EDGE real (RvD Thm 3.8): g(t)=⟪V_tη, Δ^{it}Jξ⟫ is REAL for ξ,η∈𝒦,
+-- V_tη∈𝒦. Δ^{it}Jξ=J(Δ^{it}ξ)∈(i𝒦)^⊥ (modConj_commute_modUnitary + Δ^{it}ξ∈𝒦 + J𝒦=(i𝒦)^⊥), so the 𝒦×(i𝒦)^⊥
+-- pairing is real (inner_real_of_mem_K_perp_IK). GEOMETRIC, no analysis. The genuine device-vector g-function's
+-- real-axis edge (2nd slot = z-varying Δ^{it}Jξ, NOT the discredited fixed Jξ of corrJ). Feeds GConstancy.
 #print axioms QIQTH.Fock.OneParticleBW.oneParticleBW_of_comparison
 -- expected: standard only — ★★★ TIGHTEST honest labelling of the hUniq discharge. SOLE labelled hyp hCompare =
 -- (HalfStripReal ⟹ ComparisonDatum), where ComparisonDatum = ∀t η∈𝒦 ∀w⊥i𝒦, ⟪w,V_tη⟫=⟪w,Δ^{it}η⟫ — the EXACT
