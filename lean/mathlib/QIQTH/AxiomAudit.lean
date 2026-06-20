@@ -3990,6 +3990,11 @@ namespace QIQTH.AxiomAudit
 -- g-function g(z)=⟨h(z),J d_z(R)ζ⟩. deviceOpC_ofReal: restricts to deviceOpReal (Δ^{it}√R) on Im z=0.
 #print axioms QIQTH.deviceOpC_norm_le
 -- deviceOpC_norm_le: ‖d_z(R)‖≤2√2 uniformly on the half-strip (borelFC norm ≤2·sup‖f‖, devChar bound √2).
+#print axioms QIQTH.deviceOpReal_eq
+-- expected: standard only — ★★ DEVICE OPERATOR FACTORS as Δ^{it}·√R: deviceOpReal t = modUnitary t · rvdSqrtR
+-- (general top-edge identity; deviceOpReal_zero is t=0). devChar(↑t)=u_t·√· ⇒ borelFC(devChar ↑t)=borelFC(u_t)·
+-- borelFC(√·)=Δ^{it}·√R (borelFC_mul + modUnitary=borelFC(u_t) + borelFC(√·)=rvdSqrtR). So deviceVec(t)ζ=Δ^{it}(√R ζ)
+-- =Δ^{it}ξ ⇒ g-function top edge g(t)=⟪U_tη,JΔ^{it}ξ⟫ (gTopEdge_real, real).
 #print axioms QIQTH.deviceOpReal_zero
 -- expected: standard only — ★★ DEVICE BOUNDARY OPERATOR IDENTITY: deviceOpReal 0 = √R (rvdSqrtR). devChar 0=√·
 -- ⇒ deviceOpReal 0 = cfcCont(√·); (cfcCont√·)²=R (cfcCont_mul+cfcCont_coord, √ω·√ω=ω on σ(R)⊆[0,∞)) & ≥0

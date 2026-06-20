@@ -522,6 +522,33 @@ theorem deviceOpReal_zero (S : StandardSubspace H) : deviceOpReal S 0 = rvdSqrtR
   rw [hdev, rvdSqrtR]
   exact (CFC.sqrt_unique hsq hpos).symm
 
+open QIQTH.StandardSubspaceModular in
+/-- **The real-axis device operator factors as `Δ^{it}·√R`**: `deviceOpReal t = modUnitary S t · rvdSqrtR`
+    (the general top-edge operator identity, `deviceOpReal_zero` is the `t = 0` case).  `devChar(↑t) =
+    u_t·√·` (`devChar_ofReal`), so `borelFC(devChar ↑t) = borelFC(u_t)·borelFC(√·) = Δ^{it}·√R`
+    (`borelFC_mul` + `modUnitary = borelFC(u_t)` + `borelFC(√·) = rvdSqrtR` from `deviceOpReal_zero`).  Hence
+    the device vector at the real axis is `deviceVec(t) = deviceOpReal t ζ = Δ^{it}(√R ζ) = Δ^{it}ξ`, so the
+    g-function's top edge is `g(t) = ⟪U_t η, J Δ^{it} ξ⟫` (`gTopEdge_real`, real). -/
+theorem deviceOpReal_eq (S : StandardSubspace H) (t : ℝ) :
+    deviceOpReal S t = modUnitary S t * rvdSqrtR S := by
+  rw [← deviceOpReal_zero S, deviceOpReal, modUnitary, deviceOpReal]
+  have hpm : Measurable (fun ω => modSpecFun S t ω * devSpecReal S 0 ω) :=
+    (modSpecFun_measurable S t).mul (devSpecReal_measurable S 0)
+  have hpb : ∀ ω, ‖modSpecFun S t ω * devSpecReal S 0 ω‖ ≤ Real.sqrt 2 := fun ω => by
+    rw [norm_mul]
+    calc ‖modSpecFun S t ω‖ * ‖devSpecReal S 0 ω‖
+        ≤ 1 * Real.sqrt 2 :=
+          mul_le_mul (modSpecFun_norm_le S t ω) (devSpecReal_norm_le S 0 ω) (norm_nonneg _) zero_le_one
+      _ = Real.sqrt 2 := one_mul _
+  rw [← borelFC_mul (rvdRC S) (rvdRC_isSelfAdjoint S)
+        (modSpecFun_measurable S t) zero_le_one (modSpecFun_norm_le S t)
+        (devSpecReal_measurable S 0) (Real.sqrt_nonneg 2) (devSpecReal_norm_le S 0)
+        hpm (Real.sqrt_nonneg 2) hpb]
+  refine borelFC_congr (rvdRC S) (rvdRC_isSelfAdjoint S) (devSpecReal_measurable S t)
+    (Real.sqrt_nonneg 2) (devSpecReal_norm_le S t) hpm (Real.sqrt_nonneg 2) hpb (funext fun ω => ?_)
+  show devSpecReal S t ω = modSpecFun S t ω * devSpecReal S 0 ω
+  simp only [devSpecReal, modSpecFun, devChar_ofReal, Complex.ofReal_zero, devChar_zero]
+
 /-- **Spectral bridge for the real-axis device operator**: `⟪ξ, (Δ^{it}·√R) ξ⟫ = ∫ d_t dμ^R_ξ` (mirrors
     `rvdSpec_modUnitary`, via `inner_borelFC`). -/
 theorem rvdSpec_deviceOpReal (S : StandardSubspace H) (ξ : H) (t : ℝ) :
