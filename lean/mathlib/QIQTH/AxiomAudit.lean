@@ -3471,6 +3471,13 @@ namespace QIQTH.AxiomAudit
 -- 2π·B·|f|) on the bridge integral; chain rule via HasDerivAt.scomp (ℝ→ℂ). So hBoostCharge's ANALYTIC content is
 -- DERIVED; with unitarity (derivative purely imaginary) it is hBoostCharge modulo only 2π⟪ξ,pξ⟫=(2π/ℏ)T_kk (stress
 -- tensor). Mathlib has NO Stone's theorem for unitary groups (checked), so this direct H¹ route is the grounding.
+#print axioms QIQTH.Fock.OneParticleBW.hasDerivAt_inner_boostUnitary_imaginary
+-- expected: standard only — ★★★ hBoostCharge GROUNDED in its physical i·(real) form: d/dt⟪ξ,boostUnitary(−2πt)ξ⟫|₀
+-- = Complex.I·((2π∫conj(f)f').im) — PURELY IMAGINARY (= i·boost energy), the exact shape of the labelled
+-- hBoostCharge. Imaginarity forced by UNITARITY (GPT-5.5-pro): Re⟪ξ,U(t)ξ⟫≤‖ξ‖² (Complex.re_le_norm + Cauchy-
+-- Schwarz norm_inner_le_norm + isometry LinearIsometryEquiv.norm_map), equality at 0 (inner_self_eq_norm_mul_norm)
+-- ⇒ Re-correlation has a max at 0 ⇒ IsLocalMax.hasDerivAt_eq_zero ⇒ Re(deriv)=0 ⇒ deriv=I·(deriv.im). So
+-- hBoostCharge is DERIVED for any smooth wedge state; only the stress-tensor identification 2π⟪ξ,pξ⟫=(2π/ℏ)T_kk stays labelled.
 -- expected: standard only — boostUnitary_eq_vadd: boostUnitary t = DomAddAct.mk(−t)+ᵥ· (the project boost group IS
 -- Mathlib's canonical Lp domain-translation; unitary_apply precomposes with flow(−t) ⇒ ξ(x−t), matches mk(−t)+ᵥξ via
 -- add_comm + Equiv.symm_apply_apply). continuous_boostUnitary_apply: ★ STRONG CONTINUITY t↦boostUnitary t ξ, from

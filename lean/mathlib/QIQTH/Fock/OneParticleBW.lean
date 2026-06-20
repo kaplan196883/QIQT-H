@@ -254,6 +254,60 @@ theorem hasDerivAt_inner_boostUnitary_wedge
       (hfd (θ + 2 * Real.pi * x)).scomp x hlin
     exact hcomp.const_mul ((starRingEnd ℂ) (f θ))
 
+/-- **★★★ The boost-charge derivative in its physical `i·(real)` form — `hBoostCharge` grounded.**  The boost
+    correlation derivative is **purely imaginary**: `d/dt ⟪ξ, boostUnitary(−2π t) ξ⟫|₀ = i·(boost energy)`,
+    with boost energy `= (2π·∫ conj(f)·f')·(−i) =` the real rapidity-momentum expectation.  This is exactly the
+    shape of the labelled `hBoostCharge` input — now DERIVED for any smooth wedge state (modulo only the single
+    physical identification `boost energy = (2π/ℏ)·T_kk`, the stress tensor).
+
+    The imaginarity is forced by **unitarity** (`GPT-5.5-pro`'s observation): `Re⟪ξ, U(t)ξ⟫ ≤ ‖ξ‖²` with
+    equality at `t = 0` (Cauchy–Schwarz `norm_inner_le_norm` + the isometry `‖U(t)ξ‖ = ‖ξ‖`), so the real part
+    of the correlation has a maximum at `0`, hence its derivative — the real part of the complex derivative —
+    vanishes (`IsLocalMax.hasDerivAt_eq_zero`).  A complex number with zero real part is `i` times its
+    imaginary part.  Axiom-free. -/
+theorem hasDerivAt_inner_boostUnitary_imaginary
+    (f f' : ℝ → ℂ) (hf2 : MemLp f 2 (volume : Measure ℝ))
+    (hf_int : Integrable f (volume : Measure ℝ))
+    (hF0_int : Integrable (fun θ => (starRingEnd ℂ) (f θ) * f θ) (volume : Measure ℝ))
+    (hf_meas : AEStronglyMeasurable f (volume : Measure ℝ))
+    (hfd : ∀ x, HasDerivAt f (f' x) x)
+    (hf'_meas : AEStronglyMeasurable f' (volume : Measure ℝ))
+    (B : ℝ) (hB : ∀ x, ‖f' x‖ ≤ B) :
+    HasDerivAt
+      (fun t : ℝ => inner ℂ (hf2.toLp f) (boostUnitary (-(2 * Real.pi * t)) (hf2.toLp f)))
+      (Complex.I *
+        (((2 * Real.pi * ∫ θ, (starRingEnd ℂ) (f θ) * f' θ ∂(volume : Measure ℝ)).im : ℝ) : ℂ)) 0 := by
+  set ξ := hf2.toLp f with hξ
+  set D := 2 * Real.pi * ∫ θ, (starRingEnd ℂ) (f θ) * f' θ ∂(volume : Measure ℝ) with hDdef
+  have hD : HasDerivAt (fun t : ℝ => inner ℂ ξ (boostUnitary (-(2 * Real.pi * t)) ξ)) D 0 :=
+    hasDerivAt_inner_boostUnitary_wedge f f' hf2 hf_int hF0_int hf_meas hfd hf'_meas B hB
+  -- The real part of the correlation has a maximum at 0 (unitarity).
+  have hmax : ∀ t : ℝ,
+      (inner ℂ ξ (boostUnitary (-(2 * Real.pi * t)) ξ) : ℂ).re
+        ≤ (inner ℂ ξ (boostUnitary (-(2 * Real.pi * 0)) ξ) : ℂ).re := by
+    intro t
+    have h0 : (inner ℂ ξ (boostUnitary (-(2 * Real.pi * 0)) ξ) : ℂ).re = ‖ξ‖ * ‖ξ‖ := by
+      simp only [mul_zero, neg_zero, boostUnitary_zero_apply]
+      exact inner_self_eq_norm_mul_norm (𝕜 := ℂ) ξ
+    rw [h0]
+    calc (inner ℂ ξ (boostUnitary (-(2 * Real.pi * t)) ξ)).re
+        ≤ ‖inner ℂ ξ (boostUnitary (-(2 * Real.pi * t)) ξ)‖ := Complex.re_le_norm _
+      _ ≤ ‖ξ‖ * ‖boostUnitary (-(2 * Real.pi * t)) ξ‖ := norm_inner_le_norm _ _
+      _ = ‖ξ‖ * ‖ξ‖ := by rw [LinearIsometryEquiv.norm_map]
+  have hRe : HasDerivAt (fun t : ℝ => (inner ℂ ξ (boostUnitary (-(2 * Real.pi * t)) ξ) : ℂ).re)
+      D.re 0 := by
+    have h := (Complex.reCLM.hasFDerivAt.comp 0 hD.hasFDerivAt).hasDerivAt
+    simpa only [Function.comp_def, ContinuousLinearMap.comp_apply,
+      ContinuousLinearMap.toSpanSingleton_apply, one_smul, Complex.reCLM_apply] using h
+  have hlocmax : IsLocalMax
+      (fun t : ℝ => (inner ℂ ξ (boostUnitary (-(2 * Real.pi * t)) ξ) : ℂ).re) 0 :=
+    Filter.Eventually.of_forall hmax
+  have hzero : D.re = 0 := hlocmax.hasDerivAt_eq_zero hRe
+  have hDeq : D = Complex.I * ((D.im : ℝ) : ℂ) := by
+    apply Complex.ext <;> simp [hzero]
+  rw [hDeq] at hD
+  exact hD
+
 /-- **Invariance engine** (for the boost-invariance of the wedge standard subspace): a continuous
     `ℝ`-linear map `L` that maps a set `W` into itself also maps `closure (span ℝ W)` into itself.
     Applied with `L = boostUnitary a` and `W` = the (boost-closed) wedge generating set, this gives
