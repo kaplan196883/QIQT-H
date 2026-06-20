@@ -168,4 +168,43 @@ theorem support_boostTest_subset (a : ℝ) {f : V → ℂ}
   have h1 := lorentzBoost_mapsTo_rightWedge (-a) (hf hmem)
   rwa [lorentzBoost_neg_boost] at h1
 
+/-! ### Layer 1 — the wedge standard subspace, boost-invariant (assembly) -/
+
+/-- **The wedge generating set**: the one-particle vectors `KrepL2 f` from *real*, *wedge-supported*,
+    `L²` test functions.  The physical generators of the wedge standard subspace — defined PURELY from
+    wedge test functions (NOT from modular data), per the anti-circularity discipline. -/
+def wedgeGenSet (m : ℝ) : Set (Lp ℂ 2 (volume : Measure ℝ)) :=
+  {ψ | ∃ (f : V → ℂ) (h : MemLp (Krep m f) 2 (volume : Measure ℝ)),
+        Function.support f ⊆ rightWedge ∧ (∀ x, (starRingEnd ℂ) (f x) = f x)
+        ∧ ψ = h.toLp (Krep m f)}
+
+/-- **The wedge generating set is boost-closed**: `boostUnitary a` maps it into itself.  For
+    `ψ = KrepL2 f`, `boostUnitary a ψ = KrepL2(boostTest(−a) f)` (sign lemma), and `boostTest(−a) f` is
+    again real, wedge-supported (`support_boostTest_subset`), and `L²` (translation of an `L²` function). -/
+theorem boostUnitary_mapsTo_wedgeGenSet (m a : ℝ) :
+    Set.MapsTo (boostUnitary a) (wedgeGenSet m) (wedgeGenSet m) := by
+  rintro ψ ⟨f, h, hsupp, hreal, rfl⟩
+  have hmemLp' : MemLp (Krep m (boostTest (-a) f)) 2 (volume : Measure ℝ) := by
+    have heq : Krep m (boostTest (-a) f) = (Krep m f) ∘ (fun θ => θ + (-a)) := by
+      funext θ; exact Krep_boost m (-a) f θ
+    rw [heq]
+    exact h.comp_measurePreserving (measurePreserving_add_right volume (-a))
+  refine ⟨boostTest (-a) f, hmemLp', support_boostTest_subset (-a) hsupp, ?_,
+    boostUnitary_KrepL2 m a f h hmemLp'⟩
+  intro x
+  show (starRingEnd ℂ) (f (lorentzBoost (-a) x)) = f (lorentzBoost (-a) x)
+  exact hreal _
+
+/-- **★ The wedge standard subspace `𝒦_W := closure (span_ℝ (wedge generators))` is BOOST-INVARIANT:**
+    `boostUnitary a (𝒦_W) ⊆ 𝒦_W` for every rapidity `a`.  This is the `V(a)𝒦 = 𝒦` the GPT-5-pro
+    KMS-uniqueness route consumes — now PROVED axiom-free for the physically-defined wedge subspace
+    (assembling the sign lemma + invariance engine + wedge geometry).  The remaining inputs of the
+    one-particle BW are the (formalizable) KMS-uniqueness lemma and the single labelled strip/KMS
+    property of `boostUnitary` on these vectors. -/
+theorem boostUnitary_mapsTo_wedgeSubspace (m a : ℝ) :
+    Set.MapsTo (boostUnitary a)
+      (closure (Submodule.span ℝ (wedgeGenSet m) : Set _))
+      (closure (Submodule.span ℝ (wedgeGenSet m) : Set _)) :=
+  boostUnitary_mapsTo_closure_span a (boostUnitary_mapsTo_wedgeGenSet m a)
+
 end QIQTH.Fock.OneParticleBW

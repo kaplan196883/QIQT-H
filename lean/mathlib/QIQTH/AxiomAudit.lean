@@ -3414,6 +3414,14 @@ namespace QIQTH.AxiomAudit
 -- z¹−z⁰>0 ∧ z¹+z⁰>0) in 1+1D Minkowski is BOOST-INVARIANT (lorentzBoost a maps W_R into itself). In
 -- light-cone coords the boost scales z⁻↦e^{−a}z⁻, z⁺↦e^{a}z⁺ (cosh∓sinh=e^{∓a}), preserving positivity.
 -- This is WHY the wedge generating set {KrepL2 f : supp f⊆W_R} is boost-closed ⇒ 𝒦_W boost-invariant. Axiom-free.
+#print axioms QIQTH.Fock.OneParticleBW.boostUnitary_mapsTo_wedgeGenSet
+#print axioms QIQTH.Fock.OneParticleBW.boostUnitary_mapsTo_wedgeSubspace
+-- expected: standard only — ★ WEDGE-SUBSPACE BOOST-INVARIANCE COMPLETE (the V(a)𝒦=𝒦 the KMS route needs).
+-- wedgeGenSet m = {KrepL2 f : f real (starRingEnd∘f=f), supp f⊆rightWedge, MemLp}; boost-closed via the sign
+-- lemma + support_boostTest_subset + MemLp under translation (comp_measurePreserving). boostUnitary_mapsTo_
+-- wedgeSubspace: boostUnitary a maps closure(span ℝ wedgeGenSet)=𝒦_W into itself — the PHYSICALLY-defined wedge
+-- subspace (NOT from modular data), boost-invariant, axiom-free. Soft geometric layer of the one-particle BW
+-- COMPLETE; remaining = KMS-uniqueness lemma (formalizable) + labelled strip input Hyp_strip_Krep (irreducible AQFT).
 -- (relEntropy_nonneg) DERIVE the differential area law δS=ηδA, which with the two CITED inputs (hFlux=Bisognano–
 -- Wichmann boost flux, hFocus=Raychaudhuri focusing) + structural (Lorentzian congruence g=PᵀηP, ∇·T=0,
 -- f-regularity) ⇒ ∃Λ, a·T=G+Λg (genuine Einstein tensor, constant Λ) via jacobson_einstein_equation_of_state.
