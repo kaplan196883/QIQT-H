@@ -467,6 +467,15 @@ noncomputable def deviceOpC (S : StandardSubspace H) (z : ℂ) (hz2 : z.im ≤ 0
 theorem deviceOpC_ofReal (S : StandardSubspace H) (t : ℝ) :
     deviceOpC S (t : ℂ) (by simp) (by norm_num [Complex.ofReal_im]) = deviceOpReal S t := rfl
 
+/-- **Operator-norm bound for the complex-`z` device operator**: `‖d_z(R)‖ ≤ 2√2` uniformly on the half-strip
+    `−1/2 ≤ Im z ≤ 0` (the bounded-FC norm bound `‖borelFC f‖ ≤ 2·sup‖f‖` applied to the device symbol bound
+    `‖d_z‖ ≤ √2`).  This is the operator-level boundedness the g-function `g(z) = ⟨h(z), J d_z(R) ζ⟩` consumes:
+    `‖g(z)‖ ≤ ‖h(z)‖·‖d_z(R)ζ‖ ≤ ‖h(z)‖·2√2·‖ζ‖`, uniform over the half-strip. -/
+theorem deviceOpC_norm_le (S : StandardSubspace H) (z : ℂ) (hz2 : z.im ≤ 0)
+    (hz1 : -(1 / 2 : ℝ) ≤ z.im) : ‖deviceOpC S z hz2 hz1‖ ≤ 2 * Real.sqrt 2 := by
+  rw [deviceOpC, borelFC]
+  exact (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).boundedFC_norm_le _ _ _
+
 /-- **Spectral bridge for the real-axis device operator**: `⟪ξ, (Δ^{it}·√R) ξ⟫ = ∫ d_t dμ^R_ξ` (mirrors
     `rvdSpec_modUnitary`, via `inner_borelFC`). -/
 theorem rvdSpec_deviceOpReal (S : StandardSubspace H) (ξ : H) (t : ℝ) :
