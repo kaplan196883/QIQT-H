@@ -3797,6 +3797,16 @@ namespace QIQTH.AxiomAudit
 -- (modCorrExt convention, ξ first slot; conjugate both sides + clm_eq_of_inner_self_eq). The operator-level
 -- target of modCorrExt_eq_of_boundary: once a KMS competitor's correlation is pinned to the Δ-side modCorrExt
 -- on the strip (hence on the real axis ⟨ξ,V_tξ⟩=⟨ξ,Δ^{it}ξ⟩), this gives V_t=Δ^{it}.
+#print axioms QIQTH.StandardSubspaceModular.corrW_bottom_edge_real_of_kms
+-- expected: standard only — ★★ GENERAL bottom-edge reality transfer (RvD Thm 3.8, the genuine "apply KMS for
+-- {U_t} to the pair (η,w)" step), ARBITRARY fixed 2nd-slot w. f bdd-holo on half-strip, =corrC(w) on real axis,
+-- real lower edge ⇒ (eqOn_of_im_zero_edge_halfStrip) g(t−i/2) real. SATISFIABILITY DEPENDS ON w: for w=Δ^{it}ξ
+-- (=modUnitary S t ξ, valid 𝒦-pair since Δ^{it}𝒦=𝒦) the KMS condition genuinely supplies f and the lower edge
+-- IS real (V=Δ: ⟨Δ^{it}Jη,Δ^{it}ξ⟩=⟨Jη,ξ⟩, real). RvD's NON-CIRCULAR step — brings Δ in via a legit 𝒦-pair, not
+-- by assuming ⟨ξ,U_tξ⟩=⟨ξ,Δ^{it}ξ⟩. For w=Jξ (corrJ instance) the premise is VACUOUS instead (see that lemma).
+#print axioms QIQTH.StandardSubspaceModular.inner_mem_K_modConj_real
+-- expected: standard only — ★ NON-VACUITY WITNESS: ξ,η∈𝒦 ⇒ ⟨ξ,Jη⟩ real (Jη∈(i𝒦)^⊥ + inner_real_of_mem_K_perp_IK).
+-- The lower-edge value making the Δ-rotated-pair instance (w=Δ^{it}ξ) of corrW_bottom_edge_real_of_kms satisfiable.
 #print axioms QIQTH.StandardSubspaceModular.corrJ_bottom_edge_real_of_kms
 -- expected: standard only — ⚠⚠ VACUOUS PREMISE (honest correction 2026-06-21, total honesty). True conditional,
 -- but its hypothesis (a bdd-holo f matching g=corrC(Jξ) on the real axis AND real on the bottom edge Im=−1/2)

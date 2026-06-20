@@ -355,6 +355,53 @@ theorem corrJ_real_on_axis (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)
   corrC_real_on_axis S hn η (modConj S ξ) hcont hbd hgrp
     (projIK_modConj_eq_zero_of_mem_K S hξ) hKinv t
 
+/-- **Bottom-edge reality transfer for the half-strip correlation** (RvD Thm 3.8, the genuine "apply the KMS
+    condition for `{U_t}` to the pair `(η, w)`" step) — stated for an ARBITRARY fixed second-slot vector `w`.
+    If a function `f` is bounded-holomorphic on the half-strip `{−1/2 ≤ Im z ≤ 0}`, matches the orbit
+    correlation `g = corrC w V n η` on the real axis, and is real on the lower edge `Im = −1/2`, then `g`'s
+    lower edge inherits the reality: by `eqOn_of_im_zero_edge_halfStrip` (Hadamard one-edge), `f = g` on the
+    half-strip, so `g(t − i/2)` is real.  **Satisfiability of the premise depends on `w`** — this is the
+    discriminating point.  For `w = Δ^{it}ξ` (`= modUnitary S t ξ`, a VALID `𝒦`-pair vector since `Δ^{it}`
+    preserves `𝒦`), the KMS condition for `{U_t}` genuinely supplies such an `f`, and the lower edge IS real
+    (for `V = Δ` it is `⟨Δ^{it}Jη, Δ^{it}ξ⟩ = ⟨Jη, ξ⟩`, real by `inner_real_of_mem_K_perp_IK`).  This is RvD's
+    actual non-circular step: it brings `Δ` in through a legitimate `𝒦`-pair, NOT by assuming `⟨ξ,U_tξ⟩ =
+    ⟨ξ,Δ^{it}ξ⟩`.  For `w = Jξ` (the `corrJ` instance below) the premise is instead VACUOUS — see that lemma. -/
+theorem corrW_bottom_edge_real_of_kms {V : ℝ → (H →L[ℂ] H)} {n : ℝ}
+    (hn : 0 < n) (η w : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    {f : ℂ → ℂ} {M : ℝ} (hf : DiffContOnCl ℂ f StripUniqueness.kmsHalfStripOpen)
+    (hfb : ∀ z ∈ StripUniqueness.kmsHalfStrip, ‖f z‖ ≤ M)
+    (hmatch : ∀ t : ℝ, f (t : ℂ) = corrC w V n η (t : ℂ))
+    (hfbot : ∀ t : ℝ, (f ((t : ℂ) - Complex.I / 2)).im = 0) (t : ℝ) :
+    (corrC w V n η ((t : ℂ) - Complex.I / 2)).im = 0 := by
+  have hg : DiffContOnCl ℂ (corrC w V n η) StripUniqueness.kmsHalfStripOpen :=
+    (differentiable_corrC hn η w hcont hbd).diffContOnCl
+  have heq : Set.EqOn f (corrC w V n η) StripUniqueness.kmsHalfStrip :=
+    StripUniqueness.eqOn_of_im_zero_edge_halfStrip
+      (M := max M (‖w‖ * (Real.exp (n / 4) * ‖η‖ * Real.sqrt (Real.pi / n))))
+      hf hg
+      (fun z hz => le_trans (hfb z hz) (le_max_left _ _))
+      (fun z hz => le_trans (corrC_bdd_halfStrip hn η w hcont hbd z hz) (le_max_right _ _))
+      (fun z hz0 => by
+        have hz' : z = ((z.re : ℝ) : ℂ) := Complex.ext (by simp) (by simp [hz0])
+        rw [hz']; exact hmatch z.re)
+  have hmem : ((t : ℂ) - Complex.I / 2) ∈ StripUniqueness.kmsHalfStrip := by
+    have him : ((t : ℂ) - Complex.I / 2).im = -(1 / 2) := by
+      simp [Complex.sub_im, Complex.div_im, Complex.I_im]
+    simp only [StripUniqueness.kmsHalfStrip, Set.mem_preimage, Set.mem_Icc, him]
+    norm_num
+  rw [← heq hmem]
+  exact hfbot t
+
+/-- **Non-vacuity witness for `corrW_bottom_edge_real_of_kms`**: for `ξ, η ∈ 𝒦` the geometric pairing
+    `⟨ξ, Jη⟩` is real (`Jη = modConj S η ∈ (i𝒦)^⊥` by `projIK_modConj_eq_zero_of_mem_K`, `ξ ∈ 𝒦`, so
+    `inner_real_of_mem_K_perp_IK` applies).  This is the lower-edge value that makes the Δ-rotated-pair instance
+    of `corrW_bottom_edge_real_of_kms` (`w = Δ^{it}ξ`) genuinely satisfiable — for `V = Δ` the lower edge
+    `⟨Δ^{it}Jη, Δ^{it}ξ⟩` reduces to exactly `⟨Jη, ξ⟩` (unitary invariance), the conjugate of this. -/
+theorem inner_mem_K_modConj_real (S : StandardSubspace H) {ξ η : H}
+    (hξ : projK S ξ = ξ) (hη : projK S η = η) : (inner ℂ ξ (modConj S η)).im = 0 :=
+  inner_real_of_mem_K_perp_IK S hξ (projIK_modConj_eq_zero_of_mem_K S hη)
+
 /-- ⚠⚠ **VACUOUS PREMISE — does NOT advance the discharge** (honest correction, 2026-06-21).  This is a true
     conditional, but its hypothesis is UNSATISFIABLE for the relevant flows, so it establishes nothing toward
     `hUniq`.  Rigorous reason: `g = corrC (Jξ) = ⟨Jξ, h(z)⟩` has a FIXED second slot (forced by holomorphy).
@@ -375,25 +422,8 @@ theorem corrJ_bottom_edge_real_of_kms (S : StandardSubspace H) {V : ℝ → (H �
     (hfb : ∀ z ∈ StripUniqueness.kmsHalfStrip, ‖f z‖ ≤ M)
     (hmatch : ∀ t : ℝ, f (t : ℂ) = corrC (modConj S ξ) V n η (t : ℂ))
     (hfbot : ∀ t : ℝ, (f ((t : ℂ) - Complex.I / 2)).im = 0) (t : ℝ) :
-    (corrC (modConj S ξ) V n η ((t : ℂ) - Complex.I / 2)).im = 0 := by
-  have hg : DiffContOnCl ℂ (corrC (modConj S ξ) V n η) StripUniqueness.kmsHalfStripOpen :=
-    (differentiable_corrC hn η (modConj S ξ) hcont hbd).diffContOnCl
-  have heq : Set.EqOn f (corrC (modConj S ξ) V n η) StripUniqueness.kmsHalfStrip :=
-    StripUniqueness.eqOn_of_im_zero_edge_halfStrip
-      (M := max M (‖modConj S ξ‖ * (Real.exp (n / 4) * ‖η‖ * Real.sqrt (Real.pi / n))))
-      hf hg
-      (fun z hz => le_trans (hfb z hz) (le_max_left _ _))
-      (fun z hz => le_trans (corrC_bdd_halfStrip hn η (modConj S ξ) hcont hbd z hz) (le_max_right _ _))
-      (fun z hz0 => by
-        have hz' : z = ((z.re : ℝ) : ℂ) := Complex.ext (by simp) (by simp [hz0])
-        rw [hz']; exact hmatch z.re)
-  have hmem : ((t : ℂ) - Complex.I / 2) ∈ StripUniqueness.kmsHalfStrip := by
-    have him : ((t : ℂ) - Complex.I / 2).im = -(1 / 2) := by
-      simp [Complex.sub_im, Complex.div_im, Complex.I_im]
-    simp only [StripUniqueness.kmsHalfStrip, Set.mem_preimage, Set.mem_Icc, him]
-    norm_num
-  rw [← heq hmem]
-  exact hfbot t
+    (corrC (modConj S ξ) V n η ((t : ℂ) - Complex.I / 2)).im = 0 :=
+  corrW_bottom_edge_real_of_kms hn η (modConj S ξ) hcont hbd hf hfb hmatch hfbot t
 
 /-- **The Δ-side modular correlation is pinned by its boundary data** (RvD Theorem 3.8, the comparison
     target).  In the regular spectral regime `σ(R) ⊆ [a, 2−a]`, the strip extension `modCorrExt S ξ`
