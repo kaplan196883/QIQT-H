@@ -19,8 +19,12 @@ Born-from-typicality reduction (to a state-supervenience premise, with a no-go),
 covariance/contextuality structure, and the <em>metaselector</em> layer — a machine-checked no-go trilogy
 (neither capacity, nor symmetry, nor the state Φ selects the record framework) with the positive answer
 (einselection, Zurek's commutativity criterion), plus a category-error-proof record/area "contract" resting
-on Born-from-projectors. What it does <strong>not</strong> establish: the holographic axiom (FQ),
-λ's <em>dynamical</em> law, or the continuum (Type III₁). It does not close the
+on Born-from-projectors. A second, self-contained thread formalizes <strong>emergent gravity</strong> —
+Jacobson's "Einstein equation of state" route to the Einstein field equations, with the thermodynamic input
+grounded in QIQT-H's own capacity bound, as a <em>conditional</em> axiom-free chain (see below). What it does
+<strong>not</strong> establish: the holographic axiom (FQ),
+λ's <em>dynamical</em> law, or the continuum (Type III₁); and the gravity thread is conditional on three
+clearly-labelled physics inputs (it is <em>not</em> "general relativity from nothing"). It does not close the
 <a href="/open-problems">open problems</a>. (The original Macroscopic Definiteness Conjecture is
 <a href="/open-problems">retired</a> as a category error, not a pending verification target.)
 
@@ -40,6 +44,57 @@ so that
 $$
 S_{\mathrm{Araki}}\big(\omega_{W(f)\Omega}\,\Vert\,\omega_\Omega\big) = S_{\mathrm{CGP}}(f) \ge 0.
 $$
+
+## Emergent gravity: the Einstein equations as a machine-checked equation of state
+
+A second, self-contained axiom-free development formalizes **Jacobson's "Einstein equation of state"** route
+to general relativity — with the thermodynamic input now *grounded in QIQT-H* rather than assumed. The result
+is a single **conditional** theorem:
+
+> `qiqt_gr_from_wedge_kms` — the **Einstein field equations** $a\,T_{\mu\nu} = G_{\mu\nu} + \Lambda\,g_{\mu\nu}$
+> (with a genuine Einstein tensor and a *constant* $\Lambda$) follow from QIQT-H's holographic **capacity bound**
+> $S \le \eta A$ together with **Klein positivity** $S(\rho\Vert\sigma)\ge 0$, modulo **exactly three
+> clearly-labelled, well-motivated physics inputs**: the wedge **KMS property**, **matter conservation**
+> $\nabla^\mu T_{\mu\nu}=0$, and standard **structural regularity**.
+
+What is genuinely *derived* inside the chain (no hypothesis smuggles in the conclusion):
+
+- the **differential area law** $\delta S = \eta\,\delta A$ — from the capacity *bound* + saturation at the
+  reference + Klein positivity (no hypothesis asserts $S=\eta A$; the inequality side is QIQT-H's own theorem);
+- the **boost-charge** content of input #1 — the wedge modular flow *is* the geometric Lorentz boost
+  (one-particle Bisognano–Wichmann), and the boost-energy derivative is purely imaginary, $i\cdot(\text{real})$,
+  from the explicit boost generator together with unitarity;
+- the **focusing** content of input #3 — at a stationary horizon the Raychaudhuri equation collapses to pure
+  Ricci focusing $\,\mathrm{d}\theta/\mathrm{d}\lambda = -R_{kk}$;
+- all the **differential geometry** — the Bianchi identities, $\nabla^\mu G_{\mu\nu}=0$, the
+  null-cone $\Rightarrow$ tensor step, and the constancy of $\Lambda$.
+
+| theorem | statement |
+| --- | --- |
+| `qiqt_gr_from_wedge_kms` | $a\,T = G + \Lambda g$ from the QIQT-H capacity bound + Klein, modulo three labelled inputs |
+| `differential_area_law_of_relEntropy` | $\delta S = \eta\,\delta A$ derived from the bound + saturation + Klein positivity |
+| `oneParticleBW_wedge` | the wedge modular flow equals the geometric Lorentz boost (one-particle Bisognano–Wichmann) |
+| `hasDerivAt_inner_boostUnitary_imaginary` | the boost-charge derivative is $i\cdot$(boost energy) — boost generator + unitarity |
+| `raychaudhuri_focusing_at_equilibrium` | Raychaudhuri $\Rightarrow \mathrm{d}\theta/\mathrm{d}\lambda=-R_{kk}$ at a stationary horizon |
+| `einsteinTensor_divergence_zero` | $\nabla^\mu G_{\mu\nu}=0$ (twice-contracted Bianchi) |
+| `jacobson_einstein_equation_of_state` | the null-cone tensor relation $\Rightarrow$ Einstein's equations with constant $\Lambda$ |
+
+<div class="note">
+
+<strong>Honest scope — a conditional formalization milestone, not "GR from nothing."</strong> This is a
+rigorous, axiom-free, <em>conditional</em> derivation: the chain still rests on three labelled inputs that are
+kept as explicit hypotheses and <strong>never</strong> as Lean axioms. The wedge KMS property bottoms out in
+cited algebraic-QFT facts (KMS-uniqueness, the strip property, standardness — the Bisognano–Wichmann package),
+which current Mathlib cannot prove; the boost-charge's final identification needs the free-field stress tensor
+(one scalar identity, not yet built); and matter conservation $\nabla^\mu T_{\mu\nu}=0$ is a physical
+postulate. What QIQT-H supplies as <em>theorems</em> is the inequality side of the area law; what makes the
+output <em>general relativity</em> is Jacobson's argument, here machine-checked end to end. The work this
+session <em>drained</em> the analytic and geometric content out of two of the three inputs into theorems
+(the modular-flow$=$boost story and Raychaudhuri focusing), sharpening each labelled input to its irreducible
+kernel. It is a verified <em>formalization</em> result — not a new physical prediction, and it does not by
+itself establish that our universe's gravity <em>is</em> emergent.
+
+</div>
 
 ## Index of machine-checked results
 
