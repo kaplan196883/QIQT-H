@@ -293,4 +293,20 @@ theorem secondQuantModFlow_eq_of_bw {H : Type*} [NormedAddCommGroup H] [InnerPro
     ∀ t, QIQTH.Fock.secondQuantModFlow S t = QIQTH.Fock.secondQuantPre (W t) := fun t => by
   rw [QIQTH.Fock.secondQuantModFlow, hbw t]
 
+/-- **★★ The field-level Bisognano–Wichmann (geometric action).**  Given the one-particle BW at the
+    vector level (`hbw : modUnitary S t u = boostUnitary(−2π t) u`), the modular automorphism
+    `σ_t = Γ(Δ^{it})` acts on the Weyl operators by the **geometric Lorentz boost**:
+    `σ_t(W(u) x) = W(boostUnitary(−2π t) u)(σ_t x)`.  i.e. the modular flow of the wedge IS the boost,
+    implemented on the field algebra — the genuine content of Bisognano–Wichmann.  From the project's
+    Tomita covariance `secondQuantModFlowH_weylH` (σ_t(W(u))=W(Δ^{it}u)) + the BW identification. -/
+theorem secondQuantModFlowH_acts_as_boost
+    (S : StandardSubspace (Lp ℂ 2 (volume : Measure ℝ)))
+    (hbw : ∀ (t : ℝ) (u : Lp ℂ 2 (volume : Measure ℝ)),
+        QIQTH.StandardSubspaceModular.modUnitary S t u = boostUnitary (-(2 * Real.pi * t)) u)
+    (t : ℝ) (u : Lp ℂ 2 (volume : Measure ℝ)) (x : QIQTH.Fock.Fock (Lp ℂ 2 (volume : Measure ℝ))) :
+    QIQTH.Fock.secondQuantModFlowH S t (QIQTH.Fock.weylH u x)
+      = QIQTH.Fock.weylH (boostUnitary (-(2 * Real.pi * t)) u)
+          (QIQTH.Fock.secondQuantModFlowH S t x) := by
+  rw [QIQTH.Fock.secondQuantModFlowH_weylH, hbw t u]
+
 end QIQTH.Fock.OneParticleBW
