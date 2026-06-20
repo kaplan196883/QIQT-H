@@ -3613,6 +3613,18 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ GAUSSIAN BOUND on the correlation |corrC ξ V n η z| ≤ ‖ξ‖·e^{n(Im z)²}·‖η‖·√(π/n)
 -- (Cauchy–Schwarz over gaussSmearC_norm_le). On 0≤Im z≤1 uniformly bounded — the `bound` hypothesis of
 -- StripUniqueness.eqOn_of_bdd_holomorphic_strip. corrC is now entire (differentiable_corrC) AND strip-bounded.
+-- KMS CORRELATION ON THE STRIP (KMSCorrelation.lean): furnishing the strip-uniqueness hypotheses for corrC.
+#print axioms QIQTH.StandardSubspaceModular.diffContOnCl_corrC
+-- expected: standard only — corrC ξ V n η is DiffContOnCl on the open KMS strip (entire ⇒ diffContOnCl).
+-- The first analytic hypothesis of kms_correlation_boundary_determined, now concrete for corrC.
+#print axioms QIQTH.StandardSubspaceModular.corrC_bdd_strip
+-- expected: standard only — uniform bound ‖corrC ξ V n η z‖ ≤ ‖ξ‖·e^n·‖η‖·√(π/n) on the OPEN strip
+-- (corrC_norm_le + (Im z)²<1). The second analytic hypothesis of kms_correlation_boundary_determined.
+#print axioms QIQTH.StandardSubspaceModular.corrC_eqOn_strip_of_boundary_eq
+-- expected: standard only — ★★ STRIP-UNIQUENESS COMPARISON, the structural core of the hUniq discharge:
+-- two contraction flows V,V' whose correlations corrC agree on the real axis AND the KMS top edge t+i have
+-- EQUAL correlations on the whole closed KMS strip (kms_correlation_boundary_determined applied to the now-
+-- furnished diffContOnCl_corrC + corrC_bdd_strip). With entireVec_tendsto density ⇒ V_t = V'_t.
 -- expected: standard only — gaussSmear V n η = ∫ e^{−n t²}•V_t η dt. gaussSmear_integrable: Bochner-integrable
 -- (dominated by the Gaussian e^{−n t²}·‖η‖ via integrable_exp_neg_mul_sq, V_t norm-non-increasing + orbit
 -- continuous). gaussSmear_mem_K: ★ the smeared vector lands in the real subspace K — the ℝ-linear projection

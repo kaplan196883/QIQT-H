@@ -1,0 +1,65 @@
+/-
+# The KMS correlation on the strip — furnishing the strip-uniqueness hypotheses
+
+This bridges the entire bounded correlation `corrC` (built in `StandardSubspaceModularFlow`) to the
+strip-uniqueness machinery (`StripUniqueness`).  It establishes the two analytic hypotheses that
+`kms_correlation_boundary_determined` consumes — `DiffContOnCl` on the open KMS strip and a uniform bound
+on the strip — *concretely for `corrC`*, so the abstract uniqueness lemma can finally be applied to a
+genuine candidate modular flow.  This is the structural core of the RvD Theorem 3.8 discharge of `hUniq`:
+once two flows' correlations are known to be entire + strip-bounded and to agree on both edges, they
+coincide on the strip, hence (by density of the entire vectors) the flows coincide.
+
+All results axiom-free (standard three only).
+-/
+import QIQTH.StandardSubspaceModularFlow
+import QIQTH.StripUniqueness
+
+namespace QIQTH.StandardSubspaceModular
+
+open MeasureTheory QIQTH
+
+variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
+
+/-- **The KMS correlation is bounded-holomorphic on the strip** (`DiffContOnCl`): `corrC ξ V n η` is entire
+    (`differentiable_corrC`), hence in particular differentiable on the open KMS strip and continuous up to
+    its closure.  The first of the two analytic hypotheses of `kms_correlation_boundary_determined`. -/
+theorem diffContOnCl_corrC {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η ξ : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖) :
+    DiffContOnCl ℂ (corrC ξ V n η) StripUniqueness.kmsStripOpen :=
+  (differentiable_corrC hn η ξ hcont hbd).diffContOnCl
+
+/-- **Uniform bound of the KMS correlation on the open strip**: for `0 < Im z < 1`,
+    `|corrC ξ V n η z| ≤ ‖ξ‖·e^{n}·‖η‖·√(π/n)`.  The Gaussian bound `corrC_norm_le` gives the factor
+    `e^{n(Im z)²}`, and `(Im z)² < 1` on the open strip.  The second analytic hypothesis of
+    `kms_correlation_boundary_determined`. -/
+theorem corrC_bdd_strip {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η ξ : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖) :
+    ∀ z ∈ StripUniqueness.kmsStripOpen,
+      ‖corrC ξ V n η z‖ ≤ ‖ξ‖ * (Real.exp n * ‖η‖ * Real.sqrt (Real.pi / n)) := by
+  intro z hz
+  simp only [StripUniqueness.kmsStripOpen, Set.mem_preimage, Set.mem_Ioo] at hz
+  refine (corrC_norm_le hn η ξ hcont hbd z).trans ?_
+  refine mul_le_mul_of_nonneg_left ?_ (norm_nonneg _)
+  refine mul_le_mul_of_nonneg_right ?_ (Real.sqrt_nonneg _)
+  refine mul_le_mul_of_nonneg_right ?_ (norm_nonneg _)
+  refine Real.exp_le_exp.mpr ?_
+  nlinarith [hz.1, hz.2, hn.le,
+    mul_pos (by linarith [hz.2] : (0:ℝ) < 1 - z.im) (by linarith [hz.1] : (0:ℝ) < 1 + z.im)]
+
+/-- **Strip-uniqueness comparison for two KMS correlations** — the structural core of the `hUniq` discharge.
+    If two strongly-continuous contraction flows `V`, `V'` produce correlations `corrC ξ V n η` and
+    `corrC ξ V' n η` that agree on the **real axis** and on the **KMS top edge** `t + i`, then the
+    correlations coincide on the whole closed KMS strip.  This is `kms_correlation_boundary_determined`
+    applied to the now-furnished entirety (`diffContOnCl_corrC`) and strip bound (`corrC_bdd_strip`).
+    With the density of the entire vectors (`entireVec_tendsto`) this upgrades to `V_t = V'_t`. -/
+theorem corrC_eqOn_strip_of_boundary_eq {V V' : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η ξ : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hcont' : Continuous (fun t => V' t η)) (hbd' : ∀ t, ‖V' t η‖ ≤ ‖η‖)
+    (hreal : ∀ t : ℝ, corrC ξ V n η (t : ℂ) = corrC ξ V' n η (t : ℂ))
+    (htop : ∀ t : ℝ, corrC ξ V n η ((t : ℂ) + Complex.I) = corrC ξ V' n η ((t : ℂ) + Complex.I)) :
+    Set.EqOn (corrC ξ V n η) (corrC ξ V' n η) StripUniqueness.kmsStrip :=
+  StripUniqueness.kms_correlation_boundary_determined
+    (diffContOnCl_corrC hn η ξ hcont hbd) (diffContOnCl_corrC hn η ξ hcont' hbd')
+    (corrC_bdd_strip hn η ξ hcont hbd) (corrC_bdd_strip hn η ξ hcont' hbd') hreal htop
+
+end QIQTH.StandardSubspaceModular
