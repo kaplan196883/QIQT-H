@@ -2324,4 +2324,15 @@ theorem devChar_norm_le_Icc {z : ℂ} (hz2 : z.im ≤ 0) (hz1 : -(1 / 2 : ℝ) �
       abs_of_nonneg (Real.sqrt_nonneg r)]
     exact Real.sqrt_le_sqrt hr.2
 
+/-- **The complex `z`-derivative of the device character**: `d/dz d_z(r) = i·log((2−r)/r)·d_z(r)` (same modular
+    frequency as `modCharC`, since the `√r` factor is `z`-constant).  This is the pointwise derivative that,
+    integrated against the spectral measure and dominated on the *open* half-strip (where `−Im z ∈ (0,1/2)`, so
+    the `r^{1/2+Im z}` factor of `‖d_z‖` keeps `log·d_z` bounded), gives holomorphy of `devCorrExt`. -/
+theorem hasDerivAt_devChar {r : ℝ} (hr : r ∈ Set.Ioo (0 : ℝ) 2) (z : ℂ) :
+    HasDerivAt (fun z => devChar z r)
+      (Complex.I * (Real.log ((2 - r) / r) : ℂ) * devChar z r) z := by
+  have h := (hasDerivAt_modCharC hr z).mul_const (Real.sqrt r : ℂ)
+  convert h using 1
+  rw [devChar]; ring
+
 end QIQTH.StandardSubspaceModular
