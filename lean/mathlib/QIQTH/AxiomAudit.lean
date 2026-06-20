@@ -3456,6 +3456,13 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — continuous_inner_boostUnitary: ★ matrix-element continuity t↦⟪η,boostUnitary t ξ⟫,
 -- the real-axis boundary regularity of the correlation F_{η,ξ}(t) whose strip extension StripKMS asserts (a
 -- derived ingredient of the wedge-KMS input) = scalar shadow of strong continuity ∘ continuous inner product.
+#print axioms QIQTH.Fock.OneParticleBW.coeFn_boostUnitary
+#print axioms QIQTH.Fock.OneParticleBW.inner_boostUnitary_toLp
+-- expected: standard only — coeFn_boostUnitary: (boostUnitary a ξ)(θ)=ξ(θ−a) a.e. (the rapidity boost is the
+-- spatial translation, from MPFlow.unitary_apply + pullback flow). inner_boostUnitary_toLp: ★ the boost matrix
+-- coefficient ⟪f.toLp, boostUnitary s (f.toLp)⟫ = ∫ conj(f θ)·f(θ−s) dθ — the inner-product-to-integral bridge
+-- (L2.inner_def + MemLp.coeFn_toLp + coeFn_boostUnitary + measure-preserving shift) turning the abstract boost
+-- correlation into an analyzable cross-correlation integral. Setup for the boost-charge derivative (→ hBoostCharge).
 -- expected: standard only — boostUnitary_eq_vadd: boostUnitary t = DomAddAct.mk(−t)+ᵥ· (the project boost group IS
 -- Mathlib's canonical Lp domain-translation; unitary_apply precomposes with flow(−t) ⇒ ξ(x−t), matches mk(−t)+ᵥξ via
 -- add_comm + Equiv.symm_apply_apply). continuous_boostUnitary_apply: ★ STRONG CONTINUITY t↦boostUnitary t ξ, from

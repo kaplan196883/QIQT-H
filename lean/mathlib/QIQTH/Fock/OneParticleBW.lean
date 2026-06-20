@@ -90,6 +90,20 @@ theorem boostUnitary_KrepL2 (m a : ℝ) (f : V → ℂ)
 
 /-! ### Strong continuity of the boost group (first brick of the Stone-generator program) -/
 
+/-- **Pointwise form of the boost action**: `(boostUnitary a ξ)(θ) = ξ(θ − a)` (a.e.).  The rapidity boost
+    is the spatial translation `θ ↦ θ − a` on the one-particle wavefunction.  From `MPFlow.unitary_apply`
+    (the unitary precomposes with the pullback flow `θ ↦ θ + (−a)`). -/
+theorem coeFn_boostUnitary (a : ℝ) (ξ : Lp ℂ 2 (volume : Measure ℝ)) :
+    ⇑(boostUnitary a ξ) =ᵐ[volume] fun θ => (ξ : ℝ → ℂ) (θ - a) := by
+  have hcmp : boostUnitary a ξ
+      = Lp.compMeasurePreserving (boostFlow.flow (-a)) (boostFlow.mp (-a)) ξ :=
+    MPFlow.unitary_apply boostFlow a ξ
+  rw [hcmp]
+  filter_upwards [Lp.coeFn_compMeasurePreserving ξ (boostFlow.mp (-a))] with θ hθ
+  rw [hθ]
+  show (ξ : ℝ → ℂ) (θ + -a) = (ξ : ℝ → ℂ) (θ - a)
+  rw [sub_eq_add_neg]
+
 /-- **The boost unitary IS the canonical `Lp` domain-translation** `DomAddAct.mk t +ᵥ ξ`.  `boostUnitary t`
     is precomposition with `θ ↦ θ + t` (the rapidity-translation flow); Mathlib's `DomAddAct` action is
     precomposition with `θ ↦ t + θ`.  They agree by `add_comm`, identifying the project's boost group with
@@ -151,6 +165,27 @@ theorem tendsto_boostUnitary_wedge (ξ : Lp ℂ 2 (volume : Measure ℝ)) :
 theorem continuous_inner_boostUnitary (η ξ : Lp ℂ 2 (volume : Measure ℝ)) :
     Continuous (fun t : ℝ => inner ℂ η (boostUnitary t ξ)) :=
   continuous_const.inner (continuous_boostUnitary_apply ξ)
+
+/-- **★ The boost matrix coefficient as a concrete translation integral.**  For a one-particle state given
+    by a representative `f` (`ξ = f.toLp`), the modular/boost correlation `⟪ξ, boostUnitary s ξ⟫` is the
+    cross-correlation integral `∫ conj(f θ)·f(θ − s) dθ`.  This is the inner-product-to-integral bridge
+    (`L2.inner_def` + `MemLp.coeFn_toLp` + `coeFn_boostUnitary`, the translation pushed through the
+    measure-preserving shift) that turns the abstract boost correlation into an analyzable integral — the
+    setup on which the boost-charge *derivative* (Stone generator → `hBoostCharge`) is computed.  Axiom-free. -/
+theorem inner_boostUnitary_toLp (f : ℝ → ℂ) (hf2 : MemLp f 2 (volume : Measure ℝ)) (s : ℝ) :
+    inner ℂ (hf2.toLp f) (boostUnitary s (hf2.toLp f))
+      = ∫ θ, (starRingEnd ℂ) (f θ) * f (θ - s) ∂(volume : Measure ℝ) := by
+  rw [MeasureTheory.L2.inner_def]
+  refine integral_congr_ae ?_
+  have hξ : ⇑(hf2.toLp f) =ᵐ[volume] f := hf2.coeFn_toLp
+  have hb : ⇑(boostUnitary s (hf2.toLp f)) =ᵐ[volume]
+      fun θ => (hf2.toLp f : ℝ → ℂ) (θ - s) := coeFn_boostUnitary s (hf2.toLp f)
+  have hξs : (fun θ : ℝ => (hf2.toLp f : ℝ → ℂ) (θ - s)) =ᵐ[volume] fun θ => f (θ - s) :=
+    ((measurePreserving_sub_right volume s).quasiMeasurePreserving.tendsto_ae).eventually hξ
+  filter_upwards [hξ, hb, hξs] with θ hθ hbθ hθs
+  show inner ℂ (⇑(hf2.toLp f) θ) (⇑(boostUnitary s (hf2.toLp f)) θ)
+      = (starRingEnd ℂ) (f θ) * f (θ - s)
+  rw [hbθ, hθ, hθs, RCLike.inner_apply, mul_comm]
 
 /-- **Invariance engine** (for the boost-invariance of the wedge standard subspace): a continuous
     `ℝ`-linear map `L` that maps a set `W` into itself also maps `closure (span ℝ W)` into itself.
