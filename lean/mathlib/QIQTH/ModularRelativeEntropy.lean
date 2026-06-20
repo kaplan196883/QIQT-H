@@ -325,6 +325,106 @@ theorem devCorrExt_norm_le (S : StandardSubspace H) (ξ : H) {z : ℂ} (hz2 : z.
         rw [MeasureTheory.integral_const, smul_eq_mul, MeasureTheory.measureReal_def,
           rvdSpecMeasure_univ, ENNReal.toReal_ofReal (sq_nonneg ‖ξ‖), mul_comm]
 
+open MeasureTheory in
+/-- **The device strip extension is holomorphic on the OPEN half-strip — with NO regular-window assumption**.
+    At every interior `z₀` (`Im z₀ ∈ (−1/2, 0)`), differentiation under the spectral integral
+    (`hasDerivAt_integral_of_dominated_loc_of_deriv_le`, `𝕜 = ℂ`) gives
+    `(devCorrExt S ξ)'(z₀) = ∫ i·log((2−ω)/ω)·d_{z₀}(ω) dμ`.  The dominators are the device's two
+    *constant* (regular-window-free) bounds: `‖d_z‖ ≤ √2` (`devChar_norm_le_Icc`) for `F`, and the assembled
+    `devChar_deriv_norm_le` constant for `F'`, both uniform over a slab neighborhood
+    `s = {c < Im z < d}` with `[c,d] ⊂ (−1/2,0) ∋ Im z₀`.  Endpoints `ω ∈ {0,2}` of `σ(R) ⊆ [0,2]` are
+    handled by `hasDerivAt_devChar_Icc` (the orbit is `z`-constant there).  This is the holomorphy half of the
+    bounded-holomorphic half-strip extension that the strip-uniqueness comparison consumes — available for
+    EVERY standard subspace, the decisive advantage of the RvD Prop 3.7 device. -/
+theorem hasDerivAt_devCorrExt (S : StandardSubspace H) (ξ : H)
+    {z₀ : ℂ} (hz0 : z₀.im ∈ Set.Ioo (-(1 / 2) : ℝ) 0) :
+    HasDerivAt (devCorrExt S ξ)
+      (∫ ω, Complex.I * (Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val)
+          / (ω : spectrum ℝ (rvdRC S)).val) : ℂ)
+        * devChar z₀ (ω : spectrum ℝ (rvdRC S)).val ∂(rvdSpecMeasure S ξ)) z₀ := by
+  haveI : IsFiniteMeasure (rvdSpecMeasure S ξ) := by unfold rvdSpecMeasure; infer_instance
+  set μ := rvdSpecMeasure S ξ
+  obtain ⟨hz0lo, hz0hi⟩ := hz0
+  have hlog2 : (0 : ℝ) ≤ Real.log 2 := Real.log_nonneg (by norm_num)
+  set c : ℝ := (z₀.im - 1 / 2) / 2 with hc
+  set d : ℝ := z₀.im / 2 with hd
+  have hcd_lo : -(1 / 2 : ℝ) < c := by rw [hc]; linarith
+  have hcz : c < z₀.im := by rw [hc]; linarith
+  have hzd : z₀.im < d := by rw [hd]; linarith
+  have hd0 : d < 0 := by rw [hd]; linarith
+  set β₀ : ℝ := -d with hβ₀def
+  set β₁ : ℝ := -c with hβ₁def
+  have hβ₀ : 0 < β₀ := by rw [hβ₀def]; linarith
+  have hβ₁ : β₁ < 1 / 2 := by rw [hβ₁def]; linarith
+  have hβ₁' : 0 < 1 / 2 - β₁ := by linarith
+  set s : Set ℂ := Complex.im ⁻¹' Set.Ioo c d with hs
+  have hz0s : z₀ ∈ s := by rw [hs, Set.mem_preimage, Set.mem_Ioo]; exact ⟨hcz, hzd⟩
+  have hspec : ∀ ω : spectrum ℝ (rvdRC S), (ω : spectrum ℝ (rvdRC S)).val ∈ Set.Icc (0 : ℝ) 2 :=
+    rvdRC_spectrum_mem_Icc S
+  set C : ℝ := Real.sqrt 2 * (2 / β₀ + Real.log 2) + Real.sqrt 2 * (2 / (1 / 2 - β₁) + Real.log 2)
+    with hCdef
+  have hC0 : 0 ≤ C := by
+    rw [hCdef]
+    have h1 : (0 : ℝ) ≤ 2 / β₀ := le_of_lt (div_pos (by norm_num) hβ₀)
+    have h2 : (0 : ℝ) ≤ 2 / (1 / 2 - β₁) := le_of_lt (div_pos (by norm_num) hβ₁')
+    nlinarith [Real.sqrt_nonneg 2, hlog2, h1, h2]
+  have hmeasF : ∀ z : ℂ, AEStronglyMeasurable
+      (fun ω : spectrum ℝ (rvdRC S) => devChar z (ω : spectrum ℝ (rvdRC S)).val) μ :=
+    fun z => ((measurable_devChar z).comp measurable_subtype_coe).aestronglyMeasurable
+  have hmeasL : Measurable fun ω : spectrum ℝ (rvdRC S) =>
+      (Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val) / (ω : spectrum ℝ (rvdRC S)).val) : ℂ) :=
+    Complex.measurable_ofReal.comp (Real.measurable_log.comp
+      ((measurable_const.sub measurable_subtype_coe).div measurable_subtype_coe))
+  have hFbd : ∀ {z : ℂ}, z ∈ s → ∀ ω : spectrum ℝ (rvdRC S),
+      ‖devChar z (ω : spectrum ℝ (rvdRC S)).val‖ ≤ Real.sqrt 2 := by
+    intro z hz ω
+    rw [hs, Set.mem_preimage, Set.mem_Ioo] at hz
+    exact devChar_norm_le_Icc (le_of_lt (lt_trans hz.2 hd0))
+      (le_of_lt (lt_trans hcd_lo hz.1)) (hspec ω)
+  have hF'bd : ∀ {z : ℂ}, z ∈ s → ∀ ω : spectrum ℝ (rvdRC S),
+      ‖Complex.I * (Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val)
+          / (ω : spectrum ℝ (rvdRC S)).val) : ℂ)
+        * devChar z (ω : spectrum ℝ (rvdRC S)).val‖ ≤ C := by
+    intro z hz ω
+    rw [hs, Set.mem_preimage, Set.mem_Ioo] at hz
+    rw [norm_mul, norm_mul, Complex.norm_I, one_mul, Complex.norm_real, Real.norm_eq_abs]
+    by_cases hω : (ω : spectrum ℝ (rvdRC S)).val ∈ Set.Ioo (0 : ℝ) 2
+    · rw [hCdef]
+      exact devChar_deriv_norm_le hβ₀ hβ₁
+        (show z.im ≤ -β₀ by rw [hβ₀def, neg_neg]; exact le_of_lt hz.2)
+        (show -β₁ ≤ z.im by rw [hβ₁def, neg_neg]; exact le_of_lt hz.1) hω
+    · have hr02 : (ω : spectrum ℝ (rvdRC S)).val = 0 ∨ (ω : spectrum ℝ (rvdRC S)).val = 2 := by
+        obtain ⟨h0', h2'⟩ := Set.mem_Icc.mp (hspec ω)
+        rw [Set.mem_Ioo, not_and_or, not_lt, not_lt] at hω
+        exact hω.imp (fun hle => le_antisymm hle h0') (fun hge => le_antisymm h2' hge)
+      have hzero : |Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val)
+          / (ω : spectrum ℝ (rvdRC S)).val)|
+          * ‖devChar z (ω : spectrum ℝ (rvdRC S)).val‖ = 0 := by
+        rcases hr02 with h | h <;> rw [h] <;> simp [devChar, Real.sqrt_zero]
+      rw [hzero]; exact hC0
+  show HasDerivAt (fun z => ∫ ω, devChar z (ω : spectrum ℝ (rvdRC S)).val ∂μ) _ z₀
+  refine (hasDerivAt_integral_of_dominated_loc_of_deriv_le (𝕜 := ℂ)
+    (F := fun z ω => devChar z (ω : spectrum ℝ (rvdRC S)).val)
+    (F' := fun z ω => Complex.I * (Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val)
+        / (ω : spectrum ℝ (rvdRC S)).val) : ℂ) * devChar z (ω : spectrum ℝ (rvdRC S)).val)
+    (bound := fun _ => C) (s := s)
+    ((Complex.continuous_im.isOpen_preimage _ isOpen_Ioo).mem_nhds hz0s)
+    (Filter.Eventually.of_forall (fun z => hmeasF z))
+    ((integrable_const (Real.sqrt 2)).mono' (hmeasF z₀)
+      (Filter.Eventually.of_forall (fun ω => by simpa using hFbd hz0s ω)))
+    ((measurable_const.mul hmeasL).mul ((measurable_devChar z₀).comp
+      measurable_subtype_coe) |>.aestronglyMeasurable)
+    (Filter.Eventually.of_forall (fun ω z hz => hF'bd hz ω))
+    (integrable_const _)
+    (Filter.Eventually.of_forall (fun ω z _ => hasDerivAt_devChar_Icc (hspec ω) z))).2
+
+/-- **The device strip extension is differentiable on the open half-strip** (no regular window): immediate
+    from `hasDerivAt_devCorrExt` at every interior point.  The differentiability half of the
+    bounded-holomorphic half-strip extension that strip-uniqueness consumes, for ANY standard subspace. -/
+theorem differentiableOn_devCorrExt (S : StandardSubspace H) (ξ : H) :
+    DifferentiableOn ℂ (devCorrExt S ξ) (Complex.im ⁻¹' Set.Ioo (-(1 / 2) : ℝ) 0) := fun z hz =>
+  (hasDerivAt_devCorrExt S ξ (by simpa using hz)).differentiableAt.differentiableWithinAt
+
 /-- The vacuum coherent state (`ξ = 0`) has zero relative entropy with itself. -/
 @[simp] theorem cgpEntropy_zero (S : StandardSubspace H) : cgpEntropy S (0 : H) = 0 := by
   simp [cgpEntropy]

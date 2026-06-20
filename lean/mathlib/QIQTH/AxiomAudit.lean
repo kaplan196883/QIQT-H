@@ -3920,6 +3920,15 @@ namespace QIQTH.AxiomAudit
 -- rvdSpec_modUnitary). modCorrExt_kms_flip: TOP edge F_ξ(t+i)=∫ modChar t (ω)·(ω/(2−ω)) dμ (the KMS weight),
 -- in the regular regime σ(R)⊆(0,2). These are the two BOUNDARY conditions strip-uniqueness consumes — the
 -- extension's edges now pinned. Remaining for hUniq: holomorphy under ∫ (boundedness done) + Borchers reduction.
+#print axioms QIQTH.hasDerivAt_devCorrExt
+#print axioms QIQTH.differentiableOn_devCorrExt
+-- expected: standard only — ★★★ DEVICE strip extension HOLOMORPHIC on the open half-strip, NO regular window.
+-- At z₀ with Im z₀∈(−1/2,0): differentiate devCorrExt under the spectral integral (hasDerivAt_integral_of_
+-- dominated_loc_of_deriv_le) ⇒ (devCorrExt)'(z₀)=∫ i·log((2−ω)/ω)·d_{z₀}(ω) dμ. Dominators = the device's
+-- regular-window-FREE constants: F bound √2 (devChar_norm_le_Icc), F' bound the devChar_deriv_norm_le const,
+-- uniform on a slab nbhd s={c<Im z<d}, [c,d]⊂(−1/2,0)∋Im z₀ (c=(z₀.im−1/2)/2, d=z₀.im/2). Spectrum endpoints
+-- ω∈{0,2} handled by hasDerivAt_devChar_Icc (orbit z-constant there). Holomorphy half of the bdd-holo half-strip
+-- extension strip-uniqueness consumes — available for EVERY standard subspace (the RvD Prop 3.7 device payoff).
 #print axioms QIQTH.devCorrExt_norm_le
 -- expected: standard only — ★★★ DEVICE strip extension bound, NO regular window. devCorrExt S ξ z = ∫ devChar z
 -- dμ^R_ξ (RvD Prop 3.7 device analogue of modCorrExt). ‖D_ξ(z)‖ ≤ √2·‖ξ‖² for ALL z with −1/2≤Im z≤0, for ANY
