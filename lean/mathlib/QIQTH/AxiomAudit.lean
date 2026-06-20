@@ -3620,6 +3620,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ 𝒦→H CAPSTONE: two continuous ℂ-linear A,B agreeing on 𝒦 agree everywhere.
 -- By ℂ-linearity also agree on i𝒦 (q∈i𝒦 ⇒ −i·q∈𝒦), hence on 𝒦+i𝒦 which is DENSE (IsCyclic 𝒦⊔i𝒦=⊤);
 -- continuity (Continuous.ext_on). Lifts V_t η=Δ^{it}η on 𝒦 (eq_of_mem_K_of_inner_perp_IK) to V_t=Δ^{it}.
+#print axioms QIQTH.StandardSubspaceModular.modConj_smul_I
+-- expected: standard only — ★ J IS ANTILINEAR: modConj(i·η)=−i·(modConj η). On the dense range of T (ℂ-linear):
+-- J(i·T x)=J(T(i·x))=D(i·x)=(P−Q)(i·x)=i·(Q−P)x=−i·Dx=−i·J(Tx) (projK_smul_I/projIK_smul_I), continuity extends.
+-- The antilinearity RvD use to place J𝒦 ⊆ (i𝒦)^⊥ (Prop 2.2(5)) — the source of the w⊥i𝒦 vectors of Thm 3.8.
 #print axioms QIQTH.StandardSubspaceModular.eq_of_mem_K_of_inner_perp_IK
 -- expected: standard only — ★★ TOTALITY/⊥-TO-EQUALITY (RvD Thm 3.8 closeout): a,b∈𝒦 with ⟨w,a⟩=⟨w,b⟩ ∀w⊥i𝒦
 -- (projIK w=0) ⇒ a=b. d=a−b∈𝒦 ⊥ all (i𝒦)^⊥: w=d−Qd gives ‖d−Qd‖²=Re⟨w,d⟩=0 ⇒ d=Qd∈i𝒦; d∈𝒦⊓i𝒦=⊥

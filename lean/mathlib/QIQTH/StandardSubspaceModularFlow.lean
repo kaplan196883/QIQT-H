@@ -669,6 +669,22 @@ theorem modConj_sq (S : StandardSubspace H) (η : H) : modConj S (modConj S η) 
   refine ext_inner_left ℝ fun ζ => ?_
   rw [← modConj_isSelfAdjoint S ζ (modConj S η), modConj_inner_map]
 
+/-- **The modular conjugation `J` is antilinear**: `J(i·η) = −i·(J η)`.  On the dense range of `T` (which is
+    ℂ-linear), `J(i·T x) = J(T(i·x)) = D(i·x) = (P−Q)(i·x) = i·(Q−P)x = −i·D x = −i·J(T x)`
+    (`projK_smul_I`/`projIK_smul_I`), and continuity extends to all `η`.  This is the antilinearity RvD use
+    to place `J𝒦` in `(i𝒦)^⊥` (Prop 2.2(5)), the source of the `w ⊥ i𝒦` vectors of Theorem 3.8. -/
+theorem modConj_smul_I (S : StandardSubspace H) (η : H) :
+    modConj S (Complex.I • η) = -(Complex.I) • modConj S η := by
+  refine congrFun (Continuous.ext_on (rvdT_restrictScalars_denseRange S)
+    ((modConj S).continuous.comp (continuous_id.const_smul Complex.I))
+    ((continuous_id.const_smul (-Complex.I)).comp (modConj S).continuous) ?_) η
+  rintro v ⟨x, rfl⟩
+  show modConj S (Complex.I • rvdT S x) = -(Complex.I) • modConj S (rvdT S x)
+  rw [← map_smul (rvdT S) Complex.I x, modConj_rvdT, modConj_rvdT, rvdPmQ,
+    ContinuousLinearMap.sub_apply, ContinuousLinearMap.sub_apply, projK_smul_I, projIK_smul_I,
+    smul_sub, neg_smul, neg_smul]
+  abel
+
 /-! ### Modular reflection of `R`: `J R J = 2 − R`
 
   The bounded shadow of the canonical Tomita–Takesaki relation `J Δ J = Δ⁻¹` (with `Δ = (2−R)R⁻¹`):
