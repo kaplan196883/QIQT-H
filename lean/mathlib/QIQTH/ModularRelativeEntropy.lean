@@ -240,6 +240,39 @@ theorem hasDerivAt_modCorrExt (S : StandardSubspace H) (ξ : H) {a : ℝ} (ha0 :
         apply mul_le_mul (abs_log_div_le ha0 (hspec ω).1 (hspec ω).2) (hCbd hz ω)
           (norm_nonneg _) (Real.log_nonneg (by rw [le_div_iff₀ ha0]; linarith))
 
+/-- **The strip extension is differentiable on the open KMS strip** (regular regime): immediate from
+    `hasDerivAt_modCorrExt` at every interior point.  The differentiability half of the
+    bounded-holomorphic strip extension that strip-uniqueness consumes. -/
+theorem differentiableOn_modCorrExt (S : StandardSubspace H) (ξ : H) {a : ℝ} (ha0 : 0 < a) (ha1 : a ≤ 1)
+    (hspec : ∀ ω : spectrum ℝ (rvdRC S), a ≤ (ω : spectrum ℝ (rvdRC S)).val
+      ∧ (ω : spectrum ℝ (rvdRC S)).val ≤ 2 - a) :
+    DifferentiableOn ℂ (modCorrExt S ξ) (Complex.im ⁻¹' Set.Ioo (0 : ℝ) 1) := fun z hz =>
+  (hasDerivAt_modCorrExt S ξ ha0 ha1 hspec hz).differentiableAt.differentiableWithinAt
+
+open MeasureTheory in
+/-- **★★ The strip extension is differentiable on the open KMS strip AND continuous up to its closure**
+    (`DiffContOnCl`), in the regular regime.  Differentiability on the open strip is
+    `differentiableOn_modCorrExt`; continuity on the closed strip `{0 ≤ Im ≤ 1}` is dominated continuity of
+    the integral (`continuousOn_of_dominated`: the integrand `u_z(ω)` is continuous in `z` and uniformly
+    bounded by `(2−a)/a` on the closed strip).  This is the precise regularity the KMS strip-uniqueness
+    principle (`QIQTH.StripUniqueness.eqOn_of_bdd_holomorphic_strip`) consumes — the bounded-holomorphic
+    strip extension of the modular correlation, now fully assembled. -/
+theorem diffContOnCl_modCorrExt (S : StandardSubspace H) (ξ : H) {a : ℝ} (ha0 : 0 < a) (ha1 : a ≤ 1)
+    (hspec : ∀ ω : spectrum ℝ (rvdRC S), a ≤ (ω : spectrum ℝ (rvdRC S)).val
+      ∧ (ω : spectrum ℝ (rvdRC S)).val ≤ 2 - a) :
+    DiffContOnCl ℂ (modCorrExt S ξ) (Complex.im ⁻¹' Set.Ioo (0 : ℝ) 1) := by
+  haveI : IsFiniteMeasure (rvdSpecMeasure S ξ) := by unfold rvdSpecMeasure; infer_instance
+  refine ⟨differentiableOn_modCorrExt S ξ ha0 ha1 hspec, ?_⟩
+  rw [Complex.closure_preimage_im, closure_Ioo (by norm_num : (0 : ℝ) ≠ 1)]
+  have hmeasC : ∀ z : ℂ, AEStronglyMeasurable
+      (fun ω : spectrum ℝ (rvdRC S) => modCharC z (ω : spectrum ℝ (rvdRC S)).val) (rvdSpecMeasure S ξ) :=
+    fun z => ((measurable_modCharC z).comp measurable_subtype_coe).aestronglyMeasurable
+  exact continuousOn_of_dominated (fun x _ => hmeasC x)
+    (fun x hx => Filter.Eventually.of_forall (fun ω =>
+      modCharC_norm_le ha0 ha1 (hspec ω).1 (hspec ω).2 hx.1 hx.2))
+    (integrable_const _)
+    (Filter.Eventually.of_forall (fun ω => (differentiable_modCharC _).continuous.continuousOn))
+
 /-- The vacuum coherent state (`ξ = 0`) has zero relative entropy with itself. -/
 @[simp] theorem cgpEntropy_zero (S : StandardSubspace H) : cgpEntropy S (0 : H) = 0 := by
   simp [cgpEntropy]

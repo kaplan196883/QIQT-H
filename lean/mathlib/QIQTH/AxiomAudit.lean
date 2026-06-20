@@ -3529,6 +3529,15 @@ namespace QIQTH.AxiomAudit
 -- z-derivative bounded on the whole strip by log((2−a)/a)·(2−a)/a via abs_log_div_le + modCharC_norm_le). With
 -- modCorrExt_ofReal/_kms_flip (the two edges) this is the bounded-holomorphic strip extension strip-uniqueness
 -- consumes. Remaining for hUniq: continuity-to-closure (DiffContOnCl) + the Borchers group-equality reduction.
+#print axioms QIQTH.differentiableOn_modCorrExt
+#print axioms QIQTH.diffContOnCl_modCorrExt
+-- expected: standard only — differentiableOn_modCorrExt: F_ξ differentiable on the OPEN strip (from
+-- hasDerivAt_modCorrExt). diffContOnCl_modCorrExt: ★★ the FULL DiffContOnCl — differentiable on the open strip
+-- AND continuous up to the closed strip {0≤Im≤1} (continuity via continuousOn_of_dominated: integrand
+-- continuous in z, bounded by (2−a)/a on the closure; closure(im⁻¹'Ioo)=im⁻¹'Icc via Complex.closure_preimage_im).
+-- This is the EXACT regularity QIQTH.StripUniqueness.eqOn_of_bdd_holomorphic_strip consumes — the bounded-
+-- holomorphic strip extension of the modular correlation, fully assembled. Remaining for hUniq: the Borchers
+-- group-equality reduction (V=Δ^{it} from boundary-value uniqueness) — the conceptual step, not yet started.
 #print axioms QIQTH.StandardSubspaceModular.modCharC_norm
 #print axioms QIQTH.StandardSubspaceModular.modCharC_norm_le
 -- expected: standard only — modCharC_norm: EXACT modulus ‖u_z(r)‖=exp(−Im(z)·log((2−r)/r)) on (0,2) (=1 on the
