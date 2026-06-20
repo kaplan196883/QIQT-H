@@ -326,16 +326,19 @@ theorem corrJ_real_on_axis (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)
   corrC_real_on_axis S hn η (modConj S ξ) hcont hbd hgrp
     (projIK_modConj_eq_zero_of_mem_K S hξ) hKinv t
 
-/-- **Faithful RvD `g`-function, BOTTOM-edge reality** (RvD Thm 3.8, *p. 198*, the KMS-matching step — the
-    correct-strip counterpart of the discredited full-strip `corrC_top_edge_real_of_kms_match`).  The genuine
-    RvD function `g(z) = ⟨Jξ, h(z)⟩ = corrC (Jξ) V n η z` lives on the HALF strip `{−1/2 ≤ Im z ≤ 0}`.  Its
-    *bottom* edge `Im z = −1/2` (the half-modular shift `Δ^{1/2} = J`) is where RvD bring `Δ` in: applying the
-    KMS condition for `{U_t}` to the pair `(η, Δ^{it}ξ)` yields a function `f`, bounded-holomorphic on the
-    half-strip, matching `g` on the real axis (`Im = 0`), with *real* lower edge.  Then by
-    `eqOn_of_im_zero_edge_halfStrip` (one-edge half-strip determination via Hadamard three-lines) `f = g` on the
-    whole half-strip, so `g`'s lower edge `g(t − i/2)` inherits the reality.  This is the genuinely
-    KMS-dependent input (`f` = the labelled `StripKMSrvd`/`hUniq` function); everything else is discharged.
-    Together with `corrJ_real_on_axis` (top edge), `g` is real on BOTH edges of the half-strip. -/
+/-- ⚠⚠ **VACUOUS PREMISE — does NOT advance the discharge** (honest correction, 2026-06-21).  This is a true
+    conditional, but its hypothesis is UNSATISFIABLE for the relevant flows, so it establishes nothing toward
+    `hUniq`.  Rigorous reason: `g = corrC (Jξ) = ⟨Jξ, h(z)⟩` has a FIXED second slot (forced by holomorphy).
+    For `V = Δ` its top edge `⟨Δ^{it}η, Jξ⟩` is real (`Δ^{it}η ∈ 𝒦`, `Jξ ∈ (i𝒦)^⊥`).  Were the bottom edge
+    *also* real, then bounded + holomorphic + real-on-both-edges ⟹ CONSTANT (Schwarz reflection + Liouville)
+    ⟹ `⟨Δ^{it}η, Jξ⟩ = ⟨η, Jξ⟩ ∀ξ ∈ 𝒦`; but `Jξ` EXHAUSTS `{projIK = 0}` (`projK_modConj_eq_self_of_perp_IK`),
+    so the machine-checked `eq_of_mem_K_of_inner_perp_IK` forces `Δ^{it}η = η`, i.e. `Δ = id` — absurd.  Hence
+    `g`'s bottom edge is NOT real, no matching `f` exists, and the premise is vacuous (same failure class as the
+    discredited full-strip `corrC_top_edge_real_of_kms_match`).  The GENUINE RvD `g` is NOT `⟨h(z), Jξ⟩`: it is
+    the Prop 3.7 *device* `⟨(2−R)^{iz} R^{−iz+1/2}[·], η⟩` with the VARYING vector in the FIRST slot (bounded on
+    the half-strip by Lemma 3.6 — no unbounded `R^{−1/2}`), pairing the orbit against `η` through the modular
+    continuation.  That is the correct target.  `corrJ_real_on_axis` (the top edge) is UNAFFECTED and valid.
+    Kept (not deleted) as a labelled record of the failed approach. -/
 theorem corrJ_bottom_edge_real_of_kms (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ}
     (hn : 0 < n) (η : H) {ξ : H}
     (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)

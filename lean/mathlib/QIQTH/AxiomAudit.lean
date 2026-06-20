@@ -3788,12 +3788,18 @@ namespace QIQTH.AxiomAudit
 -- paradox: J𝒦=(i𝒦)^{⊥ℝ} is REAL-orthogonal, so ⟨v,Jξ⟩=0∀ξ does NOT give v∈i𝒦; consistent conclusion is the
 -- U-vs-Δ comparison (modUnitary_eq_of_orbit_compare), shared constant ⟨η,Jξ⟩ cancelling between U and Δ sides.
 #print axioms QIQTH.StandardSubspaceModular.corrJ_bottom_edge_real_of_kms
--- expected: standard only — ★★ FAITHFUL RvD g-function BOTTOM EDGE (RvD Thm 3.8, p.198, KMS-matching step;
--- correct-strip counterpart of the discredited full-strip corrC_top_edge_real_of_kms_match). g=corrC(Jξ) on
--- HALF strip {−1/2≤Im≤0}; bottom edge Im=−1/2 (= half-shift Δ^{1/2}=J) is where Δ enters: KMS for U on pair
--- (η,Δ^{it}ξ) gives f bdd-holo on half-strip, =g on real axis, real lower edge ⇒ (eqOn_of_im_zero_edge_halfStrip,
--- Hadamard) f=g on half-strip ⇒ g(t−i/2) real. f = the labelled StripKMSrvd/hUniq function (the ONE genuinely
--- KMS-dependent input); rest discharged. With corrJ_real_on_axis (top), g real on BOTH edges of the half-strip.
+-- expected: standard only — ⚠⚠ VACUOUS PREMISE (honest correction 2026-06-21, total honesty). True conditional,
+-- but its hypothesis (a bdd-holo f matching g=corrC(Jξ) on the real axis AND real on the bottom edge Im=−1/2)
+-- is UNSATISFIABLE for the relevant flows, so it does NOT advance the hUniq discharge. RIGOROUS reason: g=⟨h(z),Jξ⟩
+-- has a FIXED 2nd slot (needed for holomorphy). For V=Δ its TOP edge ⟨Δ^{it}η,Jξ⟩ is real (Δ^{it}η∈𝒦, Jξ∈(i𝒦)^⊥,
+-- machine-checked reality). If the bottom edge were ALSO real then bdd+holo+real-both-edges ⟹ CONSTANT (Schwarz
+-- reflection/Liouville) ⟹ ⟨Δ^{it}η,Jξ⟩=⟨η,Jξ⟩ ∀ξ∈𝒦; but Jξ EXHAUSTS {projIK=0} (projK_modConj_eq_self_of_perp_IK),
+-- so the machine-checked eq_of_mem_K_of_inner_perp_IK forces Δ^{it}η=η ⇒ Δ=id, ABSURD. Hence g's bottom edge is
+-- NOT real ⇒ no matching f exists ⇒ premise vacuous (same failure class as the full-strip corrC_top_edge flaw).
+-- The GENUINE RvD g is NOT ⟨h(z),Jξ⟩: it is the Prop 3.7 device ⟨(2−R)^{iz}R^{−iz+1/2}[·],η⟩ with the VARYING
+-- vector in the FIRST slot (BOUNDED on the half-strip by Lemma 3.6 — no unbounded R^{−1/2}), pairing the orbit
+-- against η through the modular continuation. That is the correct target. corrJ_real_on_axis (TOP edge) is
+-- UNAFFECTED — ⟨U_tη,Jξ⟩ real is genuinely true and remains valid.
 #print axioms QIQTH.StandardSubspaceModular.orbit_inner_eq_of_entire
 -- expected: standard only — ★★ DENSITY EXTENSION: ⟨w,V_t(gaussSmear V n η)⟩=⟨w,gaussSmear V n η⟩ ∀n>0 ⇒
 -- ⟨w,V_t η⟩=⟨w,η⟩. Scale by √(n/π) to entireVec, entireVec_tendsto (→η) + continuity of V_t,⟨w,·⟩. Resolves
