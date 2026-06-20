@@ -476,6 +476,52 @@ theorem deviceOpC_norm_le (S : StandardSubspace H) (z : ℂ) (hz2 : z.im ≤ 0)
   rw [deviceOpC, borelFC]
   exact (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).boundedFC_norm_le _ _ _
 
+open QIQTH.StandardSubspaceModular in
+/-- **The device operator at `z = 0` is `√R`** (`deviceOpReal 0 = rvdSqrtR`, the device interpolation start).
+    `devChar 0 = √·`, so `deviceOpReal 0 = borelFC(√·) = cfcCont(√·)`, and `cfcCont(√·)` is the *positive*
+    square root of `R`: `(cfcCont √·)² = R` (`cfcCont_mul` + `cfcCont_coord`, since `√ω·√ω = ω` on `σ(R)⊆[0,∞)`),
+    and `cfcCont(√·) = (cfcCont ∜·)² ≥ 0` (`cfcCont ∜·` self-adjoint as a real symbol).  `CFC.sqrt_unique` then
+    identifies it with `CFC.sqrt R = rvdSqrtR`.  Hence `deviceOpReal 0 ζ = R^{1/2}ζ = ξ`, so the g-function's
+    value at the origin is `g(0) = ⟪η, Jξ⟫` — the right-hand side of `GConstancy`. -/
+theorem deviceOpReal_zero (S : StandardSubspace H) : deviceOpReal S 0 = rvdSqrtR S := by
+  set sqrtC : C(spectrum ℝ (rvdRC S), ℂ) :=
+    ⟨fun ω => (Real.sqrt (ω : ℝ) : ℂ),
+      Complex.continuous_ofReal.comp (Real.continuous_sqrt.comp continuous_subtype_val)⟩ with hsqrtC
+  set qrtC : C(spectrum ℝ (rvdRC S), ℂ) :=
+    ⟨fun ω => (Real.sqrt (Real.sqrt (ω : ℝ)) : ℂ),
+      Complex.continuous_ofReal.comp
+        (Real.continuous_sqrt.comp (Real.continuous_sqrt.comp continuous_subtype_val))⟩ with hqrtC
+  have hdev : deviceOpReal S 0 = cfcCont S sqrtC := by
+    rw [deviceOpReal, cfcCont]
+    refine borelFC_congr (rvdRC S) (rvdRC_isSelfAdjoint S) _ _ _ _ _ _ ?_
+    ext ω
+    show devSpecReal S 0 ω = (Real.sqrt (ω : ℝ) : ℂ)
+    rw [devSpecReal, Complex.ofReal_zero, devChar_zero]
+  have hsq : cfcCont S sqrtC * cfcCont S sqrtC = rvdRC S := by
+    rw [← cfcCont_mul]
+    refine (?_ : cfcCont S (sqrtC * sqrtC) = cfcCont S _).trans (cfcCont_coord S)
+    congr 1
+    ext ω
+    show (Real.sqrt (ω : ℝ) : ℂ) * (Real.sqrt (ω : ℝ) : ℂ) = specCoord S ω
+    rw [specCoord, ← Complex.ofReal_mul, Real.mul_self_sqrt (rvdRC_spectrum_mem_Icc S ω).1]
+  have hpos : 0 ≤ cfcCont S sqrtC := by
+    have hsqrtC_eq : sqrtC = qrtC * qrtC := by
+      ext ω
+      show (Real.sqrt (ω : ℝ) : ℂ)
+        = (Real.sqrt (Real.sqrt (ω : ℝ)) : ℂ) * (Real.sqrt (Real.sqrt (ω : ℝ)) : ℂ)
+      rw [← Complex.ofReal_mul, Real.mul_self_sqrt (Real.sqrt_nonneg _)]
+    have hsa : star (cfcCont S qrtC) = cfcCont S qrtC := by
+      rw [← cfcCont_star]
+      congr 1
+      ext ω
+      show (starRingEnd ℂ) (Real.sqrt (Real.sqrt (ω : ℝ)) : ℂ) = (Real.sqrt (Real.sqrt (ω : ℝ)) : ℂ)
+      exact Complex.conj_ofReal _
+    rw [hsqrtC_eq, cfcCont_mul]
+    calc (0 : H →L[ℂ] H) ≤ star (cfcCont S qrtC) * cfcCont S qrtC := star_mul_self_nonneg _
+      _ = cfcCont S qrtC * cfcCont S qrtC := by rw [hsa]
+  rw [hdev, rvdSqrtR]
+  exact (CFC.sqrt_unique hsq hpos).symm
+
 /-- **Spectral bridge for the real-axis device operator**: `⟪ξ, (Δ^{it}·√R) ξ⟫ = ∫ d_t dμ^R_ξ` (mirrors
     `rvdSpec_modUnitary`, via `inner_borelFC`). -/
 theorem rvdSpec_deviceOpReal (S : StandardSubspace H) (ξ : H) (t : ℝ) :

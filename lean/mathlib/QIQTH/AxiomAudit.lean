@@ -3990,6 +3990,12 @@ namespace QIQTH.AxiomAudit
 -- g-function g(z)=⟨h(z),J d_z(R)ζ⟩. deviceOpC_ofReal: restricts to deviceOpReal (Δ^{it}√R) on Im z=0.
 #print axioms QIQTH.deviceOpC_norm_le
 -- deviceOpC_norm_le: ‖d_z(R)‖≤2√2 uniformly on the half-strip (borelFC norm ≤2·sup‖f‖, devChar bound √2).
+#print axioms QIQTH.deviceOpReal_zero
+-- expected: standard only — ★★ DEVICE BOUNDARY OPERATOR IDENTITY: deviceOpReal 0 = √R (rvdSqrtR). devChar 0=√·
+-- ⇒ deviceOpReal 0 = cfcCont(√·); (cfcCont√·)²=R (cfcCont_mul+cfcCont_coord, √ω·√ω=ω on σ(R)⊆[0,∞)) & ≥0
+-- (=(cfcCont∜·)², self-adjoint square via cfcCont_star+star_mul_self_nonneg) ⇒ CFC.sqrt_unique ⇒ =CFC.sqrt R.
+-- So deviceVec(0)=√R ζ=ξ, J·deviceVec(0)=Jξ ⇒ g-function value g(0)=⟪η,Jξ⟫ = the GConstancy RHS. The cfcCont↔CFC
+-- bridge (borelFC of continuous fn = Mathlib CFC) realized via the sqrt-uniqueness pattern, no new axiom.
 #print axioms QIQTH.devCorrExt_ofReal_inner
 #print axioms QIQTH.rvdSpec_deviceOpReal
 -- expected: standard only — OPERATOR-FORM real-axis value: D_ξ(t)=⟪ξ,(Δ^{it}·√R)ξ⟫. deviceOpReal S t :=
