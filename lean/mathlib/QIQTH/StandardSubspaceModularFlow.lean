@@ -25,6 +25,7 @@ import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Range
 import Mathlib.Topology.ContinuousMap.StoneWeierstrass
 import Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral
 import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+import Mathlib.MeasureTheory.Measure.Haar.NormedSpace
 
 namespace QIQTH.StandardSubspaceModular
 
@@ -1419,6 +1420,24 @@ theorem entireVec_sub_norm_le {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < 
   refine integral_congr_ae (Filter.Eventually.of_forall (fun t => ?_))
   show ‖Real.exp (-n * t ^ 2) • (V t η - η)‖ = Real.exp (-n * t ^ 2) * ‖V t η - η‖
   rw [norm_smul, Real.norm_eq_abs, abs_of_pos (Real.exp_pos _)]
+
+open MeasureTheory in
+/-- **Change of variables for the Gaussian mollifier** `u = √n·t`: `∫ e^{−u²}·f(u/√n) du = √n·∫ e^{−n t²}·f(t) dt`.
+    The substitution that turns the *concentrating* Gaussian kernel into a *fixed* Gaussian `e^{−u²}` against
+    the rescaled `f(u/√n)`, so the mollifier limit follows from dominated convergence (`f(u/√n) → f(0)`). -/
+theorem gauss_mollifier_change_of_var {n : ℝ} (hn : 0 < n) (f : ℝ → ℝ) :
+    ∫ u : ℝ, Real.exp (-u ^ 2) * f (u / Real.sqrt n)
+      = Real.sqrt n * ∫ t : ℝ, Real.exp (-n * t ^ 2) * f t := by
+  have hkey := Measure.integral_comp_div (fun v : ℝ => Real.exp (-n * v ^ 2) * f v) (Real.sqrt n)
+  rw [abs_of_nonneg (Real.sqrt_nonneg _), smul_eq_mul] at hkey
+  rw [← hkey]
+  refine integral_congr_ae (Filter.Eventually.of_forall (fun u => ?_))
+  have harg : -n * (u / Real.sqrt n) ^ 2 = -u ^ 2 := by
+    have hne : n ≠ 0 := ne_of_gt hn
+    rw [div_pow, Real.sq_sqrt hn.le]; field_simp
+  show Real.exp (-u ^ 2) * f (u / Real.sqrt n)
+      = Real.exp (-n * (u / Real.sqrt n) ^ 2) * f (u / Real.sqrt n)
+  rw [harg]
 
 /-! ### Analytic continuation of the modular character to the KMS strip
 

@@ -3556,6 +3556,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ‖η_n−η‖ ≤ √(n/π)·∫ e^{−n t²}·‖V_t η−η‖ dt (norm_integral_le_integral_norm on the
 -- mollifier form), reducing the VECTOR density to a SCALAR Gaussian-mollifier limit of t↦‖V_t η−η‖ (bounded,
 -- continuous, =0 at t=0). The convergence of that scalar mollifier is the remaining density brick.
+#print axioms QIQTH.StandardSubspaceModular.gauss_mollifier_change_of_var
+-- expected: standard only — change of variables u=√n·t: ∫ e^{−u²}·f(u/√n) du = √n·∫ e^{−n t²}·f(t) dt
+-- (Measure.integral_comp_div + the exponent identity n·(u/√n)²=u²). Turns the CONCENTRATING Gaussian kernel into
+-- a FIXED e^{−u²} against the rescaled f(u/√n), so the mollifier limit → f(0) follows by dominated convergence
+-- (f(u/√n)→f(0)). Foundation for the scalar density convergence.
 -- expected: standard only — gaussSmear V n η = ∫ e^{−n t²}•V_t η dt. gaussSmear_integrable: Bochner-integrable
 -- (dominated by the Gaussian e^{−n t²}·‖η‖ via integrable_exp_neg_mul_sq, V_t norm-non-increasing + orbit
 -- continuous). gaussSmear_mem_K: ★ the smeared vector lands in the real subspace K — the ℝ-linear projection
