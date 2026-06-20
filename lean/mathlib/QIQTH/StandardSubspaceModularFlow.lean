@@ -685,6 +685,14 @@ theorem modConj_smul_I (S : StandardSubspace H) (η : H) :
     smul_sub, neg_smul, neg_smul]
   abel
 
+/-- **The `(i𝒦)^⊥` supply**: for every `ξ`, the vector `ξ − Q ξ` is `⊥ i𝒦` (`projIK (ξ − Q ξ) = 0`).
+    Immediate from idempotence of `Q = projIK`.  Concretely populates the set of `w`-vectors the orbit-
+    identity framework (`corrC_real_on_axis`, `eq_of_mem_K_of_inner_perp_IK`) ranges over: every element of
+    `ker(projIK) = (i𝒦)^⊥` is of this form, so the totality of `(i𝒦)^⊥` against `𝒦` is fully available. -/
+theorem projIK_sub_projIK_self (S : StandardSubspace H) (ξ : H) :
+    projIK S (ξ - projIK S ξ) = 0 := by
+  rw [map_sub, ← ContinuousLinearMap.mul_apply, (projIK_idem S).eq, sub_self]
+
 /-- **`J · D = T`** (the dual of `J · T = D`): `J(D ξ) = T ξ`.  Apply `J` to `J(T ξ) = D ξ`
     (`modConj_rvdT`) and use `J² = 1` (`modConj_sq`).  Together with `modConj_rvdT` this is the bounded
     Tomita polar relation `D = J T`, `T = J D`, `J² = 1`. -/

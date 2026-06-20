@@ -3620,6 +3620,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ 𝒦→H CAPSTONE: two continuous ℂ-linear A,B agreeing on 𝒦 agree everywhere.
 -- By ℂ-linearity also agree on i𝒦 (q∈i𝒦 ⇒ −i·q∈𝒦), hence on 𝒦+i𝒦 which is DENSE (IsCyclic 𝒦⊔i𝒦=⊤);
 -- continuity (Continuous.ext_on). Lifts V_t η=Δ^{it}η on 𝒦 (eq_of_mem_K_of_inner_perp_IK) to V_t=Δ^{it}.
+#print axioms QIQTH.StandardSubspaceModular.projIK_sub_projIK_self
+-- expected: standard only — (i𝒦)^⊥ SUPPLY: projIK(ξ−Qξ)=0 (Q idempotent). Every ker(projIK)=(i𝒦)^⊥ element
+-- is of this form, so the totality of (i𝒦)^⊥ against 𝒦 (eq_of_mem_K_of_inner_perp_IK) is fully populated.
 #print axioms QIQTH.StandardSubspaceModular.modConj_rvdPmQ
 -- expected: standard only — J·D=T (dual of J·T=D): modConj(rvdPmQ ξ)=rvdT ξ. Apply J to J(Tξ)=Dξ + J²=1.
 -- The bounded Tomita polar relation D=JT, T=JD, J²=1.
