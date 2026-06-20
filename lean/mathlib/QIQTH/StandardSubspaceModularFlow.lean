@@ -1459,6 +1459,60 @@ theorem gauss_mollifier_integral_tendsto {f : ℝ → ℝ} {M : ℝ} (hf : Conti
       tendsto_const_nhds.div_atTop Real.tendsto_sqrt_atTop
     exact (hf.continuousAt.tendsto.comp h0).const_mul (Real.exp (-u ^ 2))
 
+open MeasureTheory Filter Topology in
+/-- **The scalar Gaussian density** `√(n/π)·∫ e^{−n t²}·f(t) dt → f(0)` as `n → ∞`, for bounded
+    continuous `f`.  Combines the change of variables `u = √n·t` (`gauss_mollifier_change_of_var`)
+    with the fixed-Gaussian limit (`gauss_mollifier_integral_tendsto`):
+    `√(n/π)·∫ e^{−n t²}f = √(1/π)·∫ e^{−u²}f(u/√n) → √(1/π)·∫ e^{−u²}f(0) = f(0)`.
+    Applied to `f(t) = ‖V_t η − η‖` (bounded by `2‖η‖`, vanishing at `0`) this lands the RvD
+    entire-vector density `η_n → η`. -/
+theorem gauss_density_tendsto {f : ℝ → ℝ} {M : ℝ} (hf : Continuous f) (hM : ∀ t, |f t| ≤ M) :
+    Tendsto (fun n : ℝ => Real.sqrt (n / Real.pi) * ∫ t : ℝ, Real.exp (-n * t ^ 2) * f t) atTop
+      (𝓝 (f 0)) := by
+  have hg : (∫ u : ℝ, Real.exp (-u ^ 2)) = Real.sqrt Real.pi := by
+    have := integral_gaussian 1
+    simpa only [neg_one_mul, div_one] using this
+  have hsqrt : Real.sqrt (1 / Real.pi) * Real.sqrt Real.pi = 1 := by
+    rw [← Real.sqrt_mul (by positivity), one_div_mul_cancel Real.pi_ne_zero, Real.sqrt_one]
+  have hlim : Real.sqrt (1 / Real.pi) * ∫ u : ℝ, Real.exp (-u ^ 2) * f 0 = f 0 := by
+    rw [integral_mul_const, hg, ← mul_assoc, hsqrt, one_mul]
+  have base : Tendsto (fun n : ℝ => Real.sqrt (1 / Real.pi)
+      * ∫ u : ℝ, Real.exp (-u ^ 2) * f (u / Real.sqrt n)) atTop
+      (𝓝 (Real.sqrt (1 / Real.pi) * ∫ u : ℝ, Real.exp (-u ^ 2) * f 0)) :=
+    (gauss_mollifier_integral_tendsto hf hM).const_mul _
+  rw [hlim] at base
+  refine Tendsto.congr' ?_ base
+  filter_upwards [eventually_gt_atTop (0 : ℝ)] with n hn
+  show Real.sqrt (1 / Real.pi) * ∫ u : ℝ, Real.exp (-u ^ 2) * f (u / Real.sqrt n)
+      = Real.sqrt (n / Real.pi) * ∫ t : ℝ, Real.exp (-n * t ^ 2) * f t
+  rw [gauss_mollifier_change_of_var hn f, ← mul_assoc]
+  congr 1
+  rw [← Real.sqrt_mul (by positivity), one_div_mul_eq_div]
+
+open MeasureTheory Filter Topology in
+/-- **RvD entire-vector density** `η_n → η`: the normalised entire vectors `η_n = √(n/π)·∫ e^{−n t²}·V_t η dt`
+    converge to `η` as `n → ∞`, for any strongly-continuous one-parameter contraction `V` with `V_0 η = η`.
+    Squeeze: `0 ≤ ‖η_n − η‖ ≤ √(n/π)·∫ e^{−n t²}·‖V_t η − η‖ → ‖V_0 η − η‖ = 0`
+    (`entireVec_sub_norm_le` + `gauss_density_tendsto` on the bounded continuous `t ↦ ‖V_t η − η‖`).
+    With `entireVec_mem_K` this makes the entire vectors a *dense* subset of the real subspace `K` —
+    the totality input for the RvD Theorem 3.8 KMS-uniqueness argument (`hUniq`). -/
+theorem entireVec_tendsto {V : ℝ → (H →L[ℂ] H)} (η : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖) (hV0 : V 0 η = η) :
+    Tendsto (fun n : ℝ => entireVec V n η) atTop (𝓝 η) := by
+  rw [tendsto_iff_norm_sub_tendsto_zero]
+  have hf : Continuous (fun t => ‖V t η - η‖) := (hcont.sub continuous_const).norm
+  have hM : ∀ t, |‖V t η - η‖| ≤ 2 * ‖η‖ := by
+    intro t
+    rw [abs_of_nonneg (norm_nonneg _)]
+    calc ‖V t η - η‖ ≤ ‖V t η‖ + ‖η‖ := norm_sub_le _ _
+      _ ≤ ‖η‖ + ‖η‖ := by linarith [hbd t]
+      _ = 2 * ‖η‖ := by ring
+  have hdens := gauss_density_tendsto hf hM
+  rw [hV0, sub_self, norm_zero] at hdens
+  refine squeeze_zero' (Filter.Eventually.of_forall (fun n => norm_nonneg _)) ?_ hdens
+  filter_upwards [eventually_gt_atTop (0 : ℝ)] with n hn
+  exact entireVec_sub_norm_le hn η hcont hbd
+
 /-! ### Analytic continuation of the modular character to the KMS strip
 
 The modular character `u_t(r) = exp(i·t·log((2−r)/r))` continues to an entire function of a *complex*

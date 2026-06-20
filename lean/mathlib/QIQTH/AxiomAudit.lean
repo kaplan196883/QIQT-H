@@ -3566,6 +3566,16 @@ namespace QIQTH.AxiomAudit
 -- ∫e^{−u²}·f(0)du as n→∞ for bounded continuous f. f(u/√n)→f(0) (u/√n→0 via Real.tendsto_sqrt_atTop + f cont),
 -- dominated by e^{−u²}·M (tendsto_integral_filter_of_dominated_convergence). With change_of_var this gives
 -- √(n/π)∫e^{−n t²}f → f(0) — the scalar density. Combined with entireVec_sub_norm_le ⇒ η_n → η (RvD density).
+#print axioms QIQTH.StandardSubspaceModular.gauss_density_tendsto
+-- expected: standard only — ★ the SCALAR Gaussian density √(n/π)·∫e^{−n t²}·f(t)dt → f(0) for bounded
+-- continuous f. √(n/π)∫e^{−nt²}f = √(1/π)∫e^{−u²}f(u/√n) (change_of_var) → √(1/π)∫e^{−u²}f(0) = f(0)
+-- (integral_gaussian: ∫e^{−u²}=√π, √(1/π)·√π=1). The mollifier limit, scalar form.
+#print axioms QIQTH.StandardSubspaceModular.entireVec_tendsto
+-- expected: standard only — ★★ RvD ENTIRE-VECTOR DENSITY η_n → η: the normalised entire vectors
+-- η_n = √(n/π)∫e^{−n t²}V_t η converge to η (strongly-cont contraction V, V_0 η=η). Squeeze
+-- 0 ≤ ‖η_n−η‖ ≤ √(n/π)∫e^{−nt²}‖V_t η−η‖ → ‖V_0 η−η‖=0 (entireVec_sub_norm_le + gauss_density_tendsto on
+-- t↦‖V_t η−η‖, bounded by 2‖η‖). With entireVec_mem_K ⇒ entire vectors DENSE in K — the totality input
+-- for RvD Theorem 3.8 KMS-uniqueness (hUniq). The analytic density backbone is now COMPLETE.
 -- expected: standard only — gaussSmear V n η = ∫ e^{−n t²}•V_t η dt. gaussSmear_integrable: Bochner-integrable
 -- (dominated by the Gaussian e^{−n t²}·‖η‖ via integrable_exp_neg_mul_sq, V_t norm-non-increasing + orbit
 -- continuous). gaussSmear_mem_K: ★ the smeared vector lands in the real subspace K — the ℝ-linear projection
