@@ -329,4 +329,79 @@ theorem eqOn_of_im_zero_edge_halfStrip {F G : ℂ → ℂ} {M : ℝ}
     (fun w hw => (norm_sub_le _ _).trans (add_le_add (hFb w hw) (hGb w hw)))
     (fun w hw => by rw [Pi.sub_apply, h0 w hw, sub_self]) z hz)
 
+/-- The **unit KMS strip** `{−1 ≤ Im z ≤ 0}` and its interior — the strip of RvD Definition 3.4 (the
+    full-width KMS condition, before Proposition 3.5 folds it to the half-strip). -/
+def negStrip : Set ℂ := Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0
+def negStripOpen : Set ℂ := Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0
+
+open Complex.HadamardThreeLines in
+/-- **One-edge boundary uniqueness on the UNIT strip** `{−1 ≤ Im z ≤ 0}`: a function bounded-holomorphic
+    there and vanishing on the top edge `Im z = 0` vanishes on the whole closed strip.  Same Hadamard
+    three-lines route as `eqZero_of_im_zero_edge_halfStrip`, on `re⁻¹'[−1, 0]`.  This is the uniqueness that
+    powers RvD Proposition 3.5's reflection argument (the full-width KMS strip of Definition 3.4). -/
+theorem eqZero_of_im_zero_edge_negStrip {f : ℂ → ℂ} {M : ℝ}
+    (hf : DiffContOnCl ℂ f negStripOpen) (hfb : ∀ z ∈ negStrip, ‖f z‖ ≤ M)
+    (h0 : ∀ z : ℂ, z.im = 0 → f z = 0) :
+    ∀ z ∈ negStrip, f z = 0 := by
+  have hφim : ∀ w : ℂ, (Complex.I * w).im = w.re := fun w => by
+    rw [Complex.mul_im, Complex.I_re, Complex.I_im, zero_mul, one_mul, zero_add]
+  have hmaps_open : Set.MapsTo (fun w => Complex.I * w) (verticalStrip (-1) 0) negStripOpen := by
+    intro w hw
+    rw [verticalStrip, Set.mem_preimage] at hw
+    rw [negStripOpen, Set.mem_preimage, hφim]; exact hw
+  have hmaps_closed : Set.MapsTo (fun w => Complex.I * w) (verticalClosedStrip (-1) 0) negStrip := by
+    intro w hw
+    rw [verticalClosedStrip, Set.mem_preimage] at hw
+    rw [negStrip, Set.mem_preimage, hφim]; exact hw
+  have hclos_v : closure (verticalStrip (-1) 0) = verticalClosedStrip (-1) 0 := by
+    rw [verticalStrip, verticalClosedStrip, Complex.closure_preimage_re,
+      closure_Ioo (by norm_num : (-1 : ℝ) ≠ 0)]
+  have hclos_k : closure negStripOpen = negStrip := by
+    rw [negStripOpen, negStrip, Complex.closure_preimage_im,
+      closure_Ioo (by norm_num : (-1 : ℝ) ≠ 0)]
+  have hgdiff : DiffContOnCl ℂ (fun w => f (Complex.I * w)) (verticalStrip (-1) 0) := by
+    refine ⟨hf.1.comp ((differentiable_id.const_mul Complex.I).differentiableOn) hmaps_open, ?_⟩
+    rw [hclos_v]
+    refine hf.2.comp ((continuous_const.mul continuous_id).continuousOn) ?_
+    rw [hclos_k]; exact hmaps_closed
+  have hgbdd : BddAbove ((norm ∘ fun w => f (Complex.I * w)) '' verticalClosedStrip (-1) 0) :=
+    ⟨M, by rintro _ ⟨w, hw, rfl⟩; exact hfb _ (hmaps_closed hw)⟩
+  have hre' : ∀ z : ℂ, (-Complex.I * z).re = z.im := fun z => by rw [Complex.mul_re]; simp
+  have ha : ∀ w ∈ Complex.re ⁻¹' {(-1 : ℝ)}, ‖f (Complex.I * w)‖ ≤ M := by
+    intro w hw
+    rw [Set.mem_preimage, Set.mem_singleton_iff] at hw
+    exact hfb _ (by rw [negStrip, Set.mem_preimage, hφim, hw]; constructor <;> norm_num)
+  have hb : ∀ w ∈ Complex.re ⁻¹' {(0 : ℝ)}, ‖f (Complex.I * w)‖ ≤ 0 := by
+    intro w hw
+    rw [Set.mem_preimage, Set.mem_singleton_iff] at hw
+    rw [h0 _ (by rw [hφim]; exact hw)]; simp
+  have hopen : ∀ z ∈ negStripOpen, f z = 0 := by
+    intro z hz
+    rw [negStripOpen, Set.mem_preimage, Set.mem_Ioo] at hz
+    have hw : (-Complex.I * z) ∈ verticalClosedStrip (-1) 0 := by
+      rw [verticalClosedStrip, Set.mem_preimage, hre', Set.mem_Icc]
+      exact ⟨le_of_lt hz.1, le_of_lt hz.2⟩
+    have hbound := norm_le_interp_of_mem_verticalClosedStrip' (f := fun w => f (Complex.I * w))
+      (z := -Complex.I * z) (by norm_num : (-1 : ℝ) < 0) hw hgdiff hgbdd ha hb
+    simp only [hre'] at hbound
+    rw [show Complex.I * (-Complex.I * z) = z by
+        rw [← mul_assoc, mul_neg, Complex.I_mul_I, neg_neg, one_mul]] at hbound
+    rw [Real.zero_rpow (ne_of_gt (div_pos (by linarith [hz.1]) (by norm_num))),
+      mul_zero] at hbound
+    exact norm_le_zero_iff.mp hbound
+  refine Set.EqOn.of_subset_closure hopen (hclos_k ▸ hf.2) continuousOn_const
+    (Set.preimage_mono Set.Ioo_subset_Icc_self) (le_of_eq hclos_k.symm)
+
+/-- **One-edge determination on the UNIT strip** `{−1 ≤ Im z ≤ 0}`: two bounded-holomorphic functions
+    agreeing on the top edge `Im z = 0` agree on the whole closed strip.  Apply
+    `eqZero_of_im_zero_edge_negStrip` to `F − G`.  The full-width companion of `eqOn_of_im_zero_edge_halfStrip`,
+    the uniqueness RvD Proposition 3.5 invokes for the KMS extension on `{−1 ≤ Im ≤ 0}`. -/
+theorem eqOn_of_im_zero_edge_negStrip {F G : ℂ → ℂ} {M : ℝ}
+    (hF : DiffContOnCl ℂ F negStripOpen) (hG : DiffContOnCl ℂ G negStripOpen)
+    (hFb : ∀ z ∈ negStrip, ‖F z‖ ≤ M) (hGb : ∀ z ∈ negStrip, ‖G z‖ ≤ M)
+    (h0 : ∀ z : ℂ, z.im = 0 → F z = G z) : Set.EqOn F G negStrip := fun z hz =>
+  sub_eq_zero.mp (eqZero_of_im_zero_edge_negStrip (hF.sub hG)
+    (fun w hw => (norm_sub_le _ _).trans (add_le_add (hFb w hw) (hGb w hw)))
+    (fun w hw => by rw [Pi.sub_apply, h0 w hw, sub_self]) z hz)
+
 end QIQTH.StripUniqueness

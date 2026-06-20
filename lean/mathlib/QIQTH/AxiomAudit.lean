@@ -3524,6 +3524,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — two bdd-holo F,G on {−1/2≤Im≤0} agreeing on the top edge Im=0 agree on the
 -- half-strip (eqZero_of_im_zero_edge_halfStrip on F−G). The correct-strip matching step: orbit correlation
 -- ⟨h(z),w⟩ and the KMS function share Im=0 values ⟨U_t ξ,η⟩ ⇒ coincide ⇒ KMS lower-edge (Im=−1/2) reality transfers.
+#print axioms QIQTH.StripUniqueness.eqZero_of_im_zero_edge_negStrip
+#print axioms QIQTH.StripUniqueness.eqOn_of_im_zero_edge_negStrip
+-- expected: standard only — ★ UNIT-strip {−1≤Im≤0} one-edge uniqueness (full-width companion of the halfStrip
+-- versions): bdd-holo + zero on top edge Im=0 ⇒ zero on the strip (Hadamard three-lines on re⁻¹'[−1,0]); two
+-- such agreeing on Im=0 agree on the strip. This is the strip of RvD Def 3.4 (full-width KMS) — the uniqueness
+-- RvD Prop 3.5's reflection argument invokes (full strip {−1≤Im≤0}, before Prop 3.5 folds to the half-strip).
 #print axioms QIQTH.StripUniqueness.eqOn_of_im_zero_edge
 -- expected: standard only — ★ one-edge determination: two bounded-holomorphic F,G agreeing on the bottom edge
 -- (Im=0) agree on the closed strip (eqZero_of_im_zero_edge on F−G). RvD Thm 3.8 step-5 matching: the entire
