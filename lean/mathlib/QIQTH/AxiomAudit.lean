@@ -3506,6 +3506,16 @@ namespace QIQTH.AxiomAudit
 -- kms_correlation_boundary_determined: restated for the modular setting — a KMS two-point correlation is pinned
 -- by its real-axis values F(t) and its KMS-flipped top-edge values F(t+i). This is the analytic heart of
 -- one-particle KMS-uniqueness; the remaining hUniq discharge is the Borchers/Florig group-equality reduction.
+-- MODULAR CHARACTER continuation (StandardSubspaceModularFlow.lean): the modular flow's OWN KMS strip seed.
+#print axioms QIQTH.StandardSubspaceModular.differentiable_modCharC
+#print axioms QIQTH.StandardSubspaceModular.modCharC_kms_flip
+#print axioms QIQTH.StandardSubspaceModular.modCharC_ofReal
+-- expected: standard only — modCharC z r = exp(i·z·log((2−r)/r)) is the analytic continuation of the modular
+-- character modChar to COMPLEX time z. differentiable_modCharC: entire in z (Complex.differentiable_exp).
+-- modCharC_ofReal: matches modChar on the real axis (rfl). modCharC_kms_flip: ★ THE KMS BOUNDARY FLIP
+-- u_{z+i}(r)=u_z(r)·(r/(2−r)) — shifting Im by β=1 multiplies by the modular weight exp(−log((2−r)/r)). This is
+-- the scalar core of Δ^{it}'s own strip/KMS property, the regularity needed to enter the strip-uniqueness
+-- comparison toward discharging hUniq. (Next: lift to the spectral-integral correlation ⟪ξ,Δ^{it}ξ⟫.)
 -- expected: standard only — boostUnitary_eq_vadd: boostUnitary t = DomAddAct.mk(−t)+ᵥ· (the project boost group IS
 -- Mathlib's canonical Lp domain-translation; unitary_apply precomposes with flow(−t) ⇒ ξ(x−t), matches mk(−t)+ᵥξ via
 -- add_comm + Equiv.symm_apply_apply). continuous_boostUnitary_apply: ★ STRONG CONTINUITY t↦boostUnitary t ξ, from

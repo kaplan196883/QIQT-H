@@ -1309,4 +1309,56 @@ theorem modUnitary_mem_K_iff (t : ℝ) (ξ : H) :
         rw [← ContinuousLinearMap.mul_apply, ← modUnitary_add, neg_add_cancel, modUnitary_zero,
             ContinuousLinearMap.one_apply]] at h2
 
+/-! ### Analytic continuation of the modular character to the KMS strip
+
+The modular character `u_t(r) = exp(i·t·log((2−r)/r))` continues to an entire function of a *complex*
+time `z`.  Evaluated on the boundary of the KMS strip `{0 ≤ Im z ≤ 1}` it implements the modular weight:
+`u_{z+i}(r) = u_z(r)·(r/(2−r))`.  These scalar facts seed the modular flow's own strip/KMS property —
+the regularity that makes `Δ^{it}` a participant in the strip-uniqueness comparison toward discharging the
+labelled `hUniq` of one-particle Bisognano–Wichmann. -/
+
+/-- The **complexified modular character** `u_z(r) = exp(i·z·log((2−r)/r))` on `(0,2)` (and `1` outside) —
+    the analytic continuation of `modChar` to complex time `z`. -/
+noncomputable def modCharC (z : ℂ) : ℝ → ℂ :=
+  (Set.Ioo (0 : ℝ) 2).piecewise
+    (fun r => Complex.exp (Complex.I * z * (Real.log ((2 - r) / r) : ℂ)))
+    (fun _ => 1)
+
+/-- On `(0,2)` the complexified character is the bare exponential. -/
+theorem modCharC_of_mem {r : ℝ} (hr : r ∈ Set.Ioo (0 : ℝ) 2) (z : ℂ) :
+    modCharC z r = Complex.exp (Complex.I * z * (Real.log ((2 - r) / r) : ℂ)) :=
+  Set.piecewise_eq_of_mem _ _ _ hr
+
+/-- On the real axis the complexification recovers `modChar`. -/
+theorem modCharC_ofReal (t : ℝ) (r : ℝ) : modCharC (t : ℂ) r = modChar t r := rfl
+
+/-- **The complexified modular character is entire** in `z` for each fixed `r`. -/
+theorem differentiable_modCharC (r : ℝ) : Differentiable ℂ (fun z => modCharC z r) := by
+  by_cases hr : r ∈ Set.Ioo (0 : ℝ) 2
+  · have h : (fun z => modCharC z r)
+        = fun z => Complex.exp (Complex.I * z * (Real.log ((2 - r) / r) : ℂ)) :=
+      funext (fun z => modCharC_of_mem hr z)
+    rw [h]
+    exact Complex.differentiable_exp.comp
+      (((differentiable_const _).mul differentiable_id).mul (differentiable_const _))
+  · have h : (fun z => modCharC z r) = fun _ => (1 : ℂ) :=
+      funext (fun z => Set.piecewise_eq_of_notMem _ _ _ hr)
+    rw [h]; exact differentiable_const _
+
+/-- **The KMS boundary flip** `u_{z+i}(r) = u_z(r)·(r/(2−r))`: shifting the imaginary part by the inverse
+    temperature `β = 1` multiplies by the modular weight `r/(2−r) = exp(−log((2−r)/r))`.  This is the scalar
+    core of the modular KMS condition. -/
+theorem modCharC_kms_flip {r : ℝ} (hr : r ∈ Set.Ioo (0 : ℝ) 2) (z : ℂ) :
+    modCharC (z + Complex.I) r = modCharC z r * ((r / (2 - r) : ℝ) : ℂ) := by
+  obtain ⟨hr0, hr2⟩ := hr
+  have hpos : (0 : ℝ) < (2 - r) / r := by positivity
+  rw [modCharC_of_mem ⟨hr0, hr2⟩, modCharC_of_mem ⟨hr0, hr2⟩]
+  have hexp : Complex.I * (z + Complex.I) * (Real.log ((2 - r) / r) : ℂ)
+      = Complex.I * z * (Real.log ((2 - r) / r) : ℂ) + (-(Real.log ((2 - r) / r) : ℂ)) := by
+    linear_combination (Real.log ((2 - r) / r) : ℂ) * Complex.I_mul_I
+  rw [hexp, Complex.exp_add]
+  congr 1
+  rw [show (-(Real.log ((2 - r) / r) : ℂ)) = ((-Real.log ((2 - r) / r) : ℝ) : ℂ) by push_cast; ring,
+    ← Complex.ofReal_exp, Real.exp_neg, Real.exp_log hpos, inv_div]
+
 end QIQTH.StandardSubspaceModular
