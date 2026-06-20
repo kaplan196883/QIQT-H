@@ -3691,6 +3691,11 @@ namespace QIQTH.AxiomAudit
 -- ⟨w,V_t(gaussSmear)⟩=⟨w,gaussSmear⟩ ∀t. Chains corrC_real_on_axis (bottom) + corrC_top_edge_real_of_kms_match
 -- (top, Hadamard) ⟹ corrC_orbit_eq_of_edges_real. The ENTIRE analytic chain is now one axiom-free theorem;
 -- only producing f from StripKMSrvd at the RvD vectors (the labelled physics input) remains for V=Δ.
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_eq_of_orbit_inner
+-- expected: standard only — ★★★ TOP-LEVEL RvD Thm 3.8 ASSEMBLY (hUniq discharge modulo orbit identities):
+-- V and Δ^{it}=modUnitary both preserve 𝒦 AND both satisfy ⟨w,·_t η⟩=⟨w,η⟩ ∀η∈𝒦,∀w⊥i𝒦 ⇒ Δ^{it}=V_t.
+-- ⟨w,Δ^{it}η⟩=⟨w,η⟩=⟨w,V_t η⟩ + both∈𝒦 ⇒ (eq_of_mem_K_of_inner_perp_IK, IsSeparating) Δ^{it}η=V_t η on 𝒦 ⇒
+-- (clm_eq_of_eqOn_K, IsCyclic) Δ^{it}=V_t. Orbit identities = output of the KMS chain; 𝒦-inv = hUniq hyp.
 #print axioms QIQTH.StandardSubspaceModular.orbit_inner_eq_of_entire
 -- expected: standard only — ★★ DENSITY EXTENSION: ⟨w,V_t(gaussSmear V n η)⟩=⟨w,gaussSmear V n η⟩ ∀n>0 ⇒
 -- ⟨w,V_t η⟩=⟨w,η⟩. Scale by √(n/π) to entireVec, entireVec_tendsto (→η) + continuity of V_t,⟨w,·⟩. Resolves

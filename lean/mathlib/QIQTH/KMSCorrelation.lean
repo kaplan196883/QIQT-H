@@ -244,6 +244,28 @@ theorem operator_ext_inner_dense {A B : H →L[ℂ] H} {Dw Dx : Set H}
   exact Continuous.ext_on hDx A.continuous B.continuous
     (fun x hx => key (A x) (B x) (fun w hw => h w hw x hx))
 
+/-- **Top-level assembly of RvD Theorem 3.8** (the `hUniq` discharge, modulo the labelled orbit identities).
+    If `V` and the modular flow `Δ^{it} = modUnitary S` both **preserve `𝒦`** and both satisfy the *orbit
+    identity* `⟨w, ·_t η⟩ = ⟨w, η⟩` for every `η ∈ 𝒦` and every `w ⊥ i𝒦`, then `Δ^{it} = V_t`.  Proof: the two
+    orbit identities give `⟨w, Δ^{it} η⟩ = ⟨w, η⟩ = ⟨w, V_t η⟩` for all `w ⊥ i𝒦`, with both `Δ^{it} η, V_t η ∈
+    𝒦`; `eq_of_mem_K_of_inner_perp_IK` (totality, `𝒦 ∩ i𝒦 = {0}`) gives `Δ^{it} η = V_t η` on `𝒦`, and
+    `clm_eq_of_eqOn_K` (density, `𝒦 + i𝒦 = ⊤`) lifts to the operator identity.  The orbit identities are the
+    output of the verified KMS chain (`corrC_orbit_eq_of_kms_function` ∘ `orbit_inner_eq_of_entire`); the
+    `𝒦`-invariance is the standing `hUniq` hypothesis.  Only producing the KMS function `f` from
+    `StripKMSrvd` at the RvD vectors remains to make the orbit identities themselves theorems. -/
+theorem modUnitary_eq_of_orbit_inner (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} (t : ℝ)
+    (hVK : ∀ η ∈ S.toClosedSubmodule, V t η ∈ S.toClosedSubmodule)
+    (hΔK : ∀ η ∈ S.toClosedSubmodule, modUnitary S t η ∈ S.toClosedSubmodule)
+    (hVorbit : ∀ η ∈ S.toClosedSubmodule, ∀ w, projIK S w = 0 →
+      inner ℂ w (V t η) = inner ℂ w η)
+    (hΔorbit : ∀ η ∈ S.toClosedSubmodule, ∀ w, projIK S w = 0 →
+      inner ℂ w (modUnitary S t η) = inner ℂ w η) :
+    modUnitary S t = V t := by
+  refine clm_eq_of_eqOn_K S (fun η hη => ?_)
+  refine eq_of_mem_K_of_inner_perp_IK S ((mem_K_iff_projK S _).mp (hΔK η hη))
+    ((mem_K_iff_projK S _).mp (hVK η hη)) (fun w hw => ?_)
+  rw [hΔorbit η hη w hw, hVorbit η hη w hw]
+
 /-- **The Δ-side modular correlation is pinned by its boundary data** (RvD Theorem 3.8, the comparison
     target).  In the regular spectral regime `σ(R) ⊆ [a, 2−a]`, the strip extension `modCorrExt S ξ`
     (`= ⟨ξ, Δ^{it} ξ⟩` continued to the KMS strip) is bounded-holomorphic (`diffContOnCl_modCorrExt`,
