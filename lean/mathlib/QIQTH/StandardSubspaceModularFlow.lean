@@ -768,6 +768,16 @@ theorem modConj_rvdRC_modConj (S : StandardSubspace H) (ξ : H) :
     modConj S (rvdRC S (modConj S ξ)) = rvdTwoSubRC S ξ := by
   rw [modConj_rvdRC_reflect, modConj_sq]
 
+/-- **The square of `B = J R^{1/2} J` is `2 − R`**: `B(B ξ) = (2−R) ξ`, where `B ξ = J(R^{1/2}(J ξ))`.
+    The inner `J² = 1` (`modConj_sq`) collapses `B² ξ = J R^{1/2} (J J) R^{1/2} J ξ = J R^{1/2} R^{1/2} J ξ =
+    J R J ξ = (2−R) ξ` (`rvdSqrtR_mul_self` + `modConj_rvdRC_modConj`).  This is the `b·b = a` input to
+    `CFC.sqrt_unique`: once `B` is bundled as a ℂ-linear positive operator (it commutes with `i·` by
+    `modConj_smul_I` applied twice), square-root uniqueness yields `J R^{1/2} J = (2−R)^{1/2}` — the
+    sqrt-reflection underlying `J𝒦 = (i𝒦)^⊥`, reachable WITHOUT general antilinear CFC. -/
+theorem modConjSqrtR_sq (S : StandardSubspace H) (ξ : H) :
+    modConj S (rvdSqrtR S (modConj S (modConj S (rvdSqrtR S (modConj S ξ))))) = rvdTwoSubRC S ξ := by
+  rw [modConj_sq, ← ContinuousLinearMap.mul_apply, rvdSqrtR_mul_self, modConj_rvdRC_modConj]
+
 /-! ### Bounded Tomita fixedness for `ξ ∈ 𝒦`
 
   The second CGP spectral-balance prerequisite, in bounded form.  The Tomita operator `S = J Δ^{1/2}`

@@ -3620,6 +3620,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ 𝒦→H CAPSTONE: two continuous ℂ-linear A,B agreeing on 𝒦 agree everywhere.
 -- By ℂ-linearity also agree on i𝒦 (q∈i𝒦 ⇒ −i·q∈𝒦), hence on 𝒦+i𝒦 which is DENSE (IsCyclic 𝒦⊔i𝒦=⊤);
 -- continuity (Continuous.ext_on). Lifts V_t η=Δ^{it}η on 𝒦 (eq_of_mem_K_of_inner_perp_IK) to V_t=Δ^{it}.
+#print axioms QIQTH.StandardSubspaceModular.modConjSqrtR_sq
+-- expected: standard only — ★ B·B=2−R for B=J R^{½}J: B(Bξ)=(2−R)ξ. Inner J²=1 collapses
+-- J R^{½}(JJ)R^{½}J = J R^{½}R^{½}J = JRJ = 2−R (rvdSqrtR_mul_self + modConj_rvdRC_modConj). The b·b=a input
+-- to CFC.sqrt_unique: with B bundled ℂ-linear + positive ⇒ J R^{½}J=(2−R)^{½} WITHOUT general antilinear CFC.
 #print axioms QIQTH.StandardSubspaceModular.projIK_sub_projIK_self
 -- expected: standard only — (i𝒦)^⊥ SUPPLY: projIK(ξ−Qξ)=0 (Q idempotent). Every ker(projIK)=(i𝒦)^⊥ element
 -- is of this form, so the totality of (i𝒦)^⊥ against 𝒦 (eq_of_mem_K_of_inner_perp_IK) is fully populated.
