@@ -1347,6 +1347,23 @@ theorem gaussSmear_mem_K (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} 
   show projK S (Real.exp (-n * t ^ 2) • V t η) = Real.exp (-n * t ^ 2) • V t η
   rw [map_smul, (mem_K_iff_projK S (V t η)).mp (hinv t)]
 
+open MeasureTheory in
+/-- **The translation property of the smeared vector**: `V_s (gaussSmear V n η) = ∫ e^{−n t²}·V_{s+t} η dt`.
+    Applying the unitary `V_s` (a continuous linear map) commutes with the Bochner integral
+    (`integral_comp_comm`) and, via the group law, shifts the orbit.  After the change of variables
+    `u = s + t` the right side is `∫ e^{−n (u−s)²}·V_u η du`, whose integrand is *entire* in the parameter
+    `s` — this is what makes `gaussSmear V n η` an entire vector for `V` (RvD's key property toward
+    Theorem 3.8). -/
+theorem gaussSmear_smul_left {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hgrp : ∀ s t, V s (V t η) = V (s + t) η) (s : ℝ) :
+    V s (gaussSmear V n η) = ∫ t : ℝ, Real.exp (-n * t ^ 2) • V (s + t) η := by
+  rw [gaussSmear,
+    ← ContinuousLinearMap.integral_comp_comm (V s) (gaussSmear_integrable hn η hcont hbd)]
+  refine integral_congr_ae (Filter.Eventually.of_forall (fun t => ?_))
+  show V s (Real.exp (-n * t ^ 2) • V t η) = Real.exp (-n * t ^ 2) • V (s + t) η
+  rw [(V s).map_smul_of_tower (Real.exp (-n * t ^ 2)) (V t η), hgrp s t]
+
 /-! ### Analytic continuation of the modular character to the KMS strip
 
 The modular character `u_t(r) = exp(i·t·log((2−r)/r))` continues to an entire function of a *complex*

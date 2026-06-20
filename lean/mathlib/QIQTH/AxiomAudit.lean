@@ -3538,6 +3538,11 @@ namespace QIQTH.AxiomAudit
 -- ENTIRE-VECTOR construction (RvD Thm 3.8 operator half): Gaussian smearing into K.
 #print axioms QIQTH.StandardSubspaceModular.gaussSmear_integrable
 #print axioms QIQTH.StandardSubspaceModular.gaussSmear_mem_K
+#print axioms QIQTH.StandardSubspaceModular.gaussSmear_smul_left
+-- (gaussSmear_smul_left): V_s(gaussSmear V n η)=∫ e^{−n t²}•V_{s+t}η dt — V_s commutes with the Bochner integral
+-- (integral_comp_comm) + the group law shifts the orbit; after u=s+t the integrand is e^{−n(u−s)²}•V_u η,
+-- ENTIRE in s ⇒ gaussSmear is an entire vector for V (RvD's key property for Thm 3.8). Uses map_smul_of_tower
+-- (ℂ-linear V_s commutes with the ℝ-scalar Gaussian weight).
 -- expected: standard only — gaussSmear V n η = ∫ e^{−n t²}•V_t η dt. gaussSmear_integrable: Bochner-integrable
 -- (dominated by the Gaussian e^{−n t²}·‖η‖ via integrable_exp_neg_mul_sq, V_t norm-non-increasing + orbit
 -- continuous). gaussSmear_mem_K: ★ the smeared vector lands in the real subspace K — the ℝ-linear projection
