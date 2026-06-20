@@ -114,4 +114,35 @@ theorem boostUnitary_mapsTo_closure_span (a : ℝ) {S : Set (Lp ℂ 2 (volume : 
   mapsTo_closure_span
     ((boostUnitary a).toContinuousLinearEquiv.toContinuousLinearMap.restrictScalars ℝ) hS
 
+/-! ### Layer 1 — the right wedge is boost-invariant (the geometric foundation) -/
+
+/-- **The right wedge** `W_R = {z : z¹ > |z⁰|}` in 1+1D Minkowski `V = Fin 2 → ℝ` (index `0` = time,
+    `1` = space), written in light-cone form `z¹ − z⁰ > 0 ∧ z¹ + z⁰ > 0`. -/
+def rightWedge : Set V := {z | 0 < z 1 - z 0 ∧ 0 < z 1 + z 0}
+
+/-- **The right wedge is boost-invariant**: `lorentzBoost a` maps `W_R` into itself.  In light-cone
+    coordinates `z± = z¹ ± z⁰` the boost acts by the positive scalings `z⁻ ↦ e^{−a}z⁻`, `z⁺ ↦ e^{a}z⁺`,
+    so positivity of both is preserved.  This is why the wedge generating set of test functions is
+    boost-closed, hence `𝒦_W` is boost-invariant. -/
+theorem lorentzBoost_mapsTo_rightWedge (a : ℝ) :
+    Set.MapsTo (lorentzBoost a) rightWedge rightWedge := by
+  rintro z ⟨h1, h2⟩
+  have hcs : Real.cosh a - Real.sinh a = Real.exp (-a) := by
+    rw [Real.cosh_eq, Real.sinh_eq]; ring
+  have hca : Real.cosh a + Real.sinh a = Real.exp a := by
+    rw [Real.cosh_eq, Real.sinh_eq]; ring
+  refine ⟨?_, ?_⟩
+  · simp only [rightWedge, Set.mem_setOf_eq, lorentzBoost_zero, lorentzBoost_one]
+    have hrw : (Real.sinh a * z 0 + Real.cosh a * z 1) - (Real.cosh a * z 0 + Real.sinh a * z 1)
+        = (Real.cosh a - Real.sinh a) * (z 1 - z 0) := by ring
+    rw [hrw, hcs]
+    have := Real.exp_pos (-a)
+    positivity
+  · simp only [rightWedge, Set.mem_setOf_eq, lorentzBoost_zero, lorentzBoost_one]
+    have hrw : (Real.sinh a * z 0 + Real.cosh a * z 1) + (Real.cosh a * z 0 + Real.sinh a * z 1)
+        = (Real.cosh a + Real.sinh a) * (z 1 + z 0) := by ring
+    rw [hrw, hca]
+    have := Real.exp_pos a
+    positivity
+
 end QIQTH.Fock.OneParticleBW

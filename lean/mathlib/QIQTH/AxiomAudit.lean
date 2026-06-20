@@ -3409,6 +3409,11 @@ namespace QIQTH.AxiomAudit
 -- boostUnitary via toContinuousLinearEquiv.toContinuousLinearMap.restrictScalars ℝ. This is the V(a)𝒦=𝒦
 -- the KMS-uniqueness route consumes. Axiom-free. (Remaining: KMS-uniqueness lemma [real functional analysis]
 -- + wedge generating set + the labelled strip input Hyp_strip_Krep [irreducible AQFT, BGL §4].)
+#print axioms QIQTH.Fock.OneParticleBW.lorentzBoost_mapsTo_rightWedge
+-- expected: standard only — GEOMETRIC FOUNDATION: the right wedge W_R={z:z¹>|z⁰|} (light-cone form
+-- z¹−z⁰>0 ∧ z¹+z⁰>0) in 1+1D Minkowski is BOOST-INVARIANT (lorentzBoost a maps W_R into itself). In
+-- light-cone coords the boost scales z⁻↦e^{−a}z⁻, z⁺↦e^{a}z⁺ (cosh∓sinh=e^{∓a}), preserving positivity.
+-- This is WHY the wedge generating set {KrepL2 f : supp f⊆W_R} is boost-closed ⇒ 𝒦_W boost-invariant. Axiom-free.
 -- (relEntropy_nonneg) DERIVE the differential area law δS=ηδA, which with the two CITED inputs (hFlux=Bisognano–
 -- Wichmann boost flux, hFocus=Raychaudhuri focusing) + structural (Lorentzian congruence g=PᵀηP, ∇·T=0,
 -- f-regularity) ⇒ ∃Λ, a·T=G+Λg (genuine Einstein tensor, constant Λ) via jacobson_einstein_equation_of_state.
