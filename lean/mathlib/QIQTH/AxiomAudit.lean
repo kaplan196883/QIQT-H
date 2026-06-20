@@ -3496,6 +3496,16 @@ namespace QIQTH.AxiomAudit
 -- hasDerivAt_inner_boostUnitary_imaginary modulo the SINGLE scalar identification hTkk:(2π/ℏ)T_kk=boost energy
 -- (conserved boost Killing charge = stress-tensor flux). So the whole boost-charge slot reduces to ONE real
 -- equation; everything operator/analytic is machine-checked. Pins the irreducible labelled remainder of input #1.
+-- KMS STRIP-UNIQUENESS (StripUniqueness.lean): the analytic core of the labelled KMS-uniqueness (hUniq) — the
+-- "Hardy-strip infrastructure Mathlib does not yet have," now assembled from Mathlib's Phragmén–Lindelöf.
+#print axioms QIQTH.StripUniqueness.eqOn_of_bdd_holomorphic_strip
+#print axioms QIQTH.StripUniqueness.kms_correlation_boundary_determined
+-- expected: standard only — eqOn_of_bdd_holomorphic_strip: ★ two bounded functions holomorphic on the open KMS
+-- strip {0<Im<1}, continuous to the closure, AGREEING ON BOTH EDGES (Im=0 and Im=1), agree on the whole closed
+-- strip — via PhragmenLindelof.eqOn_horizontal_strip (bounded ⇒ the sub-double-exp growth bound with c=0,B=0).
+-- kms_correlation_boundary_determined: restated for the modular setting — a KMS two-point correlation is pinned
+-- by its real-axis values F(t) and its KMS-flipped top-edge values F(t+i). This is the analytic heart of
+-- one-particle KMS-uniqueness; the remaining hUniq discharge is the Borchers/Florig group-equality reduction.
 -- expected: standard only — boostUnitary_eq_vadd: boostUnitary t = DomAddAct.mk(−t)+ᵥ· (the project boost group IS
 -- Mathlib's canonical Lp domain-translation; unitary_apply precomposes with flow(−t) ⇒ ξ(x−t), matches mk(−t)+ᵥξ via
 -- add_comm + Equiv.symm_apply_apply). continuous_boostUnitary_apply: ★ STRONG CONTINUITY t↦boostUnitary t ξ, from
