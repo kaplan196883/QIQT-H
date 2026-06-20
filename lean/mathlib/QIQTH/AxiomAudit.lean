@@ -3448,5 +3448,34 @@ namespace QIQTH.AxiomAudit
 -- S=ηA). CITED (Mathlib-unprovable, explicit labelled hyps NEVER axioms): hFlux (Type III₁ wedge-modular=boost,
 -- BW) + hFocus (Raychaudhuri) + structural + per-generator path differentiability (modelling). All geometry
 -- (Bianchi/∇·G=0/null-cone→tensor/Λ=const) machine-checked axiom-free. Verified: no sorry, no vacuous True hyps.
+#print axioms QIQTH.Fock.OneParticleBW.modularEnergy_eq_stressFlux
+-- expected: standard only — modular energy = (2π/ℏ)·T_kk at the Hilbert level: from BW (hasDerivAt_modularEnergy_of_
+-- boost, modular energy = boost energy) + hBoostCharge (boost-charge=stress-flux). NOTE the derivative is i·(real):
+-- for a unitary group d/dt⟪ξ,U(t)ξ⟫=i·⟨ξ,Kξ⟩ is PURELY IMAGINARY — stated correctly as Complex.I*((2π/ℏ·T_kk):ℂ),
+-- so hBoostCharge is physically SATISFIABLE (non-vacuous). An earlier real-valued form was vacuous; fixed.
+#print axioms QIQTH.Fock.OneParticleBW.oneParticle_hFlux
+-- expected: standard only — ★★★ the one-particle hFlux fully assembled from labelled inputs: hcarrier/standardness
+-- (Reeh–Schlieder), hUniq (KMS-uniqueness BGL §2), hStrip (wedge strip/KMS BGL §4), hBoostCharge (boost-charge=
+-- stress-flux). Derives EVERYTHING modular inside: boost-invariance of 𝒦_W, modUnitary 𝒦_W=boostUnitary (BW), and
+-- modular energy=boost energy ⇒ d/dt⟪ξ,Δ^{it}ξ⟫=i·(2π/ℏ)T_kk. = hFlux at the Hilbert level. Axiom-free.
+#print axioms QIQTH.Fock.OneParticleBW.component_hFlux_of_wedgeKMS
+-- expected: standard only — ★★★ the one-particle↔COMPONENT bridge: from the wedge-KMS inputs + hBoostCharge +
+-- hbridge (the localization identity HasDerivAt(⟪ξ,Δ^{it}ξ⟫)(i·kd) — "the null-generator modular energy IS the
+-- one-particle modular energy of ξ_{x,v}"), oneParticle_hFlux pins the SAME correlation's derivative to i·(2π/ℏ)T_kk;
+-- HasDerivAt.unique + cancel I (Complex.I_ne_zero) + real-cast inj ⇒ kd=(2π/ℏ)T_kk — the chain's REAL component
+-- hFlux, derived. So hFlux's whole modular surface (BW, modular=boost energy, real-coeff descent) is DERIVED. Axiom-free.
+-- ★ WEDGE-KMS ⇒ GR (WedgeKMSToGR.lean): hFlux consolidated into the single labelled wedge KMS property.
+#print axioms QIQTH.WedgeKMSToGR.hFlux_of_wedgeKMS
+-- expected: standard only — the boost heat-flux hFlux DERIVED from WedgeKMSFlux (per null generator, unpack the
+-- wedge-KMS bundle + feed component_hFlux_of_wedgeKMS) ⇒ kd=(2π/ℏ)BL(T x)v. hFlux is now derived from the labelled
+-- wedge KMS property, not assumed. Axiom-free.
+#print axioms QIQTH.WedgeKMSToGR.qiqt_gr_from_wedge_kms
+-- expected: standard only — ★★★ THE GOAL THEOREM. Einstein's eqs from QIQT-H capacity postulate + Klein positivity
+-- modulo EXACTLY THREE labelled physics inputs: (1) the wedge KMS property hKMS (WedgeKMSFlux — standardness +
+-- KMS-uniqueness + strip + localized boost-charge=stress-flux + per-generator state), which DERIVES hFlux via
+-- hFlux_of_wedgeKMS; (2) matter conservation conserv (∇·(a·T)=0); (3) standard structural regularity (Lorentzian
+-- congruence g=PᵀηP, Raychaudhuri focusing hFocus = kinematics, f-regularity hreg, per-generator differentiability).
+-- QIQT supplies bound+saturation+Klein as THEOREMS ⇒ δS=ηδA derived; all geometry axiom-free. = qiqt_bekenstein_
+-- gives_gr with hFlux replaced by the derived wedge-KMS flux. Verified: no sorry, no vacuous True hyps. Axiom-free.
 
 end QIQTH.AxiomAudit

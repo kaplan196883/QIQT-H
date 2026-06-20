@@ -378,4 +378,46 @@ theorem oneParticle_hFlux (m : ℝ)
     exact hVboost t u
   exact modularEnergy_eq_stressFlux S hbw ξ hbar Tkk hBoostCharge
 
+/-! ### The one-particle ↔ component bridge — landing `hFlux` at the chain's real component level -/
+
+/-- **★★★ The component-level `hFlux`, derived from the wedge-KMS property + the standard localization.**
+    This is the bridge from the one-particle (Hilbert) `hFlux` to the *real, component-level* `hFlux`
+    `kd = (2π/ℏ)·T_kk` that `qiqt_bekenstein_gives_gr` actually consumes per null generator.
+
+    The chain's modular-energy derivative `kd : ℝ` is, physically, the imaginary-derivative coefficient of
+    the localized correlation `t ↦ ⟪ξ, Δ^{it} ξ⟫` (for a unitary group the derivative is `i·(real energy)`).
+    `hbridge` is exactly that labelled localization identity — "the chain's null-generator modular energy IS
+    the one-particle modular energy of the wedge state `ξ = ξ_{x,v}`."  Given it together with the
+    wedge-KMS inputs and the boost-charge identity, `oneParticle_hFlux` pins the same correlation's
+    derivative to `i·(2π/ℏ)·T_kk`; uniqueness of the derivative (`HasDerivAt.unique`) then forces
+    `i·kd = i·(2π/ℏ)·T_kk`, and cancelling `i` + real-cast injectivity gives the component identity
+    `kd = (2π/ℏ)·T_kk`.
+
+    So the entire modular surface of `hFlux` — the BW identification, modular-energy = boost-energy, and
+    the descent to the real component coefficient — is **derived**, resting only on the labelled wedge-KMS
+    property (`hUniq`,`hStrip`,standardness), the boost-charge = stress-flux identity (`hBoostCharge`), and
+    the localization identity (`hbridge`).  All three belong to the single "wedge KMS property + its
+    standard localization" input.  No Lean axioms. -/
+theorem component_hFlux_of_wedgeKMS (m : ℝ)
+    (S : StandardSubspace (Lp ℂ 2 (volume : Measure ℝ)))
+    (V : ℝ → (Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ))) {D : Set _}
+    (hcarrier : (S.toClosedSubmodule : Set (Lp ℂ 2 (volume : Measure ℝ)))
+        = closure (Submodule.span ℝ (wedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ))))
+    (hVboost : ∀ t x, V t x = boostUnitary (-(2 * Real.pi * t)) x)
+    (hUniq : (∀ t, Set.MapsTo (V t) (S.toClosedSubmodule : Set _) (S.toClosedSubmodule : Set _)) →
+             StripKMS V D → ∀ t, QIQTH.StandardSubspaceModular.modUnitary S t = V t)
+    (hStrip : StripKMS V D)
+    (ξ : Lp ℂ 2 (volume : Measure ℝ)) (hbar kd Tkk : ℝ)
+    (hBoostCharge : HasDerivAt (fun t : ℝ => inner ℂ ξ (boostUnitary (-(2 * Real.pi * t)) ξ))
+        (Complex.I * ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ)) 0)
+    (hbridge : HasDerivAt (fun t : ℝ => inner ℂ ξ (QIQTH.StandardSubspaceModular.modUnitary S t ξ))
+        (Complex.I * ((kd : ℝ) : ℂ)) 0) :
+    kd = 2 * Real.pi / hbar * Tkk := by
+  have hHil := oneParticle_hFlux m S V hcarrier hVboost hUniq hStrip ξ hbar Tkk hBoostCharge
+  have huniq : Complex.I * ((kd : ℝ) : ℂ) = Complex.I * ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ) :=
+    hbridge.unique hHil
+  have hcast : ((kd : ℝ) : ℂ) = ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ) :=
+    mul_left_cancel₀ Complex.I_ne_zero huniq
+  exact_mod_cast hcast
+
 end QIQTH.Fock.OneParticleBW

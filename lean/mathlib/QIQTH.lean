@@ -171,6 +171,7 @@ import QIQTH.ThreeQubitUniverse
 import QIQTH.RecordContract
 import QIQTH.DifferentialAreaLaw
 import QIQTH.QiqtToGR
+import QIQTH.WedgeKMSToGR
 -- Born FROM PROJECTORS: the operator bridge grounding the record/area contract. For a
 -- finite orthogonal PVM {P_r} and a normalized Φ, μ(r)=‖P_r Φ‖²=⟨Φ,P_rΦ⟩ is a genuine
 -- RecordContract.RecordLaw — so the contract rests on Born-from-Φ, not a toy distribution.
