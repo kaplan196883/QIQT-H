@@ -2240,4 +2240,52 @@ theorem modCharC_norm_le {a r : ℝ} (ha0 : 0 < a) (ha1 : a ≤ 1) (hr1 : a ≤ 
   calc Real.exp (-z.im * L) ≤ Real.exp M := Real.exp_le_exp.mpr hkey
     _ = (2 - a) / a := by rw [hMdef, Real.exp_log (div_pos (by linarith) ha0)]
 
+/-! ### The RvD Proposition 3.7 device character (bounded on the half-strip with no regular window)
+
+`modCorrExt`/`modCharC` are bounded on the KMS strip only in the *regular* regime `σ(R) ⊆ [a, 2−a]`, because
+`u_z(r) = ((2−r)/r)^{iz}` blows up as `r → 0, 2`.  RvD's Proposition 3.7 *device* multiplies by `√r` (the `+1/2`
+in `R^{−iz+1/2}`), and this **exactly** tames the singularity: the device character `d_z(r) = u_z(r)·√r` is
+bounded by `√2` on the *whole* half-strip `{−1/2 ≤ Im z ≤ 0}`, uniformly over `r ∈ (0,2)`, for ANY standard
+subspace.  This is the scalar core of the genuine U-side continuation `(2−R)^{iz}R^{−iz+1/2}ζ = d_z(R)ζ`. -/
+
+/-- The **device character** `d_z(r) = ((2−r)/r)^{iz}·√r = modCharC z r · √r` (RvD Prop 3.7). -/
+noncomputable def devChar (z : ℂ) (r : ℝ) : ℂ := modCharC z r * (Real.sqrt r : ℂ)
+
+/-- The device character is Borel measurable in `r` (for fixed `z`). -/
+theorem measurable_devChar (z : ℂ) : Measurable (devChar z) :=
+  (measurable_modCharC z).mul
+    (Complex.continuous_ofReal.measurable.comp Real.continuous_sqrt.measurable)
+
+/-- On the real axis the device character is `modChar t · √r` (the `Δ^{it}·√R` part of the continuation). -/
+theorem devChar_ofReal (t : ℝ) (r : ℝ) : devChar (t : ℂ) r = modChar t r * (Real.sqrt r : ℂ) := by
+  rw [devChar, modCharC_ofReal]
+
+/-- **The device character is entire** in `z` for each fixed `r` (product of the entire `modCharC` with a
+    `z`-constant). -/
+theorem differentiable_devChar (r : ℝ) : Differentiable ℂ (fun z => devChar z r) :=
+  fun z => ((differentiable_modCharC r z).mul_const _)
+
+/-- **The device character is bounded by `√2` on the half-strip** `{−1/2 ≤ Im z ≤ 0}`, uniformly over the
+    spectrum `r ∈ (0,2)` — with NO regular-window assumption (RvD Lemma 3.6 / Prop 3.7).  Writing `b = −Im z ∈
+    [0, 1/2]`, `‖d_z(r)‖ = exp(b·log((2−r)/r))·√r`; in log form `b·log(2−r) + (1/2 − b)·log r ≤ (1/2)·log 2`
+    since `log(2−r), log r ≤ log 2` and the coefficients `b, 1/2 − b` are nonnegative and sum to `1/2`.  The
+    `√r` factor (the `+1/2` exponent of `R^{−iz+1/2}`) is exactly what cancels the `r^{−iz}` blow-up, so the
+    device continuation is *bounded*-holomorphic on the half-strip for ANY standard subspace — the U-side
+    boundedness the strip-uniqueness comparison consumes. -/
+theorem devChar_norm_le {z : ℂ} (hz2 : z.im ≤ 0) (hz1 : -(1 / 2 : ℝ) ≤ z.im) {r : ℝ}
+    (hr : r ∈ Set.Ioo (0 : ℝ) 2) : ‖devChar z r‖ ≤ Real.sqrt 2 := by
+  obtain ⟨hr0, hr2⟩ := hr
+  have h2r : (0 : ℝ) < 2 - r := by linarith
+  rw [devChar, norm_mul, modCharC_norm ⟨hr0, hr2⟩, Complex.norm_real, Real.norm_eq_abs,
+    abs_of_nonneg (Real.sqrt_nonneg r)]
+  have e1 : Real.sqrt r = Real.exp (Real.log r * (1 / 2)) := by
+    rw [Real.sqrt_eq_rpow, Real.rpow_def_of_pos hr0]
+  have e2 : Real.sqrt 2 = Real.exp (Real.log 2 * (1 / 2)) := by
+    rw [Real.sqrt_eq_rpow, Real.rpow_def_of_pos (by norm_num)]
+  rw [e1, e2, ← Real.exp_add, Real.exp_le_exp, Real.log_div (by linarith) (ne_of_gt hr0)]
+  have h1 : Real.log (2 - r) ≤ Real.log 2 := Real.log_le_log h2r (by linarith)
+  have h2 : Real.log r ≤ Real.log 2 := Real.log_le_log hr0 (by linarith)
+  nlinarith [mul_le_mul_of_nonneg_left h1 (by linarith : (0 : ℝ) ≤ -z.im),
+    mul_le_mul_of_nonneg_left h2 (by linarith : (0 : ℝ) ≤ 1 / 2 + z.im)]
+
 end QIQTH.StandardSubspaceModular

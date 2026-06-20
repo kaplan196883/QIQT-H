@@ -3868,6 +3868,16 @@ namespace QIQTH.AxiomAudit
 -- real axis). modCharC_norm_le: in the REGULAR regime r∈[a,2−a] (0<a≤1) and z in the strip (0≤Im z≤1),
 -- ‖u_z(r)‖≤(2−a)/a — the uniform BOUND that makes z↦∫u_z dμ^R_ξ a BOUNDED holomorphic strip extension of
 -- ⟪ξ,Δ^{it}ξ⟫ (the hypothesis strip-uniqueness consumes). Boundedness seed for the spectral-integral lift.
+#print axioms QIQTH.StandardSubspaceModular.devChar_norm_le
+-- expected: standard only — ★★★ RvD Prop 3.7 DEVICE CHARACTER bound, NO regular window. d_z(r)=u_z(r)·√r =
+-- ((2−r)/r)^{iz}·√r (=modCharC z r·√r). On the HALF strip {−1/2≤Im z≤0}: ‖d_z(r)‖≤√2 UNIFORMLY over ALL
+-- r∈(0,2) — the √r factor (the +1/2 in R^{−iz+1/2}) EXACTLY cancels the r^{−iz} blow-up at r→0,2. Log form:
+-- b·log(2−r)+(1/2−b)·log r ≤ (1/2)log2 (b=−Im z∈[0,1/2]; coeffs nonneg, sum 1/2; log(2−r),log r≤log2). This is
+-- the scalar core of the genuine U-side continuation (2−R)^{iz}R^{−iz+1/2}ζ=d_z(R)ζ, bounded-holomorphic on
+-- the half-strip for ANY standard subspace (unlike modCorrExt which needs σ(R)⊆[a,2−a]). devChar/measurable_devChar/
+-- devChar_ofReal/differentiable_devChar: the device char is entire in z, Borel in r, =modChar t·√r on the axis.
+#print axioms QIQTH.StandardSubspaceModular.differentiable_devChar
+#print axioms QIQTH.StandardSubspaceModular.measurable_devChar
 -- SPECTRAL-INTEGRAL STRIP EXTENSION (ModularRelativeEntropy.lean): F_ξ(z)=∫u_z dμ^R_ξ + its boundary data.
 #print axioms QIQTH.modCorrExt_ofReal
 #print axioms QIQTH.modCorrExt_kms_flip
