@@ -309,4 +309,23 @@ theorem secondQuantModFlowH_acts_as_boost
           (QIQTH.Fock.secondQuantModFlowH S t x) := by
   rw [QIQTH.Fock.secondQuantModFlowH_weylH, hbw t u]
 
+/-- **★ Modular energy = boost energy (derivative level), via BW.**  Given the one-particle BW
+    `modUnitary S t u = boostUnitary(−2π t) u`, the modular-energy correlation `t ↦ ⟪ξ, Δ^{it} ξ⟫`
+    coincides with the boost-energy correlation `t ↦ ⟪ξ, boostUnitary(−2π t) ξ⟫` as functions of `t`, so
+    their derivatives at `0` agree.  The modular energy `kd = d/dt⟪ξ,Δ^{it}ξ⟫|₀` (the object feeding
+    `hFlux`) therefore equals the boost energy derivative — reducing `hFlux` (modular energy = stress
+    flux) to the standard **boost-charge = stress-flux** identity `δ⟨boost⟩ = ∫λ T_kk`, the one remaining
+    labelled geometric fact.  No unbounded generator needed: the equality is a direct congruence from BW. -/
+theorem hasDerivAt_modularEnergy_of_boost
+    (S : StandardSubspace (Lp ℂ 2 (volume : Measure ℝ)))
+    (hbw : ∀ (t : ℝ) (u : Lp ℂ 2 (volume : Measure ℝ)),
+        QIQTH.StandardSubspaceModular.modUnitary S t u = boostUnitary (-(2 * Real.pi * t)) u)
+    (ξ : Lp ℂ 2 (volume : Measure ℝ)) (c : ℂ)
+    (h : HasDerivAt (fun t : ℝ => inner ℂ ξ (boostUnitary (-(2 * Real.pi * t)) ξ)) c 0) :
+    HasDerivAt (fun t : ℝ => inner ℂ ξ (QIQTH.StandardSubspaceModular.modUnitary S t ξ)) c 0 := by
+  have heq : (fun t : ℝ => inner ℂ ξ (QIQTH.StandardSubspaceModular.modUnitary S t ξ))
+      = (fun t : ℝ => inner ℂ ξ (boostUnitary (-(2 * Real.pi * t)) ξ)) := by
+    funext t; rw [hbw t ξ]
+  rw [heq]; exact h
+
 end QIQTH.Fock.OneParticleBW
