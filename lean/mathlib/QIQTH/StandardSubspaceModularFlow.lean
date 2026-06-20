@@ -2288,4 +2288,19 @@ theorem devChar_norm_le {z : ℂ} (hz2 : z.im ≤ 0) (hz1 : -(1 / 2 : ℝ) ≤ z
   nlinarith [mul_le_mul_of_nonneg_left h1 (by linarith : (0 : ℝ) ≤ -z.im),
     mul_le_mul_of_nonneg_left h2 (by linarith : (0 : ℝ) ≤ 1 / 2 + z.im)]
 
+/-- **The device character is bounded by `√2` on the CLOSED interval `[0,2]`** (the spectrum-ready strengthening
+    of `devChar_norm_le`).  On the open interior `(0,2)` this is `devChar_norm_le`; at the endpoints `r ∈ {0,2}`
+    the modular character collapses to `1` (`r ∉ (0,2)`), so `d_z(r) = √r` with `‖d_z(r)‖ = √r ≤ √2`.  In
+    particular `d_z(0) = 0` (the `√r` factor kills the `r → 0` singularity outright).  Since `0 ≤ R ≤ 2`, the
+    spectrum of `R` lies in `[0,2]`, so this is the bound the `borelFC` construction of the operator device
+    vector `(2−R)^{iz}R^{−iz+1/2}ζ = d_z(R)ζ` consumes. -/
+theorem devChar_norm_le_Icc {z : ℂ} (hz2 : z.im ≤ 0) (hz1 : -(1 / 2 : ℝ) ≤ z.im) {r : ℝ}
+    (hr : r ∈ Set.Icc (0 : ℝ) 2) : ‖devChar z r‖ ≤ Real.sqrt 2 := by
+  by_cases h : r ∈ Set.Ioo (0 : ℝ) 2
+  · exact devChar_norm_le hz2 hz1 h
+  · have hm : modCharC z r = 1 := Set.piecewise_eq_of_notMem _ _ _ h
+    rw [devChar, hm, one_mul, Complex.norm_real, Real.norm_eq_abs,
+      abs_of_nonneg (Real.sqrt_nonneg r)]
+    exact Real.sqrt_le_sqrt hr.2
+
 end QIQTH.StandardSubspaceModular

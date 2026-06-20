@@ -3876,6 +3876,11 @@ namespace QIQTH.AxiomAudit
 -- the scalar core of the genuine U-side continuation (2−R)^{iz}R^{−iz+1/2}ζ=d_z(R)ζ, bounded-holomorphic on
 -- the half-strip for ANY standard subspace (unlike modCorrExt which needs σ(R)⊆[a,2−a]). devChar/measurable_devChar/
 -- devChar_ofReal/differentiable_devChar: the device char is entire in z, Borel in r, =modChar t·√r on the axis.
+#print axioms QIQTH.StandardSubspaceModular.devChar_norm_le_Icc
+-- expected: standard only — ★★ DEVICE CHARACTER bound on CLOSED [0,2] (spectrum-ready strengthening). Interior
+-- (0,2): devChar_norm_le. Endpoints r∈{0,2}: modCharC z r=1 (r∉(0,2)) ⇒ d_z(r)=√r, ‖·‖=√r≤√2; d_z(0)=0 (√r
+-- kills the r→0 singularity). Since 0≤R≤2 (rvdRC_nonneg, rvdR_le_two) spectrum(R)⊆[0,2], so this is the bound
+-- the borelFC construction of the operator device vector (2−R)^{iz}R^{−iz+1/2}ζ=d_z(R)ζ will consume.
 #print axioms QIQTH.StandardSubspaceModular.differentiable_devChar
 #print axioms QIQTH.StandardSubspaceModular.measurable_devChar
 -- SPECTRAL-INTEGRAL STRIP EXTENSION (ModularRelativeEntropy.lean): F_ξ(z)=∫u_z dμ^R_ξ + its boundary data.
