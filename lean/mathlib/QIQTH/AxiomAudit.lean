@@ -3434,6 +3434,14 @@ namespace QIQTH.AxiomAudit
 -- wedgeSubspace: boostUnitary a maps closure(span ℝ wedgeGenSet)=𝒦_W into itself — the PHYSICALLY-defined wedge
 -- subspace (NOT from modular data), boost-invariant, axiom-free. Soft geometric layer of the one-particle BW
 -- COMPLETE; remaining = KMS-uniqueness lemma (formalizable) + labelled strip input Hyp_strip_Krep (irreducible AQFT).
+#print axioms QIQTH.Fock.OneParticleBW.stripKMS_trivial
+-- expected: standard only — ★★★ SOUNDNESS AUDIT: StripKMS is TRIVIALLY satisfiable for ANY V (given Dense D)!
+-- The witness F is only DifferentiableOn the OPEN strip with boundary VALUES imposed pointwise (no continuity
+-- linking interior↔boundary), so F≡0 on the open strip + overriding the two boundary lines satisfies it. ⇒ the
+-- labelled hStrip of oneParticleBW_of_kms/_wedge is VACUOUS, and the only real content (hUniq with trivial
+-- StripKMS) asserts "invariance ⟹ V=Δ^{it}" — FALSE. The current StripKMS is mis-stated (too weak); the honest
+-- fix is DiffContOnCl+bounded (now available via diffContOnCl_modCorrExt/modCorrExt_norm_le) + the Δ-WEIGHTED
+-- top edge F(t+i)=∫modChar t·(ω/(2−ω))dμ (modCorrExt_kms_flip), NOT the plain flip. Defect recorded machine-checked.
 #print axioms QIQTH.Fock.OneParticleBW.oneParticleBW_of_kms
 -- expected: standard only — ★ CONDITIONAL ONE-PARTICLE BISOGNANO–WICHMANN (KMS-uniqueness route, gpt-5-pro
 -- verdict: KMS-uniqueness is NOT provable in current Mathlib — needs unbounded Tomita/Hardy-strip, months —

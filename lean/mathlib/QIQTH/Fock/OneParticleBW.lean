@@ -475,6 +475,35 @@ def StripKMS (V : ℝ → (H →L[ℂ] H)) (D : Set H) : Prop :=
     (∀ t : ℝ, F t = inner ℂ ξ (V t η)) ∧
     (∀ t : ℝ, F ((t : ℂ) + Complex.I) = inner ℂ η (V t ξ))
 
+/-- **★ SOUNDNESS AUDIT — `StripKMS` as defined is TRIVIALLY satisfiable, hence too weak to be the KMS
+    condition.**  Because the witness `F` is required to be holomorphic only on the *open* strip while the
+    boundary values at `Im = 0` and `Im = 1` are imposed *pointwise* (with no continuity linking interior to
+    boundary), one may take `F ≡ 0` on the open strip and simply *override* its values on the two boundary
+    lines.  So `StripKMS V D` holds for **every** unitary family `V` (given only that `D` is dense).
+
+    Consequence: the labelled `hStrip` of `oneParticleBW_of_kms`/`oneParticleBW_wedge` is vacuous, so the
+    *only* real content there is the `hUniq` hypothesis — which, with a trivially-true `StripKMS`, asserts
+    "invariance ⟹ V = Δ^{it}", a FALSE statement (many `𝒦`-invariant unitary groups are not the modular
+    flow).  The honest fix is to strengthen `StripKMS` to a *bounded, continuous-to-the-closure* holomorphic
+    extension (`DiffContOnCl` + a uniform bound — the regularity now available via
+    `diffContOnCl_modCorrExt`/`modCorrExt_norm_le`) and to use the correct **Δ-weighted** top edge
+    (`modCorrExt_kms_flip`: `F(t+i) = ∫ modChar t (ω)·(ω/(2−ω)) dμ`), not the plain flip.  This theorem
+    records the defect, machine-checked, so the one-particle BW conditional is not read as resting on a
+    genuine analytic fact while `StripKMS` stands as written. -/
+theorem stripKMS_trivial {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
+    (V : ℝ → (H →L[ℂ] H)) {D : Set H} (hD : Dense D) : StripKMS V D := by
+  refine ⟨hD, fun ξ _ η _ => ⟨fun z => if z.im = 0 then inner ℂ ξ (V z.re η)
+      else if z.im = 1 then inner ℂ η (V z.re ξ) else 0, ?_, ?_, ?_⟩⟩
+  · refine (differentiableOn_const (0 : ℂ)).congr (fun z hz => ?_)
+    obtain ⟨h0, h1⟩ := hz
+    rw [if_neg (ne_of_gt h0), if_neg (ne_of_lt h1)]
+  · intro t
+    simp only [Complex.ofReal_im, Complex.ofReal_re, ↓reduceIte]
+  · intro t
+    have him : ((t : ℂ) + Complex.I).im = 1 := by simp
+    have hre : ((t : ℂ) + Complex.I).re = t := by simp
+    simp only [him, hre, one_ne_zero, ↓reduceIte]
+
 /-- **★ Conditional one-particle Bisognano–Wichmann (KMS-uniqueness route).**  For a standard subspace
     `S` and a strongly-continuous unitary group `V`, GIVEN the two labelled AQFT facts that current
     Mathlib cannot prove (kept as explicit hypotheses, NEVER Lean axioms):
