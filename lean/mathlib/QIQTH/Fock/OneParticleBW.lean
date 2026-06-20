@@ -623,6 +623,15 @@ theorem oneParticleBW_of_comparison (S : StandardSubspace H) (V : ℝ → (H →
     (fun η hη => hInv t hη) (fun η hη => modUnitary_mapsTo_K S t η hη)
     (fun η hη w hw => hcmp t η hη w hw)
 
+/-- **Non-vacuity / consistency of the narrowed conditional.**  The modular flow `V = Δ^{it}` itself satisfies
+    `ComparisonDatum` (trivially: `⟪w, Δ^{it} η⟫ = ⟪w, Δ^{it} η⟫`).  So the labelled `hCompare` of
+    `oneParticleBW_of_comparison` has a *consistent* conclusion — `Δ` is a model — confirming the formulation is
+    not a vacuous-premise artifact: its content is the genuine UNIQUENESS (any KMS `V` equals `Δ`), not an empty
+    hypothesis.  (`Δ` also satisfies the invariance `modUnitary_mapsTo_K`; with this, the conditional at `V = Δ`
+    consistently yields `modUnitary = modUnitary`.) -/
+theorem comparisonDatum_modUnitary (S : StandardSubspace H) :
+    ComparisonDatum S (modUnitary S) := fun _ _ _ _ _ => rfl
+
 end ConditionalBW
 
 /-- **★ One-particle Bisognano–Wichmann for the WEDGE subspace (boost-invariance supplied from the

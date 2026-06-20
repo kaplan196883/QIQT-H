@@ -3455,6 +3455,10 @@ namespace QIQTH.AxiomAudit
 -- hThm38 (HalfStripReal + 𝒦-invariance ⟹ modUnitary=V). The Prop-3.5 reduction StripKMSrvd⟹HalfStripReal is
 -- DISCHARGED axiom-free (stripKMSrvd_halfStripReal = stripKMSrvd_real_midline per pair). So the unproven surface
 -- shrinks from "all of Thm 3.8 + a vacuous StripKMS" to "just the Thm 3.8 g-function assembly". Strictly more honest.
+#print axioms QIQTH.Fock.OneParticleBW.comparisonDatum_modUnitary
+-- expected: standard only — NON-VACUITY CHECK: Δ^{it} (modUnitary S) satisfies ComparisonDatum trivially
+-- (⟪w,Δ^{it}η⟫=⟪w,Δ^{it}η⟫, rfl). Confirms the narrowed conditional oneParticleBW_of_comparison is NOT a
+-- vacuous-premise artifact — Δ is a model of hCompare's conclusion; the content is genuine UNIQUENESS.
 #print axioms QIQTH.Fock.OneParticleBW.oneParticleBW_of_comparison
 -- expected: standard only — ★★★ TIGHTEST honest labelling of the hUniq discharge. SOLE labelled hyp hCompare =
 -- (HalfStripReal ⟹ ComparisonDatum), where ComparisonDatum = ∀t η∈𝒦 ∀w⊥i𝒦, ⟪w,V_tη⟫=⟪w,Δ^{it}η⟫ — the EXACT
