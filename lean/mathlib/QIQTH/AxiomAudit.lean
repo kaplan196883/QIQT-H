@@ -3605,6 +3605,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.corrC_ofReal
 -- expected: standard only — real-axis value corrC ξ V n η ↑s = ⟨ξ,V_s(gaussSmear V n η)⟩: on ℝ the
 -- correlation is the genuine matrix element of the flow (gaussSmearC_ofReal). Boundary data for Thm 3.8.
+#print axioms QIQTH.StandardSubspaceModular.gaussSmearC_norm_le
+-- expected: standard only — ★ GAUSSIAN BOUND ‖gaussSmearC V n η z‖ ≤ e^{n(Im z)²}·‖η‖·√(π/n): the complex
+-- Gaussian modulus e^{−n(u−Re z)²+n(Im z)²} integrates (translation-invariant ∫e^{−n(u−Re z)²}=√(π/n)). On
+-- the closed strip 0≤Im z≤1 this is the UNIFORM bound e^{n}·‖η‖·√(π/n).
+#print axioms QIQTH.StandardSubspaceModular.corrC_norm_le
+-- expected: standard only — ★ GAUSSIAN BOUND on the correlation |corrC ξ V n η z| ≤ ‖ξ‖·e^{n(Im z)²}·‖η‖·√(π/n)
+-- (Cauchy–Schwarz over gaussSmearC_norm_le). On 0≤Im z≤1 uniformly bounded — the `bound` hypothesis of
+-- StripUniqueness.eqOn_of_bdd_holomorphic_strip. corrC is now entire (differentiable_corrC) AND strip-bounded.
 -- expected: standard only — gaussSmear V n η = ∫ e^{−n t²}•V_t η dt. gaussSmear_integrable: Bochner-integrable
 -- (dominated by the Gaussian e^{−n t²}·‖η‖ via integrable_exp_neg_mul_sq, V_t norm-non-increasing + orbit
 -- continuous). gaussSmear_mem_K: ★ the smeared vector lands in the real subspace K — the ℝ-linear projection

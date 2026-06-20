@@ -1751,6 +1751,48 @@ theorem corrC_ofReal {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η ξ
     corrC ξ V n η (s : ℂ) = innerSL ℂ ξ (V s (gaussSmear V n η)) := by
   rw [corrC, gaussSmearC_ofReal hn η hcont hbd hgrp s]
 
+open MeasureTheory in
+/-- **Gaussian bound on the complex orbit**: `‖gaussSmearC V n η z‖ ≤ e^{n(Im z)²}·‖η‖·√(π/n)`.
+    The complex Gaussian `e^{−n(u−z)²}` has modulus `e^{−n(u−Re z)²+n(Im z)²}`, so the orbit's norm is at
+    most `e^{n(Im z)²}·‖η‖·∫ e^{−n(u−Re z)²} = e^{n(Im z)²}·‖η‖·√(π/n)`.  On the closed KMS strip
+    `0 ≤ Im z ≤ 1` this gives a *uniform* bound `e^{n}·‖η‖·√(π/n)` — the boundedness hypothesis the
+    strip-uniqueness step requires. -/
+theorem gaussSmearC_norm_le {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖) (z : ℂ) :
+    ‖gaussSmearC V n η z‖ ≤ Real.exp (n * z.im ^ 2) * ‖η‖ * Real.sqrt (Real.pi / n) := by
+  rw [gaussSmearC]
+  refine (norm_integral_le_integral_norm _).trans ?_
+  have hptwise : ∀ u : ℝ, ‖Complex.exp (-(n : ℂ) * ((u : ℂ) - z) ^ 2) • V u η‖
+      ≤ Real.exp (n * z.im ^ 2) * ‖η‖ * Real.exp (-n * (u - z.re) ^ 2) := by
+    intro u
+    rw [norm_smul, Complex.norm_exp]
+    have hw : (-(n : ℂ) * ((u : ℂ) - z) ^ 2).re = -n * (u - z.re) ^ 2 + n * z.im ^ 2 := by
+      simp only [pow_two, Complex.mul_re, Complex.mul_im, Complex.neg_re, Complex.neg_im,
+        Complex.sub_re, Complex.sub_im, Complex.ofReal_re, Complex.ofReal_im]; ring
+    rw [hw, Real.exp_add]
+    calc Real.exp (-n * (u - z.re) ^ 2) * Real.exp (n * z.im ^ 2) * ‖V u η‖
+        ≤ Real.exp (-n * (u - z.re) ^ 2) * Real.exp (n * z.im ^ 2) * ‖η‖ :=
+          mul_le_mul_of_nonneg_left (hbd u) (by positivity)
+      _ = Real.exp (n * z.im ^ 2) * ‖η‖ * Real.exp (-n * (u - z.re) ^ 2) := by ring
+  have hbnd : Integrable
+      (fun u : ℝ => Real.exp (n * z.im ^ 2) * ‖η‖ * Real.exp (-n * (u - z.re) ^ 2)) volume :=
+    ((integrable_exp_neg_mul_sq hn).comp_sub_right z.re).const_mul _
+  refine (integral_mono ((gaussSmearC_integrable hn η hcont hbd z).norm) hbnd hptwise).trans ?_
+  rw [integral_const_mul, integral_sub_right_eq_self (fun u => Real.exp (-n * u ^ 2)) z.re,
+    integral_gaussian, mul_assoc]
+
+open MeasureTheory in
+/-- **Gaussian bound on the KMS correlation**: `|corrC ξ V n η z| ≤ ‖ξ‖·e^{n(Im z)²}·‖η‖·√(π/n)`.
+    Cauchy–Schwarz (`innerSL` norm `≤ ‖ξ‖`) over `gaussSmearC_norm_le`.  On the closed strip
+    `0 ≤ Im z ≤ 1` the correlation is uniformly bounded — the `bound` hypothesis of
+    `StripUniqueness.eqOn_of_bdd_holomorphic_strip`. -/
+theorem corrC_norm_le {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η ξ : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖) (z : ℂ) :
+    ‖corrC ξ V n η z‖ ≤ ‖ξ‖ * (Real.exp (n * z.im ^ 2) * ‖η‖ * Real.sqrt (Real.pi / n)) := by
+  rw [corrC, innerSL_apply_apply]
+  refine (norm_inner_le_norm (𝕜 := ℂ) ξ (gaussSmearC V n η z)).trans ?_
+  exact mul_le_mul_of_nonneg_left (gaussSmearC_norm_le hn η hcont hbd z) (norm_nonneg _)
+
 /-! ### Analytic continuation of the modular character to the KMS strip
 
 The modular character `u_t(r) = exp(i·t·log((2−r)/r))` continues to an entire function of a *complex*
