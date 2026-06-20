@@ -1730,6 +1730,27 @@ theorem differentiable_gaussSmearC {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn :
     Differentiable ℂ (gaussSmearC V n η) :=
   fun z₀ => (hasDerivAt_gaussSmearC hn η hcont hbd z₀).differentiableAt
 
+/-- The **KMS two-point correlation** of two entire vectors, `corrC ξ V n η z = ⟨ξ, gaussSmearC V n η z⟩`
+    — the analytic object the strip-uniqueness step compares between two candidate modular flows. -/
+noncomputable def corrC (ξ : H) (V : ℝ → (H →L[ℂ] H)) (n : ℝ) (η : H) (z : ℂ) : ℂ :=
+  innerSL ℂ ξ (gaussSmearC V n η z)
+
+/-- **The KMS correlation is entire**: `z ↦ ⟨ξ, gaussSmearC V n η z⟩` is complex-differentiable on all of
+    `ℂ`, being the continuous-linear functional `innerSL ℂ ξ` composed with the entire orbit
+    (`differentiable_gaussSmearC`). -/
+theorem differentiable_corrC {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η ξ : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖) :
+    Differentiable ℂ (corrC ξ V n η) :=
+  (innerSL ℂ ξ).differentiable.comp (differentiable_gaussSmearC hn η hcont hbd)
+
+/-- **Real-axis value of the correlation**: on the real axis the KMS correlation is the genuine
+    matrix element of the flow, `corrC ξ V n η ↑s = ⟨ξ, V_s(gaussSmear V n η)⟩` (`gaussSmearC_ofReal`). -/
+theorem corrC_ofReal {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η ξ : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hgrp : ∀ s t, V s (V t η) = V (s + t) η) (s : ℝ) :
+    corrC ξ V n η (s : ℂ) = innerSL ℂ ξ (V s (gaussSmear V n η)) := by
+  rw [corrC, gaussSmearC_ofReal hn η hcont hbd hgrp s]
+
 /-! ### Analytic continuation of the modular character to the KMS strip
 
 The modular character `u_t(r) = exp(i·t·log((2−r)/r))` continues to an entire function of a *complex*

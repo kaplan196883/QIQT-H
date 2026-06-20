@@ -3598,6 +3598,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.differentiable_gaussSmearC
 -- expected: standard only — gaussSmearC V n η is Differentiable ℂ everywhere (entire). Composed with a
 -- continuous-linear functional ⇒ the entire KMS correlation for the strip-uniqueness step of Thm 3.8.
+#print axioms QIQTH.StandardSubspaceModular.differentiable_corrC
+-- expected: standard only — ★ the KMS two-point CORRELATION corrC ξ V n η z = ⟨ξ,gaussSmearC V n η z⟩ is
+-- ENTIRE (innerSL ℂ ξ ∘ the entire orbit). The analytic object the strip-uniqueness step compares between
+-- two candidate modular flows.
+#print axioms QIQTH.StandardSubspaceModular.corrC_ofReal
+-- expected: standard only — real-axis value corrC ξ V n η ↑s = ⟨ξ,V_s(gaussSmear V n η)⟩: on ℝ the
+-- correlation is the genuine matrix element of the flow (gaussSmearC_ofReal). Boundary data for Thm 3.8.
 -- expected: standard only — gaussSmear V n η = ∫ e^{−n t²}•V_t η dt. gaussSmear_integrable: Bochner-integrable
 -- (dominated by the Gaussian e^{−n t²}·‖η‖ via integrable_exp_neg_mul_sq, V_t norm-non-increasing + orbit
 -- continuous). gaussSmear_mem_K: ★ the smeared vector lands in the real subspace K — the ℝ-linear projection
