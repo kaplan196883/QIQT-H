@@ -315,4 +315,18 @@ theorem eqZero_of_im_zero_edge_halfStrip {f : ℂ → ℂ} {M : ℝ}
   refine Set.EqOn.of_subset_closure hopen (hclos_k ▸ hf.2) continuousOn_const
     (Set.preimage_mono Set.Ioo_subset_Icc_self) (le_of_eq hclos_k.symm)
 
+/-- **One-edge determination on the HALF strip** (RvD Prop 3.5 / Theorem 3.8 setting): two bounded-holomorphic
+    functions on `{−1/2 ≤ Im z ≤ 0}` agreeing on the top edge `Im z = 0` agree on the whole closed half-strip.
+    Apply `eqZero_of_im_zero_edge_halfStrip` to `F − G`.  This is the correct-strip analog of
+    `eqOn_of_im_zero_edge`: the matching step where the entire-orbit correlation `⟨h(z), w⟩` and the KMS
+    function (which share their `Im = 0` boundary values `⟨U_t ξ, η⟩`) coincide on the half-strip, so the KMS
+    function's lower-edge `Im = −1/2` reality transfers to the orbit correlation. -/
+theorem eqOn_of_im_zero_edge_halfStrip {F G : ℂ → ℂ} {M : ℝ}
+    (hF : DiffContOnCl ℂ F kmsHalfStripOpen) (hG : DiffContOnCl ℂ G kmsHalfStripOpen)
+    (hFb : ∀ z ∈ kmsHalfStrip, ‖F z‖ ≤ M) (hGb : ∀ z ∈ kmsHalfStrip, ‖G z‖ ≤ M)
+    (h0 : ∀ z : ℂ, z.im = 0 → F z = G z) : Set.EqOn F G kmsHalfStrip := fun z hz =>
+  sub_eq_zero.mp (eqZero_of_im_zero_edge_halfStrip (hF.sub hG)
+    (fun w hw => (norm_sub_le _ _).trans (add_le_add (hFb w hw) (hGb w hw)))
+    (fun w hw => by rw [Pi.sub_apply, h0 w hw, sub_self]) z hz)
+
 end QIQTH.StripUniqueness
