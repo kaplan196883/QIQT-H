@@ -348,4 +348,34 @@ theorem modularEnergy_eq_stressFlux
         ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ) 0 :=
   hasDerivAt_modularEnergy_of_boost S hbw ξ _ hBoostCharge
 
+/-- **★★★ The one-particle `hFlux`, fully assembled from the labelled inputs.**  From exactly the
+    labelled, citable physics facts — `hcarrier`/standardness (`𝒦_W` is a standard subspace, Reeh–
+    Schlieder), `hUniq` (KMS-uniqueness, BGL §2), `hStrip` (the wedge strip/KMS property, BGL §4), and
+    `hBoostCharge` (boost-charge = stress-flux) — the modular-energy derivative equals `(2π/ℏ)·T_kk`,
+    i.e. the `hFlux` of `qiqt_bekenstein_gives_gr` at the one-particle level.  EVERYTHING geometric and
+    modular is derived inside: the boost-invariance of `𝒦_W`, the BW identification
+    `modUnitary 𝒦_W = boostUnitary` (via `oneParticleBW_wedge`), and modular-energy = boost-energy.  So
+    `hFlux`'s deep content is derived; only the standard labelled facts above remain.  No Lean axioms. -/
+theorem oneParticle_hFlux (m : ℝ)
+    (S : StandardSubspace (Lp ℂ 2 (volume : Measure ℝ)))
+    (V : ℝ → (Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ))) {D : Set _}
+    (hcarrier : (S.toClosedSubmodule : Set (Lp ℂ 2 (volume : Measure ℝ)))
+        = closure (Submodule.span ℝ (wedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ))))
+    (hVboost : ∀ t x, V t x = boostUnitary (-(2 * Real.pi * t)) x)
+    (hUniq : (∀ t, Set.MapsTo (V t) (S.toClosedSubmodule : Set _) (S.toClosedSubmodule : Set _)) →
+             StripKMS V D → ∀ t, QIQTH.StandardSubspaceModular.modUnitary S t = V t)
+    (hStrip : StripKMS V D)
+    (ξ : Lp ℂ 2 (volume : Measure ℝ)) (hbar Tkk : ℝ)
+    (hBoostCharge : HasDerivAt (fun t : ℝ => inner ℂ ξ (boostUnitary (-(2 * Real.pi * t)) ξ))
+        ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ) 0) :
+    HasDerivAt (fun t : ℝ => inner ℂ ξ (QIQTH.StandardSubspaceModular.modUnitary S t ξ))
+        ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ) 0 := by
+  have hone := oneParticleBW_wedge m S V hcarrier hVboost hUniq hStrip
+  have hbw : ∀ (t : ℝ) (u : Lp ℂ 2 (volume : Measure ℝ)),
+      QIQTH.StandardSubspaceModular.modUnitary S t u = boostUnitary (-(2 * Real.pi * t)) u := by
+    intro t u
+    rw [show QIQTH.StandardSubspaceModular.modUnitary S t = V t from hone t]
+    exact hVboost t u
+  exact modularEnergy_eq_stressFlux S hbw ξ hbar Tkk hBoostCharge
+
 end QIQTH.Fock.OneParticleBW
