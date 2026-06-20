@@ -64,6 +64,24 @@ theorem corrC_bdd_closed_strip {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 <
   nlinarith [hz.1, hz.2, hn.le, mul_nonneg hn.le
     (mul_nonneg (by linarith [hz.2] : (0:ℝ) ≤ 1 - z.im) (by linarith [hz.1] : (0:ℝ) ≤ 1 + z.im))]
 
+/-- **Uniform bound of the KMS correlation on the HALF strip** `{−1/2 ≤ Im z ≤ 0}` (the strip RvD Thm 3.8
+    / Prop 3.5 actually use): `‖corrC ξ V n η z‖ ≤ ‖ξ‖·e^{n/4}·‖η‖·√(π/n)`, since `(Im z)² ≤ 1/4` there.
+    The bounded-holomorphic input the *correct-strip* `g`-function argument consumes (with
+    `diffContOnCl_corrC` restricted to `kmsHalfStripOpen` and `eqOn_of_im_zero_edge_halfStrip`). -/
+theorem corrC_bdd_halfStrip {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η ξ : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖) :
+    ∀ z ∈ StripUniqueness.kmsHalfStrip,
+      ‖corrC ξ V n η z‖ ≤ ‖ξ‖ * (Real.exp (n / 4) * ‖η‖ * Real.sqrt (Real.pi / n)) := by
+  intro z hz
+  simp only [StripUniqueness.kmsHalfStrip, Set.mem_preimage, Set.mem_Icc] at hz
+  refine (corrC_norm_le hn η ξ hcont hbd z).trans ?_
+  refine mul_le_mul_of_nonneg_left ?_ (norm_nonneg _)
+  refine mul_le_mul_of_nonneg_right ?_ (Real.sqrt_nonneg _)
+  refine mul_le_mul_of_nonneg_right ?_ (norm_nonneg _)
+  refine Real.exp_le_exp.mpr ?_
+  nlinarith [hz.1, hz.2, hn.le, mul_nonneg hn.le
+    (mul_nonneg (by linarith [hz.2] : (0:ℝ) ≤ 1/2 - z.im) (by linarith [hz.1] : (0:ℝ) ≤ 1/2 + z.im))]
+
 /-- **Step-5 reality transfer** (RvD Theorem 3.8): the KMS top-edge reality transfers to the orbit
     correlation.  Suppose a function `f` (the KMS function produced by `StripKMSrvd`) is bounded-holomorphic
     on the strip, agrees with the orbit correlation `g = corrC w V n η` on the *real axis*, and has *real*

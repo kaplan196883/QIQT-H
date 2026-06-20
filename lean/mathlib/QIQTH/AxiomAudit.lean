@@ -3741,6 +3741,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.corrC_bdd_closed_strip
 -- expected: standard only — corrC closed-strip bound ‖corrC ξ z‖ ≤ ‖ξ‖·e^n·‖η‖·√(π/n) on kmsStrip (Im z∈[0,1]
 -- ⇒ (Im z)²≤1). The bound hypothesis of eqOn_of_im_zero_edge.
+#print axioms QIQTH.StandardSubspaceModular.corrC_bdd_halfStrip
+-- expected: standard only — CORRECT-STRIP bound: ‖corrC ξ z‖ ≤ ‖ξ‖·e^{n/4}·‖η‖·√(π/n) on kmsHalfStrip
+-- ({−1/2≤Im≤0}, (Im z)²≤1/4). The bounded-holomorphic input the correct half-strip g-function argument needs
+-- (with diffContOnCl_corrC + eqOn_of_im_zero_edge_halfStrip). NOT part of the flawed full-strip chain above.
 #print axioms QIQTH.StandardSubspaceModular.corrC_top_edge_real_of_kms_match
 -- expected: standard only — ★★ STEP-5 REALITY TRANSFER: a KMS function f (from StripKMSrvd) bounded-holo on
 -- the strip, agreeing with the orbit correlation g=corrC w on the REAL AXIS and with REAL top edge
