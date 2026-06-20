@@ -3770,6 +3770,15 @@ namespace QIQTH.AxiomAudit
 -- half-shift Δ^{1/2}=J (g(t−i/2)=⟨h,Jξ⟩, (2−R)^{½}ζ=Jξ) + KMS-matching that brings Δ in. So the hUniq
 -- discharge does NOT go through via this chain; a faithful redo needs the half-strip + J-twisted w + R^{−½}
 -- device. The J-algebra (J𝒦=(i𝒦)^⊥ etc.), entire vectors, Hadamard one-edge, StripUniqueness are UNAFFECTED.
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_eq_of_orbit_compare
+-- expected: standard only — ★★★ CORRECTED TOP-LEVEL RvD Thm 3.8 ASSEMBLY (supersedes the vacuous
+-- modUnitary_eq_of_orbit_inner above). Takes the FAITHFUL orbit datum: the U-vs-Δ comparison
+-- ⟨w,V_t η⟩=⟨w,Δ^{it}η⟩ ∀η∈𝒦,∀w⊥i𝒦 (what RvD's g-fn constancy + KMS-matching against ⟨h,Δ^{it}ξ⟩ produce;
+-- Δ genuinely enters since KMS is applied to the pair (η,Δ^{it}ξ) — it does NOT factor through ⟨w,η⟩, so this
+-- premise is SATISFIABLE/non-vacuous, unlike orbit_inner's). Given it + both flows preserving 𝒦:
+-- eq_of_mem_K_of_inner_perp_IK (IsSeparating) ⇒ V_t η=Δ^{it}η on 𝒦 ⇒ clm_eq_of_eqOn_K (IsCyclic) ⇒ Δ^{it}=V_t.
+-- Remaining gap = producing the comparison datum from StripKMSrvd via the half-strip g-fn (RvD R^{−½} ζ-device,
+-- Prop 3.7, garbled in the scan — NOT fabricated). This is the correct top-level structure of the discharge.
 #print axioms QIQTH.StandardSubspaceModular.orbit_inner_eq_of_entire
 -- expected: standard only — ★★ DENSITY EXTENSION: ⟨w,V_t(gaussSmear V n η)⟩=⟨w,gaussSmear V n η⟩ ∀n>0 ⇒
 -- ⟨w,V_t η⟩=⟨w,η⟩. Scale by √(n/π) to entireVec, entireVec_tendsto (→η) + continuity of V_t,⟨w,·⟩. Resolves

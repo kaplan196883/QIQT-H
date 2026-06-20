@@ -284,6 +284,26 @@ theorem modUnitary_eq_of_orbit_inner (S : StandardSubspace H) {V : ℝ → (H �
     ((mem_K_iff_projK S _).mp (hVK η hη)) (fun w hw => ?_)
   rw [hΔorbit η hη w hw, hVorbit η hη w hw]
 
+/-- **CORRECTED top-level assembly of RvD Theorem 3.8** (`hUniq` discharge, faithful form).  Supersedes
+    `modUnitary_eq_of_orbit_inner`, whose hypotheses `⟨w, ·_t η⟩ = ⟨w, η⟩` are VACUOUS (they would force
+    `V_t = id`; see the FRAMEWORK CAVEAT in AxiomAudit).  The correct orbit datum is the *U-vs-Δ comparison*
+    `⟨w, V_t η⟩ = ⟨w, Δ^{it} η⟩` directly — what RvD's `g`-function constancy + the KMS-matching against
+    `⟨h(z), Δ^{it}ξ⟩` actually produce (the KMS condition is applied to the pair `(η, Δ^{it}ξ)`, so `Δ^{it}`
+    genuinely enters; it does NOT factor through `⟨w, η⟩`).  This hypothesis is satisfiable and non-vacuous.
+    Given it (+ both flows preserving `𝒦`): `eq_of_mem_K_of_inner_perp_IK` (`IsSeparating`) gives `V_t η =
+    Δ^{it} η` on `𝒦`, and `clm_eq_of_eqOn_K` (`IsCyclic`) lifts to `Δ^{it} = V_t`.  Producing the comparison
+    datum from `StripKMSrvd` via the half-strip `g`-function still needs RvD's `R^{−1/2}` ζ-device (Prop 3.7),
+    garbled in the available scan — not fabricated. -/
+theorem modUnitary_eq_of_orbit_compare (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} (t : ℝ)
+    (hVK : ∀ η ∈ S.toClosedSubmodule, V t η ∈ S.toClosedSubmodule)
+    (hΔK : ∀ η ∈ S.toClosedSubmodule, modUnitary S t η ∈ S.toClosedSubmodule)
+    (hcompare : ∀ η ∈ S.toClosedSubmodule, ∀ w, projIK S w = 0 →
+      inner ℂ w (V t η) = inner ℂ w (modUnitary S t η)) :
+    modUnitary S t = V t := by
+  refine clm_eq_of_eqOn_K S (fun η hη => ?_)
+  exact eq_of_mem_K_of_inner_perp_IK S ((mem_K_iff_projK S _).mp (hΔK η hη))
+    ((mem_K_iff_projK S _).mp (hVK η hη)) (fun w hw => (hcompare η hη w hw).symm)
+
 /-- **The Δ-side modular correlation is pinned by its boundary data** (RvD Theorem 3.8, the comparison
     target).  In the regular spectral regime `σ(R) ⊆ [a, 2−a]`, the strip extension `modCorrExt S ξ`
     (`= ⟨ξ, Δ^{it} ξ⟩` continued to the KMS strip) is bounded-holomorphic (`diffContOnCl_modCorrExt`,
