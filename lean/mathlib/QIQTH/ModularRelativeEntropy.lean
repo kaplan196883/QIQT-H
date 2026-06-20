@@ -549,6 +549,30 @@ theorem deviceOpReal_eq (S : StandardSubspace H) (t : ℝ) :
   show devSpecReal S t ω = modSpecFun S t ω * devSpecReal S 0 ω
   simp only [devSpecReal, modSpecFun, devChar_ofReal, Complex.ofReal_zero, devChar_zero]
 
+open MeasureTheory in
+/-- **`L²` identity for the bounded Borel FC**: `⟪f(R)ζ, f(R)ζ⟫ = ∫ conj(f)·f dμ^R_ζ` (`= ∫|f|² dμ`, so
+    `‖f(R)ζ‖² = ∫|f|² dμ^R_ζ`).  Via `⟪Aζ,Aζ⟫ = ⟪ζ, A*Aζ⟫` (`adjoint_inner_right`), `A* = borelFC(conj f)`
+    (`borelFC_adjoint`), `A*·A = borelFC(conj f·f)` (`borelFC_mul`), then the spectral bridge
+    `⟪ζ, g(R)ζ⟫ = ∫ g dμ^R_ζ` (`inner_borelFC`).  This is the linchpin for the strong (Fréchet) holomorphy of
+    `z ↦ d_z(R)ζ`: the difference-quotient remainder `q − d` satisfies `‖q − d‖² = ∫|Δ_z − ∂_z d|² dμ^R_ζ → 0`
+    by dominated convergence (the derivative is dominated by the `devChar_deriv_norm_le` constant). -/
+theorem borelFC_inner_self (S : StandardSubspace H) {g : spectrum ℝ (rvdRC S) → ℂ}
+    (hg : Measurable g) {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ ω, ‖g ω‖ ≤ C) (ζ : H) :
+    inner ℂ (borelFC (rvdRC S) (rvdRC_isSelfAdjoint S) hg hC0 hC ζ)
+        (borelFC (rvdRC S) (rvdRC_isSelfAdjoint S) hg hC0 hC ζ)
+      = ∫ ω, (starRingEnd ℂ) (g ω) * g ω ∂(rvdSpecMeasure S ζ) := by
+  have hcg : Measurable (fun ω => (starRingEnd ℂ) (g ω)) := Complex.continuous_conj.measurable.comp hg
+  have hcgb : ∀ ω, ‖(starRingEnd ℂ) (g ω)‖ ≤ C := fun ω => by rw [RCLike.norm_conj]; exact hC ω
+  have hpm : Measurable (fun ω => (starRingEnd ℂ) (g ω) * g ω) := hcg.mul hg
+  have hpb : ∀ ω, ‖(starRingEnd ℂ) (g ω) * g ω‖ ≤ C * C := fun ω => by
+    rw [norm_mul]; exact mul_le_mul (hcgb ω) (hC ω) (norm_nonneg _) hC0
+  rw [← ContinuousLinearMap.adjoint_inner_right,
+    borelFC_adjoint (rvdRC S) (rvdRC_isSelfAdjoint S) hg hC0 hC hcg hC0 hcgb,
+    ← ContinuousLinearMap.mul_apply,
+    ← borelFC_mul (rvdRC S) (rvdRC_isSelfAdjoint S) hcg hC0 hcgb hg hC0 hC hpm
+      (mul_nonneg hC0 hC0) hpb,
+    inner_borelFC, bilinDiag_self, ProjectionValuedMeasure.diagInt, rvdSpecMeasure]
+
 open QIQTH.StandardSubspaceModular in
 /-- **Bottom-edge `t`-translation of the device operator**: `deviceOpC(t − i/2) = Δ^{it}·deviceOpC(−i/2)`
     (the bottom-edge analogue of `deviceOpReal_eq`).  `devChar(↑t − i/2) = u_t·devChar(−i/2)` EVERYWHERE (via

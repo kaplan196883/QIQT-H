@@ -4010,6 +4010,11 @@ namespace QIQTH.AxiomAudit
 -- So deviceVec(0)=√R ζ=ξ, J·deviceVec(0)=Jξ ⇒ g-function value g(0)=⟪η,Jξ⟫ = the GConstancy RHS. The cfcCont↔CFC
 -- bridge (borelFC of continuous fn = Mathlib CFC) realized via the sqrt-uniqueness pattern, no new axiom.
 #print axioms QIQTH.devCorrExt_ofReal_inner
+#print axioms QIQTH.borelFC_inner_self
+-- expected: standard only — ★★★ L² LINCHPIN for strong holomorphy: ⟪f(R)ζ,f(R)ζ⟫=∫ conj(f)·f dμ^R_ζ (=∫|f|²,
+-- so ‖f(R)ζ‖²=∫|f|²dμ^R_ζ). Via ⟪Aζ,Aζ⟫=⟪ζ,A*Aζ⟫ (adjoint_inner_right) + A*=borelFC(conj f) (borelFC_adjoint) +
+-- A*A=borelFC(conj f·f) (borelFC_mul) + spectral bridge ⟪ζ,g(R)ζ⟫=∫g dμ (inner_borelFC). THE key for STRONG
+-- (Fréchet) holo of z↦d_z(R)ζ: difference-quotient ‖q−d‖²=∫|Δ_z−∂d|²dμ^R_ζ→0 by dominated conv (no Mathlib Dunford).
 #print axioms QIQTH.rvdSpec_deviceOpReal
 -- expected: standard only — OPERATOR-FORM real-axis value: D_ξ(t)=⟪ξ,(Δ^{it}·√R)ξ⟫. deviceOpReal S t :=
 -- borelFC(rvdRC)(devSpecReal) is the bounded real-axis device operator (devSpecReal ω=d_t(ω)=u_t·√ω, ‖·‖≤√2
