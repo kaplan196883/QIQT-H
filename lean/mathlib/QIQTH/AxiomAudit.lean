@@ -3455,6 +3455,13 @@ namespace QIQTH.AxiomAudit
 -- hThm38 (HalfStripReal + 𝒦-invariance ⟹ modUnitary=V). The Prop-3.5 reduction StripKMSrvd⟹HalfStripReal is
 -- DISCHARGED axiom-free (stripKMSrvd_halfStripReal = stripKMSrvd_real_midline per pair). So the unproven surface
 -- shrinks from "all of Thm 3.8 + a vacuous StripKMS" to "just the Thm 3.8 g-function assembly". Strictly more honest.
+#print axioms QIQTH.Fock.OneParticleBW.oneParticleBW_of_comparison
+-- expected: standard only — ★★★ TIGHTEST honest labelling of the hUniq discharge. SOLE labelled hyp hCompare =
+-- (HalfStripReal ⟹ ComparisonDatum), where ComparisonDatum = ∀t η∈𝒦 ∀w⊥i𝒦, ⟪w,V_tη⟫=⟪w,Δ^{it}η⟫ — the EXACT
+-- output of RvD Thm 3.8's g-function. EVERYTHING else discharged axiom-free: Prop-3.5 reduction (stripKMSrvd_
+-- halfStripReal), Δ-invariance (modUnitary_mapsTo_K), operator assembly (modUnitary_eq_of_orbit_compare:
+-- IsSeparating⇒V_tη=Δ^{it}η on 𝒦, IsCyclic⇒V_t=Δ^{it}). So the ONLY unproven step is the source-garbled g-pairing/
+-- Prop-3.7-device producing the comparison from the half-strip reality. Minimal honest "what remains".
 #print axioms QIQTH.Fock.OneParticleBW.oneParticleBW_of_kms
 -- expected: standard only — ★ CONDITIONAL ONE-PARTICLE BISOGNANO–WICHMANN (KMS-uniqueness route, gpt-5-pro
 -- verdict: KMS-uniqueness is NOT provable in current Mathlib — needs unbounded Tomita/Hardy-strip, months —

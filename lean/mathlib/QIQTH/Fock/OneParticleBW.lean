@@ -3,6 +3,7 @@ import QIQTH.Fock.Localization
 import QIQTH.Fock.OneParticle
 import QIQTH.Fock.SecondQuantModularFlow
 import QIQTH.StripUniqueness
+import QIQTH.KMSCorrelation
 import Mathlib.MeasureTheory.Function.LpSpace.DomAct.Continuous
 import Mathlib.Analysis.Calculus.ParametricIntegral
 
@@ -594,6 +595,33 @@ theorem oneParticleBW_of_stripKMSrvd (S : StandardSubspace H) (V : ℝ → (H �
     (hKMS : StripKMSrvd V (S.toClosedSubmodule : Set H)) :
     ∀ t, modUnitary S t = V t :=
   hThm38 hInv (stripKMSrvd_halfStripReal hKMS)
+
+/-- The **comparison datum** — the exact OUTPUT of RvD Theorem 3.8's `g`-function: for every `t`, `η ∈ 𝒦`,
+    and `w ⊥ i𝒦` (`projIK w = 0`), `⟪w, V_t η⟫ = ⟪w, Δ^{it} η⟫`.  This is the single relation that the
+    (source-garbled) `g`-pairing / Prop-3.7-device argument produces from the half-strip reality; everything
+    downstream of it — `V_t η = Δ^{it} η` on `𝒦` (`IsSeparating`) and the lift to `Δ^{it} = V_t`
+    (`IsCyclic`) — is the already-proven `modUnitary_eq_of_orbit_compare`. -/
+def ComparisonDatum (S : StandardSubspace H) (V : ℝ → (H →L[ℂ] H)) : Prop :=
+  ∀ t : ℝ, ∀ η ∈ (S.toClosedSubmodule : Set H), ∀ w : H,
+    QIQTH.StandardSubspaceModular.projIK S w = 0 →
+    inner ℂ w (V t η) = inner ℂ w (modUnitary S t η)
+
+/-- **★ Conditional one-particle BW with the TIGHTEST honest labelling.**  Everything provable is now proved:
+    the Proposition-3.5 reduction (`stripKMSrvd_halfStripReal`), the `Δ`-invariance (`modUnitary_mapsTo_K`),
+    and the operator assembly (`modUnitary_eq_of_orbit_compare`: separating ⇒ equal on `𝒦`, cyclic ⇒ equal
+    everywhere).  The SOLE labelled hypothesis `hCompare` is the exact `g`-function output
+    `HalfStripReal ⟹ ComparisonDatum` — the only genuinely source-garbled step of RvD Theorem 3.8.  This is
+    the minimal honest statement of "what remains unproven" on the `hUniq` discharge route. -/
+theorem oneParticleBW_of_comparison (S : StandardSubspace H) (V : ℝ → (H →L[ℂ] H))
+    (hCompare : HalfStripReal V (S.toClosedSubmodule : Set H) → ComparisonDatum S V)
+    (hInv : ∀ t, Set.MapsTo (V t) (S.toClosedSubmodule : Set H) (S.toClosedSubmodule : Set H))
+    (hKMS : StripKMSrvd V (S.toClosedSubmodule : Set H)) :
+    ∀ t, modUnitary S t = V t := by
+  have hcmp : ComparisonDatum S V := hCompare (stripKMSrvd_halfStripReal hKMS)
+  intro t
+  exact QIQTH.StandardSubspaceModular.modUnitary_eq_of_orbit_compare S t
+    (fun η hη => hInv t hη) (fun η hη => modUnitary_mapsTo_K S t η hη)
+    (fun η hη w hw => hcmp t η hη w hw)
 
 end ConditionalBW
 
