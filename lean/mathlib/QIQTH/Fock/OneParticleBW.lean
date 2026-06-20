@@ -343,9 +343,9 @@ theorem modularEnergy_eq_stressFlux
         QIQTH.StandardSubspaceModular.modUnitary S t u = boostUnitary (-(2 * Real.pi * t)) u)
     (ξ : Lp ℂ 2 (volume : Measure ℝ)) (hbar Tkk : ℝ)
     (hBoostCharge : HasDerivAt (fun t : ℝ => inner ℂ ξ (boostUnitary (-(2 * Real.pi * t)) ξ))
-        ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ) 0) :
+        (Complex.I * ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ)) 0) :
     HasDerivAt (fun t : ℝ => inner ℂ ξ (QIQTH.StandardSubspaceModular.modUnitary S t ξ))
-        ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ) 0 :=
+        (Complex.I * ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ)) 0 :=
   hasDerivAt_modularEnergy_of_boost S hbw ξ _ hBoostCharge
 
 /-- **★★★ The one-particle `hFlux`, fully assembled from the labelled inputs.**  From exactly the
@@ -367,9 +367,9 @@ theorem oneParticle_hFlux (m : ℝ)
     (hStrip : StripKMS V D)
     (ξ : Lp ℂ 2 (volume : Measure ℝ)) (hbar Tkk : ℝ)
     (hBoostCharge : HasDerivAt (fun t : ℝ => inner ℂ ξ (boostUnitary (-(2 * Real.pi * t)) ξ))
-        ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ) 0) :
+        (Complex.I * ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ)) 0) :
     HasDerivAt (fun t : ℝ => inner ℂ ξ (QIQTH.StandardSubspaceModular.modUnitary S t ξ))
-        ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ) 0 := by
+        (Complex.I * ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ)) 0 := by
   have hone := oneParticleBW_wedge m S V hcarrier hVboost hUniq hStrip
   have hbw : ∀ (t : ℝ) (u : Lp ℂ 2 (volume : Measure ℝ)),
       QIQTH.StandardSubspaceModular.modUnitary S t u = boostUnitary (-(2 * Real.pi * t)) u := by
