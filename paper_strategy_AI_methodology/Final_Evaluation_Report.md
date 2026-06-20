@@ -2,7 +2,7 @@
 
 Composer Phase 5. Manuscript: *Trustworthy AI for Foundational Science: A Closed, Audited
 Human–AI Loop for Machine-Checked Theory Formalization.* Target: arXiv cs.AI (cross-list
-quant-ph, math.LO). Evaluated 2026-06-12.
+quant-ph, math.LO). Evaluated 2026-06-21.
 
 ## 7-Dimension Assessment (10 each; threshold ≥56/70)
 
@@ -37,7 +37,7 @@ quant-ph, math.LO). Evaluated 2026-06-12.
 - [x] Architecture figure (Fig. 1) + two tables (metrics; three-layer boundary)
 - [x] Honesty boundary present in abstract, §1.2 (boxed), §4.3 (Table 2 + sentence), §5.3
 - [x] Reproducibility: repo + pinned commit + checkable metrics described
-- [x] No invented numbers — all metrics trace to the verified repo (122 / ~1347 / 795 / 0 / 0 / 1; 57→…→0)
+- [x] No invented numbers — all metrics trace to the verified repo (192 / ~2,010 / 830 / 0 / 0 / 1; 57→…→0)
 
 ## Issues & recommendations
 

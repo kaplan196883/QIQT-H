@@ -12,9 +12,9 @@ the three standard Lean axioms (`propext`, `Classical.choice`, `Quot.sound`) are
 | Pre-strengthening (paper-era baseline) | **57** | green | 0 |
 | After consolidation + Step-1 deletion | 40 | green | 0 |
 | After capacity-exclusion pass (paper's last recorded number) | 37 | green | 0 |
-| 2026-06-12 (current) | **0** | green | 0 |
+| 2026-06-21 (current) | **0** | green | 0 |
 
-122 modules · ~1,347 theorems/lemmas · 795 `#print axioms` directives · 0 axioms · 0 `sorry`
+192 modules · ~2,010 theorems/lemmas · 830 `#print axioms` directives · 0 axioms · 0 `sorry`
 · 1 benign vacuity-lint site. The axiom budget is **CI-enforced at 0** (raise only with a
 written audit note).
 

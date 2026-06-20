@@ -1,7 +1,7 @@
 # Verification-status update for QIQT_Foundations_Paper.md (deliverable A)
 
 The paper's formal-verification claims (abstract paragraph + §11.2a + §11.4a) describe a
-state with **~33–37 named interface axioms**. As of 2026-06-12 the Lean development has
+state with **~33–37 named interface axioms**. As of 2026-06-21 the Lean development has
 been driven to **zero project axioms** (CI budget 0; audit trail ends "★ THE QIQT-H FINITE
 CORE IS NOW AXIOM-FREE"). The drafts below are drop-in replacements that correct this while
 **preserving the paper's honesty boundary** — *axiom-free in Lean ≠ the physics is
@@ -24,7 +24,7 @@ established*. Three things must stay distinct and are kept distinct below:
 > three standard Lean axioms (`propext`, `Classical.choice`, `Quot.sound`), with **no
 > `sorry`** and **no project-specific axioms** (CI-guarded by `scripts/axiom_budget_check.sh`
 > at budget 0; per-theorem `#print axioms` recorded in `lean/mathlib/QIQTH/AxiomAudit.lean`,
-> 795 directives over 122 modules and ~1350 theorems). This is the endpoint of a sustained
+> 830 directives over 192 modules and ~2,010 theorems). This is the endpoint of a sustained
 > discharge effort that retired every interface axiom the earlier drafts relied on — the
 > project axiom total fell **57 → 40 → 37 → … → 0** as each named axiom was either proved in
 > a concrete finite model or replaced by an explicit hypothesis. Landmarks: the entire
@@ -107,6 +107,6 @@ chiefly the Type II / Fock rows.)*
 
 - `grep -rhE '^axiom ' lean/mathlib/QIQTH/ | wc -l` → **0**
 - `bash lean/mathlib/scripts/axiom_budget_check.sh` → budget 0, clean
-- modules: **122**; theorems+lemmas: **1347**; `#print axioms` directives: **795**
+- modules: **192**; theorems+lemmas: **2,010**; `#print axioms` directives: **830**
 - vacuity lint: **1** benign site (`LorentzWitness.lean:180`, indiscrete preorder)
 - trajectory source: audit-note comments in `scripts/axiom_budget_check.sh`

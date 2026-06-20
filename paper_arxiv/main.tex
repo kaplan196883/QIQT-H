@@ -25,7 +25,7 @@
 \title{Trustworthy AI for Foundational Science:\\
 A Closed, Audited Human-AI Loop for Machine-Checked Theory Formalization}
 \author{Pawe\l{} Kap\l{}a\'nski}
-\date{12 June 2026}
+\date{21 June 2026}
 
 \begin{document}
 \maketitle
@@ -45,7 +45,7 @@ depends on, ratcheting a tracked budget down and publishing an honest proved/con
 boundary. A verified blueprint links every human-readable statement to its kernel-checked proof.
 Applied to a collapse-free, finite-information account of quantum measurement, the loop drove the
 deductive core from fifty-seven project-specific axioms to zero, with no \texttt{sorry}, across
-122 modules and roughly 1{,}347 theorems. We report two episodes in which the independent reviewer
+192 modules and roughly 2{,}010 theorems. We report two episodes in which the independent reviewer
 caught a false axiom and an inconsistent one that the axiom counter could not see, motivating a
 third soundness instrument. We are explicit about scope: verification certifies that the
 framework's conditional mathematics is correct and free of hidden axioms, not its physical
@@ -146,8 +146,8 @@ axiom budget that reached zero for the deductive core.
   ratchets a budget downward, and publishes the proved/conditional/cited split (\S3.5).
 \item \textbf{An existence proof at the scale of a whole theory.} End-to-end formalization of a
   researcher's own new foundational framework, not a benchmark and not a published lemma, driving
-  its deductive core from 57 project axioms to 0, with no \texttt{sorry}, over 122 modules and
-  about 1{,}347 theorems (\S4).
+  its deductive core from 57 project axioms to 0, with no \texttt{sorry}, over 192 modules and
+  about 2{,}010 theorems (\S4).
 \item \textbf{Two documented soundness saves and a third instrument.} Two concrete,
   kernel-checkable episodes in which the independent reviewer caught a false axiom and an
   inconsistent one invisible to the axiom counter, which motivated a vacuity lint as a complementary
@@ -372,7 +372,7 @@ The audit is central to the trust claim, and it works because modern proof assis
 own trusted base. In Lean, the command \texttt{\#print axioms F} reports the exact set of axioms that
 the term \texttt{F} transitively depends on, computed by the kernel rather than by inspection of the
 source, so nothing a proof uses can escape it. We maintain a dedicated audit module containing such a
-directive for every headline theorem (795 of them in the case study), and we classify each dependency
+directive for every headline theorem (830 of them in the case study), and we classify each dependency
 into three buckets. A result is proved when its axiom set contains only the standard logical axioms of
 the system, which for Lean are \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound},
 the axioms that every ordinary theorem in the library uses and that we do not count against the
@@ -486,40 +486,28 @@ bounded spectral theory and projection-valued measures, Fock space and Weyl/CCR 
 entropy and data-processing machinery; it is under construction toward the framework's open problems
 and is not yet complete.
 
-A subsequent thread, postdating the snapshot quantified below, extends the same discipline to
-emergent gravity. It formalizes, axiom-free and conditionally, Jacobson's equation-of-state route to
-the Einstein field equations: from the framework's holographic capacity bound together with
-relative-entropy (Klein) positivity it derives the field equations $a\,T = G + \Lambda g$, with a
-genuine Einstein tensor and constant $\Lambda$, modulo exactly three explicitly labelled physics
-inputs (a wedge KMS property, matter conservation, and standard structural regularity). The
-differential area law $\delta S = \eta\,\delta A$, the modular-flow$=$boost identification, and the
-Raychaudhuri focusing are derived rather than assumed; the labelled inputs are kept as hypotheses,
-never as axioms. We report it only as evidence that the loop reaches new domains: like every result
-here it certifies conditional mathematics, not the physics, and it is not a derivation of general
-relativity from first principles.
-
 Naming the layers matters because the audit treats them uniformly. Every theorem above, across all
 four layers and the in-progress tower, is subject to the same \texttt{\#print axioms} discipline, and
 every one of them, including the negative audits, which are themselves theorems that something does
 not follow, lands in the proved bucket.
 
-The artifact is quantified rather than asserted. As of 2026-06-12 the development comprises 122 modules
-and approximately 1{,}347 theorems and lemmas, with 795 \texttt{\#print axioms} directives in a
+The artifact is quantified rather than asserted. As of 2026-06-21 the development comprises 192 modules
+and approximately 2{,}010 theorems and lemmas, with 830 \texttt{\#print axioms} directives in a
 dedicated audit module. It builds green, contains no \texttt{sorry}, and depends on zero
 project-specific axioms, so every audited theorem rests only on the three standard Lean axioms. A
 vacuity scan (\S4.4) reports a single benign site. Table~\ref{tab:metrics} summarizes.
 
 \begin{table}[ht]
 \centering
-\caption{Artifact metrics (verified 2026-06-12).}
+\caption{Artifact metrics (verified 2026-06-21).}
 \label{tab:metrics}
 \begin{tabular}{@{}ll@{}}
 \toprule
 Quantity & Value \\
 \midrule
 Lean modules & 122 \\
-Theorems / lemmas & $\sim$1{,}347 \\
-\texttt{\#print axioms} directives (audit) & 795 \\
+Theorems / lemmas & $\sim$2{,}010 \\
+\texttt{\#print axioms} directives (audit) & 830 \\
 Project-specific axioms & 0 \\
 \texttt{sorry} occurrences & 0 \\
 Vacuity-lint sites & 1 (benign; an indiscrete-preorder definition) \\
@@ -687,8 +675,8 @@ independent adversarial reviewer and a continuously maintained, CI-enforced soun
 verified blueprint that makes the result legible to the domain that must judge it.
 
 Applied to a new, contested foundations-of-physics framework, the loop drove the deductive core from
-fifty-seven project-specific axioms to zero, with no \texttt{sorry}, across 122 modules and roughly
-1{,}347 theorems, and it produced two documented, kernel-checkable soundness saves: a false axiom that
+fifty-seven project-specific axioms to zero, with no \texttt{sorry}, across 192 modules and roughly
+2{,}010 theorems, and it produced two documented, kernel-checkable soundness saves: a false axiom that
 the reviewer refuted by counterexample, and an inconsistent one that the axiom counter structurally
 could not see, the second of which motivated a third instrument, a vacuity lint on axiom content. The
 contribution is the audited methodology together with the existence proof that it scales to a whole
@@ -757,7 +745,7 @@ Mathlib library and on the broader interactive-theorem-proving community.
 \bibitem{r40} J.~D.~Bekenstein. \emph{Universal upper bound on the entropy-to-energy ratio for bounded systems.} Phys. Rev. D 23, 287, 1981.
 \bibitem{r41} R.~Srikanth. \emph{The quantum measurement problem and physical reality: a computation theoretic perspective.} arXiv:quant-ph/0602114, 2006.
 \bibitem{r42} P.~Kap\l{}a\'nski. \emph{One Wave Function, One World: Finite-Information Regional Algebras and the Macroscopic World from Holographic Constraint.} Companion foundations paper, 2026.
-\bibitem{r43} P.~Kap\l{}a\'nski. \emph{QIQT-H formalization repository and master write-up.} \url{https://github.com/kaplan196883/QIQT-H}, commit 4720763, 2026.
+\bibitem{r43} P.~Kap\l{}a\'nski. \emph{QIQT-H formalization repository and master write-up.} \url{https://github.com/kaplan196883/QIQT-H}, commit 5727bcd, 2026.
 \bibitem{r44} P.~Massot. \emph{Leanblueprint: a tool for formalization projects.} leanprover-community, 2023.
 \bibitem{r45} J.~K.~Korbicz. \emph{Roads to objectivity: Quantum Darwinism, Spectrum Broadcast Structures, and strong quantum Darwinism (a review).} Quantum 5, 571, 2021. arXiv:2007.04276.
 

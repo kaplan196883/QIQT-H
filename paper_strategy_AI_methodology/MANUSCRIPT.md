@@ -1,7 +1,7 @@
 ---
 title: "Trustworthy AI for Foundational Science: A Closed, Audited Human-AI Loop for Machine-Checked Theory Formalization"
 author: "Paweł Kapłański"
-date: 2026-06-12
+date: 2026-06-21
 classification: "arXiv cs.AI (primary); cross-list quant-ph, math.LO"
 ---
 
@@ -22,7 +22,7 @@ records which named axioms each result depends on, ratcheting a tracked budget d
 an honest proved/conditional/cited boundary. A verified blueprint links every human-readable
 statement to its kernel-checked proof. Applied to a collapse-free, finite-information account of
 quantum measurement, the loop drove the deductive core from fifty-seven project-specific axioms to
-zero, with no `sorry`, across 122 modules and roughly 1,347 theorems. We report two episodes in
+zero, with no `sorry`, across 192 modules and roughly 2,010 theorems. We report two episodes in
 which the independent reviewer caught a false axiom and an inconsistent one that the axiom counter
 could not see, motivating a third soundness instrument. We are explicit about scope: verification
 certifies that the framework's conditional mathematics is correct and free of hidden axioms, not
@@ -117,7 +117,7 @@ axiom budget that reached zero for the deductive core.
   budget downward, and publishes the proved/conditional/cited split (§3.5).
 - **An existence proof at the scale of a whole theory.** End-to-end formalization of a researcher's
   own new foundational framework, not a benchmark and not a published lemma, driving its deductive
-  core from 57 project axioms to 0, with no `sorry`, over 122 modules and about 1,347 theorems (§4).
+  core from 57 project axioms to 0, with no `sorry`, over 192 modules and about 2,010 theorems (§4).
 - **Two documented soundness saves and a third instrument.** Two concrete, kernel-checkable
   episodes in which the independent reviewer caught a false axiom and an inconsistent one invisible
   to the axiom counter, which motivated a vacuity lint as a complementary guard (§4.4).
@@ -330,7 +330,7 @@ The audit is central to the trust claim, and it works because modern proof assis
 own trusted base. In Lean, the command `#print axioms F` reports the exact set of axioms that the
 term `F` transitively depends on, computed by the kernel rather than by inspection of the source,
 so nothing a proof uses can escape it. We maintain a dedicated audit module containing such a
-directive for every headline theorem (795 of them in the case study), and we classify each
+directive for every headline theorem (830 of them in the case study), and we classify each
 dependency into three buckets. A result is proved when its axiom set contains only the standard
 logical axioms of the system, which for Lean are `propext`, `Classical.choice`, and `Quot.sound`,
 the axioms that every ordinary theorem in the library uses and that we do not count against the
@@ -451,19 +451,19 @@ four layers and the in-progress tower, is subject to the same `#print axioms` di
 one of them, including the negative audits, which are themselves theorems that something does not
 follow, lands in the proved bucket.
 
-The artifact is quantified rather than asserted. As of 2026-06-12 the development comprises **122
-modules and approximately 1,347 theorems and lemmas**, with **795 `#print axioms` directives** in a
+The artifact is quantified rather than asserted. As of 2026-06-21 the development comprises **122
+modules and approximately 2,010 theorems and lemmas**, with **830 `#print axioms` directives** in a
 dedicated audit module. It builds green, contains **no `sorry`**, and depends on **zero
 project-specific axioms**, so every audited theorem rests only on the three standard Lean axioms. A
 vacuity scan (§4.4) reports a single benign site. Table 1 summarizes.
 
-**Table 1. Artifact metrics (verified 2026-06-12).**
+**Table 1. Artifact metrics (verified 2026-06-21).**
 
 | Quantity | Value |
 |---|---|
 | Lean modules | 122 |
-| Theorems / lemmas | ~1,347 |
-| `#print axioms` directives (audit) | 795 |
+| Theorems / lemmas | ~2,010 |
+| `#print axioms` directives (audit) | 830 |
 | Project-specific axioms | 0 |
 | `sorry` occurrences | 0 |
 | Vacuity-lint sites | 1 (benign; an indiscrete-preorder definition) |
@@ -626,7 +626,7 @@ independent adversarial reviewer and a continuously maintained, CI-enforced soun
 verified blueprint that makes the result legible to the domain that must judge it.
 
 Applied to a new, contested foundations-of-physics framework, the loop drove the deductive core from
-fifty-seven project-specific axioms to zero, with no `sorry`, across 122 modules and roughly 1,347
+fifty-seven project-specific axioms to zero, with no `sorry`, across 192 modules and roughly 2,010
 theorems, and it produced two documented, kernel-checkable soundness saves: a false axiom that the
 reviewer refuted by counterexample, and an inconsistent one that the axiom counter structurally
 could not see, the second of which motivated a third instrument, a vacuity lint on axiom content.
