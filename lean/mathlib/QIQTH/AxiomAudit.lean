@@ -3432,6 +3432,15 @@ namespace QIQTH.AxiomAudit
 -- wedgeSubspace)}. Instantiated at 𝒦_W, V=boostUnitary(−2π·) ⇒ modUnitary 𝒦_W=boostUnitary(−2π·) ⇒ hFlux
 -- DERIVED modulo exactly TWO labelled citable AQFT facts. AXIOM-FREE (the AQFT facts are hypotheses, not axioms);
 -- genuine contribution = the invariance is DERIVED. This is the honest endpoint of the BW reduction.
+#print axioms QIQTH.Fock.OneParticleBW.oneParticleBW_wedge
+-- expected: standard only — ★ ONE-PARTICLE BW FOR THE WEDGE (invariance DISCHARGED from the proved lemma).
+-- For S a StandardSubspace on the one-particle Lp whose real subspace is 𝒦_W=closure(span ℝ wedgeGenSet)
+-- (hcarrier — the standardness of 𝒦_W = the one-particle Reeh–Schlieder input that makes S a StandardSubspace)
+-- and V t=boostUnitary(−2πt) (hVboost): modUnitary S t=V t from {hUniq (KMS-uniqueness, BGL §2, labelled) +
+-- hStrip (StripKMS, BGL §4, labelled)} — the boost-INVARIANCE oneParticleBW_of_kms needs is DISCHARGED here
+-- from boostUnitary_mapsTo_wedgeSubspace (the proved geometric result) via hcarrier+hVboost. So the wedge
+-- instance rests ONLY on the labelled AQFT facts, invariance derived. = modUnitary 𝒦_W=boostUnitary(−2π·),
+-- the BW identification ⇒ hFlux. Axiom-free.
 -- (relEntropy_nonneg) DERIVE the differential area law δS=ηδA, which with the two CITED inputs (hFlux=Bisognano–
 -- Wichmann boost flux, hFocus=Raychaudhuri focusing) + structural (Lorentzian congruence g=PᵀηP, ∇·T=0,
 -- f-regularity) ⇒ ∃Λ, a·T=G+Λg (genuine Einstein tensor, constant Λ) via jacobson_einstein_equation_of_state.

@@ -252,4 +252,30 @@ theorem oneParticleBW_of_kms (S : StandardSubspace H)
 
 end ConditionalBW
 
+/-- **★ One-particle Bisognano–Wichmann for the WEDGE subspace (boost-invariance supplied from the
+    proved lemma).**  For a standard subspace `S` on the one-particle space whose real subspace is the
+    physical wedge subspace `𝒦_W = closure(span_ℝ wedgeGenSet)` (`hcarrier` — the *standardness* of `𝒦_W`
+    is what makes `S` a `StandardSubspace`, the one-particle Reeh–Schlieder input), and a unitary group
+    `V t = boostUnitary(−2π t)` (`hVboost`): GIVEN the KMS-uniqueness lemma (`hUniq`, BGL §2) and the
+    strip property (`hStrip`, BGL §4), the modular flow IS the boost: `modUnitary S t = V t`.
+
+    The boost-INVARIANCE that `oneParticleBW_of_kms` needs is here DISCHARGED from the proved
+    `boostUnitary_mapsTo_wedgeSubspace` (via `hcarrier` + `hVboost`) — so the wedge instance rests only on
+    the labelled AQFT facts, with the invariance derived.  This is `modUnitary 𝒦_W = boostUnitary(−2π·)`,
+    the one-particle BW identification ⇒ the `hFlux` input of `qiqt_bekenstein_gives_gr`. -/
+theorem oneParticleBW_wedge (m : ℝ)
+    (S : StandardSubspace (Lp ℂ 2 (volume : Measure ℝ)))
+    (V : ℝ → (Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ))) {D : Set _}
+    (hcarrier : (S.toClosedSubmodule : Set (Lp ℂ 2 (volume : Measure ℝ)))
+        = closure (Submodule.span ℝ (wedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ))))
+    (hVboost : ∀ t x, V t x = boostUnitary (-(2 * Real.pi * t)) x)
+    (hUniq : (∀ t, Set.MapsTo (V t) (S.toClosedSubmodule : Set _) (S.toClosedSubmodule : Set _)) →
+             StripKMS V D → ∀ t, modUnitary S t = V t)
+    (hStrip : StripKMS V D) :
+    ∀ t, modUnitary S t = V t := by
+  refine oneParticleBW_of_kms S V hUniq ?_ hStrip
+  intro t x hx
+  rw [hVboost t x, hcarrier] at *
+  exact boostUnitary_mapsTo_wedgeSubspace m (-(2 * Real.pi * t)) hx
+
 end QIQTH.Fock.OneParticleBW
