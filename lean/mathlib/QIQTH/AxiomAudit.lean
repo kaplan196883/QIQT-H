@@ -3881,6 +3881,15 @@ namespace QIQTH.AxiomAudit
 -- the scalar core of the genuine U-side continuation (2−R)^{iz}R^{−iz+1/2}ζ=d_z(R)ζ, bounded-holomorphic on
 -- the half-strip for ANY standard subspace (unlike modCorrExt which needs σ(R)⊆[a,2−a]). devChar/measurable_devChar/
 -- devChar_ofReal/differentiable_devChar: the device char is entire in z, Borel in r, =modChar t·√r on the axis.
+#print axioms QIQTH.StandardSubspaceModular.devChar_norm_eq
+-- expected: standard only — ‖d_z(r)‖=(2−r)^{−Im z}·r^{1/2+Im z} on (0,2) (rpow form, from modCharC_norm +
+-- exp(c·log x)=x^c + div_rpow + rpow_sub). Exposes the two nonneg-exponent rpow factors for the domination.
+#print axioms QIQTH.StandardSubspaceModular.devChar_deriv_norm_le
+-- expected: standard only — ★★★ ASSEMBLED DEVICE-DERIVATIVE DOMINATION (no regular window): for −Im z=b∈[β₀,β₁]
+-- ⊂(0,1/2), r∈(0,2), |log((2−r)/r)|·‖d_z(r)‖ ≤ √2·(2/β₀+log2)+√2·(2/(1/2−β₁)+log2) — a CONSTANT (r-uniform, slab-
+-- uniform). devChar_norm_eq gives ‖d_z‖=(2−r)^b·r^{1/2−b}; split |log((2−r)/r)|≤|log(2−r)|+|log r|; rpow_mul_abs_
+-- log_le on (2−r)^b·|log(2−r)| and r^{1/2−b}·|log r|, complementary rpow factors ≤√2. The integrable const dominator
+-- hasDerivAt_integral_of_dominated_loc_of_deriv_le consumes for holomorphy of devCorrExt on the OPEN half-strip.
 #print axioms QIQTH.StandardSubspaceModular.rpow_mul_abs_log_le
 -- expected: standard only — ★★ POLYNOMIAL-BEATS-LOG bound (heart of the device-derivative domination): for
 -- x∈(0,2], δ∈(0,1], x^δ·|log x| ≤ 2/δ + log2. (0,1]: log x⁻¹≤(x⁻¹)^{δ/2}/(δ/2) (Real.log_le_rpow_div) ⇒

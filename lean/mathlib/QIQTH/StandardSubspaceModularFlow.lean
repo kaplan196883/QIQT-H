@@ -2324,6 +2324,23 @@ theorem devChar_norm_le_Icc {z : ℂ} (hz2 : z.im ≤ 0) (hz1 : -(1 / 2 : ℝ) �
       abs_of_nonneg (Real.sqrt_nonneg r)]
     exact Real.sqrt_le_sqrt hr.2
 
+/-- **The device-character modulus in `rpow` form**: `‖d_z(r)‖ = (2−r)^{−Im z}·r^{1/2+Im z}` on `(0,2)`.
+    From `‖d_z(r)‖ = exp(−Im z·log((2−r)/r))·√r` (`modCharC_norm`), converting `exp(c·log x) = x^c`,
+    `((2−r)/r)^c = (2−r)^c·r^{−c}`, and `r^{−Im z}·r^{1/2} = r^{1/2+Im z}`.  This exposes the two
+    `rpow`-with-nonnegative-exponent factors (`−Im z ∈ (0,1/2)`, `1/2+Im z ∈ (0,1/2)` on the open half-strip)
+    that `rpow_mul_abs_log_le` pairs against the `log((2−r)/r)` of the derivative. -/
+theorem devChar_norm_eq {z : ℂ} {r : ℝ} (hr : r ∈ Set.Ioo (0 : ℝ) 2) :
+    ‖devChar z r‖ = (2 - r) ^ (-z.im) * r ^ (1 / 2 + z.im) := by
+  obtain ⟨hr0, hr2⟩ := hr
+  have h2r : (0 : ℝ) < 2 - r := by linarith
+  rw [devChar, norm_mul, modCharC_norm ⟨hr0, hr2⟩, Complex.norm_real, Real.norm_eq_abs,
+    abs_of_nonneg (Real.sqrt_nonneg r), Real.sqrt_eq_rpow,
+    show Real.exp (-z.im * Real.log ((2 - r) / r)) = ((2 - r) / r) ^ (-z.im) from by
+      rw [Real.rpow_def_of_pos (by positivity)]; congr 1; ring,
+    Real.div_rpow h2r.le hr0.le,
+    show (1 : ℝ) / 2 + z.im = 1 / 2 - (-z.im) from by ring, Real.rpow_sub hr0]
+  ring
+
 /-- **Uniform `x^δ·|log x|` bound** (the heart of the device-derivative domination): for `x ∈ (0,2]` and
     `δ ∈ (0,1]`, `x^δ·|log x| ≤ 2/δ + log 2`.  On `(0,1]` use `log x⁻¹ ≤ (x⁻¹)^{δ/2}/(δ/2)`
     (`Real.log_le_rpow_div`) so `x^δ·|log x| ≤ 2·x^{δ/2}/δ ≤ 2/δ`; on `[1,2]` use `log x ≤ log 2`,
@@ -2365,6 +2382,66 @@ theorem rpow_mul_abs_log_le {x δ : ℝ} (hx0 : 0 < x) (hx2 : x ≤ 2) (hδ0 : 0
     calc x ^ δ * Real.log x
         ≤ 2 * Real.log 2 := mul_le_mul hxδ hlogxle (Real.log_nonneg hx1.le) (by norm_num)
       _ ≤ 2 / δ + Real.log 2 := by linarith
+
+/-- **Uniform domination of the device `z`-derivative on a half-strip slab** (the assembled dominator for
+    holomorphy of `devCorrExt`).  For `z` with `−Im z = b ∈ [β₀, β₁] ⊂ (0, 1/2)` and `r ∈ (0,2)`, the
+    derivative coefficient `|log((2−r)/r)|·‖d_z(r)‖` is bounded by the constant
+    `√2·(2/β₀ + log2) + √2·(2/(1/2−β₁) + log2)`, uniformly in `r` and over the slab.  Proof: write
+    `‖d_z(r)‖ = (2−r)^b·r^{1/2−b}` (`devChar_norm_eq`), split `|log((2−r)/r)| ≤ |log(2−r)| + |log r|`, and
+    apply `rpow_mul_abs_log_le` to `(2−r)^b·|log(2−r)|` and `r^{1/2−b}·|log r|`, bounding the complementary
+    `rpow` factors by `√2`.  This is the integrable constant dominator (`μ` finite) that
+    `hasDerivAt_integral_of_dominated_loc_of_deriv_le` consumes — with NO regular-window assumption. -/
+theorem devChar_deriv_norm_le {z : ℂ} {β₀ β₁ : ℝ} (hβ₀ : 0 < β₀) (hβ₁ : β₁ < 1 / 2)
+    (hz_hi : z.im ≤ -β₀) (hz_lo : -β₁ ≤ z.im) {r : ℝ} (hr : r ∈ Set.Ioo (0 : ℝ) 2) :
+    |Real.log ((2 - r) / r)| * ‖devChar z r‖
+      ≤ Real.sqrt 2 * (2 / β₀ + Real.log 2) + Real.sqrt 2 * (2 / (1 / 2 - β₁) + Real.log 2) := by
+  obtain ⟨hr0, hr2⟩ := hr
+  have h2r : (0 : ℝ) < 2 - r := by linarith
+  have h2r2 : 2 - r ≤ 2 := by linarith
+  set b := -z.im with hb
+  have hb0 : 0 < b := by simp only [hb]; linarith
+  have hbh : b < 1 / 2 := by simp only [hb]; linarith
+  have hb1 : b ≤ 1 := by linarith
+  have hbβ₀ : β₀ ≤ b := by simp only [hb]; linarith
+  have hbβ₁ : b ≤ β₁ := by simp only [hb]; linarith
+  have hd0 : 0 < 1 / 2 - b := by linarith
+  have hd1 : 1 / 2 - b ≤ 1 := by linarith
+  have hsqrt2 : ∀ {x c : ℝ}, 0 < x → x ≤ 2 → 0 ≤ c → c ≤ 1 / 2 → x ^ c ≤ Real.sqrt 2 := by
+    intro x c hx hx2 hc0 hc2
+    rw [Real.sqrt_eq_rpow]
+    exact (Real.rpow_le_rpow hx.le hx2 hc0).trans
+      (Real.rpow_le_rpow_of_exponent_le (by norm_num) hc2)
+  rw [devChar_norm_eq ⟨hr0, hr2⟩, show (-z.im) = b from rfl,
+    show (1 / 2 + z.im) = 1 / 2 - b from by simp only [hb]; ring]
+  have hlogsplit : |Real.log ((2 - r) / r)| ≤ |Real.log (2 - r)| + |Real.log r| := by
+    rw [Real.log_div (ne_of_gt h2r) (ne_of_gt hr0), sub_eq_add_neg]
+    exact (abs_add_le _ _).trans_eq (by rw [abs_neg])
+  have hpow_nonneg : 0 ≤ (2 - r) ^ b * r ^ (1 / 2 - b) :=
+    mul_nonneg (Real.rpow_nonneg h2r.le _) (Real.rpow_nonneg hr0.le _)
+  have hsqrt2_nonneg : 0 ≤ Real.sqrt 2 := Real.sqrt_nonneg 2
+  calc |Real.log ((2 - r) / r)| * ((2 - r) ^ b * r ^ (1 / 2 - b))
+      ≤ (|Real.log (2 - r)| + |Real.log r|) * ((2 - r) ^ b * r ^ (1 / 2 - b)) :=
+        mul_le_mul_of_nonneg_right hlogsplit hpow_nonneg
+    _ = ((2 - r) ^ b * |Real.log (2 - r)|) * r ^ (1 / 2 - b)
+        + (r ^ (1 / 2 - b) * |Real.log r|) * (2 - r) ^ b := by ring
+    _ ≤ (2 / b + Real.log 2) * Real.sqrt 2 + (2 / (1 / 2 - b) + Real.log 2) * Real.sqrt 2 := by
+        gcongr
+        · exact rpow_mul_abs_log_le h2r h2r2 hb0 hb1
+        · exact hsqrt2 hr0 hr2.le (by linarith) (by linarith)
+        · exact rpow_mul_abs_log_le hr0 hr2.le hd0 hd1
+        · exact hsqrt2 h2r h2r2 hb0.le (by linarith)
+    _ ≤ Real.sqrt 2 * (2 / β₀ + Real.log 2) + Real.sqrt 2 * (2 / (1 / 2 - β₁) + Real.log 2) := by
+        have hA : 2 / b ≤ 2 / β₀ := by
+          apply div_le_div_of_nonneg_left (by norm_num) hβ₀ hbβ₀
+        have hB : 2 / (1 / 2 - b) ≤ 2 / (1 / 2 - β₁) := by
+          apply div_le_div_of_nonneg_left (by norm_num) (by linarith) (by linarith)
+        have e1 : (2 / b + Real.log 2) * Real.sqrt 2
+            ≤ Real.sqrt 2 * (2 / β₀ + Real.log 2) := by
+          rw [mul_comm]; exact mul_le_mul_of_nonneg_left (by linarith) hsqrt2_nonneg
+        have e2 : (2 / (1 / 2 - b) + Real.log 2) * Real.sqrt 2
+            ≤ Real.sqrt 2 * (2 / (1 / 2 - β₁) + Real.log 2) := by
+          rw [mul_comm]; exact mul_le_mul_of_nonneg_left (by linarith) hsqrt2_nonneg
+        exact add_le_add e1 e2
 
 /-- **The complex `z`-derivative of the device character**: `d/dz d_z(r) = i·log((2−r)/r)·d_z(r)` (same modular
     frequency as `modCharC`, since the `√r` factor is `z`-constant).  This is the pointwise derivative that,
