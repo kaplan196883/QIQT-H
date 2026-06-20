@@ -3868,6 +3868,11 @@ namespace QIQTH.AxiomAudit
 -- real axis). modCharC_norm_le: in the REGULAR regime r∈[a,2−a] (0<a≤1) and z in the strip (0≤Im z≤1),
 -- ‖u_z(r)‖≤(2−a)/a — the uniform BOUND that makes z↦∫u_z dμ^R_ξ a BOUNDED holomorphic strip extension of
 -- ⟪ξ,Δ^{it}ξ⟫ (the hypothesis strip-uniqueness consumes). Boundedness seed for the spectral-integral lift.
+#print axioms QIQTH.StandardSubspaceModular.rvdRC_spectrum_mem_Icc
+-- expected: standard only — ★★ TIGHT spectrum location σ(R)⊆[0,2] (vs the loose norm-margin spectrum_subset_covΩ).
+-- Lower 0≤ω: rvdRC_nonneg + StarOrderedRing.nonneg_iff_spectrum_nonneg. Upper ω≤2: 2−ω∈{2}−σ(R)=σ(2·1−R)
+-- (spectrum.singleton_sub_eq) + rvdTwoSubRC_nonneg ⇒ 0≤2−ω. The spectral location the borelFC device-vector
+-- construction (2−R)^{iz}R^{−iz+1/2}ζ=d_z(R)ζ consumes, paired with devChar_norm_le_Icc (d_z bounded on [0,2]).
 #print axioms QIQTH.StandardSubspaceModular.devChar_norm_le
 -- expected: standard only — ★★★ RvD Prop 3.7 DEVICE CHARACTER bound, NO regular window. d_z(r)=u_z(r)·√r =
 -- ((2−r)/r)^{iz}·√r (=modCharC z r·√r). On the HALF strip {−1/2≤Im z≤0}: ‖d_z(r)‖≤√2 UNIFORMLY over ALL

@@ -401,6 +401,27 @@ theorem specCoord_norm_le (S : StandardSubspace H) (ω : spectrum ℝ (rvdRC S))
   rw [specCoord, Complex.norm_real]
   exact spectrum.norm_le_norm_mul_of_mem ω.2
 
+/-- **The spectrum of `R = P + Q` lies in `[0, 2]`** (the TIGHT bound, from the RvD order relations
+    `0 ≤ R` and `0 ≤ 2 − R`, not the loose norm margin `spectrum_subset_covΩ`).  Lower: `0 ≤ R`
+    (`rvdRC_nonneg`) gives `0 ≤ ω` via `StarOrderedRing.nonneg_iff_spectrum_nonneg`.  Upper: for
+    `ω ∈ σ(R)`, `2 − ω ∈ {2} − σ(R) = σ(2·1 − R) = σ(2 − R)` (`spectrum.singleton_sub_eq`), and
+    `0 ≤ 2 − R` (`rvdTwoSubRC_nonneg`) gives `0 ≤ 2 − ω`, i.e. `ω ≤ 2`.  This is the spectral location the
+    `borelFC` construction of the operator device vector `(2−R)^{iz}R^{−iz+1/2}ζ = d_z(R)ζ` consumes
+    (`devChar_norm_le_Icc` bounds `d_z` exactly on `[0,2]`). -/
+theorem rvdRC_spectrum_mem_Icc (S : StandardSubspace H) (ω : spectrum ℝ (rvdRC S)) :
+    (ω : ℝ) ∈ Set.Icc (0 : ℝ) 2 := by
+  refine ⟨(StarOrderedRing.nonneg_iff_spectrum_nonneg (R := ℝ) (rvdRC S)
+      (rvdRC_isSelfAdjoint S)).mp (rvdRC_nonneg S) ω ω.2, ?_⟩
+  have halg : (algebraMap ℝ (H →L[ℂ] H)) 2 - rvdRC S = rvdTwoSubRC S := by
+    rw [rvdTwoSubRC, Algebra.algebraMap_eq_smul_one, two_smul ℝ (1 : H →L[ℂ] H),
+      two_smul ℂ (1 : H →L[ℂ] H)]
+  have hmem : (2 : ℝ) - (ω : ℝ) ∈ spectrum ℝ (rvdTwoSubRC S) := by
+    rw [← halg, ← spectrum.singleton_sub_eq]
+    exact Set.sub_mem_sub rfl ω.2
+  have hnn := (StarOrderedRing.nonneg_iff_spectrum_nonneg (R := ℝ) (rvdTwoSubRC S)
+    (rvdTwoSubRC_isPositive S).isSelfAdjoint).mp (rvdTwoSubRC_nonneg S) _ hmem
+  linarith
+
 /-- `diagInt(coord) z = ⟪z, R z⟫` (the `scalarMeasure=specMeasure` bridge + `re_inner_T_eq_integral`
     + self-adjoint realness). -/
 theorem diagInt_specCoord (S : StandardSubspace H) (z : H) :
