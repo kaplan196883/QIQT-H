@@ -1752,6 +1752,29 @@ theorem corrC_ofReal {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η ξ
   rw [corrC, gaussSmearC_ofReal hn η hcont hbd hgrp s]
 
 open MeasureTheory in
+/-- **Group factorization of the complex orbit** (RvD Theorem 3.8, the `h(z+t) = U_t h(z)` step):
+    `V_t (gaussSmearC V n η z) = gaussSmearC V n η (z + t)` for real `t`.  Pulling `V_t` through the
+    Bochner integral (`integral_comp_comm`) and using the group law `V_t V_u = V_{t+u}` shifts the orbit;
+    the translation `u ↦ u + t` (`integral_add_right_eq_self`) re-centres the Gaussian at `z + t`.  This is
+    the entire-function factorization that drives the boundary computation in the KMS-uniqueness proof. -/
+theorem gaussSmearC_smul_left {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hgrp : ∀ s t, V s (V t η) = V (s + t) η) (t : ℝ) (z : ℂ) :
+    V t (gaussSmearC V n η z) = gaussSmearC V n η (z + (t : ℂ)) := by
+  rw [gaussSmearC, gaussSmearC,
+    ← ContinuousLinearMap.integral_comp_comm (V t) (gaussSmearC_integrable hn η hcont hbd z),
+    ← integral_add_right_eq_self
+      (fun v : ℝ => Complex.exp (-(n : ℂ) * ((v : ℂ) - (z + (t : ℂ))) ^ 2) • V v η) t]
+  refine integral_congr_ae (Filter.Eventually.of_forall (fun u => ?_))
+  show V t (Complex.exp (-(n : ℂ) * ((u : ℂ) - z) ^ 2) • V u η)
+      = Complex.exp (-(n : ℂ) * ((↑(u + t) : ℂ) - (z + (t : ℂ))) ^ 2) • V (u + t) η
+  rw [(V t).map_smul, hgrp t u]
+  congr 1
+  · congr 1
+    push_cast; ring
+  · rw [add_comm]
+
+open MeasureTheory in
 /-- **Gaussian bound on the complex orbit**: `‖gaussSmearC V n η z‖ ≤ e^{n(Im z)²}·‖η‖·√(π/n)`.
     The complex Gaussian `e^{−n(u−z)²}` has modulus `e^{−n(u−Re z)²+n(Im z)²}`, so the orbit's norm is at
     most `e^{n(Im z)²}·‖η‖·∫ e^{−n(u−Re z)²} = e^{n(Im z)²}·‖η‖·√(π/n)`.  On the closed KMS strip

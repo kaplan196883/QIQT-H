@@ -3605,6 +3605,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.corrC_ofReal
 -- expected: standard only — real-axis value corrC ξ V n η ↑s = ⟨ξ,V_s(gaussSmear V n η)⟩: on ℝ the
 -- correlation is the genuine matrix element of the flow (gaussSmearC_ofReal). Boundary data for Thm 3.8.
+#print axioms QIQTH.StandardSubspaceModular.gaussSmearC_smul_left
+-- expected: standard only — ★ GROUP FACTORIZATION V_t(gaussSmearC V n η z) = gaussSmearC V n η (z+t)
+-- (RvD Thm 3.8's h(z+t)=U_t h(z) step). Pull V_t through the Bochner integral (← integral_comp_comm) +
+-- group law V_t V_u = V_{t+u} + translation u↦u+t (integral_add_right_eq_self). Direct integral proof,
+-- no identity theorem. The entire-function factorization driving the KMS boundary computation.
 #print axioms QIQTH.StandardSubspaceModular.gaussSmearC_norm_le
 -- expected: standard only — ★ GAUSSIAN BOUND ‖gaussSmearC V n η z‖ ≤ e^{n(Im z)²}·‖η‖·√(π/n): the complex
 -- Gaussian modulus e^{−n(u−Re z)²+n(Im z)²} integrates (translation-invariant ∫e^{−n(u−Re z)²}=√(π/n)). On
