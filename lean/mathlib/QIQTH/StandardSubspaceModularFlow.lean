@@ -1573,6 +1573,24 @@ theorem gaussSmearC_ofReal {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) 
   show Real.exp (-n * (s + t - s) ^ 2) • V (s + t) η = Real.exp (-n * t ^ 2) • V (s + t) η
   rw [add_sub_cancel_left]
 
+open MeasureTheory in
+/-- **Linear×Gaussian integrability** `Integrable (u ↦ (|u| + c)·e^{−b u²})` for `b > 0` — a degree-one
+    polynomial against a Gaussian.  `|u|·e^{−b u²}` is integrable (norm of `u·e^{−b u²}`,
+    `integrable_mul_exp_neg_mul_sq`) and `c·e^{−b u²}` is integrable; their sum dominates the derivative
+    of the complex orbit (the `‖2n(u−z)·e^{−n(u−z)²}‖` bound), so this is the integrable dominating
+    function for the holomorphy of `gaussSmearC`. -/
+theorem integrable_abs_add_mul_exp_neg_mul_sq {b c : ℝ} (hb : 0 < b) :
+    Integrable (fun u : ℝ => (|u| + c) * Real.exp (-b * u ^ 2)) := by
+  have h1 : Integrable (fun u : ℝ => |u| * Real.exp (-b * u ^ 2)) := by
+    have hnorm := (integrable_mul_exp_neg_mul_sq hb).norm
+    simp only [Real.norm_eq_abs, abs_mul, abs_of_pos (Real.exp_pos _)] at hnorm
+    exact hnorm
+  have h2 : Integrable (fun u : ℝ => c * Real.exp (-b * u ^ 2)) :=
+    (integrable_exp_neg_mul_sq hb).const_mul c
+  refine (h1.add h2).congr (Filter.Eventually.of_forall (fun u => ?_))
+  show |u| * Real.exp (-b * u ^ 2) + c * Real.exp (-b * u ^ 2) = (|u| + c) * Real.exp (-b * u ^ 2)
+  ring
+
 /-! ### Analytic continuation of the modular character to the KMS strip
 
 The modular character `u_t(r) = exp(i·t·log((2−r)/r))` continues to an entire function of a *complex*

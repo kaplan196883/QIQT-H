@@ -3585,6 +3585,10 @@ namespace QIQTH.AxiomAudit
 -- orbit restricted to ℝ is the genuine unitary-group orbit of the smeared vector (complex kernel collapses
 -- to real e^{−n(u−s)²}, translation u=s+t via integral_add_left_eq_self + gaussSmear_smul_left). Anchors the
 -- entire extension gaussSmearC to the actual flow V — toward the RvD Thm 3.8 operator assembly.
+#print axioms QIQTH.StandardSubspaceModular.integrable_abs_add_mul_exp_neg_mul_sq
+-- expected: standard only — LINEAR×GAUSSIAN integrability Integrable(u↦(|u|+c)·e^{−b u²}), b>0:
+-- |u|·e^{−bu²} (= ‖u·e^{−bu²}‖, integrable_mul_exp_neg_mul_sq) + c·e^{−bu²}. The integrable DOMINATING
+-- function for the holomorphy of gaussSmearC (bounds ‖2n(u−z)·e^{−n(u−z)²}‖ uniformly on a ball).
 -- expected: standard only — gaussSmear V n η = ∫ e^{−n t²}•V_t η dt. gaussSmear_integrable: Bochner-integrable
 -- (dominated by the Gaussian e^{−n t²}·‖η‖ via integrable_exp_neg_mul_sq, V_t norm-non-increasing + orbit
 -- continuous). gaussSmear_mem_K: ★ the smeared vector lands in the real subspace K — the ℝ-linear projection
