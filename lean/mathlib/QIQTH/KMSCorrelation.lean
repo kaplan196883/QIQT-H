@@ -122,4 +122,24 @@ theorem corrC_orbit_eq_of_edges_real {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn
   corrC_eq_at_real_of_const hn η w hcont hbd hgrp
     (corrC_const_on_strip_of_edges hn η w hcont hbd h0 h1) t
 
+/-- **Operator equality from matrix elements on dense sets** (RvD Theorem 3.8, the totality + density
+    wiring, step 6e).  If two continuous operators `A, B` have equal matrix elements `⟨w, A x⟩ = ⟨w, B x⟩`
+    for `w` ranging over a dense (total) set `Dw` and `x` over a dense set `Dx`, then `A = B`.  For fixed
+    `x ∈ Dx`, density of `Dw` + continuity of `w ↦ ⟨w, ·⟩` upgrades to all `w`, giving `A x = B x`
+    (`ext_inner_left`); then `A, B` continuous and agreeing on the dense `Dx` are equal.  This is the final
+    step of the KMS-uniqueness proof: `Dw =` the total set `{J(2−R)^{1/2}R^{−1/2}ζ}`, `Dx =` the dense
+    entire vectors (`entireVec_tendsto`), and the matrix-element equality is `corrC_orbit_eq_of_edges_real`
+    applied to `V` and `Δ^{it}`. -/
+theorem operator_ext_inner_dense {A B : H →L[ℂ] H} {Dw Dx : Set H}
+    (hDw : Dense Dw) (hDx : Dense Dx)
+    (h : ∀ w ∈ Dw, ∀ x ∈ Dx, inner ℂ w (A x) = inner ℂ w (B x)) : A = B := by
+  have key : ∀ a b : H, (∀ w ∈ Dw, inner ℂ w a = inner ℂ w b) → a = b := by
+    intro a b hab
+    have heq : (fun w : H => (inner ℂ w a : ℂ)) = fun w => inner ℂ w b :=
+      Continuous.ext_on hDw (by fun_prop) (by fun_prop) hab
+    exact ext_inner_left ℂ (fun w => congrFun heq w)
+  apply DFunLike.coe_injective
+  exact Continuous.ext_on hDx A.continuous B.continuous
+    (fun x hx => key (A x) (B x) (fun w hw => h w hw x hx))
+
 end QIQTH.StandardSubspaceModular

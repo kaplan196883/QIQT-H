@@ -3654,6 +3654,10 @@ namespace QIQTH.AxiomAudit
 -- ⟨w,V_t(gaussSmear)⟩=⟨w,gaussSmear⟩ ∀t (corrC_eq_at_real_of_const ∘ corrC_const_on_strip_of_edges). Edge
 -- inputs: corrC_real_on_axis (Im=0, step 4) + KMS-flip top edge (Im=1, step 5/StripKMSrvd). Applied to V and
 -- Δ^{it} ⇒ ⟨w,V_t smear⟩=⟨w,Δ^{it} smear⟩; totality of w + density ⇒ V=Δ. Only step 5 remains.
+#print axioms QIQTH.StandardSubspaceModular.operator_ext_inner_dense
+-- expected: standard only — ★ STEP 6e WIRING: continuous A,B with ⟨w,A x⟩=⟨w,B x⟩ for w in dense Dw + x in
+-- dense Dx ⇒ A=B (ext_inner_left over dense Dw, then Continuous.ext_on over dense Dx). The final operator-
+-- equality step: Dw=total {J(2−R)^½R^{−½}ζ}, Dx=dense entire vectors, equality=corrC_orbit_eq_of_edges_real.
 -- expected: standard only — gaussSmear V n η = ∫ e^{−n t²}•V_t η dt. gaussSmear_integrable: Bochner-integrable
 -- (dominated by the Gaussian e^{−n t²}·‖η‖ via integrable_exp_neg_mul_sq, V_t norm-non-increasing + orbit
 -- continuous). gaussSmear_mem_K: ★ the smeared vector lands in the real subspace K — the ℝ-linear projection
