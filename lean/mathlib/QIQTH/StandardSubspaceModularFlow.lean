@@ -1364,6 +1364,24 @@ theorem gaussSmear_smul_left {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n
   show V s (Real.exp (-n * t ^ 2) • V t η) = Real.exp (-n * t ^ 2) • V (s + t) η
   rw [(V s).map_smul_of_tower (Real.exp (-n * t ^ 2)) (V t η), hgrp s t]
 
+/-- **The Gaussian normalisation** `√(n/π)·∫ e^{−n t²} dt = 1` — so `√(n/π)` is the right constant to make
+    `gaussSmear` an approximate identity (`integral_gaussian`: `∫ e^{−n t²} = √(π/n)`). -/
+theorem gaussian_normalization {n : ℝ} (hn : 0 < n) :
+    Real.sqrt (n / Real.pi) * ∫ t : ℝ, Real.exp (-n * t ^ 2) = 1 := by
+  rw [integral_gaussian, ← Real.sqrt_mul (by positivity), div_mul_div_comm,
+    mul_comm n Real.pi, div_self (by positivity), Real.sqrt_one]
+
+/-- The **normalised entire vector** `η_n = √(n/π)·gaussSmear V n η` — RvD's dense entire vectors in `K`. -/
+noncomputable def entireVec (V : ℝ → (H →L[ℂ] H)) (n : ℝ) (η : H) : H :=
+  Real.sqrt (n / Real.pi) • gaussSmear V n η
+
+/-- The normalised entire vector lands in the real subspace `K` (scaling `gaussSmear_mem_K` by a real). -/
+theorem entireVec_mem_K (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) {η : H}
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hinv : ∀ t, V t η ∈ S.toClosedSubmodule) :
+    entireVec V n η ∈ S.toClosedSubmodule :=
+  Submodule.smul_mem _ _ (gaussSmear_mem_K S hn hcont hbd hinv)
+
 /-! ### Analytic continuation of the modular character to the KMS strip
 
 The modular character `u_t(r) = exp(i·t·log((2−r)/r))` continues to an entire function of a *complex*
