@@ -3448,6 +3448,16 @@ namespace QIQTH.AxiomAudit
 -- S=ηA). CITED (Mathlib-unprovable, explicit labelled hyps NEVER axioms): hFlux (Type III₁ wedge-modular=boost,
 -- BW) + hFocus (Raychaudhuri) + structural + per-generator path differentiability (modelling). All geometry
 -- (Bianchi/∇·G=0/null-cone→tensor/Λ=const) machine-checked axiom-free. Verified: no sorry, no vacuous True hyps.
+-- STRONG CONTINUITY of the boost group (first brick of the Stone-generator program toward grounding hBoostCharge):
+#print axioms QIQTH.Fock.OneParticleBW.boostUnitary_eq_vadd
+#print axioms QIQTH.Fock.OneParticleBW.continuous_boostUnitary_apply
+#print axioms QIQTH.Fock.OneParticleBW.tendsto_boostUnitary_wedge
+-- expected: standard only — boostUnitary_eq_vadd: boostUnitary t = DomAddAct.mk(−t)+ᵥ· (the project boost group IS
+-- Mathlib's canonical Lp domain-translation; unitary_apply precomposes with flow(−t) ⇒ ξ(x−t), matches mk(−t)+ᵥξ via
+-- add_comm + Equiv.symm_apply_apply). continuous_boostUnitary_apply: ★ STRONG CONTINUITY t↦boostUnitary t ξ, from
+-- Mathlib's Lp.instContinuousVAddDomAddAct (Lebesgue translation-invariant+locally-finite+inner-regular) + the adapter
+-- (continuous_id.vadd const)∘(mkHomeomorph.continuous∘neg). tendsto_boostUnitary_wedge: boostUnitary(−2πt)ξ→ξ as t→0
+-- — the strong-continuity premise a Stone-generator construction of the boost-charge derivative consumes. Axiom-free.
 #print axioms QIQTH.Fock.OneParticleBW.modularEnergy_eq_stressFlux
 -- expected: standard only — modular energy = (2π/ℏ)·T_kk at the Hilbert level: from BW (hasDerivAt_modularEnergy_of_
 -- boost, modular energy = boost energy) + hBoostCharge (boost-charge=stress-flux). NOTE the derivative is i·(real):

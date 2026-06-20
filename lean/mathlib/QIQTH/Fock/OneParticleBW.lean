@@ -2,6 +2,7 @@ import QIQTH.StandardSubspaceModularFlow
 import QIQTH.Fock.Localization
 import QIQTH.Fock.OneParticle
 import QIQTH.Fock.SecondQuantModularFlow
+import Mathlib.MeasureTheory.Function.LpSpace.DomAct.Continuous
 
 /-!
 # One-particle Bisognano–Wichmann — Phase 0: the scalar spectral identity
@@ -23,6 +24,7 @@ conditional hypotheses, NOT proved here and NEVER Lean axioms.
 
 namespace QIQTH.Fock.OneParticleBW
 
+open scoped ENNReal
 open QIQTH.StandardSubspaceModular
 
 /-- The **Fermi function** of the boost generator's spectral parameter:
@@ -85,6 +87,59 @@ theorem boostUnitary_KrepL2 (m a : ℝ) (f : V → ℂ)
     show Krep m f (θ + (-a)) = Krep m (boostTest (-a) f) θ
     rw [Krep_boost]
   exact Lp.ext (hae.trans h'.coeFn_toLp.symm)
+
+/-! ### Strong continuity of the boost group (first brick of the Stone-generator program) -/
+
+/-- **The boost unitary IS the canonical `Lp` domain-translation** `DomAddAct.mk t +ᵥ ξ`.  `boostUnitary t`
+    is precomposition with `θ ↦ θ + t` (the rapidity-translation flow); Mathlib's `DomAddAct` action is
+    precomposition with `θ ↦ t + θ`.  They agree by `add_comm`, identifying the project's boost group with
+    Mathlib's continuous domain action — the bridge that makes the boost group's *strong continuity* a
+    one-line consequence of Mathlib's `Lp.instContinuousVAddDomAddAct`. -/
+theorem boostUnitary_eq_vadd (t : ℝ) (ξ : Lp ℂ 2 (volume : Measure ℝ)) :
+    boostUnitary t ξ = DomAddAct.mk (-t) +ᵥ ξ := by
+  have hcmp : boostUnitary t ξ
+      = Lp.compMeasurePreserving (boostFlow.flow (-t)) (boostFlow.mp (-t)) ξ :=
+    MPFlow.unitary_apply boostFlow t ξ
+  have h1 : ⇑(boostUnitary t ξ) =ᵐ[volume] (fun x => (ξ : ℝ → ℂ) (x + -t)) := by
+    rw [hcmp]
+    filter_upwards [Lp.coeFn_compMeasurePreserving ξ (boostFlow.mp (-t))] with x hx
+    rw [hx]; rfl
+  have h2 : ⇑(DomAddAct.mk (-t) +ᵥ ξ) =ᵐ[volume] (fun x => (ξ : ℝ → ℂ) (-t + x)) := by
+    filter_upwards [DomAddAct.vadd_Lp_ae_eq (DomAddAct.mk (-t)) ξ] with x hx
+    rw [hx, Equiv.symm_apply_apply]; rfl
+  apply Lp.ext
+  filter_upwards [h1, h2] with x hx1 hx2
+  rw [hx1, hx2, add_comm]
+
+/-- **★ Strong continuity of the boost group** (vector level): for every one-particle state `ξ`, the orbit
+    `t ↦ boostUnitary t ξ` is continuous.  This is the genuine strong continuity of the rapidity-translation
+    unitary group — the *first brick of the Stone-generator program* whose later steps would ground the
+    boost-charge derivative `hBoostCharge`.  Derived from Mathlib's continuity of the `Lp` domain action
+    (`Lp.instContinuousVAddDomAddAct`, valid since Lebesgue measure is translation-invariant, locally finite,
+    inner regular) via the identification `boostUnitary_eq_vadd`.  Axiom-free. -/
+theorem continuous_boostUnitary_apply (ξ : Lp ℂ 2 (volume : Measure ℝ)) :
+    Continuous (fun t : ℝ => boostUnitary t ξ) := by
+  haveI : Fact ((2 : ℝ≥0∞) ≠ ∞) := ⟨by norm_num⟩
+  have heq : (fun t : ℝ => boostUnitary t ξ) = fun t : ℝ => DomAddAct.mk (-t) +ᵥ ξ :=
+    funext (fun t => boostUnitary_eq_vadd t ξ)
+  rw [heq]
+  have hmk : Continuous (fun t : ℝ => DomAddAct.mk (-t) : ℝ → DomAddAct ℝ) :=
+    DomAddAct.mkHomeomorph.continuous.comp continuous_neg
+  exact (continuous_id.vadd continuous_const).comp hmk
+
+/-- **Strong continuity at the wedge-boost rate** (the `t ↦ boostUnitary(−2π t)` form used in the BW flow):
+    `boostUnitary(−2π t) ξ → ξ` as `t → 0`.  This is exactly the strong-continuity premise a Stone-generator
+    construction of the boost-charge derivative would consume.  Axiom-free. -/
+theorem tendsto_boostUnitary_wedge (ξ : Lp ℂ 2 (volume : Measure ℝ)) :
+    Filter.Tendsto (fun t : ℝ => boostUnitary (-(2 * Real.pi * t)) ξ) (nhds 0) (nhds ξ) := by
+  have hc : Continuous (fun t : ℝ => boostUnitary (-(2 * Real.pi * t)) ξ) :=
+    (continuous_boostUnitary_apply ξ).comp (by fun_prop)
+  have hval : (fun t : ℝ => boostUnitary (-(2 * Real.pi * t)) ξ) 0 = ξ := by
+    show boostUnitary (-(2 * Real.pi * 0)) ξ = ξ
+    rw [mul_zero, neg_zero, boostUnitary_zero_apply]
+  have h0 : Filter.Tendsto (fun t : ℝ => boostUnitary (-(2 * Real.pi * t)) ξ) (nhds 0)
+      (nhds ((fun t : ℝ => boostUnitary (-(2 * Real.pi * t)) ξ) 0)) := hc.continuousAt.tendsto
+  rwa [hval] at h0
 
 /-- **Invariance engine** (for the boost-invariance of the wedge standard subspace): a continuous
     `ℝ`-linear map `L` that maps a set `W` into itself also maps `closure (span ℝ W)` into itself.
