@@ -742,6 +742,23 @@ theorem modConj_rvdT_of_mem_K (S : StandardSubspace H) {ξ : H} (hξ : projK S �
     modConj S (rvdT S ξ) = rvdTwoSubRC S ξ := by
   rw [modConj_rvdT, rvdPmQ_eq_of_mem_K S hξ]
 
+/-- **RvD Proposition 2.3 — reality across `𝒦` and `(i𝒦)^⊥`.**  If `x ∈ 𝒦` (`projK x = x`) and `y ⊥ i𝒦`
+    (`projIK y = 0`), then `⟨x, y⟩_ℂ` is *real*.  Reason: `Im⟨x, y⟩ = ⟨i·x, y⟩_ℝ`, and `i·x ∈ i𝒦` while
+    `y ⊥ i𝒦`, so this real inner product vanishes.  This is the reality used in RvD Theorem 3.8 to show the
+    correlation `g(t) = ⟨U_t η, J(2−R)^{1/2}R^{−1/2}ζ⟩` is real on the real axis (and, after the KMS flip, on
+    the lower edge), the input to "real on both edges ⟹ constant". -/
+theorem inner_real_of_mem_K_perp_IK (S : StandardSubspace H) {x y : H}
+    (hx : projK S x = x) (hy : projIK S y = 0) : (inner ℂ x y).im = 0 := by
+  have hid : (inner ℂ x y).im = inner ℝ (Complex.I • x) y := by
+    show (inner ℂ x y).im = (inner ℂ (Complex.I • x) y).re
+    rw [inner_smul_left, Complex.conj_I, Complex.mul_re]
+    simp
+  rw [hid]
+  have hmem : projIK S (Complex.I • x) = Complex.I • x := by rw [projIK_smul_I, hx]
+  have hadj : ContinuousLinearMap.adjoint (projIK S) = projIK S := by
+    rw [← ContinuousLinearMap.star_eq_adjoint]; exact projIK_isSelfAdjoint S
+  rw [← hmem, ← hadj, ContinuousLinearMap.adjoint_inner_left, hy, inner_zero_right]
+
 /-! ### `cfcCont` — the continuous-function bounded FC of `R`, bundled for Stone–Weierstrass
 
 `U_t = u_t(R)` is discontinuous at the spectral endpoints `r = 0, 2`, but `U_t·A` with `A = R(2−R)`
