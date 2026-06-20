@@ -62,4 +62,22 @@ theorem corrC_eqOn_strip_of_boundary_eq {V V' : ℝ → (H →L[ℂ] H)} {n : �
     (diffContOnCl_corrC hn η ξ hcont hbd) (diffContOnCl_corrC hn η ξ hcont' hbd')
     (corrC_bdd_strip hn η ξ hcont hbd) (corrC_bdd_strip hn η ξ hcont' hbd') hreal htop
 
+/-- **Constancy of `g` ⟹ the orbit's matrix element is `t`-independent** (RvD Theorem 3.8, step 6b).
+    If the KMS correlation `g = corrC w V n η` is constant on the closed KMS strip (the conclusion of
+    "real on both edges ⟹ constant"), then evaluating at the real axis `t` vs the origin `0` gives
+    `⟨w, V_t(gaussSmear)⟩ = ⟨w, gaussSmear⟩` for every real `t` — using `g(0) = ⟨w, η_n⟩` (`gaussSmearC_zero`).
+    Comparing this for `V` and for the modular flow `Δ^{it}` (both yield `⟨w, gaussSmear⟩`) forces
+    `⟨w, V_t(gaussSmear)⟩ = ⟨w, Δ^{it}(gaussSmear)⟩`; totality of `w` + density then give `V_t = Δ^{it}`. -/
+theorem corrC_eq_at_real_of_const {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η w : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hgrp : ∀ s t, V s (V t η) = V (s + t) η)
+    (hconst : ∀ z ∈ StripUniqueness.kmsStrip, corrC w V n η z = corrC w V n η 0) (t : ℝ) :
+    innerSL ℂ w (V t (gaussSmear V n η)) = innerSL ℂ w (gaussSmear V n η) := by
+  have hmem : (t : ℂ) ∈ StripUniqueness.kmsStrip := by
+    simp only [StripUniqueness.kmsStrip, Set.mem_preimage, Complex.ofReal_im, Set.mem_Icc]
+    exact ⟨le_rfl, zero_le_one⟩
+  have h1 := hconst (t : ℂ) hmem
+  rw [corrC_ofReal hn η w hcont hbd hgrp t, corrC, gaussSmearC_zero] at h1
+  exact h1
+
 end QIQTH.StandardSubspaceModular

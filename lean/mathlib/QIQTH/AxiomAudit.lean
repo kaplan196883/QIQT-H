@@ -3638,6 +3638,13 @@ namespace QIQTH.AxiomAudit
 -- two contraction flows V,V' whose correlations corrC agree on the real axis AND the KMS top edge t+i have
 -- EQUAL correlations on the whole closed KMS strip (kms_correlation_boundary_determined applied to the now-
 -- furnished diffContOnCl_corrC + corrC_bdd_strip). With entireVec_tendsto density ⇒ V_t = V'_t.
+#print axioms QIQTH.StandardSubspaceModular.gaussSmearC_zero
+-- expected: standard only — h(0) = gaussSmear: the complex orbit at z=0 is the smeared vector η_n (complex
+-- Gaussian e^{−n(u−0)²} collapses to real e^{−n u²}). Evaluation point g(0)=⟨w,η_n⟩ in RvD Thm 3.8.
+#print axioms QIQTH.StandardSubspaceModular.corrC_eq_at_real_of_const
+-- expected: standard only — ★ STEP 6b: g=corrC w constant on the strip ⇒ ⟨w,V_t(gaussSmear)⟩=⟨w,gaussSmear⟩
+-- ∀t (evaluate g at t vs 0, gaussSmearC_zero). Same for Δ^{it} ⇒ ⟨w,V_t smear⟩=⟨w,Δ^{it} smear⟩; totality
+-- of w + density ⇒ V_t=Δ^{it}. The constancy→operator-equality closeout of the KMS-uniqueness proof.
 -- expected: standard only — gaussSmear V n η = ∫ e^{−n t²}•V_t η dt. gaussSmear_integrable: Bochner-integrable
 -- (dominated by the Gaussian e^{−n t²}·‖η‖ via integrable_exp_neg_mul_sq, V_t norm-non-increasing + orbit
 -- continuous). gaussSmear_mem_K: ★ the smeared vector lands in the real subspace K — the ℝ-linear projection

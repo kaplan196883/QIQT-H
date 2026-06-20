@@ -1768,6 +1768,18 @@ theorem corrC_ofReal {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η ξ
     corrC ξ V n η (s : ℂ) = innerSL ℂ ξ (V s (gaussSmear V n η)) := by
   rw [corrC, gaussSmearC_ofReal hn η hcont hbd hgrp s]
 
+open MeasureTheory in
+/-- **The complex orbit at `0` is the smeared vector**: `gaussSmearC V n η 0 = gaussSmear V n η` (`h(0)=η_n`).
+    At `z = 0` the complex Gaussian `e^{−n(u−0)²}` collapses to the real `e^{−n u²}`.  Used to evaluate the
+    KMS correlation at the origin: `g(0) = ⟨w, η_n⟩`, the comparison point in RvD Theorem 3.8. -/
+theorem gaussSmearC_zero {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (η : H) :
+    gaussSmearC V n η 0 = gaussSmear V n η := by
+  rw [gaussSmearC, gaussSmear]
+  refine integral_congr_ae (Filter.Eventually.of_forall (fun u => ?_))
+  show Complex.exp (-(n : ℂ) * ((u : ℂ) - 0) ^ 2) • V u η = Real.exp (-n * u ^ 2) • V u η
+  rw [sub_zero, show (-(n : ℂ) * (u : ℂ) ^ 2) = (((-n * u ^ 2 : ℝ)) : ℂ) by push_cast; ring,
+    ← Complex.ofReal_exp, ← algebraMap_smul ℂ (Real.exp (-n * u ^ 2)) (V u η), Complex.coe_algebraMap]
+
 /-- **The KMS correlation is real on the real axis** (RvD Theorem 3.8, the `g(t) = ⟨U_t η, Jξ'⟩` real step).
     With `w = J(2−R)^{1/2}R^{−1/2}ζ ⊥ i𝒦` (`projIK w = 0`) and the orbit `V_t(gaussSmear)` staying in `𝒦`,
     the correlation `corrC w V n η ↑t = ⟨w, V_t(gaussSmear)⟩` is real for every real `t`: it is the conjugate
