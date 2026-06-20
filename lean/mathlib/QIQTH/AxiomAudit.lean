@@ -3516,6 +3516,12 @@ namespace QIQTH.AxiomAudit
 -- u_{z+i}(r)=u_z(r)·(r/(2−r)) — shifting Im by β=1 multiplies by the modular weight exp(−log((2−r)/r)). This is
 -- the scalar core of Δ^{it}'s own strip/KMS property, the regularity needed to enter the strip-uniqueness
 -- comparison toward discharging hUniq. (Next: lift to the spectral-integral correlation ⟪ξ,Δ^{it}ξ⟫.)
+#print axioms QIQTH.StandardSubspaceModular.modCharC_norm
+#print axioms QIQTH.StandardSubspaceModular.modCharC_norm_le
+-- expected: standard only — modCharC_norm: EXACT modulus ‖u_z(r)‖=exp(−Im(z)·log((2−r)/r)) on (0,2) (=1 on the
+-- real axis). modCharC_norm_le: in the REGULAR regime r∈[a,2−a] (0<a≤1) and z in the strip (0≤Im z≤1),
+-- ‖u_z(r)‖≤(2−a)/a — the uniform BOUND that makes z↦∫u_z dμ^R_ξ a BOUNDED holomorphic strip extension of
+-- ⟪ξ,Δ^{it}ξ⟫ (the hypothesis strip-uniqueness consumes). Boundedness seed for the spectral-integral lift.
 -- expected: standard only — boostUnitary_eq_vadd: boostUnitary t = DomAddAct.mk(−t)+ᵥ· (the project boost group IS
 -- Mathlib's canonical Lp domain-translation; unitary_apply precomposes with flow(−t) ⇒ ξ(x−t), matches mk(−t)+ᵥξ via
 -- add_comm + Equiv.symm_apply_apply). continuous_boostUnitary_apply: ★ STRONG CONTINUITY t↦boostUnitary t ξ, from

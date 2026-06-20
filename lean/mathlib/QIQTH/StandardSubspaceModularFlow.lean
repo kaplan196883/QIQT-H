@@ -1361,4 +1361,51 @@ theorem modCharC_kms_flip {r : ℝ} (hr : r ∈ Set.Ioo (0 : ℝ) 2) (z : ℂ) :
   rw [show (-(Real.log ((2 - r) / r) : ℂ)) = ((-Real.log ((2 - r) / r) : ℝ) : ℂ) by push_cast; ring,
     ← Complex.ofReal_exp, Real.exp_neg, Real.exp_log hpos, inv_div]
 
+/-- **The exact modulus of the complexified character on the strip**: `‖u_z(r)‖ = exp(−Im(z)·log((2−r)/r))`.
+    On the real axis (`Im z = 0`) this is `1`; for `Im z ∈ (0,1]` it is the modular weight raised to `−Im z`.
+    This is the seed of the *boundedness* of the strip extension of `⟪ξ, Δ^{it} ξ⟫` in the regular spectral
+    regime (`σ(R) ⊆ [a, 2−a]`), where the exponent stays bounded. -/
+theorem modCharC_norm {r : ℝ} (hr : r ∈ Set.Ioo (0 : ℝ) 2) (z : ℂ) :
+    ‖modCharC z r‖ = Real.exp (-z.im * Real.log ((2 - r) / r)) := by
+  rw [modCharC_of_mem hr, Complex.norm_exp]
+  congr 1
+  simp only [Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im, Complex.ofReal_re,
+    Complex.ofReal_im, zero_mul, one_mul, zero_sub, mul_zero, sub_zero, add_zero, zero_add]
+
+/-- **Uniform bound on the strip in the regular spectral regime.**  For `r ∈ [a, 2−a]` (with `0 < a ≤ 1`)
+    and `z` in the KMS strip (`0 ≤ Im z ≤ 1`), the complexified character is bounded by the constant
+    `(2−a)/a`.  This is the boundedness that lets `z ↦ ∫ u_z dμ^R_ξ` be a *bounded* holomorphic strip
+    extension of the modular correlation `⟪ξ, Δ^{it} ξ⟫` — the hypothesis the strip-uniqueness principle
+    consumes — whenever the RvD spectrum lies in `[a, 2−a]`. -/
+theorem modCharC_norm_le {a r : ℝ} (ha0 : 0 < a) (ha1 : a ≤ 1) (hr1 : a ≤ r) (hr2 : r ≤ 2 - a)
+    {z : ℂ} (hz0 : 0 ≤ z.im) (hz1 : z.im ≤ 1) :
+    ‖modCharC z r‖ ≤ (2 - a) / a := by
+  have hr0 : 0 < r := lt_of_lt_of_le ha0 hr1
+  have h2r : 0 < 2 - r := by linarith
+  have hrmem : r ∈ Set.Ioo (0 : ℝ) 2 := ⟨hr0, by linarith⟩
+  rw [modCharC_norm hrmem]
+  set L := Real.log ((2 - r) / r) with hLdef
+  set M := Real.log ((2 - a) / a) with hMdef
+  have hMpos : 0 ≤ M := Real.log_nonneg (by rw [le_div_iff₀ ha0]; linarith)
+  have hL_ub : L ≤ M := by
+    rw [hLdef, hMdef]
+    apply Real.log_le_log (by positivity)
+    rw [div_le_div_iff₀ hr0 ha0]; nlinarith
+  have hnegL : -L = Real.log (r / (2 - r)) := by rw [hLdef, ← Real.log_inv, inv_div]
+  have hL_lb : -M ≤ L := by
+    have h : Real.log (r / (2 - r)) ≤ M := by
+      rw [hMdef]
+      apply Real.log_le_log (by positivity)
+      rw [div_le_div_iff₀ h2r ha0]; nlinarith
+    rw [← hnegL] at h; linarith
+  have habsL : |L| ≤ M := abs_le.mpr ⟨hL_lb, hL_ub⟩
+  have hkey : -z.im * L ≤ M :=
+    calc -z.im * L = -(z.im * L) := by ring
+      _ ≤ |z.im * L| := neg_le_abs _
+      _ = z.im * |L| := by rw [abs_mul, abs_of_nonneg hz0]
+      _ ≤ 1 * M := mul_le_mul hz1 habsL (abs_nonneg _) (by norm_num)
+      _ = M := one_mul M
+  calc Real.exp (-z.im * L) ≤ Real.exp M := Real.exp_le_exp.mpr hkey
+    _ = (2 - a) / a := by rw [hMdef, Real.exp_log (div_pos (by linarith) ha0)]
+
 end QIQTH.StandardSubspaceModular
