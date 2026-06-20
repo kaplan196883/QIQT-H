@@ -181,6 +181,65 @@ theorem modCorrExt_kms_flip (S : StandardSubspace H) (ξ : H) (t : ℝ)
   rw [modCharC_ofReal] at h
   exact h
 
+open MeasureTheory in
+/-- **The strip extension is holomorphic on the open KMS strip** (regular regime).  In the regular spectral
+    regime `σ(R) ⊆ [a, 2−a]` (`0 < a ≤ 1`), at every interior point `z₀` (with `Im z₀ ∈ (0,1)`) the strip
+    extension `F_ξ(z) = ∫ u_z dμ^R_ξ` is complex-differentiable, with derivative
+    `∫ i·log((2−ω)/ω)·u_{z₀}(ω) dμ`.  Differentiation under the spectral integral
+    (`hasDerivAt_integral_of_dominated_loc_of_deriv_le`, `𝕜 = ℂ`): the `z`-derivative `i·log·u_z` is bounded
+    on the whole strip by the constant `log((2−a)/a)·(2−a)/a` (the modular frequency by `abs_log_div_le`, the
+    character by `modCharC_norm_le`).  Together with `modCorrExt_ofReal`/`_kms_flip` this gives the
+    bounded-holomorphic strip extension the strip-uniqueness principle consumes. -/
+theorem hasDerivAt_modCorrExt (S : StandardSubspace H) (ξ : H) {a : ℝ} (ha0 : 0 < a) (ha1 : a ≤ 1)
+    (hspec : ∀ ω : spectrum ℝ (rvdRC S), a ≤ (ω : spectrum ℝ (rvdRC S)).val
+      ∧ (ω : spectrum ℝ (rvdRC S)).val ≤ 2 - a)
+    {z₀ : ℂ} (hz0 : z₀.im ∈ Set.Ioo (0 : ℝ) 1) :
+    HasDerivAt (modCorrExt S ξ)
+      (∫ ω, Complex.I * (Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val)
+          / (ω : spectrum ℝ (rvdRC S)).val) : ℂ)
+        * modCharC z₀ (ω : spectrum ℝ (rvdRC S)).val ∂(rvdSpecMeasure S ξ)) z₀ := by
+  haveI : IsFiniteMeasure (rvdSpecMeasure S ξ) := by unfold rvdSpecMeasure; infer_instance
+  have hposω : ∀ ω : spectrum ℝ (rvdRC S), (ω : spectrum ℝ (rvdRC S)).val ∈ Set.Ioo (0 : ℝ) 2 :=
+    fun ω => ⟨lt_of_lt_of_le ha0 (hspec ω).1, lt_of_le_of_lt (hspec ω).2 (by linarith)⟩
+  set μ := rvdSpecMeasure S ξ
+  -- measurability of the value coordinate and of the derivative coefficient
+  have hmeasC : ∀ z : ℂ, AEStronglyMeasurable
+      (fun ω : spectrum ℝ (rvdRC S) => modCharC z (ω : spectrum ℝ (rvdRC S)).val) μ :=
+    fun z => ((measurable_modCharC z).comp measurable_subtype_coe).aestronglyMeasurable
+  have hmeasL : Measurable fun ω : spectrum ℝ (rvdRC S) =>
+      (Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val) / (ω : spectrum ℝ (rvdRC S)).val) : ℂ) :=
+    Complex.measurable_ofReal.comp (Real.measurable_log.comp
+      ((measurable_const.sub measurable_subtype_coe).div measurable_subtype_coe))
+  -- uniform norm bound for the character on the strip
+  have hCbd : ∀ {z : ℂ}, z.im ∈ Set.Ioo (0 : ℝ) 1 → ∀ ω : spectrum ℝ (rvdRC S),
+      ‖modCharC z (ω : spectrum ℝ (rvdRC S)).val‖ ≤ (2 - a) / a := by
+    intro z hz ω
+    exact modCharC_norm_le ha0 ha1 (hspec ω).1 (hspec ω).2 (le_of_lt hz.1) (le_of_lt hz.2)
+  show HasDerivAt (fun z => ∫ ω, modCharC z (ω : spectrum ℝ (rvdRC S)).val ∂μ) _ z₀
+  refine (hasDerivAt_integral_of_dominated_loc_of_deriv_le (𝕜 := ℂ)
+    (F := fun z ω => modCharC z (ω : spectrum ℝ (rvdRC S)).val)
+    (F' := fun z ω => Complex.I * (Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val)
+        / (ω : spectrum ℝ (rvdRC S)).val) : ℂ) * modCharC z (ω : spectrum ℝ (rvdRC S)).val)
+    (bound := fun _ => Real.log ((2 - a) / a) * ((2 - a) / a))
+    (s := Complex.im ⁻¹' Set.Ioo (0 : ℝ) 1)
+    ((Complex.continuous_im.isOpen_preimage _ isOpen_Ioo).mem_nhds hz0)
+    (Filter.Eventually.of_forall (fun z => hmeasC z))
+    (((integrable_const ((2 - a) / a)).mono' (hmeasC z₀)
+      (Filter.Eventually.of_forall (fun ω => by
+        simpa using hCbd hz0 ω))))
+    ((measurable_const.mul hmeasL).mul ((measurable_modCharC z₀).comp
+      measurable_subtype_coe) |>.aestronglyMeasurable)
+    (Filter.Eventually.of_forall (fun ω z hz => ?_))
+    (integrable_const _)
+    (Filter.Eventually.of_forall (fun ω z _ => hasDerivAt_modCharC (hposω ω) z))).2
+  -- the domination bound on the derivative
+  rw [norm_mul, norm_mul, Complex.norm_I, one_mul, Complex.norm_real, Real.norm_eq_abs]
+  calc |Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val) / (ω : spectrum ℝ (rvdRC S)).val)|
+        * ‖modCharC z (ω : spectrum ℝ (rvdRC S)).val‖
+      ≤ Real.log ((2 - a) / a) * ((2 - a) / a) := by
+        apply mul_le_mul (abs_log_div_le ha0 (hspec ω).1 (hspec ω).2) (hCbd hz ω)
+          (norm_nonneg _) (Real.log_nonneg (by rw [le_div_iff₀ ha0]; linarith))
+
 /-- The vacuum coherent state (`ξ = 0`) has zero relative entropy with itself. -/
 @[simp] theorem cgpEntropy_zero (S : StandardSubspace H) : cgpEntropy S (0 : H) = 0 := by
   simp [cgpEntropy]

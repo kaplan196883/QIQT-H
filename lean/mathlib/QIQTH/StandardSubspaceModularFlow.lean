@@ -1324,6 +1324,14 @@ noncomputable def modCharC (z : ℂ) : ℝ → ℂ :=
     (fun r => Complex.exp (Complex.I * z * (Real.log ((2 - r) / r) : ℂ)))
     (fun _ => 1)
 
+/-- The complexified character is Borel measurable (in `r`, for fixed `z`). -/
+theorem measurable_modCharC (z : ℂ) : Measurable (modCharC z) := by
+  apply Measurable.piecewise measurableSet_Ioo _ measurable_const
+  apply Complex.continuous_exp.measurable.comp
+  apply Measurable.mul measurable_const
+  exact Complex.continuous_ofReal.measurable.comp
+    (Real.measurable_log.comp ((measurable_const.sub measurable_id).div measurable_id))
+
 /-- On `(0,2)` the complexified character is the bare exponential. -/
 theorem modCharC_of_mem {r : ℝ} (hr : r ∈ Set.Ioo (0 : ℝ) 2) (z : ℂ) :
     modCharC z r = Complex.exp (Complex.I * z * (Real.log ((2 - r) / r) : ℂ)) :=
@@ -1344,6 +1352,23 @@ theorem differentiable_modCharC (r : ℝ) : Differentiable ℂ (fun z => modChar
   · have h : (fun z => modCharC z r) = fun _ => (1 : ℂ) :=
       funext (fun z => Set.piecewise_eq_of_notMem _ _ _ hr)
     rw [h]; exact differentiable_const _
+
+/-- **The modular-frequency `log((2−r)/r)` is uniformly bounded on the regular window** `[a, 2−a]`:
+    `|log((2−r)/r)| ≤ log((2−a)/a)`.  This bounds the derivative of the modular character `i·log·u_z`, the
+    domination needed for holomorphy of the strip extension under the integral. -/
+theorem abs_log_div_le {a r : ℝ} (ha0 : 0 < a) (hr1 : a ≤ r) (hr2 : r ≤ 2 - a) :
+    |Real.log ((2 - r) / r)| ≤ Real.log ((2 - a) / a) := by
+  have hr0 : 0 < r := lt_of_lt_of_le ha0 hr1
+  have h2r : 0 < 2 - r := by linarith
+  rw [abs_le]
+  refine ⟨?_, ?_⟩
+  · have hnegL : -Real.log ((2 - r) / r) = Real.log (r / (2 - r)) := by rw [← Real.log_inv, inv_div]
+    have h : Real.log (r / (2 - r)) ≤ Real.log ((2 - a) / a) := by
+      apply Real.log_le_log (by positivity)
+      rw [div_le_div_iff₀ h2r ha0]; nlinarith
+    linarith
+  · apply Real.log_le_log (by positivity)
+    rw [div_le_div_iff₀ hr0 ha0]; nlinarith
 
 /-- **The complex `z`-derivative of the modular character**: `d/dz u_z(r) = i·log((2−r)/r)·u_z(r)`.  This is
     the pointwise derivative that, integrated against the spectral measure and dominated in the regular

@@ -3517,9 +3517,18 @@ namespace QIQTH.AxiomAudit
 -- the scalar core of Δ^{it}'s own strip/KMS property, the regularity needed to enter the strip-uniqueness
 -- comparison toward discharging hUniq. (Next: lift to the spectral-integral correlation ⟪ξ,Δ^{it}ξ⟫.)
 #print axioms QIQTH.StandardSubspaceModular.hasDerivAt_modCharC
+#print axioms QIQTH.StandardSubspaceModular.measurable_modCharC
+#print axioms QIQTH.StandardSubspaceModular.abs_log_div_le
 -- expected: standard only — the pointwise COMPLEX z-derivative d/dz u_z(r) = i·log((2−r)/r)·u_z(r) (via
--- HasDerivAt.cexp on exp(i·z·L)). This is the integrand-derivative that, dominated in the regular regime,
--- gives holomorphy of the strip extension z↦∫u_z dμ under the integral sign (next brick).
+-- HasDerivAt.cexp on exp(i·z·L)). measurable_modCharC: u_z Borel-measurable in r. abs_log_div_le: the modular
+-- frequency |log((2−r)/r)|≤log((2−a)/a) on the regular window [a,2−a]. These dominate the integrand-derivative.
+#print axioms QIQTH.hasDerivAt_modCorrExt
+-- expected: standard only — ★★ HOLOMORPHY of the strip extension: in the regular regime σ(R)⊆[a,2−a] (0<a≤1),
+-- at each interior z₀ (Im z₀∈(0,1)) F_ξ(z)=∫u_z dμ is ℂ-differentiable with derivative ∫i·log((2−ω)/ω)·u_{z₀} dμ
+-- — differentiation under the spectral integral (hasDerivAt_integral_of_dominated_loc_of_deriv_le, 𝕜=ℂ; the
+-- z-derivative bounded on the whole strip by log((2−a)/a)·(2−a)/a via abs_log_div_le + modCharC_norm_le). With
+-- modCorrExt_ofReal/_kms_flip (the two edges) this is the bounded-holomorphic strip extension strip-uniqueness
+-- consumes. Remaining for hUniq: continuity-to-closure (DiffContOnCl) + the Borchers group-equality reduction.
 #print axioms QIQTH.StandardSubspaceModular.modCharC_norm
 #print axioms QIQTH.StandardSubspaceModular.modCharC_norm_le
 -- expected: standard only — modCharC_norm: EXACT modulus ‖u_z(r)‖=exp(−Im(z)·log((2−r)/r)) on (0,2) (=1 on the
