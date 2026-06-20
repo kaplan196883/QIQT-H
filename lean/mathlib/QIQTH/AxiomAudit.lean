@@ -3508,6 +3508,13 @@ namespace QIQTH.AxiomAudit
 -- "Hardy-strip infrastructure Mathlib does not yet have," now assembled from Mathlib's Phragmén–Lindelöf.
 #print axioms QIQTH.StripUniqueness.eqOn_of_bdd_holomorphic_strip
 #print axioms QIQTH.StripUniqueness.kms_correlation_boundary_determined
+#print axioms QIQTH.StripUniqueness.im_zero_on_strip
+-- expected: standard only — ★ MAX-MODULUS on the strip: if g is bounded-holomorphic on the KMS strip
+-- (DiffContOnCl+bound) and Im g=0 on BOTH edges, then Im g=0 throughout. Via |exp(±i·g)|=exp(∓Im g)=1 on the
+-- edges ⇒ PhragmenLindelof.horizontal_strip ⇒ |exp(i·g)|≤1 and |exp(−i·g)|≤1 inside ⇒ Im g=0. The
+-- REFLECTION-FREE substitute for RvD's "real on both edges ⇒ constant" step (the analytic crux of RvD Thm 3.8
+-- KMS-uniqueness). Builds toward discharging hUniq via the bounded RvD route (Mathlib lacks Schwarz reflection,
+-- so this routes through max-modulus + the already-built strip-uniqueness instead).
 -- expected: standard only — eqOn_of_bdd_holomorphic_strip: ★ two bounded functions holomorphic on the open KMS
 -- strip {0<Im<1}, continuous to the closure, AGREEING ON BOTH EDGES (Im=0 and Im=1), agree on the whole closed
 -- strip — via PhragmenLindelof.eqOn_horizontal_strip (bounded ⇒ the sub-double-exp growth bound with c=0,B=0).
