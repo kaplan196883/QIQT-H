@@ -3645,6 +3645,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ STEP 6b: g=corrC w constant on the strip ⇒ ⟨w,V_t(gaussSmear)⟩=⟨w,gaussSmear⟩
 -- ∀t (evaluate g at t vs 0, gaussSmearC_zero). Same for Δ^{it} ⇒ ⟨w,V_t smear⟩=⟨w,Δ^{it} smear⟩; totality
 -- of w + density ⇒ V_t=Δ^{it}. The constancy→operator-equality closeout of the KMS-uniqueness proof.
+#print axioms QIQTH.StandardSubspaceModular.corrC_const_on_strip_of_edges
+-- expected: standard only — ★ STEP 6a (to closed strip): Im(corrC w)=0 on BOTH edges (Im=0,Im=1) ⇒ corrC w
+-- constant on the CLOSED kmsStrip. eqConst_of_im_zero_strip (Phragmén–Lindelöf) gives const on the open strip;
+-- continuity of entire g propagates to closure (kmsStrip=closure kmsStripOpen, Set.EqOn.closure).
+#print axioms QIQTH.StandardSubspaceModular.corrC_orbit_eq_of_edges_real
+-- expected: standard only — ★★ FULL STEP-6 CLOSEOUT CHAIN: g=corrC w real on both strip edges ⇒
+-- ⟨w,V_t(gaussSmear)⟩=⟨w,gaussSmear⟩ ∀t (corrC_eq_at_real_of_const ∘ corrC_const_on_strip_of_edges). Edge
+-- inputs: corrC_real_on_axis (Im=0, step 4) + KMS-flip top edge (Im=1, step 5/StripKMSrvd). Applied to V and
+-- Δ^{it} ⇒ ⟨w,V_t smear⟩=⟨w,Δ^{it} smear⟩; totality of w + density ⇒ V=Δ. Only step 5 remains.
 -- expected: standard only — gaussSmear V n η = ∫ e^{−n t²}•V_t η dt. gaussSmear_integrable: Bochner-integrable
 -- (dominated by the Gaussian e^{−n t²}·‖η‖ via integrable_exp_neg_mul_sq, V_t norm-non-increasing + orbit
 -- continuous). gaussSmear_mem_K: ★ the smeared vector lands in the real subspace K — the ℝ-linear projection

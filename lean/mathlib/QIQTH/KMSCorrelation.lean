@@ -80,4 +80,46 @@ theorem corrC_eq_at_real_of_const {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 
   rw [corrC_ofReal hn η w hcont hbd hgrp t, corrC, gaussSmearC_zero] at h1
   exact h1
 
+/-- **Real on both edges ⟹ constant on the closed strip** (RvD Theorem 3.8, step 6a, completed to the
+    closed KMS strip).  If `Im(corrC w V n η) = 0` on both boundary lines `Im z = 0` and `Im z = 1`, then
+    `corrC w V n η` is constant on the *closed* strip `kmsStrip` (equal to its value at `0`).  `Im g = 0` on
+    the edges forces (`eqConst_of_im_zero_strip`, via Phragmén–Lindelöf) `g` constant on the open strip;
+    continuity of the entire `g` then propagates the constant to the closure `kmsStrip = closure kmsStripOpen`
+    (`Set.EqOn.closure`).  Feeds `corrC_eq_at_real_of_const`. -/
+theorem corrC_const_on_strip_of_edges {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η w : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (h0 : ∀ z : ℂ, z.im = 0 → (corrC w V n η z).im = 0)
+    (h1 : ∀ z : ℂ, z.im = 1 → (corrC w V n η z).im = 0) :
+    ∀ z ∈ StripUniqueness.kmsStrip, corrC w V n η z = corrC w V n η 0 := by
+  obtain ⟨c, hc⟩ := StripUniqueness.eqConst_of_im_zero_strip
+    (diffContOnCl_corrC hn η w hcont hbd) (corrC_bdd_strip hn η w hcont hbd) h0 h1
+  have hclos : StripUniqueness.kmsStrip = closure StripUniqueness.kmsStripOpen := by
+    rw [StripUniqueness.kmsStrip, StripUniqueness.kmsStripOpen, Complex.closure_preimage_im,
+      closure_Ioo (by norm_num : (0 : ℝ) ≠ 1)]
+  have hcl : ∀ z ∈ StripUniqueness.kmsStrip, corrC w V n η z = c := by
+    rw [hclos]
+    exact Set.EqOn.closure (fun z hz => hc z hz)
+      (differentiable_corrC hn η w hcont hbd).continuous continuous_const
+  have h0mem : (0 : ℂ) ∈ StripUniqueness.kmsStrip := by
+    simp only [StripUniqueness.kmsStrip, Set.mem_preimage, Complex.zero_im, Set.mem_Icc]
+    exact ⟨le_rfl, zero_le_one⟩
+  intro z hz
+  rw [hcl z hz, hcl 0 h0mem]
+
+/-- **Edge-reality ⟹ the orbit matrix element is `t`-independent** (RvD Theorem 3.8, the full step-6
+    closeout chain).  If the KMS correlation `g = corrC w V n η` is real on *both* strip edges, then
+    `⟨w, V_t(gaussSmear)⟩ = ⟨w, gaussSmear⟩` for every real `t`.  Just the composition
+    `corrC_eq_at_real_of_const ∘ corrC_const_on_strip_of_edges`.  The two edge-reality inputs are
+    `corrC_real_on_axis` (the `Im = 0` edge, RvD step 4) and the KMS-flip top edge (`Im = 1`, RvD step 5,
+    where `StripKMSrvd` is consumed).  Applied to `V` and to `Δ^{it}` (both giving `⟨w, gaussSmear⟩`) it
+    yields `⟨w, V_t(gaussSmear)⟩ = ⟨w, Δ^{it}(gaussSmear)⟩`; totality of `w` + density close to `V = Δ^{it}`. -/
+theorem corrC_orbit_eq_of_edges_real {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η w : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hgrp : ∀ s t, V s (V t η) = V (s + t) η)
+    (h0 : ∀ z : ℂ, z.im = 0 → (corrC w V n η z).im = 0)
+    (h1 : ∀ z : ℂ, z.im = 1 → (corrC w V n η z).im = 0) (t : ℝ) :
+    innerSL ℂ w (V t (gaussSmear V n η)) = innerSL ℂ w (gaussSmear V n η) :=
+  corrC_eq_at_real_of_const hn η w hcont hbd hgrp
+    (corrC_const_on_strip_of_edges hn η w hcont hbd h0 h1) t
+
 end QIQTH.StandardSubspaceModular
