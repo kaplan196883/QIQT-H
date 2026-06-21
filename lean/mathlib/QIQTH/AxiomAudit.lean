@@ -4276,6 +4276,14 @@ namespace QIQTH.AxiomAudit
 -- reality h1 is derived from hKMS via h1_of_stripKMSrvd (RvD Thm 3.8 g-function f-transfer, machine-checked), no
 -- longer labelled. The entire device g-function argument is axiom-free; the SOLE remaining named analytic input
 -- is hdense (C', √R-range∩𝒦 dense in 𝒦). The convention is now the genuine RvD Def 3.4 (vacuity hole closed).
+#print axioms QIQTH.StandardSubspaceModular.commute_projK_of_commute_R_D
+-- expected: standard only — generic [A,P]=0 from [A,R]=[A,D]=0 (2P=R+D, rvdR_add_rvdPmQ_eq). Toward hdense.
+#print axioms QIQTH.StandardSubspaceModular.mapsTo_K_of_commute_R_D
+-- expected: standard only — generic 𝒦-invariance: A commuting with R(rvdR) and D(rvdPmQ) preserves 𝒦 (operator-
+-- generic modUnitary_mapsTo_K_of_commute). The mechanism by which symmetric f(R) lands cutoffs in 𝒦 for hdense.
+#print axioms QIQTH.StandardSubspaceModular.commute_rvdPmQ_of_commute_modConj_rvdT
+-- expected: standard only — [A,D]=0 from [A,J]=[A,T]=0 (D=J·T, modConj_rvdT). For symmetric f, cfcCont f commutes
+-- with J (modConj_cfcΩ/twΩ) and T (fn of R) ⟹ with D — the [·,D]=0 'frontier' step available for symmetric symbols.
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable

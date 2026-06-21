@@ -1015,6 +1015,44 @@ theorem modConj_rvdT_of_mem_K (S : StandardSubspace H) {ξ : H} (hξ : projK S �
     modConj S (rvdT S ξ) = rvdTwoSubRC S ξ := by
   rw [modConj_rvdT, rvdPmQ_eq_of_mem_K S hξ]
 
+/-! ### Generic `𝒦`-preservation (toward the `√R`-range density `hdense`)
+
+  An operator preserves the standard subspace `𝒦 = {ξ : Pξ = ξ}` iff it commutes with `P = projK`, and since
+  `2P = R + D` (`rvdR_add_rvdPmQ_eq`) that holds iff it commutes with `R` (`rvdR`) and `D` (`rvdPmQ`).  A real
+  *symmetric* function `f(R)` (`f(2−r) = f(r)`) commutes with `R` (it is a function of `R`) and with `D = J·T`
+  (`modConj_rvdT`) — because it commutes with `J` (`modConj_cfcΩ` with `twΩ f = conj(f(2−·)) = f`) and with
+  `T` (`rvdT`, a function of `R`).  This is the mechanism by which the symmetric spectral cutoffs land in `𝒦`. -/
+
+/-- **Generic `projK`-commutation:** a continuous ℂ-linear `A` commuting with `rvdR` (`= R`) and `rvdPmQ` (`= D`)
+    pointwise commutes with `projK = (R + D)/2`.  The operator-generic form of `modUnitary_commute_projK_of`. -/
+theorem commute_projK_of_commute_R_D (S : StandardSubspace H) (A : H →L[ℂ] H)
+    (hR : ∀ ξ, A (rvdR S ξ) = rvdR S (A ξ)) (hD : ∀ ξ, A (rvdPmQ S ξ) = rvdPmQ S (A ξ)) (ξ : H) :
+    A (projK S ξ) = projK S (A ξ) := by
+  have hP : ∀ η, (2 : ℝ) • projK S η = rvdR S η + rvdPmQ S η := fun η => by
+    have h := congrArg (fun B => (B : H →L[ℝ] H) η) (rvdR_add_rvdPmQ_eq S)
+    simpa using h.symm
+  have key : (2 : ℝ) • projK S (A ξ) = (2 : ℝ) • A (projK S ξ) := by
+    rw [hP, ← hR, ← hD, ← map_add, ← hP, ContinuousLinearMap.map_smul_of_tower]
+  exact (smul_right_injective H two_ne_zero key).symm
+
+/-- **Generic `𝒦`-invariance from `[A, R] = [A, D] = 0`:** such an `A` preserves `𝒦`.  (RvD Prop 2.2:
+    `𝒦 = {ξ : Pξ = ξ}`, `2P = R + D`.)  The operator-generic form of `modUnitary_mapsTo_K_of_commute`. -/
+theorem mapsTo_K_of_commute_R_D (S : StandardSubspace H) (A : H →L[ℂ] H)
+    (hR : ∀ ξ, A (rvdR S ξ) = rvdR S (A ξ)) (hD : ∀ ξ, A (rvdPmQ S ξ) = rvdPmQ S (A ξ)) :
+    ∀ ξ ∈ S.toClosedSubmodule, A ξ ∈ S.toClosedSubmodule := by
+  intro ξ hξ
+  rw [mem_K_iff_projK] at hξ ⊢
+  rw [← commute_projK_of_commute_R_D S A hR hD ξ, hξ]
+
+/-- **`[A, D] = 0` from `[A, J] = [A, T] = 0`:** since `D = J·T` (`modConj_rvdT`: `J(Tξ) = Dξ`), an operator
+    commuting with the modular conjugation `J` and the polar radius `T` commutes with `D = rvdPmQ`.  For a real
+    *symmetric* `f`, `cfcCont f` commutes with both (`J` via `modConj_cfcΩ`/`twΩ`, `T` as a function of `R`),
+    so it commutes with `D` — the `[·, D] = 0` "frontier" step, available for symmetric symbols. -/
+theorem commute_rvdPmQ_of_commute_modConj_rvdT (S : StandardSubspace H) (A : H →L[ℂ] H)
+    (hJ : ∀ ξ, A (modConj S ξ) = modConj S (A ξ)) (hT : ∀ ξ, A (rvdT S ξ) = rvdT S (A ξ)) (ξ : H) :
+    A (rvdPmQ S ξ) = rvdPmQ S (A ξ) := by
+  rw [← modConj_rvdT S ξ, ← modConj_rvdT S (A ξ), hJ, hT]
+
 /-- **RvD Proposition 2.3 — reality across `𝒦` and `(i𝒦)^⊥`.**  If `x ∈ 𝒦` (`projK x = x`) and `y ⊥ i𝒦`
     (`projIK y = 0`), then `⟨x, y⟩_ℂ` is *real*.  Reason: `Im⟨x, y⟩ = ⟨i·x, y⟩_ℝ`, and `i·x ∈ i𝒦` while
     `y ⊥ i𝒦`, so this real inner product vanishes.  This is the reality used in RvD Theorem 3.8 to show the
