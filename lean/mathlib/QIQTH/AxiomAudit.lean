@@ -4284,6 +4284,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.commute_rvdPmQ_of_commute_modConj_rvdT
 -- expected: standard only — [A,D]=0 from [A,J]=[A,T]=0 (D=J·T, modConj_rvdT). For symmetric f, cfcCont f commutes
 -- with J (modConj_cfcΩ/twΩ) and T (fn of R) ⟹ with D — the [·,D]=0 'frontier' step available for symmetric symbols.
+#print axioms QIQTH.StandardSubspaceModular.cfcΩ_symm_mapsTo_K
+-- expected: standard only — ★★ SYMMETRIC f(R) PRESERVES 𝒦: for twΩ f=f (conj(f(2−r))=f(r)), cfcΩ f maps 𝒦→𝒦.
+-- cfcΩ f commutes with R (cfcΩ_commute_rvdRC), T (cfcΩ_commute_rvdT), J (modConj_cfcΩ + twΩ f=f) ⟹ with D=J·T
+-- (commute_rvdPmQ_of_commute_modConj_rvdT) ⟹ with P=(R+D)/2 (mapsTo_K_of_commute_R_D). The hdense engine (step a):
+-- symmetric spectral cutoffs land in 𝒦. Remaining: cutoff φ_k(R)ξ→ξ ∈range(√R) (step b) + assemble (step c).
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable

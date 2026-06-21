@@ -1515,6 +1515,27 @@ theorem modChar_damp_continuous (t : ℝ) :
         rw [Set.piecewise_eq_of_notMem _ _ _ hni]
   exact hmc.mul hdamp.continuousAt
 
+/-- **★ A `θ`-fixed continuous function of `R` preserves `𝒦`:** for `twΩ f = f` (`conj(f(2−r)) = f(r)`, the
+    modular reflection invariance, e.g. a real symmetric `f`), `cfcΩ f` maps `𝒦` into `𝒦`.  `cfcΩ f` commutes
+    with `R` (`cfcΩ_commute_rvdRC`), with `T = rvdT` (`cfcΩ_commute_rvdT`), and — via `twΩ f = f` and
+    `modConj_cfcΩ` — with the modular conjugation `J`; hence with `D = J·T`
+    (`commute_rvdPmQ_of_commute_modConj_rvdT`) and so with `P = (R + D)/2` (`mapsTo_K_of_commute_R_D`).  This is
+    the structural engine of the `√R`-range density `hdense`: symmetric spectral cutoffs land in `𝒦`. -/
+theorem cfcΩ_symm_mapsTo_K (f : C(Set.Icc (-covM S) (2 + covM S), ℂ)) (hsymm : twΩ S f = f) :
+    ∀ ξ ∈ S.toClosedSubmodule, cfcΩ S f ξ ∈ S.toClosedSubmodule := by
+  have hR : ∀ ξ, cfcΩ S f (rvdR S ξ) = rvdR S (cfcΩ S f ξ) := fun ξ => by
+    have h := DFunLike.congr_fun (cfcΩ_commute_rvdRC S f).eq ξ
+    simpa only [ContinuousLinearMap.mul_apply] using h
+  have hJ : ∀ ξ, cfcΩ S f (modConj S ξ) = modConj S (cfcΩ S f ξ) := fun ξ => by
+    have h := modConj_cfcΩ S f ξ
+    rw [hsymm] at h
+    exact h.symm
+  have hT : ∀ ξ, cfcΩ S f (rvdT S ξ) = rvdT S (cfcΩ S f ξ) := fun ξ => by
+    have h := DFunLike.congr_fun (cfcΩ_commute_rvdT S f).eq ξ
+    simpa only [ContinuousLinearMap.mul_apply] using h
+  exact mapsTo_K_of_commute_R_D S (cfcΩ S f) hR
+    (commute_rvdPmQ_of_commute_modConj_rvdT S (cfcΩ S f) hJ hT)
+
 /-- **`u_t` is θ-fixed:** `conj(u_t(2−r)) = u_t(r)`.  (`u_t(2−r)=exp(it·log(r/(2−r)))=conj(u_t(r))`.) -/
 theorem modChar_reflect (t r : ℝ) : (starRingEnd ℂ) (modChar t (2 - r)) = modChar t r := by
   unfold modChar
