@@ -4438,6 +4438,12 @@ namespace QIQTH.AxiomAudit
 -- of the real Fourier transform 𝓕). From Mathlib's VectorFourier.integral_fourierIntegral_smul_eq_flip + flip_innerₗ (real
 -- inner product symmetric ⟹ L.flip=L, so NO Fourier inversion needed). The engine of the Parseval pairing ∫conj(𝓕A)·𝓕B =
 -- ∫conj(A)·B that (with the Fourier-derivative ψ_H=𝓕[B] and k↦θ change of vars) discharges hFlux. Real progress on hFlux.
+#print axioms QIQTH.Fock.StressTensor.fourier_conj_parseval
+-- expected: standard only — ★★ Stress-tensor Route B, Phase 3b-ii: the PARSEVAL PAIRING ∫conj(𝓕A)·𝓕B = ∫conj(A)·B
+-- (Plancherel, conjugate form). From Mathlib's sesquilinear VectorFourier.integral_sesq_fourierIntegral_eq_neg_flip with
+-- M=innerSL ℂ + Fourier inversion Continuous.fourierInv_fourier_eq (𝓕⁻(𝓕B)=B). Hyps: A integrable; B continuous+integrable,
+-- 𝓕B integrable. This is the analytic HEART of hFlux — now PROVEN, not bundled. Remaining for hFlux: ψ_H=𝓕(−iA') (Fourier-deriv)
+-- + k↦θ change of vars + Krep on-shell diff/decay; then χ_H=𝓕(horizonAmp) (done) + this Parseval ⟹ hFlux ⟹ stressFluxKK_eq_of_flux.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

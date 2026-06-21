@@ -1,5 +1,6 @@
 import QIQTH.Fock.StressTensor.HorizonFourier
 import Mathlib.Analysis.Fourier.FourierTransform
+import Mathlib.Analysis.Fourier.Inversion
 
 /-!
 # Free-field stress tensor (Route B) — Phase 3b-ii: the Fourier-convention bridge
@@ -139,5 +140,21 @@ theorem real_fourier_mul_formula (A g : ℝ → ℂ)
     continuous_fourierChar continuous_inner hA hg
   rw [flip_innerₗ] at h
   simpa only [smul_eq_mul] using h
+
+/-- **★★ Parseval pairing for the real Fourier transform** (the conjugate / sesquilinear form):
+    `∫ w, conj(𝓕 A w)·𝓕 B w = ∫ x, conj(A x)·B x`.  This is Plancherel in the form Phase 3b-ii needs: it pairs
+    `χ_H = 𝓕(horizonAmp)` with `ψ_H = 𝓕(horizonAmp')` to land `∫ conj(A)·B`.  From Mathlib's sesquilinear
+    Fourier identity (`integral_sesq_fourierIntegral_eq_neg_flip` with `M = innerSL ℂ`) + Fourier inversion
+    `𝓕⁻(𝓕 B) = B`. -/
+theorem fourier_conj_parseval (A B : ℝ → ℂ)
+    (hA : Integrable A) (hBc : Continuous B) (hB : Integrable B) (hFB : Integrable (𝓕 B)) :
+    ∫ w, (starRingEnd ℂ) (𝓕 A w) * 𝓕 B w = ∫ x, (starRingEnd ℂ) (A x) * B x := by
+  have hinv : 𝓕⁻ (𝓕 B) = B := Continuous.fourierInv_fourier_eq hBc hB hFB
+  have h := VectorFourier.integral_sesq_fourierIntegral_eq_neg_flip (innerSL ℂ)
+    (e := 𝐞) (μ := (volume : Measure ℝ)) (ν := (volume : Measure ℝ)) (L := innerₗ ℝ)
+    (f := A) (g := 𝓕 B) continuous_fourierChar continuous_inner hA hFB
+  rw [flip_innerₗ] at h
+  rw [show (VectorFourier.fourierIntegral 𝐞 (volume : Measure ℝ) (-innerₗ ℝ) (𝓕 B)) = B from hinv] at h
+  simpa only [coe_innerSL_apply, RCLike.inner_apply'] using h
 
 end QIQTH.Fock.StressTensor
