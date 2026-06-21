@@ -330,6 +330,41 @@ theorem eqOn_of_im_zero_edge_halfStrip {F G : ℂ → ℂ} {M : ℝ}
     (fun w hw => (norm_sub_le _ _).trans (add_le_add (hFb w hw) (hGb w hw)))
     (fun w hw => by rw [Pi.sub_apply, h0 w hw, sub_self]) z hz)
 
+/-- **Real on both edges ⟹ constant on the HALF-strip** `{−1/2 < Im z < 0}`.  Adapts the unit-strip two-edge
+    Phragmén–Lindelöf constancy (`eqConst_of_im_zero_strip`, edges `Im = 0`, `Im = 1`) via the affine map
+    `φ(w) = −w/2`, which maps `{0 < Im w < 1}` onto `{−1/2 < Im z < 0}` (top edge `Im w = 0 ↦ Im z = 0`,
+    bottom edge `Im w = 1 ↦ Im z = −1/2`).  `G(w) = g(−w/2)` is bounded-holomorphic on the unit strip and real
+    on both its edges, hence constant; pulling back gives `g` constant on the half-strip.  This is the
+    constancy the RvD Theorem 3.8 g-function (real on `Im = 0` and `Im = −1/2`) consumes. -/
+theorem eqConst_of_im_zero_halfStrip {g : ℂ → ℂ} {M : ℝ}
+    (hg : DiffContOnCl ℂ g kmsHalfStripOpen) (hgb : ∀ z ∈ kmsHalfStripOpen, ‖g z‖ ≤ M)
+    (h0 : ∀ z : ℂ, z.im = 0 → (g z).im = 0)
+    (h1 : ∀ z : ℂ, z.im = -(1 / 2) → (g z).im = 0) :
+    ∃ c : ℂ, ∀ z ∈ kmsHalfStripOpen, g z = c := by
+  have him : ∀ w : ℂ, (-w / 2 : ℂ).im = -w.im / 2 := fun w => by
+    rw [neg_div, Complex.neg_im, Complex.div_ofNat_im, neg_div]
+  have hmaps : Set.MapsTo (fun w => -w / 2) kmsStripOpen kmsHalfStripOpen := by
+    intro w hw
+    simp only [kmsStripOpen, Set.mem_preimage, Set.mem_Ioo] at hw
+    simp only [kmsHalfStripOpen, Set.mem_preimage, Set.mem_Ioo, him]
+    constructor <;> linarith [hw.1, hw.2]
+  have hφdiff : DiffContOnCl ℂ (fun w : ℂ => -w / 2) kmsStripOpen :=
+    Differentiable.diffContOnCl (by fun_prop)
+  obtain ⟨c, hc⟩ := eqConst_of_im_zero_strip (hg.comp hφdiff hmaps)
+    (fun w hw => hgb _ (hmaps hw))
+    (fun w hw => h0 _ (by rw [him, hw]; norm_num))
+    (fun w hw => h1 _ (by rw [him, hw]; norm_num))
+  refine ⟨c, fun z hz => ?_⟩
+  have hzim : (-2 * z : ℂ).im = -(2 * z.im) := by
+    simp [Complex.mul_im, Complex.neg_im, Complex.neg_re]
+  have hw : (-2 * z : ℂ) ∈ kmsStripOpen := by
+    simp only [kmsHalfStripOpen, Set.mem_preimage, Set.mem_Ioo] at hz
+    simp only [kmsStripOpen, Set.mem_preimage, Set.mem_Ioo, hzim]
+    constructor <;> linarith [hz.1, hz.2]
+  have hz' := hc (-2 * z) hw
+  simp only [Function.comp_apply] at hz'
+  rwa [show (-(-2 * z) / 2 : ℂ) = z from by ring] at hz'
+
 /-- The **unit KMS strip** `{−1 ≤ Im z ≤ 0}` and its interior — the strip of RvD Definition 3.4 (the
     full-width KMS condition, before Proposition 3.5 folds it to the half-strip). -/
 def negStrip : Set ℂ := Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0

@@ -3576,6 +3576,10 @@ namespace QIQTH.AxiomAudit
 -- (Im=0) agree on the closed strip (eqZero_of_im_zero_edge on F−G). RvD Thm 3.8 step-5 matching: the entire
 -- orbit correlation ⟨h(z),b⟩ and the StripKMSrvd KMS function agree on the real axis ⇒ on the strip ⇒ the KMS
 -- top-edge reality transfers to the orbit correlation (the Im=1 input of corrC_orbit_eq_of_edges_real).
+#print axioms QIQTH.StripUniqueness.eqConst_of_im_zero_halfStrip
+-- expected: standard only — ★★ HALF-STRIP two-edge constancy: bdd-holo g on {-1/2<Im<0} real on edges Im=0 & Im=-1/2
+-- ⇒ g CONSTANT. Adapts eqConst_of_im_zero_strip ({0<Im<1}) via affine φ(w)=-w/2 ({0<Im w<1}→{-1/2<Im z<0}); G=g∘φ
+-- bdd-holo real-on-edges ⇒ const, pull back. The constancy the RvD device g-function (real on Im=0 & Im=-1/2) consumes.
 #print axioms QIQTH.StripUniqueness.eqConst_of_im_zero_strip
 -- expected: standard only — ★★ bounded-holomorphic g with Im g=0 on BOTH strip edges ⇒ g CONSTANT. Combines
 -- im_zero_on_strip (Im g=0 throughout) with AnalyticOnNhd.eq_const_of_re_eq_const (Re(i·g)=−Im g=0 const ⇒ i·g
