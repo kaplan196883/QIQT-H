@@ -25,11 +25,21 @@ derivatives) as `θ → +∞`, since `x = nullMom θ = c·e^{−θ}`.
   rigorous non-vacuity proof (an explicit `f` discharging ALL hyps) is the honest remaining TODO — exactly the
   vacuity trap the axiom-budget check does NOT catch.
 
-**Remaining work (the lightest frontier):** (a) prove `Krep`'s super-exponential rapidity decay for `f ∈ C_c^∞`
-(Schwartz Fourier theory: `minkowskiFourier` of `C_c^∞` is Schwartz ⟹ the `e^{−nθ}` bounds via `|massShell|~e^θ`);
-(b) from it, `Differentiable ℝ horizonAmp` (boundary differentiability at `x=0`) + the integrability hypotheses;
-(c) a non-vacuity witness. This is genuine multi-fire analysis but conceptually routine; the crux (the
-distribution-free Fourier computation + the Minkowski-Fourier differentiation) is done.
+**Remaining work — REFRAMED (the infrastructure already exists).**  `QIQTH/Fock/SchwartzDecay.lean` already
+provides the Fourier-decay machinery: `minkowskiFourier_eq_fourierIntegral` (= Mathlib `VectorFourier`),
+`schwartz_Krep_memLp` (for `f : SchwartzMap`, `‖Krep m f θ‖ ≤ C·(cosh θ)⁻¹`, via Mathlib's
+`VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le` at `k=0,n=1`), and `schwartzLocalTest`.  So the
+remaining is **tractable via existing tools, not a frontier** — just laborious:
+* (a) generalize `schwartz_Krep_memLp`'s `(cosh θ)⁻¹` bound to `(cosh θ)⁻ⁿ` (using `n` iterated derivatives —
+  the same Mathlib lemma at higher `n`); `(cosh θ)⁻ⁿ ~ e^{−n|θ|}` gives the needed decay (e.g. `n ≥ 2` for
+  `Integrable horizonAmp`, since `∫‖Krep‖·nullMom = ∫‖Krep‖·(m/√2)e^{−θ}` needs `e^{−2|θ|}` to converge at `−∞`).
+* (b) from the decay: `Differentiable ℝ horizonAmp` (boundary differentiability at `x=0`) + the integrabilities.
+* (c) the class reconciliation: `Krep_hasDerivAt` is proved for `Continuous f` + `HasCompactSupport f`, the decay
+  for `SchwartzMap f`; both hold on `C_c^∞` (smooth + compact support) — restrict there.
+* (d) a NON-VACUITY witness.  NOTE: `f = 0` already witnesses logical non-vacuity (all hyps hold trivially, the
+  axiom-budget vacuity concern is technically resolved); a *nontrivial* witness needs (a)–(c).
+This is genuine multi-fire but routine analysis on top of existing infrastructure; the crux (the distribution-free
+Fourier computation + the Minkowski-Fourier differentiation) is done.
 
 
 ## Goal (one sentence)
