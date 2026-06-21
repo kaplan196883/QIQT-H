@@ -508,6 +508,28 @@ theorem clm_eq_of_inner_self_eq {A B : H →L[ℂ] H}
   ext x
   exact sub_eq_zero.mp (by simpa using LinearMap.congr_fun h0 x)
 
+open MeasureTheory QIQTH.SpectralTheorem in
+/-- **The bounded Borel FC depends only on the a.e. class of its symbol**: `f(R) = g(R)` whenever `f =ᵐ g`
+    against every spectral measure `μ^R_x`.  Via `rvdSpec_borelFC_diag` (`⟪x, f(R)x⟫ = ∫ f dμ^R_x`) the
+    diagonals agree (`integral_congr_ae`), so `clm_eq_of_inner_self_eq` gives `f(R) = g(R)`.  This is the tool
+    for `deviceOpC(−i/2) = √(2−R)`: the device character `d_{−i/2}` and `√(2−r)` differ ONLY on the spectral
+    endpoints `{0,2}`, which carry no spectral mass once `R` and `2−R` are injective (`E({0,2}) = 0`). -/
+theorem borelFC_congr_ae (S : StandardSubspace H) {f g : spectrum ℝ (rvdRC S) → ℂ}
+    {Cf Cg : ℝ} (hf : Measurable f) (hC0f : 0 ≤ Cf) (hCf : ∀ ω, ‖f ω‖ ≤ Cf)
+    (hg : Measurable g) (hC0g : 0 ≤ Cg) (hCg : ∀ ω, ‖g ω‖ ≤ Cg)
+    (h : ∀ x : H, f =ᵐ[rvdSpecMeasure S x] g) :
+    borelFC (rvdRC S) (rvdRC_isSelfAdjoint S) hf hC0f hCf
+      = borelFC (rvdRC S) (rvdRC_isSelfAdjoint S) hg hC0g hCg := by
+  refine clm_eq_of_inner_self_eq (fun x => ?_)
+  have ef : inner ℂ (borelFC (rvdRC S) (rvdRC_isSelfAdjoint S) hf hC0f hCf x) x
+      = (starRingEnd ℂ) (∫ ω, f ω ∂(rvdSpecMeasure S x)) := by
+    rw [← inner_conj_symm, rvdSpec_borelFC_diag]
+  have eg : inner ℂ (borelFC (rvdRC S) (rvdRC_isSelfAdjoint S) hg hC0g hCg x) x
+      = (starRingEnd ℂ) (∫ ω, g ω ∂(rvdSpecMeasure S x)) := by
+    rw [← inner_conj_symm, rvdSpec_borelFC_diag]
+  rw [ef, eg]
+  exact congrArg (starRingEnd ℂ) (integral_congr_ae (h x))
+
 /-- **Diagonal-correlation form of the RvD Theorem 3.8 closeout**: if the modular correlations agree,
     `⟨ξ, V_t ξ⟩ = ⟨ξ, Δ^{it} ξ⟩` for every `ξ`, then `V_t = Δ^{it}` (stated with `ξ` in the first slot, the
     `modCorrExt` convention).  This is the operator-level conclusion that the `modCorrExt` strip-uniqueness

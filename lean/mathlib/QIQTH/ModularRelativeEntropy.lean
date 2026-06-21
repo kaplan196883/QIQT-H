@@ -609,6 +609,19 @@ theorem borelFC_apply_norm_sq (S : StandardSubspace H) {g : spectrum ℝ (rvdRC 
   rw [borelFC_inner_self S hg hC0 hC ζ, hcast] at hre
   simpa using hre.symm
 
+open MeasureTheory in
+/-- **Diagonal of the bounded Borel FC against the spectral measure**: `⟪x, f(R)x⟫ = ∫ f dμ^R_x`.  The
+    linear (un-conjugated) companion to `borelFC_inner_self`, via the spectral bridge
+    (`inner_borelFC` + `bilinDiag_self` + `diagInt`).  This is the bridge for `borelFC_congr_ae` (`borelFC`
+    depends only on the `μ^R_x`-a.e. class of `f`): combined with `clm_eq_of_inner_self_eq` it gives
+    `borelFC(f) = borelFC(g)` whenever `f =ᵐ g` for every spectral measure — the tool for
+    `deviceOpC(−i/2) = √(2−R)` (the device character and `√(2−r)` differ only on the `E`-null endpoints). -/
+theorem rvdSpec_borelFC_diag (S : StandardSubspace H) {f : spectrum ℝ (rvdRC S) → ℂ}
+    (hf : Measurable f) {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ ω, ‖f ω‖ ≤ C) (x : H) :
+    inner ℂ x (borelFC (rvdRC S) (rvdRC_isSelfAdjoint S) hf hC0 hC x)
+      = ∫ ω, f ω ∂(rvdSpecMeasure S x) := by
+  rw [inner_borelFC, bilinDiag_self, ProjectionValuedMeasure.diagInt, rvdSpecMeasure]
+
 open QIQTH.StandardSubspaceModular in
 /-- **Bottom-edge `t`-translation of the device operator**: `deviceOpC(t − i/2) = Δ^{it}·deviceOpC(−i/2)`
     (the bottom-edge analogue of `deviceOpReal_eq`).  `devChar(↑t − i/2) = u_t·devChar(−i/2)` EVERYWHERE (via

@@ -4184,6 +4184,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — borelFC LINEARITY (subtraction): (f−g)(T)=f(T)−g(T), from borelFC_add+borelFC_neg
 -- (=borelFC_smul(−1)). Step (i) of the strong-holomorphy diff-quotient: deviceVec(z)−deviceVec(z₀) =
 -- borelFC(devChar z − devChar z₀)ζ, so the slope = borelFC(Δ_z)ζ with Δ_z=(devChar z−devChar z₀)/(z−z₀).
+#print axioms QIQTH.rvdSpec_borelFC_diag
+-- expected: standard only — DIAGONAL of borelFC: ⟪x,f(R)x⟫=∫f dμ^R_x (inner_borelFC+bilinDiag_self+diagInt). Linear
+-- companion to borelFC_inner_self; the bridge for borelFC_congr_ae.
+#print axioms QIQTH.StandardSubspaceModular.borelFC_congr_ae
+-- expected: standard only — ★★ borelFC a.e.-CONGRUENCE: f(R)=g(R) if f=ᵐ[μ^R_x] g ∀x. Via rvdSpec_borelFC_diag (diagonals
+-- = ∫, integral_congr_ae) + clm_eq_of_inner_self_eq. THE tool for deviceOpC(−i/2)=√(2−R): d_{−i/2} & √(2−r) differ ONLY
+-- on endpoints {0,2}, E-null once R,2−R injective. Remaining for (a1-end): scalarMeasure({0,2})=0 (E-atom, needs E=
+-- boundedFC(ind) or R·E({λ})=λE({λ})).
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable
