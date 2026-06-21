@@ -4433,6 +4433,11 @@ namespace QIQTH.AxiomAudit
 -- self-adjointness (∫conj(a)a'=i·rapidityMomentum): the two i factors give i²=−1 ⟹ the real −2π·rapidityMomentum. hFlux is
 -- the ONE remaining deferred piece (weak sesquilinear Parseval on χ_H=𝓕(horizonAmp), ψ_H=𝓕(−iA'), + k↦θ change of vars) — a
 -- genuine standard Mathlib-provable theorem (Fourier inversion + integral_sesq_fourierIntegral_eq_neg_flip), NOT vacuous/conjecture.
+#print axioms QIQTH.Fock.StressTensor.real_fourier_mul_formula
+-- expected: standard only — ★ Stress-tensor Route B, Phase 3b-ii: the multiplication formula ∫ 𝓕A·g = ∫ A·𝓕g (self-adjointness
+-- of the real Fourier transform 𝓕). From Mathlib's VectorFourier.integral_fourierIntegral_smul_eq_flip + flip_innerₗ (real
+-- inner product symmetric ⟹ L.flip=L, so NO Fourier inversion needed). The engine of the Parseval pairing ∫conj(𝓕A)·𝓕B =
+-- ∫conj(A)·B that (with the Fourier-derivative ψ_H=𝓕[B] and k↦θ change of vars) discharges hFlux. Real progress on hFlux.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

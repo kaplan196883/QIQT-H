@@ -127,4 +127,17 @@ theorem stressFluxKK_eq_of_flux (m : ℝ) (f : V → ℂ) (a a' : ℝ → ℂ)
     push_cast; ring
   exact_mod_cast key
 
+/-- **★ Multiplication formula for the real Fourier transform** (self-adjointness of `𝓕`):
+    `∫ w, 𝓕 A w · g w = ∫ x, A x · 𝓕 g x`.  Since the real inner product is symmetric, `L.flip = L`, so this
+    follows from Mathlib's `integral_fourierIntegral_smul_eq_flip` with NO Fourier inversion.  This is the
+    engine of the Parseval pairing `∫ conj(𝓕A)·𝓕B = ∫ conj(A)·B` needed to discharge `hFlux`. -/
+theorem real_fourier_mul_formula (A g : ℝ → ℂ)
+    (hA : Integrable A) (hg : Integrable g) :
+    ∫ w, 𝓕 A w * g w = ∫ x, A x * 𝓕 g x := by
+  have h := VectorFourier.integral_fourierIntegral_smul_eq_flip (e := 𝐞)
+    (μ := (volume : Measure ℝ)) (ν := (volume : Measure ℝ)) (L := innerₗ ℝ) (f := A) (g := g)
+    continuous_fourierChar continuous_inner hA hg
+  rw [flip_innerₗ] at h
+  simpa only [smul_eq_mul] using h
+
 end QIQTH.Fock.StressTensor
