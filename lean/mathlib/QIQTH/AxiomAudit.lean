@@ -4637,4 +4637,12 @@ namespace QIQTH.AxiomAudit
 -- from the machine-checked RvD Theorem 3.8 (oneParticleBW_complete) rather than assumed. Closes target #2 (GPT-5.5-pro
 -- audit): the one remaining modular-theory ASSUMPTION of the GR chain is replaced by a theorem. Axiom-free, no sorry.
 
+-- Item A (QIQT_GR_DISCHARGE_PLAN.md), Phase A1a — wedge-mode analytic continuation foundations:
+#print axioms QIQTH.Fock.WedgeAnalyticity.KrepCont_ofReal
+-- expected: standard only — ★★ A1a: the analytically continued localized amplitude KrepCont m f ζ agrees with
+-- Krep m f θ on the real axis (ζ=↑θ). Foundation for the free-field Hardy proof of StripKMSrvd (boost-KMS / BW).
+#print axioms QIQTH.Fock.WedgeAnalyticity.massShellℂ_add_pi_I
+-- expected: standard only — ★★ the iπ-shift identity p_m(ζ+iπ)=−p_m(ζ) (cosh/sinh add-π-i), the analytic engine
+-- of the boundary conjugation ψ_f(θ+iπ)=conj(ψ_f(θ)) that gives the KMS bottom edge.
+
 end QIQTH.AxiomAudit
