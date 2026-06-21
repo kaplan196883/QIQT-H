@@ -958,6 +958,23 @@ theorem deviceVecF_real_eq (S : StandardSubspace H) (ζ : H) (t : ℝ) :
     deviceOpReal_eq, ContinuousLinearMap.mul_apply]
 
 open QIQTH.StandardSubspaceModular in
+/-- **The device-vector RvD g-function is HOLOMORPHIC on the open half-strip** (piece 2 of the endgame):
+    `g(z) = ⟪J·d_z(R)ζ, V_z η⟫ = modConjBilin S (deviceVecF S ζ z) (gaussSmearC V n η z)` is
+    complex-differentiable on `{−1/2 < Im z < 0}`.  It is the continuous ℂ-bilinear form `modConjBilin`
+    (`= ⟪J·,·⟫`, holomorphic by the J-cancellation) applied to the two HOLOMORPHIC curves: the device vector
+    `deviceVecF` (`differentiableOn_deviceVecF`, the strong-holomorphy result) and the entire V-orbit
+    `gaussSmearC` (`differentiable_gaussSmearC`).  Bilinear chain rule (`DifferentiableOn.clm_apply`).  This is
+    the holomorphic strip function the Phragmén–Lindelöf constancy `g(t) = g(0) ⟹ GConstancy` consumes. -/
+theorem differentiableOn_gFunction (S : StandardSubspace H) (ζ : H)
+    {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n) (η : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖) :
+    DifferentiableOn ℂ (fun z => modConjBilin S (deviceVecF S ζ z) (gaussSmearC V n η z))
+      (Complex.im ⁻¹' Set.Ioo (-(1 / 2) : ℝ) 0) :=
+  DifferentiableOn.clm_apply
+    ((modConjBilin S).differentiable.comp_differentiableOn (differentiableOn_deviceVecF S ζ))
+    (differentiable_gaussSmearC hn η hcont hbd).differentiableOn
+
+open QIQTH.StandardSubspaceModular in
 /-- **Diagonal operator identification of the device strip extension** (general `z` in the half-strip):
     `D_ξ(z) = ⟪ξ, deviceOpC(z) ξ⟫`.  The scalar integral `∫ d_z dμ^R_ξ` IS the diagonal expectation of the
     device operator `d_z(R)` (via `inner_borelFC` + `bilinDiag_self` + `diagInt`).  This connects the proven

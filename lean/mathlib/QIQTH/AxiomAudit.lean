@@ -4017,6 +4017,12 @@ namespace QIQTH.AxiomAudit
 -- So deviceVec(0)=√R ζ=ξ, J·deviceVec(0)=Jξ ⇒ g-function value g(0)=⟪η,Jξ⟫ = the GConstancy RHS. The cfcCont↔CFC
 -- bridge (borelFC of continuous fn = Mathlib CFC) realized via the sqrt-uniqueness pattern, no new axiom.
 #print axioms QIQTH.devCorrExt_ofReal_inner
+#print axioms QIQTH.differentiableOn_gFunction
+-- expected: standard only — ★★★ G-FUNCTION HOLOMORPHIC (endgame piece 2): g(z)=⟪J·d_z(R)ζ, V_z η⟫=modConjBilin S
+-- (deviceVecF S ζ z)(gaussSmearC V n η z) is DifferentiableOn the open half-strip. The continuous ℂ-bilinear
+-- modConjBilin (=⟪J·,·⟫) applied to two HOLO curves: deviceVecF (differentiableOn_deviceVecF, strong holo) +
+-- gaussSmearC (differentiable_gaussSmearC, entire V-orbit). Bilinear chain rule DifferentiableOn.clm_apply. The
+-- holomorphic strip fn the Phragmén–Lindelöf constancy g(t)=g(0)⟹GConstancy consumes.
 #print axioms QIQTH.deviceVecF_real_eq
 -- expected: standard only — REAL-AXIS value deviceVecF(t)=Δ^{it}·√R ζ (g-function top-edge): via deviceVecF_eq_of_mem
 -- + deviceOpC_ofReal + deviceOpReal_eq. With ξ=√R ζ, J·deviceVecF(t)=Δ^{it}(Jξ) = the second slot of g(t)=
