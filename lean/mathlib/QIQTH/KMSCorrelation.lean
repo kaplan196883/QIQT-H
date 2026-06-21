@@ -265,6 +265,25 @@ theorem gFunction_top_edge_real_all (S : StandardSubspace H) (ζ : H) {V : ℝ �
   rw [hz_eq]
   exact gFunction_top_edge_real S ζ hn η hcont hbd hgrp hξ z.re (hKinv z.re)
 
+/-- **GConstancy for the entire vectors, reduced to the BOTTOM-EDGE KMS reality** (the precise residual of the
+    RvD Theorem 3.8 discharge).  With the geometric inputs (`ξ = √R ζ ∈ 𝒦`, the V-orbit stays in `𝒦`) the
+    top-edge reality is automatic (`gFunction_top_edge_real_all`), so the ENTIRE analytic g-function argument
+    collapses to a single hypothesis: `h1`, the reality of `g` on the mid-line `Im z = −1/2`.  That mid-line
+    reality is exactly the KMS input (`HalfStripReal` / `StripKMSrvd`).  Conclusion: `⟪V_t η_n, Δ^{it}(Jξ)⟫ =
+    ⟪η_n, Jξ⟫` (GConstancy at the entire vector `η_n` and `ξ = √R ζ`) — everything but the bottom-edge KMS step
+    is now machine-checked. -/
+theorem gConstancy_entire_of_bottom (S : StandardSubspace H) (ζ : H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ}
+    (hn : 0 < n) (η : H) (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hgrp : ∀ s t, V s (V t η) = V (s + t) η)
+    (hξ : projK S (rvdSqrtR S ζ) = rvdSqrtR S ζ)
+    (hKinv : ∀ s : ℝ, projK S (V s (gaussSmear V n η)) = V s (gaussSmear V n η))
+    (h1 : ∀ z : ℂ, z.im = -(1 / 2) →
+      (modConjBilin S (deviceVecF S ζ z) (gaussSmearC V n η z)).im = 0) (t : ℝ) :
+    inner ℂ (V t (gaussSmear V n η)) (modUnitary S t (modConj S (rvdSqrtR S ζ)))
+      = inner ℂ (gaussSmear V n η) (modConj S (rvdSqrtR S ζ)) :=
+  gConstancy_entire S ζ hn η hcont hbd hgrp
+    (gFunction_top_edge_real_all S ζ hn η hcont hbd hgrp hξ hKinv) h1 t
+
 /-- **Analytic capstone of the KMS-uniqueness proof** (RvD Theorem 3.8): given the labelled KMS function,
     the orbit matrix element is `t`-independent.  Assembles the whole verified analytic chain.  Inputs: the
     *geometric* facts (`w ⊥ i𝒦`, the orbit `V_t(gaussSmear)` stays in `𝒦`) and the *labelled KMS input* — a

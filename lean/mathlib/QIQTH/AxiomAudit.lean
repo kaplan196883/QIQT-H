@@ -3790,6 +3790,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ STEP 6a (to closed strip): Im(corrC w)=0 on BOTH edges (Im=0,Im=1) ⇒ corrC w
 -- constant on the CLOSED kmsStrip. eqConst_of_im_zero_strip (Phragmén–Lindelöf) gives const on the open strip;
 -- continuity of entire g propagates to closure (kmsStrip=closure kmsStripOpen, Set.EqOn.closure).
+#print axioms QIQTH.StandardSubspaceModular.gConstancy_entire_of_bottom
+-- expected: standard only — ★★★ GCONSTANCY(η_n) REDUCED TO BOTTOM-EDGE KMS: ⟪V_t η_n,Δ^{it}Jξ⟫=⟪η_n,Jξ⟫ given ONLY
+-- the geometric inputs (ξ=√Rζ∈𝒦, orbit∈𝒦) + h1 (mid-line Im=-1/2 reality = the KMS input HalfStripReal). Top edge
+-- auto (gFunction_top_edge_real_all). The ENTIRE analytic g-function argument now collapses to the single bottom-edge
+-- KMS hypothesis — everything else machine-checked. Remaining to full hUniq: bottom-edge reality + density η_n→η + ξ range.
 #print axioms QIQTH.StandardSubspaceModular.gFunction_top_edge_real_all
 -- expected: standard only — TOP-EDGE reality ∀z form (h0 input): Im g(z)=0 on Im z=0 edge, for ξ=√Rζ∈𝒦 + orbit∈𝒦.
 -- z with Im z=0 is real (z=↑z.re), so = gFunction_top_edge_real at z.re. Geometric, always-available top edge.
