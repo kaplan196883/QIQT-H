@@ -538,6 +538,70 @@ theorem deviceOpReal_zero (S : StandardSubspace H) : deviceOpReal S 0 = rvdSqrtR
   exact (CFC.sqrt_unique hsq hpos).symm
 
 open QIQTH.StandardSubspaceModular in
+/-- **The continuous symbol `√(2−·)` gives `√(2−R)`**: `cfcCont(√(2−·)) = rvdSqrtTwoSubR` (the bottom-edge
+    analogue of `deviceOpReal_zero`, which does `cfcCont(√·) = √R`).  Route: the square is `2−R`
+    (`cfcCont_mul` + `cfcCont(2−coord) = 2−R` via `cfcCont_add`/`_smul`/`_one`/`_coord`, since
+    `√(2−ω)·√(2−ω) = 2−ω` on `σ(R) ⊆ [0,2]`), and `cfcCont(√(2−·)) = (cfcCont ∜(2−·))² ≥ 0`; `CFC.sqrt_unique`
+    then identifies it with `CFC.sqrt(2−R) = rvdSqrtTwoSubR`.  This is the CONTINUOUS half of
+    `deviceOpC(−i/2) = √(2−R)`; the device character `d_{−i/2}` then matches `√(2−·)` only μ-a.e. (they swap at
+    the spectral endpoints `{0,2}`), closed by `borelFC_congr_ae` + `rvdSpecMeasure_endpoints`. -/
+theorem cfcCont_sqrtTwoSub_eq (S : StandardSubspace H) :
+    cfcCont S ⟨fun ω => (Real.sqrt (2 - (ω : ℝ)) : ℂ),
+        Complex.continuous_ofReal.comp
+          (Real.continuous_sqrt.comp (continuous_const.sub continuous_subtype_val))⟩
+      = rvdSqrtTwoSubR S := by
+  set sqrtC : C(spectrum ℝ (rvdRC S), ℂ) :=
+    ⟨fun ω => (Real.sqrt (2 - (ω : ℝ)) : ℂ),
+      Complex.continuous_ofReal.comp
+        (Real.continuous_sqrt.comp (continuous_const.sub continuous_subtype_val))⟩ with hsqrtC
+  set qrtC : C(spectrum ℝ (rvdRC S), ℂ) :=
+    ⟨fun ω => (Real.sqrt (Real.sqrt (2 - (ω : ℝ))) : ℂ),
+      Complex.continuous_ofReal.comp
+        (Real.continuous_sqrt.comp
+          (Real.continuous_sqrt.comp (continuous_const.sub continuous_subtype_val)))⟩ with hqrtC
+  set twoSubC : C(spectrum ℝ (rvdRC S), ℂ) :=
+    ⟨fun ω => ((2 - (ω : ℝ) : ℝ) : ℂ),
+      Complex.continuous_ofReal.comp (continuous_const.sub continuous_subtype_val)⟩ with htwoSubC
+  -- cfcCont(2−coord) = 2−R, from the ⋆-algebra-hom structure of cfcCont
+  have htwosub : cfcCont S twoSubC = rvdTwoSubRC S := by
+    have h1 : twoSubC = (2 : ℂ) • (1 : C(spectrum ℝ (rvdRC S), ℂ))
+        + (-1 : ℂ) • ⟨specCoord S, Complex.continuous_ofReal.comp continuous_subtype_val⟩ := by
+      ext ω
+      simp only [ContinuousMap.add_apply, ContinuousMap.smul_apply, ContinuousMap.one_apply,
+        ContinuousMap.coe_mk, smul_eq_mul]
+      show ((2 - (ω : ℝ) : ℝ) : ℂ) = 2 * 1 + (-1) * specCoord S ω
+      rw [specCoord]; push_cast; ring
+    rw [h1, cfcCont_add, cfcCont_smul, cfcCont_smul, cfcCont_one, cfcCont_coord, rvdTwoSubRC,
+      neg_one_smul, ← sub_eq_add_neg]
+  -- square = 2−R
+  have hsq : cfcCont S sqrtC * cfcCont S sqrtC = rvdTwoSubRC S := by
+    rw [← cfcCont_mul]
+    refine (?_ : cfcCont S (sqrtC * sqrtC) = cfcCont S twoSubC).trans htwosub
+    congr 1
+    ext ω
+    show (Real.sqrt (2 - (ω : ℝ)) : ℂ) * (Real.sqrt (2 - (ω : ℝ)) : ℂ) = ((2 - (ω : ℝ) : ℝ) : ℂ)
+    rw [← Complex.ofReal_mul, Real.mul_self_sqrt (by linarith [(rvdRC_spectrum_mem_Icc S ω).2])]
+  -- positivity: √(2−·) = (∜(2−·))² ≥ 0
+  have hpos : 0 ≤ cfcCont S sqrtC := by
+    have hsqrtC_eq : sqrtC = qrtC * qrtC := by
+      ext ω
+      show (Real.sqrt (2 - (ω : ℝ)) : ℂ)
+        = (Real.sqrt (Real.sqrt (2 - (ω : ℝ))) : ℂ) * (Real.sqrt (Real.sqrt (2 - (ω : ℝ))) : ℂ)
+      rw [← Complex.ofReal_mul, Real.mul_self_sqrt (Real.sqrt_nonneg _)]
+    have hsa : star (cfcCont S qrtC) = cfcCont S qrtC := by
+      rw [← cfcCont_star]
+      congr 1
+      ext ω
+      show (starRingEnd ℂ) (Real.sqrt (Real.sqrt (2 - (ω : ℝ))) : ℂ)
+        = (Real.sqrt (Real.sqrt (2 - (ω : ℝ))) : ℂ)
+      exact Complex.conj_ofReal _
+    rw [hsqrtC_eq, cfcCont_mul]
+    calc (0 : H →L[ℂ] H) ≤ star (cfcCont S qrtC) * cfcCont S qrtC := star_mul_self_nonneg _
+      _ = cfcCont S qrtC * cfcCont S qrtC := by rw [hsa]
+  rw [rvdSqrtTwoSubR]
+  exact (CFC.sqrt_unique hsq hpos).symm
+
+open QIQTH.StandardSubspaceModular in
 /-- **The real-axis device operator factors as `Δ^{it}·√R`**: `deviceOpReal t = modUnitary S t · rvdSqrtR`
     (the general top-edge operator identity, `deviceOpReal_zero` is the `t = 0` case).  `devChar(↑t) =
     u_t·√·` (`devChar_ofReal`), so `borelFC(devChar ↑t) = borelFC(u_t)·borelFC(√·) = Δ^{it}·√R`

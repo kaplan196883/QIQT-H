@@ -4213,6 +4213,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ μ^R_x({λ∈{0,2}})=0: the device-character ENDPOINTS are μ^R_x-null (measure_union_null
 -- of the two atoms). EXACTLY the a.e. input borelFC_congr_ae needs for deviceOpC(−i/2)=√(2−R): d_{−i/2} & √(2−r)
 -- differ only on {0,2}. (a1-end) E-atom-vanishing now CLOSED — next: feed into deviceOpC(−i/2)=√(2−R) + KMS reflection.
+#print axioms QIQTH.cfcCont_sqrtTwoSub_eq
+-- expected: standard only — CONTINUOUS half of deviceOpC(−i/2)=√(2−R): cfcCont(√(2−·))=rvdSqrtTwoSubR. Mirrors
+-- deviceOpReal_zero (cfcCont(√·)=√R): square=2−R (cfcCont_mul + cfcCont(2−coord)=2−R via add/smul/one/coord),
+-- positive (=(cfcCont ∜(2−·))²), CFC.sqrt_unique ⇒ CFC.sqrt(2−R).
+#print axioms QIQTH.StandardSubspaceModular.deviceOpC_neg_half_eq
+-- expected: standard only — ★★★ deviceOpC(−i/2)=√(2−R) (=rvdSqrtTwoSubR), the BOTTOM-EDGE device identity. devChar(−i/2)
+-- =√(2−r) on (0,2) (devChar_neg_half_I) + cfcCont(√(2−·))=√(2−R) (cfcCont_sqrtTwoSub_eq); symbols differ ONLY at {0,2}
+-- (modCharC=1 swaps), μ^R_x-null (rvdSpecMeasure_endpoints), so borelFC_congr_ae identifies the operators. Step (a1)
+-- of the bottom-edge KMS reality (A) COMPLETE: J·deviceOpC(−i/2)ζ=J√(2−R)ζ=√Rζ=ξ. Remaining: (a2/a3) KMS reflection.
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable

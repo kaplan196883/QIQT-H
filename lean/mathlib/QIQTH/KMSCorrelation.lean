@@ -530,6 +530,35 @@ theorem borelFC_congr_ae (S : StandardSubspace H) {f g : spectrum ℝ (rvdRC S) 
   rw [ef, eg]
   exact congrArg (starRingEnd ℂ) (integral_congr_ae (h x))
 
+open MeasureTheory in
+/-- **The bottom-edge device operator is `√(2−R)`**: `deviceOpC(−i/2) = rvdSqrtTwoSubR`.  The device character
+    `d_{−i/2}(r) = √(2−r)` on `(0,2)` (`devChar_neg_half_I`) and the continuous symbol `√(2−·)` gives `√(2−R)`
+    (`cfcCont_sqrtTwoSub_eq`); the two symbols differ ONLY at the spectral endpoints `{0,2}` (where the
+    piecewise `modCharC = 1` swaps the value), and those are `μ^R_x`-null (`rvdSpecMeasure_endpoints`), so
+    `borelFC_congr_ae` identifies the operators.  This completes the device/J algebra at the bottom edge:
+    `J·deviceOpC(−i/2)ζ = J√(2−R)ζ = √R ζ = ξ` — RvD's `(2−R)^{1/2}ζ = Jξ`, the half-modular-shift `Δ^{1/2} = J`
+    on `𝒦`.  The sole prior unproven step of the bottom-edge KMS reality (A) is thereby reduced to the KMS
+    reflection (a2/a3). -/
+theorem deviceOpC_neg_half_eq (S : StandardSubspace H) :
+    deviceOpC S (-(Complex.I / 2))
+        (by simp [Complex.neg_im, Complex.div_im, Complex.I_im])
+        (by rw [show (-(Complex.I / 2)).im = -(1 / 2) from by
+              simp [Complex.neg_im, Complex.div_im, Complex.I_im]])
+      = rvdSqrtTwoSubR S := by
+  rw [← cfcCont_sqrtTwoSub_eq S, deviceOpC, cfcCont]
+  refine borelFC_congr_ae S _ _ _ _ _ _ (fun x => ?_)
+  refine MeasureTheory.ae_iff.mpr
+    (measure_mono_null (fun ω hω => ?_) (rvdSpecMeasure_endpoints S x))
+  rw [Set.mem_setOf_eq] at hω
+  rw [Set.mem_setOf_eq]
+  by_contra hc
+  push_neg at hc
+  apply hω
+  have hmem : (ω : ℝ) ∈ Set.Ioo (0 : ℝ) 2 := by
+    obtain ⟨hge, hle⟩ := rvdRC_spectrum_mem_Icc S ω
+    exact ⟨lt_of_le_of_ne hge (Ne.symm hc.1), lt_of_le_of_ne hle hc.2⟩
+  simp only [Function.comp_apply, ContinuousMap.coe_mk, devChar_neg_half_I hmem]
+
 /-- **Diagonal-correlation form of the RvD Theorem 3.8 closeout**: if the modular correlations agree,
     `⟨ξ, V_t ξ⟩ = ⟨ξ, Δ^{it} ξ⟩` for every `ξ`, then `V_t = Δ^{it}` (stated with `ξ` in the first slot, the
     `modCorrExt` convention).  This is the operator-level conclusion that the `modCorrExt` strip-uniqueness
