@@ -55,4 +55,36 @@ theorem fourier_lp_ae_eq {g : ℝ → ℂ} (h1 : Integrable g volume) (h2 : MemL
         show (⇑Ψ) x * 𝓕 g x = ψ x • 𝓕 g x
         rw [hps x (𝓕 g x), smul_eq_mul]
 
+/-- **★★★★ Plancherel pairing for the classical Fourier transform** — the inversion-free conjugate Parseval.
+    For `A, B ∈ L¹ ∩ L²`, `∫ conj(𝓕A)·𝓕B = ∫ conj(A)·B`.  Proved from Mathlib's `L²` Plancherel isometry
+    (`Lp.inner_fourier_eq`) + the coincidence `fourier_lp_ae_eq` (classical `𝓕` = `L²` `𝓕` a.e.) — needing only
+    `L¹ ∩ L²` membership, NOT Fourier inversion (`Continuous.fourierInv_fourier_eq`) and hence NOT
+    `Integrable (𝓕 B)` (`hFdA`).  This is the drop-in replacement for `fourier_conj_parseval` that closes Route B. -/
+theorem fourier_conj_parseval_L2 {A B : ℝ → ℂ}
+    (h1A : Integrable A volume) (h2A : MemLp A 2 volume)
+    (h1B : Integrable B volume) (h2B : MemLp B 2 volume) :
+    ∫ w, (starRingEnd ℂ) (𝓕 A w) * 𝓕 B w = ∫ x, (starRingEnd ℂ) (A x) * B x := by
+  have hcA := fourier_lp_ae_eq h1A h2A
+  have hcB := fourier_lp_ae_eq h1B h2B
+  set A2 : Lp ℂ 2 volume := h2A.toLp with hA2def
+  set B2 : Lp ℂ 2 volume := h2B.toLp with hB2def
+  set FA2 : Lp ℂ 2 volume := 𝓕 A2 with hFA2
+  set FB2 : Lp ℂ 2 volume := 𝓕 B2 with hFB2
+  calc ∫ w, (starRingEnd ℂ) (𝓕 A w) * 𝓕 B w
+      = ∫ a, (starRingEnd ℂ) ((⇑FA2) a) * (⇑FB2) a := by
+        refine integral_congr_ae ?_
+        filter_upwards [hcA, hcB] with a ha hb; rw [ha, hb]
+    _ = (inner ℂ FA2 FB2 : ℂ) := by
+        rw [L2.inner_def]
+        refine integral_congr_ae (.of_forall fun a => ?_)
+        simp only [RCLike.inner_apply, mul_comm]
+    _ = (inner ℂ A2 B2 : ℂ) := MeasureTheory.Lp.inner_fourier_eq _ _
+    _ = ∫ a, (starRingEnd ℂ) ((⇑A2) a) * (⇑B2) a := by
+        rw [L2.inner_def]
+        refine integral_congr_ae (.of_forall fun a => ?_)
+        simp only [RCLike.inner_apply, mul_comm]
+    _ = ∫ x, (starRingEnd ℂ) (A x) * B x := by
+        refine integral_congr_ae ?_
+        filter_upwards [h2A.coeFn_toLp, h2B.coeFn_toLp] with x ha hb; rw [ha, hb]
+
 end QIQTH.Fock.StressTensor
