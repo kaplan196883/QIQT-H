@@ -4464,6 +4464,11 @@ namespace QIQTH.AxiomAudit
 -- ∫ λ, λ·‖𝓕A(λ/2π)‖² = 2π·rapidityMomentum A (deriv A). The λ=2πw rescale (Measure.integral_comp_mul_left) puts the (2π)²
 -- weight·Jacobian against weighted_pairing_real's (2π)⁻¹. This IS stressFluxKK m f once A=horizonAmp m f (horizonFieldDeriv_eq_fourier).
 -- Remaining for hFlux: instantiate A=horizonAmp + k↦θ change of vars (rapidityMomentum(horizonAmp)↔rapidityMomentum(Krep)) + Krep regularity.
+#print axioms QIQTH.Fock.StressTensor.stressFluxKK_eq_rapMom
+-- expected: standard only — ★★★ Stress-tensor Route B, Phase 3b-ii: stressFluxKK m f = 2π·rapidityMomentum(horizonAmp m f)(deriv …).
+-- flux_integral_eq instantiated at A=horizonAmp m f (via horizonFieldDeriv_eq_fourier: χ_H=𝓕 A). The horizon stress flux IS a rapidity
+-- momentum. Hypotheses = the genuine on-shell regularity of horizonAmp (differentiable/integrable, its deriv, its 𝓕) — the gating
+-- Krep-regularity, isolated as labeled hyps (true for nicely-decaying test fns). Remaining for hFlux: k↦θ change of vars (→∫conj(Krep)Krep', the sign).
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

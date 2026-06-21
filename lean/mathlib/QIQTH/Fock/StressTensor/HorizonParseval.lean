@@ -258,4 +258,29 @@ theorem flux_integral_eq (A : ℝ → ℂ)
     rw [hlem, ← mul_assoc, mul_inv_cancel₀ hne, one_mul]]
   rw [hwpr]; field_simp
 
+/-- **★★★ The horizon stress flux as a rapidity momentum.**  Instantiating `flux_integral_eq` at the wedge
+    mode's horizon amplitude `A = horizonAmp m f` (via `horizonFieldDeriv_eq_fourier`, so `χ_H = 𝓕 A`):
+    `stressFluxKK m f = 2π · rapidityMomentum (horizonAmp m f) (deriv (horizonAmp m f))`.
+    The hypotheses are the genuine on-shell regularity of the horizon amplitude (its differentiability,
+    integrability, and that of its derivative and Fourier transform) — true for nicely-decaying test functions.
+    The `k ↦ θ` change of variables (next) relates `rapidityMomentum(horizonAmp)` to the wedge wavefunction's
+    `∫ conj(Krep)·Krep'`, producing the `hFlux` shape with the geometric sign. -/
+theorem stressFluxKK_eq_rapMom (m : ℝ) (hm : 0 < m) (f : V → ℂ)
+    (hA : Integrable (horizonAmp m f)) (hAd : Differentiable ℝ (horizonAmp m f))
+    (hdAc : Continuous (deriv (horizonAmp m f))) (hdA : Integrable (deriv (horizonAmp m f)))
+    (hFdA : Integrable (𝓕 (deriv (horizonAmp m f))))
+    (hff : Integrable (fun θ => (starRingEnd ℂ) (horizonAmp m f θ) * horizonAmp m f θ))
+    (h1 : Integrable (fun θ => (starRingEnd ℂ) (deriv (horizonAmp m f) θ) * horizonAmp m f θ))
+    (h2 : Integrable (fun θ => (starRingEnd ℂ) (horizonAmp m f θ) * deriv (horizonAmp m f) θ)) :
+    stressFluxKK m f
+      = 2 * Real.pi * rapidityMomentum (horizonAmp m f) (deriv (horizonAmp m f)) := by
+  have hint : (∫ lam, lam * Tkk m f lam)
+      = ∫ lam, lam * ‖𝓕 (horizonAmp m f) (lam / (2 * Real.pi))‖ ^ 2 := by
+    refine integral_congr_ae (Filter.Eventually.of_forall (fun lam => ?_))
+    show lam * ‖horizonFieldDeriv m f lam‖ ^ 2
+      = lam * ‖𝓕 (horizonAmp m f) (lam / (2 * Real.pi))‖ ^ 2
+    rw [horizonFieldDeriv_eq_fourier m hm f lam]
+  rw [show stressFluxKK m f = ∫ lam, lam * Tkk m f lam from rfl, hint]
+  exact flux_integral_eq (horizonAmp m f) hA hAd hdAc hdA hFdA hff h1 h2
+
 end QIQTH.Fock.StressTensor
