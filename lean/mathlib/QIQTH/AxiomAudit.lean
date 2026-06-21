@@ -4412,6 +4412,11 @@ namespace QIQTH.AxiomAudit
 -- θ↦k=nullMom m θ=(m/√2)e^{−θ} (inverse rapInv m x=log(m/√2)−log x; Jacobian |dk/dθ|=k cancels the explicit nullMom factor).
 -- Proof: integral_image_eq_integral_abs_deriv_smul + nullMom bijection ℝ→(0,∞) (rapInv_nullMom/nullMom_rapInv/injective/
 -- image_univ/hasDerivAt). Entry point to the sesquilinear-Fourier evaluation (Phase 3b-ii ⟹ −2π·rapidityMomentum).
+#print axioms QIQTH.Fock.StressTensor.fourierIntegral_exp_bridge
+-- expected: standard only — ★ Stress-tensor Route B, Phase 3b-ii (convention bridge): 𝓕 g (λ/2π) = ∫ g(x)·e^{−iλx}dx.
+-- Identifies the physicists' Fourier integral (from 3b-i) with Mathlib's 𝓕 (Real.fourierIntegral, whose convention carries
+-- the 2π in the exponent), so the Fourier API / sesquilinear Parseval applies. Purely mechanical (fourier_real_eq_integral_
+-- exp_smul + the 2π exponent cancellation); no analytic hypotheses. Remaining 3b-ii: ψ_H=𝓕[B] (IBP) + sesquilinear pairing + θ↔k.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,
