@@ -591,6 +591,39 @@ def HalfStripReal (V : ℝ → (H →L[ℂ] H)) (K : Set H) : Prop :=
 theorem stripKMSrvd_halfStripReal {V : ℝ → (H →L[ℂ] H)} {K : Set H} (hV : StripKMSrvd V K) :
     HalfStripReal V K := fun ξ hξ η hη => stripKMSrvd_real_midline hV hξ hη
 
+open QIQTH QIQTH.StripUniqueness in
+/-- **★★★ The bottom-edge KMS reality `h1` DISCHARGED from `StripKMSrvd` — RvD Theorem 3.8 g-function complete.**
+    For the orbit input `η ∈ 𝒦` (strongly-continuous contraction, orbit staying in `𝒦`) and `ξ = √Rζ ∈ 𝒦`, the
+    g-function's bottom edge `g(t − i/2) = ⟪J·deviceVecF(t−i/2), gaussSmearC(t−i/2)⟫` is REAL.  Assembly of the
+    whole device g-function argument: the K.M.S. condition (`hKMS`) applied to the pair
+    `(gaussSmear, ξ_t = Δ^{it}ξ)` (both in `𝒦`: `gaussSmear_mem_K`, `modUnitary_mapsTo_K`) gives a
+    bounded-holomorphic `f` with `f(s) = ⟪ξ_t, V_s·gaussSmear⟫` (faithful RvD Def 3.4 convention) and — via the
+    plain conjugate-flip (`real_on_midline_of_conj_flip`, RvD Prop 3.5) — `f(t − i/2)` REAL.  Restricting `f` to
+    the half-strip and feeding the transfer engine `gFunction_bottom_real_of_faithful_kms` (which identifies the
+    bottom g-value with `corrC ξ_t` and transfers `f`'s mid-line reality by half-strip boundary uniqueness)
+    discharges `h1`.  This is the complete, axiom-free formalization of RvD Theorem 3.8's bottom-edge reality —
+    the last analytic input of the device g-function, no longer labelled. -/
+theorem h1_of_stripKMSrvd (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ}
+    (hn : 0 < n) {η : H} (hcont : Continuous (fun s => V s η)) (hbd : ∀ s, ‖V s η‖ ≤ ‖η‖)
+    (hgrp : ∀ s u, V s (V u η) = V (s + u) η)
+    (hinv : ∀ s, V s η ∈ (S.toClosedSubmodule : Set H))
+    {ζ : H} (hζ : projK S (rvdSqrtR S ζ) = rvdSqrtR S ζ)
+    (hKMS : StripKMSrvd V (S.toClosedSubmodule : Set H)) (t : ℝ) :
+    (modConjBilin S (QIQTH.deviceVecF S ζ ((t : ℂ) - Complex.I / 2))
+        (gaussSmearC V n η ((t : ℂ) - Complex.I / 2))).im = 0 := by
+  obtain ⟨f, hfdcc, ⟨M, hfM⟩, hfreal, hfflip⟩ := hKMS (gaussSmear V n η)
+    (gaussSmear_mem_K S hn hcont hbd hinv) (modUnitary S t (rvdSqrtR S ζ))
+    (modUnitary_mapsTo_K S t (rvdSqrtR S ζ) ((mem_K_iff_projK S (rvdSqrtR S ζ)).mpr hζ))
+  have hmid : (f ((t : ℂ) - Complex.I / 2)).im = 0 := by
+    refine real_on_midline_of_conj_flip hfdcc (fun z _ => hfM z) (fun s => ?_) t
+    rw [hfflip s, hfreal s]
+    exact (inner_conj_symm (𝕜 := ℂ) (V s (gaussSmear V n η))
+      (modUnitary S t (rvdSqrtR S ζ))).symm
+  refine gFunction_bottom_real_of_faithful_kms S hn η hζ t hcont hbd hgrp
+    (hfdcc.mono (fun z hz => ?_)) (fun z _ => hfM z) hfreal hmid
+  simp only [kmsHalfStripOpen, Set.mem_preimage, Set.mem_Ioo] at hz
+  exact ⟨by linarith [hz.1], hz.2⟩
+
 /-- **★ Conditional one-particle Bisognano–Wichmann via the CORRECT RvD KMS condition (narrowed core).**
     Replaces the vacuous `StripKMS` of `oneParticleBW_of_kms` with the genuine `StripKMSrvd` (RvD Def 3.4), and
     narrows the single labelled hypothesis to the **RvD Theorem 3.8 core** `hThm38` (half-strip reality +
@@ -730,6 +763,37 @@ theorem oneParticleBW_of_inputs (S : StandardSubspace H) (V : ℝ → (H →L[�
     (fun _ => comparisonDatum_of_gConstancy S V
       (gConstancy_of_inputs S V hcont hbd hgrp hV0 hKinv h1 hdense))
     hInv hKMS
+
+open Filter in
+/-- **★★★ One-particle Bisognano–Wichmann from the KMS condition — `h1` DISCHARGED, only `hdense` named.**
+    `modUnitary S t = V t` for a strongly-continuous contraction group `V` with `𝒦`-invariance (`hInv`) and the
+    correct RvD Def 3.4 KMS condition (`hKMS : StripKMSrvd`), GIVEN only the `√R`-range density `hdense`.  The
+    bottom-edge KMS reality — the last analytic input of RvD Theorem 3.8's device g-function — is no longer a
+    labelled hypothesis: it is derived from `hKMS` via `h1_of_stripKMSrvd` (the complete f-transfer assembly).
+    So the entire `hUniq` discharge now rests on a SINGLE named analytic input, `hdense` (the `√R`-range density
+    in `𝒦`), with the KMS condition supplied as the genuine RvD Def 3.4 hypothesis. -/
+theorem oneParticleBW_of_stripKMSrvd_density (S : StandardSubspace H) (V : ℝ → (H →L[ℂ] H))
+    (hcont : ∀ η ∈ (S.toClosedSubmodule : Set H), Continuous (fun t => V t η))
+    (hbd : ∀ η : H, ∀ t, ‖V t η‖ ≤ ‖η‖) (hgrp : ∀ η : H, ∀ s t, V s (V t η) = V (s + t) η)
+    (hV0 : ∀ η : H, V 0 η = η)
+    (hKinv : ∀ η ∈ (S.toClosedSubmodule : Set H), ∀ n : ℝ, 0 < n → ∀ s : ℝ,
+      projK S (V s (gaussSmear V n η)) = V s (gaussSmear V n η))
+    (hdense : ∀ ξ ∈ (S.toClosedSubmodule : Set H), ∃ ζs : ℕ → H,
+      (∀ k, projK S (rvdSqrtR S (ζs k)) = rvdSqrtR S (ζs k)) ∧
+        Tendsto (fun k => rvdSqrtR S (ζs k)) atTop (nhds ξ))
+    (hInv : ∀ t, Set.MapsTo (V t) (S.toClosedSubmodule : Set H) (S.toClosedSubmodule : Set H))
+    (hKMS : StripKMSrvd V (S.toClosedSubmodule : Set H)) :
+    ∀ t, modUnitary S t = V t :=
+  oneParticleBW_of_inputs S V hcont hbd hgrp hV0 hKinv
+    (fun η hη ζ hζ n hn z hz => by
+      have hzeq : z = ((z.re : ℝ) : ℂ) - Complex.I / 2 := by
+        apply Complex.ext
+        · simp
+        · rw [hz]; simp [Complex.sub_im, Complex.div_im, Complex.I_im]
+      rw [hzeq]
+      exact h1_of_stripKMSrvd S hn (hcont η hη) (hbd η) (hgrp η)
+        (fun s => hInv s hη) hζ hKMS z.re)
+    hdense hInv hKMS
 
 /-- **Top-edge reality of the g-function** (RvD Theorem 3.8, the real-axis edge `g(t) = ⟪U_t η, Δ^{it} J ξ⟫`
     is real).  For `ξ, η ∈ 𝒦` with `V_t η ∈ 𝒦`: `Δ^{it} J ξ = J(Δ^{it} ξ)` (`modConj_commute_modUnitary`)

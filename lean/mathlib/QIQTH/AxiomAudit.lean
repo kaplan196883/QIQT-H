@@ -4264,6 +4264,18 @@ namespace QIQTH.AxiomAudit
 -- For pair (gaussSmear,ξ_t): f(s)=⟪ξ_t,V_s gaussSmear⟫=corrC ξ_t s, f(t−i/2) real ⟹ gFunction_bottom_real_of_kms_match
 -- ⟹ h1. VALIDATES the finding: codebase StripKMSrvd/HalfStripReal use inner ℂ (V_t ξ) η = CONJUGATE of RvD Def 3.4
 -- (transfers reality to t+i/2 not t−i/2). Sole remaining h1 gap = convention fix StripKMSrvd ⟹ this faithful witness.
+#print axioms QIQTH.Fock.OneParticleBW.h1_of_stripKMSrvd
+-- expected: standard only — ★★★ h1 DISCHARGED from StripKMSrvd — RvD Thm 3.8 device g-function bottom edge COMPLETE.
+-- For η∈𝒦 (orbit in 𝒦) + ξ=√Rζ∈𝒦: KMS (hKMS) at pair (gaussSmear,ξ_t=Δ^{it}ξ) [both ∈𝒦: gaussSmear_mem_K,
+-- modUnitary_mapsTo_K] gives f bdd-holo, f(s)=⟪ξ_t,V_s gaussSmear⟫ (faithful Def 3.4), f(t−i/2) real (real_on_
+-- midline_of_conj_flip). Restrict to half-strip (DiffContOnCl.mono) + gFunction_bottom_real_of_faithful_kms ⟹ h1.
+-- The last analytic input of the g-function, NO LONGER LABELLED. Remaining for full hUniq: hdense (C', √R-range).
+#print axioms QIQTH.Fock.OneParticleBW.oneParticleBW_of_stripKMSrvd_density
+-- expected: standard only — ★★★ FULL hUniq DISCHARGE with h1 ELIMINATED: modUnitary S t = V t from V contraction
+-- group + 𝒦-invariance + StripKMSrvd (RvD Def 3.4) + ONLY hdense (√R-range density in 𝒦). The bottom-edge KMS
+-- reality h1 is derived from hKMS via h1_of_stripKMSrvd (RvD Thm 3.8 g-function f-transfer, machine-checked), no
+-- longer labelled. The entire device g-function argument is axiom-free; the SOLE remaining named analytic input
+-- is hdense (C', √R-range∩𝒦 dense in 𝒦). The convention is now the genuine RvD Def 3.4 (vacuity hole closed).
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable
