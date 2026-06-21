@@ -355,6 +355,26 @@ theorem gConstancy_of_tendsto_xi (S : StandardSubspace H) {V : ℝ → (H →L[�
   exact tendsto_nhds_unique ((hcL.tendsto ξ).comp htend)
     (((hcR.tendsto ξ).comp htend).congr (fun k => (hGC k).symm))
 
+open Filter in
+/-- **GConstancy at every `ξ ∈ 𝒦`, from the `√R`-vector GConstancy + the `√R`-range density** (the `ξ`-side
+    closeout).  Given GConstancy holds at every `√R ζ ∈ 𝒦` (`hsqrt`, supplied by `gConstancy_eta_of_bottom`)
+    and the `√R`-range is dense in `𝒦` (`hdense`: every `ξ ∈ 𝒦` is a limit of `√R ζ_k ∈ 𝒦` — the structural
+    fact that `√R` has dense range, `R` injective via `rvdRC_mul_rvdTwoSubRC_injective`), GConstancy holds at
+    every `ξ ∈ 𝒦` by closedness in `ξ` (`gConstancy_of_tendsto_xi`).  This is exactly the `∀ ξ ∈ 𝒦` premise of
+    the comparison wrapper `comparisonDatum_of_gConstancy`, completing the `ξ`-reconciliation modulo the named
+    `√R`-density input. -/
+theorem gConstancy_xi_of_density (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} (η : H) (t : ℝ)
+    (hsqrt : ∀ ζ : H, projK S (rvdSqrtR S ζ) = rvdSqrtR S ζ →
+      inner ℂ (V t η) (modUnitary S t (modConj S (rvdSqrtR S ζ)))
+        = inner ℂ η (modConj S (rvdSqrtR S ζ)))
+    (hdense : ∀ ξ ∈ (S.toClosedSubmodule : Set H), ∃ ζs : ℕ → H,
+      (∀ k, projK S (rvdSqrtR S (ζs k)) = rvdSqrtR S (ζs k)) ∧
+        Tendsto (fun k => rvdSqrtR S (ζs k)) atTop (nhds ξ))
+    (ξ : H) (hξ : ξ ∈ (S.toClosedSubmodule : Set H)) :
+    inner ℂ (V t η) (modUnitary S t (modConj S ξ)) = inner ℂ η (modConj S ξ) := by
+  obtain ⟨ζs, hζmem, hζtend⟩ := hdense ξ hξ
+  exact gConstancy_of_tendsto_xi S η t hζtend (fun k => hsqrt (ζs k) (hζmem k))
+
 /-- **Analytic capstone of the KMS-uniqueness proof** (RvD Theorem 3.8): given the labelled KMS function,
     the orbit matrix element is `t`-independent.  Assembles the whole verified analytic chain.  Inputs: the
     *geometric* facts (`w ⊥ i𝒦`, the orbit `V_t(gaussSmear)` stays in `𝒦`) and the *labelled KMS input* — a

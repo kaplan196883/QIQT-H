@@ -3790,6 +3790,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ STEP 6a (to closed strip): Im(corrC w)=0 on BOTH edges (Im=0,Im=1) ⇒ corrC w
 -- constant on the CLOSED kmsStrip. eqConst_of_im_zero_strip (Phragmén–Lindelöf) gives const on the open strip;
 -- continuity of entire g propagates to closure (kmsStrip=closure kmsStripOpen, Set.EqOn.closure).
+#print axioms QIQTH.StandardSubspaceModular.gConstancy_xi_of_density
+-- expected: standard only — ★★ GConstancy ∀ξ∈𝒦 from √R-vector GConstancy + √R-density: hsqrt (GConstancy at √Rζ∈𝒦,
+-- from gConstancy_eta_of_bottom) + hdense (√R-range dense in 𝒦: ∀ξ∈𝒦 ∃√Rζ_k∈𝒦→ξ) ⇒ GConstancy(η,ξ) ∀ξ∈𝒦 via
+-- gConstancy_of_tendsto_xi. The ∀ξ∈𝒦 premise of comparisonDatum_of_gConstancy — ξ-reconciliation modulo √R-density.
 #print axioms QIQTH.StandardSubspaceModular.gConstancy_of_tendsto_xi
 -- expected: standard only — GConstancy CLOSED in ξ: GConstancy(η,ξ_k) for ξ_k→ξ ⇒ GConstancy(η,ξ). Both sides
 -- ⟪V_t η,Δ^{it}(J·)⟫,⟪η,J·⟫ continuous in ξ (modConj+modUnitary+inner) ⇒ tendsto_nhds_unique. Lifts GConstancy from
