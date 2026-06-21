@@ -559,6 +559,38 @@ theorem deviceOpC_neg_half_eq (S : StandardSubspace H) :
     exact ⟨lt_of_le_of_ne hge (Ne.symm hc.1), lt_of_le_of_ne hle hc.2⟩
   simp only [Function.comp_apply, ContinuousMap.coe_mk, devChar_neg_half_I hmem]
 
+/-- **`J` applied to the bottom-edge device vector**: `J·deviceOpC(−i/2)ζ = √R(Jζ)`.  From
+    `deviceOpC(−i/2) = √(2−R)` (`deviceOpC_neg_half_eq`) and the bottom-edge sqrt swap `J√(2−R) = √R·J`
+    (`modConj_rvdSqrtTwoSubR_modConj` + `modConj_sq`).  For a `J`-fixed `ζ` this is `√Rζ = ξ`. -/
+theorem modConj_deviceOpC_neg_half (S : StandardSubspace H) (ζ : H) :
+    modConj S (deviceOpC S (-(Complex.I / 2))
+        (by simp [Complex.neg_im, Complex.div_im, Complex.I_im])
+        (by rw [show (-(Complex.I / 2)).im = -(1 / 2) from by
+              simp [Complex.neg_im, Complex.div_im, Complex.I_im]]) ζ)
+      = rvdSqrtR S (modConj S ζ) := by
+  rw [deviceOpC_neg_half_eq S]
+  have h := modConj_rvdSqrtTwoSubR_modConj S (modConj S ζ)
+  rwa [modConj_sq] at h
+
+/-- **The bottom-edge g-vector**: `J·deviceVecF(t − i/2) = Δ^{it}·√R(Jζ)`.  Combines the device/J commute
+    (`modConj_deviceVecF_bottom`) with `J·deviceOpC(−i/2)ζ = √R(Jζ)` (`modConj_deviceOpC_neg_half`).  This is
+    the FIRST slot of the bottom-edge g-function `g(t − i/2) = ⟪J·deviceVecF(t−i/2), gaussSmearC(t−i/2)⟫` made
+    explicit, now that `deviceOpC(−i/2) = √(2−R)` is proven. -/
+theorem modConj_deviceVecF_bottom_eq (S : StandardSubspace H) (ζ : H) (t : ℝ) :
+    modConj S (deviceVecF S ζ ((t : ℂ) - Complex.I / 2))
+      = modUnitary S t (rvdSqrtR S (modConj S ζ)) := by
+  rw [modConj_deviceVecF_bottom, modConj_deviceOpC_neg_half]
+
+/-- **The bottom-edge g-vector for a `J`-fixed `ζ`**: `J·deviceVecF(t − i/2) = Δ^{it}·√Rζ = Δ^{it}ξ`
+    (`ξ = √Rζ`).  This is RvD's `(2−R)^{1/2}ζ = Jξ` at the operator-vector level: the bottom-edge device
+    vector, conjugated by `J`, is exactly the modular flow `Δ^{it}` applied to `ξ = √Rζ`.  The reality of
+    `⟪Δ^{it}ξ, gaussSmearC(t−i/2)⟫` is then the bottom-edge KMS input `h1`. -/
+theorem modConj_deviceVecF_bottom_eq_fixed (S : StandardSubspace H) {ζ : H}
+    (hζ : modConj S ζ = ζ) (t : ℝ) :
+    modConj S (deviceVecF S ζ ((t : ℂ) - Complex.I / 2))
+      = modUnitary S t (rvdSqrtR S ζ) := by
+  rw [modConj_deviceVecF_bottom_eq, hζ]
+
 /-- **Diagonal-correlation form of the RvD Theorem 3.8 closeout**: if the modular correlations agree,
     `⟨ξ, V_t ξ⟩ = ⟨ξ, Δ^{it} ξ⟩` for every `ξ`, then `V_t = Δ^{it}` (stated with `ξ` in the first slot, the
     `modCorrExt` convention).  This is the operator-level conclusion that the `modCorrExt` strip-uniqueness

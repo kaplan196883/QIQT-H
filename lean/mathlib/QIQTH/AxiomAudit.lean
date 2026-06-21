@@ -4222,6 +4222,14 @@ namespace QIQTH.AxiomAudit
 -- =√(2−r) on (0,2) (devChar_neg_half_I) + cfcCont(√(2−·))=√(2−R) (cfcCont_sqrtTwoSub_eq); symbols differ ONLY at {0,2}
 -- (modCharC=1 swaps), μ^R_x-null (rvdSpecMeasure_endpoints), so borelFC_congr_ae identifies the operators. Step (a1)
 -- of the bottom-edge KMS reality (A) COMPLETE: J·deviceOpC(−i/2)ζ=J√(2−R)ζ=√Rζ=ξ. Remaining: (a2/a3) KMS reflection.
+#print axioms QIQTH.StandardSubspaceModular.modConj_deviceOpC_neg_half
+-- expected: standard only — J·deviceOpC(−i/2)ζ=√R(Jζ): deviceOpC_neg_half_eq + bottom-edge sqrt swap J√(2−R)=√R·J.
+#print axioms QIQTH.StandardSubspaceModular.modConj_deviceVecF_bottom_eq
+-- expected: standard only — bottom-edge g-VECTOR J·deviceVecF(t−i/2)=Δ^{it}·√R(Jζ) (modConj_deviceVecF_bottom +
+-- modConj_deviceOpC_neg_half). First slot of the bottom g-function made explicit via deviceOpC(−i/2)=√(2−R).
+#print axioms QIQTH.StandardSubspaceModular.modConj_deviceVecF_bottom_eq_fixed
+-- expected: standard only — ★ Jζ=ζ case: J·deviceVecF(t−i/2)=Δ^{it}·√Rζ=Δ^{it}ξ (RvD (2−R)^½ζ=Jξ at vector level).
+-- The bottom-edge g-vector IS Δ^{it}ξ; reality of ⟪Δ^{it}ξ,gaussSmearC(t−i/2)⟫ = the remaining KMS input h1 (a2/a3).
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable
