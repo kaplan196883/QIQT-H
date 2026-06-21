@@ -336,6 +336,25 @@ theorem gConstancy_eta_of_bottom (S : StandardSubspace H) (ζ : H) {V : ℝ → 
   exact gConstancy_real_smul S (gaussSmear V n η) (rvdSqrtR S ζ) t (Real.sqrt (n / Real.pi))
     (gConstancy_entire_of_bottom S ζ hn η hcont hbd hgrp hξ (hKinv n hn) (h1 n hn) t)
 
+open Filter in
+/-- **GConstancy is closed in `ξ`** (continuity in the second-slot vector): if GConstancy at `(η, ξ_k)` holds
+    for a sequence `ξ_k → ξ`, it holds at `(η, ξ)`.  Both sides `⟪V_t η, Δ^{it}(J·)⟫` and `⟪η, J·⟫` are
+    continuous in `ξ` (`modConj`, `modUnitary` continuous, inner continuous), so the equality passes to the
+    limit (`tendsto_nhds_unique`).  This lifts GConstancy from `ξ = √R ζ` (`gConstancy_eta_of_bottom`) to any
+    `ξ` in the closure of the `√R`-range — and `√R` has dense range (`R` injective via
+    `rvdRC_mul_rvdTwoSubRC_injective`), the `ξ = √R ζ` reconciliation. -/
+theorem gConstancy_of_tendsto_xi (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} (η : H) (t : ℝ)
+    {ξ : H} {ξs : ℕ → H} (htend : Tendsto ξs atTop (nhds ξ))
+    (hGC : ∀ k, inner ℂ (V t η) (modUnitary S t (modConj S (ξs k)))
+      = inner ℂ η (modConj S (ξs k))) :
+    inner ℂ (V t η) (modUnitary S t (modConj S ξ)) = inner ℂ η (modConj S ξ) := by
+  have hcL : Continuous (fun x => inner ℂ (V t η) (modUnitary S t (modConj S x))) :=
+    Continuous.inner continuous_const ((modUnitary S t).continuous.comp (modConj S).continuous)
+  have hcR : Continuous (fun x => inner ℂ η (modConj S x)) :=
+    Continuous.inner continuous_const (modConj S).continuous
+  exact tendsto_nhds_unique ((hcL.tendsto ξ).comp htend)
+    (((hcR.tendsto ξ).comp htend).congr (fun k => (hGC k).symm))
+
 /-- **Analytic capstone of the KMS-uniqueness proof** (RvD Theorem 3.8): given the labelled KMS function,
     the orbit matrix element is `t`-independent.  Assembles the whole verified analytic chain.  Inputs: the
     *geometric* facts (`w ⊥ i𝒦`, the orbit `V_t(gaussSmear)` stays in `𝒦`) and the *labelled KMS input* — a
