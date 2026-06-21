@@ -649,6 +649,56 @@ theorem devCorrExt_ofReal_inner (S : StandardSubspace H) (ξ : H) (t : ℝ) :
   rfl
 
 open QIQTH.StandardSubspaceModular in
+/-- **Uniform slope (Lipschitz) bound of the device character on a slab** (piece 2 of the strong-holomorphy
+    dominated-convergence argument): on the open slab `s = {−β₁ < Im z < −β₀} ⊂ (−1/2,0)`,
+    `‖d_z(ω) − d_{z₀}(ω)‖ ≤ C·‖z − z₀‖` with `C = √2(2/β₀+log2) + √2(2/(1/2−β₁)+log2)` the
+    `devChar_deriv_norm_le` constant — UNIFORM in the spectral point `ω`.  Via the complex mean-value
+    inequality `Convex.norm_image_sub_le_of_norm_hasDerivWithin_le` (`hasDerivAt_devChar_Icc` on the convex
+    slab + the `devChar_deriv_norm_le` derivative bound, with `ω ∈ {0,2}` giving `d_z` `z`-constant ⇒ derivative
+    `0 ≤ C`).  Hence `‖Δ_z(ω)‖ ≤ C` uniformly: the dominating constant for the dominated-convergence step. -/
+theorem devChar_slope_norm_le (S : StandardSubspace H) (ω : spectrum ℝ (rvdRC S))
+    {β₀ β₁ : ℝ} (hβ₀ : 0 < β₀) (hβ₁ : β₁ < 1 / 2)
+    {z z₀ : ℂ} (hz : z ∈ Complex.im ⁻¹' Set.Ioo (-β₁) (-β₀))
+    (hz₀ : z₀ ∈ Complex.im ⁻¹' Set.Ioo (-β₁) (-β₀)) :
+    ‖devChar z (ω : spectrum ℝ (rvdRC S)).val - devChar z₀ (ω : spectrum ℝ (rvdRC S)).val‖
+      ≤ (Real.sqrt 2 * (2 / β₀ + Real.log 2) + Real.sqrt 2 * (2 / (1 / 2 - β₁) + Real.log 2))
+        * ‖z - z₀‖ := by
+  set s : Set ℂ := Complex.im ⁻¹' Set.Ioo (-β₁) (-β₀) with hs
+  set C : ℝ := Real.sqrt 2 * (2 / β₀ + Real.log 2) + Real.sqrt 2 * (2 / (1 / 2 - β₁) + Real.log 2)
+    with hCdef
+  have hlog2 : (0 : ℝ) ≤ Real.log 2 := Real.log_nonneg (by norm_num)
+  have hβ₁' : 0 < 1 / 2 - β₁ := by linarith
+  have hC0 : 0 ≤ C := by
+    rw [hCdef]
+    have h1 : (0 : ℝ) ≤ 2 / β₀ := le_of_lt (div_pos (by norm_num) hβ₀)
+    have h2 : (0 : ℝ) ≤ 2 / (1 / 2 - β₁) := le_of_lt (div_pos (by norm_num) hβ₁')
+    nlinarith [Real.sqrt_nonneg 2, hlog2, h1, h2]
+  have hconv : Convex ℝ s := by
+    have heq : s = {z : ℂ | z.im < -β₀} ∩ {z : ℂ | -β₁ < z.im} := by
+      ext w
+      rw [hs, Set.mem_preimage, Set.mem_Ioo, Set.mem_inter_iff, Set.mem_setOf_eq, Set.mem_setOf_eq]
+      tauto
+    rw [heq]; exact Convex.inter (convex_halfSpace_im_lt (-β₀)) (convex_halfSpace_im_gt (-β₁))
+  have hbound : ∀ w ∈ s, ‖Complex.I * (Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val)
+        / (ω : spectrum ℝ (rvdRC S)).val) : ℂ) * devChar w (ω : spectrum ℝ (rvdRC S)).val‖ ≤ C := by
+    intro w hw
+    rw [hs, Set.mem_preimage, Set.mem_Ioo] at hw
+    rw [norm_mul, norm_mul, Complex.norm_I, one_mul, Complex.norm_real, Real.norm_eq_abs]
+    by_cases hω : (ω : spectrum ℝ (rvdRC S)).val ∈ Set.Ioo (0 : ℝ) 2
+    · rw [hCdef]; exact devChar_deriv_norm_le hβ₀ hβ₁ (le_of_lt hw.2) (le_of_lt hw.1) hω
+    · have hr02 : (ω : spectrum ℝ (rvdRC S)).val = 0 ∨ (ω : spectrum ℝ (rvdRC S)).val = 2 := by
+        obtain ⟨h0', h2'⟩ := Set.mem_Icc.mp (rvdRC_spectrum_mem_Icc S ω)
+        rw [Set.mem_Ioo, not_and_or, not_lt, not_lt] at hω
+        exact hω.imp (fun hle => le_antisymm hle h0') (fun hge => le_antisymm h2' hge)
+      have hzero : |Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val)
+          / (ω : spectrum ℝ (rvdRC S)).val)| * ‖devChar w (ω : spectrum ℝ (rvdRC S)).val‖ = 0 := by
+        rcases hr02 with h | h <;> rw [h] <;> simp [devChar, Real.sqrt_zero]
+      rw [hzero]; exact hC0
+  exact hconv.norm_image_sub_le_of_norm_hasDerivWithin_le
+    (fun w _ => (hasDerivAt_devChar_Icc (rvdRC_spectrum_mem_Icc S ω) w).hasDerivWithinAt)
+    hbound hz₀ hz
+
+open QIQTH.StandardSubspaceModular in
 /-- **Pointwise difference-quotient convergence of the device character** (piece 1 of the strong-holomorphy
     dominated-convergence argument): for each spectral point `ω`, the slope
     `(d_z(ω) − d_{z₀}(ω))/(z − z₀) → i·log((2−ω)/ω)·d_{z₀}(ω)` as `z → z₀` (`z ≠ z₀`).  Immediate from

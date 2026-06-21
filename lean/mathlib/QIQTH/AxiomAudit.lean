@@ -4010,6 +4010,11 @@ namespace QIQTH.AxiomAudit
 -- So deviceVec(0)=√R ζ=ξ, J·deviceVec(0)=Jξ ⇒ g-function value g(0)=⟪η,Jξ⟫ = the GConstancy RHS. The cfcCont↔CFC
 -- bridge (borelFC of continuous fn = Mathlib CFC) realized via the sqrt-uniqueness pattern, no new axiom.
 #print axioms QIQTH.devCorrExt_ofReal_inner
+#print axioms QIQTH.devChar_slope_norm_le
+-- expected: standard only — UNIFORM slope/Lipschitz bound (piece 2 of strong-holo dominated convergence): on the
+-- slab {−β₁<Im z<−β₀}, ‖d_z(ω)−d_{z₀}(ω)‖ ≤ C·‖z−z₀‖, C=devChar_deriv_norm_le const, UNIFORM in ω. Via complex
+-- MVT Convex.norm_image_sub_le_of_norm_hasDerivWithin_le (hasDerivAt_devChar_Icc on convex slab + deriv bound;
+-- ω∈{0,2}⇒deriv 0). Gives ‖Δ_z(ω)‖≤C uniformly ⇒ the dominating constant 4C² for dominated convergence.
 #print axioms QIQTH.tendsto_devChar_slope
 -- expected: standard only — POINTWISE diff-quotient convergence (piece 1 of strong-holo dominated convergence):
 -- (d_z(ω)−d_{z₀}(ω))/(z−z₀) → i·log((2−ω)/ω)·d_{z₀}(ω) as z→z₀ (z≠z₀), from hasDerivAt_devChar_Icc via
