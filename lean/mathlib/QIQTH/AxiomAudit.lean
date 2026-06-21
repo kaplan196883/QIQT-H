@@ -4556,6 +4556,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ Stress-tensor Route B (Krep' decay input): ∃ C≥0, ∀θ ‖minkowskiFourier(x_j f)(massShell m θ)‖
 -- ≤ C·(cosh θ)⁻². The (cosh)⁻² decay of the mass-shell FT of the moment x_j f (Schwartz), via Krep_coordMul + schwartz_Krep_decay_sq.
 -- This is THE moment-decay input for the (cosh)⁻¹ decay of the rapidity derivative Krep' (kd), which unblocks hdA/hdAc/hFdA/h1/h2.
+#print axioms QIQTH.Fock.Localization.kd_integral_eq_moments
+-- expected: standard only — ★★ Stress-tensor Route B: the Krep' moment split — ∫ e^{iη}(−i m(x₀sinh−x₁cosh))f = −i m sinh θ·𝓕(x₀f)
+-- + i m cosh θ·𝓕(x₁f) on the mass shell. Pointwise pull-out of real θ-constants (push_cast+ring) + integral linearity (each moment
+-- integrand L¹ since ‖e^{iη}(x_j•f)‖=‖coordMul j f‖) separates the two mass-shell Fourier transforms.
+#print axioms QIQTH.Fock.Localization.kd_norm_le
+-- expected: standard only — ★★★ Stress-tensor Route B (THE Krep' DECAY): ∃C≥0,∀θ ‖(1/√2)∫e^{iη}(−i m(x₀sinh−x₁cosh))f‖ ≤ C·(cosh θ)⁻¹.
+-- = ‖Krep'(θ)‖ ≤ C cosh⁻¹. Combines kd_integral_eq_moments (split) + minkowskiFourier_coordMul_decay (cosh⁻² moment decay) + |sinh|≤cosh
+-- (abs_sinh_le_cosh): the m cosh θ prefactors meet cosh⁻² to leave cosh⁻¹. Since ∫cosh⁻¹=π this makes kd integrable — the analytic core
+-- unblocking the remaining horizon-amplitude derivative gates hdA/hdAc/hFdA/h1/h2 (deriv horizonAmp = (i/x)kd(rapInv x) on x>0).
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

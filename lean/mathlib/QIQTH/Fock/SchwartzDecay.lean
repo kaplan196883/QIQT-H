@@ -306,4 +306,80 @@ theorem minkowskiFourier_coordMul_decay (j : Fin 2) (f : SchwartzMap V ℂ) {m :
           + (∫ v, ‖iteratedFDeriv ℝ 2 (⇑(coordMul j f)) v‖)) / (Real.sqrt 2 * m ^ 2))
           * ((Real.cosh θ) ^ 2)⁻¹ := by ring
 
+/-- **The `Krep'` moment split.**  The bare integral of the rapidity-derivative `kd = Krep'` (from
+`schwartz_Krep_hasDerivAt`, modulo `1/√2`) decomposes as
+`−i·m·sinh θ·𝓕(x₀ f) + i·m·cosh θ·𝓕(x₁ f)` on the mass shell.  Pointwise the integrand splits by pulling out
+the real `θ`-constants, and integral linearity (each moment integrand is `L¹` since `‖e^{iη}·(x_j•f)‖ =
+‖coordMul j f‖`) separates the two mass-shell Fourier transforms.  This + `minkowskiFourier_coordMul_decay`
+(`(cosh)⁻²`) + `|sinh| ≤ cosh` give the `(cosh)⁻¹` decay of `Krep'`. -/
+theorem kd_integral_eq_moments (m : ℝ) (f : SchwartzMap V ℂ) (θ : ℝ) :
+    (∫ x, (Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ))
+        * (-Complex.I * ((m * (x 0 * Real.sinh θ - x 1 * Real.cosh θ) : ℝ) : ℂ))) * (⇑f) x)
+      = (-Complex.I * ((m * Real.sinh θ : ℝ) : ℂ))
+          * minkowskiFourier (fun x => (x 0 : ℝ) • (⇑f) x) (massShell m θ)
+        + (Complex.I * ((m * Real.cosh θ : ℝ) : ℂ))
+          * minkowskiFourier (fun x => (x 1 : ℝ) • (⇑f) x) (massShell m θ) := by
+  have hnorm_e : ∀ x : V, ‖Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ))‖ = 1 := by
+    intro x; rw [Complex.norm_exp]
+    simp [Complex.neg_re, Complex.mul_re, Complex.I_re, Complex.I_im,
+      Complex.ofReal_re, Complex.ofReal_im]
+  have hmD : Continuous (fun x : V => (minkowskiDot (massShell m θ) x : ℝ)) := by
+    simp only [minkowskiDot]
+    exact (continuous_const.mul (continuous_apply 0)).sub (continuous_const.mul (continuous_apply 1))
+  have hexpc : Continuous (fun x : V =>
+      Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ))) :=
+    Complex.continuous_exp.comp (continuous_const.mul (Complex.continuous_ofReal.comp hmD))
+  have hint : ∀ j : Fin 2, Integrable (fun x : V =>
+      Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ)) * ((x j : ℝ) • (⇑f) x)) := by
+    intro j
+    refine ((coordMul j f).integrable.norm).mono'
+      (hexpc.mul ((continuous_apply j).smul f.continuous)).aestronglyMeasurable
+      (Filter.Eventually.of_forall fun x => ?_)
+    rw [norm_mul, hnorm_e, one_mul, coordMul_apply]
+  have hpt : ∀ x : V,
+      (Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ))
+        * (-Complex.I * ((m * (x 0 * Real.sinh θ - x 1 * Real.cosh θ) : ℝ) : ℂ))) * (⇑f) x
+      = (-Complex.I * ((m * Real.sinh θ : ℝ) : ℂ))
+          * (Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ)) * ((x 0 : ℝ) • (⇑f) x))
+        + (Complex.I * ((m * Real.cosh θ : ℝ) : ℂ))
+          * (Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ)) * ((x 1 : ℝ) • (⇑f) x)) := by
+    intro x; simp only [Complex.real_smul]; push_cast; ring
+  rw [integral_congr_ae (Filter.Eventually.of_forall hpt),
+    integral_add ((hint 0).const_mul _) ((hint 1).const_mul _),
+    integral_const_mul, integral_const_mul]
+  rfl
+
+/-- **★★★ `(cosh)⁻¹` decay of the rapidity derivative `Krep'` (`kd`).**  Combining the moment split
+(`kd_integral_eq_moments`) with the `(cosh)⁻²` moment decay (`minkowskiFourier_coordMul_decay`) and
+`|sinh θ| ≤ cosh θ`: the `m·cosh θ` prefactors meet the `(cosh)⁻²` decay to leave `(cosh)⁻¹`.  Since
+`∫ (cosh θ)⁻¹ dθ = π`, this is exactly the decay that makes `kd` integrable — the analytic core of the
+remaining horizon-amplitude derivative gates (`hdA`/`hdAc`/`hFdA`/`h1`/`h2`). -/
+theorem kd_norm_le (m : ℝ) (hm : 0 < m) (f : SchwartzMap V ℂ) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ θ : ℝ,
+      ‖(1 / Real.sqrt 2 : ℂ) * (∫ x, (Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ))
+          * (-Complex.I * ((m * (x 0 * Real.sinh θ - x 1 * Real.cosh θ) : ℝ) : ℂ))) * (⇑f) x)‖
+        ≤ C * (Real.cosh θ)⁻¹ := by
+  obtain ⟨C0, hC0, hb0⟩ := minkowskiFourier_coordMul_decay 0 f hm.ne'
+  obtain ⟨C1, hC1, hb1⟩ := minkowskiFourier_coordMul_decay 1 f hm.ne'
+  refine ⟨1 / Real.sqrt 2 * (m * (C0 + C1)), by positivity, fun θ => ?_⟩
+  have hcosh : (0 : ℝ) < Real.cosh θ := Real.cosh_pos θ
+  rw [kd_integral_eq_moments, norm_mul, show ‖(1 / Real.sqrt 2 : ℂ)‖ = 1 / Real.sqrt 2 from by
+    rw [show (1 / Real.sqrt 2 : ℂ) = ((1 / Real.sqrt 2 : ℝ) : ℂ) by push_cast; ring, Complex.norm_real,
+      Real.norm_eq_abs, abs_of_nonneg (by positivity)],
+    show (1 : ℝ) / Real.sqrt 2 * (m * (C0 + C1)) * (Real.cosh θ)⁻¹
+      = (1 / Real.sqrt 2) * (m * (C0 + C1) * (Real.cosh θ)⁻¹) from by ring]
+  refine mul_le_mul_of_nonneg_left ?_ (by positivity)
+  refine (norm_add_le _ _).trans ?_
+  simp only [norm_mul, norm_neg, Complex.norm_I, Complex.norm_real, one_mul, Real.norm_eq_abs,
+    abs_of_pos hm, abs_of_pos (Real.cosh_pos θ)]
+  have e0 : m * |Real.sinh θ| * ‖minkowskiFourier (fun x => (x 0 : ℝ) • (⇑f) x) (massShell m θ)‖
+      ≤ m * Real.cosh θ * (C0 * ((Real.cosh θ) ^ 2)⁻¹) :=
+    mul_le_mul (mul_le_mul_of_nonneg_left (abs_sinh_le_cosh θ) hm.le) (hb0 θ) (norm_nonneg _)
+      (by positivity)
+  have e1 : m * Real.cosh θ * ‖minkowskiFourier (fun x => (x 1 : ℝ) • (⇑f) x) (massShell m θ)‖
+      ≤ m * Real.cosh θ * (C1 * ((Real.cosh θ) ^ 2)⁻¹) :=
+    mul_le_mul_of_nonneg_left (hb1 θ) (by positivity)
+  refine (add_le_add e0 e1).trans (le_of_eq ?_)
+  field_simp
+
 end QIQTH.Fock.Localization
