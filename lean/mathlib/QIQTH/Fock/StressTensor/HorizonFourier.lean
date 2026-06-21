@@ -120,4 +120,45 @@ theorem Krep_integrand_hasDerivAt (m : ℝ) (f : V → ℂ) (x : V) (θ : ℝ) :
     rw [heq]; exact h0
   exact (((hg.ofReal_comp).const_mul (-Complex.I)).cexp).mul_const (f x)
 
+/-- **The domination bound for `Krep`'s θ-derivative** (the `h_bound`/`bound_integrable` ingredient).
+    For `|θ| ≤ R`, the derivative integrand is bounded by `m·cosh R·(|x₀|+|x₁|)·‖f x‖`, since `‖e^{iφ}‖ = 1`
+    and `|sinh θ|, |cosh θ| ≤ cosh R`.  The bound is a continuous, compactly-supported (for such `f`)
+    function of `x`, hence integrable — the domination the differentiation-under-the-integral needs. -/
+theorem Krep_deriv_norm_bound (m : ℝ) (hm : 0 ≤ m) (f : V → ℂ) (x : V) {R θ : ℝ}
+    (hR : 0 ≤ R) (hθ : |θ| ≤ R) :
+    ‖(Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ))
+        * (-Complex.I * ((m * (x 0 * Real.sinh θ - x 1 * Real.cosh θ) : ℝ) : ℂ))) * f x‖
+      ≤ m * Real.cosh R * (|x 0| + |x 1|) * ‖f x‖ := by
+  have hexp1 : ‖Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ))‖ = 1 := by
+    rw [Complex.norm_exp]
+    simp [Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im]
+  have hsinh : |Real.sinh θ| ≤ Real.cosh R := by
+    rw [Real.abs_sinh]
+    have h1 : Real.sinh |θ| ≤ Real.cosh |θ| := by
+      have := Real.exp_pos (-|θ|); rw [Real.cosh_eq, Real.sinh_eq]; linarith
+    have h2 : Real.cosh |θ| ≤ Real.cosh R := by
+      rw [Real.cosh_abs]; exact Real.cosh_le_cosh.mpr (by rwa [abs_of_nonneg hR])
+    linarith
+  have hcosh : |Real.cosh θ| ≤ Real.cosh R := by
+    rw [abs_of_nonneg (Real.cosh_pos θ).le]
+    exact Real.cosh_le_cosh.mpr (by rwa [abs_of_nonneg hR])
+  have hnorm : ‖(Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ))
+        * (-Complex.I * ((m * (x 0 * Real.sinh θ - x 1 * Real.cosh θ) : ℝ) : ℂ))) * f x‖
+      = |m * (x 0 * Real.sinh θ - x 1 * Real.cosh θ)| * ‖f x‖ := by
+    rw [norm_mul, norm_mul, hexp1, one_mul, norm_mul, norm_neg, Complex.norm_I, one_mul,
+      Complex.norm_real, Real.norm_eq_abs]
+  rw [hnorm]
+  refine mul_le_mul_of_nonneg_right ?_ (norm_nonneg _)
+  rw [abs_mul, abs_of_nonneg hm]
+  have hg : |x 0 * Real.sinh θ - x 1 * Real.cosh θ| ≤ Real.cosh R * (|x 0| + |x 1|) := by
+    calc |x 0 * Real.sinh θ - x 1 * Real.cosh θ|
+        ≤ |x 0 * Real.sinh θ| + |x 1 * Real.cosh θ| := abs_sub _ _
+      _ = |x 0| * |Real.sinh θ| + |x 1| * |Real.cosh θ| := by rw [abs_mul, abs_mul]
+      _ ≤ |x 0| * Real.cosh R + |x 1| * Real.cosh R := by
+          gcongr
+      _ = Real.cosh R * (|x 0| + |x 1|) := by ring
+  calc m * |x 0 * Real.sinh θ - x 1 * Real.cosh θ|
+      ≤ m * (Real.cosh R * (|x 0| + |x 1|)) := mul_le_mul_of_nonneg_left hg hm
+    _ = m * Real.cosh R * (|x 0| + |x 1|) := by ring
+
 end QIQTH.Fock.StressTensor
