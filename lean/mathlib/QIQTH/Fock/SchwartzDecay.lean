@@ -250,6 +250,91 @@ theorem schwartz_Krep_decay_sq (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) 
         field_simp
         ring
 
+/-- **Schwartz `1/cosh³` decay** of the localized amplitude (the `n = 3` Fourier-decay estimate, one
+derivative more than `schwartz_Krep_decay_sq`).  For any Schwartz `f` and `m ≠ 0`,
+`∃ C ≥ 0, ‖Krep m f θ‖ ≤ C · (cosh θ)⁻³`.  The extra power is what gives the rapidity derivative `Krep'` the
+SUPER-exponential `(cosh)⁻²` decay (`kd ~ cosh · cosh⁻³`), needed for the continuity of `deriv (horizonAmp)`
+at the bifurcation surface `x = 0` (the `hdAc` gate). -/
+theorem schwartz_Krep_decay_cube (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ θ : ℝ, ‖Krep m (⇑f) θ‖ ≤ C * ((Real.cosh θ) ^ 3)⁻¹ := by
+  set S : ℝ := (∫ v, ‖(⇑f) v‖) + (∫ v, ‖iteratedFDeriv ℝ 1 (⇑f) v‖)
+      + (∫ v, ‖iteratedFDeriv ℝ 2 (⇑f) v‖) + (∫ v, ‖iteratedFDeriv ℝ 3 (⇑f) v‖) with hSdef
+  have hSnonneg : 0 ≤ S := by rw [hSdef]; positivity
+  have hmabs : (0 : ℝ) < |m| := abs_pos.mpr hm
+  refine ⟨2 ^ 3 * (2 * π) ^ 3 * S / (Real.sqrt 2 * |m| ^ 3),
+    div_nonneg (mul_nonneg (by positivity) hSnonneg) (by positivity), fun θ => ?_⟩
+  have hcosh : (0 : ℝ) < Real.cosh θ := Real.cosh_pos θ
+  set p : V := massShell m θ with hp
+  set v : V := ![p 0, -(p 1)] with hv
+  have key := VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le
+    (L := minkBilin) (μ := (volume : Measure V)) (f := (⇑f))
+    (f.smooth ⊤) (fun k n _ _ => SchwartzMap.integrable_pow_mul_iteratedFDeriv volume f k n)
+    (k := 0) (n := 3) le_top le_top v p
+  have hsum : (∑ q ∈ Finset.range (0 + 1) ×ˢ Finset.range (3 + 1),
+      ∫ w, ‖w‖ ^ q.1 * ‖iteratedFDeriv ℝ q.2 (⇑f) w‖) = S := by
+    rw [hSdef, Finset.sum_product]
+    simp [Finset.sum_range_succ, norm_iteratedFDeriv_zero]
+  rw [hsum] at key
+  simp only [pow_zero, mul_one, norm_iteratedFDeriv_zero, Nat.cast_zero, mul_zero, zero_add] at key
+  rw [← minkowskiFourier_eq_fourierIntegral] at key
+  have hLvp : minkBilin v p = (p 0 ^ 2 + p 1 ^ 2) / (2 * π) := by
+    rw [minkBilin_apply, hv]; simp only [Matrix.cons_val_zero, Matrix.cons_val_one]; ring
+  rw [hLvp, abs_of_nonneg (by positivity)] at key
+  set mF : ℝ := ‖minkowskiFourier (⇑f) p‖ with hmF
+  have hmFnn : (0 : ℝ) ≤ mF := norm_nonneg _
+  set A : ℝ := p 0 ^ 2 + p 1 ^ 2 with hA
+  have h0 : ‖v 0‖ ≤ |m| * Real.cosh θ := by
+    have h : ‖v 0‖ = |m| * Real.cosh θ := by
+      simp only [hv, Matrix.cons_val_zero, hp, massShell_zero, Real.norm_eq_abs, abs_mul,
+        abs_of_pos hcosh]
+    exact h.le
+  have h1 : ‖v 1‖ ≤ |m| * Real.cosh θ := by
+    rw [hv]
+    simp only [Matrix.cons_val_one, Matrix.cons_val_zero, hp, massShell_one,
+      abs_neg, Real.norm_eq_abs, abs_mul]
+    exact mul_le_mul_of_nonneg_left (abs_sinh_le_cosh θ) (abs_nonneg m)
+  have hvnorm : ‖v‖ ≤ |m| * Real.cosh θ := by
+    rw [pi_norm_le_iff_of_nonneg (by positivity), Fin.forall_fin_two]
+    exact ⟨h0, h1⟩
+  have hAlb : (|m| * Real.cosh θ) ^ 2 ≤ A := by
+    rw [hA, hp]
+    simp only [massShell_zero, massShell_one, mul_pow, sq_abs]
+    nlinarith [mul_nonneg (sq_nonneg m) (sq_nonneg (Real.sinh θ))]
+  have hv3 : ‖v‖ ^ 3 ≤ (|m| * Real.cosh θ) ^ 3 := pow_le_pow_left₀ (norm_nonneg v) hvnorm 3
+  have key2 : (A / (2 * π)) ^ 3 * mF ≤ (|m| * Real.cosh θ) ^ 3 * 2 ^ 3 * S :=
+    le_trans key
+      (mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right hv3 (by norm_num)) hSnonneg)
+  have key3 : A ^ 3 * mF ≤ (|m| * Real.cosh θ) ^ 3 * (2 ^ 3 * (2 * π) ^ 3) * S := by
+    have h := mul_le_mul_of_nonneg_right key2 (by positivity : (0 : ℝ) ≤ (2 * π) ^ 3)
+    have e1 : (A / (2 * π)) ^ 3 * mF * (2 * π) ^ 3 = A ^ 3 * mF := by field_simp
+    rw [e1] at h
+    calc A ^ 3 * mF ≤ (|m| * Real.cosh θ) ^ 3 * 2 ^ 3 * S * (2 * π) ^ 3 := h
+      _ = (|m| * Real.cosh θ) ^ 3 * (2 ^ 3 * (2 * π) ^ 3) * S := by ring
+  have hclean : mF * (|m| * Real.cosh θ) ^ 3 ≤ (2 ^ 3 * (2 * π) ^ 3) * S := by
+    have hA3 : ((|m| * Real.cosh θ) ^ 2) ^ 3 ≤ A ^ 3 := pow_le_pow_left₀ (by positivity) hAlb 3
+    have hchain : (|m| * Real.cosh θ) ^ 3 * ((|m| * Real.cosh θ) ^ 3 * mF)
+        ≤ (|m| * Real.cosh θ) ^ 3 * ((2 ^ 3 * (2 * π) ^ 3) * S) :=
+      calc (|m| * Real.cosh θ) ^ 3 * ((|m| * Real.cosh θ) ^ 3 * mF)
+          = ((|m| * Real.cosh θ) ^ 2) ^ 3 * mF := by ring
+        _ ≤ A ^ 3 * mF := mul_le_mul_of_nonneg_right hA3 hmFnn
+        _ ≤ (|m| * Real.cosh θ) ^ 3 * (2 ^ 3 * (2 * π) ^ 3) * S := key3
+        _ = (|m| * Real.cosh θ) ^ 3 * ((2 ^ 3 * (2 * π) ^ 3) * S) := by ring
+    have := le_of_mul_le_mul_left hchain (by positivity : (0 : ℝ) < (|m| * Real.cosh θ) ^ 3)
+    linarith
+  have hmFbound : mF ≤ (2 ^ 3 * (2 * π) ^ 3) * S / (|m| * Real.cosh θ) ^ 3 := by
+    rw [le_div_iff₀ (by positivity)]; exact hclean
+  have hc : ‖(1 / Real.sqrt 2 : ℂ)‖ = 1 / Real.sqrt 2 := by
+    rw [show (1 / Real.sqrt 2 : ℂ) = ((1 / Real.sqrt 2 : ℝ) : ℂ) by push_cast; ring,
+      Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (by positivity)]
+  show ‖(1 / Real.sqrt 2 : ℂ) * minkowskiFourier (⇑f) p‖ ≤ _
+  rw [norm_mul, hc, ← hmF]
+  calc 1 / Real.sqrt 2 * mF
+      ≤ 1 / Real.sqrt 2 * ((2 ^ 3 * (2 * π) ^ 3) * S / (|m| * Real.cosh θ) ^ 3) :=
+        mul_le_mul_of_nonneg_left hmFbound (by positivity)
+    _ = 2 ^ 3 * (2 * π) ^ 3 * S / (Real.sqrt 2 * |m| ^ 3) * ((Real.cosh θ) ^ 3)⁻¹ := by
+        rw [show (|m| * Real.cosh θ) ^ 3 = |m| ^ 3 * (Real.cosh θ) ^ 3 from by rw [mul_pow]]
+        field_simp
+
 /-- **A non-degenerate `LocalTest` from any Schwartz function** (`m ≠ 0`): the honest "local test
 class" — every Schwartz spacetime test function is `L²`-admissible for the mass-shell localization. -/
 def schwartzLocalTest (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) : LocalTest m where
