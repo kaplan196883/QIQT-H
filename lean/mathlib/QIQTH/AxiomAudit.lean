@@ -3790,6 +3790,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ STEP 6a (to closed strip): Im(corrC w)=0 on BOTH edges (Im=0,Im=1) ⇒ corrC w
 -- constant on the CLOSED kmsStrip. eqConst_of_im_zero_strip (Phragmén–Lindelöf) gives const on the open strip;
 -- continuity of entire g propagates to closure (kmsStrip=closure kmsStripOpen, Set.EqOn.closure).
+#print axioms QIQTH.StandardSubspaceModular.gConstancy_entire
+-- expected: standard only — ★★★ GCONSTANCY for entire vectors (RvD Thm 3.8 output assembled): ⟪V_t η_n, Δ^{it}(Jξ)⟫=
+-- ⟪η_n, Jξ⟫ (ξ=√R ζ, η_n=gaussSmear) from gFunction_eq_zero_const (g(t)=g(0)) + gFunction_real_eq (top) + gFunction_
+-- zero (origin) + conj (inner_conj_symm). = GConstancy S V at (η_n, √R ζ), modulo the 2 edge-reality inputs h0,h1.
 #print axioms QIQTH.StandardSubspaceModular.gFunction_eq_zero_const
 -- expected: standard only — ★★★ DEVICE g-FUNCTION CONSTANCY (RvD Thm 3.8 analytic heart): g(z)=⟪J·d_z(R)ζ,V_z η⟫
 -- real on BOTH half-strip edges (Im=0 & Im=-1/2) ⇒ g(t)=g(0) ∀t. diffContOnCl_gFunction + uniform bound

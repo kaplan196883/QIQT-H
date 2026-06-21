@@ -229,6 +229,27 @@ theorem gFunction_eq_zero_const (S : StandardSubspace H) (ζ : H) {V : ℝ → (
     show modConjBilin S (deviceVecF S ζ (0 : ℂ)) (gaussSmearC V n η (0 : ℂ)) = c from
       hext (by simp only [Set.mem_preimage, Complex.zero_im, Set.mem_Icc]; constructor <;> norm_num)]
 
+/-- **GConstancy for the entire vectors** (RvD Theorem 3.8 output, assembled): from the g-function constancy
+    `g(t) = g(0)` and the edge value identities, `⟪V_t η_n, Δ^{it}(J ξ)⟫ = ⟪η_n, J ξ⟫` for `ξ = √R ζ`,
+    `η_n = gaussSmear`.  `gFunction_eq_zero_const` gives `g(t) = g(0)`; `gFunction_real_eq` evaluates the top
+    edge `g(t) = ⟪Δ^{it}(Jξ), V_t η_n⟫`, `gFunction_zero` the origin `g(0) = ⟪Jξ, η_n⟫`; conjugating
+    (`inner_conj_symm`) flips both slots to the GConstancy form.  This is exactly `GConstancy S V` evaluated at
+    `(η_n, √R ζ)` — the analytic conclusion of RvD Theorem 3.8, modulo the two edge-reality inputs. -/
+theorem gConstancy_entire (S : StandardSubspace H) (ζ : H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ}
+    (hn : 0 < n) (η : H) (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hgrp : ∀ s t, V s (V t η) = V (s + t) η)
+    (h0 : ∀ z : ℂ, z.im = 0 →
+      (modConjBilin S (deviceVecF S ζ z) (gaussSmearC V n η z)).im = 0)
+    (h1 : ∀ z : ℂ, z.im = -(1 / 2) →
+      (modConjBilin S (deviceVecF S ζ z) (gaussSmearC V n η z)).im = 0) (t : ℝ) :
+    inner ℂ (V t (gaussSmear V n η)) (modUnitary S t (modConj S (rvdSqrtR S ζ)))
+      = inner ℂ (gaussSmear V n η) (modConj S (rvdSqrtR S ζ)) := by
+  have hconst := gFunction_eq_zero_const S ζ hn η hcont hbd h0 h1 t
+  rw [gFunction_real_eq S ζ hn η hcont hbd hgrp t, gFunction_zero] at hconst
+  rw [← inner_conj_symm (V t (gaussSmear V n η)) (modUnitary S t (modConj S (rvdSqrtR S ζ))),
+    ← inner_conj_symm (gaussSmear V n η) (modConj S (rvdSqrtR S ζ))]
+  exact congrArg (starRingEnd ℂ) hconst
+
 /-- **Analytic capstone of the KMS-uniqueness proof** (RvD Theorem 3.8): given the labelled KMS function,
     the orbit matrix element is `t`-independent.  Assembles the whole verified analytic chain.  Inputs: the
     *geometric* facts (`w ⊥ i𝒦`, the orbit `V_t(gaussSmear)` stays in `𝒦`) and the *labelled KMS input* — a
