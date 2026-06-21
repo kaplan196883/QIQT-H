@@ -736,6 +736,37 @@ theorem modConj_smul_conj (S : StandardSubspace H) (c : ℂ) (η : H) :
     smul_eq_re_add_im (starRingEnd ℂ c) (modConj S η), Complex.conj_re, Complex.conj_im]
   simp only [neg_smul, smul_neg]
 
+/-- **The J-twisted pairing `⟪J v, w⟫` is ℂ-LINEAR in `v`** (the J-cancellation): `⟪J(c·v), w⟫ = c·⟪J v, w⟫`.
+    `J`'s conjugate-linearity (`modConj_smul_conj`, pulling out `conj c`) cancels the inner product's
+    conjugate-linearity in the first slot (`inner_smul_left`, pulling out `conj(conj c) = c`).  Together with
+    ℂ-linearity in `w` (second slot) this makes `(v,w) ↦ ⟪J v, w⟫` a continuous ℂ-BILINEAR form — the engine
+    that makes the RvD g-function `g(z) = ⟪J d_z(R)ζ, V_z η⟫` HOLOMORPHIC despite `J`'s antilinearity. -/
+theorem inner_modConj_smul_left (S : StandardSubspace H) (c : ℂ) (v w : H) :
+    inner ℂ (modConj S (c • v)) w = c • inner ℂ (modConj S v) w := by
+  rw [modConj_smul_conj, inner_smul_left, Complex.conj_conj, smul_eq_mul]
+
+/-- **The J-twisted bilinear form** `B(v,w) = ⟪J v, w⟫` as a continuous ℂ-BILINEAR map `H →L[ℂ] H →L[ℂ] ℂ`.
+    ℂ-linear in `v` by the J-cancellation (`inner_modConj_smul_left`: `J` antilinear ∘ inner conj-linear =
+    ℂ-linear), ℂ-linear in `w` (inner second slot), bounded by `‖v‖·‖w‖` (`modConj_norm` isometry +
+    Cauchy–Schwarz).  This is the bilinear form whose composition with two HOLOMORPHIC curves
+    `g(z) = B(d_z(R)ζ, V_z η)` is holomorphic — the device-vector RvD g-function. -/
+noncomputable def modConjBilin (S : StandardSubspace H) : H →L[ℂ] H →L[ℂ] ℂ :=
+  LinearMap.mkContinuous₂
+    (LinearMap.mk₂ ℂ (fun v w => inner ℂ (modConj S v) w)
+      (fun v v' w => by simp only [map_add, inner_add_left])
+      (fun c v w => show inner ℂ (modConj S (c • v)) w = c • inner ℂ (modConj S v) w from
+        inner_modConj_smul_left S c v w)
+      (fun v w w' => by simp only [inner_add_right])
+      (fun c v w => by simp only [inner_smul_right, smul_eq_mul]))
+    1 (fun v w => by
+      show ‖inner ℂ (modConj S v) w‖ ≤ 1 * ‖v‖ * ‖w‖
+      rw [one_mul]
+      exact (norm_inner_le_norm _ _).trans (by rw [modConj_norm]))
+
+/-- `modConjBilin` applied: `B(v, w) = ⟪J v, w⟫`. -/
+@[simp] theorem modConjBilin_apply (S : StandardSubspace H) (v w : H) :
+    modConjBilin S v w = inner ℂ (modConj S v) w := rfl
+
 /-- A bookkeeping identity: the imaginary part of a complex inner product as a real inner product,
     `Im⟪x, y⟫ = ⟪i·x, y⟫_ℝ`.  (`inner_smul_left` + `conj i = −i`.) -/
 private theorem im_inner_eq_real_inner_smul_I (x y : H) :

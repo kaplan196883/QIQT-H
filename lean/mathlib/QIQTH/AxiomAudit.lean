@@ -3680,6 +3680,13 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ 𝒦→H CAPSTONE: two continuous ℂ-linear A,B agreeing on 𝒦 agree everywhere.
 -- By ℂ-linearity also agree on i𝒦 (q∈i𝒦 ⇒ −i·q∈𝒦), hence on 𝒦+i𝒦 which is DENSE (IsCyclic 𝒦⊔i𝒦=⊤);
 -- continuity (Continuous.ext_on). Lifts V_t η=Δ^{it}η on 𝒦 (eq_of_mem_K_of_inner_perp_IK) to V_t=Δ^{it}.
+#print axioms QIQTH.StandardSubspaceModular.inner_modConj_smul_left
+-- expected: standard only — J-CANCELLATION: ⟪J(c•v),w⟫=c•⟪Jv,w⟫ (ℂ-LINEAR in v). J antilinear (modConj_smul_conj)
+-- ∘ inner conj-linear (inner_smul_left) = ℂ-linear (conj∘conj=id). Foundation of the J-twisted bilinear form.
+#print axioms QIQTH.StandardSubspaceModular.modConjBilin
+-- expected: standard only — ★★ J-TWISTED ℂ-BILINEAR FORM B(v,w)=⟪Jv,w⟫ : H →L[ℂ] H →L[ℂ] ℂ (mkContinuous₂; ℂ-linear
+-- in v by J-cancellation, in w by inner; bound ‖v‖‖w‖ via modConj_norm). THE construction making the RvD g-function
+-- g(z)=B(d_z(R)ζ, V_z η) HOLOMORPHIC (bounded bilinear of two holo curves) despite J's antilinearity.
 #print axioms QIQTH.StandardSubspaceModular.modConj_smul_conj
 -- expected: standard only — ★ J IS CONJUGATE-LINEAR: modConj(c•η)=conj(c)•modConj η. Extends antilinearity
 -- (c=i) to all c via c=Re c+i·Im c + J's ℝ-linearity. Bundles J R^{½}J (J-sandwiches) as ℂ-linear — the
