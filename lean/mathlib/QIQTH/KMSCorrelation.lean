@@ -284,6 +284,27 @@ theorem gConstancy_entire_of_bottom (S : StandardSubspace H) (ζ : H) {V : ℝ �
   gConstancy_entire S ζ hn η hcont hbd hgrp
     (gFunction_top_edge_real_all S ζ hn η hcont hbd hgrp hξ hKinv) h1 t
 
+open Filter in
+/-- **GConstancy density**: GConstancy holds for `η` if it holds for every normalised entire vector
+    `entireVec V n η` (`n → ∞`).  The entire vectors converge to `η` (`entireVec_tendsto`), and both sides
+    `⟪V_t·, w⟫`, `⟪·, w⟫` are continuous, so the constant equality passes to the limit (`tendsto_nhds_unique`).
+    This lifts the entire-vector GConstancy (`gConstancy_entire_of_bottom`) to the genuine `η ∈ 𝒦`. -/
+theorem gConstancy_of_entireVec_limit (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} (η ξ : H)
+    (t : ℝ) (hcont : Continuous (fun s => V s η)) (hbd : ∀ s, ‖V s η‖ ≤ ‖η‖) (hV0 : V 0 η = η)
+    (hGC : ∀ n : ℝ, 0 < n →
+      inner ℂ (V t (entireVec V n η)) (modUnitary S t (modConj S ξ))
+        = inner ℂ (entireVec V n η) (modConj S ξ)) :
+    inner ℂ (V t η) (modUnitary S t (modConj S ξ)) = inner ℂ η (modConj S ξ) := by
+  have htend := entireVec_tendsto η hcont hbd hV0
+  have hL : Tendsto (fun n => inner ℂ (V t (entireVec V n η)) (modUnitary S t (modConj S ξ)))
+      atTop (nhds (inner ℂ (V t η) (modUnitary S t (modConj S ξ)))) :=
+    (Continuous.tendsto (Continuous.inner (V t).continuous continuous_const) η).comp htend
+  have hR : Tendsto (fun n => inner ℂ (entireVec V n η) (modConj S ξ))
+      atTop (nhds (inner ℂ η (modConj S ξ))) :=
+    (Continuous.tendsto (Continuous.inner continuous_id continuous_const) η).comp htend
+  exact tendsto_nhds_unique hL
+    (hR.congr' (eventually_atTop.mpr ⟨1, fun n hn => (hGC n (by linarith)).symm⟩))
+
 /-- **Analytic capstone of the KMS-uniqueness proof** (RvD Theorem 3.8): given the labelled KMS function,
     the orbit matrix element is `t`-independent.  Assembles the whole verified analytic chain.  Inputs: the
     *geometric* facts (`w ⊥ i𝒦`, the orbit `V_t(gaussSmear)` stays in `𝒦`) and the *labelled KMS input* — a
