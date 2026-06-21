@@ -836,6 +836,28 @@ theorem tendsto_integral_devChar_remainder_sq (S : StandardSubspace H) (ζ : H)
   simpa using hconv
 
 open QIQTH.StandardSubspaceModular in
+/-- **Device-operator difference as a single `borelFC`** (first step of the slope operator-algebra):
+    `deviceOpC(z) − deviceOpC(z₀) = borelFC(d_z − d_{z₀})`.  Just `borelFC_sub` read backwards, using that
+    `deviceOpC` is definitionally a `borelFC` with the `√2` bound. -/
+theorem deviceOpC_sub (S : StandardSubspace H) {z z₀ : ℂ}
+    (hz2 : z.im ≤ 0) (hz1 : -(1 / 2 : ℝ) ≤ z.im)
+    (hz02 : z₀.im ≤ 0) (hz01 : -(1 / 2 : ℝ) ≤ z₀.im) :
+    deviceOpC S z hz2 hz1 - deviceOpC S z₀ hz02 hz01
+      = borelFC (rvdRC S) (rvdRC_isSelfAdjoint S)
+        (((measurable_devChar z).comp measurable_subtype_coe).sub
+          ((measurable_devChar z₀).comp measurable_subtype_coe))
+        (add_nonneg (Real.sqrt_nonneg 2) (Real.sqrt_nonneg 2))
+        (fun ω => (norm_sub_le _ _).trans (add_le_add
+          (devChar_norm_le_Icc hz2 hz1 (rvdRC_spectrum_mem_Icc S ω))
+          (devChar_norm_le_Icc hz02 hz01 (rvdRC_spectrum_mem_Icc S ω)))) :=
+  (borelFC_sub (rvdRC S) (rvdRC_isSelfAdjoint S)
+    ((measurable_devChar z).comp measurable_subtype_coe)
+    ((measurable_devChar z₀).comp measurable_subtype_coe)
+    (Real.sqrt_nonneg 2) (Real.sqrt_nonneg 2)
+    (fun ω => devChar_norm_le_Icc hz2 hz1 (rvdRC_spectrum_mem_Icc S ω))
+    (fun ω => devChar_norm_le_Icc hz02 hz01 (rvdRC_spectrum_mem_Icc S ω))).symm
+
+open QIQTH.StandardSubspaceModular in
 /-- **Candidate Fréchet derivative operator of the device** at an interior point: `∂_z d_{z₀}(R) =
     borelFC(ω ↦ i·log((2−ω)/ω)·d_{z₀}(ω))`, the spectral operator whose symbol is the `z`-derivative of the
     device character at `z₀`.  Bounded by the `devCharDeriv_norm_le_slab` constant `C(β₀,β₁)` (the operator is
