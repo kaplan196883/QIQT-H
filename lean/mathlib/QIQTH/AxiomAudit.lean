@@ -4397,14 +4397,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.StressTensor.Tkk_boostTest
 -- expected: standard only — ★ Stress-tensor Route B, Phase 2: the null stress component T_kk = ‖∂_λ φ_H‖² DEFINED,
 -- and its scaling: Tkk[boostTest a f](λ) = (e^a)²·Tkk[f](e^a λ) (weight-2 conformal dim of ∂_λφ). horizonFieldDeriv
--- (= ∂_λ horizonField as an integral), Tkk := ‖horizonFieldDeriv‖², stressFluxKK := ∫_{λ>0} λ·Tkk (the modular/boost
--- charge K=∫_H λ T_kk dλ) are now DEFINED objects (T_kk no longer a label). Phase 3: stressFluxKK = π·rapidityMomentum.
+-- (= ∂_λ horizonField as an integral), Tkk := ‖horizonFieldDeriv‖², stressFluxKK := ∫_ℝ λ·Tkk (the two-sided modular/
+-- boost charge K=∫_H λ T_kk dλ) are now DEFINED objects (T_kk no longer a label). Phase 3: stressFluxKK = −2π·rapidityMomentum.
 #print axioms QIQTH.Fock.StressTensor.stressFluxKK_boostTest
--- expected: standard only — ★ Stress-tensor Route B, Phase 3 (unconditional half): DILATION-INVARIANCE of the horizon
--- flux. stressFluxKK m (boostTest a f) = stressFluxKK m f — the boost charge K=∫_H λ T_kk dλ is boost-invariant (the
--- Noether/KMS consistency: modular Hamiltonian commutes with the boost). Weight-2 scaling of Tkk cancels the weight-(−2)
--- Jacobian of the horizon dilation λ↦e^aλ. Proof: Tkk_boostTest + integral_comp_mul_left_Ioi. The remaining crux —
--- stressFluxKK = π·rapidityMomentum — is a genuine distribution obstacle (oscillatory ∫λe^{−iλΔ}dλ, δ'(Δ) term); see file.
+-- expected: standard only — ★ Stress-tensor Route B, Phase 3a′ (unconditional half): DILATION-INVARIANCE of the FULL-LINE
+-- horizon flux. stressFluxKK m (boostTest a f) = stressFluxKK m f — the boost charge K=∫_ℝ λ T_kk dλ is boost-invariant
+-- (the Noether/KMS consistency: modular Hamiltonian commutes with the boost). Weight-2 scaling of Tkk cancels the weight-(−2)
+-- Jacobian of the horizon dilation λ↦e^aλ. Proof: Tkk_boostTest + Measure.integral_comp_mul_left. NB: stressFluxKK is now
+-- the FULL-LINE ∫_ℝ (was wrongly ∫_{λ>0}; GPT-5.5 consult — half-line ≠ const·rapidityMomentum). Phase 3b (now TRACTABLE,
+-- no distributions): stressFluxKK = −2π·rapidityMomentum via the sesquilinear Fourier identity on the k-line.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

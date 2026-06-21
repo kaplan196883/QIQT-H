@@ -14,8 +14,8 @@ Definitions:
 * `horizonFieldDeriv m f λ` — the affine derivative of the horizon field.
 * `Tkk m f λ := ‖horizonFieldDeriv m f λ‖²` — the null-null stress component `T_kk` (a defined object, no
   longer a label).
-* `stressFluxKK m f := ∫_{λ>0} λ · T_kk(λ) dλ` — the affine-weighted horizon flux `∫_H λ T_kk dλ`, i.e. the
-  modular/boost charge.
+* `stressFluxKK m f := ∫_ℝ λ · T_kk(λ) dλ` — the affine-weighted horizon flux `∫_H λ T_kk dλ` over the FULL
+  (two-sided) horizon generator, i.e. the wedge modular/boost charge.
 
 Covariances (the Route-B payoff that the boost = horizon dilation):
 * `horizonFieldDeriv_boostTest`: `horizonFieldDeriv m (boostTest a f) λ = e^a · horizonFieldDeriv m f (e^a λ)`.
@@ -41,10 +41,17 @@ noncomputable def horizonFieldDeriv (m : ℝ) (f : V → ℂ) (lam : ℝ) : ℂ 
     This is a *defined* real quantity (the labelled `T_kk` made concrete). -/
 noncomputable def Tkk (m : ℝ) (f : V → ℂ) (lam : ℝ) : ℝ := ‖horizonFieldDeriv m f lam‖ ^ 2
 
-/-- The **affine-weighted horizon stress flux** `∫_{λ>0} λ · T_kk(λ) dλ` — the modular/boost charge
-    `K = ∫_H λ T_kk dλ`.  Phase 3 proves this equals `π · rapidityMomentum`, discharging `hTkk`. -/
+/-- The **affine-weighted horizon stress flux** `∫_ℝ λ · T_kk(λ) dλ` — the (two-sided) modular/boost charge
+    `K = ∫_H λ T_kk dλ` over the FULL horizon generator.  The wedge modular flow `Δ^{it}` is the *two-sided*
+    boost, so the full line `∫_ℝ` (not the half line `∫_{λ>0}`) is the physically-correct object; it is also
+    the one that equals the boost momentum.  Phase 3 proves `stressFluxKK = −2π · rapidityMomentum`,
+    discharging `hTkk`.
+
+    NB (GPT-5.5 consult, verified): the *half*-line flux `∫_{λ>0} λ T_kk` is NOT `const · rapidityMomentum`
+    — it differs by a nonlocal Hilbert-transform term (e.g. it is strictly positive for real `K`, while
+    `rapidityMomentum = Im∫K·K' = 0`).  The earlier `∫_{Ioi 0}` definition was a bug; this is the fix. -/
 noncomputable def stressFluxKK (m : ℝ) (f : V → ℂ) : ℝ :=
-  ∫ lam in Set.Ioi (0 : ℝ), lam * Tkk m f lam
+  ∫ lam, lam * Tkk m f lam
 
 /-- **Affine derivative under the boost↔dilation map.**  `horizonFieldDeriv m (boostTest a f) λ
     = e^a · horizonFieldDeriv m f (e^a λ)`: the boost dilates the horizon and brings down one power of
