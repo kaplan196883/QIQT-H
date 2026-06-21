@@ -665,6 +665,63 @@ theorem comparisonDatum_of_gConstancy (S : StandardSubspace H) (V : ℝ → (H �
   rw [← inner_conj_symm w (V t η), ← inner_conj_symm w (modUnitary S t η)]
   exact congrArg (starRingEnd ℂ) hg
 
+open Filter in
+/-- **Full `GConstancy` from the two named RvD inputs** (the end-to-end assembly of the device g-function
+    discharge).  Given a strongly-continuous contraction group `V` (`hcont`/`hbd`/`hgrp`/`hV0`), the orbit
+    invariance of `𝒦` (`hKinv`), the **bottom-edge KMS reality** `h1` (the mid-line `Im z = −1/2` reality of the
+    device g-function, supplied by `HalfStripReal`), and the **`√R`-range density in `𝒦`** `hdense` (every
+    `ξ ∈ 𝒦` is a limit of `√R ζ_k ∈ 𝒦`, available since `R` is injective), the `GConstancy` proposition holds.
+    Chains `gConstancy_eta_of_bottom` (η-side, `h1`) → `gConstancy_xi_of_density` (ξ-side, `hdense`).  Together
+    with `comparisonDatum_of_gConstancy` this is the complete RvD Theorem 3.8 g-function argument, reducing the
+    `hUniq` discharge to exactly the two named inputs — every analytic and density step machine-checked. -/
+theorem gConstancy_of_inputs (S : StandardSubspace H) (V : ℝ → (H →L[ℂ] H))
+    (hcont : ∀ η ∈ (S.toClosedSubmodule : Set H), Continuous (fun t => V t η))
+    (hbd : ∀ η : H, ∀ t, ‖V t η‖ ≤ ‖η‖) (hgrp : ∀ η : H, ∀ s t, V s (V t η) = V (s + t) η)
+    (hV0 : ∀ η : H, V 0 η = η)
+    (hKinv : ∀ η ∈ (S.toClosedSubmodule : Set H), ∀ n : ℝ, 0 < n → ∀ s : ℝ,
+      projK S (V s (gaussSmear V n η)) = V s (gaussSmear V n η))
+    (h1 : ∀ η ∈ (S.toClosedSubmodule : Set H), ∀ ζ : H,
+      projK S (rvdSqrtR S ζ) = rvdSqrtR S ζ → ∀ n : ℝ, 0 < n → ∀ z : ℂ, z.im = -(1 / 2) →
+        (modConjBilin S (QIQTH.deviceVecF S ζ z) (gaussSmearC V n η z)).im = 0)
+    (hdense : ∀ ξ ∈ (S.toClosedSubmodule : Set H), ∃ ζs : ℕ → H,
+      (∀ k, projK S (rvdSqrtR S (ζs k)) = rvdSqrtR S (ζs k)) ∧
+        Tendsto (fun k => rvdSqrtR S (ζs k)) atTop (nhds ξ)) :
+    GConstancy S V := by
+  intro t η hη ξ hξ
+  exact gConstancy_xi_of_density S η t
+    (fun ζ hsq => gConstancy_eta_of_bottom S ζ η (hcont η hη) (hbd η) (hgrp η) (hV0 η) hsq
+      (hKinv η hη) (h1 η hη ζ hsq) t) hdense ξ hξ
+
+open Filter in
+/-- **★ One-particle Bisognano–Wichmann via the device g-function, reduced to the two named RvD inputs.**
+    The modular flow IS the candidate flow, `modUnitary S t = V t`, GIVEN: the strongly-continuous contraction
+    group `V` with `𝒦`-invariance (`hInv`), the correct full-strip KMS condition (`hKMS : StripKMSrvd`), and
+    the two RvD Theorem 3.8 inputs that drive the g-function — the **bottom-edge KMS reality** `h1` (mid-line
+    `Im z = −1/2` reality) and the **`√R`-range density in `𝒦`** `hdense`.  `gConstancy_of_inputs` yields the
+    full `GConstancy`, `comparisonDatum_of_gConstancy` the `ComparisonDatum`, and `oneParticleBW_of_comparison`
+    the flow identification.  This is the COMPLETE device g-function discharge of `hUniq`: every analytic,
+    constancy, and density step machine-checked and axiom-free, the labelled surface narrowed to exactly
+    `h1` + `hdense`. -/
+theorem oneParticleBW_of_inputs (S : StandardSubspace H) (V : ℝ → (H →L[ℂ] H))
+    (hcont : ∀ η ∈ (S.toClosedSubmodule : Set H), Continuous (fun t => V t η))
+    (hbd : ∀ η : H, ∀ t, ‖V t η‖ ≤ ‖η‖) (hgrp : ∀ η : H, ∀ s t, V s (V t η) = V (s + t) η)
+    (hV0 : ∀ η : H, V 0 η = η)
+    (hKinv : ∀ η ∈ (S.toClosedSubmodule : Set H), ∀ n : ℝ, 0 < n → ∀ s : ℝ,
+      projK S (V s (gaussSmear V n η)) = V s (gaussSmear V n η))
+    (h1 : ∀ η ∈ (S.toClosedSubmodule : Set H), ∀ ζ : H,
+      projK S (rvdSqrtR S ζ) = rvdSqrtR S ζ → ∀ n : ℝ, 0 < n → ∀ z : ℂ, z.im = -(1 / 2) →
+        (modConjBilin S (QIQTH.deviceVecF S ζ z) (gaussSmearC V n η z)).im = 0)
+    (hdense : ∀ ξ ∈ (S.toClosedSubmodule : Set H), ∃ ζs : ℕ → H,
+      (∀ k, projK S (rvdSqrtR S (ζs k)) = rvdSqrtR S (ζs k)) ∧
+        Tendsto (fun k => rvdSqrtR S (ζs k)) atTop (nhds ξ))
+    (hInv : ∀ t, Set.MapsTo (V t) (S.toClosedSubmodule : Set H) (S.toClosedSubmodule : Set H))
+    (hKMS : StripKMSrvd V (S.toClosedSubmodule : Set H)) :
+    ∀ t, modUnitary S t = V t :=
+  oneParticleBW_of_comparison S V
+    (fun _ => comparisonDatum_of_gConstancy S V
+      (gConstancy_of_inputs S V hcont hbd hgrp hV0 hKinv h1 hdense))
+    hInv hKMS
+
 /-- **Top-edge reality of the g-function** (RvD Theorem 3.8, the real-axis edge `g(t) = ⟪U_t η, Δ^{it} J ξ⟫`
     is real).  For `ξ, η ∈ 𝒦` with `V_t η ∈ 𝒦`: `Δ^{it} J ξ = J(Δ^{it} ξ)` (`modConj_commute_modUnitary`)
     lies in `(i𝒦)^⊥` (since `Δ^{it}ξ ∈ 𝒦` and `J𝒦 = (i𝒦)^⊥`), so pairing it against `V_t η ∈ 𝒦` is real

@@ -3470,6 +3470,15 @@ namespace QIQTH.AxiomAudit
 -- V_tη∈𝒦. Δ^{it}Jξ=J(Δ^{it}ξ)∈(i𝒦)^⊥ (modConj_commute_modUnitary + Δ^{it}ξ∈𝒦 + J𝒦=(i𝒦)^⊥), so the 𝒦×(i𝒦)^⊥
 -- pairing is real (inner_real_of_mem_K_perp_IK). GEOMETRIC, no analysis. The genuine device-vector g-function's
 -- real-axis edge (2nd slot = z-varying Δ^{it}Jξ, NOT the discredited fixed Jξ of corrJ). Feeds GConstancy.
+#print axioms QIQTH.Fock.OneParticleBW.gConstancy_of_inputs
+-- expected: standard only — ★★★ FULL GConstancy from the 2 named RvD inputs: V-group + hKinv + h1 (bottom-edge KMS)
+-- + hdense (√R-range density in 𝒦) ⇒ GConstancy S V. Chains gConstancy_eta_of_bottom (η) → gConstancy_xi_of_density (ξ).
+#print axioms QIQTH.Fock.OneParticleBW.oneParticleBW_of_inputs
+-- expected: standard only — ★★★★ COMPLETE DEVICE g-FUNCTION DISCHARGE of hUniq: modUnitary S t = V t from V-group +
+-- hInv + hKMS(StripKMSrvd) + the 2 named RvD inputs (h1 bottom-edge mid-line KMS reality + hdense √R-range density in 𝒦).
+-- gConstancy_of_inputs ⟹ comparisonDatum_of_gConstancy ⟹ oneParticleBW_of_comparison. EVERY analytic/constancy/density
+-- step machine-checked axiom-free; labelled surface = exactly h1 + hdense (both RvD-structure facts). The un-garbled
+-- g-function discharge END-TO-END.
 #print axioms QIQTH.Fock.OneParticleBW.oneParticleBW_of_comparison
 -- expected: standard only — ★★★ TIGHTEST honest labelling of the hUniq discharge. SOLE labelled hyp hCompare =
 -- (HalfStripReal ⟹ ComparisonDatum), where ComparisonDatum = ∀t η∈𝒦 ∀w⊥i𝒦, ⟪w,V_tη⟫=⟪w,Δ^{it}η⟫ — the EXACT
