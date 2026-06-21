@@ -157,4 +157,20 @@ theorem fourier_conj_parseval (A B : ℝ → ℂ)
   rw [show (VectorFourier.fourierIntegral 𝐞 (volume : Measure ℝ) (-innerₗ ℝ) (𝓕 B)) = B from hinv] at h
   simpa only [coe_innerSL_apply, RCLike.inner_apply'] using h
 
+/-- **★★ Parseval ∘ self-adjointness:** `∫ w, conj(𝓕 A w)·𝓕 (deriv A) w = i·rapidityMomentum A (deriv A)`.
+    Chains the Parseval pairing (`fourier_conj_parseval` with `B = deriv A`) with the Hermiticity of `−i∂`
+    (`inner_deriv_eq_I_mul_rapidityMomentum`).  This is the spectral side of the horizon flux: once the
+    Fourier-derivative relation `w·𝓕A = (2πi)⁻¹·𝓕(deriv A)` puts the affine weight into `𝓕(deriv A)`, this
+    lemma evaluates the resulting pairing to the rapidity momentum. -/
+theorem fourier_parseval_deriv (A : ℝ → ℂ)
+    (hA : Integrable A) (hAd : Differentiable ℝ A)
+    (hdAc : Continuous (deriv A)) (hdA : Integrable (deriv A)) (hFdA : Integrable (𝓕 (deriv A)))
+    (hff : Integrable (fun θ => (starRingEnd ℂ) (A θ) * A θ))
+    (h1 : Integrable (fun θ => (starRingEnd ℂ) (deriv A θ) * A θ))
+    (h2 : Integrable (fun θ => (starRingEnd ℂ) (A θ) * deriv A θ)) :
+    ∫ w, (starRingEnd ℂ) (𝓕 A w) * 𝓕 (deriv A) w
+      = Complex.I * (rapidityMomentum A (deriv A) : ℂ) := by
+  rw [fourier_conj_parseval A (deriv A) hA hdAc hdA hFdA]
+  exact inner_deriv_eq_I_mul_rapidityMomentum A (deriv A) (fun x => (hAd x).hasDerivAt) hff h1 h2
+
 end QIQTH.Fock.StressTensor

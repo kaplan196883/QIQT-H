@@ -4444,6 +4444,11 @@ namespace QIQTH.AxiomAudit
 -- M=innerSL ℂ + Fourier inversion Continuous.fourierInv_fourier_eq (𝓕⁻(𝓕B)=B). Hyps: A integrable; B continuous+integrable,
 -- 𝓕B integrable. This is the analytic HEART of hFlux — now PROVEN, not bundled. Remaining for hFlux: ψ_H=𝓕(−iA') (Fourier-deriv)
 -- + k↦θ change of vars + Krep on-shell diff/decay; then χ_H=𝓕(horizonAmp) (done) + this Parseval ⟹ hFlux ⟹ stressFluxKK_eq_of_flux.
+#print axioms QIQTH.Fock.StressTensor.fourier_parseval_deriv
+-- expected: standard only — ★★ Stress-tensor Route B, Phase 3b-ii: ∫conj(𝓕A)·𝓕(deriv A) = i·rapidityMomentum A (deriv A).
+-- Chains fourier_conj_parseval (B:=deriv A) with the self-adjointness inner_deriv_eq_I_mul_rapidityMomentum. The spectral-side
+-- evaluation of the horizon flux: once Mathlib's fourier_deriv (𝓕(deriv A)=2πi·w·𝓕A) moves the affine weight λ into 𝓕(deriv A),
+-- this gives the rapidity momentum. Remaining for hFlux: apply fourier_deriv + the λ=2πw rescale + horizonAmp instantiation + Krep regularity.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,
