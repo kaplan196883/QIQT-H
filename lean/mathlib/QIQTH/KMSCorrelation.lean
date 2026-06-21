@@ -635,6 +635,29 @@ theorem modCorr_midline_real (S : StandardSubspace H) {ζ η : H}
       ((mem_K_iff_projK S _).mp (modUnitary_mapsTo_K S t (rvdSqrtR S ζ)
         ((mem_K_iff_projK S (rvdSqrtR S ζ)).mpr hζ))))
 
+open StripUniqueness in
+/-- **★★ The modular flow satisfies RvD Proposition 3.5's half-strip KMS form (at `ξ = √Rζ ∈ 𝒦`).**  The
+    modular correlation `f(z) = ⟪η, deviceVecF(z)⟫ = ⟪η, Δ^{iz}ξ⟫` is bounded-holomorphic on the half-strip
+    `{−1/2 < Im z < 0}` (the device's strong holomorphy `differentiableOn_deviceVecF` + continuity to the
+    closure `deviceVecF_continuousOn`), with real-axis value `f(t) = ⟪η, Δ^{it}ξ⟫` (`deviceVecF_real_eq`) and
+    REAL mid-line value `f(t − i/2)` (`modCorr_midline_real`, geometric).  This is RvD Prop 3.5's `{−1/2}`
+    half-strip KMS form for the MODULAR flow — the converse RvD Theorem 3.8 direction (`Δ` is KMS), confirming
+    `oneParticleBW_complete` is non-vacuous.  Remaining for full `Δ`-KMS: density extension to all `ξ ∈ 𝒦`
+    (`rvdSqrtR_range_dense_in_K`) and RvD Prop 3.5's converse (half-strip form ⟹ `StripKMSrvd`, Schwarz reflection). -/
+theorem modCorr_halfStripReal (S : StandardSubspace H) {ζ η : H}
+    (hζ : projK S (rvdSqrtR S ζ) = rvdSqrtR S ζ) (hη : projK S η = η) :
+    ∃ f : ℂ → ℂ, DiffContOnCl ℂ f kmsHalfStripOpen ∧
+      (∀ t : ℝ, f (t : ℂ) = inner ℂ η (modUnitary S t (rvdSqrtR S ζ))) ∧
+      (∀ t : ℝ, (f ((t : ℂ) - Complex.I / 2)).im = 0) := by
+  refine ⟨fun z => inner ℂ η (QIQTH.deviceVecF S ζ z), ⟨?_, ?_⟩, ?_, ?_⟩
+  · exact (innerSL ℂ η).differentiable.comp_differentiableOn (differentiableOn_deviceVecF S ζ)
+  · rw [kmsHalfStripOpen, Complex.closure_preimage_im, closure_Ioo (by norm_num : (-(1 / 2) : ℝ) ≠ 0)]
+    exact (innerSL ℂ η).continuous.comp_continuousOn (deviceVecF_continuousOn S ζ)
+  · intro t
+    show inner ℂ η (QIQTH.deviceVecF S ζ (t : ℂ)) = inner ℂ η (modUnitary S t (rvdSqrtR S ζ))
+    rw [deviceVecF_real_eq]
+  · intro t; exact modCorr_midline_real S hζ hη t
+
 /-- **Geometric *sufficient condition* for the bottom-edge value (NOT the `h1` discharge route).**  Under
     `√Rζ ∈ 𝒦` the bottom-edge g-value is `⟪Δ^{it}ξ, gaussSmearC(t−i/2)⟫` with `Δ^{it}ξ ∈ 𝒦`
     (`modUnitary_mapsTo_K`), so by RvD Prop 2.3 (`inner_real_of_mem_K_perp_IK`) it is real IF

@@ -4306,6 +4306,11 @@ namespace QIQTH.AxiomAudit
 -- deviceVecF(t−i/2)=J(Δ^{it}ξ) (modConj_deviceVecF_bottom_eq_of_mem_K + modConj_sq), Δ^{it}ξ∈𝒦 ⟹ J(Δ^{it}ξ)∈(i𝒦)^⊥
 -- (projIK_modConj_eq_zero_of_mem_K), η∈𝒦 ⟹ inner_real_of_mem_K_perp_IK. NO circularity (the modular flow's device
 -- vector IS Δ^{iz}ξ; Δ^½ξ=Jξ on 𝒦) — unlike the candidate V whose h1 needed the f-transfer.
+#print axioms QIQTH.StandardSubspaceModular.modCorr_halfStripReal
+-- expected: standard only — ★★ MODULAR flow satisfies RvD Prop 3.5 HALF-STRIP KMS form (at ξ=√Rζ∈𝒦): ∃f bdd-holo
+-- on {−1/2<Im<0}, f(t)=⟪η,Δ^{it}ξ⟫, f(t−i/2) REAL. f(z)=⟪η,deviceVecF(z)⟫=⟪η,Δ^{iz}ξ⟫; bdd-holo via
+-- differentiableOn_deviceVecF + deviceVecF_continuousOn; real-axis deviceVecF_real_eq; mid-line modCorr_midline_real
+-- (geometric). Converse RvD Thm 3.8 (Δ is KMS) — non-vacuity of oneParticleBW_complete. Remaining: density + Prop 3.5 ⟸.
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable
