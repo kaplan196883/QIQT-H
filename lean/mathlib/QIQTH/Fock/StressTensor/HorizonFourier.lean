@@ -329,4 +329,55 @@ theorem schwartz_Krep_hasDerivAt (m : ℝ) (hm : 0 ≤ m) (f : SchwartzMap V ℂ
   rw [hKrep]
   exact key.2.const_mul (1 / Real.sqrt 2 : ℂ)
 
+/-- **★★ `Krep ∈ C¹`: the rapidity derivative `kd = Krep'` is continuous** (`f` Schwartz, `m ≥ 0`).  Since
+    `deriv (Krep m f) θ = (1/√2)·∫ F θ x` (the `schwartz_Krep_hasDerivAt` value), continuity follows from
+    `continuousAt_of_dominated`: the integrand `F` is continuous in `θ` (a.e. `x`), and on each ball
+    `|θ − θ₀| < 1` it is dominated by the integrable Schwartz bound `m·cosh(|θ₀|+1)·(|x₀|+|x₁|)·‖f x‖`
+    (`Krep_deriv_norm_bound` + `integrable_pow_mul`).  Needed for the continuity of `deriv (horizonAmp)`
+    (the `hdAc` gate). -/
+theorem schwartz_Krep_deriv_continuous {m : ℝ} (hm : 0 ≤ m) (f : SchwartzMap V ℂ) :
+    Continuous (deriv (fun θ => Krep m (⇑f) θ)) := by
+  set F : ℝ → V → ℂ := fun θ x =>
+    Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ))
+      * (-Complex.I * ((m * (x 0 * Real.sinh θ - x 1 * Real.cosh θ) : ℝ) : ℂ)) * (⇑f) x with hF
+  have hderiv_eq : deriv (fun θ => Krep m (⇑f) θ)
+      = fun θ => (1 / Real.sqrt 2 : ℂ) * ∫ x, F θ x := by
+    funext θ; rw [hF]; exact (schwartz_Krep_hasDerivAt m hm f θ).deriv
+  rw [hderiv_eq]
+  refine Continuous.const_mul ?_ _
+  rw [continuous_iff_continuousAt]
+  intro θ₀
+  have hFcont_x : ∀ θ, Continuous (F θ) := by
+    intro θ; simp only [hF, minkowskiDot, massShell_zero, massShell_one]; fun_prop
+  have hFcont_θ : ∀ x, Continuous (fun θ => F θ x) := by
+    intro x; simp only [hF, minkowskiDot, massShell_zero, massShell_one]; fun_prop
+  have hbound_int : Integrable
+      (fun x : V => m * Real.cosh (|θ₀| + 1) * (|x 0| + |x 1|) * ‖(⇑f) x‖) := by
+    refine ((f.integrable_pow_mul volume 1).const_mul (2 * m * Real.cosh (|θ₀| + 1))).mono'
+      (((continuous_const.mul ((continuous_abs.comp (continuous_apply 0)).add
+        (continuous_abs.comp (continuous_apply 1)))).mul f.continuous.norm).aestronglyMeasurable) ?_
+    filter_upwards with x
+    rw [Real.norm_eq_abs, abs_of_nonneg (by positivity)]
+    have hx2 : |x 0| + |x 1| ≤ 2 * ‖x‖ := by
+      have h0 := norm_le_pi_norm x 0
+      have h1 := norm_le_pi_norm x 1
+      rw [Real.norm_eq_abs] at h0 h1
+      linarith
+    calc m * Real.cosh (|θ₀| + 1) * (|x 0| + |x 1|) * ‖(⇑f) x‖
+        ≤ m * Real.cosh (|θ₀| + 1) * (2 * ‖x‖) * ‖(⇑f) x‖ :=
+          mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hx2 (by positivity)) (norm_nonneg _)
+      _ = 2 * m * Real.cosh (|θ₀| + 1) * (‖x‖ ^ 1 * ‖(⇑f) x‖) := by rw [pow_one]; ring
+  refine continuousAt_of_dominated
+    (Filter.Eventually.of_forall (fun θ => (hFcont_x θ).aestronglyMeasurable))
+    ?_ hbound_int (Filter.Eventually.of_forall (fun x => (hFcont_θ x).continuousAt))
+  filter_upwards [Metric.ball_mem_nhds θ₀ one_pos] with θ hθ
+  refine Filter.Eventually.of_forall (fun x => ?_)
+  have hθR : |θ| ≤ |θ₀| + 1 := by
+    rw [Metric.mem_ball, Real.dist_eq] at hθ
+    calc |θ| = |θ₀ + (θ - θ₀)| := by ring_nf
+      _ ≤ |θ₀| + |θ - θ₀| := abs_add_le _ _
+      _ ≤ |θ₀| + 1 := by linarith
+  rw [hF]
+  exact Krep_deriv_norm_bound m hm (⇑f) x (by positivity) hθR
+
 end QIQTH.Fock.StressTensor
