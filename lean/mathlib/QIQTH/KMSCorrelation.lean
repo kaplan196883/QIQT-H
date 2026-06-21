@@ -637,6 +637,54 @@ theorem gFunction_bottom_real_of_perp_IK (S : StandardSubspace H) (V : ℝ → (
     ((mem_K_iff_projK S _).mp (modUnitary_mapsTo_K S t (rvdSqrtR S ζ)
       ((mem_K_iff_projK S (rvdSqrtR S ζ)).mpr hζ))) hperp
 
+open StripUniqueness in
+/-- **★ The g-function bottom-edge reality from the KMS f-transfer (RvD Theorem 3.8's actual route).**
+    The bottom-edge g-value equals the auxiliary orbit correlation with the device FROZEN at its bottom-edge
+    value `ξ_t = Δ^{it}ξ` (`ξ = √Rζ ∈ 𝒦`): `g(t−i/2) = ⟪ξ_t, gaussSmearC(t−i/2)⟫ = corrC ξ_t V n η (t−i/2)`.
+    `corrC ξ_t` is entire (`differentiable_corrC`) and bounded on the half-strip (`corrC_bdd_halfStrip`).  RvD's
+    argument: the K.M.S. condition applied to the pair `(η, Δ^{it}ξ)` yields a bounded-holomorphic `f` matching
+    this auxiliary `corrC ξ_t` on the real axis with `f(t−i/2)` REAL.  By half-strip boundary uniqueness
+    (`eqOn_of_im_zero_edge_halfStrip`) `corrC ξ_t = f` on the whole half-strip, so `g(t−i/2) = f(t−i/2)` is real.
+
+    This is the CORRECT route (the device is frozen at the bottom edge, turning `g`'s bottom value into a pure
+    orbit correlation that DOES match a KMS function — unlike the discredited direct-geometric route, where the
+    mid-line orbit's `i𝒦` component blocks `inner_real_of_mem_K_perp_IK`).  The remaining gap is producing the
+    matching `f` from `StripKMSrvd`/`HalfStripReal` — a convention bridge (RvD's `⟨·,·⟩` is linear-first, so the
+    KMS bottom edge `⟨U_sη, Δ^{it}ξ⟩` equals Mathlib `⟪ξ_t, V_s η⟫ = corrC ξ_t`, the conjugate of `HalfStripReal`'s
+    `⟪V_s ξ', η'⟫`).  The `f` is genuinely available (RvD guarantees it), so this `hmatch` hypothesis — unlike
+    `projIK = 0` — IS satisfiable. -/
+theorem gFunction_bottom_real_of_kms_match (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ}
+    (hn : 0 < n) (η : H) {ζ : H} (hζ : projK S (rvdSqrtR S ζ) = rvdSqrtR S ζ) (t : ℝ)
+    (hcont : Continuous (fun s => V s η)) (hbd : ∀ s, ‖V s η‖ ≤ ‖η‖)
+    {f : ℂ → ℂ} {M : ℝ} (hf : DiffContOnCl ℂ f kmsHalfStripOpen)
+    (hfb : ∀ z ∈ kmsHalfStrip, ‖f z‖ ≤ M)
+    (hmatch : ∀ s : ℝ, f (s : ℂ) = corrC (modUnitary S t (rvdSqrtR S ζ)) V n η (s : ℂ))
+    (hmid : (f ((t : ℂ) - Complex.I / 2)).im = 0) :
+    (modConjBilin S (deviceVecF S ζ ((t : ℂ) - Complex.I / 2))
+        (gaussSmearC V n η ((t : ℂ) - Complex.I / 2))).im = 0 := by
+  set ξt := modUnitary S t (rvdSqrtR S ζ) with hξt
+  have hg : modConjBilin S (deviceVecF S ζ ((t : ℂ) - Complex.I / 2))
+        (gaussSmearC V n η ((t : ℂ) - Complex.I / 2))
+      = corrC ξt V n η ((t : ℂ) - Complex.I / 2) := by
+    rw [gFunction_bottom_eq_of_mem_K S hζ, corrC, innerSL_apply_apply]
+  rw [hg]
+  have heqOn : Set.EqOn (corrC ξt V n η) f kmsHalfStrip :=
+    eqOn_of_im_zero_edge_halfStrip
+      (M := max M (‖ξt‖ * (Real.exp (n / 4) * ‖η‖ * Real.sqrt (Real.pi / n))))
+      ((differentiable_corrC hn η ξt hcont hbd).diffContOnCl) hf
+      (fun z hz => le_trans (corrC_bdd_halfStrip hn η ξt hcont hbd z hz) (le_max_right _ _))
+      (fun z hz => le_trans (hfb z hz) (le_max_left _ _))
+      (fun z hz0 => by
+        have hz : z = ((z.re : ℝ) : ℂ) := Complex.ext (by simp) (by simp [hz0])
+        rw [hz]; exact (hmatch z.re).symm)
+  have hmem : ((t : ℂ) - Complex.I / 2) ∈ kmsHalfStrip := by
+    rw [kmsHalfStrip, Set.mem_preimage,
+      show ((t : ℂ) - Complex.I / 2).im = -(1 / 2) from by
+        simp [Complex.sub_im, Complex.div_im, Complex.I_im], Set.mem_Icc]
+    constructor <;> norm_num
+  rw [heqOn hmem]
+  exact hmid
+
 /-- **Diagonal-correlation form of the RvD Theorem 3.8 closeout**: if the modular correlations agree,
     `⟨ξ, V_t ξ⟩ = ⟨ξ, Δ^{it} ξ⟩` for every `ξ`, then `V_t = Δ^{it}` (stated with `ξ` in the first slot, the
     `modCorrExt` convention).  This is the operator-level conclusion that the `modCorrExt` strip-uniqueness

@@ -4251,6 +4251,12 @@ namespace QIQTH.AxiomAudit
 -- gaussSmearC(t−i/2)⟫ real IF projIK(gaussSmearC(t−i/2))=0. ⚠ that hypothesis is generally FALSE (mid-line orbit
 -- has an i𝒦 component from the e^{−ni(u−t)} phase: −i·sin·V_uη ∈ i𝒦), so the bottom-edge reality is a GLOBAL
 -- analytic fact (KMS f-transfer, RvD Thm 3.8 core), not pointwise ⊥. Lemma records the correct implication only.
+#print axioms QIQTH.StandardSubspaceModular.gFunction_bottom_real_of_kms_match
+-- expected: standard only — ★★★ THE CORRECT h1 ROUTE (RvD Thm 3.8 f-transfer). Freeze device at bottom-edge value
+-- ξ_t=Δ^{it}ξ: g(t−i/2)=⟪ξ_t,gaussSmearC(t−i/2)⟫=corrC ξ_t V n η (t−i/2). corrC ξ_t entire (differentiable_corrC)
+-- + bounded on half-strip (corrC_bdd_halfStrip); KMS f matches it on real axis with f(t−i/2) real ⟹ (half-strip
+-- boundary uniqueness eqOn_of_im_zero_edge_halfStrip) corrC ξ_t=f ⟹ g(t−i/2)=f(t−i/2) real. hmatch IS satisfiable
+-- (RvD's KMS for pair (η,Δ^{it}ξ) gives it) — remaining gap = the convention bridge from StripKMSrvd/HalfStripReal.
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable
