@@ -4010,6 +4010,10 @@ namespace QIQTH.AxiomAudit
 -- So deviceVec(0)=√R ζ=ξ, J·deviceVec(0)=Jξ ⇒ g-function value g(0)=⟪η,Jξ⟫ = the GConstancy RHS. The cfcCont↔CFC
 -- bridge (borelFC of continuous fn = Mathlib CFC) realized via the sqrt-uniqueness pattern, no new axiom.
 #print axioms QIQTH.devCorrExt_ofReal_inner
+#print axioms QIQTH.differentiableOn_deviceVecF
+-- expected: standard only — device vector HOLOMORPHIC (DifferentiableOn) on the open half-strip im⁻¹'Ioo(-1/2)0:
+-- immediate from hasDerivAt_deviceVecF (slab β₀=-Im z₀/2, β₁=(1/2-Im z₀)/2 around z₀). The strong-holo half-strip
+-- input the g-function Phragmén–Lindelöf constancy consumes.
 #print axioms QIQTH.hasDerivAt_deviceVecF
 -- expected: standard only — ★★★★ STRONG (FRÉCHET) HOLOMORPHY of the device vector (PIECE 4 COMPLETE, the holomorphy
 -- wall DEFEATED): HasDerivAt (deviceVecF S ζ) (deviceDerivOpC z₀ ζ) z₀ at every interior z₀ of the open half-strip.

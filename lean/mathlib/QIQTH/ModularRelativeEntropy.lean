@@ -934,6 +934,19 @@ theorem hasDerivAt_deviceVecF (S : StandardSubspace H) (ζ : H)
   rw [slope_def_module, deviceVecF_eq_of_mem S ζ hz2 hz1, deviceVecF_eq_of_mem S ζ hz02 hz01,
     ← Real.sqrt_sq (norm_nonneg _), deviceOpC_slope_normSq S ζ hβ₀ hβ₁ hz2 hz1 hz02 hz01 hz₀]
 
+/-- **The device vector is holomorphic on the open half-strip** (piece 4 ⇒ `DifferentiableOn`): immediate
+    from `hasDerivAt_deviceVecF` at every interior point (choosing the slab `β₀ = −Im z₀/2`,
+    `β₁ = (1/2 − Im z₀)/2` around `z₀`).  This is the strong-holomorphic half-strip input the g-function
+    Phragmén–Lindelöf constancy consumes — now available for the device vector of EVERY standard subspace. -/
+theorem differentiableOn_deviceVecF (S : StandardSubspace H) (ζ : H) :
+    DifferentiableOn ℂ (deviceVecF S ζ) (Complex.im ⁻¹' Set.Ioo (-(1 / 2) : ℝ) 0) := by
+  intro z₀ hz₀
+  obtain ⟨hlo, hhi⟩ := (Set.mem_preimage.mp hz₀ : z₀.im ∈ Set.Ioo (-(1 / 2) : ℝ) 0)
+  refine (hasDerivAt_deviceVecF S ζ (β₀ := -z₀.im / 2) (β₁ := (1 / 2 - z₀.im) / 2)
+    (by linarith) (by linarith) ?_).differentiableAt.differentiableWithinAt
+  rw [Set.mem_preimage, Set.mem_Ioo]
+  constructor <;> linarith
+
 open QIQTH.StandardSubspaceModular in
 /-- **Diagonal operator identification of the device strip extension** (general `z` in the half-strip):
     `D_ξ(z) = ⟪ξ, deviceOpC(z) ξ⟫`.  The scalar integral `∫ d_z dμ^R_ξ` IS the diagonal expectation of the
