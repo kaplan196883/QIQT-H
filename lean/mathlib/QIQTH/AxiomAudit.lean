@@ -4192,6 +4192,27 @@ namespace QIQTH.AxiomAudit
 -- = ∫, integral_congr_ae) + clm_eq_of_inner_self_eq. THE tool for deviceOpC(−i/2)=√(2−R): d_{−i/2} & √(2−r) differ ONLY
 -- on endpoints {0,2}, E-null once R,2−R injective. Remaining for (a1-end): scalarMeasure({0,2})=0 (E-atom, needs E=
 -- boundedFC(ind) or R·E({λ})=λE({λ})).
+#print axioms QIQTH.SpectralTheorem.borelFC_const
+-- expected: standard only — QIQTH-layer wrapper of boundedFC_const: (fun _ => c)(T)=c•1.
+#print axioms QIQTH.SpectralTheorem.borelFC_indicator
+-- expected: standard only — QIQTH-layer wrapper of boundedFC_indicator: 𝟙_s(T)=E s (bounded Borel FC of a
+-- level-set indicator = the spectral projection). The bridge from the FC down to the PVM projections E.
+#print axioms QIQTH.StandardSubspaceModular.rvdRC_mul_E_levelSet
+-- expected: standard only — ★ SPECTRAL-ATOM EIGEN-RELATION R·E({λ=c})=c·E({λ=c}): borelFC sends coord↦mult, so on
+-- {λ=c} R acts as scalar c. Via R=borelFC(coord) (rvdRC_eq_borelFC), E(s)=borelFC(𝟙_s) (borelFC_indicator),
+-- coord·𝟙_s=c·𝟙_s pointwise, borelFC_mul+borelFC_const. THE E-atom-vanishing engine (closes the borelFC_congr_ae gap).
+#print axioms QIQTH.StandardSubspaceModular.rvdRC_E_zero_levelSet
+-- expected: standard only — E({λ=0})=0 (no atom at 0): R·E({0})=0 (eigen-relation, c=0) + R injective (rvdRC_injective).
+#print axioms QIQTH.StandardSubspaceModular.rvdRC_E_two_levelSet
+-- expected: standard only — E({λ=2})=0 (no atom at 2): (2−R)·E({2})=0 (eigen-relation, c=2 ⇒ R·E=2E) + 2−R injective.
+#print axioms QIQTH.rvdSpecMeasure_zero_levelSet
+-- expected: standard only — μ^R_x({λ=0})=0 (scalarMeasure_apply + E({0})=0).
+#print axioms QIQTH.rvdSpecMeasure_two_levelSet
+-- expected: standard only — μ^R_x({λ=2})=0 (scalarMeasure_apply + E({2})=0).
+#print axioms QIQTH.rvdSpecMeasure_endpoints
+-- expected: standard only — ★★ μ^R_x({λ∈{0,2}})=0: the device-character ENDPOINTS are μ^R_x-null (measure_union_null
+-- of the two atoms). EXACTLY the a.e. input borelFC_congr_ae needs for deviceOpC(−i/2)=√(2−R): d_{−i/2} & √(2−r)
+-- differ only on {0,2}. (a1-end) E-atom-vanishing now CLOSED — next: feed into deviceOpC(−i/2)=√(2−R) + KMS reflection.
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable

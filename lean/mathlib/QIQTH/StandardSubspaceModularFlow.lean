@@ -1582,6 +1582,86 @@ theorem rvdTwoSubRC_injective : Function.Injective (rvdTwoSubRC S) := by
   refine rvdRC_mul_rvdTwoSubRC_injective S ?_
   simp only [ContinuousLinearMap.mul_apply, hab]
 
+/-- **Spectral-atom eigen-relation** `R · E({λ = c}) = c · E({λ = c})`: the bounded Borel FC sends the
+    coordinate `λ` to multiplication, so on the level set `{λ = c}` the operator `R = ∫λ dE` acts as the
+    scalar `c`.  Route: `R = borelFC(coord)` (`rvdRC_eq_borelFC`), `E(s) = borelFC(𝟙_s)`
+    (`borelFC_indicator`), the pointwise identity `coord·𝟙_s = c·𝟙_s`, then `borelFC_mul` + `borelFC_const`.
+    With `R`/`2−R` injectivity this kills the endpoint spectral atoms (`E({0}) = E({2}) = 0`). -/
+theorem rvdRC_mul_E_levelSet (S : StandardSubspace H) (c : ℝ) :
+    rvdRC S * (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).E {ω | (ω : ℝ) = c}
+      = (c : ℂ) • (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).E {ω | (ω : ℝ) = c} := by
+  set s : Set (spectrum ℝ (rvdRC S)) := {ω | (ω : ℝ) = c} with hs_def
+  have hs : MeasurableSet s := measurable_subtype_coe (measurableSet_singleton c)
+  have hind_bd : ∀ ω, ‖s.indicator (fun _ => (1 : ℂ)) ω‖ ≤ 1 :=
+    QIQTH.Spectral.ProjectionValuedMeasure.norm_indicatorOne_le s
+  -- coord · 𝟙_s = c · 𝟙_s  (pointwise: on `s`, `coord = c`; off `s`, `𝟙_s = 0`)
+  have hci : (fun ω => specCoord S ω * s.indicator (fun _ => (1 : ℂ)) ω)
+      = (fun ω => (c : ℂ) * s.indicator (fun _ => (1 : ℂ)) ω) := by
+    funext ω
+    by_cases hω : ω ∈ s
+    · have hc : (ω : ℝ) = c := hω
+      simp only [specCoord, hc]
+    · simp only [Set.indicator_of_notMem hω, mul_zero]
+  -- proof data for the two product symbols (kept as named terms for `rw` matching)
+  have hpmeas : Measurable (fun ω => specCoord S ω * s.indicator (fun _ => (1 : ℂ)) ω) :=
+    (specCoord_measurable S).mul (measurable_const.indicator hs)
+  have hpbd : ∀ ω, ‖specCoord S ω * s.indicator (fun _ => (1 : ℂ)) ω‖
+      ≤ ‖rvdRC S‖ * ‖(1 : H →L[ℂ] H)‖ := fun ω => by
+    rw [norm_mul]
+    refine (mul_le_mul (specCoord_norm_le S ω) (hind_bd ω) (norm_nonneg _) (by positivity)).trans ?_
+    rw [mul_one]
+  have hpC0 : (0 : ℝ) ≤ ‖rvdRC S‖ * ‖(1 : H →L[ℂ] H)‖ := by positivity
+  have hcmeas : Measurable (fun ω => (c : ℂ) * s.indicator (fun _ => (1 : ℂ)) ω) :=
+    measurable_const.mul (measurable_const.indicator hs)
+  have hcbd : ∀ ω, ‖(c : ℂ) * s.indicator (fun _ => (1 : ℂ)) ω‖ ≤ ‖(c : ℂ)‖ := fun ω => by
+    rw [norm_mul]
+    refine (mul_le_mul_of_nonneg_left (hind_bd ω) (norm_nonneg _)).trans ?_
+    rw [mul_one]
+  nth_rewrite 1 [rvdRC_eq_borelFC S]
+  rw [← borelFC_indicator (rvdRC S) (rvdRC_isSelfAdjoint S) hs,
+      ← borelFC_mul (rvdRC S) (rvdRC_isSelfAdjoint S) (specCoord_measurable S)
+          (mul_nonneg (norm_nonneg _) (norm_nonneg _)) (specCoord_norm_le S)
+          (measurable_const.indicator hs) zero_le_one
+          (QIQTH.Spectral.ProjectionValuedMeasure.norm_indicatorOne_le s) hpmeas hpC0 hpbd,
+      borelFC_congr (rvdRC S) (rvdRC_isSelfAdjoint S) hpmeas hpC0 hpbd hcmeas (norm_nonneg _) hcbd hci,
+      borelFC_mul (rvdRC S) (rvdRC_isSelfAdjoint S) measurable_const (norm_nonneg (c : ℂ))
+          (fun _ => le_rfl) (measurable_const.indicator hs) zero_le_one
+          (QIQTH.Spectral.ProjectionValuedMeasure.norm_indicatorOne_le s) hcmeas (norm_nonneg _) hcbd,
+      borelFC_const, smul_mul_assoc, one_mul]
+
+/-- **`E({λ = 0}) = 0`** — no spectral atom at `0`: from `R · E({0}) = 0` (`rvdRC_mul_E_levelSet` at
+    `c = 0`) and `R` injective (`rvdRC_injective`).  So `0` is not an eigenvalue of `R`. -/
+theorem rvdRC_E_zero_levelSet (S : StandardSubspace H) :
+    (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).E {ω | (ω : ℝ) = 0} = 0 := by
+  have hkey := rvdRC_mul_E_levelSet S 0
+  rw [Complex.ofReal_zero, zero_smul] at hkey
+  ext x
+  have hx : rvdRC S ((PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).E {ω | (ω : ℝ) = 0} x) = 0 := by
+    have := congrArg (fun T => T x) hkey
+    simpa [ContinuousLinearMap.mul_apply] using this
+  have heq : rvdRC S ((PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).E {ω | (ω : ℝ) = 0} x)
+      = rvdRC S 0 := by rw [map_zero]; exact hx
+  simpa using rvdRC_injective S heq
+
+/-- **`E({λ = 2}) = 0`** — no spectral atom at `2`: from `R · E({2}) = 2 · E({2})`, so
+    `(2 − R) · E({2}) = 0`, and `2 − R` injective (`rvdTwoSubRC_injective`). -/
+theorem rvdRC_E_two_levelSet (S : StandardSubspace H) :
+    (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).E {ω | (ω : ℝ) = 2} = 0 := by
+  have hkey := rvdRC_mul_E_levelSet S 2
+  have hkill : rvdTwoSubRC S
+      * (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).E {ω | (ω : ℝ) = 2} = 0 := by
+    rw [rvdTwoSubRC, sub_mul, smul_mul_assoc, one_mul, hkey]
+    norm_num
+  ext x
+  have hx : rvdTwoSubRC S
+      ((PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).E {ω | (ω : ℝ) = 2} x) = 0 := by
+    have := congrArg (fun T => T x) hkill
+    simpa [ContinuousLinearMap.mul_apply] using this
+  have heq : rvdTwoSubRC S
+      ((PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).E {ω | (ω : ℝ) = 2} x)
+      = rvdTwoSubRC S 0 := by rw [map_zero]; exact hx
+  simpa using rvdTwoSubRC_injective S heq
+
 /-- `A.restrictScalars ℝ` has dense range (self-adjoint + injective). -/
 theorem rvdRC_mul_rvdTwoSubRC_denseRange :
     DenseRange ((rvdRC S * rvdTwoSubRC S).restrictScalars ℝ) := by

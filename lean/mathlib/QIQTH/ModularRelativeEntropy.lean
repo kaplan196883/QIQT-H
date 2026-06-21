@@ -622,6 +622,40 @@ theorem rvdSpec_borelFC_diag (S : StandardSubspace H) {f : spectrum ℝ (rvdRC S
       = ∫ ω, f ω ∂(rvdSpecMeasure S x) := by
   rw [inner_borelFC, bilinDiag_self, ProjectionValuedMeasure.diagInt, rvdSpecMeasure]
 
+open MeasureTheory in
+/-- **No spectral atom at `0`**: `μ^R_x({λ = 0}) = 0`, from `E({0}) = 0` (`rvdRC_E_zero_levelSet`). -/
+theorem rvdSpecMeasure_zero_levelSet (S : StandardSubspace H) (x : H) :
+    rvdSpecMeasure S x {ω | (ω : ℝ) = 0} = 0 := by
+  have hs0 : MeasurableSet {ω : spectrum ℝ (rvdRC S) | (ω : ℝ) = 0} :=
+    measurable_subtype_coe (measurableSet_singleton 0)
+  rw [rvdSpecMeasure,
+      (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).scalarMeasure_apply x hs0,
+      rvdRC_E_zero_levelSet S]
+  simp
+
+open MeasureTheory in
+/-- **No spectral atom at `2`**: `μ^R_x({λ = 2}) = 0`, from `E({2}) = 0` (`rvdRC_E_two_levelSet`). -/
+theorem rvdSpecMeasure_two_levelSet (S : StandardSubspace H) (x : H) :
+    rvdSpecMeasure S x {ω | (ω : ℝ) = 2} = 0 := by
+  have hs2 : MeasurableSet {ω : spectrum ℝ (rvdRC S) | (ω : ℝ) = 2} :=
+    measurable_subtype_coe (measurableSet_singleton 2)
+  rw [rvdSpecMeasure,
+      (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).scalarMeasure_apply x hs2,
+      rvdRC_E_two_levelSet S]
+  simp
+
+open MeasureTheory in
+/-- **The device-character endpoints are `μ^R_x`-null**: `μ^R_x({λ ∈ {0,2}}) = 0`.  This is exactly the
+    a.e.-equality input for `borelFC_congr_ae` needed for `deviceOpC(−i/2) = √(2−R)`: the device character
+    `d_{−i/2}` and the symbol `√(2−r)` of `√(2−R)` differ ONLY at the spectral endpoints `{0,2}`, which
+    carry no spectral mass (no atom at `0` or `2`, as `R` and `2−R` are injective). -/
+theorem rvdSpecMeasure_endpoints (S : StandardSubspace H) (x : H) :
+    rvdSpecMeasure S x {ω | (ω : ℝ) = 0 ∨ (ω : ℝ) = 2} = 0 := by
+  have hset : {ω : spectrum ℝ (rvdRC S) | (ω : ℝ) = 0 ∨ (ω : ℝ) = 2}
+      = {ω : spectrum ℝ (rvdRC S) | (ω : ℝ) = 0} ∪ {ω : spectrum ℝ (rvdRC S) | (ω : ℝ) = 2} := rfl
+  rw [hset]
+  exact measure_union_null (rvdSpecMeasure_zero_levelSet S x) (rvdSpecMeasure_two_levelSet S x)
+
 open QIQTH.StandardSubspaceModular in
 /-- **Bottom-edge `t`-translation of the device operator**: `deviceOpC(t − i/2) = Δ^{it}·deviceOpC(−i/2)`
     (the bottom-edge analogue of `deviceOpReal_eq`).  `devChar(↑t − i/2) = u_t·devChar(−i/2)` EVERYWHERE (via
