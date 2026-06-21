@@ -4417,6 +4417,11 @@ namespace QIQTH.AxiomAudit
 -- Identifies the physicists' Fourier integral (from 3b-i) with Mathlib's 𝓕 (Real.fourierIntegral, whose convention carries
 -- the 2π in the exponent), so the Fourier API / sesquilinear Parseval applies. Purely mechanical (fourier_real_eq_integral_
 -- exp_smul + the 2π exponent cancellation); no analytic hypotheses. Remaining 3b-ii: ψ_H=𝓕[B] (IBP) + sesquilinear pairing + θ↔k.
+#print axioms QIQTH.Fock.StressTensor.horizonFieldDeriv_eq_fourier
+-- expected: standard only — ★ Stress-tensor Route B, Phase 3b-ii (consolidation): χ_H=∂_λφ_H IS a Mathlib Fourier transform.
+-- horizonFieldDeriv m f λ = 𝓕 (horizonAmp m f)(λ/2π), horizonAmp := (Ioi 0).indicator (x↦−i·Krep m f(rapInv m x)). Combines
+-- 3b-i (k-line integral) + the convention bridge + indicator-extension to ℝ. Makes the weak sesquilinear Parseval directly
+-- applicable to χ_H. Next: the ψ_H=𝓕[B] partner (IBP) + the sesquilinear pairing ⟹ stressFluxKK = −2π·rapidityMomentum.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

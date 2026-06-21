@@ -19,6 +19,7 @@ pairing, and the change of variables back to `θ` giving `−2π·rapidityMoment
 namespace QIQTH.Fock.StressTensor
 
 open MeasureTheory Real
+open QIQTH.Fock.Localization QIQTH.Fock.OneParticle
 open scoped FourierTransform
 
 /-- **The Fourier-convention bridge.**  The physicists' Fourier integral `∫ g(x) e^{−iλx} dx` is Mathlib's
@@ -37,5 +38,26 @@ theorem fourierIntegral_exp_bridge (g : ℝ → ℂ) (lam : ℝ) :
   show Complex.exp (↑(-2 * Real.pi * x * (lam / (2 * Real.pi))) * Complex.I) • g x
       = g x * Complex.exp (-Complex.I * (lam : ℂ) * (x : ℂ))
   rw [he, smul_eq_mul, mul_comm]
+
+/-- The **horizon amplitude** `A(x) = −i·Krep m f (rapInv m x)` on `(0,∞)`, extended by `0` to all of `ℝ` —
+    the `k`-line function whose Mathlib Fourier transform is `χ_H = ∂_λ φ_H`. -/
+noncomputable def horizonAmp (m : ℝ) (f : V → ℂ) : ℝ → ℂ :=
+  Set.indicator (Set.Ioi 0) (fun x => -Complex.I * Krep m f (rapInv m x))
+
+/-- **★ `∂_λ φ_H` IS a Mathlib Fourier transform.**  Consolidating Phase 3b-i (`horizonFieldDeriv_eq_kIntegral`)
+    with the convention bridge: `horizonFieldDeriv m f λ = 𝓕 (horizonAmp m f) (λ / 2π)`.  This makes the weak
+    sesquilinear Parseval identity directly applicable to `χ_H`. -/
+theorem horizonFieldDeriv_eq_fourier (m : ℝ) (hm : 0 < m) (f : V → ℂ) (lam : ℝ) :
+    horizonFieldDeriv m f lam = 𝓕 (horizonAmp m f) (lam / (2 * Real.pi)) := by
+  rw [fourierIntegral_exp_bridge, horizonFieldDeriv_eq_kIntegral m hm f lam,
+    ← integral_indicator measurableSet_Ioi]
+  refine integral_congr_ae (Filter.Eventually.of_forall (fun x => ?_))
+  show (Set.Ioi (0 : ℝ)).indicator
+      (fun x => (-Complex.I * Krep m f (rapInv m x)) * Complex.exp (-Complex.I * (lam : ℂ) * (x : ℂ))) x
+    = horizonAmp m f x * Complex.exp (-Complex.I * (lam : ℂ) * (x : ℂ))
+  unfold horizonAmp
+  by_cases hx : x ∈ Set.Ioi (0 : ℝ)
+  · rw [Set.indicator_of_mem hx, Set.indicator_of_mem hx]
+  · rw [Set.indicator_of_notMem hx, Set.indicator_of_notMem hx, zero_mul]
 
 end QIQTH.Fock.StressTensor
