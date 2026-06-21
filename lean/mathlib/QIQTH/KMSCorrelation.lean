@@ -250,6 +250,21 @@ theorem gConstancy_entire (S : StandardSubspace H) (ζ : H) {V : ℝ → (H →L
     ← inner_conj_symm (gaussSmear V n η) (modConj S (rvdSqrtR S ζ))]
   exact congrArg (starRingEnd ℂ) hconst
 
+/-- **Top-edge reality of the g-function, `∀ z` form** (the `h0` input to `gFunction_eq_zero_const`): if
+    `ξ = √R ζ ∈ 𝒦` and the V-orbit `V_s(gaussSmear)` stays in `𝒦`, then `Im g(z) = 0` on the whole edge
+    `Im z = 0`.  Any `z` with `Im z = 0` is real (`z = ↑z.re`), so this is just `gFunction_top_edge_real` at
+    `t = z.re`.  Geometric — the always-available top edge of the device g-function. -/
+theorem gFunction_top_edge_real_all (S : StandardSubspace H) (ζ : H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ}
+    (hn : 0 < n) (η : H) (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hgrp : ∀ s t, V s (V t η) = V (s + t) η)
+    (hξ : projK S (rvdSqrtR S ζ) = rvdSqrtR S ζ)
+    (hKinv : ∀ s : ℝ, projK S (V s (gaussSmear V n η)) = V s (gaussSmear V n η))
+    (z : ℂ) (hz : z.im = 0) :
+    (modConjBilin S (deviceVecF S ζ z) (gaussSmearC V n η z)).im = 0 := by
+  have hz_eq : z = (z.re : ℂ) := Complex.ext rfl (by rw [hz, Complex.ofReal_im])
+  rw [hz_eq]
+  exact gFunction_top_edge_real S ζ hn η hcont hbd hgrp hξ z.re (hKinv z.re)
+
 /-- **Analytic capstone of the KMS-uniqueness proof** (RvD Theorem 3.8): given the labelled KMS function,
     the orbit matrix element is `t`-independent.  Assembles the whole verified analytic chain.  Inputs: the
     *geometric* facts (`w ⊥ i𝒦`, the orbit `V_t(gaussSmear)` stays in `𝒦`) and the *labelled KMS input* — a

@@ -3790,6 +3790,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ STEP 6a (to closed strip): Im(corrC w)=0 on BOTH edges (Im=0,Im=1) ⇒ corrC w
 -- constant on the CLOSED kmsStrip. eqConst_of_im_zero_strip (Phragmén–Lindelöf) gives const on the open strip;
 -- continuity of entire g propagates to closure (kmsStrip=closure kmsStripOpen, Set.EqOn.closure).
+#print axioms QIQTH.StandardSubspaceModular.gFunction_top_edge_real_all
+-- expected: standard only — TOP-EDGE reality ∀z form (h0 input): Im g(z)=0 on Im z=0 edge, for ξ=√Rζ∈𝒦 + orbit∈𝒦.
+-- z with Im z=0 is real (z=↑z.re), so = gFunction_top_edge_real at z.re. Geometric, always-available top edge.
 #print axioms QIQTH.StandardSubspaceModular.gConstancy_entire
 -- expected: standard only — ★★★ GCONSTANCY for entire vectors (RvD Thm 3.8 output assembled): ⟪V_t η_n, Δ^{it}(Jξ)⟫=
 -- ⟪η_n, Jξ⟫ (ξ=√R ζ, η_n=gaussSmear) from gFunction_eq_zero_const (g(t)=g(0)) + gFunction_real_eq (top) + gFunction_
