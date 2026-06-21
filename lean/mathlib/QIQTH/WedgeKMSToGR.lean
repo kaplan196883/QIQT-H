@@ -210,4 +210,61 @@ theorem qiqt_gr_from_wedge_kms_complete
     hT_symm hric_symm P Pinv hPP hPP' hcong Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0
     (hFlux_of_wedgeKMS_complete hKMS) hFocus hreg conserv
 
+/-- **★★★★ THE GOAL THEOREM with the focusing input DERIVED from Raychaudhuri (no raw `hFocus`).**  Identical
+    to `qiqt_gr_from_wedge_kms_complete`, but the labelled `hFocus` (`ad = R_kk`) is replaced by the *kinematic*
+    Raychaudhuri data it follows from: a null geodesic congruence `Vcong v` for each null direction `v`
+    (smooth `hVC`, geodesic `hgeo`, taking value `v` at `x` via `hVval`), at equilibrium (`hequil`: the
+    shear–expansion quadratic vanishes — a stationary/bifurcation horizon, Jacobson's setup), with the single
+    **modelling identification** `harea` (abstract area rate = minus the congruence expansion rate).  The
+    geometric focusing step `ad x v = BL(Ric) v` is then DERIVED via `hFocus_of_raychaudhuri`
+    (= the axiom-free `raychaudhuri_focusing_at_equilibrium`), no Einstein presupposed.  So of the GR chain's
+    inputs, the modular side is RvD-derived (only `WedgeKMSFlux_complete` labelled), and the focusing side is
+    Raychaudhuri-derived — leaving only the area↔θ identification `harea` + the equilibrium/Clausius physics as
+    the labelled surface.  Axiom-free, no `sorry`. -/
+theorem qiqt_gr_from_wedge_kms_raychaudhuri
+    (g gi : Point 4 → Fin 4 → Fin 4 → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (T : Point 4 → Fin 4 → Fin 4 → ℝ) (η hbar a : ℝ)
+    (hbar0 : hbar ≠ 0) (heta : η ≠ 0) (ha : a = 2 * Real.pi / (hbar * η))
+    (hT_symm : ∀ x a' b, T x a' b = T x b a')
+    (hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x)
+    (P Pinv : Point 4 → Fin 4 → Fin 4 → ℝ)
+    (hPP : ∀ x i j, (∑ k, P x i k * Pinv x k j) = if i = j then (1 : ℝ) else 0)
+    (hPP' : ∀ x i j, (∑ k, Pinv x i k * P x k j) = if i = j then (1 : ℝ) else 0)
+    (hcong : ∀ x i j, g x i j = ∑ k, ∑ l, P x k i * gm k l * P x l j)
+    (Sf KE A : Point 4 → (Fin 4 → ℝ) → ℝ → ℝ) (sd kd ad : Point 4 → (Fin 4 → ℝ) → ℝ)
+    (hS : ∀ x v, BL (g x) v = 0 → HasDerivAt (Sf x v) (sd x v) 0)
+    (hK : ∀ x v, BL (g x) v = 0 → HasDerivAt (KE x v) (kd x v) 0)
+    (hA : ∀ x v, BL (g x) v = 0 → HasDerivAt (A x v) (ad x v) 0)
+    (hbound : ∀ x v, BL (g x) v = 0 → ∀ᶠ t in 𝓝 0, Sf x v t ≤ η * A x v t)
+    (hsat : ∀ x v, BL (g x) v = 0 → Sf x v 0 = η * A x v 0)
+    (hDnn : ∀ x v, BL (g x) v = 0 → ∀ t, 0 ≤ KE x v t - Sf x v t)
+    (hD0 : ∀ x v, BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0)
+    (hKMS : WedgeKMSFlux_complete g T kd hbar)
+    (Vcong : (Fin 4 → ℝ) → Point 4 → Fin 4 → ℝ)
+    (hVC : ∀ v μ, ContDiff ℝ ⊤ (fun y => Vcong v y μ))
+    (hgeo : ∀ v y μ, ∑ ν, Vcong v y ν * covDerivVec g gi (Vcong v) ν μ y = 0)
+    (hVval : ∀ x v, BL (g x) v = 0 → Vcong v x = v)
+    (hequil : ∀ x v, BL (g x) v = 0 →
+        (∑ μ, ∑ ν, covDerivVec g gi (Vcong v) μ ν x * covDerivVec g gi (Vcong v) ν μ x) = 0)
+    (harea : ∀ x v, BL (g x) v = 0 →
+        ad x v = - ∑ ν, Vcong v x ν * pd (fun y => expansion g gi (Vcong v) y) ν x)
+    (hreg : ∀ f : Point 4 → ℝ,
+        (∀ y a' b, a * T y a' b = ricci g gi a' b y + f y * g y a' b) →
+        (∀ x ρ, PdiffAt f ρ x) ∧
+          Differentiable ℝ (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y))
+    (conserv : ∀ x ν, div02 g gi (fun y a' b => a * T y a' b) ν x = 0) :
+    ∃ Λ : ℝ, ∀ x μ ν, a * T x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν := by
+  refine qiqt_gr_from_wedge_kms_complete g gi hsymm hsymm_gi hinv hCg hCgi hC T η hbar a hbar0 heta ha
+    hT_symm hric_symm P Pinv hPP hPP' hcong Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0 hKMS
+    ?_ hreg conserv
+  intro x v hnull
+  have hfoc := hFocus_of_raychaudhuri g gi hsymm (Vcong v) (hVC v) hC (hgeo v) x
+    (hequil x v hnull) (ad x v) (harea x v hnull)
+  rwa [hVval x v hnull] at hfoc
+
 end QIQTH.WedgeKMSToGR

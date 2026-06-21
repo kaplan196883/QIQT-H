@@ -4623,6 +4623,13 @@ namespace QIQTH.AxiomAudit
 -- (Tkk:=−(ℏ/2π)·stressFluxKK) via boostEnergy_eq_neg_stressFlux_schwartz_closed; all wedge-mode regularity supplied here
 -- (schwartz_Krep_memLp, Krep_integrable, MemLp.star.integrable_mul, Krep_deriv_bounded, schwartz_Krep_hasDerivAt). The hTkk
 -- scalar — the last labelled physics input of the localization slot — is now an UNCONDITIONAL theorem for the free field.
+#print axioms QIQTH.WedgeKMSToGR.qiqt_gr_from_wedge_kms_raychaudhuri
+-- expected: standard only — ★★★★ THE GOAL THEOREM with the FOCUSING input ALSO derived. Replaces raw hFocus
+-- (ad=R_kk) with the kinematic Raychaudhuri data: a null geodesic congruence Vcong v per direction (hVC/hgeo/
+-- hVval), at equilibrium (hequil), + the area↔θ modelling identification harea. The focusing step ad=BL(Ric)v
+-- is DERIVED via hFocus_of_raychaudhuri (= axiom-free raychaudhuri_focusing_at_equilibrium). So BOTH the modular
+-- side (RvD Thm 3.8, only WedgeKMSFlux_complete labelled) AND the focusing side (Raychaudhuri) are now derived;
+-- the labelled surface shrinks to the area↔θ identification + the equilibrium/Clausius physics.
 #print axioms QIQTH.WedgeKMSToGR.qiqt_gr_from_wedge_kms_complete
 -- expected: standard only — ★★★★ THE GOAL THEOREM with KMS-uniqueness DERIVED. Identical to qiqt_gr_from_wedge_kms
 -- but the wedge KMS input is the GENUINE non-vacuous WedgeKMSFlux_complete (bundling StripKMSrvd = RvD Def 3.4),
