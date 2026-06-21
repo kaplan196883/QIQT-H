@@ -4449,6 +4449,11 @@ namespace QIQTH.AxiomAudit
 -- Chains fourier_conj_parseval (B:=deriv A) with the self-adjointness inner_deriv_eq_I_mul_rapidityMomentum. The spectral-side
 -- evaluation of the horizon flux: once Mathlib's fourier_deriv (𝓕(deriv A)=2πi·w·𝓕A) moves the affine weight λ into 𝓕(deriv A),
 -- this gives the rapidity momentum. Remaining for hFlux: apply fourier_deriv + the λ=2πw rescale + horizonAmp instantiation + Krep regularity.
+#print axioms QIQTH.Fock.StressTensor.fourier_weighted_pairing
+-- expected: standard only — ★★ Stress-tensor Route B, Phase 3b-ii: the affine-weighted spectral pairing
+-- ∫ w, conj(𝓕A w)·(w·𝓕A w) = (2π)⁻¹·rapidityMomentum A (deriv A). Mathlib's fourier_deriv (𝓕(deriv A)=2πi·w·𝓕A) moves the
+-- weight w onto 𝓕(deriv A); fourier_parseval_deriv evaluates; the 2πi and the self-adjoint i combine to the real (2π)⁻¹. This
+-- is the w-weighted norm of χ_H=𝓕A — the shape of stressFluxKK after the λ=2πw rescale. Remaining: ‖·‖² real cast + λ rescale + horizonAmp + Krep regularity.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

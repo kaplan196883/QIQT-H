@@ -1,6 +1,7 @@
 import QIQTH.Fock.StressTensor.HorizonFourier
 import Mathlib.Analysis.Fourier.FourierTransform
 import Mathlib.Analysis.Fourier.Inversion
+import Mathlib.Analysis.Fourier.FourierTransformDeriv
 
 /-!
 # Free-field stress tensor (Route B) — Phase 3b-ii: the Fourier-convention bridge
@@ -172,5 +173,35 @@ theorem fourier_parseval_deriv (A : ℝ → ℂ)
       = Complex.I * (rapidityMomentum A (deriv A) : ℂ) := by
   rw [fourier_conj_parseval A (deriv A) hA hdAc hdA hFdA]
   exact inner_deriv_eq_I_mul_rapidityMomentum A (deriv A) (fun x => (hAd x).hasDerivAt) hff h1 h2
+
+/-- **★★ The affine-weighted spectral pairing** `∫ w, conj(𝓕A w)·(w·𝓕A w) = (2π)⁻¹·rapidityMomentum A (deriv A)`.
+    Mathlib's `fourier_deriv` (`𝓕(deriv A) w = 2πi·w·𝓕A w`) moves the weight `w` onto `𝓕(deriv A)`, and
+    `fourier_parseval_deriv` evaluates the result; the `2πi` and the `i` from self-adjointness combine to the
+    real factor `(2π)⁻¹`.  This is the `w`-weighted norm of `χ_H = 𝓕A` — exactly the shape of `stressFluxKK`
+    after the `λ = 2π w` rescale. -/
+theorem fourier_weighted_pairing (A : ℝ → ℂ)
+    (hA : Integrable A) (hAd : Differentiable ℝ A)
+    (hdAc : Continuous (deriv A)) (hdA : Integrable (deriv A)) (hFdA : Integrable (𝓕 (deriv A)))
+    (hff : Integrable (fun θ => (starRingEnd ℂ) (A θ) * A θ))
+    (h1 : Integrable (fun θ => (starRingEnd ℂ) (deriv A θ) * A θ))
+    (h2 : Integrable (fun θ => (starRingEnd ℂ) (A θ) * deriv A θ)) :
+    ∫ w, (starRingEnd ℂ) (𝓕 A w) * ((w : ℂ) * 𝓕 A w)
+      = (1 / (2 * Real.pi) : ℂ) * (rapidityMomentum A (deriv A) : ℂ) := by
+  have hpi : (Real.pi : ℂ) ≠ 0 := by exact_mod_cast Real.pi_ne_zero
+  have h2pi : (2 * (Real.pi : ℂ) * Complex.I) ≠ 0 :=
+    mul_ne_zero (mul_ne_zero two_ne_zero hpi) Complex.I_ne_zero
+  have hpd := fourier_parseval_deriv A hA hAd hdAc hdA hFdA hff h1 h2
+  have hstep : (∫ w, (starRingEnd ℂ) (𝓕 A w) * 𝓕 (deriv A) w)
+      = (2 * (Real.pi : ℂ) * Complex.I)
+          * ∫ w, (starRingEnd ℂ) (𝓕 A w) * ((w : ℂ) * 𝓕 A w) := by
+    rw [← integral_const_mul]
+    refine integral_congr_ae (Filter.Eventually.of_forall (fun w => ?_))
+    rw [fourier_deriv hA hAd hdA]
+    simp only [smul_eq_mul]
+    ring
+  rw [hstep] at hpd
+  refine mul_left_cancel₀ h2pi ?_
+  rw [hpd]
+  field_simp
 
 end QIQTH.Fock.StressTensor
