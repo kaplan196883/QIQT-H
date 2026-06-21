@@ -161,6 +161,94 @@ theorem schwartz_Krep_memLp (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) :
     _ = 4 * π * S / (Real.sqrt 2 * |m|) * (Real.cosh θ)⁻¹ := by
         rw [div_mul_eq_mul_div]; field_simp
 
+/-- **General Schwartz `1/cosh²` decay** of the localized amplitude (one derivative more than
+`schwartz_Krep_memLp`).  For any Schwartz `f` and `m ≠ 0`,
+`‖Krep m f θ‖ ≤ 16π²·S₂/(√2·m²) · (cosh θ)⁻²` with `S₂ = ∫‖f‖ + ∫‖Df‖ + ∫‖D²f‖`.  The `(cosh θ)⁻²` decay
+(via the `n = 2` Fourier-decay estimate) is what makes the horizon amplitude `L¹` and differentiable at the
+bifurcation surface `x = 0` (the softer Route-B regularity). -/
+theorem schwartz_Krep_decay_sq (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) (θ : ℝ) :
+    ‖Krep m (⇑f) θ‖
+      ≤ 16 * π ^ 2 * ((∫ v, ‖(⇑f) v‖) + (∫ v, ‖iteratedFDeriv ℝ 1 (⇑f) v‖)
+          + (∫ v, ‖iteratedFDeriv ℝ 2 (⇑f) v‖)) / (Real.sqrt 2 * m ^ 2) * ((Real.cosh θ) ^ 2)⁻¹ := by
+  set S : ℝ := (∫ v, ‖(⇑f) v‖) + (∫ v, ‖iteratedFDeriv ℝ 1 (⇑f) v‖)
+      + (∫ v, ‖iteratedFDeriv ℝ 2 (⇑f) v‖) with hSdef
+  have hSnonneg : 0 ≤ S := by rw [hSdef]; positivity
+  have hcosh : (0 : ℝ) < Real.cosh θ := Real.cosh_pos θ
+  set p : V := massShell m θ with hp
+  set v : V := ![p 0, -(p 1)] with hv
+  have key := VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le
+    (L := minkBilin) (μ := (volume : Measure V)) (f := (⇑f))
+    (f.smooth ⊤) (fun k n _ _ => SchwartzMap.integrable_pow_mul_iteratedFDeriv volume f k n)
+    (k := 0) (n := 2) le_top le_top v p
+  have hsum : (∑ q ∈ Finset.range (0 + 1) ×ˢ Finset.range (2 + 1),
+      ∫ w, ‖w‖ ^ q.1 * ‖iteratedFDeriv ℝ q.2 (⇑f) w‖) = S := by
+    rw [hSdef, Finset.sum_product]
+    simp [Finset.sum_range_succ, norm_iteratedFDeriv_zero]
+  rw [hsum] at key
+  simp only [pow_zero, mul_one, norm_iteratedFDeriv_zero, Nat.cast_zero, mul_zero, zero_add] at key
+  rw [← minkowskiFourier_eq_fourierIntegral] at key
+  have hLvp : minkBilin v p = (p 0 ^ 2 + p 1 ^ 2) / (2 * π) := by
+    rw [minkBilin_apply, hv]; simp only [Matrix.cons_val_zero, Matrix.cons_val_one]; ring
+  rw [hLvp, abs_of_nonneg (by positivity)] at key
+  set mF : ℝ := ‖minkowskiFourier (⇑f) p‖ with hmF
+  have hmFnn : (0 : ℝ) ≤ mF := norm_nonneg _
+  set A : ℝ := p 0 ^ 2 + p 1 ^ 2 with hA
+  have h0 : ‖v 0‖ ≤ |m| * Real.cosh θ := by
+    have h : ‖v 0‖ = |m| * Real.cosh θ := by
+      simp only [hv, Matrix.cons_val_zero, hp, massShell_zero, Real.norm_eq_abs, abs_mul,
+        abs_of_pos hcosh]
+    exact h.le
+  have h1 : ‖v 1‖ ≤ |m| * Real.cosh θ := by
+    rw [hv]
+    simp only [Matrix.cons_val_one, Matrix.cons_val_zero, hp, massShell_one,
+      abs_neg, Real.norm_eq_abs, abs_mul]
+    exact mul_le_mul_of_nonneg_left (abs_sinh_le_cosh θ) (abs_nonneg m)
+  have hvnorm : ‖v‖ ≤ |m| * Real.cosh θ := by
+    rw [pi_norm_le_iff_of_nonneg (by positivity), Fin.forall_fin_two]
+    exact ⟨h0, h1⟩
+  have ht : (0 : ℝ) < |m| * Real.cosh θ := by positivity
+  have hAlb : (|m| * Real.cosh θ) ^ 2 ≤ A := by
+    rw [hA, hp]
+    simp only [massShell_zero, massShell_one, mul_pow, sq_abs]
+    nlinarith [mul_nonneg (sq_nonneg m) (sq_nonneg (Real.sinh θ))]
+  have hv2 : ‖v‖ ^ 2 ≤ (|m| * Real.cosh θ) ^ 2 := pow_le_pow_left₀ (norm_nonneg v) hvnorm 2
+  have key2 : (A / (2 * π)) ^ 2 * mF ≤ (|m| * Real.cosh θ) ^ 2 * 2 ^ 2 * S :=
+    le_trans key
+      (mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right hv2 (by norm_num)) hSnonneg)
+  have key3 : A ^ 2 * mF ≤ (|m| * Real.cosh θ) ^ 2 * (2 ^ 2 * (2 * π) ^ 2) * S := by
+    have h := mul_le_mul_of_nonneg_right key2 (sq_nonneg (2 * π))
+    have e1 : (A / (2 * π)) ^ 2 * mF * (2 * π) ^ 2 = A ^ 2 * mF := by field_simp
+    rw [e1] at h
+    calc A ^ 2 * mF ≤ (|m| * Real.cosh θ) ^ 2 * 2 ^ 2 * S * (2 * π) ^ 2 := h
+      _ = (|m| * Real.cosh θ) ^ 2 * (2 ^ 2 * (2 * π) ^ 2) * S := by ring
+  have hclean : mF * (|m| * Real.cosh θ) ^ 2 ≤ (2 ^ 2 * (2 * π) ^ 2) * S := by
+    have hA2 : (|m| * Real.cosh θ) ^ 2 * (|m| * Real.cosh θ) ^ 2 ≤ A * A :=
+      mul_le_mul hAlb hAlb (by positivity) (le_trans (by positivity) hAlb)
+    have hchain : (|m| * Real.cosh θ) ^ 2 * ((|m| * Real.cosh θ) ^ 2 * mF)
+        ≤ (|m| * Real.cosh θ) ^ 2 * ((2 ^ 2 * (2 * π) ^ 2) * S) :=
+      calc (|m| * Real.cosh θ) ^ 2 * ((|m| * Real.cosh θ) ^ 2 * mF)
+          = ((|m| * Real.cosh θ) ^ 2 * (|m| * Real.cosh θ) ^ 2) * mF := by ring
+        _ ≤ (A * A) * mF := mul_le_mul_of_nonneg_right hA2 hmFnn
+        _ = A ^ 2 * mF := by ring
+        _ ≤ (|m| * Real.cosh θ) ^ 2 * (2 ^ 2 * (2 * π) ^ 2) * S := key3
+        _ = (|m| * Real.cosh θ) ^ 2 * ((2 ^ 2 * (2 * π) ^ 2) * S) := by ring
+    have := le_of_mul_le_mul_left hchain (by positivity : (0 : ℝ) < (|m| * Real.cosh θ) ^ 2)
+    linarith
+  have hmFbound : mF ≤ (2 ^ 2 * (2 * π) ^ 2) * S / (|m| * Real.cosh θ) ^ 2 := by
+    rw [le_div_iff₀ (by positivity)]; exact hclean
+  have hc : ‖(1 / Real.sqrt 2 : ℂ)‖ = 1 / Real.sqrt 2 := by
+    rw [show (1 / Real.sqrt 2 : ℂ) = ((1 / Real.sqrt 2 : ℝ) : ℂ) by push_cast; ring,
+      Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (by positivity)]
+  show ‖(1 / Real.sqrt 2 : ℂ) * minkowskiFourier (⇑f) p‖ ≤ _
+  rw [norm_mul, hc, ← hmF]
+  calc 1 / Real.sqrt 2 * mF
+      ≤ 1 / Real.sqrt 2 * ((2 ^ 2 * (2 * π) ^ 2) * S / (|m| * Real.cosh θ) ^ 2) :=
+        mul_le_mul_of_nonneg_left hmFbound (by positivity)
+    _ = 16 * π ^ 2 * S / (Real.sqrt 2 * m ^ 2) * ((Real.cosh θ) ^ 2)⁻¹ := by
+        rw [show (|m| * Real.cosh θ) ^ 2 = m ^ 2 * (Real.cosh θ) ^ 2 from by rw [mul_pow, sq_abs]]
+        field_simp
+        ring
+
 /-- **A non-degenerate `LocalTest` from any Schwartz function** (`m ≠ 0`): the honest "local test
 class" — every Schwartz spacetime test function is `L²`-admissible for the mass-shell localization. -/
 def schwartzLocalTest (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) : LocalTest m where
