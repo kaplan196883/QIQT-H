@@ -4469,6 +4469,11 @@ namespace QIQTH.AxiomAudit
 -- flux_integral_eq instantiated at A=horizonAmp m f (via horizonFieldDeriv_eq_fourier: χ_H=𝓕 A). The horizon stress flux IS a rapidity
 -- momentum. Hypotheses = the genuine on-shell regularity of horizonAmp (differentiable/integrable, its deriv, its 𝓕) — the gating
 -- Krep-regularity, isolated as labeled hyps (true for nicely-decaying test fns). Remaining for hFlux: k↦θ change of vars (→∫conj(Krep)Krep', the sign).
+#print axioms QIQTH.Fock.StressTensor.horizonAmp_hasDerivAt
+-- expected: standard only — ★ Stress-tensor Route B, Phase 3b-ii: the horizon amplitude's derivative. For x>0,
+-- HasDerivAt (horizonAmp m f) ((i/x)·kd(rapInv m x)) x where kd = the wedge mode's rapidity derivative (HasDerivAt Krep kd). Chain
+-- rule for −i·Krep∘rapInv (Ioi 0 open ⟹ indicator locally smooth; rapInv'=−1/x). The explicit B=−iA' form, the input to the k↦θ
+-- change of variables relating rapidityMomentum(horizonAmp) to ∫conj(Krep)·Krep'. Isolates the differentiation; needs HasDerivAt Krep.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

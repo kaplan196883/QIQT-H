@@ -283,4 +283,27 @@ theorem stressFluxKK_eq_rapMom (m : ℝ) (hm : 0 < m) (f : V → ℂ)
   rw [show stressFluxKK m f = ∫ lam, lam * Tkk m f lam from rfl, hint]
   exact flux_integral_eq (horizonAmp m f) hA hAd hdAc hdA hFdA hff h1 h2
 
+/-- **★ The horizon amplitude's derivative** (chain rule for `−i·Krep∘rapInv` on `(0,∞)`):
+    given the wedge mode's rapidity derivative `kd` (`HasDerivAt Krep kd`), for `x > 0`
+    `HasDerivAt (horizonAmp m f) ((i/x)·kd(rapInv m x)) x`.  (`Ioi 0` is open so the indicator is locally the
+    smooth amplitude; `rapInv' = −1/x`.)  This is the `B = −iA'` partner's explicit form, the input to the
+    `k ↦ θ` change of variables relating `rapidityMomentum(horizonAmp)` to the wedge `∫conj(Krep)·Krep'`. -/
+theorem horizonAmp_hasDerivAt (m : ℝ) (hm : 0 < m) (f : V → ℂ) (kd : ℝ → ℂ)
+    (hkd : ∀ θ, HasDerivAt (fun θ => Krep m f θ) (kd θ) θ) {x : ℝ} (hx : 0 < x) :
+    HasDerivAt (horizonAmp m f) ((Complex.I / (x : ℂ)) * kd (rapInv m x)) x := by
+  have hrapInv : HasDerivAt (rapInv m) (-x⁻¹) x := by
+    simpa [rapInv] using (Real.hasDerivAt_log hx.ne').const_sub (Real.log (m / Real.sqrt 2))
+  have hcomp : HasDerivAt (fun y => Krep m f (rapInv m y)) ((-x⁻¹ : ℝ) • kd (rapInv m x)) x :=
+    (hkd (rapInv m x)).scomp x hrapInv
+  have hg : HasDerivAt (fun y => -Complex.I * Krep m f (rapInv m y))
+      (-Complex.I * ((-x⁻¹ : ℝ) • kd (rapInv m x))) x := hcomp.const_mul (-Complex.I)
+  have hval : -Complex.I * ((-x⁻¹ : ℝ) • kd (rapInv m x))
+      = (Complex.I / (x : ℂ)) * kd (rapInv m x) := by
+    rw [Complex.real_smul]; push_cast; ring
+  rw [hval] at hg
+  have heq : horizonAmp m f =ᶠ[nhds x] (fun y => -Complex.I * Krep m f (rapInv m y)) := by
+    filter_upwards [isOpen_Ioi.mem_nhds hx] with y hy
+    exact Set.indicator_of_mem hy _
+  exact hg.congr_of_eventuallyEq heq
+
 end QIQTH.Fock.StressTensor
