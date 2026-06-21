@@ -4022,6 +4022,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.gFunction_zero
 -- expected: standard only — g(0)=⟪Jξ,η_n⟫ (ξ=√R ζ, η_n=gaussSmear): the Phragmén–Lindelöf comparison point. With g
 -- const this = g(t). Via deviceVecF_zero + gaussSmearC_zero + modConjBilin_apply.
+#print axioms QIQTH.deviceVecF_bottom_eq
+-- expected: standard only — BOTTOM-EDGE device value deviceVecF(t−i/2)=Δ^{it}·deviceOpC(−i/2)ζ (=√(2−R)ζ off {0,2}):
+-- deviceVecF_eq_of_mem (mid-line Im=−1/2 in closed half-strip) + deviceOpC_bottomEdge_eq. The 2nd-slot device on the
+-- g-function bottom edge; its reality is the KMS input (HalfStripReal) for the Phragmén–Lindelöf constancy.
 #print axioms QIQTH.gFunction_top_edge_real
 -- expected: standard only — ★★ TOP-EDGE REALITY of g (endgame piece 3a): g(t).im=0 for ξ=√R ζ∈𝒦 + orbit in 𝒦.
 -- Δ^{it}(Jξ)=J(Δ^{it}ξ) (modConj_commute) with Δ^{it}ξ∈𝒦 (modUnitary_mapsTo_K) ⇒ ⊥i𝒦 (projIK_modConj_eq_zero_of_

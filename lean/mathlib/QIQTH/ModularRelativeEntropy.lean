@@ -1024,6 +1024,24 @@ theorem gFunction_top_edge_real (S : StandardSubspace H) (ζ : H) {V : ℝ → (
       ((mem_K_iff_projK S _).mp (modUnitary_mapsTo_K S t _ ((mem_K_iff_projK S _).mpr hξ))))
 
 open QIQTH.StandardSubspaceModular in
+/-- **Bottom-edge value of the device vector**: `deviceVecF(t − i/2) = Δ^{it}·deviceOpC(−i/2) ζ`, the modular
+    flow translating the FIXED bottom vector `deviceOpC(−i/2) ζ` (`= √(2−R) ζ` off the spectral endpoints
+    `{0,2}`).  Via `deviceVecF_eq_of_mem` (the closed half-strip contains the mid-line `Im z = −1/2`) and
+    `deviceOpC_bottomEdge_eq`.  This is the second-slot device vector on the bottom edge of the g-function,
+    whose reality is the KMS input (`HalfStripReal`) feeding the Phragmén–Lindelöf constancy. -/
+theorem deviceVecF_bottom_eq (S : StandardSubspace H) (ζ : H) (t : ℝ) :
+    deviceVecF S ζ ((t : ℂ) - Complex.I / 2)
+      = modUnitary S t (deviceOpC S (-(Complex.I / 2))
+          (by simp [Complex.neg_im, Complex.div_im, Complex.I_im])
+          (by rw [show (-(Complex.I / 2)).im = -(1 / 2) from by
+                simp [Complex.neg_im, Complex.div_im, Complex.I_im]]) ζ) := by
+  rw [deviceVecF_eq_of_mem S ζ
+      (by simp [Complex.sub_im, Complex.div_im, Complex.I_im])
+      (by rw [show ((t : ℂ) - Complex.I / 2).im = -(1 / 2) from by
+            simp [Complex.sub_im, Complex.div_im, Complex.I_im]]),
+    deviceOpC_bottomEdge_eq, ContinuousLinearMap.mul_apply]
+
+open QIQTH.StandardSubspaceModular in
 /-- **Diagonal operator identification of the device strip extension** (general `z` in the half-strip):
     `D_ξ(z) = ⟪ξ, deviceOpC(z) ξ⟫`.  The scalar integral `∫ d_z dμ^R_ξ` IS the diagonal expectation of the
     device operator `d_z(R)` (via `inner_borelFC` + `bilinDiag_self` + `diagInt`).  This connects the proven
