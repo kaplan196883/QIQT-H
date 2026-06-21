@@ -856,6 +856,48 @@ theorem oneParticleBW_wedge (m : ℝ)
   rw [hVboost t x, hcarrier] at *
   exact boostUnitary_mapsTo_wedgeSubspace m (-(2 * Real.pi * t)) hx
 
+/-- **★★★ One-particle Bisognano–Wichmann for the WEDGE — KMS-uniqueness DERIVED (no bundled `hUniq`).**
+    `modUnitary S t = boostUnitary(−2π t)` for the wedge standard subspace `𝒦_W`, given ONLY the carrier
+    identity (`hcarrier`), `V = boostUnitary(−2π·)` (`hVboost`), and the genuine RvD Def 3.4 KMS condition
+    `hKMS : StripKMSrvd V 𝒦_W`.  Unlike `oneParticleBW_wedge`, the KMS-uniqueness is no longer a bundled opaque
+    hypothesis but is DERIVED via `oneParticleBW_complete` (the machine-checked RvD Theorem 3.8 discharge), and
+    the labelled KMS predicate is the genuine, non-vacuous `StripKMSrvd` rather than the trivially-satisfiable
+    `StripKMS`.  The boost's structural facts — strong continuity (`continuous_boostUnitary_apply`), isometry
+    (`boostUnitary` is `≃ₗᵢ`), the one-parameter group law (`boostUnitary_add_apply`/`_zero_apply`), and
+    `𝒦_W`-invariance (`boostUnitary_mapsTo_wedgeSubspace`) — are all derived, not assumed.  This replaces the
+    bundled `hUniq` of the wedge-KMS chain with the discharged theorem, resting only on the genuine wedge KMS
+    property. -/
+theorem oneParticleBW_wedge_complete (m : ℝ)
+    (S : StandardSubspace (Lp ℂ 2 (volume : Measure ℝ)))
+    (V : ℝ → (Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ)))
+    (hcarrier : (S.toClosedSubmodule : Set (Lp ℂ 2 (volume : Measure ℝ)))
+        = closure (Submodule.span ℝ (wedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ))))
+    (hVboost : ∀ t x, V t x = boostUnitary (-(2 * Real.pi * t)) x)
+    (hKMS : StripKMSrvd V (S.toClosedSubmodule : Set _)) :
+    ∀ t, modUnitary S t = V t := by
+  have hInv : ∀ t, Set.MapsTo (V t)
+      (S.toClosedSubmodule : Set _) (S.toClosedSubmodule : Set _) := by
+    intro t x hx
+    rw [hVboost t x, hcarrier] at *
+    exact boostUnitary_mapsTo_wedgeSubspace m (-(2 * Real.pi * t)) hx
+  have hbd : ∀ η : Lp ℂ 2 (volume : Measure ℝ), ∀ t, ‖V t η‖ ≤ ‖η‖ := fun η t => by
+    rw [hVboost]; exact le_of_eq ((boostUnitary (-(2 * Real.pi * t))).norm_map η)
+  have hgrp : ∀ η : Lp ℂ 2 (volume : Measure ℝ), ∀ s t, V s (V t η) = V (s + t) η := fun η s t => by
+    simp only [hVboost]
+    rw [show -(2 * Real.pi * (s + t)) = -(2 * Real.pi * s) + -(2 * Real.pi * t) from by ring,
+      boostUnitary_add_apply]
+  have hV0 : ∀ η : Lp ℂ 2 (volume : Measure ℝ), V 0 η = η := fun η => by
+    rw [hVboost, show -(2 * Real.pi * 0) = (0 : ℝ) from by ring, boostUnitary_zero_apply]
+  have hcont : ∀ η ∈ (S.toClosedSubmodule : Set _), Continuous (fun t => V t η) := fun η _ => by
+    simp only [hVboost]
+    exact (continuous_boostUnitary_apply η).comp (by fun_prop)
+  have hKinv : ∀ η ∈ (S.toClosedSubmodule : Set _), ∀ n : ℝ, 0 < n → ∀ s : ℝ,
+      projK S (V s (gaussSmear V n η)) = V s (gaussSmear V n η) := fun η hη n hn s => by
+    have hgauss : gaussSmear V n η ∈ S.toClosedSubmodule :=
+      gaussSmear_mem_K S hn (hcont η hη) (hbd η) (fun t => hInv t hη)
+    exact (mem_K_iff_projK S _).mp (hInv s hgauss)
+  exact oneParticleBW_complete S V hcont hbd hgrp hV0 hKinv hInv hKMS
+
 /-! ### The field-level BW: the second-quantized modular flow IS Γ of the boost -/
 
 /-- **★ The field-level Bisognano–Wichmann (functorial lift).**  Once the one-particle BW
@@ -996,5 +1038,50 @@ theorem component_hFlux_of_wedgeKMS (m : ℝ)
   have hcast : ((kd : ℝ) : ℂ) = ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ) :=
     mul_left_cancel₀ Complex.I_ne_zero huniq
   exact_mod_cast hcast
+
+/-- **`oneParticle_hFlux` with KMS-uniqueness DERIVED** — the genuine `StripKMSrvd` replaces the bundled
+    opaque `hUniq`+`StripKMS`.  The modular-energy derivative `t ↦ ⟪ξ, Δ^{it}ξ⟫` equals the boost-charge
+    derivative `i·(2π/ℏ)·T_kk`, with the BW identification `modUnitary = boostUnitary` now derived via
+    `oneParticleBW_wedge_complete` (= `oneParticleBW_complete`, the RvD Theorem 3.8 discharge). -/
+theorem oneParticle_hFlux_complete (m : ℝ)
+    (S : StandardSubspace (Lp ℂ 2 (volume : Measure ℝ)))
+    (V : ℝ → (Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ)))
+    (hcarrier : (S.toClosedSubmodule : Set (Lp ℂ 2 (volume : Measure ℝ)))
+        = closure (Submodule.span ℝ (wedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ))))
+    (hVboost : ∀ t x, V t x = boostUnitary (-(2 * Real.pi * t)) x)
+    (hKMS : StripKMSrvd V (S.toClosedSubmodule : Set _))
+    (ξ : Lp ℂ 2 (volume : Measure ℝ)) (hbar Tkk : ℝ)
+    (hBoostCharge : HasDerivAt (fun t : ℝ => inner ℂ ξ (boostUnitary (-(2 * Real.pi * t)) ξ))
+        (Complex.I * ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ)) 0) :
+    HasDerivAt (fun t : ℝ => inner ℂ ξ (QIQTH.StandardSubspaceModular.modUnitary S t ξ))
+        (Complex.I * ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ)) 0 := by
+  have hone := oneParticleBW_wedge_complete m S V hcarrier hVboost hKMS
+  have hbw : ∀ (t : ℝ) (u : Lp ℂ 2 (volume : Measure ℝ)),
+      QIQTH.StandardSubspaceModular.modUnitary S t u = boostUnitary (-(2 * Real.pi * t)) u := by
+    intro t u
+    rw [show QIQTH.StandardSubspaceModular.modUnitary S t = V t from hone t]
+    exact hVboost t u
+  exact modularEnergy_eq_stressFlux S hbw ξ hbar Tkk hBoostCharge
+
+/-- **`component_hFlux_of_wedgeKMS` with KMS-uniqueness DERIVED** — the component-level `hFlux`
+    `kd = (2π/ℏ)·T_kk` resting on the genuine `StripKMSrvd` (not the bundled opaque `hUniq`+vacuous
+    `StripKMS`).  The BW identification is derived via `oneParticleBW_complete` (RvD Theorem 3.8). -/
+theorem component_hFlux_of_wedgeKMS_complete (m : ℝ)
+    (S : StandardSubspace (Lp ℂ 2 (volume : Measure ℝ)))
+    (V : ℝ → (Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ)))
+    (hcarrier : (S.toClosedSubmodule : Set (Lp ℂ 2 (volume : Measure ℝ)))
+        = closure (Submodule.span ℝ (wedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ))))
+    (hVboost : ∀ t x, V t x = boostUnitary (-(2 * Real.pi * t)) x)
+    (hKMS : StripKMSrvd V (S.toClosedSubmodule : Set _))
+    (ξ : Lp ℂ 2 (volume : Measure ℝ)) (hbar kd Tkk : ℝ)
+    (hBoostCharge : HasDerivAt (fun t : ℝ => inner ℂ ξ (boostUnitary (-(2 * Real.pi * t)) ξ))
+        (Complex.I * ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ)) 0)
+    (hbridge : HasDerivAt (fun t : ℝ => inner ℂ ξ (QIQTH.StandardSubspaceModular.modUnitary S t ξ))
+        (Complex.I * ((kd : ℝ) : ℂ)) 0) :
+    kd = 2 * Real.pi / hbar * Tkk := by
+  have hHil := oneParticle_hFlux_complete m S V hcarrier hVboost hKMS ξ hbar Tkk hBoostCharge
+  have huniq : Complex.I * ((kd : ℝ) : ℂ) = Complex.I * ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ) :=
+    hbridge.unique hHil
+  exact_mod_cast mul_left_cancel₀ Complex.I_ne_zero huniq
 
 end QIQTH.Fock.OneParticleBW

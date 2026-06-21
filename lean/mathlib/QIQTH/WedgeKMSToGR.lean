@@ -135,4 +135,79 @@ theorem qiqt_gr_from_wedge_kms
     hT_symm hric_symm P Pinv hPP hPP' hcong S KE A sd kd ad hS hK hA hbound hsat hDnn hD0
     (hFlux_of_wedgeKMS hKMS) hFocus hreg conserv
 
+/-! ### The wedge-KMS GR derivation with KMS-uniqueness DERIVED (no bundled `hUniq`, genuine `StripKMSrvd`) -/
+
+/-- **The wedge KMS property with the genuine, non-vacuous KMS condition.**  Identical to `WedgeKMSFlux`
+    except the bundled opaque `hUniq` (the KMS-uniqueness implication) and the trivially-satisfiable `StripKMS`
+    are replaced by the single genuine RvD Definition 3.4 predicate `StripKMSrvd V 𝒦_W` — from which the
+    BW identification `modUnitary = boostUnitary` is DERIVED (`oneParticleBW_wedge_complete`, via the RvD
+    Theorem 3.8 discharge `oneParticleBW_complete`).  So the wedge KMS input is now exactly: standardness of the
+    wedge subspace, `V = boostUnitary(−2π·)`, the genuine KMS condition, the boost-charge = stress-flux
+    identity, and the localization identity — with NO assumed uniqueness implication. -/
+def WedgeKMSFlux_complete (g T : Point 4 → Fin 4 → Fin 4 → ℝ)
+    (kd : Point 4 → (Fin 4 → ℝ) → ℝ) (hbar : ℝ) : Prop :=
+  ∀ (x : Point 4) (v : Fin 4 → ℝ), BL (g x) v = 0 →
+    ∃ (m : ℝ) (S : StandardSubspace (Lp ℂ 2 (volume : Measure ℝ)))
+      (V : ℝ → (Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ)))
+      (ξ : Lp ℂ 2 (volume : Measure ℝ)),
+      ((S.toClosedSubmodule : Set (Lp ℂ 2 (volume : Measure ℝ)))
+          = closure (Submodule.span ℝ (wedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ)))) ∧
+      (∀ t y, V t y = boostUnitary (-(2 * Real.pi * t)) y) ∧
+      StripKMSrvd V (S.toClosedSubmodule : Set _) ∧
+      HasDerivAt (fun t : ℝ => inner ℂ ξ (boostUnitary (-(2 * Real.pi * t)) ξ))
+        (Complex.I * ((2 * Real.pi / hbar * BL (T x) v : ℝ) : ℂ)) 0 ∧
+      HasDerivAt (fun t : ℝ => inner ℂ ξ (QIQTH.StandardSubspaceModular.modUnitary S t ξ))
+        (Complex.I * ((kd x v : ℝ) : ℂ)) 0
+
+/-- **`hFlux` derived from the genuine wedge KMS property** (via `component_hFlux_of_wedgeKMS_complete`):
+    `kd = (2π/ℏ)·T_kk` per null generator, with the BW identification machine-checked from `StripKMSrvd`. -/
+theorem hFlux_of_wedgeKMS_complete {g T : Point 4 → Fin 4 → Fin 4 → ℝ}
+    {kd : Point 4 → (Fin 4 → ℝ) → ℝ} {hbar : ℝ} (h : WedgeKMSFlux_complete g T kd hbar) :
+    ∀ x v, BL (g x) v = 0 → kd x v = 2 * Real.pi / hbar * BL (T x) v := by
+  intro x v hnull
+  obtain ⟨m, S, V, ξ, hcarrier, hVboost, hKMS, hBoost, hbridge⟩ := h x v hnull
+  exact component_hFlux_of_wedgeKMS_complete m S V hcarrier hVboost hKMS ξ hbar (kd x v)
+    (BL (T x) v) hBoost hbridge
+
+/-- **★★★ THE GOAL THEOREM, with KMS-uniqueness DERIVED.**  Einstein's equations from QIQT-H's capacity
+    postulate + Klein positivity, modulo the three labelled physics inputs — but now the wedge KMS input is the
+    GENUINE, non-vacuous `WedgeKMSFlux_complete` (using `StripKMSrvd`, RvD Def 3.4), with the
+    Bisognano–Wichmann KMS-uniqueness no longer an assumed bundled implication but DERIVED from the
+    machine-checked RvD Theorem 3.8 (`oneParticleBW_complete`).  This is `qiqt_gr_from_wedge_kms` with its one
+    remaining modular-theory assumption (the old opaque `hUniq` + vacuous `StripKMS`) replaced by a theorem. -/
+theorem qiqt_gr_from_wedge_kms_complete
+    (g gi : Point 4 → Fin 4 → Fin 4 → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (T : Point 4 → Fin 4 → Fin 4 → ℝ) (η hbar a : ℝ)
+    (hbar0 : hbar ≠ 0) (heta : η ≠ 0) (ha : a = 2 * Real.pi / (hbar * η))
+    (hT_symm : ∀ x a' b, T x a' b = T x b a')
+    (hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x)
+    (P Pinv : Point 4 → Fin 4 → Fin 4 → ℝ)
+    (hPP : ∀ x i j, (∑ k, P x i k * Pinv x k j) = if i = j then (1 : ℝ) else 0)
+    (hPP' : ∀ x i j, (∑ k, Pinv x i k * P x k j) = if i = j then (1 : ℝ) else 0)
+    (hcong : ∀ x i j, g x i j = ∑ k, ∑ l, P x k i * gm k l * P x l j)
+    (Sf KE A : Point 4 → (Fin 4 → ℝ) → ℝ → ℝ) (sd kd ad : Point 4 → (Fin 4 → ℝ) → ℝ)
+    (hS : ∀ x v, BL (g x) v = 0 → HasDerivAt (Sf x v) (sd x v) 0)
+    (hK : ∀ x v, BL (g x) v = 0 → HasDerivAt (KE x v) (kd x v) 0)
+    (hA : ∀ x v, BL (g x) v = 0 → HasDerivAt (A x v) (ad x v) 0)
+    (hbound : ∀ x v, BL (g x) v = 0 → ∀ᶠ t in 𝓝 0, Sf x v t ≤ η * A x v t)
+    (hsat : ∀ x v, BL (g x) v = 0 → Sf x v 0 = η * A x v 0)
+    (hDnn : ∀ x v, BL (g x) v = 0 → ∀ t, 0 ≤ KE x v t - Sf x v t)
+    (hD0 : ∀ x v, BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0)
+    (hKMS : WedgeKMSFlux_complete g T kd hbar)
+    (hFocus : ∀ x v, BL (g x) v = 0 → ad x v = BL (fun i j => ricci g gi i j x) v)
+    (hreg : ∀ f : Point 4 → ℝ,
+        (∀ y a' b, a * T y a' b = ricci g gi a' b y + f y * g y a' b) →
+        (∀ x ρ, PdiffAt f ρ x) ∧
+          Differentiable ℝ (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y))
+    (conserv : ∀ x ν, div02 g gi (fun y a' b => a * T y a' b) ν x = 0) :
+    ∃ Λ : ℝ, ∀ x μ ν, a * T x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν :=
+  qiqt_bekenstein_gives_gr g gi hsymm hsymm_gi hinv hCg hCgi hC T η hbar a hbar0 heta ha
+    hT_symm hric_symm P Pinv hPP hPP' hcong Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0
+    (hFlux_of_wedgeKMS_complete hKMS) hFocus hreg conserv
+
 end QIQTH.WedgeKMSToGR

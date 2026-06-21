@@ -4379,5 +4379,15 @@ namespace QIQTH.AxiomAudit
 -- congruence g=PᵀηP, Raychaudhuri focusing hFocus = kinematics, f-regularity hreg, per-generator differentiability).
 -- QIQT supplies bound+saturation+Klein as THEOREMS ⇒ δS=ηδA derived; all geometry axiom-free. = qiqt_bekenstein_
 -- gives_gr with hFlux replaced by the derived wedge-KMS flux. Verified: no sorry, no vacuous True hyps. Axiom-free.
+#print axioms QIQTH.Fock.OneParticleBW.oneParticleBW_wedge_complete
+-- expected: standard only — wedge BW with KMS-UNIQUENESS DERIVED: modUnitary=boostUnitary(−2π·) from hcarrier +
+-- V=boost + genuine StripKMSrvd, via oneParticleBW_complete (RvD Thm 3.8). Boost structural facts (isometry/group/
+-- continuity/𝒦-inv) all derived from boostUnitary lemmas. Replaces the bundled opaque hUniq + vacuous StripKMS.
+#print axioms QIQTH.WedgeKMSToGR.qiqt_gr_from_wedge_kms_complete
+-- expected: standard only — ★★★★ THE GOAL THEOREM with KMS-uniqueness DERIVED. Identical to qiqt_gr_from_wedge_kms
+-- but the wedge KMS input is the GENUINE non-vacuous WedgeKMSFlux_complete (bundling StripKMSrvd = RvD Def 3.4),
+-- NOT the old opaque hUniq + trivially-satisfiable StripKMS. The BW identification modUnitary=boost is now DERIVED
+-- from the machine-checked RvD Theorem 3.8 (oneParticleBW_complete) rather than assumed. Closes target #2 (GPT-5.5-pro
+-- audit): the one remaining modular-theory ASSUMPTION of the GR chain is replaced by a theorem. Axiom-free, no sorry.
 
 end QIQTH.AxiomAudit
