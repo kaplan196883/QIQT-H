@@ -173,6 +173,21 @@ theorem Krep_bound_integrable (m : ℝ) (f : V → ℂ) (hf : Continuous f)
     (continuous_const.mul c1).mul hf.norm
   exact cont.integrable_of_hasCompactSupport (hf_supp.norm.mul_left)
 
+/-- **Integrability of the Cauchy-type dominator** `(c² + x²)⁻¹` (for `c > 0`), the function that bounds the
+    horizon amplitude `‖horizonAmp m f x‖` (via `cosh(rapInv x) = (c²+x²)/(2cx)` and the `(cosh)⁻²` Schwartz
+    decay).  Reduces to Mathlib's `integrable_inv_one_add_sq` by the domination
+    `(c²+x²)⁻¹ ≤ (min(c²,1))⁻¹·(1+x²)⁻¹`. -/
+theorem integrable_inv_const_sq_add {c : ℝ} (hc : 0 < c) :
+    Integrable (fun x : ℝ => (c ^ 2 + x ^ 2)⁻¹) := by
+  have hmin : (0 : ℝ) < min (c ^ 2) 1 := lt_min (by positivity) one_pos
+  refine (integrable_inv_one_add_sq.const_mul (min (c ^ 2) 1)⁻¹).mono'
+    ((continuous_const.add (continuous_pow 2)).inv₀
+      (fun x => (show (0 : ℝ) < c ^ 2 + x ^ 2 by positivity).ne')).aestronglyMeasurable ?_
+  filter_upwards with x
+  rw [Real.norm_eq_abs, abs_of_nonneg (by positivity), ← mul_inv]
+  gcongr
+  nlinarith [min_le_left (c ^ 2) 1, min_le_right (c ^ 2) 1, sq_nonneg x, hmin]
+
 /-- **★★★ `Krep` is rapidity-differentiable** (the last regularity gate of the Route B target).  For a
     continuous, compactly-supported test function `f`, `θ ↦ Krep m f θ` is differentiable, with
     `kd θ₀ = (1/√2)·∫ e^{−i η(p_m(θ₀),x)}·(−i·m(x₀ sinh θ₀ − x₁ cosh θ₀))·f(x) dx` — i.e. `kd = Krep'`.
