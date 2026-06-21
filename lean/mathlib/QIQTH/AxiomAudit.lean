@@ -4010,6 +4010,15 @@ namespace QIQTH.AxiomAudit
 -- So deviceVec(0)=√R ζ=ξ, J·deviceVec(0)=Jξ ⇒ g-function value g(0)=⟪η,Jξ⟫ = the GConstancy RHS. The cfcCont↔CFC
 -- bridge (borelFC of continuous fn = Mathlib CFC) realized via the sqrt-uniqueness pattern, no new axiom.
 #print axioms QIQTH.devCorrExt_ofReal_inner
+#print axioms QIQTH.devCharDeriv_norm_le_slab
+-- expected: standard only — derivative-norm-on-slab bound ‖i·log·d_w(ω)‖≤C (companion to devChar_slope_norm_le):
+-- bounds the candidate Fréchet derivative ∂d at slab points (devChar_deriv_norm_le on (0,2); 0 on {0,2}).
+#print axioms QIQTH.tendsto_integral_devChar_remainder_sq
+-- expected: standard only — ★★★ STRONG-HOLO DOMINATED CONVERGENCE (piece 3, the heart): the L² remainder of the
+-- device-vector difference quotient vanishes, ∫‖(d_z(ω)−d_{z₀}(ω))/(z−z₀)−∂d_{z₀}(ω)‖²dμ^R_ζ→0 as z→z₀ (z≠z₀).
+-- Lebesgue tendsto_integral_filter_of_dominated_convergence: integrand→0 ptwise (tendsto_devChar_slope, piece 1)
+-- + dominated by const 4C² (devChar_slope_norm_le ‖Δ_z‖≤C + devCharDeriv_norm_le_slab ‖∂d‖≤C, piece 2), integrable
+-- on finite μ^R_ζ. With borelFC_sub+borelFC_apply_norm_sq (‖slope−d‖²=∫‖Δ_z−∂d‖²dμ) ⇒ Fréchet deriv of z↦deviceOpC(z)ζ.
 #print axioms QIQTH.devChar_slope_norm_le
 -- expected: standard only — UNIFORM slope/Lipschitz bound (piece 2 of strong-holo dominated convergence): on the
 -- slab {−β₁<Im z<−β₀}, ‖d_z(ω)−d_{z₀}(ω)‖ ≤ C·‖z−z₀‖, C=devChar_deriv_norm_le const, UNIFORM in ω. Via complex

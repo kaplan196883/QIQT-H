@@ -649,6 +649,35 @@ theorem devCorrExt_ofReal_inner (S : StandardSubspace H) (ξ : H) (t : ℝ) :
   rfl
 
 open QIQTH.StandardSubspaceModular in
+/-- **Derivative-norm bound of the device character on a slab** (the `‖∂_z d_z(ω)‖ ≤ C` companion to
+    `devChar_slope_norm_le`): on `{−β₁ < Im w < −β₀}`, `‖i·log((2−ω)/ω)·d_w(ω)‖ ≤ C` uniformly in `ω`
+    (`devChar_deriv_norm_le` for `ω ∈ (0,2)`; the coefficient vanishes for `ω ∈ {0,2}`).  This bounds the
+    candidate Fréchet derivative `∂_z d` at every slab point — used as the second half of the
+    dominating constant `4C²` in the strong-holomorphy dominated-convergence step. -/
+theorem devCharDeriv_norm_le_slab (S : StandardSubspace H) (ω : spectrum ℝ (rvdRC S))
+    {β₀ β₁ : ℝ} (hβ₀ : 0 < β₀) (hβ₁ : β₁ < 1 / 2) {w : ℂ}
+    (hw : w ∈ Complex.im ⁻¹' Set.Ioo (-β₁) (-β₀)) :
+    ‖Complex.I * (Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val)
+        / (ω : spectrum ℝ (rvdRC S)).val) : ℂ) * devChar w (ω : spectrum ℝ (rvdRC S)).val‖
+      ≤ Real.sqrt 2 * (2 / β₀ + Real.log 2) + Real.sqrt 2 * (2 / (1 / 2 - β₁) + Real.log 2) := by
+  rw [Set.mem_preimage, Set.mem_Ioo] at hw
+  rw [norm_mul, norm_mul, Complex.norm_I, one_mul, Complex.norm_real, Real.norm_eq_abs]
+  by_cases hω : (ω : spectrum ℝ (rvdRC S)).val ∈ Set.Ioo (0 : ℝ) 2
+  · exact devChar_deriv_norm_le hβ₀ hβ₁ (le_of_lt hw.2) (le_of_lt hw.1) hω
+  · have hr02 : (ω : spectrum ℝ (rvdRC S)).val = 0 ∨ (ω : spectrum ℝ (rvdRC S)).val = 2 := by
+      obtain ⟨h0', h2'⟩ := Set.mem_Icc.mp (rvdRC_spectrum_mem_Icc S ω)
+      rw [Set.mem_Ioo, not_and_or, not_lt, not_lt] at hω
+      exact hω.imp (fun hle => le_antisymm hle h0') (fun hge => le_antisymm h2' hge)
+    have hzero : |Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val)
+        / (ω : spectrum ℝ (rvdRC S)).val)| * ‖devChar w (ω : spectrum ℝ (rvdRC S)).val‖ = 0 := by
+      rcases hr02 with h | h <;> rw [h] <;> simp [devChar, Real.sqrt_zero]
+    rw [hzero]
+    have hβ₁' : 0 < 1 / 2 - β₁ := by linarith
+    have hlog2 : (0 : ℝ) ≤ Real.log 2 := Real.log_nonneg (by norm_num)
+    nlinarith [Real.sqrt_nonneg 2, hlog2, le_of_lt (div_pos (by norm_num : (0:ℝ) < 2) hβ₀),
+      le_of_lt (div_pos (by norm_num : (0:ℝ) < 2) hβ₁')]
+
+open QIQTH.StandardSubspaceModular in
 /-- **Uniform slope (Lipschitz) bound of the device character on a slab** (piece 2 of the strong-holomorphy
     dominated-convergence argument): on the open slab `s = {−β₁ < Im z < −β₀} ⊂ (−1/2,0)`,
     `‖d_z(ω) − d_{z₀}(ω)‖ ≤ C·‖z − z₀‖` with `C = √2(2/β₀+log2) + √2(2/(1/2−β₁)+log2)` the
@@ -714,6 +743,82 @@ theorem tendsto_devChar_slope (S : StandardSubspace H) (z₀ : ℂ) (ω : spectr
     (hasDerivAt_devChar_Icc (rvdRC_spectrum_mem_Icc S ω) z₀)).congr'
     (Filter.Eventually.of_forall fun z => ?_)
   rw [slope_def_field]
+
+open QIQTH.StandardSubspaceModular MeasureTheory Filter in
+/-- **Strong-holomorphy dominated convergence** (piece 3 — the heart): the `L²` remainder of the device-vector
+    difference quotient vanishes, `∫‖(d_z(ω)−d_{z₀}(ω))/(z−z₀) − ∂_z d_{z₀}(ω)‖² dμ^R_ζ → 0` as `z → z₀`
+    (`z ≠ z₀`), for `z₀` in the slab.  Lebesgue dominated convergence
+    (`tendsto_integral_filter_of_dominated_convergence`): the integrand `→ 0` pointwise (`tendsto_devChar_slope`,
+    piece 1) and is dominated by the constant `4C²` (`devChar_slope_norm_le` + `devCharDeriv_norm_le_slab`,
+    piece 2: `‖Δ_z(ω)‖ ≤ C`, `‖∂d(ω)‖ ≤ C`), integrable on the finite measure `μ^R_ζ`.  Combined with
+    `borelFC_sub` + `borelFC_apply_norm_sq` (`‖slope − d‖² = ∫‖Δ_z − ∂d‖² dμ`), this gives the Fréchet
+    derivative of `z ↦ deviceOpC(z)ζ`. -/
+theorem tendsto_integral_devChar_remainder_sq (S : StandardSubspace H) (ζ : H)
+    {β₀ β₁ : ℝ} (hβ₀ : 0 < β₀) (hβ₁ : β₁ < 1 / 2) {z₀ : ℂ}
+    (hz₀ : z₀ ∈ Complex.im ⁻¹' Set.Ioo (-β₁) (-β₀)) :
+    Tendsto (fun z => ∫ ω, ‖(devChar z (ω : spectrum ℝ (rvdRC S)).val
+        - devChar z₀ (ω : spectrum ℝ (rvdRC S)).val) / (z - z₀)
+        - Complex.I * (Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val)
+          / (ω : spectrum ℝ (rvdRC S)).val) : ℂ) * devChar z₀ (ω : spectrum ℝ (rvdRC S)).val‖ ^ 2
+        ∂(rvdSpecMeasure S ζ)) (nhdsWithin z₀ {z₀}ᶜ) (nhds 0) := by
+  haveI : IsFiniteMeasure (rvdSpecMeasure S ζ) := by unfold rvdSpecMeasure; infer_instance
+  set μ := rvdSpecMeasure S ζ
+  set C : ℝ := Real.sqrt 2 * (2 / β₀ + Real.log 2) + Real.sqrt 2 * (2 / (1 / 2 - β₁) + Real.log 2)
+    with hCdef
+  set s : Set ℂ := Complex.im ⁻¹' Set.Ioo (-β₁) (-β₀) with hs
+  set d : spectrum ℝ (rvdRC S) → ℂ := fun ω => Complex.I
+      * (Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val) / (ω : spectrum ℝ (rvdRC S)).val) : ℂ)
+      * devChar z₀ (ω : spectrum ℝ (rvdRC S)).val with hd
+  set F : ℂ → spectrum ℝ (rvdRC S) → ℝ := fun z ω =>
+    ‖(devChar z (ω : spectrum ℝ (rvdRC S)).val - devChar z₀ (ω : spectrum ℝ (rvdRC S)).val)
+        / (z - z₀) - d ω‖ ^ 2 with hF
+  have hlog2 : (0 : ℝ) ≤ Real.log 2 := Real.log_nonneg (by norm_num)
+  have hβ₁' : 0 < 1 / 2 - β₁ := by linarith
+  have hC0 : 0 ≤ C := by
+    rw [hCdef]
+    nlinarith [Real.sqrt_nonneg 2, hlog2, le_of_lt (div_pos (by norm_num : (0:ℝ) < 2) hβ₀),
+      le_of_lt (div_pos (by norm_num : (0:ℝ) < 2) hβ₁')]
+  have hmeasL : Measurable fun ω : spectrum ℝ (rvdRC S) =>
+      (Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val) / (ω : spectrum ℝ (rvdRC S)).val) : ℂ) :=
+    Complex.measurable_ofReal.comp (Real.measurable_log.comp
+      ((measurable_const.sub measurable_subtype_coe).div measurable_subtype_coe))
+  have hmeasd : Measurable d :=
+    (measurable_const.mul hmeasL).mul ((measurable_devChar z₀).comp measurable_subtype_coe)
+  have hFmeas : ∀ z : ℂ, AEStronglyMeasurable (F z) μ := fun z =>
+    ((((((measurable_devChar z).comp measurable_subtype_coe).sub
+      ((measurable_devChar z₀).comp measurable_subtype_coe)).div measurable_const).sub
+      hmeasd).norm.pow_const 2).aestronglyMeasurable
+  have hdbd : ∀ ω, ‖d ω‖ ≤ C := fun ω => devCharDeriv_norm_le_slab S ω hβ₀ hβ₁ hz₀
+  have hsnhd : s ∈ nhds z₀ := (Complex.continuous_im.isOpen_preimage _ isOpen_Ioo).mem_nhds hz₀
+  have hconv : Tendsto (fun z => ∫ ω, F z ω ∂μ) (nhdsWithin z₀ {z₀}ᶜ) (nhds (∫ _ω, (0:ℝ) ∂μ)) := by
+    refine tendsto_integral_filter_of_dominated_convergence (fun _ => 4 * C ^ 2)
+      (Eventually.of_forall hFmeas) ?_ (integrable_const _) ?_
+    · filter_upwards [mem_nhdsWithin_of_mem_nhds hsnhd, self_mem_nhdsWithin] with z hzs hzne
+      refine Eventually.of_forall fun ω => ?_
+      have hz0 : 0 < ‖z - z₀‖ := by rw [norm_pos_iff]; exact sub_ne_zero.mpr hzne
+      have hslope : ‖(devChar z (ω : spectrum ℝ (rvdRC S)).val
+          - devChar z₀ (ω : spectrum ℝ (rvdRC S)).val) / (z - z₀)‖ ≤ C := by
+        rw [norm_div, div_le_iff₀ hz0]
+        exact devChar_slope_norm_le S ω hβ₀ hβ₁ hzs hz₀
+      have hsd : ‖(devChar z (ω : spectrum ℝ (rvdRC S)).val
+          - devChar z₀ (ω : spectrum ℝ (rvdRC S)).val) / (z - z₀) - d ω‖ ≤ 2 * C :=
+        (norm_sub_le _ _).trans (by linarith [add_le_add hslope (hdbd ω)])
+      have hnorm : ‖F z ω‖ = ‖(devChar z (ω : spectrum ℝ (rvdRC S)).val
+          - devChar z₀ (ω : spectrum ℝ (rvdRC S)).val) / (z - z₀) - d ω‖ ^ 2 := by
+        rw [hF]; exact Real.norm_of_nonneg (by positivity)
+      rw [hnorm]
+      calc ‖(devChar z (ω : spectrum ℝ (rvdRC S)).val
+              - devChar z₀ (ω : spectrum ℝ (rvdRC S)).val) / (z - z₀) - d ω‖ ^ 2
+          ≤ (2 * C) ^ 2 := pow_le_pow_left₀ (norm_nonneg _) hsd 2
+        _ = 4 * C ^ 2 := by ring
+    · refine Eventually.of_forall fun ω => ?_
+      have h2 : Tendsto (fun z => (devChar z (ω : spectrum ℝ (rvdRC S)).val
+          - devChar z₀ (ω : spectrum ℝ (rvdRC S)).val) / (z - z₀) - d ω)
+          (nhdsWithin z₀ {z₀}ᶜ) (nhds 0) := by
+        have h1 := (tendsto_devChar_slope S z₀ ω).sub_const (d ω)
+        simpa [hd] using h1
+      simpa [hF] using h2.norm.pow 2
+  simpa using hconv
 
 /-- **Diagonal operator identification of the device strip extension** (general `z` in the half-strip):
     `D_ξ(z) = ⟪ξ, deviceOpC(z) ξ⟫`.  The scalar integral `∫ d_z dμ^R_ξ` IS the diagonal expectation of the
