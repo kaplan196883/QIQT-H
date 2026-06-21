@@ -787,6 +787,38 @@ theorem horizonAmp_deriv_continuous {m : ℝ} (hm : 0 < m) (f : SchwartzMap V �
     simp only [hdHdef]
     rw [Set.indicator_of_mem hy]
 
+/-- **★★ The horizon amplitude is `L²`** (`f` Schwartz, `m > 0`) — the wedge mode is normalizable.
+    `‖horizonAmp x‖² ≤ B²·((c²+x²)⁻¹)²` (`horizonAmp_norm_le'`), dominated by the squared Cauchy kernel.
+    Foundation for the `L²`-Plancherel route to `hFdA`. -/
+theorem horizonAmp_memLp_two {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) :
+    MemLp (horizonAmp m (⇑f)) 2 volume := by
+  have hmeas : AEStronglyMeasurable (horizonAmp m (⇑f)) volume :=
+    (horizonAmp_integrable hm f).aestronglyMeasurable
+  rw [memLp_two_iff_integrable_sq_norm hmeas]
+  obtain ⟨B, hB, hAb⟩ := horizonAmp_norm_le' hm f
+  refine ((integrable_inv_const_sq_add_sq (show (0 : ℝ) < m / Real.sqrt 2 by positivity)).const_mul
+    (B ^ 2)).mono' ((continuous_pow 2).comp_aestronglyMeasurable hmeas.norm) ?_
+  filter_upwards with x
+  rw [Real.norm_eq_abs, abs_of_nonneg (by positivity)]
+  calc ‖horizonAmp m (⇑f) x‖ ^ 2
+      ≤ (B * ((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹) ^ 2 := pow_le_pow_left₀ (norm_nonneg _) (hAb x) 2
+    _ = B ^ 2 * (((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹) ^ 2 := by rw [mul_pow]
+
+/-- **★★ `deriv (horizonAmp)` is `L²`** (`f` Schwartz, `m > 0`).  `‖deriv(horizonAmp) x‖² ≤ D²·((c²+x²)⁻¹)²`
+    (`horizonAmp_deriv_le`).  Together with `horizonAmp_memLp_two` this gives `A, A' ∈ L²` — the input the
+    Plancherel isometry (`MeasureTheory.Lp.inner_fourier_eq`) needs to discharge `hFdA` without inversion. -/
+theorem horizonAmp_deriv_memLp_two {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) :
+    MemLp (deriv (horizonAmp m (⇑f))) 2 volume := by
+  obtain ⟨hmeas, D, hD, hAd_b⟩ := horizonAmp_deriv_le hm f
+  rw [memLp_two_iff_integrable_sq_norm hmeas]
+  refine ((integrable_inv_const_sq_add_sq (show (0 : ℝ) < m / Real.sqrt 2 by positivity)).const_mul
+    (D ^ 2)).mono' ((continuous_pow 2).comp_aestronglyMeasurable hmeas.norm) ?_
+  filter_upwards [hAd_b] with x hx
+  rw [Real.norm_eq_abs, abs_of_nonneg (by positivity)]
+  calc ‖deriv (horizonAmp m (⇑f)) x‖ ^ 2
+      ≤ (D * ((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹) ^ 2 := pow_le_pow_left₀ (norm_nonneg _) hx 2
+    _ = D ^ 2 * (((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹) ^ 2 := by rw [mul_pow]
+
 /-- **★★★★ Route B for the SCHWARTZ class — 8 of 9 regularity gates discharged.**  For any Schwartz test
     function `f` (`m > 0`), the horizon stress flux equals the boost momentum
     `stressFluxKK m f = −2π·rapidityMomentum(Krep)(Krep')` — assembling the eight axiom-free regularity
