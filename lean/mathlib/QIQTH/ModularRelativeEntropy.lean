@@ -1084,6 +1084,50 @@ theorem deviceOpC_diff_normSq (S : StandardSubspace H) (ζ : H) {z z₀ : ℂ}
   rw [← ContinuousLinearMap.sub_apply, deviceOpC_sub, borelFC_apply_norm_sq]
   rfl
 
+open QIQTH.StandardSubspaceModular MeasureTheory Filter in
+/-- **Device-character `L²` continuity** (dominated convergence): `∫‖d_z(ω) − d_{z₀}(ω)‖² dμ^R_ζ → 0` as
+    `z → z₀` within the closed half-strip `{−1/2 ≤ Im z ≤ 0}`.  The integrand `→ 0` pointwise (`d_z` continuous
+    in `z`, `hasDerivAt_devChar_Icc.continuousAt`) and is dominated by `(√2+√2)² = 8` (`devChar_norm_le_Icc`),
+    integrable on the finite spectral measure.  With `deviceOpC_diff_normSq` this gives the device-vector
+    continuity `‖deviceVecF z − deviceVecF z₀‖ = √(∫…) → 0` — the continuity-to-closure half of `DiffContOnCl`. -/
+theorem tendsto_integral_devChar_diff_sq (S : StandardSubspace H) (ζ : H) {z₀ : ℂ}
+    (hz02 : z₀.im ≤ 0) (hz01 : -(1 / 2 : ℝ) ≤ z₀.im) :
+    Tendsto (fun z => ∫ ω, ‖devChar z (ω : spectrum ℝ (rvdRC S)).val
+        - devChar z₀ (ω : spectrum ℝ (rvdRC S)).val‖ ^ 2 ∂(rvdSpecMeasure S ζ))
+      (nhdsWithin z₀ (Complex.im ⁻¹' Set.Icc (-(1 / 2) : ℝ) 0)) (nhds 0) := by
+  haveI : IsFiniteMeasure (rvdSpecMeasure S ζ) := by unfold rvdSpecMeasure; infer_instance
+  set μ := rvdSpecMeasure S ζ
+  set s : Set ℂ := Complex.im ⁻¹' Set.Icc (-(1 / 2) : ℝ) 0 with hs
+  set F : ℂ → spectrum ℝ (rvdRC S) → ℝ := fun z ω =>
+    ‖devChar z (ω : spectrum ℝ (rvdRC S)).val - devChar z₀ (ω : spectrum ℝ (rvdRC S)).val‖ ^ 2 with hF
+  have hFmeas : ∀ z : ℂ, AEStronglyMeasurable (F z) μ := fun z =>
+    ((((measurable_devChar z).comp measurable_subtype_coe).sub
+      ((measurable_devChar z₀).comp measurable_subtype_coe)).norm.pow_const 2).aestronglyMeasurable
+  have hconv : Tendsto (fun z => ∫ ω, F z ω ∂μ) (nhdsWithin z₀ s) (nhds (∫ _ω, (0:ℝ) ∂μ)) := by
+    refine tendsto_integral_filter_of_dominated_convergence (fun _ => 8)
+      (Eventually.of_forall hFmeas) ?_ (integrable_const _) ?_
+    · filter_upwards [self_mem_nhdsWithin] with z hzs
+      rw [hs, Set.mem_preimage, Set.mem_Icc] at hzs
+      refine Eventually.of_forall fun ω => ?_
+      rw [Real.norm_of_nonneg (by positivity)]
+      calc ‖devChar z (ω : spectrum ℝ (rvdRC S)).val - devChar z₀ (ω : spectrum ℝ (rvdRC S)).val‖ ^ 2
+          ≤ (Real.sqrt 2 + Real.sqrt 2) ^ 2 := by
+            refine pow_le_pow_left₀ (norm_nonneg _) ((norm_sub_le _ _).trans (add_le_add
+              (devChar_norm_le_Icc hzs.2 hzs.1 (rvdRC_spectrum_mem_Icc S ω))
+              (devChar_norm_le_Icc hz02 hz01 (rvdRC_spectrum_mem_Icc S ω)))) 2
+        _ = 8 := by nlinarith [Real.sq_sqrt (by norm_num : (0:ℝ) ≤ 2)]
+    · refine Eventually.of_forall fun ω => ?_
+      have hcont : Tendsto (fun z => devChar z (ω : spectrum ℝ (rvdRC S)).val)
+          (nhdsWithin z₀ s) (nhds (devChar z₀ (ω : spectrum ℝ (rvdRC S)).val)) :=
+        ((hasDerivAt_devChar_Icc (rvdRC_spectrum_mem_Icc S ω) z₀).continuousAt).mono_left
+          nhdsWithin_le_nhds
+      have h2 : Tendsto (fun z => devChar z (ω : spectrum ℝ (rvdRC S)).val
+          - devChar z₀ (ω : spectrum ℝ (rvdRC S)).val) (nhdsWithin z₀ s) (nhds 0) := by
+        have := hcont.sub_const (devChar z₀ (ω : spectrum ℝ (rvdRC S)).val)
+        simpa using this
+      simpa [hF] using h2.norm.pow 2
+  simpa using hconv
+
 open QIQTH.StandardSubspaceModular in
 /-- **Diagonal operator identification of the device strip extension** (general `z` in the half-strip):
     `D_ξ(z) = ⟪ξ, deviceOpC(z) ξ⟫`.  The scalar integral `∫ d_z dμ^R_ξ` IS the diagonal expectation of the

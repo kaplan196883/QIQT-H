@@ -4022,6 +4022,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.gFunction_zero
 -- expected: standard only — g(0)=⟪Jξ,η_n⟫ (ξ=√R ζ, η_n=gaussSmear): the Phragmén–Lindelöf comparison point. With g
 -- const this = g(t). Via deviceVecF_zero + gaussSmearC_zero + modConjBilin_apply.
+#print axioms QIQTH.tendsto_integral_devChar_diff_sq
+-- expected: standard only — DEVICE-CHAR L² CONTINUITY (dominated conv): ∫‖d_z−d_{z₀}‖²dμ^R_ζ→0 as z→z₀ in closed
+-- half-strip. tendsto_integral_filter_of_dominated_convergence: integrand→0 ptwise (hasDerivAt_devChar_Icc.continuousAt)
+-- + dominated by (√2+√2)²=8 (devChar_norm_le_Icc). With deviceOpC_diff_normSq ⇒ deviceVecF continuity ⇒ DiffContOnCl.
 #print axioms QIQTH.deviceOpC_diff_normSq
 -- expected: standard only — L² DIFFERENCE identity ‖deviceOpC(z)ζ−deviceOpC(z₀)ζ‖²=∫‖d_z−d_{z₀}‖²dμ^R_ζ (deviceOpC_sub
 -- + borelFC_apply_norm_sq). Foundation of device-vector CONTINUITY (∫→0 by dominated conv) ⇒ DiffContOnCl half of g.
