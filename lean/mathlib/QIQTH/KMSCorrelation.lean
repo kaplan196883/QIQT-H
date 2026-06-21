@@ -305,6 +305,37 @@ theorem gConstancy_of_entireVec_limit (S : StandardSubspace H) {V : ℝ → (H �
   exact tendsto_nhds_unique hL
     (hR.congr' (eventually_atTop.mpr ⟨1, fun n hn => (hGC n (by linarith)).symm⟩))
 
+/-- **GConstancy is real-scalar linear in the vector**: if GConstancy holds for `v`, it holds for `c • v`
+    (`c : ℝ`).  `V_t` is ℂ-linear (so commutes with the real scalar) and `⟪·, w⟫` pulls out `conj(c) = c`
+    (`inner_smul_left`, `c` real).  This bridges `gConstancy_entire_of_bottom` (for `gaussSmear`) to the
+    normalised entire vector `entireVec = √(n/π) • gaussSmear` the density limit consumes. -/
+theorem gConstancy_real_smul (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} (v ξ : H) (t : ℝ) (c : ℝ)
+    (hGC : inner ℂ (V t v) (modUnitary S t (modConj S ξ)) = inner ℂ v (modConj S ξ)) :
+    inner ℂ (V t (c • v)) (modUnitary S t (modConj S ξ)) = inner ℂ (c • v) (modConj S ξ) := by
+  rw [← algebraMap_smul ℂ c v, map_smul, inner_smul_left, inner_smul_left, hGC]
+
+/-- **GConstancy for `η ∈ 𝒦` reduced to the bottom-edge KMS reality** (the full density+scaling closeout):
+    `⟪V_t η, Δ^{it}(Jξ)⟫ = ⟪η, Jξ⟫` for `ξ = √R ζ`, given the geometric inputs (`ξ ∈ 𝒦`, the orbit stays in
+    `𝒦` for every entire vector) and the bottom-edge reality `h1` for every entire vector.  Chains
+    `gConstancy_entire_of_bottom` (GConstancy for `gaussSmear V n η`) → `gConstancy_real_smul` (scale to the
+    normalised `entireVec = √(n/π)·gaussSmear`) → `gConstancy_of_entireVec_limit` (`n → ∞`, `entireVec → η`).
+    So the FULL GConstancy at `η` (any `η ∈ 𝒦` with the orbit hypotheses) now rests only on the bottom-edge
+    mid-line KMS reality — the single labelled input of RvD Theorem 3.8. -/
+theorem gConstancy_eta_of_bottom (S : StandardSubspace H) (ζ : H) {V : ℝ → (H →L[ℂ] H)} (η : H)
+    (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hgrp : ∀ s t, V s (V t η) = V (s + t) η) (hV0 : V 0 η = η)
+    (hξ : projK S (rvdSqrtR S ζ) = rvdSqrtR S ζ)
+    (hKinv : ∀ n : ℝ, 0 < n → ∀ s : ℝ,
+      projK S (V s (gaussSmear V n η)) = V s (gaussSmear V n η))
+    (h1 : ∀ n : ℝ, 0 < n → ∀ z : ℂ, z.im = -(1 / 2) →
+      (modConjBilin S (deviceVecF S ζ z) (gaussSmearC V n η z)).im = 0) (t : ℝ) :
+    inner ℂ (V t η) (modUnitary S t (modConj S (rvdSqrtR S ζ)))
+      = inner ℂ η (modConj S (rvdSqrtR S ζ)) := by
+  refine gConstancy_of_entireVec_limit S η (rvdSqrtR S ζ) t hcont hbd hV0 (fun n hn => ?_)
+  rw [entireVec]
+  exact gConstancy_real_smul S (gaussSmear V n η) (rvdSqrtR S ζ) t (Real.sqrt (n / Real.pi))
+    (gConstancy_entire_of_bottom S ζ hn η hcont hbd hgrp hξ (hKinv n hn) (h1 n hn) t)
+
 /-- **Analytic capstone of the KMS-uniqueness proof** (RvD Theorem 3.8): given the labelled KMS function,
     the orbit matrix element is `t`-independent.  Assembles the whole verified analytic chain.  Inputs: the
     *geometric* facts (`w ⊥ i𝒦`, the orbit `V_t(gaussSmear)` stays in `𝒦`) and the *labelled KMS input* — a

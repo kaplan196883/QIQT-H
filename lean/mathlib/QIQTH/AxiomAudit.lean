@@ -3790,6 +3790,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ STEP 6a (to closed strip): Im(corrC w)=0 on BOTH edges (Im=0,Im=1) ⇒ corrC w
 -- constant on the CLOSED kmsStrip. eqConst_of_im_zero_strip (Phragmén–Lindelöf) gives const on the open strip;
 -- continuity of entire g propagates to closure (kmsStrip=closure kmsStripOpen, Set.EqOn.closure).
+#print axioms QIQTH.StandardSubspaceModular.gConstancy_real_smul
+-- expected: standard only — GConstancy real-scalar linear in vector: GConstancy(v) ⇒ GConstancy(c•v), c:ℝ (V_t ℂ-linear
+-- + inner_smul_left, conj c=c). Bridges gaussSmear→entireVec=√(n/π)•gaussSmear.
+#print axioms QIQTH.StandardSubspaceModular.gConstancy_eta_of_bottom
+-- expected: standard only — ★★★ GCONSTANCY(η∈𝒦) REDUCED TO BOTTOM-EDGE KMS (full density+scaling closeout): ⟪V_t η,
+-- Δ^{it}(Jξ)⟫=⟪η,Jξ⟫ (ξ=√Rζ) given geometric inputs + h1 (bottom-edge ∀ entire vec). Chains gConstancy_entire_of_bottom
+-- → gConstancy_real_smul (scale to entireVec) → gConstancy_of_entireVec_limit (n→∞). FULL GConstancy(η) now rests ONLY
+-- on the bottom-edge mid-line KMS reality — the single labelled RvD Thm 3.8 input. Remaining: h1(KMS) + ξ=√Rζ range.
 #print axioms QIQTH.StandardSubspaceModular.gConstancy_of_entireVec_limit
 -- expected: standard only — GCONSTANCY DENSITY: GConstancy(η) from GConstancy(entireVec V n η) ∀n>0. entireVec→η
 -- (entireVec_tendsto) + ⟪V_t·,w⟫,⟪·,w⟫ continuous ⇒ constant equality passes to limit (tendsto_nhds_unique). Lifts the
