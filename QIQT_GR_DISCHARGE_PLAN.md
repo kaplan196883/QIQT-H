@@ -92,6 +92,24 @@ The single analytic engine: **`p(θ+iπ) = −p(θ)`** (since `cosh(θ+iπ)=−c
    `oneParticleBW_wedge_unconditional : ∀ t, modUnitary 𝒦_W t = boostUnitary(−2π t)`, and thread up through
    `WedgeKMSFlux_complete` / `qiqt_gr_from_wedge_kms_complete` to remove `hKMS`.
 
+> **STATUS 2026-06-22: A0 convention audit DONE — route confirmed; long pole de-risked.**
+> - **Conventions match GPT's route exactly.** With `minkowskiDot p x = p₀x₀ − p₁x₁`
+>   (`Localization.lean:37`) and `minkowskiFourier f p = ∫ exp(−i·(p·x))·f` and `massShell m θ = (m coshθ,
+>   m sinhθ)`, the damping is reproduced: for `ζ=θ+iλ`, `Re(−i·p(ζ)·x) = m sinλ·(sinhθ·x₀ − coshθ·x₁)`, which
+>   is `< 0` on `rightWedge = {x₁>|x₀|}` (`OneParticleBW.lean:371`) for `0<λ<π` (since
+>   `coshθ·x₁ − sinhθ·x₀ = ½e^θ(x₁−x₀)+½e^{−θ}(x₁+x₀) > 0`). So `ψ_f` is holomorphic & decaying on
+>   **`S_π={0<Im<π}`**. And `massShellℂ m (θ+iπ) = −massShell m θ` (cosh/sinh `(θ+iπ)=−`), giving
+>   `ψ_f(θ+iπ)=conj(ψ_f(θ))` for real `f` (since `minkowskiFourier f (−p)=conj(minkowskiFourier f p)`). ✅
+> - **One sign to handle in A4:** `boostUnitary t` is `g ↦ g(·−t)` (`MPFlow.unitary`, χ=add_right), so
+>   `boostUnitary(−2πt) g = g(·+2πt)` = `ξ(θ+2πt)` — opposite to GPT's `ξ(θ−2πt)`. Flip the KMS strip
+>   orientation (use `{0<Im z<1}` / swap edges) accordingly; GPT flagged this.
+> - **Long pole NOT blocked.** Mathlib `ParametricIntegral.lean` provides
+>   `hasDerivAt_integral_of_dominated_loc_of_deriv_le` / `hasFDerivAt_integral_of_dominated_loc_of_lip`
+>   over general `𝕜` (take `𝕜=ℂ` ⟹ complex-differentiable parametric integral ⟹ holomorphy).
+>   **`Mathlib/Analysis/MellinTransform.lean` is a worked precedent** for strip-holomorphy of a parametric
+>   integral — use it as the template for A1/A2. The wedge-wavefunction strip analyticity is assembly of
+>   existing infra, not new analysis. Effort estimate revised DOWN toward the multi-week end (was 1–3 mo).
+
 ### Phasing (each an axiom-free green checkpoint)
 
 - **A1.** `massShellℂ`, holomorphy of the continued wavefunction on `S_π`, the wedge-damping sign bound.
@@ -118,6 +136,16 @@ The single analytic engine: **`p(θ+iπ) = −p(θ)`** (since `cosh(θ+iπ)=−c
 ---
 
 ## Work Item B — Close `hFocus` to the area↔θ modelling identification only
+
+> **STATUS 2026-06-22: B1 DONE** (commit `e09652d`). `qiqt_gr_from_wedge_kms_raychaudhuri`
+> (`WedgeKMSToGR.lean`) is the end-to-end GR theorem with the focusing step DERIVED from the kinematic
+> Raychaudhuri data (per-direction null geodesic congruence `Vcong v`, `hVC`/`hgeo`/`hVval`/`hequil`) via
+> `hFocus_of_raychaudhuri`; raw `hFocus` is gone. Axiom-free, budget 0. **B2** (honest classification) is
+> captured below + in the plan. **B3** (fold `harea` into a `def`) is deliberately NOT done: `harea` bridges
+> the abstract thermodynamic area functional `A` (whose derivative is `ad`, via `hA`) to the congruence
+> expansion — it is a genuine *modelling identification*, not pure notation, so folding it would relocate, not
+> eliminate, the physical content. Item B is therefore considered **closed** at the honest floor: the only
+> residue is `harea` (area↔θ) + `hequil` (stationary horizon), both in the Jacobson local-equilibrium bucket.
 
 **Small.** The geometric content of `hFocus` is ALREADY machine-checked: `hFocus_of_raychaudhuri`
 (`QiqtToGR.lean:39`) derives `ad = BL(Ric) v` from the axiom-free `raychaudhuri_focusing_at_equilibrium`
