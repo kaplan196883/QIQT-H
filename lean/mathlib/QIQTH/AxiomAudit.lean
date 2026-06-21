@@ -4246,6 +4246,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★★ bottom g-VALUE explicit (√Rζ∈𝒦): g(t−i/2)=⟪J·deviceVecF(t−i/2),w⟫=⟪Δ^{it}ξ,w⟫.
 -- h1 NOW = Im⟪Δ^{it}ξ,gaussSmearC(t−i/2)⟫=0, ξ=√Rζ∈𝒦 — the clean a2/a3 KMS-reflection target (Δ^½=J + half-strip PL
 -- from stripKMSrvd_real_midline). Bottom-edge g-vector AND value fully machine-checked; only the KMS reflection remains.
+#print axioms QIQTH.StandardSubspaceModular.gFunction_bottom_real_of_perp_IK
+-- expected: standard only — ★★★ GEOMETRIC REDUCTION of h1 (bottom-edge analogue of gTopEdge_real): under √Rζ∈𝒦,
+-- g(t−i/2)=⟪Δ^{it}ξ, gaussSmearC(t−i/2)⟫ with Δ^{it}ξ∈𝒦 (modUnitary_mapsTo_K), so by inner_real_of_mem_K_perp_IK
+-- (RvD Prop 2.3) it is REAL as soon as projIK(gaussSmearC(t−i/2))=0. Localizes ALL remaining KMS content of h1 to
+-- that single fact (mid-line orbit ⊥ i𝒦) — note the J-flip: device side is ⊥i𝒦 on real axis, IN 𝒦 on bottom edge.
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable

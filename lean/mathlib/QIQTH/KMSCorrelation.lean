@@ -613,6 +613,24 @@ theorem gFunction_bottom_eq_of_mem_K (S : StandardSubspace H) {ζ : H}
       = inner ℂ (modUnitary S t (rvdSqrtR S ζ)) w := by
   rw [modConjBilin_apply, modConj_deviceVecF_bottom_eq_of_mem_K S hζ]
 
+/-- **Geometric reduction of the bottom-edge KMS reality `h1`** — the bottom-edge analogue of the
+    purely-geometric `gTopEdge_real`.  Under `√Rζ ∈ 𝒦`, the bottom-edge g-value is `⟪Δ^{it}ξ, gaussSmearC(t−i/2)⟫`
+    with `ξ = √Rζ`, and `Δ^{it}ξ ∈ 𝒦` (`modUnitary_mapsTo_K`).  So by RvD Prop 2.3 (`inner_real_of_mem_K_perp_IK`,
+    `Im⟪x,y⟫ = 0` for `x ∈ 𝒦`, `y ⊥ i𝒦`) the value is REAL as soon as the mid-line orbit vector
+    `gaussSmearC(t−i/2)` lies in `(i𝒦)^⊥` (`projIK = 0`).  This localizes the ENTIRE remaining KMS content of
+    `h1` to the single fact `projIK(gaussSmearC(t−i/2)) = 0` — the analytic continuation of the orbit to the
+    mid-line landing in `(i𝒦)^⊥`, which is exactly what the KMS condition (`StripKMSrvd`) supplies (RvD's
+    half-period reflection `Δ^{1/2} = J`). -/
+theorem gFunction_bottom_real_of_perp_IK (S : StandardSubspace H) (V : ℝ → (H →L[ℂ] H)) (n : ℝ) (η : H)
+    {ζ : H} (hζ : projK S (rvdSqrtR S ζ) = rvdSqrtR S ζ) (t : ℝ)
+    (hperp : projIK S (gaussSmearC V n η ((t : ℂ) - Complex.I / 2)) = 0) :
+    (modConjBilin S (deviceVecF S ζ ((t : ℂ) - Complex.I / 2))
+        (gaussSmearC V n η ((t : ℂ) - Complex.I / 2))).im = 0 := by
+  rw [gFunction_bottom_eq_of_mem_K S hζ]
+  exact inner_real_of_mem_K_perp_IK S
+    ((mem_K_iff_projK S _).mp (modUnitary_mapsTo_K S t (rvdSqrtR S ζ)
+      ((mem_K_iff_projK S (rvdSqrtR S ζ)).mpr hζ))) hperp
+
 /-- **Diagonal-correlation form of the RvD Theorem 3.8 closeout**: if the modular correlations agree,
     `⟨ξ, V_t ξ⟩ = ⟨ξ, Δ^{it} ξ⟩` for every `ξ`, then `V_t = Δ^{it}` (stated with `ξ` in the first slot, the
     `modCorrExt` convention).  This is the operator-level conclusion that the `modCorrExt` strip-uniqueness
