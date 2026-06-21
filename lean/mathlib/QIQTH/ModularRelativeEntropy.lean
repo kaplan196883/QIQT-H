@@ -948,6 +948,16 @@ theorem differentiableOn_deviceVecF (S : StandardSubspace H) (ζ : H) :
   constructor <;> linarith
 
 open QIQTH.StandardSubspaceModular in
+/-- **Real-axis value of the device vector**: `deviceVecF(t) = Δ^{it}·√R ζ` (the top-edge value of the
+    g-function).  Via `deviceVecF_eq_of_mem` (the strip contains the real axis), `deviceOpC_ofReal`
+    (`d_{(t:ℂ)} = d_t`), and `deviceOpReal_eq` (`d_t = Δ^{it}·√R`).  With `ξ = √R ζ`, `J·deviceVecF(t) =
+    JΔ^{it}ξ = Δ^{it}(Jξ)` is the second slot of the g-function on its real edge `g(t) = ⟪V_t η, Δ^{it}Jξ⟫`. -/
+theorem deviceVecF_real_eq (S : StandardSubspace H) (ζ : H) (t : ℝ) :
+    deviceVecF S ζ (t : ℂ) = modUnitary S t (rvdSqrtR S ζ) := by
+  rw [deviceVecF_eq_of_mem S ζ (by simp) (by norm_num [Complex.ofReal_im]), deviceOpC_ofReal,
+    deviceOpReal_eq, ContinuousLinearMap.mul_apply]
+
+open QIQTH.StandardSubspaceModular in
 /-- **Diagonal operator identification of the device strip extension** (general `z` in the half-strip):
     `D_ξ(z) = ⟪ξ, deviceOpC(z) ξ⟫`.  The scalar integral `∫ d_z dμ^R_ξ` IS the diagonal expectation of the
     device operator `d_z(R)` (via `inner_borelFC` + `bilinDiag_self` + `diagInt`).  This connects the proven
