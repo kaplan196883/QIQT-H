@@ -975,6 +975,37 @@ theorem differentiableOn_gFunction (S : StandardSubspace H) (ζ : H)
     (differentiable_gaussSmearC hn η hcont hbd).differentiableOn
 
 open QIQTH.StandardSubspaceModular in
+/-- **Device vector at the origin**: `deviceVecF(0) = √R ζ` (`= ξ`, the comparison point).  From
+    `deviceVecF_real_eq` at `t = 0` (`Δ^{i·0} = 1`, `modUnitary_zero`). -/
+theorem deviceVecF_zero (S : StandardSubspace H) (ζ : H) :
+    deviceVecF S ζ 0 = rvdSqrtR S ζ := by
+  have h := deviceVecF_real_eq S ζ 0
+  rw [Complex.ofReal_zero] at h
+  rw [h, modUnitary_zero, ContinuousLinearMap.one_apply]
+
+open QIQTH.StandardSubspaceModular in
+/-- **g-function value at the origin** `g(0) = ⟪J ξ, η_n⟫` (`ξ = √R ζ`, `η_n = gaussSmear`): the comparison
+    point of the Phragmén–Lindelöf constancy.  With `g` constant this equals `g(t)`, the top-edge matrix
+    element — the heart of RvD Theorem 3.8.  Via `deviceVecF_zero` + `gaussSmearC_zero`. -/
+theorem gFunction_zero (S : StandardSubspace H) (ζ : H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (η : H) :
+    modConjBilin S (deviceVecF S ζ 0) (gaussSmearC V n η 0)
+      = inner ℂ (modConj S (rvdSqrtR S ζ)) (gaussSmear V n η) := by
+  rw [deviceVecF_zero, gaussSmearC_zero, modConjBilin_apply]
+
+open QIQTH.StandardSubspaceModular in
+/-- **g-function value on the real axis (top edge)** `g(t) = ⟪Δ^{it}(J ξ), V_t η_n⟫` (`ξ = √R ζ`): via
+    `deviceVecF_real_eq` (`d_t ζ = Δ^{it}√R ζ`), `gaussSmearC_ofReal` (`h(t) = V_t η_n`), and
+    `modConj_commute_modUnitary` (`JΔ^{it} = Δ^{it}J`).  Its conjugate is the GConstancy LHS
+    `⟪V_t η_n, Δ^{it}Jξ⟫`; reality (RvD top edge) makes `g(t)` equal to it. -/
+theorem gFunction_real_eq (S : StandardSubspace H) (ζ : H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn : 0 < n)
+    (η : H) (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hgrp : ∀ s t, V s (V t η) = V (s + t) η) (t : ℝ) :
+    modConjBilin S (deviceVecF S ζ (t : ℂ)) (gaussSmearC V n η (t : ℂ))
+      = inner ℂ (modUnitary S t (modConj S (rvdSqrtR S ζ))) (V t (gaussSmear V n η)) := by
+  rw [deviceVecF_real_eq, gaussSmearC_ofReal hn η hcont hbd hgrp t, modConjBilin_apply,
+    modConj_commute_modUnitary]
+
+open QIQTH.StandardSubspaceModular in
 /-- **Diagonal operator identification of the device strip extension** (general `z` in the half-strip):
     `D_ξ(z) = ⟪ξ, deviceOpC(z) ξ⟫`.  The scalar integral `∫ d_z dμ^R_ξ` IS the diagonal expectation of the
     device operator `d_z(R)` (via `inner_borelFC` + `bilinDiag_self` + `diagInt`).  This connects the proven

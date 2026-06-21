@@ -4017,6 +4017,14 @@ namespace QIQTH.AxiomAudit
 -- So deviceVec(0)=√R ζ=ξ, J·deviceVec(0)=Jξ ⇒ g-function value g(0)=⟪η,Jξ⟫ = the GConstancy RHS. The cfcCont↔CFC
 -- bridge (borelFC of continuous fn = Mathlib CFC) realized via the sqrt-uniqueness pattern, no new axiom.
 #print axioms QIQTH.devCorrExt_ofReal_inner
+#print axioms QIQTH.deviceVecF_zero
+-- expected: standard only — deviceVecF(0)=√R ζ (=ξ, the comparison point), from deviceVecF_real_eq t=0 + modUnitary_zero.
+#print axioms QIQTH.gFunction_zero
+-- expected: standard only — g(0)=⟪Jξ,η_n⟫ (ξ=√R ζ, η_n=gaussSmear): the Phragmén–Lindelöf comparison point. With g
+-- const this = g(t). Via deviceVecF_zero + gaussSmearC_zero + modConjBilin_apply.
+#print axioms QIQTH.gFunction_real_eq
+-- expected: standard only — g(t)=⟪Δ^{it}(Jξ), V_t η_n⟫ (top edge, ξ=√R ζ): deviceVecF_real_eq + gaussSmearC_ofReal +
+-- modConj_commute_modUnitary(JΔ^{it}=Δ^{it}J). conj = GConstancy LHS ⟪V_t η_n, Δ^{it}Jξ⟫; reality ⇒ g(t)=that.
 #print axioms QIQTH.differentiableOn_gFunction
 -- expected: standard only — ★★★ G-FUNCTION HOLOMORPHIC (endgame piece 2): g(z)=⟪J·d_z(R)ζ, V_z η⟫=modConjBilin S
 -- (deviceVecF S ζ z)(gaussSmearC V n η z) is DifferentiableOn the open half-strip. The continuous ℂ-bilinear
