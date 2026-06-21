@@ -60,4 +60,42 @@ theorem horizonFieldDeriv_eq_fourier (m : ℝ) (hm : 0 < m) (f : V → ℂ) (lam
   · rw [Set.indicator_of_mem hx, Set.indicator_of_mem hx]
   · rw [Set.indicator_of_notMem hx, Set.indicator_of_notMem hx, zero_mul]
 
+/-- **★ Self-adjointness of `−i∂_θ`: the rapidity-momentum integral is purely imaginary.**
+    For a smooth, decaying amplitude `f` (the boundary terms vanish), `∫ conj(f)·f' = i·rapidityMomentum f f'`
+    — equivalently `Re ∫ conj(f)·f' = 0`.  This is the Hermiticity of the momentum operator; it is what turns
+    the Parseval output (`∫ conj(A)·B = i·∫ conj(K)·K'`) into the real `−2π·rapidityMomentum` at the end of
+    Phase 3b-ii.  Proof: `∫ conj(f)f' + conj(∫ conj(f)f') = ∫ d/dθ|f|² = 0` (full-line FTC). -/
+theorem inner_deriv_eq_I_mul_rapidityMomentum (f f' : ℝ → ℂ)
+    (hderiv : ∀ x, HasDerivAt f (f' x) x)
+    (hff : Integrable (fun θ => (starRingEnd ℂ) (f θ) * f θ))
+    (h1 : Integrable (fun θ => (starRingEnd ℂ) (f' θ) * f θ))
+    (h2 : Integrable (fun θ => (starRingEnd ℂ) (f θ) * f' θ)) :
+    ∫ θ, (starRingEnd ℂ) (f θ) * f' θ = Complex.I * (rapidityMomentum f f' : ℂ) := by
+  set I := ∫ θ, (starRingEnd ℂ) (f θ) * f' θ with hI
+  have hgderiv : ∀ x, HasDerivAt (fun θ => (starRingEnd ℂ) (f θ) * f θ)
+      ((starRingEnd ℂ) (f' x) * f x + (starRingEnd ℂ) (f x) * f' x) x := by
+    intro x
+    have hc : HasDerivAt (fun θ => (starRingEnd ℂ) (f θ)) ((starRingEnd ℂ) (f' x)) x := by
+      simpa only [starRingEnd_apply] using (hderiv x).star
+    exact hc.mul (hderiv x)
+  have hzero : ∫ θ, ((starRingEnd ℂ) (f' θ) * f θ + (starRingEnd ℂ) (f θ) * f' θ) = 0 :=
+    integral_eq_zero_of_hasDerivAt_of_integrable hgderiv (h1.add h2) hff
+  rw [integral_add h1 h2] at hzero
+  have hconj : ∫ θ, (starRingEnd ℂ) (f' θ) * f θ = (starRingEnd ℂ) I := by
+    rw [hI, ← integral_conj]
+    refine integral_congr_ae (Filter.Eventually.of_forall (fun θ => ?_))
+    simp [mul_comm]
+  rw [hconj, ← hI] at hzero
+  have hre : I.re = 0 := by
+    have h := congrArg Complex.re hzero
+    simp only [Complex.add_re, Complex.conj_re, Complex.zero_re] at h
+    linarith
+  have hII : I = Complex.I * (I.im : ℂ) := by
+    apply Complex.ext
+    · simp [Complex.mul_re, hre]
+    · simp [Complex.mul_im]
+  rw [hII]
+  have hrm : rapidityMomentum f f' = I.im := by simp only [rapidityMomentum, hI]
+  rw [hrm]
+
 end QIQTH.Fock.StressTensor

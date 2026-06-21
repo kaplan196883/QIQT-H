@@ -4422,6 +4422,11 @@ namespace QIQTH.AxiomAudit
 -- horizonFieldDeriv m f λ = 𝓕 (horizonAmp m f)(λ/2π), horizonAmp := (Ioi 0).indicator (x↦−i·Krep m f(rapInv m x)). Combines
 -- 3b-i (k-line integral) + the convention bridge + indicator-extension to ℝ. Makes the weak sesquilinear Parseval directly
 -- applicable to χ_H. Next: the ψ_H=𝓕[B] partner (IBP) + the sesquilinear pairing ⟹ stressFluxKK = −2π·rapidityMomentum.
+#print axioms QIQTH.Fock.StressTensor.inner_deriv_eq_I_mul_rapidityMomentum
+-- expected: standard only — ★ Stress-tensor Route B, Phase 3b-ii: SELF-ADJOINTNESS of −i∂_θ. ∫conj(f)·f' = i·rapidityMomentum
+-- f f' for smooth decaying f (Re∫conj(f)f'=0, the momentum operator is Hermitian). The piece that turns the Parseval output
+-- ∫conj(A)B = i∫conj(K)K' into the REAL −2π·rapidityMomentum. Proof: ∫conj(f)f' + conj(∫conj(f)f') = ∫ d/dθ|f|² = 0 via the
+-- full-line FTC integral_eq_zero_of_hasDerivAt_of_integrable + HasDerivAt.star. Generic (hyps: f differentiable + integrable f,f'·f).
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,
