@@ -490,14 +490,12 @@ theorem stressFluxKK_eq_neg_rapMom_cptSupp (m : ℝ) (hm : 0 < m) (f : V → ℂ
     stressFluxKK_eq_neg_rapMom m hm f _ (fun θ => Krep_hasDerivAt m hm.le f hf hf_supp θ)
       hA hAd hdAc hdA hFdA hff h1 h2⟩
 
-/-- **★★★ The horizon amplitude is differentiable** for a Schwartz test function `f` (`m > 0`), given the
-    wedge mode's rapidity derivative `kd` (`HasDerivAt Krep kd`).  Three regions: for `x < 0` it is locally
-    `0`; for `x > 0` it is `horizonAmp_hasDerivAt`; and at the **bifurcation surface `x = 0`** the `(cosh)⁻²`
-    Schwartz decay forces the quadratic envelope `‖horizonAmp t‖ ≤ K·t²`, so the slope `→ 0` and the derivative
-    is `0`.  This discharges the `hAd` regularity hypothesis (the boundary-differentiability gate). -/
-theorem horizonAmp_differentiable {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) (kd : ℝ → ℂ)
-    (hkd : ∀ θ, HasDerivAt (fun θ => Krep m (⇑f) θ) (kd θ) θ) :
-    Differentiable ℝ (horizonAmp m (⇑f)) := by
+/-- **★★★ The horizon amplitude has derivative `0` at the bifurcation surface `x = 0`** (`f` Schwartz,
+    `m > 0`).  The `(cosh)⁻²` Schwartz decay forces the quadratic envelope `‖horizonAmp t‖ ≤ K·t²`
+    (via `cosh(rapInv t) = (c²+t²)/(2ct)`), so the slope `→ 0` (`squeeze_zero_norm`) and the derivative is `0`.
+    The boundary input to both `horizonAmp_differentiable` (`hAd`) and `horizonAmp_deriv_continuous` (`hdAc`). -/
+theorem horizonAmp_hasDerivAt_zero {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) :
+    HasDerivAt (horizonAmp m (⇑f)) 0 0 := by
   set c : ℝ := m / Real.sqrt 2 with hc
   have hcpos : 0 < c := by rw [hc]; positivity
   set C : ℝ := 16 * π ^ 2 * ((∫ v, ‖(⇑f) v‖) + (∫ v, ‖iteratedFDeriv ℝ 1 (⇑f) v‖)
@@ -505,7 +503,6 @@ theorem horizonAmp_differentiable {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ)
   have hCnn : (0 : ℝ) ≤ C := by rw [hCdef]; positivity
   set K : ℝ := 4 * C / c ^ 2 with hKdef
   have hKnn : (0 : ℝ) ≤ K := by rw [hKdef]; exact div_nonneg (by positivity) (by positivity)
-  -- the quadratic envelope ‖horizonAmp t‖ ≤ K·t²  (from the (cosh)⁻² decay + cosh(rapInv t)=(c²+t²)/(2ct))
   have hbound : ∀ t : ℝ, ‖horizonAmp m (⇑f) t‖ ≤ K * t ^ 2 := by
     intro t
     simp only [horizonAmp, Set.indicator_apply]
@@ -525,33 +522,36 @@ theorem horizonAmp_differentiable {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ)
         mul_nonneg (mul_nonneg (by norm_num) hCnn) (by positivity)
       nlinarith [hh]
     · rw [norm_zero]; exact mul_nonneg hKnn (sq_nonneg t)
+  rw [hasDerivAt_iff_tendsto_slope]
+  have h0val : horizonAmp m (⇑f) 0 = 0 := by
+    simp only [horizonAmp]; rw [Set.indicator_of_notMem (by simp : (0 : ℝ) ∉ Set.Ioi 0)]
+  have hsl : ∀ t : ℝ, ‖slope (horizonAmp m (⇑f)) 0 t‖ ≤ K * |t| := by
+    intro t
+    rw [slope_def_module, h0val, sub_zero, sub_zero, norm_smul, norm_inv, Real.norm_eq_abs]
+    rcases eq_or_ne t 0 with rfl | ht0
+    · simp
+    · refine (mul_le_mul_of_nonneg_left (hbound t) (by positivity)).trans (le_of_eq ?_)
+      rw [← sq_abs]; field_simp
+  have htend : Filter.Tendsto (fun t : ℝ => K * |t|) (nhdsWithin 0 {(0 : ℝ)}ᶜ) (nhds 0) := by
+    have h := (tendsto_const_nhds (x := K)).mul (continuous_abs.tendsto (0 : ℝ))
+    simp only [abs_zero, mul_zero] at h
+    exact h.mono_left nhdsWithin_le_nhds
+  exact squeeze_zero_norm hsl htend
+
+/-- **★★★ The horizon amplitude is differentiable** for a Schwartz test function `f` (`m > 0`), given the
+    wedge mode's rapidity derivative `kd` (`HasDerivAt Krep kd`).  Three regions: `x < 0` locally `0`;
+    `x > 0` via `horizonAmp_hasDerivAt`; `x = 0` via `horizonAmp_hasDerivAt_zero`.  Discharges `hAd`. -/
+theorem horizonAmp_differentiable {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) (kd : ℝ → ℂ)
+    (hkd : ∀ θ, HasDerivAt (fun θ => Krep m (⇑f) θ) (kd θ) θ) :
+    Differentiable ℝ (horizonAmp m (⇑f)) := by
   intro x
   rcases lt_trichotomy x 0 with hx | hx | hx
-  · -- x < 0: locally zero
-    refine ((hasDerivAt_const x (0 : ℂ)).congr_of_eventuallyEq ?_).differentiableAt
+  · refine ((hasDerivAt_const x (0 : ℂ)).congr_of_eventuallyEq ?_).differentiableAt
     filter_upwards [isOpen_Iio.mem_nhds (Set.mem_Iio.mpr hx)] with y hy
     have hynot : y ∉ Set.Ioi (0 : ℝ) := by simp only [Set.mem_Ioi, not_lt]; exact (Set.mem_Iio.mp hy).le
     simp only [horizonAmp, Set.indicator_of_notMem hynot]
-  · -- x = 0: boundary, derivative 0 via the quadratic envelope
-    subst hx
-    refine (?_ : HasDerivAt (horizonAmp m (⇑f)) 0 0).differentiableAt
-    rw [hasDerivAt_iff_tendsto_slope]
-    have h0val : horizonAmp m (⇑f) 0 = 0 := by
-      simp only [horizonAmp]; rw [Set.indicator_of_notMem (by simp : (0 : ℝ) ∉ Set.Ioi 0)]
-    have hsl : ∀ t : ℝ, ‖slope (horizonAmp m (⇑f)) 0 t‖ ≤ K * |t| := by
-      intro t
-      rw [slope_def_module, h0val, sub_zero, sub_zero, norm_smul, norm_inv, Real.norm_eq_abs]
-      rcases eq_or_ne t 0 with rfl | ht0
-      · simp
-      · refine (mul_le_mul_of_nonneg_left (hbound t) (by positivity)).trans (le_of_eq ?_)
-        rw [← sq_abs]; field_simp
-    have htend : Filter.Tendsto (fun t : ℝ => K * |t|) (nhdsWithin 0 {(0 : ℝ)}ᶜ) (nhds 0) := by
-      have h := (tendsto_const_nhds (x := K)).mul (continuous_abs.tendsto (0 : ℝ))
-      simp only [abs_zero, mul_zero] at h
-      exact h.mono_left nhdsWithin_le_nhds
-    exact squeeze_zero_norm hsl htend
-  · -- x > 0
-    exact (horizonAmp_hasDerivAt m hm (⇑f) kd hkd hx).differentiableAt
+  · subst hx; exact (horizonAmp_hasDerivAt_zero hm f).differentiableAt
+  · exact (horizonAmp_hasDerivAt m hm (⇑f) kd hkd hx).differentiableAt
 
 /-- **★★ The self-adjoint integrability `∫ conj(A)·A`** (`hff`) for the horizon amplitude `A = horizonAmp m f`
     (`f` Schwartz, `m > 0`).  Since `‖conj(A x)·A x‖ = ‖A x‖²`, the Cauchy envelope
@@ -589,6 +589,15 @@ theorem horizonAmp_sq_integrable {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) 
 theorem Krep_deriv_norm_le {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) :
     ∃ C : ℝ, 0 ≤ C ∧ ∀ θ : ℝ, ‖deriv (fun θ => Krep m (⇑f) θ) θ‖ ≤ C * (Real.cosh θ)⁻¹ := by
   obtain ⟨C, hC, hb⟩ := kd_norm_le m hm f
+  refine ⟨C, hC, fun θ => ?_⟩
+  rw [(schwartz_Krep_hasDerivAt m hm.le f θ).deriv]
+  exact hb θ
+
+/-- **`(cosh)⁻²` (super-exponential) decay of `deriv (Krep m f)`** — packages `kd_norm_le_sq` against the
+    genuine `deriv` (`schwartz_Krep_hasDerivAt.deriv`).  The bound the `hdAc` boundary squeeze consumes. -/
+theorem Krep_deriv_norm_le_sq {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ θ : ℝ, ‖deriv (fun θ => Krep m (⇑f) θ) θ‖ ≤ C * ((Real.cosh θ) ^ 2)⁻¹ := by
+  obtain ⟨C, hC, hb⟩ := kd_norm_le_sq m hm f
   refine ⟨C, hC, fun θ => ?_⟩
   rw [(schwartz_Krep_hasDerivAt m hm.le f θ).deriv]
   exact hb θ
@@ -701,5 +710,81 @@ theorem horizonAmp_mul_deriv_integrable {m : ℝ} (hm : 0 < m) (f : SchwartzMap 
       ≤ (B * ((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹) * (D * ((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹) :=
         mul_le_mul (hA_b x) hx (norm_nonneg _) (le_trans (norm_nonneg _) (hA_b x))
     _ = B * D * (((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹) ^ 2 := by ring
+
+/-- **★★★ `deriv (horizonAmp)` is continuous** (`hdAc`) for a Schwartz test function (`m > 0`).  Globally
+    `deriv (horizonAmp m f) = derivH` where `derivH x = (i/x)·Krep'(rapInv x)` on `x > 0` and `0` on `x ≤ 0`
+    (`horizonAmp_hasDerivAt` / `horizonAmp_hasDerivAt_zero`).  `derivH` is continuous: off `x = 0` via `Krep' ∈ C⁰`
+    (`schwartz_Krep_deriv_continuous`), and AT the bifurcation surface `x = 0` the SUPER-exponential `(cosh)⁻²`
+    decay (`Krep_deriv_norm_le_sq`) + `cosh(rapInv t) = (c²+t²)/(2ct)` give `‖derivH t‖ ≤ 4Cc²|t|/(c²+t²)² → 0`,
+    so `derivH` is continuous at `0` by squeeze.  Discharges `hdAc`. -/
+theorem horizonAmp_deriv_continuous {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) :
+    Continuous (deriv (horizonAmp m (⇑f))) := by
+  set c : ℝ := m / Real.sqrt 2 with hc
+  have hcpos : 0 < c := by rw [hc]; positivity
+  obtain ⟨C, hC, hCb⟩ := Krep_deriv_norm_le_sq hm f
+  set kd : ℝ → ℂ := deriv (fun θ => Krep m (⇑f) θ) with hkddef
+  have hkd : ∀ θ, HasDerivAt (fun θ => Krep m (⇑f) θ) (kd θ) θ := fun θ =>
+    (schwartz_Krep_hasDerivAt m hm.le f θ).differentiableAt.hasDerivAt
+  have hkd_cont : Continuous kd := schwartz_Krep_deriv_continuous hm.le f
+  set derivH : ℝ → ℂ :=
+    fun x => (Set.Ioi 0).indicator (fun x : ℝ => (Complex.I / (x : ℂ)) * kd (rapInv m x)) x with hdHdef
+  have hderiv_eq : deriv (horizonAmp m (⇑f)) = derivH := by
+    funext x
+    rcases lt_trichotomy x 0 with hlt | rfl | hgt
+    · have hd0 : derivH x = 0 := by
+        simp only [hdHdef]
+        exact Set.indicator_of_notMem (by simp only [Set.mem_Ioi, not_lt]; exact hlt.le) _
+      rw [hd0]
+      refine ((hasDerivAt_const x (0 : ℂ)).congr_of_eventuallyEq ?_).deriv
+      filter_upwards [isOpen_Iio.mem_nhds (Set.mem_Iio.mpr hlt)] with y hy
+      exact Set.indicator_of_notMem (by simp only [Set.mem_Ioi, not_lt]; exact (Set.mem_Iio.mp hy).le) _
+    · have hd0 : derivH 0 = 0 := by
+        simp only [hdHdef]; exact Set.indicator_of_notMem (by simp) _
+      rw [hd0, (horizonAmp_hasDerivAt_zero hm f).deriv]
+    · have hdx : derivH x = (Complex.I / (x : ℂ)) * kd (rapInv m x) := by
+        simp only [hdHdef]; exact Set.indicator_of_mem (Set.mem_Ioi.mpr hgt) _
+      rw [hdx]; exact (horizonAmp_hasDerivAt m hm (⇑f) kd hkd hgt).deriv
+  rw [hderiv_eq, continuous_iff_continuousAt]
+  intro x₀
+  rcases lt_trichotomy x₀ 0 with hlt | rfl | hgt
+  · have h0 : ContinuousAt (fun _ : ℝ => (0 : ℂ)) x₀ := continuousAt_const
+    refine h0.congr ?_
+    filter_upwards [isOpen_Iio.mem_nhds (Set.mem_Iio.mpr hlt)] with y hy
+    show (0 : ℂ) = derivH y
+    simp only [hdHdef]
+    rw [Set.indicator_of_notMem (by simp only [Set.mem_Ioi, not_lt]; exact (Set.mem_Iio.mp hy).le)]
+  · have hd0 : derivH 0 = 0 := by
+      simp only [hdHdef]; exact Set.indicator_of_notMem (by simp) _
+    have hbd : ∀ t : ℝ, ‖derivH t‖ ≤ 4 * C * c ^ 2 * |t| / (c ^ 2 + t ^ 2) ^ 2 := by
+      intro t
+      simp only [hdHdef, Set.indicator_apply]
+      split_ifs with ht
+      · rw [Set.mem_Ioi] at ht
+        rw [norm_mul, norm_div, Complex.norm_I, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht,
+          one_div]
+        have hcosh_eq : Real.cosh (rapInv m t) = (c ^ 2 + t ^ 2) / (2 * c * t) := by
+          rw [rapInv, ← hc, ← Real.log_div hcpos.ne' ht.ne', Real.cosh_log (by positivity)]; field_simp
+        have hkb := hCb (rapInv m t)
+        rw [hcosh_eq] at hkb
+        refine (mul_le_mul_of_nonneg_left hkb (by positivity)).trans (le_of_eq ?_)
+        rw [div_pow, inv_div]; field_simp; ring
+      · rw [norm_zero]; positivity
+    have hg_cont : Continuous (fun t : ℝ => 4 * C * c ^ 2 * |t| / (c ^ 2 + t ^ 2) ^ 2) :=
+      Continuous.div (continuous_const.mul continuous_abs)
+        ((continuous_const.add (continuous_pow 2)).pow 2) (fun t => by positivity)
+    have htend : Filter.Tendsto (fun t : ℝ => 4 * C * c ^ 2 * |t| / (c ^ 2 + t ^ 2) ^ 2)
+        (nhds 0) (nhds 0) := by simpa using hg_cont.tendsto 0
+    show Filter.Tendsto derivH (nhds 0) (nhds (derivH 0))
+    rw [hd0]
+    exact squeeze_zero_norm hbd htend
+  · have hrap : ContinuousAt (rapInv m) x₀ := by
+      unfold rapInv; exact continuousAt_const.sub (Real.continuousAt_log hgt.ne')
+    have hgfunc : ContinuousAt (fun x : ℝ => (Complex.I / (x : ℂ)) * kd (rapInv m x)) x₀ :=
+      (continuousAt_const.div Complex.continuous_ofReal.continuousAt
+        (Complex.ofReal_ne_zero.mpr hgt.ne')).mul (hkd_cont.continuousAt.comp hrap)
+    refine hgfunc.congr ?_
+    filter_upwards [isOpen_Ioi.mem_nhds (Set.mem_Ioi.mpr hgt)] with y hy
+    simp only [hdHdef]
+    rw [Set.indicator_of_mem hy]
 
 end QIQTH.Fock.StressTensor

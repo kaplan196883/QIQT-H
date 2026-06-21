@@ -4582,6 +4582,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.StressTensor.horizonAmp_mul_deriv_integrable
 -- expected: standard only — ★★ Stress-tensor Route B (h2 DISCHARGED): Integrable (conj(A)·deriv A). Same product bound as h1.
 -- 7 of 9 regularity gates done (hkd hA hAd hff hdA h1 h2); remaining hdAc (needs super-exp Krep' decay) + hFdA (𝓕(deriv) integrable).
+#print axioms QIQTH.Fock.StressTensor.horizonAmp_deriv_continuous
+-- expected: standard only — ★★★ Stress-tensor Route B (hdAc DISCHARGED): Continuous (deriv (horizonAmp m f)), f Schwartz, m>0.
+-- deriv horizonAmp = derivH globally (=(i/x)Krep'(rapInv x) on x>0, 0 on x≤0; x=0 via horizonAmp_hasDerivAt_zero). derivH continuous:
+-- off 0 via Krep'∈C⁰ (schwartz_Krep_deriv_continuous) + rapInv/div continuity; at x=0 the SUPER-exp (cosh)⁻² decay (Krep_deriv_norm_le_sq)
+-- + cosh(rapInv t)=(c²+t²)/(2ct) give ‖derivH t‖≤4Cc²|t|/(c²+t²)²→0 (squeeze_zero_norm). 8 of 9 gates done; only hFdA remains.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,
