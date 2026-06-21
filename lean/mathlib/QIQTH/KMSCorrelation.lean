@@ -685,6 +685,35 @@ theorem gFunction_bottom_real_of_kms_match (S : StandardSubspace H) {V : ℝ →
   rw [heqOn hmem]
   exact hmid
 
+open StripUniqueness in
+/-- **★★ The bottom-edge KMS reality `h1` from the FAITHFUL-convention half-strip witness.**  RvD Definition 3.4
+    (read from source, pp.194-195) states the KMS function with the orbit in the LINEAR inner-product slot:
+    `f(t) = ⟨U_tξ, η⟩` with RvD's `⟨·,·⟩` *linear-first* (forced — `⟨h(z),Δ^{it}ξ⟩` must be entire), i.e. in
+    Mathlib `f(t) = inner ℂ η (V_t ξ)`.  For the pair `(ξ' = gaussSmear, η' = ξ_t = Δ^{it}ξ)` this is
+    `f(s) = ⟪ξ_t, V_s·gaussSmear⟫ = corrC ξ_t V n η s` (the real-axis value of the bottom-edge auxiliary
+    `gFunction_bottom_eq_of_mem_K` + `gaussSmearC_ofReal`).  With `f(t−i/2)` real (RvD Prop 3.5), the transfer
+    engine `gFunction_bottom_real_of_kms_match` discharges `h1`.
+
+    This VALIDATES the convention finding: the faithful KMS witness (orbit in the LINEAR slot) discharges `h1`
+    exactly.  The current `HalfStripReal`/`StripKMSrvd` instead state `f(t) = inner ℂ (V_t ξ) η` (orbit in the
+    CONJUGATE slot) — the conjugate of RvD Def 3.4, which transfers reality to `t+i/2` not `t−i/2`.  The sole
+    remaining gap for `h1` is thus the convention correction `StripKMSrvd ⟹ this faithful witness`. -/
+theorem gFunction_bottom_real_of_faithful_kms (S : StandardSubspace H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ}
+    (hn : 0 < n) (η : H) {ζ : H} (hζ : projK S (rvdSqrtR S ζ) = rvdSqrtR S ζ) (t : ℝ)
+    (hcont : Continuous (fun s => V s η)) (hbd : ∀ s, ‖V s η‖ ≤ ‖η‖)
+    (hgrp : ∀ s u, V s (V u η) = V (s + u) η)
+    {f : ℂ → ℂ} {M : ℝ} (hf : DiffContOnCl ℂ f kmsHalfStripOpen)
+    (hfb : ∀ z ∈ kmsHalfStrip, ‖f z‖ ≤ M)
+    (hfaithful : ∀ s : ℝ,
+      f (s : ℂ) = inner ℂ (modUnitary S t (rvdSqrtR S ζ)) (V s (gaussSmear V n η)))
+    (hmid : (f ((t : ℂ) - Complex.I / 2)).im = 0) :
+    (modConjBilin S (deviceVecF S ζ ((t : ℂ) - Complex.I / 2))
+        (gaussSmearC V n η ((t : ℂ) - Complex.I / 2))).im = 0 :=
+  gFunction_bottom_real_of_kms_match S hn η hζ t hcont hbd hf hfb
+    (fun s => by
+      rw [hfaithful s, corrC, innerSL_apply_apply, gaussSmearC_ofReal hn η hcont hbd hgrp s])
+    hmid
+
 /-- **Diagonal-correlation form of the RvD Theorem 3.8 closeout**: if the modular correlations agree,
     `⟨ξ, V_t ξ⟩ = ⟨ξ, Δ^{it} ξ⟩` for every `ξ`, then `V_t = Δ^{it}` (stated with `ξ` in the first slot, the
     `modCorrExt` convention).  This is the operator-level conclusion that the `modCorrExt` strip-uniqueness

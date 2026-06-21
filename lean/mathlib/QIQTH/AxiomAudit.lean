@@ -4257,6 +4257,12 @@ namespace QIQTH.AxiomAudit
 -- + bounded on half-strip (corrC_bdd_halfStrip); KMS f matches it on real axis with f(t−i/2) real ⟹ (half-strip
 -- boundary uniqueness eqOn_of_im_zero_edge_halfStrip) corrC ξ_t=f ⟹ g(t−i/2)=f(t−i/2) real. hmatch IS satisfiable
 -- (RvD's KMS for pair (η,Δ^{it}ξ) gives it) — remaining gap = the convention bridge from StripKMSrvd/HalfStripReal.
+#print axioms QIQTH.StandardSubspaceModular.gFunction_bottom_real_of_faithful_kms
+-- expected: standard only — ★★ h1 from the FAITHFUL-convention KMS witness. RvD Def 3.4 (read from source):
+-- f(t)=⟨U_tξ,η⟩, RvD ⟨·,·⟩ LINEAR-FIRST (⟨h(z),Δ^{it}ξ⟩ entire) ⟹ Mathlib f(t)=inner ℂ η (V_t ξ) [orbit LINEAR slot].
+-- For pair (gaussSmear,ξ_t): f(s)=⟪ξ_t,V_s gaussSmear⟫=corrC ξ_t s, f(t−i/2) real ⟹ gFunction_bottom_real_of_kms_match
+-- ⟹ h1. VALIDATES the finding: codebase StripKMSrvd/HalfStripReal use inner ℂ (V_t ξ) η = CONJUGATE of RvD Def 3.4
+-- (transfers reality to t+i/2 not t−i/2). Sole remaining h1 gap = convention fix StripKMSrvd ⟹ this faithful witness.
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable
