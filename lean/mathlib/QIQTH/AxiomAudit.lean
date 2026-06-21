@@ -4524,6 +4524,12 @@ namespace QIQTH.AxiomAudit
 -- cosh(rapInv x)=(c²+x²)/(2cx) (cosh_log, c=m/√2) dominate ‖horizonAmp x‖ ≤ 4Cc²(c²+x²)⁻¹ by the integrable Cauchy
 -- kernel (integrable_inv_const_sq_add). Removes the L¹ half of the remaining horizon-amplitude regularity. Differentiable
 -- ℝ horizonAmp (boundary at x=0, needs Krep' decay too) is the last labelled softer gate.
+#print axioms QIQTH.Fock.StressTensor.horizonAmp_differentiable
+-- expected: standard only — ★★★ Stress-tensor Route B (softer regularity, DIFFERENTIABILITY DISCHARGED): for f Schwartz,
+-- m>0, given the wedge derivative kd (HasDerivAt Krep kd), Differentiable ℝ (horizonAmp m f). Three regions: x<0 locally
+-- 0; x>0 via horizonAmp_hasDerivAt; x=0 the BIFURCATION SURFACE — the (cosh)⁻² Schwartz decay (schwartz_Krep_decay_sq) +
+-- cosh(rapInv t)=(c²+t²)/(2ct) force the quadratic envelope ‖horizonAmp t‖≤K t², so slope→0 (squeeze_zero_norm) ⟹ deriv 0.
+-- Discharges hAd. NOTE: the boundary case needs ONLY the cosh⁻² decay of Krep (the O(t²) envelope), NOT a Krep' decay.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

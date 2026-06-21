@@ -457,4 +457,67 @@ theorem stressFluxKK_eq_neg_rapMom_cptSupp (m : ℝ) (hm : 0 < m) (f : V → ℂ
     stressFluxKK_eq_neg_rapMom m hm f _ (fun θ => Krep_hasDerivAt m hm.le f hf hf_supp θ)
       hA hAd hdAc hdA hFdA hff h1 h2⟩
 
+/-- **★★★ The horizon amplitude is differentiable** for a Schwartz test function `f` (`m > 0`), given the
+    wedge mode's rapidity derivative `kd` (`HasDerivAt Krep kd`).  Three regions: for `x < 0` it is locally
+    `0`; for `x > 0` it is `horizonAmp_hasDerivAt`; and at the **bifurcation surface `x = 0`** the `(cosh)⁻²`
+    Schwartz decay forces the quadratic envelope `‖horizonAmp t‖ ≤ K·t²`, so the slope `→ 0` and the derivative
+    is `0`.  This discharges the `hAd` regularity hypothesis (the boundary-differentiability gate). -/
+theorem horizonAmp_differentiable {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) (kd : ℝ → ℂ)
+    (hkd : ∀ θ, HasDerivAt (fun θ => Krep m (⇑f) θ) (kd θ) θ) :
+    Differentiable ℝ (horizonAmp m (⇑f)) := by
+  set c : ℝ := m / Real.sqrt 2 with hc
+  have hcpos : 0 < c := by rw [hc]; positivity
+  set C : ℝ := 16 * π ^ 2 * ((∫ v, ‖(⇑f) v‖) + (∫ v, ‖iteratedFDeriv ℝ 1 (⇑f) v‖)
+      + (∫ v, ‖iteratedFDeriv ℝ 2 (⇑f) v‖)) / (Real.sqrt 2 * m ^ 2) with hCdef
+  have hCnn : (0 : ℝ) ≤ C := by rw [hCdef]; positivity
+  set K : ℝ := 4 * C / c ^ 2 with hKdef
+  have hKnn : (0 : ℝ) ≤ K := by rw [hKdef]; exact div_nonneg (by positivity) (by positivity)
+  -- the quadratic envelope ‖horizonAmp t‖ ≤ K·t²  (from the (cosh)⁻² decay + cosh(rapInv t)=(c²+t²)/(2ct))
+  have hbound : ∀ t : ℝ, ‖horizonAmp m (⇑f) t‖ ≤ K * t ^ 2 := by
+    intro t
+    simp only [horizonAmp, Set.indicator_apply]
+    split_ifs with ht
+    · rw [Set.mem_Ioi] at ht
+      rw [norm_mul, norm_neg, Complex.norm_I, one_mul]
+      have hcosh_eq : Real.cosh (rapInv m t) = (c ^ 2 + t ^ 2) / (2 * c * t) := by
+        rw [rapInv, ← hc, ← Real.log_div hcpos.ne' ht.ne', Real.cosh_log (by positivity)]
+        field_simp
+      have hdecay := schwartz_Krep_decay_sq f hm.ne' (rapInv m t)
+      rw [hcosh_eq, ← hCdef] at hdecay
+      refine le_trans hdecay ?_
+      rw [div_pow, inv_div, ← mul_div_assoc, div_le_iff₀ (by positivity), hKdef,
+        show 4 * C / c ^ 2 * t ^ 2 * (c ^ 2 + t ^ 2) ^ 2
+          = 4 * C * t ^ 2 * (c ^ 2 + t ^ 2) ^ 2 / c ^ 2 by ring, le_div_iff₀ (by positivity)]
+      have hh : (0 : ℝ) ≤ 4 * C * (t ^ 4 * (2 * c ^ 2 + t ^ 2)) :=
+        mul_nonneg (mul_nonneg (by norm_num) hCnn) (by positivity)
+      nlinarith [hh]
+    · rw [norm_zero]; exact mul_nonneg hKnn (sq_nonneg t)
+  intro x
+  rcases lt_trichotomy x 0 with hx | hx | hx
+  · -- x < 0: locally zero
+    refine ((hasDerivAt_const x (0 : ℂ)).congr_of_eventuallyEq ?_).differentiableAt
+    filter_upwards [isOpen_Iio.mem_nhds (Set.mem_Iio.mpr hx)] with y hy
+    have hynot : y ∉ Set.Ioi (0 : ℝ) := by simp only [Set.mem_Ioi, not_lt]; exact (Set.mem_Iio.mp hy).le
+    simp only [horizonAmp, Set.indicator_of_notMem hynot]
+  · -- x = 0: boundary, derivative 0 via the quadratic envelope
+    subst hx
+    refine (?_ : HasDerivAt (horizonAmp m (⇑f)) 0 0).differentiableAt
+    rw [hasDerivAt_iff_tendsto_slope]
+    have h0val : horizonAmp m (⇑f) 0 = 0 := by
+      simp only [horizonAmp]; rw [Set.indicator_of_notMem (by simp : (0 : ℝ) ∉ Set.Ioi 0)]
+    have hsl : ∀ t : ℝ, ‖slope (horizonAmp m (⇑f)) 0 t‖ ≤ K * |t| := by
+      intro t
+      rw [slope_def_module, h0val, sub_zero, sub_zero, norm_smul, norm_inv, Real.norm_eq_abs]
+      rcases eq_or_ne t 0 with rfl | ht0
+      · simp
+      · refine (mul_le_mul_of_nonneg_left (hbound t) (by positivity)).trans (le_of_eq ?_)
+        rw [← sq_abs]; field_simp
+    have htend : Filter.Tendsto (fun t : ℝ => K * |t|) (nhdsWithin 0 {(0 : ℝ)}ᶜ) (nhds 0) := by
+      have h := (tendsto_const_nhds (x := K)).mul (continuous_abs.tendsto (0 : ℝ))
+      simp only [abs_zero, mul_zero] at h
+      exact h.mono_left nhdsWithin_le_nhds
+    exact squeeze_zero_norm hsl htend
+  · -- x > 0
+    exact (horizonAmp_hasDerivAt m hm (⇑f) kd hkd hx).differentiableAt
+
 end QIQTH.Fock.StressTensor
