@@ -4010,6 +4010,10 @@ namespace QIQTH.AxiomAudit
 -- So deviceVec(0)=√R ζ=ξ, J·deviceVec(0)=Jξ ⇒ g-function value g(0)=⟪η,Jξ⟫ = the GConstancy RHS. The cfcCont↔CFC
 -- bridge (borelFC of continuous fn = Mathlib CFC) realized via the sqrt-uniqueness pattern, no new axiom.
 #print axioms QIQTH.devCorrExt_ofReal_inner
+#print axioms QIQTH.StandardSubspaceModular.borelFC_sub
+-- expected: standard only — borelFC LINEARITY (subtraction): (f−g)(T)=f(T)−g(T), from borelFC_add+borelFC_neg
+-- (=borelFC_smul(−1)). Step (i) of the strong-holomorphy diff-quotient: deviceVec(z)−deviceVec(z₀) =
+-- borelFC(devChar z − devChar z₀)ζ, so the slope = borelFC(Δ_z)ζ with Δ_z=(devChar z−devChar z₀)/(z−z₀).
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable

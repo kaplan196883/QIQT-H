@@ -1046,6 +1046,28 @@ theorem borelFC_smul (T : H →L[ℂ] H) (ha : IsSelfAdjoint T) (c : ℂ) {f : s
       = c • borelFC T ha hf hC0 hC :=
   (PVM_of_selfAdjoint T ha).boundedFC_smul c hf hC0 hC
 
+/-- `borelFC` is additive-inverse compatible: `(-f)(T) = -f(T)` (from `borelFC_smul (-1)`). -/
+theorem borelFC_neg (T : H →L[ℂ] H) (ha : IsSelfAdjoint T) {f : spectrum ℝ T → ℂ}
+    {C : ℝ} (hf : Measurable f) (hC0 : 0 ≤ C) (hC : ∀ ω, ‖f ω‖ ≤ C) :
+    borelFC T ha hf.neg hC0 (fun ω => by simpa using hC ω)
+      = - borelFC T ha hf hC0 hC := by
+  have hs := borelFC_smul T ha (-1) hf hC0 hC
+  rw [neg_one_smul] at hs
+  rw [← hs]
+  exact borelFC_congr T ha _ _ _ _ _ _ (funext fun ω => by rw [neg_one_mul])
+
+/-- `borelFC` is subtractive: `(f − g)(T) = f(T) − g(T)` (lift of additivity + `borelFC_neg`). -/
+theorem borelFC_sub (T : H →L[ℂ] H) (ha : IsSelfAdjoint T) {f g : spectrum ℝ T → ℂ}
+    {Cf Cg : ℝ} (hf : Measurable f) (hg : Measurable g) (hCf0 : 0 ≤ Cf) (hCg0 : 0 ≤ Cg)
+    (hCf : ∀ ω, ‖f ω‖ ≤ Cf) (hCg : ∀ ω, ‖g ω‖ ≤ Cg) :
+    borelFC T ha (hf.sub hg) (add_nonneg hCf0 hCg0)
+        (fun ω => (norm_sub_le _ _).trans (add_le_add (hCf ω) (hCg ω)))
+      = borelFC T ha hf hCf0 hCf - borelFC T ha hg hCg0 hCg := by
+  have hngb : ∀ ω, ‖-g ω‖ ≤ Cg := fun ω => by simpa using hCg ω
+  have hadd := borelFC_add T ha hf hg.neg hCf0 hCg0 hCf hngb
+  rw [borelFC_neg T ha hg hCg0 hCg] at hadd
+  rw [sub_eq_add_neg, ← hadd]
+
 variable (S : StandardSubspace H)
 
 /-- The bounded Borel FC of `R = rvdRC S` on a continuous function, with the automatic compact-sup
