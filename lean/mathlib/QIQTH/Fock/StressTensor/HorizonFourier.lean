@@ -161,4 +161,16 @@ theorem Krep_deriv_norm_bound (m : ℝ) (hm : 0 ≤ m) (f : V → ℂ) (x : V) {
       ≤ m * (Real.cosh R * (|x 0| + |x 1|)) := mul_le_mul_of_nonneg_left hg hm
     _ = m * Real.cosh R * (|x 0| + |x 1|) := by ring
 
+/-- **Integrability of the domination bound** (`bound_integrable`).  For a continuous, compactly-supported
+    test function `f`, the bound `m·cosh R·(|x₀|+|x₁|)·‖f x‖` is continuous and compactly-supported (it
+    vanishes wherever `f` does), hence integrable. -/
+theorem Krep_bound_integrable (m : ℝ) (f : V → ℂ) (hf : Continuous f)
+    (hf_supp : HasCompactSupport f) (R : ℝ) :
+    Integrable (fun x => m * Real.cosh R * (|x 0| + |x 1|) * ‖f x‖) := by
+  have c1 : Continuous (fun x : V => |x 0| + |x 1|) :=
+    (continuous_abs.comp (continuous_apply 0)).add (continuous_abs.comp (continuous_apply 1))
+  have cont : Continuous (fun x : V => m * Real.cosh R * (|x 0| + |x 1|) * ‖f x‖) :=
+    (continuous_const.mul c1).mul hf.norm
+  exact cont.integrable_of_hasCompactSupport (hf_supp.norm.mul_left)
+
 end QIQTH.Fock.StressTensor

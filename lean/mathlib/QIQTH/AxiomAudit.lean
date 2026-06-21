@@ -4497,6 +4497,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ Stress-tensor Route B: the domination bound (h_bound ingredient). For |θ|≤R, the Krep θ-derivative
 -- integrand is ≤ m·cosh R·(|x₀|+|x₁|)·‖f x‖ (‖e^{iφ}‖=1 via Complex.norm_exp; |sinh θ|,|cosh θ|≤cosh R via abs_sinh/cosh_abs/cosh_le_cosh).
 -- Continuous + compactly-supported in x for such f ⟹ integrable — the domination the differentiation-under-the-integral for kd=Krep' needs.
+#print axioms QIQTH.Fock.StressTensor.Krep_bound_integrable
+-- expected: standard only — ★ Stress-tensor Route B: bound_integrable ingredient. For continuous compactly-supported f, the bound
+-- m·cosh R·(|x₀|+|x₁|)·‖f x‖ is continuous + compactly-supported (vanishes where f does) ⟹ integrable. With Krep_integrand_hasDerivAt
+-- (h_diff) and Krep_deriv_norm_bound (h_bound), the differentiation-under-the-integral for HasDerivAt (Krep m f) kd is now assemblable.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,
