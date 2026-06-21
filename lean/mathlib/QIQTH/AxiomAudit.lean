@@ -4010,6 +4010,11 @@ namespace QIQTH.AxiomAudit
 -- So deviceVec(0)=√R ζ=ξ, J·deviceVec(0)=Jξ ⇒ g-function value g(0)=⟪η,Jξ⟫ = the GConstancy RHS. The cfcCont↔CFC
 -- bridge (borelFC of continuous fn = Mathlib CFC) realized via the sqrt-uniqueness pattern, no new axiom.
 #print axioms QIQTH.devCorrExt_ofReal_inner
+#print axioms QIQTH.tendsto_devChar_slope
+-- expected: standard only — POINTWISE diff-quotient convergence (piece 1 of strong-holo dominated convergence):
+-- (d_z(ω)−d_{z₀}(ω))/(z−z₀) → i·log((2−ω)/ω)·d_{z₀}(ω) as z→z₀ (z≠z₀), from hasDerivAt_devChar_Icc via
+-- hasDerivAt_iff_tendsto_slope + slope_def_field. Feeds tendsto_integral_filter_of_dominated_convergence ⇒
+-- ∫‖Δ_z−∂d‖²dμ→0 ⇒ Fréchet deriv of z↦deviceOpC(z)ζ (with borelFC_sub + borelFC_apply_norm_sq).
 #print axioms QIQTH.devCorrExt_inner
 -- expected: standard only — DIAGONAL operator identification (general z in half-strip): D_ξ(z)=⟪ξ,deviceOpC(z)ξ⟫.
 -- The scalar integral ∫d_z dμ^R_ξ IS the diagonal device-operator expectation (inner_borelFC+bilinDiag_self+diagInt).

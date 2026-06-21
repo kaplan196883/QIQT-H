@@ -648,6 +648,23 @@ theorem devCorrExt_ofReal_inner (S : StandardSubspace H) (ξ : H) (t : ℝ) :
   rw [rvdSpec_deviceOpReal, devCorrExt]
   rfl
 
+open QIQTH.StandardSubspaceModular in
+/-- **Pointwise difference-quotient convergence of the device character** (piece 1 of the strong-holomorphy
+    dominated-convergence argument): for each spectral point `ω`, the slope
+    `(d_z(ω) − d_{z₀}(ω))/(z − z₀) → i·log((2−ω)/ω)·d_{z₀}(ω)` as `z → z₀` (`z ≠ z₀`).  Immediate from
+    `hasDerivAt_devChar_Icc` via `hasDerivAt_iff_tendsto_slope` (`slope_def_field`).  Fed into
+    `tendsto_integral_filter_of_dominated_convergence` to drive `∫‖Δ_z − ∂_z d‖² dμ^R_ζ → 0`, hence the
+    Fréchet derivative of `z ↦ deviceOpC(z)ζ` (via `borelFC_sub` + `borelFC_apply_norm_sq`). -/
+theorem tendsto_devChar_slope (S : StandardSubspace H) (z₀ : ℂ) (ω : spectrum ℝ (rvdRC S)) :
+    Filter.Tendsto (fun z => (devChar z (ω : spectrum ℝ (rvdRC S)).val
+        - devChar z₀ (ω : spectrum ℝ (rvdRC S)).val) / (z - z₀)) (nhdsWithin z₀ {z₀}ᶜ)
+      (nhds (Complex.I * (Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val)
+        / (ω : spectrum ℝ (rvdRC S)).val) : ℂ) * devChar z₀ (ω : spectrum ℝ (rvdRC S)).val)) := by
+  refine (hasDerivAt_iff_tendsto_slope.mp
+    (hasDerivAt_devChar_Icc (rvdRC_spectrum_mem_Icc S ω) z₀)).congr'
+    (Filter.Eventually.of_forall fun z => ?_)
+  rw [slope_def_field]
+
 /-- **Diagonal operator identification of the device strip extension** (general `z` in the half-strip):
     `D_ξ(z) = ⟪ξ, deviceOpC(z) ξ⟫`.  The scalar integral `∫ d_z dμ^R_ξ` IS the diagonal expectation of the
     device operator `d_z(R)` (via `inner_borelFC` + `bilinDiag_self` + `diagInt`).  This connects the proven
