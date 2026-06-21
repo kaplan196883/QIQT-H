@@ -398,4 +398,24 @@ theorem boostEnergy_eq_neg_stressFlux (m : ℝ) (hm : 0 < m) (f : V → ℂ) (kd
     Complex.ofReal_im, Complex.re_ofNat, Complex.im_ofNat]
   ring
 
+/-- **★★★★ Route B, hkd discharged: for a compactly-supported test function the wedge mode is differentiable
+    and the horizon stress flux equals `−2π·rapidityMomentum(Krep)(Krep')`.**  Instantiates
+    `stressFluxKK_eq_neg_rapMom` with the rapidity derivative `Krep' = kd` produced by `Krep_hasDerivAt`,
+    removing the differentiability hypothesis `hkd` (the hardest on-shell regularity gate) from the labelled
+    inputs.  Only the softer horizon-amplitude regularity (`Differentiable ℝ horizonAmp` and integrability)
+    remains as labelled hypotheses; both follow from `Krep` being Schwartz-on-rapidity. -/
+theorem stressFluxKK_eq_neg_rapMom_cptSupp (m : ℝ) (hm : 0 < m) (f : V → ℂ)
+    (hf : Continuous f) (hf_supp : HasCompactSupport f)
+    (hA : Integrable (horizonAmp m f)) (hAd : Differentiable ℝ (horizonAmp m f))
+    (hdAc : Continuous (deriv (horizonAmp m f))) (hdA : Integrable (deriv (horizonAmp m f)))
+    (hFdA : Integrable (𝓕 (deriv (horizonAmp m f))))
+    (hff : Integrable (fun θ => (starRingEnd ℂ) (horizonAmp m f θ) * horizonAmp m f θ))
+    (h1 : Integrable (fun θ => (starRingEnd ℂ) (deriv (horizonAmp m f) θ) * horizonAmp m f θ))
+    (h2 : Integrable (fun θ => (starRingEnd ℂ) (horizonAmp m f θ) * deriv (horizonAmp m f) θ)) :
+    ∃ kd, (∀ θ, HasDerivAt (fun θ => Krep m f θ) (kd θ) θ) ∧
+      stressFluxKK m f = -(2 * Real.pi) * rapidityMomentum (fun θ => Krep m f θ) kd := by
+  refine ⟨_, fun θ => Krep_hasDerivAt m hm.le f hf hf_supp θ,
+    stressFluxKK_eq_neg_rapMom m hm f _ (fun θ => Krep_hasDerivAt m hm.le f hf hf_supp θ)
+      hA hAd hdAc hdA hFdA hff h1 h2⟩
+
 end QIQTH.Fock.StressTensor

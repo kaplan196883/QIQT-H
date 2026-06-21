@@ -4506,6 +4506,11 @@ namespace QIQTH.AxiomAudit
 -- continuous compactly-supported f, HasDerivAt (Krep m f) kd θ₀ with kd θ₀=(1/√2)∫ e^{−iη}·(−i·m(x₀sinh θ₀−x₁cosh θ₀))·f dx (=Krep').
 -- Differentiation under the integral (hasDerivAt_integral_of_dominated_loc_of_deriv_le) via Krep_integrand_hasDerivAt (h_diff) +
 -- Krep_deriv_norm_bound (h_bound) + Krep_bound_integrable. DISCHARGES the hkd hypothesis of stressFluxKK_eq_neg_rapMom/boostEnergy_eq_neg_stressFlux.
+#print axioms QIQTH.Fock.StressTensor.stressFluxKK_eq_neg_rapMom_cptSupp
+-- expected: standard only — ★★★★ Stress-tensor Route B, hkd DISCHARGED: for a continuous compactly-supported test function f,
+-- ∃ kd (=Krep'), (∀θ HasDerivAt (Krep m f)(kd θ)θ) ∧ stressFluxKK m f = −2π·rapidityMomentum(Krep m f)(kd). Instantiates
+-- stressFluxKK_eq_neg_rapMom with Krep_hasDerivAt, REMOVING the hardest regularity gate (Krep differentiability) from the labelled
+-- inputs. Only the softer horizon-amplitude regularity (Differentiable ℝ horizonAmp + integrability) remains labelled (Schwartz-on-rapidity).
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,
