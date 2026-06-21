@@ -4383,6 +4383,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — wedge BW with KMS-UNIQUENESS DERIVED: modUnitary=boostUnitary(−2π·) from hcarrier +
 -- V=boost + genuine StripKMSrvd, via oneParticleBW_complete (RvD Thm 3.8). Boost structural facts (isometry/group/
 -- continuity/𝒦-inv) all derived from boostUnitary lemmas. Replaces the bundled opaque hUniq + vacuous StripKMS.
+#print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
+-- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
+-- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,
+-- then wedge_hBoostCharge_of_smooth. With wedge_hBoostCharge_of_smooth, BOTH WedgeKMSFlux derivative identities are now
+-- derived from one smooth state ⟹ the bundled physics collapses to the SINGLE scalar hTkk:(2π/ℏ)T_kk=2π·Im∫f̄f' (the
+-- free-field boost/modular energy = stress flux). All analytic/operator/modular machine-checked; only the scalar remains.
 #print axioms QIQTH.WedgeKMSToGR.qiqt_gr_from_wedge_kms_complete
 -- expected: standard only — ★★★★ THE GOAL THEOREM with KMS-uniqueness DERIVED. Identical to qiqt_gr_from_wedge_kms
 -- but the wedge KMS input is the GENUINE non-vacuous WedgeKMSFlux_complete (bundling StripKMSrvd = RvD Def 3.4),

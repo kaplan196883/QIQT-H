@@ -1084,4 +1084,43 @@ theorem component_hFlux_of_wedgeKMS_complete (m : ℝ)
     hbridge.unique hHil
   exact_mod_cast mul_left_cancel₀ Complex.I_ne_zero huniq
 
+/-- **★★★ The `WedgeKMSFlux` localization slot `hbridge`, DERIVED for a smooth wedge state.**  The modular-energy
+    derivative `t ↦ ⟪ξ, Δ^{it} ξ⟫` equals `i·(2π/ℏ)·T_kk` for any smooth wedge state `ξ = f.toLp`, via the BW
+    identification `modUnitary = boostUnitary` (`oneParticleBW_wedge_complete`, derived from the genuine
+    `StripKMSrvd`) reducing the MODULAR derivative to the BOOST derivative, then `wedge_hBoostCharge_of_smooth`.
+    Together with `wedge_hBoostCharge_of_smooth` (the boost-charge slot), this means BOTH derivative identities
+    of `WedgeKMSFlux` are now DERIVED from the single smooth state — so the entire bundled physics of the
+    wedge-KMS input collapses to the ONE scalar stress identification `hTkk : (2π/ℏ)·T_kk = 2π·Im∫f̄f'` (the
+    boost/modular energy = stress flux), plus standardness and the genuine KMS condition.  Everything analytic,
+    operator, and modular is machine-checked; the irreducible remainder is exactly the free-field stress-tensor
+    scalar. -/
+theorem wedge_hbridge_of_smooth (m : ℝ)
+    (S : StandardSubspace (Lp ℂ 2 (volume : Measure ℝ)))
+    (V : ℝ → (Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ)))
+    (hcarrier : (S.toClosedSubmodule : Set (Lp ℂ 2 (volume : Measure ℝ)))
+        = closure (Submodule.span ℝ (wedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ))))
+    (hVboost : ∀ t x, V t x = boostUnitary (-(2 * Real.pi * t)) x)
+    (hKMS : StripKMSrvd V (S.toClosedSubmodule : Set _))
+    (f f' : ℝ → ℂ) (hf2 : MemLp f 2 (volume : Measure ℝ))
+    (hf_int : Integrable f (volume : Measure ℝ))
+    (hF0_int : Integrable (fun θ => (starRingEnd ℂ) (f θ) * f θ) (volume : Measure ℝ))
+    (hf_meas : AEStronglyMeasurable f (volume : Measure ℝ))
+    (hfd : ∀ x, HasDerivAt f (f' x) x)
+    (hf'_meas : AEStronglyMeasurable f' (volume : Measure ℝ))
+    (B : ℝ) (hB : ∀ x, ‖f' x‖ ≤ B) (hbar Tkk : ℝ)
+    (hTkk : 2 * Real.pi / hbar * Tkk
+        = (2 * Real.pi * ∫ θ, (starRingEnd ℂ) (f θ) * f' θ ∂(volume : Measure ℝ)).im) :
+    HasDerivAt
+      (fun t : ℝ => inner ℂ (hf2.toLp f)
+        (QIQTH.StandardSubspaceModular.modUnitary S t (hf2.toLp f)))
+      (Complex.I * ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ)) 0 := by
+  have hBW := oneParticleBW_wedge_complete m S V hcarrier hVboost hKMS
+  have hfun : (fun t : ℝ => inner ℂ (hf2.toLp f)
+        (QIQTH.StandardSubspaceModular.modUnitary S t (hf2.toLp f)))
+      = (fun t : ℝ => inner ℂ (hf2.toLp f) (boostUnitary (-(2 * Real.pi * t)) (hf2.toLp f))) := by
+    funext t
+    rw [show QIQTH.StandardSubspaceModular.modUnitary S t = V t from hBW t, hVboost t]
+  rw [hfun]
+  exact wedge_hBoostCharge_of_smooth f f' hf2 hf_int hF0_int hf_meas hfd hf'_meas B hB hbar Tkk hTkk
+
 end QIQTH.Fock.OneParticleBW
