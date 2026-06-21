@@ -1128,6 +1128,44 @@ theorem tendsto_integral_devChar_diff_sq (S : StandardSubspace H) (ζ : H) {z₀
       simpa [hF] using h2.norm.pow 2
   simpa using hconv
 
+open QIQTH.StandardSubspaceModular Filter MeasureTheory in
+/-- **The device vector is continuous on the closed half-strip** (the `DiffContOnCl` continuity-to-closure):
+    `ContinuousOn (deviceVecF S ζ) {−1/2 ≤ Im z ≤ 0}`.  At each `z₀`, `‖deviceVecF z − deviceVecF z₀‖ =
+    √(∫‖d_z − d_{z₀}‖² dμ^R_ζ)` (`deviceVecF_eq_of_mem` + `deviceOpC_diff_normSq` + `Real.sqrt_sq`), which
+    `→ √0 = 0` (`tendsto_integral_devChar_diff_sq` + `Real.sqrt` continuity).  Together with
+    `differentiableOn_deviceVecF` this is the device-vector half of `DiffContOnCl` for the g-function. -/
+theorem deviceVecF_continuousOn (S : StandardSubspace H) (ζ : H) :
+    ContinuousOn (deviceVecF S ζ) (Complex.im ⁻¹' Set.Icc (-(1 / 2) : ℝ) 0) := by
+  intro z₀ hz₀
+  obtain ⟨hz01, hz02⟩ := (Set.mem_preimage.mp hz₀ : z₀.im ∈ Set.Icc (-(1 / 2) : ℝ) 0)
+  rw [ContinuousWithinAt, tendsto_iff_norm_sub_tendsto_zero]
+  have hsqrt : Tendsto (fun z => Real.sqrt (∫ ω, ‖devChar z (ω : spectrum ℝ (rvdRC S)).val
+      - devChar z₀ (ω : spectrum ℝ (rvdRC S)).val‖ ^ 2 ∂(rvdSpecMeasure S ζ)))
+      (nhdsWithin z₀ (Complex.im ⁻¹' Set.Icc (-(1 / 2) : ℝ) 0)) (nhds 0) := by
+    have h := (Real.continuous_sqrt.tendsto 0).comp (tendsto_integral_devChar_diff_sq S ζ hz02 hz01)
+    simpa using h
+  refine hsqrt.congr' ?_
+  filter_upwards [self_mem_nhdsWithin] with z hzs
+  obtain ⟨hz1, hz2⟩ := (Set.mem_preimage.mp hzs : z.im ∈ Set.Icc (-(1 / 2) : ℝ) 0)
+  rw [deviceVecF_eq_of_mem S ζ hz2 hz1, deviceVecF_eq_of_mem S ζ hz02 hz01,
+    ← deviceOpC_diff_normSq S ζ hz2 hz1 hz02 hz01, Real.sqrt_sq (norm_nonneg _)]
+
+open QIQTH.StandardSubspaceModular in
+/-- **The g-function is bounded-holomorphic (`DiffContOnCl`) on the half-strip** (the full analytic regularity
+    for Phragmén–Lindelöf): holomorphic on the open half-strip (`differentiableOn_gFunction`) and continuous up
+    to the closure `{−1/2 ≤ Im z ≤ 0}` (the bilinear `modConjBilin` of the continuous device vector
+    `deviceVecF_continuousOn` and the continuous V-orbit `gaussSmearC`).  With the uniform bound
+    (`gFunction_norm_le`) and the two edge realities this is the exact input the half-strip constancy consumes. -/
+theorem diffContOnCl_gFunction (S : StandardSubspace H) (ζ : H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ}
+    (hn : 0 < n) (η : H) (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖) :
+    DiffContOnCl ℂ (fun z => modConjBilin S (deviceVecF S ζ z) (gaussSmearC V n η z))
+      (Complex.im ⁻¹' Set.Ioo (-(1 / 2) : ℝ) 0) := by
+  refine ⟨differentiableOn_gFunction S ζ hn η hcont hbd, ?_⟩
+  rw [Complex.closure_preimage_im, closure_Ioo (by norm_num : (-(1 / 2) : ℝ) ≠ 0)]
+  exact ContinuousOn.clm_apply
+    ((modConjBilin S).continuous.comp_continuousOn (deviceVecF_continuousOn S ζ))
+    (differentiable_gaussSmearC hn η hcont hbd).continuous.continuousOn
+
 open QIQTH.StandardSubspaceModular in
 /-- **Diagonal operator identification of the device strip extension** (general `z` in the half-strip):
     `D_ξ(z) = ⟪ξ, deviceOpC(z) ξ⟫`.  The scalar integral `∫ d_z dμ^R_ξ` IS the diagonal expectation of the

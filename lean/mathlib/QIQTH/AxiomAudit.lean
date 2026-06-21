@@ -4022,6 +4022,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.gFunction_zero
 -- expected: standard only — g(0)=⟪Jξ,η_n⟫ (ξ=√R ζ, η_n=gaussSmear): the Phragmén–Lindelöf comparison point. With g
 -- const this = g(t). Via deviceVecF_zero + gaussSmearC_zero + modConjBilin_apply.
+#print axioms QIQTH.deviceVecF_continuousOn
+-- expected: standard only — DEVICE VECTOR CONTINUOUS on closed half-strip: ‖deviceVecF z−deviceVecF z₀‖=√(∫‖d_z−d_{z₀}
+-- ‖²dμ)→0 (deviceOpC_diff_normSq+tendsto_integral_devChar_diff_sq+Real.sqrt_sq, congr' on self_mem_nhdsWithin).
+#print axioms QIQTH.diffContOnCl_gFunction
+-- expected: standard only — ★★ g-FUNCTION DiffContOnCl (full analytic regularity for Phragmén–Lindelöf): holo on open
+-- half-strip (differentiableOn_gFunction) + continuous to closure {−1/2≤Im≤0} (modConjBilin bilinear ∘ deviceVecF_
+-- continuousOn + gaussSmearC continuous, ContinuousOn.clm_apply). With gFunction_norm_le + edge realities ⇒ constancy.
 #print axioms QIQTH.tendsto_integral_devChar_diff_sq
 -- expected: standard only — DEVICE-CHAR L² CONTINUITY (dominated conv): ∫‖d_z−d_{z₀}‖²dμ^R_ζ→0 as z→z₀ in closed
 -- half-strip. tendsto_integral_filter_of_dominated_convergence: integrand→0 ptwise (hasDerivAt_devChar_Icc.continuousAt)
