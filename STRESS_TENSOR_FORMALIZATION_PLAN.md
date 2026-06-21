@@ -1,5 +1,22 @@
 # Free-field stress-tensor formalization — discharging `hTkk` (GPT target #1, scalar half)
 
+### ✅✅✅✅✅ STATUS UPDATE 5 (2026-06-22): ROUTE B FULLY CLOSED — `hFdA` DISCHARGED, NO REMAINING HYPOTHESES (commit `cbefff8`)
+
+**Route B is DONE, axiom-free, for the Schwartz test class.** For ANY Schwartz `f` and `m > 0`:
+`stressFluxKK m f = −2π·rapidityMomentum(Krep)(Krep')` (`stressFluxKK_eq_neg_rapMom_schwartz_closed`) and its
+GR-bridge form `(2π·∫conj(Krep)·Krep').im = −stressFluxKK m f` (`boostEnergy_eq_neg_stressFlux_schwartz_closed`)
+— with **NO remaining hypotheses**, depending only on `[propext, Classical.choice, Quot.sound]`. The bundled GR
+chain scalar `T_kk := −(ℏ/2π)·stressFluxKK` makes the labelled `hTkk` an unconditional free-field theorem.
+
+All **9 regularity gates** discharged (`hkd hA hAd hff hdA h1 h2 hdAc hFdA`). The last gate `hFdA`
+(`Integrable 𝓕(deriv(horizonAmp))`) — repeatedly assessed as a deep frontier requiring a `C³` layer or a
+from-scratch `L¹∩L²` density theorem — was discharged by a **density-free tempered-distribution route**
+(`QIQTH/Fock/StressTensor/L2Plancherel.lean`): `fourier_lp_ae_eq` proves the classical-`𝓕` = `L²`-`𝓕`
+coincidence via the multiplication formula + distribution injectivity, and `fourier_conj_parseval_L2` gives the
+inversion-free conjugate Parseval (needing only `A,A' ∈ L²`), so the chain was re-derived (`*_L2`) dropping the
+inversion hypotheses `(hdAc, hFdA)` for `MemLp·2`. Imports the 2025 Mathlib `LpSpace`/`TemperedDistribution`
+modules. (`STATUS UPDATE 4` below is superseded.)
+
 ### ✅✅✅ STATUS UPDATE 4 (2026-06-22): Route B CORE COMPLETE + a soundness subtlety on the remaining hyps
 
 **Proven, axiom-free (commits up to `ff200b5`):** the target `stressFluxKK = −2π·rapidityMomentum(Krep)`
