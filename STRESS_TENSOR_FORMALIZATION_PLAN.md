@@ -78,6 +78,24 @@ Define `Tkk m f λ := ‖∂_λ (horizonField m f) λ‖^2` (real, ≥0) and
 finiteness on the domain. This is the genuine **`T_kk` made into a defined quantity** (no longer a label).
 New: `NullStressFlux.lean`.
 
+### ✅✅ STATUS UPDATE 3 (2026-06-22): ROUTE B TARGET REACHED — `stressFluxKK = −2π·rapidityMomentum(Krep)`
+
+`stressFluxKK_eq_neg_rapMom` (commit `ed654a1`, axiom-free): the **defined** free-field horizon null stress
+flux `∫_H λ T_kk dλ` is **proven** `= −2π·rapidityMomentum(Krep m f)(Krep')` — exactly the scalar `hTkk`
+asserted. The entire Fourier-analytic computation is machine-checked end-to-end: change of variables (`χ_H` is
+a genuine `𝓕`), multiplication formula, conjugate **Parseval** (sesquilinear + inversion), **Fourier-derivative**,
+**self-adjointness** of `−i∂_θ`, the `λ`-rescale, the chain-rule differentiation of the horizon amplitude, and
+the `k↦θ` change of variables with the orientation sign. The free-field stress tensor was *never* built as an
+operator — instead the null flux was **defined** (`Tkk=‖∂_λφ_H‖²`, `stressFluxKK=∫λ·Tkk`) and **proven** equal
+to the boost momentum.
+
+**Remaining for full closure (the cited regularity frontier — NOT new mathematics):** discharge the labeled
+hypotheses of `stressFluxKK_eq_neg_rapMom`, all genuine on-shell regularity of the wedge mode, true for
+nicely-decaying test functions: (a) `kd = Krep'` (differentiate `Krep = (1/√2)·minkowskiFourier f (massShell m θ)`);
+(b) `Differentiable ℝ (horizonAmp)` (the indicator needs `Krep(+∞)=0` smooth → restrict to compactly-supported
+rapidity test functions); (c) the integrability hypotheses. Then **Phase 4**: wire `stressFluxKK_eq_neg_rapMom`
+into `WedgeKMSToGR` (define the chain's `T_kk` via `stressFluxKK`). The mathematical content of Route B is DONE.
+
 ### ✅ STATUS UPDATE 2 (2026-06-21, post GPT-5.5 consult): the obstacle was a DEFINITION BUG — 3b is TRACTABLE
 
 GPT-5.5 found (and I verified independently — the counterexample is decisive) that the **half-line** definition
