@@ -4616,6 +4616,13 @@ namespace QIQTH.AxiomAudit
 -- then wedge_hBoostCharge_of_smooth. With wedge_hBoostCharge_of_smooth, BOTH WedgeKMSFlux derivative identities are now
 -- derived from one smooth state ⟹ the bundled physics collapses to the SINGLE scalar hTkk:(2π/ℏ)T_kk=2π·Im∫f̄f' (the
 -- free-field boost/modular energy = stress flux). All analytic/operator/modular machine-checked; only the scalar remains.
+#print axioms QIQTH.Fock.StressTensor.wedge_boostCharge_eq_neg_stressFlux
+-- expected: standard only — ★★★★★ ROUTE B WIRED INTO THE WEDGE BOOST CHARGE. For ANY Schwartz g, m>0, the boost/modular-energy
+-- derivative of the free-field wedge mode Krep m g equals i·(−stressFluxKK m g) — the conserved boost Killing charge IS the
+-- proven Route-B horizon stress flux, with NO hTkk hypothesis. Discharges hTkk of hasDerivAt_inner_boostUnitary_imaginary
+-- (Tkk:=−(ℏ/2π)·stressFluxKK) via boostEnergy_eq_neg_stressFlux_schwartz_closed; all wedge-mode regularity supplied here
+-- (schwartz_Krep_memLp, Krep_integrable, MemLp.star.integrable_mul, Krep_deriv_bounded, schwartz_Krep_hasDerivAt). The hTkk
+-- scalar — the last labelled physics input of the localization slot — is now an UNCONDITIONAL theorem for the free field.
 #print axioms QIQTH.WedgeKMSToGR.qiqt_gr_from_wedge_kms_complete
 -- expected: standard only — ★★★★ THE GOAL THEOREM with KMS-uniqueness DERIVED. Identical to qiqt_gr_from_wedge_kms
 -- but the wedge KMS input is the GENUINE non-vacuous WedgeKMSFlux_complete (bundling StripKMSrvd = RvD Def 3.4),
