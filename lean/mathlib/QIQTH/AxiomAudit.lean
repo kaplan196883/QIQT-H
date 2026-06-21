@@ -4592,6 +4592,13 @@ namespace QIQTH.AxiomAudit
 -- stressFluxKK m f = −2π·rapidityMomentum(Krep)(Krep') with the ONLY remaining hypothesis hFdA : Integrable(𝓕(deriv(horizonAmp m f))).
 -- Assembles the 8 axiom-free discharges (hkd hA hAd hff hdA h1 h2 hdAc) into stressFluxKK_eq_neg_rapMom. hFdA needs the C³ layer or an
 -- L²-Plancherel (Lp.inner_fourier_eq) refactor of fourier_conj_parseval avoiding Fourier inversion. The single open technical gate of Route B.
+#print axioms QIQTH.Fock.StressTensor.fourier_lp_ae_eq
+-- expected: standard only — ★★★★ Stress-tensor Route B (hFdA UNBLOCK): the density-free L²-Plancherel coincidence. For g∈L¹∩L²,
+-- ⇑(𝓕_{L²}(g.toLp 2)) =ᵐ 𝓕 g (classical Fourier integral). Proved WITHOUT density: both, as tempered distributions, pair with a
+-- complex Schwartz Ψ by ∫(𝓕Ψ)·g = ∫Ψ·(𝓕g) (real_fourier_mul_formula = multiplication formula), so they agree as distributions,
+-- and ae_eq_of_integral_contDiff_smul_eq (distribution injectivity) gives the a.e. equality. KEY: Lp.fourier_toTemperedDistribution_eq,
+-- TemperedDistribution.fourier_apply, HasCompactSupport.toSchwartzMap (real Cc^∞ test → complex Schwartz). The bridge importing
+-- Mathlib's L² Plancherel isometry (Lp.inner_fourier_eq) into the classical-𝓕 Parseval pairing — the route to discharging hFdA.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

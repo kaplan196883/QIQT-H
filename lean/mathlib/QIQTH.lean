@@ -359,6 +359,7 @@ import QIQTH.Fock.StressTensor.NullStressFlux
 import QIQTH.Fock.StressTensor.HorizonPlancherel
 import QIQTH.Fock.StressTensor.HorizonFourier
 import QIQTH.Fock.StressTensor.HorizonParseval
+import QIQTH.Fock.StressTensor.L2Plancherel
 import QIQTH.StripUniqueness
 import QIQTH.KMSCorrelation
 import QIQTH.Fock.RelativeModularFlow
