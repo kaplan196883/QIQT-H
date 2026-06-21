@@ -903,6 +903,15 @@ theorem modConj_rvdSqrtR (S : StandardSubspace H) (y : H) :
   have h := modConj_rvdSqrtR_modConj S (modConj S y)
   rwa [modConj_sq] at h
 
+/-- **The bottom-edge sqrt swap for a `J`-fixed vector**: `J (2−R)^{1/2} ζ = R^{1/2} ζ` when `J ζ = ζ`.
+    This is the device/J algebra of the RvD Theorem 3.8 bottom edge `z = t − i/2`: the device there is
+    `(2−R)^{1/2}` and `J` swaps it to `R^{1/2}`, turning the bottom vector into `ξ = R^{1/2} ζ` (RvD's
+    `(2−R)^{1/2}ζ = Jξ`).  From `modConj_rvdSqrtTwoSubR_modConj` (`J (2−R)^{1/2} J = R^{1/2}`) at `J ζ = ζ`. -/
+theorem modConj_rvdSqrtTwoSubR_of_fixed (S : StandardSubspace H) {ζ : H} (hζ : modConj S ζ = ζ) :
+    modConj S (rvdSqrtTwoSubR S ζ) = rvdSqrtR S ζ := by
+  have h := modConj_rvdSqrtTwoSubR_modConj S ζ
+  rwa [hζ] at h
+
 /-- **`J T J = T`** — the modular conjugation commutes with the polar radius `T = R^{1/2}(2−R)^{1/2}`.
     `J T J = (J R^{1/2} J)(J (2−R)^{1/2} J) = (2−R)^{1/2} R^{1/2} = R^{1/2}(2−R)^{1/2} = T`, using both
     sqrt-reflections and that the square roots commute (`rvdSqrtR_commute_rvdSqrtTwoSubR`).  Hence

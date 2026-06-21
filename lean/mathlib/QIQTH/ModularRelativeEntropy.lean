@@ -1042,6 +1042,20 @@ theorem deviceVecF_bottom_eq (S : StandardSubspace H) (ζ : H) (t : ℝ) :
     deviceOpC_bottomEdge_eq, ContinuousLinearMap.mul_apply]
 
 open QIQTH.StandardSubspaceModular in
+/-- **Device/J commute on the bottom edge**: `J·deviceVecF(t − i/2) = Δ^{it}·(J·deviceOpC(−i/2) ζ)`.  The
+    modular conjugation pulls through `Δ^{it}` (`modConj_commute_modUnitary`) after `deviceVecF_bottom_eq`.
+    With `deviceOpC(−i/2) = √(2−R)` and `J √(2−R) ζ = √R ζ` (`modConj_rvdSqrtTwoSubR_of_fixed`, `J ζ = ζ`) this
+    becomes `Δ^{it}·√R ζ = Δ^{it}ξ` — the second slot of the g-function bottom edge `g(t − i/2)`, whose reality
+    is the KMS input (RvD's `(2−R)^{1/2}ζ = Jξ` device argument). -/
+theorem modConj_deviceVecF_bottom (S : StandardSubspace H) (ζ : H) (t : ℝ) :
+    modConj S (deviceVecF S ζ ((t : ℂ) - Complex.I / 2))
+      = modUnitary S t (modConj S (deviceOpC S (-(Complex.I / 2))
+          (by simp [Complex.neg_im, Complex.div_im, Complex.I_im])
+          (by rw [show (-(Complex.I / 2)).im = -(1 / 2) from by
+                simp [Complex.neg_im, Complex.div_im, Complex.I_im]]) ζ)) := by
+  rw [deviceVecF_bottom_eq, modConj_commute_modUnitary]
+
+open QIQTH.StandardSubspaceModular in
 /-- **Uniform bound of the device vector** `‖deviceVecF z‖ ≤ 2√2·‖ζ‖` for EVERY `z` (the device operator's
     `2√2` operator-norm bound, `deviceOpC_norm_le`, applied to `ζ`; `0` off the strip).  The bounded factor of
     the g-function `‖g(z)‖ ≤ 2√2·‖ζ‖·‖h(z)‖`, the bound input the Phragmén–Lindelöf constancy needs. -/

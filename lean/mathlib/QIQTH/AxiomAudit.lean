@@ -3713,6 +3713,9 @@ namespace QIQTH.AxiomAudit
 -- around via CFC.sqrt_unique — NOT general antilinear CFC). Bundle B ξ=J(R^{½}(Jξ)) as ℂ-linear
 -- (modConj_smul_conj×2), self-adjoint+positive (antiunitary modConj_inner_conj reduces ⟨Bx,y⟩ to
 -- conj⟨R^{½}Jx,Jy⟩, R^{½}≥0), B·B=2−R (modConjSqrtR_sq) ⇒ sqrt_unique ⇒ B=(2−R)^{½}. Unblocks JPJ=1−Q ⇒ J𝒦=(i𝒦)^⊥.
+#print axioms QIQTH.StandardSubspaceModular.modConj_rvdSqrtTwoSubR_of_fixed
+-- expected: standard only — BOTTOM-EDGE sqrt swap for J-fixed ζ: J(2−R)^{½}ζ=R^{½}ζ when Jζ=ζ (modConj_rvdSqrtTwoSubR_
+-- modConj at Jζ=ζ). RvD's (2−R)^{½}ζ=Jξ device argument: the −i/2 device √(2−R) swaps to √R=ξ. Step (a1) of bottom edge.
 #print axioms QIQTH.StandardSubspaceModular.modConj_rvdSqrtTwoSubR_modConj
 -- expected: standard only — symmetric sqrt-reflection J(2−R)^{½}J=R^{½}: immediate from J R^{½}J=(2−R)^{½}
 -- by sandwiching with J + J²=1. Toward JTJ=T ⇒ [J,T]=0 ⇒ JDJ=D ⇒ JPJ=1−Q ⇒ J𝒦=(i𝒦)^⊥.
@@ -4097,6 +4100,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.gFunction_norm_le
 -- expected: standard only — POINTWISE g-BOUND ‖g(z)‖≤2√2‖ζ‖·‖h(z)‖ (h=gaussSmearC): modConj_norm isometry +
 -- deviceVecF_norm_le + norm_inner_le_norm. With the Gaussian bound on ‖h‖ ⇒ uniform strip bound for Phragmén–Lindelöf.
+#print axioms QIQTH.modConj_deviceVecF_bottom
+-- expected: standard only — DEVICE/J COMMUTE on bottom edge: J·deviceVecF(t−i/2)=Δ^{it}·(J·deviceOpC(−i/2)ζ) (deviceVecF_
+-- bottom_eq + modConj_commute_modUnitary). With deviceOpC(−i/2)=√(2−R) + modConj_rvdSqrtTwoSubR_of_fixed ⇒ Δ^{it}·√R ζ=
+-- Δ^{it}ξ, the 2nd slot of g(t−i/2). Step (a1) of the bottom-edge reality (RvD device argument).
 #print axioms QIQTH.deviceVecF_bottom_eq
 -- expected: standard only — BOTTOM-EDGE device value deviceVecF(t−i/2)=Δ^{it}·deviceOpC(−i/2)ζ (=√(2−R)ζ off {0,2}):
 -- deviceVecF_eq_of_mem (mid-line Im=−1/2 in closed half-strip) + deviceOpC_bottomEdge_eq. The 2nd-slot device on the
