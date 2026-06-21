@@ -3452,9 +3452,10 @@ namespace QIQTH.AxiomAudit
 -- top edge F(t+i)=∫modChar t·(ω/(2−ω))dμ (modCorrExt_kms_flip), NOT the plain flip. Defect recorded machine-checked.
 #print axioms QIQTH.Fock.OneParticleBW.stripKMSrvd_real_midline
 -- expected: standard only — ★★ RvD Prop 3.5 applied to StripKMSrvd: discharges the Prop-3.5 step of hUniq from
--- the CORRECT labelled KMS input. StripKMSrvd's plain top-edge flip f(t−i)=⟪η,V_tξ⟫ IS conj(f(t)) automatically
--- (⟪η,V_tξ⟫=conj⟪V_tξ,η⟫ by inner_conj_symm, f(t)=⟪V_tξ,η⟫) ⇒ real_on_midline_of_conj_flip gives the half-strip
--- KMS form: bdd-holo f, f(t)=⟪V_tξ,η⟫, f(t−i/2) REAL. The reality input RvD Thm 3.8 consumes — axiom-free, the
+-- the CORRECT labelled KMS input. [CONVENTION CORRECTED 2026-06-21 to faithful RvD Def 3.4: f(t)=⟪η,V_tξ⟫ orbit in
+-- LINEAR slot; Δ satisfies this on Im<0, removing a vacuity hole.] Top-edge flip f(t−i)=⟪V_tξ,η⟫ IS conj(f(t))
+-- (⟪V_tξ,η⟫=conj⟪η,V_tξ⟫ by inner_conj_symm) ⇒ real_on_midline_of_conj_flip gives the half-strip
+-- KMS form: bdd-holo f, f(t)=⟪η,V_tξ⟫, f(t−i/2) REAL. The reality input RvD Thm 3.8 consumes — axiom-free, the
 -- genuine Prop-3.5 brick on the hUniq discharge spine (Thm 3.8's remaining g-pairing/device step still labelled).
 #print axioms QIQTH.Fock.OneParticleBW.stripKMSrvd_halfStripReal
 #print axioms QIQTH.Fock.OneParticleBW.oneParticleBW_of_stripKMSrvd

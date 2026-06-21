@@ -482,8 +482,16 @@ def StripKMS (V : ℝ → (H →L[ℂ] H)) (D : Set H) : Prop :=
     the **real subspace** `K` (`= 𝒦`) iff for every `ξ, η ∈ K` there is `f`
     * **bounded and continuous on the closed strip `{−1 ≤ Im z ≤ 0}`, analytic in the interior**
       (`DiffContOnCl` on the open strip `{−1 < Im < 0}` + a uniform bound `M`), with boundary values
-    * `f(t)   = ⟪V(t) ξ, η⟫`   (bottom edge `Im = 0`),
-    * `f(t−i) = ⟪η, V(t) ξ⟫`   (top edge `Im = −1`, the plain flip).
+    * `f(t)   = ⟪η, V(t) ξ⟫`   (bottom edge `Im = 0`),
+    * `f(t−i) = ⟪V(t) ξ, η⟫`   (top edge `Im = −1`, the plain flip).
+
+    **Convention (corrected 2026-06-21, RvD Def 3.4 read from source pp.194-195):** RvD writes `f(t)=⟨U_tξ, η⟩`
+    with `⟨·,·⟩` *linear-first* (forced — `⟨h(z), Δ^{it}ξ⟩` must be entire with `h(z)` entire), which in Mathlib
+    `inner` (conj-linear-first) is `inner ℂ η (V_t ξ)` — the orbit `V_tξ` in the LINEAR slot.  This is the
+    convention `Δ` actually satisfies: `⟪η, Δ^{iz}ξ⟫` is HOLOMORPHIC and extends to `Im z < 0` (RvD Lemma 3.6,
+    `R^{iz}` analytic for `Im z<0`).  The conjugate `⟪V_tξ, η⟫` is anti-holomorphic (extends to the *upper*
+    strip), so it would NOT be satisfied by `Δ` on this lower strip — the earlier statement of this kind was
+    the conjugate of Def 3.4 and is now corrected.
 
     This is the fix for the defect `stripKMS_trivial` exposes in `StripKMS`: the boundedness +
     continuity-to-the-closure (absent from `StripKMS`) is exactly what makes the extension **unique**
@@ -496,12 +504,13 @@ def StripKMSrvd (V : ℝ → (H →L[ℂ] H)) (K : Set H) : Prop :=
   ∀ ξ ∈ K, ∀ η ∈ K, ∃ f : ℂ → ℂ,
     DiffContOnCl ℂ f (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) ∧
     (∃ M : ℝ, ∀ z : ℂ, ‖f z‖ ≤ M) ∧
-    (∀ t : ℝ, f t = inner ℂ (V t ξ) η) ∧
-    (∀ t : ℝ, f ((t : ℂ) - Complex.I) = inner ℂ η (V t ξ))
+    (∀ t : ℝ, f t = inner ℂ η (V t ξ)) ∧
+    (∀ t : ℝ, f ((t : ℂ) - Complex.I) = inner ℂ (V t ξ) η)
 
 /-- **From RvD Definition 3.4 to the half-strip reality** (RvD Proposition 3.5 applied to `StripKMSrvd`).
-    The plain-flip top-edge value `f(t − i) = ⟪η, V_t ξ⟫` of `StripKMSrvd` is automatically `conj(f(t))`:
-    by conjugate symmetry `⟪η, V_t ξ⟫ = conj⟪V_t ξ, η⟫`, and `f(t) = ⟪V_t ξ, η⟫`.  So
+    The plain-flip top-edge value `f(t − i) = ⟪V_t ξ, η⟫` of `StripKMSrvd` is automatically `conj(f(t))`:
+    by conjugate symmetry `⟪V_t ξ, η⟫ = conj⟪η, V_t ξ⟫`, and `f(t) = ⟪η, V_t ξ⟫` (the corrected RvD Def 3.4
+    convention, orbit in the linear slot).  So
     `real_on_midline_of_conj_flip` (RvD Prop 3.5) upgrades the witness to the *half-strip KMS form*: a
     bounded-holomorphic `f` with real-axis value `f(t) = ⟪V_t ξ, η⟫` **and** `f(t − i/2)` REAL — exactly the
     reality input RvD Theorem 3.8 consumes (`Δ^{1/2} = J` on the standard subspace).  This discharges the
@@ -509,12 +518,12 @@ def StripKMSrvd (V : ℝ → (H →L[ℂ] H)) (K : Set H) : Prop :=
 theorem stripKMSrvd_real_midline {V : ℝ → (H →L[ℂ] H)} {K : Set H} (hV : StripKMSrvd V K)
     {ξ η : H} (hξ : ξ ∈ K) (hη : η ∈ K) :
     ∃ f : ℂ → ℂ, DiffContOnCl ℂ f (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) ∧
-      (∀ t : ℝ, f (t : ℂ) = inner ℂ (V t ξ) η) ∧ (∀ t : ℝ, (f ((t : ℂ) - Complex.I / 2)).im = 0) := by
+      (∀ t : ℝ, f (t : ℂ) = inner ℂ η (V t ξ)) ∧ (∀ t : ℝ, (f ((t : ℂ) - Complex.I / 2)).im = 0) := by
   obtain ⟨f, hfdcc, ⟨M, hfM⟩, hfreal, hfflip⟩ := hV ξ hξ η hη
   refine ⟨f, hfdcc, hfreal, fun t => ?_⟩
   refine QIQTH.StripUniqueness.real_on_midline_of_conj_flip hfdcc (fun z _ => hfM z) (fun s => ?_) t
   rw [hfflip s, hfreal s]
-  exact (inner_conj_symm (𝕜 := ℂ) η (V s ξ)).symm
+  exact (inner_conj_symm (𝕜 := ℂ) (V s ξ) η).symm
 
 /-- **★ SOUNDNESS AUDIT — `StripKMS` as defined is TRIVIALLY satisfiable, hence too weak to be the KMS
     condition.**  Because the witness `F` is required to be holomorphic only on the *open* strip while the
@@ -575,7 +584,7 @@ theorem oneParticleBW_of_kms (S : StandardSubspace H)
     unproven surface to exactly the Theorem-3.8 core. -/
 def HalfStripReal (V : ℝ → (H →L[ℂ] H)) (K : Set H) : Prop :=
   ∀ ξ ∈ K, ∀ η ∈ K, ∃ f : ℂ → ℂ, DiffContOnCl ℂ f (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) ∧
-    (∀ t : ℝ, f (t : ℂ) = inner ℂ (V t ξ) η) ∧ (∀ t : ℝ, (f ((t : ℂ) - Complex.I / 2)).im = 0)
+    (∀ t : ℝ, f (t : ℂ) = inner ℂ η (V t ξ)) ∧ (∀ t : ℝ, (f ((t : ℂ) - Complex.I / 2)).im = 0)
 
 /-- **`StripKMSrvd` ⟹ `HalfStripReal`** — RvD Proposition 3.5, packaged: the correct full-strip KMS condition
     yields the half-strip reality form (each pair's witness made real on the mid-line). -/
