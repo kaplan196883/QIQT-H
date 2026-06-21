@@ -1,5 +1,37 @@
 # Free-field stress-tensor formalization — discharging `hTkk` (GPT target #1, scalar half)
 
+### ✅✅✅ STATUS UPDATE 4 (2026-06-22): Route B CORE COMPLETE + a soundness subtlety on the remaining hyps
+
+**Proven, axiom-free (commits up to `ff200b5`):** the target `stressFluxKK = −2π·rapidityMomentum(Krep)`
+(`stressFluxKK_eq_neg_rapMom`), the GR bridge to `hTkk` (`boostEnergy_eq_neg_stressFlux`), the **hard**
+regularity gate `Krep` differentiability (`Krep_hasDerivAt`, the on-shell Minkowski-Fourier differentiation
+under the integral), and the wrapper discharging `hkd` (`stressFluxKK_eq_neg_rapMom_cptSupp`).
+
+**Remaining: the softer horizon-amplitude regularity** (`Integrable horizonAmp`, `Differentiable ℝ horizonAmp`,
+the integrabilities) — STILL labelled hypotheses.
+
+**⚠ SOUNDNESS SUBTLETY (must not bury — affects non-vacuity).** `Differentiable ℝ (horizonAmp)` everywhere is
+a *real* constraint, not automatic. `horizonAmp = (Ioi 0).indicator(−i·Krep∘rapInv)`; at `x=0` (the bifurcation
+surface) it needs the right-derivative to exist and vanish, i.e. `Krep(θ)·e^{θ} → 0` (and similarly for
+derivatives) as `θ → +∞`, since `x = nullMom θ = c·e^{−θ}`.
+* For merely **continuous** compactly-supported `f`, `Krep = minkowskiFourier f(massShell)` decays only
+  *polynomially* in `|p| ~ e^{θ}` (Riemann–Lebesgue), so `Krep(θ)e^{θ} ↛ 0` — `Differentiable horizonAmp` FAILS.
+* For **`f ∈ C_c^∞`** (smooth), `minkowskiFourier f` is Schwartz, decaying faster than `|p|^{−n} ~ e^{−nθ}` for
+  ALL `n`, so `Krep(θ) = o(e^{−nθ})` ∀n — **super-exponential** decay — hence `Krep(θ)e^{θ}→0` and
+  `horizonAmp` IS differentiable at `0`. So the hypotheses are jointly satisfiable (non-vacuous) **only for the
+  smooth class** `f ∈ C_c^∞`, where `Krep`'s super-exponential rapidity decay holds.
+* Consequence: `stressFluxKK_eq_neg_rapMom_cptSupp` is stated with `Continuous f`, but its `hAd` hypothesis is
+  only satisfiable when `f` is additionally smooth. It is TRUE and NON-VACUOUS (a `C_c^∞` witness exists), but a
+  rigorous non-vacuity proof (an explicit `f` discharging ALL hyps) is the honest remaining TODO — exactly the
+  vacuity trap the axiom-budget check does NOT catch.
+
+**Remaining work (the lightest frontier):** (a) prove `Krep`'s super-exponential rapidity decay for `f ∈ C_c^∞`
+(Schwartz Fourier theory: `minkowskiFourier` of `C_c^∞` is Schwartz ⟹ the `e^{−nθ}` bounds via `|massShell|~e^θ`);
+(b) from it, `Differentiable ℝ horizonAmp` (boundary differentiability at `x=0`) + the integrability hypotheses;
+(c) a non-vacuity witness. This is genuine multi-fire analysis but conceptually routine; the crux (the
+distribution-free Fourier computation + the Minkowski-Fourier differentiation) is done.
+
+
 ## Goal (one sentence)
 
 Turn the labelled scalar input
