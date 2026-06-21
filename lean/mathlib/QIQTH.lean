@@ -353,6 +353,7 @@ import QIQTH.Fock.FockTypicality
 import QIQTH.Fock.SecondQuant
 import QIQTH.Fock.SecondQuantModularFlow
 import QIQTH.Fock.OneParticleBW
+import QIQTH.Fock.StressTensor.RapidityMomentum
 import QIQTH.StripUniqueness
 import QIQTH.KMSCorrelation
 import QIQTH.Fock.RelativeModularFlow

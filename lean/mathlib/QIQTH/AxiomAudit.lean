@@ -4383,6 +4383,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — wedge BW with KMS-UNIQUENESS DERIVED: modUnitary=boostUnitary(−2π·) from hcarrier +
 -- V=boost + genuine StripKMSrvd, via oneParticleBW_complete (RvD Thm 3.8). Boost structural facts (isometry/group/
 -- continuity/𝒦-inv) all derived from boostUnitary lemmas. Replaces the bundled opaque hUniq + vacuous StripKMS.
+#print axioms QIQTH.Fock.StressTensor.hasDerivAt_inner_boost_rapidityMomentum
+-- expected: standard only — ★ Stress-tensor Route B, Phase 0: the boost-charge derivative with its RHS NAMED.
+-- d/dt⟪ξ,boostUnitary(−2πt)ξ⟫|₀ = i·2π·rapidityMomentum f f', where rapidityMomentum f f' = Im∫conj(f)·f' is the
+-- boost energy ⟪f,(−i∂_θ)f⟫. Names the scalar that hTkk identifies with (2π/ℏ)·T_kk; Phases 1–3 (horizon field →
+-- null stress flux → Mellin/Plancherel) will turn rapidityMomentum into a DEFINED stress flux, discharging hTkk.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,
