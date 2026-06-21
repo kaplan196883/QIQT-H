@@ -4459,6 +4459,11 @@ namespace QIQTH.AxiomAudit
 -- (2π)⁻¹·rapidityMomentum A (deriv A). The real form of fourier_weighted_pairing via conj(z)·z=‖z‖²
 -- (Complex.normSq_eq_conj_mul_self + normSq_eq_norm_sq) + integral_ofReal. Remaining for hFlux: λ=2πw rescale (→stressFluxKK
 -- = 2π·rapidityMomentum(horizonAmp)) + k↦θ change of vars (→rapidityMomentum(Krep)) + Krep on-shell diff/decay (Differentiable ℝ horizonAmp).
+#print axioms QIQTH.Fock.StressTensor.flux_integral_eq
+-- expected: standard only — ★★★ Stress-tensor Route B, Phase 3b-ii: the WHOLE generic spectral computation —
+-- ∫ λ, λ·‖𝓕A(λ/2π)‖² = 2π·rapidityMomentum A (deriv A). The λ=2πw rescale (Measure.integral_comp_mul_left) puts the (2π)²
+-- weight·Jacobian against weighted_pairing_real's (2π)⁻¹. This IS stressFluxKK m f once A=horizonAmp m f (horizonFieldDeriv_eq_fourier).
+-- Remaining for hFlux: instantiate A=horizonAmp + k↦θ change of vars (rapidityMomentum(horizonAmp)↔rapidityMomentum(Krep)) + Krep regularity.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

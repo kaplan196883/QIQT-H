@@ -229,4 +229,33 @@ theorem weighted_pairing_real (A : ℝ → ℂ)
   rw [ha] at hwp
   exact_mod_cast hwp
 
+/-- **★★ The flux integral in `λ` equals `2π·rapidityMomentum`.**  After the `λ = 2π w` rescale (the `χ_H`
+    arguments carry `λ/2π`), the `(2π)²` Jacobian-and-weight factor times `weighted_pairing_real`'s `(2π)⁻¹`
+    gives `∫ λ, λ·‖𝓕A(λ/2π)‖² = 2π·rapidityMomentum A (deriv A)`.  This is exactly `stressFluxKK` once
+    `A = horizonAmp` (via `horizonFieldDeriv_eq_fourier`). -/
+theorem flux_integral_eq (A : ℝ → ℂ)
+    (hA : Integrable A) (hAd : Differentiable ℝ A)
+    (hdAc : Continuous (deriv A)) (hdA : Integrable (deriv A)) (hFdA : Integrable (𝓕 (deriv A)))
+    (hff : Integrable (fun θ => (starRingEnd ℂ) (A θ) * A θ))
+    (h1 : Integrable (fun θ => (starRingEnd ℂ) (deriv A θ) * A θ))
+    (h2 : Integrable (fun θ => (starRingEnd ℂ) (A θ) * deriv A θ)) :
+    ∫ lam, lam * ‖𝓕 A (lam / (2 * Real.pi))‖ ^ 2 = 2 * Real.pi * rapidityMomentum A (deriv A) := by
+  have hpos : (0 : ℝ) < 2 * Real.pi := by positivity
+  have hne : (2 * Real.pi) ≠ 0 := hpos.ne'
+  set φ : ℝ → ℝ := fun lam => lam * ‖𝓕 A (lam / (2 * Real.pi))‖ ^ 2 with hφ
+  have hphi : ∀ x, φ (2 * Real.pi * x) = 2 * Real.pi * (x * ‖𝓕 A x‖ ^ 2) := by
+    intro x
+    simp only [hφ]
+    rw [show (2 * Real.pi * x) / (2 * Real.pi) = x from by
+      rw [mul_comm, mul_div_assoc, div_self hne, mul_one]]
+    ring
+  have hlem := Measure.integral_comp_mul_left φ (2 * Real.pi)
+  rw [abs_of_pos (by positivity : (0 : ℝ) < (2 * Real.pi)⁻¹), smul_eq_mul] at hlem
+  simp only [hphi] at hlem
+  rw [integral_const_mul] at hlem
+  have hwpr := weighted_pairing_real A hA hAd hdAc hdA hFdA hff h1 h2
+  rw [show (∫ lam, φ lam) = 2 * Real.pi * (2 * Real.pi * ∫ x, x * ‖𝓕 A x‖ ^ 2) from by
+    rw [hlem, ← mul_assoc, mul_inv_cancel₀ hne, one_mul]]
+  rw [hwpr]; field_simp
+
 end QIQTH.Fock.StressTensor
