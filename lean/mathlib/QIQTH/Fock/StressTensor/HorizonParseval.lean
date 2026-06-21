@@ -582,4 +582,73 @@ theorem horizonAmp_sq_integrable {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) 
         mul_le_mul hb hb (norm_nonneg _) (le_trans (norm_nonneg _) hb)
     _ = B ^ 2 * ((c ^ 2 + x ^ 2)⁻¹) ^ 2 := by ring
 
+/-- **★★ The `(cosh)⁻¹` decay of the actual derivative `deriv (Krep m f)`** (`f` Schwartz, `m > 0`).  Packages
+    `kd_norm_le` against the genuine `deriv` via `schwartz_Krep_hasDerivAt.deriv` — so `kd := deriv (Krep m f)`
+    is both bounded (`≤ C·(cosh θ)⁻¹`) and, being a `deriv`, automatically measurable (`measurable_deriv`).
+    This is the bound every remaining horizon-amplitude derivative gate (`hdA`/`hdAc`/`hFdA`/`h1`/`h2`) consumes. -/
+theorem Krep_deriv_norm_le {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ θ : ℝ, ‖deriv (fun θ => Krep m (⇑f) θ) θ‖ ≤ C * (Real.cosh θ)⁻¹ := by
+  obtain ⟨C, hC, hb⟩ := kd_norm_le m hm f
+  refine ⟨C, hC, fun θ => ?_⟩
+  rw [(schwartz_Krep_hasDerivAt m hm.le f θ).deriv]
+  exact hb θ
+
+/-- **★★★ `deriv (horizonAmp)` is `L¹`** (`hdA`) for a Schwartz test function (`m > 0`).  Off `x = 0` the
+    derivative is `(i/x)·Krep'(rapInv x)` on `x > 0` and `0` on `x < 0`; with `cosh(rapInv x) = (c²+x²)/(2cx)`
+    and the `Krep'` decay `‖Krep'(θ)‖ ≤ C·(cosh θ)⁻¹` (`Krep_deriv_norm_le`) the `1/x` cancels, leaving
+    `‖deriv(horizonAmp) x‖ ≤ 2Cc·(c²+x²)⁻¹` — integrable (`integrable_inv_const_sq_add`).  `{0}` is null so the
+    `x = 0` boundary is irrelevant; `deriv` is measurable (`measurable_deriv`).  Discharges `hdA`. -/
+theorem horizonAmp_deriv_integrable {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) :
+    Integrable (deriv (horizonAmp m (⇑f))) := by
+  set c : ℝ := m / Real.sqrt 2 with hc
+  have hcpos : 0 < c := by rw [hc]; positivity
+  obtain ⟨C, hC, hCb⟩ := Krep_deriv_norm_le hm f
+  set kd : ℝ → ℂ := deriv (fun θ => Krep m (⇑f) θ) with hkddef
+  have hkd : ∀ θ, HasDerivAt (fun θ => Krep m (⇑f) θ) (kd θ) θ := fun θ =>
+    (schwartz_Krep_hasDerivAt m hm.le f θ).differentiableAt.hasDerivAt
+  set derivH : ℝ → ℂ :=
+    fun x => (Set.Ioi 0).indicator (fun x : ℝ => (Complex.I / (x : ℂ)) * kd (rapInv m x)) x with hdHdef
+  have hrap_meas : Measurable (rapInv m) := by
+    unfold rapInv; exact measurable_const.sub Real.measurable_log
+  -- deriv horizonAmp =ᵐ derivH  (they agree off the null set {0})
+  have hae : deriv (horizonAmp m (⇑f)) =ᵐ[volume] derivH := by
+    have hnull : volume ({(0 : ℝ)} : Set ℝ) = 0 := Real.volume_singleton
+    refine Filter.eventuallyEq_of_mem (s := {(0 : ℝ)}ᶜ) (compl_mem_ae_iff.mpr hnull) (fun x hx => ?_)
+    simp only [Set.mem_compl_iff, Set.mem_singleton_iff] at hx
+    rcases lt_or_gt_of_ne hx with hlt | hgt
+    · have hd0 : derivH x = 0 := by
+        simp only [hdHdef]
+        exact Set.indicator_of_notMem (by simp only [Set.mem_Ioi, not_lt]; exact hlt.le) _
+      rw [hd0]
+      refine ((hasDerivAt_const x (0 : ℂ)).congr_of_eventuallyEq ?_).deriv
+      filter_upwards [isOpen_Iio.mem_nhds (Set.mem_Iio.mpr hlt)] with y hy
+      exact Set.indicator_of_notMem (by simp only [Set.mem_Ioi, not_lt]; exact (Set.mem_Iio.mp hy).le) _
+    · have hdx : derivH x = (Complex.I / (x : ℂ)) * kd (rapInv m x) := by
+        simp only [hdHdef]
+        exact Set.indicator_of_mem (Set.mem_Ioi.mpr hgt) _
+      rw [hdx]
+      exact (horizonAmp_hasDerivAt m hm (⇑f) kd hkd hgt).deriv
+  have hderivH_meas : Measurable derivH := by
+    rw [hdHdef]
+    exact (((measurable_const.div Complex.continuous_ofReal.measurable).mul
+      ((measurable_deriv (fun θ => Krep m (⇑f) θ)).comp hrap_meas)).indicator measurableSet_Ioi)
+  refine (Integrable.congr ?_ hae.symm)
+  refine ((integrable_inv_const_sq_add hcpos).const_mul (2 * C * c)).mono'
+    hderivH_meas.aestronglyMeasurable (Filter.Eventually.of_forall fun x => ?_)
+  simp only [hdHdef, Set.indicator_apply]
+  split_ifs with hx
+  · rw [Set.mem_Ioi] at hx
+    rw [norm_mul, norm_div, Complex.norm_I, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hx,
+      one_div]
+    have hcosh_eq : Real.cosh (rapInv m x) = (c ^ 2 + x ^ 2) / (2 * c * x) := by
+      rw [rapInv, ← hc, ← Real.log_div hcpos.ne' hx.ne', Real.cosh_log (by positivity)]; field_simp
+    have hkb := hCb (rapInv m x)
+    rw [hcosh_eq] at hkb
+    calc x⁻¹ * ‖kd (rapInv m x)‖
+        ≤ x⁻¹ * (C * ((c ^ 2 + x ^ 2) / (2 * c * x))⁻¹) :=
+          mul_le_mul_of_nonneg_left hkb (by positivity)
+      _ = 2 * C * c * (c ^ 2 + x ^ 2)⁻¹ := by rw [inv_div]; field_simp
+  · rw [norm_zero]
+    exact mul_nonneg (mul_nonneg (mul_nonneg (by norm_num) hC) (by positivity)) (by positivity)
+
 end QIQTH.Fock.StressTensor

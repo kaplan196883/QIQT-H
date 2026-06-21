@@ -4565,6 +4565,14 @@ namespace QIQTH.AxiomAudit
 -- = ‖Krep'(θ)‖ ≤ C cosh⁻¹. Combines kd_integral_eq_moments (split) + minkowskiFourier_coordMul_decay (cosh⁻² moment decay) + |sinh|≤cosh
 -- (abs_sinh_le_cosh): the m cosh θ prefactors meet cosh⁻² to leave cosh⁻¹. Since ∫cosh⁻¹=π this makes kd integrable — the analytic core
 -- unblocking the remaining horizon-amplitude derivative gates hdA/hdAc/hFdA/h1/h2 (deriv horizonAmp = (i/x)kd(rapInv x) on x>0).
+#print axioms QIQTH.Fock.StressTensor.Krep_deriv_norm_le
+-- expected: standard only — ★★ Stress-tensor Route B: ‖deriv (Krep m f) θ‖ ≤ C·(cosh θ)⁻¹ (f Schwartz, m>0). Packages kd_norm_le
+-- against the genuine deriv via schwartz_Krep_hasDerivAt.deriv, so kd:=deriv(Krep m f) is bounded AND measurable (measurable_deriv).
+#print axioms QIQTH.Fock.StressTensor.horizonAmp_deriv_integrable
+-- expected: standard only — ★★★ Stress-tensor Route B (hdA DISCHARGED): Integrable (deriv (horizonAmp m f)) for f Schwartz, m>0.
+-- Off x=0 (null set, irrelevant): deriv = (i/x)·Krep'(rapInv x) on x>0, 0 on x<0; with cosh(rapInv x)=(c²+x²)/(2cx) + Krep_deriv_norm_le
+-- the 1/x cancels ⟹ ‖deriv horizonAmp x‖ ≤ 2Cc(c²+x²)⁻¹, integrable (integrable_inv_const_sq_add). deriv measurable (measurable_deriv);
+-- deriv horizonAmp =ᵐ derivH via {0} null (compl_mem_ae_iff). Discharges hdA — 5 of 9 regularity gates done.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,
