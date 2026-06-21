@@ -188,6 +188,47 @@ theorem corrC_orbit_eq_of_edges_real {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (hn
   corrC_eq_at_real_of_const hn η w hcont hbd hgrp
     (corrC_const_on_strip_of_edges hn η w hcont hbd h0 h1) t
 
+open StripUniqueness in
+/-- **The device g-function is constant on the real axis** (RvD Theorem 3.8 constancy, the analytic heart of
+    the GConstancy output): if the device g-function `g(z) = ⟪J·d_z(R)ζ, V_z η_n⟫` is real on BOTH half-strip
+    edges `Im z = 0` and `Im z = −1/2`, then `g(t) = g(0)` for every real `t`.  The g-function is
+    bounded-holomorphic (`diffContOnCl_gFunction`, `gFunction_norm_le` + `gaussSmearC_norm_le` give the uniform
+    bound `2√2‖ζ‖·e^{n/4}‖η‖√(π/n)` since `(Im z)² ≤ 1/4`), so the two-edge half-strip Phragmén–Lindelöf
+    (`eqConst_of_im_zero_halfStrip`) forces it constant on the open half-strip; continuity to the closure
+    (`Set.EqOn.closure`) propagates the constant to the real axis.  The top edge is geometric
+    (`gFunction_top_edge_real`); the bottom edge `Im z = −1/2` is the KMS input (`HalfStripReal`). -/
+theorem gFunction_eq_zero_const (S : StandardSubspace H) (ζ : H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ}
+    (hn : 0 < n) (η : H) (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (h0 : ∀ z : ℂ, z.im = 0 →
+      (modConjBilin S (deviceVecF S ζ z) (gaussSmearC V n η z)).im = 0)
+    (h1 : ∀ z : ℂ, z.im = -(1 / 2) →
+      (modConjBilin S (deviceVecF S ζ z) (gaussSmearC V n η z)).im = 0) (t : ℝ) :
+    modConjBilin S (deviceVecF S ζ (t : ℂ)) (gaussSmearC V n η (t : ℂ))
+      = modConjBilin S (deviceVecF S ζ 0) (gaussSmearC V n η 0) := by
+  have hM : ∀ z ∈ kmsHalfStripOpen,
+      ‖modConjBilin S (deviceVecF S ζ z) (gaussSmearC V n η z)‖ ≤
+      2 * Real.sqrt 2 * ‖ζ‖ * (Real.exp (n / 4) * ‖η‖ * Real.sqrt (Real.pi / n)) := by
+    intro z hz
+    simp only [kmsHalfStripOpen, Set.mem_preimage, Set.mem_Ioo] at hz
+    refine (gFunction_norm_le S ζ η z).trans (mul_le_mul_of_nonneg_left ?_ (by positivity))
+    refine (gaussSmearC_norm_le hn η hcont hbd z).trans
+      (mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right (Real.exp_le_exp.mpr ?_)
+        (norm_nonneg _)) (Real.sqrt_nonneg _))
+    nlinarith [hz.1, hz.2, hn.le, mul_pos (show (0:ℝ) < z.im + 1/2 by linarith)
+      (show (0:ℝ) < 1/2 - z.im by linarith)]
+  obtain ⟨c, hc⟩ := eqConst_of_im_zero_halfStrip
+    (diffContOnCl_gFunction S ζ hn η hcont hbd) hM h0 h1
+  have hcl : Complex.im ⁻¹' Set.Icc (-(1 / 2) : ℝ) 0 = closure kmsHalfStripOpen := by
+    rw [kmsHalfStripOpen, Complex.closure_preimage_im, closure_Ioo (by norm_num : (-(1/2):ℝ) ≠ 0)]
+  have hext := Set.EqOn.of_subset_closure (s := kmsHalfStripOpen)
+    (t := Complex.im ⁻¹' Set.Icc (-(1 / 2) : ℝ) 0) hc
+    ((diffContOnCl_gFunction S ζ hn η hcont hbd).2.mono (le_of_eq hcl)) continuousOn_const
+    (Set.preimage_mono Set.Ioo_subset_Icc_self) (le_of_eq hcl)
+  rw [show modConjBilin S (deviceVecF S ζ (t : ℂ)) (gaussSmearC V n η (t : ℂ)) = c from
+      hext (by simp only [Set.mem_preimage, Complex.ofReal_im, Set.mem_Icc]; constructor <;> norm_num),
+    show modConjBilin S (deviceVecF S ζ (0 : ℂ)) (gaussSmearC V n η (0 : ℂ)) = c from
+      hext (by simp only [Set.mem_preimage, Complex.zero_im, Set.mem_Icc]; constructor <;> norm_num)]
+
 /-- **Analytic capstone of the KMS-uniqueness proof** (RvD Theorem 3.8): given the labelled KMS function,
     the orbit matrix element is `t`-independent.  Assembles the whole verified analytic chain.  Inputs: the
     *geometric* facts (`w ⊥ i𝒦`, the orbit `V_t(gaussSmear)` stays in `𝒦`) and the *labelled KMS input* — a

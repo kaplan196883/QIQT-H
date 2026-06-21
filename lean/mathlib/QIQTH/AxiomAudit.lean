@@ -3790,6 +3790,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ STEP 6a (to closed strip): Im(corrC w)=0 on BOTH edges (Im=0,Im=1) ⇒ corrC w
 -- constant on the CLOSED kmsStrip. eqConst_of_im_zero_strip (Phragmén–Lindelöf) gives const on the open strip;
 -- continuity of entire g propagates to closure (kmsStrip=closure kmsStripOpen, Set.EqOn.closure).
+#print axioms QIQTH.StandardSubspaceModular.gFunction_eq_zero_const
+-- expected: standard only — ★★★ DEVICE g-FUNCTION CONSTANCY (RvD Thm 3.8 analytic heart): g(z)=⟪J·d_z(R)ζ,V_z η⟫
+-- real on BOTH half-strip edges (Im=0 & Im=-1/2) ⇒ g(t)=g(0) ∀t. diffContOnCl_gFunction + uniform bound
+-- (gFunction_norm_le+gaussSmearC_norm_le, (Im z)²≤1/4) + eqConst_of_im_zero_halfStrip (2-edge Phragmén-Lindelöf)
+-- ⇒ const on open half-strip; Set.EqOn.of_subset_closure (ContinuousOn closure) propagates to real axis. Top edge
+-- geometric (gFunction_top_edge_real); BOTTOM edge Im=-1/2 = KMS input (HalfStripReal). ⇒ GConstancy(η_n).
 #print axioms QIQTH.StandardSubspaceModular.corrC_orbit_eq_of_edges_real
 -- expected: standard only — ★★ FULL STEP-6 CLOSEOUT CHAIN: g=corrC w real on both strip edges ⇒
 -- ⟨w,V_t(gaussSmear)⟩=⟨w,gaussSmear⟩ ∀t (corrC_eq_at_real_of_const ∘ corrC_const_on_strip_of_edges). Edge
