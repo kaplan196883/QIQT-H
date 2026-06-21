@@ -613,6 +613,28 @@ theorem gFunction_bottom_eq_of_mem_K (S : StandardSubspace H) {ζ : H}
       = inner ℂ (modUnitary S t (rvdSqrtR S ζ)) w := by
   rw [modConjBilin_apply, modConj_deviceVecF_bottom_eq_of_mem_K S hζ]
 
+/-- **★ The modular flow's half-strip KMS reality is GEOMETRIC (toward RvD Prop 3.7, `Δ` is KMS).**  For
+    `ξ = √Rζ ∈ 𝒦` and `η ∈ 𝒦`, the modular correlation `f(z) = ⟪η, deviceVecF(z)⟫ = ⟪η, Δ^{iz}ξ⟫` is REAL at
+    the mid-line `z = t − i/2`: there `deviceVecF(t−i/2) = J(Δ^{it}ξ)` (from `modConj_deviceVecF_bottom_eq_of_mem_K`
+    + `J² = 1`), and `Δ^{it}ξ ∈ 𝒦` (`modUnitary_mapsTo_K`) gives `J(Δ^{it}ξ) ∈ (i𝒦)^⊥`
+    (`projIK_modConj_eq_zero_of_mem_K`, `J𝒦 = (i𝒦)^⊥`), so pairing against `η ∈ 𝒦` is real by RvD Prop 2.3
+    (`inner_real_of_mem_K_perp_IK`).  Unlike the candidate flow `V` (whose mid-line reality `h1` needed the KMS
+    f-transfer), the MODULAR flow's mid-line reality is purely geometric — no circularity — because its device
+    vector is exactly `Δ^{iz}ξ` and `Δ^{1/2}ξ = Jξ` on `𝒦`.  This is the heart of the converse RvD Theorem 3.8
+    direction (`Δ` satisfies the KMS condition), confirming the `oneParticleBW_complete` discharge is non-vacuous. -/
+theorem modCorr_midline_real (S : StandardSubspace H) {ζ η : H}
+    (hζ : projK S (rvdSqrtR S ζ) = rvdSqrtR S ζ) (hη : projK S η = η) (t : ℝ) :
+    (inner ℂ η (deviceVecF S ζ ((t : ℂ) - Complex.I / 2))).im = 0 := by
+  have hdev : deviceVecF S ζ ((t : ℂ) - Complex.I / 2)
+      = modConj S (modUnitary S t (rvdSqrtR S ζ)) := by
+    have h := congrArg (modConj S) (modConj_deviceVecF_bottom_eq_of_mem_K S hζ t)
+    rwa [modConj_sq] at h
+  rw [hdev]
+  exact inner_real_of_mem_K_perp_IK S hη
+    (projIK_modConj_eq_zero_of_mem_K S
+      ((mem_K_iff_projK S _).mp (modUnitary_mapsTo_K S t (rvdSqrtR S ζ)
+        ((mem_K_iff_projK S (rvdSqrtR S ζ)).mpr hζ))))
+
 /-- **Geometric *sufficient condition* for the bottom-edge value (NOT the `h1` discharge route).**  Under
     `√Rζ ∈ 𝒦` the bottom-edge g-value is `⟪Δ^{it}ξ, gaussSmearC(t−i/2)⟫` with `Δ^{it}ξ ∈ 𝒦`
     (`modUnitary_mapsTo_K`), so by RvD Prop 2.3 (`inner_real_of_mem_K_perp_IK`) it is real IF

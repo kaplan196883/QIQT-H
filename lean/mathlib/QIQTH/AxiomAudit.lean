@@ -4300,6 +4300,12 @@ namespace QIQTH.AxiomAudit
 -- analytic input. Both g-function inputs are now THEOREMS: h1 (h1_of_stripKMSrvd, bottom-edge KMS reality via the
 -- f-transfer) and hdense (rvdSqrtR_range_dense_in_K, √R-range density via the polar radius T). The un-garbled
 -- device g-function discharge is end-to-end machine-checked. Rests only on the genuine KMS + contraction/invariance.
+#print axioms QIQTH.StandardSubspaceModular.modCorr_midline_real
+-- expected: standard only — ★★ MODULAR flow half-strip KMS reality is GEOMETRIC (toward RvD Prop 3.7, Δ is KMS /
+-- non-vacuity of oneParticleBW_complete). For ξ=√Rζ∈𝒦, η∈𝒦: ⟪η,deviceVecF(t−i/2)⟫=⟪η,Δ^{it}Jξ⟫ real, since
+-- deviceVecF(t−i/2)=J(Δ^{it}ξ) (modConj_deviceVecF_bottom_eq_of_mem_K + modConj_sq), Δ^{it}ξ∈𝒦 ⟹ J(Δ^{it}ξ)∈(i𝒦)^⊥
+-- (projIK_modConj_eq_zero_of_mem_K), η∈𝒦 ⟹ inner_real_of_mem_K_perp_IK. NO circularity (the modular flow's device
+-- vector IS Δ^{iz}ξ; Δ^½ξ=Jξ on 𝒦) — unlike the candidate V whose h1 needed the f-transfer.
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable
