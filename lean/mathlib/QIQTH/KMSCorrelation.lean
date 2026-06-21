@@ -591,6 +591,28 @@ theorem modConj_deviceVecF_bottom_eq_fixed (S : StandardSubspace H) {ζ : H}
       = modUnitary S t (rvdSqrtR S ζ) := by
   rw [modConj_deviceVecF_bottom_eq, hζ]
 
+/-- **The bottom-edge g-vector under the `gConstancy_eta_of_bottom` hypothesis** `√Rζ ∈ 𝒦`:
+    `J·deviceVecF(t − i/2) = Δ^{it}·√Rζ = Δ^{it}ξ`.  The condition `√Rζ ∈ 𝒦` makes `ζ` `J`-fixed
+    (`modConj_fixed_of_sqrtR_mem_K`, the bounded Tomita relation `Jξ = Δ^{1/2}ξ` on `𝒦`), so the general
+    bottom-edge value `Δ^{it}√R(Jζ)` collapses to `Δ^{it}√Rζ`.  This resolves the `√Rζ∈𝒦`-vs-`Jζ=ζ`
+    condition gap, in exactly the form the bottom-edge KMS reality `h1` consumes. -/
+theorem modConj_deviceVecF_bottom_eq_of_mem_K (S : StandardSubspace H) {ζ : H}
+    (hζ : projK S (rvdSqrtR S ζ) = rvdSqrtR S ζ) (t : ℝ) :
+    modConj S (deviceVecF S ζ ((t : ℂ) - Complex.I / 2))
+      = modUnitary S t (rvdSqrtR S ζ) :=
+  modConj_deviceVecF_bottom_eq_fixed S (modConj_fixed_of_sqrtR_mem_K S hζ) t
+
+/-- **The bottom-edge g-function value made fully explicit** (for `√Rζ ∈ 𝒦`):
+    `g(t − i/2) = ⟪J·deviceVecF(t−i/2), w⟫ = ⟪Δ^{it}·√Rζ, w⟫ = ⟪Δ^{it}ξ, w⟫`.  With `w = gaussSmearC(t−i/2)`,
+    the bottom-edge KMS reality `h1` becomes precisely `Im⟪Δ^{it}ξ, gaussSmearC(t−i/2)⟫ = 0` (`ξ = √Rζ ∈ 𝒦`) —
+    the clean target of the remaining a2/a3 KMS reflection (RvD's reality on the lower edge, via `Δ^{1/2} = J`
+    and the half-strip Phragmén–Lindelöf transfer from the proven mid-line KMS function `stripKMSrvd_real_midline`). -/
+theorem gFunction_bottom_eq_of_mem_K (S : StandardSubspace H) {ζ : H}
+    (hζ : projK S (rvdSqrtR S ζ) = rvdSqrtR S ζ) (w : H) (t : ℝ) :
+    modConjBilin S (deviceVecF S ζ ((t : ℂ) - Complex.I / 2)) w
+      = inner ℂ (modUnitary S t (rvdSqrtR S ζ)) w := by
+  rw [modConjBilin_apply, modConj_deviceVecF_bottom_eq_of_mem_K S hζ]
+
 /-- **Diagonal-correlation form of the RvD Theorem 3.8 closeout**: if the modular correlations agree,
     `⟨ξ, V_t ξ⟩ = ⟨ξ, Δ^{it} ξ⟩` for every `ξ`, then `V_t = Δ^{it}` (stated with `ξ` in the first slot, the
     `modCorrExt` convention).  This is the operator-level conclusion that the `modCorrExt` strip-uniqueness

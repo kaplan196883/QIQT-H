@@ -1582,6 +1582,53 @@ theorem rvdTwoSubRC_injective : Function.Injective (rvdTwoSubRC S) := by
   refine rvdRC_mul_rvdTwoSubRC_injective S ?_
   simp only [ContinuousLinearMap.mul_apply, hab]
 
+/-- **`J √(2−R) = √R J`** — the companion of `modConj_rvdSqrtR` (`J √R = √(2−R) J`), for the bottom-edge
+    Tomita algebra.  From `modConj_rvdSqrtTwoSubR_modConj` (`J √(2−R) J = √R`) at `J y` + `J² = 1`. -/
+theorem modConj_rvdSqrtTwoSubR (S : StandardSubspace H) (y : H) :
+    modConj S (rvdSqrtTwoSubR S y) = rvdSqrtR S (modConj S y) := by
+  have h := modConj_rvdSqrtTwoSubR_modConj S (modConj S y)
+  rwa [modConj_sq] at h
+
+/-- **`√(2−R)` is injective** — companion to `rvdT_injective`: from `√(2−R)² = 2−R` and `2−R` injective
+    (`rvdTwoSubRC_injective`). -/
+theorem rvdSqrtTwoSubR_injective (S : StandardSubspace H) :
+    Function.Injective (rvdSqrtTwoSubR S) := by
+  intro a b hab
+  refine rvdTwoSubRC_injective S ?_
+  have ha : rvdTwoSubRC S a = rvdSqrtTwoSubR S (rvdSqrtTwoSubR S a) := by
+    rw [← ContinuousLinearMap.mul_apply, rvdSqrtTwoSubR_mul_self]
+  have hb : rvdTwoSubRC S b = rvdSqrtTwoSubR S (rvdSqrtTwoSubR S b) := by
+    rw [← ContinuousLinearMap.mul_apply, rvdSqrtTwoSubR_mul_self]
+  rw [ha, hb, hab]
+
+/-- **RvD Proposition 3.7 (bounded Tomita on `√R`):** for `ξ ∈ 𝒦`, `√R (Jξ) = √(2−R) ξ`.  This is the
+    BOUNDED form of `Δ^{1/2}ξ = Jξ` (with `Δ^{1/2} = √(2−R)·√R⁻¹`): from `J(Tξ) = (2−R)ξ`
+    (`modConj_rvdT_of_mem_K`, `T = √R √(2−R)`) expand `J(√R(√(2−R)ξ)) = √(2−R)(√R(Jξ))` (the two sqrt
+    reflections), so `√(2−R)(√R(Jξ)) = (2−R)ξ = √(2−R)(√(2−R)ξ)`, and cancel one `√(2−R)`. -/
+theorem rvdSqrtR_modConj_of_mem_K (S : StandardSubspace H) {ξ : H} (hξ : projK S ξ = ξ) :
+    rvdSqrtR S (modConj S ξ) = rvdSqrtTwoSubR S ξ := by
+  refine rvdSqrtTwoSubR_injective S ?_
+  have hL : rvdSqrtTwoSubR S (rvdSqrtR S (modConj S ξ)) = rvdTwoSubRC S ξ := by
+    have ht := modConj_rvdT_of_mem_K S hξ
+    simp only [rvdT, ContinuousLinearMap.mul_apply, modConj_rvdSqrtR, modConj_rvdSqrtTwoSubR] at ht
+    exact ht
+  rw [hL, ← ContinuousLinearMap.mul_apply, rvdSqrtTwoSubR_mul_self]
+
+/-- **`√Rζ ∈ 𝒦 ⟹ Jζ = ζ`** — the bottom-edge condition reconciliation.  Resolves the gap between the
+    `gConstancy_eta_of_bottom` hypothesis `√Rζ ∈ 𝒦` and the `J`-fixedness `Jζ = ζ` the bottom-edge g-vector
+    simplification needs.  From `√R(J(√Rζ)) = √(2−R)(√Rζ)` (`rvdSqrtR_modConj_of_mem_K` at `ξ = √Rζ`) and
+    `J(√Rζ) = √(2−R)(Jζ)` (`modConj_rvdSqrtR`): `√R√(2−R)(Jζ) = √(2−R)√R ζ = √R√(2−R) ζ` (commute), so
+    `rvdT(Jζ) = rvdT ζ`, and `rvdT` injective gives `Jζ = ζ`.  (So `√Rζ ∈ 𝒦` makes `ζ` `J`-fixed:
+    `Jξ = Δ^{1/2}ξ` on `𝒦` forces `Jζ = ζ` here.) -/
+theorem modConj_fixed_of_sqrtR_mem_K (S : StandardSubspace H) {ζ : H}
+    (hζ : projK S (rvdSqrtR S ζ) = rvdSqrtR S ζ) : modConj S ζ = ζ := by
+  refine rvdT_injective S ?_
+  have h := rvdSqrtR_modConj_of_mem_K S hζ
+  rw [modConj_rvdSqrtR] at h
+  simp only [rvdT, ContinuousLinearMap.mul_apply]
+  rw [h]
+  exact (DFunLike.congr_fun (rvdSqrtR_commute_rvdSqrtTwoSubR S).eq ζ).symm
+
 /-- **Spectral-atom eigen-relation** `R · E({λ = c}) = c · E({λ = c})`: the bounded Borel FC sends the
     coordinate `λ` to multiplication, so on the level set `{λ = c}` the operator `R = ∫λ dE` acts as the
     scalar `c`.  Route: `R = borelFC(coord)` (`rvdRC_eq_borelFC`), `E(s) = borelFC(𝟙_s)`

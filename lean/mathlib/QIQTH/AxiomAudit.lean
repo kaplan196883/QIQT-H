@@ -4230,6 +4230,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.modConj_deviceVecF_bottom_eq_fixed
 -- expected: standard only — ★ Jζ=ζ case: J·deviceVecF(t−i/2)=Δ^{it}·√Rζ=Δ^{it}ξ (RvD (2−R)^½ζ=Jξ at vector level).
 -- The bottom-edge g-vector IS Δ^{it}ξ; reality of ⟪Δ^{it}ξ,gaussSmearC(t−i/2)⟫ = the remaining KMS input h1 (a2/a3).
+#print axioms QIQTH.StandardSubspaceModular.modConj_rvdSqrtTwoSubR
+-- expected: standard only — J√(2−R)=√R·J (companion of modConj_rvdSqrtR), bottom-edge Tomita algebra.
+#print axioms QIQTH.StandardSubspaceModular.rvdSqrtTwoSubR_injective
+-- expected: standard only — √(2−R) injective (from √(2−R)²=2−R + rvdTwoSubRC_injective).
+#print axioms QIQTH.StandardSubspaceModular.rvdSqrtR_modConj_of_mem_K
+-- expected: standard only — ★ RvD Prop 3.7 (bounded Tomita on √R): ξ∈𝒦 ⟹ √R(Jξ)=√(2−R)ξ (bounded form of Δ^½ξ=Jξ).
+-- From J(Tξ)=(2−R)ξ (modConj_rvdT_of_mem_K) + two sqrt reflections, cancel one √(2−R).
+#print axioms QIQTH.StandardSubspaceModular.modConj_fixed_of_sqrtR_mem_K
+-- expected: standard only — ★★ √Rζ∈𝒦 ⟹ Jζ=ζ: the bottom-edge condition reconciliation (resolves the
+-- √Rζ∈𝒦-vs-Jζ=ζ gap). rvdSqrtR_modConj_of_mem_K at ξ=√Rζ + modConj_rvdSqrtR + commute, rvdT injective.
+#print axioms QIQTH.StandardSubspaceModular.modConj_deviceVecF_bottom_eq_of_mem_K
+-- expected: standard only — under √Rζ∈𝒦: J·deviceVecF(t−i/2)=Δ^{it}·√Rζ=Δ^{it}ξ (collapses √R(Jζ)→√Rζ via Jζ=ζ).
+#print axioms QIQTH.StandardSubspaceModular.gFunction_bottom_eq_of_mem_K
+-- expected: standard only — ★★★ bottom g-VALUE explicit (√Rζ∈𝒦): g(t−i/2)=⟪J·deviceVecF(t−i/2),w⟫=⟪Δ^{it}ξ,w⟫.
+-- h1 NOW = Im⟪Δ^{it}ξ,gaussSmearC(t−i/2)⟫=0, ξ=√Rζ∈𝒦 — the clean a2/a3 KMS-reflection target (Δ^½=J + half-strip PL
+-- from stripKMSrvd_real_midline). Bottom-edge g-vector AND value fully machine-checked; only the KMS reflection remains.
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable
