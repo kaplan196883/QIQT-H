@@ -47,6 +47,39 @@ theorem fourierIntegral_exp_bridge (g : ℝ → ℂ) (lam : ℝ) :
 noncomputable def horizonAmp (m : ℝ) (f : V → ℂ) : ℝ → ℂ :=
   Set.indicator (Set.Ioi 0) (fun x => -Complex.I * Krep m f (rapInv m x))
 
+/-- **The pointwise Cauchy envelope of the horizon amplitude.**  For `f` Schwartz and `m > 0`,
+    `‖horizonAmp m f x‖ ≤ 4Cc²·(c²+x²)⁻¹` with `c = m/√2` and `C` the `(cosh)⁻²` decay constant
+    (`schwartz_Krep_decay_sq`); on `x > 0` via `cosh(rapInv x) = (c²+x²)/(2cx)` and `x² ≤ c²+x²`, on `x ≤ 0`
+    the amplitude vanishes.  The single bound feeding both `L¹` and `L²` integrability of `horizonAmp`. -/
+theorem horizonAmp_norm_le {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) (x : ℝ) :
+    ‖horizonAmp m (⇑f) x‖
+      ≤ 4 * (16 * π ^ 2 * ((∫ v, ‖(⇑f) v‖) + (∫ v, ‖iteratedFDeriv ℝ 1 (⇑f) v‖)
+          + (∫ v, ‖iteratedFDeriv ℝ 2 (⇑f) v‖)) / (Real.sqrt 2 * m ^ 2))
+        * (m / Real.sqrt 2) ^ 2 * ((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹ := by
+  set c : ℝ := m / Real.sqrt 2 with hc
+  have hcpos : 0 < c := by rw [hc]; positivity
+  set C : ℝ := 16 * π ^ 2 * ((∫ v, ‖(⇑f) v‖) + (∫ v, ‖iteratedFDeriv ℝ 1 (⇑f) v‖)
+      + (∫ v, ‖iteratedFDeriv ℝ 2 (⇑f) v‖)) / (Real.sqrt 2 * m ^ 2) with hCdef
+  have hCnn : (0 : ℝ) ≤ C := by rw [hCdef]; positivity
+  simp only [horizonAmp, Set.indicator_apply]
+  split_ifs with hx
+  · rw [Set.mem_Ioi] at hx
+    rw [norm_mul, norm_neg, Complex.norm_I, one_mul]
+    have hcosh_eq : Real.cosh (rapInv m x) = (c ^ 2 + x ^ 2) / (2 * c * x) := by
+      rw [rapInv, ← hc, ← Real.log_div hcpos.ne' hx.ne', Real.cosh_log (by positivity)]
+      field_simp
+    have hdecay := schwartz_Krep_decay_sq f hm.ne' (rapInv m x)
+    rw [hcosh_eq, ← hCdef] at hdecay
+    refine le_trans hdecay ?_
+    rw [div_pow, inv_div, ← mul_div_assoc, div_le_iff₀ (by positivity),
+      show 4 * C * c ^ 2 * (c ^ 2 + x ^ 2)⁻¹ * (c ^ 2 + x ^ 2) ^ 2
+        = 4 * C * c ^ 2 * (c ^ 2 + x ^ 2) by field_simp]
+    have hkey : (0 : ℝ) ≤ 4 * C * c ^ 4 :=
+      mul_nonneg (mul_nonneg (by norm_num) hCnn) (by positivity)
+    nlinarith [hkey]
+  · rw [norm_zero]
+    exact mul_nonneg (mul_nonneg (mul_nonneg (by norm_num) hCnn) (by positivity)) (by positivity)
+
 /-- **★ The horizon amplitude is `L¹`** for a Schwartz test function `f` (`m > 0`).  The `(cosh)⁻²` Schwartz
     decay (`schwartz_Krep_decay_sq`) plus the explicit boundary map `cosh(rapInv x) = (c²+x²)/(2cx)`
     (`c = m/√2`) dominate `‖horizonAmp m f x‖ ≤ 4Cc²·(c²+x²)⁻¹` by the integrable Cauchy kernel
@@ -519,5 +552,34 @@ theorem horizonAmp_differentiable {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ)
     exact squeeze_zero_norm hsl htend
   · -- x > 0
     exact (horizonAmp_hasDerivAt m hm (⇑f) kd hkd hx).differentiableAt
+
+/-- **★★ The self-adjoint integrability `∫ conj(A)·A`** (`hff`) for the horizon amplitude `A = horizonAmp m f`
+    (`f` Schwartz, `m > 0`).  Since `‖conj(A x)·A x‖ = ‖A x‖²`, the Cauchy envelope
+    `‖A x‖ ≤ 4Cc²(c²+x²)⁻¹` (`horizonAmp_norm_le`) gives the squared dominator `(4Cc²)²·((c²+x²)⁻¹)²`
+    (`integrable_inv_const_sq_add_sq`).  Discharges the `hff` regularity hypothesis. -/
+theorem horizonAmp_sq_integrable {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) :
+    Integrable (fun θ => (starRingEnd ℂ) (horizonAmp m (⇑f) θ) * horizonAmp m (⇑f) θ) := by
+  set c : ℝ := m / Real.sqrt 2 with hc
+  have hcpos : 0 < c := by rw [hc]; positivity
+  set B : ℝ := 4 * (16 * π ^ 2 * ((∫ v, ‖(⇑f) v‖) + (∫ v, ‖iteratedFDeriv ℝ 1 (⇑f) v‖)
+      + (∫ v, ‖iteratedFDeriv ℝ 2 (⇑f) v‖)) / (Real.sqrt 2 * m ^ 2)) * (m / Real.sqrt 2) ^ 2 with hBdef
+  have hrap_meas : Measurable (rapInv m) := by
+    unfold rapInv; exact measurable_const.sub Real.measurable_log
+  have hg_meas : Measurable (fun x : ℝ => -Complex.I * Krep m (⇑f) (rapInv m x)) :=
+    ((Krep_continuous f.integrable).measurable.comp hrap_meas).const_mul _
+  have hA_aes : AEStronglyMeasurable (horizonAmp m (⇑f)) volume :=
+    hg_meas.aestronglyMeasurable.indicator measurableSet_Ioi
+  refine ((integrable_inv_const_sq_add_sq hcpos).const_mul (B ^ 2)).mono'
+    ((Complex.continuous_conj.comp_aestronglyMeasurable hA_aes).mul hA_aes) ?_
+  filter_upwards with x
+  rw [norm_mul, Complex.norm_conj]
+  have hb : ‖horizonAmp m (⇑f) x‖ ≤ B * ((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹ := by
+    rw [hBdef]; exact horizonAmp_norm_le hm f x
+  have hBcInv : B * ((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹ = B * (c ^ 2 + x ^ 2)⁻¹ := by rw [hc]
+  rw [hBcInv] at hb
+  calc ‖horizonAmp m (⇑f) x‖ * ‖horizonAmp m (⇑f) x‖
+      ≤ (B * (c ^ 2 + x ^ 2)⁻¹) * (B * (c ^ 2 + x ^ 2)⁻¹) :=
+        mul_le_mul hb hb (norm_nonneg _) (le_trans (norm_nonneg _) hb)
+    _ = B ^ 2 * ((c ^ 2 + x ^ 2)⁻¹) ^ 2 := by ring
 
 end QIQTH.Fock.StressTensor

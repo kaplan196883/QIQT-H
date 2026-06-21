@@ -188,6 +188,21 @@ theorem integrable_inv_const_sq_add {c : ℝ} (hc : 0 < c) :
   gcongr
   nlinarith [min_le_left (c ^ 2) 1, min_le_right (c ^ 2) 1, sq_nonneg x, hmin]
 
+/-- **Integrability of the squared Cauchy dominator** `((c²+x²)⁻¹)²` (for `c > 0`), bounding `‖horizonAmp‖²`
+    (hence the self-adjoint `∫ conj A · A`).  Reduces to `integrable_inv_const_sq_add` by
+    `((c²+x²)⁻¹)² ≤ (c²)⁻¹·(c²+x²)⁻¹`. -/
+theorem integrable_inv_const_sq_add_sq {c : ℝ} (hc : 0 < c) :
+    Integrable (fun x : ℝ => ((c ^ 2 + x ^ 2)⁻¹) ^ 2) := by
+  refine ((integrable_inv_const_sq_add hc).const_mul (c ^ 2)⁻¹).mono'
+    (((continuous_const.add (continuous_pow 2)).inv₀
+      (fun x => (show (0 : ℝ) < c ^ 2 + x ^ 2 by positivity).ne')).pow 2).aestronglyMeasurable ?_
+  filter_upwards with x
+  rw [Real.norm_eq_abs, abs_of_nonneg (by positivity), sq]
+  have h1 : (c ^ 2 + x ^ 2)⁻¹ ≤ (c ^ 2)⁻¹ := by
+    gcongr
+    nlinarith [sq_nonneg x]
+  exact mul_le_mul_of_nonneg_right h1 (by positivity)
+
 /-- **★★★ `Krep` is rapidity-differentiable** (the last regularity gate of the Route B target).  For a
     continuous, compactly-supported test function `f`, `θ ↦ Krep m f θ` is differentiable, with
     `kd θ₀ = (1/√2)·∫ e^{−i η(p_m(θ₀),x)}·(−i·m(x₀ sinh θ₀ − x₁ cosh θ₀))·f(x) dx` — i.e. `kd = Krep'`.

@@ -4530,6 +4530,16 @@ namespace QIQTH.AxiomAudit
 -- 0; x>0 via horizonAmp_hasDerivAt; x=0 the BIFURCATION SURFACE — the (cosh)⁻² Schwartz decay (schwartz_Krep_decay_sq) +
 -- cosh(rapInv t)=(c²+t²)/(2ct) force the quadratic envelope ‖horizonAmp t‖≤K t², so slope→0 (squeeze_zero_norm) ⟹ deriv 0.
 -- Discharges hAd. NOTE: the boundary case needs ONLY the cosh⁻² decay of Krep (the O(t²) envelope), NOT a Krep' decay.
+#print axioms QIQTH.Fock.StressTensor.horizonAmp_norm_le
+-- expected: standard only — Stress-tensor Route B: the pointwise Cauchy envelope ‖horizonAmp m f x‖ ≤ 4Cc²(c²+x²)⁻¹
+-- (c=m/√2, C the cosh⁻² decay constant). The single bound feeding both L¹ (horizonAmp_integrable) and L² (hff).
+#print axioms QIQTH.Fock.StressTensor.integrable_inv_const_sq_add_sq
+-- expected: standard only — Stress-tensor Route B: Integrable ((c²+x²)⁻¹)² for c>0 (squared Cauchy dominator), via
+-- integrable_inv_const_sq_add + ((c²+x²)⁻¹)² ≤ (c²)⁻¹(c²+x²)⁻¹. Bounds ‖horizonAmp‖².
+#print axioms QIQTH.Fock.StressTensor.horizonAmp_sq_integrable
+-- expected: standard only — ★★ Stress-tensor Route B (softer regularity, hff DISCHARGED): for f Schwartz, m>0,
+-- Integrable (fun θ => conj(horizonAmp θ)·horizonAmp θ). ‖conj A·A‖=‖A‖² ≤ (4Cc²)²((c²+x²)⁻¹)² via horizonAmp_norm_le
+-- + integrable_inv_const_sq_add_sq. Discharges hff (the A-self-pairing integrability). Uses only the cosh⁻² decay (no Krep').
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,
