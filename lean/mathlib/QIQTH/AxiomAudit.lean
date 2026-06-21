@@ -4599,6 +4599,17 @@ namespace QIQTH.AxiomAudit
 -- and ae_eq_of_integral_contDiff_smul_eq (distribution injectivity) gives the a.e. equality. KEY: Lp.fourier_toTemperedDistribution_eq,
 -- TemperedDistribution.fourier_apply, HasCompactSupport.toSchwartzMap (real Cc^∞ test → complex Schwartz). The bridge importing
 -- Mathlib's L² Plancherel isometry (Lp.inner_fourier_eq) into the classical-𝓕 Parseval pairing — the route to discharging hFdA.
+#print axioms QIQTH.Fock.StressTensor.fourier_conj_parseval_L2
+-- expected: standard only — ★★★★ Stress-tensor Route B: inversion-free conjugate Parseval. For A,B∈L¹∩L², ∫conj(𝓕A)·𝓕B=∫conj(A)·B,
+-- via Lp.inner_fourier_eq + fourier_lp_ae_eq + L2.inner_def. Needs only L¹∩L² membership, NOT Fourier inversion (no hFdA). Replaces fourier_conj_parseval.
+#print axioms QIQTH.Fock.StressTensor.stressFluxKK_eq_neg_rapMom_schwartz_closed
+-- expected: standard only — ★★★★★ ROUTE B FULLY CLOSED (Schwartz class): for ANY Schwartz f, m>0, stressFluxKK m f = −2π·rapidityMomentum(Krep)(Krep')
+-- with NO remaining hypotheses. The last gate hFdA is GONE — the Parseval chain (fourier_parseval_deriv_L2 → … → stressFluxKK_eq_neg_rapMom_L2) uses
+-- the L² Plancherel pairing (fourier_conj_parseval_L2), needing only horizonAmp,deriv∈L² (horizonAmp_memLp_two/horizonAmp_deriv_memLp_two). The
+-- free-field horizon stress flux = boost momentum, UNCONDITIONALLY for Schwartz test functions, axiom-free.
+#print axioms QIQTH.Fock.StressTensor.boostEnergy_eq_neg_stressFlux_schwartz_closed
+-- expected: standard only — ★★★★★ The hTkk scalar FULLY CLOSED (Schwartz): (2π·∫conj(Krep)·Krep').im = −stressFluxKK m f for ANY Schwartz f, no
+-- hypotheses. T_kk := −(ℏ/2π)·stressFluxKK makes the labelled hTkk an unconditional theorem — the bundled stress scalar IS the proven horizon stress flux.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,
