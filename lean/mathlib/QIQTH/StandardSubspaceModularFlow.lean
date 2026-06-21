@@ -1554,6 +1554,16 @@ theorem rvdRC_mul_rvdTwoSubRC_injective :
   rw [rvdRC_mul_rvdTwoSubRC_apply, rvdRC_mul_rvdTwoSubRC_apply] at hab
   exact rvdPmQ_injective S (rvdPmQ_injective S hab)
 
+/-- **`R = rvdRC` is injective** (toward the `√R`-range density, the `ξ = √R ζ` reconciliation of the device
+    g-function discharge).  From `R(2−R)` injective (`rvdRC_mul_rvdTwoSubRC_injective`): `R a = R b` gives
+    `R(2−R)a = (2−R)(R a) = (2−R)(R b) = R(2−R)b` (commute), hence `a = b`.  As a self-adjoint operator, `R`
+    injective ⟹ `√R` injective ⟹ `√R` has DENSE RANGE in `H` — the structural basis of the `√R`-range
+    density that lifts GConstancy from `ξ = √R ζ` to all of `𝒦`. -/
+theorem rvdRC_injective : Function.Injective (rvdRC S) := by
+  intro a b hab
+  refine rvdRC_mul_rvdTwoSubRC_injective S ?_
+  simp only [(rvdRC_commute_rvdTwoSubRC S).eq, ContinuousLinearMap.mul_apply, hab]
+
 /-- `A.restrictScalars ℝ` has dense range (self-adjoint + injective). -/
 theorem rvdRC_mul_rvdTwoSubRC_denseRange :
     DenseRange ((rvdRC S * rvdTwoSubRC S).restrictScalars ℝ) := by

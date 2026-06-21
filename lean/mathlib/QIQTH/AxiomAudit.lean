@@ -1421,6 +1421,10 @@ namespace QIQTH.AxiomAudit
 -- ℝ-side rvdR_le_two by defeq of reApplyInnerSelf.
 #print axioms QIQTH.StandardSubspaceModular.rvdSqrtR_mul_self
 -- expected: standard only — R^{1/2}·R^{1/2}=R (CFC.sqrt_mul_sqrt_self on the positive Rℂ).
+#print axioms QIQTH.StandardSubspaceModular.rvdRC_injective
+-- expected: standard only — R=rvdRC INJECTIVE (toward √R-range density, the ξ=√Rζ reconciliation): from R(2−R)
+-- injective (rvdRC_mul_rvdTwoSubRC_injective) via commute. R inj ⟹ √R inj (rvdSqrtR_mul_self) ⟹ √R DENSE RANGE in H
+-- — the structural basis of lifting GConstancy from ξ=√Rζ to all 𝒦 (remaining: the √R-vectors-in-𝒦 dense in 𝒦).
 #print axioms QIQTH.StandardSubspaceModular.rvdSqrtTwoSubR_mul_self
 -- expected: standard only — (2−R)^{1/2}·(2−R)^{1/2}=2−R.
 #print axioms QIQTH.StandardSubspaceModular.rvdSqrtR_commute_rvdSqrtTwoSubR
