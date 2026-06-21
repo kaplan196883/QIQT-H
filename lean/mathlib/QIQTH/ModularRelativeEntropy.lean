@@ -648,6 +648,19 @@ theorem devCorrExt_ofReal_inner (S : StandardSubspace H) (ξ : H) (t : ℝ) :
   rw [rvdSpec_deviceOpReal, devCorrExt]
   rfl
 
+/-- **Diagonal operator identification of the device strip extension** (general `z` in the half-strip):
+    `D_ξ(z) = ⟪ξ, deviceOpC(z) ξ⟫`.  The scalar integral `∫ d_z dμ^R_ξ` IS the diagonal expectation of the
+    device operator `d_z(R)` (via `inner_borelFC` + `bilinDiag_self` + `diagInt`).  This connects the proven
+    scalar holomorphy (`hasDerivAt_devCorrExt`) to the device OPERATOR — the bridge the polarization route to
+    the off-diagonal `⟪w, deviceOpC(z) ζ⟫` (and thence the strong/Fréchet holomorphy of `z ↦ deviceOpC(z)ζ`)
+    consumes. -/
+theorem devCorrExt_inner (S : StandardSubspace H) (ξ : H) (z : ℂ) (hz2 : z.im ≤ 0)
+    (hz1 : -(1 / 2 : ℝ) ≤ z.im) :
+    devCorrExt S ξ z = inner ℂ ξ (deviceOpC S z hz2 hz1 ξ) := by
+  rw [deviceOpC, inner_borelFC, bilinDiag_self, ProjectionValuedMeasure.diagInt, devCorrExt,
+    rvdSpecMeasure]
+  rfl
+
 /-- **The device strip extension is differentiable on the open half-strip** (no regular window): immediate
     from `hasDerivAt_devCorrExt` at every interior point.  The differentiability half of the
     bounded-holomorphic half-strip extension that strip-uniqueness consumes, for ANY standard subspace. -/

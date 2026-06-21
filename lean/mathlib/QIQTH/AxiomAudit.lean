@@ -4010,6 +4010,11 @@ namespace QIQTH.AxiomAudit
 -- So deviceVec(0)=√R ζ=ξ, J·deviceVec(0)=Jξ ⇒ g-function value g(0)=⟪η,Jξ⟫ = the GConstancy RHS. The cfcCont↔CFC
 -- bridge (borelFC of continuous fn = Mathlib CFC) realized via the sqrt-uniqueness pattern, no new axiom.
 #print axioms QIQTH.devCorrExt_ofReal_inner
+#print axioms QIQTH.devCorrExt_inner
+-- expected: standard only — DIAGONAL operator identification (general z in half-strip): D_ξ(z)=⟪ξ,deviceOpC(z)ξ⟫.
+-- The scalar integral ∫d_z dμ^R_ξ IS the diagonal device-operator expectation (inner_borelFC+bilinDiag_self+diagInt).
+-- Bridges the proven scalar holo (hasDerivAt_devCorrExt) to the device OPERATOR — prerequisite for the polarization
+-- route to off-diagonal ⟪w,deviceOpC(z)ζ⟫ and the strong/Fréchet holo of z↦deviceOpC(z)ζ.
 #print axioms QIQTH.StandardSubspaceModular.borelFC_sub
 -- expected: standard only — borelFC LINEARITY (subtraction): (f−g)(T)=f(T)−g(T), from borelFC_add+borelFC_neg
 -- (=borelFC_smul(−1)). Step (i) of the strong-holomorphy diff-quotient: deviceVec(z)−deviceVec(z₀) =
