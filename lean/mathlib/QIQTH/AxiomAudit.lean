@@ -4010,6 +4010,10 @@ namespace QIQTH.AxiomAudit
 -- So deviceVec(0)=√R ζ=ξ, J·deviceVec(0)=Jξ ⇒ g-function value g(0)=⟪η,Jξ⟫ = the GConstancy RHS. The cfcCont↔CFC
 -- bridge (borelFC of continuous fn = Mathlib CFC) realized via the sqrt-uniqueness pattern, no new axiom.
 #print axioms QIQTH.devCorrExt_ofReal_inner
+#print axioms QIQTH.deviceDerivOpC
+-- expected: standard only — CANDIDATE Fréchet derivative operator ∂_z d_{z₀}(R)=borelFC(ω↦i·log((2−ω)/ω)·d_{z₀}(ω)),
+-- bounded by devCharDeriv_norm_le_slab const (slab-independent operator by borelFC_congr). Applied to ζ it is the
+-- derivative of deviceVecF S ζ at z₀ (hasDerivAt_deviceVecF, pending the borelFC operator-algebra slope identity).
 #print axioms QIQTH.deviceVecF_eq_of_mem
 -- expected: standard only — TOTAL device-vector function deviceVecF (piece 4 of strong holo): dite-total ℂ→H,
 -- = deviceOpC(z)ζ on closed half-strip {−1/2≤Im z≤0}, 0 outside. Sidesteps the deviceOpC-takes-proofs friction

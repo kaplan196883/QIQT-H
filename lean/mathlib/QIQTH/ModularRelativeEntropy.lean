@@ -835,6 +835,25 @@ theorem tendsto_integral_devChar_remainder_sq (S : StandardSubspace H) (ζ : H)
       simpa [hF] using h2.norm.pow 2
   simpa using hconv
 
+open QIQTH.StandardSubspaceModular in
+/-- **Candidate Fréchet derivative operator of the device** at an interior point: `∂_z d_{z₀}(R) =
+    borelFC(ω ↦ i·log((2−ω)/ω)·d_{z₀}(ω))`, the spectral operator whose symbol is the `z`-derivative of the
+    device character at `z₀`.  Bounded by the `devCharDeriv_norm_le_slab` constant `C(β₀,β₁)` (the operator is
+    independent of the slab `(β₀,β₁) ∋ Im z₀`, by `borelFC_congr`).  Applied to `ζ` it is the Fréchet derivative
+    of `deviceVecF S ζ` at `z₀` (`hasDerivAt_deviceVecF`). -/
+noncomputable def deviceDerivOpC (S : StandardSubspace H) (z₀ : ℂ) {β₀ β₁ : ℝ}
+    (hβ₀ : 0 < β₀) (hβ₁ : β₁ < 1 / 2) (hz₀ : z₀ ∈ Complex.im ⁻¹' Set.Ioo (-β₁) (-β₀)) : H →L[ℂ] H :=
+  borelFC (rvdRC S) (rvdRC_isSelfAdjoint S)
+    ((measurable_const.mul (Complex.measurable_ofReal.comp (Real.measurable_log.comp
+      ((measurable_const.sub measurable_subtype_coe).div measurable_subtype_coe)))).mul
+      ((measurable_devChar z₀).comp measurable_subtype_coe))
+    (by
+      have hlog2 : (0 : ℝ) ≤ Real.log 2 := Real.log_nonneg (by norm_num)
+      have hβ₁' : 0 < 1 / 2 - β₁ := by linarith
+      nlinarith [Real.sqrt_nonneg 2, hlog2, le_of_lt (div_pos (by norm_num : (0:ℝ) < 2) hβ₀),
+        le_of_lt (div_pos (by norm_num : (0:ℝ) < 2) hβ₁')])
+    (fun ω => devCharDeriv_norm_le_slab S ω hβ₀ hβ₁ hz₀)
+
 /-- **Diagonal operator identification of the device strip extension** (general `z` in the half-strip):
     `D_ξ(z) = ⟪ξ, deviceOpC(z) ξ⟫`.  The scalar integral `∫ d_z dμ^R_ξ` IS the diagonal expectation of the
     device operator `d_z(R)` (via `inner_borelFC` + `bilinDiag_self` + `diagInt`).  This connects the proven
