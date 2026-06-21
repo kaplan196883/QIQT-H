@@ -4483,6 +4483,11 @@ namespace QIQTH.AxiomAudit
 -- free-field horizon null stress flux ∫_H λ T_kk dλ equals −2π·(rapidity-momentum boost charge of the one-particle wedge mode) — exactly
 -- the scalar hTkk asserted. Combines stressFluxKK_eq_rapMom (=2π·rapidityMomentum(horizonAmp)) + horizonAmp_inner_deriv (k↦θ flip). Discharges
 -- the scalar stress-flux identification hTkk of the QIQT→GR boost-charge=stress-flux input, modulo the genuine on-shell regularity of the wedge mode (labeled hyps).
+#print axioms QIQTH.Fock.StressTensor.boostEnergy_eq_neg_stressFlux
+-- expected: standard only — ★★★ Stress-tensor Route B → GR bridge: (2π·∫conj(Krep m f)·Krep').im = −stressFluxKK m f. The boost
+-- energy in the EXACT form wedge_hBoostCharge_of_smooth's hTkk uses ((2π·∫conj(f)f').im) equals −stressFluxKK. So defining the GR
+-- chain's T_kk := −(ℏ/2π)·stressFluxKK makes hTkk ((2π/ℏ)T_kk=(2π∫conj(f)f').im) hold by stressFluxKK_eq_neg_rapMom — the bundled
+-- scalar T_kk is now the DEFINED, proven free-field horizon stress flux. Modulo the same on-shell regularity (labeled hyps).
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

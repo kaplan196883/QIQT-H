@@ -378,4 +378,24 @@ theorem stressFluxKK_eq_neg_rapMom (m : ℝ) (hm : 0 < m) (f : V → ℂ) (kd : 
   rw [stressFluxKK_eq_rapMom m hm f hA hAd hdAc hdA hFdA hff h1 h2, hrel]
   ring
 
+/-- **★★★ Bridge to the GR chain's `hTkk`.**  The boost energy of the wedge mode in the exact form the
+    `wedge_hBoostCharge_of_smooth` input uses — `(2π·∫ conj(Krep)·Krep').im` — equals `−stressFluxKK`.
+    Hence defining the chain's stress scalar by `T_kk := −(ℏ/2π)·stressFluxKK` makes the labelled `hTkk`
+    (`(2π/ℏ)·T_kk = (2π·∫conj(f)·f').im`) hold by `stressFluxKK_eq_neg_rapMom`: the bundled scalar `T_kk` is
+    now the DEFINED, proven free-field horizon stress flux, not a free parameter.  Same on-shell regularity
+    hypotheses. -/
+theorem boostEnergy_eq_neg_stressFlux (m : ℝ) (hm : 0 < m) (f : V → ℂ) (kd : ℝ → ℂ)
+    (hkd : ∀ θ, HasDerivAt (fun θ => Krep m f θ) (kd θ) θ)
+    (hA : Integrable (horizonAmp m f)) (hAd : Differentiable ℝ (horizonAmp m f))
+    (hdAc : Continuous (deriv (horizonAmp m f))) (hdA : Integrable (deriv (horizonAmp m f)))
+    (hFdA : Integrable (𝓕 (deriv (horizonAmp m f))))
+    (hff : Integrable (fun θ => (starRingEnd ℂ) (horizonAmp m f θ) * horizonAmp m f θ))
+    (h1 : Integrable (fun θ => (starRingEnd ℂ) (deriv (horizonAmp m f) θ) * horizonAmp m f θ))
+    (h2 : Integrable (fun θ => (starRingEnd ℂ) (horizonAmp m f θ) * deriv (horizonAmp m f) θ)) :
+    (2 * Real.pi * ∫ θ, (starRingEnd ℂ) (Krep m f θ) * kd θ).im = - stressFluxKK m f := by
+  rw [stressFluxKK_eq_neg_rapMom m hm f kd hkd hA hAd hdAc hdA hFdA hff h1 h2]
+  simp only [rapidityMomentum, Complex.mul_im, Complex.mul_re, Complex.ofReal_re,
+    Complex.ofReal_im, Complex.re_ofNat, Complex.im_ofNat]
+  ring
+
 end QIQTH.Fock.StressTensor
