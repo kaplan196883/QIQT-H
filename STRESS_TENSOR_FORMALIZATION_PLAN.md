@@ -78,7 +78,33 @@ Define `Tkk m f λ := ‖∂_λ (horizonField m f) λ‖^2` (real, ≥0) and
 finiteness on the domain. This is the genuine **`T_kk` made into a defined quantity** (no longer a label).
 New: `NullStressFlux.lean`.
 
-### ⚠ STATUS UPDATE (2026-06-21): Phase 3 reached — 3a DONE, 3b is the CITED FRONTIER
+### ✅ STATUS UPDATE 2 (2026-06-21, post GPT-5.5 consult): the obstacle was a DEFINITION BUG — 3b is TRACTABLE
+
+GPT-5.5 found (and I verified independently — the counterexample is decisive) that the **half-line** definition
+`stressFluxKK := ∫_{λ>0} λ·T_kk` is WRONG: it does not equal `const·rapidityMomentum`. Counterexample: `K` real,
+smooth, compactly supported ⟹ `rapidityMomentum = Im∫K·K' = Im[½∫(K²)'] = 0`, but `∫_{λ>0} λ|∂_λφ_H|² > 0`. The
+`1_{λ>0}` multiplier is exactly what reintroduces the `δ'`/PV distribution. Physically the half-line is the
+*one-sided* modular Hamiltonian; the wedge modular flow `Δ^{it}` is the *two-sided* boost.
+
+**CORRECTED DEFINITION — full line:** `stressFluxKK := ∫_ℝ λ·T_kk(λ) dλ`. Then (verified by hand)
+`∫_ℝ λ|∂_λφ_H|² dλ = −2π · rapidityMomentum`, and this IS formalizable with current Mathlib:
+* `λ|∂_λφ_H|² = conj(χ_H)·ψ_H` where `χ_H = ∂_λφ_H`, `ψ_H = λ∂_λφ_H` (single integral, NO δ').
+* `χ_H = 𝓕[A]`, `ψ_H = 𝓕[B]` on the `k`-line (`k=(m/√2)e^{−θ}`, diffeo `θ↦k`), `A = −iK∘θ(k)`, `B = K'∘θ(k)/k = −iA'`.
+* `∫_ℝ conj(𝓕A)·𝓕B = 2π ∫ conj(A)·B` (Mathlib `integral_sesq_fourierIntegral_eq_neg_flip` / Parseval, integrability-only).
+* change of vars back: `∫conj(A)B = i∫_ℝ conj(K)K'dθ`, and `∫conj(K)K' = i·rapidityMomentum` (self-adjointness) ⟹ `−2π·rapidityMomentum`.
+* **Hypothesis class:** `K ∈ C_c^∞(ℝ)` (or weighted exp-decay so `A,B ∈ L¹(dk)` — Schwartz-in-θ alone is NOT enough,
+  since `∫|A|dk = ∫ k|K|dθ` needs decay as `θ→−∞`).
+
+**REVISED Phase 3 plan (tractable, ~2–3 fires):**
+- 3a′ (redo): redefine `stressFluxKK` with `∫_ℝ` (was `∫_{Ioi 0}`); re-prove dilation-invariance (full-line scaling — even simpler).
+- 3b-i: the `k`-line change of variables `χ_H = 𝓕[A]`, `ψ_H = 𝓕[B]` (+ the IBP `λχ_H = ψ_H`).
+- 3b-ii: apply the sesquilinear Fourier identity → `∫conj(A)B`; change vars back → `−2π·rapidityMomentum`. THE THEOREM.
+- Phase 4: discharge `hTkk` (define the chain `T_kk := −(1/2π)·stressFluxKK` up to the ℏ,2π constants) + rewire.
+
+Risk now concentrated in the Fourier change-of-variables + matching Mathlib's `Real.fourierIntegral` 2π convention —
+real work but standard, NOT a frontier. (Original alarmist "cited frontier" note below is SUPERSEDED.)
+
+### ~~⚠ STATUS UPDATE (2026-06-21): Phase 3 reached — 3a DONE, 3b is the CITED FRONTIER~~ (SUPERSEDED by Update 2 above)
 
 Phases 0–2 + 3a are **complete and axiom-free** (commits 7db57c6, 1f3f181, d35881a, 245a5f0): the entire
 definitional layer (`rapidityMomentum`, `horizonField`, `horizonFieldDeriv`, `Tkk`, `stressFluxKK`), all
