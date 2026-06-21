@@ -81,6 +81,70 @@ concrete free-field boost, or is the single irreducible labelled physical input.
 
 ---
 
+---
+
+## STATUS UPDATE (2026-06-22)
+
+### Task 1 — DONE ✅ (commit `da1cd3f`)
+
+`wedge_boostCharge_eq_neg_stressFlux` (`QIQTH/Fock/StressTensor/WedgeBoostWiring.lean`):
+for any Schwartz `g`, `m > 0`,
+```
+HasDerivAt (fun t => ⟪Krep, boostUnitary(−2π t) Krep⟫) (i·(−stressFluxKK m g)) 0
+```
+— the boost/modular-energy derivative of the free-field wedge mode **equals** `i·(−stressFluxKK m g)`,
+**with no `hTkk` hypothesis**. The labelled scalar `hTkk` of `hasDerivAt_inner_boostUnitary_imaginary`
+(`Tkk := −(ℏ/2π)·stressFluxKK`) is discharged via Route B
+(`boostEnergy_eq_neg_stressFlux_schwartz_closed`). All wedge-mode regularity supplied here:
+- `Krep_integrable` (`∫‖Krep‖ < ∞` — dominated by `cosh⁻²`, via new `integrable_exp_neg_abs` +
+  `integrable_inv_cosh_sq`);
+- `Krep_deriv_bounded` (`‖Krep'‖ ≤ C·cosh⁻¹ ≤ C`, from `Krep_deriv_norm_le`);
+- `schwartz_Krep_memLp`, `(schwartz_Krep_memLp …).star.integrable_mul …` (the `conj(Krep)·Krep ∈ L¹`
+  Hölder fact), `Krep_continuous`, `schwartz_Krep_hasDerivAt`.
+
+Axiom-free (`[propext, Classical.choice, Quot.sound]`), budget 0, no `sorry`. Imported into `QIQTH.lean`;
+audit entry added to `AxiomAudit.lean`. **The last labelled physics scalar of the localization slot is now an
+unconditional theorem for the free field.**
+
+### Task 2 — VERDICT: (iii) irreducible labelled input, with non-vacuity machine-checked
+
+**`StripKMSrvd` for the concrete free-field boost is the single irreducible labelled physical input** of the
+QIQT→GR chain's modular side — the Bisognano–Wichmann / Reeh–Schlieder thermality of the vacuum w.r.t. the
+boost. Precisely:
+
+1. **Never discharged for the boost.** Every theorem consuming it threads `hKMS : StripKMSrvd V 𝒦` as a
+   *hypothesis* about the candidate group `V`. `oneParticleBW_wedge_complete` (`OneParticleBW.lean:870`)
+   takes `hVboost : V = boostUnitary(−2π·)` + `hKMS : StripKMSrvd V 𝒦_W` and **derives** everything else —
+   invariance (`boostUnitary_mapsTo_wedgeSubspace`, geometric/proven), strong continuity, group law,
+   isometry — concluding the BW identification `modUnitary 𝒦_W t = boostUnitary(−2π t)`. No theorem proves
+   `StripKMSrvd boostUnitary 𝒦_W`.
+
+2. **Proven satisfiable / NON-VACUOUS (machine-checked).** `modCorr_halfStripReal` (`KMSCorrelation.lean:647`)
+   proves the **modular flow `Δ^{it}` itself** satisfies RvD Prop 3.5's half-strip KMS reality form —
+   *geometrically*, axiom-free, no circularity (the device vector is literally `Δ^{iz}ξ`, and
+   `Δ^{1/2}ξ = Jξ` on `𝒦` via `modCorr_midline_real`). Contrast `stripKMS_trivial` (`OneParticleBW.lean:543`),
+   which exposed the *old* `StripKMS` as vacuously true: `StripKMSrvd` (with `DiffContOnCl` + uniform bound +
+   the corrected RvD Def 3.4 plain-flip edge) is a **genuine, satisfiable constraint**.
+
+3. **Why irreducible for the boost.** `boostUnitary` is the *geometric* rapidity-translation `θ ↦ θ + t`
+   (`OneParticle.boostUnitary = boostFlow.unitary`, `boostFlow := translationFlow`), defined independently of
+   the modular `R`-operator. Proving `StripKMSrvd boostUnitary 𝒦_W` IS proving the free-field vacuum is KMS
+   (thermal) w.r.t. the geometric boost — the **Bisognano–Wichmann theorem itself**. Doing so from within is
+   either *circular* (it would go via `boost = Δ`, which is the conclusion) or requires the explicit
+   free-field rapidity two-point analyticity computation (the BW theorem done by hand on `L²(ℝ,dθ)`). The
+   latter is route **(ii) — derivable in principle but substantial and not done**: the missing lemma is the
+   explicit characterization of `𝒦_W` as the RvD/Hardy real subspace + the strip-analyticity of the rapidity
+   cross-correlation `∫conj(η(θ))ξ(θ+t)dθ` for `ξ,η ∈ 𝒦_W`. RvD/BGL themselves take this as their starting
+   datum.
+
+**Honest boundary.** The QIQT→GR modular chain rests on exactly one clearly-citable AQFT input:
+*the free-field vacuum's boost-KMS thermality* (`StripKMSrvd boostUnitary 𝒦_W` = Bisognano–Wichmann), its
+non-vacuity machine-verified. Everything downstream — RvD Thm 3.8 uniqueness (`oneParticleBW_complete`),
+the BW identification, the second-quantized modular flow, Route B's stress flux, and now (Task 1) the
+boost-charge = stress-flux scalar — is **derived, axiom-free**.
+
+---
+
 ## Verification discipline (both tasks)
 - Per Lean increment: `lake build` green; every new theorem `#print axioms` shows only
   `[propext, Classical.choice, Quot.sound]`; `scripts/axiom_budget_check.sh` → `budget 0`; commit on `main`
