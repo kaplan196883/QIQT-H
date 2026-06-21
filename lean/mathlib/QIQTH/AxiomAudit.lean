@@ -4010,6 +4010,13 @@ namespace QIQTH.AxiomAudit
 -- So deviceVec(0)=√R ζ=ξ, J·deviceVec(0)=Jξ ⇒ g-function value g(0)=⟪η,Jξ⟫ = the GConstancy RHS. The cfcCont↔CFC
 -- bridge (borelFC of continuous fn = Mathlib CFC) realized via the sqrt-uniqueness pattern, no new axiom.
 #print axioms QIQTH.devCorrExt_ofReal_inner
+#print axioms QIQTH.hasDerivAt_deviceVecF
+-- expected: standard only — ★★★★ STRONG (FRÉCHET) HOLOMORPHY of the device vector (PIECE 4 COMPLETE, the holomorphy
+-- wall DEFEATED): HasDerivAt (deviceVecF S ζ) (deviceDerivOpC z₀ ζ) z₀ at every interior z₀ of the open half-strip.
+-- slope→deriv since ‖slope−deriv‖=√(remainder integral)→√0=0 (deviceOpC_slope_normSq + tendsto_integral_devChar_
+-- remainder_sq + Real.sqrt continuity, via hasDerivAt_iff_tendsto_slope + tendsto_iff_norm_sub_tendsto_zero). NO
+-- Mathlib Dunford (weak⟹strong) needed — the H-valued derivative is obtained from a SCALAR dominated-convergence
+-- integral. ⇒ DifferentiableOn deviceVecF on the open strip ⇒ the g-function product rule ⇒ GConstancy ⇒ hUniq.
 #print axioms QIQTH.deviceOpC_slope_normSq
 -- expected: standard only — ★★★ OPERATOR-ALGEBRA HEART of piece 4: ‖(z−z₀)⁻¹·(deviceOpC(z)ζ−deviceOpC(z₀)ζ) −
 -- deviceDerivOpC(z₀)ζ‖² = ∫‖Δ_z(ω)−∂d(ω)‖² dμ^R_ζ (= tendsto_integral_devChar_remainder_sq integrand). The slope−

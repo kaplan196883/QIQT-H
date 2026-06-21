@@ -900,6 +900,40 @@ theorem deviceOpC_slope_normSq (S : StandardSubspace H) (ζ : H)
   simp only [Function.comp_apply]
   ring
 
+open QIQTH.StandardSubspaceModular MeasureTheory Filter in
+/-- **Strong (Fréchet) holomorphy of the device vector** (piece 4 COMPLETE): `z ↦ deviceOpC(z)ζ` is
+    complex-differentiable at every interior point `z₀` of the open half-strip, with derivative
+    `deviceDerivOpC(z₀)ζ`.  The slope-minus-derivative norm `→ 0`: its square is the remainder integral
+    (`deviceOpC_slope_normSq`) which `→ 0` (`tendsto_integral_devChar_remainder_sq`), so `‖slope − deriv‖ =
+    √(remainder) → √0 = 0` (`Real.sqrt` continuity), hence `slope → deriv`
+    (`tendsto_iff_norm_sub_tendsto_zero`).  This defeats the holomorphy wall WITHOUT Mathlib's missing
+    weak⟹strong (Dunford): the H-valued derivative is obtained from a scalar dominated-convergence integral. -/
+theorem hasDerivAt_deviceVecF (S : StandardSubspace H) (ζ : H)
+    {β₀ β₁ : ℝ} (hβ₀ : 0 < β₀) (hβ₁ : β₁ < 1 / 2) {z₀ : ℂ}
+    (hz₀ : z₀ ∈ Complex.im ⁻¹' Set.Ioo (-β₁) (-β₀)) :
+    HasDerivAt (deviceVecF S ζ) (deviceDerivOpC S z₀ hβ₀ hβ₁ hz₀ ζ) z₀ := by
+  obtain ⟨hz0lo, hz0hi⟩ := (Set.mem_preimage.mp hz₀ : z₀.im ∈ Set.Ioo (-β₁) (-β₀))
+  have hz02 : z₀.im ≤ 0 := le_of_lt (hz0hi.trans (by linarith))
+  have hz01 : -(1 / 2 : ℝ) ≤ z₀.im := le_of_lt (lt_of_le_of_lt (by linarith) hz0lo)
+  rw [hasDerivAt_iff_tendsto_slope, tendsto_iff_norm_sub_tendsto_zero]
+  have hR := tendsto_integral_devChar_remainder_sq S ζ hβ₀ hβ₁ hz₀
+  have hsqrt : Tendsto (fun z => Real.sqrt (∫ ω, ‖(devChar z (ω : spectrum ℝ (rvdRC S)).val
+        - devChar z₀ (ω : spectrum ℝ (rvdRC S)).val) / (z - z₀)
+        - Complex.I * (Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val)
+          / (ω : spectrum ℝ (rvdRC S)).val) : ℂ) * devChar z₀ (ω : spectrum ℝ (rvdRC S)).val‖ ^ 2
+        ∂(rvdSpecMeasure S ζ))) (nhdsWithin z₀ {z₀}ᶜ) (nhds 0) := by
+    have h := (Real.continuous_sqrt.tendsto 0).comp hR
+    simpa using h
+  have hsnhd : (Complex.im ⁻¹' Set.Ioo (-β₁) (-β₀)) ∈ nhds z₀ :=
+    (Complex.continuous_im.isOpen_preimage _ isOpen_Ioo).mem_nhds hz₀
+  refine hsqrt.congr' ?_
+  filter_upwards [mem_nhdsWithin_of_mem_nhds hsnhd, self_mem_nhdsWithin] with z hzs _
+  obtain ⟨hzlo, hzhi⟩ := (Set.mem_preimage.mp hzs : z.im ∈ Set.Ioo (-β₁) (-β₀))
+  have hz2 : z.im ≤ 0 := le_of_lt (hzhi.trans (by linarith))
+  have hz1 : -(1 / 2 : ℝ) ≤ z.im := le_of_lt (lt_of_le_of_lt (by linarith) hzlo)
+  rw [slope_def_module, deviceVecF_eq_of_mem S ζ hz2 hz1, deviceVecF_eq_of_mem S ζ hz02 hz01,
+    ← Real.sqrt_sq (norm_nonneg _), deviceOpC_slope_normSq S ζ hβ₀ hβ₁ hz2 hz1 hz02 hz01 hz₀]
+
 open QIQTH.StandardSubspaceModular in
 /-- **Diagonal operator identification of the device strip extension** (general `z` in the half-strip):
     `D_ξ(z) = ⟪ξ, deviceOpC(z) ξ⟫`.  The scalar integral `∫ d_z dμ^R_ξ` IS the diagonal expectation of the
