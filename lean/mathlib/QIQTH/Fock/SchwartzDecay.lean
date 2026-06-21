@@ -22,6 +22,7 @@
 import QIQTH.Fock.Localization
 import Mathlib.Analysis.Fourier.FourierTransformDeriv
 import Mathlib.Analysis.Distribution.SchwartzSpace.Basic
+import Mathlib.Analysis.Distribution.TemperateGrowth
 
 noncomputable section
 
@@ -254,5 +255,55 @@ class" — every Schwartz spacetime test function is `L²`-admissible for the ma
 def schwartzLocalTest (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) : LocalTest m where
   f := ⇑f
   memLp := schwartz_Krep_memLp f hm
+
+/-- **`x_j · f` as a Schwartz function** — coordinate multiplication preserves the Schwartz class.  Built from
+`SchwartzMap.bilinLeftCLM` with the scalar-multiplication bilinear map `(z, r) ↦ r • z` and the
+temperate-growth coordinate projection `x ↦ x j`.  This is the moment-map building block: the rapidity
+derivative `Krep' = kd` decomposes into mass-shell Fourier transforms of `x_j f` (each with `(cosh)⁻²` decay
+by `schwartz_Krep_decay_sq`), which yields the `(cosh)⁻¹` decay of `Krep'`. -/
+def coordMul (j : Fin 2) (f : SchwartzMap V ℂ) : SchwartzMap V ℂ :=
+  SchwartzMap.bilinLeftCLM ((ContinuousLinearMap.lsmul ℝ ℝ).flip)
+    (ContinuousLinearMap.proj j).hasTemperateGrowth f
+
+@[simp] theorem coordMul_apply (j : Fin 2) (f : SchwartzMap V ℂ) (x : V) :
+    coordMul j f x = (x j : ℝ) • f x := by
+  simp only [coordMul, SchwartzMap.bilinLeftCLM_apply, ContinuousLinearMap.flip_apply,
+    ContinuousLinearMap.lsmul_apply, ContinuousLinearMap.proj_apply]
+
+/-- `Krep` of the coordinate-multiplied test function is `(1/√2)` times the mass-shell Fourier transform of
+`x_j f` — the bridge that imports the `(cosh)⁻²` decay (`schwartz_Krep_decay_sq` on `coordMul j f`) into the
+`Krep'` moment decomposition. -/
+theorem Krep_coordMul (j : Fin 2) (f : SchwartzMap V ℂ) (m θ : ℝ) :
+    Krep m (⇑(coordMul j f)) θ
+      = (1 / Real.sqrt 2 : ℂ) * minkowskiFourier (fun x => (x j : ℝ) • (⇑f) x) (massShell m θ) := by
+  have hfun : (⇑(coordMul j f)) = (fun x => (x j : ℝ) • (⇑f) x) := funext (coordMul_apply j f)
+  simp only [Krep, hfun]
+
+/-- **`(cosh)⁻²` decay of the mass-shell Fourier transform of `x_j f`.**  Since `x_j f` is Schwartz
+(`coordMul`), `schwartz_Krep_decay_sq` applies to it, and `minkowskiFourier(x_j f) = √2·Krep(coordMul j f)`
+(`Krep_coordMul`).  This is the moment-decay input for the `(cosh)⁻¹` decay of the rapidity derivative `Krep'`. -/
+theorem minkowskiFourier_coordMul_decay (j : Fin 2) (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ θ : ℝ,
+      ‖minkowskiFourier (fun x => (x j : ℝ) • (⇑f) x) (massShell m θ)‖ ≤ C * ((Real.cosh θ) ^ 2)⁻¹ := by
+  refine ⟨Real.sqrt 2 * (16 * π ^ 2 * ((∫ v, ‖(⇑(coordMul j f)) v‖)
+      + (∫ v, ‖iteratedFDeriv ℝ 1 (⇑(coordMul j f)) v‖)
+      + (∫ v, ‖iteratedFDeriv ℝ 2 (⇑(coordMul j f)) v‖)) / (Real.sqrt 2 * m ^ 2)),
+    by positivity, fun θ => ?_⟩
+  have hd := schwartz_Krep_decay_sq (coordMul j f) hm θ
+  have hM : minkowskiFourier (fun x => (x j : ℝ) • (⇑f) x) (massShell m θ)
+      = (Real.sqrt 2 : ℂ) * Krep m (⇑(coordMul j f)) θ := by
+    rw [Krep_coordMul, ← mul_assoc, show (Real.sqrt 2 : ℂ) * (1 / Real.sqrt 2 : ℂ) = 1 from by
+      rw [mul_one_div, div_self]; exact_mod_cast Real.sqrt_ne_zero'.mpr (by norm_num), one_mul]
+  rw [hM, norm_mul, show ‖(Real.sqrt 2 : ℂ)‖ = Real.sqrt 2 from by
+    rw [Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (by positivity)]]
+  calc Real.sqrt 2 * ‖Krep m (⇑(coordMul j f)) θ‖
+      ≤ Real.sqrt 2 * (16 * π ^ 2 * ((∫ v, ‖(⇑(coordMul j f)) v‖)
+          + (∫ v, ‖iteratedFDeriv ℝ 1 (⇑(coordMul j f)) v‖)
+          + (∫ v, ‖iteratedFDeriv ℝ 2 (⇑(coordMul j f)) v‖)) / (Real.sqrt 2 * m ^ 2)
+          * ((Real.cosh θ) ^ 2)⁻¹) := mul_le_mul_of_nonneg_left hd (by positivity)
+    _ = Real.sqrt 2 * (16 * π ^ 2 * ((∫ v, ‖(⇑(coordMul j f)) v‖)
+          + (∫ v, ‖iteratedFDeriv ℝ 1 (⇑(coordMul j f)) v‖)
+          + (∫ v, ‖iteratedFDeriv ℝ 2 (⇑(coordMul j f)) v‖)) / (Real.sqrt 2 * m ^ 2))
+          * ((Real.cosh θ) ^ 2)⁻¹ := by ring
 
 end QIQTH.Fock.Localization
