@@ -78,6 +78,37 @@ Define `Tkk m f λ := ‖∂_λ (horizonField m f) λ‖^2` (real, ≥0) and
 finiteness on the domain. This is the genuine **`T_kk` made into a defined quantity** (no longer a label).
 New: `NullStressFlux.lean`.
 
+### ⚠ STATUS UPDATE (2026-06-21): Phase 3 reached — 3a DONE, 3b is the CITED FRONTIER
+
+Phases 0–2 + 3a are **complete and axiom-free** (commits 7db57c6, 1f3f181, d35881a, 245a5f0): the entire
+definitional layer (`rapidityMomentum`, `horizonField`, `horizonFieldDeriv`, `Tkk`, `stressFluxKK`), all
+boost↔dilation covariances, and the **dilation-invariance** of the flux `stressFluxKK_boostTest`.
+
+**Phase 3b — `stressFluxKK = π · rapidityMomentum` — is BLOCKED on missing Mathlib analysis infrastructure**
+(genuine assessment, both routes tried on paper):
+* **Direct route.** `∫_{λ>0} λ|∂_λφ_H|²dλ` Parseval-expands to `∫∫ K(θ)K̄(θ') k(θ)k(θ') · [∫_0^∞ λe^{−iλ(k(θ)−k(θ'))}dλ] dθdθ'`.
+  The inner kernel converges only as a distribution: `∫_0^∞ λe^{−iλΔ}dλ = iπδ'(Δ) + (PV part)`. The `δ'(Δ)` is
+  exactly what yields the momentum coupling `∫K̄·K'` — but Mathlib has **no tempered distributions / no `δ'`**.
+* **Regularize-then-limit route (c).** The regularized kernel `∫_0^∞ λe^{−(ε+iΔ)λ}dλ = (ε+iΔ)^{−2}` IS buildable
+  (Mathlib's `integral_Ioi_of_hasDerivAt_of_tendsto` is ℂ-valued; antiderivative `−(t/c+1/c²)e^{−ct}`). But the
+  `ε→0` limit `(ε+iΔ)^{−2} → δ'`-distribution inside the double `θ`-integral is the SAME distributional step —
+  the limit kernel is not an L¹ function, so dominated convergence does not apply; identifying the boundary `δ'`
+  is precisely the missing distribution theory.
+* **IBP + Parseval route.** `λ∂_λφ_H = 𝓕[K']` (one IBP in θ, since `λk e^{−iλk} = −i∂_θ e^{−iλk}`) reduces it to a
+  half-line Fourier–Parseval pairing. But Mathlib has **no line Fourier–Plancherel isometry** (only the weak
+  sesquilinear `integral_sesq_fourierIntegral_eq_neg_flip`, integrability-only) and **no Hardy/half-line
+  structure** to handle the `∫_0^∞` vs `∫_ℝ` and the on-shell change of variables `θ ↔ k`.
+
+**Conclusion.** `stressFluxKK = π·rapidityMomentum` is a research-grade analytic formalization (it needs either
+minimal tempered-distribution support, OR line Fourier–Plancherel + full-line IBP + Hardy structure) — a
+multi-week-to-multi-month Mathlib-grade build, NOT a fire-sized increment. Per the honest-scale note below, the
+disciplined outcome is to **declare Phase 3a the fully-rigorous milestone and Phase 3b the cited frontier**
+(exactly as Araki/Type-III are cited), unless the user authorizes the deliberate infrastructure campaign.
+**Decision for the user:** (A) authorize the multi-week infra build, or (B) accept 3a + cite 3b. (`CronDelete`
+the loop to pause autonomous fires while deciding.)
+
+---
+
 **Phase 3 — Mellin/Plancherel identity = THE THEOREM (~1–2 weeks, the crux).**
 Prove `stressFluxKK_eq_rapidityMomentum`:
 ```
