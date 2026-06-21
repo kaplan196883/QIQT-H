@@ -98,4 +98,33 @@ theorem inner_deriv_eq_I_mul_rapidityMomentum (f f' : ℝ → ℂ)
   have hrm : rapidityMomentum f f' = I.im := by simp only [rapidityMomentum, hI]
   rw [hrm]
 
+/-- **★★ Phase 3b-ii assembly: the horizon flux equals `−2π·rapidityMomentum` (modulo the Parseval step).**
+    Given the genuine analytic fact `hFlux` — that the Parseval/Fourier-derivative computation reduces the
+    horizon flux to `2π·i·∫ conj(a)·a'` — the self-adjointness `inner_deriv_eq_I_mul_rapidityMomentum`
+    (`∫ conj(a)a' = i·rapidityMomentum`) turns the two factors of `i` into the real sign, yielding
+    `stressFluxKK m f = −2π · rapidityMomentum a a'`.
+
+    `hFlux` is the *one* remaining piece to formalize: the weak sesquilinear Parseval identity applied to
+    `χ_H = 𝓕(horizonAmp)` and `ψ_H = 𝓕(−i·horizonAmp')` (`horizonFieldDeriv_eq_fourier` + the Fourier-derivative
+    relation), then the `k ↦ θ` change of variables — all standard, Mathlib-provable analysis (Fourier
+    inversion + `integral_sesq_fourierIntegral_eq_neg_flip`), deferred.  It is a genuine theorem, NOT a
+    conjecture and NOT vacuous (it is a concrete equation between two integrals of the wedge mode). -/
+theorem stressFluxKK_eq_of_flux (m : ℝ) (f : V → ℂ) (a a' : ℝ → ℂ)
+    (hderiv : ∀ x, HasDerivAt a (a' x) x)
+    (hff : Integrable (fun θ => (starRingEnd ℂ) (a θ) * a θ))
+    (h1 : Integrable (fun θ => (starRingEnd ℂ) (a' θ) * a θ))
+    (h2 : Integrable (fun θ => (starRingEnd ℂ) (a θ) * a' θ))
+    (hFlux : ((stressFluxKK m f : ℝ) : ℂ)
+        = 2 * Real.pi * Complex.I * ∫ θ, (starRingEnd ℂ) (a θ) * a' θ) :
+    stressFluxKK m f = -(2 * Real.pi) * rapidityMomentum a a' := by
+  rw [inner_deriv_eq_I_mul_rapidityMomentum a a' hderiv hff h1 h2] at hFlux
+  have key : ((stressFluxKK m f : ℝ) : ℂ)
+      = ((-(2 * Real.pi) * rapidityMomentum a a' : ℝ) : ℂ) := by
+    rw [hFlux]
+    rw [show (2 : ℂ) * (Real.pi : ℂ) * Complex.I * (Complex.I * (rapidityMomentum a a' : ℂ))
+          = (2 * (Real.pi : ℂ) * (rapidityMomentum a a' : ℂ)) * (Complex.I * Complex.I) from by ring,
+      Complex.I_mul_I]
+    push_cast; ring
+  exact_mod_cast key
+
 end QIQTH.Fock.StressTensor

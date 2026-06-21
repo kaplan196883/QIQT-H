@@ -4427,6 +4427,12 @@ namespace QIQTH.AxiomAudit
 -- f f' for smooth decaying f (Re∫conj(f)f'=0, the momentum operator is Hermitian). The piece that turns the Parseval output
 -- ∫conj(A)B = i∫conj(K)K' into the REAL −2π·rapidityMomentum. Proof: ∫conj(f)f' + conj(∫conj(f)f') = ∫ d/dθ|f|² = 0 via the
 -- full-line FTC integral_eq_zero_of_hasDerivAt_of_integrable + HasDerivAt.star. Generic (hyps: f differentiable + integrable f,f'·f).
+#print axioms QIQTH.Fock.StressTensor.stressFluxKK_eq_of_flux
+-- expected: standard only — ★★ Stress-tensor Route B, Phase 3b-ii ASSEMBLY: stressFluxKK m f = −2π·rapidityMomentum a a',
+-- GIVEN hFlux (the Parseval/Fourier-deriv computation: ↑stressFluxKK = 2π·i·∫conj(a)a'). Combines hFlux with the proven
+-- self-adjointness (∫conj(a)a'=i·rapidityMomentum): the two i factors give i²=−1 ⟹ the real −2π·rapidityMomentum. hFlux is
+-- the ONE remaining deferred piece (weak sesquilinear Parseval on χ_H=𝓕(horizonAmp), ψ_H=𝓕(−iA'), + k↦θ change of vars) — a
+-- genuine standard Mathlib-provable theorem (Fourier inversion + integral_sesq_fourierIntegral_eq_neg_flip), NOT vacuous/conjecture.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,
