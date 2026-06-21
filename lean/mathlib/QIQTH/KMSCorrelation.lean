@@ -613,14 +613,20 @@ theorem gFunction_bottom_eq_of_mem_K (S : StandardSubspace H) {ζ : H}
       = inner ℂ (modUnitary S t (rvdSqrtR S ζ)) w := by
   rw [modConjBilin_apply, modConj_deviceVecF_bottom_eq_of_mem_K S hζ]
 
-/-- **Geometric reduction of the bottom-edge KMS reality `h1`** — the bottom-edge analogue of the
-    purely-geometric `gTopEdge_real`.  Under `√Rζ ∈ 𝒦`, the bottom-edge g-value is `⟪Δ^{it}ξ, gaussSmearC(t−i/2)⟫`
-    with `ξ = √Rζ`, and `Δ^{it}ξ ∈ 𝒦` (`modUnitary_mapsTo_K`).  So by RvD Prop 2.3 (`inner_real_of_mem_K_perp_IK`,
-    `Im⟪x,y⟫ = 0` for `x ∈ 𝒦`, `y ⊥ i𝒦`) the value is REAL as soon as the mid-line orbit vector
-    `gaussSmearC(t−i/2)` lies in `(i𝒦)^⊥` (`projIK = 0`).  This localizes the ENTIRE remaining KMS content of
-    `h1` to the single fact `projIK(gaussSmearC(t−i/2)) = 0` — the analytic continuation of the orbit to the
-    mid-line landing in `(i𝒦)^⊥`, which is exactly what the KMS condition (`StripKMSrvd`) supplies (RvD's
-    half-period reflection `Δ^{1/2} = J`). -/
+/-- **Geometric *sufficient condition* for the bottom-edge value (NOT the `h1` discharge route).**  Under
+    `√Rζ ∈ 𝒦` the bottom-edge g-value is `⟪Δ^{it}ξ, gaussSmearC(t−i/2)⟫` with `Δ^{it}ξ ∈ 𝒦`
+    (`modUnitary_mapsTo_K`), so by RvD Prop 2.3 (`inner_real_of_mem_K_perp_IK`) it is real IF
+    `projIK(gaussSmearC(t−i/2)) = 0`.
+
+    ⚠ HONEST CAVEAT: that hypothesis is in general **FALSE**, so this is NOT how `h1` is discharged.  Writing
+    `gaussSmearC(t−i/2) = ∫ e^{−n(u−t+i/2)²} V_u η du = e^{n/4}∫ e^{−n(u−t)²}[cos − i·sin](n(u−t))·V_u η du`,
+    the `−i·sin·V_u η` part lies in `i𝒦` (since `−i·v = i·(−v) ∈ i𝒦` for `v ∈ 𝒦`), so the mid-line orbit
+    carries a genuine `i𝒦` component: `projIK(gaussSmearC(t−i/2)) ≠ 0`.  Unlike the real-axis edge
+    (`gTopEdge_real`, where the DEVICE side `Δ^{it}Jξ ∈ (i𝒦)^⊥` carries the perpendicularity), the bottom edge
+    has the device side IN `𝒦` (the `√R↔√(2−R)` half-strip flip) and the orbit side in NEITHER `𝒦` nor
+    `(i𝒦)^⊥`.  So the bottom-edge reality is a GLOBAL analytic fact (the KMS f-transfer: `HalfStripReal`'s
+    mid-line-real witness matched to `g` via half-strip boundary uniqueness — RvD Thm 3.8's source-garbled core),
+    not a pointwise perpendicularity.  This lemma records the correct geometric implication only. -/
 theorem gFunction_bottom_real_of_perp_IK (S : StandardSubspace H) (V : ℝ → (H →L[ℂ] H)) (n : ℝ) (η : H)
     {ζ : H} (hζ : projK S (rvdSqrtR S ζ) = rvdSqrtR S ζ) (t : ℝ)
     (hperp : projIK S (gaussSmearC V n η ((t : ℂ) - Complex.I / 2)) = 0) :
