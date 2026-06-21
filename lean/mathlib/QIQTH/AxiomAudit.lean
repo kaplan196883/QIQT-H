@@ -4573,6 +4573,15 @@ namespace QIQTH.AxiomAudit
 -- Off x=0 (null set, irrelevant): deriv = (i/x)·Krep'(rapInv x) on x>0, 0 on x<0; with cosh(rapInv x)=(c²+x²)/(2cx) + Krep_deriv_norm_le
 -- the 1/x cancels ⟹ ‖deriv horizonAmp x‖ ≤ 2Cc(c²+x²)⁻¹, integrable (integrable_inv_const_sq_add). deriv measurable (measurable_deriv);
 -- deriv horizonAmp =ᵐ derivH via {0} null (compl_mem_ae_iff). Discharges hdA — 5 of 9 regularity gates done.
+#print axioms QIQTH.Fock.StressTensor.horizonAmp_deriv_le
+-- expected: standard only — Stress-tensor Route B: shared aux — AEStronglyMeasurable (deriv horizonAmp) ∧ ∃D≥0, ‖deriv horizonAmp x‖
+-- ≤ D(c²+x²)⁻¹ a.e. The Cauchy bound + measurability core feeding hdA/h1/h2.
+#print axioms QIQTH.Fock.StressTensor.horizonAmp_deriv_mul_integrable
+-- expected: standard only — ★★ Stress-tensor Route B (h1 DISCHARGED): Integrable (conj(deriv A)·A), A=horizonAmp m f (f Schwartz, m>0).
+-- ‖conj A'·A‖=‖A'‖‖A‖ ≤ (2Cc(c²+x²)⁻¹)(B(c²+x²)⁻¹) via horizonAmp_deriv_le × horizonAmp_norm_le', squared dominator integrable_inv_const_sq_add_sq.
+#print axioms QIQTH.Fock.StressTensor.horizonAmp_mul_deriv_integrable
+-- expected: standard only — ★★ Stress-tensor Route B (h2 DISCHARGED): Integrable (conj(A)·deriv A). Same product bound as h1.
+-- 7 of 9 regularity gates done (hkd hA hAd hff hdA h1 h2); remaining hdAc (needs super-exp Krep' decay) + hFdA (𝓕(deriv) integrable).
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

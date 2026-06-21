@@ -593,13 +593,15 @@ theorem Krep_deriv_norm_le {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) :
   rw [(schwartz_Krep_hasDerivAt m hm.le f θ).deriv]
   exact hb θ
 
-/-- **★★★ `deriv (horizonAmp)` is `L¹`** (`hdA`) for a Schwartz test function (`m > 0`).  Off `x = 0` the
-    derivative is `(i/x)·Krep'(rapInv x)` on `x > 0` and `0` on `x < 0`; with `cosh(rapInv x) = (c²+x²)/(2cx)`
-    and the `Krep'` decay `‖Krep'(θ)‖ ≤ C·(cosh θ)⁻¹` (`Krep_deriv_norm_le`) the `1/x` cancels, leaving
-    `‖deriv(horizonAmp) x‖ ≤ 2Cc·(c²+x²)⁻¹` — integrable (`integrable_inv_const_sq_add`).  `{0}` is null so the
-    `x = 0` boundary is irrelevant; `deriv` is measurable (`measurable_deriv`).  Discharges `hdA`. -/
-theorem horizonAmp_deriv_integrable {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) :
-    Integrable (deriv (horizonAmp m (⇑f))) := by
+/-- **The Cauchy bound + measurability of `deriv (horizonAmp)`** — the shared analytic core of the
+    derivative gates (`hdA`/`h1`/`h2`).  Off the null set `{0}`, `deriv (horizonAmp m f) = (i/x)·Krep'(rapInv x)`
+    on `x > 0` and `0` on `x < 0`; with `cosh(rapInv x) = (c²+x²)/(2cx)` and `‖Krep'(θ)‖ ≤ C·(cosh θ)⁻¹`
+    (`Krep_deriv_norm_le`) the `1/x` cancels, leaving `‖deriv(horizonAmp) x‖ ≤ 2Cc·(c²+x²)⁻¹` a.e.  `deriv` is
+    measurable (`measurable_deriv`); `{0}` is null (`compl_mem_ae_iff`). -/
+theorem horizonAmp_deriv_le {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) :
+    AEStronglyMeasurable (deriv (horizonAmp m (⇑f))) volume ∧
+      ∃ D : ℝ, 0 ≤ D ∧ ∀ᵐ x ∂volume,
+        ‖deriv (horizonAmp m (⇑f)) x‖ ≤ D * ((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹ := by
   set c : ℝ := m / Real.sqrt 2 with hc
   have hcpos : 0 < c := by rw [hc]; positivity
   obtain ⟨C, hC, hCb⟩ := Krep_deriv_norm_le hm f
@@ -610,7 +612,6 @@ theorem horizonAmp_deriv_integrable {m : ℝ} (hm : 0 < m) (f : SchwartzMap V �
     fun x => (Set.Ioi 0).indicator (fun x : ℝ => (Complex.I / (x : ℂ)) * kd (rapInv m x)) x with hdHdef
   have hrap_meas : Measurable (rapInv m) := by
     unfold rapInv; exact measurable_const.sub Real.measurable_log
-  -- deriv horizonAmp =ᵐ derivH  (they agree off the null set {0})
   have hae : deriv (horizonAmp m (⇑f)) =ᵐ[volume] derivH := by
     have hnull : volume ({(0 : ℝ)} : Set ℝ) = 0 := Real.volume_singleton
     refine Filter.eventuallyEq_of_mem (s := {(0 : ℝ)}ᶜ) (compl_mem_ae_iff.mpr hnull) (fun x hx => ?_)
@@ -632,23 +633,73 @@ theorem horizonAmp_deriv_integrable {m : ℝ} (hm : 0 < m) (f : SchwartzMap V �
     rw [hdHdef]
     exact (((measurable_const.div Complex.continuous_ofReal.measurable).mul
       ((measurable_deriv (fun θ => Krep m (⇑f) θ)).comp hrap_meas)).indicator measurableSet_Ioi)
-  refine (Integrable.congr ?_ hae.symm)
-  refine ((integrable_inv_const_sq_add hcpos).const_mul (2 * C * c)).mono'
-    hderivH_meas.aestronglyMeasurable (Filter.Eventually.of_forall fun x => ?_)
-  simp only [hdHdef, Set.indicator_apply]
-  split_ifs with hx
-  · rw [Set.mem_Ioi] at hx
-    rw [norm_mul, norm_div, Complex.norm_I, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hx,
-      one_div]
-    have hcosh_eq : Real.cosh (rapInv m x) = (c ^ 2 + x ^ 2) / (2 * c * x) := by
-      rw [rapInv, ← hc, ← Real.log_div hcpos.ne' hx.ne', Real.cosh_log (by positivity)]; field_simp
-    have hkb := hCb (rapInv m x)
-    rw [hcosh_eq] at hkb
-    calc x⁻¹ * ‖kd (rapInv m x)‖
-        ≤ x⁻¹ * (C * ((c ^ 2 + x ^ 2) / (2 * c * x))⁻¹) :=
-          mul_le_mul_of_nonneg_left hkb (by positivity)
-      _ = 2 * C * c * (c ^ 2 + x ^ 2)⁻¹ := by rw [inv_div]; field_simp
-  · rw [norm_zero]
-    exact mul_nonneg (mul_nonneg (mul_nonneg (by norm_num) hC) (by positivity)) (by positivity)
+  have hbound : ∀ x : ℝ, ‖derivH x‖ ≤ 2 * C * c * (c ^ 2 + x ^ 2)⁻¹ := by
+    intro x
+    simp only [hdHdef, Set.indicator_apply]
+    split_ifs with hx
+    · rw [Set.mem_Ioi] at hx
+      rw [norm_mul, norm_div, Complex.norm_I, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hx, one_div]
+      have hcosh_eq : Real.cosh (rapInv m x) = (c ^ 2 + x ^ 2) / (2 * c * x) := by
+        rw [rapInv, ← hc, ← Real.log_div hcpos.ne' hx.ne', Real.cosh_log (by positivity)]; field_simp
+      have hkb := hCb (rapInv m x)
+      rw [hcosh_eq] at hkb
+      calc x⁻¹ * ‖kd (rapInv m x)‖
+          ≤ x⁻¹ * (C * ((c ^ 2 + x ^ 2) / (2 * c * x))⁻¹) :=
+            mul_le_mul_of_nonneg_left hkb (by positivity)
+        _ = 2 * C * c * (c ^ 2 + x ^ 2)⁻¹ := by rw [inv_div]; field_simp
+    · rw [norm_zero]
+      exact mul_nonneg (mul_nonneg (mul_nonneg (by norm_num) hC) (by positivity)) (by positivity)
+  refine ⟨hderivH_meas.aestronglyMeasurable.congr hae.symm,
+    2 * C * c, mul_nonneg (mul_nonneg (by norm_num) hC) hcpos.le, ?_⟩
+  filter_upwards [hae] with x hx
+  rw [hx]; exact hbound x
+
+/-- **★★★ `deriv (horizonAmp)` is `L¹`** (`hdA`) for a Schwartz test function (`m > 0`). -/
+theorem horizonAmp_deriv_integrable {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) :
+    Integrable (deriv (horizonAmp m (⇑f))) := by
+  obtain ⟨hmeas, D, _, hb⟩ := horizonAmp_deriv_le hm f
+  exact ((integrable_inv_const_sq_add (show (0 : ℝ) < m / Real.sqrt 2 by positivity)).const_mul D).mono'
+    hmeas hb
+
+/-- The horizon-amplitude Cauchy envelope in existential form (for use with the `deriv` envelope). -/
+theorem horizonAmp_norm_le' {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) :
+    ∃ B : ℝ, 0 ≤ B ∧ ∀ x : ℝ, ‖horizonAmp m (⇑f) x‖ ≤ B * ((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹ :=
+  ⟨4 * (16 * π ^ 2 * ((∫ v, ‖(⇑f) v‖) + (∫ v, ‖iteratedFDeriv ℝ 1 (⇑f) v‖)
+      + (∫ v, ‖iteratedFDeriv ℝ 2 (⇑f) v‖)) / (Real.sqrt 2 * m ^ 2)) * (m / Real.sqrt 2) ^ 2,
+    by positivity, fun x => horizonAmp_norm_le hm f x⟩
+
+/-- **★★ The cross self-pairing `∫ conj(A')·A`** (`h1`) for `A = horizonAmp m f` (`f` Schwartz, `m > 0`).
+    `‖conj(A' x)·A x‖ = ‖A' x‖·‖A x‖ ≤ (2Cc·(c²+x²)⁻¹)·(B·(c²+x²)⁻¹)` (`horizonAmp_deriv_le` ×
+    `horizonAmp_norm_le'`), dominated by the squared Cauchy kernel (`integrable_inv_const_sq_add_sq`). -/
+theorem horizonAmp_deriv_mul_integrable {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) :
+    Integrable (fun θ => (starRingEnd ℂ) (deriv (horizonAmp m (⇑f)) θ) * horizonAmp m (⇑f) θ) := by
+  obtain ⟨hAd_meas, D, _, hAd_b⟩ := horizonAmp_deriv_le hm f
+  obtain ⟨B, _, hA_b⟩ := horizonAmp_norm_le' hm f
+  have hA_aes : AEStronglyMeasurable (horizonAmp m (⇑f)) volume :=
+    (horizonAmp_integrable hm f).aestronglyMeasurable
+  refine ((integrable_inv_const_sq_add_sq (show (0 : ℝ) < m / Real.sqrt 2 by positivity)).const_mul
+    (D * B)).mono' ((Complex.continuous_conj.comp_aestronglyMeasurable hAd_meas).mul hA_aes) ?_
+  filter_upwards [hAd_b] with x hx
+  rw [norm_mul, Complex.norm_conj]
+  calc ‖deriv (horizonAmp m (⇑f)) x‖ * ‖horizonAmp m (⇑f) x‖
+      ≤ (D * ((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹) * (B * ((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹) :=
+        mul_le_mul hx (hA_b x) (norm_nonneg _) (le_trans (norm_nonneg _) hx)
+    _ = D * B * (((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹) ^ 2 := by ring
+
+/-- **★★ The cross self-pairing `∫ conj(A)·A'`** (`h2`) for `A = horizonAmp m f` (`f` Schwartz, `m > 0`). -/
+theorem horizonAmp_mul_deriv_integrable {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) :
+    Integrable (fun θ => (starRingEnd ℂ) (horizonAmp m (⇑f) θ) * deriv (horizonAmp m (⇑f)) θ) := by
+  obtain ⟨hAd_meas, D, _, hAd_b⟩ := horizonAmp_deriv_le hm f
+  obtain ⟨B, _, hA_b⟩ := horizonAmp_norm_le' hm f
+  have hA_aes : AEStronglyMeasurable (horizonAmp m (⇑f)) volume :=
+    (horizonAmp_integrable hm f).aestronglyMeasurable
+  refine ((integrable_inv_const_sq_add_sq (show (0 : ℝ) < m / Real.sqrt 2 by positivity)).const_mul
+    (B * D)).mono' ((Complex.continuous_conj.comp_aestronglyMeasurable hA_aes).mul hAd_meas) ?_
+  filter_upwards [hAd_b] with x hx
+  rw [norm_mul, Complex.norm_conj]
+  calc ‖horizonAmp m (⇑f) x‖ * ‖deriv (horizonAmp m (⇑f)) x‖
+      ≤ (B * ((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹) * (D * ((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹) :=
+        mul_le_mul (hA_b x) hx (norm_nonneg _) (le_trans (norm_nonneg _) (hA_b x))
+    _ = B * D * (((m / Real.sqrt 2) ^ 2 + x ^ 2)⁻¹) ^ 2 := by ring
 
 end QIQTH.Fock.StressTensor
