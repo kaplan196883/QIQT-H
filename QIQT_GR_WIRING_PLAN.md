@@ -106,7 +106,19 @@ Axiom-free (`[propext, Classical.choice, Quot.sound]`), budget 0, no `sorry`. Im
 audit entry added to `AxiomAudit.lean`. **The last labelled physics scalar of the localization slot is now an
 unconditional theorem for the free field.**
 
-### Task 2 — VERDICT: (iii) irreducible labelled input, with non-vacuity machine-checked
+### Task 2 — VERDICT (CORRECTED 2026-06-22 after GPT-5.5-pro review)
+
+⚠ **My first verdict below ("(iii) irreducible") was an OVERCLAIM / sandbagging.** GPT-5.5-pro review
+(reproduced after) shows `StripKMSrvd` for the free-field boost is **NOT irreducible** — it is a
+**dischargeable theorem** via an explicit, non-circular rapidity Hardy-space proof. And `hFocus`, `hDnn`,
+`conserv` are mostly **mathematical theorems**, not physical citations. The ONE genuinely irreducible
+*physical* input is the **Clausius/area-saturation law** (`hbound`, `hsat`). See "CORRECTED VERDICT" below;
+the original-verdict text is retained (struck) for the record.
+
+#### Original (incorrect) verdict — retained for honesty
+
+~~(iii) irreducible labelled input.~~ The points below about *non-vacuity* and *what is consumed vs derived*
+remain correct; only the "irreducible / can't be discharged" conclusion was wrong.
 
 **`StripKMSrvd` for the concrete free-field boost is the single irreducible labelled physical input** of the
 QIQT→GR chain's modular side — the Bisognano–Wichmann / Reeh–Schlieder thermality of the vacuum w.r.t. the
@@ -142,6 +154,37 @@ boost. Precisely:
 non-vacuity machine-verified. Everything downstream — RvD Thm 3.8 uniqueness (`oneParticleBW_complete`),
 the BW identification, the second-quantized modular flow, Route B's stress flux, and now (Task 1) the
 boost-charge = stress-flux scalar — is **derived, axiom-free**.
+
+#### CORRECTED VERDICT (GPT-5.5-pro review, 2026-06-22)
+
+**`StripKMSrvd(boostUnitary, 𝒦_W)` is dischargeable for the free 1+1 scalar — NOT irreducible.** The proof is
+non-circular and explicit (route b):
+
+- One-particle space `L²(ℝ,dθ)`, `p(θ)=m(coshθ,sinhθ)`. **Key identity `p(θ+iπ) = −p(θ)`.**
+- A wedge-supported real test function `f` has rapidity wavefunction `ψ_f(θ)=c·f̂(p(θ))` in the **Hardy space
+  `H²(S_π)`** on the strip `0<Im ζ<π` (damping from `Im p(θ+iλ)·x ≤ 0` for `x∈W_R`, using ONLY wedge support
+  + energy positivity), with boundary relation `ψ_f(θ+iπ)=conj(ψ_f(θ))` (real `f`).
+- The KMS function `F(z)=∫ H^#(θ+πz)·Ξ(θ−πz)dθ` has top edge `⟪η,V_t ξ⟫`, bottom edge `⟪V_t ξ,η⟫` (the iπ-flip
+  IS the conjugation), bounded by Cauchy–Schwarz. **It never uses Δ/J/boost=Δ.**
+- Honest logic: `supp f⊂W ⟹ ψ_f∈H²(S_π) ⟹ boost-KMS ⟹[RvD uniq, DONE] boost=Δ`. The *circular* route
+  (`boost=Δ ⟹ KMS`) is the one we avoid.
+- This is the EASY free-field one-particle Hardy computation, **not** equivalent to full AQFT BW (that was
+  also an overstatement). Effort: a few pages on paper; Lean multi-week IF the Schwartz/Fourier/holomorphic-
+  parameter-integration infra exists, else 1–3 months. (Caveat: `StripKMSrvd` gives the modular GROUP only;
+  full 1-particle BW also identifies `J` — the project may not need it.)
+
+**GR side — math mislabeled as physics.** `hFocus` (Raychaudhuri) is differential geometry, a theorem given the
+local-horizon setup — not a citation. `hDnn`/`hD0` (relative-entropy positivity) is a mathematical theorem
+(Klein/Araki), heavy but not a new axiom. `conserv` (∇·T=0) is derivable for the explicit KG stress tensor.
+
+**The ONE genuinely irreducible physical input** is the **Clausius/area-law package** (`hbound`, `hsat`):
+`δQ=TδS`, `δS=ηδA` + saturation. Free-field BW gives the Unruh temperature but NOT the universal entropy
+density `η` / Newton's `G`, so this can be repackaged into one clean postulate but not eliminated. (A fully
+hypothesis-free GR is not an honest target — Jacobson's derivation is inherently conditional.)
+
+**Minimal honest input set & next discharge targets**: (1) route-b Hardy proof of boost-KMS [retires `hKMS`];
+(2) `hFocus`/Raychaudhuri [geometry theorem]; (3) relative-entropy positivity [math]; leaving the
+Clausius/area-saturation law as the single labelled physical postulate.
 
 ---
 
