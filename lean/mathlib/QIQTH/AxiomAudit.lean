@@ -4587,6 +4587,11 @@ namespace QIQTH.AxiomAudit
 -- deriv horizonAmp = derivH globally (=(i/x)Krep'(rapInv x) on x>0, 0 on x≤0; x=0 via horizonAmp_hasDerivAt_zero). derivH continuous:
 -- off 0 via Krep'∈C⁰ (schwartz_Krep_deriv_continuous) + rapInv/div continuity; at x=0 the SUPER-exp (cosh)⁻² decay (Krep_deriv_norm_le_sq)
 -- + cosh(rapInv t)=(c²+t²)/(2ct) give ‖derivH t‖≤4Cc²|t|/(c²+t²)²→0 (squeeze_zero_norm). 8 of 9 gates done; only hFdA remains.
+#print axioms QIQTH.Fock.StressTensor.stressFluxKK_eq_neg_rapMom_schwartz
+-- expected: standard only — ★★★★ Stress-tensor Route B for the SCHWARTZ class, 8 of 9 gates: for f Schwartz, m>0,
+-- stressFluxKK m f = −2π·rapidityMomentum(Krep)(Krep') with the ONLY remaining hypothesis hFdA : Integrable(𝓕(deriv(horizonAmp m f))).
+-- Assembles the 8 axiom-free discharges (hkd hA hAd hff hdA h1 h2 hdAc) into stressFluxKK_eq_neg_rapMom. hFdA needs the C³ layer or an
+-- L²-Plancherel (Lp.inner_fourier_eq) refactor of fourier_conj_parseval avoiding Fourier inversion. The single open technical gate of Route B.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

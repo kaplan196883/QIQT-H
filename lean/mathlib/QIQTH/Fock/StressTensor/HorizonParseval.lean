@@ -787,4 +787,24 @@ theorem horizonAmp_deriv_continuous {m : ℝ} (hm : 0 < m) (f : SchwartzMap V �
     simp only [hdHdef]
     rw [Set.indicator_of_mem hy]
 
+/-- **★★★★ Route B for the SCHWARTZ class — 8 of 9 regularity gates discharged.**  For any Schwartz test
+    function `f` (`m > 0`), the horizon stress flux equals the boost momentum
+    `stressFluxKK m f = −2π·rapidityMomentum(Krep)(Krep')` — assembling the eight axiom-free regularity
+    discharges (`hkd` `hA` `hAd` `hff` `hdA` `h1` `h2` `hdAc`) into `stressFluxKK_eq_neg_rapMom`.  The ONLY
+    remaining hypothesis is `hFdA : Integrable (𝓕 (deriv (horizonAmp m f)))` — the integrability of the Fourier
+    transform of the derivative (genuinely true for Schwartz `f` since `horizonAmp ∈ C^∞`, but its proof needs
+    the third-derivative `C³` layer, or an `L²`-Plancherel refactor of `fourier_conj_parseval` avoiding Fourier
+    inversion).  This isolates the single open technical gate of Route B. -/
+theorem stressFluxKK_eq_neg_rapMom_schwartz {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ)
+    (hFdA : Integrable (𝓕 (deriv (horizonAmp m (⇑f))))) :
+    stressFluxKK m (⇑f) = -(2 * Real.pi) *
+      rapidityMomentum (fun θ => Krep m (⇑f) θ) (deriv (fun θ => Krep m (⇑f) θ)) := by
+  have hkd : ∀ θ, HasDerivAt (fun θ => Krep m (⇑f) θ) (deriv (fun θ => Krep m (⇑f) θ) θ) θ := fun θ =>
+    (schwartz_Krep_hasDerivAt m hm.le f θ).differentiableAt.hasDerivAt
+  exact stressFluxKK_eq_neg_rapMom m hm (⇑f) (deriv (fun θ => Krep m (⇑f) θ)) hkd
+    (horizonAmp_integrable hm f) (horizonAmp_differentiable hm f _ hkd)
+    (horizonAmp_deriv_continuous hm f) (horizonAmp_deriv_integrable hm f) hFdA
+    (horizonAmp_sq_integrable hm f) (horizonAmp_deriv_mul_integrable hm f)
+    (horizonAmp_mul_deriv_integrable hm f)
+
 end QIQTH.Fock.StressTensor
