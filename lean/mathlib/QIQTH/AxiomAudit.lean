@@ -4022,6 +4022,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.gFunction_zero
 -- expected: standard only — g(0)=⟪Jξ,η_n⟫ (ξ=√R ζ, η_n=gaussSmear): the Phragmén–Lindelöf comparison point. With g
 -- const this = g(t). Via deviceVecF_zero + gaussSmearC_zero + modConjBilin_apply.
+#print axioms QIQTH.deviceVecF_norm_le
+-- expected: standard only — UNIFORM device-vector bound ‖deviceVecF z‖≤2√2‖ζ‖ ∀z (deviceOpC_norm_le applied to ζ; 0
+-- off strip). The bounded device factor of g.
+#print axioms QIQTH.gFunction_norm_le
+-- expected: standard only — POINTWISE g-BOUND ‖g(z)‖≤2√2‖ζ‖·‖h(z)‖ (h=gaussSmearC): modConj_norm isometry +
+-- deviceVecF_norm_le + norm_inner_le_norm. With the Gaussian bound on ‖h‖ ⇒ uniform strip bound for Phragmén–Lindelöf.
 #print axioms QIQTH.deviceVecF_bottom_eq
 -- expected: standard only — BOTTOM-EDGE device value deviceVecF(t−i/2)=Δ^{it}·deviceOpC(−i/2)ζ (=√(2−R)ζ off {0,2}):
 -- deviceVecF_eq_of_mem (mid-line Im=−1/2 in closed half-strip) + deviceOpC_bottomEdge_eq. The 2nd-slot device on the

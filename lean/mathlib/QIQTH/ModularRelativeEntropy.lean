@@ -1042,6 +1042,34 @@ theorem deviceVecF_bottom_eq (S : StandardSubspace H) (ζ : H) (t : ℝ) :
     deviceOpC_bottomEdge_eq, ContinuousLinearMap.mul_apply]
 
 open QIQTH.StandardSubspaceModular in
+/-- **Uniform bound of the device vector** `‖deviceVecF z‖ ≤ 2√2·‖ζ‖` for EVERY `z` (the device operator's
+    `2√2` operator-norm bound, `deviceOpC_norm_le`, applied to `ζ`; `0` off the strip).  The bounded factor of
+    the g-function `‖g(z)‖ ≤ 2√2·‖ζ‖·‖h(z)‖`, the bound input the Phragmén–Lindelöf constancy needs. -/
+theorem deviceVecF_norm_le (S : StandardSubspace H) (ζ : H) (z : ℂ) :
+    ‖deviceVecF S ζ z‖ ≤ 2 * Real.sqrt 2 * ‖ζ‖ := by
+  unfold deviceVecF
+  split_ifs with h
+  · exact ((deviceOpC S z h.1 h.2).le_opNorm ζ).trans
+      (mul_le_mul_of_nonneg_right (deviceOpC_norm_le S z h.1 h.2) (norm_nonneg _))
+  · rw [norm_zero]; positivity
+
+open QIQTH.StandardSubspaceModular in
+/-- **Pointwise bound of the g-function** `‖g(z)‖ ≤ 2√2·‖ζ‖·‖h(z)‖` (`h(z) = gaussSmearC`): `J` is an isometry
+    (`modConj_norm`) and `‖d_z(R)ζ‖ ≤ 2√2·‖ζ‖` (`deviceVecF_norm_le`), so the inner product is bounded by the
+    product (`norm_inner_le_norm`).  Combined with the Gaussian bound on `‖h(z)‖` this gives the uniform
+    strip bound the Phragmén–Lindelöf constancy consumes. -/
+theorem gFunction_norm_le (S : StandardSubspace H) (ζ : H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ} (η : H)
+    (z : ℂ) :
+    ‖modConjBilin S (deviceVecF S ζ z) (gaussSmearC V n η z)‖
+      ≤ 2 * Real.sqrt 2 * ‖ζ‖ * ‖gaussSmearC V n η z‖ := by
+  rw [modConjBilin_apply]
+  calc ‖inner ℂ (modConj S (deviceVecF S ζ z)) (gaussSmearC V n η z)‖
+      ≤ ‖modConj S (deviceVecF S ζ z)‖ * ‖gaussSmearC V n η z‖ := norm_inner_le_norm _ _
+    _ = ‖deviceVecF S ζ z‖ * ‖gaussSmearC V n η z‖ := by rw [modConj_norm]
+    _ ≤ 2 * Real.sqrt 2 * ‖ζ‖ * ‖gaussSmearC V n η z‖ :=
+        mul_le_mul_of_nonneg_right (deviceVecF_norm_le S ζ z) (norm_nonneg _)
+
+open QIQTH.StandardSubspaceModular in
 /-- **Diagonal operator identification of the device strip extension** (general `z` in the half-strip):
     `D_ξ(z) = ⟪ξ, deviceOpC(z) ξ⟫`.  The scalar integral `∫ d_z dμ^R_ξ` IS the diagonal expectation of the
     device operator `d_z(R)` (via `inner_borelFC` + `bilinDiag_self` + `diagInt`).  This connects the proven
