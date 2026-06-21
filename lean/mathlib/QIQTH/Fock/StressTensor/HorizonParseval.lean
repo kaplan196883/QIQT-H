@@ -306,4 +306,76 @@ theorem horizonAmp_hasDerivAt (m : ℝ) (hm : 0 < m) (f : V → ℂ) (kd : ℝ �
     exact Set.indicator_of_mem hy _
   exact hg.congr_of_eventuallyEq heq
 
+/-- **★★ The `k ↦ θ` change of variables for the horizon momentum.**
+    `∫ x, conj(horizonAmp m f x)·(deriv horizonAmp) x = − ∫ θ, conj(Krep m f θ)·kd θ`, where `kd` is the wedge
+    mode's rapidity derivative.  The integrand vanishes for `x ≤ 0` (the indicator), and for `x > 0` the
+    explicit derivative (`horizonAmp_hasDerivAt`) + `conj(−i·z)=i·conj z` give `(−1/x)·conj(Krep)·kd`; the
+    Jacobian `|nullMom'|=nullMom` of `θ ↦ k = nullMom θ` cancels the `1/x`, and the orientation flip
+    (`k=e^{−θ}` decreasing) produces the minus sign. -/
+theorem horizonAmp_inner_deriv (m : ℝ) (hm : 0 < m) (f : V → ℂ) (kd : ℝ → ℂ)
+    (hkd : ∀ θ, HasDerivAt (fun θ => Krep m f θ) (kd θ) θ) :
+    (∫ x, (starRingEnd ℂ) (horizonAmp m f x) * deriv (horizonAmp m f) x)
+      = - ∫ θ, (starRingEnd ℂ) (Krep m f θ) * kd θ := by
+  set h : ℝ → ℂ :=
+    fun x => (-(x : ℂ)⁻¹) * ((starRingEnd ℂ) (Krep m f (rapInv m x)) * kd (rapInv m x)) with hh
+  have hg : ∀ x, (starRingEnd ℂ) (horizonAmp m f x) * deriv (horizonAmp m f) x
+      = Set.indicator (Set.Ioi 0) h x := by
+    intro x
+    by_cases hx : x ∈ Set.Ioi (0 : ℝ)
+    · rw [Set.indicator_of_mem hx]
+      have hxpos : 0 < x := hx
+      have hd : deriv (horizonAmp m f) x = (Complex.I / (x : ℂ)) * kd (rapInv m x) :=
+        (horizonAmp_hasDerivAt m hm f kd hkd hxpos).deriv
+      have ha : horizonAmp m f x = -Complex.I * Krep m f (rapInv m x) := by
+        simp only [horizonAmp, Set.indicator_of_mem hx]
+      have hconj : (starRingEnd ℂ) (horizonAmp m f x)
+          = Complex.I * (starRingEnd ℂ) (Krep m f (rapInv m x)) := by
+        rw [ha, map_mul, map_neg, Complex.conj_I]; ring
+      rw [hd, hconj, hh, div_eq_mul_inv,
+        show Complex.I * (starRingEnd ℂ) (Krep m f (rapInv m x))
+              * (Complex.I * (x : ℂ)⁻¹ * kd (rapInv m x))
+            = (Complex.I * Complex.I)
+              * ((x : ℂ)⁻¹ * ((starRingEnd ℂ) (Krep m f (rapInv m x)) * kd (rapInv m x))) from by ring,
+        Complex.I_mul_I]
+      ring
+    · rw [Set.indicator_of_notMem hx]
+      have ha : horizonAmp m f x = 0 := by simp only [horizonAmp, Set.indicator_of_notMem hx]
+      rw [ha, map_zero, zero_mul]
+  rw [integral_congr_ae (Filter.Eventually.of_forall hg), integral_indicator measurableSet_Ioi]
+  have hcov := integral_image_eq_integral_abs_deriv_smul (f := nullMom m)
+    (f' := fun θ => -(nullMom m θ)) (s := Set.univ) MeasurableSet.univ
+    (fun θ _ => (nullMom_hasDerivAt m θ).hasDerivWithinAt) ((nullMom_injective m hm).injOn) h
+  rw [nullMom_image_univ m hm] at hcov
+  rw [hcov, setIntegral_univ, ← integral_neg]
+  refine integral_congr_ae (Filter.Eventually.of_forall (fun θ => ?_))
+  have hnz : ((nullMom m θ : ℝ) : ℂ) ≠ 0 := by exact_mod_cast (nullMom_pos m hm θ).ne'
+  simp only [hh, rapInv_nullMom m hm θ, abs_neg, abs_of_pos (nullMom_pos m hm θ), Complex.real_smul]
+  field_simp
+
+/-- **★★★★ Route B target: the free-field horizon stress flux equals `−2π·rapidityMomentum` of the wedge mode.**
+    `stressFluxKK m f = −2π · rapidityMomentum (Krep m f) Krep'` — the *defined* null stress flux
+    `∫_H λ T_kk dλ` equals (up to the fixed `−2π`) the rapidity-momentum boost charge of the one-particle
+    wedge mode, exactly the scalar `hTkk` asserted.  Combines `stressFluxKK_eq_rapMom`
+    (`= 2π·rapidityMomentum(horizonAmp)`) with the `k↦θ` change of variables `horizonAmp_inner_deriv`
+    (`rapidityMomentum(horizonAmp) = −rapidityMomentum(Krep)`).
+
+    The hypotheses are the genuine on-shell regularity of the wedge mode (`kd = Krep'` its rapidity derivative,
+    and the integrability/differentiability of the horizon amplitude) — true for nicely-decaying test functions.
+    This discharges the scalar stress-flux identification `hTkk` of the QIQT→GR boost-charge=stress-flux input. -/
+theorem stressFluxKK_eq_neg_rapMom (m : ℝ) (hm : 0 < m) (f : V → ℂ) (kd : ℝ → ℂ)
+    (hkd : ∀ θ, HasDerivAt (fun θ => Krep m f θ) (kd θ) θ)
+    (hA : Integrable (horizonAmp m f)) (hAd : Differentiable ℝ (horizonAmp m f))
+    (hdAc : Continuous (deriv (horizonAmp m f))) (hdA : Integrable (deriv (horizonAmp m f)))
+    (hFdA : Integrable (𝓕 (deriv (horizonAmp m f))))
+    (hff : Integrable (fun θ => (starRingEnd ℂ) (horizonAmp m f θ) * horizonAmp m f θ))
+    (h1 : Integrable (fun θ => (starRingEnd ℂ) (deriv (horizonAmp m f) θ) * horizonAmp m f θ))
+    (h2 : Integrable (fun θ => (starRingEnd ℂ) (horizonAmp m f θ) * deriv (horizonAmp m f) θ)) :
+    stressFluxKK m f = -(2 * Real.pi) * rapidityMomentum (fun θ => Krep m f θ) kd := by
+  have hrel : rapidityMomentum (horizonAmp m f) (deriv (horizonAmp m f))
+      = - rapidityMomentum (fun θ => Krep m f θ) kd := by
+    simp only [rapidityMomentum]
+    rw [horizonAmp_inner_deriv m hm f kd hkd, Complex.neg_im]
+  rw [stressFluxKK_eq_rapMom m hm f hA hAd hdAc hdA hFdA hff h1 h2, hrel]
+  ring
+
 end QIQTH.Fock.StressTensor

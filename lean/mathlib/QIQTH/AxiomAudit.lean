@@ -4474,6 +4474,15 @@ namespace QIQTH.AxiomAudit
 -- HasDerivAt (horizonAmp m f) ((i/x)·kd(rapInv m x)) x where kd = the wedge mode's rapidity derivative (HasDerivAt Krep kd). Chain
 -- rule for −i·Krep∘rapInv (Ioi 0 open ⟹ indicator locally smooth; rapInv'=−1/x). The explicit B=−iA' form, the input to the k↦θ
 -- change of variables relating rapidityMomentum(horizonAmp) to ∫conj(Krep)·Krep'. Isolates the differentiation; needs HasDerivAt Krep.
+#print axioms QIQTH.Fock.StressTensor.horizonAmp_inner_deriv
+-- expected: standard only — ★★ Stress-tensor Route B, Phase 3b-ii: the k↦θ change of variables. ∫conj(horizonAmp m f)·deriv(horizonAmp m f)
+-- = −∫conj(Krep m f)·kd (kd=Krep's rapidity deriv). Integrand vanishes x≤0 (indicator); for x>0, horizonAmp_hasDerivAt + conj(−iz)=i·conj z
+-- give (−1/x)conj(Krep)·kd; integral_image_eq_integral_abs_deriv_smul (nullMom, |nullMom'|=nullMom cancels 1/x) + the k=e^{−θ} orientation flip → the minus.
+#print axioms QIQTH.Fock.StressTensor.stressFluxKK_eq_neg_rapMom
+-- expected: standard only — ★★★★ Stress-tensor Route B TARGET: stressFluxKK m f = −2π·rapidityMomentum(Krep m f)(Krep'). The DEFINED
+-- free-field horizon null stress flux ∫_H λ T_kk dλ equals −2π·(rapidity-momentum boost charge of the one-particle wedge mode) — exactly
+-- the scalar hTkk asserted. Combines stressFluxKK_eq_rapMom (=2π·rapidityMomentum(horizonAmp)) + horizonAmp_inner_deriv (k↦θ flip). Discharges
+-- the scalar stress-flux identification hTkk of the QIQT→GR boost-charge=stress-flux input, modulo the genuine on-shell regularity of the wedge mode (labeled hyps).
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,
