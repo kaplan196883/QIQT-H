@@ -4511,6 +4511,19 @@ namespace QIQTH.AxiomAudit
 -- ∃ kd (=Krep'), (∀θ HasDerivAt (Krep m f)(kd θ)θ) ∧ stressFluxKK m f = −2π·rapidityMomentum(Krep m f)(kd). Instantiates
 -- stressFluxKK_eq_neg_rapMom with Krep_hasDerivAt, REMOVING the hardest regularity gate (Krep differentiability) from the labelled
 -- inputs. Only the softer horizon-amplitude regularity (Differentiable ℝ horizonAmp + integrability) remains labelled (Schwartz-on-rapidity).
+#print axioms QIQTH.Fock.Localization.schwartz_Krep_decay_sq
+-- expected: standard only — ★★ Stress-tensor Route B (softer regularity, decay gate): for f Schwartz, m≠0,
+-- ‖Krep m f θ‖ ≤ 16π²·(∫‖f‖+∫‖Df‖+∫‖D²f‖)/(√2 m²)·(cosh θ)⁻². The n=2 Fourier-decay estimate (one derivative more
+-- than schwartz_Krep_memLp's n=1); test vector v=(p₀,−p₁) gives L v p=(p₀²+p₁²)/2π ≥ (m cosh θ)²/2π. Gates L¹/boundary-diff.
+#print axioms QIQTH.Fock.StressTensor.integrable_inv_const_sq_add
+-- expected: standard only — ★ Stress-tensor Route B: Integrable (fun x => (c²+x²)⁻¹) for c>0, via Mathlib
+-- integrable_inv_one_add_sq + the domination (c²+x²)⁻¹ ≤ (min(c²,1))⁻¹(1+x²)⁻¹. The Cauchy dominator for ‖horizonAmp‖.
+#print axioms QIQTH.Fock.StressTensor.horizonAmp_integrable
+-- expected: standard only — ★★★ Stress-tensor Route B (softer regularity, INTEGRABILITY DISCHARGED): for f Schwartz, m>0,
+-- Integrable (horizonAmp m f). The (cosh)⁻² Schwartz decay (schwartz_Krep_decay_sq) + the exact boundary map
+-- cosh(rapInv x)=(c²+x²)/(2cx) (cosh_log, c=m/√2) dominate ‖horizonAmp x‖ ≤ 4Cc²(c²+x²)⁻¹ by the integrable Cauchy
+-- kernel (integrable_inv_const_sq_add). Removes the L¹ half of the remaining horizon-amplitude regularity. Differentiable
+-- ℝ horizonAmp (boundary at x=0, needs Krep' decay too) is the last labelled softer gate.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

@@ -1,4 +1,5 @@
 import QIQTH.Fock.StressTensor.HorizonFourier
+import QIQTH.Fock.SchwartzDecay
 import Mathlib.Analysis.Fourier.FourierTransform
 import Mathlib.Analysis.Fourier.Inversion
 import Mathlib.Analysis.Fourier.FourierTransformDeriv
@@ -45,6 +46,44 @@ theorem fourierIntegral_exp_bridge (g : ℝ → ℂ) (lam : ℝ) :
     the `k`-line function whose Mathlib Fourier transform is `χ_H = ∂_λ φ_H`. -/
 noncomputable def horizonAmp (m : ℝ) (f : V → ℂ) : ℝ → ℂ :=
   Set.indicator (Set.Ioi 0) (fun x => -Complex.I * Krep m f (rapInv m x))
+
+/-- **★ The horizon amplitude is `L¹`** for a Schwartz test function `f` (`m > 0`).  The `(cosh)⁻²` Schwartz
+    decay (`schwartz_Krep_decay_sq`) plus the explicit boundary map `cosh(rapInv x) = (c²+x²)/(2cx)`
+    (`c = m/√2`) dominate `‖horizonAmp m f x‖ ≤ 4Cc²·(c²+x²)⁻¹` by the integrable Cauchy kernel
+    (`integrable_inv_const_sq_add`).  This is the integrability half of the softer Route-B regularity. -/
+theorem horizonAmp_integrable {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ) :
+    Integrable (horizonAmp m (⇑f)) := by
+  set c : ℝ := m / Real.sqrt 2 with hc
+  have hcpos : 0 < c := by rw [hc]; positivity
+  set C : ℝ := 16 * π ^ 2 * ((∫ v, ‖(⇑f) v‖) + (∫ v, ‖iteratedFDeriv ℝ 1 (⇑f) v‖)
+      + (∫ v, ‖iteratedFDeriv ℝ 2 (⇑f) v‖)) / (Real.sqrt 2 * m ^ 2) with hCdef
+  have hCnn : (0 : ℝ) ≤ C := by rw [hCdef]; positivity
+  have hRHSnn : ∀ x : ℝ, (0 : ℝ) ≤ 4 * C * c ^ 2 * (c ^ 2 + x ^ 2)⁻¹ := fun x =>
+    mul_nonneg (mul_nonneg (mul_nonneg (by norm_num) hCnn) (by positivity)) (by positivity)
+  have hrap_meas : Measurable (rapInv m) := by
+    unfold rapInv; exact measurable_const.sub Real.measurable_log
+  have hg_meas : Measurable (fun x : ℝ => -Complex.I * Krep m (⇑f) (rapInv m x)) :=
+    (((Krep_continuous f.integrable).measurable.comp hrap_meas).const_mul _)
+  refine ((integrable_inv_const_sq_add hcpos).const_mul (4 * C * c ^ 2)).mono'
+    (hg_meas.aestronglyMeasurable.indicator measurableSet_Ioi) ?_
+  filter_upwards with x
+  simp only [horizonAmp, Set.indicator_apply]
+  split_ifs with hx
+  · rw [Set.mem_Ioi] at hx
+    rw [norm_mul, norm_neg, Complex.norm_I, one_mul]
+    have hcosh_eq : Real.cosh (rapInv m x) = (c ^ 2 + x ^ 2) / (2 * c * x) := by
+      rw [rapInv, ← hc, ← Real.log_div hcpos.ne' hx.ne', Real.cosh_log (by positivity)]
+      field_simp
+    have hdecay := schwartz_Krep_decay_sq f hm.ne' (rapInv m x)
+    rw [hcosh_eq, ← hCdef] at hdecay
+    refine le_trans hdecay ?_
+    rw [div_pow, inv_div, ← mul_div_assoc, div_le_iff₀ (by positivity),
+      show 4 * C * c ^ 2 * (c ^ 2 + x ^ 2)⁻¹ * (c ^ 2 + x ^ 2) ^ 2
+        = 4 * C * c ^ 2 * (c ^ 2 + x ^ 2) by field_simp]
+    have hkey : (0 : ℝ) ≤ 4 * C * c ^ 4 :=
+      mul_nonneg (mul_nonneg (by norm_num) hCnn) (by positivity)
+    nlinarith [hkey]
+  · rw [norm_zero]; exact hRHSnn x
 
 /-- **★ `∂_λ φ_H` IS a Mathlib Fourier transform.**  Consolidating Phase 3b-i (`horizonFieldDeriv_eq_kIntegral`)
     with the convention bridge: `horizonFieldDeriv m f λ = 𝓕 (horizonAmp m f) (λ / 2π)`.  This makes the weak
