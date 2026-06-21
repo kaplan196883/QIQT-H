@@ -4454,6 +4454,11 @@ namespace QIQTH.AxiomAudit
 -- ∫ w, conj(𝓕A w)·(w·𝓕A w) = (2π)⁻¹·rapidityMomentum A (deriv A). Mathlib's fourier_deriv (𝓕(deriv A)=2πi·w·𝓕A) moves the
 -- weight w onto 𝓕(deriv A); fourier_parseval_deriv evaluates; the 2πi and the self-adjoint i combine to the real (2π)⁻¹. This
 -- is the w-weighted norm of χ_H=𝓕A — the shape of stressFluxKK after the λ=2πw rescale. Remaining: ‖·‖² real cast + λ rescale + horizonAmp + Krep regularity.
+#print axioms QIQTH.Fock.StressTensor.weighted_pairing_real
+-- expected: standard only — ★★ Stress-tensor Route B, Phase 3b-ii: the REAL w-weighted Fourier norm ∫ w, w·‖𝓕A w‖² =
+-- (2π)⁻¹·rapidityMomentum A (deriv A). The real form of fourier_weighted_pairing via conj(z)·z=‖z‖²
+-- (Complex.normSq_eq_conj_mul_self + normSq_eq_norm_sq) + integral_ofReal. Remaining for hFlux: λ=2πw rescale (→stressFluxKK
+-- = 2π·rapidityMomentum(horizonAmp)) + k↦θ change of vars (→rapidityMomentum(Krep)) + Krep on-shell diff/decay (Differentiable ℝ horizonAmp).
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

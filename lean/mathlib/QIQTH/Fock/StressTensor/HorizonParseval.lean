@@ -204,4 +204,29 @@ theorem fourier_weighted_pairing (A : ℝ → ℂ)
   rw [hpd]
   field_simp
 
+/-- **★★ The real `w`-weighted Fourier norm** `∫ w, w·‖𝓕A w‖² = (2π)⁻¹·rapidityMomentum A (deriv A)`.
+    The real form of `fourier_weighted_pairing`, using `conj(z)·z = ‖z‖²`. -/
+theorem weighted_pairing_real (A : ℝ → ℂ)
+    (hA : Integrable A) (hAd : Differentiable ℝ A)
+    (hdAc : Continuous (deriv A)) (hdA : Integrable (deriv A)) (hFdA : Integrable (𝓕 (deriv A)))
+    (hff : Integrable (fun θ => (starRingEnd ℂ) (A θ) * A θ))
+    (h1 : Integrable (fun θ => (starRingEnd ℂ) (deriv A θ) * A θ))
+    (h2 : Integrable (fun θ => (starRingEnd ℂ) (A θ) * deriv A θ)) :
+    ∫ w, w * ‖𝓕 A w‖ ^ 2 = (1 / (2 * Real.pi)) * rapidityMomentum A (deriv A) := by
+  have hnorm : ∀ z : ℂ, (starRingEnd ℂ) z * z = ((‖z‖ ^ 2 : ℝ) : ℂ) := by
+    intro z; rw [← Complex.normSq_eq_conj_mul_self, Complex.normSq_eq_norm_sq]
+  have hwp := fourier_weighted_pairing A hA hAd hdAc hdA hFdA hff h1 h2
+  have ha : (∫ w, (starRingEnd ℂ) (𝓕 A w) * ((w : ℂ) * 𝓕 A w))
+      = ((∫ w, w * ‖𝓕 A w‖ ^ 2 : ℝ) : ℂ) := by
+    have hc : (∫ w, (starRingEnd ℂ) (𝓕 A w) * ((w : ℂ) * 𝓕 A w))
+        = ∫ w, ((w * ‖𝓕 A w‖ ^ 2 : ℝ) : ℂ) := by
+      refine integral_congr_ae (Filter.Eventually.of_forall (fun w => ?_))
+      show (starRingEnd ℂ) (𝓕 A w) * ((w : ℂ) * 𝓕 A w) = ((w * ‖𝓕 A w‖ ^ 2 : ℝ) : ℂ)
+      rw [show (starRingEnd ℂ) (𝓕 A w) * ((w : ℂ) * 𝓕 A w)
+            = (w : ℂ) * ((starRingEnd ℂ) (𝓕 A w) * 𝓕 A w) from by ring, hnorm (𝓕 A w)]
+      push_cast; ring
+    rw [hc]; exact integral_ofReal
+  rw [ha] at hwp
+  exact_mod_cast hwp
+
 end QIQTH.Fock.StressTensor
