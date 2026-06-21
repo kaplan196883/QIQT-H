@@ -1573,6 +1573,15 @@ theorem rvdRC_injective : Function.Injective (rvdRC S) := by
   refine rvdRC_mul_rvdTwoSubRC_injective S ?_
   simp only [(rvdRC_commute_rvdTwoSubRC S).eq, ContinuousLinearMap.mul_apply, hab]
 
+/-- **`2 − R = rvdTwoSubRC` is injective** (the companion to `rvdRC_injective`, giving `E({2}) = 0`).  From
+    `R(2−R)` injective: `(2−R)a = (2−R)b` gives `R((2−R)a) = R((2−R)b)`, i.e. `R(2−R)a = R(2−R)b`, hence
+    `a = b`.  So `2` is not an eigenvalue of `R` — the spectral atom at the device-character endpoint `r = 2`
+    vanishes, the other half of `deviceOpC(−i/2) = √(2−R)` (a.e., `PVM({0,2}) = 0`). -/
+theorem rvdTwoSubRC_injective : Function.Injective (rvdTwoSubRC S) := by
+  intro a b hab
+  refine rvdRC_mul_rvdTwoSubRC_injective S ?_
+  simp only [ContinuousLinearMap.mul_apply, hab]
+
 /-- `A.restrictScalars ℝ` has dense range (self-adjoint + injective). -/
 theorem rvdRC_mul_rvdTwoSubRC_denseRange :
     DenseRange ((rvdRC S * rvdTwoSubRC S).restrictScalars ℝ) := by

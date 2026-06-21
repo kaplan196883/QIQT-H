@@ -1425,6 +1425,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — R=rvdRC INJECTIVE (toward √R-range density, the ξ=√Rζ reconciliation): from R(2−R)
 -- injective (rvdRC_mul_rvdTwoSubRC_injective) via commute. R inj ⟹ √R inj (rvdSqrtR_mul_self) ⟹ √R DENSE RANGE in H
 -- — the structural basis of lifting GConstancy from ξ=√Rζ to all 𝒦 (remaining: the √R-vectors-in-𝒦 dense in 𝒦).
+#print axioms QIQTH.StandardSubspaceModular.rvdTwoSubRC_injective
+-- expected: standard only — 2−R INJECTIVE (companion to rvdRC_injective): from R(2−R) inj, (2−R)a=(2−R)b ⇒ R(2−R)a=
+-- R(2−R)b ⇒ a=b. So 2 not eigenvalue ⇒ E({2})=0. With R inj (E({0})=0): PVM({0,2})=0 ⇒ deviceOpC(−i/2)=√(2−R) a.e.
+-- (the device-character endpoint atoms vanish) — toward (a1-end) of the bottom-edge KMS reality.
 #print axioms QIQTH.StandardSubspaceModular.rvdSqrtTwoSubR_mul_self
 -- expected: standard only — (2−R)^{1/2}·(2−R)^{1/2}=2−R.
 #print axioms QIQTH.StandardSubspaceModular.rvdSqrtR_commute_rvdSqrtTwoSubR
