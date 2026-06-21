@@ -4488,6 +4488,11 @@ namespace QIQTH.AxiomAudit
 -- energy in the EXACT form wedge_hBoostCharge_of_smooth's hTkk uses ((2π·∫conj(f)f').im) equals −stressFluxKK. So defining the GR
 -- chain's T_kk := −(ℏ/2π)·stressFluxKK makes hTkk ((2π/ℏ)T_kk=(2π∫conj(f)f').im) hold by stressFluxKK_eq_neg_rapMom — the bundled
 -- scalar T_kk is now the DEFINED, proven free-field horizon stress flux. Modulo the same on-shell regularity (labeled hyps).
+#print axioms QIQTH.Fock.StressTensor.Krep_integrand_hasDerivAt
+-- expected: standard only — ★ Stress-tensor Route B: pointwise θ-derivative of the Krep integrand (toward discharging the last
+-- regularity gate, Krep differentiability). θ↦e^{−iη(p_m(θ),x)}·f(x) is differentiable with deriv e^{−iη}·(−i·m(x₀sinh θ−x₁cosh θ))·f(x),
+-- since ∂_θ η(p_m(θ),x)=m(x₀sinh θ−x₁cosh θ) (minkowskiDot_massShell + cosh'=sinh,sinh'=cosh; HasDerivAt.ofReal_comp/cexp/mul_const). The
+-- h_diff ingredient of Krep's rapidity differentiability; the full kd=Krep' adds the dominated-convergence bound (integrable for C_c^∞ f).
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

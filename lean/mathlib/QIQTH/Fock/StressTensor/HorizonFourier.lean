@@ -1,4 +1,5 @@
 import QIQTH.Fock.StressTensor.NullStressFlux
+import QIQTH.Fock.PauliJordan
 import Mathlib.MeasureTheory.Function.JacobianOneDim
 
 /-!
@@ -94,5 +95,29 @@ theorem horizonFieldDeriv_eq_kIntegral (m : ℝ) (hm : 0 < m) (f : V → ℂ) (l
         refine integral_congr_ae (Filter.Eventually.of_forall (fun θ => (hpt θ).symm))
     _ = ∫ θ in Set.univ, |-(nullMom m θ)| • g (nullMom m θ) := setIntegral_univ.symm
     _ = ∫ x in Set.Ioi (0 : ℝ), g x := hcov.symm
+
+/-- **The θ-derivative of the `Krep` integrand** (the `h_diff` ingredient of the differentiation-under-the-
+    integral for `Krep`).  For each fixed `x`, `θ ↦ e^{−i η(p_m(θ),x)}·f(x)` is differentiable with derivative
+    `e^{−i η(p_m(θ),x)}·(−i·m(x₀ sinh θ − x₁ cosh θ))·f(x)`, since `∂_θ η(p_m(θ),x) = m(x₀ sinh θ − x₁ cosh θ)`
+    (from `minkowskiDot_massShell` and `cosh' = sinh`, `sinh' = cosh`).  This is the pointwise core of
+    `Krep`'s rapidity differentiability `kd = Krep'`; the full statement adds the dominated-convergence
+    domination (a `(|x₀|+|x₁|)·‖f x‖` bound, integrable for compactly-supported `f`). -/
+theorem Krep_integrand_hasDerivAt (m : ℝ) (f : V → ℂ) (x : V) (θ : ℝ) :
+    HasDerivAt
+      (fun θ => Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ)) * f x)
+      ((Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ))
+        * (-Complex.I * ((m * (x 0 * Real.sinh θ - x 1 * Real.cosh θ) : ℝ) : ℂ))) * f x) θ := by
+  have hg : HasDerivAt (fun θ => (minkowskiDot (massShell m θ) x : ℝ))
+      (m * (x 0 * Real.sinh θ - x 1 * Real.cosh θ)) θ := by
+    have h1 : HasDerivAt (fun θ => x 0 * Real.cosh θ) (x 0 * Real.sinh θ) θ :=
+      (Real.hasDerivAt_cosh θ).const_mul (x 0)
+    have h2 : HasDerivAt (fun θ => x 1 * Real.sinh θ) (x 1 * Real.cosh θ) θ :=
+      (Real.hasDerivAt_sinh θ).const_mul (x 1)
+    have h0 := (h1.sub h2).const_mul m
+    have heq : (fun θ => (minkowskiDot (massShell m θ) x : ℝ))
+        = fun θ => m * (x 0 * Real.cosh θ - x 1 * Real.sinh θ) := by
+      funext θ; exact minkowskiDot_massShell m θ x
+    rw [heq]; exact h0
+  exact (((hg.ofReal_comp).const_mul (-Complex.I)).cexp).mul_const (f x)
 
 end QIQTH.Fock.StressTensor
