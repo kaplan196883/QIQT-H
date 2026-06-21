@@ -4010,6 +4010,11 @@ namespace QIQTH.AxiomAudit
 -- So deviceVec(0)=√R ζ=ξ, J·deviceVec(0)=Jξ ⇒ g-function value g(0)=⟪η,Jξ⟫ = the GConstancy RHS. The cfcCont↔CFC
 -- bridge (borelFC of continuous fn = Mathlib CFC) realized via the sqrt-uniqueness pattern, no new axiom.
 #print axioms QIQTH.devCorrExt_ofReal_inner
+#print axioms QIQTH.deviceOpC_slope_normSq
+-- expected: standard only — ★★★ OPERATOR-ALGEBRA HEART of piece 4: ‖(z−z₀)⁻¹·(deviceOpC(z)ζ−deviceOpC(z₀)ζ) −
+-- deviceDerivOpC(z₀)ζ‖² = ∫‖Δ_z(ω)−∂d(ω)‖² dμ^R_ζ (= tendsto_integral_devChar_remainder_sq integrand). The slope−
+-- deriv vector is ONE borelFC applied to ζ (deviceOpC_sub + borelFC_smul + borelFC_sub via CLM sub_apply/smul_apply),
+-- so borelFC_apply_norm_sq turns ‖·‖² into ∫‖g_z‖²dμ. Bridges the H-valued slope to the proven scalar →0 integral.
 #print axioms QIQTH.deviceOpC_sub
 -- expected: standard only — device-op difference as single borelFC: deviceOpC(z)−deviceOpC(z₀)=borelFC(d_z−d_{z₀}),
 -- = borelFC_sub.symm (deviceOpC is defeq a borelFC with √2 bound). First step of the slope operator-algebra.

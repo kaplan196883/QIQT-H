@@ -876,6 +876,31 @@ noncomputable def deviceDerivOpC (S : StandardSubspace H) (z₀ : ℂ) {β₀ β
         le_of_lt (div_pos (by norm_num : (0:ℝ) < 2) hβ₁')])
     (fun ω => devCharDeriv_norm_le_slab S ω hβ₀ hβ₁ hz₀)
 
+open QIQTH.StandardSubspaceModular MeasureTheory in
+/-- **`L²` identity for the device-vector slope remainder** (the operator-algebra heart of piece 4):
+    `‖(z−z₀)⁻¹·(deviceOpC(z)ζ − deviceOpC(z₀)ζ) − deviceDerivOpC(z₀)ζ‖² = ∫‖Δ_z(ω) − ∂d(ω)‖² dμ^R_ζ`, the
+    integrand of `tendsto_integral_devChar_remainder_sq`.  The slope-minus-derivative vector is a single
+    `borelFC` applied to `ζ` (`deviceOpC_sub` + `borelFC_smul` + `borelFC_sub`, pushed through the CLM
+    `sub_apply`/`smul_apply`), so `borelFC_apply_norm_sq` turns its norm² into the spectral `L²` integral. -/
+theorem deviceOpC_slope_normSq (S : StandardSubspace H) (ζ : H)
+    {β₀ β₁ : ℝ} (hβ₀ : 0 < β₀) (hβ₁ : β₁ < 1 / 2) {z z₀ : ℂ}
+    (hz2 : z.im ≤ 0) (hz1 : -(1 / 2 : ℝ) ≤ z.im)
+    (hz02 : z₀.im ≤ 0) (hz01 : -(1 / 2 : ℝ) ≤ z₀.im)
+    (hz₀ : z₀ ∈ Complex.im ⁻¹' Set.Ioo (-β₁) (-β₀)) :
+    ‖(z - z₀)⁻¹ • (deviceOpC S z hz2 hz1 ζ - deviceOpC S z₀ hz02 hz01 ζ)
+        - deviceDerivOpC S z₀ hβ₀ hβ₁ hz₀ ζ‖ ^ 2
+      = ∫ ω, ‖(devChar z (ω : spectrum ℝ (rvdRC S)).val - devChar z₀ (ω : spectrum ℝ (rvdRC S)).val)
+          / (z - z₀) - Complex.I * (Real.log ((2 - (ω : spectrum ℝ (rvdRC S)).val)
+            / (ω : spectrum ℝ (rvdRC S)).val) : ℂ) * devChar z₀ (ω : spectrum ℝ (rvdRC S)).val‖ ^ 2
+          ∂(rvdSpecMeasure S ζ) := by
+  rw [← ContinuousLinearMap.sub_apply, deviceOpC_sub, ← ContinuousLinearMap.smul_apply, ← borelFC_smul,
+    ← ContinuousLinearMap.sub_apply, deviceDerivOpC, ← borelFC_sub, borelFC_apply_norm_sq]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun ω => ?_)
+  refine congrArg (fun x => ‖x‖ ^ 2) ?_
+  simp only [Function.comp_apply]
+  ring
+
+open QIQTH.StandardSubspaceModular in
 /-- **Diagonal operator identification of the device strip extension** (general `z` in the half-strip):
     `D_ξ(z) = ⟪ξ, deviceOpC(z) ξ⟫`.  The scalar integral `∫ d_z dμ^R_ξ` IS the diagonal expectation of the
     device operator `d_z(R)` (via `inner_borelFC` + `bilinDiag_self` + `diagInt`).  This connects the proven
