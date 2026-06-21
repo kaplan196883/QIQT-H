@@ -1536,6 +1536,48 @@ theorem cfcΩ_symm_mapsTo_K (f : C(Set.Icc (-covM S) (2 + covM S), ℂ)) (hsymm 
   exact mapsTo_K_of_commute_R_D S (cfcΩ S f) hR
     (commute_rvdPmQ_of_commute_modConj_rvdT S (cfcΩ S f) hJ hT)
 
+open Filter Topology in
+/-- **★★★ The `√R`-range density in `𝒦` (`hdense`)** — RvD's `ξ = R^{1/2}ζ` reconciliation, the LAST analytic
+    input of the device g-function discharge.  Every `ξ ∈ 𝒦` is a limit of vectors `√R ζ_k ∈ 𝒦`.
+
+    Clean route via the polar radius `T = R^{1/2}(2−R)^{1/2}` (NOTE `√R` itself does NOT preserve `𝒦` — only
+    θ-fixed/symmetric functions of `R` do).  `T` is self-adjoint with DENSE RANGE in `H`
+    (`rvdT_restrictScalars_denseRange`) and commutes with `P = projK`: it commutes with `R` (`rvdRC_commute_rvdT`)
+    and with `J` (`modConj_rvdT_modConj`, `J T J = T`), hence with `D = J·T`
+    (`commute_rvdPmQ_of_commute_modConj_rvdT`) and with `P = (R+D)/2` (`commute_projK_of_commute_R_D`).  Moreover
+    `T η = R^{1/2}((2−R)^{1/2}η) ∈ range(R^{1/2})`.  So for `ξ ∈ 𝒦`, pick `T ζ_k → ξ` (dense range) and project:
+    `√R((2−R)^{1/2}(Pζ_k)) = T(Pζ_k) = P(T ζ_k) → Pξ = ξ`, and `P(T ζ_k) ∈ 𝒦` (a `P`-image).  Hence
+    `ζ_k := (2−R)^{1/2}(P ζ_k)` exhibits `ξ` as a limit of `√R`-vectors in `𝒦`. -/
+theorem rvdSqrtR_range_dense_in_K (S : StandardSubspace H) :
+    ∀ ξ ∈ S.toClosedSubmodule, ∃ ζs : ℕ → H,
+      (∀ k, projK S (rvdSqrtR S (ζs k)) = rvdSqrtR S (ζs k)) ∧
+        Tendsto (fun k => rvdSqrtR S (ζs k)) atTop (nhds ξ) := by
+  have hRcomm : ∀ x, rvdT S (rvdR S x) = rvdR S (rvdT S x) := fun x => by
+    have h := DFunLike.congr_fun (rvdRC_commute_rvdT S).symm.eq x
+    simpa only [ContinuousLinearMap.mul_apply] using h
+  have hJcomm : ∀ x, rvdT S (modConj S x) = modConj S (rvdT S x) := fun x => by
+    have h := congrArg (modConj S) (modConj_rvdT_modConj S x)
+    rwa [modConj_sq] at h
+  have hPcomm : ∀ x, rvdT S (projK S x) = projK S (rvdT S x) :=
+    commute_projK_of_commute_R_D S (rvdT S) hRcomm
+      (commute_rvdPmQ_of_commute_modConj_rvdT S (rvdT S) hJcomm (fun _ => rfl))
+  have hTfac : ∀ x, rvdT S x = rvdSqrtR S (rvdSqrtTwoSubR S x) := fun x => by
+    rw [rvdT, ContinuousLinearMap.mul_apply]
+  intro ξ hξ
+  obtain ⟨u, hu_range, hu_lim⟩ := mem_closure_iff_seq_limit.mp
+    ((rvdT_restrictScalars_denseRange S) ξ)
+  choose ζ hζ using hu_range
+  have hζ' : ∀ k, rvdT S (ζ k) = u k := fun k => hζ k
+  refine ⟨fun k => rvdSqrtTwoSubR S (projK S (ζ k)), fun k => ?_, ?_⟩
+  · rw [← hTfac, hPcomm]
+    exact DFunLike.congr_fun (projK_idem S).eq (rvdT S (ζ k))
+  · have hrw : ∀ k, rvdSqrtR S (rvdSqrtTwoSubR S (projK S (ζ k))) = projK S (u k) := fun k => by
+      rw [← hTfac, hPcomm, hζ' k]
+    simp only [hrw]
+    have h := ((projK S).continuous.tendsto ξ).comp hu_lim
+    rw [(mem_K_iff_projK S ξ).mp hξ] at h
+    exact h
+
 /-- **`u_t` is θ-fixed:** `conj(u_t(2−r)) = u_t(r)`.  (`u_t(2−r)=exp(it·log(r/(2−r)))=conj(u_t(r))`.) -/
 theorem modChar_reflect (t r : ℝ) : (starRingEnd ℂ) (modChar t (2 - r)) = modChar t r := by
   unfold modChar

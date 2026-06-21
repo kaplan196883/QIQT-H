@@ -4289,6 +4289,17 @@ namespace QIQTH.AxiomAudit
 -- cfcΩ f commutes with R (cfcΩ_commute_rvdRC), T (cfcΩ_commute_rvdT), J (modConj_cfcΩ + twΩ f=f) ⟹ with D=J·T
 -- (commute_rvdPmQ_of_commute_modConj_rvdT) ⟹ with P=(R+D)/2 (mapsTo_K_of_commute_R_D). The hdense engine (step a):
 -- symmetric spectral cutoffs land in 𝒦. Remaining: cutoff φ_k(R)ξ→ξ ∈range(√R) (step b) + assemble (step c).
+#print axioms QIQTH.StandardSubspaceModular.rvdSqrtR_range_dense_in_K
+-- expected: standard only — ★★★★ hdense PROVEN: √R-range dense in 𝒦 (RvD's ξ=√Rζ reconciliation, the LAST g-function
+-- input). Via polar radius T=√R√(2−R): self-adjoint, DENSE RANGE in H (rvdT_restrictScalars_denseRange), commutes
+-- with P (with R via rvdRC_commute_rvdT, with J via modConj_rvdT_modConj ⟹ with D ⟹ with P), and Tη=√R(√(2−R)η)∈
+-- range(√R). For ξ∈𝒦: Tζ_k→ξ, T(Pζ_k)=P(Tζ_k)→Pξ=ξ ∈𝒦. ζ_k=√(2−R)(Pζ_k). hdense is now a THEOREM, not labelled.
+#print axioms QIQTH.Fock.OneParticleBW.oneParticleBW_complete
+-- expected: standard only — ★★★★★ hUniq FULLY DISCHARGED (RvD Theorem 3.8 COMPLETE, axiom-free). modUnitary S t=V t
+-- for a strongly-continuous contraction group V with 𝒦-invariance + StripKMSrvd (RvD Def 3.4), NO remaining named
+-- analytic input. Both g-function inputs are now THEOREMS: h1 (h1_of_stripKMSrvd, bottom-edge KMS reality via the
+-- f-transfer) and hdense (rvdSqrtR_range_dense_in_K, √R-range density via the polar radius T). The un-garbled
+-- device g-function discharge is end-to-end machine-checked. Rests only on the genuine KMS + contraction/invariance.
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable

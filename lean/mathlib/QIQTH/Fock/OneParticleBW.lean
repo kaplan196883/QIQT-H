@@ -795,6 +795,26 @@ theorem oneParticleBW_of_stripKMSrvd_density (S : StandardSubspace H) (V : ℝ �
         (fun s => hInv s hη) hζ hKMS z.re)
     hdense hInv hKMS
 
+/-- **★★★★ One-particle Bisognano–Wichmann from the KMS condition — the COMPLETE, unconditional discharge.**
+    `modUnitary S t = V t` for a strongly-continuous contraction group `V` with `𝒦`-invariance (`hInv`) and the
+    correct RvD Def 3.4 KMS condition (`hKMS : StripKMSrvd`) — with NO remaining named analytic input.  Both RvD
+    Theorem 3.8 inputs of the device g-function are now theorems: the bottom-edge KMS reality `h1` (via
+    `h1_of_stripKMSrvd`) and the `√R`-range density `hdense` (via `rvdSqrtR_range_dense_in_K`).  This is the full,
+    axiom-free formalization of RvD Theorem 3.8: `Δ^{it}` is the unique strongly-continuous unitary group
+    carrying `𝒦` onto `𝒦` and satisfying the KMS condition — i.e. the complete discharge of `hUniq`, resting only
+    on the genuine KMS hypothesis and the standard contraction-group/invariance structure. -/
+theorem oneParticleBW_complete (S : StandardSubspace H) (V : ℝ → (H →L[ℂ] H))
+    (hcont : ∀ η ∈ (S.toClosedSubmodule : Set H), Continuous (fun t => V t η))
+    (hbd : ∀ η : H, ∀ t, ‖V t η‖ ≤ ‖η‖) (hgrp : ∀ η : H, ∀ s t, V s (V t η) = V (s + t) η)
+    (hV0 : ∀ η : H, V 0 η = η)
+    (hKinv : ∀ η ∈ (S.toClosedSubmodule : Set H), ∀ n : ℝ, 0 < n → ∀ s : ℝ,
+      projK S (V s (gaussSmear V n η)) = V s (gaussSmear V n η))
+    (hInv : ∀ t, Set.MapsTo (V t) (S.toClosedSubmodule : Set H) (S.toClosedSubmodule : Set H))
+    (hKMS : StripKMSrvd V (S.toClosedSubmodule : Set H)) :
+    ∀ t, modUnitary S t = V t :=
+  oneParticleBW_of_stripKMSrvd_density S V hcont hbd hgrp hV0 hKinv
+    (fun ξ hξ => rvdSqrtR_range_dense_in_K S ξ hξ) hInv hKMS
+
 /-- **Top-edge reality of the g-function** (RvD Theorem 3.8, the real-axis edge `g(t) = ⟪U_t η, Δ^{it} J ξ⟫`
     is real).  For `ξ, η ∈ 𝒦` with `V_t η ∈ 𝒦`: `Δ^{it} J ξ = J(Δ^{it} ξ)` (`modConj_commute_modUnitary`)
     lies in `(i𝒦)^⊥` (since `Δ^{it}ξ ∈ 𝒦` and `J𝒦 = (i𝒦)^⊥`), so pairing it against `V_t η ∈ 𝒦` is real
