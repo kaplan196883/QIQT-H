@@ -1006,6 +1006,24 @@ theorem gFunction_real_eq (S : StandardSubspace H) (ζ : H) {V : ℝ → (H →L
     modConj_commute_modUnitary]
 
 open QIQTH.StandardSubspaceModular in
+/-- **Top-edge reality of the g-function** (RvD Theorem 3.8, the real-axis edge): for `ξ = √R ζ ∈ 𝒦` and the
+    V-orbit staying in `𝒦`, `g(t) = ⟪Δ^{it}(Jξ), V_t η_n⟫` is REAL.  `Δ^{it}(Jξ) = J(Δ^{it}ξ)`
+    (`modConj_commute_modUnitary`) with `Δ^{it}ξ ∈ 𝒦` (`modUnitary_mapsTo_K`), so `J(Δ^{it}ξ) ⊥ i𝒦`
+    (`projIK_modConj_eq_zero_of_mem_K`, `J𝒦 = (i𝒦)^⊥`); pairing it against the `𝒦`-vector `V_t η_n` is real
+    (`inner_real_of_mem_K_perp_IK`, RvD Prop 2.3) — and `g(t)` is the conjugate of that.  Geometric, no analysis;
+    the real-axis edge of the holomorphic strip g-function feeding the Phragmén–Lindelöf constancy. -/
+theorem gFunction_top_edge_real (S : StandardSubspace H) (ζ : H) {V : ℝ → (H →L[ℂ] H)} {n : ℝ}
+    (hn : 0 < n) (η : H) (hcont : Continuous (fun t => V t η)) (hbd : ∀ t, ‖V t η‖ ≤ ‖η‖)
+    (hgrp : ∀ s t, V s (V t η) = V (s + t) η) (hξ : projK S (rvdSqrtR S ζ) = rvdSqrtR S ζ) (t : ℝ)
+    (hVη : projK S (V t (gaussSmear V n η)) = V t (gaussSmear V n η)) :
+    (modConjBilin S (deviceVecF S ζ (t : ℂ)) (gaussSmearC V n η (t : ℂ))).im = 0 := by
+  rw [gFunction_real_eq S ζ hn η hcont hbd hgrp t, ← modConj_commute_modUnitary, ← inner_conj_symm,
+    Complex.conj_im, neg_eq_zero]
+  exact inner_real_of_mem_K_perp_IK S hVη
+    (projIK_modConj_eq_zero_of_mem_K S
+      ((mem_K_iff_projK S _).mp (modUnitary_mapsTo_K S t _ ((mem_K_iff_projK S _).mpr hξ))))
+
+open QIQTH.StandardSubspaceModular in
 /-- **Diagonal operator identification of the device strip extension** (general `z` in the half-strip):
     `D_ξ(z) = ⟪ξ, deviceOpC(z) ξ⟫`.  The scalar integral `∫ d_z dμ^R_ξ` IS the diagonal expectation of the
     device operator `d_z(R)` (via `inner_borelFC` + `bilinDiag_self` + `diagInt`).  This connects the proven

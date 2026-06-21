@@ -4022,6 +4022,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.gFunction_zero
 -- expected: standard only — g(0)=⟪Jξ,η_n⟫ (ξ=√R ζ, η_n=gaussSmear): the Phragmén–Lindelöf comparison point. With g
 -- const this = g(t). Via deviceVecF_zero + gaussSmearC_zero + modConjBilin_apply.
+#print axioms QIQTH.gFunction_top_edge_real
+-- expected: standard only — ★★ TOP-EDGE REALITY of g (endgame piece 3a): g(t).im=0 for ξ=√R ζ∈𝒦 + orbit in 𝒦.
+-- Δ^{it}(Jξ)=J(Δ^{it}ξ) (modConj_commute) with Δ^{it}ξ∈𝒦 (modUnitary_mapsTo_K) ⇒ ⊥i𝒦 (projIK_modConj_eq_zero_of_
+-- mem_K, J𝒦=(i𝒦)^⊥); ⟪𝒦-vec V_t η_n, ⊥i𝒦⟫ REAL (inner_real_of_mem_K_perp_IK), g(t)=conj of that. Geometric.
 #print axioms QIQTH.gFunction_real_eq
 -- expected: standard only — g(t)=⟪Δ^{it}(Jξ), V_t η_n⟫ (top edge, ξ=√R ζ): deviceVecF_real_eq + gaussSmearC_ofReal +
 -- modConj_commute_modUnitary(JΔ^{it}=Δ^{it}J). conj = GConstancy LHS ⟪V_t η_n, Δ^{it}Jξ⟫; reality ⇒ g(t)=that.
