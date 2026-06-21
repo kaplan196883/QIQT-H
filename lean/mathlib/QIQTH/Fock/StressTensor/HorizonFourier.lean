@@ -173,4 +173,55 @@ theorem Krep_bound_integrable (m : ℝ) (f : V → ℂ) (hf : Continuous f)
     (continuous_const.mul c1).mul hf.norm
   exact cont.integrable_of_hasCompactSupport (hf_supp.norm.mul_left)
 
+/-- **★★★ `Krep` is rapidity-differentiable** (the last regularity gate of the Route B target).  For a
+    continuous, compactly-supported test function `f`, `θ ↦ Krep m f θ` is differentiable, with
+    `kd θ₀ = (1/√2)·∫ e^{−i η(p_m(θ₀),x)}·(−i·m(x₀ sinh θ₀ − x₁ cosh θ₀))·f(x) dx` — i.e. `kd = Krep'`.
+    Differentiation under the integral (`hasDerivAt_integral_of_dominated_loc_of_deriv_le`) with the pointwise
+    derivative `Krep_integrand_hasDerivAt`, the domination `Krep_deriv_norm_bound`, and the integrability
+    `Krep_bound_integrable`.  This discharges the `hkd` hypothesis of `stressFluxKK_eq_neg_rapMom`. -/
+theorem Krep_hasDerivAt (m : ℝ) (hm : 0 ≤ m) (f : V → ℂ) (hf : Continuous f)
+    (hf_supp : HasCompactSupport f) (θ₀ : ℝ) :
+    HasDerivAt (fun θ => Krep m f θ)
+      ((1 / Real.sqrt 2 : ℂ) * ∫ x, (Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ₀) x : ℝ) : ℂ))
+        * (-Complex.I * ((m * (x 0 * Real.sinh θ₀ - x 1 * Real.cosh θ₀) : ℝ) : ℂ))) * f x) θ₀ := by
+  set F : ℝ → V → ℂ := fun θ x =>
+    Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ)) * f x with hF
+  set F' : ℝ → V → ℂ := fun θ x =>
+    (Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ))
+      * (-Complex.I * ((m * (x 0 * Real.sinh θ - x 1 * Real.cosh θ) : ℝ) : ℂ))) * f x with hF'
+  have hmD : ∀ θ, Continuous (fun x : V => (minkowskiDot (massShell m θ) x : ℝ)) := by
+    intro θ
+    simp only [minkowskiDot]
+    exact (continuous_const.mul (continuous_apply 0)).sub (continuous_const.mul (continuous_apply 1))
+  have hexpc : ∀ θ, Continuous (fun x : V =>
+      Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ))) := fun θ =>
+    Complex.continuous_exp.comp (continuous_const.mul (Complex.continuous_ofReal.comp (hmD θ)))
+  have hFcont : ∀ θ, Continuous (F θ) := fun θ => (hexpc θ).mul hf
+  have hF'cont : ∀ θ, Continuous (F' θ) := by
+    intro θ
+    refine ((hexpc θ).mul ?_).mul hf
+    exact continuous_const.mul (Complex.continuous_ofReal.comp (continuous_const.mul
+      (((continuous_apply 0).mul continuous_const).sub ((continuous_apply 1).mul continuous_const))))
+  have hbnd : ∀ᵐ x ∂(volume : Measure V), ∀ θ ∈ Metric.ball θ₀ 1,
+      ‖F' θ x‖ ≤ m * Real.cosh (|θ₀| + 1) * (|x 0| + |x 1|) * ‖f x‖ := by
+    refine Filter.Eventually.of_forall (fun x θ hθ => ?_)
+    have hθR : |θ| ≤ |θ₀| + 1 := by
+      rw [Metric.mem_ball, Real.dist_eq] at hθ
+      calc |θ| = |θ₀ + (θ - θ₀)| := by ring_nf
+        _ ≤ |θ₀| + |θ - θ₀| := abs_add_le _ _
+        _ ≤ |θ₀| + 1 := by linarith
+    exact Krep_deriv_norm_bound m hm f x (by positivity) hθR
+  have key := hasDerivAt_integral_of_dominated_loc_of_deriv_le (𝕜 := ℝ) (x₀ := θ₀)
+    (F := F) (F' := F') (bound := fun x => m * Real.cosh (|θ₀| + 1) * (|x 0| + |x 1|) * ‖f x‖)
+    (Metric.ball_mem_nhds θ₀ one_pos)
+    (Filter.Eventually.of_forall (fun θ => (hFcont θ).aestronglyMeasurable))
+    ((hFcont θ₀).integrable_of_hasCompactSupport (hf_supp.mul_left))
+    ((hF'cont θ₀).aestronglyMeasurable) hbnd
+    (Krep_bound_integrable m f hf hf_supp (|θ₀| + 1))
+    (Filter.Eventually.of_forall (fun x θ _ => Krep_integrand_hasDerivAt m f x θ))
+  have hKrep : (fun θ => Krep m f θ) = fun θ => (1 / Real.sqrt 2 : ℂ) * ∫ x, F θ x := by
+    funext θ; simp only [hF, Krep, minkowskiFourier]
+  rw [hKrep]
+  exact key.2.const_mul (1 / Real.sqrt 2 : ℂ)
+
 end QIQTH.Fock.StressTensor

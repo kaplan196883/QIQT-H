@@ -4501,6 +4501,11 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ Stress-tensor Route B: bound_integrable ingredient. For continuous compactly-supported f, the bound
 -- m·cosh R·(|x₀|+|x₁|)·‖f x‖ is continuous + compactly-supported (vanishes where f does) ⟹ integrable. With Krep_integrand_hasDerivAt
 -- (h_diff) and Krep_deriv_norm_bound (h_bound), the differentiation-under-the-integral for HasDerivAt (Krep m f) kd is now assemblable.
+#print axioms QIQTH.Fock.StressTensor.Krep_hasDerivAt
+-- expected: standard only — ★★★ Stress-tensor Route B: Krep IS rapidity-differentiable (the HARD regularity gate discharged). For
+-- continuous compactly-supported f, HasDerivAt (Krep m f) kd θ₀ with kd θ₀=(1/√2)∫ e^{−iη}·(−i·m(x₀sinh θ₀−x₁cosh θ₀))·f dx (=Krep').
+-- Differentiation under the integral (hasDerivAt_integral_of_dominated_loc_of_deriv_le) via Krep_integrand_hasDerivAt (h_diff) +
+-- Krep_deriv_norm_bound (h_bound) + Krep_bound_integrable. DISCHARGES the hkd hypothesis of stressFluxKK_eq_neg_rapMom/boostEnergy_eq_neg_stressFlux.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,
