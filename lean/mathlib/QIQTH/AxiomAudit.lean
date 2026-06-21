@@ -4022,6 +4022,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.gFunction_zero
 -- expected: standard only — g(0)=⟪Jξ,η_n⟫ (ξ=√R ζ, η_n=gaussSmear): the Phragmén–Lindelöf comparison point. With g
 -- const this = g(t). Via deviceVecF_zero + gaussSmearC_zero + modConjBilin_apply.
+#print axioms QIQTH.deviceOpC_diff_normSq
+-- expected: standard only — L² DIFFERENCE identity ‖deviceOpC(z)ζ−deviceOpC(z₀)ζ‖²=∫‖d_z−d_{z₀}‖²dμ^R_ζ (deviceOpC_sub
+-- + borelFC_apply_norm_sq). Foundation of device-vector CONTINUITY (∫→0 by dominated conv) ⇒ DiffContOnCl half of g.
 #print axioms QIQTH.deviceVecF_norm_le
 -- expected: standard only — UNIFORM device-vector bound ‖deviceVecF z‖≤2√2‖ζ‖ ∀z (deviceOpC_norm_le applied to ζ; 0
 -- off strip). The bounded device factor of g.

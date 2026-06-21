@@ -1069,6 +1069,21 @@ theorem gFunction_norm_le (S : StandardSubspace H) (ζ : H) {V : ℝ → (H →L
     _ ≤ 2 * Real.sqrt 2 * ‖ζ‖ * ‖gaussSmearC V n η z‖ :=
         mul_le_mul_of_nonneg_right (deviceVecF_norm_le S ζ z) (norm_nonneg _)
 
+open QIQTH.StandardSubspaceModular MeasureTheory in
+/-- **`L²` identity for the device-vector difference**: `‖deviceOpC(z)ζ − deviceOpC(z₀)ζ‖² =
+    ∫‖d_z(ω) − d_{z₀}(ω)‖² dμ^R_ζ`.  The difference is a single `borelFC` applied to `ζ` (`deviceOpC_sub`),
+    so `borelFC_apply_norm_sq` turns its norm² into the spectral `L²` integral.  Feeds the device-vector
+    continuity (`∫‖d_z − d_{z₀}‖² → 0` by dominated convergence, `d_z` continuous + dominated by `2√2`) — the
+    continuity-to-closure half of `DiffContOnCl` for the g-function. -/
+theorem deviceOpC_diff_normSq (S : StandardSubspace H) (ζ : H) {z z₀ : ℂ}
+    (hz2 : z.im ≤ 0) (hz1 : -(1 / 2 : ℝ) ≤ z.im)
+    (hz02 : z₀.im ≤ 0) (hz01 : -(1 / 2 : ℝ) ≤ z₀.im) :
+    ‖deviceOpC S z hz2 hz1 ζ - deviceOpC S z₀ hz02 hz01 ζ‖ ^ 2
+      = ∫ ω, ‖devChar z (ω : spectrum ℝ (rvdRC S)).val
+          - devChar z₀ (ω : spectrum ℝ (rvdRC S)).val‖ ^ 2 ∂(rvdSpecMeasure S ζ) := by
+  rw [← ContinuousLinearMap.sub_apply, deviceOpC_sub, borelFC_apply_norm_sq]
+  rfl
+
 open QIQTH.StandardSubspaceModular in
 /-- **Diagonal operator identification of the device strip extension** (general `z` in the half-strip):
     `D_ξ(z) = ⟪ξ, deviceOpC(z) ξ⟫`.  The scalar integral `∫ d_z dμ^R_ξ` IS the diagonal expectation of the
