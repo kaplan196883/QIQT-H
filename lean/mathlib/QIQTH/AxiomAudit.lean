@@ -4394,6 +4394,11 @@ namespace QIQTH.AxiomAudit
 -- = (m/√2)e^{−θ}); horizonField m (boostTest a f) λ = horizonField m f (e^a·λ): the Lorentz boost acts on the
 -- horizon as the DILATION λ↦e^aλ. The horizon-level Bisognano–Wichmann fact making modular flow = horizon dilation,
 -- so K = ∫_H λ T_kk dλ (Phase 2–3). Proof: Krep_boost (boost = rapidity translation) + integral_add_right_eq_self.
+#print axioms QIQTH.Fock.StressTensor.Tkk_boostTest
+-- expected: standard only — ★ Stress-tensor Route B, Phase 2: the null stress component T_kk = ‖∂_λ φ_H‖² DEFINED,
+-- and its scaling: Tkk[boostTest a f](λ) = (e^a)²·Tkk[f](e^a λ) (weight-2 conformal dim of ∂_λφ). horizonFieldDeriv
+-- (= ∂_λ horizonField as an integral), Tkk := ‖horizonFieldDeriv‖², stressFluxKK := ∫_{λ>0} λ·Tkk (the modular/boost
+-- charge K=∫_H λ T_kk dλ) are now DEFINED objects (T_kk no longer a label). Phase 3: stressFluxKK = π·rapidityMomentum.
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,
