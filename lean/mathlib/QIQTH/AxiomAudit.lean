@@ -4010,6 +4010,10 @@ namespace QIQTH.AxiomAudit
 -- So deviceVec(0)=√R ζ=ξ, J·deviceVec(0)=Jξ ⇒ g-function value g(0)=⟪η,Jξ⟫ = the GConstancy RHS. The cfcCont↔CFC
 -- bridge (borelFC of continuous fn = Mathlib CFC) realized via the sqrt-uniqueness pattern, no new axiom.
 #print axioms QIQTH.devCorrExt_ofReal_inner
+#print axioms QIQTH.borelFC_apply_norm_sq
+-- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
+-- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable
+-- form for the strong-holomorphy diff-quotient ‖q_z−d‖²=∫‖Δ_z−∂d‖²dμ^R_ζ→0 (dominated convergence).
 #print axioms QIQTH.borelFC_inner_self
 -- expected: standard only — ★★★ L² LINCHPIN for strong holomorphy: ⟪f(R)ζ,f(R)ζ⟫=∫ conj(f)·f dμ^R_ζ (=∫|f|²,
 -- so ‖f(R)ζ‖²=∫|f|²dμ^R_ζ). Via ⟪Aζ,Aζ⟫=⟪ζ,A*Aζ⟫ (adjoint_inner_right) + A*=borelFC(conj f) (borelFC_adjoint) +

@@ -573,6 +573,27 @@ theorem borelFC_inner_self (S : StandardSubspace H) {g : spectrum ℝ (rvdRC S) 
       (mul_nonneg hC0 hC0) hpb,
     inner_borelFC, bilinDiag_self, ProjectionValuedMeasure.diagInt, rvdSpecMeasure]
 
+open MeasureTheory in
+/-- **`L²` isometry (real form)**: `‖f(R)ζ‖² = ∫ ‖f(ω)‖² dμ^R_ζ`.  The real-valued restatement of
+    `borelFC_inner_self` (`⟪f(R)ζ,f(R)ζ⟫ = ↑‖f(R)ζ‖²`, and `conj(f)·f = ↑‖f‖²`).  This is the form the
+    strong-holomorphy difference-quotient argument uses directly: `‖q_z − d‖² = ∫‖Δ_z − ∂_z d‖² dμ^R_ζ → 0`. -/
+theorem borelFC_apply_norm_sq (S : StandardSubspace H) {g : spectrum ℝ (rvdRC S) → ℂ}
+    (hg : Measurable g) {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ ω, ‖g ω‖ ≤ C) (ζ : H) :
+    ‖borelFC (rvdRC S) (rvdRC_isSelfAdjoint S) hg hC0 hC ζ‖ ^ 2
+      = ∫ ω, ‖g ω‖ ^ 2 ∂(rvdSpecMeasure S ζ) := by
+  have hcast : (∫ ω, (starRingEnd ℂ) (g ω) * g ω ∂(rvdSpecMeasure S ζ))
+      = ((∫ ω, ‖g ω‖ ^ 2 ∂(rvdSpecMeasure S ζ) : ℝ) : ℂ) := by
+    rw [← integral_complex_ofReal]
+    refine integral_congr_ae (Filter.Eventually.of_forall fun ω => ?_)
+    show (starRingEnd ℂ) (g ω) * g ω = ((‖g ω‖ ^ 2 : ℝ) : ℂ)
+    rw [mul_comm, Complex.mul_conj]
+    norm_cast
+    exact Complex.normSq_eq_norm_sq _
+  have hre := inner_self_eq_norm_sq (𝕜 := ℂ)
+    (borelFC (rvdRC S) (rvdRC_isSelfAdjoint S) hg hC0 hC ζ)
+  rw [borelFC_inner_self S hg hC0 hC ζ, hcast] at hre
+  simpa using hre.symm
+
 open QIQTH.StandardSubspaceModular in
 /-- **Bottom-edge `t`-translation of the device operator**: `deviceOpC(t − i/2) = Δ^{it}·deviceOpC(−i/2)`
     (the bottom-edge analogue of `deviceOpReal_eq`).  `devChar(↑t − i/2) = u_t·devChar(−i/2)` EVERYWHERE (via
