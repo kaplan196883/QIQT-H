@@ -4540,6 +4540,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ Stress-tensor Route B (softer regularity, hff DISCHARGED): for f Schwartz, m>0,
 -- Integrable (fun θ => conj(horizonAmp θ)·horizonAmp θ). ‖conj A·A‖=‖A‖² ≤ (4Cc²)²((c²+x²)⁻¹)² via horizonAmp_norm_le
 -- + integrable_inv_const_sq_add_sq. Discharges hff (the A-self-pairing integrability). Uses only the cosh⁻² decay (no Krep').
+#print axioms QIQTH.Fock.StressTensor.schwartz_Krep_hasDerivAt
+-- expected: standard only — ★★★ Stress-tensor Route B (class unification): Krep IS rapidity-differentiable for a SCHWARTZ f
+-- (companion of Krep_hasDerivAt, which needed compact support), same explicit kd=Krep'. Differentiation under the integral with
+-- the two integrabilities from the Schwartz tail: F=e^{iη}·f is L¹ (‖e^{iη}‖=1, f integrable), bound m cosh R(|x₀|+|x₁|)‖f‖ is
+-- L¹ ((|x₀|+|x₁|)≤2‖x‖, integrable_pow_mul). Lets hkd be discharged on the SAME Schwartz class as hA/hAd/hff. Provides kd for the
+-- remaining deriv gates (hdA/hdAc/hFdA/h1/h2), whose closure needs the kd=Krep' DECAY (the next sub-campaign).
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,

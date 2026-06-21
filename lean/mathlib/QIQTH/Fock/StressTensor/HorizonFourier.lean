@@ -1,6 +1,7 @@
 import QIQTH.Fock.StressTensor.NullStressFlux
 import QIQTH.Fock.PauliJordan
 import Mathlib.MeasureTheory.Function.JacobianOneDim
+import Mathlib.Analysis.Distribution.SchwartzSpace.Basic
 
 /-!
 # Free-field stress tensor (Route B) — Phase 3b-i: the horizon field as a Fourier integral on the k-line
@@ -250,6 +251,80 @@ theorem Krep_hasDerivAt (m : ℝ) (hm : 0 ≤ m) (f : V → ℂ) (hf : Continuou
     (Krep_bound_integrable m f hf hf_supp (|θ₀| + 1))
     (Filter.Eventually.of_forall (fun x θ _ => Krep_integrand_hasDerivAt m f x θ))
   have hKrep : (fun θ => Krep m f θ) = fun θ => (1 / Real.sqrt 2 : ℂ) * ∫ x, F θ x := by
+    funext θ; simp only [hF, Krep, minkowskiFourier]
+  rw [hKrep]
+  exact key.2.const_mul (1 / Real.sqrt 2 : ℂ)
+
+/-- **★★★ `Krep` is rapidity-differentiable for a SCHWARTZ test function** — the class-unifying companion of
+    `Krep_hasDerivAt`.  Same proof (differentiation under the integral, same explicit `kd = Krep'`), but the two
+    integrabilities use the Schwartz tail instead of compact support: `F θ₀ = e^{iη}·f` is `L¹` because
+    `‖e^{iη}‖ = 1` and `f` is integrable, and the dominating bound `m·cosh R·(|x₀|+|x₁|)·‖f x‖` is `L¹` because
+    `(|x₀|+|x₁|)‖f x‖ ≤ 2‖x‖‖f x‖` (`integrable_pow_mul`).  Lets `hkd` be discharged on the SAME Schwartz class
+    as `hA`/`hAd`/`hff`. -/
+theorem schwartz_Krep_hasDerivAt (m : ℝ) (hm : 0 ≤ m) (f : SchwartzMap V ℂ) (θ₀ : ℝ) :
+    HasDerivAt (fun θ => Krep m (⇑f) θ)
+      ((1 / Real.sqrt 2 : ℂ) * ∫ x, (Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ₀) x : ℝ) : ℂ))
+        * (-Complex.I * ((m * (x 0 * Real.sinh θ₀ - x 1 * Real.cosh θ₀) : ℝ) : ℂ))) * (⇑f) x) θ₀ := by
+  set F : ℝ → V → ℂ := fun θ x =>
+    Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ)) * (⇑f) x with hF
+  set F' : ℝ → V → ℂ := fun θ x =>
+    (Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ))
+      * (-Complex.I * ((m * (x 0 * Real.sinh θ - x 1 * Real.cosh θ) : ℝ) : ℂ))) * (⇑f) x with hF'
+  have hfc : Continuous (⇑f) := f.continuous
+  have hnorm1 : ∀ t : ℝ, ‖Complex.exp (-Complex.I * (t : ℂ))‖ = 1 := by
+    intro t
+    rw [Complex.norm_exp]
+    simp [Complex.neg_re, Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im,
+      Complex.ofReal_re, Complex.ofReal_im]
+  have hmD : ∀ θ, Continuous (fun x : V => (minkowskiDot (massShell m θ) x : ℝ)) := by
+    intro θ; simp only [minkowskiDot]
+    exact (continuous_const.mul (continuous_apply 0)).sub (continuous_const.mul (continuous_apply 1))
+  have hexpc : ∀ θ, Continuous (fun x : V =>
+      Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ))) := fun θ =>
+    Complex.continuous_exp.comp (continuous_const.mul (Complex.continuous_ofReal.comp (hmD θ)))
+  have hFcont : ∀ θ, Continuous (F θ) := fun θ => (hexpc θ).mul hfc
+  have hF'cont : ∀ θ, Continuous (F' θ) := by
+    intro θ
+    refine ((hexpc θ).mul ?_).mul hfc
+    exact continuous_const.mul (Complex.continuous_ofReal.comp (continuous_const.mul
+      (((continuous_apply 0).mul continuous_const).sub ((continuous_apply 1).mul continuous_const))))
+  have hbnd : ∀ᵐ x ∂(volume : Measure V), ∀ θ ∈ Metric.ball θ₀ 1,
+      ‖F' θ x‖ ≤ m * Real.cosh (|θ₀| + 1) * (|x 0| + |x 1|) * ‖(⇑f) x‖ := by
+    refine Filter.Eventually.of_forall (fun x θ hθ => ?_)
+    have hθR : |θ| ≤ |θ₀| + 1 := by
+      rw [Metric.mem_ball, Real.dist_eq] at hθ
+      calc |θ| = |θ₀ + (θ - θ₀)| := by ring_nf
+        _ ≤ |θ₀| + |θ - θ₀| := abs_add_le _ _
+        _ ≤ |θ₀| + 1 := by linarith
+    exact Krep_deriv_norm_bound m hm (⇑f) x (by positivity) hθR
+  have hFint : Integrable (F θ₀) := by
+    refine (f.integrable).norm.mono' (hFcont θ₀).aestronglyMeasurable
+      (Filter.Eventually.of_forall (fun x => le_of_eq ?_))
+    simp only [hF, norm_mul, hnorm1, one_mul]
+  have hbound_int : Integrable
+      (fun x : V => m * Real.cosh (|θ₀| + 1) * (|x 0| + |x 1|) * ‖(⇑f) x‖) := by
+    refine ((f.integrable_pow_mul volume 1).const_mul
+      (2 * m * Real.cosh (|θ₀| + 1))).mono'
+      (((continuous_const.mul ((continuous_abs.comp (continuous_apply 0)).add
+        (continuous_abs.comp (continuous_apply 1)))).mul hfc.norm).aestronglyMeasurable) ?_
+    filter_upwards with x
+    rw [Real.norm_eq_abs, abs_of_nonneg (by positivity)]
+    have hx2 : |x 0| + |x 1| ≤ 2 * ‖x‖ := by
+      have h0 := norm_le_pi_norm x 0
+      have h1 := norm_le_pi_norm x 1
+      rw [Real.norm_eq_abs] at h0 h1
+      linarith
+    calc m * Real.cosh (|θ₀| + 1) * (|x 0| + |x 1|) * ‖(⇑f) x‖
+        ≤ m * Real.cosh (|θ₀| + 1) * (2 * ‖x‖) * ‖(⇑f) x‖ :=
+          mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hx2 (by positivity)) (norm_nonneg _)
+      _ = 2 * m * Real.cosh (|θ₀| + 1) * (‖x‖ ^ 1 * ‖(⇑f) x‖) := by rw [pow_one]; ring
+  have key := hasDerivAt_integral_of_dominated_loc_of_deriv_le (𝕜 := ℝ) (x₀ := θ₀)
+    (F := F) (F' := F') (bound := fun x => m * Real.cosh (|θ₀| + 1) * (|x 0| + |x 1|) * ‖(⇑f) x‖)
+    (Metric.ball_mem_nhds θ₀ one_pos)
+    (Filter.Eventually.of_forall (fun θ => (hFcont θ).aestronglyMeasurable))
+    hFint ((hF'cont θ₀).aestronglyMeasurable) hbnd hbound_int
+    (Filter.Eventually.of_forall (fun x θ _ => Krep_integrand_hasDerivAt m (⇑f) x θ))
+  have hKrep : (fun θ => Krep m (⇑f) θ) = fun θ => (1 / Real.sqrt 2 : ℂ) * ∫ x, F θ x := by
     funext θ; simp only [hF, Krep, minkowskiFourier]
   rw [hKrep]
   exact key.2.const_mul (1 / Real.sqrt 2 : ℂ)
