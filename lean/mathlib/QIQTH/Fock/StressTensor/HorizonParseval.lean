@@ -839,4 +839,21 @@ theorem stressFluxKK_eq_neg_rapMom_schwartz {m : ℝ} (hm : 0 < m) (f : Schwartz
     (horizonAmp_sq_integrable hm f) (horizonAmp_deriv_mul_integrable hm f)
     (horizonAmp_mul_deriv_integrable hm f)
 
+/-- **★★★★ GR-bridge form of Route B for the SCHWARTZ class — the `hTkk` scalar, 8 of 9 gates.**  The boost
+    energy of the wedge mode in the exact form the GR chain's `hTkk` uses, `(2π·∫conj(Krep)·Krep').im`, equals
+    `−stressFluxKK` for any Schwartz `f` — so defining `T_kk := −(ℏ/2π)·stressFluxKK` makes the labelled `hTkk`
+    hold: the bundled stress scalar is the proven free-field horizon stress flux.  Same 8 axiom-free discharges;
+    the ONLY remaining hypothesis is `hFdA`. -/
+theorem boostEnergy_eq_neg_stressFlux_schwartz {m : ℝ} (hm : 0 < m) (f : SchwartzMap V ℂ)
+    (hFdA : Integrable (𝓕 (deriv (horizonAmp m (⇑f))))) :
+    (2 * Real.pi * ∫ θ, (starRingEnd ℂ) (Krep m (⇑f) θ) * deriv (fun θ => Krep m (⇑f) θ) θ).im
+      = - stressFluxKK m (⇑f) := by
+  have hkd : ∀ θ, HasDerivAt (fun θ => Krep m (⇑f) θ) (deriv (fun θ => Krep m (⇑f) θ) θ) θ := fun θ =>
+    (schwartz_Krep_hasDerivAt m hm.le f θ).differentiableAt.hasDerivAt
+  exact boostEnergy_eq_neg_stressFlux m hm (⇑f) (deriv (fun θ => Krep m (⇑f) θ)) hkd
+    (horizonAmp_integrable hm f) (horizonAmp_differentiable hm f _ hkd)
+    (horizonAmp_deriv_continuous hm f) (horizonAmp_deriv_integrable hm f) hFdA
+    (horizonAmp_sq_integrable hm f) (horizonAmp_deriv_mul_integrable hm f)
+    (horizonAmp_mul_deriv_integrable hm f)
+
 end QIQTH.Fock.StressTensor
