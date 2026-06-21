@@ -4406,6 +4406,12 @@ namespace QIQTH.AxiomAudit
 -- Jacobian of the horizon dilation λ↦e^aλ. Proof: Tkk_boostTest + Measure.integral_comp_mul_left. NB: stressFluxKK is now
 -- the FULL-LINE ∫_ℝ (was wrongly ∫_{λ>0}; GPT-5.5 consult — half-line ≠ const·rapidityMomentum). Phase 3b (now TRACTABLE,
 -- no distributions): stressFluxKK = −2π·rapidityMomentum via the sesquilinear Fourier identity on the k-line.
+#print axioms QIQTH.Fock.StressTensor.horizonFieldDeriv_eq_kIntegral
+-- expected: standard only — ★ Stress-tensor Route B, Phase 3b-i: horizonFieldDeriv (=∂_λφ_H) IS a Fourier integral on the
+-- null-momentum k-line. horizonFieldDeriv m f λ = ∫_{x>0} (−i·Krep m f(rapInv m x))·e^{−iλx}dx, via the change of variables
+-- θ↦k=nullMom m θ=(m/√2)e^{−θ} (inverse rapInv m x=log(m/√2)−log x; Jacobian |dk/dθ|=k cancels the explicit nullMom factor).
+-- Proof: integral_image_eq_integral_abs_deriv_smul + nullMom bijection ℝ→(0,∞) (rapInv_nullMom/nullMom_rapInv/injective/
+-- image_univ/hasDerivAt). Entry point to the sesquilinear-Fourier evaluation (Phase 3b-ii ⟹ −2π·rapidityMomentum).
 #print axioms QIQTH.Fock.OneParticleBW.wedge_hbridge_of_smooth
 -- expected: standard only — ★★ WedgeKMSFlux LOCALIZATION slot hbridge DERIVED for smooth wedge states: the modular-
 -- energy deriv d/dt⟪ξ,Δ^{it}ξ⟫|₀ = i(2π/ℏ)T_kk via BW (oneParticleBW_wedge_complete: Δ=boost) reducing modular→boost,
