@@ -462,6 +462,21 @@ noncomputable def deviceOpC (S : StandardSubspace H) (z : ℂ) (hz2 : z.im ≤ 0
     ((measurable_devChar z).comp measurable_subtype_coe) (Real.sqrt_nonneg 2)
     (fun ω => devChar_norm_le_Icc hz2 hz1 (rvdRC_spectrum_mem_Icc S ω))
 
+/-- **Total device-vector function** `z ↦ deviceOpC(z)ζ` (piece 4 of the strong holomorphy): a `dite`-total
+    function on all of `ℂ`, equal to `deviceOpC(z)ζ` on the closed half-strip `{−1/2 ≤ Im z ≤ 0}` (where the
+    device operator's `√2` bound holds) and `0` outside.  The totality sidesteps the `deviceOpC`-takes-proofs
+    friction: `HasDerivAt (deviceVecF S ζ)` is a statement about a genuine `ℂ → H` function, provable at every
+    interior `z₀` because `deviceVecF` agrees with the `borelFC` branch on a neighborhood.  Its Fréchet
+    derivative is `borelFC(ω ↦ i·log((2−ω)/ω)·d_{z₀}(ω))ζ`, with `‖slope − deriv‖² = ∫‖Δ_z − ∂d‖² dμ^R_ζ → 0`
+    (`borelFC_sub` + `borelFC_smul` + `borelFC_apply_norm_sq` + `tendsto_integral_devChar_remainder_sq`). -/
+noncomputable def deviceVecF (S : StandardSubspace H) (ζ : H) (z : ℂ) : H :=
+  if h : z.im ≤ 0 ∧ -(1 / 2 : ℝ) ≤ z.im then deviceOpC S z h.1 h.2 ζ else 0
+
+/-- On the closed half-strip, `deviceVecF` is the device operator applied to `ζ` (proof-irrelevant `dite`). -/
+theorem deviceVecF_eq_of_mem (S : StandardSubspace H) (ζ : H) {z : ℂ}
+    (hz2 : z.im ≤ 0) (hz1 : -(1 / 2 : ℝ) ≤ z.im) :
+    deviceVecF S ζ z = deviceOpC S z hz2 hz1 ζ := dif_pos ⟨hz2, hz1⟩
+
 /-- **`deviceOpC` at a real point is `deviceOpReal`** (`d_{(t:ℂ)} = d_t`): the half-strip device operator
     restricts to the real-axis device operator `Δ^{it}·√R` on the boundary `Im z = 0`. -/
 theorem deviceOpC_ofReal (S : StandardSubspace H) (t : ℝ) :
