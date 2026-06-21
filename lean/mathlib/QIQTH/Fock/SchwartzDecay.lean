@@ -467,4 +467,53 @@ theorem kd_norm_le (m : ℝ) (hm : 0 < m) (f : SchwartzMap V ℂ) :
   refine (add_le_add e0 e1).trans (le_of_eq ?_)
   field_simp
 
+/-- **`(cosh)⁻³` decay of the mass-shell Fourier transform of `x_j f`** (the cube version of
+`minkowskiFourier_coordMul_decay`).  `schwartz_Krep_decay_cube` on the Schwartz `coordMul j f` + `Krep_coordMul`. -/
+theorem minkowskiFourier_coordMul_decay_cube (j : Fin 2) (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ θ : ℝ,
+      ‖minkowskiFourier (fun x => (x j : ℝ) • (⇑f) x) (massShell m θ)‖ ≤ C * ((Real.cosh θ) ^ 3)⁻¹ := by
+  obtain ⟨K, hK, hKb⟩ := schwartz_Krep_decay_cube (coordMul j f) hm
+  refine ⟨Real.sqrt 2 * K, mul_nonneg (by positivity) hK, fun θ => ?_⟩
+  have hM : minkowskiFourier (fun x => (x j : ℝ) • (⇑f) x) (massShell m θ)
+      = (Real.sqrt 2 : ℂ) * Krep m (⇑(coordMul j f)) θ := by
+    rw [Krep_coordMul, ← mul_assoc, show (Real.sqrt 2 : ℂ) * (1 / Real.sqrt 2 : ℂ) = 1 from by
+      rw [mul_one_div, div_self]; exact_mod_cast Real.sqrt_ne_zero'.mpr (by norm_num), one_mul]
+  rw [hM, norm_mul, show ‖(Real.sqrt 2 : ℂ)‖ = Real.sqrt 2 from by
+    rw [Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (by positivity)]]
+  calc Real.sqrt 2 * ‖Krep m (⇑(coordMul j f)) θ‖
+      ≤ Real.sqrt 2 * (K * ((Real.cosh θ) ^ 3)⁻¹) := mul_le_mul_of_nonneg_left (hKb θ) (by positivity)
+    _ = Real.sqrt 2 * K * ((Real.cosh θ) ^ 3)⁻¹ := by ring
+
+/-- **★★★ Super-exponential `(cosh)⁻²` decay of the rapidity derivative `Krep'`** (the cube-moment version of
+`kd_norm_le`).  Combining `kd_integral_eq_moments` with the `(cosh)⁻³` moment decay
+(`minkowskiFourier_coordMul_decay_cube`) and `|sinh θ| ≤ cosh θ`: the `m·cosh θ` prefactors meet `(cosh)⁻³` to
+leave `(cosh)⁻²`.  This is `kd = o(e^{−θ})`, the decay that makes `deriv (horizonAmp)` continuous at `x = 0`. -/
+theorem kd_norm_le_sq (m : ℝ) (hm : 0 < m) (f : SchwartzMap V ℂ) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ θ : ℝ,
+      ‖(1 / Real.sqrt 2 : ℂ) * (∫ x, (Complex.exp (-Complex.I * ((minkowskiDot (massShell m θ) x : ℝ) : ℂ))
+          * (-Complex.I * ((m * (x 0 * Real.sinh θ - x 1 * Real.cosh θ) : ℝ) : ℂ))) * (⇑f) x)‖
+        ≤ C * ((Real.cosh θ) ^ 2)⁻¹ := by
+  obtain ⟨C0, hC0, hb0⟩ := minkowskiFourier_coordMul_decay_cube 0 f hm.ne'
+  obtain ⟨C1, hC1, hb1⟩ := minkowskiFourier_coordMul_decay_cube 1 f hm.ne'
+  refine ⟨1 / Real.sqrt 2 * (m * (C0 + C1)), by positivity, fun θ => ?_⟩
+  have hcosh : (0 : ℝ) < Real.cosh θ := Real.cosh_pos θ
+  rw [kd_integral_eq_moments, norm_mul, show ‖(1 / Real.sqrt 2 : ℂ)‖ = 1 / Real.sqrt 2 from by
+    rw [show (1 / Real.sqrt 2 : ℂ) = ((1 / Real.sqrt 2 : ℝ) : ℂ) by push_cast; ring, Complex.norm_real,
+      Real.norm_eq_abs, abs_of_nonneg (by positivity)],
+    show (1 : ℝ) / Real.sqrt 2 * (m * (C0 + C1)) * ((Real.cosh θ) ^ 2)⁻¹
+      = (1 / Real.sqrt 2) * (m * (C0 + C1) * ((Real.cosh θ) ^ 2)⁻¹) from by ring]
+  refine mul_le_mul_of_nonneg_left ?_ (by positivity)
+  refine (norm_add_le _ _).trans ?_
+  simp only [norm_mul, norm_neg, Complex.norm_I, Complex.norm_real, one_mul, Real.norm_eq_abs,
+    abs_of_pos hm, abs_of_pos (Real.cosh_pos θ)]
+  have e0 : m * |Real.sinh θ| * ‖minkowskiFourier (fun x => (x 0 : ℝ) • (⇑f) x) (massShell m θ)‖
+      ≤ m * Real.cosh θ * (C0 * ((Real.cosh θ) ^ 3)⁻¹) :=
+    mul_le_mul (mul_le_mul_of_nonneg_left (abs_sinh_le_cosh θ) hm.le) (hb0 θ) (norm_nonneg _)
+      (by positivity)
+  have e1 : m * Real.cosh θ * ‖minkowskiFourier (fun x => (x 1 : ℝ) • (⇑f) x) (massShell m θ)‖
+      ≤ m * Real.cosh θ * (C1 * ((Real.cosh θ) ^ 3)⁻¹) :=
+    mul_le_mul_of_nonneg_left (hb1 θ) (by positivity)
+  refine (add_le_add e0 e1).trans (le_of_eq ?_)
+  field_simp
+
 end QIQTH.Fock.Localization
