@@ -562,13 +562,22 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          ⟹ `∀ᵐ x, F↑x≠0`.  Restriction of an entire fn to `ℝ` is real-analytic (`DifferentiableOn.analyticOnNhd` +
          `AnalyticAt.restrictScalars`/`.comp` with `Complex.ofRealCLM.analyticAt`) → 8c.  The FT-nonvanishing TAIL is now
          fully assembled: an entire FT that's `≢0` gives the Wiener hypothesis directly.
-         NEXT: **(8a)** super-exponential decay `|Krep m (bumpC) θ|≤C_N e^{−N|θ|}` (from `f̂_M` Schwartz on the shell —
-         relate `minkowskiFourier` to the standard FT `f̂_E(p⁰,−p¹)`, use FT-of-Schwartz-is-Schwartz + `massShell ~e^{|θ|}`
-         growth; NOTE the codebase's `norm_KrepCont_le_*` bounds use the CRUDE `|kernel|≤1` so give only boundedness on
-         the real axis — the finer Schwartz decay is NEW work); **(8b)** `𝓕(Krep m f₀)` entire from 8a (FT holomorphic on
-         every strip via differentiation-under-integral, since all exponential moments finite); **(8d)** assemble: a
-         concrete `bumpC` witness with `Krep≢0` (its amplitude `≠0` somewhere), `8b+8c′` ⟹ `𝓕≠0` a.e., feed
-         `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
+         **★ 8a IS LARGELY IN THE CODEBASE** (`SchwartzDecay.lean`): `minkowskiFourier_eq_fourierIntegral` connects the
+         custom FT to Mathlib's; `schwartz_Krep_memLp` gives `‖Krep m ⇑f θ‖≤C/cosh θ` and `schwartz_Krep_decay_sq` gives
+         `≤C/cosh²θ` (single/double-exponential decay) for ANY Schwartz `f` — so a SINGLE-exponential real-axis decay (NOT
+         the crude `norm_KrepCont_le_*` boundedness) is already available; `LocalizedWitness.lean` has `bumpC` (wedge
+         bumps) + `schwartz_Krep_memLp` (`MemLp` automatic). `cosh²θ≥e^{2|θ|}/4` ⟹ `‖Krep‖≤4C e^{−2|θ|}`, so the FT is
+         holomorphic on the strip `|Im ζ|<2` ⟹ real-analytic on `ℝ` (single-exp suffices — don't need entire/all-N).
+         **(8a-foundation) BUILT** (`4595193`): `integrable_exp_neg_mul_abs` (`exp(−b|x|)∈L¹(ℝ)` for `b>0`, both-ends via
+         `integrable_of_isBigO_atBot_atTop`) — dominates the `cosh⁻²` decay ⟹ `Krep∈L¹` + finite exp moments `∫‖Krep‖e^{a|θ|}<∞`
+         for `a<2`, the precise FT-holomorphy inputs.
+         NEXT: **(8b)** `𝓕(Krep m f₀)` real-analytic on `ℝ` — the FT extends holomorphically to the strip `|Im ζ|<2` via
+         differentiation-under-the-integral (Mathlib has FT *smoothness* `hasFTaylorSeriesUpTo_fourierIntegral` but NOT
+         analyticity — build the strip-holomorphy from the exp-moment integrability above; then "strip-holomorphic ⊇ ℝ ⟹
+         real-analytic on ℝ" → 8c, OR push to all-N decay for entire → 8c′).  Also need **8b-bridge**: the `L²` FT coeFn
+         `⇑(𝓕 N₀.vec)` agrees a.e. with the *function* FT of `Krep` (L²↔L¹ FT agreement on `L¹∩L²` — check/​build).
+         **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0` (its amplitude `≠0` somewhere), `8b+8c/8c′` ⟹ `𝓕≠0`
+         a.e., feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
          EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness, the full
          Tauberian theorem, the `NiceWedgeCyclic` wiring, BOTH a.e.-nonzero finishers 8c/8c′) is DONE; brick 8 reduced to
          the real-axis decay bound 8a + FT-holomorphy 8b (standard real analysis) on the existing `bumpC` witness.
