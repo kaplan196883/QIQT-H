@@ -230,4 +230,33 @@ theorem fourier_correlation_eq (g₀ h : Lp ℂ 2 (volume : Measure ℝ)) (w : �
     rw [Real.inner_apply]; push_cast; ring
   rw [Circle.smul_def, hchar, smul_eq_mul]
 
+/-- **Wiener brick 6b — Fourier injectivity on L¹.**  If `k ∈ L¹(ℝ)` and its (function) Fourier
+    transform vanishes identically, then `k = 0` a.e.  Proof: it suffices (`AEEqOfIntegralContDiff`)
+    that `∫ g·k = 0` for every real smooth compactly-supported test `g`; package its complexification
+    `G:=↑∘g` as a Schwartz map, write `G = 𝓕(𝓕⁻G)` (Schwartz inversion) and apply the multiplication
+    formula `∫ 𝓕(𝓕⁻G)·k = ∫ (𝓕⁻G)·𝓕k` (`integral_fourierIntegral_smul_eq_flip`, `innerₗ` symmetric)
+    `= 0` since `𝓕 k = 0`. -/
+theorem ae_eq_zero_of_fourier_eq_zero {k : ℝ → ℂ} (hk : Integrable k)
+    (h : ∀ w, 𝓕 k w = 0) : k =ᵐ[volume] 0 := by
+  apply ae_eq_zero_of_integral_contDiff_smul_eq_zero hk.locallyIntegrable
+  intro g hg_smooth hg_supp
+  have hGc_smooth := hg_smooth.continuousLinearMap_comp Complex.ofRealCLM
+  have hGc_supp : HasCompactSupport (⇑Complex.ofRealCLM ∘ g) := hg_supp.comp_left (map_zero _)
+  set G : 𝓢(ℝ, ℂ) := hGc_supp.toSchwartzMap hGc_smooth with hGdef
+  have hGcoe : ∀ x, G x = (g x : ℂ) := fun x => Complex.ofRealCLM_apply (g x)
+  set F : 𝓢(ℝ, ℂ) := 𝓕⁻ G with hFdef
+  have hinv : 𝓕 F = G := FourierTransform.fourier_fourierInv_eq G
+  have hfe : 𝓕 (⇑F) = (⇑G : ℝ → ℂ) := by rw [← fourier_coe, hinv]
+  have hrw : (fun ξ => g ξ • k ξ) = fun ξ => 𝓕 (⇑F) ξ • k ξ := by
+    funext ξ
+    rw [hfe, hGcoe]
+    simp [Complex.real_smul]
+  rw [hrw,
+    show (fun ξ => 𝓕 (⇑F) ξ • k ξ)
+      = fun ξ => VectorFourier.fourierIntegral 𝐞 volume (innerₗ ℝ) (⇑F) ξ • k ξ from rfl,
+    VectorFourier.integral_fourierIntegral_smul_eq_flip (L := innerₗ ℝ)
+      Real.continuous_fourierChar continuous_inner F.integrable hk]
+  have hz : ∀ x, VectorFourier.fourierIntegral 𝐞 volume (innerₗ ℝ) k x = 0 := h
+  simp only [flip_innerₗ, hz, smul_zero, integral_zero]
+
 end QIQTH.Fock.WienerL2
