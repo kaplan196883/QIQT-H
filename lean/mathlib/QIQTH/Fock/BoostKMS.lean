@@ -1066,6 +1066,55 @@ theorem real_L2_inner_le {μ : Measure ℝ} {u v : ℝ → ℝ} (hu : MemLp u 2 
   refine (integral_mul_le_Lp_mul_Lq_of_nonneg Real.HolderConjugate.two_two hunn hvnn hmu hmv).trans_eq ?_
   rw [hpow u, hpow v, Real.sqrt_eq_rpow, Real.sqrt_eq_rpow]
 
+/-- **One shifted-tail term**: with the cutoff indicator tied to the FIRST factor's shift `+c`,
+    `∫ 1_{R<|θ+c|}·‖Krep h₁(θ+c)‖·‖Krep h₂(θ+d)‖ ≤ T_{h₁}(R)·‖Krep h₂‖₂`. Real Cauchy–Schwarz
+    (`real_L2_inner_le`) on `1_{·}·‖Krep h₁(·+c)‖` and `‖Krep h₂(·+d)‖`, then translation-invariance
+    (`integral_add_right_eq_self`) turns each shifted slice integral into the `t`-independent tail / full norm. -/
+theorem tail_term_le (m : ℝ) {h₁ h₂ : V → ℂ} (hh₁ : MemLp (Krep m h₁) 2 volume)
+    (hh₂ : MemLp (Krep m h₂) 2 volume) (R c d : ℝ) :
+    ∫ θ, Set.indicator {θ : ℝ | R < |θ + c|} (1 : ℝ → ℝ) θ
+        * (‖Krep m h₁ (θ + c)‖ * ‖Krep m h₂ (θ + d)‖)
+      ≤ Real.sqrt (∫ θ in {θ : ℝ | R < |θ|}, ‖Krep m h₁ θ‖ ^ 2)
+        * Real.sqrt (∫ θ, ‖Krep m h₂ θ‖ ^ 2) := by
+  have hmeasR : MeasurableSet {θ : ℝ | R < |θ|} :=
+    measurableSet_lt measurable_const _root_.continuous_abs.measurable
+  have hT₁ : MemLp (fun θ : ℝ => Krep m h₁ (θ + c)) 2 volume := by
+    simpa [Function.comp_def] using hh₁.comp_measurePreserving (measurePreserving_add_right volume c)
+  have hT₂ : MemLp (fun θ : ℝ => Krep m h₂ (θ + d)) 2 volume := by
+    simpa [Function.comp_def] using hh₂.comp_measurePreserving (measurePreserving_add_right volume d)
+  set S : Set ℝ := {θ : ℝ | R < |θ + c|} with hSdef
+  have hSmeas : MeasurableSet S := measurableSet_lt measurable_const (by fun_prop)
+  set u : ℝ → ℝ := S.indicator (fun θ => ‖Krep m h₁ (θ + c)‖) with hudef
+  set v : ℝ → ℝ := fun θ => ‖Krep m h₂ (θ + d)‖ with hvdef
+  have hu : MemLp u 2 volume := hT₁.norm.indicator hSmeas
+  have hv : MemLp v 2 volume := hT₂.norm
+  have heq : (fun θ => Set.indicator S (1 : ℝ → ℝ) θ * (‖Krep m h₁ (θ + c)‖ * ‖Krep m h₂ (θ + d)‖))
+      = fun θ => u θ * v θ := by
+    funext θ
+    rw [hudef, hvdef]
+    by_cases hθ : θ ∈ S
+    · rw [Set.indicator_of_mem hθ, Set.indicator_of_mem hθ, Pi.one_apply]; ring
+    · rw [Set.indicator_of_notMem hθ, Set.indicator_of_notMem hθ]; ring
+  rw [heq]
+  have hu2 : (∫ θ, u θ ^ 2) = ∫ θ in {θ : ℝ | R < |θ|}, ‖Krep m h₁ θ‖ ^ 2 := by
+    rw [show (∫ θ, u θ ^ 2)
+        = ∫ θ, ({θ : ℝ | R < |θ|}.indicator (fun s => ‖Krep m h₁ s‖ ^ 2)) (θ + c) from ?_,
+      integral_add_right_eq_self, integral_indicator hmeasR]
+    refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
+    show u θ ^ 2 = {θ : ℝ | R < |θ|}.indicator (fun s => ‖Krep m h₁ s‖ ^ 2) (θ + c)
+    rw [hudef]
+    by_cases hθ : R < |θ + c|
+    · rw [Set.indicator_of_mem (show θ ∈ S from hθ),
+        Set.indicator_of_mem (show (θ + c) ∈ {θ : ℝ | R < |θ|} from hθ)]
+    · rw [Set.indicator_of_notMem (show θ ∉ S from hθ),
+        Set.indicator_of_notMem (show (θ + c) ∉ {θ : ℝ | R < |θ|} from hθ)]; ring
+  have hv2 : (∫ θ, v θ ^ 2) = ∫ θ, ‖Krep m h₂ θ‖ ^ 2 := by
+    rw [hvdef]; exact integral_add_right_eq_self (fun θ => ‖Krep m h₂ θ‖ ^ 2) d
+  have hcs := real_L2_inner_le hu hv
+    (Filter.Eventually.of_forall fun θ => by rw [hudef]; exact Set.indicator_nonneg (fun _ _ => norm_nonneg _) θ)
+    (Filter.Eventually.of_forall fun θ => by rw [hvdef]; exact norm_nonneg _)
+  rwa [hu2, hv2] at hcs
+
 /-- **Shifted-tail geometry** (the crux of the annular bound): if `|θ| > R` then `|θ+a| > R` or `|θ−a| > R`.
     Since `2|θ| = |(θ+a)+(θ−a)| ≤ |θ+a|+|θ−a|`, both `≤ R` would force `|θ| ≤ R`. This is why the scalar KMS
     product has uniformly small edge tails even though the individual `L²` slices do not. -/
