@@ -141,4 +141,16 @@ theorem differentiable_kmsIntegrand (m : ℝ) {f g : V → ℂ} (hf : Continuous
   ((differentiable_reflKrepCont m hg hgc).comp (by fun_prop)).mul
     ((differentiable_KrepCont m hf hfc).comp (by fun_prop))
 
+/-- **The `kmsFun` integrand is continuous in `θ`** (for fixed `z`) — the measurability (`hF_meas`) ingredient
+    for the parametric-integral holomorphy of `F`. `KrepCont` is continuous (entire), composed with the
+    continuous `θ`-maps `θ↦conj(θ+πz)`, `θ↦θ−πz`, and `conj`. -/
+theorem continuous_kmsIntegrand_in_theta (m : ℝ) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) (z : ℂ) :
+    Continuous (fun θ : ℝ =>
+      (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+        * KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)) :=
+  (Complex.continuous_conj.comp ((differentiable_KrepCont m hg hgc).continuous.comp
+      (Complex.continuous_conj.comp (by fun_prop)))).mul
+    ((differentiable_KrepCont m hf hfc).continuous.comp (by fun_prop))
+
 end QIQTH.Fock.BoostKMS

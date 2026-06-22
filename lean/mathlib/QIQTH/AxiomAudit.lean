@@ -4710,5 +4710,8 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ A4: the kmsFun INTEGRAND is entire in z (g-factor = reflKrepCont∘affine,
 -- f-factor = KrepCont∘affine, product differentiable). The per-θ h_diff ingredient for F's parametric-integral
 -- holomorphy (DiffContOnCl). Remaining: the dominated z-derivative assembly + continuity-to-boundary + boundedness.
+#print axioms QIQTH.Fock.BoostKMS.continuous_kmsIntegrand_in_theta
+-- expected: standard only — ★ A4: the kmsFun integrand is continuous in θ (KrepCont continuous ∘ continuous
+-- θ-maps + conj) — the hF_meas (measurability) ingredient for F's parametric-integral holomorphy.
 
 end QIQTH.AxiomAudit
