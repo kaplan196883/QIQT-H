@@ -162,6 +162,33 @@ The single analytic engine: **`p(θ+iπ) = −p(θ)`** (since `cosh(θ+iπ)=−c
 
 ---
 
+## A4 MILESTONE — analytic toolkit COMPLETE (2026-06-22)
+
+Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, axiom-free, budget 0:
+- **Witness + edges**: `kmsFun`, `kmsFun_ofReal_eq_inner` (top edge), `kmsFun_sub_I` (bottom edge),
+  `stripKMSrvd_pair_of_regularity` (consolidation: everything reduced to `kmsFun` `DiffContOnCl`+bounded).
+- **Per-factor strip-decay bounds** (general args): `norm_reflKrepCont_le`, `norm_deriv_reflKrepCont_le`,
+  `norm_KrepCont_le_exp_decay_gen`, `norm_deriv_KrepCont_le_exp_decay`.
+- **Integrand `z`-derivative**: `hasDerivAt_kmsIntegrand_z` (explicit value) + `norm_two_term_le` (4-factor
+  norm decomposition); `differentiable_kmsIntegrand`, `continuous_kmsIntegrand_in_theta` (`h_diff`/`hF_meas`).
+- **Uniformity + integrability**: `cosh_shift_exp_le` (shifted decay made `z`-uniform), `cosh` shift bounds,
+  `integrable_cosh_mul_exp_neg_const_mul_cosh`, `integrable_exp_neg_const_mul_cosh`, `sin_neg_pi_mul_pos`
+  (decay rate `σ>0` on the open strip).
+
+**Honest remaining scope (≈ several fires each; mechanical-but-large + one hard lemma):**
+1. `hF_int` (integrand integrable in `θ` at interior `z`) — decay × bounded factor + `comp_sub_right`.
+2. **`h_bound` + dominated theorem** ⟹ `kmsFun` differentiable on the open strip: assemble `norm_two_term_le`
+   + the four factor bounds + `cosh_shift_exp_le` (with `σ_min`/`R` from a strip-interior ball) into one
+   `z`-uniform integrable bound, feed `hasDerivAt_integral_of_dominated_loc_of_deriv_le`. The largest single proof.
+3. **Continuity-to-closure** ⟹ `DiffContOnCl`.
+4. **Boundedness `∃M`** — `s↦‖KrepCont f(·+iπs)‖₂` continuous/bounded on `[0,1]` (Cauchy–Schwarz gives
+   `|kmsFun z| ≤ ‖reflKrep(·)‖₂‖KrepCont f(·)‖₂`; at the boundary the `L²` norm is `‖Krep‖₂` via `MemLp`/A3,
+   interior via `memLp_KrepCont_strip`). **NOT a fundamental wall** — a genuine but achievable `L²`-continuity
+   lemma interpolating the oscillatory (boundary) and damping (interior) decay. The hardest remaining piece.
+5. Closedness of `StripKMSrvd` to `𝒦_W` + `2π`↔`−2π` sign mirror + threading ⟹ remove `hKMS`.
+
+---
+
 ## FRONTIER ASSESSMENT (2026-06-22, after assessing Mathlib support)
 
 **What is DONE, axiom-free (the analytic skeleton of the free-field BW/Hardy proof):** Item B (focusing
