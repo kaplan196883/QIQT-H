@@ -555,4 +555,22 @@ theorem hasDerivAt_ftKrepF (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) {ζ�
     ((integrable_abs_mul_exp_neg_mul_abs hdpos).const_mul (2 * Real.pi * C))
     (Filter.Eventually.of_forall fun θ ζ _ => hasDerivAt_ftKrep m (⇑f) θ ζ)).2
 
+/-- **Wiener brick 8b-fin — the FT of `Krep`, on `ℝ`, is real-analytic.**  `F` is holomorphic on the open
+    strip `|Im ζ| < 1/π` (brick 8b), which contains `ℝ`; restricting to the real axis gives
+    `AnalyticOnNhd ℝ (ξ ↦ F ξ) univ` (the same `DifferentiableOn.analyticOnNhd` + `restrictScalars`/`ofRealCLM`
+    route as `8c′`).  Feeds brick 8c: combined with `≢ 0` it yields `F ≠ 0` a.e. on `ℝ`. -/
+theorem analyticOnNhd_ftKrepF_real (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) :
+    AnalyticOnNhd ℝ (fun ξ : ℝ => ftKrepF m (⇑f) (ξ : ℂ)) Set.univ := by
+  have hSopen : IsOpen {ζ : ℂ | |ζ.im| < 1 / Real.pi} :=
+    isOpen_lt (continuous_abs.comp Complex.continuous_im) continuous_const
+  have hdiff : DifferentiableOn ℂ (ftKrepF m (⇑f)) {ζ : ℂ | |ζ.im| < 1 / Real.pi} :=
+    fun ζ hζ => (hasDerivAt_ftKrepF f hm hζ).differentiableAt.differentiableWithinAt
+  have hana : AnalyticOnNhd ℂ (ftKrepF m (⇑f)) {ζ : ℂ | |ζ.im| < 1 / Real.pi} :=
+    hdiff.analyticOnNhd hSopen
+  intro ξ _
+  have hmem : (ξ : ℂ) ∈ {ζ : ℂ | |ζ.im| < 1 / Real.pi} := by
+    simp only [Set.mem_setOf_eq, Complex.ofReal_im, abs_zero]
+    positivity
+  exact (hana _ hmem).restrictScalars.comp (Complex.ofRealCLM.analyticAt ξ)
+
 end QIQTH.Fock.WienerL2
