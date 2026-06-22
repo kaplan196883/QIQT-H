@@ -1679,6 +1679,19 @@ theorem norm_toLp_Krep_eq_sqrt {m : ℝ} {f : V → ℂ} (hf : MemLp (Krep m f) 
     rw [← inner_self_eq_norm_sq (𝕜 := ℂ) (hf.toLp (Krep m f)), hinner]; simp
   rw [← hsq, Real.sqrt_sq (norm_nonneg _)]
 
+/-- **`KrepL2` respects addition**: `KrepL2(f₁+f₂) = KrepL2 f₁ + KrepL2 f₂` in `L²`. `MemLp.toLp_add` +
+    `MemLp.toLp_eq_toLp_iff` (`Krep(f₁+f₂) =ᵐ Krep f₁ + Krep f₂`, `Krep_add`). With `KrepL2_sub` and the real
+    scalar law, this makes `{KrepL2 f : f nice}` an ℝ-subspace, so `span_ℝ` adds nothing: every span element is
+    a single `KrepL2` of a nice function — collapsing the closure threading to single nice generator pairs. -/
+theorem KrepL2_add {m : ℝ} {f₁ f₂ : V → ℂ} (hf₁ : Continuous f₁) (hf₁c : HasCompactSupport f₁)
+    (hf₂ : Continuous f₂) (hf₂c : HasCompactSupport f₂)
+    (hf₁L : MemLp (Krep m f₁) 2 volume) (hf₂L : MemLp (Krep m f₂) 2 volume) :
+    (memLp_Krep_add hf₁ hf₁c hf₂ hf₂c hf₁L hf₂L).toLp (Krep m (f₁ + f₂))
+      = hf₁L.toLp (Krep m f₁) + hf₂L.toLp (Krep m f₂) := by
+  rw [← MemLp.toLp_add hf₁L hf₂L, MemLp.toLp_eq_toLp_iff]
+  exact Filter.Eventually.of_forall fun θ =>
+    (Krep_add m hf₁ hf₁c hf₂ hf₂c θ).trans (Pi.add_apply _ _ _).symm
+
 /-- **`KrepL2` respects subtraction**: `KrepL2(f₁−f₂) = KrepL2 f₁ − KrepL2 f₂` in `L²`. `MemLp.toLp_sub` +
     `MemLp.toLp_eq_toLp_iff` (the `Lp` elements agree since `Krep(f₁−f₂) =ᵐ Krep f₁ − Krep f₂`, `Krep_sub`).
     Lets `‖KrepL2(Fₙ−Fₘ)‖ = ‖ξₙ − ξₘ‖ → 0` drive the closure Cauchy argument. -/

@@ -790,6 +790,17 @@ theorem Krep_sub (m : ℝ) {f₁ f₂ : V → ℂ} (hf₁ : Continuous f₁) (hf
   rw [he] at h
   rw [h]; ring
 
+/-- **`MemLp` closure under addition**: `MemLp (Krep m (f₁+f₂)) 2` from `MemLp (Krep m fᵢ) 2`, via
+    `Krep_add` (`Krep(f₁+f₂)=Krep f₁+Krep f₂`) + `MemLp.add`. The additive companion of `memLp_Krep_sub`;
+    together they make the nice one-particle vectors `{KrepL2 f}` closed under `±`, i.e. an ℝ-subspace. -/
+theorem memLp_Krep_add {m : ℝ} {f₁ f₂ : V → ℂ} (hf₁ : Continuous f₁) (hf₁c : HasCompactSupport f₁)
+    (hf₂ : Continuous f₂) (hf₂c : HasCompactSupport f₂)
+    (hf₁L : MemLp (Krep m f₁) 2 volume) (hf₂L : MemLp (Krep m f₂) 2 volume) :
+    MemLp (Krep m (f₁ + f₂)) 2 volume := by
+  have heq : Krep m (f₁ + f₂) = Krep m f₁ + Krep m f₂ := by
+    funext θ; exact Krep_add m hf₁ hf₁c hf₂ hf₂c θ
+  rw [heq]; exact hf₁L.add hf₂L
+
 /-- **`MemLp` closure under subtraction**: `MemLp (Krep m (f₁−f₂)) 2` from `MemLp (Krep m fᵢ) 2`, via
     `Krep_sub` (`Krep(f₁−f₂)=Krep f₁−Krep f₂`) + `MemLp.sub`. -/
 theorem memLp_Krep_sub {m : ℝ} {f₁ f₂ : V → ℂ} (hf₁ : Continuous f₁) (hf₁c : HasCompactSupport f₁)
