@@ -224,6 +224,28 @@ theorem continuous_kmsIntegrand_in_theta (m : ℝ) {f g : V → ℂ} (hf : Conti
       (Complex.continuous_conj.comp (by fun_prop)))).mul
     ((differentiable_KrepCont m hf hfc).continuous.comp (by fun_prop))
 
+/-- `deriv reflKrep` is continuous (`reflKrep` entire ⟹ deriv analytic ⟹ continuous). -/
+theorem continuous_deriv_reflKrepCont (m : ℝ) {g : V → ℂ} (hg : Continuous g)
+    (hgc : HasCompactSupport g) :
+    Continuous (deriv (fun u => (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) u)))) :=
+  Differentiable.continuous fun z =>
+    ((differentiable_reflKrepCont m hg hgc).analyticAt z).deriv.differentiableAt
+
+/-- **The `kmsFun` integrand's `z`-derivative value is continuous in `θ`** — the `hF'_meas` (derivative
+    measurability) ingredient. Each of the four factors is continuous in `θ`. -/
+theorem continuous_kmsIntegrand_deriv_in_theta (m : ℝ) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) (z : ℂ) :
+    Continuous (fun θ : ℝ =>
+      deriv (fun u => (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) u))) ((θ : ℂ) + (Real.pi : ℂ) * z)
+          * (Real.pi : ℂ) * KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)
+        + (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+          * (deriv (KrepCont m f) ((θ : ℂ) - (Real.pi : ℂ) * z) * (-(Real.pi : ℂ)))) := by
+  refine (((((continuous_deriv_reflKrepCont m hg hgc).comp (by fun_prop)).mul continuous_const).mul
+    ((differentiable_KrepCont m hf hfc).continuous.comp (by fun_prop))).add ?_)
+  exact (Complex.continuous_conj.comp ((differentiable_KrepCont m hg hgc).continuous.comp
+      (Complex.continuous_conj.comp (by fun_prop)))).mul
+    (((continuous_deriv_KrepCont m hf hfc).comp (by fun_prop)).mul continuous_const)
+
 /-- **`hF_int` — the `kmsFun` integrand is integrable in `θ`** at an interior strip point `z` (`−1<Im z<0`).
     `‖integrand‖ = ‖reflKrep(θ+πz)‖·‖KrepCont f(θ−πz)‖ ≤ C_g·(C_f·exp(−(mσδf)·cosh(θ−π Re z)))` (the `g`-factor
     bounded, the `f`-factor decaying, `σ=sin(−π Im z)>0`), dominated by an integrable translate of
