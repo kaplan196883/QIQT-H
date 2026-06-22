@@ -501,14 +501,16 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          **★ WIENER BRICK 1 DE-RISKED (2026-06-23) — the Schwartz-translation operator COMPILES** (confirmed in
          isolation): `compCLM ℂ (g := fun x => x + a) (HasTemperateGrowth.id'.add (.const a)) ⟨1, 1+‖a‖, fun x =>
          by rw[pow_one]; …norm_sub_le…; nlinarith⟩ : 𝓢(ℝ,ℂ) →L[ℂ] 𝓢(ℝ,ℂ)`. So the Wiener build is concretely
-         buildable (not just "Mathlib lacks it"). FULL build (~8 bricks, a NEW file `WienerL2.lean` importing the
-         Fourier stack): (1) ✓ Schwartz translation; (2) Lp-modulation CLM (`MemLp.of_le_mul`); (3) `boostUnitary a
-         (f.toLp) = (schwartzTranslate a f).toLp`; (4) intertwining `𝓕∘T_a = M_a∘𝓕` on Schwartz then L²-density;
-         (5) `𝓕h⊥{M_a 𝓕g₀} ⟺ FT(conj(𝓕g₀)·𝓕h)≡0`; (6) FT-injective-on-L¹ (`Inversion.lean`); (7) Wiener:
-         boost-orbit dense `⟸ 𝓕g₀≠0` a.e.; (8) concrete `f₀` with `𝓕(Krep f₀)≠0` a.e. A genuine multi-fire generic-
-         Fourier-infrastructure project (≈ contributing the L²-Wiener Tauberian theorem) — arguably general-Mathlib
-         work beyond the QIQT discharge. **Decision point for the user:** commit the loop to this multi-fire Fourier
-         build, OR treat it as the cited frontier (like Type-III). The QIQT plan's STRUCTURAL content is complete.
+         buildable (not just "Mathlib lacks it"). **BUILD STARTED — `QIQTH/Fock/WienerL2.lean`** (new file). FULL
+         build (~8 bricks): **(1) BUILT** (`d4f4d9b`): `schwartzTranslate a : 𝓢(ℝ,ℂ)→L[ℂ]𝓢(ℝ,ℂ)`, `f↦f(·+a)`,
+         axiom-free, with `schwartzTranslate_apply`. NEXT: (2) Lp-modulation CLM (`MemLp.of_le_mul`); (3)
+         `boostUnitary a (f.toLp) = (schwartzTranslate (−a) f).toLp` (connects QIQT to the Schwartz translate via
+         `coeFn_boostUnitary` + `SchwartzMap.toLp`); (4) intertwining `𝓕∘T_a = M_a∘𝓕` on Schwartz (via
+         `fourierTransformCLM`+`fourier_coe`+`fourierIntegral_comp_add_right`) then L²-density (`denseRange_toLpCLM`);
+         (5) `𝓕h⊥{M_a 𝓕g₀} ⟺ FT(conj(𝓕g₀)·𝓕h)≡0`; (6) FT-injective-on-L¹ (`Inversion.lean`); (7) Wiener: boost-orbit
+         dense `⟸ 𝓕g₀≠0` a.e.; (8) concrete `f₀` with `𝓕(Krep f₀)≠0` a.e. A multi-fire generic-Fourier-infrastructure
+         build (≈ the L²-Wiener Tauberian theorem) — being built brick by brick like the BW witness (15 fires). The
+         QIQT plan's STRUCTURAL content is complete; this is the cyclic analytic discharge proceeding.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
