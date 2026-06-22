@@ -526,29 +526,30 @@ theorem kmsFun_differentiableOn {m : ℝ} (hmpos : 0 < m) {f g : V → ℂ} (hf 
 /-- **Cauchy–Schwarz for a conjugate-bilinear `L²` integral.** For `A, B ∈ L²(dθ)`,
     `‖∫ conj(A θ)·B θ‖ ≤ ‖A‖_{L²}·‖B‖_{L²}`. The abstract estimate behind the boundedness of `kmsFun`:
     `‖∫ F‖ ≤ ∫ ‖F‖` then Hölder (`integral_mul_le_Lp_mul_Lq_of_nonneg`, `p=q=2`). -/
-theorem norm_integral_conj_mul_le_l2 {A B : ℝ → ℂ} (hA : MemLp A 2 volume) (hB : MemLp B 2 volume) :
-    ‖∫ θ : ℝ, (starRingEnd ℂ) (A θ) * B θ‖
-      ≤ Real.sqrt (∫ θ : ℝ, ‖A θ‖ ^ 2) * Real.sqrt (∫ θ : ℝ, ‖B θ‖ ^ 2) := by
-  have hmA : MemLp (fun θ => ‖A θ‖) (ENNReal.ofReal 2) volume := by
+theorem norm_integral_conj_mul_le_l2 {μ : Measure ℝ} {A B : ℝ → ℂ}
+    (hA : MemLp A 2 μ) (hB : MemLp B 2 μ) :
+    ‖∫ θ : ℝ, (starRingEnd ℂ) (A θ) * B θ ∂μ‖
+      ≤ Real.sqrt (∫ θ : ℝ, ‖A θ‖ ^ 2 ∂μ) * Real.sqrt (∫ θ : ℝ, ‖B θ‖ ^ 2 ∂μ) := by
+  have hmA : MemLp (fun θ => ‖A θ‖) (ENNReal.ofReal 2) μ := by
     rw [show ENNReal.ofReal 2 = (2 : ENNReal) from by norm_num [ENNReal.ofReal_ofNat]]; exact hA.norm
-  have hmB : MemLp (fun θ => ‖B θ‖) (ENNReal.ofReal 2) volume := by
+  have hmB : MemLp (fun θ => ‖B θ‖) (ENNReal.ofReal 2) μ := by
     rw [show ENNReal.ofReal 2 = (2 : ENNReal) from by norm_num [ENNReal.ofReal_ofNat]]; exact hB.norm
-  have hpow : ∀ h : ℝ → ℂ, (∫ θ : ℝ, ‖h θ‖ ^ (2 : ℝ)) = ∫ θ : ℝ, ‖h θ‖ ^ 2 := by
+  have hpow : ∀ h : ℝ → ℂ, (∫ θ : ℝ, ‖h θ‖ ^ (2 : ℝ) ∂μ) = ∫ θ : ℝ, ‖h θ‖ ^ 2 ∂μ := by
     intro h
     refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
     show ‖h θ‖ ^ (2 : ℝ) = ‖h θ‖ ^ 2
     rw [show (2 : ℝ) = ((2 : ℕ) : ℝ) from by norm_num, Real.rpow_natCast]
-  calc ‖∫ θ : ℝ, (starRingEnd ℂ) (A θ) * B θ‖
-      ≤ ∫ θ : ℝ, ‖(starRingEnd ℂ) (A θ) * B θ‖ := norm_integral_le_integral_norm _
-    _ = ∫ θ : ℝ, ‖A θ‖ * ‖B θ‖ := by
+  calc ‖∫ θ : ℝ, (starRingEnd ℂ) (A θ) * B θ ∂μ‖
+      ≤ ∫ θ : ℝ, ‖(starRingEnd ℂ) (A θ) * B θ‖ ∂μ := norm_integral_le_integral_norm _
+    _ = ∫ θ : ℝ, ‖A θ‖ * ‖B θ‖ ∂μ := by
         refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
         show ‖(starRingEnd ℂ) (A θ) * B θ‖ = ‖A θ‖ * ‖B θ‖
         rw [norm_mul, RCLike.norm_conj]
-    _ ≤ (∫ θ : ℝ, ‖A θ‖ ^ (2 : ℝ)) ^ (1 / (2 : ℝ)) * (∫ θ : ℝ, ‖B θ‖ ^ (2 : ℝ)) ^ (1 / (2 : ℝ)) :=
+    _ ≤ (∫ θ : ℝ, ‖A θ‖ ^ (2 : ℝ) ∂μ) ^ (1 / (2 : ℝ)) * (∫ θ : ℝ, ‖B θ‖ ^ (2 : ℝ) ∂μ) ^ (1 / (2 : ℝ)) :=
         integral_mul_le_Lp_mul_Lq_of_nonneg Real.HolderConjugate.two_two
           (Filter.Eventually.of_forall fun θ => norm_nonneg _)
           (Filter.Eventually.of_forall fun θ => norm_nonneg _) hmA hmB
-    _ = Real.sqrt (∫ θ : ℝ, ‖A θ‖ ^ 2) * Real.sqrt (∫ θ : ℝ, ‖B θ‖ ^ 2) := by
+    _ = Real.sqrt (∫ θ : ℝ, ‖A θ‖ ^ 2 ∂μ) * Real.sqrt (∫ θ : ℝ, ‖B θ‖ ^ 2 ∂μ) := by
         rw [hpow A, hpow B, Real.sqrt_eq_rpow, Real.sqrt_eq_rpow]
 
 /-- **Cauchy–Schwarz bound for `kmsFun`** (interior `z`): `‖kmsFun m f g z‖` is bounded by the product of
@@ -802,5 +803,90 @@ theorem kmsFunCut_diffContOnCl {m : ℝ} (hmpos : 0 < m) {f g : V → ℂ} (hf :
     rwa [closure_Ioo (by norm_num : (-1 : ℝ) ≠ 0)] at h
   exact ⟨kmsFunCut_differentiableOn hmpos hf hfc hg hgc hδ hmf hmg Rc,
     (kmsFunCut_continuousOn hmpos.le hf hfc hg hgc hδ.le hmf hmg Rc).mono hcl⟩
+
+/-- **`kmsFunCut` on the real axis** — same `KrepCont→Krep` collapse as `kmsFun_ofReal`, over `[−R,R]`. -/
+theorem kmsFunCut_ofReal (m : ℝ) (f g : V → ℂ) (R t : ℝ) :
+    kmsFunCut m f g R (t : ℂ)
+      = ∫ θ in Set.Icc (-R) R,
+          (starRingEnd ℂ) (Krep m g (θ + Real.pi * t)) * Krep m f (θ - Real.pi * t) := by
+  rw [kmsFunCut]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
+  have e1 : (θ : ℂ) + (Real.pi : ℂ) * (t : ℂ) = ((θ + Real.pi * t : ℝ) : ℂ) := by push_cast; ring
+  have e2 : (θ : ℂ) - (Real.pi : ℂ) * (t : ℂ) = ((θ - Real.pi * t : ℝ) : ℂ) := by push_cast; ring
+  simp only [e1, e2, Complex.conj_ofReal, KrepCont_ofReal]
+
+/-- **Truncated top-edge bound** (`Im z = 0`): `‖kmsFunCut R t‖ ≤ √(∫‖Krep g‖²)·√(∫‖Krep f‖²) =: B`, the SAME
+    constant for every `R, t`. Truncated Cauchy–Schwarz (`norm_integral_conj_mul_le_l2` over `volume.restrict
+    [−R,R]`) bounds it by the truncated slice `L²`-norms, and truncation only DEcreases them
+    (`setIntegral_le_integral`); translation-invariance (`integral_add_right_eq_self`) identifies each full
+    slice norm with `∫‖Krep ·‖²`. This is the edge constant Hadamard propagates into the strip. -/
+theorem norm_kmsFunCut_ofReal_le (m : ℝ) (R t : ℝ) {f g : V → ℂ}
+    (hf : MemLp (Krep m f) 2 volume) (hg : MemLp (Krep m g) 2 volume) :
+    ‖kmsFunCut m f g R (t : ℂ)‖
+      ≤ Real.sqrt (∫ θ, ‖Krep m g θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m f θ‖ ^ 2) := by
+  rw [kmsFunCut_ofReal]
+  have hAv : MemLp (fun θ : ℝ => Krep m g (θ + Real.pi * t)) 2 volume := by
+    simpa [Function.comp_def] using
+      hg.comp_measurePreserving (measurePreserving_add_right volume (Real.pi * t))
+  have hBv : MemLp (fun θ : ℝ => Krep m f (θ - Real.pi * t)) 2 volume := by
+    have h := hf.comp_measurePreserving (measurePreserving_add_right volume (-(Real.pi * t)))
+    simpa [Function.comp_def, sub_eq_add_neg] using h
+  have hAmem : MemLp (fun θ : ℝ => Krep m g (θ + Real.pi * t)) 2
+      (volume.restrict (Set.Icc (-R) R)) := hAv.mono_measure Measure.restrict_le_self
+  have hBmem : MemLp (fun θ : ℝ => Krep m f (θ - Real.pi * t)) 2
+      (volume.restrict (Set.Icc (-R) R)) := hBv.mono_measure Measure.restrict_le_self
+  refine (norm_integral_conj_mul_le_l2 hAmem hBmem).trans ?_
+  have hslice : ∀ (h : V → ℂ) (a : ℝ), MemLp (fun θ : ℝ => Krep m h (θ + a)) 2 volume →
+      Real.sqrt (∫ θ in Set.Icc (-R) R, ‖Krep m h (θ + a)‖ ^ 2)
+        ≤ Real.sqrt (∫ θ, ‖Krep m h θ‖ ^ 2) := by
+    intro h a hmem
+    apply Real.sqrt_le_sqrt
+    have hint : Integrable (fun θ : ℝ => ‖Krep m h (θ + a)‖ ^ 2) volume :=
+      (memLp_two_iff_integrable_sq hmem.norm.aestronglyMeasurable).mp hmem.norm
+    calc ∫ θ in Set.Icc (-R) R, ‖Krep m h (θ + a)‖ ^ 2
+        ≤ ∫ θ, ‖Krep m h (θ + a)‖ ^ 2 :=
+          setIntegral_le_integral hint (Filter.Eventually.of_forall fun θ => by positivity)
+      _ = ∫ θ, ‖Krep m h θ‖ ^ 2 :=
+          integral_add_right_eq_self (fun θ : ℝ => ‖Krep m h θ‖ ^ 2) a
+  refine mul_le_mul (hslice g (Real.pi * t) hAv) ?_ (Real.sqrt_nonneg _) (Real.sqrt_nonneg _)
+  have hBv' : MemLp (fun θ : ℝ => Krep m f (θ + -(Real.pi * t))) 2 volume := by
+    simpa [sub_eq_add_neg] using hBv
+  calc Real.sqrt (∫ θ in Set.Icc (-R) R, ‖Krep m f (θ - Real.pi * t)‖ ^ 2)
+      = Real.sqrt (∫ θ in Set.Icc (-R) R, ‖Krep m f (θ + -(Real.pi * t))‖ ^ 2) := by
+        simp only [sub_eq_add_neg]
+    _ ≤ Real.sqrt (∫ θ, ‖Krep m f θ‖ ^ 2) := hslice f (-(Real.pi * t)) hBv'
+
+/-- **`kmsFunCut` bottom edge** `F(t−i) = conj F(t)` (real `f,g`) — same `iπ`-shift collapse as `kmsFun_sub_I`,
+    over `[−R,R]`. -/
+theorem kmsFunCut_sub_I (m : ℝ) {f g : V → ℂ} (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x)
+    (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x) (R t : ℝ) :
+    kmsFunCut m f g R ((t : ℂ) - Complex.I) = (starRingEnd ℂ) (kmsFunCut m f g R (t : ℂ)) := by
+  have hL : kmsFunCut m f g R ((t : ℂ) - Complex.I)
+      = ∫ θ in Set.Icc (-R) R,
+          Krep m g (θ + Real.pi * t) * (starRingEnd ℂ) (Krep m f (θ - Real.pi * t)) := by
+    rw [kmsFunCut]
+    refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
+    dsimp only
+    have ag : (starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * ((t : ℂ) - Complex.I))
+        = ((θ + Real.pi * t : ℝ) : ℂ) + (Real.pi : ℂ) * Complex.I := by
+      simp only [map_add, map_mul, map_sub, Complex.conj_ofReal, Complex.conj_I]
+      push_cast; ring
+    have af : (θ : ℂ) - (Real.pi : ℂ) * ((t : ℂ) - Complex.I)
+        = ((θ - Real.pi * t : ℝ) : ℂ) + (Real.pi : ℂ) * Complex.I := by push_cast; ring
+    rw [ag, af, KrepCont_add_pi_I m hgr, KrepCont_add_pi_I m hfr, Complex.conj_conj]
+  rw [hL, kmsFunCut_ofReal, ← integral_conj]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
+  simp only [map_mul, Complex.conj_conj, mul_comm]
+
+/-- **Truncated bottom-edge bound** (`Im z = −1`): the SAME constant `B = √(∫‖Krep g‖²)·√(∫‖Krep f‖²)` as the
+    top edge, via `kmsFunCut_sub_I` (equal norm) and `norm_kmsFunCut_ofReal_le`. Both boundary lines of the
+    strip are now uniformly bounded by `B` for every `R` — the Hadamard edge data. -/
+theorem norm_kmsFunCut_sub_I_le (m : ℝ) (R t : ℝ) {f g : V → ℂ}
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hf : MemLp (Krep m f) 2 volume) (hg : MemLp (Krep m g) 2 volume) :
+    ‖kmsFunCut m f g R ((t : ℂ) - Complex.I)‖
+      ≤ Real.sqrt (∫ θ, ‖Krep m g θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m f θ‖ ^ 2) := by
+  rw [kmsFunCut_sub_I m hfr hgr R t, RCLike.norm_conj]
+  exact norm_kmsFunCut_ofReal_le m R t hf hg
 
 end QIQTH.Fock.BoostKMS
