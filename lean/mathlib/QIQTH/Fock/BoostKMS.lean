@@ -2465,6 +2465,29 @@ theorem inner_boostUnitary_correlation (a : ℝ) (g h : Lp ℂ 2 (volume : Measu
   simp only [add_sub_cancel_right]
 
 open QIQTH.StandardSubspaceModular in
+/-- **★★ Cyclicity from correlation-totality** (the cyclic frontier as a concrete integral condition, no FT):
+    the nice-core wedge is cyclic as soon as there is ONE nice generator `N₀` whose cross-correlation against
+    any `h` vanishing at every shift forces `h = 0` — i.e. the only `h` with `∫ conj(Krep m N₀.f θ)·h(θ+a) dθ = 0`
+    for all `a ∈ ℝ` is `h = 0`.  Combines `niceWedge_isCyclic_of_boost_orbit_dense` (boost-orbit ⊆ niceWedgeGenSet),
+    `inner_boostUnitary_correlation` (the correlation = the boost-orbit inner products), and the complex orthogonal
+    complement.  This is EXACTLY the Wiener–Tauberian condition `FT(N₀.vec) ≠ 0` a.e., stated as the explicit
+    vanishing-cross-correlation ⟹ zero — the cleanest concrete form of the remaining cyclic frontier. -/
+theorem niceWedge_isCyclic_of_correlation_total (m : ℝ) (N₀ : NiceTest m)
+    (hcorr : ∀ h : Lp ℂ 2 (volume : Measure ℝ),
+      (∀ a : ℝ, ∫ θ, (starRingEnd ℂ) ((N₀.vec : ℝ → ℂ) θ) * (h : ℝ → ℂ) (θ + a) = 0) → h = 0) :
+    niceWedgeClosedSubmodule m ⊔ (niceWedgeClosedSubmodule m).mulI = ⊤ := by
+  apply niceWedge_isCyclic_of_boost_orbit_dense m N₀
+  have h1 : (Submodule.span ℂ (Set.range (fun a : ℝ => boostUnitary a N₀.vec)))ᗮ = ⊥ := by
+    rw [Submodule.eq_bot_iff]
+    intro h hh
+    refine hcorr h (fun a => ?_)
+    rw [← inner_boostUnitary_correlation a N₀.vec h]
+    exact (Submodule.mem_orthogonal _ h).mp hh _ (Submodule.subset_span ⟨a, rfl⟩)
+  rw [dense_iff_closure_eq, ← Submodule.topologicalClosure_coe,
+    Submodule.topologicalClosure_eq_top_iff.mpr h1]
+  rfl
+
+open QIQTH.StandardSubspaceModular in
 /-- **`v ∈ K.mulI ⟹ I • v ∈ K`**: the `mulI` membership direction, via `mem_mapEquiv_iff` + `I⁻¹ = -I` + the
     real-subspace closure (`I•v = (-1)•((-I)•v)`).  Uses the unambiguous ℂ `scalarSMulCLE` — NO ℝ-instance
     tangle (unlike the `ᗮ` route).  The engine for the DIRECT separating reduction. -/
