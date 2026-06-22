@@ -1555,6 +1555,33 @@ theorem norm_kmsFun_le_closed {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Con
     (le_refl (0 : ℝ)) hz.1 hz.2
   rwa [kmsFunCut_zero, sub_zero] at h
 
+/-- **`kmsFun` is additive in the `f` slot** on the closed strip (continuous compact-support real wedge
+    `f₁,f₂,g` with `MemLp` amplitudes). `KrepCont_add` distributes the `f`-factor; the outer integral splits by
+    `integral_add` (each summand integrable via `integrable_kmsFun_integrand_closed`). -/
+theorem kmsFun_add_left {m : ℝ} (hm : 0 < m) {f₁ f₂ g : V → ℂ}
+    (hf₁ : Continuous f₁) (hf₁c : HasCompactSupport f₁) (hf₂ : Continuous f₂) (hf₂c : HasCompactSupport f₂)
+    (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf₁ : ∀ x, f₁ x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmf₂ : ∀ x, f₂ x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hf₁r : ∀ x, (starRingEnd ℂ) (f₁ x) = f₁ x) (hf₂r : ∀ x, (starRingEnd ℂ) (f₂ x) = f₂ x)
+    (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hf₁L : MemLp (Krep m f₁) 2 volume) (hf₂L : MemLp (Krep m f₂) 2 volume)
+    (hgL : MemLp (Krep m g) 2 volume) {z : ℂ} (hz0 : -1 ≤ z.im) (hz1 : z.im ≤ 0) :
+    kmsFun m (f₁ + f₂) g z = kmsFun m f₁ g z + kmsFun m f₂ g z := by
+  rw [kmsFun, kmsFun, kmsFun, ← integral_add
+    (integrable_kmsFun_integrand_closed hm hf₁ hf₁c hg hgc hδ hmf₁ hmg hf₁r hgr hf₁L hgL hz0 hz1)
+    (integrable_kmsFun_integrand_closed hm hf₂ hf₂c hg hgc hδ hmf₂ hmg hf₂r hgr hf₂L hgL hz0 hz1)]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
+  show (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+      * KrepCont m (f₁ + f₂) ((θ : ℂ) - (Real.pi : ℂ) * z)
+    = (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+        * KrepCont m f₁ ((θ : ℂ) - (Real.pi : ℂ) * z)
+      + (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+        * KrepCont m f₂ ((θ : ℂ) - (Real.pi : ℂ) * z)
+  rw [KrepCont_add m hf₁ hf₁c hf₂ hf₂c ((θ : ℂ) - (Real.pi : ℂ) * z)]
+  ring
+
 /-- **`L²`-norm of a one-particle vector as an integral**: `‖KrepL2 f‖ = √(∫‖Krep m f‖²)`. Via `inner_KrepL2`
     (`⟪KrepL2 f, KrepL2 f⟫ = ∫ conj(Krep f)·Krep f = ↑∫‖Krep f‖²`) and `inner_self_eq_norm_sq`. The bridge from
     the analytic strip bound (in `∫‖Krep‖²`) to the Hilbert norms `‖ξ‖,‖η‖` for the closure/threading argument. -/
