@@ -471,9 +471,17 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          `inner_boostUnitary_correlation` + the complex orthogonal complement. So the cyclic frontier is now the
          single concrete statement "vanishing cross-correlation at all shifts ⟹ zero" — NO Fourier machinery yet
          invoked. REMAINING = ONLY the Wiener FT core: `(∀a, ∫ conj(g₀)·h(·+a)=0) ⟹ h=0` given `FT(g₀)≠0` a.e.
-         (the L²-translate↔modulation intertwining — Mathlib has it at the integral level `fourierIntegral_comp_add_right`,
-         needs lifting to `fourierTransformₗᵢ` — then `inner_fourier_eq` + FT injectivity). This is the one genuine
-         Fourier-analysis brick left for the entire cyclic side.
+         **★ PATH REFINED — the L¹ CONVOLUTION route (2026-06-23), cleaner than the L²-modulation lift.** If
+         `g₀ = KrepL2 f₀ ∈ L¹ ∩ L²`, the correlation IS a convolution: `c(a) = ∫ conj(g₀ θ)·h(θ+a) dθ = (φ ⋆ h)(a)`,
+         `φ(t)=conj(g₀(−t)) ∈ L¹` (reflection sub). For `φ∈L¹, h∈L²`: `φ⋆h` well-defined (Young) + `FT(φ⋆h)=φ̂·ĥ`
+         (Mathlib `Fourier/Convolution.lean`, L¹ theorem — NO L²-modulation lift). So `c≡0 ⟹ φ̂·ĥ=0 ⟹ ĥ=0` (`φ̂=conj(ĝ₀)
+         ≠0` a.e.) `⟹ h=0` (FT inj, `Inversion.lean`). **CAVEAT (corrected):** `g₀∈L¹` is NOT free — the `exp(−c·coshθ)`
+         decay is INTERIOR-strip (λ>0); at the real axis `norm_KrepCont_le` gives only a CONSTANT bound. So `g₀∈L¹`
+         needs a CONCRETE `f₀` (a wedge Gaussian, where `Krep` is explicit and `gaussian_Krep_memLp` lives) or a real-axis
+         decay argument. So both `g₀∈L¹` AND `FT(g₀)≠0 a.e.` point to the SAME concrete-Gaussian computation. Remaining
+         bricks (multi-fire, STANDARD but needs a concrete `f₀`): (i) pick a wedge Gaussian `f₀`, show `Krep f₀∈L¹` +
+         `FT(Krep f₀)≠0 a.e.` (explicit); (ii) correlation = convolution; (iii) convolution-Fourier `FT(φ⋆h)=φ̂ĥ`;
+         (iv) FT injectivity. All Mathlib-supported at the right level — a concrete Gaussian-Fourier project.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
