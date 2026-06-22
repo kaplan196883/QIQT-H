@@ -4724,4 +4724,26 @@ namespace QIQTH.AxiomAudit
 -- inner_conj_symm), V_t=boostUnitary(2πt). PRECISELY ISOLATES THE REMAINING FRONTIER: everything (F, both KMS
 -- edges, Lp bridge, boost-orbit id) is DONE axiom-free; only DiffContOnCl+boundedness of one explicit function remains.
 
+#print axioms QIQTH.Fock.BoostKMS.stripKMSrvd_pair
+-- expected: standard only — ★★★★★ A4: StripKMSrvd (RvD Def 3.4) FULLY DISCHARGED for a wedge generator pair.
+-- The θ-truncation+Hadamard three-lines+annular-difference route gives kmsFun_diffContOnCl + norm_kmsFun_le_closed,
+-- feeding stripKMSrvd_pair_of_regularity. The banked citable result: the explicit free-field boost-KMS witness.
+#print axioms QIQTH.Fock.BoostKMS.stripKMSrvd_closure
+-- expected: standard only — ★★★★★ A4 (c3+c4): the KMS witness extended to the CLOSURE of the nice generators.
+-- Nice approximants → bcf_cauchySeq → complete-space limit b in closedStrip→ᵇℂ → F (b on strip, 0 off). Holomorphy
+-- via Weierstrass (TendstoLocallyUniformlyOn.differentiableOn); boundary via Filter.Tendsto.inner. NO density theorem.
+#print axioms QIQTH.Fock.BoostKMS.stripKMSrvd_boostUnitary
+-- expected: standard only — ★★★★★ A4: StripKMSrvd (fun t => boostUnitary(2πt)) (closure(niceWedgeGenSet m)) — the
+-- free-field Bisognano–Wichmann KMS condition (RvD Def 3.4) as a THEOREM on the standard wedge subspace.
+#print axioms QIQTH.Fock.BoostKMS.oneParticleBW_niceWedge
+-- expected: standard only — ★★★★★ A4 DISCHARGE: modUnitary S t = boostUnitary(2πt) for S with carrier
+-- closure(niceWedgeGenSet m), with EVERY labelled analytic input discharged (hKMS←stripKMSrvd_boostUnitary;
+-- hInv←boostUnitary_mapsTo_niceWedgeGenSet+Set.MapsTo.closure; group structure←boost laws) via oneParticleBW_complete.
+-- The labelled hKMS is ELIMINATED. Sign finding: StripKMSrvd holds for exactly one boost sign, and it is +2π.
+#print axioms QIQTH.Fock.BoostKMS.oneParticleBW_niceWedge_of_standard
+-- expected: standard only — ★ A4 FRONTIER ISOLATION: modUnitary = boost(2πt) for the nice-core wedge standard
+-- subspace, conditional ONLY on hsep (separating) + hcyc (cyclic) — the niceWedgeStandardSubspace constructor over
+-- the elementary carrier niceWedgeClosedSubmodule (= closure(niceWedgeGenSet)). The ENTIRE remaining gap to an
+-- unconditional free-field one-particle BW is exactly those two Reeh–Schlieder lattice identities; all else is built.
+
 end QIQTH.AxiomAudit
