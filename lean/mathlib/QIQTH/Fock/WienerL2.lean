@@ -56,4 +56,54 @@ theorem boostUnitary_toLp (a : ℝ) (f : 𝓢(ℝ, ℂ)) :
     rw [schwartzTranslate_apply, sub_eq_add_neg]
   exact (e1.trans e2).trans e3.symm
 
+/-! ## Brick 2 — the L² modulation operator `M_c`
+
+The Fourier dual of translation is modulation: multiplication by the unit character `e^{i c ξ}`.
+We build it on `L²(ℝ,ℂ)` directly — Mathlib has no bounded-function action on `Lp` — as the
+foundation of the translate↔modulation intertwining `𝓕 ∘ τ_a = M_a ∘ 𝓕`. -/
+
+/-- The unit Fourier character `ξ ↦ e^{i c ξ}` (modulus 1). -/
+noncomputable def modChar (c ξ : ℝ) : ℂ := Complex.exp (Complex.I * (c * ξ : ℝ))
+
+@[simp] theorem norm_modChar (c ξ : ℝ) : ‖modChar c ξ‖ = 1 := by
+  rw [modChar, Complex.norm_exp]
+  simp [Complex.mul_re]
+
+theorem continuous_modChar (c : ℝ) : Continuous (modChar c) := by
+  unfold modChar; fun_prop
+
+/-- `e^{icξ}·g ∈ L²` whenever `g ∈ L²` (modulus-1 multiplier, via `MemLp.of_le_mul`). -/
+theorem memLp_modChar_smul (c : ℝ) (g : Lp ℂ 2 (volume : Measure ℝ)) :
+    MemLp (fun ξ => modChar c ξ * (g : ℝ → ℂ) ξ) 2 volume := by
+  refine MemLp.of_le_mul (c := 1) (Lp.memLp g)
+    ((continuous_modChar c).aestronglyMeasurable.mul (Lp.aestronglyMeasurable g)) ?_
+  filter_upwards with ξ
+  simp
+
+/-- **Wiener brick 2 — the L² modulation operator** `M_c : g ↦ (ξ ↦ e^{icξ} g(ξ))`. -/
+noncomputable def modL2 (c : ℝ) (g : Lp ℂ 2 (volume : Measure ℝ)) : Lp ℂ 2 (volume : Measure ℝ) :=
+  (memLp_modChar_smul c g).toLp _
+
+theorem coeFn_modL2 (c : ℝ) (g : Lp ℂ 2 (volume : Measure ℝ)) :
+    (modL2 c g : ℝ → ℂ) =ᵐ[volume] fun ξ => modChar c ξ * (g : ℝ → ℂ) ξ :=
+  (memLp_modChar_smul c g).coeFn_toLp
+
+/-- `M_c` is additive (it is multiplication by a fixed function). -/
+theorem modL2_add (c : ℝ) (g h : Lp ℂ 2 (volume : Measure ℝ)) :
+    modL2 c (g + h) = modL2 c g + modL2 c h := by
+  rw [Lp.ext_iff]
+  filter_upwards [coeFn_modL2 c (g + h), coeFn_modL2 c g, coeFn_modL2 c h,
+    Lp.coeFn_add g h, Lp.coeFn_add (modL2 c g) (modL2 c h)] with ξ h0 h1 h2 h3 h4
+  rw [h0, h4, Pi.add_apply, h1, h2, h3, Pi.add_apply, mul_add]
+
+/-- `M_c` is an `L²`-isometry: `‖M_c g‖ = ‖g‖` (the character has modulus 1). -/
+theorem norm_modL2 (c : ℝ) (g : Lp ℂ 2 (volume : Measure ℝ)) :
+    ‖modL2 c g‖ = ‖g‖ := by
+  rw [Lp.norm_def, Lp.norm_def]
+  congr 1
+  refine (eLpNorm_congr_ae (coeFn_modL2 c g)).trans ?_
+  refine eLpNorm_congr_norm_ae ?_
+  filter_upwards with ξ
+  rw [norm_mul, norm_modChar, one_mul]
+
 end QIQTH.Fock.WienerL2
