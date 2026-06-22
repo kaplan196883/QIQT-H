@@ -535,11 +535,18 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          multiplication formula `VectorFourier.integral_fourierIntegral_smul_eq_flip` (`∫ 𝓕(𝓕⁻G)·k=∫ (𝓕⁻G)·𝓕k`,
          `innerₗ` symmetric via `flip_innerₗ`) `=0`. The fiddly bits (real→ℂ test coercion, `•`/`*`, `𝓕`↔`fourierIntegral`
          defeq) all dispatched. **This was the hardest remaining analytic brick.**
-         NEXT: **(7)** chain — `(∀a ⟪boost_a g₀,h⟫=0) ∧ 𝓕g₀≠0` a.e. `⟹ h=0`: 6a+`horth` give `𝓕 k≡0`; `k∈L¹`
-         (product of two `L²`, Hölder); 6b ⟹ `k=conj(𝓕g₀)·𝓕h=0` a.e.; `𝓕g₀≠0` a.e. `⟹ 𝓕h=0` a.e. `⟹ 𝓕h=0` in `Lp`
-         `⟹ h=0` (`Lp.fourierTransformₗᵢ` inj). (8) concrete `f₀` with `𝓕(Krep f₀)≠0` a.e.
-         Bricks 1–5,6a,6b BUILT axiom-free; remaining = 7 (short chain) + 8 (concrete generator).
-         ALL hard analytic pieces (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness) are DONE.
+         **(7) BUILT** (`31b6f2d`): `boost_orbit_total_of_fourier_ne_zero` — `𝓕g₀≠0` a.e. `∧ (∀a ⟪boost_a g₀,h⟫=0)
+         ⟹ h=0`. Chains 6a (`⟹ 𝓕 k≡0`) + 6b (`⟹ k=ᵐ0`) on `k=conj(𝓕g₀)·𝓕h` (`∈L¹` via `MemLp.integrable_mul` of
+         two `L²`, `MemLp.star` for the conj factor); `𝓕g₀≠0` a.e. + `mul_eq_zero` + `star_eq_zero` ⟹ `𝓕h=0` a.e.
+         `⟹ 𝓕h=0` in `Lp` (`Lp.eq_zero_iff_ae_eq_zero`) `⟹ h=0` (`Lp.fourierTransformₗᵢ` inj).
+         **★★★ THE WIENER L² TAUBERIAN THEOREM IS COMPLETE** — the boost orbit of any single generator with `𝓕≠0`
+         a.e. is total in `L²`, fully axiom-free. NEXT: **(8)** a concrete nice generator `f₀` (Gaussian-type) with
+         `𝓕(Krep m f₀)≠0` a.e., then WIRE into `NiceWedgeCyclic m` (`BoostKMS.lean`): the orbit `boostUnitary a N₀.vec`
+         = nice generators, so "⊥ all generators" ⟹ "⊥ N₀'s boost-orbit" ⟹[brick 7] `h=0` ⟹ `NiceWedgeCyclic m` ⟹
+         `oneParticleBW_niceWedge_reehSchlieder` discharges the cyclic Reeh–Schlieder input.
+         Bricks 1–7 BUILT axiom-free; remaining = 8 (concrete generator) + the `NiceWedgeCyclic` wiring.
+         EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness, the
+         full Tauberian theorem) is DONE — the cyclic discharge is one concrete computation + wiring from closing.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
