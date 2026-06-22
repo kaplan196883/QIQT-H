@@ -203,6 +203,15 @@ theorem hasDerivAt_kmsIntegrand_z (m : ℝ) {f g : V → ℂ} (hf : Continuous f
   have hffac := ((differentiable_KrepCont m hf hfc ((θ : ℂ) - (Real.pi : ℂ) * z)).hasDerivAt).comp z hB
   exact hgfac.mul hffac
 
+/-- Norm decomposition of the integrand `z`-derivative value (from `hasDerivAt_kmsIntegrand_z`) into its four
+    factors: `‖A·π·C + B·(D·(−π))‖ ≤ π·‖A‖·‖C‖ + π·‖B‖·‖D‖`. -/
+theorem norm_two_term_le (A B C D : ℂ) :
+    ‖A * (Real.pi : ℂ) * C + B * (D * (-(Real.pi : ℂ)))‖
+      ≤ Real.pi * (‖A‖ * ‖C‖) + Real.pi * (‖B‖ * ‖D‖) := by
+  refine (norm_add_le _ _).trans (le_of_eq ?_)
+  simp only [norm_mul, norm_neg, Complex.norm_real, Real.norm_of_nonneg Real.pi_pos.le]
+  ring
+
 /-- **The `kmsFun` integrand is continuous in `θ`** (for fixed `z`) — the measurability (`hF_meas`) ingredient
     for the parametric-integral holomorphy of `F`. `KrepCont` is continuous (entire), composed with the
     continuous `θ`-maps `θ↦conj(θ+πz)`, `θ↦θ−πz`, and `conj`. -/
