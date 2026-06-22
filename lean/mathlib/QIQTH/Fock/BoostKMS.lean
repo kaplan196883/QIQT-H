@@ -2374,6 +2374,36 @@ theorem niceWedge_isCyclic_of_dense (m : ℝ)
                     exact subset_closure hy)
     hdense
 
+/-- **★ Density from totality (the sharpest analytic form)**: `span_ℂ (niceWedgeGenSet m)` is dense as soon as
+    the nice wedge generators are TOTAL — no nonzero `h ∈ L²(ℝ)` is orthogonal to every `KrepL2 f`.  Pure
+    Hilbert-space machinery on the *complex* orthogonal complement (`orthogonal_eq_bot_iff` /
+    `topologicalClosure_eq_top_iff`), which on `Lp ℂ 2` is the unambiguous `InnerProductSpace ℂ` — NO instance
+    diamond.  Chains with `niceWedge_isCyclic_of_dense`: the cyclic Reeh–Schlieder frontier is now exactly
+    "`{KrepL2 f : f nice}` is total in `L²(ℝ)`" — the canonical wedge-totality statement. -/
+theorem niceWedge_dense_of_total (m : ℝ)
+    (htotal : ∀ h : Lp ℂ 2 (volume : Measure ℝ),
+      (∀ N : NiceTest m, inner ℂ N.vec h = 0) → h = 0) :
+    Dense (Submodule.span ℂ (niceWedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ))) := by
+  have h1 : (Submodule.span ℂ (niceWedgeGenSet m))ᗮ = ⊥ := by
+    rw [Submodule.eq_bot_iff]
+    intro h hh
+    refine htotal h (fun N => ?_)
+    exact (Submodule.mem_orthogonal _ h).mp hh N.vec (Submodule.subset_span ⟨N, rfl⟩)
+  have h2 : (Submodule.span ℂ (niceWedgeGenSet m)).topologicalClosure = ⊤ := by
+    rw [Submodule.topologicalClosure_eq_top_iff]; exact h1
+  rw [dense_iff_closure_eq, ← Submodule.topologicalClosure_coe, h2]
+  rfl
+
+open QIQTH.StandardSubspaceModular in
+/-- **★ Cyclicity from totality**: the nice-core wedge subspace is cyclic as soon as `{KrepL2 f : f nice}` is
+    total in `L²(ℝ)` (`niceWedge_dense_of_total` ∘ `niceWedge_isCyclic_of_dense`).  The cyclic Reeh–Schlieder
+    frontier in its canonical, sharpest form — no instance plumbing, no density bookkeeping. -/
+theorem niceWedge_isCyclic_of_total (m : ℝ)
+    (htotal : ∀ h : Lp ℂ 2 (volume : Measure ℝ),
+      (∀ N : NiceTest m, inner ℂ N.vec h = 0) → h = 0) :
+    niceWedgeClosedSubmodule m ⊔ (niceWedgeClosedSubmodule m).mulI = ⊤ :=
+  niceWedge_isCyclic_of_dense m (niceWedge_dense_of_total m htotal)
+
 open scoped BoundedContinuousFunction in
 /-- **★★★ (c3+c4) The RvD Def 3.4 KMS witness extended to the CLOSURE of the nice generators**, axiom-free.
     For `ξ, η ∈ closure (niceWedgeGenSet m)` there is a bounded function `F`, holomorphic on the open strip and
@@ -2574,5 +2604,20 @@ theorem oneParticleBW_niceWedge_of_dense {m : ℝ} (hm : 0 < m)
     (hdense : Dense (Submodule.span ℂ (niceWedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ)))) :
     ∀ t, modUnitary (niceWedgeStandardSubspace m hsep (niceWedge_isCyclic_of_dense m hdense)) t = V t :=
   oneParticleBW_niceWedge_of_standard hm V hVboost hsep (niceWedge_isCyclic_of_dense m hdense)
+
+open QIQTH.StandardSubspaceModular in
+/-- **★★★ The nice-core wedge BW with the cyclic input in its SHARPEST (totality) form**: `modUnitary =
+    boost(2πt)` given `hsep` (separating) and the canonical Reeh–Schlieder wedge-totality — `{KrepL2 f : f
+    nice}` is total in `L²(ℝ)` (no nonzero `h` orthogonal to all of them).  The cyclic Reeh–Schlieder input is
+    now this one clean analytic statement; the ENTIRE remaining gap to an unconditional free-field one-particle
+    BW is `hsep` (separating) + this totality — both genuine wedge-totality content, no plumbing. -/
+theorem oneParticleBW_niceWedge_of_total {m : ℝ} (hm : 0 < m)
+    (V : ℝ → (Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ)))
+    (hVboost : ∀ t x, V t x = boostUnitary (2 * Real.pi * t) x)
+    (hsep : niceWedgeClosedSubmodule m ⊓ (niceWedgeClosedSubmodule m).mulI = ⊥)
+    (htotal : ∀ h : Lp ℂ 2 (volume : Measure ℝ),
+      (∀ N : NiceTest m, inner ℂ N.vec h = 0) → h = 0) :
+    ∀ t, modUnitary (niceWedgeStandardSubspace m hsep (niceWedge_isCyclic_of_total m htotal)) t = V t :=
+  oneParticleBW_niceWedge_of_standard hm V hVboost hsep (niceWedge_isCyclic_of_total m htotal)
 
 end QIQTH.Fock.BoostKMS
