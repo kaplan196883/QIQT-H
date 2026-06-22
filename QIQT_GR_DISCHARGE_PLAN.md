@@ -282,8 +282,21 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
        (c4) boundary values: pointwise conv (`TendstoUniformlyOn.tendsto_at`) + `Filter.Tendsto.inner` +
             `(V a).continuous.tendsto` + the pair edge identity + `tendsto_nhds_unique`.
      Well-definedness NOT needed (existential goal). AVOID abstract dense-extension (`DenseInducing.extend`) —
-     no ready Banach space of holomorphic-strip fns. Plus density of nice generators + `2π`↔`−2π` sign mirror.
+     no ready Banach space of holomorphic-strip fns. Plus `2π`↔`−2π` sign mirror.
    ⟹ `StripKMSrvd boostUnitary 𝒦_W` ⟹ remove `hKMS` from `qiqt_gr_from_wedge_kms_complete`.
+   - **★ DENSITY RESOLVED (GPT-5.5 #4): use the NICE CORE.** The density gap (nice dense in the BROAD
+     `wedgeGenSet` = {supp⊆wedge, real, MemLp}) is an ARTIFACT of the over-broad generator class. The STANDARD,
+     physically-faithful BW formalization defines the wedge standard subspace as `closure(span(NICE one-particle
+     vectors))` — compactly-supported `δ`-margin functions are the canonical CORE for wedge localization. So:
+     define `niceWedgeGenSet := {KrepL2 f : f continuous, compact supp, δ-margin, real, MemLp}` and prove
+     `StripKMSrvd boostUnitary (closure(span(niceWedgeGenSet)))` — **NO density theorem needed** (the generators
+     ARE nice; the BCF Cauchy limit closes the span). `boostUnitary_mapsTo_niceWedgeGenSet` holds (boost preserves
+     nice: `boostTest` is a wedge-preserving homeomorphism comp). The broad-class equality `K_big = K_nice` is a
+     SEPARATE optional theorem (`Submodule.orthogonal_orthogonal_eq_closure` + a distributional totality lemma,
+     OR `tendsto_Lp_of_tendsto_ae` mollifier approximation) — only needed if a downstream lemma genuinely requires
+     the broad `𝒦_W`. The KMS extension itself uses the nice-core def. [Decision pending: refactor `wedgeGenSet`
+     to nice, or introduce `niceWedgeGenSet` + the equality — check downstream `𝒦_W` consumers (standardness,
+     `hdense`).]
    NOTE: this is laborious Hilbert-space plumbing (sesquilinear extension from a total set by continuity) — no
    new hard analysis. If it proves too long, `stripKMSrvd_pair` alone is already the citable A4 result (the
    explicit free-field boost-KMS witness, the genuine BW analytic content).
