@@ -430,4 +430,25 @@ theorem hasDerivAt_ftKrep (m : ℝ) (f : V → ℂ) (θ : ℝ) (ζ₀ : ℂ) :
   unfold ftKrep'
   ring
 
+/-- The exponent's real part: `Re(−2π i θ ζ) = 2π θ (Im ζ)`. -/
+theorem ftKrep_exp_re (θ : ℝ) (ζ : ℂ) :
+    (-2 * (Real.pi : ℂ) * Complex.I * (θ : ℂ) * ζ).re = 2 * Real.pi * θ * ζ.im := by
+  rw [show (-2 * (Real.pi : ℂ) * Complex.I * (θ : ℂ) * ζ)
+      = ((-2 * Real.pi * θ : ℝ) : ℂ) * (Complex.I * ζ) from by push_cast; ring,
+    Complex.re_ofReal_mul]
+  simp only [Complex.mul_re, Complex.I_re, Complex.I_im, zero_mul, one_mul, zero_sub]
+  ring
+
+/-- The norm of the integrand's `ζ`-derivative. -/
+theorem norm_ftKrep' (m : ℝ) (f : V → ℂ) (ζ : ℂ) (θ : ℝ) :
+    ‖ftKrep' m f ζ θ‖
+      = 2 * Real.pi * |θ| * Real.exp (2 * Real.pi * θ * ζ.im) * ‖Krep m f θ‖ := by
+  unfold ftKrep'
+  rw [norm_mul, norm_mul, Complex.norm_exp, ftKrep_exp_re]
+  congr 2
+  rw [show (-2 * (Real.pi : ℂ) * Complex.I * (θ : ℂ))
+      = ((-2 * Real.pi * θ : ℝ) : ℂ) * Complex.I from by push_cast; ring,
+    norm_mul, Complex.norm_I, mul_one, Complex.norm_real, Real.norm_eq_abs,
+    abs_mul, abs_mul, abs_of_pos Real.pi_pos, abs_neg, abs_two]
+
 end QIQTH.Fock.WienerL2
