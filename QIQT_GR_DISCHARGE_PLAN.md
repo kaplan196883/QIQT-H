@@ -502,10 +502,11 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          isolation): `compCLM ℂ (g := fun x => x + a) (HasTemperateGrowth.id'.add (.const a)) ⟨1, 1+‖a‖, fun x =>
          by rw[pow_one]; …norm_sub_le…; nlinarith⟩ : 𝓢(ℝ,ℂ) →L[ℂ] 𝓢(ℝ,ℂ)`. So the Wiener build is concretely
          buildable (not just "Mathlib lacks it"). **BUILD STARTED — `QIQTH/Fock/WienerL2.lean`** (new file). FULL
-         build (~8 bricks): **(1) BUILT** (`d4f4d9b`): `schwartzTranslate a : 𝓢(ℝ,ℂ)→L[ℂ]𝓢(ℝ,ℂ)`, `f↦f(·+a)`,
-         axiom-free, with `schwartzTranslate_apply`. NEXT: (2) Lp-modulation CLM (`MemLp.of_le_mul`); (3)
-         `boostUnitary a (f.toLp) = (schwartzTranslate (−a) f).toLp` (connects QIQT to the Schwartz translate via
-         `coeFn_boostUnitary` + `SchwartzMap.toLp`); (4) intertwining `𝓕∘T_a = M_a∘𝓕` on Schwartz (via
+         build (~8 bricks): **(1) BUILT** (`d4f4d9b`): `schwartzTranslate a`, `f↦f(·+a)`, with `schwartzTranslate_apply`.
+         **(3) BUILT** (`2714172`): `boostUnitary_toLp` — `boostUnitary a (f.toLp) = (schwartzTranslate (−a) f).toLp`
+         (via `coeFn_boostUnitary` + measure-preserving translated-`ae` + `schwartzTranslate_apply`); connects the QIQT
+         boost group to the Schwartz translation. NEXT: (2) Lp-modulation CLM (`MemLp.of_le_mul`); (4) intertwining
+         `𝓕∘T_a = M_a∘𝓕` on Schwartz (via
          `fourierTransformCLM`+`fourier_coe`+`fourierIntegral_comp_add_right`) then L²-density (`denseRange_toLpCLM`);
          (5) `𝓕h⊥{M_a 𝓕g₀} ⟺ FT(conj(𝓕g₀)·𝓕h)≡0`; (6) FT-injective-on-L¹ (`Inversion.lean`); (7) Wiener: boost-orbit
          dense `⟸ 𝓕g₀≠0` a.e.; (8) concrete `f₀` with `𝓕(Krep f₀)≠0` a.e. A multi-fire generic-Fourier-infrastructure
