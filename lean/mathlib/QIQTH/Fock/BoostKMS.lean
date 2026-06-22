@@ -752,4 +752,55 @@ theorem kmsFunCut_differentiableOn {m : ℝ} (hmpos : 0 < m) {f g : V → ℂ} (
   rw [Set.mem_preimage, Set.mem_Ioo] at hz
   exact (kmsFunCut_differentiableAt hmpos hf hfc hg hgc hδ hmf hmg Rc hz.1 hz.2).differentiableWithinAt
 
+/-- **`kmsFunCut Rc` is continuous on the CLOSED strip** `{−1≤Im z≤0}` — the `ContinuousOn` half of
+    `DiffContOnCl`. This is where the θ-truncation pays off: the integrand is dominated by the **constant**
+    `C_g·C_f` uniformly on the closed strip (no degeneration, since `‖KrepCont‖ ≤ C` for `Im arg ∈ [0,π]`),
+    which is integrable on the finite-measure window `[−Rc,Rc]`; `continuousOn_of_dominated` + the integrand's
+    `z`-continuity (`differentiable_kmsIntegrand`) close it. -/
+theorem kmsFunCut_continuousOn {m : ℝ} (hm : 0 ≤ m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 ≤ δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0) (Rc : ℝ) :
+    ContinuousOn (kmsFunCut m f g Rc) (Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0) := by
+  refine continuousOn_of_dominated
+    (bound := fun _ : ℝ => (1 / Real.sqrt 2 * ∫ x, ‖g x‖) * (1 / Real.sqrt 2 * ∫ x, ‖f x‖))
+    (fun z _ => (continuous_kmsIntegrand_in_theta m hf hfc hg hgc z).aestronglyMeasurable)
+    (fun z hz => ?_) ?_ ?_
+  · rw [Set.mem_preimage, Set.mem_Icc] at hz
+    refine Filter.Eventually.of_forall fun θ => ?_
+    have him0 : (0 : ℝ) ≤ -(Real.pi * z.im) := by
+      have : 0 ≤ -z.im := by linarith [hz.2]
+      have := Real.pi_pos; nlinarith
+    have himπ : -(Real.pi * z.im) ≤ Real.pi := by
+      have h1 : -z.im ≤ 1 := by linarith [hz.1]
+      nlinarith [Real.pi_pos]
+    rw [norm_mul, RCLike.norm_conj]
+    have hgim : ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)).im = -(Real.pi * z.im) := by
+      simp only [Complex.conj_im, Complex.add_im, Complex.mul_im, Complex.ofReal_re,
+        Complex.ofReal_im]; ring
+    have hfim : ((θ : ℂ) - (Real.pi : ℂ) * z).im = -(Real.pi * z.im) := by
+      simp only [Complex.sub_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im]; ring
+    refine mul_le_mul ?_ ?_ (norm_nonneg _) ?_
+    · exact norm_KrepCont_le_const hm hg hgc hδ hmg (by rw [hgim]; exact him0) (by rw [hgim]; exact himπ)
+    · exact norm_KrepCont_le_const hm hf hfc hδ hmf (by rw [hfim]; exact him0) (by rw [hfim]; exact himπ)
+    · have : 0 ≤ ∫ x, ‖g x‖ := integral_nonneg (fun x => norm_nonneg _)
+      positivity
+  · exact MeasureTheory.integrableOn_const measure_Icc_lt_top.ne
+  · exact Filter.Eventually.of_forall fun θ =>
+      (differentiable_kmsIntegrand m hf hfc hg hgc θ).continuous.continuousOn
+
+/-- **`kmsFunCut Rc` is `DiffContOnCl` on the open strip** `{−1<Im z<0}` — holomorphic on the open strip
+    (`kmsFunCut_differentiableOn`) and continuous on its closure `{−1≤Im z≤0}` (`kmsFunCut_continuousOn`, using
+    `closure (im⁻¹' Ioo) ⊆ im⁻¹' Icc`). The full regularity hypothesis Hadamard three-lines consumes. -/
+theorem kmsFunCut_diffContOnCl {m : ℝ} (hmpos : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0) (Rc : ℝ) :
+    DiffContOnCl ℂ (kmsFunCut m f g Rc) (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) := by
+  have hcl : closure (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) ⊆ Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0 := by
+    have h := Complex.continuous_im.closure_preimage_subset (Set.Ioo (-1 : ℝ) 0)
+    rwa [closure_Ioo (by norm_num : (-1 : ℝ) ≠ 0)] at h
+  exact ⟨kmsFunCut_differentiableOn hmpos hf hfc hg hgc hδ hmf hmg Rc,
+    (kmsFunCut_continuousOn hmpos.le hf hfc hg hgc hδ.le hmf hmg Rc).mono hcl⟩
+
 end QIQTH.Fock.BoostKMS
