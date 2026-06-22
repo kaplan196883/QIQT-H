@@ -236,9 +236,13 @@ margin lemma is DONE (`b98dc63`).
        (`15ba0d1`, poly-factor bound); `deriv_KrepCont_eq` + `norm_kernel_eq'` (`559d28f`, deriv repr +
        general-`ζ` modulus); `norm_kernel_le_exp_decay'` + `norm_kernelDeriv_le_exp_decay` (`a2d6560`, general-`ζ`
        kernel & kernelDeriv strip-decay: `‖K'(ζ,x)‖ ≤ exp(−c cosh(Re ζ))·|m|·cosh(Re ζ)·(|x₀|+|x₁|)`).
-       **Next:** `norm_deriv_KrepCont_le` (integral assembly: `‖deriv KrepCont f ζ‖ ≲ cosh(Re ζ)·exp(−c cosh(Re ζ))`)
-       → the `z`-derivative norm bound of the `kmsFun` integrand → the dominated-derivative theorem → `kmsFun`
-       holomorphic; then continuity-to-closure ⟹ `DiffContOnCl`, and the boundedness frontier.
+       `norm_deriv_KrepCont_le_exp_decay` (`2fe7a2b`): `‖deriv(KrepCont m f) ζ‖ ≤ (1/√2)|m|·cosh(Re ζ)·
+       exp(−c cosh(Re ζ))·∫(|x₀|+|x₁|)‖f‖` — the `z`-derivative norm bound. **Full strip-decay infrastructure
+       (function + derivative) now complete.**
+       **Next:** the `kmsFun` holomorphy assembly — the integrand's `z`-derivative (product/chain rule through
+       the reflection factor + the affine `±πz`), bounded via `norm_KrepCont_le_exp_decay` + the deriv bound +
+       `cosh·exp` integrability, fed to `hasDerivAt_integral_of_dominated_loc_of_deriv_le` (𝕜=ℂ) ⟹ `kmsFun`
+       differentiable on the strip; then continuity-to-closure ⟹ `DiffContOnCl`, and the boundedness frontier.
 
 **Honest scale:** discharging `StripKMSrvd` from here is a genuine multi-week-to-month real-analysis +
 Mathlib-infrastructure effort (Minkowski integral inequality is itself a Mathlib-worthy contribution). This is
