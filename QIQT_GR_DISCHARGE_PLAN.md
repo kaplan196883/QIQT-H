@@ -509,13 +509,22 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          (mult by the modulus-1 character `modChar c ξ = e^{icξ}`) — NOT a Mathlib CLM (no bounded-function action on
          `Lp` exists), built from scratch: `memLp_modChar_smul` (`MemLp.of_le_mul (c:=1)`), `modL2 c` (the map),
          `coeFn_modL2`, `modL2_add` (additivity), `norm_modL2` (the `L²`-isometry `‖M_c g‖=‖g‖` via `eLpNorm_congr_norm_ae`).
-         Additivity + isometry give continuity by hand → NO bundled CLM needed for the density step. NEXT: (4) intertwining
-         `𝓕∘T_a = M_a∘𝓕` on Schwartz (via
-         `fourierTransformCLM`+`fourier_coe`+`fourierIntegral_comp_add_right`) then L²-density (`denseRange_toLpCLM`);
-         (5) `𝓕h⊥{M_a 𝓕g₀} ⟺ FT(conj(𝓕g₀)·𝓕h)≡0`; (6) FT-injective-on-L¹ (`Inversion.lean`); (7) Wiener: boost-orbit
-         dense `⟸ 𝓕g₀≠0` a.e.; (8) concrete `f₀` with `𝓕(Krep f₀)≠0` a.e. A multi-fire generic-Fourier-infrastructure
-         build (≈ the L²-Wiener Tauberian theorem) — being built brick by brick like the BW witness (15 fires). The
-         QIQT plan's STRUCTURAL content is complete; this is the cyclic analytic discharge proceeding.
+         Additivity + isometry give continuity by hand → NO bundled CLM needed for the density step.
+         **(4) BUILT** (`b5a4f32`): the translate→modulation intertwining `𝓕∘boost_a = M∘𝓕`, in two parts —
+         **4a** `fourier_schwartzTranslate` (pointwise Schwartz): `𝓕(f(·−a))(w)=e^{−2πiaw}·𝓕f(w)` via `fourier_coe`
+         + `VectorFourier.fourierIntegral_comp_add_right` + the char identity (`Real.fourierChar_apply`: `𝐞(⟪−a,w⟫)
+         =modChar(−2πa)w`); **4b** `fourierL2_boostUnitary` (∀ `g∈L²`): `𝓕(boostUnitary a g)=M_{−2πa}(𝓕 g)`, lifted
+         from the dense Schwartz range by `DenseRange.equalizer` (both sides continuous: `𝓕`/`boostUnitary` are `≃ₗᵢ`,
+         `M_c` via `isometry_modL2`/`continuous_modL2`+`modL2_sub`).
+         **★ KEY ENABLER FOUND (2026-06-23): Mathlib ALREADY HAS the L²-Plancherel Fourier UNITARY** —
+         `MeasureTheory.Lp.fourierTransformₗᵢ : Lp F 2 ≃ₗᵢ[ℂ] Lp F 2` (notation `𝓕`) with `inner_fourier_eq`
+         (`⟪𝓕 f,𝓕 g⟫=⟪f,g⟫`, Plancherel), `norm_fourier_eq`, and `SchwartzMap.toLp_fourier_eq` (`𝓕(f.toLp)=(𝓕 f).toLp`).
+         (NO bounded-function action on `Lp` though — `M_c` was still built from scratch.) This collapses the remaining
+         build: the Wiener argument is now `⟪boost_a g₀,h⟫ = ⟪𝓕(boost_a g₀),𝓕 h⟫` [Plancherel] `= ⟪M_a(𝓕g₀),𝓕h⟫`
+         [brick 4] `= ∫ e^{+2πiaξ}·conj(𝓕g₀ ξ)·𝓕h ξ dξ` = the integral-FT of `k:=conj(𝓕g₀)·𝓕h ∈ L¹`. NEXT: (5) this
+         `c(a)≡0 ⟺ 𝓕_int(k)≡0`; (6) FT-injective-on-L¹ (`Inversion.lean`/`Integrable.fourierInv_fourier_eq`) `⟹ k=0`
+         a.e.; (7) `𝓕g₀≠0` a.e. `⟹ 𝓕h=0 ⟹ h=0` (`𝓕` injective); (8) concrete `f₀` with `𝓕(Krep f₀)≠0` a.e.
+         Bricks 1,2,3,4 BUILT axiom-free; the cyclic analytic discharge is well past half-way and de-risked.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
