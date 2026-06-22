@@ -11,6 +11,7 @@
   their agreement with the real-rapidity `Krep` on the real axis.
 -/
 import QIQTH.Fock.Localization
+import Mathlib.Analysis.Calculus.ParametricIntegral
 
 noncomputable section
 
@@ -154,5 +155,122 @@ theorem continuous_kernel_in_x (m : ℝ) (ζ : ℂ) : Continuous (fun x : V => k
   refine Complex.continuous_exp.comp (continuous_const.mul ?_)
   exact (continuous_const.mul (Complex.continuous_ofReal.comp (continuous_apply 0))).sub
     (continuous_const.mul (Complex.continuous_ofReal.comp (continuous_apply 1)))
+
+/-- `‖exp z‖ ≤ e^{‖z‖}` and `‖exp(−z)‖ ≤ e^{‖z‖}` (from `‖exp z‖ = e^{Re z}` and `±Re z ≤ ‖z‖`). -/
+theorem norm_exp_le_exp_norm (z : ℂ) : ‖Complex.exp z‖ ≤ Real.exp ‖z‖ := by
+  rw [Complex.norm_exp]; exact Real.exp_le_exp.mpr (RCLike.re_le_norm z)
+
+theorem norm_exp_neg_le_exp_norm (z : ℂ) : ‖Complex.exp (-z)‖ ≤ Real.exp ‖z‖ := by
+  have h := norm_exp_le_exp_norm (-z)
+  rwa [norm_neg] at h
+
+/-- `‖cosh ζ‖ ≤ e^{‖ζ‖}` (crude growth bound from `cosh ζ = (e^ζ + e^{−ζ})/2`). -/
+theorem norm_cosh_le (ζ : ℂ) : ‖Complex.cosh ζ‖ ≤ Real.exp ‖ζ‖ := by
+  have key : ‖Complex.cosh ζ‖ ≤ (‖Complex.exp ζ‖ + ‖Complex.exp (-ζ)‖) / 2 := by
+    simp only [Complex.cosh, norm_div]
+    have h2 : ‖(2 : ℂ)‖ = 2 := by simp
+    rw [h2]; gcongr; exact norm_add_le _ _
+  calc ‖Complex.cosh ζ‖ ≤ (‖Complex.exp ζ‖ + ‖Complex.exp (-ζ)‖) / 2 := key
+    _ ≤ (Real.exp ‖ζ‖ + Real.exp ‖ζ‖) / 2 := by
+        gcongr; exacts [norm_exp_le_exp_norm ζ, norm_exp_neg_le_exp_norm ζ]
+    _ = Real.exp ‖ζ‖ := by ring
+
+/-- `‖sinh ζ‖ ≤ e^{‖ζ‖}` (crude growth bound from `sinh ζ = (e^ζ − e^{−ζ})/2`). -/
+theorem norm_sinh_le (ζ : ℂ) : ‖Complex.sinh ζ‖ ≤ Real.exp ‖ζ‖ := by
+  have key : ‖Complex.sinh ζ‖ ≤ (‖Complex.exp ζ‖ + ‖Complex.exp (-ζ)‖) / 2 := by
+    simp only [Complex.sinh, norm_div]
+    have h2 : ‖(2 : ℂ)‖ = 2 := by simp
+    rw [h2]; gcongr; exact norm_sub_le _ _
+  calc ‖Complex.sinh ζ‖ ≤ (‖Complex.exp ζ‖ + ‖Complex.exp (-ζ)‖) / 2 := key
+    _ ≤ (Real.exp ‖ζ‖ + Real.exp ‖ζ‖) / 2 := by
+        gcongr; exacts [norm_exp_le_exp_norm ζ, norm_exp_neg_le_exp_norm ζ]
+    _ = Real.exp ‖ζ‖ := by ring
+
+/-- A bound for a term `(m·c)·a − (m·s)·b` with `‖c‖,‖s‖ ≤ e^r`: `≤ |m|·e^r·(|a|+|b|)`. Used for both the
+    pairing `p_m(ζ)·x` (`c,s = cosh,sinh`) and its `ζ`-derivative (`c,s = sinh,cosh`). -/
+theorem norm_term_le {r : ℝ} (m : ℝ) {c s : ℂ} (hc : ‖c‖ ≤ Real.exp r) (hs : ‖s‖ ≤ Real.exp r)
+    (a b : ℝ) :
+    ‖(m : ℂ) * c * (a : ℂ) - (m : ℂ) * s * (b : ℂ)‖ ≤ |m| * Real.exp r * (|a| + |b|) := by
+  calc ‖(m : ℂ) * c * (a : ℂ) - (m : ℂ) * s * (b : ℂ)‖
+      ≤ ‖(m : ℂ) * c * (a : ℂ)‖ + ‖(m : ℂ) * s * (b : ℂ)‖ := norm_sub_le _ _
+    _ = |m| * ‖c‖ * |a| + |m| * ‖s‖ * |b| := by
+        simp only [norm_mul, Complex.norm_real, Real.norm_eq_abs]
+    _ ≤ |m| * Real.exp r * (|a| + |b|) := by
+        nlinarith [mul_nonneg (mul_nonneg (abs_nonneg m) (abs_nonneg a)) (sub_nonneg.mpr hc),
+          mul_nonneg (mul_nonneg (abs_nonneg m) (abs_nonneg b)) (sub_nonneg.mpr hs)]
+
+/-- `‖K(ζ,x)‖ ≤ exp(|m|·e^{‖ζ‖}·(|x₀|+|x₁|))` (kernel growth bound; `‖exp(−i·D)‖ ≤ exp‖D‖`, `‖D‖` bound). -/
+theorem norm_kernel_le (m : ℝ) (x : V) (ζ : ℂ) :
+    ‖kernel m x ζ‖ ≤ Real.exp (|m| * Real.exp ‖ζ‖ * (|x 0| + |x 1|)) := by
+  refine (norm_exp_le_exp_norm _).trans (Real.exp_le_exp.mpr ?_)
+  rw [norm_mul, norm_neg, Complex.norm_I, one_mul]
+  simp only [minkowskiDotℂ, massShellℂ_zero, massShellℂ_one]
+  exact norm_term_le m (norm_cosh_le ζ) (norm_sinh_le ζ) (x 0) (x 1)
+
+/-- `‖K'(ζ,x)‖ ≤ exp(B)·B` with `B = |m|·e^{‖ζ‖}·(|x₀|+|x₁|)` (the integrand-derivative growth bound). -/
+theorem norm_kernelDeriv_le (m : ℝ) (x : V) (ζ : ℂ) :
+    ‖kernelDeriv m x ζ‖ ≤ Real.exp (|m| * Real.exp ‖ζ‖ * (|x 0| + |x 1|))
+      * (|m| * Real.exp ‖ζ‖ * (|x 0| + |x 1|)) := by
+  rw [kernelDeriv, norm_mul]
+  have hpoly : ‖-Complex.I * ((m : ℂ) * Complex.sinh ζ * (x 0 : ℂ)
+      - (m : ℂ) * Complex.cosh ζ * (x 1 : ℂ))‖ ≤ |m| * Real.exp ‖ζ‖ * (|x 0| + |x 1|) := by
+    rw [norm_mul, norm_neg, Complex.norm_I, one_mul]
+    exact norm_term_le m (norm_sinh_le ζ) (norm_cosh_le ζ) (x 0) (x 1)
+  exact mul_le_mul (norm_kernel_le m x ζ) hpoly (norm_nonneg _) (Real.exp_pos _).le
+
+/-- The integrand-derivative is continuous in `x` (for fixed `ζ`) — gives measurability. -/
+theorem continuous_kernelDeriv_in_x (m : ℝ) (ζ : ℂ) :
+    Continuous (fun x : V => kernelDeriv m x ζ) := by
+  refine (continuous_kernel_in_x m ζ).mul (continuous_const.mul ?_)
+  exact (continuous_const.mul (Complex.continuous_ofReal.comp (continuous_apply 0))).sub
+    (continuous_const.mul (Complex.continuous_ofReal.comp (continuous_apply 1)))
+
+/-- **A1b-ii-β — holomorphy of `KrepCont`.** For `f` continuous with compact support, `ζ ↦ KrepCont m f ζ`
+    is complex-differentiable at every `ζ₀`, with derivative `(1/√2)·∫ K'(ζ₀,x)·f(x)`. Proven by the
+    dominated parametric-derivative theorem (𝕜 = ℂ): the per-`x` derivative is `hasDerivAt_kernel_mul`, and
+    the ball-domination uses `norm_kernelDeriv_le` + the compact bound `‖x‖ ≤ M` on `tsupport f`. -/
+theorem hasDerivAt_KrepCont (m : ℝ) {f : V → ℂ} (hf : Continuous f) (hfc : HasCompactSupport f)
+    (ζ₀ : ℂ) :
+    HasDerivAt (KrepCont m f) ((1 / Real.sqrt 2 : ℂ) * ∫ x, kernelDeriv m x ζ₀ * f x) ζ₀ := by
+  obtain ⟨M, hM⟩ := hfc.isBounded.exists_norm_le
+  set C : ℝ := Real.exp (|m| * Real.exp (‖ζ₀‖ + 1) * (M + M))
+    * (|m| * Real.exp (‖ζ₀‖ + 1) * (M + M)) with hCdef
+  have hbound : ∀ᵐ x ∂(volume : Measure V), ∀ ζ ∈ Metric.ball ζ₀ 1,
+      ‖kernelDeriv m x ζ * f x‖ ≤ C * ‖f x‖ := by
+    refine Filter.Eventually.of_forall fun x ζ hζ => ?_
+    rw [norm_mul]
+    by_cases hfx : f x = 0
+    · simp [hfx]
+    · have hxsupp : x ∈ tsupport f := subset_tsupport f (Function.mem_support.mpr hfx)
+      have hxM : ‖x‖ ≤ M := hM x hxsupp
+      have hx0 : |x 0| ≤ M := by rw [← Real.norm_eq_abs]; exact (norm_le_pi_norm x 0).trans hxM
+      have hx1 : |x 1| ≤ M := by rw [← Real.norm_eq_abs]; exact (norm_le_pi_norm x 1).trans hxM
+      have hζR : ‖ζ‖ ≤ ‖ζ₀‖ + 1 := by
+        have hd : ‖ζ - ζ₀‖ < 1 := by rw [← dist_eq_norm]; exact Metric.mem_ball.mp hζ
+        have ht : ‖ζ‖ ≤ ‖ζ₀‖ + ‖ζ - ζ₀‖ := by
+          calc ‖ζ‖ = ‖ζ₀ + (ζ - ζ₀)‖ := by congr 1; ring
+            _ ≤ ‖ζ₀‖ + ‖ζ - ζ₀‖ := norm_add_le _ _
+        linarith
+      refine mul_le_mul_of_nonneg_right ((norm_kernelDeriv_le m x ζ).trans ?_) (norm_nonneg _)
+      have hB : |m| * Real.exp ‖ζ‖ * (|x 0| + |x 1|) ≤ |m| * Real.exp (‖ζ₀‖ + 1) * (M + M) := by
+        gcongr
+      exact mul_le_mul (Real.exp_le_exp.mpr hB) hB (by positivity) (Real.exp_pos _).le
+  have key := hasDerivAt_integral_of_dominated_loc_of_deriv_le (μ := (volume : Measure V))
+    (F := fun ζ x => kernel m x ζ * f x) (F' := fun ζ x => kernelDeriv m x ζ * f x)
+    (bound := fun x => C * ‖f x‖) (s := Metric.ball ζ₀ 1) (x₀ := ζ₀)
+    (Metric.ball_mem_nhds ζ₀ one_pos)
+    (Filter.Eventually.of_forall fun ζ =>
+      ((continuous_kernel_in_x m ζ).mul hf).aestronglyMeasurable)
+    (((continuous_kernel_in_x m ζ₀).mul hf).integrable_of_hasCompactSupport (hfc.mul_left))
+    ((continuous_kernelDeriv_in_x m ζ₀).mul hf).aestronglyMeasurable
+    hbound
+    ((hf.norm.integrable_of_hasCompactSupport hfc.norm).const_mul C)
+    (Filter.Eventually.of_forall fun x ζ _ => hasDerivAt_kernel_mul m f x ζ)
+  exact key.2.const_mul (1 / Real.sqrt 2 : ℂ)
+
+/-- **A1b — `KrepCont m f` is entire** for `f` continuous with compact support. -/
+theorem differentiable_KrepCont (m : ℝ) {f : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) : Differentiable ℂ (KrepCont m f) :=
+  fun ζ₀ => (hasDerivAt_KrepCont m hf hfc ζ₀).differentiableAt
 
 end QIQTH.Fock.WedgeAnalyticity

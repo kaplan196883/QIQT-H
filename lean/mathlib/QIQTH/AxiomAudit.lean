@@ -4655,5 +4655,11 @@ namespace QIQTH.AxiomAudit
 -- kernelDeriv·f(x) — the h_diff ingredient for the dominated parametric-derivative assembly of KrepCont holomorphy.
 #print axioms QIQTH.Fock.WedgeAnalyticity.continuous_kernel_in_x
 -- expected: standard only — ★ A1b-ii: continuity of the kernel in x (measurability of the integrand).
+#print axioms QIQTH.Fock.WedgeAnalyticity.differentiable_KrepCont
+-- expected: standard only — ★★★★ A1b COMPLETE: KrepCont m f (the analytic continuation of the localized wedge
+-- amplitude) is ENTIRE in rapidity for f continuous with compact support. Via hasDerivAt_KrepCont (dominated
+-- parametric-derivative theorem over ℂ): per-x derivative hasDerivAt_kernel_mul + ball-domination from
+-- norm_kernelDeriv_le (‖K'‖ ≤ exp(B)·B) and the compact bound ‖x‖≤M on tsupport f. The holomorphy half of the
+-- free-field Hardy proof of StripKMSrvd (boost-KMS / Bisognano–Wichmann).
 
 end QIQTH.AxiomAudit
