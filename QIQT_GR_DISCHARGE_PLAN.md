@@ -314,16 +314,22 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          (reconciles per-pair margins at the four-way min) (`ac73f9b`).
        • **`NiceTest.bcf_cauchySeq`** (`c6e803e`): `(N n).vec→ξ, (M n).vec→η` ⟹ `n↦(N n).bcf (M n)` is `CauchySeq`
          in `closedStrip →ᵇ ℂ` (the c2→limit step; norms bounded via `Tendsto.norm.bddAbove_range`, vecs Cauchy).
-   - **REMAINING (c3,c4 — final assembly):**
-       (c3) `b := cauchySeq_tendsto_of_complete (bcf_cauchySeq …)` (BCF complete) → limit `b`; `F := stripExtend b`
-            global bound `‖b‖`; `DifferentiableOn` on open strip via `TendstoLocallyUniformlyOn.differentiableOn`
-            (BCF→sup-conv→loc-unif); `ContinuousOn` closed via `b.continuous`.
-       (c4) BCF edge identities `NiceTest.bcf_apply_ofReal` (top = `⟪M.vec, boostUnitary(2πt) N.vec⟫`, via
-            `kmsFun_ofReal_eq_inner`) + `_apply_sub_I` (bottom, via `kmsFun_sub_I`); then `b`-boundary =
-            `lim ⟪Mₙ.vec, V(2πt) Nₙ.vec⟫ = ⟪η, V(2πt) ξ⟫` via `Filter.Tendsto.inner` + `(V a).continuous` +
-            BCF→pointwise eval + `tendsto_nhds_unique`.
-     ⟹ `StripKMSrvd boostUnitary (closure(niceWedgeGenSet))`. Then the `2π`↔`−2π` sign mirror + redefine/relate
-     `𝒦_W` to the nice core ⟹ remove `hKMS`.
+   - **★★★★★ DONE (2026-06-22) — `StripKMSrvd boostUnitary (closure(niceWedgeGenSet))` axiom-free.** The full c3+c4
+     assembly is machine-checked:
+       (c4 edges) `NiceTest.bcf_apply_eq_top` (= `⟪M.vec, V(2πt) N.vec⟫`, via `kmsFun_ofReal_eq_inner`) +
+         `bcf_apply_eq_bot` (via `kmsFun_sub_I` + `inner_conj_symm`) (`2d3fbc0`).
+       (c3+c4) **`stripKMSrvd_closure`** (`53651ca`): nice approximants (`mem_closure_iff_seq_limit`+choice) →
+         `bcf_cauchySeq` → `cauchySeq_tendsto_of_complete` limit `b` in `closedStrip→ᵇℂ` → `F := b on strip, 0 off`;
+         holomorphy via **`TendstoLocallyUniformlyOn.differentiableOn`** (added import `Analysis.Complex.LocallyUniformLimit`;
+         uniform transfer via `BoundedContinuousFunction.tendsto_iff_tendstoUniformly` + `…comp_coe`); continuity via
+         `b.continuous`; boundary via `Filter.Tendsto.inner` + `tendsto_nhds_unique`. NO density theorem.
+       (package) **`stripKMSrvd_boostUnitary`** (`6c2551e`): `StripKMSrvd (fun t => boostUnitary (2πt))
+         (closure (niceWedgeGenSet m))` — the free-field BW KMS condition as a THEOREM.
+   - **REMAINING to remove `hKMS`:** connect `stripKMSrvd_boostUnitary` (nice core, rate `+2π`) to the codebase's
+     labelled `hKMS` (which uses `𝒦_W = closure(span(wedgeGenSet))`, broad, and rate `−2π` per `Δ^{it}=V(−2πt)`).
+     Two steps: (i) the `2π`↔`−2π` SIGN MIRROR (reflect the strip / conjugate — `f↦conj∘f∘conj` swaps the edges);
+     (ii) align `𝒦_W` to the nice core — refactor `wedgeGenSet`→nice OR prove the broad-equality `K_big=K_nice`
+     (the standard density, the optional theorem). Then `hKMS` discharges.
    NOTE: this is laborious Hilbert-space plumbing (sesquilinear extension from a total set by continuity) — no
    new hard analysis. If it proves too long, `stripKMSrvd_pair` alone is already the citable A4 result (the
    explicit free-field boost-KMS witness, the genuine BW analytic content).
