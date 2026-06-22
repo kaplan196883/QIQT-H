@@ -1480,4 +1480,22 @@ theorem kmsFun_continuousOn_closed {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf 
   exact htu.continuousOn (Filter.Eventually.of_forall (fun n : ℕ =>
     kmsFunCut_continuousOn hm.le hf hfc hg hgc hδ.le hmf hmg (n : ℝ))).frequently
 
+/-- **★★★★★ `kmsFun` is `DiffContOnCl` on the strip** — holomorphic on the open strip
+    (`kmsFun_differentiableOn`) and continuous on its closure (`kmsFun_continuousOn_closed`). The full analytic
+    regularity of the `StripKMSrvd` witness, axiom-free — the entire holomorphy + boundary-continuity of the
+    free-field boost-KMS function, established via the θ-truncation + Hadamard + annular-difference route with
+    NO Hardy/Paley–Wiener theory. -/
+theorem kmsFun_diffContOnCl {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hfL : MemLp (Krep m f) 2 volume) (hgL : MemLp (Krep m g) 2 volume) :
+    DiffContOnCl ℂ (kmsFun m f g) (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) := by
+  have hcl : closure (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) ⊆ Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0 := by
+    have h := Complex.continuous_im.closure_preimage_subset (Set.Ioo (-1 : ℝ) 0)
+    rwa [closure_Ioo (by norm_num : (-1 : ℝ) ≠ 0)] at h
+  exact ⟨kmsFun_differentiableOn hm hf hfc hg hgc hδ hmf hmg,
+    (kmsFun_continuousOn_closed hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL).mono hcl⟩
+
 end QIQTH.Fock.BoostKMS
