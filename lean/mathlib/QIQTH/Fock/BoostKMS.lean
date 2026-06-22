@@ -2464,6 +2464,19 @@ theorem inner_boostUnitary_correlation (a : ℝ) (g h : Lp ℂ 2 (volume : Measu
   refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
   simp only [add_sub_cancel_right]
 
+/-- **The boost-orbit correlation in CONVOLUTION form**: `⟪boostUnitary a g, h⟫ = ∫ conj(g(−t))·h(a−t) dt`
+    (reflection `θ ↦ −t`, `integral_neg_eq_self`).  This is `(φ ⋆ h)(a)` with `φ(t) = conj(g(−t))` — the form on
+    which the L¹-convolution Wiener route runs (`FT(φ⋆h) = φ̂·ĥ` when `φ ∈ L¹`, i.e. `g = KrepL2 f₀` for a concrete
+    wedge Gaussian; then `c≡0 ⟹ ĥ=0 ⟹ h=0`). -/
+theorem inner_boostUnitary_correlation_conv (a : ℝ) (g h : Lp ℂ 2 (volume : Measure ℝ)) :
+    inner ℂ (boostUnitary a g) h
+      = ∫ t, (starRingEnd ℂ) ((g : ℝ → ℂ) (-t)) * (h : ℝ → ℂ) (a - t) := by
+  rw [inner_boostUnitary_correlation,
+    ← integral_neg_eq_self (fun θ => (starRingEnd ℂ) ((g : ℝ → ℂ) θ) * (h : ℝ → ℂ) (θ + a)) volume]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun t => ?_)
+  congr 2
+  ring
+
 open QIQTH.StandardSubspaceModular in
 /-- **★★ Cyclicity from correlation-totality** (the cyclic frontier as a concrete integral condition, no FT):
     the nice-core wedge is cyclic as soon as there is ONE nice generator `N₀` whose cross-correlation against
