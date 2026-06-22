@@ -175,6 +175,24 @@ theorem norm_cosh_le (ζ : ℂ) : ‖Complex.cosh ζ‖ ≤ Real.exp ‖ζ‖ :=
         gcongr; exacts [norm_exp_le_exp_norm ζ, norm_exp_neg_le_exp_norm ζ]
     _ = Real.exp ‖ζ‖ := by ring
 
+/-- `‖cosh ζ‖ ≤ cosh(Re ζ)` (sharp real-part bound, `‖e^{±ζ}‖ = e^{±Re ζ}`). -/
+theorem norm_cosh_le_cosh_re (ζ : ℂ) : ‖Complex.cosh ζ‖ ≤ Real.cosh ζ.re := by
+  rw [Real.cosh_eq]
+  calc ‖Complex.cosh ζ‖ ≤ (‖Complex.exp ζ‖ + ‖Complex.exp (-ζ)‖) / 2 := by
+        simp only [Complex.cosh, norm_div]
+        rw [show ‖(2 : ℂ)‖ = 2 by simp]; gcongr; exact norm_add_le _ _
+    _ = (Real.exp ζ.re + Real.exp (-ζ.re)) / 2 := by
+        rw [Complex.norm_exp, Complex.norm_exp, Complex.neg_re]
+
+/-- `‖sinh ζ‖ ≤ cosh(Re ζ)` (sharp real-part bound). -/
+theorem norm_sinh_le_cosh_re (ζ : ℂ) : ‖Complex.sinh ζ‖ ≤ Real.cosh ζ.re := by
+  rw [Real.cosh_eq]
+  calc ‖Complex.sinh ζ‖ ≤ (‖Complex.exp ζ‖ + ‖Complex.exp (-ζ)‖) / 2 := by
+        simp only [Complex.sinh, norm_div]
+        rw [show ‖(2 : ℂ)‖ = 2 by simp]; gcongr; exact norm_sub_le _ _
+    _ = (Real.exp ζ.re + Real.exp (-ζ.re)) / 2 := by
+        rw [Complex.norm_exp, Complex.norm_exp, Complex.neg_re]
+
 /-- `‖sinh ζ‖ ≤ e^{‖ζ‖}` (crude growth bound from `sinh ζ = (e^ζ − e^{−ζ})/2`). -/
 theorem norm_sinh_le (ζ : ℂ) : ‖Complex.sinh ζ‖ ≤ Real.exp ‖ζ‖ := by
   have key : ‖Complex.sinh ζ‖ ≤ (‖Complex.exp ζ‖ + ‖Complex.exp (-ζ)‖) / 2 := by
