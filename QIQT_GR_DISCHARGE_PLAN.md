@@ -218,6 +218,9 @@ margin lemma is DONE (`b98dc63`).
      entire in `z` (the per-`θ` `h_diff` ingredient).
    - **Integrand continuity/measurability DONE** (`35cb3f2`): `continuous_kmsIntegrand_in_theta` (the `hF_meas`
      ingredient). So both pointwise ingredients (`h_diff` + `hF_meas`) for the parametric theorem are in hand.
+   - **Derivative-decay integrability DONE** (`28c63e3`): `abs_le_cosh` (`|θ|≤coshθ`) +
+     `integrable_cosh_mul_exp_neg_const_mul_cosh` (`cosh s·exp(−c cosh s)` integrable) — the integrability the
+     `z`-derivative domination reduces to (`‖∂_z integrand‖ ≲ cosh(s)·exp(−c cosh s)`).
    - **Remaining A4**: (c) `DiffContOnCl` — assemble `F` holomorphic on the open strip from
      `differentiable_kmsIntegrand` via the parametric-derivative theorem (needs the `z`-derivative dominated by
      an integrable-in-`θ` bound on a `z`-ball — analogous to A2's `exp(−c cosh)` decay but for the derivative)
