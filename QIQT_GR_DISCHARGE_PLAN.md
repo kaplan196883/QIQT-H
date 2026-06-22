@@ -216,6 +216,8 @@ margin lemma is DONE (`b98dc63`).
      **Confirms `F`'s holomorphy is reachable** (the `conj∘·∘conj` was the only non-obvious differentiability).
    - **Integrand holomorphy DONE** (`a82ad92`): `differentiable_kmsIntegrand` — the `kmsFun` integrand is
      entire in `z` (the per-`θ` `h_diff` ingredient).
+   - **Integrand continuity/measurability DONE** (`35cb3f2`): `continuous_kmsIntegrand_in_theta` (the `hF_meas`
+     ingredient). So both pointwise ingredients (`h_diff` + `hF_meas`) for the parametric theorem are in hand.
    - **Remaining A4**: (c) `DiffContOnCl` — assemble `F` holomorphic on the open strip from
      `differentiable_kmsIntegrand` via the parametric-derivative theorem (needs the `z`-derivative dominated by
      an integrable-in-`θ` bound on a `z`-ball — analogous to A2's `exp(−c cosh)` decay but for the derivative)
