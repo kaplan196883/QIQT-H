@@ -1444,4 +1444,40 @@ theorem norm_kmsFun_sub_kmsFunCut_le {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (h
   exact norm_kmsFunCut_diff_le hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL hR
     (le_trans (Nat.le_ceil R) (by exact_mod_cast hn)) hz0 hz1
 
+/-- **★★★★★ `ContinuousOn kmsFun (closed strip)`** — the last analytic gap. `kmsFunCut n → kmsFun` UNIFORMLY
+    on the closed strip (`norm_kmsFun_sub_kmsFunCut_le` + `ε_n → 0`), and each `kmsFunCut n` is continuous on
+    the closed strip (`kmsFunCut_continuousOn`); the uniform limit of continuous functions is continuous
+    (`TendstoUniformlyOn.continuousOn`). -/
+theorem kmsFun_continuousOn_closed {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hfL : MemLp (Krep m f) 2 volume) (hgL : MemLp (Krep m g) 2 volume) :
+    ContinuousOn (kmsFun m f g) (Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0) := by
+  have hgsq : Integrable (fun θ : ℝ => ‖Krep m g θ‖ ^ 2) volume :=
+    (memLp_two_iff_integrable_sq hgL.norm.aestronglyMeasurable).mp hgL.norm
+  have hfsq : Integrable (fun θ : ℝ => ‖Krep m f θ‖ ^ 2) volume :=
+    (memLp_two_iff_integrable_sq hfL.norm.aestronglyMeasurable).mp hfL.norm
+  have hεtend : Filter.Tendsto (fun n : ℕ =>
+      Real.sqrt (∫ θ in {θ : ℝ | (n : ℝ) < |θ|}, ‖Krep m g θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m f θ‖ ^ 2)
+        + Real.sqrt (∫ θ in {θ : ℝ | (n : ℝ) < |θ|}, ‖Krep m f θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m g θ‖ ^ 2))
+      Filter.atTop (nhds 0) := by
+    have h := ((tendsto_tail_seminorm_zero hgsq).mul_const (Real.sqrt (∫ θ, ‖Krep m f θ‖ ^ 2))).add
+      ((tendsto_tail_seminorm_zero hfsq).mul_const (Real.sqrt (∫ θ, ‖Krep m g θ‖ ^ 2)))
+    simpa using h
+  have htu : TendstoUniformlyOn (fun n : ℕ => kmsFunCut m f g (n : ℝ)) (kmsFun m f g)
+      Filter.atTop (Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0) := by
+    rw [Metric.tendstoUniformlyOn_iff]
+    intro ε hε
+    filter_upwards [hεtend.eventually_lt_const hε] with n hn
+    intro z hz
+    rw [Set.mem_preimage, Set.mem_Icc] at hz
+    rw [Complex.dist_eq]
+    exact lt_of_le_of_lt
+      (norm_kmsFun_sub_kmsFunCut_le hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL
+        (Nat.cast_nonneg n) hz.1 hz.2) hn
+  exact htu.continuousOn (Filter.Eventually.of_forall (fun n : ℕ =>
+    kmsFunCut_continuousOn hm.le hf hfc hg hgc hδ.le hmf hmg (n : ℝ))).frequently
+
 end QIQTH.Fock.BoostKMS
