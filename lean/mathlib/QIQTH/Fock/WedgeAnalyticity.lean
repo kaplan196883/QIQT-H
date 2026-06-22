@@ -291,6 +291,12 @@ theorem differentiable_KrepCont (m : ℝ) {f : V → ℂ} (hf : Continuous f)
     (hfc : HasCompactSupport f) : Differentiable ℂ (KrepCont m f) :=
   fun ζ₀ => (hasDerivAt_KrepCont m hf hfc ζ₀).differentiableAt
 
+/-- **`deriv (KrepCont m f)` is continuous** (entire ⟹ analytic ⟹ deriv analytic ⟹ continuous,
+    `AnalyticAt.deriv`). The measurability ingredient (`hF'_meas`) for the dominated-derivative theorem. -/
+theorem continuous_deriv_KrepCont (m : ℝ) {f : V → ℂ} (hf : Continuous f) (hfc : HasCompactSupport f) :
+    Continuous (deriv (KrepCont m f)) :=
+  Differentiable.continuous fun z => ((differentiable_KrepCont m hf hfc).analyticAt z).deriv.differentiableAt
+
 /-- The rapidity-derivative of `KrepCont m f` as an integral: `(K_ℂ f)'(ζ) = 2^{-1/2}·∫ K'(ζ,x)·f(x) dx`. -/
 theorem deriv_KrepCont_eq (m : ℝ) {f : V → ℂ} (hf : Continuous f) (hfc : HasCompactSupport f) (ζ : ℂ) :
     deriv (KrepCont m f) ζ = (1 / Real.sqrt 2 : ℂ) * ∫ x, kernelDeriv m x ζ * f x :=
