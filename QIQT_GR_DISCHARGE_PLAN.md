@@ -591,11 +591,19 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          `Real.fourier_eq'`+`Real.inner_apply`) + `analyticOnNhd_fourier_Krep` (`AnalyticOnNhd ℝ (ξ↦𝓕(Krep) ξ) univ`).
          So **the function FT of the wedge amplitude is real-analytic** ⟹ (8c, given `≢0`) `𝓕(Krep)≠0` a.e.
          NEXT: **(8b-bridge L²↔L¹)** — the `L²` FT coeFn `⇑(𝓕 N₀.vec)` agrees a.e. with the *function* FT `𝓕(Krep)`
-         (`N₀.vec=KrepL2 f₀`, `Krep∈L¹∩L²`).  Mathlib lacks a direct lemma; route via Plancherel + `toLp_fourierInv_eq`
-         tested against dense Schwartz, OR the tempered-distribution FT (`Lp.toTemperedDistribution` +
-         `fourier_toTemperedDistributionCLM_eq`).  **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0`
-         (amplitude `≠0` somewhere), `analyticOnNhd_fourier_Krep`+`8c`+the L²↔L¹ bridge ⟹ `⇑(𝓕 N₀.vec)≠0` a.e., feed
-         `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
+         (`N₀.vec=KrepL2 f₀`, `Krep∈L¹∩L²`).  **ROUTE PINNED (exact Mathlib lemmas, 2026-06-23):** tempered-distribution
+         FT — for `g∈L¹∩L²` and Schwartz `φ`, `∫ φ•⇑(𝓕_{L²}(g.toLp)) = (𝓕_{L²}(g.toLp):𝓢')(φ)`
+         [`Lp.toTemperedDistribution_apply` = `∫ φ•f`] `= 𝓕((g.toLp):𝓢')(φ)` [`Lp.fourier_toTemperedDistribution_eq`]
+         `= ((g.toLp):𝓢')(𝓕φ)` [`TemperedDistribution.fourier_apply`] `= ∫ (𝓕φ)•g` `= ∫ φ•𝓕_{int}g`
+         [`VectorFourier.integral_fourierIntegral_smul_eq_flip`+`flip_innerₗ`, `fourier_coe`]; then test against real
+         `C^∞_c` `φ` ⟹ `⇑(𝓕_{L²}(g.toLp)) =ᵐ 𝓕_{int}g` (`ae_eq_zero_of_integral_contDiff_smul_eq_zero`, the brick-6b
+         variational lemma — Mathlib's own `ker_toTemperedDistributionCLM_eq_bot` uses exactly this).
+         **CAVEAT (attempted 2026-06-23, reverted to keep green):** the rw chain hits instance-synthesis + coercion
+         friction at the `𝓢'` level (`𝓕`-notation ambiguity on `Lp` vs function; `(·:𝓢')` vs `toTemperedDistribution`;
+         distribution-FT instance args) — budget a focused fire for the coercion massage (or try the
+         Plancherel-against-Schwartz variant: `⟪𝓕_{L²}(g.toLp),(𝓕⁻φ form)⟫` via `inner_fourier_eq`+`toLp_fourierInv_eq`).
+         **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0`, `analyticOnNhd_fourier_Krep`+`8c`+the L²↔L¹ bridge
+         ⟹ `⇑(𝓕 N₀.vec)≠0` a.e., feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone.
          **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0` (its amplitude `≠0` somewhere), `8b+8c/8c′` ⟹ `𝓕≠0`
          a.e., feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
          EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness, the full
