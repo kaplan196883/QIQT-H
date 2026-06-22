@@ -979,4 +979,39 @@ theorem norm_kmsFunCut_le_B {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Conti
   rwa [← Real.rpow_add_of_nonneg hBnn (by linarith : (0:ℝ) ≤ 1 - w.re) hwre0,
     show 1 - w.re + w.re = 1 from by ring, Real.rpow_one] at hhad
 
+/-- **Boundedness of `kmsFun` on the open strip** (the frontier, now closed): for interior `z`,
+    `‖kmsFun m f g z‖ ≤ B = √(∫‖Krep g‖²)·√(∫‖Krep f‖²)`. The `R→∞` transfer of `norm_kmsFunCut_le_B`:
+    `kmsFunCut n z → kmsFun z` by `tendsto_setIntegral_of_monotone` (`⋃ₙ [−n,n] = ℝ`), and `‖kmsFunCut n z‖ ≤ B`
+    for all `n` passes to the limit. -/
+theorem norm_kmsFun_le_B {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hfL : MemLp (Krep m f) 2 volume) (hgL : MemLp (Krep m g) 2 volume)
+    {z : ℂ} (hz0 : -1 < z.im) (hz1 : z.im < 0) :
+    ‖kmsFun m f g z‖
+      ≤ Real.sqrt (∫ θ, ‖Krep m g θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m f θ‖ ^ 2) := by
+  have hint := integrable_kmsIntegrand hm hf hfc hg hgc hδ hδ hmf hmg hz0 hz1
+  have hmono : Monotone (fun n : ℕ => Set.Icc (-(n : ℝ)) (n : ℝ)) := by
+    intro a b hab
+    exact Set.Icc_subset_Icc (neg_le_neg (by exact_mod_cast hab)) (by exact_mod_cast hab)
+  have hunion : ⋃ n : ℕ, Set.Icc (-(n : ℝ)) (n : ℝ) = Set.univ := by
+    rw [Set.eq_univ_iff_forall]
+    intro θ
+    obtain ⟨n, hn⟩ := exists_nat_ge |θ|
+    exact Set.mem_iUnion.mpr ⟨n, Set.mem_Icc.mpr (abs_le.mp hn)⟩
+  have hconv : Filter.Tendsto (fun n : ℕ => kmsFunCut m f g (n : ℝ) z)
+      Filter.atTop (nhds (kmsFun m f g z)) := by
+    have h := tendsto_setIntegral_of_monotone (μ := volume) (f := fun θ : ℝ =>
+        (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+          * KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z))
+      (fun _ : ℕ => measurableSet_Icc) hmono (by rw [hunion]; exact hint.integrableOn)
+    rw [hunion, MeasureTheory.setIntegral_univ] at h
+    exact h
+  have hbnd : ∀ n : ℕ, ‖kmsFunCut m f g (n : ℝ) z‖
+      ≤ Real.sqrt (∫ θ, ‖Krep m g θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m f θ‖ ^ 2) := fun n =>
+    norm_kmsFunCut_le_B hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL (by positivity) hz0.le hz1.le
+  exact le_of_tendsto hconv.norm (Filter.Eventually.of_forall hbnd)
+
 end QIQTH.Fock.BoostKMS
