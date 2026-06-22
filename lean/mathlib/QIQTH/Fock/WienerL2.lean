@@ -502,4 +502,57 @@ theorem integrable_ftKrep (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) {ζ :
     _ = C * Real.exp (-(2 - 2 * Real.pi * |ζ.im|) * |θ|) := by
         rw [mul_left_comm, ← Real.exp_add]; congr 2; ring
 
+/-- **Wiener brick 8b — the FT of `Krep` is holomorphic on the strip.**  At every `ζ₀` with `|Im ζ₀| < 1/π`,
+    `F(ζ) = ∫ exp(−2π i θ ζ)·Krep(θ) dθ` is complex-differentiable, with derivative `∫ ftKrep'`.  Via the
+    dominated-derivative theorem (`hasDerivAt_integral_of_dominated_loc_of_deriv_le`, `𝕜 = ℂ`): the integrand
+    is pointwise `ζ`-holomorphic (`hasDerivAt_ftKrep`), `L¹` at `ζ₀` (`integrable_ftKrep`), and its derivative is
+    dominated on a ball by `2πC·|θ|·exp(−d|θ|) ∈ L¹` (`integrable_abs_mul_exp_neg_mul_abs`). -/
+theorem hasDerivAt_ftKrepF (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) {ζ₀ : ℂ}
+    (hζ₀ : |ζ₀.im| < 1 / Real.pi) :
+    HasDerivAt (ftKrepF m (⇑f)) (∫ θ, ftKrep' m (⇑f) ζ₀ θ) ζ₀ := by
+  obtain ⟨C, hCnn, hC⟩ := norm_Krep_le_exp f hm
+  obtain ⟨r, hr0, hr⟩ : ∃ r : ℝ, 0 < r ∧ |ζ₀.im| + r < 1 / Real.pi :=
+    ⟨(1 / Real.pi - |ζ₀.im|) / 2, by
+      have : 0 < 1 / Real.pi - |ζ₀.im| := by linarith
+      linarith, by linarith⟩
+  have hKrepc : Continuous (Krep m (⇑f)) := Krep_continuous f.integrable
+  have hdpos : 0 < 2 - 2 * Real.pi * (|ζ₀.im| + r) := by
+    have h1 : Real.pi * (|ζ₀.im| + r) < 1 := by
+      rw [lt_div_iff₀ Real.pi_pos] at hr; linarith [mul_comm (|ζ₀.im| + r) Real.pi]
+    linarith
+  have hbound : ∀ᵐ θ ∂(volume : Measure ℝ), ∀ ζ ∈ Metric.ball ζ₀ r,
+      ‖ftKrep' m (⇑f) ζ θ‖
+        ≤ 2 * Real.pi * C * (|θ| * Real.exp (-(2 - 2 * Real.pi * (|ζ₀.im| + r)) * |θ|)) := by
+    refine Filter.Eventually.of_forall fun θ ζ hζ => ?_
+    have hd2 : ‖ζ - ζ₀‖ < r := by rw [← dist_eq_norm]; exact Metric.mem_ball.mp hζ
+    have him : |ζ.im| ≤ |ζ₀.im| + r := by
+      have h1 : |ζ.im - ζ₀.im| ≤ ‖ζ - ζ₀‖ := by
+        rw [← Complex.sub_im]; exact Complex.abs_im_le_norm _
+      have h2 := abs_sub_abs_le_abs_sub ζ.im ζ₀.im
+      linarith
+    have hexp : 2 * Real.pi * θ * ζ.im ≤ 2 * Real.pi * (|ζ₀.im| + r) * |θ| := by
+      nlinarith [le_abs_self (θ * ζ.im), abs_mul θ ζ.im, Real.pi_pos, him, abs_nonneg θ,
+        mul_le_mul_of_nonneg_left him (abs_nonneg θ)]
+    rw [norm_ftKrep']
+    calc 2 * Real.pi * |θ| * Real.exp (2 * Real.pi * θ * ζ.im) * ‖Krep m (⇑f) θ‖
+        ≤ 2 * Real.pi * |θ| * Real.exp (2 * Real.pi * (|ζ₀.im| + r) * |θ|)
+            * (C * Real.exp (-2 * |θ|)) :=
+          mul_le_mul (by gcongr) (hC θ) (norm_nonneg _) (by positivity)
+      _ = 2 * Real.pi * C * (|θ| * Real.exp (-(2 - 2 * Real.pi * (|ζ₀.im| + r)) * |θ|)) := by
+          have hprod : Real.exp (2 * Real.pi * (|ζ₀.im| + r) * |θ|) * Real.exp (-2 * |θ|)
+              = Real.exp (-(2 - 2 * Real.pi * (|ζ₀.im| + r)) * |θ|) := by
+            rw [← Real.exp_add]; congr 1; ring
+          rw [← hprod]; ring
+  exact (hasDerivAt_integral_of_dominated_loc_of_deriv_le (μ := (volume : Measure ℝ)) (𝕜 := ℂ)
+    (F := fun ζ θ => ftKrep m (⇑f) ζ θ) (F' := fun ζ θ => ftKrep' m (⇑f) ζ θ)
+    (bound := fun θ => 2 * Real.pi * C
+      * (|θ| * Real.exp (-(2 - 2 * Real.pi * (|ζ₀.im| + r)) * |θ|)))
+    (Metric.ball_mem_nhds ζ₀ hr0)
+    (Filter.Eventually.of_forall fun ζ => (continuous_ftKrep m hKrepc ζ).aestronglyMeasurable)
+    (integrable_ftKrep f hm hζ₀)
+    (continuous_ftKrep' m hKrepc ζ₀).aestronglyMeasurable
+    hbound
+    ((integrable_abs_mul_exp_neg_mul_abs hdpos).const_mul (2 * Real.pi * C))
+    (Filter.Eventually.of_forall fun θ ζ _ => hasDerivAt_ftKrep m (⇑f) θ ζ)).2
+
 end QIQTH.Fock.WienerL2
