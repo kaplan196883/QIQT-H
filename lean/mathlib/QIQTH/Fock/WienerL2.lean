@@ -451,4 +451,55 @@ theorem norm_ftKrep' (m : ℝ) (f : V → ℂ) (ζ : ℂ) (θ : ℝ) :
     norm_mul, Complex.norm_I, mul_one, Complex.norm_real, Real.norm_eq_abs,
     abs_mul, abs_mul, abs_of_pos Real.pi_pos, abs_neg, abs_two]
 
+/-- The norm of the integrand itself. -/
+theorem norm_ftKrep (m : ℝ) (f : V → ℂ) (ζ : ℂ) (θ : ℝ) :
+    ‖ftKrep m f ζ θ‖ = Real.exp (2 * Real.pi * θ * ζ.im) * ‖Krep m f θ‖ := by
+  unfold ftKrep
+  rw [norm_mul, Complex.norm_exp, ftKrep_exp_re]
+
+/-- The decay constant for `Krep`, factored: `‖Krep m f θ‖ ≤ C·exp(−2|θ|)` for some `C ≥ 0`. -/
+theorem norm_Krep_le_exp (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ θ : ℝ, ‖Krep m (⇑f) θ‖ ≤ C * Real.exp (-2 * |θ|) := by
+  refine ⟨4 * (16 * Real.pi ^ 2 * ((∫ v, ‖(⇑f) v‖) + (∫ v, ‖iteratedFDeriv ℝ 1 (⇑f) v‖)
+      + (∫ v, ‖iteratedFDeriv ℝ 2 (⇑f) v‖)) / (Real.sqrt 2 * m ^ 2)), by positivity, fun θ => ?_⟩
+  calc ‖Krep m (⇑f) θ‖
+      ≤ 16 * Real.pi ^ 2 * ((∫ v, ‖(⇑f) v‖) + (∫ v, ‖iteratedFDeriv ℝ 1 (⇑f) v‖)
+          + (∫ v, ‖iteratedFDeriv ℝ 2 (⇑f) v‖)) / (Real.sqrt 2 * m ^ 2)
+          * (Real.cosh θ ^ 2)⁻¹ := schwartz_Krep_decay_sq f hm θ
+    _ ≤ 16 * Real.pi ^ 2 * ((∫ v, ‖(⇑f) v‖) + (∫ v, ‖iteratedFDeriv ℝ 1 (⇑f) v‖)
+          + (∫ v, ‖iteratedFDeriv ℝ 2 (⇑f) v‖)) / (Real.sqrt 2 * m ^ 2)
+          * (4 * Real.exp (-2 * |θ|)) := by gcongr; exact inv_cosh_sq_le_exp θ
+    _ = _ := by ring
+
+theorem continuous_ftKrep (m : ℝ) {f : V → ℂ} (hf : Continuous (Krep m f)) (ζ : ℂ) :
+    Continuous (fun θ : ℝ => ftKrep m f ζ θ) :=
+  (Complex.continuous_exp.comp (by fun_prop)).mul hf
+
+theorem continuous_ftKrep' (m : ℝ) {f : V → ℂ} (hf : Continuous (Krep m f)) (ζ : ℂ) :
+    Continuous (fun θ : ℝ => ftKrep' m f ζ θ) :=
+  (((by fun_prop : Continuous fun θ : ℝ => -2 * (Real.pi : ℂ) * Complex.I * (θ : ℂ)).mul
+    (Complex.continuous_exp.comp (by fun_prop))).mul hf)
+
+/-- The integrand is integrable at any strip point `|Im ζ| < 1/π`. -/
+theorem integrable_ftKrep (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) {ζ : ℂ}
+    (hζ : |ζ.im| < 1 / Real.pi) :
+    Integrable (fun θ => ftKrep m (⇑f) ζ θ) volume := by
+  obtain ⟨C, hCnn, hC⟩ := norm_Krep_le_exp f hm
+  have hdpos : 0 < 2 - 2 * Real.pi * |ζ.im| := by
+    have h1 : Real.pi * |ζ.im| < 1 := by
+      rw [lt_div_iff₀ Real.pi_pos] at hζ; linarith [mul_comm |ζ.im| Real.pi]
+    linarith
+  refine Integrable.mono' (g := fun θ => C * Real.exp (-(2 - 2 * Real.pi * |ζ.im|) * |θ|))
+    ((integrable_exp_neg_mul_abs hdpos).const_mul C)
+    (continuous_ftKrep m (Krep_continuous f.integrable) ζ).aestronglyMeasurable ?_
+  filter_upwards with θ
+  rw [norm_ftKrep]
+  have hθζ : 2 * Real.pi * θ * ζ.im ≤ 2 * Real.pi * |ζ.im| * |θ| := by
+    nlinarith [le_abs_self (θ * ζ.im), abs_mul θ ζ.im, Real.pi_pos, abs_nonneg θ, abs_nonneg ζ.im]
+  calc Real.exp (2 * Real.pi * θ * ζ.im) * ‖Krep m (⇑f) θ‖
+      ≤ Real.exp (2 * Real.pi * |ζ.im| * |θ|) * (C * Real.exp (-2 * |θ|)) :=
+        mul_le_mul (Real.exp_le_exp.mpr hθζ) (hC θ) (norm_nonneg _) (Real.exp_nonneg _)
+    _ = C * Real.exp (-(2 - 2 * Real.pi * |ζ.im|) * |θ|) := by
+        rw [mul_left_comm, ← Real.exp_add]; congr 2; ring
+
 end QIQTH.Fock.WienerL2
