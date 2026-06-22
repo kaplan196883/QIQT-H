@@ -573,4 +573,27 @@ theorem analyticOnNhd_ftKrepF_real (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠
     positivity
   exact (hana _ hmem).restrictScalars.comp (Complex.ofRealCLM.analyticAt ξ)
 
+/-- **Wiener brick 8b-bridge (function FT) — `F` restricts to the function Fourier transform of `Krep`.**
+    `ftKrepF m f ξ = 𝓕(Krep m f) ξ` for real `ξ` (matching the character `exp(−2πiθξ) = 𝐞(−⟨θ,ξ⟩)`,
+    `Real.fourier_eq`/`Real.fourierChar_apply`).  With `analyticOnNhd_ftKrepF_real` this gives
+    `AnalyticOnNhd ℝ (𝓕 Krep) univ`. -/
+theorem ftKrepF_eq_fourier (m : ℝ) (f : V → ℂ) (ξ : ℝ) :
+    ftKrepF m f (ξ : ℂ) = 𝓕 (Krep m f) ξ := by
+  rw [ftKrepF, Real.fourier_eq']
+  refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
+  simp only [ftKrep, smul_eq_mul]
+  congr 1
+  congr 1
+  simp only [Real.inner_apply]
+  push_cast; ring
+
+/-- **The function Fourier transform of `Krep` is real-analytic on `ℝ`** (combining `ftKrepF_eq_fourier`
+    with `analyticOnNhd_ftKrepF_real`).  Combined with `≢ 0`, brick 8c yields `𝓕(Krep) ≠ 0` a.e. -/
+theorem analyticOnNhd_fourier_Krep (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) :
+    AnalyticOnNhd ℝ (fun ξ : ℝ => 𝓕 (Krep m (⇑f)) ξ) Set.univ := by
+  have heq : (fun ξ : ℝ => 𝓕 (Krep m (⇑f)) ξ) = fun ξ : ℝ => ftKrepF m (⇑f) (ξ : ℂ) := by
+    funext ξ; exact (ftKrepF_eq_fourier m (⇑f) ξ).symm
+  rw [heq]
+  exact analyticOnNhd_ftKrepF_real f hm
+
 end QIQTH.Fock.WienerL2
