@@ -334,13 +334,23 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
      discharged with a genuine KMS witness — that `−2π` was the *labelled/expected* sign, and the construction shows
      the discharge runs at `+2π`. (Reflection `f↦conj∘f∘conj` does NOT convert: it always introduces a stray `conj`
      or lands on the WRONG strip — consistent with the at-most-one-sign fact, not a fixable mechanical gap.)
-   - **CONCRETE DISCHARGE PATH (`+2π`, nice core):** write `oneParticleBW_niceWedge` (mirror of
-     `oneParticleBW_wedge_complete` with `hcarrier : S.toClosedSubmodule = closure(niceWedgeGenSet m)` and
-     `hVboost : V t x = boostUnitary(2πt) x`), proved via `oneParticleBW_of_stripKMSrvd_density` with
-     `hKMS := stripKMSrvd_boostUnitary` (rewritten by `hcarrier`). `hdense` is generic (`rvdSqrtR_range_dense_in_K`).
-     NEEDS: `boostUnitary_mapsTo_niceWedgeGenSet` (boost preserves nice: margin/compact-supp/real under `boostTest`)
-     ⟹ `hInv` for the nice-core carrier. Then `modUnitary S t = boostUnitary(2πt)` is axiom-free for the nice-core
-     wedge standard subspace — the labelled `hKMS` discharged at the correct (constructed) sign.
+   - **★★★★★ DISCHARGED (2026-06-23, `e95622e`) — `oneParticleBW_niceWedge`, axiom-free.** For a standard
+     subspace `S` with `hcarrier : S.toClosedSubmodule = closure(niceWedgeGenSet m)` and `hVboost : V t =
+     boostUnitary(2πt)`: `modUnitary S t = V t`. EVERY labelled analytic input discharged:
+       • `hKMS` ← `stripKMSrvd_boostUnitary` (machine-checked RvD Def 3.4 KMS), • `hInv` ←
+       `boostUnitary_mapsTo_niceWedgeGenSet` (`NiceTest.boost` + lightcone scaling, `56b3de0`) + `Set.MapsTo.closure`,
+       • contraction-group structure ← boost group laws, all fed to `oneParticleBW_complete` (RvD Thm 3.8 discharge).
+     This is `oneParticleBW_wedge_complete` with the labelled KMS hypothesis ELIMINATED. Full QIQTH green (8677 jobs);
+     budget 0.
+   - **REMAINING (honest boundary — NOT the labelled KMS anymore):**
+     (a) **`S`-construction**: `oneParticleBW_niceWedge` still takes `S : StandardSubspace` + `hcarrier` as a
+         hypothesis (as did `oneParticleBW_wedge_complete`). To make it unconditional, CONSTRUCT a `StandardSubspace`
+         whose `toClosedSubmodule = closure(niceWedgeGenSet m)` — i.e. prove the nice-core span is separating +
+         cyclic (Reeh–Schlieder-type). Structural, orthogonal to the KMS analytics.
+     (b) **`−2π` convention reconciliation**: the codebase's `oneParticleBW_wedge_complete` uses `−2π` + broad
+         `wedgeGenSet`; my discharge uses `+2π` + nice core. Per the sign finding, only `+2π` is KMS-satisfiable,
+         so the `−2π` form is the labelled/expected convention. An honest audit of `boostUnitary`/`modUnitary`/
+         `rvdRC` sign conventions is needed to state whether they coincide — flagged, NOT guessed.
      **★ Lightcone scaling WORKED OUT (ready to implement):** `lorentzBoost a` scales the lightcone coords by
      `(z₁−z₀) ↦ e^{−a}(z₁−z₀)` and `(z₁+z₀) ↦ e^{a}(z₁+z₀)` [from `lorentzBoost_one/zero` + `cosh a ∓ sinh a =
      e^{∓a}`]. So `boostTest(−a) f x = f(lorentzBoost(−a) x)`: if `≠0` then `f`'s margin `δ` at `y=lorentzBoost(−a)x`
