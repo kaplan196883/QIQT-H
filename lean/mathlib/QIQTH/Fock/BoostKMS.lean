@@ -1819,4 +1819,41 @@ noncomputable def kmsBCF {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuo
       rw [Set.mem_preimage, Set.mem_Icc] at hz
       exact norm_kmsFun_le_norm_mul hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL hz.1 hz.2)
 
+open scoped BoundedContinuousFunction in
+@[simp] theorem kmsBCF_apply {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hfL : MemLp (Krep m f) 2 volume) (hgL : MemLp (Krep m g) 2 volume)
+    (z : Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0) :
+    kmsBCF hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL z = kmsFun m f g (z : ℂ) := rfl
+
+open scoped BoundedContinuousFunction in
+/-- **(c2) BCF Cauchy-control step**: `dist (kmsBCF f₁ g₁) (kmsBCF f₂ g₂) ≤ ` the difference bound. Via
+    `BoundedContinuousFunction.dist_le` + the pointwise `norm_kmsFun_sub_le`. (Common margin `δ`.) -/
+theorem dist_kmsBCF_le {m : ℝ} (hm : 0 < m) {f₁ f₂ g₁ g₂ : V → ℂ}
+    (hf₁ : Continuous f₁) (hf₁c : HasCompactSupport f₁) (hf₂ : Continuous f₂) (hf₂c : HasCompactSupport f₂)
+    (hg₁ : Continuous g₁) (hg₁c : HasCompactSupport g₁) (hg₂ : Continuous g₂) (hg₂c : HasCompactSupport g₂)
+    {δ : ℝ} (hδ : 0 < δ)
+    (hmf₁ : ∀ x, f₁ x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmf₂ : ∀ x, f₂ x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg₁ : ∀ x, g₁ x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg₂ : ∀ x, g₂ x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hf₁r : ∀ x, (starRingEnd ℂ) (f₁ x) = f₁ x) (hf₂r : ∀ x, (starRingEnd ℂ) (f₂ x) = f₂ x)
+    (hg₁r : ∀ x, (starRingEnd ℂ) (g₁ x) = g₁ x) (hg₂r : ∀ x, (starRingEnd ℂ) (g₂ x) = g₂ x)
+    (hf₁L : MemLp (Krep m f₁) 2 volume) (hf₂L : MemLp (Krep m f₂) 2 volume)
+    (hg₁L : MemLp (Krep m g₁) 2 volume) (hg₂L : MemLp (Krep m g₂) 2 volume) :
+    dist (kmsBCF hm hf₁ hf₁c hg₁ hg₁c hδ hmf₁ hmg₁ hf₁r hg₁r hf₁L hg₁L)
+        (kmsBCF hm hf₂ hf₂c hg₂ hg₂c hδ hmf₂ hmg₂ hf₂r hg₂r hf₂L hg₂L)
+      ≤ 2 * ‖hg₁L.toLp (Krep m g₁)‖ * ‖hf₁L.toLp (Krep m f₁) - hf₂L.toLp (Krep m f₂)‖
+        + 2 * ‖hg₁L.toLp (Krep m g₁) - hg₂L.toLp (Krep m g₂)‖ * ‖hf₂L.toLp (Krep m f₂)‖ := by
+  rw [BoundedContinuousFunction.dist_le (by positivity)]
+  intro z
+  have hz := z.2
+  rw [Set.mem_preimage, Set.mem_Icc] at hz
+  rw [kmsBCF_apply, kmsBCF_apply, Complex.dist_eq]
+  exact norm_kmsFun_sub_le hm hf₁ hf₁c hf₂ hf₂c hg₁ hg₁c hg₂ hg₂c hδ hmf₁ hmf₂ hmg₁ hmg₂
+    hf₁r hf₂r hg₁r hg₂r hf₁L hf₂L hg₁L hg₂L hz.1 hz.2
+
 end QIQTH.Fock.BoostKMS
