@@ -2427,6 +2427,36 @@ theorem niceWedge_isCyclic_of_total_integral (m : ℝ)
   niceWedge_isCyclic_of_total m fun h hh =>
     htotal h fun N => (inner_KrepL2_general m N.memLp h).symm.trans (hh N)
 
+open QIQTH.StandardSubspaceModular in
+/-- **`v ∈ K.mulI ⟹ I • v ∈ K`**: the `mulI` membership direction, via `mem_mapEquiv_iff` + `I⁻¹ = -I` + the
+    real-subspace closure (`I•v = (-1)•((-I)•v)`).  Uses the unambiguous ℂ `scalarSMulCLE` — NO ℝ-instance
+    tangle (unlike the `ᗮ` route).  The engine for the DIRECT separating reduction. -/
+theorem closedSubmodule_smul_I_mem_of_mem_mulI
+    {K : ClosedSubmodule ℝ (Lp ℂ 2 (volume : Measure ℝ))} {v : Lp ℂ 2 (volume : Measure ℝ)}
+    (hvmI : v ∈ K.mulI) : Complex.I • v ∈ K := by
+  rw [ClosedSubmodule.mem_mapEquiv_iff (scalarSMulCLE _ Complex.UnitI), scalarSMulCLE_symm_apply,
+    Units.smul_def, Units.val_inv_eq_inv_val, show (↑Complex.UnitI : ℂ) = Complex.I from rfl,
+    Complex.inv_I] at hvmI
+  have he : Complex.I • v = (-1 : ℝ) • ((-Complex.I) • v) := by rw [neg_one_smul, neg_smul, neg_neg]
+  rw [he]; exact K.smul_mem _ hvmI
+
+open QIQTH.StandardSubspaceModular in
+/-- **★ The separating frontier in DIRECT form** (sidestepping the `ᗮ` instance tangle): the nice-core wedge
+    subspace is SEPARATING (`hsep`) as soon as it contains NO nonzero complex line — the only `v` with both
+    `v ∈ K` and `I • v ∈ K` is `v = 0`.  Via `mem_inf` + `closedSubmodule_smul_I_mem_of_mem_mulI`, all on the
+    unambiguous ℂ `mulI` (no orthogonal complement, no ℝ-inner-product diamond).  For the free field this is the
+    non-degeneracy of the one-particle symplectic form (Pauli–Jordan) — the dual analytic Reeh–Schlieder input. -/
+theorem niceWedge_isSeparating_of_no_complex_line (m : ℝ)
+    (hsep0 : ∀ v : Lp ℂ 2 (volume : Measure ℝ), v ∈ niceWedgeClosedSubmodule m →
+      Complex.I • v ∈ niceWedgeClosedSubmodule m → v = 0) :
+    niceWedgeClosedSubmodule m ⊓ (niceWedgeClosedSubmodule m).mulI = ⊥ := by
+  rw [eq_bot_iff]
+  intro v hv
+  rw [ClosedSubmodule.mem_inf] at hv
+  obtain ⟨hvK, hvmI⟩ := hv
+  have hv0 : v = 0 := hsep0 v hvK (closedSubmodule_smul_I_mem_of_mem_mulI hvmI)
+  rw [hv0]; exact Submodule.zero_mem _
+
 open scoped BoundedContinuousFunction in
 /-- **★★★ (c3+c4) The RvD Def 3.4 KMS witness extended to the CLOSURE of the nice generators**, axiom-free.
     For `ξ, η ∈ closure (niceWedgeGenSet m)` there is a bounded function `F`, holomorphic on the open strip and
@@ -2658,5 +2688,30 @@ theorem oneParticleBW_niceWedge_of_total_integral {m : ℝ} (hm : 0 < m)
       (∀ N : NiceTest m, ∫ θ, (starRingEnd ℂ) (Krep m N.f θ) * (h : ℝ → ℂ) θ = 0) → h = 0) :
     ∀ t, modUnitary (niceWedgeStandardSubspace m hsep (niceWedge_isCyclic_of_total_integral m htotal)) t = V t :=
   oneParticleBW_niceWedge_of_standard hm V hVboost hsep (niceWedge_isCyclic_of_total_integral m htotal)
+
+open QIQTH.StandardSubspaceModular in
+/-- **★★★★★ THE free-field one-particle Bisognano–Wichmann, reduced to its TWO analytic Reeh–Schlieder inputs.**
+    `modUnitary S t = boostUnitary(2πt)` for the nice-core wedge standard subspace, given ONLY:
+    • **separating** (`hsep0`): no nonzero complex line — the only `v` with `v ∈ K` and `I•v ∈ K` is `v = 0`
+      (the one-particle symplectic non-degeneracy / Pauli–Jordan); and
+    • **cyclic** (`htotal`): wedge-totality — the only `h` with `∫ conj(Krep m f θ)·h(θ) dθ = 0` for every nice
+      wedge `f` is `h = 0` (Paley–Wiener / edge-of-the-wedge).
+    NO lattice, NO instance, NO labelled-KMS hypotheses remain: every structural step (the KMS condition, the
+    `𝒦`-invariance, the boost group, the standard-subspace construction, BOTH Reeh–Schlieder lattice reductions)
+    is machine-checked and axiom-free.  The entire free-field one-particle BW now rests on exactly these two
+    concrete analytic statements about the localized rapidity amplitudes — the genuine, irreducible physics. -/
+theorem oneParticleBW_niceWedge_reehSchlieder {m : ℝ} (hm : 0 < m)
+    (V : ℝ → (Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ)))
+    (hVboost : ∀ t x, V t x = boostUnitary (2 * Real.pi * t) x)
+    (hsep0 : ∀ v : Lp ℂ 2 (volume : Measure ℝ), v ∈ niceWedgeClosedSubmodule m →
+      Complex.I • v ∈ niceWedgeClosedSubmodule m → v = 0)
+    (htotal : ∀ h : Lp ℂ 2 (volume : Measure ℝ),
+      (∀ N : NiceTest m, ∫ θ, (starRingEnd ℂ) (Krep m N.f θ) * (h : ℝ → ℂ) θ = 0) → h = 0) :
+    ∀ t, modUnitary (niceWedgeStandardSubspace m
+      (niceWedge_isSeparating_of_no_complex_line m hsep0)
+      (niceWedge_isCyclic_of_total_integral m htotal)) t = V t :=
+  oneParticleBW_niceWedge_of_standard hm V hVboost
+    (niceWedge_isSeparating_of_no_complex_line m hsep0)
+    (niceWedge_isCyclic_of_total_integral m htotal)
 
 end QIQTH.Fock.BoostKMS
