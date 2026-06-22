@@ -241,11 +241,13 @@ margin lemma is DONE (`b98dc63`).
        (function + derivative) now complete.**
        Reflection-factor derivative `deriv_reflKrepCont_eq` (`ccada4e`) + the integrand's `z`-derivative
        `hasDerivAt_kmsIntegrand_z` (`a2a0797`, explicit value via product/chain rule) — the `h_diff` ingredient.
+       `cosh` shift bounds `e^{−|s|}cosh θ ≤ cosh(θ+s) ≤ e^{|s|}cosh θ` (`ea5ef0c`, + `abs_sinh_le_cosh`,
+       `cosh±|sinh|=e^{±|s|}`) — make the shifting-peak decay uniform over a `z`-ball. **All analytic building
+       blocks for the domination are now in hand.**
        **Next:** (i) bound `‖integrand z-derivative‖ ≤` integrable-in-`θ` uniformly over a `z`-ball in the strip
-       interior (combine the four decay bounds — `‖reflKrep‖`,`‖deriv reflKrep‖`,`‖KrepCont f‖`,
-       `‖deriv KrepCont f‖`, with the `conj`-arg `Im` bookkeeping + `c_min>0` from staying interior); (ii) feed
-       `hasDerivAt_integral_of_dominated_loc_of_deriv_le` ⟹ `kmsFun` differentiable on the open strip;
-       (iii) continuity-to-closure ⟹ `DiffContOnCl`; then the boundedness frontier.
+       interior (combine the four decay bounds via the `cosh` shift bounds + `conj`-arg `Im` bookkeeping +
+       `c_min>0` from staying interior); (ii) feed `hasDerivAt_integral_of_dominated_loc_of_deriv_le` ⟹ `kmsFun`
+       differentiable on the open strip; (iii) continuity-to-closure ⟹ `DiffContOnCl`; then the boundedness frontier.
 
 **Honest scale:** discharging `StripKMSrvd` from here is a genuine multi-week-to-month real-analysis +
 Mathlib-infrastructure effort (Minkowski integral inequality is itself a Mathlib-worthy contribution). This is
