@@ -1856,4 +1856,21 @@ theorem dist_kmsBCF_le {m : ℝ} (hm : 0 < m) {f₁ f₂ g₁ g₂ : V → ℂ}
   exact norm_kmsFun_sub_le hm hf₁ hf₁c hf₂ hf₂c hg₁ hg₁c hg₂ hg₂c hδ hmf₁ hmf₂ hmg₁ hmg₂
     hf₁r hf₂r hg₁r hg₂r hf₁L hf₂L hg₁L hg₂L hz.1 hz.2
 
+open scoped BoundedContinuousFunction in
+/-- **`kmsBCF` is independent of the margin `δ`** (the BCF is determined by its coeFn `kmsFun m f g`, which has
+    no `δ`). Lets the closure Cauchy sequence over approximants with shrinking margins `δₙ→0` be compared at a
+    common (minimal) `δ` via `dist_kmsBCF_le`. -/
+theorem kmsBCF_congr {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ δ' : ℝ} (hδ : 0 < δ)
+    (hδ' : 0 < δ')
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmf' : ∀ x, f x ≠ 0 → δ' ≤ x 1 - x 0 ∧ δ' ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg' : ∀ x, g x ≠ 0 → δ' ≤ x 1 - x 0 ∧ δ' ≤ x 1 + x 0)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hfL : MemLp (Krep m f) 2 volume) (hgL : MemLp (Krep m g) 2 volume) :
+    kmsBCF hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL
+      = kmsBCF hm hf hfc hg hgc hδ' hmf' hmg' hfr hgr hfL hgL := by
+  ext z; rw [kmsBCF_apply, kmsBCF_apply]
+
 end QIQTH.Fock.BoostKMS
