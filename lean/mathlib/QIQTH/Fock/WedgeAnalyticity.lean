@@ -663,6 +663,29 @@ theorem norm_KrepCont_le_exp_decay_gen {m : ℝ} (hm : 0 ≤ m) {f : V → ℂ} 
   conv_lhs => rw [← Complex.re_add_im w]
   exact norm_KrepCont_le_exp_decay hm hf hfc hmargin him0 himπ
 
+/-- **Plain `KrepCont` bound on the closed strip** (`0≤Im w≤π`, `f` wedge-supported with `δ≥0`):
+    `‖KrepCont m f w‖ ≤ (1/√2)·∫‖f‖` — the strip-damping factor `exp(−(m sin(Im w)δ)·cosh(Re w)) ≤ 1` since its
+    exponent is `≤ 0` (`sin(Im w)≥0` on `[0,π]`, `m,δ,cosh ≥ 0`). This `Re`-uniform constant bound is what makes
+    the truncated KMS integral trivially bounded on the closed strip (no log-blowup). -/
+theorem norm_KrepCont_le_const {m : ℝ} (hm : 0 ≤ m) {f : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) {δ : ℝ} (hδ : 0 ≤ δ)
+    (hmargin : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    {w : ℂ} (him0 : 0 ≤ w.im) (himπ : w.im ≤ Real.pi) :
+    ‖KrepCont m f w‖ ≤ 1 / Real.sqrt 2 * (∫ x, ‖f x‖) := by
+  refine (norm_KrepCont_le_exp_decay_gen hm hf hfc hmargin him0 himπ).trans ?_
+  have hsin : 0 ≤ Real.sin w.im := Real.sin_nonneg_of_nonneg_of_le_pi him0 himπ
+  have hexp : Real.exp (-(m * Real.sin w.im * δ) * Real.cosh w.re) ≤ 1 := by
+    rw [Real.exp_le_one_iff]
+    have hnn : 0 ≤ m * Real.sin w.im * δ * Real.cosh w.re := by positivity
+    nlinarith [hnn]
+  have hC : 0 ≤ 1 / Real.sqrt 2 * ∫ x, ‖f x‖ := by
+    have : 0 ≤ ∫ x, ‖f x‖ := integral_nonneg (fun x => norm_nonneg _)
+    positivity
+  calc 1 / Real.sqrt 2 * (∫ x, ‖f x‖) * Real.exp (-(m * Real.sin w.im * δ) * Real.cosh w.re)
+      ≤ 1 / Real.sqrt 2 * (∫ x, ‖f x‖) * 1 := by
+        exact mul_le_mul_of_nonneg_left hexp hC
+    _ = 1 / Real.sqrt 2 * (∫ x, ‖f x‖) := mul_one _
+
 /-- **A2 (step 2) — interior-`λ` `L²` membership.** For `m > 0`, wedge-supported `f` (continuous, compact
     support, `tsupport f ⊆` open wedge), and `λ ∈ (0,π)`, the strip slice `θ ↦ KrepCont m f (θ+iλ)` is in
     `L²(dθ)`. Proven by **pointwise domination** `‖KrepCont(θ+iλ)‖ ≤ C·exp(−c·coshθ)`

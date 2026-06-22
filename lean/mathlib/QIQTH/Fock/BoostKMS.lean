@@ -615,4 +615,51 @@ theorem norm_kmsFun_sub_I_le (m t : ℝ) {f g : V → ℂ} (hfr : ∀ x, (starRi
   rw [kmsFun_sub_I m hfr hgr t, RCLike.norm_conj]
   exact norm_kmsFun_ofReal_le m t hf hg hbf
 
+/-- **θ-truncated KMS function** (cutoff `R`): the same integrand as `kmsFun`, but integrated over the compact
+    rapidity window `θ ∈ [−R,R]`. The truncation device (GPT-5.5): the compact θ-domain makes `kmsFunCut R`
+    holomorphic on the open strip, continuous on the closed strip, and trivially BOUNDED there — with **no**
+    logarithmic blow-up — so Hadamard three-lines bounds it by the edge constant `B` for every `R`, and
+    `R→∞` (dominated convergence) transfers the bound to `kmsFun`. -/
+def kmsFunCut (m : ℝ) (f g : V → ℂ) (R : ℝ) (z : ℂ) : ℂ :=
+  ∫ θ in Set.Icc (-R) R, (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+    * KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)
+
+/-- **Trivial closed-strip bound for `kmsFunCut`** (`Im z ∈ [−1,0]`, `R ≥ 0`): `‖kmsFunCut R z‖ ≤ C_g·C_f·2R`
+    with `C_h = (1/√2)∫‖h‖`. Each `KrepCont` factor has argument imaginary part `−π·Im z ∈ [0,π]`, so the plain
+    bound `norm_KrepCont_le_const` applies; integrate the constant `C_g·C_f` over `[−R,R]` (measure `2R`). This
+    is the `BddAbove` Hadamard needs — finite for each `R`, the log-blowup absent. -/
+theorem norm_kmsFunCut_le {m : ℝ} (hm : 0 ≤ m) {f g : V → ℂ} (hf : Continuous f) (hfc : HasCompactSupport f)
+    (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 ≤ δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    {R : ℝ} (hR : 0 ≤ R) {z : ℂ} (hz0 : -1 ≤ z.im) (hz1 : z.im ≤ 0) :
+    ‖kmsFunCut m f g R z‖
+      ≤ (1 / Real.sqrt 2 * ∫ x, ‖g x‖) * (1 / Real.sqrt 2 * ∫ x, ‖f x‖) * (2 * R) := by
+  have him0 : (0 : ℝ) ≤ -(Real.pi * z.im) := by
+    have : 0 ≤ -z.im := by linarith
+    have := Real.pi_pos; nlinarith
+  have himπ : -(Real.pi * z.im) ≤ Real.pi := by
+    have h1 : -z.im ≤ 1 := by linarith
+    nlinarith [Real.pi_pos]
+  -- imaginary parts of the two KrepCont arguments both equal −(π·z.im)
+  have hbound : ∀ θ : ℝ, ‖(starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+        * KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)‖
+      ≤ (1 / Real.sqrt 2 * ∫ x, ‖g x‖) * (1 / Real.sqrt 2 * ∫ x, ‖f x‖) := by
+    intro θ
+    rw [norm_mul, RCLike.norm_conj]
+    have hgim : ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)).im = -(Real.pi * z.im) := by
+      simp only [Complex.conj_im, Complex.add_im, Complex.mul_im, Complex.ofReal_re,
+        Complex.ofReal_im]; ring
+    have hfim : ((θ : ℂ) - (Real.pi : ℂ) * z).im = -(Real.pi * z.im) := by
+      simp only [Complex.sub_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im]; ring
+    refine mul_le_mul ?_ ?_ (norm_nonneg _) ?_
+    · exact norm_KrepCont_le_const hm hg hgc hδ hmg (by rw [hgim]; exact him0) (by rw [hgim]; exact himπ)
+    · exact norm_KrepCont_le_const hm hf hfc hδ hmf (by rw [hfim]; exact him0) (by rw [hfim]; exact himπ)
+    · have : 0 ≤ ∫ x, ‖g x‖ := integral_nonneg (fun x => norm_nonneg _)
+      positivity
+  rw [kmsFunCut]
+  refine (norm_setIntegral_le_of_norm_le_const measure_Icc_lt_top (fun x _ => hbound x)).trans_eq ?_
+  rw [Real.volume_real_Icc_of_le (by linarith : (-R : ℝ) ≤ R)]
+  ring
+
 end QIQTH.Fock.BoostKMS
