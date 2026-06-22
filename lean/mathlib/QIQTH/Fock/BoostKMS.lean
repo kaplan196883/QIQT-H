@@ -437,4 +437,78 @@ theorem kmsIntegrand_deriv_bound {m : ℝ} (hmpos : 0 < m) {f g : V → ℂ} (hf
   nlinarith [mul_nonneg Real.pi_pos.le (sub_nonneg.mpr h1),
     mul_nonneg Real.pi_pos.le (sub_nonneg.mpr h2)]
 
+/-- **★★★★★ `kmsFun m f g` is differentiable at every interior strip point** (`−1<Im z₀<0`), for `f,g`
+    continuous with compact support strictly inside the wedge (uniform margin `δ>0`). The holomorphy half of
+    `DiffContOnCl`. Assembles the six dominated-derivative hypotheses (`hF_meas`, `hF_int`, `hF'_meas`,
+    `h_diff`, `h_bound`, `bound_integrable` — all proven) over a strip-interior ball (with `σ_min` from
+    `exists_sin_min`, `R` from the ball). -/
+theorem kmsFun_differentiableAt {m : ℝ} (hmpos : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    {z₀ : ℂ} (hz₀0 : -1 < z₀.im) (hz₀1 : z₀.im < 0) :
+    DifferentiableAt ℂ (kmsFun m f g) z₀ := by
+  set ε : ℝ := min (z₀.im + 1) (-z₀.im) / 2 with hεdef
+  have hε : 0 < ε := by rw [hεdef]; have := lt_min (by linarith : (0:ℝ) < z₀.im + 1) (by linarith : (0:ℝ) < -z₀.im); linarith
+  have hdist : ∀ z ∈ Metric.closedBall z₀ ε, |z.im - z₀.im| ≤ ε ∧ |z.re - z₀.re| ≤ ε := by
+    intro z hz
+    rw [Metric.mem_closedBall, Complex.dist_eq] at hz
+    refine ⟨?_, ?_⟩
+    · calc |z.im - z₀.im| = |(z - z₀).im| := by rw [Complex.sub_im]
+        _ ≤ ‖z - z₀‖ := Complex.abs_im_le_norm _
+        _ ≤ ε := hz
+    · calc |z.re - z₀.re| = |(z - z₀).re| := by rw [Complex.sub_re]
+        _ ≤ ‖z - z₀‖ := Complex.abs_re_le_norm _
+        _ ≤ ε := hz
+  have hball_im : ∀ z ∈ Metric.closedBall z₀ ε, -1 < z.im ∧ z.im < 0 := by
+    intro z hz
+    obtain ⟨him, _⟩ := hdist z hz
+    rw [abs_le] at him
+    constructor <;> [nlinarith [min_le_left (z₀.im + 1) (-z₀.im)]; nlinarith [min_le_right (z₀.im + 1) (-z₀.im)]]
+  obtain ⟨σmin, hσmin, hσ⟩ := exists_sin_min hε hball_im
+  set R : ℝ := |z₀.re| + ε with hRdef
+  have hR : ∀ z ∈ Metric.closedBall z₀ ε, |z.re| ≤ R := by
+    intro z hz
+    obtain ⟨_, hre⟩ := hdist z hz
+    rw [hRdef]; rw [abs_le] at hre; cases abs_cases z.re <;> cases abs_cases z₀.re <;> linarith
+  have hballmem : ∀ z ∈ Metric.ball z₀ ε, z ∈ Metric.closedBall z₀ ε := fun z hz =>
+    Metric.ball_subset_closedBall hz
+  have hκ : 0 < m * σmin * δ * Real.exp (-(Real.pi * R)) := by positivity
+  have hbi : Integrable (fun θ : ℝ => Real.pi
+      * ((1 / Real.sqrt 2 * (|m| * ∫ x, (|x 0| + |x 1|) * ‖g x‖) * (1 / Real.sqrt 2 * ∫ x, ‖f x‖)
+          + 1 / Real.sqrt 2 * (|m| * ∫ x, (|x 0| + |x 1|) * ‖f x‖) * (1 / Real.sqrt 2 * ∫ x, ‖g x‖))
+        * (Real.exp (Real.pi * R) * Real.cosh θ
+          * Real.exp (-(m * σmin * δ * Real.exp (-(Real.pi * R)) * Real.cosh θ))))) := by
+    have heq : (fun θ : ℝ => Real.pi
+        * ((1 / Real.sqrt 2 * (|m| * ∫ x, (|x 0| + |x 1|) * ‖g x‖) * (1 / Real.sqrt 2 * ∫ x, ‖f x‖)
+            + 1 / Real.sqrt 2 * (|m| * ∫ x, (|x 0| + |x 1|) * ‖f x‖) * (1 / Real.sqrt 2 * ∫ x, ‖g x‖))
+          * (Real.exp (Real.pi * R) * Real.cosh θ
+            * Real.exp (-(m * σmin * δ * Real.exp (-(Real.pi * R)) * Real.cosh θ)))))
+        = fun θ : ℝ => (Real.pi
+            * (1 / Real.sqrt 2 * (|m| * ∫ x, (|x 0| + |x 1|) * ‖g x‖) * (1 / Real.sqrt 2 * ∫ x, ‖f x‖)
+              + 1 / Real.sqrt 2 * (|m| * ∫ x, (|x 0| + |x 1|) * ‖f x‖) * (1 / Real.sqrt 2 * ∫ x, ‖g x‖))
+            * Real.exp (Real.pi * R))
+          * (Real.cosh θ
+            * Real.exp (-(m * σmin * δ * Real.exp (-(Real.pi * R)) * Real.cosh θ))) := by funext θ; ring
+    rw [heq]
+    exact (integrable_cosh_mul_exp_neg_const_mul_cosh hκ).const_mul _
+  have key := hasDerivAt_integral_of_dominated_loc_of_deriv_le (μ := (volume : Measure ℝ))
+    (F := fun z θ => (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+        * KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z))
+    (F' := fun z θ => deriv (fun u => (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) u)))
+          ((θ : ℂ) + (Real.pi : ℂ) * z) * (Real.pi : ℂ) * KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)
+        + (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+          * (deriv (KrepCont m f) ((θ : ℂ) - (Real.pi : ℂ) * z) * (-(Real.pi : ℂ))))
+    (bound := _) (s := Metric.ball z₀ ε) (x₀ := z₀) (Metric.ball_mem_nhds z₀ hε)
+    (Filter.Eventually.of_forall fun z =>
+      (continuous_kmsIntegrand_in_theta m hf hfc hg hgc z).aestronglyMeasurable)
+    (integrable_kmsIntegrand hmpos hf hfc hg hgc hδ hδ hmf hmg hz₀0 hz₀1)
+    (continuous_kmsIntegrand_deriv_in_theta m hf hfc hg hgc z₀).aestronglyMeasurable
+    (Filter.Eventually.of_forall fun θ z hz =>
+      kmsIntegrand_deriv_bound hmpos hf hfc hg hgc hδ hmf hmg (hball_im z (hballmem z hz)).1
+        (hball_im z (hballmem z hz)).2 hσmin (hσ z (hballmem z hz)) (hR z (hballmem z hz)) θ)
+    hbi
+    (Filter.Eventually.of_forall fun θ z _ => hasDerivAt_kmsIntegrand_z m hf hfc hg hgc θ z)
+  exact key.2.differentiableAt
+
 end QIQTH.Fock.BoostKMS
