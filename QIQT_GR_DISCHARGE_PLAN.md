@@ -558,14 +558,20 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          2^{−1/2}π·exp(−m²cosh2θ/4)` — the prototype showing super-exp decay).
          **(8c) BUILT** (`c661b6c`): `ae_ne_zero_of_analyticOnNhd` — `F` analytic on `ℝ` ∧ `≢0` ⟹ `∀ᵐ x, F x≠0` (zero
          set co-discrete `→` null, via `eqOn_zero_or_eventually_ne_zero_of_preconnected`+`ae_restrict_le_codiscreteWithin`).
-         The FT-nonvanishing FINISHER.  NEXT: **(8a)** the super-exponential decay bound `|Krep m (bumpC) θ|≤C_N e^{−N|θ|}`
-         (from `f̂_M` Schwartz on the shell — `schwartz_Krep` bounds + `massShell` growth); **(8b)** `𝓕(Krep m f₀)`
-         entire/real-analytic from 8a (FT-analyticity under exponential weights); **(8d)** assemble: concrete `bumpC`
-         witness with `Krep≠0` (a.e.-nonzero amplitude → `≢0`), `8b+8c` give `𝓕≠0` a.e., feed
+         **(8c′) BUILT** (`27b2e70`): `ae_ne_zero_of_differentiable` — `Differentiable ℂ F` (entire) ∧ `(∃x:ℝ,F↑x≠0)`
+         ⟹ `∀ᵐ x, F↑x≠0`.  Restriction of an entire fn to `ℝ` is real-analytic (`DifferentiableOn.analyticOnNhd` +
+         `AnalyticAt.restrictScalars`/`.comp` with `Complex.ofRealCLM.analyticAt`) → 8c.  The FT-nonvanishing TAIL is now
+         fully assembled: an entire FT that's `≢0` gives the Wiener hypothesis directly.
+         NEXT: **(8a)** super-exponential decay `|Krep m (bumpC) θ|≤C_N e^{−N|θ|}` (from `f̂_M` Schwartz on the shell —
+         relate `minkowskiFourier` to the standard FT `f̂_E(p⁰,−p¹)`, use FT-of-Schwartz-is-Schwartz + `massShell ~e^{|θ|}`
+         growth; NOTE the codebase's `norm_KrepCont_le_*` bounds use the CRUDE `|kernel|≤1` so give only boundedness on
+         the real axis — the finer Schwartz decay is NEW work); **(8b)** `𝓕(Krep m f₀)` entire from 8a (FT holomorphic on
+         every strip via differentiation-under-integral, since all exponential moments finite); **(8d)** assemble: a
+         concrete `bumpC` witness with `Krep≢0` (its amplitude `≠0` somewhere), `8b+8c′` ⟹ `𝓕≠0` a.e., feed
          `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
          EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness, the full
-         Tauberian theorem, the `NiceWedgeCyclic` wiring, the a.e.-nonzero finisher) is DONE; brick 8 reduced to the
-         decay bound + FT-analyticity (standard real analysis) on the existing `bumpC` witness.
+         Tauberian theorem, the `NiceWedgeCyclic` wiring, BOTH a.e.-nonzero finishers 8c/8c′) is DONE; brick 8 reduced to
+         the real-axis decay bound 8a + FT-holomorphy 8b (standard real analysis) on the existing `bumpC` witness.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
