@@ -113,6 +113,14 @@ The single analytic engine: **`p(θ+iπ) = −p(θ)`** (since `cosh(θ+iπ)=−c
 ### Phasing (each an axiom-free green checkpoint)
 
 - **A1.** `massShellℂ`, holomorphy of the continued wavefunction on `S_π`, the wedge-damping sign bound.
+  - **A1a DONE** (commit `7fb8b7a`, `QIQTH/Fock/WedgeAnalyticity.lean`): `minkowskiDotℂ`, `massShellℂ`,
+    `KrepCont`; `KrepCont_ofReal` (real-axis agreement); `massShellℂ_add_pi_I` (the `iπ`-shift
+    `p_m(ζ+iπ)=−p_m(ζ)`). Axiom-free, budget 0.
+  - **A1b NEXT:** holomorphy of `ζ ↦ KrepCont m f ζ` (for a suitable analytic class of `f` — start with
+    compactly-supported smooth real wedge functions, for which the integral is over a bounded set ⟹ entire;
+    use `hasDerivAt_integral_of_dominated_loc_of_deriv_le` over `ℂ`, MellinTransform.lean as template).
+  - **A1c:** the wedge-damping bound `‖exp(−i·p_m(θ+iλ)·x)‖ = exp(m sinλ(sinhθ x₀ − coshθ x₁)) ≤ 1` on
+    `rightWedge`, `0≤λ≤π` (A0 sign computation, now to be Lean-ified).
 - **A2.** Uniform `H²(S_π)` strip bounds.
 - **A3.** Boundary conjugation `ψ_f(θ+iπ)=conj(ψ_f(θ))`; define `K_Hardy`, prove `wedgeGenSet ⊆ K_Hardy`,
   closedness ⟹ `𝒦_W ⊆ K_Hardy`.
