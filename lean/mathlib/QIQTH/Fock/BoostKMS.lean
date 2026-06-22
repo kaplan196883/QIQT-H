@@ -129,6 +129,18 @@ theorem differentiable_reflKrepCont (m : ℝ) {g : V → ℂ} (hg : Continuous g
   rw [Complex.conj_conj] at h
   exact h
 
+/-- The derivative of the reflected amplitude: `deriv(u ↦ conj(KrepCont g(conj u))) u
+    = conj(deriv(KrepCont g)(conj u))` (Schwarz reflection, `HasDerivAt.conj_conj`). -/
+theorem deriv_reflKrepCont_eq (m : ℝ) {g : V → ℂ} (hg : Continuous g) (hgc : HasCompactSupport g)
+    (u : ℂ) :
+    deriv (fun u => (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) u))) u
+      = (starRingEnd ℂ) (deriv (KrepCont m g) ((starRingEnd ℂ) u)) := by
+  have hd : HasDerivAt (KrepCont m g) (deriv (KrepCont m g) ((starRingEnd ℂ) u)) ((starRingEnd ℂ) u) :=
+    (differentiable_KrepCont m hg hgc ((starRingEnd ℂ) u)).hasDerivAt
+  have h := hd.conj_conj
+  rw [Complex.conj_conj] at h
+  exact h.deriv
+
 /-- **The `kmsFun` integrand is entire in `z`** (for `f,g` continuous with compact support). The `g`-factor
     `conj(KrepCont g(conj(θ+πz)))` = `differentiable_reflKrepCont ∘ (affine)`, the `f`-factor `KrepCont f(θ−πz)`
     = `differentiable_KrepCont ∘ (affine)`; the product is differentiable. This is the per-`θ` (`h_diff`)
