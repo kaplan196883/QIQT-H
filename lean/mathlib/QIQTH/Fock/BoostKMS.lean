@@ -8,6 +8,7 @@
 -/
 import QIQTH.Fock.OneParticleBW
 import QIQTH.Fock.WedgeAnalyticity
+import Mathlib.Analysis.Complex.LocallyUniformLimit
 
 noncomputable section
 
@@ -2094,5 +2095,116 @@ theorem niceWedgeGenSet_add_mem {m : ℝ} {ξ η : Lp ℂ 2 (volume : Measure �
   obtain ⟨N₁, rfl⟩ := hξ
   obtain ⟨N₂, rfl⟩ := hη
   exact ⟨N₁.add N₂, N₁.vec_add N₂⟩
+
+open scoped BoundedContinuousFunction in
+/-- **★★★ (c3+c4) The RvD Def 3.4 KMS witness extended to the CLOSURE of the nice generators**, axiom-free.
+    For `ξ, η ∈ closure (niceWedgeGenSet m)` there is a bounded function `F`, holomorphic on the open strip and
+    continuous to its closure, with the boost-KMS boundary values `F(t) = ⟪η, V(2πt) ξ⟫`, `F(t−i) = ⟪V(2πt) ξ, η⟫`.
+    Construction: pick nice approximants `Nₙ.vec → ξ`, `Mₙ.vec → η`; their witness BCFs `(Nₙ).bcf (Mₙ)` form a
+    Cauchy sequence (`bcf_cauchySeq`) with limit `b` in the complete space `closedStrip →ᵇ ℂ`; `F := dite`-extend
+    `b` by `0` off the strip.  Holomorphy on the open strip is the Weierstrass theorem
+    (`TendstoLocallyUniformlyOn.differentiableOn`: each `kmsFun` is holomorphic and they converge locally
+    uniformly); continuity to the closure is `b.continuous`; the boundary values pass to the limit via the edge
+    identities (`bcf_apply_eq_top`/`_bot`) and `Filter.Tendsto.inner`.  This is the `StripKMSrvd` witness for the
+    whole wedge subspace — the last analytic step of the free-field Bisognano–Wichmann KMS condition. -/
+theorem stripKMSrvd_closure {m : ℝ} (hm : 0 < m) {ξ η : Lp ℂ 2 (volume : Measure ℝ)}
+    (hξ : ξ ∈ closure (niceWedgeGenSet m)) (hη : η ∈ closure (niceWedgeGenSet m)) :
+    ∃ F : ℂ → ℂ, DiffContOnCl ℂ F (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) ∧
+      (∃ C : ℝ, ∀ z : ℂ, ‖F z‖ ≤ C) ∧
+      (∀ t : ℝ, F (t : ℂ) = inner ℂ η (boostUnitary (2 * Real.pi * t) ξ)) ∧
+      (∀ t : ℝ, F ((t : ℂ) - Complex.I) = inner ℂ (boostUnitary (2 * Real.pi * t) ξ) η) := by
+  classical
+  -- nice approximating sequences
+  obtain ⟨xN, hxNmem, hxN⟩ := mem_closure_iff_seq_limit.mp hξ
+  obtain ⟨xM, hxMmem, hxM⟩ := mem_closure_iff_seq_limit.mp hη
+  choose N hN using fun n => mem_niceWedgeGenSet.mp (hxNmem n)
+  choose M hM using fun n => mem_niceWedgeGenSet.mp (hxMmem n)
+  have hNlim : Filter.Tendsto (fun n => (N n).vec) Filter.atTop (nhds ξ) := by
+    have he : (fun n => (N n).vec) = xN := funext hN
+    rw [he]; exact hxN
+  have hMlim : Filter.Tendsto (fun n => (M n).vec) Filter.atTop (nhds η) := by
+    have he : (fun n => (M n).vec) = xM := funext hM
+    rw [he]; exact hxM
+  -- strip sets named BEFORE `b` is obtained, so `b`'s domain type is never rewritten (keeps `b` stable)
+  set S : Set ℂ := Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0 with hSdef
+  set U : Set ℂ := Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0 with hUdef
+  -- limit BCF in the complete space closedStrip →ᵇ ℂ
+  obtain ⟨b, hb⟩ := cauchySeq_tendsto_of_complete (NiceTest.bcf_cauchySeq hm hNlim hMlim)
+  -- the witness: `b` on the closed strip, `0` off it
+  obtain ⟨F, hFdef⟩ : ∃ F : ℂ → ℂ, ∀ z, F z = if h : z ∈ S then b ⟨z, h⟩ else 0 :=
+    ⟨_, fun _ => rfl⟩
+  have hUsubS : U ⊆ S := fun z hz => by
+    rw [hUdef, Set.mem_preimage, Set.mem_Ioo] at hz
+    rw [hSdef, Set.mem_preimage, Set.mem_Icc]; exact ⟨hz.1.le, hz.2.le⟩
+  have hcl : closure U ⊆ S := by
+    have h := Complex.continuous_im.closure_preimage_subset (Set.Ioo (-1 : ℝ) 0)
+    rw [hUdef]; rw [closure_Ioo (by norm_num : (-1 : ℝ) ≠ 0)] at h; exact h
+  have hUopen : IsOpen U := by rw [hUdef]; exact isOpen_Ioo.preimage Complex.continuous_im
+  -- F = b on S (restriction)
+  have hFrestrict : S.restrict F = ⇑b := by
+    funext x; rw [Set.restrict_apply, hFdef]; simp only [dif_pos x.2, Subtype.coe_eta]
+  have hFcoe : F ∘ ((↑) : S → ℂ) = ⇑b := by
+    funext x; rw [Function.comp_apply, hFdef]; simp only [dif_pos x.2, Subtype.coe_eta]
+  -- uniform convergence of the underlying kmsFun functions on S
+  have hbu := BoundedContinuousFunction.tendsto_iff_tendstoUniformly.mp hb
+  have hkms : (fun n (x : S) => kmsFun m (N n).f (M n).f (x : ℂ))
+      = (fun n => ⇑((N n).bcf hm (M n))) := by
+    funext n x; rw [NiceTest.bcf, kmsBCF_apply]
+  have htuOn : TendstoUniformlyOn (fun n z => kmsFun m (N n).f (M n).f z) F Filter.atTop S := by
+    rw [tendstoUniformlyOn_iff_tendstoUniformly_comp_coe, hFcoe, hkms]; exact hbu
+  have hlu : TendstoLocallyUniformlyOn (fun n z => kmsFun m (N n).f (M n).f z) F Filter.atTop U :=
+    htuOn.tendstoLocallyUniformlyOn.mono hUsubS
+  -- holomorphy on the open strip (Weierstrass) + continuity to the closure
+  have hdiff : DifferentiableOn ℂ F U := by
+    refine _root_.TendstoLocallyUniformlyOn.differentiableOn hlu
+      (Filter.Eventually.of_forall fun n => ?_) hUopen
+    exact kmsFun_differentiableOn hm (N n).cont (N n).cpt (M n).cont (M n).cpt
+      (lt_min (N n).hδ (M n).hδ) ((N n).margin_le (min_le_left _ _))
+      ((M n).margin_le (min_le_right _ _))
+  have hcont : ContinuousOn F (closure U) := by
+    refine ContinuousOn.mono ?_ hcl
+    rw [continuousOn_iff_continuous_restrict, hFrestrict]; exact b.continuous
+  refine ⟨F, ⟨hdiff, hcont⟩, ⟨‖b‖, fun z => ?_⟩, fun t => ?_, fun t => ?_⟩
+  · -- global bound ‖b‖
+    by_cases h : z ∈ S
+    · rw [hFdef]; simp only [dif_pos h]; exact b.norm_coe_le_norm _
+    · rw [hFdef]; simp only [dif_neg h, norm_zero]; exact norm_nonneg _
+  · -- top boundary value
+    have htmem : (t : ℂ) ∈ S := by
+      rw [hSdef, Set.mem_preimage, Set.mem_Icc, Complex.ofReal_im]; exact ⟨by norm_num, by norm_num⟩
+    have hpt : Filter.Tendsto (fun n => (N n).bcf hm (M n) ⟨(t : ℂ), htmem⟩) Filter.atTop
+        (nhds (b ⟨(t : ℂ), htmem⟩)) := hbu.tendsto_at _
+    have hpt' : Filter.Tendsto
+        (fun n => inner ℂ (M n).vec (boostUnitary (2 * Real.pi * t) (N n).vec)) Filter.atTop
+        (nhds (b ⟨(t : ℂ), htmem⟩)) := by
+      refine hpt.congr (fun n => ?_)
+      exact NiceTest.bcf_apply_eq_top hm (N n) (M n) t ⟨(t : ℂ), htmem⟩ rfl
+    have hV : Filter.Tendsto (fun n => boostUnitary (2 * Real.pi * t) (N n).vec) Filter.atTop
+        (nhds (boostUnitary (2 * Real.pi * t) ξ)) :=
+      ((boostUnitary (2 * Real.pi * t)).continuous.continuousAt).tendsto.comp hNlim
+    have hlim : Filter.Tendsto
+        (fun n => inner ℂ (M n).vec (boostUnitary (2 * Real.pi * t) (N n).vec)) Filter.atTop
+        (nhds (inner ℂ η (boostUnitary (2 * Real.pi * t) ξ))) := hMlim.inner hV
+    rw [hFdef]; simp only [dif_pos htmem]
+    exact tendsto_nhds_unique hpt' hlim
+  · -- bottom boundary value
+    have hbmem : (t : ℂ) - Complex.I ∈ S := by
+      rw [hSdef, Set.mem_preimage, Set.mem_Icc, Complex.sub_im, Complex.ofReal_im, Complex.I_im]
+      exact ⟨by norm_num, by norm_num⟩
+    have hpt : Filter.Tendsto (fun n => (N n).bcf hm (M n) ⟨(t : ℂ) - Complex.I, hbmem⟩) Filter.atTop
+        (nhds (b ⟨(t : ℂ) - Complex.I, hbmem⟩)) := hbu.tendsto_at _
+    have hpt' : Filter.Tendsto
+        (fun n => inner ℂ (boostUnitary (2 * Real.pi * t) (N n).vec) (M n).vec) Filter.atTop
+        (nhds (b ⟨(t : ℂ) - Complex.I, hbmem⟩)) := by
+      refine hpt.congr (fun n => ?_)
+      exact NiceTest.bcf_apply_eq_bot hm (N n) (M n) t ⟨(t : ℂ) - Complex.I, hbmem⟩ rfl
+    have hV : Filter.Tendsto (fun n => boostUnitary (2 * Real.pi * t) (N n).vec) Filter.atTop
+        (nhds (boostUnitary (2 * Real.pi * t) ξ)) :=
+      ((boostUnitary (2 * Real.pi * t)).continuous.continuousAt).tendsto.comp hNlim
+    have hlim : Filter.Tendsto
+        (fun n => inner ℂ (boostUnitary (2 * Real.pi * t) (N n).vec) (M n).vec) Filter.atTop
+        (nhds (inner ℂ (boostUnitary (2 * Real.pi * t) ξ) η)) := hV.inner hMlim
+    rw [hFdef]; simp only [dif_pos hbmem]
+    exact tendsto_nhds_unique hpt' hlim
 
 end QIQTH.Fock.BoostKMS
