@@ -1342,4 +1342,61 @@ theorem norm_kmsFunCut_diff_le {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Co
   · exact norm_kmsFunCut_le hm.le hf hfc hg hgc hδ.le hmf hmg (by linarith) hz'.1 hz'.2
   · exact norm_kmsFunCut_le hm.le hf hfc hg hgc hδ.le hmf hmg hR hz'.1 hz'.2
 
+/-- **The `kmsFun` integrand is integrable at every CLOSED-strip `z`** (`−1≤Im z≤0`). Both slices are `L²`
+    via `memLp_KrepCont_affine_closed` (arg `Im = −π·Im z ∈ [0,π]`, including the edges), so the product is
+    integrable by AM-GM and the integrand by `integrable_norm_iff`. This is the per-`z` input that makes
+    `kmsFunCut n z → kmsFun z` hold up to the boundary. -/
+theorem integrable_kmsFun_integrand_closed {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hfL : MemLp (Krep m f) 2 volume) (hgL : MemLp (Krep m g) 2 volume)
+    {z : ℂ} (hz0 : -1 ≤ z.im) (hz1 : z.im ≤ 0) :
+    Integrable (fun θ : ℝ =>
+      (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+        * KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)) volume := by
+  have him0 : (0 : ℝ) ≤ Real.pi * (-z.im) := by
+    have : 0 ≤ -z.im := by linarith
+    have := Real.pi_pos; positivity
+  have himπ : Real.pi * (-z.im) ≤ Real.pi := by
+    have h1 : -z.im ≤ 1 := by linarith
+    nlinarith [Real.pi_pos]
+  have hgim : ((Real.pi : ℂ) * (starRingEnd ℂ z)).im = Real.pi * (-z.im) := by
+    simp only [Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, Complex.conj_im]; ring
+  have hfim : (-((Real.pi : ℂ) * z)).im = Real.pi * (-z.im) := by
+    simp only [Complex.neg_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im]; ring
+  have hMemG : MemLp (fun θ : ℝ =>
+      KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z))) 2 volume := by
+    have hfun : (fun θ : ℝ => KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+        = fun θ : ℝ => KrepCont m g ((θ : ℂ) + (Real.pi : ℂ) * (starRingEnd ℂ z)) := by
+      funext θ; congr 1; rw [map_add, map_mul, Complex.conj_ofReal, Complex.conj_ofReal]
+    rw [hfun]
+    exact memLp_KrepCont_affine_closed hm hg hgc hδ hmg hgr hgL
+      (by rw [hgim]; exact him0) (by rw [hgim]; exact himπ)
+  have hMemF : MemLp (fun θ : ℝ => KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)) 2 volume := by
+    have hfun : (fun θ : ℝ => KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z))
+        = fun θ : ℝ => KrepCont m f ((θ : ℂ) + (-((Real.pi : ℂ) * z))) := by
+      funext θ; rw [sub_eq_add_neg]
+    rw [hfun]
+    exact memLp_KrepCont_affine_closed hm hf hfc hδ hmf hfr hfL
+      (by rw [hfim]; exact him0) (by rw [hfim]; exact himπ)
+  have hAsq : Integrable (fun θ : ℝ =>
+      ‖KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z))‖ ^ 2) volume :=
+    (memLp_two_iff_integrable_sq hMemG.norm.aestronglyMeasurable).mp hMemG.norm
+  have hBsq : Integrable (fun θ : ℝ => ‖KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)‖ ^ 2) volume :=
+    (memLp_two_iff_integrable_sq hMemF.norm.aestronglyMeasurable).mp hMemF.norm
+  have haesm : AEStronglyMeasurable (fun θ : ℝ =>
+      (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+        * KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)) volume :=
+    (Complex.continuous_conj.comp_aestronglyMeasurable hMemG.aestronglyMeasurable).mul
+      hMemF.aestronglyMeasurable
+  rw [← integrable_norm_iff haesm]
+  refine Integrable.mono' (hAsq.add hBsq) haesm.norm (Filter.Eventually.of_forall fun θ => ?_)
+  simp only [Pi.add_apply, norm_norm, norm_mul, RCLike.norm_conj]
+  nlinarith [sq_nonneg (‖KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z))‖
+      - ‖KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)‖),
+    norm_nonneg (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z))),
+    norm_nonneg (KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z))]
+
 end QIQTH.Fock.BoostKMS

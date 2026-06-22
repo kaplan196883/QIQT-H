@@ -754,4 +754,40 @@ theorem memLp_KrepCont_affine {m : ℝ} (hm : 0 < m) {f : V → ℂ} (hf : Conti
   simp only [Complex.add_im, Complex.add_re, Complex.ofReal_im, Complex.ofReal_re, zero_add] at hb
   rwa [← hCdef] at hb
 
+/-- **Affine-argument `L²` membership on the CLOSED strip** `Im c₀ ∈ [0,π]`. Extends `memLp_KrepCont_affine`
+    to the two boundary heights: at `Im c₀ = 0` the slice is a real-axis translate `Krep m f(·+Re c₀)`
+    (`KrepCont_ofReal`), at `Im c₀ = π` it is the conjugate `conj(Krep m f(·+Re c₀))` (`KrepCont_add_pi_I`,
+    `MemLp.star`) — both in `L²` via the `MemLp (Krep m f) 2` hypothesis; the interior is `memLp_KrepCont_affine`.
+    This supplies the edge `L²` slices needed to integrate the `kmsFun` integrand up to the boundary. -/
+theorem memLp_KrepCont_affine_closed {m : ℝ} (hm : 0 < m) {f : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) {δ : ℝ} (hδ : 0 < δ)
+    (hmargin : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hfL : MemLp (Krep m f) 2 volume)
+    {c₀ : ℂ} (hc0 : 0 ≤ c₀.im) (hc0π : c₀.im ≤ Real.pi) :
+    MemLp (fun θ : ℝ => KrepCont m f ((θ : ℂ) + c₀)) 2 volume := by
+  rcases eq_or_lt_of_le hc0 with heq0 | hlt0
+  · have hfun : (fun θ : ℝ => KrepCont m f ((θ : ℂ) + c₀)) = fun θ : ℝ => Krep m f (θ + c₀.re) := by
+      funext θ
+      have harg : (θ : ℂ) + c₀ = ((θ + c₀.re : ℝ) : ℂ) := by
+        apply Complex.ext <;> simp [← heq0]
+      rw [harg, KrepCont_ofReal]
+    rw [hfun]
+    simpa [Function.comp_def] using
+      hfL.comp_measurePreserving (measurePreserving_add_right volume c₀.re)
+  · rcases eq_or_lt_of_le hc0π with heqπ | hltπ
+    · have hfun : (fun θ : ℝ => KrepCont m f ((θ : ℂ) + c₀))
+          = fun θ : ℝ => (starRingEnd ℂ) (Krep m f (θ + c₀.re)) := by
+        funext θ
+        have harg : (θ : ℂ) + c₀ = ((θ + c₀.re : ℝ) : ℂ) + (Real.pi : ℂ) * Complex.I := by
+          apply Complex.ext <;>
+            simp [heqπ, Complex.add_im, Complex.mul_im, Complex.I_im, Complex.I_re,
+              Complex.ofReal_im, Complex.ofReal_re]
+        rw [harg, KrepCont_add_pi_I m hfr]
+      rw [hfun]
+      have hT : MemLp (fun θ : ℝ => Krep m f (θ + c₀.re)) 2 volume := by
+        simpa [Function.comp_def] using
+          hfL.comp_measurePreserving (measurePreserving_add_right volume c₀.re)
+      exact hT.star
+    · exact memLp_KrepCont_affine hm hf hfc hδ hmargin hlt0 hltπ
+
 end QIQTH.Fock.WedgeAnalyticity
