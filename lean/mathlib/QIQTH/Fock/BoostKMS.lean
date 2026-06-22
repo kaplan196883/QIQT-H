@@ -414,4 +414,27 @@ theorem norm_term2_le {m : ℝ} (hmpos : 0 < m) {f g : V → ℂ} (hf : Continuo
   · rw [abs_neg, abs_mul, abs_of_nonneg Real.pi_pos.le]; nlinarith [hR, Real.pi_pos, abs_nonneg z.re]
   · nlinarith [mul_le_mul_of_nonneg_left hσ (mul_pos hmpos hδ).le, hδ, hmpos]
 
+/-- **The `h_bound` pointwise content**: `‖F'(z,θ)‖ ≤ π·(Cdg·Cf + Cdf·Cg)·(e^{πR}·cosh θ·exp(−κ·cosh θ))`,
+    `κ = m σmin δ e^{−πR}` — a `z`-independent (for the ball) integrable-in-`θ` bound on the integrand
+    `z`-derivative. Combines `norm_two_term_le` + `norm_term1_le` + `norm_term2_le`. -/
+theorem kmsIntegrand_deriv_bound {m : ℝ} (hmpos : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    {z : ℂ} (hz0 : -1 < z.im) (hz1 : z.im < 0) {σmin R : ℝ} (hσmin : 0 < σmin)
+    (hσ : σmin ≤ Real.sin (-(Real.pi * z.im))) (hR : |z.re| ≤ R) (θ : ℝ) :
+    ‖deriv (fun u => (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) u))) ((θ : ℂ) + (Real.pi : ℂ) * z)
+          * (Real.pi : ℂ) * KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)
+        + (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+          * (deriv (KrepCont m f) ((θ : ℂ) - (Real.pi : ℂ) * z) * (-(Real.pi : ℂ)))‖
+      ≤ Real.pi * ((1 / Real.sqrt 2 * (|m| * ∫ x, (|x 0| + |x 1|) * ‖g x‖) * (1 / Real.sqrt 2 * ∫ x, ‖f x‖)
+            + 1 / Real.sqrt 2 * (|m| * ∫ x, (|x 0| + |x 1|) * ‖f x‖) * (1 / Real.sqrt 2 * ∫ x, ‖g x‖))
+          * (Real.exp (Real.pi * R) * Real.cosh θ
+            * Real.exp (-(m * σmin * δ * Real.exp (-(Real.pi * R)) * Real.cosh θ)))) := by
+  refine (norm_two_term_le _ _ _ _).trans ?_
+  have h1 := norm_term1_le hmpos hf hfc hg hgc hδ hmf hmg hz0 hz1 hσmin hσ hR θ
+  have h2 := norm_term2_le hmpos hf hfc hg hgc hδ hmf hmg hz0 hz1 hσmin hσ hR θ
+  nlinarith [mul_nonneg Real.pi_pos.le (sub_nonneg.mpr h1),
+    mul_nonneg Real.pi_pos.le (sub_nonneg.mpr h2)]
+
 end QIQTH.Fock.BoostKMS
