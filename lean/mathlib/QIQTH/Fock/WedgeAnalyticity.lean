@@ -431,6 +431,28 @@ theorem abs_le_cosh (θ : ℝ) : |θ| ≤ Real.cosh θ := by
   have h2 : 2 * |θ| ≤ Real.exp |θ| := Real.two_mul_le_exp
   linarith
 
+/-- **The shifted `cosh·exp` made uniform.** For `|s| ≤ S`, `0 < c₀ ≤ c`:
+    `cosh(θ+s)·exp(−c·cosh(θ+s)) ≤ e^S·cosh θ·exp(−c₀·e^{−S}·cosh θ)`. The core estimate that turns the
+    shifting-peak strip decay (`s = πRe z` over a `z`-ball) into a `z`-uniform integrable-in-`θ` bound. -/
+theorem cosh_shift_exp_le {θ s c c₀ S : ℝ} (hS : |s| ≤ S) (hc₀ : 0 < c₀) (hcc : c₀ ≤ c) :
+    Real.cosh (θ + s) * Real.exp (-(c * Real.cosh (θ + s)))
+      ≤ Real.exp S * Real.cosh θ * Real.exp (-(c₀ * Real.exp (-S) * Real.cosh θ)) := by
+  have hupper : Real.cosh (θ + s) ≤ Real.exp S * Real.cosh θ :=
+    (cosh_add_le_exp_abs_mul θ s).trans
+      (mul_le_mul_of_nonneg_right (Real.exp_le_exp.mpr hS) (Real.cosh_pos θ).le)
+  have he' : Real.exp (-S) * Real.cosh θ ≤ Real.cosh (θ + s) :=
+    (mul_le_mul_of_nonneg_right (Real.exp_le_exp.mpr (by linarith : (-S : ℝ) ≤ -|s|))
+      (Real.cosh_pos θ).le).trans (exp_neg_abs_mul_le_cosh_add θ s)
+  have h1 : c₀ * Real.exp (-S) * Real.cosh θ ≤ c * Real.cosh (θ + s) :=
+    calc c₀ * Real.exp (-S) * Real.cosh θ = c₀ * (Real.exp (-S) * Real.cosh θ) := by ring
+      _ ≤ c₀ * Real.cosh (θ + s) := mul_le_mul_of_nonneg_left he' hc₀.le
+      _ ≤ c * Real.cosh (θ + s) := mul_le_mul_of_nonneg_right hcc (Real.cosh_pos _).le
+  have hexp : Real.exp (-(c * Real.cosh (θ + s)))
+      ≤ Real.exp (-(c₀ * Real.exp (-S) * Real.cosh θ)) := Real.exp_le_exp.mpr (by linarith)
+  calc Real.cosh (θ + s) * Real.exp (-(c * Real.cosh (θ + s)))
+      ≤ Real.exp S * Real.cosh θ * Real.exp (-(c₀ * Real.exp (-S) * Real.cosh θ)) :=
+        mul_le_mul hupper hexp (Real.exp_pos _).le (by positivity)
+
 /-- **A2 (derivative-decay building block).** `s ↦ cosh s·exp(−c·cosh s)` is integrable over `ℝ` for `c > 0`.
     The integrand-derivative bound (`‖kernelDeriv‖ ≲ cosh(s)·exp(−c·cosh s)`, the `cosh` polynomial factor
     against the double-exponential damping) reduces to this. Via `cosh s ≤ (1/c)·exp((c/2)cosh s)`
