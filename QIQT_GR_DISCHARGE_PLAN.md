@@ -547,11 +547,25 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          = the integral, `inner_KrepL2_general`) ⟹[brick 7] `h=0`.  Feeds the banked capstone
          `oneParticleBW_niceWedge_reehSchlieder`.  Bricks 1–7 + wiring BUILT axiom-free.
          **THE ENTIRE CYCLIC REEH–SCHLIEDER INPUT NOW RESTS ON THE SINGLE CONCRETE FACT `∃ N₀, 𝓕(N₀.vec)≠0` a.e.**
-         NEXT — only **(8)**: exhibit ONE concrete nice generator `f₀` (a wedge-supported bump/Gaussian-type real test)
-         and show its one-particle amplitude `𝓕(Krep m f₀)≠0` a.e.  Then `niceWedgeCyclic_of_fourier_ne_zero` ⟹
-         `NiceWedgeCyclic m` ⟹ the capstone discharges cyclic Reeh–Schlieder unconditionally (modulo the parallel
-         separating side).  EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction,
-         L¹-uniqueness, the full Tauberian theorem, the `NiceWedgeCyclic` wiring) is DONE.
+         **★★★ KEY INSIGHT (2026-06-23): brick 8 is TRACTABLE, NOT irreducible hard analysis.**  A wedge bump `f₀`
+         (compact support) has Minkowski-FT `f̂_M` Schwartz (rapid decay), and the mass-shell coordinate
+         `massShell m θ=(m coshθ,m sinhθ)` grows like `e^{|θ|}`, so `Krep m f₀ θ=(1/√2)f̂_M(massShell m θ)` decays
+         FASTER THAN ANY EXPONENTIAL (`|Krep θ|≤C_N e^{−N|θ|}` ∀N) ⟹ its Fourier transform is **ENTIRE** ⟹ (if `≢0`)
+         zeros are isolated ⟹ `≠0` a.e.  So `𝓕(N₀.vec)≠0` a.e. holds for a wedge bump — no edge-of-the-wedge / no
+         special-function computation.  Existing codebase support (`LocalizedWitness.lean`): `bumpC` (wedge bumps,
+         `bumpC_hasCompactSupport`/`_real`/`_contDiff`), `schwartz_Krep_memLp` (the `MemLp` field is AUTOMATIC for
+         smooth compact-support `f`), `Krep_gaussian_eq` (explicit Gaussian amplitude `Krep m gaussianTest θ=
+         2^{−1/2}π·exp(−m²cosh2θ/4)` — the prototype showing super-exp decay).
+         **(8c) BUILT** (`c661b6c`): `ae_ne_zero_of_analyticOnNhd` — `F` analytic on `ℝ` ∧ `≢0` ⟹ `∀ᵐ x, F x≠0` (zero
+         set co-discrete `→` null, via `eqOn_zero_or_eventually_ne_zero_of_preconnected`+`ae_restrict_le_codiscreteWithin`).
+         The FT-nonvanishing FINISHER.  NEXT: **(8a)** the super-exponential decay bound `|Krep m (bumpC) θ|≤C_N e^{−N|θ|}`
+         (from `f̂_M` Schwartz on the shell — `schwartz_Krep` bounds + `massShell` growth); **(8b)** `𝓕(Krep m f₀)`
+         entire/real-analytic from 8a (FT-analyticity under exponential weights); **(8d)** assemble: concrete `bumpC`
+         witness with `Krep≠0` (a.e.-nonzero amplitude → `≢0`), `8b+8c` give `𝓕≠0` a.e., feed
+         `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
+         EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness, the full
+         Tauberian theorem, the `NiceWedgeCyclic` wiring, the a.e.-nonzero finisher) is DONE; brick 8 reduced to the
+         decay bound + FT-analyticity (standard real analysis) on the existing `bumpC` witness.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
