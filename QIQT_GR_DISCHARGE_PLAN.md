@@ -578,12 +578,18 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          **(8b-prep) BUILT** (`2d1e6ae`): `integrable_abs_mul_exp_neg_mul_abs` (`|θ|·exp(−d|θ|)∈L¹`, `d>0`) — the
          derivative-domination block: the `ζ`-derivative of the complexified integrand `exp(−2πiζθ)·Krep(θ)` has norm
          `2π|θ|e^{2π Im ζ·θ}‖Krep‖ ≤ C|θ|e^{−(2−2π|Im ζ|)|θ|}`, integrable on the strip `|Im ζ|<1/π`.
-         NEXT: **(8b)** assemble the strip-holomorphy — define `F(ζ)=∫ exp(−2πiζθ)·Krep(θ)dθ`, apply
-         `hasDerivAt_integral_of_dominated_loc_of_deriv_le` (ℂ-derivative; integrand `ζ`-differentiable a.e., dominated by
-         `C·|θ|·exp(−d|θ|)` via 8b-prep, base `Krep∈L¹` via 8a) ⟹ `DifferentiableOn ℂ F (strip)` ⟹ (restrict to `ℝ`,
-         like `8c′`) `AnalyticOnNhd ℝ (𝓕 Krep) univ`.  (Mathlib has FT *smoothness* not analyticity — this is THE genuine
-         build; the codebase's `hasDerivAt_KrepCont` is a worked ℂ-parametric-derivative template.)  Then **8b-bridge**:
-         the `L²` FT coeFn `⇑(𝓕 N₀.vec)` agrees a.e. with this function FT of `Krep` (L²↔L¹ agreement on `L¹∩L²`).
+         **(8b) BUILT** (`c7fc3aa`) — **THE genuine analytic build, DONE.**  `hasDerivAt_ftKrepF`: at every `ζ₀` with
+         `|Im ζ₀|<1/π`, `F(ζ)=∫ exp(−2πiθζ)·Krep(θ)dθ` is complex-differentiable with derivative `∫ ftKrep'`, via
+         `hasDerivAt_integral_of_dominated_loc_of_deriv_le` (`𝕜=ℂ`).  Supporting (all axiom-free): `ftKrep`/`ftKrep'`/`ftKrepF`
+         (the integrand/derivative/`F`), `hasDerivAt_ftKrep` (pointwise `ζ`-holomorphy), `ftKrep_exp_re`+`norm_ftKrep'`
+         (the norm `2π|θ|exp(2πθ Im ζ)‖Krep‖`), `norm_Krep_le_exp` (factored decay `‖Krep‖≤C exp(−2|θ|)`),
+         `continuous_ftKrep`/`'`, `integrable_ftKrep` (the `hF_int`), and the ball-domination by `2πC|θ|exp(−d|θ|)∈L¹`.
+         Mathlib has FT *smoothness* but NOT analyticity → built from scratch (mirroring `hasDerivAt_KrepCont`).
+         NEXT: **(8b-fin)** restrict `F` to `ℝ` → `AnalyticOnNhd ℝ (fun ξ => F ξ) univ` (the strip `|Im|<1/π` contains
+         `ℝ`; `DifferentiableOn ℂ F strip` → `AnalyticAt ℂ F ↑ξ` → restrict like `8c′`).  **(8b-bridge)** identify
+         `F ξ = 𝓕(Krep) ξ` (real) AND the `L²` FT coeFn `⇑(𝓕 N₀.vec)` agrees a.e. with this function FT of `Krep`
+         (L²↔L¹ agreement on `L¹∩L²`).  **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0`, `8b-fin+8b-bridge+8c`
+         ⟹ `𝓕(N₀.vec)≠0` a.e., feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone.
          **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0` (its amplitude `≠0` somewhere), `8b+8c/8c′` ⟹ `𝓕≠0`
          a.e., feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
          EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness, the full
