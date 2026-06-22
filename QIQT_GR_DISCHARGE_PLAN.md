@@ -208,13 +208,15 @@ margin lemma is DONE (`b98dc63`).
    - **`F` defined + top edge DONE** (`f4f9cb3`): `kmsFun m f g z := ∫ conj(KrepCont g(conj(θ+πz)))·KrepCont
      f(θ−πz)`; `kmsFun_ofReal` (`F(t)=` symmetric integral via `KrepCont_ofReal`); `kmsFun_ofReal_eq_inner`
      (`F(t)=⟪KrepL2 g, boostUnitary(2πt)(KrepL2 f)⟫`). Axiom-free.
-   - **Remaining A4**: (b) the **bottom edge** `F(t−i) = conj(F(t)) = ⟪V_t ξ, η⟫`: at `z=t−i`,
-     `conj(θ+π(t−i)) = (θ+πt)+iπ` and `θ−π(t−i) = (θ−πt)+iπ`, so `KrepCont_add_pi_I` (A3) collapses both
-     `KrepCont` to `conj(Krep …)`, giving `F(t−i)=∫ Krep g(θ+πt)·conj(Krep f(θ−πt)) = conj(F(t))` — needs `f,g`
-     real. (c) `DiffContOnCl` (holomorphy on the open strip — dominated-derivative arg — + continuity to
-     closure) and boundedness (*uniform-to-boundary* `s↦‖Ξ(·+iπs)‖₂` continuity is the one delicate piece;
-     interior `L²` in hand via `memLp_KrepCont_strip`); (d) closedness to `𝒦_W`; then
-     `oneParticleBW_wedge_complete` ⟹ unconditional BW ⟹ remove `hKMS`. The genuine multi-fire finish.
+   - **Bottom edge `F(t−i)=conj(F(t))=⟪V_t ξ,η⟫` DONE** (`f7eb282`): `kmsFun_sub_I` — at `z=t−i` the `iπ`-shift
+     puts both `KrepCont` args at `Im=+π`, `KrepCont_add_pi_I` (A3) collapses each to `conj(Krep…)`. Axiom-free.
+     **★ BOTH KMS EDGES of the witness `F` now machine-checked.**
+   - **Remaining A4**: (c) `DiffContOnCl` — holomorphy of `F` on the open strip (dominated-derivative arg: each
+     factor holomorphic in `z` — `KrepCont` entire, `conj(KrepCont g(conj ·))` holo as anti∘anti, composed with
+     affine — integrate via dominated convergence with interior-`L²` domination) + continuity to closure; and
+     **boundedness** (the *uniform-to-boundary* `s↦‖Ξ(·+iπs)‖₂` continuity on `[0,1]` — the one genuinely
+     delicate analytic piece left). (d) closedness of `StripKMSrvd` to `𝒦_W` (bound continuous in `ξ,η`); then
+     `oneParticleBW_wedge_complete` ⟹ unconditional BW ⟹ remove `hKMS`.
 
 **Honest scale:** discharging `StripKMSrvd` from here is a genuine multi-week-to-month real-analysis +
 Mathlib-infrastructure effort (Minkowski integral inequality is itself a Mathlib-worthy contribution). This is
