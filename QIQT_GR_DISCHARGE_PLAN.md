@@ -250,12 +250,15 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
            full `DiffContOnCl ℂ kmsFun (im⁻¹'Ioo(−1)0)`. **THE ENTIRE ANALYTIC REGULARITY OF THE WITNESS IS DONE,
            AXIOM-FREE, NO HARDY THEORY.**
      (GPT confirmed Vitali/Montel and the L²-slice/Riesz routes are NOT Lean-tractable; this annular route is.)
-   - **REMAINING (witness wiring)**: (a) global bound `∃M ∀z:ℂ, ‖kmsFun z‖≤M` for `stripKMSrvd_pair_of_regularity`'s
-     `hbd` — closed strip `≤ ε_0` (`norm_kmsFun_sub_kmsFunCut_le` at `R=0`, `kmsFunCut 0 z=0`); OUTSIDE the strip
-     `kmsFun z=0` (non-integrable junk) — OR weaken `hbd`/`StripKMSrvd` to a closed-strip bound (non-vacuity rests
-     on the CONTINUITY, not the global bound, per the `OneParticleBW:528` soundness note). (b) feed `kmsFun_diffContOnCl`
-     + the bound into `stripKMSrvd_pair_of_regularity` ⟹ the `StripKMSrvd` `∃F` witness for the wedge pair.
-5. Closedness of `StripKMSrvd` to `𝒦_W` + `2π`↔`−2π` sign mirror + threading ⟹ remove `hKMS`.
+   - **★★★★★ WITNESS WIRING DONE** — `norm_kmsFun_le_closed` (closed-strip bound via `R=0`, `kmsFunCut_zero`);
+     `stripKMSrvd_pair_of_regularity` reworked to use the witness `F := closedStrip.indicator(kmsFun)` (= `kmsFun`
+     on the strip via `DifferentiableOn`/`ContinuousOn.congr`, `0` off-strip ⟹ globally bounded WITHOUT weakening
+     the `StripKMSrvd` predicate — RvD Def 3.4 only constrains `F` on the strip); **`stripKMSrvd_pair`** = the
+     UNCONDITIONAL `∃F` witness (RvD Def 3.4) for the wedge pair, axiom-free. **A4 is essentially COMPLETE: the
+     free-field boost-KMS / Bisognano–Wichmann analytic input is fully machine-checked — no Hardy/Paley–Wiener,
+     no Tomita–Takesaki, no axioms.** Full `QIQTH` rebuilds green (8677 jobs), budget 0.
+5. **REMAINING**: thread `stripKMSrvd_pair` over the wedge generators ⟹ `StripKMSrvd boostUnitary 𝒦_W` (closedness
+   to `𝒦_W` + `2π`↔`−2π` sign mirror) ⟹ remove `hKMS` from `qiqt_gr_from_wedge_kms_complete`.
 
 ---
 
