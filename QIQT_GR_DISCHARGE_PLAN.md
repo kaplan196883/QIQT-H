@@ -198,12 +198,16 @@ margin lemma is DONE (`b98dc63`).
    `C·exp(−c·cosh)` (sq integrable). **Minkowski gap fully off the critical path.** Axiom-free, budget 0.
    **★ PHASE A2 CORE COMPLETE** (sup-bound, decay block, margin, pointwise decay, interior-λ MemLp). Endpoints
    `λ=0,π` are `Krep`/`conj` via existing `MemLp`/A3 if needed.
-3. **A4 (the remaining finish)**: KMS function `F`, `DiffContOnCl`+boundedness (the *uniform-to-boundary*
-   bound — `s↦‖Ξ(·+iπs)‖₂` continuous on `[0,1]` — is the one delicate piece left; the interior `L²` bound is
-   now in hand via `memLp_KrepCont_strip`), the two edges via the `Lp` bridge (concrete `∫…dθ` ↔
-   `MeasureTheory.L2.inner_def` + `boostUnitary` = rapidity translation), closedness to `𝒦_W`, then thread up
-   to remove `hKMS`. This is the genuine multi-fire finish integrating with the abstract `Lp`/`StandardSubspace`
-   layer.
+3. **A4 (the remaining finish)** — STARTED (`8d17b79`, new file `QIQTH/Fock/BoostKMS.lean`):
+   - **Real-axis edge bridge DONE**: `inner_KrepL2` (`⟪KrepL2 f, KrepL2 g⟫ = ∫ conj(Krep f)·Krep g`) and
+     `inner_boostUnitary_KrepL2` (`⟪KrepL2 g, boostUnitary a (KrepL2 f)⟫ = ∫ conj(Krep g θ)·Krep f(θ−a) dθ`,
+     via `boostUnitary_KrepL2` + `Krep_boost`). The concrete-integral form of `f(t)=⟪η,V_t ξ⟫`. Axiom-free.
+   - **Remaining A4**: define the KMS function `F(z)=∫ H^#(θ+πz)·Ξ(θ−πz) dθ` (`Ξ,H = KrepCont f,g`); match
+     its real-axis value to `inner_boostUnitary_KrepL2` (a change of variables `y=θ−πt`); the bottom edge via
+     `KrepCont_add_pi_I` (A3); `DiffContOnCl` (holomorphy on the open strip — another dominated-derivative arg
+     — + continuity to closure) and boundedness (the *uniform-to-boundary* `s↦‖Ξ(·+iπs)‖₂` continuity is the
+     one delicate piece; interior `L²` is in hand via `memLp_KrepCont_strip`); closedness to `𝒦_W`; then
+     `oneParticleBW_wedge_complete` ⟹ unconditional BW ⟹ remove `hKMS`. The genuine multi-fire finish.
 
 **Honest scale:** discharging `StripKMSrvd` from here is a genuine multi-week-to-month real-analysis +
 Mathlib-infrastructure effort (Minkowski integral inequality is itself a Mathlib-worthy contribution). This is
