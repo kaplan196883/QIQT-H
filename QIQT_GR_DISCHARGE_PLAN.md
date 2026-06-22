@@ -571,6 +571,10 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          **(8a-foundation) BUILT** (`4595193`): `integrable_exp_neg_mul_abs` (`exp(−b|x|)∈L¹(ℝ)` for `b>0`, both-ends via
          `integrable_of_isBigO_atBot_atTop`) — dominates the `cosh⁻²` decay ⟹ `Krep∈L¹` + finite exp moments `∫‖Krep‖e^{a|θ|}<∞`
          for `a<2`, the precise FT-holomorphy inputs.
+         **(8a) BUILT** (`c754239`): `integrable_Krep` — `Krep m f∈L¹(ℝ)` for Schwartz `f`, via `Integrable.mono'`:
+         `‖Krep θ‖≤C(cosh θ)⁻²` (`schwartz_Krep_decay_sq`) `≤4C exp(−2|θ|)` (new `inv_cosh_sq_le_exp` from `exp|θ|≤2cosh θ`),
+         dominated by `integrable_exp_neg_mul_abs`; continuity from `Krep_continuous`.  The function FT of `Krep` is now
+         well-defined.
          NEXT: **(8b)** `𝓕(Krep m f₀)` real-analytic on `ℝ` — the FT extends holomorphically to the strip `|Im ζ|<2` via
          differentiation-under-the-integral (Mathlib has FT *smoothness* `hasFTaylorSeriesUpTo_fourierIntegral` but NOT
          analyticity — build the strip-holomorphy from the exp-moment integrability above; then "strip-holomorphic ⊇ ℝ ⟹
