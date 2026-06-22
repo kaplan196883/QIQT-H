@@ -754,6 +754,24 @@ theorem memLp_KrepCont_affine {m : ℝ} (hm : 0 < m) {f : V → ℂ} (hf : Conti
   simp only [Complex.add_im, Complex.add_re, Complex.ofReal_im, Complex.ofReal_re, zero_add] at hb
   rwa [← hCdef] at hb
 
+/-- **`KrepCont` is additive in the test function** (for continuous compact-support `f₁,f₂`): the defining
+    integral `∫ kernel·f` is linear in `f`, with each `kernel·fᵢ` integrable (continuous, compact support). The
+    sesquilinearity foundation for threading `stripKMSrvd_pair` over the wedge span. -/
+theorem KrepCont_add (m : ℝ) {f₁ f₂ : V → ℂ} (hf₁ : Continuous f₁) (hf₁c : HasCompactSupport f₁)
+    (hf₂ : Continuous f₂) (hf₂c : HasCompactSupport f₂) (ζ : ℂ) :
+    KrepCont m (f₁ + f₂) ζ = KrepCont m f₁ ζ + KrepCont m f₂ ζ := by
+  have hint : ∀ {h : V → ℂ}, Continuous h → HasCompactSupport h →
+      Integrable (fun x => Complex.exp (-Complex.I * minkowskiDotℂ (massShellℂ m ζ) x) * h x) := by
+    intro h hc hcs
+    exact ((continuous_kernel_in_x m ζ).mul hc).integrable_of_hasCompactSupport hcs.mul_left
+  rw [KrepCont, KrepCont, KrepCont, ← mul_add, ← integral_add (hint hf₁ hf₁c) (hint hf₂ hf₂c)]
+  congr 1
+  refine integral_congr_ae (Filter.Eventually.of_forall fun x => ?_)
+  show Complex.exp (-Complex.I * minkowskiDotℂ (massShellℂ m ζ) x) * (f₁ + f₂) x
+    = Complex.exp (-Complex.I * minkowskiDotℂ (massShellℂ m ζ) x) * f₁ x
+      + Complex.exp (-Complex.I * minkowskiDotℂ (massShellℂ m ζ) x) * f₂ x
+  rw [Pi.add_apply]; ring
+
 /-- **Affine-argument `L²` membership on the CLOSED strip** `Im c₀ ∈ [0,π]`. Extends `memLp_KrepCont_affine`
     to the two boundary heights: at `Im c₀ = 0` the slice is a real-axis translate `Krep m f(·+Re c₀)`
     (`KrepCont_ofReal`), at `Im c₀ = π` it is the conjugate `conj(Krep m f(·+Re c₀))` (`KrepCont_add_pi_I`,
