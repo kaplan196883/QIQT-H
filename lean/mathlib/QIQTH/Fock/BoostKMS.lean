@@ -1608,6 +1608,33 @@ theorem kmsFun_add_right {m : ℝ} (hm : 0 < m) {f g₁ g₂ : V → ℂ}
   rw [KrepCont_add m hg₁ hg₁c hg₂ hg₂c ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)), map_add]
   ring
 
+/-- **`f`-slot subtraction identity**: `kmsFun m (f₁−f₂) g = kmsFun m f₁ g − kmsFun m f₂ g` on the closed strip
+    (from `kmsFun_add_left`; `f₁−f₂` is again nice — `δ`-margin on the union of supports, real, `MemLp`). -/
+theorem kmsFun_sub_left {m : ℝ} (hm : 0 < m) {f₁ f₂ g : V → ℂ}
+    (hf₁ : Continuous f₁) (hf₁c : HasCompactSupport f₁) (hf₂ : Continuous f₂) (hf₂c : HasCompactSupport f₂)
+    (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf₁ : ∀ x, f₁ x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmf₂ : ∀ x, f₂ x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hf₁r : ∀ x, (starRingEnd ℂ) (f₁ x) = f₁ x) (hf₂r : ∀ x, (starRingEnd ℂ) (f₂ x) = f₂ x)
+    (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hf₁L : MemLp (Krep m f₁) 2 volume) (hf₂L : MemLp (Krep m f₂) 2 volume)
+    (hgL : MemLp (Krep m g) 2 volume) {z : ℂ} (hz0 : -1 ≤ z.im) (hz1 : z.im ≤ 0) :
+    kmsFun m (f₁ - f₂) g z = kmsFun m f₁ g z - kmsFun m f₂ g z := by
+  have hmf₁₂ : ∀ x, (f₁ - f₂) x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0 := by
+    intro x hx
+    by_cases h : f₁ x = 0
+    · exact hmf₂ x fun hc => hx (by rw [Pi.sub_apply, h, hc, sub_zero])
+    · exact hmf₁ x h
+  have hf₁₂r : ∀ x, (starRingEnd ℂ) ((f₁ - f₂) x) = (f₁ - f₂) x := by
+    intro x; rw [Pi.sub_apply, map_sub, hf₁r, hf₂r]
+  have h : kmsFun m (f₁ - f₂ + f₂) g z = kmsFun m (f₁ - f₂) g z + kmsFun m f₂ g z :=
+    kmsFun_add_left hm (hf₁.sub hf₂) (hf₁c.sub hf₂c) hf₂ hf₂c hg hgc hδ hmf₁₂ hmf₂ hmg hf₁₂r hf₂r hgr
+      (memLp_Krep_sub hf₁ hf₁c hf₂ hf₂c hf₁L hf₂L) hf₂L hgL hz0 hz1
+  have he : f₁ - f₂ + f₂ = f₁ := by ext x; simp only [Pi.add_apply, Pi.sub_apply]; ring
+  rw [he] at h
+  rw [h]; ring
+
 /-- **`L²`-norm of a one-particle vector as an integral**: `‖KrepL2 f‖ = √(∫‖Krep m f‖²)`. Via `inner_KrepL2`
     (`⟪KrepL2 f, KrepL2 f⟫ = ∫ conj(Krep f)·Krep f = ↑∫‖Krep f‖²`) and `inner_self_eq_norm_sq`. The bridge from
     the analytic strip bound (in `∫‖Krep‖²`) to the Hilbert norms `‖ξ‖,‖η‖` for the closure/threading argument. -/
