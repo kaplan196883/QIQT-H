@@ -232,6 +232,9 @@ margin lemma is DONE (`b98dc63`).
      *uniform-to-boundary* `L²`-norm continuity — the one genuinely delicate piece). (d) closedness of
      `StripKMSrvd` to `𝒦_W` (bound continuous in `ξ,η`) + the `−2π`↔`2π` boost-sign mirror to match
      `oneParticleBW_wedge_complete`; then ⟹ unconditional BW ⟹ remove `hKMS`.
+     - *Derivative-decay building blocks landed:* `norm_cosh_le_cosh_re`/`norm_sinh_le_cosh_re`
+       (`‖cosh ζ‖,‖sinh ζ‖ ≤ cosh(Re ζ)`, `15ba0d1`) — the `poly`-factor bound; with the `cosh·exp`
+       integrability these give the `z`-derivative domination `‖∂_z·KrepCont(ζ)‖ ≲ cosh(Re ζ)·exp(−c cosh(Re ζ))`.
 
 **Honest scale:** discharging `StripKMSrvd` from here is a genuine multi-week-to-month real-analysis +
 Mathlib-infrastructure effort (Minkowski integral inequality is itself a Mathlib-worthy contribution). This is
