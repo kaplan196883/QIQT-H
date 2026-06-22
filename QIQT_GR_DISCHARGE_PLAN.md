@@ -221,12 +221,17 @@ margin lemma is DONE (`b98dc63`).
    - **Derivative-decay integrability DONE** (`28c63e3`): `abs_le_cosh` (`|θ|≤coshθ`) +
      `integrable_cosh_mul_exp_neg_const_mul_cosh` (`cosh s·exp(−c cosh s)` integrable) — the integrability the
      `z`-derivative domination reduces to (`‖∂_z integrand‖ ≲ cosh(s)·exp(−c cosh s)`).
-   - **Remaining A4**: (c) `DiffContOnCl` — assemble `F` holomorphic on the open strip from
-     `differentiable_kmsIntegrand` via the parametric-derivative theorem (needs the `z`-derivative dominated by
-     an integrable-in-`θ` bound on a `z`-ball — analogous to A2's `exp(−c cosh)` decay but for the derivative)
-     + continuity to closure; and **boundedness** (the *uniform-to-boundary* `s↦‖Ξ(·+iπs)‖₂` continuity on
-     `[0,1]` — the one genuinely delicate analytic piece). (d) closedness of `StripKMSrvd` to `𝒦_W` (bound
-     continuous in `ξ,η`); then `oneParticleBW_wedge_complete` ⟹ unconditional BW ⟹ remove `hKMS`.
+   - **★★★★ CONSOLIDATION DONE** (`275342d`): `stripKMSrvd_pair_of_regularity` — for a wedge generator pair,
+     the `StripKMSrvd` `∃F` witness holds GIVEN ONLY `hDCC` (`DiffContOnCl` of `kmsFun`) + `hbd` (bounded). Both
+     KMS edges discharged (top via `kmsFun_ofReal_eq_inner`, bottom via `kmsFun_sub_I`+`inner_conj_symm`).
+     **This precisely isolates the entire remaining frontier** to the analytic regularity of ONE explicit
+     function `kmsFun m f g`. Axiom-free.
+   - **Remaining (the whole frontier, now crisply isolated)**: (c) prove `DiffContOnCl ℂ (kmsFun m f g)` (the
+     parametric-holomorphy assembly — `z`-derivative norm bound `≲ cosh·exp(−c cosh)` [integrability in hand] +
+     the dominated-derivative theorem + continuity-to-closure) and `∃M, ∀z ‖kmsFun z‖≤M` (the
+     *uniform-to-boundary* `L²`-norm continuity — the one genuinely delicate piece). (d) closedness of
+     `StripKMSrvd` to `𝒦_W` (bound continuous in `ξ,η`) + the `−2π`↔`2π` boost-sign mirror to match
+     `oneParticleBW_wedge_complete`; then ⟹ unconditional BW ⟹ remove `hKMS`.
 
 **Honest scale:** discharging `StripKMSrvd` from here is a genuine multi-week-to-month real-analysis +
 Mathlib-infrastructure effort (Minkowski integral inequality is itself a Mathlib-worthy contribution). This is
