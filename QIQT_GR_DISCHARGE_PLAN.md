@@ -585,11 +585,17 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          (the norm `2π|θ|exp(2πθ Im ζ)‖Krep‖`), `norm_Krep_le_exp` (factored decay `‖Krep‖≤C exp(−2|θ|)`),
          `continuous_ftKrep`/`'`, `integrable_ftKrep` (the `hF_int`), and the ball-domination by `2πC|θ|exp(−d|θ|)∈L¹`.
          Mathlib has FT *smoothness* but NOT analyticity → built from scratch (mirroring `hasDerivAt_KrepCont`).
-         NEXT: **(8b-fin)** restrict `F` to `ℝ` → `AnalyticOnNhd ℝ (fun ξ => F ξ) univ` (the strip `|Im|<1/π` contains
-         `ℝ`; `DifferentiableOn ℂ F strip` → `AnalyticAt ℂ F ↑ξ` → restrict like `8c′`).  **(8b-bridge)** identify
-         `F ξ = 𝓕(Krep) ξ` (real) AND the `L²` FT coeFn `⇑(𝓕 N₀.vec)` agrees a.e. with this function FT of `Krep`
-         (L²↔L¹ agreement on `L¹∩L²`).  **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0`, `8b-fin+8b-bridge+8c`
-         ⟹ `𝓕(N₀.vec)≠0` a.e., feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone.
+         **(8b-fin) BUILT** (`ff914dd`): `analyticOnNhd_ftKrepF_real` — `F` restricted to `ℝ` is real-analytic
+         (`DifferentiableOn ℂ F (open strip)` → `analyticOnNhd` → restrict like `8c′`).
+         **(8b-bridge function-FT) BUILT** (`a4639d5`): `ftKrepF_eq_fourier` (`F ξ=𝓕(Krep) ξ` real, character match via
+         `Real.fourier_eq'`+`Real.inner_apply`) + `analyticOnNhd_fourier_Krep` (`AnalyticOnNhd ℝ (ξ↦𝓕(Krep) ξ) univ`).
+         So **the function FT of the wedge amplitude is real-analytic** ⟹ (8c, given `≢0`) `𝓕(Krep)≠0` a.e.
+         NEXT: **(8b-bridge L²↔L¹)** — the `L²` FT coeFn `⇑(𝓕 N₀.vec)` agrees a.e. with the *function* FT `𝓕(Krep)`
+         (`N₀.vec=KrepL2 f₀`, `Krep∈L¹∩L²`).  Mathlib lacks a direct lemma; route via Plancherel + `toLp_fourierInv_eq`
+         tested against dense Schwartz, OR the tempered-distribution FT (`Lp.toTemperedDistribution` +
+         `fourier_toTemperedDistributionCLM_eq`).  **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0`
+         (amplitude `≠0` somewhere), `analyticOnNhd_fourier_Krep`+`8c`+the L²↔L¹ bridge ⟹ `⇑(𝓕 N₀.vec)≠0` a.e., feed
+         `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
          **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0` (its amplitude `≠0` somewhere), `8b+8c/8c′` ⟹ `𝓕≠0`
          a.e., feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
          EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness, the full
