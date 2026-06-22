@@ -119,8 +119,11 @@ The single analytic engine: **`p(θ+iπ) = −p(θ)`** (since `cosh(θ+iπ)=−c
   - **A1b NEXT:** holomorphy of `ζ ↦ KrepCont m f ζ` (for a suitable analytic class of `f` — start with
     compactly-supported smooth real wedge functions, for which the integral is over a bounded set ⟹ entire;
     use `hasDerivAt_integral_of_dominated_loc_of_deriv_le` over `ℂ`, MellinTransform.lean as template).
-  - **A1c:** the wedge-damping bound `‖exp(−i·p_m(θ+iλ)·x)‖ = exp(m sinλ(sinhθ x₀ − coshθ x₁)) ≤ 1` on
-    `rightWedge`, `0≤λ≤π` (A0 sign computation, now to be Lean-ified).
+  - **A1c DONE** (commit pending, `WedgeAnalyticity.lean`): `cosh_ofReal_add_ofReal_mul_I` /
+    `sinh_ofReal_add_ofReal_mul_I` (real/imag split at complex rapidity) + `norm_kernel_le_one` — the
+    wedge-damping bound `‖exp(−i·p_m(θ+iλ)·x)‖ ≤ 1` for `0<x₁−x₀`, `0<x₁+x₀`, `0≤λ≤π`, `m≥0` (the
+    `rightWedge` conditions kept as explicit hyps to keep this file dependency-light; the
+    `x∈rightWedge ↔ …` bridge goes in `BoostKMS.lean`). Axiom-free, budget 0.
 - **A2.** Uniform `H²(S_π)` strip bounds.
 - **A3.** Boundary conjugation `ψ_f(θ+iπ)=conj(ψ_f(θ))`; define `K_Hardy`, prove `wedgeGenSet ⊆ K_Hardy`,
   closedness ⟹ `𝒦_W ⊆ K_Hardy`.

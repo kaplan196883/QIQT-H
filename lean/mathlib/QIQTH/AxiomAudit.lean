@@ -4644,5 +4644,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.WedgeAnalyticity.massShellℂ_add_pi_I
 -- expected: standard only — ★★ the iπ-shift identity p_m(ζ+iπ)=−p_m(ζ) (cosh/sinh add-π-i), the analytic engine
 -- of the boundary conjugation ψ_f(θ+iπ)=conj(ψ_f(θ)) that gives the KMS bottom edge.
+#print axioms QIQTH.Fock.WedgeAnalyticity.norm_kernel_le_one
+-- expected: standard only — ★★★ A1c: the WEDGE-DAMPING bound. ‖exp(−i·p_m(θ+iλ)·x)‖=exp(m sinλ(sinhθ x₀−coshθ x₁))≤1
+-- for x in the right wedge (0<x₁−x₀, 0<x₁+x₀), 0≤λ≤π — the analytic engine that puts ψ_f in the Hardy strip H²(S_π).
 
 end QIQTH.AxiomAudit

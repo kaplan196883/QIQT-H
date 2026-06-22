@@ -63,4 +63,46 @@ theorem KrepCont_ofReal (m : ℝ) (f : V → ℂ) (θ : ℝ) :
     (integral_congr_ae (Filter.Eventually.of_forall fun x => ?_))
   simp only [minkowskiDotℂ_massShellℂ_ofReal]
 
+/-! ### A1c — the wedge-damping bound -/
+
+/-- `cosh(θ + iλ) = cosh θ cos λ + i sinh θ sin λ` (real/imaginary split at a complex rapidity). -/
+theorem cosh_ofReal_add_ofReal_mul_I (θ lam : ℝ) :
+    Complex.cosh ((θ : ℂ) + (lam : ℂ) * Complex.I)
+      = ((Real.cosh θ * Real.cos lam : ℝ) : ℂ) + ((Real.sinh θ * Real.sin lam : ℝ) : ℂ) * Complex.I := by
+  rw [Complex.cosh_add, Complex.cosh_mul_I, Complex.sinh_mul_I, ← Complex.ofReal_cosh,
+    ← Complex.ofReal_sinh, ← Complex.ofReal_cos, ← Complex.ofReal_sin]
+  push_cast; ring
+
+/-- `sinh(θ + iλ) = sinh θ cos λ + i cosh θ sin λ`. -/
+theorem sinh_ofReal_add_ofReal_mul_I (θ lam : ℝ) :
+    Complex.sinh ((θ : ℂ) + (lam : ℂ) * Complex.I)
+      = ((Real.sinh θ * Real.cos lam : ℝ) : ℂ) + ((Real.cosh θ * Real.sin lam : ℝ) : ℂ) * Complex.I := by
+  rw [Complex.sinh_add, Complex.cosh_mul_I, Complex.sinh_mul_I, ← Complex.ofReal_cosh,
+    ← Complex.ofReal_sinh, ← Complex.ofReal_cos, ← Complex.ofReal_sin]
+  push_cast; ring
+
+/-- **A1c — the wedge-damping bound.** For `m ≥ 0`, `x` in the right wedge, and `0 ≤ λ ≤ π`, the
+    analytic-continuation kernel has norm `≤ 1`:
+    `‖exp(−i·p_m(θ+iλ)·x)‖ = exp(m sinλ·(sinhθ·x₀ − coshθ·x₁)) ≤ 1`,
+    because `coshθ·x₁ − sinhθ·x₀ = ½e^θ(x₁−x₀)+½e^{−θ}(x₁+x₀) > 0` on `rightWedge` and `sinλ ≥ 0`. -/
+theorem norm_kernel_le_one {m : ℝ} (hm : 0 ≤ m) {x : V} (hx1 : 0 < x 1 - x 0) (hx2 : 0 < x 1 + x 0)
+    {lam : ℝ} (hlam0 : 0 ≤ lam) (hlamπ : lam ≤ Real.pi) (θ : ℝ) :
+    ‖Complex.exp (-Complex.I *
+      minkowskiDotℂ (massShellℂ m ((θ : ℂ) + (lam : ℂ) * Complex.I)) x)‖ ≤ 1 := by
+  rw [Complex.norm_exp, ← Real.exp_zero, Real.exp_le_exp]
+  have hre : (-Complex.I *
+      minkowskiDotℂ (massShellℂ m ((θ : ℂ) + (lam : ℂ) * Complex.I)) x).re
+      = m * Real.sin lam * (Real.sinh θ * x 0 - Real.cosh θ * x 1) := by
+    simp only [minkowskiDotℂ, massShellℂ_zero, massShellℂ_one, cosh_ofReal_add_ofReal_mul_I,
+      sinh_ofReal_add_ofReal_mul_I, Complex.mul_re, Complex.mul_im, Complex.neg_re, Complex.neg_im,
+      Complex.I_re, Complex.I_im, Complex.add_re, Complex.add_im, Complex.sub_re, Complex.sub_im,
+      Complex.ofReal_re, Complex.ofReal_im]
+    ring
+  rw [hre]
+  have hsin : 0 ≤ Real.sin lam := Real.sin_nonneg_of_nonneg_of_le_pi hlam0 hlamπ
+  have hwedge : 0 < Real.cosh θ * x 1 - Real.sinh θ * x 0 := by
+    rw [Real.cosh_eq, Real.sinh_eq]
+    nlinarith [mul_pos (Real.exp_pos θ) hx1, mul_pos (Real.exp_pos (-θ)) hx2]
+  nlinarith [mul_nonneg (mul_nonneg hm hsin) (le_of_lt hwedge)]
+
 end QIQTH.Fock.WedgeAnalyticity
