@@ -651,4 +651,30 @@ theorem fourierL2_toLp_ae_eq {g : ℝ → ℂ} (hg1 : Integrable g) (hg2 : MemLp
       rw [hΨcoe, Complex.real_smul, smul_eq_mul])
   exact (hconv _).trans ((integral_smul_fourierL2_eq hg1 hg2 Ψ).trans (hconv _).symm)
 
+/-- **The Wiener nonvanishing, assembled.**  For `g ∈ L¹∩L²` with `𝓕 g` real-analytic on `ℝ` and `g ≢ 0`,
+    the `L²` FT coeFn `⇑(𝓕_{L²}(g.toLp)) ≠ 0` a.e.  Chains: `g ≢ 0 ⟹ ∃ x, 𝓕g(x)≠0` (brick 6b contrapositive)
+    ⟹ `𝓕 g ≠ 0` a.e. (brick 8c) ⟹ (L²↔L¹ agreement) `⇑(𝓕_{L²}(g.toLp)) ≠ 0` a.e. -/
+theorem fourierL2_toLp_ne_zero_of_ne_zero {g : ℝ → ℂ} (hg1 : Integrable g) (hg2 : MemLp g 2 volume)
+    (hanalytic : AnalyticOnNhd ℝ (fun ξ => 𝓕 g ξ) Set.univ) (hne : ¬ (g =ᵐ[volume] 0)) :
+    ∀ᵐ ξ ∂volume, ((𝓕 (hg2.toLp g) : Lp ℂ 2 (volume : Measure ℝ)) : ℝ → ℂ) ξ ≠ 0 := by
+  have hF0 : ∃ x : ℝ, 𝓕 g x ≠ 0 := by
+    by_contra h
+    push_neg at h
+    exact hne (ae_eq_zero_of_fourier_eq_zero hg1 h)
+  have h1 := ae_ne_zero_of_analyticOnNhd hanalytic hF0
+  have h2 := fourierL2_toLp_ae_eq hg1 hg2
+  filter_upwards [h1, h2] with ξ hξ1 hξ2
+  rw [hξ2]; exact hξ1
+
+/-- **The Wiener nonvanishing for `Krep`.**  If the localized amplitude `Krep m fS` of a Schwartz wedge
+    test `fS` is not a.e. zero, then the `L²` Fourier transform of its one-particle vector is `≠ 0` a.e. —
+    the Wiener hypothesis of brick 7, ready to feed `niceWedgeCyclic_of_fourier_ne_zero`. -/
+theorem fourierL2_Krep_ne_zero (fS : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0)
+    (hne : ¬ (Krep m (⇑fS) =ᵐ[volume] 0)) :
+    ∀ᵐ ξ ∂volume,
+      ((𝓕 ((schwartz_Krep_memLp fS hm).toLp (Krep m (⇑fS))) : Lp ℂ 2 (volume : Measure ℝ)) : ℝ → ℂ) ξ
+        ≠ 0 :=
+  fourierL2_toLp_ne_zero_of_ne_zero (integrable_Krep fS hm) (schwartz_Krep_memLp fS hm)
+    (analyticOnNhd_fourier_Krep fS hm) hne
+
 end QIQTH.Fock.WienerL2
