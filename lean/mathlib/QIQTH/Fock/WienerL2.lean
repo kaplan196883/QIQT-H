@@ -16,6 +16,7 @@ import Mathlib.Analysis.Distribution.SchwartzSpace.Basic
 import Mathlib.Analysis.Distribution.TemperateGrowth
 import Mathlib.Analysis.Distribution.SchwartzSpace.Fourier
 import Mathlib.Analysis.Fourier.LpSpace
+import Mathlib.Analysis.Distribution.TemperedDistribution
 import Mathlib.Analysis.Analytic.IsolatedZeros
 import Mathlib.MeasureTheory.Topology
 import Mathlib.MeasureTheory.Integral.ExpDecay
@@ -595,5 +596,59 @@ theorem analyticOnNhd_fourier_Krep (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠
     funext ξ; exact (ftKrepF_eq_fourier m (⇑f) ξ).symm
   rw [heq]
   exact analyticOnNhd_ftKrepF_real f hm
+
+/-! ## Brick 8b-bridge (L²↔L¹) — the L² FT coeFn agrees a.e. with the function FT -/
+
+/-- **The integral pairing identity.**  For `g ∈ L¹∩L²` and Schwartz `φ`:
+    `∫ φ·⇑(𝓕_{L²}(g.toLp)) = ∫ φ·𝓕_{int}(g)` — via the tempered-distribution Fourier transform
+    (`fourier_toTemperedDistribution_eq` + `fourier_apply` + the `Lp` pairing `toTemperedDistribution_apply`)
+    and the multiplication formula (`integral_fourierIntegral_smul_eq_flip`). -/
+theorem integral_smul_fourierL2_eq {g : ℝ → ℂ} (hg1 : Integrable g) (hg2 : MemLp g 2 volume)
+    (φ : 𝓢(ℝ, ℂ)) :
+    (∫ x, φ x • ((𝓕 (hg2.toLp g) : Lp ℂ 2 (volume : Measure ℝ)) : ℝ → ℂ) x)
+      = ∫ x, φ x • 𝓕 g x := by
+  set ftφ : 𝓢(ℝ, ℂ) := 𝓕 φ with hftφ
+  have mult : (∫ x, (ftφ : ℝ → ℂ) x • g x) = ∫ x, φ x • 𝓕 g x := by
+    have hcoe : (fun x => (ftφ : ℝ → ℂ) x • g x)
+        = fun x => VectorFourier.fourierIntegral 𝐞 volume (innerₗ ℝ) (⇑φ) x • g x := by
+      funext x; rw [hftφ]; rfl
+    rw [hcoe, VectorFourier.integral_fourierIntegral_smul_eq_flip (L := innerₗ ℝ)
+      Real.continuous_fourierChar continuous_inner φ.integrable hg1]
+    simp only [flip_innerₗ]
+    rfl
+  calc (∫ x, φ x • ((𝓕 (hg2.toLp g) : Lp ℂ 2 (volume : Measure ℝ)) : ℝ → ℂ) x)
+      = MeasureTheory.Lp.toTemperedDistribution
+          (𝓕 (hg2.toLp g) : Lp ℂ 2 (volume : Measure ℝ)) φ :=
+        (MeasureTheory.Lp.toTemperedDistribution_apply _ φ).symm
+    _ = 𝓕 (MeasureTheory.Lp.toTemperedDistribution (hg2.toLp g)) φ := by
+        rw [← MeasureTheory.Lp.fourier_toTemperedDistribution_eq]
+    _ = MeasureTheory.Lp.toTemperedDistribution (hg2.toLp g) ftφ :=
+        TemperedDistribution.fourier_apply _ _
+    _ = ∫ x, (ftφ : ℝ → ℂ) x • ((hg2.toLp g : Lp ℂ 2 (volume : Measure ℝ)) : ℝ → ℂ) x :=
+        MeasureTheory.Lp.toTemperedDistribution_apply _ ftφ
+    _ = ∫ x, (ftφ : ℝ → ℂ) x • g x :=
+        integral_congr_ae (by filter_upwards [hg2.coeFn_toLp] with x hx; rw [hx])
+    _ = ∫ x, φ x • 𝓕 g x := mult
+
+/-- **Wiener brick 8b-bridge (L²↔L¹) — the L² FT coeFn agrees a.e. with the function FT.**
+    For `g ∈ L¹∩L²`, `⇑(𝓕_{L²}(g.toLp)) =ᵐ 𝓕_{int}(g)`.  From the pairing identity
+    `integral_smul_fourierL2_eq` (both pair equally with every Schwartz `φ`) + the variational lemma
+    `ae_eq_of_integral_contDiff_smul_eq` (testing against real `C^∞_c` functions, packaged as Schwartz). -/
+theorem fourierL2_toLp_ae_eq {g : ℝ → ℂ} (hg1 : Integrable g) (hg2 : MemLp g 2 volume) :
+    (⇑(𝓕 (hg2.toLp g) : Lp ℂ 2 (volume : Measure ℝ)) : ℝ → ℂ) =ᵐ[volume] 𝓕 g := by
+  have hcont : Continuous (𝓕 g) :=
+    VectorFourier.fourierIntegral_continuous Real.continuous_fourierChar continuous_inner hg1
+  refine ae_eq_of_integral_contDiff_smul_eq
+    ((Lp.memLp (𝓕 (hg2.toLp g) : Lp ℂ 2 (volume : Measure ℝ))).locallyIntegrable (by norm_num))
+    hcont.locallyIntegrable (fun ψ hψ_smooth hψ_supp => ?_)
+  have hΨc_smooth := hψ_smooth.continuousLinearMap_comp Complex.ofRealCLM
+  have hΨc_supp : HasCompactSupport (⇑Complex.ofRealCLM ∘ ψ) := hψ_supp.comp_left (map_zero _)
+  set Ψ : 𝓢(ℝ, ℂ) := hΨc_supp.toSchwartzMap hΨc_smooth with hΨdef
+  have hΨcoe : ∀ x, Ψ x = (ψ x : ℂ) := fun x => Complex.ofRealCLM_apply (ψ x)
+  have hconv : ∀ f : ℝ → ℂ, (∫ x, ψ x • f x) = ∫ x, Ψ x • f x := fun f =>
+    integral_congr_ae (Filter.Eventually.of_forall fun x => by
+      show ψ x • f x = Ψ x • f x
+      rw [hΨcoe, Complex.real_smul, smul_eq_mul])
+  exact (hconv _).trans ((integral_smul_fourierL2_eq hg1 hg2 Ψ).trans (hconv _).symm)
 
 end QIQTH.Fock.WienerL2
