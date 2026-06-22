@@ -129,4 +129,16 @@ theorem differentiable_reflKrepCont (m : ℝ) {g : V → ℂ} (hg : Continuous g
   rw [Complex.conj_conj] at h
   exact h
 
+/-- **The `kmsFun` integrand is entire in `z`** (for `f,g` continuous with compact support). The `g`-factor
+    `conj(KrepCont g(conj(θ+πz)))` = `differentiable_reflKrepCont ∘ (affine)`, the `f`-factor `KrepCont f(θ−πz)`
+    = `differentiable_KrepCont ∘ (affine)`; the product is differentiable. This is the per-`θ` (`h_diff`)
+    ingredient for the parametric-integral holomorphy of `F` (`DiffContOnCl`). -/
+theorem differentiable_kmsIntegrand (m : ℝ) {f g : V → ℂ} (hf : Continuous f) (hfc : HasCompactSupport f)
+    (hg : Continuous g) (hgc : HasCompactSupport g) (θ : ℝ) :
+    Differentiable ℂ (fun z : ℂ =>
+      (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+        * KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)) :=
+  ((differentiable_reflKrepCont m hg hgc).comp (by fun_prop)).mul
+    ((differentiable_KrepCont m hf hfc).comp (by fun_prop))
+
 end QIQTH.Fock.BoostKMS

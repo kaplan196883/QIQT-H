@@ -4706,5 +4706,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ A4 (holomorphy ingredient): the reflected amplitude u↦conj(KrepCont g(conj u)) is
 -- ENTIRE (Schwarz reflection conj∘F∘conj holo, via DifferentiableAt.star_conj + differentiable_KrepCont). The g-factor
 -- H^# of the kmsFun integrand — confirms F's holomorphy is reachable (DiffContOnCl not blocked).
+#print axioms QIQTH.Fock.BoostKMS.differentiable_kmsIntegrand
+-- expected: standard only — ★★ A4: the kmsFun INTEGRAND is entire in z (g-factor = reflKrepCont∘affine,
+-- f-factor = KrepCont∘affine, product differentiable). The per-θ h_diff ingredient for F's parametric-integral
+-- holomorphy (DiffContOnCl). Remaining: the dominated z-derivative assembly + continuity-to-boundary + boundedness.
 
 end QIQTH.AxiomAudit
