@@ -29,6 +29,17 @@ theorem inner_KrepL2 (m : ℝ) {f g : V → ℂ} (hf : MemLp (Krep m f) 2 volume
   filter_upwards [hf.coeFn_toLp, hg.coeFn_toLp] with θ hfθ hgθ
   rw [hfθ, hgθ, RCLike.inner_apply]; ring
 
+/-- **The `L²` inner product of a wedge mode against an ARBITRARY `h ∈ L²` as a concrete integral**:
+    `⟪KrepL2 f, h⟫ = ∫ conj(Krep m f θ)·h(θ) dθ`.  The concrete form of the Reeh–Schlieder *totality* condition:
+    `{KrepL2 f : f nice}` is total iff the only `h` with `∫ conj(Krep f)·h = 0` for all nice `f` is `h = 0`. -/
+theorem inner_KrepL2_general (m : ℝ) {f : V → ℂ} (hf : MemLp (Krep m f) 2 volume)
+    (h : Lp ℂ 2 (volume : Measure ℝ)) :
+    inner ℂ (hf.toLp (Krep m f)) h = ∫ θ, (starRingEnd ℂ) (Krep m f θ) * (h : ℝ → ℂ) θ := by
+  rw [MeasureTheory.L2.inner_def]
+  refine integral_congr_ae ?_
+  filter_upwards [hf.coeFn_toLp] with θ hfθ
+  rw [hfθ, RCLike.inner_apply]; ring
+
 /-- **The real-axis edge.** `⟪KrepL2 g, boostUnitary a (KrepL2 f)⟫ = ∫ conj(Krep m g θ)·Krep m f (θ−a) dθ`.
     Combines `boostUnitary_KrepL2` (boost acts by `boostTest`), `inner_KrepL2`, and the amplitude boost-
     covariance `Krep m (boostTest (−a) f) θ = Krep m f (θ−a)`. This is the orbit correlation `f(t) =
@@ -2404,6 +2415,18 @@ theorem niceWedge_isCyclic_of_total (m : ℝ)
     niceWedgeClosedSubmodule m ⊔ (niceWedgeClosedSubmodule m).mulI = ⊤ :=
   niceWedge_isCyclic_of_dense m (niceWedge_dense_of_total m htotal)
 
+open QIQTH.StandardSubspaceModular in
+/-- **★ Cyclicity from totality, in fully EXPLICIT integral form** (the precise Reeh–Schlieder statement):
+    cyclic as soon as the only `h ∈ L²(ℝ)` with `∫ conj(Krep m f θ)·h(θ) dθ = 0` for every nice wedge `f` is
+    `h = 0`.  Via `inner_KrepL2_general` (`⟪KrepL2 f, h⟫ = ∫ conj(Krep f)·h`).  This is the cyclic frontier as a
+    concrete integral-vanishing condition on the on-shell amplitudes — the textbook wedge-totality, no abstraction. -/
+theorem niceWedge_isCyclic_of_total_integral (m : ℝ)
+    (htotal : ∀ h : Lp ℂ 2 (volume : Measure ℝ),
+      (∀ N : NiceTest m, ∫ θ, (starRingEnd ℂ) (Krep m N.f θ) * (h : ℝ → ℂ) θ = 0) → h = 0) :
+    niceWedgeClosedSubmodule m ⊔ (niceWedgeClosedSubmodule m).mulI = ⊤ :=
+  niceWedge_isCyclic_of_total m fun h hh =>
+    htotal h fun N => (inner_KrepL2_general m N.memLp h).symm.trans (hh N)
+
 open scoped BoundedContinuousFunction in
 /-- **★★★ (c3+c4) The RvD Def 3.4 KMS witness extended to the CLOSURE of the nice generators**, axiom-free.
     For `ξ, η ∈ closure (niceWedgeGenSet m)` there is a bounded function `F`, holomorphic on the open strip and
@@ -2619,5 +2642,21 @@ theorem oneParticleBW_niceWedge_of_total {m : ℝ} (hm : 0 < m)
       (∀ N : NiceTest m, inner ℂ N.vec h = 0) → h = 0) :
     ∀ t, modUnitary (niceWedgeStandardSubspace m hsep (niceWedge_isCyclic_of_total m htotal)) t = V t :=
   oneParticleBW_niceWedge_of_standard hm V hVboost hsep (niceWedge_isCyclic_of_total m htotal)
+
+open QIQTH.StandardSubspaceModular in
+/-- **★★★★ The nice-core wedge BW with the cyclic input as a FULLY EXPLICIT integral condition.**
+    `modUnitary S t = boostUnitary(2πt)` given `hsep` (separating) and the textbook Reeh–Schlieder wedge-totality
+    in concrete form: *the only `h ∈ L²(ℝ)` with `∫ conj(Krep m f θ)·h(θ) dθ = 0` for every nice wedge `f` is
+    `h = 0`*.  This is the free-field one-particle Bisognano–Wichmann reduced to its irreducible analytic core —
+    every structural/lattice/instance step machine-checked, leaving exactly this on-shell-amplitude totality (the
+    Paley–Wiener / edge-of-the-wedge frontier) and `hsep`. -/
+theorem oneParticleBW_niceWedge_of_total_integral {m : ℝ} (hm : 0 < m)
+    (V : ℝ → (Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ)))
+    (hVboost : ∀ t x, V t x = boostUnitary (2 * Real.pi * t) x)
+    (hsep : niceWedgeClosedSubmodule m ⊓ (niceWedgeClosedSubmodule m).mulI = ⊥)
+    (htotal : ∀ h : Lp ℂ 2 (volume : Measure ℝ),
+      (∀ N : NiceTest m, ∫ θ, (starRingEnd ℂ) (Krep m N.f θ) * (h : ℝ → ℂ) θ = 0) → h = 0) :
+    ∀ t, modUnitary (niceWedgeStandardSubspace m hsep (niceWedge_isCyclic_of_total_integral m htotal)) t = V t :=
+  oneParticleBW_niceWedge_of_standard hm V hVboost hsep (niceWedge_isCyclic_of_total_integral m htotal)
 
 end QIQTH.Fock.BoostKMS
