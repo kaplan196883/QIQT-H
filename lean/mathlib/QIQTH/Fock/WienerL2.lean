@@ -14,6 +14,8 @@ This file: **Brick 1 — the Schwartz translation operator** `τ_a : f ↦ f(·+
 -/
 import Mathlib.Analysis.Distribution.SchwartzSpace.Basic
 import Mathlib.Analysis.Distribution.TemperateGrowth
+import Mathlib.Analysis.Distribution.SchwartzSpace.Fourier
+import Mathlib.Analysis.Fourier.LpSpace
 import QIQTH.Fock.OneParticleBW
 
 namespace QIQTH.Fock.WienerL2
@@ -105,5 +107,76 @@ theorem norm_modL2 (c : ℝ) (g : Lp ℂ 2 (volume : Measure ℝ)) :
   refine eLpNorm_congr_norm_ae ?_
   filter_upwards with ξ
   rw [norm_mul, norm_modChar, one_mul]
+
+/-! ## Brick 4 — the translate→modulation intertwining `𝓕 ∘ τ_a = M ∘ 𝓕`
+
+The Fourier transform diagonalizes translation: it turns the rapidity boost (a translation) into
+multiplication by the unit character.  We prove the pointwise Schwartz identity first, then lift it
+to the `L²` Fourier unitary (`MeasureTheory.Lp.fourierTransformₗᵢ`, notation `𝓕`) by density. -/
+
+open scoped RealInnerProductSpace FourierTransform
+
+/-- **Wiener brick 4a — the Schwartz translate→modulation identity (pointwise).**
+    `𝓕(f(·−a))(w) = e^{−2πi a w} · 𝓕f(w)` — the Fourier dual of translation is modulation by the
+    unit character `modChar (−2πa)`.  Via `fourier_coe` (Schwartz `𝓕` = integral `𝓕` on the coeFn) and
+    `VectorFourier.fourierIntegral_comp_add_right`. -/
+theorem fourier_schwartzTranslate (a : ℝ) (f : 𝓢(ℝ, ℂ)) (w : ℝ) :
+    (𝓕 (schwartzTranslate (-a) f)) w = modChar (-(2 * Real.pi * a)) w * (𝓕 f) w := by
+  rw [fourier_coe, fourier_coe]
+  have hcoe : (⇑(schwartzTranslate (-a) f) : ℝ → ℂ) = (⇑f) ∘ (fun v => v + (-a)) := by
+    funext x; rw [Function.comp_apply, schwartzTranslate_apply]
+  rw [hcoe]
+  have key : (𝓕 ((⇑f) ∘ (fun v => v + (-a))) : ℝ → ℂ)
+      = fun w => 𝐞 (innerₗ ℝ (-a) w) • (𝓕 (⇑f) : ℝ → ℂ) w :=
+    VectorFourier.fourierIntegral_comp_add_right 𝐞 volume (innerₗ ℝ) (⇑f) (-a)
+  rw [key]
+  dsimp only
+  have hchar : ((𝐞 (innerₗ ℝ (-a) w) : Circle) : ℂ) = modChar (-(2 * Real.pi * a)) w := by
+    rw [Real.fourierChar_apply, modChar]
+    congr 1
+    have hinner : innerₗ ℝ (-a) w = -a * w := by
+      rw [innerₗ_apply_apply]; exact Real.inner_apply (-a) w
+    rw [hinner]; push_cast; ring
+  rw [Circle.smul_def, hchar, smul_eq_mul]
+
+/-- `M_c` is subtractive (companion to `modL2_add`), giving the isometry below. -/
+theorem modL2_sub (c : ℝ) (g h : Lp ℂ 2 (volume : Measure ℝ)) :
+    modL2 c (g - h) = modL2 c g - modL2 c h := by
+  rw [Lp.ext_iff]
+  filter_upwards [coeFn_modL2 c (g - h), coeFn_modL2 c g, coeFn_modL2 c h,
+    Lp.coeFn_sub g h, Lp.coeFn_sub (modL2 c g) (modL2 c h)] with ξ h0 h1 h2 h3 h4
+  rw [h0, h4, Pi.sub_apply, h1, h2, h3, Pi.sub_apply, mul_sub]
+
+/-- `M_c` is an isometry of `L²` (modulus-1 multiplier), hence continuous. -/
+theorem isometry_modL2 (c : ℝ) : Isometry (modL2 c) :=
+  Isometry.of_dist_eq fun x y => by
+    rw [dist_eq_norm, dist_eq_norm, ← modL2_sub, norm_modL2]
+
+theorem continuous_modL2 (c : ℝ) : Continuous (modL2 c) := (isometry_modL2 c).continuous
+
+/-- **Wiener brick 4b — the `L²` translate→modulation intertwining.**
+    `𝓕 (boostUnitary a g) = M_{−2πa} (𝓕 g)` for *all* `g ∈ L²` — the boost (a translation) becomes
+    multiplication by the unit character under the `L²` Fourier unitary.  Proven on the dense Schwartz
+    range (brick 4a + `toLp_fourier_eq` + `boostUnitary_toLp`) and extended by `DenseRange.equalizer`
+    (both sides continuous: `𝓕`/`boostUnitary` are isometry-equivs, `M_c` is `continuous_modL2`). -/
+theorem fourierL2_boostUnitary (a : ℝ) (g : Lp ℂ 2 (volume : Measure ℝ)) :
+    𝓕 (boostUnitary a g) = modL2 (-(2 * Real.pi * a)) (𝓕 g) := by
+  have hF : Continuous (fun g : Lp ℂ 2 (volume : Measure ℝ) => 𝓕 (boostUnitary a g)) :=
+    (Lp.fourierTransformₗᵢ ℝ ℂ).continuous.comp (boostUnitary a).continuous
+  have hG : Continuous
+      (fun g : Lp ℂ 2 (volume : Measure ℝ) => modL2 (-(2 * Real.pi * a)) (𝓕 g)) :=
+    (continuous_modL2 _).comp (Lp.fourierTransformₗᵢ ℝ ℂ).continuous
+  have base : (fun g : Lp ℂ 2 (volume : Measure ℝ) => 𝓕 (boostUnitary a g))
+        ∘ (SchwartzMap.toLpCLM ℝ ℂ 2 volume)
+      = (fun g : Lp ℂ 2 (volume : Measure ℝ) => modL2 (-(2 * Real.pi * a)) (𝓕 g))
+        ∘ (SchwartzMap.toLpCLM ℝ ℂ 2 volume) := by
+    funext f
+    simp only [Function.comp_apply, toLpCLM_apply]
+    rw [boostUnitary_toLp, SchwartzMap.toLp_fourier_eq, SchwartzMap.toLp_fourier_eq, Lp.ext_iff]
+    filter_upwards [(𝓕 (schwartzTranslate (-a) f)).coeFn_toLp 2,
+      coeFn_modL2 (-(2 * Real.pi * a)) ((𝓕 f).toLp 2), (𝓕 f).coeFn_toLp 2] with ξ h1 h2 h3
+    rw [h1, h2, h3, fourier_schwartzTranslate]
+  exact congrFun (DenseRange.equalizer
+    (denseRange_toLpCLM (F := ℂ) (p := 2) (by norm_num)) hF hG base) g
 
 end QIQTH.Fock.WienerL2
