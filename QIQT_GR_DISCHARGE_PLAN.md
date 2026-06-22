@@ -159,6 +159,31 @@ The single analytic engine: **`p(θ+iπ) = −p(θ)`** (since `cosh(θ+iπ)=−c
      `0<x₁∓x₀` hyps of `norm_kernel_le_one`. Then `oneParticleBW_wedge_complete` ⟹ unconditional BW; thread
      up to remove `hKMS` from `qiqt_gr_from_wedge_kms_complete`.
   This step integrates with the abstract `Lp`/`StandardSubspace` layer and is the genuine multi-fire finish.
+
+---
+
+## FRONTIER ASSESSMENT (2026-06-22, after assessing Mathlib support)
+
+**What is DONE, axiom-free (the analytic skeleton of the free-field BW/Hardy proof):** Item B (focusing
+derived from Raychaudhuri); Item A — A0 convention audit, **A1 holomorphy** (`KrepCont` entire), **A1c**
+damping bound, **A3** `iπ` boundary conjugation, **A2 sup-bound**. These are genuine, machine-checked results.
+
+**What remains is research-grade, and partly blocked on missing Mathlib infrastructure:**
+1. **A2 `L²` strip bound — no clean route in current Mathlib.** The natural proof needs **Minkowski's integral
+   inequality** `‖∫_x F(·,x) dx‖_{L²} ≤ ∫_x ‖F(·,x)‖_{L²} dx`, which **Mathlib does not have** (only Hölder
+   `lintegral_mul_le_Lp_mul_Lq` and the `Lp`-triangle `eLpNorm_add_le`). It would have to be proven from
+   scratch (duality + Fubini + Cauchy–Schwarz). Even the elementary helper `coshθ ≥ 1+θ²/2` (for Gaussian
+   domination of the interior-`λ` decay) is absent. And the bound must be **uniform in `λ∈[0,π]`**, requiring
+   interpolation between the real-axis `cosh⁻²` decay (endpoints) and the interior double-exponential decay —
+   delicate.
+2. **A4 KMS-function assembly** — additionally needs the concrete-`∫` ↔ abstract-`Lp`-inner-product bridge and
+   the `boostUnitary` translation action threaded through, then closedness extension to `𝒦_W`.
+
+**Honest scale:** discharging `StripKMSrvd` from here is a genuine multi-week-to-month real-analysis +
+Mathlib-infrastructure effort (Minkowski integral inequality is itself a Mathlib-worthy contribution). This is
+the same class of "cited frontier" boundary as the Araki/Type-III continuum work. The analytic skeleton built
+this session (A0–A3, A2-sup) is the honest, axiom-free contribution; the `L²`/assembly core is the documented
+remaining frontier. Per the plan's fallback clause, this is the last green checkpoint of the fast-progress arc.
   - **A1c DONE** (commit pending, `WedgeAnalyticity.lean`): `cosh_ofReal_add_ofReal_mul_I` /
     `sinh_ofReal_add_ofReal_mul_I` (real/imag split at complex rapidity) + `norm_kernel_le_one` — the
     wedge-damping bound `‖exp(−i·p_m(θ+iλ)·x)‖ ≤ 1` for `0<x₁−x₀`, `0<x₁+x₀`, `0≤λ≤π`, `m≥0` (the
