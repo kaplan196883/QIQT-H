@@ -505,7 +505,11 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          build (~8 bricks): **(1) BUILT** (`d4f4d9b`): `schwartzTranslate a`, `f↦f(·+a)`, with `schwartzTranslate_apply`.
          **(3) BUILT** (`2714172`): `boostUnitary_toLp` — `boostUnitary a (f.toLp) = (schwartzTranslate (−a) f).toLp`
          (via `coeFn_boostUnitary` + measure-preserving translated-`ae` + `schwartzTranslate_apply`); connects the QIQT
-         boost group to the Schwartz translation. NEXT: (2) Lp-modulation CLM (`MemLp.of_le_mul`); (4) intertwining
+         boost group to the Schwartz translation. **(2) BUILT** (`fce5e28`): the L²-modulation operator `M_c`
+         (mult by the modulus-1 character `modChar c ξ = e^{icξ}`) — NOT a Mathlib CLM (no bounded-function action on
+         `Lp` exists), built from scratch: `memLp_modChar_smul` (`MemLp.of_le_mul (c:=1)`), `modL2 c` (the map),
+         `coeFn_modL2`, `modL2_add` (additivity), `norm_modL2` (the `L²`-isometry `‖M_c g‖=‖g‖` via `eLpNorm_congr_norm_ae`).
+         Additivity + isometry give continuity by hand → NO bundled CLM needed for the density step. NEXT: (4) intertwining
          `𝓕∘T_a = M_a∘𝓕` on Schwartz (via
          `fourierTransformCLM`+`fourier_coe`+`fourierIntegral_comp_add_right`) then L²-density (`denseRange_toLpCLM`);
          (5) `𝓕h⊥{M_a 𝓕g₀} ⟺ FT(conj(𝓕g₀)·𝓕h)≡0`; (6) FT-injective-on-L¹ (`Inversion.lean`); (7) Wiener: boost-orbit
