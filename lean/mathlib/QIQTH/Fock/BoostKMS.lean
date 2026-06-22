@@ -2336,23 +2336,21 @@ theorem closedSubmodule_smul_complex_mem {S : ClosedSubmodule ℝ (Lp ℂ 2 (vol
   exact S.add_mem (S.smul_mem _ hx) (S.smul_mem _ hI)
 
 open QIQTH.StandardSubspaceModular in
-/-- **★ The cyclic frontier in natural Reeh–Schlieder form**: the nice-core wedge subspace is CYCLIC (`hcyc`)
-    as soon as the *complex* span of the nice one-particle vectors is dense in `L²(ℝ)`.  `K ⊔ K.mulI` is
-    `i`-invariant, hence a closed ℂ-subspace containing every nice generator, hence (closed) ⊇ the closure of
-    their dense ℂ-span `= ⊤`.  This converts the lattice identity `hcyc` into the standard analytic statement
-    `Dense (span_ℂ (niceWedgeGenSet m))` — the genuine Reeh–Schlieder wedge-totality content. -/
-theorem niceWedge_isCyclic_of_dense (m : ℝ)
-    (hdense : Dense (Submodule.span ℂ (niceWedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ)))) :
-    niceWedgeClosedSubmodule m ⊔ (niceWedgeClosedSubmodule m).mulI = ⊤ := by
-  set S := niceWedgeClosedSubmodule m ⊔ (niceWedgeClosedSubmodule m).mulI with hSdef
-  have hSinv : S.mulI = S := ClosedSubmodule_sup_mulI_invariant (niceWedgeClosedSubmodule m)
-  have hsub : (Submodule.span ℂ (niceWedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ))) ⊆ (S : Set _) := by
+/-- **★ General cyclicity from density**: for ANY real closed submodule `K` and generating set `G ⊆ K` whose
+    *complex* span is dense, `K ⊔ K.mulI = ⊤`.  `K ⊔ K.mulI` is `i`-invariant (a closed ℂ-subspace) ⊇ `G` ⊇
+    closure of its dense ℂ-span `= ⊤`.  The reusable engine: applies to the right wedge (`niceWedgeGenSet`),
+    and to the complement `Kᗮ` for the dual separating reduction. -/
+theorem ClosedSubmodule_sup_mulI_eq_top_of_dense
+    (K : ClosedSubmodule ℝ (Lp ℂ 2 (volume : Measure ℝ)))
+    (G : Set (Lp ℂ 2 (volume : Measure ℝ))) (hGK : G ⊆ (K : Set _))
+    (hdense : Dense (Submodule.span ℂ G : Set (Lp ℂ 2 (volume : Measure ℝ)))) :
+    K ⊔ K.mulI = ⊤ := by
+  set S := K ⊔ K.mulI with hSdef
+  have hSinv : S.mulI = S := ClosedSubmodule_sup_mulI_invariant K
+  have hsub : (Submodule.span ℂ G : Set (Lp ℂ 2 (volume : Measure ℝ))) ⊆ (S : Set _) := by
     intro x hx
     induction hx using Submodule.span_induction with
-    | mem y hy =>
-      have hyK : y ∈ niceWedgeClosedSubmodule m := by
-        rw [← SetLike.mem_coe, niceWedgeClosedSubmodule_coe]; exact subset_closure hy
-      exact SetLike.le_def.mp le_sup_left hyK
+    | mem y hy => exact SetLike.le_def.mp le_sup_left (hGK hy)
     | zero => exact S.zero_mem
     | add a b _ _ ha hb => exact S.add_mem ha hb
     | smul c a _ ha => exact closedSubmodule_smul_complex_mem hSinv ha c
@@ -2361,6 +2359,20 @@ theorem niceWedge_isCyclic_of_dense (m : ℝ)
   apply SetLike.coe_injective
   rw [ClosedSubmodule.coe_top]
   exact Set.eq_univ_of_univ_subset huniv
+
+open QIQTH.StandardSubspaceModular in
+/-- **★ The cyclic frontier in natural Reeh–Schlieder form**: the nice-core wedge subspace is CYCLIC (`hcyc`)
+    as soon as the *complex* span of the nice one-particle vectors is dense in `L²(ℝ)`.  Instance of
+    `ClosedSubmodule_sup_mulI_eq_top_of_dense` with `G = niceWedgeGenSet m ⊆ K = niceWedgeClosedSubmodule m`
+    (`niceWedgeClosedSubmodule_coe` + `subset_closure`).  This converts the lattice identity `hcyc` into the
+    standard analytic statement `Dense (span_ℂ (niceWedgeGenSet m))` — the Reeh–Schlieder wedge-totality. -/
+theorem niceWedge_isCyclic_of_dense (m : ℝ)
+    (hdense : Dense (Submodule.span ℂ (niceWedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ)))) :
+    niceWedgeClosedSubmodule m ⊔ (niceWedgeClosedSubmodule m).mulI = ⊤ :=
+  ClosedSubmodule_sup_mulI_eq_top_of_dense (niceWedgeClosedSubmodule m) (niceWedgeGenSet m)
+    (fun y hy => by rw [SetLike.mem_coe, ← SetLike.mem_coe, niceWedgeClosedSubmodule_coe]
+                    exact subset_closure hy)
+    hdense
 
 open scoped BoundedContinuousFunction in
 /-- **★★★ (c3+c4) The RvD Def 3.4 KMS witness extended to the CLOSURE of the nice generators**, axiom-free.
