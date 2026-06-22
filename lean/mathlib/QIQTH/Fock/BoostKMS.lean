@@ -1301,4 +1301,45 @@ theorem norm_kmsFunCut_diff_ofReal_le (m t : ℝ) {f g : V → ℂ} (hf : MemLp 
       rw [Set.indicator_of_notMem hθS, Set.indicator_of_notMem hθR, sub_zero, norm_zero]
       positivity
 
+/-- **Annular bottom-edge bound** (`S ≥ R`, real `f,g`): same `ε_R` as the top edge, via `kmsFunCut_sub_I`
+    (`F(t−i)=conj F(t)`) ⟹ the difference is the conjugate of the top-edge difference, equal norm. -/
+theorem norm_kmsFunCut_diff_sub_I_le (m t : ℝ) {f g : V → ℂ}
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hf : MemLp (Krep m f) 2 volume) (hg : MemLp (Krep m g) 2 volume) {R S : ℝ} (hRS : R ≤ S) :
+    ‖kmsFunCut m f g S ((t : ℂ) - Complex.I) - kmsFunCut m f g R ((t : ℂ) - Complex.I)‖
+      ≤ Real.sqrt (∫ θ in {θ : ℝ | R < |θ|}, ‖Krep m g θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m f θ‖ ^ 2)
+        + Real.sqrt (∫ θ in {θ : ℝ | R < |θ|}, ‖Krep m f θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m g θ‖ ^ 2) := by
+  rw [kmsFunCut_sub_I m hfr hgr S t, kmsFunCut_sub_I m hfr hgr R t, ← map_sub, RCLike.norm_conj]
+  exact norm_kmsFunCut_diff_ofReal_le m t hf hg hRS
+
+/-- **The annular difference is `≤ ε_R` on the WHOLE closed strip** (`S ≥ R`). `kmsFunCut S − kmsFunCut R` is
+    `DiffContOnCl` + bounded (difference of two such), and both boundary lines are `≤ ε_R`
+    (`norm_kmsFunCut_diff_ofReal_le`/`_sub_I_le`); `norm_le_of_strip_edges` propagates the edge bound inward.
+    Combined with `ε_R → 0` this is the uniform-Cauchy property of `{kmsFunCut n}` on the closed strip. -/
+theorem norm_kmsFunCut_diff_le {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hfL : MemLp (Krep m f) 2 volume) (hgL : MemLp (Krep m g) 2 volume)
+    {R S : ℝ} (hR : 0 ≤ R) (hRS : R ≤ S) {z : ℂ} (hz0 : -1 ≤ z.im) (hz1 : z.im ≤ 0) :
+    ‖kmsFunCut m f g S z - kmsFunCut m f g R z‖
+      ≤ Real.sqrt (∫ θ in {θ : ℝ | R < |θ|}, ‖Krep m g θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m f θ‖ ^ 2)
+        + Real.sqrt (∫ θ in {θ : ℝ | R < |θ|}, ‖Krep m f θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m g θ‖ ^ 2) := by
+  refine norm_le_of_strip_edges (Φ := fun z => kmsFunCut m f g S z - kmsFunCut m f g R z)
+    ((kmsFunCut_differentiableOn hm hf hfc hg hgc hδ hmf hmg S).sub
+      (kmsFunCut_differentiableOn hm hf hfc hg hgc hδ hmf hmg R))
+    ((kmsFunCut_continuousOn hm.le hf hfc hg hgc hδ.le hmf hmg S).sub
+      (kmsFunCut_continuousOn hm.le hf hfc hg hgc hδ.le hmf hmg R)) ?_
+    (fun t => norm_kmsFunCut_diff_ofReal_le m t hfL hgL hRS)
+    (fun t => norm_kmsFunCut_diff_sub_I_le m t hfr hgr hfL hgL hRS) hz0 hz1
+  refine ⟨(1 / Real.sqrt 2 * ∫ x, ‖g x‖) * (1 / Real.sqrt 2 * ∫ x, ‖f x‖) * (2 * S)
+      + (1 / Real.sqrt 2 * ∫ x, ‖g x‖) * (1 / Real.sqrt 2 * ∫ x, ‖f x‖) * (2 * R), ?_⟩
+  rintro y ⟨z', hz', rfl⟩
+  simp only [Set.mem_preimage, Set.mem_Icc] at hz'
+  refine (norm_sub_le _ _).trans ?_
+  gcongr
+  · exact norm_kmsFunCut_le hm.le hf hfc hg hgc hδ.le hmf hmg (by linarith) hz'.1 hz'.2
+  · exact norm_kmsFunCut_le hm.le hf hfc hg hgc hδ.le hmf hmg hR hz'.1 hz'.2
+
 end QIQTH.Fock.BoostKMS
