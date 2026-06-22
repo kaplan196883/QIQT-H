@@ -589,4 +589,30 @@ theorem norm_kmsFun_le_l2_product {m : ℝ} (hmpos : 0 < m) {f g : V → ℂ} (h
   rw [kmsFun]
   exact norm_integral_conj_mul_le_l2 hMemA hMemB
 
+/-- **Top-edge uniform bound** (`Im z = 0`). `‖kmsFun m f g t‖ ≤ ‖KrepL2 g‖·‖KrepL2 f‖` for all real `t`:
+    the top edge is the inner product `⟪KrepL2 g, boostUnitary(2πt) (KrepL2 f)⟫` (`kmsFun_ofReal_eq_inner`),
+    Cauchy–Schwarz (`norm_inner_le_norm`) and the **boost isometry** (`LinearIsometryEquiv.norm_map`) give a
+    bound **independent of `t`** — the edge constant `B` the three-lines/Phragmén–Lindelöf argument propagates
+    into the strip interior. -/
+theorem norm_kmsFun_ofReal_le (m t : ℝ) {f g : V → ℂ}
+    (hf : MemLp (Krep m f) 2 volume) (hg : MemLp (Krep m g) 2 volume)
+    (hbf : MemLp (Krep m (boostTest (-(2 * Real.pi * t)) f)) 2 volume) :
+    ‖kmsFun m f g (t : ℂ)‖ ≤ ‖hg.toLp (Krep m g)‖ * ‖hf.toLp (Krep m f)‖ := by
+  rw [kmsFun_ofReal_eq_inner m t hf hg hbf]
+  calc ‖inner ℂ (hg.toLp (Krep m g)) (boostUnitary (2 * Real.pi * t) (hf.toLp (Krep m f)))‖
+      ≤ ‖hg.toLp (Krep m g)‖ * ‖boostUnitary (2 * Real.pi * t) (hf.toLp (Krep m f))‖ :=
+        norm_inner_le_norm _ _
+    _ = ‖hg.toLp (Krep m g)‖ * ‖hf.toLp (Krep m f)‖ := by rw [LinearIsometryEquiv.norm_map]
+
+/-- **Bottom-edge uniform bound** (`Im z = −1`). Same constant `B = ‖KrepL2 g‖·‖KrepL2 f‖`, via
+    `kmsFun_sub_I` (`F(t−i) = conj F(t)`, so equal norm) and `norm_kmsFun_ofReal_le`. With the top edge this
+    bounds `kmsFun` uniformly on **both** boundary lines of the strip `{−1<Im z<0}`. -/
+theorem norm_kmsFun_sub_I_le (m t : ℝ) {f g : V → ℂ} (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x)
+    (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hf : MemLp (Krep m f) 2 volume) (hg : MemLp (Krep m g) 2 volume)
+    (hbf : MemLp (Krep m (boostTest (-(2 * Real.pi * t)) f)) 2 volume) :
+    ‖kmsFun m f g ((t : ℂ) - Complex.I)‖ ≤ ‖hg.toLp (Krep m g)‖ * ‖hf.toLp (Krep m f)‖ := by
+  rw [kmsFun_sub_I m hfr hgr t, RCLike.norm_conj]
+  exact norm_kmsFun_ofReal_le m t hf hg hbf
+
 end QIQTH.Fock.BoostKMS
