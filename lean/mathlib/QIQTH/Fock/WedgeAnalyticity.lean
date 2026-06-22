@@ -354,4 +354,21 @@ theorem integrable_exp_neg_const_mul_cosh {c : ℝ} (hc : 0 < c) :
   refine Real.exp_le_exp.mpr ?_
   nlinarith [sq_div_eight_le_cosh θ, hc.le]
 
+/-- **A2 — uniform wedge margin.** If `f` has compact support contained strictly in the (open) right wedge
+    (`tsupport f ⊆ {x₁ > |x₀|}`), there is a uniform margin `δ > 0` with `δ ≤ x₁−x₀` and `δ ≤ x₁+x₀` on
+    `tsupport f`. (Continuous positive function on a compact set attains a positive minimum.) This gives the
+    uniform damping rate `coshθ·x₁ − sinhθ·x₀ ≥ δ·coshθ` powering the interior-`λ` `L²` decay. -/
+theorem exists_wedge_margin {f : V → ℂ} (hfc : HasCompactSupport f)
+    (hsupp : ∀ x ∈ tsupport f, 0 < x 1 - x 0 ∧ 0 < x 1 + x 0) :
+    ∃ δ : ℝ, 0 < δ ∧ ∀ x ∈ tsupport f, δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0 := by
+  rcases Set.eq_empty_or_nonempty (tsupport f) with he | hne
+  · exact ⟨1, one_pos, fun x hx => by simp only [he, Set.mem_empty_iff_false] at hx⟩
+  · have hg : ContinuousOn (fun x : V => min (x 1 - x 0) (x 1 + x 0)) (tsupport f) :=
+      (Continuous.min (by fun_prop) (by fun_prop)).continuousOn
+    obtain ⟨x₁, hx₁mem, hx₁min⟩ := IsCompact.exists_isMinOn hfc hne hg
+    rw [isMinOn_iff] at hx₁min
+    refine ⟨min (x₁ 1 - x₁ 0) (x₁ 1 + x₁ 0), ?_, fun y hy => ?_⟩
+    · obtain ⟨ha, hb⟩ := hsupp x₁ hx₁mem; exact lt_min ha hb
+    · exact ⟨(hx₁min y hy).trans (min_le_left _ _), (hx₁min y hy).trans (min_le_right _ _)⟩
+
 end QIQTH.Fock.WedgeAnalyticity

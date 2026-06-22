@@ -4672,5 +4672,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.WedgeAnalyticity.integrable_exp_neg_const_mul_cosh
 -- expected: standard only — ★ A2 decay building block: exp(−c·coshθ) integrable over ℝ (c>0), Gaussian
 -- domination via coshθ≥θ²/8. The θ-integrability the interior-λ wedge-mode strip decay reduces to.
+#print axioms QIQTH.Fock.WedgeAnalyticity.exists_wedge_margin
+-- expected: standard only — ★ A2: uniform wedge margin. tsupport f ⊆ open wedge (compact) ⟹ ∃δ>0,
+-- δ≤x₁∓x₀ on tsupport f (continuous positive fn on compact attains positive min). Gives the uniform damping
+-- rate coshθ·x₁−sinhθ·x₀ ≥ δ·coshθ powering the interior-λ L² decay (the pointwise route, sidestepping Minkowski).
 
 end QIQTH.AxiomAudit
