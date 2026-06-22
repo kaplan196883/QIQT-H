@@ -4676,5 +4676,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ A2: uniform wedge margin. tsupport f ⊆ open wedge (compact) ⟹ ∃δ>0,
 -- δ≤x₁∓x₀ on tsupport f (continuous positive fn on compact attains positive min). Gives the uniform damping
 -- rate coshθ·x₁−sinhθ·x₀ ≥ δ·coshθ powering the interior-λ L² decay (the pointwise route, sidestepping Minkowski).
+#print axioms QIQTH.Fock.WedgeAnalyticity.norm_KrepCont_le_exp_decay
+-- expected: standard only — ★★ A2 step 1: POINTWISE STRIP-DECAY. ‖KrepCont m f (θ+iλ)‖ ≤ (1/√2)(∫‖f‖)·exp(−(m sinλ δ)coshθ)
+-- for wedge-supported f (margin δ), 0≤λ≤π. The double-exponential θ-decay (interior λ) making KrepCont(·+iλ)∈L².
+-- Uses norm_kernel_eq (‖K‖=exp(m sinλ(sinhθ x₀−coshθ x₁))) + norm_kernel_le_exp_decay (margin ⟹ ≤exp(−c coshθ)).
 
 end QIQTH.AxiomAudit

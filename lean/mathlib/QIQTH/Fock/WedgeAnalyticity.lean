@@ -371,4 +371,62 @@ theorem exists_wedge_margin {f : V → ℂ} (hfc : HasCompactSupport f)
     · obtain ⟨ha, hb⟩ := hsupp x₁ hx₁mem; exact lt_min ha hb
     · exact ⟨(hx₁min y hy).trans (min_le_left _ _), (hx₁min y hy).trans (min_le_right _ _)⟩
 
+/-- The exact kernel modulus on the strip: `‖K(θ+iλ,x)‖ = exp(m sinλ·(sinhθ·x₀ − coshθ·x₁))`. -/
+theorem norm_kernel_eq (m : ℝ) (x : V) (θ lam : ℝ) :
+    ‖kernel m x ((θ : ℂ) + (lam : ℂ) * Complex.I)‖
+      = Real.exp (m * Real.sin lam * (Real.sinh θ * x 0 - Real.cosh θ * x 1)) := by
+  rw [kernel, Complex.norm_exp]
+  congr 1
+  simp only [minkowskiDotℂ, massShellℂ_zero, massShellℂ_one, cosh_ofReal_add_ofReal_mul_I,
+    sinh_ofReal_add_ofReal_mul_I, Complex.mul_re, Complex.mul_im, Complex.neg_re, Complex.neg_im,
+    Complex.I_re, Complex.I_im, Complex.add_re, Complex.add_im, Complex.sub_re, Complex.sub_im,
+    Complex.ofReal_re, Complex.ofReal_im]
+  ring
+
+/-- **Pointwise strip-decay of the kernel.** For `x` with wedge margin `δ` (`δ ≤ x₁∓x₀`) and `0≤λ≤π`,
+    `‖K(θ+iλ,x)‖ ≤ exp(−(m sinλ δ)·coshθ)` — double-exponential decay in `θ` for interior `λ`. -/
+theorem norm_kernel_le_exp_decay {m : ℝ} (hm : 0 ≤ m) {x : V} {δ : ℝ}
+    (hx1 : δ ≤ x 1 - x 0) (hx2 : δ ≤ x 1 + x 0) {θ lam : ℝ} (hlam0 : 0 ≤ lam)
+    (hlamπ : lam ≤ Real.pi) :
+    ‖kernel m x ((θ : ℂ) + (lam : ℂ) * Complex.I)‖
+      ≤ Real.exp (-(m * Real.sin lam * δ) * Real.cosh θ) := by
+  rw [norm_kernel_eq]
+  refine Real.exp_le_exp.mpr ?_
+  have hsin : 0 ≤ Real.sin lam := Real.sin_nonneg_of_nonneg_of_le_pi hlam0 hlamπ
+  have hwedge : δ * Real.cosh θ ≤ Real.cosh θ * x 1 - Real.sinh θ * x 0 := by
+    rw [Real.cosh_eq, Real.sinh_eq]
+    nlinarith [mul_nonneg (Real.exp_pos θ).le (by linarith : (0 : ℝ) ≤ x 1 - x 0 - δ),
+      mul_nonneg (Real.exp_pos (-θ)).le (by linarith : (0 : ℝ) ≤ x 1 + x 0 - δ)]
+  nlinarith [mul_nonneg (mul_nonneg hm hsin) (by linarith : (0 : ℝ) ≤
+    (Real.cosh θ * x 1 - Real.sinh θ * x 0) - δ * Real.cosh θ)]
+
+/-- **A2 (step 1) — pointwise strip-decay of the continued amplitude.** For wedge-supported `f` (uniform
+    margin `δ` via `exists_wedge_margin`) and `0≤λ≤π`,
+    `‖KrepCont m f (θ+iλ)‖ ≤ (1/√2)·(∫‖f‖)·exp(−(m sinλ δ)·coshθ)`. The decay factor (double-exponential in
+    `θ` for interior `λ`) is what makes `KrepCont m f (·+iλ) ∈ L²`. -/
+theorem norm_KrepCont_le_exp_decay {m : ℝ} (hm : 0 ≤ m) {f : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) {δ : ℝ}
+    (hmargin : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    {θ lam : ℝ} (hlam0 : 0 ≤ lam) (hlamπ : lam ≤ Real.pi) :
+    ‖KrepCont m f ((θ : ℂ) + (lam : ℂ) * Complex.I)‖
+      ≤ 1 / Real.sqrt 2 * (∫ x, ‖f x‖) * Real.exp (-(m * Real.sin lam * δ) * Real.cosh θ) := by
+  have hsqrt : ‖(1 / Real.sqrt 2 : ℂ)‖ = 1 / Real.sqrt 2 := by
+    rw [norm_div, norm_one, Complex.norm_real, Real.norm_of_nonneg (Real.sqrt_nonneg 2)]
+  rw [KrepCont, norm_mul, hsqrt, mul_assoc]
+  refine mul_le_mul_of_nonneg_left ?_ (by positivity)
+  calc ‖∫ x, kernel m x ((θ : ℂ) + (lam : ℂ) * Complex.I) * f x‖
+      ≤ ∫ x, ‖kernel m x ((θ : ℂ) + (lam : ℂ) * Complex.I) * f x‖ := norm_integral_le_integral_norm _
+    _ ≤ ∫ x, Real.exp (-(m * Real.sin lam * δ) * Real.cosh θ) * ‖f x‖ := by
+        refine integral_mono_of_nonneg (Filter.Eventually.of_forall fun x => norm_nonneg _)
+          ((hf.norm.integrable_of_hasCompactSupport hfc.norm).const_mul _)
+          (Filter.Eventually.of_forall fun x => ?_)
+        simp only [norm_mul]
+        by_cases hfx : f x = 0
+        · simp [hfx]
+        · obtain ⟨hx1, hx2⟩ := hmargin x hfx
+          exact mul_le_mul_of_nonneg_right
+            (norm_kernel_le_exp_decay hm hx1 hx2 hlam0 hlamπ) (norm_nonneg _)
+    _ = (∫ x, ‖f x‖) * Real.exp (-(m * Real.sin lam * δ) * Real.cosh θ) := by
+        rw [integral_const_mul]; ring
+
 end QIQTH.Fock.WedgeAnalyticity
