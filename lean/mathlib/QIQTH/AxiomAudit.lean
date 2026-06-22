@@ -4647,5 +4647,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.WedgeAnalyticity.norm_kernel_le_one
 -- expected: standard only — ★★★ A1c: the WEDGE-DAMPING bound. ‖exp(−i·p_m(θ+iλ)·x)‖=exp(m sinλ(sinhθ x₀−coshθ x₁))≤1
 -- for x in the right wedge (0<x₁−x₀, 0<x₁+x₀), 0≤λ≤π — the analytic engine that puts ψ_f in the Hardy strip H²(S_π).
+#print axioms QIQTH.Fock.WedgeAnalyticity.hasDerivAt_kernel
+-- expected: standard only — ★★ A1b (pointwise): the kernel ζ↦exp(−i·p_m(ζ)·x) is entire in rapidity, with
+-- dK/dζ = K·(−i·(m sinhζ·x₀ − m coshζ·x₁)) (chain rule through exp). The per-x half of the holomorphy argument.
 
 end QIQTH.AxiomAudit

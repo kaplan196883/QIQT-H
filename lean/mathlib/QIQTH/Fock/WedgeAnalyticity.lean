@@ -105,4 +105,37 @@ theorem norm_kernel_le_one {m : ℝ} (hm : 0 ≤ m) {x : V} (hx1 : 0 < x 1 - x 0
     nlinarith [mul_pos (Real.exp_pos θ) hx1, mul_pos (Real.exp_pos (-θ)) hx2]
   nlinarith [mul_nonneg (mul_nonneg hm hsin) (le_of_lt hwedge)]
 
+/-! ### A1b — holomorphy of the continued amplitude (pointwise ζ-derivative of the kernel) -/
+
+/-- The analytic-continuation **kernel** `K(ζ, x) = exp(−i·p_m(ζ)·x)`. -/
+def kernel (m : ℝ) (x : V) (ζ : ℂ) : ℂ :=
+  Complex.exp (-Complex.I * minkowskiDotℂ (massShellℂ m ζ) x)
+
+/-- The `ζ`-derivative of the complex pairing `p_m(ζ)·x = m coshζ·x₀ − m sinhζ·x₁` is
+    `m sinhζ·x₀ − m coshζ·x₁`. -/
+theorem hasDerivAt_minkowskiDotℂ_massShellℂ (m : ℝ) (x : V) (ζ : ℂ) :
+    HasDerivAt (fun ζ => minkowskiDotℂ (massShellℂ m ζ) x)
+      ((m : ℂ) * Complex.sinh ζ * (x 0 : ℂ) - (m : ℂ) * Complex.cosh ζ * (x 1 : ℂ)) ζ := by
+  have h0 : HasDerivAt (fun ζ => (m : ℂ) * Complex.cosh ζ * (x 0 : ℂ))
+      ((m : ℂ) * Complex.sinh ζ * (x 0 : ℂ)) ζ :=
+    ((Complex.hasDerivAt_cosh ζ).const_mul (m : ℂ)).mul_const (x 0 : ℂ)
+  have h1 : HasDerivAt (fun ζ => (m : ℂ) * Complex.sinh ζ * (x 1 : ℂ))
+      ((m : ℂ) * Complex.cosh ζ * (x 1 : ℂ)) ζ :=
+    ((Complex.hasDerivAt_sinh ζ).const_mul (m : ℂ)).mul_const (x 1 : ℂ)
+  exact h0.sub h1
+
+/-- **A1b (pointwise).** For each `x`, the kernel `ζ ↦ K(ζ,x)` is complex-differentiable everywhere, with
+    `dK/dζ = K(ζ,x)·(−i·(m sinhζ·x₀ − m coshζ·x₁))` — the chain rule through `exp`. So for each fixed `x`
+    the integrand is entire in the rapidity parameter (the per-`x` half of the dominated-convergence
+    holomorphy argument). -/
+theorem hasDerivAt_kernel (m : ℝ) (x : V) (ζ : ℂ) :
+    HasDerivAt (kernel m x)
+      (kernel m x ζ * (-Complex.I * ((m : ℂ) * Complex.sinh ζ * (x 0 : ℂ)
+        - (m : ℂ) * Complex.cosh ζ * (x 1 : ℂ)))) ζ := by
+  have hin : HasDerivAt (fun ζ => -Complex.I * minkowskiDotℂ (massShellℂ m ζ) x)
+      (-Complex.I * ((m : ℂ) * Complex.sinh ζ * (x 0 : ℂ)
+        - (m : ℂ) * Complex.cosh ζ * (x 1 : ℂ))) ζ :=
+    (hasDerivAt_minkowskiDotℂ_massShellℂ m x ζ).const_mul (-Complex.I)
+  exact (Complex.hasDerivAt_exp _).comp ζ hin
+
 end QIQTH.Fock.WedgeAnalyticity

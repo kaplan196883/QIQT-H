@@ -116,9 +116,14 @@ The single analytic engine: **`p(θ+iπ) = −p(θ)`** (since `cosh(θ+iπ)=−c
   - **A1a DONE** (commit `7fb8b7a`, `QIQTH/Fock/WedgeAnalyticity.lean`): `minkowskiDotℂ`, `massShellℂ`,
     `KrepCont`; `KrepCont_ofReal` (real-axis agreement); `massShellℂ_add_pi_I` (the `iπ`-shift
     `p_m(ζ+iπ)=−p_m(ζ)`). Axiom-free, budget 0.
-  - **A1b NEXT:** holomorphy of `ζ ↦ KrepCont m f ζ` (for a suitable analytic class of `f` — start with
-    compactly-supported smooth real wedge functions, for which the integral is over a bounded set ⟹ entire;
-    use `hasDerivAt_integral_of_dominated_loc_of_deriv_le` over `ℂ`, MellinTransform.lean as template).
+  - **A1b-i DONE** (`WedgeAnalyticity.lean`): `kernel m x ζ := exp(−i·p_m(ζ)·x)`;
+    `hasDerivAt_minkowskiDotℂ_massShellℂ` (ζ-deriv of the pairing) + `hasDerivAt_kernel` (the kernel is
+    entire in ζ, `dK/dζ = K·(−i·(m sinhζ·x₀ − m coshζ·x₁))`, chain rule through `exp`). Axiom-free, budget 0.
+  - **A1b-ii NEXT:** integral assembly — `HasDerivAt (KrepCont m f) (∫ kernel'·f) ζ₀` for compactly-supported
+    `f` via `hasDerivAt_integral_of_dominated_loc_of_deriv_le` (𝕜=ℂ): supply `F ζ x = kernel m x ζ·f x`,
+    `F' ζ x = (kernel-deriv)·f x`, and the ball-domination bound `‖F' ζ x‖ ≤ C·‖f x‖` (kernel norm `≤ 1` on
+    the strip from A1c + the polynomial factor `‖m sinhζ x₀ − m coshζ x₁‖` bounded on the compact ζ-ball ×
+    compact `supp f`). Then `DifferentiableOn ℂ (KrepCont m f) univ` ⟹ holomorphy.
   - **A1c DONE** (commit pending, `WedgeAnalyticity.lean`): `cosh_ofReal_add_ofReal_mul_I` /
     `sinh_ofReal_add_ofReal_mul_I` (real/imag split at complex rapidity) + `norm_kernel_le_one` — the
     wedge-damping bound `‖exp(−i·p_m(θ+iλ)·x)‖ ≤ 1` for `0<x₁−x₀`, `0<x₁+x₀`, `0≤λ≤π`, `m≥0` (the
