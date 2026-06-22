@@ -1799,4 +1799,24 @@ theorem stripKMSrvd_pair {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuo
     (kmsFun_diffContOnCl hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL)
     (norm_kmsFun_le_closed hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL)
 
+open scoped BoundedContinuousFunction in
+/-- **(c1) The KMS witness as a bounded continuous function on the closed strip** (nice `f,g`). Continuous via
+    `kmsFun_continuousOn_closed`, bounded by `2‖KrepL2 g‖·‖KrepL2 f‖` via `norm_kmsFun_le_norm_mul`. The vehicle
+    for the uniform-Cauchy limit (`norm_kmsFun_sub_le`) in the span-closure threading to `StripKMSrvd 𝒦_W`. -/
+noncomputable def kmsBCF {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hfL : MemLp (Krep m f) 2 volume) (hgL : MemLp (Krep m g) 2 volume) :
+    (Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0) →ᵇ ℂ :=
+  BoundedContinuousFunction.ofNormedAddCommGroup
+    (Set.restrict (Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0) (kmsFun m f g))
+    ((kmsFun_continuousOn_closed hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL).restrict)
+    (2 * ‖hgL.toLp (Krep m g)‖ * ‖hfL.toLp (Krep m f)‖)
+    (fun z => by
+      have hz := z.2
+      rw [Set.mem_preimage, Set.mem_Icc] at hz
+      exact norm_kmsFun_le_norm_mul hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL hz.1 hz.2)
+
 end QIQTH.Fock.BoostKMS
