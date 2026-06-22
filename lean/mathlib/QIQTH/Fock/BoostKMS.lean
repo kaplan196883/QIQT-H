@@ -2549,4 +2549,18 @@ theorem oneParticleBW_niceWedge_of_standard {m : ℝ} (hm : 0 < m)
   oneParticleBW_niceWedge hm (niceWedgeStandardSubspace m hsep hcyc) V
     (niceWedgeClosedSubmodule_coe m) hVboost
 
+open QIQTH.StandardSubspaceModular in
+/-- **★★ The nice-core wedge BW with the cyclic input in ANALYTIC form**: `modUnitary = boost(2πt)` given
+    `hsep` (separating, lattice) and the *analytic* `Dense (span_ℂ (niceWedgeGenSet m))` — the cyclic
+    hypothesis is supplied by `niceWedge_isCyclic_of_dense`.  So of the two Reeh–Schlieder inputs, the cyclic
+    one is now the standard wedge-totality statement (no lattice/instance plumbing); only `hsep` remains as a
+    lattice identity (its own reduction is the dual `Kᗮ`-cyclicity = opposite-wedge totality). -/
+theorem oneParticleBW_niceWedge_of_dense {m : ℝ} (hm : 0 < m)
+    (V : ℝ → (Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ)))
+    (hVboost : ∀ t x, V t x = boostUnitary (2 * Real.pi * t) x)
+    (hsep : niceWedgeClosedSubmodule m ⊓ (niceWedgeClosedSubmodule m).mulI = ⊥)
+    (hdense : Dense (Submodule.span ℂ (niceWedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ)))) :
+    ∀ t, modUnitary (niceWedgeStandardSubspace m hsep (niceWedge_isCyclic_of_dense m hdense)) t = V t :=
+  oneParticleBW_niceWedge_of_standard hm V hVboost hsep (niceWedge_isCyclic_of_dense m hdense)
+
 end QIQTH.Fock.BoostKMS
