@@ -780,6 +780,16 @@ theorem Krep_add (m : ℝ) {f₁ f₂ : V → ℂ} (hf₁ : Continuous f₁) (hf
   rw [← KrepCont_ofReal, ← KrepCont_ofReal, ← KrepCont_ofReal,
     KrepCont_add m hf₁ hf₁c hf₂ hf₂c (θ : ℂ)]
 
+/-- **`Krep` (real axis) respects subtraction** — `Krep m (f₁−f₂) = Krep m f₁ − Krep m f₂` (from `Krep_add`). -/
+theorem Krep_sub (m : ℝ) {f₁ f₂ : V → ℂ} (hf₁ : Continuous f₁) (hf₁c : HasCompactSupport f₁)
+    (hf₂ : Continuous f₂) (hf₂c : HasCompactSupport f₂) (θ : ℝ) :
+    Krep m (f₁ - f₂) θ = Krep m f₁ θ - Krep m f₂ θ := by
+  have h : Krep m (f₁ - f₂ + f₂) θ = Krep m (f₁ - f₂) θ + Krep m f₂ θ :=
+    Krep_add m (hf₁.sub hf₂) (hf₁c.sub hf₂c) hf₂ hf₂c θ
+  have he : f₁ - f₂ + f₂ = f₁ := by ext x; simp only [Pi.add_apply, Pi.sub_apply]; ring
+  rw [he] at h
+  rw [h]; ring
+
 /-- **Affine-argument `L²` membership on the CLOSED strip** `Im c₀ ∈ [0,π]`. Extends `memLp_KrepCont_affine`
     to the two boundary heights: at `Im c₀ = 0` the slice is a real-axis translate `Krep m f(·+Re c₀)`
     (`KrepCont_ofReal`), at `Im c₀ = π` it is the conjugate `conj(Krep m f(·+Re c₀))` (`KrepCont_add_pi_I`,
