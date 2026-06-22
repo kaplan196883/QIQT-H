@@ -235,12 +235,12 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
      machinery; closed-strip continuity in ~5 steps:
        (i) **DONE** tail seminorm `T_h(R) := √(∫_{|θ|>R}‖Krep h‖²) → 0` (`tendsto_tail_sq_zero`,
            `tendsto_tail_seminorm_zero`), so `ε_R := T_g(R)·‖Krep f‖₂ + ‖Krep g‖₂·T_f(R) → 0`.
-       (ii) **shifted-tail geometry** `|θ|>R ⟹ |θ+πt|>R ∨ |θ−πt|>R` **DONE** (`tail_geom`); the annular EDGE bound
-           `‖kmsFunCut S t − kmsFunCut R t‖ ≤ ε_R` (uniform in `t`) is **IN PROGRESS**: helpers DONE —
-           `real_L2_inner_le` (real CS, any measure) + `tail_term_le` (one shifted-tail term
-           `≤ T_{h₁}(R)·‖Krep h₂‖₂` via real CS + translation). REMAINING: `tail_integral_le` (sum the two terms
-           via `tail_geom` + `integral_mono_of_nonneg`, needs `‖Krep g(·+πt)‖·‖Krep f(·−πt)‖∈L¹` by AM-GM) then
-           the annulus-⊆-tail step (`kmsFunCut S t − kmsFunCut R t = ∫_{annulus}` via `integral_indicator`).
+       (ii) **shifted-tail geometry** `tail_geom` DONE; **the uniform tail bound `tail_integral_le`
+           `∫_{|θ|>R}‖Krep g(·+πt)‖‖Krep f(·−πt)‖ ≤ ε_R` is DONE** (helpers `real_L2_inner_le` + `tail_term_le`,
+           geometry split + AM-GM product integrability). REMAINING: the annulus EDGE bound
+           `‖kmsFunCut S t − kmsFunCut R t‖ ≤ ε_R` (`S≥R`): pointwise
+           `‖Icc(−S,S).indicator I θ − Icc(−R,R).indicator I θ‖ ≤ 1_{|θ|>R}·w θ` + `norm_integral_le_integral_norm`
+           + `integral_mono` + `tail_integral_le` (and the bottom edge via `kmsFunCut_sub_I`-style reflection).
        (iii) **`norm_le_of_strip_edges`** (DONE, extracted) applied to `Φ = kmsFunCut S − kmsFunCut R`, `b = ε_R`
            ⟹ `‖kmsFunCut S z − kmsFunCut R z‖ ≤ ε_R` on the whole closed strip;
        (iv) `S→∞` (`tendsto_setIntegral_of_monotone`) ⟹ `‖kmsFun z − kmsFunCut R z‖ ≤ ε_R` on the closed strip
