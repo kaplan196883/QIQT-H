@@ -1220,4 +1220,85 @@ theorem tail_integral_le (m t : ℝ) {f g : V → ℂ} (hf : MemLp (Krep m f) 2 
     simp only [hwdef, sub_eq_add_neg]
     rw [mul_comm (‖Krep m g (θ + Real.pi * t)‖) (‖Krep m f (θ + -(Real.pi * t))‖)]
 
+/-- **Annular top-edge bound** (`S ≥ R`): `‖kmsFunCut S t − kmsFunCut R t‖ ≤ ε_R` UNIFORMLY in `t`. The
+    difference is `∫ (1_{Icc(−S,S)} − 1_{Icc(−R,R)})·I` whose integrand has norm `≤ 1_{|θ|>R}·w` pointwise
+    (`I` is the real-axis integrand, `w=‖I‖`; on `|θ|≤R` it cancels, on `R<|θ|≤S` it is `I`, beyond `S` it is
+    `0`); then `norm_integral_le_integral_norm` + `integral_mono` + `tail_integral_le`. -/
+theorem norm_kmsFunCut_diff_ofReal_le (m t : ℝ) {f g : V → ℂ} (hf : MemLp (Krep m f) 2 volume)
+    (hg : MemLp (Krep m g) 2 volume) {R S : ℝ} (hRS : R ≤ S) :
+    ‖kmsFunCut m f g S (t : ℂ) - kmsFunCut m f g R (t : ℂ)‖
+      ≤ Real.sqrt (∫ θ in {θ : ℝ | R < |θ|}, ‖Krep m g θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m f θ‖ ^ 2)
+        + Real.sqrt (∫ θ in {θ : ℝ | R < |θ|}, ‖Krep m f θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m g θ‖ ^ 2) := by
+  have hTg : MemLp (fun θ : ℝ => Krep m g (θ + Real.pi * t)) 2 volume := by
+    simpa [Function.comp_def] using
+      hg.comp_measurePreserving (measurePreserving_add_right volume (Real.pi * t))
+  have hTf : MemLp (fun θ : ℝ => Krep m f (θ - Real.pi * t)) 2 volume := by
+    have h := hf.comp_measurePreserving (measurePreserving_add_right volume (-(Real.pi * t)))
+    simpa [Function.comp_def, sub_eq_add_neg] using h
+  have hga : Integrable (fun θ => ‖Krep m g (θ + Real.pi * t)‖ ^ 2) volume :=
+    (memLp_two_iff_integrable_sq hTg.norm.aestronglyMeasurable).mp hTg.norm
+  have hfb : Integrable (fun θ => ‖Krep m f (θ - Real.pi * t)‖ ^ 2) volume :=
+    (memLp_two_iff_integrable_sq hTf.norm.aestronglyMeasurable).mp hTf.norm
+  have hprod : Integrable (fun θ => ‖Krep m g (θ + Real.pi * t)‖ * ‖Krep m f (θ - Real.pi * t)‖) volume := by
+    refine Integrable.mono' (hga.add hfb)
+      (hTg.norm.aestronglyMeasurable.mul hTf.norm.aestronglyMeasurable)
+      (Filter.Eventually.of_forall fun θ => ?_)
+    simp only [Pi.add_apply]
+    rw [Real.norm_of_nonneg (by positivity)]
+    nlinarith [sq_nonneg (‖Krep m g (θ + Real.pi * t)‖ - ‖Krep m f (θ - Real.pi * t)‖),
+      norm_nonneg (Krep m g (θ + Real.pi * t)), norm_nonneg (Krep m f (θ - Real.pi * t))]
+  have hIaesm : AEStronglyMeasurable
+      (fun θ => (starRingEnd ℂ) (Krep m g (θ + Real.pi * t)) * Krep m f (θ - Real.pi * t)) volume :=
+    (Complex.continuous_conj.comp_aestronglyMeasurable hTg.aestronglyMeasurable).mul hTf.aestronglyMeasurable
+  have hI : Integrable
+      (fun θ => (starRingEnd ℂ) (Krep m g (θ + Real.pi * t)) * Krep m f (θ - Real.pi * t)) volume := by
+    rw [← integrable_norm_iff hIaesm]
+    refine hprod.congr (Filter.Eventually.of_forall fun θ => ?_)
+    show ‖Krep m g (θ + Real.pi * t)‖ * ‖Krep m f (θ - Real.pi * t)‖
+      = ‖(starRingEnd ℂ) (Krep m g (θ + Real.pi * t)) * Krep m f (θ - Real.pi * t)‖
+    rw [norm_mul, RCLike.norm_conj]
+  rw [kmsFunCut_ofReal, kmsFunCut_ofReal, ← integral_indicator measurableSet_Icc,
+    ← integral_indicator measurableSet_Icc,
+    ← integral_sub (hI.indicator measurableSet_Icc) (hI.indicator measurableSet_Icc)]
+  refine (norm_integral_le_integral_norm _).trans ?_
+  set J : ℝ → ℂ := fun θ => (starRingEnd ℂ) (Krep m g (θ + Real.pi * t)) * Krep m f (θ - Real.pi * t)
+    with hJdef
+  have hnormJ : ∀ θ, ‖J θ‖ = ‖Krep m g (θ + Real.pi * t)‖ * ‖Krep m f (θ - Real.pi * t)‖ := fun θ => by
+    rw [hJdef, norm_mul, RCLike.norm_conj]
+  have hRHSint : Integrable (fun θ => Set.indicator {θ : ℝ | R < |θ|} (1 : ℝ → ℝ) θ
+      * (‖Krep m g (θ + Real.pi * t)‖ * ‖Krep m f (θ - Real.pi * t)‖)) volume := by
+    have heq : (fun θ => Set.indicator {θ : ℝ | R < |θ|} (1 : ℝ → ℝ) θ
+          * (‖Krep m g (θ + Real.pi * t)‖ * ‖Krep m f (θ - Real.pi * t)‖))
+        = {θ : ℝ | R < |θ|}.indicator
+          (fun θ => ‖Krep m g (θ + Real.pi * t)‖ * ‖Krep m f (θ - Real.pi * t)‖) := by
+      funext θ
+      by_cases hθ : θ ∈ {θ : ℝ | R < |θ|}
+      · rw [Set.indicator_of_mem hθ, Set.indicator_of_mem hθ, Pi.one_apply, one_mul]
+      · rw [Set.indicator_of_notMem hθ, Set.indicator_of_notMem hθ, zero_mul]
+    rw [heq]
+    exact hprod.indicator (measurableSet_lt measurable_const _root_.continuous_abs.measurable)
+  refine (integral_mono ((hI.indicator measurableSet_Icc).sub (hI.indicator measurableSet_Icc)).norm
+    hRHSint (fun θ => ?_)).trans (tail_integral_le m t hf hg R)
+  -- pointwise: ‖1_S·J − 1_R·J‖ ≤ 1_{|θ|>R}·(‖Krep g(θ+πt)‖·‖Krep f(θ−πt)‖)
+  show ‖Set.indicator (Set.Icc (-S) S) J θ - Set.indicator (Set.Icc (-R) R) J θ‖
+    ≤ Set.indicator {θ : ℝ | R < |θ|} (1 : ℝ → ℝ) θ
+      * (‖Krep m g (θ + Real.pi * t)‖ * ‖Krep m f (θ - Real.pi * t)‖)
+  by_cases hR : |θ| ≤ R
+  · have hθR : θ ∈ Set.Icc (-R) R := Set.mem_Icc.mpr (abs_le.mp hR)
+    have hθS : θ ∈ Set.Icc (-S) S := Set.mem_Icc.mpr (abs_le.mp (hR.trans hRS))
+    rw [Set.indicator_of_mem hθS, Set.indicator_of_mem hθR, sub_self, norm_zero]
+    exact mul_nonneg (Set.indicator_nonneg (fun _ _ => zero_le_one) θ) (by positivity)
+  · push_neg at hR
+    rw [Set.indicator_of_mem (show θ ∈ {θ : ℝ | R < |θ|} from hR), Pi.one_apply, one_mul]
+    by_cases hS : |θ| ≤ S
+    · have hθS : θ ∈ Set.Icc (-S) S := Set.mem_Icc.mpr (abs_le.mp hS)
+      have hθR : θ ∉ Set.Icc (-R) R := fun h => absurd (abs_le.mpr (Set.mem_Icc.mp h)) (not_le.mpr hR)
+      rw [Set.indicator_of_mem hθS, Set.indicator_of_notMem hθR, sub_zero, hnormJ]
+    · push_neg at hS
+      have hθS : θ ∉ Set.Icc (-S) S := fun h => absurd (abs_le.mpr (Set.mem_Icc.mp h)) (not_le.mpr hS)
+      have hθR : θ ∉ Set.Icc (-R) R :=
+        fun h => absurd (abs_le.mpr (Set.mem_Icc.mp h)) (not_le.mpr hR)
+      rw [Set.indicator_of_notMem hθS, Set.indicator_of_notMem hθR, sub_zero, norm_zero]
+      positivity
+
 end QIQTH.Fock.BoostKMS
