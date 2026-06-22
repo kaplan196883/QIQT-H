@@ -332,4 +332,44 @@ theorem exists_sin_min {z₀ : ℂ} {ε : ℝ} (hε : 0 < ε)
   obtain ⟨him0, him1⟩ := hball z₁ hz₁mem
   exact ⟨Real.sin (-(Real.pi * z₁.im)), sin_neg_pi_mul_pos him0 him1, hz₁min⟩
 
+/-- **`h_bound` term 1**: `‖deriv reflKrep(θ+πz)‖·‖KrepCont f(θ−πz)‖ ≤ Cdg·Cf·(e^{πR}·cosh θ·exp(−κ·cosh θ))`
+    (`κ = m σmin δ e^{−πR}`), via `prod_norm_bound_cosh_shift` (the `deriv reflKrep` factor decays in
+    `cosh(θ+π Re z)`, the `KrepCont f` factor is bounded by `Cf`). -/
+theorem norm_term1_le {m : ℝ} (hmpos : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    {z : ℂ} (hz0 : -1 < z.im) (hz1 : z.im < 0) {σmin R : ℝ} (hσmin : 0 < σmin)
+    (hσ : σmin ≤ Real.sin (-(Real.pi * z.im))) (hR : |z.re| ≤ R) (θ : ℝ) :
+    ‖deriv (fun u => (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) u))) ((θ : ℂ) + (Real.pi : ℂ) * z)‖
+        * ‖KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)‖
+      ≤ 1 / Real.sqrt 2 * (|m| * ∫ x, (|x 0| + |x 1|) * ‖g x‖) * (1 / Real.sqrt 2 * ∫ x, ‖f x‖)
+        * (Real.exp (Real.pi * R) * Real.cosh θ
+          * Real.exp (-(m * σmin * δ * Real.exp (-(Real.pi * R)) * Real.cosh θ))) := by
+  have him_g : ((θ : ℂ) + (Real.pi : ℂ) * z).im = Real.pi * z.im := by simp
+  have hre_g : ((θ : ℂ) + (Real.pi : ℂ) * z).re = θ + Real.pi * z.re := by simp
+  have him_f : ((θ : ℂ) - (Real.pi : ℂ) * z).im = -(Real.pi * z.im) := by simp
+  have hσz : 0 < Real.sin (-(Real.pi * z.im)) := sin_neg_pi_mul_pos hz0 hz1
+  have hna : ‖deriv (fun u => (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) u))) ((θ : ℂ) + (Real.pi : ℂ) * z)‖
+      ≤ 1 / Real.sqrt 2 * (|m| * ∫ x, (|x 0| + |x 1|) * ‖g x‖)
+        * (Real.cosh (θ + Real.pi * z.re)
+          * Real.exp (-(m * Real.sin (-(Real.pi * z.im)) * δ * Real.cosh (θ + Real.pi * z.re)))) := by
+    have h := norm_deriv_reflKrepCont_le hmpos.le hg hgc hmg
+      (u := (θ : ℂ) + (Real.pi : ℂ) * z) (by rw [him_g]; nlinarith [Real.pi_pos])
+      (by rw [him_g]; nlinarith [Real.pi_pos])
+    rw [him_g, hre_g, neg_mul] at h
+    exact h.trans_eq (by ring)
+  have hnb : ‖KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)‖ ≤ 1 / Real.sqrt 2 * ∫ x, ‖f x‖ := by
+    refine (norm_KrepCont_le_exp_decay_gen hmpos.le hf hfc hmf
+      (by rw [him_f]; nlinarith [Real.pi_pos]) (by rw [him_f]; nlinarith [Real.pi_pos])).trans ?_
+    refine mul_le_of_le_one_right (by positivity) (Real.exp_le_one_iff.mpr ?_)
+    rw [him_f]
+    nlinarith [mul_pos (mul_pos (mul_pos hmpos hσz) hδ)
+      (Real.cosh_pos ((θ : ℂ) - (Real.pi : ℂ) * z).re)]
+  refine prod_norm_bound_cosh_shift (s := Real.pi * z.re) (S := Real.pi * R)
+    (c := m * Real.sin (-(Real.pi * z.im)) * δ) (c₀ := m * σmin * δ) hna hnb (norm_nonneg _)
+    (by positivity) (by positivity) ?_ (by positivity) ?_
+  · rw [abs_mul, abs_of_nonneg Real.pi_pos.le]; nlinarith [hR, Real.pi_pos, abs_nonneg z.re]
+  · nlinarith [mul_le_mul_of_nonneg_left hσ (mul_pos hmpos hδ).le, hδ, hmpos]
+
 end QIQTH.Fock.BoostKMS
