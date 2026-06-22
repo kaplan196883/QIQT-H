@@ -618,17 +618,19 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          (Krep m ⇑fS)` match is DEFEQ (`toFun`/`toLp` proof-irrelevance — no friction).  **THE ENTIRE CYCLIC REEH–SCHLIEDER
          DISCHARGE IS NOW MECHANICALLY ASSEMBLED, axiom-free, reduced to ONE named concrete fact.**
          NEXT — only **(ii) AMPLITUDE-NONZERO** `Krep m (bumpC 0 10) ≢ 0` (a continuous fn, so `≢ᵐ0 ⟺ ∃θ Krep θ≠0`).
-         **FACTORIZATION BUILT** (`deecc60`): `minkowskiFourier_bumpC` — `minkowskiFourier (bumpC cT cX) p =
-         (∫ e^{−ip₀y}bump1 cT(y)dy)·(∫ e^{ip₁y}bump1 cX(y)dy)` (Fubini `integral_fintype_prod_volume_eq_prod`, mirroring
-         `minkowskiFourier_gaussian`).  So `Krep m (bumpC cT cX) θ = (1/√2)·A(massShell m θ 0)·B(massShell m θ 1)` with
-         `A,B` the 1D bump Fourier integrals.  REMAINING: pick the witness point.  **Route A (θ=0 + positivity, needs a
-         small bump):** at `massShell m 0=(m,0)`, 2nd factor `=∫bump1 cX>0`; 1st factor `∫e^{−imy}bump1 0(y)dy` — real part
-         `∫cos(my)bump1>0` IF the bump radius `<π/(2m)` (then `cos>0` on supp).  The codebase `bump1=⟨1,2⟩` is FIXED radius 2
-         (works only for `m<π/4`); a clean general proof needs a small/​scaled bump → redefine `bumpNiceTest` with radius
-         `~min(1,π/(4(|m|+1)))` (margin `δ=c−2r`).  **Route B (fixed bump, separable real-analytic):** `A,B` entire `≢0`
-         (1D bump FT, `≢0` since `A(0)=∫bump1>0`); `A(m cosh·)`,`B(m sinh·)` real-analytic in `θ` with countable zeros, union
-         `≠ℝ` ⟹ `∃θ` both `≠0`.  Either way THE LAST CONCRETE FACT.  The separating side (`NiceWedgeSeparating`, Pauli–Jordan)
-         remains a parallel unattacked frontier.
+         **FACTORIZATION + θ=0 VALUE + REDUCTION BUILT** (`deecc60`, `fdec690`): `minkowskiFourier_bumpC`
+         (`minkowskiFourier (bumpC cT cX) p = (∫ e^{−ip₀y}bump1 cT)·(∫ e^{ip₁y}bump1 cX)`, Fubini); `Krep_bumpC_zero`
+         (`Krep m (bumpC cT cX) 0 = (1/√2)·A(m)·∫bump1 cX`, shell `(m,0)` ⟹ 2nd phase `e⁰=1`); `Krep_bumpC_ne_zero_of`
+         (`Krep ≢ 0 ⟸ A(m)≠0`, since `∫bump1 cX>0` `ContDiffBump.integral_pos` + `Krep` continuous); and the capstone
+         **`niceWedgeCyclic_of_bump_fourier_ne_zero m hm (hA : ∫ e^{−imy}·bump1 0(y) dy ≠ 0) : NiceWedgeCyclic m`**.
+         **★ THE ENTIRE CYCLIC REEH–SCHLIEDER DISCHARGE NOW FLOWS FROM A SINGLE 1D FOURIER-INTEGRAL NONVANISHING**
+         `A(m) = ∫ e^{−imy}·bump1 0(y) dy ≠ 0` — everything upstream machine-checked, axiom-free.
+         REMAINING — only `A(m)≠0`: **for `0<m<π/4`** the FIXED radius-2 bump works directly (`A(m).re = ∫cos(my)bump1 0 > 0`
+         since `cos(my)>0` for `|y|<2`, `m<π/4`; via `Complex.re`∘integral + `integral_pos_iff_support_of_nonneg`).  **For
+         general `m>0`** a scaled bump (radius `~min(1,π/(4(|m|+1)))`) gives `A(m).re>0` for all `m` — a re-parametrized
+         `bumpNiceTest`/`Krep_bumpC_zero` (the lemmas are stated for `bumpC cT cX` but use the fixed `bump1`; the scaled
+         version re-derives the same chain).  THE LAST CONCRETE COMPUTATION.  The separating side (`NiceWedgeSeparating`,
+         Pauli–Jordan) remains a parallel unattacked frontier.
          **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0` (its amplitude `≠0` somewhere), `8b+8c/8c′` ⟹ `𝓕≠0`
          a.e., feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
          EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness, the full
