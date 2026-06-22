@@ -441,7 +441,13 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          hypotheses remain. **The entire free-field one-particle Bisognano–Wichmann is machine-checked down to exactly
          these two concrete analytic statements about the localized rapidity amplitudes.** Item A's STRUCTURAL reduction
          is COMPLETE; only the two analytic Reeh–Schlieder facts (Fourier/analyticity on the on-shell amplitudes) remain
-         as the honest cited frontier.
+         as the honest cited frontier. **Named as first-class `Prop`s (`af37538`): `NiceWedgeSeparating m`
+         (no complex line / Pauli–Jordan) and `NiceWedgeCyclic m` (wedge-totality / Paley–Wiener); the capstone
+         `oneParticleBW_niceWedge_reehSchlieder` takes exactly these two — the precise, named goals for any future
+         analytic proof.** These are research-grade analysis (Mathlib-unsupported, NOT fire-sized): the cyclic Fubini
+         fails at L² integrability (`h∈L²` not `L¹`, needs L² Fourier theory); separating needs the free-field
+         symplectic non-degeneracy. They are the genuine irreducible physics — Item A reduced as far as possible
+         without entering the analytic proofs themselves.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
