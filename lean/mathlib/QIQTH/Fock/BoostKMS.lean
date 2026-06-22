@@ -1555,6 +1555,15 @@ theorem norm_kmsFun_le_closed {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Con
     (le_refl (0 : ℝ)) hz.1 hz.2
   rwa [kmsFunCut_zero, sub_zero] at h
 
+/-- **Boost-translate preserves `L²`**: `MemLp (Krep m (boostTest a f)) 2` from `MemLp (Krep m f) 2`, since
+    `Krep m (boostTest a f) = Krep m f ∘ (·+a)` (`Krep_boost`) and translation is measure-preserving. -/
+theorem memLp_Krep_boostTest {m : ℝ} {f : V → ℂ} (hf : MemLp (Krep m f) 2 volume) (a : ℝ) :
+    MemLp (Krep m (boostTest a f)) 2 volume := by
+  have heq : Krep m (boostTest a f) = (Krep m f) ∘ (fun θ => θ + a) := by
+    funext θ; exact Krep_boost m a f θ
+  rw [heq]
+  exact hf.comp_measurePreserving (measurePreserving_add_right volume a)
+
 /-- **★★★★★ `StripKMSrvd` (RvD Def 3.4) DISCHARGED for a wedge generator pair, axiom-free.** For real
     wedge-supported `f, g` (continuous, compact support inside the wedge with margin `δ>0`, `MemLp` one-particle
     amplitudes), the boost-orbit KMS witness exists with all of RvD Def 3.4: `DiffContOnCl` on the strip
@@ -1566,14 +1575,13 @@ theorem stripKMSrvd_pair {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuo
     (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
     (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
     (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
-    (hfL : MemLp (Krep m f) 2 volume) (hgL : MemLp (Krep m g) 2 volume)
-    (hbf : ∀ t : ℝ, MemLp (Krep m (boostTest (-(2 * Real.pi * t)) f)) 2 volume) :
+    (hfL : MemLp (Krep m f) 2 volume) (hgL : MemLp (Krep m g) 2 volume) :
     ∃ F : ℂ → ℂ, DiffContOnCl ℂ F (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) ∧
       (∃ M : ℝ, ∀ z : ℂ, ‖F z‖ ≤ M) ∧
       (∀ t : ℝ, F t = inner ℂ (hgL.toLp (Krep m g)) (boostUnitary (2 * Real.pi * t) (hfL.toLp (Krep m f)))) ∧
       (∀ t : ℝ, F ((t : ℂ) - Complex.I)
         = inner ℂ (boostUnitary (2 * Real.pi * t) (hfL.toLp (Krep m f))) (hgL.toLp (Krep m g))) :=
-  stripKMSrvd_pair_of_regularity m hfL hgL hbf hfr hgr
+  stripKMSrvd_pair_of_regularity m hfL hgL (fun t => memLp_Krep_boostTest hfL (-(2 * Real.pi * t))) hfr hgr
     (kmsFun_diffContOnCl hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL)
     (norm_kmsFun_le_closed hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL)
 
