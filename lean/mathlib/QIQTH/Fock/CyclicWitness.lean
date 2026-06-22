@@ -115,6 +115,15 @@ theorem Krep_bumpC_ne_zero_of (m cT cX : ℝ)
     · exact hA h
     · exact hB h
 
+/-- The real part of the 1D bump Fourier integrand: `Re(e^{−imy}·bump1 0(y)) = cos(my)·bump1 0(y)`. -/
+theorem bump1_fourier_re_eq (m y : ℝ) :
+    (Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1 0 y) : ℂ)).re
+      = Real.cos (m * y) * bump1 0 y := by
+  rw [Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, mul_zero, sub_zero]
+  congr 1
+  rw [show -Complex.I * ((m * y : ℝ) : ℂ) = ((-(m * y) : ℝ) : ℂ) * Complex.I by push_cast; ring,
+    Complex.exp_ofReal_mul_I_re, Real.cos_neg]
+
 /-- **★★★★★ The cyclic Reeh–Schlieder discharge, reduced to a single 1D Fourier integral.**
     `NiceWedgeCyclic m` holds as soon as the 1D bump Fourier integral `∫ e^{−imy}·bump1 0(y) dy ≠ 0`.
     Everything else — the complete Wiener–Tauberian theorem, the FT-holomorphy and L²↔L¹ agreement
@@ -125,5 +134,76 @@ theorem niceWedgeCyclic_of_bump_fourier_ne_zero (m : ℝ) (hm : m ≠ 0)
     (hA : (∫ y : ℝ, Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1 0 y) : ℂ)) ≠ 0) :
     NiceWedgeCyclic m :=
   niceWedgeCyclic_bump m hm (Krep_bumpC_ne_zero_of m 0 10 hA)
+
+/-- **The 1D bump Fourier integral is nonzero for `0 < m < π/4`** (the fixed radius-2 bump): its real part
+    `∫ cos(my)·bump1 0(y) dy > 0`, since `cos(my) > 0` on the support `|y| < 2` (as `|my| < 2m < π/2`).
+    Via `RCLike.integral_re` + `bump1_fourier_re_eq` + `integral_pos_iff_support_of_nonneg`. -/
+theorem bump1_fourier_ne_zero {m : ℝ} (hm0 : 0 < m) (hmπ : m < Real.pi / 4) :
+    (∫ y : ℝ, Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1 0 y) : ℂ)) ≠ 0 := by
+  have hbnn : ∀ y : ℝ, 0 ≤ bump1 0 y := fun y => (bump1 0).nonneg
+  have hcontc : Continuous (fun y : ℝ => Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1 0 y) : ℂ)) :=
+    (Complex.continuous_exp.comp (by fun_prop)).mul
+      (Complex.continuous_ofReal.comp (bump1 0).continuous)
+  have hcsc : HasCompactSupport (fun y : ℝ => Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1 0 y) : ℂ)) :=
+    ((bump1 0).hasCompactSupport.comp_left (g := ((↑) : ℝ → ℂ)) Complex.ofReal_zero).mul_left
+  have hint : Integrable (fun y : ℝ => Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1 0 y) : ℂ)) :=
+    hcontc.integrable_of_hasCompactSupport hcsc
+  -- `cos(my) > 0` on the bump support `|y| ≤ 2` (since `|my| < 2m < π/2`)
+  have hcos_pos : ∀ y : ℝ, |y| ≤ 2 → 0 < Real.cos (m * y) := by
+    intro y hy
+    apply Real.cos_pos_of_mem_Ioo
+    rw [Set.mem_Ioo, ← abs_lt, abs_mul, abs_of_pos hm0]
+    calc m * |y| ≤ m * 2 := by nlinarith
+      _ < Real.pi / 2 := by linarith
+  have hcosnn : ∀ y : ℝ, 0 ≤ Real.cos (m * y) * bump1 0 y := by
+    intro y
+    rcases eq_or_lt_of_le (hbnn y) with hb | hb
+    · rw [← hb, mul_zero]
+    · have hy : |y| < 2 := by
+        have hmem : y ∈ Function.support (bump1 0) := Function.mem_support.mpr hb.ne'
+        rw [(bump1 0).support_eq, Metric.mem_ball, Real.dist_eq, sub_zero] at hmem
+        simpa using hmem
+      have := hcos_pos y hy.le
+      positivity
+  have hcosint : Integrable (fun y : ℝ => Real.cos (m * y) * bump1 0 y) :=
+    ((Real.continuous_cos.comp (by fun_prop)).mul (bump1 0).continuous).integrable_of_hasCompactSupport
+      (bump1 0).hasCompactSupport.mul_left
+  have hpos : 0 < ∫ y : ℝ, Real.cos (m * y) * bump1 0 y := by
+    rw [integral_pos_iff_support_of_nonneg hcosnn hcosint]
+    have hsub : Set.Ioo (-1 : ℝ) 1 ⊆ Function.support (fun y => Real.cos (m * y) * bump1 0 y) := by
+      intro y hy
+      rw [Function.mem_support]
+      have hyb : |y| ≤ 1 := abs_le.mpr ⟨le_of_lt hy.1, le_of_lt hy.2⟩
+      have hb1 : bump1 0 y = 1 := (bump1 0).one_of_mem_closedBall (by
+        rw [Metric.mem_closedBall, Real.dist_eq, sub_zero]; exact hyb)
+      have hcos : 0 < Real.cos (m * y) := hcos_pos y (hyb.trans (by norm_num))
+      rw [hb1, mul_one]; exact hcos.ne'
+    calc (0 : ENNReal) < volume (Set.Ioo (-1 : ℝ) 1) := by rw [Real.volume_Ioo]; norm_num
+      _ ≤ _ := measure_mono hsub
+  -- assemble: Re(∫) = ∫ cos·bump > 0, so ∫ ≠ 0
+  intro h
+  have hre : (∫ y : ℝ, Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1 0 y) : ℂ)).re
+      = ∫ y : ℝ, Real.cos (m * y) * bump1 0 y := by
+    rw [show ((∫ y : ℝ, Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1 0 y) : ℂ)).re)
+        = RCLike.re (∫ y : ℝ, Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1 0 y) : ℂ)) from rfl,
+      ← integral_re hint]
+    refine integral_congr_ae (Filter.Eventually.of_forall fun y => ?_)
+    show RCLike.re (Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1 0 y) : ℂ))
+        = Real.cos (m * y) * bump1 0 y
+    rw [RCLike.re_to_complex]
+    exact bump1_fourier_re_eq m y
+  rw [h, Complex.zero_re] at hre
+  linarith [hpos]
+
+/-- **★★★★★★ THE CYCLIC REEH–SCHLIEDER INPUT, UNCONDITIONALLY DISCHARGED for `0 < m < π/4`, axiom-free.**
+    `NiceWedgeCyclic m` holds with no hypotheses for masses in `(0, π/4)`: the concrete wedge bump `bumpC 0 10`
+    has nonzero one-particle amplitude (`bump1_fourier_ne_zero` via `cos`-positivity on the bump support), and
+    the complete Wiener–Tauberian machinery (`niceWedgeCyclic_of_bump_fourier_ne_zero`) does the rest.  The free-
+    field one-particle Bisognano–Wichmann's cyclic side is now a *theorem*, not a hypothesis, for this mass range —
+    every step (Wiener theorem, FT-holomorphy, L²↔L¹ agreement, witness, amplitude) machine-checked and axiom-free.
+    General `m > 0` follows the same chain with a radius-scaled bump. -/
+theorem niceWedgeCyclic_small_mass {m : ℝ} (hm0 : 0 < m) (hmπ : m < Real.pi / 4) :
+    NiceWedgeCyclic m :=
+  niceWedgeCyclic_of_bump_fourier_ne_zero m hm0.ne' (bump1_fourier_ne_zero hm0 hmπ)
 
 end QIQTH.Fock.CyclicWitness
