@@ -218,15 +218,22 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
            — the truncation payoff, no edge degeneration; `kmsFunCut_diffContOnCl` assembles them);
        (ii) **DONE** `BddAbove`: `norm_kmsFunCut_le` gives `‖kmsFunCut R z‖ ≤ C_g·C_f·2R` on the closed strip
             (plain bound `norm_KrepCont_le_const`, `exp(−m sinη δ coshθ) ≤ 1`) — log-blowup absent;
-       (iii) **TODO** edge bounds `≤ B`: truncated Cauchy–Schwarz (`∫_{[−R,R]}‖Krep g‖²·∫_{[−R,R]}‖Krep f‖² ≤
-            ‖KrepL2 g‖²·‖KrepL2 f‖²`, truncation only DEcreases the L² norm); **TODO** apply
-            **`Complex.HadamardThreeLines.norm_le_interp_of_mem_verticalClosedStrip'`** to `(B+ε)⁻¹·G_R`,
-            `G_R(w):=kmsFunCut R (−i·w)` on `verticalStrip 0 1` (rotation `−i·w` maps it to `im⁻¹'Ioo(−1)0`),
-            edge consts `1,1` ⟹ `‖kmsFunCut R z‖ ≤ B+ε`, `ε↓0` ⟹ `≤ B`, **for every `R`**.
-     Then **TODO** `R→∞`: `kmsFunCut n z → kmsFun z` by dominated convergence
-     (`tendsto_integral_of_dominated_convergence`, indicators of `[−n,n]`, σ-damped L¹ dominator at fixed
-     interior `z`), `‖kmsFunCut n z‖ ≤ B` ∀n ⟹ `‖kmsFun z‖ ≤ B`. **No Hardy, no PL.** (GPT flagged the
-     half-line spectral-support idea is WRONG for a finite strip — avoided.) **Fully Mathlib-supported.**
+       (iii) **DONE** edge bounds `≤ B := √(∫‖Krep g‖²)·√(∫‖Krep f‖²)`: `kmsFunCut_ofReal`,
+            `norm_kmsFunCut_ofReal_le` (top) + `kmsFunCut_sub_I`, `norm_kmsFunCut_sub_I_le` (bottom) — truncated
+            Cauchy–Schwarz (`norm_integral_conj_mul_le_l2` generalized to any measure, over `volume.restrict`)
+            + `setIntegral_le_integral` (truncation shrinks the L²-norm) + `integral_add_right_eq_self`.
+       (iv) **DONE** Hadamard: `norm_kmsFunCut_le_B` — rotation `w↦−i·w` to `verticalClosedStrip 0 1`,
+            `Complex.HadamardThreeLines.norm_le_interp_of_mem_verticalClosedStrip'` with edge consts `B,B`,
+            `B^(1−s)·B^s=B` (`rpow_add_of_nonneg`) ⟹ `‖kmsFunCut R z‖ ≤ B` for every `R`, every closed-strip `z`.
+       (v) **★★★★★ DONE — BOUNDEDNESS** `norm_kmsFun_le_B`: `R→∞` via `tendsto_setIntegral_of_monotone`
+            (`⋃ₙ[−n,n]=ℝ`) ⟹ `‖kmsFun z‖ ≤ B` for interior `z`. **The boundedness frontier is CLOSED, axiom-free.**
+   - **REMAINING for the full DiffContOnCl witness**: `ContinuousOn kmsFun (closed strip)` of the UNtruncated
+     function (the `hDCC` continuity half consumed by `stripKMSrvd_pair_of_regularity`). Boundedness alone does
+     NOT give it; `kmsFunCut → kmsFun` is NOT uniform up to the edges (σ-tail degenerates). Options next:
+     (a) locally-uniform convergence on bounded-`Re` closed sub-rectangles via per-η tail bounds (the η=0 edge
+     tail is the L²-tail of `Krep`, uniform on bounded `Re`); (b) check whether RvD Def 3.4 / the `StripKMSrvd`
+     encoding can accept `L²`/edge-limit boundary values instead of full closed-strip continuity (would let
+     `stripKMSrvd_pair_of_regularity` drop `hDCC`'s continuity half). This is the last analytic gap.
 5. Closedness of `StripKMSrvd` to `𝒦_W` + `2π`↔`−2π` sign mirror + threading ⟹ remove `hKMS`.
 
 ---
