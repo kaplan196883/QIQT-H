@@ -128,9 +128,29 @@ The single analytic engine: **`p(θ+iπ) = −p(θ)`** (since `cosh(θ+iπ)=−c
     `norm_kernelDeriv_le` and `‖x‖≤M` on `tsupport f`). Axiom-free, budget 0.
   - **★ PHASE A1 COMPLETE** — foundations (A1a), damping bound (A1c), holomorphy (A1b).
 
-- **A2 NEXT.** The `H²(S_π)` uniform strip bound: `‖ψ_f(·+iλ)‖_{L²(dθ)} ≤ ‖ψ_f‖₂` (or a uniform `C`) for
-  `0≤λ≤π`, the wedge-supported analytic class. (Combines A1c's pointwise damping with an `L²`/Plancherel or
-  dominated argument; the L2Plancherel.lean machinery from Route B may help.)
+- **A3 DONE** (commit `c555eaa`, done ahead of A2 — self-contained): `kernel_add_pi_I`
+  (`K(θ+iπ,x)=conj K(θ,x)`) and **`KrepCont_add_pi_I`** (for real `f`, `ψ_f(θ+iπ)=conj(Krep m f θ)`). The
+  `iπ` boundary conjugation = the KMS bottom-edge engine. Axiom-free, budget 0.
+
+- **A2 NEXT.** The `H²(S_π)` uniform strip bound: `‖ψ_f(·+iλ)‖_{L²(dθ)} ≤ C` for `0≤λ≤π`. Combines A1c's
+  pointwise damping with an `L²` argument; L2Plancherel.lean (Route B) may help. Needed for the
+  Cauchy–Schwarz boundedness of the KMS function `F` and to make `Ξ(·+iλ) ∈ L²`.
+
+- **A4 (the hard finish).** Assemble `StripKMSrvd boostUnitary 𝒦_W`. Architecture:
+  1. **KMS function** `F_{η,ξ}(z) := ∫ H^#(θ+πz)·Ξ(θ−πz) dθ` (`H^#(ζ):=conj(H(conj ζ))`, `Ξ,H` the
+     `KrepCont` reps of `ξ,η`). Holomorphy on the strip + continuity-to-closure (`DiffContOnCl`) via a
+     dominated parametric-derivative argument (reuse the A1b pattern); boundedness via Cauchy–Schwarz + A2.
+  2. **Top edge** `F(t) = ⟪η, boostUnitary(−2π t) ξ⟫`: connect the concrete `∫…dθ` to the abstract `Lp ℂ 2`
+     inner product (`L2.inner_def`/`MeasureTheory.L2.inner_def`) and the boost = rapidity-translation action
+     (`OneParticle.boostUnitary_apply`, `MPFlow.unitary_apply`). Change of variables `y = θ−πt`. **NB the
+     A0/A4 boost-sign:** `boostUnitary(−2πt) g = g(·+2πt)`, so orient the strip/edges accordingly.
+  3. **Bottom edge** `F(t−i) = ⟪boostUnitary(−2π t) ξ, η⟫` via the A3 conjugation `KrepCont_add_pi_I`
+     (`Ξ(θ+iπ)=conj Ξ(θ)`) — the `iπ` flip swaps the inner-product order.
+  4. Conclude `StripKMSrvd` for the dense class of (real, compact-support, wedge) generators; extend to
+     `𝒦_W` by closedness (the bound is continuous in `ξ,η`), and bridge `x∈rightWedge` ↔ the
+     `0<x₁∓x₀` hyps of `norm_kernel_le_one`. Then `oneParticleBW_wedge_complete` ⟹ unconditional BW; thread
+     up to remove `hKMS` from `qiqt_gr_from_wedge_kms_complete`.
+  This step integrates with the abstract `Lp`/`StandardSubspace` layer and is the genuine multi-fire finish.
   - **A1c DONE** (commit pending, `WedgeAnalyticity.lean`): `cosh_ofReal_add_ofReal_mul_I` /
     `sinh_ofReal_add_ofReal_mul_I` (real/imag split at complex rapidity) + `norm_kernel_le_one` — the
     wedge-damping bound `‖exp(−i·p_m(θ+iλ)·x)‖ ≤ 1` for `0<x₁−x₀`, `0<x₁+x₀`, `0≤λ≤π`, `m≥0` (the
