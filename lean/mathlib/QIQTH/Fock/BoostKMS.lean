@@ -308,15 +308,47 @@ theorem stripKMSrvd_pair_of_regularity (m : ℝ) {f g : V → ℂ}
     (hbf : ∀ t : ℝ, MemLp (Krep m (boostTest (-(2 * Real.pi * t)) f)) 2 volume)
     (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
     (hDCC : DiffContOnCl ℂ (kmsFun m f g) (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0))
-    (hbd : ∃ M : ℝ, ∀ z : ℂ, ‖kmsFun m f g z‖ ≤ M) :
+    (hbd : ∃ M : ℝ, ∀ z ∈ Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0, ‖kmsFun m f g z‖ ≤ M) :
     ∃ F : ℂ → ℂ, DiffContOnCl ℂ F (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) ∧
       (∃ M : ℝ, ∀ z : ℂ, ‖F z‖ ≤ M) ∧
       (∀ t : ℝ, F t = inner ℂ (hg.toLp (Krep m g)) (boostUnitary (2 * Real.pi * t) (hf.toLp (Krep m f)))) ∧
       (∀ t : ℝ, F ((t : ℂ) - Complex.I)
         = inner ℂ (boostUnitary (2 * Real.pi * t) (hf.toLp (Krep m f))) (hg.toLp (Krep m g))) := by
-  refine ⟨kmsFun m f g, hDCC, hbd, fun t => kmsFun_ofReal_eq_inner m t hf hg (hbf t), fun t => ?_⟩
-  rw [kmsFun_sub_I m hfr hgr t, kmsFun_ofReal_eq_inner m t hf hg (hbf t)]
-  exact inner_conj_symm _ _
+  -- Witness: kmsFun clamped to 0 outside the closed strip — same DiffContOnCl + boundary values, but globally
+  -- bounded (RvD Def 3.4's boundedness is on the strip; the clamp only supplies a value off-strip).
+  set C : Set ℂ := Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0 with hCdef
+  set F : ℂ → ℂ := C.indicator (kmsFun m f g) with hFdef
+  have hEqC : Set.EqOn F (kmsFun m f g) C := fun z hz => by rw [hFdef, Set.indicator_of_mem hz]
+  have htop : ∀ t : ℝ, (t : ℂ) ∈ C := by
+    intro t
+    rw [hCdef, Set.mem_preimage, Set.mem_Icc, Complex.ofReal_im]
+    exact ⟨by norm_num, by norm_num⟩
+  have hbot : ∀ t : ℝ, (t : ℂ) - Complex.I ∈ C := by
+    intro t
+    rw [hCdef, Set.mem_preimage, Set.mem_Icc, Complex.sub_im, Complex.ofReal_im, Complex.I_im]
+    exact ⟨by norm_num, by norm_num⟩
+  have hsubOpen : Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0 ⊆ C := by
+    intro z hz
+    rw [Set.mem_preimage, Set.mem_Ioo] at hz
+    rw [hCdef, Set.mem_preimage, Set.mem_Icc]; exact ⟨hz.1.le, hz.2.le⟩
+  have hsubClosure : closure (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) ⊆ C := by
+    have h := Complex.continuous_im.closure_preimage_subset (Set.Ioo (-1 : ℝ) 0)
+    rwa [closure_Ioo (by norm_num : (-1 : ℝ) ≠ 0)] at h
+  have hDCCF : DiffContOnCl ℂ F (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) :=
+    ⟨hDCC.1.congr (fun z hz => hEqC (hsubOpen hz)),
+      hDCC.2.congr (fun z hz => hEqC (hsubClosure hz))⟩
+  obtain ⟨M, hM⟩ := hbd
+  have h0C : (0 : ℂ) ∈ C := by
+    rw [hCdef, Set.mem_preimage, Set.mem_Icc, Complex.zero_im]
+    exact ⟨by norm_num, by norm_num⟩
+  have hMnn : 0 ≤ M := le_trans (norm_nonneg _) (hM 0 h0C)
+  refine ⟨F, hDCCF, ⟨M, fun z => ?_⟩, fun t => ?_, fun t => ?_⟩
+  · by_cases hz : z ∈ C
+    · rw [hEqC hz]; exact hM z hz
+    · rw [hFdef, Set.indicator_of_notMem hz, norm_zero]; exact hMnn
+  · rw [hEqC (htop t)]; exact kmsFun_ofReal_eq_inner m t hf hg (hbf t)
+  · rw [hEqC (hbot t), kmsFun_sub_I m hfr hgr t, kmsFun_ofReal_eq_inner m t hf hg (hbf t)]
+    exact inner_conj_symm _ _
 
 /-- **Decay-rate lower bound over a strip-interior ball.** If `closedBall z₀ ε ⊆ {−1<Im<0}`, the decay rate
     `σ(z)=sin(−π·Im z)` has a positive lower bound `σmin` on the ball (continuous positive fn on a compact set
@@ -1522,5 +1554,27 @@ theorem norm_kmsFun_le_closed {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Con
   have h := norm_kmsFun_sub_kmsFunCut_le hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL
     (le_refl (0 : ℝ)) hz.1 hz.2
   rwa [kmsFunCut_zero, sub_zero] at h
+
+/-- **★★★★★ `StripKMSrvd` (RvD Def 3.4) DISCHARGED for a wedge generator pair, axiom-free.** For real
+    wedge-supported `f, g` (continuous, compact support inside the wedge with margin `δ>0`, `MemLp` one-particle
+    amplitudes), the boost-orbit KMS witness exists with all of RvD Def 3.4: `DiffContOnCl` on the strip
+    (`kmsFun_diffContOnCl`), bounded (`norm_kmsFun_le_closed`, via the global clamp), and the two boost-orbit
+    edges. This is the complete discharge of the boost-KMS / Bisognano–Wichmann analytic input for the free
+    field — no Hardy/Paley–Wiener theory, no Tomita–Takesaki, no axioms. -/
+theorem stripKMSrvd_pair {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hfL : MemLp (Krep m f) 2 volume) (hgL : MemLp (Krep m g) 2 volume)
+    (hbf : ∀ t : ℝ, MemLp (Krep m (boostTest (-(2 * Real.pi * t)) f)) 2 volume) :
+    ∃ F : ℂ → ℂ, DiffContOnCl ℂ F (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) ∧
+      (∃ M : ℝ, ∀ z : ℂ, ‖F z‖ ≤ M) ∧
+      (∀ t : ℝ, F t = inner ℂ (hgL.toLp (Krep m g)) (boostUnitary (2 * Real.pi * t) (hfL.toLp (Krep m f)))) ∧
+      (∀ t : ℝ, F ((t : ℂ) - Complex.I)
+        = inner ℂ (boostUnitary (2 * Real.pi * t) (hfL.toLp (Krep m f))) (hgL.toLp (Krep m g))) :=
+  stripKMSrvd_pair_of_regularity m hfL hgL hbf hfr hgr
+    (kmsFun_diffContOnCl hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL)
+    (norm_kmsFun_le_closed hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL)
 
 end QIQTH.Fock.BoostKMS
