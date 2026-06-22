@@ -498,6 +498,17 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          infrastructure gap) + a concrete Gaussian; the separating reduces to Pauli–Jordan symplectic non-degeneracy.
          Both are precisely-named standard analysis with EVERY surrounding structural step machine-checked — the
          maximal honest reduction, parallel to the cited Type-III / continuum-TT frontier.
+         **★ WIENER BRICK 1 DE-RISKED (2026-06-23) — the Schwartz-translation operator COMPILES** (confirmed in
+         isolation): `compCLM ℂ (g := fun x => x + a) (HasTemperateGrowth.id'.add (.const a)) ⟨1, 1+‖a‖, fun x =>
+         by rw[pow_one]; …norm_sub_le…; nlinarith⟩ : 𝓢(ℝ,ℂ) →L[ℂ] 𝓢(ℝ,ℂ)`. So the Wiener build is concretely
+         buildable (not just "Mathlib lacks it"). FULL build (~8 bricks, a NEW file `WienerL2.lean` importing the
+         Fourier stack): (1) ✓ Schwartz translation; (2) Lp-modulation CLM (`MemLp.of_le_mul`); (3) `boostUnitary a
+         (f.toLp) = (schwartzTranslate a f).toLp`; (4) intertwining `𝓕∘T_a = M_a∘𝓕` on Schwartz then L²-density;
+         (5) `𝓕h⊥{M_a 𝓕g₀} ⟺ FT(conj(𝓕g₀)·𝓕h)≡0`; (6) FT-injective-on-L¹ (`Inversion.lean`); (7) Wiener:
+         boost-orbit dense `⟸ 𝓕g₀≠0` a.e.; (8) concrete `f₀` with `𝓕(Krep f₀)≠0` a.e. A genuine multi-fire generic-
+         Fourier-infrastructure project (≈ contributing the L²-Wiener Tauberian theorem) — arguably general-Mathlib
+         work beyond the QIQT discharge. **Decision point for the user:** commit the loop to this multi-fire Fourier
+         build, OR treat it as the cited frontier (like Type-III). The QIQT plan's STRUCTURAL content is complete.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
