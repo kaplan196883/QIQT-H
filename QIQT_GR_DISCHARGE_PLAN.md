@@ -343,14 +343,26 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
      This is `oneParticleBW_wedge_complete` with the labelled KMS hypothesis ELIMINATED. Full QIQTH green (8677 jobs);
      budget 0.
    - **REMAINING (honest boundary — NOT the labelled KMS anymore):**
-     (a) **`S`-construction**: `oneParticleBW_niceWedge` still takes `S : StandardSubspace` + `hcarrier` as a
-         hypothesis (as did `oneParticleBW_wedge_complete`). To make it unconditional, CONSTRUCT a `StandardSubspace`
-         whose `toClosedSubmodule = closure(niceWedgeGenSet m)` — i.e. prove the nice-core span is separating +
-         cyclic (Reeh–Schlieder-type). Structural, orthogonal to the KMS analytics.
-     (b) **`−2π` convention reconciliation**: the codebase's `oneParticleBW_wedge_complete` uses `−2π` + broad
-         `wedgeGenSet`; my discharge uses `+2π` + nice core. Per the sign finding, only `+2π` is KMS-satisfiable,
-         so the `−2π` form is the labelled/expected convention. An honest audit of `boostUnitary`/`modUnitary`/
-         `rvdRC` sign conventions is needed to state whether they coincide — flagged, NOT guessed.
+     (a) **`S`-construction = the Reeh–Schlieder FRONTIER.** `oneParticleBW_niceWedge` takes `S : StandardSubspace`
+         + `hcarrier` as a hypothesis (as did `oneParticleBW_wedge_complete`). Unconditionalizing it = CONSTRUCT a
+         `StandardSubspace` with `toClosedSubmodule = closure(niceWedgeGenSet m)`, i.e. prove `K := closure(span ℝ
+         nice)` is **separating** (`K ⊓ K.mulI = ⊥`) and **cyclic** (`K ⊔ K.mulI = ⊤`). Cyclic ⟺ `{KrepL2 g : g
+         nice}` dense in `L²(ℝ,dθ)` ⟺ the on-shell amplitudes of wedge test functions are total — this is genuine
+         **Reeh–Schlieder / Lorentz-analyticity** (Paley–Wiener / edge-of-the-wedge), NOT in Mathlib, a multi-week
+         research-grade formalization. **This is the cited frontier** (like Type-III); the codebase NEVER constructs
+         `S` either. The easy containment is DONE: `closure(niceWedgeGenSet) ⊆ 𝒦_W_broad`
+         (`closure_niceWedgeGenSet_subset`, `68494d6`, via `niceWedgeGenSet ⊆ wedgeGenSet`).
+     (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
+         `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
+         for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
+         (`oneParticleBW_wedge_complete`) is the unsatisfiable labelled/expected convention. NOT editing the
+         codebase's `−2π` theorem (it may target a different orientation; the broad=nice density would force the
+         contradiction, but that density is itself the frontier). The honest statement stands: the BW discharge is
+         machine-checked at `+2π`.
+   - **NET STATE OF ITEM A:** the free-field BW analytic content (RvD Def 3.4 KMS witness, the `modUnitary=boost`
+     identification with every labelled analytic input discharged) is COMPLETE and axiom-free. What remains
+     (Reeh–Schlieder standardness of the wedge subspace) is the genuine cited frontier, beyond mechanical
+     implementation — the same honest stopping point as Type-III / continuum TT.
      **★ Lightcone scaling WORKED OUT (ready to implement):** `lorentzBoost a` scales the lightcone coords by
      `(z₁−z₀) ↦ e^{−a}(z₁−z₀)` and `(z₁+z₀) ↦ e^{a}(z₁+z₀)` [from `lorentzBoost_one/zero` + `cosh a ∓ sinh a =
      e^{∓a}`]. So `boostTest(−a) f x = f(lorentzBoost(−a) x)`: if `≠0` then `f`'s margin `δ` at `y=lorentzBoost(−a)x`
