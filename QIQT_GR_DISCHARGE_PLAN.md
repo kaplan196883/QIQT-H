@@ -421,6 +421,15 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          REMAINING: (i) that totality itself — the genuine Paley–Wiener / edge-of-the-wedge frontier
          (`∫ conj(Krep f)·h = 0 ∀ nice f ⟹ h=0`, via Fubini + analyticity of the on-shell transform in a tube);
          (ii) `hsep` (separating), still gated on the ℝ-instance tangle for its dual reduction.
+         **★★★★ CYCLIC AS A FULLY EXPLICIT INTEGRAL (2026-06-23, `67e4b34`, axiom-free).** `inner_KrepL2_general`
+         (`⟪KrepL2 f, h⟫ = ∫ conj(Krep m f θ)·h(θ) dθ` for arbitrary `h`, via `L2.inner_def`) →
+         `niceWedge_isCyclic_of_total_integral` + **`oneParticleBW_niceWedge_of_total_integral`**: `modUnitary =
+         boost(2πt)` from `hsep` + the TEXTBOOK Reeh–Schlieder statement in concrete form — *the only `h ∈ L²(ℝ)`
+         with `∫ conj(Krep m f θ)·h(θ) dθ = 0` for every nice wedge `f` is `h = 0`*. The free-field one-particle BW
+         is now reduced to its IRREDUCIBLE analytic core: every structural/lattice/instance step machine-checked,
+         leaving EXACTLY this on-shell-amplitude totality (the Paley–Wiener frontier) + `hsep`. This is the cleanest
+         possible statement of what remains — a concrete integral-vanishing ⟹ zero condition on the localized
+         rapidity amplitudes.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
