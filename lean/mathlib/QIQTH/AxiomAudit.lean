@@ -4689,5 +4689,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ A4 (real-axis edge): ⟪KrepL2 g, boostUnitary a (KrepL2 f)⟫ = ∫ conj(Krep g θ)·Krep f(θ−a) dθ.
 -- Bridges the abstract Lp ℂ 2 inner product (L2.inner_def) + boostUnitary action (boostUnitary_KrepL2, = rapidity
 -- translation Krep_boost) to the concrete rapidity integral — the orbit correlation f(t)=⟪η,V_t ξ⟫ of StripKMSrvd.
+#print axioms QIQTH.Fock.BoostKMS.symm_edge_eq_inner
+-- expected: standard only — ★★ A4: the KMS TOP EDGE f(t)=⟪η,V_t ξ⟫ in symmetric (KMS-function) form. The
+-- symmetric integral ∫ conj(Krep g(θ+πt))·Krep f(θ−πt) dθ (= t-real value of F(z)=∫conj(KrepCont g(θ+πz̄))·KrepCont f(θ−πz))
+-- equals ⟪KrepL2 g, boostUnitary(2πt)(KrepL2 f)⟫, via symm_edge_eq_shifted (change of vars) + inner_boostUnitary_KrepL2.
 
 end QIQTH.AxiomAudit
