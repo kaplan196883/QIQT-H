@@ -2286,6 +2286,18 @@ theorem niceWedgeClosedSubmodule_coe (m : ℝ) :
   rw [niceWedgeClosedSubmodule, Submodule.coe_closure]
   rfl
 
+/-- **The nice-core wedge standard subspace, GIVEN the Reeh–Schlieder properties** (separating + cyclic).
+    Carrier = `niceWedgeClosedSubmodule m` (= `closure (niceWedgeGenSet m)`).  Separating and cyclic are the
+    two — and only two — remaining inputs: the genuine Reeh–Schlieder frontier, isolated here as named
+    hypotheses (the carrier and everything else is elementary and built). -/
+def niceWedgeStandardSubspace (m : ℝ)
+    (hsep : niceWedgeClosedSubmodule m ⊓ (niceWedgeClosedSubmodule m).mulI = ⊥)
+    (hcyc : niceWedgeClosedSubmodule m ⊔ (niceWedgeClosedSubmodule m).mulI = ⊤) :
+    StandardSubspace (Lp ℂ 2 (volume : Measure ℝ)) where
+  toClosedSubmodule := niceWedgeClosedSubmodule m
+  IsSeparating := hsep
+  IsCyclic := hcyc
+
 open scoped BoundedContinuousFunction in
 /-- **★★★ (c3+c4) The RvD Def 3.4 KMS witness extended to the CLOSURE of the nice generators**, axiom-free.
     For `ξ, η ∈ closure (niceWedgeGenSet m)` there is a bounded function `F`, holomorphic on the open strip and
@@ -2456,5 +2468,21 @@ theorem oneParticleBW_niceWedge {m : ℝ} (hm : 0 < m)
     · rw [hVboost t ξ]; exact htop t
     · rw [hVboost t ξ]; exact hbot t
   exact oneParticleBW_complete S V hcont hbd hgrp hV0 hKinv hInv hKMS
+
+open QIQTH.StandardSubspaceModular in
+/-- **★ The nice-core wedge BW, conditional ONLY on Reeh–Schlieder** (separating + cyclic).  For the boost
+    `V t = boostUnitary(2πt)`, the modular flow of the nice-core wedge standard subspace IS the boost.
+    Combines `niceWedgeStandardSubspace` with `oneParticleBW_niceWedge`, making explicit that the ENTIRE
+    remaining gap to an unconditional free-field one-particle BW is the two Reeh–Schlieder properties (the
+    cited frontier) — every analytic input (the KMS condition, the `𝒦`-invariance, the boost-group structure)
+    is discharged. -/
+theorem oneParticleBW_niceWedge_of_standard {m : ℝ} (hm : 0 < m)
+    (V : ℝ → (Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ)))
+    (hVboost : ∀ t x, V t x = boostUnitary (2 * Real.pi * t) x)
+    (hsep : niceWedgeClosedSubmodule m ⊓ (niceWedgeClosedSubmodule m).mulI = ⊥)
+    (hcyc : niceWedgeClosedSubmodule m ⊔ (niceWedgeClosedSubmodule m).mulI = ⊤) :
+    ∀ t, modUnitary (niceWedgeStandardSubspace m hsep hcyc) t = V t :=
+  oneParticleBW_niceWedge hm (niceWedgeStandardSubspace m hsep hcyc) V
+    (niceWedgeClosedSubmodule_coe m) hVboost
 
 end QIQTH.Fock.BoostKMS
