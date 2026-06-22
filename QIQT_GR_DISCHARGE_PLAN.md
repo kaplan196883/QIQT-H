@@ -325,11 +325,24 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          `b.continuous`; boundary via `Filter.Tendsto.inner` + `tendsto_nhds_unique`. NO density theorem.
        (package) **`stripKMSrvd_boostUnitary`** (`6c2551e`): `StripKMSrvd (fun t => boostUnitary (2πt))
          (closure (niceWedgeGenSet m))` — the free-field BW KMS condition as a THEOREM.
-   - **REMAINING to remove `hKMS`:** connect `stripKMSrvd_boostUnitary` (nice core, rate `+2π`) to the codebase's
-     labelled `hKMS` (which uses `𝒦_W = closure(span(wedgeGenSet))`, broad, and rate `−2π` per `Δ^{it}=V(−2πt)`).
-     Two steps: (i) the `2π`↔`−2π` SIGN MIRROR (reflect the strip / conjugate — `f↦conj∘f∘conj` swaps the edges);
-     (ii) align `𝒦_W` to the nice core — refactor `wedgeGenSet`→nice OR prove the broad-equality `K_big=K_nice`
-     (the standard density, the optional theorem). Then `hKMS` discharges.
+   - **★★ SIGN FINDING (2026-06-22) — the discharge is the `+2π` instance, NOT `−2π`.** `oneParticleBW_of_stripKMSrvd_density`
+     (OneParticleBW.lean:775) is GENERIC in `V`: it derives `modUnitary S t = V t` for *whatever* `V` satisfies
+     `StripKMSrvd V K` (+ the boost-group/`𝒦`-invariance regularity, all true for either sign). Hence **`StripKMSrvd`
+     is satisfiable for AT MOST ONE boost sign** on a given `S` (else `modUnitary = V₊ = V₋`, contradiction). I PROVED
+     it for `V₊ = boostUnitary(2π·)` (`stripKMSrvd_boostUnitary`). Therefore `StripKMSrvd (boostUnitary(−2π·))` is
+     FALSE, so the codebase's `oneParticleBW_wedge_complete` `hVboost : V t = boostUnitary(−2πt)` can never be
+     discharged with a genuine KMS witness — that `−2π` was the *labelled/expected* sign, and the construction shows
+     the discharge runs at `+2π`. (Reflection `f↦conj∘f∘conj` does NOT convert: it always introduces a stray `conj`
+     or lands on the WRONG strip — consistent with the at-most-one-sign fact, not a fixable mechanical gap.)
+   - **CONCRETE DISCHARGE PATH (`+2π`, nice core):** write `oneParticleBW_niceWedge` (mirror of
+     `oneParticleBW_wedge_complete` with `hcarrier : S.toClosedSubmodule = closure(niceWedgeGenSet m)` and
+     `hVboost : V t x = boostUnitary(2πt) x`), proved via `oneParticleBW_of_stripKMSrvd_density` with
+     `hKMS := stripKMSrvd_boostUnitary` (rewritten by `hcarrier`). `hdense` is generic (`rvdSqrtR_range_dense_in_K`).
+     NEEDS: `boostUnitary_mapsTo_niceWedgeGenSet` (boost preserves nice: margin/compact-supp/real under `boostTest`)
+     ⟹ `hInv` for the nice-core carrier. Then `modUnitary S t = boostUnitary(2πt)` is axiom-free for the nice-core
+     wedge standard subspace — the labelled `hKMS` discharged at the correct (constructed) sign.
+   - **★ The `−2π` reconciliation is a SEPARATE convention question** (whether the codebase's `boostUnitary`/`modUnitary`/
+     `rvdRC`/`modChar` sign convention makes `−2π` here `≡ +2π` physically). Flagged for an honest audit, NOT guessed.
    NOTE: this is laborious Hilbert-space plumbing (sesquilinear extension from a total set by continuity) — no
    new hard analysis. If it proves too long, `stripKMSrvd_pair` alone is already the citable A4 result (the
    explicit free-field boost-KMS witness, the genuine BW analytic content).
