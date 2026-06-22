@@ -18,6 +18,8 @@ import Mathlib.Analysis.Distribution.SchwartzSpace.Fourier
 import Mathlib.Analysis.Fourier.LpSpace
 import Mathlib.Analysis.Analytic.IsolatedZeros
 import Mathlib.MeasureTheory.Topology
+import Mathlib.MeasureTheory.Integral.ExpDecay
+import Mathlib.MeasureTheory.Integral.Asymptotics
 import QIQTH.Fock.OneParticleBW
 
 namespace QIQTH.Fock.WienerL2
@@ -316,5 +318,29 @@ theorem ae_ne_zero_of_differentiable {F : ℂ → ℂ} (hF : Differentiable ℂ 
     have ho : AnalyticAt ℝ (fun t : ℝ => (t : ℂ)) x := Complex.ofRealCLM.analyticAt x
     exact hR.comp ho
   exact ae_ne_zero_of_analyticOnNhd hana hF0
+
+/-- **Wiener brick 8a-foundation — `exp(−b|x|)` is integrable on `ℝ`** for `b > 0`.  The reusable both-ends
+    exponential building block: `f =O[atBot] exp(b·)` and `f =O[atTop] exp(−b·)`, each integrable at its end
+    (`exp_neg_integrableOn_Ioi` + reflection), via `LocallyIntegrable.integrable_of_isBigO_atBot_atTop`.
+    Dominates the `1/cosh²θ` decay of `Krep`, giving `Krep ∈ L¹` and its finite exponential moments. -/
+theorem integrable_exp_neg_mul_abs {b : ℝ} (hb : 0 < b) :
+    Integrable (fun x : ℝ => Real.exp (-b * |x|)) := by
+  have hcont : Continuous (fun x : ℝ => Real.exp (-b * |x|)) := by fun_prop
+  have hbot : IntegrableOn (fun x : ℝ => Real.exp (b * x)) (Set.Iio 0) := by
+    have hpre : Neg.neg ⁻¹' (Set.Ioi (0 : ℝ)) = Set.Iio 0 := by ext x; simp
+    have h := (Measure.measurePreserving_neg (volume : Measure ℝ)).integrableOn_comp_preimage
+      measurableEmbedding_neg (f := fun x : ℝ => Real.exp (-b * x)) (s := Set.Ioi 0)
+    rw [hpre] at h
+    refine (h.mpr (exp_neg_integrableOn_Ioi 0 hb)).congr_fun ?_ measurableSet_Iio
+    intro x _; simp only [Function.comp_apply]; congr 1; ring
+  refine hcont.locallyIntegrable.integrable_of_isBigO_atBot_atTop
+    (g := fun x => Real.exp (b * x)) ?_ ⟨Set.Iio 0, Filter.Iio_mem_atBot 0, hbot⟩
+    (g' := fun x => Real.exp (-b * x)) ?_ ⟨Set.Ioi 0, Filter.Ioi_mem_atTop 0, exp_neg_integrableOn_Ioi 0 hb⟩
+  · refine (Filter.EventuallyEq.isBigO ?_)
+    filter_upwards [Filter.eventually_lt_atBot 0] with x hx
+    rw [abs_of_neg hx]; congr 1; ring
+  · refine (Filter.EventuallyEq.isBigO ?_)
+    filter_upwards [Filter.eventually_gt_atTop 0] with x hx
+    rw [abs_of_pos hx]
 
 end QIQTH.Fock.WienerL2
