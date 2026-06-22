@@ -214,10 +214,12 @@ margin lemma is DONE (`b98dc63`).
    - **Holomorphy ingredient DONE** (`86196d6`): `differentiable_reflKrepCont` — the reflected `g`-factor
      `u↦conj(KrepCont g(conj u))` is entire (Schwarz reflection via `DifferentiableAt.star_conj`).
      **Confirms `F`'s holomorphy is reachable** (the `conj∘·∘conj` was the only non-obvious differentiability).
-   - **Remaining A4**: (c) `DiffContOnCl` — assemble `F` holomorphic on the open strip (parametric-derivative
-     arg: pointwise integrand holo from `differentiable_reflKrepCont` + `differentiable_KrepCont` ∘ affine;
-     integrate via dominated convergence with interior-`L²`/`exp(−c cosh)` domination of the `z`-derivative) +
-     continuity to closure; and **boundedness** (the *uniform-to-boundary* `s↦‖Ξ(·+iπs)‖₂` continuity on
+   - **Integrand holomorphy DONE** (`a82ad92`): `differentiable_kmsIntegrand` — the `kmsFun` integrand is
+     entire in `z` (the per-`θ` `h_diff` ingredient).
+   - **Remaining A4**: (c) `DiffContOnCl` — assemble `F` holomorphic on the open strip from
+     `differentiable_kmsIntegrand` via the parametric-derivative theorem (needs the `z`-derivative dominated by
+     an integrable-in-`θ` bound on a `z`-ball — analogous to A2's `exp(−c cosh)` decay but for the derivative)
+     + continuity to closure; and **boundedness** (the *uniform-to-boundary* `s↦‖Ξ(·+iπs)‖₂` continuity on
      `[0,1]` — the one genuinely delicate analytic piece). (d) closedness of `StripKMSrvd` to `𝒦_W` (bound
      continuous in `ξ,η`); then `oneParticleBW_wedge_complete` ⟹ unconditional BW ⟹ remove `hKMS`.
 
