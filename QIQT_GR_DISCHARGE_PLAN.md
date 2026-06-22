@@ -211,12 +211,15 @@ margin lemma is DONE (`b98dc63`).
    - **Bottom edge `F(t−i)=conj(F(t))=⟪V_t ξ,η⟫` DONE** (`f7eb282`): `kmsFun_sub_I` — at `z=t−i` the `iπ`-shift
      puts both `KrepCont` args at `Im=+π`, `KrepCont_add_pi_I` (A3) collapses each to `conj(Krep…)`. Axiom-free.
      **★ BOTH KMS EDGES of the witness `F` now machine-checked.**
-   - **Remaining A4**: (c) `DiffContOnCl` — holomorphy of `F` on the open strip (dominated-derivative arg: each
-     factor holomorphic in `z` — `KrepCont` entire, `conj(KrepCont g(conj ·))` holo as anti∘anti, composed with
-     affine — integrate via dominated convergence with interior-`L²` domination) + continuity to closure; and
-     **boundedness** (the *uniform-to-boundary* `s↦‖Ξ(·+iπs)‖₂` continuity on `[0,1]` — the one genuinely
-     delicate analytic piece left). (d) closedness of `StripKMSrvd` to `𝒦_W` (bound continuous in `ξ,η`); then
-     `oneParticleBW_wedge_complete` ⟹ unconditional BW ⟹ remove `hKMS`.
+   - **Holomorphy ingredient DONE** (`86196d6`): `differentiable_reflKrepCont` — the reflected `g`-factor
+     `u↦conj(KrepCont g(conj u))` is entire (Schwarz reflection via `DifferentiableAt.star_conj`).
+     **Confirms `F`'s holomorphy is reachable** (the `conj∘·∘conj` was the only non-obvious differentiability).
+   - **Remaining A4**: (c) `DiffContOnCl` — assemble `F` holomorphic on the open strip (parametric-derivative
+     arg: pointwise integrand holo from `differentiable_reflKrepCont` + `differentiable_KrepCont` ∘ affine;
+     integrate via dominated convergence with interior-`L²`/`exp(−c cosh)` domination of the `z`-derivative) +
+     continuity to closure; and **boundedness** (the *uniform-to-boundary* `s↦‖Ξ(·+iπs)‖₂` continuity on
+     `[0,1]` — the one genuinely delicate analytic piece). (d) closedness of `StripKMSrvd` to `𝒦_W` (bound
+     continuous in `ξ,η`); then `oneParticleBW_wedge_complete` ⟹ unconditional BW ⟹ remove `hKMS`.
 
 **Honest scale:** discharging `StripKMSrvd` from here is a genuine multi-week-to-month real-analysis +
 Mathlib-infrastructure effort (Minkowski integral inequality is itself a Mathlib-worthy contribution). This is
