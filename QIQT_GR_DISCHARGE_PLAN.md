@@ -235,18 +235,20 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
      machinery; closed-strip continuity in ~5 steps:
        (i) **DONE** tail seminorm `T_h(R) := √(∫_{|θ|>R}‖Krep h‖²) → 0` (`tendsto_tail_sq_zero`,
            `tendsto_tail_seminorm_zero`), so `ε_R := T_g(R)·‖Krep f‖₂ + ‖Krep g‖₂·T_f(R) → 0`.
-       (ii) **shifted-tail geometry** `tail_geom` DONE; **the uniform tail bound `tail_integral_le`
-           `∫_{|θ|>R}‖Krep g(·+πt)‖‖Krep f(·−πt)‖ ≤ ε_R` is DONE** (helpers `real_L2_inner_le` + `tail_term_le`,
-           geometry split + AM-GM product integrability). REMAINING: the annulus EDGE bound
-           `‖kmsFunCut S t − kmsFunCut R t‖ ≤ ε_R` (`S≥R`): pointwise
-           `‖Icc(−S,S).indicator I θ − Icc(−R,R).indicator I θ‖ ≤ 1_{|θ|>R}·w θ` + `norm_integral_le_integral_norm`
-           + `integral_mono` + `tail_integral_le` (and the bottom edge via `kmsFunCut_sub_I`-style reflection).
-       (iii) **`norm_le_of_strip_edges`** (DONE, extracted) applied to `Φ = kmsFunCut S − kmsFunCut R`, `b = ε_R`
-           ⟹ `‖kmsFunCut S z − kmsFunCut R z‖ ≤ ε_R` on the whole closed strip;
-       (iv) `S→∞` (`tendsto_setIntegral_of_monotone`) ⟹ `‖kmsFun z − kmsFunCut R z‖ ≤ ε_R` on the closed strip
-           — i.e. `kmsFunCut R → kmsFun` **uniformly on the closed strip**;
-       (v) uniform limit of the continuous `kmsFunCut R` (`kmsFunCut_continuousOn`) ⟹
-           **`ContinuousOn kmsFun (closed strip)`** ⟹ `DiffContOnCl` ⟹ `stripKMSrvd_pair_of_regularity` fires.
+       (ii) **DONE** — `tail_geom`, `real_L2_inner_le`, `tail_term_le`, `tail_integral_le` (uniform tail bound),
+           and the annulus EDGE bounds `norm_kmsFunCut_diff_ofReal_le` (top) + `norm_kmsFunCut_diff_sub_I_le`
+           (bottom) `‖kmsFunCut S t − kmsFunCut R t‖ ≤ ε_R`, all axiom-free.
+       (iii) **DONE** — `norm_kmsFunCut_diff_le`: `norm_le_of_strip_edges` on `Φ = kmsFunCut S − kmsFunCut R`
+           ⟹ `‖kmsFunCut S z − kmsFunCut R z‖ ≤ ε_R` on the WHOLE closed strip, every `S≥R`.
+           (= uniform-Cauchy of `{kmsFunCut n}` on the closed strip.)
+       (iv) **REMAINING** — `S→∞`: `kmsFunCut S z → kmsFun z` for each closed-strip `z`
+           (`tendsto_setIntegral_of_monotone`, needs the kmsFun integrand integrable at `z` — interior via
+           `integrable_kmsIntegrand`, EDGES `Im z∈{0,−1}` need the slice `L²` at arg-`Im∈{0,π}`: a
+           `memLp_KrepCont` extended to the CLOSED range via `KrepCont_ofReal` / `KrepCont_add_pi_I`). Then
+           `le_of_tendsto` on `norm_kmsFunCut_diff_le` ⟹ `‖kmsFun z − kmsFunCut R z‖ ≤ ε_R` on the closed strip.
+       (v) **REMAINING** — `TendstoUniformlyOn kmsFunCut kmsFun atTop (closedStrip)` (from (iv) + `ε_R→0`) +
+           `kmsFunCut_continuousOn` ⟹ **`ContinuousOn kmsFun (closedStrip)`** (`TendstoUniformlyOn.continuousOn`)
+           ⟹ `DiffContOnCl` ⟹ `stripKMSrvd_pair_of_regularity` fires.
      (GPT confirmed Vitali/Montel and the L²-slice/Riesz routes are NOT Lean-tractable; this annular route is.)
 5. Closedness of `StripKMSrvd` to `𝒦_W` + `2π`↔`−2π` sign mirror + threading ⟹ remove `hKMS`.
 
