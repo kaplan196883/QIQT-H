@@ -2273,6 +2273,19 @@ theorem niceWedgeGenSet_span_eq (m : ℝ) :
     Submodule.span_eq (niceWedgeSubmodule m)
   rw [this]; rfl
 
+/-- **The nice-core wedge subspace as a `ClosedSubmodule ℝ`** — the carrier object of the (would-be) wedge
+    standard subspace, whose underlying set is exactly `closure (niceWedgeGenSet m)`.  This is the `S`-carrier
+    the Reeh–Schlieder standardness (separating + cyclic) would be proved about; the carrier itself is
+    elementary (the topological closure of the nice ℝ-subspace). -/
+noncomputable def niceWedgeClosedSubmodule (m : ℝ) : ClosedSubmodule ℝ (Lp ℂ 2 (volume : Measure ℝ)) :=
+  (niceWedgeSubmodule m).closure
+
+/-- The carrier set of `niceWedgeClosedSubmodule m` is `closure (niceWedgeGenSet m)`. -/
+theorem niceWedgeClosedSubmodule_coe (m : ℝ) :
+    (niceWedgeClosedSubmodule m : Set (Lp ℂ 2 (volume : Measure ℝ))) = closure (niceWedgeGenSet m) := by
+  rw [niceWedgeClosedSubmodule, Submodule.coe_closure]
+  rfl
+
 open scoped BoundedContinuousFunction in
 /-- **★★★ (c3+c4) The RvD Def 3.4 KMS witness extended to the CLOSURE of the nice generators**, axiom-free.
     For `ξ, η ∈ closure (niceWedgeGenSet m)` there is a bounded function `F`, holomorphic on the open strip and
