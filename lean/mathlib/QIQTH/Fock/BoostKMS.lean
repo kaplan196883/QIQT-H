@@ -318,4 +318,18 @@ theorem stripKMSrvd_pair_of_regularity (m : ℝ) {f g : V → ℂ}
   rw [kmsFun_sub_I m hfr hgr t, kmsFun_ofReal_eq_inner m t hf hg (hbf t)]
   exact inner_conj_symm _ _
 
+/-- **Decay-rate lower bound over a strip-interior ball.** If `closedBall z₀ ε ⊆ {−1<Im<0}`, the decay rate
+    `σ(z)=sin(−π·Im z)` has a positive lower bound `σmin` on the ball (continuous positive fn on a compact set
+    attains a positive min). The `c₀` for `cosh_shift_exp_le` in the `h_bound` assembly. -/
+theorem exists_sin_min {z₀ : ℂ} {ε : ℝ} (hε : 0 < ε)
+    (hball : ∀ z ∈ Metric.closedBall z₀ ε, -1 < z.im ∧ z.im < 0) :
+    ∃ σmin : ℝ, 0 < σmin ∧ ∀ z ∈ Metric.closedBall z₀ ε, σmin ≤ Real.sin (-(Real.pi * z.im)) := by
+  have hcont : ContinuousOn (fun z : ℂ => Real.sin (-(Real.pi * z.im)))
+      (Metric.closedBall z₀ ε) := by fun_prop
+  obtain ⟨z₁, hz₁mem, hz₁min⟩ :=
+    (isCompact_closedBall z₀ ε).exists_isMinOn (Metric.nonempty_closedBall.mpr hε.le) hcont
+  rw [isMinOn_iff] at hz₁min
+  obtain ⟨him0, him1⟩ := hball z₁ hz₁mem
+  exact ⟨Real.sin (-(Real.pi * z₁.im)), sin_neg_pi_mul_pos him0 him1, hz₁min⟩
+
 end QIQTH.Fock.BoostKMS
