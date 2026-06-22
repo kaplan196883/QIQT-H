@@ -155,6 +155,21 @@ theorem deriv_reflKrepCont_eq (m : ℝ) {g : V → ℂ} (hg : Continuous g) (hgc
   rw [Complex.conj_conj] at h
   exact h.deriv
 
+/-- **Strip-decay of the reflected amplitude's derivative**: `‖deriv reflKrep(u)‖ = ‖deriv KrepCont g(conj u)‖
+    ≤ (1/√2)·|m|·cosh(Re u)·exp(−(m sin(−Im u)δ)·cosh(Re u))·∫(|x₀|+|x₁|)‖g‖` for `−π≤Im u≤0`. The
+    `deriv reflKrep` factor bound for the `kmsFun` integrand's `z`-derivative. -/
+theorem norm_deriv_reflKrepCont_le {m : ℝ} (hm : 0 ≤ m) {g : V → ℂ} (hg : Continuous g)
+    (hgc : HasCompactSupport g) {δ : ℝ}
+    (hmargin : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    {u : ℂ} (him0 : -Real.pi ≤ u.im) (himπ : u.im ≤ 0) :
+    ‖deriv (fun u => (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) u))) u‖
+      ≤ 1 / Real.sqrt 2 * (|m| * Real.cosh u.re
+        * Real.exp (-(m * Real.sin (-u.im) * δ) * Real.cosh u.re) * ∫ x, (|x 0| + |x 1|) * ‖g x‖) := by
+  rw [deriv_reflKrepCont_eq m hg hgc, Complex.norm_conj]
+  have h := norm_deriv_KrepCont_le_exp_decay hm hg hgc hmargin (ζ := (starRingEnd ℂ) u)
+    (by rw [Complex.conj_im]; linarith) (by rw [Complex.conj_im]; linarith)
+  rwa [Complex.conj_im, Complex.conj_re] at h
+
 /-- **The `kmsFun` integrand is entire in `z`** (for `f,g` continuous with compact support). The `g`-factor
     `conj(KrepCont g(conj(θ+πz)))` = `differentiable_reflKrepCont ∘ (affine)`, the `f`-factor `KrepCont f(θ−πz)`
     = `differentiable_KrepCont ∘ (affine)`; the product is differentiable. This is the per-`θ` (`h_diff`)
