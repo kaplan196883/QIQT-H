@@ -521,10 +521,18 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          (`⟪𝓕 f,𝓕 g⟫=⟪f,g⟫`, Plancherel), `norm_fourier_eq`, and `SchwartzMap.toLp_fourier_eq` (`𝓕(f.toLp)=(𝓕 f).toLp`).
          (NO bounded-function action on `Lp` though — `M_c` was still built from scratch.) This collapses the remaining
          build: the Wiener argument is now `⟪boost_a g₀,h⟫ = ⟪𝓕(boost_a g₀),𝓕 h⟫` [Plancherel] `= ⟪M_a(𝓕g₀),𝓕h⟫`
-         [brick 4] `= ∫ e^{+2πiaξ}·conj(𝓕g₀ ξ)·𝓕h ξ dξ` = the integral-FT of `k:=conj(𝓕g₀)·𝓕h ∈ L¹`. NEXT: (5) this
-         `c(a)≡0 ⟺ 𝓕_int(k)≡0`; (6) FT-injective-on-L¹ (`Inversion.lean`/`Integrable.fourierInv_fourier_eq`) `⟹ k=0`
-         a.e.; (7) `𝓕g₀≠0` a.e. `⟹ 𝓕h=0 ⟹ h=0` (`𝓕` injective); (8) concrete `f₀` with `𝓕(Krep f₀)≠0` a.e.
-         Bricks 1,2,3,4 BUILT axiom-free; the cyclic analytic discharge is well past half-way and de-risked.
+         [brick 4] `= ∫ e^{+2πiaξ}·conj(𝓕g₀ ξ)·𝓕h ξ dξ` = the integral-FT of `k:=conj(𝓕g₀)·𝓕h ∈ L¹`.
+         **(5) BUILT** (`d402880`): `inner_boostUnitary_eq_integral` — `⟪boostUnitary a g₀,h⟫ = ∫ e^{+2πiaξ}·conj(𝓕g₀ ξ)
+         ·𝓕h ξ dξ`, via Plancherel (`Lp.inner_fourier_eq`) + brick 4 + `L2.inner_def` + `coeFn_modL2` + the conjugate-
+         character helper `conj_modChar` (`conj e^{icξ}=e^{−icξ}` via `Complex.exp_conj`). So `∀a ⟪…⟫=0 ⟺ 𝓕⁻(k)≡0`.
+         NEXT: **(6) FT-injective-on-L¹** — `k∈L¹ ∧ 𝓕⁻k≡0 ⟹ k=0` a.e. Route (de-risked, lemmas located): `𝓕⁻k(a)
+         =𝓕k(−a)` so `𝓕⁻k≡0 ⟺ 𝓕k≡0`; multiplication formula `VectorFourier.integral_fourierIntegral_smul_eq_flip`
+         (`∫ 𝓕k·φ = ∫ k·𝓕φ`) ⟹ `∫ k·𝓕φ=0 ∀φ` test; `{𝓕φ}`=test fns (Fourier bijection on Schwartz) ⟹ `∫ k·ψ=0 ∀ψ`;
+         then the variational lemma `Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff.lean`
+         (`ae_eq_zero_of_forall_…ContDiff`-family) ⟹ `k=0` a.e. (7) `conj(𝓕g₀)·𝓕h=0` a.e. `∧ 𝓕g₀≠0` a.e. `⟹ 𝓕h=0`
+         a.e. `⟹ 𝓕h=0 ⟹ h=0` (`𝓕` inj). (8) concrete `f₀` with `𝓕(Krep f₀)≠0` a.e.
+         Bricks 1–5 BUILT axiom-free; the cyclic analytic discharge is two bricks (6 = L¹-uniqueness, 8 = concrete
+         generator) from closing — well past the hardest part (the intertwining + Plancherel bridge are done).
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
