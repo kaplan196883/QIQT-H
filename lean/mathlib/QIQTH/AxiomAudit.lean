@@ -4685,5 +4685,9 @@ namespace QIQTH.AxiomAudit
 -- λ∈(0,π), θ↦KrepCont m f (θ+iλ) ∈ L²(dθ). By POINTWISE domination ‖KrepCont(θ+iλ)‖≤C·exp(−c coshθ)
 -- (norm_KrepCont_le_exp_decay) against the L² fn C·exp(−c cosh) (sq integrable via integrable_exp_neg_const_mul_cosh)
 -- + MemLp.mono'. NO Minkowski integral inequality — the previously-flagged Mathlib gap is fully off the path.
+#print axioms QIQTH.Fock.BoostKMS.inner_boostUnitary_KrepL2
+-- expected: standard only — ★★ A4 (real-axis edge): ⟪KrepL2 g, boostUnitary a (KrepL2 f)⟫ = ∫ conj(Krep g θ)·Krep f(θ−a) dθ.
+-- Bridges the abstract Lp ℂ 2 inner product (L2.inner_def) + boostUnitary action (boostUnitary_KrepL2, = rapidity
+-- translation Krep_boost) to the concrete rapidity integral — the orbit correlation f(t)=⟪η,V_t ξ⟫ of StripKMSrvd.
 
 end QIQTH.AxiomAudit
