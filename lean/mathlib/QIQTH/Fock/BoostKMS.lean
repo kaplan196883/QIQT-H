@@ -1720,6 +1720,55 @@ theorem norm_kmsFun_le_norm_mul {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : C
         + ‖hfL.toLp (Krep m f)‖ * ‖hgL.toLp (Krep m g)‖ := h
     _ = 2 * ‖hgL.toLp (Krep m g)‖ * ‖hfL.toLp (Krep m f)‖ := by ring
 
+/-- **Difference bound (closure Cauchy keystone)**: on the closed strip,
+    `‖kmsFun f₁ g₁ z − kmsFun f₂ g₂ z‖ ≤ 2‖KrepL2 g₁‖·‖KrepL2 f₁ − KrepL2 f₂‖ + 2‖KrepL2 g₁ − KrepL2 g₂‖·‖KrepL2 f₂‖`.
+    Difference identity (`kmsFun_sub_left/right`) ⟹ `kmsFun_{f₁−f₂,g₁}+kmsFun_{f₂,g₁−g₂}`, each bounded by
+    `norm_kmsFun_le_norm_mul` and rewritten via `KrepL2_sub`. The controlling estimate for the BCF Cauchy net. -/
+theorem norm_kmsFun_sub_le {m : ℝ} (hm : 0 < m) {f₁ f₂ g₁ g₂ : V → ℂ}
+    (hf₁ : Continuous f₁) (hf₁c : HasCompactSupport f₁) (hf₂ : Continuous f₂) (hf₂c : HasCompactSupport f₂)
+    (hg₁ : Continuous g₁) (hg₁c : HasCompactSupport g₁) (hg₂ : Continuous g₂) (hg₂c : HasCompactSupport g₂)
+    {δ : ℝ} (hδ : 0 < δ)
+    (hmf₁ : ∀ x, f₁ x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmf₂ : ∀ x, f₂ x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg₁ : ∀ x, g₁ x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg₂ : ∀ x, g₂ x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hf₁r : ∀ x, (starRingEnd ℂ) (f₁ x) = f₁ x) (hf₂r : ∀ x, (starRingEnd ℂ) (f₂ x) = f₂ x)
+    (hg₁r : ∀ x, (starRingEnd ℂ) (g₁ x) = g₁ x) (hg₂r : ∀ x, (starRingEnd ℂ) (g₂ x) = g₂ x)
+    (hf₁L : MemLp (Krep m f₁) 2 volume) (hf₂L : MemLp (Krep m f₂) 2 volume)
+    (hg₁L : MemLp (Krep m g₁) 2 volume) (hg₂L : MemLp (Krep m g₂) 2 volume)
+    {z : ℂ} (hz0 : -1 ≤ z.im) (hz1 : z.im ≤ 0) :
+    ‖kmsFun m f₁ g₁ z - kmsFun m f₂ g₂ z‖
+      ≤ 2 * ‖hg₁L.toLp (Krep m g₁)‖ * ‖hf₁L.toLp (Krep m f₁) - hf₂L.toLp (Krep m f₂)‖
+        + 2 * ‖hg₁L.toLp (Krep m g₁) - hg₂L.toLp (Krep m g₂)‖ * ‖hf₂L.toLp (Krep m f₂)‖ := by
+  have hmf₁₂ : ∀ x, (f₁ - f₂) x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0 := by
+    intro x hx
+    by_cases h : f₁ x = 0
+    · exact hmf₂ x fun hc => hx (by rw [Pi.sub_apply, h, hc, sub_zero])
+    · exact hmf₁ x h
+  have hf₁₂r : ∀ x, (starRingEnd ℂ) ((f₁ - f₂) x) = (f₁ - f₂) x := fun x => by
+    rw [Pi.sub_apply, map_sub, hf₁r, hf₂r]
+  have hmg₁₂ : ∀ x, (g₁ - g₂) x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0 := by
+    intro x hx
+    by_cases h : g₁ x = 0
+    · exact hmg₂ x fun hc => hx (by rw [Pi.sub_apply, h, hc, sub_zero])
+    · exact hmg₁ x h
+  have hg₁₂r : ∀ x, (starRingEnd ℂ) ((g₁ - g₂) x) = (g₁ - g₂) x := fun x => by
+    rw [Pi.sub_apply, map_sub, hg₁r, hg₂r]
+  have hid : kmsFun m f₁ g₁ z - kmsFun m f₂ g₂ z
+      = kmsFun m (f₁ - f₂) g₁ z + kmsFun m f₂ (g₁ - g₂) z := by
+    rw [kmsFun_sub_left hm hf₁ hf₁c hf₂ hf₂c hg₁ hg₁c hδ hmf₁ hmf₂ hmg₁ hf₁r hf₂r hg₁r hf₁L hf₂L hg₁L hz0 hz1,
+      kmsFun_sub_right hm hf₂ hf₂c hg₁ hg₁c hg₂ hg₂c hδ hmf₂ hmg₁ hmg₂ hf₂r hg₁r hg₂r hf₂L hg₁L hg₂L hz0 hz1]
+    ring
+  rw [hid]
+  refine (norm_add_le _ _).trans ?_
+  gcongr ?_ + ?_
+  · have hb := norm_kmsFun_le_norm_mul (f := f₁ - f₂) hm (hf₁.sub hf₂) (hf₁c.sub hf₂c) hg₁ hg₁c hδ hmf₁₂ hmg₁
+      hf₁₂r hg₁r (memLp_Krep_sub hf₁ hf₁c hf₂ hf₂c hf₁L hf₂L) hg₁L hz0 hz1
+    rwa [KrepL2_sub hf₁ hf₁c hf₂ hf₂c hf₁L hf₂L] at hb
+  · have hb := norm_kmsFun_le_norm_mul (g := g₁ - g₂) hm hf₂ hf₂c (hg₁.sub hg₂) (hg₁c.sub hg₂c) hδ hmf₂ hmg₁₂
+      hf₂r hg₁₂r hf₂L (memLp_Krep_sub hg₁ hg₁c hg₂ hg₂c hg₁L hg₂L) hz0 hz1
+    rwa [KrepL2_sub hg₁ hg₁c hg₂ hg₂c hg₁L hg₂L] at hb
+
 /-- **Boost-translate preserves `L²`**: `MemLp (Krep m (boostTest a f)) 2` from `MemLp (Krep m f) 2`, since
     `Krep m (boostTest a f) = Krep m f ∘ (·+a)` (`Krep_boost`) and translation is measure-preserving. -/
 theorem memLp_Krep_boostTest {m : ℝ} {f : V → ℂ} (hf : MemLp (Krep m f) 2 volume) (a : ℝ) :
