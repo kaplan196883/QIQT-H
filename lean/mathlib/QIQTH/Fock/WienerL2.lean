@@ -300,4 +300,21 @@ theorem ae_ne_zero_of_analyticOnNhd {F : ℝ → ℂ} (hF : AnalyticOnNhd ℝ F 
     rw [Measure.restrict_univ] at hle
     exact hle h
 
+/-- **Wiener brick 8c′ — an entire function nonzero somewhere on `ℝ` is `≠ 0` a.e. on `ℝ`.**
+    The restriction of an entire `F : ℂ → ℂ` to the real axis is real-analytic
+    (`analyticOnNhd_univ_iff_differentiable` + `AnalyticAt.restrictScalars`/`.comp` with `ofRealCLM`),
+    so brick 8c applies.  This is the exact shape consumed by brick 8: the Fourier transform of the
+    super-exponentially-decaying wedge amplitude `Krep m f₀` extends to an entire function. -/
+theorem ae_ne_zero_of_differentiable {F : ℂ → ℂ} (hF : Differentiable ℂ F)
+    (hF0 : ∃ x : ℝ, F (Complex.ofReal x) ≠ 0) :
+    ∀ᵐ x ∂(volume : Measure ℝ), F (Complex.ofReal x) ≠ 0 := by
+  have hana : AnalyticOnNhd ℝ (fun x : ℝ => F (Complex.ofReal x)) Set.univ := by
+    intro x _
+    have hC : AnalyticAt ℂ F (x : ℂ) :=
+      (hF.differentiableOn.analyticOnNhd isOpen_univ) (x : ℂ) (Set.mem_univ _)
+    have hR : AnalyticAt ℝ F (x : ℂ) := hC.restrictScalars
+    have ho : AnalyticAt ℝ (fun t : ℝ => (t : ℂ)) x := Complex.ofRealCLM.analyticAt x
+    exact hR.comp ho
+  exact ae_ne_zero_of_analyticOnNhd hana hF0
+
 end QIQTH.Fock.WienerL2
