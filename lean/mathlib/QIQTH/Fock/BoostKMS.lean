@@ -1572,6 +1572,35 @@ theorem norm_toLp_Krep_eq_sqrt {m : ℝ} {f : V → ℂ} (hf : MemLp (Krep m f) 
     rw [← inner_self_eq_norm_sq (𝕜 := ℂ) (hf.toLp (Krep m f)), hinner]; simp
   rw [← hsq, Real.sqrt_sq (norm_nonneg _)]
 
+/-- **Strip bound in Hilbert norms**: `‖kmsFun z‖ ≤ 2·‖KrepL2 g‖·‖KrepL2 f‖` on the closed strip. The `R=0`
+    annular constant `ε₀` rewritten via `{0<|θ|} =ᵐ ℝ` and `norm_toLp_Krep_eq_sqrt`. The Cauchy–Schwarz-type
+    bound `‖F z‖ ≤ C·‖η‖·‖ξ‖` controlling the span-closure threading. -/
+theorem norm_kmsFun_le_norm_mul {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hfL : MemLp (Krep m f) 2 volume) (hgL : MemLp (Krep m g) 2 volume)
+    {z : ℂ} (hz0 : -1 ≤ z.im) (hz1 : z.im ≤ 0) :
+    ‖kmsFun m f g z‖ ≤ 2 * ‖hgL.toLp (Krep m g)‖ * ‖hfL.toLp (Krep m f)‖ := by
+  have hset : ∀ h : V → ℂ,
+      (∫ θ in {θ : ℝ | (0 : ℝ) < |θ|}, ‖Krep m h θ‖ ^ 2) = ∫ θ, ‖Krep m h θ‖ ^ 2 := by
+    intro h
+    have hae : {θ : ℝ | (0 : ℝ) < |θ|} =ᵐ[volume] (Set.univ : Set ℝ) := by
+      rw [MeasureTheory.ae_eq_univ]
+      have hcompl : {θ : ℝ | (0 : ℝ) < |θ|}ᶜ = {0} := by
+        ext θ; simp [abs_pos, not_not]
+      rw [hcompl]; exact Real.volume_singleton
+    rw [MeasureTheory.setIntegral_congr_set hae, MeasureTheory.setIntegral_univ]
+  have h := norm_kmsFun_sub_kmsFunCut_le hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL
+    (le_refl (0 : ℝ)) hz0 hz1
+  rw [kmsFunCut_zero, sub_zero, hset g, hset f, ← norm_toLp_Krep_eq_sqrt hgL,
+    ← norm_toLp_Krep_eq_sqrt hfL] at h
+  calc ‖kmsFun m f g z‖
+      ≤ ‖hgL.toLp (Krep m g)‖ * ‖hfL.toLp (Krep m f)‖
+        + ‖hfL.toLp (Krep m f)‖ * ‖hgL.toLp (Krep m g)‖ := h
+    _ = 2 * ‖hgL.toLp (Krep m g)‖ * ‖hfL.toLp (Krep m f)‖ := by ring
+
 /-- **Boost-translate preserves `L²`**: `MemLp (Krep m (boostTest a f)) 2` from `MemLp (Krep m f) 2`, since
     `Krep m (boostTest a f) = Krep m f ∘ (·+a)` (`Krep_boost`) and translation is measure-preserving. -/
 theorem memLp_Krep_boostTest {m : ℝ} {f : V → ℂ} (hf : MemLp (Krep m f) 2 volume) (a : ℝ) :
