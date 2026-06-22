@@ -1498,4 +1498,29 @@ theorem kmsFun_diffContOnCl {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Conti
   exact ⟨kmsFun_differentiableOn hm hf hfc hg hgc hδ hmf hmg,
     (kmsFun_continuousOn_closed hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL).mono hcl⟩
 
+/-- `kmsFunCut m f g 0 z = 0` — the cutoff window `[−0,0] = {0}` has measure zero. -/
+theorem kmsFunCut_zero (m : ℝ) (f g : V → ℂ) (z : ℂ) : kmsFunCut m f g 0 z = 0 := by
+  rw [kmsFunCut, neg_zero, Set.Icc_self, MeasureTheory.integral_singleton,
+    show volume.real ({0} : Set ℝ) = 0 by
+      rw [MeasureTheory.measureReal_def, Real.volume_singleton, ENNReal.toReal_zero], zero_smul]
+
+/-- **`kmsFun` is bounded on the closed strip** by `M₀ := ε₀` (the `R=0` annular constant). `kmsFunCut 0 z = 0`
+    and `norm_kmsFun_sub_kmsFunCut_le` at `R=0` give `‖kmsFun z‖ ≤ ε₀` for every `z` in the closed strip — the
+    boundedness component of the `StripKMSrvd` witness (RvD Def 3.4 bounds `F` on the strip). -/
+theorem norm_kmsFun_le_closed {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hfL : MemLp (Krep m f) 2 volume) (hgL : MemLp (Krep m g) 2 volume) :
+    ∃ M : ℝ, ∀ z ∈ Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0, ‖kmsFun m f g z‖ ≤ M := by
+  refine ⟨Real.sqrt (∫ θ in {θ : ℝ | (0 : ℝ) < |θ|}, ‖Krep m g θ‖ ^ 2)
+      * Real.sqrt (∫ θ, ‖Krep m f θ‖ ^ 2)
+      + Real.sqrt (∫ θ in {θ : ℝ | (0 : ℝ) < |θ|}, ‖Krep m f θ‖ ^ 2)
+        * Real.sqrt (∫ θ, ‖Krep m g θ‖ ^ 2), fun z hz => ?_⟩
+  rw [Set.mem_preimage, Set.mem_Icc] at hz
+  have h := norm_kmsFun_sub_kmsFunCut_le hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL
+    (le_refl (0 : ℝ)) hz.1 hz.2
+  rwa [kmsFunCut_zero, sub_zero] at h
+
 end QIQTH.Fock.BoostKMS
