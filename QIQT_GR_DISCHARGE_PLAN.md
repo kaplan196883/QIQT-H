@@ -540,13 +540,18 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          two `L²`, `MemLp.star` for the conj factor); `𝓕g₀≠0` a.e. + `mul_eq_zero` + `star_eq_zero` ⟹ `𝓕h=0` a.e.
          `⟹ 𝓕h=0` in `Lp` (`Lp.eq_zero_iff_ae_eq_zero`) `⟹ h=0` (`Lp.fourierTransformₗᵢ` inj).
          **★★★ THE WIENER L² TAUBERIAN THEOREM IS COMPLETE** — the boost orbit of any single generator with `𝓕≠0`
-         a.e. is total in `L²`, fully axiom-free. NEXT: **(8)** a concrete nice generator `f₀` (Gaussian-type) with
-         `𝓕(Krep m f₀)≠0` a.e., then WIRE into `NiceWedgeCyclic m` (`BoostKMS.lean`): the orbit `boostUnitary a N₀.vec`
-         = nice generators, so "⊥ all generators" ⟹ "⊥ N₀'s boost-orbit" ⟹[brick 7] `h=0` ⟹ `NiceWedgeCyclic m` ⟹
-         `oneParticleBW_niceWedge_reehSchlieder` discharges the cyclic Reeh–Schlieder input.
-         Bricks 1–7 BUILT axiom-free; remaining = 8 (concrete generator) + the `NiceWedgeCyclic` wiring.
-         EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness, the
-         full Tauberian theorem) is DONE — the cyclic discharge is one concrete computation + wiring from closing.
+         a.e. is total in `L²`, fully axiom-free.
+         **WIRING DONE** (`641dc6d`): `niceWedgeCyclic_of_fourier_ne_zero` (`BoostKMS.lean`, now imports `WienerL2`) —
+         `NiceWedgeCyclic m` holds as soon as ONE nice generator `N₀` has `𝓕(N₀.vec)≠0` a.e.  Proof: `h⊥` all nice
+         generators ⟹ `h⊥` `N₀`'s boost-orbit (boosts of a nice generator are nice, `NiceTest.vec_boost`; orthogonality
+         = the integral, `inner_KrepL2_general`) ⟹[brick 7] `h=0`.  Feeds the banked capstone
+         `oneParticleBW_niceWedge_reehSchlieder`.  Bricks 1–7 + wiring BUILT axiom-free.
+         **THE ENTIRE CYCLIC REEH–SCHLIEDER INPUT NOW RESTS ON THE SINGLE CONCRETE FACT `∃ N₀, 𝓕(N₀.vec)≠0` a.e.**
+         NEXT — only **(8)**: exhibit ONE concrete nice generator `f₀` (a wedge-supported bump/Gaussian-type real test)
+         and show its one-particle amplitude `𝓕(Krep m f₀)≠0` a.e.  Then `niceWedgeCyclic_of_fourier_ne_zero` ⟹
+         `NiceWedgeCyclic m` ⟹ the capstone discharges cyclic Reeh–Schlieder unconditionally (modulo the parallel
+         separating side).  EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction,
+         L¹-uniqueness, the full Tauberian theorem, the `NiceWedgeCyclic` wiring) is DONE.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
