@@ -2169,6 +2169,27 @@ theorem boostUnitary_mapsTo_niceWedgeGenSet (m a : ℝ) :
   rintro ξ ⟨N, rfl⟩
   exact ⟨N.boost a, (N.vec_boost a).symm⟩
 
+/-- **The nice core is contained in the broad wedge generating set**: a `δ`-margin forces wedge support
+    (`δ ≤ x₁∓x₀ ⟹ 0 < x₁∓x₀`), and niceness already supplies realness + `L²`.  So `niceWedgeGenSet m ⊆
+    wedgeGenSet m` — the EASY half of the broad-vs-nice equality `K_big = K_nice` (the hard half is the
+    standard density). -/
+theorem niceWedgeGenSet_subset_wedgeGenSet (m : ℝ) :
+    niceWedgeGenSet m ⊆ wedgeGenSet m := by
+  rintro ξ ⟨N, rfl⟩
+  refine ⟨N.f, N.memLp, ?_, N.real, rfl⟩
+  intro x hx
+  obtain ⟨h1, h2⟩ := N.margin x (Function.mem_support.mp hx)
+  exact ⟨lt_of_lt_of_le N.hδ h1, lt_of_lt_of_le N.hδ h2⟩
+
+/-- **The nice-core wedge subspace is contained in the broad `𝒦_W`**: `closure (niceWedgeGenSet m) ⊆
+    closure (span_ℝ (wedgeGenSet m))`.  So any vector handled by the nice-core BW discharge lives in the
+    codebase's broad wedge standard subspace — the containment toward connecting `oneParticleBW_niceWedge`
+    to the broad `𝒦_W` (the reverse inclusion is the standard density, the optional theorem). -/
+theorem closure_niceWedgeGenSet_subset (m : ℝ) :
+    closure (niceWedgeGenSet m)
+      ⊆ closure (Submodule.span ℝ (wedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ))) :=
+  closure_mono ((niceWedgeGenSet_subset_wedgeGenSet m).trans Submodule.subset_span)
+
 open scoped BoundedContinuousFunction in
 /-- **★★★ (c3+c4) The RvD Def 3.4 KMS witness extended to the CLOSURE of the nice generators**, axiom-free.
     For `ξ, η ∈ closure (niceWedgeGenSet m)` there is a bounded function `F`, holomorphic on the open strip and
