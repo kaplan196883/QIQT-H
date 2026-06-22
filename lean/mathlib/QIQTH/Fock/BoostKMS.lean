@@ -2290,4 +2290,54 @@ theorem stripKMSrvd_boostUnitary {m : ℝ} (hm : 0 < m) :
     StripKMSrvd (fun t => boostUnitary (2 * Real.pi * t)) (closure (niceWedgeGenSet m)) :=
   fun _ hξ _ hη => stripKMSrvd_closure hm hξ hη
 
+open QIQTH.StandardSubspaceModular in
+/-- **★★★★★ One-particle Bisognano–Wichmann for the nice-core wedge subspace — `hKMS` DISCHARGED at the
+    constructed `+2π` sign**, axiom-free.  For a standard subspace `S` whose carrier is the nice-core wedge
+    subspace `closure (niceWedgeGenSet m)` and the rapidity-boost group `V t = boostUnitary(2πt)`, the modular
+    flow IS the boost: `modUnitary S t = V t`.  The genuine RvD Def 3.4 KMS condition (`hKMS`) is no longer a
+    labelled hypothesis — it is supplied by the machine-checked `stripKMSrvd_boostUnitary`; the `𝒦`-invariance
+    by `boostUnitary_mapsTo_niceWedgeGenSet` (+ `Set.MapsTo.closure`); the contraction-group structure by the
+    boost group laws.  This is `oneParticleBW_wedge_complete` with EVERY labelled analytic input discharged, at
+    the sign the construction actually realizes (`+2π`; see the sign finding — `StripKMSrvd` holds for only one
+    sign, and it is this one). -/
+theorem oneParticleBW_niceWedge {m : ℝ} (hm : 0 < m)
+    (S : StandardSubspace (Lp ℂ 2 (volume : Measure ℝ)))
+    (V : ℝ → (Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ)))
+    (hcarrier : (S.toClosedSubmodule : Set (Lp ℂ 2 (volume : Measure ℝ))) = closure (niceWedgeGenSet m))
+    (hVboost : ∀ t x, V t x = boostUnitary (2 * Real.pi * t) x) :
+    ∀ t, modUnitary S t = V t := by
+  have hInv : ∀ t, Set.MapsTo (V t)
+      (S.toClosedSubmodule : Set _) (S.toClosedSubmodule : Set _) := by
+    intro t
+    rw [hcarrier]
+    have hset : Set.MapsTo (V t) (niceWedgeGenSet m) (niceWedgeGenSet m) := by
+      intro x hx
+      rw [hVboost t x]
+      exact boostUnitary_mapsTo_niceWedgeGenSet m (2 * Real.pi * t) hx
+    exact hset.closure (V t).continuous
+  have hbd : ∀ η : Lp ℂ 2 (volume : Measure ℝ), ∀ t, ‖V t η‖ ≤ ‖η‖ := fun η t => by
+    rw [hVboost]; exact le_of_eq ((boostUnitary (2 * Real.pi * t)).norm_map η)
+  have hgrp : ∀ η : Lp ℂ 2 (volume : Measure ℝ), ∀ s t, V s (V t η) = V (s + t) η := fun η s t => by
+    simp only [hVboost]
+    rw [show 2 * Real.pi * (s + t) = 2 * Real.pi * s + 2 * Real.pi * t from by ring,
+      boostUnitary_add_apply]
+  have hV0 : ∀ η : Lp ℂ 2 (volume : Measure ℝ), V 0 η = η := fun η => by
+    rw [hVboost, show 2 * Real.pi * 0 = (0 : ℝ) from by ring, boostUnitary_zero_apply]
+  have hcont : ∀ η ∈ (S.toClosedSubmodule : Set _), Continuous (fun t => V t η) := fun η _ => by
+    simp only [hVboost]
+    exact (continuous_boostUnitary_apply η).comp (by fun_prop)
+  have hKinv : ∀ η ∈ (S.toClosedSubmodule : Set _), ∀ n : ℝ, 0 < n → ∀ s : ℝ,
+      projK S (V s (gaussSmear V n η)) = V s (gaussSmear V n η) := fun η hη n hn s => by
+    have hgauss : gaussSmear V n η ∈ S.toClosedSubmodule :=
+      gaussSmear_mem_K S hn (hcont η hη) (hbd η) (fun t => hInv t hη)
+    exact (mem_K_iff_projK S _).mp (hInv s hgauss)
+  have hKMS : StripKMSrvd V (S.toClosedSubmodule : Set _) := by
+    rw [hcarrier]
+    intro ξ hξ η hη
+    obtain ⟨f, hdcc, hbdd, htop, hbot⟩ := stripKMSrvd_boostUnitary hm ξ hξ η hη
+    refine ⟨f, hdcc, hbdd, fun t => ?_, fun t => ?_⟩
+    · rw [hVboost t ξ]; exact htop t
+    · rw [hVboost t ξ]; exact hbot t
+  exact oneParticleBW_complete S V hcont hbd hgrp hV0 hKinv hInv hKMS
+
 end QIQTH.Fock.BoostKMS
