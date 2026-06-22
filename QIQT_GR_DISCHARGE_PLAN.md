@@ -400,11 +400,16 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          `rw` and even type-ascribed term-mode). WITH `open [scoped] ClosedSubmodule`, the `ᗮ` instance aligns BUT the
          open simultaneously breaks `⊔`/`Max` synthesis for `ClosedSubmodule` (`failed to synthesize Max`) and overloads
          the `ᗮ` notation. So the anonymous scoped instance can only be brought in by an open that breaks the lattice
-         ops — a genuine Mathlib scoping tangle. RESOLUTION PATHS (dedicated pass): state the theorem with `@`-explicit
-         `ClosedSubmodule.orthogonal ... ClosedSubmodule.instInnerProductSpaceReal` (verbose; caller must match), or a
-         file-level `open scoped ClosedSubmodule` + re-verify all `⊔`/`⊓` uses, or a small Mathlib-side instance-priority
-         fix. Reverted to keep green; the CYCLIC side is fully done, separating awaits this scoping resolution (then
-         density of `Kᗮ` = opposite-wedge totality via the now-general engine).
+         ops — a genuine Mathlib scoping tangle. **CONFIRMED ROOT (letI test):** even `letI :=
+         ClosedSubmodule.instInnerProductSpaceReal` (pinning the ᗮ instance with NO open) makes `Max (ClosedSubmodule
+         ℝ (Lp ℂ 2))` fail to synthesize — so the `ClosedSubmodule` LATTICE (`⊔`) instance ALSO depends on
+         `InnerProductSpace ℝ`, and the two competing real-inner-product instances cannot be satisfied together. A
+         genuine **Mathlib instance-design tangle** (lattice + orthogonal over two non-agreeing `InnerProductSpace ℝ`
+         paths), NOT a local-trick fix. RESOLUTION (dedicated/Mathlib-aware): `@`-explicit instances on every `⊔`/`⊓`/`ᗮ`
+         (verbose/fragile), or a Mathlib-side instance-priority fix making the scoped real-inner-product canonical.
+         Reverted to keep green; the CYCLIC side is fully done, separating is the one piece gated on this tangle (its
+         math is trivial once instances align). NB: the analytic `Dense(span_ℂ niceWedgeGenSet)` (wedge-totality) is the
+         genuine remaining content for BOTH sides regardless.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
