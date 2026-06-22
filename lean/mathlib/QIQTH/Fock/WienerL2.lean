@@ -21,10 +21,11 @@ import Mathlib.MeasureTheory.Topology
 import Mathlib.MeasureTheory.Integral.ExpDecay
 import Mathlib.MeasureTheory.Integral.Asymptotics
 import QIQTH.Fock.OneParticleBW
+import QIQTH.Fock.SchwartzDecay
 
 namespace QIQTH.Fock.WienerL2
 
-open SchwartzMap MeasureTheory QIQTH.Fock.OneParticle QIQTH.Fock.OneParticleBW
+open SchwartzMap MeasureTheory QIQTH.Fock.OneParticle QIQTH.Fock.OneParticleBW QIQTH.Fock.Localization
 
 /-- **Wiener brick 1 — the Schwartz translation operator** `τ_a : 𝓢(ℝ,ℂ) →L[ℂ] 𝓢(ℝ,ℂ)`, `f ↦ f(·+a)`.
     Built via `SchwartzMap.compCLM` with the temperate-growth affine map `x ↦ x + a` (`HasTemperateGrowth.id'
@@ -342,5 +343,39 @@ theorem integrable_exp_neg_mul_abs {b : ℝ} (hb : 0 < b) :
   · refine (Filter.EventuallyEq.isBigO ?_)
     filter_upwards [Filter.eventually_gt_atTop 0] with x hx
     rw [abs_of_pos hx]
+
+/-- `(cosh θ)⁻² ≤ 4·exp(−2|θ|)` — from `exp|θ| ≤ 2cosh θ` (one of `e^{±θ}` equals `e^{|θ|}`). -/
+theorem inv_cosh_sq_le_exp (θ : ℝ) : (Real.cosh θ ^ 2)⁻¹ ≤ 4 * Real.exp (-2 * |θ|) := by
+  have hexp : Real.exp |θ| ≤ 2 * Real.cosh θ := by
+    rw [Real.cosh_eq]
+    rcases le_total 0 θ with h | h
+    · rw [abs_of_nonneg h]; have := (Real.exp_pos (-θ)).le; linarith
+    · rw [abs_of_nonpos h]; have := (Real.exp_pos θ).le; linarith
+  have hexp2 : Real.exp (2 * |θ|) ≤ 4 * Real.cosh θ ^ 2 := by
+    have h := mul_le_mul hexp hexp (Real.exp_nonneg _) (by positivity)
+    calc Real.exp (2 * |θ|) = Real.exp |θ| * Real.exp |θ| := by rw [← Real.exp_add]; ring_nf
+      _ ≤ 2 * Real.cosh θ * (2 * Real.cosh θ) := h
+      _ = 4 * Real.cosh θ ^ 2 := by ring
+  have hee : Real.exp (-2 * |θ|) * Real.exp (2 * |θ|) = 1 := by rw [← Real.exp_add]; simp
+  rw [show (Real.cosh θ ^ 2)⁻¹ = 1 / Real.cosh θ ^ 2 by rw [one_div],
+    div_le_iff₀ (by positivity)]
+  nlinarith [hexp2, Real.exp_pos (-2 * |θ|), Real.exp_pos (2 * |θ|), hee]
+
+/-- **Wiener brick 8a — `Krep m f ∈ L¹(ℝ)`** for a Schwartz test `f`: the localized rapidity amplitude is
+    integrable, since `‖Krep m f θ‖ ≤ C·(cosh θ)⁻²` (`schwartz_Krep_decay_sq`) `≤ 4C·exp(−2|θ|)`, dominated by
+    the integrable `exp(−2|θ|)` (`integrable_exp_neg_mul_abs`).  Makes the function Fourier transform of `Krep`
+    well-defined and is the base for the L²↔L¹ agreement and the FT-holomorphy (8b). -/
+theorem integrable_Krep (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) :
+    Integrable (Krep m (⇑f)) volume := by
+  set C : ℝ := 16 * Real.pi ^ 2 * ((∫ v, ‖(⇑f) v‖) + (∫ v, ‖iteratedFDeriv ℝ 1 (⇑f) v‖)
+      + (∫ v, ‖iteratedFDeriv ℝ 2 (⇑f) v‖)) / (Real.sqrt 2 * m ^ 2) with hCdef
+  have hCnn : 0 ≤ C := by rw [hCdef]; positivity
+  refine Integrable.mono' (g := fun θ => C * 4 * Real.exp (-2 * |θ|))
+    ((integrable_exp_neg_mul_abs (by norm_num : (0 : ℝ) < 2)).const_mul (C * 4)) ?_ ?_
+  · exact (Krep_continuous f.integrable).aestronglyMeasurable
+  · filter_upwards with θ
+    calc ‖Krep m (⇑f) θ‖ ≤ C * (Real.cosh θ ^ 2)⁻¹ := schwartz_Krep_decay_sq f hm θ
+      _ ≤ C * (4 * Real.exp (-2 * |θ|)) := by gcongr; exact inv_cosh_sq_le_exp θ
+      _ = C * 4 * Real.exp (-2 * |θ|) := by ring
 
 end QIQTH.Fock.WienerL2
