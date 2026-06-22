@@ -341,6 +341,13 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
      NEEDS: `boostUnitary_mapsTo_niceWedgeGenSet` (boost preserves nice: margin/compact-supp/real under `boostTest`)
      ⟹ `hInv` for the nice-core carrier. Then `modUnitary S t = boostUnitary(2πt)` is axiom-free for the nice-core
      wedge standard subspace — the labelled `hKMS` discharged at the correct (constructed) sign.
+     **★ Lightcone scaling WORKED OUT (ready to implement):** `lorentzBoost a` scales the lightcone coords by
+     `(z₁−z₀) ↦ e^{−a}(z₁−z₀)` and `(z₁+z₀) ↦ e^{a}(z₁+z₀)` [from `lorentzBoost_one/zero` + `cosh a ∓ sinh a =
+     e^{∓a}`]. So `boostTest(−a) f x = f(lorentzBoost(−a) x)`: if `≠0` then `f`'s margin `δ` at `y=lorentzBoost(−a)x`
+     gives `δ ≤ e^{a}(x₁−x₀)` and `δ ≤ e^{−a}(x₁+x₀)` ⟹ `x` has margin `δ' := δ·e^{−|a|} > 0`. Build a
+     `NiceTest.boost (a) : NiceTest m` constructor (f := `boostTest(−a) N.f`, δ := `N.δ·exp(−|a|)`, cont/cpt via
+     `Continuous.comp`/homeomorph support, real preserved, memLp via `memLp_Krep_boostTest`) + `vec_boost`
+     (`boostUnitary a N.vec = (N.boost a).vec`, from `boostUnitary_KrepL2`) ⟹ `boostUnitary_mapsTo_niceWedgeGenSet`.
    - **★ The `−2π` reconciliation is a SEPARATE convention question** (whether the codebase's `boostUnitary`/`modUnitary`/
      `rvdRC`/`modChar` sign convention makes `−2π` here `≡ +2π` physically). Flagged for an honest audit, NOT guessed.
    NOTE: this is laborious Hilbert-space plumbing (sesquilinear extension from a total set by continuity) — no
