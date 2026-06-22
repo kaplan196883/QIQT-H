@@ -606,6 +606,17 @@ theorem norm_deriv_KrepCont_le_exp_decay {m : ℝ} (hm : 0 ≤ m) {f : V → ℂ
     _ = |m| * Real.cosh ζ.re * Real.exp (-(m * Real.sin ζ.im * δ) * Real.cosh ζ.re)
           * ∫ x, (|x 0| + |x 1|) * ‖f x‖ := by rw [integral_const_mul]
 
+/-- **Pointwise strip-decay of `KrepCont` at a general complex argument `w`** (`0≤Im w≤π`, `f` wedge-supported):
+    `‖KrepCont m f w‖ ≤ (1/√2)·(∫‖f‖)·exp(−(m sin(Im w)δ)·cosh(Re w))` (rewrite `w = Re w + i·Im w`). -/
+theorem norm_KrepCont_le_exp_decay_gen {m : ℝ} (hm : 0 ≤ m) {f : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) {δ : ℝ}
+    (hmargin : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    {w : ℂ} (him0 : 0 ≤ w.im) (himπ : w.im ≤ Real.pi) :
+    ‖KrepCont m f w‖
+      ≤ 1 / Real.sqrt 2 * (∫ x, ‖f x‖) * Real.exp (-(m * Real.sin w.im * δ) * Real.cosh w.re) := by
+  conv_lhs => rw [← Complex.re_add_im w]
+  exact norm_KrepCont_le_exp_decay hm hf hfc hmargin him0 himπ
+
 /-- **A2 (step 2) — interior-`λ` `L²` membership.** For `m > 0`, wedge-supported `f` (continuous, compact
     support, `tsupport f ⊆` open wedge), and `λ ∈ (0,π)`, the strip slice `θ ↦ KrepCont m f (θ+iλ)` is in
     `L²(dθ)`. Proven by **pointwise domination** `‖KrepCont(θ+iλ)‖ ≤ C·exp(−c·coshθ)`
