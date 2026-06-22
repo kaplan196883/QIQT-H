@@ -179,4 +179,33 @@ theorem fourierL2_boostUnitary (a : ℝ) (g : Lp ℂ 2 (volume : Measure ℝ)) :
   exact congrFun (DenseRange.equalizer
     (denseRange_toLpCLM (F := ℂ) (p := 2) (by norm_num)) hF hG base) g
 
+/-! ## Brick 5 — the Wiener bridge: boost-orbit inner product = integral Fourier transform -/
+
+open scoped ComplexConjugate
+
+/-- The unit character conjugates to its inverse: `conj (e^{icξ}) = e^{−icξ}`. -/
+theorem conj_modChar (c ξ : ℝ) : conj (modChar c ξ) = modChar (-c) ξ := by
+  rw [modChar, modChar, ← Complex.exp_conj]
+  congr 1
+  simp only [map_mul, Complex.conj_I, Complex.conj_ofReal]
+  push_cast
+  ring
+
+/-- **Wiener brick 5 — the bridge.**  Via Plancherel (`inner_fourier_eq`) and the intertwining
+    (brick 4), the boost-orbit inner product is the integral (inverse) Fourier transform of
+    `k(ξ) = conj(𝓕g₀ ξ)·𝓕h ξ ∈ L¹`:
+    `⟪boostUnitary a g₀, h⟫ = ∫ e^{+2πi a ξ}·conj(𝓕g₀ ξ)·𝓕h ξ dξ`.
+    So the orbit-orthogonality condition `∀a, ⟪…⟫ = 0` becomes the vanishing of the FT of `k` — the
+    exact hypothesis of the L¹ uniqueness theorem (next brick). -/
+theorem inner_boostUnitary_eq_integral (a : ℝ) (g₀ h : Lp ℂ 2 (volume : Measure ℝ)) :
+    inner ℂ (boostUnitary a g₀) h
+      = ∫ ξ, modChar (2 * Real.pi * a) ξ
+          * (conj ((𝓕 g₀ : Lp ℂ 2 (volume : Measure ℝ)) ξ)
+              * (𝓕 h : Lp ℂ 2 (volume : Measure ℝ)) ξ) := by
+  rw [← MeasureTheory.Lp.inner_fourier_eq, fourierL2_boostUnitary, MeasureTheory.L2.inner_def]
+  refine integral_congr_ae ?_
+  filter_upwards [coeFn_modL2 (-(2 * Real.pi * a)) (𝓕 g₀)] with ξ hξ
+  rw [hξ, RCLike.inner_apply', map_mul, conj_modChar, neg_neg]
+  ring
+
 end QIQTH.Fock.WienerL2
