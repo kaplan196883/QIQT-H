@@ -444,10 +444,20 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          as the honest cited frontier. **Named as first-class `Prop`s (`af37538`): `NiceWedgeSeparating m`
          (no complex line / Pauli–Jordan) and `NiceWedgeCyclic m` (wedge-totality / Paley–Wiener); the capstone
          `oneParticleBW_niceWedge_reehSchlieder` takes exactly these two — the precise, named goals for any future
-         analytic proof.** These are research-grade analysis (Mathlib-unsupported, NOT fire-sized): the cyclic Fubini
-         fails at L² integrability (`h∈L²` not `L¹`, needs L² Fourier theory); separating needs the free-field
-         symplectic non-degeneracy. They are the genuine irreducible physics — Item A reduced as far as possible
-         without entering the analytic proofs themselves.
+         analytic proof.** These are research-grade analysis (Mathlib-unsupported): the cyclic side needs L² Fourier
+         theory; separating needs the free-field symplectic non-degeneracy.
+         **★★ CYCLIC FRONTIER MAJORLY SIMPLIFIED (2026-06-23, `e425cd8`, axiom-free) — BYPASSES edge-of-the-wedge.**
+         `niceWedge_isCyclic_of_boost_orbit_dense`: cyclic ⟸ the complex span of the rapidity-boost ORBIT
+         `{boostUnitary a (N₀.vec) : a∈ℝ}` of a SINGLE nice generator is dense. KEY: the boost acts on `Krep` by
+         rapidity TRANSLATION (`Krep(boostTest a f)θ = Krep f(θ+a)`) + `boostTest` preserves niceness, so the orbit ⊆
+         `niceWedgeGenSet`. So the cyclic frontier drops from "all wedge vectors total" to "the TRANSLATES of ONE
+         on-shell amplitude are total" — the **Wiener–Tauberian condition `FT(KrepL2 f₀) ≠ 0` a.e.**, NO edge-of-the-wedge
+         analyticity (the boost-translation richness does the work). REMAINING for cyclic: (a) Wiener's L² theorem
+         (translates dense ⟺ `FT≠0` a.e.) — not in Mathlib but PROVABLE from its Fourier/Plancherel (`⟨τ_a g,h⟩=0 ∀a ⟹
+         ĝ·conj(ĥ)=0 ⟹ ĥ=0`); (b) `FT(KrepL2 f₀)≠0 a.e.` for one concrete nice `f₀` (e.g. a wedge Gaussian; codebase has
+         `gaussian_Krep_memLp`). Both are STANDARD L²-Fourier computations — a real step down from the abstract totality.
+         (Separating still needs the symplectic non-degeneracy.) I was too quick to call this "terminus" — the
+         boost-covariance gives a genuinely cleaner route.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
