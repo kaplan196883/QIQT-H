@@ -611,15 +611,20 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          a.e. [8c] ⟹ [L²↔L¹] result) + `fourierL2_Krep_ne_zero` (specialization: `Krep m fS ≢ 0` ⟹ the brick-7 Wiener
          hypothesis, plugging `integrable_Krep`+`analyticOnNhd_fourier_Krep`).
          **THE ENTIRE CYCLIC DISCHARGE NOW REDUCES TO ONE CONCRETE FACT: a Schwartz WEDGE bump `fS` with `Krep m fS ≢ 0`.**
-         NEXT — two pieces: **(i) WIRING** (`BoostKMS.lean`, mechanical): build the `NiceTest` from a `bumpC` (cont/cpt/real
-         are `bumpC_*`; `margin` from `bumpReal_support_subset` with the bump centred in the wedge interior, e.g. `bumpC 0 10`
-         → `δ=6`; `memLp`=`bumpC_Krep_memLp`), note `N₀.f = ⇑(bumpC.toSchwartzMap)` (defeq, `toFun`), so `N₀.vec =
-         (schwartz_Krep_memLp fS hm).toLp (Krep m ⇑fS)` (toLp proof-irrelevant) and `fourierL2_Krep_ne_zero` feeds
-         `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone.  **(ii) AMPLITUDE-NONZERO** `Krep m (bumpC) ≢ 0`
-         — THE genuine last hard fact (Gaussian prototype `K_gaussian_ne_zero` uses the explicit positive form, but the Gaussian
-         is NOT wedge-supported).  For a product bump `bumpC 0 cX`, `Krep m (bumpC) 0 = (1/√2)·f̂_M(m,0) = (1/√2)·bump1̂(m)·∫bump1`
-         (`bump1̂(m)=∫e^{−imy}bump1`), so `Krep≢0` ⟸ `bump1̂(m)≠0` — m-dependent; route: a SMALL-radius bump has `bump1̂(m)≈∫bump1>0`
-         (or fix a concrete `m` and bound `bump1̂(m)`).  This is the irreducible concrete computation isolating the cyclic discharge.
+         **(i) WIRING BUILT** (`53a8bc0`, NEW file `QIQTH/Fock/CyclicWitness.lean`, in the QIQTH aggregator):
+         `bumpNiceTest m hm` (the concrete `NiceTest` from `bumpC 0 10`, margin `δ=6` via `bumpReal_support_subset`) +
+         `niceWedgeCyclic_bump m hm (hKrep : Krep m (bumpC 0 10) ≢ 0) : NiceWedgeCyclic m` — feeds `fourierL2_Krep_ne_zero`
+         (the complete Wiener theorem) into `niceWedgeCyclic_of_fourier_ne_zero`; the `N₀.vec = (schwartz_Krep_memLp fS hm).toLp
+         (Krep m ⇑fS)` match is DEFEQ (`toFun`/`toLp` proof-irrelevance — no friction).  **THE ENTIRE CYCLIC REEH–SCHLIEDER
+         DISCHARGE IS NOW MECHANICALLY ASSEMBLED, axiom-free, reduced to ONE named concrete fact.**
+         NEXT — only **(ii) AMPLITUDE-NONZERO** `Krep m (bumpC 0 10) ≢ 0` (a continuous fn, so `≢ᵐ0 ⟺ ∃θ Krep θ≠0`).
+         **Cleanest route (separable + real-analytic):** the bump is a PRODUCT `bumpReal 0 10 = bump1 0(x⁰)·bump1 10(x¹)`, so
+         `f̂_M(bumpC)(p⁰,p¹)=A(p⁰)·B(p¹)` (`A,B` = 1D FTs of bumps, ENTIRE and `≢0` since `bump1≢0`).  On the shell
+         `Krep m (bumpC) θ = (1/√2)A(m coshθ)B(m sinhθ)`; `A(m cosh·)` is real-analytic in `θ` and `≢0` (`A` entire `≢0` ⟹
+         discrete zeros, but `m coshθ` sweeps `[m,∞)` ⟹ can't all be zeros), ditto `B(m sinh·)`, so the product `≢0` ⟹
+         `∃θ Krep θ≠0`.  (The naive `θ=0` value `(1/√2)bump1̂(m)·∫bump1` needs `bump1̂(m)≠0`, m-dependent — the separable route
+         avoids that.)  This is the irreducible real-analysis computation isolating the cyclic discharge; the separating side
+         (`NiceWedgeSeparating`, Pauli–Jordan) remains a parallel unattacked frontier.
          **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0` (its amplitude `≠0` somewhere), `8b+8c/8c′` ⟹ `𝓕≠0`
          a.e., feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
          EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness, the full
