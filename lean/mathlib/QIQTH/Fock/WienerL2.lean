@@ -16,6 +16,8 @@ import Mathlib.Analysis.Distribution.SchwartzSpace.Basic
 import Mathlib.Analysis.Distribution.TemperateGrowth
 import Mathlib.Analysis.Distribution.SchwartzSpace.Fourier
 import Mathlib.Analysis.Fourier.LpSpace
+import Mathlib.Analysis.Analytic.IsolatedZeros
+import Mathlib.MeasureTheory.Topology
 import QIQTH.Fock.OneParticleBW
 
 namespace QIQTH.Fock.WienerL2
@@ -281,5 +283,21 @@ theorem boost_orbit_total_of_fourier_ne_zero (g₀ h : Lp ℂ 2 (volume : Measur
   have hF0 : (𝓕 h : Lp ℂ 2 (volume : Measure ℝ)) = 0 :=
     Lp.eq_zero_iff_ae_eq_zero.mpr hFh0
   exact (Lp.fourierTransformₗᵢ ℝ ℂ).injective (hF0.trans (map_zero _).symm)
+
+/-- **Wiener brick 8c — a nonzero real-analytic function is `≠ 0` a.e.**  The zero set of a function
+    analytic on all of `ℝ` (and not identically zero) is co-discrete, hence Lebesgue-null
+    (`AnalyticOnNhd.eqOn_zero_or_eventually_ne_zero_of_preconnected` + `ae_restrict_le_codiscreteWithin`).
+    This is the final step turning "the boost-orbit generator's Fourier transform is entire and `≢ 0`"
+    into the Wiener hypothesis `𝓕 g₀ ≠ 0` a.e. of brick 7. -/
+theorem ae_ne_zero_of_analyticOnNhd {F : ℝ → ℂ} (hF : AnalyticOnNhd ℝ F Set.univ)
+    (hF0 : ∃ x, F x ≠ 0) : ∀ᵐ x ∂(volume : Measure ℝ), F x ≠ 0 := by
+  rcases hF.eqOn_zero_or_eventually_ne_zero_of_preconnected isPreconnected_univ with h | h
+  · obtain ⟨x, hx⟩ := hF0
+    have hzero := h (Set.mem_univ x)
+    simp only [Pi.zero_apply] at hzero
+    exact absurd hzero hx
+  · have hle := ae_restrict_le_codiscreteWithin (μ := (volume : Measure ℝ)) MeasurableSet.univ
+    rw [Measure.restrict_univ] at hle
+    exact hle h
 
 end QIQTH.Fock.WienerL2
