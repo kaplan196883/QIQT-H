@@ -376,6 +376,18 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          `niceWedgeStandardSubspace` constructor. So the ENTIRE remaining gap to an unconditional free-field
          one-particle BW is exactly those **two named Reeh–Schlieder lattice identities** — every other input
          (carrier, KMS, 𝒦-invariance, group structure) is machine-checked.
+         **★ ATTEMPTED the cyclic reduction `hcyc ⟸ Dense(span_ℂ niceWedgeGenSet)` (2026-06-23) — BLOCKED on a
+         Mathlib `ClosedSubmodule.mulI` API issue.** The math is right (`K⊔K.mulI` is `i`-invariant via
+         `mulI_sup`+`mulI_mulI_eq`+`sup_comm`, hence a closed ℂ-subspace ⊇ every nice generator ⊇ closure of their
+         dense ℂ-span = ⊤; `closedSubmodule_smul_I_mem`/`_complex_mem` via `mem_mapEquiv_iff`+`inv_I`, then
+         `closure_minimal`+`coe_top`). BUT `rw [ClosedSubmodule.mulI_sup]` does NOT match `(K ⊔ K.mulI).mulI` even
+         in isolation — the `mulI` abbrev (`mapEquiv (scalarSMulCLE H UnitI)`) fails to unify, almost certainly an
+         instance-diamond between the StandardSubspace framework's `InnerProductSpace ℂ` and `Lp`'s. Same wall on
+         `mem_mapEquiv_iff`. This is a real Mathlib-API/instance investigation (use `mulI_mulI_eq`'s exact idiom
+         `mem_mapEquiv_iff (scalarSMulCLE H UnitI)` + `SetLike.forall_smul_mem_iff`, or `convert`/`simp only [mulI]`
+         to force the unfold), NOT a quick lemma — reverted to keep green. The reduction remains the right next
+         step; it needs a dedicated session on the `mulI` lattice unfolding, after which only the analytic
+         `Dense(span_ℂ)` (wedge-totality) remains as the genuine frontier.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
