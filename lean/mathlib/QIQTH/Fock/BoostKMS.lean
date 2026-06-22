@@ -2690,28 +2690,39 @@ theorem oneParticleBW_niceWedge_of_total_integral {m : ℝ} (hm : 0 < m)
   oneParticleBW_niceWedge_of_standard hm V hVboost hsep (niceWedge_isCyclic_of_total_integral m htotal)
 
 open QIQTH.StandardSubspaceModular in
+/-- **The Reeh–Schlieder SEPARATING condition** (the nice-core wedge subspace has no nonzero complex line):
+    the only `v` with `v ∈ K` and `I•v ∈ K` is `v = 0` — the one-particle symplectic non-degeneracy
+    (Pauli–Jordan).  One of the two analytic facts the free-field one-particle BW rests on; named here as a
+    first-class goal for an analytic proof. -/
+def NiceWedgeSeparating (m : ℝ) : Prop :=
+  ∀ v : Lp ℂ 2 (volume : Measure ℝ), v ∈ niceWedgeClosedSubmodule m →
+    Complex.I • v ∈ niceWedgeClosedSubmodule m → v = 0
+
+/-- **The Reeh–Schlieder CYCLIC condition** (wedge-totality of the on-shell amplitudes): the only
+    `h ∈ L²(ℝ)` with `∫ conj(Krep m f θ)·h(θ) dθ = 0` for every nice wedge `f` is `h = 0` — Paley–Wiener /
+    edge-of-the-wedge.  The other analytic fact the free-field one-particle BW rests on. -/
+def NiceWedgeCyclic (m : ℝ) : Prop :=
+  ∀ h : Lp ℂ 2 (volume : Measure ℝ),
+    (∀ N : NiceTest m, ∫ θ, (starRingEnd ℂ) (Krep m N.f θ) * (h : ℝ → ℂ) θ = 0) → h = 0
+
+open QIQTH.StandardSubspaceModular in
 /-- **★★★★★ THE free-field one-particle Bisognano–Wichmann, reduced to its TWO analytic Reeh–Schlieder inputs.**
-    `modUnitary S t = boostUnitary(2πt)` for the nice-core wedge standard subspace, given ONLY:
-    • **separating** (`hsep0`): no nonzero complex line — the only `v` with `v ∈ K` and `I•v ∈ K` is `v = 0`
-      (the one-particle symplectic non-degeneracy / Pauli–Jordan); and
-    • **cyclic** (`htotal`): wedge-totality — the only `h` with `∫ conj(Krep m f θ)·h(θ) dθ = 0` for every nice
-      wedge `f` is `h = 0` (Paley–Wiener / edge-of-the-wedge).
-    NO lattice, NO instance, NO labelled-KMS hypotheses remain: every structural step (the KMS condition, the
-    `𝒦`-invariance, the boost group, the standard-subspace construction, BOTH Reeh–Schlieder lattice reductions)
-    is machine-checked and axiom-free.  The entire free-field one-particle BW now rests on exactly these two
-    concrete analytic statements about the localized rapidity amplitudes — the genuine, irreducible physics. -/
+    `modUnitary S t = boostUnitary(2πt)` for the nice-core wedge standard subspace, given ONLY the two named
+    Reeh–Schlieder conditions: `NiceWedgeSeparating m` (no complex line / Pauli–Jordan) and `NiceWedgeCyclic m`
+    (wedge-totality / Paley–Wiener).  NO lattice, NO instance, NO labelled-KMS hypotheses remain: every
+    structural step (the KMS condition, the `𝒦`-invariance, the boost group, the standard-subspace construction,
+    BOTH Reeh–Schlieder lattice reductions) is machine-checked and axiom-free.  The entire free-field one-particle
+    BW now rests on exactly these two concrete analytic statements about the localized rapidity amplitudes — the
+    genuine, irreducible physics, isolated as two named `Prop`s. -/
 theorem oneParticleBW_niceWedge_reehSchlieder {m : ℝ} (hm : 0 < m)
     (V : ℝ → (Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ)))
     (hVboost : ∀ t x, V t x = boostUnitary (2 * Real.pi * t) x)
-    (hsep0 : ∀ v : Lp ℂ 2 (volume : Measure ℝ), v ∈ niceWedgeClosedSubmodule m →
-      Complex.I • v ∈ niceWedgeClosedSubmodule m → v = 0)
-    (htotal : ∀ h : Lp ℂ 2 (volume : Measure ℝ),
-      (∀ N : NiceTest m, ∫ θ, (starRingEnd ℂ) (Krep m N.f θ) * (h : ℝ → ℂ) θ = 0) → h = 0) :
+    (hsep : NiceWedgeSeparating m) (hcyc : NiceWedgeCyclic m) :
     ∀ t, modUnitary (niceWedgeStandardSubspace m
-      (niceWedge_isSeparating_of_no_complex_line m hsep0)
-      (niceWedge_isCyclic_of_total_integral m htotal)) t = V t :=
+      (niceWedge_isSeparating_of_no_complex_line m hsep)
+      (niceWedge_isCyclic_of_total_integral m hcyc)) t = V t :=
   oneParticleBW_niceWedge_of_standard hm V hVboost
-    (niceWedge_isSeparating_of_no_complex_line m hsep0)
-    (niceWedge_isCyclic_of_total_integral m htotal)
+    (niceWedge_isSeparating_of_no_complex_line m hsep)
+    (niceWedge_isCyclic_of_total_integral m hcyc)
 
 end QIQTH.Fock.BoostKMS
