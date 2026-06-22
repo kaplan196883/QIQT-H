@@ -2298,6 +2298,70 @@ def niceWedgeStandardSubspace (m : ℝ)
   IsSeparating := hsep
   IsCyclic := hcyc
 
+/-! ### Reducing the cyclic frontier to density of the complex span (the natural Reeh–Schlieder form) -/
+
+open QIQTH.StandardSubspaceModular in
+/-- **`K ⊔ iK` is `i`-invariant**: `(K ⊔ K.mulI).mulI = K ⊔ K.mulI` (`mulI_sup` + `mulI_mulI_eq` + `sup_comm`).
+    Term-mode (`exact`) absorbs the `mulI` instance-diamond that defeats `rw`. -/
+theorem ClosedSubmodule_sup_mulI_invariant
+    {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] (K : ClosedSubmodule ℝ H) :
+    (K ⊔ K.mulI).mulI = K ⊔ K.mulI := by
+  have h1 := ClosedSubmodule.mulI_sup K K.mulI
+  rw [ClosedSubmodule.mulI_mulI_eq] at h1
+  exact h1.trans (sup_comm K.mulI K)
+
+open QIQTH.StandardSubspaceModular in
+/-- **An `i`-invariant real closed submodule is closed under `i•`**: `S.mulI = S`, `x ∈ S` ⟹ `I • x ∈ S`. -/
+theorem closedSubmodule_smul_I_mem {S : ClosedSubmodule ℝ (Lp ℂ 2 (volume : Measure ℝ))}
+    (hS : S.mulI = S) {x : Lp ℂ 2 (volume : Measure ℝ)} (hx : x ∈ S) : Complex.I • x ∈ S := by
+  rw [← hS]
+  refine (ClosedSubmodule.mem_mapEquiv_iff (scalarSMulCLE _ Complex.UnitI) S (Complex.I • x)).mpr ?_
+  rw [scalarSMulCLE_symm_apply, Units.smul_def, Units.val_inv_eq_inv_val,
+    show (↑Complex.UnitI : ℂ) = Complex.I from rfl, Complex.inv_I, smul_smul,
+    show (-Complex.I) * Complex.I = (1 : ℂ) by rw [neg_mul, Complex.I_mul_I]; ring, one_smul]
+  exact hx
+
+open QIQTH.StandardSubspaceModular in
+/-- **An `i`-invariant real closed submodule is closed under `ℂ`-scalar multiplication** (a complex subspace):
+    `c • x ∈ S` for `c : ℂ`, via `c • x = c.re • x + c.im • (I • x)`. -/
+theorem closedSubmodule_smul_complex_mem {S : ClosedSubmodule ℝ (Lp ℂ 2 (volume : Measure ℝ))}
+    (hS : S.mulI = S) {x : Lp ℂ 2 (volume : Measure ℝ)} (hx : x ∈ S) (c : ℂ) : c • x ∈ S := by
+  have hI : Complex.I • x ∈ S := closedSubmodule_smul_I_mem hS hx
+  have hdecomp : c • x = (c.re : ℝ) • x + (c.im : ℝ) • (Complex.I • x) := by
+    conv_lhs => rw [← Complex.re_add_im c]
+    rw [add_smul, mul_smul]
+    simp only [Complex.coe_smul]
+    rfl
+  rw [hdecomp]
+  exact S.add_mem (S.smul_mem _ hx) (S.smul_mem _ hI)
+
+open QIQTH.StandardSubspaceModular in
+/-- **★ The cyclic frontier in natural Reeh–Schlieder form**: the nice-core wedge subspace is CYCLIC (`hcyc`)
+    as soon as the *complex* span of the nice one-particle vectors is dense in `L²(ℝ)`.  `K ⊔ K.mulI` is
+    `i`-invariant, hence a closed ℂ-subspace containing every nice generator, hence (closed) ⊇ the closure of
+    their dense ℂ-span `= ⊤`.  This converts the lattice identity `hcyc` into the standard analytic statement
+    `Dense (span_ℂ (niceWedgeGenSet m))` — the genuine Reeh–Schlieder wedge-totality content. -/
+theorem niceWedge_isCyclic_of_dense (m : ℝ)
+    (hdense : Dense (Submodule.span ℂ (niceWedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ)))) :
+    niceWedgeClosedSubmodule m ⊔ (niceWedgeClosedSubmodule m).mulI = ⊤ := by
+  set S := niceWedgeClosedSubmodule m ⊔ (niceWedgeClosedSubmodule m).mulI with hSdef
+  have hSinv : S.mulI = S := ClosedSubmodule_sup_mulI_invariant (niceWedgeClosedSubmodule m)
+  have hsub : (Submodule.span ℂ (niceWedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ))) ⊆ (S : Set _) := by
+    intro x hx
+    induction hx using Submodule.span_induction with
+    | mem y hy =>
+      have hyK : y ∈ niceWedgeClosedSubmodule m := by
+        rw [← SetLike.mem_coe, niceWedgeClosedSubmodule_coe]; exact subset_closure hy
+      exact SetLike.le_def.mp le_sup_left hyK
+    | zero => exact S.zero_mem
+    | add a b _ _ ha hb => exact S.add_mem ha hb
+    | smul c a _ ha => exact closedSubmodule_smul_complex_mem hSinv ha c
+  have huniv : (Set.univ : Set (Lp ℂ 2 (volume : Measure ℝ))) ⊆ (S : Set _) := by
+    rw [← hdense.closure_eq]; exact closure_minimal hsub S.isClosed
+  apply SetLike.coe_injective
+  rw [ClosedSubmodule.coe_top]
+  exact Set.eq_univ_of_univ_subset huniv
+
 open scoped BoundedContinuousFunction in
 /-- **★★★ (c3+c4) The RvD Def 3.4 KMS witness extended to the CLOSURE of the nice generators**, axiom-free.
     For `ξ, η ∈ closure (niceWedgeGenSet m)` there is a bounded function `F`, holomorphic on the open strip and
