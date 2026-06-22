@@ -15,7 +15,8 @@ import Mathlib.Analysis.Calculus.BumpFunction.Normed
 
 namespace QIQTH.Fock.CyclicWitness
 
-open MeasureTheory
+open MeasureTheory Metric
+open scoped ContDiff
 open QIQTH.Fock.Localization QIQTH.Fock.OneParticle QIQTH.Fock.OneParticleBW QIQTH.Fock.BoostKMS
   QIQTH.Fock.WienerL2
 
@@ -205,5 +206,263 @@ theorem bump1_fourier_ne_zero {m : ℝ} (hm0 : 0 < m) (hmπ : m < Real.pi / 4) :
 theorem niceWedgeCyclic_small_mass {m : ℝ} (hm0 : 0 < m) (hmπ : m < Real.pi / 4) :
     NiceWedgeCyclic m :=
   niceWedgeCyclic_of_bump_fourier_ne_zero m hm0.ne' (bump1_fourier_ne_zero hm0 hmπ)
+
+/-! ### General mass `m > 0`: the width-scaled bump
+
+For `m ≥ π/4` the *fixed* radius-2 bump's amplitude `A(m)` can vanish (the bump's Fourier transform has
+real zeros), so the `θ = 0`-value route stalls.  The fix is a bump of radius `R` chosen so small that
+`m·R < π/2` — then `cos(m y) > 0` on the *whole* support and the real part of the amplitude is a strictly
+positive integral exactly as before.  Picking `R = π/(4m)` gives `m·R = π/4 < π/2` for every `m > 0`,
+discharging `NiceWedgeCyclic m` unconditionally for all positive masses. -/
+
+/-- A width-`R` 1D bump (`rIn = R/2`, `rOut = R`). -/
+noncomputable def bump1W (R : ℝ) (hR : 0 < R) (c : ℝ) : ContDiffBump c :=
+  ⟨R / 2, R, by linarith, by linarith⟩
+
+@[simp] theorem bump1W_rOut (R : ℝ) (hR : 0 < R) (c : ℝ) : (bump1W R hR c).rOut = R := rfl
+
+@[simp] theorem bump1W_rIn (R : ℝ) (hR : 0 < R) (c : ℝ) : (bump1W R hR c).rIn = R / 2 := rfl
+
+/-- The width-`R` 2D product bump on `V = Fin 2 → ℝ`. -/
+noncomputable def bumpRealW (R : ℝ) (hR : 0 < R) (cT cX : ℝ) : V → ℝ :=
+  fun x => bump1W R hR cT (x 0) * bump1W R hR cX (x 1)
+
+noncomputable def bumpCW (R : ℝ) (hR : 0 < R) (cT cX : ℝ) : V → ℂ :=
+  fun x => ((bumpRealW R hR cT cX x : ℝ) : ℂ)
+
+theorem bumpRealW_contDiff (R : ℝ) (hR : 0 < R) (cT cX : ℝ) :
+    ContDiff ℝ ∞ (bumpRealW R hR cT cX) := by
+  have h0 : ContDiff ℝ ∞ (fun x : V => bump1W R hR cT (x 0)) :=
+    (bump1W R hR cT).contDiff.comp (contDiff_apply ℝ ℝ 0)
+  have h1 : ContDiff ℝ ∞ (fun x : V => bump1W R hR cX (x 1)) :=
+    (bump1W R hR cX).contDiff.comp (contDiff_apply ℝ ℝ 1)
+  exact h0.mul h1
+
+theorem bumpCW_contDiff (R : ℝ) (hR : 0 < R) (cT cX : ℝ) : ContDiff ℝ ∞ (bumpCW R hR cT cX) :=
+  Complex.ofRealCLM.contDiff.comp (bumpRealW_contDiff R hR cT cX)
+
+theorem bumpCW_continuous (R : ℝ) (hR : 0 < R) (cT cX : ℝ) : Continuous (bumpCW R hR cT cX) :=
+  (bumpCW_contDiff R hR cT cX).continuous
+
+theorem bumpCW_real (R : ℝ) (hR : 0 < R) (cT cX : ℝ) (x : V) :
+    (starRingEnd ℂ) (bumpCW R hR cT cX x) = bumpCW R hR cT cX x := by
+  simp [bumpCW]
+
+theorem bumpRealW_support_subset (R : ℝ) (hR : 0 < R) (cT cX : ℝ) :
+    Function.support (bumpRealW R hR cT cX) ⊆ {x : V | |x 0 - cT| ≤ R ∧ |x 1 - cX| ≤ R} := by
+  intro x hx
+  simp only [Function.mem_support, bumpRealW, mul_ne_zero_iff] at hx
+  obtain ⟨h0, h1⟩ := hx
+  have hb0 : x 0 ∈ Metric.ball cT (bump1W R hR cT).rOut :=
+    (bump1W R hR cT).support_eq ▸ Function.mem_support.mpr h0
+  have hb1 : x 1 ∈ Metric.ball cX (bump1W R hR cX).rOut :=
+    (bump1W R hR cX).support_eq ▸ Function.mem_support.mpr h1
+  rw [bump1W_rOut, Metric.mem_ball, Real.dist_eq] at hb0
+  rw [bump1W_rOut, Metric.mem_ball, Real.dist_eq] at hb1
+  exact ⟨hb0.le, hb1.le⟩
+
+theorem bumpCW_hasCompactSupport (R : ℝ) (hR : 0 < R) (cT cX : ℝ) :
+    HasCompactSupport (bumpCW R hR cT cX) := by
+  refine HasCompactSupport.intro (isCompact_closedBall (0 : V) (|cT| + |cX| + 2 * R)) (fun x hx => ?_)
+  simp only [bumpCW, Complex.ofReal_eq_zero]
+  by_contra h
+  obtain ⟨hT, hX⟩ := bumpRealW_support_subset R hR cT cX (Function.mem_support.mpr h)
+  apply hx
+  rw [Metric.mem_closedBall, dist_zero_right, pi_norm_le_iff_of_nonneg (by positivity),
+    Fin.forall_fin_two]
+  refine ⟨?_, ?_⟩
+  · rw [Real.norm_eq_abs]
+    have := abs_sub_abs_le_abs_sub (x 0) cT
+    linarith [hT, abs_nonneg cX, abs_nonneg cT, hR.le]
+  · rw [Real.norm_eq_abs]
+    have := abs_sub_abs_le_abs_sub (x 1) cX
+    linarith [hX, abs_nonneg cX, abs_nonneg cT, hR.le]
+
+/-- `Krep ∈ L²` for the width-`R` bump (smooth, compactly supported). -/
+theorem bumpCW_Krep_memLp (m R : ℝ) (hR : 0 < R) (cT cX : ℝ) (hm : m ≠ 0) :
+    MemLp (Krep m (bumpCW R hR cT cX)) 2 (volume : Measure ℝ) :=
+  schwartz_Krep_memLp
+    ((bumpCW_hasCompactSupport R hR cT cX).toSchwartzMap (bumpCW_contDiff R hR cT cX)) hm
+
+/-- A width-`R` wedge-supported nice generator centred at `(0, cX)` with `2R < cX` (margin `δ = cX − 2R`). -/
+noncomputable def bumpNiceTestW (m R cX : ℝ) (hR : 0 < R) (hm : m ≠ 0) (hcX : 2 * R < cX) :
+    NiceTest m where
+  f := bumpCW R hR 0 cX
+  cont := bumpCW_continuous R hR 0 cX
+  cpt := bumpCW_hasCompactSupport R hR 0 cX
+  δ := cX - 2 * R
+  hδ := by linarith
+  margin := fun x hx => by
+    have hsupp : x ∈ Function.support (bumpRealW R hR 0 cX) := by
+      simpa only [bumpCW, Function.mem_support, Complex.ofReal_ne_zero] using hx
+    obtain ⟨h0, h1⟩ := bumpRealW_support_subset R hR 0 cX hsupp
+    rw [sub_zero, abs_le] at h0
+    rw [abs_le] at h1
+    exact ⟨by linarith [h0.1, h0.2, h1.1, h1.2], by linarith [h0.1, h0.2, h1.1, h1.2]⟩
+  real := bumpCW_real R hR 0 cX
+  memLp := bumpCW_Krep_memLp m R hR 0 cX hm
+
+/-- `NiceWedgeCyclic` from the width-`R` bump generator, modulo its amplitude being nonzero. -/
+theorem niceWedgeCyclic_bumpW (m R cX : ℝ) (hR : 0 < R) (hm : m ≠ 0) (hcX : 2 * R < cX)
+    (hKrep : ¬ (Krep m (⇑((bumpCW_hasCompactSupport R hR 0 cX).toSchwartzMap
+        (bumpCW_contDiff R hR 0 cX))) =ᵐ[volume] (0 : ℝ → ℂ))) :
+    NiceWedgeCyclic m :=
+  niceWedgeCyclic_of_fourier_ne_zero m (bumpNiceTestW m R cX hR hm hcX)
+    (fourierL2_Krep_ne_zero
+      ((bumpCW_hasCompactSupport R hR 0 cX).toSchwartzMap (bumpCW_contDiff R hR 0 cX)) hm hKrep)
+
+/-- The width-`R` amplitude factorizes (Fubini), mirroring `minkowskiFourier_bumpC`. -/
+theorem minkowskiFourier_bumpCW (R : ℝ) (hR : 0 < R) (cT cX : ℝ) (p : V) :
+    minkowskiFourier (bumpCW R hR cT cX) p
+      = (∫ y : ℝ, Complex.exp (-Complex.I * (p 0 * y : ℝ)) * (↑(bump1W R hR cT y) : ℂ))
+        * (∫ y : ℝ, Complex.exp (Complex.I * (p 1 * y : ℝ)) * (↑(bump1W R hR cX y) : ℂ)) := by
+  rw [minkowskiFourier]
+  have key : (fun x : V =>
+        Complex.exp (-Complex.I * ((minkowskiDot p x : ℝ) : ℂ)) * bumpCW R hR cT cX x)
+      = fun x : V => ∏ i : Fin 2,
+          (![fun y : ℝ => Complex.exp (-Complex.I * (p 0 * y : ℝ)) * (↑(bump1W R hR cT y) : ℂ),
+             fun y : ℝ => Complex.exp (Complex.I * (p 1 * y : ℝ)) * (↑(bump1W R hR cX y) : ℂ)] i) (x i) := by
+    funext x
+    rw [Fin.prod_univ_two]
+    simp only [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons, bumpCW, bumpRealW,
+      minkowskiDot, Complex.ofReal_mul, Complex.ofReal_sub]
+    rw [show (-Complex.I * ((p 0 : ℂ) * (x 0 : ℂ) - (p 1 : ℂ) * (x 1 : ℂ)))
+        = -Complex.I * ((p 0 : ℂ) * (x 0 : ℂ)) + Complex.I * ((p 1 : ℂ) * (x 1 : ℂ)) by ring,
+      Complex.exp_add]
+    push_cast
+    ring
+  rw [key, integral_fintype_prod_volume_eq_prod, Fin.prod_univ_two]
+  simp only [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons]
+
+/-- The width-`R` bump amplitude at `θ = 0`, factored. -/
+theorem Krep_bumpCW_zero (m R : ℝ) (hR : 0 < R) (cT cX : ℝ) :
+    Krep m (bumpCW R hR cT cX) 0
+      = (1 / Real.sqrt 2 : ℂ)
+        * ((∫ y : ℝ, Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1W R hR cT y) : ℂ))
+          * (∫ y : ℝ, (↑(bump1W R hR cX y) : ℂ))) := by
+  rw [Krep, minkowskiFourier_bumpCW]
+  simp only [massShell_zero, massShell_one, Real.cosh_zero, Real.sinh_zero, mul_one, mul_zero,
+    zero_mul, Complex.ofReal_zero, Complex.exp_zero, one_mul]
+
+/-- The width-`R` amplitude is `≢ 0` as soon as the 1D integral `∫ e^{−imy}·bump1W R cT(y) dy ≠ 0`. -/
+theorem Krep_bumpCW_ne_zero_of (m R : ℝ) (hR : 0 < R) (cT cX : ℝ)
+    (hA : (∫ y : ℝ, Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1W R hR cT y) : ℂ)) ≠ 0) :
+    ¬ (Krep m (bumpCW R hR cT cX) =ᵐ[volume] (0 : ℝ → ℂ)) := by
+  have hB : (∫ y : ℝ, (↑(bump1W R hR cX y) : ℂ)) ≠ 0 := by
+    have hofReal : (∫ y : ℝ, (↑(bump1W R hR cX y) : ℂ)) = ((∫ y : ℝ, bump1W R hR cX y : ℝ) : ℂ) :=
+      integral_ofReal
+    rw [hofReal]
+    exact_mod_cast (bump1W R hR cX).integral_pos.ne'
+  have hsqrt : (1 / Real.sqrt 2 : ℂ) ≠ 0 := by
+    simp only [ne_eq, div_eq_zero_iff, one_ne_zero, Complex.ofReal_eq_zero, false_or]
+    exact Real.sqrt_ne_zero'.mpr (by norm_num)
+  intro hae
+  have hcont : Continuous (Krep m (bumpCW R hR cT cX)) :=
+    Krep_continuous
+      ((bumpCW_continuous R hR cT cX).integrable_of_hasCompactSupport
+        (bumpCW_hasCompactSupport R hR cT cX))
+  have h0 : Krep m (bumpCW R hR cT cX) 0 = 0 :=
+    congrFun ((hcont.ae_eq_iff_eq volume continuous_zero).mp hae) 0
+  rw [Krep_bumpCW_zero] at h0
+  rcases mul_eq_zero.mp h0 with h | h
+  · exact hsqrt h
+  · rcases mul_eq_zero.mp h with h | h
+    · exact hA h
+    · exact hB h
+
+/-- The real part of the 1D Fourier integrand for an arbitrary real weight `g`: `Re(e^{−imy}·g(y)) = cos(my)·g(y)`. -/
+theorem fourier_re_eq (g : ℝ → ℝ) (m y : ℝ) :
+    (Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(g y) : ℂ)).re = Real.cos (m * y) * g y := by
+  rw [Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, mul_zero, sub_zero]
+  congr 1
+  rw [show -Complex.I * ((m * y : ℝ) : ℂ) = ((-(m * y) : ℝ) : ℂ) * Complex.I by push_cast; ring,
+    Complex.exp_ofReal_mul_I_re, Real.cos_neg]
+
+/-- **The width-`R` 1D bump Fourier integral is nonzero whenever `m·R < π/2`**: its real part
+    `∫ cos(my)·bump1W R 0(y) dy > 0`, since `cos(my) > 0` on the support `|y| < R` (as `|my| ≤ mR < π/2`). -/
+theorem bump1W_fourier_ne_zero {m R : ℝ} (hm0 : 0 < m) (hR : 0 < R) (hmR : m * R < Real.pi / 2) :
+    (∫ y : ℝ, Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1W R hR 0 y) : ℂ)) ≠ 0 := by
+  have hbnn : ∀ y : ℝ, 0 ≤ bump1W R hR 0 y := fun y => (bump1W R hR 0).nonneg
+  have hcontc : Continuous
+      (fun y : ℝ => Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1W R hR 0 y) : ℂ)) :=
+    (Complex.continuous_exp.comp (by fun_prop)).mul
+      (Complex.continuous_ofReal.comp (bump1W R hR 0).continuous)
+  have hcsc : HasCompactSupport
+      (fun y : ℝ => Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1W R hR 0 y) : ℂ)) :=
+    ((bump1W R hR 0).hasCompactSupport.comp_left (g := ((↑) : ℝ → ℂ)) Complex.ofReal_zero).mul_left
+  have hint : Integrable
+      (fun y : ℝ => Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1W R hR 0 y) : ℂ)) :=
+    hcontc.integrable_of_hasCompactSupport hcsc
+  have hcos_pos : ∀ y : ℝ, |y| ≤ R → 0 < Real.cos (m * y) := by
+    intro y hy
+    apply Real.cos_pos_of_mem_Ioo
+    rw [Set.mem_Ioo, ← abs_lt, abs_mul, abs_of_pos hm0]
+    calc m * |y| ≤ m * R := mul_le_mul_of_nonneg_left hy hm0.le
+      _ < Real.pi / 2 := hmR
+  have hcosnn : ∀ y : ℝ, 0 ≤ Real.cos (m * y) * bump1W R hR 0 y := by
+    intro y
+    rcases eq_or_lt_of_le (hbnn y) with hb | hb
+    · rw [← hb, mul_zero]
+    · have hy : |y| < R := by
+        have hmem : y ∈ Function.support (bump1W R hR 0) := Function.mem_support.mpr hb.ne'
+        rw [(bump1W R hR 0).support_eq, Metric.mem_ball, Real.dist_eq, sub_zero, bump1W_rOut] at hmem
+        exact hmem
+      have := hcos_pos y hy.le
+      positivity
+  have hcosint : Integrable (fun y : ℝ => Real.cos (m * y) * bump1W R hR 0 y) :=
+    ((Real.continuous_cos.comp (by fun_prop)).mul
+      (bump1W R hR 0).continuous).integrable_of_hasCompactSupport
+      (bump1W R hR 0).hasCompactSupport.mul_left
+  have hpos : 0 < ∫ y : ℝ, Real.cos (m * y) * bump1W R hR 0 y := by
+    rw [integral_pos_iff_support_of_nonneg hcosnn hcosint]
+    have hsub : Set.Ioo (-(R / 2)) (R / 2)
+        ⊆ Function.support (fun y => Real.cos (m * y) * bump1W R hR 0 y) := by
+      intro y hy
+      rw [Function.mem_support]
+      have hyb : |y| ≤ R / 2 := abs_le.mpr ⟨le_of_lt hy.1, le_of_lt hy.2⟩
+      have hb1 : bump1W R hR 0 y = 1 := (bump1W R hR 0).one_of_mem_closedBall (by
+        rw [Metric.mem_closedBall, Real.dist_eq, sub_zero, bump1W_rIn]; exact hyb)
+      have hcos : 0 < Real.cos (m * y) := hcos_pos y (hyb.trans (by linarith))
+      rw [hb1, mul_one]; exact hcos.ne'
+    calc (0 : ENNReal) < volume (Set.Ioo (-(R / 2)) (R / 2)) := by
+          rw [Real.volume_Ioo]; exact ENNReal.ofReal_pos.mpr (by linarith)
+      _ ≤ _ := measure_mono hsub
+  intro h
+  have hre : (∫ y : ℝ, Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1W R hR 0 y) : ℂ)).re
+      = ∫ y : ℝ, Real.cos (m * y) * bump1W R hR 0 y := by
+    rw [show ((∫ y : ℝ, Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1W R hR 0 y) : ℂ)).re)
+        = RCLike.re (∫ y : ℝ, Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1W R hR 0 y) : ℂ)) from rfl,
+      ← integral_re hint]
+    refine integral_congr_ae (Filter.Eventually.of_forall fun y => ?_)
+    show RCLike.re (Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1W R hR 0 y) : ℂ))
+        = Real.cos (m * y) * bump1W R hR 0 y
+    rw [RCLike.re_to_complex]
+    exact fourier_re_eq (fun t => bump1W R hR 0 t) m y
+  rw [h, Complex.zero_re] at hre
+  linarith [hpos]
+
+/-- **`NiceWedgeCyclic` from a width-`R` bump whose 1D amplitude is nonzero.** -/
+theorem niceWedgeCyclic_of_bumpW_fourier_ne_zero (m R cX : ℝ) (hR : 0 < R) (hm : m ≠ 0)
+    (hcX : 2 * R < cX)
+    (hA : (∫ y : ℝ, Complex.exp (-Complex.I * (m * y : ℝ)) * (↑(bump1W R hR 0 y) : ℂ)) ≠ 0) :
+    NiceWedgeCyclic m :=
+  niceWedgeCyclic_bumpW m R cX hR hm hcX (Krep_bumpCW_ne_zero_of m R hR 0 cX hA)
+
+/-- **★★★★★★★ THE CYCLIC REEH–SCHLIEDER INPUT, UNCONDITIONALLY DISCHARGED FOR ALL `m > 0`, axiom-free.**
+    `NiceWedgeCyclic m` holds with no hypotheses for *every* positive mass.  Take the width-`R` wedge bump
+    with `R = π/(4m)`, centred at `(0, 2R+1)`: then `m·R = π/4 < π/2`, so `cos(m y) > 0` on its whole
+    support and the amplitude's real part `∫ cos(m y)·bump1W R(y) dy > 0` (`bump1W_fourier_ne_zero`); the
+    complete Wiener–Tauberian machinery does the rest.  The free-field one-particle Bisognano–Wichmann's
+    cyclic Reeh–Schlieder input is now a *theorem*, not a hypothesis, for the full physical mass range
+    `m > 0` — every step (Wiener theorem, FT-holomorphy, L²↔L¹ agreement, witness, amplitude) machine-checked
+    and axiom-free.  This supersedes `niceWedgeCyclic_small_mass` (which is the `R = 2` special case). -/
+theorem niceWedgeCyclic_pos_mass {m : ℝ} (hm0 : 0 < m) : NiceWedgeCyclic m := by
+  have hR : (0 : ℝ) < Real.pi / (4 * m) := by positivity
+  have hmR : m * (Real.pi / (4 * m)) < Real.pi / 2 := by
+    have hmne : m ≠ 0 := hm0.ne'
+    have key : m * (Real.pi / (4 * m)) = Real.pi / 4 := by field_simp
+    rw [key]; linarith [Real.pi_pos]
+  exact niceWedgeCyclic_of_bumpW_fourier_ne_zero m (Real.pi / (4 * m))
+    (2 * (Real.pi / (4 * m)) + 1) hR hm0.ne' (by linarith) (bump1W_fourier_ne_zero hm0 hR hmR)
 
 end QIQTH.Fock.CyclicWitness
