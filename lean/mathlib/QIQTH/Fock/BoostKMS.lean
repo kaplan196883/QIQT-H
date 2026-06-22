@@ -2203,6 +2203,76 @@ theorem closure_niceWedgeGenSet_subset (m : ℝ) :
       ⊆ closure (Submodule.span ℝ (wedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ))) :=
   closure_mono ((niceWedgeGenSet_subset_wedgeGenSet m).trans Submodule.subset_span)
 
+/-! ### `niceWedgeGenSet` is an ℝ-subspace as a set (zero + smul closure) -/
+
+/-- **The zero nice test** (`f = 0`): witnesses `NiceTest m` is inhabited and `0 ∈ niceWedgeGenSet`. -/
+def NiceTest.zero (m : ℝ) : NiceTest m where
+  f := fun _ => 0
+  cont := continuous_const
+  cpt := HasCompactSupport.zero
+  δ := 1
+  hδ := one_pos
+  margin := fun x hx => absurd rfl hx
+  real := fun x => by simp
+  memLp := by rw [Krep_zero]; exact MemLp.zero
+
+/-- **Real-scalar multiple of a nice test** (`c·f`): again nice (`c·f ≠ 0 ⟹ f ≠ 0`, so the margin holds at
+    the same `δ`; realness uses `c` real). -/
+def NiceTest.smul {m : ℝ} (c : ℝ) (N : NiceTest m) : NiceTest m where
+  f := fun x => (c : ℂ) * N.f x
+  cont := continuous_const.mul N.cont
+  cpt := N.cpt.mul_left
+  δ := N.δ
+  hδ := N.hδ
+  margin := fun x hx => N.margin x (fun h => hx (by rw [h, mul_zero]))
+  real := fun x => by rw [map_mul, Complex.conj_ofReal, N.real x]
+  memLp := by rw [Krep_smul]; exact N.memLp.const_mul (c : ℂ)
+
+/-- `(NiceTest.zero m).vec = 0`. -/
+@[simp] theorem NiceTest.zero_vec (m : ℝ) : (NiceTest.zero m).vec = 0 := by
+  rw [Lp.ext_iff]
+  have hcoe : ((NiceTest.zero m).vec : ℝ → ℂ) =ᵐ[volume] Krep m (fun _ => (0 : ℂ)) :=
+    (NiceTest.zero m).memLp.coeFn_toLp
+  filter_upwards [hcoe, Lp.coeFn_zero (E := ℂ) (p := 2) (μ := (volume : Measure ℝ))] with θ hθ h0
+  rw [hθ, h0]; exact congrFun (Krep_zero m) θ
+
+/-- **`NiceTest.smul` realizes Hilbert-space real-scalar multiplication**: `(N.smul c).vec = c • N.vec`. -/
+theorem NiceTest.vec_smul {m : ℝ} (c : ℝ) (N : NiceTest m) :
+    (N.smul c).vec = (c : ℝ) • N.vec := by
+  rw [Lp.ext_iff]
+  have hc1 : ((N.smul c).vec : ℝ → ℂ) =ᵐ[volume] Krep m (fun x => (c : ℂ) * N.f x) :=
+    (N.smul c).memLp.coeFn_toLp
+  have hc2 : (N.vec : ℝ → ℂ) =ᵐ[volume] Krep m N.f := N.memLp.coeFn_toLp
+  filter_upwards [hc1, hc2, Lp.coeFn_smul (c : ℝ) N.vec] with θ h1 h2 h3
+  rw [h1, h3, Pi.smul_apply, h2, Complex.real_smul]
+  exact congrFun (Krep_smul m c N.f) θ
+
+/-- **`0 ∈ niceWedgeGenSet`.** -/
+theorem zero_mem_niceWedgeGenSet (m : ℝ) : (0 : Lp ℂ 2 (volume : Measure ℝ)) ∈ niceWedgeGenSet m :=
+  ⟨NiceTest.zero m, NiceTest.zero_vec m⟩
+
+/-- **`niceWedgeGenSet` is closed under real-scalar multiplication.** -/
+theorem niceWedgeGenSet_smul_mem {m : ℝ} (c : ℝ) {ξ : Lp ℂ 2 (volume : Measure ℝ)}
+    (hξ : ξ ∈ niceWedgeGenSet m) : c • ξ ∈ niceWedgeGenSet m := by
+  obtain ⟨N, rfl⟩ := hξ
+  exact ⟨N.smul c, N.vec_smul c⟩
+
+/-- **`niceWedgeGenSet` is an ℝ-subspace** (carrier of an explicit `Submodule`): closed under `+`, real `•`,
+    and contains `0`.  Hence `span_ℝ (niceWedgeGenSet) = niceWedgeGenSet` as a set (`niceWedgeGenSet_span_eq`),
+    so the nice-core ClosedSubmodule is literally `closure (niceWedgeGenSet m)`. -/
+def niceWedgeSubmodule (m : ℝ) : Submodule ℝ (Lp ℂ 2 (volume : Measure ℝ)) where
+  carrier := niceWedgeGenSet m
+  add_mem' := niceWedgeGenSet_add_mem
+  zero_mem' := zero_mem_niceWedgeGenSet m
+  smul_mem' := niceWedgeGenSet_smul_mem
+
+/-- **`span_ℝ` adds nothing to the nice core**: `(span_ℝ (niceWedgeGenSet m) : Set _) = niceWedgeGenSet m`. -/
+theorem niceWedgeGenSet_span_eq (m : ℝ) :
+    (Submodule.span ℝ (niceWedgeGenSet m) : Set (Lp ℂ 2 (volume : Measure ℝ))) = niceWedgeGenSet m := by
+  have : Submodule.span ℝ (niceWedgeGenSet m) = niceWedgeSubmodule m :=
+    Submodule.span_eq (niceWedgeSubmodule m)
+  rw [this]; rfl
+
 open scoped BoundedContinuousFunction in
 /-- **★★★ (c3+c4) The RvD Def 3.4 KMS witness extended to the CLOSURE of the nice generators**, axiom-free.
     For `ξ, η ∈ closure (niceWedgeGenSet m)` there is a bounded function `F`, holomorphic on the open strip and
