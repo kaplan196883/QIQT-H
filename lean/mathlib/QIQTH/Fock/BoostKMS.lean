@@ -2207,4 +2207,14 @@ theorem stripKMSrvd_closure {m : ℝ} (hm : 0 < m) {ξ η : Lp ℂ 2 (volume : M
     rw [hFdef]; simp only [dif_pos hbmem]
     exact tendsto_nhds_unique hpt' hlim
 
+/-- **★★★★★ `StripKMSrvd` (RvD Def 3.4) for the boost group on the FULL wedge standard subspace**, axiom-free.
+    The free-field Bisognano–Wichmann KMS condition: the rapidity-boost unitary group `t ↦ V(2πt)` satisfies
+    the RvD half-strip KMS condition on `closure (niceWedgeGenSet m)` — the standard wedge subspace.  Immediate
+    packaging of `stripKMSrvd_closure` (each generator pair gets the bounded-holomorphic KMS witness).  This is
+    the object RvD Theorem 3.8 consumes to identify the boost generator with the modular Hamiltonian — now a
+    THEOREM, not a labelled `hKMS` hypothesis. -/
+theorem stripKMSrvd_boostUnitary {m : ℝ} (hm : 0 < m) :
+    StripKMSrvd (fun t => boostUnitary (2 * Real.pi * t)) (closure (niceWedgeGenSet m)) :=
+  fun _ hξ _ hη => stripKMSrvd_closure hm hξ hη
+
 end QIQTH.Fock.BoostKMS
