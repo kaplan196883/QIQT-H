@@ -273,4 +273,32 @@ theorem differentiable_KrepCont (m : ℝ) {f : V → ℂ} (hf : Continuous f)
     (hfc : HasCompactSupport f) : Differentiable ℂ (KrepCont m f) :=
   fun ζ₀ => (hasDerivAt_KrepCont m hf hfc ζ₀).differentiableAt
 
+/-! ### A3 — the `iπ` boundary conjugation (the KMS bottom edge) -/
+
+/-- The kernel's `iπ`-boundary conjugation: `K(θ+iπ, x) = conj(K(θ, x))`. Engine: `p_m(θ+iπ) = −p_m(θ)`
+    and `p_m(θ)·x` real, so `exp(−i·(−p_m(θ)·x)) = conj(exp(−i·p_m(θ)·x))`. -/
+theorem kernel_add_pi_I (m : ℝ) (x : V) (θ : ℝ) :
+    kernel m x ((θ : ℂ) + (Real.pi : ℂ) * Complex.I) = (starRingEnd ℂ) (kernel m x (θ : ℂ)) := by
+  rw [kernel, kernel, ← Complex.exp_conj]
+  congr 1
+  have hneg : minkowskiDotℂ (massShellℂ m ((θ : ℂ) + (Real.pi : ℂ) * Complex.I)) x
+      = -minkowskiDotℂ (massShellℂ m (θ : ℂ)) x := by
+    rw [massShellℂ_add_pi_I]; simp only [minkowskiDotℂ, Pi.neg_apply]; ring
+  rw [hneg, minkowskiDotℂ_massShellℂ_ofReal, map_mul, map_neg, Complex.conj_I, Complex.conj_ofReal]
+  ring
+
+/-- **A3 — boundary conjugation of the continued amplitude.** For *real* `f`,
+    `ψ_f(θ+iπ) = conj(ψ_f(θ))` (`= conj(Krep m f θ)`). This is the relation that turns the top edge
+    `⟪η, V_t ξ⟫` into the KMS bottom edge `⟪V_t ξ, η⟫`. -/
+theorem KrepCont_add_pi_I (m : ℝ) {f : V → ℂ} (hf : ∀ x, (starRingEnd ℂ) (f x) = f x) (θ : ℝ) :
+    KrepCont m f ((θ : ℂ) + (Real.pi : ℂ) * Complex.I) = (starRingEnd ℂ) (Krep m f θ) := by
+  rw [← KrepCont_ofReal m f θ, KrepCont, KrepCont, map_mul]
+  congr 1
+  · simp
+  · rw [← integral_conj]
+    refine integral_congr_ae (Filter.Eventually.of_forall fun x => ?_)
+    simp only [map_mul, hf]
+    congr 1
+    exact kernel_add_pi_I m x θ
+
 end QIQTH.Fock.WedgeAnalyticity

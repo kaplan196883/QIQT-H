@@ -4661,5 +4661,9 @@ namespace QIQTH.AxiomAudit
 -- parametric-derivative theorem over ℂ): per-x derivative hasDerivAt_kernel_mul + ball-domination from
 -- norm_kernelDeriv_le (‖K'‖ ≤ exp(B)·B) and the compact bound ‖x‖≤M on tsupport f. The holomorphy half of the
 -- free-field Hardy proof of StripKMSrvd (boost-KMS / Bisognano–Wichmann).
+#print axioms QIQTH.Fock.WedgeAnalyticity.KrepCont_add_pi_I
+-- expected: standard only — ★★★ A3: the iπ BOUNDARY CONJUGATION ψ_f(θ+iπ)=conj(ψ_f(θ))=conj(Krep m f θ) for
+-- REAL f (via kernel_add_pi_I: K(θ+iπ,x)=conj K(θ,x), from p_m(θ+iπ)=−p_m(θ) + integral_conj). This is what
+-- turns the KMS top edge ⟪η,V_t ξ⟫ into the bottom edge ⟪V_t ξ,η⟫ — the bottom-edge engine of StripKMSrvd.
 
 end QIQTH.AxiomAudit
