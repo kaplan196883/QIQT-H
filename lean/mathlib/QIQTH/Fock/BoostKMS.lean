@@ -1680,6 +1680,19 @@ theorem norm_toLp_Krep_eq_sqrt {m : ℝ} {f : V → ℂ} (hf : MemLp (Krep m f) 
     rw [← inner_self_eq_norm_sq (𝕜 := ℂ) (hf.toLp (Krep m f)), hinner]; simp
   rw [← hsq, Real.sqrt_sq (norm_nonneg _)]
 
+/-- **`minkowskiFourier` is `ℂ`-homogeneous in the test function**: `(c·f)^_M = c·f̂_M`. -/
+theorem minkowskiFourier_smul (c : ℂ) (f : V → ℂ) (p : V) :
+    minkowskiFourier (fun x => c * f x) p = c * minkowskiFourier f p := by
+  simp only [minkowskiFourier]
+  rw [← integral_const_mul]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun x => ?_)
+  ring
+
+/-- **`Krep` is `ℂ`-homogeneous in the test function**: `Krep m (c·f) = c·Krep m f`. -/
+theorem Krep_smul (m : ℝ) (c : ℂ) (f : V → ℂ) :
+    Krep m (fun x => c * f x) = fun θ => c * Krep m f θ := by
+  funext θ; simp only [Krep, minkowskiFourier_smul]; ring
+
 /-- **`KrepL2` respects addition**: `KrepL2(f₁+f₂) = KrepL2 f₁ + KrepL2 f₂` in `L²`. `MemLp.toLp_add` +
     `MemLp.toLp_eq_toLp_iff` (`Krep(f₁+f₂) =ᵐ Krep f₁ + Krep f₂`, `Krep_add`). With `KrepL2_sub` and the real
     scalar law, this makes `{KrepL2 f : f nice}` an ℝ-subspace, so `span_ℝ` adds nothing: every span element is
