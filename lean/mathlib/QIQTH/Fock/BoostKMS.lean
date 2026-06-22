@@ -1886,4 +1886,71 @@ theorem kmsBCF_congr {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuous f
       = kmsBCF hm hf hfc hg hgc hδ' hmf' hmg' hfr hgr hfL hgL := by
   ext z; rw [kmsBCF_apply, kmsBCF_apply]
 
+/-! ### The nice-core wedge generators as an ℝ-subspace (the standard BW wedge subspace) -/
+
+/-- **A nice wedge test function**: the bundled data for a one-particle generator of the wedge standard
+    subspace — continuous, compactly supported, real, with a `δ`-margin inside the wedge, and `L²` on-shell
+    amplitude.  This is the standard AQFT wedge-localization core class (compactly-supported `δ`-margin
+    functions), closed under `±`, so the generators `{NiceTest.vec}` already form an ℝ-subspace — and the
+    BW/KMS extension over `closure(span(niceWedgeGenSet))` reduces to a closure limit over single nice
+    generator PAIRS (no density theorem; the `kmsBCF` Cauchy limit closes the span). -/
+structure NiceTest (m : ℝ) where
+  /-- the underlying test function -/
+  f : V → ℂ
+  cont : Continuous f
+  cpt : HasCompactSupport f
+  /-- the wedge margin -/
+  δ : ℝ
+  hδ : 0 < δ
+  margin : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0
+  real : ∀ x, (starRingEnd ℂ) (f x) = f x
+  memLp : MemLp (Krep m f) 2 volume
+
+/-- The one-particle vector `KrepL2 f ∈ L²` of a nice test function. -/
+noncomputable def NiceTest.vec {m : ℝ} (N : NiceTest m) : Lp ℂ 2 (volume : Measure ℝ) :=
+  N.memLp.toLp (Krep m N.f)
+
+/-- **Nice tests are closed under addition** (margin → `min`, support → union): the sum is again nice.
+    The structural engine behind `span_ℝ(niceWedgeGenSet) = niceWedgeGenSet`. -/
+def NiceTest.add {m : ℝ} (N₁ N₂ : NiceTest m) : NiceTest m where
+  f := N₁.f + N₂.f
+  cont := N₁.cont.add N₂.cont
+  cpt := N₁.cpt.add N₂.cpt
+  δ := min N₁.δ N₂.δ
+  hδ := lt_min N₁.hδ N₂.hδ
+  margin := fun x hx => by
+    rw [Pi.add_apply] at hx
+    by_cases h : N₁.f x = 0
+    · have h2 : N₂.f x ≠ 0 := by rw [h, zero_add] at hx; exact hx
+      exact ⟨le_trans (min_le_right _ _) (N₂.margin x h2).1,
+             le_trans (min_le_right _ _) (N₂.margin x h2).2⟩
+    · exact ⟨le_trans (min_le_left _ _) (N₁.margin x h).1,
+             le_trans (min_le_left _ _) (N₁.margin x h).2⟩
+  real := fun x => by simp only [Pi.add_apply, map_add, N₁.real, N₂.real]
+  memLp := memLp_Krep_add N₁.cont N₁.cpt N₂.cont N₂.cpt N₁.memLp N₂.memLp
+
+/-- **`NiceTest.add` realizes Hilbert-space addition**: `(N₁.add N₂).vec = N₁.vec + N₂.vec` (via `KrepL2_add`). -/
+theorem NiceTest.vec_add {m : ℝ} (N₁ N₂ : NiceTest m) :
+    (N₁.add N₂).vec = N₁.vec + N₂.vec :=
+  KrepL2_add N₁.cont N₁.cpt N₂.cont N₂.cpt N₁.memLp N₂.memLp
+
+/-- **The nice-core wedge generating set**: the one-particle vectors `KrepL2 f` from *nice* wedge test
+    functions.  The standard BW wedge-localization core; an ℝ-subspace as a set (closed under `±` via
+    `NiceTest.add`/`vec_add`), so `span_ℝ` of it adds nothing. -/
+noncomputable def niceWedgeGenSet (m : ℝ) : Set (Lp ℂ 2 (volume : Measure ℝ)) :=
+  Set.range (fun N : NiceTest m => N.vec)
+
+/-- Membership unfolding for `niceWedgeGenSet`: `ξ` is a nice generator iff it is some `NiceTest.vec`. -/
+theorem mem_niceWedgeGenSet {m : ℝ} {ξ : Lp ℂ 2 (volume : Measure ℝ)} :
+    ξ ∈ niceWedgeGenSet m ↔ ∃ N : NiceTest m, N.vec = ξ := Iff.rfl
+
+/-- **`niceWedgeGenSet` is closed under addition** (witness: `NiceTest.add`), the set-level statement that
+    it is already an ℝ-subspace (so `span_ℝ` collapses to it). -/
+theorem niceWedgeGenSet_add_mem {m : ℝ} {ξ η : Lp ℂ 2 (volume : Measure ℝ)}
+    (hξ : ξ ∈ niceWedgeGenSet m) (hη : η ∈ niceWedgeGenSet m) :
+    ξ + η ∈ niceWedgeGenSet m := by
+  obtain ⟨N₁, rfl⟩ := hξ
+  obtain ⟨N₂, rfl⟩ := hη
+  exact ⟨N₁.add N₂, N₁.vec_add N₂⟩
+
 end QIQTH.Fock.BoostKMS

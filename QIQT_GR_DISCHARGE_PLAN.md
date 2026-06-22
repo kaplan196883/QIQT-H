@@ -297,6 +297,15 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
      the broad `𝒦_W`. The KMS extension itself uses the nice-core def. [Decision pending: refactor `wedgeGenSet`
      to nice, or introduce `niceWedgeGenSet` + the equality — check downstream `𝒦_W` consumers (standardness,
      `hdense`).]
+   - **★★ SPAN COLLAPSE (DONE 2026-06-22, `5bb7d10`): `span_ℝ(niceWedgeGenSet) = niceWedgeGenSet` as a SET.**
+     The nice test functions are closed under ℝ-linear combination (sum: margin→min, support→union; real scalar:
+     scales the margin), and `KrepL2` is ℝ-linear: `KrepL2(c·f₁+f₂)=c·KrepL2 f₁+KrepL2 f₂` (`KrepL2_add` ✅ +
+     `KrepL2_sub` ✅ + real-scalar law). So `{KrepL2 f : f nice}` is ALREADY an ℝ-subspace ⟹ `span_ℝ` adds nothing
+     ⟹ **every span element is a SINGLE `KrepL2` of a nice test function.** This COLLAPSES the bilinear-span step
+     of (c2): the closure threading is a closure limit over SINGLE nice generator PAIRS — each `Fₙ = kmsBCF fₙ gₙ`
+     (one nice pair), no finite-sum bilinear bookkeeping. The Cauchy machinery (c0 `dist_kmsBCF_le` ✅) applies
+     verbatim. NEXT: bundle a `NiceTest m` structure (f + the 7 niceness fields incl. δ); `niceWedgeGenSet :=
+     range NiceTest.vec`; closed under ±; then the c2→c4 CauchySeq→limit→boundary assembly over `NiceTest` seqs.
    NOTE: this is laborious Hilbert-space plumbing (sesquilinear extension from a total set by continuity) — no
    new hard analysis. If it proves too long, `stripKMSrvd_pair` alone is already the citable A4 result (the
    explicit free-field boost-KMS witness, the genuine BW analytic content).
