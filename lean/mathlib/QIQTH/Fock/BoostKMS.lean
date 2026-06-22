@@ -889,38 +889,30 @@ theorem norm_kmsFunCut_sub_I_le (m : ℝ) (R t : ℝ) {f g : V → ℂ}
   rw [kmsFunCut_sub_I m hfr hgr R t, RCLike.norm_conj]
   exact norm_kmsFunCut_ofReal_le m R t hf hg
 
-/-- **Hadamard step: `‖kmsFunCut R z‖ ≤ B` on the whole closed strip**, for every `R`, with the
-    `R,z`-independent constant `B = √(∫‖Krep g‖²)·√(∫‖Krep f‖²)`. Rotate `w ↦ −i·w` to put the strip
-    `{−1≤Im z≤0}` onto Mathlib's `verticalClosedStrip 0 1`; the truncated function supplies the three Hadamard
-    inputs — `DiffContOnCl` (`kmsFunCut_diffContOnCl`), `BddAbove` (`norm_kmsFunCut_le`), and both edges `≤ B`
-    (`norm_kmsFunCut_ofReal_le`, `norm_kmsFunCut_sub_I_le`) — and `Complex.HadamardThreeLines.norm_le_interp_…'`
-    with edge constants `B,B` interpolates to `B^(1−s)·B^s = B`. -/
-theorem norm_kmsFunCut_le_B {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuous f)
-    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
-    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
-    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
-    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
-    (hfL : MemLp (Krep m f) 2 volume) (hgL : MemLp (Krep m g) 2 volume)
-    {R : ℝ} (hR : 0 ≤ R) {z : ℂ} (hz0 : -1 ≤ z.im) (hz1 : z.im ≤ 0) :
-    ‖kmsFunCut m f g R z‖
-      ≤ Real.sqrt (∫ θ, ‖Krep m g θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m f θ‖ ^ 2) := by
-  set B : ℝ := Real.sqrt (∫ θ, ‖Krep m g θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m f θ‖ ^ 2) with hBdef
-  have hBnn : 0 ≤ B := mul_nonneg (Real.sqrt_nonneg _) (Real.sqrt_nonneg _)
+/-- **Abstract Hadamard-on-the-strip bound.** A function `Φ` holomorphic on the open strip `{−1<Im z<0}`,
+    continuous and bounded on the closed strip, with both boundary lines `≤ b`, satisfies `‖Φ z‖ ≤ b`
+    everywhere in the closed strip. Rotate `w↦−i·w` onto `verticalClosedStrip 0 1` and apply
+    `Complex.HadamardThreeLines.norm_le_interp_of_mem_verticalClosedStrip'` (edge consts `b,b`,
+    `b^(1−s)·b^s=b`). The reusable core of the truncation argument (used for `kmsFunCut` and for the annular
+    differences `kmsFunCut S − kmsFunCut R`). -/
+theorem norm_le_of_strip_edges {Φ : ℂ → ℂ} {b : ℝ}
+    (hdiff : DifferentiableOn ℂ Φ (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0))
+    (hcont : ContinuousOn Φ (Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0))
+    (hbdd : BddAbove ((norm ∘ Φ) '' (Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0)))
+    (htop : ∀ t : ℝ, ‖Φ (t : ℂ)‖ ≤ b) (hbot : ∀ t : ℝ, ‖Φ ((t : ℂ) - Complex.I)‖ ≤ b)
+    {z : ℂ} (hz0 : -1 ≤ z.im) (hz1 : z.im ≤ 0) :
+    ‖Φ z‖ ≤ b := by
+  have hbnn : 0 ≤ b := le_trans (norm_nonneg _) (htop 0)
   set φ : ℂ → ℂ := fun w => -Complex.I * w with hφdef
-  set G : ℂ → ℂ := fun w => kmsFunCut m f g R (φ w) with hGdef
-  -- the rotation's real/imaginary parts
-  have hφim : ∀ w' : ℂ, (φ w').im = -w'.re := fun w' => by
-    simp [hφdef, Complex.mul_im, Complex.mul_re]
-  have hφre : ∀ w' : ℂ, (φ w').re = w'.im := fun w' => by
-    simp [hφdef, Complex.mul_re, Complex.mul_im]
-  -- the point w = i·z maps back to z
+  set G : ℂ → ℂ := fun w => Φ (φ w) with hGdef
+  have hφim : ∀ w' : ℂ, (φ w').im = -w'.re := fun w' => by simp [hφdef, Complex.mul_im, Complex.mul_re]
+  have hφre : ∀ w' : ℂ, (φ w').re = w'.im := fun w' => by simp [hφdef, Complex.mul_re, Complex.mul_im]
   set w : ℂ := Complex.I * z with hwdef
   have hφw : φ w = z := by
     simp only [hφdef, hwdef]
     rw [← mul_assoc, neg_mul, Complex.I_mul_I, neg_neg, one_mul]
   have hwre : w.re = -z.im := by rw [hwdef, Complex.mul_re, Complex.I_re, Complex.I_im]; ring
-  -- DiffContOnCl of the rotated function
-  have hφent : Differentiable ℂ φ := by rw [hφdef]; exact (differentiable_id.const_mul _)
+  have hφent : Differentiable ℂ φ := by rw [hφdef]; exact differentiable_id.const_mul _
   have hmaps_open : Set.MapsTo φ (Complex.HadamardThreeLines.verticalStrip 0 1)
       (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) := by
     intro w' hw'
@@ -937,47 +929,64 @@ theorem norm_kmsFunCut_le_B {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Conti
       ⊆ Complex.HadamardThreeLines.verticalClosedStrip 0 1 := by
     have h := Complex.continuous_re.closure_preimage_subset (Set.Ioo (0 : ℝ) 1)
     rwa [closure_Ioo (by norm_num : (0 : ℝ) ≠ 1)] at h
-  have hd : DiffContOnCl ℂ G (Complex.HadamardThreeLines.verticalStrip 0 1) := by
-    refine ⟨(kmsFunCut_differentiableOn hm hf hfc hg hgc hδ hmf hmg R).comp
-        hφent.differentiableOn hmaps_open, ?_⟩
-    exact ((kmsFunCut_continuousOn hm.le hf hfc hg hgc hδ.le hmf hmg R).comp
-      hφent.continuous.continuousOn hmaps_closed).mono hsub
-  -- BddAbove from the trivial closed-strip bound
-  have hbdd : BddAbove ((norm ∘ G) '' Complex.HadamardThreeLines.verticalClosedStrip 0 1) := by
-    refine ⟨(1 / Real.sqrt 2 * ∫ x, ‖g x‖) * (1 / Real.sqrt 2 * ∫ x, ‖f x‖) * (2 * R), ?_⟩
+  have hd : DiffContOnCl ℂ G (Complex.HadamardThreeLines.verticalStrip 0 1) :=
+    ⟨hdiff.comp hφent.differentiableOn hmaps_open,
+      (hcont.comp hφent.continuous.continuousOn hmaps_closed).mono hsub⟩
+  have hbddG : BddAbove ((norm ∘ G) '' Complex.HadamardThreeLines.verticalClosedStrip 0 1) := by
+    refine hbdd.mono ?_
     rintro y ⟨w', hw', rfl⟩
-    simp only [Complex.HadamardThreeLines.verticalClosedStrip, Set.mem_preimage, Set.mem_Icc] at hw'
-    exact norm_kmsFunCut_le hm.le hf hfc hg hgc hδ.le hmf hmg hR
-      (by rw [hφim]; linarith [hw'.2]) (by rw [hφim]; linarith [hw'.1])
-  -- left edge Re w' = 0  ⟹  φ w' = ↑w'.im
-  have ha : ∀ w' ∈ Complex.re ⁻¹' {(0 : ℝ)}, ‖G w'‖ ≤ B := by
+    exact ⟨φ w', hmaps_closed hw', rfl⟩
+  have ha : ∀ w' ∈ Complex.re ⁻¹' {(0 : ℝ)}, ‖G w'‖ ≤ b := by
     intro w' hw'
     simp only [Set.mem_preimage, Set.mem_singleton_iff] at hw'
     have hφeq : φ w' = (w'.im : ℂ) :=
       Complex.ext (by rw [hφre]; simp) (by rw [hφim, hw']; simp)
-    show ‖kmsFunCut m f g R (φ w')‖ ≤ B
-    rw [hφeq]; exact norm_kmsFunCut_ofReal_le m R w'.im hfL hgL
-  -- right edge Re w' = 1  ⟹  φ w' = ↑w'.im − i
-  have hb : ∀ w' ∈ Complex.re ⁻¹' {(1 : ℝ)}, ‖G w'‖ ≤ B := by
+    show ‖Φ (φ w')‖ ≤ b
+    rw [hφeq]; exact htop w'.im
+  have hb : ∀ w' ∈ Complex.re ⁻¹' {(1 : ℝ)}, ‖G w'‖ ≤ b := by
     intro w' hw'
     simp only [Set.mem_preimage, Set.mem_singleton_iff] at hw'
     have hφeq : φ w' = (w'.im : ℂ) - Complex.I :=
       Complex.ext (by rw [hφre]; simp) (by rw [hφim, hw']; simp)
-    show ‖kmsFunCut m f g R (φ w')‖ ≤ B
-    rw [hφeq]; exact norm_kmsFunCut_sub_I_le m R w'.im hfr hgr hfL hgL
-  -- apply Hadamard at w = i·z
+    show ‖Φ (φ w')‖ ≤ b
+    rw [hφeq]; exact hbot w'.im
   have hmem : w ∈ Complex.HadamardThreeLines.verticalClosedStrip 0 1 := by
     simp only [Complex.HadamardThreeLines.verticalClosedStrip, Set.mem_preimage, Set.mem_Icc, hwre]
     exact ⟨by linarith, by linarith⟩
   have hhad := Complex.HadamardThreeLines.norm_le_interp_of_mem_verticalClosedStrip'
-    (l := 0) (u := 1) (a := B) (b := B) (by norm_num) hmem hd hbdd ha hb
-  have hGw : G w = kmsFunCut m f g R z := by simp only [hGdef]; rw [hφw]
+    (l := 0) (u := 1) (a := b) (b := b) (by norm_num) hmem hd hbddG ha hb
+  have hGw : G w = Φ z := by simp only [hGdef]; rw [hφw]
   rw [hGw] at hhad
   have hwre0 : (0 : ℝ) ≤ w.re := by rw [hwre]; linarith
   have hwre1 : w.re ≤ 1 := by rw [hwre]; linarith
   simp only [sub_zero, div_one] at hhad
-  rwa [← Real.rpow_add_of_nonneg hBnn (by linarith : (0:ℝ) ≤ 1 - w.re) hwre0,
+  rwa [← Real.rpow_add_of_nonneg hbnn (by linarith : (0:ℝ) ≤ 1 - w.re) hwre0,
     show 1 - w.re + w.re = 1 from by ring, Real.rpow_one] at hhad
+
+/-- **Hadamard step: `‖kmsFunCut R z‖ ≤ B` on the whole closed strip**, for every `R`, with the
+    `R,z`-independent constant `B = √(∫‖Krep g‖²)·√(∫‖Krep f‖²)`. Rotate `w ↦ −i·w` to put the strip
+    `{−1≤Im z≤0}` onto Mathlib's `verticalClosedStrip 0 1`; the truncated function supplies the three Hadamard
+    inputs — `DiffContOnCl` (`kmsFunCut_diffContOnCl`), `BddAbove` (`norm_kmsFunCut_le`), and both edges `≤ B`
+    (`norm_kmsFunCut_ofReal_le`, `norm_kmsFunCut_sub_I_le`) — and `Complex.HadamardThreeLines.norm_le_interp_…'`
+    with edge constants `B,B` interpolates to `B^(1−s)·B^s = B`. -/
+theorem norm_kmsFunCut_le_B {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hfL : MemLp (Krep m f) 2 volume) (hgL : MemLp (Krep m g) 2 volume)
+    {R : ℝ} (hR : 0 ≤ R) {z : ℂ} (hz0 : -1 ≤ z.im) (hz1 : z.im ≤ 0) :
+    ‖kmsFunCut m f g R z‖
+      ≤ Real.sqrt (∫ θ, ‖Krep m g θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m f θ‖ ^ 2) := by
+  refine norm_le_of_strip_edges
+    (kmsFunCut_differentiableOn hm hf hfc hg hgc hδ hmf hmg R)
+    (kmsFunCut_continuousOn hm.le hf hfc hg hgc hδ.le hmf hmg R) ?_
+    (fun t => norm_kmsFunCut_ofReal_le m R t hfL hgL)
+    (fun t => norm_kmsFunCut_sub_I_le m R t hfr hgr hfL hgL) hz0 hz1
+  refine ⟨(1 / Real.sqrt 2 * ∫ x, ‖g x‖) * (1 / Real.sqrt 2 * ∫ x, ‖f x‖) * (2 * R), ?_⟩
+  rintro y ⟨z', hz', rfl⟩
+  simp only [Set.mem_preimage, Set.mem_Icc] at hz'
+  exact norm_kmsFunCut_le hm.le hf hfc hg hgc hδ.le hmf hmg hR hz'.1 hz'.2
 
 /-- **Boundedness of `kmsFun` on the open strip** (the frontier, now closed): for interior `z`,
     `‖kmsFun m f g z‖ ≤ B = √(∫‖Krep g‖²)·√(∫‖Krep f‖²)`. The `R→∞` transfer of `norm_kmsFunCut_le_B`:
