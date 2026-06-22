@@ -304,8 +304,26 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
      ⟹ **every span element is a SINGLE `KrepL2` of a nice test function.** This COLLAPSES the bilinear-span step
      of (c2): the closure threading is a closure limit over SINGLE nice generator PAIRS — each `Fₙ = kmsBCF fₙ gₙ`
      (one nice pair), no finite-sum bilinear bookkeeping. The Cauchy machinery (c0 `dist_kmsBCF_le` ✅) applies
-     verbatim. NEXT: bundle a `NiceTest m` structure (f + the 7 niceness fields incl. δ); `niceWedgeGenSet :=
-     range NiceTest.vec`; closed under ±; then the c2→c4 CauchySeq→limit→boundary assembly over `NiceTest` seqs.
+     verbatim.
+   - **★★★ NICE-CORE INFRASTRUCTURE BUILT (2026-06-22, axiom-free, budget 0):**
+       • `NiceTest m` structure (f + 7 niceness fields incl. δ); `NiceTest.vec := KrepL2 f` (`7a16c61`).
+       • Closed under ± : `NiceTest.add`/`vec_add` (`KrepL2_add`, `5bb7d10`), `NiceTest.sub`/`vec_sub`
+         (`KrepL2_sub`); `niceWedgeGenSet := range NiceTest.vec`; `niceWedgeGenSet_add_mem` (ℝ-subspace as a set).
+       • `NiceTest.margin_le` (margin monotone in δ); `NiceTest.bcf` (= `kmsBCF` at common margin `min N.δ M.δ`);
+         `NiceTest.bcf_congr` (δ-independence); **`NiceTest.dist_bcf_le`** = the c2 BCF Cauchy-control over pairs
+         (reconciles per-pair margins at the four-way min) (`ac73f9b`).
+       • **`NiceTest.bcf_cauchySeq`** (`c6e803e`): `(N n).vec→ξ, (M n).vec→η` ⟹ `n↦(N n).bcf (M n)` is `CauchySeq`
+         in `closedStrip →ᵇ ℂ` (the c2→limit step; norms bounded via `Tendsto.norm.bddAbove_range`, vecs Cauchy).
+   - **REMAINING (c3,c4 — final assembly):**
+       (c3) `b := cauchySeq_tendsto_of_complete (bcf_cauchySeq …)` (BCF complete) → limit `b`; `F := stripExtend b`
+            global bound `‖b‖`; `DifferentiableOn` on open strip via `TendstoLocallyUniformlyOn.differentiableOn`
+            (BCF→sup-conv→loc-unif); `ContinuousOn` closed via `b.continuous`.
+       (c4) BCF edge identities `NiceTest.bcf_apply_ofReal` (top = `⟪M.vec, boostUnitary(2πt) N.vec⟫`, via
+            `kmsFun_ofReal_eq_inner`) + `_apply_sub_I` (bottom, via `kmsFun_sub_I`); then `b`-boundary =
+            `lim ⟪Mₙ.vec, V(2πt) Nₙ.vec⟫ = ⟪η, V(2πt) ξ⟫` via `Filter.Tendsto.inner` + `(V a).continuous` +
+            BCF→pointwise eval + `tendsto_nhds_unique`.
+     ⟹ `StripKMSrvd boostUnitary (closure(niceWedgeGenSet))`. Then the `2π`↔`−2π` sign mirror + redefine/relate
+     `𝒦_W` to the nice core ⟹ remove `hKMS`.
    NOTE: this is laborious Hilbert-space plumbing (sesquilinear extension from a total set by continuity) — no
    new hard analysis. If it proves too long, `stripKMSrvd_pair` alone is already the citable A4 result (the
    explicit free-field boost-KMS witness, the genuine BW analytic content).
