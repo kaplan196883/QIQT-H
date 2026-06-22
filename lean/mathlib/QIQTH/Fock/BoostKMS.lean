@@ -2445,6 +2445,25 @@ theorem niceWedge_isCyclic_of_boost_orbit_dense (m : ℝ) (N₀ : NiceTest m)
   rintro ξ ⟨a, rfl⟩
   exact boostUnitary_mapsTo_niceWedgeGenSet m a ⟨N₀, rfl⟩
 
+/-- **The boost-orbit correlation as a concrete integral** (the entry point for the Wiener–Tauberian
+    argument): `⟪boostUnitary a g, h⟫ = ∫ conj(g θ)·h(θ+a) dθ`.  Via `L2.inner_def`, `coeFn_boostUnitary`
+    (`(boostUnitary a g) θ = g(θ−a)`), and translation invariance (`integral_add_right_eq_self`).  As a function
+    of `a` this is the cross-correlation of `g` and `h`; its vanishing for all `a` is the orthogonality of `h`
+    to the whole boost orbit — the input the Wiener density theorem turns into `ĝ·conj(ĥ)=0`. -/
+theorem inner_boostUnitary_correlation (a : ℝ) (g h : Lp ℂ 2 (volume : Measure ℝ)) :
+    inner ℂ (boostUnitary a g) h
+      = ∫ θ, (starRingEnd ℂ) ((g : ℝ → ℂ) θ) * (h : ℝ → ℂ) (θ + a) := by
+  rw [MeasureTheory.L2.inner_def]
+  have h1 : ∫ θ, (inner ℂ ((boostUnitary a g : ℝ → ℂ) θ) ((h : ℝ → ℂ) θ) : ℂ)
+      = ∫ θ, (starRingEnd ℂ) ((g : ℝ → ℂ) (θ - a)) * (h : ℝ → ℂ) θ := by
+    refine integral_congr_ae ?_
+    filter_upwards [coeFn_boostUnitary a g] with θ hθ
+    rw [hθ, RCLike.inner_apply]; ring
+  rw [h1, ← integral_add_right_eq_self
+    (fun θ => (starRingEnd ℂ) ((g : ℝ → ℂ) (θ - a)) * (h : ℝ → ℂ) θ) a]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
+  simp only [add_sub_cancel_right]
+
 open QIQTH.StandardSubspaceModular in
 /-- **`v ∈ K.mulI ⟹ I • v ∈ K`**: the `mulI` membership direction, via `mem_mapEquiv_iff` + `I⁻¹ = -I` + the
     real-subspace closure (`I•v = (-1)•((-I)•v)`).  Uses the unambiguous ℂ `scalarSMulCLE` — NO ℝ-instance
