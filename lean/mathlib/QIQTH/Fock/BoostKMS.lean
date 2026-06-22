@@ -66,4 +66,32 @@ theorem symm_edge_eq_inner (m t : ℝ) {f g : V → ℂ}
       = inner ℂ (hg.toLp (Krep m g)) (boostUnitary (2 * Real.pi * t) (hf.toLp (Krep m f))) := by
   rw [symm_edge_eq_shifted, inner_boostUnitary_KrepL2 m (2 * Real.pi * t) hf hg hbf]
 
+/-- **The KMS function** `F(z) = ∫ conj(KrepCont g (conj(θ+πz)))·KrepCont f (θ−πz) dθ` — the candidate
+    `StripKMSrvd` witness. `H^#(θ+πz) = conj(H(conj(θ+πz)))` with `H = KrepCont g`, `Ξ = KrepCont f`; for `z`
+    in the strip `{−1<Im z<0}` both factors are evaluated with imaginary part in `(0,π)` (the good damping
+    region). -/
+def kmsFun (m : ℝ) (f g : V → ℂ) (z : ℂ) : ℂ :=
+  ∫ θ : ℝ, (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+    * KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)
+
+/-- **The KMS function on the real axis** equals the symmetric integral (via `KrepCont_ofReal`): the real-axis
+    arguments are real, so each `KrepCont` collapses to `Krep` and the inner conjugation is trivial. -/
+theorem kmsFun_ofReal (m : ℝ) (f g : V → ℂ) (t : ℝ) :
+    kmsFun m f g (t : ℂ)
+      = ∫ θ, (starRingEnd ℂ) (Krep m g (θ + Real.pi * t)) * Krep m f (θ - Real.pi * t) := by
+  rw [kmsFun]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
+  have e1 : (θ : ℂ) + (Real.pi : ℂ) * (t : ℂ) = ((θ + Real.pi * t : ℝ) : ℂ) := by push_cast; ring
+  have e2 : (θ : ℂ) - (Real.pi : ℂ) * (t : ℂ) = ((θ - Real.pi * t : ℝ) : ℂ) := by push_cast; ring
+  simp only [e1, e2, Complex.conj_ofReal, KrepCont_ofReal]
+
+/-- **The KMS top edge for `kmsFun`**: `F(t) = ⟪KrepL2 g, boostUnitary(2πt) (KrepL2 f)⟫`
+    (`kmsFun_ofReal` ∘ `symm_edge_eq_inner`). -/
+theorem kmsFun_ofReal_eq_inner (m t : ℝ) {f g : V → ℂ}
+    (hf : MemLp (Krep m f) 2 volume) (hg : MemLp (Krep m g) 2 volume)
+    (hbf : MemLp (Krep m (boostTest (-(2 * Real.pi * t)) f)) 2 volume) :
+    kmsFun m f g (t : ℂ)
+      = inner ℂ (hg.toLp (Krep m g)) (boostUnitary (2 * Real.pi * t) (hf.toLp (Krep m f))) := by
+  rw [kmsFun_ofReal, symm_edge_eq_inner m t hf hg hbf]
+
 end QIQTH.Fock.BoostKMS

@@ -4693,5 +4693,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ A4: the KMS TOP EDGE f(t)=⟪η,V_t ξ⟫ in symmetric (KMS-function) form. The
 -- symmetric integral ∫ conj(Krep g(θ+πt))·Krep f(θ−πt) dθ (= t-real value of F(z)=∫conj(KrepCont g(θ+πz̄))·KrepCont f(θ−πz))
 -- equals ⟪KrepL2 g, boostUnitary(2πt)(KrepL2 f)⟫, via symm_edge_eq_shifted (change of vars) + inner_boostUnitary_KrepL2.
+#print axioms QIQTH.Fock.BoostKMS.kmsFun_ofReal_eq_inner
+-- expected: standard only — ★★★ A4: the KMS FUNCTION F defined (kmsFun = ∫ conj(KrepCont g(conj(θ+πz)))·KrepCont f(θ−πz)),
+-- and its REAL-AXIS (top-edge) value F(t) = ⟪KrepL2 g, boostUnitary(2πt)(KrepL2 f)⟫ (kmsFun_ofReal via KrepCont_ofReal,
+-- then symm_edge_eq_inner). The StripKMSrvd witness F with its top edge discharged; bottom edge + DiffContOnCl remain.
 
 end QIQTH.AxiomAudit
