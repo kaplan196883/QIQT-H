@@ -228,12 +228,23 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
        (v) **★★★★★ DONE — BOUNDEDNESS** `norm_kmsFun_le_B`: `R→∞` via `tendsto_setIntegral_of_monotone`
             (`⋃ₙ[−n,n]=ℝ`) ⟹ `‖kmsFun z‖ ≤ B` for interior `z`. **The boundedness frontier is CLOSED, axiom-free.**
    - **REMAINING for the full DiffContOnCl witness**: `ContinuousOn kmsFun (closed strip)` of the UNtruncated
-     function (the `hDCC` continuity half consumed by `stripKMSrvd_pair_of_regularity`). Boundedness alone does
-     NOT give it; `kmsFunCut → kmsFun` is NOT uniform up to the edges (σ-tail degenerates). Options next:
-     (a) locally-uniform convergence on bounded-`Re` closed sub-rectangles via per-η tail bounds (the η=0 edge
-     tail is the L²-tail of `Krep`, uniform on bounded `Re`); (b) check whether RvD Def 3.4 / the `StripKMSrvd`
-     encoding can accept `L²`/edge-limit boundary values instead of full closed-strip continuity (would let
-     `stripKMSrvd_pair_of_regularity` drop `hDCC`'s continuity half). This is the last analytic gap.
+     function (the `hDCC` continuity half of `stripKMSrvd_pair_of_regularity`). REQUIRED — NOT droppable: the
+     `StripKMS` variant WITHOUT closure-continuity is trivially/vacuously satisfiable (documented soundness hole,
+     `OneParticleBW.lean:528`), so the continuity is exactly what makes the KMS condition a genuine constraint.
+   - **★ ROUTE (GPT-5.5, 2026-06-22 #2): ANNULAR-DIFFERENCE UNIFORM CAUCHY** — reuses ALL the truncation
+     machinery; closed-strip continuity in ~5 steps:
+       (i) tail seminorm `T_h(R) := √(∫_{|θ|>R}‖Krep h‖²)`, `ε_R := T_g(R)·‖Krep f‖₂ + ‖Krep g‖₂·T_f(R) → 0`
+           (L²-tail, dominated convergence + `Real.sqrt` continuity);
+       (ii) **shifted-tail geometry** `|θ|>R ⟹ |θ+πt|>R ∨ |θ−πt|>R` (since `2|θ|≤|θ+πt|+|θ−πt|`), giving the
+           **annular EDGE bound** `‖kmsFunCut S t − kmsFunCut R t‖ ≤ ε_R` UNIFORMLY in `t` (truncated CS, the
+           scalar product has uniform edge tails even though individual L²-slices do not — the crux GPT supplied);
+       (iii) **`norm_le_of_strip_edges`** (just extracted) applied to `Φ = kmsFunCut S − kmsFunCut R`, `b = ε_R`
+           ⟹ `‖kmsFunCut S z − kmsFunCut R z‖ ≤ ε_R` on the whole closed strip;
+       (iv) `S→∞` (`tendsto_setIntegral_of_monotone`) ⟹ `‖kmsFun z − kmsFunCut R z‖ ≤ ε_R` on the closed strip
+           — i.e. `kmsFunCut R → kmsFun` **uniformly on the closed strip**;
+       (v) uniform limit of the continuous `kmsFunCut R` (`kmsFunCut_continuousOn`) ⟹
+           **`ContinuousOn kmsFun (closed strip)`** ⟹ `DiffContOnCl` ⟹ `stripKMSrvd_pair_of_regularity` fires.
+     (GPT confirmed Vitali/Montel and the L²-slice/Riesz routes are NOT Lean-tractable; this annular route is.)
 5. Closedness of `StripKMSrvd` to `𝒦_W` + `2π`↔`−2π` sign mirror + threading ⟹ remove `hKMS`.
 
 ---

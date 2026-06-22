@@ -1023,4 +1023,31 @@ theorem norm_kmsFun_le_B {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuo
     norm_kmsFunCut_le_B hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL (by positivity) hz0.le hz1.le
   exact le_of_tendsto hconv.norm (Filter.Eventually.of_forall hbnd)
 
+/-- **`L²`-tail vanishes**: for `F` with `‖F‖² ∈ L¹`, the tail integral `∫_{|θ|>n}‖F‖² → 0` as `n→∞`. The
+    sets `{|θ|>n}` are antitone with empty intersection, so `tendsto_setIntegral_of_antitone` applies. -/
+theorem tendsto_tail_sq_zero {F : ℝ → ℂ} (hF : Integrable (fun θ : ℝ => ‖F θ‖ ^ 2) volume) :
+    Filter.Tendsto (fun n : ℕ => ∫ θ in {θ : ℝ | (n : ℝ) < |θ|}, ‖F θ‖ ^ 2) Filter.atTop (nhds 0) := by
+  have hanti : Antitone (fun n : ℕ => {θ : ℝ | (n : ℝ) < |θ|}) := by
+    intro a b hab θ hθ
+    simp only [Set.mem_setOf_eq] at hθ ⊢
+    exact lt_of_le_of_lt (by exact_mod_cast hab) hθ
+  have hcap : ⋂ n : ℕ, {θ : ℝ | (n : ℝ) < |θ|} = ∅ := by
+    rw [Set.eq_empty_iff_forall_notMem]
+    intro θ hθ
+    obtain ⟨n, hn⟩ := exists_nat_gt |θ|
+    have hmem := Set.mem_iInter.mp hθ n
+    simp only [Set.mem_setOf_eq] at hmem
+    linarith
+  have h := tendsto_setIntegral_of_antitone (μ := volume) (f := fun θ : ℝ => ‖F θ‖ ^ 2)
+    (fun n => measurableSet_lt measurable_const _root_.continuous_abs.measurable) hanti
+    ⟨0, hF.integrableOn⟩
+  rwa [hcap, MeasureTheory.setIntegral_empty] at h
+
+/-- **Tail seminorm vanishes**: `T_F(n) := √(∫_{|θ|>n}‖F‖²) → 0`. -/
+theorem tendsto_tail_seminorm_zero {F : ℝ → ℂ} (hF : Integrable (fun θ : ℝ => ‖F θ‖ ^ 2) volume) :
+    Filter.Tendsto (fun n : ℕ => Real.sqrt (∫ θ in {θ : ℝ | (n : ℝ) < |θ|}, ‖F θ‖ ^ 2))
+      Filter.atTop (nhds 0) := by
+  have h := (Real.continuous_sqrt.tendsto 0).comp (tendsto_tail_sq_zero hF)
+  rwa [Real.sqrt_zero] at h
+
 end QIQTH.Fock.BoostKMS
