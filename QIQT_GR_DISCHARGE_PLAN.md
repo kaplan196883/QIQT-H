@@ -239,10 +239,13 @@ margin lemma is DONE (`b98dc63`).
        `norm_deriv_KrepCont_le_exp_decay` (`2fe7a2b`): `‖deriv(KrepCont m f) ζ‖ ≤ (1/√2)|m|·cosh(Re ζ)·
        exp(−c cosh(Re ζ))·∫(|x₀|+|x₁|)‖f‖` — the `z`-derivative norm bound. **Full strip-decay infrastructure
        (function + derivative) now complete.**
-       **Next:** the `kmsFun` holomorphy assembly — the integrand's `z`-derivative (product/chain rule through
-       the reflection factor + the affine `±πz`), bounded via `norm_KrepCont_le_exp_decay` + the deriv bound +
-       `cosh·exp` integrability, fed to `hasDerivAt_integral_of_dominated_loc_of_deriv_le` (𝕜=ℂ) ⟹ `kmsFun`
-       differentiable on the strip; then continuity-to-closure ⟹ `DiffContOnCl`, and the boundedness frontier.
+       Reflection-factor derivative `deriv_reflKrepCont_eq` (`ccada4e`) + the integrand's `z`-derivative
+       `hasDerivAt_kmsIntegrand_z` (`a2a0797`, explicit value via product/chain rule) — the `h_diff` ingredient.
+       **Next:** (i) bound `‖integrand z-derivative‖ ≤` integrable-in-`θ` uniformly over a `z`-ball in the strip
+       interior (combine the four decay bounds — `‖reflKrep‖`,`‖deriv reflKrep‖`,`‖KrepCont f‖`,
+       `‖deriv KrepCont f‖`, with the `conj`-arg `Im` bookkeeping + `c_min>0` from staying interior); (ii) feed
+       `hasDerivAt_integral_of_dominated_loc_of_deriv_le` ⟹ `kmsFun` differentiable on the open strip;
+       (iii) continuity-to-closure ⟹ `DiffContOnCl`; then the boundedness frontier.
 
 **Honest scale:** discharging `StripKMSrvd` from here is a genuine multi-week-to-month real-analysis +
 Mathlib-infrastructure effort (Minkowski integral inequality is itself a Mathlib-worthy contribution). This is
