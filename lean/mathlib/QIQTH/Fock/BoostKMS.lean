@@ -1934,6 +1934,79 @@ theorem NiceTest.vec_add {m : ℝ} (N₁ N₂ : NiceTest m) :
     (N₁.add N₂).vec = N₁.vec + N₂.vec :=
   KrepL2_add N₁.cont N₁.cpt N₂.cont N₂.cpt N₁.memLp N₂.memLp
 
+/-- **Nice tests are closed under subtraction** (margin → `min`, support → union): the difference is again
+    nice.  Companion to `NiceTest.add`; needed for `NiceTest`-indexed Cauchy approximants `Nₙ − Nₘ`. -/
+def NiceTest.sub {m : ℝ} (N₁ N₂ : NiceTest m) : NiceTest m where
+  f := N₁.f - N₂.f
+  cont := N₁.cont.sub N₂.cont
+  cpt := N₁.cpt.sub N₂.cpt
+  δ := min N₁.δ N₂.δ
+  hδ := lt_min N₁.hδ N₂.hδ
+  margin := fun x hx => by
+    rw [Pi.sub_apply] at hx
+    by_cases h : N₁.f x = 0
+    · have h2 : N₂.f x ≠ 0 := by rw [h, zero_sub, neg_ne_zero] at hx; exact hx
+      exact ⟨le_trans (min_le_right _ _) (N₂.margin x h2).1,
+             le_trans (min_le_right _ _) (N₂.margin x h2).2⟩
+    · exact ⟨le_trans (min_le_left _ _) (N₁.margin x h).1,
+             le_trans (min_le_left _ _) (N₁.margin x h).2⟩
+  real := fun x => by simp only [Pi.sub_apply, map_sub, N₁.real, N₂.real]
+  memLp := memLp_Krep_sub N₁.cont N₁.cpt N₂.cont N₂.cpt N₁.memLp N₂.memLp
+
+/-- **`NiceTest.sub` realizes Hilbert-space subtraction**: `(N₁.sub N₂).vec = N₁.vec − N₂.vec` (via `KrepL2_sub`). -/
+theorem NiceTest.vec_sub {m : ℝ} (N₁ N₂ : NiceTest m) :
+    (N₁.sub N₂).vec = N₁.vec - N₂.vec :=
+  KrepL2_sub N₁.cont N₁.cpt N₂.cont N₂.cpt N₁.memLp N₂.memLp
+
+/-- **Margin monotonicity**: a nice test's `δ`-margin also holds at any smaller `δ₀ ≤ δ`. Lets a pair of
+    nice tests with different margins be compared at the common (smaller) margin. -/
+theorem NiceTest.margin_le {m : ℝ} (N : NiceTest m) {δ₀ : ℝ} (h : δ₀ ≤ N.δ) :
+    ∀ x, N.f x ≠ 0 → δ₀ ≤ x 1 - x 0 ∧ δ₀ ≤ x 1 + x 0 :=
+  fun x hx => ⟨le_trans h (N.margin x hx).1, le_trans h (N.margin x hx).2⟩
+
+open scoped BoundedContinuousFunction in
+/-- **The KMS witness BCF for a pair of nice tests** (`N` in the `ξ` slot, `M` in the `η` slot), built at the
+    common margin `min N.δ M.δ`.  The `NiceTest`-bundled form of `kmsBCF`, the vehicle for the Cauchy limit. -/
+noncomputable def NiceTest.bcf {m : ℝ} (hm : 0 < m) (N M : NiceTest m) :
+    (Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0) →ᵇ ℂ :=
+  kmsBCF hm N.cont N.cpt M.cont M.cpt (lt_min N.hδ M.hδ)
+    (N.margin_le (min_le_left _ _)) (M.margin_le (min_le_right _ _))
+    N.real M.real N.memLp M.memLp
+
+open scoped BoundedContinuousFunction in
+/-- **`NiceTest.bcf` at an arbitrary common margin `δ'`** (δ-independence of `kmsBCF`, `kmsBCF_congr`). -/
+theorem NiceTest.bcf_congr {m : ℝ} (hm : 0 < m) (N M : NiceTest m) {δ' : ℝ} (hδ' : 0 < δ')
+    (hmf' : ∀ x, N.f x ≠ 0 → δ' ≤ x 1 - x 0 ∧ δ' ≤ x 1 + x 0)
+    (hmg' : ∀ x, M.f x ≠ 0 → δ' ≤ x 1 - x 0 ∧ δ' ≤ x 1 + x 0) :
+    N.bcf hm M
+      = kmsBCF hm N.cont N.cpt M.cont M.cpt hδ' hmf' hmg' N.real M.real N.memLp M.memLp := by
+  rw [NiceTest.bcf]
+  exact kmsBCF_congr hm N.cont N.cpt M.cont M.cpt (lt_min N.hδ M.hδ) hδ'
+    (N.margin_le (min_le_left _ _)) hmf' (M.margin_le (min_le_right _ _)) hmg'
+    N.real M.real N.memLp M.memLp
+
+open scoped BoundedContinuousFunction in
+/-- **(c2, `NiceTest` form) BCF Cauchy-control**: `dist (N₁.kmsBCF M₁) (N₂.kmsBCF M₂)` is bounded by the
+    Hilbert-norm difference bound, reconciling the per-pair margins at the four-way minimum via
+    `NiceTest.bcf_congr`, then `dist_kmsBCF_le`.  The keystone for the closure Cauchy sequence. -/
+theorem NiceTest.dist_bcf_le {m : ℝ} (hm : 0 < m) (N₁ N₂ M₁ M₂ : NiceTest m) :
+    dist (N₁.bcf hm M₁) (N₂.bcf hm M₂)
+      ≤ 2 * ‖M₁.vec‖ * ‖N₁.vec - N₂.vec‖ + 2 * ‖M₁.vec - M₂.vec‖ * ‖N₂.vec‖ := by
+  have hδpos : 0 < min (min N₁.δ M₁.δ) (min N₂.δ M₂.δ) :=
+    lt_min (lt_min N₁.hδ M₁.hδ) (lt_min N₂.hδ M₂.hδ)
+  rw [N₁.bcf_congr hm M₁ hδpos
+        (N₁.margin_le ((min_le_left _ _).trans (min_le_left _ _)))
+        (M₁.margin_le ((min_le_left _ _).trans (min_le_right _ _))),
+      N₂.bcf_congr hm M₂ hδpos
+        (N₂.margin_le ((min_le_right _ _).trans (min_le_left _ _)))
+        (M₂.margin_le ((min_le_right _ _).trans (min_le_right _ _)))]
+  exact dist_kmsBCF_le hm N₁.cont N₁.cpt N₂.cont N₂.cpt M₁.cont M₁.cpt M₂.cont M₂.cpt hδpos
+    (N₁.margin_le ((min_le_left _ _).trans (min_le_left _ _)))
+    (N₂.margin_le ((min_le_right _ _).trans (min_le_left _ _)))
+    (M₁.margin_le ((min_le_left _ _).trans (min_le_right _ _)))
+    (M₂.margin_le ((min_le_right _ _).trans (min_le_right _ _)))
+    N₁.real N₂.real M₁.real M₂.real N₁.memLp N₂.memLp M₁.memLp M₂.memLp
+
 /-- **The nice-core wedge generating set**: the one-particle vectors `KrepL2 f` from *nice* wedge test
     functions.  The standard BW wedge-localization core; an ℝ-subspace as a set (closed under `±` via
     `NiceTest.add`/`vec_add`), so `span_ℝ` of it adds nothing. -/
