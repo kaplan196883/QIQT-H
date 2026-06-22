@@ -175,11 +175,19 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
   `integrable_cosh_mul_exp_neg_const_mul_cosh`, `integrable_exp_neg_const_mul_cosh`, `sin_neg_pi_mul_pos`
   (decay rate `σ>0` on the open strip).
 
-**Honest remaining scope (≈ several fires each; mechanical-but-large + one hard lemma):**
-1. `hF_int` (integrand integrable in `θ` at interior `z`) — decay × bounded factor + `comp_sub_right`.
-2. **`h_bound` + dominated theorem** ⟹ `kmsFun` differentiable on the open strip: assemble `norm_two_term_le`
-   + the four factor bounds + `cosh_shift_exp_le` (with `σ_min`/`R` from a strip-interior ball) into one
-   `z`-uniform integrable bound, feed `hasDerivAt_integral_of_dominated_loc_of_deriv_le`. The largest single proof.
+**Honest remaining scope:**
+1. `hF_int` — **DONE** (`integrable_kmsIntegrand`, `f9dc445`).
+2. **`h_bound` + dominated theorem** ⟹ `kmsFun` differentiable on the open strip:
+   - `hF_meas` (`continuous_kmsIntegrand_in_theta`), `hF_int` (`integrable_kmsIntegrand`), `hF'_meas`
+     (`continuous_kmsIntegrand_deriv_in_theta` + `continuous_deriv_KrepCont`/`_reflKrepCont`), `h_diff`
+     (`hasDerivAt_kmsIntegrand_z`) — **all DONE**.
+   - **`h_bound` — DONE** (`ce38254`): `kmsIntegrand_deriv_bound` — `‖F'(z,θ)‖ ≤ π(Cdg Cf+Cdf Cg)·e^{πR}cosh θ·
+     exp(−κ cosh θ)` (`z`-independent), via `norm_two_term_le` + `norm_term1_le` + `norm_term2_le` +
+     `prod_norm_bound_cosh_shift` + `exists_sin_min`/`cosh_shift_exp_le`.
+   - `bound_integrable` (the bound = const·`cosh·exp`, integrable — `integrable_cosh_mul_exp_neg_const_mul_cosh`).
+   - **NEXT (the only remaining holomorphy step):** the dominated-theorem CALL
+     `hasDerivAt_integral_of_dominated_loc_of_deriv_le` with the six (now-proven) hypotheses + the `σ_min`/`R`
+     ball extraction ⟹ `HasDerivAt kmsFun … z₀` for interior `z₀` ⟹ differentiable on the open strip.
 3. **Continuity-to-closure** ⟹ `DiffContOnCl`.
 4. **Boundedness `∃M`** — `s↦‖KrepCont f(·+iπs)‖₂` continuous/bounded on `[0,1]` (Cauchy–Schwarz gives
    `|kmsFun z| ≤ ‖reflKrep(·)‖₂‖KrepCont f(·)‖₂`; at the boundary the `L²` norm is `‖Krep‖₂` via `MemLp`/A3,
