@@ -458,6 +458,14 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          `gaussian_Krep_memLp`). Both are STANDARD L²-Fourier computations — a real step down from the abstract totality.
          (Separating still needs the symplectic non-degeneracy.) I was too quick to call this "terminus" — the
          boost-covariance gives a genuinely cleaner route.
+         **WIENER CHAIN STARTED (2026-06-23, `4bb820c`): `inner_boostUnitary_correlation`** —
+         `⟪boostUnitary a g, h⟫ = ∫ conj(g θ)·h(θ+a) dθ` (the g–h cross-correlation as a function of `a`), via
+         `L2.inner_def` + `coeFn_boostUnitary` + `integral_add_right_eq_self`. First brick. REMAINING Wiener steps
+         (Mathlib has `MeasureTheory.Lp.fourierTransformₗᵢ` (L² FT isometry equiv) + `inner_fourier_eq` (Parseval) +
+         `fourierIntegral_comp_add_right` (translate→modulation)): (2) the correlation's FT = `conj(ĝ)·ĥ` (Parseval +
+         modulation); (3) `c≡0 ⟹ conj(ĝ)·ĥ=0 ⟹ ĥ=0` (ĝ≠0 a.e.) `⟹ h=0` (FT iso injective); (4) assemble Wiener:
+         boost-orbit dense `⟸ FT(g)≠0 a.e.`; (5) `FT(KrepL2 f₀)≠0 a.e.` for a concrete wedge Gaussian. A multi-fire
+         STANDARD Fourier effort — the bricks accumulate like the BW witness did.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
