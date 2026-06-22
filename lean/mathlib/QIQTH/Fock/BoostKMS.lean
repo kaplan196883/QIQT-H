@@ -1050,6 +1050,22 @@ theorem tendsto_tail_seminorm_zero {F : ℝ → ℂ} (hF : Integrable (fun θ : 
   have h := (Real.continuous_sqrt.tendsto 0).comp (tendsto_tail_sq_zero hF)
   rwa [Real.sqrt_zero] at h
 
+/-- **Real Cauchy–Schwarz** for nonnegative `L²` functions: `∫ u·v ≤ √(∫u²)·√(∫v²)`. Hölder `p=q=2`. -/
+theorem real_L2_inner_le {μ : Measure ℝ} {u v : ℝ → ℝ} (hu : MemLp u 2 μ) (hv : MemLp v 2 μ)
+    (hunn : 0 ≤ᵐ[μ] u) (hvnn : 0 ≤ᵐ[μ] v) :
+    ∫ θ, u θ * v θ ∂μ ≤ Real.sqrt (∫ θ, u θ ^ 2 ∂μ) * Real.sqrt (∫ θ, v θ ^ 2 ∂μ) := by
+  have hmu : MemLp u (ENNReal.ofReal 2) μ := by
+    rw [show ENNReal.ofReal 2 = (2 : ENNReal) from by norm_num [ENNReal.ofReal_ofNat]]; exact hu
+  have hmv : MemLp v (ENNReal.ofReal 2) μ := by
+    rw [show ENNReal.ofReal 2 = (2 : ENNReal) from by norm_num [ENNReal.ofReal_ofNat]]; exact hv
+  have hpow : ∀ w : ℝ → ℝ, (∫ θ, w θ ^ (2 : ℝ) ∂μ) = ∫ θ, w θ ^ 2 ∂μ := by
+    intro w
+    refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
+    show w θ ^ (2 : ℝ) = w θ ^ 2
+    rw [show (2 : ℝ) = ((2 : ℕ) : ℝ) from by norm_num, Real.rpow_natCast]
+  refine (integral_mul_le_Lp_mul_Lq_of_nonneg Real.HolderConjugate.two_two hunn hvnn hmu hmv).trans_eq ?_
+  rw [hpow u, hpow v, Real.sqrt_eq_rpow, Real.sqrt_eq_rpow]
+
 /-- **Shifted-tail geometry** (the crux of the annular bound): if `|θ| > R` then `|θ+a| > R` or `|θ−a| > R`.
     Since `2|θ| = |(θ+a)+(θ−a)| ≤ |θ+a|+|θ−a|`, both `≤ R` would force `|θ| ≤ R`. This is why the scalar KMS
     product has uniformly small edge tails even though the individual `L²` slices do not. -/
