@@ -129,6 +129,20 @@ theorem differentiable_reflKrepCont (m : ℝ) {g : V → ℂ} (hg : Continuous g
   rw [Complex.conj_conj] at h
   exact h
 
+/-- **Strip-decay of the reflected amplitude** `‖reflKrep(u)‖ = ‖KrepCont g(conj u)‖` for `−π ≤ Im u ≤ 0`
+    (so `Im(conj u) ∈ [0,π]`): `≤ (1/√2)(∫‖g‖)·exp(−(m sin(−Im u)δ)·cosh(Re u))`. The `g`-factor bound for the
+    `kmsFun` integrand (`reflKrep(θ+πz)`, where `Im(θ+πz)=π Im z ∈(−π,0)` for `z` in the strip). -/
+theorem norm_reflKrepCont_le {m : ℝ} (hm : 0 ≤ m) {g : V → ℂ} (hg : Continuous g)
+    (hgc : HasCompactSupport g) {δ : ℝ}
+    (hmargin : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    {u : ℂ} (him0 : -Real.pi ≤ u.im) (himπ : u.im ≤ 0) :
+    ‖(starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) u))‖
+      ≤ 1 / Real.sqrt 2 * (∫ x, ‖g x‖) * Real.exp (-(m * Real.sin (-u.im) * δ) * Real.cosh u.re) := by
+  rw [Complex.norm_conj]
+  have h := norm_KrepCont_le_exp_decay_gen hm hg hgc hmargin (w := (starRingEnd ℂ) u)
+    (by rw [Complex.conj_im]; linarith) (by rw [Complex.conj_im]; linarith)
+  rwa [Complex.conj_im, Complex.conj_re] at h
+
 /-- The derivative of the reflected amplitude: `deriv(u ↦ conj(KrepCont g(conj u))) u
     = conj(deriv(KrepCont g)(conj u))` (Schwarz reflection, `HasDerivAt.conj_conj`). -/
 theorem deriv_reflKrepCont_eq (m : ℝ) {g : V → ℂ} (hg : Continuous g) (hgc : HasCompactSupport g)
