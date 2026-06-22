@@ -463,6 +463,20 @@ theorem cosh_shift_exp_le {θ s c c₀ S : ℝ} (hS : |s| ≤ S) (hc₀ : 0 < c�
       ≤ Real.exp S * Real.cosh θ * Real.exp (-(c₀ * Real.exp (-S) * Real.cosh θ)) :=
         mul_le_mul hupper hexp (Real.exp_pos _).le (by positivity)
 
+/-- **The `h_bound` core estimate.** A `cosh(θ+s)·exp(−c·cosh(θ+s))`-decaying factor (`na`) times a bounded
+    factor (`nb ≤ Cb`), made `z`-uniform: `na·nb ≤ Cd·Cb·(e^S·cosh θ·exp(−c₀·e^{−S}·cosh θ))`. Both terms of
+    the `kmsFun` integrand `z`-derivative reduce to this (via the four factor bounds + `cosh_shift_exp_le`). -/
+theorem prod_norm_bound_cosh_shift {na nb Cd Cb c c₀ S s θ : ℝ}
+    (hna : na ≤ Cd * (Real.cosh (θ + s) * Real.exp (-(c * Real.cosh (θ + s)))))
+    (hnb : nb ≤ Cb) (hnb0 : 0 ≤ nb) (hCb : 0 ≤ Cb) (hCd : 0 ≤ Cd)
+    (hS : |s| ≤ S) (hc₀ : 0 < c₀) (hcc : c₀ ≤ c) :
+    na * nb ≤ Cd * Cb * (Real.exp S * Real.cosh θ * Real.exp (-(c₀ * Real.exp (-S) * Real.cosh θ))) :=
+  calc na * nb ≤ Cd * (Real.cosh (θ + s) * Real.exp (-(c * Real.cosh (θ + s)))) * Cb :=
+        mul_le_mul hna hnb hnb0 (mul_nonneg hCd (by positivity))
+    _ = Cd * Cb * (Real.cosh (θ + s) * Real.exp (-(c * Real.cosh (θ + s)))) := by ring
+    _ ≤ Cd * Cb * (Real.exp S * Real.cosh θ * Real.exp (-(c₀ * Real.exp (-S) * Real.cosh θ))) :=
+        mul_le_mul_of_nonneg_left (cosh_shift_exp_le hS hc₀ hcc) (mul_nonneg hCd hCb)
+
 /-- **A2 (derivative-decay building block).** `s ↦ cosh s·exp(−c·cosh s)` is integrable over `ℝ` for `c > 0`.
     The integrand-derivative bound (`‖kernelDeriv‖ ≲ cosh(s)·exp(−c·cosh s)`, the `cosh` polynomial factor
     against the double-exponential damping) reduces to this. Via `cosh s ≤ (1/c)·exp((c/2)cosh s)`
