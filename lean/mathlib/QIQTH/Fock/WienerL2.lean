@@ -208,4 +208,26 @@ theorem inner_boostUnitary_eq_integral (a : ℝ) (g₀ h : Lp ℂ 2 (volume : Me
   rw [hξ, RCLike.inner_apply', map_mul, conj_modChar, neg_neg]
   ring
 
+/-! ## Brick 6 — Fourier injectivity on L¹ closes the Wiener argument
+
+`k := conj(𝓕g₀)·𝓕h ∈ L¹`.  Brick 6a identifies its function Fourier transform with the boost-orbit
+correlation, so the orbit-orthogonality hypothesis becomes `𝓕 k ≡ 0`; brick 6b (next) is the generic
+L¹ uniqueness `Integrable k ∧ 𝓕 k = 0 ⟹ k =ᵐ 0`. -/
+
+/-- **Wiener brick 6a — the reduction.**  The function Fourier transform of `k(ξ) = conj(𝓕g₀ ξ)·𝓕h ξ`
+    at `w` equals the boost-orbit correlation `⟪boostUnitary (−w) g₀, h⟫` (brick 5 at `a = −w`, matching
+    the `𝓕`-character `𝐞(−⟪ξ,w⟫) = modChar(2π(−w))ξ`).  Hence `(∀a, ⟪boost_a g₀,h⟫ = 0) ⟹ 𝓕 k ≡ 0`. -/
+theorem fourier_correlation_eq (g₀ h : Lp ℂ 2 (volume : Measure ℝ)) (w : ℝ) :
+    𝓕 (fun ξ => conj ((𝓕 g₀ : Lp ℂ 2 (volume : Measure ℝ)) ξ)
+        * (𝓕 h : Lp ℂ 2 (volume : Measure ℝ)) ξ) w
+      = inner ℂ (boostUnitary (-w) g₀) h := by
+  rw [inner_boostUnitary_eq_integral, Real.fourier_eq]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun ξ => ?_)
+  dsimp only
+  have hchar : ((𝐞 (-inner ℝ ξ w) : Circle) : ℂ) = modChar (2 * Real.pi * (-w)) ξ := by
+    rw [Real.fourierChar_apply, modChar]
+    congr 1
+    rw [Real.inner_apply]; push_cast; ring
+  rw [Circle.smul_def, hchar, smul_eq_mul]
+
 end QIQTH.Fock.WienerL2
