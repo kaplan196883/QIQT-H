@@ -1399,4 +1399,49 @@ theorem integrable_kmsFun_integrand_closed {m : ℝ} (hm : 0 < m) {f g : V → �
     norm_nonneg (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z))),
     norm_nonneg (KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z))]
 
+/-- **`kmsFunCut n z → kmsFun z` up to the boundary**: for closed-strip `z`, `tendsto_setIntegral_of_monotone`
+    (`⋃ₙ[−n,n]=ℝ`) with the closed-strip integrability `integrable_kmsFun_integrand_closed`. -/
+theorem kmsFunCut_tendsto_closed {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hfL : MemLp (Krep m f) 2 volume) (hgL : MemLp (Krep m g) 2 volume)
+    {z : ℂ} (hz0 : -1 ≤ z.im) (hz1 : z.im ≤ 0) :
+    Filter.Tendsto (fun n : ℕ => kmsFunCut m f g (n : ℝ) z) Filter.atTop (nhds (kmsFun m f g z)) := by
+  have hint := integrable_kmsFun_integrand_closed hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL hz0 hz1
+  have hmono : Monotone (fun n : ℕ => Set.Icc (-(n : ℝ)) (n : ℝ)) := fun a b hab =>
+    Set.Icc_subset_Icc (neg_le_neg (by exact_mod_cast hab)) (by exact_mod_cast hab)
+  have hunion : ⋃ n : ℕ, Set.Icc (-(n : ℝ)) (n : ℝ) = Set.univ := by
+    rw [Set.eq_univ_iff_forall]
+    intro θ
+    obtain ⟨n, hn⟩ := exists_nat_ge |θ|
+    exact Set.mem_iUnion.mpr ⟨n, Set.mem_Icc.mpr (abs_le.mp hn)⟩
+  have h := tendsto_setIntegral_of_monotone (μ := volume) (f := fun θ : ℝ =>
+      (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+        * KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z))
+    (fun _ : ℕ => measurableSet_Icc) hmono (by rw [hunion]; exact hint.integrableOn)
+  rw [hunion, MeasureTheory.setIntegral_univ] at h
+  exact h
+
+/-- **Uniform error `‖kmsFun z − kmsFunCut R z‖ ≤ ε_R`** on the closed strip (`R ≥ 0`). Pass `S→∞` to the limit
+    in `norm_kmsFunCut_diff_le` via `kmsFunCut_tendsto_closed` + `le_of_tendsto`. -/
+theorem norm_kmsFun_sub_kmsFunCut_le {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hfL : MemLp (Krep m f) 2 volume) (hgL : MemLp (Krep m g) 2 volume)
+    {R : ℝ} (hR : 0 ≤ R) {z : ℂ} (hz0 : -1 ≤ z.im) (hz1 : z.im ≤ 0) :
+    ‖kmsFun m f g z - kmsFunCut m f g R z‖
+      ≤ Real.sqrt (∫ θ in {θ : ℝ | R < |θ|}, ‖Krep m g θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m f θ‖ ^ 2)
+        + Real.sqrt (∫ θ in {θ : ℝ | R < |θ|}, ‖Krep m f θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m g θ‖ ^ 2) := by
+  have hconv := (kmsFunCut_tendsto_closed hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL hz0 hz1).sub_const
+    (kmsFunCut m f g R z)
+  refine le_of_tendsto hconv.norm ?_
+  rw [Filter.eventually_atTop]
+  refine ⟨⌈R⌉₊, fun n hn => ?_⟩
+  exact norm_kmsFunCut_diff_le hm hf hfc hg hgc hδ hmf hmg hfr hgr hfL hgL hR
+    (le_trans (Nat.le_ceil R) (by exact_mod_cast hn)) hz0 hz1
+
 end QIQTH.Fock.BoostKMS
