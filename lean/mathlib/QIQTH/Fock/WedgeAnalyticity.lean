@@ -354,6 +354,34 @@ theorem integrable_exp_neg_const_mul_cosh {c : ℝ} (hc : 0 < c) :
   refine Real.exp_le_exp.mpr ?_
   nlinarith [sq_div_eight_le_cosh θ, hc.le]
 
+/-- `|θ| ≤ cosh θ` (from `cosh θ ≥ e^{|θ|}/2` and `e^{|θ|} ≥ 2|θ|`, `Real.two_mul_le_exp`). -/
+theorem abs_le_cosh (θ : ℝ) : |θ| ≤ Real.cosh θ := by
+  have he : Real.exp |θ| ≤ 2 * Real.cosh θ := by
+    rw [Real.cosh_eq]
+    rcases abs_cases θ with ⟨h, _⟩ | ⟨h, _⟩ <;> rw [h] <;>
+      nlinarith [Real.exp_pos θ, Real.exp_pos (-θ)]
+  have h2 : 2 * |θ| ≤ Real.exp |θ| := Real.two_mul_le_exp
+  linarith
+
+/-- **A2 (derivative-decay building block).** `s ↦ cosh s·exp(−c·cosh s)` is integrable over `ℝ` for `c > 0`.
+    The integrand-derivative bound (`‖kernelDeriv‖ ≲ cosh(s)·exp(−c·cosh s)`, the `cosh` polynomial factor
+    against the double-exponential damping) reduces to this. Via `cosh s ≤ (1/c)·exp((c/2)cosh s)`
+    (`Real.two_mul_le_exp`) ⟹ `cosh s·exp(−c cosh s) ≤ (1/c)·exp(−(c/2)cosh s)`. -/
+theorem integrable_cosh_mul_exp_neg_const_mul_cosh {c : ℝ} (hc : 0 < c) :
+    Integrable (fun s : ℝ => Real.cosh s * Real.exp (-(c * Real.cosh s))) := by
+  refine ((integrable_exp_neg_const_mul_cosh (show (0 : ℝ) < c / 2 by positivity)).const_mul
+    (1 / c)).mono' (by fun_prop) (Filter.Eventually.of_forall fun s => ?_)
+  rw [Real.norm_of_nonneg (by positivity)]
+  have hc' : c * Real.cosh s ≤ Real.exp ((c / 2) * Real.cosh s) := by
+    nlinarith [Real.two_mul_le_exp (x := (c / 2) * Real.cosh s)]
+  have hcosh_le : Real.cosh s ≤ (1 / c) * Real.exp ((c / 2) * Real.cosh s) := by
+    rw [one_div, inv_mul_eq_div, le_div_iff₀ hc]; linarith [hc']
+  calc Real.cosh s * Real.exp (-(c * Real.cosh s))
+      ≤ (1 / c) * Real.exp ((c / 2) * Real.cosh s) * Real.exp (-(c * Real.cosh s)) :=
+        mul_le_mul_of_nonneg_right hcosh_le (Real.exp_pos _).le
+    _ = (1 / c) * Real.exp (-(c / 2 * Real.cosh s)) := by
+        rw [mul_assoc, ← Real.exp_add]; congr 2; ring
+
 /-- **A2 — uniform wedge margin.** If `f` has compact support contained strictly in the (open) right wedge
     (`tsupport f ⊆ {x₁ > |x₀|}`), there is a uniform margin `δ > 0` with `δ ≤ x₁−x₀` and `δ ≤ x₁+x₀` on
     `tsupport f`. (Continuous positive function on a compact set attains a positive minimum.) This gives the

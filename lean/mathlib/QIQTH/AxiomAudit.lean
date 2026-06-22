@@ -4672,6 +4672,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.WedgeAnalyticity.integrable_exp_neg_const_mul_cosh
 -- expected: standard only — ★ A2 decay building block: exp(−c·coshθ) integrable over ℝ (c>0), Gaussian
 -- domination via coshθ≥θ²/8. The θ-integrability the interior-λ wedge-mode strip decay reduces to.
+#print axioms QIQTH.Fock.WedgeAnalyticity.integrable_cosh_mul_exp_neg_const_mul_cosh
+-- expected: standard only — ★ A2 derivative-decay block: cosh s·exp(−c·cosh s) integrable (c>0), via cosh s ≤
+-- (1/c)exp((c/2)cosh s) (Real.two_mul_le_exp). The integrand-DERIVATIVE bound (cosh poly factor vs damping)
+-- reduces to this — the integrability for the z-derivative domination of F's parametric holomorphy (DiffContOnCl).
 #print axioms QIQTH.Fock.WedgeAnalyticity.exists_wedge_margin
 -- expected: standard only — ★ A2: uniform wedge margin. tsupport f ⊆ open wedge (compact) ⟹ ∃δ>0,
 -- δ≤x₁∓x₀ on tsupport f (continuous positive fn on compact attains positive min). Gives the uniform damping
