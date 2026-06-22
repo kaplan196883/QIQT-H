@@ -410,6 +410,17 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          Reverted to keep green; the CYCLIC side is fully done, separating is the one piece gated on this tangle (its
          math is trivial once instances align). NB: the analytic `Dense(span_ℂ niceWedgeGenSet)` (wedge-totality) is the
          genuine remaining content for BOTH sides regardless.
+         **★★★ CYCLIC SHARPENED TO TOTALITY (2026-06-23, `1ead640`, axiom-free) — ROUTED AROUND the ℝ-instance tangle.**
+         `niceWedge_dense_of_total`: `Dense(span_ℂ niceWedgeGenSet) ⟸ {KrepL2 f : f nice} total in L²(ℝ)` (no nonzero
+         `h` with `⟪KrepL2 f, h⟫=0 ∀ f`). KEY: uses the **COMPLEX** orthogonal complement (`orthogonal_eq_bot_iff` +
+         `topologicalClosure_eq_top_iff`), and `InnerProductSpace ℂ` on `Lp ℂ 2` is UNAMBIGUOUS — so NO instance
+         diamond (the ℝ-side tangle that blocks separating simply doesn't arise on the ℂ side). Chained:
+         `niceWedge_isCyclic_of_total` + **`oneParticleBW_niceWedge_of_total`** give `modUnitary = boost(2πt)` from
+         `hsep` + the canonical wedge-totality. The cyclic Reeh–Schlieder input is now in its SHARPEST form: "the nice
+         wedge one-particle vectors are total in `L²(ℝ)`" — zero lattice/instance plumbing, the textbook statement.
+         REMAINING: (i) that totality itself — the genuine Paley–Wiener / edge-of-the-wedge frontier
+         (`∫ conj(Krep f)·h = 0 ∀ nice f ⟹ h=0`, via Fubini + analyticity of the on-shell transform in a tube);
+         (ii) `hsep` (separating), still gated on the ℝ-instance tangle for its dual reduction.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
