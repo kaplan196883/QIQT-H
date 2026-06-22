@@ -2057,6 +2057,25 @@ theorem NiceTest.bcf_cauchySeq {m : ℝ} (hm : 0 < m) {ξ η : Lp ℂ 2 (volume 
   refine (NiceTest.dist_bcf_le hm (N p) (N q) (M p) (M q)).trans_lt ?_
   linarith [e1, e2]
 
+open scoped BoundedContinuousFunction in
+/-- **(c4) BCF top edge**: at a closed-strip point `z` with `(z:ℂ) = t` (real), `N.bcf M z = ⟪M.vec,
+    boostUnitary(2πt) N.vec⟫` — the `StripKMSrvd` top-boundary value, via `kmsFun_ofReal_eq_inner`. -/
+theorem NiceTest.bcf_apply_eq_top {m : ℝ} (hm : 0 < m) (N M : NiceTest m) (t : ℝ)
+    (z : (Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0)) (hz : (z : ℂ) = (t : ℂ)) :
+    N.bcf hm M z = inner ℂ M.vec (boostUnitary (2 * Real.pi * t) N.vec) := by
+  rw [NiceTest.bcf, kmsBCF_apply, hz]
+  exact kmsFun_ofReal_eq_inner m t N.memLp M.memLp (memLp_Krep_boostTest N.memLp _)
+
+open scoped BoundedContinuousFunction in
+/-- **(c4) BCF bottom edge**: at a closed-strip point `z` with `(z:ℂ) = t − i`, `N.bcf M z = ⟪boostUnitary(2πt)
+    N.vec, M.vec⟫` — the `StripKMSrvd` bottom-boundary value, via `kmsFun_sub_I` + `inner_conj_symm`. -/
+theorem NiceTest.bcf_apply_eq_bot {m : ℝ} (hm : 0 < m) (N M : NiceTest m) (t : ℝ)
+    (z : (Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0)) (hz : (z : ℂ) = (t : ℂ) - Complex.I) :
+    N.bcf hm M z = inner ℂ (boostUnitary (2 * Real.pi * t) N.vec) M.vec := by
+  rw [NiceTest.bcf, kmsBCF_apply, hz, kmsFun_sub_I m N.real M.real t,
+    kmsFun_ofReal_eq_inner m t N.memLp M.memLp (memLp_Krep_boostTest N.memLp _)]
+  exact inner_conj_symm _ _
+
 /-- **The nice-core wedge generating set**: the one-particle vectors `KrepL2 f` from *nice* wedge test
     functions.  The standard BW wedge-localization core; an ℝ-subspace as a set (closed under `±` via
     `NiceTest.add`/`vec_add`), so `span_ℝ` of it adds nothing. -/
