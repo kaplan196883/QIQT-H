@@ -4746,4 +4746,20 @@ namespace QIQTH.AxiomAudit
 -- the elementary carrier niceWedgeClosedSubmodule (= closure(niceWedgeGenSet)). The ENTIRE remaining gap to an
 -- unconditional free-field one-particle BW is exactly those two Reeh–Schlieder lattice identities; all else is built.
 
+#print axioms QIQTH.Fock.BoostKMS.niceWedge_isCyclic_of_dense
+-- expected: standard only — ★ cyclic lattice identity hcyc ⟸ Dense(span_ℂ niceWedgeGenSet); the mulI instance-diamond
+-- cracked via defeq-tolerant exact/refine. Engine: ClosedSubmodule_sup_mulI_eq_top_of_dense (general K + G⊆K).
+#print axioms QIQTH.Fock.BoostKMS.niceWedge_dense_of_total
+-- expected: standard only — ★ Dense(span_ℂ) ⟸ totality of {KrepL2 f}, via the COMPLEX orthogonal complement
+-- (orthogonal_eq_bot_iff + topologicalClosure_eq_top_iff) — unambiguous InnerProductSpace ℂ, no diamond.
+#print axioms QIQTH.Fock.BoostKMS.niceWedge_isSeparating_of_no_complex_line
+-- expected: standard only — ★ separating hsep ⟸ "no complex line" (v∈K ∧ I•v∈K ⟹ v=0), DIRECT via the mulI
+-- membership (closedSubmodule_smul_I_mem_of_mem_mulI, ℂ scalarSMulCLE) — bypasses the ᗮ ℝ-instance tangle entirely.
+#print axioms QIQTH.Fock.BoostKMS.oneParticleBW_niceWedge_reehSchlieder
+-- expected: standard only — ★★★★★ THE one-particle Bisognano–Wichmann reduced to its TWO analytic Reeh–Schlieder
+-- inputs: modUnitary = boost(2πt) given ONLY (a) separating = no complex line (Pauli–Jordan symplectic non-degeneracy)
+-- and (b) cyclic = wedge-totality ∫ conj(Krep f)·h=0 ∀ nice f ⟹ h=0 (Paley–Wiener). NO lattice/instance/KMS hypotheses;
+-- every structural step machine-checked axiom-free. Item A's STRUCTURAL reduction COMPLETE — only the two analytic
+-- on-shell-amplitude facts remain as the cited frontier.
+
 end QIQTH.AxiomAudit
