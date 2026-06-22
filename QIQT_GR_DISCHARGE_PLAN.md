@@ -466,6 +466,14 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          modulation); (3) `c≡0 ⟹ conj(ĝ)·ĥ=0 ⟹ ĥ=0` (ĝ≠0 a.e.) `⟹ h=0` (FT iso injective); (4) assemble Wiener:
          boost-orbit dense `⟸ FT(g)≠0 a.e.`; (5) `FT(KrepL2 f₀)≠0 a.e.` for a concrete wedge Gaussian. A multi-fire
          STANDARD Fourier effort — the bricks accumulate like the BW witness did.
+         **BRICK 2 DONE (`d792c1d`): `niceWedge_isCyclic_of_correlation_total`** — cyclic ⟸ (∃ nice `N₀`: the only `h`
+         with `∫ conj(Krep N₀.f θ)·h(θ+a) dθ = 0` for ALL `a` is `h=0`). Combines the boost-orbit reduction +
+         `inner_boostUnitary_correlation` + the complex orthogonal complement. So the cyclic frontier is now the
+         single concrete statement "vanishing cross-correlation at all shifts ⟹ zero" — NO Fourier machinery yet
+         invoked. REMAINING = ONLY the Wiener FT core: `(∀a, ∫ conj(g₀)·h(·+a)=0) ⟹ h=0` given `FT(g₀)≠0` a.e.
+         (the L²-translate↔modulation intertwining — Mathlib has it at the integral level `fourierIntegral_comp_add_right`,
+         needs lifting to `fourierTransformₗᵢ` — then `inner_fourier_eq` + FT injectivity). This is the one genuine
+         Fourier-analysis brick left for the entire cyclic side.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
