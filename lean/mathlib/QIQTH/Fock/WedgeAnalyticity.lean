@@ -291,6 +291,11 @@ theorem differentiable_KrepCont (m : ℝ) {f : V → ℂ} (hf : Continuous f)
     (hfc : HasCompactSupport f) : Differentiable ℂ (KrepCont m f) :=
   fun ζ₀ => (hasDerivAt_KrepCont m hf hfc ζ₀).differentiableAt
 
+/-- The rapidity-derivative of `KrepCont m f` as an integral: `(K_ℂ f)'(ζ) = 2^{-1/2}·∫ K'(ζ,x)·f(x) dx`. -/
+theorem deriv_KrepCont_eq (m : ℝ) {f : V → ℂ} (hf : Continuous f) (hfc : HasCompactSupport f) (ζ : ℂ) :
+    deriv (KrepCont m f) ζ = (1 / Real.sqrt 2 : ℂ) * ∫ x, kernelDeriv m x ζ * f x :=
+  (hasDerivAt_KrepCont m hf hfc ζ).deriv
+
 /-! ### A3 — the `iπ` boundary conjugation (the KMS bottom edge) -/
 
 /-- The kernel's `iπ`-boundary conjugation: `K(θ+iπ, x) = conj(K(θ, x))`. Engine: `p_m(θ+iπ) = −p_m(θ)`
@@ -428,6 +433,14 @@ theorem norm_kernel_eq (m : ℝ) (x : V) (θ lam : ℝ) :
     Complex.I_re, Complex.I_im, Complex.add_re, Complex.add_im, Complex.sub_re, Complex.sub_im,
     Complex.ofReal_re, Complex.ofReal_im]
   ring
+
+/-- The exact kernel modulus at a **general** complex `ζ`: `‖K(ζ,x)‖ = exp(m sin(Im ζ)·(sinh(Re ζ)·x₀ −
+    cosh(Re ζ)·x₁))` (rewrite `ζ = Re ζ + i·Im ζ`, then `norm_kernel_eq`). -/
+theorem norm_kernel_eq' (m : ℝ) (x : V) (ζ : ℂ) :
+    ‖kernel m x ζ‖
+      = Real.exp (m * Real.sin ζ.im * (Real.sinh ζ.re * x 0 - Real.cosh ζ.re * x 1)) := by
+  conv_lhs => rw [← Complex.re_add_im ζ]
+  exact norm_kernel_eq m x ζ.re ζ.im
 
 /-- **Pointwise strip-decay of the kernel.** For `x` with wedge margin `δ` (`δ ≤ x₁∓x₀`) and `0≤λ≤π`,
     `‖K(θ+iλ,x)‖ ≤ exp(−(m sinλ δ)·coshθ)` — double-exponential decay in `θ` for interior `λ`. -/
