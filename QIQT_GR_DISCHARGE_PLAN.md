@@ -193,10 +193,18 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
    `ContinuousOn kmsFun (closedStrip)` and `‖kmsFun z‖ ≤ M` need the parametric integral controlled up to the
    boundary `Im z ∈ {0,−1}`, where the `σ`-damping degenerates (`σ=sin(−π·Im z)→0`) and the `L²`/oscillatory
    mechanism takes over (`Krep`'s real-axis `cosh⁻²` decay + A3). The remaining genuine analytic frontier.
-4. **Boundedness `∃M`** — `s↦‖KrepCont f(·+iπs)‖₂` continuous/bounded on `[0,1]` (Cauchy–Schwarz gives
-   `|kmsFun z| ≤ ‖reflKrep(·)‖₂‖KrepCont f(·)‖₂`; at the boundary the `L²` norm is `‖Krep‖₂` via `MemLp`/A3,
-   interior via `memLp_KrepCont_strip`). **NOT a fundamental wall** — a genuine but achievable `L²`-continuity
-   lemma interpolating the oscillatory (boundary) and damping (interior) decay. The hardest remaining piece.
+   - **★★★★ CAUCHY–SCHWARZ REDUCTION DONE** (`memLp_KrepCont_affine` in WedgeAnalyticity;
+     `norm_integral_conj_mul_le_l2` + `norm_kmsFun_le_l2_product` in BoostKMS): for interior `z`,
+     `‖kmsFun m f g z‖ ≤ √(∫‖slice_g‖²)·√(∫‖slice_f‖²)` — boundedness of `kmsFun` is now **reduced to uniform
+     control of the two strip-slice `L²` norms**, the correct Hardy-space decomposition. Each slice is `L²`
+     via `memLp_KrepCont_affine` (`Im = −π·z.im ∈ (0,π)`, real shift absorbed by `measurePreserving_add_right`).
+     Axiom-free, budget 0.
+4. **Boundedness `∃M`** — REMAINING (the Hardy core): show the slice `L²` norm `N_f(η):=∫‖KrepCont f(·+iη)‖²`
+   is bounded **uniformly** for `η ∈ [0,π]`. Interior bound (σ-damped domination, `memLp_KrepCont_strip`/
+   `memLp_KrepCont_affine`) degenerates at `η∈{0,π}`; honest route = Hardy three-lines / subharmonicity of
+   `η↦log N_f(η)` with **finite** edges `N_f(0)=‖KrepL2 f‖²` (genuine one-particle norm, not the crude bound)
+   and `N_f(π)` (the `p(θ+iπ)=−p(θ)` reflected norm). Same estimate gives `ContinuousOn`-to-boundary.
+   **NOT a fundamental wall** — a genuine but achievable `L²`-interpolation lemma. The hardest remaining piece.
 5. Closedness of `StripKMSrvd` to `𝒦_W` + `2π`↔`−2π` sign mirror + threading ⟹ remove `hKMS`.
 
 ---

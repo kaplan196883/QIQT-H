@@ -698,4 +698,37 @@ theorem memLp_KrepCont_strip {m : ℝ} (hm : 0 < m) {f : V → ℂ} (hf : Contin
     (fun x hx => hmargin x (subset_tsupport f (Function.mem_support.mpr hx))) hlam.le hlamπ.le
   rwa [← hCdef] at hb
 
+/-- **A2 (step 2′) — affine-argument `L²` membership.** For `m > 0`, wedge-supported `f`, and a complex
+    offset `c₀` with `Im c₀ ∈ (0,π)`, the slice `θ ↦ KrepCont m f (θ + c₀)` is in `L²(dθ)`. The argument's
+    imaginary part is the constant `Im c₀` (strip-interior ⟹ `sin > 0`), and the real part is `θ + Re c₀`;
+    pointwise domination by `C·exp(−c·cosh(θ+Re c₀))` (`norm_KrepCont_le_exp_decay_gen`) against the `L²`
+    translate of `C·exp(−c·cosh)` (`measurePreserving_add_right`). Generalizes `memLp_KrepCont_strip` to a
+    real shift of the strip slice — the form the two boost-KMS slices take. -/
+theorem memLp_KrepCont_affine {m : ℝ} (hm : 0 < m) {f : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) {δ : ℝ} (hδ : 0 < δ)
+    (hmargin : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    {c₀ : ℂ} (hc0 : 0 < c₀.im) (hc0π : c₀.im < Real.pi) :
+    MemLp (fun θ : ℝ => KrepCont m f ((θ : ℂ) + c₀)) 2 volume := by
+  have hsinpos : 0 < Real.sin c₀.im := Real.sin_pos_of_pos_of_lt_pi hc0 hc0π
+  set C : ℝ := 1 / Real.sqrt 2 * ∫ x, ‖f x‖ with hCdef
+  have hbound0 : MemLp (fun s : ℝ => C * Real.exp (-(m * Real.sin c₀.im * δ) * Real.cosh s)) 2 volume := by
+    rw [memLp_two_iff_integrable_sq (by fun_prop)]
+    have hsqeq : (fun s : ℝ => (C * Real.exp (-(m * Real.sin c₀.im * δ) * Real.cosh s)) ^ 2)
+        = (fun s : ℝ => C ^ 2 * Real.exp (-(2 * (m * Real.sin c₀.im * δ) * Real.cosh s))) := by
+      funext s; rw [mul_pow, ← Real.exp_nat_mul]; congr 2; push_cast; ring
+    rw [hsqeq]
+    exact (integrable_exp_neg_const_mul_cosh
+      (by positivity : (0 : ℝ) < 2 * (m * Real.sin c₀.im * δ))).const_mul _
+  have hbound : MemLp
+      (fun θ : ℝ => C * Real.exp (-(m * Real.sin c₀.im * δ) * Real.cosh (θ + c₀.re))) 2 volume := by
+    have h := hbound0.comp_measurePreserving (measurePreserving_add_right (volume : Measure ℝ) c₀.re)
+    simpa [Function.comp_def] using h
+  refine hbound.mono'
+    (((differentiable_KrepCont m hf hfc).continuous.comp (by fun_prop)).aestronglyMeasurable)
+    (Filter.Eventually.of_forall fun θ => ?_)
+  have hb := norm_KrepCont_le_exp_decay_gen hm.le hf hfc hmargin (w := (θ : ℂ) + c₀)
+    (by simpa using hc0.le) (by simpa using hc0π.le)
+  simp only [Complex.add_im, Complex.add_re, Complex.ofReal_im, Complex.ofReal_re, zero_add] at hb
+  rwa [← hCdef] at hb
+
 end QIQTH.Fock.WedgeAnalyticity

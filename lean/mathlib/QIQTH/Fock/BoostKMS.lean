@@ -523,4 +523,70 @@ theorem kmsFun_differentiableOn {m : ℝ} (hmpos : 0 < m) {f g : V → ℂ} (hf 
   rw [Set.mem_preimage, Set.mem_Ioo] at hz
   exact (kmsFun_differentiableAt hmpos hf hfc hg hgc hδ hmf hmg hz.1 hz.2).differentiableWithinAt
 
+/-- **Cauchy–Schwarz for a conjugate-bilinear `L²` integral.** For `A, B ∈ L²(dθ)`,
+    `‖∫ conj(A θ)·B θ‖ ≤ ‖A‖_{L²}·‖B‖_{L²}`. The abstract estimate behind the boundedness of `kmsFun`:
+    `‖∫ F‖ ≤ ∫ ‖F‖` then Hölder (`integral_mul_le_Lp_mul_Lq_of_nonneg`, `p=q=2`). -/
+theorem norm_integral_conj_mul_le_l2 {A B : ℝ → ℂ} (hA : MemLp A 2 volume) (hB : MemLp B 2 volume) :
+    ‖∫ θ : ℝ, (starRingEnd ℂ) (A θ) * B θ‖
+      ≤ Real.sqrt (∫ θ : ℝ, ‖A θ‖ ^ 2) * Real.sqrt (∫ θ : ℝ, ‖B θ‖ ^ 2) := by
+  have hmA : MemLp (fun θ => ‖A θ‖) (ENNReal.ofReal 2) volume := by
+    rw [show ENNReal.ofReal 2 = (2 : ENNReal) from by norm_num [ENNReal.ofReal_ofNat]]; exact hA.norm
+  have hmB : MemLp (fun θ => ‖B θ‖) (ENNReal.ofReal 2) volume := by
+    rw [show ENNReal.ofReal 2 = (2 : ENNReal) from by norm_num [ENNReal.ofReal_ofNat]]; exact hB.norm
+  have hpow : ∀ h : ℝ → ℂ, (∫ θ : ℝ, ‖h θ‖ ^ (2 : ℝ)) = ∫ θ : ℝ, ‖h θ‖ ^ 2 := by
+    intro h
+    refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
+    show ‖h θ‖ ^ (2 : ℝ) = ‖h θ‖ ^ 2
+    rw [show (2 : ℝ) = ((2 : ℕ) : ℝ) from by norm_num, Real.rpow_natCast]
+  calc ‖∫ θ : ℝ, (starRingEnd ℂ) (A θ) * B θ‖
+      ≤ ∫ θ : ℝ, ‖(starRingEnd ℂ) (A θ) * B θ‖ := norm_integral_le_integral_norm _
+    _ = ∫ θ : ℝ, ‖A θ‖ * ‖B θ‖ := by
+        refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
+        show ‖(starRingEnd ℂ) (A θ) * B θ‖ = ‖A θ‖ * ‖B θ‖
+        rw [norm_mul, RCLike.norm_conj]
+    _ ≤ (∫ θ : ℝ, ‖A θ‖ ^ (2 : ℝ)) ^ (1 / (2 : ℝ)) * (∫ θ : ℝ, ‖B θ‖ ^ (2 : ℝ)) ^ (1 / (2 : ℝ)) :=
+        integral_mul_le_Lp_mul_Lq_of_nonneg Real.HolderConjugate.two_two
+          (Filter.Eventually.of_forall fun θ => norm_nonneg _)
+          (Filter.Eventually.of_forall fun θ => norm_nonneg _) hmA hmB
+    _ = Real.sqrt (∫ θ : ℝ, ‖A θ‖ ^ 2) * Real.sqrt (∫ θ : ℝ, ‖B θ‖ ^ 2) := by
+        rw [hpow A, hpow B, Real.sqrt_eq_rpow, Real.sqrt_eq_rpow]
+
+/-- **Cauchy–Schwarz bound for `kmsFun`** (interior `z`): `‖kmsFun m f g z‖` is bounded by the product of
+    the two strip-slice `L²` norms. Reduces the boundedness of `kmsFun` (the remaining frontier of the
+    `StripKMSrvd` witness) to **uniform control of the slice `L²` norms** across the strip — the correct
+    Hardy-space decomposition. Each slice is in `L²` via `memLp_KrepCont_affine` (`Im = −π·z.im ∈ (0,π)`). -/
+theorem norm_kmsFun_le_l2_product {m : ℝ} (hmpos : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    {z : ℂ} (hz0 : -1 < z.im) (hz1 : z.im < 0) :
+    ‖kmsFun m f g z‖
+      ≤ Real.sqrt (∫ θ : ℝ, ‖KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z))‖ ^ 2)
+        * Real.sqrt (∫ θ : ℝ, ‖KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)‖ ^ 2) := by
+  have h0 : 0 < Real.pi * (-z.im) := by
+    have hz : 0 < -z.im := by linarith
+    positivity
+  have hπlt : Real.pi * (-z.im) < Real.pi := by
+    have h1 : -z.im < 1 := by linarith
+    nlinarith [Real.pi_pos]
+  have hgim : ((Real.pi : ℂ) * (starRingEnd ℂ z)).im = Real.pi * (-z.im) := by
+    simp only [Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, Complex.conj_im]; ring
+  have hfim : (-((Real.pi : ℂ) * z)).im = Real.pi * (-z.im) := by
+    simp only [Complex.neg_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im]; ring
+  have hMemA : MemLp (fun θ : ℝ =>
+      KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z))) 2 volume := by
+    have hfun : (fun θ : ℝ => KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+        = fun θ : ℝ => KrepCont m g ((θ : ℂ) + (Real.pi : ℂ) * (starRingEnd ℂ z)) := by
+      funext θ; congr 1; rw [map_add, map_mul, Complex.conj_ofReal, Complex.conj_ofReal]
+    rw [hfun]
+    exact memLp_KrepCont_affine hmpos hg hgc hδ hmg (by rw [hgim]; exact h0) (by rw [hgim]; exact hπlt)
+  have hMemB : MemLp (fun θ : ℝ => KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)) 2 volume := by
+    have hfun : (fun θ : ℝ => KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z))
+        = fun θ : ℝ => KrepCont m f ((θ : ℂ) + (-((Real.pi : ℂ) * z))) := by
+      funext θ; rw [sub_eq_add_neg]
+    rw [hfun]
+    exact memLp_KrepCont_affine hmpos hf hfc hδ hmf (by rw [hfim]; exact h0) (by rw [hfim]; exact hπlt)
+  rw [kmsFun]
+  exact norm_integral_conj_mul_le_l2 hMemA hMemB
+
 end QIQTH.Fock.BoostKMS
