@@ -257,8 +257,22 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
      UNCONDITIONAL `∃F` witness (RvD Def 3.4) for the wedge pair, axiom-free. **A4 is essentially COMPLETE: the
      free-field boost-KMS / Bisognano–Wichmann analytic input is fully machine-checked — no Hardy/Paley–Wiener,
      no Tomita–Takesaki, no axioms.** Full `QIQTH` rebuilds green (8677 jobs), budget 0.
-5. **REMAINING**: thread `stripKMSrvd_pair` over the wedge generators ⟹ `StripKMSrvd boostUnitary 𝒦_W` (closedness
-   to `𝒦_W` + `2π`↔`−2π` sign mirror) ⟹ remove `hKMS` from `qiqt_gr_from_wedge_kms_complete`.
+5. **REMAINING — THREADING `stripKMSrvd_pair` ⟹ `StripKMSrvd boostUnitary 𝒦_W`** (abstract functional-analysis
+   plumbing; the HARD ANALYSIS is done). `𝒦_W = closure(span_ℝ(wedgeGenSet))`, `wedgeGenSet = {KrepL2 f : supp f⊆
+   rightWedge, real, MemLp(Krep f)}`; `hKMS` is consumed on the whole closed submodule (via `h1_of_stripKMSrvd`
+   at arbitrary closed-submodule vectors), so the full extension is needed. Three sub-gaps:
+   - (a) **f-regularity / density**: `wedgeGenSet`'s `f` (supp⊆wedge, real, MemLp) is weaker than `stripKMSrvd_pair`'s
+     NICE `f` (continuous, compact supp, `δ`-margin). Need: `span_ℝ(nice KrepL2)` dense in `𝒦_W` (smooth-compact
+     wedge functions dense). [`memLp_Krep_boostTest` DONE — auto-discharges the boost-translate hypothesis.]
+   - (b) **sesquilinearity**: `⟪η,V_t ξ⟫` is sesquilinear ⟹ for `ξ=Σaᵢξᵢ, η=Σbⱼηⱼ` the witness is
+     `F = Σ conj(bⱼ)aᵢ F_{ξᵢηⱼ}` — `DiffContOnCl` + bound + edges preserved under finite ℝ-combos.
+   - (c) **closure/continuity**: `ξ_n→ξ, η_n→η` ⟹ `F_{ξ_nη_n} → F_{ξη}` UNIFORMLY on the strip (Cauchy–Schwarz
+     bound `‖F z‖ ≤ ‖η‖·‖ξ‖`, from the closed-strip `ε_0` ≤ `‖KrepL2 g‖‖KrepL2 f‖`) ⟹ `DiffContOnCl` (uniform
+     limit) + bound + boundary values pass to the limit. Plus the `2π`↔`−2π` sign mirror (`V_t=boostUnitary(−2π·)`).
+   ⟹ `StripKMSrvd boostUnitary 𝒦_W` ⟹ remove `hKMS` from `qiqt_gr_from_wedge_kms_complete`.
+   NOTE: this is laborious Hilbert-space plumbing (sesquilinear extension from a total set by continuity) — no
+   new hard analysis. If it proves too long, `stripKMSrvd_pair` alone is already the citable A4 result (the
+   explicit free-field boost-KMS witness, the genuine BW analytic content).
 
 ---
 
