@@ -1635,6 +1635,33 @@ theorem kmsFun_sub_left {m : ℝ} (hm : 0 < m) {f₁ f₂ g : V → ℂ}
   rw [he] at h
   rw [h]; ring
 
+/-- **`g`-slot subtraction identity**: `kmsFun m f (g₁−g₂) = kmsFun m f g₁ − kmsFun m f g₂` (from
+    `kmsFun_add_right`; `g₁−g₂` is again nice). -/
+theorem kmsFun_sub_right {m : ℝ} (hm : 0 < m) {f g₁ g₂ : V → ℂ}
+    (hf : Continuous f) (hfc : HasCompactSupport f) (hg₁ : Continuous g₁) (hg₁c : HasCompactSupport g₁)
+    (hg₂ : Continuous g₂) (hg₂c : HasCompactSupport g₂) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg₁ : ∀ x, g₁ x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg₂ : ∀ x, g₂ x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hg₁r : ∀ x, (starRingEnd ℂ) (g₁ x) = g₁ x)
+    (hg₂r : ∀ x, (starRingEnd ℂ) (g₂ x) = g₂ x)
+    (hfL : MemLp (Krep m f) 2 volume) (hg₁L : MemLp (Krep m g₁) 2 volume)
+    (hg₂L : MemLp (Krep m g₂) 2 volume) {z : ℂ} (hz0 : -1 ≤ z.im) (hz1 : z.im ≤ 0) :
+    kmsFun m f (g₁ - g₂) z = kmsFun m f g₁ z - kmsFun m f g₂ z := by
+  have hmg₁₂ : ∀ x, (g₁ - g₂) x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0 := by
+    intro x hx
+    by_cases h : g₁ x = 0
+    · exact hmg₂ x fun hc => hx (by rw [Pi.sub_apply, h, hc, sub_zero])
+    · exact hmg₁ x h
+  have hg₁₂r : ∀ x, (starRingEnd ℂ) ((g₁ - g₂) x) = (g₁ - g₂) x := by
+    intro x; rw [Pi.sub_apply, map_sub, hg₁r, hg₂r]
+  have h : kmsFun m f (g₁ - g₂ + g₂) z = kmsFun m f (g₁ - g₂) z + kmsFun m f g₂ z :=
+    kmsFun_add_right hm hf hfc (hg₁.sub hg₂) (hg₁c.sub hg₂c) hg₂ hg₂c hδ hmf hmg₁₂ hmg₂ hfr hg₁₂r hg₂r
+      hfL (memLp_Krep_sub hg₁ hg₁c hg₂ hg₂c hg₁L hg₂L) hg₂L hz0 hz1
+  have he : g₁ - g₂ + g₂ = g₁ := by ext x; simp only [Pi.add_apply, Pi.sub_apply]; ring
+  rw [he] at h
+  rw [h]; ring
+
 /-- **`L²`-norm of a one-particle vector as an integral**: `‖KrepL2 f‖ = √(∫‖Krep m f‖²)`. Via `inner_KrepL2`
     (`⟪KrepL2 f, KrepL2 f⟫ = ∫ conj(Krep f)·Krep f = ↑∫‖Krep f‖²`) and `inner_self_eq_norm_sq`. The bridge from
     the analytic strip bound (in `∫‖Krep‖²`) to the Hilbert norms `‖ξ‖,‖η‖` for the closure/threading argument. -/
