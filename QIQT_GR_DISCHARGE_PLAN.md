@@ -205,13 +205,16 @@ margin lemma is DONE (`b98dc63`).
    - **Top edge (`f(t)=⟪η,V_t ξ⟫`) DONE** (`55c8658`): `symm_edge_eq_shifted` + `symm_edge_eq_inner` — the
      symmetric integral `∫ conj(Krep g(θ+πt))·Krep f(θ−πt)` (= real-axis value of `F`) equals
      `⟪KrepL2 g, boostUnitary(2πt)(KrepL2 f)⟫`. Axiom-free.
-   - **Remaining A4**: (a) define the holomorphic `F(z)=∫ conj(KrepCont g(θ+πz̄))·KrepCont f(θ−πz) dθ` and
-     prove `F(t) =` the symmetric integral via `KrepCont_ofReal` (real-axis agreement); (b) the **bottom edge**
-     `F(t−i) = ⟪V_t ξ, η⟫` via `KrepCont_add_pi_I` (A3, the `iπ` conjugation) + conjugate symmetry; (c)
-     `DiffContOnCl` (holomorphy on the open strip — another dominated-derivative arg — + continuity to closure)
-     and boundedness (the *uniform-to-boundary* `s↦‖Ξ(·+iπs)‖₂` continuity is the one delicate piece; interior
-     `L²` is in hand via `memLp_KrepCont_strip`); (d) closedness to `𝒦_W`; then `oneParticleBW_wedge_complete`
-     ⟹ unconditional BW ⟹ remove `hKMS`. The genuine multi-fire finish.
+   - **`F` defined + top edge DONE** (`f4f9cb3`): `kmsFun m f g z := ∫ conj(KrepCont g(conj(θ+πz)))·KrepCont
+     f(θ−πz)`; `kmsFun_ofReal` (`F(t)=` symmetric integral via `KrepCont_ofReal`); `kmsFun_ofReal_eq_inner`
+     (`F(t)=⟪KrepL2 g, boostUnitary(2πt)(KrepL2 f)⟫`). Axiom-free.
+   - **Remaining A4**: (b) the **bottom edge** `F(t−i) = conj(F(t)) = ⟪V_t ξ, η⟫`: at `z=t−i`,
+     `conj(θ+π(t−i)) = (θ+πt)+iπ` and `θ−π(t−i) = (θ−πt)+iπ`, so `KrepCont_add_pi_I` (A3) collapses both
+     `KrepCont` to `conj(Krep …)`, giving `F(t−i)=∫ Krep g(θ+πt)·conj(Krep f(θ−πt)) = conj(F(t))` — needs `f,g`
+     real. (c) `DiffContOnCl` (holomorphy on the open strip — dominated-derivative arg — + continuity to
+     closure) and boundedness (*uniform-to-boundary* `s↦‖Ξ(·+iπs)‖₂` continuity is the one delicate piece;
+     interior `L²` in hand via `memLp_KrepCont_strip`); (d) closedness to `𝒦_W`; then
+     `oneParticleBW_wedge_complete` ⟹ unconditional BW ⟹ remove `hKMS`. The genuine multi-fire finish.
 
 **Honest scale:** discharging `StripKMSrvd` from here is a genuine multi-week-to-month real-analysis +
 Mathlib-infrastructure effort (Minkowski integral inequality is itself a Mathlib-worthy contribution). This is
