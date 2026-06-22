@@ -301,4 +301,31 @@ theorem KrepCont_add_pi_I (m : ℝ) {f : V → ℂ} (hf : ∀ x, (starRingEnd �
     congr 1
     exact kernel_add_pi_I m x θ
 
+/-! ### A2 (partial) — the uniform sup-bound on the strip -/
+
+/-- **A2 (sup-bound).** On the strip `0 ≤ λ ≤ π`, for `f` (continuous, compact support) supported in the right
+    wedge, the analytic continuation is bounded by the `L¹` norm of `f`:
+    `‖KrepCont m f (θ+iλ)‖ ≤ (1/√2)·∫‖f‖`. Immediate from the wedge-damping bound `‖K(ζ,x)‖ ≤ 1`
+    (`norm_kernel_le_one`) pushed through the integral. (This is the `L^∞`-on-strip half of the `H²(S_π)`
+    bound; the `L²`-in-`θ` decay — extending the real-axis `cosh⁻²` estimates to the strip — remains.) -/
+theorem norm_KrepCont_le {m : ℝ} (hm : 0 ≤ m) {f : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hsupp : ∀ x, f x ≠ 0 → 0 < x 1 - x 0 ∧ 0 < x 1 + x 0)
+    {θ lam : ℝ} (hlam0 : 0 ≤ lam) (hlamπ : lam ≤ Real.pi) :
+    ‖KrepCont m f ((θ : ℂ) + (lam : ℂ) * Complex.I)‖ ≤ (1 / Real.sqrt 2) * ∫ x, ‖f x‖ := by
+  have hsqrt : ‖(1 / Real.sqrt 2 : ℂ)‖ = 1 / Real.sqrt 2 := by
+    rw [norm_div, norm_one, Complex.norm_real, Real.norm_of_nonneg (Real.sqrt_nonneg 2)]
+  rw [KrepCont, norm_mul, hsqrt]
+  refine mul_le_mul_of_nonneg_left ?_ (by positivity)
+  calc ‖∫ x, kernel m x ((θ : ℂ) + (lam : ℂ) * Complex.I) * f x‖
+      ≤ ∫ x, ‖kernel m x ((θ : ℂ) + (lam : ℂ) * Complex.I) * f x‖ := norm_integral_le_integral_norm _
+    _ ≤ ∫ x, ‖f x‖ := by
+        refine integral_mono_of_nonneg (Filter.Eventually.of_forall fun x => norm_nonneg _)
+          (hf.norm.integrable_of_hasCompactSupport hfc.norm) (Filter.Eventually.of_forall fun x => ?_)
+        simp only [norm_mul]
+        by_cases hfx : f x = 0
+        · simp [hfx]
+        · obtain ⟨hx1, hx2⟩ := hsupp x hfx
+          exact mul_le_of_le_one_left (norm_nonneg _)
+            (norm_kernel_le_one hm hx1 hx2 hlam0 hlamπ θ)
+
 end QIQTH.Fock.WedgeAnalyticity

@@ -4665,5 +4665,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★★ A3: the iπ BOUNDARY CONJUGATION ψ_f(θ+iπ)=conj(ψ_f(θ))=conj(Krep m f θ) for
 -- REAL f (via kernel_add_pi_I: K(θ+iπ,x)=conj K(θ,x), from p_m(θ+iπ)=−p_m(θ) + integral_conj). This is what
 -- turns the KMS top edge ⟪η,V_t ξ⟫ into the bottom edge ⟪V_t ξ,η⟫ — the bottom-edge engine of StripKMSrvd.
+#print axioms QIQTH.Fock.WedgeAnalyticity.norm_KrepCont_le
+-- expected: standard only — ★★ A2 (sup-bound half): ‖KrepCont m f (θ+iλ)‖ ≤ (1/√2)·∫‖f‖ on the strip 0≤λ≤π for
+-- wedge-supported f (from the damping ‖K(ζ,x)‖≤1 pushed through the integral). The L^∞-on-strip half of the
+-- H²(S_π) bound; the L²-in-θ decay (strip extension of the cosh⁻² estimates) is the remaining analytic frontier.
 
 end QIQTH.AxiomAudit
