@@ -618,13 +618,17 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          (Krep m ⇑fS)` match is DEFEQ (`toFun`/`toLp` proof-irrelevance — no friction).  **THE ENTIRE CYCLIC REEH–SCHLIEDER
          DISCHARGE IS NOW MECHANICALLY ASSEMBLED, axiom-free, reduced to ONE named concrete fact.**
          NEXT — only **(ii) AMPLITUDE-NONZERO** `Krep m (bumpC 0 10) ≢ 0` (a continuous fn, so `≢ᵐ0 ⟺ ∃θ Krep θ≠0`).
-         **Cleanest route (separable + real-analytic):** the bump is a PRODUCT `bumpReal 0 10 = bump1 0(x⁰)·bump1 10(x¹)`, so
-         `f̂_M(bumpC)(p⁰,p¹)=A(p⁰)·B(p¹)` (`A,B` = 1D FTs of bumps, ENTIRE and `≢0` since `bump1≢0`).  On the shell
-         `Krep m (bumpC) θ = (1/√2)A(m coshθ)B(m sinhθ)`; `A(m cosh·)` is real-analytic in `θ` and `≢0` (`A` entire `≢0` ⟹
-         discrete zeros, but `m coshθ` sweeps `[m,∞)` ⟹ can't all be zeros), ditto `B(m sinh·)`, so the product `≢0` ⟹
-         `∃θ Krep θ≠0`.  (The naive `θ=0` value `(1/√2)bump1̂(m)·∫bump1` needs `bump1̂(m)≠0`, m-dependent — the separable route
-         avoids that.)  This is the irreducible real-analysis computation isolating the cyclic discharge; the separating side
-         (`NiceWedgeSeparating`, Pauli–Jordan) remains a parallel unattacked frontier.
+         **FACTORIZATION BUILT** (`deecc60`): `minkowskiFourier_bumpC` — `minkowskiFourier (bumpC cT cX) p =
+         (∫ e^{−ip₀y}bump1 cT(y)dy)·(∫ e^{ip₁y}bump1 cX(y)dy)` (Fubini `integral_fintype_prod_volume_eq_prod`, mirroring
+         `minkowskiFourier_gaussian`).  So `Krep m (bumpC cT cX) θ = (1/√2)·A(massShell m θ 0)·B(massShell m θ 1)` with
+         `A,B` the 1D bump Fourier integrals.  REMAINING: pick the witness point.  **Route A (θ=0 + positivity, needs a
+         small bump):** at `massShell m 0=(m,0)`, 2nd factor `=∫bump1 cX>0`; 1st factor `∫e^{−imy}bump1 0(y)dy` — real part
+         `∫cos(my)bump1>0` IF the bump radius `<π/(2m)` (then `cos>0` on supp).  The codebase `bump1=⟨1,2⟩` is FIXED radius 2
+         (works only for `m<π/4`); a clean general proof needs a small/​scaled bump → redefine `bumpNiceTest` with radius
+         `~min(1,π/(4(|m|+1)))` (margin `δ=c−2r`).  **Route B (fixed bump, separable real-analytic):** `A,B` entire `≢0`
+         (1D bump FT, `≢0` since `A(0)=∫bump1>0`); `A(m cosh·)`,`B(m sinh·)` real-analytic in `θ` with countable zeros, union
+         `≠ℝ` ⟹ `∃θ` both `≠0`.  Either way THE LAST CONCRETE FACT.  The separating side (`NiceWedgeSeparating`, Pauli–Jordan)
+         remains a parallel unattacked frontier.
          **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0` (its amplitude `≠0` somewhere), `8b+8c/8c′` ⟹ `𝓕≠0`
          a.e., feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
          EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness, the full
