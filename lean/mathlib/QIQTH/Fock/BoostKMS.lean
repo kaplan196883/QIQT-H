@@ -224,6 +224,52 @@ theorem continuous_kmsIntegrand_in_theta (m : ℝ) {f g : V → ℂ} (hf : Conti
       (Complex.continuous_conj.comp (by fun_prop)))).mul
     ((differentiable_KrepCont m hf hfc).continuous.comp (by fun_prop))
 
+/-- **`hF_int` — the `kmsFun` integrand is integrable in `θ`** at an interior strip point `z` (`−1<Im z<0`).
+    `‖integrand‖ = ‖reflKrep(θ+πz)‖·‖KrepCont f(θ−πz)‖ ≤ C_g·(C_f·exp(−(mσδf)·cosh(θ−π Re z)))` (the `g`-factor
+    bounded, the `f`-factor decaying, `σ=sin(−π Im z)>0`), dominated by an integrable translate of
+    `exp(−c·cosh)`. -/
+theorem integrable_kmsIntegrand {m : ℝ} (hmpos : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δf δg : ℝ}
+    (hδf : 0 < δf) (hδg : 0 < δg) (hmf : ∀ x, f x ≠ 0 → δf ≤ x 1 - x 0 ∧ δf ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δg ≤ x 1 - x 0 ∧ δg ≤ x 1 + x 0)
+    {z : ℂ} (hz0 : -1 < z.im) (hz1 : z.im < 0) :
+    Integrable (fun θ : ℝ =>
+      (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+        * KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)) := by
+  have hσ : 0 < Real.sin (-(Real.pi * z.im)) := sin_neg_pi_mul_pos hz0 hz1
+  set Cf : ℝ := 1 / Real.sqrt 2 * ∫ x, ‖f x‖ with hCf
+  set Cg : ℝ := 1 / Real.sqrt 2 * ∫ x, ‖g x‖ with hCg
+  have hCgnn : 0 ≤ Cg := by rw [hCg]; positivity
+  have hcf : 0 < m * Real.sin (-(Real.pi * z.im)) * δf := by positivity
+  have hdom : Integrable (fun θ : ℝ =>
+      Cg * (Cf * Real.exp (-(m * Real.sin (-(Real.pi * z.im)) * δf
+        * Real.cosh (θ - Real.pi * z.re))))) :=
+    (((integrable_exp_neg_const_mul_cosh hcf).comp_sub_right (Real.pi * z.re)).const_mul Cf).const_mul Cg
+  refine hdom.mono' (continuous_kmsIntegrand_in_theta m hf hfc hg hgc z).aestronglyMeasurable
+    (Filter.Eventually.of_forall fun θ => ?_)
+  have him_g : ((θ : ℂ) + (Real.pi : ℂ) * z).im = Real.pi * z.im := by simp
+  have him_f : ((θ : ℂ) - (Real.pi : ℂ) * z).im = -(Real.pi * z.im) := by simp
+  have hre_f : ((θ : ℂ) - (Real.pi : ℂ) * z).re = θ - Real.pi * z.re := by simp
+  rw [norm_mul]
+  have hgb : ‖(starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))‖ ≤ Cg := by
+    refine (norm_reflKrepCont_le hmpos.le hg hgc hmg (by rw [him_g]; nlinarith [Real.pi_pos])
+      (by rw [him_g]; nlinarith [Real.pi_pos])).trans ?_
+    rw [← hCg]
+    refine mul_le_of_le_one_right hCgnn (Real.exp_le_one_iff.mpr ?_)
+    rw [him_g]
+    nlinarith [mul_pos (mul_pos (mul_pos hmpos hσ) hδg)
+      (Real.cosh_pos ((θ : ℂ) + (Real.pi : ℂ) * z).re)]
+  have hfb : ‖KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)‖
+      ≤ Cf * Real.exp (-(m * Real.sin (-(Real.pi * z.im)) * δf
+        * Real.cosh (θ - Real.pi * z.re))) := by
+    have h := norm_KrepCont_le_exp_decay_gen hmpos.le hf hfc hmf
+      (by rw [him_f]; nlinarith [Real.pi_pos]) (by rw [him_f]; nlinarith [Real.pi_pos])
+    rw [← hCf, him_f, hre_f, neg_mul] at h
+    exact h
+  calc ‖(starRingEnd ℂ) (KrepCont m g _)‖ * ‖KrepCont m f _‖
+      ≤ Cg * (Cf * Real.exp (-(m * Real.sin (-(Real.pi * z.im)) * δf
+        * Real.cosh (θ - Real.pi * z.re)))) := mul_le_mul hgb hfb (norm_nonneg _) hCgnn
+
 /-- **★★★★ `StripKMSrvd` for a wedge generator pair, reduced to the analytic regularity of `kmsFun`.**
     For real wedge modes `ξ=KrepL2 f`, `η=KrepL2 g`, GIVEN only that the explicit KMS function `kmsFun m f g`
     is `DiffContOnCl` on the strip `{−1<Im z<0}` and bounded (`hDCC`, `hbd`), the `StripKMSrvd` `∃F` witness
