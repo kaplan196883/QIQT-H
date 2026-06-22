@@ -138,4 +138,21 @@ theorem hasDerivAt_kernel (m : ℝ) (x : V) (ζ : ℂ) :
     (hasDerivAt_minkowskiDotℂ_massShellℂ m x ζ).const_mul (-Complex.I)
   exact (Complex.hasDerivAt_exp _).comp ζ hin
 
+/-- The integrand-derivative value `K'(ζ,x) = K(ζ,x)·(−i·(m sinhζ·x₀ − m coshζ·x₁))`. -/
+def kernelDeriv (m : ℝ) (x : V) (ζ : ℂ) : ℂ :=
+  kernel m x ζ * (-Complex.I * ((m : ℂ) * Complex.sinh ζ * (x 0 : ℂ)
+    - (m : ℂ) * Complex.cosh ζ * (x 1 : ℂ)))
+
+/-- The full integrand `ζ ↦ K(ζ,x)·f(x)` is complex-differentiable, derivative `K'(ζ,x)·f(x)`
+    (the `h_diff` ingredient for the dominated parametric-derivative assembly). -/
+theorem hasDerivAt_kernel_mul (m : ℝ) (f : V → ℂ) (x : V) (ζ : ℂ) :
+    HasDerivAt (fun ζ => kernel m x ζ * f x) (kernelDeriv m x ζ * f x) ζ :=
+  (hasDerivAt_kernel m x ζ).mul_const (f x)
+
+/-- The kernel is continuous in `x` (for fixed `ζ`) — gives `ae`-strong-measurability of the integrand. -/
+theorem continuous_kernel_in_x (m : ℝ) (ζ : ℂ) : Continuous (fun x : V => kernel m x ζ) := by
+  refine Complex.continuous_exp.comp (continuous_const.mul ?_)
+  exact (continuous_const.mul (Complex.continuous_ofReal.comp (continuous_apply 0))).sub
+    (continuous_const.mul (Complex.continuous_ofReal.comp (continuous_apply 1)))
+
 end QIQTH.Fock.WedgeAnalyticity

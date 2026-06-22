@@ -4650,5 +4650,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.WedgeAnalyticity.hasDerivAt_kernel
 -- expected: standard only — ★★ A1b (pointwise): the kernel ζ↦exp(−i·p_m(ζ)·x) is entire in rapidity, with
 -- dK/dζ = K·(−i·(m sinhζ·x₀ − m coshζ·x₁)) (chain rule through exp). The per-x half of the holomorphy argument.
+#print axioms QIQTH.Fock.WedgeAnalyticity.hasDerivAt_kernel_mul
+-- expected: standard only — ★★ A1b-ii-α: the full integrand ζ↦K(ζ,x)·f(x) is complex-differentiable, deriv
+-- kernelDeriv·f(x) — the h_diff ingredient for the dominated parametric-derivative assembly of KrepCont holomorphy.
+#print axioms QIQTH.Fock.WedgeAnalyticity.continuous_kernel_in_x
+-- expected: standard only — ★ A1b-ii: continuity of the kernel in x (measurability of the integrand).
 
 end QIQTH.AxiomAudit
