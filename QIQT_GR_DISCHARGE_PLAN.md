@@ -241,15 +241,20 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
        (iii) **DONE** — `norm_kmsFunCut_diff_le`: `norm_le_of_strip_edges` on `Φ = kmsFunCut S − kmsFunCut R`
            ⟹ `‖kmsFunCut S z − kmsFunCut R z‖ ≤ ε_R` on the WHOLE closed strip, every `S≥R`.
            (= uniform-Cauchy of `{kmsFunCut n}` on the closed strip.)
-       (iv) **REMAINING** — `S→∞`: `kmsFunCut S z → kmsFun z` for each closed-strip `z`
-           (`tendsto_setIntegral_of_monotone`, needs the kmsFun integrand integrable at `z` — interior via
-           `integrable_kmsIntegrand`, EDGES `Im z∈{0,−1}` need the slice `L²` at arg-`Im∈{0,π}`: a
-           `memLp_KrepCont` extended to the CLOSED range via `KrepCont_ofReal` / `KrepCont_add_pi_I`). Then
-           `le_of_tendsto` on `norm_kmsFunCut_diff_le` ⟹ `‖kmsFun z − kmsFunCut R z‖ ≤ ε_R` on the closed strip.
-       (v) **REMAINING** — `TendstoUniformlyOn kmsFunCut kmsFun atTop (closedStrip)` (from (iv) + `ε_R→0`) +
-           `kmsFunCut_continuousOn` ⟹ **`ContinuousOn kmsFun (closedStrip)`** (`TendstoUniformlyOn.continuousOn`)
-           ⟹ `DiffContOnCl` ⟹ `stripKMSrvd_pair_of_regularity` fires.
+       (iv) **DONE** — `S→∞`: `kmsFunCut_tendsto_closed` (`kmsFunCut n z → kmsFun z`, via
+           `tendsto_setIntegral_of_monotone` + `integrable_kmsFun_integrand_closed` =
+           `memLp_KrepCont_affine_closed` slices at arg-`Im∈[0,π]` incl. edges) +
+           `norm_kmsFun_sub_kmsFunCut_le` (`le_of_tendsto` ⟹ `‖kmsFun z − kmsFunCut R z‖ ≤ ε_R` on closed strip).
+       (v) **★★★★★ DONE** — `kmsFun_continuousOn_closed` (`TendstoUniformlyOn` + `ε_R→0` +
+           `kmsFunCut_continuousOn` ⟹ `ContinuousOn kmsFun (closedStrip)`), then **`kmsFun_diffContOnCl`** =
+           full `DiffContOnCl ℂ kmsFun (im⁻¹'Ioo(−1)0)`. **THE ENTIRE ANALYTIC REGULARITY OF THE WITNESS IS DONE,
+           AXIOM-FREE, NO HARDY THEORY.**
      (GPT confirmed Vitali/Montel and the L²-slice/Riesz routes are NOT Lean-tractable; this annular route is.)
+   - **REMAINING (witness wiring)**: (a) global bound `∃M ∀z:ℂ, ‖kmsFun z‖≤M` for `stripKMSrvd_pair_of_regularity`'s
+     `hbd` — closed strip `≤ ε_0` (`norm_kmsFun_sub_kmsFunCut_le` at `R=0`, `kmsFunCut 0 z=0`); OUTSIDE the strip
+     `kmsFun z=0` (non-integrable junk) — OR weaken `hbd`/`StripKMSrvd` to a closed-strip bound (non-vacuity rests
+     on the CONTINUITY, not the global bound, per the `OneParticleBW:528` soundness note). (b) feed `kmsFun_diffContOnCl`
+     + the bound into `stripKMSrvd_pair_of_regularity` ⟹ the `StripKMSrvd` `∃F` witness for the wedge pair.
 5. Closedness of `StripKMSrvd` to `𝒦_W` + `2π`↔`−2π` sign mirror + threading ⟹ remove `hKMS`.
 
 ---
