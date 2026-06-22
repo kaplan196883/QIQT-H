@@ -598,12 +598,20 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          [`VectorFourier.integral_fourierIntegral_smul_eq_flip`+`flip_innerₗ`, `fourier_coe`]; then test against real
          `C^∞_c` `φ` ⟹ `⇑(𝓕_{L²}(g.toLp)) =ᵐ 𝓕_{int}g` (`ae_eq_zero_of_integral_contDiff_smul_eq_zero`, the brick-6b
          variational lemma — Mathlib's own `ker_toTemperedDistributionCLM_eq_bot` uses exactly this).
-         **CAVEAT (attempted 2026-06-23, reverted to keep green):** the rw chain hits instance-synthesis + coercion
-         friction at the `𝓢'` level (`𝓕`-notation ambiguity on `Lp` vs function; `(·:𝓢')` vs `toTemperedDistribution`;
-         distribution-FT instance args) — budget a focused fire for the coercion massage (or try the
-         Plancherel-against-Schwartz variant: `⟪𝓕_{L²}(g.toLp),(𝓕⁻φ form)⟫` via `inner_fourier_eq`+`toLp_fourierInv_eq`).
-         **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0`, `analyticOnNhd_fourier_Krep`+`8c`+the L²↔L¹ bridge
-         ⟹ `⇑(𝓕 N₀.vec)≠0` a.e., feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone.
+         **(8b-bridge L²↔L¹) BUILT** (`ee39689`): `integral_smul_fourierL2_eq` (the Schwartz pairing identity
+         `∫ φ•⇑(𝓕_{L²}(g.toLp)) = ∫ φ•𝓕_{int}g` via the tempered-distribution chain + mult formula) +
+         `fourierL2_toLp_ae_eq` (`⇑(𝓕_{L²}(g.toLp)) =ᵐ 𝓕_{int}g`, via `ae_eq_of_integral_contDiff_smul_eq` testing
+         against real `C^∞_c` packaged as Schwartz, mirroring brick 6b).  Mathlib had NO such lemma — built from scratch.
+         The friction (`𝓢'`-level coercions) was resolved: bind the Schwartz FT as `ftφ:𝓢(ℝ,ℂ)` (not `(𝓕 φ:ℝ→ℂ)`),
+         use `set`, term-mode `.trans` (not HO `rw`), `show` to beta-reduce, and pin `f'=𝓕 g` via an explicit
+         `Continuous (𝓕 g)`.
+         **★ ALL of brick 8's analytic content is now DONE** (decay, holomorphy, real-analyticity, `≠0` a.e., L²↔L¹).
+         NEXT — only **(8d)** assemble: a concrete `bumpC` witness `N₀:NiceTest m` with `Krep m N₀.f ≢ 0` (its amplitude
+         `≠0` somewhere — `K_gaussian_ne_zero` is the prototype; need it for a WEDGE bump), then
+         `fourierL2_toLp_ae_eq`+`analyticOnNhd_fourier_Krep`+`ae_ne_zero_of_analyticOnNhd` (8c) ⟹ `⇑(𝓕 N₀.vec)≠0` a.e.,
+         feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.  (`N₀.vec`
+         `= N₀.memLp.toLp (Krep m N₀.f)`, so `fourierL2_toLp_ae_eq` applies with `g=Krep m N₀.f`, `hg1`=`integrable_Krep`,
+         `hg2=N₀.memLp`.)
          **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0` (its amplitude `≠0` somewhere), `8b+8c/8c′` ⟹ `𝓕≠0`
          a.e., feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
          EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness, the full
