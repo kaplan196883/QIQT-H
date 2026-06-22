@@ -367,6 +367,15 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          research-grade formalization. **This is the cited frontier** (like Type-III); the codebase NEVER constructs
          `S` either. The easy containment is DONE: `closure(niceWedgeGenSet) ⊆ 𝒦_W_broad`
          (`closure_niceWedgeGenSet_subset`, `68494d6`, via `niceWedgeGenSet ⊆ wedgeGenSet`).
+         **★ FRONTIER NOW PRECISELY ISOLATED (2026-06-23):** all elementary structure is built axiom-free —
+         `niceWedgeGenSet` is a genuine ℝ-`Submodule` (`niceWedgeSubmodule`; `span_ℝ = it` via
+         `niceWedgeGenSet_span_eq`, from `NiceTest.zero`/`smul` + `Krep_smul`/`minkowskiFourier_smul`,
+         `4edd9bc`/`9681520`); its `ClosedSubmodule` carrier `niceWedgeClosedSubmodule` has coe
+         `= closure(niceWedgeGenSet)` (`98de1b1`); and **`oneParticleBW_niceWedge_of_standard`** (`503981d`)
+         proves `modUnitary = boost(2πt)` GIVEN ONLY `hsep` (separating) + `hcyc` (cyclic), via the
+         `niceWedgeStandardSubspace` constructor. So the ENTIRE remaining gap to an unconditional free-field
+         one-particle BW is exactly those **two named Reeh–Schlieder lattice identities** — every other input
+         (carrier, KMS, 𝒦-invariance, group structure) is machine-checked.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
