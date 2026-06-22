@@ -4717,5 +4717,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.BoostKMS.continuous_kmsIntegrand_in_theta
 -- expected: standard only — ★ A4: the kmsFun integrand is continuous in θ (KrepCont continuous ∘ continuous
 -- θ-maps + conj) — the hF_meas (measurability) ingredient for F's parametric-integral holomorphy.
+#print axioms QIQTH.Fock.BoostKMS.stripKMSrvd_pair_of_regularity
+-- expected: standard only — ★★★★ A4 CONSOLIDATION: StripKMSrvd for a wedge generator pair REDUCED TO the
+-- analytic regularity of kmsFun. Given only hDCC (DiffContOnCl on the strip) + hbd (bounded), the ∃F witness
+-- holds: F=kmsFun, top edge ⟪η,V_t ξ⟫ (kmsFun_ofReal_eq_inner), bottom edge ⟪V_t ξ,η⟫ (kmsFun_sub_I +
+-- inner_conj_symm), V_t=boostUnitary(2πt). PRECISELY ISOLATES THE REMAINING FRONTIER: everything (F, both KMS
+-- edges, Lp bridge, boost-orbit id) is DONE axiom-free; only DiffContOnCl+boundedness of one explicit function remains.
 
 end QIQTH.AxiomAudit

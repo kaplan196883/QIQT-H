@@ -153,4 +153,30 @@ theorem continuous_kmsIntegrand_in_theta (m : ℝ) {f g : V → ℂ} (hf : Conti
       (Complex.continuous_conj.comp (by fun_prop)))).mul
     ((differentiable_KrepCont m hf hfc).continuous.comp (by fun_prop))
 
+/-- **★★★★ `StripKMSrvd` for a wedge generator pair, reduced to the analytic regularity of `kmsFun`.**
+    For real wedge modes `ξ=KrepL2 f`, `η=KrepL2 g`, GIVEN only that the explicit KMS function `kmsFun m f g`
+    is `DiffContOnCl` on the strip `{−1<Im z<0}` and bounded (`hDCC`, `hbd`), the `StripKMSrvd` `∃F` witness
+    holds for this pair with `V_t = boostUnitary(2πt)`: `F=kmsFun`, top edge `F(t)=⟪η,V_t ξ⟫`
+    (`kmsFun_ofReal_eq_inner`), bottom edge `F(t−i)=⟪V_t ξ,η⟫` (`kmsFun_sub_I` + `inner_conj_symm`).
+
+    This **precisely isolates the entire remaining frontier** of the free-field BW/Hardy discharge: everything
+    — the construction of `F`, both KMS edges, the `Lp` bridge, the boost-orbit identification — is DONE and
+    axiom-free; what remains is the analytic regularity (`DiffContOnCl` + boundedness) of the single explicit
+    function `kmsFun m f g`, of which the holomorphy ingredients (`differentiable_kmsIntegrand`,
+    `continuous_kmsIntegrand_in_theta`, `integrable_cosh_mul_exp_neg_const_mul_cosh`) are in hand. -/
+theorem stripKMSrvd_pair_of_regularity (m : ℝ) {f g : V → ℂ}
+    (hf : MemLp (Krep m f) 2 volume) (hg : MemLp (Krep m g) 2 volume)
+    (hbf : ∀ t : ℝ, MemLp (Krep m (boostTest (-(2 * Real.pi * t)) f)) 2 volume)
+    (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x) (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x)
+    (hDCC : DiffContOnCl ℂ (kmsFun m f g) (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0))
+    (hbd : ∃ M : ℝ, ∀ z : ℂ, ‖kmsFun m f g z‖ ≤ M) :
+    ∃ F : ℂ → ℂ, DiffContOnCl ℂ F (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) ∧
+      (∃ M : ℝ, ∀ z : ℂ, ‖F z‖ ≤ M) ∧
+      (∀ t : ℝ, F t = inner ℂ (hg.toLp (Krep m g)) (boostUnitary (2 * Real.pi * t) (hf.toLp (Krep m f)))) ∧
+      (∀ t : ℝ, F ((t : ℂ) - Complex.I)
+        = inner ℂ (boostUnitary (2 * Real.pi * t) (hf.toLp (Krep m f))) (hg.toLp (Krep m g))) := by
+  refine ⟨kmsFun m f g, hDCC, hbd, fun t => kmsFun_ofReal_eq_inner m t hf hg (hbf t), fun t => ?_⟩
+  rw [kmsFun_sub_I m hfr hgr t, kmsFun_ofReal_eq_inner m t hf hg (hbf t)]
+  exact inner_conj_symm _ _
+
 end QIQTH.Fock.BoostKMS
