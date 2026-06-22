@@ -4680,5 +4680,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ A2 step 1: POINTWISE STRIP-DECAY. ‖KrepCont m f (θ+iλ)‖ ≤ (1/√2)(∫‖f‖)·exp(−(m sinλ δ)coshθ)
 -- for wedge-supported f (margin δ), 0≤λ≤π. The double-exponential θ-decay (interior λ) making KrepCont(·+iλ)∈L².
 -- Uses norm_kernel_eq (‖K‖=exp(m sinλ(sinhθ x₀−coshθ x₁))) + norm_kernel_le_exp_decay (margin ⟹ ≤exp(−c coshθ)).
+#print axioms QIQTH.Fock.WedgeAnalyticity.memLp_KrepCont_strip
+-- expected: standard only — ★★★ A2 step 2 (CORE): interior-λ L² MEMBERSHIP. For m>0, wedge-supported f,
+-- λ∈(0,π), θ↦KrepCont m f (θ+iλ) ∈ L²(dθ). By POINTWISE domination ‖KrepCont(θ+iλ)‖≤C·exp(−c coshθ)
+-- (norm_KrepCont_le_exp_decay) against the L² fn C·exp(−c cosh) (sq integrable via integrable_exp_neg_const_mul_cosh)
+-- + MemLp.mono'. NO Minkowski integral inequality — the previously-flagged Mathlib gap is fully off the path.
 
 end QIQTH.AxiomAudit

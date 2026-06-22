@@ -429,4 +429,39 @@ theorem norm_KrepCont_le_exp_decay {m : ℝ} (hm : 0 ≤ m) {f : V → ℂ} (hf 
     _ = (∫ x, ‖f x‖) * Real.exp (-(m * Real.sin lam * δ) * Real.cosh θ) := by
         rw [integral_const_mul]; ring
 
+/-- **A2 (step 2) — interior-`λ` `L²` membership.** For `m > 0`, wedge-supported `f` (continuous, compact
+    support, `tsupport f ⊆` open wedge), and `λ ∈ (0,π)`, the strip slice `θ ↦ KrepCont m f (θ+iλ)` is in
+    `L²(dθ)`. Proven by **pointwise domination** `‖KrepCont(θ+iλ)‖ ≤ C·exp(−c·coshθ)`
+    (`norm_KrepCont_le_exp_decay`, `c = m sinλ δ > 0`) against the `L²` function `C·exp(−c·cosh)` (whose square
+    `C²·exp(−2c·cosh)` is integrable, `integrable_exp_neg_const_mul_cosh`). **No Minkowski integral inequality.** -/
+theorem memLp_KrepCont_strip {m : ℝ} (hm : 0 < m) {f : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hsupp : ∀ x ∈ tsupport f, 0 < x 1 - x 0 ∧ 0 < x 1 + x 0)
+    {lam : ℝ} (hlam : 0 < lam) (hlamπ : lam < Real.pi) :
+    MemLp (fun θ : ℝ => KrepCont m f ((θ : ℂ) + (lam : ℂ) * Complex.I)) 2 volume := by
+  obtain ⟨δ, hδ, hmargin⟩ := exists_wedge_margin hfc hsupp
+  have hsinpos : 0 < Real.sin lam := Real.sin_pos_of_pos_of_lt_pi hlam hlamπ
+  have hcpos : 0 < m * Real.sin lam * δ := mul_pos (mul_pos hm hsinpos) hδ
+  set C : ℝ := 1 / Real.sqrt 2 * ∫ x, ‖f x‖ with hCdef
+  have hint : Integrable
+      (fun θ : ℝ => C ^ 2 * Real.exp (-(2 * (m * Real.sin lam * δ)) * Real.cosh θ)) := by
+    have heq : (fun θ : ℝ => C ^ 2 * Real.exp (-(2 * (m * Real.sin lam * δ)) * Real.cosh θ))
+        = (fun θ : ℝ => C ^ 2 * Real.exp (-(2 * (m * Real.sin lam * δ) * Real.cosh θ))) := by
+      funext θ; rw [neg_mul]
+    rw [heq]
+    exact (integrable_exp_neg_const_mul_cosh
+      (by positivity : (0 : ℝ) < 2 * (m * Real.sin lam * δ))).const_mul _
+  have hgmemLp : MemLp
+      (fun θ : ℝ => C * Real.exp (-(m * Real.sin lam * δ) * Real.cosh θ)) 2 volume := by
+    rw [memLp_two_iff_integrable_sq (by fun_prop)]
+    have hsqeq : (fun θ : ℝ => (C * Real.exp (-(m * Real.sin lam * δ) * Real.cosh θ)) ^ 2)
+        = (fun θ : ℝ => C ^ 2 * Real.exp (-(2 * (m * Real.sin lam * δ)) * Real.cosh θ)) := by
+      funext θ; rw [mul_pow, ← Real.exp_nat_mul]; congr 2; push_cast; ring
+    rw [hsqeq]; exact hint
+  refine hgmemLp.mono'
+    (((differentiable_KrepCont m hf hfc).continuous.comp (by fun_prop)).aestronglyMeasurable)
+    (Filter.Eventually.of_forall fun θ => ?_)
+  have hb := norm_KrepCont_le_exp_decay (θ := θ) hm.le hf hfc
+    (fun x hx => hmargin x (subset_tsupport f (Function.mem_support.mpr hx))) hlam.le hlamπ.le
+  rwa [← hCdef] at hb
+
 end QIQTH.Fock.WedgeAnalyticity
