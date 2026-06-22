@@ -8,6 +8,7 @@
 -/
 import QIQTH.Fock.OneParticleBW
 import QIQTH.Fock.WedgeAnalyticity
+import QIQTH.Fock.WienerL2
 import Mathlib.Analysis.Complex.LocallyUniformLimit
 
 noncomputable section
@@ -2777,6 +2778,23 @@ def NiceWedgeSeparating (m : ℝ) : Prop :=
 def NiceWedgeCyclic (m : ℝ) : Prop :=
   ∀ h : Lp ℂ 2 (volume : Measure ℝ),
     (∀ N : NiceTest m, ∫ θ, (starRingEnd ℂ) (Krep m N.f θ) * (h : ℝ → ℂ) θ = 0) → h = 0
+
+open scoped FourierTransform in
+open QIQTH.Fock.WienerL2 in
+/-- **★★★ `NiceWedgeCyclic` from the Wiener–Tauberian theorem.**  The wedge-totality Reeh–Schlieder
+    condition holds as soon as there is ONE nice generator `N₀` whose one-particle Fourier transform is
+    nonzero almost everywhere.  Proof: `h ⊥` every nice generator ⟹ `h ⊥` the whole rapidity-boost orbit
+    of `N₀` (boosts of a nice generator are nice generators, `NiceTest.vec_boost`; the orthogonality is the
+    integral via `inner_KrepL2_general`); then the complete L²-Wiener theorem
+    (`boost_orbit_total_of_fourier_ne_zero`) forces `h = 0`.  This reduces the entire cyclic Reeh–Schlieder
+    input to the SINGLE concrete analytic fact `𝓕(N₀.vec) ≠ 0` a.e. — no edge-of-the-wedge analyticity. -/
+theorem niceWedgeCyclic_of_fourier_ne_zero (m : ℝ) (N₀ : NiceTest m)
+    (hne : ∀ᵐ ξ ∂volume, (𝓕 N₀.vec : Lp ℂ 2 (volume : Measure ℝ)) ξ ≠ 0) :
+    NiceWedgeCyclic m := by
+  intro h hh
+  refine boost_orbit_total_of_fourier_ne_zero N₀.vec h hne (fun a => ?_)
+  rw [NiceTest.vec_boost]
+  exact (inner_KrepL2_general m (N₀.boost a).memLp h).trans (hh (N₀.boost a))
 
 open QIQTH.StandardSubspaceModular in
 /-- **★★★★★ THE free-field one-particle Bisognano–Wichmann, reduced to its TWO analytic Reeh–Schlieder inputs.**
