@@ -4697,5 +4697,10 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★★ A4: the KMS FUNCTION F defined (kmsFun = ∫ conj(KrepCont g(conj(θ+πz)))·KrepCont f(θ−πz)),
 -- and its REAL-AXIS (top-edge) value F(t) = ⟪KrepL2 g, boostUnitary(2πt)(KrepL2 f)⟫ (kmsFun_ofReal via KrepCont_ofReal,
 -- then symm_edge_eq_inner). The StripKMSrvd witness F with its top edge discharged; bottom edge + DiffContOnCl remain.
+#print axioms QIQTH.Fock.BoostKMS.kmsFun_sub_I
+-- expected: standard only — ★★★ A4: the KMS BOTTOM EDGE F(t−i)=conj(F(t)) for real f,g. At z=t−i the iπ-shift puts
+-- both KrepCont args at Im=+π, so KrepCont_add_pi_I (A3) collapses each to conj(Krep…): F(t−i)=∫Krep g(θ+πt)·conj(Krep f(θ−πt))
+-- =conj(F(t)). With the top edge + ⟪V_t ξ,η⟫=conj⟪η,V_t ξ⟫, this is StripKMSrvd's bottom edge f(t−i)=⟪V_t ξ,η⟫.
+-- BOTH KMS edges of the StripKMSrvd witness now proven; DiffContOnCl + boundedness + closedness-to-𝒦_W remain.
 
 end QIQTH.AxiomAudit

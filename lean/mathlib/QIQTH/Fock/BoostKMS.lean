@@ -94,4 +94,27 @@ theorem kmsFun_ofReal_eq_inner (m t : ℝ) {f g : V → ℂ}
       = inner ℂ (hg.toLp (Krep m g)) (boostUnitary (2 * Real.pi * t) (hf.toLp (Krep m f))) := by
   rw [kmsFun_ofReal, symm_edge_eq_inner m t hf hg hbf]
 
+/-- **The KMS bottom edge `F(t−i) = conj(F(t))`** (for real `f,g`). At `z=t−i` the `iπ`-shift puts both
+    `KrepCont` arguments at imaginary part `+π`, so `KrepCont_add_pi_I` (A3) collapses each to `conj(Krep …)`:
+    `F(t−i) = ∫ Krep g(θ+πt)·conj(Krep f(θ−πt)) dθ = conj(F(t))`. With the top edge (`kmsFun_ofReal_eq_inner`)
+    and `⟪V_t ξ,η⟫ = conj⟪η,V_t ξ⟫`, this is the bottom-edge requirement `f(t−i) = ⟪V_t ξ,η⟫` of `StripKMSrvd`. -/
+theorem kmsFun_sub_I (m : ℝ) {f g : V → ℂ} (hfr : ∀ x, (starRingEnd ℂ) (f x) = f x)
+    (hgr : ∀ x, (starRingEnd ℂ) (g x) = g x) (t : ℝ) :
+    kmsFun m f g ((t : ℂ) - Complex.I) = (starRingEnd ℂ) (kmsFun m f g (t : ℂ)) := by
+  have hL : kmsFun m f g ((t : ℂ) - Complex.I)
+      = ∫ θ, Krep m g (θ + Real.pi * t) * (starRingEnd ℂ) (Krep m f (θ - Real.pi * t)) := by
+    rw [kmsFun]
+    refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
+    dsimp only
+    have ag : (starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * ((t : ℂ) - Complex.I))
+        = ((θ + Real.pi * t : ℝ) : ℂ) + (Real.pi : ℂ) * Complex.I := by
+      simp only [map_add, map_mul, map_sub, Complex.conj_ofReal, Complex.conj_I]
+      push_cast; ring
+    have af : (θ : ℂ) - (Real.pi : ℂ) * ((t : ℂ) - Complex.I)
+        = ((θ - Real.pi * t : ℝ) : ℂ) + (Real.pi : ℂ) * Complex.I := by push_cast; ring
+    rw [ag, af, KrepCont_add_pi_I m hgr, KrepCont_add_pi_I m hfr, Complex.conj_conj]
+  rw [hL, kmsFun_ofReal, ← integral_conj]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
+  simp only [map_mul, Complex.conj_conj, mul_comm]
+
 end QIQTH.Fock.BoostKMS
