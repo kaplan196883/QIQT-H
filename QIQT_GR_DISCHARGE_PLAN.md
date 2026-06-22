@@ -210,23 +210,23 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
      every closed sub-strip `Im z ∈ [−1+ε,−ε]`. The ONLY subtlety is the edge limit `η→{0,−1}`, where the
      crude bound `N_f(η) ~ −log η` blows up logarithmically (so plain Hadamard `BddAbove` fails) but the TRUE
      edge value is `≤ B`.
-   - **★ ROUTE NAILED DOWN (GPT-5.5, 2026-06-22): θ-TRUNCATION + HADAMARD + DOMINATED CONVERGENCE** — sidesteps
-     the entire Hardy / continuity-to-boundary wall. Define `kmsFunCut R z := ∫_{θ∈[−R,R]} (same integrand)`.
-     For each fixed `R`, on the CLOSED strip:
-       (i) `kmsFunCut R` is holomorphic on the open strip AND continuous on the closed strip — compact θ-domain,
-           integrand entire/continuous in `(z,θ)` (no degenerating dominator needed);
-       (ii) `BddAbove`: trivially `‖kmsFunCut R z‖ ≤ 2R·C_f·C_g` from the PLAIN bound `‖KrepCont‖ ≤ C_f`
-            (the σ-damping factor `exp(−m sinη δ coshθ) ≤ 1` for `η∈[0,π]`) — **the log-blowup never appears
-            because we never integrate θ to ∞**;
-       (iii) edge bounds `≤ B`: truncated Cauchy–Schwarz (`∫_{[−R,R]}‖Krep g‖²·∫_{[−R,R]}‖Krep f‖² ≤
-            ‖KrepL2 g‖²·‖KrepL2 f‖²`, truncation only DEcreases the L² norm; translation-invariance for the
-            shift). Apply **`Complex.HadamardThreeLines.norm_le_interp_of_mem_verticalClosedStrip'`** to
-            `(B+ε)⁻¹·G_R`, `G_R(w):=kmsFunCut R (−i·w)` on `verticalStrip 0 1`, edge consts `1,1` ⟹
-            `‖kmsFunCut R z‖ ≤ B+ε`, `ε↓0` ⟹ `≤ B`, **for every `R`**.
-     Then `R→∞`: `kmsFunCut n z → kmsFun z` by dominated convergence (`tendsto_integral_of_dominated_convergence`,
-     indicators of `[−n,n]`, σ-damped L¹ dominator at fixed interior `z`), and `‖kmsFunCut n z‖ ≤ B` ∀n ⟹
-     `‖kmsFun z‖ ≤ B`. **No Hardy, no PL, no closed-strip continuity of the untruncated `F`.** (GPT also flagged
-     the half-line spectral-support idea is WRONG for a finite strip — avoided.) **Few-day, fully Mathlib-supported.**
+   - **★ ROUTE (GPT-5.5, 2026-06-22): θ-TRUNCATION + HADAMARD + DOMINATED CONVERGENCE** — sidesteps the entire
+     Hardy / continuity-to-boundary wall. `kmsFunCut R z := ∫_{θ∈[−R,R]} (same integrand)`. PROGRESS:
+       (i) **DONE** `kmsFunCut` def + **DiffContOnCl** on the strip (`kmsFunCut_differentiableAt`/`_differentiableOn`
+           = open-strip holomorphy via restricted-measure dominated-derivative; `kmsFunCut_continuousOn` =
+           continuity on the CLOSED strip via `continuousOn_of_dominated` with the CONSTANT dominator `C_g·C_f`
+           — the truncation payoff, no edge degeneration; `kmsFunCut_diffContOnCl` assembles them);
+       (ii) **DONE** `BddAbove`: `norm_kmsFunCut_le` gives `‖kmsFunCut R z‖ ≤ C_g·C_f·2R` on the closed strip
+            (plain bound `norm_KrepCont_le_const`, `exp(−m sinη δ coshθ) ≤ 1`) — log-blowup absent;
+       (iii) **TODO** edge bounds `≤ B`: truncated Cauchy–Schwarz (`∫_{[−R,R]}‖Krep g‖²·∫_{[−R,R]}‖Krep f‖² ≤
+            ‖KrepL2 g‖²·‖KrepL2 f‖²`, truncation only DEcreases the L² norm); **TODO** apply
+            **`Complex.HadamardThreeLines.norm_le_interp_of_mem_verticalClosedStrip'`** to `(B+ε)⁻¹·G_R`,
+            `G_R(w):=kmsFunCut R (−i·w)` on `verticalStrip 0 1` (rotation `−i·w` maps it to `im⁻¹'Ioo(−1)0`),
+            edge consts `1,1` ⟹ `‖kmsFunCut R z‖ ≤ B+ε`, `ε↓0` ⟹ `≤ B`, **for every `R`**.
+     Then **TODO** `R→∞`: `kmsFunCut n z → kmsFun z` by dominated convergence
+     (`tendsto_integral_of_dominated_convergence`, indicators of `[−n,n]`, σ-damped L¹ dominator at fixed
+     interior `z`), `‖kmsFunCut n z‖ ≤ B` ∀n ⟹ `‖kmsFun z‖ ≤ B`. **No Hardy, no PL.** (GPT flagged the
+     half-line spectral-support idea is WRONG for a finite strip — avoided.) **Fully Mathlib-supported.**
 5. Closedness of `StripKMSrvd` to `𝒦_W` + `2π`↔`−2π` sign mirror + threading ⟹ remove `hKMS`.
 
 ---
