@@ -268,11 +268,21 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
      `kmsFun_add_left` + `kmsFun_add_right` (kmsFun additive in `f` and `g` on the closed strip). Gives the
      difference identity `kmsFun_{F,G}−kmsFun_{F',G'} = kmsFun_{F−F',G}+kmsFun_{F',G−G'}`. Keystone bounds DONE:
      `norm_toLp_Krep_eq_sqrt` (‖KrepL2 f‖=√∫‖Krep f‖²) + `norm_kmsFun_le_norm_mul` (‖kmsFun z‖≤2‖KrepL2 g‖‖KrepL2 f‖).
-   - (c) **closure/continuity — REMAINING (the big piece)**: `ξ_n→ξ, η_n→η` (`ξ_n=KrepL2 F_n`, `F_n` nice) ⟹
-     `kmsFun_{F_n,G_n}` UNIFORMLY Cauchy on the strip (difference identity + `norm_kmsFun_le_norm_mul` +
-     `KrepL2` linearity); limit `F_{ξη}` is `DiffContOnCl` (uniform limit of holomorphic — Morera/Mathlib
-     `TendstoLocallyUniformlyOn.differentiableOn`) + bounded + boundary values `⟪η,V_t ξ⟫` (inner-product
-     continuity). Well-definedness (independent of approximant). Plus the `2π`↔`−2π` sign mirror.
+   - (c) **closure — REMAINING (the big piece); ROUTE NAILED DOWN (GPT-5.5 #3): `closedStrip →ᵇ ℂ` BCF**:
+       (c0) **difference bound** `‖kmsFun_{f₁,g₁}(z) − kmsFun_{f₂,g₂}(z)‖ ≤ 2‖KrepL2 g₁‖‖KrepL2 f₁−KrepL2 f₂‖
+            + 2‖KrepL2 g₁−KrepL2 g₂‖‖KrepL2 f₂‖` on the closed strip (difference identity via `kmsFun_add_*` +
+            `norm_kmsFun_le_norm_mul` + `KrepL2` linearity). [Needs niceness closed under `−`: continuous/compact
+            (`HasCompactSupport.sub`)/margin(union of supports)/real/MemLp — bundle a `WedgeTest` class.]
+       (c1) `kmsBCF F G : closedStrip →ᵇ ℂ := ⟨z ↦ kmsFun m F G z, closed-strip continuity, norm_kmsFun_le_norm_mul⟩`;
+       (c2) approximants via `mem_closure_iff_seq_limit`; `B n := kmsBCF (Fₙ) (Gₙ)` is `CauchySeq` (c0 + `ξₙ→ξ`);
+            `cauchySeq_tendsto_of_complete` (`closedStrip →ᵇ ℂ` is `CompleteSpace`) ⟹ limit `b`;
+       (c3) `F := stripExtend b` (= `b` on closed strip, `0` outside) ⟹ global bound `‖b‖`; `DifferentiableOn` on
+            the open strip via **`TendstoLocallyUniformlyOn.differentiableOn`** (`hUnifClosed.mono` to open, the
+            BIGGEST RISK = this lemma's API); `ContinuousOn` closed via `b.continuous`;
+       (c4) boundary values: pointwise conv (`TendstoUniformlyOn.tendsto_at`) + `Filter.Tendsto.inner` +
+            `(V a).continuous.tendsto` + the pair edge identity + `tendsto_nhds_unique`.
+     Well-definedness NOT needed (existential goal). AVOID abstract dense-extension (`DenseInducing.extend`) —
+     no ready Banach space of holomorphic-strip fns. Plus density of nice generators + `2π`↔`−2π` sign mirror.
    ⟹ `StripKMSrvd boostUnitary 𝒦_W` ⟹ remove `hKMS` from `qiqt_gr_from_wedge_kms_complete`.
    NOTE: this is laborious Hilbert-space plumbing (sesquilinear extension from a total set by continuity) — no
    new hard analysis. If it proves too long, `stripKMSrvd_pair` alone is already the citable A4 result (the
