@@ -391,15 +391,20 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          `ClosedSubmodule_sup_mulI_eq_top_of_dense` — for ANY `K` and `G ⊆ K` with dense ℂ-span, `K ⊔ K.mulI = ⊤`
          (reusable, axiom-free); `niceWedge_isCyclic_of_dense` is now a one-line instance; `oneParticleBW_niceWedge_of_dense`
          gives `modUnitary = boost` from `hsep` + `Dense(span_ℂ niceWedgeGenSet)`.
-         **★ SEPARATING DUAL `hsep ⟸ Kᗮ cyclic` ATTEMPTED — blocked on a DEEPER instance diamond.** The math is
-         clean (take `ᗮ` of `Kᗮ⊔(Kᗮ).mulI=⊤`: `inf_orthogonal`+`orthogonal_orthogonal_eq`+`mulI_orthogonal`+`top_orthogonal_eq_bot`
-         ⟹ `K⊓K.mulI=⊥`), and all four lemmas exist — but `ᗮ` resolves to TWO different `InnerProductSpace ℝ (Lp ℂ 2)`
-         instances: `L2.innerProductSpace` (in my goal) vs `ClosedSubmodule.instInnerProductSpaceReal` (in the framework
-         lemmas). Unlike the `mulI` diamond (cracked via term-mode, since `mulI` uses the unambiguous ℂ structure), this
-         ℝ-inner-product diamond on `ᗮ` defeats both `rw` AND term-mode unification. Fix needs explicit `@`-instance
-         pinning of `ᗮ` to `ClosedSubmodule.instInnerProductSpaceReal` throughout (or a defeq `convert`), a dedicated
-         instance-surgery pass. Reverted to keep green; the cyclic side is fully done, separating awaits this surgery
-         (then density of `Kᗮ` = opposite-wedge totality).
+         **★ SEPARATING DUAL `hsep ⟸ Kᗮ cyclic` ATTEMPTED — ROOT-CAUSED to a scoped-instance vs `Max` conflict.**
+         The math is clean and all four lemmas exist (`inf_orthogonal`+`orthogonal_orthogonal_eq`+`mulI_orthogonal`+
+         `top_orthogonal_eq_bot`). DIAGNOSIS: `ᗮ` needs `InnerProductSpace ℝ (Lp ℂ 2)`, which the StandardSubspace
+         framework provides as a `noncomputable scoped instance` inside `namespace ClosedSubmodule` (auto-named
+         `ClosedSubmodule.instInnerProductSpaceReal`; docstring says "`open ClosedSubmodule`" to use it). WITHOUT the
+         open, `ᗮ` in my goal picks a DIFFERENT `InnerProductSpace ℝ` than the framework lemmas → mismatch (defeats
+         `rw` and even type-ascribed term-mode). WITH `open [scoped] ClosedSubmodule`, the `ᗮ` instance aligns BUT the
+         open simultaneously breaks `⊔`/`Max` synthesis for `ClosedSubmodule` (`failed to synthesize Max`) and overloads
+         the `ᗮ` notation. So the anonymous scoped instance can only be brought in by an open that breaks the lattice
+         ops — a genuine Mathlib scoping tangle. RESOLUTION PATHS (dedicated pass): state the theorem with `@`-explicit
+         `ClosedSubmodule.orthogonal ... ClosedSubmodule.instInnerProductSpaceReal` (verbose; caller must match), or a
+         file-level `open scoped ClosedSubmodule` + re-verify all `⊔`/`⊓` uses, or a small Mathlib-side instance-priority
+         fix. Reverted to keep green; the CYCLIC side is fully done, separating awaits this scoping resolution (then
+         density of `Kᗮ` = opposite-wedge totality via the now-general engine).
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
