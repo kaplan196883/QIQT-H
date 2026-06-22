@@ -199,12 +199,24 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
      control of the two strip-slice `L²` norms**, the correct Hardy-space decomposition. Each slice is `L²`
      via `memLp_KrepCont_affine` (`Im = −π·z.im ∈ (0,π)`, real shift absorbed by `measurePreserving_add_right`).
      Axiom-free, budget 0.
-4. **Boundedness `∃M`** — REMAINING (the Hardy core): show the slice `L²` norm `N_f(η):=∫‖KrepCont f(·+iη)‖²`
-   is bounded **uniformly** for `η ∈ [0,π]`. Interior bound (σ-damped domination, `memLp_KrepCont_strip`/
-   `memLp_KrepCont_affine`) degenerates at `η∈{0,π}`; honest route = Hardy three-lines / subharmonicity of
-   `η↦log N_f(η)` with **finite** edges `N_f(0)=‖KrepL2 f‖²` (genuine one-particle norm, not the crude bound)
-   and `N_f(π)` (the `p(θ+iπ)=−p(θ)` reflected norm). Same estimate gives `ContinuousOn`-to-boundary.
-   **NOT a fundamental wall** — a genuine but achievable `L²`-interpolation lemma. The hardest remaining piece.
+4. **Boundedness `∃M`** — strategy now NAILED DOWN (apply the scalar max-principle to `kmsFun` itself, not
+   to the slice norms):
+   - **★★★ EDGE BOUNDS DONE** (`norm_kmsFun_ofReal_le`, `norm_kmsFun_sub_I_le` in BoostKMS): **both** boundary
+     lines `Im z ∈ {0,−1}` are bounded by the SAME `t`-independent constant `B = ‖KrepL2 g‖·‖KrepL2 f‖`
+     (top edge = `⟪KrepL2 g, boostUnitary(2πt) KrepL2 f⟫`, Cauchy–Schwarz + boost isometry; bottom edge =
+     `conj` of top via `kmsFun_sub_I`). Axiom-free.
+   - **KEY STRUCTURAL FACT**: the slice-norm bound `‖kmsFun z‖ ≤ √N_g(η)√N_f(η)` depends only on `η=Im z`
+     (θ-translation invariance), so `kmsFun` is **bounded in the unbounded (Re z) strip direction** and on
+     every closed sub-strip `Im z ∈ [−1+ε,−ε]`. The ONLY subtlety is the edge limit `η→{0,−1}`, where the
+     crude bound `N_f(η) ~ −log η` blows up logarithmically (so plain Hadamard `BddAbove` fails) but the TRUE
+     edge value is `≤ B`.
+   - **REMAINING**: (a) `ContinuousOn kmsFun (closedStrip)` — continuity of the parametric integral up to the
+     edge (the genuinely delicate piece, where the dominating function degenerates — needs an edge-tailored
+     dominated-convergence / equicontinuity argument, NOT the interior `h_bound`); then (b) feed `B`
+     (edge bounds) + `DiffContOnCl` into **Mathlib `Complex.HadamardThreeLines.norm_le_interp_of_mem_…'`**
+     (after the rotation `w↦−i·w` mapping `im⁻¹'Ioo(−1)0` to a `verticalStrip`) — with the `BddAbove` gap
+     closed by Phragmén–Lindelöf (`Analysis/Complex/PhragmenLindelof.lean`), since growth is only logarithmic
+     at the edge and bounded in `Re`. **NOT a fundamental wall**; Mathlib has both max-principle tools.
 5. Closedness of `StripKMSrvd` to `𝒦_W` + `2π`↔`−2π` sign mirror + threading ⟹ remove `hKMS`.
 
 ---
