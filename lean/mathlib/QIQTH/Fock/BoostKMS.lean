@@ -1129,4 +1129,95 @@ theorem tail_geom {R a θ : ℝ} (hθ : R < |θ|) : R < |θ + a| ∨ R < |θ - a
       _ = 2 * R := by ring
   linarith
 
+/-- **The full tail integral bound** `∫_{|θ|>R} ‖Krep g(θ+πt)‖·‖Krep f(θ−πt)‖ ≤ ε_R`, UNIFORM in `t`, with
+    `ε_R = T_g(R)·‖Krep f‖₂ + T_f(R)·‖Krep g‖₂`. Split the `{|θ|>R}` indicator by `tail_geom` into the two
+    shifted tails and apply `tail_term_le` to each. The scalar product's edge tail is `t`-uniform — the heart
+    of the annular-difference route to closed-strip continuity. -/
+theorem tail_integral_le (m t : ℝ) {f g : V → ℂ} (hf : MemLp (Krep m f) 2 volume)
+    (hg : MemLp (Krep m g) 2 volume) (R : ℝ) :
+    ∫ θ, Set.indicator {θ : ℝ | R < |θ|} (1 : ℝ → ℝ) θ
+        * (‖Krep m g (θ + Real.pi * t)‖ * ‖Krep m f (θ - Real.pi * t)‖)
+      ≤ Real.sqrt (∫ θ in {θ : ℝ | R < |θ|}, ‖Krep m g θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m f θ‖ ^ 2)
+        + Real.sqrt (∫ θ in {θ : ℝ | R < |θ|}, ‖Krep m f θ‖ ^ 2) * Real.sqrt (∫ θ, ‖Krep m g θ‖ ^ 2) := by
+  have hTg : MemLp (fun θ : ℝ => Krep m g (θ + Real.pi * t)) 2 volume := by
+    simpa [Function.comp_def] using
+      hg.comp_measurePreserving (measurePreserving_add_right volume (Real.pi * t))
+  have hTf : MemLp (fun θ : ℝ => Krep m f (θ - Real.pi * t)) 2 volume := by
+    have h := hf.comp_measurePreserving (measurePreserving_add_right volume (-(Real.pi * t)))
+    simpa [Function.comp_def, sub_eq_add_neg] using h
+  have hga : Integrable (fun θ => ‖Krep m g (θ + Real.pi * t)‖ ^ 2) volume :=
+    (memLp_two_iff_integrable_sq hTg.norm.aestronglyMeasurable).mp hTg.norm
+  have hfb : Integrable (fun θ => ‖Krep m f (θ - Real.pi * t)‖ ^ 2) volume :=
+    (memLp_two_iff_integrable_sq hTf.norm.aestronglyMeasurable).mp hTf.norm
+  have hwaesm : AEStronglyMeasurable
+      (fun θ => ‖Krep m g (θ + Real.pi * t)‖ * ‖Krep m f (θ - Real.pi * t)‖) volume :=
+    hTg.norm.aestronglyMeasurable.mul hTf.norm.aestronglyMeasurable
+  have hw : Integrable
+      (fun θ => ‖Krep m g (θ + Real.pi * t)‖ * ‖Krep m f (θ - Real.pi * t)‖) volume := by
+    refine Integrable.mono' (hga.add hfb) hwaesm (Filter.Eventually.of_forall fun θ => ?_)
+    simp only [Pi.add_apply]
+    rw [Real.norm_of_nonneg (by positivity)]
+    nlinarith [sq_nonneg (‖Krep m g (θ + Real.pi * t)‖ - ‖Krep m f (θ - Real.pi * t)‖),
+      norm_nonneg (Krep m g (θ + Real.pi * t)), norm_nonneg (Krep m f (θ - Real.pi * t))]
+  set w : ℝ → ℝ := fun θ => ‖Krep m g (θ + Real.pi * t)‖ * ‖Krep m f (θ - Real.pi * t)‖ with hwdef
+  -- the two shifted-tail term functions are integrable (bounded by w)
+  have hmeas1 : MeasurableSet {θ : ℝ | R < |θ + Real.pi * t|} :=
+    measurableSet_lt measurable_const (by fun_prop)
+  have hmeas2 : MeasurableSet {θ : ℝ | R < |θ - Real.pi * t|} :=
+    measurableSet_lt measurable_const (by fun_prop)
+  have hterm_int : ∀ s : Set ℝ, MeasurableSet s →
+      Integrable (fun θ => Set.indicator s (1 : ℝ → ℝ) θ * w θ) volume := by
+    intro s hs
+    have heq : (fun θ => Set.indicator s (1 : ℝ → ℝ) θ * w θ) = s.indicator w := by
+      funext θ
+      by_cases hθ : θ ∈ s
+      · rw [Set.indicator_of_mem hθ, Set.indicator_of_mem hθ, Pi.one_apply, one_mul]
+      · rw [Set.indicator_of_notMem hθ, Set.indicator_of_notMem hθ, zero_mul]
+    rw [heq]; exact hw.indicator hs
+  -- geometry: split the |θ|>R indicator into the two shifted tails
+  have hgeom : ∀ θ : ℝ,
+      Set.indicator {θ : ℝ | R < |θ|} (1 : ℝ → ℝ) θ * w θ
+      ≤ Set.indicator {θ : ℝ | R < |θ + Real.pi * t|} (1 : ℝ → ℝ) θ * w θ
+        + Set.indicator {θ : ℝ | R < |θ - Real.pi * t|} (1 : ℝ → ℝ) θ * w θ := by
+    intro θ
+    have hwnn : 0 ≤ w θ := by rw [hwdef]; positivity
+    have hi1 : 0 ≤ Set.indicator {θ : ℝ | R < |θ + Real.pi * t|} (1 : ℝ → ℝ) θ * w θ :=
+      mul_nonneg (Set.indicator_nonneg (fun _ _ => zero_le_one) θ) hwnn
+    have hi2 : 0 ≤ Set.indicator {θ : ℝ | R < |θ - Real.pi * t|} (1 : ℝ → ℝ) θ * w θ :=
+      mul_nonneg (Set.indicator_nonneg (fun _ _ => zero_le_one) θ) hwnn
+    by_cases hθ : θ ∈ {θ : ℝ | R < |θ|}
+    · rw [Set.indicator_of_mem hθ, Pi.one_apply, one_mul]
+      rcases tail_geom (a := Real.pi * t) (show R < |θ| from hθ) with h1 | h2
+      · rw [Set.indicator_of_mem (show θ ∈ {θ : ℝ | R < |θ + Real.pi * t|} from h1), Pi.one_apply, one_mul]
+        linarith
+      · rw [Set.indicator_of_mem (show θ ∈ {θ : ℝ | R < |θ - Real.pi * t|} from h2), Pi.one_apply, one_mul]
+        linarith
+    · rw [Set.indicator_of_notMem hθ, zero_mul]
+      linarith
+  -- integrate the geometry bound, then bound each term by tail_term_le
+  have hsplit : (∫ θ, Set.indicator {θ : ℝ | R < |θ|} (1 : ℝ → ℝ) θ * w θ)
+      ≤ (∫ θ, Set.indicator {θ : ℝ | R < |θ + Real.pi * t|} (1 : ℝ → ℝ) θ * w θ)
+        + ∫ θ, Set.indicator {θ : ℝ | R < |θ - Real.pi * t|} (1 : ℝ → ℝ) θ * w θ := by
+    rw [← integral_add (hterm_int _ hmeas1) (hterm_int _ hmeas2)]
+    refine integral_mono_of_nonneg (Filter.Eventually.of_forall fun θ => ?_)
+      ((hterm_int _ hmeas1).add (hterm_int _ hmeas2)) (Filter.Eventually.of_forall hgeom)
+    rw [hwdef]; exact mul_nonneg (Set.indicator_nonneg (fun _ _ => zero_le_one) θ) (by positivity)
+  refine hsplit.trans ?_
+  gcongr ?_ + ?_
+  · -- term 1 (indicator on g-shift +πt)
+    have h := tail_term_le m hg hf R (Real.pi * t) (-(Real.pi * t))
+    refine le_of_eq_of_le (integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)) h
+    show Set.indicator {θ : ℝ | R < |θ + Real.pi * t|} (1 : ℝ → ℝ) θ * w θ
+      = Set.indicator {θ : ℝ | R < |θ + Real.pi * t|} (1 : ℝ → ℝ) θ
+        * (‖Krep m g (θ + Real.pi * t)‖ * ‖Krep m f (θ + -(Real.pi * t))‖)
+    simp only [hwdef]; rw [sub_eq_add_neg]
+  · -- term 2 (indicator on f-shift −πt), product commuted
+    have h := tail_term_le m hf hg R (-(Real.pi * t)) (Real.pi * t)
+    refine le_of_eq_of_le (integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)) h
+    show Set.indicator {θ : ℝ | R < |θ - Real.pi * t|} (1 : ℝ → ℝ) θ * w θ
+      = Set.indicator {θ : ℝ | R < |θ + -(Real.pi * t)|} (1 : ℝ → ℝ) θ
+        * (‖Krep m f (θ + -(Real.pi * t))‖ * ‖Krep m g (θ + Real.pi * t)‖)
+    simp only [hwdef, sub_eq_add_neg]
+    rw [mul_comm (‖Krep m g (θ + Real.pi * t)‖) (‖Krep m f (θ + -(Real.pi * t))‖)]
+
 end QIQTH.Fock.BoostKMS
