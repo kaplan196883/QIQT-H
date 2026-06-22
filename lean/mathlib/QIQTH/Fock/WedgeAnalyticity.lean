@@ -527,6 +527,40 @@ theorem norm_KrepCont_le_exp_decay {m : ℝ} (hm : 0 ≤ m) {f : V → ℂ} (hf 
     _ = (∫ x, ‖f x‖) * Real.exp (-(m * Real.sin lam * δ) * Real.cosh θ) := by
         rw [integral_const_mul]; ring
 
+/-- **Pointwise strip-decay of `deriv KrepCont`.** For wedge-supported `f` (margin `δ`) and `0≤Im ζ≤π`,
+    `‖deriv(KrepCont m f) ζ‖ ≤ (1/√2)·|m|·cosh(Re ζ)·exp(−c·cosh(Re ζ))·∫(|x₀|+|x₁|)‖f‖` (`c=m sin(Im ζ)δ`).
+    The `z`-derivative norm bound: `cosh(Re ζ)·exp(−c·cosh(Re ζ))` decay (× a finite constant). -/
+theorem norm_deriv_KrepCont_le_exp_decay {m : ℝ} (hm : 0 ≤ m) {f : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) {δ : ℝ}
+    (hmargin : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    {ζ : ℂ} (him0 : 0 ≤ ζ.im) (himπ : ζ.im ≤ Real.pi) :
+    ‖deriv (KrepCont m f) ζ‖ ≤ 1 / Real.sqrt 2 * (|m| * Real.cosh ζ.re
+      * Real.exp (-(m * Real.sin ζ.im * δ) * Real.cosh ζ.re) * ∫ x, (|x 0| + |x 1|) * ‖f x‖) := by
+  have hsqrt : ‖(1 / Real.sqrt 2 : ℂ)‖ = 1 / Real.sqrt 2 := by
+    rw [norm_div, norm_one, Complex.norm_real, Real.norm_of_nonneg (Real.sqrt_nonneg 2)]
+  rw [deriv_KrepCont_eq m hf hfc, norm_mul, hsqrt]
+  refine mul_le_mul_of_nonneg_left ?_ (by positivity)
+  calc ‖∫ x, kernelDeriv m x ζ * f x‖
+      ≤ ∫ x, ‖kernelDeriv m x ζ * f x‖ := norm_integral_le_integral_norm _
+    _ ≤ ∫ x, (|m| * Real.cosh ζ.re * Real.exp (-(m * Real.sin ζ.im * δ) * Real.cosh ζ.re))
+          * ((|x 0| + |x 1|) * ‖f x‖) := by
+        refine integral_mono_of_nonneg (Filter.Eventually.of_forall fun x => norm_nonneg _)
+          (((((by fun_prop : Continuous fun x : V => |x 0| + |x 1|).mul hf.norm)).integrable_of_hasCompactSupport
+            (hfc.norm.mul_left)).const_mul _) (Filter.Eventually.of_forall fun x => ?_)
+        simp only [norm_mul]
+        by_cases hfx : f x = 0
+        · simp [hfx]
+        · obtain ⟨hx1, hx2⟩ := hmargin x hfx
+          calc ‖kernelDeriv m x ζ‖ * ‖f x‖
+              ≤ (Real.exp (-(m * Real.sin ζ.im * δ) * Real.cosh ζ.re)
+                  * (|m| * Real.cosh ζ.re * (|x 0| + |x 1|))) * ‖f x‖ :=
+                mul_le_mul_of_nonneg_right (norm_kernelDeriv_le_exp_decay hm hx1 hx2 him0 himπ)
+                  (norm_nonneg _)
+            _ = (|m| * Real.cosh ζ.re * Real.exp (-(m * Real.sin ζ.im * δ) * Real.cosh ζ.re))
+                  * ((|x 0| + |x 1|) * ‖f x‖) := by ring
+    _ = |m| * Real.cosh ζ.re * Real.exp (-(m * Real.sin ζ.im * δ) * Real.cosh ζ.re)
+          * ∫ x, (|x 0| + |x 1|) * ‖f x‖ := by rw [integral_const_mul]
+
 /-- **A2 (step 2) — interior-`λ` `L²` membership.** For `m > 0`, wedge-supported `f` (continuous, compact
     support, `tsupport f ⊆` open wedge), and `λ ∈ (0,π)`, the strip slice `θ ↦ KrepCont m f (θ+iλ)` is in
     `L²(dθ)`. Proven by **pointwise domination** `‖KrepCont(θ+iλ)‖ ≤ C·exp(−c·coshθ)`
