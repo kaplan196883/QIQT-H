@@ -193,15 +193,17 @@ margin lemma is DONE (`b98dc63`).
 1. **Pointwise strip-decay bound — DONE** (`f32adc0`): `norm_kernel_eq` (exact modulus),
    `norm_kernel_le_exp_decay`, `norm_KrepCont_le_exp_decay`
    (`‖KrepCont m f (θ+iλ)‖ ≤ (1/√2)(∫‖f‖)·exp(−(m sinλ δ)coshθ)`). Axiom-free, budget 0.
-2. **Interior-`λ` `L²` membership — NEXT** `MemLp (fun θ => KrepCont m f (θ+iλ)) 2 volume` for `λ∈(0,π)`
-   (`sinλ>0`): dominate `‖KrepCont(·+iλ)‖ ≤ g` with `g θ = C'·exp(−c coshθ)` (step 1) and show `MemLp g 2`
-   (`g` bounded `≤C'` and `g² = C'²exp(−2c coshθ)` integrable). Need the Mathlib lemma for "bounded + `L¹`/sq-
-   integrable ⟹ `MemLp 2`" (`memLp_top_inter`? or `MemLp.mono'` against an `L²` `g`; build `MemLp g 2` from
-   `eLpNorm` finiteness / `Integrable (g^2)`). Then `MemLp.mono'` for `KrepCont`. (Endpoints `Krep`/`conj`.)
-3. **A4**: KMS function `F`, `DiffContOnCl`+boundedness (the *uniform-to-boundary* bound is the one delicate
-   piece left — `s↦‖Ξ(·+iπs)‖₂` continuous on `[0,1]`), the two edges via the `Lp` bridge, closedness to
-   `𝒦_W`, then thread up to remove `hKMS`. *(Minkowski's integral inequality is no longer on the critical path;
-   only the boundary-uniformity of the `L²` norm remains delicate.)*
+2. **Interior-`λ` `L²` membership — DONE** (`3635e54`): `memLp_KrepCont_strip` —
+   `MemLp (fun θ => KrepCont m f (θ+iλ)) 2 volume` for `λ∈(0,π)`, via `MemLp.mono'` against
+   `C·exp(−c·cosh)` (sq integrable). **Minkowski gap fully off the critical path.** Axiom-free, budget 0.
+   **★ PHASE A2 CORE COMPLETE** (sup-bound, decay block, margin, pointwise decay, interior-λ MemLp). Endpoints
+   `λ=0,π` are `Krep`/`conj` via existing `MemLp`/A3 if needed.
+3. **A4 (the remaining finish)**: KMS function `F`, `DiffContOnCl`+boundedness (the *uniform-to-boundary*
+   bound — `s↦‖Ξ(·+iπs)‖₂` continuous on `[0,1]` — is the one delicate piece left; the interior `L²` bound is
+   now in hand via `memLp_KrepCont_strip`), the two edges via the `Lp` bridge (concrete `∫…dθ` ↔
+   `MeasureTheory.L2.inner_def` + `boostUnitary` = rapidity translation), closedness to `𝒦_W`, then thread up
+   to remove `hKMS`. This is the genuine multi-fire finish integrating with the abstract `Lp`/`StandardSubspace`
+   layer.
 
 **Honest scale:** discharging `StripKMSrvd` from here is a genuine multi-week-to-month real-analysis +
 Mathlib-infrastructure effort (Minkowski integral inequality is itself a Mathlib-worthy contribution). This is
