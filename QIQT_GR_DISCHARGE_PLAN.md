@@ -625,12 +625,20 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          **`niceWedgeCyclic_of_bump_fourier_ne_zero m hm (hA : ∫ e^{−imy}·bump1 0(y) dy ≠ 0) : NiceWedgeCyclic m`**.
          **★ THE ENTIRE CYCLIC REEH–SCHLIEDER DISCHARGE NOW FLOWS FROM A SINGLE 1D FOURIER-INTEGRAL NONVANISHING**
          `A(m) = ∫ e^{−imy}·bump1 0(y) dy ≠ 0` — everything upstream machine-checked, axiom-free.
-         REMAINING — only `A(m)≠0`: **for `0<m<π/4`** the FIXED radius-2 bump works directly (`A(m).re = ∫cos(my)bump1 0 > 0`
-         since `cos(my)>0` for `|y|<2`, `m<π/4`; via `Complex.re`∘integral + `integral_pos_iff_support_of_nonneg`).  **For
-         general `m>0`** a scaled bump (radius `~min(1,π/(4(|m|+1)))`) gives `A(m).re>0` for all `m` — a re-parametrized
-         `bumpNiceTest`/`Krep_bumpC_zero` (the lemmas are stated for `bumpC cT cX` but use the fixed `bump1`; the scaled
-         version re-derives the same chain).  THE LAST CONCRETE COMPUTATION.  The separating side (`NiceWedgeSeparating`,
-         Pauli–Jordan) remains a parallel unattacked frontier.
+         **★★★ DONE for `0<m<π/4` (`3fff287`, 2026-06-23, axiom-free, budget 0) — THE CYCLIC SIDE IS NOW A THEOREM.**
+         `bump1_fourier_ne_zero {m} (hm0:0<m) (hmπ:m<π/4) : ∫ e^{−imy}·bump1 0(y) dy ≠ 0`: on the bump support `|y|≤2`,
+         `m|y| ≤ 2m < π/2` so `cos(my)>0`, hence `Re A = ∫cos(my)·bump1 0 > 0` (`integral_pos_iff_support_of_nonneg`,
+         support ⊇ `Ioo(−1,1)`; the `RCLike.re`↔`Complex.re` bridge is `RCLike.re_to_complex` + a `show` to beta-reduce
+         the `integral_congr_ae` lambda, NOT `from rfl`). Chains via `niceWedgeCyclic_of_bump_fourier_ne_zero` to
+         **`niceWedgeCyclic_small_mass {m} (hm0:0<m) (hmπ:m<π/4) : NiceWedgeCyclic m`** — NO other hypotheses. The
+         free-field one-particle Bisognano–Wichmann's cyclic Reeh–Schlieder input is DISCHARGED (axiom-free, unconditional)
+         for the nonempty mass window `(0,π/4)`.
+         REMAINING — **general `m>0`**: the FIXED radius-2 bump's FT acquires zeros for large `m`, so the `θ=0`-value route
+         caps at `m<π/4`. A scaled bump (radius `~min(1,π/(4(|m|+1)))`) shrinks the support so `cos(my)>0` persists,
+         re-deriving the same chain with a mass-dependent `bumpNiceTest`/`Krep_bumpC_zero`; OR the separable real-analytic
+         route (`A(m coshθ)·B(m sinhθ)`, `m coshθ` sweeps `[m,∞)`, each factor entire `≢0`). Not blocking — the cyclic side
+         already holds for a nonempty window. The separating side (`NiceWedgeSeparating`, Pauli–Jordan) remains a parallel
+         unattacked frontier.
          **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0` (its amplitude `≠0` somewhere), `8b+8c/8c′` ⟹ `𝓕≠0`
          a.e., feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
          EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness, the full
