@@ -179,6 +179,18 @@ damping bound, **A3** `iπ` boundary conjugation, **A2 sup-bound**. These are ge
 2. **A4 KMS-function assembly** — additionally needs the concrete-`∫` ↔ abstract-`Lp`-inner-product bridge and
    the `boostUnitary` translation action threaded through, then closedness extension to `𝒦_W`.
 
+**Building blocks landed toward the frontier** (axiom-free, budget 0): `norm_KrepCont_le` (A2 sup-bound,
+`59deb45`); `sq_div_eight_le_cosh` + `integrable_exp_neg_const_mul_cosh` (A2 decay building block — the
+`θ`-integrability the interior-`λ` decay reduces to, `c11291e`).
+
+**Concrete next-step ladder (each a self-contained sub-project):**
+1. **Minkowski's integral inequality (`L²`)** `‖∫_x F(·,x) dx‖₂ ≤ ∫_x ‖F(·,x)‖₂ dx` — prove from scratch
+   (duality against `g∈L²` + Fubini + Cauchy–Schwarz). *Mathlib-worthy in its own right.* THE gate to A2-`L²`.
+2. **Strip `L²` bound** (A2 finish): combine Minkowski + `integrable_exp_neg_const_mul_cosh` (interior `λ`) +
+   the real-axis `cosh⁻²` decay (`schwartz_Krep_decay_sq`) at the endpoints, uniformly in `λ∈[0,π]`.
+3. **A4**: KMS function `F`, its `DiffContOnCl`+boundedness, the two edges via the `Lp` bridge, closedness to
+   `𝒦_W`, then thread up to remove `hKMS`.
+
 **Honest scale:** discharging `StripKMSrvd` from here is a genuine multi-week-to-month real-analysis +
 Mathlib-infrastructure effort (Minkowski integral inequality is itself a Mathlib-worthy contribution). This is
 the same class of "cited frontier" boundary as the Araki/Type-III continuum work. The analytic skeleton built
