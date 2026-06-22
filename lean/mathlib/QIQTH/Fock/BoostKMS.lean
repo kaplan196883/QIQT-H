@@ -2428,6 +2428,24 @@ theorem niceWedge_isCyclic_of_total_integral (m : ℝ)
     htotal h fun N => (inner_KrepL2_general m N.memLp h).symm.trans (hh N)
 
 open QIQTH.StandardSubspaceModular in
+/-- **★★ Cyclicity from a SINGLE generator's boost-orbit** (the major simplification of the cyclic frontier):
+    the nice-core wedge subspace is cyclic as soon as the complex span of the rapidity-boost orbit
+    `{boostUnitary a (N₀.vec) : a ∈ ℝ}` of just ONE nice generator is dense in `L²(ℝ)`.  Because the boost acts on
+    `Krep` by rapidity TRANSLATION (`Krep(boostTest a f) θ = Krep f (θ+a)`) and `boostTest` preserves niceness,
+    the whole boost orbit lies in `niceWedgeGenSet`; so its dense span forces `Dense(span_ℂ niceWedgeGenSet)` ⟹
+    cyclic.  This reduces the wedge-totality frontier to the totality of the TRANSLATES of one on-shell amplitude
+    — the Wiener-Tauberian condition `FT(KrepL2 f₀) ≠ 0` a.e. (no edge-of-the-wedge analyticity). -/
+theorem niceWedge_isCyclic_of_boost_orbit_dense (m : ℝ) (N₀ : NiceTest m)
+    (hdense : Dense (Submodule.span ℂ (Set.range (fun a : ℝ => boostUnitary a N₀.vec))
+      : Set (Lp ℂ 2 (volume : Measure ℝ)))) :
+    niceWedgeClosedSubmodule m ⊔ (niceWedgeClosedSubmodule m).mulI = ⊤ := by
+  refine niceWedge_isCyclic_of_dense m (Dense.mono ?_ hdense)
+  apply SetLike.coe_subset_coe.mpr
+  apply Submodule.span_mono
+  rintro ξ ⟨a, rfl⟩
+  exact boostUnitary_mapsTo_niceWedgeGenSet m a ⟨N₀, rfl⟩
+
+open QIQTH.StandardSubspaceModular in
 /-- **`v ∈ K.mulI ⟹ I • v ∈ K`**: the `mulI` membership direction, via `mem_mapEquiv_iff` + `I⁻¹ = -I` + the
     real-subspace closure (`I•v = (-1)•((-I)•v)`).  Uses the unambiguous ℂ `scalarSMulCLE` — NO ℝ-instance
     tangle (unlike the `ᗮ` route).  The engine for the DIRECT separating reduction. -/
