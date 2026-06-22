@@ -2096,6 +2096,79 @@ theorem niceWedgeGenSet_add_mem {m : ℝ} {ξ η : Lp ℂ 2 (volume : Measure �
   obtain ⟨N₂, rfl⟩ := hη
   exact ⟨N₁.add N₂, N₁.vec_add N₂⟩
 
+/-! ### The nice-core wedge subspace is boost-invariant (for `hInv` in the BW discharge) -/
+
+/-- The Lorentz boost as a homeomorphism of `V` (a continuous linear equivalence on `ℝ²`). -/
+noncomputable def boostHomeo (a : ℝ) : V ≃ₜ V :=
+  (lorentzBoostLE a).toContinuousLinearEquiv.toHomeomorph
+
+theorem coe_boostHomeo (a : ℝ) : ⇑(boostHomeo a) = lorentzBoost a := by
+  funext z
+  show (lorentzBoostLE a).toContinuousLinearEquiv.toHomeomorph z = lorentzBoost a z
+  have hz : ((lorentzBoostLE a).toContinuousLinearEquiv.toHomeomorph) z = lorentzBoostₗ a z := rfl
+  rw [hz, lorentzBoostₗ_apply]
+
+theorem continuous_lorentzBoost (a : ℝ) : Continuous (lorentzBoost a) :=
+  coe_boostHomeo a ▸ (boostHomeo a).continuous
+
+/-- **Lightcone `−` coordinate scales by `e^{−a}` under the boost**: `(Λ_a z)₁ − (Λ_a z)₀ = e^{−a}(z₁ − z₀)`. -/
+theorem lorentzBoost_lc_sub (a : ℝ) (z : V) :
+    lorentzBoost a z 1 - lorentzBoost a z 0 = Real.exp (-a) * (z 1 - z 0) := by
+  rw [lorentzBoost_one, lorentzBoost_zero, ← Real.cosh_sub_sinh]; ring
+
+/-- **Lightcone `+` coordinate scales by `e^{a}` under the boost**: `(Λ_a z)₁ + (Λ_a z)₀ = e^{a}(z₁ + z₀)`. -/
+theorem lorentzBoost_lc_add (a : ℝ) (z : V) :
+    lorentzBoost a z 1 + lorentzBoost a z 0 = Real.exp a * (z 1 + z 0) := by
+  rw [lorentzBoost_one, lorentzBoost_zero, ← Real.cosh_add_sinh]; ring
+
+/-- **The boost of a nice test is again nice** (the standard wedge-localization core is boost-invariant).
+    `f := boostTest(−a) N.f`; the wedge margin `δ` rescales to `δ·e^{−|a|} > 0` (the boost scales the lightcone
+    coords by `e^{∓a}`), continuity/compact-support transport through the boost homeomorphism, realness and `L²`
+    are preserved (`memLp_Krep_boostTest` via `Krep_boost`). -/
+def NiceTest.boost {m : ℝ} (N : NiceTest m) (a : ℝ) : NiceTest m where
+  f := boostTest (-a) N.f
+  cont := N.cont.comp (continuous_lorentzBoost (-a))
+  cpt := by
+    have he : boostTest (-a) N.f = N.f ∘ ⇑(boostHomeo (-a)) := by rw [coe_boostHomeo]; rfl
+    rw [he]; exact N.cpt.comp_homeomorph (boostHomeo (-a))
+  δ := N.δ * Real.exp (-|a|)
+  hδ := mul_pos N.hδ (Real.exp_pos _)
+  margin := fun x hx => by
+    have hy : N.f (lorentzBoost (-a) x) ≠ 0 := hx
+    obtain ⟨hm1, hm2⟩ := N.margin (lorentzBoost (-a) x) hy
+    rw [lorentzBoost_lc_sub, neg_neg] at hm1
+    rw [lorentzBoost_lc_add] at hm2
+    have step : ∀ {s P : ℝ}, N.δ ≤ Real.exp s * P → Real.exp (-|a|) ≤ Real.exp (-s) →
+        N.δ * Real.exp (-|a|) ≤ P := by
+      intro s P hsP hexp
+      calc N.δ * Real.exp (-|a|) ≤ N.δ * Real.exp (-s) :=
+            mul_le_mul_of_nonneg_left hexp N.hδ.le
+        _ = Real.exp (-s) * N.δ := by ring
+        _ ≤ Real.exp (-s) * (Real.exp s * P) := mul_le_mul_of_nonneg_left hsP (Real.exp_pos _).le
+        _ = P := by rw [← mul_assoc, ← Real.exp_add, neg_add_cancel, Real.exp_zero, one_mul]
+    refine ⟨step hm1 (Real.exp_le_exp.mpr (neg_le_neg (le_abs_self a))), ?_⟩
+    have hexp2 : Real.exp (-|a|) ≤ Real.exp (-(-a)) := by
+      rw [neg_neg]; exact Real.exp_le_exp.mpr (neg_abs_le a)
+    exact step hm2 hexp2
+  real := fun x => N.real (lorentzBoost (-a) x)
+  memLp := by
+    have heq : Krep m (boostTest (-a) N.f) = (Krep m N.f) ∘ (fun θ => θ + (-a)) := by
+      funext θ; exact Krep_boost m (-a) N.f θ
+    rw [heq]
+    exact N.memLp.comp_measurePreserving (measurePreserving_add_right volume (-a))
+
+/-- **`NiceTest.boost` realizes the boost unitary**: `boostUnitary a N.vec = (N.boost a).vec` (`boostUnitary_KrepL2`). -/
+theorem NiceTest.vec_boost {m : ℝ} (N : NiceTest m) (a : ℝ) :
+    boostUnitary a N.vec = (N.boost a).vec :=
+  boostUnitary_KrepL2 m a N.f N.memLp (N.boost a).memLp
+
+/-- **★ The nice-core wedge generating set is boost-closed**: `boostUnitary a` maps `niceWedgeGenSet m` into
+    itself.  Supplies the `𝒦`-invariance `hInv` for the `+2π` nice-core BW discharge (`oneParticleBW_niceWedge`). -/
+theorem boostUnitary_mapsTo_niceWedgeGenSet (m a : ℝ) :
+    Set.MapsTo (boostUnitary a) (niceWedgeGenSet m) (niceWedgeGenSet m) := by
+  rintro ξ ⟨N, rfl⟩
+  exact ⟨N.boost a, (N.vec_boost a).symm⟩
+
 open scoped BoundedContinuousFunction in
 /-- **★★★ (c3+c4) The RvD Def 3.4 KMS witness extended to the CLOSURE of the nice generators**, axiom-free.
     For `ξ, η ∈ closure (niceWedgeGenSet m)` there is a bounded function `F`, holomorphic on the open strip and
