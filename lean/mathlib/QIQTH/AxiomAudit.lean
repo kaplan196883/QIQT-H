@@ -4702,5 +4702,9 @@ namespace QIQTH.AxiomAudit
 -- both KrepCont args at Im=+π, so KrepCont_add_pi_I (A3) collapses each to conj(Krep…): F(t−i)=∫Krep g(θ+πt)·conj(Krep f(θ−πt))
 -- =conj(F(t)). With the top edge + ⟪V_t ξ,η⟫=conj⟪η,V_t ξ⟫, this is StripKMSrvd's bottom edge f(t−i)=⟪V_t ξ,η⟫.
 -- BOTH KMS edges of the StripKMSrvd witness now proven; DiffContOnCl + boundedness + closedness-to-𝒦_W remain.
+#print axioms QIQTH.Fock.BoostKMS.differentiable_reflKrepCont
+-- expected: standard only — ★★ A4 (holomorphy ingredient): the reflected amplitude u↦conj(KrepCont g(conj u)) is
+-- ENTIRE (Schwarz reflection conj∘F∘conj holo, via DifferentiableAt.star_conj + differentiable_KrepCont). The g-factor
+-- H^# of the kmsFun integrand — confirms F's holomorphy is reachable (DiffContOnCl not blocked).
 
 end QIQTH.AxiomAudit

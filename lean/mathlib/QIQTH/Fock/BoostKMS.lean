@@ -117,4 +117,16 @@ theorem kmsFun_sub_I (m : ℝ) {f g : V → ℂ} (hfr : ∀ x, (starRingEnd ℂ)
   refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
   simp only [map_mul, Complex.conj_conj, mul_comm]
 
+/-- **The reflected amplitude `u ↦ conj(KrepCont g(conj u))` is entire** (Schwarz reflection: `conj∘F∘conj`
+    is holomorphic when `F` is). Via `DifferentiableAt.star_conj` + `differentiable_KrepCont`. This is the `g`
+    factor `H^#` of the KMS-function integrand — the holomorphy ingredient for `kmsFun`. -/
+theorem differentiable_reflKrepCont (m : ℝ) {g : V → ℂ} (hg : Continuous g)
+    (hgc : HasCompactSupport g) :
+    Differentiable ℂ (fun u : ℂ => (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) u))) := by
+  have hg' : Differentiable ℂ (KrepCont m g) := differentiable_KrepCont m hg hgc
+  intro z
+  have h := (hg' ((starRingEnd ℂ) z)).star_conj
+  rw [Complex.conj_conj] at h
+  exact h
+
 end QIQTH.Fock.BoostKMS
