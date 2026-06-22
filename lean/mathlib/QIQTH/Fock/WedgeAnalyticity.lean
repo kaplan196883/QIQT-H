@@ -772,6 +772,14 @@ theorem KrepCont_add (m : ℝ) {f₁ f₂ : V → ℂ} (hf₁ : Continuous f₁)
       + Complex.exp (-Complex.I * minkowskiDotℂ (massShellℂ m ζ) x) * f₂ x
   rw [Pi.add_apply]; ring
 
+/-- **`Krep` (real axis) is additive in the test function** — `KrepCont_add` at real argument (`KrepCont_ofReal`).
+    Used for the `MemLp` closure of the wedge-test class under `+`/`−` in the span-closure threading. -/
+theorem Krep_add (m : ℝ) {f₁ f₂ : V → ℂ} (hf₁ : Continuous f₁) (hf₁c : HasCompactSupport f₁)
+    (hf₂ : Continuous f₂) (hf₂c : HasCompactSupport f₂) (θ : ℝ) :
+    Krep m (f₁ + f₂) θ = Krep m f₁ θ + Krep m f₂ θ := by
+  rw [← KrepCont_ofReal, ← KrepCont_ofReal, ← KrepCont_ofReal,
+    KrepCont_add m hf₁ hf₁c hf₂ hf₂c (θ : ℂ)]
+
 /-- **Affine-argument `L²` membership on the CLOSED strip** `Im c₀ ∈ [0,π]`. Extends `memLp_KrepCont_affine`
     to the two boundary heights: at `Im c₀ = 0` the slice is a real-axis translate `Krep m f(·+Re c₀)`
     (`KrepCont_ofReal`), at `Im c₀ = π` it is the conjugate `conj(Krep m f(·+Re c₀))` (`KrepCont_add_pi_I`,
