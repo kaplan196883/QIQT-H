@@ -132,9 +132,17 @@ The single analytic engine: **`p(θ+iπ) = −p(θ)`** (since `cosh(θ+iπ)=−c
   (`K(θ+iπ,x)=conj K(θ,x)`) and **`KrepCont_add_pi_I`** (for real `f`, `ψ_f(θ+iπ)=conj(Krep m f θ)`). The
   `iπ` boundary conjugation = the KMS bottom-edge engine. Axiom-free, budget 0.
 
-- **A2 NEXT.** The `H²(S_π)` uniform strip bound: `‖ψ_f(·+iλ)‖_{L²(dθ)} ≤ C` for `0≤λ≤π`. Combines A1c's
-  pointwise damping with an `L²` argument; L2Plancherel.lean (Route B) may help. Needed for the
-  Cauchy–Schwarz boundedness of the KMS function `F` and to make `Ξ(·+iλ) ∈ L²`.
+- **A2 (sup-bound half) DONE** (commit `59deb45`): `norm_KrepCont_le` — `‖KrepCont m f (θ+iλ)‖ ≤ (1/√2)·∫‖f‖`
+  uniformly on `0≤λ≤π` for wedge-supported `f`, from the damping `‖K(ζ,x)‖≤1` through the integral.
+  Axiom-free, budget 0.
+  - **A2 (L² decay) — THE HARD ANALYTIC FRONTIER, still open.** Needed: `‖KrepCont m f (·+iλ)‖_{L²(dθ)} ≤ C`
+    (uniform in `λ∈[0,π]`). The existing decay infra (`schwartz_Krep_decay_sq`, `cosh⁻²`) is **real-axis
+    only**; extending it to complex rapidity is genuinely hard. The favorable fact: for `x` strictly inside
+    the wedge (compact support ⟹ bounded away from the boundary), the damping exponent
+    `m sinλ(sinhθ x₀ − coshθ x₁) ≲ −c·coshθ` gives *double-exponential* decay in `θ` for `λ∈(0,π)` — so the
+    `L²` bound should hold and even be easy pointwise; the formalization needs Minkowski's integral
+    inequality (`‖∫_x K(·,x)f(x)‖_{L²_θ} ≤ ∫_x ‖K(·,x)‖_{L²_θ}|f(x)|`) and a `θ`-integrability estimate for
+    `exp(−c coshθ)`. **Assess Mathlib support for Minkowski's integral inequality before committing.**
 
 - **A4 (the hard finish).** Assemble `StripKMSrvd boostUnitary 𝒦_W`. Architecture:
   1. **KMS function** `F_{η,ξ}(z) := ∫ H^#(θ+πz)·Ξ(θ−πz) dθ` (`H^#(ζ):=conj(H(conj ζ))`, `Ξ,H` the
