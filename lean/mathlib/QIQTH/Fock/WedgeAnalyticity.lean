@@ -431,6 +431,10 @@ theorem abs_le_cosh (θ : ℝ) : |θ| ≤ Real.cosh θ := by
   have h2 : 2 * |θ| ≤ Real.exp |θ| := Real.two_mul_le_exp
   linarith
 
+/-- `0 < sin(−π·w)` for `−1 < w < 0` (the decay rate `σ = sin(−π·Im z)` is positive on the open strip). -/
+theorem sin_neg_pi_mul_pos {w : ℝ} (h0 : -1 < w) (h1 : w < 0) : 0 < Real.sin (-(Real.pi * w)) :=
+  Real.sin_pos_of_pos_of_lt_pi (by nlinarith [Real.pi_pos]) (by nlinarith [Real.pi_pos])
+
 /-- **The shifted `cosh·exp` made uniform.** For `|s| ≤ S`, `0 < c₀ ≤ c`:
     `cosh(θ+s)·exp(−c·cosh(θ+s)) ≤ e^S·cosh θ·exp(−c₀·e^{−S}·cosh θ)`. The core estimate that turns the
     shifting-peak strip decay (`s = πRe z` over a `z`-ball) into a `z`-uniform integrable-in-`θ` bound. -/
