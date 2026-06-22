@@ -50,4 +50,29 @@ theorem niceWedgeCyclic_bump (m : ℝ) (hm : m ≠ 0)
     (fourierL2_Krep_ne_zero
       ((bumpC_hasCompactSupport 0 10).toSchwartzMap (bumpC_contDiff 0 10)) hm hKrep)
 
+/-- **The Minkowski–Fourier transform of a product bump factorizes** into two 1D bump Fourier integrals
+    (Fubini over `Fin 2 → ℝ`, `integral_fintype_prod_volume_eq_prod`).  The entry point for the amplitude
+    nonvanishing: each factor is a 1D Fourier integral of a `ContDiffBump`. -/
+theorem minkowskiFourier_bumpC (cT cX : ℝ) (p : V) :
+    minkowskiFourier (bumpC cT cX) p
+      = (∫ y : ℝ, Complex.exp (-Complex.I * (p 0 * y : ℝ)) * (↑(bump1 cT y) : ℂ))
+        * (∫ y : ℝ, Complex.exp (Complex.I * (p 1 * y : ℝ)) * (↑(bump1 cX y) : ℂ)) := by
+  rw [minkowskiFourier]
+  have key : (fun x : V =>
+        Complex.exp (-Complex.I * ((minkowskiDot p x : ℝ) : ℂ)) * bumpC cT cX x)
+      = fun x : V => ∏ i : Fin 2,
+          (![fun y : ℝ => Complex.exp (-Complex.I * (p 0 * y : ℝ)) * (↑(bump1 cT y) : ℂ),
+             fun y : ℝ => Complex.exp (Complex.I * (p 1 * y : ℝ)) * (↑(bump1 cX y) : ℂ)] i) (x i) := by
+    funext x
+    rw [Fin.prod_univ_two]
+    simp only [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons, bumpC, bumpReal,
+      minkowskiDot, Complex.ofReal_mul, Complex.ofReal_sub]
+    rw [show (-Complex.I * ((p 0 : ℂ) * (x 0 : ℂ) - (p 1 : ℂ) * (x 1 : ℂ)))
+        = -Complex.I * ((p 0 : ℂ) * (x 0 : ℂ)) + Complex.I * ((p 1 : ℂ) * (x 1 : ℂ)) by ring,
+      Complex.exp_add]
+    push_cast
+    ring
+  rw [key, integral_fintype_prod_volume_eq_prod, Fin.prod_univ_two]
+  simp only [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons]
+
 end QIQTH.Fock.CyclicWitness
