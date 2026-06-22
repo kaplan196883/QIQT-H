@@ -121,12 +121,16 @@ The single analytic engine: **`p(θ+iπ) = −p(θ)`** (since `cosh(θ+iπ)=−c
     entire in ζ, `dK/dζ = K·(−i·(m sinhζ·x₀ − m coshζ·x₁))`, chain rule through `exp`). Axiom-free, budget 0.
   - **A1b-ii-α DONE** (commit `980a4c4`): `kernelDeriv`; `hasDerivAt_kernel_mul` (the `h_diff` ingredient —
     `ζ↦K(ζ,x)·f(x)` differentiable, deriv `kernelDeriv·f(x)`); `continuous_kernel_in_x` (measurability).
-  - **A1b-ii-β NEXT:** the ball-domination bound + the assembly. For `f` continuous with compact support,
-    pick `R = ‖ζ₀‖+ε`; on `ball ζ₀ ε` use `‖cosh ζ‖,‖sinh ζ‖ ≤ e^R` and `|x i| ≤ M` on `tsupport f` (from
-    `IsCompact.isBounded`) to get `‖kernelDeriv m x ζ‖ ≤ C` on `supp f`, hence (case split on `f x = 0`)
-    `‖kernelDeriv m x ζ·f x‖ ≤ C·‖f x‖ =: bound x` (integrable, `f∈L¹`). Feed
-    `hasDerivAt_integral_of_dominated_loc_of_deriv_le` (𝕜=ℂ) ⟹ `HasDerivAt (KrepCont m f) … ζ₀` for every
-    `ζ₀` ⟹ `Differentiable ℂ (KrepCont m f)` (entire). [Strip-specific `H²` norm bound is A2, separate.]
+  - **A1b-ii-β DONE** (commit `14dabdb`): `norm_exp_le_exp_norm`, `norm_cosh_le`, `norm_sinh_le`,
+    `norm_term_le`, `norm_kernel_le`, `norm_kernelDeriv_le`, `continuous_kernelDeriv_in_x`,
+    `hasDerivAt_KrepCont`, **`differentiable_KrepCont`** (KrepCont entire for `f` continuous + compact
+    support, via the dominated parametric-derivative theorem over ℂ + the ball-domination from
+    `norm_kernelDeriv_le` and `‖x‖≤M` on `tsupport f`). Axiom-free, budget 0.
+  - **★ PHASE A1 COMPLETE** — foundations (A1a), damping bound (A1c), holomorphy (A1b).
+
+- **A2 NEXT.** The `H²(S_π)` uniform strip bound: `‖ψ_f(·+iλ)‖_{L²(dθ)} ≤ ‖ψ_f‖₂` (or a uniform `C`) for
+  `0≤λ≤π`, the wedge-supported analytic class. (Combines A1c's pointwise damping with an `L²`/Plancherel or
+  dominated argument; the L2Plancherel.lean machinery from Route B may help.)
   - **A1c DONE** (commit pending, `WedgeAnalyticity.lean`): `cosh_ofReal_add_ofReal_mul_I` /
     `sinh_ofReal_add_ofReal_mul_I` (real/imag split at complex rapidity) + `norm_kernel_le_one` — the
     wedge-damping bound `‖exp(−i·p_m(θ+iλ)·x)‖ ≤ 1` for `0<x₁−x₀`, `0<x₁+x₀`, `0≤λ≤π`, `m≥0` (the
