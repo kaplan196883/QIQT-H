@@ -511,4 +511,16 @@ theorem kmsFun_differentiableAt {m : ℝ} (hmpos : 0 < m) {f g : V → ℂ} (hf 
     (Filter.Eventually.of_forall fun θ z _ => hasDerivAt_kmsIntegrand_z m hf hfc hg hgc θ z)
   exact key.2.differentiableAt
 
+/-- **`kmsFun m f g` is holomorphic on the whole open strip** `{−1<Im z<0}` — the `DifferentiableOn`
+    half of `DiffContOnCl`, an immediate corollary of `kmsFun_differentiableAt` (the strip is open, so
+    `DifferentiableAt` at each point gives `DifferentiableWithinAt`). -/
+theorem kmsFun_differentiableOn {m : ℝ} (hmpos : 0 < m) {f g : V → ℂ} (hf : Continuous f)
+    (hfc : HasCompactSupport f) (hg : Continuous g) (hgc : HasCompactSupport g) {δ : ℝ} (hδ : 0 < δ)
+    (hmf : ∀ x, f x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0)
+    (hmg : ∀ x, g x ≠ 0 → δ ≤ x 1 - x 0 ∧ δ ≤ x 1 + x 0) :
+    DifferentiableOn ℂ (kmsFun m f g) (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) := by
+  intro z hz
+  rw [Set.mem_preimage, Set.mem_Ioo] at hz
+  exact (kmsFun_differentiableAt hmpos hf hfc hg hgc hδ hmf hmg hz.1 hz.2).differentiableWithinAt
+
 end QIQTH.Fock.BoostKMS

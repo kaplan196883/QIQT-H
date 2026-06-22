@@ -185,10 +185,14 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
      exp(−κ cosh θ)` (`z`-independent), via `norm_two_term_le` + `norm_term1_le` + `norm_term2_le` +
      `prod_norm_bound_cosh_shift` + `exists_sin_min`/`cosh_shift_exp_le`.
    - `bound_integrable` (the bound = const·`cosh·exp`, integrable — `integrable_cosh_mul_exp_neg_const_mul_cosh`).
-   - **NEXT (the only remaining holomorphy step):** the dominated-theorem CALL
-     `hasDerivAt_integral_of_dominated_loc_of_deriv_le` with the six (now-proven) hypotheses + the `σ_min`/`R`
-     ball extraction ⟹ `HasDerivAt kmsFun … z₀` for interior `z₀` ⟹ differentiable on the open strip.
-3. **Continuity-to-closure** ⟹ `DiffContOnCl`.
+   - **★★★★★ HOLOMORPHY DONE** (`4ce35ad`): `kmsFun_differentiableAt` — `kmsFun m f g` is `DifferentiableAt`
+     every interior strip point (`−1<Im z₀<0`), via the dominated-derivative theorem with all six hypotheses +
+     the `ε`-ball / `σ_min`(`exists_sin_min`)/`R` extraction. **The hardest analytic content is machine-checked.**
+     ⟹ `DifferentiableOn ℂ kmsFun (openStrip)` immediately.
+3. **Continuity-to-closure + boundedness** ⟹ `DiffContOnCl` + `∃M`. Both are the **boundary** difficulty:
+   `ContinuousOn kmsFun (closedStrip)` and `‖kmsFun z‖ ≤ M` need the parametric integral controlled up to the
+   boundary `Im z ∈ {0,−1}`, where the `σ`-damping degenerates (`σ=sin(−π·Im z)→0`) and the `L²`/oscillatory
+   mechanism takes over (`Krep`'s real-axis `cosh⁻²` decay + A3). The remaining genuine analytic frontier.
 4. **Boundedness `∃M`** — `s↦‖KrepCont f(·+iπs)‖₂` continuous/bounded on `[0,1]` (Cauchy–Schwarz gives
    `|kmsFun z| ≤ ‖reflKrep(·)‖₂‖KrepCont f(·)‖₂`; at the boundary the `L²` norm is `‖Krep‖₂` via `MemLp`/A3,
    interior via `memLp_KrepCont_strip`). **NOT a fundamental wall** — a genuine but achievable `L²`-continuity
