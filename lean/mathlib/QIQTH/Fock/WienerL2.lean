@@ -399,4 +399,35 @@ theorem integrable_Krep (f : SchwartzMap V ℂ) {m : ℝ} (hm : m ≠ 0) :
       _ ≤ C * (4 * Real.exp (-2 * |θ|)) := by gcongr; exact inv_cosh_sq_le_exp θ
       _ = C * 4 * Real.exp (-2 * |θ|) := by ring
 
+/-! ## Brick 8b — the Fourier transform of `Krep` is holomorphic on a strip
+
+`F(ζ) = ∫ exp(−2π i θ ζ)·Krep(θ) dθ` extends the function Fourier transform of `Krep` (real `ζ`) to the
+complex strip `|Im ζ| < 1/π`, where it is holomorphic (differentiation under the integral; the ζ-derivative
+`−2π i θ exp(−2π i θ ζ)·Krep` is dominated by `C|θ|exp(−d|θ|) ∈ L¹`, brick 8b-prep). Restricting to `ℝ` gives
+`AnalyticOnNhd ℝ (𝓕 Krep)` — the input to brick 8c. -/
+
+/-- The complexified Fourier integrand `exp(−2π i θ ζ)·Krep(θ)`. -/
+noncomputable def ftKrep (m : ℝ) (f : V → ℂ) (ζ : ℂ) (θ : ℝ) : ℂ :=
+  Complex.exp (-2 * (Real.pi : ℂ) * Complex.I * (θ : ℂ) * ζ) * Krep m f θ
+
+/-- Its `ζ`-derivative `−2π i θ exp(−2π i θ ζ)·Krep(θ)`. -/
+noncomputable def ftKrep' (m : ℝ) (f : V → ℂ) (ζ : ℂ) (θ : ℝ) : ℂ :=
+  -2 * (Real.pi : ℂ) * Complex.I * (θ : ℂ)
+    * Complex.exp (-2 * (Real.pi : ℂ) * Complex.I * (θ : ℂ) * ζ) * Krep m f θ
+
+/-- The complexified Fourier transform `F(ζ) = ∫ exp(−2π i θ ζ)·Krep(θ) dθ`. -/
+noncomputable def ftKrepF (m : ℝ) (f : V → ℂ) (ζ : ℂ) : ℂ := ∫ θ, ftKrep m f ζ θ
+
+/-- The integrand is `ζ`-holomorphic pointwise, with derivative `ftKrep'`. -/
+theorem hasDerivAt_ftKrep (m : ℝ) (f : V → ℂ) (θ : ℝ) (ζ₀ : ℂ) :
+    HasDerivAt (fun ζ => ftKrep m f ζ θ) (ftKrep' m f ζ₀ θ) ζ₀ := by
+  have h1 : HasDerivAt
+      (fun ζ : ℂ => -2 * (Real.pi : ℂ) * Complex.I * (θ : ℂ) * ζ)
+      (-2 * (Real.pi : ℂ) * Complex.I * (θ : ℂ)) ζ₀ := by
+    simpa using (hasDerivAt_id ζ₀).const_mul (-2 * (Real.pi : ℂ) * Complex.I * (θ : ℂ))
+  have h2 := (h1.cexp).mul_const (Krep m f θ)
+  refine h2.congr_deriv ?_
+  unfold ftKrep'
+  ring
+
 end QIQTH.Fock.WienerL2
