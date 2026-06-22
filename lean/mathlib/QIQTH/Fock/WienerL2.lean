@@ -259,4 +259,27 @@ theorem ae_eq_zero_of_fourier_eq_zero {k : ℝ → ℂ} (hk : Integrable k)
   have hz : ∀ x, VectorFourier.fourierIntegral 𝐞 volume (innerₗ ℝ) k x = 0 := h
   simp only [flip_innerₗ, hz, smul_zero, integral_zero]
 
+/-- **Wiener brick 7 — the Tauberian conclusion.**  If `𝓕 g₀ ≠ 0` a.e. and `h` is orthogonal to the
+    entire boost orbit of `g₀`, then `h = 0`.  Chains 6a (orbit-orthogonality ⟹ `𝓕 k ≡ 0`, `k=conj(𝓕g₀)·𝓕h ∈ L¹`)
+    with 6b (`𝓕 k = 0 ⟹ k=ᵐ0`); then `𝓕g₀≠0` a.e. forces `𝓕 h = 0` a.e. `⟹ 𝓕 h = 0 ⟹ h = 0` (`𝓕` an isometry). -/
+theorem boost_orbit_total_of_fourier_ne_zero (g₀ h : Lp ℂ 2 (volume : Measure ℝ))
+    (hg₀ : ∀ᵐ ξ ∂volume, (𝓕 g₀ : Lp ℂ 2 (volume : Measure ℝ)) ξ ≠ 0)
+    (horth : ∀ a, inner ℂ (boostUnitary a g₀) h = 0) : h = 0 := by
+  have hk0 : ∀ w, 𝓕 (fun ξ => (starRingEnd ℂ) ((𝓕 g₀ : Lp ℂ 2 (volume : Measure ℝ)) ξ)
+      * (𝓕 h : Lp ℂ 2 (volume : Measure ℝ)) ξ) w = 0 := by
+    intro w; rw [fourier_correlation_eq]; exact horth (-w)
+  have hkInt : Integrable (fun ξ => (starRingEnd ℂ) ((𝓕 g₀ : Lp ℂ 2 (volume : Measure ℝ)) ξ)
+      * (𝓕 h : Lp ℂ 2 (volume : Measure ℝ)) ξ) :=
+    MemLp.integrable_mul (Lp.memLp (𝓕 g₀ : Lp ℂ 2 (volume : Measure ℝ))).star
+      (Lp.memLp (𝓕 h : Lp ℂ 2 (volume : Measure ℝ)))
+  have hkae := ae_eq_zero_of_fourier_eq_zero hkInt hk0
+  have hFh0 : (⇑(𝓕 h : Lp ℂ 2 (volume : Measure ℝ))) =ᵐ[volume] 0 := by
+    filter_upwards [hkae, hg₀] with ξ hk hg
+    rcases mul_eq_zero.mp hk with h1 | h2
+    · exact absurd (star_eq_zero.mp h1) hg
+    · exact h2
+  have hF0 : (𝓕 h : Lp ℂ 2 (volume : Measure ℝ)) = 0 :=
+    Lp.eq_zero_iff_ae_eq_zero.mpr hFh0
+  exact (Lp.fourierTransformₗᵢ ℝ ℂ).injective (hF0.trans (map_zero _).symm)
+
 end QIQTH.Fock.WienerL2
