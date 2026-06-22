@@ -2007,6 +2007,56 @@ theorem NiceTest.dist_bcf_le {m : ℝ} (hm : 0 < m) (N₁ N₂ M₁ M₂ : NiceT
     (M₂.margin_le ((min_le_right _ _).trans (min_le_right _ _)))
     N₁.real N₂.real M₁.real M₂.real N₁.memLp N₂.memLp M₁.memLp M₂.memLp
 
+open scoped BoundedContinuousFunction in
+/-- **(c2→limit) The KMS-witness BCFs of `L²`-convergent approximants form a Cauchy sequence.**  If
+    `(N n).vec → ξ` and `(M n).vec → η` in `L²`, then `n ↦ (N n).bcf (M n)` is `CauchySeq` in
+    `closedStrip →ᵇ ℂ` — from `NiceTest.dist_bcf_le` (the product difference bound) plus boundedness of the
+    convergent norm sequences and Cauchyness of the vectors.  Since `closedStrip →ᵇ ℂ` is a `CompleteSpace`,
+    this Cauchy sequence converges (next step), giving the closure KMS witness. -/
+theorem NiceTest.bcf_cauchySeq {m : ℝ} (hm : 0 < m) {ξ η : Lp ℂ 2 (volume : Measure ℝ)}
+    {N M : ℕ → NiceTest m}
+    (hN : Filter.Tendsto (fun n => (N n).vec) Filter.atTop (nhds ξ))
+    (hM : Filter.Tendsto (fun n => (M n).vec) Filter.atTop (nhds η)) :
+    CauchySeq (fun n => (N n).bcf hm (M n)) := by
+  obtain ⟨C₁, hC₁⟩ := hN.norm.bddAbove_range
+  obtain ⟨C₂, hC₂⟩ := hM.norm.bddAbove_range
+  have hNc := hN.cauchySeq
+  have hMc := hM.cauchySeq
+  rw [Metric.cauchySeq_iff] at hNc hMc ⊢
+  intro ε hε
+  set C : ℝ := max (max C₁ C₂) 1 with hCdef
+  have hCpos : 0 < C := lt_of_lt_of_le one_pos (le_max_right _ _)
+  have hbN : ∀ n, ‖(N n).vec‖ ≤ C := fun n =>
+    (hC₁ (Set.mem_range_self n)).trans ((le_max_left _ _).trans (le_max_left _ _))
+  have hbM : ∀ n, ‖(M n).vec‖ ≤ C := fun n =>
+    (hC₂ (Set.mem_range_self n)).trans ((le_max_right _ _).trans (le_max_left _ _))
+  obtain ⟨aN, haN⟩ := hNc (ε / (4 * C)) (by positivity)
+  obtain ⟨aM, haM⟩ := hMc (ε / (4 * C)) (by positivity)
+  refine ⟨max aN aM, fun p hp q hq => ?_⟩
+  have hNpq : ‖(N p).vec - (N q).vec‖ < ε / (4 * C) := by
+    rw [← dist_eq_norm]
+    exact haN p (le_trans (le_max_left _ _) hp) q (le_trans (le_max_left _ _) hq)
+  have hMpq : ‖(M p).vec - (M q).vec‖ < ε / (4 * C) := by
+    rw [← dist_eq_norm]
+    exact haM p (le_trans (le_max_right _ _) hp) q (le_trans (le_max_right _ _) hq)
+  have e1 : 2 * ‖(M p).vec‖ * ‖(N p).vec - (N q).vec‖ < ε / 2 := by
+    have hle : 2 * ‖(M p).vec‖ * ‖(N p).vec - (N q).vec‖
+        ≤ 2 * C * ‖(N p).vec - (N q).vec‖ := by gcongr; exact hbM p
+    refine hle.trans_lt ?_
+    have hlt : 2 * C * ‖(N p).vec - (N q).vec‖ < 2 * C * (ε / (4 * C)) :=
+      mul_lt_mul_of_pos_left hNpq (by positivity)
+    refine hlt.trans_le (le_of_eq ?_); field_simp; ring
+  have e2 : 2 * ‖(M p).vec - (M q).vec‖ * ‖(N q).vec‖ < ε / 2 := by
+    have hle : 2 * ‖(M p).vec - (M q).vec‖ * ‖(N q).vec‖
+        ≤ 2 * ‖(M p).vec - (M q).vec‖ * C := by gcongr; exact hbN q
+    refine hle.trans_lt ?_
+    rw [mul_comm (2 * ‖(M p).vec - (M q).vec‖) C, ← mul_assoc]
+    have hlt : C * 2 * ‖(M p).vec - (M q).vec‖ < C * 2 * (ε / (4 * C)) :=
+      mul_lt_mul_of_pos_left hMpq (by positivity)
+    refine hlt.trans_le (le_of_eq ?_); field_simp; ring
+  refine (NiceTest.dist_bcf_le hm (N p) (N q) (M p) (M q)).trans_lt ?_
+  linarith [e1, e2]
+
 /-- **The nice-core wedge generating set**: the one-particle vectors `KrepL2 f` from *nice* wedge test
     functions.  The standard BW wedge-localization core; an ℝ-subspace as a set (closed under `±` via
     `NiceTest.add`/`vec_add`), so `span_ℝ` of it adds nothing. -/
