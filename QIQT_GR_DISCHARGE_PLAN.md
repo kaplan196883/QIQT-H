@@ -485,6 +485,19 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          intertwining (then the density lift). A genuine multi-fire L²-Fourier-infrastructure build (Mathlib lacks it at
          the Lp level) — STANDARD, not research-grade. (The successive corrections are the honesty standard: each
          optimistic shortcut was checked against Mathlib's actual hypotheses and ruled out before relying on it.)
+         **★ INFRASTRUCTURE INVENTORY (2026-06-23) — the cyclic FT core = "build Wiener's L² theorem".** Mathlib
+         HAS: density (`SchwartzMap.denseRange_toLpCLM`), the integral-level translate→modulation
+         (`fourierIntegral_comp_add_right`), Lp mult-by-bounded (`MemLp.of_le_mul`, so the modulation keeps `L²`),
+         Fourier inversion (`Inversion.lean`, for FT injectivity), the Schwartz↔Lp FT bridge
+         (`SchwartzMap.toLp_fourier_eq`), and Plancherel (`inner_fourier_eq`). Mathlib LACKS (must build): a
+         SCHWARTZ-TRANSLATION operator (so even the intertwining's base case needs it), an Lp-MODULATION operator
+         (as a CLM), the translate↔modulation INTERTWINING `𝓕∘T_a = M_a∘𝓕` (via density), and the L²-FT-injectivity
+         assembly. This is a genuine multi-fire Lean-Fourier-infrastructure project — STANDARD analysis, but a
+         sizeable contribution in its own right (essentially the L²-Wiener Tauberian theorem), arguably beyond the
+         QIQT plan's scope. **HONEST FRONTIER:** the cyclic Reeh–Schlieder reduces to Wiener's L² theorem (Mathlib
+         infrastructure gap) + a concrete Gaussian; the separating reduces to Pauli–Jordan symplectic non-degeneracy.
+         Both are precisely-named standard analysis with EVERY surrounding structural step machine-checked — the
+         maximal honest reduction, parallel to the cited Type-III / continuum-TT frontier.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
