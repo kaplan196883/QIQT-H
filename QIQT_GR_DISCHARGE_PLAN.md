@@ -430,6 +430,18 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          leaving EXACTLY this on-shell-amplitude totality (the Paley–Wiener frontier) + `hsep`. This is the cleanest
          possible statement of what remains — a concrete integral-vanishing ⟹ zero condition on the localized
          rapidity amplitudes.
+         **★★★★★ BOTH Reeh–Schlieder inputs REDUCED — one-particle BW now rests on TWO analytic conditions
+         (2026-06-23, `86f87b0`, axiom-free).** The SEPARATING `ᗮ`-instance tangle is BYPASSED by going DIRECT:
+         `closedSubmodule_smul_I_mem_of_mem_mulI` (`v ∈ K.mulI ⟹ I•v ∈ K`, via the unambiguous ℂ `scalarSMulCLE` —
+         same technique as the cyclic `mulI`, NO `ᗮ`/ℝ-inner-product) ⟹ `niceWedge_isSeparating_of_no_complex_line`
+         (`hsep ⟸` "no nonzero complex line": the only `v` with `v ∈ K` and `I•v ∈ K` is `v=0`). The dual-via-`ᗮ`
+         route + its Mathlib instance tangle is now MOOT. Capstone **`oneParticleBW_niceWedge_reehSchlieder`**:
+         `modUnitary = boost(2πt)` given ONLY (a) separating = no complex line (symplectic non-degeneracy / Pauli–Jordan)
+         + (b) cyclic = wedge-totality `∫ conj(Krep f)·h=0 ∀ nice f ⟹ h=0` (Paley–Wiener). NO lattice/instance/KMS
+         hypotheses remain. **The entire free-field one-particle Bisognano–Wichmann is machine-checked down to exactly
+         these two concrete analytic statements about the localized rapidity amplitudes.** Item A's STRUCTURAL reduction
+         is COMPLETE; only the two analytic Reeh–Schlieder facts (Fourier/analyticity on the on-shell amplitudes) remain
+         as the honest cited frontier.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
