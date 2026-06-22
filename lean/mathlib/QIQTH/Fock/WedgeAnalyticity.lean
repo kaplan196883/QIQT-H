@@ -377,6 +377,51 @@ theorem integrable_exp_neg_const_mul_cosh {c : ℝ} (hc : 0 < c) :
   refine Real.exp_le_exp.mpr ?_
   nlinarith [sq_div_eight_le_cosh θ, hc.le]
 
+/-- `|sinh θ| ≤ cosh θ` (`cosh±sinh = e^{±θ} ≥ 0`). -/
+theorem abs_sinh_le_cosh (θ : ℝ) : |Real.sinh θ| ≤ Real.cosh θ := by
+  rw [abs_le]
+  exact ⟨by nlinarith [Real.cosh_eq θ, Real.sinh_eq θ, Real.exp_pos θ],
+    by nlinarith [Real.cosh_eq θ, Real.sinh_eq θ, Real.exp_pos (-θ)]⟩
+
+/-- `cosh s + |sinh s| = e^{|s|}` and `cosh s − |sinh s| = e^{−|s|}`. -/
+theorem cosh_add_abs_sinh (s : ℝ) : Real.cosh s + |Real.sinh s| = Real.exp |s| := by
+  rcases abs_cases s with ⟨h1, h2⟩ | ⟨h1, h2⟩
+  · have hmono : Real.exp (-s) ≤ Real.exp s := Real.exp_le_exp.mpr (by linarith)
+    have hsnn : (0 : ℝ) ≤ Real.sinh s := by nlinarith [Real.sinh_eq s]
+    rw [h1, abs_of_nonneg hsnn]; nlinarith [Real.cosh_eq s, Real.sinh_eq s]
+  · have hmono : Real.exp s ≤ Real.exp (-s) := Real.exp_le_exp.mpr (by linarith)
+    have hsnp : Real.sinh s ≤ 0 := by nlinarith [Real.sinh_eq s]
+    rw [h1, abs_of_nonpos hsnp]; nlinarith [Real.cosh_eq s, Real.sinh_eq s]
+
+theorem cosh_sub_abs_sinh (s : ℝ) : Real.cosh s - |Real.sinh s| = Real.exp (-|s|) := by
+  rcases abs_cases s with ⟨h1, h2⟩ | ⟨h1, h2⟩
+  · have hmono : Real.exp (-s) ≤ Real.exp s := Real.exp_le_exp.mpr (by linarith)
+    have hsnn : (0 : ℝ) ≤ Real.sinh s := by nlinarith [Real.sinh_eq s]
+    rw [h1, abs_of_nonneg hsnn]; nlinarith [Real.cosh_eq s, Real.sinh_eq s]
+  · have hmono : Real.exp s ≤ Real.exp (-s) := Real.exp_le_exp.mpr (by linarith)
+    have hsnp : Real.sinh s ≤ 0 := by nlinarith [Real.sinh_eq s]
+    rw [h1, abs_of_nonpos hsnp, neg_neg, sub_neg_eq_add]
+    nlinarith [Real.cosh_eq s, Real.sinh_eq s]
+
+/-- **`cosh(θ+s) ≤ e^{|s|}·cosh θ`** (shift upper bound — makes the shifting-peak strip decay uniform). -/
+theorem cosh_add_le_exp_abs_mul (θ s : ℝ) : Real.cosh (θ + s) ≤ Real.exp |s| * Real.cosh θ := by
+  rw [Real.cosh_add, ← cosh_add_abs_sinh s]
+  have hkey : Real.sinh θ * Real.sinh s ≤ Real.cosh θ * |Real.sinh s| :=
+    calc Real.sinh θ * Real.sinh s ≤ |Real.sinh θ * Real.sinh s| := le_abs_self _
+      _ = |Real.sinh θ| * |Real.sinh s| := abs_mul _ _
+      _ ≤ Real.cosh θ * |Real.sinh s| := by gcongr; exact abs_sinh_le_cosh θ
+  nlinarith [hkey]
+
+/-- **`e^{−|s|}·cosh θ ≤ cosh(θ+s)`** (shift lower bound). -/
+theorem exp_neg_abs_mul_le_cosh_add (θ s : ℝ) : Real.exp (-|s|) * Real.cosh θ ≤ Real.cosh (θ + s) := by
+  rw [Real.cosh_add, ← cosh_sub_abs_sinh s]
+  have hkey : -(Real.cosh θ * |Real.sinh s|) ≤ Real.sinh θ * Real.sinh s :=
+    calc -(Real.cosh θ * |Real.sinh s|) ≤ -(|Real.sinh θ| * |Real.sinh s|) := by
+          gcongr; exact abs_sinh_le_cosh θ
+      _ = -|Real.sinh θ * Real.sinh s| := by rw [abs_mul]
+      _ ≤ Real.sinh θ * Real.sinh s := neg_abs_le _
+  nlinarith [hkey]
+
 /-- `|θ| ≤ cosh θ` (from `cosh θ ≥ e^{|θ|}/2` and `e^{|θ|} ≥ 2|θ|`, `Real.two_mul_le_exp`). -/
 theorem abs_le_cosh (θ : ℝ) : |θ| ≤ Real.cosh θ := by
   have he : Real.exp |θ| ≤ 2 * Real.cosh θ := by
