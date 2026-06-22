@@ -153,6 +153,27 @@ theorem differentiable_kmsIntegrand (m : ℝ) {f g : V → ℂ} (hf : Continuous
   ((differentiable_reflKrepCont m hg hgc).comp (by fun_prop)).mul
     ((differentiable_KrepCont m hf hfc).comp (by fun_prop))
 
+/-- **The `kmsFun` integrand's `z`-derivative** (product/chain rule): for fixed `θ`, the integrand
+    `conj(KrepCont g(conj(θ+πz)))·KrepCont f(θ−πz)` has derivative
+    `[deriv reflKrep(θ+πz)·π]·KrepCont f(θ−πz) + reflKrep(θ+πz)·[deriv KrepCont f(θ−πz)·(−π)]`.
+    The `h_diff` ingredient (with explicit value, for the domination bound) of the dominated-derivative
+    theorem for `kmsFun`'s holomorphy. -/
+theorem hasDerivAt_kmsIntegrand_z (m : ℝ) {f g : V → ℂ} (hf : Continuous f) (hfc : HasCompactSupport f)
+    (hg : Continuous g) (hgc : HasCompactSupport g) (θ : ℝ) (z : ℂ) :
+    HasDerivAt (fun z => (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+        * KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z))
+      (deriv (fun u => (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) u))) ((θ : ℂ) + (Real.pi : ℂ) * z)
+          * (Real.pi : ℂ) * KrepCont m f ((θ : ℂ) - (Real.pi : ℂ) * z)
+        + (starRingEnd ℂ) (KrepCont m g ((starRingEnd ℂ) ((θ : ℂ) + (Real.pi : ℂ) * z)))
+          * (deriv (KrepCont m f) ((θ : ℂ) - (Real.pi : ℂ) * z) * (-(Real.pi : ℂ)))) z := by
+  have hA : HasDerivAt (fun z : ℂ => (θ : ℂ) + (Real.pi : ℂ) * z) (Real.pi : ℂ) z := by
+    simpa using ((hasDerivAt_id z).const_mul (Real.pi : ℂ)).const_add (θ : ℂ)
+  have hB : HasDerivAt (fun z : ℂ => (θ : ℂ) - (Real.pi : ℂ) * z) (-(Real.pi : ℂ)) z := by
+    simpa using ((hasDerivAt_id z).const_mul (Real.pi : ℂ)).const_sub (θ : ℂ)
+  have hgfac := ((differentiable_reflKrepCont m hg hgc ((θ : ℂ) + (Real.pi : ℂ) * z)).hasDerivAt).comp z hA
+  have hffac := ((differentiable_KrepCont m hf hfc ((θ : ℂ) - (Real.pi : ℂ) * z)).hasDerivAt).comp z hB
+  exact hgfac.mul hffac
+
 /-- **The `kmsFun` integrand is continuous in `θ`** (for fixed `z`) — the measurability (`hF_meas`) ingredient
     for the parametric-integral holomorphy of `F`. `KrepCont` is continuous (entire), composed with the
     continuous `θ`-maps `θ↦conj(θ+πz)`, `θ↦θ−πz`, and `conj`. -/
