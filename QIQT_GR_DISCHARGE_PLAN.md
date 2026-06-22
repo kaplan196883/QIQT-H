@@ -183,13 +183,22 @@ damping bound, **A3** `iπ` boundary conjugation, **A2 sup-bound**. These are ge
 `59deb45`); `sq_div_eight_le_cosh` + `integrable_exp_neg_const_mul_cosh` (A2 decay building block — the
 `θ`-integrability the interior-`λ` decay reduces to, `c11291e`).
 
-**Concrete next-step ladder (each a self-contained sub-project):**
-1. **Minkowski's integral inequality (`L²`)** `‖∫_x F(·,x) dx‖₂ ≤ ∫_x ‖F(·,x)‖₂ dx` — prove from scratch
-   (duality against `g∈L²` + Fubini + Cauchy–Schwarz). *Mathlib-worthy in its own right.* THE gate to A2-`L²`.
-2. **Strip `L²` bound** (A2 finish): combine Minkowski + `integrable_exp_neg_const_mul_cosh` (interior `λ`) +
-   the real-axis `cosh⁻²` decay (`schwartz_Krep_decay_sq`) at the endpoints, uniformly in `λ∈[0,π]`.
-3. **A4**: KMS function `F`, its `DiffContOnCl`+boundedness, the two edges via the `Lp` bridge, closedness to
-   `𝒦_W`, then thread up to remove `hKMS`.
+**★ REFRAME (2026-06-22): the Minkowski gap is SIDESTEPPED for interior-`λ` `L²` membership.** The
+**pointwise** bound `‖KrepCont m f (θ+iλ)‖ ≤ (1/√2)(∫‖f‖)·exp(−c·coshθ)` with `c = m·sinλ·δ` (`δ` the wedge
+margin from `exists_wedge_margin`, using `coshθ·x₁−sinhθ·x₀ ≥ δ·coshθ`) + `integrable_exp_neg_const_mul_cosh`
+(at `2c`) gives `MemLp (KrepCont m f (·+iλ)) 2` **directly**, no Minkowski integral inequality needed. The
+margin lemma is DONE (`b98dc63`).
+
+**Concrete next-step ladder:**
+1. **Pointwise strip-decay bound** `‖KrepCont m f (θ+iλ)‖ ≤ C'·exp(−c·coshθ)` (`c = m sinλ δ > 0`, interior
+   `λ∈(0,π)`): like `norm_KrepCont_le` but keep the `exp(damping) ≤ exp(−c coshθ)` factor instead of `≤ 1`,
+   pulling the `θ`-dependent `exp(−c coshθ)` out of the `x`-integral.
+2. **Interior-`λ` `L²` membership** `MemLp (KrepCont m f (·+iλ)) 2 volume` for `λ∈(0,π)`: from (1) +
+   `integrable_exp_neg_const_mul_cosh`. (Endpoints `λ=0,π` are `Krep`/`conj` via `MemLp`/A3.)
+3. **A4**: KMS function `F`, `DiffContOnCl`+boundedness (the *uniform-to-boundary* bound is the one delicate
+   piece left — `s↦‖Ξ(·+iπs)‖₂` continuous on `[0,1]`), the two edges via the `Lp` bridge, closedness to
+   `𝒦_W`, then thread up to remove `hKMS`. *(Minkowski's integral inequality is no longer on the critical path;
+   only the boundary-uniformity of the `L²` norm remains delicate.)*
 
 **Honest scale:** discharging `StripKMSrvd` from here is a genuine multi-week-to-month real-analysis +
 Mathlib-infrastructure effort (Minkowski integral inequality is itself a Mathlib-worthy contribution). This is
