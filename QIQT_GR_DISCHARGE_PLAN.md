@@ -525,14 +525,20 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          **(5) BUILT** (`d402880`): `inner_boostUnitary_eq_integral` — `⟪boostUnitary a g₀,h⟫ = ∫ e^{+2πiaξ}·conj(𝓕g₀ ξ)
          ·𝓕h ξ dξ`, via Plancherel (`Lp.inner_fourier_eq`) + brick 4 + `L2.inner_def` + `coeFn_modL2` + the conjugate-
          character helper `conj_modChar` (`conj e^{icξ}=e^{−icξ}` via `Complex.exp_conj`). So `∀a ⟪…⟫=0 ⟺ 𝓕⁻(k)≡0`.
-         NEXT: **(6) FT-injective-on-L¹** — `k∈L¹ ∧ 𝓕⁻k≡0 ⟹ k=0` a.e. Route (de-risked, lemmas located): `𝓕⁻k(a)
-         =𝓕k(−a)` so `𝓕⁻k≡0 ⟺ 𝓕k≡0`; multiplication formula `VectorFourier.integral_fourierIntegral_smul_eq_flip`
-         (`∫ 𝓕k·φ = ∫ k·𝓕φ`) ⟹ `∫ k·𝓕φ=0 ∀φ` test; `{𝓕φ}`=test fns (Fourier bijection on Schwartz) ⟹ `∫ k·ψ=0 ∀ψ`;
-         then the variational lemma `Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff.lean`
-         (`ae_eq_zero_of_forall_…ContDiff`-family) ⟹ `k=0` a.e. (7) `conj(𝓕g₀)·𝓕h=0` a.e. `∧ 𝓕g₀≠0` a.e. `⟹ 𝓕h=0`
-         a.e. `⟹ 𝓕h=0 ⟹ h=0` (`𝓕` inj). (8) concrete `f₀` with `𝓕(Krep f₀)≠0` a.e.
-         Bricks 1–5 BUILT axiom-free; the cyclic analytic discharge is two bricks (6 = L¹-uniqueness, 8 = concrete
-         generator) from closing — well past the hardest part (the intertwining + Plancherel bridge are done).
+         **(6a) BUILT** (`4f2435f`): `fourier_correlation_eq` — the function FT `𝓕 k (w) = ⟪boostUnitary(−w) g₀, h⟫`
+         (brick 5 at `a=−w` + the `𝓕`-character `𝐞(−⟪ξ,w⟫)=modChar(2π(−w))ξ` via `Real.fourier_eq`/`Real.fourierChar_apply`).
+         So the orbit-orthogonality hypothesis `∀a ⟪boost_a g₀,h⟫=0` becomes EXACTLY `𝓕 k ≡ 0`.
+         NEXT: **(6b) generic L¹ uniqueness** `Integrable k ∧ 𝓕 k = 0 ⟹ k=ᵐ0`. Route (lemmas located): apply
+         `ae_eq_zero_of_integral_contDiff_smul_eq_zero` (`AEEqOfIntegralContDiff.lean`, needs `LocallyIntegrable k`
+         + `∀ g:ℝ→ℝ` C^∞-compact, `∫ g•k=0`); for such test `g`, set `G:=(↑∘g):ℝ→ℂ` (Schwartz) and use the
+         multiplication formula `VectorFourier.integral_fourierIntegral_smul_eq_flip` with `f:=𝓕⁻G` + Fourier
+         inversion `Continuous.fourier_fourierInv_eq` (`𝓕(𝓕⁻G)=G`) + `innerₗ` symmetric (`L.flip=L`) ⟹
+         `∫ G·k = ∫ (𝓕⁻G)·𝓕k = 0`. CAVEAT (honest): coercing the real test `g↦G:ℂ`, matching `•`/`*` conventions,
+         and the `𝓕`↔`fourierIntegral` defeq are the fiddly parts — a meaty but standard brick.
+         (7) `conj(𝓕g₀)·𝓕h=0` a.e. `∧ 𝓕g₀≠0` a.e. `⟹ 𝓕h=0` a.e. `⟹ 𝓕h=0 ⟹ h=0` (`𝓕` inj `Lp.fourierTransformₗᵢ`).
+         (8) concrete `f₀` with `𝓕(Krep f₀)≠0` a.e.
+         Bricks 1–5,6a BUILT axiom-free; remaining = 6b (L¹-uniqueness core) + 7 (short) + 8 (concrete generator).
+         The hardest analytic pieces (intertwining, Plancherel bridge, the FT↔correlation reduction) are DONE.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
