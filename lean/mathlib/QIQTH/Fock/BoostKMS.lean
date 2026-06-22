@@ -1050,4 +1050,18 @@ theorem tendsto_tail_seminorm_zero {F : ℝ → ℂ} (hF : Integrable (fun θ : 
   have h := (Real.continuous_sqrt.tendsto 0).comp (tendsto_tail_sq_zero hF)
   rwa [Real.sqrt_zero] at h
 
+/-- **Shifted-tail geometry** (the crux of the annular bound): if `|θ| > R` then `|θ+a| > R` or `|θ−a| > R`.
+    Since `2|θ| = |(θ+a)+(θ−a)| ≤ |θ+a|+|θ−a|`, both `≤ R` would force `|θ| ≤ R`. This is why the scalar KMS
+    product has uniformly small edge tails even though the individual `L²` slices do not. -/
+theorem tail_geom {R a θ : ℝ} (hθ : R < |θ|) : R < |θ + a| ∨ R < |θ - a| := by
+  by_contra h
+  push_neg at h
+  have h2 : (2 : ℝ) * |θ| ≤ 2 * R :=
+    calc (2 : ℝ) * |θ| = |θ + a + (θ - a)| := by
+          rw [show θ + a + (θ - a) = 2 * θ from by ring, abs_mul, abs_two]
+      _ ≤ |θ + a| + |θ - a| := abs_add_le _ _
+      _ ≤ R + R := add_le_add h.1 h.2
+      _ = 2 * R := by ring
+  linarith
+
 end QIQTH.Fock.BoostKMS
