@@ -385,9 +385,21 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          `have h := mulI_sup K K.mulI; exact h.trans ...`; `(mem_mapEquiv_iff (scalarSMulCLE _ UnitI) S y).mpr`;
          `show (↑UnitI:ℂ)=I from rfl`). So `hcyc` is now the STANDARD analytic statement — the nice wedge one-particle
          vectors are total in `L²(ℝ)` (Reeh–Schlieder wedge-totality) — with NO lattice/instance plumbing left.
-         REMAINING: (i) `hsep` analogous reduction (separating ⟺ cyclic of the symplectic complement `Kᗮ`, via
-         `inf_orthogonal` + `mulI_orthogonal` — a similar density of `Kᗮ`'s generators); (ii) the analytic
+         REMAINING: (i) `hsep` analogous reduction (separating ⟺ cyclic of the complement `Kᗮ`); (ii) the analytic
          `Dense(span_ℂ niceWedgeGenSet)` itself — the genuine wedge-totality frontier (Paley–Wiener / edge-of-the-wedge).
+         **★ ENGINE GENERALIZED + `of_dense` conditional (2026-06-23, `e71cc75`/`b11b40b`):**
+         `ClosedSubmodule_sup_mulI_eq_top_of_dense` — for ANY `K` and `G ⊆ K` with dense ℂ-span, `K ⊔ K.mulI = ⊤`
+         (reusable, axiom-free); `niceWedge_isCyclic_of_dense` is now a one-line instance; `oneParticleBW_niceWedge_of_dense`
+         gives `modUnitary = boost` from `hsep` + `Dense(span_ℂ niceWedgeGenSet)`.
+         **★ SEPARATING DUAL `hsep ⟸ Kᗮ cyclic` ATTEMPTED — blocked on a DEEPER instance diamond.** The math is
+         clean (take `ᗮ` of `Kᗮ⊔(Kᗮ).mulI=⊤`: `inf_orthogonal`+`orthogonal_orthogonal_eq`+`mulI_orthogonal`+`top_orthogonal_eq_bot`
+         ⟹ `K⊓K.mulI=⊥`), and all four lemmas exist — but `ᗮ` resolves to TWO different `InnerProductSpace ℝ (Lp ℂ 2)`
+         instances: `L2.innerProductSpace` (in my goal) vs `ClosedSubmodule.instInnerProductSpaceReal` (in the framework
+         lemmas). Unlike the `mulI` diamond (cracked via term-mode, since `mulI` uses the unambiguous ℂ structure), this
+         ℝ-inner-product diamond on `ᗮ` defeats both `rw` AND term-mode unification. Fix needs explicit `@`-instance
+         pinning of `ᗮ` to `ClosedSubmodule.instInnerProductSpaceReal` throughout (or a defeq `convert`), a dedicated
+         instance-surgery pass. Reverted to keep green; the cyclic side is fully done, separating awaits this surgery
+         (then density of `Kᗮ` = opposite-wedge totality).
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
