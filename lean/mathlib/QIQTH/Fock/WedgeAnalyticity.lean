@@ -459,6 +459,45 @@ theorem norm_kernel_le_exp_decay {m : ℝ} (hm : 0 ≤ m) {x : V} {δ : ℝ}
   nlinarith [mul_nonneg (mul_nonneg hm hsin) (by linarith : (0 : ℝ) ≤
     (Real.cosh θ * x 1 - Real.sinh θ * x 0) - δ * Real.cosh θ)]
 
+/-- **Pointwise strip-decay of the kernel at a general `ζ`** (`0 ≤ Im ζ ≤ π`, `x` with wedge margin `δ`):
+    `‖K(ζ,x)‖ ≤ exp(−(m sin(Im ζ) δ)·cosh(Re ζ))`. The general-`ζ` form powering the `z`-derivative decay. -/
+theorem norm_kernel_le_exp_decay' {m : ℝ} (hm : 0 ≤ m) {x : V} {δ : ℝ}
+    (hx1 : δ ≤ x 1 - x 0) (hx2 : δ ≤ x 1 + x 0) {ζ : ℂ} (him0 : 0 ≤ ζ.im) (himπ : ζ.im ≤ Real.pi) :
+    ‖kernel m x ζ‖ ≤ Real.exp (-(m * Real.sin ζ.im * δ) * Real.cosh ζ.re) := by
+  rw [norm_kernel_eq']
+  refine Real.exp_le_exp.mpr ?_
+  have hsin : 0 ≤ Real.sin ζ.im := Real.sin_nonneg_of_nonneg_of_le_pi him0 himπ
+  have hwedge : δ * Real.cosh ζ.re ≤ Real.cosh ζ.re * x 1 - Real.sinh ζ.re * x 0 := by
+    rw [Real.cosh_eq, Real.sinh_eq]
+    nlinarith [mul_nonneg (Real.exp_pos ζ.re).le (by linarith : (0 : ℝ) ≤ x 1 - x 0 - δ),
+      mul_nonneg (Real.exp_pos (-ζ.re)).le (by linarith : (0 : ℝ) ≤ x 1 + x 0 - δ)]
+  nlinarith [mul_nonneg (mul_nonneg hm hsin) (by linarith : (0 : ℝ) ≤
+    (Real.cosh ζ.re * x 1 - Real.sinh ζ.re * x 0) - δ * Real.cosh ζ.re)]
+
+/-- **Pointwise strip-decay of `kernelDeriv` at a general `ζ`**: `‖K'(ζ,x)‖ ≤ exp(−c·cosh(Re ζ))·|m|·
+    cosh(Re ζ)·(|x₀|+|x₁|)` (`c = m sin(Im ζ) δ`). Kernel decay (`norm_kernel_le_exp_decay'`) × `poly` bound
+    (`‖poly‖ ≤ |m|·cosh(Re ζ)·(|x₀|+|x₁|)` via `norm_sinh/cosh_le_cosh_re`). The `cosh(Re ζ)` polynomial factor
+    against the double-exponential damping — the integrand of the `z`-derivative domination. -/
+theorem norm_kernelDeriv_le_exp_decay {m : ℝ} (hm : 0 ≤ m) {x : V} {δ : ℝ}
+    (hx1 : δ ≤ x 1 - x 0) (hx2 : δ ≤ x 1 + x 0) {ζ : ℂ} (him0 : 0 ≤ ζ.im) (himπ : ζ.im ≤ Real.pi) :
+    ‖kernelDeriv m x ζ‖ ≤ Real.exp (-(m * Real.sin ζ.im * δ) * Real.cosh ζ.re)
+      * (|m| * Real.cosh ζ.re * (|x 0| + |x 1|)) := by
+  rw [kernelDeriv, norm_mul]
+  have hpoly : ‖-Complex.I * ((m : ℂ) * Complex.sinh ζ * (x 0 : ℂ)
+      - (m : ℂ) * Complex.cosh ζ * (x 1 : ℂ))‖ ≤ |m| * Real.cosh ζ.re * (|x 0| + |x 1|) := by
+    rw [norm_mul, norm_neg, Complex.norm_I, one_mul]
+    calc ‖(m : ℂ) * Complex.sinh ζ * (x 0 : ℂ) - (m : ℂ) * Complex.cosh ζ * (x 1 : ℂ)‖
+        ≤ ‖(m : ℂ) * Complex.sinh ζ * (x 0 : ℂ)‖ + ‖(m : ℂ) * Complex.cosh ζ * (x 1 : ℂ)‖ :=
+          norm_sub_le _ _
+      _ = |m| * ‖Complex.sinh ζ‖ * |x 0| + |m| * ‖Complex.cosh ζ‖ * |x 1| := by
+          simp only [norm_mul, Complex.norm_real, Real.norm_eq_abs]
+      _ ≤ |m| * Real.cosh ζ.re * |x 0| + |m| * Real.cosh ζ.re * |x 1| := by
+          gcongr
+          exacts [norm_sinh_le_cosh_re ζ, norm_cosh_le_cosh_re ζ]
+      _ = |m| * Real.cosh ζ.re * (|x 0| + |x 1|) := by ring
+  exact mul_le_mul (norm_kernel_le_exp_decay' hm hx1 hx2 him0 himπ) hpoly (norm_nonneg _)
+    (Real.exp_pos _).le
+
 /-- **A2 (step 1) — pointwise strip-decay of the continued amplitude.** For wedge-supported `f` (uniform
     margin `δ` via `exists_wedge_margin`) and `0≤λ≤π`,
     `‖KrepCont m f (θ+iλ)‖ ≤ (1/√2)·(∫‖f‖)·exp(−(m sinλ δ)·coshθ)`. The decay factor (double-exponential in
