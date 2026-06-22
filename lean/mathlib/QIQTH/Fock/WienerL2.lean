@@ -344,6 +344,27 @@ theorem integrable_exp_neg_mul_abs {b : ℝ} (hb : 0 < b) :
     filter_upwards [Filter.eventually_gt_atTop 0] with x hx
     rw [abs_of_pos hx]
 
+/-- **`|θ|·exp(−d|θ|)` is integrable on `ℝ`** for `d > 0` — the derivative-domination building block for the
+    FT-holomorphy (8b): `|θ| ≤ (2/d)·exp((d/2)|θ|)` (from `t ≤ exp t`) absorbs the `|θ|` into a slower exponential
+    dominated by `integrable_exp_neg_mul_abs (d/2)`. -/
+theorem integrable_abs_mul_exp_neg_mul_abs {d : ℝ} (hd : 0 < d) :
+    Integrable (fun θ : ℝ => |θ| * Real.exp (-d * |θ|)) := by
+  refine ((integrable_exp_neg_mul_abs (show (0 : ℝ) < d / 2 by linarith)).const_mul (2 / d)).mono'
+    (Continuous.aestronglyMeasurable (by fun_prop)) ?_
+  filter_upwards with θ
+  rw [Real.norm_eq_abs, abs_of_nonneg (by positivity)]
+  have hb : d / 2 * |θ| ≤ Real.exp (d / 2 * |θ|) := by
+    have := Real.add_one_le_exp (d / 2 * |θ|); linarith
+  have h1 : |θ| ≤ 2 / d * Real.exp (d / 2 * |θ|) := by
+    have key := mul_le_mul_of_nonneg_left hb (show (0 : ℝ) ≤ 2 / d by positivity)
+    rwa [show 2 / d * (d / 2 * |θ|) = |θ| by field_simp] at key
+  have hexpprod : Real.exp (d / 2 * |θ|) * Real.exp (-d * |θ|) = Real.exp (-(d / 2) * |θ|) := by
+    rw [← Real.exp_add]; congr 1; ring
+  calc |θ| * Real.exp (-d * |θ|)
+      ≤ 2 / d * Real.exp (d / 2 * |θ|) * Real.exp (-d * |θ|) :=
+        mul_le_mul_of_nonneg_right h1 (Real.exp_nonneg _)
+    _ = 2 / d * Real.exp (-(d / 2) * |θ|) := by rw [mul_assoc, hexpprod]
+
 /-- `(cosh θ)⁻² ≤ 4·exp(−2|θ|)` — from `exp|θ| ≤ 2cosh θ` (one of `e^{±θ}` equals `e^{|θ|}`). -/
 theorem inv_cosh_sq_le_exp (θ : ℝ) : (Real.cosh θ ^ 2)⁻¹ ≤ 4 * Real.exp (-2 * |θ|) := by
   have hexp : Real.exp |θ| ≤ 2 * Real.cosh θ := by
