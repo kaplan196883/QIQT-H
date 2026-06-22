@@ -575,11 +575,15 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          `‖Krep θ‖≤C(cosh θ)⁻²` (`schwartz_Krep_decay_sq`) `≤4C exp(−2|θ|)` (new `inv_cosh_sq_le_exp` from `exp|θ|≤2cosh θ`),
          dominated by `integrable_exp_neg_mul_abs`; continuity from `Krep_continuous`.  The function FT of `Krep` is now
          well-defined.
-         NEXT: **(8b)** `𝓕(Krep m f₀)` real-analytic on `ℝ` — the FT extends holomorphically to the strip `|Im ζ|<2` via
-         differentiation-under-the-integral (Mathlib has FT *smoothness* `hasFTaylorSeriesUpTo_fourierIntegral` but NOT
-         analyticity — build the strip-holomorphy from the exp-moment integrability above; then "strip-holomorphic ⊇ ℝ ⟹
-         real-analytic on ℝ" → 8c, OR push to all-N decay for entire → 8c′).  Also need **8b-bridge**: the `L²` FT coeFn
-         `⇑(𝓕 N₀.vec)` agrees a.e. with the *function* FT of `Krep` (L²↔L¹ FT agreement on `L¹∩L²` — check/​build).
+         **(8b-prep) BUILT** (`2d1e6ae`): `integrable_abs_mul_exp_neg_mul_abs` (`|θ|·exp(−d|θ|)∈L¹`, `d>0`) — the
+         derivative-domination block: the `ζ`-derivative of the complexified integrand `exp(−2πiζθ)·Krep(θ)` has norm
+         `2π|θ|e^{2π Im ζ·θ}‖Krep‖ ≤ C|θ|e^{−(2−2π|Im ζ|)|θ|}`, integrable on the strip `|Im ζ|<1/π`.
+         NEXT: **(8b)** assemble the strip-holomorphy — define `F(ζ)=∫ exp(−2πiζθ)·Krep(θ)dθ`, apply
+         `hasDerivAt_integral_of_dominated_loc_of_deriv_le` (ℂ-derivative; integrand `ζ`-differentiable a.e., dominated by
+         `C·|θ|·exp(−d|θ|)` via 8b-prep, base `Krep∈L¹` via 8a) ⟹ `DifferentiableOn ℂ F (strip)` ⟹ (restrict to `ℝ`,
+         like `8c′`) `AnalyticOnNhd ℝ (𝓕 Krep) univ`.  (Mathlib has FT *smoothness* not analyticity — this is THE genuine
+         build; the codebase's `hasDerivAt_KrepCont` is a worked ℂ-parametric-derivative template.)  Then **8b-bridge**:
+         the `L²` FT coeFn `⇑(𝓕 N₀.vec)` agrees a.e. with this function FT of `Krep` (L²↔L¹ agreement on `L¹∩L²`).
          **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0` (its amplitude `≠0` somewhere), `8b+8c/8c′` ⟹ `𝓕≠0`
          a.e., feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
          EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness, the full
