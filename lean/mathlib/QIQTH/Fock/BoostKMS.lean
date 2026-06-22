@@ -1555,6 +1555,23 @@ theorem norm_kmsFun_le_closed {m : ℝ} (hm : 0 < m) {f g : V → ℂ} (hf : Con
     (le_refl (0 : ℝ)) hz.1 hz.2
   rwa [kmsFunCut_zero, sub_zero] at h
 
+/-- **`L²`-norm of a one-particle vector as an integral**: `‖KrepL2 f‖ = √(∫‖Krep m f‖²)`. Via `inner_KrepL2`
+    (`⟪KrepL2 f, KrepL2 f⟫ = ∫ conj(Krep f)·Krep f = ↑∫‖Krep f‖²`) and `inner_self_eq_norm_sq`. The bridge from
+    the analytic strip bound (in `∫‖Krep‖²`) to the Hilbert norms `‖ξ‖,‖η‖` for the closure/threading argument. -/
+theorem norm_toLp_Krep_eq_sqrt {m : ℝ} {f : V → ℂ} (hf : MemLp (Krep m f) 2 volume) :
+    ‖hf.toLp (Krep m f)‖ = Real.sqrt (∫ θ, ‖Krep m f θ‖ ^ 2) := by
+  have hcongr : (∫ θ, (starRingEnd ℂ) (Krep m f θ) * Krep m f θ)
+      = ∫ θ, ((‖Krep m f θ‖ ^ 2 : ℝ) : ℂ) := by
+    refine integral_congr_ae (Filter.Eventually.of_forall fun θ => ?_)
+    show (starRingEnd ℂ) (Krep m f θ) * Krep m f θ = ((‖Krep m f θ‖ ^ 2 : ℝ) : ℂ)
+    rw [← Complex.normSq_eq_conj_mul_self, ← Complex.sq_norm]
+  have hinner : inner ℂ (hf.toLp (Krep m f)) (hf.toLp (Krep m f))
+      = ((∫ θ, ‖Krep m f θ‖ ^ 2 : ℝ) : ℂ) := by
+    rw [inner_KrepL2 m hf hf, hcongr, integral_complex_ofReal]
+  have hsq : ‖hf.toLp (Krep m f)‖ ^ 2 = ∫ θ, ‖Krep m f θ‖ ^ 2 := by
+    rw [← inner_self_eq_norm_sq (𝕜 := ℂ) (hf.toLp (Krep m f)), hinner]; simp
+  rw [← hsq, Real.sqrt_sq (norm_nonneg _)]
+
 /-- **Boost-translate preserves `L²`**: `MemLp (Krep m (boostTest a f)) 2` from `MemLp (Krep m f) 2`, since
     `Krep m (boostTest a f) = Krep m f ∘ (·+a)` (`Krep_boost`) and translation is measure-preserving. -/
 theorem memLp_Krep_boostTest {m : ℝ} {f : V → ℂ} (hf : MemLp (Krep m f) 2 volume) (a : ℝ) :
