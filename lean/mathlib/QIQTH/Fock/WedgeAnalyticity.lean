@@ -328,4 +328,30 @@ theorem norm_KrepCont_le {m : ℝ} (hm : 0 ≤ m) {f : V → ℂ} (hf : Continuo
           exact mul_le_of_le_one_left (norm_nonneg _)
             (norm_kernel_le_one hm hx1 hx2 hlam0 hlamπ θ)
 
+/-- `θ²/8 ≤ cosh θ` — a crude quadratic lower bound (`cosh θ ≥ e^{|θ|}/2 ≥ (1+|θ|/2)²/2 ≥ θ²/8`),
+    the comparison feeding the Gaussian domination of the wedge-mode strip decay. -/
+theorem sq_div_eight_le_cosh (θ : ℝ) : θ ^ 2 / 8 ≤ Real.cosh θ := by
+  have he : Real.exp |θ| ≤ 2 * Real.cosh θ := by
+    rw [Real.cosh_eq]
+    rcases abs_cases θ with ⟨h, _⟩ | ⟨h, _⟩ <;> rw [h] <;>
+      nlinarith [Real.exp_pos θ, Real.exp_pos (-θ)]
+  have h3 : 1 + |θ| / 2 ≤ Real.exp (|θ| / 2) := by
+    have := Real.add_one_le_exp (|θ| / 2); linarith
+  have hsqexp : Real.exp (|θ| / 2) ^ 2 = Real.exp |θ| := by
+    rw [sq, ← Real.exp_add]; congr 1; ring
+  have h2 : (1 + |θ| / 2) ^ 2 ≤ Real.exp |θ| := by
+    rw [← hsqexp]; nlinarith [h3, abs_nonneg θ]
+  nlinarith [he, h2, sq_abs θ, abs_nonneg θ]
+
+/-- **A2 (decay building block).** `θ ↦ exp(−c·cosh θ)` is integrable over `ℝ` for `c > 0` — by Gaussian
+    domination `exp(−c cosh θ) ≤ exp(−(c/8)·θ²)` (`sq_div_eight_le_cosh`). The `θ`-integrability that the
+    interior-`λ` strip decay of the wedge mode reduces to (the damping exponent is `∝ −cosh θ`). -/
+theorem integrable_exp_neg_const_mul_cosh {c : ℝ} (hc : 0 < c) :
+    Integrable (fun θ : ℝ => Real.exp (-(c * Real.cosh θ))) := by
+  refine (integrable_exp_neg_mul_sq (show (0 : ℝ) < c / 8 by positivity)).mono'
+    (by fun_prop) (Filter.Eventually.of_forall fun θ => ?_)
+  rw [Real.norm_of_nonneg (Real.exp_pos _).le]
+  refine Real.exp_le_exp.mpr ?_
+  nlinarith [sq_div_eight_le_cosh θ, hc.le]
+
 end QIQTH.Fock.WedgeAnalyticity

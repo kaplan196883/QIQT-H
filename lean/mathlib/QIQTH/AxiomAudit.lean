@@ -4669,5 +4669,8 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★ A2 (sup-bound half): ‖KrepCont m f (θ+iλ)‖ ≤ (1/√2)·∫‖f‖ on the strip 0≤λ≤π for
 -- wedge-supported f (from the damping ‖K(ζ,x)‖≤1 pushed through the integral). The L^∞-on-strip half of the
 -- H²(S_π) bound; the L²-in-θ decay (strip extension of the cosh⁻² estimates) is the remaining analytic frontier.
+#print axioms QIQTH.Fock.WedgeAnalyticity.integrable_exp_neg_const_mul_cosh
+-- expected: standard only — ★ A2 decay building block: exp(−c·coshθ) integrable over ℝ (c>0), Gaussian
+-- domination via coshθ≥θ²/8. The θ-integrability the interior-λ wedge-mode strip decay reduces to.
 
 end QIQTH.AxiomAudit
