@@ -528,17 +528,18 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          **(6a) BUILT** (`4f2435f`): `fourier_correlation_eq` — the function FT `𝓕 k (w) = ⟪boostUnitary(−w) g₀, h⟫`
          (brick 5 at `a=−w` + the `𝓕`-character `𝐞(−⟪ξ,w⟫)=modChar(2π(−w))ξ` via `Real.fourier_eq`/`Real.fourierChar_apply`).
          So the orbit-orthogonality hypothesis `∀a ⟪boost_a g₀,h⟫=0` becomes EXACTLY `𝓕 k ≡ 0`.
-         NEXT: **(6b) generic L¹ uniqueness** `Integrable k ∧ 𝓕 k = 0 ⟹ k=ᵐ0`. Route (lemmas located): apply
-         `ae_eq_zero_of_integral_contDiff_smul_eq_zero` (`AEEqOfIntegralContDiff.lean`, needs `LocallyIntegrable k`
-         + `∀ g:ℝ→ℝ` C^∞-compact, `∫ g•k=0`); for such test `g`, set `G:=(↑∘g):ℝ→ℂ` (Schwartz) and use the
-         multiplication formula `VectorFourier.integral_fourierIntegral_smul_eq_flip` with `f:=𝓕⁻G` + Fourier
-         inversion `Continuous.fourier_fourierInv_eq` (`𝓕(𝓕⁻G)=G`) + `innerₗ` symmetric (`L.flip=L`) ⟹
-         `∫ G·k = ∫ (𝓕⁻G)·𝓕k = 0`. CAVEAT (honest): coercing the real test `g↦G:ℂ`, matching `•`/`*` conventions,
-         and the `𝓕`↔`fourierIntegral` defeq are the fiddly parts — a meaty but standard brick.
-         (7) `conj(𝓕g₀)·𝓕h=0` a.e. `∧ 𝓕g₀≠0` a.e. `⟹ 𝓕h=0` a.e. `⟹ 𝓕h=0 ⟹ h=0` (`𝓕` inj `Lp.fourierTransformₗᵢ`).
-         (8) concrete `f₀` with `𝓕(Krep f₀)≠0` a.e.
-         Bricks 1–5,6a BUILT axiom-free; remaining = 6b (L¹-uniqueness core) + 7 (short) + 8 (concrete generator).
-         The hardest analytic pieces (intertwining, Plancherel bridge, the FT↔correlation reduction) are DONE.
+         **(6b) BUILT** (`6584995`): `ae_eq_zero_of_fourier_eq_zero` — `Integrable k ∧ 𝓕 k = 0 ⟹ k=ᵐ0`, the
+         classical L¹ Fourier-uniqueness. Via `ae_eq_zero_of_integral_contDiff_smul_eq_zero` (`AEEqOfIntegralContDiff`):
+         for each real C^∞-compact test `g`, package `↑∘g` as Schwartz (`HasCompactSupport.toSchwartzMap` +
+         `ContDiff.continuousLinearMap_comp ofRealCLM`), write `G=𝓕(𝓕⁻G)` (`FourierTransform.fourier_fourierInv_eq`),
+         multiplication formula `VectorFourier.integral_fourierIntegral_smul_eq_flip` (`∫ 𝓕(𝓕⁻G)·k=∫ (𝓕⁻G)·𝓕k`,
+         `innerₗ` symmetric via `flip_innerₗ`) `=0`. The fiddly bits (real→ℂ test coercion, `•`/`*`, `𝓕`↔`fourierIntegral`
+         defeq) all dispatched. **This was the hardest remaining analytic brick.**
+         NEXT: **(7)** chain — `(∀a ⟪boost_a g₀,h⟫=0) ∧ 𝓕g₀≠0` a.e. `⟹ h=0`: 6a+`horth` give `𝓕 k≡0`; `k∈L¹`
+         (product of two `L²`, Hölder); 6b ⟹ `k=conj(𝓕g₀)·𝓕h=0` a.e.; `𝓕g₀≠0` a.e. `⟹ 𝓕h=0` a.e. `⟹ 𝓕h=0` in `Lp`
+         `⟹ h=0` (`Lp.fourierTransformₗᵢ` inj). (8) concrete `f₀` with `𝓕(Krep f₀)≠0` a.e.
+         Bricks 1–5,6a,6b BUILT axiom-free; remaining = 7 (short chain) + 8 (concrete generator).
+         ALL hard analytic pieces (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness) are DONE.
      (b) **Sign RESOLVED (not an open audit): `+2π`, proven.** `oneParticleBW_niceWedge` IS a theorem
          `modUnitary S t = boostUnitary(2πt)` (conditional on the carrier `S`). So the relative sign modUnitary↔boost
          for the nice-core right wedge is settled `+2π`; by the at-most-one-sign fact the codebase's `−2π`
