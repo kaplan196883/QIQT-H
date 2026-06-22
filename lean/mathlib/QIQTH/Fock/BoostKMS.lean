@@ -1625,6 +1625,18 @@ theorem norm_toLp_Krep_eq_sqrt {m : ℝ} {f : V → ℂ} (hf : MemLp (Krep m f) 
     rw [← inner_self_eq_norm_sq (𝕜 := ℂ) (hf.toLp (Krep m f)), hinner]; simp
   rw [← hsq, Real.sqrt_sq (norm_nonneg _)]
 
+/-- **`KrepL2` respects subtraction**: `KrepL2(f₁−f₂) = KrepL2 f₁ − KrepL2 f₂` in `L²`. `MemLp.toLp_sub` +
+    `MemLp.toLp_eq_toLp_iff` (the `Lp` elements agree since `Krep(f₁−f₂) =ᵐ Krep f₁ − Krep f₂`, `Krep_sub`).
+    Lets `‖KrepL2(Fₙ−Fₘ)‖ = ‖ξₙ − ξₘ‖ → 0` drive the closure Cauchy argument. -/
+theorem KrepL2_sub {m : ℝ} {f₁ f₂ : V → ℂ} (hf₁ : Continuous f₁) (hf₁c : HasCompactSupport f₁)
+    (hf₂ : Continuous f₂) (hf₂c : HasCompactSupport f₂)
+    (hf₁L : MemLp (Krep m f₁) 2 volume) (hf₂L : MemLp (Krep m f₂) 2 volume) :
+    (memLp_Krep_sub hf₁ hf₁c hf₂ hf₂c hf₁L hf₂L).toLp (Krep m (f₁ - f₂))
+      = hf₁L.toLp (Krep m f₁) - hf₂L.toLp (Krep m f₂) := by
+  rw [← MemLp.toLp_sub hf₁L hf₂L, MemLp.toLp_eq_toLp_iff]
+  exact Filter.Eventually.of_forall fun θ =>
+    (Krep_sub m hf₁ hf₁c hf₂ hf₂c θ).trans (Pi.sub_apply _ _ _).symm
+
 /-- **Strip bound in Hilbert norms**: `‖kmsFun z‖ ≤ 2·‖KrepL2 g‖·‖KrepL2 f‖` on the closed strip. The `R=0`
     annular constant `ε₀` rewritten via `{0<|θ|} =ᵐ ℝ` and `norm_toLp_Krep_eq_sqrt`. The Cauchy–Schwarz-type
     bound `‖F z‖ ≤ C·‖η‖·‖ξ‖` controlling the span-closure threading. -/
