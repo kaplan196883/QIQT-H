@@ -4759,7 +4759,24 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★★★★ THE one-particle Bisognano–Wichmann reduced to its TWO analytic Reeh–Schlieder
 -- inputs: modUnitary = boost(2πt) given ONLY (a) separating = no complex line (Pauli–Jordan symplectic non-degeneracy)
 -- and (b) cyclic = wedge-totality ∫ conj(Krep f)·h=0 ∀ nice f ⟹ h=0 (Paley–Wiener). NO lattice/instance/KMS hypotheses;
--- every structural step machine-checked axiom-free. Item A's STRUCTURAL reduction COMPLETE — only the two analytic
--- on-shell-amplitude facts remain as the cited frontier.
+-- every structural step machine-checked axiom-free. Item A's STRUCTURAL reduction COMPLETE.
+
+-- ★★★★★★ THE TWO ANALYTIC REEH–SCHLIEDER INPUTS, BOTH NOW DISCHARGED (2026-06-23) — the frontier is CLOSED.
+#print axioms QIQTH.Fock.CyclicWitness.niceWedgeCyclic_pos_mass
+-- expected: standard only — ★ CYCLIC (wedge-totality) for ALL m>0: the complete L²-Wiener–Tauberian theorem
+-- (boost_orbit_total_of_fourier_ne_zero) fed by a width-scaled wedge bump (R=π/(4m)) whose 1D amplitude is nonzero
+-- by cos-positivity on the support. The Paley–Wiener input is now a THEOREM, no edge-of-the-wedge analyticity.
+#print axioms QIQTH.Fock.CyclicWitness.strip_eqZero_of_top_edge_zero
+-- expected: standard only — strip boundary-uniqueness: holomorphic on the open strip, continuous+bounded on the
+-- closure, zero on the whole top edge ⟹ zero on the bottom edge. Asymmetric Hadamard three-lines (top const 0) +
+-- continuity. The modular/KMS uniqueness engine of the separating proof.
+#print axioms QIQTH.Fock.CyclicWitness.niceWedgeSeparating_pos_mass
+-- expected: standard only — ★ SEPARATING (Pauli–Jordan symplectic non-degeneracy) for ALL m>0: PURE modular/KMS.
+-- From stripKMSrvd_closure the boost-KMS witnesses F_vv (v,v) and F_c (iv,v); top edge F_c(t)=i·F_vv(t) ⟹ D:=F_c−i·F_vv
+-- vanishes on the top edge ⟹ (strip_eqZero_of_top_edge_zero) on the bottom edge ⟹ −2i⟪U_t v,v⟫=0 ⟹ (t=0) ⟪v,v⟫=0 ⟹ v=0.
+#print axioms QIQTH.Fock.CyclicWitness.oneParticleBW_niceWedge_unconditional
+-- expected: standard only — ★★★★★★ THE free-field one-particle Bisognano–Wichmann, FULLY UNCONDITIONAL: modUnitary S t
+-- = boostUnitary(2πt) with NO Reeh–Schlieder hypotheses at all (both separating + cyclic discharged internally).
+-- "modular flow = geometric boost" is a fully closed, axiom-free theorem — NO cited frontier on the one-particle level.
 
 end QIQTH.AxiomAudit
