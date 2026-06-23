@@ -63,10 +63,14 @@ and `hHessGrad` (the Hessian-gradient identity `g^{μρ}∂_μφ(∇∇φ)_ρν 
 contraction collapse to `(□φ − m²φ)∂_νφ = 0`. **Brick 6 DONE (`a74bfd1`, 2026-06-23, axiom-free):** `pd_metric_inv_identity` — differentiating the pointwise
 inverse relation `∑_α g_{μα}gi^{αβ} = δ_μ^β` gives `∑_α ∂_ν(g_{μα})gi^{αβ} + ∑_α g_{μα}∂_ν(gi^{αβ}) = 0` (via
 `pd_const` + `pd_sum` + `pd_mul`) — the crux first step toward inverse-metric compatibility `∇gi = 0`.
-**REMAINING (final two bricks):** (i) **inverse-metric compatibility** `∂_ν gi^{λβ} = −∑σ Γ^λ_{νσ}gi^{σβ} −
-∑σ Γ^β_{νσ}gi^{σλ}` — contract `pd_metric_inv_identity` with `gi^{λμ}`, extract via the δ-identity
-`∑_μ gi^{λμ}g_{μα} = δ^λ_α` (from `hinv` + symmetries; cf. `inv_contract`), substitute `metric_compat`
-(`covDeriv02 g gi g … = 0`) for `∂g`, and do two more δ-contractions. (ii) **`hHessGrad`** itself: expand
+**Brick 7 DONE (`76b2ab4`, 2026-06-23, axiom-free)** — the two ingredients for inverse-metric compatibility:
+`gi_g_delta` (`∑_μ gi^{aμ}g_{μb} = δ^a_b`, the left-inverse, from `hinv` + symmetries) and `pd_g_eq`
+(`∂_ν g_{μα} = ∑σ Γ^σ_{νμ}g_{σα} + ∑σ Γ^σ_{να}g_{μσ}`, the explicit `metric_compat` unpacking).
+**REMAINING (final two bricks):** (i) **inverse-metric compatibility** `pd_gi_eq`: `∂_ν gi^{λβ} = −∑σ Γ^λ_{νσ}gi^{σβ} −
+∑σ Γ^β_{νσ}gi^{σλ}` — contract `pd_metric_inv_identity` with `gi^{λμ}`, extract via `gi_g_delta`, substitute
+`pd_g_eq` for `∂g`, and collapse two double sums by the δ-contractions `∑α g_{σα}gi^{αβ}=δ_σ^β` (`hinv`) and
+`gi_g_delta`. (All ingredients now committed; assembly is mechanical nested-`Finset.sum` reordering — attempted
+this fire, deferred for a cleaner flat structure.) (ii) **`hHessGrad`** itself: expand
 `½∂_ν(g^{αβ}∂_αφ∂_βφ)` by `pd_mul`/`pd_sum`, use `pd_comm` (the double-deriv terms = the LHS Hessian partials) +
 inverse-metric compat (the `∂gi` term = the LHS Christoffel term) + `kgHess_symm`/`christoffel_symm`. `hKG` is the
 matter EOM (physics — a Jacobson-program input, not a mechanical discharge target). So `conserv` for explicit KG is
