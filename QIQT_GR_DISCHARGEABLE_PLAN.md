@@ -25,7 +25,7 @@ This does **not** attempt H2 (the area law from `Q_max`) — that is the genuine
 | `hric_symm` (Ricci symmetry `R_{σν}=R_{νσ}`) | pure geometry | ✅ **DONE `11a3af1`** — `ricci_symm` in `QIQTH/RicciSymm.lean` | **A1 ✓** |
 | `hFocus` / Raychaudhuri identity | pure geometry | **DONE** — `raychaudhuri_focusing`, `raychaudhuri_geodesic`, `raychaudhuri_focusing_at_equilibrium` (`hFocus_of_raychaudhuri`). Residual `harea`/`hequil` is the physical floor, not dischargeable. | **A2 (verify only)** |
 | `P,Pinv,hPP,hPP',hcong` (Sylvester tetrad `g=Pᵀ·gm·P`) | linear algebra | Sylvester is currently a LABELLED hypothesis in several files (`ClausiusToPernull`, `EinsteinEquationOfState`); a "Sylvester null-cone lemma" exists | **A3** |
-| `hreg` (focusing-function regularity) | technical | used as-is; the explicit `f = a·T·gi-trace − ½R` is concrete | **A4** |
+| `hreg` (focusing-function regularity) | technical | ✅ **DONE `68e0c9a`** — `hreg_kg` in `QIQTH/HregExplicitKG.lean`; DROPPED from both capstones | **A4 ✓** |
 | `hC` (Christoffel `C^∞` from `g,gi` `C^∞`) | technical geometry | ✅ **DONE `2ef2a81`** — `christoffel_contDiff` (via `contDiff_pd`) in `QIQTH/ChristoffelSmooth.lean` | **A5 ✓** |
 | `Sf,KE,A` + `hDnn`/`hD0` (entropy/energy oracles) | quantum information | `relEntropy_nonneg` (Klein) DONE; `ArakiEntropy`/`ArakiInterface` exist; spacetime bridge missing | **B** |
 | `hKMS` (`WedgeKMSFlux_complete` — modular-flux dynamical realization) | QFT | one-particle BW DONE; Fock infrastructure (`Fock/`, `ContinuumLambdaFock`) exists; the BW→stress-flux bridge missing | **C** |
@@ -73,11 +73,11 @@ diagonalization (`LinearMap.BilinForm` / `Matrix.isHermitian` spectral theory).
 - Discharges `P,Pinv,hPP,hPP',hcong`.  NB: the existing `EinsteinEquationOfState`/`ClausiusToPernull` Sylvester
   null-cone lemma may already give most of this — audit first.
 
-### A4 — `hreg` : derive from the explicit focusing function *(1–2 fires)*
-`hreg` asserts the focusing function `f` (defined by `a·T = Ricci + f·g`) is `PdiffAt` everywhere and `f + ½R` is
-differentiable.  For `T = kgStress` and smooth `g,gi,φ`, `f` is an explicit smooth algebraic combination
-(`f = (a·g^{ab}kgStress_{ab} − R)/n`-type trace).  **Brick:** compute `f` explicitly and prove its regularity from
-`hCg/hCgi/hφ`.  Discharges `hreg` for the explicit KG field.
+### A4 — `hreg` — ✅ **DONE (`68e0c9a`, 2026-06-23, axiom-free)**
+`QIQTH/HregExplicitKG.lean`: `hreg_kg`.  The `gi`-trace of `a·kgStress = Ric + f·g` fixes `f = (a·tr(kgStress)
+− R)/4` uniquely (via `metric_contraction_trace` `∑gi·g = 4`), and that explicit `f` is `C^∞` (`kgStress_contDiff`/
+`kgLagr_contDiff` + the curvature `C^∞` chain `riemann/ricci/scalarCurv_contDiff` in `ChristoffelSmooth.lean`).
+**Discharges `hreg`; DROPPED from both capstones.**
 
 ### A5 — `hC` : Christoffel smoothness — ✅ **DONE (`2ef2a81`, 2026-06-23, axiom-free)**
 `QIQTH/ChristoffelSmooth.lean`: `contDiff_pd` (∂ of a `C^∞` scalar is `C^∞`, via `pd_eq_fderiv` +
@@ -87,9 +87,9 @@ differentiable.  For `T = kgStress` and smooth `g,gi,φ`, `f` is an explicit smo
 
 **Tier A deliverable:** a refactored capstone whose hypotheses no longer include `hric_symm`, `hC`, `hreg`, or the
 tetrad block — only the genuinely-physical + entropy/modular inputs remain.
-**★ PARTIAL DELIVERABLE DONE (`454e413`, 2026-06-23):** `qiqt_gr_explicit_kg` and `qiqt_gr_explicit_kg_raychaudhuri`
-now DROP `hC` and `hric_symm` (supplied internally from `christoffel_contDiff` + `ricci_symm`). Remaining to also
-drop from the capstone: `hreg` (A4) and the tetrad block `P/Pinv/hPP/hPP'/hcong` (A3).
+**★ DELIVERABLE (`454e413`+`68e0c9a`, 2026-06-23):** `qiqt_gr_explicit_kg` and `qiqt_gr_explicit_kg_raychaudhuri`
+now DROP `hC`, `hric_symm`, AND `hreg` (supplied internally from `christoffel_contDiff` + `ricci_symm` + `hreg_kg`).
+Remaining to also drop from the capstone: the tetrad block `P/Pinv/hPP/hPP'/hcong` (A3).
 
 ---
 
