@@ -41,7 +41,6 @@ theorem freeField_kd_conclusion
     (f f' : Point 4 → (Fin 4 → ℝ) → ℝ → ℂ)
     (hf2 : ∀ x v, MemLp (f x v) 2 (volume : Measure ℝ))
     (hf_int : ∀ x v, Integrable (f x v) (volume : Measure ℝ))
-    (hF0_int : ∀ x v, Integrable (fun θ => (starRingEnd ℂ) (f x v θ) * f x v θ) (volume : Measure ℝ))
     (hfd : ∀ x v θ, HasDerivAt (f x v) (f' x v θ) θ)
     (hf'_meas : ∀ x v, AEStronglyMeasurable (f' x v) (volume : Measure ℝ))
     (B : Point 4 → (Fin 4 → ℝ) → ℝ) (hB : ∀ x v θ, ‖f' x v θ‖ ≤ B x v)
@@ -57,7 +56,7 @@ theorem freeField_kd_conclusion
         (Complex.I * ((kd x v : ℝ) : ℂ)) 0) :
     ∀ x v, BL (g x) v = 0 → kd x v = 2 * Real.pi / hbar * BL (T x) v := by
   intro x v hnull
-  exact freeField_component_hFlux (hmw x v) (f x v) (f' x v) (hf2 x v) (hf_int x v) (hF0_int x v)
+  exact freeField_component_hFlux (hmw x v) (f x v) (f' x v) (hf2 x v) (hf_int x v)
     (hfd x v) (hf'_meas x v) (B x v) (hB x v) hbar (kd x v) (BL (T x) v)
     (hTkk x v hnull) (hbridge x v hnull)
 
@@ -97,7 +96,6 @@ theorem qiqt_gr_freefield
     (ff ff' : Point 4 → (Fin 4 → ℝ) → ℝ → ℂ)
     (hf2 : ∀ x v, MemLp (ff x v) 2 (volume : Measure ℝ))
     (hf_int : ∀ x v, Integrable (ff x v) (volume : Measure ℝ))
-    (hF0_int : ∀ x v, Integrable (fun θ => (starRingEnd ℂ) (ff x v θ) * ff x v θ) (volume : Measure ℝ))
     (hfd : ∀ x v θ, HasDerivAt (ff x v) (ff' x v θ) θ)
     (hf'_meas : ∀ x v, AEStronglyMeasurable (ff' x v) (volume : Measure ℝ))
     (Bd : Point 4 → (Fin 4 → ℝ) → ℝ) (hB : ∀ x v θ, ‖ff' x v θ‖ ≤ Bd x v)
@@ -123,7 +121,7 @@ theorem qiqt_gr_freefield
   refine qiqt_gr_from_flux_complete g gi hsymm hsymm_gi hinv hCg hCgi
     (kgStress m φ g gi) η hbar a hbar0 heta ha ?_ P Pinv hPP hPP' hcong
     Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0
-    (freeField_kd_conclusion g (kgStress m φ g gi) kd hbar mw hmw ff ff' hf2 hf_int hF0_int
+    (freeField_kd_conclusion g (kgStress m φ g gi) kd hbar mw hmw ff ff' hf2 hf_int
       hfd hf'_meas Bd hB hTkk hbridge) hFocus hreg ?_
   · -- `kgStress` is symmetric
     intro x a' b
