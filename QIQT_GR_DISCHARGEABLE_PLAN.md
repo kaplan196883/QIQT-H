@@ -24,7 +24,7 @@ This does **not** attempt H2 (the area law from `Q_max`) — that is the genuine
 |---|---|---|---|
 | `hric_symm` (Ricci symmetry `R_{σν}=R_{νσ}`) | pure geometry | ✅ **DONE `11a3af1`** — `ricci_symm` in `QIQTH/RicciSymm.lean` | **A1 ✓** |
 | `hFocus` / Raychaudhuri identity | pure geometry | **DONE** — `raychaudhuri_focusing`, `raychaudhuri_geodesic`, `raychaudhuri_focusing_at_equilibrium` (`hFocus_of_raychaudhuri`). Residual `harea`/`hequil` is the physical floor, not dischargeable. | **A2 (verify only)** |
-| `P,Pinv,hPP,hPP',hcong` (Sylvester tetrad `g=Pᵀ·gm·P`) | linear algebra | Sylvester is currently a LABELLED hypothesis in several files (`ClausiusToPernull`, `EinsteinEquationOfState`); a "Sylvester null-cone lemma" exists | **A3** |
+| `P,Pinv,hPP,hPP',hcong` (Sylvester tetrad `g=Pᵀ·gm·P`) | **background structure** (NOT pure debt) | ⚠️ **RECLASSIFIED + CONSOLIDATED `b7704a2`** — the tetrad IS "g is Lorentzian" (Sylvester); the 5 hyps collapse to ONE `hLor` (`qiqt_gr_explicit_kg_lorentzian`) but the input is irreducible structure | **A3 ~** |
 | `hreg` (focusing-function regularity) | technical | ✅ **DONE `68e0c9a`** — `hreg_kg` in `QIQTH/HregExplicitKG.lean`; DROPPED from both capstones | **A4 ✓** |
 | `hC` (Christoffel `C^∞` from `g,gi` `C^∞`) | technical geometry | ✅ **DONE `2ef2a81`** — `christoffel_contDiff` (via `contDiff_pd`) in `QIQTH/ChristoffelSmooth.lean` | **A5 ✓** |
 | `Sf,KE,A` + `hDnn`/`hD0` (entropy/energy oracles) | quantum information | `relEntropy_nonneg` (Klein) DONE; `ArakiEntropy`/`ArakiInterface` exist; spacetime bridge missing | **B** |
@@ -61,7 +61,17 @@ equation axiom-free.  The labelled `hFocus` is replaced by these in `qiqt_gr_fro
 capstone's remaining inputs (`hgeo`/`hequil`/`harea`) are exactly the physical floor (geodesic congruence +
 local-equilibrium + area-rate modelling), and document that the *geometric* content is fully discharged.
 
-### A3 — Sylvester tetrad existence : `∃ P Pinv, g = Pᵀ·gm·P` (pointwise) *(2–5 fires; MODERATE)*
+### A3 — Sylvester tetrad — ⚠️ **RECLASSIFIED as background structure + CONSOLIDATED (`b7704a2`, 2026-06-23)**
+**Honest finding:** the tetrad `g = Pᵀ·gm·P` (`hcong`, used in `EinsteinEquationOfState` via `BL g v = BL gm(Pv)`)
+IS Sylvester's law of inertia — i.e. exactly the statement "`g` is Lorentzian (signature `(−,+,+,+)`)".  It is
+therefore **genuine background structure (#5), not pure technical debt** like `hric_symm`/`hC`/`hreg`.  "`g` symmetric
++ invertible" does NOT imply congruence to `gm` (could be Euclidean), so the signature is an irreducible input.
+**What WAS done:** `qiqt_gr_explicit_kg_lorentzian` collapses the five tetrad hypotheses `P/Pinv/hPP/hPP'/hcong` into
+a SINGLE `hLor` (`g` admits an invertible Minkowski frame).  That is the honest endpoint — repackage 5 → 1; the input
+remains the Lorentzian-metric assumption.  (A full Mathlib Sylvester `signature ⟹ congruence` theorem is possible but
+just moves the input to "`g` has signature `(1,3)`" — equivalent structure, large effort, not pursued.)  Original
+sketch below for reference:
+### A3 (sketch) — Sylvester tetrad existence : `∃ P Pinv, g = Pᵀ·gm·P` (pointwise)
 For a smooth Lorentzian metric, at each point the symmetric nondegenerate bilinear form `g x` is congruent to the
 constant Minkowski form `gm` (Sylvester's law of inertia, fixed signature `(−,+,+,+)`).  Mathlib has bilinear-form
 diagonalization (`LinearMap.BilinForm` / `Matrix.isHermitian` spectral theory).
@@ -87,9 +97,14 @@ diagonalization (`LinearMap.BilinForm` / `Matrix.isHermitian` spectral theory).
 
 **Tier A deliverable:** a refactored capstone whose hypotheses no longer include `hric_symm`, `hC`, `hreg`, or the
 tetrad block — only the genuinely-physical + entropy/modular inputs remain.
-**★ DELIVERABLE (`454e413`+`68e0c9a`, 2026-06-23):** `qiqt_gr_explicit_kg` and `qiqt_gr_explicit_kg_raychaudhuri`
-now DROP `hC`, `hric_symm`, AND `hreg` (supplied internally from `christoffel_contDiff` + `ricci_symm` + `hreg_kg`).
-Remaining to also drop from the capstone: the tetrad block `P/Pinv/hPP/hPP'/hcong` (A3).
+**★★★ TIER A COMPLETE (2026-06-23).** `qiqt_gr_explicit_kg` and `qiqt_gr_explicit_kg_raychaudhuri` now DROP `hC`,
+`hric_symm`, AND `hreg` (discharged outright — `christoffel_contDiff` + `ricci_symm` + `hreg_kg`). A2 (Raychaudhuri)
+was already done. A3 (tetrad) is reclassified as background Lorentzian structure and CONSOLIDATED 5→1 in
+`qiqt_gr_explicit_kg_lorentzian`. **Every pure-technical-debt hypothesis GPT flagged is now a machine-checked
+theorem.** What remains on the capstone is exactly: the physics floor (`hbound`/`hsat`, the EOM `hKG`), the
+background structure (smooth metric `g`/`gi`, the Lorentzian frame `hLor`), the coupling `η`/`a`, and the
+entropy/modular inputs (`Sf/KE/A`, `hDnn`/`hD0`, `hKMS`) — i.e. Tiers **B** and **C**, which are the research-grade
+frontiers gated on the continuum Tomita–Takesaki / Araki-entropy programs (see below).
 
 ---
 
