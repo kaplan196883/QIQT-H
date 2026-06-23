@@ -130,4 +130,38 @@ theorem qiqt_gr_explicit_kg_raychaudhuri
   · intro x ν
     exact kg_conserv_of_contDiff a m φ g gi x ν hsymm hsymm_gi hinv hφ hCg hCgi (hKG x)
 
+/-- **The explicit-KG capstone with the tetrad block consolidated into a single Lorentzian-structure input.**
+    The five tetrad hypotheses `P, Pinv, hPP, hPP', hcong` collapse to ONE: `hLor` — that `g` admits a (global,
+    invertible) frame field `P` putting it in the constant-Minkowski form `g = Pᵀ·gm·P`.  By Sylvester's law of
+    inertia this is exactly "`g` is Lorentzian" (signature `(−,+,+,+)`), the genuine background-structure input — NOT
+    pure technical debt like `hC`/`hric_symm`/`hreg`, which were discharged outright.  So this is the honest endpoint
+    of the tetrad item: the five separate hypotheses are repackaged into the single Lorentzian-metric assumption. -/
+theorem qiqt_gr_explicit_kg_lorentzian
+    (g gi : Point 4 → Fin 4 → Fin 4 → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (φ : Point 4 → ℝ) (m η hbar a : ℝ)
+    (hbar0 : hbar ≠ 0) (heta : η ≠ 0) (ha : a = 2 * Real.pi / (hbar * η))
+    (hφ : ContDiff ℝ ⊤ φ) (hKG : ∀ x, boxField φ g gi x = m ^ 2 * φ x)
+    (Sf KE A : Point 4 → (Fin 4 → ℝ) → ℝ → ℝ) (sd kd ad : Point 4 → (Fin 4 → ℝ) → ℝ)
+    (hS : ∀ x v, BL (g x) v = 0 → HasDerivAt (Sf x v) (sd x v) 0)
+    (hK : ∀ x v, BL (g x) v = 0 → HasDerivAt (KE x v) (kd x v) 0)
+    (hA : ∀ x v, BL (g x) v = 0 → HasDerivAt (A x v) (ad x v) 0)
+    (hbound : ∀ x v, BL (g x) v = 0 → ∀ᶠ t in 𝓝 0, Sf x v t ≤ η * A x v t)
+    (hsat : ∀ x v, BL (g x) v = 0 → Sf x v 0 = η * A x v 0)
+    (hDnn : ∀ x v, BL (g x) v = 0 → ∀ t, 0 ≤ KE x v t - Sf x v t)
+    (hD0 : ∀ x v, BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0)
+    (hKMS : WedgeKMSFlux_complete g (kgStress m φ g gi) kd hbar)
+    (hFocus : ∀ x v, BL (g x) v = 0 → ad x v = BL (fun i j => ricci g gi i j x) v)
+    (hLor : ∃ P Pinv : Point 4 → Fin 4 → Fin 4 → ℝ,
+        (∀ x i j, (∑ k, P x i k * Pinv x k j) = if i = j then (1 : ℝ) else 0) ∧
+        (∀ x i j, (∑ k, Pinv x i k * P x k j) = if i = j then (1 : ℝ) else 0) ∧
+        (∀ x i j, g x i j = ∑ k, ∑ l, P x k i * gm k l * P x l j)) :
+    ∃ Λ : ℝ, ∀ x μ ν, a * kgStress m φ g gi x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν := by
+  obtain ⟨P, Pinv, hPP, hPP', hcong⟩ := hLor
+  exact qiqt_gr_explicit_kg g gi hsymm hsymm_gi hinv hCg hCgi φ m η hbar a hbar0 heta ha hφ hKG
+    P Pinv hPP hPP' hcong Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0 hKMS hFocus
+
 end QIQTH.WedgeKMSToGR
