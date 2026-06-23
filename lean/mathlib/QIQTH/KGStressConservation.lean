@@ -354,4 +354,26 @@ theorem pd_gradSq_eq (φ : Point n → ℝ) (gi : Point n → Fin n → Fin n �
   simp only [Finset.sum_add_distrib]
   ring
 
+/-- **The two cross gradient terms are equal** `R2 = R3`: `∑_{αβ} gi^{αβ}(∂_ν∂_αφ)∂_βφ =
+    ∑_{αβ} gi^{αβ}∂_αφ(∂_ν∂_βφ)` (swap `α ↔ β`, `gi`-symmetry).  Used to fold the two `∂(∂φ)` terms of
+    `pd_gradSq_eq` into one in `hHessGrad`. -/
+theorem gradSq_cross_symm (φ : Point n → ℝ) (gi : Point n → Fin n → Fin n → ℝ) (ν : Fin n) (x : Point n)
+    (hsymm_gi : ∀ y a b, gi y a b = gi y b a) :
+    (∑ α, ∑ β, gi x α β * (pd (fun y => pd φ α y) ν x * pd φ β x))
+      = ∑ α, ∑ β, gi x α β * (pd φ α x * pd (fun y => pd φ β y) ν x) := by
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl (fun α _ => Finset.sum_congr rfl (fun β _ => ?_))
+  rw [hsymm_gi x β α]; ring
+
+/-- **The Hessian-partial term equals `R2`** `T1 = R2`: `∑_{μρ} gi^{μρ}∂_μφ ∂_ρ∂_νφ =
+    ∑_{αβ} gi^{αβ}(∂_ν∂_αφ)∂_βφ` (commute the second derivative by `pd_comm`, then relabel `μ↔β, ρ↔α` via
+    `gi`-symmetry).  This is the partial-derivative half of the Hessian-gradient identity. -/
+theorem hessGrad_partial_eq (φ : Point n → ℝ) (gi : Point n → Fin n → Fin n → ℝ) (ν : Fin n) (x : Point n)
+    (hsymm_gi : ∀ y a b, gi y a b = gi y b a) (hφ : ContDiff ℝ ⊤ φ) :
+    (∑ μ, ∑ ρ, gi x μ ρ * (pd φ μ x * pd (fun y => pd φ ν y) ρ x))
+      = ∑ α, ∑ β, gi x α β * (pd (fun y => pd φ α y) ν x * pd φ β x) := by
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl (fun α _ => Finset.sum_congr rfl (fun β _ => ?_))
+  rw [pd_comm φ α ν x hφ, hsymm_gi x β α]; ring
+
 end QIQTH.Curvature
