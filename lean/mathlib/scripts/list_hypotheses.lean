@@ -24,7 +24,8 @@ def categorize (n : String) : String :=
     "PHYSICS — Clausius / area-saturation law (the thermodynamic floor)"
   else if n == "hFocus" then "PHYSICS — Raychaudhuri focusing (ad = R_kk)"
   else if n == "hTkk" || n == "hbridge" then "PHYSICS — localization map ξ_{x,v} (Gap 2, dynamical realization)"
-  else if n == "hflux" || n == "hKMS" then "PHYSICS — wedge-KMS / boost-flux (modular input)"
+  else if n == "hflux" || n == "hKMS" || n == "hFlux" then "PHYSICS — wedge-KMS / boost-flux (modular input)"
+  else if n == "conserv" then "CONSISTENCY — stress-energy conservation ∇·(aT)=0"
   else if n == "hS" || n == "hK" || n == "hA" then "SETUP — per-generator derivative existence"
   else if n == "hVC" || n == "hgeo" || n == "hequil" || n == "hVval" || n == "harea" then
     "SETUP — null-congruence kinematics (Raychaudhuri form)"
@@ -44,6 +45,7 @@ def catOrder : List String :=
     "PHYSICS — Raychaudhuri focusing (ad = R_kk)",
     "PHYSICS — localization map ξ_{x,v} (Gap 2, dynamical realization)",
     "PHYSICS — wedge-KMS / boost-flux (modular input)",
+    "CONSISTENCY — stress-energy conservation ∇·(aT)=0",
     "SETUP — per-generator derivative existence",
     "SETUP — null-congruence kinematics (Raychaudhuri form)",
     "REGULARITY — localization mode (soft analytic data)",
