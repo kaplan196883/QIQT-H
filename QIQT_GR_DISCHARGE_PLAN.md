@@ -644,8 +644,17 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          Choosing `R=π/(4m)`, `cX=2R+1` gives `m·R=π/4<π/2`, so `cos(my)>0` on the whole support `|y|≤R` and
          `Re A=∫cos(my)·bump1W R(y)>0`. Supersedes `niceWedgeCyclic_small_mass` (the `R=2` special case). Needed
          `open scoped ContDiff` (for `∞`) + `open Metric`. **The cyclic Reeh–Schlieder input is fully, unconditionally
-         CLOSED.** The separating side (`NiceWedgeSeparating`, Pauli–Jordan / no-complex-line) remains the parallel
-         unattacked frontier — now the SOLE remaining input of the free-field one-particle BW.
+         CLOSED.**
+         **★★★★★ CAPSTONE CONSOLIDATED (`ce902fe`, 2026-06-23, axiom-free, budget 0): the free-field one-particle BW
+         now rests on EXACTLY ONE input.** `oneParticleBW_niceWedge_of_separating {m} (hm:0<m) (V) (hVboost)
+         (hsep : NiceWedgeSeparating m) : ∀ t, modUnitary (niceWedgeStandardSubspace …) t = V t` (in `CyclicWitness.lean`,
+         which sees both `niceWedgeCyclic_pos_mass` and the BoostKMS capstone). The cyclic input is discharged INTERNALLY
+         (`niceWedgeCyclic_pos_mass hm`), so `hcyc` is gone. The free-field one-particle Bisognano–Wichmann is now a
+         theorem modulo the SINGLE concrete analytic statement `NiceWedgeSeparating m` (symplectic non-degeneracy /
+         Pauli–Jordan). That separating side (no simple `θ→−θ` reflection: `conj(Krep θ)=minkFourier f(−m coshθ,−m sinhθ)`,
+         off-shell) is the honest, irreducible remaining frontier — its rigorous discharge needs the free-field
+         symplectic non-degeneracy (e.g. duality `K sep ⟸ K′ cyclic` with `K′`=left wedge, blocked earlier on the
+         `ᗮ`/ℝ-instance tangle; or a direct Hardy-space/modular argument).
          **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0` (its amplitude `≠0` somewhere), `8b+8c/8c′` ⟹ `𝓕≠0`
          a.e., feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
          EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness, the full
