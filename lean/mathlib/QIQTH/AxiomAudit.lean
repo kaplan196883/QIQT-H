@@ -4822,6 +4822,19 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the kinematic-Raychaudhuri form of the above: hFocus replaced by the null-congruence
 -- Raychaudhuri data (hgeo/hequil/harea), still with T=kgStress concrete and conserv discharged internally.
 
+-- Phases 4-5 of QIQT_GR_FREEFIELD_COMPLETION_PLAN: the FREE-FIELD QIQT→GR capstone.
+#print axioms QIQTH.WedgeKMSToGR.qiqt_gr_from_flux_complete
+-- expected: standard only — the GR theorem taking the per-generator flux EQUATION kd x v = (2π/ℏ)·BL(T x)v directly
+-- (what qiqt_bekenstein_gives_gr consumes), instead of the WedgeKMSFlux_complete bundle. Convention-agnostic entry.
+#print axioms QIQTH.WedgeKMSToGR.freeField_kd_conclusion
+-- expected: standard only — the ∀-wrap of freeField_component_hFlux: per null generator the localization datum
+-- (hbridge, hTkk) + freeField_oneParticle_hFlux gives kd x v = (2π/ℏ)·BL(T x)v. All modular/BW/boost machine-checked.
+#print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield
+-- expected: standard only — ★★★★★★ THE FREE-FIELD QIQT→GR CAPSTONE: a·kgStress_μν = G_μν + Λ·g_μν with the wedge-KMS
+-- modular flux supplied by the axiom-free +2π one-particle BW machinery (NOT a labelled WedgeKMSFlux_complete bundle).
+-- Geometry hC/hric_symm/hreg + matter conserv + hT_symm all discharged internally for kgStress. Only labelled inputs:
+-- the Clausius/area-saturation physics + the per-generator localization map (hbridge, hTkk) (Gap 2).
+
 -- Tier A1 of QIQT_GR_DISCHARGEABLE_PLAN: discharge hric_symm.
 #print axioms QIQTH.Curvature.ricci_symm
 -- expected: standard only — Ricci symmetry R_σν=R_νσ via lowered-Riemann pair-symmetry (lowered_riemann_pair_symm:

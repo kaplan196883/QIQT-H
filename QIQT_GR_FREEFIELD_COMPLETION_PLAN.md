@@ -146,11 +146,40 @@ the smooth mode `f_{x,v}` + `(hbridge, hTkk)`, and prove
   localized at the horizon generator) → fully discharged. If a MODELING identification → the GR derivation reduces to
   that single labelled localization datum, the entire modular/BW/boost/stress content machine-checked.
 
-### Phase 5 — feed the free-field kd-equation into `qiqt_bekenstein_gives_gr` *(1–2 fires)*
-Build `qiqt_gr_freefield` = `qiqt_bekenstein_gives_gr` with the flux slot supplied by `freeField_kd_conclusion`
-(Phase 4) instead of `hFlux_of_wedgeKMS_complete hKMS`.  NO capstone refactor needed — `qiqt_bekenstein_gives_gr`
-already takes the kd-equation `∀ x v, BL=0 → kd x v = (2π/ℏ)·BL(T x)v` directly.
-(superseded note) Refactor `qiqt_gr_explicit_kg(_lorentzian)` to supply `hKMS` internally from `freeField_hKMS`.
+### Phase 5 — the free-field capstone ✅ DONE 2026-06-23 (`QIQTH/QiqtGrFreeField.lean`)
+Built (axiom-free, budget 0):
+- **`qiqt_gr_from_flux_complete`** (`WedgeKMSToGR.lean`): the GR theorem taking the per-generator flux equation
+  `kd x v = (2π/ℏ)·BL(T x)v` directly — what `qiqt_bekenstein_gives_gr` consumes — instead of the
+  `WedgeKMSFlux_complete` bundle. Convention-agnostic entry point.
+- **`freeField_kd_conclusion`**: the `∀`-wrap of `freeField_component_hFlux` — per null generator, the localization
+  datum `(hbridge, hTkk)` + `freeField_oneParticle_hFlux` gives the flux equation.
+- **`qiqt_gr_freefield`**: ★★★★★★ THE FREE-FIELD QIQT→GR CAPSTONE. `a·kgStress_μν = G_μν + Λ·g_μν` with the wedge-KMS
+  modular flux supplied by the axiom-free `+2π` one-particle BW machinery. Geometry (`hC`/`hric_symm`/`hreg`), matter
+  (`conserv`), and `hT_symm` all discharged internally for `kgStress`. Only labelled inputs: the Clausius/area-
+  saturation physics + the per-generator localization map `(hbridge, hTkk)` (Gap 2).
+
+---
+
+## ✅ COMPLETION SUMMARY (2026-06-23)
+
+The free-field QIQT→GR derivation is **complete modulo exactly the honest physics floor + the localization map**.
+The full chain is machine-checked axiom-free (`[propext, Classical.choice, Quot.sound]`, budget 0):
+
+`oneParticleBW_niceWedge_unconditional` (modular flow = +2π boost, NO Reeh–Schlieder hyps)
+  → `freeField_oneParticle_hFlux` (modular energy = i·(2π/ℏ)·T_kk, BW + boost-charge supplied internally)
+  → `freeField_component_hFlux` (kd = (2π/ℏ)·T_kk per generator)
+  → `freeField_kd_conclusion` (∀ null generators)
+  → `qiqt_gr_from_flux_complete` / `qiqt_gr_freefield` (Einstein's equations for the explicit free KG field).
+
+**What remains labelled (the honest boundary — all genuine, none mechanical):**
+1. **Gap 2 — the localization map `(hbridge, hTkk)`**: per null horizon generator, which wedge mode realizes it, and
+   that its rapidity stress flux = the horizon stress component. The dynamical-realization input.
+2. **The Clausius/area-saturation law** (`hbound`/`hsat`/`hDnn`/`hD0`) — the Jacobson thermodynamic postulate.
+3. **H2 — the area law from finite `Q_max`** — QIQT-H's central open scientific claim (separate plan).
+4. Matter EOM (`hKG`), Lorentzian/smooth background, coupling `η`/`G`, focusing `hFocus` — irreducible inputs.
+
+Every modular, Bisognano–Wichmann, boost-charge, stress-flux, conservation, and curvature step beneath these is
+machine-checked. The `±2π` sign obstruction is fully resolved (the `+2π` route is the satisfiable one).
 - **Deliverable:** `qiqt_gr_freefield` — the QIQT→GR Einstein equations for the explicit free KG field with `hKMS`
   AND `conserv` AND the geometric debt all discharged; resting on `{Clausius/area law, EOM, Lorentzian frame,
   G/η, the localization map (if Gap 2 stays labelled)}`.

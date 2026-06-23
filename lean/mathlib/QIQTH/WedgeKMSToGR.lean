@@ -210,6 +210,47 @@ theorem qiqt_gr_from_wedge_kms_complete
     hT_symm hric_symm P Pinv hPP hPP' hcong Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0
     (hFlux_of_wedgeKMS_complete hKMS) hFocus hreg conserv
 
+/-- **★★★★ THE GOAL THEOREM, taking the per-generator flux EQUATION directly.**  Identical to
+    `qiqt_gr_from_wedge_kms_complete`, but the modular input is the bare conclusion
+    `hflux : kd x v = (2π/ℏ)·BL(T x)v` per null generator — exactly what `qiqt_bekenstein_gives_gr` consumes —
+    instead of the `WedgeKMSFlux_complete` (`−2π`/`wedgeGenSet`) bundle.  This is the convention-agnostic GR entry
+    point: the bundle supplies `hflux` via `hFlux_of_wedgeKMS_complete`, and the free-field `+2π` route supplies it
+    via `freeField_component_hFlux` — both land here.  Axiom-free, no `sorry`. -/
+theorem qiqt_gr_from_flux_complete
+    (g gi : Point 4 → Fin 4 → Fin 4 → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
+    (T : Point 4 → Fin 4 → Fin 4 → ℝ) (η hbar a : ℝ)
+    (hbar0 : hbar ≠ 0) (heta : η ≠ 0) (ha : a = 2 * Real.pi / (hbar * η))
+    (hT_symm : ∀ x a' b, T x a' b = T x b a')
+    (hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x)
+    (P Pinv : Point 4 → Fin 4 → Fin 4 → ℝ)
+    (hPP : ∀ x i j, (∑ k, P x i k * Pinv x k j) = if i = j then (1 : ℝ) else 0)
+    (hPP' : ∀ x i j, (∑ k, Pinv x i k * P x k j) = if i = j then (1 : ℝ) else 0)
+    (hcong : ∀ x i j, g x i j = ∑ k, ∑ l, P x k i * gm k l * P x l j)
+    (Sf KE A : Point 4 → (Fin 4 → ℝ) → ℝ → ℝ) (sd kd ad : Point 4 → (Fin 4 → ℝ) → ℝ)
+    (hS : ∀ x v, BL (g x) v = 0 → HasDerivAt (Sf x v) (sd x v) 0)
+    (hK : ∀ x v, BL (g x) v = 0 → HasDerivAt (KE x v) (kd x v) 0)
+    (hA : ∀ x v, BL (g x) v = 0 → HasDerivAt (A x v) (ad x v) 0)
+    (hbound : ∀ x v, BL (g x) v = 0 → ∀ᶠ t in 𝓝 0, Sf x v t ≤ η * A x v t)
+    (hsat : ∀ x v, BL (g x) v = 0 → Sf x v 0 = η * A x v 0)
+    (hDnn : ∀ x v, BL (g x) v = 0 → ∀ t, 0 ≤ KE x v t - Sf x v t)
+    (hD0 : ∀ x v, BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0)
+    (hflux : ∀ x v, BL (g x) v = 0 → kd x v = 2 * Real.pi / hbar * BL (T x) v)
+    (hFocus : ∀ x v, BL (g x) v = 0 → ad x v = BL (fun i j => ricci g gi i j x) v)
+    (hreg : ∀ f : Point 4 → ℝ,
+        (∀ y a' b, a * T y a' b = ricci g gi a' b y + f y * g y a' b) →
+        (∀ x ρ, PdiffAt f ρ x) ∧
+          Differentiable ℝ (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y))
+    (conserv : ∀ x ν, div02 g gi (fun y a' b => a * T y a' b) ν x = 0) :
+    ∃ Λ : ℝ, ∀ x μ ν, a * T x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν :=
+  qiqt_bekenstein_gives_gr g gi hsymm hsymm_gi hinv hCg hCgi hC T η hbar a hbar0 heta ha
+    hT_symm hric_symm P Pinv hPP hPP' hcong Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0
+    hflux hFocus hreg conserv
+
 /-- **★★★★ THE GOAL THEOREM with the focusing input DERIVED from Raychaudhuri (no raw `hFocus`).**  Identical
     to `qiqt_gr_from_wedge_kms_complete`, but the labelled `hFocus` (`ad = R_kk`) is replaced by the *kinematic*
     Raychaudhuri data it follows from: a null geodesic congruence `Vcong v` for each null direction `v`
