@@ -23,10 +23,11 @@ variable {n : ℕ}
 noncomputable def kgKinetic (φ : Point n → ℝ) (y : Point n) (a b : Fin n) : ℝ :=
   pd φ a y * pd φ b y
 
-/-- The KG **Lagrangian scalar** `L = g^{αβ} ∂_α φ ∂_β φ − m² φ²`. -/
+/-- The KG **Lagrangian scalar** `L = g^{αβ} ∂_α φ ∂_β φ + m² φ²` (the combination appearing inside the trace
+    term of the stress tensor; the sign makes `∇^μ T_{μν} = 0` close against the equation of motion `□φ = m²φ`). -/
 noncomputable def kgLagr (m : ℝ) (φ : Point n → ℝ) (gi : Point n → Fin n → Fin n → ℝ)
     (y : Point n) : ℝ :=
-  (∑ α, ∑ β, gi y α β * (pd φ α y * pd φ β y)) - m ^ 2 * (φ y) ^ 2
+  (∑ α, ∑ β, gi y α β * (pd φ α y * pd φ β y)) + m ^ 2 * (φ y) ^ 2
 
 /-- The **Klein–Gordon stress tensor** `T_{ab} = ∂_a φ ∂_b φ − ½ g_{ab} L`. -/
 noncomputable def kgStress (m : ℝ) (φ : Point n → ℝ)
@@ -64,5 +65,60 @@ theorem div02_kgStress_eq (m : ℝ) (φ : Point n → ℝ) (g gi : Point n → F
     div02_scalar_metric g gi hsymm hinv (fun y => -(1 / 2 : ℝ) * kgLagr m φ gi y) x hf hg ν,
     pd_const_mul (-(1 / 2 : ℝ)) (kgLagr m φ gi) ν x (hL ν)]
   ring
+
+/-- The **covariant Hessian** of the scalar `φ`: `(∇∇φ)_{ρμ} = ∂_ρ ∂_μ φ − Γ^σ_{ρμ} ∂_σ φ` (the covariant
+    derivative of the gradient covector `∂φ`).  It is symmetric in `ρ μ` (torsion-free connection), which the
+    kinetic identity will use. -/
+noncomputable def kgHess (φ : Point n → ℝ) (g gi : Point n → Fin n → Fin n → ℝ)
+    (ρ μ : Fin n) (x : Point n) : ℝ :=
+  pd (fun y => pd φ μ y) ρ x - ∑ σ, christoffel g gi σ ρ μ x * pd φ σ x
+
+/-- **Leibniz/product rule for the kinetic tensor.**  The covariant derivative of `K_{μν} = ∂_μφ ∂_νφ`
+    factors through the covariant Hessian:
+    `(∇_ρ K)_{μν} = (∇∇φ)_{ρμ} ∂_νφ + ∂_μφ (∇∇φ)_{ρν}`.
+    Each Christoffel term in `covDeriv02` regroups (by `Finset.sum_mul`/`Finset.mul_sum`) into exactly one of
+    the two Hessians, leaving the partial-derivative Leibniz term (`pd_mul`).  This is the second brick of the
+    `conserv` discharge: contracting it with `g^{μρ}` and using `□φ = m²φ` + Hessian symmetry will give
+    `∇^μ K_{μν} = ½ ∂_ν L`, closing conservation via `div02_kgStress_eq`. -/
+theorem covDeriv02_kgKinetic (φ : Point n → ℝ) (g gi : Point n → Fin n → Fin n → ℝ)
+    (ρ μ ν : Fin n) (x : Point n) (hφ2 : ∀ i j, PdiffAt (fun y => pd φ i y) j x) :
+    covDeriv02 g gi (kgKinetic φ) ρ μ ν x
+      = kgHess φ g gi ρ μ x * pd φ ν x + pd φ μ x * kgHess φ g gi ρ ν x := by
+  have hs1 : (∑ σ, christoffel g gi σ ρ μ x * pd φ σ x) * pd φ ν x
+      = ∑ σ, christoffel g gi σ ρ μ x * (pd φ σ x * pd φ ν x) := by
+    rw [Finset.sum_mul]; exact Finset.sum_congr rfl (fun σ _ => by ring)
+  have hs2 : pd φ μ x * (∑ σ, christoffel g gi σ ρ ν x * pd φ σ x)
+      = ∑ σ, christoffel g gi σ ρ ν x * (pd φ μ x * pd φ σ x) := by
+    rw [Finset.mul_sum]; exact Finset.sum_congr rfl (fun σ _ => by ring)
+  simp only [covDeriv02, kgKinetic, kgHess]
+  rw [pd_mul (fun y => pd φ μ y) (fun y => pd φ ν y) ρ x (hφ2 μ ρ) (hφ2 ν ρ),
+    sub_mul, mul_sub, hs1, hs2]
+  ring
+
+/-- The **d'Alembertian** `□φ = g^{μρ} (∇∇φ)_{ρμ}` (the covariant Laplace–Beltrami of the scalar `φ`). -/
+noncomputable def boxField (φ : Point n → ℝ) (g gi : Point n → Fin n → Fin n → ℝ) (x : Point n) : ℝ :=
+  ∑ μ, ∑ ρ, gi x μ ρ * kgHess φ g gi ρ μ x
+
+/-- **Kinetic divergence in Hessian form.**  Contracting the Leibniz rule (`covDeriv02_kgKinetic`) with the
+    inverse metric splits the kinetic divergence into the `□φ` piece and a Hessian-gradient piece:
+    `∇^μ K_{μν} = (□φ) ∂_νφ + g^{μρ} ∂_μφ (∇∇φ)_{ρν}`.
+    The first piece is exactly where the Klein–Gordon equation `□φ = m²φ` enters; the second is `½ ∂_ν` of the
+    kinetic part of `L` (by Hessian symmetry + metric compatibility) — the two facts that, with
+    `div02_kgStress_eq`, close `∇^μ T_{μν} = 0`.  This is the third brick of the `conserv` discharge. -/
+theorem div02_kgKinetic_eq (φ : Point n → ℝ) (g gi : Point n → Fin n → Fin n → ℝ)
+    (ν : Fin n) (x : Point n) (hφ2 : ∀ i j, PdiffAt (fun y => pd φ i y) j x) :
+    div02 g gi (kgKinetic φ) ν x
+      = boxField φ g gi x * pd φ ν x
+        + ∑ μ, ∑ ρ, gi x μ ρ * (pd φ μ x * kgHess φ g gi ρ ν x) := by
+  have hsum : ∀ μ ρ : Fin n, gi x μ ρ * covDeriv02 g gi (kgKinetic φ) ρ μ ν x
+      = gi x μ ρ * kgHess φ g gi ρ μ x * pd φ ν x
+        + gi x μ ρ * (pd φ μ x * kgHess φ g gi ρ ν x) := by
+    intro μ ρ; rw [covDeriv02_kgKinetic φ g gi ρ μ ν x hφ2]; ring
+  simp only [div02]
+  rw [Finset.sum_congr rfl (fun μ _ => Finset.sum_congr rfl (fun ρ _ => hsum μ ρ))]
+  simp only [Finset.sum_add_distrib]
+  congr 1
+  rw [boxField, Finset.sum_mul]
+  exact Finset.sum_congr rfl (fun μ _ => by rw [Finset.sum_mul])
 
 end QIQTH.Curvature
