@@ -177,4 +177,27 @@ theorem div02_kgStress_conserved (m : ℝ) (φ : Point n → ℝ) (g gi : Point 
     div02_kgKinetic_eq φ g gi ν x hφ2, hKG, hHessGrad, hLsplit, hmsqpd]
   ring
 
+/-- **Differentiated inverse relation** (`∂(g·gi = δ)`): for a pointwise inverse metric, differentiating the
+    identity `∑_α g_{μα} gi^{αβ} = δ_μ^β` gives `∑_α ∂_ν(g_{μα}) gi^{αβ} + ∑_α g_{μα} ∂_ν(gi^{αβ}) = 0`.  This is
+    the first step toward inverse-metric compatibility `∇gi = 0` (which then follows by contracting with `gi^{λμ}`
+    and substituting `metric_compat` for `∂g`), the one geometric fact still needed for `hHessGrad`. -/
+theorem pd_metric_inv_identity (g gi : Point n → Fin n → Fin n → ℝ) (μ β ν : Fin n) (x : Point n)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b ρ, PdiffAt (fun y => g y a b) ρ x)
+    (hgi : ∀ a b ρ, PdiffAt (fun y => gi y a b) ρ x) :
+    (∑ α, pd (fun y => g y μ α) ν x * gi x α β)
+      + (∑ α, g x μ α * pd (fun y => gi y α β) ν x) = 0 := by
+  have h1 : pd (fun y => ∑ α, g y μ α * gi y α β) ν x = 0 := by
+    have heq : (fun y => ∑ α, g y μ α * gi y α β) = fun _ => (if μ = β then (1 : ℝ) else 0) := by
+      funext y; exact hinv y μ β
+    rw [heq]; exact pd_const _ ν x
+  have h2 : pd (fun y => ∑ α, g y μ α * gi y α β) ν x
+      = (∑ α, pd (fun y => g y μ α) ν x * gi x α β)
+        + (∑ α, g x μ α * pd (fun y => gi y α β) ν x) := by
+    rw [pd_sum Finset.univ (fun α y => g y μ α * gi y α β) ν x
+        (fun α _ => (hg μ α ν).mul (hgi α β ν)), ← Finset.sum_add_distrib]
+    exact Finset.sum_congr rfl (fun α _ =>
+      pd_mul (fun y => g y μ α) (fun y => gi y α β) ν x (hg μ α ν) (hgi α β ν))
+  rw [← h2, h1]
+
 end QIQTH.Curvature
