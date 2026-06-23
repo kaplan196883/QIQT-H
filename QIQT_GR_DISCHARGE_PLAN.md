@@ -51,10 +51,14 @@ remains the Clausius/area-saturation law (the honest floor by design).
 The explicit free Klein–Gordon stress tensor is now constructed: `kgKinetic K_ab = ∂_aφ ∂_bφ`,
 `kgLagr L = g^{αβ}∂_αφ∂_βφ − m²φ²`, `kgStress T_ab = ∂_aφ ∂_bφ − ½ g_ab L`. The **conservation SPLIT**
 `div02_kgStress_eq`: `∇^μ T_μν = ∇^μ K_μν − ½ ∂_ν L` is proven axiom-free — the scalar/metric term is dispatched
-by metric compatibility (`div02_scalar_metric`, the same mechanism making `Λ·g` covariantly constant). REMAINING:
-the purely kinetic identity `∇^μ K_μν = ½ ∂_ν L`, which is the Klein–Gordon equation of motion
-(`g^{μρ}∇_ρ∂_μφ = m²φ`) + symmetry of the second covariant derivative of a scalar (`covDeriv02_symm`) + the
-Leibniz/product rule for `covDeriv02` — the next bricks. `conserv` for explicit KG is then `a·`(this) `= 0`.
+by metric compatibility (`div02_scalar_metric`, the same mechanism making `Λ·g` covariantly constant).
+**Bricks 2–3 DONE (`c2c0fd3`, 2026-06-23, axiom-free):** `kgHess (∇∇φ)_ρμ = ∂_ρ∂_μφ − Γ^σ_ρμ∂_σφ`;
+`covDeriv02_kgKinetic` (Leibniz) `(∇_ρK)_μν = (∇∇φ)_ρμ ∂_νφ + ∂_μφ(∇∇φ)_ρν`; `boxField □φ = g^{μρ}(∇∇φ)_ρμ`;
+`div02_kgKinetic_eq` (contraction) `∇^μK_μν = (□φ)∂_νφ + g^{μρ}∂_μφ(∇∇φ)_ρν`. Also fixed `kgLagr` sign to
+`g^{αβ}∂_αφ∂_βφ + m²φ²` so conservation closes against `□φ = m²φ`. **REMAINING (final assembly):** (i) the KG
+equation hypothesis `boxField φ = m²φ`; (ii) the Hessian-gradient identity `g^{μρ}∂_μφ(∇∇φ)_ρν =
+½∂_ν(g^{αβ}∂_αφ∂_βφ)` — needs Hessian symmetry (`pd_comm` + torsion-free Γ) + metric compatibility (`∇g=0`).
+Then `∇^μT_μν = (□φ − m²φ)∂_νφ = 0`, and `conserv` for explicit KG is `a·`(this)`= 0` (via a `div02` constant-scale).
 
 ---
 
