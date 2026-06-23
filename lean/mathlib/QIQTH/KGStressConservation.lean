@@ -466,4 +466,53 @@ theorem div02_kgStress_conserved_of_KG (m : ℝ) (φ : Point n → ℝ) (g gi : 
   div02_kgStress_conserved m φ g gi x ν hsymm hinv hKin hg hL hφ2 hφd hgradSq hKG
     (hHessGrad_eq φ g gi ν x hsymm hsymm_gi hinv hg hgi hφ2 hφ)
 
+/-- **The raised divergence scales out a constant** `∇^μ(a·X)_{μν} = a·∇^μ X_{μν}` (the connection and metric
+    are linear, `a` is constant — `pd_const_mul` + `Finset.mul_sum`).  This is what carries the Einstein
+    coupling `a` through the conservation law `∇·(a·T) = a·∇·T`. -/
+theorem div02_const_smul (g gi : Point n → Fin n → Fin n → ℝ) (a : ℝ)
+    (X : Point n → Fin n → Fin n → ℝ) (ν : Fin n) (x : Point n)
+    (hX : ∀ b c ρ, PdiffAt (fun y => X y b c) ρ x) :
+    div02 g gi (fun y b c => a * X y b c) ν x = a * div02 g gi X ν x := by
+  have hcd : ∀ μ ρ : Fin n,
+      covDeriv02 g gi (fun y b c => a * X y b c) ρ μ ν x = a * covDeriv02 g gi X ρ μ ν x := by
+    intro μ ρ
+    simp only [covDeriv02]
+    rw [pd_const_mul a (fun y => X y μ ν) ρ x (hX μ ν ρ),
+      show (∑ σ, christoffel g gi σ ρ μ x * (a * X x σ ν))
+          = a * ∑ σ, christoffel g gi σ ρ μ x * X x σ ν from by
+        rw [Finset.mul_sum]; exact Finset.sum_congr rfl (fun σ _ => by ring),
+      show (∑ σ, christoffel g gi σ ρ ν x * (a * X x μ σ))
+          = a * ∑ σ, christoffel g gi σ ρ ν x * X x μ σ from by
+        rw [Finset.mul_sum]; exact Finset.sum_congr rfl (fun σ _ => by ring)]
+    ring
+  simp only [div02]
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl (fun μ _ => ?_)
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl (fun ρ _ => ?_)
+  rw [hcd μ ρ]; ring
+
+/-- **★★★★★★ THE `conserv` INPUT OF THE QIQT→GR DERIVATION, IN ITS EXACT FORM, DISCHARGED for the explicit KG
+    field.**  `∇·(a·T) = 0` with `T = kgStress` (the free Klein–Gordon stress tensor): the Einstein-coupling
+    constant `a` scales out (`div02_const_smul`) and the bare divergence vanishes
+    (`div02_kgStress_conserved_of_KG`).  This is exactly the `conserv : ∀ x ν, div02 g gi (fun y a' b => a · T y a' b) ν x = 0`
+    hypothesis consumed by `WedgeKMSToGR`/`qiqt_gr_from_wedge_kms_complete` — so the matter-conservation input is now
+    a THEOREM for the explicit free scalar, modulo only the equation of motion `□φ = m²φ`. -/
+theorem kg_conserv (a m : ℝ) (φ : Point n → ℝ) (g gi : Point n → Fin n → Fin n → ℝ)
+    (x : Point n) (ν : Fin n)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hKin : ∀ a b ρ, PdiffAt (fun y => kgKinetic φ y a b) ρ x)
+    (hg : ∀ a b ρ, PdiffAt (fun y => g y a b) ρ x)
+    (hgi : ∀ a b ρ, PdiffAt (fun y => gi y a b) ρ x)
+    (hL : ∀ ρ, PdiffAt (kgLagr m φ gi) ρ x)
+    (hφ2 : ∀ i j, PdiffAt (fun y => pd φ i y) j x) (hφd : PdiffAt φ ν x) (hφ : ContDiff ℝ ⊤ φ)
+    (hgradSq : PdiffAt (fun y => ∑ α, ∑ β, gi y α β * (pd φ α y * pd φ β y)) ν x)
+    (hkgS : ∀ b c ρ, PdiffAt (fun y => kgStress m φ g gi y b c) ρ x)
+    (hKG : boxField φ g gi x = m ^ 2 * φ x) :
+    div02 g gi (fun y b c => a * kgStress m φ g gi y b c) ν x = 0 := by
+  rw [div02_const_smul g gi a (kgStress m φ g gi) ν x hkgS,
+    div02_kgStress_conserved_of_KG m φ g gi x ν hsymm hsymm_gi hinv hKin hg hgi hL hφ2 hφd hφ hgradSq hKG,
+    mul_zero]
+
 end QIQTH.Curvature
