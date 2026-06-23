@@ -55,10 +55,15 @@ by metric compatibility (`div02_scalar_metric`, the same mechanism making `Λ·g
 **Bricks 2–3 DONE (`c2c0fd3`, 2026-06-23, axiom-free):** `kgHess (∇∇φ)_ρμ = ∂_ρ∂_μφ − Γ^σ_ρμ∂_σφ`;
 `covDeriv02_kgKinetic` (Leibniz) `(∇_ρK)_μν = (∇∇φ)_ρμ ∂_νφ + ∂_μφ(∇∇φ)_ρν`; `boxField □φ = g^{μρ}(∇∇φ)_ρμ`;
 `div02_kgKinetic_eq` (contraction) `∇^μK_μν = (□φ)∂_νφ + g^{μρ}∂_μφ(∇∇φ)_ρν`. Also fixed `kgLagr` sign to
-`g^{αβ}∂_αφ∂_βφ + m²φ²` so conservation closes against `□φ = m²φ`. **REMAINING (final assembly):** (i) the KG
-equation hypothesis `boxField φ = m²φ`; (ii) the Hessian-gradient identity `g^{μρ}∂_μφ(∇∇φ)_ρν =
-½∂_ν(g^{αβ}∂_αφ∂_βφ)` — needs Hessian symmetry (`pd_comm` + torsion-free Γ) + metric compatibility (`∇g=0`).
-Then `∇^μT_μν = (□φ − m²φ)∂_νφ = 0`, and `conserv` for explicit KG is `a·`(this)`= 0` (via a `div02` constant-scale).
+`g^{αβ}∂_αφ∂_βφ + m²φ²` so conservation closes against `□φ = m²φ`.
+**Bricks 4–5 DONE (`ce4c39d`, 2026-06-23, axiom-free):** `kgHess_symm` (the covariant scalar Hessian
+`(∇∇φ)_ρμ = (∇∇φ)_μρ` is symmetric — `pd_comm` + `christoffel_symm`); and the FINAL conditional conservation
+`div02_kgStress_conserved`: `∇^μ T_μν = 0` for explicit KG given exactly TWO named facts — `hKG` (EOM `□φ = m²φ`)
+and `hHessGrad` (the Hessian-gradient identity `g^{μρ}∂_μφ(∇∇φ)_ρν = ½∂_ν(g^{αβ}∂_αφ∂_βφ)`). The split +
+contraction collapse to `(□φ − m²φ)∂_νφ = 0`. **REMAINING (the single last brick):** prove `hHessGrad` from the
+codebase's `metric_compat` (`covDeriv02 g gi g … = 0`, i.e. `∇g = 0`) + `kgHess_symm` + inverse-metric
+compatibility (`∂_ν gi = −gi·gi·∂_ν g`). `hKG` is the matter EOM (physics — a Jacobson-program input, not a
+mechanical discharge target). So `conserv` for explicit KG is one purely-geometric metric-compatibility lemma away.
 
 ---
 
