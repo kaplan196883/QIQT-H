@@ -8,19 +8,12 @@
   joint convexity of the quantum relative entropy (Lieb's concavity → Carlen §6.3), built end to
   end from the `CStarMatrix` bridge.  This retires the 4 DPI axioms (budget 21 → 17).
 
-  **HONEST SCOPE.**  This file discharges DPI for the *mixed-unitary* CPTP class
-  `Φ(ρ) = Σₖ pₖ Uₖ ρ Uₖ⋆` — a genuine but proper subclass (it includes e.g. the depolarizing and
-  dephasing channels) — via the §6.3 joint convexity proved here.
-
-  **UPDATE (2026-06-19): the partial-trace case is now ALSO proved**, by a different route.
-  `QIQTH.Entropy.partial_trace_dpi` establishes `D(Tr₂ρ ‖ Tr₂σ) ≤ D(ρ‖σ)` (and its mirror
-  `QIQTH.Entropy.partial_trace_left_dpi`) from the discrete Heisenberg–Weyl 1-design / partial-trace
-  averaging of Carlen §5.7+§6.4 — exactly the ingredient flagged here as missing.  Its headline
-  consequences, the **subadditivity** (`QIQTH.Entropy.subadditivity`) and **strong subadditivity**
-  (`QIQTH.Entropy.strong_subadditivity`, Lieb–Ruskai) of the von Neumann entropy, are likewise proved
-  and axiom-free.  So partial trace / regional restriction is **no longer a frontier**.  Fully
-  *general* CPTP DPI (arbitrary Kraus channels, via the Stinespring dilation) remains the cited
-  frontier.  The former `regional_monotone`/`DPI_comp` corollaries had no consumers and are dropped.
+  **HONEST SCOPE.**  This discharges DPI for the *mixed-unitary* CPTP class `Φ(ρ) = Σₖ pₖ Uₖ ρ Uₖ⋆`
+  — a genuine but proper subclass (it includes e.g. the depolarizing and dephasing channels).
+  Fully general CPTP DPI (in particular partial trace / regional restriction, the former `restrict`)
+  additionally needs the Stinespring dilation / partial-trace averaging of Carlen §6.4, which is
+  beyond the §6.3 joint convexity proved here; that remains the cited frontier.  The former
+  `regional_monotone`/`DPI_comp` corollaries had no consumers and are dropped.
 -/
 
 import QIQTH.Entropy.RelEntropyDPI

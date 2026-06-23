@@ -18,3 +18,7 @@ build/*.synctex.gz
 refs/
 .playwright-mcp/
 refs/
+
+# Python bytecode
+__pycache__/
+*.pyc
