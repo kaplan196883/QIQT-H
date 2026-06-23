@@ -103,6 +103,10 @@ the Einstein coupling scales out) + **`kg_conserv`**: `div02 g gi (fun y b c => 
 — *exactly* the `conserv : ∀ x ν, div02 g gi (fun y a' b => a·T y a' b) ν x = 0` hypothesis consumed by
 `WedgeKMSToGR`/`qiqt_gr_from_wedge_kms_complete` with `T = kgStress`. So `conserv` is not just discharged in the
 abstract — it is now a drop-in theorem for the GR derivation, modulo only the matter EOM.
+**CLEAN DROP-IN (`0a2c500`, 2026-06-23, axiom-free):** `kg_conserv_of_contDiff` — the same `∇·(a·kgStress)=0`
+but with every pointwise `PdiffAt` derived from a single `ContDiff` assumption on `φ` and the metric components,
+so the hypotheses collapse to: metric symmetry/inverse + `ContDiff φ/g/gi` + the EOM `□φ=m²φ`. This is the form
+convenient to plug straight into `qiqt_gr_from_wedge_kms_complete`.
 
 ---
 
