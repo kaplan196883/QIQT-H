@@ -591,6 +591,85 @@ theorem strip_eqZero_of_top_edge_zero {Φ : ℂ → ℂ}
     simp only [hu0]; exact tendsto_const_nhds
   exact tendsto_nhds_unique hΦlim hΦ0
 
+/-- **★★★★★★★★★ THE SEPARATING Reeh–Schlieder input, DISCHARGED for all `m > 0`, axiom-free (Pauli–Jordan).**
+    `NiceWedgeSeparating m`: the only `v` with both `v` and `i·v` in the nice-core wedge subspace `K` is `v = 0`
+    (symplectic non-degeneracy / no nonzero complex line).  Proof — pure modular/KMS: from the boost-KMS witness
+    (`stripKMSrvd_closure`) take `F_vv` for `(v,v)` and `F_c` for `(i·v, v)`; both `v, i·v ∈ K = closure(genSet)`.
+    On the TOP edge `F_c(t) = ⟪v, U_t(i v)⟫ = i⟪v, U_t v⟫ = i·F_vv(t)`, so `D := F_c − i·F_vv` vanishes on the
+    whole top edge.  `D` is holomorphic on the strip, continuous and bounded on its closure, so by strip
+    boundary-uniqueness (`strip_eqZero_of_top_edge_zero`) it vanishes on the BOTTOM edge too.  But there the KMS
+    edges give `F_c(t−i) = ⟪U_t(i v), v⟫ = −i⟪U_t v, v⟫` and `F_vv(t−i) = ⟪U_t v, v⟫`, so `0 = D(t−i) =
+    −i⟪U_t v,v⟫ − i⟪U_t v,v⟫ = −2i⟪U_t v,v⟫`, forcing `⟪U_t v, v⟫ = 0` for all `t`.  At `t = 0` (`U_0 = id`):
+    `⟪v,v⟫ = 0`, hence `v = 0`.  This is the genuine free-field Pauli–Jordan content, now a *theorem* — the LAST
+    Reeh–Schlieder input of the free-field one-particle Bisognano–Wichmann. -/
+theorem niceWedgeSeparating_pos_mass {m : ℝ} (hm : 0 < m) : NiceWedgeSeparating m := by
+  intro v hvK hivK
+  rw [← SetLike.mem_coe, niceWedgeClosedSubmodule_coe] at hvK hivK
+  obtain ⟨Fvv, hFvvD, ⟨Cvv, hCvv⟩, hFvvT, hFvvB⟩ := stripKMSrvd_closure hm hvK hvK
+  obtain ⟨Fc, hFcD, ⟨Cc, hCc⟩, hFcT, hFcB⟩ := stripKMSrvd_closure hm hivK hvK
+  set D : ℂ → ℂ := fun z => Fc z - Complex.I * Fvv z with hD
+  -- TOP edge: `D(t) = 0` (`F_c(t) = i·F_vv(t)`)
+  have hDtop : ∀ t : ℝ, D (t : ℂ) = 0 := by
+    intro t
+    have e1 : Fc (t : ℂ) = Complex.I * Fvv (t : ℂ) := by
+      rw [hFcT t, hFvvT t, map_smul, inner_smul_right]
+    simp only [hD, e1, sub_self]
+  -- closure of the open strip = the closed strip
+  have hclos : closure (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) = Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0 := by
+    apply Set.Subset.antisymm
+    · calc closure (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0)
+          ⊆ Complex.im ⁻¹' closure (Set.Ioo (-1 : ℝ) 0) :=
+            Complex.continuous_im.closure_preimage_subset _
+        _ = Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0 := by rw [closure_Ioo (by norm_num : (-1 : ℝ) ≠ 0)]
+    · intro z hz
+      rw [Set.mem_preimage, Set.mem_Icc] at hz
+      rw [Metric.mem_closure_iff]
+      intro ε hε
+      have hzc : z.im ∈ closure (Set.Ioo (-1 : ℝ) 0) := by
+        rw [closure_Ioo (by norm_num : (-1 : ℝ) ≠ 0)]; exact Set.mem_Icc.mpr hz
+      rw [Metric.mem_closure_iff] at hzc
+      obtain ⟨y, hyIoo, hyd⟩ := hzc ε hε
+      refine ⟨z - ((z.im - y : ℝ) : ℂ) * Complex.I, ?_, ?_⟩
+      · rw [Set.mem_preimage]
+        have him : (z - ((z.im - y : ℝ) : ℂ) * Complex.I).im = y := by
+          simp only [Complex.sub_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
+            Complex.I_im, Complex.I_re]; ring
+        rw [him]; exact hyIoo
+      · have hsub' : z - (z - ((z.im - y : ℝ) : ℂ) * Complex.I) = ((z.im - y : ℝ) : ℂ) * Complex.I := by
+          ring
+        rw [dist_eq_norm, hsub', norm_mul, Complex.norm_I, mul_one, Complex.norm_real,
+          Real.norm_eq_abs]
+        rw [Real.dist_eq] at hyd
+        exact hyd
+  have hDdiff : DifferentiableOn ℂ D (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) :=
+    hFcD.differentiableOn.sub ((differentiableOn_const _).mul hFvvD.differentiableOn)
+  have hDcont : ContinuousOn D (Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0) := by
+    rw [← hclos]
+    exact hFcD.continuousOn.sub (continuousOn_const.mul hFvvD.continuousOn)
+  have hDbdd : BddAbove ((norm ∘ D) '' (Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0)) := by
+    refine ⟨Cc + Cvv, ?_⟩
+    rintro r ⟨z, _, rfl⟩
+    calc (norm ∘ D) z = ‖Fc z - Complex.I * Fvv z‖ := rfl
+      _ ≤ ‖Fc z‖ + ‖Complex.I * Fvv z‖ := norm_sub_le _ _
+      _ = ‖Fc z‖ + ‖Fvv z‖ := by rw [norm_mul, Complex.norm_I, one_mul]
+      _ ≤ Cc + Cvv := add_le_add (hCc z) (hCvv z)
+  have hDbot := strip_eqZero_of_top_edge_zero hDdiff hDcont hDbdd hDtop
+  -- BOTTOM edge: `⟪U_t v, v⟫ = 0` for all `t`
+  have key : ∀ t : ℝ,
+      (inner ℂ (QIQTH.Fock.OneParticle.boostUnitary (2 * Real.pi * t) v) v : ℂ) = 0 := by
+    intro t
+    have hd : Fc ((t : ℂ) - Complex.I) - Complex.I * Fvv ((t : ℂ) - Complex.I) = 0 := by
+      have h := hDbot t; rw [hD] at h; exact h
+    rw [hFcB t, hFvvB t, map_smul, inner_smul_left, Complex.conj_I] at hd
+    set A : ℂ := inner ℂ (QIQTH.Fock.OneParticle.boostUnitary (2 * Real.pi * t) v) v with hA
+    have hd2 : (-2 * Complex.I) * A = 0 := by rw [← hd]; ring
+    rcases mul_eq_zero.mp hd2 with h | h
+    · exact absurd h (mul_ne_zero (by norm_num) Complex.I_ne_zero)
+    · exact h
+  have h00 := key 0
+  rw [mul_zero, QIQTH.Fock.OneParticle.boostUnitary_zero_apply] at h00
+  exact inner_self_eq_zero.mp h00
+
 open QIQTH.StandardSubspaceModular in
 /-- **★★★★★★★★ THE free-field one-particle Bisognano–Wichmann, reduced to its SINGLE remaining analytic input.**
     `modUnitary S t = boostUnitary(2πt)` for the nice-core wedge standard subspace, given ONLY the Reeh–Schlieder
@@ -609,5 +688,23 @@ theorem oneParticleBW_niceWedge_of_separating {m : ℝ} (hm : 0 < m)
       (niceWedge_isSeparating_of_no_complex_line m hsep)
       (niceWedge_isCyclic_of_total_integral m (niceWedgeCyclic_pos_mass hm))) t = V t :=
   oneParticleBW_niceWedge_reehSchlieder hm V hVboost hsep (niceWedgeCyclic_pos_mass hm)
+
+open QIQTH.StandardSubspaceModular in
+/-- **★★★★★★★★★★ THE free-field one-particle Bisognano–Wichmann — FULLY UNCONDITIONAL, axiom-free.**
+    For every mass `m > 0` and every candidate boost representation `V t = boostUnitary(2πt)`, the modular flow of
+    the nice-core wedge standard subspace equals the boost: `modUnitary S t = V t`, with NO Reeh–Schlieder
+    hypotheses whatsoever.  BOTH analytic inputs are now discharged internally and unconditionally:
+    `niceWedgeSeparating_pos_mass` (Pauli–Jordan symplectic non-degeneracy, via the KMS uniqueness argument) and
+    `niceWedgeCyclic_pos_mass` (wedge-totality, via the Wiener–Tauberian theorem).  The free-field one-particle
+    Bisognano–Wichmann theorem `modular flow = geometric boost` is therefore a *fully closed, axiom-free theorem* —
+    no cited frontier remains on the one-particle level.  (`#print axioms` = the standard three only.) -/
+theorem oneParticleBW_niceWedge_unconditional {m : ℝ} (hm : 0 < m)
+    (V : ℝ → (Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ)))
+    (hVboost : ∀ t x, V t x = QIQTH.Fock.OneParticle.boostUnitary (2 * Real.pi * t) x) :
+    ∀ t, modUnitary (niceWedgeStandardSubspace m
+      (niceWedge_isSeparating_of_no_complex_line m (niceWedgeSeparating_pos_mass hm))
+      (niceWedge_isCyclic_of_total_integral m (niceWedgeCyclic_pos_mass hm))) t = V t :=
+  oneParticleBW_niceWedge_reehSchlieder hm V hVboost
+    (niceWedgeSeparating_pos_mass hm) (niceWedgeCyclic_pos_mass hm)
 
 end QIQTH.Fock.CyclicWitness
