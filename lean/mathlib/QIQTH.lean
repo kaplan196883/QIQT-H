@@ -411,6 +411,7 @@ import QIQTH.SpectralSum
 import QIQTH.EntanglementFirstLaw
 import QIQTH.Curvature
 import QIQTH.EinsteinFieldEquation
+import QIQTH.KGStressConservation
 import QIQTH.ManifoldCurvature
 import QIQTH.ManifoldCommutator
 import QIQTH.PseudoRiemannian
