@@ -121,4 +121,60 @@ theorem div02_kgKinetic_eq (φ : Point n → ℝ) (g gi : Point n → Fin n → 
   rw [boxField, Finset.sum_mul]
   exact Finset.sum_congr rfl (fun μ _ => by rw [Finset.sum_mul])
 
+/-- **The covariant Hessian of a scalar is symmetric** `(∇∇φ)_{ρμ} = (∇∇φ)_{μρ}`: the partial-derivative
+    part commutes (`pd_comm`, smoothness) and the Christoffel part is symmetric in its lower indices
+    (`christoffel_symm`, torsion-freeness).  This symmetry is exactly what turns the Hessian-gradient term into
+    a perfect `∂_ν` of the kinetic scalar. -/
+theorem kgHess_symm (φ : Point n → ℝ) (g gi : Point n → Fin n → Fin n → ℝ) (ρ μ : Fin n) (x : Point n)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hφ : ContDiff ℝ ⊤ φ) :
+    kgHess φ g gi ρ μ x = kgHess φ g gi μ ρ x := by
+  simp only [kgHess]
+  rw [pd_comm φ ρ μ x hφ]
+  congr 1
+  exact Finset.sum_congr rfl (fun σ _ => by rw [christoffel_symm g gi hsymm σ ρ μ x])
+
+/-- **★ KG STRESS-TENSOR CONSERVATION (final assembly), conditional on the two physical/geometric facts.**
+    For the explicit Klein–Gordon field, `∇^μ T_{μν} = 0` follows from exactly:
+    * `hKG`  — the equation of motion `□φ = m²φ` (`boxField φ = m²·φ`); and
+    * `hHessGrad` — the Hessian-gradient identity `g^{μρ} ∂_μφ (∇∇φ)_{ρν} = ½ ∂_ν(g^{αβ}∂_αφ ∂_βφ)`, the one
+      place metric compatibility (`metric_compat`, `∇g = 0`) + Hessian symmetry (`kgHess_symm`) enter.
+    Given these, the split (`div02_kgStress_eq`) + contraction (`div02_kgKinetic_eq`) collapse algebraically:
+    `∇^μ T_{μν} = (□φ − m²φ) ∂_νφ = 0`.  This discharges the `conserv` input of the free-field QIQT→GR surface
+    down to the Klein–Gordon equation of motion + the (purely geometric) Hessian-gradient metric-compatibility
+    identity — no other physics. -/
+theorem div02_kgStress_conserved (m : ℝ) (φ : Point n → ℝ) (g gi : Point n → Fin n → Fin n → ℝ)
+    (x : Point n) (ν : Fin n)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hKin : ∀ a b ρ, PdiffAt (fun y => kgKinetic φ y a b) ρ x)
+    (hg : ∀ a b ρ, PdiffAt (fun y => g y a b) ρ x)
+    (hL : ∀ ρ, PdiffAt (kgLagr m φ gi) ρ x)
+    (hφ2 : ∀ i j, PdiffAt (fun y => pd φ i y) j x)
+    (hφd : PdiffAt φ ν x)
+    (hgradSq : PdiffAt (fun y => ∑ α, ∑ β, gi y α β * (pd φ α y * pd φ β y)) ν x)
+    (hKG : boxField φ g gi x = m ^ 2 * φ x)
+    (hHessGrad : (∑ μ, ∑ ρ, gi x μ ρ * (pd φ μ x * kgHess φ g gi ρ ν x))
+        = (1 / 2 : ℝ) * pd (fun y => ∑ α, ∑ β, gi y α β * (pd φ α y * pd φ β y)) ν x) :
+    div02 g gi (kgStress m φ g gi) ν x = 0 := by
+  have hmsq : PdiffAt (fun y => m ^ 2 * (φ y) ^ 2) ν x := by
+    have h1 : PdiffAt (fun y => (φ y) ^ 2) ν x := by
+      rw [show (fun y => (φ y) ^ 2) = fun y => φ y * φ y by funext y; ring]
+      exact hφd.mul hφd
+    have hconst : PdiffAt (fun _ : Point n => m ^ 2) ν x := differentiableAt_const _
+    exact hconst.mul h1
+  have hLsplit : pd (kgLagr m φ gi) ν x
+      = pd (fun y => ∑ α, ∑ β, gi y α β * (pd φ α y * pd φ β y)) ν x
+        + pd (fun y => m ^ 2 * (φ y) ^ 2) ν x := by
+    have hLeq : (kgLagr m φ gi)
+        = fun y => (∑ α, ∑ β, gi y α β * (pd φ α y * pd φ β y)) + m ^ 2 * (φ y) ^ 2 := by
+      funext y; rfl
+    rw [hLeq, pd_add _ _ ν x hgradSq hmsq]
+  have hmsqpd : pd (fun y => m ^ 2 * (φ y) ^ 2) ν x = m ^ 2 * (2 * φ x * pd φ ν x) := by
+    rw [show (fun y => m ^ 2 * (φ y) ^ 2) = fun y => m ^ 2 * (φ y * φ y) by funext y; ring,
+      pd_const_mul (m ^ 2) (fun y => φ y * φ y) ν x (hφd.mul hφd), pd_mul φ φ ν x hφd hφd]
+    ring
+  rw [div02_kgStress_eq m φ g gi x ν hsymm hinv hKin hg hL,
+    div02_kgKinetic_eq φ g gi ν x hφ2, hKG, hHessGrad, hLsplit, hmsqpd]
+  ring
+
 end QIQTH.Curvature
