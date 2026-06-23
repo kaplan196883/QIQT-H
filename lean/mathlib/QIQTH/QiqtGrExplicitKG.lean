@@ -17,6 +17,7 @@ import QIQTH.WedgeKMSToGR
 import QIQTH.KGStressConservation
 import QIQTH.RicciSymm
 import QIQTH.ChristoffelSmooth
+import QIQTH.HregExplicitKG
 
 namespace QIQTH.WedgeKMSToGR
 
@@ -55,16 +56,17 @@ theorem qiqt_gr_explicit_kg
     (hD0 : ∀ x v, BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0)
     (hKMS : WedgeKMSFlux_complete g (kgStress m φ g gi) kd hbar)
     (hFocus : ∀ x v, BL (g x) v = 0 → ad x v = BL (fun i j => ricci g gi i j x) v)
-    (hreg : ∀ f : Point 4 → ℝ,
-        (∀ y a' b, a * kgStress m φ g gi y a' b = ricci g gi a' b y + f y * g y a' b) →
-        (∀ x ρ, PdiffAt f ρ x) ∧
-          Differentiable ℝ (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y)) :
-    ∃ Λ : ℝ, ∀ x μ ν, a * kgStress m φ g gi x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν := by
-  -- `hC` and `hric_symm` are now THEOREMS (Tier A5, A1), supplied internally:
+    : ∃ Λ : ℝ, ∀ x μ ν, a * kgStress m φ g gi x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν := by
+  -- `hC`, `hric_symm` and `hreg` are now THEOREMS (Tier A5, A1, A4), supplied internally:
   have hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y) :=
     fun a b c => christoffel_contDiff g gi hCg hCgi a b c
   have hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x :=
     fun x a' b => ricci_symm g gi hsymm hsymm_gi hinv hCg hC a' b x
+  have hreg : ∀ f : Point 4 → ℝ,
+      (∀ y a' b, a * kgStress m φ g gi y a' b = ricci g gi a' b y + f y * g y a' b) →
+      (∀ x ρ, PdiffAt f ρ x) ∧
+        Differentiable ℝ (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y) :=
+    fun f hrel => hreg_kg m φ g gi a hsymm_gi hinv hφ hCg hCgi f hrel
   refine qiqt_gr_from_wedge_kms_complete g gi hsymm hsymm_gi hinv hCg hCgi hC
     (kgStress m φ g gi) η hbar a hbar0 heta ha ?_ hric_symm P Pinv hPP hPP' hcong
     Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0 hKMS hFocus hreg ?_
