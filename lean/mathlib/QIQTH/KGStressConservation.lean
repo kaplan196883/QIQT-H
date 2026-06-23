@@ -225,4 +225,100 @@ theorem pd_g_eq (g gi : Point n → Fin n → Fin n → ℝ) (μ α ν : Fin n) 
   simp only [covDeriv02] at h
   linarith [h]
 
+/-- **★ INVERSE-METRIC COMPATIBILITY `∇gi = 0`** (upper-index companion of `metric_compat`):
+    `∂_ν gi^{λβ} = −∑σ Γ^λ_{νσ} gi^{σβ} − ∑σ Γ^β_{νσ} gi^{σλ}`.
+    Contract the differentiated inverse relation (`pd_metric_inv_identity`) with `gi^{λμ}`, extract `∂gi^{λβ}` via
+    the δ-identity `gi_g_delta`, substitute `pd_g_eq` for `∂g`, and collapse the two double sums by the
+    δ-contractions `∑α g_{σα}gi^{αβ} = δ_σ^β` (`hinv`) and `∑μ gi^{λμ}g_{μσ} = δ^λ_σ` (`gi_g_delta`).  The last
+    purely-geometric fact needed for `hHessGrad`. -/
+theorem pd_gi_eq (g gi : Point n → Fin n → Fin n → ℝ) (lam β ν : Fin n) (x : Point n)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b ρ, PdiffAt (fun y => g y a b) ρ x)
+    (hgi : ∀ a b ρ, PdiffAt (fun y => gi y a b) ρ x) :
+    pd (fun y => gi y lam β) ν x
+      = - (∑ σ, christoffel g gi lam ν σ x * gi x σ β)
+        - (∑ σ, christoffel g gi β ν σ x * gi x σ lam) := by
+  classical
+  have hinvx : ∀ a b, (∑ σ, g x a σ * gi x σ b) = if a = b then 1 else 0 := fun a b => hinv x a b
+  -- extraction: `∑μ gi^{λμ} (∑α g_{μα} w_α) = w_λ`
+  have hExtract : (∑ μ, gi x lam μ * (∑ α, g x μ α * pd (fun y => gi y α β) ν x))
+      = pd (fun y => gi y lam β) ν x := by
+    have e1 : (∑ μ, gi x lam μ * (∑ α, g x μ α * pd (fun y => gi y α β) ν x))
+        = ∑ α, (∑ μ, gi x lam μ * g x μ α) * pd (fun y => gi y α β) ν x := by
+      have e0 : (∑ μ, gi x lam μ * (∑ α, g x μ α * pd (fun y => gi y α β) ν x))
+          = ∑ μ, ∑ α, gi x lam μ * g x μ α * pd (fun y => gi y α β) ν x := by
+        refine Finset.sum_congr rfl (fun μ _ => ?_)
+        rw [Finset.mul_sum]
+        exact Finset.sum_congr rfl (fun α _ => by ring)
+      rw [e0, Finset.sum_comm]
+      refine Finset.sum_congr rfl (fun α _ => ?_)
+      rw [Finset.sum_mul]
+    rw [e1, Finset.sum_congr rfl (fun α _ => by rw [gi_g_delta g gi x hsymm hsymm_gi hinvx lam α])]
+    simp only [ite_mul, one_mul, zero_mul, Finset.sum_ite_eq, Finset.mem_univ, if_true]
+  -- metric-contracted identity from `pd_metric_inv_identity`
+  have hME : ∀ μ : Fin n, (∑ α, g x μ α * pd (fun y => gi y α β) ν x)
+      = - ∑ α, pd (fun y => g y μ α) ν x * gi x α β := by
+    intro μ; linarith [pd_metric_inv_identity g gi μ β ν x hinv hg hgi]
+  -- inner δ-contraction A: `∑α (∑σ Γσνμ gσα) giαβ = Γβνμ`
+  have hTAi : ∀ μ : Fin n,
+      (∑ α, (∑ σ, christoffel g gi σ ν μ x * g x σ α) * gi x α β) = christoffel g gi β ν μ x := by
+    intro μ
+    have e1 : (∑ α, (∑ σ, christoffel g gi σ ν μ x * g x σ α) * gi x α β)
+        = ∑ σ, christoffel g gi σ ν μ x * (∑ α, g x σ α * gi x α β) := by
+      have e0 : (∑ α, (∑ σ, christoffel g gi σ ν μ x * g x σ α) * gi x α β)
+          = ∑ α, ∑ σ, christoffel g gi σ ν μ x * g x σ α * gi x α β := by
+        refine Finset.sum_congr rfl (fun α _ => ?_); rw [Finset.sum_mul]
+      rw [e0, Finset.sum_comm]
+      refine Finset.sum_congr rfl (fun σ _ => ?_)
+      rw [Finset.mul_sum]
+      exact Finset.sum_congr rfl (fun α _ => by ring)
+    rw [e1, Finset.sum_congr rfl (fun σ _ => by rw [hinvx σ β])]
+    simp only [mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+  -- Claim A: `∑μ gi^{λμ} TA_μ = ∑σ Γβνσ giσλ`
+  have hClaimA : (∑ μ, gi x lam μ * (∑ α, (∑ σ, christoffel g gi σ ν μ x * g x σ α) * gi x α β))
+      = ∑ σ, christoffel g gi β ν σ x * gi x σ lam := by
+    rw [Finset.sum_congr rfl (fun μ _ => by rw [hTAi μ])]
+    refine Finset.sum_congr rfl (fun μ _ => ?_)
+    rw [hsymm_gi x lam μ]; ring
+  -- Claim B: `∑μ gi^{λμ} TB_μ = ∑σ Γλνσ giσβ` (the δ is over μ, so reorder first)
+  have hClaimB : (∑ μ, gi x lam μ * (∑ α, (∑ σ, christoffel g gi σ ν α x * g x μ σ) * gi x α β))
+      = ∑ σ, christoffel g gi lam ν σ x * gi x σ β := by
+    have e1 : (∑ μ, gi x lam μ * (∑ α, (∑ σ, christoffel g gi σ ν α x * g x μ σ) * gi x α β))
+        = ∑ μ, ∑ α, ∑ σ, gi x lam μ * g x μ σ * christoffel g gi σ ν α x * gi x α β := by
+      refine Finset.sum_congr rfl (fun μ _ => ?_)
+      rw [Finset.mul_sum]
+      refine Finset.sum_congr rfl (fun α _ => ?_)
+      rw [Finset.sum_mul, Finset.mul_sum]
+      exact Finset.sum_congr rfl (fun σ _ => by ring)
+    rw [e1, Finset.sum_comm]
+    refine Finset.sum_congr rfl (fun α _ => ?_)
+    rw [Finset.sum_comm]
+    have e2 : (∑ σ, ∑ μ, gi x lam μ * g x μ σ * christoffel g gi σ ν α x * gi x α β)
+        = ∑ σ, (∑ μ, gi x lam μ * g x μ σ) * (christoffel g gi σ ν α x * gi x α β) := by
+      refine Finset.sum_congr rfl (fun σ _ => ?_)
+      rw [Finset.sum_mul]
+      exact Finset.sum_congr rfl (fun μ _ => by ring)
+    rw [e2, Finset.sum_congr rfl (fun σ _ => by rw [gi_g_delta g gi x hsymm hsymm_gi hinvx lam σ])]
+    simp only [ite_mul, one_mul, zero_mul, Finset.sum_ite_eq, Finset.mem_univ, if_true]
+  -- RHS contraction
+  have hRHS : (∑ μ, gi x lam μ * (∑ α, pd (fun y => g y μ α) ν x * gi x α β))
+      = (∑ σ, christoffel g gi lam ν σ x * gi x σ β)
+        + (∑ σ, christoffel g gi β ν σ x * gi x σ lam) := by
+    have hsub : ∀ μ, (∑ α, pd (fun y => g y μ α) ν x * gi x α β)
+        = (∑ α, (∑ σ, christoffel g gi σ ν μ x * g x σ α) * gi x α β)
+          + (∑ α, (∑ σ, christoffel g gi σ ν α x * g x μ σ) * gi x α β) := by
+      intro μ
+      rw [← Finset.sum_add_distrib]
+      refine Finset.sum_congr rfl (fun α _ => ?_)
+      rw [pd_g_eq g gi μ α ν x hsymm hinvx]; ring
+    rw [Finset.sum_congr rfl (fun μ _ => by rw [hsub μ, mul_add]), Finset.sum_add_distrib,
+      hClaimA, hClaimB, add_comm]
+  -- assemble
+  have hfinal : (∑ μ, gi x lam μ * (∑ α, g x μ α * pd (fun y => gi y α β) ν x))
+      = - (∑ μ, gi x lam μ * (∑ α, pd (fun y => g y μ α) ν x * gi x α β)) := by
+    rw [Finset.sum_congr rfl (fun μ _ => by rw [hME μ, mul_neg]), Finset.sum_neg_distrib]
+  rw [← hExtract, hfinal, hRHS]
+  ring
+
 end QIQTH.Curvature
