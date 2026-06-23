@@ -1,4 +1,4 @@
-# LaTeX build artifacts (regenerate with: latexmk -pdf main.tex)
+# LaTeX build artifacts (regenerate with: python paper_cs_ai/build.py)
 *.aux
 *.log
 *.fls
