@@ -376,4 +376,94 @@ theorem hessGrad_partial_eq (φ : Point n → ℝ) (gi : Point n → Fin n → F
   refine Finset.sum_congr rfl (fun α _ => Finset.sum_congr rfl (fun β _ => ?_))
   rw [pd_comm φ α ν x hφ, hsymm_gi x β α]; ring
 
+/-- **★★ THE HESSIAN-GRADIENT IDENTITY `hHessGrad`** — the last brick of the `conserv` discharge:
+    `g^{μρ}∂_μφ(∇∇φ)_{ρν} = ½ ∂_ν(g^{αβ}∂_αφ∂_βφ)`.
+    Decompose the LHS `= T1 − T2` (Hessian partials minus the Christoffel term) and the RHS `= ½(R1+R2+R3)`
+    (`pd_gradSq_eq`).  Then `T1 = R2` (`hessGrad_partial_eq`), `R2 = R3` (`gradSq_cross_symm`), and `T2 = −½R1`
+    (the Christoffel term: substitute `pd_gi_eq` into `R1`, giving `R1 = −P − Q`; `Q = P` by α↔β; `P = T2` by a
+    triple-sum reindex with `christoffel_symm` + gi-symmetry).  Algebra then closes `LHS = R2 − T2 = ½R1 + R2 =
+    ½(R1+R2+R3) = RHS`.  Feeding this to `div02_kgStress_conserved` makes KG conservation `∇^μ T_{μν} = 0`
+    unconditional (modulo only the matter equation of motion `□φ = m²φ`). -/
+theorem hHessGrad_eq (φ : Point n → ℝ) (g gi : Point n → Fin n → Fin n → ℝ) (ν : Fin n) (x : Point n)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b ρ, PdiffAt (fun y => g y a b) ρ x)
+    (hgi : ∀ a b ρ, PdiffAt (fun y => gi y a b) ρ x)
+    (hφ2 : ∀ i j, PdiffAt (fun y => pd φ i y) j x) (hφ : ContDiff ℝ ⊤ φ) :
+    (∑ μ, ∑ ρ, gi x μ ρ * (pd φ μ x * kgHess φ g gi ρ ν x))
+      = (1 / 2 : ℝ) * pd (fun y => ∑ α, ∑ β, gi y α β * (pd φ α y * pd φ β y)) ν x := by
+  classical
+  -- the Christoffel term `T2 = −½ R1`
+  have hT2R1 : (∑ μ, ∑ ρ, gi x μ ρ * (pd φ μ x * ∑ σ, christoffel g gi σ ρ ν x * pd φ σ x))
+      = -(1 / 2 : ℝ) * (∑ α, ∑ β, pd (fun y => gi y α β) ν x * (pd φ α x * pd φ β x)) := by
+    -- P = T2 (triple-sum reindex)
+    have hPT2 : (∑ α, ∑ β, (∑ σ, christoffel g gi α ν σ x * gi x σ β) * (pd φ α x * pd φ β x))
+        = ∑ μ, ∑ ρ, gi x μ ρ * (pd φ μ x * ∑ σ, christoffel g gi σ ρ ν x * pd φ σ x) := by
+      have hT2 : (∑ μ, ∑ ρ, gi x μ ρ * (pd φ μ x * ∑ σ, christoffel g gi σ ρ ν x * pd φ σ x))
+          = ∑ μ, ∑ ρ, ∑ σ, gi x μ ρ * christoffel g gi σ ρ ν x * (pd φ μ x * pd φ σ x) := by
+        refine Finset.sum_congr rfl (fun μ _ => Finset.sum_congr rfl (fun ρ _ => ?_))
+        rw [Finset.mul_sum, Finset.mul_sum]
+        exact Finset.sum_congr rfl (fun σ _ => by ring)
+      have hP : (∑ α, ∑ β, (∑ σ, christoffel g gi α ν σ x * gi x σ β) * (pd φ α x * pd φ β x))
+          = ∑ α, ∑ β, ∑ σ, christoffel g gi α ν σ x * gi x σ β * (pd φ α x * pd φ β x) := by
+        refine Finset.sum_congr rfl (fun α _ => Finset.sum_congr rfl (fun β _ => ?_))
+        rw [Finset.sum_mul]
+      rw [hP, hT2, Finset.sum_comm]
+      rw [Finset.sum_congr rfl (fun β _ => Finset.sum_comm
+        (f := fun α σ => christoffel g gi α ν σ x * gi x σ β * (pd φ α x * pd φ β x)))]
+      refine Finset.sum_congr rfl (fun μ _ => Finset.sum_congr rfl (fun ρ _ =>
+        Finset.sum_congr rfl (fun σ _ => ?_)))
+      rw [christoffel_symm g gi hsymm σ ρ ν x, hsymm_gi x ρ μ]; ring
+    -- Q = P (α↔β)
+    have hQP : (∑ α, ∑ β, (∑ σ, christoffel g gi β ν σ x * gi x σ α) * (pd φ α x * pd φ β x))
+        = ∑ α, ∑ β, (∑ σ, christoffel g gi α ν σ x * gi x σ β) * (pd φ α x * pd φ β x) := by
+      rw [Finset.sum_comm]
+      refine Finset.sum_congr rfl (fun α _ => Finset.sum_congr rfl (fun β _ => by ring))
+    -- R1 = −P − Q
+    have hR1 : (∑ α, ∑ β, pd (fun y => gi y α β) ν x * (pd φ α x * pd φ β x))
+        = - (∑ α, ∑ β, (∑ σ, christoffel g gi α ν σ x * gi x σ β) * (pd φ α x * pd φ β x))
+          - (∑ α, ∑ β, (∑ σ, christoffel g gi β ν σ x * gi x σ α) * (pd φ α x * pd φ β x)) := by
+      have hterm : ∀ α β : Fin n, pd (fun y => gi y α β) ν x * (pd φ α x * pd φ β x)
+          = -((∑ σ, christoffel g gi α ν σ x * gi x σ β) * (pd φ α x * pd φ β x))
+            + -((∑ σ, christoffel g gi β ν σ x * gi x σ α) * (pd φ α x * pd φ β x)) := by
+        intro α β
+        rw [pd_gi_eq g gi α β ν x hsymm hsymm_gi hinv hg hgi]; ring
+      rw [Finset.sum_congr rfl (fun α _ => Finset.sum_congr rfl (fun β _ => hterm α β))]
+      simp only [Finset.sum_add_distrib, Finset.sum_neg_distrib]
+      ring
+    rw [hR1, hQP, hPT2]; ring
+  -- LHS = T1 − T2
+  have hLHS : (∑ μ, ∑ ρ, gi x μ ρ * (pd φ μ x * kgHess φ g gi ρ ν x))
+      = (∑ μ, ∑ ρ, gi x μ ρ * (pd φ μ x * pd (fun y => pd φ ν y) ρ x))
+        - (∑ μ, ∑ ρ, gi x μ ρ * (pd φ μ x * ∑ σ, christoffel g gi σ ρ ν x * pd φ σ x)) := by
+    rw [← Finset.sum_sub_distrib]
+    refine Finset.sum_congr rfl (fun μ _ => ?_)
+    rw [← Finset.sum_sub_distrib]
+    refine Finset.sum_congr rfl (fun ρ _ => ?_)
+    simp only [kgHess]; ring
+  rw [pd_gradSq_eq φ gi ν x hgi hφ2, hLHS, hessGrad_partial_eq φ gi ν x hsymm_gi hφ,
+    gradSq_cross_symm φ gi ν x hsymm_gi, hT2R1]
+  ring
+
+/-- **★★★★★ KLEIN–GORDON STRESS-TENSOR CONSERVATION, DISCHARGED — `∇^μ T_{μν} = 0` for the explicit free KG
+    field, axiom-free, modulo ONLY the equation of motion.**  The Hessian-gradient identity (`hHessGrad`) is now
+    supplied internally by `hHessGrad_eq` (built from inverse-metric compatibility `pd_gi_eq` + the gradient
+    expansion + the symmetry lemmas), so the only remaining hypothesis is `hKG : □φ = m²φ` — the matter equation
+    of motion, genuine physics.  Everything geometric is machine-checked.  This DISCHARGES the `conserv` input of
+    the free-field QIQT→GR surface for the explicit Klein–Gordon stress tensor: `conserv = a · (this) = 0`. -/
+theorem div02_kgStress_conserved_of_KG (m : ℝ) (φ : Point n → ℝ) (g gi : Point n → Fin n → Fin n → ℝ)
+    (x : Point n) (ν : Fin n)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hKin : ∀ a b ρ, PdiffAt (fun y => kgKinetic φ y a b) ρ x)
+    (hg : ∀ a b ρ, PdiffAt (fun y => g y a b) ρ x)
+    (hgi : ∀ a b ρ, PdiffAt (fun y => gi y a b) ρ x)
+    (hL : ∀ ρ, PdiffAt (kgLagr m φ gi) ρ x)
+    (hφ2 : ∀ i j, PdiffAt (fun y => pd φ i y) j x) (hφd : PdiffAt φ ν x) (hφ : ContDiff ℝ ⊤ φ)
+    (hgradSq : PdiffAt (fun y => ∑ α, ∑ β, gi y α β * (pd φ α y * pd φ β y)) ν x)
+    (hKG : boxField φ g gi x = m ^ 2 * φ x) :
+    div02 g gi (kgStress m φ g gi) ν x = 0 :=
+  div02_kgStress_conserved m φ g gi x ν hsymm hinv hKin hg hL hφ2 hφd hgradSq hKG
+    (hHessGrad_eq φ g gi ν x hsymm hsymm_gi hinv hg hgi hφ2 hφ)
+
 end QIQTH.Curvature
