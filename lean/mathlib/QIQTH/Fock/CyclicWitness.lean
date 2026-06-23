@@ -465,6 +465,132 @@ theorem niceWedgeCyclic_pos_mass {m : ℝ} (hm0 : 0 < m) : NiceWedgeCyclic m := 
   exact niceWedgeCyclic_of_bumpW_fourier_ne_zero m (Real.pi / (4 * m))
     (2 * (Real.pi / (4 * m)) + 1) hR hm0.ne' (by linarith) (bump1W_fourier_ne_zero hm0 hR hmR)
 
+/-- **Strip boundary-uniqueness (top edge zero ⟹ bottom edge zero).**  A function `Φ` holomorphic on the open
+    strip `{−1 < Im z < 0}`, continuous and bounded on the closed strip, that vanishes on the *entire* top edge
+    (`Φ(t) = 0 ∀ real t`), vanishes on the bottom edge too (`Φ(t − i) = 0 ∀ t`).  Proof: the asymmetric Hadamard
+    three-lines bound with top constant `0` gives `‖Φ z‖ ≤ 0^{1−s}·B^{s}` (`s = −Im z`), which is `0` for every
+    interior point (`s < 1`), so `Φ` vanishes on the open strip; the bottom edge then follows by continuity
+    (approach `t − i` from inside).  This is the modular/KMS uniqueness that the separating proof needs. -/
+theorem strip_eqZero_of_top_edge_zero {Φ : ℂ → ℂ}
+    (hdiff : DifferentiableOn ℂ Φ (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0))
+    (hcont : ContinuousOn Φ (Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0))
+    (hbdd : BddAbove ((norm ∘ Φ) '' (Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0)))
+    (htop : ∀ t : ℝ, Φ (t : ℂ) = 0) :
+    ∀ t : ℝ, Φ ((t : ℂ) - Complex.I) = 0 := by
+  obtain ⟨B, hB⟩ := hbdd
+  have hBmem : ∀ z : ℂ, -1 ≤ z.im → z.im ≤ 0 → ‖Φ z‖ ≤ B := fun z hz0 hz1 =>
+    hB ⟨z, by rw [Set.mem_preimage, Set.mem_Icc]; exact ⟨hz0, hz1⟩, rfl⟩
+  have hB0 : 0 ≤ B := le_trans (norm_nonneg _) (hBmem 0 (by norm_num) (le_refl 0))
+  -- interior + top vanishing via the asymmetric Hadamard three-lines (top edge constant 0)
+  have hint : ∀ z : ℂ, -1 < z.im → z.im ≤ 0 → Φ z = 0 := by
+    intro z hz0 hz1
+    rw [← norm_le_zero_iff]
+    set φ : ℂ → ℂ := fun w => -Complex.I * w with hφdef
+    set G : ℂ → ℂ := fun w => Φ (φ w) with hGdef
+    have hφim : ∀ w' : ℂ, (φ w').im = -w'.re := fun w' => by
+      simp [hφdef, Complex.mul_im, Complex.mul_re]
+    have hφre : ∀ w' : ℂ, (φ w').re = w'.im := fun w' => by
+      simp [hφdef, Complex.mul_re, Complex.mul_im]
+    set w : ℂ := Complex.I * z with hwdef
+    have hφw : φ w = z := by
+      simp only [hφdef, hwdef]
+      rw [← mul_assoc, neg_mul, Complex.I_mul_I, neg_neg, one_mul]
+    have hwre : w.re = -z.im := by rw [hwdef, Complex.mul_re, Complex.I_re, Complex.I_im]; ring
+    have hφent : Differentiable ℂ φ := by rw [hφdef]; exact differentiable_id.const_mul _
+    have hmaps_open : Set.MapsTo φ (Complex.HadamardThreeLines.verticalStrip 0 1)
+        (Complex.im ⁻¹' Set.Ioo (-1 : ℝ) 0) := by
+      intro w' hw'
+      simp only [Complex.HadamardThreeLines.verticalStrip, Set.mem_preimage, Set.mem_Ioo] at hw'
+      rw [Set.mem_preimage, Set.mem_Ioo, hφim]
+      exact ⟨by linarith [hw'.2], by linarith [hw'.1]⟩
+    have hmaps_closed : Set.MapsTo φ (Complex.HadamardThreeLines.verticalClosedStrip 0 1)
+        (Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0) := by
+      intro w' hw'
+      simp only [Complex.HadamardThreeLines.verticalClosedStrip, Set.mem_preimage, Set.mem_Icc] at hw'
+      rw [Set.mem_preimage, Set.mem_Icc, hφim]
+      exact ⟨by linarith [hw'.2], by linarith [hw'.1]⟩
+    have hsub : closure (Complex.HadamardThreeLines.verticalStrip 0 1)
+        ⊆ Complex.HadamardThreeLines.verticalClosedStrip 0 1 := by
+      have h := Complex.continuous_re.closure_preimage_subset (Set.Ioo (0 : ℝ) 1)
+      rwa [closure_Ioo (by norm_num : (0 : ℝ) ≠ 1)] at h
+    have hd : DiffContOnCl ℂ G (Complex.HadamardThreeLines.verticalStrip 0 1) :=
+      ⟨hdiff.comp hφent.differentiableOn hmaps_open,
+        (hcont.comp hφent.continuous.continuousOn hmaps_closed).mono hsub⟩
+    have hbddG : BddAbove ((norm ∘ G) '' Complex.HadamardThreeLines.verticalClosedStrip 0 1) := by
+      refine ⟨B, ?_⟩
+      rintro y ⟨w', hw', rfl⟩
+      have hmem' := hmaps_closed hw'
+      rw [Set.mem_preimage, Set.mem_Icc] at hmem'
+      exact hBmem (φ w') hmem'.1 hmem'.2
+    have ha : ∀ w' ∈ Complex.re ⁻¹' {(0 : ℝ)}, ‖G w'‖ ≤ 0 := by
+      intro w' hw'
+      simp only [Set.mem_preimage, Set.mem_singleton_iff] at hw'
+      have hφeq : φ w' = (w'.im : ℂ) := Complex.ext (by rw [hφre]; simp) (by rw [hφim, hw']; simp)
+      show ‖Φ (φ w')‖ ≤ 0
+      rw [hφeq, htop w'.im, norm_zero]
+    have hb : ∀ w' ∈ Complex.re ⁻¹' {(1 : ℝ)}, ‖G w'‖ ≤ B := by
+      intro w' hw'
+      simp only [Set.mem_preimage, Set.mem_singleton_iff] at hw'
+      have hφeq : φ w' = (w'.im : ℂ) - Complex.I :=
+        Complex.ext (by rw [hφre]; simp) (by rw [hφim, hw']; simp)
+      show ‖Φ (φ w')‖ ≤ B
+      rw [hφeq]
+      have himeq : ((w'.im : ℂ) - Complex.I).im = -1 := by simp
+      exact hBmem _ (le_of_eq himeq.symm) (by rw [himeq]; norm_num)
+    have hmem : w ∈ Complex.HadamardThreeLines.verticalClosedStrip 0 1 := by
+      simp only [Complex.HadamardThreeLines.verticalClosedStrip, Set.mem_preimage, Set.mem_Icc, hwre]
+      exact ⟨by linarith, by linarith⟩
+    have hhad := Complex.HadamardThreeLines.norm_le_interp_of_mem_verticalClosedStrip'
+      (l := 0) (u := 1) (a := 0) (b := B) (by norm_num) hmem hd hbddG ha hb
+    have hGw : G w = Φ z := by simp only [hGdef]; rw [hφw]
+    rw [hGw] at hhad
+    simp only [sub_zero, div_one] at hhad
+    rwa [Real.zero_rpow (by rw [hwre]; linarith : (1 : ℝ) - w.re ≠ 0), zero_mul] at hhad
+  -- bottom edge by continuity (approach `t − i` from inside the strip)
+  intro t
+  set z₀ : ℂ := (t : ℂ) - Complex.I with hz₀
+  have hz₀im : z₀.im = -1 := by rw [hz₀]; simp
+  have hz₀mem : z₀ ∈ Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0 := by
+    rw [Set.mem_preimage, Set.mem_Icc, hz₀im]; exact ⟨le_refl _, by norm_num⟩
+  set u : ℕ → ℂ := fun n => (t : ℂ) + ((-1 + 1 / (n + 1 : ℝ) : ℝ) : ℂ) * Complex.I with hudef
+  have huim : ∀ n, (u n).im = -1 + 1 / (n + 1 : ℝ) := by
+    intro n; rw [hudef]
+    simp only [Complex.add_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
+      Complex.I_im, Complex.I_re]
+    ring
+  have hupos : ∀ n : ℕ, (0 : ℝ) < 1 / (n + 1 : ℝ) := fun n => by positivity
+  have hule : ∀ n : ℕ, 1 / (n + 1 : ℝ) ≤ 1 := by
+    intro n; rw [div_le_one (by positivity)]; linarith [Nat.cast_nonneg (α := ℝ) n]
+  have hu0 : ∀ n, Φ (u n) = 0 := by
+    intro n; refine hint _ ?_ ?_ <;> rw [huim]
+    · linarith [hupos n]
+    · linarith [hule n]
+  have hulim : Filter.Tendsto u Filter.atTop (nhds z₀) := by
+    have key : Filter.Tendsto (fun n : ℕ => ((1 / (n + 1 : ℝ) : ℝ) : ℂ) * Complex.I) Filter.atTop
+        (nhds 0) := by
+      have h0 : Filter.Tendsto (fun n : ℕ => ((1 / (n + 1 : ℝ) : ℝ) : ℂ)) Filter.atTop (nhds 0) := by
+        have h := (Complex.continuous_ofReal.tendsto (0 : ℝ)).comp
+          tendsto_one_div_add_atTop_nhds_zero_nat
+        rwa [Complex.ofReal_zero] at h
+      simpa using h0.mul_const Complex.I
+    have heq : ∀ n : ℕ, u n = z₀ + ((1 / (n + 1 : ℝ) : ℝ) : ℂ) * Complex.I := by
+      intro n; rw [hudef, hz₀]; push_cast; ring
+    have hsum : Filter.Tendsto (fun n : ℕ => z₀ + ((1 / (n + 1 : ℝ) : ℝ) : ℂ) * Complex.I) Filter.atTop
+        (nhds (z₀ + 0)) := tendsto_const_nhds.add key
+    rw [add_zero] at hsum
+    exact hsum.congr (fun n => (heq n).symm)
+  have hwithin : Filter.Tendsto u Filter.atTop
+      (nhdsWithin z₀ (Complex.im ⁻¹' Set.Icc (-1 : ℝ) 0)) :=
+    tendsto_nhdsWithin_of_tendsto_nhds_of_eventually_within u hulim
+      (Filter.Eventually.of_forall fun n => by
+        rw [Set.mem_preimage, Set.mem_Icc, huim]
+        exact ⟨by linarith [hupos n], by linarith [hule n]⟩)
+  have hΦlim : Filter.Tendsto (fun n => Φ (u n)) Filter.atTop (nhds (Φ z₀)) :=
+    Filter.Tendsto.comp (hcont z₀ hz₀mem) hwithin
+  have hΦ0 : Filter.Tendsto (fun n => Φ (u n)) Filter.atTop (nhds 0) := by
+    simp only [hu0]; exact tendsto_const_nhds
+  exact tendsto_nhds_unique hΦlim hΦ0
+
 open QIQTH.StandardSubspaceModular in
 /-- **★★★★★★★★ THE free-field one-particle Bisognano–Wichmann, reduced to its SINGLE remaining analytic input.**
     `modUnitary S t = boostUnitary(2πt)` for the nice-core wedge standard subspace, given ONLY the Reeh–Schlieder
