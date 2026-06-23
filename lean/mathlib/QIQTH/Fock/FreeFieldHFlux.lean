@@ -70,7 +70,6 @@ theorem hasDerivAt_inner_boostUnitary_imaginary_pos
     (f f' : ℝ → ℂ) (hf2 : MemLp f 2 (volume : Measure ℝ))
     (hf_int : Integrable f (volume : Measure ℝ))
     (hF0_int : Integrable (fun θ => (starRingEnd ℂ) (f θ) * f θ) (volume : Measure ℝ))
-    (hf_meas : AEStronglyMeasurable f (volume : Measure ℝ))
     (hfd : ∀ x, HasDerivAt f (f' x) x)
     (hf'_meas : AEStronglyMeasurable f' (volume : Measure ℝ))
     (B : ℝ) (hB : ∀ x, ‖f' x‖ ≤ B) :
@@ -78,6 +77,10 @@ theorem hasDerivAt_inner_boostUnitary_imaginary_pos
       (fun t : ℝ => inner ℂ (hf2.toLp f) (boostUnitary (2 * Real.pi * t) (hf2.toLp f)))
       (Complex.I *
         (((-(2 * Real.pi * ∫ θ, (starRingEnd ℂ) (f θ) * f' θ ∂(volume : Measure ℝ))).im : ℝ) : ℂ)) 0 := by
+  -- `hf_meas` discharged from `hfd`: differentiable everywhere ⟹ continuous ⟹ measurable (was a labelled input).
+  have hf_meas : AEStronglyMeasurable f (volume : Measure ℝ) := by
+    have hdiff : Differentiable ℝ f := fun x => (hfd x).differentiableAt
+    exact hdiff.continuous.aestronglyMeasurable
   have him := hasDerivAt_inner_boostUnitary_imaginary f f' hf2 hf_int hF0_int hf_meas hfd hf'_meas B hB
   -- Reflection `t → −t`: `⟪ξ, boostUnitary(2πt) ξ⟫ = ⟪ξ, boostUnitary(−2π(0−t)) ξ⟫`, so the +2π correlation is
   -- the −2π one precomposed with `0 − ·`; `comp_const_sub` flips the derivative sign with no HO unification.
@@ -106,7 +109,6 @@ theorem freeField_oneParticle_hFlux {m : ℝ} (hm : 0 < m)
     (f f' : ℝ → ℂ) (hf2 : MemLp f 2 (volume : Measure ℝ))
     (hf_int : Integrable f (volume : Measure ℝ))
     (hF0_int : Integrable (fun θ => (starRingEnd ℂ) (f θ) * f θ) (volume : Measure ℝ))
-    (hf_meas : AEStronglyMeasurable f (volume : Measure ℝ))
     (hfd : ∀ x, HasDerivAt f (f' x) x)
     (hf'_meas : AEStronglyMeasurable f' (volume : Measure ℝ))
     (B : ℝ) (hB : ∀ x, ‖f' x‖ ≤ B) (hbar Tkk : ℝ)
@@ -118,7 +120,7 @@ theorem freeField_oneParticle_hFlux {m : ℝ} (hm : 0 < m)
           (niceWedge_isSeparating_of_no_complex_line m (niceWedgeSeparating_pos_mass hm))
           (niceWedge_isCyclic_of_total_integral m (niceWedgeCyclic_pos_mass hm))) t (hf2.toLp f)))
       (Complex.I * ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ)) 0 := by
-  have hbc := hasDerivAt_inner_boostUnitary_imaginary_pos f f' hf2 hf_int hF0_int hf_meas hfd hf'_meas B hB
+  have hbc := hasDerivAt_inner_boostUnitary_imaginary_pos f f' hf2 hf_int hF0_int hfd hf'_meas B hB
   rw [show ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ)
         = (((-(2 * Real.pi * ∫ θ, (starRingEnd ℂ) (f θ) * f' θ ∂(volume : Measure ℝ))).im : ℝ) : ℂ) by
       rw [hTkk]]
@@ -138,7 +140,6 @@ theorem freeField_component_hFlux {m : ℝ} (hm : 0 < m)
     (f f' : ℝ → ℂ) (hf2 : MemLp f 2 (volume : Measure ℝ))
     (hf_int : Integrable f (volume : Measure ℝ))
     (hF0_int : Integrable (fun θ => (starRingEnd ℂ) (f θ) * f θ) (volume : Measure ℝ))
-    (hf_meas : AEStronglyMeasurable f (volume : Measure ℝ))
     (hfd : ∀ x, HasDerivAt f (f' x) x)
     (hf'_meas : AEStronglyMeasurable f' (volume : Measure ℝ))
     (B : ℝ) (hB : ∀ x, ‖f' x‖ ≤ B) (hbar kd Tkk : ℝ)
@@ -151,7 +152,7 @@ theorem freeField_component_hFlux {m : ℝ} (hm : 0 < m)
           (niceWedge_isCyclic_of_total_integral m (niceWedgeCyclic_pos_mass hm))) t (hf2.toLp f)))
       (Complex.I * ((kd : ℝ) : ℂ)) 0) :
     kd = 2 * Real.pi / hbar * Tkk := by
-  have hHil := freeField_oneParticle_hFlux hm f f' hf2 hf_int hF0_int hf_meas hfd hf'_meas B hB
+  have hHil := freeField_oneParticle_hFlux hm f f' hf2 hf_int hF0_int hfd hf'_meas B hB
     hbar Tkk hTkk
   have huniq : Complex.I * ((kd : ℝ) : ℂ) = Complex.I * ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ) :=
     hbridge.unique hHil
