@@ -26,7 +26,7 @@ This does **not** attempt H2 (the area law from `Q_max`) — that is the genuine
 | `hFocus` / Raychaudhuri identity | pure geometry | **DONE** — `raychaudhuri_focusing`, `raychaudhuri_geodesic`, `raychaudhuri_focusing_at_equilibrium` (`hFocus_of_raychaudhuri`). Residual `harea`/`hequil` is the physical floor, not dischargeable. | **A2 (verify only)** |
 | `P,Pinv,hPP,hPP',hcong` (Sylvester tetrad `g=Pᵀ·gm·P`) | linear algebra | Sylvester is currently a LABELLED hypothesis in several files (`ClausiusToPernull`, `EinsteinEquationOfState`); a "Sylvester null-cone lemma" exists | **A3** |
 | `hreg` (focusing-function regularity) | technical | used as-is; the explicit `f = a·T·gi-trace − ½R` is concrete | **A4** |
-| `hC` (Christoffel `C^∞` from `g,gi` `C^∞`) | technical geometry | currently assumed; derivable from `hCg`/`hCgi` since `christoffel` is a smooth algebraic combination of `∂g, gi` | **A5** |
+| `hC` (Christoffel `C^∞` from `g,gi` `C^∞`) | technical geometry | ✅ **DONE `2ef2a81`** — `christoffel_contDiff` (via `contDiff_pd`) in `QIQTH/ChristoffelSmooth.lean` | **A5 ✓** |
 | `Sf,KE,A` + `hDnn`/`hD0` (entropy/energy oracles) | quantum information | `relEntropy_nonneg` (Klein) DONE; `ArakiEntropy`/`ArakiInterface` exist; spacetime bridge missing | **B** |
 | `hKMS` (`WedgeKMSFlux_complete` — modular-flux dynamical realization) | QFT | one-particle BW DONE; Fock infrastructure (`Fock/`, `ContinuumLambdaFock`) exists; the BW→stress-flux bridge missing | **C** |
 
@@ -79,10 +79,11 @@ differentiable.  For `T = kgStress` and smooth `g,gi,φ`, `f` is an explicit smo
 (`f = (a·g^{ab}kgStress_{ab} − R)/n`-type trace).  **Brick:** compute `f` explicitly and prove its regularity from
 `hCg/hCgi/hφ`.  Discharges `hreg` for the explicit KG field.
 
-### A5 — `hC` : Christoffel smoothness from metric smoothness *(1 fire)*
-`christoffel g gi = ½ gi·(∂g + ∂g − ∂g)` is a smooth algebraic combination of `gi` and first derivatives of `g`.
-**Brick:** `hC` from `hCg`, `hCgi` via `ContDiff.mul`/`ContDiff.sum` + `ContDiff` of `pd` (`contDiff_top_iff_fderiv`
-or the existing `pd`/`PdiffAt_pd` machinery lifted to `ContDiff`).  Discharges `hC`.
+### A5 — `hC` : Christoffel smoothness — ✅ **DONE (`2ef2a81`, 2026-06-23, axiom-free)**
+`QIQTH/ChristoffelSmooth.lean`: `contDiff_pd` (∂ of a `C^∞` scalar is `C^∞`, via `pd_eq_fderiv` +
+`ContDiff.fderiv_right` + `ContDiff.clm_apply`) → `christoffel_contDiff` (finite combination via `ContDiff.sum`/
+`.mul`/`.add`/`.sub`).  **Discharges `hC`.**  GOTCHA: `ContDiff.differentiable` wants `⊤ ≠ 0` (`by simp`), not
+`1 ≤ ⊤`, in the current `WithTop ℕ∞` API.
 
 **Tier A deliverable:** a refactored capstone `qiqt_gr_explicit_kg_geom` whose hypotheses no longer include
 `hric_symm`, `hC`, `hreg`, or the tetrad block — only the genuinely-physical + entropy/modular inputs remain.

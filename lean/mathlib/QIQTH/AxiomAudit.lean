@@ -4805,5 +4805,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Curvature.ricci_symm
 -- expected: standard only — Ricci symmetry R_σν=R_νσ via lowered-Riemann pair-symmetry (lowered_riemann_pair_symm:
 -- the two antisymmetries + first Bianchi) + the gi-raised trace. Discharges the hric_symm hypothesis of the capstone.
+-- Tier A5: discharge hC.
+#print axioms QIQTH.Curvature.christoffel_contDiff
+-- expected: standard only — Christoffel C^∞ from metric C^∞ (christoffel = ½∑gi·∂g; contDiff_pd: ∂ of C^∞ is C^∞).
+-- Discharges the hC hypothesis of the capstone.
 
 end QIQTH.AxiomAudit
