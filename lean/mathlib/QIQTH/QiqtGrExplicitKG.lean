@@ -15,6 +15,8 @@ Axiom-free.
 -/
 import QIQTH.WedgeKMSToGR
 import QIQTH.KGStressConservation
+import QIQTH.RicciSymm
+import QIQTH.ChristoffelSmooth
 
 namespace QIQTH.WedgeKMSToGR
 
@@ -36,11 +38,9 @@ theorem qiqt_gr_explicit_kg
     (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
     (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
     (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
-    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
     (φ : Point 4 → ℝ) (m η hbar a : ℝ)
     (hbar0 : hbar ≠ 0) (heta : η ≠ 0) (ha : a = 2 * Real.pi / (hbar * η))
     (hφ : ContDiff ℝ ⊤ φ) (hKG : ∀ x, boxField φ g gi x = m ^ 2 * φ x)
-    (hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x)
     (P Pinv : Point 4 → Fin 4 → Fin 4 → ℝ)
     (hPP : ∀ x i j, (∑ k, P x i k * Pinv x k j) = if i = j then (1 : ℝ) else 0)
     (hPP' : ∀ x i j, (∑ k, Pinv x i k * P x k j) = if i = j then (1 : ℝ) else 0)
@@ -60,6 +60,11 @@ theorem qiqt_gr_explicit_kg
         (∀ x ρ, PdiffAt f ρ x) ∧
           Differentiable ℝ (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y)) :
     ∃ Λ : ℝ, ∀ x μ ν, a * kgStress m φ g gi x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν := by
+  -- `hC` and `hric_symm` are now THEOREMS (Tier A5, A1), supplied internally:
+  have hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y) :=
+    fun a b c => christoffel_contDiff g gi hCg hCgi a b c
+  have hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x :=
+    fun x a' b => ricci_symm g gi hsymm hsymm_gi hinv hCg hC a' b x
   refine qiqt_gr_from_wedge_kms_complete g gi hsymm hsymm_gi hinv hCg hCgi hC
     (kgStress m φ g gi) η hbar a hbar0 heta ha ?_ hric_symm P Pinv hPP hPP' hcong
     Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0 hKMS hFocus hreg ?_
@@ -81,11 +86,9 @@ theorem qiqt_gr_explicit_kg_raychaudhuri
     (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
     (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
     (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
-    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
     (φ : Point 4 → ℝ) (m η hbar a : ℝ)
     (hbar0 : hbar ≠ 0) (heta : η ≠ 0) (ha : a = 2 * Real.pi / (hbar * η))
     (hφ : ContDiff ℝ ⊤ φ) (hKG : ∀ x, boxField φ g gi x = m ^ 2 * φ x)
-    (hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x)
     (P Pinv : Point 4 → Fin 4 → Fin 4 → ℝ)
     (hPP : ∀ x i j, (∑ k, P x i k * Pinv x k j) = if i = j then (1 : ℝ) else 0)
     (hPP' : ∀ x i j, (∑ k, Pinv x i k * P x k j) = if i = j then (1 : ℝ) else 0)
@@ -112,6 +115,10 @@ theorem qiqt_gr_explicit_kg_raychaudhuri
         (∀ x ρ, PdiffAt f ρ x) ∧
           Differentiable ℝ (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y)) :
     ∃ Λ : ℝ, ∀ x μ ν, a * kgStress m φ g gi x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν := by
+  have hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y) :=
+    fun a b c => christoffel_contDiff g gi hCg hCgi a b c
+  have hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x :=
+    fun x a' b => ricci_symm g gi hsymm hsymm_gi hinv hCg hC a' b x
   refine qiqt_gr_from_wedge_kms_raychaudhuri g gi hsymm hsymm_gi hinv hCg hCgi hC
     (kgStress m φ g gi) η hbar a hbar0 heta ha ?_ hric_symm P Pinv hPP hPP' hcong
     Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0 hKMS Vcong hVC hgeo hVval hequil harea hreg ?_
