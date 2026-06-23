@@ -85,8 +85,11 @@ differentiable.  For `T = kgStress` and smooth `g,gi,φ`, `f` is an explicit smo
 `.mul`/`.add`/`.sub`).  **Discharges `hC`.**  GOTCHA: `ContDiff.differentiable` wants `⊤ ≠ 0` (`by simp`), not
 `1 ≤ ⊤`, in the current `WithTop ℕ∞` API.
 
-**Tier A deliverable:** a refactored capstone `qiqt_gr_explicit_kg_geom` whose hypotheses no longer include
-`hric_symm`, `hC`, `hreg`, or the tetrad block — only the genuinely-physical + entropy/modular inputs remain.
+**Tier A deliverable:** a refactored capstone whose hypotheses no longer include `hric_symm`, `hC`, `hreg`, or the
+tetrad block — only the genuinely-physical + entropy/modular inputs remain.
+**★ PARTIAL DELIVERABLE DONE (`454e413`, 2026-06-23):** `qiqt_gr_explicit_kg` and `qiqt_gr_explicit_kg_raychaudhuri`
+now DROP `hC` and `hric_symm` (supplied internally from `christoffel_contDiff` + `ricci_symm`). Remaining to also
+drop from the capstone: `hreg` (A4) and the tetrad block `P/Pinv/hPP/hPP'/hcong` (A3).
 
 ---
 
