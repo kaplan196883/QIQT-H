@@ -515,4 +515,41 @@ theorem kg_conserv (a m : ℝ) (φ : Point n → ℝ) (g gi : Point n → Fin n 
     div02_kgStress_conserved_of_KG m φ g gi x ν hsymm hsymm_gi hinv hKin hg hgi hL hφ2 hφd hφ hgradSq hKG,
     mul_zero]
 
+/-- **★★★★★★ `conserv` FROM SMOOTHNESS ALONE — the clean drop-in.**  The same matter-conservation input
+    `∇·(a·T) = 0` (`T = kgStress`), but with all the pointwise differentiability hypotheses *derived* from a
+    single `ContDiff` assumption on the field `φ` and the metric components `g, gi`.  This is the form actually
+    convenient to plug into `WedgeKMSToGR`/`qiqt_gr_from_wedge_kms_complete`: given a smooth free scalar on a
+    smooth (symmetric, invertible) metric satisfying the Klein–Gordon equation `□φ = m²φ`, the explicit stress
+    tensor is covariantly conserved. -/
+theorem kg_conserv_of_contDiff (a m : ℝ) (φ : Point n → ℝ) (g gi : Point n → Fin n → Fin n → ℝ)
+    (x : Point n) (ν : Fin n)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hφ : ContDiff ℝ ⊤ φ)
+    (hgC : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b)) (hgiC : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hKG : boxField φ g gi x = m ^ 2 * φ x) :
+    div02 g gi (fun y b c => a * kgStress m φ g gi y b c) ν x = 0 := by
+  have hg : ∀ a b ρ, PdiffAt (fun y => g y a b) ρ x :=
+    fun a b ρ => PdiffAt_of_contDiff _ (hgC a b) ρ x
+  have hgi : ∀ a b ρ, PdiffAt (fun y => gi y a b) ρ x :=
+    fun a b ρ => PdiffAt_of_contDiff _ (hgiC a b) ρ x
+  have hφ2 : ∀ i j, PdiffAt (fun y => pd φ i y) j x := fun i j => PdiffAt_pd φ hφ i j x
+  have hgradSqAll : ∀ ρ, PdiffAt (fun y => ∑ α, ∑ β, gi y α β * (pd φ α y * pd φ β y)) ρ x := fun ρ =>
+    PdiffAt_sum Finset.univ _ ρ x (fun α _ => PdiffAt_sum Finset.univ _ ρ x
+      (fun β _ => (hgi α β ρ).mul ((hφ2 α ρ).mul (hφ2 β ρ))))
+  have hL : ∀ ρ, PdiffAt (kgLagr m φ gi) ρ x := fun ρ => by
+    rw [show (kgLagr m φ gi)
+        = fun y => (∑ α, ∑ β, gi y α β * (pd φ α y * pd φ β y)) + m ^ 2 * (φ y) ^ 2 from by funext y; rfl]
+    refine (hgradSqAll ρ).add ?_
+    rw [show (fun y => m ^ 2 * (φ y) ^ 2) = fun y => m ^ 2 * (φ y * φ y) from by funext y; ring]
+    exact (differentiableAt_const _).mul ((PdiffAt_of_contDiff φ hφ ρ x).mul (PdiffAt_of_contDiff φ hφ ρ x))
+  have hKin : ∀ a b ρ, PdiffAt (fun y => kgKinetic φ y a b) ρ x :=
+    fun a b ρ => (hφ2 a ρ).mul (hφ2 b ρ)
+  have hkgS : ∀ b c ρ, PdiffAt (fun y => kgStress m φ g gi y b c) ρ x := fun b c ρ => by
+    rw [show (fun y => kgStress m φ g gi y b c)
+        = fun y => pd φ b y * pd φ c y - (1 / 2 : ℝ) * g y b c * kgLagr m φ gi y from by funext y; rfl]
+    exact ((hφ2 b ρ).mul (hφ2 c ρ)).sub (((differentiableAt_const _).mul (hg b c ρ)).mul (hL ρ))
+  exact kg_conserv a m φ g gi x ν hsymm hsymm_gi hinv hKin hg hgi hL hφ2
+    (PdiffAt_of_contDiff φ hφ ν x) hφ (hgradSqAll ν) hkgS hKG
+
 end QIQTH.Curvature
