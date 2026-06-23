@@ -321,4 +321,37 @@ theorem pd_gi_eq (g gi : Point n → Fin n → Fin n → ℝ) (lam β ν : Fin n
   rw [← hExtract, hfinal, hRHS]
   ring
 
+/-- **Product-rule expansion of the kinetic-scalar gradient** `∂_ν(g^{αβ}∂_αφ∂_βφ)`.  Differentiating term by
+    term (`pd_sum` twice, `pd_mul` for the triple product) splits it into the `∂gi` term plus the two
+    `∂(∂φ)` terms:
+    `∂_ν(∑_{αβ} gi^{αβ}∂_αφ∂_βφ) = ∑_{αβ} ∂_ν(gi^{αβ})∂_αφ∂_βφ + ∑_{αβ} gi^{αβ}(∂_ν∂_αφ)∂_βφ
+      + ∑_{αβ} gi^{αβ}∂_αφ(∂_ν∂_βφ)`.
+    The first term meets `pd_gi_eq` (inverse-metric compatibility) and the last two meet the Hessian partials
+    (`pd_comm`) in the final `hHessGrad` assembly. -/
+theorem pd_gradSq_eq (φ : Point n → ℝ) (gi : Point n → Fin n → Fin n → ℝ) (ν : Fin n) (x : Point n)
+    (hgi : ∀ a b ρ, PdiffAt (fun y => gi y a b) ρ x)
+    (hφ2 : ∀ i j, PdiffAt (fun y => pd φ i y) j x) :
+    pd (fun y => ∑ α, ∑ β, gi y α β * (pd φ α y * pd φ β y)) ν x
+      = (∑ α, ∑ β, pd (fun y => gi y α β) ν x * (pd φ α x * pd φ β x))
+        + ((∑ α, ∑ β, gi x α β * (pd (fun y => pd φ α y) ν x * pd φ β x))
+          + (∑ α, ∑ β, gi x α β * (pd φ α x * pd (fun y => pd φ β y) ν x))) := by
+  have hterm : ∀ α β : Fin n, pd (fun y => gi y α β * (pd φ α y * pd φ β y)) ν x
+      = pd (fun y => gi y α β) ν x * (pd φ α x * pd φ β x)
+        + gi x α β * (pd (fun y => pd φ α y) ν x * pd φ β x)
+        + gi x α β * (pd φ α x * pd (fun y => pd φ β y) ν x) := by
+    intro α β
+    rw [pd_mul (fun y => gi y α β) (fun y => pd φ α y * pd φ β y) ν x (hgi α β ν)
+        ((hφ2 α ν).mul (hφ2 β ν)),
+      pd_mul (fun y => pd φ α y) (fun y => pd φ β y) ν x (hφ2 α ν) (hφ2 β ν)]
+    ring
+  rw [pd_sum Finset.univ (fun α y => ∑ β, gi y α β * (pd φ α y * pd φ β y)) ν x
+      (fun α _ => PdiffAt_sum Finset.univ (fun β y => gi y α β * (pd φ α y * pd φ β y)) ν x
+        (fun β _ => (hgi α β ν).mul ((hφ2 α ν).mul (hφ2 β ν))))]
+  rw [Finset.sum_congr rfl (fun α _ =>
+      pd_sum Finset.univ (fun β y => gi y α β * (pd φ α y * pd φ β y)) ν x
+        (fun β _ => (hgi α β ν).mul ((hφ2 α ν).mul (hφ2 β ν))))]
+  rw [Finset.sum_congr rfl (fun α _ => Finset.sum_congr rfl (fun β _ => hterm α β))]
+  simp only [Finset.sum_add_distrib]
+  ring
+
 end QIQTH.Curvature
