@@ -228,7 +228,9 @@ def _escape_prose(text: str) -> str:
 
 
 def _convert_emphasis(text: str) -> str:
-    text = re.sub(r"\*\*([^*\n]+?)\*\*", lambda m: r"\textbf{" + m.group(1) + "}", text)
+    # bold may wrap across a line break (a bold lead-in on a list item), so the
+    # body class allows newlines; non-greedy stops at the nearest closing **.
+    text = re.sub(r"\*\*([^*]+?)\*\*", lambda m: r"\textbf{" + m.group(1) + "}", text)
     text = re.sub(r"(?<![*\w])\*([^*\n]+?)\*(?![*\w])",
                   lambda m: r"\emph{" + m.group(1) + "}", text)
     return text
@@ -261,28 +263,49 @@ _BULLET = re.compile(r"^(\s*)[-*+]\s+(.*)$")
 _NUM = re.compile(r"^(\s*)\d+\.\s+(.*)$")
 
 
+def _item_match(s: str):
+    """Return (env, content) if the line starts a list item, else None."""
+    m = _BULLET.match(s)
+    if m:
+        return ("itemize", m.group(2))
+    m = _NUM.match(s)
+    if m:
+        return ("enumerate", m.group(2))
+    return None
+
+
 def _convert_lists(text: str) -> str:
     lines = text.split("\n")
     out: list[str] = []
     i, n = 0, len(lines)
-
-    def is_b(s): return bool(_BULLET.match(s))
-    def is_n(s): return bool(_NUM.match(s))
-
     while i < n:
-        for rx, env, pred in ((_BULLET, "itemize", is_b), (_NUM, "enumerate", is_n)):
-            if pred(lines[i]):
-                out.append(r"\begin{" + env + "}")
-                while i < n and (pred(lines[i]) or
-                                 (lines[i].strip() == "" and i + 1 < n and pred(lines[i + 1]))):
-                    if lines[i].strip() == "":
-                        i += 1; continue
-                    out.append(r"  \item " + rx.match(lines[i]).group(2))
-                    i += 1
-                out.append(r"\end{" + env + "}")
-                break
-        else:
+        m = _item_match(lines[i])
+        if not m:
             out.append(lines[i]); i += 1
+            continue
+        env = m[0]
+        out.append(r"\begin{" + env + "}")
+        while i < n:
+            m = _item_match(lines[i])
+            if not m:
+                break
+            content = m[1]
+            i += 1
+            # fold continuation lines (indented/non-blank, not a new item) into this item
+            while i < n and lines[i].strip() != "" and not _item_match(lines[i]):
+                content += " " + lines[i].strip()
+                i += 1
+            out.append(r"  \item " + content)
+            # a blank line continues the same list only if another item follows
+            if i < n and lines[i].strip() == "":
+                j = i
+                while j < n and lines[j].strip() == "":
+                    j += 1
+                if j < n and _item_match(lines[j]):
+                    i = j
+                else:
+                    break
+        out.append(r"\end{" + env + "}")
     return "\n".join(out)
 
 

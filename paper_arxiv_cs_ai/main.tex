@@ -179,41 +179,13 @@ axiom budget that reached zero for the deductive core.
 \subsection{Contributions}
 
 \begin{itemize}
-  \item \textbf{A closed, audited human-AI formalization loop.} A coding agent that formalizes and
+  \item \textbf{A closed, audited human-AI formalization loop.} A coding agent that formalizes and self-corrects against the Lean compiler, an architecturally independent model that adversarially reviews the conceptual design, and a human who sets scope and adjudicates. The organizing idea is a division between mechanical correctness (owned by the compiler) and conceptual soundness (owned by the reviewer and the audit), described in §3.2 to §3.4.
+  \item \textbf{An axiom-budget discipline as a soundness instrument.} A continuously maintained, CI-enforced audit that prints and classifies the axiom dependencies of every headline result, ratchets a budget downward, and publishes the proved/conditional/cited split (§3.5).
+  \item \textbf{Headline result: the Einstein field equations, machine-checked and axiom-free, from a finite-information bound.} Running the loop on a researcher's own framework (QIQT-H, not a benchmark and not a published lemma), we obtained a single end-to-end Lean theorem deriving the Einstein field equations $a\,T_{\mu\nu}=G_{\mu\nu}+\Lambda g_{\mu\nu}$ from the framework's Bekenstein-type capacity bound: a Jacobson-style equation of state in which the thermodynamic (area-law) input is \emph{derived} from the framework rather than assumed, with only Bisognano-Wichmann wedge-modular flux and Raychaudhuri focusing cited as explicit hypotheses and all the differential geometry machine-checked. The same axiom-free development also carries a no-collapse measurement core (driving the project's axiom count 57 to 0); in total 192 modules, about 2,010 theorems, 0 project axioms, no \texttt{sorry} (§4).
+  \item \textbf{Two documented soundness saves and a third instrument.} Two concrete, kernel-checkable episodes in which the independent reviewer caught a false axiom and an inconsistent one invisible to the axiom counter, which motivated a vacuity lint as a complementary guard (§4.5).
+  \item \textbf{A verified human-readable bridge.} A blueprint whose formalized tags are mechanically linked to kernel-checked declarations, making an AI-formalized result auditable by domain experts who do not read Lean (§3.6).
+  \item \textbf{A reproducible artifact.} A public repository, the axiom audit, and the blueprint, so that every claim in §4 is checkable down to its proof.
 \end{itemize}
-  self-corrects against the Lean compiler, an architecturally independent model that adversarially
-  reviews the conceptual design, and a human who sets scope and adjudicates. The organizing idea is
-  a division between mechanical correctness (owned by the compiler) and conceptual soundness (owned
-  by the reviewer and the audit), described in §3.2 to §3.4.
-\begin{itemize}
-  \item \textbf{An axiom-budget discipline as a soundness instrument.} A continuously maintained, CI-enforced
-\end{itemize}
-  audit that prints and classifies the axiom dependencies of every headline result, ratchets a
-  budget downward, and publishes the proved/conditional/cited split (§3.5).
-\begin{itemize}
-  \item **Headline result: the Einstein field equations, machine-checked and axiom-free, from a
-\end{itemize}
-  finite-information bound.** Running the loop on the case-study framework produced a Lean derivation
-  of the Einstein field equations $a\,T_{\mu\nu}=G_{\mu\nu}+\Lambda g_{\mu\nu}$ from a
-  finite-information (Bekenstein-type) capacity bound via a Jacobson-style equation of state, with the
-  thermodynamic first law derived from the framework, the Bisognano-Wichmann flux and Raychaudhuri
-  focusing as explicitly cited hypotheses, and all the differential geometry machine-checked — an
-  existence proof at the scale of a whole theory, driving its deductive core from 57 project axioms to
-  0, with no \texttt{sorry}, over 192 modules and about 2,010 theorems (§4).
-\begin{itemize}
-  \item \textbf{Two documented soundness saves and a third instrument.} Two concrete, kernel-checkable
-\end{itemize}
-  episodes in which the independent reviewer caught a false axiom and an inconsistent one invisible
-  to the axiom counter, which motivated a vacuity lint as a complementary guard (§4.5).
-\begin{itemize}
-  \item \textbf{A verified human-readable bridge.} A blueprint whose formalized tags are mechanically linked
-\end{itemize}
-  to kernel-checked declarations, making an AI-formalized result auditable by domain experts who do
-  not read Lean (§3.6).
-\begin{itemize}
-  \item \textbf{A reproducible artifact.} A public repository, the axiom audit, and the blueprint, so that
-\end{itemize}
-  every claim in §4 is checkable down to its proof.
 
 \subsection{Roadmap}
 
@@ -457,19 +429,23 @@ the count while constraining nothing, and removing it lowers the count without i
 the inconsistency it introduced was the real problem. The budget therefore needs a companion that
 inspects axiom content, not only cardinality, a point we return to in §3.7 and §4.5.
 
-The axiom budget governs assumptions declared as \texttt{axiom}, but a result can also rest on assumptions
-carried as ordinary \emph{hypotheses} on its statement; since a hypothesis is an axiom local to one
-theorem, an honest audit must make that surface visible too. Two further scripts do this over the
-headline theorems, both re-runnable by anyone. A hypothesis ledger separates a theorem's data binders
-from its propositional hypotheses and buckets the latter into physical inputs, kinematic setup, and
-regularity or background conditions, so the genuine physical-assumption surface is legible rather than
-buried among side-conditions. A redundancy probe then removes each hypothesis and asks whether a
-heuristic tactic re-derives it from the remaining binders and the library; one that closes was
-redundant and is flagged for internalization. The probe is one-directional: a hypothesis it leaves
-standing is merely not closed by the heuristics tried, which is a lower bound on redundancy, not a
-proof of minimality, and we report it as such. With the axiom budget and the vacuity lint, these give
-a four-part picture of what a result assumes: which axioms it invokes, whether any are vacuous, which
-hypotheses it carries, and which of those are redundant.
+The axiom budget governs assumptions declared as \texttt{axiom}, but a result can also rest on
+assumptions carried as ordinary \emph{hypotheses} on its statement; an honest audit must make that
+surface visible too, since a hypothesis is just an axiom local to one theorem. We therefore run two
+further instruments over the headline theorems, both of them scripts that anyone can re-execute. The
+first is a hypothesis ledger: for each target it separates the data binders (the objects a theorem
+speaks about) from its propositional hypotheses, and buckets the latter into physical inputs,
+kinematic setup, and regularity or background conditions, so the genuine physical-assumption surface
+is legible at a glance rather than buried among smoothness side-conditions. The second is a
+redundancy probe: for each hypothesis it removes the binder and asks whether a heuristic tactic can
+re-derive it from the remaining binders and the library; if so, the hypothesis was redundant and is
+flagged for internalization, tightening the statement. The probe is deliberately one-directional. A
+hypothesis it closes is genuinely removable, but one it leaves standing is only *not closed by
+the heuristics tried*, which does not prove the hypothesis irreducible; the instrument is a lower
+bound on redundancy, not a certificate of minimality, and we report it as such. Together with the
+axiom budget and the vacuity lint, these give a four-part picture of what a result assumes: which
+axioms it invokes, whether any are vacuous, which hypotheses it carries, and which of those are
+redundant.
 
 \subsection{The verified blueprint bridge}
 
@@ -516,93 +492,106 @@ artifact rather than taken on faith, as part of the methodology rather than an a
 
 \section{Case Study: From a Finite-Information Bound to the Einstein Field Equations}
 
-The target theory, QIQT-H, is a foundations-of-physics framework that we treat strictly as a
-formalization target, not as a claim to defend. We describe it neutrally, then report the loop's
-headline output — a machine-checked derivation of the Einstein field equations — and the rest of the
-development, being explicit throughout about what is derived, what is cited, and what is checked.
+The target framework, QIQT-H, is a foundations-of-physics proposal that we treat strictly as a
+formalization target, not as a claim to defend. Its single organizing premise (a finite-information,
+Bekenstein-type capacity bound on bounded spacetime regions) reaches in two directions: down to the
+quantum measurement problem, and out to gravity. We describe it neutrally, then report the headline
+result the loop produced (a machine-checked, axiom-free derivation of the Einstein field equations),
+the rest of the development, and what is and is not established.
 
 \subsection{The target theory, in neutral terms}
 
-QIQT-H is a single-world, exactly-unitary account of quantum measurement whose organizing premise is
-that the physical instantiation of a wave function in a bounded spacetime region carries only finite
-information, bounded by a holographic capacity \cite{r40}. The same finite-capacity premise reaches in two
-directions. Toward measurement: together with environmental decoherence it is argued to make
-multi-record macroscopic states non-instantiable, so that a single definite record obtains per run,
-with a non-dynamical actuality selector fixing which record, and the Born rule appearing as an
-across-run frequency rather than a per-run probability \cite{r32,r33,r34}. Toward gravity: a saturated
-finite-information (Bekenstein-type) capacity bound on local causal horizons feeds a Jacobson-style
-equation of state, from which the Einstein field equations follow. The proposal continues a
-finite-information line of approaches to measurement \cite{r41}; it is set out in a companion paper \cite{r42},
-and the Lean development we report on is public \cite{r43}. Whether these physical claims are true is not
-our subject. Our subject is whether the framework's deductive core can be formalized end to end,
-honestly audited, and rendered legible — and on the gravity arm, whether the derivation is sound and
-free of hidden axioms. The framework's own authors flag its central physical postulates as open, and
-the formalization respects that boundary exactly.
+QIQT-H is a single-world, exactly-unitary framework whose one physical input is that the physical
+instantiation of a state in a bounded spacetime region carries only finite information, bounded by a
+holographic (Bekenstein-type) capacity \cite{r40}. On the measurement side this is argued to make
+multi-record macroscopic states non-instantiable, so a single definite record obtains per run, with
+a non-dynamical actuality selector fixing which record and the Born rule appearing as an across-run
+frequency \cite{r32,r33,r34}; the proposal continues a finite-information line of approaches to
+measurement \cite{r41}. On the gravitational side the same capacity bound plays the role of the
+area-entropy relation in a thermodynamic, Jacobson-style route to the field equations \cite{r46}. It
+is set out in a companion paper \cite{r42}, and the Lean development we report on is public
+\cite{r43}. Whether these physical claims are true is not our subject; our subject is whether the
+framework's deductive core can be formalized end to end, honestly audited, and rendered legible. The
+framework's own authors flag its central physical postulates as open, and the formalization respects
+that boundary exactly.
 
 \subsection{The headline result: the Einstein field equations from a finite-information bound}
 
-The loop's headline output is a machine-checked, axiom-free Lean derivation of the Einstein field
-equations
+The development's headline theorem, \texttt{QIQTH.QiqtToGR.qiqt\_bekenstein\_gives\_gr}, is a single
+end-to-end Lean statement whose conclusion is the Einstein field equations: there exists a constant
+$\Lambda$ such that, at every point and for all indices, $a\,T_{\mu\nu}=G_{\mu\nu}+\Lambda\,g_{\mu\nu}$,
+with $G$ the genuine Einstein tensor built from the metric. It is axiom-free and \texttt{sorry}-free,
+and it follows the thermodynamic, equation-of-state route to gravity pioneered by Jacobson \cite{r46},
+in which the Einstein equations arise from a local Clausius relation $\delta Q=T\,\delta S$ on local
+causal horizons, with the temperature the local Unruh temperature \cite{r48} and entropy proportional
+to horizon area.
 
-\[
-a\,T_{\mu\nu} = G_{\mu\nu} + \Lambda\,g_{\mu\nu}
-\]
+What makes this a genuine \emph{derivation from the framework}, rather than an assumption of the area
+law, is that QIQT-H's own content supplies the thermodynamic input as theorems. Along each local null
+generator, the finite-information capacity \emph{bound} $S\le\eta A$ (the Bekenstein-type content,
+Lean \texttt{shannon\_le\_log\_card}), its saturation at the reference, and relative-entropy positivity
+(Klein's inequality) together \emph{derive} the differential first law $\delta\langle K\rangle=\eta\,\delta A$
+(\texttt{differential\_area\_law}); no hypothesis asserts the area law or the conclusion. Two
+physics facts that Mathlib cannot prove are then introduced as \emph{explicit, labelled hypotheses}
+(never Lean axioms): the Bisognano-Wichmann identification of the wedge-modular flow with the boost,
+which supplies the heat flux $\delta\langle K\rangle=(2\pi/\hbar)\,T_{kk}$ \cite{r47}, and Raychaudhuri
+focusing, which supplies the area rate $\dot{A}=R_{kk}$ \cite{r49} (the latter itself reduced, via a
+machine-checked Raychaudhuri equation, to a single area-versus-expansion modelling identification).
+These yield Jacobson's pointwise per-null premise; a machine-checked lemma then turns a symmetric
+tensor that vanishes on the entire null cone into a scalar multiple of the metric, and conservation
+plus the contracted Bianchi identity fix the integration constant as a genuine cosmological constant.
 
-from a finite-information capacity bound, by way of a Jacobson-style equation of state \cite{r46}. The Lean
-top theorem (\texttt{qiqt\_bekenstein\_gives\_gr}) takes a smooth metric, a stress tensor, and a local
-causal-horizon congruence; from the QIQT-H capacity bound $S \le \eta A$ together with its saturation
-and Klein positivity it \emph{derives} the differential first law $\delta\langle K\rangle = \eta\,\delta A$;
-it then combines this with two explicitly cited physics inputs — the Bisognano-Wichmann
-boost/modular flux \cite{r47,r48} and Raychaudhuri null focusing \cite{r49} — to obtain the Jacobson per-null
-premise, and concludes the field equations with a constant cosmological term $\Lambda$. Every
-differential-geometric step downstream of the per-null premise is machine-checked: the second Bianchi
-identity, the contracted Bianchi identity $\nabla^\mu G_{\mu\nu}=0$, the passage from the
-null-cone-pointwise relation to the full tensor equation, and the constancy of $\Lambda$.
-
-The point for this paper is not the physics but the \emph{shape of the certificate}. Table 1 records the
-status of each link in the chain, so the reader can see exactly where derivation ends and citation
-begins. The geometry is verified to Lean's kernel and uses no project-specific axiom; the two physics
-inputs are present as named hypotheses, not as assumptions hidden inside a tactic; and the capacity
-bound is the framework's own postulate. Verification certifies the conditional implication — \emph{given}
-the cited flux and focusing inputs and the capacity bound, the field equations follow with no hidden
-axiom — and certifies nothing about whether those inputs or the bound hold in nature.
+All of the differential geometry is machine-checked and axiom-free: the second Bianchi identity, the
+contracted-Bianchi conservation law $\nabla^\mu G_{\mu\nu}=0$ (divergence-freeness of the Einstein
+tensor), metric compatibility, the trace identities, the null-cone-to-tensor step for a general
+Lorentzian metric, and the constancy of $\Lambda$. Table 1 sorts the chain into what
+QIQT-H derives, what is cited, and what is machine-checked geometry.
 
 \begin{table}[ht]
 \centering
-\caption{Status of each link in the QIQT-H → Einstein chain.}
+\caption{The QIQT-H + Bekenstein ⇒ Einstein-field-equations chain, by status.}
 \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.60\linewidth}Y@{}}
 \toprule
-\textbf{Link in the chain} & \textbf{Status} \\
+\textbf{Step} & \textbf{Status} \\
 \midrule
-Finite-information capacity bound $S \le \eta A$ (QIQT-H postulate) & framework postulate \\
-Saturation + Klein positivity ⟹ differential first law $\delta\langle K\rangle=\eta\,\delta A$ & \textbf{derived (machine-checked)} \\
-Boost/modular flux $\delta\langle K\rangle = \tfrac{2\pi}{\hbar}\!\int T_{\mu\nu}\,\xi^\mu d\Sigma^\nu$ (Bisognano-Wichmann) & cited input \cite{r47,r48} \\
-Raychaudhuri null focusing $\delta A = -\!\int R_{\mu\nu}k^\mu k^\nu\,\lambda\,d\lambda\,dA$ & cited input \cite{r49} \\
-Jacobson per-null premise (Clausius $\delta Q = T\,\delta S$ on local horizons) & \textbf{derived (machine-checked)} \\
-Second + contracted Bianchi, $\nabla^\mu G_{\mu\nu}=0$ & \textbf{machine-checked} \\
-Null-cone-pointwise ⟹ tensor equation; $\Lambda$ constant & \textbf{machine-checked} \\
-Einstein field equations $a\,T_{\mu\nu}=G_{\mu\nu}+\Lambda g_{\mu\nu}$ & \textbf{machine-checked conclusion} \\
+Capacity bound $S\le\eta A$, saturation, Klein positivity & Derived in QIQT-H (theorems) \\
+Differential first law $\delta\langle K\rangle=\eta\,\delta A$ & Derived from the above \\
+Wedge-modular $=$ boost heat flux $T_{kk}$ (Bisognano-Wichmann) & Cited (explicit hypothesis) \\
+Raychaudhuri focusing $\dot{A}=R_{kk}$ & Cited hypothesis; geometric core machine-checked \\
+Null-cone→tensor, 2nd/contracted Bianchi, $\nabla^\mu G_{\mu\nu}=0$, constant $\Lambda$ & Machine-checked, axiom-free \\
+Einstein field equations $a\,T_{\mu\nu}=G_{\mu\nu}+\Lambda g_{\mu\nu}$ & Machine-checked conclusion \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-This scope statement is read off the theorem by the hypothesis-audit scripts of §3.5, which anyone
-can re-run. The ledger reports that \texttt{qiqt\_bekenstein\_gives\_gr} takes 14 data binders and 23
-propositional hypotheses, bucketed as four physical inputs (the Clausius/area-saturation floor), one
-Raychaudhuri-focusing input, one wedge-modular boost-flux input, one stress-energy conservation
-condition, three per-generator differentiability conditions, and thirteen regularity or background
-conditions. The genuine physical-assumption surface is thus exactly the three inputs the prose names;
+The honest scope is therefore precise, and we state it in both directions. The formalization certifies
+that, \emph{conditional on} the two cited physics facts and the standard structural inputs (a
+Lorentzian congruence, $\nabla^\mu(aT)=0$, regularity of the scalar $f$, per-generator
+differentiability), QIQT-H's capacity bound and Klein positivity \emph{derive} the Einstein field
+equations, and that this derivation rests on no hidden axiom. It does \emph{not} establish the cited
+inputs themselves: Bisognano-Wichmann and Raychaudhuri are genuine theorems of algebraic QFT and
+Lorentzian geometry, but here they are assumed; nor does it establish the framework's physical
+capacity postulate. An in-progress effort formalizes the one-particle Bisognano-Wichmann property
+directly, which would move the modular-flux input from cited toward derived for the free field.
+
+This scope statement is not editorial: it is read off the theorem by the hypothesis-audit scripts of
+§3.5, which anyone can re-run. The ledger reports that \texttt{qiqt\_bekenstein\_gives\_gr} takes 14
+data binders and 23 propositional hypotheses, and buckets the hypotheses as four physical inputs (the
+Clausius/area-saturation floor), one Raychaudhuri-focusing input, one wedge-modular boost-flux input,
+one stress-energy conservation condition, three per-generator differentiability conditions, and
+thirteen regularity or background conditions (metric symmetry and smoothness, the frame, and the
+constants). The genuine physical-assumption surface is thus exactly the three inputs the prose names;
 everything else is kinematic setup or regularity. Running the redundancy probe over the headline
-theorem and the eight related capstones of the chain returns zero auto-dischargeable hypotheses — no
+theorem and the eight related capstones of the chain returns zero auto-dischargeable hypotheses: no
 labelled input is closed by the heuristic tactics, so the surface is not padded with hypotheses the
-library could already supply. As in §3.5 this is a lower bound on minimality rather than a proof of
-it, but it shows the assumption surface is tight under an automated check, and it makes the premise
-ledger of the headline result a reproducible artifact rather than a narrative claim.
+library could already supply. Consistent with §3.5, this is a lower bound on minimality rather than a
+proof of it, but it shows the assumption surface is tight under an automated check, and it makes the
+premise ledger of the headline result a reproducible artifact rather than a narrative claim.
 
 \subsection{The rest of the development, with artifact metrics}
 
-The development formalizes the framework's layered deductive core, and it is worth naming the layers
-because their epistemic shapes differ and the method's job is to keep those differences explicit. A
+Beyond the headline result, the development formalizes the framework's other layers, whose epistemic
+shapes differ and which the method's audit keeps explicit. A
 first layer mechanizes the no-collapse mechanism. From a finite additive capacity and a
 redundant-record (Spectrum Broadcast) structure \cite{r45}, it derives that at most one macroscopic record can
 be co-instantiated, with the capacity threshold itself derived from orthonormality rather than
@@ -629,10 +618,10 @@ four layers and the in-progress tower, is subject to the same \texttt{\#print ax
 one of them, including the negative audits, which are themselves theorems that something does not
 follow, lands in the proved bucket.
 
-The artifact is quantified rather than asserted. As of 2026-06-21 the development comprises **192
-modules and approximately 2,010 theorems and lemmas\textbf{, with }830 \texttt{\#print axioms} directives** in a
-dedicated audit module. It builds green, contains \textbf{no \texttt{sorry}}, and depends on **zero
-project-specific axioms**, so every audited theorem rests only on the three standard Lean axioms. A
+The artifact is quantified rather than asserted. As of 2026-06-21 the development comprises \textbf{192
+modules and approximately 2,010 theorems and lemmas}, with \textbf{830 \texttt{\#print axioms} directives} in a
+dedicated audit module. It builds green, contains \textbf{no \texttt{sorry}}, and depends on \textbf{zero
+project-specific axioms}, so every audited theorem rests only on the three standard Lean axioms. A
 vacuity scan (§4.5) reports a single benign site. Table 2 summarizes.
 
 \begin{table}[ht]
@@ -797,16 +786,13 @@ vacuous by the lint's criteria, but "no vacuous axiom the lint can see" is weake
 assumption is justified," and a sufficiently subtle mis-formalization of a statement, as opposed to
 a proof, remains possible in principle, which is part of why the blueprint bridge and human review
 matter. The fourth, and most important, is that the case-study theory's own physics is not closed by
-formalization: driving the deductive core to zero axioms says nothing about whether the holographic
-capacity bound, the definiteness conjecture, or the Born principle are physically correct. This bears
-directly on the headline result. The machine-checked Einstein-equation derivation is a \emph{conditional}
-one: it depends on the QIQT-H capacity bound as a postulate and on two explicitly cited physics
-inputs — the Bisognano-Wichmann boost/modular flux \cite{r47,r48} and Raychaudhuri null focusing \cite{r49} —
-which enter as named hypotheses rather than as proved facts. What is certified is that, given those
-inputs, the field equations follow with no hidden axiom and with all the intervening geometry
-machine-checked; the cited inputs and the capacity bound are not themselves established by the
-formalization. We state this not as a closing caveat but as a structural feature of what machine
-verification can and cannot do for foundational science.
+formalization. Driving the deductive core to zero axioms says nothing about whether the holographic
+capacity bound, the definiteness conjecture, or the Born principle are physically correct; and the
+headline derivation of the Einstein field equations is explicitly conditional on its two cited inputs
+(the Bisognano-Wichmann wedge-modular flux and Raychaudhuri focusing) and standard structural
+assumptions, which the formalization records as hypotheses but does not establish. We state this not
+as a closing caveat but as a structural feature of what machine verification can and cannot do for
+foundational science.
 
 \section{Conclusion}
 
@@ -819,22 +805,20 @@ human-directed loop in which a self-correcting formalizer is paired with an arch
 independent adversarial reviewer and a continuously maintained, CI-enforced soundness audit, with a
 verified blueprint that makes the result legible to the domain that must judge it.
 
-Applied to a new, contested foundations-of-physics framework, the loop's headline output is a
-machine-checked, axiom-free Lean derivation of the Einstein field equations
-$a\,T_{\mu\nu}=G_{\mu\nu}+\Lambda g_{\mu\nu}$ from a finite-information (Bekenstein-type) capacity
-bound, by way of a Jacobson-style equation of state in which the thermodynamic first law is itself
-derived from the framework, the Bisognano-Wichmann flux and Raychaudhuri focusing enter as
-explicitly cited hypotheses, and all the differential geometry is checked to the kernel. The same
-development carries an axiom-free no-collapse measurement core; in driving its deductive core from
-fifty-seven project-specific axioms to zero, with no \texttt{sorry}, across 192 modules and roughly 2,010
-theorems, the loop also produced two documented, kernel-checkable soundness saves: a false axiom that
-the reviewer refuted by counterexample, and an inconsistent one that the axiom counter structurally
-could not see, the second of which motivated a third instrument, a vacuity lint on axiom content. The
-contribution is the audited methodology together with the existence proof that it scales to a whole
-theory and reaches a deep physical target, held throughout under an explicit and repeated honesty
-boundary: the formalization certifies that the framework's conditional mathematics is correct and
-free of hidden axioms, with its physics inputs labelled as explicit hypotheses; it does not, and
-cannot, establish those cited inputs or the framework's physical postulates, which remain open.
+Applied to a new, contested foundations-of-physics framework, the loop produced a machine-checked,
+axiom-free Lean derivation of the Einstein field equations $a\,T_{\mu\nu}=G_{\mu\nu}+\Lambda g_{\mu\nu}$
+from the framework's finite-information (Bekenstein-type) capacity bound: a Jacobson-style equation of
+state in which the thermodynamic input is itself derived, with only Bisognano-Wichmann wedge-modular
+flux and Raychaudhuri focusing cited as explicit hypotheses and all the differential geometry
+machine-checked. The same axiom-free development carries a no-collapse measurement core; in total it
+drove the project's axiom count from fifty-seven to zero, with no \texttt{sorry}, across 192 modules
+and roughly 2,010 theorems, and it produced two documented, kernel-checkable soundness saves (a false
+axiom the reviewer refuted by counterexample, and an inconsistent one the axiom counter could not see,
+which motivated a vacuity lint). The contribution is the audited methodology together with this
+demonstration on a hard physics target, held throughout under an explicit honesty boundary: the
+formalization certifies that the derivation is correct and free of hidden axioms, with its physics
+inputs labelled; it does not, and cannot, establish those cited inputs or the framework's physical
+postulates, which remain open.
 
 Three near-term directions follow. The first is independent multi-team replication, since the
 strongest test of a methodology is that others can run it, and the artifact is published so they can.
