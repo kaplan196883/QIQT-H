@@ -22,10 +22,16 @@ open Lean Elab Command Meta
 
 /-- Targets to audit. -/
 def targets : List Name :=
-  [ ``QIQTH.WedgeKMSToGR.qiqt_gr_freefield,
+  [ -- the whole QIQT→GR chain, abstract core → concrete capstones:
+    ``QIQTH.QiqtToGR.qiqt_bekenstein_gives_gr,
+    ``QIQTH.WedgeKMSToGR.qiqt_gr_from_wedge_kms,
+    ``QIQTH.WedgeKMSToGR.qiqt_gr_from_wedge_kms_complete,
+    ``QIQTH.WedgeKMSToGR.qiqt_gr_from_flux_complete,
+    ``QIQTH.WedgeKMSToGR.qiqt_gr_from_wedge_kms_raychaudhuri,
     ``QIQTH.WedgeKMSToGR.qiqt_gr_explicit_kg,
-    -- a LESS-internalized capstone (still takes hC/hric_symm) — demonstrates the probe catching real discharges:
-    ``QIQTH.WedgeKMSToGR.qiqt_gr_from_wedge_kms_complete ]
+    ``QIQTH.WedgeKMSToGR.qiqt_gr_explicit_kg_raychaudhuri,
+    ``QIQTH.WedgeKMSToGR.qiqt_gr_explicit_kg_lorentzian,
+    ``QIQTH.WedgeKMSToGR.qiqt_gr_freefield ]
 
 /-- Heuristic discharge tactic: tries the cheap, sound closers + the project's curated discharge lemmas. -/
 syntax "discharge_probe" : tactic
