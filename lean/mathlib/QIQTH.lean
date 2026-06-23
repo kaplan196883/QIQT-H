@@ -414,6 +414,7 @@ import QIQTH.EinsteinFieldEquation
 import QIQTH.KGStressConservation
 import QIQTH.QiqtGrExplicitKG
 import QIQTH.RicciSymm
+import QIQTH.ChristoffelSmooth
 import QIQTH.ManifoldCurvature
 import QIQTH.ManifoldCommutator
 import QIQTH.PseudoRiemannian
