@@ -633,12 +633,19 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          **`niceWedgeCyclic_small_mass {m} (hm0:0<m) (hmπ:m<π/4) : NiceWedgeCyclic m`** — NO other hypotheses. The
          free-field one-particle Bisognano–Wichmann's cyclic Reeh–Schlieder input is DISCHARGED (axiom-free, unconditional)
          for the nonempty mass window `(0,π/4)`.
-         REMAINING — **general `m>0`**: the FIXED radius-2 bump's FT acquires zeros for large `m`, so the `θ=0`-value route
-         caps at `m<π/4`. A scaled bump (radius `~min(1,π/(4(|m|+1)))`) shrinks the support so `cos(my)>0` persists,
-         re-deriving the same chain with a mass-dependent `bumpNiceTest`/`Krep_bumpC_zero`; OR the separable real-analytic
-         route (`A(m coshθ)·B(m sinhθ)`, `m coshθ` sweeps `[m,∞)`, each factor entire `≢0`). Not blocking — the cyclic side
-         already holds for a nonempty window. The separating side (`NiceWedgeSeparating`, Pauli–Jordan) remains a parallel
-         unattacked frontier.
+         **★★★★ DONE for ALL `m>0` (`ab566ac`, 2026-06-23, axiom-free, budget 0) — THE CYCLIC SIDE IS A THEOREM FOR THE
+         FULL PHYSICAL MASS RANGE.** `niceWedgeCyclic_pos_mass {m} (hm0:0<m) : NiceWedgeCyclic m` — NO hypotheses beyond
+         `m>0`. The fixed radius-2 bump's FT vanishes for `m≥π/4`, so this adds the WIDTH-SCALED bump family
+         `bump1W R hR c := ⟨R/2, R, …⟩` / `bumpRealW` / `bumpCW` and re-derives the entire chain parametrically
+         (`bumpRealW_contDiff`, `bumpCW_continuous/_real`, `bumpRealW_support_subset` (box `|x−c|≤R`),
+         `bumpCW_hasCompactSupport` (closedBall `|cT|+|cX|+2R`), `bumpCW_Krep_memLp`, `bumpNiceTestW` (centre `(0,cX)`,
+         `2R<cX`, margin `δ=cX−2R`), `niceWedgeCyclic_bumpW`, `minkowskiFourier_bumpCW`, `Krep_bumpCW_zero`,
+         `Krep_bumpCW_ne_zero_of`, `bump1W_fourier_ne_zero` for `m·R<π/2`, `niceWedgeCyclic_of_bumpW_fourier_ne_zero`).
+         Choosing `R=π/(4m)`, `cX=2R+1` gives `m·R=π/4<π/2`, so `cos(my)>0` on the whole support `|y|≤R` and
+         `Re A=∫cos(my)·bump1W R(y)>0`. Supersedes `niceWedgeCyclic_small_mass` (the `R=2` special case). Needed
+         `open scoped ContDiff` (for `∞`) + `open Metric`. **The cyclic Reeh–Schlieder input is fully, unconditionally
+         CLOSED.** The separating side (`NiceWedgeSeparating`, Pauli–Jordan / no-complex-line) remains the parallel
+         unattacked frontier — now the SOLE remaining input of the free-field one-particle BW.
          **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0` (its amplitude `≠0` somewhere), `8b+8c/8c′` ⟹ `𝓕≠0`
          a.e., feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
          EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness, the full
