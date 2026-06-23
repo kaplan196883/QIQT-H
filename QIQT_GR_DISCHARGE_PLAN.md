@@ -26,6 +26,27 @@ surface. After the corrected audit, that surface splits cleanly:
 **Goal of this plan:** retire `hKMS` (Item A) and close `hFocus` to `harea` only (Item B), leaving the
 Clausius/area-saturation law as the single labelled physical input.
 
+**⚠ HONEST VERDICT (GPT-5.5-pro audit, 2026-06-23): this is a STRONG AXIOM-FREE CONDITIONAL Jacobson/KG theorem,
+NOT a "full pure QIQT→GR proof."** Slogan: *"Given a smooth Lorentzian 4-geometry, a classical KG field obeying its
+EOM, and local Jacobson thermodynamic/modular/focusing hypotheses, Lean proves the Einstein equation (with Λ) for the
+explicit KG stress tensor."* The genuinely-discharged pieces (one-particle BW incl. Reeh–Schlieder; KG covariant
+conservation) are real and non-trivial, but the capstone is CONDITIONAL on inputs that are NOT QIQT-derived:
+- **`hKMS` (biggest FORMAL gap):** `WedgeKMSFlux_complete` is a SPACETIME stress-flux condition — a DIFFERENT Lean
+  object from the one-particle modular-flow theorem we proved. The one-particle BW does NOT currently feed the
+  capstone; the bridge (lift BW → Fock/local-algebra modular flow → stress operator → modular Hamiltonian = boost
+  stress flux → global-wedge to local-horizon) is unformalized. This is the "dynamical-realization" gap.
+- **`Sf`/`KE`/`A` are thermodynamic ORACLES**, not constructed entanglement/modular entropy + horizon area; so
+  `hDnn` (`KE−Sf≥0`) is smuggled (would be a Klein theorem if `KE−Sf` were genuine relative entropy).
+- **`hbound`/`hsat` (biggest CONCEPTUAL blocker):** the Clausius/area-saturation floor + the meaning of `η·A` — the
+  honest irreducible core of ANY Jacobson-type derivation, unless QIQT itself proves a horizon area-entropy law.
+- `kgStress` is a CLASSICAL c-number tensor, not a renormalized quantum stress expectation.
+- No proof the hypotheses are SIMULTANEOUSLY realizable by the QIQT/free-field model ⟹ the result could be vacuous
+  as a first-principles claim until a model is exhibited satisfying all of them.
+- Technical debt GPT flagged: `hric_symm` should be a geometry THEOREM (Ricci symmetry via Bianchi), not a
+  hypothesis; audit `hreg` for hidden limit-exchanges. (`hric_symm` is derivable but a non-trivial Bianchi-dependent
+  proof — pair-symmetry `R_{abcd}=R_{cdab}` from `riemann_first_bianchi` + the antisymmetries — not a quick win.)
+This verdict matches the cited 4-gap frontier (H2=crux · dynamical-realization · Born · FQ/continuum).
+
 **★★★★★★★ PLAN FULLY COMPLETE — MECHANICAL SCOPE EXHAUSTED (2026-06-23).** Not only are both work items discharged
 to their honest floors, but the two residuals the plan flagged as *cited frontier / out-of-scope* (the Reeh–Schlieder
 `S`-construction and `conserv`) are now ALSO machine-checked axiom-free theorems, and every new theorem is certified
