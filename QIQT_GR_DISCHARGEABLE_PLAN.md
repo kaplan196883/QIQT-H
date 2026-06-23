@@ -22,7 +22,7 @@ This does **not** attempt H2 (the area law from `Q_max`) — that is the genuine
 
 | Hypothesis | Class | Codebase status (2026-06-23) | Tier |
 |---|---|---|---|
-| `hric_symm` (Ricci symmetry `R_{σν}=R_{νσ}`) | pure geometry | `lowered_riemann_eq` + lowered-Riemann antisymmetry machinery EXIST; no `ricci_symm` yet | **A1** |
+| `hric_symm` (Ricci symmetry `R_{σν}=R_{νσ}`) | pure geometry | ✅ **DONE `11a3af1`** — `ricci_symm` in `QIQTH/RicciSymm.lean` | **A1 ✓** |
 | `hFocus` / Raychaudhuri identity | pure geometry | **DONE** — `raychaudhuri_focusing`, `raychaudhuri_geodesic`, `raychaudhuri_focusing_at_equilibrium` (`hFocus_of_raychaudhuri`). Residual `harea`/`hequil` is the physical floor, not dischargeable. | **A2 (verify only)** |
 | `P,Pinv,hPP,hPP',hcong` (Sylvester tetrad `g=Pᵀ·gm·P`) | linear algebra | Sylvester is currently a LABELLED hypothesis in several files (`ClausiusToPernull`, `EinsteinEquationOfState`); a "Sylvester null-cone lemma" exists | **A3** |
 | `hreg` (focusing-function regularity) | technical | used as-is; the explicit `f = a·T·gi-trace − ½R` is concrete | **A4** |
@@ -39,7 +39,12 @@ the fundamental/background inputs and are deliberately out of scope.
 
 These need NO QFT/operator-algebra. They are the cleanest wins and should be done first.
 
-### A1 — `ricci_symm` : `R_{σν}(x) = R_{νσ}(x)` *(1–3 fires; HIGH confidence)*
+### A1 — `ricci_symm` : `R_{σν} = R_{νσ}` — ✅ **DONE (`11a3af1`, 2026-06-23, axiom-free)**
+`QIQTH/RicciSymm.lean`: `lowered_riemann_pair_symm` (`R_{abcd}=R_{cdab}` from the two antisymmetries + the first
+Bianchi, the 4-cyclic-Bianchi `linarith`) → `ricci_symm` (Ricci as the gi-raised lowered-Riemann trace
+`ricci_eq_trace` + termwise pair-symmetry + `Finset.sum_comm` + gi-symmetry). **Discharges `hric_symm`.** Original
+sketch below for reference:
+### A1 (sketch) — `ricci_symm` : `R_{σν}(x) = R_{νσ}(x)`
 `ricci g gi σ ν x = ∑μ riemann g gi μ σ μ ν x`.  Symmetry follows from the **pair-symmetry of the lowered Riemann
 tensor** `R_{abcd} = R_{cdab}`, contracted with `gi`.  The codebase already has `lowered_riemann_eq` (the explicit
 `∂Γ−∂Γ+ΓΓ−ΓΓ` lowered form), `lowered_riemann_antisymm` (antisymmetry in each pair), and `riemann_first_bianchi`.

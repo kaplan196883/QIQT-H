@@ -4801,4 +4801,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — the kinematic-Raychaudhuri form of the above: hFocus replaced by the null-congruence
 -- Raychaudhuri data (hgeo/hequil/harea), still with T=kgStress concrete and conserv discharged internally.
 
+-- Tier A1 of QIQT_GR_DISCHARGEABLE_PLAN: discharge hric_symm.
+#print axioms QIQTH.Curvature.ricci_symm
+-- expected: standard only — Ricci symmetry R_σν=R_νσ via lowered-Riemann pair-symmetry (lowered_riemann_pair_symm:
+-- the two antisymmetries + first Bianchi) + the gi-raised trace. Discharges the hric_symm hypothesis of the capstone.
+
 end QIQTH.AxiomAudit
