@@ -180,6 +180,26 @@ The full chain is machine-checked axiom-free (`[propext, Classical.choice, Quot.
 
 Every modular, Bisognano–Wichmann, boost-charge, stress-flux, conservation, and curvature step beneath these is
 machine-checked. The `±2π` sign obstruction is fully resolved (the `+2π` route is the satisfiable one).
+
+### Gap 2 investigation (2026-06-23) — confirmed IRREDUCIBLE modeling, not a missing construction
+Surveyed the localization apparatus (`Fock/Localization.lean`, `LocalizedCovariance`, `LocalizedWitness`):
+- There is **`Krep`** (rapidity rep of a `V → ℂ` test function) but **NO** canonical map from a null horizon
+  generator `(x,v)` to a wedge mode. So `(hbridge, hTkk)` cannot be discharged mechanically — choosing which wedge
+  mode realizes a given local Rindler horizon, and identifying its rapidity stress flux with the horizon stress, is
+  the genuine dynamical-realization (physics modeling) step. This is the honest, irreducible Gap 2.
+- The **soft** sub-hypotheses (`MemLp`/`Integrable`/`AEStronglyMeasurable`/`HasDerivAt`/bounded-`‖f'‖`) ARE
+  satisfiable in principle (Schwartz/Gaussian/compact-support modes — the codebase has the `Krep`/`horizonAmp`
+  integrability machinery, e.g. `stressFluxKK_eq_neg_rapMom_cptSupp`). But discharging them generically would be a
+  SEPARATE sub-project: Mathlib lacks ready `SchwartzMap.memLp`/`integrable`, and `freeField_component_hFlux` is
+  stated for a generic `f : ℝ → ℂ` (not `Krep m (·)`), so a `_schwartz`/`_cptSupp` convenience wrapper would require
+  bridging the generic-`f` and `Krep` pictures. It is NOT part of completing this plan (it only narrows the SOFT
+  shell of Gap 2; the irreducible core `(hbridge, hTkk)` remains regardless).
+
+### PLAN STATUS: COMPLETE — no mechanical work remains
+All 5 phases are discharged and machine-checked axiom-free (budget 0). What remains is exactly the genuine physics
+floor (Clausius/area law, H2, EOM/background/couplings) + the Gap-2 modeling input — none of it mechanical Lean work.
+Any further increment (e.g. a Schwartz soft-data wrapper, or a non-vacuity witness) is a NEW optional strengthening,
+not a completion item.
 - **Deliverable:** `qiqt_gr_freefield` — the QIQT→GR Einstein equations for the explicit free KG field with `hKMS`
   AND `conserv` AND the geometric debt all discharged; resting on `{Clausius/area law, EOM, Lorentzian frame,
   G/η, the localization map (if Gap 2 stays labelled)}`.
