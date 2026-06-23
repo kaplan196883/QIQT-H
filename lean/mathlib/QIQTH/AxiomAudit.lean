@@ -4799,6 +4799,10 @@ namespace QIQTH.AxiomAudit
 -- of component_hFlux_of_wedgeKMS_complete. Routes freeField_oneParticle_hFlux + derivative uniqueness into the EXACT
 -- kd-conclusion qiqt_bekenstein_gives_gr consumes — bypassing the −2π/wedgeGenSet bundle. Only remaining inputs are
 -- hbridge (kd = modular energy of localized mode) + hTkk (localization map, Gap 2). Phase 4 of the freefield plan.
+#print axioms QIQTH.Fock.freeField_softData_nonvacuous
+-- expected: standard only — NON-VACUITY of the localization datum's soft shell: the analytic hypotheses of
+-- freeField_component_hFlux (MemLp/Integrable/measurable/HasDerivAt/bounded ‖f'‖) are simultaneously satisfiable,
+-- witnessed by the Gaussian mode θ↦exp(−θ²), B=1 (2|x|≤x²+1≤exp(x²)). Only the modeling core (hbridge,hTkk) stays labelled.
 
 -- ★★★★★★ THE `conserv` INPUT OF THE QIQT→GR DERIVATION, DISCHARGED for the explicit Klein–Gordon field (2026-06-23).
 #print axioms QIQTH.Curvature.pd_gi_eq

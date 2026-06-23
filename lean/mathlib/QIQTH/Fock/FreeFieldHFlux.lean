@@ -157,4 +157,66 @@ theorem freeField_component_hFlux {m : ℝ} (hm : 0 < m)
     hbridge.unique hHil
   exact_mod_cast mul_left_cancel₀ Complex.I_ne_zero huniq
 
+/-- **Non-vacuity of the localization datum's SOFT shell.**  The analytic hypotheses of `freeField_component_hFlux`
+    (`MemLp`/`Integrable`/`AEStronglyMeasurable`/`HasDerivAt`/globally-bounded `‖f'‖`) are simultaneously
+    satisfiable — witnessed by the Gaussian mode `θ ↦ exp(−θ²)` with derivative bound `B = 1`
+    (`2|x| ≤ x²+1 ≤ exp(x²)`).  So the only genuinely-labelled part of Gap 2 is the modeling core `(hbridge, hTkk)`;
+    the analytic shell is inhabited and machine-checked.  Axiom-free. -/
+theorem freeField_softData_nonvacuous :
+    ∃ (f f' : ℝ → ℂ) (B : ℝ),
+      MemLp f 2 (volume : Measure ℝ) ∧
+      Integrable f (volume : Measure ℝ) ∧
+      Integrable (fun θ => (starRingEnd ℂ) (f θ) * f θ) (volume : Measure ℝ) ∧
+      AEStronglyMeasurable f (volume : Measure ℝ) ∧
+      (∀ x, HasDerivAt f (f' x) x) ∧
+      AEStronglyMeasurable f' (volume : Measure ℝ) ∧
+      (∀ x, ‖f' x‖ ≤ B) := by
+  refine ⟨fun θ => (Real.exp (-θ ^ 2) : ℂ),
+    fun θ => ((Real.exp (-θ ^ 2) * (-(2 * θ)) : ℝ) : ℂ), 1, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · -- MemLp f 2 : ‖f‖² = exp(−2θ²) is integrable
+    have hmeas : AEStronglyMeasurable (fun θ => (Real.exp (-θ ^ 2) : ℂ)) (volume : Measure ℝ) :=
+      (Complex.continuous_ofReal.comp (by fun_prop)).aestronglyMeasurable
+    rw [memLp_two_iff_integrable_sq_norm hmeas]
+    have hge : (fun θ : ℝ => ‖(Real.exp (-θ ^ 2) : ℂ)‖ ^ 2) = fun θ : ℝ => Real.exp (-2 * θ ^ 2) := by
+      funext θ
+      rw [Complex.norm_real, Real.norm_eq_abs, abs_of_pos (Real.exp_pos _), pow_two,
+        ← Real.exp_add, show (-θ ^ 2 + -θ ^ 2 : ℝ) = -2 * θ ^ 2 by ring]
+    rw [hge]; exact integrable_exp_neg_mul_sq (by norm_num)
+  · -- Integrable f
+    have : Integrable (fun θ : ℝ => Real.exp (-θ ^ 2)) (volume : Measure ℝ) := by
+      simpa using integrable_exp_neg_mul_sq (b := 1) (by norm_num)
+    exact this.ofReal
+  · -- Integrable (conj f · f) = exp(−2θ²)
+    have hI : Integrable (fun θ : ℝ => Real.exp (-2 * θ ^ 2)) (volume : Measure ℝ) :=
+      integrable_exp_neg_mul_sq (by norm_num)
+    have heq : (fun θ : ℝ => (starRingEnd ℂ) (Real.exp (-θ ^ 2) : ℂ) * (Real.exp (-θ ^ 2) : ℂ))
+        = fun θ : ℝ => ((Real.exp (-2 * θ ^ 2) : ℝ) : ℂ) := by
+      funext θ
+      rw [Complex.conj_ofReal, ← Complex.ofReal_mul, ← Real.exp_add,
+        show (-θ ^ 2 + -θ ^ 2 : ℝ) = -2 * θ ^ 2 by ring]
+    rw [heq]; exact hI.ofReal
+  · -- AEStronglyMeasurable f
+    exact (Complex.continuous_ofReal.comp (by fun_prop)).aestronglyMeasurable
+  · -- HasDerivAt f (f' x) x
+    intro x
+    have hsq : HasDerivAt (fun θ : ℝ => -θ ^ 2) (-(2 * x)) x := by
+      simpa using (hasDerivAt_pow 2 x).neg
+    exact hsq.exp.ofReal_comp
+  · -- AEStronglyMeasurable f'
+    exact (Complex.continuous_ofReal.comp (by fun_prop)).aestronglyMeasurable
+  · -- ‖f' x‖ ≤ 1
+    intro x
+    have hbnd : 2 * |x| ≤ Real.exp (x ^ 2) := by
+      have h2 : 2 * |x| ≤ x ^ 2 + 1 := by nlinarith [sq_nonneg (|x| - 1), sq_abs x]
+      have h3 : x ^ 2 + 1 ≤ Real.exp (x ^ 2) := by have := Real.add_one_le_exp (x ^ 2); linarith
+      linarith
+    have hnorm : ‖((Real.exp (-x ^ 2) * (-(2 * x)) : ℝ) : ℂ)‖ = Real.exp (-x ^ 2) * (2 * |x|) := by
+      rw [Complex.norm_real, Real.norm_eq_abs, abs_mul, abs_of_pos (Real.exp_pos _), abs_neg,
+        abs_mul, abs_two]
+    rw [hnorm]
+    calc Real.exp (-x ^ 2) * (2 * |x|)
+        ≤ Real.exp (-x ^ 2) * Real.exp (x ^ 2) :=
+          mul_le_mul_of_nonneg_left hbnd (le_of_lt (Real.exp_pos _))
+      _ = 1 := by rw [← Real.exp_add]; simp
+
 end QIQTH.Fock

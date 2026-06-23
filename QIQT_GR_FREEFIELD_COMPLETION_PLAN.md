@@ -198,8 +198,13 @@ Surveyed the localization apparatus (`Fock/Localization.lean`, `LocalizedCovaria
 ### PLAN STATUS: COMPLETE — no mechanical work remains
 All 5 phases are discharged and machine-checked axiom-free (budget 0). What remains is exactly the genuine physics
 floor (Clausius/area law, H2, EOM/background/couplings) + the Gap-2 modeling input — none of it mechanical Lean work.
-Any further increment (e.g. a Schwartz soft-data wrapper, or a non-vacuity witness) is a NEW optional strengthening,
-not a completion item.
+
+### Optional strengthening DONE 2026-06-23 — soft-shell non-vacuity (`Fock/FreeFieldHFlux.lean`)
+`freeField_softData_nonvacuous` — the analytic hypotheses of `freeField_component_hFlux`
+(`MemLp`/`Integrable`/`AEStronglyMeasurable`/`HasDerivAt`/globally-bounded `‖f'‖`) are simultaneously satisfiable,
+witnessed by the Gaussian mode `θ ↦ exp(−θ²)` with derivative bound `B = 1` (`2|x| ≤ x²+1 ≤ exp(x²)`). Confirms the
+localization datum's analytic shell is inhabited (guards against vacuity); only the modeling core `(hbridge, hTkk)`
+stays labelled. Axiom-free, budget 0.
 - **Deliverable:** `qiqt_gr_freefield` — the QIQT→GR Einstein equations for the explicit free KG field with `hKMS`
   AND `conserv` AND the geometric debt all discharged; resting on `{Clausius/area law, EOM, Lorentzian frame,
   G/η, the localization map (if Gap 2 stays labelled)}`.
