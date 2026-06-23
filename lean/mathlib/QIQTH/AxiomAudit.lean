@@ -4779,4 +4779,19 @@ namespace QIQTH.AxiomAudit
 -- = boostUnitary(2πt) with NO Reeh–Schlieder hypotheses at all (both separating + cyclic discharged internally).
 -- "modular flow = geometric boost" is a fully closed, axiom-free theorem — NO cited frontier on the one-particle level.
 
+-- ★★★★★★ THE `conserv` INPUT OF THE QIQT→GR DERIVATION, DISCHARGED for the explicit Klein–Gordon field (2026-06-23).
+#print axioms QIQTH.Curvature.pd_gi_eq
+-- expected: standard only — INVERSE-METRIC COMPATIBILITY ∇gi=0: ∂_ν gi^{λβ} = −∑σ Γ^λ_νσ gi^{σβ} − ∑σ Γ^β_νσ gi^{σλ}.
+-- Contract the differentiated inverse relation pd_metric_inv_identity with gi^{λμ}; gi_g_delta + pd_g_eq + δ-contractions.
+#print axioms QIQTH.Curvature.hHessGrad_eq
+-- expected: standard only — the Hessian-gradient identity g^{μρ}∂_μφ(∇∇φ)_ρν = ½∂_ν(g^{αβ}∂_αφ∂_βφ): decompose
+-- LHS=T1−T2, RHS=½(R1+R2+R3) (pd_gradSq_eq); T1=R2, R2=R3, T2=−½R1 (pd_gi_eq + christoffel_symm + gi-symmetry).
+#print axioms QIQTH.Curvature.div02_kgStress_conserved_of_KG
+-- expected: standard only — ∇^μ T_μν = 0 for the explicit free KG stress tensor T=kgStress, with hHessGrad supplied
+-- internally; the ONLY remaining hypothesis is the equation of motion □φ=m²φ (genuine matter physics).
+#print axioms QIQTH.Curvature.kg_conserv
+-- expected: standard only — ★★★★★★ EXACTLY the `conserv : ∀ x ν, div02 g gi (fun y a' b => a·T y a' b) ν x = 0` input
+-- consumed by WedgeKMSToGR/qiqt_gr_from_wedge_kms_complete, with T=kgStress: the coupling a scales out
+-- (div02_const_smul) and the divergence vanishes. The matter-conservation input is now a drop-in theorem.
+
 end QIQTH.AxiomAudit
