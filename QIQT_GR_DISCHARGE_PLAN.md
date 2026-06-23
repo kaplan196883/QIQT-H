@@ -41,11 +41,20 @@ Clausius/area-saturation law as the single labelled physical input.
   horizon-thermodynamics postulate, the honest floor by design.
 
 Remaining beyond this plan's scope (all either cited frontier or new subsystems, NOT mechanical discharge):
-~~the `S`-construction (Reeh–Schlieder)~~ **[CLOSED 2026-06-23, see above]**, `conserv` (would need a full
-KG-stress-tensor-on-manifold construction + covariant-divergence computation), and the continuum Type-III / DPI-Lieb
-axiom-retirement programs (separate plans). With the `S`-construction closed, the ONLY non-physical residual left in
-the one-particle free-field QIQT→GR surface is `conserv` (an explicit-KG-`T` construction); the single labelled
-*physical* input remains the Clausius/area-saturation law (the honest floor by design).
+~~the `S`-construction (Reeh–Schlieder)~~ **[CLOSED 2026-06-23, see above]**, `conserv` (full KG-stress-tensor
+covariant-conservation — **STARTED 2026-06-23**, see below), and the continuum Type-III / DPI-Lieb axiom-retirement
+programs (separate plans). With the `S`-construction closed, the ONLY non-physical residual left in the one-particle
+free-field QIQT→GR surface is `conserv` (an explicit-KG-`T` construction); the single labelled *physical* input
+remains the Clausius/area-saturation law (the honest floor by design).
+
+**★ `conserv` DISCHARGE STARTED (`c8ba89a`, 2026-06-23, axiom-free, budget 0) — `QIQTH/KGStressConservation.lean`.**
+The explicit free Klein–Gordon stress tensor is now constructed: `kgKinetic K_ab = ∂_aφ ∂_bφ`,
+`kgLagr L = g^{αβ}∂_αφ∂_βφ − m²φ²`, `kgStress T_ab = ∂_aφ ∂_bφ − ½ g_ab L`. The **conservation SPLIT**
+`div02_kgStress_eq`: `∇^μ T_μν = ∇^μ K_μν − ½ ∂_ν L` is proven axiom-free — the scalar/metric term is dispatched
+by metric compatibility (`div02_scalar_metric`, the same mechanism making `Λ·g` covariantly constant). REMAINING:
+the purely kinetic identity `∇^μ K_μν = ½ ∂_ν L`, which is the Klein–Gordon equation of motion
+(`g^{μρ}∇_ρ∂_μφ = m²φ`) + symmetry of the second covariant derivative of a scalar (`covDeriv02_symm`) + the
+Leibniz/product rule for `covDeriv02` — the next bricks. `conserv` for explicit KG is then `a·`(this) `= 0`.
 
 ---
 
