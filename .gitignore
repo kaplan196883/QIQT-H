@@ -22,3 +22,7 @@ refs/
 # Python bytecode
 __pycache__/
 *.pyc
+
+# generated report probe (temp)
+lean/mathlib/QIQTH/_ReportProbeTmp.lean
+/reports/*.tmp

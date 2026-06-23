@@ -1,0 +1,41 @@
+/-
+  AUTO-GENERATED PROBE (do not edit; written by scripts/report_lib.py).
+  Emits one JSON array on stdout: per theorem its axiom dependencies, Prop-hypotheses
+  (name:type), data binders, and conclusion. Lean is the source of truth.
+-/
+import QIQTH
+
+open Lean Elab Command Meta
+
+def reportTargets : List Name := [@@TARGETS@@]
+
+run_cmd liftTermElabM do
+  let mut objs : Array Json := #[]
+  for tgt in reportTargets do
+    -- graceful: a missing/renamed name degrades to present:false instead of aborting
+    let infoOpt ← (do try pure (some (← getConstInfo tgt)) catch _ => pure none)
+    match infoOpt with
+    | none =>
+        objs := objs.push (Json.mkObj [("name", Json.str (toString tgt)), ("present", Json.bool false)])
+    | some info =>
+        let axs ← collectAxioms tgt
+        let (props, datas, conclStr) ← forallTelescopeReducing info.type fun args concl => do
+          let mut props : Array Json := #[]
+          let mut datas : Array Json := #[]
+          for a in args do
+            let ld ← a.fvarId!.getDecl
+            let tyStr := toString (← ppExpr ld.type)
+            if (← isProp ld.type) then
+              props := props.push (Json.mkObj [("name", Json.str (toString ld.userName)),
+                                               ("type", Json.str tyStr)])
+            else
+              datas := datas.push (Json.str (toString ld.userName))
+          pure (props, datas, toString (← ppExpr concl))
+        objs := objs.push (Json.mkObj [
+          ("name", Json.str (toString tgt)),
+          ("present", Json.bool true),
+          ("axioms", Json.arr (axs.map (fun n => Json.str (toString n)))),
+          ("propHyps", Json.arr props),
+          ("dataBinders", Json.arr datas),
+          ("concl", Json.str conclStr)])
+  IO.println (Json.arr objs).compress
