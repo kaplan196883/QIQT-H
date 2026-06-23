@@ -651,10 +651,20 @@ Every cleanly-buildable ingredient for `kmsFun`'s `DiffContOnCl` is now proven, 
          which sees both `niceWedgeCyclic_pos_mass` and the BoostKMS capstone). The cyclic input is discharged INTERNALLY
          (`niceWedgeCyclic_pos_mass hm`), so `hcyc` is gone. The free-field one-particle Bisognano–Wichmann is now a
          theorem modulo the SINGLE concrete analytic statement `NiceWedgeSeparating m` (symplectic non-degeneracy /
-         Pauli–Jordan). That separating side (no simple `θ→−θ` reflection: `conj(Krep θ)=minkFourier f(−m coshθ,−m sinhθ)`,
-         off-shell) is the honest, irreducible remaining frontier — its rigorous discharge needs the free-field
-         symplectic non-degeneracy (e.g. duality `K sep ⟸ K′ cyclic` with `K′`=left wedge, blocked earlier on the
-         `ᗮ`/ℝ-instance tangle; or a direct Hardy-space/modular argument).
+         Pauli–Jordan).
+         **★★★★★★ SEPARATING DISCHARGED — FREE-FIELD ONE-PARTICLE BW FULLY CLOSED (`29655e9`, 2026-06-23, axiom-free,
+         budget 0).** `niceWedgeSeparating_pos_mass {m} (hm:0<m) : NiceWedgeSeparating m`, then the fully unconditional
+         `oneParticleBW_niceWedge_unconditional` = `modUnitary S t = boostUnitary(2πt)` with NO Reeh–Schlieder
+         hypotheses at all. The separating proof is PURE MODULAR/KMS (NOT the duality/Hardy routes — those were
+         sidestepped): from `stripKMSrvd_closure` take the boost-KMS witnesses `F_vv` for `(v,v)` and `F_c` for
+         `(iv,v)` (both `v, iv ∈ K = closure(genSet)`); the TOP edge gives `F_c(t)=⟪v,U_t(iv)⟫=i⟪v,U_t v⟫=i·F_vv(t)`,
+         so `D:=F_c−i·F_vv` vanishes on the whole top edge; by the NEW strip boundary-uniqueness lemma
+         `strip_eqZero_of_top_edge_zero` (asymmetric Hadamard three-lines, top const 0 ⟹ `0^{1−s}·B^s=0` on the open
+         strip, bottom edge by continuity) `D` vanishes on the BOTTOM edge too, where the KMS edges force
+         `−2i⟪U_t v,v⟫=0` ⟹ `⟪U_t v,v⟫=0 ∀t` ⟹ (`t=0`, `U_0=id`) `⟪v,v⟫=0` ⟹ `v=0`. **The free-field one-particle BW
+         theorem "modular flow = geometric boost" is now a fully closed, axiom-free theorem — NO cited frontier remains
+         on the one-particle level.** (The continuum Type-III / multi-particle net is the separate long-arc frontier;
+         this closes the ONE-PARTICLE BW completely.)
          **(8d)** assemble: a concrete `bumpC` witness with `Krep≢0` (its amplitude `≠0` somewhere), `8b+8c/8c′` ⟹ `𝓕≠0`
          a.e., feed `niceWedgeCyclic_of_fourier_ne_zero` ⟹ `NiceWedgeCyclic m` ⟹ capstone discharges cyclic RS.
          EVERY hard analytic piece (intertwining, Plancherel bridge, FT↔correlation reduction, L¹-uniqueness, the full
