@@ -4793,5 +4793,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★★★★★ EXACTLY the `conserv : ∀ x ν, div02 g gi (fun y a' b => a·T y a' b) ν x = 0` input
 -- consumed by WedgeKMSToGR/qiqt_gr_from_wedge_kms_complete, with T=kgStress: the coupling a scales out
 -- (div02_const_smul) and the divergence vanishes. The matter-conservation input is now a drop-in theorem.
+#print axioms QIQTH.WedgeKMSToGR.qiqt_gr_explicit_kg
+-- expected: standard only — ★★★★★★★ THE END-TO-END QIQT→GR FOR THE EXPLICIT KG FIELD: a·kgStress_μν = G_μν + Λ·g_μν,
+-- with T=kgStress concrete and conserv discharged internally (kg_conserv_of_contDiff) + hT_symm proved from metric
+-- symmetry. No abstract matter T, no conserv hypothesis — the QIQT→GR matter sector is concrete and machine-checked.
 
 end QIQTH.AxiomAudit
