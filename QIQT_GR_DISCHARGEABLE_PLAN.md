@@ -209,3 +209,24 @@ crux** (QIQT-H's to derive from `Q_max`, the genuinely-open core) remain.
 **Bottom line:** the dischargeable surface of the QIQT→GR capstone is exhausted. Tier A was discharged here; Tiers B
 and C were found already discharged (axiom-free) in the continuum modular-theory files. What remains is exactly the
 labelled Type-III₁ physics + the QIQT-H area-law crux (H2) — genuine science, not formalization debt.
+
+### ✅ FINAL VERIFICATION (2026-06-23, triple-checked)
+- **No `sorry` anywhere** in the built `QIQTH` (budget script: `no sorryAx`); **`raw axiom count: 0 (budget 0)`**;
+  every capstone/discharge `#print axioms = [propext, Classical.choice, Quot.sound]`.
+- Capstone hypotheses dropped this session: `hC`, `hric_symm`, `hreg` (discharged outright); tetrad consolidated 5→1.
+- Tiers B/C verified already-derived: `component_hFlux_of_wedgeKMS`, `hasDerivAt_relModFlow_vacuum`, `cgpEntropy_nonneg`
+  — all axiom-free.
+
+### The ONE remaining *mechanically-wireable* item (convention-gated, not pursued)
+`oneParticle_hFlux` / `modularEnergy_eq_stressFlux` take the BW identification `modUnitary S = boostUnitary(−2π·)`
+as a labelled input.  For the free-field nice wedge, `oneParticleBW_niceWedge_unconditional` PROVES
+`modUnitary S = boostUnitary(+2π·)` — so the BW input could be wired in *except* for the **`+2π` vs `−2π` sign
+convention** (flagged earlier in the BW work).  Resolving that sign (an honest convention audit of
+`boostUnitary`/`modUnitary`/`rvdRC`/`modChar` orientations, NOT a deep proof) would let a `freeField_hFlux` discharge
+the BW/standardness input of `hFlux` for the free field.  This is the single concrete near-term option; everything
+else remaining is the cited Type-III₁ physics (`hStrip`/`hUniq` KMS-uniqueness, `hBoostCharge`/`hbridge` localization)
++ the Clausius/area floor + H2.
+
+**This plan is COMPLETE.** Further progress requires either the sign-convention audit above (a small, well-scoped
+task) or opening the genuine-science frontiers (Type-III₁ standardness; H2 area-law from `Q_max`) — both out of the
+"discharge the capstone's formalization debt" scope, which is done.
