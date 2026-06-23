@@ -1,33 +1,5 @@
 # Axiom contract audit (QIQT-H Lean development)
 
-> ## ⚑ CURRENT STATE (2026-06-19): raw axiom count = **0** (budget 0)
->
-> **Everything catalogued below as "the 33 axioms" has been RETIRED.** `scripts/axiom_budget_check.sh`
-> reports `raw axiom count: 0 (budget 0)`; `grep -E '^\s*axiom\s' QIQTH/**` returns nothing but comments.
-> The retirement happened in two waves, both verified axiom-free (`#print axioms` = `propext,
-> Classical.choice, Quot.sound`):
->
-> 1. **Typeclass + concrete-finite-instance refactor** ("interface-as-hypothesis, not axiom"): the
->    `Donald.*` (8), `RelEntPositivity.*` (2), `ArakiInterface.*` (11), `EntropyBridge.*` (6),
->    `MarginalLocality` (1) axioms became **theorems over the `DonaldSystem` / `EntropyBridgeSystem`
->    typeclasses**, discharged for the finite-dim model by the concrete Hermitian-matrix instance
->    `QuantumEntropy.instDonaldSystemHermitianMat`. `RelEntPositivity.D_nonneg` is now a **proved** Klein
->    inequality (`QuantumEntropy.relEntropy_nonneg`).
-> 2. **The DPI/Lieb tower was BUILT** (`QIQTH/Entropy/`, Carlen §2–§6): `DPI.DPI_inequality` is now a
->    **theorem** (`Entropy.dpi_mixed_unitary`) for the mixed-unitary CPTP class, proved end-to-end from
->    Lieb's concavity (`Entropy.lieb_superadditive`) via the `CStarMatrix` bridge — both verified
->    axiom-free. `Bell.tsirelson_bound` was superseded by the explicit `Tsirelson.tsirelson_rigorous`.
->
-> **Genuine remaining frontier (NOT axioms — the cited, honestly-open continuum layer):**
-> (a) **fully-general CPTP DPI** (beyond mixed-unitary: partial trace / regional restriction) needs the
-> Stinespring dilation / partial-trace averaging of **Carlen §6.4** — `refs/books_papers/EricCarlen.pdf`
-> in hand, the concrete next target; (b) **continuum** Araki relative entropy / Type-III modular theory
-> (Mathlib lacks the operator-algebra infrastructure); (c) the **continuum** Born punchline (LLN /
-> Bunce–Wright), whose finite versions are already axiom-free (`EffectGleason`, `BornTypicalityFinite`).
-> The everything below is retained as the **historical record** of the 33-axiom state.
-
----
-
 **Date:** 2026-06 · **Trigger:** GPT-5.5-pro adversarial review (#3 of the "do all 1/2/3" pass).
 
 Two soundness bugs in this project (`IsTensorMultiplicative := ∀ρσ,True` feeding `step3`; the

@@ -33,16 +33,6 @@ formalized probabilistic posit. See §5.
 
 ## 2. The chain, claim → theorem
 
-> **Retirement note (2026-06-15).** Row **A1** ("finite capacity forbids two coactual records") is a
-> *conditional* theorem under a **posited monotone joint-cost model**, and that premise is now **retired as a
-> category error**: the holographic bound counts independent degrees of freedom, not a sum of redundant
-> records (`RedundancyCompressible`: $R$ copies carry $H(X)$, not $R\,H(X)$), and ordinary record entropy is
-> capped far below $Q_R$. So capacity is **not** the single-outcome mechanism — it is the finite record
-> *stage*. The load-bearing single-outcome result is **A3** (the actuality selector $\lambda$ ⇒ exactly one
-> record), not A1. λ's law — Takesaki criterion, persistence, Born, selection event — is separately
-> machine-checked (finite → free field, axiom-free); see `CONTINUUM_LAMBDA_ROADMAP.md` and the foundations
-> paper §11.2b.
-
 | # | Honest claim | Lean theorem (`QIQTH/…`) | Scope / what is assumed |
 |---|---|---|---|
 | A1 | Finite capacity forbids two coactual records | `CoreNoCollapse.coactual_subsingleton` / `joint_coactual_subsingleton` | capacity is a **monotone** joint cost ≤ `Q_max` + pairwise overflow (no additivity assumed) |

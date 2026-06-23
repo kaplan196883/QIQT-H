@@ -14,28 +14,6 @@ Born representation** joining the capacity core to the Born/typicality layer (§
 scope map in `FINITE_BORN_REPRESENTATION.md`). This is the honest map: what is done,
 what is the prize we are chasing, and what must be fixed before arXiv.*
 
-> **Update 2026-06-16 — the continuum λ-law is machine-checked (free-field / standard-subspace sector).**
-> The Type-III-native λ-law (the 2026-06-15 redirect: λ rides the standard form + modular automorphism, NOT
-> the retired gravitational crossed product) is now lifted from the finite shadow onto the **genuine continuum
-> modular flow** `Δ^{it}` (the RvD bounded `modUnitary`), axiom-free, in three staged modules:
-> `ContinuumLambda` (the modular automorphism `σ_t = Ad(Δ^{it})` as a one-parameter ⋆-automorphism group; the
-> **continuum Takesaki criterion** `σ_t(A)=A ⟺ [A,Δ^{it}]=0`; **continuum persistence** — the decoherence map
-> commutes with `σ_t` for every `t`, unconditional for spectral pointer projections); `NaturalConeBorn` (the
-> **Type-independent algebraic Born rule** — the scalar spectral measure of pointer Borel sets is a genuine
-> probability, no trace); `ContinuumSelection` (the **Type-blind selection event** — exactly one record per
-> actuality seed, realizing the continuum Born frequencies, reusing the inverse-CDF constructor). So Takesaki
-> criterion + persistence + Born rule + selection event all hold on the real `Δ^{it}`. **And the whole λ-law
-> is now also lifted to the SECOND-QUANTIZED FREE FIELD**: `Γ(Δ^{it})` is repackaged as a unitary one-parameter
-> group of bounded operators on the Fock Hilbert space (`SecondQuantCLM`: `Γ⋆=Γ(-t)`, unitary), the field-level
-> modular automorphism `Ad(Γ(Δ^{it}))` + Takesaki criterion + **field-level persistence** (decoherence map
-> commutes with `σ_t` ∀t) hold (`ContinuumLambdaField`), the **Born rule** holds on the genuine Fock vacuum
-> state (`FieldBorn`: vacuum-state POVM weights are a probability; the Weyl-bit record gives `(1±exp(−½‖u‖²))/2`),
-> and the **selection event** picks exactly one Weyl-bit record per seed realizing those weights (`FieldSelection`).
-> So the continuum λ-law — modular automorphism + Takesaki + persistence + Born + selection — is machine-checked
-> at BOTH the one-particle and free-field levels, axiom-free. **Cited, not proved** (the honest boundary): local
-> algebras are Type III₁ (Buchholz–Wichmann); the genuine residual walls are the *Haagerup natural-cone existence*
-> in Mathlib and the *interacting (non-free) case*. Roadmap: `lean/mathlib/QIQTH/CONTINUUM_LAMBDA_ROADMAP.md`.
->
 > **Update 2026-06-13 — axiom-free milestone + the Born/μ residual sharply localized.** Two things changed
 > since the 06-08 note. **(a) Budget 0.** All 33 continuum/operator-algebra interface axioms have been
 > retired (EntropyBridge/Donald/DPI/Araki/RelEnt typeclass-and-instance discharges); the **entire** project
@@ -102,70 +80,6 @@ what is the prize we are chasing, and what must be fixed before arXiv.*
 > complexified group, Wick-related); only positive-definite cases carry a probability. The full "why the
 > square" quartet — `RotationBorn`, `RankCountNoGo`, `BornChain`, `SymmetrySquare` — is on qiqt.org/born.
 > Full root build green (3840 jobs), budget 0.
-
-> **Update 2026-06-13 — EMPIRICAL STATUS owned honestly (GPT-5.5 assessment).** Asked whether finite `Q_max`
-> predicts any observable deviation from standard QM, the honest verdict is **probably empirically equivalent**:
-> the bound is *kinematic*, and `Q_R = A/4ℓ_P²` is far too large (~10⁶⁶ bits/cm², vs record costs ~10²⁵ bits)
-> to be approached at any accessible scale. A genuine deviation (neutrino-oscillation decoherence; a
-> macroscopic-superposition cutoff) requires an **added dynamical law** with a small effective capacity
-> `Q^eff` along the coherence-relevant degrees — and `Q^eff` is currently a **free parameter**, not derived
-> (the causal-diamond/tube capacity is itself ~10⁶⁰–10⁸² bits). So the neutrino "prediction" (`08_Neutrino_…`)
-> is **not** a derived prediction; it is a *conditional dynamical extension*. Net: finite `Q_max` is, as far as
-> we can show, an **interpretation, not new physics**, unless an independent principle fixes `Q^eff`. This has
-> been propagated honestly: `08_Neutrino_Decoherence_Prediction.md` (downgraded header), `QIQT_Foundations_Paper.md`
-> ("Honest empirical status" + item 13 caveat), `PUBLICATION_STRATEGY.md`, and qiqt.org/idea. The one path to
-> falsifiability is deriving `Q^eff` non-circularly. **Attempted and failed (`51_Qeff_Derivation_Attempt.md`,
-> stress-tested 2026-06-13):** all information capacities (holographic area, Bekenstein, entanglement) are far
-> too large; the one gravitational candidate (capacity→Diósi–Penrose) is a **category error** — a kinematic
-> capacity bound gives no rate, finite capacity does not even forbid superpositions (`|1⟩+|2⟩` needs no second
-> capacity = the known H2 gap), and the holographic area-difference does not scale like the DP self-energy
-> `E_Δ`; DP itself is largely excluded (Donadi et al. 2021). So **no non-circular testable channel survives**:
-> finite `Q_max` is, as far as we can show, empirically equivalent to QM (an interpretation) unless an explicit
-> collapse dynamics `𝓛_grav` is *added* as a new postulate. This sharpens §1's verdict on the empirical axis.
-
-> **Update 2026-06-15 — the λ construction, where Q_max actually sits, and the realm-selection result.** (Full
-> detail: `paper_strategy/55`–`57`.) **(a) Q_max is on ACTUALITY, not Φ** (`55`): the capacity exclusion
-> (`CoreNoCollapse`/`CapacityModel`) is Φ-INDEPENDENT — it bounds the *actual* record content; Φ stays exactly
-> unitary (a superposition of records is one vector at no extra cost, `RankCountNoGo`). Slogan corrected
-> everywhere (paper Theorem 4 + conclusion, site `/idea` `/theory` `/selection` `/index`): "Q_max does not
-> constrain the wavefunction; it constrains actuality — λ selects which record is actual." **(b) The λ
-> construction** (`57`): λ = a μ-typical complete 4D actual-record history, a compatible global section of the
-> decohered-record net over the causal-diamond poset, **sampled** from the Poincaré-covariant
-> decoherence-functional measure `μ_Φ(α)=‖C_α Φ‖²` (Born by construction). KEY (`56`): a covariant *measure* ≠
-> a covariant *selector* (S²: invariant measure, no invariant point) — λ is a SAMPLE, individually
-> symmetry-breaking, law covariant. The decisive object (covariant σ-additive Born measure on actual-record
-> histories) is **already machine-checked for the 1+1D free field** (`KolmogorovFiniteFiber`+`StateNetMeasure`+
-> `localized_typicality_poincare_invariant`+no-signaling). **Where Q_max sits in it:** the STAGE — the record
-> algebra `B_Φ(D)`: finiteness (≤e^{Q_R}, = the finite fibers that make the measure constructible), area-grain,
-> single-macroscopic, and the realm grain. NOT the measure (Born), NOT the single-world (sampling). **(c)
-> Realm-selection result** (`QIQTH/RealmSelection.lean`, axiom-free): Q_max ALONE does NOT select a unique
-> realm — `capacity_underdetermines_realm` (standard vs Hadamard ℂ² decompositions are both capacity-maximal,
-> distinct); it selects it only WITH einselection (`realm_unique_of_einselection`). Same pattern: capacity =
-> finiteness/structure, selection needs an extra input (here einselection, as actuality needed λ). **(d)
-> CORRECTION to §4a:** the OP3b "Roberts net cohomology / covariant global section" framing is **mis-targeted**
-> (`56`) — λ is a sample from a covariant measure, not a covariant section; the obstruction to a global
-> actuality assignment is **contextuality** (Bell/Fine/Kochen–Specker / Abramsky–Brandenburger), dodged by
-> assigning values only to ACTUAL decohered records in the ACTUAL context (not a counterfactual value-map),
-> NOT Roberts cohomology (which classifies DHR charges). Treat §4a's Roberts/Ȟ¹ language as superseded.
-
-> **CORRECTION 2026-06-15b — the actuality-layer "records ADD ⇒ overflow Q_max" is a CATEGORY ERROR**
-> (two GPT-5.5-pro consults, checked vs Bousso/Bekenstein + decoherence theory; supersedes the "(a) Q_max on
-> actuality" claim above as a *mechanism*). Charging the holographic bound for the *sum* of actual classical
-> records is not valid: (1) the bound counts independent d.o.f. = joint entropy/code-dimension, NOT a sum of
-> redundant marginals — R redundant Quantum-Darwinism imprints of one classical fact have joint entropy
-> `H(X)`, not `R·H(X)` (compressible); (2) ordinary weakly-gravitating record entropy is capped at
-> `S ~ (A/ℓ_P²)^{3/4}` (max thermal entropy before BH collapse), `≈10^91.5` for the observable universe vs
-> `Q_max ~10^122` — a **permanent ~31-order gap** (power 3/4 vs 1; only black holes reach `A/4`, and a BH has
-> no records); so `I₀ ≈ Q_R` ("one macro record ≈ full budget") is false by ~31 orders, the universe runs at
-> `~10^-18` of capacity. (3) The exclusion of two actual records traces to **local single-valuedness** (a
-> classical carrier holds ONE value) + **λ** — and "a carrier has one value" is itself the single-world claim
-> supplied by λ, not by Q_max and not by decoherence (decoherence gives branch structure + suppressed
-> interference, NOT actuality/definiteness). Theorem-level: unitary linearity + finite capacity CANNOT select
-> one branch. NET: **Q_max is the finite STAGE only** (record-count bound `≤e^{Q_R}`, finite-trace Type III→II
-> record algebra, decoherence-redundancy regulator, area-grain) — NOT an exclusion mechanism; **λ does the
-> single-outcome work**. This reinstates the `paper_strategy/54` selection-MDC conclusion and retracts "Q_max
-> load-bearing on actuality" (`55`). The foundations paper §7.6 already disavows the naive joint-info argument;
-> Theorem 4's "classical record-contents add" parenthetical is corrected accordingly.
 
 > **Update 2026-06-06.** The project axiom budget is now **33** (all 33 are continuum /
 > operator-algebra interface axioms; the entire finite core below is axiom-free —

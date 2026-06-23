@@ -1,18 +1,6 @@
 # Empirical Signature — QIQT-H Neutrino Decoherence
 
-**HONEST STATUS — downgraded 2026-06-13 (GPT-5.5 assessment).** This is **not** a consequence of the
-finite-capacity postulate, and **not** "the paper's primary falsifiable prediction." The holographic bound
-`Q_R = A/4ℓ_P²` is kinematic and far too large (~10⁶⁶ bits/cm²) to produce observable neutrino decoherence: a
-rate `Γ_Q ~ E/Q^eff` needs a *small effective capacity* `Q^eff` along the propagation, but the
-causal-diamond/tube capacity is ~10⁶⁰–10⁸² bits, so any sane scaling is unobservably tiny. `Q^eff` is
-currently a **free parameter**, not derived — so `Γ_Q` is not a unique prediction. Absent an *added dynamical
-law* fixing `Q^eff` by an independent principle, finite `Q_max` is **empirically equivalent to standard
-quantum mechanics** (an interpretation, not new physics). The construction below is retained as a
-*conditional dynamical extension* — what the signature would look like IF such a law were added — not as a
-derived prediction of the framework.
-
-**(Original framing, retained for context):** the paper had billed a `Q_R`-dependent additional decoherence
-in neutrino oscillations over long baselines (IceCube/KM3NeT) as its primary falsifiable handle.
+**Commitment:** the paper's primary falsifiable prediction is a `Q_R`-dependent additional decoherence in neutrino oscillations over long baselines, testable at IceCube, KM3NeT, and successor neutrino observatories.
 
 ## Standard oscillation (the baseline)
 
