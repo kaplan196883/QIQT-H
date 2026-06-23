@@ -66,16 +66,16 @@ inverse relation `∑_α g_{μα}gi^{αβ} = δ_μ^β` gives `∑_α ∂_ν(g_{�
 **Brick 7 DONE (`76b2ab4`, 2026-06-23, axiom-free)** — the two ingredients for inverse-metric compatibility:
 `gi_g_delta` (`∑_μ gi^{aμ}g_{μb} = δ^a_b`, the left-inverse, from `hinv` + symmetries) and `pd_g_eq`
 (`∂_ν g_{μα} = ∑σ Γ^σ_{νμ}g_{σα} + ∑σ Γ^σ_{να}g_{μσ}`, the explicit `metric_compat` unpacking).
-**REMAINING (final two bricks):** (i) **inverse-metric compatibility** `pd_gi_eq`: `∂_ν gi^{λβ} = −∑σ Γ^λ_{νσ}gi^{σβ} −
-∑σ Γ^β_{νσ}gi^{σλ}` — contract `pd_metric_inv_identity` with `gi^{λμ}`, extract via `gi_g_delta`, substitute
-`pd_g_eq` for `∂g`, and collapse two double sums by the δ-contractions `∑α g_{σα}gi^{αβ}=δ_σ^β` (`hinv`) and
-`gi_g_delta`. (All ingredients now committed; assembly is mechanical nested-`Finset.sum` reordering — attempted
-this fire, deferred for a cleaner flat structure.) (ii) **`hHessGrad`** itself: expand
-`½∂_ν(g^{αβ}∂_αφ∂_βφ)` by `pd_mul`/`pd_sum`, use `pd_comm` (the double-deriv terms = the LHS Hessian partials) +
-inverse-metric compat (the `∂gi` term = the LHS Christoffel term) + `kgHess_symm`/`christoffel_symm`. `hKG` is the
-matter EOM (physics — a Jacobson-program input, not a mechanical discharge target). So `conserv` for explicit KG is
-exactly these two purely-geometric algebraic bricks away — all tooling (`metric_compat`, `inv_contract`,
-`pd_comm`, `kgHess_symm`) already in hand.
+**Brick 8 DONE — INVERSE-METRIC COMPATIBILITY `∇gi=0` (`2a93762`, 2026-06-23, axiom-free):** `pd_gi_eq`:
+`∂_ν gi^{λβ} = −∑σ Γ^λ_{νσ}gi^{σβ} − ∑σ Γ^β_{νσ}gi^{σλ}` — contracted `pd_metric_inv_identity` with `gi^{λμ}`,
+extracted via `gi_g_delta`, substituted `pd_g_eq` for `∂g`, collapsed the two double sums by the δ-contractions
+(`hinv`, `gi_g_delta`). Flat `have`-structure (Claim A / Claim B with explicit `Finset.sum_comm`); GOTCHA: the
+`σ=β` δ orientation needs `Finset.sum_ite_eq'` (primed), the `lam=α`/`lam=σ` ones need the unprimed.
+**REMAINING (the SINGLE last brick):** **`hHessGrad`** `g^{μρ}∂_μφ(∇∇φ)_{ρν} = ½∂_ν(g^{αβ}∂_αφ∂_βφ)` — expand
+`½∂_ν(g^{αβ}∂_αφ∂_βφ)` by `pd_sum`/`pd_mul`, use `pd_comm` (the double-derivative terms = the LHS Hessian partials)
++ `pd_gi_eq` (the `∂gi` term = the LHS Christoffel term) + `kgHess_symm`. Then `div02_kgStress_conserved` gives
+unconditional `∇^μ T_{μν} = 0` for the explicit KG field (modulo only the matter EOM `hKG` — genuine physics, a
+Jacobson-program input). So `conserv` is ONE algebraic brick from complete, all tooling now committed.
 
 ---
 
