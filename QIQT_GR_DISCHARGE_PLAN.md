@@ -21,7 +21,7 @@ surface. After the corrected audit, that surface splits cleanly:
 | `hFocus` (Raychaudhuri focusing, `ad = BL(Ric) v`) | **mostly DERIVED** (`hFocus_of_raychaudhuri`); only the `harea` area↔θ modelling identification + `hequil` equilibrium remain | **Work Item B** |
 | `hKMS` = `StripKMSrvd(boostUnitary, 𝒦_W)` | **DISCHARGED axiom-free** (`stripKMSrvd_boostUnitary` → `oneParticleBW_niceWedge`, 2026-06-23). **★ The Reeh–Schlieder standardness of the wedge subspace (`S`-construction) — listed here as the cited frontier — is ALSO now CLOSED axiom-free** (`niceWedgeSeparating_pos_mass` + `niceWedgeCyclic_pos_mass` ⟹ `oneParticleBW_niceWedge_unconditional`, 2026-06-23). The free-field one-particle BW is FULLY unconditional. | **Work Item A — FULLY CLOSED** |
 | Clausius/area-saturation (`hbound`, `hsat`) | **genuinely irreducible PHYSICS** (= QIQT-H horizon-thermodynamics postulate) | out of scope — the honest floor |
-| metric/frame/regularity scaffolding (`hCg`, `hreg`, `conserv`, …) | precondition infrastructure; `conserv` derivable for explicit KG `T` | out of scope (optional later) |
+| metric/frame/regularity scaffolding (`hCg`, `hreg`, `conserv`, …) | **`conserv` DISCHARGED for the explicit KG field** (`div02_kgStress_conserved_of_KG`, 2026-06-23, axiom-free) — `∇^μ T_{μν}=0` modulo only the matter EOM `□φ=m²φ`; `hCg`/`hreg` are standard structural regularity | **`conserv` DONE** |
 
 **Goal of this plan:** retire `hKMS` (Item A) and close `hFocus` to `harea` only (Item B), leaving the
 Clausius/area-saturation law as the single labelled physical input.
@@ -41,11 +41,12 @@ Clausius/area-saturation law as the single labelled physical input.
   horizon-thermodynamics postulate, the honest floor by design.
 
 Remaining beyond this plan's scope (all either cited frontier or new subsystems, NOT mechanical discharge):
-~~the `S`-construction (Reeh–Schlieder)~~ **[CLOSED 2026-06-23, see above]**, `conserv` (full KG-stress-tensor
-covariant-conservation — **STARTED 2026-06-23**, see below), and the continuum Type-III / DPI-Lieb axiom-retirement
-programs (separate plans). With the `S`-construction closed, the ONLY non-physical residual left in the one-particle
-free-field QIQT→GR surface is `conserv` (an explicit-KG-`T` construction); the single labelled *physical* input
-remains the Clausius/area-saturation law (the honest floor by design).
+~~the `S`-construction (Reeh–Schlieder)~~ **[CLOSED 2026-06-23]**, ~~`conserv`~~ **[DISCHARGED 2026-06-23 for the
+explicit KG field — `div02_kgStress_conserved_of_KG`, axiom-free, modulo only the matter EOM]**, and the continuum
+Type-III / DPI-Lieb axiom-retirement programs (separate plans). **With both the `S`-construction AND `conserv`
+closed, the one-particle free-field QIQT→GR surface now has NO non-physical residual left** — the remaining inputs
+are exactly the genuine physics: the Clausius/area-saturation law (the honest floor by design) and the matter
+equation of motion `□φ=m²φ`.
 
 **★ `conserv` DISCHARGE STARTED (`c8ba89a`, 2026-06-23, axiom-free, budget 0) — `QIQTH/KGStressConservation.lean`.**
 The explicit free Klein–Gordon stress tensor is now constructed: `kgKinetic K_ab = ∂_aφ ∂_bφ`,
@@ -75,15 +76,19 @@ extracted via `gi_g_delta`, substituted `pd_g_eq` for `∂g`, collapsed the two 
 `∂_ν(∑_{αβ}gi^{αβ}∂_αφ∂_βφ) = ∑∂_ν(gi^{αβ})∂_αφ∂_βφ + ∑gi^{αβ}(∂_ν∂_αφ)∂_βφ + ∑gi^{αβ}∂_αφ(∂_ν∂_βφ)` (via
 `pd_sum`×2 + `pd_mul` triple product).
 **Bricks 10–11 DONE (`f1d3d96`, 2026-06-23, axiom-free)** — two of the three `hHessGrad` sub-identities:
-`gradSq_cross_symm` (`R2 = R3`, via α↔β swap + gi-symmetry) and `hessGrad_partial_eq` (`T1 = R2`, via `pd_comm`
-+ relabel).
-**REMAINING for `hHessGrad`:** ONLY `hT2R1` (`T2 = −½R1`, i.e. the Christoffel term) — substitute `pd_gi_eq` into
-`R1 = ∑_{αβ} ∂_ν(gi^{αβ})∂_αφ∂_βφ`, giving `R1 = −P − Q` with `P = ∑_{αβσ}Γ^α_{νσ}gi^{σβ}∂_αφ∂_βφ`; then
-`Q = P` (α↔β) and `P = T2` (relabel α=μ, σ=ρ, β=s; swap μ↔s; `christoffel_symm` + gi-symmetry) ⟹ `R1 = −2T2`.
-This is a triple-sum reindexing of the same size/shape as `pd_gi_eq`'s `hClaimB` (flat `have`s + `Finset.sum_comm`).
-Then `hHessGrad`: `LHS = T1 − T2 = R2 − (−½R1) = ½R1 + R2 = ½(R1+R2+R3) = RHS`, and `div02_kgStress_conserved`
-gives unconditional `∇^μ T_{μν} = 0` for the explicit KG field (modulo only the matter EOM `hKG` — genuine physics,
-a Jacobson-program input). All tooling committed.
+`gradSq_cross_symm` (`R2 = R3`) and `hessGrad_partial_eq` (`T1 = R2`).
+**★★★★★ `conserv` DISCHARGED (`7879a72`, 2026-06-23, axiom-free, budget 0) — THE LAST NON-PHYSICAL RESIDUAL IS
+CLOSED.** `hHessGrad_eq` (the Hessian-gradient identity) is proven: decompose LHS `= T1−T2`, RHS `= ½(R1+R2+R3)`
+(`pd_gradSq_eq`); `T1=R2` + `R2=R3` + `T2=−½R1` (the inline `hT2R1`: substitute `pd_gi_eq` into `R1=−P−Q`, `Q=P`
+by α↔β, `P=T2` by a triple-sum reindex with `christoffel_symm` + gi-symmetry — `Finset.sum_comm` at two depths)
+⟹ `LHS=RHS`. Then **`div02_kgStress_conserved_of_KG`**: `∇^μ T_{μν}=0` for the explicit free KG field, with
+`hHessGrad` supplied internally — the ONLY remaining hypothesis is the equation of motion `hKG: □φ=m²φ` (genuine
+matter physics, a Jacobson-program input). So `conserv = a·(this) = 0` is DISCHARGED for the explicit Klein–Gordon
+stress tensor. The 12-brick chain (split · Leibniz · contraction · Hessian-symmetry · conditional conservation ·
+∂(g·gi) · `gi_g_delta` · `pd_g_eq` · `pd_gi_eq` · `pd_gradSq_eq` · R2=R3 · T1=R2 · `hHessGrad_eq`) is all axiom-free.
+**With `conserv` discharged, the one-particle free-field QIQT→GR surface has NO non-physical residual left** — only
+the single labelled physical input (the Clausius/area-saturation law) and the matter EOM remain, both genuine physics
+by design.
 
 ---
 
