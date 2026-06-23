@@ -386,6 +386,7 @@ import QIQTH.Fock.PauliJordan
 import QIQTH.Fock.LocalizedCovariance
 import QIQTH.Fock.LocalizedWitness
 import QIQTH.Fock.CyclicWitness
+import QIQTH.Fock.FreeFieldHFlux
 import QIQTH.Fock.TranslationCovariance
 
 import QIQTH.RefinementBorn

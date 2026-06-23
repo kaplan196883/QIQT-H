@@ -32,10 +32,17 @@ The Type-III / modular apparatus IS formalised; the free-field wedge-KMS inputs 
 
 ## The two genuinely-remaining gaps
 
-### Gap 1 — the `±2π` sign convention *(small; a convention audit, not a proof)*
+### Gap 1 — the `±2π` sign convention *(✅ RESOLVED 2026-06-23 — `Fock/FreeFieldHFlux.lean`)*
 `oneParticle_hFlux` / `oneParticleBW_wedge` are stated with `V t = boostUnitary(−(2πt))` (MINUS), and consume
 `hUniq`/`hStrip` as hypotheses.  The UNCONDITIONAL theorem `oneParticleBW_niceWedge_unconditional` proves
-`modUnitary S t = boostUnitary(+(2πt))` (PLUS).  To wire the unconditional BW into `hFlux`, reconcile the sign.
+`modUnitary S t = boostUnitary(+(2πt))` (PLUS).
+**Resolution:** rather than reconcile to the unsatisfiable `−2π`, I rebuilt the modular-energy step in the
+satisfiable `+2π` convention. `hasDerivAt_modularEnergy_of_boost_pos` is the sign-flipped copy of
+`hasDerivAt_modularEnergy_of_boost`; `freeField_modularEnergy_eq_boostCharge` then gives, for the nice-wedge `S` and
+ANY mode `ξ`, `HasDerivAt (t ↦ ⟨ξ, modUnitary S t ξ⟩) c 0` from the `+2π` boost-charge derivative — with the BW
+identification supplied INTERNALLY by `oneParticleBW_niceWedge_unconditional` (axiom-free, no labelled
+`hUniq`/`hStrip`, no sign mismatch, no density lemma needed). Both new theorems `#print axioms` = standard three,
+budget 0. **The only remaining input on this path is the `+2π` boost-charge derivative (Phase 3 below).**
 
 ### Gap 2 — the localization map `hbridge` *(the dynamical-realization modeling step)*
 `WedgeKMSFlux_complete` is an EXISTENTIAL: per null horizon generator `(x,v)`, exhibit a wedge mode `ξ_{x,v}` (and

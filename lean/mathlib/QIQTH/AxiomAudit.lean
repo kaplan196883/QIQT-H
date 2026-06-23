@@ -4778,6 +4778,13 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★★★★★ THE free-field one-particle Bisognano–Wichmann, FULLY UNCONDITIONAL: modUnitary S t
 -- = boostUnitary(2πt) with NO Reeh–Schlieder hypotheses at all (both separating + cyclic discharged internally).
 -- "modular flow = geometric boost" is a fully closed, axiom-free theorem — NO cited frontier on the one-particle level.
+#print axioms QIQTH.Fock.hasDerivAt_modularEnergy_of_boost_pos
+-- expected: standard only — sign-flipped (+2π) copy of hasDerivAt_modularEnergy_of_boost: given the SATISFIABLE BW
+-- identification modUnitary S = boostUnitary(+2π·), the modular-energy derivative = the boost-energy derivative.
+#print axioms QIQTH.Fock.freeField_modularEnergy_eq_boostCharge
+-- expected: standard only — ★ FREE-FIELD modular-energy = stress-flux derivative with BW supplied INTERNALLY from
+-- oneParticleBW_niceWedge_unconditional in the satisfiable +2π convention (no labelled hUniq/hStrip, no sign mismatch).
+-- Phase 2 of QIQT_GR_FREEFIELD_COMPLETION_PLAN: only remaining input is the +2π boost-charge derivative (Phase 3).
 
 -- ★★★★★★ THE `conserv` INPUT OF THE QIQT→GR DERIVATION, DISCHARGED for the explicit Klein–Gordon field (2026-06-23).
 #print axioms QIQTH.Curvature.pd_gi_eq
