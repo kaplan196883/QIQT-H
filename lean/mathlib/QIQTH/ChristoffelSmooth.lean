@@ -42,4 +42,37 @@ theorem christoffel_contDiff (g gi : Point n → Fin n → Fin n → ℝ)
       (contDiff_pd (fun y => g y α ν) (hCg α ν) ρ)).sub
     (contDiff_pd (fun y => g y ν ρ) (hCg ν ρ) α)
 
+/-- **The Riemann tensor is `C^∞`** — `R^ρ_{σμν} = ∂_μΓ^ρ_{νσ} − ∂_νΓ^ρ_{μσ} + Σ_l(Γ^ρ_{μl}Γ^l_{νσ}
+    − Γ^ρ_{νl}Γ^l_{μσ})` is a finite combination of `∂Γ` (`contDiff_pd` ∘ `christoffel_contDiff`) and `ΓΓ`. -/
+theorem riemann_contDiff (g gi : Point n → Fin n → Fin n → ℝ)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (ρ σ μ ν : Fin n) :
+    ContDiff ℝ ⊤ (fun y => riemann g gi ρ σ μ ν y) := by
+  simp only [riemann]
+  refine ((contDiff_pd _ (christoffel_contDiff g gi hCg hCgi ρ ν σ) μ).sub
+    (contDiff_pd _ (christoffel_contDiff g gi hCg hCgi ρ μ σ) ν)).add ?_
+  exact ContDiff.sum (fun l _ =>
+    ((christoffel_contDiff g gi hCg hCgi ρ μ l).mul (christoffel_contDiff g gi hCg hCgi l ν σ)).sub
+      ((christoffel_contDiff g gi hCg hCgi ρ ν l).mul (christoffel_contDiff g gi hCg hCgi l μ σ)))
+
+/-- **The Ricci tensor is `C^∞`** — `R_{σν} = ∑μ R^μ_{σμν}` (sum of `C^∞` Riemann components). -/
+theorem ricci_contDiff (g gi : Point n → Fin n → Fin n → ℝ)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (σ ν : Fin n) :
+    ContDiff ℝ ⊤ (fun y => ricci g gi σ ν y) := by
+  simp only [ricci]
+  exact ContDiff.sum (fun μ _ => riemann_contDiff g gi hCg hCgi μ σ μ ν)
+
+/-- **The scalar curvature is `C^∞`** — `R = ∑_{σν} g^{σν} R_{σν}` (a finite combination of `C^∞` `gi` and
+    `C^∞` Ricci).  Feeds the `hreg` regularity input of the QIQT→GR capstone (Tier A4). -/
+theorem scalarCurv_contDiff (g gi : Point n → Fin n → Fin n → ℝ)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b)) :
+    ContDiff ℝ ⊤ (fun y => scalarCurv g gi y) := by
+  simp only [scalarCurv]
+  exact ContDiff.sum (fun σ _ => ContDiff.sum (fun ν _ =>
+    (hCgi σ ν).mul (ricci_contDiff g gi hCg hCgi σ ν)))
+
 end QIQTH.Curvature
