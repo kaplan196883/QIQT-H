@@ -74,13 +74,16 @@ extracted via `gi_g_delta`, substituted `pd_g_eq` for `∂g`, collapsed the two 
 **Brick 9 DONE (`5455eac`, 2026-06-23, axiom-free):** `pd_gradSq_eq` — the product-rule expansion
 `∂_ν(∑_{αβ}gi^{αβ}∂_αφ∂_βφ) = ∑∂_ν(gi^{αβ})∂_αφ∂_βφ + ∑gi^{αβ}(∂_ν∂_αφ)∂_βφ + ∑gi^{αβ}∂_αφ(∂_ν∂_βφ)` (via
 `pd_sum`×2 + `pd_mul` triple product).
-**REMAINING (the SINGLE last brick): `hHessGrad`** `g^{μρ}∂_μφ(∇∇φ)_{ρν} = ½∂_ν(g^{αβ}∂_αφ∂_βφ)` — now a pure
-algebraic assembly of committed pieces. Decompose LHS = `T1 − T2` (`T1 = ∑gi^{μρ}∂_μφ ∂_ρ∂_νφ`, `T2 =
-∑gi^{μρ}∂_μφ Γ^σ_{ρν}∂_σφ`) and RHS = `½(R1+R2+R3)` via `pd_gradSq_eq`. Then: `T1 = R2` (`pd_comm` + gi-symmetry
-relabel), `R2 = R3` (gi-symmetry), `½R1 = −T2` (substitute `pd_gi_eq` into R1, then α↔β + `christoffel_symm`
-relabel) ⟹ `LHS = R2 − T2 = (½R1+R2) − 0 = RHS`. Then `div02_kgStress_conserved` gives unconditional
-`∇^μ T_{μν} = 0` for the explicit KG field (modulo only the matter EOM `hKG` — genuine physics, a Jacobson-program
-input). All tooling committed; the assembly is the multi-relabel grind (≈ the size of `pd_gi_eq`).
+**Bricks 10–11 DONE (`f1d3d96`, 2026-06-23, axiom-free)** — two of the three `hHessGrad` sub-identities:
+`gradSq_cross_symm` (`R2 = R3`, via α↔β swap + gi-symmetry) and `hessGrad_partial_eq` (`T1 = R2`, via `pd_comm`
++ relabel).
+**REMAINING for `hHessGrad`:** ONLY `hT2R1` (`T2 = −½R1`, i.e. the Christoffel term) — substitute `pd_gi_eq` into
+`R1 = ∑_{αβ} ∂_ν(gi^{αβ})∂_αφ∂_βφ`, giving `R1 = −P − Q` with `P = ∑_{αβσ}Γ^α_{νσ}gi^{σβ}∂_αφ∂_βφ`; then
+`Q = P` (α↔β) and `P = T2` (relabel α=μ, σ=ρ, β=s; swap μ↔s; `christoffel_symm` + gi-symmetry) ⟹ `R1 = −2T2`.
+This is a triple-sum reindexing of the same size/shape as `pd_gi_eq`'s `hClaimB` (flat `have`s + `Finset.sum_comm`).
+Then `hHessGrad`: `LHS = T1 − T2 = R2 − (−½R1) = ½R1 + R2 = ½(R1+R2+R3) = RHS`, and `div02_kgStress_conserved`
+gives unconditional `∇^μ T_{μν} = 0` for the explicit KG field (modulo only the matter EOM `hKG` — genuine physics,
+a Jacobson-program input). All tooling committed.
 
 ---
 
