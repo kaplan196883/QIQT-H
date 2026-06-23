@@ -28,7 +28,7 @@ This does **not** attempt H2 (the area law from `Q_max`) — that is the genuine
 | `hreg` (focusing-function regularity) | technical | ✅ **DONE `68e0c9a`** — `hreg_kg` in `QIQTH/HregExplicitKG.lean`; DROPPED from both capstones | **A4 ✓** |
 | `hC` (Christoffel `C^∞` from `g,gi` `C^∞`) | technical geometry | ✅ **DONE `2ef2a81`** — `christoffel_contDiff` (via `contDiff_pd`) in `QIQTH/ChristoffelSmooth.lean` | **A5 ✓** |
 | `Sf,KE,A` + `hDnn`/`hD0` (entropy/energy) | quantum information | ⚠️ **LARGELY DERIVED** — coherent-state Araki rel. entropy = `cgpEntropy ≥ 0` (`hasDerivAt_relModFlow_vacuum`, `cgpEntropy_nonneg`, Connes cocycle), axiom-free; only the spacetime↔one-particle localization bridge (Type-III₁) remains | **B ~** |
-| `hKMS` (`WedgeKMSFlux_complete` — modular-flux dynamical realization) | QFT | ⚠️ **LARGELY DERIVED** — Fock modular flow=boost, modular energy=stress flux, `component_hFlux_of_wedgeKMS` gives `kd=(2π/ℏ)T_kk` axiom-free; residual = cited Type-III₁ wedge standardness + boost-charge + localization bridge | **C ~** |
+| `hKMS` (`WedgeKMSFlux_complete` — modular-flux dynamical realization) | QFT | ⚠️ **DERIVED (Type III formalised)** — Fock modular flow=boost, modular energy=stress flux, `component_hFlux_of_wedgeKMS`; `hStrip`=`stripKMSrvd_boostUnitary`, `hUniq`=`gConstancy_of_inputs`, standardness=`oneParticleBW_niceWedge_unconditional`, `hBoostCharge`=`boostEnergy_eq_neg_stressFlux` — ALL axiom-free. Residual = localization bridge `hbridge` + `±2π` sign audit | **C ~** |
 
 Items NOT in this table (`g`, `hsymm`, `hCg`, `hCgi`, `φ`, `hφ`, `hKG`, `m,η,ħ,a`, `hbound`, `hsat`, `hequil`) are
 the fundamental/background inputs and are deliberately out of scope.
@@ -143,15 +143,23 @@ localization bridge "the chain's null-generator entropy IS the one-particle rela
   **`component_hFlux_of_wedgeKMS`** (axiom-free) descends it to the *component-level* `kd = (2π/ℏ)·T_kk` — EXACTLY
   the `hFlux` that `qiqt_bekenstein_gives_gr` / `WedgeKMSFlux_complete` consume. So `hKMS`'s modular content is
   DERIVED.
-- **The genuine remaining LABELLED inputs** (per `OneParticleBW.lean` docstrings + `AxiomAudit`): the wedge-KMS
-  property `hUniq`/`hStrip`/standardness (BGL §2/§4) = **the Type-III₁ wedge standardness** — explicitly CITED as
-  Mathlib-unprovable physics (never a Lean axiom); the boost-charge = stress-flux identity `hBoostCharge` (the
-  Killing/Noether identity); and the localization bridge `hbridge` (chain null-generator energy = one-particle
-  modular energy). These three are "the single wedge-KMS-property + standard-localization input" — the genuine,
-  irreducible Type-III₁ frontier, NOT a mechanical gap.
+- **⚠️⚠️ FURTHER CORRECTION (2026-06-23): the Type-III / modular apparatus IS FORMALISED — the wedge-KMS inputs are
+  THEOREMS, not "cited Mathlib-unprovable physics" (my earlier claim was wrong).** Discharged for the free field,
+  axiom-free:
+  - **`hStrip` (StripKMSrvd, the wedge-KMS property): `stripKMSrvd_boostUnitary`** (`BoostKMS.lean:2651`).
+  - **`hUniq` (RvD Theorem 3.8, modular uniqueness): `gConstancy_of_inputs`** (`OneParticleBW.lean:719`) — the full
+    g-function argument; its inputs (bottom-edge KMS reality `HalfStripReal`, `√R`-range density) are met for the free
+    field (`R` injective, `StripKMSrvd` ⟹ `HalfStripReal`).
+  - **standardness (separating + cyclic): `oneParticleBW_niceWedge_unconditional`** (proved this session).
+  - **`hBoostCharge`/`hTkk` (boost-charge = stress-flux): `boostEnergy_eq_neg_stressFlux`** (`HorizonParseval.lean:459`)
+    — `T_kk := −(ℏ/2π)·stressFluxKK` makes it hold.
+- **What ACTUALLY remains** is much narrower: (i) the **localization bridge `hbridge`** — "the chain's null-generator
+  modular energy IS the one-particle modular energy of the wedge mode `ξ_{x,v}`" (the spacetime↔one-particle
+  identification, the genuine dynamical-realization modeling step); and (ii) the **`+2π` vs `−2π` sign convention**
+  (the BW theorem proves `+2π`, the `hFlux` machinery is stated with `−2π` — a convention audit, not a proof).
 
-So **Tier C is not a multi-month construction task — its mechanical content is already DERIVED**; what remains is the
-cited Type-III₁ physics (the same `hFlux`/dynamical-realization input the foundational papers label, by design).
+So **Tier C's modular content is fully DERIVED (Type III formalised)**; the residual is the localization-bridge
+identification + the sign-convention audit — both small/modeling, NOT a Type-III construction.
 
 ---
 
@@ -198,11 +206,11 @@ crux** (QIQT-H's to derive from `Q_max`, the genuinely-open core) remain.
 - **Tier C — already DERIVED in the codebase (axiom-free).** Fock modular flow = boost
   (`secondQuantModFlowH_acts_as_boost`), modular energy = stress flux, `component_hFlux_of_wedgeKMS` →
   `kd = (2π/ℏ)T_kk` (exactly the GR `hFlux`).
-- **The genuine residual is NOT mechanical — it is the CITED, irreducible physics:** (i) the Type-III₁ wedge-KMS
-  standardness (BGL `hUniq`/`hStrip`/standardness — Mathlib-unprovable by design, the dynamical-realization input);
-  (ii) the spacetime↔one-particle localization bridge (`hbridge`, `hBoostCharge`); (iii) the Clausius/area law
-  (`hbound`/`hsat`) + matter EOM + Lorentzian/smooth-metric background. These are the honest physical floor, shared
-  with the foundational-paper's labelled inputs.
+- **The genuine residual (CORRECTED — Type III IS formalised, so the wedge-KMS inputs are theorems not citations):**
+  (i) the spacetime↔one-particle **localization bridge `hbridge`** (which wedge mode `ξ_{x,v}` realizes which horizon
+  generator — the dynamical-realization modeling step); (ii) the **`±2π` sign-convention audit**; (iii) the
+  Clausius/area law (`hbound`/`hsat`) + matter EOM + Lorentzian/smooth-metric background — the honest physics floor.
+  (`hStrip`/`hUniq`/standardness/`hBoostCharge` are NO LONGER residual — all discharged axiom-free: see Tier C.)
 - **NOT in this plan, the ONE real open frontier:** H2 — the area law from finite `Q_max` — the irreducible QIQT-H
   core, the single thing between "conditional Jacobson theorem" and "QIQT predicts gravity". Deserves its own plan.
 
