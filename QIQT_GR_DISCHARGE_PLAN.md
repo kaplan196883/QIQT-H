@@ -26,7 +26,16 @@ surface. After the corrected audit, that surface splits cleanly:
 **Goal of this plan:** retire `hKMS` (Item A) and close `hFocus` to `harea` only (Item B), leaving the
 Clausius/area-saturation law as the single labelled physical input.
 
-**★★★★★ PLAN GOAL ACHIEVED (2026-06-23).** Both work items are discharged to their honest floors, axiom-free:
+**★★★★★★★ PLAN FULLY COMPLETE — MECHANICAL SCOPE EXHAUSTED (2026-06-23).** Not only are both work items discharged
+to their honest floors, but the two residuals the plan flagged as *cited frontier / out-of-scope* (the Reeh–Schlieder
+`S`-construction and `conserv`) are now ALSO machine-checked axiom-free theorems, and every new theorem is certified
+in `AxiomAudit.lean` (standard three axioms only, budget 0). **The one-particle free-field QIQT→GR surface now rests
+on EXACTLY the genuine physics — the Clausius/area-saturation law and the matter equation of motion `□φ=m²φ` — with
+no non-physical, mechanically-dischargeable input remaining.** Nothing in this plan's scope is left to do; the
+remaining program-level frontiers (continuum Type-III / Tomita–Takesaki, the DPI–Lieb axiom-retirement tower) are
+explicitly separate plans, and the physics floor is not a discharge target by design.
+
+Both work items are discharged to their honest floors, axiom-free:
 - **Item A (`hKMS`) FULLY CLOSED**: the free-field BW KMS condition (RvD Def 3.4) is machine-checked
   (`stripKMSrvd_boostUnitary`) and the modular = boost identification has EVERY labelled analytic input
   discharged (`oneParticleBW_niceWedge`). **★ The residual cited frontier — the Reeh–Schlieder standardness of
