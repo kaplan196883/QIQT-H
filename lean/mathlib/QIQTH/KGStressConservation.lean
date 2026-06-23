@@ -200,4 +200,29 @@ theorem pd_metric_inv_identity (g gi : Point n → Fin n → Fin n → ℝ) (μ 
       pd_mul (fun y => g y μ α) (fun y => gi y α β) ν x (hg μ α ν) (hgi α β ν))
   rw [← h2, h1]
 
+/-- **The inverse metric is a left inverse too** `∑_μ gi^{aμ} g_{μb} = δ^a_b` (from the right-inverse `hinv`
+    plus symmetry of `g` and `gi`).  The δ used to extract `∂gi` in the inverse-metric compatibility. -/
+theorem gi_g_delta (g gi : Point n → Fin n → Fin n → ℝ) (x : Point n)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ a b, (∑ σ, g x a σ * gi x σ b) = if a = b then 1 else 0) (a b : Fin n) :
+    (∑ μ, gi x a μ * g x μ b) = if a = b then 1 else 0 := by
+  have hrw : (∑ μ, gi x a μ * g x μ b) = ∑ μ, g x b μ * gi x μ a := by
+    refine Finset.sum_congr rfl (fun μ _ => ?_)
+    rw [hsymm_gi x a μ, hsymm x μ b]; ring
+  rw [hrw, hinv b a]
+  rcases eq_or_ne a b with h | h
+  · subst h; simp
+  · rw [if_neg (Ne.symm h), if_neg h]
+
+/-- **`∂g` in terms of the connection** `∂_ν g_{μα} = ∑σ Γ^σ_{νμ} g_{σα} + ∑σ Γ^σ_{να} g_{μσ}` — the explicit
+    content of metric compatibility `∇g = 0` (`metric_compat`), unpacked from the `covDeriv02` definition. -/
+theorem pd_g_eq (g gi : Point n → Fin n → Fin n → ℝ) (μ α ν : Fin n) (x : Point n)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinv : ∀ a b, (∑ σ, g x a σ * gi x σ b) = if a = b then 1 else 0) :
+    pd (fun y => g y μ α) ν x
+      = (∑ σ, christoffel g gi σ ν μ x * g x σ α) + (∑ σ, christoffel g gi σ ν α x * g x μ σ) := by
+  have h := metric_compat g gi hsymm x hinv ν μ α
+  simp only [covDeriv02] at h
+  linarith [h]
+
 end QIQTH.Curvature
