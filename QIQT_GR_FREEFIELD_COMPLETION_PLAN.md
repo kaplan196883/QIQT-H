@@ -122,18 +122,35 @@ mismatch and no labelled modular hypotheses — Gap 1 + Phases 2–3 all closed 
 - Original deliverable `freeField_hBoostCharge` subsumed by `hasDerivAt_inner_boostUnitary_imaginary_pos` +
   `freeField_oneParticle_hFlux`.
 
-### Phase 4 — assemble `WedgeKMSFlux_complete` for the free field *(2–4 fires; depends on Gap 2)*
-Per null generator `(x,v)`, choose the wedge mode `ξ_{x,v}` (the localization map — Gap 2) and assemble the existential
-`∃ m S V ξ, …` from the Phase 2–3 deliverables + `component_hFlux_of_wedgeKMS`.
-- **The honest fork:** if `hbridge`/`ξ_{x,v}` is a CANONICAL free-field construction (the wedge mode localized at the
-  horizon generator), build it and Gap 2 closes → `hKMS` fully discharged. If it is a genuine MODELING identification
-  (which horizon ↔ which QIQT mode), then `hKMS` reduces to that single labelled localization input — still a major
-  narrowing (the entire modular content discharged, only the realization map labelled).
-- **Deliverable:** `freeField_hKMS : WedgeKMSFlux_complete g (kgStress…) kd ħ` (unconditional, or conditional on the
-  single localization map).
+### Phase 4 — route the free-field flux into the GR derivation *(core brick DONE 2026-06-23)*
+**★ KEY DISCOVERY: no `−2π` bundle needed.** `qiqt_gr_from_wedge_kms_complete` uses `hKMS` only by calling
+`hFlux_of_wedgeKMS_complete hKMS` to produce the per-generator equation `kd x v = (2π/ℏ)·BL(T x)v`, then feeds THAT to
+the underlying `qiqt_bekenstein_gives_gr` — which takes the **kd-equation directly**, not the bundle. So
+`WedgeKMSFlux_complete` (`−2π`/`wedgeGenSet`) is just ONE way to supply the kd-equation; the free-field `+2π` route is
+another, landing at the same entry point.
 
-### Phase 5 — drop `hKMS` from the capstone *(1 fire; analogous to the `conserv`/`hreg` drops)*
-Refactor `qiqt_gr_explicit_kg(_lorentzian)` to supply `hKMS` internally from `freeField_hKMS` (Phase 4).
+**✅ Core brick (`Fock/FreeFieldHFlux.lean`):** `freeField_component_hFlux` — the `+2π`/nice-wedge analog of
+`component_hFlux_of_wedgeKMS_complete`. For the nice-wedge `S` and smooth wedge state `ξ = f.toLp`, derivative
+uniqueness against `freeField_oneParticle_hFlux` gives `kd = (2π/ℏ)·T_kk` from exactly two per-generator hypotheses:
+- `hbridge` : `HasDerivAt (t ↦ ⟪ξ, modUnitary S t ξ⟫) (i·kd) 0` — that the abstract capstone coefficient `kd` IS the
+  modular energy of the localized mode (the dynamical-realization identification);
+- `hTkk` : `(2π/ℏ)·T_kk = (−(2π·∫ conj(f)·f')).im` — the localization map (Gap 2): the horizon stress component =
+  the chosen mode's rapidity stress flux.
+Everything modular/BW/boost discharged axiom-free; budget 0. **Gap 2 is now isolated to precisely `(hbridge, hTkk)`.**
+
+**Remaining:** package a localization structure `FreeFieldHorizonData g T kd ħ` supplying, per null generator `(x,v)`,
+the smooth mode `f_{x,v}` + `(hbridge, hTkk)`, and prove
+`freeField_kd_conclusion : FreeFieldHorizonData … → ∀ x v, BL(g x)v=0 → kd x v = (2π/ℏ)·BL(T x)v` (a `∀`-wrap of
+`freeField_component_hFlux`).
+- **The honest fork (unchanged):** if `(hbridge, hTkk)` come from a CANONICAL free-field construction (the wedge mode
+  localized at the horizon generator) → fully discharged. If a MODELING identification → the GR derivation reduces to
+  that single labelled localization datum, the entire modular/BW/boost/stress content machine-checked.
+
+### Phase 5 — feed the free-field kd-equation into `qiqt_bekenstein_gives_gr` *(1–2 fires)*
+Build `qiqt_gr_freefield` = `qiqt_bekenstein_gives_gr` with the flux slot supplied by `freeField_kd_conclusion`
+(Phase 4) instead of `hFlux_of_wedgeKMS_complete hKMS`.  NO capstone refactor needed — `qiqt_bekenstein_gives_gr`
+already takes the kd-equation `∀ x v, BL=0 → kd x v = (2π/ℏ)·BL(T x)v` directly.
+(superseded note) Refactor `qiqt_gr_explicit_kg(_lorentzian)` to supply `hKMS` internally from `freeField_hKMS`.
 - **Deliverable:** `qiqt_gr_freefield` — the QIQT→GR Einstein equations for the explicit free KG field with `hKMS`
   AND `conserv` AND the geometric debt all discharged; resting on `{Clausius/area law, EOM, Lorentzian frame,
   G/η, the localization map (if Gap 2 stays labelled)}`.

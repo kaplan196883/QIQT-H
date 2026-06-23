@@ -124,4 +124,37 @@ theorem freeField_oneParticle_hFlux {m : ℝ} (hm : 0 < m)
       rw [hTkk]]
   exact freeField_modularEnergy_eq_boostCharge hm (hf2.toLp f) _ hbc
 
+/-- **★★★ The free-field per-generator flux equation `kd = (2π/ℏ)·T_kk` (the `+2π`/nice-wedge analog of
+    `component_hFlux_of_wedgeKMS_complete`).**  For the nice-wedge standard subspace `S` and smooth wedge state
+    `ξ = f.toLp`, given (i) `hbridge` — that the abstract per-generator modular-energy coefficient `kd` IS the
+    derivative of `t ↦ ⟪ξ, modUnitary S t ξ⟫` — and (ii) `hTkk` — the localization identification of the horizon
+    stress component `T_kk` with the mode's rapidity stress flux — derivative uniqueness pins
+    `kd = (2π/ℏ)·T_kk`.  This is exactly the conclusion `qiqt_bekenstein_gives_gr` consumes (it takes the kd-equation
+    directly, not the `WedgeKMSFlux_complete` bundle), so it routes the free-field `+2π` `hFlux` straight into the
+    GR derivation — bypassing the `−2π`/`wedgeGenSet` bundle entirely.  Everything modular/BW/boost is discharged
+    axiom-free; the ONLY remaining per-generator inputs are `hbridge` (kd = modular energy of the localized mode)
+    and `hTkk` (the localization map, Gap 2).  Axiom-free. -/
+theorem freeField_component_hFlux {m : ℝ} (hm : 0 < m)
+    (f f' : ℝ → ℂ) (hf2 : MemLp f 2 (volume : Measure ℝ))
+    (hf_int : Integrable f (volume : Measure ℝ))
+    (hF0_int : Integrable (fun θ => (starRingEnd ℂ) (f θ) * f θ) (volume : Measure ℝ))
+    (hf_meas : AEStronglyMeasurable f (volume : Measure ℝ))
+    (hfd : ∀ x, HasDerivAt f (f' x) x)
+    (hf'_meas : AEStronglyMeasurable f' (volume : Measure ℝ))
+    (B : ℝ) (hB : ∀ x, ‖f' x‖ ≤ B) (hbar kd Tkk : ℝ)
+    (hTkk : (2 * Real.pi / hbar * Tkk : ℝ)
+        = (-(2 * Real.pi * ∫ θ, (starRingEnd ℂ) (f θ) * f' θ ∂(volume : Measure ℝ))).im)
+    (hbridge : HasDerivAt
+      (fun t : ℝ => inner ℂ (hf2.toLp f)
+        (modUnitary (niceWedgeStandardSubspace m
+          (niceWedge_isSeparating_of_no_complex_line m (niceWedgeSeparating_pos_mass hm))
+          (niceWedge_isCyclic_of_total_integral m (niceWedgeCyclic_pos_mass hm))) t (hf2.toLp f)))
+      (Complex.I * ((kd : ℝ) : ℂ)) 0) :
+    kd = 2 * Real.pi / hbar * Tkk := by
+  have hHil := freeField_oneParticle_hFlux hm f f' hf2 hf_int hF0_int hf_meas hfd hf'_meas B hB
+    hbar Tkk hTkk
+  have huniq : Complex.I * ((kd : ℝ) : ℂ) = Complex.I * ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ) :=
+    hbridge.unique hHil
+  exact_mod_cast mul_left_cancel₀ Complex.I_ne_zero huniq
+
 end QIQTH.Fock

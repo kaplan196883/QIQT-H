@@ -4794,6 +4794,11 @@ namespace QIQTH.AxiomAudit
 -- convention: HasDerivAt(t↦⟪ξ,modUnitary S t ξ⟫)(i·(2π/ℏ·T_kk)) 0 for any smooth wedge state ξ=f.toLp, with the
 -- BW identification AND the boost-charge derivative both supplied internally (axiom-free). Only labelled input is
 -- the scalar physics identification hTkk: (2π/ℏ)·T_kk = (−(2π·∫conj(f)·f')).im. Phase 3 of the freefield plan.
+#print axioms QIQTH.Fock.freeField_component_hFlux
+-- expected: standard only — ★★★ free-field per-generator flux equation kd = (2π/ℏ)·T_kk, the +2π/nice-wedge analog
+-- of component_hFlux_of_wedgeKMS_complete. Routes freeField_oneParticle_hFlux + derivative uniqueness into the EXACT
+-- kd-conclusion qiqt_bekenstein_gives_gr consumes — bypassing the −2π/wedgeGenSet bundle. Only remaining inputs are
+-- hbridge (kd = modular energy of localized mode) + hTkk (localization map, Gap 2). Phase 4 of the freefield plan.
 
 -- ★★★★★★ THE `conserv` INPUT OF THE QIQT→GR DERIVATION, DISCHARGED for the explicit Klein–Gordon field (2026-06-23).
 #print axioms QIQTH.Curvature.pd_gi_eq
