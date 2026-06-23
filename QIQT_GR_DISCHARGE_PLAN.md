@@ -89,6 +89,11 @@ stress tensor. The 12-brick chain (split · Leibniz · contraction · Hessian-sy
 **With `conserv` discharged, the one-particle free-field QIQT→GR surface has NO non-physical residual left** — only
 the single labelled physical input (the Clausius/area-saturation law) and the matter EOM remain, both genuine physics
 by design.
+**WIRED to the exact GR-chain form (`1ffcd57`, 2026-06-23, axiom-free):** `div02_const_smul` (`∇^μ(a·X)=a·∇^μX`,
+the Einstein coupling scales out) + **`kg_conserv`**: `div02 g gi (fun y b c => a·kgStress m φ g gi y b c) ν x = 0`
+— *exactly* the `conserv : ∀ x ν, div02 g gi (fun y a' b => a·T y a' b) ν x = 0` hypothesis consumed by
+`WedgeKMSToGR`/`qiqt_gr_from_wedge_kms_complete` with `T = kgStress`. So `conserv` is not just discharged in the
+abstract — it is now a drop-in theorem for the GR derivation, modulo only the matter EOM.
 
 ---
 
