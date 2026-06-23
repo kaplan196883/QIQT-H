@@ -4797,5 +4797,8 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★★★★★★★ THE END-TO-END QIQT→GR FOR THE EXPLICIT KG FIELD: a·kgStress_μν = G_μν + Λ·g_μν,
 -- with T=kgStress concrete and conserv discharged internally (kg_conserv_of_contDiff) + hT_symm proved from metric
 -- symmetry. No abstract matter T, no conserv hypothesis — the QIQT→GR matter sector is concrete and machine-checked.
+#print axioms QIQTH.WedgeKMSToGR.qiqt_gr_explicit_kg_raychaudhuri
+-- expected: standard only — the kinematic-Raychaudhuri form of the above: hFocus replaced by the null-congruence
+-- Raychaudhuri data (hgeo/hequil/harea), still with T=kgStress concrete and conserv discharged internally.
 
 end QIQTH.AxiomAudit

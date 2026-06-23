@@ -115,6 +115,10 @@ free scalar `φ` on a smooth Lorentzian metric satisfying the EOM `□φ=m²φ`,
 (Clausius/area-saturation `hbound`/`hsat`, wedge-KMS `hKMS`, Raychaudhuri `hFocus`), the Einstein field equations
 `a·kgStress_{μν} = G_{μν} + Λ·g_{μν}` hold for the CONCRETE Klein–Gordon stress tensor. The QIQT→GR matter sector
 is now fully concrete and machine-checked — the citation surface is exactly the labelled physics.
+Also `qiqt_gr_explicit_kg_raychaudhuri` (`9f…`/2026-06-23): the kinematic-Raychaudhuri form, with the labelled
+`hFocus` replaced by the null-congruence Raychaudhuri data (`hgeo`/`hequil`/`harea`, Jacobson's local-equilibrium
+setup) — same `T=kgStress` concrete, same internal `conserv` discharge. Both end-to-end forms axiom-free and
+audit-certified.
 
 ---
 
