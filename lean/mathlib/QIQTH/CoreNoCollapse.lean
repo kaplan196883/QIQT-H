@@ -2,9 +2,24 @@
 # QIQT-H core: single outcome WITHOUT a collapse postulate (skeleton)
 
 This file states and proves the *load-bearing* core of the QIQT-H claim
-"a finite information-capacity bound `Q_max` removes the need for the collapse
+"a finite information-capacity bound removes the need for the collapse
 postulate", in the form GPT-5.5-pro identified as the only honest target: a
 **conditional representation theorem**.
+
+★ NAMING / PAPER CORRESPONDENCE (read this before reusing `Qmax`).  The abstract bound
+`Qmax : ℝ` below is the finite-dimensional PROXY for the paper's regional holographic
+capacity `Q_R := A(∂R)/(4ℓ_P²)` — the postulate (FQ), foundations paper §3 and step 1 of
+the gap map `paper_strategy/48_GAP_PRIZE_List.md`.  Two paper facts this name must NOT obscure:
+  • `Q_R` is MODULAR-LOCAL: each bounded region `R` has its OWN capacity, fixed by its
+    boundary area.  It is NOT a single spacetime-global information budget.  Where comments
+    below say "global" they mean the aggregate over the records in ONE region's register
+    (the `∑ cost ≤ Qmax` total), never a budget shared across spacetime.
+  • The per-record `cost` is the finite proxy of the modular cost `χ_R`.  The premise
+    `cost r > Qmax/2` is the finite-dimensional core of **H2** (GAP 1 / Macroscopic
+    Definiteness Conjecture: a ≥2-record regional content has `χ_R > Q_R`).  What is
+    mechanized here is ONLY the number-bound (at most one macroscopic record); the full
+    continuum claim `χ_R > Q_R`, and the postulate `Q_R = A/4ℓ_P²` itself, are NOT proved
+    here (they are GAP 1 / GAP 4).
 
 Strategic note (per the 2026-06 consultation): the Tomita–Takesaki / Type-III
 machinery (QIQTH/Spectral/PVM.lean, FiniteModularTheory.lean, ...) is *not* the
@@ -14,10 +29,11 @@ finite-capacity exclusion principle + an actuality selector + Born/typicality +
 collapse-recovered-as-conditionalization.
 
 Design discipline (the trap GPT flagged):
-  Do NOT define `Q_max` as "at most one actual record" — that trivializes the
-  theorem. Instead `cost` is a genuine per-record capacity expenditure, the global
-  bound is `∑ cost ≤ Q_max`, and "at most one" is DERIVED from a saturation premise
-  (each complete record costs `> Q_max/2`). Finite capacity then bounds the NUMBER
+  Do NOT define `Qmax` as "at most one actual record" — that trivializes the
+  theorem. Instead `cost` is a genuine per-record capacity expenditure, the
+  per-region aggregate bound is `∑ cost ≤ Qmax` (one region's register, NOT a
+  spacetime budget), and "at most one" is DERIVED from a saturation premise
+  (each complete record costs `> Qmax/2`). Finite capacity then bounds the NUMBER
   of coactual records; the selector `λ` supplies "at least one"; together they give
   EXACTLY one — but the single-outcome fact is a theorem, not a hidden hypothesis.
 
@@ -25,7 +41,7 @@ Supporting literature (see CORE_THEOREM_REFS.md; TeX sources in refs/arxiv_sourc
   • Strasberg–Schindler–Wang–Winter, arXiv:2601.19703 — decoherent-histories
     "branch selection problem": the number of *identifiable* records is bounded
     (geometric Hilbert-space fact, N_detectable ≪ D ≪ N_max). This is precisely the
-    capacity bound; QIQT-H's (Q_max, λ) is a proposed *answer* to their open problem.
+    capacity bound; QIQT-H's (Q_R, λ) is a proposed *answer* to their open problem.
   • Quantum Darwinism capacity bounds (arXiv:2509.17775, Holevo/functional-info).
   • Typicality & Born (arXiv:1910.08049, 2302.02086) — the across-run frequency layer
     (cf. QIQTH/GleasonSelector, BornTypicality, BornConcentration).
@@ -43,22 +59,24 @@ open scoped BigOperators
 /- ── Block 3 (the load-bearing core): finite-capacity exclusion ────────────-/
 
 /-- A **finite record context**: finitely many candidate complete macroscopic
-    records, each consuming a positive information `cost`, against a finite total
-    capacity `Qmax`.  `cost_gt_half` is the *physical* input (each complete
-    macroscopic record is "large" — it consumes more than half the budget); it is
-    NOT the conclusion. -/
+    records, each consuming a positive information `cost` (the finite proxy of the
+    modular cost `χ_R`), against a finite per-region capacity `Qmax` (the finite proxy
+    of the regional holographic capacity `Q_R = A(∂R)/4ℓ_P²`).  `cost_gt_half` is the
+    *physical* input (each complete macroscopic record is "large" — it consumes more than
+    half the region's capacity); it is NOT the conclusion. -/
 structure RecordContext where
   /-- candidate complete records -/
   Rec : Type
   [recFintype : Fintype Rec]
-  /-- information/capacity each record consumes if actual -/
+  /-- information/capacity each record consumes if actual (finite proxy of `χ_R`) -/
   cost : Rec → ℝ
   /-- a complete macroscopic record consumes positive capacity -/
   cost_pos : ∀ r, 0 < cost r
-  /-- the finite capacity bound `Q_max` -/
+  /-- the finite per-region capacity bound — proxy for `Q_R = A(∂R)/4ℓ_P²` (FQ);
+      modular-local, NOT a spacetime-global budget -/
   Qmax : ℝ
-  /-- **saturation premise** (physical, non-circular): each complete record costs
-      more than half the total capacity.  Equivalently: at most one fits. -/
+  /-- **saturation premise** (physical, non-circular; finite-dim core of H2 `χ_R > Q_R`):
+      each complete record costs more than half the region's capacity.  ⇒ at most one fits. -/
   cost_gt_half : ∀ r, Qmax / 2 < cost r
 
 attribute [instance] RecordContext.recFintype
@@ -66,8 +84,8 @@ attribute [instance] RecordContext.recFintype
 variable (C : RecordContext)
 
 /-- A **coactual configuration** of a run: the finite set of records that are
-    simultaneously actual, subject to the capacity bound `∑ cost ≤ Q_max` (cost is
-    additive over independent coactual records). -/
+    simultaneously actual, subject to the per-region aggregate capacity bound
+    `∑ cost ≤ Qmax` (cost is additive over independent coactual records in one region). -/
 structure Coactual where
   active : Finset C.Rec
   capacity : ∑ r ∈ active, C.cost r ≤ C.Qmax

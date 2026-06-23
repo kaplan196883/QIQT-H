@@ -9,6 +9,12 @@ finite-dimensional "record register", so their dimensions ADD and are capped by 
 register dimension `D = finrank`. The capacity bound is then a THEOREM (orthonormality
 + a dimension count), not a hypothesis.
 
+★ Paper correspondence: the register dimension `D` is the finite-dimensional PROXY for
+the regional holographic capacity `Q_R = A(∂R)/4ℓ_P²` (FQ postulate); it is MODULAR-LOCAL
+(one region's register), not a spacetime-global budget.  This file mechanizes only the
+finite number-bound; the continuum cost claim `χ_R > Q_R` (H2) and the postulate
+`Q_R = A/4ℓ_P²` are NOT proved here (GAP 1 / GAP 4 of 48_GAP_PRIZE_List.md).
+
 This is the rigorous backbone of the Strasberg–Schindler–Wang–Winter "branch selection
 problem" (arXiv:2601.19703): a family of N almost-orthogonal record vectors cannot
 exceed the register dimension D — the number of identifiable records is capacity-bounded.
@@ -56,9 +62,10 @@ variable {ι κ : Type*} [Fintype ι] [DecidableEq ι] [Fintype κ]
 def recDim (label : κ → ι) (j : ι) : ℕ :=
   (Finset.univ.filter (fun k => label k = j)).card
 
-/-- **Capacity is additive and bounded:** `∑ⱼ recDim j ≤ D`.  This is the global
-    capacity bound `∑ cost ≤ Q_max` of `CoreNoCollapse.RecordContext` — here DERIVED
-    from orthonormality, not assumed. -/
+/-- **Capacity is additive and bounded:** `∑ⱼ recDim j ≤ D`.  This is the per-region
+    aggregate capacity bound `∑ cost ≤ Qmax` of `CoreNoCollapse.RecordContext` (one
+    region's register, NOT a spacetime budget) — here DERIVED from orthonormality, not
+    assumed.  The register dimension `D` is the finite proxy for `Q_R = A(∂R)/4ℓ_P²`. -/
 theorem capacity_total {v : κ → H} (hv : Orthonormal 𝕜 v) (label : κ → ι) :
     ∑ j : ι, recDim label j ≤ finrank 𝕜 H := by
   have h : ∑ j : ι, recDim label j = Fintype.card κ := by
