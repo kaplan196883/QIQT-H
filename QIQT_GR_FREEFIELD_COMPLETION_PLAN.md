@@ -93,8 +93,14 @@ Decide and execute ONE of:
 - **First brick:** state the `−2π` variant and attempt the proof by mirroring the `+2π` proof with the reflection;
   if a sign obstruction appears, root-cause it to a specific `J`/`Δ` orientation lemma and audit that.
 
-### Phase 2 — supply `hUniq`/`hStrip`/standardness to `oneParticle_hFlux` from the discharged theorems *(1–2 fires)*
-`oneParticle_hFlux` takes `hUniq`, `hStrip`, `hcarrier` as hypotheses.  Build `freeField_oneParticle_hFlux` that
+### Phase 2 — supply `hUniq`/`hStrip`/standardness ✅ DONE 2026-06-23 (`Fock/FreeFieldHFlux.lean`)
+**Folded into the BW, not into `oneParticle_hFlux`.** Rather than feed `hUniq`/`hStrip`/`hcarrier` as the labelled
+inputs of the `−2π` `oneParticle_hFlux`, the `+2π` `freeField_modularEnergy_eq_boostCharge` supplies the BW
+identification `modUnitary S = boostUnitary(+2π·)` INTERNALLY from `oneParticleBW_niceWedge_unconditional` — which
+already discharges separating + cyclic + RvD-uniqueness for the nice-wedge `S`. So `hUniq`/`hStrip`/standardness
+never appear as hypotheses. Axiom-free, budget 0. (Original per-hypothesis route, now moot, retained below.)
+
+Original plan: `oneParticle_hFlux` takes `hUniq`, `hStrip`, `hcarrier` as hypotheses.  Build `freeField_oneParticle_hFlux` that
 SUPPLIES them for the nice-wedge standard subspace `S = niceWedgeStandardSubspace`:
 - `hStrip` ← `stripKMSrvd_boostUnitary` (repackaged to the `StripKMS V D` shape `oneParticle_hFlux` wants — check the
   `StripKMS` vs `StripKMSrvd` interface; `stripKMSrvd_halfStripReal` etc. bridge them).
@@ -104,10 +110,17 @@ SUPPLIES them for the nice-wedge standard subspace `S = niceWedgeStandardSubspac
 - **Deliverable:** `freeField_oneParticle_hFlux (m hm) (ξ) (Tkk) (hBoostCharge) : HasDerivAt … = i·(2π/ℏ)T_kk` — the
   one-particle hFlux with NO labelled wedge-KMS hypotheses (only `hBoostCharge`, itself discharged in Phase 3).
 
-### Phase 3 — supply `hBoostCharge` from `boostEnergy_eq_neg_stressFlux` *(1 fire)*
-`boostEnergy_eq_neg_stressFlux` gives the boost-energy = `−stressFluxKK` identity for a wedge mode.  Wire it to the
-`hBoostCharge : HasDerivAt (t ↦ ⟨ξ, boostUnitary(−2πt) ξ⟩) (i·(2π/ℏ)T_kk) 0` shape with `T_kk := −(ℏ/2π)·stressFluxKK`.
-- **Deliverable:** `freeField_hBoostCharge` — `hBoostCharge` discharged for the wedge mode `ξ = KrepL2 f`.
+### Phase 3 — supply `hBoostCharge` ✅ DONE 2026-06-23 (`Fock/FreeFieldHFlux.lean`)
+The `+2π` boost-charge derivative `hasDerivAt_inner_boostUnitary_imaginary_pos` is obtained by the `t→−t` reflection
+(`HasDerivAt.comp_const_sub`) of the existing `−2π` `hasDerivAt_inner_boostUnitary_imaginary` — reusing the hard
+dominated-convergence proof, no re-derivation. Composed with Phase 2's BW into the headline
+**`freeField_oneParticle_hFlux`**: for any smooth wedge state `ξ = f.toLp`,
+`HasDerivAt (t ↦ ⟪ξ, modUnitary S t ξ⟫) (i·(2π/ℏ·T_kk)) 0` with EVERYTHING operator/analytic discharged axiom-free —
+the ONLY labelled input is the scalar identification `hTkk : (2π/ℏ)·T_kk = (−(2π·∫ conj(f)·f')).im` (the boost
+Killing charge = stress flux, `+2π` orientation). Budget 0. **This is the free-field `oneParticle_hFlux` with no sign
+mismatch and no labelled modular hypotheses — Gap 1 + Phases 2–3 all closed in one file.**
+- Original deliverable `freeField_hBoostCharge` subsumed by `hasDerivAt_inner_boostUnitary_imaginary_pos` +
+  `freeField_oneParticle_hFlux`.
 
 ### Phase 4 — assemble `WedgeKMSFlux_complete` for the free field *(2–4 fires; depends on Gap 2)*
 Per null generator `(x,v)`, choose the wedge mode `ξ_{x,v}` (the localization map — Gap 2) and assemble the existential

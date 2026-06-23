@@ -61,4 +61,67 @@ theorem freeField_modularEnergy_eq_boostCharge {m : ℝ} (hm : 0 < m)
     rw [hBW]; rfl
   exact hasDerivAt_modularEnergy_of_boost_pos _ hbw ξ c hBoostCharge
 
+/-- **The `+2π` boost-charge derivative (purely imaginary), by the `t → −t` reflection** of the `−2π`
+    `hasDerivAt_inner_boostUnitary_imaginary`.  Because `⟪ξ, boostUnitary(2πt) ξ⟫ = ⟪ξ, boostUnitary(−2π(−t)) ξ⟫`,
+    the `+2π` correlation is the `−2π` one precomposed with negation, so its derivative is the negative:
+    `d/dt ⟪ξ, boostUnitary(2π t) ξ⟫|₀ = i·((−(2π·∫ conj(f)·f')).im)`.  Reuses the hard dominated-convergence
+    proof of the `−2π` lemma — no re-derivation.  Axiom-free. -/
+theorem hasDerivAt_inner_boostUnitary_imaginary_pos
+    (f f' : ℝ → ℂ) (hf2 : MemLp f 2 (volume : Measure ℝ))
+    (hf_int : Integrable f (volume : Measure ℝ))
+    (hF0_int : Integrable (fun θ => (starRingEnd ℂ) (f θ) * f θ) (volume : Measure ℝ))
+    (hf_meas : AEStronglyMeasurable f (volume : Measure ℝ))
+    (hfd : ∀ x, HasDerivAt f (f' x) x)
+    (hf'_meas : AEStronglyMeasurable f' (volume : Measure ℝ))
+    (B : ℝ) (hB : ∀ x, ‖f' x‖ ≤ B) :
+    HasDerivAt
+      (fun t : ℝ => inner ℂ (hf2.toLp f) (boostUnitary (2 * Real.pi * t) (hf2.toLp f)))
+      (Complex.I *
+        (((-(2 * Real.pi * ∫ θ, (starRingEnd ℂ) (f θ) * f' θ ∂(volume : Measure ℝ))).im : ℝ) : ℂ)) 0 := by
+  have him := hasDerivAt_inner_boostUnitary_imaginary f f' hf2 hf_int hF0_int hf_meas hfd hf'_meas B hB
+  -- Reflection `t → −t`: `⟪ξ, boostUnitary(2πt) ξ⟫ = ⟪ξ, boostUnitary(−2π(0−t)) ξ⟫`, so the +2π correlation is
+  -- the −2π one precomposed with `0 − ·`; `comp_const_sub` flips the derivative sign with no HO unification.
+  have hcomp : HasDerivAt
+      (fun t : ℝ => inner ℂ (hf2.toLp f) (boostUnitary (-(2 * Real.pi * (0 - t))) (hf2.toLp f)))
+      (-(Complex.I *
+        (((2 * Real.pi * ∫ θ, (starRingEnd ℂ) (f θ) * f' θ ∂(volume : Measure ℝ)).im : ℝ) : ℂ))) 0 :=
+    HasDerivAt.comp_const_sub (0 : ℝ) (0 : ℝ)
+      (f := fun s => inner ℂ (hf2.toLp f) (boostUnitary (-(2 * Real.pi * s)) (hf2.toLp f)))
+      (by simpa using him)
+  convert hcomp using 1
+  · funext t; congr 2; ring
+  · simp only [Complex.neg_im, Complex.ofReal_neg]; ring
+
+/-- **★★★ The free-field one-particle `hFlux`, FULLY ASSEMBLED in the satisfiable `+2π` convention.**  For any
+    smooth wedge state `ξ = f.toLp` and the nice-wedge standard subspace `S`, the modular-energy derivative is
+    `i·(2π/ℏ)·T_kk`:
+    `HasDerivAt (t ↦ ⟪ξ, modUnitary S t ξ⟫) (i·(2π/ℏ·T_kk)) 0`,
+    with EVERYTHING operator/analytic discharged axiom-free — the Bisognano–Wichmann identification
+    (`oneParticleBW_niceWedge_unconditional`) and the boost-charge derivative
+    (`hasDerivAt_inner_boostUnitary_imaginary_pos`) are both supplied internally.  The ONLY labelled input is the
+    single scalar physics identification `hTkk : (2π/ℏ)·T_kk = (−(2π·∫ conj(f)·f')).im` (the conserved boost
+    Killing charge = stress-tensor flux, in the `+2π` orientation).  This is the free-field `oneParticle_hFlux`
+    with NO sign mismatch and NO labelled modular hypotheses.  Axiom-free. -/
+theorem freeField_oneParticle_hFlux {m : ℝ} (hm : 0 < m)
+    (f f' : ℝ → ℂ) (hf2 : MemLp f 2 (volume : Measure ℝ))
+    (hf_int : Integrable f (volume : Measure ℝ))
+    (hF0_int : Integrable (fun θ => (starRingEnd ℂ) (f θ) * f θ) (volume : Measure ℝ))
+    (hf_meas : AEStronglyMeasurable f (volume : Measure ℝ))
+    (hfd : ∀ x, HasDerivAt f (f' x) x)
+    (hf'_meas : AEStronglyMeasurable f' (volume : Measure ℝ))
+    (B : ℝ) (hB : ∀ x, ‖f' x‖ ≤ B) (hbar Tkk : ℝ)
+    (hTkk : (2 * Real.pi / hbar * Tkk : ℝ)
+        = (-(2 * Real.pi * ∫ θ, (starRingEnd ℂ) (f θ) * f' θ ∂(volume : Measure ℝ))).im) :
+    HasDerivAt
+      (fun t : ℝ => inner ℂ (hf2.toLp f)
+        (modUnitary (niceWedgeStandardSubspace m
+          (niceWedge_isSeparating_of_no_complex_line m (niceWedgeSeparating_pos_mass hm))
+          (niceWedge_isCyclic_of_total_integral m (niceWedgeCyclic_pos_mass hm))) t (hf2.toLp f)))
+      (Complex.I * ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ)) 0 := by
+  have hbc := hasDerivAt_inner_boostUnitary_imaginary_pos f f' hf2 hf_int hF0_int hf_meas hfd hf'_meas B hB
+  rw [show ((2 * Real.pi / hbar * Tkk : ℝ) : ℂ)
+        = (((-(2 * Real.pi * ∫ θ, (starRingEnd ℂ) (f θ) * f' θ ∂(volume : Measure ℝ))).im : ℝ) : ℂ) by
+      rw [hTkk]]
+  exact freeField_modularEnergy_eq_boostCharge hm (hf2.toLp f) _ hbc
+
 end QIQTH.Fock

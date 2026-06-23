@@ -4785,6 +4785,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — ★ FREE-FIELD modular-energy = stress-flux derivative with BW supplied INTERNALLY from
 -- oneParticleBW_niceWedge_unconditional in the satisfiable +2π convention (no labelled hUniq/hStrip, no sign mismatch).
 -- Phase 2 of QIQT_GR_FREEFIELD_COMPLETION_PLAN: only remaining input is the +2π boost-charge derivative (Phase 3).
+#print axioms QIQTH.Fock.hasDerivAt_inner_boostUnitary_imaginary_pos
+-- expected: standard only — the +2π boost-charge derivative (purely imaginary), by the t→−t reflection
+-- (HasDerivAt.comp_const_sub) of the −2π hasDerivAt_inner_boostUnitary_imaginary; reuses the hard
+-- dominated-convergence proof. d/dt ⟪ξ,boostUnitary(2πt)ξ⟫|₀ = i·((−(2π·∫conj(f)·f')).im).
+#print axioms QIQTH.Fock.freeField_oneParticle_hFlux
+-- expected: standard only — ★★★ THE free-field one-particle hFlux FULLY ASSEMBLED in the satisfiable +2π
+-- convention: HasDerivAt(t↦⟪ξ,modUnitary S t ξ⟫)(i·(2π/ℏ·T_kk)) 0 for any smooth wedge state ξ=f.toLp, with the
+-- BW identification AND the boost-charge derivative both supplied internally (axiom-free). Only labelled input is
+-- the scalar physics identification hTkk: (2π/ℏ)·T_kk = (−(2π·∫conj(f)·f')).im. Phase 3 of the freefield plan.
 
 -- ★★★★★★ THE `conserv` INPUT OF THE QIQT→GR DERIVATION, DISCHARGED for the explicit Klein–Gordon field (2026-06-23).
 #print axioms QIQTH.Curvature.pd_gi_eq
