@@ -465,4 +465,23 @@ theorem niceWedgeCyclic_pos_mass {m : ℝ} (hm0 : 0 < m) : NiceWedgeCyclic m := 
   exact niceWedgeCyclic_of_bumpW_fourier_ne_zero m (Real.pi / (4 * m))
     (2 * (Real.pi / (4 * m)) + 1) hR hm0.ne' (by linarith) (bump1W_fourier_ne_zero hm0 hR hmR)
 
+open QIQTH.StandardSubspaceModular in
+/-- **★★★★★★★★ THE free-field one-particle Bisognano–Wichmann, reduced to its SINGLE remaining analytic input.**
+    `modUnitary S t = boostUnitary(2πt)` for the nice-core wedge standard subspace, given ONLY the Reeh–Schlieder
+    SEPARATING condition `NiceWedgeSeparating m` (no complex line / Pauli–Jordan symplectic non-degeneracy).  The
+    cyclic Reeh–Schlieder input is now discharged *internally* and unconditionally for every `m > 0`
+    (`niceWedgeCyclic_pos_mass`), so it is no longer a hypothesis.  Every other step — the KMS condition, the
+    `𝒦`-invariance, the boost group, the standard-subspace construction, BOTH Reeh–Schlieder lattice reductions,
+    AND the entire cyclic/wedge-totality input (the complete Wiener–Tauberian theorem + brick 8) — is machine-checked
+    and axiom-free.  The free-field one-particle BW now rests on EXACTLY ONE concrete analytic statement: the
+    symplectic non-degeneracy of the localized rapidity amplitudes.  This is the honest, irreducible frontier. -/
+theorem oneParticleBW_niceWedge_of_separating {m : ℝ} (hm : 0 < m)
+    (V : ℝ → (Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ)))
+    (hVboost : ∀ t x, V t x = QIQTH.Fock.OneParticle.boostUnitary (2 * Real.pi * t) x)
+    (hsep : NiceWedgeSeparating m) :
+    ∀ t, modUnitary (niceWedgeStandardSubspace m
+      (niceWedge_isSeparating_of_no_complex_line m hsep)
+      (niceWedge_isCyclic_of_total_integral m (niceWedgeCyclic_pos_mass hm))) t = V t :=
+  oneParticleBW_niceWedge_reehSchlieder hm V hVboost hsep (niceWedgeCyclic_pos_mass hm)
+
 end QIQTH.Fock.CyclicWitness
