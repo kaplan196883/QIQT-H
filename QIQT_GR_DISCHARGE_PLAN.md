@@ -19,7 +19,7 @@ surface. After the corrected audit, that surface splits cleanly:
 | Route B horizon stress flux + `wedge_boostCharge_eq_neg_stressFlux` (hTkk) | **DERIVED** axiom-free (done) | — |
 | `hDnn`/`hD0` (relative-entropy positivity) | **DERIVED** via Klein (`relEntropy_nonneg`) | — |
 | `hFocus` (Raychaudhuri focusing, `ad = BL(Ric) v`) | **mostly DERIVED** (`hFocus_of_raychaudhuri`); only the `harea` area↔θ modelling identification + `hequil` equilibrium remain | **Work Item B** |
-| `hKMS` = `StripKMSrvd(boostUnitary, 𝒦_W)` | **DISCHARGED axiom-free** (`stripKMSrvd_boostUnitary` → `oneParticleBW_niceWedge`, 2026-06-23) — the labelled KMS is now a THEOREM; only the Reeh–Schlieder standardness of the wedge subspace (`S`-construction) remains, the cited frontier | **Work Item A — DONE to floor** |
+| `hKMS` = `StripKMSrvd(boostUnitary, 𝒦_W)` | **DISCHARGED axiom-free** (`stripKMSrvd_boostUnitary` → `oneParticleBW_niceWedge`, 2026-06-23). **★ The Reeh–Schlieder standardness of the wedge subspace (`S`-construction) — listed here as the cited frontier — is ALSO now CLOSED axiom-free** (`niceWedgeSeparating_pos_mass` + `niceWedgeCyclic_pos_mass` ⟹ `oneParticleBW_niceWedge_unconditional`, 2026-06-23). The free-field one-particle BW is FULLY unconditional. | **Work Item A — FULLY CLOSED** |
 | Clausius/area-saturation (`hbound`, `hsat`) | **genuinely irreducible PHYSICS** (= QIQT-H horizon-thermodynamics postulate) | out of scope — the honest floor |
 | metric/frame/regularity scaffolding (`hCg`, `hreg`, `conserv`, …) | precondition infrastructure; `conserv` derivable for explicit KG `T` | out of scope (optional later) |
 
@@ -27,19 +27,25 @@ surface. After the corrected audit, that surface splits cleanly:
 Clausius/area-saturation law as the single labelled physical input.
 
 **★★★★★ PLAN GOAL ACHIEVED (2026-06-23).** Both work items are discharged to their honest floors, axiom-free:
-- **Item A (`hKMS`) DONE**: the free-field BW KMS condition (RvD Def 3.4) is machine-checked
+- **Item A (`hKMS`) FULLY CLOSED**: the free-field BW KMS condition (RvD Def 3.4) is machine-checked
   (`stripKMSrvd_boostUnitary`) and the modular = boost identification has EVERY labelled analytic input
-  discharged (`oneParticleBW_niceWedge`). Residual = the Reeh–Schlieder standardness of the wedge subspace
-  (the `S`-construction), the cited frontier — research-grade, not in Mathlib, and the codebase never assumed
-  it discharged either.
+  discharged (`oneParticleBW_niceWedge`). **★ The residual cited frontier — the Reeh–Schlieder standardness of
+  the wedge subspace (the `S`-construction) — is now ALSO discharged axiom-free (2026-06-23):** `niceWedgeCyclic_pos_mass`
+  (cyclic, via the Wiener–Tauberian theorem + width-scaled bump) and `niceWedgeSeparating_pos_mass` (separating /
+  Pauli–Jordan, via a pure modular/KMS uniqueness argument) combine into `oneParticleBW_niceWedge_unconditional` =
+  `modUnitary S t = boostUnitary(2πt)` with NO Reeh–Schlieder hypotheses. The free-field one-particle BW is a
+  fully closed, axiom-free theorem — what was "research-grade, not in Mathlib" is now machine-checked.
 - **Item B (`hFocus`) CLOSED**: focusing derived from kinematic Raychaudhuri (`hFocus_of_raychaudhuri`);
   residual = the `harea` area↔θ modelling identification + `hequil`, which are physics/modelling, not analytic.
 - **Single labelled physical input**: the Clausius/area-saturation law (`hbound`, `hsat`) — the QIQT-H
   horizon-thermodynamics postulate, the honest floor by design.
 
 Remaining beyond this plan's scope (all either cited frontier or new subsystems, NOT mechanical discharge):
-the `S`-construction (Reeh–Schlieder), `conserv` (would need a full KG-stress-tensor-on-manifold construction +
-covariant-divergence computation), and the continuum Type-III / DPI-Lieb axiom-retirement programs (separate plans).
+~~the `S`-construction (Reeh–Schlieder)~~ **[CLOSED 2026-06-23, see above]**, `conserv` (would need a full
+KG-stress-tensor-on-manifold construction + covariant-divergence computation), and the continuum Type-III / DPI-Lieb
+axiom-retirement programs (separate plans). With the `S`-construction closed, the ONLY non-physical residual left in
+the one-particle free-field QIQT→GR surface is `conserv` (an explicit-KG-`T` construction); the single labelled
+*physical* input remains the Clausius/area-saturation law (the honest floor by design).
 
 ---
 
