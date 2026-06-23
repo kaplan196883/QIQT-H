@@ -49,6 +49,30 @@ possibly an honest modeling identification.
 ## Phases
 
 ### Phase 1 — `±2π` sign reconciliation *(1–3 fires; HIGH-to-MODERATE confidence)*
+
+**★ ROOT-CAUSE DIAGNOSIS (2026-06-23, fire 1).** Two things differ between the unconditional BW and the `hFlux`
+machinery:
+1. **Generator set:** `niceWedgeGenSet m ⊆ wedgeGenSet m` (`BoostKMS.lean:2202`) — my `oneParticleBW_niceWedge_unconditional`
+   is over the *nice* (smooth, compact-support) generators; `oneParticleBW_wedge(_complete)` is over the full
+   `wedgeGenSet`. Whether they give the SAME standard subspace `S` hinges on **`closure(span niceWedgeGenSet) =
+   closure(span wedgeGenSet)`** (density of nice in full). `niceWedgeCyclic_pos_mass` proves the nice generators are
+   cyclic — strong evidence the closures coincide; CONFIRM this (a `niceWedge_dense_in_wedge` lemma) as brick 1.
+2. **Sign:** my theorem proves the **satisfiable** `modUnitary S t = boostUnitary(+2πt)`; `oneParticleBW_wedge_complete`'s
+   `−2πt` is the *labelled "expected convention"* — by the at-most-one-sign fact it cannot also hold for the true
+   `modUnitary` (unless vacuous). So the `hFlux` machinery (`modularEnergy_eq_stressFlux`, `oneParticle_hFlux`,
+   `boostEnergy_eq_neg_stressFlux`) is written in the `−2π` convention that the REAL modular flow does NOT satisfy.
+
+**Resolution path (the honest fix):** build the `+2π` variants of the `hFlux` chain and re-derive the GR-chain sign
+consistently — the boost direction `boostUnitary(±2πt)` only flips the sign of the energy derivative, hence of the
+*defined* `T_kk := ∓(ℏ/2π)·stressFluxKK`; the physical `kd = (2π/ℏ)T_kk` is convention-covariant as long as `hbw`,
+`hBoostCharge`, and the `T_kk` sign all use the SAME orientation. So:
+- **Brick 1:** `niceWedge_dense_in_wedge` (or: the nice-wedge standard subspace = the wedge standard subspace), so the
+  unconditional `+2π` BW applies to the SAME `S` the `hFlux` chain uses.
+- **Brick 2:** `modularEnergy_eq_stressFlux_pos` / `oneParticle_hFlux_pos` / `boostEnergy_eq_neg_stressFlux` with the
+  `+2π` orientation and `T_kk := +(ℏ/2π)·stressFluxKK` (sign chosen so `kd = (2π/ℏ)T_kk` matches the GR chain).
+- This REPLACES the original sub-options below (which assumed a re-derivation in `−2π` — wrong direction, since `−2π`
+  is the unsatisfiable convention). Original sub-options retained for reference:
+
 Decide and execute ONE of:
 - **(a) Re-derive the unconditional BW in the `−2π` convention.** Restate `oneParticleBW_niceWedge_unconditional`
   with `V t = boostUnitary(−(2πt))`; check whether the separating/cyclic/KMS proofs are orientation-symmetric (the
