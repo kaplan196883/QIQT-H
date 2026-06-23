@@ -1,6 +1,8 @@
 import QIQTH.ClausiusToPernull
 import QIQTH.DifferentialAreaLaw
 import QIQTH.Raychaudhuri
+import QIQTH.ChristoffelSmooth
+import QIQTH.RicciSymm
 
 /-!
 # Assembling QIQT-H + Bekenstein ⇒ GR: the per-null tensor premise from the DERIVED modular relation
@@ -124,11 +126,9 @@ theorem qiqt_bekenstein_gives_gr
     (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
     (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
     (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
-    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
     (T : Point 4 → Fin 4 → Fin 4 → ℝ) (η hbar a : ℝ)
     (hbar0 : hbar ≠ 0) (heta : η ≠ 0) (ha : a = 2 * Real.pi / (hbar * η))
     (hT_symm : ∀ x a' b, T x a' b = T x b a')
-    (hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x)
     (P Pinv : Point 4 → Fin 4 → Fin 4 → ℝ)
     (hPP : ∀ x i j, (∑ k, P x i k * Pinv x k j) = if i = j then (1 : ℝ) else 0)
     (hPP' : ∀ x i j, (∑ k, Pinv x i k * P x k j) = if i = j then (1 : ℝ) else 0)
@@ -151,6 +151,11 @@ theorem qiqt_bekenstein_gives_gr
           Differentiable ℝ (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y))
     (conserv : ∀ x ν, div02 g gi (fun y a' b => a * T y a' b) ν x = 0) :
     ∃ Λ : ℝ, ∀ x μ ν, a * T x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν := by
+  -- `hC`/`hric_symm` discharged internally (christoffel_contDiff / ricci_symm) — were labelled inputs:
+  have hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y) :=
+    fun a b c => christoffel_contDiff g gi hCg hCgi a b c
+  have hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x :=
+    fun x a' b => ricci_symm g gi hsymm hsymm_gi hinv hCg hC a' b x
   have pernull : ∀ (x : Point 4) (v : Fin 4 → ℝ),
       BL (g x) v = 0 → BL (fun a' b => a * T x a' b - ricci g gi a' b x) v = 0 := by
     intro x v hnull

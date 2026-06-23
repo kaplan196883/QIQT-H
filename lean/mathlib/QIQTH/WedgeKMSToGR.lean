@@ -102,11 +102,9 @@ theorem qiqt_gr_from_wedge_kms
     (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
     (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
     (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
-    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
     (T : Point 4 → Fin 4 → Fin 4 → ℝ) (η hbar a : ℝ)
     (hbar0 : hbar ≠ 0) (heta : η ≠ 0) (ha : a = 2 * Real.pi / (hbar * η))
     (hT_symm : ∀ x a' b, T x a' b = T x b a')
-    (hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x)
     (P Pinv : Point 4 → Fin 4 → Fin 4 → ℝ)
     (hPP : ∀ x i j, (∑ k, P x i k * Pinv x k j) = if i = j then (1 : ℝ) else 0)
     (hPP' : ∀ x i j, (∑ k, Pinv x i k * P x k j) = if i = j then (1 : ℝ) else 0)
@@ -131,8 +129,8 @@ theorem qiqt_gr_from_wedge_kms
     -- INPUT 2 — matter conservation:
     (conserv : ∀ x ν, div02 g gi (fun y a' b => a * T y a' b) ν x = 0) :
     ∃ Λ : ℝ, ∀ x μ ν, a * T x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν :=
-  qiqt_bekenstein_gives_gr g gi hsymm hsymm_gi hinv hCg hCgi hC T η hbar a hbar0 heta ha
-    hT_symm hric_symm P Pinv hPP hPP' hcong S KE A sd kd ad hS hK hA hbound hsat hDnn hD0
+  qiqt_bekenstein_gives_gr g gi hsymm hsymm_gi hinv hCg hCgi T η hbar a hbar0 heta ha
+    hT_symm P Pinv hPP hPP' hcong S KE A sd kd ad hS hK hA hbound hsat hDnn hD0
     (hFlux_of_wedgeKMS hKMS) hFocus hreg conserv
 
 /-! ### The wedge-KMS GR derivation with KMS-uniqueness DERIVED (no bundled `hUniq`, genuine `StripKMSrvd`) -/
@@ -181,11 +179,9 @@ theorem qiqt_gr_from_wedge_kms_complete
     (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
     (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
     (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
-    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
     (T : Point 4 → Fin 4 → Fin 4 → ℝ) (η hbar a : ℝ)
     (hbar0 : hbar ≠ 0) (heta : η ≠ 0) (ha : a = 2 * Real.pi / (hbar * η))
     (hT_symm : ∀ x a' b, T x a' b = T x b a')
-    (hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x)
     (P Pinv : Point 4 → Fin 4 → Fin 4 → ℝ)
     (hPP : ∀ x i j, (∑ k, P x i k * Pinv x k j) = if i = j then (1 : ℝ) else 0)
     (hPP' : ∀ x i j, (∑ k, Pinv x i k * P x k j) = if i = j then (1 : ℝ) else 0)
@@ -206,8 +202,8 @@ theorem qiqt_gr_from_wedge_kms_complete
           Differentiable ℝ (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y))
     (conserv : ∀ x ν, div02 g gi (fun y a' b => a * T y a' b) ν x = 0) :
     ∃ Λ : ℝ, ∀ x μ ν, a * T x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν :=
-  qiqt_bekenstein_gives_gr g gi hsymm hsymm_gi hinv hCg hCgi hC T η hbar a hbar0 heta ha
-    hT_symm hric_symm P Pinv hPP hPP' hcong Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0
+  qiqt_bekenstein_gives_gr g gi hsymm hsymm_gi hinv hCg hCgi T η hbar a hbar0 heta ha
+    hT_symm P Pinv hPP hPP' hcong Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0
     (hFlux_of_wedgeKMS_complete hKMS) hFocus hreg conserv
 
 /-- **★★★★ THE GOAL THEOREM, taking the per-generator flux EQUATION directly.**  Identical to
@@ -222,11 +218,9 @@ theorem qiqt_gr_from_flux_complete
     (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
     (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
     (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
-    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
     (T : Point 4 → Fin 4 → Fin 4 → ℝ) (η hbar a : ℝ)
     (hbar0 : hbar ≠ 0) (heta : η ≠ 0) (ha : a = 2 * Real.pi / (hbar * η))
     (hT_symm : ∀ x a' b, T x a' b = T x b a')
-    (hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x)
     (P Pinv : Point 4 → Fin 4 → Fin 4 → ℝ)
     (hPP : ∀ x i j, (∑ k, P x i k * Pinv x k j) = if i = j then (1 : ℝ) else 0)
     (hPP' : ∀ x i j, (∑ k, Pinv x i k * P x k j) = if i = j then (1 : ℝ) else 0)
@@ -247,8 +241,8 @@ theorem qiqt_gr_from_flux_complete
           Differentiable ℝ (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y))
     (conserv : ∀ x ν, div02 g gi (fun y a' b => a * T y a' b) ν x = 0) :
     ∃ Λ : ℝ, ∀ x μ ν, a * T x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν :=
-  qiqt_bekenstein_gives_gr g gi hsymm hsymm_gi hinv hCg hCgi hC T η hbar a hbar0 heta ha
-    hT_symm hric_symm P Pinv hPP hPP' hcong Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0
+  qiqt_bekenstein_gives_gr g gi hsymm hsymm_gi hinv hCg hCgi T η hbar a hbar0 heta ha
+    hT_symm P Pinv hPP hPP' hcong Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0
     hflux hFocus hreg conserv
 
 /-- **★★★★ THE GOAL THEOREM with the focusing input DERIVED from Raychaudhuri (no raw `hFocus`).**  Identical
@@ -268,11 +262,9 @@ theorem qiqt_gr_from_wedge_kms_raychaudhuri
     (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
     (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
     (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
-    (hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y))
     (T : Point 4 → Fin 4 → Fin 4 → ℝ) (η hbar a : ℝ)
     (hbar0 : hbar ≠ 0) (heta : η ≠ 0) (ha : a = 2 * Real.pi / (hbar * η))
     (hT_symm : ∀ x a' b, T x a' b = T x b a')
-    (hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x)
     (P Pinv : Point 4 → Fin 4 → Fin 4 → ℝ)
     (hPP : ∀ x i j, (∑ k, P x i k * Pinv x k j) = if i = j then (1 : ℝ) else 0)
     (hPP' : ∀ x i j, (∑ k, Pinv x i k * P x k j) = if i = j then (1 : ℝ) else 0)
@@ -300,8 +292,10 @@ theorem qiqt_gr_from_wedge_kms_raychaudhuri
           Differentiable ℝ (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y))
     (conserv : ∀ x ν, div02 g gi (fun y a' b => a * T y a' b) ν x = 0) :
     ∃ Λ : ℝ, ∀ x μ ν, a * T x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν := by
-  refine qiqt_gr_from_wedge_kms_complete g gi hsymm hsymm_gi hinv hCg hCgi hC T η hbar a hbar0 heta ha
-    hT_symm hric_symm P Pinv hPP hPP' hcong Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0 hKMS
+  have hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y) :=
+    fun a b c => christoffel_contDiff g gi hCg hCgi a b c
+  refine qiqt_gr_from_wedge_kms_complete g gi hsymm hsymm_gi hinv hCg hCgi T η hbar a hbar0 heta ha
+    hT_symm P Pinv hPP hPP' hcong Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0 hKMS
     ?_ hreg conserv
   intro x v hnull
   have hfoc := hFocus_of_raychaudhuri g gi hsymm (Vcong v) (hVC v) hC (hgeo v) x

@@ -58,17 +58,14 @@ theorem qiqt_gr_explicit_kg
     (hFocus : ∀ x v, BL (g x) v = 0 → ad x v = BL (fun i j => ricci g gi i j x) v)
     : ∃ Λ : ℝ, ∀ x μ ν, a * kgStress m φ g gi x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν := by
   -- `hC`, `hric_symm` and `hreg` are now THEOREMS (Tier A5, A1, A4), supplied internally:
-  have hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y) :=
-    fun a b c => christoffel_contDiff g gi hCg hCgi a b c
-  have hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x :=
-    fun x a' b => ricci_symm g gi hsymm hsymm_gi hinv hCg hC a' b x
+  -- hC, hric_symm now discharged INSIDE the abstract capstone (no longer passed):
   have hreg : ∀ f : Point 4 → ℝ,
       (∀ y a' b, a * kgStress m φ g gi y a' b = ricci g gi a' b y + f y * g y a' b) →
       (∀ x ρ, PdiffAt f ρ x) ∧
         Differentiable ℝ (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y) :=
     fun f hrel => hreg_kg m φ g gi a hsymm_gi hinv hφ hCg hCgi f hrel
-  refine qiqt_gr_from_wedge_kms_complete g gi hsymm hsymm_gi hinv hCg hCgi hC
-    (kgStress m φ g gi) η hbar a hbar0 heta ha ?_ hric_symm P Pinv hPP hPP' hcong
+  refine qiqt_gr_from_wedge_kms_complete g gi hsymm hsymm_gi hinv hCg hCgi
+    (kgStress m φ g gi) η hbar a hbar0 heta ha ?_ P Pinv hPP hPP' hcong
     Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0 hKMS hFocus hreg ?_
   · -- `kgStress` is symmetric (metric symmetry + commuting first derivatives)
     intro x a' b
@@ -117,12 +114,9 @@ theorem qiqt_gr_explicit_kg_raychaudhuri
         (∀ x ρ, PdiffAt f ρ x) ∧
           Differentiable ℝ (fun y => f y + (1 / 2 : ℝ) * scalarCurv g gi y)) :
     ∃ Λ : ℝ, ∀ x μ ν, a * kgStress m φ g gi x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν := by
-  have hC : ∀ a b c, ContDiff ℝ ⊤ (fun y => christoffel g gi a b c y) :=
-    fun a b c => christoffel_contDiff g gi hCg hCgi a b c
-  have hric_symm : ∀ x a' b, ricci g gi a' b x = ricci g gi b a' x :=
-    fun x a' b => ricci_symm g gi hsymm hsymm_gi hinv hCg hC a' b x
-  refine qiqt_gr_from_wedge_kms_raychaudhuri g gi hsymm hsymm_gi hinv hCg hCgi hC
-    (kgStress m φ g gi) η hbar a hbar0 heta ha ?_ hric_symm P Pinv hPP hPP' hcong
+  -- hC, hric_symm now discharged INSIDE the abstract capstone (no longer passed):
+  refine qiqt_gr_from_wedge_kms_raychaudhuri g gi hsymm hsymm_gi hinv hCg hCgi
+    (kgStress m φ g gi) η hbar a hbar0 heta ha ?_ P Pinv hPP hPP' hcong
     Sf KE A sd kd ad hS hK hA hbound hsat hDnn hD0 hKMS Vcong hVC hgeo hVval hequil harea hreg ?_
   · intro x a' b
     simp only [kgStress]
