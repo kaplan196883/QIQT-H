@@ -92,5 +92,20 @@ circular derivation as a discharge.  This is the same discipline as the GR local
   a genuine coarse-graining selector `π ∘ selF` has Kolmogorov-consistent marginals (coarse marginal = sum of
   fine marginals over the merge fiber) — selector no-signaling under refinement, automatic, NO Born input. The
   α=2 rule fails this (`alphaSq_selector_signals`) because its coarse/fine realizations aren't genuine
-  refinements — the non-vacuity witness. Axiom-free, budget 0. Next: Stage 2 (bridge APC ⟹ refinement-additivity
-  of the weight rule).
+  refinements — the non-vacuity witness. Axiom-free, budget 0.
+- **Stage 2 ✅ — §4 limit reached** (`apc_iff_positiveAdditive`, same file) — **APC ⟺ additivity**: for a rule
+  `p ∝ f` positive on positive weights, `RefinementNatural f` (selector no-signaling under outcome-refinement)
+  is *logically equivalent* to additivity of `f`. So APC is the honest §4 outcome — a **grounding/reframing**
+  (Born's discriminating premise relocated to "the actuality selector is microcausal/no-signaling under
+  refinement," a principle QIQT-H independently holds), **not** a strict from-nothing derivation. Axiom-free,
+  budget 0.
+
+### COMPLETE — the honest result
+The chain is **APC ⟺ additive ⟹ Born**: `apc_iff_positiveAdditive` (APC ⟺ additive) + the existing
+`RefinementBorn.continuous_additive_fMeasure_eq_born` (additive ⟹ Born), with `marg_coarseGrain` (honest
+refinements satisfy APC automatically) and `RefinementBorn.alphaSq_refinement_violation` (the α=2 rule violates
+APC — non-vacuity). Per §4, we **stop at the equivalence** rather than dress up a circular "from-nothing"
+derivation: APC is logically equivalent to additivity, so the deliverable is the equivalence + the physical
+reframing + the non-vacuity witness. Stages 3 (a packaged `apc ⟹ Born` needs the Cauchy `ℝ→+ℝ` hom-extension —
+not pursued, it would only re-package `continuous_additive_fMeasure_eq_born`) and 4 (non-vacuity, already in
+`RefinementBorn`) are folded into this. **Born's additivity bridge is now grounded in selector no-signaling.**

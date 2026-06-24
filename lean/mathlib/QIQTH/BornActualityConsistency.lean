@@ -23,11 +23,12 @@ Stages 2–3 (next): bridge APC to refinement-additivity of the weight rule (`Re
 Axiom-free.
 -/
 import QIQTH.SelectorRefinement
+import QIQTH.RefinementBorn
 import Mathlib.Tactic
 
 namespace QIQTH.BornActualityConsistency
 
-open QIQTH.SelectorRefinement
+open QIQTH.SelectorRefinement QIQTH.RefinementBorn
 
 /-- **Actuality Projective Consistency (structural).**  For a fine selector `selF : Ω → K'` and a merge map
     `π : K' → K`, the marginal of the coarse-grained readout `π ∘ selF` at a coarse outcome `k` equals the sum
@@ -43,5 +44,25 @@ theorem marg_coarseGrain {Ω K K' : Type*} [Fintype Ω] [Fintype K'] [DecidableE
   refine Finset.sum_congr rfl fun ω _ => ?_
   rw [Finset.sum_ite_eq (Finset.univ.filter (fun k' => π k' = k)) (selF ω) (fun _ => μ ω)]
   simp [Finset.mem_filter]
+
+/-- **Stage 2 — APC ⟺ additivity (the honest §4 equivalence).**  For a rule `p ∝ f` positive on positive
+    weights, *Actuality Projective Consistency* — `RefinementNatural f`, i.e. the selector does not signal under
+    outcome-refinement (the coarse probability of a merged outcome equals the sum of the two fine
+    probabilities) — is **logically equivalent** to additivity of `f` on positive weights.
+
+    So APC is NOT strictly weaker than the Born additivity premise: it is a physically-motivated, amplitude-free
+    *reframing* of it.  The value is the relocation — Born's discriminating premise is now "the actuality
+    selector is no-signaling under refinement," a microcausality principle QIQT-H independently holds — together
+    with the structural fact (`marg_coarseGrain`) that honest coarse-graining selectors satisfy it automatically
+    and the non-vacuity witness (`RefinementBorn.alphaSq_refinement_violation`: the α=2 rule violates it).
+    Composed with `RefinementBorn.continuous_additive_fMeasure_eq_born` (additive ⟹ Born), the chain is
+    **APC ⟺ additive ⟹ Born**. -/
+theorem apc_iff_positiveAdditive (f : ℝ → ℝ) (hf : ∀ t, 0 < t → 0 < f t) :
+    RefinementNatural f ↔ (∀ x y : ℝ, 0 < x → 0 < y → f (x + y) = f x + f y) := by
+  constructor
+  · intro hnat x y hx hy
+    exact refinementNatural_additive f hf hnat hx hy one_pos
+  · intro hadd x y z hx hy hz
+    rw [hadd x y hx hy]
 
 end QIQTH.BornActualityConsistency
