@@ -2679,6 +2679,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BornActualityConsistency.marg_coarseGrain
 -- BORN-A1 Stage 2: APC ⟺ additivity (the honest §4 equivalence — Born's premise reframed as selector no-signaling):
 #print axioms QIQTH.BornActualityConsistency.apc_iff_positiveAdditive
+-- A1-ppwave Stage 1: the pp-wave metric, its inverse, symmetry and g·gi=I:
+#print axioms QIQTH.Curvature.ppMetric_inv
 #print axioms QIQTH.SelectorRefinement.local_factor_remote_invariant
 -- expected: standard only — Gap-2 milestone 1: selector-locality (local marginal factors through ρ_A) +
 -- ρ_A-preservation under remote refinement ⇒ local marginal remote-invariant (the "remote" half of the bridge).

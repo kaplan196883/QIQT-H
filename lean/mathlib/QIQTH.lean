@@ -199,6 +199,9 @@ import QIQTH.QiqtGrCovCong
 -- BORN-A1: Actuality Projective Consistency — grounding the Born additivity bridge in selector
 -- no-signaling under outcome-refinement (Stage 1: honest coarse-graining selectors satisfy APC).
 import QIQTH.BornActualityConsistency
+-- A1-ppwave: a non-flat (curved) witness for the Raychaudhuri congruence premises — the pp-wave
+-- metric whose null field ∂_v is covariantly constant (Stage 1: metric, inverse, symmetry).
+import QIQTH.PPWaveMetric
 -- Born FROM PROJECTORS: the operator bridge grounding the record/area contract. For a
 -- finite orthogonal PVM {P_r} and a normalized Φ, μ(r)=‖P_r Φ‖²=⟨Φ,P_rΦ⟩ is a genuine
 -- RecordContract.RecordLaw — so the contract rests on Born-from-Φ, not a toy distribution.
