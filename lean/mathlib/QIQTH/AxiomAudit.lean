@@ -2681,6 +2681,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BornActualityConsistency.apc_iff_positiveAdditive
 -- BORN-C Stage 1: μ-selection — equivariance (quantum equilibrium) ⟹ selector no-signaling:
 #print axioms QIQTH.BornMuSelection.equivariant_no_signaling
+-- BORN-C Stage 2-3: equivariance ⟹ context-independent (non-contextual) marginals; martingale selection:
+#print axioms QIQTH.BornMuSelection.equivariant_context_independent
+#print axioms QIQTH.BornMuSelection.mu_selection_martingale
 -- A1-ppwave Stage 1: the pp-wave metric, its inverse, symmetry and g·gi=I:
 #print axioms QIQTH.Curvature.ppMetric_inv
 -- A1-ppwave Stage 2-3: Γ^μ_{ν1}≡0 ⟹ ∂_v covariantly constant ⟹ hWgeo/hWequil on a CURVED metric:

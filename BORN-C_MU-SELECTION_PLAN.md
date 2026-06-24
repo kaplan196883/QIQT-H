@@ -65,4 +65,21 @@ countermodels.  We do **not** dress up the equivalence as a from-nothing selecti
 - **Stage 1 ✅** (`Equivariant`, `uniform_equivariant`, `equivariant_no_signaling`; `QIQTH/BornMuSelection.lean`)
   — the selection principle (refinement equivariance = the quantum-equilibrium condition), the canonical uniform
   measure is equivariant, and **equivariance ⟹ selector no-signaling** (the bridge to Born via BORN-A1).
-  Axiom-free, budget 0. Next: Stage 2 (equivariance ⟹ Born, composing `apc_iff_positiveAdditive`).
+  Axiom-free, budget 0.
+- **Stage 2 ✅ — the kinematic selection** (`equivariant_context_independent`) — an equivariant measure's
+  outcome marginal is invariant under the equivariant refinement (the *whole* marginal function): the
+  quantum-equilibrium measure has **no preferred refinement**, so its statistics are **non-contextual** — the
+  Born-strength premise consumed by `finite_noCollapseBorn_fromNoncontextuality` (and ⟺ additivity ⟺ Born via
+  BORN-A1). **Equivariance grounds the Born selection.** Axiom-free, budget 0.
+- **Stage 3+4 ✅ — the bracket + the dynamical selection** (`mu_underdetermined`, `mu_selection_martingale`) —
+  WITHOUT a principle μ is underdetermined (`any_anti_born_realizable`); WITH the dynamical martingale
+  conservation, μ-probability = Born weight (`born_from_martingale`) — a second independent grounding; the α=2
+  (non-equivariant) rule SIGNALS under refinement (`sqRule_refinement_signals`) — non-vacuity. Axiom-free, budget 0.
+
+### COMPLETE — the honest §2 grounding
+μ-selection is grounded in physically-motivated, amplitude-free principles — **equivariance** (kinematic,
+quantum-equilibrium) and **martingale conservation** (dynamical, GRW/CSL) — both selecting Born, bracketed by
+the underdetermination no-go and the non-equivariant countermodel. Per §2 (mirroring BORN-A1): some selection
+principle MUST be assumed (the no-go proves it); these principles are the physically-motivated choices and are
+logically tied to the Born-selection — so this is a **grounding/reframing** of μ-selection, not a from-nothing
+derivation. Delivered as such; no circularity dressed up as a discharge.
