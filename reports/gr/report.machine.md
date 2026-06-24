@@ -1,7 +1,7 @@
 # Track state — GR field equations
 *Target 3 — QIQT-H gives the GR field equations (Jacobson route, free KG field)*
 
-_Generated 2026-06-24 09:49 UTC · git `7233ca0` · 14 theorems · tool lean_track_ · provenance: [L]=Lean fact [P]=Lean-checked prober [D]=derived [C]=curation_
+_Generated 2026-06-24 23:00 UTC · git `9072cd1` · 15 theorems · tool lean_track_ · provenance: [L]=Lean fact [P]=Lean-checked prober [D]=derived [C]=curation_
 
 ## Axiom status  [L]
 - Project-specific (non-standard) axioms: **0**
@@ -57,7 +57,7 @@ _Generated 2026-06-24 09:49 UTC · git `7233ca0` · 14 theorems · tool lean_tra
 
 ## Curated piles  [C] *(author labels — NOT a Lean fact)*
 
-**PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)** (17 distinct)
+**PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)** (19 distinct)
   - `2 * Real.pi / hbar * Tkk = (-(2 * ↑Real.pi * ∫ (θ : ℝ), (starRingEnd ℂ) (f θ) * f' θ)).im`
   - `HasDerivAt
   (fun t =>
@@ -65,6 +65,7 @@ _Generated 2026-06-24 09:49 UTC · git `7233ca0` · 14 theorems · tool lean_tra
       ((QIQTH.StandardSubspaceModular.modUnitary (QIQTH.Fock.BoostKMS.niceWedgeStandardSubspace m ⋯ ⋯) t)
         (MeasureTheory.MemLp.toLp f hf2)))
   (Complex.I * ↑kd) 0`
+  - `η * c = Real.log ↑(Fintype.card ι)`
   - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
   QIQTH.EinsteinEOS.BL (g x) v = 0 →
     2 * Real.pi / hbar * (∑ b, v b * QIQTH.Curvature.pd φ b x) ^ 2 =
@@ -97,6 +98,8 @@ _Generated 2026-06-24 09:49 UTC · git `7233ca0` · 14 theorems · tool lean_tra
   - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ (t : ℝ), 0 ≤ KE x v t - S x v t`
   - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ (t : ℝ), 0 ≤ KE x v t - Sf x v t`
   - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), η * A x v 0 = Real.log ↑(Fintype.card ι)`
+  - `∀ (x : QIQTH.Curvature.Point 4),
+  QIQTH.Curvature.boxField φ (QIQTH.Curvature.ppMetric H) (QIQTH.Curvature.ppMetricInv H) x = m ^ 2 * φ x`
   - `∀ (x : QIQTH.Curvature.Point 4), QIQTH.Curvature.boxField φ g gi x = m ^ 2 * φ x`
 
 **PHYSICS — genuine input (EOM / Clausius / focusing / localization)** (2 distinct)
@@ -142,10 +145,22 @@ _Generated 2026-06-24 09:49 UTC · git `7233ca0` · 14 theorems · tool lean_tra
   - `∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), gi y a b = gi y b a`
   - `∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), ∑ σ, g y a σ * gi y σ b = if a = b then 1 else 0`
 
-**SETUP — per-generator derivative existence / null-congruence kinematics** (12 distinct)
+**SETUP — per-generator derivative existence / null-congruence kinematics** (15 distinct)
   - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (y : QIQTH.Curvature.Point 4) (μ : Fin 4),
   ∑ ν, W x v y ν * QIQTH.Curvature.covDerivVec g gi (W x v) ν μ y = 0`
   - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (μ : Fin 4), ContDiff ℝ ⊤ fun y => W x v y μ`
+  - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
+  QIQTH.EinsteinEOS.BL (QIQTH.Curvature.ppMetric H x) v = 0 →
+    HasDerivAt
+      (fun t =>
+        QIQTH.BranchLedger.Shannon Finset.univ (pp x v t) + QIQTH.RelEntPositivity.KL Finset.univ (pp x v t) (pp x v 0))
+      (2 * Real.pi / hbar *
+        QIQTH.EinsteinEOS.BL
+          (QIQTH.Curvature.kgStress m φ (QIQTH.Curvature.ppMetric H) (QIQTH.Curvature.ppMetricInv H) x) v)
+      0`
+  - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
+  QIQTH.EinsteinEOS.BL (QIQTH.Curvature.ppMetric H x) v = 0 →
+    HasDerivAt (fun t => QIQTH.BranchLedger.Shannon Finset.univ (pp x v t)) (sd x v) 0`
   - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
   QIQTH.EinsteinEOS.BL (g x) v = 0 →
     HasDerivAt
@@ -163,14 +178,18 @@ _Generated 2026-06-24 09:49 UTC · git `7233ca0` · 14 theorems · tool lean_tra
     ∑ μ, ∑ ν, QIQTH.Curvature.covDerivVec g gi (W x v) μ ν x * QIQTH.Curvature.covDerivVec g gi (W x v) ν μ x = 0`
   - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
   QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (fun t => QIQTH.BranchLedger.Shannon Finset.univ (pp x v t)) (sd x v) 0`
+  - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (QIQTH.Curvature.ppMetric H x) v = 0 → W x v x = v`
   - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (A x v) (ad x v) 0`
   - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (KE x v) (kd x v) 0`
   - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (S x v) (sd x v) 0`
   - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (Sf x v) (sd x v) 0`
   - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → W x v x = v`
 
-**(uncategorised surface hypotheses — 2)** *(no rule matched)*
+**(uncategorised surface hypotheses — 4)** *(no rule matched)*
+  - `ContDiff ℝ ⊤ H`
   - `Nonempty ι`
+  - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (p q : Fin 4) (y : QIQTH.Curvature.Point 4),
+  QIQTH.Curvature.covDerivVec (QIQTH.Curvature.ppMetric H) (QIQTH.Curvature.ppMetricInv H) (W x v) p q y = 0`
   - `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
   QIQTH.EinsteinEOS.BL (g x) v = 0 →
     ad x v = -∑ ν, W x v x ν * QIQTH.Curvature.pd (fun y => QIQTH.Curvature.expansion g gi (W x v) y) ν x`
@@ -230,6 +249,51 @@ _Generated 2026-06-24 09:49 UTC · git `7233ca0` · 14 theorems · tool lean_tra
 28. hmw [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), 0 < mw x v
 ```
 - **data binders (15):** `ι`, `g`, `gi`, `φ`, `m`, `η`, `hbar`, `a`, `P`, `Pinv`, `A`, `sd`, `pp`, `W`, `mw`
+
+### `QIQTH.WedgeKMSToGR.qiqt_gr_ppwave_showcase`  ·  *spine*
+- policy-clean · kind=thm  [L]
+- **conclusion:**
+```
+∃ Λ,
+  ∀ (x : QIQTH.Curvature.Point 4) (μ ν : Fin 4),
+    a * QIQTH.Curvature.kgStress m φ (QIQTH.Curvature.ppMetric H) (QIQTH.Curvature.ppMetricInv H) x μ ν =
+      QIQTH.Curvature.einsteinTensor (QIQTH.Curvature.ppMetric H) (QIQTH.Curvature.ppMetricInv H) μ ν x +
+        Λ * QIQTH.Curvature.ppMetric H x μ ν
+```
+- **hypotheses (18)** — name : status [P]/[D]:
+```
+1. inst._@.QIQTH.QiqtGrShowcase.1910216171._hygCtx._hyg.6 [surface] : Nonempty ι
+2. hCH [surface] : ContDiff ℝ ⊤ H
+3. hbar0 [surface] : hbar ≠ 0
+4. hbar_pos [surface] : 0 < hbar
+5. heta [surface] : η ≠ 0
+6. ha [surface] : a = 2 * Real.pi / (hbar * η)
+7. hφ [surface] : ContDiff ℝ ⊤ φ
+8. hKG [surface] : ∀ (x : QIQTH.Curvature.Point 4),
+  QIQTH.Curvature.boxField φ (QIQTH.Curvature.ppMetric H) (QIQTH.Curvature.ppMetricInv H) x = m ^ 2 * φ x
+9. hcap [surface] : η * c = Real.log ↑(Fintype.card ι)
+10. hpp_nn [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (t : ℝ) (r : ι), 0 ≤ pp x v t r
+11. hpp1 [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (t : ℝ), ∑ r, pp x v t r = 1
+12. hpp0 [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), pp x v 0 = fun x => (↑(Fintype.card ι))⁻¹
+13. hWx [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (QIQTH.Curvature.ppMetric H x) v = 0 → W x v x = v
+14. hWC [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (μ : Fin 4), ContDiff ℝ ⊤ fun y => W x v y μ
+15. hcov [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (p q : Fin 4) (y : QIQTH.Curvature.Point 4),
+  QIQTH.Curvature.covDerivVec (QIQTH.Curvature.ppMetric H) (QIQTH.Curvature.ppMetricInv H) (W x v) p q y = 0
+16. hS [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
+  QIQTH.EinsteinEOS.BL (QIQTH.Curvature.ppMetric H x) v = 0 →
+    HasDerivAt (fun t => QIQTH.BranchLedger.Shannon Finset.univ (pp x v t)) (sd x v) 0
+17. hK [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
+  QIQTH.EinsteinEOS.BL (QIQTH.Curvature.ppMetric H x) v = 0 →
+    HasDerivAt
+      (fun t =>
+        QIQTH.BranchLedger.Shannon Finset.univ (pp x v t) + QIQTH.RelEntPositivity.KL Finset.univ (pp x v t) (pp x v 0))
+      (2 * Real.pi / hbar *
+        QIQTH.EinsteinEOS.BL
+          (QIQTH.Curvature.kgStress m φ (QIQTH.Curvature.ppMetric H) (QIQTH.Curvature.ppMetricInv H) x) v)
+      0
+18. hmw [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), 0 < mw x v
+```
+- **data binders (12):** `ι`, `H`, `φ`, `m`, `η`, `hbar`, `a`, `c`, `sd`, `pp`, `W`, `mw`
 
 ### `QIQTH.WedgeKMSToGR.qiqt_gr_freefield_gaussian`  ·  *spine*
 - policy-clean · uses-spine: `qiqt_gr_freefield_nullEnergy` · kind=thm  [L]

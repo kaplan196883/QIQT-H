@@ -607,6 +607,412 @@
     ],
     "binders": [
       {
+        "info": "implicit",
+        "kind": "data",
+        "name": "ι",
+        "packedProps": [],
+        "type": "Type u_1",
+        "typeHead": "Sort"
+      },
+      {
+        "info": "instance",
+        "kind": "instance",
+        "name": "inst._@.QIQTH.QiqtGrShowcase.1910216171._hygCtx._hyg.3",
+        "packedProps": [],
+        "type": "Fintype ι",
+        "typeHead": "Fintype"
+      },
+      {
+        "info": "instance",
+        "kind": "prop",
+        "name": "inst._@.QIQTH.QiqtGrShowcase.1910216171._hygCtx._hyg.6",
+        "packedProps": [],
+        "type": "Nonempty ι",
+        "typeHead": "Nonempty",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": null
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "H",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hCH",
+        "packedProps": [],
+        "type": "ContDiff ℝ ⊤ H",
+        "typeHead": "ContDiff",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": null
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "φ",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "m",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "η",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "hbar",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "a",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hbar0",
+        "packedProps": [],
+        "type": "hbar ≠ 0",
+        "typeHead": "Ne",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hbar_pos",
+        "packedProps": [],
+        "type": "0 < hbar",
+        "typeHead": "LT.lt",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "heta",
+        "packedProps": [],
+        "type": "η ≠ 0",
+        "typeHead": "Ne",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "ha",
+        "packedProps": [],
+        "type": "a = 2 * Real.pi / (hbar * η)",
+        "typeHead": "Eq",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hφ",
+        "packedProps": [],
+        "type": "ContDiff ℝ ⊤ φ",
+        "typeHead": "ContDiff",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hKG",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4),\n  QIQTH.Curvature.boxField φ (QIQTH.Curvature.ppMetric H) (QIQTH.Curvature.ppMetricInv H) x = m ^ 2 * φ x",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "c",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hcap",
+        "packedProps": [],
+        "type": "η * c = Real.log ↑(Fintype.card ι)",
+        "typeHead": "Eq",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "sd",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "pp",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ → ι → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hpp_nn",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (t : ℝ) (r : ι), 0 ≤ pp x v t r",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hpp1",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (t : ℝ), ∑ r, pp x v t r = 1",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hpp0",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), pp x v 0 = fun x => (↑(Fintype.card ι))⁻¹",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "W",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → QIQTH.Curvature.Point 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hWx",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (QIQTH.Curvature.ppMetric H x) v = 0 → W x v x = v",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — per-generator derivative existence / null-congruence kinematics",
+          "rule": "setup"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hWC",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (μ : Fin 4), ContDiff ℝ ⊤ fun y => W x v y μ",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — per-generator derivative existence / null-congruence kinematics",
+          "rule": "setup"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hcov",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (p q : Fin 4) (y : QIQTH.Curvature.Point 4),\n  QIQTH.Curvature.covDerivVec (QIQTH.Curvature.ppMetric H) (QIQTH.Curvature.ppMetricInv H) (W x v) p q y = 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": null
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hS",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (QIQTH.Curvature.ppMetric H x) v = 0 →\n    HasDerivAt (fun t => QIQTH.BranchLedger.Shannon Finset.univ (pp x v t)) (sd x v) 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — per-generator derivative existence / null-congruence kinematics",
+          "rule": "setup"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hK",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (QIQTH.Curvature.ppMetric H x) v = 0 →\n    HasDerivAt\n      (fun t =>\n        QIQTH.BranchLedger.Shannon Finset.univ (pp x v t) + QIQTH.RelEntPositivity.KL Finset.univ (pp x v t) (pp x v 0))\n      (2 * Real.pi / hbar *\n        QIQTH.EinsteinEOS.BL\n          (QIQTH.Curvature.kgStress m φ (QIQTH.Curvature.ppMetric H) (QIQTH.Curvature.ppMetricInv H) x) v)\n      0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — per-generator derivative existence / null-congruence kinematics",
+          "rule": "setup"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "mw",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hmw",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), 0 < mw x v",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization",
+          "rule": "regularity"
+        }
+      }
+    ],
+    "concl": {
+      "head": "Exists",
+      "isFalse": false,
+      "isProp": true,
+      "isTrue": false,
+      "pp": "∃ Λ,\n  ∀ (x : QIQTH.Curvature.Point 4) (μ ν : Fin 4),\n    a * QIQTH.Curvature.kgStress m φ (QIQTH.Curvature.ppMetric H) (QIQTH.Curvature.ppMetricInv H) x μ ν =\n      QIQTH.Curvature.einsteinTensor (QIQTH.Curvature.ppMetric H) (QIQTH.Curvature.ppMetricInv H) μ ν x +\n        Λ * QIQTH.Curvature.ppMetric H x μ ν"
+    },
+    "kind": "thm",
+    "name": "QIQTH.WedgeKMSToGR.qiqt_gr_ppwave_showcase",
+    "present": true,
+    "proofUnusedBinders": [],
+    "proofUsesSpine": [],
+    "role": "spine",
+    "axiom_free_literal": false,
+    "policy_clean": true,
+    "nonstandard_axioms": [],
+    "falseProvable": false
+  },
+  {
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "binders": [
+      {
         "info": "explicit",
         "kind": "data",
         "name": "g",

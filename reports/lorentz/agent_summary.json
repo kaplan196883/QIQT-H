@@ -1,8 +1,8 @@
 {
   "track": "lorentz",
   "title": "Lorentz covariance",
-  "generated": "2026-06-24T09:51:17.842421+00:00",
-  "git": "7233ca0",
+  "generated": "2026-06-24T23:02:26.353470+00:00",
+  "git": "9072cd1",
   "totals": {
     "theorems": 11,
     "present": 11,
