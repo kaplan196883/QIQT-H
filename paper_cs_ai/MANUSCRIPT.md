@@ -27,8 +27,8 @@ explicitly labelled hypotheses (not axioms), alongside conservation and regulari
 differential geometry downstream (Bianchi, $\nabla^\mu G_{\mu\nu}=0$, the null-cone-to-tensor step,
 constant $\Lambda$) is machine-checked. The full assumption surface — 14 data binders and 23
 labelled hypotheses, with the `#print axioms` output — is listed in an appendix, and a separate
-machine-checked, project-axiom-free witness (a flat/vacuum instantiation) shows that premise set is
-*jointly satisfiable*, so the theorem is non-vacuous. The same development carries a
+machine-checked, project-axiom-free witness (a deliberately degenerate flat/vacuum instantiation)
+shows that premise set is *jointly satisfiable*, so the theorem is non-vacuous in the logical sense. The same development carries a
 project-axiom-free no-collapse measurement core; in total 192 modules, roughly 2,010 theorems, 0
 project-specific axioms, no `sorry`. We are explicit about scope: verification certifies that the
 derivation uses no project axiom, that its premises are labelled, and that they are satisfiable — but
@@ -611,7 +611,7 @@ zero-auto-dischargeable verdict establishes that the 23 hypotheses are *jointly 
 project-axiom-free theorem whose premises were secretly contradictory would be vacuously true, and
 the syntactic vacuity lint of §3.5 need not catch it. The audit certifies the absence of project
 axioms, not the consistency of the premise set. The rigorous remedy is a *model* — an explicit
-instantiation of every binder under which all 23 hypotheses hold and the conclusion is non-trivial.
+instantiation of every binder under which all 23 hypotheses simultaneously hold.
 We supply such a witness, machine-checked: a flat (Minkowski) background with vanishing
 stress-energy — `g = gi = (fun _ => gm)` (the constant reference metric, with $gm\cdot gm = I$), the
 identity frame, $T=0$, and zero entropy/modular-energy/area. The Lean theorem
@@ -620,10 +620,16 @@ identity frame, $T=0$, and zero entropy/modular-energy/area. The Lean theorem
 The one non-trivial lemma is that the Ricci tensor of a constant metric vanishes (its Christoffel
 symbols are built from metric derivatives, which are zero); we prove it, and the witness is itself
 project-axiom-free (`#print axioms` returns only the three standard axioms). So the headline premise
-set is demonstrably consistent and the theorem non-vacuous. We keep the general distinction explicit:
-the audit shows no project axiom and no syntactically vacuous premise, which for an *arbitrary*
-theorem is weaker than a consistency proof — making such a witness routine is methodological future
-work (§5.3) — but for the headline result the satisfiability is now machine-checked.
+set is demonstrably consistent and the theorem non-vacuous *in the logical sense* — its hypotheses
+are jointly satisfiable, ruling out the failure mode where the result holds only by explosion. We are
+equally clear about what the witness does *not* show: the model is deliberately degenerate (flat,
+$T=0$), so the flux, focusing, area-law, and conservation premises all reduce to $0=0$ and the
+conclusion to the vacuum equation. It exhibits a model of the premise set; it does not exercise the
+derivation on a curved or matter-bearing instance, and "non-vacuous" should be read throughout as
+"jointly satisfiable," not "physically rich." We also keep the general distinction explicit: the
+audit shows no project axiom and no syntactically vacuous premise, which for an *arbitrary* theorem
+is weaker than a consistency proof — making such a witness routine is methodological future work
+(§5.3) — but for the headline result the satisfiability is now machine-checked.
 
 ### 4.3 The rest of the development, with artifact metrics
 
@@ -875,9 +881,10 @@ demonstration at the scale of a whole theory, held throughout under an explicit 
 formalization certifies that the derivation uses no hidden axiom, given its labelled premises; it
 does not, and cannot, establish those cited inputs or the framework's physical postulates, which
 remain open — though a machine-checked witness (Appendix A) does establish that the headline premise
-set is jointly satisfiable, so the theorem is non-vacuous. We make the
-strong-sounding negative claim deliberately: this is not "AI proved general relativity," and the
-paper's value lies precisely in being able to say exactly what it is and is not.
+set is jointly satisfiable (via a deliberately degenerate flat/vacuum model), so the theorem is
+non-vacuous in the logical sense. We make the strong-sounding negative claim deliberately: this is
+not "AI proved general relativity," and the paper's value lies precisely in being able to say exactly
+what it is and is not.
 
 Three near-term directions follow. The first is independent multi-team replication, since the
 strongest test of a methodology is that others can run it, and the artifact is published so they can.
@@ -987,7 +994,9 @@ theorem qiqt_bekenstein_gives_gr_satisfiable :
 
 and `#print axioms QIQTH.QiqtGrWitness.qiqt_bekenstein_gives_gr_satisfiable` returns
 `[propext, Classical.choice, Quot.sound]` — project-axiom-free. Hence the headline premise set is
-provably consistent and the theorem demonstrably non-vacuous.
+provably consistent and the theorem non-vacuous in the logical (joint-satisfiability) sense. The
+model is deliberately degenerate — flat, $T=0$, so flux/focusing/area-law premises reduce to $0=0$
+and the conclusion to $G_{\mu\nu}=0$ — so it certifies consistency, not a physically rich instance.
 
 ---
 
