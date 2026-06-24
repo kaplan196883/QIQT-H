@@ -202,6 +202,9 @@ import QIQTH.BornActualityConsistency
 -- A1-ppwave: a non-flat (curved) witness for the Raychaudhuri congruence premises — the pp-wave
 -- metric whose null field ∂_v is covariantly constant (Stage 1: metric, inverse, symmetry).
 import QIQTH.PPWaveMetric
+-- A1+A2 worked example: QIQT→GR for the explicit pp-wave spacetime — all geometry (metric, tetrad
+-- congruence, smoothness) discharged concretely; FQ/realization + matter field carried (conditional).
+import QIQTH.QiqtGrPPWave
 -- Born FROM PROJECTORS: the operator bridge grounding the record/area contract. For a
 -- finite orthogonal PVM {P_r} and a normalized Φ, μ(r)=‖P_r Φ‖²=⟨Φ,P_rΦ⟩ is a genuine
 -- RecordContract.RecordLaw — so the contract rests on Born-from-Φ, not a toy distribution.

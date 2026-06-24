@@ -71,4 +71,24 @@ Upgrades the existing flat/vacuum witness to a curved, most-discharged one.
 ### Progress log
 - **Stage 1 ✅** (`ppMetric_contDiff`, `ppMetricInv_contDiff`; `QIQTH/PPWaveMetric.lean`) — the metric and
   inverse components are `C^∞` for smooth `H` (each is `H`, `−H`, or a constant), giving `hCg`/`hCgi`.
-  Axiom-free, budget 0. Next: Stage 2 (the explicit tetrad `P`/`Pinv` ⟹ `hcong`/`hPP`/`hPP'`).
+  Axiom-free, budget 0.
+- **Stage 2 ✅** (`ppFrame`/`ppFrameInv`, `ppFrame_cong`, `ppFrame_pp`, `ppFrame_pp'`, `ppMetricInv_symm`) — the
+  explicit tetrad diagonalizing the `(u,v)` block `[[H,1],[1,0]] → diag(−1,1)`; `hcong` (`g = PᵀgmP`),
+  `hPP`/`hPP'` (`P·Pinv=I`), and `hsymm_gi`. Axiom-free, budget 0.
+- **Stage 3+4+5 ✅** (`qiqt_gr_ppwave`, `QIQTH/QiqtGrPPWave.lean`) — the worked-example theorem: the Einstein
+  equations `a·kgStress = G + Λg` for `g = ppMetric H` (a curved pp-wave) with **every geometric premise
+  discharged concretely** (symmetry, inverse, smoothness, the tetrad's congruence + invertibility). Per §0/§Stage4,
+  the matter EOM `hKG` (curved-background KG field — documented frontier), the FQ/realization inputs
+  (`hbound`/`hcap`/`hK`/`hS`/`hA`), the record-law data, and a covariantly-constant congruence `W` are **carried**
+  (not faked). Axiom-free, budget 0.
+
+### COMPLETE
+A concrete **curved-spacetime** instance of QIQT→GR: all geometry (metric, inverse, smoothness, explicit tetrad
+congruence) discharged for the pp-wave, the conclusion conditional on the genuine FQ postulate + Gap-2
+realization + the matter field — a curved upgrade of the flat/vacuum `QiqtGrWitness`. The curved KG field
+(Stage 4) is carried as the documented frontier per the no-faking discipline.
+
+**Note (finding):** the most-discharged form `qiqt_gr_freefield_complete_covCong` (with `hcov` = `W` covariantly
+constant) is instantiable here by *carrying* `W`; a fully-`W`-free pp-wave instantiation is blocked because only
+`∂_v` is covariantly constant in the pp-wave, not congruences through *all* null directions — so the
+covariant-constancy reduction trades the geodesic-ODE frontier for a per-generator existence one. Documented.

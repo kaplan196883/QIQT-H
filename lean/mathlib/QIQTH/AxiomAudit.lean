@@ -2688,6 +2688,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Curvature.christoffel_ppMetric_x_uu
 -- A1+A2 worked-example Stage 1: pp-wave metric/inverse smoothness (hCg/hCgi) for smooth H:
 #print axioms QIQTH.Curvature.ppMetric_contDiff
+-- A1+A2 Stage 2: explicit pp-wave tetrad — frame congruence hcong + invertibility hPP/hPP':
+#print axioms QIQTH.Curvature.ppFrame_cong
+-- A1+A2 worked example: QIQT→GR for the explicit pp-wave spacetime (all geometry discharged; FQ carried):
+#print axioms QIQTH.WedgeKMSToGR.qiqt_gr_ppwave
 #print axioms QIQTH.SelectorRefinement.local_factor_remote_invariant
 -- expected: standard only — Gap-2 milestone 1: selector-locality (local marginal factors through ρ_A) +
 -- ρ_A-preservation under remote refinement ⇒ local marginal remote-invariant (the "remote" half of the bridge).

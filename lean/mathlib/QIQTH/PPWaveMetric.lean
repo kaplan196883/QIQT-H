@@ -44,6 +44,10 @@ theorem ppMetric_inv (H : Point 4 → ℝ) (x : Point 4) (a b : Fin 4) :
   fin_cases a <;> fin_cases b <;>
     simp [ppMetric, ppMetricInv, Fin.sum_univ_four] <;> ring
 
+theorem ppMetricInv_symm (H : Point 4 → ℝ) (x : Point 4) (a b : Fin 4) :
+    ppMetricInv H x a b = ppMetricInv H x b a := by
+  fin_cases a <;> fin_cases b <;> simp [ppMetricInv]
+
 /-! ### Stage 2 — the Christoffels with last index `1` vanish. -/
 
 /-- The metric component `g_{a1}` is constant (independent of the point), so its `pd` vanishes. -/
@@ -133,5 +137,49 @@ theorem ppMetricInv_contDiff (H : Point 4 → ℝ) (hCH : ContDiff ℝ ⊤ H) (a
     ContDiff ℝ ⊤ (fun y => ppMetricInv H y a b) := by
   fin_cases a <;> fin_cases b <;> simp only [ppMetricInv] <;>
     first | exact hCH.neg | exact contDiff_const | (simp; exact contDiff_const)
+
+/-! ### A1+A2 Stage 2 — an explicit tetrad `P`/`Pinv` ⟹ `hcong`/`hPP`/`hPP'`.
+
+The `(x,y)` block of `gm = diag(−1,1,1,1)` is already `δ`; the `(u,v)` block `[[H,1],[1,0]]` (`det=−1`)
+diagonalizes to `diag(−1,1)` via the coframe `e^a_b`:
+`e^0 = ((H−1)/2, 1, 0, 0)`, `e^1 = ((H+1)/2, 1, 0, 0)`, `e^2 = (0,0,1,0)`, `e^3 = (0,0,0,1)`. -/
+
+open QIQTH.EinsteinEOS
+
+/-- The pp-wave **coframe** `P_{ab} = e^a_b`. -/
+noncomputable def ppFrame (H : Point 4 → ℝ) (x : Point 4) (a b : Fin 4) : ℝ :=
+  if a = 0 ∧ b = 0 then (H x - 1) / 2
+  else if a = 1 ∧ b = 0 then (H x + 1) / 2
+  else if (a = 0 ∧ b = 1) ∨ (a = 1 ∧ b = 1) then 1
+  else if (a = 2 ∧ b = 2) ∨ (a = 3 ∧ b = 3) then 1
+  else 0
+
+/-- The inverse frame `Pinv = P⁻¹`. -/
+noncomputable def ppFrameInv (H : Point 4 → ℝ) (x : Point 4) (a b : Fin 4) : ℝ :=
+  if a = 0 ∧ b = 0 then -1
+  else if a = 0 ∧ b = 1 then 1
+  else if a = 1 ∧ b = 0 then (H x + 1) / 2
+  else if a = 1 ∧ b = 1 then -(H x - 1) / 2
+  else if (a = 2 ∧ b = 2) ∨ (a = 3 ∧ b = 3) then 1
+  else 0
+
+/-- **`hcong` for the pp-wave**: `g_{ij} = ∑_{kl} P_{ki} gm_{kl} P_{lj}` (the metric is the Minkowski reference
+    pulled back by the tetrad). -/
+theorem ppFrame_cong (H : Point 4 → ℝ) (x : Point 4) (i j : Fin 4) :
+    ppMetric H x i j = ∑ k, ∑ l, ppFrame H x k i * gm k l * ppFrame H x l j := by
+  fin_cases i <;> fin_cases j <;>
+    simp [ppMetric, ppFrame, gm, Fin.sum_univ_four] <;> ring
+
+/-- **`hPP` for the pp-wave**: `∑_k P_{ik} Pinv_{kj} = δ_{ij}`. -/
+theorem ppFrame_pp (H : Point 4 → ℝ) (x : Point 4) (i j : Fin 4) :
+    (∑ k, ppFrame H x i k * ppFrameInv H x k j) = if i = j then 1 else 0 := by
+  fin_cases i <;> fin_cases j <;>
+    simp [ppFrame, ppFrameInv, Fin.sum_univ_four] <;> ring
+
+/-- **`hPP'` for the pp-wave**: `∑_k Pinv_{ik} P_{kj} = δ_{ij}`. -/
+theorem ppFrame_pp' (H : Point 4 → ℝ) (x : Point 4) (i j : Fin 4) :
+    (∑ k, ppFrameInv H x i k * ppFrame H x k j) = if i = j then 1 else 0 := by
+  fin_cases i <;> fin_cases j <;>
+    simp [ppFrame, ppFrameInv, Fin.sum_univ_four] <;> ring
 
 end QIQTH.Curvature
