@@ -1,15 +1,19 @@
 # T3-3 — Localization / the bridge map (Gap 2): discharge `hFocus`, `hbridge`, `hTkk`
 
-**Status:** IN PROGRESS — Stages 0 ✅, 1 ✅ done. **Track:** GR. **Goal capstone:**
+**Status:** IN PROGRESS — Stages 0 ✅, 1 ✅, 2 ✅ done. **Track:** GR. **Goal capstone:**
 `QIQTH.WedgeKMSToGR.qiqt_gr_freefield` (`lean/mathlib/QIQTH/QiqtGrFreeField.lean`).
 
 ### Progress log
 - **Stage 0 ✅** (`BL_kgStress_null`, `QiqtGrFreeField.lean`) — null-stress simplification
   `BL(kgStress) v = (∑ₐ vₐ ∂ₐφ)²` on `BL(g x)v=0`. Axiom-free, budget 0.
-- **Stage 1 ✅** (`qiqt_gr_freefield_localized`, `QiqtGrFreeField.lean`) — **`hbridge` discharged.** New
-  capstone fixes `kd := (2π/ℏ)·BL(kgStress)v` and derives `hbridge` internally from
-  `freeField_oneParticle_hFlux`; `hK` now states the heat rate IS `(2π/ℏ)·T_kk`. Gap-2 surface down to
-  `hTkk` + `hFocus`. Axiom-free `[propext, Classical.choice, Quot.sound]`, budget 0. Next: Stage 2 (`hFocus`).
+- **Stage 1 ✅** (`qiqt_gr_freefield_localized`) — **`hbridge` discharged.** Fixes `kd := (2π/ℏ)·BL(kgStress)v`
+  and derives `hbridge` from `freeField_oneParticle_hFlux`; `hK` now states heat rate IS `(2π/ℏ)·T_kk`.
+  Axiom-free, budget 0.
+- **Stage 2 ✅** (`qiqt_gr_freefield_localized'`) — **`hFocus` discharged.** The Raychaudhuri focusing law
+  `ad = R_kk` derived from a per-generator smooth geodesic congruence `W` at equilibrium (`hFocus_of_raychaudhuri`),
+  christoffel smoothness itself discharged (`christoffel_contDiff`). **Gap-2 surface now = `hTkk` ALONE.**
+  Axiom-free `[propext, Classical.choice, Quot.sound]`, budget 0. Next: Stage 3 (`hTkk` — the genuine
+  Unruh/BW stress identification; high risk per §3).
 
 ## 0. What this is
 
@@ -105,6 +109,9 @@ Provide a null congruence and apply `hFocus_of_raychaudhuri`. Two sub-steps:
 proved — the residue is kinematics, not the focusing law. **Risk: medium** (constructing a `V` that satisfies
 `hgeo`+`hequil` concretely; fallback: keep `V` + its three kinematic premises as the labelled surface — still
 strictly better, since the focusing *law* is discharged).
+**✅ DONE** (fallback form, the honest one) — `qiqt_gr_freefield_localized'` takes the per-generator congruence
+`W` + (`hWx`,`hWC`,`hWgeo`,`hWequil`,`hWarea`) and *derives* `hFocus`; christoffel smoothness discharged via
+`christoffel_contDiff`. Axiom-free, budget 0. Focusing law proved; residue is pure kinematics, no Einstein.
 
 ### Stage 3 — `hTkk`: the genuine localization map *(the hard core; the real Gap-2 physics)*
 Construct the mode and prove the stress identity. Two sub-steps:
