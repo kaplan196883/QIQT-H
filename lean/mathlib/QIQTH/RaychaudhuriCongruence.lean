@@ -41,4 +41,37 @@ theorem covDerivVec_constMetric_const (G : Fin n → Fin n → ℝ)
   simp only [covDerivVec, pd_const, QIQTH.QiqtGrWitness.christoffel_constMetric, zero_mul,
     Finset.sum_const_zero, add_zero]
 
+/-- **Stage 3 — zero expansion for a covariantly-constant congruence.**  The expansion `θ = ∑_μ ∇_μ V^μ`
+    of a covariantly-constant `V` vanishes identically (every `∇_μ V^μ = 0`). -/
+theorem expansion_eq_zero_of_covConst (g gi : Point n → Fin n → Fin n → ℝ)
+    (V : Point n → Fin n → ℝ) (hcov : ∀ a b y, covDerivVec g gi V a b y = 0) (x : Point n) :
+    expansion g gi V x = 0 := by
+  simp only [expansion]
+  exact Finset.sum_eq_zero (fun μ _ => hcov μ μ x)
+
+/-- The coordinate derivative of the (identically-zero) expansion is zero. -/
+theorem pd_expansion_zero_of_covConst (g gi : Point n → Fin n → Fin n → ℝ)
+    (V : Point n → Fin n → ℝ) (hcov : ∀ a b y, covDerivVec g gi V a b y = 0)
+    (ν : Fin n) (x : Point n) :
+    pd (fun y => expansion g gi V y) ν x = 0 := by
+  have h0 : (fun y => expansion g gi V y) = (fun _ => (0 : ℝ)) :=
+    funext (fun y => expansion_eq_zero_of_covConst g gi V hcov y)
+  rw [h0]; exact pd_const 0 ν x
+
+/-- **Stage 3 — the area-derivative witness `hA` for a covariantly-constant congruence.**  A covariantly-
+    constant congruence has identically-zero expansion, so the Raychaudhuri area-rate
+    `-∑_ν V^ν ∂_ν θ` is `0`, and a constant cross-sectional area satisfies the capstone's `hA`
+    (`HasDerivAt (area) (rate) 0`) — the `θ = 0` case (area preserved along a shear-free, expansion-free
+    congruence).  Discharges `hA` for the flat / pp-wave (∂_v) congruence, the same setting in which
+    `hWgeo`/`hWequil` reduce.  The expanding (θ≠0) curved case needs the geodesic-ODE / area-element
+    machinery Mathlib lacks (the cited frontier, header). -/
+theorem area_hasDerivAt_of_covConst (g gi : Point n → Fin n → Fin n → ℝ)
+    (V : Point n → Fin n → ℝ) (hcov : ∀ a b y, covDerivVec g gi V a b y = 0)
+    (x : Point n) (c : ℝ) :
+    HasDerivAt (fun _ : ℝ => c)
+      (-∑ ν, V x ν * pd (fun y => expansion g gi V y) ν x) 0 := by
+  have hrate : (-∑ ν, V x ν * pd (fun y => expansion g gi V y) ν x) = 0 := by
+    simp [pd_expansion_zero_of_covConst g gi V hcov]
+  rw [hrate]; exact hasDerivAt_const 0 c
+
 end QIQTH.Curvature

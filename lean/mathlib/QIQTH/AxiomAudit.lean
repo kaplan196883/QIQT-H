@@ -4888,6 +4888,9 @@ namespace QIQTH.AxiomAudit
 -- T3-GR-Raychaudhuri: hWgeo/hWequil from W covariantly constant; flat-metric witness:
 #print axioms QIQTH.Curvature.raychaudhuri_setup_of_covConst
 #print axioms QIQTH.Curvature.covDerivVec_constMetric_const
+-- GR scaffolding B: area-derivative hA from W covariantly constant (θ=0 ⟹ area-rate 0 ⟹ constant area):
+#print axioms QIQTH.Curvature.expansion_eq_zero_of_covConst
+#print axioms QIQTH.Curvature.area_hasDerivAt_of_covConst
 -- complete capstone with hWgeo/hWequil collapsed to one covariant-constancy condition:
 #print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_complete_covCong
 

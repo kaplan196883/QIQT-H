@@ -120,4 +120,13 @@ prints CHANGES.
   identifying its rates `sd`/`2π·ℏ⁻¹·BL(kgStress)` with the witness rate — that identification is `hTkk`
   (physics/localization), already its own labelled input, not an entropy fact. Full concrete instantiation
   overlaps Workstream C (a model where `pp`/`Sf`/`sd` are explicit).
-- **NEXT: Workstream B** — area derivative `hA` for the explicit (flat / pp-wave) congruence.
+- **Workstream B ✅** (`expansion_eq_zero_of_covConst`, `pd_expansion_zero_of_covConst`,
+  `area_hasDerivAt_of_covConst`; extends `RaychaudhuriCongruence.lean`) — a covariantly-constant congruence
+  has identically-zero expansion `θ = ∑_μ ∇_μ V^μ`, so its coordinate derivative vanishes and the Raychaudhuri
+  area-rate `-∑_ν V^ν ∂_ν θ = 0`; a constant cross-sectional area then satisfies the capstone's `hA`
+  (`HasDerivAt (area) (rate) 0`). This is the `θ=0` case (area preserved along a shear-free, expansion-free
+  congruence), discharging `hA` for the flat / pp-wave (∂_v) congruence — the same setting that reduces
+  `hWgeo`/`hWequil` via `covCong`. Axiom-free (std 3); wired into AxiomAudit; budget 0. The expanding (θ≠0)
+  curved case needs the geodesic-ODE / area-element machinery Mathlib lacks (cited frontier, file header).
+- **NEXT: Workstream C** — a second explicit localization mode beyond Gaussian (broaden `hTkk` + the
+  `hf2/hf_int/hfd/hf'_meas/hB` regularity block). Hardest; do last.
