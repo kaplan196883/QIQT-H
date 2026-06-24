@@ -185,6 +185,9 @@ import QIQTH.LocalizedMode
 -- T3-3-C2: the concrete calibrated profile — a Gaussian wave packet satisfies the mode calibration,
 -- closing the last analytic input (hcal) of the localization map.
 import QIQTH.GaussianMode
+-- T3-3-C3: the free-field QIQT→GR capstone with the localization mode CONSTRUCTED from φ
+-- (ff = field-gradient · Gaussian), hTkk discharged in the GR theorem itself.
+import QIQTH.QiqtGrGaussian
 -- Born FROM PROJECTORS: the operator bridge grounding the record/area contract. For a
 -- finite orthogonal PVM {P_r} and a normalized Φ, μ(r)=‖P_r Φ‖²=⟨Φ,P_rΦ⟩ is a genuine
 -- RecordContract.RecordLaw — so the contract rests on Born-from-Φ, not a toy distribution.

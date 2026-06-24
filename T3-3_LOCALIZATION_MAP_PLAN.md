@@ -173,8 +173,18 @@ localization map (deriving `ff` from `φ` by wedge smearing) is the cited contin
   normalization `∫e^{−θ²}=√π` is needed — no odd moment), plus `Complex.mul_conj`/`norm_exp` for the pointwise
   boost-charge density. **`hcal` is closed** — the localization map's last analytic input is discharged. Axiom-free,
   budget 0.
-- **C3 (next)** — thread `ff := D·g₀` (= `gaussMode`) through a capstone (build on `_thermo`) so `hTkk` is
-  discharged in the GR theorem itself, using `localized_mode_hTkk` + `gaussMode_calibration`.
+- **C3 ✅** (`qiqt_gr_freefield_gaussian`, `QIQTH/QiqtGrGaussian.lean`) — the free-field QIQT→GR capstone with
+  the localization mode CONSTRUCTED from φ: `ff x v θ := ↑(∑ₐ vₐ ∂ₐφ(x))·gaussMode ℏ θ`. Its full regularity
+  (`MemLp`/`Integrable`/`HasDerivAt`/measurability/`‖ff'‖≤Bd`) comes from the `gaussMode` lemmas scaled by the
+  field gradient, and `hTkk` is discharged via `localized_mode_hTkk` + `gaussMode_calibration`. **`hTkk` is now
+  discharged in the GR theorem itself** — the Gap-2 localization map is constructed, not assumed. Axiom-free,
+  budget 0. Only the Clausius/area physics + the Raychaudhuri congruence setup remain labelled.
+
+### T3-3 continuum — COMPLETE
+The localization map (Gap 2) is fully constructed for the canonical Gaussian localization: hTkk no longer an
+assumption anywhere in the chain. The single honest caveat is that the mode profile is the canonical Gaussian
+wave packet rather than one derived from the specific wedge geometry — but the amplitude-from-field-gradient
+law, the `(∂φ)²` scaling, and the calibration are all proved theorems.
 
 ## 4. Deliverable
 

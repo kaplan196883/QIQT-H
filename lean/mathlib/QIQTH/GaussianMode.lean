@@ -39,24 +39,27 @@ theorem gaussC_sq_mul_sqrt (hbar : ℝ) (hb : 0 < hbar) :
   rw [inv_pow, Real.sq_sqrt hbπ.le]
   field_simp
 
-/-- The pointwise boost-charge density: `conj(g₀ θ)·g₀'(θ) = ↑(C²·e^{−θ²})·(−θ − i)`. -/
-theorem gaussMode_conj_mul (hbar : ℝ) (θ : ℝ) :
-    (starRingEnd ℂ) (gaussMode hbar θ) * gaussMode' hbar θ
-      = ((gaussC hbar ^ 2 * Real.exp (-θ ^ 2) : ℝ) : ℂ) * (-(θ : ℂ) - Complex.I) := by
+/-- `normSq(g₀ θ) = C²·e^{−θ²}` — the Gaussian envelope. -/
+theorem gaussMode_normSq (hbar : ℝ) (θ : ℝ) :
+    Complex.normSq (gaussMode hbar θ) = gaussC hbar ^ 2 * Real.exp (-θ ^ 2) := by
   have hexp : Real.exp (-θ ^ 2 / 2) ^ 2 = Real.exp (-θ ^ 2) := by
     rw [pow_two, ← Real.exp_add]; congr 1; ring
   have hwre : (((-θ ^ 2 / 2 : ℝ) : ℂ) - (θ : ℂ) * Complex.I).re = -θ ^ 2 / 2 := by
     simp only [Complex.sub_re, Complex.ofReal_re, Complex.mul_re, Complex.ofReal_im, Complex.I_re,
       Complex.I_im]
     ring
-  have hns : Complex.normSq (gaussMode hbar θ) = gaussC hbar ^ 2 * Real.exp (-θ ^ 2) := by
-    unfold gaussMode
-    rw [Complex.normSq_mul, Complex.normSq_ofReal,
-      Complex.normSq_eq_norm_sq (Complex.exp _), Complex.norm_exp, hwre, hexp]
-    ring
+  unfold gaussMode
+  rw [Complex.normSq_mul, Complex.normSq_ofReal,
+    Complex.normSq_eq_norm_sq (Complex.exp _), Complex.norm_exp, hwre, hexp]
+  ring
+
+/-- The pointwise boost-charge density: `conj(g₀ θ)·g₀'(θ) = ↑(C²·e^{−θ²})·(−θ − i)`. -/
+theorem gaussMode_conj_mul (hbar : ℝ) (θ : ℝ) :
+    (starRingEnd ℂ) (gaussMode hbar θ) * gaussMode' hbar θ
+      = ((gaussC hbar ^ 2 * Real.exp (-θ ^ 2) : ℝ) : ℂ) * (-(θ : ℂ) - Complex.I) := by
   unfold gaussMode'
   rw [← mul_assoc, mul_comm ((starRingEnd ℂ) (gaussMode hbar θ)) (gaussMode hbar θ),
-    Complex.mul_conj, hns]
+    Complex.mul_conj, gaussMode_normSq]
 
 /-- The boost-charge integrand is integrable (Gaussian × polynomial). -/
 theorem gaussMode_integrable (hbar : ℝ) :
@@ -111,5 +114,93 @@ theorem gaussMode_calibration (hbar : ℝ) (hb : 0 < hbar) :
     ring
   rw [hpiim, himInt, hintval, gaussC_sq_mul_sqrt hbar hb]
   ring
+
+/-! ### Regularity of the Gaussian mode (for the capstone's `ff` requirements). -/
+
+theorem gaussC_pos (hbar : ℝ) (hb : 0 < hbar) : 0 < gaussC hbar :=
+  inv_pos.mpr (Real.sqrt_pos.mpr (by positivity))
+
+/-- `‖g₀(θ)‖ = C·e^{−θ²/2}` (from `normSq = C²e^{−θ²}`). -/
+theorem gaussMode_norm (hbar : ℝ) (hb : 0 < hbar) (θ : ℝ) :
+    ‖gaussMode hbar θ‖ = gaussC hbar * Real.exp (-θ ^ 2 / 2) := by
+  rw [← Real.sqrt_sq (norm_nonneg (gaussMode hbar θ)), ← Complex.normSq_eq_norm_sq, gaussMode_normSq,
+    show gaussC hbar ^ 2 * Real.exp (-θ ^ 2) = (gaussC hbar * Real.exp (-θ ^ 2 / 2)) ^ 2 by
+      rw [mul_pow, ← Real.exp_nat_mul]; congr 2; push_cast; ring]
+  exact Real.sqrt_sq (mul_nonneg (gaussC_pos hbar hb).le (Real.exp_pos _).le)
+
+theorem gaussMode_continuous (hbar : ℝ) : Continuous (gaussMode hbar) := by
+  unfold gaussMode; fun_prop
+
+theorem gaussMode_hasDerivAt (hbar : ℝ) (θ : ℝ) :
+    HasDerivAt (gaussMode hbar) (gaussMode' hbar θ) θ := by
+  have hpoly : HasDerivAt (fun y : ℝ => -y ^ 2 / 2) (-θ) θ := by
+    have h := (hasDerivAt_pow 2 θ).const_mul (-1 / 2 : ℝ)
+    convert h using 1
+    · funext y; ring
+    · push_cast; ring
+  have h1 : HasDerivAt (fun y : ℝ => ((-y ^ 2 / 2 : ℝ) : ℂ)) ((-θ : ℝ) : ℂ) θ := hpoly.ofReal_comp
+  have h2 : HasDerivAt (fun y : ℝ => (y : ℂ) * Complex.I) Complex.I θ := by
+    have := ((hasDerivAt_id θ).ofReal_comp).mul_const Complex.I
+    simpa using this
+  have hu : HasDerivAt (fun y : ℝ => ((-y ^ 2 / 2 : ℝ) : ℂ) - (y : ℂ) * Complex.I)
+      (-(θ : ℂ) - Complex.I) θ := by
+    have := h1.sub h2; simpa using this
+  have hcexp := (hu.cexp).const_mul (gaussC hbar : ℂ)
+  have heq : gaussMode' hbar θ
+      = (gaussC hbar : ℂ) * (Complex.exp (((-θ ^ 2 / 2 : ℝ) : ℂ) - (θ : ℂ) * Complex.I)
+          * (-(θ : ℂ) - Complex.I)) := by
+    unfold gaussMode' gaussMode; ring
+  rw [heq]; exact hcexp
+
+theorem gaussMode'_continuous (hbar : ℝ) : Continuous (gaussMode' hbar) := by
+  unfold gaussMode'; exact (gaussMode_continuous hbar).mul (by fun_prop)
+
+/-- `‖g₀'(θ)‖ ≤ C`, via `1 + θ² ≤ e^{θ²}` so `e^{−θ²/2}√(θ²+1) ≤ 1`. -/
+theorem gaussMode'_norm_le (hbar : ℝ) (hb : 0 < hbar) (θ : ℝ) :
+    ‖gaussMode' hbar θ‖ ≤ gaussC hbar := by
+  unfold gaussMode'
+  rw [norm_mul, gaussMode_norm hbar hb]
+  have hnI : ‖-(θ : ℂ) - Complex.I‖ = Real.sqrt (θ ^ 2 + 1) := by
+    rw [← Real.sqrt_sq (norm_nonneg (-(θ : ℂ) - Complex.I)), ← Complex.normSq_eq_norm_sq]
+    congr 1
+    simp only [Complex.normSq_apply, Complex.sub_re, Complex.sub_im, Complex.neg_re,
+      Complex.neg_im, Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im]
+    ring
+  rw [hnI]
+  have hb1 : Real.sqrt (θ ^ 2 + 1) ≤ Real.exp (θ ^ 2 / 2) := by
+    have h2 : Real.exp (θ ^ 2 / 2) ^ 2 = Real.exp (θ ^ 2) := by
+      rw [← Real.exp_nat_mul]; congr 1; push_cast; ring
+    rw [← Real.sqrt_sq (Real.exp_pos (θ ^ 2 / 2)).le, h2]
+    exact Real.sqrt_le_sqrt (by linarith [Real.add_one_le_exp (θ ^ 2)])
+  calc gaussC hbar * Real.exp (-θ ^ 2 / 2) * Real.sqrt (θ ^ 2 + 1)
+      ≤ gaussC hbar * Real.exp (-θ ^ 2 / 2) * Real.exp (θ ^ 2 / 2) :=
+        mul_le_mul_of_nonneg_left hb1 (mul_nonneg (gaussC_pos hbar hb).le (Real.exp_pos _).le)
+    _ = gaussC hbar := by
+        rw [mul_assoc, ← Real.exp_add, show -θ ^ 2 / 2 + θ ^ 2 / 2 = 0 by ring, Real.exp_zero,
+          mul_one]
+
+theorem gaussMode_sq_integrable (hbar : ℝ) :
+    Integrable (fun θ => ‖gaussMode hbar θ‖ ^ 2) (volume : Measure ℝ) := by
+  have hg : Integrable (fun θ : ℝ => gaussC hbar ^ 2 * Real.exp (-θ ^ 2)) volume := by
+    have := integrable_exp_neg_mul_sq (b := 1) (by norm_num)
+    refine (this.const_mul (gaussC hbar ^ 2)).congr (Filter.Eventually.of_forall (fun θ => ?_))
+    simp
+  refine hg.congr (Filter.Eventually.of_forall (fun θ => ?_))
+  show gaussC hbar ^ 2 * Real.exp (-θ ^ 2) = ‖gaussMode hbar θ‖ ^ 2
+  rw [← Complex.normSq_eq_norm_sq, gaussMode_normSq]
+
+theorem gaussMode_memLp (hbar : ℝ) : MemLp (gaussMode hbar) 2 (volume : Measure ℝ) :=
+  (memLp_two_iff_integrable_sq_norm (gaussMode_continuous hbar).aestronglyMeasurable).mpr
+    (gaussMode_sq_integrable hbar)
+
+theorem gaussMode_integrable_fn (hbar : ℝ) (hb : 0 < hbar) :
+    Integrable (gaussMode hbar) (volume : Measure ℝ) := by
+  have hg : Integrable (fun θ : ℝ => gaussC hbar * Real.exp (-θ ^ 2 / 2)) volume := by
+    have := integrable_exp_neg_mul_sq (b := 1 / 2) (by norm_num)
+    refine (this.const_mul (gaussC hbar)).congr (Filter.Eventually.of_forall (fun θ => ?_))
+    show gaussC hbar * Real.exp (-(1 / 2) * θ ^ 2) = gaussC hbar * Real.exp (-θ ^ 2 / 2)
+    rw [show -(1 / 2 : ℝ) * θ ^ 2 = -θ ^ 2 / 2 by ring]
+  exact Integrable.mono' hg (gaussMode_continuous hbar).aestronglyMeasurable
+    (Filter.Eventually.of_forall (fun θ => le_of_eq (gaussMode_norm hbar hb θ)))
 
 end QIQTH.WedgeKMSToGR

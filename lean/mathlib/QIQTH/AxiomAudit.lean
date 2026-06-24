@@ -4853,6 +4853,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WedgeKMSToGR.localized_mode_hTkk
 -- T3-3-C2: a concrete Gaussian wave packet satisfies the calibration (Im ∫ conj g₀ g₀' = −1/ℏ):
 #print axioms QIQTH.WedgeKMSToGR.gaussMode_calibration
+-- T3-3-C3: free-field QIQT→GR with the localization mode CONSTRUCTED from φ — hTkk discharged:
+#print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_gaussian
 
 -- Tier A1 of QIQT_GR_DISCHARGEABLE_PLAN: discharge hric_symm.
 #print axioms QIQTH.Curvature.ricci_symm
