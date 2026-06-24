@@ -14,12 +14,11 @@ The primary statement of the program: the $(\Phi,\lambda)$ single-world no-colla
 finite-information premise as a record *stage*, the regional cost functional $\chi_R$, and an honest account
 of what remains [open](/open-problems). It includes the **retirement of the Macroscopic Definiteness
 Conjecture** (capacity does not forbid records, a category error) and reframes the single outcome as λ's, with
-the machine-checked covariant Born-*reduction* (to a single typicality premise, with a no-go that some premise is unavoidable) and consistency results as the substantive contribution. Submitted to arXiv
-(quant-ph; cross-listed math-ph, gr-qc), currently under moderation.
+the machine-checked covariant Born-*reduction* (to a single typicality premise, with a no-go that some premise is unavoidable) and consistency results as the substantive contribution. Being prepared for
+submission to a peer-reviewed venue (quantum foundations; math-ph, gr-qc).
 
 **[Read the PDF](/QIQT_Foundations_Paper.pdf)**
-&nbsp;·&nbsp; Submitted to arXiv; under moderation. The arXiv link will be posted here once it is
-announced; for now the current build is served directly from this site.
+&nbsp;·&nbsp; Preprint, served directly from this site. A DOI will be posted here once available.
 
 ## Methods paper — the way in
 
@@ -38,8 +37,8 @@ reader who wants to see *how* the program is built and checked before reading th
 [foundations paper](#foundations-paper) above for *what* it claims.
 
 **[Read the PDF](/QIQT_AI_Methodology.pdf)**
-&nbsp;·&nbsp; Submitted to arXiv (primary cs.AI; cross-listed gr-qc, quant-ph, physics.hist-ph),
-currently under moderation. The arXiv link will be posted here once it is announced.
+&nbsp;·&nbsp; Preprint, served directly from this site; being prepared for submission to a
+peer-reviewed venue. A DOI will be posted here once available.
 
 ## Formalization companion
 
@@ -79,5 +78,5 @@ The machine-checked substrate lives in the project repository. Every theorem is 
 
 ## How to cite
 
-Until the preprint is live, cite as: P. Kapłański, *One Wave Function, One World*, preprint, 2026. A
-DOI and arXiv identifier will be added here on release.
+Cite as: P. Kapłański, *One Wave Function, One World*, preprint, 2026 (qiqt.org). A DOI will be added
+here once available.
