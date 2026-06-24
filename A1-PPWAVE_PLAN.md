@@ -72,5 +72,12 @@ documented and the witness (Stages 1–3) stands on the non-flat metric class.
 ### Progress log
 - **Stage 1 ✅** (`ppMetric`, `ppMetricInv`, `ppMetric_symm`, `ppMetric_inv`; `QIQTH/PPWaveMetric.lean`) — the
   pp-wave metric `[[H,1,0,0],[1,0,0,0],[0,0,1,0],[0,0,0,1]]` and its inverse, with symmetry and `g·gi = I`
-  (the `hinv` premise) proved by `Fin 4` case-bashing. Axiom-free, budget 0. Next: Stage 2
-  (`christoffel … 1 ≡ 0`).
+  (the `hinv` premise) proved by `Fin 4` case-bashing. Axiom-free, budget 0.
+- **Stage 2 ✅** (`christoffel_ppMetric_last_one` + helpers `pd_ppMetric_snd_one`/`pd_ppMetric_dir_one`) — every
+  Christoffel with last index `1` vanishes (`Γ^μ_{ν1} ≡ 0`): all three metric-derivative terms are zero
+  (`g_{·1}` constant; `pd H 1 = 0`). Axiom-free, budget 0.
+- **Stage 3 ✅** (`ppMetric_covDerivVec_v_zero`, `ppMetric_raychaudhuri_setup`) — `∂_v` (`ppV`) is covariantly
+  constant (`∇ ∂_v ≡ 0`), hence `hWgeo ∧ hWequil` hold for the pp-wave congruence via
+  `raychaudhuri_setup_of_covConst`. **A non-flat (curved-metric-class) witness for the Raychaudhuri congruence
+  premises** — upgrades the flat (degenerate) witness. Axiom-free, budget 0. Next: Stage 4 (`Ric≠0` for a
+  non-harmonic `H`, high-risk) — or document the standard `Ric₀₀=−½Δ⊥H` if the Ricci computation is too heavy.

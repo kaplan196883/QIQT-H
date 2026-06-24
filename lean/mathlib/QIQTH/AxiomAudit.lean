@@ -2681,6 +2681,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BornActualityConsistency.apc_iff_positiveAdditive
 -- A1-ppwave Stage 1: the pp-wave metric, its inverse, symmetry and g·gi=I:
 #print axioms QIQTH.Curvature.ppMetric_inv
+-- A1-ppwave Stage 2-3: Γ^μ_{ν1}≡0 ⟹ ∂_v covariantly constant ⟹ hWgeo/hWequil on a CURVED metric:
+#print axioms QIQTH.Curvature.christoffel_ppMetric_last_one
+#print axioms QIQTH.Curvature.ppMetric_raychaudhuri_setup
 #print axioms QIQTH.SelectorRefinement.local_factor_remote_invariant
 -- expected: standard only — Gap-2 milestone 1: selector-locality (local marginal factors through ρ_A) +
 -- ρ_A-preservation under remote refinement ⇒ local marginal remote-invariant (the "remote" half of the bridge).
