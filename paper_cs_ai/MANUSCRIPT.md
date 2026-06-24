@@ -1162,9 +1162,9 @@ and the conclusion to $G_{\mu\nu}=0$), so it certifies consistency, not a physic
 
 [41] Srikanth, R. (2006). *The quantum measurement problem and physical reality: a computation theoretic perspective.* arXiv:quant-ph/0602114.
 
-[42] Kapłański, P. (2026). *One Wave Function, One World: Finite-Information Regional Algebras and the Macroscopic World from Holographic Constraint.* Companion foundations paper.
+[42] Kapłański, P. (2026). *One Wave Function, One World: Finite-Information Regional Algebras and the Macroscopic World from Holographic Constraint.* Companion foundations paper; available at the project site, qiqt.org.
 
-[43] Kapłański, P. (2026). *QIQT-H formalization repository and master write-up (WRITEUP.md).* Project repository, lean/mathlib/QIQTH/.
+[43] Kapłański, P. (2026). *QIQT-H formalization repository and master write-up (WRITEUP.md).* Public repository github.com/kaplan196883/QIQT-H (development in lean/mathlib/QIQTH/); project site qiqt.org.
 
 [44] Massot, P. (2023). *Leanblueprint: a tool for formalization projects.* leanprover-community.
 
