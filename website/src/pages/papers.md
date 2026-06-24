@@ -22,19 +22,21 @@ submission to a peer-reviewed venue (quantum foundations; math-ph, gr-qc).
 
 ## Methods paper — the way in
 
-**Trustworthy AI for Foundational Science: An Audited Human-AI Loop that Machine-Checks a Conditional
-Derivation of the Einstein Field Equations from a Finite-Information Bound.** Paweł Kapłański.
+**An Audited Human-AI Loop for Trustworthy Lean Formalization: Axiom-Budget Auditing, a Goal-Directed
+State Report, and a Conditional General-Relativity Case Study.** Paweł Kapłański.
 
-The shortest way into the program. This is a cs.AI methods paper, not a physics paper: it describes the
+The shortest way into the program. This is a methods paper, not a physics paper: it describes the
 human-directed, two-model loop (a coding agent that formalizes against the Lean compiler, an independent
-model that adversarially reviews the design, a human who controls scope) and the soundness audit that
-holds the project-axiom budget at zero. Running that loop on QIQT-H produced its headline artifact: a
-machine-checked, project-axiom-free Lean theorem deriving, *conditionally*, the Einstein field equations
-$a\,T_{\mu\nu}=G_{\mu\nu}+\Lambda g_{\mu\nu}$ from a finite-information (Bekenstein-type) capacity bound,
-by a Jacobson-style equation of state. It is deliberately honest about scope (the cited physics inputs
-are labelled hypotheses, the capacity postulate stays open), and it is the natural entry point for a
-reader who wants to see *how* the program is built and checked before reading the
-[foundations paper](#foundations-paper) above for *what* it claims.
+model that adversarially reviews the design, a human who controls scope) and the audit instruments that
+wrap it — an axiom budget that can only ratchet down, a vacuity lint and hypothesis-ledger / redundancy
+probe, a goal-directed state report, and a link-checked blueprint — evaluated with a small controlled
+instrument ablation. As a demanding case study the loop is driven to a machine-checked,
+project-axiom-free Lean theorem deriving, *conditionally*, the Einstein field equations
+$a\,T_{\mu\nu}=G_{\mu\nu}+\Lambda g_{\mu\nu}$ from a finite-information capacity bound by a
+Jacobson-style equation of state. It is deliberately honest about scope (the case study stresses the
+workflow, not physics: the cited inputs are labelled hypotheses and the capacity postulate stays open),
+and it is the natural entry point for a reader who wants to see *how* the program is built and checked
+before reading the [foundations paper](#foundations-paper) above for *what* it claims.
 
 **[Read the PDF](/QIQT_AI_Methodology.pdf)**
 &nbsp;·&nbsp; Preprint, served directly from this site; being prepared for submission to a

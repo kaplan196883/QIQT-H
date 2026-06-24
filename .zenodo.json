@@ -1,0 +1,31 @@
+{
+  "title": "QIQT-H: a machine-checked Lean 4 / Mathlib development with an audited human-AI formalization loop",
+  "upload_type": "software",
+  "description": "The Lean 4 / Mathlib formalization of QIQT-H (Quantized Information Quantum Theory — Holographic), produced and audited by the human-directed two-model loop described in the accompanying methods paper. Every top-level theorem is audited with #print axioms; the development carries no sorry and the deductive core is project-axiom-free (it uses only Lean's standard axioms propext, Classical.choice, Quot.sound). Includes the conditional, project-axiom-free derivation of the Einstein field equations (QIQTH.QiqtToGR.qiqt_bekenstein_gives_gr) with its machine-checked satisfiability witness, the no-collapse measurement core, the axiom-budget audit, the vacuity lint, the hypothesis-ledger / redundancy probe, and the goal-directed track-state report.",
+  "license": "CC-BY-4.0",
+  "access_right": "open",
+  "creators": [
+    {
+      "name": "Kapłański, Paweł",
+      "affiliation": "Cognitum"
+    }
+  ],
+  "keywords": [
+    "Lean 4",
+    "Mathlib",
+    "interactive theorem proving",
+    "autoformalization",
+    "soundness auditing",
+    "axiom budget",
+    "quantum foundations",
+    "general relativity",
+    "human-AI collaboration"
+  ],
+  "related_identifiers": [
+    {
+      "relation": "isDocumentedBy",
+      "identifier": "https://qiqt.org",
+      "scheme": "url"
+    }
+  ]
+}

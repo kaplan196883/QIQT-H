@@ -1,0 +1,11 @@
+# LaTeX build artifacts (regenerate with: python paper_methods/build.py)
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.out
+*.synctex.gz
+*.bbl
+*.blg
+*.toc
+# Keep: main.tex, main.pdf, .gitignore
