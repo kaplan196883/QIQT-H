@@ -4838,6 +4838,10 @@ namespace QIQTH.AxiomAudit
 -- modular flux supplied by the axiom-free +2π one-particle BW machinery (NOT a labelled WedgeKMSFlux_complete bundle).
 -- Geometry hC/hric_symm/hreg + matter conserv + hT_symm all discharged internally for kgStress. Only labelled inputs:
 -- the Clausius/area-saturation physics + the per-generator localization map (hbridge, hTkk) (Gap 2).
+-- T3-3 localization ladder (hbridge/hFocus/hWarea discharged; hTkk transparent):
+#print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_geom
+-- T3-1: the four Clausius/area-law premises are theorems of the finite QIQT entropy model + area-capacity id:
+#print axioms QIQTH.ClausiusFiniteWitness.clausius_package_from_finite_model
 
 -- Tier A1 of QIQT_GR_DISCHARGEABLE_PLAN: discharge hric_symm.
 #print axioms QIQTH.Curvature.ricci_symm
