@@ -79,5 +79,16 @@ documented and the witness (Stages 1–3) stands on the non-flat metric class.
 - **Stage 3 ✅** (`ppMetric_covDerivVec_v_zero`, `ppMetric_raychaudhuri_setup`) — `∂_v` (`ppV`) is covariantly
   constant (`∇ ∂_v ≡ 0`), hence `hWgeo ∧ hWequil` hold for the pp-wave congruence via
   `raychaudhuri_setup_of_covConst`. **A non-flat (curved-metric-class) witness for the Raychaudhuri congruence
-  premises** — upgrades the flat (degenerate) witness. Axiom-free, budget 0. Next: Stage 4 (`Ric≠0` for a
-  non-harmonic `H`, high-risk) — or document the standard `Ric₀₀=−½Δ⊥H` if the Ricci computation is too heavy.
+  premises** — upgrades the flat (degenerate) witness. Axiom-free, budget 0.
+- **Stage 4 ✅ (partial + documented)** (`christoffel_ppMetric_x_uu`) — the load-bearing curvature piece:
+  `Γ^x_{uu} = −½ ∂_x H`, **non-zero for non-constant `H`**, so the connection genuinely depends on `H` (the
+  metric is not the flat constant metric in disguise). The **full** Ricci `Ric₀₀ = −½(∂_x²+∂_y²)H` (= `−1` for
+  `H=(x²)²`) needs many Christoffel + `pd`-of-Christoffel + quadratic-product lemmas in the bespoke setup —
+  **documented as a sub-frontier** per §2 Stage 4 (not faked). Axiom-free, budget 0.
+
+### COMPLETE
+The Raychaudhuri congruence premises (`hWgeo`/`hWequil` = `hcov`) are discharged for the **pp-wave** via the
+explicit covariantly-constant null field `∂_v` (Stages 1–3), with the connection certified H-dependent
+(Stage 4 partial) — upgrading the flat (degenerate) witness to a curved-metric-class one. The full Ricci-≠-0
+evaluation is the documented sub-frontier; the witness stands on the pp-wave, the standard curved-spacetime
+example.

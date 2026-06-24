@@ -97,4 +97,27 @@ theorem ppMetric_raychaudhuri_setup (H : Point 4 → ℝ) (hHv : ∀ x, pd H 1 x
   raychaudhuri_setup_of_covConst (ppMetric H) (ppMetricInv H) ppV x
     (fun a b y => ppMetric_covDerivVec_v_zero H hHv a b y)
 
+/-! ### Stage 4 (partial) — the connection is non-trivial: `Γ^x_{uu} = −½ ∂_x H`.
+
+The full Riemann/Ricci `Ric₀₀ = −½(∂_x²+∂_y²)H` (≠ 0 for non-harmonic `H`, e.g. `−1` for `H = (x²)²`) is the
+standard non-degeneracy certificate, but its evaluation in the bespoke `Point`/`christoffel` setup needs many
+Christoffel + `pd`-of-Christoffel + quadratic-product lemmas — a documented sub-frontier (plan §2 Stage 4).
+We record the load-bearing piece: the transverse-`uu` Christoffel is `−½ ∂_x H`, non-zero for non-constant `H`,
+so the connection genuinely depends on `H` (the metric is not the flat constant metric in disguise). -/
+
+/-- `Γ^x_{uu} = −½ ∂_x H` (index `2 = x`, `0 = u`).  Non-zero for non-constant `H` — the connection is
+    H-dependent. -/
+theorem christoffel_ppMetric_x_uu (H : Point 4 → ℝ) (x : Point 4) :
+    christoffel (ppMetric H) (ppMetricInv H) 2 0 0 x = -(1 / 2) * pd H 2 x := by
+  unfold christoffel
+  rw [Finset.sum_eq_single (2 : Fin 4)]
+  · have hgi : ppMetricInv H x 2 2 = 1 := by simp [ppMetricInv]
+    have h20 : pd (fun y => ppMetric H y 2 0) 0 x = 0 := by simp [ppMetric, pd_const]
+    have h00 : pd (fun y => ppMetric H y 0 0) 2 x = pd H 2 x := by simp [ppMetric]
+    rw [hgi, h20, h00]; ring
+  · intro α _ hα
+    have : ppMetricInv H x 2 α = 0 := by fin_cases α <;> simp_all [ppMetricInv]
+    rw [this, zero_mul]
+  · intro h; exact absurd (Finset.mem_univ _) h
+
 end QIQTH.Curvature
