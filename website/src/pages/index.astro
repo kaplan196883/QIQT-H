@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import Chain from '../components/Chain.astro';
 import StatusTable from '../components/StatusTable.astro';
 const chiR = katex.renderToString('\\chi_R', { throwOnError: false });
+const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnError: false });
 ---
 <Base legend={true}>
   <header class="hero"><div class="wrap">
@@ -72,7 +73,7 @@ const chiR = katex.renderToString('\\chi_R', { throwOnError: false });
       <strong>P3 · Microcausality.</strong> Spacelike-separated regions commute — the Lorentz input.
       <em>Not</em> the source of Born: it is a machine-checked theorem that observable microcausality does
       <em>not</em> entail selector no-signalling.<br/><br/>
-      <strong>P4 · Finite holographic capacity (FQ). ★</strong> Regional entropy ≤ Q_R = A/4ℓ_P². The one
+      <strong>P4 · Finite holographic capacity (FQ). ★</strong> Regional entropy ≤ <span set:html={QRcap} />. The one
       distinctive physical postulate — and the sole genuine input to the machine-checked Einstein-equation
       chain.<br/><br/>
       <strong>P5 · Quantum equilibrium of λ's measure.</strong> The typicality measure is refinement-equivariant
