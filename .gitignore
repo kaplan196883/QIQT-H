@@ -30,3 +30,5 @@ lean/mathlib/QIQTH/_ReportProbeTmp.lean
 # lean_track temp probes/outputs
 lean/mathlib/QIQTH/_lt_*
 lean/mathlib/_lt_*
+
+reports/.last_qiqth_tree
