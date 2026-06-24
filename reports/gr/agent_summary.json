@@ -1,20 +1,203 @@
 {
   "track": "gr",
   "title": "GR field equations",
-  "generated": "2026-06-24T03:40:32.213133+00:00",
-  "git": "177be12",
+  "generated": "2026-06-24T04:50:08.527601+00:00",
+  "git": "70d4613",
   "totals": {
-    "theorems": 11,
-    "present": 11,
+    "theorems": 12,
+    "present": 12,
     "project_axioms": [],
     "all_policy_clean": true,
     "vacuous_contexts": []
   },
   "theorems": [
     {
-      "name": "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_geom",
+      "name": "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_thermo",
       "present": true,
       "role": "capstone",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 33,
+      "n_packed": 0,
+      "uses_spine": [
+        "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_geom"
+      ],
+      "surface": [
+        {
+          "name": "inst._@.QIQTH.QiqtGrThermo.1369663628._hygCtx._hyg.6",
+          "type": "Nonempty ι",
+          "curation": null
+        },
+        {
+          "name": "hsymm",
+          "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), g y a b = g y b a",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hsymm_gi",
+          "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), gi y a b = gi y b a",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hinv",
+          "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), ∑ σ, g y a σ * gi y σ b = if a = b then 1 else 0",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hCg",
+          "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => g y a b",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hCgi",
+          "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => gi y a b",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hbar0",
+          "type": "hbar ≠ 0",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "heta",
+          "type": "η ≠ 0",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "ha",
+          "type": "a = 2 * Real.pi / (hbar * η)",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hφ",
+          "type": "ContDiff ℝ ⊤ φ",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hKG",
+          "type": "∀ (x : QIQTH.Curvature.Point 4), QIQTH.Curvature.boxField φ g gi x = m ^ 2 * φ x",
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
+        },
+        {
+          "name": "hPP",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, P x i k * Pinv x k j = if i = j then 1 else 0",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hPP'",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, Pinv x i k * P x k j = if i = j then 1 else 0",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hcong",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hpp_nn",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (t : ℝ) (r : ι), 0 ≤ pp x v t r",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hpp1",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (t : ℝ), ∑ r, pp x v t r = 1",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hpp0",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), pp x v 0 = fun x => (↑(Fintype.card ι))⁻¹",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hcap",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), η * A x v 0 = Real.log ↑(Fintype.card ι)",
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
+        },
+        {
+          "name": "hWx",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → W x v x = v",
+          "curation": "SETUP — per-generator derivative existence / null-congruence kinematics"
+        },
+        {
+          "name": "hWC",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (μ : Fin 4), ContDiff ℝ ⊤ fun y => W x v y μ",
+          "curation": "SETUP — per-generator derivative existence / null-congruence kinematics"
+        },
+        {
+          "name": "hWgeo",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (y : QIQTH.Curvature.Point 4) (μ : Fin 4),\n  ∑ ν, W x v y ν * QIQTH.Curvature.covDerivVec g gi (W x v) ν μ y = 0",
+          "curation": "SETUP — per-generator derivative existence / null-congruence kinematics"
+        },
+        {
+          "name": "hWequil",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 →\n    ∑ μ, ∑ ν, QIQTH.Curvature.covDerivVec g gi (W x v) μ ν x * QIQTH.Curvature.covDerivVec g gi (W x v) ν μ x = 0",
+          "curation": "SETUP — per-generator derivative existence / null-congruence kinematics"
+        },
+        {
+          "name": "hS",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (fun t => QIQTH.BranchLedger.Shannon Finset.univ (pp x v t)) (sd x v) 0",
+          "curation": "SETUP — per-generator derivative existence / null-congruence kinematics"
+        },
+        {
+          "name": "hK",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 →\n    HasDerivAt\n      (fun t =>\n        QIQTH.BranchLedger.Shannon Finset.univ (pp x v t) + QIQTH.RelEntPositivity.KL Finset.univ (pp x v t) (pp x v 0))\n      (2 * Real.pi / hbar * QIQTH.EinsteinEOS.BL (QIQTH.Curvature.kgStress m φ g gi x) v) 0",
+          "curation": "SETUP — per-generator derivative existence / null-congruence kinematics"
+        },
+        {
+          "name": "hA",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 →\n    HasDerivAt (A x v) (-∑ ν, W x v x ν * QIQTH.Curvature.pd (fun y => QIQTH.Curvature.expansion g gi (W x v) y) ν x) 0",
+          "curation": "SETUP — per-generator derivative existence / null-congruence kinematics"
+        },
+        {
+          "name": "hbound",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 →\n    ∀ᶠ (t : ℝ) in nhds 0, QIQTH.BranchLedger.Shannon Finset.univ (pp x v t) ≤ η * A x v t",
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
+        },
+        {
+          "name": "hmw",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), 0 < mw x v",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hf2",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.MemLp (ff x v) 2 MeasureTheory.volume",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hf_int",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.Integrable (ff x v) MeasureTheory.volume",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hfd",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (θ : ℝ), HasDerivAt (ff x v) (ff' x v θ) θ",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hf'_meas",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.AEStronglyMeasurable (ff' x v) MeasureTheory.volume",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hB",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (θ : ℝ), ‖ff' x v θ‖ ≤ Bd x v",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hTkk",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 →\n    2 * Real.pi / hbar * (∑ b, v b * QIQTH.Curvature.pd φ b x) ^ 2 =\n      (-(2 * ↑Real.pi * ∫ (θ : ℝ), (starRingEnd ℂ) (ff x v θ) * ff' x v θ)).im",
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_geom",
+      "present": true,
+      "role": "spine",
       "kind": "thm",
       "axiom_free_literal": false,
       "policy_clean": true,
@@ -29,67 +212,67 @@
         {
           "name": "hsymm",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), g y a b = g y b a",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hsymm_gi",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), gi y a b = gi y b a",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hinv",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), ∑ σ, g y a σ * gi y σ b = if a = b then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hCg",
           "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => g y a b",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hCgi",
           "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => gi y a b",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hbar0",
           "type": "hbar ≠ 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "heta",
           "type": "η ≠ 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "ha",
           "type": "a = 2 * Real.pi / (hbar * η)",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hφ",
           "type": "ContDiff ℝ ⊤ φ",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hKG",
           "type": "∀ (x : QIQTH.Curvature.Point 4), QIQTH.Curvature.boxField φ g gi x = m ^ 2 * φ x",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hPP",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, P x i k * Pinv x k j = if i = j then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hPP'",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, Pinv x i k * P x k j = if i = j then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hcong",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hWx",
@@ -129,57 +312,57 @@
         {
           "name": "hbound",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ᶠ (t : ℝ) in nhds 0, Sf x v t ≤ η * A x v t",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hsat",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → Sf x v 0 = η * A x v 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hDnn",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ (t : ℝ), 0 ≤ KE x v t - Sf x v t",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hD0",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hmw",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), 0 < mw x v",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf2",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.MemLp (ff x v) 2 MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf_int",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.Integrable (ff x v) MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hfd",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (θ : ℝ), HasDerivAt (ff x v) (ff' x v θ) θ",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf'_meas",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.AEStronglyMeasurable (ff' x v) MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hB",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (θ : ℝ), ‖ff' x v θ‖ ≤ Bd x v",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hTkk",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 →\n    2 * Real.pi / hbar * (∑ b, v b * QIQTH.Curvature.pd φ b x) ^ 2 =\n      (-(2 * ↑Real.pi * ∫ (θ : ℝ), (starRingEnd ℂ) (ff x v θ) * ff' x v θ)).im",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         }
       ],
       "dischargeable": []
@@ -202,67 +385,67 @@
         {
           "name": "hsymm",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), g y a b = g y b a",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hsymm_gi",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), gi y a b = gi y b a",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hinv",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), ∑ σ, g y a σ * gi y σ b = if a = b then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hCg",
           "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => g y a b",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hCgi",
           "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => gi y a b",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hbar0",
           "type": "hbar ≠ 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "heta",
           "type": "η ≠ 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "ha",
           "type": "a = 2 * Real.pi / (hbar * η)",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hφ",
           "type": "ContDiff ℝ ⊤ φ",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hKG",
           "type": "∀ (x : QIQTH.Curvature.Point 4), QIQTH.Curvature.boxField φ g gi x = m ^ 2 * φ x",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hPP",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, P x i k * Pinv x k j = if i = j then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hPP'",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, Pinv x i k * P x k j = if i = j then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hcong",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hS",
@@ -282,57 +465,57 @@
         {
           "name": "hbound",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ᶠ (t : ℝ) in nhds 0, Sf x v t ≤ η * A x v t",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hsat",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → Sf x v 0 = η * A x v 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hDnn",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ (t : ℝ), 0 ≤ KE x v t - Sf x v t",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hD0",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hmw",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), 0 < mw x v",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf2",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.MemLp (ff x v) 2 MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf_int",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.Integrable (ff x v) MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hfd",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (θ : ℝ), HasDerivAt (ff x v) (ff' x v θ) θ",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf'_meas",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.AEStronglyMeasurable (ff' x v) MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hB",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (θ : ℝ), ‖ff' x v θ‖ ≤ Bd x v",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hTkk",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 →\n    2 * Real.pi / hbar * (∑ b, v b * QIQTH.Curvature.pd φ b x) ^ 2 =\n      (-(2 * ↑Real.pi * ∫ (θ : ℝ), (starRingEnd ℂ) (ff x v θ) * ff' x v θ)).im",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hWx",
@@ -380,67 +563,67 @@
         {
           "name": "hsymm",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), g y a b = g y b a",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hsymm_gi",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), gi y a b = gi y b a",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hinv",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), ∑ σ, g y a σ * gi y σ b = if a = b then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hCg",
           "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => g y a b",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hCgi",
           "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => gi y a b",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hbar0",
           "type": "hbar ≠ 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "heta",
           "type": "η ≠ 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "ha",
           "type": "a = 2 * Real.pi / (hbar * η)",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hφ",
           "type": "ContDiff ℝ ⊤ φ",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hKG",
           "type": "∀ (x : QIQTH.Curvature.Point 4), QIQTH.Curvature.boxField φ g gi x = m ^ 2 * φ x",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hPP",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, P x i k * Pinv x k j = if i = j then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hPP'",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, Pinv x i k * P x k j = if i = j then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hcong",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hS",
@@ -460,57 +643,57 @@
         {
           "name": "hbound",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ᶠ (t : ℝ) in nhds 0, Sf x v t ≤ η * A x v t",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hsat",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → Sf x v 0 = η * A x v 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hDnn",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ (t : ℝ), 0 ≤ KE x v t - Sf x v t",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hD0",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hmw",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), 0 < mw x v",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf2",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.MemLp (ff x v) 2 MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf_int",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.Integrable (ff x v) MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hfd",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (θ : ℝ), HasDerivAt (ff x v) (ff' x v θ) θ",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf'_meas",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.AEStronglyMeasurable (ff' x v) MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hB",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (θ : ℝ), ‖ff' x v θ‖ ≤ Bd x v",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hTkk",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 →\n    2 * Real.pi / hbar * QIQTH.EinsteinEOS.BL (QIQTH.Curvature.kgStress m φ g gi x) v =\n      (-(2 * ↑Real.pi * ∫ (θ : ℝ), (starRingEnd ℂ) (ff x v θ) * ff' x v θ)).im",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hWx",
@@ -559,67 +742,67 @@
         {
           "name": "hsymm",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), g y a b = g y b a",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hsymm_gi",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), gi y a b = gi y b a",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hinv",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), ∑ σ, g y a σ * gi y σ b = if a = b then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hCg",
           "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => g y a b",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hCgi",
           "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => gi y a b",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hbar0",
           "type": "hbar ≠ 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "heta",
           "type": "η ≠ 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "ha",
           "type": "a = 2 * Real.pi / (hbar * η)",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hφ",
           "type": "ContDiff ℝ ⊤ φ",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hKG",
           "type": "∀ (x : QIQTH.Curvature.Point 4), QIQTH.Curvature.boxField φ g gi x = m ^ 2 * φ x",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hPP",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, P x i k * Pinv x k j = if i = j then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hPP'",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, Pinv x i k * P x k j = if i = j then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hcong",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hS",
@@ -639,62 +822,62 @@
         {
           "name": "hbound",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ᶠ (t : ℝ) in nhds 0, Sf x v t ≤ η * A x v t",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hsat",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → Sf x v 0 = η * A x v 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hDnn",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ (t : ℝ), 0 ≤ KE x v t - Sf x v t",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hD0",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hmw",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), 0 < mw x v",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf2",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.MemLp (ff x v) 2 MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf_int",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.Integrable (ff x v) MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hfd",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (θ : ℝ), HasDerivAt (ff x v) (ff' x v θ) θ",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf'_meas",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.AEStronglyMeasurable (ff' x v) MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hB",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (θ : ℝ), ‖ff' x v θ‖ ≤ Bd x v",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hTkk",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 →\n    2 * Real.pi / hbar * QIQTH.EinsteinEOS.BL (QIQTH.Curvature.kgStress m φ g gi x) v =\n      (-(2 * ↑Real.pi * ∫ (θ : ℝ), (starRingEnd ℂ) (ff x v θ) * ff' x v θ)).im",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hFocus",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ad x v = QIQTH.EinsteinEOS.BL (fun i j => QIQTH.Curvature.ricci g gi i j x) v",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         }
       ],
       "dischargeable": []
@@ -717,67 +900,67 @@
         {
           "name": "hsymm",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), g y a b = g y b a",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hsymm_gi",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), gi y a b = gi y b a",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hinv",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), ∑ σ, g y a σ * gi y σ b = if a = b then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hCg",
           "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => g y a b",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hCgi",
           "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => gi y a b",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hbar0",
           "type": "hbar ≠ 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "heta",
           "type": "η ≠ 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "ha",
           "type": "a = 2 * Real.pi / (hbar * η)",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hφ",
           "type": "ContDiff ℝ ⊤ φ",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hKG",
           "type": "∀ (x : QIQTH.Curvature.Point 4), QIQTH.Curvature.boxField φ g gi x = m ^ 2 * φ x",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hPP",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, P x i k * Pinv x k j = if i = j then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hPP'",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, Pinv x i k * P x k j = if i = j then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hcong",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hS",
@@ -797,67 +980,67 @@
         {
           "name": "hbound",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ᶠ (t : ℝ) in nhds 0, Sf x v t ≤ η * A x v t",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hsat",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → Sf x v 0 = η * A x v 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hDnn",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ (t : ℝ), 0 ≤ KE x v t - Sf x v t",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hD0",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hmw",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), 0 < mw x v",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf2",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.MemLp (ff x v) 2 MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf_int",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.Integrable (ff x v) MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hfd",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (θ : ℝ), HasDerivAt (ff x v) (ff' x v θ) θ",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf'_meas",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.AEStronglyMeasurable (ff' x v) MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hB",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (θ : ℝ), ‖ff' x v θ‖ ≤ Bd x v",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hTkk",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 →\n    2 * Real.pi / hbar * QIQTH.EinsteinEOS.BL (QIQTH.Curvature.kgStress m φ g gi x) v =\n      (-(2 * ↑Real.pi * ∫ (θ : ℝ), (starRingEnd ℂ) (ff x v θ) * ff' x v θ)).im",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hbridge",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 →\n    HasDerivAt\n      (fun t =>\n        inner ℂ (MeasureTheory.MemLp.toLp (ff x v) ⋯)\n          ((QIQTH.StandardSubspaceModular.modUnitary (QIQTH.Fock.BoostKMS.niceWedgeStandardSubspace (mw x v) ⋯ ⋯) t)\n            (MeasureTheory.MemLp.toLp (ff x v) ⋯)))\n      (Complex.I * ↑(kd x v)) 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hFocus",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ad x v = QIQTH.EinsteinEOS.BL (fun i j => QIQTH.Curvature.ricci g gi i j x) v",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         }
       ],
       "dischargeable": []
@@ -878,67 +1061,67 @@
         {
           "name": "hsymm",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), g y a b = g y b a",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hsymm_gi",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), gi y a b = gi y b a",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hinv",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), ∑ σ, g y a σ * gi y σ b = if a = b then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hCg",
           "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => g y a b",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hCgi",
           "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => gi y a b",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hbar0",
           "type": "hbar ≠ 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "heta",
           "type": "η ≠ 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "ha",
           "type": "a = 2 * Real.pi / (hbar * η)",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hφ",
           "type": "ContDiff ℝ ⊤ φ",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hKG",
           "type": "∀ (x : QIQTH.Curvature.Point 4), QIQTH.Curvature.boxField φ g gi x = m ^ 2 * φ x",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hPP",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, P x i k * Pinv x k j = if i = j then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hPP'",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, Pinv x i k * P x k j = if i = j then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hcong",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hS",
@@ -958,22 +1141,22 @@
         {
           "name": "hbound",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ᶠ (t : ℝ) in nhds 0, Sf x v t ≤ η * A x v t",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hsat",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → Sf x v 0 = η * A x v 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hDnn",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ (t : ℝ), 0 ≤ KE x v t - Sf x v t",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hD0",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hKMS",
@@ -983,7 +1166,7 @@
         {
           "name": "hFocus",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ad x v = QIQTH.EinsteinEOS.BL (fun i j => QIQTH.Curvature.ricci g gi i j x) v",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         }
       ],
       "dischargeable": []
@@ -1006,62 +1189,62 @@
         {
           "name": "hsymm",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), g y a b = g y b a",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hsymm_gi",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), gi y a b = gi y b a",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hinv",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), ∑ σ, g y a σ * gi y σ b = if a = b then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hCg",
           "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => g y a b",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hCgi",
           "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => gi y a b",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hbar0",
           "type": "hbar ≠ 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "heta",
           "type": "η ≠ 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "ha",
           "type": "a = 2 * Real.pi / (hbar * η)",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hT_symm",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (a' b : Fin 4), T x a' b = T x b a'",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hPP",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, P x i k * Pinv x k j = if i = j then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hPP'",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, Pinv x i k * P x k j = if i = j then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hcong",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hS",
@@ -1081,22 +1264,22 @@
         {
           "name": "hbound",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ᶠ (t : ℝ) in nhds 0, Sf x v t ≤ η * A x v t",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hsat",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → Sf x v 0 = η * A x v 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hDnn",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ (t : ℝ), 0 ≤ KE x v t - Sf x v t",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hD0",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hflux",
@@ -1106,17 +1289,17 @@
         {
           "name": "hFocus",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ad x v = QIQTH.EinsteinEOS.BL (fun i j => QIQTH.Curvature.ricci g gi i j x) v",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hreg",
           "type": "∀ (f : QIQTH.Curvature.Point 4 → ℝ),\n  (∀ (y : QIQTH.Curvature.Point 4) (a' b : Fin 4), a * T y a' b = QIQTH.Curvature.ricci g gi a' b y + f y * g y a' b) →\n    (∀ (x : QIQTH.Curvature.Point 4) (ρ : Fin 4), QIQTH.Curvature.PdiffAt f ρ x) ∧\n      Differentiable ℝ fun y => f y + 1 / 2 * QIQTH.Curvature.scalarCurv g gi y",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "conserv",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (ν : Fin 4), QIQTH.Curvature.div02 g gi (fun y a' b => a * T y a' b) ν x = 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         }
       ],
       "dischargeable": []
@@ -1137,62 +1320,62 @@
         {
           "name": "hsymm",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), g y a b = g y b a",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hsymm_gi",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), gi y a b = gi y b a",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hinv",
           "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), ∑ σ, g y a σ * gi y σ b = if a = b then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hCg",
           "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => g y a b",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hCgi",
           "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => gi y a b",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hbar0",
           "type": "hbar ≠ 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "heta",
           "type": "η ≠ 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "ha",
           "type": "a = 2 * Real.pi / (hbar * η)",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hT_symm",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (a' b : Fin 4), T x a' b = T x b a'",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hPP",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, P x i k * Pinv x k j = if i = j then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hPP'",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, Pinv x i k * P x k j = if i = j then 1 else 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hcong",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hS",
@@ -1212,22 +1395,22 @@
         {
           "name": "hbound",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ᶠ (t : ℝ) in nhds 0, S x v t ≤ η * A x v t",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hsat",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → S x v 0 = η * A x v 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hDnn",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ (t : ℝ), 0 ≤ KE x v t - S x v t",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hD0",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → KE x v 0 - S x v 0 = 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hFlux",
@@ -1237,17 +1420,17 @@
         {
           "name": "hFocus",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ad x v = QIQTH.EinsteinEOS.BL (fun i j => QIQTH.Curvature.ricci g gi i j x) v",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hreg",
           "type": "∀ (f : QIQTH.Curvature.Point 4 → ℝ),\n  (∀ (y : QIQTH.Curvature.Point 4) (a' b : Fin 4), a * T y a' b = QIQTH.Curvature.ricci g gi a' b y + f y * g y a' b) →\n    (∀ (x : QIQTH.Curvature.Point 4) (ρ : Fin 4), QIQTH.Curvature.PdiffAt f ρ x) ∧\n      Differentiable ℝ fun y => f y + 1 / 2 * QIQTH.Curvature.scalarCurv g gi y",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "conserv",
           "type": "∀ (x : QIQTH.Curvature.Point 4) (ν : Fin 4), QIQTH.Curvature.div02 g gi (fun y a' b => a * T y a' b) ν x = 0",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         }
       ],
       "dischargeable": []
@@ -1268,12 +1451,12 @@
         {
           "name": "hm",
           "type": "0 < m",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hVboost",
           "type": "∀ (t : ℝ) (x : ↥(MeasureTheory.Lp ℂ 2 MeasureTheory.volume)),\n  (V t) x = (QIQTH.Fock.OneParticle.boostUnitary (2 * Real.pi * t)) x",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         }
       ],
       "dischargeable": []
@@ -1294,37 +1477,37 @@
         {
           "name": "hm",
           "type": "0 < m",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf2",
           "type": "MeasureTheory.MemLp f 2 MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf_int",
           "type": "MeasureTheory.Integrable f MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hfd",
           "type": "∀ (x : ℝ), HasDerivAt f (f' x) x",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf'_meas",
           "type": "MeasureTheory.AEStronglyMeasurable f' MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hB",
           "type": "∀ (x : ℝ), ‖f' x‖ ≤ B",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hTkk",
           "type": "2 * Real.pi / hbar * Tkk = (-(2 * ↑Real.pi * ∫ (θ : ℝ), (starRingEnd ℂ) (f θ) * f' θ)).im",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         }
       ],
       "dischargeable": []
@@ -1347,42 +1530,42 @@
         {
           "name": "hm",
           "type": "0 < m",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf2",
           "type": "MeasureTheory.MemLp f 2 MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf_int",
           "type": "MeasureTheory.Integrable f MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hfd",
           "type": "∀ (x : ℝ), HasDerivAt f (f' x) x",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hf'_meas",
           "type": "MeasureTheory.AEStronglyMeasurable f' MeasureTheory.volume",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hB",
           "type": "∀ (x : ℝ), ‖f' x‖ ≤ B",
-          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
         },
         {
           "name": "hTkk",
           "type": "2 * Real.pi / hbar * Tkk = (-(2 * ↑Real.pi * ∫ (θ : ℝ), (starRingEnd ℂ) (f θ) * f' θ)).im",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         },
         {
           "name": "hbridge",
           "type": "HasDerivAt\n  (fun t =>\n    inner ℂ (MeasureTheory.MemLp.toLp f hf2)\n      ((QIQTH.StandardSubspaceModular.modUnitary (QIQTH.Fock.BoostKMS.niceWedgeStandardSubspace m ⋯ ⋯) t)\n        (MeasureTheory.MemLp.toLp f hf2)))\n  (Complex.I * ↑kd) 0",
-          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
         }
       ],
       "dischargeable": []
