@@ -1,0 +1,66 @@
+/-
+  AUTO-GENERATED prober probe (written by lean_track). Lean-CHECKED results.
+  For each theorem: (a) per Prop-hypothesis, can it be proved from the OTHER binders
+  (auto-dischargeable ⇒ removable); (b) can `False` be proved from all binders
+  (context inconsistent ⇒ vacuity guard — all discharges then suspect).
+  Emits JSON to @@OUTPUT@@. Placeholders @@IMPORT@@ @@TARGETS@@ @@OUTPUT@@ filled by Python.
+-/
+import @@IMPORT@@
+
+open Lean Elab Command Meta Tactic
+
+def reportTargets : List Name := [@@TARGETS@@]
+
+syntax "discharge_probe" : tactic
+macro_rules
+  | `(tactic| discharge_probe) =>
+    `(tactic| first
+        | assumption
+        | rfl
+        | trivial
+        | positivity
+        | fun_prop
+        | (intros; first | rfl | assumption | positivity | fun_prop | trivial))
+
+/-- Try to close goal `g`; return true iff fully closed (no throw, no remaining goals). -/
+def tryClose (g : MVarId) : TermElabM Bool := do
+  try
+    let rem ← Tactic.run g do Tactic.evalTactic (← `(tactic| discharge_probe))
+    pure rem.isEmpty
+  catch _ => pure false
+
+def probeOne (tgt : Name) : TermElabM Json := do
+  let infoOpt ← (do try pure (some (← getConstInfo tgt)) catch _ => pure none)
+  match infoOpt with
+  | none => return Json.mkObj [("name", Json.str (toString tgt)), ("present", Json.bool false)]
+  | some info =>
+      forallTelescopeReducing info.type fun args _ => do
+        -- (b) vacuity: can we prove False from ALL binders in scope?
+        let falseG ← mkFreshExprMVar (mkConst ``False)
+        let falseProvable ← tryClose falseG.mvarId!
+        -- (a) per Prop-hypothesis discharge (clear the binder so it can't prove itself)
+        let mut hyps : Array Json := #[]
+        for a in args do
+          let ld ← a.fvarId!.getDecl
+          if (← isProp ld.type) then
+            let mvar ← mkFreshExprMVar ld.type
+            let clearedOpt ← (do try pure (some (← mvar.mvarId!.clear a.fvarId!))
+                                 catch _ => pure none)
+            let (status, ok) ← match clearedOpt with
+              | none => pure ("depended_on", false)       -- not isolable; conservatively kept
+              | some g => do let r ← tryClose g; pure ((if r then "auto_dischargeable" else "unresolved"), r)
+            hyps := hyps.push (Json.mkObj [
+              ("name", Json.str (toString ld.userName)),
+              ("status", Json.str status),
+              ("dischargeable", Json.bool ok)])
+        return Json.mkObj [
+          ("name", Json.str (toString tgt)),
+          ("present", Json.bool true),
+          ("falseProvable", Json.bool falseProvable),
+          ("hyps", Json.arr hyps)]
+
+run_cmd liftTermElabM do
+  let mut objs : Array Json := #[]
+  for tgt in reportTargets do
+    objs := objs.push (← probeOne tgt)
+  IO.FS.writeFile "@@OUTPUT@@" (Json.arr objs).compress

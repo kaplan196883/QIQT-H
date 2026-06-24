@@ -1,0 +1,57 @@
+# Track config — Lorentz covariance.  `python -m lean_track report -c tracks/lorentz.toml`
+[track]
+id = "lorentz"
+title = "Lorentz covariance"
+subtitle = "Target 2 — QIQT-H compatible with Lorentz (covariance spine + selector no-go)"
+
+[project]
+lean_import = "QIQTH"
+allowed_axioms = ["propext", "Classical.choice", "Quot.sound"]
+timeout_sec = 1800
+
+[[theorems]]
+name = "QIQTH.LorentzSelectionStrong.upvm_covariant_probability"
+role = "capstone"
+[[theorems]]
+name = "QIQTH.LorentzSelection.evaluation_covariance"
+role = "spine"
+[[theorems]]
+name = "QIQTH.LorentzSelectionStrong.group_evaluation_covariance"
+role = "spine"
+[[theorems]]
+name = "QIQTH.FreeFieldTypicality.freeFieldMeasure_boost_invariant"
+role = "spine"
+[[theorems]]
+name = "QIQTH.BHTypicalityMeasure.bh_typicalityMeasure_exists"
+role = "spine"
+[[theorems]]
+name = "QIQTH.Fock.fock_typicalityMeasure_exists"
+role = "spine"
+[[theorems]]
+name = "QIQTH.ContinuumSelection.continuum_volume_selects"
+role = "spine"
+[[theorems]]
+name = "QIQTH.Theorem7.Setup.no_signaling"
+role = "spine"
+[[theorems]]
+name = "QIQTH.NoSignalingGeneral.bipartite_no_signaling"
+role = "spine"
+[[theorems]]
+name = "QIQTH.CovariantGluing.no_covariant_selector"
+role = "nogo"
+[[theorems]]
+name = "QIQTH.CovariantGluing.bool_swap_no_selector"
+role = "nogo"
+
+# --- curation rules ---
+[[category_rules]]
+id = "covariance-premise"
+category = "covariance"
+label = "COVARIANCE — equivariance / unitary-transport premise"
+name_regex = "(cov|covar|equivar|transport|act_mul|act_one|boost|invariant)"
+
+[[category_rules]]
+id = "structure"
+category = "structure"
+label = "STRUCTURE — presheaf / net / group / measurability"
+name_regex = "(naturality|presheaf|section|glue|meas|sigma|orth|complete)"

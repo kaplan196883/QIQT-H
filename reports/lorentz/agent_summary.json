@@ -1,0 +1,430 @@
+{
+  "track": "lorentz",
+  "title": "Lorentz covariance",
+  "generated": "2026-06-24T00:40:50.503795+00:00",
+  "git": "b82b3c8",
+  "totals": {
+    "theorems": 11,
+    "present": 11,
+    "project_axioms": [],
+    "all_policy_clean": true,
+    "vacuous_contexts": []
+  },
+  "theorems": [
+    {
+      "name": "QIQTH.LorentzSelectionStrong.upvm_covariant_probability",
+      "present": true,
+      "role": "capstone",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 0,
+      "n_packed": 10,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "P.restrict_id",
+          "type": "∀ {D : Diam} (x : X D), restrict ⋯ x = x",
+          "curation": null
+        },
+        {
+          "name": "P.restrict_comp",
+          "type": "∀ {L K D : Diam} (hLK : L ≤ K) (hKD : K ≤ D) (x : X D), restrict hLK (restrict hKD x) = restrict ⋯ x",
+          "curation": null
+        },
+        {
+          "name": "A.natural",
+          "type": "∀ (g : G) {K D : Diam} (h : K ≤ D) (x : P.X D), P.restrict ⋯ ((γ g D) x) = (γ g K) (P.restrict h x)",
+          "curation": null
+        },
+        {
+          "name": "A.act_one",
+          "type": "act 1 = OrderIso.refl Diam",
+          "curation": "COVARIANCE — equivariance / unitary-transport premise"
+        },
+        {
+          "name": "A.act_mul",
+          "type": "∀ (g₁ g₂ : G), act (g₁ * g₂) = (act g₁).trans (act g₂)",
+          "curation": "COVARIANCE — equivariance / unitary-transport premise"
+        },
+        {
+          "name": "B.proj_herm",
+          "type": "∀ (D : Diam) (x : P.X D), (toUniformBornData.E D x).conjTranspose = toUniformBornData.E D x",
+          "curation": null
+        },
+        {
+          "name": "B.proj_idem",
+          "type": "∀ (D : Diam) (x : P.X D), toUniformBornData.E D x * toUniformBornData.E D x = toUniformBornData.E D x",
+          "curation": null
+        },
+        {
+          "name": "C.U_unit",
+          "type": "∀ (g : G) (D : Diam), (U g D).conjTranspose * U g D = 1",
+          "curation": null
+        },
+        {
+          "name": "C.ψ_cov",
+          "type": "∀ (g : G) (D : Diam), B.ψ ((A.act g) D) = (U g D).mulVec (B.ψ D)",
+          "curation": "COVARIANCE — equivariance / unitary-transport premise"
+        },
+        {
+          "name": "C.E_cov",
+          "type": "∀ (g : G) (D : Diam) (x : P.X D), B.E ((A.act g) D) ((A.γ g D) x) = U g D * B.E D x * (U g D).conjTranspose",
+          "curation": "COVARIANCE — equivariance / unitary-transport premise"
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.LorentzSelection.evaluation_covariance",
+      "present": true,
+      "role": "spine",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 0,
+      "n_packed": 4,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "P.restrict_id",
+          "type": "∀ {D : Diam} (x : X D), restrict ⋯ x = x",
+          "curation": null
+        },
+        {
+          "name": "P.restrict_comp",
+          "type": "∀ {L K D : Diam} (hLK : L ≤ K) (hKD : K ≤ D) (x : X D), restrict hLK (restrict hKD x) = restrict ⋯ x",
+          "curation": null
+        },
+        {
+          "name": "g.natural",
+          "type": "∀ {K D : Diam} (h : K ≤ D) (x : P.X D), P.restrict ⋯ ((γ D) x) = (γ K) (P.restrict h x)",
+          "curation": null
+        },
+        {
+          "name": "lam.consistent",
+          "type": "∀ {K D : Diam} (h : K ≤ D), P.restrict h (val D) = val K",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.LorentzSelectionStrong.group_evaluation_covariance",
+      "present": true,
+      "role": "spine",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 0,
+      "n_packed": 6,
+      "uses_spine": [
+        "QIQTH.LorentzSelection.evaluation_covariance"
+      ],
+      "surface": [
+        {
+          "name": "P.restrict_id",
+          "type": "∀ {D : Diam} (x : X D), restrict ⋯ x = x",
+          "curation": null
+        },
+        {
+          "name": "P.restrict_comp",
+          "type": "∀ {L K D : Diam} (hLK : L ≤ K) (hKD : K ≤ D) (x : X D), restrict hLK (restrict hKD x) = restrict ⋯ x",
+          "curation": null
+        },
+        {
+          "name": "A.natural",
+          "type": "∀ (g : G) {K D : Diam} (h : K ≤ D) (x : P.X D), P.restrict ⋯ ((γ g D) x) = (γ g K) (P.restrict h x)",
+          "curation": null
+        },
+        {
+          "name": "A.act_one",
+          "type": "act 1 = OrderIso.refl Diam",
+          "curation": "COVARIANCE — equivariance / unitary-transport premise"
+        },
+        {
+          "name": "A.act_mul",
+          "type": "∀ (g₁ g₂ : G), act (g₁ * g₂) = (act g₁).trans (act g₂)",
+          "curation": "COVARIANCE — equivariance / unitary-transport premise"
+        },
+        {
+          "name": "lam.consistent",
+          "type": "∀ {K D : Diam} (h : K ≤ D), P.restrict h (val D) = val K",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.FreeFieldTypicality.freeFieldMeasure_boost_invariant",
+      "present": true,
+      "role": "spine",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 2,
+      "n_packed": 4,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "ν.m_iUnion",
+          "type": "∀ ⦃f : ℕ → Set α⦄,\n  (∀ (i : ℕ), MeasurableSet (f i)) →\n    Pairwise (Function.onFun Disjoint f) → toOuterMeasure (⋃ i, f i) = ∑' (i : ℕ), toOuterMeasure (f i)",
+          "curation": null
+        },
+        {
+          "name": "ν.trim_le",
+          "type": "toOuterMeasure.trim ≤ toOuterMeasure",
+          "curation": null
+        },
+        {
+          "name": "inst._@.QIQTH.FreeFieldTypicality.4290387588._hygCtx._hyg.15",
+          "type": "MeasureTheory.IsProbabilityMeasure ν",
+          "curation": null
+        },
+        {
+          "name": "e.left_inv",
+          "type": "autoParam (Function.LeftInverse invFun toFun) Equiv.left_inv._autoParam",
+          "curation": null
+        },
+        {
+          "name": "e.right_inv",
+          "type": "autoParam (Function.RightInverse invFun toFun) Equiv.right_inv._autoParam",
+          "curation": null
+        },
+        {
+          "name": "hν",
+          "type": "MeasureTheory.Measure.map (QIQTH.FreeFieldTypicality.boostMap e) ν = ν",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.BHTypicalityMeasure.bh_typicalityMeasure_exists",
+      "present": true,
+      "role": "spine",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 8,
+      "n_packed": 0,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "inst._@.QIQTH.BHTypicalityMeasure.2998898123._hygCtx._hyg.36",
+          "type": "∀ (i : ι), MeasurableSingletonClass (α i)",
+          "curation": null
+        },
+        {
+          "name": "inst._@.QIQTH.BHTypicalityMeasure.2998898123._hygCtx._hyg.56",
+          "type": "CompleteSpace H",
+          "curation": null
+        },
+        {
+          "name": "inst._@.QIQTH.BHTypicalityMeasure.2998898123._hygCtx._hyg.79",
+          "type": "∀ (i : ι), DiscreteTopology (α i)",
+          "curation": null
+        },
+        {
+          "name": "inst._@.QIQTH.BHTypicalityMeasure.2998898123._hygCtx._hyg.88",
+          "type": "∀ (i : ι), Finite (α i)",
+          "curation": null
+        },
+        {
+          "name": "hb",
+          "type": "Orthonormal ℂ ⇑b",
+          "curation": null
+        },
+        {
+          "name": "hp",
+          "type": "∀ (i : κ), 0 ≤ p i",
+          "curation": null
+        },
+        {
+          "name": "hsum",
+          "type": "Summable p",
+          "curation": null
+        },
+        {
+          "name": "hp1",
+          "type": "∑' (i : κ), p i = 1",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.Fock.fock_typicalityMeasure_exists",
+      "present": true,
+      "role": "spine",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 3,
+      "n_packed": 0,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "inst._@.QIQTH.Fock.FockTypicality.377538603._hygCtx._hyg.36",
+          "type": "∀ (i : ι), MeasurableSingletonClass (α i)",
+          "curation": null
+        },
+        {
+          "name": "inst._@.QIQTH.Fock.FockTypicality.377538603._hygCtx._hyg.64",
+          "type": "∀ (i : ι), DiscreteTopology (α i)",
+          "curation": null
+        },
+        {
+          "name": "inst._@.QIQTH.Fock.FockTypicality.377538603._hygCtx._hyg.73",
+          "type": "∀ (i : ι), Finite (α i)",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.ContinuumSelection.continuum_volume_selects",
+      "present": true,
+      "role": "spine",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 1,
+      "n_packed": 2,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "inst._@.QIQTH.ContinuumSelection.1070711794._hygCtx._hyg.12",
+          "type": "CompleteSpace H",
+          "curation": null
+        },
+        {
+          "name": "S.IsSeparating",
+          "type": "toClosedSubmodule ⊓ toClosedSubmodule.mulI = ⊥",
+          "curation": null
+        },
+        {
+          "name": "S.IsCyclic",
+          "type": "toClosedSubmodule ⊔ toClosedSubmodule.mulI = ⊤",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.Theorem7.Setup.no_signaling",
+      "present": true,
+      "role": "spine",
+      "kind": "thm",
+      "axiom_free_literal": true,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 0,
+      "n_packed": 2,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "S.alice_effect_inA",
+          "type": "∀ (x : AliceSetting) (a : AliceOutcome), inA (E x a)",
+          "curation": null
+        },
+        {
+          "name": "S.locality",
+          "type": "∀ (y : BobSetting) (X : Obs), inA X → Ψ y X = X",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.NoSignalingGeneral.bipartite_no_signaling",
+      "present": true,
+      "role": "spine",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 1,
+      "n_packed": 0,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "hF",
+          "type": "∑ b, F b = 1",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.CovariantGluing.no_covariant_selector",
+      "present": true,
+      "role": "nogo",
+      "kind": "thm",
+      "axiom_free_literal": true,
+      "policy_clean": true,
+      "isFalse": true,
+      "falseProvable": false,
+      "n_prop": 3,
+      "n_packed": 0,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "equiv",
+          "type": "∀ (Φ : State), σ (actS Φ) = actH (σ Φ)",
+          "curation": null
+        },
+        {
+          "name": "hΦ",
+          "type": "actS Φ = Φ",
+          "curation": null
+        },
+        {
+          "name": "hno",
+          "type": "∀ (h : History), actH h ≠ h",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.CovariantGluing.bool_swap_no_selector",
+      "present": true,
+      "role": "nogo",
+      "kind": "thm",
+      "axiom_free_literal": true,
+      "policy_clean": true,
+      "isFalse": true,
+      "falseProvable": false,
+      "n_prop": 1,
+      "n_packed": 0,
+      "uses_spine": [
+        "QIQTH.CovariantGluing.no_covariant_selector"
+      ],
+      "surface": [
+        {
+          "name": "equiv",
+          "type": "∀ (u : Unit), σ u = !σ u",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    }
+  ]
+}

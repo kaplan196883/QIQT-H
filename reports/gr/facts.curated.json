@@ -1,0 +1,2610 @@
+[
+  {
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "binders": [
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "g",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "gi",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hsymm",
+        "packedProps": [],
+        "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), g y a b = g y b a",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hsymm_gi",
+        "packedProps": [],
+        "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), gi y a b = gi y b a",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hinv",
+        "packedProps": [],
+        "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), ∑ σ, g y a σ * gi y σ b = if a = b then 1 else 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hCg",
+        "packedProps": [],
+        "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => g y a b",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hCgi",
+        "packedProps": [],
+        "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => gi y a b",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "φ",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "m",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "η",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "hbar",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "a",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hbar0",
+        "packedProps": [],
+        "type": "hbar ≠ 0",
+        "typeHead": "Ne",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "heta",
+        "packedProps": [],
+        "type": "η ≠ 0",
+        "typeHead": "Ne",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "ha",
+        "packedProps": [],
+        "type": "a = 2 * Real.pi / (hbar * η)",
+        "typeHead": "Eq",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hφ",
+        "packedProps": [],
+        "type": "ContDiff ℝ ⊤ φ",
+        "typeHead": "ContDiff",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hKG",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4), QIQTH.Curvature.boxField φ g gi x = m ^ 2 * φ x",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "P",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "Pinv",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hPP",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, P x i k * Pinv x k j = if i = j then 1 else 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hPP'",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, Pinv x i k * P x k j = if i = j then 1 else 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hcong",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "Sf",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "KE",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "A",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "sd",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "kd",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "ad",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hS",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (Sf x v) (sd x v) 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — per-generator derivative existence / null-congruence kinematics",
+          "rule": "setup"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hK",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (KE x v) (kd x v) 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — per-generator derivative existence / null-congruence kinematics",
+          "rule": "setup"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hA",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (A x v) (ad x v) 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — per-generator derivative existence / null-congruence kinematics",
+          "rule": "setup"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hbound",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ᶠ (t : ℝ) in nhds 0, Sf x v t ≤ η * A x v t",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hsat",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → Sf x v 0 = η * A x v 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hDnn",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ (t : ℝ), 0 ≤ KE x v t - Sf x v t",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hD0",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "mw",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hmw",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), 0 < mw x v",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "ff",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ → ℂ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "ff'",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ → ℂ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hf2",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.MemLp (ff x v) 2 MeasureTheory.volume",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hf_int",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.Integrable (ff x v) MeasureTheory.volume",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hfd",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (θ : ℝ), HasDerivAt (ff x v) (ff' x v θ) θ",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hf'_meas",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), MeasureTheory.AEStronglyMeasurable (ff' x v) MeasureTheory.volume",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "Bd",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hB",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (θ : ℝ), ‖ff' x v θ‖ ≤ Bd x v",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hTkk",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 →\n    2 * Real.pi / hbar * QIQTH.EinsteinEOS.BL (QIQTH.Curvature.kgStress m φ g gi x) v =\n      (-(2 * ↑Real.pi * ∫ (θ : ℝ), (starRingEnd ℂ) (ff x v θ) * ff' x v θ)).im",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hbridge",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 →\n    HasDerivAt\n      (fun t =>\n        inner ℂ (MeasureTheory.MemLp.toLp (ff x v) ⋯)\n          ((QIQTH.StandardSubspaceModular.modUnitary (QIQTH.Fock.BoostKMS.niceWedgeStandardSubspace (mw x v) ⋯ ⋯) t)\n            (MeasureTheory.MemLp.toLp (ff x v) ⋯)))\n      (Complex.I * ↑(kd x v)) 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hFocus",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ad x v = QIQTH.EinsteinEOS.BL (fun i j => QIQTH.Curvature.ricci g gi i j x) v",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      }
+    ],
+    "concl": {
+      "head": "Exists",
+      "isFalse": false,
+      "isProp": true,
+      "isTrue": false,
+      "pp": "∃ Λ,\n  ∀ (x : QIQTH.Curvature.Point 4) (μ ν : Fin 4),\n    a * QIQTH.Curvature.kgStress m φ g gi x μ ν = QIQTH.Curvature.einsteinTensor g gi μ ν x + Λ * g x μ ν"
+    },
+    "kind": "thm",
+    "name": "QIQTH.WedgeKMSToGR.qiqt_gr_freefield",
+    "present": true,
+    "proofUnusedBinders": [],
+    "proofUsesSpine": [
+      "QIQTH.WedgeKMSToGR.qiqt_gr_from_flux_complete"
+    ],
+    "role": "capstone",
+    "axiom_free_literal": false,
+    "policy_clean": true,
+    "nonstandard_axioms": [],
+    "falseProvable": false
+  },
+  {
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "binders": [
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "g",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "gi",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hsymm",
+        "packedProps": [],
+        "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), g y a b = g y b a",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hsymm_gi",
+        "packedProps": [],
+        "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), gi y a b = gi y b a",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hinv",
+        "packedProps": [],
+        "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), ∑ σ, g y a σ * gi y σ b = if a = b then 1 else 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hCg",
+        "packedProps": [],
+        "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => g y a b",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hCgi",
+        "packedProps": [],
+        "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => gi y a b",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "φ",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "m",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "η",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "hbar",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "a",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hbar0",
+        "packedProps": [],
+        "type": "hbar ≠ 0",
+        "typeHead": "Ne",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "heta",
+        "packedProps": [],
+        "type": "η ≠ 0",
+        "typeHead": "Ne",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "ha",
+        "packedProps": [],
+        "type": "a = 2 * Real.pi / (hbar * η)",
+        "typeHead": "Eq",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hφ",
+        "packedProps": [],
+        "type": "ContDiff ℝ ⊤ φ",
+        "typeHead": "ContDiff",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hKG",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4), QIQTH.Curvature.boxField φ g gi x = m ^ 2 * φ x",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "P",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "Pinv",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hPP",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, P x i k * Pinv x k j = if i = j then 1 else 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hPP'",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, Pinv x i k * P x k j = if i = j then 1 else 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hcong",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "Sf",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "KE",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "A",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "sd",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "kd",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "ad",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hS",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (Sf x v) (sd x v) 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — per-generator derivative existence / null-congruence kinematics",
+          "rule": "setup"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hK",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (KE x v) (kd x v) 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — per-generator derivative existence / null-congruence kinematics",
+          "rule": "setup"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hA",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (A x v) (ad x v) 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — per-generator derivative existence / null-congruence kinematics",
+          "rule": "setup"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hbound",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ᶠ (t : ℝ) in nhds 0, Sf x v t ≤ η * A x v t",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hsat",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → Sf x v 0 = η * A x v 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hDnn",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ (t : ℝ), 0 ≤ KE x v t - Sf x v t",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hD0",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hKMS",
+        "packedProps": [],
+        "type": "QIQTH.WedgeKMSToGR.WedgeKMSFlux_complete g (QIQTH.Curvature.kgStress m φ g gi) kd hbar",
+        "typeHead": "QIQTH.WedgeKMSToGR.WedgeKMSFlux_complete",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": null
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hFocus",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ad x v = QIQTH.EinsteinEOS.BL (fun i j => QIQTH.Curvature.ricci g gi i j x) v",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      }
+    ],
+    "concl": {
+      "head": "Exists",
+      "isFalse": false,
+      "isProp": true,
+      "isTrue": false,
+      "pp": "∃ Λ,\n  ∀ (x : QIQTH.Curvature.Point 4) (μ ν : Fin 4),\n    a * QIQTH.Curvature.kgStress m φ g gi x μ ν = QIQTH.Curvature.einsteinTensor g gi μ ν x + Λ * g x μ ν"
+    },
+    "kind": "thm",
+    "name": "QIQTH.WedgeKMSToGR.qiqt_gr_explicit_kg",
+    "present": true,
+    "proofUnusedBinders": [],
+    "proofUsesSpine": [],
+    "role": "spine",
+    "axiom_free_literal": false,
+    "policy_clean": true,
+    "nonstandard_axioms": [],
+    "falseProvable": false
+  },
+  {
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "binders": [
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "g",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "gi",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hsymm",
+        "packedProps": [],
+        "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), g y a b = g y b a",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hsymm_gi",
+        "packedProps": [],
+        "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), gi y a b = gi y b a",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hinv",
+        "packedProps": [],
+        "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), ∑ σ, g y a σ * gi y σ b = if a = b then 1 else 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hCg",
+        "packedProps": [],
+        "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => g y a b",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hCgi",
+        "packedProps": [],
+        "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => gi y a b",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "T",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "η",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "hbar",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "a",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hbar0",
+        "packedProps": [],
+        "type": "hbar ≠ 0",
+        "typeHead": "Ne",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "heta",
+        "packedProps": [],
+        "type": "η ≠ 0",
+        "typeHead": "Ne",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "ha",
+        "packedProps": [],
+        "type": "a = 2 * Real.pi / (hbar * η)",
+        "typeHead": "Eq",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hT_symm",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (a' b : Fin 4), T x a' b = T x b a'",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "P",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "Pinv",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hPP",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, P x i k * Pinv x k j = if i = j then 1 else 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hPP'",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, Pinv x i k * P x k j = if i = j then 1 else 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hcong",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "Sf",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "KE",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "A",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "sd",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "kd",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "ad",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hS",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (Sf x v) (sd x v) 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — per-generator derivative existence / null-congruence kinematics",
+          "rule": "setup"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hK",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (KE x v) (kd x v) 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — per-generator derivative existence / null-congruence kinematics",
+          "rule": "setup"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hA",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (A x v) (ad x v) 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — per-generator derivative existence / null-congruence kinematics",
+          "rule": "setup"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hbound",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ᶠ (t : ℝ) in nhds 0, Sf x v t ≤ η * A x v t",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hsat",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → Sf x v 0 = η * A x v 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hDnn",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ (t : ℝ), 0 ≤ KE x v t - Sf x v t",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hD0",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hflux",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → kd x v = 2 * Real.pi / hbar * QIQTH.EinsteinEOS.BL (T x) v",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": null
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hFocus",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ad x v = QIQTH.EinsteinEOS.BL (fun i j => QIQTH.Curvature.ricci g gi i j x) v",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hreg",
+        "packedProps": [],
+        "type": "∀ (f : QIQTH.Curvature.Point 4 → ℝ),\n  (∀ (y : QIQTH.Curvature.Point 4) (a' b : Fin 4), a * T y a' b = QIQTH.Curvature.ricci g gi a' b y + f y * g y a' b) →\n    (∀ (x : QIQTH.Curvature.Point 4) (ρ : Fin 4), QIQTH.Curvature.PdiffAt f ρ x) ∧\n      Differentiable ℝ fun y => f y + 1 / 2 * QIQTH.Curvature.scalarCurv g gi y",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "conserv",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (ν : Fin 4), QIQTH.Curvature.div02 g gi (fun y a' b => a * T y a' b) ν x = 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      }
+    ],
+    "concl": {
+      "head": "Exists",
+      "isFalse": false,
+      "isProp": true,
+      "isTrue": false,
+      "pp": "∃ Λ,\n  ∀ (x : QIQTH.Curvature.Point 4) (μ ν : Fin 4), a * T x μ ν = QIQTH.Curvature.einsteinTensor g gi μ ν x + Λ * g x μ ν"
+    },
+    "kind": "thm",
+    "name": "QIQTH.WedgeKMSToGR.qiqt_gr_from_flux_complete",
+    "present": true,
+    "proofUnusedBinders": [],
+    "proofUsesSpine": [
+      "QIQTH.QiqtToGR.qiqt_bekenstein_gives_gr"
+    ],
+    "role": "spine",
+    "axiom_free_literal": false,
+    "policy_clean": true,
+    "nonstandard_axioms": [],
+    "falseProvable": false
+  },
+  {
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "binders": [
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "g",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "gi",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hsymm",
+        "packedProps": [],
+        "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), g y a b = g y b a",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hsymm_gi",
+        "packedProps": [],
+        "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), gi y a b = gi y b a",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hinv",
+        "packedProps": [],
+        "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), ∑ σ, g y a σ * gi y σ b = if a = b then 1 else 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hCg",
+        "packedProps": [],
+        "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => g y a b",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hCgi",
+        "packedProps": [],
+        "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => gi y a b",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "T",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "η",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "hbar",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "a",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hbar0",
+        "packedProps": [],
+        "type": "hbar ≠ 0",
+        "typeHead": "Ne",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "heta",
+        "packedProps": [],
+        "type": "η ≠ 0",
+        "typeHead": "Ne",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "ha",
+        "packedProps": [],
+        "type": "a = 2 * Real.pi / (hbar * η)",
+        "typeHead": "Eq",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hT_symm",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (a' b : Fin 4), T x a' b = T x b a'",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "P",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "Pinv",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → Fin 4 → Fin 4 → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hPP",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, P x i k * Pinv x k j = if i = j then 1 else 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hPP'",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, Pinv x i k * P x k j = if i = j then 1 else 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hcong",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "S",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "KE",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "A",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "sd",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "kd",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "ad",
+        "packedProps": [],
+        "type": "QIQTH.Curvature.Point 4 → (Fin 4 → ℝ) → ℝ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hS",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (S x v) (sd x v) 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — per-generator derivative existence / null-congruence kinematics",
+          "rule": "setup"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hK",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (KE x v) (kd x v) 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — per-generator derivative existence / null-congruence kinematics",
+          "rule": "setup"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hA",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (A x v) (ad x v) 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — per-generator derivative existence / null-congruence kinematics",
+          "rule": "setup"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hbound",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ᶠ (t : ℝ) in nhds 0, S x v t ≤ η * A x v t",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hsat",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → S x v 0 = η * A x v 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hDnn",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ (t : ℝ), 0 ≤ KE x v t - S x v t",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hD0",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → KE x v 0 - S x v 0 = 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hFlux",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → kd x v = 2 * Real.pi / hbar * QIQTH.EinsteinEOS.BL (T x) v",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": null
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hFocus",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ad x v = QIQTH.EinsteinEOS.BL (fun i j => QIQTH.Curvature.ricci g gi i j x) v",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hreg",
+        "packedProps": [],
+        "type": "∀ (f : QIQTH.Curvature.Point 4 → ℝ),\n  (∀ (y : QIQTH.Curvature.Point 4) (a' b : Fin 4), a * T y a' b = QIQTH.Curvature.ricci g gi a' b y + f y * g y a' b) →\n    (∀ (x : QIQTH.Curvature.Point 4) (ρ : Fin 4), QIQTH.Curvature.PdiffAt f ρ x) ∧\n      Differentiable ℝ fun y => f y + 1 / 2 * QIQTH.Curvature.scalarCurv g gi y",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "conserv",
+        "packedProps": [],
+        "type": "∀ (x : QIQTH.Curvature.Point 4) (ν : Fin 4), QIQTH.Curvature.div02 g gi (fun y a' b => a * T y a' b) ν x = 0",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      }
+    ],
+    "concl": {
+      "head": "Exists",
+      "isFalse": false,
+      "isProp": true,
+      "isTrue": false,
+      "pp": "∃ Λ,\n  ∀ (x : QIQTH.Curvature.Point 4) (μ ν : Fin 4), a * T x μ ν = QIQTH.Curvature.einsteinTensor g gi μ ν x + Λ * g x μ ν"
+    },
+    "kind": "thm",
+    "name": "QIQTH.QiqtToGR.qiqt_bekenstein_gives_gr",
+    "present": true,
+    "proofUnusedBinders": [],
+    "proofUsesSpine": [],
+    "role": "spine",
+    "axiom_free_literal": false,
+    "policy_clean": true,
+    "nonstandard_axioms": [],
+    "falseProvable": false
+  },
+  {
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "binders": [
+      {
+        "info": "implicit",
+        "kind": "data",
+        "name": "m",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hm",
+        "packedProps": [],
+        "type": "0 < m",
+        "typeHead": "LT.lt",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": null
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "V",
+        "packedProps": [],
+        "type": "ℝ → ↥(MeasureTheory.Lp ℂ 2 MeasureTheory.volume) →L[ℂ] ↥(MeasureTheory.Lp ℂ 2 MeasureTheory.volume)",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hVboost",
+        "packedProps": [],
+        "type": "∀ (t : ℝ) (x : ↥(MeasureTheory.Lp ℂ 2 MeasureTheory.volume)),\n  (V t) x = (QIQTH.Fock.OneParticle.boostUnitary (2 * Real.pi * t)) x",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": null
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "t",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      }
+    ],
+    "concl": {
+      "head": "Eq",
+      "isFalse": false,
+      "isProp": true,
+      "isTrue": false,
+      "pp": "QIQTH.StandardSubspaceModular.modUnitary (QIQTH.Fock.BoostKMS.niceWedgeStandardSubspace m ⋯ ⋯) t = V t"
+    },
+    "kind": "thm",
+    "name": "QIQTH.Fock.CyclicWitness.oneParticleBW_niceWedge_unconditional",
+    "present": true,
+    "proofUnusedBinders": [],
+    "proofUsesSpine": [],
+    "role": "spine",
+    "axiom_free_literal": false,
+    "policy_clean": true,
+    "nonstandard_axioms": [],
+    "falseProvable": false
+  },
+  {
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "binders": [
+      {
+        "info": "implicit",
+        "kind": "data",
+        "name": "m",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hm",
+        "packedProps": [],
+        "type": "0 < m",
+        "typeHead": "LT.lt",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": null
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "f",
+        "packedProps": [],
+        "type": "ℝ → ℂ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "f'",
+        "packedProps": [],
+        "type": "ℝ → ℂ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hf2",
+        "packedProps": [],
+        "type": "MeasureTheory.MemLp f 2 MeasureTheory.volume",
+        "typeHead": "MeasureTheory.MemLp",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hf_int",
+        "packedProps": [],
+        "type": "MeasureTheory.Integrable f MeasureTheory.volume",
+        "typeHead": "MeasureTheory.Integrable",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hfd",
+        "packedProps": [],
+        "type": "∀ (x : ℝ), HasDerivAt f (f' x) x",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hf'_meas",
+        "packedProps": [],
+        "type": "MeasureTheory.AEStronglyMeasurable f' MeasureTheory.volume",
+        "typeHead": "MeasureTheory.AEStronglyMeasurable",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "B",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hB",
+        "packedProps": [],
+        "type": "∀ (x : ℝ), ‖f' x‖ ≤ B",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "hbar",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "Tkk",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hTkk",
+        "packedProps": [],
+        "type": "2 * Real.pi / hbar * Tkk = (-(2 * ↑Real.pi * ∫ (θ : ℝ), (starRingEnd ℂ) (f θ) * f' θ)).im",
+        "typeHead": "Eq",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      }
+    ],
+    "concl": {
+      "head": "HasDerivAt",
+      "isFalse": false,
+      "isProp": true,
+      "isTrue": false,
+      "pp": "HasDerivAt\n  (fun t =>\n    inner ℂ (MeasureTheory.MemLp.toLp f hf2)\n      ((QIQTH.StandardSubspaceModular.modUnitary (QIQTH.Fock.BoostKMS.niceWedgeStandardSubspace m ⋯ ⋯) t)\n        (MeasureTheory.MemLp.toLp f hf2)))\n  (Complex.I * ↑(2 * Real.pi / hbar * Tkk)) 0"
+    },
+    "kind": "thm",
+    "name": "QIQTH.Fock.freeField_oneParticle_hFlux",
+    "present": true,
+    "proofUnusedBinders": [],
+    "proofUsesSpine": [],
+    "role": "spine",
+    "axiom_free_literal": false,
+    "policy_clean": true,
+    "nonstandard_axioms": [],
+    "falseProvable": false
+  },
+  {
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "binders": [
+      {
+        "info": "implicit",
+        "kind": "data",
+        "name": "m",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hm",
+        "packedProps": [],
+        "type": "0 < m",
+        "typeHead": "LT.lt",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": null
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "f",
+        "packedProps": [],
+        "type": "ℝ → ℂ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "f'",
+        "packedProps": [],
+        "type": "ℝ → ℂ",
+        "typeHead": "<other>"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hf2",
+        "packedProps": [],
+        "type": "MeasureTheory.MemLp f 2 MeasureTheory.volume",
+        "typeHead": "MeasureTheory.MemLp",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hf_int",
+        "packedProps": [],
+        "type": "MeasureTheory.Integrable f MeasureTheory.volume",
+        "typeHead": "MeasureTheory.Integrable",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hfd",
+        "packedProps": [],
+        "type": "∀ (x : ℝ), HasDerivAt f (f' x) x",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hf'_meas",
+        "packedProps": [],
+        "type": "MeasureTheory.AEStronglyMeasurable f' MeasureTheory.volume",
+        "typeHead": "MeasureTheory.AEStronglyMeasurable",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "B",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hB",
+        "packedProps": [],
+        "type": "∀ (x : ℝ), ‖f' x‖ ≤ B",
+        "typeHead": "<other>",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "regularity",
+          "label": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants",
+          "rule": "regularity"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "hbar",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "kd",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "data",
+        "name": "Tkk",
+        "packedProps": [],
+        "type": "ℝ",
+        "typeHead": "Real"
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hTkk",
+        "packedProps": [],
+        "type": "2 * Real.pi / hbar * Tkk = (-(2 * ↑Real.pi * ∫ (θ : ℝ), (starRingEnd ℂ) (f θ) * f' θ)).im",
+        "typeHead": "Eq",
+        "dischargeable": false,
+        "shared": true,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      },
+      {
+        "info": "explicit",
+        "kind": "prop",
+        "name": "hbridge",
+        "packedProps": [],
+        "type": "HasDerivAt\n  (fun t =>\n    inner ℂ (MeasureTheory.MemLp.toLp f hf2)\n      ((QIQTH.StandardSubspaceModular.modUnitary (QIQTH.Fock.BoostKMS.niceWedgeStandardSubspace m ⋯ ⋯) t)\n        (MeasureTheory.MemLp.toLp f hf2)))\n  (Complex.I * ↑kd) 0",
+        "typeHead": "HasDerivAt",
+        "dischargeable": false,
+        "shared": false,
+        "status": "surface",
+        "curation": {
+          "category": "physics",
+          "label": "PHYSICS — genuine input (EOM / Clausius / focusing / localization)",
+          "rule": "physics-floor"
+        }
+      }
+    ],
+    "concl": {
+      "head": "Eq",
+      "isFalse": false,
+      "isProp": true,
+      "isTrue": false,
+      "pp": "kd = 2 * Real.pi / hbar * Tkk"
+    },
+    "kind": "thm",
+    "name": "QIQTH.Fock.freeField_component_hFlux",
+    "present": true,
+    "proofUnusedBinders": [],
+    "proofUsesSpine": [
+      "QIQTH.Fock.freeField_oneParticle_hFlux"
+    ],
+    "role": "spine",
+    "axiom_free_literal": false,
+    "policy_clean": true,
+    "nonstandard_axioms": [],
+    "falseProvable": false
+  }
+]

@@ -1,0 +1,69 @@
+# Track config — Born rule.  `python -m lean_track report -c tracks/born.toml`
+[track]
+id = "born"
+title = "Born rule"
+subtitle = "Target 1 — QIQT-H compatible with Born (spine + no-go audits)"
+
+[project]
+lean_import = "QIQTH"
+allowed_axioms = ["propext", "Classical.choice", "Quot.sound"]
+timeout_sec = 1800
+
+[[theorems]]
+name = "QIQTH.BornJoinGleason.finite_noCollapseBorn_fromNoncontextuality"
+role = "capstone"
+[[theorems]]
+name = "QIQTH.EffectGleason.EffectMeasure.finite_effect_gleason"
+role = "spine"
+[[theorems]]
+name = "QIQTH.GleasonSelector.positive_ray_certain_forces_born"
+role = "spine"
+[[theorems]]
+name = "QIQTH.RefinementBorn.continuous_additive_fMeasure_eq_born"
+role = "spine"
+[[theorems]]
+name = "QIQTH.RecordGleason.decoherent_partition_additive"
+role = "spine"
+[[theorems]]
+name = "QIQTH.BornJoin.ActualEnsemble.finite_noCollapseBornRepresentation"
+role = "spine"
+[[theorems]]
+name = "QIQTH.BornMeasureUniqueness.product_born_measure_unique"
+role = "spine"
+[[theorems]]
+name = "QIQTH.BornTypicalityFinite.chebyshev_freq"
+role = "spine"
+[[theorems]]
+name = "QIQTH.BornTypicality.qiqth_born_typicality_conditional"
+role = "spine"
+[[theorems]]
+name = "QIQTH.NoBornFromNothing.born_distribution_realizable_conditional"
+role = "nogo"
+[[theorems]]
+name = "QIQTH.NoConcentration.decoherence_does_not_concentrate"
+role = "nogo"
+[[theorems]]
+name = "QIQTH.EquivarianceGap.support_preservation_does_not_imply_measure_preservation"
+role = "nogo"
+[[theorems]]
+name = "QIQTH.OperationalNoGo.operational_data_insufficient"
+role = "nogo"
+
+# --- curation rules ---
+[[category_rules]]
+id = "bridge-additivity"
+category = "bridge"
+label = "BRIDGE — additivity / non-contextuality (the Born-strength premise)"
+name_regex = "(additive|noncontext|hcal|oneSite|hnc)"
+
+[[category_rules]]
+id = "bridge-positivity"
+category = "bridge"
+label = "BRIDGE — positivity / normalization / ray-certainty"
+name_regex = "(normalized|nonneg|pos|ray|certain)"
+
+[[category_rules]]
+id = "setup"
+category = "setup"
+label = "SETUP — independence / completeness / probability vector"
+name_regex = "(indep|complete|p_sum|sum_one|p_nonneg|hsum)"

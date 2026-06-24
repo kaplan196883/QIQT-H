@@ -1,0 +1,52 @@
+# Track config — GR field equations.  Consumed by `python -m lean_track report -c tracks/gr.toml`.
+[track]
+id = "gr"
+title = "GR field equations"
+subtitle = "Target 3 — QIQT-H gives the GR field equations (Jacobson route, free KG field)"
+
+[project]
+lean_import = "QIQTH"
+allowed_axioms = ["propext", "Classical.choice", "Quot.sound"]
+timeout_sec = 1800
+
+# --- spine (ordered; capstone first) ---
+[[theorems]]
+name = "QIQTH.WedgeKMSToGR.qiqt_gr_freefield"
+role = "capstone"
+[[theorems]]
+name = "QIQTH.WedgeKMSToGR.qiqt_gr_explicit_kg"
+role = "spine"
+[[theorems]]
+name = "QIQTH.WedgeKMSToGR.qiqt_gr_from_flux_complete"
+role = "spine"
+[[theorems]]
+name = "QIQTH.QiqtToGR.qiqt_bekenstein_gives_gr"
+role = "spine"
+[[theorems]]
+name = "QIQTH.Fock.CyclicWitness.oneParticleBW_niceWedge_unconditional"
+role = "spine"
+[[theorems]]
+name = "QIQTH.Fock.freeField_oneParticle_hFlux"
+role = "spine"
+[[theorems]]
+name = "QIQTH.Fock.freeField_component_hFlux"
+role = "spine"
+
+# --- curation rules (author labels — provenance [C]; first match wins) ---
+[[category_rules]]
+id = "physics-floor"
+category = "physics"
+label = "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+name_regex = "^(hKG|hbound|hsat|hDnn|hD0|hFocus|hTkk|hbridge)$"
+
+[[category_rules]]
+id = "setup"
+category = "setup"
+label = "SETUP — per-generator derivative existence / null-congruence kinematics"
+name_regex = "^(hS|hK|hA|hVC|hgeo|hequil|hVval|harea)$"
+
+[[category_rules]]
+id = "regularity"
+category = "regularity"
+label = "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
+name_regex = "^(hsymm|hsymm_gi|hinv|hCg|hCgi|hPP|hPP'|hcong|hT_symm|hbar0|heta|ha|hφ|hmw|hf2|hf_int|hF0_int|hfd|hf'_meas|hB|hreg|conserv)$"

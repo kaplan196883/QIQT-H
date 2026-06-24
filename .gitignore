@@ -26,3 +26,7 @@ __pycache__/
 # generated report probe (temp)
 lean/mathlib/QIQTH/_ReportProbeTmp.lean
 /reports/*.tmp
+
+# lean_track temp probes/outputs
+lean/mathlib/QIQTH/_lt_*
+lean/mathlib/_lt_*

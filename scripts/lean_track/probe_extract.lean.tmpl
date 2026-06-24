@@ -1,0 +1,114 @@
+/-
+  AUTO-GENERATED extractor probe (written by lean_track). Lean facts only.
+  Emits a JSON array to the file @@OUTPUT@@ (writing to a file, not stdout, avoids
+  diagnostics corrupting the JSON). Placeholders @@TARGETS@@, @@OUTPUT@@ are filled by Python.
+-/
+import @@IMPORT@@
+
+open Lean Elab Command Meta
+
+def reportTargets : List Name := [@@TARGETS@@]
+
+/-- Prop-valued fields packed inside a structure-typed data binder (depth 1):
+    surfaces assumptions hidden inside e.g. `(M : EffectMeasure d)`. -/
+def packedProps (ty : Expr) : MetaM (Array Json) := do
+  let ty ← whnf ty
+  let fn := ty.getAppFn
+  let .const sname _ := fn | return #[]
+  let env ← getEnv
+  unless isStructure env sname do return #[]
+  let some (.inductInfo iv) := env.find? sname | return #[]
+  let some ctor := iv.ctors.head? | return #[]
+  let cinfo ← getConstInfo ctor
+  forallTelescopeReducing cinfo.type fun cargs _ => do
+    let mut fields : Array Json := #[]
+    for i in [iv.numParams:cargs.size] do
+      let ld ← cargs[i]!.fvarId!.getDecl
+      if (← isProp ld.type) then
+        fields := fields.push (Json.mkObj [
+          ("field", Json.str (toString ld.userName)),
+          ("type", Json.str (toString (← ppExpr ld.type)))])
+    return fields
+
+def binfoStr : BinderInfo → String
+  | .default => "explicit" | .implicit => "implicit"
+  | .strictImplicit => "strictImplicit" | .instImplicit => "instance"
+
+def headName (e : Expr) : String :=
+  match e.getAppFn with
+  | .const n _ => toString n
+  | .fvar _ => "<fvar>"
+  | .sort _ => "Sort"
+  | _ => "<other>"
+
+def probeOne (tgt : Name) : MetaM Json := do
+  let infoOpt ← (do try pure (some (← getConstInfo tgt)) catch _ => pure none)
+  match infoOpt with
+  | none => return Json.mkObj [("name", Json.str (toString tgt)), ("present", Json.bool false)]
+  | some info =>
+      let kind := match info with
+        | .thmInfo _ => "thm" | .defnInfo _ => "def"
+        | .axiomInfo _ => "axiom" | .opaqueInfo _ => "opaque" | _ => "other"
+      let axs ← collectAxioms tgt
+      -- proof-term facts (only for theorems/defs that carry a value)
+      let mut usesSpine : Array Json := #[]
+      let mut unused : Array Json := #[]
+      let valOpt : Option Expr := match info with
+        | .thmInfo v => some v.value | .defnInfo v => some v.value | _ => none
+      if let some val := valOpt then
+        let used := val.getUsedConstants
+        let tset := reportTargets.foldl (fun s n => s.insert n) (∅ : NameSet)
+        for c in used do
+          if tset.contains c && c != tgt then
+            usesSpine := usesSpine.push (Json.str (toString c))
+        -- proof-unused binders: i-th lambda fvar absent from body and later binder types
+        try
+          unused ← lambdaTelescope val fun lams body => do
+            let mut u : Array Json := #[]
+            for i in [0:lams.size] do
+              let fv := lams[i]!.fvarId!
+              let ld ← fv.getDecl
+              let mut usedHere := body.containsFVar fv
+              for j in [i+1:lams.size] do
+                let ldj ← lams[j]!.fvarId!.getDecl
+                if ldj.type.containsFVar fv then usedHere := true
+              if !usedHere then u := u.push (Json.str (toString ld.userName))
+            pure u
+        catch _ => unused := #[]
+      -- binder telescope of the TYPE
+      let (binders, concl) ← forallTelescopeReducing info.type fun args concl => do
+        let mut bs : Array Json := #[]
+        for a in args do
+          let ld ← a.fvarId!.getDecl
+          let isP ← isProp ld.type
+          let bk := if isP then "prop" else if ld.binderInfo == .instImplicit then "instance" else "data"
+          let packed ← if bk == "data" then packedProps ld.type else pure #[]
+          bs := bs.push (Json.mkObj [
+            ("name", Json.str (toString ld.userName)),
+            ("info", Json.str (binfoStr ld.binderInfo)),
+            ("kind", Json.str bk),
+            ("typeHead", Json.str (headName ld.type)),
+            ("type", Json.str (toString (← ppExpr ld.type))),
+            ("packedProps", Json.arr packed)])
+        let cP ← isProp concl
+        pure (bs, Json.mkObj [
+          ("pp", Json.str (toString (← ppExpr concl))),
+          ("isProp", Json.bool cP),
+          ("isFalse", Json.bool (concl.isConstOf ``False)),
+          ("isTrue", Json.bool (concl.isConstOf ``True)),
+          ("head", Json.str (headName concl))])
+      return Json.mkObj [
+        ("name", Json.str (toString tgt)),
+        ("present", Json.bool true),
+        ("kind", Json.str kind),
+        ("axioms", Json.arr (axs.map (fun n => Json.str (toString n)))),
+        ("binders", Json.arr binders),
+        ("concl", concl),
+        ("proofUsesSpine", Json.arr usesSpine),
+        ("proofUnusedBinders", Json.arr unused)]
+
+run_cmd liftTermElabM do
+  let mut objs : Array Json := #[]
+  for tgt in reportTargets do
+    objs := objs.push (← probeOne tgt)
+  IO.FS.writeFile "@@OUTPUT@@" (Json.arr objs).compress

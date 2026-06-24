@@ -1,0 +1,500 @@
+{
+  "track": "born",
+  "title": "Born rule",
+  "generated": "2026-06-24T00:39:17.155586+00:00",
+  "git": "b82b3c8",
+  "totals": {
+    "theorems": 13,
+    "present": 13,
+    "project_axioms": [],
+    "all_policy_clean": true,
+    "vacuous_contexts": []
+  },
+  "theorems": [
+    {
+      "name": "QIQTH.BornJoinGleason.finite_noCollapseBorn_fromNoncontextuality",
+      "present": true,
+      "role": "capstone",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 4,
+      "n_packed": 8,
+      "uses_spine": [
+        "QIQTH.BornJoin.ActualEnsemble.finite_noCollapseBornRepresentation"
+      ],
+      "surface": [
+        {
+          "name": "E.p_nonneg",
+          "type": "∀ (k : Fin m), 0 ≤ p k",
+          "curation": "BRIDGE — positivity / normalization / ray-certainty"
+        },
+        {
+          "name": "E.p_sum",
+          "type": "∑ k, p k = 1",
+          "curation": "SETUP — independence / completeness / probability vector"
+        },
+        {
+          "name": "E.oneSite",
+          "type": "∀ (t : Fin n) (a : Fin m), P.massSet {ω | (V ω t).actualValue = a} = p a",
+          "curation": "BRIDGE — additivity / non-contextuality (the Born-strength premise)"
+        },
+        {
+          "name": "E.indep",
+          "type": "∀ (h : Fin n → Fin m),\n  P.massSet {ω | (fun t => (V ω t).actualValue) = h} = ∏ t, P.massSet {ω | (V ω t).actualValue = h t}",
+          "curation": "SETUP — independence / completeness / probability vector"
+        },
+        {
+          "name": "M.normalized",
+          "type": "μ 1 = 1",
+          "curation": "BRIDGE — positivity / normalization / ray-certainty"
+        },
+        {
+          "name": "M.nonneg",
+          "type": "∀ (E : Matrix (Fin d) (Fin d) ℂ), QIQTH.EffectGleason.IsEffect E → 0 ≤ μ E",
+          "curation": "BRIDGE — positivity / normalization / ray-certainty"
+        },
+        {
+          "name": "M.additive",
+          "type": "∀ (E F : Matrix (Fin d) (Fin d) ℂ),\n  QIQTH.EffectGleason.IsEffect E →\n    QIQTH.EffectGleason.IsEffect F → QIQTH.EffectGleason.IsEffect (E + F) → μ (E + F) = μ E + μ F",
+          "curation": "BRIDGE — additivity / non-contextuality (the Born-strength premise)"
+        },
+        {
+          "name": "hP",
+          "type": "∀ (a : Fin m), QIQTH.EffectGleason.IsEffect (P a)",
+          "curation": null
+        },
+        {
+          "name": "hcal",
+          "type": "∀ (a : Fin m), M.μ (P a) = E.p a",
+          "curation": "BRIDGE — additivity / non-contextuality (the Born-strength premise)"
+        },
+        {
+          "name": "k.isLt",
+          "type": "val < n",
+          "curation": null
+        },
+        {
+          "name": "hε",
+          "type": "0 < ε",
+          "curation": null
+        },
+        {
+          "name": "hn",
+          "type": "0 < n",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.EffectGleason.EffectMeasure.finite_effect_gleason",
+      "present": true,
+      "role": "spine",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 0,
+      "n_packed": 3,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "m.normalized",
+          "type": "μ 1 = 1",
+          "curation": "BRIDGE — positivity / normalization / ray-certainty"
+        },
+        {
+          "name": "m.nonneg",
+          "type": "∀ (E : Matrix (Fin d) (Fin d) ℂ), QIQTH.EffectGleason.IsEffect E → 0 ≤ μ E",
+          "curation": "BRIDGE — positivity / normalization / ray-certainty"
+        },
+        {
+          "name": "m.additive",
+          "type": "∀ (E F : Matrix (Fin d) (Fin d) ℂ),\n  QIQTH.EffectGleason.IsEffect E →\n    QIQTH.EffectGleason.IsEffect F → QIQTH.EffectGleason.IsEffect (E + F) → μ (E + F) = μ E + μ F",
+          "curation": "BRIDGE — additivity / non-contextuality (the Born-strength premise)"
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.GleasonSelector.positive_ray_certain_forces_born",
+      "present": true,
+      "role": "spine",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 8,
+      "n_packed": 0,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "hψ",
+          "type": "star ψ ⬝ᵥ ψ = 1",
+          "curation": null
+        },
+        {
+          "name": "hadd",
+          "type": "∀ (A B : Matrix n n ℂ), w (A + B) = w A + w B",
+          "curation": null
+        },
+        {
+          "name": "hhom",
+          "type": "∀ (c : ℂ) (A : Matrix n n ℂ), w (c • A) = c * w A",
+          "curation": null
+        },
+        {
+          "name": "hpsd",
+          "type": "∀ (A : Matrix n n ℂ), QIQTH.GleasonSelector.NonnegC (w (A.conjTranspose * A))",
+          "curation": null
+        },
+        {
+          "name": "hP_herm",
+          "type": "(Matrix.vecMulVec ψ (star ψ)).conjTranspose = Matrix.vecMulVec ψ (star ψ)",
+          "curation": null
+        },
+        {
+          "name": "hP_idem",
+          "type": "Matrix.vecMulVec ψ (star ψ) * Matrix.vecMulVec ψ (star ψ) = Matrix.vecMulVec ψ (star ψ)",
+          "curation": null
+        },
+        {
+          "name": "hray",
+          "type": "w (Matrix.vecMulVec ψ (star ψ)) = 1",
+          "curation": "BRIDGE — positivity / normalization / ray-certainty"
+        },
+        {
+          "name": "hone",
+          "type": "w 1 = 1",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.RefinementBorn.continuous_additive_fMeasure_eq_born",
+      "present": true,
+      "role": "spine",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 3,
+      "n_packed": 2,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "f.map_add'",
+          "type": "∀ (x y : M), toZeroHom.toFun (x + y) = toZeroHom.toFun x + toZeroHom.toFun y",
+          "curation": null
+        },
+        {
+          "name": "hf",
+          "type": "Continuous ⇑f",
+          "curation": null
+        },
+        {
+          "name": "h1",
+          "type": "f 1 ≠ 0",
+          "curation": null
+        },
+        {
+          "name": "hsum",
+          "type": "∑ j, w j = 1",
+          "curation": "SETUP — independence / completeness / probability vector"
+        },
+        {
+          "name": "k.isLt",
+          "type": "val < n",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.RecordGleason.decoherent_partition_additive",
+      "present": true,
+      "role": "spine",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 1,
+      "n_packed": 1,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "hdec",
+          "type": "QIQTH.RecordGleason.Decoherent ψ C",
+          "curation": null
+        },
+        {
+          "name": "S.nodup",
+          "type": "val.Nodup",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.BornJoin.ActualEnsemble.finite_noCollapseBornRepresentation",
+      "present": true,
+      "role": "spine",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 2,
+      "n_packed": 5,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "E.p_nonneg",
+          "type": "∀ (k : Fin m), 0 ≤ p k",
+          "curation": "BRIDGE — positivity / normalization / ray-certainty"
+        },
+        {
+          "name": "E.p_sum",
+          "type": "∑ k, p k = 1",
+          "curation": "SETUP — independence / completeness / probability vector"
+        },
+        {
+          "name": "E.oneSite",
+          "type": "∀ (t : Fin n) (a : Fin m), P.massSet {ω | (V ω t).actualValue = a} = p a",
+          "curation": "BRIDGE — additivity / non-contextuality (the Born-strength premise)"
+        },
+        {
+          "name": "E.indep",
+          "type": "∀ (h : Fin n → Fin m),\n  P.massSet {ω | (fun t => (V ω t).actualValue) = h} = ∏ t, P.massSet {ω | (V ω t).actualValue = h t}",
+          "curation": "SETUP — independence / completeness / probability vector"
+        },
+        {
+          "name": "k.isLt",
+          "type": "val < n",
+          "curation": null
+        },
+        {
+          "name": "hε",
+          "type": "0 < ε",
+          "curation": null
+        },
+        {
+          "name": "hn",
+          "type": "0 < n",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.BornMeasureUniqueness.product_born_measure_unique",
+      "present": true,
+      "role": "spine",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 5,
+      "n_packed": 1,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "hρ",
+          "type": "ρ.PosSemidef",
+          "curation": null
+        },
+        {
+          "name": "hE",
+          "type": "∀ (k : Fin m), (E k).PosSemidef",
+          "curation": null
+        },
+        {
+          "name": "hμ0",
+          "type": "μ ∅ = 0",
+          "curation": null
+        },
+        {
+          "name": "hμins",
+          "type": "∀ (a : Fin n → Fin m) (S : Finset (Fin n → Fin m)), a ∉ S → μ (insert a S) = μ {a} + μ S",
+          "curation": null
+        },
+        {
+          "name": "hpt",
+          "type": "∀ (ω : Fin n → Fin m), μ {ω} = ∏ t, QIQTH.BornTypicalityQuantum.bornProb ρ E (ω t)",
+          "curation": null
+        },
+        {
+          "name": "S.nodup",
+          "type": "val.Nodup",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.BornTypicalityFinite.chebyshev_freq",
+      "present": true,
+      "role": "spine",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 4,
+      "n_packed": 1,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "hp",
+          "type": "∀ (i : Fin m), 0 ≤ p i",
+          "curation": null
+        },
+        {
+          "name": "hp1",
+          "type": "∑ i, p i = 1",
+          "curation": null
+        },
+        {
+          "name": "k.isLt",
+          "type": "val < n",
+          "curation": null
+        },
+        {
+          "name": "hε",
+          "type": "0 < ε",
+          "curation": null
+        },
+        {
+          "name": "hN",
+          "type": "0 < N",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.BornTypicality.qiqth_born_typicality_conditional",
+      "present": true,
+      "role": "spine",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 0,
+      "n_packed": 3,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "M.nn",
+          "type": "∀ (γ : Γ), 0 ≤ μ γ",
+          "curation": null
+        },
+        {
+          "name": "M.sum_one",
+          "type": "∑ γ, μ γ = 1",
+          "curation": "SETUP — independence / completeness / probability vector"
+        },
+        {
+          "name": "M.born_marginal",
+          "type": "∀ (k : Outcome), QIQTH.NoBornFromNothing.outcomeMarginal outcome μ k = c k ^ 2",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.NoBornFromNothing.born_distribution_realizable_conditional",
+      "present": true,
+      "role": "nogo",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 3,
+      "n_packed": 0,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "h_surj",
+          "type": "Function.Surjective outcome",
+          "curation": null
+        },
+        {
+          "name": "hc_norm",
+          "type": "∑ k, c k ^ 2 = 1",
+          "curation": null
+        }
+      ],
+      "dischargeable": [
+        "hc_nn_sq"
+      ]
+    },
+    {
+      "name": "QIQTH.NoConcentration.decoherence_does_not_concentrate",
+      "present": true,
+      "role": "nogo",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 2,
+      "n_packed": 0,
+      "uses_spine": [],
+      "surface": [
+        {
+          "name": "h0",
+          "type": "c 0 ≠ 0",
+          "curation": null
+        },
+        {
+          "name": "h1",
+          "type": "c 1 ≠ 0",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.EquivarianceGap.support_preservation_does_not_imply_measure_preservation",
+      "present": true,
+      "role": "nogo",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 0,
+      "n_packed": 0,
+      "uses_spine": [],
+      "surface": [],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.OperationalNoGo.operational_data_insufficient",
+      "present": true,
+      "role": "nogo",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 0,
+      "n_packed": 0,
+      "uses_spine": [],
+      "surface": [],
+      "dischargeable": []
+    }
+  ]
+}
