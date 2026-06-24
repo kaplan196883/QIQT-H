@@ -4857,6 +4857,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_gaussian
 -- Maximally-discharged capstone: T3-1 (entropy from finite record) + T3-3-C3 (mode from φ) combined:
 #print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_complete
+-- T3-GR-Raychaudhuri: hWgeo/hWequil from W covariantly constant; flat-metric witness:
+#print axioms QIQTH.Curvature.raychaudhuri_setup_of_covConst
+#print axioms QIQTH.Curvature.covDerivVec_constMetric_const
 
 -- Tier A1 of QIQT_GR_DISCHARGEABLE_PLAN: discharge hric_symm.
 #print axioms QIQTH.Curvature.ricci_symm
