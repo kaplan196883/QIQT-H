@@ -305,7 +305,7 @@ reviewer and the audit; and the human owns scope and the gatekeeping of premises
 \node[box, below=of human] (form) {\textbf{Formalizer}\\\scriptsize coding agent};
 \node[oracle, right=of form] (comp) {\textbf{Lean / Mathlib}\\\textbf{compiler}\\\scriptsize authority on validity};
 \node[box, below=of form] (dev) {\textbf{Development}};
-\node[box, right=of dev, text width=34mm] (aud) {\textbf{Axiom auditor}\\\scriptsize \texttt{\#print axioms};\\proved/conditional/cited;\\CI budget; vacuity lint};
+\node[box, right=of dev, text width=34mm] (aud) {\textbf{Axiom auditor}\\\scriptsize \texttt{\#print axioms};\\proved/conditional/cited;\\CI budget; vacuity lint;\\track state report (open surface)};
 \node[box, below=of dev, text width=34mm] (rev) {\textbf{Adversarial reviewer}\\\scriptsize independent model;\\attacks the design};
 \node[box, below=of aud, text width=34mm] (bp) {\textbf{Blueprint}\\\scriptsize statements linked to\\kernel-checked declarations};
 
@@ -447,6 +447,23 @@ axiom budget and the vacuity lint, these give a four-part picture of what a resu
 axioms it invokes, whether any are vacuous, which hypotheses it carries, and which of those are
 redundant.
 
+These per-result checks are aggregated, finally, into a goal-directed \emph{state report} for a \emph{track} —
+a target theorem together with the spine of lemmas that reaches it. The report is driven by a small
+version-controlled manifest naming the track's theorems, the axioms it is permitted to use, and the
+curation rules that sort hypotheses into physical, setup, and regularity piles; from that manifest it
+is regenerated deterministically. For the track's capstone it lists the axioms each result actually
+depends on, the complete hypothesis surface — including assumptions *packed inside data-structure
+arguments*, which a naive binder count silently misses — the redundancy-probe verdict, and a
+partition of the surface into proved, conditional, and open. Every line carries a provenance badge
+separating a kernel fact from a prober verdict from a human curation label from our own
+interpretation, so the report can neither upgrade "not discharged by the probe" into "mathematically
+necessary" nor pass an editorial label off as a Lean fact. Its purpose is direction, not
+record-keeping: the open and physical piles are, literally, the assumptions still to discharge, and a
+diff between two runs reports exactly which axioms were retired and which hypotheses were closed since
+the last. This is what makes the loop goal-directed rather than merely green — after each increment
+the human and the formalizer read the remaining open surface and choose the next assumption to
+internalize or prove, and the budget's descent toward zero is that open pile emptying out.
+
 \subsection{The verified blueprint bridge}
 
 An AI-formalized theory that only Lean experts can read fails the people who must evaluate it, here
@@ -479,7 +496,10 @@ axiom content. Fourth, the adversarial reviewer critiques the design along the f
 Fifth, the human adjudicates, either accepting the increment, ordering a redesign, or converting an
 axiom into an explicit hypothesis on the consuming theorems. Role boundaries are fixed and do not
 blur: the compiler is the sole authority on proof validity; the reviewer never edits proofs and
-never has the last word; the human alone admits an axiom into the budget.
+never has the last word; the human alone admits an axiom into the budget. Each round then closes by
+regenerating the track's state report (§3.5); its open pile sets the next round's target and its
+run-to-run diff records what was discharged, so successive rounds are steered by what remains to be
+proved rather than by what already compiles.
 
 Reproducibility is built in rather than asserted. The full development, the per-theorem audit
 module, the budget-check and vacuity-lint scripts, and the blueprint are published in a public
