@@ -1,7 +1,16 @@
 # T3-3 — Localization / the bridge map (Gap 2): discharge `hFocus`, `hbridge`, `hTkk`
 
-**Status:** IN PROGRESS — Stages 0 ✅, 1 ✅, 2 ✅ done. **Track:** GR. **Goal capstone:**
-`QIQTH.WedgeKMSToGR.qiqt_gr_freefield` (`lean/mathlib/QIQTH/QiqtGrFreeField.lean`).
+**Status:** ✅ COMPLETE (Stages 0–2 full discharge; Stage 3 = documented-stop, the honest outcome).
+**Track:** GR. **Goal capstone:** `QIQTH.WedgeKMSToGR.qiqt_gr_freefield`
+(`lean/mathlib/QIQTH/QiqtGrFreeField.lean`).
+
+### Outcome — Gap-2 localization map went from **4 abstract identities → 1 transparent physical law**
+`hbridge` and `hFocus` are **genuinely discharged** (reduced to axiom-free one-particle BW machinery and the
+proved Raychaudhuri focusing law). `hTkk` is **not eliminated** — it is the single irreducible physical input
+(the Unruh/BW localization map), now stated transparently as *classical null energy = mode boost charge*.
+Eliminating it would require either continuum mode-expansion machinery Mathlib lacks, or constructing an
+*arbitrary* mode with the right charge — which would be physically vacuous (a soundness hole), so it was
+deliberately **not** done. Final capstone: `qiqt_gr_freefield_nullEnergy`. All stages axiom-free, budget 0.
 
 ### Progress log
 - **Stage 0 ✅** (`BL_kgStress_null`, `QiqtGrFreeField.lean`) — null-stress simplification
@@ -12,8 +21,12 @@
 - **Stage 2 ✅** (`qiqt_gr_freefield_localized'`) — **`hFocus` discharged.** The Raychaudhuri focusing law
   `ad = R_kk` derived from a per-generator smooth geodesic congruence `W` at equilibrium (`hFocus_of_raychaudhuri`),
   christoffel smoothness itself discharged (`christoffel_contDiff`). **Gap-2 surface now = `hTkk` ALONE.**
-  Axiom-free `[propext, Classical.choice, Quot.sound]`, budget 0. Next: Stage 3 (`hTkk` — the genuine
-  Unruh/BW stress identification; high risk per §3).
+  Axiom-free `[propext, Classical.choice, Quot.sound]`, budget 0.
+- **Stage 3 ✅ (documented-stop)** (`qiqt_gr_freefield_nullEnergy`) — `hTkk` **reduced to transparent form** via
+  Stage 0: the lone surviving input now reads `2π/ℏ·(∑ₐ vₐ ∂ₐφ)² = (−2π∫conj(ff)·ff').im` (classical null
+  energy = mode boost charge), the genuine Unruh/BW localization map. Not discharged (would need continuum
+  mode-expansion, or a vacuous arbitrary-mode construction — deliberately avoided). Axiom-free, budget 0.
+  **T3-3 complete.**
 
 ## 0. What this is
 
@@ -134,6 +147,12 @@ Construct the mode and prove the stress identity. Two sub-steps:
 3. **Documented stop:** if 3a itself needs continuum machinery Mathlib lacks (full QFT mode expansion), stop at
    Stages 0–2 (hbridge+hFocus discharged) and leave `hTkk` labelled with the Stage-0 simplification applied
    (so it reads as the concrete `(v^a∂_aφ)²` identity, not the opaque integral form).
+
+**✅ OUTCOME = #3 (documented stop), and it is the honest one.** `qiqt_gr_freefield_nullEnergy` applies Stage 0
+so `hTkk` reads as the transparent `2π/ℏ·(∑ₐ vₐ ∂ₐφ)² = (−2π∫conj(ff)·ff').im`. We deliberately did **not**
+take route #1/trivial-3a (construct an arbitrary mode with the prescribed boost charge): that would discharge
+`hTkk` syntactically while being physically vacuous — exactly the kind of soundness hole to avoid. The genuine
+localization map (deriving `ff` from `φ` by wedge smearing) is the cited continuum frontier.
 
 ## 4. Deliverable
 
