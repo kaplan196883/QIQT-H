@@ -79,6 +79,18 @@ This paper develops a position in the foundations of quantum mechanics whose str
 
 7. Born statistics emerge from typicality of microscopic initial conditions across runs.
 
+### 1.1a The irreducible postulates
+
+After the machine-checked discharge-and-grounding effort (§11.4b), the framework's content reduces to a small set of postulates, of which only one is distinctive physics:
+
+- **(P1) The $(\Phi,\lambda)$ ontology.** The universal wave function $\Phi$ is the complete ontology (no external observer, no fundamental probability); a non-dynamical selector $\lambda$ makes exactly one decoherent record actual per run — no collapse term, no branching.
+- **(P2) Quantum kinematics.** The complex-Hilbert-space / operator-algebraic framework (states as positive normalized functionals, observables as a net of algebras, the $\operatorname{tr}(\rho\,\cdot)$ pairing). The Born *squared modulus is not a separate postulate*: it is the inner-product geometry of this arena ($\operatorname{tr}(|\psi\rangle\langle\psi|\,P_k)=|\langle k|\psi\rangle|^2$), forced into linear/trace form by (P5) and *selected* — exponent $1$ over the $\alpha$-family — by refinement no-signaling.
+- **(P3) Microcausality.** Spacelike-separated regional algebras commute. This is the Lorentz-covariance input; it is *not* the source of the Born premises (see below).
+- **(P4) The (FQ) holographic capacity bound.** The regional renormalized entropy is bounded by $Q_R = A(\partial R)/(4\ell_P^2)$. This is the single distinctive physical postulate and the sole genuine input to the machine-checked QIQT$\to$GR chain (§11.4b).
+- **(P5) Quantum equilibrium of the typicality measure.** $\lambda$'s measure is refinement-equivariant (the Dürr–Goldstein–Zanghì / Valentini condition).
+
+The refinement of this account is that the two Born-rule premises of earlier formulations — the additivity / non-contextuality *bridge* and the $\mu$-*selection* — both reduce to **(P5) alone**. In the Lean development: refinement-equivariance implies selector no-signaling (`BornMuSelection.equivariant_no_signaling`); selector no-signaling is *equivalent* to additivity (`BornActualityConsistency.apc_iff_positiveAdditive`), hence to the Born rule; and equivariance grounds the measure-selection directly (`equivariant_context_independent`, `mu_selection_martingale`), with the no-go theorems certifying that a selection principle is unavoidable (`NoBornFromNothing.any_anti_born_realizable`) and non-vacuous (`BornRoutes.sqRule_refinement_signals`). Crucially, (P5) is **not** reducible to (P3): the formalization proves that observable microcausality does *not* entail selector no-signaling (`SelectorRefinement.alphaSq_selector_signals`) — the two live at different layers (observable algebra vs.\ actuality measure), so they cannot be merged. The genuinely irreducible *physics* therefore reduces to **(P4) + (P5)**, on the (P1) ontology, with (P2)–(P3) the standard quantum-relativistic arena.
+
 ### 1.2 What this paper does and does not claim
 
 **Does.** Introduces (FQ) in its rigorous algebraic form using Type II crossed-product algebras. Distinguishes formal vs per-run wave functions. Establishes the finite-physical-resolution consequence of Type II regional algebras. Discusses the decoherence-plus-finite-information-restriction mechanism for single-record regional content. States four formal results. Identifies three explicit open problems.
