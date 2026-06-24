@@ -141,12 +141,13 @@ theorem born_distribution_realizable_conditional
     [Fintype Outcome]
     (outcome : Γ → Outcome) (h_surj : Function.Surjective outcome)
     (c : Outcome → ℝ)
-    (hc_nn_sq : ∀ k, 0 ≤ (c k)^2) (hc_norm : ∑ k, (c k)^2 = 1) :
+    (hc_norm : ∑ k, (c k)^2 = 1) :   -- `hc_nn_sq : 0 ≤ (c k)²` discharged (sq_nonneg), was an input
     ∃ μ : Γ → ℝ,
       (∀ γ, 0 ≤ μ γ) ∧
       (∑ γ, μ γ = 1) ∧
-      (∀ k, outcomeMarginal outcome μ k = (c k)^2) :=
-  exists_probability_realizing outcome h_surj
+      (∀ k, outcomeMarginal outcome μ k = (c k)^2) := by
+  have hc_nn_sq : ∀ k, 0 ≤ (c k) ^ 2 := fun k => sq_nonneg (c k)
+  exact exists_probability_realizing outcome h_surj
     (fun k => (c k)^2) hc_nn_sq hc_norm
 
 /-- **No-Born-from-nothing corollary.**

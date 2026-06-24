@@ -529,13 +529,26 @@ theorem positive_ray_certain_forces_born
     (hadd : ∀ A B, w (A + B) = w A + w B)
     (hhom : ∀ (c : ℂ) A, w (c • A) = c * w A)
     (hpsd : ∀ A, NonnegC (w (Aᴴ * A)))
-    (hP_herm : (vecMulVec ψ (star ψ))ᴴ = vecMulVec ψ (star ψ))
-    (hP_idem : (vecMulVec ψ (star ψ)) * (vecMulVec ψ (star ψ))
-                 = vecMulVec ψ (star ψ))
     (hray : w (vecMulVec ψ (star ψ)) = 1)
     (hone : w 1 = 1) :
-    ∀ E, w E = born ψ E :=
-  born_is_forced ψ hψ w hhom hray
+    ∀ E, w E = born ψ E := by
+  -- `|ψ⟩⟨ψ|` is Hermitian (always) and idempotent (from `⟨ψ|ψ⟩ = 1`); discharged, were inputs.
+  have hP_herm : (vecMulVec ψ (star ψ))ᴴ = vecMulVec ψ (star ψ) := by
+    ext i j
+    simp only [Matrix.conjTranspose_apply, Matrix.vecMulVec_apply, Pi.star_apply]
+    rw [star_mul', star_star]; ring
+  have hP_idem : (vecMulVec ψ (star ψ)) * (vecMulVec ψ (star ψ)) = vecMulVec ψ (star ψ) := by
+    ext i j
+    rw [Matrix.mul_apply]
+    have hsum : ∑ k, star ψ k * ψ k = 1 := hψ
+    calc ∑ k, vecMulVec ψ (star ψ) i k * vecMulVec ψ (star ψ) k j
+        = (ψ i * star ψ j) * ∑ k, star ψ k * ψ k := by
+          rw [Finset.mul_sum]
+          refine Finset.sum_congr rfl fun k _ => ?_
+          simp only [Matrix.vecMulVec_apply, Pi.star_apply]; ring
+      _ = vecMulVec ψ (star ψ) i j := by
+          rw [hsum, mul_one]; simp only [Matrix.vecMulVec_apply, Pi.star_apply]
+  exact born_is_forced ψ hψ w hhom hray
     (support_of_positive_certain ψ hψ w hadd hhom hpsd hP_herm hP_idem hray hone)
 
 /- ── 4. The history corollary: μ on a decoherent record family ──────────
