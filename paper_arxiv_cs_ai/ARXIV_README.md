@@ -1,6 +1,6 @@
 # arXiv submission package
 
-Self-contained LaTeX source for the methodology paper. Compiles to an 18-page PDF with no
+Self-contained LaTeX source for the methodology paper. Compiles to a 22-page PDF with no
 external dependencies beyond a standard TeXLive (the same one arXiv runs).
 
 ## Source of truth and pipeline
@@ -23,7 +23,7 @@ in parallel).
 - `main.pdf` — local compile result (do **not** upload the PDF; arXiv compiles from source).
 
 ## Verified
-Result: exit 0, 18 pages, 0 LaTeX warnings, 0 undefined citations/references, 0 bad overfull
+Result: exit 0, 22 pages, 0 LaTeX warnings, 0 undefined citations/references, 0 bad overfull
 boxes. Packages used (all standard on arXiv): inputenc, fontenc, lmodern, geometry, microtype,
 amsmath, amssymb, booktabs, array, tabularx, tikz (+arrows.meta, positioning), newunicodechar,
 hyperref.
@@ -35,10 +35,11 @@ hyperref.
 2. **Categories.** Primary `cs.AI`; cross-list `quant-ph` and `math.LO`. (The author is endorsed
    for `cs.AI`; cross-lists need no separate endorsement once the primary is accepted. See
    `../PUBLICATION_STRATEGY.md`.)
-3. **Title / authors / abstract.** Taken from `main.tex`. The abstract is 1920 characters,
-   exactly arXiv's metadata limit; if the web form rejects it, delete the clause
-   `, with no \texttt{sorry},` to gain margin (also drop it from the metadata abstract).
-4. **Comments field.** Suggested: `18 pages, 1 figure, 3 tables. Reproducible artifact (Lean 4 /
+3. **Title / authors / abstract.** Title and authors from `main.tex`. The PDF abstract is ~2,300
+   chars (no LaTeX limit); the arXiv web-form metadata abstract is capped at 1920, so paste the
+   **condensed** metadata abstract from `../paper_cs_ai/SUBMISSION_METADATA.md` (1,724 chars) into
+   that field rather than the full PDF abstract.
+4. **Comments field.** Suggested: `22 pages, 1 figure, 3 tables. Reproducible artifact (Lean 4 /
    Mathlib development, axiom audit, verified blueprint) at https://github.com/kaplan196883/QIQT-H.`
 5. **License.** Choose one (arXiv's default non-exclusive licence, or CC BY 4.0).
 6. **AI-assistance disclosure.** Already in the Acknowledgements and Section 3 (Claude Code as

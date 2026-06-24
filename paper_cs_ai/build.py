@@ -64,6 +64,7 @@ PREAMBLE = r"""\documentclass[11pt]{article}
 \usepackage{array}
 \usepackage{tabularx}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\usepackage{alltt}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning}
 
@@ -467,9 +468,12 @@ def _build_body(md: str) -> str:
                 lambda m: "\n\\[\n" + math[int(m.group(1))].strip() + "\n\\]\n", md)
     md = re.sub(r"@@IMATH(\d+)@@", lambda m: inlinemath[int(m.group(1))], md)
     md = re.sub(r"@@RAW(\d+)@@", lambda m: store["RAW"][int(m.group(1))], md)
+    # alltt (not verbatim): keeps \ { } active so newunicodechar substitutions fire,
+    # letting Lean's unicode (∀ ∑ → η Λ …) render in code blocks. Code fences must
+    # therefore avoid literal \ { } and any unicode not covered by the preamble map.
     md = re.sub(r"@@CODE(\d+)@@",
-                lambda m: "\n\\begin{verbatim}\n" + store["CODE"][int(m.group(1))].rstrip("\n")
-                          + "\n\\end{verbatim}\n", md)
+                lambda m: "\n{\\footnotesize\\begin{alltt}\n" + store["CODE"][int(m.group(1))].rstrip("\n")
+                          + "\n\\end{alltt}}\n", md)
     md = re.sub(r"@@INLINE(\d+)@@",
                 lambda m: r"\texttt{" + _escape_verb(store["INLINE"][int(m.group(1))]) + "}", md)
     return re.sub(r"\n{3,}", "\n\n", md)
