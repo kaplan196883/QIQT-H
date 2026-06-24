@@ -10,9 +10,24 @@ allowed_axioms = ["propext", "Classical.choice", "Quot.sound"]
 timeout_sec = 1800
 
 # --- spine (ordered; capstone first) ---
+# Capstone is the most-discharged free-field form: the T3-3 localization ladder
+# (qiqt_gr_freefield → _localized [hbridge] → _localized' [hFocus] → _nullEnergy [hTkk transparent]
+#  → _geom [hWarea]).  Each step strictly stronger; all axiom-free.
+[[theorems]]
+name = "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_geom"
+role = "capstone"
+[[theorems]]
+name = "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_nullEnergy"
+role = "spine"
+[[theorems]]
+name = "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_localized'"
+role = "spine"
+[[theorems]]
+name = "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_localized"
+role = "spine"
 [[theorems]]
 name = "QIQTH.WedgeKMSToGR.qiqt_gr_freefield"
-role = "capstone"
+role = "spine"
 [[theorems]]
 name = "QIQTH.WedgeKMSToGR.qiqt_gr_explicit_kg"
 role = "spine"
@@ -43,10 +58,16 @@ name_regex = "^(hKG|hbound|hsat|hDnn|hD0|hFocus|hTkk|hbridge)$"
 id = "setup"
 category = "setup"
 label = "SETUP — per-generator derivative existence / null-congruence kinematics"
-name_regex = "^(hS|hK|hA|hVC|hgeo|hequil|hVval|harea)$"
+name_regex = "^(hS|hK|hA|hVC|hgeo|hequil|hVval|harea|hWx|hWC|hWgeo|hWequil)$"
+
+[[category_rules]]
+id = "physics-flux"
+category = "physics"
+label = "PHYSICS — genuine input (EOM / Clausius / focusing / localization)"
+name_regex = "^(hFlux|hflux|hKMS)$"
 
 [[category_rules]]
 id = "regularity"
 category = "regularity"
 label = "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants"
-name_regex = "^(hsymm|hsymm_gi|hinv|hCg|hCgi|hPP|hPP'|hcong|hT_symm|hbar0|heta|ha|hφ|hmw|hf2|hf_int|hF0_int|hfd|hf'_meas|hB|hreg|conserv)$"
+name_regex = "^(hsymm|hsymm_gi|hinv|hCg|hCgi|hPP|hPP'|hcong|hT_symm|hbar0|heta|ha|hφ|hmw|hf2|hf_int|hF0_int|hfd|hf'_meas|hB|hreg|conserv|hm|hVboost)$"
