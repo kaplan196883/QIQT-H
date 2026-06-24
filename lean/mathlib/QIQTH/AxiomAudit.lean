@@ -2686,6 +2686,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Curvature.ppMetric_raychaudhuri_setup
 -- A1-ppwave Stage 4 (partial): Γ^x_uu = −½∂_x H — the connection is H-dependent (full Ric≠0 documented frontier):
 #print axioms QIQTH.Curvature.christoffel_ppMetric_x_uu
+-- A1+A2 worked-example Stage 1: pp-wave metric/inverse smoothness (hCg/hCgi) for smooth H:
+#print axioms QIQTH.Curvature.ppMetric_contDiff
 #print axioms QIQTH.SelectorRefinement.local_factor_remote_invariant
 -- expected: standard only — Gap-2 milestone 1: selector-locality (local marginal factors through ρ_A) +
 -- ρ_A-preservation under remote refinement ⇒ local marginal remote-invariant (the "remote" half of the bridge).

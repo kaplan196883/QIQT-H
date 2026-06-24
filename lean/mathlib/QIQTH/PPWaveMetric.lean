@@ -120,4 +120,18 @@ theorem christoffel_ppMetric_x_uu (H : Point 4 → ℝ) (x : Point 4) :
     rw [this, zero_mul]
   · intro h; exact absurd (Finset.mem_univ _) h
 
+/-! ### A1+A2 Stage 1 — smoothness (`hCg`/`hCgi`). -/
+
+/-- The pp-wave metric components are `C^∞` when `H` is (`hCg`): each is `H` or a constant. -/
+theorem ppMetric_contDiff (H : Point 4 → ℝ) (hCH : ContDiff ℝ ⊤ H) (a b : Fin 4) :
+    ContDiff ℝ ⊤ (fun y => ppMetric H y a b) := by
+  fin_cases a <;> fin_cases b <;> simp only [ppMetric] <;>
+    first | exact hCH | exact contDiff_const | (simp; exact contDiff_const)
+
+/-- The inverse pp-wave metric components are `C^∞` when `H` is (`hCgi`): each is `−H` or a constant. -/
+theorem ppMetricInv_contDiff (H : Point 4 → ℝ) (hCH : ContDiff ℝ ⊤ H) (a b : Fin 4) :
+    ContDiff ℝ ⊤ (fun y => ppMetricInv H y a b) := by
+  fin_cases a <;> fin_cases b <;> simp only [ppMetricInv] <;>
+    first | exact hCH.neg | exact contDiff_const | (simp; exact contDiff_const)
+
 end QIQTH.Curvature
