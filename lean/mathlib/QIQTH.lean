@@ -194,6 +194,8 @@ import QIQTH.QiqtGrComplete
 -- T3-GR-Raychaudhuri: the congruence premises hWgeo/hWequil from one condition (W covariantly
 -- constant), discharged fully for a flat (constant) metric.
 import QIQTH.RaychaudhuriCongruence
+-- The complete capstone with hWgeo/hWequil collapsed to the single covariant-constancy condition.
+import QIQTH.QiqtGrCovCong
 -- Born FROM PROJECTORS: the operator bridge grounding the record/area contract. For a
 -- finite orthogonal PVM {P_r} and a normalized Φ, μ(r)=‖P_r Φ‖²=⟨Φ,P_rΦ⟩ is a genuine
 -- RecordContract.RecordLaw — so the contract rests on Born-from-Φ, not a toy distribution.

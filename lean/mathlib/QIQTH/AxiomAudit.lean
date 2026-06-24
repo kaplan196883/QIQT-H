@@ -4860,6 +4860,8 @@ namespace QIQTH.AxiomAudit
 -- T3-GR-Raychaudhuri: hWgeo/hWequil from W covariantly constant; flat-metric witness:
 #print axioms QIQTH.Curvature.raychaudhuri_setup_of_covConst
 #print axioms QIQTH.Curvature.covDerivVec_constMetric_const
+-- complete capstone with hWgeo/hWequil collapsed to one covariant-constancy condition:
+#print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_complete_covCong
 
 -- Tier A1 of QIQT_GR_DISCHARGEABLE_PLAN: discharge hric_symm.
 #print axioms QIQTH.Curvature.ricci_symm

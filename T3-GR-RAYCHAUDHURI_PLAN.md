@@ -73,5 +73,14 @@ cited geometric frontier; the pp-wave (Stage 4) is the next concrete non-degener
   reduced to the single condition "W covariantly constant" (`covDerivVec g gi V ≡ 0`). Axiom-free, budget 0.
 - **Stage 2 ✅** (`covDerivVec_constMetric_const`, same file) — flat witness: in a constant metric a constant
   congruence is covariantly constant, so the congruence bundle holds for flat space (non-vacuity certificate).
-  Axiom-free, budget 0. Next: Stage 3 (capstone variant `_complete_covCong` taking `hcov` instead of
-  `hWgeo`+`hWequil`).
+  Axiom-free, budget 0.
+- **Stage 3 ✅** (`qiqt_gr_freefield_complete_covCong`, `QIQTH/QiqtGrCovCong.lean`) — the maximally-discharged
+  capstone with `hWgeo`+`hWequil` replaced by the single condition `hcov` (W covariantly constant), derived via
+  Stage 1. Axiom-free, budget 0. **Stages 1–3 (the achievable ones) complete.**
+- **Stage 4** — the non-degenerate pp-wave witness remains the documented geometric frontier (general curved
+  geodesic congruence needs geodesic-ODE / exp-map machinery Mathlib lacks for this setup).
+
+### Outcome
+`hWgeo`+`hWequil` reduced to ONE clean geometric condition (W covariantly constant), discharged fully for flat
+space. The last *non-physics* labelled premises of the GR chain are now a single covariant-constancy condition;
+what remains is genuine physics (`hbound`/`hcap`/`hK` = H2/FQ), matter EOM `hKG`, and geometry scaffolding.
