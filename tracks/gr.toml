@@ -10,14 +10,18 @@ allowed_axioms = ["propext", "Classical.choice", "Quot.sound"]
 timeout_sec = 1800
 
 # --- spine (ordered; capstone first) ---
-# Capstone is the most-discharged free-field form.  T3-3 localization ladder
-# (qiqt_gr_freefield → _localized [hbridge] → _localized' [hFocus] → _nullEnergy [hTkk transparent]
-#  → _geom [hWarea]), then T3-1 _thermo: entropy/heat built from a finite record law, with the
-# relative-entropy premises (hDnn/hD0) and saturation (hsat) discharged via the finite-core witness.
-# Each step strictly stronger / more grounded; all axiom-free.
+# Capstone = the localization-constructed form (T3-3-C3): the wedge mode ff is BUILT from φ as
+# ↑(∑ v∂φ)·gaussMode, so hTkk and the whole ff regularity block are DISCHARGED (no longer inputs).
+# Spine keeps the ladder: _thermo (T3-1: hsat/hDnn/hD0 via the finite-core witness), _geom (hWarea),
+# _nullEnergy (hTkk transparent), _localized' (hFocus), _localized (hbridge), qiqt_gr_freefield.
+# (gaussian and thermo discharge ORTHOGONAL premises on the shared nullEnergy base — localization
+#  vs relative-entropy — so neither strictly dominates; the capstone shown discharges localization.)
+[[theorems]]
+name = "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_gaussian"
+role = "capstone"
 [[theorems]]
 name = "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_thermo"
-role = "capstone"
+role = "spine"
 [[theorems]]
 name = "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_geom"
 role = "spine"
@@ -75,4 +79,4 @@ name_regex = "^(hFlux|hflux|hKMS)$"
 id = "regularity"
 category = "regularity"
 label = "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
-name_regex = "^(hsymm|hsymm_gi|hinv|hCg|hCgi|hPP|hPP'|hcong|hT_symm|hbar0|heta|ha|hφ|hmw|hf2|hf_int|hF0_int|hfd|hf'_meas|hB|hreg|conserv|hm|hVboost|hpp_nn|hpp1|hpp0)$"
+name_regex = "^(hsymm|hsymm_gi|hinv|hCg|hCgi|hPP|hPP'|hcong|hT_symm|hbar0|hbar_pos|heta|ha|hφ|hmw|hf2|hf_int|hF0_int|hfd|hf'_meas|hB|hreg|conserv|hm|hVboost|hpp_nn|hpp1|hpp0)$"

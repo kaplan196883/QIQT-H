@@ -1,20 +1,173 @@
 {
   "track": "gr",
   "title": "GR field equations",
-  "generated": "2026-06-24T04:50:08.527601+00:00",
-  "git": "70d4613",
+  "generated": "2026-06-24T06:56:58.208179+00:00",
+  "git": "b6b6792",
   "totals": {
-    "theorems": 12,
-    "present": 12,
+    "theorems": 13,
+    "present": 13,
     "project_axioms": [],
     "all_policy_clean": true,
     "vacuous_contexts": []
   },
   "theorems": [
     {
-      "name": "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_thermo",
+      "name": "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_gaussian",
       "present": true,
       "role": "capstone",
+      "kind": "thm",
+      "axiom_free_literal": false,
+      "policy_clean": true,
+      "isFalse": false,
+      "falseProvable": false,
+      "n_prop": 27,
+      "n_packed": 0,
+      "uses_spine": [
+        "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_nullEnergy"
+      ],
+      "surface": [
+        {
+          "name": "hsymm",
+          "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), g y a b = g y b a",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hsymm_gi",
+          "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), gi y a b = gi y b a",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hinv",
+          "type": "∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), ∑ σ, g y a σ * gi y σ b = if a = b then 1 else 0",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hCg",
+          "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => g y a b",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hCgi",
+          "type": "∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => gi y a b",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hbar0",
+          "type": "hbar ≠ 0",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hbar_pos",
+          "type": "0 < hbar",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "heta",
+          "type": "η ≠ 0",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "ha",
+          "type": "a = 2 * Real.pi / (hbar * η)",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hφ",
+          "type": "ContDiff ℝ ⊤ φ",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hKG",
+          "type": "∀ (x : QIQTH.Curvature.Point 4), QIQTH.Curvature.boxField φ g gi x = m ^ 2 * φ x",
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
+        },
+        {
+          "name": "hPP",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, P x i k * Pinv x k j = if i = j then 1 else 0",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hPP'",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, Pinv x i k * P x k j = if i = j then 1 else 0",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hcong",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hS",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (Sf x v) (sd x v) 0",
+          "curation": "SETUP — per-generator derivative existence / null-congruence kinematics"
+        },
+        {
+          "name": "hK",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 →\n    HasDerivAt (KE x v) (2 * Real.pi / hbar * QIQTH.EinsteinEOS.BL (QIQTH.Curvature.kgStress m φ g gi x) v) 0",
+          "curation": "SETUP — per-generator derivative existence / null-congruence kinematics"
+        },
+        {
+          "name": "hA",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (A x v) (ad x v) 0",
+          "curation": "SETUP — per-generator derivative existence / null-congruence kinematics"
+        },
+        {
+          "name": "hbound",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ᶠ (t : ℝ) in nhds 0, Sf x v t ≤ η * A x v t",
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
+        },
+        {
+          "name": "hsat",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → Sf x v 0 = η * A x v 0",
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
+        },
+        {
+          "name": "hDnn",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ (t : ℝ), 0 ≤ KE x v t - Sf x v t",
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
+        },
+        {
+          "name": "hD0",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0",
+          "curation": "PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)"
+        },
+        {
+          "name": "hmw",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), 0 < mw x v",
+          "curation": "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
+        },
+        {
+          "name": "hWx",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → W x v x = v",
+          "curation": "SETUP — per-generator derivative existence / null-congruence kinematics"
+        },
+        {
+          "name": "hWC",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (μ : Fin 4), ContDiff ℝ ⊤ fun y => W x v y μ",
+          "curation": "SETUP — per-generator derivative existence / null-congruence kinematics"
+        },
+        {
+          "name": "hWgeo",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (y : QIQTH.Curvature.Point 4) (μ : Fin 4),\n  ∑ ν, W x v y ν * QIQTH.Curvature.covDerivVec g gi (W x v) ν μ y = 0",
+          "curation": "SETUP — per-generator derivative existence / null-congruence kinematics"
+        },
+        {
+          "name": "hWequil",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 →\n    ∑ μ, ∑ ν, QIQTH.Curvature.covDerivVec g gi (W x v) μ ν x * QIQTH.Curvature.covDerivVec g gi (W x v) ν μ x = 0",
+          "curation": "SETUP — per-generator derivative existence / null-congruence kinematics"
+        },
+        {
+          "name": "hWarea",
+          "type": "∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),\n  QIQTH.EinsteinEOS.BL (g x) v = 0 →\n    ad x v = -∑ ν, W x v x ν * QIQTH.Curvature.pd (fun y => QIQTH.Curvature.expansion g gi (W x v) y) ν x",
+          "curation": null
+        }
+      ],
+      "dischargeable": []
+    },
+    {
+      "name": "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_thermo",
+      "present": true,
+      "role": "spine",
       "kind": "thm",
       "axiom_free_literal": false,
       "policy_clean": true,
