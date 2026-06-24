@@ -2697,6 +2697,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Curvature.ppFrame_cong
 -- A1+A2 worked example: QIQT→GR for the explicit pp-wave spacetime (all geometry discharged; FQ carried):
 #print axioms QIQTH.WedgeKMSToGR.qiqt_gr_ppwave
+-- The SHOWCASE: pp-wave QIQT→GR, floor laid bare — geometry + hA + hbound discharged; only EOM + P4 + localization:
+#print axioms QIQTH.WedgeKMSToGR.qiqt_gr_ppwave_showcase
 #print axioms QIQTH.SelectorRefinement.local_factor_remote_invariant
 -- expected: standard only — Gap-2 milestone 1: selector-locality (local marginal factors through ρ_A) +
 -- ρ_A-preservation under remote refinement ⇒ local marginal remote-invariant (the "remote" half of the bridge).

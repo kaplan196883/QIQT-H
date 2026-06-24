@@ -19,6 +19,11 @@ timeout_sec = 1800
 [[theorems]]
 name = "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_complete"
 role = "capstone"
+# The instantiated SHOWCASE (pp-wave, floor laid bare): geometry + area-derivative hA + entropy bound hbound
+# all discharged; surface = exactly the floor (EOM hKG, FQ capacity hcap, localization hS/hK, congruence).
+[[theorems]]
+name = "QIQTH.WedgeKMSToGR.qiqt_gr_ppwave_showcase"
+role = "spine"
 [[theorems]]
 name = "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_gaussian"
 role = "spine"

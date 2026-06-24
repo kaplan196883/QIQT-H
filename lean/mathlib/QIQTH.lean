@@ -214,6 +214,10 @@ import QIQTH.PPWaveMetric
 -- A1+A2 worked example: QIQT→GR for the explicit pp-wave spacetime — all geometry (metric, tetrad
 -- congruence, smoothness) discharged concretely; FQ/realization + matter field carried (conditional).
 import QIQTH.QiqtGrPPWave
+-- The instantiated SHOWCASE: pp-wave QIQT→GR with the floor laid bare — geometry + area-derivative hA
+-- (via area_hasDerivAt_of_covConst) + entropy bound hbound (via shannon_le_log_card) all discharged;
+-- only EOM (hKG) + FQ capacity (hcap) + the localization map (hS/hK) carried.
+import QIQTH.QiqtGrShowcase
 -- Born FROM PROJECTORS: the operator bridge grounding the record/area contract. For a
 -- finite orthogonal PVM {P_r} and a normalized Φ, μ(r)=‖P_r Φ‖²=⟨Φ,P_rΦ⟩ is a genuine
 -- RecordContract.RecordLaw — so the contract rests on Born-from-Φ, not a toy distribution.
