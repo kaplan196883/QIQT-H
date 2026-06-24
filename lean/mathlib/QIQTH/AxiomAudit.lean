@@ -3399,6 +3399,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.QiqtToGR.qiqt_bekenstein_gives_gr
 -- expected: standard only — ★★★ THE END-TO-END THEOREM. Single theorem: along each null generator, QIQT-H's
 -- capacity BOUND S≤η·A (shannon_le_log_card) + saturation (shannon_uniform_eq_log_card) + Klein positivity
+#print axioms QIQTH.QiqtGrWitness.qiqt_bekenstein_gives_gr_satisfiable
+-- expected: standard only — SATISFIABILITY WITNESS for the 23-hypothesis premise set of
+-- qiqt_bekenstein_gives_gr. The flat/vacuum model (g=gi=const gm, identity frame, T=0, zero S/KE/A)
+-- verifies all 23 hypotheses and the theorem yields its conclusion (vacuum Einstein eq), so the
+-- premise set is jointly satisfiable and the headline theorem is NON-VACUOUS (not vacuously true).
 -- ONE-PARTICLE BISOGNANO–WICHMANN — Phase 0 (OneParticleBW.lean): toward DERIVING hFlux (replacing the cited BW).
 #print axioms QIQTH.Fock.OneParticleBW.modChar_fermi
 #print axioms QIQTH.Fock.OneParticleBW.fermi_mem_Ioo
@@ -4842,6 +4847,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_geom
 -- T3-1: the four Clausius/area-law premises are theorems of the finite QIQT entropy model + area-capacity id:
 #print axioms QIQTH.ClausiusFiniteWitness.clausius_package_from_finite_model
+-- T3-1 Stage 2: thermo capstone — hsat/hDnn/hD0 discharged via the witness; only the dynamical bound labelled:
+#print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_thermo
 
 -- Tier A1 of QIQT_GR_DISCHARGEABLE_PLAN: discharge hric_symm.
 #print axioms QIQTH.Curvature.ricci_symm

@@ -1,6 +1,6 @@
 # T3-1 — the H2 / Clausius crux: discharge `hbound`/`hsat`/`hDnn`/`hD0`
 
-**Status:** Stage 1 ✅ done (the finite-model witness). **Track:** GR. **Goal:** turn the four Clausius/area-law
+**Status:** Stages 1 ✅, 2 ✅ done. **Track:** GR. **Goal:** turn the four Clausius/area-law
 hypotheses of the GR capstone from labelled inputs into theorems of QIQT-H's axiom-free finite-entropy core.
 
 ### Progress log
@@ -9,6 +9,14 @@ hypotheses of the GR capstone from labelled inputs into theorems of QIQT-H's axi
   `KE=Sf+KL(p t‖p 0)`, `A=Acap` with `η·Acap=log|R|`, via `shannon_le_log_card` / `shannon_uniform_eq_log_card`
   / `KL_classical_nonneg`. **The entropy bound/saturation/positivity are now theorems, not assumptions.**
   Wired into `QIQTH.lean` + `AxiomAudit`. Axiom-free `[propext, Classical.choice, Quot.sound]`, full budget 0.
+- **Stage 2 ✅** (`qiqt_gr_freefield_thermo`, `QIQTH/QiqtGrThermo.lean`) — the **thermodynamic capstone**: the
+  entropy/heat functionals are CONSTRUCTED from a per-generator finite record law `pp`, and **`hsat`, `hDnn`,
+  `hD0` are discharged internally** via the Stage-1 witness. The full Einstein equations `a·kgStress = G + Λg`
+  follow with only the *dynamical* FQ capacity **bound** `hbound` (`Shannon(pp) ≤ η·A`) + the reference
+  identification `hcap` (`η·A(·,·,0)=log|ι|`) + realization derivatives `hS`/`hK`/`hA` left labelled.
+  **The Clausius package's relative-entropy half (positivity + tightness) is now fully internal; saturation is
+  reduced to the FQ reference identification.** Axiom-free, full budget 0. Honest residue: the dynamical bound
+  is the continuum frontier (a discrete record capacity can't track a continuous area — §2).
 
 ## 0. The exact target
 
