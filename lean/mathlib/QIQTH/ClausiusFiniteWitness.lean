@@ -20,6 +20,7 @@ Axiom-free.
 -/
 import QIQTH.RecordContract
 import QIQTH.RelEntPositivity
+import QIQTH.EntropyDeriv
 
 namespace QIQTH.ClausiusFiniteWitness
 
@@ -72,5 +73,34 @@ theorem clausius_package_from_finite_model
       refine Finset.sum_eq_zero (fun r _ => ?_)
       rw [div_self (hp0pos r).ne', Real.log_one, mul_zero]
     rw [hKL0]; ring
+
+/-- **Stage A3 — the derivative package from the finite QIQT entropy model.**  Given the same finite record
+    law `p t` (now assumed *differentiable* at the reference: per-component `HasDerivAt`, strictly-positive
+    reference, probability for every `t`), the two HasDerivAt facts the GR capstones assume — `hS` (the
+    Shannon entropy `Sf t = Shannon (p t)` has a derivative at `0`) and `hK` (the heat functional
+    `Sf t + KL (p t ‖ p 0)` has a derivative at `0`) — are **theorems**, and they hold with the **same**
+    rate: the relative-entropy correction is flat at the equilibrium reference (`EntropyDeriv.KE_hasDerivAt`).
+
+    So the capstone's two derivative premises are not independent: `hK` follows from `hS` once the heat rate
+    is identified with the entropy rate, and that identification is exactly "KL contributes nothing at
+    equilibrium" — not a separate physical input.  (What stays labelled is only the *value* of the rate as a
+    stress flux `2π/ℏ · T_kk`, i.e. the localization/calibration `hTkk`, and the FQ capacity `hcap` — the
+    irreducible floor; this lemma touches neither.)  Axiom-free. -/
+theorem clausius_deriv_package_from_finite_model
+    {R : Type*} [Fintype R] [Nonempty R]
+    (p : ℝ → R → ℝ) (pderiv : R → ℝ)
+    (hpd : ∀ r, HasDerivAt (fun t => p t r) (pderiv r) 0)
+    (hp0pos : ∀ r, 0 < p 0 r)
+    (hp1 : ∀ t, ∑ r, p t r = 1) :
+    -- hS: the Shannon entropy has a derivative at the reference …
+    HasDerivAt (fun t => Shannon Finset.univ (p t))
+        (-∑ r, (Real.log (p 0 r) + 1) * pderiv r) 0
+    -- … and hK: the heat functional has the SAME derivative (KL flat at equilibrium).
+    ∧ HasDerivAt (fun t => Shannon Finset.univ (p t) + KL Finset.univ (p t) (p 0))
+        (-∑ r, (Real.log (p 0 r) + 1) * pderiv r) 0 :=
+  ⟨QIQTH.EntropyDeriv.shannon_hasDerivAt Finset.univ p pderiv
+      (fun r _ => hpd r) (fun r _ => hp0pos r),
+   QIQTH.EntropyDeriv.KE_hasDerivAt Finset.univ p pderiv
+      (fun r _ => hpd r) (fun r _ => hp0pos r) (fun t => hp1 t)⟩
 
 end QIQTH.ClausiusFiniteWitness

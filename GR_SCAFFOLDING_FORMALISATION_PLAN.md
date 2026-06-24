@@ -108,5 +108,16 @@ prints CHANGES.
   derivative `Sf+KL` **equals** the Shannon derivative — so the capstone's `hK` is derivable from `hS` (the
   `sd = 2π/ℏ·BL(kgStress)` identification is "KL contributes nothing at equilibrium"). Axiom-free (std 3).
   Wired into `QIQTH.lean` + `AxiomAudit.lean`; `lake build QIQTH.AxiomAudit` green; budget 0.
-- **NEXT: Stage A3** — `clausius_deriv_package_from_finite_model`: output `hS`/`hK` HasDerivAt facts from the
-  finite record law (extend `ClausiusFiniteWitness`), then a thermo corollary supplying them rather than assuming.
+- **Stage A3 ✅** (`clausius_deriv_package_from_finite_model`, extends `ClausiusFiniteWitness.lean`) — given the
+  finite record law + per-component `HasDerivAt` + reference positivity + `∑ p t r = 1`, **both** capstone
+  derivative premises `hS` and `hK` are theorems, holding with the **same** rate (`-∑ (log p₀+1)·p'`). So the
+  capstone's two HasDerivAt hypotheses are not independent: `hK` follows from `hS` + KL-flatness. What stays
+  labelled is only the rate's *value* as a stress flux `2π/ℏ·T_kk` (= the localization/calibration `hTkk`) and
+  the FQ capacity `hcap` — the irreducible floor; this lemma touches neither. Axiom-free (std 3); wired into
+  AxiomAudit; budget 0.
+- **Workstream A COMPLETE.** The entropy-side scaffolding (`hS`, `hK`) is now derived from smoothness for the
+  finite-record model. Honest boundary: feeding these into the *concrete* `qiqt_gr_freefield_thermo` requires
+  identifying its rates `sd`/`2π·ℏ⁻¹·BL(kgStress)` with the witness rate — that identification is `hTkk`
+  (physics/localization), already its own labelled input, not an entropy fact. Full concrete instantiation
+  overlaps Workstream C (a model where `pp`/`Sf`/`sd` are explicit).
+- **NEXT: Workstream B** — area derivative `hA` for the explicit (flat / pp-wave) congruence.

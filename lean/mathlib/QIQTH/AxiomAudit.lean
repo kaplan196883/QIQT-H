@@ -4873,6 +4873,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EntropyDeriv.shannon_hasDerivAt
 #print axioms QIQTH.EntropyDeriv.KL_hasDerivAt_self
 #print axioms QIQTH.EntropyDeriv.KE_hasDerivAt
+-- A3: the witness packages hS/hK with the SAME rate (KL flat at equilibrium) — capstone derivs not independent:
+#print axioms QIQTH.ClausiusFiniteWitness.clausius_deriv_package_from_finite_model
 -- T3-1 Stage 2: thermo capstone — hsat/hDnn/hD0 discharged via the witness; only the dynamical bound labelled:
 #print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_thermo
 -- T3-3 continuum: per-generator hTkk from one universal mode calibration (ff = field-gradient · g₀):
