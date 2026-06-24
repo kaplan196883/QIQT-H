@@ -196,6 +196,9 @@ import QIQTH.QiqtGrComplete
 import QIQTH.RaychaudhuriCongruence
 -- The complete capstone with hWgeo/hWequil collapsed to the single covariant-constancy condition.
 import QIQTH.QiqtGrCovCong
+-- BORN-A1: Actuality Projective Consistency — grounding the Born additivity bridge in selector
+-- no-signaling under outcome-refinement (Stage 1: honest coarse-graining selectors satisfy APC).
+import QIQTH.BornActualityConsistency
 -- Born FROM PROJECTORS: the operator bridge grounding the record/area contract. For a
 -- finite orthogonal PVM {P_r} and a normalized Φ, μ(r)=‖P_r Φ‖²=⟨Φ,P_rΦ⟩ is a genuine
 -- RecordContract.RecordLaw — so the contract rests on Born-from-Φ, not a toy distribution.
