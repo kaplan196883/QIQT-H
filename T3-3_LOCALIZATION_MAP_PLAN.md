@@ -1,12 +1,15 @@
 # T3-3 — Localization / the bridge map (Gap 2): discharge `hFocus`, `hbridge`, `hTkk`
 
-**Status:** IN PROGRESS — Stage 0 ✅ done. **Track:** GR. **Goal capstone:** `QIQTH.WedgeKMSToGR.qiqt_gr_freefield`
-(`lean/mathlib/QIQTH/QiqtGrFreeField.lean`).
+**Status:** IN PROGRESS — Stages 0 ✅, 1 ✅ done. **Track:** GR. **Goal capstone:**
+`QIQTH.WedgeKMSToGR.qiqt_gr_freefield` (`lean/mathlib/QIQTH/QiqtGrFreeField.lean`).
 
 ### Progress log
 - **Stage 0 ✅** (`BL_kgStress_null`, `QiqtGrFreeField.lean`) — null-stress simplification
-  `BL(kgStress) v = (∑ₐ vₐ ∂ₐφ)²` on `BL(g x)v=0`. Built green, axiom-free `[propext, Classical.choice,
-  Quot.sound]`, budget 0. Next: Stage 1 (`hbridge`).
+  `BL(kgStress) v = (∑ₐ vₐ ∂ₐφ)²` on `BL(g x)v=0`. Axiom-free, budget 0.
+- **Stage 1 ✅** (`qiqt_gr_freefield_localized`, `QiqtGrFreeField.lean`) — **`hbridge` discharged.** New
+  capstone fixes `kd := (2π/ℏ)·BL(kgStress)v` and derives `hbridge` internally from
+  `freeField_oneParticle_hFlux`; `hK` now states the heat rate IS `(2π/ℏ)·T_kk`. Gap-2 surface down to
+  `hTkk` + `hFocus`. Axiom-free `[propext, Classical.choice, Quot.sound]`, budget 0. Next: Stage 2 (`hFocus`).
 
 ## 0. What this is
 
@@ -87,6 +90,7 @@ So provide `hbridge` internally instead of as a hypothesis.
   `2π/ℏ·T_kk`" — a genuine Clausius-side input, correctly **kept** labelled (it is physics, not Gap 2).
 - Net surface change: **`hbridge` removed**; `kd` no longer free.
 **Risk: low** (it is the existing lemma). Acceptance: capstone builds without the `hbridge` binder; axiom-free.
+**✅ DONE** — `qiqt_gr_freefield_localized` (no `hbridge` binder; `kd` fixed), axiom-free, budget 0.
 
 ### Stage 2 — discharge `hFocus` *(wire in Raychaudhuri; trade physics-looking hyp for proved kinematics)*
 Provide a null congruence and apply `hFocus_of_raychaudhuri`. Two sub-steps:

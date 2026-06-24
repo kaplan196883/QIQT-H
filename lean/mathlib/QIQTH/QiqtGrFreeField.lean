@@ -153,4 +153,55 @@ theorem qiqt_gr_freefield
     intro x ν
     exact kg_conserv_of_contDiff a m φ g gi x ν hsymm hsymm_gi hinv hφ hCg hCgi (hKG x)
 
+/-- **Stage 1 (T3-3): `hbridge` discharged.**  The free-field QIQT→GR capstone with the heat coefficient
+    FIXED to the boost flux `kd x v := (2π/ℏ)·BL(kgStress) v` and the modular-localization hypothesis
+    `hbridge` DERIVED internally from `freeField_oneParticle_hFlux` (the axiom-free `+2π` one-particle
+    Bisognano–Wichmann machinery) given `hTkk`.  The thermodynamic premise `hK` now reads
+    `HasDerivAt (KE x v) ((2π/ℏ)·T_kk) 0` — the genuine Clausius statement that the heat-functional rate IS the
+    boost-energy flux (correctly kept labelled).  Of the Gap-2 localization map only `hTkk` (Stage 3) and the
+    focusing identity `hFocus` (Stage 2) survive as inputs.  Axiom-free. -/
+theorem qiqt_gr_freefield_localized
+    (g gi : Point 4 → Fin 4 → Fin 4 → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (φ : Point 4 → ℝ) (m η hbar a : ℝ)
+    (hbar0 : hbar ≠ 0) (heta : η ≠ 0) (ha : a = 2 * Real.pi / (hbar * η))
+    (hφ : ContDiff ℝ ⊤ φ) (hKG : ∀ x, boxField φ g gi x = m ^ 2 * φ x)
+    (P Pinv : Point 4 → Fin 4 → Fin 4 → ℝ)
+    (hPP : ∀ x i j, (∑ k, P x i k * Pinv x k j) = if i = j then (1 : ℝ) else 0)
+    (hPP' : ∀ x i j, (∑ k, Pinv x i k * P x k j) = if i = j then (1 : ℝ) else 0)
+    (hcong : ∀ x i j, g x i j = ∑ k, ∑ l, P x k i * gm k l * P x l j)
+    (Sf KE A : Point 4 → (Fin 4 → ℝ) → ℝ → ℝ) (sd ad : Point 4 → (Fin 4 → ℝ) → ℝ)
+    (hS : ∀ x v, BL (g x) v = 0 → HasDerivAt (Sf x v) (sd x v) 0)
+    (hK : ∀ x v, BL (g x) v = 0 →
+        HasDerivAt (KE x v) (2 * Real.pi / hbar * BL (kgStress m φ g gi x) v) 0)
+    (hA : ∀ x v, BL (g x) v = 0 → HasDerivAt (A x v) (ad x v) 0)
+    (hbound : ∀ x v, BL (g x) v = 0 → ∀ᶠ t in 𝓝 0, Sf x v t ≤ η * A x v t)
+    (hsat : ∀ x v, BL (g x) v = 0 → Sf x v 0 = η * A x v 0)
+    (hDnn : ∀ x v, BL (g x) v = 0 → ∀ t, 0 ≤ KE x v t - Sf x v t)
+    (hD0 : ∀ x v, BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0)
+    (mw : Point 4 → (Fin 4 → ℝ) → ℝ) (hmw : ∀ x v, 0 < mw x v)
+    (ff ff' : Point 4 → (Fin 4 → ℝ) → ℝ → ℂ)
+    (hf2 : ∀ x v, MemLp (ff x v) 2 (volume : Measure ℝ))
+    (hf_int : ∀ x v, Integrable (ff x v) (volume : Measure ℝ))
+    (hfd : ∀ x v θ, HasDerivAt (ff x v) (ff' x v θ) θ)
+    (hf'_meas : ∀ x v, AEStronglyMeasurable (ff' x v) (volume : Measure ℝ))
+    (Bd : Point 4 → (Fin 4 → ℝ) → ℝ) (hB : ∀ x v θ, ‖ff' x v θ‖ ≤ Bd x v)
+    (hTkk : ∀ x v, BL (g x) v = 0 →
+        (2 * Real.pi / hbar * BL (kgStress m φ g gi x) v : ℝ)
+          = (-(2 * Real.pi * ∫ θ, (starRingEnd ℂ) (ff x v θ) * ff' x v θ ∂(volume : Measure ℝ))).im)
+    (hFocus : ∀ x v, BL (g x) v = 0 → ad x v = BL (fun i j => ricci g gi i j x) v)
+    : ∃ Λ : ℝ, ∀ x μ ν, a * kgStress m φ g gi x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν := by
+  refine qiqt_gr_freefield g gi hsymm hsymm_gi hinv hCg hCgi φ m η hbar a hbar0 heta ha hφ hKG
+    P Pinv hPP hPP' hcong Sf KE A sd
+    (fun x v => 2 * Real.pi / hbar * BL (kgStress m φ g gi x) v) ad
+    hS hK hA hbound hsat hDnn hD0 mw hmw ff ff' hf2 hf_int hfd hf'_meas Bd hB hTkk ?_ hFocus
+  -- `hbridge` DISCHARGED: it is exactly `freeField_oneParticle_hFlux` with `kd := (2π/ℏ)·T_kk`.
+  intro x v hnull
+  exact freeField_oneParticle_hFlux (hmw x v) (ff x v) (ff' x v) (hf2 x v) (hf_int x v)
+    (hfd x v) (hf'_meas x v) (Bd x v) (hB x v) hbar
+    (BL (kgStress m φ g gi x) v) (hTkk x v hnull)
+
 end QIQTH.WedgeKMSToGR
