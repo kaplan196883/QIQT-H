@@ -4,7 +4,7 @@
 GPT-5.5-Pro reviews flagged as the remaining gap: *evidence that the two-model loop is effective*, not
 merely that it succeeded once. The reviewer's explicit ask (Review 3, highest-leverage change):
 
-> a compact empirical/process-evidence section — LLM-call/session counts, human hours, build
+> a compact empirical/process-evidence section, LLM-call/session counts, human hours, build
 > iterations, axioms introduced and discharged over time, reviewer critiques classified
 > TP/FP/clarification and how many led to code changes, and **a comparison to a "formalizer +
 > compiler only" baseline on a small representative module/track**.
@@ -15,7 +15,7 @@ disclosed, not faked.
 
 ---
 
-## Bucket A — Retrospective process metrics (extractable now)
+## Bucket A, Retrospective process metrics (extractable now)
 
 All reproducible from `git` and the audit docs at the pinned commit. Draft "process audit" table:
 
@@ -43,12 +43,12 @@ artifact-reproducible like the rest of §4.
 
 ---
 
-## Bucket B — The ablation (must be run)
+## Bucket B, The ablation (must be run)
 
 The reviewer wants "formalizer + compiler only vs. + audit vs. + reviewer." Two complementary designs;
 do **B1** first (cheap, already-evidenced), then **B2** if we want a denominator.
 
-### B1 — Retrospective counterfactual on the two documented saves (cheap, high-credibility)
+### B1, Retrospective counterfactual on the two documented saves (cheap, high-credibility)
 
 The two saves (§B.3, §B.4) are *already* an instrument-detection comparison; we make it explicit and
 reproducible. Re-introduce each faulty declaration on a throwaway branch and run each instrument:
@@ -61,33 +61,33 @@ reproducible. Re-introduce each faulty declaration on a throwaway branch and run
 This is honest, concrete, and reproducible (re-add the two axioms, run `lake build`,
 `axiom_budget_check.sh`, `vacuity_lint.sh`, and re-show the archived reviewer transcript). It directly
 demonstrates the claim "compiles + low axiom count is necessary but not sufficient." **Limitation
-(disclose): n = 2 faults — an existence/profile result, not a rate.**
+(disclose): n = 2 faults, an existence/profile result, not a rate.**
 
-### B2 — Prospective seeded-fault study (gives a real catch-rate denominator)
+### B2, Prospective seeded-fault study (gives a real catch-rate denominator)
 
 To answer "how often does each instrument catch a fault," inject a controlled set of known-unsound
 shortcuts and measure detection. Protocol:
 
-- **Faults:** seed N ≈ 10–15 unsound edits across a few representative modules, drawn from a fixed
-  taxonomy — (i) false-but-well-typed axiom, (ii) vacuous/`True`-antecedent axiom, (iii) over-strong
+- **Faults:** seed N ≈ 10-15 unsound edits across a few representative modules, drawn from a fixed
+  taxonomy, (i) false-but-well-typed axiom, (ii) vacuous/`True`-antecedent axiom, (iii) over-strong
   hypothesis that trivializes the goal, (iv) `sorry` (control: must be caught by everyone), (v) a
   *sound* edit (control: must NOT be flagged → measures false-positive/over-flagging).
 - **Configs:** C1 compiler-only; C2 +`#print axioms` budget; C3 +vacuity lint; C4 +adversarial
   reviewer (fixed prompt, fixed model/version, blind to which edits are faults).
 - **Metrics per config:** true positives, false positives (sound edits flagged), misses; for C4 also
   classify each critique TP/FP/clarification and whether it led to a code change.
-- **Report:** a detection-rate table + the reviewer's TP/FP/clarification breakdown — exactly the
+- **Report:** a detection-rate table + the reviewer's TP/FP/clarification breakdown, exactly the
   numbers the reviewer asked for.
 - **Controls/honesty:** pre-register the fault set and the reviewer prompt; run C4 blind; report
   model/version and that results are version-specific; N is small, so report as indicative not
   definitive.
 
-**Effort:** B1 ≈ a few hours (re-add 2 axioms, run 3 scripts, cite archived transcript). B2 ≈ 1–2 days
+**Effort:** B1 ≈ a few hours (re-add 2 axioms, run 3 scripts, cite archived transcript). B2 ≈ 1-2 days
 (design fault set, run 4 configs × ~12 edits, score). B2 is the genuine new experiment.
 
 ---
 
-## Bucket C — Unrecoverable (disclose, do not fabricate)
+## Bucket C, Unrecoverable (disclose, do not fabricate)
 
 - **Exact LLM-call counts / agent turns:** not logged. Proxy = commit counts (Bucket A), labelled as a
   lower bound.
@@ -107,7 +107,7 @@ shortcuts and measure detection. Protocol:
   keeping the honest n-limitation.
 - **§5.3:** downgrade the "no controlled comparison" threat to "a small controlled ablation (B1/B2);
   large-scale validation remains future work."
-- **Honesty guard:** version-specificity, small N, commit-count-as-proxy, single team — all stated.
+- **Honesty guard:** version-specificity, small N, commit-count-as-proxy, single team, all stated.
 
 ## Recommended order
 

@@ -18,20 +18,20 @@ repurposed to formalize a researcher's own framework in Lean 4 / Mathlib, self-c
 the compiler; an independent model (GPT-5.5-Pro) adversarially reviews the design; a human directs
 scope; and a soundness audit records which named axioms each result depends on, holding the
 project-axiom budget at zero. Running this loop, we obtained a machine-checked, *project-axiom-free*
-Lean theorem (it uses only Lean's standard axioms — `propext`, `Classical.choice`, `Quot.sound` —
+Lean theorem (it uses only Lean's standard axioms, `propext`, `Classical.choice`, `Quot.sound`,
 and no project-specific axiom) deriving, *conditionally*, the Einstein field equations
 $a\,T_{\mu\nu}=G_{\mu\nu}+\Lambda g_{\mu\nu}$ from a finite-information (Bekenstein-type) capacity
 bound by a Jacobson-style equation of state. The thermodynamic first law is itself derived from the
 framework, while the Bisognano-Wichmann wedge-modular flux and Raychaudhuri focusing enter as
 explicitly labelled hypotheses (not axioms), alongside conservation and regularity premises; all the
 differential geometry downstream (Bianchi, $\nabla^\mu G_{\mu\nu}=0$, the null-cone-to-tensor step,
-constant $\Lambda$) is machine-checked. The full assumption surface — 14 data binders and 23
-labelled hypotheses, with the `#print axioms` output — is listed in an appendix, and a separate
+constant $\Lambda$) is machine-checked. The full assumption surface, 14 data binders and 23
+labelled hypotheses, with the `#print axioms` output, is listed in an appendix, and a separate
 machine-checked, project-axiom-free witness (a deliberately degenerate flat/vacuum instantiation)
 shows that premise set is *jointly satisfiable*, so the theorem is non-vacuous in the logical sense. The same development carries a
 project-axiom-free no-collapse measurement core; in total 192 modules, roughly 2,010 theorems, 0
 project-specific axioms, no `sorry`. We are explicit about scope: verification certifies that the
-derivation uses no project axiom, that its premises are labelled, and that they are satisfiable — but
+derivation uses no project axiom, that its premises are labelled, and that they are satisfiable, but
 *not* that the cited physics inputs or the framework's physical capacity postulate are true; those
 remain open. The contribution is an auditable, goal-directed architecture for AI-assisted
 formalization, reported as a single-team case study and conjectured to transfer.
@@ -107,8 +107,8 @@ to machine-checking for trustworthy AI-assisted science.
 > *project-axiom-free* derivation whose physics inputs (Bisognano-Wichmann flux, Raychaudhuri
 > focusing) are labelled hypotheses and whose capacity postulate is an open physical conjecture
 > (§4.4, §5.3). The proved/conditional/cited boundary is maintained throughout, and the central
-> honesty principle is that a project-axiom-free development certifies the conditional mathematics —
-> given its labelled premises — not the physics.
+> honesty principle is that a project-axiom-free development certifies the conditional mathematics,
+> given its labelled premises, not the physics.
 
 The thesis of the paper, in one sentence: for AI to contribute trustworthily to foundational
 science, "the proof compiles" must be replaced by "here is exactly which named axioms the result
@@ -144,7 +144,7 @@ axiom budget that reached zero for the deductive core.
   to the axiom counter, which motivated a vacuity lint as a complementary guard (§4.5).
 - **A link-checked human-readable bridge.** A blueprint whose formalized tags are mechanically
   linked to (and CI-checked against) kernel-checked declarations, making an AI-formalized result
-  navigable by domain experts who do not read Lean — link resolution, not a guarantee that the prose
+  navigable by domain experts who do not read Lean: link resolution, not a guarantee that the prose
   paraphrase is faithful (§3.6).
 - **A reproducible artifact.** A public repository, the axiom audit, and the blueprint, so that
   every claim in §4 is checkable down to its proof.
@@ -247,7 +247,7 @@ assumption can masquerade as a result.
 Inspecting a result's trusted base is not new, and we claim no novelty for the primitive. Coq's
 `Print Assumptions` reports the axioms and admitted facts a term depends on [50]; Isabelle tracks
 oracles and theorem dependencies [51]; and large verification efforts have long made trust arguments
-explicit — the Flyspeck proof of the Kepler conjecture, for instance, is accompanied by a careful
+explicit, the Flyspeck proof of the Kepler conjecture, for instance, is accompanied by a careful
 account of exactly what its formal kernel does and does not establish [52]. Our contribution is
 not the `#print axioms` primitive but its use as a *continuously enforced, ratcheting* discipline
 inside an AI-driven loop: a CI budget that can only fall, a vacuity lint and a hypothesis-ledger /
@@ -429,20 +429,20 @@ axiom budget and the vacuity lint, these give a four-part picture of what a resu
 axioms it invokes, whether any are vacuous, which hypotheses it carries, and which of those are
 redundant.
 
-These per-result checks are aggregated, finally, into a goal-directed *state report* for a *track* —
+These per-result checks are aggregated, finally, into a goal-directed *state report* for a *track*,
 a target theorem together with the spine of lemmas that reaches it. The report is driven by a small
 version-controlled manifest naming the track's theorems, the axioms it is permitted to use, and the
 curation rules that sort hypotheses into physical, setup, and regularity piles; from that manifest it
 is regenerated deterministically. For the track's capstone it lists the axioms each result actually
-depends on, the complete hypothesis surface — including assumptions *packed inside data-structure
-arguments*, which a naive binder count silently misses — the redundancy-probe verdict, and a
+depends on, the complete hypothesis surface, including assumptions *packed inside data-structure
+arguments*, which a naive binder count silently misses, the redundancy-probe verdict, and a
 partition of the surface into proved, conditional, and open. Every line carries a provenance badge
 separating a kernel fact from a prober verdict from a human curation label from our own
 interpretation, so the report can neither upgrade "not discharged by the probe" into "mathematically
 necessary" nor pass an editorial label off as a Lean fact. Its purpose is direction, not
 record-keeping: the open and physical piles are, literally, the assumptions still to discharge, and a
 diff between two runs reports exactly which axioms were retired and which hypotheses were closed since
-the last. This is what makes the loop goal-directed rather than merely green — after each increment
+the last. This is what makes the loop goal-directed rather than merely green; after each increment
 the human and the formalizer read the remaining open surface and choose the next assumption to
 internalize or prove, and the budget's descent toward zero is that open pile emptying out.
 
@@ -463,8 +463,8 @@ Earlier tools generate blueprints as a one-off export [31, 44]; the artifact her
 integral, continuously-link-checked bridge. A formalized tag in the human-readable document resolves
 to a declaration the kernel accepts, and the link is maintained in CI alongside the build and the
 audit. We are careful about what this guarantees and what it does not: the checker verifies that
-every tag *resolves to a real, kernel-checked declaration* — it prevents dangling references and
-silent drift when a declaration is renamed or removed — but it does **not** verify that the prose
+every tag *resolves to a real, kernel-checked declaration*, it prevents dangling references and
+silent drift when a declaration is renamed or removed, but it does **not** verify that the prose
 *faithfully paraphrases* the theorem it points to. Name resolution is not semantic equivalence;
 catching a prose statement that overclaims relative to its Lean target remains a job for human
 reading and the adversarial reviewer. Within that limit, the bridge lets a domain expert read the
@@ -478,8 +478,8 @@ A round of the loop runs as follows. First, the human fixes a target result and 
 that may be assumed for it. Second, the formalizer produces a compiling, `sorry`-free increment,
 iterating against the compiler as in §3.2. Third, the axiom auditor records the increment's axiom
 dependencies via `#print axioms` and updates the budget, and a vacuity lint scans the new code for
-syntactically vacuous propositional bodies — definitions or conclusions that are literally `True`
-(`:= True`, `→ True`, `∀…, True`) — complementing the count with a check on axiom content. Fourth, the adversarial reviewer critiques the design along the four axes of §3.3.
+syntactically vacuous propositional bodies, definitions or conclusions that are literally `True`
+(`:= True`, `→ True`, `∀…, True`), complementing the count with a check on axiom content. Fourth, the adversarial reviewer critiques the design along the four axes of §3.3.
 Fifth, the human adjudicates, either accepting the increment, ordering a redesign, or converting an
 axiom into an explicit hypothesis on the consuming theorems. Role boundaries are fixed and do not
 blur: the compiler is the sole authority on proof validity; the reviewer never edits proofs and
@@ -498,12 +498,12 @@ build; `scripts/axiom_budget_check.sh` reproduces the project-axiom count of zer
 is a script; the per-result axiom and hypothesis surface (Appendix A) is regenerated by
 `python scripts/lean-track.py report -c tracks/gr.toml`, which calls Lean's `collectAxioms` directly;
 and the blueprint's claim-to-proof links are checked by the bundled checker. The "roughly 2,010"
-theorem count is an approximate lemma tally; the exact, audit-relevant numbers — 192 modules, 830
-`#print axioms` directives, 0 project axioms, 0 `sorry`, 1 benign vacuity site — are exact and
+theorem count is an approximate lemma tally; the exact, audit-relevant numbers (192 modules, 830
+`#print axioms` directives, 0 project axioms, 0 `sorry`, 1 benign vacuity site) are exact and
 script-reproducible. We regard this property, that the paper's quantitative soundness claims can be
 re-derived from the artifact rather than taken on faith, as part of the methodology rather than an
 afterthought. We are explicit, by contrast, about what is *not* reproducible: the formalizer and
-reviewer are proprietary models, and we do not claim a replayable transcript of the loop — the
+reviewer are proprietary models, and we do not claim a replayable transcript of the loop, the
 checkable object is the audited final artifact, not the agent trajectory (§5.3).
 
 ### 3.8 Process metrics and an instrument ablation
@@ -528,22 +528,22 @@ study, regenerated from git by `scripts/process_metrics.sh`.
 
 The trajectory is the load-bearing process metric: a continuously audited, CI-enforced descent to
 zero project axioms, non-monotone because several passes *introduced* a named interface axiom to make
-a new conditional result explicit before discharging it — the budget rising is the audit working, not
+a new conditional result explicit before discharging it; the budget rising is the audit working, not
 failing.
 
 Whether the loop's *components* earn their place is the harder question, and the honest answer needs
 a comparison, not a narrative. We ran a small **instrument ablation**: a controlled set of seven Lean
-declarations — five seeded faults spanning the failure taxonomy (a false-but-well-typed axiom; an
+declarations, five seeded faults spanning the failure taxonomy (a false-but-well-typed axiom; an
 inconsistent `True`-antecedent axiom; a circular/over-strong hypothesis; a vacuous `:= True`
 predicate; a `sorry`) and two sound controls (a clearly-labelled interface axiom; an ordinary proved
-lemma) — run past each instrument. The deterministic instruments are scored against their exact
+lemma), run past each instrument. The deterministic instruments are scored against their exact
 specification (verified by running each script's logic); the reviewer is a single *blind*
-GPT-5.5-Pro pass — the seven declarations carry neutral names (e.g. `gleason_naive`,
+GPT-5.5-Pro pass, the seven declarations carry neutral names (e.g. `gleason_naive`,
 `locality_from_dilation`), are presented in fixed order, and the reviewer is asked only to classify
 each as sound or unsound, *not* told how many faults the set contains. The fault set, the exact
-prompt, and the verbatim verdicts are archived with the artifact. We distinguish *surfacing* — an
+prompt, and the verbatim verdicts are archived with the artifact. We distinguish *surfacing* (an
 instrument flagging that something needs human attention, e.g. the budget disclosing that an axiom
-was added — from *diagnosis* — identifying the fault as unsound; the structural instruments only
+was added) from *diagnosis* (identifying the fault as unsound): the structural instruments only
 surface, whereas the reviewer diagnoses.
 
 **Table 2. Instrument ablation: which of 5 seeded faults each configuration surfaces vs. diagnoses (with false positives on 2 sound controls).**
@@ -551,24 +551,24 @@ surface, whereas the reviewer diagnoses.
 | Configuration | Faults flagged (of 5) | False axiom diagnosed | Over-strong hyp. diagnosed | Sound controls misflagged |
 |---|---|---|---|---|
 | Compiler (green build) | 0/5 (all build; `sorry` only warns) | no | no | 0/2 |
-| + axiom budget | 4/5 *surfaced* — `sorry` + the 3 fault-axioms disclosed as *added axioms* (not judged false); misses the over-strong hypothesis (it adds no axiom) | no (surfaced, not diagnosed) | no | 0/2 |
+| + axiom budget | 4/5 *surfaced*, `sorry` + the 3 fault-axioms disclosed as *added axioms* (not judged false); misses the over-strong hypothesis (it adds no axiom) | no (surfaced, not diagnosed) | no | 0/2 |
 | + vacuity lint | 1/5 (the `:= True` predicate; a `(h : True)` binder is not matched) | no | no | 0/2 |
 | + independent reviewer (blind) | 5/5 *diagnosed* | **yes** | **yes** | **0/2** |
 
 The point is not the headline 5/5 but the *profile*, and the surfaced/diagnosed split is the whole
-story. The structural instruments surface structural faults — `sorry` and added axioms (budget),
-`:= True` bodies (lint) — but cannot *diagnose* semantic soundness: a false-but-well-typed axiom is
+story. The structural instruments surface structural faults, `sorry` and added axioms (budget),
+`:= True` bodies (lint), but cannot *diagnose* semantic soundness: a false-but-well-typed axiom is
 disclosed by the budget only as "an axiom" (the same signal a *legitimate* labelled assumption
 emits, so disclosure is not diagnosis), and a circular/over-strong hypothesis adds no axiom and no
-`sorry`, so it is invisible to all three. Those two faults — exactly the kinds the two historical
-reviewer saves (§4.5) belong to — were diagnosed only by the independent reviewer, which also did not
+`sorry`, so it is invisible to all three. Those two faults, exactly the kinds the two historical
+reviewer saves (§4.5) belong to, were diagnosed only by the independent reviewer, which also did not
 misflag either sound control. This is direct evidence for the division of labour the paper argues:
 the compiler owns mechanical correctness, the budget and lint own a *structural* slice of soundness,
 and the reviewer covers the *semantic* residue they cannot see.
 
 We hold this evidence to its size. It is one blind pass of one model version over seven hand-designed,
 relatively legible faults; it is an indicative profile, not a catch rate, and there is selection bias
-toward clear faults — the historical Case 1 (§4.5) took the reviewer *three* passes, so the perfect
+toward clear faults, the historical Case 1 (§4.5) took the reviewer *three* passes, so the perfect
 single-pass score here should not be read as reliability on subtle faults. A larger pre-registered,
 multi-model study is future work (§5.3). The deterministic cells are determinate and reproducible; the
 reviewer cell is stochastic and version-specific. The fault set and verdicts are archived with the
@@ -679,17 +679,17 @@ rather than only counting them. Second, and more subtly, neither the zero projec
 zero-auto-dischargeable verdict establishes that the 23 hypotheses are *jointly satisfiable*: a
 project-axiom-free theorem whose premises were secretly contradictory would be vacuously true, and
 the syntactic vacuity lint of §3.5 need not catch it. The audit certifies the absence of project
-axioms, not the consistency of the premise set. The rigorous remedy is a *model* — an explicit
+axioms, not the consistency of the premise set. The rigorous remedy is a *model*, an explicit
 instantiation of every binder under which all 23 hypotheses simultaneously hold.
 We supply such a witness, machine-checked: a flat (Minkowski) background with vanishing
-stress-energy — `g = gi = (fun _ => gm)` (the constant reference metric, with $gm\cdot gm = I$), the
+stress-energy, `g = gi = (fun _ => gm)` (the constant reference metric, with $gm\cdot gm = I$), the
 identity frame, $T=0$, and zero entropy/modular-energy/area. The Lean theorem
 `qiqt_bekenstein_gives_gr_satisfiable` (Appendix A) discharges all 23 hypotheses under this model and
-*applies* the headline theorem, obtaining its conclusion — the true vacuum equation $G_{\mu\nu}=0$.
+*applies* the headline theorem, obtaining its conclusion, the true vacuum equation $G_{\mu\nu}=0$.
 The one non-trivial lemma is that the Ricci tensor of a constant metric vanishes (its Christoffel
 symbols are built from metric derivatives, which are zero); we prove it, and the witness is itself
 project-axiom-free (`#print axioms` returns only the three standard axioms). So the headline premise
-set is demonstrably consistent and the theorem non-vacuous *in the logical sense* — its hypotheses
+set is demonstrably consistent and the theorem non-vacuous *in the logical sense*: its hypotheses
 are jointly satisfiable, ruling out the failure mode where the result holds only by explosion. We are
 equally clear about what the witness does *not* show: the model is deliberately degenerate (flat,
 $T=0$), so the flux, focusing, area-law, and conservation premises all reduce to $0=0$ and the
@@ -697,8 +697,8 @@ conclusion to the vacuum equation. It exhibits a model of the premise set; it do
 derivation on a curved or matter-bearing instance, and "non-vacuous" should be read throughout as
 "jointly satisfiable," not "physically rich." We also keep the general distinction explicit: the
 audit shows no project axiom and no syntactically vacuous premise, which for an *arbitrary* theorem
-is weaker than a consistency proof — making such a witness routine is methodological future work
-(§5.3) — but for the headline result the satisfiability is now machine-checked.
+is weaker than a consistency proof, and making such a witness routine is methodological future work
+(§5.3); but for the headline result the satisfiability is now machine-checked.
 
 ### 4.3 The rest of the development, with artifact metrics
 
@@ -780,7 +780,7 @@ the macroscopic-definiteness conjecture, the canonical typicality (Born) princip
 covariance of the selector, are open, and a project-axiom-free Lean development bears on none of them.
 A continuum formalization frontier is in progress. The most important sentence of this section is
 therefore the following: a project-axiom-free development in the proof assistant certifies that the
-framework's conditional mathematics is correct — given its labelled premises — and rests on no hidden
+framework's conditional mathematics is correct, given its labelled premises, and rests on no hidden
 axiom; it does not establish the physics, and project-axiom-freedom is not consistency of the premise
 set (§4.2). We repeat this guard in §5.3.
 
@@ -817,10 +817,10 @@ consuming it inherited an inconsistency. Neither of the habitual checks detects 
 development builds, and it contains no `sorry`, yet it rested on a contradiction. The axiom was
 removed, and the affected theorem now takes locality as an explicit hypothesis, relocating the
 assumption into the open. In response, the project added a third soundness instrument, a vacuity
-lint that scans for *syntactically* vacuous propositional bodies — definitions or conclusions that
+lint that scans for *syntactically* vacuous propositional bodies, definitions or conclusions that
 are literally `True` (`:= True`, `→ True`, `∀…, True`). It is a syntactic complement, not a
 replacement for the reviewer: a vacuity hidden in a `(h : True)` binder, as in this very case, is
-*not* matched by the lint — it is surfaced by the budget (as an added axiom) and diagnosed by the
+*not* matched by the lint; it is surfaced by the budget (as an added axiom) and diagnosed by the
 reviewer, the division of labour the ablation of §3.8 quantifies. The lint currently reports a
 single site, which inspection confirms is a legitimate indiscrete-preorder definition rather than a
 hidden assumption. This episode captures the paper's
@@ -828,13 +828,13 @@ central point: "compiles, no `sorry`, axiom count zero" is necessary but not suf
 soundness requires auditing for vacuity and inconsistency as well.
 
 We are deliberately modest about what these two episodes prove. They are illustrative, kernel-checked
-*existence* cases — concrete demonstrations that an independent reviewer, so positioned, can catch a
+*existence* cases, concrete demonstrations that an independent reviewer, so positioned, can catch a
 false axiom and a vacuous one that a green build and a zero `sorry` count do not. They are not, by
 themselves, a measured catch rate: we did not log every reviewer critique over the project's life,
 so we have no project-wide true-positive/false-positive denominator. To put the comparison on a
 controlled footing we instead ran the small instrument ablation of §3.8, in which the reviewer caught
-both fault families these two saves exemplify — the false-but-well-typed axiom and the
-circular/over-strong hypothesis that the structural instruments cannot see — with no false positives
+both fault families these two saves exemplify, the false-but-well-typed axiom and the
+circular/over-strong hypothesis that the structural instruments cannot see, with no false positives
 on the sound controls. That ablation is small and indicative rather than definitive (§3.8, §5.3), but
 it moves the claim from "the failure mode is real and the instrument can catch it" toward a
 reproducible, if modest, detection profile. With that caveat, the loop did not merely yield a green
@@ -848,7 +848,7 @@ build; it yielded an audited, shrinking-to-zero conditional base with concrete, 
 
 The loop and the audit are, by construction, domain-agnostic: nothing in §3 is specific to physics or
 to the particular case-study theory. We state this as a *conjecture supported by one case*, not a
-demonstrated property — the generality is argued from the structure of the method, and we have not
+demonstrated property, the generality is argued from the structure of the method, and we have not
 run it on a second domain or team (§5.3). The construction is a self-correcting formalizer, an
 independent adversarial reviewer, a `#print axioms`-based proved/conditional/cited audit with a
 ratcheting budget, a vacuity lint and a hypothesis ledger over the assumption surface, a goal-directed
@@ -916,9 +916,9 @@ The fifth limit is evidential, and it is now partial rather than total. We repor
 a small controlled instrument ablation (§3.8), which does show that the structural instruments
 (compiler, axiom budget, vacuity lint) miss the semantic faults the independent reviewer catches. But
 that ablation is small (seven items, one blind pass, one model version), and we still do not report
-full quantitative process metrics — true LLM-call counts (commit counts are only a lower-bound proxy),
+full quantitative process metrics, true LLM-call counts (commit counts are only a lower-bound proxy),
 human hours, project-wide reviewer true-/false-positive rates, or time relative to manual
-formalization — nor a large pre-registered multi-model study. The claim is therefore an audited
+formalization, nor a large pre-registered multi-model study. The claim is therefore an audited
 existence result, a methodology, and an *indicative* ablation, not yet a statistically validated
 improvement over a baseline; the larger study is future work. The sixth concerns premise-set consistency: as discussed in §4.2,
 project-axiom-freedom certifies the absence of project axioms, not the joint satisfiability of a
@@ -958,7 +958,7 @@ which motivated a vacuity lint). The contribution is the audited methodology tog
 demonstration at the scale of a whole theory, held throughout under an explicit honesty boundary: the
 formalization certifies that the derivation uses no hidden axiom, given its labelled premises; it
 does not, and cannot, establish those cited inputs or the framework's physical postulates, which
-remain open — though a machine-checked witness (Appendix A) does establish that the headline premise
+remain open, though a machine-checked witness (Appendix A) does establish that the headline premise
 set is jointly satisfiable (via a deliberately degenerate flat/vacuum model), so the theorem is
 non-vacuous in the logical sense. We make the strong-sounding negative claim deliberately: this is
 not "AI proved general relativity," and the paper's value lies precisely in being able to say exactly
@@ -992,10 +992,10 @@ hypotheses, and the kernel's report of the axioms it depends on, so that the cla
 checkable from the text. Everything below is regenerated from the public artifact (§3.7) by
 `python scripts/lean-track.py report -c tracks/gr.toml`, which calls Lean's `collectAxioms`.
 
-**Conclusion and data.** `QIQTH.QiqtToGR.qiqt_bekenstein_gives_gr` takes 14 data binders — a metric
+**Conclusion and data.** `QIQTH.QiqtToGR.qiqt_bekenstein_gives_gr` takes 14 data binders, a metric
 `g` and inverse `gi` (each `Point 4 → Fin 4 → Fin 4 → ℝ`), a stress tensor `T`, constants `η hbar a`,
 a frame `P`/`Pinv`, and per-generator entropy/modular-energy/area functions `S KE A` with derivatives
-`sd kd ad` — and concludes the Einstein field equations:
+`sd kd ad`, and concludes the Einstein field equations:
 
 ```
 ∃ Λ, ∀ (x : Curvature.Point 4) (μ ν : Fin 4),
@@ -1009,20 +1009,20 @@ live in `QIQTH.Curvature`).
 **The 23 labelled hypotheses** (binder name : type), grouped by the curated piles of §3.5:
 
 ```
--- PHYSICS — genuine inputs (the conditional content); "near 0" = Eventually (nhds 0)
+-- PHYSICS, genuine inputs (the conditional content); "near 0" = Eventually (nhds 0)
 hbound  : ∀ x v, BL (g x) v = 0 → near 0,  S x v t ≤ η * A x v t
 hsat    : ∀ x v, BL (g x) v = 0 → S x v 0 = η * A x v 0
 hDnn    : ∀ x v, BL (g x) v = 0 → ∀ t, 0 ≤ KE x v t - S x v t
 hD0     : ∀ x v, BL (g x) v = 0 → KE x v 0 - S x v 0 = 0
 hFlux   : ∀ x v, BL (g x) v = 0 → kd x v = 2*π/hbar * BL (T x) v
 hFocus  : ∀ x v, BL (g x) v = 0 → ad x v = BL (fun i j => ricci g gi i j x) v
--- SETUP — per-generator derivative existence
+-- SETUP, per-generator derivative existence
 hS : ∀ x v, BL (g x) v = 0 → HasDerivAt (S  x v) (sd x v) 0
 hK : ∀ x v, BL (g x) v = 0 → HasDerivAt (KE x v) (kd x v) 0
 hA : ∀ x v, BL (g x) v = 0 → HasDerivAt (A  x v) (ad x v) 0
--- CONSISTENCY — stress-energy conservation
+-- CONSISTENCY, stress-energy conservation
 conserv : ∀ x ν, Curvature.div02 g gi (fun y a b => a * T y a b) ν x = 0
--- REGULARITY / BACKGROUND — metric, frame, smoothness, constants
+-- REGULARITY / BACKGROUND, metric, frame, smoothness, constants
 hsymm    : ∀ y a b, g  y a b = g  y b a
 hsymm_gi : ∀ y a b, gi y a b = gi y b a
 hinv     : ∀ y a b, ∑ σ, g y a σ * gi y σ b = (if a = b then 1 else 0)
@@ -1041,7 +1041,7 @@ hreg     : ∀ f, (∀ y a b, a * T y a b = ricci g gi a b y + f y * g y a b) �
 Here `BL (g x) v` is the bilinear form `g_{ij} v^i v^j`, so `BL (g x) v = 0` is the null condition
 selecting horizon generators. The genuine physical surface is the six PHYSICS binders; of these, the
 Clausius/area floor (`hbound`, `hsat`, `hDnn`, `hD0`) is the QIQT-H capacity postulate, and `hFlux`,
-`hFocus` are the cited Bisognano–Wichmann and Raychaudhuri inputs.
+`hFocus` are the cited Bisognano-Wichmann and Raychaudhuri inputs.
 
 **Axiom audit.** `#print axioms QIQTH.QiqtToGR.qiqt_bekenstein_gives_gr` reports
 
@@ -1049,7 +1049,7 @@ Clausius/area floor (`hbound`, `hsat`, `hDnn`, `hD0`) is the QIQT-H capacity pos
 'QIQTH.QiqtToGR.qiqt_bekenstein_gives_gr' depends on axioms: [propext, Classical.choice, Quot.sound]
 ```
 
-— Lean's three standard axioms and no project-specific axiom (the project-axiom budget is 0). The
+These are Lean's three standard axioms and no project-specific axiom (the project-axiom budget is 0). The
 redundancy probe of §3.5 returns no auto-dischargeable hypothesis among the 23.
 
 **Satisfiability witness (machine-checked).** Project-axiom-freedom does not by itself establish that
@@ -1071,10 +1071,10 @@ theorem qiqt_bekenstein_gives_gr_satisfiable :
 ```
 
 and `#print axioms QIQTH.QiqtGrWitness.qiqt_bekenstein_gives_gr_satisfiable` returns
-`[propext, Classical.choice, Quot.sound]` — project-axiom-free. Hence the headline premise set is
+`[propext, Classical.choice, Quot.sound]`, i.e. project-axiom-free. Hence the headline premise set is
 provably consistent and the theorem non-vacuous in the logical (joint-satisfiability) sense. The
-model is deliberately degenerate — flat, $T=0$, so flux/focusing/area-law premises reduce to $0=0$
-and the conclusion to $G_{\mu\nu}=0$ — so it certifies consistency, not a physically rich instance.
+model is deliberately degenerate (flat, $T=0$, so flux/focusing/area-law premises reduce to $0=0$
+and the conclusion to $G_{\mu\nu}=0$), so it certifies consistency, not a physically rich instance.
 
 ---
 
@@ -1178,7 +1178,7 @@ and the conclusion to $G_{\mu\nu}=0$ — so it certifies consistency, not a phys
 
 [49] Raychaudhuri, A. (1955). *Relativistic Cosmology. I.* Physical Review 98, 1123.
 
-[50] The Coq Development Team. *The Coq Reference Manual* — the `Print Assumptions` command. Inria.
+[50] The Coq Development Team. *The Coq Reference Manual*, the `Print Assumptions` command. Inria.
 
 [51] Nipkow, T., Paulson, L. C., & Wenzel, M. (2002). *Isabelle/HOL: A Proof Assistant for Higher-Order Logic.* LNCS 2283, Springer.
 

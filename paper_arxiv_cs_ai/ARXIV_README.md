@@ -17,10 +17,10 @@ cross-references consistent (they previously drifted when `main.tex` and the man
 in parallel).
 
 ## Files
-- `main.tex` — the complete generated paper (article class; inline `thebibliography`; TikZ figure;
+- `main.tex`, the complete generated paper (article class; inline `thebibliography`; TikZ figure;
   five `booktabs` tables). This is the only file you upload.
-- `arxiv-submission.tar.gz` — `main.tex` packaged for upload.
-- `main.pdf` — local compile result (do **not** upload the PDF; arXiv compiles from source).
+- `arxiv-submission.tar.gz`, `main.tex` packaged for upload.
+- `main.pdf`, local compile result (do **not** upload the PDF; arXiv compiles from source).
 
 ## Verified
 Result: exit 0, 24 pages, 0 LaTeX warnings, 0 undefined citations/references, 0 bad overfull
