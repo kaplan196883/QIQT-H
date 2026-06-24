@@ -17,8 +17,11 @@ timeout_sec = 1800
 # (gaussian and thermo discharge ORTHOGONAL premises on the shared nullEnergy base — localization
 #  vs relative-entropy — so neither strictly dominates; the capstone shown discharges localization.)
 [[theorems]]
-name = "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_gaussian"
+name = "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_complete"
 role = "capstone"
+[[theorems]]
+name = "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_gaussian"
+role = "spine"
 [[theorems]]
 name = "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_thermo"
 role = "spine"

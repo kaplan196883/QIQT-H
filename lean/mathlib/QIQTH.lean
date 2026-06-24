@@ -188,6 +188,9 @@ import QIQTH.GaussianMode
 -- T3-3-C3: the free-field QIQT→GR capstone with the localization mode CONSTRUCTED from φ
 -- (ff = field-gradient · Gaussian), hTkk discharged in the GR theorem itself.
 import QIQTH.QiqtGrGaussian
+-- The maximally-discharged capstone: combines T3-1 (entropy from a finite record law) and T3-3-C3
+-- (mode from φ) — hbridge/hFocus/hWarea/hsat/hDnn/hD0/hTkk/ff-block all discharged.
+import QIQTH.QiqtGrComplete
 -- Born FROM PROJECTORS: the operator bridge grounding the record/area contract. For a
 -- finite orthogonal PVM {P_r} and a normalized Φ, μ(r)=‖P_r Φ‖²=⟨Φ,P_rΦ⟩ is a genuine
 -- RecordContract.RecordLaw — so the contract rests on Born-from-Φ, not a toy distribution.

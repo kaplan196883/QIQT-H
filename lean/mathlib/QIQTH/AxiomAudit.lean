@@ -4855,6 +4855,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WedgeKMSToGR.gaussMode_calibration
 -- T3-3-C3: free-field QIQT→GR with the localization mode CONSTRUCTED from φ — hTkk discharged:
 #print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_gaussian
+-- Maximally-discharged capstone: T3-1 (entropy from finite record) + T3-3-C3 (mode from φ) combined:
+#print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_complete
 
 -- Tier A1 of QIQT_GR_DISCHARGEABLE_PLAN: discharge hric_symm.
 #print axioms QIQTH.Curvature.ricci_symm

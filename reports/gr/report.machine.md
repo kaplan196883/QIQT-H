@@ -1,7 +1,7 @@
 # Track state — GR field equations
 *Target 3 — QIQT-H gives the GR field equations (Jacobson route, free KG field)*
 
-_Generated 2026-06-24 06:56 UTC · git `b6b6792` · 13 theorems · tool lean_track_ · provenance: [L]=Lean fact [P]=Lean-checked prober [D]=derived [C]=curation_
+_Generated 2026-06-24 07:09 UTC · git `39af19a` · 14 theorems · tool lean_track_ · provenance: [L]=Lean fact [P]=Lean-checked prober [D]=derived [C]=curation_
 
 ## Axiom status  [L]
 - Project-specific (non-standard) axioms: **0**
@@ -10,9 +10,10 @@ _Generated 2026-06-24 06:56 UTC · git `b6b6792` · 13 theorems · tool lean_tra
 
 ## Assumption surface (capstone)  [P]/[D]
 
-**`QIQTH.WedgeKMSToGR.qiqt_gr_freefield_gaussian`** — 27 surface items (27 distinct after dedup; conclusion: `∃ Λ,
+**`QIQTH.WedgeKMSToGR.qiqt_gr_freefield_complete`** — 28 surface items (28 distinct after dedup; conclusion: `∃ Λ,
   ∀ (x : QIQTH.Curvature.Point 4) (μ ν : Fin 4),
     a * QIQTH.Curvature.kgStress m φ`):
+  - `inst._@.QIQTH.QiqtGrComplete.4163739781._hygCtx._hyg.6` : `Nonempty ι`
   - `hsymm` : `∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), g y a b = g y b a` · **REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization** [C:regularity]
   - `hsymm_gi` : `∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), gi y a b = gi y b a` · **REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization** [C:regularity]
   - `hinv` : `∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), ∑ σ, g y a σ * gi y σ b = if a = b then 1 else 0` · **REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization** [C:regularity]
@@ -27,17 +28,10 @@ _Generated 2026-06-24 06:56 UTC · git `b6b6792` · 13 theorems · tool lean_tra
   - `hPP` : `∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, P x i k * Pinv x k j = if i = j then 1 else 0` · **REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization** [C:regularity]
   - `hPP'` : `∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, Pinv x i k * P x k j = if i = j then 1 else 0` · **REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization** [C:regularity]
   - `hcong` : `∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j` · **REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization** [C:regularity]
-  - `hS` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (Sf x v) (sd x v) 0` · **SETUP — per-generator derivative existence / null-congruence kinematics** [C:setup]
-  - `hK` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
-  QIQTH.EinsteinEOS.BL (g x) v = 0 →
-    HasDerivAt (KE x v) (2 * Real.pi / hbar * QIQTH.EinsteinEOS.BL (QIQTH.Curvature.kgStress m φ g gi x) v) 0` · **SETUP — per-generator derivative existence / null-congruence kinematics** [C:setup]
-  - `hA` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (A x v) (ad x v) 0` · **SETUP — per-generator derivative existence / null-congruence kinematics** [C:setup]
-  - `hbound` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
-  QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ᶠ (t : ℝ) in nhds 0, Sf x v t ≤ η * A x v t` · **PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)** [C:physics-floor]
-  - `hsat` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → Sf x v 0 = η * A x v 0` · **PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)** [C:physics-floor]
-  - `hDnn` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → ∀ (t : ℝ), 0 ≤ KE x v t - Sf x v t` · **PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)** [C:physics-floor]
-  - `hD0` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0` · **PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)** [C:physics-floor]
-  - `hmw` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), 0 < mw x v` · **REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization** [C:regularity]
+  - `hpp_nn` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (t : ℝ) (r : ι), 0 ≤ pp x v t r` · **REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization** [C:regularity]
+  - `hpp1` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (t : ℝ), ∑ r, pp x v t r = 1` · **REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization** [C:regularity]
+  - `hpp0` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), pp x v 0 = fun x => (↑(Fintype.card ι))⁻¹` · **REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization** [C:regularity]
+  - `hcap` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), η * A x v 0 = Real.log ↑(Fintype.card ι)` · **PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)** [C:physics-floor]
   - `hWx` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → W x v x = v` · **SETUP — per-generator derivative existence / null-congruence kinematics** [C:setup]
   - `hWC` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (μ : Fin 4), ContDiff ℝ ⊤ fun y => W x v y μ` · **SETUP — per-generator derivative existence / null-congruence kinematics** [C:setup]
   - `hWgeo` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (y : QIQTH.Curvature.Point 4) (μ : Fin 4),
@@ -45,9 +39,21 @@ _Generated 2026-06-24 06:56 UTC · git `b6b6792` · 13 theorems · tool lean_tra
   - `hWequil` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
   QIQTH.EinsteinEOS.BL (g x) v = 0 →
     ∑ μ, ∑ ν, QIQTH.Curvature.covDerivVec g gi (W x v) μ ν x * QIQTH.Curvature.covDerivVec g gi (W x v) ν μ x = 0` · **SETUP — per-generator derivative existence / null-congruence kinematics** [C:setup]
-  - `hWarea` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
+  - `hS` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
+  QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (fun t => QIQTH.BranchLedger.Shannon Finset.univ (pp x v t)) (sd x v) 0` · **SETUP — per-generator derivative existence / null-congruence kinematics** [C:setup]
+  - `hK` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
   QIQTH.EinsteinEOS.BL (g x) v = 0 →
-    ad x v = -∑ ν, W x v x ν * QIQTH.Curvature.pd (fun y => QIQTH.Curvature.expansion g gi (W x v) y) ν x`
+    HasDerivAt
+      (fun t =>
+        QIQTH.BranchLedger.Shannon Finset.univ (pp x v t) + QIQTH.RelEntPositivity.KL Finset.univ (pp x v t) (pp x v 0))
+      (2 * Real.pi / hbar * QIQTH.EinsteinEOS.BL (QIQTH.Curvature.kgStress m φ g gi x) v) 0` · **SETUP — per-generator derivative existence / null-congruence kinematics** [C:setup]
+  - `hA` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
+  QIQTH.EinsteinEOS.BL (g x) v = 0 →
+    HasDerivAt (A x v) (-∑ ν, W x v x ν * QIQTH.Curvature.pd (fun y => QIQTH.Curvature.expansion g gi (W x v) y) ν x) 0` · **SETUP — per-generator derivative existence / null-congruence kinematics** [C:setup]
+  - `hbound` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
+  QIQTH.EinsteinEOS.BL (g x) v = 0 →
+    ∀ᶠ (t : ℝ) in nhds 0, QIQTH.BranchLedger.Shannon Finset.univ (pp x v t) ≤ η * A x v t` · **PHYSICS — genuine input (EOM / Clausius / focusing / localization / FQ capacity)** [C:physics-floor]
+  - `hmw` : `∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), 0 < mw x v` · **REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization** [C:regularity]
 
 ## Curated piles  [C] *(author labels — NOT a Lean fact)*
 
@@ -171,7 +177,61 @@ _Generated 2026-06-24 06:56 UTC · git `b6b6792` · 13 theorems · tool lean_tra
 
 ## Per-theorem facts  [L]/[P]/[D]
 
-### `QIQTH.WedgeKMSToGR.qiqt_gr_freefield_gaussian`  ·  *capstone*
+### `QIQTH.WedgeKMSToGR.qiqt_gr_freefield_complete`  ·  *capstone*
+- policy-clean · uses-spine: `qiqt_gr_freefield_thermo` · kind=thm  [L]
+- **conclusion:**
+```
+∃ Λ,
+  ∀ (x : QIQTH.Curvature.Point 4) (μ ν : Fin 4),
+    a * QIQTH.Curvature.kgStress m φ g gi x μ ν = QIQTH.Curvature.einsteinTensor g gi μ ν x + Λ * g x μ ν
+```
+- **hypotheses (28)** — name : status [P]/[D]:
+```
+1. inst._@.QIQTH.QiqtGrComplete.4163739781._hygCtx._hyg.6 [surface] : Nonempty ι
+2. hsymm [surface] : ∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), g y a b = g y b a
+3. hsymm_gi [surface] : ∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), gi y a b = gi y b a
+4. hinv [surface] : ∀ (y : QIQTH.Curvature.Point 4) (a b : Fin 4), ∑ σ, g y a σ * gi y σ b = if a = b then 1 else 0
+5. hCg [surface] : ∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => g y a b
+6. hCgi [surface] : ∀ (a b : Fin 4), ContDiff ℝ ⊤ fun y => gi y a b
+7. hbar0 [surface] : hbar ≠ 0
+8. hbar_pos [surface] : 0 < hbar
+9. heta [surface] : η ≠ 0
+10. ha [surface] : a = 2 * Real.pi / (hbar * η)
+11. hφ [surface] : ContDiff ℝ ⊤ φ
+12. hKG [surface] : ∀ (x : QIQTH.Curvature.Point 4), QIQTH.Curvature.boxField φ g gi x = m ^ 2 * φ x
+13. hPP [surface] : ∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, P x i k * Pinv x k j = if i = j then 1 else 0
+14. hPP' [surface] : ∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), ∑ k, Pinv x i k * P x k j = if i = j then 1 else 0
+15. hcong [surface] : ∀ (x : QIQTH.Curvature.Point 4) (i j : Fin 4), g x i j = ∑ k, ∑ l, P x k i * QIQTH.EinsteinEOS.gm k l * P x l j
+16. hpp_nn [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (t : ℝ) (r : ι), 0 ≤ pp x v t r
+17. hpp1 [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (t : ℝ), ∑ r, pp x v t r = 1
+18. hpp0 [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), pp x v 0 = fun x => (↑(Fintype.card ι))⁻¹
+19. hcap [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), η * A x v 0 = Real.log ↑(Fintype.card ι)
+20. hWx [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), QIQTH.EinsteinEOS.BL (g x) v = 0 → W x v x = v
+21. hWC [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (μ : Fin 4), ContDiff ℝ ⊤ fun y => W x v y μ
+22. hWgeo [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ) (y : QIQTH.Curvature.Point 4) (μ : Fin 4),
+  ∑ ν, W x v y ν * QIQTH.Curvature.covDerivVec g gi (W x v) ν μ y = 0
+23. hWequil [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
+  QIQTH.EinsteinEOS.BL (g x) v = 0 →
+    ∑ μ, ∑ ν, QIQTH.Curvature.covDerivVec g gi (W x v) μ ν x * QIQTH.Curvature.covDerivVec g gi (W x v) ν μ x = 0
+24. hS [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
+  QIQTH.EinsteinEOS.BL (g x) v = 0 → HasDerivAt (fun t => QIQTH.BranchLedger.Shannon Finset.univ (pp x v t)) (sd x v) 0
+25. hK [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
+  QIQTH.EinsteinEOS.BL (g x) v = 0 →
+    HasDerivAt
+      (fun t =>
+        QIQTH.BranchLedger.Shannon Finset.univ (pp x v t) + QIQTH.RelEntPositivity.KL Finset.univ (pp x v t) (pp x v 0))
+      (2 * Real.pi / hbar * QIQTH.EinsteinEOS.BL (QIQTH.Curvature.kgStress m φ g gi x) v) 0
+26. hA [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
+  QIQTH.EinsteinEOS.BL (g x) v = 0 →
+    HasDerivAt (A x v) (-∑ ν, W x v x ν * QIQTH.Curvature.pd (fun y => QIQTH.Curvature.expansion g gi (W x v) y) ν x) 0
+27. hbound [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ),
+  QIQTH.EinsteinEOS.BL (g x) v = 0 →
+    ∀ᶠ (t : ℝ) in nhds 0, QIQTH.BranchLedger.Shannon Finset.univ (pp x v t) ≤ η * A x v t
+28. hmw [surface] : ∀ (x : QIQTH.Curvature.Point 4) (v : Fin 4 → ℝ), 0 < mw x v
+```
+- **data binders (15):** `ι`, `g`, `gi`, `φ`, `m`, `η`, `hbar`, `a`, `P`, `Pinv`, `A`, `sd`, `pp`, `W`, `mw`
+
+### `QIQTH.WedgeKMSToGR.qiqt_gr_freefield_gaussian`  ·  *spine*
 - policy-clean · uses-spine: `qiqt_gr_freefield_nullEnergy` · kind=thm  [L]
 - **conclusion:**
 ```
