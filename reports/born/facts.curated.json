@@ -41,7 +41,7 @@
             "curation": {
               "category": "bridge",
               "label": "BRIDGE — positivity / normalization / ray-certainty",
-              "rule": "bridge-positivity"
+              "rule": "bridge-positivity-name"
             }
           },
           {
@@ -50,7 +50,7 @@
             "curation": {
               "category": "setup",
               "label": "SETUP — independence / completeness / probability vector",
-              "rule": "setup"
+              "rule": "setup-type"
             }
           },
           {
@@ -59,7 +59,7 @@
             "curation": {
               "category": "bridge",
               "label": "BRIDGE — additivity / non-contextuality (the Born-strength premise)",
-              "rule": "bridge-additivity"
+              "rule": "bridge-additivity-name"
             }
           },
           {
@@ -68,7 +68,7 @@
             "curation": {
               "category": "setup",
               "label": "SETUP — independence / completeness / probability vector",
-              "rule": "setup"
+              "rule": "setup-type"
             }
           }
         ],
@@ -86,7 +86,7 @@
             "curation": {
               "category": "bridge",
               "label": "BRIDGE — positivity / normalization / ray-certainty",
-              "rule": "bridge-positivity"
+              "rule": "bridge-positivity-name"
             }
           },
           {
@@ -95,7 +95,7 @@
             "curation": {
               "category": "bridge",
               "label": "BRIDGE — positivity / normalization / ray-certainty",
-              "rule": "bridge-positivity"
+              "rule": "bridge-positivity-name"
             }
           },
           {
@@ -104,7 +104,7 @@
             "curation": {
               "category": "bridge",
               "label": "BRIDGE — additivity / non-contextuality (the Born-strength premise)",
-              "rule": "bridge-additivity"
+              "rule": "bridge-additivity-name"
             }
           }
         ],
@@ -144,7 +144,7 @@
         "curation": {
           "category": "bridge",
           "label": "BRIDGE — additivity / non-contextuality (the Born-strength premise)",
-          "rule": "bridge-additivity"
+          "rule": "bridge-additivity-name"
         }
       },
       {
@@ -240,7 +240,7 @@
             "curation": {
               "category": "bridge",
               "label": "BRIDGE — positivity / normalization / ray-certainty",
-              "rule": "bridge-positivity"
+              "rule": "bridge-positivity-name"
             }
           },
           {
@@ -249,7 +249,7 @@
             "curation": {
               "category": "bridge",
               "label": "BRIDGE — positivity / normalization / ray-certainty",
-              "rule": "bridge-positivity"
+              "rule": "bridge-positivity-name"
             }
           },
           {
@@ -258,7 +258,7 @@
             "curation": {
               "category": "bridge",
               "label": "BRIDGE — additivity / non-contextuality (the Born-strength premise)",
-              "rule": "bridge-additivity"
+              "rule": "bridge-additivity-name"
             }
           }
         ],
@@ -333,7 +333,11 @@
         "dischargeable": false,
         "shared": false,
         "status": "surface",
-        "curation": null
+        "curation": {
+          "category": "bridge",
+          "label": "BRIDGE — positivity / normalization / ray-certainty",
+          "rule": "bridge-positivity-type"
+        }
       },
       {
         "info": "explicit",
@@ -353,7 +357,11 @@
         "dischargeable": false,
         "shared": false,
         "status": "surface",
-        "curation": null
+        "curation": {
+          "category": "bridge",
+          "label": "BRIDGE — additivity / non-contextuality (the Born-strength premise)",
+          "rule": "bridge-additivity-type"
+        }
       },
       {
         "info": "explicit",
@@ -365,7 +373,11 @@
         "dischargeable": false,
         "shared": false,
         "status": "surface",
-        "curation": null
+        "curation": {
+          "category": "bridge",
+          "label": "BRIDGE — additivity / non-contextuality (the Born-strength premise)",
+          "rule": "bridge-additivity-type"
+        }
       },
       {
         "info": "explicit",
@@ -377,7 +389,11 @@
         "dischargeable": false,
         "shared": false,
         "status": "surface",
-        "curation": null
+        "curation": {
+          "category": "bridge",
+          "label": "BRIDGE — positivity / normalization / ray-certainty",
+          "rule": "bridge-positivity-type"
+        }
       },
       {
         "info": "explicit",
@@ -416,7 +432,7 @@
         "curation": {
           "category": "bridge",
           "label": "BRIDGE — positivity / normalization / ray-certainty",
-          "rule": "bridge-positivity"
+          "rule": "bridge-positivity-name"
         }
       },
       {
@@ -429,7 +445,11 @@
         "dischargeable": false,
         "shared": false,
         "status": "surface",
-        "curation": null
+        "curation": {
+          "category": "bridge",
+          "label": "BRIDGE — positivity / normalization / ray-certainty",
+          "rule": "bridge-positivity-type"
+        }
       },
       {
         "info": "explicit",
@@ -481,7 +501,11 @@
           {
             "field": "map_add'",
             "type": "∀ (x y : M), toZeroHom.toFun (x + y) = toZeroHom.toFun x + toZeroHom.toFun y",
-            "curation": null
+            "curation": {
+              "category": "bridge",
+              "label": "BRIDGE — additivity / non-contextuality (the Born-strength premise)",
+              "rule": "bridge-additivity-type"
+            }
           }
         ],
         "type": "ℝ →+ ℝ",
@@ -532,7 +556,7 @@
         "curation": {
           "category": "setup",
           "label": "SETUP — independence / completeness / probability vector",
-          "rule": "setup"
+          "rule": "setup-type"
         }
       },
       {
@@ -712,7 +736,7 @@
             "curation": {
               "category": "bridge",
               "label": "BRIDGE — positivity / normalization / ray-certainty",
-              "rule": "bridge-positivity"
+              "rule": "bridge-positivity-name"
             }
           },
           {
@@ -721,7 +745,7 @@
             "curation": {
               "category": "setup",
               "label": "SETUP — independence / completeness / probability vector",
-              "rule": "setup"
+              "rule": "setup-type"
             }
           },
           {
@@ -730,7 +754,7 @@
             "curation": {
               "category": "bridge",
               "label": "BRIDGE — additivity / non-contextuality (the Born-strength premise)",
-              "rule": "bridge-additivity"
+              "rule": "bridge-additivity-name"
             }
           },
           {
@@ -739,7 +763,7 @@
             "curation": {
               "category": "setup",
               "label": "SETUP — independence / completeness / probability vector",
-              "rule": "setup"
+              "rule": "setup-type"
             }
           }
         ],
@@ -868,7 +892,11 @@
         "dischargeable": false,
         "shared": false,
         "status": "surface",
-        "curation": null
+        "curation": {
+          "category": "bridge",
+          "label": "BRIDGE — positivity / normalization / ray-certainty",
+          "rule": "bridge-positivity-type"
+        }
       },
       {
         "info": "explicit",
@@ -880,7 +908,11 @@
         "dischargeable": false,
         "shared": false,
         "status": "surface",
-        "curation": null
+        "curation": {
+          "category": "bridge",
+          "label": "BRIDGE — positivity / normalization / ray-certainty",
+          "rule": "bridge-positivity-type"
+        }
       },
       {
         "info": "explicit",
@@ -912,7 +944,11 @@
         "dischargeable": false,
         "shared": false,
         "status": "surface",
-        "curation": null
+        "curation": {
+          "category": "bridge",
+          "label": "BRIDGE — additivity / non-contextuality (the Born-strength premise)",
+          "rule": "bridge-additivity-type"
+        }
       },
       {
         "info": "explicit",
@@ -924,7 +960,11 @@
         "dischargeable": false,
         "shared": false,
         "status": "surface",
-        "curation": null
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — independence / completeness / probability vector",
+          "rule": "setup-type"
+        }
       },
       {
         "info": "explicit",
@@ -1000,7 +1040,11 @@
         "dischargeable": false,
         "shared": false,
         "status": "surface",
-        "curation": null
+        "curation": {
+          "category": "bridge",
+          "label": "BRIDGE — positivity / normalization / ray-certainty",
+          "rule": "bridge-positivity-type"
+        }
       },
       {
         "info": "explicit",
@@ -1012,7 +1056,11 @@
         "dischargeable": false,
         "shared": false,
         "status": "surface",
-        "curation": null
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — independence / completeness / probability vector",
+          "rule": "setup-type"
+        }
       },
       {
         "info": "explicit",
@@ -1142,7 +1190,11 @@
           {
             "field": "nn",
             "type": "∀ (γ : Γ), 0 ≤ μ γ",
-            "curation": null
+            "curation": {
+              "category": "bridge",
+              "label": "BRIDGE — positivity / normalization / ray-certainty",
+              "rule": "bridge-positivity-type"
+            }
           },
           {
             "field": "sum_one",
@@ -1150,7 +1202,7 @@
             "curation": {
               "category": "setup",
               "label": "SETUP — independence / completeness / probability vector",
-              "rule": "setup"
+              "rule": "setup-type"
             }
           },
           {
@@ -1268,7 +1320,11 @@
         "dischargeable": true,
         "shared": false,
         "status": "auto_dischargeable",
-        "curation": null
+        "curation": {
+          "category": "bridge",
+          "label": "BRIDGE — positivity / normalization / ray-certainty",
+          "rule": "bridge-positivity-type"
+        }
       },
       {
         "info": "explicit",
@@ -1280,7 +1336,11 @@
         "dischargeable": false,
         "shared": false,
         "status": "surface",
-        "curation": null
+        "curation": {
+          "category": "setup",
+          "label": "SETUP — independence / completeness / probability vector",
+          "rule": "setup-type"
+        }
       }
     ],
     "concl": {

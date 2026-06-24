@@ -1,8 +1,8 @@
 {
   "track": "born",
   "title": "Born rule",
-  "generated": "2026-06-24T00:39:17.155586+00:00",
-  "git": "b82b3c8",
+  "generated": "2026-06-24T00:59:31.385764+00:00",
+  "git": "e01ccb2",
   "totals": {
     "theorems": 13,
     "present": 13,
@@ -136,22 +136,22 @@
         {
           "name": "hψ",
           "type": "star ψ ⬝ᵥ ψ = 1",
-          "curation": null
+          "curation": "BRIDGE — positivity / normalization / ray-certainty"
         },
         {
           "name": "hadd",
           "type": "∀ (A B : Matrix n n ℂ), w (A + B) = w A + w B",
-          "curation": null
+          "curation": "BRIDGE — additivity / non-contextuality (the Born-strength premise)"
         },
         {
           "name": "hhom",
           "type": "∀ (c : ℂ) (A : Matrix n n ℂ), w (c • A) = c * w A",
-          "curation": null
+          "curation": "BRIDGE — additivity / non-contextuality (the Born-strength premise)"
         },
         {
           "name": "hpsd",
           "type": "∀ (A : Matrix n n ℂ), QIQTH.GleasonSelector.NonnegC (w (A.conjTranspose * A))",
-          "curation": null
+          "curation": "BRIDGE — positivity / normalization / ray-certainty"
         },
         {
           "name": "hP_herm",
@@ -171,7 +171,7 @@
         {
           "name": "hone",
           "type": "w 1 = 1",
-          "curation": null
+          "curation": "BRIDGE — positivity / normalization / ray-certainty"
         }
       ],
       "dischargeable": []
@@ -192,7 +192,7 @@
         {
           "name": "f.map_add'",
           "type": "∀ (x y : M), toZeroHom.toFun (x + y) = toZeroHom.toFun x + toZeroHom.toFun y",
-          "curation": null
+          "curation": "BRIDGE — additivity / non-contextuality (the Born-strength premise)"
         },
         {
           "name": "hf",
@@ -310,12 +310,12 @@
         {
           "name": "hρ",
           "type": "ρ.PosSemidef",
-          "curation": null
+          "curation": "BRIDGE — positivity / normalization / ray-certainty"
         },
         {
           "name": "hE",
           "type": "∀ (k : Fin m), (E k).PosSemidef",
-          "curation": null
+          "curation": "BRIDGE — positivity / normalization / ray-certainty"
         },
         {
           "name": "hμ0",
@@ -325,12 +325,12 @@
         {
           "name": "hμins",
           "type": "∀ (a : Fin n → Fin m) (S : Finset (Fin n → Fin m)), a ∉ S → μ (insert a S) = μ {a} + μ S",
-          "curation": null
+          "curation": "BRIDGE — additivity / non-contextuality (the Born-strength premise)"
         },
         {
           "name": "hpt",
           "type": "∀ (ω : Fin n → Fin m), μ {ω} = ∏ t, QIQTH.BornTypicalityQuantum.bornProb ρ E (ω t)",
-          "curation": null
+          "curation": "SETUP — independence / completeness / probability vector"
         },
         {
           "name": "S.nodup",
@@ -356,12 +356,12 @@
         {
           "name": "hp",
           "type": "∀ (i : Fin m), 0 ≤ p i",
-          "curation": null
+          "curation": "BRIDGE — positivity / normalization / ray-certainty"
         },
         {
           "name": "hp1",
           "type": "∑ i, p i = 1",
-          "curation": null
+          "curation": "SETUP — independence / completeness / probability vector"
         },
         {
           "name": "k.isLt",
@@ -397,7 +397,7 @@
         {
           "name": "M.nn",
           "type": "∀ (γ : Γ), 0 ≤ μ γ",
-          "curation": null
+          "curation": "BRIDGE — positivity / normalization / ray-certainty"
         },
         {
           "name": "M.sum_one",
@@ -433,7 +433,7 @@
         {
           "name": "hc_norm",
           "type": "∑ k, c k ^ 2 = 1",
-          "curation": null
+          "curation": "SETUP — independence / completeness / probability vector"
         }
       ],
       "dischargeable": [

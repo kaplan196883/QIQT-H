@@ -49,21 +49,41 @@ role = "nogo"
 name = "QIQTH.OperationalNoGo.operational_data_insufficient"
 role = "nogo"
 
-# --- curation rules ---
+# --- curation rules (author labels [C]; first match wins; name_regex on binder name, type_regex on
+#     the pretty-printed type — single-quoted TOML literals so regex backslashes pass through). ---
+
+# SETUP first: sums-to-one / products (independence) — before the additivity rule (which keys on "= …+…").
 [[category_rules]]
-id = "bridge-additivity"
+id = "setup-type"
+category = "setup"
+label = "SETUP — independence / completeness / probability vector"
+type_regex = '∏|∑.*= 1|massSet.*=.*∏'
+[[category_rules]]
+id = "setup-name"
+category = "setup"
+label = "SETUP — independence / completeness / probability vector"
+name_regex = "(indep|complete|p_sum|sum_one|hsum)"
+
+# BRIDGE — additivity / non-contextuality: RHS is a sum (f(x+y)=fx+fy), or named calibration.
+[[category_rules]]
+id = "bridge-additivity-name"
 category = "bridge"
 label = "BRIDGE — additivity / non-contextuality (the Born-strength premise)"
 name_regex = "(additive|noncontext|hcal|oneSite|hnc)"
-
 [[category_rules]]
-id = "bridge-positivity"
+id = "bridge-additivity-type"
+category = "bridge"
+label = "BRIDGE — additivity / non-contextuality (the Born-strength premise)"
+type_regex = '= [^=]*\+[^=]*$|insert|= c \* w A'
+
+# BRIDGE — positivity / normalization / ray-certainty.
+[[category_rules]]
+id = "bridge-positivity-name"
 category = "bridge"
 label = "BRIDGE — positivity / normalization / ray-certainty"
 name_regex = "(normalized|nonneg|pos|ray|certain)"
-
 [[category_rules]]
-id = "setup"
-category = "setup"
-label = "SETUP — independence / completeness / probability vector"
-name_regex = "(indep|complete|p_sum|sum_one|p_nonneg|hsum)"
+id = "bridge-positivity-type"
+category = "bridge"
+label = "BRIDGE — positivity / normalization / ray-certainty"
+type_regex = '0 ≤|PosSemidef|NonnegC|⬝ᵥ ψ = 1|w 1 = 1|μ 1 = 1|w \(.*\) = 1'

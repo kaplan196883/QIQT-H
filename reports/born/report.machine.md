@@ -1,7 +1,7 @@
 # Track state — Born rule
 *Target 1 — QIQT-H compatible with Born (spine + no-go audits)*
 
-_Generated 2026-06-24 00:39 UTC · git `b82b3c8` · 13 theorems · tool lean_track_ · provenance: [L]=Lean fact [P]=Lean-checked prober [D]=derived [C]=curation_
+_Generated 2026-06-24 00:59 UTC · git `e01ccb2` · 13 theorems · tool lean_track_ · provenance: [L]=Lean fact [P]=Lean-checked prober [D]=derived [C]=curation_
 
 ## Axiom status  [L]
 - Project-specific (non-standard) axioms: **0**
@@ -14,45 +14,60 @@ _Generated 2026-06-24 00:39 UTC · git `b82b3c8` · 13 theorems · tool lean_tra
   ρ.PosSemidef ∧
     ρ.trace = 1 ∧
       (∀ (ω : E.Ω), ∃! h, ∀ (t : Fin n), ∃ r ∈ (E.`):
-  - `E.p_nonneg` : `∀ (k : Fin m), 0 ≤ p k` · **BRIDGE — positivity / normalization / ray-certainty** [C:bridge-positivity]
-  - `E.p_sum` : `∑ k, p k = 1` · **SETUP — independence / completeness / probability vector** [C:setup]
-  - `E.oneSite` : `∀ (t : Fin n) (a : Fin m), P.massSet {ω | (V ω t).actualValue = a} = p a` · **BRIDGE — additivity / non-contextuality (the Born-strength premise)** [C:bridge-additivity]
+  - `E.p_nonneg` : `∀ (k : Fin m), 0 ≤ p k` · **BRIDGE — positivity / normalization / ray-certainty** [C:bridge-positivity-name]
+  - `E.p_sum` : `∑ k, p k = 1` · **SETUP — independence / completeness / probability vector** [C:setup-type]
+  - `E.oneSite` : `∀ (t : Fin n) (a : Fin m), P.massSet {ω | (V ω t).actualValue = a} = p a` · **BRIDGE — additivity / non-contextuality (the Born-strength premise)** [C:bridge-additivity-name]
   - `E.indep` : `∀ (h : Fin n → Fin m),
-  P.massSet {ω | (fun t => (V ω t).actualValue) = h} = ∏ t, P.massSet {ω | (V ω t).actualValue = h t}` · **SETUP — independence / completeness / probability vector** [C:setup]
-  - `M.normalized` : `μ 1 = 1` · **BRIDGE — positivity / normalization / ray-certainty** [C:bridge-positivity]
-  - `M.nonneg` : `∀ (E : Matrix (Fin d) (Fin d) ℂ), QIQTH.EffectGleason.IsEffect E → 0 ≤ μ E` · **BRIDGE — positivity / normalization / ray-certainty** [C:bridge-positivity]
+  P.massSet {ω | (fun t => (V ω t).actualValue) = h} = ∏ t, P.massSet {ω | (V ω t).actualValue = h t}` · **SETUP — independence / completeness / probability vector** [C:setup-type]
+  - `M.normalized` : `μ 1 = 1` · **BRIDGE — positivity / normalization / ray-certainty** [C:bridge-positivity-name]
+  - `M.nonneg` : `∀ (E : Matrix (Fin d) (Fin d) ℂ), QIQTH.EffectGleason.IsEffect E → 0 ≤ μ E` · **BRIDGE — positivity / normalization / ray-certainty** [C:bridge-positivity-name]
   - `M.additive` : `∀ (E F : Matrix (Fin d) (Fin d) ℂ),
   QIQTH.EffectGleason.IsEffect E →
-    QIQTH.EffectGleason.IsEffect F → QIQTH.EffectGleason.IsEffect (E + F) → μ (E + F) = μ E + μ F` · **BRIDGE — additivity / non-contextuality (the Born-strength premise)** [C:bridge-additivity]
+    QIQTH.EffectGleason.IsEffect F → QIQTH.EffectGleason.IsEffect (E + F) → μ (E + F) = μ E + μ F` · **BRIDGE — additivity / non-contextuality (the Born-strength premise)** [C:bridge-additivity-name]
   - `hP` : `∀ (a : Fin m), QIQTH.EffectGleason.IsEffect (P a)`
-  - `hcal` : `∀ (a : Fin m), M.μ (P a) = E.p a` · **BRIDGE — additivity / non-contextuality (the Born-strength premise)** [C:bridge-additivity]
+  - `hcal` : `∀ (a : Fin m), M.μ (P a) = E.p a` · **BRIDGE — additivity / non-contextuality (the Born-strength premise)** [C:bridge-additivity-name]
   - `k.isLt` : `val < n`
   - `hε` : `0 < ε`
   - `hn` : `0 < n`
 
 ## Curated piles  [C] *(author labels — NOT a Lean fact)*
 
-**BRIDGE — additivity / non-contextuality (the Born-strength premise)** (3 distinct)
+**BRIDGE — additivity / non-contextuality (the Born-strength premise)** (7 distinct)
+  - `∀ (A B : Matrix n n ℂ), w (A + B) = w A + w B`
   - `∀ (E F : Matrix (Fin d) (Fin d) ℂ),
   QIQTH.EffectGleason.IsEffect E →
     QIQTH.EffectGleason.IsEffect F → QIQTH.EffectGleason.IsEffect (E + F) → μ (E + F) = μ E + μ F`
   - `∀ (a : Fin m), M.μ (P a) = E.p a`
+  - `∀ (a : Fin n → Fin m) (S : Finset (Fin n → Fin m)), a ∉ S → μ (insert a S) = μ {a} + μ S`
+  - `∀ (c : ℂ) (A : Matrix n n ℂ), w (c • A) = c * w A`
   - `∀ (t : Fin n) (a : Fin m), P.massSet {ω | (V ω t).actualValue = a} = p a`
+  - `∀ (x y : M), toZeroHom.toFun (x + y) = toZeroHom.toFun x + toZeroHom.toFun y`
 
-**BRIDGE — positivity / normalization / ray-certainty** (4 distinct)
+**BRIDGE — positivity / normalization / ray-certainty** (12 distinct)
+  - `star ψ ⬝ᵥ ψ = 1`
   - `w (Matrix.vecMulVec ψ (star ψ)) = 1`
+  - `w 1 = 1`
   - `μ 1 = 1`
+  - `ρ.PosSemidef`
+  - `∀ (A : Matrix n n ℂ), QIQTH.GleasonSelector.NonnegC (w (A.conjTranspose * A))`
   - `∀ (E : Matrix (Fin d) (Fin d) ℂ), QIQTH.EffectGleason.IsEffect E → 0 ≤ μ E`
+  - `∀ (i : Fin m), 0 ≤ p i`
+  - `∀ (k : Fin m), (E k).PosSemidef`
   - `∀ (k : Fin m), 0 ≤ p k`
+  - `∀ (k : Outcome), 0 ≤ c k ^ 2`
+  - `∀ (γ : Γ), 0 ≤ μ γ`
 
-**SETUP — independence / completeness / probability vector** (4 distinct)
+**SETUP — independence / completeness / probability vector** (7 distinct)
   - `∀ (h : Fin n → Fin m),
   P.massSet {ω | (fun t => (V ω t).actualValue) = h} = ∏ t, P.massSet {ω | (V ω t).actualValue = h t}`
+  - `∀ (ω : Fin n → Fin m), μ {ω} = ∏ t, QIQTH.BornTypicalityQuantum.bornProb ρ E (ω t)`
+  - `∑ i, p i = 1`
   - `∑ j, w j = 1`
+  - `∑ k, c k ^ 2 = 1`
   - `∑ k, p k = 1`
   - `∑ γ, μ γ = 1`
 
-**(uncategorised surface hypotheses — 25)** *(no rule matched)*
+**(uncategorised surface hypotheses — 13)** *(no rule matched)*
   - `(Matrix.vecMulVec ψ (star ψ)).conjTranspose = Matrix.vecMulVec ψ (star ψ)`
   - `0 < N`
   - `0 < n`
@@ -64,20 +79,8 @@ _Generated 2026-06-24 00:39 UTC · git `b82b3c8` · 13 theorems · tool lean_tra
   - `c 0 ≠ 0`
   - `c 1 ≠ 0`
   - `f 1 ≠ 0`
-  - `star ψ ⬝ᵥ ψ = 1`
-  - `w 1 = 1`
   - `μ ∅ = 0`
-  - `ρ.PosSemidef`
-  - `∀ (A : Matrix n n ℂ), QIQTH.GleasonSelector.NonnegC (w (A.conjTranspose * A))`
-  - `∀ (A B : Matrix n n ℂ), w (A + B) = w A + w B`
   - `∀ (a : Fin m), QIQTH.EffectGleason.IsEffect (P a)`
-  - `∀ (a : Fin n → Fin m) (S : Finset (Fin n → Fin m)), a ∉ S → μ (insert a S) = μ {a} + μ S`
-  - `∀ (c : ℂ) (A : Matrix n n ℂ), w (c • A) = c * w A`
-  - `∀ (i : Fin m), 0 ≤ p i`
-  - `∀ (k : Fin m), (E k).PosSemidef`
-  - `∀ (ω : Fin n → Fin m), μ {ω} = ∏ t, QIQTH.BornTypicalityQuantum.bornProb ρ E (ω t)`
-  - `∑ i, p i = 1`
-  - `∑ k, c k ^ 2 = 1`
 
 ## Per-theorem facts  [L]/[P]/[D]
 
