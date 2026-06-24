@@ -75,6 +75,31 @@ not QIQT-H's.
 
 </div>
 
+<div class="note">
+
+<strong>"But you machine-checked the Einstein equations — isn't that quantum gravity?"</strong> No, and it is
+worth being exact, because the <a href="/formalization">showcase theorem</a>
+(<code>qiqt_gr_ppwave_showcase</code>) makes the gap precise rather than closing it. That result is a
+<em>Jacobson "equation of state"</em> derivation: the <em>classical</em> Einstein field equations emerge as the
+<em>thermodynamics</em> of a horizon, for a free field on a fixed background, <em>conditional</em> on three
+carried inputs — the matter equation of motion, the holographic capacity law <strong>P4</strong>
+(<em>S = A/4ℓ<sub>P</sub><sup>2</sup></em>), and a localization map. It supports exactly one claim:
+<strong>the metric need not be a fundamental quantum field</strong> — gravity can be emergent, like a
+temperature, so quantizing <em>g<sub>μν</sub></em> (gravitons, a path integral over geometries, the
+perturbative infinities) may be the wrong problem. It does <em>not</em> support "no quantum gravity needed."
+Two reasons. (i) The coefficient <em>η = 1/4ℓ<sub>P</sub><sup>2</sup> = 1/4ℏG</em> <strong>is Newton's
+constant</strong> — so postulating P4 inserts the gravitational coupling through the entropy density; the
+derivation has the <em>equation of state</em> but not the <em>statistical mechanics</em> (the microstates whose
+counting would <em>give</em> <em>S = A/4</em>). (ii) The hard cases — singularities, the Planck regime,
+black-hole microstates and information, and the lab tests of <em>gravitationally-induced entanglement</em> —
+are <em>deferred</em> to exactly that undelivered micro-theory, not solved. So the problem is <strong>relocated,
+not removed</strong>: from "quantize the metric" to "find the quantum degrees of freedom whose entanglement
+yields <em>S = A/4</em> and the localization flux" — and QIQT-H currently <em>assumes</em> (P4) the very thing
+such a theory would have to <em>derive</em>. The honest slogan: <strong>QIQT-H can remove the need to quantize
+the metric as fundamental; it does not remove the need for a quantum statistical micro-theory of spacetime.</strong>
+
+</div>
+
 To actually quantize gravity you would have to *add* a real **holographic dynamics** — a covariant law for
 finite regions, a short-distance mechanism replacing the usual field products, and the right low-energy limits
 (Einstein's gravity plus the Standard Model). The frameworks that *do* UV-complete gravity (AdS/CFT, matrix
