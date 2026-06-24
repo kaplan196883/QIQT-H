@@ -152,6 +152,20 @@ prints CHANGES.
   `−C(a)²e^{−aθ²}` independent of how `a` scales it. **So the `hTkk` localization discharge is not specific to
   the single Gaussian — a one-parameter family of modes works.** Axiom-free (std 3); wired into QIQTH.lean +
   AxiomAudit; budget 0.
-- **NEXT: Stage C3** — the regularity block (`gaussCA_pos`, `gaussModeA_norm`, `_continuous`, `_hasDerivAt`,
-  `gaussModeA'_continuous`, `gaussModeA'_norm_le` with the clean bound `≤ C(a)·√(a+1)`, `_sq_integrable`,
-  `_memLp`, `_integrable_fn`) — the `hf2/hf_int/hfd/hf'_meas/hB` capstone block for the family.
+- **Stage C3 ✅** — the regularity block for the family: `gaussCA_pos`, `gaussModeA_norm` (`C(a)·e^{−aθ²/2}`),
+  `gaussModeA_continuous`, `gaussModeA_hasDerivAt` (`hfd`), `gaussModeA'_continuous` (⟹ `hf'_meas`),
+  `gaussModeA'_norm_le` (`hB`, the clean uniform bound `≤ C(a)·√(a+1)` via `u·e^{−u} ≤ 1`),
+  `gaussModeA_sq_integrable`, `gaussModeA_memLp` (`hf2`), `gaussModeA_integrable_fn` (`hf_int`). So the
+  capstone's whole `ff`-regularity block holds for every width `a > 0`. Axiom-free (std 3); wired into
+  AxiomAudit; budget 0.
+- **Workstream C COMPLETE.** The localization discharge (`hTkk` calibration + the `ff`-regularity block) is
+  realized by a one-parameter family of modes, not the single Gaussian — `a=1` recovers `GaussianMode`.
+
+### ALL DONE — Workstreams A, B, C complete (axiom-free, budget 0)
+The class-② analytic scaffolding of the GR capstones is now **derived** for the finite-record + explicit
+congruence + width-family models: entropy/heat derivatives `hS`/`hK` (A), area derivative `hA` (B, θ=0 case),
+and the localization mode's calibration + regularity (C, a one-parameter family). What remains carried in the
+*general* capstones is exactly the irreducible physics floor — `hKG` (EOM) and `hcap`/`hbound`/`hsat` (P4) —
+untouched, as intended. Cited frontiers left honest: the expanding (θ≠0) curved congruence for `hA` (geodesic-
+ODE / area-element, Mathlib gap) and a genuinely *different-envelope* mode (a new hard integral; the width
+family reuses `integral_gaussian a`).

@@ -119,4 +119,109 @@ theorem gaussModeA_calibration (hbar a : ℝ) (hb : 0 < hbar) (ha : 0 < a) :
   rw [hpiim, himInt, hintval, gaussCA_sq_mul_sqrt hbar a hb ha]
   ring
 
+/-! ### Stage C3 — regularity of the width-`a` mode (the capstone's `ff`-block requirements). -/
+
+theorem gaussCA_pos (hbar a : ℝ) (hb : 0 < hbar) (ha : 0 < a) : 0 < gaussCA hbar a :=
+  inv_pos.mpr (Real.sqrt_pos.mpr (mul_pos hb (Real.sqrt_pos.mpr (by positivity))))
+
+/-- `‖g(θ)‖ = C(a)·e^{−a θ²/2}` (from `normSq = C(a)²e^{−a θ²}`). -/
+theorem gaussModeA_norm (hbar a : ℝ) (hb : 0 < hbar) (ha : 0 < a) (θ : ℝ) :
+    ‖gaussModeA hbar a θ‖ = gaussCA hbar a * Real.exp (-a * θ ^ 2 / 2) := by
+  rw [← Real.sqrt_sq (norm_nonneg (gaussModeA hbar a θ)), ← Complex.normSq_eq_norm_sq, gaussModeA_normSq,
+    show gaussCA hbar a ^ 2 * Real.exp (-a * θ ^ 2)
+        = (gaussCA hbar a * Real.exp (-a * θ ^ 2 / 2)) ^ 2 by
+      rw [mul_pow, ← Real.exp_nat_mul]; congr 2; push_cast; ring]
+  exact Real.sqrt_sq (mul_nonneg (gaussCA_pos hbar a hb ha).le (Real.exp_pos _).le)
+
+theorem gaussModeA_continuous (hbar a : ℝ) : Continuous (gaussModeA hbar a) := by
+  unfold gaussModeA; fun_prop
+
+theorem gaussModeA_hasDerivAt (hbar a : ℝ) (θ : ℝ) :
+    HasDerivAt (gaussModeA hbar a) (gaussModeA' hbar a θ) θ := by
+  have hpoly : HasDerivAt (fun y : ℝ => -a * y ^ 2 / 2) (-a * θ) θ := by
+    have h := (hasDerivAt_pow 2 θ).const_mul (-a / 2 : ℝ)
+    convert h using 1
+    · funext y; ring
+    · push_cast; ring
+  have h1 : HasDerivAt (fun y : ℝ => ((-a * y ^ 2 / 2 : ℝ) : ℂ)) ((-a * θ : ℝ) : ℂ) θ :=
+    hpoly.ofReal_comp
+  have h2 : HasDerivAt (fun y : ℝ => (y : ℂ) * Complex.I) Complex.I θ := by
+    have := ((hasDerivAt_id θ).ofReal_comp).mul_const Complex.I
+    simpa using this
+  have hu : HasDerivAt (fun y : ℝ => ((-a * y ^ 2 / 2 : ℝ) : ℂ) - (y : ℂ) * Complex.I)
+      (-(a : ℂ) * (θ : ℂ) - Complex.I) θ := by
+    have hsub := h1.sub h2
+    have hcast : (((-a * θ : ℝ) : ℂ)) - Complex.I = -(a : ℂ) * (θ : ℂ) - Complex.I := by
+      push_cast; ring
+    rwa [hcast] at hsub
+  have hcexp := (hu.cexp).const_mul (gaussCA hbar a : ℂ)
+  have heq : gaussModeA' hbar a θ
+      = (gaussCA hbar a : ℂ) * (Complex.exp (((-a * θ ^ 2 / 2 : ℝ) : ℂ) - (θ : ℂ) * Complex.I)
+          * (-(a : ℂ) * (θ : ℂ) - Complex.I)) := by
+    unfold gaussModeA' gaussModeA; ring
+  rw [heq]; exact hcexp
+
+theorem gaussModeA'_continuous (hbar a : ℝ) : Continuous (gaussModeA' hbar a) := by
+  unfold gaussModeA'; exact (gaussModeA_continuous hbar a).mul (by fun_prop)
+
+/-- `‖g'(θ)‖ ≤ C(a)·√(a+1)` — a clean uniform bound for the width-`a` mode, via `u·e^{−u} ≤ 1`
+    (`u = a θ²`) so `e^{−a θ²}(a²θ²+1) ≤ a+1`. -/
+theorem gaussModeA'_norm_le (hbar a : ℝ) (hb : 0 < hbar) (ha : 0 < a) (θ : ℝ) :
+    ‖gaussModeA' hbar a θ‖ ≤ gaussCA hbar a * Real.sqrt (a + 1) := by
+  have hns : ‖gaussModeA' hbar a θ‖ ^ 2
+      = gaussCA hbar a ^ 2 * Real.exp (-a * θ ^ 2) * (a ^ 2 * θ ^ 2 + 1) := by
+    rw [← Complex.normSq_eq_norm_sq]
+    unfold gaussModeA'
+    rw [Complex.normSq_mul, gaussModeA_normSq]
+    congr 1
+    simp only [Complex.normSq_apply, Complex.sub_re, Complex.sub_im, Complex.mul_re, Complex.mul_im,
+      Complex.neg_re, Complex.neg_im, Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im]
+    ring
+  have hbound : Real.exp (-a * θ ^ 2) * (a ^ 2 * θ ^ 2 + 1) ≤ a + 1 := by
+    have hexp_pos : (0 : ℝ) < Real.exp (a * θ ^ 2) := Real.exp_pos _
+    have hule : a * θ ^ 2 ≤ Real.exp (a * θ ^ 2) := by linarith [Real.add_one_le_exp (a * θ ^ 2)]
+    have huexp : a * θ ^ 2 * Real.exp (-(a * θ ^ 2)) ≤ 1 := by
+      rw [Real.exp_neg, ← div_eq_mul_inv, div_le_one hexp_pos]; exact hule
+    have hexp1 : Real.exp (-(a * θ ^ 2)) ≤ 1 :=
+      Real.exp_le_one_iff.mpr (neg_nonpos.mpr (by positivity))
+    have h4 : a * (a * θ ^ 2 * Real.exp (-(a * θ ^ 2))) ≤ a * 1 :=
+      mul_le_mul_of_nonneg_left huexp ha.le
+    have hcongr : Real.exp (-a * θ ^ 2) = Real.exp (-(a * θ ^ 2)) := by rw [neg_mul]
+    rw [hcongr]; nlinarith [h4, hexp1]
+  have hCsq : (0 : ℝ) ≤ gaussCA hbar a ^ 2 := sq_nonneg _
+  have hsq : ‖gaussModeA' hbar a θ‖ ^ 2 ≤ (gaussCA hbar a * Real.sqrt (a + 1)) ^ 2 := by
+    rw [hns, mul_pow, Real.sq_sqrt (by linarith : (0 : ℝ) ≤ a + 1)]
+    calc gaussCA hbar a ^ 2 * Real.exp (-a * θ ^ 2) * (a ^ 2 * θ ^ 2 + 1)
+        = gaussCA hbar a ^ 2 * (Real.exp (-a * θ ^ 2) * (a ^ 2 * θ ^ 2 + 1)) := by ring
+      _ ≤ gaussCA hbar a ^ 2 * (a + 1) := mul_le_mul_of_nonneg_left hbound hCsq
+  have hB0 : (0 : ℝ) ≤ gaussCA hbar a * Real.sqrt (a + 1) :=
+    mul_nonneg (gaussCA_pos hbar a hb ha).le (Real.sqrt_nonneg _)
+  rw [← Real.sqrt_sq (norm_nonneg (gaussModeA' hbar a θ))]
+  calc Real.sqrt (‖gaussModeA' hbar a θ‖ ^ 2)
+      ≤ Real.sqrt ((gaussCA hbar a * Real.sqrt (a + 1)) ^ 2) := Real.sqrt_le_sqrt hsq
+    _ = gaussCA hbar a * Real.sqrt (a + 1) := Real.sqrt_sq hB0
+
+theorem gaussModeA_sq_integrable (hbar a : ℝ) (ha : 0 < a) :
+    Integrable (fun θ => ‖gaussModeA hbar a θ‖ ^ 2) (volume : Measure ℝ) := by
+  have hg : Integrable (fun θ : ℝ => gaussCA hbar a ^ 2 * Real.exp (-a * θ ^ 2)) volume :=
+    (integrable_exp_neg_mul_sq ha).const_mul (gaussCA hbar a ^ 2)
+  refine hg.congr (Filter.Eventually.of_forall (fun θ => ?_))
+  show gaussCA hbar a ^ 2 * Real.exp (-a * θ ^ 2) = ‖gaussModeA hbar a θ‖ ^ 2
+  rw [← Complex.normSq_eq_norm_sq, gaussModeA_normSq]
+
+theorem gaussModeA_memLp (hbar a : ℝ) (ha : 0 < a) :
+    MemLp (gaussModeA hbar a) 2 (volume : Measure ℝ) :=
+  (memLp_two_iff_integrable_sq_norm (gaussModeA_continuous hbar a).aestronglyMeasurable).mpr
+    (gaussModeA_sq_integrable hbar a ha)
+
+theorem gaussModeA_integrable_fn (hbar a : ℝ) (hb : 0 < hbar) (ha : 0 < a) :
+    Integrable (gaussModeA hbar a) (volume : Measure ℝ) := by
+  have hg : Integrable (fun θ : ℝ => gaussCA hbar a * Real.exp (-a * θ ^ 2 / 2)) volume := by
+    have h := (integrable_exp_neg_mul_sq (by positivity : (0:ℝ) < a / 2)).const_mul (gaussCA hbar a)
+    refine h.congr (Filter.Eventually.of_forall (fun θ => ?_))
+    have hθ : -(a / 2) * θ ^ 2 = -a * θ ^ 2 / 2 := by ring
+    simp only [hθ]
+  exact Integrable.mono' hg (gaussModeA_continuous hbar a).aestronglyMeasurable
+    (Filter.Eventually.of_forall (fun θ => le_of_eq (gaussModeA_norm hbar a hb ha θ)))
+
 end QIQTH.WedgeKMSToGR

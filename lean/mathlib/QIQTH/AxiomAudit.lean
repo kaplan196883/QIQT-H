@@ -4883,6 +4883,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WedgeKMSToGR.gaussMode_calibration
 -- GR scaffolding C: the WHOLE width family hits the same 2π/ℏ calibration (not Gaussian-specific):
 #print axioms QIQTH.WedgeKMSToGR.gaussModeA_calibration
+-- GR scaffolding C3: the family's regularity block (hfd/hf'_meas/hB/hf2/hf_int for the capstone ff):
+#print axioms QIQTH.WedgeKMSToGR.gaussModeA_hasDerivAt
+#print axioms QIQTH.WedgeKMSToGR.gaussModeA'_norm_le
+#print axioms QIQTH.WedgeKMSToGR.gaussModeA_memLp
+#print axioms QIQTH.WedgeKMSToGR.gaussModeA_integrable_fn
 -- T3-3-C3: free-field QIQT→GR with the localization mode CONSTRUCTED from φ — hTkk discharged:
 #print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_gaussian
 -- Maximally-discharged capstone: T3-1 (entropy from finite record) + T3-3-C3 (mode from φ) combined:
