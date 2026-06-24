@@ -160,6 +160,18 @@ take route #1/trivial-3a (construct an arbitrary mode with the prescribed boost 
 `hTkk` syntactically while being physically vacuous — exactly the kind of soundness hole to avoid. The genuine
 localization map (deriving `ff` from `φ` by wedge smearing) is the cited continuum frontier.
 
+### Continuum stage (T3-3-C) — the localization mode from the field
+- **C1 ✅** (`localized_mode_hTkk`, `QIQTH/LocalizedMode.lean`) — the **non-vacuous** construction:
+  `ff x v := (∑ₐ vₐ ∂ₐφ(x))·g₀` (field directional derivative × universal reference profile `g₀`). Because the
+  boost charge is quadratic in the mode it scales as `(v^a∂_aφ)²` — so the transparent `hTkk` holds for EVERY
+  generator from a SINGLE universal calibration `(−2π∫conj(g₀)·g₀').im = 2π/ℏ`. The amplitude-from-gradient law
+  and the `(∂φ)²` scaling are now DERIVED, not assumed. Axiom-free, budget 0. **The per-generator localization
+  frontier is reduced to one universal mode-calibration constant.**
+- **C2 (next)** — exhibit a concrete calibrated `g₀` (Gaussian wave packet `C·e^{-θ²/2}·e^{-iθ}` with
+  `C²=1/(ℏ√π)`): `Im(∫conj g₀ g₀') = −1/ℏ` via the Gaussian integral `∫e^{-θ²}=√π` + oddness of `∫θe^{-θ²}`.
+  Closes `hcal` ⟹ `hTkk` fully discharged for the canonical localization.
+- **C3 (next)** — thread `ff := D·g₀` through a capstone (build on `_thermo`) so `hTkk` is discharged there.
+
 ## 4. Deliverable
 
 `QIQTH.WedgeKMSToGR.qiqt_gr_freefield_localized` (new theorem; keep `qiqt_gr_freefield` as the more-general
