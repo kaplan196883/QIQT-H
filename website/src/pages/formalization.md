@@ -79,6 +79,40 @@ What is genuinely *derived* inside the chain (no hypothesis smuggles in the conc
 | `einsteinTensor_divergence_zero` | $\nabla^\mu G_{\mu\nu}=0$ (twice-contracted Bianchi) |
 | `jacobson_einstein_equation_of_state` | the null-cone tensor relation $\Rightarrow$ Einstein's equations with constant $\Lambda$ |
 
+### The instantiated showcase — the floor laid bare
+
+The development since has been *drained* further: the chain is now machine-checked for an **explicit free
+Klein–Gordon field on a curved pp-wave spacetime**, the one-particle **Bisognano–Wichmann theorem is now a
+fully unconditional Lean theorem** (no longer a cited input), matter conservation $\nabla^\mu T_{\mu\nu}=0$ is
+*derived* for the KG stress tensor, and the entropy/area *derivatives* are derived from smoothness of the
+record law. The capstone of that effort is a single theorem that **discharges every geometric and analytic
+premise** and exhibits exactly what GR rests on:
+
+> `qiqt_gr_ppwave_showcase` — the **Einstein field equations** $a\,T_{\mu\nu}=G_{\mu\nu}+\Lambda g_{\mu\nu}$ for
+> the explicit **pp-wave** spacetime, with the metric/tetrad, the **area derivative** (Raychaudhuri area-rate,
+> via an expansion-free congruence), and the **entropy bound** $S\le\eta A$ (Shannon's maximum at the
+> holographic capacity) **all discharged inside the theorem** — leaving as hypotheses *exactly the irreducible
+> floor*.
+
+| what the showcase discharges | how |
+| --- | --- |
+| pp-wave metric + tetrad (symmetry, inverse, smoothness, frame congruence) | the explicit pp-wave geometry |
+| `hA` — the area derivative | `area_hasDerivAt_of_covConst`: an expansion-free congruence has zero expansion $\Rightarrow$ constant area |
+| `hbound` — the entropy bound $S\le\eta A$ | `shannon_le_log_card`: the area is set to the holographic capacity $\eta\,c=\log\lvert R\rvert$ |
+
+| what it carries — *exactly the floor* | meaning |
+| --- | --- |
+| `hKG` | the matter **equation of motion** (Klein–Gordon on the pp-wave background) |
+| `hcap` ($\eta\,c=\log\lvert R\rvert$) | the **FQ holographic capacity** — postulate **P4**, $Q_R=A/4\ell_P^2$ |
+| `hS`, `hK` | the **localization map** — the field-coupled record law whose entropy rate equals the stress flux $2\pi/\hbar\cdot T_{kk}$ |
+
+The localization map is **provably not** dischargeable by analysis: at the uniform reference the Shannon
+entropy is *stationary* ($\sum p'=0$), so the *value* of the heat rate is forced to be the stress flux — i.e.
+the field-coupled record law, the irreducible Gap-2 input. So the showcase is the cleanest honest statement of
+the result: **the Einstein equations for the pp-wave spacetime follow from the matter equation of motion + the
+holographic capacity (P4) + the localization map** — every geometric, curvature, area-kinematic, and
+entropy-bound step machine-checked and discharged.
+
 <div class="note">
 
 <strong>Honest scope — a conditional formalization milestone, not "GR from nothing."</strong> This is a
