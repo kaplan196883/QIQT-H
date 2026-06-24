@@ -27,6 +27,28 @@ open QIQTH.Fock QIQTH.Fock.OneParticle QIQTH.Fock.BoostKMS QIQTH.Fock.CyclicWitn
   QIQTH.StandardSubspaceModular
 open MeasureTheory Filter Topology
 
+/-- **Stage 0 (T3-3): the KG null-stress simplification.**  On the null cone `BL(g x) v = 0`, the
+    Klein–Gordon stress tensor's null component collapses to the squared directional derivative
+    `BL(kgStress) v = (∑ₐ vₐ ∂ₐφ)²` — because the trace term `−½ g_{ab} L` contracts to `−½·(BL(g x)v)·L = 0`.
+    This is the classical null-energy `T_kk = (v^a ∂_a φ)²` that the localization map (`hTkk`) identifies with the
+    one-particle rapidity-momentum integral.  Axiom-free, reusable. -/
+theorem BL_kgStress_null (m : ℝ) (φ : Point 4 → ℝ)
+    (g gi : Point 4 → Fin 4 → Fin 4 → ℝ) (x : Point 4) (v : Fin 4 → ℝ)
+    (hnull : BL (g x) v = 0) :
+    BL (kgStress m φ g gi x) v = (∑ a, v a * pd φ a x) ^ 2 := by
+  simp only [BL] at hnull ⊢
+  have key : (∑ i, ∑ j, kgStress m φ g gi x i j * v i * v j)
+      = (∑ i, v i * pd φ i x) * (∑ j, v j * pd φ j x)
+        - (1 / 2 * kgLagr m φ gi x) * (∑ i, ∑ j, g x i j * v i * v j) := by
+    rw [Finset.sum_mul_sum, Finset.mul_sum]
+    simp_rw [Finset.mul_sum]
+    rw [← Finset.sum_sub_distrib]
+    refine Finset.sum_congr rfl fun i _ => ?_
+    rw [← Finset.sum_sub_distrib]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    simp only [kgStress]; ring
+  rw [key, hnull, mul_zero, sub_zero, pow_two]
+
 /-- **★★★ The free-field flux equation `kd x v = (2π/ℏ)·BL(T x)v`, per null generator.**  The `∀`-wrap of
     `freeField_component_hFlux`: given, for each null horizon generator `(x,v)`, a smooth wedge mode `f_{x,v}`
     (with the standard integrability/measurability/bound data) together with
