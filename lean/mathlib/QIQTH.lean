@@ -171,6 +171,7 @@ import QIQTH.ThreeQubitUniverse
 import QIQTH.RecordContract
 import QIQTH.DifferentialAreaLaw
 import QIQTH.QiqtToGR
+import QIQTH.QiqtGrWitness
 import QIQTH.WedgeKMSToGR
 -- T3-1: the four Clausius/area-law premises (bound/saturation/positivity/tightness) are theorems of
 -- the finite QIQT entropy model + the holographic area-capacity identification, not assumptions.

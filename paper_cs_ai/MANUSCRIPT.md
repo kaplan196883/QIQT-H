@@ -26,14 +26,15 @@ framework, while the Bisognano-Wichmann wedge-modular flux and Raychaudhuri focu
 explicitly labelled hypotheses (not axioms), alongside conservation and regularity premises; all the
 differential geometry downstream (Bianchi, $\nabla^\mu G_{\mu\nu}=0$, the null-cone-to-tensor step,
 constant $\Lambda$) is machine-checked. The full assumption surface — 14 data binders and 23
-labelled hypotheses, with the `#print axioms` output — is listed in an appendix. The same
-development carries a project-axiom-free no-collapse measurement core; in total 192 modules, roughly
-2,010 theorems, 0 project-specific axioms, no `sorry`. We are explicit about scope: the audit
-certifies that the derivation uses no project axiom and that its premises are labelled, *not* that
-those premises are jointly satisfiable or that the cited physics inputs and the framework's physical
-capacity postulate are true — those remain open. The contribution is an auditable, goal-directed
-architecture for AI-assisted formalization, reported as a single-team case study and conjectured to
-transfer.
+labelled hypotheses, with the `#print axioms` output — is listed in an appendix, and a separate
+machine-checked, project-axiom-free witness (a flat/vacuum instantiation) shows that premise set is
+*jointly satisfiable*, so the theorem is non-vacuous. The same development carries a
+project-axiom-free no-collapse measurement core; in total 192 modules, roughly 2,010 theorems, 0
+project-specific axioms, no `sorry`. We are explicit about scope: verification certifies that the
+derivation uses no project axiom, that its premises are labelled, and that they are satisfiable — but
+*not* that the cited physics inputs or the framework's physical capacity postulate are true; those
+remain open. The contribution is an auditable, goal-directed architecture for AI-assisted
+formalization, reported as a single-team case study and conjectured to transfer.
 
 **Keywords:** AI for science; autoformalization; interactive theorem proving; Lean; multi-agent
 systems; LLM-as-judge; verification; soundness auditing; human-AI collaboration; Einstein field
@@ -611,14 +612,18 @@ project-axiom-free theorem whose premises were secretly contradictory would be v
 the syntactic vacuity lint of §3.5 need not catch it. The audit certifies the absence of project
 axioms, not the consistency of the premise set. The rigorous remedy is a *model* — an explicit
 instantiation of every binder under which all 23 hypotheses hold and the conclusion is non-trivial.
-A natural witness is a flat (Minkowski) background with vanishing stress-energy, under which the
-capacity, flux, focusing, conservation, and regularity premises hold and the conclusion reduces to
-the true vacuum equation $G_{\mu\nu}=0$; Appendix A sketches this instantiation and the lemmas it
-needs (chiefly that the Ricci tensor of a constant metric vanishes). We are explicit that we have
-*not yet mechanized* this witness: at present premise-set satisfiability for the headline theorem is
-argued, not machine-checked, and we flag building the Lean witness as the concrete next increment the
-methodology itself calls for (§5.3). In general the audit shows no project axiom and no syntactically
-vacuous premise, which is weaker than a consistency proof.
+We supply such a witness, machine-checked: a flat (Minkowski) background with vanishing
+stress-energy — `g = gi = (fun _ => gm)` (the constant reference metric, with $gm\cdot gm = I$), the
+identity frame, $T=0$, and zero entropy/modular-energy/area. The Lean theorem
+`qiqt_bekenstein_gives_gr_satisfiable` (Appendix A) discharges all 23 hypotheses under this model and
+*applies* the headline theorem, obtaining its conclusion — the true vacuum equation $G_{\mu\nu}=0$.
+The one non-trivial lemma is that the Ricci tensor of a constant metric vanishes (its Christoffel
+symbols are built from metric derivatives, which are zero); we prove it, and the witness is itself
+project-axiom-free (`#print axioms` returns only the three standard axioms). So the headline premise
+set is demonstrably consistent and the theorem non-vacuous. We keep the general distinction explicit:
+the audit shows no project axiom and no syntactically vacuous premise, which for an *arbitrary*
+theorem is weaker than a consistency proof — making such a witness routine is methodological future
+work (§5.3) — but for the headline result the satisfiability is now machine-checked.
 
 ### 4.3 The rest of the development, with artifact metrics
 
@@ -833,10 +838,11 @@ false-positive rates, or time relative to manual formalization. The claim is the
 existence result and a methodology, not a measured improvement over a baseline; designing that
 comparison is future work. The sixth concerns premise-set consistency: as discussed in §4.2,
 project-axiom-freedom certifies the absence of project axioms, not the joint satisfiability of a
-theorem's hypotheses; we identify a model witness (a Minkowski/vacuum instantiation, sketched in
-Appendix A) as the rigorous remedy but have not yet mechanized it, so the methodology does not yet
-make satisfiability checking routine, and a contradictory premise set would render a theorem
-vacuously true without tripping the syntactic vacuity lint. Finally, the loop
+theorem's hypotheses. For the headline result we close this with a machine-checked
+model witness (the Minkowski/vacuum instantiation of Appendix A), so its premise set is provably
+satisfiable; but the methodology does not yet make such a witness *routine* for an arbitrary theorem,
+and absent one a contradictory premise set would render a theorem vacuously true without tripping the
+syntactic vacuity lint. Finally, the loop
 itself is not reproducible: the formalizer and reviewer are proprietary models and we publish no
 replayable transcript, so the checkable object is the audited final artifact, not the agent
 trajectory.
@@ -867,9 +873,9 @@ axiom the reviewer refuted by counterexample, and an inconsistent one the axiom 
 which motivated a vacuity lint). The contribution is the audited methodology together with this
 demonstration at the scale of a whole theory, held throughout under an explicit honesty boundary: the
 formalization certifies that the derivation uses no hidden axiom, given its labelled premises; it
-does not, and cannot, establish those cited inputs, the joint satisfiability of the premise set (for
-which we sketch but do not yet mechanize a model witness, Appendix A), or the framework's physical
-postulates, which remain open. We make the
+does not, and cannot, establish those cited inputs or the framework's physical postulates, which
+remain open — though a machine-checked witness (Appendix A) does establish that the headline premise
+set is jointly satisfiable, so the theorem is non-vacuous. We make the
 strong-sounding negative claim deliberately: this is not "AI proved general relativity," and the
 paper's value lies precisely in being able to say exactly what it is and is not.
 
@@ -961,17 +967,27 @@ Clausius/area floor (`hbound`, `hsat`, `hDnn`, `hD0`) is the QIQT-H capacity pos
 — Lean's three standard axioms and no project-specific axiom (the project-axiom budget is 0). The
 redundancy probe of §3.5 returns no auto-dischargeable hypothesis among the 23.
 
-**Satisfiability witness (sketch; not yet mechanized).** Project-axiom-freedom does not by itself
-establish that the 23 hypotheses are jointly satisfiable (§4.2). The natural witness is a flat
-background: take `g = gi = (fun _ => EinsteinEOS.gm)` (the constant reference metric), `P = Pinv = id`
-(so `hcong`, `hinv`, `hsymm`, `hPP` hold by computation), `T = 0`, and `S = KE = A = 0` with
-`sd = kd = ad = 0`. Then `hbound`/`hsat`/`hDnn`/`hD0` reduce to `0 ≤ 0` / `0 = 0`; `hFlux`/`hFocus`
-reduce to `0 = 0` once `ricci` of a constant metric is shown to vanish; `conserv` holds since `T = 0`;
-and the conclusion holds with `Λ = 0` because the Einstein tensor of a flat metric is zero, giving the
-true vacuum equation `G_{μν} = 0`. The one non-trivial lemma is `ricci (fun _ => gm) = 0` (Christoffel
-symbols of a constant metric vanish), from which `scalarCurv = 0` and `einsteinTensor = 0` follow. We
-flag mechanizing this witness as the concrete next increment (§5.3); until then, premise-set
-satisfiability is argued here rather than machine-checked.
+**Satisfiability witness (machine-checked).** Project-axiom-freedom does not by itself establish that
+the 23 hypotheses are jointly satisfiable (§4.2), so we exhibit a model and verify all of them in
+Lean. Take `g = gi = (fun _ => EinsteinEOS.gm)` (the constant reference metric, with `gm·gm = I`),
+`P = Pinv = id`, `T = 0`, and `S = KE = A = 0` with `sd = kd = ad = 0`. Then `hsymm`/`hinv`/`hPP`/
+`hcong` hold by computation; `hbound`/`hsat`/`hDnn`/`hD0` reduce to `0 ≤ 0` / `0 = 0`;
+`hFlux`/`hFocus`/`conserv` reduce to `0 = 0` once the Ricci tensor of the constant metric is shown to
+vanish; `hreg` forces `f = 0` (from `0 = ricci + f·gm` with `ricci = 0` and `gm₀₀ = -1`); and the
+conclusion holds with `Λ = 0`, giving the true vacuum equation `G_{μν} = 0`. The supporting lemma
+chain `christoffel (fun _ => G) = 0 → riemann = 0 → ricci = 0 → scalarCurv = 0 → einsteinTensor = 0`
+(Christoffel symbols of a constant metric vanish, since they are built from metric derivatives) is
+proved generically. The witness theorem is
+
+```
+theorem qiqt_bekenstein_gives_gr_satisfiable :
+    ∃ Λ, ∀ x μ ν, (2*π) * 0 = einsteinTensor gW gW μ ν x + Λ * gW x μ ν :=
+  QIQTH.QiqtToGR.qiqt_bekenstein_gives_gr gW gW … -- all 23 hypotheses discharged
+```
+
+and `#print axioms QIQTH.QiqtGrWitness.qiqt_bekenstein_gives_gr_satisfiable` returns
+`[propext, Classical.choice, Quot.sound]` — project-axiom-free. Hence the headline premise set is
+provably consistent and the theorem demonstrably non-vacuous.
 
 ---
 
