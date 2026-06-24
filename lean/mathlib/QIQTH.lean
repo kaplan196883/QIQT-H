@@ -188,6 +188,9 @@ import QIQTH.LocalizedMode
 -- T3-3-C2: the concrete calibrated profile — a Gaussian wave packet satisfies the mode calibration,
 -- closing the last analytic input (hcal) of the localization map.
 import QIQTH.GaussianMode
+-- GR scaffolding C: the localization discharge is not specific to one Gaussian — a width-parametrized
+-- family gaussModeA (a>0) hits the SAME calibration 2π/ℏ for every width (reuses integral_gaussian a).
+import QIQTH.GaussianModeFamily
 -- T3-3-C3: the free-field QIQT→GR capstone with the localization mode CONSTRUCTED from φ
 -- (ff = field-gradient · Gaussian), hTkk discharged in the GR theorem itself.
 import QIQTH.QiqtGrGaussian

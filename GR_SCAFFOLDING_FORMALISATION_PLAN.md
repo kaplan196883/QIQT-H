@@ -143,5 +143,15 @@ prints CHANGES.
 - **Workstream C recon ✅** — read the full `GaussianMode.lean`; identified the tractable honest route: a
   width-parametrized family `gaussModeA hbar a` (a>0) hitting the **same** `2π/ℏ` for every width, reusing
   Mathlib `integral_gaussian a` (no new hard integral). Scoped into C1/C2/C3 in §3 above.
-- **NEXT: Workstream C, Stage C1** — `GaussianModeFamily.lean`: `gaussModeA`/`gaussCA` defs +
-  `gaussCA_sq_mul_sqrt` + `gaussModeA_normSq`/`gaussModeA_conj_mul`. Then C2 (calibration ∀ a), C3 (regularity).
+- **Stage C1 ✅** (`GaussianModeFamily.lean`) — `gaussCA`/`gaussModeA`/`gaussModeA'` defs +
+  `gaussCA_sq_mul_sqrt` (`C(a)²√(π/a)=1/ℏ`) + `gaussModeA_normSq` (`C(a)²e^{−a θ²}`) + `gaussModeA_conj_mul`.
+  Axiom-free (std 3).
+- **Stage C2 ✅** (`gaussModeA_integrable`, `gaussModeA_calibration`) — **the whole width family hits the SAME
+  calibration `(−2π∫conj·').im = 2π/ℏ` for every `a > 0`** (via `integral_gaussian a = √(π/a)` +
+  `gaussCA_sq_mul_sqrt`). The width enters only the real (total-derivative) part; the imaginary density is
+  `−C(a)²e^{−aθ²}` independent of how `a` scales it. **So the `hTkk` localization discharge is not specific to
+  the single Gaussian — a one-parameter family of modes works.** Axiom-free (std 3); wired into QIQTH.lean +
+  AxiomAudit; budget 0.
+- **NEXT: Stage C3** — the regularity block (`gaussCA_pos`, `gaussModeA_norm`, `_continuous`, `_hasDerivAt`,
+  `gaussModeA'_continuous`, `gaussModeA'_norm_le` with the clean bound `≤ C(a)·√(a+1)`, `_sq_integrable`,
+  `_memLp`, `_integrable_fn`) — the `hf2/hf_int/hfd/hf'_meas/hB` capstone block for the family.

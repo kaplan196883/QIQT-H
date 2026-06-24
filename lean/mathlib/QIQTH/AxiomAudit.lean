@@ -4881,6 +4881,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WedgeKMSToGR.localized_mode_hTkk
 -- T3-3-C2: a concrete Gaussian wave packet satisfies the calibration (Im ∫ conj g₀ g₀' = −1/ℏ):
 #print axioms QIQTH.WedgeKMSToGR.gaussMode_calibration
+-- GR scaffolding C: the WHOLE width family hits the same 2π/ℏ calibration (not Gaussian-specific):
+#print axioms QIQTH.WedgeKMSToGR.gaussModeA_calibration
 -- T3-3-C3: free-field QIQT→GR with the localization mode CONSTRUCTED from φ — hTkk discharged:
 #print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_gaussian
 -- Maximally-discharged capstone: T3-1 (entropy from finite record) + T3-3-C3 (mode from φ) combined:
