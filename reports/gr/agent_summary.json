@@ -1,8 +1,8 @@
 {
   "track": "gr",
   "title": "GR field equations",
-  "generated": "2026-06-24T07:09:13.167596+00:00",
-  "git": "39af19a",
+  "generated": "2026-06-24T09:49:41.640628+00:00",
+  "git": "7233ca0",
   "totals": {
     "theorems": 14,
     "present": 14,

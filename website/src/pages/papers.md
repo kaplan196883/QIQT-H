@@ -13,13 +13,13 @@ Holographic Constraint.** Paweł Kapłański.
 The primary statement of the program: the $(\Phi,\lambda)$ single-world no-collapse ontology, the
 finite-information premise as a record *stage*, the regional cost functional $\chi_R$, and an honest account
 of what remains [open](/open-problems). It includes the **retirement of the Macroscopic Definiteness
-Conjecture** (capacity does not forbid records — a category error) and reframes the single outcome as λ's, with
-the machine-checked covariant Born-*reduction* (to a single typicality premise, with a no-go that some premise is unavoidable) and consistency results as the substantive contribution. Prepared for arXiv
-(quant-ph; cross-listed math-ph, gr-qc).
+Conjecture** (capacity does not forbid records, a category error) and reframes the single outcome as λ's, with
+the machine-checked covariant Born-*reduction* (to a single typicality premise, with a no-go that some premise is unavoidable) and consistency results as the substantive contribution. Submitted to arXiv
+(quant-ph; cross-listed math-ph, gr-qc), currently under moderation.
 
 **[Read the PDF](/QIQT_Foundations_Paper.pdf)**
-&nbsp;·&nbsp; arXiv-ready preprint. The arXiv link will be posted here on submission; for now the current
-build is served directly from this site.
+&nbsp;·&nbsp; Submitted to arXiv; under moderation. The arXiv link will be posted here once it is
+announced; for now the current build is served directly from this site.
 
 ## Methods paper — the way in
 
@@ -32,14 +32,14 @@ model that adversarially reviews the design, a human who controls scope) and the
 holds the project-axiom budget at zero. Running that loop on QIQT-H produced its headline artifact: a
 machine-checked, project-axiom-free Lean theorem deriving, *conditionally*, the Einstein field equations
 $a\,T_{\mu\nu}=G_{\mu\nu}+\Lambda g_{\mu\nu}$ from a finite-information (Bekenstein-type) capacity bound,
-by a Jacobson-style equation of state. It is deliberately honest about scope — the cited physics inputs
-are labelled hypotheses, the capacity postulate stays open — and it is the natural entry point for a
+by a Jacobson-style equation of state. It is deliberately honest about scope (the cited physics inputs
+are labelled hypotheses, the capacity postulate stays open), and it is the natural entry point for a
 reader who wants to see *how* the program is built and checked before reading the
 [foundations paper](#foundations-paper) above for *what* it claims.
 
 **[Read the PDF](/QIQT_AI_Methodology.pdf)**
-&nbsp;·&nbsp; arXiv-ready (cs.AI; cross-list quant-ph, math.LO). The arXiv link will be posted here on
-submission.
+&nbsp;·&nbsp; Submitted to arXiv (primary cs.AI; cross-listed gr-qc, quant-ph, physics.hist-ph),
+currently under moderation. The arXiv link will be posted here once it is announced.
 
 ## Formalization companion
 

@@ -1,7 +1,7 @@
 # Track state — GR field equations
 *Target 3 — QIQT-H gives the GR field equations (Jacobson route, free KG field)*
 
-_Generated 2026-06-24 07:09 UTC · git `39af19a` · 14 theorems · tool lean_track_ · provenance: [L]=Lean fact [P]=Lean-checked prober [D]=derived [C]=curation_
+_Generated 2026-06-24 09:49 UTC · git `7233ca0` · 14 theorems · tool lean_track_ · provenance: [L]=Lean fact [P]=Lean-checked prober [D]=derived [C]=curation_
 
 ## Axiom status  [L]
 - Project-specific (non-standard) axioms: **0**
