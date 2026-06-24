@@ -39,7 +39,7 @@ is the **case study / evaluation domain**, framed for an AI audience.
   compiler ⇄ reviewer loop). A pipeline figure and a sample dependency-graph screenshot land well.
 - **Terminology:** use the field's words — *autoformalization*, *neural/agentic theorem
   proving*, *verifier-in-the-loop*, *self-correction*, *human-in-the-loop*, *MCP tools*.
-- **AI-assistance disclosure:** required by arXiv; in this genre it is the *subject*, so
+- **AI-assistance disclosure:** in this genre it is the *subject*, so
   state the exact models and roles (Claude / Claude Code as formalizer; GPT-5.5 Pro as
   reviewer) plainly in the method and acknowledgements.
 

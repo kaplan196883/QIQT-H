@@ -43,8 +43,8 @@ hyperref.
    Mathlib development, axiom audit, verified blueprint) at https://github.com/kaplan196883/QIQT-H.`
 5. **License.** Choose one (arXiv's default non-exclusive licence, or CC BY 4.0).
 6. **AI-assistance disclosure.** Already in the Acknowledgements and Section 3 (Claude Code as
-   formalizer, GPT-5.5-Pro as reviewer, under the author's direction). This is required by arXiv
-   and is the subject of the paper.
+   formalizer, GPT-5.5-Pro as reviewer, under the author's direction). This is the subject of the
+   paper, not a compliance note.
 
 ## Remaining pre-submission items (optional, non-blocking)
 - All 49 references were verified to exist via web search; arXiv IDs and venues are filled in. References [42] (companion foundations paper) and [43] (project repository) are the author's own work.

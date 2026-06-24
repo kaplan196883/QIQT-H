@@ -24,9 +24,10 @@ AI now produces scientific reasoning faster than it can be vetted, and most of i
 **Endorsement.** Submit under cs.AI (author endorsed); cross-lists do not require separate
 endorsement once the primary is accepted. See `../PUBLICATION_STRATEGY.md` §1, §7.
 
-**AI-assistance disclosure (required).** State plainly (already in §3 + Acknowledgements): Claude
-Code as formalizer, GPT-5.5-Pro as independent reviewer, under author direction; this is the
-paper's subject, not incidental tooling.
+**AI-assistance disclosure.** Stated plainly (in §3 + Acknowledgements): Claude
+Code as formalizer, GPT-5.5-Pro as independent reviewer, under author direction. This is the
+paper's subject, not incidental tooling, and is described as such rather than to satisfy any
+external requirement.
 
 **Pre-submission LOW fixes (from Final_Evaluation_Report.md).** verify abstract char count;
 fill arXiv IDs/authors for refs [3], [14]; replace the ASCII Fig. 1 with a TikZ vector; optional
