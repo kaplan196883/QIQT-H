@@ -27,6 +27,12 @@ deliberately **not** done. Final capstone: `qiqt_gr_freefield_nullEnergy`. All s
   energy = mode boost charge), the genuine Unruh/BW localization map. Not discharged (would need continuum
   mode-expansion, or a vacuous arbitrary-mode construction — deliberately avoided). Axiom-free, budget 0.
   **T3-3 complete.**
+- **Stage 2′ ✅ (option b — `hWarea` discharged)** (`qiqt_gr_freefield_geom`) — the area-rate `ad` is no longer
+  an abstract parameter; it is **defined** geometrically as `ad x v := −∑ᵥ Wˣᵛ ∂ᵥ θ[Wˣᵛ]`, so the labelled
+  identity `hWarea` becomes `rfl` and the abstract `ad` function is removed. The remaining congruence premises
+  `hWx`/`hWC`/`hWgeo`/`hWequil` are the genuine Jacobson local-Rindler-horizon **setup** (smooth geodesic null
+  congruence at equilibrium) — they need a geodesic-ODE / exp-map construction Mathlib lacks for this curvature
+  setup, so they stay labelled (the cited geometric frontier, NOT physics). Axiom-free, budget 0.
 
 ## 0. What this is
 

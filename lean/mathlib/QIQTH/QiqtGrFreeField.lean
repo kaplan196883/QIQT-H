@@ -330,4 +330,59 @@ theorem qiqt_gr_freefield_nullEnergy
     P Pinv hPP hPP' hcong Sf KE A sd ad hS hK hA hbound hsat hDnn hD0
     mw hmw ff ff' hf2 hf_int hfd hf'_meas Bd hB hTkk' W hWx hWC hWgeo hWequil hWarea
 
+/-- **Stage 2′ (T3-3, option b): `hWarea` discharged — `ad` defined geometrically.**  Identical to
+    `qiqt_gr_freefield_nullEnergy`, but the area first-variation rate `ad` is no longer an abstract parameter
+    paired with the labelled identity `hWarea`; it is **defined** as the congruence-expansion derivative
+    `ad x v := −∑ᵥ Wˣᵛ ∂ᵥ θ[Wˣᵛ]`, so `hWarea` becomes `rfl`.  `hA` (the area functional's rate) now reads in
+    that explicit geometric form.  The remaining congruence premises `hWx`/`hWC`/`hWgeo`/`hWequil` are the
+    genuine Jacobson local-Rindler-horizon **setup** (a smooth geodesic null congruence at equilibrium) — these
+    require a geodesic-ODE / exp-map construction Mathlib lacks for this curvature setup, so they stay labelled
+    (the cited geometric frontier, NOT physics).  Axiom-free. -/
+theorem qiqt_gr_freefield_geom
+    (g gi : Point 4 → Fin 4 → Fin 4 → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hCg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hCgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (φ : Point 4 → ℝ) (m η hbar a : ℝ)
+    (hbar0 : hbar ≠ 0) (heta : η ≠ 0) (ha : a = 2 * Real.pi / (hbar * η))
+    (hφ : ContDiff ℝ ⊤ φ) (hKG : ∀ x, boxField φ g gi x = m ^ 2 * φ x)
+    (P Pinv : Point 4 → Fin 4 → Fin 4 → ℝ)
+    (hPP : ∀ x i j, (∑ k, P x i k * Pinv x k j) = if i = j then (1 : ℝ) else 0)
+    (hPP' : ∀ x i j, (∑ k, Pinv x i k * P x k j) = if i = j then (1 : ℝ) else 0)
+    (hcong : ∀ x i j, g x i j = ∑ k, ∑ l, P x k i * gm k l * P x l j)
+    (Sf KE A : Point 4 → (Fin 4 → ℝ) → ℝ → ℝ) (sd : Point 4 → (Fin 4 → ℝ) → ℝ)
+    -- the congruence is declared first, so `ad` can be DEFINED from it (discharging `hWarea`):
+    (W : Point 4 → (Fin 4 → ℝ) → Point 4 → Fin 4 → ℝ)
+    (hWx : ∀ x v, BL (g x) v = 0 → W x v x = v)
+    (hWC : ∀ x v μ, ContDiff ℝ ⊤ (fun y => W x v y μ))
+    (hWgeo : ∀ x v, ∀ y μ, (∑ ν, W x v y ν * covDerivVec g gi (W x v) ν μ y) = 0)
+    (hWequil : ∀ x v, BL (g x) v = 0 →
+        (∑ μ, ∑ ν, covDerivVec g gi (W x v) μ ν x * covDerivVec g gi (W x v) ν μ x) = 0)
+    (hS : ∀ x v, BL (g x) v = 0 → HasDerivAt (Sf x v) (sd x v) 0)
+    (hK : ∀ x v, BL (g x) v = 0 →
+        HasDerivAt (KE x v) (2 * Real.pi / hbar * BL (kgStress m φ g gi x) v) 0)
+    (hA : ∀ x v, BL (g x) v = 0 → HasDerivAt (A x v)
+        (- ∑ ν, W x v x ν * pd (fun y => expansion g gi (W x v) y) ν x) 0)
+    (hbound : ∀ x v, BL (g x) v = 0 → ∀ᶠ t in 𝓝 0, Sf x v t ≤ η * A x v t)
+    (hsat : ∀ x v, BL (g x) v = 0 → Sf x v 0 = η * A x v 0)
+    (hDnn : ∀ x v, BL (g x) v = 0 → ∀ t, 0 ≤ KE x v t - Sf x v t)
+    (hD0 : ∀ x v, BL (g x) v = 0 → KE x v 0 - Sf x v 0 = 0)
+    (mw : Point 4 → (Fin 4 → ℝ) → ℝ) (hmw : ∀ x v, 0 < mw x v)
+    (ff ff' : Point 4 → (Fin 4 → ℝ) → ℝ → ℂ)
+    (hf2 : ∀ x v, MemLp (ff x v) 2 (volume : Measure ℝ))
+    (hf_int : ∀ x v, Integrable (ff x v) (volume : Measure ℝ))
+    (hfd : ∀ x v θ, HasDerivAt (ff x v) (ff' x v θ) θ)
+    (hf'_meas : ∀ x v, AEStronglyMeasurable (ff' x v) (volume : Measure ℝ))
+    (Bd : Point 4 → (Fin 4 → ℝ) → ℝ) (hB : ∀ x v θ, ‖ff' x v θ‖ ≤ Bd x v)
+    (hTkk : ∀ x v, BL (g x) v = 0 →
+        (2 * Real.pi / hbar * (∑ b, v b * pd φ b x) ^ 2 : ℝ)
+          = (-(2 * Real.pi * ∫ θ, (starRingEnd ℂ) (ff x v θ) * ff' x v θ ∂(volume : Measure ℝ))).im)
+    : ∃ Λ : ℝ, ∀ x μ ν, a * kgStress m φ g gi x μ ν = einsteinTensor g gi μ ν x + Λ * g x μ ν := by
+  exact qiqt_gr_freefield_nullEnergy g gi hsymm hsymm_gi hinv hCg hCgi φ m η hbar a hbar0 heta ha hφ hKG
+    P Pinv hPP hPP' hcong Sf KE A sd
+    (fun x v => - ∑ ν, W x v x ν * pd (fun y => expansion g gi (W x v) y) ν x)  -- `ad` DEFINED
+    hS hK hA hbound hsat hDnn hD0 mw hmw ff ff' hf2 hf_int hfd hf'_meas Bd hB hTkk
+    W hWx hWC hWgeo hWequil (fun _ _ _ => rfl)  -- `hWarea` is now `rfl`
+
 end QIQTH.WedgeKMSToGR
