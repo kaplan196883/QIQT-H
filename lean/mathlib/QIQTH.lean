@@ -199,6 +199,9 @@ import QIQTH.QiqtGrCovCong
 -- BORN-A1: Actuality Projective Consistency — grounding the Born additivity bridge in selector
 -- no-signaling under outcome-refinement (Stage 1: honest coarse-graining selectors satisfy APC).
 import QIQTH.BornActualityConsistency
+-- BORN-C: μ-selection grounded in refinement equivariance (quantum equilibrium) — equivariance ⟹
+-- selector no-signaling ⟹ (via BORN-A1) Born; the canonical measure is equivariant.
+import QIQTH.BornMuSelection
 -- A1-ppwave: a non-flat (curved) witness for the Raychaudhuri congruence premises — the pp-wave
 -- metric whose null field ∂_v is covariantly constant (Stage 1: metric, inverse, symmetry).
 import QIQTH.PPWaveMetric

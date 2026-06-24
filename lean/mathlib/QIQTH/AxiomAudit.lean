@@ -2679,6 +2679,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BornActualityConsistency.marg_coarseGrain
 -- BORN-A1 Stage 2: APC ⟺ additivity (the honest §4 equivalence — Born's premise reframed as selector no-signaling):
 #print axioms QIQTH.BornActualityConsistency.apc_iff_positiveAdditive
+-- BORN-C Stage 1: μ-selection — equivariance (quantum equilibrium) ⟹ selector no-signaling:
+#print axioms QIQTH.BornMuSelection.equivariant_no_signaling
 -- A1-ppwave Stage 1: the pp-wave metric, its inverse, symmetry and g·gi=I:
 #print axioms QIQTH.Curvature.ppMetric_inv
 -- A1-ppwave Stage 2-3: Γ^μ_{ν1}≡0 ⟹ ∂_v covariantly constant ⟹ hWgeo/hWequil on a CURVED metric:
