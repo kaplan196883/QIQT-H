@@ -19,8 +19,21 @@ macro_rules
         | rfl
         | trivial
         | positivity
+        | norm_num
+        | omega
         | fun_prop
-        | (intros; first | rfl | assumption | positivity | fun_prop | trivial))
+        | measurability
+        | simp_all
+        | (intro_and_close)
+        | (constructor <;> intro_and_close))
+
+syntax "intro_and_close" : tactic
+macro_rules
+  | `(tactic| intro_and_close) =>
+    `(tactic| (intros
+               first
+                 | rfl | assumption | positivity | norm_num | omega
+                 | fun_prop | measurability | simp_all | trivial))
 
 /-- Try to close goal `g`; return true iff fully closed (no throw, no remaining goals). -/
 def tryClose (g : MVarId) : TermElabM Bool := do
