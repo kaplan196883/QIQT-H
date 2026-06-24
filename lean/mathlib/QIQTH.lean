@@ -176,6 +176,9 @@ import QIQTH.WedgeKMSToGR
 -- T3-1: the four Clausius/area-law premises (bound/saturation/positivity/tightness) are theorems of
 -- the finite QIQT entropy model + the holographic area-capacity identification, not assumptions.
 import QIQTH.ClausiusFiniteWitness
+-- GR scaffolding: the capstone HasDerivAt facts hS/hK derived from smoothness of the finite record law
+-- (Shannon/KL derivatives; KL flat at equilibrium ⟹ hK from hS) — pure analysis, not the physics floor.
+import QIQTH.EntropyDeriv
 -- T3-1 Stage 2: the thermodynamic free-field QIQT→GR capstone — entropy/heat built from a finite record
 -- law, hsat/hDnn/hD0 discharged via the witness; only the dynamical FQ capacity bound stays labelled.
 import QIQTH.QiqtGrThermo

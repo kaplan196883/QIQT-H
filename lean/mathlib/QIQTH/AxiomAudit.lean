@@ -4869,6 +4869,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_geom
 -- T3-1: the four Clausius/area-law premises are theorems of the finite QIQT entropy model + area-capacity id:
 #print axioms QIQTH.ClausiusFiniteWitness.clausius_package_from_finite_model
+-- GR scaffolding: capstone hS/hK HasDerivAt facts derived from smoothness (Shannon/KL deriv; KL flat at equil):
+#print axioms QIQTH.EntropyDeriv.shannon_hasDerivAt
+#print axioms QIQTH.EntropyDeriv.KL_hasDerivAt_self
+#print axioms QIQTH.EntropyDeriv.KE_hasDerivAt
 -- T3-1 Stage 2: thermo capstone — hsat/hDnn/hD0 discharged via the witness; only the dynamical bound labelled:
 #print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_thermo
 -- T3-3 continuum: per-generator hTkk from one universal mode calibration (ff = field-gradient · g₀):
