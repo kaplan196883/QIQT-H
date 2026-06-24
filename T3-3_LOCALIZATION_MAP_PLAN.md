@@ -167,10 +167,14 @@ localization map (deriving `ff` from `φ` by wedge smearing) is the cited contin
   generator from a SINGLE universal calibration `(−2π∫conj(g₀)·g₀').im = 2π/ℏ`. The amplitude-from-gradient law
   and the `(∂φ)²` scaling are now DERIVED, not assumed. Axiom-free, budget 0. **The per-generator localization
   frontier is reduced to one universal mode-calibration constant.**
-- **C2 (next)** — exhibit a concrete calibrated `g₀` (Gaussian wave packet `C·e^{-θ²/2}·e^{-iθ}` with
-  `C²=1/(ℏ√π)`): `Im(∫conj g₀ g₀') = −1/ℏ` via the Gaussian integral `∫e^{-θ²}=√π` + oddness of `∫θe^{-θ²}`.
-  Closes `hcal` ⟹ `hTkk` fully discharged for the canonical localization.
-- **C3 (next)** — thread `ff := D·g₀` through a capstone (build on `_thermo`) so `hTkk` is discharged there.
+- **C2 ✅** (`gaussMode_calibration`, `QIQTH/GaussianMode.lean`) — the concrete calibrated `g₀`: the Gaussian
+  wave packet `g₀(θ)=C·e^{−θ²/2}·e^{−iθ}` with `C=(ℏ√π)^{−1/2}` satisfies `(−2π∫conj g₀ g₀').im = 2π/ℏ`.
+  Proved via the `.im`-first trick (`Im(∫f)=∫Im f` discards the real total-derivative part, so only the Gaussian
+  normalization `∫e^{−θ²}=√π` is needed — no odd moment), plus `Complex.mul_conj`/`norm_exp` for the pointwise
+  boost-charge density. **`hcal` is closed** — the localization map's last analytic input is discharged. Axiom-free,
+  budget 0.
+- **C3 (next)** — thread `ff := D·g₀` (= `gaussMode`) through a capstone (build on `_thermo`) so `hTkk` is
+  discharged in the GR theorem itself, using `localized_mode_hTkk` + `gaussMode_calibration`.
 
 ## 4. Deliverable
 

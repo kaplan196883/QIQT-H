@@ -4851,6 +4851,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_thermo
 -- T3-3 continuum: per-generator hTkk from one universal mode calibration (ff = field-gradient · g₀):
 #print axioms QIQTH.WedgeKMSToGR.localized_mode_hTkk
+-- T3-3-C2: a concrete Gaussian wave packet satisfies the calibration (Im ∫ conj g₀ g₀' = −1/ℏ):
+#print axioms QIQTH.WedgeKMSToGR.gaussMode_calibration
 
 -- Tier A1 of QIQT_GR_DISCHARGEABLE_PLAN: discharge hric_symm.
 #print axioms QIQTH.Curvature.ricci_symm

@@ -182,6 +182,9 @@ import QIQTH.QiqtGrThermo
 -- T3-3 continuum: the localization mode from the field (ff = (v^a ∂_a φ)·g₀); the per-generator hTkk
 -- reduces to ONE universal mode calibration (Im ∫ conj g₀ g₀' = −1/ℏ).
 import QIQTH.LocalizedMode
+-- T3-3-C2: the concrete calibrated profile — a Gaussian wave packet satisfies the mode calibration,
+-- closing the last analytic input (hcal) of the localization map.
+import QIQTH.GaussianMode
 -- Born FROM PROJECTORS: the operator bridge grounding the record/area contract. For a
 -- finite orthogonal PVM {P_r} and a normalized Φ, μ(r)=‖P_r Φ‖²=⟨Φ,P_rΦ⟩ is a genuine
 -- RecordContract.RecordLaw — so the contract rests on Born-from-Φ, not a toy distribution.
