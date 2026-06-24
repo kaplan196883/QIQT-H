@@ -10,7 +10,7 @@ Machine-Checks a Conditional Derivation of the Einstein Field Equations from a F
 **ACM/MSC (optional).** I.2.3 (Deduction and Theorem Proving); 68V15 (Theorem proving);
 03B35 (Mechanization of proofs).
 
-**Comments field (suggested).** "22 pages, 1 figure, 3 tables. Reproducible artifact:
+**Comments field (suggested).** "24 pages, 1 figure, 5 tables. Reproducible artifact:
 Lean 4 / Mathlib development, axiom audit, track-state tool, and link-checked blueprint at https://github.com/kaplan196883/QIQT-H, commit 83dc08e (toolchain leanprover/lean4:v4.30.0).
 AI assistance (the subject of the paper) disclosed in §3."
 

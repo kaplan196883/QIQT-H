@@ -201,7 +201,8 @@ axiom budget that reached zero for the deductive core.
 
 Section 2 situates the work against autoformalization and agentic proving, AI-for-science,
 LLM-as-judge, and physics-in-Lean. Section 3 specifies the loop, the audit, the blueprint bridge,
-and the reproducibility protocol. Section 4 reports the case study with metrics, the discharge
+the reproducibility protocol, and process metrics with a controlled instrument ablation. Section 4
+reports the case study with metrics, the discharge
 trajectory, and the two reviewer-caught episodes. Section 5 discusses what generalizes, the failure
 modes, and the threats to validity. Section 6 concludes.
 
@@ -547,6 +548,79 @@ afterthought. We are explicit, by contrast, about what is \emph{not} reproducibl
 reviewer are proprietary models, and we do not claim a replayable transcript of the loop — the
 checkable object is the audited final artifact, not the agent trajectory (§5.3).
 
+\subsection{Process metrics and an instrument ablation}
+
+A methodology paper should say what running the loop cost and whether its parts pull their weight. We
+report both, and are candid about what we did and did not measure. Two honesty boundaries up front:
+the formalizer's individual calls were not logged, so commit counts are a \emph{lower-bound proxy} for
+iterations, not a true call count; and the figures below are a single-team, single-toolchain case
+study, regenerated from git by \texttt{scripts/process\_metrics.sh}.
+
+\begin{table}[ht]
+\centering
+\caption{Process metrics (regenerated from git at the pinned commit).}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.60\linewidth}Y@{}}
+\toprule
+\textbf{Quantity} & \textbf{Value} \\
+\midrule
+Active span & \textasciitilde{}30 days (2026-05-25 → 2026-06-24) \\
+Commits (total / touching \texttt{lean/}) & 1,455 / 1,016 \\
+Commits referencing the reviewer (GPT-5.5) & 61 \\
+Commits referencing an axiom or its discharge & 231 \\
+Project-axiom trajectory & 57 → 40 → 37 → 35 → 33 → 32 → 31 → 29 → 21 → 17 → 8 → 7 → 6 → 0 (13 events) \\
+Adversarial-review rounds (this paper) & 3 (reject → borderline → accept) \\
+Reviewer saves, kernel-checked & 2 (a false axiom; an inconsistent one) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The trajectory is the load-bearing process metric: a continuously audited, CI-enforced descent to
+zero project axioms, non-monotone because several passes \emph{introduced} a named interface axiom to make
+a new conditional result explicit before discharging it — the budget rising is the audit working, not
+failing.
+
+Whether the loop's \emph{components} earn their place is the harder question, and the honest answer needs
+a comparison, not a narrative. We ran a small \textbf{instrument ablation}: a controlled set of seven Lean
+declarations — five seeded faults spanning the failure taxonomy (a false-but-well-typed axiom; an
+inconsistent \texttt{True}-antecedent axiom; a circular/over-strong hypothesis; a vacuous \texttt{:= True}
+predicate; a \texttt{sorry}) and two sound controls (a clearly-labelled interface axiom; an ordinary proved
+lemma) — run past each instrument. The deterministic instruments are scored against their exact
+specification (verified by running each script's logic); the reviewer is a single \emph{blind}
+GPT-5.5-Pro pass that was not told which items are faults.
+
+\begin{table}[ht]
+\centering
+\caption{Instrument ablation: faults detected (of 5 seeded), by loop configuration.}
+\begin{tabularx}{\linewidth}{@{}YYYYY@{}}
+\toprule
+\textbf{Configuration} & \textbf{Faults detected} & \textbf{False axiom} & \textbf{Circular/over-strong} & \textbf{Sound controls misflagged} \\
+\midrule
+Compiler (green build) & 0/5 (all build; \texttt{sorry} only warns) & no & no & 0/2 \\
++ axiom budget & 1 outright (\texttt{sorry}); 3 more flagged as \emph{added axioms} (disclosure, not falsity); misses the over-strong one & flagged as "an axiom", not as false & \textbf{no} & 0/2 \\
++ vacuity lint & 1/5 (the \texttt{:= True} predicate; the \texttt{True}-\emph{binder} form is not matched) & no & no & 0/2 \\
++ independent reviewer (blind) & \textbf{5/5} & \textbf{yes} & \textbf{yes} & \textbf{0/2} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The point is not the headline 5/5 but the \emph{profile}. The structural instruments catch structural
+faults — \texttt{sorry} and added axioms (budget), \texttt{:= True} bodies (lint) — but they cannot judge semantic
+soundness: a false-but-well-typed axiom is flagged by the budget only as "an axiom" (the same signal a
+\emph{legitimate} labelled assumption emits), and a circular/over-strong hypothesis adds no axiom and no
+\texttt{sorry}, so it is invisible to all three. Those two faults — exactly the kinds the two historical
+reviewer saves (§4.5) belong to — were caught only by the independent reviewer, which also did not
+misflag either sound control. This is direct evidence for the division of labour the paper argues:
+the compiler owns mechanical correctness, the budget and lint own a \emph{structural} slice of soundness,
+and the reviewer covers the \emph{semantic} residue they cannot see.
+
+We hold this evidence to its size. It is one blind pass of one model version over seven hand-designed,
+relatively legible faults; it is an indicative profile, not a catch rate, and there is selection bias
+toward clear faults — the historical Case 1 (§4.5) took the reviewer \emph{three} passes, so the perfect
+single-pass score here should not be read as reliability on subtle faults. A larger pre-registered,
+multi-model study is future work (§5.3). The deterministic cells are determinate and reproducible; the
+reviewer cell is stochastic and version-specific. The fault set and verdicts are archived with the
+artifact.
+
 \section{Case Study: From a Finite-Information Bound to the Einstein Field Equations}
 
 The target framework, QIQT-H, is a foundations-of-physics proposal that we treat strictly as a
@@ -605,7 +679,7 @@ plus the contracted Bianchi identity fix the integration constant as a genuine c
 All of the differential geometry is machine-checked and project-axiom-free: the second Bianchi
 identity, the contracted-Bianchi conservation law $\nabla^\mu G_{\mu\nu}=0$ (divergence-freeness of the Einstein
 tensor), metric compatibility, the trace identities, the null-cone-to-tensor step for a general
-Lorentzian metric, and the constancy of $\Lambda$. Table 1 sorts the chain into what
+Lorentzian metric, and the constancy of $\Lambda$. Table 3 sorts the chain into what
 QIQT-H derives, what is cited, and what is machine-checked geometry.
 
 \begin{table}[ht]
@@ -711,7 +785,7 @@ The artifact is quantified rather than asserted. As of 2026-06-21 the developmen
 modules and approximately 2,010 theorems and lemmas}, with \textbf{830 \texttt{\#print axioms} directives} in a
 dedicated audit module. It builds green, contains \textbf{no \texttt{sorry}}, and depends on \textbf{zero
 project-specific axioms}, so every audited theorem rests only on the three standard Lean axioms. A
-vacuity scan (§4.5) reports a single benign site. Table 2 summarizes.
+vacuity scan (§4.5) reports a single benign site. Table 4 summarizes.
 
 \begin{table}[ht]
 \centering
@@ -759,7 +833,7 @@ false axiom of §4.5. The endpoint is that the deductive core depends on no proj
 at all: every one of the former interface assumptions is now either a theorem in a concrete
 realization or an explicit hypothesis on the theorems that use it.
 
-Three layers must be held apart, and the audit holds them apart (Table 3). The deductive core is
+Three layers must be held apart, and the audit holds them apart (Table 5). The deductive core is
 project-axiom-free. The framework's physical postulates, namely the holographic instantiation bound,
 the macroscopic-definiteness conjecture, the canonical typicality (Born) principle, and the Lorentz
 covariance of the selector, are open, and a project-axiom-free Lean development bears on none of them.
@@ -816,14 +890,16 @@ soundness requires auditing for vacuity and inconsistency as well.
 
 We are deliberately modest about what these two episodes prove. They are illustrative, kernel-checked
 \emph{existence} cases — concrete demonstrations that an independent reviewer, so positioned, can catch a
-false axiom and a vacuous one that a green build and a zero \texttt{sorry} count do not — not a measured
-catch rate. We did not log every reviewer critique over the project, so we report no denominator: no
-true-positive/false-positive rate, no count of faults the reviewer missed, and no controlled
-comparison against an expert human reviewer or a richer static check (all of which we flag as future
-work in §5.3). What the two cases do establish is that the failure mode is real and that the
-instrument can catch it; quantifying how often it does is a separate empirical question this single
-case study does not answer. With that caveat, the loop did not merely yield a green build; it yielded
-an audited, shrinking-to-zero conditional base with concrete, checkable saves.
+false axiom and a vacuous one that a green build and a zero \texttt{sorry} count do not. They are not, by
+themselves, a measured catch rate: we did not log every reviewer critique over the project's life,
+so we have no project-wide true-positive/false-positive denominator. To put the comparison on a
+controlled footing we instead ran the small instrument ablation of §3.8, in which the reviewer caught
+both fault families these two saves exemplify — the false-but-well-typed axiom and the
+circular/over-strong hypothesis that the structural instruments cannot see — with no false positives
+on the sound controls. That ablation is small and indicative rather than definitive (§3.8, §5.3), but
+it moves the claim from "the failure mode is real and the instrument can catch it" toward a
+reproducible, if modest, detection profile. With that caveat, the loop did not merely yield a green
+build; it yielded an audited, shrinking-to-zero conditional base with concrete, checkable saves.
 
 \section{Discussion, Limitations, and Threats to Validity}
 
@@ -895,12 +971,15 @@ assumptions, which the formalization records as hypotheses but does not establis
 as a closing caveat but as a structural feature of what machine verification can and cannot do for
 foundational science.
 
-The fifth limit is evidential: we report no controlled comparison. We do not show that the two-model
-loop outperforms a single agent, a human-only review, or ordinary CI plus \texttt{\#print axioms}, and we
-report no quantitative process metrics — LLM-call counts, human hours, reviewer true- and
-false-positive rates, or time relative to manual formalization. The claim is therefore an audited
-existence result and a methodology, not a measured improvement over a baseline; designing that
-comparison is future work. The sixth concerns premise-set consistency: as discussed in §4.2,
+The fifth limit is evidential, and it is now partial rather than total. We report process metrics and
+a small controlled instrument ablation (§3.8), which does show that the structural instruments
+(compiler, axiom budget, vacuity lint) miss the semantic faults the independent reviewer catches. But
+that ablation is small (seven items, one blind pass, one model version), and we still do not report
+full quantitative process metrics — true LLM-call counts (commit counts are only a lower-bound proxy),
+human hours, project-wide reviewer true-/false-positive rates, or time relative to manual
+formalization — nor a large pre-registered multi-model study. The claim is therefore an audited
+existence result, a methodology, and an \emph{indicative} ablation, not yet a statistically validated
+improvement over a baseline; the larger study is future work. The sixth concerns premise-set consistency: as discussed in §4.2,
 project-axiom-freedom certifies the absence of project axioms, not the joint satisfiability of a
 theorem's hypotheses. For the headline result we close this with a machine-checked
 model witness (the Minkowski/vacuum instantiation of Appendix A), so its premise set is provably

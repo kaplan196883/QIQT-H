@@ -1,6 +1,6 @@
 # arXiv submission package
 
-Self-contained LaTeX source for the methodology paper. Compiles to a 22-page PDF with no
+Self-contained LaTeX source for the methodology paper. Compiles to a 24-page PDF with no
 external dependencies beyond a standard TeXLive (the same one arXiv runs).
 
 ## Source of truth and pipeline
@@ -18,12 +18,12 @@ in parallel).
 
 ## Files
 - `main.tex` — the complete generated paper (article class; inline `thebibliography`; TikZ figure;
-  three `booktabs` tables). This is the only file you upload.
+  five `booktabs` tables). This is the only file you upload.
 - `arxiv-submission.tar.gz` — `main.tex` packaged for upload.
 - `main.pdf` — local compile result (do **not** upload the PDF; arXiv compiles from source).
 
 ## Verified
-Result: exit 0, 22 pages, 0 LaTeX warnings, 0 undefined citations/references, 0 bad overfull
+Result: exit 0, 24 pages, 0 LaTeX warnings, 0 undefined citations/references, 0 bad overfull
 boxes. Packages used (all standard on arXiv): inputenc, fontenc, lmodern, geometry, microtype,
 amsmath, amssymb, booktabs, array, tabularx, tikz (+arrows.meta, positioning), newunicodechar,
 hyperref.
@@ -39,7 +39,7 @@ hyperref.
    chars (no LaTeX limit); the arXiv web-form metadata abstract is capped at 1920, so paste the
    **condensed** metadata abstract from `../paper_cs_ai/SUBMISSION_METADATA.md` (1,724 chars) into
    that field rather than the full PDF abstract.
-4. **Comments field.** Suggested: `22 pages, 1 figure, 3 tables. Reproducible artifact (Lean 4 /
+4. **Comments field.** Suggested: `24 pages, 1 figure, 5 tables. Reproducible artifact (Lean 4 /
    Mathlib development, axiom audit, verified blueprint) at https://github.com/kaplan196883/QIQT-H.`
 5. **License.** Choose one (arXiv's default non-exclusive licence, or CC BY 4.0).
 6. **AI-assistance disclosure.** Already in the Acknowledgements and Section 3 (Claude Code as

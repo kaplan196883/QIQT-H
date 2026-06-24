@@ -456,9 +456,11 @@ def _build_body(md: str) -> str:
                 lambda m: r"\cite{" + ",".join("r" + x.strip()
                           for x in m.group(1).split(",")) + "}", md)
 
-    md = _convert_tables(md)
+    # Lists BEFORE tables: while pipe-table rows still begin with "|", list
+    # detection won't mis-read a cell that starts with "+ "/"- " as a bullet.
     md = _convert_blockquotes(md)
     md = _convert_lists(md)
+    md = _convert_tables(md)
     md = _drop_hr(md)
     md = _convert_links(md)
     md = _convert_emphasis(md)
