@@ -478,8 +478,8 @@ A round of the loop runs as follows. First, the human fixes a target result and 
 that may be assumed for it. Second, the formalizer produces a compiling, `sorry`-free increment,
 iterating against the compiler as in §3.2. Third, the axiom auditor records the increment's axiom
 dependencies via `#print axioms` and updates the budget, and a vacuity lint scans the new code for
-trivially-true hypotheses and vacuous propositional bodies, complementing the count with a check on
-axiom content. Fourth, the adversarial reviewer critiques the design along the four axes of §3.3.
+syntactically vacuous propositional bodies — definitions or conclusions that are literally `True`
+(`:= True`, `→ True`, `∀…, True`) — complementing the count with a check on axiom content. Fourth, the adversarial reviewer critiques the design along the four axes of §3.3.
 Fifth, the human adjudicates, either accepting the increment, ordering a redesign, or converting an
 axiom into an explicit hypothesis on the consuming theorems. Role boundaries are fixed and do not
 blur: the compiler is the sole authority on proof validity; the reviewer never edits proofs and
@@ -538,23 +538,30 @@ inconsistent `True`-antecedent axiom; a circular/over-strong hypothesis; a vacuo
 predicate; a `sorry`) and two sound controls (a clearly-labelled interface axiom; an ordinary proved
 lemma) — run past each instrument. The deterministic instruments are scored against their exact
 specification (verified by running each script's logic); the reviewer is a single *blind*
-GPT-5.5-Pro pass that was not told which items are faults.
+GPT-5.5-Pro pass — the seven declarations carry neutral names (e.g. `gleason_naive`,
+`locality_from_dilation`), are presented in fixed order, and the reviewer is asked only to classify
+each as sound or unsound, *not* told how many faults the set contains. The fault set, the exact
+prompt, and the verbatim verdicts are archived with the artifact. We distinguish *surfacing* — an
+instrument flagging that something needs human attention, e.g. the budget disclosing that an axiom
+was added — from *diagnosis* — identifying the fault as unsound; the structural instruments only
+surface, whereas the reviewer diagnoses.
 
-**Table 2. Instrument ablation: faults detected (of 5 seeded), by loop configuration.**
+**Table 2. Instrument ablation: which of 5 seeded faults each configuration surfaces vs. diagnoses (with false positives on 2 sound controls).**
 
-| Configuration | Faults detected | False axiom | Circular/over-strong | Sound controls misflagged |
+| Configuration | Faults flagged (of 5) | False axiom diagnosed | Over-strong hyp. diagnosed | Sound controls misflagged |
 |---|---|---|---|---|
 | Compiler (green build) | 0/5 (all build; `sorry` only warns) | no | no | 0/2 |
-| + axiom budget | 1 outright (`sorry`); 3 more flagged as *added axioms* (disclosure, not falsity); misses the over-strong one | flagged as "an axiom", not as false | **no** | 0/2 |
-| + vacuity lint | 1/5 (the `:= True` predicate; the `True`-*binder* form is not matched) | no | no | 0/2 |
-| + independent reviewer (blind) | **5/5** | **yes** | **yes** | **0/2** |
+| + axiom budget | 4/5 *surfaced* — `sorry` + the 3 fault-axioms disclosed as *added axioms* (not judged false); misses the over-strong hypothesis (it adds no axiom) | no (surfaced, not diagnosed) | no | 0/2 |
+| + vacuity lint | 1/5 (the `:= True` predicate; a `(h : True)` binder is not matched) | no | no | 0/2 |
+| + independent reviewer (blind) | 5/5 *diagnosed* | **yes** | **yes** | **0/2** |
 
-The point is not the headline 5/5 but the *profile*. The structural instruments catch structural
-faults — `sorry` and added axioms (budget), `:= True` bodies (lint) — but they cannot judge semantic
-soundness: a false-but-well-typed axiom is flagged by the budget only as "an axiom" (the same signal a
-*legitimate* labelled assumption emits), and a circular/over-strong hypothesis adds no axiom and no
+The point is not the headline 5/5 but the *profile*, and the surfaced/diagnosed split is the whole
+story. The structural instruments surface structural faults — `sorry` and added axioms (budget),
+`:= True` bodies (lint) — but cannot *diagnose* semantic soundness: a false-but-well-typed axiom is
+disclosed by the budget only as "an axiom" (the same signal a *legitimate* labelled assumption
+emits, so disclosure is not diagnosis), and a circular/over-strong hypothesis adds no axiom and no
 `sorry`, so it is invisible to all three. Those two faults — exactly the kinds the two historical
-reviewer saves (§4.5) belong to — were caught only by the independent reviewer, which also did not
+reviewer saves (§4.5) belong to — were diagnosed only by the independent reviewer, which also did not
 misflag either sound control. This is direct evidence for the division of labour the paper argues:
 the compiler owns mechanical correctness, the budget and lint own a *structural* slice of soundness,
 and the reviewer covers the *semantic* residue they cannot see.
@@ -810,9 +817,13 @@ consuming it inherited an inconsistency. Neither of the habitual checks detects 
 development builds, and it contains no `sorry`, yet it rested on a contradiction. The axiom was
 removed, and the affected theorem now takes locality as an explicit hypothesis, relocating the
 assumption into the open. In response, the project added a third soundness instrument, a vacuity
-lint that scans for vacuous propositional bodies and trivially-true antecedents, to complement the
-axiom counter. It currently reports a single site, which inspection confirms is a legitimate
-indiscrete-preorder definition rather than a hidden assumption. This episode captures the paper's
+lint that scans for *syntactically* vacuous propositional bodies — definitions or conclusions that
+are literally `True` (`:= True`, `→ True`, `∀…, True`). It is a syntactic complement, not a
+replacement for the reviewer: a vacuity hidden in a `(h : True)` binder, as in this very case, is
+*not* matched by the lint — it is surfaced by the budget (as an added axiom) and diagnosed by the
+reviewer, the division of labour the ablation of §3.8 quantifies. The lint currently reports a
+single site, which inspection confirms is a legitimate indiscrete-preorder definition rather than a
+hidden assumption. This episode captures the paper's
 central point: "compiles, no `sorry`, axiom count zero" is necessary but not sufficient, and
 soundness requires auditing for vacuity and inconsistency as well.
 
