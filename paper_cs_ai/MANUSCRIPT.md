@@ -1106,7 +1106,7 @@ and the conclusion to $G_{\mu\nu}=0$), so it certifies consistency, not a physic
 
 [13] *LeanMarathon: Toward Reliable AI Co-Mathematicians through Long-Horizon Lean Autoformalization* (2026). arXiv:2606.05400.
 
-[14] *MA-LoT: Multi-Agent Lean-based Long Chain-of-Thought Reasoning enhances Formal Theorem Proving* (2025). arXiv:2503.03205.
+[14] *MA-LoT: Model-Collaboration Lean-based Long Chain-of-Thought Reasoning enhances Formal Theorem Proving* (2025). arXiv:2503.03205.
 
 [15] *MPS-Prover: Advancing Stepwise Theorem Proving by Multi-Perspective Search* (2025). arXiv:2505.10962.
 
