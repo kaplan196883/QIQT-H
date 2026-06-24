@@ -398,30 +398,6 @@
       {
         "info": "explicit",
         "kind": "prop",
-        "name": "hP_herm",
-        "packedProps": [],
-        "type": "(Matrix.vecMulVec ψ (star ψ)).conjTranspose = Matrix.vecMulVec ψ (star ψ)",
-        "typeHead": "Eq",
-        "dischargeable": false,
-        "shared": false,
-        "status": "surface",
-        "curation": null
-      },
-      {
-        "info": "explicit",
-        "kind": "prop",
-        "name": "hP_idem",
-        "packedProps": [],
-        "type": "Matrix.vecMulVec ψ (star ψ) * Matrix.vecMulVec ψ (star ψ) = Matrix.vecMulVec ψ (star ψ)",
-        "typeHead": "Eq",
-        "dischargeable": false,
-        "shared": false,
-        "status": "surface",
-        "curation": null
-      },
-      {
-        "info": "explicit",
-        "kind": "prop",
         "name": "hray",
         "packedProps": [],
         "type": "w (Matrix.vecMulVec ψ (star ψ)) = 1",
@@ -1309,22 +1285,6 @@
         "packedProps": [],
         "type": "Outcome → ℝ",
         "typeHead": "<other>"
-      },
-      {
-        "info": "explicit",
-        "kind": "prop",
-        "name": "hc_nn_sq",
-        "packedProps": [],
-        "type": "∀ (k : Outcome), 0 ≤ c k ^ 2",
-        "typeHead": "<other>",
-        "dischargeable": true,
-        "shared": false,
-        "status": "auto_dischargeable",
-        "curation": {
-          "category": "bridge",
-          "label": "BRIDGE — positivity / normalization / ray-certainty",
-          "rule": "bridge-positivity-type"
-        }
       },
       {
         "info": "explicit",

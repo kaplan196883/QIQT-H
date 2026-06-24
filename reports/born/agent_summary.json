@@ -1,8 +1,8 @@
 {
   "track": "born",
   "title": "Born rule",
-  "generated": "2026-06-24T00:59:31.385764+00:00",
-  "git": "e01ccb2",
+  "generated": "2026-06-24T02:21:24.092011+00:00",
+  "git": "127881e",
   "totals": {
     "theorems": 13,
     "present": 13,
@@ -129,7 +129,7 @@
       "policy_clean": true,
       "isFalse": false,
       "falseProvable": false,
-      "n_prop": 8,
+      "n_prop": 6,
       "n_packed": 0,
       "uses_spine": [],
       "surface": [
@@ -152,16 +152,6 @@
           "name": "hpsd",
           "type": "∀ (A : Matrix n n ℂ), QIQTH.GleasonSelector.NonnegC (w (A.conjTranspose * A))",
           "curation": "BRIDGE — positivity / normalization / ray-certainty"
-        },
-        {
-          "name": "hP_herm",
-          "type": "(Matrix.vecMulVec ψ (star ψ)).conjTranspose = Matrix.vecMulVec ψ (star ψ)",
-          "curation": null
-        },
-        {
-          "name": "hP_idem",
-          "type": "Matrix.vecMulVec ψ (star ψ) * Matrix.vecMulVec ψ (star ψ) = Matrix.vecMulVec ψ (star ψ)",
-          "curation": null
         },
         {
           "name": "hray",
@@ -421,7 +411,7 @@
       "policy_clean": true,
       "isFalse": false,
       "falseProvable": false,
-      "n_prop": 3,
+      "n_prop": 2,
       "n_packed": 0,
       "uses_spine": [],
       "surface": [
@@ -436,9 +426,7 @@
           "curation": "SETUP — independence / completeness / probability vector"
         }
       ],
-      "dischargeable": [
-        "hc_nn_sq"
-      ]
+      "dischargeable": []
     },
     {
       "name": "QIQTH.NoConcentration.decoherence_does_not_concentrate",

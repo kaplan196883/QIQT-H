@@ -1,7 +1,7 @@
 # Track state — Born rule
 *Target 1 — QIQT-H compatible with Born (spine + no-go audits)*
 
-_Generated 2026-06-24 00:59 UTC · git `e01ccb2` · 13 theorems · tool lean_track_ · provenance: [L]=Lean fact [P]=Lean-checked prober [D]=derived [C]=curation_
+_Generated 2026-06-24 02:21 UTC · git `127881e` · 13 theorems · tool lean_track_ · provenance: [L]=Lean fact [P]=Lean-checked prober [D]=derived [C]=curation_
 
 ## Axiom status  [L]
 - Project-specific (non-standard) axioms: **0**
@@ -43,7 +43,7 @@ _Generated 2026-06-24 00:59 UTC · git `e01ccb2` · 13 theorems · tool lean_tra
   - `∀ (t : Fin n) (a : Fin m), P.massSet {ω | (V ω t).actualValue = a} = p a`
   - `∀ (x y : M), toZeroHom.toFun (x + y) = toZeroHom.toFun x + toZeroHom.toFun y`
 
-**BRIDGE — positivity / normalization / ray-certainty** (12 distinct)
+**BRIDGE — positivity / normalization / ray-certainty** (11 distinct)
   - `star ψ ⬝ᵥ ψ = 1`
   - `w (Matrix.vecMulVec ψ (star ψ)) = 1`
   - `w 1 = 1`
@@ -54,7 +54,6 @@ _Generated 2026-06-24 00:59 UTC · git `e01ccb2` · 13 theorems · tool lean_tra
   - `∀ (i : Fin m), 0 ≤ p i`
   - `∀ (k : Fin m), (E k).PosSemidef`
   - `∀ (k : Fin m), 0 ≤ p k`
-  - `∀ (k : Outcome), 0 ≤ c k ^ 2`
   - `∀ (γ : Γ), 0 ≤ μ γ`
 
 **SETUP — independence / completeness / probability vector** (7 distinct)
@@ -67,14 +66,12 @@ _Generated 2026-06-24 00:59 UTC · git `e01ccb2` · 13 theorems · tool lean_tra
   - `∑ k, p k = 1`
   - `∑ γ, μ γ = 1`
 
-**(uncategorised surface hypotheses — 13)** *(no rule matched)*
-  - `(Matrix.vecMulVec ψ (star ψ)).conjTranspose = Matrix.vecMulVec ψ (star ψ)`
+**(uncategorised surface hypotheses — 11)** *(no rule matched)*
   - `0 < N`
   - `0 < n`
   - `0 < ε`
   - `Continuous ⇑f`
   - `Function.Surjective outcome`
-  - `Matrix.vecMulVec ψ (star ψ) * Matrix.vecMulVec ψ (star ψ) = Matrix.vecMulVec ψ (star ψ)`
   - `QIQTH.RecordGleason.Decoherent ψ C`
   - `c 0 ≠ 0`
   - `c 1 ≠ 0`
@@ -146,16 +143,14 @@ m.additive : ∀ (E F : Matrix (Fin d) (Fin d) ℂ),
 ```
 w E = QIQTH.GleasonSelector.born ψ E
 ```
-- **hypotheses (8)** — name : status [P]/[D]:
+- **hypotheses (6)** — name : status [P]/[D]:
 ```
 1. hψ [surface] : star ψ ⬝ᵥ ψ = 1
 2. hadd [surface] : ∀ (A B : Matrix n n ℂ), w (A + B) = w A + w B
 3. hhom [surface] : ∀ (c : ℂ) (A : Matrix n n ℂ), w (c • A) = c * w A
 4. hpsd [surface] : ∀ (A : Matrix n n ℂ), QIQTH.GleasonSelector.NonnegC (w (A.conjTranspose * A))
-5. hP_herm [surface] : (Matrix.vecMulVec ψ (star ψ)).conjTranspose = Matrix.vecMulVec ψ (star ψ)
-6. hP_idem [surface] : Matrix.vecMulVec ψ (star ψ) * Matrix.vecMulVec ψ (star ψ) = Matrix.vecMulVec ψ (star ψ)
-7. hray [surface] : w (Matrix.vecMulVec ψ (star ψ)) = 1
-8. hone [surface] : w 1 = 1
+5. hray [surface] : w (Matrix.vecMulVec ψ (star ψ)) = 1
+6. hone [surface] : w 1 = 1
 ```
 - **data binders (4):** `n`, `ψ`, `w`, `E`
 
@@ -283,11 +278,10 @@ M.born_marginal : ∀ (k : Outcome), QIQTH.NoBornFromNothing.outcomeMarginal out
 ∃ μ,
   (∀ (γ : Γ), 0 ≤ μ γ) ∧ ∑ γ, μ γ = 1 ∧ ∀ (k : Outcome), QIQTH.NoBornFromNothing.outcomeMarginal outcome μ k = c k ^ 2
 ```
-- **hypotheses (3)** — name : status [P]/[D]:
+- **hypotheses (2)** — name : status [P]/[D]:
 ```
 1. h_surj [surface] : Function.Surjective outcome
-2. hc_nn_sq [auto_dischargeable] : ∀ (k : Outcome), 0 ≤ c k ^ 2
-3. hc_norm [surface] : ∑ k, c k ^ 2 = 1
+2. hc_norm [surface] : ∑ k, c k ^ 2 = 1
 ```
 - **data binders (4):** `Γ`, `Outcome`, `outcome`, `c`
 
