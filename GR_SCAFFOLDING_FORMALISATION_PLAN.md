@@ -78,10 +78,22 @@ pp-wave (`ppMetric_raychaudhuri_setup`). Discharges `hA` for the explicit models
 ## 3. Workstream C — a second explicit localization mode (broaden `hTkk`, TERTIARY)
 
 Currently `hTkk` (and the `hf2/hf_int/hfd/hf'_meas/hB` regularity block) is discharged only by `GaussianMode`.
-Add a second concrete mode — a normalized Hermite×Gaussian `gaussMode₁` (one node), or factor a
-`SchwartzMode` class — proving the regularity block + the calibration `(−2π∫conj·')·im = 2π/ℏ`, to show the
-localization discharge is not Gaussian-specific. **Risk: medium–high** (a second hard complex oscillatory
-integral; the Gaussian one was the session's hardest). Do ONLY after A+B land.
+Show the localization discharge is not specific to the single Gaussian.
+
+**Tractable route identified (recon done — reuses Mathlib `integral_gaussian a`):** a **width-parametrized
+Gaussian family** `gaussModeA hbar a θ = C(a)·exp(-a θ²/2 - i θ)` for `a > 0`, with
+`gaussCA hbar a = (√(hbar·√(π/a)))⁻¹` (so `C(a)²·√(π/a) = 1/hbar`).  The phase stays the unit `e^{-iθ}`, so
+the calibration still hits the **same** `2π/ℏ` for **every** width `a` — a genuine one-parameter family of
+localization modes, not just `a=1`.  The hard integrals are unchanged in *kind*: `∫exp(-aθ²) = √(π/a)`
+(`integral_gaussian a`) and `∫θ·exp(-aθ²) = 0`; only the width factor `√(π/a)` threads through.  The `a=1`
+specialization recovers the existing `gaussMode`/`gaussC`.  Deliverable: `GaussianModeFamily.lean` mirroring
+`GaussianMode.lean` with the `a` parameter — `gaussModeA_normSq`, `_conj_mul`, `_integrable`, `_calibration`
+(= `2π/ℏ` ∀ a), plus the regularity block.  **Risk: medium** (mechanical mirror with `√(π/a)`; the integral
+*content* is already in Mathlib — not a new hard integral).  ~120–150 lines.
+
+**Stages:** C1 = `gaussModeA`/`gaussCA` defs + `gaussCA_sq_mul_sqrt` (`C(a)²√(π/a)=1/ℏ`) + `_normSq`/`_conj_mul`;
+C2 = `_integrable` + `_calibration` (the `2π/ℏ`-∀-a result, via `integral_gaussian a`); C3 = regularity block
+(`_norm`/`_hasDerivAt`/`_memLp`/`_integrable_fn`/`_norm_le`) + AxiomAudit wiring.
 
 ## 4. Honest scope (stated up front)
 This formalises **scaffolding, not floor.** It does NOT touch P4 (`hcap`/`hbound`/`hsat` stay assumed —
@@ -128,5 +140,8 @@ prints CHANGES.
   congruence), discharging `hA` for the flat / pp-wave (∂_v) congruence — the same setting that reduces
   `hWgeo`/`hWequil` via `covCong`. Axiom-free (std 3); wired into AxiomAudit; budget 0. The expanding (θ≠0)
   curved case needs the geodesic-ODE / area-element machinery Mathlib lacks (cited frontier, file header).
-- **NEXT: Workstream C** — a second explicit localization mode beyond Gaussian (broaden `hTkk` + the
-  `hf2/hf_int/hfd/hf'_meas/hB` regularity block). Hardest; do last.
+- **Workstream C recon ✅** — read the full `GaussianMode.lean`; identified the tractable honest route: a
+  width-parametrized family `gaussModeA hbar a` (a>0) hitting the **same** `2π/ℏ` for every width, reusing
+  Mathlib `integral_gaussian a` (no new hard integral). Scoped into C1/C2/C3 in §3 above.
+- **NEXT: Workstream C, Stage C1** — `GaussianModeFamily.lean`: `gaussModeA`/`gaussCA` defs +
+  `gaussCA_sq_mul_sqrt` + `gaussModeA_normSq`/`gaussModeA_conj_mul`. Then C2 (calibration ∀ a), C3 (regularity).
