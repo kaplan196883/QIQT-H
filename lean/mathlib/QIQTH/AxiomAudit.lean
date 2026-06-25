@@ -5191,6 +5191,16 @@ namespace QIQTH.AxiomAudit
 -- ★ WILLIAMSON n=1 symplectic INVARIANCE: ν=√det(cov) is unchanged under symplectic congruence M↦SMSᵀ (det S=1,
 -- Sp(2,ℝ)=SL(2,ℝ)) — so ν is a basis-independent physical invariant (the defining feature of the Williamson
 -- spectrum; lets ν be read off any canonical frame). The N-mode normal-form reduction stays the labelled frontier.
+#print axioms QIQTH.Sakharov.sakharov_ratio
+#print axioms QIQTH.Sakharov.geometric_quarter
+#print axioms QIQTH.Sakharov.heatkernel_ratio_eq_geometric
+-- ★ SAKHAROV 1/4 RATIO (Lean mirror of scripts/sakharov_kg.py, Stages A+B) — the circularity-clean algebraic core:
+-- sakharov_ratio: S_ent=A·b/(48π·reg), 1/G_ind=b/(12π·reg) ⟹ S_ent/(A/G_ind)=1/4 with the matter coefficient b,
+-- regulator reg, area A, and π ALL cancelling (the 1/4 is the OUTPUT, never an input). geometric_quarter: 4π/16π=1/4
+-- (the conical-deficit/EH geometric origin). heatkernel_ratio_eq_geometric: (1/48π)/(1/12π)=4π/16π (both 1/4).
+-- HONEST SCOPE: formalizes the RATIO cancellation only; the heat-kernel coefficients 48π/12π are physics INPUTS
+-- (Seeley–DeWitt a₂, reproduces Susskind–Uglum/Solodukhin), and the area-law SCALING S∝A (Williamson, M3), the
+-- VALUE of G_ind/ℓ_P (species/UV datum), and cross-species universality remain the labelled frontiers/carried input.
 
 -- Tier A1 of QIQT_GR_DISCHARGEABLE_PLAN: discharge hric_symm.
 #print axioms QIQTH.Curvature.ricci_symm

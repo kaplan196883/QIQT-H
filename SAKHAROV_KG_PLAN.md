@@ -170,7 +170,20 @@ entanglement = `A/4G_ind`); Solodukhin, *Living Rev. Rel.* 14 (2011) 8 (review, 
   eigenvalue — basis-independence — making `ν` a genuine physical invariant (readable off any canonical frame),
   the property the whole Williamson-spectrum / area-law mode-count rests on. The `N`-mode normal form stays the
   labelled frontier. Axiom-free, budget 0, full build green.
-- **PLAN COMPLETE** (A+B+C+/++/+++/⁴/⁵; only the N-mode Williamson reduction is the labelled frontier). Net: the `1/4` is derived (geometric, non-circular — A+B); the Srednicki entropy formula
+- **Stage A-Lean ✅ (the `1/4` RATIO machine-checked — Lean mirror of `scripts/sakharov_kg.py`)** —
+  `QIQTH/SakharovRatio.lean` (axiom-free, standard 3, budget 0, wired into `QIQTH.lean` + `AxiomAudit.lean`,
+  full `QIQTH` build green, 8713 jobs). Formalizes the **circularity-clean algebraic core** the sympy script
+  checks: `sakharov_ratio` — with `S_ent = A·b/(48π·reg)` and `1/G_ind = b/(12π·reg)`, the ratio
+  `S_ent/(A/G_ind) = 1/4` with the **arbitrary** matter coefficient `b`, **arbitrary** regulator `reg`, area
+  `A`, and `π` ALL cancelling (the `1/4` is the *output*, never an input); `geometric_quarter` — `4π/16π = 1/4`
+  (the conical-deficit/EH geometric origin); `heatkernel_ratio_eq_geometric` — `(1/48π)/(1/12π) = 4π/16π` (both
+  `1/4`, the two presentations agree). **HONEST SCOPE (in the file's docstrings):** this machine-checks the
+  RATIO cancellation only; the heat-kernel coefficients `48π`/`12π` are physics INPUTS (Seeley–DeWitt `a₂`,
+  reproducing Susskind–Uglum/Solodukhin), and the area-law SCALING `S∝A` (Williamson / M3), the VALUE of
+  `G_ind`/`ℓ_P` (the species/UV datum), and cross-species universality remain the labelled frontiers / carried
+  input. So: the `1/4` *ratio* is now a Lean theorem (regulator- and matter-independent); the value of `G` stays
+  carried.
+- **PLAN COMPLETE** (A+B+C+/++/+++/⁴/⁵ + A-Lean; only the N-mode Williamson reduction is the labelled frontier). Net: the `1/4` is derived (geometric, non-circular — A+B) and now **machine-checked in Lean** (A-Lean); the Srednicki entropy formula
   `S = Σᵢ S(νᵢ)` and its physics (pure⇔0, monotone, nonneg, strictly positive when entangled) are
   machine-checked (C/C+), instantiated on the canonical entangled two-mode squeezed vacuum (C++), and reduced
   to a sum over the entangled modes only (C+++) — the area-law seed, frontier = "entangled modes ⟹ boundary".
