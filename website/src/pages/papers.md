@@ -18,7 +18,8 @@ the machine-checked covariant Born-*reduction* (to a single typicality premise, 
 submission to a peer-reviewed venue (quantum foundations; math-ph, gr-qc).
 
 **[Read the PDF](/QIQT_Foundations_Paper.pdf)**
-&nbsp;·&nbsp; Preprint, served directly from this site. A DOI will be posted here once available.
+&nbsp;·&nbsp; Preprint, served directly from this site.
+&nbsp;·&nbsp; DOI: [10.5281/zenodo.20837966](https://doi.org/10.5281/zenodo.20837966) (Zenodo).
 
 ## Methods paper — the way in
 
@@ -82,5 +83,6 @@ The machine-checked substrate lives in the project repository. Every theorem is 
 
 ## How to cite
 
-Cite as: P. Kapłański, *One Wave Function, One World*, preprint, 2026 (qiqt.org). A DOI will be added
-here once available.
+Cite as: P. Kapłański, *One Wave Function, One World: Finite-Information Regional Algebras and the
+Macroscopic World from Holographic Constraint*, Zenodo, 2026,
+[doi:10.5281/zenodo.20837966](https://doi.org/10.5281/zenodo.20837966).
