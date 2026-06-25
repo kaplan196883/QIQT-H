@@ -333,6 +333,9 @@ import QIQTH.ModularHamiltonian
 -- Type II crossed product Increment 1a-0: the modular automorphism σ_t(a)=Δ^{it}aΔ^{-it} as a one-parameter
 -- group of unital *-homomorphisms (the ℝ-action M ⋊_σ ℝ is built from) — toward an honest area operator.
 import QIQTH.CrossedProduct
+-- The Wall, Phase 1.1: measurability of the matter-rep fiber s ↦ σ_{-s}(a)(ξ s) on L²(ℝ;H) — toward π(a)
+-- as an operator on the crossed-product Hilbert space (operator-valued Lp multiplication).
+import QIQTH.CrossedProductRep
 -- MODULAR RELATIVE ENTROPY (Phase B, one-particle / standard-subspace continuum object): the
 -- Casini–Grillo–Pontello relative entropy of a coherent state vs vacuum, as the SCALAR spectral
 -- integral S(ξ)=−∫log((2−r)/r)dμ^R_ξ over the bounded RvD operator R=P+Q (no unbounded log Δ).

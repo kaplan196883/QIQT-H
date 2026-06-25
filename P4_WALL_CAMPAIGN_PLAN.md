@@ -135,4 +135,15 @@ specialization).
 ## Progress log
 - **Phase 0 (foundations) ✅** — modular flow, modular automorphism `σ_t` (Increment 1a-0), the JLMS modular-energy
   engine (Stages 1–2), spectral/`borelFC` machinery — all in place and axiom-free.
-- **NEXT: Phase 1.1** — the fiber map `ξ ↦ (s ↦ σ_{-s}(a)(ξ s))` `AEStronglyMeasurable` on `L²(ℝ;H)`.
+- **Phase 1.1 ✅** (`QIQTH/CrossedProductRep.lean`) — the matter-rep fiber `s ↦ σ_{-s}(a)(ξ s) = Δ^{-is} a Δ^{is}(ξ s)`
+  is `AEStronglyMeasurable` on `L²(ℝ;H)` (`aesm_matterFiber`), via `aesm_modUnitary_comp` (the modular flow along a
+  measurable time reparametrization preserves measurability) and the generic helper
+  `stronglyMeasurable_uncurry_clmFamily` (the uncurry of a strongly-continuous CLM family is strongly measurable —
+  stated for an opaque family so `modUnitary`'s `borelFC` is never unfolded). `H` separable (`SecondCountableTopology`),
+  the physical one-particle assumption. Axiom-free (std 3); wired into AxiomAudit; budget 0.
+  - *Overcoming the wall:* the earlier `whnf`/`isDefEq` blowup was **not** the uncurry lemma (which builds in
+    isolation) — it was a **divergent instance search from a missing `BorelSpace H`** (needed by the pushforward
+    `comp_aemeasurable`). Fix: (i) generic opaque-family helper (no `modUnitary` unfolding), (ii) `[BorelSpace H]`
+    present, (iii) `maxHeartbeats 1000000`. The operator-valued `Lp`-measurability route is therefore tractable.
+- **NEXT: Phase 1.2** — the `Lp` bound `‖σ_{-s}(a)(ξ s)‖ ≤ ‖a‖·‖ξ s‖` ⟹ `MemLp` ⟹ `π(a) : L²(ℝ;H) →L[ℂ] L²(ℝ;H)`
+  with `‖π(a)‖ ≤ ‖a‖`.
