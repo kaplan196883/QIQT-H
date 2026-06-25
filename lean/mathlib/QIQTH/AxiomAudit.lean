@@ -1204,6 +1204,8 @@ namespace QIQTH.AxiomAudit
 -- (the concrete Cauchy bound for boundedFC(fₙ)x).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_diff_sq_le
 -- the Cauchy integrand bound (fₘ−fₙ)² ≤ 2(f−fₘ)²+2(f−fₙ)² — truncation L²-convergence controls the diff-norm.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_integral_sub_sq_tendsto
+-- Bochner form ∫|f−fₙ|²dμ_x → 0 (from the lintegral version via ∫g=(∫⁻ofReal g).toReal + toReal continuity).
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

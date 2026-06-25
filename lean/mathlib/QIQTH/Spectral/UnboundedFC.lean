@@ -327,4 +327,23 @@ theorem fcTrunc_lintegral_sub_sq_tendsto {f : Ω → ℝ} (hf : Measurable f) {x
     (fun ω => ENNReal.ofReal ((f ω) ^ 2)) hmeas hbound hfin hlim
   simpa using this
 
+/-- **The Bochner form** of the truncation `L²`-convergence: `∫ |f − fₙ|² dμ_x → 0` (real integral).
+    From the `lintegral` version (`fcTrunc_lintegral_sub_sq_tendsto`) via `∫ g = (∫⁻ ofReal g).toReal`
+    (nonnegative integrand) + continuity of `ENNReal.toReal` at `0`. -/
+theorem fcTrunc_integral_sub_sq_tendsto {f : Ω → ℝ} (hf : Measurable f) {x : H}
+    (hx : x ∈ P.fcDomain f) :
+    Filter.Tendsto (fun n => ∫ ω, (f ω - fcTrunc f n ω) ^ 2 ∂(P.scalarMeasure x))
+      Filter.atTop (nhds 0) := by
+  have heq : ∀ n, ∫ ω, (f ω - fcTrunc f n ω) ^ 2 ∂(P.scalarMeasure x)
+      = (∫⁻ ω, ENNReal.ofReal ((f ω - fcTrunc f n ω) ^ 2) ∂(P.scalarMeasure x)).toReal := fun n =>
+    MeasureTheory.integral_eq_lintegral_of_nonneg_ae (Filter.Eventually.of_forall (fun ω => sq_nonneg _))
+      ((hf.sub (fcTrunc_measurable hf n)).pow_const 2).aestronglyMeasurable
+  have htoReal : Filter.Tendsto
+      (fun n => (∫⁻ ω, ENNReal.ofReal ((f ω - fcTrunc f n ω) ^ 2) ∂(P.scalarMeasure x)).toReal)
+      Filter.atTop (nhds (0 : ℝ≥0∞).toReal) :=
+    (ENNReal.continuousAt_toReal ENNReal.zero_ne_top).tendsto.comp
+      (P.fcTrunc_lintegral_sub_sq_tendsto hf hx)
+  simp only [ENNReal.toReal_zero] at htoReal
+  exact htoReal.congr (fun n => (heq n).symm)
+
 end QIQTH.Spectral.ProjectionValuedMeasure
