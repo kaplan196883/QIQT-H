@@ -122,9 +122,13 @@ item.** Never claim the `1/4`.
   bound + `A_k→0` + `lt_of_pow_lt_pow_left₀`). **So the strong limit exists (H complete).** **★ THE OPERATOR ✅**
   (`fcOp hf x := limUnder (boundedFC(fₙ)x)`; `fcSeq_tendsto_fcOp`: `boundedFC(fₙ)x → fcOp x` on the domain via
   `CauchySeq.tendsto_limUnder`; `fcOp_add` + `fcOp_smul`: additive + ℂ-homogeneous — **a linear operator
-  `∫ f dE` on `D(∫f dE)`**). NEXT: **symmetry/self-adjointness** (`⟨fcOp x, y⟩ = ⟨x, fcOp y⟩` on the domain, from
-  the limit of the self-adjoint `boundedFC(fₙ)` via `inner` continuity); then **M2** (`K = ∫ log(r/(2−r)) dE_R`
-  + `Δ^{it}=e^{−itK}` → JLMS Stage 1).
+  `∫ f dE` on `D(∫f dE)`**). **★ SYMMETRY ✅** (`fcOp_symmetric`: `⟨(∫f dE)x, y⟩ = ⟨x, (∫f dE)y⟩` on the domain
+  — each `boundedFC(fₙ)` self-adjoint (`f` real) + `inner`-continuity of the limit). **M1 ESSENTIALLY COMPLETE:
+  the unbounded FC `∫ f dE` exists as a linear, symmetric operator on its domain — axiom-free, end-to-end from
+  the bounded FC.** (Optional wrap-up: bounded-compat `∫g dE = boundedFC g`; formal `LinearPMap`+`IsSelfAdjoint`
+  packaging.) NEXT → **M2**: `E_R := PVM_of_selfAdjoint R`; `K := fcOp` at `log(r/(2−r))` (symmetric via
+  `fcOp_symmetric`); `Δ^{it} = boundedFC(((2−r)/r)^{it}) = e^{−itK}` (the FC exponential law, Stone Phase 2.1)
+  → JLMS Stage 1 closed.
 - [ ] **M2** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1 closed)
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)

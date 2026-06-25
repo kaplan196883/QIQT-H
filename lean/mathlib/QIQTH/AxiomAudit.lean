@@ -1221,6 +1221,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_smul
 -- ★ THE UNBOUNDED OPERATOR ∫f dE: fcOp hf x := limUnder (boundedFC(fₙ)x); boundedFC(fₙ)x→fcOp x on the
 -- domain (fcSeq_tendsto_fcOp); additive (fcOp_add) and ℂ-homogeneous (fcOp_smul) — a linear operator on D(∫f dE).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_symmetric
+-- ★ the operator is SYMMETRIC on the domain: ⟨(∫f dE)x, y⟩ = ⟨x, (∫f dE)y⟩ (f real ⟹ boundedFC(fₙ)
+-- self-adjoint; pass to the limit by inner-product continuity) — the modular Hamiltonian's reality/symmetry.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

@@ -468,4 +468,24 @@ theorem fcOp_smul {f : Ω → ℝ} (hf : Measurable f) (c : ℂ) {x : H} (hx : x
   exact tendsto_nhds_unique (heq ▸ P.fcSeq_tendsto_fcOp hf hcx)
     ((P.fcSeq_tendsto_fcOp hf hx).const_smul c)
 
+/-- **The operator is symmetric** on the domain: `⟨(∫ f dE) x, y⟩ = ⟨x, (∫ f dE) y⟩` (`f` real, so each
+    `boundedFC(fₙ)` is self-adjoint; pass to the limit by continuity of the inner product).  This is the
+    self-adjointness of the (real) functional-calculus operator at the form level — the modular Hamiltonian's
+    reality/symmetry. -/
+theorem fcOp_symmetric {f : Ω → ℝ} (hf : Measurable f) {x y : H} (hx : x ∈ P.fcDomain f)
+    (hy : y ∈ P.fcDomain f) :
+    inner ℂ (P.fcOp hf x) y = inner ℂ x (P.fcOp hf y) := by
+  have hsa : ∀ n, inner ℂ (P.fcSeq hf n x) y = inner ℂ x (P.fcSeq hf n y) := fun n =>
+    (ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp
+      (P.boundedFC_isSelfAdjoint (Complex.continuous_ofReal.measurable.comp (fcTrunc_measurable hf n))
+        n.cast_nonneg
+        (fun ω => (Complex.norm_real (fcTrunc f n ω)).le.trans
+          ((Real.norm_eq_abs (fcTrunc f n ω)).le.trans (fcTrunc_abs_le f n ω)))
+        (fun ω => Complex.conj_ofReal _))) x y
+  have h1 : Filter.Tendsto (fun n => inner ℂ (P.fcSeq hf n x) y) Filter.atTop
+      (nhds (inner ℂ (P.fcOp hf x) y)) := (P.fcSeq_tendsto_fcOp hf hx).inner tendsto_const_nhds
+  have h2 : Filter.Tendsto (fun n => inner ℂ x (P.fcSeq hf n y)) Filter.atTop
+      (nhds (inner ℂ x (P.fcOp hf y))) := tendsto_const_nhds.inner (P.fcSeq_tendsto_fcOp hf hy)
+  exact tendsto_nhds_unique ((funext hsa : _ = _) ▸ h1) h2
+
 end QIQTH.Spectral.ProjectionValuedMeasure
