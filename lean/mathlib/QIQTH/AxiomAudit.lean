@@ -1368,7 +1368,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.Multiplication.norm_indMul_sq
 -- ★ MULTIPLICATION PVM brick 8 — the scalar spectral measure as a real nonneg quantity: ‖E(A)f‖²=∫_A‖f‖² (the L²
 -- mass of f on A; via inner_self_eq_norm_sq + L2.inner_def + integral_re). μ_f(A)=∫_A‖f‖² is the genuine scalar
--- spectral measure of the position PVM — the key input to σ-additivity (the tail ∫_{A_N}‖f‖²→0). Next: σ-additivity.
+-- spectral measure of the position PVM — the key input to σ-additivity (the tail ∫_{A_N}‖f‖²→0).
+#print axioms QIQTH.Spectral.Multiplication.norm_indMul_tendsto_iInter
+-- ★ MULTIPLICATION PVM brick 9 — σ-additivity (continuity from above) of the scalar spectral measure: for antitone
+-- Bₙ, ‖E(Bₙ)f‖²=∫_{Bₙ}‖f‖² → ∫_{⋂Bₙ}‖f‖² (Bₙ↓∅ ⟹ ‖E(Bₙ)f‖→0). Via norm_indMul_sq + tendsto_setIntegral_of_antitone
+-- (‖f‖²∈L¹). The measure-tail driving the position PVM's operator σ-additivity. Next: bundle the ProjectionValuedMeasure.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

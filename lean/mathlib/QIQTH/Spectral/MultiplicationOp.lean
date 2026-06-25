@@ -297,4 +297,18 @@ theorem norm_indMul_sq {A : Set α} (hA : MeasurableSet A) (f : Lp ℂ 2 μ) :
   · simp only [indSymbol, Set.indicator_of_mem h, one_mul]
   · simp [indSymbol, Set.indicator_of_notMem h]
 
+/-- **σ-additivity of the scalar spectral measure (continuity from above):** for an antitone family of
+    measurable sets `Bₙ`, the spectral-projection masses `‖E(Bₙ) f‖² = ∫_{Bₙ} ‖f‖²` converge to `∫_{⋂Bₙ} ‖f‖²`.
+    In particular `Bₙ ↓ ∅ ⟹ ‖E(Bₙ) f‖ → 0` — the measure-tail that drives the operator σ-additivity of the
+    position PVM (`E(⋃Aₙ) = ∑ E(Aₙ)` strong, for disjoint `Aₙ`).  From `norm_indMul_sq` +
+    `tendsto_setIntegral_of_antitone` (`‖f‖² ∈ L¹` since `f ∈ L²`). -/
+theorem norm_indMul_tendsto_iInter {B : ℕ → Set α} (hB : ∀ n, MeasurableSet (B n)) (hanti : Antitone B)
+    (f : Lp ℂ 2 μ) :
+    Filter.Tendsto (fun n => ‖indMul (μ := μ) (hB n) f‖ ^ 2) Filter.atTop
+      (nhds (∫ a in ⋂ n, B n, ‖f a‖ ^ 2 ∂μ)) := by
+  simp_rw [norm_indMul_sq]
+  exact MeasureTheory.tendsto_setIntegral_of_antitone hB hanti
+    ⟨0, ((MeasureTheory.memLp_two_iff_integrable_sq_norm
+      (Lp.aestronglyMeasurable f)).mp (Lp.memLp f)).integrableOn⟩
+
 end QIQTH.Spectral.Multiplication

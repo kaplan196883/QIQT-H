@@ -284,8 +284,12 @@ item.** Never claim the `1/4`.
   **Brick 8 — the scalar spectral measure (real/nonneg) ✅**: `‖E(A) f‖² = ∫_A ‖f‖² dμ` (`norm_indMul_sq`, via
   `inner_self_eq_norm_sq` + `L2.inner_def` + `integral_re`) — the `L²` mass of `f` on `A`. So `μ_f(A) = ∫_A ‖f‖²` is
   the genuine (real, nonnegative) scalar spectral measure of the position PVM, and the key quantitative input to
-  σ-additivity (the tail `∫_{A_N} ‖f‖² → 0`). Next: σ-additivity (finite-additivity reduction + the measure-tail
-  convergence) → bundle the `ProjectionValuedMeasure`; then Fourier conjugation → momentum PVM → boost generator.
+  σ-additivity (the tail `∫_{A_N} ‖f‖² → 0`).
+  **Brick 9 — σ-additivity of the scalar measure (continuity from above) ✅**: for antitone `Bₙ`,
+  `‖E(Bₙ)f‖²=∫_{Bₙ}‖f‖² → ∫_{⋂Bₙ}‖f‖²` (`norm_indMul_tendsto_iInter`, via `norm_indMul_sq` +
+  `tendsto_setIntegral_of_antitone`, `‖f‖²∈L¹`). In particular `Bₙ↓∅ ⟹ ‖E(Bₙ)f‖→0` — the measure-tail driving the
+  position PVM's operator σ-additivity. Next: the operator σ-additivity (`E(⋃Aₙ)f=∑E(Aₙ)f` via finite-additivity +
+  this tail) → bundle the `ProjectionValuedMeasure`; then Fourier conjugation → momentum PVM → boost generator.
   NB the Bochner-over-`scalarMeasure` DCT route hits a `whnf` wall — the `lintegral`/`HasDerivAt` route is the way.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,
