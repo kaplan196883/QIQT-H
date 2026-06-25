@@ -132,5 +132,16 @@ entanglement = `A/4G_ind`); Solodukhin, *Living Rev. Rel.* 14 (2011) 8 (review, 
   eigenvalue / Williamson-normal-form linear algebra (a genuine Mathlib-grade gap, flagged high-risk in §2-C).
   Stage C delivers the per-mode summand and its physics (pure⇒0, monotone, nonneg); the lattice scaling that
   turns `Σ S(νᵢ)` into `∝ A` is the cited formalization frontier, left green at this checkpoint.
-- **PLAN COMPLETE** (A+B+C landed; C's lattice-scaling tail is the labelled frontier). Net: the `1/4` is
-  derived (geometric, non-circular — A+B), and the entropy-area-law's per-mode kernel is machine-checked (C).
+- **Stage C+ ✅ (multi-mode sum — the literal `S = Σᵢ S(νᵢ)` formula)** — extended
+  `QIQTH/GaussianStateEntropy.lean` (axiom-free, budget 0, full build green) to the **total** Gaussian-state
+  entropy: `gaussModeEntropy_continuous` (continuous everywhere via `negMulLog`), `gaussModeEntropy_pos`
+  (a squeezed mode `ν>½` carries strictly positive entropy, via strict monotonicity), and the multi-mode
+  `gaussStateEntropy ν := Σᵢ gaussModeEntropy(νᵢ)` with `gaussStateEntropy_nonneg`, `gaussStateEntropy_pure`
+  (all modes at the floor ⇒ 0), and `gaussStateEntropy_eq_zero_iff` (total entropy `=0` **iff** every mode
+  pure — zero exactly on the unentangled state, strictly positive once any mode is squeezed). This completes
+  the plan's named **Gaussian-state entropy formula** bullet (§2-C, first target). The remaining §2-C target
+  — the area-law *scaling* `Σ ∝ boundary size` — stays the labelled frontier (Williamson spectrum of the
+  lattice covariance matrix).
+- **PLAN COMPLETE** (A+B+C+ landed; only C's lattice-*scaling* tail is the labelled frontier). Net: the `1/4`
+  is derived (geometric, non-circular — A+B); the Srednicki entropy formula `S = Σᵢ S(νᵢ)` and its physics
+  (pure⇔0, monotone, nonneg, strictly positive when entangled) are machine-checked (C/C+).

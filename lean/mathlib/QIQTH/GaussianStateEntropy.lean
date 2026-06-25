@@ -90,4 +90,54 @@ theorem gaussModeEntropy_nonneg {ν : ℝ} (hν : 1 / 2 ≤ ν) : 0 ≤ gaussMod
       exact (gaussModeEntropy_deriv_pos hx.1).le
     exact hmono (Set.left_mem_Icc.mpr hν) (Set.right_mem_Icc.mpr hν) hν
 
+/-- `gaussModeEntropy` is continuous on all of `ℝ` (through `Real.negMulLog`, which — unlike `log` — is
+    continuous at `0`, so the `x log x` factors are continuous even where the argument vanishes). -/
+theorem gaussModeEntropy_continuous : Continuous gaussModeEntropy := by
+  have hrw : gaussModeEntropy = fun x => Real.negMulLog (x - 1 / 2) - Real.negMulLog (x + 1 / 2) := by
+    funext x; unfold gaussModeEntropy Real.negMulLog; ring
+  rw [hrw]
+  exact (Real.continuous_negMulLog.comp (continuous_id.sub continuous_const)).sub
+    (Real.continuous_negMulLog.comp (continuous_id.add continuous_const))
+
+/-- **A genuinely squeezed mode (`ν > 1/2`) carries strictly positive entanglement entropy.** -/
+theorem gaussModeEntropy_pos {ν : ℝ} (hν : 1 / 2 < ν) : 0 < gaussModeEntropy ν := by
+  rw [← gaussModeEntropy_half]
+  have hmono : StrictMonoOn gaussModeEntropy (Set.Icc (1 / 2) ν) :=
+    strictMonoOn_of_deriv_pos (convex_Icc _ _) gaussModeEntropy_continuous.continuousOn
+      (fun x hx => by
+        rw [interior_Icc] at hx
+        rw [(gaussModeEntropy_hasDerivAt hx.1).deriv]
+        exact gaussModeEntropy_deriv_pos hx.1)
+  exact hmono (Set.left_mem_Icc.mpr hν.le) (Set.right_mem_Icc.mpr hν.le) hν
+
+/-- **The total entanglement entropy of an `n`-mode Gaussian state** — the sum, over its symplectic
+    eigenvalues `νᵢ`, of the per-mode entropy.  By Williamson normal form this is the entropy the
+    Srednicki/Bombelli–Koul–Lee–Sorkin area law evaluates; the area-law *scaling* of this sum with the
+    boundary size (from the lattice covariance matrix's symplectic spectrum) is the cited frontier. -/
+noncomputable def gaussStateEntropy {n : ℕ} (ν : Fin n → ℝ) : ℝ :=
+  ∑ i, gaussModeEntropy (ν i)
+
+/-- The total Gaussian entanglement entropy is nonnegative (a sum of nonnegative per-mode entropies). -/
+theorem gaussStateEntropy_nonneg {n : ℕ} (ν : Fin n → ℝ) (hν : ∀ i, 1 / 2 ≤ ν i) :
+    0 ≤ gaussStateEntropy ν :=
+  Finset.sum_nonneg fun i _ => gaussModeEntropy_nonneg (hν i)
+
+/-- A fully pure Gaussian state (every symplectic eigenvalue at the floor `1/2`) has zero entropy. -/
+theorem gaussStateEntropy_pure {n : ℕ} {ν : Fin n → ℝ} (hν : ∀ i, ν i = 1 / 2) :
+    gaussStateEntropy ν = 0 := by
+  apply Finset.sum_eq_zero
+  intro i _
+  rw [hν i, gaussModeEntropy_half]
+
+/-- **The total entropy vanishes iff every mode is pure** (given each `νᵢ ≥ 1/2`): the area-law summand is
+    zero exactly on the unentangled state, and strictly positive as soon as any mode is squeezed. -/
+theorem gaussStateEntropy_eq_zero_iff {n : ℕ} (ν : Fin n → ℝ) (hν : ∀ i, 1 / 2 ≤ ν i) :
+    gaussStateEntropy ν = 0 ↔ ∀ i, ν i = 1 / 2 := by
+  refine ⟨fun h i => ?_, fun h => gaussStateEntropy_pure h⟩
+  have hz : gaussModeEntropy (ν i) = 0 :=
+    (Finset.sum_eq_zero_iff_of_nonneg fun j _ => gaussModeEntropy_nonneg (hν j)).mp h i
+      (Finset.mem_univ i)
+  by_contra hne
+  exact absurd hz (gaussModeEntropy_pos (lt_of_le_of_ne (hν i) (Ne.symm hne))).ne'
+
 end QIQTH.GaussianStateEntropy

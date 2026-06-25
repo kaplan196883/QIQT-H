@@ -4942,6 +4942,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussianStateEntropy.gaussModeEntropy_hasDerivAt
 #print axioms QIQTH.GaussianStateEntropy.gaussModeEntropy_deriv_pos
 #print axioms QIQTH.GaussianStateEntropy.gaussModeEntropy_nonneg
+#print axioms QIQTH.GaussianStateEntropy.gaussModeEntropy_continuous
+#print axioms QIQTH.GaussianStateEntropy.gaussModeEntropy_pos
+-- the multi-mode SUM (the literal Srednicki entropy formula S = Σᵢ S(νᵢ)); area-SCALING is the frontier.
+#print axioms QIQTH.GaussianStateEntropy.gaussStateEntropy_nonneg
+#print axioms QIQTH.GaussianStateEntropy.gaussStateEntropy_pure
+#print axioms QIQTH.GaussianStateEntropy.gaussStateEntropy_eq_zero_iff
 
 -- Tier A1 of QIQT_GR_DISCHARGEABLE_PLAN: discharge hric_symm.
 #print axioms QIQTH.Curvature.ricci_symm
