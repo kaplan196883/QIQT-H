@@ -126,7 +126,7 @@ def _read_arg(pp, i):
     if pp[i] == "λ" or re.match(r"fun\b", pp[i:]):
         return pp[i:], n
     if pp[i] in "([":
-        close = ")" if pp[i] == "(" else "]"
+        opener = pp[i]
         depth, j = 0, i
         while j < n:
             if pp[j] in "([":
@@ -137,6 +137,10 @@ def _read_arg(pp, i):
                     j += 1
                     break
             j += 1
+        # strip a (...) wrapper so the *template* controls bracketing (avoids the
+        # double parens of S((p x v t))); keep [...] groups intact.
+        if opener == "(":
+            return pp[i + 1:j - 1], j
         return pp[i:j], j
     if pp[i] in _DELIMS:
         return None, orig                       # a delimiter: no argument here
@@ -277,6 +281,20 @@ def tex_of_pp(pp, notation=None):
     # ...but the lookbehind also matched the trailing letter of an operator
     # command (\cdot, \le, ...). Undo the thin-space directly after those.
     tex = re.sub(r"(\\(?:" + "|".join(_OP_WORDS) + r"))\\,", r"\1 ", tex)
+
+    # --- idiom prettifiers (syntactic, content-preserving) ---
+    # Kronecker delta:  if X = Y then 1 else 0  ->  δ_{XY}
+    tex = re.sub(
+        r"\\text\{if \}(?:\\,)?\s*([^=]+?)\s*=\s*(.+?)\s*"
+        r"\\text\{ then \}(?:\\,)?\s*1\s*\\text\{ else \}(?:\\,)?\s*0",
+        r"\\delta_{\1\2}", tex)
+    # neighbourhood-eventually filter:
+    #   ∀ᶠ (t : ℝ) in nhds c, P   ->   for t near c, P
+    _sp = r"(?:\\,|\s)*"   # optional thin-space / whitespace
+    tex = re.sub(
+        r"\\forall" + _sp + r"\^\{f\}" + _sp + r"\(\s*([^:]+?)\s*:[^)]*\)" + _sp +
+        r"\\text\{ in \}" + _sp + r"\\mathrm\{nhds\}" + _sp + r"([^,]+?)\s*,",
+        r"\\text{for }\1\\text{ near }\2,\\;", tex)
     # safety net: drop any exotic glyph that escaped every map, so output always
     # compiles. Greek/symbols/blackboard are already translated above, so this
     # only removes rare unmapped Lean notation (record any drops for review).
