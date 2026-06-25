@@ -40,4 +40,18 @@ theorem momentumPVM_E (A : Set ℝ) :
         ∘L ((MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ).symm : Lp (α := ℝ) ℂ 2 →L[ℂ] Lp (α := ℝ) ℂ 2) :=
   rfl
 
+/-- **The momentum PVM's scalar measure is the Born momentum distribution:** for a state `x`, the
+    momentum-space probability mass on `A` equals the *position* mass of its inverse Fourier transform
+    `ℱ⁻¹ x`, `(scalarMeasure x)(A) = ENNReal.ofReal (∫_A ‖(ℱ⁻¹ x)(a)‖² da)`. This is the standard fact that
+    `|x̂(k)|²` is the momentum-probability density — here read off the Fourier-conjugated PVM via the covariance
+    of spectral measures under unitary conjugation (`conj_scalarMeasure`). -/
+theorem momentumPVM_scalarMeasure (x : Lp (α := ℝ) ℂ 2) {A : Set ℝ} (hA : MeasurableSet A) :
+    momentumPVM.scalarMeasure x A
+      = ENNReal.ofReal
+          (∫ a in A, ‖((MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ).symm x) a‖ ^ 2 ∂(volume : Measure ℝ)) := by
+  rw [show momentumPVM.scalarMeasure x A
+        = ((positionPVM (α := ℝ) (μ := (volume : Measure ℝ))).conj
+            (MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ)).scalarMeasure x A from rfl,
+    ProjectionValuedMeasure.conj_scalarMeasure _ _ _ hA, positionPVM_scalarMeasure _ hA]
+
 end QIQTH.Spectral.Multiplication

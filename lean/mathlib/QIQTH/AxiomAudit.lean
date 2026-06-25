@@ -1443,6 +1443,14 @@ namespace QIQTH.AxiomAudit
 -- positionPVM_scalarMeasure ((scalarMeasure x)(A)=ENNReal.ofReal(∫_A‖x‖²)). The position PVM's scalar spectral
 -- measure IS the (unnormalized) position-probability distribution |ψ(a)|²dμ(a) of the state — the Born rule for
 -- position read directly off the bundled ProjectionValuedMeasure. Axiom-free corollary of bricks 8 + 16.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.norm_conj_E
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.conj_scalarMeasure
+#print axioms QIQTH.Spectral.Multiplication.momentumPVM_scalarMeasure
+-- ★ SPECTRAL MEASURES TRANSFORM COVARIANTLY UNDER UNITARY CONJUGATION: norm_conj_E (‖(P.conj U).E A x‖=‖P.E A (U⁻¹x)‖,
+-- U isometry) and conj_scalarMeasure ((P.conj U).scalarMeasure x = P.scalarMeasure (U⁻¹x)). Instance
+-- momentumPVM_scalarMeasure: the momentum-space Born mass of x = the POSITION mass of ℱ⁻¹x, i.e. |x̂(k)|² is the
+-- momentum-probability density — read off the Fourier-conjugated PVM. Axiom-free; the Born rule for momentum as the
+-- Fourier image of the Born rule for position. Completes the position↔momentum PVM Born picture.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

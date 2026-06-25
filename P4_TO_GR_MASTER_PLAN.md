@@ -365,6 +365,13 @@ item.** Never claim the `1/4`.
   (unnormalized) position-probability distribution `|ψ(a)|²dμ(a)` of the state — the **Born rule for position**
   read directly off the bundled `ProjectionValuedMeasure` (corollary of bricks 8 + 16). A clean physical payoff of
   the PVM construction, independent of the Stone / physical-input frontiers.
+  **Spectral-measure covariance under unitary conjugation + the Born momentum distribution ✅**
+  (`PVMConj.lean` + `MomentumPVM.lean`, axiom-free, budget 0): `norm_conj_E` (`‖(P.conj U).E A x‖=‖P.E A (U⁻¹x)‖`,
+  `U` isometry) and `conj_scalarMeasure` (`(P.conj U).scalarMeasure x = P.scalarMeasure (U⁻¹x)`) — spectral
+  measures transform covariantly under unitary conjugation. Instance `momentumPVM_scalarMeasure`: the
+  momentum-space Born mass of `x` equals the **position** mass of `ℱ⁻¹x`, i.e. `|x̂(k)|²` is the
+  momentum-probability density — the **Born rule for momentum** as the Fourier image of the Born rule for
+  position. Completes the position↔momentum PVM Born picture, axiom-free.
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.

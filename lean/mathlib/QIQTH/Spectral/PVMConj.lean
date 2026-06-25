@@ -49,5 +49,23 @@ noncomputable def conj (P : ProjectionValuedMeasure Ω H) (U : H ≃ₗᵢ[ℂ] 
 @[simp] theorem conj_E (P : ProjectionValuedMeasure Ω H) (U : H ≃ₗᵢ[ℂ] H) (A : Set Ω) :
     (P.conj U).E A = (U : H →L[ℂ] H) ∘L P.E A ∘L (U.symm : H →L[ℂ] H) := rfl
 
+/-- The conjugated projection has the same `L²` mass as the original projection applied to `U⁻¹ x`
+    (`U` is an isometry): `‖(P.conj U).E A x‖ = ‖P.E A (U⁻¹ x)‖`. -/
+theorem norm_conj_E (P : ProjectionValuedMeasure Ω H) (U : H ≃ₗᵢ[ℂ] H) (A : Set Ω) (x : H) :
+    ‖(P.conj U).E A x‖ = ‖P.E A (U.symm x)‖ := by
+  rw [conj_E]
+  simp only [ContinuousLinearMap.comp_apply, LinearIsometryEquiv.toContinuousLinearEquiv_symm,
+    ContinuousLinearEquiv.coe_coe, LinearIsometryEquiv.coe_toContinuousLinearEquiv,
+    LinearIsometryEquiv.coe_symm_toContinuousLinearEquiv, LinearIsometryEquiv.norm_map]
+
+/-- **Spectral measures transform covariantly under unitary conjugation:** the scalar spectral measure of the
+    conjugated PVM `P.conj U` at the state `x` equals that of `P` at `U⁻¹ x`,
+    `(P.conj U).scalarMeasure x A = P.scalarMeasure (U⁻¹ x) A`. (For the Fourier case: the momentum-space
+    probability distribution of `x` is the position distribution of `ℱ⁻¹ x`.) -/
+theorem conj_scalarMeasure (P : ProjectionValuedMeasure Ω H) (U : H ≃ₗᵢ[ℂ] H) (x : H)
+    {A : Set Ω} (hA : MeasurableSet A) :
+    (P.conj U).scalarMeasure x A = P.scalarMeasure (U.symm x) A := by
+  rw [(P.conj U).scalarMeasure_apply x hA, P.scalarMeasure_apply (U.symm x) hA, norm_conj_E]
+
 end ProjectionValuedMeasure
 end QIQTH.Spectral
