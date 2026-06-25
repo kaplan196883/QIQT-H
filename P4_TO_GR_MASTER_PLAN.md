@@ -278,6 +278,10 @@ item.** Never claim the `1/4`.
   **Brick 6 — finite additivity ✅**: `M_φ+M_ψ=M_{φ+ψ}` (`mulOp_add`) ⟹ `E(A⊔B)=E(A)+E(B)` for disjoint `A,B`
   (`indMul_union_disjoint`, via `𝟙_{A∪B}=𝟙_A+𝟙_B`) — the finitely-additive projection-valued measure. Next bricks:
   σ-additivity (countable / strong `E(⋃Aₙ)=Σ E(Aₙ)`) → bundle the `ProjectionValuedMeasure`; then Fourier conjugation.
+  **Brick 7 — symbol-linearity complete ✅**: `M_φ−M_ψ=M_{φ−ψ}` (`mulOp_sub`), `M_{c·φ}=c·M_φ` (`mulOp_smul`). With
+  add/mul/const/adjoint/congr, **`M_·` is now a complete unital `*`-algebra homomorphism** (bounded measurable
+  functions → CLM on `L²`) — Mathlib-quality multiplication-operator infrastructure. Next: σ-additivity (the L²
+  norm-as-integral + DCT/measure-tail — the analytic brick) → bundle the genuine `ProjectionValuedMeasure`.
   NB the Bochner-over-`scalarMeasure` DCT route hits a `whnf` wall — the `lintegral`/`HasDerivAt` route is the way.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,

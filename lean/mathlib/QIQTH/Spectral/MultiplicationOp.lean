@@ -124,6 +124,32 @@ theorem mulOp_add {φ ψ : α → ℂ} (hφ : Measurable φ) {Cφ : ℝ} (hCφ0 
       (fun s => (norm_add_le _ _).trans (add_le_add (hCφ s) (hCψ s))) f] with s e1 e2 e3 e4
   rw [e1, Pi.add_apply, e2, e3, e4]; ring
 
+/-- **Subtractivity in the symbol `M_φ − M_ψ = M_{φ−ψ}`.** -/
+theorem mulOp_sub {φ ψ : α → ℂ} (hφ : Measurable φ) {Cφ : ℝ} (hCφ0 : 0 ≤ Cφ) (hCφ : ∀ s, ‖φ s‖ ≤ Cφ)
+    (hψ : Measurable ψ) {Cψ : ℝ} (hCψ0 : 0 ≤ Cψ) (hCψ : ∀ s, ‖ψ s‖ ≤ Cψ) :
+    mulOp (μ := μ) hφ hCφ0 hCφ - mulOp (μ := μ) hψ hCψ0 hCψ
+      = mulOp (μ := μ) (hφ.sub hψ) (add_nonneg hCφ0 hCψ0)
+          (fun s => (norm_sub_le _ _).trans (add_le_add (hCφ s) (hCψ s))) := by
+  refine ContinuousLinearMap.ext fun f => ?_
+  rw [ContinuousLinearMap.sub_apply, Lp.ext_iff]
+  filter_upwards [Lp.coeFn_sub (mulOp hφ hCφ0 hCφ f) (mulOp hψ hCψ0 hCψ f),
+    mulOp_coeFn hφ hCφ0 hCφ f, mulOp_coeFn hψ hCψ0 hCψ f,
+    mulOp_coeFn (hφ.sub hψ) (add_nonneg hCφ0 hCψ0)
+      (fun s => (norm_sub_le _ _).trans (add_le_add (hCφ s) (hCψ s))) f] with s e1 e2 e3 e4
+  rw [e1, Pi.sub_apply, e2, e3, e4]; ring
+
+/-- **Homogeneity in the symbol `M_{c·φ} = c · M_φ`.** -/
+theorem mulOp_smul (c : ℂ) {φ : α → ℂ} (hφ : Measurable φ) {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ s, ‖φ s‖ ≤ C) :
+    mulOp (μ := μ) (hφ.const_mul c) (mul_nonneg (norm_nonneg c) hC0)
+        (fun s => by rw [norm_mul]; exact mul_le_mul_of_nonneg_left (hC s) (norm_nonneg c))
+      = c • mulOp (μ := μ) hφ hC0 hC := by
+  refine ContinuousLinearMap.ext fun f => ?_
+  rw [ContinuousLinearMap.smul_apply, Lp.ext_iff]
+  filter_upwards [mulOp_coeFn (hφ.const_mul c) (mul_nonneg (norm_nonneg c) hC0)
+      (fun s => by rw [norm_mul]; exact mul_le_mul_of_nonneg_left (hC s) (norm_nonneg c)) f,
+    Lp.coeFn_smul c (mulOp hφ hC0 hC f), mulOp_coeFn hφ hC0 hC f] with s e1 e2 e3
+  rw [e1, e2, Pi.smul_apply, e3, smul_eq_mul, mul_assoc]
+
 /-- `M_φ` depends only on the symbol `φ` (not on the bound witness). -/
 theorem mulOp_congr {φ φ' : α → ℂ} (hφ : Measurable φ) {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ s, ‖φ s‖ ≤ C)
     (hφ' : Measurable φ') {C' : ℝ} (hC0' : 0 ≤ C') (hC' : ∀ s, ‖φ' s‖ ≤ C') (h : φ = φ') :

@@ -1361,6 +1361,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.Multiplication.indMul_union_disjoint
 -- ★ MULTIPLICATION PVM brick 6 — finite additivity: M_φ+M_ψ=M_{φ+ψ} (mulOp_add) ⟹ E(A⊔B)=E(A)+E(B) for disjoint A,B
 -- (indMul_union_disjoint, via 𝟙_{A∪B}=𝟙_A+𝟙_B). The finitely-additive projection-valued measure. Next: σ-additivity.
+#print axioms QIQTH.Spectral.Multiplication.mulOp_sub
+#print axioms QIQTH.Spectral.Multiplication.mulOp_smul
+-- ★ MULTIPLICATION PVM brick 7 — symbol-linearity complete: M_φ−M_ψ=M_{φ−ψ} (mulOp_sub), M_{c·φ}=c·M_φ (mulOp_smul).
+-- With add/mul/const/adjoint/congr, M_· is a complete unital *-algebra hom (bounded measurable fns → CLM on L²).
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
