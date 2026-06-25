@@ -1234,6 +1234,10 @@ namespace QIQTH.AxiomAudit
 -- M2 INSTANTIATION: the modular Hamiltonian K = modK S = ∫ kFn dE_R (E_R = PVM_of_selfAdjoint (rvdRC S)) as
 -- a genuine operator, and the operator-level first law ⟨ξ,Kξ⟩ = cgpEntropy S ξ.
 #print axioms QIQTH.StandardSubspaceModular.modK_inner_self
+-- K is a genuine SYMMETRIC LINEAR operator: K=K† (modK_symmetric), additive (modK_add), ℂ-homog (modK_smul).
+#print axioms QIQTH.StandardSubspaceModular.modK_symmetric
+#print axioms QIQTH.StandardSubspaceModular.modK_add
+#print axioms QIQTH.StandardSubspaceModular.modK_smul
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

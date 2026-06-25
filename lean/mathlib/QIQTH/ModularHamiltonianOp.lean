@@ -56,4 +56,34 @@ theorem modK_inner_self (S : StandardSubspace H) (ξ : H)
       (kFn_val_measurable S) hdom, cgpEntropy_eq_integral_kFn S ξ hspec]
   simp only [rvdSpecMeasure]
 
+/-- **`K` is symmetric** (`K = K†` on its domain): `⟨K ξ, η⟩ = ⟨ξ, K η⟩` — the reality/self-adjointness of the
+    modular Hamiltonian, inherited from `fcOp_symmetric`. -/
+theorem modK_symmetric (S : StandardSubspace H) {ξ η : H}
+    (hξ : ξ ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => kFn ω.val))
+    (hη : η ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => kFn ω.val)) :
+    inner ℂ (modK S ξ) η = inner ℂ ξ (modK S η) :=
+  (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcOp_symmetric (kFn_val_measurable S) hξ hη
+
+/-- **`K` is additive** on its domain. -/
+theorem modK_add (S : StandardSubspace H) {ξ η : H}
+    (hξ : ξ ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => kFn ω.val))
+    (hη : η ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => kFn ω.val))
+    (hξη : ξ + η ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => kFn ω.val)) :
+    modK S (ξ + η) = modK S ξ + modK S η :=
+  (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcOp_add (kFn_val_measurable S) hξ hη hξη
+
+/-- **`K` is `ℂ`-homogeneous** on its domain. -/
+theorem modK_smul (S : StandardSubspace H) (c : ℂ) {ξ : H}
+    (hξ : ξ ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => kFn ω.val))
+    (hcξ : c • ξ ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => kFn ω.val)) :
+    modK S (c • ξ) = c • modK S ξ :=
+  (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcOp_smul (kFn_val_measurable S) c hξ hcξ
+
 end QIQTH.StandardSubspaceModular
