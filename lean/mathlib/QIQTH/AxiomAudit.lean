@@ -1277,6 +1277,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.norm_boundedFC_expSymbol
 -- ★ UNITARITY (norm-preservation) of the FC-exponential group: ‖boundedFC(e^{itf})x‖=‖x‖, from U⋆U=1
 -- (boundedFC_expSymbol_adjoint_mul). Completes the unitary one-parameter group at the norm level.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.continuous_boundedFC_expSymbol
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.hasDerivAt_boundedFC_expSymbol'
+-- ★ FLOW IS C¹ EVERYWHERE: t↦boundedFC(e^{itf})x is Continuous (continuous_boundedFC_expSymbol) AND differentiable
+-- at every t₀ with d/dt|_{t₀} = U_{t₀}(i·∫f dE x) (hasDerivAt_boundedFC_expSymbol', via group law + comp_sub_const +
+-- clm comp) — upgrades the generator from t=0 to the whole line: U_t' = i·U_t·K.
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.hasDerivAt_inner_boundedFC_expSymbol
 -- ★ INFINITESIMAL matrix element: d/dt⟪η,boundedFC(e^{itf})x⟫|₀ = ⟪η,i·(∫f dE)x⟫ (generator ∘ innerSL, HasDerivAt.inner).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_integral_tendsto

@@ -233,6 +233,11 @@ item.** Never claim the `1/4`.
     identifies the GR heat-flux datum `kd = −cgpEntropy S ξ` (the modular entropy) — the first-law/Clausius datum at
     the operator level. The modular Stone work now feeds directly into the GR derivation chain's labelled inputs.
   • **`modUnitary` strongly-continuous group form ✅** (`continuous_modUnitary`: the textbook `Continuous` `C₀`-group statement).
+  • **FLOW IS `C¹` EVERYWHERE ✅** — `continuous_boundedFC_expSymbol` (general strongly-continuous form) +
+    `hasDerivAt_boundedFC_expSymbol'`: `d/dt(U_t x)|_{t₀} = U_{t₀}(i·K x)` at **every** `t₀` (not just `0`), via the
+    group law `U_t = U_{t₀}U_{t−t₀}` (`comp_sub_const` for the shift + `restrictScalars`/`comp_hasDerivAt` for the
+    `U_{t₀}`-application). The FC-exponential group is `C¹` on the whole line: `U_t' = i·U_t·K` — the complete
+    differentiable-Stone-group statement.
 
   **WedgeKMSFlux derivation-status map (precise):** the GR chain's `WedgeKMSFlux` bundle (per null generator) has 6
   inputs; the modular Stone machinery now provides one of the two `HasDerivAt` data:

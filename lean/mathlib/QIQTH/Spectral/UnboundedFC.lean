@@ -1033,6 +1033,44 @@ theorem continuousAt_boundedFC_expSymbol' {f : Ω → ℝ} (hf : Measurable f) {
   exact (P.boundedFC (measurable_expSymbol hf t₀) zero_le_one
     (norm_expSymbol_le t₀)).continuous.continuousAt.comp hinner
 
+/-- **Full strong continuity of the FC-exponential group (the `C₀`-group statement):** `t ↦ boundedFC(e^{itf}) x`
+    is continuous (everywhere), for `x` in the domain.  Packages `continuousAt_boundedFC_expSymbol'` into the
+    textbook `Continuous` form — the general statement that the modular flow's `continuous_modUnitary` specializes. -/
+theorem continuous_boundedFC_expSymbol {f : Ω → ℝ} (hf : Measurable f) {x : H}
+    (hx : x ∈ P.fcDomain f) :
+    Continuous
+      (fun t : ℝ => P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) x) :=
+  continuous_iff_continuousAt.mpr fun t₀ => P.continuousAt_boundedFC_expSymbol' hf hx t₀
+
+/-- **The generator at every `t₀` (full differentiability of the flow):** `d/dt(boundedFC(e^{itf}) x)|_{t₀}
+    = U_{t₀}(i·(∫f dE) x)`, where `U_{t₀} = boundedFC(e^{it₀f})`.  Upgrades the generator relation from `t = 0`
+    to all `t₀` via the group law `U_t = U_{t₀} U_{t−t₀}` (`HasDerivAt.comp_sub_const` for the shift +
+    `HasDerivAt.clm_apply` with the constant `U_{t₀}`).  So `t ↦ U_t x` is `C¹` with `U_t' = i·U_t·K`. -/
+theorem hasDerivAt_boundedFC_expSymbol' {f : Ω → ℝ} (hf : Measurable f) {x : H}
+    (hx : x ∈ P.fcDomain f) (t₀ : ℝ) :
+    HasDerivAt
+      (fun t : ℝ => P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) x)
+      (P.boundedFC (measurable_expSymbol hf t₀) zero_le_one (norm_expSymbol_le t₀)
+        (Complex.I • P.fcOp hf x)) t₀ := by
+  have hadd : ∀ t : ℝ, P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t)
+      = P.boundedFC (measurable_expSymbol hf t₀) zero_le_one (norm_expSymbol_le t₀)
+        * P.boundedFC (measurable_expSymbol hf (t - t₀)) zero_le_one (norm_expSymbol_le (t - t₀)) := by
+    intro t
+    have h := P.boundedFC_expSymbol_add hf t₀ (t - t₀)
+    rwa [show t₀ + (t - t₀) = t by ring] at h
+  have heq : (fun t : ℝ => P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) x)
+      = fun t : ℝ => P.boundedFC (measurable_expSymbol hf t₀) zero_le_one (norm_expSymbol_le t₀)
+          (P.boundedFC (measurable_expSymbol hf (t - t₀)) zero_le_one (norm_expSymbol_le (t - t₀)) x) := by
+    funext t; rw [hadd t, ContinuousLinearMap.mul_apply]
+  rw [heq]
+  have hu : HasDerivAt
+      (fun t : ℝ => P.boundedFC (measurable_expSymbol hf (t - t₀)) zero_le_one
+        (norm_expSymbol_le (t - t₀)) x) (Complex.I • P.fcOp hf x) t₀ :=
+    HasDerivAt.comp_sub_const t₀ t₀ ((sub_self t₀).symm ▸ P.hasDerivAt_boundedFC_expSymbol hf hx)
+  have hres := (((P.boundedFC (measurable_expSymbol hf t₀) zero_le_one
+    (norm_expSymbol_le t₀)).restrictScalars ℝ).hasFDerivAt).comp_hasDerivAt t₀ hu
+  simpa using hres
+
 /-- **Unitarity (norm-preservation) of the FC-exponential group:** `‖boundedFC(e^{itf}) x‖ = ‖x‖`.  Since
     `U_t = boundedFC(e^{itf})` satisfies `U_t⋆ U_t = 1` (`boundedFC_expSymbol_adjoint_mul`), it is an isometry —
     `⟪U_t x, U_t x⟫ = ⟪x, U_t⋆ U_t x⟫ = ⟪x, x⟫`.  Completes the unitary one-parameter group at the norm level. -/
