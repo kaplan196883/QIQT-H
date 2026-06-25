@@ -264,8 +264,11 @@ item.** Never claim the `1/4`.
   GR chain gated on the physical inputs #1/#3/#4. Axiom-free, budget 0, full build green.
   **Brick 2 — the `*`-algebra + the spectral projection ✅**: `M_φ∘M_ψ = M_{φ·ψ}` (`mulOp_mul`), `M_c = c·1`
   (`mulOp_const`), `mulOp_congr` (symbol-determined), and the spectral projection `E(A) = M_{𝟙_A}` (`indMul`) is
-  **idempotent** `E(A)²=E(A)` (`indMul_idempotent`, since `𝟙_A·𝟙_A=𝟙_A`). Next bricks: self-adjointness `E(A)*=E(A)`
-  (via the `L²` inner product `⟨M_φ f,g⟩=⟨f,M_φ̄ g⟩`) → σ-additivity → `scalarMeasure` → the PVM; then Fourier.
+  **idempotent** `E(A)²=E(A)` (`indMul_idempotent`, since `𝟙_A·𝟙_A=𝟙_A`).
+  **Brick 3 — the `*`-structure ✅**: adjoint `M_φ* = M_φ̄` (`mulOp_adjoint`, via the `L²` inner product
+  `⟪M_φ̄ f,g⟫=⟪f,M_φ g⟫`) ⟹ `E(A)` is **self-adjoint** (`indMul_isSelfAdjoint`, `𝟙_A` real). **With idempotency,
+  `E(A)` is now an ORTHOGONAL PROJECTION** — the spectral projection of the position observable. Next bricks:
+  σ-additivity (`E(⋃Aₙ)=Σ E(Aₙ)` strong) → `scalarMeasure` `⟨f,E(A)f⟩=∫_A|f|²` → the PVM; then Fourier conjugation.
   NB the Bochner-over-`scalarMeasure` DCT route hits a `whnf` wall — the `lintegral`/`HasDerivAt` route is the way.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,

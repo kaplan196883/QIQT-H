@@ -13,6 +13,8 @@ This is the first brick of the **multiplication PVM** (the position operator's s
 `matterRep` (operator-valued fiber multiplication) for the scalar case.  Axiom-free.
 -/
 import Mathlib.MeasureTheory.Function.LpSpace.Basic
+import Mathlib.MeasureTheory.Function.L2Space
+import Mathlib.Analysis.InnerProductSpace.Adjoint
 
 namespace QIQTH.Spectral.Multiplication
 
@@ -141,14 +143,40 @@ theorem indSymbol_mul_self (A : Set α) (s : α) :
 noncomputable def indMul {A : Set α} (hA : MeasurableSet A) : Lp ℂ 2 μ →L[ℂ] Lp ℂ 2 μ :=
   mulOp (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A)
 
-/-- **`E(A)` is idempotent** `E(A)² = E(A)` (since `𝟙_A · 𝟙_A = 𝟙_A`).  With self-adjointness (to come, via the
-    `L²` inner product) this exhibits `E(A)` as an orthogonal projection — a spectral projection of the
-    multiplication PVM. -/
+/-- **`E(A)` is idempotent** `E(A)² = E(A)` (since `𝟙_A · 𝟙_A = 𝟙_A`).  With self-adjointness (`indMul_isSelfAdjoint`)
+    this exhibits `E(A)` as an orthogonal projection — a spectral projection of the multiplication PVM. -/
 theorem indMul_idempotent {A : Set α} (hA : MeasurableSet A) :
     indMul (μ := μ) hA ∘L indMul hA = indMul hA := by
   rw [indMul, mulOp_mul (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A)
     (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A)]
   exact mulOp_congr _ _ _ (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A)
     (funext fun s => indSymbol_mul_self A s)
+
+/-- **Adjoint of a multiplication operator `M_φ* = M_φ̄`** — the adjoint multiplies by the conjugate symbol,
+    from the `L²` inner product `⟪M_φ̄ f, g⟫ = ⟪f, M_φ g⟫ = ∫ conj(φ·f)... `.  The `*`-structure of the
+    multiplication `*`-algebra. -/
+theorem mulOp_adjoint {φ : α → ℂ} (hφ : Measurable φ) {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ s, ‖φ s‖ ≤ C) :
+    ContinuousLinearMap.adjoint (mulOp (μ := μ) hφ hC0 hC)
+      = mulOp (μ := μ) (Complex.continuous_conj.measurable.comp hφ) hC0
+          (fun s => by simp only [Function.comp_apply, RCLike.norm_conj]; exact hC s) := by
+  symm
+  rw [ContinuousLinearMap.eq_adjoint_iff]
+  intro x y
+  rw [MeasureTheory.L2.inner_def, MeasureTheory.L2.inner_def]
+  refine MeasureTheory.integral_congr_ae ?_
+  filter_upwards [mulOp_coeFn (Complex.continuous_conj.measurable.comp hφ) hC0
+    (fun s => by simp only [Function.comp_apply, RCLike.norm_conj]; exact hC s) x, mulOp_coeFn hφ hC0 hC y] with a e1 e2
+  simp only [e1, e2, Function.comp_apply, RCLike.inner_apply', map_mul, RCLike.conj_conj]
+  ring
+
+/-- **`E(A)` is self-adjoint** `E(A)* = E(A)` (the indicator symbol is real, `conj 𝟙_A = 𝟙_A`).  Together with
+    `indMul_idempotent` this is exactly: `E(A)` is an **orthogonal projection** — the spectral projection of
+    the position observable. -/
+theorem indMul_isSelfAdjoint {A : Set α} (hA : MeasurableSet A) :
+    IsSelfAdjoint (indMul (μ := μ) hA) := by
+  rw [isSelfAdjoint_iff, ContinuousLinearMap.star_eq_adjoint, indMul, mulOp_adjoint]
+  exact mulOp_congr _ _ _ (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A)
+    (funext fun s => by
+      by_cases h : s ∈ A <;> simp [indSymbol, Set.indicator_of_mem, Set.indicator_of_notMem, h])
 
 end QIQTH.Spectral.Multiplication
