@@ -113,6 +113,11 @@ def _read_arg(pp, i):
         i += 1
     if i >= n:
         return None, i
+    # an unparenthesized `fun … => …` / `λ …` argument binds maximally — it runs
+    # to the end of the enclosing scope (here, the rest of the string, since a
+    # parenthesised lambda is caught by the balanced-group branch below).
+    if pp[i] == "λ" or re.match(r"fun\b", pp[i:]):
+        return pp[i:], n
     if pp[i] in "([":
         close = ")" if pp[i] == "(" else "]"
         depth, j = 0, i

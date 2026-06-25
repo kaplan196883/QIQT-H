@@ -90,25 +90,58 @@ label = "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, r
 name_regex = "^(hsymm|hsymm_gi|hinv|hCg|hCgi|hPP|hPP'|hcong|hT_symm|hbar0|hbar_pos|heta|ha|hφ|hmw|hf2|hf_int|hF0_int|hfd|hf'_meas|hB|hreg|conserv|hm|hVboost|hpp_nn|hpp1|hpp0)$"
 
 # --- LaTeX rendering (consumed by `python -m lean_track latex -c tracks/gr.toml`) ---
-# Map project / Mathlib operator names to readable math macros. Keys match either a
-# full qualified name or its last segment; anything unmapped becomes \mathrm{name}.
+# Maps project / Mathlib names to readable math. Keys match a full qualified name or
+# its last segment; unmapped names fall back to \mathrm{name}. Values are TOML literal
+# strings ('...') so backslashes need no escaping. A value containing #k is an
+# APPLIED-NOTATION TEMPLATE: it consumes the next k application arguments (balanced
+# (...) groups or single atoms) and substitutes #1.. into the result.
+#
+# CONVENTION NOTES (please sanity-check the index orders, which the Lean signatures
+# fix but the math notation makes a choice about):
+#  * covDerivVec g gi V ν μ y  is read as (∇V) with lower direction ν, upper comp μ.
+#  * gm (EinsteinEOS.gm) is the Minkowski metric, written η_{kl}; the *capacity*
+#    constant is a separate scalar also named η in Lean — both print as η.
+#  * BL M v is the quadratic form M(v,v) (used as the null condition BL(g x) v = 0).
 [latex.notation]
-# Plain atoms (head-symbol replacement).
-"boxField" = "\\Box"
-# Applied-notation templates: #k is the k-th application argument. These typeset
-# the tensors with index subscripts and an explicit evaluation point, e.g.
-#   einsteinTensor g gi μ ν x  ->  G_{μν}(x)
-#   kgStress m φ g gi x μ ν     ->  T_{μν}(x)
-"einsteinTensor" = "G_{#3#4}(#5)"
-"kgStress" = "T_{#6#7}(#5)"
-"covDerivVec" = "\\nabla"
-"expansion" = "\\theta"
-"Shannon" = "S"
-"KL" = "D_{\\mathrm{KL}}"
-"BL" = "\\mathrm{BL}"
-"Point" = "M"
-"hbar" = "\\hbar"
-"Fintype.card" = "\\#"
-"card" = "\\#"
-"Finset.univ" = ""
-"univ" = ""
+
+# spacetime / index sets
+"Point"          = 'M^{#1}'                 # Point 4            -> M^4
+
+# curvature & stress (Curvature.*)
+"boxField"       = '(\Box #1)(#4)'          # boxField φ g gi x  -> (□φ)(x)
+"kgStress"       = 'T(#5)'                  # kgStress m φ g gi x [μ ν] -> T(x) [μ ν]
+                                            # (5-arg natural form: appears both as the
+                                            #  tensor T(x) inside BL(...) and fully
+                                            #  applied T(x) μ ν in the conclusion)
+"einsteinTensor" = 'G_{#3#4}(#5)'           # einsteinTensor g gi μ ν x -> G_{μν}(x)
+"ricci"          = 'R_{#3#4}(#5)'           # ricci g gi i j x   -> R_{ij}(x)
+"scalarCurv"     = 'R(#3)'                  # scalarCurv g gi y  -> R(y)
+"covDerivVec"    = '(\nabla #3)_{#4}{}^{#5}(#6)'   # see convention note
+"expansion"      = '\theta(#4)'             # expansion g gi V y -> θ(y)
+"pd"             = '\partial_{#2}(#1)(#3)'  # pd f ν x           -> ∂_ν(f)(x)
+
+# Einstein equation-of-state layer (EinsteinEOS.*)
+"div02"          = '(\nabla\cdot #3)_{#4}(#5)'  # div02 g gi T ν x -> (∇·T)_ν(x)
+"gm"             = '\eta_{#1#2}'            # Minkowski metric   -> η_{kl}
+"BL"             = '#1(#2,#2)'              # BL (g x) v         -> (g x)(v,v)
+
+# entropy / probability (BranchLedger.*, RelEntPositivity.*)
+"Shannon"        = 'S(#2)'                  # Shannon univ p     -> S(p)
+"KL"             = 'D_{\mathrm{KL}}(#2\,\|\,#3)'   # KL univ p q -> D_KL(p‖q)
+"pp"             = 'p'                      # branch-probability distribution
+"Pinv"           = 'P^{-1}'
+
+# analysis predicates (Mathlib)
+"ContDiff"       = '(#3)\in C^{\infty}'     # ContDiff ℝ ⊤ f     -> (f) ∈ C^∞
+"HasDerivAt"     = "(#1)'(#3)=#2"           # HasDerivAt f d a   -> (f)'(a)=d
+"Fintype.card"   = '\#'
+"card"           = '\#'
+"Finset.univ"    = ''
+"univ"           = ''
+"hbar"           = '\hbar'
+
+# free-field / one-particle support layer (Fock.*, StandardSubspaceModular.*) — light
+# atoms; the heavier operator-algebra machinery falls back to \mathrm{name}.
+"ppMetric"       = 'g^{\mathrm{pp}}'
+"ppMetricInv"    = '(g^{\mathrm{pp}})^{-1}'
+"Tkk"            = 'T_{kk}'
