@@ -157,6 +157,19 @@ specialization).
   via `matterRepFun`-level a.e. identities (`modularAut_one`/`modularAut_mul`) + `ContinuousLinearMap.ext`. So
   **`π : M → B(L²(ℝ;H))` is a unital algebra homomorphism** — the matter side of the crossed product. Axiom-free;
   budget 0; wired into AxiomAudit.
-- **NEXT: Phase 1.3 (the `*`)** — `adjoint(π(a)) = π(a⋆)` via the `L²` inner product `⟨π(a)ξ,η⟩ = ∫⟨σ_{-s}(a)(ξ s),η s⟩`
-  + the pointwise adjoint `σ_{-s}(a)⋆ = σ_{-s}(a⋆)` (`modularAut_star`). Needs the L²-inner-product integral API;
-  the remaining piece of "unital `*`-homomorphism". Phases 2–6 (λ_t, covariance, Stone, trace) separate.
+- **Phase 1.3 (the `*`) ⛔ recorded blocker** — `modularAut_adjoint` (`σ_t(a⋆)=σ_t(a)⋆`) ✅ done; but the operator
+  statement `adjoint(π(a)) = π(a⋆)` is **blocked on an Lp/RCLike instance diamond**: the *math is complete* (via
+  `MeasureTheory.L2.inner_def` `⟨ξ,η⟩=∫⟨ξ s,η s⟩` + the fiberwise adjoint, `⟨π(a)ξ,η⟩=⟨ξ,π(a⋆)η⟩` pointwise), but
+  `ContinuousLinearMap.eq_adjoint_iff` fails to unify the `ℂ` semiring instance on `Lp H 2 volume`
+  (`Complex.instSemiring` vs the `Field`-derived `RCLike` path — a Mathlib instance-diamond, orthogonal to the
+  physics; the *statement* elaborates, only the proof's unification fails). The substantive content — `π` a unital
+  **algebra** homomorphism — is complete.
+
+### Phase 1 status — operator-valued Lp multiplication DONE (the matter representation π(a))
+**Delivered (axiom-free, budget 0):** `π(a) = matterRep S a : L²(ℝ;H) →L[ℂ] L²(ℝ;H)`, a bounded operator
+(`‖π(a)‖ ≤ ‖a‖`) and a **unital algebra homomorphism** `M → B(L²(ℝ;H))` (`matterRep_one`, `matterRep_mul`),
+built from scratch over a strongly-continuous (non-norm-measurable) modular flow — the operator-valued Lp
+multiplication that was the "real wall" of Phase 1. The matter side of the crossed product `M ⋊_σ ℝ` exists.
+**Residual:** the `*`-property (adjoint), blocked on an Lp/RCLike instance diamond (not a math gap).
+**NEXT (separate):** Phase 2 (translation unitary group λ_t via `DomAddAct`), Phase 3 (covariance), then the
+frontiers (Stone, the trace). The `1/4` coefficient stays the cited UV datum throughout.

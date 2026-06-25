@@ -160,4 +160,19 @@ theorem matterRep_mul (S : StandardSubspace H) (a b : H →L[ℂ] H) :
     matterRep S (a * b) = matterRep S a ∘L matterRep S b :=
   ContinuousLinearMap.ext (fun ξ => matterRepFun_mul S a b ξ)
 
+/-- The modular automorphism commutes with the adjoint: `σ_t(a⋆) = σ_t(a)⋆` (from `modularAut_star`). -/
+theorem modularAut_adjoint (S : StandardSubspace H) (t : ℝ) (a : H →L[ℂ] H) :
+    modularAut S t (ContinuousLinearMap.adjoint a)
+      = ContinuousLinearMap.adjoint (modularAut S t a) := by
+  rw [← ContinuousLinearMap.star_eq_adjoint, ← ContinuousLinearMap.star_eq_adjoint]
+  exact (modularAut_star S t a).symm
+
+/- **Phase 1.3 (the `*`) — `adjoint(π(a)) = π(a⋆)` — BLOCKED on an Lp/RCLike instance diamond.**  The math is
+   complete: via `MeasureTheory.L2.inner_def` (`⟨ξ,η⟩ = ∫⟨ξ s, η s⟩`) and the fiberwise adjoint
+   `σ_{-s}(a)⋆ = σ_{-s}(a⋆)` (`modularAut_adjoint`), `⟨π(a)ξ,η⟩ = ⟨ξ,π(a⋆)η⟩` pointwise.  But
+   `ContinuousLinearMap.eq_adjoint_iff` fails to unify the `ℂ` semiring instance on `Lp H 2 volume`
+   (`Complex.instSemiring` vs the `Field`-derived `RCLike` path — an instance-diamond, orthogonal to the
+   physics).  Recorded as the one residual Phase-1 piece; the unital ALGEBRA homomorphism (`matterRep_one`/`_mul`)
+   is the substantive content and is complete. -/
+
 end QIQTH.StandardSubspaceModular

@@ -4359,6 +4359,7 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.matterRep
 #print axioms QIQTH.StandardSubspaceModular.matterRep_one
 #print axioms QIQTH.StandardSubspaceModular.matterRep_mul
+#print axioms QIQTH.StandardSubspaceModular.modularAut_adjoint
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable
