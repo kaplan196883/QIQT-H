@@ -34,7 +34,9 @@ type ascriptions are factored out (free variables are implicitly universally qua
 over spacetime points, indices $\\mu,\\nu$ over $\\{0,1,2,3\\}$, $v$ over tangent vectors), the
 **conclusion leads** in display math, the **load-bearing hypotheses are shown**, and routine
 regularity / setup / typeclass conditions are summarized by count (the full assumption surface lives
-in each track's PDF). Labels like `hFlux` are the Lean hypothesis names. Regenerate with
+in each track's PDF). Labels like `hFlux` are the Lean hypothesis names. To explore the full
+dependency network — every lemma and definition these results rest on, hyperlinked, with source
+links — see the [**theorem browser**](/browser). Regenerate with
 `python scripts/lean-track.py latex -c tracks/<id>.toml`.
 """
 

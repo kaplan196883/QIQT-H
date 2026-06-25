@@ -1,0 +1,84 @@
+/-
+  AUTO-GENERATED dependency-closure probe (written by lean_track). Lean facts only.
+  Starting from the root targets, crawls the *project* dependency closure (declarations
+  whose name is under `QIQTH`), emitting for each: its delaborated+parenthesized TYPE
+  as a Syntax tree (for the nice renderer), the project declarations it references in
+  its statement and proof (the hyperlink edges), and its source module + line.
+
+  Placeholders @@IMPORT@@, @@TARGETS@@, @@OUTPUT@@, @@MAXDECLS@@ filled by Python.
+-/
+import @@IMPORT@@
+
+open Lean Elab Command Meta PrettyPrinter
+
+def reportTargets : List Name := [@@TARGETS@@]
+def maxDecls : Nat := @@MAXDECLS@@
+
+partial def synToJson : Syntax → Json
+  | Syntax.missing => Json.mkObj [("k", Json.str "missing")]
+  | Syntax.atom _ v => Json.mkObj [("k", Json.str "atom"), ("v", Json.str v)]
+  | Syntax.ident _ _ v _ => Json.mkObj [("k", Json.str "ident"), ("v", Json.str v.toString)]
+  | Syntax.node _ kind args =>
+      Json.mkObj [("k", Json.str "node"), ("kind", Json.str kind.toString),
+                  ("args", Json.arr (args.map synToJson))]
+
+def delabP (e : Expr) : MetaM (Option Syntax) :=
+  (do let t ← delab e; let s ← parenthesizeTerm t.raw; pure (some s)) <|>
+  (do try pure (some (← delab e).raw) catch _ => pure none)
+
+/-- Module name a declaration lives in (its file), if imported. -/
+def moduleOf (n : Name) : MetaM (Option Name) := do
+  let env ← getEnv
+  match env.getModuleIdxFor? n with
+  | some idx => pure (env.header.moduleNames[idx.toNat]?)
+  | none => pure none
+
+/-- A "project" declaration: under the `QIQTH` namespace and not compiler-internal. -/
+def isProj (n : Name) : Bool :=
+  n.getRoot == `QIQTH && !n.isInternalDetail
+
+def lineOf (n : Name) : MetaM (Option Nat) := do
+  match (← findDeclarationRanges? n) with
+  | some r => pure (some r.range.pos.line)
+  | none => pure none
+
+def usedConsts : ConstantInfo → Array Name
+  | info =>
+    let t := info.type.getUsedConstants
+    let v := match info with
+      | .thmInfo d => d.value.getUsedConstants
+      | .defnInfo d => d.value.getUsedConstants
+      | _ => #[]
+    t ++ v
+
+def kindStr : ConstantInfo → String
+  | .thmInfo _ => "thm" | .defnInfo _ => "def" | .axiomInfo _ => "axiom"
+  | .opaqueInfo _ => "opaque" | .inductInfo _ => "inductive"
+  | .ctorInfo _ => "ctor" | _ => "other"
+
+partial def crawl (visited : IO.Ref NameSet) (out : IO.Ref (Array Json)) (n : Name) :
+    MetaM Unit := do
+  if (← visited.get).contains n then return
+  if (← out.get).size ≥ maxDecls then return
+  visited.modify (·.insert n)
+  let infoOpt ← (do try pure (some (← getConstInfo n)) catch _ => pure none)
+  let some info := infoOpt | return
+  let mut proj : Array Name := #[]
+  for c in usedConsts info do
+    if c != n && isProj c && !proj.contains c then
+      proj := proj.push c
+  let tyStx ← delabP info.type
+  out.modify (·.push (Json.mkObj [
+    ("name", Json.str n.toString),
+    ("kind", Json.str (kindStr info)),
+    ("module", Json.str (((← moduleOf n).map (·.toString)).getD "")),
+    ("line", match (← lineOf n) with | some l => Json.num l | none => Json.null),
+    ("uses", Json.arr (proj.map (fun c => Json.str c.toString))),
+    ("type", match tyStx with | some s => synToJson s | none => Json.null)]))
+  for c in proj do crawl visited out c
+
+run_cmd liftTermElabM do
+  let visited ← IO.mkRef ({} : NameSet)
+  let out ← IO.mkRef (#[] : Array Json)
+  for tgt in reportTargets do crawl visited out tgt
+  IO.FS.writeFile "@@OUTPUT@@" (Json.arr (← out.get)).compress

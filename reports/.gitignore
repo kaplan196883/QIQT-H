@@ -8,3 +8,6 @@
 *.out
 *.toc
 *.pdf
+
+# browser dependency-closure cache (regenerate via probe.browser_closure)
+browser/*.json

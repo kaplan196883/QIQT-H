@@ -17,6 +17,7 @@ LAKE = os.path.expanduser("~/.elan/bin/lake")
 EXTRACT_TMPL = HERE / "probe_extract.lean.tmpl"
 DISCHARGE_TMPL = HERE / "probe_discharge.lean.tmpl"
 SYNTAX_TMPL = HERE / "probe_syntax.lean.tmpl"
+BROWSER_TMPL = HERE / "probe_browser.lean.tmpl"
 STANDARD_AXIOMS = ["propext", "Classical.choice", "Quot.sound"]
 
 
@@ -42,7 +43,7 @@ def git_rev():
         return "?"
 
 
-def _run_probe(tmpl_path, names, lean_import, timeout, tag):
+def _run_probe(tmpl_path, names, lean_import, timeout, tag, maxdecls=1000):
     """Fill a probe template, run `lake env lean` (cwd=MATHLIB), return the JSON it writes."""
     targets = ", ".join("`" + n for n in names)
     probe = MATHLIB / "QIQTH" / f"_lt_probe_{tag}.lean"   # temp .lean (gitignored)
@@ -51,6 +52,7 @@ def _run_probe(tmpl_path, names, lean_import, timeout, tag):
     src = (tmpl_path.read_text(encoding="utf-8")
            .replace("@@IMPORT@@", lean_import)
            .replace("@@TARGETS@@", targets)
+           .replace("@@MAXDECLS@@", str(maxdecls))
            .replace("@@OUTPUT@@", out_name))
     probe.write_text(src, encoding="utf-8")
     try:
@@ -79,3 +81,8 @@ def discharge(names, cfg):
 def syntax_trees(names, cfg):
     return _run_probe(SYNTAX_TMPL, names, cfg["project"]["lean_import"],
                       cfg["project"]["timeout_sec"], "sx")
+
+
+def browser_closure(names, cfg, maxdecls=1000):
+    return _run_probe(BROWSER_TMPL, names, cfg["project"]["lean_import"],
+                      cfg["project"]["timeout_sec"], "br", maxdecls=maxdecls)
