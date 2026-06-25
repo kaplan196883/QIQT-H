@@ -206,6 +206,10 @@ item.** Never claim the `1/4`.
     **`d/dt⟨ξ,Δ^{it}ξ⟩|₀ = i·S`** where `S = cgpEntropy` (combining the generator `iK` with the operator first law
     `⟨K⟩=S`, `modK_inner_self`). This ties the entire `C₀` modular-flow Stone package **directly to the entanglement
     entropy** — the infinitesimal JLMS first law at the operator level.
+  • **CANONICAL `Δ^{it}=e^{−itK}` (generator `−iK`) NOW LANDED ✅** — `hasDerivAt_modChar`: the flow
+    `boundedFC(e^{it·(−kFn)}(R)) = modChar(t) = Δ^{it}` on the spectrum has Stone generator `−i·modK = −iK`, i.e.
+    `Δ^{it}=e^{−itK}` *literally* (textbook sign). Uses the new symbol-linearity `fcOp_neg` (`∫(−kFn)dE = −modK`)
+    on top of the general capstone — the canonical statement now sits directly in the library.
   NB the Bochner-over-`scalarMeasure` DCT route hits a `whnf` wall — the `lintegral`/`HasDerivAt` route is the way.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,

@@ -154,4 +154,31 @@ theorem hasDerivAt_modFlow_inner (S : StandardSubspace H) {ξ : H}
     exact modK_inner_self S ξ hdom hspec
   rwa [hval] at h
 
+/-- **The modular flow in the canonical `Δ^{it}=e^{−itK}` direction (generator `−iK`).**  The flow
+    `t ↦ boundedFC(e^{it·(−kFn)}(R)) ξ` — which on the spectrum `(0,2)` is exactly `modChar(t) = Δ^{it}`
+    (by `modChar_eq_exp_neg_kFn`, `e^{it·(−kFn r)} = e^{−(i·t·kFn r)} = modChar t r`) — has Stone generator
+    `−i·modK = −iK`:  `d/dt(Δ^{it} ξ)|₀ = −i·K ξ`,  i.e. `Δ^{it}=e^{−itK}` literally.  Uses the symbol-linearity
+    `fcOp_neg` (`∫(−kFn) dE = −modK`) on top of the general capstone.  Axiom-free. -/
+theorem hasDerivAt_modChar (S : StandardSubspace H) {ξ : H}
+    (hdom : ξ ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => kFn ω.val)) :
+    HasDerivAt
+      (fun t : ℝ => (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).boundedFC
+        (QIQTH.Spectral.ProjectionValuedMeasure.measurable_expSymbol (kFn_val_measurable S).neg t)
+        zero_le_one (QIQTH.Spectral.ProjectionValuedMeasure.norm_expSymbol_le t) ξ)
+      (-(Complex.I • modK S ξ)) 0 := by
+  have hdom' : ξ ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => -kFn ω.val) := by
+    rw [ProjectionValuedMeasure.mem_fcDomain, ProjectionValuedMeasure.fcEnergy_neg]
+    exact ((PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).mem_fcDomain).mp hdom
+  have h := (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).hasDerivAt_boundedFC_expSymbol
+    (kFn_val_measurable S).neg hdom'
+  have hval : Complex.I • (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcOp
+      (kFn_val_measurable S).neg ξ
+      = -(Complex.I • (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcOp
+        (kFn_val_measurable S) ξ) := by
+    rw [(PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcOp_neg (kFn_val_measurable S) hdom,
+      smul_neg]
+  rwa [hval] at h
+
 end QIQTH.StandardSubspaceModular

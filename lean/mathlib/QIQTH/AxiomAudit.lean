@@ -1305,6 +1305,9 @@ namespace QIQTH.AxiomAudit
 -- ★★ INFINITESIMAL JLMS FIRST LAW d/dt⟨Δ^{it}⟩|₀ = i·S: the derivative of the modular flow's diagonal matrix
 -- element ⟪ξ,Δ^{−it}ξ⟫ at t=0 is i·cgpEntropy (generator iK + the operator first law ⟨K⟩=S, modK_inner_self).
 -- Ties the C₀ modular-flow Stone package directly to the entanglement entropy.
+#print axioms QIQTH.StandardSubspaceModular.hasDerivAt_modChar
+-- ★ CANONICAL Δ^{it}=e^{−itK} (generator −iK): the flow boundedFC(e^{it·(−kFn)}(R)) = modChar(t) = Δ^{it} on the
+-- spectrum has Stone generator −i·modK = −iK, i.e. Δ^{it}=e^{−itK} literally. Uses fcOp_neg (∫(−kFn)dE=−modK).
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
