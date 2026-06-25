@@ -1382,6 +1382,13 @@ namespace QIQTH.AxiomAudit
 -- Bₙ↑⋃ₖBₖ, E(Bₙ)f → E(⋃ₖBₖ)f in L². Proof: ‖E(Bₙ)f−E(⋃)f‖²=‖E((⋃)\Bₙ)f‖²=∫_{(⋃)\Bₙ}‖f‖² (subtractivity brick 10
 -- + brick 8), and (⋃)\Bₙ↓∅ ⟹ tail→∫_∅=0 (brick 9 engine), then ‖·‖²→0 ⟹ ‖·‖→0. THE genuine countable-additivity
 -- property of the position PVM — the last structural brick before bundling the ProjectionValuedMeasure.
+#print axioms QIQTH.Spectral.Multiplication.indMul_comp_disjoint
+#print axioms QIQTH.Spectral.Multiplication.indMul_inner_orthogonal
+-- ★ MULTIPLICATION PVM brick 12 — PAIRWISE ORTHOGONALITY of the spectral projections: for disjoint measurable A,B,
+-- E(A)∘E(B)=0 (indMul_comp_disjoint, via E(A)E(B)=E(A∩B)=E(∅)=0) and ⟪E(A)x,E(B)x⟫=0 (indMul_inner_orthogonal, via
+-- self-adjointness + the composition). The components live in orthogonal subspaces L²(A)⟂L²(B). This is the
+-- orthogonality input to the UNCONDITIONAL (pairwise-disjoint) σ-additivity HasSum form the ProjectionValuedMeasure
+-- record requires. Next: range-additivity ∑_{n<N}E(Aₙ)=E(⋃_{n<N}Aₙ) → Summable via OrthogonalFamily → bundle the PVM.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

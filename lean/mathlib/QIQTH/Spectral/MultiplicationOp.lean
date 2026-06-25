@@ -269,6 +269,28 @@ theorem indMul_union_disjoint {A B : Set α} (hA : MeasurableSet A) (hB : Measur
     (indSymbol_measurable hB) zero_le_one (indSymbol_norm_le B)]
   exact mulOp_congr _ _ _ _ _ _ (indSymbol_union_disjoint h)
 
+/-- **Orthogonality of the projections at the operator level:** for disjoint measurable `A, B` the
+    spectral projections compose to zero, `E(A) ∘ E(B) = 0` (`A∩B = ∅`, so `𝟙_{A∩B} = 0`). -/
+theorem indMul_comp_disjoint {A B : Set α} (hA : MeasurableSet A) (hB : MeasurableSet B)
+    (h : Disjoint A B) : indMul (μ := μ) hA ∘L indMul hB = 0 := by
+  have hAB : A ∩ B = ∅ := Set.disjoint_iff_inter_eq_empty.mp h
+  rw [indMul_inter hA hB]
+  simp only [indMul]
+  rw [mulOp_congr (indSymbol_measurable (hA.inter hB)) zero_le_one (indSymbol_norm_le _)
+    measurable_const (norm_nonneg (0 : ℂ)) (fun _ => le_rfl)
+    (funext fun s => by simp [indSymbol, hAB]), mulOp_const, zero_smul]
+
+/-- **Pairwise orthogonality of the spectral-projection vectors:** for disjoint measurable `A, B`,
+    `⟪E(A) x, E(B) x⟫ = 0` — the projected components live in orthogonal subspaces `L²(A) ⟂ L²(B)`.
+    The orthogonality input to the operator σ-additivity in `HasSum` form (unconditional, pairwise-disjoint). -/
+theorem indMul_inner_orthogonal {A B : Set α} (hA : MeasurableSet A) (hB : MeasurableSet B)
+    (h : Disjoint A B) (x : Lp ℂ 2 μ) :
+    inner ℂ (indMul (μ := μ) hA x) (indMul hB x) = 0 := by
+  rw [← ContinuousLinearMap.adjoint_inner_right,
+    ← ContinuousLinearMap.star_eq_adjoint, (indMul_isSelfAdjoint hA).star_eq,
+    ← ContinuousLinearMap.comp_apply, indMul_comp_disjoint hA hB h,
+    ContinuousLinearMap.zero_apply, inner_zero_right]
+
 theorem indSymbol_sdiff {A B : Set α} (hAB : A ⊆ B) :
     indSymbol B = fun s => indSymbol A s + indSymbol (B \ A) s := by
   funext s

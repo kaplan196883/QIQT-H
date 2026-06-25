@@ -303,6 +303,13 @@ item.** Never claim the `1/4`.
   (strong-convergence) property of the position PVM — the last structural brick before bundling the
   `ProjectionValuedMeasure`. Next: bundle the `PVContent`/`ProjectionValuedMeasure` record (PV-content from
   univ/empty/inter/finite-additivity bricks + this σ-additivity) → Fourier conjugation → momentum PVM → boost generator.
+  **Brick 12 — pairwise orthogonality of the spectral projections ✅**: for disjoint measurable `A,B`,
+  `E(A)∘E(B)=0` (`indMul_comp_disjoint`, via `E(A)E(B)=E(A∩B)=E(∅)=0`) and `⟪E(A)x,E(B)x⟫=0`
+  (`indMul_inner_orthogonal`, self-adjointness + the composition). The projected components live in orthogonal
+  subspaces `L²(A)⟂L²(B)` — the orthogonality input to the UNCONDITIONAL (pairwise-disjoint) σ-additivity in
+  `HasSum` form that the `ProjectionValuedMeasure` record's `hasSum_iUnion` field demands. Next: range-additivity
+  `∑_{n<N}E(Aₙ)=E(⋃_{n<N}Aₙ)` → `Summable` via `OrthogonalFamily.summable_iff_norm_sq_summable` (∑‖E(Aₙ)x‖²=‖E(⋃)x‖²
+  bounded by ‖x‖²) → identify the limit with `E(⋃)x` (brick 11) → bundle the `ProjectionValuedMeasure`.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,
   `oneModeSympEig_symplectic_invariant` — `ν` is a basis-independent physical invariant). The `N`-mode normal-form
