@@ -112,10 +112,13 @@ item.** Never claim the `1/4`.
   pathology class as `CrossedProductRep`. **✅ WORKAROUND LANDED** — the bound at the `lintegral` (ℝ≥0∞) level
   `fcTrunc_diff_lintegral_le` (`∫⁻ofReal((fₘ−fₙ)²) ≤ 2∫⁻ofReal((f−fₘ)²)+2∫⁻ofReal((f−fₙ)²)`, via
   `lintegral_mono`/`_add_left`/`_const_mul`) builds clean — confirming the blowup was Bochner-`Integrable`-
-  specific; `lintegral` over `scalarMeasure` elaborates fine. NEXT: `CauchySeq` via `‖boundedFC(fₘ)x −
-  boundedFC(fₙ)x‖² = ∫(fₘ−fₙ)² = (∫⁻ofReal(...)).toReal ≤ (2A_m+2A_n).toReal → 0` (the lintegral bound + `toReal`
-  monotone/continuous, all ℝ≥0∞, no Bochner `Integrable`) ⟹ the strong limit `fcLinear x := lim boundedFC(fₙ)x`
-  (the operator `∫f dE`) + linearity + self-adjointness.
+  specific; `lintegral` over `scalarMeasure` elaborates fine. **Operator sequence + diff-norm bridge ✅**
+  (`fcSeq hf n x := boundedFC(fₙ)x` the ℂ-truncation operator; `fcSeq_norm_sub_sq`:
+  `‖fcSeq m x − fcSeq n x‖² = (∫⁻ofReal((fₘ−fₙ)²)dμ_x).toReal` — via `norm_boundedFC_sub_sq` + the real-coercion
+  `‖↑a−↑b‖²=(a−b)²` + `∫g=(∫⁻ofReal g).toReal`; calc form to beat the symbol-lambda beta-redexes). NEXT:
+  `‖fcSeq m x − fcSeq n x‖² ≤ (2A_m+2A_n).toReal → 0` (bridge + `fcTrunc_diff_lintegral_le` + `toReal` monotone +
+  `A_n→0`) ⟹ `CauchySeq` ⟹ the strong limit `fcLinear x := lim fcSeq n x` (the operator `∫f dE`) + linearity +
+  self-adjointness.
 - [ ] **M2** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1 closed)
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)

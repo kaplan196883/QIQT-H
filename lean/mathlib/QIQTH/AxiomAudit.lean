@@ -1209,6 +1209,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_diff_lintegral_le
 -- the Cauchy bound at the ℝ≥0∞ level: ∫⁻ofReal((fₘ−fₙ)²) ≤ 2∫⁻ofReal((f−fₘ)²)+2∫⁻ofReal((f−fₙ)²) —
 -- sidesteps the Bochner Integrable whnf blowup (lintegral over scalarMeasure elaborates cleanly).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcSeq_norm_sub_sq
+-- the operator sequence fcSeq n x := boundedFC(fₙ)x; its diff-norm as a lintegral:
+-- ‖fcSeq m x − fcSeq n x‖² = (∫⁻ ofReal((fₘ−fₙ)²) dμ_x).toReal — bridges to the ℝ≥0∞ Cauchy bound.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

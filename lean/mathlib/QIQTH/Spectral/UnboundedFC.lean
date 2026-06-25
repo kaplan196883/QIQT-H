@@ -369,4 +369,30 @@ theorem fcTrunc_diff_lintegral_le {f : Ω → ℝ} (hf : Measurable f) (x : H) (
   rw [heq]
   exact ENNReal.ofReal_le_ofReal (fcTrunc_diff_sq_le f n m ω)
 
+/-- **The approximating operator sequence** `uₙ x := boundedFC(fₙ) x` (with `fₙ` the bounded ℂ-truncation
+    of `f`).  Its strong limit (once shown Cauchy) is the unbounded operator `∫ f dE` applied to `x`. -/
+noncomputable def fcSeq {f : Ω → ℝ} (hf : Measurable f) (n : ℕ) (x : H) : H :=
+  P.boundedFC (Complex.continuous_ofReal.measurable.comp (fcTrunc_measurable hf n)) n.cast_nonneg
+    (fun ω => (Complex.norm_real (fcTrunc f n ω)).le.trans
+      ((Real.norm_eq_abs (fcTrunc f n ω)).le.trans (fcTrunc_abs_le f n ω))) x
+
+/-- The difference-norm of the approximating sequence, as a `lintegral` (ℝ≥0∞, blowup-free):
+    `‖uₘ x − uₙ x‖² = (∫⁻ ofReal((fcTrunc m − fcTrunc n)²) dμ_x).toReal`.  From `norm_boundedFC_sub_sq`,
+    the real-coercion `‖↑a − ↑b‖² = (a−b)²`, and `∫ g = (∫⁻ ofReal g).toReal`. -/
+theorem fcSeq_norm_sub_sq {f : Ω → ℝ} (hf : Measurable f) (x : H) (n m : ℕ) :
+    ‖P.fcSeq hf m x - P.fcSeq hf n x‖ ^ 2
+      = (∫⁻ ω, ENNReal.ofReal ((fcTrunc f m ω - fcTrunc f n ω) ^ 2) ∂(P.scalarMeasure x)).toReal := by
+  have hpt : ∀ ω, ‖(fcTrunc f m ω : ℂ) - (fcTrunc f n ω : ℂ)‖ ^ 2
+      = (fcTrunc f m ω - fcTrunc f n ω) ^ 2 := fun ω => by
+    rw [← Complex.ofReal_sub, Complex.norm_real, Real.norm_eq_abs, sq_abs]
+  calc ‖P.fcSeq hf m x - P.fcSeq hf n x‖ ^ 2
+      = ∫ ω, ‖(fcTrunc f m ω : ℂ) - (fcTrunc f n ω : ℂ)‖ ^ 2 ∂(P.scalarMeasure x) := by
+        simp only [fcSeq]; exact P.norm_boundedFC_sub_sq _ _ _ _ _ _ x
+    _ = ∫ ω, (fcTrunc f m ω - fcTrunc f n ω) ^ 2 ∂(P.scalarMeasure x) :=
+        MeasureTheory.integral_congr_ae (Filter.Eventually.of_forall hpt)
+    _ = (∫⁻ ω, ENNReal.ofReal ((fcTrunc f m ω - fcTrunc f n ω) ^ 2) ∂(P.scalarMeasure x)).toReal :=
+        MeasureTheory.integral_eq_lintegral_of_nonneg_ae
+          (Filter.Eventually.of_forall fun ω => sq_nonneg _)
+          (((fcTrunc_measurable hf m).sub (fcTrunc_measurable hf n)).pow_const 2).aestronglyMeasurable
+
 end QIQTH.Spectral.ProjectionValuedMeasure
