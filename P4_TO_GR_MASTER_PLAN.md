@@ -333,6 +333,16 @@ item.** Never claim the `1/4`.
   This is the orthogonal-family bridge the `hasSum_iUnion` bundle needed — the genuine Mathlib-grade step, now landed.
   Next: identify `∑' = E(⋃)x` (range partial sums `= E(⋃ᵢ₌₀ⁿAᵢ)x → E(⋃)x` via brick 11 + `HasSum.tendsto_sum_nat`,
   uniqueness of limits) → bundle the `ProjectionValuedMeasure` record.
+  **Brick 16 — THE POSITION PVM BUNDLED ✅ (`ProjectionValuedMeasure` complete)**: `hasSum_indMul_iUnion`
+  (`∑ₙE(Aₙ)x=E(⋃Aₙ)x` in `HasSum` form — `summable_indMul` brick 15 + range partial sums `E(⋃ᵢ₌₀ⁿAᵢ)x→E(⋃)x`
+  via brick 11 + uniqueness of limits) closes the last structure field, and `positionPVM :
+  ProjectionValuedMeasure α (Lp ℂ 2 μ)` (`QIQTH/Spectral/PositionPVM.lean`) bundles `E(A)=M_{𝟙_A}` with ALL fields
+  discharged: self-adjoint idempotents (bricks 2–3), `E(∅)=0`/`E(univ)=1`/`E(A∩B)=E(A)E(B)` (brick 4), strong
+  `HasSum` σ-additivity (bricks 8–15). **The canonical position PVM is now a genuine `ProjectionValuedMeasure`,
+  axiom-free (standard 3), budget 0 — the multiplication-PVM frontier (bricks 1–16) is COMPLETE.** It is the
+  Mathlib-contributable spectral measure of the position operator on `L²(μ)`. Next frontier: Fourier-Plancherel
+  conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
+  generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,
   `oneModeSympEig_symplectic_invariant` — `ν` is a basis-independent physical invariant). The `N`-mode normal-form

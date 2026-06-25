@@ -497,4 +497,35 @@ theorem indMul_tendsto_iUnion {B : ℕ → Set α} (hB : ∀ n, MeasurableSet (B
   rw [Real.sqrt_zero] at hsqrt
   exact hsqrt
 
+/-- **Unconditional (`HasSum`) σ-additivity of the position PVM:** for a pairwise-disjoint measurable family,
+    `∑ₙ E(Aₙ) x = E(⋃ₙ Aₙ) x` in the strong (`HasSum`) sense. Combines `summable_indMul` (the family is summable)
+    with the identification of the sum: the range partial sums `∑ᵢ₌₀ⁿ E(Aᵢ)x = E(⋃ᵢ₌₀ⁿ Aᵢ)x` (range additivity)
+    converge to `E(⋃Aₙ)x` (monotone σ-additivity, brick 11), so by uniqueness of limits the `HasSum` value is
+    `E(⋃Aₙ)x`. This is exactly the `ProjectionValuedMeasure.hasSum_iUnion` field. -/
+theorem hasSum_indMul_iUnion {A : ℕ → Set α} (hA : ∀ n, MeasurableSet (A n))
+    (hd : Pairwise (fun m n => Disjoint (A m) (A n))) (x : Lp ℂ 2 μ) :
+    HasSum (fun n => indMul (μ := μ) (hA n) x) (indMul (MeasurableSet.iUnion hA) x) := by
+  obtain ⟨S, hS⟩ := summable_indMul hA hd x
+  have hBmeas : ∀ n, MeasurableSet (⋃ i ∈ Finset.range n, A i) := fun n =>
+    (Finset.range n).measurableSet_biUnion (fun i _ => hA i)
+  have hmono : Monotone (fun n => ⋃ i ∈ Finset.range n, A i) := by
+    intro m n hmn
+    refine Set.iUnion₂_subset fun i hi => ?_
+    exact Set.subset_iUnion₂_of_subset i
+      (Finset.mem_range.mpr (lt_of_lt_of_le (Finset.mem_range.mp hi) hmn)) le_rfl
+  have hpartial : ∀ n, ∑ i ∈ Finset.range n, indMul (hA i) x = indMul (hBmeas n) x := fun n => by
+    rw [← ContinuousLinearMap.sum_apply, indMul_biUnion_disjoint (Finset.range n) A hA hd]
+  have hUeq : (⋃ n, ⋃ i ∈ Finset.range n, A i) = ⋃ n, A n := by
+    refine le_antisymm (Set.iUnion_subset fun n => Set.iUnion₂_subset fun i _ => Set.subset_iUnion A i)
+      (Set.iUnion_subset fun i => Set.subset_iUnion_of_subset (i + 1)
+        (Set.subset_iUnion₂_of_subset i (Finset.mem_range.mpr (Nat.lt_succ_self i)) le_rfl))
+  have htendU : Filter.Tendsto (fun n => indMul (hBmeas n) x) Filter.atTop
+      (nhds (indMul (MeasurableSet.iUnion hBmeas) x)) := indMul_tendsto_iUnion hBmeas hmono x
+  have hSeq : S = indMul (MeasurableSet.iUnion hA) x := by
+    have h1 : Filter.Tendsto (fun n => indMul (hBmeas n) x) Filter.atTop (nhds S) := by
+      simpa only [hpartial] using hS.tendsto_sum_nat
+    rw [← indMul_set_congr (MeasurableSet.iUnion hBmeas) (MeasurableSet.iUnion hA) hUeq]
+    exact tendsto_nhds_unique h1 htendU
+  rw [← hSeq]; exact hS
+
 end QIQTH.Spectral.Multiplication

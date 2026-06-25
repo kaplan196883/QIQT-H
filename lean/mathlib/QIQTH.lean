@@ -325,6 +325,9 @@ import QIQTH.Spectral.SpectralTheorem
 -- K = ∫ log(r/(2−r)) dE_R as a self-adjoint operator). Builds on scalarMeasure + the parallelogram law.
 import QIQTH.Spectral.UnboundedFC
 import QIQTH.Spectral.MultiplicationOp
+-- The POSITION PVM: E(A)=M_{𝟙_A} bundled as a genuine ProjectionValuedMeasure on L²(μ) (self-adjoint
+-- idempotents, PV-content, strong HasSum σ-additivity). The route to the momentum PVM (Fourier) / boost gen.
+import QIQTH.Spectral.PositionPVM
 -- Prize Stage 3.1 (finite case): the matrix spectral theorem packaged as a PVM — eigenprojections
 -- Pᵢ = U·diag(δᵢ)·U⋆ with ∑Pᵢ=1 (resolution of identity), Pᵢ²=Pᵢ, PᵢPⱼ=0, Pᵢ⋆=Pᵢ. The finite,
 -- axiom-free case of the bounded-spectral-theorem target (continuum stays open). Standard axioms:

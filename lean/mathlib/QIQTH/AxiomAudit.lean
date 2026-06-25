@@ -1412,6 +1412,15 @@ namespace QIQTH.AxiomAudit
 -- ∑‖E(Aₙ)x‖²≤‖x‖² (finite partial sums = ‖E(⋃ᵢ₌₀ⁿAᵢ)x‖²≤‖x‖² by OrthogonalFamily.norm_sum Pythagoras + brick 13
 -- range-additivity + brick 14 contractivity), so OrthogonalFamily.summable_iff_norm_sq_summable gives Summable.
 -- The OrthogonalFamily bridge that the hasSum_iUnion bundle needed. Next: identify ∑'=E(⋃)x (brick 11) → bundle PVM.
+#print axioms QIQTH.Spectral.Multiplication.hasSum_indMul_iUnion
+#print axioms QIQTH.Spectral.Multiplication.positionPVM
+-- ★ MULTIPLICATION PVM brick 16 — THE POSITION PVM BUNDLED (ProjectionValuedMeasure complete): hasSum_indMul_iUnion
+-- (∑ₙE(Aₙ)x=E(⋃Aₙ)x in HasSum form — summable brick 15 + range partial sums E(⋃ᵢ₌₀ⁿAᵢ)x→E(⋃)x via brick 11
+-- + uniqueness of limits) closes the last structure field. positionPVM : ProjectionValuedMeasure α (Lp ℂ 2 μ),
+-- E(A)=M_{𝟙_A} on measurable A (0 otherwise): self-adjoint idempotents (bricks 2–3), E(∅)=0/E(univ)=1/E(A∩B)=E(A)E(B)
+-- (brick 4), strong HasSum σ-additivity (bricks 8–15). The canonical position PVM — axiom-free, the Fourier-conjugate
+-- of which is the momentum PVM (route to the boost generator / WedgeKMSFlux #5). Bricks 1–16 = the genuine spectral
+-- measure of the position operator on L²(μ), Mathlib-contributable.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
