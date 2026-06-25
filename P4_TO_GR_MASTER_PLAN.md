@@ -109,12 +109,13 @@ item.** Never claim the `1/4`.
   `∫g=(∫⁻ofReal g).toReal` + `toReal` continuity). **⚠ CHECKPOINT — the Bochner integral-bound lemma
   `∫(fₘ−fₙ)²≤2∫(f−fₘ)²+2∫(f−fₙ)²` hit a `whnf` elaboration blowup** (heartbeats diverge past 800k) in the
   `Integrable.mono`/`integral_mono` chain over the `Measure.ofMeasurable`-defined `scalarMeasure x` — the same
-  pathology class as `CrossedProductRep`. All the underlying estimates (norm identity, difference-norm,
-  integrand bound `fcTrunc_diff_sq_le`, both tail-convergences) ARE proved; the blocker is purely the Lean
-  elaboration of the Bochner integrability bookkeeping. **Workaround (next fire):** prove the bound at the
-  `lintegral` (ℝ≥0∞) level (`lintegral_mono`/`_add`/`_const_mul`, no `Integrable`), OR isolate `scalarMeasure`
-  behind an opaque wrapper to stop the divergent `whnf`, then assemble `CauchySeq` ⟹ the strong limit
-  `fcLinear x := lim boundedFC(fₙ)x` (the operator `∫f dE`) + linearity + self-adjointness.
+  pathology class as `CrossedProductRep`. **✅ WORKAROUND LANDED** — the bound at the `lintegral` (ℝ≥0∞) level
+  `fcTrunc_diff_lintegral_le` (`∫⁻ofReal((fₘ−fₙ)²) ≤ 2∫⁻ofReal((f−fₘ)²)+2∫⁻ofReal((f−fₙ)²)`, via
+  `lintegral_mono`/`_add_left`/`_const_mul`) builds clean — confirming the blowup was Bochner-`Integrable`-
+  specific; `lintegral` over `scalarMeasure` elaborates fine. NEXT: `CauchySeq` via `‖boundedFC(fₘ)x −
+  boundedFC(fₙ)x‖² = ∫(fₘ−fₙ)² = (∫⁻ofReal(...)).toReal ≤ (2A_m+2A_n).toReal → 0` (the lintegral bound + `toReal`
+  monotone/continuous, all ℝ≥0∞, no Bochner `Integrable`) ⟹ the strong limit `fcLinear x := lim boundedFC(fₙ)x`
+  (the operator `∫f dE`) + linearity + self-adjointness.
 - [ ] **M2** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1 closed)
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)

@@ -1206,6 +1206,9 @@ namespace QIQTH.AxiomAudit
 -- the Cauchy integrand bound (fₘ−fₙ)² ≤ 2(f−fₘ)²+2(f−fₙ)² — truncation L²-convergence controls the diff-norm.
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_integral_sub_sq_tendsto
 -- Bochner form ∫|f−fₙ|²dμ_x → 0 (from the lintegral version via ∫g=(∫⁻ofReal g).toReal + toReal continuity).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_diff_lintegral_le
+-- the Cauchy bound at the ℝ≥0∞ level: ∫⁻ofReal((fₘ−fₙ)²) ≤ 2∫⁻ofReal((f−fₘ)²)+2∫⁻ofReal((f−fₙ)²) —
+-- sidesteps the Bochner Integrable whnf blowup (lintegral over scalarMeasure elaborates cleanly).
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

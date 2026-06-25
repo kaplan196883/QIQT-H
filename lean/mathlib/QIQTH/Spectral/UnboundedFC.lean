@@ -346,4 +346,27 @@ theorem fcTrunc_integral_sub_sq_tendsto {f : Ω → ℝ} (hf : Measurable f) {x 
   simp only [ENNReal.toReal_zero] at htoReal
   exact htoReal.congr (fun n => (heq n).symm)
 
+/-- The **`lintegral` Cauchy bound** (ℝ≥0∞, no Bochner `Integrable` — avoids the `whnf` blowup):
+    `∫⁻ ofReal((fcTrunc m − fcTrunc n)²) ≤ 2∫⁻ ofReal((f−fcTrunc m)²) + 2∫⁻ ofReal((f−fcTrunc n)²)`.
+    The spectral integrals over `scalarMeasure` elaborate cleanly at the `lintegral` level. -/
+theorem fcTrunc_diff_lintegral_le {f : Ω → ℝ} (hf : Measurable f) (x : H) (n m : ℕ) :
+    ∫⁻ ω, ENNReal.ofReal ((fcTrunc f m ω - fcTrunc f n ω) ^ 2) ∂(P.scalarMeasure x)
+      ≤ 2 * ∫⁻ ω, ENNReal.ofReal ((f ω - fcTrunc f m ω) ^ 2) ∂(P.scalarMeasure x)
+        + 2 * ∫⁻ ω, ENNReal.ofReal ((f ω - fcTrunc f n ω) ^ 2) ∂(P.scalarMeasure x) := by
+  have hmm : Measurable (fun ω => ENNReal.ofReal ((f ω - fcTrunc f m ω) ^ 2)) :=
+    ENNReal.measurable_ofReal.comp ((hf.sub (fcTrunc_measurable hf m)).pow_const 2)
+  have hmn : Measurable (fun ω => ENNReal.ofReal ((f ω - fcTrunc f n ω) ^ 2)) :=
+    ENNReal.measurable_ofReal.comp ((hf.sub (fcTrunc_measurable hf n)).pow_const 2)
+  rw [← MeasureTheory.lintegral_const_mul _ hmm, ← MeasureTheory.lintegral_const_mul _ hmn,
+    ← MeasureTheory.lintegral_add_left (hmm.const_mul 2)]
+  refine MeasureTheory.lintegral_mono fun ω => ?_
+  have heq : (2 : ℝ≥0∞) * ENNReal.ofReal ((f ω - fcTrunc f m ω) ^ 2)
+      + 2 * ENNReal.ofReal ((f ω - fcTrunc f n ω) ^ 2)
+      = ENNReal.ofReal (2 * (f ω - fcTrunc f m ω) ^ 2 + 2 * (f ω - fcTrunc f n ω) ^ 2) := by
+    rw [ENNReal.ofReal_add (by positivity) (by positivity),
+      ENNReal.ofReal_mul (by norm_num : (0:ℝ) ≤ 2), ENNReal.ofReal_mul (by norm_num : (0:ℝ) ≤ 2)]
+    simp [ENNReal.ofReal_ofNat]
+  rw [heq]
+  exact ENNReal.ofReal_le_ofReal (fcTrunc_diff_sq_le f n m ω)
+
 end QIQTH.Spectral.ProjectionValuedMeasure
