@@ -262,6 +262,10 @@ item.** Never claim the `1/4`.
   generator** = the `boostUnitary` generator (#5). Honest scope: this is a sustained multi-fire build (position PVM
   σ-additivity → scalarMeasure → Fourier-Plancherel conjugation → the generator), and even completing #5 leaves the
   GR chain gated on the physical inputs #1/#3/#4. Axiom-free, budget 0, full build green.
+  **Brick 2 — the `*`-algebra + the spectral projection ✅**: `M_φ∘M_ψ = M_{φ·ψ}` (`mulOp_mul`), `M_c = c·1`
+  (`mulOp_const`), `mulOp_congr` (symbol-determined), and the spectral projection `E(A) = M_{𝟙_A}` (`indMul`) is
+  **idempotent** `E(A)²=E(A)` (`indMul_idempotent`, since `𝟙_A·𝟙_A=𝟙_A`). Next bricks: self-adjointness `E(A)*=E(A)`
+  (via the `L²` inner product `⟨M_φ f,g⟩=⟨f,M_φ̄ g⟩`) → σ-additivity → `scalarMeasure` → the PVM; then Fourier.
   NB the Bochner-over-`scalarMeasure` DCT route hits a `whnf` wall — the `lintegral`/`HasDerivAt` route is the way.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,

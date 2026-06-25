@@ -83,4 +83,72 @@ noncomputable def mulOp {φ : α → ℂ} (hφ : Measurable φ) {C : ℝ} (hC0 :
 theorem mulOp_coeFn {φ : α → ℂ} (hφ : Measurable φ) {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ s, ‖φ s‖ ≤ C)
     (f : Lp ℂ 2 μ) : mulOp hφ hC0 hC f =ᵐ[μ] fun s => φ s * (f s) := mulFun_coeFn hφ hC f
 
+/-- **Multiplicativity `M_φ ∘ M_ψ = M_{φ·ψ}`** — the operator product is multiplication by the product
+    symbol.  (The `*`-algebra-hom multiplicativity; gives idempotency of indicator multiplications.) -/
+theorem mulOp_mul {φ ψ : α → ℂ} (hφ : Measurable φ) {Cφ : ℝ} (hCφ0 : 0 ≤ Cφ) (hCφ : ∀ s, ‖φ s‖ ≤ Cφ)
+    (hψ : Measurable ψ) {Cψ : ℝ} (hCψ0 : 0 ≤ Cψ) (hCψ : ∀ s, ‖ψ s‖ ≤ Cψ) :
+    mulOp (μ := μ) hφ hCφ0 hCφ ∘L mulOp (μ := μ) hψ hCψ0 hCψ
+      = mulOp (μ := μ) (hφ.mul hψ) (mul_nonneg hCφ0 hCψ0)
+          (fun s => by rw [norm_mul]; exact mul_le_mul (hCφ s) (hCψ s) (norm_nonneg _) hCφ0) := by
+  refine ContinuousLinearMap.ext fun f => ?_
+  rw [ContinuousLinearMap.comp_apply, Lp.ext_iff]
+  filter_upwards [mulOp_coeFn hφ hCφ0 hCφ (mulOp hψ hCψ0 hCψ f), mulOp_coeFn hψ hCψ0 hCψ f,
+    mulOp_coeFn (hφ.mul hψ) (mul_nonneg hCφ0 hCψ0)
+      (fun s => by rw [norm_mul]; exact mul_le_mul (hCφ s) (hCψ s) (norm_nonneg _) hCφ0) f]
+    with s e1 e2 e3
+  rw [e1, e2, e3]; ring
+
+/-- **The constant symbol gives a scalar `M_c = c·1`.**  In particular `M_1 = 1` (unital). -/
+theorem mulOp_const (c : ℂ) :
+    mulOp (μ := μ) (φ := fun _ => c) measurable_const (norm_nonneg c) (fun _ => le_rfl)
+      = c • (1 : Lp ℂ 2 μ →L[ℂ] Lp ℂ 2 μ) := by
+  refine ContinuousLinearMap.ext fun f => ?_
+  rw [ContinuousLinearMap.smul_apply, ContinuousLinearMap.one_apply, Lp.ext_iff]
+  filter_upwards [mulOp_coeFn (μ := μ) (φ := fun _ => c) measurable_const (norm_nonneg c)
+    (fun _ => le_rfl) f, Lp.coeFn_smul c f] with s e1 e2
+  rw [e1, e2, Pi.smul_apply, smul_eq_mul]
+
+/-- `M_φ` depends only on the symbol `φ` (not on the bound witness). -/
+theorem mulOp_congr {φ φ' : α → ℂ} (hφ : Measurable φ) {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ s, ‖φ s‖ ≤ C)
+    (hφ' : Measurable φ') {C' : ℝ} (hC0' : 0 ≤ C') (hC' : ∀ s, ‖φ' s‖ ≤ C') (h : φ = φ') :
+    mulOp (μ := μ) hφ hC0 hC = mulOp (μ := μ) hφ' hC0' hC' := by
+  refine ContinuousLinearMap.ext fun f => ?_
+  rw [Lp.ext_iff]
+  filter_upwards [mulOp_coeFn hφ hC0 hC f, mulOp_coeFn hφ' hC0' hC' f] with s e1 e2
+  rw [e1, e2, h]
+
+/-- The complex indicator symbol `𝟙_A : α → ℂ`. -/
+noncomputable def indSymbol (A : Set α) : α → ℂ := A.indicator (fun _ => 1)
+
+theorem indSymbol_measurable {A : Set α} (hA : MeasurableSet A) : Measurable (indSymbol A) :=
+  measurable_const.indicator hA
+
+theorem indSymbol_norm_le (A : Set α) (s : α) : ‖indSymbol A s‖ ≤ 1 := by
+  rw [indSymbol]
+  by_cases h : s ∈ A
+  · rw [Set.indicator_of_mem h]; simp
+  · rw [Set.indicator_of_notMem h]; simp
+
+theorem indSymbol_mul_self (A : Set α) (s : α) :
+    indSymbol A s * indSymbol A s = indSymbol A s := by
+  rw [indSymbol]
+  by_cases h : s ∈ A
+  · rw [Set.indicator_of_mem h]; simp
+  · rw [Set.indicator_of_notMem h]; simp
+
+/-- **The spectral projection `E(A) = M_{𝟙_A}`** — multiplication by the indicator of a measurable set `A`,
+    the building block of the multiplication (position) PVM. -/
+noncomputable def indMul {A : Set α} (hA : MeasurableSet A) : Lp ℂ 2 μ →L[ℂ] Lp ℂ 2 μ :=
+  mulOp (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A)
+
+/-- **`E(A)` is idempotent** `E(A)² = E(A)` (since `𝟙_A · 𝟙_A = 𝟙_A`).  With self-adjointness (to come, via the
+    `L²` inner product) this exhibits `E(A)` as an orthogonal projection — a spectral projection of the
+    multiplication PVM. -/
+theorem indMul_idempotent {A : Set α} (hA : MeasurableSet A) :
+    indMul (μ := μ) hA ∘L indMul hA = indMul hA := by
+  rw [indMul, mulOp_mul (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A)
+    (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A)]
+  exact mulOp_congr _ _ _ (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A)
+    (funext fun s => indSymbol_mul_self A s)
+
 end QIQTH.Spectral.Multiplication

@@ -1338,6 +1338,12 @@ namespace QIQTH.AxiomAudit
 -- ★ MULTIPLICATION OPERATOR M_φ on L²(μ): for bounded measurable φ (‖φ‖≤C), (M_φ f)(s)=φ s·f s is a ℂ-linear CLM
 -- with ‖M_φ‖≤C (mulOp, via MemLp.of_le_mul + mkContinuous). First brick of the position/momentum PVM (boost generator,
 -- WedgeKMSFlux #5, via Fourier conjugation) — the most concrete remaining frontier construction.
+#print axioms QIQTH.Spectral.Multiplication.mulOp_mul
+#print axioms QIQTH.Spectral.Multiplication.mulOp_const
+#print axioms QIQTH.Spectral.Multiplication.indMul_idempotent
+-- ★ MULTIPLICATION PVM brick 2 — the *-algebra: M_φ∘M_ψ=M_{φψ} (mulOp_mul), M_c=c·1 (mulOp_const), and the spectral
+-- projection E(A)=M_{𝟙_A} is IDEMPOTENT E(A)²=E(A) (indMul_idempotent, since 𝟙_A·𝟙_A=𝟙_A) — the projection property
+-- of the position PVM (self-adjointness via the L² inner product is the next brick).
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
