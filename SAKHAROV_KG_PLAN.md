@@ -106,6 +106,16 @@ entanglement = `A/4G_ind`); Solodukhin, *Living Rev. Rel.* 14 (2011) 8 (review, 
   ratio `(conical-deficit 4π)/(EH 16π)`**, cutoff- AND matter-independent — which is *why* the Bekenstein–Hawking
   `1/4` is universal (matter sets `G_ind`; geometry sets the `1/4`). `python scripts/sakharov_kg.py` prints
   `1/4` (all assertions pass). Reproduces Susskind–Uglum/Jacobson; the QIQT-H novelty is Stage B.
-- **NEXT: Stage B** — replace the generic cutoff `ε` by QIQT-H's finiteness regulator (the `1/4` is regulator-
-  independent since it's geometric) + the **circularity audit** (prove the `1/4` comes from the conical/EH
-  geometry + the matter `a₁`, NOT from assuming `S ∝ A`). Then Stage C (the Lean Gaussian-lattice core).
+- **Stage B ✅** (`docs/SAKHAROV_KG_STAGE_B.md` + the `[Stage B]` block in `scripts/sakharov_kg.py`) — the
+  finiteness regulator + the **circularity audit**. (i) The regulator substitution `ε → ℓ_P` (finite records /
+  minimal length) turns the divergent `1/G_ind = 1/(12πε²)` into the finite Planckian `G_ind ~ ℓ_P²`, giving
+  `S_ent ~ A/4ℓ_P²` — P4's form. (ii) **Circularity audit:** traced every input — the matter heat-kernel `a₁`,
+  the conical `4π`, the EH `16π`, the regulator — and *none* carries the `1/4`; it is the *output* `= 4π/16π`.
+  The area law `∝ A` **emerges** from the conical curvature being a δ-function on `Σ` (not assumed); P4's stated
+  `η = 1/4ℓ_P²` is **recovered as a consequence**, never used as input. The script confirms it symbolically with
+  an **arbitrary** matter coefficient `b` and **arbitrary** regulator `reg`: `S_ent/(A/G_ind) = 1/4` regardless.
+  **Honest residual:** the *value* of `G_ind`/`ℓ_P` (the species problem + the concrete cutoff) is the input —
+  *not* the `1/4`; and Type II finiteness alone isn't the full regulator (needs the concrete spectrum → Stage C).
+- **NEXT: Stage C** — the Lean-formalizable core: the Gaussian entanglement-entropy area law on a finite
+  oscillator lattice (Srednicki), building on `QIQTH/Entropy` — the records as a finite network whose
+  entanglement is the area (the first finite model of the regulator/spectrum). Axiom-free, budget 0.

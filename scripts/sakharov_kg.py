@@ -64,6 +64,21 @@ def main() -> None:
     print("\nOK -- S_ent = A/(4 G_ind);  the 1/4 = (conical 4 pi)/(EH 16 pi) is cutoff- and "
           "matter-independent (the universal Bekenstein-Hawking coefficient).")
 
+    # ---- 5.  Stage B: the 1/4 is independent of the matter coefficient AND the regulator --------
+    # Repeat the derivation with an ARBITRARY heat-kernel R-coefficient `b` (any matter species)
+    # and an ARBITRARY UV cutoff scale `reg` (generic eps, minimal length, finite-record scale):
+    # the 1/4 is unchanged -- it is the geometric ratio, carrying neither the matter nor the cutoff.
+    b, reg = sp.symbols("b reg", positive=True)
+    inv16piG_gen = sp.Rational(1, 2) * (4 * sp.pi) ** (-2) * b / reg**2
+    invG_gen = sp.simplify(16 * sp.pi * inv16piG_gen)
+    Icone_gen = inv16piG_gen * 4 * sp.pi * (1 - n) * A
+    Sent_gen = sp.simplify((Icone_gen - n * sp.diff(Icone_gen, n)).subs(n, 1))
+    ratio_gen = sp.simplify(Sent_gen / (A * invG_gen))
+    print(f"\n[Stage B] arbitrary matter b, arbitrary regulator reg:  S_ent/(A/G_ind) = {ratio_gen}")
+    assert ratio_gen == sp.Rational(1, 4)               # the 1/4 carries neither b nor reg
+    print("[Stage B] CIRCULARITY-CLEAN: the 1/4 is the geometric 4pi/16pi -- independent of the "
+          "matter coefficient b and the regulator reg; only G_ind (the value) depends on them.")
+
 
 if __name__ == "__main__":
     main()
