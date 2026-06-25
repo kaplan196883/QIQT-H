@@ -1164,6 +1164,14 @@ namespace QIQTH.AxiomAudit
 -- The bounded-Borel functional calculus is a multiplicative (hence unital *-algebra) hom.
 -- Closes Phase 1's multiplicativity; the analytic core unblocking PVM_of_selfAdjoint & Δ^it.
 
+-- Stone M1 (the unbounded FC ∫f dE on a PVM): the DOMAIN D(∫f dE)={x:∫f²dμ_x<∞} as a ℂ-submodule.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.scalarMeasure_zero
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcEnergy_smul
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcEnergy_add_le
+-- expected: standard only — energy ∫f²dμ_x is ‖c‖²-homogeneous + sub-additive (parallelogram μ_{x+y}≤2μ_x+2μ_y);
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcDomain
+-- so the finite-energy set is a ℂ-submodule — the natural domain of the unbounded self-adjoint operator K=∫f dE.
+
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
 -- expected: standard only — positivity bridge: f ≥ 0 on spectrum ⟹ 0 ≤ re⟪x, f(T) x⟫.

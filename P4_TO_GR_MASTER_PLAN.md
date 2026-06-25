@@ -78,7 +78,10 @@ at each frontier (M3 Williamson, M4 Stone, M5 trace) — leave green, record the
 item.** Never claim the `1/4`.
 
 ## 4. Progress checklist
-- [ ] **M1** — unbounded FC `∫ f dE` on a PVM (`QIQTH/Spectral/UnboundedFC.lean`)
+- [~] **M1** — unbounded FC `∫ f dE` on a PVM (`QIQTH/Spectral/UnboundedFC.lean`) — **domain ✅** (the
+  finite-energy `fcDomain P f` as a ℂ-submodule: `fcEnergy` `‖c‖²`-homogeneous + sub-additive via the
+  parallelogram law; axiom-free, budget 0, wired). NEXT: the operator `fcLinear` on the domain + symmetry +
+  self-adjointness, then the bounded-compat `∫g dE = boundedFC g`.
 - [ ] **M2** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1 closed)
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)
