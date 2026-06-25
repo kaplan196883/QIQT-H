@@ -213,6 +213,27 @@ theorem boundedFC_adjoint_mul_self {g : Ω → ℂ} (hg : Measurable g) {C : ℝ
       (fun ω => by rw [norm_mul, Complex.norm_conj]
                    exact mul_le_mul (hC ω) (hC ω) (norm_nonneg _) hC0)]
 
+/-- **The norm identity** `‖boundedFC g x‖² = ∫ |g|² dμ_x` — the diagonal of `T†T = boundedFC(|g|²)`.
+    This converts the truncation `L²`-convergence into operator-image Cauchy-ness, defining `∫ f dE`. -/
+theorem norm_boundedFC_sq {g : Ω → ℂ} (hg : Measurable g) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, ‖g ω‖ ≤ C) (x : H) :
+    ‖P.boundedFC hg hC0 hC x‖ ^ 2 = ∫ ω, ‖g ω‖ ^ 2 ∂(P.scalarMeasure x) := by
+  have hgint : ∀ ω, (starRingEnd ℂ) (g ω) * g ω = ((‖g ω‖ ^ 2 : ℝ) : ℂ) := fun ω => by
+    rw [mul_comm, RCLike.mul_conj]; norm_cast
+  have hkey : inner ℂ (P.boundedFC hg hC0 hC x) (P.boundedFC hg hC0 hC x)
+      = ∫ ω, (starRingEnd ℂ) (g ω) * g ω ∂(P.scalarMeasure x) := by
+    rw [show inner ℂ (P.boundedFC hg hC0 hC x) (P.boundedFC hg hC0 hC x)
+          = inner ℂ x ((ContinuousLinearMap.adjoint (P.boundedFC hg hC0 hC)
+            * P.boundedFC hg hC0 hC) x) by
+          rw [ContinuousLinearMap.mul_apply, ContinuousLinearMap.adjoint_inner_right],
+      P.boundedFC_adjoint_mul_self hg hC0 hC, P.inner_boundedFC_self _ _ _ x]
+  have hkey2 : inner ℂ (P.boundedFC hg hC0 hC x) (P.boundedFC hg hC0 hC x)
+      = ((∫ ω, ‖g ω‖ ^ 2 ∂(P.scalarMeasure x) : ℝ) : ℂ) := by
+    rw [hkey, MeasureTheory.integral_congr_ae (Filter.Eventually.of_forall hgint)]
+    exact integral_ofReal
+  rw [← inner_self_eq_norm_sq (𝕜 := ℂ), hkey2]
+  simp
+
 /-! ### Bounded truncations of the symbol (the operator's `L²`-Cauchy engine)
 
 The unbounded operator `∫ f dE` is built as the strong limit `Kx := limₙ boundedFC(fₙ) x` over the bounded

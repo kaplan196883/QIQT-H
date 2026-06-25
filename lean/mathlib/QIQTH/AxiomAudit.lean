@@ -1195,6 +1195,9 @@ namespace QIQTH.AxiomAudit
 -- the diagonal expectation ⟨x,(∫h dE)x⟩ = ∫ h dμ_x (the JLMS first-law ⟨K⟩ at the bounded level).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_adjoint_mul_self
 -- T†T = boundedFC(ḡ·g) for T=boundedFC g (the *-algebra hom: adjoint + mul); diagonal gives ‖Tx‖²=∫|g|²dμ_x.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.norm_boundedFC_sq
+-- ★ THE NORM IDENTITY ‖boundedFC g x‖² = ∫|g|²dμ_x — converts the truncation L²-convergence into
+-- operator-image Cauchy-ness, defining the unbounded operator ∫f dE as the strong limit lim boundedFC(fₙ)x.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

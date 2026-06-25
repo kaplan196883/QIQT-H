@@ -99,9 +99,12 @@ item.** Never claim the `1/4`.
   `⟨x,(∫h dE)x⟩ = ∫ h dμ_x` — the JLMS first-law `⟨K⟩` at the bounded level, from `inner_boundedFC`+
   `bilinDiag_self`). **Operator identity `T†T=boundedFC(|g|²)` ✅** (`boundedFC_adjoint_mul_self`: composing
   `boundedFC g` with its adjoint gives the FC of `ḡ·g`, via adjoint+`boundedFC_mul`; the proof-irrelevance of the
-  `Measurable`/bound hypotheses made the instance-matching go through). NEXT: the norm identity `‖boundedFC g
-  x‖²=∫|g|²dμ_x` = the `re`/`∫`-diagonal of `T†T` (`adjoint_inner_right` + `inner_boundedFC_self` + `conj z·z=
-  ‖z‖²` + `integral_ofReal`) ⟹ `boundedFC(fₙ)x` Cauchy ⟹ the limit operator `fcLinear` + symmetry.
+  `Measurable`/bound hypotheses made the instance-matching go through). **★ THE NORM IDENTITY ✅**
+  (`norm_boundedFC_sq`: `‖boundedFC g x‖² = ∫|g|²dμ_x` — the `re`/`∫` diagonal of `T†T`, via
+  `inner_boundedFC_self` + `conj z·z=‖z‖²` + `integral_ofReal`). The keystone converting truncation
+  L²-convergence into operator-image Cauchy-ness. NEXT: `‖boundedFC(fₙ−fₘ)x‖²=∫|fₙ−fₘ|²dμ_x → 0` ⟹
+  `boundedFC(fₙ)x` Cauchy ⟹ the strong limit `fcLinear x := lim boundedFC(fₙ)x` (the operator `∫f dE`) +
+  symmetry/self-adjointness.
 - [ ] **M2** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1 closed)
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)
