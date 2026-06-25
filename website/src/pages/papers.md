@@ -78,6 +78,7 @@ The machine-checked substrate lives in the project repository. Every theorem is 
 
 - **Repository:** [github.com/kaplan196883/QIQT-H](https://github.com/kaplan196883/QIQT-H)
 - **Build:** `lake build QIQTH` · **Audit:** `lake build QIQTH.AxiomAudit`
+- **Archived release (citable):** DOI [10.5281/zenodo.20837905](https://doi.org/10.5281/zenodo.20837905) (Zenodo; all versions).
 
 ## How to cite
 
