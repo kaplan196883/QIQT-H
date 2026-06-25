@@ -152,8 +152,15 @@ item.** Never claim the `1/4`.
   `boundedFC(e^{itf})†·boundedFC(e^{itf})=1` via `boundedFC_adjoint_mul_self` with `|e^{itf}|²=1`). So for any PVM,
   `exp(itK)` is a one-parameter **unitary** group — the **full bounded-operator content of `Δ^{it}=e^{−itK}`**;
   only the generator-derivative link `d/dt(·)|₀ = i·K` to `K` (Stone reconstruction) stays the gap.
-  (Group axioms complete: `boundedFC_expSymbol_zero` identity + `_add` composition + `_adjoint_mul` inverse.
-  Strong continuity → the full Stone *hypothesis* is the natural next completion, separate from the generator.)
+  (Group axioms complete: `boundedFC_expSymbol_zero` identity + `_add` composition + `_adjoint_mul` inverse.)
+  **STONE-GENERATOR ATTACK underway** (foundations ✅, all axiom-free): the difference identity
+  `‖boundedFC(e^{itf})x − x‖² = ∫|e^{itf}−1|² dμ_x` (`expSymbol_sub_one_norm_sq`); the uniform L² domination
+  `‖e^{itf}−1‖ ≤ |t|·|f|` ⟹ `‖(e^{itf}−1)/t‖ ≤ |f|` (`norm_expSymbol_sub_one_le`); the pointwise derivative
+  `d/dt e^{itc}|₀ = ic` (`hasDerivAt_expSymbol`). Remaining = the **generator assembly**: the `t→0` L²-convergence
+  `∫|(e^{itf}−1)/t − if|² → 0` (lintegral DCT — to dodge the recurring Bochner-over-`scalarMeasure` whnf wall)
+  + the `HasDerivAt (fun t => boundedFC(e^{itf})x) (i·Kx) 0` double-limit. This is the genuine multi-fire core
+  that closes BOTH `Δ^{it}=e^{−itK}` (M2) and the abstract M4 Stone. NB strong-continuity-via-Bochner-DCT also
+  hit the whnf wall — reverted; the lintegral route is the way.
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)
 - [ ] **M5** — dual-weight trace + JLMS + FQ bound
