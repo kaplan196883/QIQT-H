@@ -4353,6 +4353,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.modularAut_star
 -- The Wall Phase 1.1: the matter-rep fiber s↦σ_{-s}(a)(ξ s) is AEStronglyMeasurable on L²(ℝ;H):
 #print axioms QIQTH.StandardSubspaceModular.aesm_matterFiber
+-- The Wall Phase 1.2: π(a)ξ ∈ L²(ℝ;H) — the fiber is L² (contraction bound ‖σ_{-s}(a)v‖ ≤ ‖a‖‖v‖):
+#print axioms QIQTH.StandardSubspaceModular.memLp_matterFiber
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable

@@ -145,5 +145,10 @@ specialization).
     isolation) — it was a **divergent instance search from a missing `BorelSpace H`** (needed by the pushforward
     `comp_aemeasurable`). Fix: (i) generic opaque-family helper (no `modUnitary` unfolding), (ii) `[BorelSpace H]`
     present, (iii) `maxHeartbeats 1000000`. The operator-valued `Lp`-measurability route is therefore tractable.
-- **NEXT: Phase 1.2** — the `Lp` bound `‖σ_{-s}(a)(ξ s)‖ ≤ ‖a‖·‖ξ s‖` ⟹ `MemLp` ⟹ `π(a) : L²(ℝ;H) →L[ℂ] L²(ℝ;H)`
-  with `‖π(a)‖ ≤ ‖a‖`.
+- **Phase 1.2 (Lᵖ membership) ✅** (`CrossedProductRep.lean`) — `norm_modularAut_apply_le` (the contraction
+  `‖σ_t(a) v‖ ≤ ‖a‖·‖v‖`, from the modular unitaries being isometries) + `memLp_matterFiber`: for `ξ ∈ L²(ℝ;H)`,
+  the fiber `s ↦ σ_{-s}(a)(ξ s) ∈ L²` (Phase-1.1 measurability + domination via `MemLp.of_le_mul`). Axiom-free
+  (std 3); wired into AxiomAudit; budget 0.
+- **NEXT: Phase 1.2 (bundling)** — `matterRep S a : L²(ℝ;H) →L[ℂ] L²(ℝ;H)`, `ξ ↦ (memLp_matterFiber).toLp`, with
+  `map_add`/`map_smul` (a.e. fiberwise linearity) and `‖π(a)‖ ≤ ‖a‖` (`LinearMap.mkContinuous`). Then 1.3 (`π` a
+  unital `*`-homomorphism). Standard `Lp`-bundling work.

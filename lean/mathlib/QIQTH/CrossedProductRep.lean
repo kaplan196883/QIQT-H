@@ -65,4 +65,23 @@ theorem aesm_matterFiber (S : StandardSubspace H) (a : H →L[ℂ] H) {ξ : ℝ 
   refine h3.congr (Filter.Eventually.of_forall (fun s => ?_))
   simp only [modularAut, neg_neg, ContinuousLinearMap.mul_apply]
 
+/-- **The conjugation is norm-contractive:** `‖σ_t(a) v‖ ≤ ‖a‖·‖v‖` (the modular unitaries are isometries, so
+    `‖σ_t(a)‖ ≤ ‖a‖`).  The pointwise bound powering the `L²` estimate for `π(a)`. -/
+theorem norm_modularAut_apply_le (S : StandardSubspace H) (t : ℝ) (a : H →L[ℂ] H) (v : H) :
+    ‖modularAut S t a v‖ ≤ ‖a‖ * ‖v‖ := by
+  rw [modularAut]
+  simp only [ContinuousLinearMap.mul_apply]
+  rw [modUnitary_norm]
+  calc ‖a (modUnitary S (-t) v)‖
+      ≤ ‖a‖ * ‖modUnitary S (-t) v‖ := a.le_opNorm _
+    _ = ‖a‖ * ‖v‖ := by rw [modUnitary_norm]
+
+/-- **★ Phase 1.2 (Lᵖ membership) — `π(a)ξ ∈ L²(ℝ;H)`.**  For `ξ ∈ L²(ℝ;H)`, the fiber `s ↦ σ_{-s}(a)(ξ s)` is
+    in `L²` (measurable by Phase 1.1, dominated by `‖a‖·‖ξ s‖` via the contraction bound). -/
+theorem memLp_matterFiber (S : StandardSubspace H) (a : H →L[ℂ] H)
+    (ξ : Lp H 2 (volume : Measure ℝ)) :
+    MemLp (fun s => modularAut S (-s) a (ξ s)) 2 (volume : Measure ℝ) :=
+  MemLp.of_le_mul (Lp.memLp ξ) (aesm_matterFiber S a (Lp.aestronglyMeasurable ξ))
+    (Filter.Eventually.of_forall (fun s => norm_modularAut_apply_le S (-s) a (ξ s)))
+
 end QIQTH.StandardSubspaceModular
