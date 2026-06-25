@@ -162,12 +162,20 @@ item.** Never claim the `1/4`.
   `lintegral` dominated-convergence route** (dodging the recurring Bochner-over-`scalarMeasure` whnf wall):
   pointwise `(e^{itc}−1)/t → ic` from the new slope tendsto `expSymbol_slope_tendsto` (`hasDerivAt_iff_tendsto_slope`),
   dominated by `4f²` from `norm_expSymbol_sub_one_div_le` (`‖(e^{itf}−1)/t‖ ≤ |f|` for ALL `t`, incl `t=0`),
-  finite by `x ∈ fcDomain f`. This was *the* genuine multi-fire core. Remaining = the **operator assembly**:
-  `HasDerivAt (fun t => boundedFC(e^{itf})x) (i·Kx) 0` — the double-limit triangle
-  `‖boundedFC(g_t)x − i·fcOp x‖ ≤ ‖boundedFC(g_t − i·↑fcTrunc_m)x‖ + ‖boundedFC(i·↑fcTrunc_m)x − i·fcOp x‖`
-  bounded by `2∫‖g_t−if‖² + 2∫‖f−↑fcTrunc_m‖²` (via `norm_boundedFC_sub_sq` + the now-proved L² conv +
-  `fcTrunc_lintegral_sub_sq_tendsto`). With the heart done this is mechanical; closes BOTH `Δ^{it}=e^{−itK}` (M2)
-  and abstract M4 Stone. NB strong-continuity-via-Bochner-DCT hit the whnf wall — the lintegral route is the way.
+  finite by `x ∈ fcDomain f`. This was *the* genuine multi-fire core.
+  **OPERATOR ASSEMBLY — steps 1 & 2 NOW LANDED ✅ (axiom-free, green):**
+  • **step 1** `complexSymbol_fcTrunc_lintegral_tendsto`: for a bounded symbol `h`, `∫‖h − i·↑fcTrunc_m‖² → ∫‖h − i·↑f‖²`
+    (lintegral DCT, dominated by `2C²+2f²`) — the `m→∞` truncation half.
+  • **step 2 (CRUX)** `dist_boundedFC_smul_fcOp_sq`: `‖boundedFC(h)x − i·(∫f dE)x‖² = ∫‖h − i·↑f‖² dμ_x` — the operator
+    distance to `i·fcOp x` **equals** the `L²` symbol distance to `i·f`, collapsing the double-limit to a SINGLE limit
+    (limit-uniqueness: `i·fcSeq_m x → i·fcOp x` + `norm_boundedFC_sub_sq` + step 1). This replaces the messy
+    ε–δ triangle entirely.
+  Remaining = **step 3 capstone** `HasDerivAt (fun t => boundedFC(e^{itf})x) (i·Kx) 0`: with the heart + step 2, this is
+  `slope g 0 t = boundedFC(g_t)x` (g_t=(e^{itf}−1)/↑t, bounded by 2/|t| for t≠0) ⟹ `‖slope − i·fcOp x‖² =
+  (∫⁻‖g_t−if‖²).toReal → 0` (heart) ⟹ `slope → i·fcOp x` ⟹ `HasDerivAt`. The ONLY remaining friction is the
+  Lean slope-identity bookkeeping (`boundedFC_sub`/`_const` proof-irrelevance + `↑(t⁻¹)` vs `/↑t` coercion bridge) —
+  fiddly but mechanical; next increment. Closes BOTH `Δ^{it}=e^{−itK}` (M2) and abstract M4 Stone.
+  NB strong-continuity-via-Bochner-DCT hit the whnf wall — the lintegral route is the way.
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)
 - [ ] **M5** — dual-weight trace + JLMS + FQ bound
