@@ -38,7 +38,7 @@
 \begin{document}
 \section*{Born rule}
 \noindent\emph{Target 1 — QIQT-H compatible with Born (spine + no-go audits)}\par\medskip
-\noindent\small Statements machine-translated from the Lean 4 / Mathlib source by \texttt{lean\_track latex -{}-tree}: rendered from the delaborated \emph{Syntax tree} (notation only, content verbatim).\normalsize\par\medskip
+\noindent\small Statements machine-translated from the Lean 4 / Mathlib source by \texttt{lean\_track latex}: rendered from the delaborated \emph{Syntax tree} (notation only, content verbatim).\normalsize\par\medskip
 \begin{theorem}[\texttt{QIQTH.BornJoinGleason.finite\_noCollapseBorn\_fromNoncontextuality}]\label{thm:qiqth-bornjoingleason-finite-nocollapseborn-fromnoncontextuality}
 \textit{capstone.}
 Given $m$, $n$, $d$, $E$, $M$, $P$, $k$, $ε$,
@@ -56,7 +56,7 @@ Then \[ \exists \rho, \rho.\mathrm{PosSemidef} \wedge \rho.\mathrm{trace} = 1 \w
 \begin{theorem}[\texttt{QIQTH.EffectGleason.EffectMeasure.finite\_effect\_gleason}]\label{thm:qiqth-effectgleason-effectmeasure-finite-effect-gleason}
 \textit{spine.}
 Given $d$, $m$.
-Then \[ \exists \rho, \rho.\mathrm{PosSemidef} \wedge \rho.\mathrm{trace} = 1 \wedge \forall (E : \mathrm{Matrix}\,(\mathrm{Fin}\,d)\,(\mathrm{Fin}\,d)\,\mathbb{C}), \mathrm{IsEffect}\,E \to (m.\mu\,E) = (\rho \cdot E).\mathrm{trace} \]
+Then \[ \exists \rho, \rho.\mathrm{PosSemidef} \wedge \rho.\mathrm{trace} = 1 \wedge \forall (E : \mathrm{Mat}\,(\mathrm{Fin}\,d)\,(\mathrm{Fin}\,d)\,\mathbb{C}), \mathrm{IsEffect}\,E \to (m.\mu\,E) = (\rho \cdot E).\mathrm{trace} \]
 \end{theorem}
 
 
@@ -65,11 +65,11 @@ Then \[ \exists \rho, \rho.\mathrm{PosSemidef} \wedge \rho.\mathrm{trace} = 1 \w
 Given $n$, $ψ$, $w$, $E$,
 assume
 \begin{itemize}
-  \item[\rm(hψ)] $\mathrm{star}\,\psi \cdot _{v} \psi = 1$
-  \item[\rm(hadd)] $\forall (A B : \mathrm{Matrix}\,n\,n\,\mathbb{C}), w\,(A + B) = w\,A + w\,B$
-  \item[\rm(hhom)] $\forall (c : \mathbb{C}) (A : \mathrm{Matrix}\,n\,n\,\mathbb{C}), w\,(c \cdot A) = c \cdot w\,A$
-  \item[\rm(hpsd)] $\forall (A : \mathrm{Matrix}\,n\,n\,\mathbb{C}), \mathrm{NonnegC}\,(w\,(A.\mathrm{conjTranspose} \cdot A))$
-  \item[\rm(hray)] $w\,(\mathrm{vecMulVec}\,\psi\,(\mathrm{star}\,\psi)) = 1$
+  \item[\rm(hψ)] ${{\psi}}^{*} \cdot _{v} \psi = 1$
+  \item[\rm(hadd)] $\forall (A B : \mathrm{Mat}\,n\,n\,\mathbb{C}), w\,(A + B) = w\,A + w\,B$
+  \item[\rm(hhom)] $\forall (c : \mathbb{C}) (A : \mathrm{Mat}\,n\,n\,\mathbb{C}), w\,(c \cdot A) = c \cdot w\,A$
+  \item[\rm(hpsd)] $\forall (A : \mathrm{Mat}\,n\,n\,\mathbb{C}), \mathrm{NonnegC}\,(w\,(A.\mathrm{conjTranspose} \cdot A))$
+  \item[\rm(hray)] $w\,(\mathrm{vecMulVec}\,\psi\,({{\psi}}^{*})) = 1$
   \item[\rm(hone)] $w\,1 = 1$
 \end{itemize}
 Then \[ w\,E = \mathrm{born}\,\psi\,E \]
@@ -174,7 +174,7 @@ Then \[ 0 < \mathrm{branchWeight}\,c\,0 \wedge 0 < \mathrm{branchWeight}\,c\,1 \
 
 \begin{theorem}[\texttt{QIQTH.EquivarianceGap.support\_preservation\_does\_not\_imply\_measure\_preservation}]\label{thm:qiqth-equivariancegap-support-preservation-does-not-imply-measure-preservation}
 \textit{nogo.}
-We have \[ \exists T \mu, \mathrm{Bijective}\,T \wedge \mathrm{SupportPreserving}\,\mathrm{univ}\,T \wedge \neg \mathrm{MeasurePreserving}\,T\,\mu \]
+We have \[ \exists T \mu, \mathrm{Bijective}\,T \wedge \mathrm{SupportPreserving}\,T \wedge \neg \mathrm{MeasurePreserving}\,T\,\mu \]
 \end{theorem}
 
 

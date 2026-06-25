@@ -2,7 +2,7 @@
 
   python -m lean_track report -c tracks/gr.toml [--no-prober] [-o reports/gr]
   python -m lean_track extract -c tracks/gr.toml          # raw Lean facts only
-  python -m lean_track latex -c tracks/gr.toml [--tree] [-o reports/gr/statements.tex]
+  python -m lean_track latex -c tracks/gr.toml [--string] [-o reports/gr/statements.tex]
   python -m lean_track diff --old A/agent_summary.json --new B/agent_summary.json
 """
 import argparse
@@ -62,7 +62,8 @@ def cmd_latex(args):
     cfg = probe.load_config(args.config)
     names, roles = _names_and_roles(cfg)
     notation = (cfg.get("latex", {}) or {}).get("notation", {})
-    if args.tree:                       # render from the delaborated Syntax tree
+    use_tree = not args.string          # AST renderer is the default
+    if use_tree:                        # render from the delaborated Syntax tree
         data = probe.syntax_trees(names, cfg)
         doc = latex_tree.render_document(data, cfg, notation=notation, roles=roles)
     else:                               # render from the pretty-printed string
@@ -73,7 +74,7 @@ def cmd_latex(args):
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(doc, encoding="utf-8")
     present = sum(1 for t in data if t.get("present"))
-    mode = "tree" if args.tree else "string"
+    mode = "tree" if use_tree else "string"
     try:
         shown = out.resolve().relative_to(probe.REPO)
     except ValueError:
@@ -102,9 +103,9 @@ def main(argv=None):
     e.add_argument("-o", "--out"); e.set_defaults(fn=cmd_extract)
     lx = sub.add_parser("latex"); lx.add_argument("-c", "--config", required=True)
     lx.add_argument("-o", "--out")
-    lx.add_argument("--tree", action="store_true",
-                    help="render from the delaborated Syntax tree (AST) instead of the "
-                         "pretty-printed string")
+    lx.add_argument("--string", action="store_true",
+                    help="render from the pretty-printed string (legacy) instead of the "
+                         "default delaborated Syntax tree (AST)")
     lx.set_defaults(fn=cmd_latex)
     d = sub.add_parser("diff"); d.add_argument("--old", required=True); d.add_argument("--new", required=True)
     d.set_defaults(fn=cmd_diff)

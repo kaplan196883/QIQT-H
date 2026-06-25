@@ -87,3 +87,15 @@ id = "bridge-positivity-type"
 category = "bridge"
 label = "BRIDGE — positivity / normalization / ray-certainty"
 type_regex = '0 ≤|PosSemidef|NonnegC|⬝ᵥ ψ = 1|w 1 = 1|μ 1 = 1|w \(.*\) = 1'
+
+# --- LaTeX rendering (consumed by `python -m lean_track latex -c tracks/born.toml`) ---
+# Concise glossary: the genuinely-notational operators only. Named functions
+# (branchWeight, marginal3to2, bornProb, …) intentionally use the \mathrm{name}
+# fallback — upright text is the correct convention for them.
+[latex.notation]
+"star"         = '{#1}^{*}'      # star z -> z^*  (complex conjugate / adjoint)
+"Matrix"       = '\mathrm{Mat}'  # Matrix (Fin n) (Fin n) ℂ type
+"Fintype.card" = '\#'
+"card"         = '\#'
+"Finset.univ"  = ''
+"univ"         = ''

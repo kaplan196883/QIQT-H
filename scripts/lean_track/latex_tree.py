@@ -249,7 +249,7 @@ def render_document(trees, cfg, notation=None, roles=None):
         body.append(f"\\noindent\\emph{{{latexify._tex_title(tr['subtitle'])}}}"
                     r"\par\medskip")
     body.append(r"\noindent\small Statements machine-translated from the Lean 4 / "
-                r"Mathlib source by \texttt{lean\_track latex -{}-tree}: rendered from the "
+                r"Mathlib source by \texttt{lean\_track latex}: rendered from the "
                 r"delaborated \emph{Syntax tree} (notation only, content verbatim).\normalsize"
                 r"\par\medskip")
     for t in trees:

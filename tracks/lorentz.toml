@@ -55,3 +55,15 @@ id = "structure"
 category = "structure"
 label = "STRUCTURE — presheaf / net / group / measurability"
 name_regex = "(naturality|presheaf|section|glue|meas|sigma|orth|complete)"
+
+# --- LaTeX rendering (consumed by `python -m lean_track latex -c tracks/lorentz.toml`) ---
+# Concise glossary: notational operators only. Named functions (selector, actSection,
+# freeFieldMeasure, diagNet, boostMap, …) use the \mathrm{name} fallback by design.
+[latex.notation]
+"ofReal"       = '{#1}'          # (↑ : ℝ → ℂ) x -> x  (drop the coercion head)
+"star"         = '{#1}^{*}'      # complex conjugate / adjoint
+"Matrix"       = '\mathrm{Mat}'
+"Fintype.card" = '\#'
+"card"         = '\#'
+"Finset.univ"  = ''
+"univ"         = ''
