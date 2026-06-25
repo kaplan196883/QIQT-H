@@ -319,6 +319,12 @@ item.** Never claim the `1/4`.
   `OrthogonalFamily` of the ranges `L²(Aₙ)` (brick 12 orthogonality) `.summable_iff_norm_sq_summable`, then
   identify `∑'` with `E(⋃)x` (brick 11). That orthogonal-family setup (subspaces + isometric inclusions +
   the summability lemma) is the genuine Mathlib-grade step; bricks 8–13 supply all its inputs. Left green here.
+  **Brick 14 — the remaining orthogonal-summability inputs ✅**: `norm_sq_eq_integral` (`‖x‖²=∫‖x a‖²`, read off
+  `E(univ)=1`), `norm_indMul_le` (`‖E(A)x‖≤‖x‖` — the projection is contractive, via `∫_A≤∫`; gives the uniform
+  bound `∑‖E(Aₙ)x‖²≤‖x‖²`), and `indMul_inner_orthogonal'` (`⟪E(A)x,E(B)y⟫=0` for ALL `x,y` on disjoint `A,B` —
+  the two-vector orthogonality the `OrthogonalFamily` of ranges `L²(Aₙ)` requires). With bricks 11–13, ALL inputs
+  to `hasSum_iUnion` are now in hand. Next: assemble `OrthogonalFamily.summable_iff_norm_sq_summable` → `HasSum`
+  → bundle the `ProjectionValuedMeasure` record.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,
   `oneModeSympEig_symplectic_invariant` — `ν` is a basis-independent physical invariant). The `N`-mode normal-form

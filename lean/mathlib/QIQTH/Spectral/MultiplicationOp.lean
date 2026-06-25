@@ -368,6 +368,37 @@ theorem norm_indMul_sq {A : Set α} (hA : MeasurableSet A) (f : Lp ℂ 2 μ) :
   · simp only [indSymbol, Set.indicator_of_mem h, one_mul]
   · simp [indSymbol, Set.indicator_of_notMem h]
 
+/-- The squared `L²` norm as the integral of the pointwise squared norm, `‖x‖² = ∫ ‖x a‖² dμ` — read off the
+    spectral measure at `A = univ` (`E(univ) = 1`). -/
+theorem norm_sq_eq_integral (x : Lp ℂ 2 μ) : ‖x‖ ^ 2 = ∫ a, ‖x a‖ ^ 2 ∂μ := by
+  have h := norm_indMul_sq (μ := μ) MeasurableSet.univ x
+  rw [indMul_univ, ContinuousLinearMap.one_apply, MeasureTheory.setIntegral_univ] at h
+  exact h
+
+/-- **The spectral projection is contractive, `‖E(A) x‖ ≤ ‖x‖`** (`E(A)` is an orthogonal projection): the
+    `L²` mass on `A` never exceeds the total mass. The uniform bound feeding the orthogonal-summability estimate
+    `∑ ‖E(Aₙ)x‖² ≤ ‖x‖²`. -/
+theorem norm_indMul_le {A : Set α} (hA : MeasurableSet A) (x : Lp ℂ 2 μ) :
+    ‖indMul (μ := μ) hA x‖ ≤ ‖x‖ := by
+  have hsq : ‖indMul hA x‖ ^ 2 ≤ ‖x‖ ^ 2 := by
+    rw [norm_indMul_sq, norm_sq_eq_integral]
+    refine MeasureTheory.setIntegral_le_integral ?_ (Filter.Eventually.of_forall fun a => sq_nonneg _)
+    exact (MeasureTheory.memLp_two_iff_integrable_sq_norm (Lp.aestronglyMeasurable x)).mp (Lp.memLp x)
+  calc ‖indMul hA x‖ = Real.sqrt (‖indMul hA x‖ ^ 2) := (Real.sqrt_sq (norm_nonneg _)).symm
+    _ ≤ Real.sqrt (‖x‖ ^ 2) := Real.sqrt_le_sqrt hsq
+    _ = ‖x‖ := Real.sqrt_sq (norm_nonneg _)
+
+/-- **Two-vector orthogonality of the spectral projections:** for disjoint measurable `A, B`,
+    `⟪E(A) x, E(B) y⟫ = 0` for *all* `x, y` (the ranges `L²(A) ⟂ L²(B)` are orthogonal subspaces). The form the
+    `OrthogonalFamily` of the projection ranges requires (generalizes the same-vector `indMul_inner_orthogonal`). -/
+theorem indMul_inner_orthogonal' {A B : Set α} (hA : MeasurableSet A) (hB : MeasurableSet B)
+    (h : Disjoint A B) (x y : Lp ℂ 2 μ) :
+    inner ℂ (indMul (μ := μ) hA x) (indMul hB y) = 0 := by
+  rw [← ContinuousLinearMap.adjoint_inner_right,
+    ← ContinuousLinearMap.star_eq_adjoint, (indMul_isSelfAdjoint hA).star_eq,
+    ← ContinuousLinearMap.comp_apply, indMul_comp_disjoint hA hB h,
+    ContinuousLinearMap.zero_apply, inner_zero_right]
+
 /-- **σ-additivity of the scalar spectral measure (continuity from above):** for an antitone family of
     measurable sets `Bₙ`, the spectral-projection masses `‖E(Bₙ) f‖² = ∫_{Bₙ} ‖f‖²` converge to `∫_{⋂Bₙ} ‖f‖²`.
     In particular `Bₙ ↓ ∅ ⟹ ‖E(Bₙ) f‖ → 0` — the measure-tail that drives the operator σ-additivity of the

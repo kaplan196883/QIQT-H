@@ -1397,6 +1397,14 @@ namespace QIQTH.AxiomAudit
 -- additivity feeding the unconditional HasSum σ-additivity (partial sums = projection onto the partial union).
 -- FRONTIER (recorded): the hasSum_iUnion bundle needs the Hilbert orthogonal-summability bridge — Summable from
 -- ∑‖E(Aₙ)x‖²<∞ via OrthogonalFamily of the ranges L²(Aₙ) (brick 12 orthogonality) + identify limit (brick 11).
+#print axioms QIQTH.Spectral.Multiplication.norm_sq_eq_integral
+#print axioms QIQTH.Spectral.Multiplication.norm_indMul_le
+#print axioms QIQTH.Spectral.Multiplication.indMul_inner_orthogonal'
+-- ★ MULTIPLICATION PVM brick 14 — the remaining inputs to the orthogonal-summability bridge: norm_sq_eq_integral
+-- (‖x‖²=∫‖x a‖², read off E(univ)=1), norm_indMul_le (‖E(A)x‖≤‖x‖ — the projection is contractive, via ∫_A≤∫;
+-- gives the uniform bound ∑‖E(Aₙ)x‖²≤‖x‖²), and indMul_inner_orthogonal' (⟪E(A)x,E(B)y⟫=0 for ALL x,y on disjoint
+-- A,B — the two-vector orthogonality the OrthogonalFamily of ranges L²(Aₙ) needs). With bricks 11–13 these are all
+-- the inputs to hasSum_iUnion: next fire assembles OrthogonalFamily.summable_iff_norm_sq_summable → HasSum → bundle PVM.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
