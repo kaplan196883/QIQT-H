@@ -102,9 +102,10 @@ item.** Never claim the `1/4`.
   `Measurable`/bound hypotheses made the instance-matching go through). **★ THE NORM IDENTITY ✅**
   (`norm_boundedFC_sq`: `‖boundedFC g x‖² = ∫|g|²dμ_x` — the `re`/`∫` diagonal of `T†T`, via
   `inner_boundedFC_self` + `conj z·z=‖z‖²` + `integral_ofReal`). The keystone converting truncation
-  L²-convergence into operator-image Cauchy-ness. NEXT: `‖boundedFC(fₙ−fₘ)x‖²=∫|fₙ−fₘ|²dμ_x → 0` ⟹
-  `boundedFC(fₙ)x` Cauchy ⟹ the strong limit `fcLinear x := lim boundedFC(fₙ)x` (the operator `∫f dE`) +
-  symmetry/self-adjointness.
+  L²-convergence into operator-image Cauchy-ness. **Difference-norm ✅** (`boundedFC_sub` +
+  `norm_boundedFC_sub_sq`: `‖boundedFC g₁ x − boundedFC g₂ x‖²=∫|g₁−g₂|²dμ_x` — the concrete Cauchy bound).
+  NEXT: `boundedFC(fₙ)x` is Cauchy (via the difference-norm + `∫|fₙ−fₘ|²→0`) ⟹ the strong limit
+  `fcLinear x := lim boundedFC(fₙ)x` (the operator `∫f dE`) + linearity + symmetry/self-adjointness.
 - [ ] **M2** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1 closed)
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)

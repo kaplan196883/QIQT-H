@@ -234,6 +234,28 @@ theorem norm_boundedFC_sq {g : Ω → ℂ} (hg : Measurable g) {C : ℝ} (hC0 : 
   rw [← inner_self_eq_norm_sq (𝕜 := ℂ), hkey2]
   simp
 
+/-- `boundedFC` is symbol-subtractive: `boundedFC(f−g) = boundedFC f − boundedFC g` (from `boundedFC_add`
+    via `(f−g)+g = f`). -/
+theorem boundedFC_sub {f g : Ω → ℂ} (hf : Measurable f) {Cf : ℝ} (hCf0 : 0 ≤ Cf)
+    (hCf : ∀ ω, ‖f ω‖ ≤ Cf) (hg : Measurable g) {Cg : ℝ} (hCg0 : 0 ≤ Cg) (hCg : ∀ ω, ‖g ω‖ ≤ Cg) :
+    P.boundedFC (hf.sub hg) (add_nonneg hCf0 hCg0)
+        (fun ω => (norm_sub_le _ _).trans (add_le_add (hCf ω) (hCg ω)))
+      = P.boundedFC hf hCf0 hCf - P.boundedFC hg hCg0 hCg := by
+  have hadd := P.boundedFC_add (hf.sub hg) hg (add_nonneg hCf0 hCg0) hCg0
+    (fun ω => (norm_sub_le _ _).trans (add_le_add (hCf ω) (hCg ω))) hCg
+  rw [P.boundedFC_congr _ _ _ hf hCf0 hCf (by funext ω; ring)] at hadd
+  rw [hadd]; abel
+
+/-- **The difference-norm identity** `‖boundedFC g₁ x − boundedFC g₂ x‖² = ∫ |g₁−g₂|² dμ_x` — the concrete
+    bound that makes `boundedFC(fₙ)x` a Cauchy sequence (from `boundedFC_sub` + the norm identity). -/
+theorem norm_boundedFC_sub_sq {g₁ g₂ : Ω → ℂ} (h₁ : Measurable g₁) {C₁ : ℝ} (hC₁0 : 0 ≤ C₁)
+    (hC₁ : ∀ ω, ‖g₁ ω‖ ≤ C₁) (h₂ : Measurable g₂) {C₂ : ℝ} (hC₂0 : 0 ≤ C₂)
+    (hC₂ : ∀ ω, ‖g₂ ω‖ ≤ C₂) (x : H) :
+    ‖P.boundedFC h₁ hC₁0 hC₁ x - P.boundedFC h₂ hC₂0 hC₂ x‖ ^ 2
+      = ∫ ω, ‖g₁ ω - g₂ ω‖ ^ 2 ∂(P.scalarMeasure x) := by
+  rw [← ContinuousLinearMap.sub_apply, ← P.boundedFC_sub h₁ hC₁0 hC₁ h₂ hC₂0 hC₂,
+    P.norm_boundedFC_sq]
+
 /-! ### Bounded truncations of the symbol (the operator's `L²`-Cauchy engine)
 
 The unbounded operator `∫ f dE` is built as the strong limit `Kx := limₙ boundedFC(fₙ) x` over the bounded
