@@ -1171,6 +1171,9 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — energy ∫f²dμ_x is ‖c‖²-homogeneous + sub-additive (parallelogram μ_{x+y}≤2μ_x+2μ_y);
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcDomain
 -- so the finite-energy set is a ℂ-submodule — the natural domain of the unbounded self-adjoint operator K=∫f dE.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.mem_fcDomain_of_bounded
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcDomain_eq_top_of_bounded
+-- bounded symbol ⟹ full domain (∫f²dμ_x ≤ C²‖x‖²) — the bridge to boundedFC; K is unbounded only via log.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

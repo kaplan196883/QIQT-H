@@ -83,4 +83,26 @@ noncomputable def fcDomain (f : Ω → ℝ) : Submodule ℂ H where
 @[simp] theorem mem_fcDomain {f : Ω → ℝ} {x : H} :
     x ∈ P.fcDomain f ↔ P.fcEnergy f x ≠ ⊤ := Iff.rfl
 
+/-- **A bounded symbol has full domain.**  If `|f| ≤ C` then every vector has finite energy
+    (`∫ f² dμ_x ≤ C²‖x‖²`), so `x ∈ fcDomain f`.  (This is why `K = ∫ log(r/(2−r)) dE_R` is genuinely
+    *unbounded* — its domain is proper precisely because `log` is unbounded, not bounded.) -/
+theorem mem_fcDomain_of_bounded {f : Ω → ℝ} {C : ℝ} (hC : ∀ ω, |f ω| ≤ C) (x : H) :
+    x ∈ P.fcDomain f := by
+  rw [mem_fcDomain]
+  have hpt : ∀ ω, ENNReal.ofReal (f ω ^ 2) ≤ ENNReal.ofReal (C ^ 2) := fun ω =>
+    ENNReal.ofReal_le_ofReal (by nlinarith [hC ω, abs_nonneg (f ω), sq_abs (f ω)])
+  have hbound : P.fcEnergy f x ≤ ENNReal.ofReal (C ^ 2) * P.scalarMeasure x Set.univ := by
+    rw [fcEnergy]
+    calc ∫⁻ ω, ENNReal.ofReal (f ω ^ 2) ∂(P.scalarMeasure x)
+        ≤ ∫⁻ _, ENNReal.ofReal (C ^ 2) ∂(P.scalarMeasure x) := lintegral_mono hpt
+      _ = ENNReal.ofReal (C ^ 2) * P.scalarMeasure x Set.univ := by rw [lintegral_const]
+  exact ne_top_of_le_ne_top (ENNReal.mul_ne_top ENNReal.ofReal_ne_top
+    (by rw [P.scalarMeasure_univ]; exact ENNReal.ofReal_ne_top)) hbound
+
+/-- **A bounded symbol's FC domain is all of `H`** — the consistency bridge to the bounded functional
+    calculus `boundedFC` (where the operator is total). -/
+theorem fcDomain_eq_top_of_bounded {f : Ω → ℝ} {C : ℝ} (hC : ∀ ω, |f ω| ≤ C) :
+    P.fcDomain f = ⊤ :=
+  Submodule.eq_top_iff'.mpr (P.mem_fcDomain_of_bounded hC)
+
 end QIQTH.Spectral.ProjectionValuedMeasure
