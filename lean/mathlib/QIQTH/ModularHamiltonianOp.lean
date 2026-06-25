@@ -258,4 +258,24 @@ theorem continuousAt_modUnitary (S : StandardSubspace H) {ξ : H}
   exact (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).continuousAt_boundedFC_expSymbol'
     (kFn_val_measurable S).neg hdom' t₀
 
+/-- **The GR-chain localization identity, derived: `d/dt⟪ξ, modUnitary S t ξ⟫|₀ = i·(−S)`.**  This is *exactly*
+    the modular-correlation-derivative hypothesis bundled into `WedgeKMSToGR.WedgeKMSFlux` (the per-null-generator
+    localization input of the Bekenstein→GR chain), here **derived** from the operator modular machinery rather
+    than assumed: the heat-flux datum `kd` of the GR chain equals `−cgpEntropy S ξ` (the modular entropy), via the
+    Stone generator `−iK` (`hasDerivAt_modUnitary`) composed with `⟪ξ,·⟫` and the operator first law `⟨K⟩=S`
+    (`modK_inner_self`).  So `d/dt⟨Δ^{it}⟩|₀ = i·(−S)` — the first-law/Clausius datum at the operator level.
+    Axiom-free. -/
+theorem hasDerivAt_inner_modUnitary (S : StandardSubspace H) {ξ : H}
+    (hdom : ξ ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => kFn ω.val))
+    (hspec : ∀ ω : spectrum ℝ (rvdRC S), (ω : spectrum ℝ (rvdRC S)).val ∈ Set.Ioo (0 : ℝ) 2) :
+    HasDerivAt (fun t : ℝ => inner ℂ ξ (modUnitary S t ξ))
+      (Complex.I * ((-cgpEntropy S ξ : ℝ) : ℂ)) 0 := by
+  have h := (hasDerivAt_const (0 : ℝ) ξ).inner ℂ (hasDerivAt_modUnitary S hdom)
+  have hval : inner ℂ ξ (-(Complex.I • modK S ξ)) + inner ℂ (0 : H) (modUnitary S 0 ξ)
+      = Complex.I * ((-cgpEntropy S ξ : ℝ) : ℂ) := by
+    rw [inner_zero_left, add_zero, inner_neg_right, inner_smul_right, modK_inner_self S ξ hdom hspec]
+    push_cast; ring
+  rwa [hval] at h
+
 end QIQTH.StandardSubspaceModular

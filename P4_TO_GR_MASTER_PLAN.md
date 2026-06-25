@@ -226,6 +226,12 @@ item.** Never claim the `1/4`.
     every `t₀`, domain `ξ`) is the last piece: with `modUnitary_add` (group), `modUnitary_unitary`, the generator
     `−iK` (`hasDerivAt_modUnitary`) and strong continuity, the crossed-product's `Δ^{it}` is now a full
     `C₀` one-parameter unitary group **with a known generator** — exactly the Stone-theorem package the Wall rests on.
+  • **GR-CHAIN LOCALIZATION IDENTITY DERIVED ✅ (bridges M2 → M6/M7)** — `hasDerivAt_inner_modUnitary`:
+    `d/dt⟪ξ, modUnitary S t ξ⟫|₀ = i·(−S)`. This is **exactly** the modular-correlation-derivative hypothesis bundled
+    into `WedgeKMSToGR.WedgeKMSFlux` (line 65 — the per-null-generator localization input of the Bekenstein→GR chain),
+    now *derived* from the operator modular machinery (generator `−iK` + first law `⟨K⟩=S`) rather than assumed. It
+    identifies the GR heat-flux datum `kd = −cgpEntropy S ξ` (the modular entropy) — the first-law/Clausius datum at
+    the operator level. The modular Stone work now feeds directly into the GR derivation chain's labelled inputs.
   NB the Bochner-over-`scalarMeasure` DCT route hits a `whnf` wall — the `lintegral`/`HasDerivAt` route is the way.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,
