@@ -15,6 +15,8 @@ This is the first brick of the **multiplication PVM** (the position operator's s
 import Mathlib.MeasureTheory.Function.LpSpace.Basic
 import Mathlib.MeasureTheory.Function.L2Space
 import Mathlib.Analysis.InnerProductSpace.Adjoint
+import Mathlib.Analysis.InnerProductSpace.Subspace
+import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 namespace QIQTH.Spectral.Multiplication
 
@@ -398,6 +400,40 @@ theorem indMul_inner_orthogonal' {A B : Set α} (hA : MeasurableSet A) (hB : Mea
     ← ContinuousLinearMap.star_eq_adjoint, (indMul_isSelfAdjoint hA).star_eq,
     ← ContinuousLinearMap.comp_apply, indMul_comp_disjoint hA hB h,
     ContinuousLinearMap.zero_apply, inner_zero_right]
+
+/-- **Summability of the spectral components** `∑ₙ E(Aₙ) x` for a pairwise-disjoint measurable family — the
+    analytic heart of the unconditional σ-additivity. The vectors `E(Aₙ) x` live in the pairwise-orthogonal
+    ranges `L²(Aₙ)`, and `∑ₙ ‖E(Aₙ)x‖² ≤ ‖x‖²` (finite partial sums `= ‖E(⋃ᵢ₌₀ⁿ Aᵢ)x‖² ≤ ‖x‖²` by Pythagoras +
+    contractivity), so by `OrthogonalFamily.summable_iff_norm_sq_summable` the family is summable in `L²`. -/
+theorem summable_indMul {A : ℕ → Set α} (hA : ∀ n, MeasurableSet (A n))
+    (hd : Pairwise (fun m n => Disjoint (A m) (A n))) (x : Lp ℂ 2 μ) :
+    Summable (fun n => indMul (μ := μ) (hA n) x) := by
+  classical
+  set K : ℕ → Submodule ℂ (Lp ℂ 2 μ) := fun n => LinearMap.range (indMul (hA n)).toLinearMap with hKdef
+  have hOF : OrthogonalFamily ℂ (fun n => (K n : Submodule ℂ (Lp ℂ 2 μ)))
+      (fun n => (K n).subtypeₗᵢ) := by
+    intro i j hij v w
+    obtain ⟨a, ha⟩ := LinearMap.mem_range.mp v.2
+    obtain ⟨b, hb⟩ := LinearMap.mem_range.mp w.2
+    show inner ℂ (↑v : Lp ℂ 2 μ) (↑w : Lp ℂ 2 μ) = 0
+    rw [← ha, ← hb]
+    exact indMul_inner_orthogonal' (hA i) (hA j) (hd hij) a b
+  set vv : (∀ n, (K n : Submodule ℂ (Lp ℂ 2 μ))) := fun n => ⟨indMul (hA n) x, ⟨x, rfl⟩⟩ with hvvdef
+  have hVcoe : ∀ n, (K n).subtypeₗᵢ (vv n) = indMul (hA n) x := fun n => rfl
+  have hsq : Summable (fun n => ‖vv n‖ ^ 2) := by
+    apply summable_of_sum_range_le (c := ‖x‖ ^ 2) (fun n => sq_nonneg _)
+    intro n
+    rw [← hOF.norm_sum vv (Finset.range n)]
+    have hsum_eq : ∑ i ∈ Finset.range n, (K i).subtypeₗᵢ (vv i)
+        = indMul ((Finset.range n).measurableSet_biUnion (fun i _ => hA i)) x := by
+      simp only [hVcoe]
+      rw [← ContinuousLinearMap.sum_apply, indMul_biUnion_disjoint (Finset.range n) A hA hd]
+    rw [hsum_eq]
+    have hle := norm_indMul_le ((Finset.range n).measurableSet_biUnion (fun i _ => hA i)) x
+    nlinarith [norm_nonneg (indMul ((Finset.range n).measurableSet_biUnion (fun i _ => hA i)) x),
+      norm_nonneg x, hle]
+  have hsummable := (hOF.summable_iff_norm_sq_summable vv).mpr hsq
+  simpa only [hVcoe] using hsummable
 
 /-- **σ-additivity of the scalar spectral measure (continuity from above):** for an antitone family of
     measurable sets `Bₙ`, the spectral-projection masses `‖E(Bₙ) f‖² = ∫_{Bₙ} ‖f‖²` converge to `∫_{⋂Bₙ} ‖f‖²`.

@@ -325,6 +325,14 @@ item.** Never claim the `1/4`.
   the two-vector orthogonality the `OrthogonalFamily` of ranges `L²(Aₙ)` requires). With bricks 11–13, ALL inputs
   to `hasSum_iUnion` are now in hand. Next: assemble `OrthogonalFamily.summable_iff_norm_sq_summable` → `HasSum`
   → bundle the `ProjectionValuedMeasure` record.
+  **Brick 15 — SUMMABILITY of the spectral components (the analytic heart) ✅**: for pairwise-disjoint measurable
+  `A`, `Summable (fun n => E(Aₙ)x)` in `L²` (`summable_indMul`). The vectors `E(Aₙ)x` live in the pairwise-**orthogonal**
+  ranges `L²(Aₙ)`, assembled as an `OrthogonalFamily` of submodule ranges (brick 14 two-vector orthogonality); and
+  `∑‖E(Aₙ)x‖²≤‖x‖²` (finite partial sums `= ‖E(⋃ᵢ₌₀ⁿAᵢ)x‖²≤‖x‖²` by `OrthogonalFamily.norm_sum` Pythagoras + brick 13
+  range-additivity + brick 14 contractivity), so `OrthogonalFamily.summable_iff_norm_sq_summable` gives `Summable`.
+  This is the orthogonal-family bridge the `hasSum_iUnion` bundle needed — the genuine Mathlib-grade step, now landed.
+  Next: identify `∑' = E(⋃)x` (range partial sums `= E(⋃ᵢ₌₀ⁿAᵢ)x → E(⋃)x` via brick 11 + `HasSum.tendsto_sum_nat`,
+  uniqueness of limits) → bundle the `ProjectionValuedMeasure` record.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,
   `oneModeSympEig_symplectic_invariant` — `ν` is a basis-independent physical invariant). The `N`-mode normal-form

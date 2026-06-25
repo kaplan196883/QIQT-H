@@ -1405,6 +1405,13 @@ namespace QIQTH.AxiomAudit
 -- gives the uniform bound ∑‖E(Aₙ)x‖²≤‖x‖²), and indMul_inner_orthogonal' (⟪E(A)x,E(B)y⟫=0 for ALL x,y on disjoint
 -- A,B — the two-vector orthogonality the OrthogonalFamily of ranges L²(Aₙ) needs). With bricks 11–13 these are all
 -- the inputs to hasSum_iUnion: next fire assembles OrthogonalFamily.summable_iff_norm_sq_summable → HasSum → bundle PVM.
+#print axioms QIQTH.Spectral.Multiplication.summable_indMul
+-- ★ MULTIPLICATION PVM brick 15 — SUMMABILITY of the spectral components (the analytic heart): for pairwise-disjoint
+-- measurable A, Summable (fun n => E(Aₙ)x) in L². The vectors E(Aₙ)x live in the pairwise-ORTHOGONAL ranges L²(Aₙ)
+-- (assembled as an OrthogonalFamily of submodule ranges via brick 14's two-vector orthogonality), and
+-- ∑‖E(Aₙ)x‖²≤‖x‖² (finite partial sums = ‖E(⋃ᵢ₌₀ⁿAᵢ)x‖²≤‖x‖² by OrthogonalFamily.norm_sum Pythagoras + brick 13
+-- range-additivity + brick 14 contractivity), so OrthogonalFamily.summable_iff_norm_sq_summable gives Summable.
+-- The OrthogonalFamily bridge that the hasSum_iUnion bundle needed. Next: identify ∑'=E(⋃)x (brick 11) → bundle PVM.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
