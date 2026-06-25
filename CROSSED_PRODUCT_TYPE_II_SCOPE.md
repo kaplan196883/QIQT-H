@@ -96,6 +96,29 @@ increment with the `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>` tra
   `modularAut_add` (the cocycle/group law σ_{s+t}=σ_s∘σ_t), `modularAut_star` (`*`-preserving). This is the
   ℝ-action the crossed product `M ⋊_σ ℝ` is formed by — promoting the modular *flow* (unitaries) to the modular
   *automorphism* (of operators), the action-side foundation. Axiom-free (std 3); wired into AxiomAudit; budget 0.
-- **NEXT: Increment 1a/1b** — the crossed-product Hilbert space `L²(ℝ; H)` + the covariant representation:
-  `π(a)ξ(s) = modularAut S (-s) a (ξ s)`, translations `λ_t`, and the covariance `λ_t π(a) λ_{-t} = π(σ_t a)`
-  (now expressible via `modularAut_add`). The Bochner-`Lp` operator-valued plumbing is the real work.
+- **Increment 1a/1b/1c ⛔ BLOCKED (honest checkpoint, after investigation)** — the `L²(ℝ; H)` covariant
+  representation is the campaign's first genuine multi-week chunk, not a loop increment. Precise findings:
+  - **`λ_t` (clock translations):** Mathlib *has* the machinery — `MeasureTheory.DomMulAct`/`DomAddAct`
+    (`Mathlib/MeasureTheory/Function/LpSpace/DomAct/Basic.lean`) acts on `Lp E p μ` by precomposition with a
+    measure-preserving map, so `ℝᵈᵃᵃ` translates `L²(ℝ;H)`. But it is an *un-bundled action* (and
+    `Lp.compMeasurePreserving` is only an `AddMonoidHom`); turning it into a usable continuous-ℂ-linear
+    **unitary group** (the covariance needs `λ_{-t} = λ_t⁻¹`) is real bundling work.
+  - **`π(a)` (the matter representation):** a **genuine Mathlib gap.** It is operator-valued *post*-composition
+    `ξ(s) ↦ σ_{-s}(a)(ξ s)` — `DomAct` only does *pre*-composition (the translations). No operator-valued `Lp`
+    multiplication exists; it must be built from scratch (fiberwise `AEStronglyMeasurable` of `s ↦ σ_{-s}(a)(ξ s)`
+    + the `Lp` bound `‖π(a)ξ‖ ≤ ‖a‖·‖ξ‖`). This is the heart of 1a/1b and the real wall.
+  - **`X = A_edge` (the generator):** unbounded — needs Stone's theorem / unbounded-self-adjoint operators
+    (the same cited TT frontier `K` hit in JLMS Stage 1).
+
+  So the derivation honestly stops at the **action-side foundation (1a-0)**: the modular automorphism `σ_t` is a
+  machine-checked one-parameter group of unital `*`-automorphisms — the concrete ℝ-action the crossed product is
+  built from. The spatial crossed product (covariant rep) + the clock energy await the Bochner-`Lp`
+  operator-valued infrastructure (build) and Stone's theorem (frontier).
+
+### Status — Increment 1a-0 delivered; the spatial crossed product is the multi-week build
+**Delivered (axiom-free, budget 0):** the modular automorphism `σ_t` (`modularAut`) as a one-parameter group of
+unital `*`-homomorphisms — the action `M ⋊_σ ℝ` is formed by, promoted from the modular unitary flow.
+**Frontier (recorded, not faked):** the covariant representation `π`/`λ` on `L²(ℝ;H)` (π(a) = an operator-valued
+`Lp`-multiplication build; λ_t = a unitary-group bundling of the existing `DomAddAct`), the clock energy
+`X = A_edge` (Stone/unbounded), and beyond that the Type II trace (steps 2–4). All the multi-week arc, with the
+`1/4` coefficient the cited UV datum throughout.
