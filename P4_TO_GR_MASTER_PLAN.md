@@ -238,6 +238,9 @@ item.** Never claim the `1/4`.
     group law `U_t = U_{t₀}U_{t−t₀}` (`comp_sub_const` for the shift + `restrictScalars`/`comp_hasDerivAt` for the
     `U_{t₀}`-application). The FC-exponential group is `C¹` on the whole line: `U_t' = i·U_t·K` — the complete
     differentiable-Stone-group statement.
+  • **`modUnitary` `C¹` everywhere ✅** (`hasDerivAt_modUnitary'`: `d/dt(modUnitary S t ξ)|_{t₀} = Δ^{it₀}(−iK ξ)` at
+    every `t₀`) — the crossed-product `Δ^{it}` is now a fully smooth (`C¹`) `C₀` one-parameter unitary group with
+    generator `−iK`. Specializes the general `hasDerivAt_boundedFC_expSymbol'` via `modUnitary_eq` + `fcOp_neg`.
 
   **WedgeKMSFlux derivation-status map (precise):** the GR chain's `WedgeKMSFlux` bundle (per null generator) has 6
   inputs; the modular Stone machinery now provides one of the two `HasDerivAt` data:

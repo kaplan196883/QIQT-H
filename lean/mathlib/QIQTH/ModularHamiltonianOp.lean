@@ -278,6 +278,38 @@ theorem hasDerivAt_inner_modUnitary (S : StandardSubspace H) {ξ : H}
     push_cast; ring
   rwa [hval] at h
 
+/-- **The crossed-product modular flow is `C¹` everywhere:** `d/dt(modUnitary S t · ξ)|_{t₀} = Δ^{it₀}(−iK ξ)`
+    at every `t₀` (domain `ξ`), generalizing `hasDerivAt_modUnitary` (the `t₀ = 0` case) to the whole line.
+    With group law + unitarity + strong continuity, `modUnitary` is a `C¹` one-parameter unitary group with
+    generator `−iK = −i·modK`.  Specializes the general `hasDerivAt_boundedFC_expSymbol'` via `modUnitary_eq`
+    and the symbol-linearity `fcOp_neg`.  Axiom-free. -/
+theorem hasDerivAt_modUnitary' (S : StandardSubspace H) {ξ : H}
+    (hdom : ξ ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => kFn ω.val)) (t₀ : ℝ) :
+    HasDerivAt (fun t : ℝ => modUnitary S t ξ) (modUnitary S t₀ (-(Complex.I • modK S ξ))) t₀ := by
+  have hdom' : ξ ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => -kFn ω.val) := by
+    rw [ProjectionValuedMeasure.mem_fcDomain, ProjectionValuedMeasure.fcEnergy_neg]
+    exact ((PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).mem_fcDomain).mp hdom
+  have heq : (fun t : ℝ => modUnitary S t ξ)
+      = fun t : ℝ => (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).boundedFC
+        (QIQTH.Spectral.ProjectionValuedMeasure.measurable_expSymbol (kFn_val_measurable S).neg t)
+        zero_le_one (QIQTH.Spectral.ProjectionValuedMeasure.norm_expSymbol_le t) ξ := by
+    funext t; rw [modUnitary_eq S t]
+  rw [heq]
+  have h := (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).hasDerivAt_boundedFC_expSymbol'
+    (kFn_val_measurable S).neg hdom' t₀
+  have hval : (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).boundedFC
+        (QIQTH.Spectral.ProjectionValuedMeasure.measurable_expSymbol (kFn_val_measurable S).neg t₀)
+        zero_le_one (QIQTH.Spectral.ProjectionValuedMeasure.norm_expSymbol_le t₀)
+        (Complex.I • (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcOp
+          (kFn_val_measurable S).neg ξ)
+      = modUnitary S t₀ (-(Complex.I • modK S ξ)) := by
+    rw [← modUnitary_eq S t₀, modK,
+      (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcOp_neg (kFn_val_measurable S) hdom,
+      smul_neg]
+  rwa [hval] at h
+
 /-- **`modUnitary` is a strongly-continuous one-parameter unitary group** (the standard `C₀`-group statement):
     `t ↦ modUnitary S t ξ` is continuous (everywhere), for `ξ` in the domain of `K = modK`.  Packages
     `continuousAt_modUnitary` into the textbook `Continuous` form. -/

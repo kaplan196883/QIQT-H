@@ -1330,6 +1330,9 @@ namespace QIQTH.AxiomAudit
 -- derived from the modular machinery (generator −iK + first law ⟨K⟩=S). The GR heat-flux kd = −cgpEntropy (modular entropy).
 #print axioms QIQTH.StandardSubspaceModular.continuous_modUnitary
 -- ★ modUnitary is a strongly-continuous one-parameter unitary group (textbook C₀-group Continuous form).
+#print axioms QIQTH.StandardSubspaceModular.hasDerivAt_modUnitary'
+-- ★ modUnitary is C¹ EVERYWHERE: d/dt(modUnitary S t ξ)|_{t₀} = Δ^{it₀}(−iK ξ) at every t₀ (generalizes the t₀=0
+-- generator hasDerivAt_modUnitary to the whole line, via hasDerivAt_boundedFC_expSymbol' + modUnitary_eq + fcOp_neg).
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
