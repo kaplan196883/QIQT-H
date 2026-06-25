@@ -107,6 +107,11 @@ name_regex = "^(hsymm|hsymm_gi|hinv|hCg|hCgi|hPP|hPP'|hcong|hT_symm|hbar0|hbar_p
 # spacetime / index sets
 "Point"          = 'M^{#1}'                 # Point 4            -> M^4
 
+# metric and inverse metric (variadic variables; arity-aware firing renders the
+# 3-arg component form with subscripts and leaves the matrix/bare uses plain)
+"g"              = 'g_{#2#3}(#1)'           # g x μ ν            -> g_{μν}(x);  g x stays g x
+"gi"             = 'g^{#2#3}(#1)'           # gi y a b           -> g^{ab}(y)  (inverse metric)
+
 # curvature & stress (Curvature.*)
 "boxField"       = '(\Box #1)(#4)'          # boxField φ g gi x  -> (□φ)(x)
 "kgStress"       = 'T(#5)'                  # kgStress m φ g gi x [μ ν] -> T(x) [μ ν]

@@ -94,6 +94,11 @@ _IDENT = re.compile(r"[A-Za-z_][A-Za-z0-9_.'!?]*")
 # glyphs that escaped every map during this run (surfaced by the CLI for review)
 _UNMAPPED = set()
 
+# characters that cannot begin an application argument (operators / separators /
+# closers). Everything else — letters, digits, (, [, Greek, ⊤ ⊥ ∅ ℝ ∞ … — can.
+_DELIMS = set(")]},;=<>+-*/|:^"
+                "→↦⟶↔≤≥≠≈≡≃≅∼≪≫∝∣∈∉⊆⊂⊇∩∪∖∧∨¬·•∙×⊗⊕±∓∘⇒⟹⟸⋯⋮⋱∑∏∫")
+
 # operator commands (NOT atoms): a thin-space must never follow these.
 _OP_WORDS = ["cdot", "le", "ge", "ne", "approx", "equiv", "simeq", "cong",
              "sim", "propto", "in", "notin", "subseteq", "subset", "supseteq",
@@ -106,13 +111,15 @@ _OP_WORDS = ["cdot", "le", "ge", "ne", "approx", "equiv", "simeq", "cong",
 def _read_arg(pp, i):
     """Read one application argument from `pp` at offset `i` (after skipping
     spaces): a balanced (...)/[...] group, or a single atom (identifier / Greek /
-    number) plus any trailing unicode sub/superscripts. Returns (substring, new_i).
+    number) plus any trailing unicode sub/superscripts. Returns (substring, new_i),
+    or (None, i) when the next token is a delimiter — `i` is then left untouched.
     """
     n = len(pp)
+    orig = i
     while i < n and pp[i] == " ":
         i += 1
     if i >= n:
-        return None, i
+        return None, orig
     # an unparenthesized `fun … => …` / `λ …` argument binds maximally — it runs
     # to the end of the enclosing scope (here, the rest of the string, since a
     # parenthesised lambda is caught by the balanced-group branch below).
@@ -131,6 +138,8 @@ def _read_arg(pp, i):
                     break
             j += 1
         return pp[i:j], j
+    if pp[i] in _DELIMS:
+        return None, orig                       # a delimiter: no argument here
     m = _IDENT.match(pp, i)
     if m:
         j = m.end()
@@ -139,7 +148,7 @@ def _read_arg(pp, i):
         while j < n and (pp[j].isdigit() or pp[j] == "."):
             j += 1
     else:
-        j = i + 1                      # a single glyph (Greek letter, etc.)
+        j = i + 1            # any other non-delimiter glyph (⊤, ℝ, μ, ℓ, …) is an atom
     while j < n and (pp[j] in SUPERS or pp[j] in SUBS):
         j += 1
     return pp[i:j], j
@@ -161,10 +170,12 @@ def _render_ident(tok, notation):
     """
     if tok in KEYWORDS:
         return None  # handled by caller
-    if tok in notation:
+    # plain (non-template) notation overrides; templates are handled by the
+    # tokenizer's arity-aware firing, and must fall through here when they don't fire.
+    if tok in notation and not re.search(r"#\d", notation[tok]):
         return notation[tok]
     last = tok.split(".")[-1]
-    if last in notation:
+    if last in notation and not re.search(r"#\d", notation[last]):
         return notation[last]
     # strip Lean decorations Lean allows in names
     base = last.rstrip("!?")
@@ -218,13 +229,23 @@ def tex_of_pp(pp, notation=None):
             val = _lookup(tok, notation)
             if val is not None and re.search(r"#\d", val):   # applied template
                 argc = max(int(d) for d in re.findall(r"#(\d+)", val))
-                args = []
+                # arity-aware: fire only if exactly `argc` real arguments are present
+                # (so a variadic variable like `g` renders `g_{μν}(x)` when applied to
+                # 3 args but stays plain `g` in `(g x)` or when passed bare).
+                args, j, ok = [], i, True
                 for _ in range(argc):
-                    raw, i = _read_arg(pp, i)
-                    args.append(tex_of_pp(raw, notation) if raw else "")
-                out.append(re.sub(r"#(\d+)",
-                                  lambda mt: args[int(mt.group(1)) - 1], val))
-                continue
+                    raw, j = _read_arg(pp, j)
+                    if raw is None:
+                        ok = False; break
+                    args.append(tex_of_pp(raw, notation))
+                if ok:
+                    i = j
+                    # brace-wrap each substituted arg so adjacent placeholders stay
+                    # self-delimiting (e.g. #2#3 with σ,b -> {\sigma}{b}, not \sigmab).
+                    out.append(re.sub(r"#(\d+)",
+                                      lambda mt: "{" + args[int(mt.group(1)) - 1] + "}",
+                                      val))
+                    continue
             out.append(_render_ident(tok, notation))
             continue
         if c in SYMBOLS:

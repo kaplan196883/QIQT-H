@@ -34,450 +34,450 @@
 \noindent\small Statements machine-translated from the Lean 4 / Mathlib source by \texttt{lean\_track latex}: notation only, content verbatim. Each \texttt{name} is the Lean declaration.\normalsize\par\medskip
 \begin{theorem}[\texttt{QIQTH.WedgeKMSToGR.qiqt\_gr\_freefield\_complete}]\label{thm:qiqth-wedgekmstogr-qiqt-gr-freefield-complete}
 \textit{capstone.}
-Given $\iota : \mathrm{Type} \mathrm{u\_1}$, $g : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{4} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $A : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $p : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \iota \to \mathbb{R}$, $W : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to M^{4} \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{mw} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
+Given $\iota : \mathrm{Type} \mathrm{u\_1}$, $g : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{{4}} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $A : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $p : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \iota \to \mathbb{R}$, $W : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to M^{{4}} \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{mw} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
 with $\mathrm{Fintype} \iota$,
 assume
 \begin{itemize}
   \item[\rm(instance)] $\mathrm{Nonempty} \iota$
-  \item[\rm(hsymm)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), g\,y\,a\,b = g\,y\,b\,a$
-  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \mathrm{gi}\,y\,a\,b = \mathrm{gi}\,y\,b\,a$
-  \item[\rm(hinv)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g\,y\,a \sigma \cdot \mathrm{gi}\,y \sigma\,b = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto g\,y\,a\,b)\in C^{\infty}$
-  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto \mathrm{gi}\,y\,a\,b)\in C^{\infty}$
+  \item[\rm(hsymm)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})$
+  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g^{{a}{b}}({y}) = g^{{b}{a}}({y})$
+  \item[\rm(hinv)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g_{{a}{b}}({y})})\in C^{\infty}$
+  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g^{{a}{b}}({y})})\in C^{\infty}$
   \item[\rm(hbar0)] $\hbar \ne 0$
   \item[\rm(hbar\_pos)] $0 < \hbar$
   \item[\rm(heta)] $\eta \ne 0$
   \item[\rm(ha)] $a = 2 \cdot \pi / (\hbar \cdot \eta)$
-  \item[\rm(hφ)] $(\varphi)\in C^{\infty}$
-  \item[\rm(hKG)] $\forall\,(x : M^{4}), (\Box \varphi)(x) = m ^ 2 \cdot \varphi\,x$
-  \item[\rm(hPP)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hcong)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), g\,x\,i\,j = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{kl} \cdot P\,x\,l\,j$
-  \item[\rm(hpp\_nn)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(t : \mathbb{R})\,(r : \iota), 0 \le p\,x\,v\,t\,r$
-  \item[\rm(hpp1)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(t : \mathbb{R}), \sum_{r}\,p\,x\,v\,t\,r = 1$
-  \item[\rm(hpp0)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), p\,x\,v\,0 = \lambda\,x \mapsto ((\# \iota))^{-1}$
-  \item[\rm(hcap)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \eta \cdot A\,x\,v\,0 = \log\,(\# \iota)$
-  \item[\rm(hWx)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to W\,x\,v\,x = v$
-  \item[\rm(hWC)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\mu : \mathrm{Fin}\,4), (\lambda\,y \mapsto W\,x\,v\,y \mu)\in C^{\infty}$
-  \item[\rm(hWgeo)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(y : M^{4})\,(\mu : \mathrm{Fin}\,4), \sum_{\nu}\,W\,x\,v\,y \nu \cdot (\nabla (W\,x\,v))_{\nu}{}^{\mu}(y) = 0$
-  \item[\rm(hWequil)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \sum_{\mu} \sum_{\nu}\,(\nabla (W\,x\,v))_{\mu}{}^{\nu}(x) \cdot (\nabla (W\,x\,v))_{\nu}{}^{\mu}(x) = 0$
-  \item[\rm(hS)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\lambda\,t \mapsto S((p\,x\,v\,t))))'(0)=(\mathrm{sd}\,x\,v)$
-  \item[\rm(hK)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\lambda\,t \mapsto S((p\,x\,v\,t)) + D_{\mathrm{KL}}((p\,x\,v\,t)\,\|\,(p\,x\,v\,0))))'(0)=(2 \cdot \pi / \hbar \cdot (T(x))(v,v))$
-  \item[\rm(hA)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((A\,x\,v))'(0)=(-\sum_{\nu}\,W\,x\,v\,x \nu \cdot \partial_{\nu}((\lambda\,y \mapsto \theta(y)))(x))$
-  \item[\rm(hbound)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, S((p\,x\,v\,t)) \le \eta \cdot A\,x\,v\,t$
-  \item[\rm(hmw)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
+  \item[\rm(hφ)] $({\varphi})\in C^{\infty}$
+  \item[\rm(hKG)] $\forall\,(x : M^{{4}}), (\Box {\varphi})({x}) = m ^ 2 \cdot \varphi\,x$
+  \item[\rm(hPP)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hcong)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), g_{{i}{j}}({x}) = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{{k}{l}} \cdot P\,x\,l\,j$
+  \item[\rm(hpp\_nn)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(t : \mathbb{R})\,(r : \iota), 0 \le p\,x\,v\,t\,r$
+  \item[\rm(hpp1)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(t : \mathbb{R}), \sum_{r}\,p\,x\,v\,t\,r = 1$
+  \item[\rm(hpp0)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), p\,x\,v\,0 = \lambda\,x \mapsto ((\# \iota))^{-1}$
+  \item[\rm(hcap)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \eta \cdot A\,x\,v\,0 = \log\,(\# \iota)$
+  \item[\rm(hWx)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to W\,x\,v\,x = v$
+  \item[\rm(hWC)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\mu : \mathrm{Fin}\,4), ({\lambda\,y \mapsto W\,x\,v\,y \mu})\in C^{\infty}$
+  \item[\rm(hWgeo)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(y : M^{{4}})\,(\mu : \mathrm{Fin}\,4), \sum_{\nu}\,W\,x\,v\,y \nu \cdot (\nabla {(W\,x\,v)})_{{\nu}}{}^{{\mu}}({y}) = 0$
+  \item[\rm(hWequil)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \sum_{\mu} \sum_{\nu}\,(\nabla {(W\,x\,v)})_{{\mu}}{}^{{\nu}}({x}) \cdot (\nabla {(W\,x\,v)})_{{\nu}}{}^{{\mu}}({x}) = 0$
+  \item[\rm(hS)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\lambda\,t \mapsto S({(p\,x\,v\,t)}))})'({0})={(\mathrm{sd}\,x\,v)}$
+  \item[\rm(hK)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\lambda\,t \mapsto S({(p\,x\,v\,t)}) + D_{\mathrm{KL}}({(p\,x\,v\,t)}\,\|\,{(p\,x\,v\,0)}))})'({0})={(2 \cdot \pi / \hbar \cdot {(T({x}))}({v},{v}))}$
+  \item[\rm(hA)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(A\,x\,v)})'({0})={(-\sum_{\nu}\,W\,x\,v\,x \nu \cdot \partial_{{\nu}}({(\lambda\,y \mapsto \theta({y}))})({x}))}$
+  \item[\rm(hbound)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, S({(p\,x\,v\,t)}) \le \eta \cdot A\,x\,v\,t$
+  \item[\rm(hmw)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
 \end{itemize}
-Then \[ \exists \Lambda, \forall\,(x : M^{4})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T(x) \mu \nu = G_{\mu\nu}(x) + \Lambda \cdot g\,x \mu \nu \]
+Then \[ \exists \Lambda, \forall\,(x : M^{{4}})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T({x}) \mu \nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) \]
 \end{theorem}
 
 
 \begin{theorem}[\texttt{QIQTH.WedgeKMSToGR.qiqt\_gr\_ppwave\_showcase}]\label{thm:qiqth-wedgekmstogr-qiqt-gr-ppwave-showcase}
 \textit{spine.}
-Given $\iota : \mathrm{Type} \mathrm{u\_1}$, $H : M^{4} \to \mathbb{R}$, $\varphi : M^{4} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $c : \mathbb{R}$, $\mathrm{sd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $p : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \iota \to \mathbb{R}$, $W : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to M^{4} \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{mw} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
+Given $\iota : \mathrm{Type} \mathrm{u\_1}$, $H : M^{{4}} \to \mathbb{R}$, $\varphi : M^{{4}} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $c : \mathbb{R}$, $\mathrm{sd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $p : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \iota \to \mathbb{R}$, $W : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to M^{{4}} \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{mw} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
 with $\mathrm{Fintype} \iota$,
 assume
 \begin{itemize}
   \item[\rm(instance)] $\mathrm{Nonempty} \iota$
-  \item[\rm(hCH)] $(H)\in C^{\infty}$
+  \item[\rm(hCH)] $({H})\in C^{\infty}$
   \item[\rm(hbar0)] $\hbar \ne 0$
   \item[\rm(hbar\_pos)] $0 < \hbar$
   \item[\rm(heta)] $\eta \ne 0$
   \item[\rm(ha)] $a = 2 \cdot \pi / (\hbar \cdot \eta)$
-  \item[\rm(hφ)] $(\varphi)\in C^{\infty}$
-  \item[\rm(hKG)] $\forall\,(x : M^{4}), (\Box \varphi)(x) = m ^ 2 \cdot \varphi\,x$
+  \item[\rm(hφ)] $({\varphi})\in C^{\infty}$
+  \item[\rm(hKG)] $\forall\,(x : M^{{4}}), (\Box {\varphi})({x}) = m ^ 2 \cdot \varphi\,x$
   \item[\rm(hcap)] $\eta \cdot c = \log\,(\# \iota)$
-  \item[\rm(hpp\_nn)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(t : \mathbb{R})\,(r : \iota), 0 \le p\,x\,v\,t\,r$
-  \item[\rm(hpp1)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(t : \mathbb{R}), \sum_{r}\,p\,x\,v\,t\,r = 1$
-  \item[\rm(hpp0)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), p\,x\,v\,0 = \lambda\,x \mapsto ((\# \iota))^{-1}$
-  \item[\rm(hWx)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g^{\mathrm{pp}}\,H\,x)(v,v) = 0 \to W\,x\,v\,x = v$
-  \item[\rm(hWC)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\mu : \mathrm{Fin}\,4), (\lambda\,y \mapsto W\,x\,v\,y \mu)\in C^{\infty}$
-  \item[\rm(hcov)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(p\,q : \mathrm{Fin}\,4)\,(y : M^{4}), (\nabla (W\,x\,v))_{p}{}^{q}(y) = 0$
-  \item[\rm(hS)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g^{\mathrm{pp}}\,H\,x)(v,v) = 0 \to ((\lambda\,t \mapsto S((p\,x\,v\,t))))'(0)=(\mathrm{sd}\,x\,v)$
-  \item[\rm(hK)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g^{\mathrm{pp}}\,H\,x)(v,v) = 0 \to ((\lambda\,t \mapsto S((p\,x\,v\,t)) + D_{\mathrm{KL}}((p\,x\,v\,t)\,\|\,(p\,x\,v\,0))))'(0)=(2 \cdot \pi / \hbar \cdot (T(x))(v,v))$
-  \item[\rm(hmw)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
+  \item[\rm(hpp\_nn)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(t : \mathbb{R})\,(r : \iota), 0 \le p\,x\,v\,t\,r$
+  \item[\rm(hpp1)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(t : \mathbb{R}), \sum_{r}\,p\,x\,v\,t\,r = 1$
+  \item[\rm(hpp0)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), p\,x\,v\,0 = \lambda\,x \mapsto ((\# \iota))^{-1}$
+  \item[\rm(hWx)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g^{\mathrm{pp}}\,H\,x)}({v},{v}) = 0 \to W\,x\,v\,x = v$
+  \item[\rm(hWC)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\mu : \mathrm{Fin}\,4), ({\lambda\,y \mapsto W\,x\,v\,y \mu})\in C^{\infty}$
+  \item[\rm(hcov)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(p\,q : \mathrm{Fin}\,4)\,(y : M^{{4}}), (\nabla {(W\,x\,v)})_{{p}}{}^{{q}}({y}) = 0$
+  \item[\rm(hS)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g^{\mathrm{pp}}\,H\,x)}({v},{v}) = 0 \to ({(\lambda\,t \mapsto S({(p\,x\,v\,t)}))})'({0})={(\mathrm{sd}\,x\,v)}$
+  \item[\rm(hK)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g^{\mathrm{pp}}\,H\,x)}({v},{v}) = 0 \to ({(\lambda\,t \mapsto S({(p\,x\,v\,t)}) + D_{\mathrm{KL}}({(p\,x\,v\,t)}\,\|\,{(p\,x\,v\,0)}))})'({0})={(2 \cdot \pi / \hbar \cdot {(T({x}))}({v},{v}))}$
+  \item[\rm(hmw)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
 \end{itemize}
-Then \[ \exists \Lambda, \forall\,(x : M^{4})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T(x) \mu \nu = G_{\mu\nu}(x) + \Lambda \cdot g^{\mathrm{pp}}\,H\,x \mu \nu \]
+Then \[ \exists \Lambda, \forall\,(x : M^{{4}})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T({x}) \mu \nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g^{\mathrm{pp}}\,H\,x \mu \nu \]
 \end{theorem}
 
 
 \begin{theorem}[\texttt{QIQTH.WedgeKMSToGR.qiqt\_gr\_freefield\_gaussian}]\label{thm:qiqth-wedgekmstogr-qiqt-gr-freefield-gaussian}
 \textit{spine.}
-Given $g : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{4} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{Sf} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ad} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{mw} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $W : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to M^{4} \to \mathrm{Fin}\,4 \to \mathbb{R}$,
+Given $g : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{{4}} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{Sf} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ad} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{mw} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $W : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to M^{{4}} \to \mathrm{Fin}\,4 \to \mathbb{R}$,
 assume
 \begin{itemize}
-  \item[\rm(hsymm)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), g\,y\,a\,b = g\,y\,b\,a$
-  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \mathrm{gi}\,y\,a\,b = \mathrm{gi}\,y\,b\,a$
-  \item[\rm(hinv)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g\,y\,a \sigma \cdot \mathrm{gi}\,y \sigma\,b = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto g\,y\,a\,b)\in C^{\infty}$
-  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto \mathrm{gi}\,y\,a\,b)\in C^{\infty}$
+  \item[\rm(hsymm)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})$
+  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g^{{a}{b}}({y}) = g^{{b}{a}}({y})$
+  \item[\rm(hinv)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g_{{a}{b}}({y})})\in C^{\infty}$
+  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g^{{a}{b}}({y})})\in C^{\infty}$
   \item[\rm(hbar0)] $\hbar \ne 0$
   \item[\rm(hbar\_pos)] $0 < \hbar$
   \item[\rm(heta)] $\eta \ne 0$
   \item[\rm(ha)] $a = 2 \cdot \pi / (\hbar \cdot \eta)$
-  \item[\rm(hφ)] $(\varphi)\in C^{\infty}$
-  \item[\rm(hKG)] $\forall\,(x : M^{4}), (\Box \varphi)(x) = m ^ 2 \cdot \varphi\,x$
-  \item[\rm(hPP)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hcong)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), g\,x\,i\,j = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{kl} \cdot P\,x\,l\,j$
-  \item[\rm(hS)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\mathrm{Sf}\,x\,v))'(0)=(\mathrm{sd}\,x\,v)$
-  \item[\rm(hK)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\mathrm{KE}\,x\,v))'(0)=(2 \cdot \pi / \hbar \cdot (T(x))(v,v))$
-  \item[\rm(hA)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((A\,x\,v))'(0)=(\mathrm{ad}\,x\,v)$
-  \item[\rm(hbound)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, \mathrm{Sf}\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
-  \item[\rm(hsat)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
-  \item[\rm(hDnn)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - \mathrm{Sf}\,x\,v\,t$
-  \item[\rm(hD0)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{KE}\,x\,v\,0 - \mathrm{Sf}\,x\,v\,0 = 0$
-  \item[\rm(hmw)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
-  \item[\rm(hWx)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to W\,x\,v\,x = v$
-  \item[\rm(hWC)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\mu : \mathrm{Fin}\,4), (\lambda\,y \mapsto W\,x\,v\,y \mu)\in C^{\infty}$
-  \item[\rm(hWgeo)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(y : M^{4})\,(\mu : \mathrm{Fin}\,4), \sum_{\nu}\,W\,x\,v\,y \nu \cdot (\nabla (W\,x\,v))_{\nu}{}^{\mu}(y) = 0$
-  \item[\rm(hWequil)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \sum_{\mu} \sum_{\nu}\,(\nabla (W\,x\,v))_{\mu}{}^{\nu}(x) \cdot (\nabla (W\,x\,v))_{\nu}{}^{\mu}(x) = 0$
-  \item[\rm(hWarea)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{ad}\,x\,v = -\sum_{\nu}\,W\,x\,v\,x \nu \cdot \partial_{\nu}((\lambda\,y \mapsto \theta(y)))(x)$
+  \item[\rm(hφ)] $({\varphi})\in C^{\infty}$
+  \item[\rm(hKG)] $\forall\,(x : M^{{4}}), (\Box {\varphi})({x}) = m ^ 2 \cdot \varphi\,x$
+  \item[\rm(hPP)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hcong)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), g_{{i}{j}}({x}) = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{{k}{l}} \cdot P\,x\,l\,j$
+  \item[\rm(hS)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\mathrm{Sf}\,x\,v)})'({0})={(\mathrm{sd}\,x\,v)}$
+  \item[\rm(hK)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\mathrm{KE}\,x\,v)})'({0})={(2 \cdot \pi / \hbar \cdot {(T({x}))}({v},{v}))}$
+  \item[\rm(hA)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(A\,x\,v)})'({0})={(\mathrm{ad}\,x\,v)}$
+  \item[\rm(hbound)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, \mathrm{Sf}\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
+  \item[\rm(hsat)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
+  \item[\rm(hDnn)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - \mathrm{Sf}\,x\,v\,t$
+  \item[\rm(hD0)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{KE}\,x\,v\,0 - \mathrm{Sf}\,x\,v\,0 = 0$
+  \item[\rm(hmw)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
+  \item[\rm(hWx)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to W\,x\,v\,x = v$
+  \item[\rm(hWC)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\mu : \mathrm{Fin}\,4), ({\lambda\,y \mapsto W\,x\,v\,y \mu})\in C^{\infty}$
+  \item[\rm(hWgeo)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(y : M^{{4}})\,(\mu : \mathrm{Fin}\,4), \sum_{\nu}\,W\,x\,v\,y \nu \cdot (\nabla {(W\,x\,v)})_{{\nu}}{}^{{\mu}}({y}) = 0$
+  \item[\rm(hWequil)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \sum_{\mu} \sum_{\nu}\,(\nabla {(W\,x\,v)})_{{\mu}}{}^{{\nu}}({x}) \cdot (\nabla {(W\,x\,v)})_{{\nu}}{}^{{\mu}}({x}) = 0$
+  \item[\rm(hWarea)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{ad}\,x\,v = -\sum_{\nu}\,W\,x\,v\,x \nu \cdot \partial_{{\nu}}({(\lambda\,y \mapsto \theta({y}))})({x})$
 \end{itemize}
-Then \[ \exists \Lambda, \forall\,(x : M^{4})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T(x) \mu \nu = G_{\mu\nu}(x) + \Lambda \cdot g\,x \mu \nu \]
+Then \[ \exists \Lambda, \forall\,(x : M^{{4}})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T({x}) \mu \nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) \]
 \end{theorem}
 
 
 \begin{theorem}[\texttt{QIQTH.WedgeKMSToGR.qiqt\_gr\_freefield\_thermo}]\label{thm:qiqth-wedgekmstogr-qiqt-gr-freefield-thermo}
 \textit{spine.}
-Given $\iota : \mathrm{Type} \mathrm{u\_1}$, $g : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{4} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $A : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $p : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \iota \to \mathbb{R}$, $W : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to M^{4} \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{mw} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ff} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{ff}^{\prime} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{Bd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
+Given $\iota : \mathrm{Type} \mathrm{u\_1}$, $g : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{{4}} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $A : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $p : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \iota \to \mathbb{R}$, $W : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to M^{{4}} \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{mw} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ff} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{ff}^{\prime} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{Bd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
 with $\mathrm{Fintype} \iota$,
 assume
 \begin{itemize}
   \item[\rm(instance)] $\mathrm{Nonempty} \iota$
-  \item[\rm(hsymm)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), g\,y\,a\,b = g\,y\,b\,a$
-  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \mathrm{gi}\,y\,a\,b = \mathrm{gi}\,y\,b\,a$
-  \item[\rm(hinv)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g\,y\,a \sigma \cdot \mathrm{gi}\,y \sigma\,b = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto g\,y\,a\,b)\in C^{\infty}$
-  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto \mathrm{gi}\,y\,a\,b)\in C^{\infty}$
+  \item[\rm(hsymm)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})$
+  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g^{{a}{b}}({y}) = g^{{b}{a}}({y})$
+  \item[\rm(hinv)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g_{{a}{b}}({y})})\in C^{\infty}$
+  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g^{{a}{b}}({y})})\in C^{\infty}$
   \item[\rm(hbar0)] $\hbar \ne 0$
   \item[\rm(heta)] $\eta \ne 0$
   \item[\rm(ha)] $a = 2 \cdot \pi / (\hbar \cdot \eta)$
-  \item[\rm(hφ)] $(\varphi)\in C^{\infty}$
-  \item[\rm(hKG)] $\forall\,(x : M^{4}), (\Box \varphi)(x) = m ^ 2 \cdot \varphi\,x$
-  \item[\rm(hPP)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hcong)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), g\,x\,i\,j = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{kl} \cdot P\,x\,l\,j$
-  \item[\rm(hpp\_nn)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(t : \mathbb{R})\,(r : \iota), 0 \le p\,x\,v\,t\,r$
-  \item[\rm(hpp1)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(t : \mathbb{R}), \sum_{r}\,p\,x\,v\,t\,r = 1$
-  \item[\rm(hpp0)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), p\,x\,v\,0 = \lambda\,x \mapsto ((\# \iota))^{-1}$
-  \item[\rm(hcap)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \eta \cdot A\,x\,v\,0 = \log\,(\# \iota)$
-  \item[\rm(hWx)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to W\,x\,v\,x = v$
-  \item[\rm(hWC)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\mu : \mathrm{Fin}\,4), (\lambda\,y \mapsto W\,x\,v\,y \mu)\in C^{\infty}$
-  \item[\rm(hWgeo)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(y : M^{4})\,(\mu : \mathrm{Fin}\,4), \sum_{\nu}\,W\,x\,v\,y \nu \cdot (\nabla (W\,x\,v))_{\nu}{}^{\mu}(y) = 0$
-  \item[\rm(hWequil)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \sum_{\mu} \sum_{\nu}\,(\nabla (W\,x\,v))_{\mu}{}^{\nu}(x) \cdot (\nabla (W\,x\,v))_{\nu}{}^{\mu}(x) = 0$
-  \item[\rm(hS)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\lambda\,t \mapsto S((p\,x\,v\,t))))'(0)=(\mathrm{sd}\,x\,v)$
-  \item[\rm(hK)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\lambda\,t \mapsto S((p\,x\,v\,t)) + D_{\mathrm{KL}}((p\,x\,v\,t)\,\|\,(p\,x\,v\,0))))'(0)=(2 \cdot \pi / \hbar \cdot (T(x))(v,v))$
-  \item[\rm(hA)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((A\,x\,v))'(0)=(-\sum_{\nu}\,W\,x\,v\,x \nu \cdot \partial_{\nu}((\lambda\,y \mapsto \theta(y)))(x))$
-  \item[\rm(hbound)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, S((p\,x\,v\,t)) \le \eta \cdot A\,x\,v\,t$
-  \item[\rm(hmw)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
-  \item[\rm(hf2)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{MemLp}\,(\mathrm{ff}\,x\,v)\,2 \mathrm{volume}$
-  \item[\rm(hf\_int)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{Integrable}\,(\mathrm{ff}\,x\,v) \mathrm{volume}$
-  \item[\rm(hfd)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), ((\mathrm{ff}\,x\,v))'(\theta)=(\mathrm{ff}^{\prime}\,x\,v \theta)$
-  \item[\rm(hf\textquotesingle{}\_meas)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{AEStronglyMeasurable}\,(\mathrm{ff}^{\prime}\,x\,v) \mathrm{volume}$
-  \item[\rm(hB)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), \|\mathrm{ff}^{\prime}\,x\,v \theta\| \le \mathrm{Bd}\,x\,v$
-  \item[\rm(hTkk)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to 2 \cdot \pi / \hbar \cdot (\sum_{b}\,v\,b \cdot \partial_{b}(\varphi)(x)) ^ 2 = (-(2 \cdot \pi \cdot \int_{(\theta : \mathbb{R})}\,(\mathrm{starRingEnd} \mathbb{C})\,(\mathrm{ff}\,x\,v \theta) \cdot \mathrm{ff}^{\prime}\,x\,v \theta)).\mathrm{im}$
+  \item[\rm(hφ)] $({\varphi})\in C^{\infty}$
+  \item[\rm(hKG)] $\forall\,(x : M^{{4}}), (\Box {\varphi})({x}) = m ^ 2 \cdot \varphi\,x$
+  \item[\rm(hPP)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hcong)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), g_{{i}{j}}({x}) = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{{k}{l}} \cdot P\,x\,l\,j$
+  \item[\rm(hpp\_nn)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(t : \mathbb{R})\,(r : \iota), 0 \le p\,x\,v\,t\,r$
+  \item[\rm(hpp1)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(t : \mathbb{R}), \sum_{r}\,p\,x\,v\,t\,r = 1$
+  \item[\rm(hpp0)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), p\,x\,v\,0 = \lambda\,x \mapsto ((\# \iota))^{-1}$
+  \item[\rm(hcap)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \eta \cdot A\,x\,v\,0 = \log\,(\# \iota)$
+  \item[\rm(hWx)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to W\,x\,v\,x = v$
+  \item[\rm(hWC)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\mu : \mathrm{Fin}\,4), ({\lambda\,y \mapsto W\,x\,v\,y \mu})\in C^{\infty}$
+  \item[\rm(hWgeo)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(y : M^{{4}})\,(\mu : \mathrm{Fin}\,4), \sum_{\nu}\,W\,x\,v\,y \nu \cdot (\nabla {(W\,x\,v)})_{{\nu}}{}^{{\mu}}({y}) = 0$
+  \item[\rm(hWequil)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \sum_{\mu} \sum_{\nu}\,(\nabla {(W\,x\,v)})_{{\mu}}{}^{{\nu}}({x}) \cdot (\nabla {(W\,x\,v)})_{{\nu}}{}^{{\mu}}({x}) = 0$
+  \item[\rm(hS)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\lambda\,t \mapsto S({(p\,x\,v\,t)}))})'({0})={(\mathrm{sd}\,x\,v)}$
+  \item[\rm(hK)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\lambda\,t \mapsto S({(p\,x\,v\,t)}) + D_{\mathrm{KL}}({(p\,x\,v\,t)}\,\|\,{(p\,x\,v\,0)}))})'({0})={(2 \cdot \pi / \hbar \cdot {(T({x}))}({v},{v}))}$
+  \item[\rm(hA)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(A\,x\,v)})'({0})={(-\sum_{\nu}\,W\,x\,v\,x \nu \cdot \partial_{{\nu}}({(\lambda\,y \mapsto \theta({y}))})({x}))}$
+  \item[\rm(hbound)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, S({(p\,x\,v\,t)}) \le \eta \cdot A\,x\,v\,t$
+  \item[\rm(hmw)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
+  \item[\rm(hf2)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{MemLp}\,(\mathrm{ff}\,x\,v)\,2 \mathrm{volume}$
+  \item[\rm(hf\_int)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{Integrable}\,(\mathrm{ff}\,x\,v) \mathrm{volume}$
+  \item[\rm(hfd)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), ({(\mathrm{ff}\,x\,v)})'({\theta})={(\mathrm{ff}^{\prime}\,x\,v \theta)}$
+  \item[\rm(hf\textquotesingle{}\_meas)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{AEStronglyMeasurable}\,(\mathrm{ff}^{\prime}\,x\,v) \mathrm{volume}$
+  \item[\rm(hB)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), \|\mathrm{ff}^{\prime}\,x\,v \theta\| \le \mathrm{Bd}\,x\,v$
+  \item[\rm(hTkk)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to 2 \cdot \pi / \hbar \cdot (\sum_{b}\,v\,b \cdot \partial_{{b}}({\varphi})({x})) ^ 2 = (-(2 \cdot \pi \cdot \int_{(\theta : \mathbb{R})}\,(\mathrm{starRingEnd} \mathbb{C})\,(\mathrm{ff}\,x\,v \theta) \cdot \mathrm{ff}^{\prime}\,x\,v \theta)).\mathrm{im}$
 \end{itemize}
-Then \[ \exists \Lambda, \forall\,(x : M^{4})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T(x) \mu \nu = G_{\mu\nu}(x) + \Lambda \cdot g\,x \mu \nu \]
+Then \[ \exists \Lambda, \forall\,(x : M^{{4}})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T({x}) \mu \nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) \]
 \end{theorem}
 
 
 \begin{theorem}[\texttt{QIQTH.WedgeKMSToGR.qiqt\_gr\_freefield\_geom}]\label{thm:qiqth-wedgekmstogr-qiqt-gr-freefield-geom}
 \textit{spine.}
-Given $g : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{4} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{Sf} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $W : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to M^{4} \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{mw} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ff} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{ff}^{\prime} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{Bd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
+Given $g : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{{4}} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{Sf} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $W : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to M^{{4}} \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{mw} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ff} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{ff}^{\prime} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{Bd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
 assume
 \begin{itemize}
-  \item[\rm(hsymm)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), g\,y\,a\,b = g\,y\,b\,a$
-  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \mathrm{gi}\,y\,a\,b = \mathrm{gi}\,y\,b\,a$
-  \item[\rm(hinv)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g\,y\,a \sigma \cdot \mathrm{gi}\,y \sigma\,b = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto g\,y\,a\,b)\in C^{\infty}$
-  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto \mathrm{gi}\,y\,a\,b)\in C^{\infty}$
+  \item[\rm(hsymm)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})$
+  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g^{{a}{b}}({y}) = g^{{b}{a}}({y})$
+  \item[\rm(hinv)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g_{{a}{b}}({y})})\in C^{\infty}$
+  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g^{{a}{b}}({y})})\in C^{\infty}$
   \item[\rm(hbar0)] $\hbar \ne 0$
   \item[\rm(heta)] $\eta \ne 0$
   \item[\rm(ha)] $a = 2 \cdot \pi / (\hbar \cdot \eta)$
-  \item[\rm(hφ)] $(\varphi)\in C^{\infty}$
-  \item[\rm(hKG)] $\forall\,(x : M^{4}), (\Box \varphi)(x) = m ^ 2 \cdot \varphi\,x$
-  \item[\rm(hPP)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hcong)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), g\,x\,i\,j = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{kl} \cdot P\,x\,l\,j$
-  \item[\rm(hWx)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to W\,x\,v\,x = v$
-  \item[\rm(hWC)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\mu : \mathrm{Fin}\,4), (\lambda\,y \mapsto W\,x\,v\,y \mu)\in C^{\infty}$
-  \item[\rm(hWgeo)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(y : M^{4})\,(\mu : \mathrm{Fin}\,4), \sum_{\nu}\,W\,x\,v\,y \nu \cdot (\nabla (W\,x\,v))_{\nu}{}^{\mu}(y) = 0$
-  \item[\rm(hWequil)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \sum_{\mu} \sum_{\nu}\,(\nabla (W\,x\,v))_{\mu}{}^{\nu}(x) \cdot (\nabla (W\,x\,v))_{\nu}{}^{\mu}(x) = 0$
-  \item[\rm(hS)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\mathrm{Sf}\,x\,v))'(0)=(\mathrm{sd}\,x\,v)$
-  \item[\rm(hK)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\mathrm{KE}\,x\,v))'(0)=(2 \cdot \pi / \hbar \cdot (T(x))(v,v))$
-  \item[\rm(hA)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((A\,x\,v))'(0)=(-\sum_{\nu}\,W\,x\,v\,x \nu \cdot \partial_{\nu}((\lambda\,y \mapsto \theta(y)))(x))$
-  \item[\rm(hbound)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, \mathrm{Sf}\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
-  \item[\rm(hsat)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
-  \item[\rm(hDnn)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - \mathrm{Sf}\,x\,v\,t$
-  \item[\rm(hD0)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{KE}\,x\,v\,0 - \mathrm{Sf}\,x\,v\,0 = 0$
-  \item[\rm(hmw)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
-  \item[\rm(hf2)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{MemLp}\,(\mathrm{ff}\,x\,v)\,2 \mathrm{volume}$
-  \item[\rm(hf\_int)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{Integrable}\,(\mathrm{ff}\,x\,v) \mathrm{volume}$
-  \item[\rm(hfd)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), ((\mathrm{ff}\,x\,v))'(\theta)=(\mathrm{ff}^{\prime}\,x\,v \theta)$
-  \item[\rm(hf\textquotesingle{}\_meas)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{AEStronglyMeasurable}\,(\mathrm{ff}^{\prime}\,x\,v) \mathrm{volume}$
-  \item[\rm(hB)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), \|\mathrm{ff}^{\prime}\,x\,v \theta\| \le \mathrm{Bd}\,x\,v$
-  \item[\rm(hTkk)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to 2 \cdot \pi / \hbar \cdot (\sum_{b}\,v\,b \cdot \partial_{b}(\varphi)(x)) ^ 2 = (-(2 \cdot \pi \cdot \int_{(\theta : \mathbb{R})}\,(\mathrm{starRingEnd} \mathbb{C})\,(\mathrm{ff}\,x\,v \theta) \cdot \mathrm{ff}^{\prime}\,x\,v \theta)).\mathrm{im}$
+  \item[\rm(hφ)] $({\varphi})\in C^{\infty}$
+  \item[\rm(hKG)] $\forall\,(x : M^{{4}}), (\Box {\varphi})({x}) = m ^ 2 \cdot \varphi\,x$
+  \item[\rm(hPP)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hcong)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), g_{{i}{j}}({x}) = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{{k}{l}} \cdot P\,x\,l\,j$
+  \item[\rm(hWx)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to W\,x\,v\,x = v$
+  \item[\rm(hWC)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\mu : \mathrm{Fin}\,4), ({\lambda\,y \mapsto W\,x\,v\,y \mu})\in C^{\infty}$
+  \item[\rm(hWgeo)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(y : M^{{4}})\,(\mu : \mathrm{Fin}\,4), \sum_{\nu}\,W\,x\,v\,y \nu \cdot (\nabla {(W\,x\,v)})_{{\nu}}{}^{{\mu}}({y}) = 0$
+  \item[\rm(hWequil)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \sum_{\mu} \sum_{\nu}\,(\nabla {(W\,x\,v)})_{{\mu}}{}^{{\nu}}({x}) \cdot (\nabla {(W\,x\,v)})_{{\nu}}{}^{{\mu}}({x}) = 0$
+  \item[\rm(hS)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\mathrm{Sf}\,x\,v)})'({0})={(\mathrm{sd}\,x\,v)}$
+  \item[\rm(hK)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\mathrm{KE}\,x\,v)})'({0})={(2 \cdot \pi / \hbar \cdot {(T({x}))}({v},{v}))}$
+  \item[\rm(hA)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(A\,x\,v)})'({0})={(-\sum_{\nu}\,W\,x\,v\,x \nu \cdot \partial_{{\nu}}({(\lambda\,y \mapsto \theta({y}))})({x}))}$
+  \item[\rm(hbound)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, \mathrm{Sf}\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
+  \item[\rm(hsat)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
+  \item[\rm(hDnn)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - \mathrm{Sf}\,x\,v\,t$
+  \item[\rm(hD0)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{KE}\,x\,v\,0 - \mathrm{Sf}\,x\,v\,0 = 0$
+  \item[\rm(hmw)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
+  \item[\rm(hf2)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{MemLp}\,(\mathrm{ff}\,x\,v)\,2 \mathrm{volume}$
+  \item[\rm(hf\_int)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{Integrable}\,(\mathrm{ff}\,x\,v) \mathrm{volume}$
+  \item[\rm(hfd)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), ({(\mathrm{ff}\,x\,v)})'({\theta})={(\mathrm{ff}^{\prime}\,x\,v \theta)}$
+  \item[\rm(hf\textquotesingle{}\_meas)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{AEStronglyMeasurable}\,(\mathrm{ff}^{\prime}\,x\,v) \mathrm{volume}$
+  \item[\rm(hB)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), \|\mathrm{ff}^{\prime}\,x\,v \theta\| \le \mathrm{Bd}\,x\,v$
+  \item[\rm(hTkk)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to 2 \cdot \pi / \hbar \cdot (\sum_{b}\,v\,b \cdot \partial_{{b}}({\varphi})({x})) ^ 2 = (-(2 \cdot \pi \cdot \int_{(\theta : \mathbb{R})}\,(\mathrm{starRingEnd} \mathbb{C})\,(\mathrm{ff}\,x\,v \theta) \cdot \mathrm{ff}^{\prime}\,x\,v \theta)).\mathrm{im}$
 \end{itemize}
-Then \[ \exists \Lambda, \forall\,(x : M^{4})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T(x) \mu \nu = G_{\mu\nu}(x) + \Lambda \cdot g\,x \mu \nu \]
+Then \[ \exists \Lambda, \forall\,(x : M^{{4}})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T({x}) \mu \nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) \]
 \end{theorem}
 
 
 \begin{theorem}[\texttt{QIQTH.WedgeKMSToGR.qiqt\_gr\_freefield\_nullEnergy}]\label{thm:qiqth-wedgekmstogr-qiqt-gr-freefield-nullenergy}
 \textit{spine.}
-Given $g : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{4} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{Sf} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ad} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{mw} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ff} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{ff}^{\prime} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{Bd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $W : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to M^{4} \to \mathrm{Fin}\,4 \to \mathbb{R}$,
+Given $g : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{{4}} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{Sf} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ad} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{mw} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ff} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{ff}^{\prime} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{Bd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $W : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to M^{{4}} \to \mathrm{Fin}\,4 \to \mathbb{R}$,
 assume
 \begin{itemize}
-  \item[\rm(hsymm)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), g\,y\,a\,b = g\,y\,b\,a$
-  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \mathrm{gi}\,y\,a\,b = \mathrm{gi}\,y\,b\,a$
-  \item[\rm(hinv)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g\,y\,a \sigma \cdot \mathrm{gi}\,y \sigma\,b = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto g\,y\,a\,b)\in C^{\infty}$
-  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto \mathrm{gi}\,y\,a\,b)\in C^{\infty}$
+  \item[\rm(hsymm)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})$
+  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g^{{a}{b}}({y}) = g^{{b}{a}}({y})$
+  \item[\rm(hinv)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g_{{a}{b}}({y})})\in C^{\infty}$
+  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g^{{a}{b}}({y})})\in C^{\infty}$
   \item[\rm(hbar0)] $\hbar \ne 0$
   \item[\rm(heta)] $\eta \ne 0$
   \item[\rm(ha)] $a = 2 \cdot \pi / (\hbar \cdot \eta)$
-  \item[\rm(hφ)] $(\varphi)\in C^{\infty}$
-  \item[\rm(hKG)] $\forall\,(x : M^{4}), (\Box \varphi)(x) = m ^ 2 \cdot \varphi\,x$
-  \item[\rm(hPP)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hcong)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), g\,x\,i\,j = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{kl} \cdot P\,x\,l\,j$
-  \item[\rm(hS)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\mathrm{Sf}\,x\,v))'(0)=(\mathrm{sd}\,x\,v)$
-  \item[\rm(hK)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\mathrm{KE}\,x\,v))'(0)=(2 \cdot \pi / \hbar \cdot (T(x))(v,v))$
-  \item[\rm(hA)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((A\,x\,v))'(0)=(\mathrm{ad}\,x\,v)$
-  \item[\rm(hbound)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, \mathrm{Sf}\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
-  \item[\rm(hsat)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
-  \item[\rm(hDnn)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - \mathrm{Sf}\,x\,v\,t$
-  \item[\rm(hD0)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{KE}\,x\,v\,0 - \mathrm{Sf}\,x\,v\,0 = 0$
-  \item[\rm(hmw)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
-  \item[\rm(hf2)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{MemLp}\,(\mathrm{ff}\,x\,v)\,2 \mathrm{volume}$
-  \item[\rm(hf\_int)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{Integrable}\,(\mathrm{ff}\,x\,v) \mathrm{volume}$
-  \item[\rm(hfd)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), ((\mathrm{ff}\,x\,v))'(\theta)=(\mathrm{ff}^{\prime}\,x\,v \theta)$
-  \item[\rm(hf\textquotesingle{}\_meas)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{AEStronglyMeasurable}\,(\mathrm{ff}^{\prime}\,x\,v) \mathrm{volume}$
-  \item[\rm(hB)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), \|\mathrm{ff}^{\prime}\,x\,v \theta\| \le \mathrm{Bd}\,x\,v$
-  \item[\rm(hTkk)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to 2 \cdot \pi / \hbar \cdot (\sum_{b}\,v\,b \cdot \partial_{b}(\varphi)(x)) ^ 2 = (-(2 \cdot \pi \cdot \int_{(\theta : \mathbb{R})}\,(\mathrm{starRingEnd} \mathbb{C})\,(\mathrm{ff}\,x\,v \theta) \cdot \mathrm{ff}^{\prime}\,x\,v \theta)).\mathrm{im}$
-  \item[\rm(hWx)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to W\,x\,v\,x = v$
-  \item[\rm(hWC)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\mu : \mathrm{Fin}\,4), (\lambda\,y \mapsto W\,x\,v\,y \mu)\in C^{\infty}$
-  \item[\rm(hWgeo)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(y : M^{4})\,(\mu : \mathrm{Fin}\,4), \sum_{\nu}\,W\,x\,v\,y \nu \cdot (\nabla (W\,x\,v))_{\nu}{}^{\mu}(y) = 0$
-  \item[\rm(hWequil)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \sum_{\mu} \sum_{\nu}\,(\nabla (W\,x\,v))_{\mu}{}^{\nu}(x) \cdot (\nabla (W\,x\,v))_{\nu}{}^{\mu}(x) = 0$
-  \item[\rm(hWarea)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{ad}\,x\,v = -\sum_{\nu}\,W\,x\,v\,x \nu \cdot \partial_{\nu}((\lambda\,y \mapsto \theta(y)))(x)$
+  \item[\rm(hφ)] $({\varphi})\in C^{\infty}$
+  \item[\rm(hKG)] $\forall\,(x : M^{{4}}), (\Box {\varphi})({x}) = m ^ 2 \cdot \varphi\,x$
+  \item[\rm(hPP)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hcong)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), g_{{i}{j}}({x}) = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{{k}{l}} \cdot P\,x\,l\,j$
+  \item[\rm(hS)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\mathrm{Sf}\,x\,v)})'({0})={(\mathrm{sd}\,x\,v)}$
+  \item[\rm(hK)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\mathrm{KE}\,x\,v)})'({0})={(2 \cdot \pi / \hbar \cdot {(T({x}))}({v},{v}))}$
+  \item[\rm(hA)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(A\,x\,v)})'({0})={(\mathrm{ad}\,x\,v)}$
+  \item[\rm(hbound)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, \mathrm{Sf}\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
+  \item[\rm(hsat)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
+  \item[\rm(hDnn)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - \mathrm{Sf}\,x\,v\,t$
+  \item[\rm(hD0)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{KE}\,x\,v\,0 - \mathrm{Sf}\,x\,v\,0 = 0$
+  \item[\rm(hmw)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
+  \item[\rm(hf2)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{MemLp}\,(\mathrm{ff}\,x\,v)\,2 \mathrm{volume}$
+  \item[\rm(hf\_int)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{Integrable}\,(\mathrm{ff}\,x\,v) \mathrm{volume}$
+  \item[\rm(hfd)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), ({(\mathrm{ff}\,x\,v)})'({\theta})={(\mathrm{ff}^{\prime}\,x\,v \theta)}$
+  \item[\rm(hf\textquotesingle{}\_meas)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{AEStronglyMeasurable}\,(\mathrm{ff}^{\prime}\,x\,v) \mathrm{volume}$
+  \item[\rm(hB)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), \|\mathrm{ff}^{\prime}\,x\,v \theta\| \le \mathrm{Bd}\,x\,v$
+  \item[\rm(hTkk)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to 2 \cdot \pi / \hbar \cdot (\sum_{b}\,v\,b \cdot \partial_{{b}}({\varphi})({x})) ^ 2 = (-(2 \cdot \pi \cdot \int_{(\theta : \mathbb{R})}\,(\mathrm{starRingEnd} \mathbb{C})\,(\mathrm{ff}\,x\,v \theta) \cdot \mathrm{ff}^{\prime}\,x\,v \theta)).\mathrm{im}$
+  \item[\rm(hWx)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to W\,x\,v\,x = v$
+  \item[\rm(hWC)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\mu : \mathrm{Fin}\,4), ({\lambda\,y \mapsto W\,x\,v\,y \mu})\in C^{\infty}$
+  \item[\rm(hWgeo)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(y : M^{{4}})\,(\mu : \mathrm{Fin}\,4), \sum_{\nu}\,W\,x\,v\,y \nu \cdot (\nabla {(W\,x\,v)})_{{\nu}}{}^{{\mu}}({y}) = 0$
+  \item[\rm(hWequil)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \sum_{\mu} \sum_{\nu}\,(\nabla {(W\,x\,v)})_{{\mu}}{}^{{\nu}}({x}) \cdot (\nabla {(W\,x\,v)})_{{\nu}}{}^{{\mu}}({x}) = 0$
+  \item[\rm(hWarea)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{ad}\,x\,v = -\sum_{\nu}\,W\,x\,v\,x \nu \cdot \partial_{{\nu}}({(\lambda\,y \mapsto \theta({y}))})({x})$
 \end{itemize}
-Then \[ \exists \Lambda, \forall\,(x : M^{4})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T(x) \mu \nu = G_{\mu\nu}(x) + \Lambda \cdot g\,x \mu \nu \]
+Then \[ \exists \Lambda, \forall\,(x : M^{{4}})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T({x}) \mu \nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) \]
 \end{theorem}
 
 
 \begin{theorem}[\texttt{QIQTH.WedgeKMSToGR.qiqt\_gr\_freefield\_localized\textquotesingle{}}]\label{thm:qiqth-wedgekmstogr-qiqt-gr-freefield-localized-prime}
 \textit{spine.}
-Given $g : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{4} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{Sf} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ad} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{mw} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ff} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{ff}^{\prime} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{Bd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $W : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to M^{4} \to \mathrm{Fin}\,4 \to \mathbb{R}$,
+Given $g : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{{4}} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{Sf} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ad} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{mw} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ff} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{ff}^{\prime} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{Bd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $W : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to M^{{4}} \to \mathrm{Fin}\,4 \to \mathbb{R}$,
 assume
 \begin{itemize}
-  \item[\rm(hsymm)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), g\,y\,a\,b = g\,y\,b\,a$
-  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \mathrm{gi}\,y\,a\,b = \mathrm{gi}\,y\,b\,a$
-  \item[\rm(hinv)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g\,y\,a \sigma \cdot \mathrm{gi}\,y \sigma\,b = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto g\,y\,a\,b)\in C^{\infty}$
-  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto \mathrm{gi}\,y\,a\,b)\in C^{\infty}$
+  \item[\rm(hsymm)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})$
+  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g^{{a}{b}}({y}) = g^{{b}{a}}({y})$
+  \item[\rm(hinv)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g_{{a}{b}}({y})})\in C^{\infty}$
+  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g^{{a}{b}}({y})})\in C^{\infty}$
   \item[\rm(hbar0)] $\hbar \ne 0$
   \item[\rm(heta)] $\eta \ne 0$
   \item[\rm(ha)] $a = 2 \cdot \pi / (\hbar \cdot \eta)$
-  \item[\rm(hφ)] $(\varphi)\in C^{\infty}$
-  \item[\rm(hKG)] $\forall\,(x : M^{4}), (\Box \varphi)(x) = m ^ 2 \cdot \varphi\,x$
-  \item[\rm(hPP)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hcong)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), g\,x\,i\,j = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{kl} \cdot P\,x\,l\,j$
-  \item[\rm(hS)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\mathrm{Sf}\,x\,v))'(0)=(\mathrm{sd}\,x\,v)$
-  \item[\rm(hK)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\mathrm{KE}\,x\,v))'(0)=(2 \cdot \pi / \hbar \cdot (T(x))(v,v))$
-  \item[\rm(hA)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((A\,x\,v))'(0)=(\mathrm{ad}\,x\,v)$
-  \item[\rm(hbound)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, \mathrm{Sf}\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
-  \item[\rm(hsat)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
-  \item[\rm(hDnn)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - \mathrm{Sf}\,x\,v\,t$
-  \item[\rm(hD0)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{KE}\,x\,v\,0 - \mathrm{Sf}\,x\,v\,0 = 0$
-  \item[\rm(hmw)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
-  \item[\rm(hf2)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{MemLp}\,(\mathrm{ff}\,x\,v)\,2 \mathrm{volume}$
-  \item[\rm(hf\_int)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{Integrable}\,(\mathrm{ff}\,x\,v) \mathrm{volume}$
-  \item[\rm(hfd)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), ((\mathrm{ff}\,x\,v))'(\theta)=(\mathrm{ff}^{\prime}\,x\,v \theta)$
-  \item[\rm(hf\textquotesingle{}\_meas)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{AEStronglyMeasurable}\,(\mathrm{ff}^{\prime}\,x\,v) \mathrm{volume}$
-  \item[\rm(hB)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), \|\mathrm{ff}^{\prime}\,x\,v \theta\| \le \mathrm{Bd}\,x\,v$
-  \item[\rm(hTkk)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to 2 \cdot \pi / \hbar \cdot (T(x))(v,v) = (-(2 \cdot \pi \cdot \int_{(\theta : \mathbb{R})}\,(\mathrm{starRingEnd} \mathbb{C})\,(\mathrm{ff}\,x\,v \theta) \cdot \mathrm{ff}^{\prime}\,x\,v \theta)).\mathrm{im}$
-  \item[\rm(hWx)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to W\,x\,v\,x = v$
-  \item[\rm(hWC)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\mu : \mathrm{Fin}\,4), (\lambda\,y \mapsto W\,x\,v\,y \mu)\in C^{\infty}$
-  \item[\rm(hWgeo)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(y : M^{4})\,(\mu : \mathrm{Fin}\,4), \sum_{\nu}\,W\,x\,v\,y \nu \cdot (\nabla (W\,x\,v))_{\nu}{}^{\mu}(y) = 0$
-  \item[\rm(hWequil)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \sum_{\mu} \sum_{\nu}\,(\nabla (W\,x\,v))_{\mu}{}^{\nu}(x) \cdot (\nabla (W\,x\,v))_{\nu}{}^{\mu}(x) = 0$
-  \item[\rm(hWarea)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{ad}\,x\,v = -\sum_{\nu}\,W\,x\,v\,x \nu \cdot \partial_{\nu}((\lambda\,y \mapsto \theta(y)))(x)$
+  \item[\rm(hφ)] $({\varphi})\in C^{\infty}$
+  \item[\rm(hKG)] $\forall\,(x : M^{{4}}), (\Box {\varphi})({x}) = m ^ 2 \cdot \varphi\,x$
+  \item[\rm(hPP)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hcong)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), g_{{i}{j}}({x}) = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{{k}{l}} \cdot P\,x\,l\,j$
+  \item[\rm(hS)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\mathrm{Sf}\,x\,v)})'({0})={(\mathrm{sd}\,x\,v)}$
+  \item[\rm(hK)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\mathrm{KE}\,x\,v)})'({0})={(2 \cdot \pi / \hbar \cdot {(T({x}))}({v},{v}))}$
+  \item[\rm(hA)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(A\,x\,v)})'({0})={(\mathrm{ad}\,x\,v)}$
+  \item[\rm(hbound)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, \mathrm{Sf}\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
+  \item[\rm(hsat)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
+  \item[\rm(hDnn)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - \mathrm{Sf}\,x\,v\,t$
+  \item[\rm(hD0)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{KE}\,x\,v\,0 - \mathrm{Sf}\,x\,v\,0 = 0$
+  \item[\rm(hmw)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
+  \item[\rm(hf2)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{MemLp}\,(\mathrm{ff}\,x\,v)\,2 \mathrm{volume}$
+  \item[\rm(hf\_int)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{Integrable}\,(\mathrm{ff}\,x\,v) \mathrm{volume}$
+  \item[\rm(hfd)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), ({(\mathrm{ff}\,x\,v)})'({\theta})={(\mathrm{ff}^{\prime}\,x\,v \theta)}$
+  \item[\rm(hf\textquotesingle{}\_meas)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{AEStronglyMeasurable}\,(\mathrm{ff}^{\prime}\,x\,v) \mathrm{volume}$
+  \item[\rm(hB)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), \|\mathrm{ff}^{\prime}\,x\,v \theta\| \le \mathrm{Bd}\,x\,v$
+  \item[\rm(hTkk)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to 2 \cdot \pi / \hbar \cdot {(T({x}))}({v},{v}) = (-(2 \cdot \pi \cdot \int_{(\theta : \mathbb{R})}\,(\mathrm{starRingEnd} \mathbb{C})\,(\mathrm{ff}\,x\,v \theta) \cdot \mathrm{ff}^{\prime}\,x\,v \theta)).\mathrm{im}$
+  \item[\rm(hWx)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to W\,x\,v\,x = v$
+  \item[\rm(hWC)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\mu : \mathrm{Fin}\,4), ({\lambda\,y \mapsto W\,x\,v\,y \mu})\in C^{\infty}$
+  \item[\rm(hWgeo)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(y : M^{{4}})\,(\mu : \mathrm{Fin}\,4), \sum_{\nu}\,W\,x\,v\,y \nu \cdot (\nabla {(W\,x\,v)})_{{\nu}}{}^{{\mu}}({y}) = 0$
+  \item[\rm(hWequil)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \sum_{\mu} \sum_{\nu}\,(\nabla {(W\,x\,v)})_{{\mu}}{}^{{\nu}}({x}) \cdot (\nabla {(W\,x\,v)})_{{\nu}}{}^{{\mu}}({x}) = 0$
+  \item[\rm(hWarea)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{ad}\,x\,v = -\sum_{\nu}\,W\,x\,v\,x \nu \cdot \partial_{{\nu}}({(\lambda\,y \mapsto \theta({y}))})({x})$
 \end{itemize}
-Then \[ \exists \Lambda, \forall\,(x : M^{4})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T(x) \mu \nu = G_{\mu\nu}(x) + \Lambda \cdot g\,x \mu \nu \]
+Then \[ \exists \Lambda, \forall\,(x : M^{{4}})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T({x}) \mu \nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) \]
 \end{theorem}
 
 
 \begin{theorem}[\texttt{QIQTH.WedgeKMSToGR.qiqt\_gr\_freefield\_localized}]\label{thm:qiqth-wedgekmstogr-qiqt-gr-freefield-localized}
 \textit{spine.}
-Given $g : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{4} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{Sf} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ad} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{mw} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ff} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{ff}^{\prime} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{Bd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
+Given $g : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{{4}} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{Sf} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ad} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{mw} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ff} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{ff}^{\prime} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{Bd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
 assume
 \begin{itemize}
-  \item[\rm(hsymm)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), g\,y\,a\,b = g\,y\,b\,a$
-  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \mathrm{gi}\,y\,a\,b = \mathrm{gi}\,y\,b\,a$
-  \item[\rm(hinv)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g\,y\,a \sigma \cdot \mathrm{gi}\,y \sigma\,b = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto g\,y\,a\,b)\in C^{\infty}$
-  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto \mathrm{gi}\,y\,a\,b)\in C^{\infty}$
+  \item[\rm(hsymm)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})$
+  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g^{{a}{b}}({y}) = g^{{b}{a}}({y})$
+  \item[\rm(hinv)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g_{{a}{b}}({y})})\in C^{\infty}$
+  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g^{{a}{b}}({y})})\in C^{\infty}$
   \item[\rm(hbar0)] $\hbar \ne 0$
   \item[\rm(heta)] $\eta \ne 0$
   \item[\rm(ha)] $a = 2 \cdot \pi / (\hbar \cdot \eta)$
-  \item[\rm(hφ)] $(\varphi)\in C^{\infty}$
-  \item[\rm(hKG)] $\forall\,(x : M^{4}), (\Box \varphi)(x) = m ^ 2 \cdot \varphi\,x$
-  \item[\rm(hPP)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hcong)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), g\,x\,i\,j = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{kl} \cdot P\,x\,l\,j$
-  \item[\rm(hS)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\mathrm{Sf}\,x\,v))'(0)=(\mathrm{sd}\,x\,v)$
-  \item[\rm(hK)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\mathrm{KE}\,x\,v))'(0)=(2 \cdot \pi / \hbar \cdot (T(x))(v,v))$
-  \item[\rm(hA)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((A\,x\,v))'(0)=(\mathrm{ad}\,x\,v)$
-  \item[\rm(hbound)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, \mathrm{Sf}\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
-  \item[\rm(hsat)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
-  \item[\rm(hDnn)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - \mathrm{Sf}\,x\,v\,t$
-  \item[\rm(hD0)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{KE}\,x\,v\,0 - \mathrm{Sf}\,x\,v\,0 = 0$
-  \item[\rm(hmw)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
-  \item[\rm(hf2)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{MemLp}\,(\mathrm{ff}\,x\,v)\,2 \mathrm{volume}$
-  \item[\rm(hf\_int)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{Integrable}\,(\mathrm{ff}\,x\,v) \mathrm{volume}$
-  \item[\rm(hfd)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), ((\mathrm{ff}\,x\,v))'(\theta)=(\mathrm{ff}^{\prime}\,x\,v \theta)$
-  \item[\rm(hf\textquotesingle{}\_meas)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{AEStronglyMeasurable}\,(\mathrm{ff}^{\prime}\,x\,v) \mathrm{volume}$
-  \item[\rm(hB)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), \|\mathrm{ff}^{\prime}\,x\,v \theta\| \le \mathrm{Bd}\,x\,v$
-  \item[\rm(hTkk)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to 2 \cdot \pi / \hbar \cdot (T(x))(v,v) = (-(2 \cdot \pi \cdot \int_{(\theta : \mathbb{R})}\,(\mathrm{starRingEnd} \mathbb{C})\,(\mathrm{ff}\,x\,v \theta) \cdot \mathrm{ff}^{\prime}\,x\,v \theta)).\mathrm{im}$
-  \item[\rm(hFocus)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{ad}\,x\,v = (\lambda\,i\,j \mapsto R_{ij}(x))(v,v)$
+  \item[\rm(hφ)] $({\varphi})\in C^{\infty}$
+  \item[\rm(hKG)] $\forall\,(x : M^{{4}}), (\Box {\varphi})({x}) = m ^ 2 \cdot \varphi\,x$
+  \item[\rm(hPP)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hcong)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), g_{{i}{j}}({x}) = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{{k}{l}} \cdot P\,x\,l\,j$
+  \item[\rm(hS)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\mathrm{Sf}\,x\,v)})'({0})={(\mathrm{sd}\,x\,v)}$
+  \item[\rm(hK)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\mathrm{KE}\,x\,v)})'({0})={(2 \cdot \pi / \hbar \cdot {(T({x}))}({v},{v}))}$
+  \item[\rm(hA)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(A\,x\,v)})'({0})={(\mathrm{ad}\,x\,v)}$
+  \item[\rm(hbound)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, \mathrm{Sf}\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
+  \item[\rm(hsat)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
+  \item[\rm(hDnn)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - \mathrm{Sf}\,x\,v\,t$
+  \item[\rm(hD0)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{KE}\,x\,v\,0 - \mathrm{Sf}\,x\,v\,0 = 0$
+  \item[\rm(hmw)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
+  \item[\rm(hf2)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{MemLp}\,(\mathrm{ff}\,x\,v)\,2 \mathrm{volume}$
+  \item[\rm(hf\_int)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{Integrable}\,(\mathrm{ff}\,x\,v) \mathrm{volume}$
+  \item[\rm(hfd)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), ({(\mathrm{ff}\,x\,v)})'({\theta})={(\mathrm{ff}^{\prime}\,x\,v \theta)}$
+  \item[\rm(hf\textquotesingle{}\_meas)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{AEStronglyMeasurable}\,(\mathrm{ff}^{\prime}\,x\,v) \mathrm{volume}$
+  \item[\rm(hB)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), \|\mathrm{ff}^{\prime}\,x\,v \theta\| \le \mathrm{Bd}\,x\,v$
+  \item[\rm(hTkk)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to 2 \cdot \pi / \hbar \cdot {(T({x}))}({v},{v}) = (-(2 \cdot \pi \cdot \int_{(\theta : \mathbb{R})}\,(\mathrm{starRingEnd} \mathbb{C})\,(\mathrm{ff}\,x\,v \theta) \cdot \mathrm{ff}^{\prime}\,x\,v \theta)).\mathrm{im}$
+  \item[\rm(hFocus)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{ad}\,x\,v = {(\lambda\,i\,j \mapsto R_{{i}{j}}({x}))}({v},{v})$
 \end{itemize}
-Then \[ \exists \Lambda, \forall\,(x : M^{4})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T(x) \mu \nu = G_{\mu\nu}(x) + \Lambda \cdot g\,x \mu \nu \]
+Then \[ \exists \Lambda, \forall\,(x : M^{{4}})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T({x}) \mu \nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) \]
 \end{theorem}
 
 
 \begin{theorem}[\texttt{QIQTH.WedgeKMSToGR.qiqt\_gr\_freefield}]\label{thm:qiqth-wedgekmstogr-qiqt-gr-freefield}
 \textit{spine.}
-Given $g : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{4} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{Sf} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{kd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ad} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{mw} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ff} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{ff}^{\prime} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{Bd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
+Given $g : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{{4}} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{Sf} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{kd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ad} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{mw} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ff} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{ff}^{\prime} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}$, $\mathrm{Bd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
 assume
 \begin{itemize}
-  \item[\rm(hsymm)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), g\,y\,a\,b = g\,y\,b\,a$
-  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \mathrm{gi}\,y\,a\,b = \mathrm{gi}\,y\,b\,a$
-  \item[\rm(hinv)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g\,y\,a \sigma \cdot \mathrm{gi}\,y \sigma\,b = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto g\,y\,a\,b)\in C^{\infty}$
-  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto \mathrm{gi}\,y\,a\,b)\in C^{\infty}$
+  \item[\rm(hsymm)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})$
+  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g^{{a}{b}}({y}) = g^{{b}{a}}({y})$
+  \item[\rm(hinv)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g_{{a}{b}}({y})})\in C^{\infty}$
+  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g^{{a}{b}}({y})})\in C^{\infty}$
   \item[\rm(hbar0)] $\hbar \ne 0$
   \item[\rm(heta)] $\eta \ne 0$
   \item[\rm(ha)] $a = 2 \cdot \pi / (\hbar \cdot \eta)$
-  \item[\rm(hφ)] $(\varphi)\in C^{\infty}$
-  \item[\rm(hKG)] $\forall\,(x : M^{4}), (\Box \varphi)(x) = m ^ 2 \cdot \varphi\,x$
-  \item[\rm(hPP)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hcong)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), g\,x\,i\,j = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{kl} \cdot P\,x\,l\,j$
-  \item[\rm(hS)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\mathrm{Sf}\,x\,v))'(0)=(\mathrm{sd}\,x\,v)$
-  \item[\rm(hK)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\mathrm{KE}\,x\,v))'(0)=(\mathrm{kd}\,x\,v)$
-  \item[\rm(hA)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((A\,x\,v))'(0)=(\mathrm{ad}\,x\,v)$
-  \item[\rm(hbound)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, \mathrm{Sf}\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
-  \item[\rm(hsat)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
-  \item[\rm(hDnn)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - \mathrm{Sf}\,x\,v\,t$
-  \item[\rm(hD0)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{KE}\,x\,v\,0 - \mathrm{Sf}\,x\,v\,0 = 0$
-  \item[\rm(hmw)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
-  \item[\rm(hf2)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{MemLp}\,(\mathrm{ff}\,x\,v)\,2 \mathrm{volume}$
-  \item[\rm(hf\_int)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{Integrable}\,(\mathrm{ff}\,x\,v) \mathrm{volume}$
-  \item[\rm(hfd)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), ((\mathrm{ff}\,x\,v))'(\theta)=(\mathrm{ff}^{\prime}\,x\,v \theta)$
-  \item[\rm(hf\textquotesingle{}\_meas)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{AEStronglyMeasurable}\,(\mathrm{ff}^{\prime}\,x\,v) \mathrm{volume}$
-  \item[\rm(hB)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), \|\mathrm{ff}^{\prime}\,x\,v \theta\| \le \mathrm{Bd}\,x\,v$
-  \item[\rm(hTkk)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to 2 \cdot \pi / \hbar \cdot (T(x))(v,v) = (-(2 \cdot \pi \cdot \int_{(\theta : \mathbb{R})}\,(\mathrm{starRingEnd} \mathbb{C})\,(\mathrm{ff}\,x\,v \theta) \cdot \mathrm{ff}^{\prime}\,x\,v \theta)).\mathrm{im}$
-  \item[\rm(hbridge)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\lambda\,t \mapsto \mathrm{inner} \mathbb{C}\,(\mathrm{toLp}\,(\mathrm{ff}\,x\,v) \cdots )\,((\mathrm{modUnitary}\,(\mathrm{niceWedgeStandardSubspace}\,(\mathrm{mw}\,x\,v) \cdots \cdots )\,t)\,(\mathrm{toLp}\,(\mathrm{ff}\,x\,v) \cdots ))))'(0)=(i \cdot (\mathrm{kd}\,x\,v))$
-  \item[\rm(hFocus)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{ad}\,x\,v = (\lambda\,i\,j \mapsto R_{ij}(x))(v,v)$
+  \item[\rm(hφ)] $({\varphi})\in C^{\infty}$
+  \item[\rm(hKG)] $\forall\,(x : M^{{4}}), (\Box {\varphi})({x}) = m ^ 2 \cdot \varphi\,x$
+  \item[\rm(hPP)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hcong)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), g_{{i}{j}}({x}) = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{{k}{l}} \cdot P\,x\,l\,j$
+  \item[\rm(hS)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\mathrm{Sf}\,x\,v)})'({0})={(\mathrm{sd}\,x\,v)}$
+  \item[\rm(hK)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\mathrm{KE}\,x\,v)})'({0})={(\mathrm{kd}\,x\,v)}$
+  \item[\rm(hA)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(A\,x\,v)})'({0})={(\mathrm{ad}\,x\,v)}$
+  \item[\rm(hbound)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, \mathrm{Sf}\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
+  \item[\rm(hsat)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
+  \item[\rm(hDnn)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - \mathrm{Sf}\,x\,v\,t$
+  \item[\rm(hD0)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{KE}\,x\,v\,0 - \mathrm{Sf}\,x\,v\,0 = 0$
+  \item[\rm(hmw)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
+  \item[\rm(hf2)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{MemLp}\,(\mathrm{ff}\,x\,v)\,2 \mathrm{volume}$
+  \item[\rm(hf\_int)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{Integrable}\,(\mathrm{ff}\,x\,v) \mathrm{volume}$
+  \item[\rm(hfd)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), ({(\mathrm{ff}\,x\,v)})'({\theta})={(\mathrm{ff}^{\prime}\,x\,v \theta)}$
+  \item[\rm(hf\textquotesingle{}\_meas)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{AEStronglyMeasurable}\,(\mathrm{ff}^{\prime}\,x\,v) \mathrm{volume}$
+  \item[\rm(hB)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R})\,(\theta : \mathbb{R}), \|\mathrm{ff}^{\prime}\,x\,v \theta\| \le \mathrm{Bd}\,x\,v$
+  \item[\rm(hTkk)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to 2 \cdot \pi / \hbar \cdot {(T({x}))}({v},{v}) = (-(2 \cdot \pi \cdot \int_{(\theta : \mathbb{R})}\,(\mathrm{starRingEnd} \mathbb{C})\,(\mathrm{ff}\,x\,v \theta) \cdot \mathrm{ff}^{\prime}\,x\,v \theta)).\mathrm{im}$
+  \item[\rm(hbridge)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\lambda\,t \mapsto \mathrm{inner} \mathbb{C}\,(\mathrm{toLp}\,(\mathrm{ff}\,x\,v) \cdots )\,((\mathrm{modUnitary}\,(\mathrm{niceWedgeStandardSubspace}\,(\mathrm{mw}\,x\,v) \cdots \cdots )\,t)\,(\mathrm{toLp}\,(\mathrm{ff}\,x\,v) \cdots )))})'({0})={(i \cdot (\mathrm{kd}\,x\,v))}$
+  \item[\rm(hFocus)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{ad}\,x\,v = {(\lambda\,i\,j \mapsto R_{{i}{j}}({x}))}({v},{v})$
 \end{itemize}
-Then \[ \exists \Lambda, \forall\,(x : M^{4})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T(x) \mu \nu = G_{\mu\nu}(x) + \Lambda \cdot g\,x \mu \nu \]
+Then \[ \exists \Lambda, \forall\,(x : M^{{4}})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T({x}) \mu \nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) \]
 \end{theorem}
 
 
 \begin{theorem}[\texttt{QIQTH.WedgeKMSToGR.qiqt\_gr\_explicit\_kg}]\label{thm:qiqth-wedgekmstogr-qiqt-gr-explicit-kg}
 \textit{spine.}
-Given $g : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{4} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{Sf} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{kd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ad} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
+Given $g : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\varphi : M^{{4}} \to \mathbb{R}$, $m : \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{Sf} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{kd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ad} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
 assume
 \begin{itemize}
-  \item[\rm(hsymm)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), g\,y\,a\,b = g\,y\,b\,a$
-  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \mathrm{gi}\,y\,a\,b = \mathrm{gi}\,y\,b\,a$
-  \item[\rm(hinv)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g\,y\,a \sigma \cdot \mathrm{gi}\,y \sigma\,b = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto g\,y\,a\,b)\in C^{\infty}$
-  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto \mathrm{gi}\,y\,a\,b)\in C^{\infty}$
+  \item[\rm(hsymm)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})$
+  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g^{{a}{b}}({y}) = g^{{b}{a}}({y})$
+  \item[\rm(hinv)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g_{{a}{b}}({y})})\in C^{\infty}$
+  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g^{{a}{b}}({y})})\in C^{\infty}$
   \item[\rm(hbar0)] $\hbar \ne 0$
   \item[\rm(heta)] $\eta \ne 0$
   \item[\rm(ha)] $a = 2 \cdot \pi / (\hbar \cdot \eta)$
-  \item[\rm(hφ)] $(\varphi)\in C^{\infty}$
-  \item[\rm(hKG)] $\forall\,(x : M^{4}), (\Box \varphi)(x) = m ^ 2 \cdot \varphi\,x$
-  \item[\rm(hPP)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hcong)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), g\,x\,i\,j = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{kl} \cdot P\,x\,l\,j$
-  \item[\rm(hS)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\mathrm{Sf}\,x\,v))'(0)=(\mathrm{sd}\,x\,v)$
-  \item[\rm(hK)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\mathrm{KE}\,x\,v))'(0)=(\mathrm{kd}\,x\,v)$
-  \item[\rm(hA)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((A\,x\,v))'(0)=(\mathrm{ad}\,x\,v)$
-  \item[\rm(hbound)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, \mathrm{Sf}\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
-  \item[\rm(hsat)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
-  \item[\rm(hDnn)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - \mathrm{Sf}\,x\,v\,t$
-  \item[\rm(hD0)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{KE}\,x\,v\,0 - \mathrm{Sf}\,x\,v\,0 = 0$
-  \item[\rm(hKMS)] $\mathrm{WedgeKMSFlux\_complete}\,g\,(T()) \mathrm{kd} \hbar$
-  \item[\rm(hFocus)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{ad}\,x\,v = (\lambda\,i\,j \mapsto R_{ij}(x))(v,v)$
+  \item[\rm(hφ)] $({\varphi})\in C^{\infty}$
+  \item[\rm(hKG)] $\forall\,(x : M^{{4}}), (\Box {\varphi})({x}) = m ^ 2 \cdot \varphi\,x$
+  \item[\rm(hPP)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hcong)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), g_{{i}{j}}({x}) = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{{k}{l}} \cdot P\,x\,l\,j$
+  \item[\rm(hS)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\mathrm{Sf}\,x\,v)})'({0})={(\mathrm{sd}\,x\,v)}$
+  \item[\rm(hK)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\mathrm{KE}\,x\,v)})'({0})={(\mathrm{kd}\,x\,v)}$
+  \item[\rm(hA)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(A\,x\,v)})'({0})={(\mathrm{ad}\,x\,v)}$
+  \item[\rm(hbound)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, \mathrm{Sf}\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
+  \item[\rm(hsat)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
+  \item[\rm(hDnn)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - \mathrm{Sf}\,x\,v\,t$
+  \item[\rm(hD0)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{KE}\,x\,v\,0 - \mathrm{Sf}\,x\,v\,0 = 0$
+  \item[\rm(hKMS)] $\mathrm{WedgeKMSFlux\_complete}\,g_{{\mathrm{kd}}{\hbar}}({(\mathrm{kgStress}\,m \varphi\,g \mathrm{gi})})$
+  \item[\rm(hFocus)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{ad}\,x\,v = {(\lambda\,i\,j \mapsto R_{{i}{j}}({x}))}({v},{v})$
 \end{itemize}
-Then \[ \exists \Lambda, \forall\,(x : M^{4})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T(x) \mu \nu = G_{\mu\nu}(x) + \Lambda \cdot g\,x \mu \nu \]
+Then \[ \exists \Lambda, \forall\,(x : M^{{4}})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T({x}) \mu \nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) \]
 \end{theorem}
 
 
 \begin{theorem}[\texttt{QIQTH.WedgeKMSToGR.qiqt\_gr\_from\_flux\_complete}]\label{thm:qiqth-wedgekmstogr-qiqt-gr-from-flux-complete}
 \textit{spine.}
-Given $g : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $T : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{Sf} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{kd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ad} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
+Given $g : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $T : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{Sf} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{kd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ad} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
 assume
 \begin{itemize}
-  \item[\rm(hsymm)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), g\,y\,a\,b = g\,y\,b\,a$
-  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \mathrm{gi}\,y\,a\,b = \mathrm{gi}\,y\,b\,a$
-  \item[\rm(hinv)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g\,y\,a \sigma \cdot \mathrm{gi}\,y \sigma\,b = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto g\,y\,a\,b)\in C^{\infty}$
-  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto \mathrm{gi}\,y\,a\,b)\in C^{\infty}$
+  \item[\rm(hsymm)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})$
+  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g^{{a}{b}}({y}) = g^{{b}{a}}({y})$
+  \item[\rm(hinv)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g_{{a}{b}}({y})})\in C^{\infty}$
+  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g^{{a}{b}}({y})})\in C^{\infty}$
   \item[\rm(hbar0)] $\hbar \ne 0$
   \item[\rm(heta)] $\eta \ne 0$
   \item[\rm(ha)] $a = 2 \cdot \pi / (\hbar \cdot \eta)$
-  \item[\rm(hT\_symm)] $\forall\,(x : M^{4})\,(a^{\prime}\,b : \mathrm{Fin}\,4), T\,x\,a^{\prime}\,b = T\,x\,b\,a^{\prime}$
-  \item[\rm(hPP)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hcong)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), g\,x\,i\,j = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{kl} \cdot P\,x\,l\,j$
-  \item[\rm(hS)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\mathrm{Sf}\,x\,v))'(0)=(\mathrm{sd}\,x\,v)$
-  \item[\rm(hK)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\mathrm{KE}\,x\,v))'(0)=(\mathrm{kd}\,x\,v)$
-  \item[\rm(hA)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((A\,x\,v))'(0)=(\mathrm{ad}\,x\,v)$
-  \item[\rm(hbound)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, \mathrm{Sf}\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
-  \item[\rm(hsat)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
-  \item[\rm(hDnn)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - \mathrm{Sf}\,x\,v\,t$
-  \item[\rm(hD0)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{KE}\,x\,v\,0 - \mathrm{Sf}\,x\,v\,0 = 0$
-  \item[\rm(hflux)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{kd}\,x\,v = 2 \cdot \pi / \hbar \cdot (T\,x)(v,v)$
-  \item[\rm(hFocus)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{ad}\,x\,v = (\lambda\,i\,j \mapsto R_{ij}(x))(v,v)$
-  \item[\rm(hreg)] $\forall\,(f : M^{4} \to \mathbb{R}), (\forall\,(y : M^{4})\,(a^{\prime}\,b : \mathrm{Fin}\,4), a \cdot T\,y\,a^{\prime}\,b = R_{a^{\prime}b}(y) + f\,y \cdot g\,y\,a^{\prime}\,b) \to (\forall\,(x : M^{4})\,(\rho : \mathrm{Fin}\,4), \mathrm{PdiffAt}\,f \rho\,x) \wedge \mathrm{Differentiable} \mathbb{R} \lambda\,y \mapsto f\,y + 1 / 2 \cdot R(y)$
-  \item[\rm(conserv)] $\forall\,(x : M^{4})\,(\nu : \mathrm{Fin}\,4), (\nabla\cdot (\lambda\,y\,a^{\prime}\,b \mapsto a \cdot T\,y\,a^{\prime}\,b))_{\nu}(x) = 0$
+  \item[\rm(hT\_symm)] $\forall\,(x : M^{{4}})\,(a^{\prime}\,b : \mathrm{Fin}\,4), T\,x\,a^{\prime}\,b = T\,x\,b\,a^{\prime}$
+  \item[\rm(hPP)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hcong)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), g_{{i}{j}}({x}) = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{{k}{l}} \cdot P\,x\,l\,j$
+  \item[\rm(hS)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\mathrm{Sf}\,x\,v)})'({0})={(\mathrm{sd}\,x\,v)}$
+  \item[\rm(hK)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\mathrm{KE}\,x\,v)})'({0})={(\mathrm{kd}\,x\,v)}$
+  \item[\rm(hA)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(A\,x\,v)})'({0})={(\mathrm{ad}\,x\,v)}$
+  \item[\rm(hbound)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, \mathrm{Sf}\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
+  \item[\rm(hsat)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
+  \item[\rm(hDnn)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - \mathrm{Sf}\,x\,v\,t$
+  \item[\rm(hD0)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{KE}\,x\,v\,0 - \mathrm{Sf}\,x\,v\,0 = 0$
+  \item[\rm(hflux)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{kd}\,x\,v = 2 \cdot \pi / \hbar \cdot {(T\,x)}({v},{v})$
+  \item[\rm(hFocus)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{ad}\,x\,v = {(\lambda\,i\,j \mapsto R_{{i}{j}}({x}))}({v},{v})$
+  \item[\rm(hreg)] $\forall\,(f : M^{{4}} \to \mathbb{R}), (\forall\,(y : M^{{4}})\,(a^{\prime}\,b : \mathrm{Fin}\,4), a \cdot T\,y\,a^{\prime}\,b = R_{{a^{\prime}}{b}}({y}) + f\,y \cdot g_{{a^{\prime}}{b}}({y})) \to (\forall\,(x : M^{{4}})\,(\rho : \mathrm{Fin}\,4), \mathrm{PdiffAt}\,f \rho\,x) \wedge \mathrm{Differentiable} \mathbb{R} \lambda\,y \mapsto f\,y + 1 / 2 \cdot R({y})$
+  \item[\rm(conserv)] $\forall\,(x : M^{{4}})\,(\nu : \mathrm{Fin}\,4), (\nabla\cdot {(\lambda\,y\,a^{\prime}\,b \mapsto a \cdot T\,y\,a^{\prime}\,b)})_{{\nu}}({x}) = 0$
 \end{itemize}
-Then \[ \exists \Lambda, \forall\,(x : M^{4})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T\,x \mu \nu = G_{\mu\nu}(x) + \Lambda \cdot g\,x \mu \nu \]
+Then \[ \exists \Lambda, \forall\,(x : M^{{4}})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T\,x \mu \nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) \]
 \end{theorem}
 
 
 \begin{theorem}[\texttt{QIQTH.QiqtToGR.qiqt\_bekenstein\_gives\_gr}]\label{thm:qiqth-qiqttogr-qiqt-bekenstein-gives-gr}
 \textit{spine.}
-Given $g : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $T : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{4} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $S : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{kd} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ad} : M^{4} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
+Given $g : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\mathrm{gi} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $T : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $\eta : \mathbb{R}$, $\hbar : \mathbb{R}$, $a : \mathbb{R}$, $P : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $P^{-1} : M^{{4}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}$, $S : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{KE} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $A : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}$, $\mathrm{sd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{kd} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$, $\mathrm{ad} : M^{{4}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}$,
 assume
 \begin{itemize}
-  \item[\rm(hsymm)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), g\,y\,a\,b = g\,y\,b\,a$
-  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \mathrm{gi}\,y\,a\,b = \mathrm{gi}\,y\,b\,a$
-  \item[\rm(hinv)] $\forall\,(y : M^{4})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g\,y\,a \sigma \cdot \mathrm{gi}\,y \sigma\,b = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto g\,y\,a\,b)\in C^{\infty}$
-  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), (\lambda\,y \mapsto \mathrm{gi}\,y\,a\,b)\in C^{\infty}$
+  \item[\rm(hsymm)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})$
+  \item[\rm(hsymm\_gi)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), g^{{a}{b}}({y}) = g^{{b}{a}}({y})$
+  \item[\rm(hinv)] $\forall\,(y : M^{{4}})\,(a\,b : \mathrm{Fin}\,4), \sum_{\sigma}\,g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \text{if }\,a = b \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hCg)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g_{{a}{b}}({y})})\in C^{\infty}$
+  \item[\rm(hCgi)] $\forall\,(a\,b : \mathrm{Fin}\,4), ({\lambda\,y \mapsto g^{{a}{b}}({y})})\in C^{\infty}$
   \item[\rm(hbar0)] $\hbar \ne 0$
   \item[\rm(heta)] $\eta \ne 0$
   \item[\rm(ha)] $a = 2 \cdot \pi / (\hbar \cdot \eta)$
-  \item[\rm(hT\_symm)] $\forall\,(x : M^{4})\,(a^{\prime}\,b : \mathrm{Fin}\,4), T\,x\,a^{\prime}\,b = T\,x\,b\,a^{\prime}$
-  \item[\rm(hPP)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
-  \item[\rm(hcong)] $\forall\,(x : M^{4})\,(i\,j : \mathrm{Fin}\,4), g\,x\,i\,j = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{kl} \cdot P\,x\,l\,j$
-  \item[\rm(hS)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((S\,x\,v))'(0)=(\mathrm{sd}\,x\,v)$
-  \item[\rm(hK)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((\mathrm{KE}\,x\,v))'(0)=(\mathrm{kd}\,x\,v)$
-  \item[\rm(hA)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to ((A\,x\,v))'(0)=(\mathrm{ad}\,x\,v)$
-  \item[\rm(hbound)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, S\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
-  \item[\rm(hsat)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to S\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
-  \item[\rm(hDnn)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - S\,x\,v\,t$
-  \item[\rm(hD0)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{KE}\,x\,v\,0 - S\,x\,v\,0 = 0$
-  \item[\rm(hFlux)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{kd}\,x\,v = 2 \cdot \pi / \hbar \cdot (T\,x)(v,v)$
-  \item[\rm(hFocus)] $\forall\,(x : M^{4})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), (g\,x)(v,v) = 0 \to \mathrm{ad}\,x\,v = (\lambda\,i\,j \mapsto R_{ij}(x))(v,v)$
-  \item[\rm(hreg)] $\forall\,(f : M^{4} \to \mathbb{R}), (\forall\,(y : M^{4})\,(a^{\prime}\,b : \mathrm{Fin}\,4), a \cdot T\,y\,a^{\prime}\,b = R_{a^{\prime}b}(y) + f\,y \cdot g\,y\,a^{\prime}\,b) \to (\forall\,(x : M^{4})\,(\rho : \mathrm{Fin}\,4), \mathrm{PdiffAt}\,f \rho\,x) \wedge \mathrm{Differentiable} \mathbb{R} \lambda\,y \mapsto f\,y + 1 / 2 \cdot R(y)$
-  \item[\rm(conserv)] $\forall\,(x : M^{4})\,(\nu : \mathrm{Fin}\,4), (\nabla\cdot (\lambda\,y\,a^{\prime}\,b \mapsto a \cdot T\,y\,a^{\prime}\,b))_{\nu}(x) = 0$
+  \item[\rm(hT\_symm)] $\forall\,(x : M^{{4}})\,(a^{\prime}\,b : \mathrm{Fin}\,4), T\,x\,a^{\prime}\,b = T\,x\,b\,a^{\prime}$
+  \item[\rm(hPP)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P\,x\,i\,k \cdot P^{-1}\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hPP\textquotesingle{})] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), \sum_{k}\,P^{-1}\,x\,i\,k \cdot P\,x\,k\,j = \text{if }\,i = j \text{ then }\,1 \text{ else }\,0$
+  \item[\rm(hcong)] $\forall\,(x : M^{{4}})\,(i\,j : \mathrm{Fin}\,4), g_{{i}{j}}({x}) = \sum_{k} \sum_{l}\,P\,x\,k\,i \cdot \eta_{{k}{l}} \cdot P\,x\,l\,j$
+  \item[\rm(hS)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(S\,x\,v)})'({0})={(\mathrm{sd}\,x\,v)}$
+  \item[\rm(hK)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(\mathrm{KE}\,x\,v)})'({0})={(\mathrm{kd}\,x\,v)}$
+  \item[\rm(hA)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to ({(A\,x\,v)})'({0})={(\mathrm{ad}\,x\,v)}$
+  \item[\rm(hbound)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall ^{f}\,(t : \mathbb{R}) \text{ in } \mathrm{nhds}\,0, S\,x\,v\,t \le \eta \cdot A\,x\,v\,t$
+  \item[\rm(hsat)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to S\,x\,v\,0 = \eta \cdot A\,x\,v\,0$
+  \item[\rm(hDnn)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \forall\,(t : \mathbb{R}), 0 \le \mathrm{KE}\,x\,v\,t - S\,x\,v\,t$
+  \item[\rm(hD0)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{KE}\,x\,v\,0 - S\,x\,v\,0 = 0$
+  \item[\rm(hFlux)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{kd}\,x\,v = 2 \cdot \pi / \hbar \cdot {(T\,x)}({v},{v})$
+  \item[\rm(hFocus)] $\forall\,(x : M^{{4}})\,(v : \mathrm{Fin}\,4 \to \mathbb{R}), {(g\,x)}({v},{v}) = 0 \to \mathrm{ad}\,x\,v = {(\lambda\,i\,j \mapsto R_{{i}{j}}({x}))}({v},{v})$
+  \item[\rm(hreg)] $\forall\,(f : M^{{4}} \to \mathbb{R}), (\forall\,(y : M^{{4}})\,(a^{\prime}\,b : \mathrm{Fin}\,4), a \cdot T\,y\,a^{\prime}\,b = R_{{a^{\prime}}{b}}({y}) + f\,y \cdot g_{{a^{\prime}}{b}}({y})) \to (\forall\,(x : M^{{4}})\,(\rho : \mathrm{Fin}\,4), \mathrm{PdiffAt}\,f \rho\,x) \wedge \mathrm{Differentiable} \mathbb{R} \lambda\,y \mapsto f\,y + 1 / 2 \cdot R({y})$
+  \item[\rm(conserv)] $\forall\,(x : M^{{4}})\,(\nu : \mathrm{Fin}\,4), (\nabla\cdot {(\lambda\,y\,a^{\prime}\,b \mapsto a \cdot T\,y\,a^{\prime}\,b)})_{{\nu}}({x}) = 0$
 \end{itemize}
-Then \[ \exists \Lambda, \forall\,(x : M^{4})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T\,x \mu \nu = G_{\mu\nu}(x) + \Lambda \cdot g\,x \mu \nu \]
+Then \[ \exists \Lambda, \forall\,(x : M^{{4}})\,(\mu \nu : \mathrm{Fin}\,4), a \cdot T\,x \mu \nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) \]
 \end{theorem}
 
 
@@ -501,12 +501,12 @@ assume
   \item[\rm(hm)] $0 < m$
   \item[\rm(hf2)] $\mathrm{MemLp}\,f\,2 \mathrm{volume}$
   \item[\rm(hf\_int)] $\mathrm{Integrable}\,f \mathrm{volume}$
-  \item[\rm(hfd)] $\forall\,(x : \mathbb{R}), (f)'(x)=(f^{\prime}\,x)$
+  \item[\rm(hfd)] $\forall\,(x : \mathbb{R}), ({f})'({x})={(f^{\prime}\,x)}$
   \item[\rm(hf\textquotesingle{}\_meas)] $\mathrm{AEStronglyMeasurable}\,f^{\prime} \mathrm{volume}$
   \item[\rm(hB)] $\forall\,(x : \mathbb{R}), \|f^{\prime}\,x\| \le B$
   \item[\rm(hTkk)] $2 \cdot \pi / \hbar \cdot T_{kk} = (-(2 \cdot \pi \cdot \int_{(\theta : \mathbb{R})}\,(\mathrm{starRingEnd} \mathbb{C})\,(f \theta) \cdot f^{\prime} \theta)).\mathrm{im}$
 \end{itemize}
-Then \[ ((\lambda\,t \mapsto \mathrm{inner} \mathbb{C}\,(\mathrm{toLp}\,f \mathrm{hf2})\,((\mathrm{modUnitary}\,(\mathrm{niceWedgeStandardSubspace}\,m \cdots \cdots )\,t)\,(\mathrm{toLp}\,f \mathrm{hf2}))))'(0)=(i \cdot (2 \cdot \pi / \hbar \cdot T_{kk})) \]
+Then \[ ({(\lambda\,t \mapsto \mathrm{inner} \mathbb{C}\,(\mathrm{toLp}\,f \mathrm{hf2})\,((\mathrm{modUnitary}\,(\mathrm{niceWedgeStandardSubspace}\,m \cdots \cdots )\,t)\,(\mathrm{toLp}\,f \mathrm{hf2})))})'({0})={(i \cdot (2 \cdot \pi / \hbar \cdot T_{kk}))} \]
 \end{theorem}
 
 
@@ -518,11 +518,11 @@ assume
   \item[\rm(hm)] $0 < m$
   \item[\rm(hf2)] $\mathrm{MemLp}\,f\,2 \mathrm{volume}$
   \item[\rm(hf\_int)] $\mathrm{Integrable}\,f \mathrm{volume}$
-  \item[\rm(hfd)] $\forall\,(x : \mathbb{R}), (f)'(x)=(f^{\prime}\,x)$
+  \item[\rm(hfd)] $\forall\,(x : \mathbb{R}), ({f})'({x})={(f^{\prime}\,x)}$
   \item[\rm(hf\textquotesingle{}\_meas)] $\mathrm{AEStronglyMeasurable}\,f^{\prime} \mathrm{volume}$
   \item[\rm(hB)] $\forall\,(x : \mathbb{R}), \|f^{\prime}\,x\| \le B$
   \item[\rm(hTkk)] $2 \cdot \pi / \hbar \cdot T_{kk} = (-(2 \cdot \pi \cdot \int_{(\theta : \mathbb{R})}\,(\mathrm{starRingEnd} \mathbb{C})\,(f \theta) \cdot f^{\prime} \theta)).\mathrm{im}$
-  \item[\rm(hbridge)] $((\lambda\,t \mapsto \mathrm{inner} \mathbb{C}\,(\mathrm{toLp}\,f \mathrm{hf2})\,((\mathrm{modUnitary}\,(\mathrm{niceWedgeStandardSubspace}\,m \cdots \cdots )\,t)\,(\mathrm{toLp}\,f \mathrm{hf2}))))'(0)=(i \cdot \mathrm{kd})$
+  \item[\rm(hbridge)] $({(\lambda\,t \mapsto \mathrm{inner} \mathbb{C}\,(\mathrm{toLp}\,f \mathrm{hf2})\,((\mathrm{modUnitary}\,(\mathrm{niceWedgeStandardSubspace}\,m \cdots \cdots )\,t)\,(\mathrm{toLp}\,f \mathrm{hf2})))})'({0})={(i \cdot \mathrm{kd})}$
 \end{itemize}
 Then \[ \mathrm{kd} = 2 \cdot \pi / \hbar \cdot T_{kk} \]
 \end{theorem}
