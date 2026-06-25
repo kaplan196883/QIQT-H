@@ -519,6 +519,15 @@ theorem measurable_expSymbol {f : Ω → ℝ} (hf : Measurable f) (t : ℝ) :
     Measurable (fun ω => Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ))) := by
   fun_prop
 
+/-- **The pointwise generator derivative** `d/dt e^{itc}|₀ = i·c` (so `(e^{itc}−1)/t → ic` as `t→0`).  The
+    ptwise input to the Stone generator relation: the symbol's difference quotient tends to `if`. -/
+theorem hasDerivAt_expSymbol (c : ℝ) :
+    HasDerivAt (fun t : ℝ => Complex.exp (Complex.I * (t : ℂ) * (c : ℂ))) (Complex.I * (c : ℂ)) 0 := by
+  have h1 : HasDerivAt (fun t : ℝ => Complex.I * (t : ℂ) * (c : ℂ)) (Complex.I * (c : ℂ)) 0 := by
+    have hb : HasDerivAt (fun t : ℝ => (t : ℂ)) 1 0 := Complex.ofRealCLM.hasDerivAt
+    simpa using (hb.const_mul Complex.I).mul_const (c : ℂ)
+  simpa using h1.cexp
+
 /-- **The difference-quotient domination** `‖e^{itf ω} − 1‖ ≤ |t|·|f ω|` (so `‖(e^{itf}−1)/t‖ ≤ |f ω|`,
     uniform in `t`).  The key estimate for the Stone generator relation `d/dt boundedFC(e^{itf})x|₀ = i·Kx`
     — `(e^{itf}−1)/t → if` in `L²(μ_x)` dominated by `|f| ∈ L²(μ_x)`.  From `‖e^{ix}−1‖ ≤ |x|`. -/

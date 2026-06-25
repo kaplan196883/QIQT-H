@@ -1241,6 +1241,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.norm_expSymbol_sub_one_le
 -- ★ STONE domination: ‖e^{itf ω}−1‖ ≤ |t|·|f ω| (Real.norm_exp_I_mul_ofReal_sub_one_le) — so ‖(e^{itf}−1)/t‖
 -- ≤ |f ω|, the uniform L² bound for the generator's difference-quotient convergence (e^{itf}−1)/t → if.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.hasDerivAt_expSymbol
+-- ★ STONE ptwise derivative: d/dt e^{itc}|₀ = i·c — the pointwise input ((e^{itf}−1)/t → if) for the generator.
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_integral_tendsto
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_inner_self
 -- ★ M2 operator-level first law: ⟨x,(∫f dE)x⟩ = ∫ f dμ_x (L¹ DCT tail-conv + inner continuity) — for
