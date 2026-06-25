@@ -341,6 +341,16 @@ item.** Never claim the `1/4`.
   `HasSum` σ-additivity (bricks 8–15). **The canonical position PVM is now a genuine `ProjectionValuedMeasure`,
   axiom-free (standard 3), budget 0 — the multiplication-PVM frontier (bricks 1–16) is COMPLETE.** It is the
   Mathlib-contributable spectral measure of the position operator on `L²(μ)`. Next frontier: Fourier-Plancherel
+  **PVM unitary conjugation ✅ (the Fourier mechanism, unitary-generic)** — `QIQTH/Spectral/PVMConj.lean`,
+  axiom-free, budget 0, full build green: for any `ProjectionValuedMeasure P` and unitary `U : H ≃ₗᵢ[ℂ] H`,
+  `(P.conj U).E A = U ∘ P.E A ∘ U⁻¹` is again a genuine `ProjectionValuedMeasure`. All fields transport —
+  self-adjoint (`U†=U⁻¹`, `E†=E`), idempotent (`U⁻¹U=1`), `∅↦0`, `univ↦UU⁻¹=1`, multiplicative, σ-additive
+  (`U` continuous-linear ⟹ `HasSum` preserved via `HasSum.mapL`). This is THE general mechanism by which the
+  Fourier–Plancherel transform carries `positionPVM` to the **momentum PVM**. **Honest checkpoint:** the
+  conjugation construction is complete and reusable; instantiating `U` with the concrete `L²` Fourier transform
+  (`Real.fourierIntegral` + Plancherel as a `≃ₗᵢ`) is the next, **Mathlib-Fourier-gated**, step. And even the
+  momentum PVM / generator (#5), once built, leaves the GR chain gated on the physical wedge inputs #1/#3/#4.
+  Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`

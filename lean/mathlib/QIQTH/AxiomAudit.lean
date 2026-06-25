@@ -1421,6 +1421,13 @@ namespace QIQTH.AxiomAudit
 -- (brick 4), strong HasSum σ-additivity (bricks 8–15). The canonical position PVM — axiom-free, the Fourier-conjugate
 -- of which is the momentum PVM (route to the boost generator / WedgeKMSFlux #5). Bricks 1–16 = the genuine spectral
 -- measure of the position operator on L²(μ), Mathlib-contributable.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.conj
+-- ★ PVM UNITARY CONJUGATION (the Fourier mechanism, unitary-generic): for any PVM P and unitary U : H ≃ₗᵢ[ℂ] H,
+-- (P.conj U).E A = U ∘ P.E A ∘ U⁻¹ is again a genuine ProjectionValuedMeasure. All fields transport: self-adjoint
+-- (U†=U⁻¹, E†=E), idempotent (U⁻¹U=1), ∅↦0, univ↦UU⁻¹=1, multiplicative, σ-additive (U continuous linear ⟹ HasSum
+-- preserved via HasSum.mapL). THE general mechanism by which the Fourier–Plancherel transform carries the position
+-- PVM to the MOMENTUM PVM (→ translation/boost generator, WedgeKMSFlux #5). Instantiating U = the L² Fourier
+-- transform is the next (Mathlib-Fourier-gated) step; the conjugation construction itself is complete + reusable.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
