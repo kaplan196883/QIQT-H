@@ -1255,6 +1255,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.complexSymbol_fcTrunc_lintegral_tendsto
 -- ★ STONE operator-assembly step 1: ∫‖h − i·↑fcTrunc_m‖²dμ_x → ∫‖h − i·↑f‖²dμ_x (bounded symbol h) — the m→∞
 -- truncation half of the distance identity ‖boundedFC(h)x − i·fcOp x‖² = ∫‖h−if‖² that makes the generator mechanical.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.dist_boundedFC_smul_fcOp_sq
+-- ★★ STONE operator-assembly step 2 (CRUX): ‖boundedFC(h)x − i·(∫f dE)x‖² = ∫‖h − i·↑f‖²dμ_x (bounded symbol h) —
+-- the operator distance to i·fcOp x EQUALS the L² symbol distance to i·f. Collapses the generator double-limit to a
+-- single limit (limit-uniqueness: i·fcSeq→i·fcOp + norm_boundedFC_sub_sq + complexSymbol_fcTrunc_lintegral_tendsto).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_integral_tendsto
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_inner_self
 -- ★ M2 operator-level first law: ⟨x,(∫f dE)x⟩ = ∫ f dμ_x (L¹ DCT tail-conv + inner continuity) — for

@@ -742,6 +742,71 @@ theorem complexSymbol_fcTrunc_lintegral_tendsto {f : Ω → ℝ} (hf : Measurabl
   exact MeasureTheory.tendsto_lintegral_of_dominated_convergence
     (fun ω => ENNReal.ofReal (2 * C ^ 2) + ENNReal.ofReal (2 * (f ω) ^ 2)) hmeas hbound hfin hlim
 
+/-- **The operator Stone distance identity** (the crux that makes the generator mechanical):
+    for a bounded symbol `h` (`‖h‖ ≤ C`) and `x ∈ fcDomain f`,
+    `‖boundedFC(h) x − i·(∫f dE) x‖² = ∫ ‖h − i·↑f‖² dμ_x`.
+    Collapses the generator's double-limit to a single limit: the LHS distance to `i·fcOp x` *equals* the `L²`
+    distance of the symbol `h` to `i·f`.  Limit-uniqueness: `i·fcSeq_m x → i·fcOp x` (Claim A), the per-`m`
+    identity `‖boundedFC(h)x − i·fcSeq_m x‖² = ∫‖h − i·↑fcTrunc_m‖²` (Claim B, `norm_boundedFC_sub_sq` +
+    `boundedFC_smul`), and the truncation `L²` convergence (`complexSymbol_fcTrunc_lintegral_tendsto`). -/
+theorem dist_boundedFC_smul_fcOp_sq {f : Ω → ℝ} (hf : Measurable f) {x : H} (hx : x ∈ P.fcDomain f)
+    {h : Ω → ℂ} (hh : Measurable h) {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ ω, ‖h ω‖ ≤ C) :
+    ‖P.boundedFC hh hC0 hC x - Complex.I • P.fcOp hf x‖ ^ 2
+      = (∫⁻ ω, ENNReal.ofReal (‖h ω - Complex.I * (f ω : ℂ)‖ ^ 2) ∂(P.scalarMeasure x)).toReal := by
+  have hA : Filter.Tendsto (fun m => Complex.I • P.fcSeq hf m x) Filter.atTop
+      (nhds (Complex.I • P.fcOp hf x)) := (P.fcSeq_tendsto_fcOp hf hx).const_smul Complex.I
+  have hB : ∀ m, ‖P.boundedFC hh hC0 hC x - Complex.I • P.fcSeq hf m x‖ ^ 2
+      = (∫⁻ ω, ENNReal.ofReal (‖h ω - Complex.I * (fcTrunc f m ω : ℂ)‖ ^ 2)
+        ∂(P.scalarMeasure x)).toReal := by
+    intro m
+    rw [fcSeq, ← ContinuousLinearMap.smul_apply, ← P.boundedFC_smul Complex.I _ m.cast_nonneg _,
+      P.norm_boundedFC_sub_sq hh hC0 hC _ _ _ x,
+      MeasureTheory.integral_eq_lintegral_of_nonneg_ae
+        (Filter.Eventually.of_forall fun ω => sq_nonneg _)
+        ((Measurable.norm (hh.sub (measurable_const.mul
+          (Complex.measurable_ofReal.comp (fcTrunc_measurable hf m))))).pow_const 2).aestronglyMeasurable]
+    simp only [Function.comp_apply]
+  have hfin_lim : ∫⁻ ω, ENNReal.ofReal (‖h ω - Complex.I * (f ω : ℂ)‖ ^ 2)
+      ∂(P.scalarMeasure x) ≠ ⊤ := by
+    have hsum_fin : ∫⁻ ω, (ENNReal.ofReal (2 * C ^ 2) + ENNReal.ofReal (2 * (f ω) ^ 2))
+        ∂(P.scalarMeasure x) ≠ ⊤ := by
+      rw [MeasureTheory.lintegral_add_left measurable_const]
+      refine ENNReal.add_ne_top.mpr ⟨?_, ?_⟩
+      · rw [MeasureTheory.lintegral_const]
+        exact ENNReal.mul_ne_top ENNReal.ofReal_ne_top
+          (by rw [P.scalarMeasure_univ]; exact ENNReal.ofReal_ne_top)
+      · have heq : ∫⁻ ω, ENNReal.ofReal (2 * (f ω) ^ 2) ∂(P.scalarMeasure x) = 2 * P.fcEnergy f x := by
+          calc ∫⁻ ω, ENNReal.ofReal (2 * (f ω) ^ 2) ∂(P.scalarMeasure x)
+              = ∫⁻ ω, 2 * ENNReal.ofReal ((f ω) ^ 2) ∂(P.scalarMeasure x) := by
+                refine MeasureTheory.lintegral_congr fun ω => ?_
+                rw [ENNReal.ofReal_mul (by norm_num : (0 : ℝ) ≤ 2), ENNReal.ofReal_ofNat]
+            _ = 2 * ∫⁻ ω, ENNReal.ofReal ((f ω) ^ 2) ∂(P.scalarMeasure x) :=
+                MeasureTheory.lintegral_const_mul 2 (ENNReal.measurable_ofReal.comp (hf.pow_const 2))
+            _ = 2 * P.fcEnergy f x := by rw [fcEnergy]
+        rw [heq]; exact ENNReal.mul_ne_top (by norm_num) ((P.mem_fcDomain).mp hx)
+    refine ne_top_of_le_ne_top hsum_fin (MeasureTheory.lintegral_mono fun ω => ?_)
+    refine (ENNReal.ofReal_le_ofReal ?_).trans ENNReal.ofReal_add_le
+    have h1 : ‖h ω - Complex.I * (f ω : ℂ)‖ ≤ ‖h ω‖ + |f ω| := by
+      have hIf : ‖Complex.I * (f ω : ℂ)‖ = |f ω| := by
+        rw [norm_mul, Complex.norm_I, one_mul, Complex.norm_real, Real.norm_eq_abs]
+      rw [← hIf]; exact norm_sub_le _ _
+    nlinarith [mul_self_le_mul_self (norm_nonneg (h ω - Complex.I * (f ω : ℂ))) h1,
+      norm_nonneg (h ω), abs_nonneg (f ω), hC ω, sq_abs (f ω),
+      sq_nonneg (‖h ω‖ - |f ω|), mul_nonneg (norm_nonneg (h ω)) (abs_nonneg (f ω))]
+  have hRHS : Filter.Tendsto
+      (fun m => (∫⁻ ω, ENNReal.ofReal (‖h ω - Complex.I * (fcTrunc f m ω : ℂ)‖ ^ 2)
+        ∂(P.scalarMeasure x)).toReal) Filter.atTop
+      (nhds ((∫⁻ ω, ENNReal.ofReal (‖h ω - Complex.I * (f ω : ℂ)‖ ^ 2)
+        ∂(P.scalarMeasure x)).toReal)) :=
+    (ENNReal.continuousAt_toReal hfin_lim).tendsto.comp
+      (P.complexSymbol_fcTrunc_lintegral_tendsto hf hx hh hC)
+  have hLHS : Filter.Tendsto
+      (fun m => ‖P.boundedFC hh hC0 hC x - Complex.I • P.fcSeq hf m x‖ ^ 2) Filter.atTop
+      (nhds (‖P.boundedFC hh hC0 hC x - Complex.I • P.fcOp hf x‖ ^ 2)) :=
+    ((tendsto_const_nhds (x := P.boundedFC hh hC0 hC x)).sub hA).norm.pow 2
+  simp only [hB] at hLHS
+  exact tendsto_nhds_unique hLHS hRHS
+
 /-- **The FC-exponential group identity** `∫ e^{i·0·f} dE = 1`: `boundedFC(e^{i·0·f}) = 1` (the `t = 0`
     element of the one-parameter group `exp(itK)`). -/
 theorem boundedFC_expSymbol_zero {f : Ω → ℝ} (hf : Measurable f) :
