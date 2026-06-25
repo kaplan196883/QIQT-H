@@ -65,6 +65,13 @@ theorem fcEnergy_add_le (f : Ω → ℝ) (x y : H) :
         rw [lintegral_add_measure, lintegral_smul_measure, lintegral_smul_measure,
           smul_eq_mul, smul_eq_mul]
 
+/-- The spectral energy is invariant under negating the symbol (`(−f)² = f²`). -/
+@[simp] theorem fcEnergy_neg (f : Ω → ℝ) (x : H) :
+    P.fcEnergy (fun ω => -f ω) x = P.fcEnergy f x := by
+  rw [fcEnergy, fcEnergy]
+  refine lintegral_congr fun ω => ?_
+  rw [neg_sq]
+
 /-- **The domain of `∫ f dE`** — the vectors of finite spectral energy — as a `ℂ`-submodule of `H`.
     `0` has zero energy; energy is sub-additive (parallelogram) and `‖c‖²`-homogeneous, so the
     finite-energy set is closed under `+` and `•`.  This is the natural (dense) domain `D(∫ f dE)` of the
@@ -247,6 +254,16 @@ theorem boundedFC_sub {f g : Ω → ℂ} (hf : Measurable f) {Cf : ℝ} (hCf0 : 
   rw [P.boundedFC_congr _ _ _ hf hCf0 hCf (by funext ω; ring)] at hadd
   rw [hadd]; abel
 
+/-- **`Φ(−g) = −Φ(g)`** — the bounded FC negates with the symbol (a ⋆-algebra-hom property), via
+    `boundedFC_smul (−1)`. -/
+theorem boundedFC_neg {g : Ω → ℂ} (hg : Measurable g) {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ ω, ‖g ω‖ ≤ C) :
+    P.boundedFC hg.neg hC0 (fun ω => by rw [norm_neg]; exact hC ω)
+      = - P.boundedFC hg hC0 hC := by
+  have hsmul := P.boundedFC_smul (-1 : ℂ) hg hC0 hC
+  rw [neg_one_smul] at hsmul
+  rw [← hsmul]
+  exact P.boundedFC_congr _ _ _ _ _ _ (by funext ω; rw [neg_one_mul])
+
 /-- **The difference-norm identity** `‖boundedFC g₁ x − boundedFC g₂ x‖² = ∫ |g₁−g₂|² dμ_x` — the concrete
     bound that makes `boundedFC(fₙ)x` a Cauchy sequence (from `boundedFC_sub` + the norm identity). -/
 theorem norm_boundedFC_sub_sq {g₁ g₂ : Ω → ℂ} (h₁ : Measurable g₁) {C₁ : ℝ} (hC₁0 : 0 ≤ C₁)
@@ -305,6 +322,14 @@ theorem fcTrunc_abs_le_abs (f : Ω → ℝ) (n : ℕ) (ω : Ω) : |fcTrunc f n �
   by_cases h : ω ∈ {ω | |f ω| ≤ (n : ℝ)}
   · rw [Set.indicator_of_mem h]
   · rw [Set.indicator_of_notMem h]; simp [abs_nonneg]
+
+/-- The truncation negates with the symbol: `fcTrunc(−f) n = −fcTrunc(f) n` (the cutoff set `{|f| ≤ n}` is
+    `abs`-symmetric). -/
+theorem fcTrunc_neg (f : Ω → ℝ) (n : ℕ) :
+    fcTrunc (fun ω => -f ω) n = fun ω => -(fcTrunc f n ω) := by
+  funext ω
+  simp only [fcTrunc, Set.indicator_apply, Set.mem_setOf_eq, abs_neg]
+  split <;> simp
 
 /-- **The `L¹` tail-convergence on the domain:** `∫ fcTrunc f n dμ_x → ∫ f dμ_x` (Bochner, real).  Dominated
     convergence (`|fcTrunc f n| ≤ |f| ∈ L¹`, `fcTrunc f n → f` ptwise).  This gives the operator's diagonal
@@ -487,6 +512,28 @@ theorem fcOp_smul {f : Ω → ℝ} (hf : Measurable f) (c : ℂ) {x : H} (hx : x
     funext n; simp only [fcSeq, map_smul]
   exact tendsto_nhds_unique (heq ▸ P.fcSeq_tendsto_fcOp hf hcx)
     ((P.fcSeq_tendsto_fcOp hf hx).const_smul c)
+
+/-- **The operator negates with the symbol** `∫ (−f) dE = − ∫ f dE` — `∫·dE` is linear in the integrand.
+    Each `fcSeq(−f) = −fcSeq(f)` (`fcTrunc_neg` + `boundedFC_neg`), so the strong limits negate. -/
+theorem fcOp_neg {f : Ω → ℝ} (hf : Measurable f) {x : H} (hx : x ∈ P.fcDomain f) :
+    P.fcOp hf.neg x = - P.fcOp hf x := by
+  have hdom : x ∈ P.fcDomain (fun ω => -f ω) := by
+    rw [mem_fcDomain, fcEnergy_neg]; exact (P.mem_fcDomain).mp hx
+  have hseq : ∀ n, P.fcSeq hf.neg n x = - P.fcSeq hf n x := by
+    intro n
+    have hbnd : ∀ ω, ‖((fcTrunc f n ω : ℝ) : ℂ)‖ ≤ (n : ℝ) := fun ω => by
+      rw [Complex.norm_real, Real.norm_eq_abs]; exact fcTrunc_abs_le f n ω
+    have hsym : (Complex.ofReal ∘ fcTrunc (fun ω => -f ω) n)
+        = fun ω => -((Complex.ofReal ∘ fcTrunc f n) ω) := by
+      rw [fcTrunc_neg]; funext ω; simp only [Function.comp_apply, Complex.ofReal_neg]
+    rw [fcSeq, fcSeq, P.boundedFC_congr _ _ _
+      (Complex.continuous_ofReal.measurable.comp (fcTrunc_measurable hf n)).neg n.cast_nonneg
+      (fun ω => by rw [norm_neg]; exact hbnd ω) hsym,
+      P.boundedFC_neg (Complex.continuous_ofReal.measurable.comp (fcTrunc_measurable hf n))
+        n.cast_nonneg hbnd, ContinuousLinearMap.neg_apply]
+  have h2 : Filter.Tendsto (fun n => P.fcSeq hf.neg n x) Filter.atTop (nhds (- P.fcOp hf x)) := by
+    simp only [hseq]; exact (P.fcSeq_tendsto_fcOp hf hx).neg
+  exact tendsto_nhds_unique (P.fcSeq_tendsto_fcOp hf.neg hdom) h2
 
 /-- **The operator is symmetric** on the domain: `⟨(∫ f dE) x, y⟩ = ⟨x, (∫ f dE) y⟩` (`f` real, so each
     `boundedFC(fₙ)` is self-adjoint; pass to the limit by continuity of the inner product).  This is the
