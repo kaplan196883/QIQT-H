@@ -44,4 +44,20 @@ noncomputable def positionPVM : ProjectionValuedMeasure α (Lp ℂ 2 μ) where
     rw [e1, posPVM_E_eq (MeasurableSet.iUnion hAmeas)]
     exact hasSum_indMul_iUnion hAmeas hd x
 
+/-- **The position PVM's scalar mass is the Born `|ψ|²` measure of `A`:** `‖E(A)x‖² = ∫_A ‖x‖² dμ` — the `L²`
+    mass of the state `x` on `A`. As `A` varies this *is* the (unnormalized) Born position-probability
+    distribution `|ψ(a)|² dμ(a)` of the state. -/
+theorem positionPVM_norm_sq (x : Lp ℂ 2 μ) {A : Set α} (hA : MeasurableSet A) :
+    ‖(positionPVM (μ := μ)).E A x‖ ^ 2 = ∫ a in A, ‖x a‖ ^ 2 ∂μ := by
+  rw [show (positionPVM (μ := μ)).E A = indMul hA from posPVM_E_eq hA, norm_indMul_sq]
+
+/-- **The position PVM's scalar spectral measure is the Born `|ψ|²` position measure:**
+    `(scalarMeasure x)(A) = ENNReal.ofReal (∫_A ‖x‖² dμ)`. The spectral measure of the position observable
+    *is* the position-probability distribution of the state — the Born rule for position, read off the PVM. -/
+theorem positionPVM_scalarMeasure (x : Lp ℂ 2 μ) {A : Set α} (hA : MeasurableSet A) :
+    (positionPVM (μ := μ)).scalarMeasure x A = ENNReal.ofReal (∫ a in A, ‖x a‖ ^ 2 ∂μ) := by
+  rw [(positionPVM (μ := μ)).scalarMeasure_apply x hA]
+  congr 1
+  rw [show (positionPVM (μ := μ)).E A = indMul hA from posPVM_E_eq hA, norm_indMul_sq]
+
 end QIQTH.Spectral.Multiplication

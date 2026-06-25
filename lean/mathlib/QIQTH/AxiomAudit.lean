@@ -1437,6 +1437,12 @@ namespace QIQTH.AxiomAudit
 -- translation/boost generator e^{itP} (WedgeKMSFlux #5). Built for E=ℝ (canonical 1D); generalizes to any
 -- finite-dim real inner product space carried by fourierTransformₗᵢ. Extracting the unbounded generator P=∫k dÊ(k)
 -- (Stone) is the remaining unbounded-FC frontier; the GR chain beyond #5 stays gated on the physical inputs #1/#3/#4.
+#print axioms QIQTH.Spectral.Multiplication.positionPVM_norm_sq
+#print axioms QIQTH.Spectral.Multiplication.positionPVM_scalarMeasure
+-- ★ POSITION PVM SCALAR MEASURE = THE BORN |ψ|² POSITION DISTRIBUTION: positionPVM_norm_sq (‖E(A)x‖²=∫_A‖x‖²) and
+-- positionPVM_scalarMeasure ((scalarMeasure x)(A)=ENNReal.ofReal(∫_A‖x‖²)). The position PVM's scalar spectral
+-- measure IS the (unnormalized) position-probability distribution |ψ(a)|²dμ(a) of the state — the Born rule for
+-- position read directly off the bundled ProjectionValuedMeasure. Axiom-free corollary of bricks 8 + 16.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

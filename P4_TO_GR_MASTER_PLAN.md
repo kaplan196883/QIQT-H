@@ -359,6 +359,12 @@ item.** Never claim the `1/4`.
   **Remaining toward #5 (honest):** extracting the *unbounded generator* `P = ∫ k dÊ(k)` (Stone's theorem on the
   momentum PVM) so the one-parameter group `e^{itP}` = spatial translation feeds the `boostUnitary` generator — the
   unbounded-FC / Stone frontier. And the GR chain beyond `#5` stays gated on the physical wedge inputs `#1/#3/#4`.
+  **Position PVM scalar measure = the Born `|ψ|²` position distribution ✅** (`QIQTH/Spectral/PositionPVM.lean`,
+  axiom-free, budget 0): `positionPVM_norm_sq` (`‖E(A)x‖²=∫_A‖x‖²`) and `positionPVM_scalarMeasure`
+  (`(scalarMeasure x)(A)=ENNReal.ofReal(∫_A‖x‖²)`). The position PVM's scalar spectral measure **is** the
+  (unnormalized) position-probability distribution `|ψ(a)|²dμ(a)` of the state — the **Born rule for position**
+  read directly off the bundled `ProjectionValuedMeasure` (corollary of bricks 8 + 16). A clean physical payoff of
+  the PVM construction, independent of the Stone / physical-input frontiers.
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.
