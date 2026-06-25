@@ -214,6 +214,14 @@ item.** Never claim the `1/4`.
     `d/dt Im⟪ξ,Δ^{−it}ξ⟫|₀ = S` (`= cgpEntropy`). Since the correlator's derivative `i·S` is purely imaginary, the
     entropy is precisely the `t`-derivative of the **imaginary part** of the modular correlator — a real observable
     (the real part is stationary at `t=0`). The operator first law in its physical, real-valued form.
+  • **UNIFICATION — `K = modK` IS the generator of the crossed-product's `Δ^{it}` ✅ (axiom-free, green)** —
+    `modUnitary_eq`: the crossed-product modular unitary `modUnitary S t` (= `borelFC(modChar t)`, on which the
+    modular automorphism `σ_t(a)=Δ^{it}aΔ^{−it}` and the crossed product `M ⋊_σ ℝ` are built) is *definitionally*
+    `(PVM_R).boundedFC` of `modSpecFun S t`, and `modSpecFun S t ω = modChar t ω.val = e^{it·(−kFn ω.val)}` (by
+    `modChar_eq_exp_neg_kFn` on the spectrum `(0,2)`; both `=1` off it). Hence `hasDerivAt_modUnitary`:
+    `d/dt(modUnitary S t · ξ)|₀ = −i·modK ξ` — **the Stone generator of the actual crossed-product `Δ^{it}` is the
+    unbounded-FC modular Hamiltonian `K = modK`**. This bridges the M2 Stone work to the M5 crossed-product/Wall:
+    `borelFC ≡ (PVM_of_selfAdjoint).boundedFC` is the load-bearing definitional identity.
   NB the Bochner-over-`scalarMeasure` DCT route hits a `whnf` wall — the `lintegral`/`HasDerivAt` route is the way.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,

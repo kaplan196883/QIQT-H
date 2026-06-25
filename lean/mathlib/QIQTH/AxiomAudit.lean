@@ -1311,6 +1311,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.hasDerivAt_modFlow_inner_im
 -- ★ REAL-VALUED (PHYSICAL) FIRST LAW d/dt Im⟪ξ,Δ^{−it}ξ⟫|₀ = S: the entropy is the t-derivative of the imaginary
 -- part of the modular correlator (a real observable) — the operator first law in physical form (Re part stationary).
+#print axioms QIQTH.StandardSubspaceModular.modUnitary_eq
+#print axioms QIQTH.StandardSubspaceModular.hasDerivAt_modUnitary
+-- ★★ UNIFICATION: the crossed-product modular unitary modUnitary S t = Δ^{it} (on which modularAut σ_t and M⋊_σℝ are
+-- built) is borelFC(modChar t) = (PVM_R).boundedFC(e^{it·(−kFn)}) (modUnitary_eq: modSpecFun=expSymbol, modChar_eq_exp_neg_kFn),
+-- so its Stone generator is −i·modK = −iK (hasDerivAt_modUnitary). Connects the unbounded-FC modular Hamiltonian K to the Wall.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

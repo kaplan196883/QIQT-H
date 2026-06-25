@@ -198,4 +198,42 @@ theorem hasDerivAt_modChar (S : StandardSubspace H) {ξ : H}
       smul_neg]
   rwa [hval] at h
 
+/-- **The crossed-product modular unitary `modUnitary S t = Δ^{it}` is the FC of the `(−kFn)`-exponential.**
+    `modUnitary` is `borelFC(modChar t) = (PVM_R).boundedFC(modSpecFun S t)`, and `modSpecFun S t ω = modChar t ω.val
+    = e^{it·(−kFn ω.val)}` (by `modChar_eq_exp_neg_kFn` on the spectrum `(0,2)`; both equal `1` off it).  Identifies
+    the crossed-product's `Δ^{it}` with the operator whose Stone generator is the modular Hamiltonian. -/
+theorem modUnitary_eq (S : StandardSubspace H) (t : ℝ) :
+    modUnitary S t = (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).boundedFC
+      (QIQTH.Spectral.ProjectionValuedMeasure.measurable_expSymbol (kFn_val_measurable S).neg t)
+      zero_le_one (QIQTH.Spectral.ProjectionValuedMeasure.norm_expSymbol_le t) := by
+  have hsym : modSpecFun S t
+      = fun ω : spectrum ℝ (rvdRC S) => Complex.exp (Complex.I * (t : ℂ) * ((-kFn ω.val : ℝ) : ℂ)) := by
+    funext ω
+    simp only [modSpecFun]
+    by_cases hω : ω.val ∈ Set.Ioo (0 : ℝ) 2
+    · rw [modChar_eq_exp_neg_kFn t hω]; congr 1; push_cast; ring
+    · rw [modChar, Set.piecewise_eq_of_notMem _ _ _ hω]
+      simp only [kFn, Set.piecewise_eq_of_notMem _ _ _ hω, neg_zero, Complex.ofReal_zero,
+        mul_zero, Complex.exp_zero]
+  rw [modUnitary, borelFC]
+  exact (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).boundedFC_congr _ _ _ _ _ _ hsym
+
+/-- **The Stone generator of the crossed-product modular unitary:** `d/dt(modUnitary S t · ξ)|₀ = −i·K ξ`.
+    The crossed-product's modular flow `Δ^{it} = modUnitary S t` (on which the modular automorphism
+    `σ_t(a) = Δ^{it} a Δ^{−it}` and hence the crossed product `M ⋊_σ ℝ` are built) has Stone generator `−i·modK`.
+    This **connects the unbounded-FC modular Hamiltonian `K = modK` to the crossed-product machinery** —
+    `modUnitary_eq` identifies `Δ^{it}` with the `(−kFn)`-exponential FC, whose generator is `hasDerivAt_modChar`.
+    Axiom-free. -/
+theorem hasDerivAt_modUnitary (S : StandardSubspace H) {ξ : H}
+    (hdom : ξ ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => kFn ω.val)) :
+    HasDerivAt (fun t : ℝ => modUnitary S t ξ) (-(Complex.I • modK S ξ)) 0 := by
+  have heq : (fun t : ℝ => modUnitary S t ξ)
+      = fun t : ℝ => (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).boundedFC
+        (QIQTH.Spectral.ProjectionValuedMeasure.measurable_expSymbol (kFn_val_measurable S).neg t)
+        zero_le_one (QIQTH.Spectral.ProjectionValuedMeasure.norm_expSymbol_le t) ξ := by
+    funext t; rw [modUnitary_eq S t]
+  rw [heq]
+  exact hasDerivAt_modChar S hdom
+
 end QIQTH.StandardSubspaceModular
