@@ -4344,6 +4344,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.modChar_eq_exp_neg_kFn
 #print axioms QIQTH.StandardSubspaceModular.kFn_nonpos_of_lt_one
 #print axioms QIQTH.StandardSubspaceModular.kFn_nonneg_of_one_lt
+-- P4-derivation Stage 2: the first law S = ⟨K⟩ — modular relative entropy = modular-energy expectation:
+#print axioms QIQTH.StandardSubspaceModular.kFn_eq_neg_entropyDensity
+#print axioms QIQTH.StandardSubspaceModular.cgpEntropy_eq_integral_kFn
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable

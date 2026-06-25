@@ -20,11 +20,14 @@ infrastructure Mathlib does not yet have (the cited Tomita–Takesaki frontier);
 function and its identity with the flow — the bounded/form-level content that Stage 2's first law builds on.
 Axiom-free.
 -/
-import QIQTH.StandardSubspaceModularFlow
+import QIQTH.ModularRelativeEntropy
 
 namespace QIQTH.StandardSubspaceModular
 
 open scoped ComplexConjugate
+open MeasureTheory
+
+variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 
 /-- The **spectral function of the modular Hamiltonian** `K = −log Δ`.  On the spectrum `(0,2)` of `R` it is
     `kFn(r) = log(r/(2−r)) = −log((2−r)/r)`; outside (the endpoint convention) it is `0`, matching `modChar`. -/
@@ -71,5 +74,32 @@ theorem kFn_nonneg_of_one_lt {r : ℝ} (hr : r ∈ Set.Ioo (1 : ℝ) 2) : 0 ≤ 
   rw [kFn, Set.piecewise_eq_of_mem _ _ _ hmem]
   apply Real.log_nonneg
   rw [le_div_iff₀ h2r]; linarith [hr.1]
+
+/-! ### Stage 2 — the first law: the modular relative entropy *is* the modular energy `S = ⟨K⟩`
+
+The one-particle (CGP) modular relative entropy is `cgpEntropy S ξ = −∫ entropyDensity dμ^R_ξ`, with
+`entropyDensity r = log((2−r)/r)` the spectral function of `log Δ`.  Since `kFn = −entropyDensity` (i.e.
+`K = −log Δ`), the relative entropy equals the **modular-energy expectation** `∫ kFn dμ^R_ξ = ⟨ξ, K ξ⟩` — the
+first-law identity `δS = δ⟨K⟩` in its sharpest form (here `S` *is* `⟨K⟩`; the von Neumann part is absorbed into
+the CGP coherent-state functional).  Combined with Klein positivity (`cgpEntropy_nonneg`), this is the engine
+Stage 4 uses to reduce the FQ *bound* to relative-entropy positivity. -/
+
+/-- `kFn = −entropyDensity` on the spectrum interior `(0,2)`: the Stage-1 modular Hamiltonian density is minus
+    the existing `log Δ` density.  (`K = −log Δ`.) -/
+theorem kFn_eq_neg_entropyDensity {r : ℝ} (hr : r ∈ Set.Ioo (0 : ℝ) 2) :
+    kFn r = -entropyDensity r := by
+  rw [kFn, Set.piecewise_eq_of_mem _ _ _ hr, entropyDensity, ← Real.log_inv, inv_div]
+
+/-- **Stage 2 — the first law `S = ⟨K⟩`.**  For a standard subspace whose modular spectrum avoids the endpoints
+    (`hspec`, the separating/cyclic case), the modular relative entropy equals the modular-energy expectation:
+    `cgpEntropy S ξ = ∫ kFn dμ^R_ξ` (`= ⟨ξ, K ξ⟩`, the integral of the modular Hamiltonian against the spectral
+    measure).  So the relative entropy's first variation is the modular-energy variation — the boundary dual of
+    the bulk Clausius relation used in the GR chain. -/
+theorem cgpEntropy_eq_integral_kFn (S : StandardSubspace H) (ξ : H)
+    (hspec : ∀ ω : spectrum ℝ (rvdRC S), (ω : spectrum ℝ (rvdRC S)).val ∈ Set.Ioo (0 : ℝ) 2) :
+    cgpEntropy S ξ = ∫ ω, kFn (ω : spectrum ℝ (rvdRC S)).val ∂(rvdSpecMeasure S ξ) := by
+  rw [cgpEntropy, ← integral_neg]
+  refine integral_congr_ae (Filter.Eventually.of_forall (fun ω => ?_))
+  exact (kFn_eq_neg_entropyDensity (hspec ω)).symm
 
 end QIQTH.StandardSubspaceModular

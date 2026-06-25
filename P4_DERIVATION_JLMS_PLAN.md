@@ -108,5 +108,15 @@ landing, run `python scripts/lean-track-refresh.py --skip-unchanged` and commit 
     spectral function + flow identity (the bounded/form-level content); Stage 2's first law is built at the
     relative-entropy (`cgpEntropy`) level, which is bounded and already exists — so the unbounded `K` operator
     is NOT on the critical path for Stages 2–4.
-- **NEXT: Stage 2** — the first law `δS = δ⟨K⟩` via `cgpEntropy` (`ArakiModularEntropy.lean`): the one-particle
-  relative entropy's first variation = modular-energy variation, the boundary dual of the bulk Clausius relation.
+- **Stage 2 ✅** (`QIQTH/ModularHamiltonian.lean`, extends) — the **first law `S = ⟨K⟩`**: the one-particle
+  (CGP) modular relative entropy *equals* the modular-energy expectation. `kFn_eq_neg_entropyDensity`
+  (`kFn = −entropyDensity` on the spectrum, i.e. `K = −log Δ` = minus the existing `log Δ` density) +
+  `cgpEntropy_eq_integral_kFn`: `cgpEntropy S ξ = ∫ kFn dμ^R_ξ` (`= ⟨ξ, K ξ⟩`), for a separating/cyclic
+  spectrum (`hspec`, the same hypothesis the existing flow theorems use). So the relative entropy's first
+  variation *is* the modular-energy variation — the boundary dual of the bulk Clausius relation. Combined with
+  the existing Klein positivity `cgpEntropy_nonneg` (already a theorem), this is the engine Stage 4 needs.
+  Axiom-free (std 3); wired into AxiomAudit; budget 0.
+- **NEXT: Stage 3** — the area/edge operator + the JLMS split `K_∂R = c·A_edge + K_bulk`. With `K = ∫ kFn`
+  (Stage 2) the structural target is: define `A_edge := (K − K_bulk)/c` and prove `K − K_bulk` is the
+  boundary/edge part (commutes with the bulk-localized algebra), with `c = 1/4ℓ_P²` carried. The geometric
+  content (`A_edge = area`) stays the labelled UV frontier — NOT smuggled.
