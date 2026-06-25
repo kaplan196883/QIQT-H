@@ -206,4 +206,18 @@ theorem indMul_inter {A B : Set α} (hA : MeasurableSet A) (hB : MeasurableSet B
   exact mulOp_congr _ _ _ (indSymbol_measurable (hA.inter hB)) zero_le_one (indSymbol_norm_le _)
     (funext fun s => indSymbol_inter A B s)
 
+/-- **The scalar spectral measure (diagonal):** `⟪f, E(A) f⟫ = ∫_A conj(f)·f dμ = ∫_A ‖f‖² dμ` — the `L²` mass
+    of `f` on `A` (`conj(f a)·f a = ‖f a‖²`).  Since `E(A) = M_{𝟙_A}` is an orthogonal projection this is
+    `‖E(A)f‖² ≥ 0`; as `A` varies it is the `‖f‖²`-weighted measure, the scalar spectral measure `μ_f` of the
+    position PVM. -/
+theorem indMul_inner_self {A : Set α} (hA : MeasurableSet A) (f : Lp ℂ 2 μ) :
+    inner ℂ f (indMul hA f) = ∫ a in A, (starRingEnd ℂ) (f a) * f a ∂μ := by
+  rw [indMul, MeasureTheory.L2.inner_def, ← MeasureTheory.integral_indicator hA]
+  refine MeasureTheory.integral_congr_ae ?_
+  filter_upwards [mulOp_coeFn (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A) f] with a e1
+  rw [e1, RCLike.inner_apply']
+  by_cases h : a ∈ A
+  · simp only [Set.indicator_of_mem h, indSymbol, one_mul]
+  · simp [indSymbol, Set.indicator_of_notMem h]
+
 end QIQTH.Spectral.Multiplication

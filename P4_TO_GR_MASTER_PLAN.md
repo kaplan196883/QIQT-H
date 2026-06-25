@@ -271,8 +271,11 @@ item.** Never claim the `1/4`.
   σ-additivity (`E(⋃Aₙ)=Σ E(Aₙ)` strong) → `scalarMeasure` `⟨f,E(A)f⟩=∫_A|f|²` → the PVM; then Fourier conjugation.
   **Brick 4 — the projection-valued content ✅**: `E(univ)=1` (`indMul_univ`), `E(∅)=0` (`indMul_empty`), and
   **`E(A)·E(B)=E(A∩B)`** (`indMul_inter`, via `mulOp_mul` + `𝟙_A·𝟙_B=𝟙_{A∩B}`) — commuting orthogonal projections,
-  disjoint ⟹ orthogonal `E(A)E(B)=0`. This is the finitely-additive **PV-content** of the position PVM. Next bricks:
-  σ-additivity (strong convergence) + `scalarMeasure` → the genuine `ProjectionValuedMeasure`; then Fourier.
+  disjoint ⟹ orthogonal `E(A)E(B)=0`. This is the finitely-additive **PV-content** of the position PVM.
+  **Brick 5 — the scalar spectral measure ✅**: `⟪f, E(A) f⟫ = ∫_A conj(f)·f dμ = ∫_A ‖f‖² dμ` (`indMul_inner_self`,
+  via `L2.inner_def`) — the `L²` mass of `f` on `A` (= `‖E(A)f‖²≥0`); as `A` varies, the `‖f‖²`-weighted scalar
+  spectral measure `μ_f`. Next bricks: σ-additivity (strong `E(⋃Aₙ)=Σ E(Aₙ)`) → bundle the `ProjectionValuedMeasure`;
+  then Fourier-conjugate to the momentum PVM → the boost generator.
   NB the Bochner-over-`scalarMeasure` DCT route hits a `whnf` wall — the `lintegral`/`HasDerivAt` route is the way.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,
