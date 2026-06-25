@@ -342,6 +342,9 @@ import QIQTH.CrossedProductTranslation
 -- The Wall, Phase 3.1: the covariance λ_{-t} π(a) λ_t = π(σ_t a) — the defining identity of the crossed
 -- product M ⋊_σ ℝ, joining the matter rep (Phase 1) and the clock group (Phase 2).
 import QIQTH.CrossedProductCovariance
+-- The Wall, Phase 4.1: strong continuity of the clock group λ_t — t ↦ λ_t ξ continuous in L²(ℝ;H), completing
+-- "λ_t is a strongly-continuous one-parameter unitary group" (Stone's theorem hypothesis; X = the frontier).
+import QIQTH.CrossedProductGenerator
 -- MODULAR RELATIVE ENTROPY (Phase B, one-particle / standard-subspace continuum object): the
 -- Casini–Grillo–Pontello relative entropy of a coherent state vs vacuum, as the SCALAR spectral
 -- integral S(ξ)=−∫log((2−r)/r)dμ^R_ξ over the bounded RvD operator R=P+Q (no unbounded log Δ).

@@ -61,4 +61,24 @@ clock energy plus a precise, honest map of exactly what infrastructure is missin
 sub-step with the `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>` trailer; push via schannel; refresh.
 
 ## Progress log
-- (none yet — Sub-step 4.1 next; honest checkpoint at the Stone wall expected at 4.2)
+- **Sub-step 4.1 ✅** (`QIQTH/CrossedProductGenerator.lean`) — **strong continuity** of the clock group:
+  `clockTransl_stronglyContinuous` (`t ↦ λ_t ξ` is continuous in `L²(ℝ;H)`), via Mathlib's
+  `ContinuousAt.compMeasurePreservingLp` with the translation family `translMap : C(ℝ, C(ℝ,ℝ))` (the curry of
+  continuous addition). With `clockTransl_add` (group law) + `clockTransl_norm` (isometry), **`λ_t` is a
+  strongly-continuous one-parameter unitary group — exactly Stone's theorem hypothesis.** Axiom-free (std 3);
+  wired into AxiomAudit; budget 0.
+- **Sub-steps 4.2 (Stone) + 4.3 (A_edge) ⛔ FRONTIER WALL — honest checkpoint.** Extracting the self-adjoint
+  generator `X` from the (now-established) strongly-continuous unitary group `λ_t` is **Stone's theorem**, which
+  is **absent from Mathlib** — there is no group→generator API and no unbounded-self-adjoint spectral theorem
+  (only `LinearPMap` + adjoint, the *target type*, exists). Building Stone is the multi-week–multi-month
+  Mathlib-grade undertaking flagged throughout (the same continuum-TT frontier `K = −log Δ` hit in JLMS Stage 1).
+  The translation-on-`L²(ℝ)` special case (`X` = multiplication by frequency, via Fourier/Plancherel) is lighter
+  *in principle* but vector-valued (`H`-coefficiented) Fourier/Plancherel is itself not in Mathlib. So `X` (hence
+  `A_edge := X`) is the cited frontier; **4.1 (the Stone hypothesis) is the honest down-payment.**
+
+### Phase 4 status — the Stone hypothesis delivered; the generator `X` is the frontier
+**Delivered (axiom-free, budget 0):** `λ_t` is a **strongly-continuous one-parameter unitary group** (strong
+continuity 4.1 + group law/isometry from Phase 2) — everything Stone's theorem *consumes*. **Frontier (recorded,
+not faked):** Stone's theorem itself (group → self-adjoint generator `X`), absent from Mathlib; hence the clock
+energy `X` = the area edge operator `A_edge`, and Phase 5 (the trace) beyond it. This is where the campaign meets
+the genuine operator-algebra wall — the `1/4` and the area operator both live past it.
