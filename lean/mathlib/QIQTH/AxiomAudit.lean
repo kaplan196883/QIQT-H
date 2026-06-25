@@ -1185,6 +1185,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_lintegral_sub_sq_tendsto
 -- on the domain the bounded truncations fₙ=f·𝟙_{|f|≤n} converge to f in L²(μ_x): ∫|f−fₙ|²dμ_x→0 (dominated
 -- convergence, dominated by f²∈L¹) — the L²-Cauchy engine making boundedFC(fₙ)x Cauchy (→ the operator).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_adjoint
+-- (boundedFC g)† = boundedFC(conj∘g) — the bounded FC is a *-hom; with boundedFC_mul gives the norm
+-- identity ‖boundedFC g x‖²=∫|g|²dμ_x.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

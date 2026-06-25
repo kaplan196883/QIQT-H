@@ -144,6 +144,23 @@ theorem boundedFC_isSelfAdjoint {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (
   rw [P.inner_boundedFC hf hC0 hC x y, ← inner_conj_symm, P.inner_boundedFC hf hC0 hC y x,
     P.bilinDiag_conj_symm f x y, show (fun ω => (starRingEnd ℂ) (f ω)) = f from funext hreal]
 
+/-- **The adjoint of `boundedFC g` is `boundedFC ḡ`** (the bounded functional calculus is a `*`-hom):
+    `(boundedFC g)† = boundedFC (conj ∘ g)`.  From `inner_boundedFC` + the symbol-conjugation symmetry
+    `bilinDiag_conj_symm` and `conj (conj z) = z`.  Combined with `boundedFC_mul` this gives the norm
+    identity `‖boundedFC g x‖² = ∫ |g|² dμ_x` driving the truncation construction. -/
+theorem boundedFC_adjoint {g : Ω → ℂ} (hg : Measurable g) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, ‖g ω‖ ≤ C) :
+    ContinuousLinearMap.adjoint (P.boundedFC hg hC0 hC)
+      = P.boundedFC (by fun_prop : Measurable fun ω => (starRingEnd ℂ) (g ω)) hC0
+          (fun ω => (Complex.norm_conj (g ω)).le.trans (hC ω)) := by
+  symm
+  rw [ContinuousLinearMap.eq_adjoint_iff]
+  intro x y
+  rw [P.inner_boundedFC hg hC0 hC x y, ← inner_conj_symm, P.inner_boundedFC _ _ _ y x,
+    P.bilinDiag_conj_symm,
+    show (fun ω => (starRingEnd ℂ) ((starRingEnd ℂ) (g ω))) = g from
+      funext fun ω => Complex.conj_conj (g ω)]
+
 /-! ### Bounded truncations of the symbol (the operator's `L²`-Cauchy engine)
 
 The unbounded operator `∫ f dE` is built as the strong limit `Kx := limₙ boundedFC(fₙ) x` over the bounded
