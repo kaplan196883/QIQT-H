@@ -37,6 +37,8 @@ SYMBOLS = {
     # blackboard
     "ℝ": r"\mathbb{R}", "ℂ": r"\mathbb{C}", "ℕ": r"\mathbb{N}",
     "ℤ": r"\mathbb{Z}", "ℚ": r"\mathbb{Q}", "𝟙": r"\mathbb{1}", "𝕜": r"\Bbbk ",
+    # letterlike
+    "ℓ": r"\ell ", "ℏ": r"\hbar ", "ℵ": r"\aleph ", "∎": r"\qed ",
     # delimiters / misc
     "⟨": r"\langle ", "⟩": r"\rangle ", "‖": r"\|", "∥": r"\|",
     "⌊": r"\lfloor ", "⌋": r"\rfloor ", "⌈": r"\lceil ", "⌉": r"\rceil ",
@@ -93,26 +95,6 @@ _IDENT = re.compile(r"[A-Za-z_][A-Za-z0-9_.'!?]*")
 _UNMAPPED = set()
 
 
-def _collapse_scripts(s):
-    """Turn runs of unicode sub/superscripts into LaTeX _{...} / ^{...}."""
-    out, i, n = [], 0, len(s)
-    while i < n:
-        c = s[i]
-        if c in SUPERS:
-            run = ""
-            while i < n and s[i] in SUPERS:
-                run += SUPERS[s[i]]; i += 1
-            out.append("^{" + run + "}")
-        elif c in SUBS:
-            run = ""
-            while i < n and s[i] in SUBS:
-                run += SUBS[s[i]]; i += 1
-            out.append("_{" + run + "}")
-        else:
-            out.append(c); i += 1
-    return "".join(out)
-
-
 def _render_ident(tok, notation):
     """A dotted Lean identifier -> a LaTeX atom.
 
@@ -152,11 +134,23 @@ def tex_of_pp(pp, notation=None):
     notation = {**DEFAULT_NOTATION, **(notation or {})}
     pp = pp.replace("\n", " ")
     pp = re.sub(r"\s+", " ", pp).strip()
-    pp = _collapse_scripts(pp)
 
     out, i, n = [], 0, len(pp)
     while i < n:
         c = pp[i]
+        # unicode sub/superscript runs -> ^{...} / _{...}. Done HERE (not in a
+        # pre-pass) so the braces we emit are never re-scanned as set-builder
+        # braces and escaped — that was the nested-script corruption bug.
+        if c in SUPERS:
+            run = ""
+            while i < n and pp[i] in SUPERS:
+                run += SUPERS[pp[i]]; i += 1
+            out.append("^{" + run + "}"); continue
+        if c in SUBS:
+            run = ""
+            while i < n and pp[i] in SUBS:
+                run += SUBS[pp[i]]; i += 1
+            out.append("_{" + run + "}"); continue
         m = _IDENT.match(pp, i)
         if m:
             tok = m.group(0)

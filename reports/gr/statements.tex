@@ -55,7 +55,7 @@ assume
   \item[\rm(hcong)] $\forall (x : M 4) (i j : \mathrm{Fin} 4), g x i j = \sum_{k} \sum_{l} P x k i \cdot \mathrm{gm} k l \cdot P x l j$
   \item[\rm(hpp\_nn)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}) (t : \mathbb{R}) (r : \iota), 0 \le \mathrm{pp} x v t r$
   \item[\rm(hpp1)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}) (t : \mathbb{R}), \sum_{r} \mathrm{pp} x v t r = 1$
-  \item[\rm(hpp0)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{pp} x v 0 = \lambda x \mapsto ((\# \iota))^\{-1\}$
+  \item[\rm(hpp0)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{pp} x v 0 = \lambda x \mapsto ((\# \iota))^{-1}$
   \item[\rm(hcap)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \eta \cdot A x v 0 = \log (\# \iota)$
   \item[\rm(hWx)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to W x v x = v$
   \item[\rm(hWC)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}) (\mu : \mathrm{Fin} 4), \mathrm{ContDiff} \mathbb{R} \top \lambda y \mapsto W x v y \mu$
@@ -64,7 +64,7 @@ assume
   \item[\rm(hS)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\lambda t \mapsto S (\mathrm{pp} x v t)) (\mathrm{sd} x v) 0$
   \item[\rm(hK)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\lambda t \mapsto S (\mathrm{pp} x v t) + D_{\mathrm{KL}} (\mathrm{pp} x v t) (\mathrm{pp} x v 0)) (2 \cdot \pi / \hbar \cdot \mathrm{BL} (T m \varphi g \mathrm{gi} x) v) 0$
   \item[\rm(hA)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (A x v) (-\sum_{\nu} W x v x \nu \cdot \mathrm{pd} (\lambda y \mapsto \theta g \mathrm{gi} (W x v) y) \nu x) 0$
-  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^\{f\} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, S (\mathrm{pp} x v t) \le \eta \cdot A x v t$
+  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^{f} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, S (\mathrm{pp} x v t) \le \eta \cdot A x v t$
   \item[\rm(hmw)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), 0 < \mathrm{mw} x v$
 \end{itemize}
 Then \[ \exists \Lambda, \forall (x : M 4) (\mu \nu : \mathrm{Fin} 4), a \cdot T m \varphi g \mathrm{gi} x \mu \nu = G g \mathrm{gi} \mu \nu x + \Lambda \cdot g x \mu \nu \]
@@ -88,7 +88,7 @@ assume
   \item[\rm(hcap)] $\eta \cdot c = \log (\# \iota)$
   \item[\rm(hpp\_nn)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}) (t : \mathbb{R}) (r : \iota), 0 \le \mathrm{pp} x v t r$
   \item[\rm(hpp1)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}) (t : \mathbb{R}), \sum_{r} \mathrm{pp} x v t r = 1$
-  \item[\rm(hpp0)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{pp} x v 0 = \lambda x \mapsto ((\# \iota))^\{-1\}$
+  \item[\rm(hpp0)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{pp} x v 0 = \lambda x \mapsto ((\# \iota))^{-1}$
   \item[\rm(hWx)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (\mathrm{ppMetric} H x) v = 0 \to W x v x = v$
   \item[\rm(hWC)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}) (\mu : \mathrm{Fin} 4), \mathrm{ContDiff} \mathbb{R} \top \lambda y \mapsto W x v y \mu$
   \item[\rm(hcov)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}) (p q : \mathrm{Fin} 4) (y : M 4), \nabla (\mathrm{ppMetric} H) (\mathrm{ppMetricInv} H) (W x v) p q y = 0$
@@ -122,7 +122,7 @@ assume
   \item[\rm(hS)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\mathrm{Sf} x v) (\mathrm{sd} x v) 0$
   \item[\rm(hK)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\mathrm{KE} x v) (2 \cdot \pi / \hbar \cdot \mathrm{BL} (T m \varphi g \mathrm{gi} x) v) 0$
   \item[\rm(hA)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (A x v) (\mathrm{ad} x v) 0$
-  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^\{f\} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, \mathrm{Sf} x v t \le \eta \cdot A x v t$
+  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^{f} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, \mathrm{Sf} x v t \le \eta \cdot A x v t$
   \item[\rm(hsat)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{Sf} x v 0 = \eta \cdot A x v 0$
   \item[\rm(hDnn)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall (t : \mathbb{R}), 0 \le \mathrm{KE} x v t - \mathrm{Sf} x v t$
   \item[\rm(hD0)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{KE} x v 0 - \mathrm{Sf} x v 0 = 0$
@@ -159,7 +159,7 @@ assume
   \item[\rm(hcong)] $\forall (x : M 4) (i j : \mathrm{Fin} 4), g x i j = \sum_{k} \sum_{l} P x k i \cdot \mathrm{gm} k l \cdot P x l j$
   \item[\rm(hpp\_nn)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}) (t : \mathbb{R}) (r : \iota), 0 \le \mathrm{pp} x v t r$
   \item[\rm(hpp1)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}) (t : \mathbb{R}), \sum_{r} \mathrm{pp} x v t r = 1$
-  \item[\rm(hpp0)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{pp} x v 0 = \lambda x \mapsto ((\# \iota))^\{-1\}$
+  \item[\rm(hpp0)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{pp} x v 0 = \lambda x \mapsto ((\# \iota))^{-1}$
   \item[\rm(hcap)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \eta \cdot A x v 0 = \log (\# \iota)$
   \item[\rm(hWx)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to W x v x = v$
   \item[\rm(hWC)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}) (\mu : \mathrm{Fin} 4), \mathrm{ContDiff} \mathbb{R} \top \lambda y \mapsto W x v y \mu$
@@ -168,7 +168,7 @@ assume
   \item[\rm(hS)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\lambda t \mapsto S (\mathrm{pp} x v t)) (\mathrm{sd} x v) 0$
   \item[\rm(hK)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\lambda t \mapsto S (\mathrm{pp} x v t) + D_{\mathrm{KL}} (\mathrm{pp} x v t) (\mathrm{pp} x v 0)) (2 \cdot \pi / \hbar \cdot \mathrm{BL} (T m \varphi g \mathrm{gi} x) v) 0$
   \item[\rm(hA)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (A x v) (-\sum_{\nu} W x v x \nu \cdot \mathrm{pd} (\lambda y \mapsto \theta g \mathrm{gi} (W x v) y) \nu x) 0$
-  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^\{f\} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, S (\mathrm{pp} x v t) \le \eta \cdot A x v t$
+  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^{f} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, S (\mathrm{pp} x v t) \le \eta \cdot A x v t$
   \item[\rm(hmw)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), 0 < \mathrm{mw} x v$
   \item[\rm(hf2)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{MemLp} (\mathrm{ff} x v) 2 \mathrm{volume}$
   \item[\rm(hf\_int)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{Integrable} (\mathrm{ff} x v) \mathrm{volume}$
@@ -206,7 +206,7 @@ assume
   \item[\rm(hS)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\mathrm{Sf} x v) (\mathrm{sd} x v) 0$
   \item[\rm(hK)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\mathrm{KE} x v) (2 \cdot \pi / \hbar \cdot \mathrm{BL} (T m \varphi g \mathrm{gi} x) v) 0$
   \item[\rm(hA)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (A x v) (-\sum_{\nu} W x v x \nu \cdot \mathrm{pd} (\lambda y \mapsto \theta g \mathrm{gi} (W x v) y) \nu x) 0$
-  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^\{f\} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, \mathrm{Sf} x v t \le \eta \cdot A x v t$
+  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^{f} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, \mathrm{Sf} x v t \le \eta \cdot A x v t$
   \item[\rm(hsat)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{Sf} x v 0 = \eta \cdot A x v 0$
   \item[\rm(hDnn)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall (t : \mathbb{R}), 0 \le \mathrm{KE} x v t - \mathrm{Sf} x v t$
   \item[\rm(hD0)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{KE} x v 0 - \mathrm{Sf} x v 0 = 0$
@@ -243,7 +243,7 @@ assume
   \item[\rm(hS)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\mathrm{Sf} x v) (\mathrm{sd} x v) 0$
   \item[\rm(hK)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\mathrm{KE} x v) (2 \cdot \pi / \hbar \cdot \mathrm{BL} (T m \varphi g \mathrm{gi} x) v) 0$
   \item[\rm(hA)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (A x v) (\mathrm{ad} x v) 0$
-  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^\{f\} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, \mathrm{Sf} x v t \le \eta \cdot A x v t$
+  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^{f} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, \mathrm{Sf} x v t \le \eta \cdot A x v t$
   \item[\rm(hsat)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{Sf} x v 0 = \eta \cdot A x v 0$
   \item[\rm(hDnn)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall (t : \mathbb{R}), 0 \le \mathrm{KE} x v t - \mathrm{Sf} x v t$
   \item[\rm(hD0)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{KE} x v 0 - \mathrm{Sf} x v 0 = 0$
@@ -285,7 +285,7 @@ assume
   \item[\rm(hS)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\mathrm{Sf} x v) (\mathrm{sd} x v) 0$
   \item[\rm(hK)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\mathrm{KE} x v) (2 \cdot \pi / \hbar \cdot \mathrm{BL} (T m \varphi g \mathrm{gi} x) v) 0$
   \item[\rm(hA)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (A x v) (\mathrm{ad} x v) 0$
-  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^\{f\} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, \mathrm{Sf} x v t \le \eta \cdot A x v t$
+  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^{f} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, \mathrm{Sf} x v t \le \eta \cdot A x v t$
   \item[\rm(hsat)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{Sf} x v 0 = \eta \cdot A x v 0$
   \item[\rm(hDnn)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall (t : \mathbb{R}), 0 \le \mathrm{KE} x v t - \mathrm{Sf} x v t$
   \item[\rm(hD0)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{KE} x v 0 - \mathrm{Sf} x v 0 = 0$
@@ -327,7 +327,7 @@ assume
   \item[\rm(hS)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\mathrm{Sf} x v) (\mathrm{sd} x v) 0$
   \item[\rm(hK)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\mathrm{KE} x v) (2 \cdot \pi / \hbar \cdot \mathrm{BL} (T m \varphi g \mathrm{gi} x) v) 0$
   \item[\rm(hA)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (A x v) (\mathrm{ad} x v) 0$
-  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^\{f\} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, \mathrm{Sf} x v t \le \eta \cdot A x v t$
+  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^{f} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, \mathrm{Sf} x v t \le \eta \cdot A x v t$
   \item[\rm(hsat)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{Sf} x v 0 = \eta \cdot A x v 0$
   \item[\rm(hDnn)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall (t : \mathbb{R}), 0 \le \mathrm{KE} x v t - \mathrm{Sf} x v t$
   \item[\rm(hD0)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{KE} x v 0 - \mathrm{Sf} x v 0 = 0$
@@ -365,7 +365,7 @@ assume
   \item[\rm(hS)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\mathrm{Sf} x v) (\mathrm{sd} x v) 0$
   \item[\rm(hK)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\mathrm{KE} x v) (\mathrm{kd} x v) 0$
   \item[\rm(hA)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (A x v) (\mathrm{ad} x v) 0$
-  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^\{f\} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, \mathrm{Sf} x v t \le \eta \cdot A x v t$
+  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^{f} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, \mathrm{Sf} x v t \le \eta \cdot A x v t$
   \item[\rm(hsat)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{Sf} x v 0 = \eta \cdot A x v 0$
   \item[\rm(hDnn)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall (t : \mathbb{R}), 0 \le \mathrm{KE} x v t - \mathrm{Sf} x v t$
   \item[\rm(hD0)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{KE} x v 0 - \mathrm{Sf} x v 0 = 0$
@@ -404,7 +404,7 @@ assume
   \item[\rm(hS)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\mathrm{Sf} x v) (\mathrm{sd} x v) 0$
   \item[\rm(hK)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\mathrm{KE} x v) (\mathrm{kd} x v) 0$
   \item[\rm(hA)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (A x v) (\mathrm{ad} x v) 0$
-  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^\{f\} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, \mathrm{Sf} x v t \le \eta \cdot A x v t$
+  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^{f} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, \mathrm{Sf} x v t \le \eta \cdot A x v t$
   \item[\rm(hsat)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{Sf} x v 0 = \eta \cdot A x v 0$
   \item[\rm(hDnn)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall (t : \mathbb{R}), 0 \le \mathrm{KE} x v t - \mathrm{Sf} x v t$
   \item[\rm(hD0)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{KE} x v 0 - \mathrm{Sf} x v 0 = 0$
@@ -435,7 +435,7 @@ assume
   \item[\rm(hS)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\mathrm{Sf} x v) (\mathrm{sd} x v) 0$
   \item[\rm(hK)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\mathrm{KE} x v) (\mathrm{kd} x v) 0$
   \item[\rm(hA)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (A x v) (\mathrm{ad} x v) 0$
-  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^\{f\} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, \mathrm{Sf} x v t \le \eta \cdot A x v t$
+  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^{f} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, \mathrm{Sf} x v t \le \eta \cdot A x v t$
   \item[\rm(hsat)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{Sf} x v 0 = \eta \cdot A x v 0$
   \item[\rm(hDnn)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall (t : \mathbb{R}), 0 \le \mathrm{KE} x v t - \mathrm{Sf} x v t$
   \item[\rm(hD0)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{KE} x v 0 - \mathrm{Sf} x v 0 = 0$
@@ -468,7 +468,7 @@ assume
   \item[\rm(hS)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (S x v) (\mathrm{sd} x v) 0$
   \item[\rm(hK)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (\mathrm{KE} x v) (\mathrm{kd} x v) 0$
   \item[\rm(hA)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{HasDerivAt} (A x v) (\mathrm{ad} x v) 0$
-  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^\{f\} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, S x v t \le \eta \cdot A x v t$
+  \item[\rm(hbound)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall ^{f} (t : \mathbb{R}) \text{ in } \mathrm{nhds} 0, S x v t \le \eta \cdot A x v t$
   \item[\rm(hsat)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to S x v 0 = \eta \cdot A x v 0$
   \item[\rm(hDnn)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \forall (t : \mathbb{R}), 0 \le \mathrm{KE} x v t - S x v t$
   \item[\rm(hD0)] $\forall (x : M 4) (v : \mathrm{Fin} 4 \to \mathbb{R}), \mathrm{BL} (g x) v = 0 \to \mathrm{KE} x v 0 - S x v 0 = 0$
