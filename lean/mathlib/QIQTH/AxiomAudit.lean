@@ -1235,6 +1235,9 @@ namespace QIQTH.AxiomAudit
 -- With the group law: exp(itK) is a one-parameter UNITARY group — full bounded content of Δ^{it}=e^{−itK}.
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_expSymbol_zero
 -- the group identity boundedFC(e^{i·0·f}) = 1 — completes the group axioms (id + compose + inverse) of exp(itK).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.expSymbol_sub_one_norm_sq
+-- ★ STONE foundation: ‖boundedFC(e^{itf})x − x‖² = ∫|e^{itf}−1|²dμ_x — the flow's deviation from 1 is the L²
+-- norm of the symbol's deviation; foundation for strong continuity (t→0) and the generator (d/dt|₀ = i·K).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_integral_tendsto
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_inner_self
 -- ★ M2 operator-level first law: ⟨x,(∫f dE)x⟩ = ∫ f dμ_x (L¹ DCT tail-conv + inner continuity) — for

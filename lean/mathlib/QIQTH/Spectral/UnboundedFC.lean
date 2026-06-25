@@ -547,6 +547,20 @@ theorem boundedFC_expSymbol_add {f : Ω → ℝ} (hf : Measurable f) (s t : ℝ)
   exact P.boundedFC_congr (measurable_expSymbol hf (s + t)) zero_le_one
     (norm_expSymbol_le (f := f) (s + t)) hpm zero_le_one hpb hsym
 
+/-- **The Stone difference identity** `‖boundedFC(e^{itf})x − x‖² = ∫ |e^{itf}−1|² dμ_x`.  The foundation
+    for both strong continuity (`t→0` ⟹ `→0`) and the generator relation (`d/dt|₀ = i·K`): the modular flow's
+    deviation from the identity is the `L²(μ_x)` norm of the symbol's deviation from `1`. -/
+theorem expSymbol_sub_one_norm_sq {f : Ω → ℝ} (hf : Measurable f) (t : ℝ) (x : H) :
+    ‖P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) x - x‖ ^ 2
+      = ∫ ω, ‖Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ)) - 1‖ ^ 2 ∂(P.scalarMeasure x) := by
+  have hone : P.boundedFC (f := fun _ => (1 : ℂ)) measurable_const (norm_nonneg (1 : ℂ))
+      (fun _ => le_rfl) x = x := by
+    rw [P.boundedFC_const, one_smul, ContinuousLinearMap.one_apply]
+  have key := P.norm_boundedFC_sub_sq (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t)
+    measurable_const (norm_nonneg (1 : ℂ)) (fun _ => le_rfl) x
+  rw [hone] at key
+  exact key
+
 /-- **The FC-exponential group identity** `∫ e^{i·0·f} dE = 1`: `boundedFC(e^{i·0·f}) = 1` (the `t = 0`
     element of the one-parameter group `exp(itK)`). -/
 theorem boundedFC_expSymbol_zero {f : Ω → ℝ} (hf : Measurable f) :
