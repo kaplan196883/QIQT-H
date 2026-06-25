@@ -5075,6 +5075,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussianStateEntropy.oneModeSympEig_ge_half
 #print axioms QIQTH.GaussianStateEntropy.oneModeSympEig_pure
 #print axioms QIQTH.GaussianStateEntropy.oneModeSympEig_entropy_nonneg
+#print axioms QIQTH.GaussianStateEntropy.oneModeSympEig_eq_sqrt_det
+#print axioms QIQTH.GaussianStateEntropy.det_conj_eq_of_det_one
+#print axioms QIQTH.GaussianStateEntropy.oneModeSympEig_symplectic_invariant
+-- ★ WILLIAMSON n=1 symplectic INVARIANCE: ν=√det(cov) is unchanged under symplectic congruence M↦SMSᵀ (det S=1,
+-- Sp(2,ℝ)=SL(2,ℝ)) — so ν is a basis-independent physical invariant (the defining feature of the Williamson
+-- spectrum; lets ν be read off any canonical frame). The N-mode normal-form reduction stays the labelled frontier.
 
 -- Tier A1 of QIQT_GR_DISCHARGEABLE_PLAN: discharge hric_symm.
 #print axioms QIQTH.Curvature.ricci_symm

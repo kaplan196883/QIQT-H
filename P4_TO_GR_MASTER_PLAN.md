@@ -188,7 +188,10 @@ item.** Never claim the `1/4`.
     `E_R = PVM_of_selfAdjoint (rvdRC S)`, symbol `kFn ∘ val` (one-liner: the capstone's RHS `i·E_R.fcOp(kFn∘val)ξ` IS
     `i·modK ξ` by definition). **The operator half of the Tomita–Takesaki `Δ^{it}=e^{−itK}` frontier is fully discharged.**
   NB strong-continuity-via-Bochner-DCT hit the whnf wall — the lintegral route is the way.
-- [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
+- [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
+  + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,
+  `oneModeSympEig_symplectic_invariant` — `ν` is a basis-independent physical invariant). The `N`-mode normal-form
+  reduction (diagonalizing the `2N×2N` covariance by a symplectic transformation) stays the labelled Mathlib-grade frontier.
 - [~] **M4** — general Stone → `X = A_edge`. **Abstract Stone reconstruction ✅** (`hasDerivAt_boundedFC_expSymbol`:
   the bounded-self-adjoint PVM's FC-exponential group has generator `i·∫f dE`, axiom-free). Remaining = the
   geometric identification `X = A_edge` (the edge-of-wedge boost generator) — the physical-input frontier.

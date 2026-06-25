@@ -163,7 +163,14 @@ entanglement = `A/4G_ind`); Solodukhin, *Living Rev. Rel.* 14 (2011) 8 (review, 
   of Williamson** — it grounds `ν` in physical *covariance data* (not an abstract input), for the tractable
   `n=1` case. The `N`-mode reduction (diagonalizing the `2N×2N` covariance by a symplectic transformation)
   stays the labelled frontier. Axiom-free, budget 0, full build green.
-- **PLAN COMPLETE** (A+B+C+/++/+++/⁴; only the N-mode Williamson reduction is the labelled frontier). Net: the `1/4` is derived (geometric, non-circular — A+B); the Srednicki entropy formula
+- **Stage C⁵ ✅ (`n=1` symplectic INVARIANCE — `ν` is a symplectic invariant)** — `oneModeSympEig_eq_sqrt_det`
+  (`ν = √det !![a,c;c,b]`), `det_conj_eq_of_det_one` (`det(S M Sᵀ)=det M` for `det S=1`, pure det-multiplicativity),
+  and `oneModeSympEig_symplectic_invariant`: under a one-mode symplectic congruence `M ↦ S M Sᵀ` with
+  `S ∈ Sp(2,ℝ)=SL(2,ℝ)`, `√det(SMSᵀ) = oneModeSympEig a b c`. This is the **defining feature** of a symplectic
+  eigenvalue — basis-independence — making `ν` a genuine physical invariant (readable off any canonical frame),
+  the property the whole Williamson-spectrum / area-law mode-count rests on. The `N`-mode normal form stays the
+  labelled frontier. Axiom-free, budget 0, full build green.
+- **PLAN COMPLETE** (A+B+C+/++/+++/⁴/⁵; only the N-mode Williamson reduction is the labelled frontier). Net: the `1/4` is derived (geometric, non-circular — A+B); the Srednicki entropy formula
   `S = Σᵢ S(νᵢ)` and its physics (pure⇔0, monotone, nonneg, strictly positive when entangled) are
   machine-checked (C/C+), instantiated on the canonical entangled two-mode squeezed vacuum (C++), and reduced
   to a sum over the entangled modes only (C+++) — the area-law seed, frontier = "entangled modes ⟹ boundary".

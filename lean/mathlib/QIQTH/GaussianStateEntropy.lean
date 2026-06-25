@@ -21,10 +21,13 @@ import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 import Mathlib.Analysis.SpecialFunctions.Log.NegMulLog
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
 import Mathlib.Analysis.Calculus.MeanValue
+import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import Mathlib.LinearAlgebra.Matrix.Notation
 
 namespace QIQTH.GaussianStateEntropy
 
 open Real
+open scoped Matrix
 
 /-- The entanglement entropy carried by one symplectic mode of a Gaussian state, as a function of its symplectic
     eigenvalue `ν ≥ 1/2`. -/
@@ -233,5 +236,27 @@ theorem oneModeSympEig_pure {a b c : ℝ} (h : a * b - c ^ 2 = 1 / 4) : oneModeS
 theorem oneModeSympEig_entropy_nonneg {a b c : ℝ} (h : 1 / 4 ≤ a * b - c ^ 2) :
     0 ≤ gaussModeEntropy (oneModeSympEig a b c) :=
   gaussModeEntropy_nonneg (oneModeSympEig_ge_half h)
+
+/-- The single-mode symplectic eigenvalue is `√det` of the `2×2` covariance matrix `[[a,c],[c,b]]`. -/
+theorem oneModeSympEig_eq_sqrt_det (a b c : ℝ) :
+    oneModeSympEig a b c = Real.sqrt (Matrix.det !![a, c; c, b]) := by
+  rw [oneModeSympEig, Matrix.det_fin_two_of]
+  congr 1; ring
+
+/-- **`det` is invariant under symplectic (unit-determinant) congruence** `M ↦ S M Sᵀ` with `det S = 1`
+    (the one-mode symplectic group `Sp(2,ℝ) = SL(2,ℝ)`).  Pure `det`-multiplicativity. -/
+theorem det_conj_eq_of_det_one (S M : Matrix (Fin 2) (Fin 2) ℝ) (hS : S.det = 1) :
+    (S * M * Sᵀ).det = M.det := by
+  simp [Matrix.det_mul, Matrix.det_transpose, hS]
+
+/-- **The single-mode symplectic eigenvalue is a symplectic invariant.**  Under a one-mode symplectic
+    transformation `S ∈ Sp(2,ℝ) = SL(2,ℝ)` acting on the covariance by congruence `M ↦ S M Sᵀ`, the symplectic
+    eigenvalue `ν = √det` is unchanged.  So `ν` is a basis-independent (physical) property of the mode — the
+    defining feature that makes the Williamson symplectic spectrum (and the area-law mode count) well-posed,
+    and that lets one read `ν` off *any* canonical frame.  (`n = 1`; the `N`-mode normal form stays the frontier.) -/
+theorem oneModeSympEig_symplectic_invariant (S : Matrix (Fin 2) (Fin 2) ℝ) (hS : S.det = 1)
+    (a b c : ℝ) :
+    Real.sqrt (S * !![a, c; c, b] * Sᵀ).det = oneModeSympEig a b c := by
+  rw [det_conj_eq_of_det_one S _ hS, ← oneModeSympEig_eq_sqrt_det]
 
 end QIQTH.GaussianStateEntropy
