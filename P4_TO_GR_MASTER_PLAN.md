@@ -254,6 +254,14 @@ item.** Never claim the `1/4`.
     6. modular derivative `d/dt⟪ξ,modUnitary S t ξ⟫|₀ = i·kd` — **DERIVED ✅** (`hasDerivAt_inner_modUnitary`, `kd=−S`).
   So the chain's `hFlux` (via `HasDerivAt.unique` on #5 vs #6 under BW #3) reads `2π/ℏ·T_kk = −S` (Clausius), and #6 is
   now ours. Remaining: #5 (translation generator / Fourier frontier) + #1/#3/#4 (geometric/physical wedge inputs).
+
+  **Momentum-PVM frontier (toward #5) — brick 1 STARTED ✅** (`QIQTH/Spectral/MultiplicationOp.lean`): the bounded
+  **multiplication operator `M_φ`** on `L²(μ)` for any bounded measurable `φ` (`‖φ‖≤C`): `(M_φ f)(s)=φ s·f s`, a
+  ℂ-linear CLM with `‖M_φ‖≤C` (`mulOp`, via `MemLp.of_le_mul` + `mkContinuous`; mirrors `matterRep` for the scalar
+  case). This is the foundation of the **position PVM** `E(A)=M_{𝟙_A}` → (Fourier-conjugated) the **momentum/translation
+  generator** = the `boostUnitary` generator (#5). Honest scope: this is a sustained multi-fire build (position PVM
+  σ-additivity → scalarMeasure → Fourier-Plancherel conjugation → the generator), and even completing #5 leaves the
+  GR chain gated on the physical inputs #1/#3/#4. Axiom-free, budget 0, full build green.
   NB the Bochner-over-`scalarMeasure` DCT route hits a `whnf` wall — the `lintegral`/`HasDerivAt` route is the way.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,

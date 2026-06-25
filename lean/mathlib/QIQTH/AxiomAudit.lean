@@ -1333,6 +1333,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.hasDerivAt_modUnitary'
 -- ★ modUnitary is C¹ EVERYWHERE: d/dt(modUnitary S t ξ)|_{t₀} = Δ^{it₀}(−iK ξ) at every t₀ (generalizes the t₀=0
 -- generator hasDerivAt_modUnitary to the whole line, via hasDerivAt_boundedFC_expSymbol' + modUnitary_eq + fcOp_neg).
+#print axioms QIQTH.Spectral.Multiplication.mulOp
+#print axioms QIQTH.Spectral.Multiplication.mulOp_coeFn
+-- ★ MULTIPLICATION OPERATOR M_φ on L²(μ): for bounded measurable φ (‖φ‖≤C), (M_φ f)(s)=φ s·f s is a ℂ-linear CLM
+-- with ‖M_φ‖≤C (mulOp, via MemLp.of_le_mul + mkContinuous). First brick of the position/momentum PVM (boost generator,
+-- WedgeKMSFlux #5, via Fourier conjugation) — the most concrete remaining frontier construction.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
