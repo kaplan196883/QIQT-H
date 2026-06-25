@@ -1,6 +1,10 @@
 # QIQT-H Foundations of Quantum Mechanics
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20837905.svg)](https://doi.org/10.5281/zenodo.20837905)
+
 A three-paper foundational program in quantum mechanics by Paweł Kapłański (2026), combining the Chandrasekaran-Penington-Witten Type II crossed-product algebra construction with a literal physical-instantiation reading of the Bekenstein-Bousso holographic information bound.
+
+The machine-checked Lean 4 / Mathlib development is archived on Zenodo with a citable DOI: [10.5281/zenodo.20837905](https://doi.org/10.5281/zenodo.20837905) (concept DOI; resolves to the latest release). The accompanying methods paper has DOI [10.5281/zenodo.20837809](https://doi.org/10.5281/zenodo.20837809).
 
 ## Two facts, one world
 
