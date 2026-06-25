@@ -299,6 +299,25 @@ theorem fcTrunc_diff_sq_le (f : Ω → ℝ) (n m : ℕ) (ω : Ω) :
       ≤ 2 * (f ω - fcTrunc f m ω) ^ 2 + 2 * (f ω - fcTrunc f n ω) ^ 2 := by
   nlinarith [sq_nonneg ((f ω - fcTrunc f m ω) + (f ω - fcTrunc f n ω))]
 
+theorem fcTrunc_abs_le_abs (f : Ω → ℝ) (n : ℕ) (ω : Ω) : |fcTrunc f n ω| ≤ |f ω| := by
+  simp only [fcTrunc]
+  by_cases h : ω ∈ {ω | |f ω| ≤ (n : ℝ)}
+  · rw [Set.indicator_of_mem h]
+  · rw [Set.indicator_of_notMem h]; simp [abs_nonneg]
+
+/-- **The `L¹` tail-convergence on the domain:** `∫ fcTrunc f n dμ_x → ∫ f dμ_x` (Bochner, real).  Dominated
+    convergence (`|fcTrunc f n| ≤ |f| ∈ L¹`, `fcTrunc f n → f` ptwise).  This gives the operator's diagonal
+    expectation `⟨x,(∫f dE)x⟩ = ∫ f dμ_x` — the operator-level first law `⟨K⟩ = ∫ kFn dμ`. -/
+theorem fcTrunc_integral_tendsto {f : Ω → ℝ} (hf : Measurable f) {x : H} (hx : x ∈ P.fcDomain f) :
+    Filter.Tendsto (fun n => ∫ ω, fcTrunc f n ω ∂(P.scalarMeasure x)) Filter.atTop
+      (nhds (∫ ω, f ω ∂(P.scalarMeasure x))) :=
+  MeasureTheory.tendsto_integral_of_dominated_convergence (fun ω => |f ω|)
+    (fun n => (fcTrunc_measurable hf n).aestronglyMeasurable)
+    ((P.integrable_of_mem_fcDomain hf hx).abs)
+    (fun n => Filter.Eventually.of_forall fun ω => by
+      rw [Real.norm_eq_abs]; exact fcTrunc_abs_le_abs f n ω)
+    (Filter.Eventually.of_forall fun ω => fcTrunc_tendsto f ω)
+
 /-- **On the domain, the truncations converge to `f` in `L²(μ_x)`:** `∫ |f − fₙ|² dμ_x → 0`.  Dominated
     convergence — the integrand `→ 0` pointwise and is dominated by `f²`, which is `μ_x`-integrable
     exactly because `x` lies in the FC domain. -/
@@ -514,5 +533,19 @@ theorem fcOp_eq_boundedFC {f : Ω → ℝ} (hf : Measurable f) {C : ℝ} (hC0 : 
     exact DFunLike.congr_fun (P.boundedFC_congr _ _ _ _ _ _ hsymeq) x
   exact tendsto_nhds_unique (P.fcSeq_tendsto_fcOp hf hxdom)
     (Filter.Tendsto.congr' hev.symm tendsto_const_nhds)
+
+/-- **The operator's diagonal expectation** (the operator-level first law `⟨K⟩ = ∫ f dμ`):
+    `⟨x, (∫ f dE) x⟩ = ∫ f dμ_x` on the domain.  The bounded diagonals `⟨x, boundedFC(fₙ)x⟩ = ∫ fcTrunc f n dμ_x`
+    converge (inner continuity + the `L¹` tail-convergence) to `∫ f dμ_x`. -/
+theorem fcOp_inner_self {f : Ω → ℝ} (hf : Measurable f) {x : H} (hx : x ∈ P.fcDomain f) :
+    inner ℂ x (P.fcOp hf x) = ((∫ ω, f ω ∂(P.scalarMeasure x) : ℝ) : ℂ) := by
+  have h2 : (fun n => inner ℂ x (P.fcSeq hf n x))
+      = fun n => ((∫ ω, fcTrunc f n ω ∂(P.scalarMeasure x) : ℝ) : ℂ) := by
+    funext n; simp only [fcSeq]; rw [P.inner_boundedFC_self _ _ _ x]; exact integral_ofReal
+  have h1 : Filter.Tendsto (fun n => inner ℂ x (P.fcSeq hf n x)) Filter.atTop
+      (nhds (inner ℂ x (P.fcOp hf x))) := tendsto_const_nhds.inner (P.fcSeq_tendsto_fcOp hf hx)
+  rw [h2] at h1
+  exact tendsto_nhds_unique h1
+    ((Complex.continuous_ofReal.tendsto _).comp (P.fcTrunc_integral_tendsto hf hx))
 
 end QIQTH.Spectral.ProjectionValuedMeasure

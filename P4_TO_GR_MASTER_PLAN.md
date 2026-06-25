@@ -131,7 +131,13 @@ item.** Never claim the `1/4`.
   packaging.) NEXT → **M2**: `E_R := PVM_of_selfAdjoint R`; `K := fcOp` at `log(r/(2−r))` (symmetric via
   `fcOp_symmetric`); `Δ^{it} = boundedFC(((2−r)/r)^{it}) = e^{−itK}` (the FC exponential law, Stone Phase 2.1)
   → JLMS Stage 1 closed.
-- [ ] **M2** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1 closed)
+- [~] **M2** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1). **Operator-level first law ✅**
+  (`fcOp_inner_self`: `⟨x,(∫f dE)x⟩ = ∫ f dμ_x` on the domain — bounded diagonals `⟨x,boundedFC(fₙ)x⟩=∫fcTrunc f n
+  dμ` converge by inner-continuity + the L¹ tail-conv `fcTrunc_integral_tendsto` via Bochner DCT, which builds
+  clean — `tendsto_integral_of_dominated_convergence` ≠ the `integral_mono` chain that blew up). For
+  `K=∫log(r/(2−r))dE_R` this is the OPERATOR `⟨K⟩=∫kFn dμ=cgpEntropy`. NEXT: instantiate at `E_R =
+  PVM_of_selfAdjoint (rvdRC S)`, identify `rvdSpecMeasure = scalarMeasure`, wire `⟨K⟩` to
+  `cgpEntropy_eq_integral_kFn`; then `Δ^{it}=e^{−itK}` (the FC exponential law — the frontier).
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)
 - [ ] **M5** — dual-weight trace + JLMS + FQ bound

@@ -1227,6 +1227,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_eq_boundedFC
 -- bounded-symbol compat: (∫f dE)x = boundedFC(↑f)x for bounded f — ties the unbounded FC to boundedFC
 -- (so Δ^{it}=boundedFC(...) and its generator K=∫log(r/(2−r))dE_R share the same calculus). M1 COMPLETE.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_integral_tendsto
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_inner_self
+-- ★ M2 operator-level first law: ⟨x,(∫f dE)x⟩ = ∫ f dμ_x (L¹ DCT tail-conv + inner continuity) — for
+-- K=∫log(r/(2−r))dE_R this is the OPERATOR ⟨K⟩ = ∫ kFn dμ = cgpEntropy (JLMS Stage 1 at operator level).
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
