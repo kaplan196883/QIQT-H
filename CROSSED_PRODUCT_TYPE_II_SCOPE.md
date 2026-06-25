@@ -90,4 +90,12 @@ area identification — those are the cited UV frontier throughout.
 increment with the `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>` trailer; push via schannel.
 
 ## Progress log
-- (none yet — Increment 1a next, if executed)
+- **Increment 1a-0 ✅** (`QIQTH/CrossedProduct.lean`) — the **modular automorphism** `σ_t(a) = Δ^{it} a Δ^{-it}`
+  (`modularAut`) built from the existing modular unitary flow, proved a **one-parameter group of unital
+  `*`-homomorphisms**: `modularAut_zero` (σ₀=id), `modularAut_one` (σ_t 1 = 1), `modularAut_mul` (multiplicative),
+  `modularAut_add` (the cocycle/group law σ_{s+t}=σ_s∘σ_t), `modularAut_star` (`*`-preserving). This is the
+  ℝ-action the crossed product `M ⋊_σ ℝ` is formed by — promoting the modular *flow* (unitaries) to the modular
+  *automorphism* (of operators), the action-side foundation. Axiom-free (std 3); wired into AxiomAudit; budget 0.
+- **NEXT: Increment 1a/1b** — the crossed-product Hilbert space `L²(ℝ; H)` + the covariant representation:
+  `π(a)ξ(s) = modularAut S (-s) a (ξ s)`, translations `λ_t`, and the covariance `λ_t π(a) λ_{-t} = π(σ_t a)`
+  (now expressible via `modularAut_add`). The Bochner-`Lp` operator-valued plumbing is the real work.
