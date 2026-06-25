@@ -296,6 +296,13 @@ item.** Never claim the `1/4`.
   — the difference operator that turns the scalar measure-tail (brick 9) into the genuine operator σ-additivity
   `‖E(Bₙ)f−E(⋃)f‖²=∫_{(⋃)\Bₙ}‖f‖²→0`. Next: assemble `indMul_tendsto_iUnion` (operator σ-additivity, monotone `Bₙ↑⋃`)
   from this + brick 9 → bundle the `ProjectionValuedMeasure`; then Fourier conjugation → momentum PVM → boost generator.
+  **Brick 11 — OPERATOR σ-ADDITIVITY (continuity from below / strong convergence) ✅**: for monotone `Bₙ↑⋃ₖBₖ`,
+  `E(Bₙ)f → E(⋃ₖBₖ)f` in `L²` (`indMul_tendsto_iUnion`). Proof: `‖E(Bₙ)f−E(⋃)f‖²=‖E((⋃)\Bₙ)f‖²=∫_{(⋃)\Bₙ}‖f‖²`
+  (subtractivity brick 10 + `norm_indMul_sq` brick 8), and `(⋃)\Bₙ↓∅` so the tail `→∫_∅=0` (brick 9 engine,
+  `tendsto_setIntegral_of_antitone`), then `‖·‖²→0 ⟹ ‖·‖→0` (`Real.sqrt` continuity). THE genuine countable-additivity
+  (strong-convergence) property of the position PVM — the last structural brick before bundling the
+  `ProjectionValuedMeasure`. Next: bundle the `PVContent`/`ProjectionValuedMeasure` record (PV-content from
+  univ/empty/inter/finite-additivity bricks + this σ-additivity) → Fourier conjugation → momentum PVM → boost generator.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,
   `oneModeSympEig_symplectic_invariant` — `ν` is a basis-independent physical invariant). The `N`-mode normal-form

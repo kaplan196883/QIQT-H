@@ -1377,6 +1377,11 @@ namespace QIQTH.AxiomAudit
 -- ★ MULTIPLICATION PVM brick 10 — subtractivity E(B)=E(A)+E(B\A) for A⊆B (equivalently E(B)−E(A)=E(B\A)): the finite-
 -- additive decomposition B=A⊔(B\A) at the operator level (via indSymbol_sdiff 𝟙_B=𝟙_A+𝟙_{B\A} + mulOp_add). The
 -- difference operator that turns the scalar measure-tail (brick 9) into operator σ-additivity ‖E(Bₙ)f−E(⋃)f‖→0.
+#print axioms QIQTH.Spectral.Multiplication.indMul_tendsto_iUnion
+-- ★ MULTIPLICATION PVM brick 11 — OPERATOR σ-ADDITIVITY (continuity from below / strong convergence): for monotone
+-- Bₙ↑⋃ₖBₖ, E(Bₙ)f → E(⋃ₖBₖ)f in L². Proof: ‖E(Bₙ)f−E(⋃)f‖²=‖E((⋃)\Bₙ)f‖²=∫_{(⋃)\Bₙ}‖f‖² (subtractivity brick 10
+-- + brick 8), and (⋃)\Bₙ↓∅ ⟹ tail→∫_∅=0 (brick 9 engine), then ‖·‖²→0 ⟹ ‖·‖→0. THE genuine countable-additivity
+-- property of the position PVM — the last structural brick before bundling the ProjectionValuedMeasure.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

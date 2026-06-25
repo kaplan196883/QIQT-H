@@ -334,4 +334,52 @@ theorem norm_indMul_tendsto_iInter {B : ℕ → Set α} (hB : ∀ n, MeasurableS
     ⟨0, ((MeasureTheory.memLp_two_iff_integrable_sq_norm
       (Lp.aestronglyMeasurable f)).mp (Lp.memLp f)).integrableOn⟩
 
+/-- **Operator σ-additivity / continuity from below of the spectral measure:** for a monotone increasing
+    measurable family `Bₙ ↑ ⋃ₖ Bₖ`, the projections converge strongly, `E(Bₙ) f → E(⋃ₖ Bₖ) f` in `L²`.
+    Proof: `‖E(Bₙ)f − E(⋃)f‖² = ‖E((⋃)\Bₙ)f‖² = ∫_{(⋃)\Bₙ}‖f‖²` (subtractivity `indMul_sdiff` + `norm_indMul_sq`),
+    and `(⋃)\Bₙ ↓ ∅`, so the tail integral `→ ∫_∅ = 0` (`tendsto_setIntegral_of_antitone`); `‖·‖² → 0 ⟹ ‖·‖ → 0`.
+    This is the genuine countable-additivity (strong-convergence) property of the position PVM. -/
+theorem indMul_tendsto_iUnion {B : ℕ → Set α} (hB : ∀ n, MeasurableSet (B n)) (hmono : Monotone B)
+    (f : Lp ℂ 2 μ) :
+    Filter.Tendsto (fun n => indMul (μ := μ) (hB n) f) Filter.atTop
+      (nhds (indMul (MeasurableSet.iUnion hB) f)) := by
+  have hUmeas : MeasurableSet (⋃ k, B k) := MeasurableSet.iUnion hB
+  have hCmeas : ∀ n, MeasurableSet ((⋃ k, B k) \ B n) := fun n => hUmeas.diff (hB n)
+  have hsub : ∀ n, B n ⊆ ⋃ k, B k := fun n => Set.subset_iUnion B n
+  have hCanti : Antitone (fun n => (⋃ k, B k) \ B n) :=
+    fun _ _ hmn => Set.diff_subset_diff_right (hmono hmn)
+  have hCinter : (⋂ n, (⋃ k, B k) \ B n) = ∅ := by
+    rw [Set.eq_empty_iff_forall_notMem]
+    intro x hx
+    rw [Set.mem_iInter] at hx
+    obtain ⟨k, hk⟩ := Set.mem_iUnion.mp (hx 0).1
+    exact (hx k).2 hk
+  -- ‖E(Bₙ)f − E(⋃)f‖² = ∫_{(⋃)\Bₙ}‖f‖²
+  have hkey : ∀ n, ‖indMul (hB n) f - indMul hUmeas f‖ ^ 2
+      = ∫ a in (⋃ k, B k) \ B n, ‖f a‖ ^ 2 ∂μ := by
+    intro n
+    have hdecomp : indMul hUmeas f = indMul (hB n) f + indMul (hCmeas n) f := by
+      rw [indMul_sdiff (hB n) hUmeas (hsub n), ContinuousLinearMap.add_apply]
+    rw [hdecomp,
+      show indMul (hB n) f - (indMul (hB n) f + indMul (hCmeas n) f) = -(indMul (hCmeas n) f) from by abel,
+      norm_neg, norm_indMul_sq]
+  -- the tail integral → 0
+  have hlim : Filter.Tendsto (fun n => ‖indMul (hB n) f - indMul hUmeas f‖ ^ 2) Filter.atTop (nhds 0) := by
+    simp_rw [hkey]
+    have htail := MeasureTheory.tendsto_setIntegral_of_antitone hCmeas hCanti
+      (⟨0, ((MeasureTheory.memLp_two_iff_integrable_sq_norm
+        (Lp.aestronglyMeasurable f)).mp (Lp.memLp f)).integrableOn⟩ :
+        ∃ n, MeasureTheory.IntegrableOn (fun a => ‖f a‖ ^ 2) ((⋃ k, B k) \ B n) μ)
+    rw [hCinter, MeasureTheory.setIntegral_empty] at htail
+    exact htail
+  -- ‖·‖² → 0 ⟹ ‖·‖ → 0 ⟹ strong convergence
+  rw [tendsto_iff_norm_sub_tendsto_zero]
+  have h2 : (fun n => ‖indMul (hB n) f - indMul hUmeas f‖)
+      = fun n => Real.sqrt (‖indMul (hB n) f - indMul hUmeas f‖ ^ 2) := by
+    funext n; rw [Real.sqrt_sq (norm_nonneg _)]
+  rw [h2]
+  have hsqrt := (Real.continuous_sqrt.tendsto 0).comp hlim
+  rw [Real.sqrt_zero] at hsqrt
+  exact hsqrt
+
 end QIQTH.Spectral.Multiplication
