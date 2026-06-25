@@ -238,6 +238,46 @@ def render_theorem(t, notation=None, role_label=None):
     return "\n".join(lines) + "\n"
 
 
+def render_web(trees, cfg, notation=None, roles=None, heading="##"):
+    """Markdown (KaTeX `$...$`) rendering of a track's statements, for the website.
+
+    Structure is Markdown (headings, lists); only the math is LaTeX, inside `$...$`
+    / `$$...$$`, which the site's remark-math + rehype-katex pipeline renders.
+    """
+    notation = {**latexify.DEFAULT_NOTATION, **(notation or {})}
+    roles = roles or {}
+    out = []
+    for t in trees:
+        nm = t["name"]
+        role = roles.get(nm)
+        title = f"`{nm.split('.')[-1]}`"
+        out.append(f"{heading} {title}")
+        out.append("")
+        if not t.get("present"):
+            out.append("*(not found in the current build)*\n")
+            continue
+        lead = f"**{nm}**" + (f" — *{role}*" if role else "")
+        out.append(lead + "  ")
+        data = [b["name"] for b in t.get("binders", []) if b["kind"] == "data"]
+        if data:
+            vs = ",\\ ".join(latexify.tex_of_pp(d, notation) for d in data)
+            out.append(f"Given ${vs}$,")
+        hyps = [(b["name"], tex_of_tree(b["type"], notation))
+                for b in t.get("binders", []) if b["kind"] == "prop"]
+        if hyps:
+            out.append("\nassume")
+            out.append("")
+            for hn, rt in hyps:
+                out.append(f"- `({hn})` &nbsp; ${rt}$")
+            out.append("")
+        concl = tex_of_tree(t.get("concl"), notation)
+        out.append("then")
+        out.append("")
+        out.append(f"$$ {concl} $$")
+        out.append("")
+    return "\n".join(out)
+
+
 def render_document(trees, cfg, notation=None, roles=None):
     notation = notation or {}
     roles = roles or {}

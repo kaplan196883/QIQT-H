@@ -134,6 +134,9 @@ itself establish that our universe's gravity <em>is</em> emergent.
 
 ## Index of machine-checked results
 
+For the **exact theorem statements**, machine-translated from the Lean source to readable math
+(notation only, content verbatim), see the [**machine-rendered statements**](/statements) page.
+
 Toolchain `leanprover/lean4:v4.30.0` · verified in `QIQTH/AxiomAudit.lean`.
 
 ### Finite Araki relative entropy
