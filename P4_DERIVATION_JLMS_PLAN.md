@@ -116,7 +116,23 @@ landing, run `python scripts/lean-track-refresh.py --skip-unchanged` and commit 
   variation *is* the modular-energy variation — the boundary dual of the bulk Clausius relation. Combined with
   the existing Klein positivity `cgpEntropy_nonneg` (already a theorem), this is the engine Stage 4 needs.
   Axiom-free (std 3); wired into AxiomAudit; budget 0.
-- **NEXT: Stage 3** — the area/edge operator + the JLMS split `K_∂R = c·A_edge + K_bulk`. With `K = ∫ kFn`
-  (Stage 2) the structural target is: define `A_edge := (K − K_bulk)/c` and prove `K − K_bulk` is the
-  boundary/edge part (commutes with the bulk-localized algebra), with `c = 1/4ℓ_P²` carried. The geometric
-  content (`A_edge = area`) stays the labelled UV frontier — NOT smuggled.
+- **Stage 3 ⛔ BLOCKED (honest checkpoint)** — the area/edge operator and the JLMS split `K_∂R = c·A_edge + K_bulk`
+  require the **gravitationally-dressed crossed-product Type II algebra** `M ⋊_σ ℝ` (CLPW/Witten): the area
+  operator is the trace-renormalization of that algebra, and the bulk/edge split `K_∂R − K_bulk` only exists once
+  the observer/clock dressing is adjoined. The one-particle CGP setting (Stages 1–2) has the matter modular
+  Hamiltonian `K` and the identity `cgpEntropy = ⟨K⟩`, but **no area operator and no `K_bulk`** — those are
+  exactly the Type II crossed product the project flags as the cited continuum frontier (no Lean vN-algebra
+  crossed-product / group-vN infrastructure in Mathlib). Defining `A_edge := (K − K_bulk)/c` is vacuous without
+  an independent `K_bulk`, and asserting `A_edge = area` would smuggle the coefficient — both forbidden by the
+  plan. **So the derivation honestly stops here:** Stages 1–2 deliver the *modular-energy engine* (the LHS of
+  JLMS — `K` pinned to the BW flow, and `S = ⟨K⟩`); Stages 3–4 await the crossed-product Type II construction,
+  the same UV/Type-II frontier that `1/4ℓ_P²` itself needs (GPT rank-1 obstruction).
+
+### Status — Stages 1–2 complete, Stages 3–4 frontier-blocked
+**Delivered (axiom-free, budget 0):** the modular Hamiltonian `K = −log Δ` as a spectral object pinned to the
+machine-checked Bisognano–Wichmann flow (`modChar_eq_exp_neg_kFn`), and the first law `S = ⟨K⟩`
+(`cgpEntropy_eq_integral_kFn`) — the relative entropy *is* the modular energy, the boundary dual of the bulk
+Clausius relation. This is the `K_∂R`-side of JLMS, built honestly with no area-smuggling.
+**Frontier (recorded, not faked):** the area edge operator + the split + the `1/4` coefficient all live in the
+crossed-product Type II algebra, which is the project's standing continuum frontier. Reaching it is the
+multi-month TT/Type-II tower, not a loop increment.
