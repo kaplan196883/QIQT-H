@@ -1274,6 +1274,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.modK_symmetric
 #print axioms QIQTH.StandardSubspaceModular.modK_add
 #print axioms QIQTH.StandardSubspaceModular.modK_smul
+#print axioms QIQTH.StandardSubspaceModular.hasDerivAt_modFlow
+-- ★★★ MODULAR Δ^{it}=e^{−itK} (OPERATOR LEVEL, pinned to the genuine modular Hamiltonian K=modK): the modular flow
+-- t↦boundedFC(e^{it·kFn}(R)) (= modChar(−t) = Δ^{−it} on the spectrum) has Stone generator i·modK = iK. Direct
+-- specialization of the general PVM Stone reconstruction hasDerivAt_boundedFC_expSymbol. Discharges the operator
+-- half of the documented Tomita–Takesaki Δ^{it}=e^{−itK} frontier for the RvD free-field modular Hamiltonian.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

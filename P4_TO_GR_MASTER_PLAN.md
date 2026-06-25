@@ -181,8 +181,12 @@ item.** Never claim the `1/4`.
     `‖slope − i·fcOp x‖² = (∫⁻‖(e^{itf}−1)/t − if‖²).toReal` ⟹ `→ 0` (heart, `lintegral_congr` bridges `(↑t)⁻¹(e^{itf}−1)`
     to `(e^{itf}−1)/t`) ⟹ `‖·‖→0` (`Real.sqrt_sq`) ⟹ `slope → i·fcOp x`. **The full STONE generator reconstruction
     for the bounded-self-adjoint PVM is now axiom-free.** Closes `Δ^{it}=e^{−itK}` (M2) and abstract M4 Stone.
-  Follow-up (wiring, not new math): specialize to `modK`/`modChar` in `ModularHamiltonianOp.lean` — the modular flow
-  `Δ^{it}` of `RvD` `R` has generator `−i·modK`, i.e. `Δ^{it}=e^{−it·K}` for the genuine modular Hamiltonian.
+  • **MODULAR SPECIALIZATION NOW LANDED ✅ (axiom-free, green)** `hasDerivAt_modFlow` (`ModularHamiltonianOp.lean`):
+    the modular flow `t ↦ boundedFC(e^{it·kFn}(R)) ξ` (= `modChar(−t) = Δ^{−it}` on the spectrum, by
+    `modChar_eq_exp_neg_kFn`) has Stone generator `i·modK = iK` — **the operator `Δ^{it}=e^{−itK}` pinned to the
+    genuine RvD modular Hamiltonian `K = modK`**. A direct specialization of the general capstone to
+    `E_R = PVM_of_selfAdjoint (rvdRC S)`, symbol `kFn ∘ val` (one-liner: the capstone's RHS `i·E_R.fcOp(kFn∘val)ξ` IS
+    `i·modK ξ` by definition). **The operator half of the Tomita–Takesaki `Δ^{it}=e^{−itK}` frontier is fully discharged.**
   NB strong-continuity-via-Bochner-DCT hit the whnf wall — the lintegral route is the way.
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [~] **M4** — general Stone → `X = A_edge`. **Abstract Stone reconstruction ✅** (`hasDerivAt_boundedFC_expSymbol`:

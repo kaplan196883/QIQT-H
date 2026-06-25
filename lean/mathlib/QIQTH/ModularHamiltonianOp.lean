@@ -86,4 +86,24 @@ theorem modK_smul (S : StandardSubspace H) (c : ℂ) {ξ : H}
     modK S (c • ξ) = c • modK S ξ :=
   (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcOp_smul (kFn_val_measurable S) c hξ hcξ
 
+/-- **The modular flow generator — the operator `Δ^{it} = e^{−itK}` pinned to the genuine modular Hamiltonian
+    `K = modK`.**  The strongly-continuous one-parameter unitary flow `t ↦ boundedFC(e^{it·kFn}(R)) ξ` —
+    which on the spectrum `(0,2)` is `modChar(−t) = Δ^{−it}` (by `modChar_eq_exp_neg_kFn`) — has Stone generator
+    `i·modK = iK`:
+    `d/dt (Δ^{−it} ξ)|₀ = i·K ξ`,  i.e.  `Δ^{it} = e^{−itK}` at the **operator** level.
+    This is a direct specialization of the general PVM Stone reconstruction
+    `hasDerivAt_boundedFC_expSymbol` to `E_R = PVM_of_selfAdjoint (rvdRC S)` with symbol `kFn ∘ val`
+    (so `K = ∫ kFn dE_R = modK`).  Discharges the operator-level half of the documented Tomita–Takesaki
+    `Δ^{it}=e^{−itK}` frontier for the RvD free-field modular Hamiltonian.  Axiom-free. -/
+theorem hasDerivAt_modFlow (S : StandardSubspace H) {ξ : H}
+    (hdom : ξ ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => kFn ω.val)) :
+    HasDerivAt
+      (fun t : ℝ => (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).boundedFC
+        (QIQTH.Spectral.ProjectionValuedMeasure.measurable_expSymbol (kFn_val_measurable S) t)
+        zero_le_one (QIQTH.Spectral.ProjectionValuedMeasure.norm_expSymbol_le t) ξ)
+      (Complex.I • modK S ξ) 0 :=
+  (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).hasDerivAt_boundedFC_expSymbol
+    (kFn_val_measurable S) hdom
+
 end QIQTH.StandardSubspaceModular
