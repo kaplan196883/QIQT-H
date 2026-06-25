@@ -1252,6 +1252,9 @@ namespace QIQTH.AxiomAudit
 -- ★★ STONE ANALYTIC HEART: ∫‖(e^{itf}−1)/t − if‖²dμ_x → 0 as t→0 — the L² convergence of the difference
 -- quotient (sequential lintegral DCT, dodging the Bochner-over-scalarMeasure whnf wall; dominated by 4f²,
 -- ptwise→0 from expSymbol_slope_tendsto). The genuine multi-fire core for Δ^{it}=e^{−itK} (M2) + abstract Stone (M4).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.complexSymbol_fcTrunc_lintegral_tendsto
+-- ★ STONE operator-assembly step 1: ∫‖h − i·↑fcTrunc_m‖²dμ_x → ∫‖h − i·↑f‖²dμ_x (bounded symbol h) — the m→∞
+-- truncation half of the distance identity ‖boundedFC(h)x − i·fcOp x‖² = ∫‖h−if‖² that makes the generator mechanical.
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_integral_tendsto
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_inner_self
 -- ★ M2 operator-level first law: ⟨x,(∫f dE)x⟩ = ∫ f dμ_x (L¹ DCT tail-conv + inner continuity) — for

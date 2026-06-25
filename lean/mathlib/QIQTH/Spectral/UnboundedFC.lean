@@ -686,6 +686,62 @@ theorem expSymbol_diffQuotient_lintegral_tendsto {f : Ω → ℝ} (hf : Measurab
     (fun ω => ENNReal.ofReal (4 * (f ω) ^ 2)) hmeas hbound hfin hlim
   simpa using hDCT
 
+/-- **Complex-symbol `L²` truncation convergence** (the `m→∞` half of the operator Stone assembly):
+    for a bounded symbol `h` (`‖h‖ ≤ C`) and `x ∈ fcDomain f`,
+    `∫ ‖h − i·↑fcTrunc_m‖² dμ_x → ∫ ‖h − i·↑f‖² dμ_x`.  Sequential `lintegral` DCT: pointwise from
+    `fcTrunc_tendsto`, dominated by `2C² + 2f²` (finite by `x ∈ fcDomain f` + finite measure). -/
+theorem complexSymbol_fcTrunc_lintegral_tendsto {f : Ω → ℝ} (hf : Measurable f) {x : H}
+    (hx : x ∈ P.fcDomain f) {h : Ω → ℂ} (hh : Measurable h) {C : ℝ} (hC : ∀ ω, ‖h ω‖ ≤ C) :
+    Filter.Tendsto
+      (fun m => ∫⁻ ω, ENNReal.ofReal (‖h ω - Complex.I * (fcTrunc f m ω : ℂ)‖ ^ 2)
+        ∂(P.scalarMeasure x)) Filter.atTop
+      (nhds (∫⁻ ω, ENNReal.ofReal (‖h ω - Complex.I * (f ω : ℂ)‖ ^ 2) ∂(P.scalarMeasure x))) := by
+  have hI : ∀ (g : Ω → ℝ) (ω : Ω), ‖Complex.I * (g ω : ℂ)‖ = |g ω| := fun g ω => by
+    rw [norm_mul, Complex.norm_I, one_mul, Complex.norm_real, Real.norm_eq_abs]
+  have hmeas : ∀ m, Measurable (fun ω => ENNReal.ofReal
+      (‖h ω - Complex.I * (fcTrunc f m ω : ℂ)‖ ^ 2)) := fun m =>
+    ENNReal.measurable_ofReal.comp ((Measurable.norm (hh.sub
+      (measurable_const.mul (Complex.measurable_ofReal.comp (fcTrunc_measurable hf m))))).pow_const 2)
+  have hptbound : ∀ m ω, ‖h ω - Complex.I * (fcTrunc f m ω : ℂ)‖ ^ 2 ≤ 2 * C ^ 2 + 2 * (f ω) ^ 2 := by
+    intro m ω
+    have h1 : ‖h ω - Complex.I * (fcTrunc f m ω : ℂ)‖ ≤ ‖h ω‖ + |fcTrunc f m ω| := by
+      rw [← hI (fcTrunc f m) ω]; exact norm_sub_le _ _
+    nlinarith [mul_self_le_mul_self (norm_nonneg (h ω - Complex.I * (fcTrunc f m ω : ℂ))) h1,
+      norm_nonneg (h ω), abs_nonneg (fcTrunc f m ω), hC ω, fcTrunc_abs_le_abs f m ω,
+      abs_nonneg (f ω), sq_abs (f ω), sq_nonneg (‖h ω‖ - |fcTrunc f m ω|),
+      mul_nonneg (norm_nonneg (h ω)) (abs_nonneg (fcTrunc f m ω))]
+  have hbound : ∀ m, (fun ω => ENNReal.ofReal (‖h ω - Complex.I * (fcTrunc f m ω : ℂ)‖ ^ 2))
+      ≤ᵐ[P.scalarMeasure x]
+      (fun ω => ENNReal.ofReal (2 * C ^ 2) + ENNReal.ofReal (2 * (f ω) ^ 2)) := fun m =>
+    Filter.Eventually.of_forall fun ω =>
+      (ENNReal.ofReal_le_ofReal (hptbound m ω)).trans ENNReal.ofReal_add_le
+  have hfin : ∫⁻ ω, (ENNReal.ofReal (2 * C ^ 2) + ENNReal.ofReal (2 * (f ω) ^ 2))
+      ∂(P.scalarMeasure x) ≠ ⊤ := by
+    rw [MeasureTheory.lintegral_add_left measurable_const]
+    refine ENNReal.add_ne_top.mpr ⟨?_, ?_⟩
+    · rw [MeasureTheory.lintegral_const]
+      exact ENNReal.mul_ne_top ENNReal.ofReal_ne_top
+        (by rw [P.scalarMeasure_univ]; exact ENNReal.ofReal_ne_top)
+    · have heq : ∫⁻ ω, ENNReal.ofReal (2 * (f ω) ^ 2) ∂(P.scalarMeasure x) = 2 * P.fcEnergy f x := by
+        calc ∫⁻ ω, ENNReal.ofReal (2 * (f ω) ^ 2) ∂(P.scalarMeasure x)
+            = ∫⁻ ω, 2 * ENNReal.ofReal ((f ω) ^ 2) ∂(P.scalarMeasure x) := by
+              refine MeasureTheory.lintegral_congr fun ω => ?_
+              rw [ENNReal.ofReal_mul (by norm_num : (0 : ℝ) ≤ 2), ENNReal.ofReal_ofNat]
+          _ = 2 * ∫⁻ ω, ENNReal.ofReal ((f ω) ^ 2) ∂(P.scalarMeasure x) :=
+              MeasureTheory.lintegral_const_mul 2 (ENNReal.measurable_ofReal.comp (hf.pow_const 2))
+          _ = 2 * P.fcEnergy f x := by rw [fcEnergy]
+      rw [heq]; exact ENNReal.mul_ne_top (by norm_num) ((P.mem_fcDomain).mp hx)
+  have hlim : ∀ᵐ ω ∂(P.scalarMeasure x), Filter.Tendsto
+      (fun m => ENNReal.ofReal (‖h ω - Complex.I * (fcTrunc f m ω : ℂ)‖ ^ 2)) Filter.atTop
+      (nhds (ENNReal.ofReal (‖h ω - Complex.I * (f ω : ℂ)‖ ^ 2))) := by
+    refine Filter.Eventually.of_forall fun ω => ?_
+    have h0 : Filter.Tendsto (fun m => (fcTrunc f m ω : ℂ)) Filter.atTop (nhds (f ω : ℂ)) :=
+      (Complex.continuous_ofReal.tendsto (f ω)).comp (fcTrunc_tendsto f ω)
+    have hsub := (tendsto_const_nhds (x := h ω)).sub (h0.const_mul Complex.I)
+    exact ENNReal.tendsto_ofReal (hsub.norm.pow 2)
+  exact MeasureTheory.tendsto_lintegral_of_dominated_convergence
+    (fun ω => ENNReal.ofReal (2 * C ^ 2) + ENNReal.ofReal (2 * (f ω) ^ 2)) hmeas hbound hfin hlim
+
 /-- **The FC-exponential group identity** `∫ e^{i·0·f} dE = 1`: `boundedFC(e^{i·0·f}) = 1` (the `t = 0`
     element of the one-parameter group `exp(itK)`). -/
 theorem boundedFC_expSymbol_zero {f : Ω → ℝ} (hf : Measurable f) :
