@@ -202,9 +202,28 @@ item.** Never claim the `1/4`.
 - [~] **M4** — general Stone → `X = A_edge`. **Abstract Stone reconstruction ✅** (`hasDerivAt_boundedFC_expSymbol`:
   the bounded-self-adjoint PVM's FC-exponential group has generator `i·∫f dE`, axiom-free). Remaining = the
   geometric identification `X = A_edge` (the edge-of-wedge boost generator) — the physical-input frontier.
-- [ ] **M5** — dual-weight trace + JLMS + FQ bound
+- [~] **M5** — dual-weight trace + JLMS + FQ bound. **Crossed-product Phases 1–4.1 ✅** (`CrossedProduct*.lean`):
+  matter rep `π(a)` (Phase 1), clock translation group `λ_t` with group law + isometry + two-sided inverse (Phase 2),
+  covariance `λ_{-t}π(a)λ_t=π(σ_t a)` + the generated algebra (Phase 3), and **strong continuity of `λ_t`** (Phase 4.1,
+  `clockTransl_stronglyContinuous`). Remaining frontiers: (4.2) the **clock generator `X`** — Stone for the *translation*
+  group, which needs the momentum PVM / Fourier conjugation (the multiplication-FC Stone `hasDerivAt_boundedFC_expSymbol`
+  does NOT apply: translation ≠ a multiplication FC on a position PVM); (5) the **dual-weight trace** `τ`; (6) the FQ
+  bound payoff. Also recorded blocker: `λ_t`'s explicit `adjoint = λ_{-t}` hits the Lp/RCLike adjoint-instance diamond
+  (unitarity is already exhibited diamond-free via isometry + two-sided inverse — sufficient for Phase 3).
 - [ ] **M6** — Gap-2 localization map
 - [ ] **M7** — fusion: `P4 → GR` closed for the free field (UV datum carried)
+
+### Frontier-survey checkpoint (post-Stone build-out)
+The tractable operator-algebra infrastructure around the Stone/modular machinery is now **built out and exhausted**:
+M1 ✅, M2 ✅ (full `C₀` modular-flow Stone package: generator `iK` + group law + unitarity + strong continuity),
+M3 `n=1` ✅ (eigenvalue + floor + symplectic invariance), M5 crossed-product Phases 1–4.1 ✅. Every remaining step is a
+genuine Mathlib-grade frontier or gated on a recorded blocker:
+- **M3 `N`-mode** — symplectic eigenvalues of a `2N×2N` covariance (Williamson normal form): a spectral/linear-algebra
+  Mathlib gap. (Decoupled-block sum is available but would be *fake* area-law progress — not taken.)
+- **M4 geometric `X=A_edge`** — Bisognano–Wichmann boost identification: physical input, not a Lean lemma.
+- **M5 clock `X` / trace** — momentum PVM (Fourier) + the dual-weight trace: open targets.
+- **`λ_t` adjoint** — gated on the Lp/RCLike adjoint diamond.
+No fake increment was forced and no frontier claimed prematurely.
 
 ## 5. Honest scope (unchanged, restated)
 Multi-month, research-grade; M4 (Stone) and M5 (trace) and M3 (Williamson) are open Mathlib targets. Value lands
