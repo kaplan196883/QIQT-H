@@ -331,6 +331,9 @@ import QIQTH.Spectral.PositionPVM
 -- Unitary conjugation of a PVM: U E(A) U⁻¹ is again a PVM (the mechanism Fourier uses to carry the position
 -- PVM to the momentum PVM). Unitary-generic, axiom-free.
 import QIQTH.Spectral.PVMConj
+-- The MOMENTUM PVM on L²(ℝ): Ê(A)=ℱ E(A) ℱ⁻¹, the Fourier–Plancherel conjugate of the position PVM (via
+-- Mathlib's fourierTransformₗᵢ). A genuine ProjectionValuedMeasure, axiom-free — the spectral measure of P=ℱXℱ⁻¹.
+import QIQTH.Spectral.MomentumPVM
 -- Prize Stage 3.1 (finite case): the matrix spectral theorem packaged as a PVM — eigenprojections
 -- Pᵢ = U·diag(δᵢ)·U⋆ with ∑Pᵢ=1 (resolution of identity), Pᵢ²=Pᵢ, PᵢPⱼ=0, Pᵢ⋆=Pᵢ. The finite,
 -- axiom-free case of the bounded-spectral-theorem target (continuum stays open). Standard axioms:

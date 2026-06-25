@@ -350,6 +350,15 @@ item.** Never claim the `1/4`.
   conjugation construction is complete and reusable; instantiating `U` with the concrete `L²` Fourier transform
   (`Real.fourierIntegral` + Plancherel as a `≃ₗᵢ`) is the next, **Mathlib-Fourier-gated**, step. And even the
   momentum PVM / generator (#5), once built, leaves the GR chain gated on the physical wedge inputs #1/#3/#4.
+  **THE MOMENTUM PVM BUILT ✅** — `QIQTH/Spectral/MomentumPVM.lean`, axiom-free (standard 3 — even through
+  Mathlib's Plancherel), budget 0, full build green: `momentumPVM = positionPVM.conj (Lp.fourierTransformₗᵢ ℝ ℂ)`,
+  i.e. `Ê(A) = ℱ E(A) ℱ⁻¹`. The Mathlib-Fourier gate is **CLEARED** — Mathlib ships the `L²` Fourier transform as
+  a unitary `MeasureTheory.Lp.fourierTransformₗᵢ : Lp ℂ 2 ≃ₗᵢ[ℂ] Lp ℂ 2`, so the conjugation construction yields
+  the momentum PVM with **no further work** — a genuine `ProjectionValuedMeasure ℝ (Lp ℂ 2 volume)`, the spectral
+  measure of the momentum operator `P = ℱXℱ⁻¹` on `L²(ℝ)` (built for the canonical 1D case; generalizes verbatim).
+  **Remaining toward #5 (honest):** extracting the *unbounded generator* `P = ∫ k dÊ(k)` (Stone's theorem on the
+  momentum PVM) so the one-parameter group `e^{itP}` = spatial translation feeds the `boostUnitary` generator — the
+  unbounded-FC / Stone frontier. And the GR chain beyond `#5` stays gated on the physical wedge inputs `#1/#3/#4`.
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.

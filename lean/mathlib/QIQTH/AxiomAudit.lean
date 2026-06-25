@@ -1428,6 +1428,15 @@ namespace QIQTH.AxiomAudit
 -- preserved via HasSum.mapL). THE general mechanism by which the Fourier–Plancherel transform carries the position
 -- PVM to the MOMENTUM PVM (→ translation/boost generator, WedgeKMSFlux #5). Instantiating U = the L² Fourier
 -- transform is the next (Mathlib-Fourier-gated) step; the conjugation construction itself is complete + reusable.
+#print axioms QIQTH.Spectral.Multiplication.momentumPVM
+#print axioms QIQTH.Spectral.Multiplication.momentumPVM_E
+-- ★ THE MOMENTUM PVM on L²(ℝ) (Fourier–Plancherel conjugate of the position PVM): momentumPVM = positionPVM.conj
+-- (Lp.fourierTransformₗᵢ ℝ ℂ), i.e. Ê(A)=ℱ E(A) ℱ⁻¹. A GENUINE ProjectionValuedMeasure ℝ (Lp ℂ 2 volume),
+-- axiom-free (standard 3 — even through Mathlib's Plancherel), inherited with NO further work via the conjugation
+-- construction. The spectral measure of the momentum operator P=ℱXℱ⁻¹ on L²(ℝ) — the route to the
+-- translation/boost generator e^{itP} (WedgeKMSFlux #5). Built for E=ℝ (canonical 1D); generalizes to any
+-- finite-dim real inner product space carried by fourierTransformₗᵢ. Extracting the unbounded generator P=∫k dÊ(k)
+-- (Stone) is the remaining unbounded-FC frontier; the GR chain beyond #5 stays gated on the physical inputs #1/#3/#4.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
