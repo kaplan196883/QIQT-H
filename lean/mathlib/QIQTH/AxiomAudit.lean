@@ -1238,6 +1238,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.expSymbol_sub_one_norm_sq
 -- ★ STONE foundation: ‖boundedFC(e^{itf})x − x‖² = ∫|e^{itf}−1|²dμ_x — the flow's deviation from 1 is the L²
 -- norm of the symbol's deviation; foundation for strong continuity (t→0) and the generator (d/dt|₀ = i·K).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.norm_expSymbol_sub_one_le
+-- ★ STONE domination: ‖e^{itf ω}−1‖ ≤ |t|·|f ω| (Real.norm_exp_I_mul_ofReal_sub_one_le) — so ‖(e^{itf}−1)/t‖
+-- ≤ |f ω|, the uniform L² bound for the generator's difference-quotient convergence (e^{itf}−1)/t → if.
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_integral_tendsto
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_inner_self
 -- ★ M2 operator-level first law: ⟨x,(∫f dE)x⟩ = ∫ f dμ_x (L¹ DCT tail-conv + inner continuity) — for

@@ -18,6 +18,7 @@ Axiom-free.  Uses the spectral scaling `μ_{c·x} = ‖c‖²·μ_x` and the par
 -/
 import QIQTH.Spectral.PVM
 import Mathlib.MeasureTheory.Function.L2Space
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
 
 namespace QIQTH.Spectral.ProjectionValuedMeasure
 
@@ -517,6 +518,16 @@ theorem norm_expSymbol_le {f : Ω → ℝ} (t : ℝ) (ω : Ω) :
 theorem measurable_expSymbol {f : Ω → ℝ} (hf : Measurable f) (t : ℝ) :
     Measurable (fun ω => Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ))) := by
   fun_prop
+
+/-- **The difference-quotient domination** `‖e^{itf ω} − 1‖ ≤ |t|·|f ω|` (so `‖(e^{itf}−1)/t‖ ≤ |f ω|`,
+    uniform in `t`).  The key estimate for the Stone generator relation `d/dt boundedFC(e^{itf})x|₀ = i·Kx`
+    — `(e^{itf}−1)/t → if` in `L²(μ_x)` dominated by `|f| ∈ L²(μ_x)`.  From `‖e^{ix}−1‖ ≤ |x|`. -/
+theorem norm_expSymbol_sub_one_le {f : Ω → ℝ} (t : ℝ) (ω : Ω) :
+    ‖Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ)) - 1‖ ≤ |t| * |f ω| := by
+  rw [show Complex.I * (t : ℂ) * (f ω : ℂ) = Complex.I * ((t * f ω : ℝ) : ℂ) from by push_cast; ring]
+  calc ‖Complex.exp (Complex.I * ((t * f ω : ℝ) : ℂ)) - 1‖
+      ≤ ‖(t * f ω : ℝ)‖ := Real.norm_exp_I_mul_ofReal_sub_one_le
+    _ = |t| * |f ω| := by rw [Real.norm_eq_abs, abs_mul]
 
 /-- **The FC-exponential group law** `∫ e^{i(s+t)f} dE = (∫ e^{isf} dE)·(∫ e^{itf} dE)`:
     `boundedFC(e^{i(s+t)f}) = boundedFC(e^{isf}) · boundedFC(e^{itf})`.  The bounded-operator content of
