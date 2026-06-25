@@ -291,6 +291,32 @@ theorem indMul_inner_orthogonal {A B : Set α} (hA : MeasurableSet A) (hB : Meas
     ← ContinuousLinearMap.comp_apply, indMul_comp_disjoint hA hB h,
     ContinuousLinearMap.zero_apply, inner_zero_right]
 
+/-- The spectral projection depends only on the *set* (the measurability proof is irrelevant): equal sets give
+    the same operator. -/
+theorem indMul_set_congr {A B : Set α} (hA : MeasurableSet A) (hB : MeasurableSet B) (h : A = B) :
+    indMul (μ := μ) hA = indMul hB := by subst h; rfl
+
+/-- **Finite (range) additivity of the spectral measure over a `Finset`:** for a pairwise-disjoint measurable
+    family `A`, `∑ᵢ∈s E(Aᵢ) = E(⋃ᵢ∈s Aᵢ)`. The discrete additivity feeding the unconditional (`HasSum`)
+    σ-additivity — the orthogonal projections onto the `L²(Aᵢ)` add up to the projection onto their union. -/
+theorem indMul_biUnion_disjoint {ι : Type*} (s : Finset ι) (A : ι → Set α)
+    (hA : ∀ i, MeasurableSet (A i)) (hd : Pairwise (fun i j => Disjoint (A i) (A j))) :
+    ∑ i ∈ s, indMul (μ := μ) (hA i) = indMul (s.measurableSet_biUnion (fun i _ => hA i)) := by
+  classical
+  induction s using Finset.induction with
+  | empty =>
+    simp only [Finset.sum_empty]
+    rw [indMul_set_congr (by simp : MeasurableSet (⋃ i ∈ (∅ : Finset ι), A i)) MeasurableSet.empty
+      (by simp), indMul_empty]
+  | @insert a s ha ih =>
+    have hdisj : Disjoint (A a) (⋃ i ∈ s, A i) := by
+      simp only [Set.disjoint_iUnion₂_right]
+      exact fun i hi => hd (fun (hai : a = i) => ha (hai ▸ hi))
+    rw [Finset.sum_insert ha, ih,
+      ← indMul_union_disjoint (hA a) (s.measurableSet_biUnion (fun i _ => hA i)) hdisj,
+      indMul_set_congr ((hA a).union (s.measurableSet_biUnion (fun i _ => hA i)))
+        (Finset.measurableSet_biUnion _ (fun i _ => hA i)) (by rw [Finset.set_biUnion_insert])]
+
 theorem indSymbol_sdiff {A B : Set α} (hAB : A ⊆ B) :
     indSymbol B = fun s => indSymbol A s + indSymbol (B \ A) s := by
   funext s

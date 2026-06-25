@@ -1389,6 +1389,14 @@ namespace QIQTH.AxiomAudit
 -- self-adjointness + the composition). The components live in orthogonal subspaces L²(A)⟂L²(B). This is the
 -- orthogonality input to the UNCONDITIONAL (pairwise-disjoint) σ-additivity HasSum form the ProjectionValuedMeasure
 -- record requires. Next: range-additivity ∑_{n<N}E(Aₙ)=E(⋃_{n<N}Aₙ) → Summable via OrthogonalFamily → bundle the PVM.
+#print axioms QIQTH.Spectral.Multiplication.indMul_set_congr
+#print axioms QIQTH.Spectral.Multiplication.indMul_biUnion_disjoint
+-- ★ MULTIPLICATION PVM brick 13 — FINITE (RANGE) ADDITIVITY over a Finset: for pairwise-disjoint measurable A,
+-- ∑_{i∈s}E(Aᵢ)=E(⋃_{i∈s}Aᵢ) (indMul_biUnion_disjoint, Finset induction via indMul_union_disjoint + set-congruence
+-- indMul_set_congr, the projection depends only on the set / proof-irrelevant measurability). The discrete
+-- additivity feeding the unconditional HasSum σ-additivity (partial sums = projection onto the partial union).
+-- FRONTIER (recorded): the hasSum_iUnion bundle needs the Hilbert orthogonal-summability bridge — Summable from
+-- ∑‖E(Aₙ)x‖²<∞ via OrthogonalFamily of the ranges L²(Aₙ) (brick 12 orthogonality) + identify limit (brick 11).
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

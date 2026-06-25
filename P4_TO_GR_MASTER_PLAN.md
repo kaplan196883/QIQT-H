@@ -310,6 +310,15 @@ item.** Never claim the `1/4`.
   `HasSum` form that the `ProjectionValuedMeasure` record's `hasSum_iUnion` field demands. Next: range-additivity
   `∑_{n<N}E(Aₙ)=E(⋃_{n<N}Aₙ)` → `Summable` via `OrthogonalFamily.summable_iff_norm_sq_summable` (∑‖E(Aₙ)x‖²=‖E(⋃)x‖²
   bounded by ‖x‖²) → identify the limit with `E(⋃)x` (brick 11) → bundle the `ProjectionValuedMeasure`.
+  **Brick 13 — finite (range) additivity over a `Finset` ✅**: for pairwise-disjoint measurable `A`,
+  `∑_{i∈s}E(Aᵢ)=E(⋃_{i∈s}Aᵢ)` (`indMul_biUnion_disjoint`, `Finset` induction via `indMul_union_disjoint` +
+  set-congruence `indMul_set_congr` — the projection depends only on the set, measurability proof-irrelevant).
+  The discrete additivity feeding the unconditional `HasSum` σ-additivity (partial sums = projection onto the
+  partial union). **FRONTIER (honest checkpoint):** the `ProjectionValuedMeasure.hasSum_iUnion` bundle now needs
+  the **Hilbert orthogonal-summability bridge** — `Summable (fun n => E(Aₙ)x)` from `∑‖E(Aₙ)x‖²<∞` via
+  `OrthogonalFamily` of the ranges `L²(Aₙ)` (brick 12 orthogonality) `.summable_iff_norm_sq_summable`, then
+  identify `∑'` with `E(⋃)x` (brick 11). That orthogonal-family setup (subspaces + isometric inclusions +
+  the summability lemma) is the genuine Mathlib-grade step; bricks 8–13 supply all its inputs. Left green here.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,
   `oneModeSympEig_symplectic_invariant` — `ν` is a basis-independent physical invariant). The `N`-mode normal-form
