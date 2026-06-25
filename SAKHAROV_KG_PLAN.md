@@ -99,4 +99,13 @@ Callan–Wilczek 1994, Kabat 1995 (conical/contact terms); Susskind–Uglum 1994
 entanglement = `A/4G_ind`); Solodukhin, *Living Rev. Rel.* 14 (2011) 8 (review, coefficients).
 
 ## Progress log
-- (none yet — Stage A next: the analytic derivation + the symbolic `1/4` check)
+- **Stage A ✅** (`docs/SAKHAROV_KG_DERIVATION.md` + `scripts/sakharov_kg.py`) — the analytic derivation +
+  symbolic check. From the scalar heat-kernel `a₁ = R/6`: induced `1/G_ind = 1/(12π ε²)` (Sakharov); the
+  conical-deficit/replica entanglement entropy `S_ent = A/(48π ε²)`; and **`S_ent = A/(4 G_ind)`** — the `ε`
+  cancels, `ratio = 1/4`. The decisive point the script makes explicit: **the `1/4` is the purely *geometric*
+  ratio `(conical-deficit 4π)/(EH 16π)`**, cutoff- AND matter-independent — which is *why* the Bekenstein–Hawking
+  `1/4` is universal (matter sets `G_ind`; geometry sets the `1/4`). `python scripts/sakharov_kg.py` prints
+  `1/4` (all assertions pass). Reproduces Susskind–Uglum/Jacobson; the QIQT-H novelty is Stage B.
+- **NEXT: Stage B** — replace the generic cutoff `ε` by QIQT-H's finiteness regulator (the `1/4` is regulator-
+  independent since it's geometric) + the **circularity audit** (prove the `1/4` comes from the conical/EH
+  geometry + the matter `a₁`, NOT from assuming `S ∝ A`). Then Stage C (the Lean Gaussian-lattice core).
