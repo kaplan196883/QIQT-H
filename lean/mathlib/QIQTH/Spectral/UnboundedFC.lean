@@ -547,6 +547,25 @@ theorem boundedFC_expSymbol_add {f : Ω → ℝ} (hf : Measurable f) (s t : ℝ)
   exact P.boundedFC_congr (measurable_expSymbol hf (s + t)) zero_le_one
     (norm_expSymbol_le (f := f) (s + t)) hpm zero_le_one hpb hsym
 
+/-- **The FC-exponential is an isometry/unitary** `(∫e^{itf}dE)† (∫e^{itf}dE) = 1`:
+    `boundedFC(e^{itf})† · boundedFC(e^{itf}) = 1`.  From `boundedFC_adjoint_mul_self` (`T†T = boundedFC(|g|²)`)
+    with `|e^{itf}|² = 1`.  Together with `boundedFC_expSymbol_add` (the group law) this is the full
+    bounded-operator content of `exp(itK)` being a one-parameter *unitary* group. -/
+theorem boundedFC_expSymbol_adjoint_mul {f : Ω → ℝ} (hf : Measurable f) (t : ℝ) :
+    ContinuousLinearMap.adjoint
+        (P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t))
+      * P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) = 1 := by
+  have hsym : (fun ω => (starRingEnd ℂ) (Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ)))
+      * Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ))) = fun _ => (1 : ℂ) := by
+    funext ω
+    rw [← Complex.exp_conj, ← Complex.exp_add,
+      show (starRingEnd ℂ) (Complex.I * (t : ℂ) * (f ω : ℂ)) + Complex.I * (t : ℂ) * (f ω : ℂ) = 0 from by
+        simp only [map_mul, Complex.conj_I, Complex.conj_ofReal]; ring,
+      Complex.exp_zero]
+  rw [P.boundedFC_adjoint_mul_self (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t),
+    P.boundedFC_congr _ _ _ measurable_const (norm_nonneg (1 : ℂ)) (fun _ => le_rfl) hsym,
+    P.boundedFC_const, one_smul]
+
 /-- **Bounded-symbol compatibility:** for a bounded symbol the unbounded FC agrees with the bounded one,
     `(∫ f dE) x = boundedFC(↑f) x`.  (The truncations are eventually `= f`, so the sequence is eventually
     the constant `boundedFC(↑f) x`.)  This ties the unbounded operator back to `boundedFC` — e.g. the
