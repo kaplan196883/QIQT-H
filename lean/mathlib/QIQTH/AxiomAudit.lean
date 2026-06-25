@@ -1231,6 +1231,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_inner_self
 -- ★ M2 operator-level first law: ⟨x,(∫f dE)x⟩ = ∫ f dμ_x (L¹ DCT tail-conv + inner continuity) — for
 -- K=∫log(r/(2−r))dE_R this is the OPERATOR ⟨K⟩ = ∫ kFn dμ = cgpEntropy (JLMS Stage 1 at operator level).
+-- M2 INSTANTIATION: the modular Hamiltonian K = modK S = ∫ kFn dE_R (E_R = PVM_of_selfAdjoint (rvdRC S)) as
+-- a genuine operator, and the operator-level first law ⟨ξ,Kξ⟩ = cgpEntropy S ξ.
+#print axioms QIQTH.StandardSubspaceModular.modK_inner_self
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

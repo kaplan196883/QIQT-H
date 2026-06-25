@@ -358,6 +358,9 @@ import QIQTH.CrossedProductGenerator
 -- entropyDensity = the modular-flow generator (modChar t r = exp(i t·g(r))); cgpEntropy + total
 -- mass ‖ξ‖² + zero. Genuine continuum one-particle object (full vN-algebra needs Γ(Δ^{it}), cited).
 import QIQTH.ModularRelativeEntropy
+-- Stone M2: the modular Hamiltonian K = −log Δ as a GENUINE unbounded operator K = ∫ kFn dE_R (via the
+-- unbounded FC), upgrading the spectral function; ⟨ξ,Kξ⟩ = cgpEntropy (operator-level JLMS first law).
+import QIQTH.ModularHamiltonianOp
 -- QIQT-H CORE (post-2026-06 GPT-5.5-pro strategic pivot): the conditional
 -- representation theorem for single-outcome-without-collapse. The non-circular
 -- finite-capacity exclusion (coactual_subsingleton) + actuality selector give

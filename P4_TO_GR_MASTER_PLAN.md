@@ -135,9 +135,14 @@ item.** Never claim the `1/4`.
   (`fcOp_inner_self`: `⟨x,(∫f dE)x⟩ = ∫ f dμ_x` on the domain — bounded diagonals `⟨x,boundedFC(fₙ)x⟩=∫fcTrunc f n
   dμ` converge by inner-continuity + the L¹ tail-conv `fcTrunc_integral_tendsto` via Bochner DCT, which builds
   clean — `tendsto_integral_of_dominated_convergence` ≠ the `integral_mono` chain that blew up). For
-  `K=∫log(r/(2−r))dE_R` this is the OPERATOR `⟨K⟩=∫kFn dμ=cgpEntropy`. NEXT: instantiate at `E_R =
-  PVM_of_selfAdjoint (rvdRC S)`, identify `rvdSpecMeasure = scalarMeasure`, wire `⟨K⟩` to
-  `cgpEntropy_eq_integral_kFn`; then `Δ^{it}=e^{−itK}` (the FC exponential law — the frontier).
+  `K=∫log(r/(2−r))dE_R` this is the OPERATOR `⟨K⟩=∫kFn dμ=cgpEntropy`. **★ INSTANTIATION ✅**
+  (`QIQTH/ModularHamiltonianOp.lean`: `modK S := E_R.fcOp (kFn∘val)` with `E_R = PVM_of_selfAdjoint (rvdRC S)`
+  — **the modular Hamiltonian `K = −log Δ` as a genuine operator** (the doc-flagged Tomita–Takesaki frontier, now
+  built); `modK_inner_self`: `⟨ξ, K ξ⟩ = cgpEntropy S ξ` — the OPERATOR-level JLMS first law `⟨K⟩=S`, using
+  `rvdSpecMeasure = E_R.scalarMeasure` (def) + `cgpEntropy_eq_integral_kFn`). **JLMS Stage 1 closed at the
+  operator level.** NEXT (the remaining frontier): `Δ^{it} = e^{−itK}` as an *operator* identity (the FC
+  exponential law `exp(it·∫f dE) = ∫ e^{itf} dE`) — `modChar_eq_exp_neg_kFn` lifted from the spectrum to the
+  operator.
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)
 - [ ] **M5** — dual-weight trace + JLMS + FQ bound
