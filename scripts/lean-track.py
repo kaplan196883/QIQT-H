@@ -3,6 +3,7 @@
 
     python scripts/lean-track.py report  -c tracks/gr.toml
     python scripts/lean-track.py extract -c tracks/born.toml
+    python scripts/lean-track.py latex   -c tracks/gr.toml   # readable LaTeX from Lean
     python scripts/lean-track.py diff --old A/agent_summary.json --new B/agent_summary.json
 """
 import pathlib

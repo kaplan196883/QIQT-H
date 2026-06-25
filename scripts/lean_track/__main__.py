@@ -2,6 +2,7 @@
 
   python -m lean_track report -c tracks/gr.toml [--no-prober] [-o reports/gr]
   python -m lean_track extract -c tracks/gr.toml          # raw Lean facts only
+  python -m lean_track latex -c tracks/gr.toml [-o reports/gr/statements.tex]
   python -m lean_track diff --old A/agent_summary.json --new B/agent_summary.json
 """
 import argparse
@@ -9,7 +10,7 @@ import json
 import pathlib
 import sys
 
-from . import probe, report
+from . import latexify, probe, report
 
 
 def _names_and_roles(cfg):
@@ -57,6 +58,24 @@ def cmd_extract(args):
     return 0
 
 
+def cmd_latex(args):
+    cfg = probe.load_config(args.config)
+    names, roles = _names_and_roles(cfg)
+    ex = probe.extract(names, cfg)
+    notation = (cfg.get("latex", {}) or {}).get("notation", {})
+    doc = latexify.render_document(ex, cfg, notation=notation, roles=roles)
+    out = (pathlib.Path(args.out) if args.out
+           else probe.REPO / "reports" / cfg["track"]["id"] / "statements.tex")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(doc, encoding="utf-8")
+    present = sum(1 for t in ex if t.get("present"))
+    msg = f"latex → {out.relative_to(probe.REPO)}  ({present}/{len(ex)} statements)"
+    if latexify._UNMAPPED:
+        msg += "  · unmapped glyphs dropped: " + " ".join(sorted(latexify._UNMAPPED))
+    print(msg)
+    return 0
+
+
 def cmd_diff(args):
     old = json.loads(pathlib.Path(args.old).read_text(encoding="utf-8"))
     new = json.loads(pathlib.Path(args.new).read_text(encoding="utf-8"))
@@ -72,6 +91,8 @@ def main(argv=None):
     r.set_defaults(fn=cmd_report)
     e = sub.add_parser("extract"); e.add_argument("-c", "--config", required=True)
     e.add_argument("-o", "--out"); e.set_defaults(fn=cmd_extract)
+    lx = sub.add_parser("latex"); lx.add_argument("-c", "--config", required=True)
+    lx.add_argument("-o", "--out"); lx.set_defaults(fn=cmd_latex)
     d = sub.add_parser("diff"); d.add_argument("--old", required=True); d.add_argument("--new", required=True)
     d.set_defaults(fn=cmd_diff)
     args = p.parse_args(argv)

@@ -1,0 +1,10 @@
+# LaTeX build artifacts from `lean_track latex` (regenerate with the tool).
+# The generated statements.tex IS tracked; its compiled byproducts are not.
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.out
+*.toc
+*.pdf

@@ -88,3 +88,22 @@ id = "regularity"
 category = "regularity"
 label = "REGULARITY/BACKGROUND — metric, frame, mode, smoothness, constants, record-law normalization"
 name_regex = "^(hsymm|hsymm_gi|hinv|hCg|hCgi|hPP|hPP'|hcong|hT_symm|hbar0|hbar_pos|heta|ha|hφ|hmw|hf2|hf_int|hF0_int|hfd|hf'_meas|hB|hreg|conserv|hm|hVboost|hpp_nn|hpp1|hpp0)$"
+
+# --- LaTeX rendering (consumed by `python -m lean_track latex -c tracks/gr.toml`) ---
+# Map project / Mathlib operator names to readable math macros. Keys match either a
+# full qualified name or its last segment; anything unmapped becomes \mathrm{name}.
+[latex.notation]
+"boxField" = "\\Box"
+"kgStress" = "T"
+"einsteinTensor" = "G"
+"covDerivVec" = "\\nabla"
+"expansion" = "\\theta"
+"Shannon" = "S"
+"KL" = "D_{\\mathrm{KL}}"
+"BL" = "\\mathrm{BL}"
+"Point" = "M"
+"hbar" = "\\hbar"
+"Fintype.card" = "\\#"
+"card" = "\\#"
+"Finset.univ" = ""
+"univ" = ""

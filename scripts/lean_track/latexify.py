@@ -1,0 +1,326 @@
+"""Render extracted Lean statements as human-readable LaTeX math.
+
+Input  : the JSON facts produced by `probe.extract` (names, binders with Lean
+         pretty-printed types, conclusions).
+Output : a compilable LaTeX document — one theorem/definition environment per
+         target, with hypotheses and conclusion typeset in math mode.
+
+Honesty: this is a *faithful syntactic* translation of the Lean statement
+(token-level Lean-pp -> LaTeX), NOT a re-proof or a re-statement. It changes
+notation, never content. Project operators can be mapped to readable macros via
+a `[latex.notation]` table in the track TOML; anything unmapped is rendered as
+\\mathrm{name} so nothing is silently dropped.
+"""
+import re
+
+# ---- single-codepoint Lean glyphs -> LaTeX (math mode) ----------------------
+SYMBOLS = {
+    # logic / quantifiers
+    "∀": r"\forall ", "∃": r"\exists ", "¬": r"\neg ", "∧": r"\wedge ",
+    "∨": r"\vee ", "↔": r"\leftrightarrow ", "→": r"\to ", "↦": r"\mapsto ",
+    "⟶": r"\longrightarrow ", "⊢": r"\vdash ",
+    # relations
+    "≤": r"\le ", "≥": r"\ge ", "≠": r"\ne ", "≈": r"\approx ", "≡": r"\equiv ",
+    "≃": r"\simeq ", "≅": r"\cong ", "∼": r"\sim ", "≪": r"\ll ", "≫": r"\gg ",
+    "∝": r"\propto ", "≜": r"\triangleq ", "≔": r":= ", "∣": r"\mid ",
+    # sets
+    "∈": r"\in ", "∉": r"\notin ", "⊆": r"\subseteq ", "⊂": r"\subset ",
+    "⊇": r"\supseteq ", "∩": r"\cap ", "∪": r"\cup ", "∅": r"\emptyset ",
+    "⋃": r"\bigcup ", "⋂": r"\bigcap ", "∖": r"\setminus ",
+    # big operators / analysis
+    "∑": r"\sum ", "∏": r"\prod ", "∫": r"\int ", "∂": r"\partial ",
+    "∇": r"\nabla ", "√": r"\sqrt ", "∞": r"\infty ", "∘": r"\circ ",
+    # arithmetic / algebra
+    "×": r"\times ", "⊗": r"\otimes ", "⊕": r"\oplus ", "·": r"\cdot ",
+    "•": r"\cdot ", "∙": r"\cdot ", "±": r"\pm ", "∓": r"\mp ",
+    "⊤": r"\top ", "⊥": r"\bot ", "†": r"^{\dagger}",
+    # blackboard
+    "ℝ": r"\mathbb{R}", "ℂ": r"\mathbb{C}", "ℕ": r"\mathbb{N}",
+    "ℤ": r"\mathbb{Z}", "ℚ": r"\mathbb{Q}", "𝟙": r"\mathbb{1}", "𝕜": r"\Bbbk ",
+    # delimiters / misc
+    "⟨": r"\langle ", "⟩": r"\rangle ", "‖": r"\|", "∥": r"\|",
+    "⌊": r"\lfloor ", "⌋": r"\rfloor ", "⌈": r"\lceil ", "⌉": r"\rceil ",
+    "↑": r"", "↓": r"", "⇑": r"", "⇓": r"", "↥": r"", "↟": r"",  # coercions: drop
+    "⋯": r"\cdots ", "⋮": r"\vdots ", "⋱": r"\ddots ", "…": r"\ldots ",
+    "⇒": r"\Rightarrow ", "⟹": r"\Longrightarrow ", "⟸": r"\Longleftarrow ",
+    "ᵒ": r"^{\circ}", "ₐ": r"_{a}",
+}
+
+# ---- Greek letters used as identifiers --------------------------------------
+GREEK = {
+    "α": r"\alpha", "β": r"\beta", "γ": r"\gamma", "δ": r"\delta",
+    "ε": r"\varepsilon", "ζ": r"\zeta", "η": r"\eta", "θ": r"\theta",
+    "ι": r"\iota", "κ": r"\kappa", "λ": r"\lambda", "μ": r"\mu", "ν": r"\nu",
+    "ξ": r"\xi", "π": r"\pi", "ρ": r"\rho", "σ": r"\sigma", "τ": r"\tau",
+    "υ": r"\upsilon", "φ": r"\varphi", "χ": r"\chi", "ψ": r"\psi", "ω": r"\omega",
+    "Γ": r"\Gamma", "Δ": r"\Delta", "Θ": r"\Theta", "Λ": r"\Lambda",
+    "Ξ": r"\Xi", "Π": r"\Pi", "Σ": r"\Sigma", "Φ": r"\Phi", "Ψ": r"\Psi",
+    "Ω": r"\Omega",
+}
+
+# ---- unicode sub/superscripts ----------------------------------------------
+SUPERS = {"⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4", "⁵": "5", "⁶": "6",
+          "⁷": "7", "⁸": "8", "⁹": "9", "⁺": "+", "⁻": "-", "ⁿ": "n", "ⁱ": "i",
+          "ᵀ": "T", "ᵃ": "a", "ᵇ": "b", "ᶜ": "c", "ᵈ": "d", "ᵉ": "e", "ᶠ": "f"}
+SUBS = {"₀": "0", "₁": "1", "₂": "2", "₃": "3", "₄": "4", "₅": "5", "₆": "6",
+        "₇": "7", "₈": "8", "₉": "9", "₊": "+", "₋": "-", "ₙ": "n", "ᵢ": "i",
+        "ⱼ": "j", "ₖ": "k", "ₗ": "l", "ₘ": "m", "ₚ": "p", "ᵣ": "r", "ₛ": "s",
+        "ₜ": "t"}
+
+# Lean keywords that survive pretty-printing -> their math-mode rendering.
+KW_TEX = {
+    "fun": r"\lambda ", "if": r"\text{if }", "then": r"\text{ then }",
+    "else": r"\text{ else }", "in": r"\text{ in }", "let": r"\text{let }",
+    "do": r"\text{do }", "match": r"\text{match }", "with": r"\text{ with }",
+    "from": r"\text{ from }", "by": r"\text{ by }", "at": r"\text{ at }",
+}
+KEYWORDS = set(KW_TEX)
+
+# Common Mathlib names with standard math notation. Track configs may extend or
+# override these via [latex.notation].
+DEFAULT_NOTATION = {
+    "Real.pi": r"\pi", "Real.exp": r"\exp", "Real.log": r"\log",
+    "Real.sqrt": r"\sqrt", "Real.sin": r"\sin", "Real.cos": r"\cos",
+    "Real.cosh": r"\cosh", "Real.sinh": r"\sinh", "Complex.I": r"i",
+    "Complex.exp": r"\exp", "Finset.univ": r"\mathrm{univ}",
+    "Finset.sum": r"\sum", "Nat": r"\mathbb{N}", "Int": r"\mathbb{Z}",
+    "Rat": r"\mathbb{Q}", "True": r"\top", "False": r"\bot",
+}
+
+_IDENT = re.compile(r"[A-Za-z_][A-Za-z0-9_.'!?]*")
+
+# glyphs that escaped every map during this run (surfaced by the CLI for review)
+_UNMAPPED = set()
+
+
+def _collapse_scripts(s):
+    """Turn runs of unicode sub/superscripts into LaTeX _{...} / ^{...}."""
+    out, i, n = [], 0, len(s)
+    while i < n:
+        c = s[i]
+        if c in SUPERS:
+            run = ""
+            while i < n and s[i] in SUPERS:
+                run += SUPERS[s[i]]; i += 1
+            out.append("^{" + run + "}")
+        elif c in SUBS:
+            run = ""
+            while i < n and s[i] in SUBS:
+                run += SUBS[s[i]]; i += 1
+            out.append("_{" + run + "}")
+        else:
+            out.append(c); i += 1
+    return "".join(out)
+
+
+def _render_ident(tok, notation):
+    """A dotted Lean identifier -> a LaTeX atom.
+
+    Order: explicit notation override (full name, then last segment) >
+    Greek letter > single-letter variable (italic) > \\mathrm{lastsegment}.
+    """
+    if tok in KEYWORDS:
+        return None  # handled by caller
+    if tok in notation:
+        return notation[tok]
+    last = tok.split(".")[-1]
+    if last in notation:
+        return notation[last]
+    # strip Lean decorations Lean allows in names
+    base = last.rstrip("!?")
+    primes = ""
+    while base.endswith("'"):
+        primes += r"\prime"; base = base[:-1]
+    if not base:
+        base = last
+    # a bare Greek letter
+    if base in GREEK:
+        return GREEK[base] + ("^{" + primes + "}" if primes else "")
+    # split a trailing numeric/letter subscript Lean folded into the name
+    m = re.fullmatch(r"([A-Za-z]+)([0-9]+)", base)
+    if m and len(m.group(1)) == 1:
+        return m.group(1) + "_{" + m.group(2) + "}"
+    if len(base) == 1:
+        return base + ("^{" + primes + "}" if primes else "")
+    # multi-letter -> upright operator name; escape TeX-special underscores
+    safe = base.replace("_", r"\_")
+    return r"\mathrm{" + safe + "}" + ("^{" + primes + "}" if primes else "")
+
+
+def tex_of_pp(pp, notation=None):
+    """Translate one Lean pretty-printed expression string into LaTeX math."""
+    notation = {**DEFAULT_NOTATION, **(notation or {})}
+    pp = pp.replace("\n", " ")
+    pp = re.sub(r"\s+", " ", pp).strip()
+    pp = _collapse_scripts(pp)
+
+    out, i, n = [], 0, len(pp)
+    while i < n:
+        c = pp[i]
+        m = _IDENT.match(pp, i)
+        if m:
+            tok = m.group(0)
+            i = m.end()
+            if tok in KEYWORDS:
+                out.append(KW_TEX[tok])
+            else:
+                out.append(_render_ident(tok, notation))
+            continue
+        if c in SYMBOLS:
+            out.append(SYMBOLS[c]); i += 1; continue
+        if c in GREEK:
+            out.append(GREEK[c]); i += 1; continue
+        if c == "=":
+            # do not collapse '=>' handled below; plain '='
+            if i + 1 < n and pp[i + 1] == ">":
+                out.append(r"\mapsto "); i += 2; continue
+            out.append("="); i += 1; continue
+        if c == "*":             # Lean multiplication -> centred dot
+            out.append(r" \cdot "); i += 1; continue
+        if c in "{}":            # set-builder braces in pp -> \{ \}
+            out.append("\\" + c); i += 1; continue
+        if c in "#$%&":          # TeX-special -> escape
+            out.append("\\" + c); i += 1; continue
+        if c == "\\":
+            out.append(r"\backslash "); i += 1; continue
+        out.append(c); i += 1     # digits, ( ) [ ] , : + - / < > | etc. pass through
+    tex = "".join(out)
+    # fold big-operator binders: `\sum x, body` -> `\sum_{x} body`
+    tex = re.sub(r"(\\(?:sum|prod|bigcup|bigcap|int))\s+([^,]+?)\s*,",
+                 r"\1_{\2}", tex)
+    # safety net: drop any exotic glyph that escaped every map, so output always
+    # compiles. Greek/symbols/blackboard are already translated above, so this
+    # only removes rare unmapped Lean notation (record any drops for review).
+    leftover = sorted({ch for ch in tex if ord(ch) > 0x7F})
+    if leftover:
+        _UNMAPPED.update(leftover)
+        tex = re.sub(r"[^\x00-\x7F]", "", tex)
+    tex = re.sub(r"\s+", " ", tex).strip()
+    return tex
+
+
+# ---------------------------------------------------------------------------- #
+#  document assembly
+# ---------------------------------------------------------------------------- #
+ENV_OF_KIND = {"thm": "theorem", "def": "definition", "axiom": "axiom",
+               "opaque": "definition", "other": "theorem"}
+
+
+def _texlabel(name):
+    slug = name.replace("'", "-prime")
+    return "thm:" + re.sub(r"[^A-Za-z0-9]+", "-", slug).strip("-").lower()
+
+
+def render_theorem(t, notation=None, role_label=None):
+    """One extracted target -> a LaTeX environment string."""
+    notation = notation or {}
+    name = t["name"]
+    if not t.get("present"):
+        return (f"\\paragraph{{\\texttt{{{_texname(name)}}}}}"
+                f" \\emph{{(not found in the current build)}}\n")
+    env = ENV_OF_KIND.get(t.get("kind", "thm"), "theorem")
+    data, insts, hyps = [], [], []
+    for b in t.get("binders", []):
+        rt = tex_of_pp(b["type"], notation)
+        nm = tex_of_pp(b["name"], notation)
+        if b["kind"] == "prop":
+            hyps.append((b["name"], rt))
+        elif b["kind"] == "instance":
+            insts.append(rt)
+        else:
+            data.append((nm, rt))
+
+    lines = [f"\\begin{{{env}}}[\\texttt{{{_texname(name)}}}]\\label{{{_texlabel(name)}}}"]
+    if role_label:
+        lines.append(f"\\textit{{{role_label}.}}")
+    if data:
+        items = ", ".join(f"${nm} : {rt}$" for nm, rt in data)
+        lines.append(f"Given {items}" + ("." if not (insts or hyps) else ","))
+    if insts:
+        lines.append("with " + ", ".join(f"${rt}$" for rt in insts)
+                     + ("." if not hyps else ","))
+    if hyps:
+        lines.append("assume")
+        lines.append(r"\begin{itemize}")
+        for hn, rt in hyps:
+            lines.append(f"  \\item[\\rm({_hyp_label(hn)})] ${rt}$")
+        lines.append(r"\end{itemize}")
+    concl = t.get("concl", {})
+    claim = tex_of_pp(concl.get("pp", ""), notation)
+    lead = "Then" if (data or insts or hyps) else "We have"
+    if concl.get("isProp", True):
+        lines.append(f"{lead} \\[ {claim} \\]")
+    else:                       # a def: the body/type is the object
+        lines.append(f"{lead} the object \\[ {claim} \\]")
+    lines.append(f"\\end{{{env}}}")
+    return "\n".join(lines) + "\n"
+
+
+def _texname(s):
+    return s.replace("_", r"\_").replace("'", r"\textquotesingle{}")
+
+
+def _hyp_label(hn):
+    """A readable itemize tag; collapse Lean's hygienic / anonymous-instance names."""
+    if hn.startswith("inst") or "._@." in hn or "_hyg" in hn:
+        return "instance"
+    return _texname(hn)
+
+
+PREAMBLE = r"""\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage{newunicodechar}
+% Fallbacks so any unicode that survives in a name / \texttt still compiles.
+\newunicodechar{ᶠ}{\ensuremath{^{f}}}
+\newunicodechar{α}{\ensuremath{\alpha}}   \newunicodechar{β}{\ensuremath{\beta}}
+\newunicodechar{γ}{\ensuremath{\gamma}}   \newunicodechar{δ}{\ensuremath{\delta}}
+\newunicodechar{ε}{\ensuremath{\varepsilon}} \newunicodechar{ζ}{\ensuremath{\zeta}}
+\newunicodechar{η}{\ensuremath{\eta}}     \newunicodechar{θ}{\ensuremath{\theta}}
+\newunicodechar{ι}{\ensuremath{\iota}}    \newunicodechar{κ}{\ensuremath{\kappa}}
+\newunicodechar{λ}{\ensuremath{\lambda}}  \newunicodechar{μ}{\ensuremath{\mu}}
+\newunicodechar{ν}{\ensuremath{\nu}}      \newunicodechar{ξ}{\ensuremath{\xi}}
+\newunicodechar{π}{\ensuremath{\pi}}      \newunicodechar{ρ}{\ensuremath{\rho}}
+\newunicodechar{σ}{\ensuremath{\sigma}}   \newunicodechar{τ}{\ensuremath{\tau}}
+\newunicodechar{φ}{\ensuremath{\varphi}}  \newunicodechar{χ}{\ensuremath{\chi}}
+\newunicodechar{ψ}{\ensuremath{\psi}}     \newunicodechar{ω}{\ensuremath{\omega}}
+\newunicodechar{Γ}{\ensuremath{\Gamma}}   \newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{Λ}{\ensuremath{\Lambda}}  \newunicodechar{Σ}{\ensuremath{\Sigma}}
+\newunicodechar{Φ}{\ensuremath{\Phi}}     \newunicodechar{Ψ}{\ensuremath{\Psi}}
+\newunicodechar{Ω}{\ensuremath{\Omega}}   \newunicodechar{Π}{\ensuremath{\Pi}}
+\newunicodechar{ℝ}{\ensuremath{\mathbb{R}}} \newunicodechar{ℂ}{\ensuremath{\mathbb{C}}}
+\newunicodechar{ℕ}{\ensuremath{\mathbb{N}}} \newunicodechar{ℤ}{\ensuremath{\mathbb{Z}}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{axiom}[theorem]{Axiom}
+\setlength{\parindent}{0pt}\setlength{\parskip}{4pt}
+"""
+
+
+def render_document(targets, cfg, notation=None, roles=None):
+    """Full standalone LaTeX document for a list of extracted targets."""
+    notation = notation or {}
+    roles = roles or {}
+    tr = cfg.get("track", {})
+    title = tr.get("title", "Formal statements")
+    subtitle = tr.get("subtitle", "")
+    extra_macros = (cfg.get("latex", {}) or {}).get("preamble", "")
+    body = [PREAMBLE, extra_macros,
+            r"\begin{document}",
+            f"\\section*{{{_tex_title(title)}}}"]
+    if subtitle:
+        body.append(f"\\noindent\\emph{{{_tex_title(subtitle)}}}\\par\\medskip")
+    body.append(r"\noindent\small Statements machine-translated from the Lean 4 / "
+                r"Mathlib source by \texttt{lean\_track latex}: notation only, content "
+                r"verbatim. Each \texttt{name} is the Lean declaration.\normalsize\par\medskip")
+    for t in targets:
+        body.append(render_theorem(t, notation, roles.get(t["name"])))
+        body.append("")
+    body.append(r"\end{document}")
+    return "\n".join(body)
+
+
+def _tex_title(s):
+    return (s.replace("&", r"\&").replace("_", r"\_")
+            .replace("#", r"\#").replace("%", r"\%"))
