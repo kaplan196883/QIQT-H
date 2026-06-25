@@ -1,0 +1,159 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage{newunicodechar}
+% Fallbacks so any unicode that survives in a name / \texttt still compiles.
+\newunicodechar{ᶠ}{\ensuremath{^{f}}}
+\newunicodechar{₀}{\ensuremath{_0}}\newunicodechar{₁}{\ensuremath{_1}}
+\newunicodechar{₂}{\ensuremath{_2}}\newunicodechar{₃}{\ensuremath{_3}}
+\newunicodechar{₄}{\ensuremath{_4}}\newunicodechar{₅}{\ensuremath{_5}}
+\newunicodechar{₆}{\ensuremath{_6}}\newunicodechar{₇}{\ensuremath{_7}}
+\newunicodechar{₈}{\ensuremath{_8}}\newunicodechar{₉}{\ensuremath{_9}}
+\newunicodechar{⁰}{\ensuremath{^0}}\newunicodechar{¹}{\ensuremath{^1}}
+\newunicodechar{²}{\ensuremath{^2}}\newunicodechar{³}{\ensuremath{^3}}
+\newunicodechar{α}{\ensuremath{\alpha}}   \newunicodechar{β}{\ensuremath{\beta}}
+\newunicodechar{γ}{\ensuremath{\gamma}}   \newunicodechar{δ}{\ensuremath{\delta}}
+\newunicodechar{ε}{\ensuremath{\varepsilon}} \newunicodechar{ζ}{\ensuremath{\zeta}}
+\newunicodechar{η}{\ensuremath{\eta}}     \newunicodechar{θ}{\ensuremath{\theta}}
+\newunicodechar{ι}{\ensuremath{\iota}}    \newunicodechar{κ}{\ensuremath{\kappa}}
+\newunicodechar{λ}{\ensuremath{\lambda}}  \newunicodechar{μ}{\ensuremath{\mu}}
+\newunicodechar{ν}{\ensuremath{\nu}}      \newunicodechar{ξ}{\ensuremath{\xi}}
+\newunicodechar{π}{\ensuremath{\pi}}      \newunicodechar{ρ}{\ensuremath{\rho}}
+\newunicodechar{σ}{\ensuremath{\sigma}}   \newunicodechar{τ}{\ensuremath{\tau}}
+\newunicodechar{φ}{\ensuremath{\varphi}}  \newunicodechar{χ}{\ensuremath{\chi}}
+\newunicodechar{ψ}{\ensuremath{\psi}}     \newunicodechar{ω}{\ensuremath{\omega}}
+\newunicodechar{Γ}{\ensuremath{\Gamma}}   \newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{Λ}{\ensuremath{\Lambda}}  \newunicodechar{Σ}{\ensuremath{\Sigma}}
+\newunicodechar{Φ}{\ensuremath{\Phi}}     \newunicodechar{Ψ}{\ensuremath{\Psi}}
+\newunicodechar{Ω}{\ensuremath{\Omega}}   \newunicodechar{Π}{\ensuremath{\Pi}}
+\newunicodechar{ℝ}{\ensuremath{\mathbb{R}}} \newunicodechar{ℂ}{\ensuremath{\mathbb{C}}}
+\newunicodechar{ℕ}{\ensuremath{\mathbb{N}}} \newunicodechar{ℤ}{\ensuremath{\mathbb{Z}}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{axiom}[theorem]{Axiom}
+\setlength{\parindent}{0pt}\setlength{\parskip}{4pt}
+
+
+\begin{document}
+\section*{Lorentz covariance}
+\noindent\emph{Target 2 — QIQT-H compatible with Lorentz (covariance spine + selector no-go)}\par\medskip
+\noindent\small Statements machine-translated from the Lean 4 / Mathlib source by \texttt{lean\_track latex -{}-tree}: rendered from the delaborated \emph{Syntax tree} (notation only, content verbatim).\normalsize\par\medskip
+\begin{theorem}[\texttt{QIQTH.LorentzSelectionStrong.upvm\_covariant\_probability}]\label{thm:qiqth-lorentzselectionstrong-upvm-covariant-probability}
+\textit{capstone.}
+Given $Diam$, $G$, $P$, $A$, $B$, $C$, $g$, $D$.
+Then \[ (\forall (x : P.X\,D), 0 \le \mathrm{uborn}\,B.\mathrm{toUniformBornData}\,D\,x) \wedge \mathrm{univ}.\mathrm{sum}\,(\mathrm{uborn}\,B.\mathrm{toUniformBornData}\,D) = 1 \wedge \forall (x : P.X\,D), \mathrm{uborn}\,B.\mathrm{toUniformBornData}\,((A.\mathrm{act}\,g)\,D)\,((A.\gamma\,g\,D)\,x) = \mathrm{uborn}\,B.\mathrm{toUniformBornData}\,D\,x \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.LorentzSelection.evaluation\_covariance}]\label{thm:qiqth-lorentzselection-evaluation-covariance}
+\textit{spine.}
+Given $Diam$, $P$, $g$, $lam$, $D$.
+Then \[ \mathrm{selector}\,(\mathrm{actSection}\,g\,\mathrm{lam})\,(g.\mathrm{act}\,D) = (g.\gamma\,D)\,(\mathrm{selector}\,\mathrm{lam}\,D) \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.LorentzSelectionStrong.group\_evaluation\_covariance}]\label{thm:qiqth-lorentzselectionstrong-group-evaluation-covariance}
+\textit{spine.}
+Given $Diam$, $G$, $P$, $A$, $lam$, $g$, $D$.
+Then \[ \mathrm{selector}\,(\mathrm{actSection}\,(A.\mathrm{toPoincare}\,g)\,\mathrm{lam})\,((A.\mathrm{act}\,g)\,D) = (A.\gamma\,g\,D)\,(\mathrm{selector}\,\mathrm{lam}\,D) \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.FreeFieldTypicality.freeFieldMeasure\_boost\_invariant}]\label{thm:qiqth-freefieldtypicality-freefieldmeasure-boost-invariant}
+\textit{spine.}
+Given $m$, $ν$, $e$,
+assume
+\begin{itemize}
+  \item[\rm(instance)] $\mathrm{IsProbabilityMeasure}\,\nu$
+  \item[\rm(hν)] $\mathrm{map}\,(\mathrm{boostMap}\,e)\,\nu = \nu$
+\end{itemize}
+Then \[ \mathrm{map}\,(\mathrm{diagBoost}\,e)\,(\mathrm{freeFieldMeasure}\,\nu) = \mathrm{freeFieldMeasure}\,\nu \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.BHTypicalityMeasure.bh\_typicalityMeasure\_exists}]\label{thm:qiqth-bhtypicalitymeasure-bh-typicalitymeasure-exists}
+\textit{spine.}
+Given $ι$, $α$, $κ$, $H$, $b$, $p$, $g$,
+assume
+\begin{itemize}
+  \item[\rm(instance)] $\forall (i : \iota), \mathrm{MeasurableSingletonClass}\,(\alpha\,i)$
+  \item[\rm(instance)] $\mathrm{CompleteSpace}\,H$
+  \item[\rm(instance)] $\forall (i : \iota), \mathrm{DiscreteTopology}\,(\alpha\,i)$
+  \item[\rm(instance)] $\forall (i : \iota), \mathrm{Finite}\,(\alpha\,i)$
+  \item[\rm(hb)] $\mathrm{Orthonormal}\,\mathbb{C}\,b$
+  \item[\rm(hp)] $\forall (i : \kappa), 0 \le p\,i$
+  \item[\rm(hsum)] $\mathrm{Summable}\,p$
+  \item[\rm(hp1)] $\sum ' (i : \kappa), p\,i = 1$
+\end{itemize}
+Then \[ \exists \mu, \mathrm{IsProbabilityMeasure}\,\mu \wedge (\mathrm{diagNet}\,\mathrm{hb}\,\mathrm{hp}\,\mathrm{hsum}\,\mathrm{hp1}\,g).\mathrm{toFiniteMarginals}.\mathrm{IsLimit}\,\mu \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.Fock.fock\_typicalityMeasure\_exists}]\label{thm:qiqth-fock-fock-typicalitymeasure-exists}
+\textit{spine.}
+Given $ι$, $α$, $H$, $g$,
+assume
+\begin{itemize}
+  \item[\rm(instance)] $\forall (i : \iota), \mathrm{MeasurableSingletonClass}\,(\alpha\,i)$
+  \item[\rm(instance)] $\forall (i : \iota), \mathrm{DiscreteTopology}\,(\alpha\,i)$
+  \item[\rm(instance)] $\forall (i : \iota), \mathrm{Finite}\,(\alpha\,i)$
+\end{itemize}
+Then \[ \exists \mu, \mathrm{IsProbabilityMeasure}\,\mu \wedge (\mathrm{fockVacuumNet}\,g).\mathrm{toFiniteMarginals}.\mathrm{IsLimit}\,\mu \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.ContinuumSelection.continuum\_volume\_selects}]\label{thm:qiqth-continuumselection-continuum-volume-selects}
+\textit{spine.}
+Given $H$, $S$, $ξ$, $n$, $s$, $k$,
+assume
+\begin{itemize}
+  \item[\rm(instance)] $\mathrm{CompleteSpace}\,H$
+\end{itemize}
+Then \[ \mathrm{volume}\,\{\mathrm{seed}|\mathrm{selects}\,(\mathrm{contWeights}\,S\,\xi\,s)\,\mathrm{seed}\,k\} = \mathrm{ofReal}\,(\mathrm{contWeights}\,S\,\xi\,s\,k) \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.Theorem7.Setup.no\_signaling}]\label{thm:qiqth-theorem7-setup-no-signaling}
+\textit{spine.}
+Given $S$, $x$, $a$, $y$.
+Then \[ S.P\,x\,a\,y = S.\mathrm{PAlice}\,x\,a \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.NoSignalingGeneral.bipartite\_no\_signaling}]\label{thm:qiqth-nosignalinggeneral-bipartite-no-signaling}
+\textit{spine.}
+Given $d₁$, $d₂$, $β$, $ρ$, $E$, $F$,
+assume
+\begin{itemize}
+  \item[\rm(hF)] $\sum_{b} F\,b = 1$
+\end{itemize}
+Then \[ \sum_{b} (\rho \cdot \mathrm{kroneckerMap}\,(\lambda x_{1} x_{2} \mapsto x_{1} \cdot x_{2})\,E\,(F\,b)).\mathrm{trace} = (\rho \cdot \mathrm{kroneckerMap}\,(\lambda x_{1} x_{2} \mapsto x_{1} \cdot x_{2})\,E\,1).\mathrm{trace} \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.CovariantGluing.no\_covariant\_selector}]\label{thm:qiqth-covariantgluing-no-covariant-selector}
+\textit{nogo.}
+Given $State$, $History$, $actS$, $actH$, $σ$, $Φ$,
+assume
+\begin{itemize}
+  \item[\rm(equiv)] $\forall (\Phi : \mathrm{State}), \sigma\,(\mathrm{actS}\,\Phi) = \mathrm{actH}\,(\sigma\,\Phi)$
+  \item[\rm(hΦ)] $\mathrm{actS}\,\Phi = \Phi$
+  \item[\rm(hno)] $\forall (h : \mathrm{History}), \mathrm{actH}\,h \ne h$
+\end{itemize}
+Then \[ \bot \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.CovariantGluing.bool\_swap\_no\_selector}]\label{thm:qiqth-covariantgluing-bool-swap-no-selector}
+\textit{nogo.}
+Given $σ$,
+assume
+\begin{itemize}
+  \item[\rm(equiv)] $\forall (u : \mathrm{Unit}), \sigma\,u = !\sigma\,u$
+\end{itemize}
+Then \[ \bot \]
+\end{theorem}
+
+
+\end{document}

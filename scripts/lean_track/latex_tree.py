@@ -27,6 +27,12 @@ def tex_atom(s):
             out.append(_SPACED[ch])
         elif ch == "*":
             out.append(r"\cdot")
+        elif ch in "{}":                 # literal set-builder braces -> \{ \}
+            out.append("\\" + ch)
+        elif ch in latexify.SUBS:
+            out.append("_{" + latexify.SUBS[ch] + "}")
+        elif ch in latexify.SUPERS:
+            out.append("^{" + latexify.SUPERS[ch] + "}")
         elif ch in latexify.SYMBOLS:
             out.append(latexify.SYMBOLS[ch])
         elif ch in latexify.GREEK:
@@ -83,7 +89,9 @@ def render(node, notation):
     if k == "atom":
         return tex_atom(node["v"])
     if k == "ident":
-        return latexify._render_ident(node["v"], notation)
+        # full string translation handles Greek + sub/superscripts (e.g. e₁ -> e_{1})
+        # and notation; app heads are resolved earlier so this is only operands/indices.
+        return latexify.tex_of_pp(node["v"], notation)
     if k != "node":
         return ""
     kind, A = node["kind"], node["args"]
@@ -112,11 +120,11 @@ def render(node, notation):
         return (r"\text{if }" + render(cond, notation) + r"\text{ then }" + rt
                 + r"\text{ else }" + re_)
 
-    if kind == "BigOperators.bigsum":
-        # [∑, bigOpBinders, null, ',', body]
+    if kind in ("BigOperators.bigsum", "BigOperators.bigprod"):
+        # [∑/∏, bigOpBinders, null, ',', body]
+        op = r"\prod" if kind.endswith("bigprod") else r"\sum"
         binder = _sum_binder(A[1], notation)
-        body = render(A[-1], notation)
-        return r"\sum_{" + binder + "} " + body
+        return op + "_{" + binder + "} " + render(A[-1], notation)
 
     if kind == "Filter.«term∀ᶠ_In_,_»":
         return _eventually(A, notation)
@@ -185,5 +193,67 @@ def _eventually(A, notation):
 def tex_of_tree(node, notation=None):
     notation = {**latexify.DEFAULT_NOTATION, **(notation or {})}
     tex = render(node, notation)
+    # safety net: drop any glyph that escaped every map so output always compiles,
+    # recording it (shared with latexify) for review.
+    leftover = sorted({ch for ch in tex if ord(ch) > 0x7F})
+    if leftover:
+        latexify._UNMAPPED.update(leftover)
+        tex = re.sub(r"[^\x00-\x7F]", "", tex)
     tex = re.sub(r"\s+", " ", tex).strip()
     return tex
+
+
+# ---------------------------------------------------------------------------- #
+#  document assembly (mirrors latexify.render_theorem/render_document, tree-fed)
+# ---------------------------------------------------------------------------- #
+def render_theorem(t, notation=None, role_label=None):
+    notation = {**latexify.DEFAULT_NOTATION, **(notation or {})}
+    name = t["name"]
+    if not t.get("present"):
+        return (f"\\paragraph{{\\texttt{{{latexify._texname(name)}}}}}"
+                f" \\emph{{(not found in the current build)}}\n")
+    env = "definition" if t.get("kind") == "def" else "theorem"
+    data, hyps = [], []
+    for b in t.get("binders", []):
+        if b["kind"] == "prop":
+            hyps.append((b["name"], tex_of_tree(b["type"], notation)))
+        elif b["kind"] == "data":
+            data.append(latexify._texname(b["name"]))
+    lines = [f"\\begin{{{env}}}[\\texttt{{{latexify._texname(name)}}}]"
+             f"\\label{{{latexify._texlabel(name)}}}"]
+    if role_label:
+        lines.append(f"\\textit{{{role_label}.}}")
+    if data:
+        lines.append("Given " + ", ".join(f"${d}$" for d in data)
+                     + ("." if not hyps else ","))
+    if hyps:
+        lines.append("assume")
+        lines.append(r"\begin{itemize}")
+        for hn, rt in hyps:
+            lines.append(f"  \\item[\\rm({latexify._hyp_label(hn)})] ${rt}$")
+        lines.append(r"\end{itemize}")
+    lead = "Then" if (data or hyps) else "We have"
+    lines.append(f"{lead} \\[ {tex_of_tree(t.get('concl'), notation)} \\]")
+    lines.append(f"\\end{{{env}}}")
+    return "\n".join(lines) + "\n"
+
+
+def render_document(trees, cfg, notation=None, roles=None):
+    notation = notation or {}
+    roles = roles or {}
+    tr = cfg.get("track", {})
+    body = [latexify.PREAMBLE, (cfg.get("latex", {}) or {}).get("preamble", ""),
+            r"\begin{document}",
+            f"\\section*{{{latexify._tex_title(tr.get('title', 'Formal statements'))}}}"]
+    if tr.get("subtitle"):
+        body.append(f"\\noindent\\emph{{{latexify._tex_title(tr['subtitle'])}}}"
+                    r"\par\medskip")
+    body.append(r"\noindent\small Statements machine-translated from the Lean 4 / "
+                r"Mathlib source by \texttt{lean\_track latex -{}-tree}: rendered from the "
+                r"delaborated \emph{Syntax tree} (notation only, content verbatim).\normalsize"
+                r"\par\medskip")
+    for t in trees:
+        body.append(render_theorem(t, notation, roles.get(t["name"])))
+        body.append("")
+    body.append(r"\end{document}")
+    return "\n".join(body)

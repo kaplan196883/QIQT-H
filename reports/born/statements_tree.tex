@@ -1,0 +1,187 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage{newunicodechar}
+% Fallbacks so any unicode that survives in a name / \texttt still compiles.
+\newunicodechar{ᶠ}{\ensuremath{^{f}}}
+\newunicodechar{₀}{\ensuremath{_0}}\newunicodechar{₁}{\ensuremath{_1}}
+\newunicodechar{₂}{\ensuremath{_2}}\newunicodechar{₃}{\ensuremath{_3}}
+\newunicodechar{₄}{\ensuremath{_4}}\newunicodechar{₅}{\ensuremath{_5}}
+\newunicodechar{₆}{\ensuremath{_6}}\newunicodechar{₇}{\ensuremath{_7}}
+\newunicodechar{₈}{\ensuremath{_8}}\newunicodechar{₉}{\ensuremath{_9}}
+\newunicodechar{⁰}{\ensuremath{^0}}\newunicodechar{¹}{\ensuremath{^1}}
+\newunicodechar{²}{\ensuremath{^2}}\newunicodechar{³}{\ensuremath{^3}}
+\newunicodechar{α}{\ensuremath{\alpha}}   \newunicodechar{β}{\ensuremath{\beta}}
+\newunicodechar{γ}{\ensuremath{\gamma}}   \newunicodechar{δ}{\ensuremath{\delta}}
+\newunicodechar{ε}{\ensuremath{\varepsilon}} \newunicodechar{ζ}{\ensuremath{\zeta}}
+\newunicodechar{η}{\ensuremath{\eta}}     \newunicodechar{θ}{\ensuremath{\theta}}
+\newunicodechar{ι}{\ensuremath{\iota}}    \newunicodechar{κ}{\ensuremath{\kappa}}
+\newunicodechar{λ}{\ensuremath{\lambda}}  \newunicodechar{μ}{\ensuremath{\mu}}
+\newunicodechar{ν}{\ensuremath{\nu}}      \newunicodechar{ξ}{\ensuremath{\xi}}
+\newunicodechar{π}{\ensuremath{\pi}}      \newunicodechar{ρ}{\ensuremath{\rho}}
+\newunicodechar{σ}{\ensuremath{\sigma}}   \newunicodechar{τ}{\ensuremath{\tau}}
+\newunicodechar{φ}{\ensuremath{\varphi}}  \newunicodechar{χ}{\ensuremath{\chi}}
+\newunicodechar{ψ}{\ensuremath{\psi}}     \newunicodechar{ω}{\ensuremath{\omega}}
+\newunicodechar{Γ}{\ensuremath{\Gamma}}   \newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{Λ}{\ensuremath{\Lambda}}  \newunicodechar{Σ}{\ensuremath{\Sigma}}
+\newunicodechar{Φ}{\ensuremath{\Phi}}     \newunicodechar{Ψ}{\ensuremath{\Psi}}
+\newunicodechar{Ω}{\ensuremath{\Omega}}   \newunicodechar{Π}{\ensuremath{\Pi}}
+\newunicodechar{ℝ}{\ensuremath{\mathbb{R}}} \newunicodechar{ℂ}{\ensuremath{\mathbb{C}}}
+\newunicodechar{ℕ}{\ensuremath{\mathbb{N}}} \newunicodechar{ℤ}{\ensuremath{\mathbb{Z}}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{axiom}[theorem]{Axiom}
+\setlength{\parindent}{0pt}\setlength{\parskip}{4pt}
+
+
+\begin{document}
+\section*{Born rule}
+\noindent\emph{Target 1 — QIQT-H compatible with Born (spine + no-go audits)}\par\medskip
+\noindent\small Statements machine-translated from the Lean 4 / Mathlib source by \texttt{lean\_track latex -{}-tree}: rendered from the delaborated \emph{Syntax tree} (notation only, content verbatim).\normalsize\par\medskip
+\begin{theorem}[\texttt{QIQTH.BornJoinGleason.finite\_noCollapseBorn\_fromNoncontextuality}]\label{thm:qiqth-bornjoingleason-finite-nocollapseborn-fromnoncontextuality}
+\textit{capstone.}
+Given $m$, $n$, $d$, $E$, $M$, $P$, $k$, $ε$,
+assume
+\begin{itemize}
+  \item[\rm(hP)] $\forall (a : \mathrm{Fin}\,m), \mathrm{IsEffect}\,(P\,a)$
+  \item[\rm(hcal)] $\forall (a : \mathrm{Fin}\,m), M.\mu\,(P\,a) = E.p\,a$
+  \item[\rm(hε)] $0 < \varepsilon$
+  \item[\rm(hn)] $0 < n$
+\end{itemize}
+Then \[ \exists \rho, \rho.\mathrm{PosSemidef} \wedge \rho.\mathrm{trace} = 1 \wedge (\forall (\omega : E.\Omega), \exists !h, \forall (t : \mathrm{Fin}\,n), \exists r\in (E.V\,\omega\,t).\mathrm{config}.\mathrm{active}, (E.V\,\omega\,t).\mathrm{ctx}.\mathrm{valueOf}\,r = h\,t) \wedge (\forall (a : \mathrm{Fin}\,m), E.p\,a = (\rho \cdot P\,a).\mathrm{trace}.\mathrm{re}) \wedge (\forall (h : \mathrm{Fin}\,n \to \mathrm{Fin}\,m), E.P.\mathrm{massSet}\,\{\omega|E.\mathrm{actualHist}\,\omega = h\} = w\,E.p\,h) \wedge E.P.\mathrm{massSet}\,\{\omega|{(n \cdot \varepsilon)}^{2} \le {(\mathrm{count}\,k\,(E.\mathrm{actualHist}\,\omega) - n \cdot E.p\,k)}^{2}\} \le E.p\,k \cdot (1 - E.p\,k) / (n \cdot {\varepsilon}^{2}) \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.EffectGleason.EffectMeasure.finite\_effect\_gleason}]\label{thm:qiqth-effectgleason-effectmeasure-finite-effect-gleason}
+\textit{spine.}
+Given $d$, $m$.
+Then \[ \exists \rho, \rho.\mathrm{PosSemidef} \wedge \rho.\mathrm{trace} = 1 \wedge \forall (E : \mathrm{Matrix}\,(\mathrm{Fin}\,d)\,(\mathrm{Fin}\,d)\,\mathbb{C}), \mathrm{IsEffect}\,E \to (m.\mu\,E) = (\rho \cdot E).\mathrm{trace} \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.GleasonSelector.positive\_ray\_certain\_forces\_born}]\label{thm:qiqth-gleasonselector-positive-ray-certain-forces-born}
+\textit{spine.}
+Given $n$, $ψ$, $w$, $E$,
+assume
+\begin{itemize}
+  \item[\rm(hψ)] $\mathrm{star}\,\psi \cdot _{v} \psi = 1$
+  \item[\rm(hadd)] $\forall (A B : \mathrm{Matrix}\,n\,n\,\mathbb{C}), w\,(A + B) = w\,A + w\,B$
+  \item[\rm(hhom)] $\forall (c : \mathbb{C}) (A : \mathrm{Matrix}\,n\,n\,\mathbb{C}), w\,(c \cdot A) = c \cdot w\,A$
+  \item[\rm(hpsd)] $\forall (A : \mathrm{Matrix}\,n\,n\,\mathbb{C}), \mathrm{NonnegC}\,(w\,(A.\mathrm{conjTranspose} \cdot A))$
+  \item[\rm(hray)] $w\,(\mathrm{vecMulVec}\,\psi\,(\mathrm{star}\,\psi)) = 1$
+  \item[\rm(hone)] $w\,1 = 1$
+\end{itemize}
+Then \[ w\,E = \mathrm{born}\,\psi\,E \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.RefinementBorn.continuous\_additive\_fMeasure\_eq\_born}]\label{thm:qiqth-refinementborn-continuous-additive-fmeasure-eq-born}
+\textit{spine.}
+Given $n$, $f$, $w$, $k$,
+assume
+\begin{itemize}
+  \item[\rm(hf)] $\mathrm{Continuous}\,f$
+  \item[\rm(h1)] $f\,1 \ne 0$
+  \item[\rm(hsum)] $\sum_{j} w\,j = 1$
+\end{itemize}
+Then \[ \mathrm{fMeasure}\,(f)\,w\,k = w\,k \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.RecordGleason.decoherent\_partition\_additive}]\label{thm:qiqth-recordgleason-decoherent-partition-additive}
+\textit{spine.}
+Given $n$, $ψ$, $ι$, $C$, $S$,
+assume
+\begin{itemize}
+  \item[\rm(hdec)] $\mathrm{Decoherent}\,\psi\,C$
+\end{itemize}
+Then \[ \mathrm{born}\,\psi\,((\sum_{a S} C\,a).\mathrm{conjTranspose} \cdot \sum_{a S} C\,a) = \sum_{a S} \mathrm{born}\,\psi\,((C\,a).\mathrm{conjTranspose} \cdot C\,a) \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.BornJoin.ActualEnsemble.finite\_noCollapseBornRepresentation}]\label{thm:qiqth-bornjoin-actualensemble-finite-nocollapsebornrepresentation}
+\textit{spine.}
+Given $m$, $n$, $E$, $k$, $ε$,
+assume
+\begin{itemize}
+  \item[\rm(hε)] $0 < \varepsilon$
+  \item[\rm(hn)] $0 < n$
+\end{itemize}
+Then \[ (\forall (\omega : E.\Omega), \exists !h, \forall (t : \mathrm{Fin}\,n), \exists r\in (E.V\,\omega\,t).\mathrm{config}.\mathrm{active}, (E.V\,\omega\,t).\mathrm{ctx}.\mathrm{valueOf}\,r = h\,t) \wedge (\forall (h : \mathrm{Fin}\,n \to \mathrm{Fin}\,m), E.P.\mathrm{massSet}\,\{\omega|E.\mathrm{actualHist}\,\omega = h\} = w\,E.p\,h) \wedge E.P.\mathrm{massSet}\,\{\omega|{(n \cdot \varepsilon)}^{2} \le {(\mathrm{count}\,k\,(E.\mathrm{actualHist}\,\omega) - n \cdot E.p\,k)}^{2}\} \le E.p\,k \cdot (1 - E.p\,k) / (n \cdot {\varepsilon}^{2}) \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.BornMeasureUniqueness.product\_born\_measure\_unique}]\label{thm:qiqth-bornmeasureuniqueness-product-born-measure-unique}
+\textit{spine.}
+Given $n$, $d$, $m$, $ρ$, $E$, $μ$, $S$,
+assume
+\begin{itemize}
+  \item[\rm(hρ)] $\rho.\mathrm{PosSemidef}$
+  \item[\rm(hE)] $\forall (k : \mathrm{Fin}\,m), (E\,k).\mathrm{PosSemidef}$
+  \item[\rm(hμ0)] $\mu\,\emptyset = 0$
+  \item[\rm(hμins)] $\forall (a : \mathrm{Fin}\,n \to \mathrm{Fin}\,m) (S : \mathrm{Finset}\,(\mathrm{Fin}\,n \to \mathrm{Fin}\,m)), a\notin S \to \mu\,(\mathrm{insert}\,a\,S) = \mu\,\{a\} + \mu\,S$
+  \item[\rm(hpt)] $\forall (\omega : \mathrm{Fin}\,n \to \mathrm{Fin}\,m), \mu\,\{\omega\} = \prod_{t} \mathrm{bornProb}\,\rho\,E\,(\omega\,t)$
+\end{itemize}
+Then \[ \mu\,S = ((\mathrm{kronN}\,\lambda x \mapsto \rho) \cdot \mathrm{eventEffect}\,E\,S).\mathrm{trace}.\mathrm{re} \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.BornTypicalityFinite.chebyshev\_freq}]\label{thm:qiqth-borntypicalityfinite-chebyshev-freq}
+\textit{spine.}
+Given $m$, $N$, $p$, $k$, $ε$,
+assume
+\begin{itemize}
+  \item[\rm(hp)] $\forall (i : \mathrm{Fin}\,m), 0 \le p\,i$
+  \item[\rm(hp1)] $\sum_{i} p\,i = 1$
+  \item[\rm(hε)] $0 < \varepsilon$
+  \item[\rm(hN)] $0 < N$
+\end{itemize}
+Then \[ \sum_{\omega} w\,p\,\omega \le p\,k \cdot (1 - p\,k) / (N \cdot {\varepsilon}^{2}) \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.BornTypicality.qiqth\_born\_typicality\_conditional}]\label{thm:qiqth-borntypicality-qiqth-born-typicality-conditional}
+\textit{spine.}
+Given $Γ$, $Outcome$, $outcome$, $c$, $M$, $k$.
+Then \[ \mathrm{expectedIndicator}\,\mathrm{outcome}\,M.\mu\,k = {c\,k}^{2} \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.NoBornFromNothing.born\_distribution\_realizable\_conditional}]\label{thm:qiqth-nobornfromnothing-born-distribution-realizable-conditional}
+\textit{nogo.}
+Given $Γ$, $Outcome$, $outcome$, $c$,
+assume
+\begin{itemize}
+  \item[\rm(h\_surj)] $\mathrm{Surjective}\,\mathrm{outcome}$
+  \item[\rm(hc\_norm)] $\sum_{k} {c\,k}^{2} = 1$
+\end{itemize}
+Then \[ \exists \mu, (\forall (\gamma : \Gamma), 0 \le \mu\,\gamma) \wedge \sum_{\gamma} \mu\,\gamma = 1 \wedge \forall (k : \mathrm{Outcome}), \mathrm{outcomeMarginal}\,\mathrm{outcome}\,\mu\,k = {c\,k}^{2} \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.NoConcentration.decoherence\_does\_not\_concentrate}]\label{thm:qiqth-noconcentration-decoherence-does-not-concentrate}
+\textit{nogo.}
+Given $c$,
+assume
+\begin{itemize}
+  \item[\rm(h0)] $c\,0 \ne 0$
+  \item[\rm(h1)] $c\,1 \ne 0$
+\end{itemize}
+Then \[ 0 < \mathrm{branchWeight}\,c\,0 \wedge 0 < \mathrm{branchWeight}\,c\,1 \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.EquivarianceGap.support\_preservation\_does\_not\_imply\_measure\_preservation}]\label{thm:qiqth-equivariancegap-support-preservation-does-not-imply-measure-preservation}
+\textit{nogo.}
+We have \[ \exists T \mu, \mathrm{Bijective}\,T \wedge \mathrm{SupportPreserving}\,\mathrm{univ}\,T \wedge \neg \mathrm{MeasurePreserving}\,T\,\mu \]
+\end{theorem}
+
+
+\begin{theorem}[\texttt{QIQTH.OperationalNoGo.operational\_data\_insufficient}]\label{thm:qiqth-operationalnogo-operational-data-insufficient}
+\textit{nogo.}
+We have \[ \exists \mathrm{outcome} \nu_{1} \nu_{2}, (\forall (k : \mathrm{Fin}\,2), \mathrm{marginal3to2}\,\nu_{1}\,\mathrm{outcome}\,k = \mathrm{marginal3to2}\,\nu_{2}\,\mathrm{outcome}\,k) \wedge \nu_{1} \ne \nu_{2} \]
+\end{theorem}
+
+
+\end{document}

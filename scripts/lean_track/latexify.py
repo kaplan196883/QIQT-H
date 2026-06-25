@@ -32,7 +32,7 @@ SYMBOLS = {
     "∇": r"\nabla ", "√": r"\sqrt ", "∞": r"\infty ", "∘": r"\circ ",
     # arithmetic / algebra
     "×": r"\times ", "⊗": r"\otimes ", "⊕": r"\oplus ", "·": r"\cdot ",
-    "•": r"\cdot ", "∙": r"\cdot ", "±": r"\pm ", "∓": r"\mp ",
+    "•": r"\cdot ", "∙": r"\cdot ", "⬝": r"\cdot ", "±": r"\pm ", "∓": r"\mp ",
     "⊤": r"\top ", "⊥": r"\bot ", "†": r"^{\dagger}",
     # blackboard
     "ℝ": r"\mathbb{R}", "ℂ": r"\mathbb{C}", "ℕ": r"\mathbb{N}",
@@ -67,7 +67,7 @@ SUPERS = {"⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4", "⁵": "5", "
 SUBS = {"₀": "0", "₁": "1", "₂": "2", "₃": "3", "₄": "4", "₅": "5", "₆": "6",
         "₇": "7", "₈": "8", "₉": "9", "₊": "+", "₋": "-", "ₙ": "n", "ᵢ": "i",
         "ⱼ": "j", "ₖ": "k", "ₗ": "l", "ₘ": "m", "ₚ": "p", "ᵣ": "r", "ₛ": "s",
-        "ₜ": "t"}
+        "ₜ": "t", "ᵥ": "v", "ᵤ": "u", "ₕ": "h", "ₓ": "x", "ₒ": "o", "ₑ": "e"}
 
 # Lean keywords that survive pretty-printing -> their math-mode rendering.
 KW_TEX = {
@@ -381,6 +381,13 @@ PREAMBLE = r"""\documentclass[11pt]{article}
 \usepackage{newunicodechar}
 % Fallbacks so any unicode that survives in a name / \texttt still compiles.
 \newunicodechar{ᶠ}{\ensuremath{^{f}}}
+\newunicodechar{₀}{\ensuremath{_0}}\newunicodechar{₁}{\ensuremath{_1}}
+\newunicodechar{₂}{\ensuremath{_2}}\newunicodechar{₃}{\ensuremath{_3}}
+\newunicodechar{₄}{\ensuremath{_4}}\newunicodechar{₅}{\ensuremath{_5}}
+\newunicodechar{₆}{\ensuremath{_6}}\newunicodechar{₇}{\ensuremath{_7}}
+\newunicodechar{₈}{\ensuremath{_8}}\newunicodechar{₉}{\ensuremath{_9}}
+\newunicodechar{⁰}{\ensuremath{^0}}\newunicodechar{¹}{\ensuremath{^1}}
+\newunicodechar{²}{\ensuremath{^2}}\newunicodechar{³}{\ensuremath{^3}}
 \newunicodechar{α}{\ensuremath{\alpha}}   \newunicodechar{β}{\ensuremath{\beta}}
 \newunicodechar{γ}{\ensuremath{\gamma}}   \newunicodechar{δ}{\ensuremath{\delta}}
 \newunicodechar{ε}{\ensuremath{\varepsilon}} \newunicodechar{ζ}{\ensuremath{\zeta}}
