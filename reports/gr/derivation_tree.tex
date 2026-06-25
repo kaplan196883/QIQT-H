@@ -1,0 +1,96 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage{newunicodechar}
+% Fallbacks so any unicode that survives in a name / \texttt still compiles.
+\newunicodechar{ᶠ}{\ensuremath{^{f}}}
+\newunicodechar{α}{\ensuremath{\alpha}}   \newunicodechar{β}{\ensuremath{\beta}}
+\newunicodechar{γ}{\ensuremath{\gamma}}   \newunicodechar{δ}{\ensuremath{\delta}}
+\newunicodechar{ε}{\ensuremath{\varepsilon}} \newunicodechar{ζ}{\ensuremath{\zeta}}
+\newunicodechar{η}{\ensuremath{\eta}}     \newunicodechar{θ}{\ensuremath{\theta}}
+\newunicodechar{ι}{\ensuremath{\iota}}    \newunicodechar{κ}{\ensuremath{\kappa}}
+\newunicodechar{λ}{\ensuremath{\lambda}}  \newunicodechar{μ}{\ensuremath{\mu}}
+\newunicodechar{ν}{\ensuremath{\nu}}      \newunicodechar{ξ}{\ensuremath{\xi}}
+\newunicodechar{π}{\ensuremath{\pi}}      \newunicodechar{ρ}{\ensuremath{\rho}}
+\newunicodechar{σ}{\ensuremath{\sigma}}   \newunicodechar{τ}{\ensuremath{\tau}}
+\newunicodechar{φ}{\ensuremath{\varphi}}  \newunicodechar{χ}{\ensuremath{\chi}}
+\newunicodechar{ψ}{\ensuremath{\psi}}     \newunicodechar{ω}{\ensuremath{\omega}}
+\newunicodechar{Γ}{\ensuremath{\Gamma}}   \newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{Λ}{\ensuremath{\Lambda}}  \newunicodechar{Σ}{\ensuremath{\Sigma}}
+\newunicodechar{Φ}{\ensuremath{\Phi}}     \newunicodechar{Ψ}{\ensuremath{\Psi}}
+\newunicodechar{Ω}{\ensuremath{\Omega}}   \newunicodechar{Π}{\ensuremath{\Pi}}
+\newunicodechar{ℝ}{\ensuremath{\mathbb{R}}} \newunicodechar{ℂ}{\ensuremath{\mathbb{C}}}
+\newunicodechar{ℕ}{\ensuremath{\mathbb{N}}} \newunicodechar{ℤ}{\ensuremath{\mathbb{Z}}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{axiom}[theorem]{Axiom}
+\setlength{\parindent}{0pt}\setlength{\parskip}{4pt}
+
+\begin{document}
+\section*{QIQT-H \(\to\) GR — rendered from the delaborated \emph{Syntax tree}}
+\noindent\small Prototype: rendered by \texttt{lean\_track latex\_tree} directly from the parenthesized Lean Syntax tree (no string heuristics).\normalsize\par\medskip
+\begin{theorem}[\texttt{QIQTH.QiqtToGR.qiqt\_bekenstein\_gives\_gr}]
+Given $g$, $gi$, $T$, $η$, $hbar$, $a$, $P$, $Pinv$, $S$, $KE$, $A$, $sd$, $kd$, $ad$.
+\begin{itemize}
+  \item[\rm(hsymm)] $\forall (y : M^{{4}}) (a b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})$
+  \item[\rm(hsymm\_gi)] $\forall (y : M^{{4}}) (a b : \mathrm{Fin}\,4), g^{{a}{b}}({y}) = g^{{b}{a}}({y})$
+  \item[\rm(hinv)] $\forall (y : M^{{4}}) (a b : \mathrm{Fin}\,4), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}$
+  \item[\rm(hCg)] $\forall (a b : \mathrm{Fin}\,4), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}$
+  \item[\rm(hCgi)] $\forall (a b : \mathrm{Fin}\,4), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}$
+  \item[\rm(hbar0)] $\hbar \ne 0$
+  \item[\rm(heta)] $\eta \ne 0$
+  \item[\rm(ha)] $a = 2 \cdot \pi / (\hbar \cdot \eta)$
+  \item[\rm(hT\_symm)] $\forall (x : M^{{4}}) (a^{\prime} b : \mathrm{Fin}\,4), T_{{a^{\prime}}{b}}({x}) = T_{{b}{a^{\prime}}}({x})$
+  \item[\rm(hPP)] $\forall (x : M^{{4}}) (i j : \mathrm{Fin}\,4), \sum_{k} P_{{i}{k}}({x}) \cdot (P^{-1})_{{k}{j}}({x}) = \delta_{ij}$
+  \item[\rm(hPP)] $\forall (x : M^{{4}}) (i j : \mathrm{Fin}\,4), \sum_{k} (P^{-1})_{{i}{k}}({x}) \cdot P_{{k}{j}}({x}) = \delta_{ij}$
+  \item[\rm(hcong)] $\forall (x : M^{{4}}) (i j : \mathrm{Fin}\,4), g_{{i}{j}}({x}) = \sum_{k} \sum_{l} P_{{k}{i}}({x}) \cdot \eta_{{k}{l}} \cdot P_{{l}{j}}({x})$
+  \item[\rm(hS)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), ({g\,x})({v},{v}) = 0 \to ({S\,x\,v})'({0})={\dot{S}({x},{v})}$
+  \item[\rm(hK)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), ({g\,x})({v},{v}) = 0 \to ({\mathrm{KE}\,x\,v})'({0})={\dot{K}({x},{v})}$
+  \item[\rm(hA)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), ({g\,x})({v},{v}) = 0 \to ({A\,x\,v})'({0})={\dot{A}({x},{v})}$
+  \item[\rm(hbound)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), ({g\,x})({v},{v}) = 0 \to \text{for }t\text{ near }0,\; S({x},{v},{t}) \le \eta \cdot A({x},{v},{t})$
+  \item[\rm(hsat)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), ({g\,x})({v},{v}) = 0 \to S({x},{v},{0}) = \eta \cdot A({x},{v},{0})$
+  \item[\rm(hDnn)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), ({g\,x})({v},{v}) = 0 \to \forall (t : \mathbb{R}), 0 \le \mathrm{KE}({x},{v},{t}) - S({x},{v},{t})$
+  \item[\rm(hD0)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), ({g\,x})({v},{v}) = 0 \to \mathrm{KE}({x},{v},{0}) - S({x},{v},{0}) = 0$
+  \item[\rm(hFlux)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), ({g\,x})({v},{v}) = 0 \to \dot{K}({x},{v}) = 2 \cdot \pi / \hbar \cdot ({T\,x})({v},{v})$
+  \item[\rm(hFocus)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), ({g\,x})({v},{v}) = 0 \to \dot{A}({x},{v}) = ({\lambda i j \mapsto R_{{i}{j}}({x})})({v},{v})$
+  \item[\rm(hreg)] $\forall (f : M^{{4}} \to \mathbb{R}), (\forall (y : M^{{4}}) (a^{\prime} b : \mathrm{Fin}\,4), a \cdot T_{{a^{\prime}}{b}}({y}) = R_{{a^{\prime}}{b}}({y}) + f\,y \cdot g_{{a^{\prime}}{b}}({y})) \to (\forall (x : M^{{4}}) (\rho : \mathrm{Fin}\,4), \mathrm{PdiffAt}\,f\,\rho\,x) \wedge \mathrm{Differentiable}\,\mathbb{R}\,\lambda y \mapsto f\,y + 1/2 \cdot R({y})$
+  \item[\rm(conserv)] $\forall (x : M^{{4}}) (\nu : \mathrm{Fin}\,4), (\nabla\!\cdot {\lambda y a^{\prime} b \mapsto a \cdot T_{{a^{\prime}}{b}}({y})})_{{\nu}}({x}) = 0$
+\end{itemize}
+Then \[ \exists \Lambda, \forall (x : M^{{4}}) (\mu \nu : \mathrm{Fin}\,4), a \cdot T_{{\mu}{\nu}}({x}) = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) \]
+\end{theorem}
+\begin{theorem}[\texttt{QIQTH.WedgeKMSToGR.qiqt\_gr\_freefield\_complete}]
+Given $ι$, $g$, $gi$, $φ$, $m$, $η$, $hbar$, $a$, $P$, $Pinv$, $A$, $sd$, $pp$, $W$, $mw$.
+\begin{itemize}
+  \item[\rm(inst.\_@.QIQTH.QiqtGrComplete.4163739781.\_hygCtx.\_hyg.6)] $\mathrm{Nonempty}\,\iota$
+  \item[\rm(hsymm)] $\forall (y : M^{{4}}) (a b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})$
+  \item[\rm(hsymm\_gi)] $\forall (y : M^{{4}}) (a b : \mathrm{Fin}\,4), g^{{a}{b}}({y}) = g^{{b}{a}}({y})$
+  \item[\rm(hinv)] $\forall (y : M^{{4}}) (a b : \mathrm{Fin}\,4), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}$
+  \item[\rm(hCg)] $\forall (a b : \mathrm{Fin}\,4), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}$
+  \item[\rm(hCgi)] $\forall (a b : \mathrm{Fin}\,4), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}$
+  \item[\rm(hbar0)] $\hbar \ne 0$
+  \item[\rm(hbar\_pos)] $0 < \hbar$
+  \item[\rm(heta)] $\eta \ne 0$
+  \item[\rm(ha)] $a = 2 \cdot \pi / (\hbar \cdot \eta)$
+  \item[\rm(hφ)] $({\varphi})\in C^{\infty}$
+  \item[\rm(hKG)] $\forall (x : M^{{4}}), (\Box {\varphi})({x}) = {m}^{2} \cdot \varphi\,x$
+  \item[\rm(hPP)] $\forall (x : M^{{4}}) (i j : \mathrm{Fin}\,4), \sum_{k} P_{{i}{k}}({x}) \cdot (P^{-1})_{{k}{j}}({x}) = \delta_{ij}$
+  \item[\rm(hPP)] $\forall (x : M^{{4}}) (i j : \mathrm{Fin}\,4), \sum_{k} (P^{-1})_{{i}{k}}({x}) \cdot P_{{k}{j}}({x}) = \delta_{ij}$
+  \item[\rm(hcong)] $\forall (x : M^{{4}}) (i j : \mathrm{Fin}\,4), g_{{i}{j}}({x}) = \sum_{k} \sum_{l} P_{{k}{i}}({x}) \cdot \eta_{{k}{l}} \cdot P_{{l}{j}}({x})$
+  \item[\rm(hpp\_nn)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}) (t : \mathbb{R}) (r : \iota), 0 \le p\,x\,v\,t\,r$
+  \item[\rm(hpp1)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}) (t : \mathbb{R}), \sum_{r} p\,x\,v\,t\,r = 1$
+  \item[\rm(hpp0)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), p\,x\,v\,0 = \lambda x \mapsto {((\#\,\iota))}^{-1}$
+  \item[\rm(hcap)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \eta \cdot A({x},{v},{0}) = \log\,(\#\,\iota)$
+  \item[\rm(hWx)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), ({g\,x})({v},{v}) = 0 \to W\,x\,v\,x = v$
+  \item[\rm(hWC)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}) (\mu : \mathrm{Fin}\,4), ({\lambda y \mapsto W\,x\,v\,y\,\mu})\in C^{\infty}$
+  \item[\rm(hWgeo)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}) (y : M^{{4}}) (\mu : \mathrm{Fin}\,4), \sum_{\nu} W\,x\,v\,y\,\nu \cdot (\nabla {W\,x\,v})_{{\nu}}{}^{{\mu}}({y}) = 0$
+  \item[\rm(hWequil)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), ({g\,x})({v},{v}) = 0 \to \sum_{\mu} \sum_{\nu} (\nabla {W\,x\,v})_{{\mu}}{}^{{\nu}}({x}) \cdot (\nabla {W\,x\,v})_{{\nu}}{}^{{\mu}}({x}) = 0$
+  \item[\rm(hS)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), ({g\,x})({v},{v}) = 0 \to ({\lambda t \mapsto S({p\,x\,v\,t})})'({0})={\dot{S}({x},{v})}$
+  \item[\rm(hK)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), ({g\,x})({v},{v}) = 0 \to ({\lambda t \mapsto S({p\,x\,v\,t}) + D_{\mathrm{KL}}({p\,x\,v\,t}\,\|\,{p\,x\,v\,0})})'({0})={2 \cdot \pi / \hbar \cdot ({T({x})})({v},{v})}$
+  \item[\rm(hA)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), ({g\,x})({v},{v}) = 0 \to ({A\,x\,v})'({0})={-\sum_{\nu} W\,x\,v\,x\,\nu \cdot \partial_{{\nu}}({\lambda y \mapsto \theta({y})})({x})}$
+  \item[\rm(hbound)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), ({g\,x})({v},{v}) = 0 \to \text{for }t\text{ near }0,\; S({p\,x\,v\,t}) \le \eta \cdot A({x},{v},{t})$
+  \item[\rm(hmw)] $\forall (x : M^{{4}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v$
+\end{itemize}
+Then \[ \exists \Lambda, \forall (x : M^{{4}}) (\mu \nu : \mathrm{Fin}\,4), a \cdot T({x})\,\mu\,\nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) \]
+\end{theorem}
+\end{document}

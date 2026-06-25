@@ -16,6 +16,7 @@ MATHLIB = REPO / "lean" / "mathlib"
 LAKE = os.path.expanduser("~/.elan/bin/lake")
 EXTRACT_TMPL = HERE / "probe_extract.lean.tmpl"
 DISCHARGE_TMPL = HERE / "probe_discharge.lean.tmpl"
+SYNTAX_TMPL = HERE / "probe_syntax.lean.tmpl"
 STANDARD_AXIOMS = ["propext", "Classical.choice", "Quot.sound"]
 
 
@@ -73,3 +74,8 @@ def extract(names, cfg):
 def discharge(names, cfg):
     return _run_probe(DISCHARGE_TMPL, names, cfg["project"]["lean_import"],
                       cfg["project"]["timeout_sec"], "pr")
+
+
+def syntax_trees(names, cfg):
+    return _run_probe(SYNTAX_TMPL, names, cfg["project"]["lean_import"],
+                      cfg["project"]["timeout_sec"], "sx")

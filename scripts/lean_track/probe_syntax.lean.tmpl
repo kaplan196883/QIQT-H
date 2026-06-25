@@ -1,0 +1,67 @@
+/-
+  AUTO-GENERATED Syntax-tree probe (written by lean_track). Lean facts only.
+  Delaborates each target's conclusion and hypothesis types to a `Syntax` tree and
+  serializes that tree to JSON (node kind + children). Emits a JSON array to the
+  file @@OUTPUT@@. Placeholders @@IMPORT@@, @@TARGETS@@, @@OUTPUT@@ filled by Python.
+
+  Rationale: rendering from the delaborated Syntax tree (which already has Mathlib
+  notation applied) gives exact application arity and structure, removing the
+  string-reconstruction heuristics in latexify.py.
+-/
+import @@IMPORT@@
+
+open Lean Elab Command Meta PrettyPrinter
+
+def reportTargets : List Name := [@@TARGETS@@]
+
+partial def synToJson : Syntax → Json
+  | Syntax.missing => Json.mkObj [("k", Json.str "missing")]
+  | Syntax.atom _ v => Json.mkObj [("k", Json.str "atom"), ("v", Json.str v)]
+  | Syntax.ident _ _ v _ =>
+      Json.mkObj [("k", Json.str "ident"), ("v", Json.str v.toString)]
+  | Syntax.node _ kind args =>
+      Json.mkObj [("k", Json.str "node"), ("kind", Json.str kind.toString),
+                  ("args", Json.arr (args.map synToJson))]
+
+def binfo : BinderInfo → String
+  | .default => "explicit" | .implicit => "implicit"
+  | .strictImplicit => "strictImplicit" | .instImplicit => "instance"
+
+/-- Delaborate `e` and run Lean's own parenthesizer, so precedence parentheses are
+    materialised as `paren` nodes in the tree (delab alone omits them). -/
+def delabP (e : Expr) : MetaM (Option Syntax) :=
+  (do
+    let t ← delab e
+    let s ← parenthesizeTerm t.raw
+    pure (some s)) <|> (do
+      try pure (some (← delab e).raw) catch _ => pure none)
+
+def probeOne (tgt : Name) : MetaM Json := do
+  let infoOpt ← (do try pure (some (← getConstInfo tgt)) catch _ => pure none)
+  match infoOpt with
+  | none => return Json.mkObj [("name", Json.str tgt.toString), ("present", Json.bool false)]
+  | some info =>
+    forallTelescopeReducing info.type fun args concl => do
+      let mut binders : Array Json := #[]
+      for a in args do
+        let ld ← a.fvarId!.getDecl
+        let isP ← isProp ld.type
+        let bk := if isP then "prop"
+                  else if ld.binderInfo == .instImplicit then "instance" else "data"
+        let stx ← delabP ld.type
+        let tyJson := match stx with | some s => synToJson s | none => Json.null
+        binders := binders.push (Json.mkObj [
+          ("name", Json.str ld.userName.toString),
+          ("kind", Json.str bk),
+          ("type", tyJson)])
+      let cStx ← delabP concl
+      let cJson := match cStx with | some s => synToJson s | none => Json.null
+      return Json.mkObj [
+        ("name", Json.str tgt.toString), ("present", Json.bool true),
+        ("binders", Json.arr binders), ("concl", cJson)]
+
+run_cmd liftTermElabM do
+  let mut objs : Array Json := #[]
+  for tgt in reportTargets do
+    objs := objs.push (← probeOne tgt)
+  IO.FS.writeFile "@@OUTPUT@@" (Json.arr objs).compress
