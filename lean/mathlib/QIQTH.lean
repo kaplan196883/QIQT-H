@@ -336,6 +336,9 @@ import QIQTH.CrossedProduct
 -- The Wall, Phase 1.1: measurability of the matter-rep fiber s ↦ σ_{-s}(a)(ξ s) on L²(ℝ;H) — toward π(a)
 -- as an operator on the crossed-product Hilbert space (operator-valued Lp multiplication).
 import QIQTH.CrossedProductRep
+-- The Wall, Phase 2.1: the clock translation λ_t ξ = ξ(·+t) as a ℂ-linear isometry on L²(ℝ;H) — the L²(ℝ)
+-- clock factor of the crossed product (via Mathlib compMeasurePreservingₗᵢ).
+import QIQTH.CrossedProductTranslation
 -- MODULAR RELATIVE ENTROPY (Phase B, one-particle / standard-subspace continuum object): the
 -- Casini–Grillo–Pontello relative entropy of a coherent state vs vacuum, as the SCALAR spectral
 -- integral S(ξ)=−∫log((2−r)/r)dμ^R_ξ over the bounded RvD operator R=P+Q (no unbounded log Δ).

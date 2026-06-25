@@ -4360,6 +4360,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.matterRep_one
 #print axioms QIQTH.StandardSubspaceModular.matterRep_mul
 #print axioms QIQTH.StandardSubspaceModular.modularAut_adjoint
+-- The Wall Phase 2.1: the clock translation λ_t = ξ(·+t) as a ℂ-linear isometry on L²(ℝ;H):
+#print axioms QIQTH.StandardSubspaceModular.clockTransl
+#print axioms QIQTH.StandardSubspaceModular.clockTransl_coeFn
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable

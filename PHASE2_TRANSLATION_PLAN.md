@@ -61,4 +61,12 @@ the data for Phase 3's covariance `λ_t π(a) λ_{-t} = π(σ_t a)`.  The clock 
 sub-step with the `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>` trailer; push via schannel; refresh.
 
 ## Progress log
-- (none yet — Sub-step 2.1 next)
+- **Sub-step 2.1 ✅** (`QIQTH/CrossedProductTranslation.lean`) — `clockTransl t : L²(ℝ;H) →L[ℂ] L²(ℝ;H)`,
+  `(λ_t ξ)(s) = ξ(s+t)`, built from Mathlib's **`Lp.compMeasurePreservingₗᵢ ℂ`** (a ready ℂ-linear isometry —
+  no hand-rolled `map_smul`), with `clockTransl_apply`, `clockTransl_coeFn` (`λ_t ξ =ᵐ fun s => ξ(s+t)`), and
+  `clockTransl_norm` (isometry `‖λ_t ξ‖ = ‖ξ‖`). `measurePreserving_addRight_volume` (translation is volume-MP).
+  Axiom-free (std 3); wired into AxiomAudit; budget 0. *(The `compMeasurePreservingₗᵢ` form sidestepped the
+  AddMonoidHom→CLM bundling entirely — Phase 2.1 was a clean one-shot.)*
+- **NEXT: Sub-step 2.2** — the group law `clockTransl 0 = 1`, `clockTransl (s+t) = clockTransl s ∘L clockTransl t`
+  (via `Lp.compMeasurePreserving_comp`/`_id`; the dependent measure-preserving proofs + the function
+  decomposition `(·+(s+t)) = (·+t)∘(·+s)` need care, or the `coeFn` + `ae_eq_comp` route). Then 2.3 (unitarity).
