@@ -547,6 +547,15 @@ theorem boundedFC_expSymbol_add {f : Ω → ℝ} (hf : Measurable f) (s t : ℝ)
   exact P.boundedFC_congr (measurable_expSymbol hf (s + t)) zero_le_one
     (norm_expSymbol_le (f := f) (s + t)) hpm zero_le_one hpb hsym
 
+/-- **The FC-exponential group identity** `∫ e^{i·0·f} dE = 1`: `boundedFC(e^{i·0·f}) = 1` (the `t = 0`
+    element of the one-parameter group `exp(itK)`). -/
+theorem boundedFC_expSymbol_zero {f : Ω → ℝ} (hf : Measurable f) :
+    P.boundedFC (measurable_expSymbol hf 0) zero_le_one (norm_expSymbol_le 0) = 1 := by
+  have hsym : (fun ω => Complex.exp (Complex.I * ((0 : ℝ) : ℂ) * (f ω : ℂ))) = fun _ => (1 : ℂ) := by
+    funext ω; simp
+  rw [P.boundedFC_congr _ _ _ measurable_const (norm_nonneg (1 : ℂ)) (fun _ => le_rfl) hsym,
+    P.boundedFC_const, one_smul]
+
 /-- **The FC-exponential is an isometry/unitary** `(∫e^{itf}dE)† (∫e^{itf}dE) = 1`:
     `boundedFC(e^{itf})† · boundedFC(e^{itf}) = 1`.  From `boundedFC_adjoint_mul_self` (`T†T = boundedFC(|g|²)`)
     with `|e^{itf}|² = 1`.  Together with `boundedFC_expSymbol_add` (the group law) this is the full

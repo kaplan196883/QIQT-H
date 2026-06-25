@@ -1233,6 +1233,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_expSymbol_adjoint_mul
 -- FC-exponential UNITARITY: boundedFC(e^{itf})†·boundedFC(e^{itf}) = 1 (|e^{itf}|²=1 via boundedFC_adjoint_mul_self).
 -- With the group law: exp(itK) is a one-parameter UNITARY group — full bounded content of Δ^{it}=e^{−itK}.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_expSymbol_zero
+-- the group identity boundedFC(e^{i·0·f}) = 1 — completes the group axioms (id + compose + inverse) of exp(itK).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_integral_tendsto
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_inner_self
 -- ★ M2 operator-level first law: ⟨x,(∫f dE)x⟩ = ∫ f dμ_x (L¹ DCT tail-conv + inner continuity) — for

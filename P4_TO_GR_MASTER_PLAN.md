@@ -152,6 +152,8 @@ item.** Never claim the `1/4`.
   `boundedFC(e^{itf})†·boundedFC(e^{itf})=1` via `boundedFC_adjoint_mul_self` with `|e^{itf}|²=1`). So for any PVM,
   `exp(itK)` is a one-parameter **unitary** group — the **full bounded-operator content of `Δ^{it}=e^{−itK}`**;
   only the generator-derivative link `d/dt(·)|₀ = i·K` to `K` (Stone reconstruction) stays the gap.
+  (Group axioms complete: `boundedFC_expSymbol_zero` identity + `_add` composition + `_adjoint_mul` inverse.
+  Strong continuity → the full Stone *hypothesis* is the natural next completion, separate from the generator.)
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)
 - [ ] **M5** — dual-weight trace + JLMS + FQ bound
