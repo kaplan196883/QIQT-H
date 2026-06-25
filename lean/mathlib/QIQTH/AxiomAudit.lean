@@ -4955,6 +4955,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussianStateEntropy.twoModeSqueezedSympEig_half_iff
 #print axioms QIQTH.GaussianStateEntropy.twoModeSqueezed_entropy_pos
 #print axioms QIQTH.GaussianStateEntropy.twoModeSqueezed_entropy_zero
+-- the n=1 Williamson case: symplectic eigenvalue ν=√det from a 2×2 covariance; uncertainty det≥1/4 ⟹ ν≥½.
+#print axioms QIQTH.GaussianStateEntropy.oneModeSympEig_ge_half
+#print axioms QIQTH.GaussianStateEntropy.oneModeSympEig_pure
+#print axioms QIQTH.GaussianStateEntropy.oneModeSympEig_entropy_nonneg
 
 -- Tier A1 of QIQT_GR_DISCHARGEABLE_PLAN: discharge hric_symm.
 #print axioms QIQTH.Curvature.ricci_symm

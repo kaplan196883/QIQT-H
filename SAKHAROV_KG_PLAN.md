@@ -156,8 +156,14 @@ entanglement = `A/4G_ind`); Solodukhin, *Living Rev. Rel.* 14 (2011) 8 (review, 
   remaining (cited) physics: for a lattice ground state those entangled modes localize at the region's
   **boundary** (the Williamson symplectic spectrum), turning the count into `∝ boundary size`. That last step
   is the labelled frontier.
-- **PLAN COMPLETE** (A+B+C+/++/+++; only the N-site lattice-*scaling* via the full Williamson spectrum is the
-  labelled frontier). Net: the `1/4` is derived (geometric, non-circular — A+B); the Srednicki entropy formula
+- **Stage C⁴ ✅ (the symplectic eigenvalue from a covariance matrix — `n=1` Williamson)** — `oneModeSympEig
+  a b c := √(ab−c²)` (the single-mode symplectic eigenvalue = `√det` of the `2×2` covariance `[[a,c],[c,b]]`),
+  with `oneModeSympEig_ge_half` (the Heisenberg uncertainty bound `det ≥ 1/4` ⟹ `ν ≥ 1/2`), `oneModeSympEig_pure`
+  (saturated bound `det=1/4` ⟹ pure floor), and `oneModeSympEig_entropy_nonneg`. This is the **first real piece
+  of Williamson** — it grounds `ν` in physical *covariance data* (not an abstract input), for the tractable
+  `n=1` case. The `N`-mode reduction (diagonalizing the `2N×2N` covariance by a symplectic transformation)
+  stays the labelled frontier. Axiom-free, budget 0, full build green.
+- **PLAN COMPLETE** (A+B+C+/++/+++/⁴; only the N-mode Williamson reduction is the labelled frontier). Net: the `1/4` is derived (geometric, non-circular — A+B); the Srednicki entropy formula
   `S = Σᵢ S(νᵢ)` and its physics (pure⇔0, monotone, nonneg, strictly positive when entangled) are
   machine-checked (C/C+), instantiated on the canonical entangled two-mode squeezed vacuum (C++), and reduced
   to a sum over the entangled modes only (C+++) — the area-law seed, frontier = "entangled modes ⟹ boundary".

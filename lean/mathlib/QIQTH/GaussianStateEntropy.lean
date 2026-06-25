@@ -198,4 +198,40 @@ theorem twoModeSqueezed_entropy_zero : gaussModeEntropy (twoModeSqueezedSympEig 
   rw [show twoModeSqueezedSympEig 0 = 1 / 2 from (twoModeSqueezedSympEig_half_iff 0).mpr rfl,
     gaussModeEntropy_half]
 
+/-! ### The symplectic eigenvalue from a covariance matrix (the `n = 1` Williamson case)
+
+The entropy formula above takes the symplectic eigenvalue `ν` as input.  The remaining physics is to
+*read `ν` off the state's covariance matrix* — this is Williamson normal form.  For a **single mode** it is
+elementary: a `2×2` covariance matrix `[[a, c], [c, b]]` has symplectic eigenvalue `ν = √det = √(ab − c²)`,
+and the Heisenberg uncertainty principle (`det ≥ 1/4` in our `ℏ = 1`, floor-`½` convention) forces
+`ν ≥ 1/2`.  This grounds `ν` in the actual physical covariance data for `n = 1`.  The **`N`-mode**
+reduction — diagonalizing the `2N×2N` covariance by a symplectic transformation — is the labelled
+formalization frontier (symplectic eigenvalues are a Mathlib-grade gap). -/
+
+/-- The single-mode symplectic eigenvalue read off a `2×2` covariance matrix `[[a,c],[c,b]]`:
+    `ν = √(ab − c²)` (the `n = 1` Williamson normal form — the symplectic eigenvalue is `√det`). -/
+noncomputable def oneModeSympEig (a b c : ℝ) : ℝ := Real.sqrt (a * b - c ^ 2)
+
+/-- `√(1/4) = 1/2` — the pure-state floor as the square root of the saturated uncertainty determinant. -/
+private theorem sqrt_quarter : Real.sqrt (1 / 4) = 1 / 2 := by
+  rw [show (1 : ℝ) / 4 = (1 / 2) ^ 2 by norm_num, Real.sqrt_sq (by norm_num)]
+
+/-- **The Heisenberg uncertainty principle (`det ≥ 1/4`) forces the symplectic eigenvalue above the
+    pure-state floor: `ν ≥ 1/2`.** -/
+theorem oneModeSympEig_ge_half {a b c : ℝ} (h : 1 / 4 ≤ a * b - c ^ 2) :
+    1 / 2 ≤ oneModeSympEig a b c := by
+  rw [oneModeSympEig, ← sqrt_quarter]
+  exact Real.sqrt_le_sqrt h
+
+/-- A minimum-uncertainty mode (`det = 1/4`, the saturated bound) sits exactly at the pure floor. -/
+theorem oneModeSympEig_pure {a b c : ℝ} (h : a * b - c ^ 2 = 1 / 4) : oneModeSympEig a b c = 1 / 2 := by
+  rw [oneModeSympEig, h, sqrt_quarter]
+
+/-- **A physical single mode — covariance obeying the uncertainty bound `det ≥ 1/4` — has a well-defined,
+    nonnegative entanglement entropy**, computed from its covariance matrix through the symplectic
+    eigenvalue.  The endpoint that grounds the whole entropy formula in physical (covariance) data. -/
+theorem oneModeSympEig_entropy_nonneg {a b c : ℝ} (h : 1 / 4 ≤ a * b - c ^ 2) :
+    0 ≤ gaussModeEntropy (oneModeSympEig a b c) :=
+  gaussModeEntropy_nonneg (oneModeSympEig_ge_half h)
+
 end QIQTH.GaussianStateEntropy
