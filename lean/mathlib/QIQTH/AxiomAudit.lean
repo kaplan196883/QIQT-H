@@ -4948,6 +4948,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussianStateEntropy.gaussStateEntropy_nonneg
 #print axioms QIQTH.GaussianStateEntropy.gaussStateEntropy_pure
 #print axioms QIQTH.GaussianStateEntropy.gaussStateEntropy_eq_zero_iff
+-- concrete entangled instance: the two-mode squeezed vacuum (ν=cosh(2s)/2) realizes the entropy formula.
+#print axioms QIQTH.GaussianStateEntropy.twoModeSqueezedSympEig_ge_half
+#print axioms QIQTH.GaussianStateEntropy.twoModeSqueezedSympEig_half_iff
+#print axioms QIQTH.GaussianStateEntropy.twoModeSqueezed_entropy_pos
+#print axioms QIQTH.GaussianStateEntropy.twoModeSqueezed_entropy_zero
 
 -- Tier A1 of QIQT_GR_DISCHARGEABLE_PLAN: discharge hric_symm.
 #print axioms QIQTH.Curvature.ricci_symm

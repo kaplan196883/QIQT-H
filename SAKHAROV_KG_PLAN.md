@@ -142,6 +142,14 @@ entanglement = `A/4G_ind`); Solodukhin, *Living Rev. Rel.* 14 (2011) 8 (review, 
   the plan's named **Gaussian-state entropy formula** bullet (§2-C, first target). The remaining §2-C target
   — the area-law *scaling* `Σ ∝ boundary size` — stays the labelled frontier (Williamson spectrum of the
   lattice covariance matrix).
-- **PLAN COMPLETE** (A+B+C+ landed; only C's lattice-*scaling* tail is the labelled frontier). Net: the `1/4`
-  is derived (geometric, non-circular — A+B); the Srednicki entropy formula `S = Σᵢ S(νᵢ)` and its physics
-  (pure⇔0, monotone, nonneg, strictly positive when entangled) are machine-checked (C/C+).
+- **Stage C++ ✅ (a concrete entangled instance — the two-mode squeezed vacuum)** — added to
+  `QIQTH/GaussianStateEntropy.lean` (axiom-free, budget 0, full build green) the canonical genuinely-entangled
+  Gaussian: `twoModeSqueezedSympEig s := cosh(2s)/2` (the reduced single-mode symplectic eigenvalue of the
+  two-mode squeezed vacuum). Machine-checked: `_ge_half` (respects the `ν≥½` floor via `cosh≥1`), `_half_iff`
+  (`ν=½ ⟺ s=0`, i.e. floor ⟺ no entanglement), `twoModeSqueezed_entropy_pos` (any `s≠0` ⟹ strictly positive
+  entanglement entropy), `twoModeSqueezed_entropy_zero` (`s=0` ⟹ a product state, zero entropy). This makes the
+  abstract formula **non-vacuous on a real physical state** — the irreducible 2-mode area-law model.
+- **PLAN COMPLETE** (A+B+C+/++; only the N-site lattice-*scaling* via the full Williamson spectrum is the
+  labelled frontier). Net: the `1/4` is derived (geometric, non-circular — A+B); the Srednicki entropy formula
+  `S = Σᵢ S(νᵢ)` and its physics (pure⇔0, monotone, nonneg, strictly positive when entangled) are
+  machine-checked (C/C+), and instantiated on the canonical entangled two-mode squeezed vacuum (C++).

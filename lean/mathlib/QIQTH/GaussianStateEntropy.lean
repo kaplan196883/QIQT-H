@@ -19,6 +19,7 @@ record/oscillator network, the building block summed by the area law.  The full 
 -/
 import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 import Mathlib.Analysis.SpecialFunctions.Log.NegMulLog
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
 import Mathlib.Analysis.Calculus.MeanValue
 
 namespace QIQTH.GaussianStateEntropy
@@ -139,5 +140,44 @@ theorem gaussStateEntropy_eq_zero_iff {n : ℕ} (ν : Fin n → ℝ) (hν : ∀ 
       (Finset.mem_univ i)
   by_contra hne
   exact absurd hz (gaussModeEntropy_pos (lt_of_le_of_ne (hν i) (Ne.symm hne))).ne'
+
+/-! ### A concrete entangled instance: the two-mode squeezed vacuum
+
+The simplest genuinely-entangled Gaussian state is the **two-mode squeezed vacuum** with squeezing `s`.
+Tracing out one mode leaves a thermal state whose single symplectic eigenvalue is `ν(s) = cosh(2s)/2`
+(`ν(0) = 1/2`, the pure floor; squeezing pushes it up).  Instantiating the entropy formula here gives a
+concrete, non-vacuous area-law summand: entanglement (`s ≠ 0`) ⟹ strictly positive entropy; product
+(`s = 0`) ⟹ zero.  This is the irreducible 2-mode model; the N-site lattice *scaling* needs the full
+symplectic / Williamson spectrum (the cited frontier). -/
+
+/-- The reduced single-mode symplectic eigenvalue of the two-mode squeezed vacuum at squeezing `s`. -/
+noncomputable def twoModeSqueezedSympEig (s : ℝ) : ℝ := Real.cosh (2 * s) / 2
+
+/-- The two-mode symplectic eigenvalue respects the pure-state floor `ν ≥ 1/2` (since `cosh ≥ 1`). -/
+theorem twoModeSqueezedSympEig_ge_half (s : ℝ) : 1 / 2 ≤ twoModeSqueezedSympEig s := by
+  have := Real.one_le_cosh (2 * s)
+  unfold twoModeSqueezedSympEig; linarith
+
+/-- It sits exactly at the floor iff the squeezing vanishes (no entanglement ⟺ product state). -/
+theorem twoModeSqueezedSympEig_half_iff (s : ℝ) : twoModeSqueezedSympEig s = 1 / 2 ↔ s = 0 := by
+  unfold twoModeSqueezedSympEig
+  constructor
+  · intro h
+    by_contra hs
+    have : 1 < Real.cosh (2 * s) := Real.one_lt_cosh.mpr (mul_ne_zero two_ne_zero hs)
+    linarith
+  · intro h; subst h; norm_num [Real.cosh_zero]
+
+/-- **The two-mode squeezed vacuum carries strictly positive entanglement entropy for any nonzero
+    squeezing** — the simplest concrete realization of the entropy formula on a genuinely entangled state. -/
+theorem twoModeSqueezed_entropy_pos {s : ℝ} (hs : s ≠ 0) :
+    0 < gaussModeEntropy (twoModeSqueezedSympEig s) := by
+  have hne : twoModeSqueezedSympEig s ≠ 1 / 2 := fun h => hs ((twoModeSqueezedSympEig_half_iff s).mp h)
+  exact gaussModeEntropy_pos (lt_of_le_of_ne (twoModeSqueezedSympEig_ge_half s) (Ne.symm hne))
+
+/-- …and zero entropy exactly at zero squeezing (a product state — no entanglement). -/
+theorem twoModeSqueezed_entropy_zero : gaussModeEntropy (twoModeSqueezedSympEig 0) = 0 := by
+  rw [show twoModeSqueezedSympEig 0 = 1 / 2 from (twoModeSqueezedSympEig_half_iff 0).mpr rfl,
+    gaussModeEntropy_half]
 
 end QIQTH.GaussianStateEntropy
