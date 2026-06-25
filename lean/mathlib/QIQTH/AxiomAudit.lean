@@ -1202,6 +1202,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.norm_boundedFC_sub_sq
 -- boundedFC symbol-subtractive + the difference-norm ‖boundedFC g₁ x − boundedFC g₂ x‖²=∫|g₁−g₂|²dμ_x
 -- (the concrete Cauchy bound for boundedFC(fₙ)x).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_diff_sq_le
+-- the Cauchy integrand bound (fₘ−fₙ)² ≤ 2(f−fₘ)²+2(f−fₙ)² — truncation L²-convergence controls the diff-norm.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

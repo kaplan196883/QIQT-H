@@ -292,6 +292,13 @@ theorem fcTrunc_sub_sq_le (f : Ω → ℝ) (n : ℕ) (ω : Ω) :
   · rw [Set.indicator_of_mem h]; simp [sq_nonneg]
   · rw [Set.indicator_of_notMem h]; simp
 
+/-- The Cauchy integrand bound `(fₘ − fₙ)² ≤ 2(f − fₘ)² + 2(f − fₙ)²` (the parallelogram-type estimate
+    `(b−a)² ≤ 2a² + 2b²`), so the truncation `L²`-convergence controls `‖boundedFC(fₘ)x − boundedFC(fₙ)x‖²`. -/
+theorem fcTrunc_diff_sq_le (f : Ω → ℝ) (n m : ℕ) (ω : Ω) :
+    (fcTrunc f m ω - fcTrunc f n ω) ^ 2
+      ≤ 2 * (f ω - fcTrunc f m ω) ^ 2 + 2 * (f ω - fcTrunc f n ω) ^ 2 := by
+  nlinarith [sq_nonneg ((f ω - fcTrunc f m ω) + (f ω - fcTrunc f n ω))]
+
 /-- **On the domain, the truncations converge to `f` in `L²(μ_x)`:** `∫ |f − fₙ|² dμ_x → 0`.  Dominated
     convergence — the integrand `→ 0` pointwise and is dominated by `f²`, which is `μ_x`-integrable
     exactly because `x` lies in the FC domain. -/

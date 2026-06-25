@@ -104,8 +104,10 @@ item.** Never claim the `1/4`.
   `inner_boundedFC_self` + `conj z·z=‖z‖²` + `integral_ofReal`). The keystone converting truncation
   L²-convergence into operator-image Cauchy-ness. **Difference-norm ✅** (`boundedFC_sub` +
   `norm_boundedFC_sub_sq`: `‖boundedFC g₁ x − boundedFC g₂ x‖²=∫|g₁−g₂|²dμ_x` — the concrete Cauchy bound).
-  NEXT: `boundedFC(fₙ)x` is Cauchy (via the difference-norm + `∫|fₙ−fₘ|²→0`) ⟹ the strong limit
-  `fcLinear x := lim boundedFC(fₙ)x` (the operator `∫f dE`) + linearity + symmetry/self-adjointness.
+  **Cauchy integrand bound ✅** (`fcTrunc_diff_sq_le`: `(fₘ−fₙ)²≤2(f−fₘ)²+2(f−fₙ)²`). NEXT: integrate it
+  (Bochner, integrability via `≤f²∈L¹`) ⟹ `‖boundedFC(fₘ)x−boundedFC(fₙ)x‖²→0` for `m,n≥N` ⟹ `CauchySeq`
+  (no monotonicity needed — the `Tendsto` def gives the eventual bound) ⟹ the strong limit `fcLinear x :=
+  lim boundedFC(fₙ)x` (the operator `∫f dE`) + linearity + symmetry/self-adjointness.
 - [ ] **M2** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1 closed)
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)
