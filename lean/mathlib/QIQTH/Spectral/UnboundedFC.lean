@@ -488,4 +488,31 @@ theorem fcOp_symmetric {f : Ω → ℝ} (hf : Measurable f) {x y : H} (hx : x �
       (nhds (inner ℂ x (P.fcOp hf y))) := tendsto_const_nhds.inner (P.fcSeq_tendsto_fcOp hf hy)
   exact tendsto_nhds_unique ((funext hsa : _ = _) ▸ h1) h2
 
+/-- **Bounded-symbol compatibility:** for a bounded symbol the unbounded FC agrees with the bounded one,
+    `(∫ f dE) x = boundedFC(↑f) x`.  (The truncations are eventually `= f`, so the sequence is eventually
+    the constant `boundedFC(↑f) x`.)  This ties the unbounded operator back to `boundedFC` — e.g. the
+    modular flow `Δ^{it} = boundedFC(((2−r)/r)^{it})` lives in the same calculus as its generator. -/
+theorem fcOp_eq_boundedFC {f : Ω → ℝ} (hf : Measurable f) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, |f ω| ≤ C) (x : H) :
+    P.fcOp hf x = P.boundedFC (Complex.continuous_ofReal.measurable.comp hf) hC0
+      (fun ω => (Complex.norm_real (f ω)).le.trans
+        ((Real.norm_eq_abs (f ω)).le.trans (hC ω))) x := by
+  have hxdom : x ∈ P.fcDomain f := by rw [P.fcDomain_eq_top_of_bounded hC]; exact Submodule.mem_top
+  obtain ⟨N, hN⟩ := exists_nat_ge C
+  have hev : (fun n => P.fcSeq hf n x) =ᶠ[Filter.atTop] fun _ =>
+      P.boundedFC (Complex.continuous_ofReal.measurable.comp hf) hC0
+        (fun ω => (Complex.norm_real (f ω)).le.trans
+          ((Real.norm_eq_abs (f ω)).le.trans (hC ω))) x := by
+    filter_upwards [Filter.eventually_ge_atTop N] with n hn
+    have hsymeq : (fun ω => ((fcTrunc f n ω : ℝ) : ℂ)) = fun ω => ((f ω : ℝ) : ℂ) := by
+      funext ω
+      have hfeq : fcTrunc f n ω = f ω := by
+        simp only [fcTrunc, Set.indicator_of_mem
+          (show ω ∈ {ω | |f ω| ≤ (n : ℝ)} from (hC ω).trans (hN.trans (by exact_mod_cast hn)))]
+      rw [hfeq]
+    simp only [fcSeq]
+    exact DFunLike.congr_fun (P.boundedFC_congr _ _ _ _ _ _ hsymeq) x
+  exact tendsto_nhds_unique (P.fcSeq_tendsto_fcOp hf hxdom)
+    (Filter.Tendsto.congr' hev.symm tendsto_const_nhds)
+
 end QIQTH.Spectral.ProjectionValuedMeasure

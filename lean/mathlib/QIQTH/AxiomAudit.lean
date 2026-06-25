@@ -1224,6 +1224,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_symmetric
 -- ★ the operator is SYMMETRIC on the domain: ⟨(∫f dE)x, y⟩ = ⟨x, (∫f dE)y⟩ (f real ⟹ boundedFC(fₙ)
 -- self-adjoint; pass to the limit by inner-product continuity) — the modular Hamiltonian's reality/symmetry.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_eq_boundedFC
+-- bounded-symbol compat: (∫f dE)x = boundedFC(↑f)x for bounded f — ties the unbounded FC to boundedFC
+-- (so Δ^{it}=boundedFC(...) and its generator K=∫log(r/(2−r))dE_R share the same calculus). M1 COMPLETE.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
