@@ -1365,6 +1365,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.Multiplication.mulOp_smul
 -- ★ MULTIPLICATION PVM brick 7 — symbol-linearity complete: M_φ−M_ψ=M_{φ−ψ} (mulOp_sub), M_{c·φ}=c·M_φ (mulOp_smul).
 -- With add/mul/const/adjoint/congr, M_· is a complete unital *-algebra hom (bounded measurable fns → CLM on L²).
+#print axioms QIQTH.Spectral.Multiplication.norm_indMul_sq
+-- ★ MULTIPLICATION PVM brick 8 — the scalar spectral measure as a real nonneg quantity: ‖E(A)f‖²=∫_A‖f‖² (the L²
+-- mass of f on A; via inner_self_eq_norm_sq + L2.inner_def + integral_re). μ_f(A)=∫_A‖f‖² is the genuine scalar
+-- spectral measure of the position PVM — the key input to σ-additivity (the tail ∫_{A_N}‖f‖²→0). Next: σ-additivity.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

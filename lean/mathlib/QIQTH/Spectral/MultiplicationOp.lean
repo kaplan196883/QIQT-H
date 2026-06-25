@@ -283,4 +283,18 @@ theorem indMul_inner_self {A : Set α} (hA : MeasurableSet A) (f : Lp ℂ 2 μ) 
   · simp only [Set.indicator_of_mem h, indSymbol, one_mul]
   · simp [indSymbol, Set.indicator_of_notMem h]
 
+/-- **The norm of the spectral projection `‖E(A) f‖² = ∫_A ‖f‖² dμ`** — the `L²` mass of `f` on `A`.  As `A`
+    varies this is the (genuine, real, nonnegative) scalar spectral measure `μ_f(A) = ∫_A ‖f‖²` of the position
+    PVM; it is the key quantitative input to σ-additivity (the tail `∫_{A_N} ‖f‖² → 0`). -/
+theorem norm_indMul_sq {A : Set α} (hA : MeasurableSet A) (f : Lp ℂ 2 μ) :
+    ‖indMul (μ := μ) hA f‖ ^ 2 = ∫ a in A, ‖f a‖ ^ 2 ∂μ := by
+  rw [← inner_self_eq_norm_sq (𝕜 := ℂ), indMul, MeasureTheory.L2.inner_def,
+    ← integral_re (MeasureTheory.L2.integrable_inner _ _), ← MeasureTheory.integral_indicator hA]
+  refine MeasureTheory.integral_congr_ae ?_
+  filter_upwards [mulOp_coeFn (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A) f] with a e1
+  rw [e1, inner_self_eq_norm_sq (𝕜 := ℂ)]
+  by_cases h : a ∈ A
+  · simp only [indSymbol, Set.indicator_of_mem h, one_mul]
+  · simp [indSymbol, Set.indicator_of_notMem h]
+
 end QIQTH.Spectral.Multiplication

@@ -280,8 +280,12 @@ item.** Never claim the `1/4`.
   σ-additivity (countable / strong `E(⋃Aₙ)=Σ E(Aₙ)`) → bundle the `ProjectionValuedMeasure`; then Fourier conjugation.
   **Brick 7 — symbol-linearity complete ✅**: `M_φ−M_ψ=M_{φ−ψ}` (`mulOp_sub`), `M_{c·φ}=c·M_φ` (`mulOp_smul`). With
   add/mul/const/adjoint/congr, **`M_·` is now a complete unital `*`-algebra homomorphism** (bounded measurable
-  functions → CLM on `L²`) — Mathlib-quality multiplication-operator infrastructure. Next: σ-additivity (the L²
-  norm-as-integral + DCT/measure-tail — the analytic brick) → bundle the genuine `ProjectionValuedMeasure`.
+  functions → CLM on `L²`) — Mathlib-quality multiplication-operator infrastructure.
+  **Brick 8 — the scalar spectral measure (real/nonneg) ✅**: `‖E(A) f‖² = ∫_A ‖f‖² dμ` (`norm_indMul_sq`, via
+  `inner_self_eq_norm_sq` + `L2.inner_def` + `integral_re`) — the `L²` mass of `f` on `A`. So `μ_f(A) = ∫_A ‖f‖²` is
+  the genuine (real, nonnegative) scalar spectral measure of the position PVM, and the key quantitative input to
+  σ-additivity (the tail `∫_{A_N} ‖f‖² → 0`). Next: σ-additivity (finite-additivity reduction + the measure-tail
+  convergence) → bundle the `ProjectionValuedMeasure`; then Fourier conjugation → momentum PVM → boost generator.
   NB the Bochner-over-`scalarMeasure` DCT route hits a `whnf` wall — the `lintegral`/`HasDerivAt` route is the way.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,
