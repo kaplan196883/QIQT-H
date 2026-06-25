@@ -106,4 +106,18 @@ theorem hasDerivAt_modFlow (S : StandardSubspace H) {ξ : H}
   (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).hasDerivAt_boundedFC_expSymbol
     (kFn_val_measurable S) hdom
 
+/-- **Strong continuity of the modular flow** (the Stone hypothesis for `Δ^{it}`): for `ξ` in the domain of
+    `K = modK`, the modular flow `t ↦ boundedFC(e^{it·kFn}(R)) ξ` (= `Δ^{−it} ξ` on the spectrum) is continuous
+    at every `t₀`.  A direct specialization of `continuousAt_boundedFC_expSymbol'`; together with the group law
+    and unitarity, this is the full `C₀`-unitary-group structure of the modular flow.  Axiom-free. -/
+theorem continuousAt_modFlow (S : StandardSubspace H) {ξ : H}
+    (hdom : ξ ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => kFn ω.val)) (t₀ : ℝ) :
+    ContinuousAt
+      (fun t : ℝ => (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).boundedFC
+        (QIQTH.Spectral.ProjectionValuedMeasure.measurable_expSymbol (kFn_val_measurable S) t)
+        zero_le_one (QIQTH.Spectral.ProjectionValuedMeasure.norm_expSymbol_le t) ξ) t₀ :=
+  (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).continuousAt_boundedFC_expSymbol'
+    (kFn_val_measurable S) hdom t₀
+
 end QIQTH.StandardSubspaceModular

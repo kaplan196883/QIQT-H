@@ -948,4 +948,42 @@ theorem hasDerivAt_boundedFC_expSymbol {f : Ω → ℝ} (hf : Measurable f) {x :
   have := hv.add (tendsto_const_nhds (x := Complex.I • P.fcOp hf x))
   simpa using this
 
+/-- **Strong continuity of the FC-exponential one-parameter group at the identity** (the Stone hypothesis):
+    `t ↦ boundedFC(e^{itf}) x` is continuous at `0`.  A free corollary of the generator relation
+    `hasDerivAt_boundedFC_expSymbol` (differentiable ⟹ continuous).  This resolves the strong-continuity step
+    the earlier Bochner-`tendsto_integral_of_dominated_convergence` route could not (the `whnf` wall): the
+    `lintegral`-built `HasDerivAt` delivers it for free. -/
+theorem continuousAt_boundedFC_expSymbol {f : Ω → ℝ} (hf : Measurable f) {x : H}
+    (hx : x ∈ P.fcDomain f) :
+    ContinuousAt
+      (fun t : ℝ => P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) x) 0 :=
+  (P.hasDerivAt_boundedFC_expSymbol hf hx).continuousAt
+
+/-- **Full strong continuity** of the FC-exponential group: `t ↦ boundedFC(e^{itf}) x` is continuous at every
+    `t₀`.  From continuity at `0` and the group law `U_{t₀+s} = U_{t₀} U_s` (`boundedFC_expSymbol_add`):
+    `U_t x = U_{t₀}(U_{t−t₀} x) → U_{t₀} x` as `t → t₀`, since `U_{t₀}` is a bounded operator. -/
+theorem continuousAt_boundedFC_expSymbol' {f : Ω → ℝ} (hf : Measurable f) {x : H}
+    (hx : x ∈ P.fcDomain f) (t₀ : ℝ) :
+    ContinuousAt
+      (fun t : ℝ => P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) x) t₀ := by
+  have hadd : ∀ t : ℝ, P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t)
+      = P.boundedFC (measurable_expSymbol hf t₀) zero_le_one (norm_expSymbol_le t₀)
+        * P.boundedFC (measurable_expSymbol hf (t - t₀)) zero_le_one (norm_expSymbol_le (t - t₀)) := by
+    intro t
+    have h := P.boundedFC_expSymbol_add hf t₀ (t - t₀)
+    rwa [show t₀ + (t - t₀) = t by ring] at h
+  have hg : (fun t : ℝ => P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) x)
+      = fun t : ℝ => P.boundedFC (measurable_expSymbol hf t₀) zero_le_one (norm_expSymbol_le t₀)
+          (P.boundedFC (measurable_expSymbol hf (t - t₀)) zero_le_one (norm_expSymbol_le (t - t₀)) x) := by
+    funext t
+    rw [hadd t, ContinuousLinearMap.mul_apply]
+  rw [hg]
+  have hinner : ContinuousAt
+      (fun t : ℝ => P.boundedFC (measurable_expSymbol hf (t - t₀)) zero_le_one
+        (norm_expSymbol_le (t - t₀)) x) t₀ :=
+    (P.continuousAt_boundedFC_expSymbol hf hx).comp_of_eq
+      ((continuous_id.sub continuous_const).continuousAt) (by simp)
+  exact (P.boundedFC (measurable_expSymbol hf t₀) zero_le_one
+    (norm_expSymbol_le t₀)).continuous.continuousAt.comp hinner
+
 end QIQTH.Spectral.ProjectionValuedMeasure

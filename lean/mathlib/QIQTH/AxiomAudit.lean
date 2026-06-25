@@ -1263,6 +1263,11 @@ namespace QIQTH.AxiomAudit
 -- ★★★ STONE GENERATOR (M2/M4 CAPSTONE): d/dt(boundedFC(e^{itf})x)|₀ = i·(∫f dE)x — the strongly-continuous
 -- one-parameter unitary group t↦boundedFC(e^{itf}) has generator i·K (K=∫f dE). The OPERATOR Δ^{it}=e^{−itK}.
 -- Assembled axiom-free from the analytic heart + the distance identity: ‖slope−i·fcOp x‖²=(∫⁻‖(e^{itf}−1)/t−if‖²).toReal→0.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.continuousAt_boundedFC_expSymbol
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.continuousAt_boundedFC_expSymbol'
+-- ★★ STRONG CONTINUITY of the FC-exponential group (the Stone hypothesis): t↦boundedFC(e^{itf})x continuous at 0
+-- (free from the HasDerivAt capstone — differentiable⟹continuous) AND at every t₀ (group law U_{t₀+s}=U_{t₀}U_s).
+-- Resolves the strong-continuity step the earlier Bochner-DCT route could not (the whnf wall); lintegral route delivers it.
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_integral_tendsto
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_inner_self
 -- ★ M2 operator-level first law: ⟨x,(∫f dE)x⟩ = ∫ f dμ_x (L¹ DCT tail-conv + inner continuity) — for
@@ -1279,6 +1284,9 @@ namespace QIQTH.AxiomAudit
 -- t↦boundedFC(e^{it·kFn}(R)) (= modChar(−t) = Δ^{−it} on the spectrum) has Stone generator i·modK = iK. Direct
 -- specialization of the general PVM Stone reconstruction hasDerivAt_boundedFC_expSymbol. Discharges the operator
 -- half of the documented Tomita–Takesaki Δ^{it}=e^{−itK} frontier for the RvD free-field modular Hamiltonian.
+#print axioms QIQTH.StandardSubspaceModular.continuousAt_modFlow
+-- ★ STRONG CONTINUITY of the modular flow (Stone hypothesis for Δ^{it}): t↦boundedFC(e^{it·kFn}(R))ξ continuous at
+-- every t₀ (domain ξ). Specializes continuousAt_boundedFC_expSymbol'; with group law + unitarity = the full C₀-group.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

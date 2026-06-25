@@ -187,7 +187,14 @@ item.** Never claim the `1/4`.
     genuine RvD modular Hamiltonian `K = modK`**. A direct specialization of the general capstone to
     `E_R = PVM_of_selfAdjoint (rvdRC S)`, symbol `kFn ∘ val` (one-liner: the capstone's RHS `i·E_R.fcOp(kFn∘val)ξ` IS
     `i·modK ξ` by definition). **The operator half of the Tomita–Takesaki `Δ^{it}=e^{−itK}` frontier is fully discharged.**
-  NB strong-continuity-via-Bochner-DCT hit the whnf wall — the lintegral route is the way.
+  • **STRONG CONTINUITY NOW LANDED ✅ (axiom-free, green)** — `continuousAt_boundedFC_expSymbol` (at `0`, a free
+    corollary of the `HasDerivAt` capstone) + `continuousAt_boundedFC_expSymbol'` (at every `t₀`, via the group law
+    `U_{t₀+s}=U_{t₀}U_s`) + `continuousAt_modFlow` (modular specialization). **Resolves the strong-continuity step
+    the earlier Bochner-`tendsto_integral_of_dominated_convergence` route could not** (the recurring `whnf` wall,
+    previously reverted): the `lintegral`-built `HasDerivAt` delivers it for free. With group law + unitarity +
+    generator + strong continuity, the modular flow is now a **full `C₀` one-parameter unitary group with generator
+    `iK`** — the complete operator Stone package, axiom-free.
+  NB the Bochner-over-`scalarMeasure` DCT route hits a `whnf` wall — the `lintegral`/`HasDerivAt` route is the way.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,
   `oneModeSympEig_symplectic_invariant` — `ν` is a basis-independent physical invariant). The `N`-mode normal-form
