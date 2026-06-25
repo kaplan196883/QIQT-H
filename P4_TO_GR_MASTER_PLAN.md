@@ -86,7 +86,8 @@ item.** Never claim the `1/4`.
   ↔ f square-integrable vs μ_x` — the domain *is* the `L²` condition, opening Mathlib's Cauchy–Schwarz / `f·g
   ∈ L¹` for the operator). Axiom-free, budget 0, wired. NEXT: the operator `fcLinear` on the domain (Riesz rep
   of the bounded antilinear `y ↦ ∫ f dμ_{x,y}`, bounded via the now-available L² Cauchy–Schwarz) + symmetry +
-  self-adjointness; then `∫g dE = boundedFC g`.
+  self-adjointness; then `∫g dE = boundedFC g`. **L¹-on-domain ✅** (`integrable_of_mem_fcDomain`: `f ∈ L¹(μ_x)`
+  on the domain via `L²⊆L¹` + `μ_x` finite — the diagonal expectation `⟨x,(∫f dE)x⟩ = ∫ f dμ_x` converges).
 - [ ] **M2** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1 closed)
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)

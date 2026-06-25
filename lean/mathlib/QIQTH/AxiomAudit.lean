@@ -1177,6 +1177,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.mem_fcDomain_iff_integrable_sq
 -- the FC domain IS the L²(μ_x) condition: x∈D(∫f dE) ↔ f square-integrable vs μ_x — opens L²/Cauchy-Schwarz
 -- for the operator construction (Riesz rep of y ↦ ∫ f dμ_{x,y}).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.integrable_of_mem_fcDomain
+-- on the domain f∈L¹(μ_x) (L²⊆L¹, μ_x finite) — the diagonal expectation ⟨x,(∫f dE)x⟩=∫f dμ_x converges.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

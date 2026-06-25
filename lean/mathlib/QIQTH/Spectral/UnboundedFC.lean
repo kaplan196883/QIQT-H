@@ -17,6 +17,7 @@ Axiom-free.  Uses the spectral scaling `μ_{c·x} = ‖c‖²·μ_x` and the par
 `μ_{x+y} + μ_{x−y} = 2μ_x + 2μ_y` already proved in `QIQTH/Spectral/PVM.lean`.
 -/
 import QIQTH.Spectral.PVM
+import Mathlib.MeasureTheory.Function.L2Space
 
 namespace QIQTH.Spectral.ProjectionValuedMeasure
 
@@ -117,5 +118,16 @@ theorem mem_fcDomain_iff_integrable_sq {f : Ω → ℝ} (hf : Measurable f) (x :
   rw [mem_fcDomain, fcEnergy, ← lt_top_iff_ne_top,
     ← MeasureTheory.hasFiniteIntegral_iff_ofReal hnn]
   exact ⟨fun h => ⟨(hf.pow_const 2).aestronglyMeasurable, h⟩, fun h => h.2⟩
+
+/-- **On the domain, the symbol itself is integrable** (`f ∈ L¹(μ_x)`).  Since `μ_x` is a *finite*
+    measure and `f ∈ L²(μ_x)` on the domain, `L² ⊆ L¹` gives `f ∈ L¹` — so the diagonal expectation
+    `⟨x, (∫f dE) x⟩ = ∫ f dμ_x` converges.  (This is the first-law/JLMS expectation value and the
+    integrability prerequisite for the operator's matrix elements.) -/
+theorem integrable_of_mem_fcDomain {f : Ω → ℝ} (hf : Measurable f) {x : H}
+    (hx : x ∈ P.fcDomain f) : Integrable f (P.scalarMeasure x) := by
+  have h2 : MemLp f 2 (P.scalarMeasure x) :=
+    (memLp_two_iff_integrable_sq hf.aestronglyMeasurable).mpr
+      ((P.mem_fcDomain_iff_integrable_sq hf x).mp hx)
+  exact memLp_one_iff_integrable.mp (h2.mono_exponent (by norm_num))
 
 end QIQTH.Spectral.ProjectionValuedMeasure
