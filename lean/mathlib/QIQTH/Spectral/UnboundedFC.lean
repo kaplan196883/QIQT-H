@@ -438,4 +438,34 @@ theorem fcSeq_cauchySeq {f : Ω → ℝ} (hf : Measurable f) {x : H} (hx : x ∈
     (P.fcSeq_norm_sub_sq_le hf hx n m).trans_lt (by nlinarith [hAm, hAn, pow_pos hε 2])
   exact lt_of_pow_lt_pow_left₀ 2 hε.le hsq
 
+/-- **The unbounded operator `∫ f dE` applied to `x`** — the strong limit of the bounded truncations
+    `boundedFC(fₙ) x`.  (Defined for all `x` via `limUnder`; meaningful — and the limit is actually attained —
+    exactly on the domain `fcDomain f`, where the sequence is Cauchy.) -/
+noncomputable def fcOp {f : Ω → ℝ} (hf : Measurable f) (x : H) : H :=
+  Filter.limUnder Filter.atTop (fun n => P.fcSeq hf n x)
+
+/-- **The defining property of the operator:** on the domain, `boundedFC(fₙ) x → (∫ f dE) x`. -/
+theorem fcSeq_tendsto_fcOp {f : Ω → ℝ} (hf : Measurable f) {x : H} (hx : x ∈ P.fcDomain f) :
+    Filter.Tendsto (fun n => P.fcSeq hf n x) Filter.atTop (nhds (P.fcOp hf x)) :=
+  (P.fcSeq_cauchySeq hf hx).tendsto_limUnder
+
+/-- **The operator is additive** on the domain: `(∫ f dE)(x+y) = (∫ f dE)x + (∫ f dE)y`.  (Each `boundedFC(fₙ)`
+    is linear, and limits respect addition.) -/
+theorem fcOp_add {f : Ω → ℝ} (hf : Measurable f) {x y : H} (hx : x ∈ P.fcDomain f)
+    (hy : y ∈ P.fcDomain f) (hxy : x + y ∈ P.fcDomain f) :
+    P.fcOp hf (x + y) = P.fcOp hf x + P.fcOp hf y := by
+  have heq : (fun n => P.fcSeq hf n (x + y)) = fun n => P.fcSeq hf n x + P.fcSeq hf n y := by
+    funext n; simp only [fcSeq, map_add]
+  exact tendsto_nhds_unique (heq ▸ P.fcSeq_tendsto_fcOp hf hxy)
+    ((P.fcSeq_tendsto_fcOp hf hx).add (P.fcSeq_tendsto_fcOp hf hy))
+
+/-- **The operator is `ℂ`-homogeneous** on the domain: `(∫ f dE)(c·x) = c·(∫ f dE)x`. -/
+theorem fcOp_smul {f : Ω → ℝ} (hf : Measurable f) (c : ℂ) {x : H} (hx : x ∈ P.fcDomain f)
+    (hcx : c • x ∈ P.fcDomain f) :
+    P.fcOp hf (c • x) = c • P.fcOp hf x := by
+  have heq : (fun n => P.fcSeq hf n (c • x)) = fun n => c • P.fcSeq hf n x := by
+    funext n; simp only [fcSeq, map_smul]
+  exact tendsto_nhds_unique (heq ▸ P.fcSeq_tendsto_fcOp hf hcx)
+    ((P.fcSeq_tendsto_fcOp hf hx).const_smul c)
+
 end QIQTH.Spectral.ProjectionValuedMeasure

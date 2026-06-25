@@ -1216,6 +1216,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcSeq_cauchySeq
 -- ★ the approximating sequence boundedFC(fₙ)x is CAUCHY on the domain (‖fcSeq m x−fcSeq n x‖²≤2A_m+2A_n,
 -- A_k→0) — so its strong limit exists (H complete): the unbounded operator (∫f dE)x.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcSeq_tendsto_fcOp
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_add
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_smul
+-- ★ THE UNBOUNDED OPERATOR ∫f dE: fcOp hf x := limUnder (boundedFC(fₙ)x); boundedFC(fₙ)x→fcOp x on the
+-- domain (fcSeq_tendsto_fcOp); additive (fcOp_add) and ℂ-homogeneous (fcOp_smul) — a linear operator on D(∫f dE).
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
