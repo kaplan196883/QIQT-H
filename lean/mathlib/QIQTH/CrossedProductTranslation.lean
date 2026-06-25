@@ -48,4 +48,53 @@ theorem clockTransl_coeFn (t : ℝ) (ξ : Lp H 2 (volume : Measure ℝ)) :
   rw [clockTransl_apply]
   exact Lp.norm_compMeasurePreserving ξ (measurePreserving_addRight_volume t)
 
+/-- `λ_0 = id` on `L²(ℝ;H)`. -/
+theorem clockTransl_zero_apply (ξ : Lp H 2 (volume : Measure ℝ)) :
+    clockTransl (0 : ℝ) ξ = ξ := by
+  rw [Lp.ext_iff]
+  filter_upwards [clockTransl_coeFn 0 ξ] with s e1
+  rw [e1, add_zero]
+
+/-- **★ Phase 2.2 — `λ_0 = 1`.** -/
+theorem clockTransl_zero :
+    (clockTransl (0 : ℝ) : Lp H 2 (volume : Measure ℝ) →L[ℂ] Lp H 2 (volume : Measure ℝ)) = 1 := by
+  refine ContinuousLinearMap.ext fun ξ => ?_
+  rw [clockTransl_zero_apply, ContinuousLinearMap.one_apply]
+
+/-- **★ Phase 2.2 — the one-parameter group law `λ_{s+t} = λ_s ∘ λ_t`.** -/
+theorem clockTransl_add (s t : ℝ) :
+    (clockTransl (s + t) : Lp H 2 (volume : Measure ℝ) →L[ℂ] Lp H 2 (volume : Measure ℝ))
+      = clockTransl s ∘L clockTransl t := by
+  refine ContinuousLinearMap.ext fun ξ => ?_
+  rw [ContinuousLinearMap.comp_apply, Lp.ext_iff]
+  have hmap : Measure.map (· + s) (volume : Measure ℝ) = volume :=
+    (measurePreserving_addRight_volume s).map_eq
+  have hco : clockTransl t ξ =ᵐ[Measure.map (· + s) volume] fun v => ξ (v + t) := by
+    simp only [hmap]; exact clockTransl_coeFn t ξ
+  have h3' : (fun u => (clockTransl t ξ) (u + s)) =ᵐ[volume] fun u => ξ ((u + s) + t) :=
+    ae_eq_comp (measurePreserving_addRight_volume s).measurable.aemeasurable hco
+  filter_upwards [clockTransl_coeFn (s + t) ξ, clockTransl_coeFn s (clockTransl t ξ), h3']
+    with u e1 e2 e3
+  rw [e1, e2, e3]; congr 1; ring
+
+/-- **★ Phase 2.3 — `λ_{-t}` is the two-sided inverse of `λ_t` (right).**  `λ_t ∘ λ_{-t} = 1`. -/
+theorem clockTransl_comp_neg (t : ℝ) :
+    clockTransl t ∘L clockTransl (-t)
+      = (1 : Lp H 2 (volume : Measure ℝ) →L[ℂ] Lp H 2 (volume : Measure ℝ)) := by
+  rw [← clockTransl_add, add_neg_cancel, clockTransl_zero]
+
+/-- **★ Phase 2.3 — `λ_{-t}` is the two-sided inverse of `λ_t` (left).**  `λ_{-t} ∘ λ_t = 1`. -/
+theorem clockTransl_neg_comp (t : ℝ) :
+    clockTransl (-t) ∘L clockTransl t
+      = (1 : Lp H 2 (volume : Measure ℝ) →L[ℂ] Lp H 2 (volume : Measure ℝ)) := by
+  rw [← clockTransl_add, neg_add_cancel, clockTransl_zero]
+
+/-! ### Phase 2.3 — `λ_t` is a **unitary** (an isometric two-sided-invertible operator).
+
+`clockTransl_norm` (isometry) + `clockTransl_comp_neg`/`_neg_comp` (inverse `λ_{-t}`) exhibit `λ_t` as a unitary
+of `L²(ℝ;H)` — the clock translation **unitary group** `λ_0 = 1`, `λ_{s+t} = λ_s λ_t`, `λ_t⁻¹ = λ_{-t}`,
+`‖λ_t ξ‖ = ‖ξ‖`.  (The explicit `star (λ_t) = λ_{-t}` / `unitary` membership meets the same `Lp`/`RCLike`
+adjoint instance diamond recorded in Phase 1's `*`; the two-sided-inverse + isometry form above is the
+diamond-free statement of unitarity, and is what Phase 3's covariance needs.) -/
+
 end QIQTH.StandardSubspaceModular

@@ -67,6 +67,18 @@ sub-step with the `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>` trai
   `clockTransl_norm` (isometry `‖λ_t ξ‖ = ‖ξ‖`). `measurePreserving_addRight_volume` (translation is volume-MP).
   Axiom-free (std 3); wired into AxiomAudit; budget 0. *(The `compMeasurePreservingₗᵢ` form sidestepped the
   AddMonoidHom→CLM bundling entirely — Phase 2.1 was a clean one-shot.)*
-- **NEXT: Sub-step 2.2** — the group law `clockTransl 0 = 1`, `clockTransl (s+t) = clockTransl s ∘L clockTransl t`
-  (via `Lp.compMeasurePreserving_comp`/`_id`; the dependent measure-preserving proofs + the function
-  decomposition `(·+(s+t)) = (·+t)∘(·+s)` need care, or the `coeFn` + `ae_eq_comp` route). Then 2.3 (unitarity).
+- **Sub-step 2.2 ✅** — `clockTransl_zero` (`λ_0 = 1`) + `clockTransl_add` (`λ_{s+t} = λ_s ∘L λ_t`), the latter via
+  the `coeFn` + `ae_eq_comp` route (`(λ_t ξ)(u+s) =ᵐ ξ((u+s)+t)` under the measure-preserving `(·+s)`). Key
+  gotcha resolved: `ext ξ` is over-aggressive (applies both CLM- and `Lp`-ext) — use
+  `refine ContinuousLinearMap.ext fun ξ => ?_` to stay at CLM level. Axiom-free; budget 0.
+- **Sub-step 2.3 ✅** — `clockTransl_comp_neg` (`λ_t ∘ λ_{-t} = 1`) + `clockTransl_neg_comp` (`λ_{-t} ∘ λ_t = 1`)
+  from the group law: `λ_{-t}` is the two-sided inverse. With `clockTransl_norm` (isometry), `λ_t` is a
+  **unitary** — the diamond-free statement (`star(λ_t)=λ_{-t}` / `unitary` membership meets the same Lp/RCLike
+  adjoint diamond as Phase 1's `*`; the isometry + two-sided-inverse form is what Phase 3 needs). Axiom-free; budget 0.
+
+### Phase 2 COMPLETE — the clock translation unitary group `λ_t`
+**Delivered (axiom-free, budget 0):** `clockTransl t : L²(ℝ;H) →L[ℂ] L²(ℝ;H)`, the `L²(ℝ)` clock factor of
+`M ⋊_σ ℝ` — a one-parameter **unitary group**: `λ_0 = 1`, `λ_{s+t} = λ_s λ_t`, two-sided inverse `λ_{-t}`,
+isometry `‖λ_t ξ‖ = ‖ξ‖`, with `λ_t ξ =ᵐ fun s => ξ(s+t)`. Both factors of the crossed product (`matterRep` =
+matter, `clockTransl` = clock) now exist as machine-checked operators. **NEXT: Phase 3** — the covariance
+`λ_t ∘ π(a) ∘ λ_{-t} = π(σ_t a)` (joins the two factors). The clock energy `X` (generator) = Phase 4 (Stone).
