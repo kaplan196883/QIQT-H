@@ -156,11 +156,18 @@ item.** Never claim the `1/4`.
   **STONE-GENERATOR ATTACK underway** (foundations ✅, all axiom-free): the difference identity
   `‖boundedFC(e^{itf})x − x‖² = ∫|e^{itf}−1|² dμ_x` (`expSymbol_sub_one_norm_sq`); the uniform L² domination
   `‖e^{itf}−1‖ ≤ |t|·|f|` ⟹ `‖(e^{itf}−1)/t‖ ≤ |f|` (`norm_expSymbol_sub_one_le`); the pointwise derivative
-  `d/dt e^{itc}|₀ = ic` (`hasDerivAt_expSymbol`). Remaining = the **generator assembly**: the `t→0` L²-convergence
-  `∫|(e^{itf}−1)/t − if|² → 0` (lintegral DCT — to dodge the recurring Bochner-over-`scalarMeasure` whnf wall)
-  + the `HasDerivAt (fun t => boundedFC(e^{itf})x) (i·Kx) 0` double-limit. This is the genuine multi-fire core
-  that closes BOTH `Δ^{it}=e^{−itK}` (M2) and the abstract M4 Stone. NB strong-continuity-via-Bochner-DCT also
-  hit the whnf wall — reverted; the lintegral route is the way.
+  `d/dt e^{itc}|₀ = ic` (`hasDerivAt_expSymbol`).
+  **ANALYTIC HEART NOW LANDED ✅ (axiom-free, green):** the `t→0` **L²-convergence of the difference quotient**
+  `∫‖(e^{itf}−1)/t − if‖² dμ_x → 0` (`expSymbol_diffQuotient_lintegral_tendsto`) — proved via the **sequential
+  `lintegral` dominated-convergence route** (dodging the recurring Bochner-over-`scalarMeasure` whnf wall):
+  pointwise `(e^{itc}−1)/t → ic` from the new slope tendsto `expSymbol_slope_tendsto` (`hasDerivAt_iff_tendsto_slope`),
+  dominated by `4f²` from `norm_expSymbol_sub_one_div_le` (`‖(e^{itf}−1)/t‖ ≤ |f|` for ALL `t`, incl `t=0`),
+  finite by `x ∈ fcDomain f`. This was *the* genuine multi-fire core. Remaining = the **operator assembly**:
+  `HasDerivAt (fun t => boundedFC(e^{itf})x) (i·Kx) 0` — the double-limit triangle
+  `‖boundedFC(g_t)x − i·fcOp x‖ ≤ ‖boundedFC(g_t − i·↑fcTrunc_m)x‖ + ‖boundedFC(i·↑fcTrunc_m)x − i·fcOp x‖`
+  bounded by `2∫‖g_t−if‖² + 2∫‖f−↑fcTrunc_m‖²` (via `norm_boundedFC_sub_sq` + the now-proved L² conv +
+  `fcTrunc_lintegral_sub_sq_tendsto`). With the heart done this is mechanical; closes BOTH `Δ^{it}=e^{−itK}` (M2)
+  and abstract M4 Stone. NB strong-continuity-via-Bochner-DCT hit the whnf wall — the lintegral route is the way.
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)
 - [ ] **M5** — dual-weight trace + JLMS + FQ bound

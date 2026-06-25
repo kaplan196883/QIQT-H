@@ -1243,6 +1243,15 @@ namespace QIQTH.AxiomAudit
 -- ≤ |f ω|, the uniform L² bound for the generator's difference-quotient convergence (e^{itf}−1)/t → if.
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.hasDerivAt_expSymbol
 -- ★ STONE ptwise derivative: d/dt e^{itc}|₀ = i·c — the pointwise input ((e^{itf}−1)/t → if) for the generator.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.expSymbol_slope_tendsto
+-- ★ STONE slope: (e^{itc}−1)/t → ic as t→0 (𝓝[≠]0, via hasDerivAt_iff_tendsto_slope) — ptwise difference
+-- quotient in the form the L² dominated-convergence step consumes.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.norm_expSymbol_sub_one_div_le
+-- ★ STONE L²-domination: ‖(e^{itf ω}−1)/t‖ ≤ |f ω| for ALL t (incl t=0, z/0=0) — the uniform DCT bound.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.expSymbol_diffQuotient_lintegral_tendsto
+-- ★★ STONE ANALYTIC HEART: ∫‖(e^{itf}−1)/t − if‖²dμ_x → 0 as t→0 — the L² convergence of the difference
+-- quotient (sequential lintegral DCT, dodging the Bochner-over-scalarMeasure whnf wall; dominated by 4f²,
+-- ptwise→0 from expSymbol_slope_tendsto). The genuine multi-fire core for Δ^{it}=e^{−itK} (M2) + abstract Stone (M4).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_integral_tendsto
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_inner_self
 -- ★ M2 operator-level first law: ⟨x,(∫f dE)x⟩ = ∫ f dμ_x (L¹ DCT tail-conv + inner continuity) — for

@@ -528,6 +528,18 @@ theorem hasDerivAt_expSymbol (c : ℝ) :
     simpa using (hb.const_mul Complex.I).mul_const (c : ℂ)
   simpa using h1.cexp
 
+/-- **The difference-quotient slope tendsto** `(e^{itc}−1)/t → ic` as `t→0` (`t≠0`).  The pointwise input,
+    in the `𝓝[≠]0` slope form the `L²` dominated-convergence step consumes, for the generator relation. -/
+theorem expSymbol_slope_tendsto (c : ℝ) :
+    Filter.Tendsto (fun t : ℝ => (Complex.exp (Complex.I * (t : ℂ) * (c : ℂ)) - 1) / (t : ℂ))
+      (nhdsWithin 0 {0}ᶜ) (nhds (Complex.I * (c : ℂ))) := by
+  have h := hasDerivAt_expSymbol c
+  rw [hasDerivAt_iff_tendsto_slope] at h
+  refine h.congr fun t => ?_
+  simp only [slope, vsub_eq_sub, sub_zero, Complex.ofReal_zero, mul_zero, zero_mul,
+    Complex.exp_zero, Complex.real_smul, Complex.ofReal_inv]
+  ring
+
 /-- **The difference-quotient domination** `‖e^{itf ω} − 1‖ ≤ |t|·|f ω|` (so `‖(e^{itf}−1)/t‖ ≤ |f ω|`,
     uniform in `t`).  The key estimate for the Stone generator relation `d/dt boundedFC(e^{itf})x|₀ = i·Kx`
     — `(e^{itf}−1)/t → if` in `L²(μ_x)` dominated by `|f| ∈ L²(μ_x)`.  From `‖e^{ix}−1‖ ≤ |x|`. -/
@@ -580,6 +592,99 @@ theorem expSymbol_sub_one_norm_sq {f : Ω → ℝ} (hf : Measurable f) (t : ℝ)
     measurable_const (norm_nonneg (1 : ℂ)) (fun _ => le_rfl) x
   rw [hone] at key
   exact key
+
+/-- **The difference-quotient `L²` domination** `‖(e^{itf ω}−1)/t‖ ≤ |f ω|`, valid for *all* `t`
+    (including `t = 0`, where `z/0 = 0`).  The uniform `L²` bound for the dominated-convergence step. -/
+theorem norm_expSymbol_sub_one_div_le {f : Ω → ℝ} (t : ℝ) (ω : Ω) :
+    ‖(Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ)) - 1) / (t : ℂ)‖ ≤ |f ω| := by
+  rcases eq_or_ne t 0 with ht | ht
+  · subst ht; simp [abs_nonneg]
+  · rw [norm_div, Complex.norm_real, Real.norm_eq_abs, div_le_iff₀ (abs_pos.mpr ht)]
+    calc ‖Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ)) - 1‖
+        ≤ |t| * |f ω| := norm_expSymbol_sub_one_le t ω
+      _ = |f ω| * |t| := by ring
+
+/-- **The `L²` convergence of the difference quotient** — the Stone-generator analytic heart.  As `t→0`,
+    `∫ ‖(e^{itf}−1)/t − if‖² dμ_x → 0` (in `ℝ≥0∞`/`lintegral` form, to dodge the recurring
+    Bochner-over-`scalarMeasure` `whnf` wall).  Sequential dominated convergence: pointwise `→ 0` from
+    `expSymbol_slope_tendsto`, dominated by `4·f²` (from `norm_expSymbol_sub_one_div_le`, finite by `hx`). -/
+theorem expSymbol_diffQuotient_lintegral_tendsto {f : Ω → ℝ} (hf : Measurable f) {x : H}
+    (hx : x ∈ P.fcDomain f) :
+    Filter.Tendsto
+      (fun t : ℝ => ∫⁻ ω, ENNReal.ofReal
+        (‖(Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ)) - 1) / (t : ℂ)
+          - Complex.I * (f ω : ℂ)‖ ^ 2) ∂(P.scalarMeasure x))
+      (nhdsWithin 0 {0}ᶜ) (nhds 0) := by
+  rw [Filter.tendsto_iff_seq_tendsto]
+  intro u hu
+  -- The pointwise squared `L²` domination `‖(e^{itf}−1)/t − if‖² ≤ 4 f²`.
+  have hsq_bound : ∀ (t : ℝ) (ω : Ω),
+      ‖(Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ)) - 1) / (t : ℂ)
+        - Complex.I * (f ω : ℂ)‖ ^ 2 ≤ 4 * (f ω) ^ 2 := by
+    intro t ω
+    have hb : ‖Complex.I * (f ω : ℂ)‖ = |f ω| := by
+      rw [norm_mul, Complex.norm_I, one_mul, Complex.norm_real, Real.norm_eq_abs]
+    have htri : ‖(Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ)) - 1) / (t : ℂ)
+        - Complex.I * (f ω : ℂ)‖ ≤ 2 * |f ω| := by
+      calc ‖(Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ)) - 1) / (t : ℂ)
+              - Complex.I * (f ω : ℂ)‖
+          ≤ ‖(Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ)) - 1) / (t : ℂ)‖
+            + ‖Complex.I * (f ω : ℂ)‖ := norm_sub_le _ _
+        _ ≤ |f ω| + |f ω| := by rw [hb]; gcongr; exact norm_expSymbol_sub_one_div_le t ω
+        _ = 2 * |f ω| := by ring
+    calc ‖(Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ)) - 1) / (t : ℂ)
+            - Complex.I * (f ω : ℂ)‖ ^ 2
+        ≤ (2 * |f ω|) ^ 2 := by gcongr
+      _ = 4 * (f ω) ^ 2 := by rw [mul_pow, sq_abs]; ring
+  -- Measurability of each truncated integrand.
+  have hmeas : ∀ n, Measurable (fun ω => ENNReal.ofReal
+      (‖(Complex.exp (Complex.I * (u n : ℂ) * (f ω : ℂ)) - 1) / (u n : ℂ)
+        - Complex.I * (f ω : ℂ)‖ ^ 2)) := by
+    intro n
+    refine ENNReal.measurable_ofReal.comp (Measurable.pow_const (Measurable.norm ?_) 2)
+    refine Measurable.sub ?_ (measurable_const.mul (Complex.measurable_ofReal.comp hf))
+    refine Measurable.div_const (Measurable.sub_const ?_ 1) _
+    exact Complex.measurable_exp.comp (measurable_const.mul (Complex.measurable_ofReal.comp hf))
+  -- The `ℝ≥0∞` domination and its finiteness.
+  have hbound : ∀ n, (fun ω => ENNReal.ofReal
+      (‖(Complex.exp (Complex.I * (u n : ℂ) * (f ω : ℂ)) - 1) / (u n : ℂ)
+        - Complex.I * (f ω : ℂ)‖ ^ 2))
+      ≤ᵐ[P.scalarMeasure x] (fun ω => ENNReal.ofReal (4 * (f ω) ^ 2)) := fun n =>
+    Filter.Eventually.of_forall (fun ω => ENNReal.ofReal_le_ofReal (hsq_bound (u n) ω))
+  have hfin : ∫⁻ ω, ENNReal.ofReal (4 * (f ω) ^ 2) ∂(P.scalarMeasure x) ≠ ⊤ := by
+    have heq : ∫⁻ ω, ENNReal.ofReal (4 * (f ω) ^ 2) ∂(P.scalarMeasure x)
+        = 4 * P.fcEnergy f x := by
+      calc ∫⁻ ω, ENNReal.ofReal (4 * (f ω) ^ 2) ∂(P.scalarMeasure x)
+          = ∫⁻ ω, 4 * ENNReal.ofReal ((f ω) ^ 2) ∂(P.scalarMeasure x) := by
+            refine MeasureTheory.lintegral_congr fun ω => ?_
+            rw [ENNReal.ofReal_mul (by norm_num : (0 : ℝ) ≤ 4), ENNReal.ofReal_ofNat]
+        _ = 4 * ∫⁻ ω, ENNReal.ofReal ((f ω) ^ 2) ∂(P.scalarMeasure x) :=
+            MeasureTheory.lintegral_const_mul 4 (ENNReal.measurable_ofReal.comp (hf.pow_const 2))
+        _ = 4 * P.fcEnergy f x := by rw [fcEnergy]
+    rw [heq]
+    exact ENNReal.mul_ne_top (by norm_num) ((P.mem_fcDomain).mp hx)
+  -- The pointwise `→ 0` from the slope tendsto.
+  have hlim : ∀ᵐ ω ∂(P.scalarMeasure x), Filter.Tendsto
+      (fun n => ENNReal.ofReal
+        (‖(Complex.exp (Complex.I * (u n : ℂ) * (f ω : ℂ)) - 1) / (u n : ℂ)
+          - Complex.I * (f ω : ℂ)‖ ^ 2)) Filter.atTop (nhds 0) := by
+    refine Filter.Eventually.of_forall (fun ω => ?_)
+    have hcomp := (expSymbol_slope_tendsto (f ω)).comp hu
+    have hsub : Filter.Tendsto
+        (fun n => (Complex.exp (Complex.I * (u n : ℂ) * (f ω : ℂ)) - 1) / (u n : ℂ)
+          - Complex.I * (f ω : ℂ)) Filter.atTop (nhds 0) := by
+      have := hcomp.sub (tendsto_const_nhds (x := Complex.I * (f ω : ℂ)))
+      simpa using this
+    have hnorm : Filter.Tendsto
+        (fun n => ‖(Complex.exp (Complex.I * (u n : ℂ) * (f ω : ℂ)) - 1) / (u n : ℂ)
+          - Complex.I * (f ω : ℂ)‖ ^ 2) Filter.atTop (nhds 0) := by
+      have := hsub.norm.pow 2
+      simpa using this
+    have := ENNReal.tendsto_ofReal hnorm
+    simpa using this
+  have hDCT := MeasureTheory.tendsto_lintegral_of_dominated_convergence
+    (fun ω => ENNReal.ofReal (4 * (f ω) ^ 2)) hmeas hbound hfin hlim
+  simpa using hDCT
 
 /-- **The FC-exponential group identity** `∫ e^{i·0·f} dE = 1`: `boundedFC(e^{i·0·f}) = 1` (the `t = 0`
     element of the one-parameter group `exp(itK)`). -/
