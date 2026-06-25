@@ -106,9 +106,15 @@ item.** Never claim the `1/4`.
   `norm_boundedFC_sub_sq`: `‖boundedFC g₁ x − boundedFC g₂ x‖²=∫|g₁−g₂|²dμ_x` — the concrete Cauchy bound).
   **Cauchy integrand bound ✅** (`fcTrunc_diff_sq_le`: `(fₘ−fₙ)²≤2(f−fₘ)²+2(f−fₙ)²`). **Bochner tail-conv ✅**
   (`fcTrunc_integral_sub_sq_tendsto`: `∫|f−fₙ|²dμ_x → 0` real, from the lintegral version via
-  `∫g=(∫⁻ofReal g).toReal` + `toReal` continuity). NEXT: integrate the integrand bound ⟹
-  `‖boundedFC(fₘ)x−boundedFC(fₙ)x‖²→0` for `m,n≥N` ⟹ `CauchySeq` (`Metric.cauchySeq_iff`, no monotonicity) ⟹
-  the strong limit `fcLinear x := lim boundedFC(fₙ)x` (the operator `∫f dE`) + linearity + self-adjointness.
+  `∫g=(∫⁻ofReal g).toReal` + `toReal` continuity). **⚠ CHECKPOINT — the Bochner integral-bound lemma
+  `∫(fₘ−fₙ)²≤2∫(f−fₘ)²+2∫(f−fₙ)²` hit a `whnf` elaboration blowup** (heartbeats diverge past 800k) in the
+  `Integrable.mono`/`integral_mono` chain over the `Measure.ofMeasurable`-defined `scalarMeasure x` — the same
+  pathology class as `CrossedProductRep`. All the underlying estimates (norm identity, difference-norm,
+  integrand bound `fcTrunc_diff_sq_le`, both tail-convergences) ARE proved; the blocker is purely the Lean
+  elaboration of the Bochner integrability bookkeeping. **Workaround (next fire):** prove the bound at the
+  `lintegral` (ℝ≥0∞) level (`lintegral_mono`/`_add`/`_const_mul`, no `Integrable`), OR isolate `scalarMeasure`
+  behind an opaque wrapper to stop the divergent `whnf`, then assemble `CauchySeq` ⟹ the strong limit
+  `fcLinear x := lim boundedFC(fₙ)x` (the operator `∫f dE`) + linearity + self-adjointness.
 - [ ] **M2** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1 closed)
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)
