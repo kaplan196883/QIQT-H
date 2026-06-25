@@ -507,6 +507,46 @@ theorem fcOp_symmetric {f : Ω → ℝ} (hf : Measurable f) {x y : H} (hx : x �
       (nhds (inner ℂ x (P.fcOp hf y))) := tendsto_const_nhds.inner (P.fcSeq_tendsto_fcOp hf hy)
   exact tendsto_nhds_unique ((funext hsa : _ = _) ▸ h1) h2
 
+/-- The exponential symbol `e^{itf}` is bounded by `1` (it is unimodular). -/
+theorem norm_expSymbol_le {f : Ω → ℝ} (t : ℝ) (ω : Ω) :
+    ‖Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ))‖ ≤ 1 := by
+  rw [Complex.norm_exp]
+  have hre : (Complex.I * (t : ℂ) * (f ω : ℂ)).re = 0 := by simp
+  rw [hre, Real.exp_zero]
+
+theorem measurable_expSymbol {f : Ω → ℝ} (hf : Measurable f) (t : ℝ) :
+    Measurable (fun ω => Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ))) := by
+  fun_prop
+
+/-- **The FC-exponential group law** `∫ e^{i(s+t)f} dE = (∫ e^{isf} dE)·(∫ e^{itf} dE)`:
+    `boundedFC(e^{i(s+t)f}) = boundedFC(e^{isf}) · boundedFC(e^{itf})`.  The bounded-operator content of
+    `exp(itK)` being a one-parameter group (`K = ∫ f dE`) — from `boundedFC_mul` + `Complex.exp_add`. -/
+theorem boundedFC_expSymbol_add {f : Ω → ℝ} (hf : Measurable f) (s t : ℝ) :
+    P.boundedFC (measurable_expSymbol hf (s + t)) zero_le_one (norm_expSymbol_le (s + t))
+      = P.boundedFC (measurable_expSymbol hf s) zero_le_one (norm_expSymbol_le s)
+        * P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) := by
+  have hpm : Measurable (fun ω => Complex.exp (Complex.I * (s : ℂ) * (f ω : ℂ))
+      * Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ))) :=
+    (measurable_expSymbol hf s).mul (measurable_expSymbol hf t)
+  have hpb : ∀ ω, ‖Complex.exp (Complex.I * (s : ℂ) * (f ω : ℂ))
+      * Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ))‖ ≤ 1 := fun ω => by
+    rw [norm_mul]
+    nlinarith [norm_expSymbol_le (f := f) s ω, norm_expSymbol_le (f := f) t ω,
+      norm_nonneg (Complex.exp (Complex.I * (s : ℂ) * (f ω : ℂ))),
+      norm_nonneg (Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ)))]
+  have hsym : (fun ω => Complex.exp (Complex.I * ((s + t : ℝ) : ℂ) * (f ω : ℂ)))
+      = fun ω => Complex.exp (Complex.I * (s : ℂ) * (f ω : ℂ))
+        * Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ)) := by
+    funext ω
+    have harg : Complex.I * ((s + t : ℝ) : ℂ) * (f ω : ℂ)
+        = Complex.I * (s : ℂ) * (f ω : ℂ) + Complex.I * (t : ℂ) * (f ω : ℂ) := by
+      rw [Complex.ofReal_add]; ring
+    rw [harg, Complex.exp_add]
+  rw [← P.boundedFC_mul (measurable_expSymbol hf s) zero_le_one (norm_expSymbol_le (f := f) s)
+    (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le (f := f) t) hpm zero_le_one hpb]
+  exact P.boundedFC_congr (measurable_expSymbol hf (s + t)) zero_le_one
+    (norm_expSymbol_le (f := f) (s + t)) hpm zero_le_one hpb hsym
+
 /-- **Bounded-symbol compatibility:** for a bounded symbol the unbounded FC agrees with the bounded one,
     `(∫ f dE) x = boundedFC(↑f) x`.  (The truncations are eventually `= f`, so the sequence is eventually
     the constant `boundedFC(↑f) x`.)  This ties the unbounded operator back to `boundedFC` — e.g. the

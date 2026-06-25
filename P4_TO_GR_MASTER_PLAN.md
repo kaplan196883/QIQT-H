@@ -147,6 +147,9 @@ item.** Never claim the `1/4`.
   (`modChar t r = e^{−it·kFn r}`) + `modChar`'s strongly-continuous unitary-group structure already exist;
   lifting to `= e^{−itK}` at the operator level is **Stone generator-reconstruction** (group → generator
   derivative `d/dt boundedFC(e^{itf})x|₀ = i·Kx`) — the same gap as M4 general Stone, recorded as frontier.
+  **Partial: the FC-exponential GROUP LAW ✅** (`boundedFC_expSymbol_add`: `boundedFC(e^{i(s+t)f}) =
+  boundedFC(e^{isf})·boundedFC(e^{itf})` for any PVM — the bounded-operator content of `exp(itK)` as a
+  one-parameter group, via `boundedFC_mul`+`exp_add`); only the generator-derivative link to `K` stays the gap.
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)
 - [ ] **M5** — dual-weight trace + JLMS + FQ bound
