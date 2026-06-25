@@ -1004,4 +1004,17 @@ theorem norm_boundedFC_expSymbol {f : Ω → ℝ} (hf : Measurable f) (t : ℝ) 
     (P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) x))
   rw [← h, hsq, Real.sqrt_sq (norm_nonneg x)]
 
+/-- **The infinitesimal matrix element of the FC-exponential flow:** `d/dt ⟪η, boundedFC(e^{itf}) x⟫|₀ =
+    ⟪η, i·(∫f dE) x⟫`.  The generator relation `hasDerivAt_boundedFC_expSymbol` composed with the continuous
+    linear functional `⟪η, ·⟫` (`innerSL`).  For the diagonal `η = x` this is the infinitesimal JLMS first law
+    `d/dt⟨Δ^{it}⟩|₀ = i·⟨K⟩`. -/
+theorem hasDerivAt_inner_boundedFC_expSymbol {f : Ω → ℝ} (hf : Measurable f) {x : H}
+    (hx : x ∈ P.fcDomain f) (η : H) :
+    HasDerivAt
+      (fun t : ℝ => inner ℂ η
+        (P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) x))
+      (inner ℂ η (Complex.I • P.fcOp hf x)) 0 := by
+  have h := (hasDerivAt_const (0 : ℝ) η).inner ℂ (P.hasDerivAt_boundedFC_expSymbol hf hx)
+  simpa using h
+
 end QIQTH.Spectral.ProjectionValuedMeasure

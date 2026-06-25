@@ -131,4 +131,27 @@ theorem norm_modFlow (S : StandardSubspace H) (t : ℝ) (ξ : H) :
   (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).norm_boundedFC_expSymbol
     (kFn_val_measurable S) t ξ
 
+/-- **The infinitesimal JLMS first law `d/dt⟨Δ^{it}⟩|₀ = i·S`:** the derivative at `t = 0` of the modular flow's
+    diagonal matrix element `⟪ξ, Δ^{−it} ξ⟫ = ⟪ξ, boundedFC(e^{it·kFn}(R)) ξ⟫` is `i·S`, where `S = cgpEntropy S ξ`
+    is the modular (CGP) entropy.  Combines the modular flow generator (`hasDerivAt_inner_boundedFC_expSymbol`)
+    with the operator first law `⟨K⟩ = S` (`modK_inner_self`): `d/dt⟨ξ,Δ^{it}ξ⟩|₀ = i·⟨ξ,Kξ⟩ = i·S`.  This ties the
+    `C₀` modular-flow Stone package directly to the entanglement entropy.  Axiom-free. -/
+theorem hasDerivAt_modFlow_inner (S : StandardSubspace H) {ξ : H}
+    (hdom : ξ ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => kFn ω.val))
+    (hspec : ∀ ω : spectrum ℝ (rvdRC S), (ω : spectrum ℝ (rvdRC S)).val ∈ Set.Ioo (0 : ℝ) 2) :
+    HasDerivAt
+      (fun t : ℝ => inner ℂ ξ ((PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).boundedFC
+        (QIQTH.Spectral.ProjectionValuedMeasure.measurable_expSymbol (kFn_val_measurable S) t)
+        zero_le_one (QIQTH.Spectral.ProjectionValuedMeasure.norm_expSymbol_le t) ξ))
+      (Complex.I * ((cgpEntropy S ξ : ℝ) : ℂ)) 0 := by
+  have h := (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).hasDerivAt_inner_boundedFC_expSymbol
+    (kFn_val_measurable S) hdom ξ
+  have hval : inner ℂ ξ (Complex.I • (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcOp
+        (kFn_val_measurable S) ξ) = Complex.I * ((cgpEntropy S ξ : ℝ) : ℂ) := by
+    rw [inner_smul_right]
+    congr 1
+    exact modK_inner_self S ξ hdom hspec
+  rwa [hval] at h
+
 end QIQTH.StandardSubspaceModular

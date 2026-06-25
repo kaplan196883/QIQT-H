@@ -1271,6 +1271,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.norm_boundedFC_expSymbol
 -- ★ UNITARITY (norm-preservation) of the FC-exponential group: ‖boundedFC(e^{itf})x‖=‖x‖, from U⋆U=1
 -- (boundedFC_expSymbol_adjoint_mul). Completes the unitary one-parameter group at the norm level.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.hasDerivAt_inner_boundedFC_expSymbol
+-- ★ INFINITESIMAL matrix element: d/dt⟪η,boundedFC(e^{itf})x⟫|₀ = ⟪η,i·(∫f dE)x⟫ (generator ∘ innerSL, HasDerivAt.inner).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_integral_tendsto
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_inner_self
 -- ★ M2 operator-level first law: ⟨x,(∫f dE)x⟩ = ∫ f dμ_x (L¹ DCT tail-conv + inner continuity) — for
@@ -1293,6 +1295,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.norm_modFlow
 -- ★ UNITARITY of the modular flow: ‖Δ^{it}ξ‖=‖ξ‖ (specializes norm_boundedFC_expSymbol). Completes Δ^{it} as a
 -- genuine C₀ one-parameter UNITARY group: group law + generator iK + strong continuity + norm-preservation.
+#print axioms QIQTH.StandardSubspaceModular.hasDerivAt_modFlow_inner
+-- ★★ INFINITESIMAL JLMS FIRST LAW d/dt⟨Δ^{it}⟩|₀ = i·S: the derivative of the modular flow's diagonal matrix
+-- element ⟪ξ,Δ^{−it}ξ⟫ at t=0 is i·cgpEntropy (generator iK + the operator first law ⟨K⟩=S, modK_inner_self).
+-- Ties the C₀ modular-flow Stone package directly to the entanglement entropy.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
