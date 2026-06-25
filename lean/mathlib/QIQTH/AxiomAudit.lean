@@ -1308,6 +1308,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.hasDerivAt_modChar
 -- ★ CANONICAL Δ^{it}=e^{−itK} (generator −iK): the flow boundedFC(e^{it·(−kFn)}(R)) = modChar(t) = Δ^{it} on the
 -- spectrum has Stone generator −i·modK = −iK, i.e. Δ^{it}=e^{−itK} literally. Uses fcOp_neg (∫(−kFn)dE=−modK).
+#print axioms QIQTH.StandardSubspaceModular.hasDerivAt_modFlow_inner_im
+-- ★ REAL-VALUED (PHYSICAL) FIRST LAW d/dt Im⟪ξ,Δ^{−it}ξ⟫|₀ = S: the entropy is the t-derivative of the imaginary
+-- part of the modular correlator (a real observable) — the operator first law in physical form (Re part stationary).
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

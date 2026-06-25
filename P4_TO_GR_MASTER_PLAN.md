@@ -210,6 +210,10 @@ item.** Never claim the `1/4`.
     `boundedFC(e^{it·(−kFn)}(R)) = modChar(t) = Δ^{it}` on the spectrum has Stone generator `−i·modK = −iK`, i.e.
     `Δ^{it}=e^{−itK}` *literally* (textbook sign). Uses the new symbol-linearity `fcOp_neg` (`∫(−kFn)dE = −modK`)
     on top of the general capstone — the canonical statement now sits directly in the library.
+  • **REAL-VALUED (PHYSICAL) FIRST LAW NOW LANDED ✅** — `hasDerivAt_modFlow_inner_im`:
+    `d/dt Im⟪ξ,Δ^{−it}ξ⟫|₀ = S` (`= cgpEntropy`). Since the correlator's derivative `i·S` is purely imaginary, the
+    entropy is precisely the `t`-derivative of the **imaginary part** of the modular correlator — a real observable
+    (the real part is stationary at `t=0`). The operator first law in its physical, real-valued form.
   NB the Bochner-over-`scalarMeasure` DCT route hits a `whnf` wall — the `lintegral`/`HasDerivAt` route is the way.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,

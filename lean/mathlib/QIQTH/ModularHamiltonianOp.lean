@@ -154,6 +154,23 @@ theorem hasDerivAt_modFlow_inner (S : StandardSubspace H) {ξ : H}
     exact modK_inner_self S ξ hdom hspec
   rwa [hval] at h
 
+/-- **The real-valued (physical) first law `d/dt Im⟪ξ, Δ^{−it} ξ⟫|₀ = S`.**  Since the modular correlator's
+    derivative `i·S` is purely imaginary, the entropy `S = cgpEntropy S ξ` is precisely the `t`-derivative of the
+    **imaginary part** of `⟪ξ, Δ^{−it} ξ⟫` — a real observable.  This is the operator first law in its physical,
+    real-valued form (the real part of the correlator is stationary at `t = 0`; the imaginary part carries `S`).
+    Axiom-free. -/
+theorem hasDerivAt_modFlow_inner_im (S : StandardSubspace H) {ξ : H}
+    (hdom : ξ ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => kFn ω.val))
+    (hspec : ∀ ω : spectrum ℝ (rvdRC S), (ω : spectrum ℝ (rvdRC S)).val ∈ Set.Ioo (0 : ℝ) 2) :
+    HasDerivAt
+      (fun t : ℝ => (inner ℂ ξ ((PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).boundedFC
+        (QIQTH.Spectral.ProjectionValuedMeasure.measurable_expSymbol (kFn_val_measurable S) t)
+        zero_le_one (QIQTH.Spectral.ProjectionValuedMeasure.norm_expSymbol_le t) ξ) : ℂ).im)
+      (cgpEntropy S ξ) 0 := by
+  have h := Complex.imCLM.hasFDerivAt.comp_hasDerivAt (0 : ℝ) (hasDerivAt_modFlow_inner S hdom hspec)
+  simpa [Complex.mul_im] using h
+
 /-- **The modular flow in the canonical `Δ^{it}=e^{−itK}` direction (generator `−iK`).**  The flow
     `t ↦ boundedFC(e^{it·(−kFn)}(R)) ξ` — which on the spectrum `(0,2)` is exactly `modChar(t) = Δ^{it}`
     (by `modChar_eq_exp_neg_kFn`, `e^{it·(−kFn r)} = e^{−(i·t·kFn r)} = modChar t r`) — has Stone generator
