@@ -1,8 +1,11 @@
 # Zenodo deposit metadata — methods paper
 
-Use these fields when creating the Zenodo deposit at <https://zenodo.org/uploads/new>.
-Upload `paper_methods_out/main.pdf` as the file. Zenodo mints a versioned DOI and a
-concept (all-versions) DOI; cite the concept DOI on qiqt.org.
+**Published 2026-06-25.** Record: <https://zenodo.org/records/20837810>
+- Concept DOI (all versions, cite this): **10.5281/zenodo.20837809** — <https://doi.org/10.5281/zenodo.20837809>
+- Version DOI (this upload): **10.5281/zenodo.20837810** — <https://doi.org/10.5281/zenodo.20837810>
+
+The fields below were used for the deposit (kept for the record / future versions).
+Upload `paper_methods_out/main.pdf` as the file; cite the concept DOI on qiqt.org.
 
 ---
 

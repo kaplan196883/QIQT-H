@@ -40,7 +40,8 @@ before reading the [foundations paper](#foundations-paper) above for *what* it c
 
 **[Read the PDF](/QIQT_AI_Methodology.pdf)**
 &nbsp;·&nbsp; Preprint, served directly from this site; being prepared for submission to a
-peer-reviewed venue. A DOI will be posted here once available.
+peer-reviewed venue.
+&nbsp;·&nbsp; DOI: [10.5281/zenodo.20837809](https://doi.org/10.5281/zenodo.20837809) (Zenodo).
 
 ## Formalization companion
 
