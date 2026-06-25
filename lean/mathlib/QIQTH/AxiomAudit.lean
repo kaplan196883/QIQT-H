@@ -4355,6 +4355,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.aesm_matterFiber
 -- The Wall Phase 1.2: π(a)ξ ∈ L²(ℝ;H) — the fiber is L² (contraction bound ‖σ_{-s}(a)v‖ ≤ ‖a‖‖v‖):
 #print axioms QIQTH.StandardSubspaceModular.memLp_matterFiber
+-- The Wall Phase 1.2/1.3: π(a) is a bounded operator (‖π(a)‖≤‖a‖) + a unital algebra homomorphism M→B(L²(ℝ;H)):
+#print axioms QIQTH.StandardSubspaceModular.matterRep
+#print axioms QIQTH.StandardSubspaceModular.matterRep_one
+#print axioms QIQTH.StandardSubspaceModular.matterRep_mul
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable

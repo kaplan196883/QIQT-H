@@ -149,6 +149,14 @@ specialization).
   `‖σ_t(a) v‖ ≤ ‖a‖·‖v‖`, from the modular unitaries being isometries) + `memLp_matterFiber`: for `ξ ∈ L²(ℝ;H)`,
   the fiber `s ↦ σ_{-s}(a)(ξ s) ∈ L²` (Phase-1.1 measurability + domination via `MemLp.of_le_mul`). Axiom-free
   (std 3); wired into AxiomAudit; budget 0.
-- **NEXT: Phase 1.2 (bundling)** — `matterRep S a : L²(ℝ;H) →L[ℂ] L²(ℝ;H)`, `ξ ↦ (memLp_matterFiber).toLp`, with
-  `map_add`/`map_smul` (a.e. fiberwise linearity) and `‖π(a)‖ ≤ ‖a‖` (`LinearMap.mkContinuous`). Then 1.3 (`π` a
-  unital `*`-homomorphism). Standard `Lp`-bundling work.
+- **Phase 1.2 (bundling) ✅** — `matterRep S a : L²(ℝ;H) →L[ℂ] L²(ℝ;H)` (`matterRepFun` + `LinearMap.mkContinuous`):
+  `matterRepFun_add`/`matterRepFun_smul` (a.e. fiberwise linearity via `Lp.ext_iff` + `Lp.coeFn_add/smul`),
+  `matterRepFun_norm_le` (`‖π(a)ξ‖ ≤ ‖a‖·‖ξ‖` via `Lp.norm_le_norm_of_ae_le` against `‖a‖•ξ`). So **`π(a)` is a
+  genuine bounded operator with `‖π(a)‖ ≤ ‖a‖`.** Axiom-free; budget 0.
+- **Phase 1.3 (algebra homomorphism) ✅** — `matterRep_one` (`π(1)=1`) + `matterRep_mul` (`π(a·b)=π(a)∘π(b)`),
+  via `matterRepFun`-level a.e. identities (`modularAut_one`/`modularAut_mul`) + `ContinuousLinearMap.ext`. So
+  **`π : M → B(L²(ℝ;H))` is a unital algebra homomorphism** — the matter side of the crossed product. Axiom-free;
+  budget 0; wired into AxiomAudit.
+- **NEXT: Phase 1.3 (the `*`)** — `adjoint(π(a)) = π(a⋆)` via the `L²` inner product `⟨π(a)ξ,η⟩ = ∫⟨σ_{-s}(a)(ξ s),η s⟩`
+  + the pointwise adjoint `σ_{-s}(a)⋆ = σ_{-s}(a⋆)` (`modularAut_star`). Needs the L²-inner-product integral API;
+  the remaining piece of "unital `*`-homomorphism". Phases 2–6 (λ_t, covariance, Stone, trace) separate.

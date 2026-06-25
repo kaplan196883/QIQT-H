@@ -84,4 +84,80 @@ theorem memLp_matterFiber (S : StandardSubspace H) (a : H →L[ℂ] H)
   MemLp.of_le_mul (Lp.memLp ξ) (aesm_matterFiber S a (Lp.aestronglyMeasurable ξ))
     (Filter.Eventually.of_forall (fun s => norm_modularAut_apply_le S (-s) a (ξ s)))
 
+/-- `π(a)ξ` as an `L²(ℝ;H)` element. -/
+noncomputable def matterRepFun (S : StandardSubspace H) (a : H →L[ℂ] H)
+    (ξ : Lp H 2 (volume : Measure ℝ)) : Lp H 2 (volume : Measure ℝ) :=
+  (memLp_matterFiber S a ξ).toLp
+
+/-- Its fiber: `π(a)ξ (s) = σ_{-s}(a)(ξ s)` a.e. -/
+theorem matterRepFun_coeFn (S : StandardSubspace H) (a : H →L[ℂ] H)
+    (ξ : Lp H 2 (volume : Measure ℝ)) :
+    matterRepFun S a ξ =ᵐ[volume] fun s => modularAut S (-s) a (ξ s) :=
+  MemLp.coeFn_toLp _
+
+theorem matterRepFun_add (S : StandardSubspace H) (a : H →L[ℂ] H)
+    (ξ η : Lp H 2 (volume : Measure ℝ)) :
+    matterRepFun S a (ξ + η) = matterRepFun S a ξ + matterRepFun S a η := by
+  rw [Lp.ext_iff]
+  filter_upwards [matterRepFun_coeFn S a (ξ + η),
+    Lp.coeFn_add (matterRepFun S a ξ) (matterRepFun S a η),
+    matterRepFun_coeFn S a ξ, matterRepFun_coeFn S a η, Lp.coeFn_add ξ η] with s e1 e2 e3 e4 e5
+  simp only [e1, e2, Pi.add_apply, e3, e4, e5, map_add]
+
+theorem matterRepFun_smul (S : StandardSubspace H) (a : H →L[ℂ] H) (c : ℂ)
+    (ξ : Lp H 2 (volume : Measure ℝ)) :
+    matterRepFun S a (c • ξ) = c • matterRepFun S a ξ := by
+  rw [Lp.ext_iff]
+  filter_upwards [matterRepFun_coeFn S a (c • ξ),
+    Lp.coeFn_smul c (matterRepFun S a ξ), matterRepFun_coeFn S a ξ, Lp.coeFn_smul c ξ]
+    with s e1 e2 e3 e4
+  simp only [e1, e2, Pi.smul_apply, e3, e4, map_smul]
+
+theorem matterRepFun_norm_le (S : StandardSubspace H) (a : H →L[ℂ] H)
+    (ξ : Lp H 2 (volume : Measure ℝ)) :
+    ‖matterRepFun S a ξ‖ ≤ ‖a‖ * ‖ξ‖ := by
+  have hg : ‖matterRepFun S a ξ‖ ≤ ‖(‖a‖ : ℝ) • ξ‖ := by
+    apply Lp.norm_le_norm_of_ae_le
+    filter_upwards [matterRepFun_coeFn S a ξ, Lp.coeFn_smul (‖a‖ : ℝ) ξ] with s e1 e2
+    rw [e1, e2, Pi.smul_apply, norm_smul, Real.norm_eq_abs, abs_of_nonneg (norm_nonneg a)]
+    exact norm_modularAut_apply_le S (-s) a (ξ s)
+  rwa [norm_smul, Real.norm_eq_abs, abs_of_nonneg (norm_nonneg a)] at hg
+
+/-- **★ Phase 1.2 — the matter representation `π(a)` as a bounded operator on `L²(ℝ;H)`.**
+    `π(a)ξ = [s ↦ σ_{-s}(a)(ξ s)]`, ℂ-linear with `‖π(a)‖ ≤ ‖a‖` — the matter side of the crossed product. -/
+noncomputable def matterRep (S : StandardSubspace H) (a : H →L[ℂ] H) :
+    Lp H 2 (volume : Measure ℝ) →L[ℂ] Lp H 2 (volume : Measure ℝ) :=
+  LinearMap.mkContinuous
+    { toFun := matterRepFun S a
+      map_add' := matterRepFun_add S a
+      map_smul' := matterRepFun_smul S a }
+    ‖a‖ (matterRepFun_norm_le S a)
+
+@[simp] theorem matterRep_apply (S : StandardSubspace H) (a : H →L[ℂ] H)
+    (ξ : Lp H 2 (volume : Measure ℝ)) : matterRep S a ξ = matterRepFun S a ξ := rfl
+
+theorem matterRepFun_one (S : StandardSubspace H) (ξ : Lp H 2 (volume : Measure ℝ)) :
+    matterRepFun S (1 : H →L[ℂ] H) ξ = ξ := by
+  rw [Lp.ext_iff]
+  filter_upwards [matterRepFun_coeFn S 1 ξ] with s e1
+  rw [e1, modularAut_one]; rfl
+
+theorem matterRepFun_mul (S : StandardSubspace H) (a b : H →L[ℂ] H)
+    (ξ : Lp H 2 (volume : Measure ℝ)) :
+    matterRepFun S (a * b) ξ = matterRepFun S a (matterRepFun S b ξ) := by
+  rw [Lp.ext_iff]
+  filter_upwards [matterRepFun_coeFn S (a * b) ξ,
+    matterRepFun_coeFn S a (matterRepFun S b ξ), matterRepFun_coeFn S b ξ] with s e1 e2 e3
+  rw [e1, e2, e3, modularAut_mul]; rfl
+
+/-- **★ Phase 1.3 (unital) — `π(1) = 1`.** -/
+theorem matterRep_one (S : StandardSubspace H) : matterRep S (1 : H →L[ℂ] H) = 1 :=
+  ContinuousLinearMap.ext (fun ξ => matterRepFun_one S ξ)
+
+/-- **★ Phase 1.3 (multiplicative) — `π(a·b) = π(a)∘π(b)`.**  With `matterRep_one`, the unital algebra
+    homomorphism `M → B(L²(ℝ;H))` underlying the crossed product (`σ_{-s}` is multiplicative). -/
+theorem matterRep_mul (S : StandardSubspace H) (a b : H →L[ℂ] H) :
+    matterRep S (a * b) = matterRep S a ∘L matterRep S b :=
+  ContinuousLinearMap.ext (fun ξ => matterRepFun_mul S a b ξ)
+
 end QIQTH.StandardSubspaceModular
