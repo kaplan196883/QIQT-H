@@ -1259,6 +1259,10 @@ namespace QIQTH.AxiomAudit
 -- ★★ STONE operator-assembly step 2 (CRUX): ‖boundedFC(h)x − i·(∫f dE)x‖² = ∫‖h − i·↑f‖²dμ_x (bounded symbol h) —
 -- the operator distance to i·fcOp x EQUALS the L² symbol distance to i·f. Collapses the generator double-limit to a
 -- single limit (limit-uniqueness: i·fcSeq→i·fcOp + norm_boundedFC_sub_sq + complexSymbol_fcTrunc_lintegral_tendsto).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.hasDerivAt_boundedFC_expSymbol
+-- ★★★ STONE GENERATOR (M2/M4 CAPSTONE): d/dt(boundedFC(e^{itf})x)|₀ = i·(∫f dE)x — the strongly-continuous
+-- one-parameter unitary group t↦boundedFC(e^{itf}) has generator i·K (K=∫f dE). The OPERATOR Δ^{it}=e^{−itK}.
+-- Assembled axiom-free from the analytic heart + the distance identity: ‖slope−i·fcOp x‖²=(∫⁻‖(e^{itf}−1)/t−if‖²).toReal→0.
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_integral_tendsto
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_inner_self
 -- ★ M2 operator-level first law: ⟨x,(∫f dE)x⟩ = ∫ f dμ_x (L¹ DCT tail-conv + inner continuity) — for

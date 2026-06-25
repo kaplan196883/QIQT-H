@@ -876,4 +876,76 @@ theorem fcOp_inner_self {f : Ω → ℝ} (hf : Measurable f) {x : H} (hx : x ∈
   exact tendsto_nhds_unique h1
     ((Complex.continuous_ofReal.tendsto _).comp (P.fcTrunc_integral_tendsto hf hx))
 
+/-- **The Stone generator relation (operator `Δ^{it}=e^{−itK}`, the M2/M4 capstone):**
+    `d/dt (boundedFC(e^{itf}) x)|₀ = i·(∫f dE) x`.  The strongly-continuous one-parameter unitary group
+    `t ↦ boundedFC(e^{itf})` has generator `i·K` with `K = ∫f dE`: differentiating the FC exponential at `0`
+    yields `i` times the unbounded operator.  Assembled from the analytic heart
+    (`expSymbol_diffQuotient_lintegral_tendsto`) + the distance identity (`dist_boundedFC_smul_fcOp_sq`):
+    `‖slope − i·fcOp x‖² = (∫⁻‖(e^{itf}−1)/t − if‖²).toReal → 0`, so the slope `→ i·fcOp x`. -/
+theorem hasDerivAt_boundedFC_expSymbol {f : Ω → ℝ} (hf : Measurable f) {x : H} (hx : x ∈ P.fcDomain f) :
+    HasDerivAt
+      (fun t : ℝ => P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) x)
+      (Complex.I • P.fcOp hf x) 0 := by
+  rw [hasDerivAt_iff_tendsto_slope]
+  -- `e^{itf} − 1`: measurability and the bound `≤ 2`.
+  have hsub_x : ∀ t : ℝ, P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) x - x
+      = P.boundedFC ((measurable_expSymbol hf t).sub (measurable_const (a := (1 : ℂ))))
+          (add_nonneg zero_le_one zero_le_one)
+          (fun ω => (norm_sub_le _ _).trans (add_le_add (norm_expSymbol_le t ω) norm_one.le)) x := by
+    intro t
+    have h := P.boundedFC_sub (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t)
+      (measurable_const (a := (1 : ℂ))) zero_le_one (fun _ => norm_one.le)
+    have hc1 : P.boundedFC (measurable_const (a := (1 : ℂ))) zero_le_one (fun _ => norm_one.le)
+        = (1 : H →L[ℂ] H) := by
+      have h2 := P.boundedFC_const (1 : ℂ); rw [one_smul] at h2; exact h2
+    rw [hc1] at h
+    have happ := congrArg (fun T : H →L[ℂ] H => T x) h
+    simp only [ContinuousLinearMap.sub_apply, ContinuousLinearMap.one_apply] at happ
+    exact happ.symm
+  -- `g 0 = x`.
+  have hg0 : P.boundedFC (measurable_expSymbol hf 0) zero_le_one (norm_expSymbol_le 0) x = x := by
+    rw [P.boundedFC_expSymbol_zero hf, ContinuousLinearMap.one_apply]
+  -- the slope is `boundedFC` of the difference-quotient symbol (for `t ≠ 0`).
+  have hslope_eq : ∀ t : ℝ, t ≠ 0 →
+      slope (fun s => P.boundedFC (measurable_expSymbol hf s) zero_le_one (norm_expSymbol_le s) x) 0 t
+        = ((t : ℂ)⁻¹) • P.boundedFC ((measurable_expSymbol hf t).sub (measurable_const (a := (1 : ℂ))))
+            (add_nonneg zero_le_one zero_le_one)
+            (fun ω => (norm_sub_le _ _).trans (add_le_add (norm_expSymbol_le t ω) norm_one.le)) x := by
+    intro t _
+    simp only [slope, vsub_eq_sub, sub_zero]
+    rw [hg0, hsub_x t, ← Complex.coe_smul, Complex.ofReal_inv]
+  -- `‖slope − i·fcOp x‖² → 0` via the distance identity + the analytic heart.
+  have hgoal : Filter.Tendsto
+      (fun t : ℝ => ‖slope (fun s => P.boundedFC (measurable_expSymbol hf s) zero_le_one
+        (norm_expSymbol_le s) x) 0 t - Complex.I • P.fcOp hf x‖ ^ 2) (nhdsWithin 0 {0}ᶜ) (nhds 0) := by
+    have hev : (fun t : ℝ => ‖slope (fun s => P.boundedFC (measurable_expSymbol hf s) zero_le_one
+        (norm_expSymbol_le s) x) 0 t - Complex.I • P.fcOp hf x‖ ^ 2)
+        =ᶠ[nhdsWithin 0 {0}ᶜ] (fun t : ℝ => (∫⁻ ω, ENNReal.ofReal
+          (‖(Complex.exp (Complex.I * (t : ℂ) * (f ω : ℂ)) - 1) / (t : ℂ)
+            - Complex.I * (f ω : ℂ)‖ ^ 2) ∂(P.scalarMeasure x)).toReal) := by
+      filter_upwards [self_mem_nhdsWithin] with t ht
+      rw [hslope_eq t ht, ← ContinuousLinearMap.smul_apply, ← P.boundedFC_smul ((t : ℂ)⁻¹)
+        ((measurable_expSymbol hf t).sub (measurable_const (a := (1 : ℂ))))
+        (add_nonneg zero_le_one zero_le_one)
+        (fun ω => (norm_sub_le _ _).trans (add_le_add (norm_expSymbol_le t ω) norm_one.le)),
+        P.dist_boundedFC_smul_fcOp_sq hf hx]
+      congr 1
+      refine MeasureTheory.lintegral_congr fun ω => ?_
+      congr 2
+      rw [div_eq_mul_inv, mul_comm]
+    rw [Filter.tendsto_congr' hev]
+    exact (ENNReal.continuousAt_toReal (by simp)).tendsto.comp
+      (P.expSymbol_diffQuotient_lintegral_tendsto hf hx)
+  -- `‖·‖² → 0  ⟹  ‖·‖ → 0  ⟹  · → 0  ⟹  slope → i·fcOp x`.
+  have hnorm : Filter.Tendsto
+      (fun t : ℝ => ‖slope (fun s => P.boundedFC (measurable_expSymbol hf s) zero_le_one
+        (norm_expSymbol_le s) x) 0 t - Complex.I • P.fcOp hf x‖) (nhdsWithin 0 {0}ᶜ) (nhds 0) := by
+    have h := (Real.continuous_sqrt.tendsto 0).comp hgoal
+    simp only [Real.sqrt_zero] at h
+    refine h.congr fun t => ?_
+    rw [Function.comp_apply, Real.sqrt_sq (norm_nonneg _)]
+  have hv := tendsto_zero_iff_norm_tendsto_zero.mpr hnorm
+  have := hv.add (tendsto_const_nhds (x := Complex.I • P.fcOp hf x))
+  simpa using this
+
 end QIQTH.Spectral.ProjectionValuedMeasure

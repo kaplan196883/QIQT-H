@@ -131,7 +131,10 @@ item.** Never claim the `1/4`.
   packaging.) NEXT → **M2**: `E_R := PVM_of_selfAdjoint R`; `K := fcOp` at `log(r/(2−r))` (symmetric via
   `fcOp_symmetric`); `Δ^{it} = boundedFC(((2−r)/r)^{it}) = e^{−itK}` (the FC exponential law, Stone Phase 2.1)
   → JLMS Stage 1 closed.
-- [~] **M2** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1). **Operator-level first law ✅**
+- [x] **M2 ✅ COMPLETE** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1). `K=∫f dE` operator + operator-level
+  first law `⟨K⟩=cgpEntropy` + the **STONE generator `d/dt(boundedFC(e^{itf})x)|₀ = i·(∫f dE)x`**
+  (`hasDerivAt_boundedFC_expSymbol`) = the operator `Δ^{it}=e^{−itK}`, all axiom-free. (Original detail:)
+  **Operator-level first law ✅**
   (`fcOp_inner_self`: `⟨x,(∫f dE)x⟩ = ∫ f dμ_x` on the domain — bounded diagonals `⟨x,boundedFC(fₙ)x⟩=∫fcTrunc f n
   dμ` converge by inner-continuity + the L¹ tail-conv `fcTrunc_integral_tendsto` via Bochner DCT, which builds
   clean — `tendsto_integral_of_dominated_convergence` ≠ the `integral_mono` chain that blew up). For
@@ -170,14 +173,21 @@ item.** Never claim the `1/4`.
     distance to `i·fcOp x` **equals** the `L²` symbol distance to `i·f`, collapsing the double-limit to a SINGLE limit
     (limit-uniqueness: `i·fcSeq_m x → i·fcOp x` + `norm_boundedFC_sub_sq` + step 1). This replaces the messy
     ε–δ triangle entirely.
-  Remaining = **step 3 capstone** `HasDerivAt (fun t => boundedFC(e^{itf})x) (i·Kx) 0`: with the heart + step 2, this is
-  `slope g 0 t = boundedFC(g_t)x` (g_t=(e^{itf}−1)/↑t, bounded by 2/|t| for t≠0) ⟹ `‖slope − i·fcOp x‖² =
-  (∫⁻‖g_t−if‖²).toReal → 0` (heart) ⟹ `slope → i·fcOp x` ⟹ `HasDerivAt`. The ONLY remaining friction is the
-  Lean slope-identity bookkeeping (`boundedFC_sub`/`_const` proof-irrelevance + `↑(t⁻¹)` vs `/↑t` coercion bridge) —
-  fiddly but mechanical; next increment. Closes BOTH `Δ^{it}=e^{−itK}` (M2) and abstract M4 Stone.
+  • **step 3 CAPSTONE NOW LANDED ✅ (axiom-free, green)** `hasDerivAt_boundedFC_expSymbol`:
+    `d/dt(boundedFC(e^{itf})x)|₀ = i·(∫f dE)x` — the strongly-continuous one-parameter unitary group
+    `t↦boundedFC(e^{itf})` has generator `i·K` (`K=∫f dE`): **the operator `Δ^{it}=e^{−itK}`**. Assembled exactly as
+    planned: `slope g 0 t = (↑t)⁻¹•boundedFC(e^{itf}−1)x` (`boundedFC_sub`/`_smul`, proof-irrelevance via defeq-`exact`,
+    `Complex.coe_smul`/`ofReal_inv` for the `↑(t⁻¹)` bridge) ⟹ via the distance identity
+    `‖slope − i·fcOp x‖² = (∫⁻‖(e^{itf}−1)/t − if‖²).toReal` ⟹ `→ 0` (heart, `lintegral_congr` bridges `(↑t)⁻¹(e^{itf}−1)`
+    to `(e^{itf}−1)/t`) ⟹ `‖·‖→0` (`Real.sqrt_sq`) ⟹ `slope → i·fcOp x`. **The full STONE generator reconstruction
+    for the bounded-self-adjoint PVM is now axiom-free.** Closes `Δ^{it}=e^{−itK}` (M2) and abstract M4 Stone.
+  Follow-up (wiring, not new math): specialize to `modK`/`modChar` in `ModularHamiltonianOp.lean` — the modular flow
+  `Δ^{it}` of `RvD` `R` has generator `−i·modK`, i.e. `Δ^{it}=e^{−it·K}` for the genuine modular Hamiltonian.
   NB strong-continuity-via-Bochner-DCT hit the whnf wall — the lintegral route is the way.
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
-- [ ] **M4** — general Stone → `X = A_edge` (frontier)
+- [~] **M4** — general Stone → `X = A_edge`. **Abstract Stone reconstruction ✅** (`hasDerivAt_boundedFC_expSymbol`:
+  the bounded-self-adjoint PVM's FC-exponential group has generator `i·∫f dE`, axiom-free). Remaining = the
+  geometric identification `X = A_edge` (the edge-of-wedge boost generator) — the physical-input frontier.
 - [ ] **M5** — dual-weight trace + JLMS + FQ bound
 - [ ] **M6** — Gap-2 localization map
 - [ ] **M7** — fusion: `P4 → GR` closed for the free field (UV datum carried)
