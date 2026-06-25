@@ -97,9 +97,11 @@ item.** Never claim the `1/4`.
   (`boundedFC_adjoint`: `(boundedFC g)† = boundedFC(conj∘g)` — the bounded FC is a `*`-hom). **Polarization
   diagonal ✅** (`bilinDiag_self`: `B_g(x,x) = ∫ g dμ_x`). **Diagonal expectation ✅** (`inner_boundedFC_self`:
   `⟨x,(∫h dE)x⟩ = ∫ h dμ_x` — the JLMS first-law `⟨K⟩` at the bounded level, from `inner_boundedFC`+
-  `bilinDiag_self`). All ingredients in hand. NEXT: the full norm identity `‖boundedFC g x‖²=∫|g|²dμ_x`
-  (`adjoint_inner_right` + adjoint + `boundedFC_mul` + `inner_boundedFC_self` + `conj z·z=‖z‖²`) ⟹
-  `boundedFC(fₙ)x` Cauchy ⟹ the limit operator `fcLinear` + symmetry; then `∫g dE = boundedFC g`.
+  `bilinDiag_self`). **Operator identity `T†T=boundedFC(|g|²)` ✅** (`boundedFC_adjoint_mul_self`: composing
+  `boundedFC g` with its adjoint gives the FC of `ḡ·g`, via adjoint+`boundedFC_mul`; the proof-irrelevance of the
+  `Measurable`/bound hypotheses made the instance-matching go through). NEXT: the norm identity `‖boundedFC g
+  x‖²=∫|g|²dμ_x` = the `re`/`∫`-diagonal of `T†T` (`adjoint_inner_right` + `inner_boundedFC_self` + `conj z·z=
+  ‖z‖²` + `integral_ofReal`) ⟹ `boundedFC(fₙ)x` Cauchy ⟹ the limit operator `fcLinear` + symmetry.
 - [ ] **M2** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1 closed)
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)

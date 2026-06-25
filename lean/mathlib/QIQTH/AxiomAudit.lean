@@ -1193,6 +1193,8 @@ namespace QIQTH.AxiomAudit
 -- ⟨x,(∫g dE)x⟩) — the last substrate piece for the norm identity.
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.inner_boundedFC_self
 -- the diagonal expectation ⟨x,(∫h dE)x⟩ = ∫ h dμ_x (the JLMS first-law ⟨K⟩ at the bounded level).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_adjoint_mul_self
+-- T†T = boundedFC(ḡ·g) for T=boundedFC g (the *-algebra hom: adjoint + mul); diagonal gives ‖Tx‖²=∫|g|²dμ_x.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

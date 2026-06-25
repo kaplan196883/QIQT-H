@@ -197,6 +197,22 @@ theorem boundedFC_adjoint {g : Ω → ℂ} (hg : Measurable g) {C : ℝ} (hC0 : 
     show (fun ω => (starRingEnd ℂ) ((starRingEnd ℂ) (g ω))) = g from
       funext fun ω => Complex.conj_conj (g ω)]
 
+/-- **`T† T = boundedFC(ḡ·g)`** for `T = boundedFC g`: composing the operator with its adjoint gives the
+    FC of `|g|²`.  From `boundedFC_adjoint` + `boundedFC_mul` (the bounded FC is a `*`-algebra hom).  The
+    diagonal of this is `‖T x‖² = ∫ |g|² dμ_x` (the norm identity). -/
+theorem boundedFC_adjoint_mul_self {g : Ω → ℂ} (hg : Measurable g) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, ‖g ω‖ ≤ C) :
+    ContinuousLinearMap.adjoint (P.boundedFC hg hC0 hC) * P.boundedFC hg hC0 hC
+      = P.boundedFC (f := fun ω => (starRingEnd ℂ) (g ω) * g ω) (by fun_prop)
+          (mul_nonneg hC0 hC0)
+          (fun ω => by rw [norm_mul, Complex.norm_conj]
+                       exact mul_le_mul (hC ω) (hC ω) (norm_nonneg _) hC0) := by
+  rw [P.boundedFC_adjoint hg hC0 hC,
+    ← P.boundedFC_mul (by fun_prop) hC0 (fun ω => (Complex.norm_conj (g ω)).le.trans (hC ω))
+      hg hC0 hC (by fun_prop) (mul_nonneg hC0 hC0)
+      (fun ω => by rw [norm_mul, Complex.norm_conj]
+                   exact mul_le_mul (hC ω) (hC ω) (norm_nonneg _) hC0)]
+
 /-! ### Bounded truncations of the symbol (the operator's `L²`-Cauchy engine)
 
 The unbounded operator `∫ f dE` is built as the strong limit `Kx := limₙ boundedFC(fₙ) x` over the bounded
