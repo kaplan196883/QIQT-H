@@ -232,6 +232,20 @@ item.** Never claim the `1/4`.
     now *derived* from the operator modular machinery (generator `−iK` + first law `⟨K⟩=S`) rather than assumed. It
     identifies the GR heat-flux datum `kd = −cgpEntropy S ξ` (the modular entropy) — the first-law/Clausius datum at
     the operator level. The modular Stone work now feeds directly into the GR derivation chain's labelled inputs.
+  • **`modUnitary` strongly-continuous group form ✅** (`continuous_modUnitary`: the textbook `Continuous` `C₀`-group statement).
+
+  **WedgeKMSFlux derivation-status map (precise):** the GR chain's `WedgeKMSFlux` bundle (per null generator) has 6
+  inputs; the modular Stone machinery now provides one of the two `HasDerivAt` data:
+    1. wedge carrier `S.toClosedSubmodule = closure(span wedgeGenSet)` — geometric input (wedge localization);
+    2. `V t = boostUnitary(−2πt)` — definitional;
+    3. `(MapsTo ∧ StripKMS → modUnitary = V)` — the **Bisognano–Wichmann identification** (physical input);
+    4. `StripKMS V D` — the KMS/strip-analyticity input;
+    5. boost derivative `d/dt⟪ξ,boostUnitary(−2πt)ξ⟫|₀ = i·(2π/ℏ)·T_kk` — **frontier**: `boostUnitary = translationFlow.unitary`,
+       so this is the *translation generator* (momentum), needing the Fourier/momentum PVM (the same clock-`X` wall);
+       the multiplication-FC Stone does NOT reach it;
+    6. modular derivative `d/dt⟪ξ,modUnitary S t ξ⟫|₀ = i·kd` — **DERIVED ✅** (`hasDerivAt_inner_modUnitary`, `kd=−S`).
+  So the chain's `hFlux` (via `HasDerivAt.unique` on #5 vs #6 under BW #3) reads `2π/ℏ·T_kk = −S` (Clausius), and #6 is
+  now ours. Remaining: #5 (translation generator / Fourier frontier) + #1/#3/#4 (geometric/physical wedge inputs).
   NB the Bochner-over-`scalarMeasure` DCT route hits a `whnf` wall — the `lintegral`/`HasDerivAt` route is the way.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,

@@ -278,4 +278,13 @@ theorem hasDerivAt_inner_modUnitary (S : StandardSubspace H) {ξ : H}
     push_cast; ring
   rwa [hval] at h
 
+/-- **`modUnitary` is a strongly-continuous one-parameter unitary group** (the standard `C₀`-group statement):
+    `t ↦ modUnitary S t ξ` is continuous (everywhere), for `ξ` in the domain of `K = modK`.  Packages
+    `continuousAt_modUnitary` into the textbook `Continuous` form. -/
+theorem continuous_modUnitary (S : StandardSubspace H) {ξ : H}
+    (hdom : ξ ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => kFn ω.val)) :
+    Continuous (fun t : ℝ => modUnitary S t ξ) :=
+  continuous_iff_continuousAt.mpr fun t₀ => continuousAt_modUnitary S hdom t₀
+
 end QIQTH.StandardSubspaceModular

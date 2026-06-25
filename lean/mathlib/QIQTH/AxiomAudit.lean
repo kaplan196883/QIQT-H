@@ -1323,6 +1323,8 @@ namespace QIQTH.AxiomAudit
 -- ★★ GR-CHAIN LOCALIZATION IDENTITY DERIVED: d/dt⟪ξ,modUnitary S t ξ⟫|₀ = i·(−S) — EXACTLY the modular-correlation-
 -- derivative hypothesis bundled in WedgeKMSToGR.WedgeKMSFlux (the Bekenstein→GR per-null localization input), now
 -- derived from the modular machinery (generator −iK + first law ⟨K⟩=S). The GR heat-flux kd = −cgpEntropy (modular entropy).
+#print axioms QIQTH.StandardSubspaceModular.continuous_modUnitary
+-- ★ modUnitary is a strongly-continuous one-parameter unitary group (textbook C₀-group Continuous form).
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
