@@ -291,6 +291,11 @@ item.** Never claim the `1/4`.
   position PVM's operator σ-additivity. Next: the operator σ-additivity (`E(⋃Aₙ)f=∑E(Aₙ)f` via finite-additivity +
   this tail) → bundle the `ProjectionValuedMeasure`; then Fourier conjugation → momentum PVM → boost generator.
   NB the Bochner-over-`scalarMeasure` DCT route hits a `whnf` wall — the `lintegral`/`HasDerivAt` route is the way.
+  **Brick 10 — subtractivity `E(B)=E(A)+E(B\A)` for `A⊆B` ✅**: the operator-level finite-additive decomposition
+  `B=A⊔(B\A)` (`indMul_sdiff`, via `indSymbol_sdiff` `𝟙_B=𝟙_A+𝟙_{B\A}` + `mulOp_add`). Equivalently `E(B)−E(A)=E(B\A)`
+  — the difference operator that turns the scalar measure-tail (brick 9) into the genuine operator σ-additivity
+  `‖E(Bₙ)f−E(⋃)f‖²=∫_{(⋃)\Bₙ}‖f‖²→0`. Next: assemble `indMul_tendsto_iUnion` (operator σ-additivity, monotone `Bₙ↑⋃`)
+  from this + brick 9 → bundle the `ProjectionValuedMeasure`; then Fourier conjugation → momentum PVM → boost generator.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,
   `oneModeSympEig_symplectic_invariant` — `ν` is a basis-independent physical invariant). The `N`-mode normal-form

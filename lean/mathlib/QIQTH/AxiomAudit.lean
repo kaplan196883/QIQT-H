@@ -1373,6 +1373,10 @@ namespace QIQTH.AxiomAudit
 -- ★ MULTIPLICATION PVM brick 9 — σ-additivity (continuity from above) of the scalar spectral measure: for antitone
 -- Bₙ, ‖E(Bₙ)f‖²=∫_{Bₙ}‖f‖² → ∫_{⋂Bₙ}‖f‖² (Bₙ↓∅ ⟹ ‖E(Bₙ)f‖→0). Via norm_indMul_sq + tendsto_setIntegral_of_antitone
 -- (‖f‖²∈L¹). The measure-tail driving the position PVM's operator σ-additivity. Next: bundle the ProjectionValuedMeasure.
+#print axioms QIQTH.Spectral.Multiplication.indMul_sdiff
+-- ★ MULTIPLICATION PVM brick 10 — subtractivity E(B)=E(A)+E(B\A) for A⊆B (equivalently E(B)−E(A)=E(B\A)): the finite-
+-- additive decomposition B=A⊔(B\A) at the operator level (via indSymbol_sdiff 𝟙_B=𝟙_A+𝟙_{B\A} + mulOp_add). The
+-- difference operator that turns the scalar measure-tail (brick 9) into operator σ-additivity ‖E(Bₙ)f−E(⋃)f‖→0.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

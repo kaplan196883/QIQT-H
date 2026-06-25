@@ -269,6 +269,29 @@ theorem indMul_union_disjoint {A B : Set α} (hA : MeasurableSet A) (hB : Measur
     (indSymbol_measurable hB) zero_le_one (indSymbol_norm_le B)]
   exact mulOp_congr _ _ _ _ _ _ (indSymbol_union_disjoint h)
 
+theorem indSymbol_sdiff {A B : Set α} (hAB : A ⊆ B) :
+    indSymbol B = fun s => indSymbol A s + indSymbol (B \ A) s := by
+  funext s
+  simp only [indSymbol]
+  by_cases hA : s ∈ A
+  · rw [Set.indicator_of_mem (hAB hA), Set.indicator_of_mem hA,
+      Set.indicator_of_notMem (by simp [Set.mem_diff, hA])]; simp
+  · by_cases hB : s ∈ B
+    · rw [Set.indicator_of_mem hB, Set.indicator_of_notMem hA,
+        Set.indicator_of_mem (show s ∈ B \ A from ⟨hB, hA⟩)]; simp
+    · rw [Set.indicator_of_notMem hB, Set.indicator_of_notMem hA,
+        Set.indicator_of_notMem (by simp [Set.mem_diff, hB])]; simp
+
+/-- **Subtractivity of the spectral measure `E(B) = E(A) + E(B \ A)`** for `A ⊆ B` (equivalently
+    `E(B) − E(A) = E(B\A)`) — the finite-additive decomposition `B = A ⊔ (B\A)`, the building block for the
+    operator σ-additivity. -/
+theorem indMul_sdiff {A B : Set α} (hA : MeasurableSet A) (hB : MeasurableSet B) (hAB : A ⊆ B) :
+    indMul (μ := μ) hB = indMul hA + indMul (hB.diff hA) := by
+  simp only [indMul]
+  rw [mulOp_add (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A)
+    (indSymbol_measurable (hB.diff hA)) zero_le_one (indSymbol_norm_le _)]
+  exact mulOp_congr _ _ _ _ _ _ (indSymbol_sdiff hAB)
+
 /-- **The scalar spectral measure (diagonal):** `⟪f, E(A) f⟫ = ∫_A conj(f)·f dμ = ∫_A ‖f‖² dμ` — the `L²` mass
     of `f` on `A` (`conj(f a)·f a = ‖f a‖²`).  Since `E(A) = M_{𝟙_A}` is an orthogonal projection this is
     `‖E(A)f‖² ≥ 0`; as `A` varies it is the `‖f‖²`-weighted measure, the scalar spectral measure `μ_f` of the
