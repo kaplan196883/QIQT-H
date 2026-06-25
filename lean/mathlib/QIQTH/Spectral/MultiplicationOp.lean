@@ -179,4 +179,31 @@ theorem indMul_isSelfAdjoint {A : Set α} (hA : MeasurableSet A) :
     (funext fun s => by
       by_cases h : s ∈ A <;> simp [indSymbol, Set.indicator_of_mem, Set.indicator_of_notMem, h])
 
+theorem indSymbol_inter (A B : Set α) (s : α) :
+    indSymbol A s * indSymbol B s = indSymbol (A ∩ B) s := by
+  simp only [indSymbol]
+  by_cases hA : s ∈ A <;> by_cases hB : s ∈ B <;>
+    simp [Set.indicator_of_mem, Set.indicator_of_notMem, hA, hB, Set.mem_inter_iff]
+
+/-- **`E(univ) = 1`** (the multiplication PVM is normalized). -/
+theorem indMul_univ : indMul (μ := μ) MeasurableSet.univ = 1 := by
+  rw [indMul, mulOp_congr (indSymbol_measurable MeasurableSet.univ) zero_le_one (indSymbol_norm_le _)
+    measurable_const (norm_nonneg (1 : ℂ)) (fun _ => le_rfl)
+    (funext fun s => by simp [indSymbol]), mulOp_const, one_smul]
+
+/-- **`E(∅) = 0`**. -/
+theorem indMul_empty : indMul (μ := μ) MeasurableSet.empty = 0 := by
+  rw [indMul, mulOp_congr (indSymbol_measurable MeasurableSet.empty) zero_le_one (indSymbol_norm_le _)
+    measurable_const (norm_nonneg (0 : ℂ)) (fun _ => le_rfl)
+    (funext fun s => by simp [indSymbol]), mulOp_const, zero_smul]
+
+/-- **Multiplicativity of spectral projections `E(A)·E(B) = E(A∩B)`** — commuting orthogonal projections; in
+    particular for disjoint `A, B` (`A∩B = ∅`) the projections are orthogonal `E(A)E(B) = 0`. -/
+theorem indMul_inter {A B : Set α} (hA : MeasurableSet A) (hB : MeasurableSet B) :
+    indMul (μ := μ) hA ∘L indMul hB = indMul (hA.inter hB) := by
+  rw [indMul, indMul, mulOp_mul (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A)
+    (indSymbol_measurable hB) zero_le_one (indSymbol_norm_le B)]
+  exact mulOp_congr _ _ _ (indSymbol_measurable (hA.inter hB)) zero_le_one (indSymbol_norm_le _)
+    (funext fun s => indSymbol_inter A B s)
+
 end QIQTH.Spectral.Multiplication

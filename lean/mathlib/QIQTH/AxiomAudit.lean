@@ -1348,6 +1348,12 @@ namespace QIQTH.AxiomAudit
 -- ★ MULTIPLICATION PVM brick 3 — the *-structure: adjoint M_φ*=M_φ̄ (mulOp_adjoint, via the L² inner product
 -- ⟪M_φ̄ f,g⟫=⟪f,M_φ g⟫) ⟹ E(A) is SELF-ADJOINT (indMul_isSelfAdjoint, 𝟙_A real). With idempotency, E(A) is an
 -- ORTHOGONAL PROJECTION — the spectral projection of the position observable. Next: σ-additivity → scalarMeasure → PVM.
+#print axioms QIQTH.Spectral.Multiplication.indMul_univ
+#print axioms QIQTH.Spectral.Multiplication.indMul_empty
+#print axioms QIQTH.Spectral.Multiplication.indMul_inter
+-- ★ MULTIPLICATION PVM brick 4 — the projection-valued CONTENT: E(univ)=1, E(∅)=0, E(A)E(B)=E(A∩B) (commuting
+-- orthogonal projections; disjoint ⟹ orthogonal). The finitely-additive PV-content of the position PVM. Next:
+-- σ-additivity (strong) + scalarMeasure ⟨f,E(A)f⟩=∫_A‖f‖² → the genuine PVM; then Fourier → momentum PVM.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
