@@ -236,4 +236,26 @@ theorem hasDerivAt_modUnitary (S : StandardSubspace H) {ξ : H}
   rw [heq]
   exact hasDerivAt_modChar S hdom
 
+/-- **Strong continuity of the crossed-product modular unitary `Δ^{it} = modUnitary S t`** (the last piece of its
+    `C₀`-structure): for `ξ` in the domain of `K = modK`, `t ↦ modUnitary S t ξ` is continuous at every `t₀`.
+    With the group law (`modUnitary_add`), unitarity (`modUnitary_unitary`) and the Stone generator `−iK`
+    (`hasDerivAt_modUnitary`), the crossed-product's `Δ^{it}` is now a full `C₀` one-parameter unitary group with
+    a *known* generator — exactly the Stone-theorem package the Wall/crossed product is built on.  Axiom-free. -/
+theorem continuousAt_modUnitary (S : StandardSubspace H) {ξ : H}
+    (hdom : ξ ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => kFn ω.val)) (t₀ : ℝ) :
+    ContinuousAt (fun t : ℝ => modUnitary S t ξ) t₀ := by
+  have hdom' : ξ ∈ (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).fcDomain
+      (fun ω : spectrum ℝ (rvdRC S) => -kFn ω.val) := by
+    rw [ProjectionValuedMeasure.mem_fcDomain, ProjectionValuedMeasure.fcEnergy_neg]
+    exact ((PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).mem_fcDomain).mp hdom
+  have heq : (fun t : ℝ => modUnitary S t ξ)
+      = fun t : ℝ => (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).boundedFC
+        (QIQTH.Spectral.ProjectionValuedMeasure.measurable_expSymbol (kFn_val_measurable S).neg t)
+        zero_le_one (QIQTH.Spectral.ProjectionValuedMeasure.norm_expSymbol_le t) ξ := by
+    funext t; rw [modUnitary_eq S t]
+  rw [heq]
+  exact (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).continuousAt_boundedFC_expSymbol'
+    (kFn_val_measurable S).neg hdom' t₀
+
 end QIQTH.StandardSubspaceModular

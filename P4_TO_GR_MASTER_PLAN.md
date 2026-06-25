@@ -222,6 +222,10 @@ item.** Never claim the `1/4`.
     `d/dt(modUnitary S t · ξ)|₀ = −i·modK ξ` — **the Stone generator of the actual crossed-product `Δ^{it}` is the
     unbounded-FC modular Hamiltonian `K = modK`**. This bridges the M2 Stone work to the M5 crossed-product/Wall:
     `borelFC ≡ (PVM_of_selfAdjoint).boundedFC` is the load-bearing definitional identity.
+  • **`modUnitary` `C₀`-package COMPLETE ✅** — `continuousAt_modUnitary` (`t ↦ modUnitary S t ξ` continuous at
+    every `t₀`, domain `ξ`) is the last piece: with `modUnitary_add` (group), `modUnitary_unitary`, the generator
+    `−iK` (`hasDerivAt_modUnitary`) and strong continuity, the crossed-product's `Δ^{it}` is now a full
+    `C₀` one-parameter unitary group **with a known generator** — exactly the Stone-theorem package the Wall rests on.
   NB the Bochner-over-`scalarMeasure` DCT route hits a `whnf` wall — the `lintegral`/`HasDerivAt` route is the way.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,

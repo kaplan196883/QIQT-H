@@ -1316,6 +1316,9 @@ namespace QIQTH.AxiomAudit
 -- ★★ UNIFICATION: the crossed-product modular unitary modUnitary S t = Δ^{it} (on which modularAut σ_t and M⋊_σℝ are
 -- built) is borelFC(modChar t) = (PVM_R).boundedFC(e^{it·(−kFn)}) (modUnitary_eq: modSpecFun=expSymbol, modChar_eq_exp_neg_kFn),
 -- so its Stone generator is −i·modK = −iK (hasDerivAt_modUnitary). Connects the unbounded-FC modular Hamiltonian K to the Wall.
+#print axioms QIQTH.StandardSubspaceModular.continuousAt_modUnitary
+-- ★ STRONG CONTINUITY of modUnitary (crossed-product Δ^{it}): t↦modUnitary S t ξ continuous at every t₀ (domain ξ).
+-- Completes modUnitary's C₀-package: group law (modUnitary_add) + unitarity + generator −iK + strong continuity.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
