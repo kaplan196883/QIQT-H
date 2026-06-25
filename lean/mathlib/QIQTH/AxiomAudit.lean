@@ -1188,6 +1188,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_adjoint
 -- (boundedFC g)† = boundedFC(conj∘g) — the bounded FC is a *-hom; with boundedFC_mul gives the norm
 -- identity ‖boundedFC g x‖²=∫|g|²dμ_x.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_self
+-- the polarized form's diagonal is the original functional: B_g(x,x)=∫g dμ_x (= the diagonal expectation
+-- ⟨x,(∫g dE)x⟩) — the last substrate piece for the norm identity.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

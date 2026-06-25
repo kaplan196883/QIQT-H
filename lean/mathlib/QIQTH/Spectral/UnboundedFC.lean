@@ -144,6 +144,34 @@ theorem boundedFC_isSelfAdjoint {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (
   rw [P.inner_boundedFC hf hC0 hC x y, ← inner_conj_symm, P.inner_boundedFC hf hC0 hC y x,
     P.bilinDiag_conj_symm f x y, show (fun ω => (starRingEnd ℂ) (f ω)) = f from funext hreal]
 
+/-- **The diagonal of the polarized form is the original functional:** `B_g(x,x) = D_g(x) = ∫ g dμ_x`.
+    The defining property of the Jordan–von Neumann polarization (mirrors `inner_self` for `‖·‖²`); via
+    `diagInt`'s homogeneity `D_g(c·x) = ‖c‖² D_g(x)`.  This is the diagonal expectation `⟨x,(∫g dE)x⟩`. -/
+theorem bilinDiag_self (g : Ω → ℂ) (x : H) : P.bilinDiag g x x = P.diagInt g x := by
+  have hz : P.diagInt g (x - x) = 0 := by
+    rw [sub_self]; simp only [diagInt, P.scalarMeasure_zero, MeasureTheory.integral_zero_measure]
+  have h2 : P.diagInt g (x + x) = ((‖(2 : ℂ)‖ ^ 2 : ℝ) : ℂ) * P.diagInt g x := by
+    rw [← two_smul ℂ x, P.diagInt_smul]
+  have hI1 : P.diagInt g (Complex.I • x + x)
+      = ((‖Complex.I + 1‖ ^ 2 : ℝ) : ℂ) * P.diagInt g x := by
+    rw [show Complex.I • x + x = (Complex.I + 1) • x by rw [add_smul, one_smul], P.diagInt_smul]
+  have hI2 : P.diagInt g (Complex.I • x - x)
+      = ((‖Complex.I - 1‖ ^ 2 : ℝ) : ℂ) * P.diagInt g x := by
+    rw [show Complex.I • x - x = (Complex.I - 1) • x by rw [sub_smul, one_smul], P.diagInt_smul]
+  have key : ∀ z : ℂ, (‖z‖ ^ 2 : ℝ) = z.re ^ 2 + z.im ^ 2 := fun z => by
+    rw [Complex.sq_norm, Complex.normSq_apply]; ring
+  have n2 : (‖(2 : ℂ)‖ ^ 2 : ℝ) = 4 := by
+    rw [key]; norm_num
+  have nI1 : (‖Complex.I + 1‖ ^ 2 : ℝ) = 2 := by
+    rw [key]; norm_num [Complex.add_re, Complex.add_im, Complex.I_re, Complex.I_im,
+      Complex.one_re, Complex.one_im]
+  have nI2 : (‖Complex.I - 1‖ ^ 2 : ℝ) = 2 := by
+    rw [key]; norm_num [Complex.sub_re, Complex.sub_im, Complex.I_re, Complex.I_im,
+      Complex.one_re, Complex.one_im]
+  simp only [bilinDiag, hz, h2, hI1, hI2, n2, nI1, nI2]
+  push_cast
+  ring
+
 /-- **The adjoint of `boundedFC g` is `boundedFC ḡ`** (the bounded functional calculus is a `*`-hom):
     `(boundedFC g)† = boundedFC (conj ∘ g)`.  From `inner_boundedFC` + the symbol-conjugation symmetry
     `bilinDiag_conj_symm` and `conj (conj z) = z`.  Combined with `boundedFC_mul` this gives the norm
