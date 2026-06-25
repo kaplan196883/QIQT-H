@@ -4340,6 +4340,10 @@ namespace QIQTH.AxiomAudit
 -- on {−1/2<Im<0}, f(t)=⟪η,Δ^{it}ξ⟫, f(t−i/2) REAL. f(z)=⟪η,deviceVecF(z)⟫=⟪η,Δ^{iz}ξ⟫; bdd-holo via
 -- differentiableOn_deviceVecF + deviceVecF_continuousOn; real-axis deviceVecF_real_eq; mid-line modCorr_midline_real
 -- (geometric). Converse RvD Thm 3.8 (Δ is KMS) — non-vacuity of oneParticleBW_complete. Remaining: density + Prop 3.5 ⟸.
+-- P4-derivation Stage 1: modular Hamiltonian K=−log Δ spectral function + generator identity Δ^{it}=e^{−itK}:
+#print axioms QIQTH.StandardSubspaceModular.modChar_eq_exp_neg_kFn
+#print axioms QIQTH.StandardSubspaceModular.kFn_nonpos_of_lt_one
+#print axioms QIQTH.StandardSubspaceModular.kFn_nonneg_of_one_lt
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable

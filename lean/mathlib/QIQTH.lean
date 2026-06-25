@@ -327,6 +327,9 @@ import QIQTH.StandardSubspaceModular
 -- discontinuous at the spectral endpoints r=0,2 (continuous cfc cannot reach it). One-parameter
 -- unitary group: U_0=1, U_{s+t}=U_s·U_t, U_t⋆=U_{-t}, unitary. Standard axioms:
 import QIQTH.StandardSubspaceModularFlow
+-- P4-derivation Stage 1: the modular Hamiltonian K = −log Δ spectral function kFn(r)=log(r/(2−r)) and the
+-- generator identity Δ^{it} = e^{−itK} (toward the JLMS route deriving the holographic capacity P4).
+import QIQTH.ModularHamiltonian
 -- MODULAR RELATIVE ENTROPY (Phase B, one-particle / standard-subspace continuum object): the
 -- Casini–Grillo–Pontello relative entropy of a coherent state vs vacuum, as the SCALAR spectral
 -- integral S(ξ)=−∫log((2−r)/r)dμ^R_ξ over the bounded RvD operator R=P+Q (no unbounded log Δ).

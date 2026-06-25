@@ -96,4 +96,17 @@ with the `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>` trailer; push
 landing, run `python scripts/lean-track-refresh.py --skip-unchanged` and commit `reports/` if it prints CHANGES.
 
 ## Progress log
-- (none yet — Stage 1 next)
+- **Stage 1 ✅** (`QIQTH/ModularHamiltonian.lean`) — the modular Hamiltonian's **spectral function**
+  `kFn(r) = log(r/(2−r)) = −log((2−r)/r)` (`= K = −log Δ` on the spectrum `(0,2)` of the RvD `R`), with
+  `kFn_measurable`, `kFn_real`, and the **generator identity** `modChar_eq_exp_neg_kFn`:
+  `modChar t r = exp(−i·t·kFn r)` on `(0,2)` — i.e. the existing modular flow `Δ^{it} = u_t(R)` is generated
+  by `−K`, pinning the modular Hamiltonian to the machine-checked flow. Plus the KMS sign structure
+  (`kFn_nonpos_of_lt_one`/`kFn_nonneg_of_one_lt`: modular energy changes sign across the fixed point `Δ=1`).
+  Axiom-free (std 3); wired into AxiomAudit; budget 0.
+  - *Honest note:* the **operator** `K = kFn(R)` is unbounded (`kFn → ±∞` at `r → 0,2`), so it needs
+    unbounded-self-adjoint-operator infrastructure Mathlib lacks (the cited TT frontier). Stage 1 delivers the
+    spectral function + flow identity (the bounded/form-level content); Stage 2's first law is built at the
+    relative-entropy (`cgpEntropy`) level, which is bounded and already exists — so the unbounded `K` operator
+    is NOT on the critical path for Stages 2–4.
+- **NEXT: Stage 2** — the first law `δS = δ⟨K⟩` via `cgpEntropy` (`ArakiModularEntropy.lean`): the one-particle
+  relative entropy's first variation = modular-energy variation, the boundary dual of the bulk Clausius relation.
