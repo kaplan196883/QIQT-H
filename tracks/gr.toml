@@ -19,11 +19,13 @@ timeout_sec = 1800
 [[theorems]]
 name = "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_complete"
 role = "capstone"
+display = "Einstein field equations for the free field (all geometric inputs discharged)"
 # The instantiated SHOWCASE (pp-wave, floor laid bare): geometry + area-derivative hA + entropy bound hbound
 # all discharged; surface = exactly the floor (EOM hKG, FQ capacity hcap, localization hS/hK, congruence).
 [[theorems]]
 name = "QIQTH.WedgeKMSToGR.qiqt_gr_ppwave_showcase"
 role = "spine"
+display = "Einstein field equations on an explicit pp-wave spacetime"
 [[theorems]]
 name = "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_gaussian"
 role = "spine"
@@ -54,6 +56,7 @@ role = "spine"
 [[theorems]]
 name = "QIQTH.QiqtToGR.qiqt_bekenstein_gives_gr"
 role = "spine"
+display = "Einstein field equations from a finite-information bound (Jacobson route)"
 [[theorems]]
 name = "QIQTH.Fock.CyclicWitness.oneParticleBW_niceWedge_unconditional"
 role = "spine"

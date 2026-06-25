@@ -238,43 +238,143 @@ def render_theorem(t, notation=None, role_label=None):
     return "\n".join(lines) + "\n"
 
 
-def render_web(trees, cfg, notation=None, roles=None, heading="##"):
-    """Markdown (KaTeX `$...$`) rendering of a track's statements, for the website.
+# hypothesis categories that are routine scaffolding — summarised, not listed.
+_SUMMARISE_CATS = {"regularity", "setup", "background", "structure",
+                   "kinematics", "bridge"}
 
-    Structure is Markdown (headings, lists); only the math is LaTeX, inside `$...$`
-    / `$$...$$`, which the site's remark-math + rehype-katex pipeline renders.
+
+def _peel_forall(node):
+    """Drop leading universal quantifiers (free-index convention)."""
+    while isinstance(node, dict) and node.get("kind") == "Lean.Parser.Term.forall":
+        node = node["args"][-1]
+    return node
+
+
+def _category_of(name, rules):
+    """First category_rule whose name_regex matches `name` (type_regex rules skipped
+    here — we only have the name at web-render time)."""
+    for r in rules:
+        nre = r.get("name_regex")
+        if nre and r.get("type_regex"):
+            continue                      # needs the type string we don't carry here
+        if nre and re.search(nre, name):
+            return r.get("category", "?")
+    return None
+
+
+def _conjuncts(node):
+    """Flatten a top-level ∧ chain into its conjuncts."""
+    if isinstance(node, dict) and node.get("kind") == "«term_∧_»":
+        a = node["args"]
+        return _conjuncts(a[0]) + _conjuncts(a[-1])
+    return [node]
+
+
+def _claim(concl, notation):
+    """(prose lead, body node) for a conclusion, peeling ∀ and naming any leading ∃."""
+    n = concl if isinstance(concl, dict) else {}
+    if "∃" in n.get("kind", ""):
+        vs = []
+
+        def gv(x):
+            if isinstance(x, dict):
+                if x.get("k") == "ident":
+                    vs.append(latexify.tex_of_pp(x["v"], notation))
+                for a in x.get("args", []):
+                    gv(a)
+        gv(n["args"][1])                  # the bound variable(s)
+        uniq = "!" in n.get("kind", "")
+        lead = ("there is a unique " if uniq else "there is ") + \
+               "$" + ",\\ ".join(vs) + "$ such that" if vs else "we have"
+        return lead, _peel_forall(n["args"][-1])
+    return "we have", _peel_forall(concl)
+
+
+def render_web(trees, cfg, notation=None, roles=None, heading="###"):
+    """Paper-style Markdown (KaTeX) rendering of a track's statements for the website.
+
+    Reads like a theorem list, not a hypothesis dump: leading ∀/types are factored
+    out (free-index convention), the conclusion leads in display math, load-bearing
+    hypotheses are shown while routine ones (regularity/setup/…) are summarised by
+    count. Per-theorem display titles come from `[[theorems]] display = "..."`.
     """
     notation = {**latexify.DEFAULT_NOTATION, **(notation or {})}
     roles = roles or {}
+    rules = cfg.get("category_rules", [])
+    displays = {t["name"]: t.get("display") for t in cfg.get("theorems", [])}
     out = []
     for t in trees:
         nm = t["name"]
+        short = nm.split(".")[-1]
         role = roles.get(nm)
-        title = f"`{nm.split('.')[-1]}`"
+        title = displays.get(nm) or f"`{short}`"
         out.append(f"{heading} {title}")
         out.append("")
+        tag = f"`{short}`" + (f" · *{role}*" if role else "")
         if not t.get("present"):
-            out.append("*(not found in the current build)*\n")
+            out.append(f"{tag} — *(not in the current build)*\n")
             continue
-        lead = f"**{nm}**" + (f" — *{role}*" if role else "")
-        out.append(lead + "  ")
-        data = [b["name"] for b in t.get("binders", []) if b["kind"] == "data"]
-        if data:
-            vs = ",\\ ".join(latexify.tex_of_pp(d, notation) for d in data)
-            out.append(f"Given ${vs}$,")
-        hyps = [(b["name"], tex_of_tree(b["type"], notation))
-                for b in t.get("binders", []) if b["kind"] == "prop"]
-        if hyps:
-            out.append("\nassume")
+        lead, body_node = _claim(t.get("concl"), notation)
+        parts = _conjuncts(body_node)
+        if len(parts) > 1:                # multi-part conclusion -> numbered list
+            out.append(f"{tag} —  {lead} all of:")
             out.append("")
-            for hn, rt in hyps:
-                out.append(f"- `({hn})` &nbsp; ${rt}$")
+            for idx, c in enumerate(parts, 1):
+                out.append(f"{idx}. ${tex_of_tree(c, notation)}$")
             out.append("")
-        concl = tex_of_tree(t.get("concl"), notation)
-        out.append("then")
-        out.append("")
-        out.append(f"$$ {concl} $$")
-        out.append("")
+        else:
+            out.append(f"{tag} —  {lead}")
+            out.append("")
+            out.append(f"$$ {tex_of_tree(body_node, notation)} $$")
+            out.append("")
+        featured, summ = [], {}
+        for b in t.get("binders", []):
+            if b["kind"] != "prop":
+                continue
+            hn = b["name"]
+            if hn.startswith("inst") or "._@." in hn or "_hyg" in hn:
+                summ["typeclass"] = summ.get("typeclass", 0) + 1
+                continue
+            cat = _category_of(hn, rules)
+            if cat in _SUMMARISE_CATS:
+                summ[cat] = summ.get(cat, 0) + 1
+            else:
+                featured.append((hn, _peel_forall(b["type"])))
+        if featured:
+            # factor a common leading antecedent (e.g. the null condition g_x(v,v)=0)
+            def _arrow(n):
+                if isinstance(n, dict) and n.get("kind") == "Lean.Parser.Term.arrow":
+                    return n["args"][0], n["args"][-1]
+                return None, None
+            ante = {hn: (tex_of_tree(_arrow(nd)[0], notation) if _arrow(nd)[0] else None)
+                    for hn, nd in featured}
+            from collections import Counter
+            cnt = Counter(a for a in ante.values() if a)
+            common = cnt.most_common(1)[0][0] if cnt and cnt.most_common(1)[0][1] >= 2 else None
+            out.append("*assuming*")
+            out.append("")
+            if common:
+                out.append(f"when $ {common} $&nbsp;:")
+                out.append("")
+                for hn, nd in featured:
+                    if ante[hn] == common:
+                        out.append(f"- `{hn}` &nbsp; ${tex_of_tree(_arrow(nd)[1], notation)}$")
+                rest = [(hn, nd) for hn, nd in featured if ante[hn] != common]
+                if rest:
+                    out.append("")
+                    out.append("and")
+                    out.append("")
+                    for hn, nd in rest:
+                        out.append(f"- `{hn}` &nbsp; ${tex_of_tree(nd, notation)}$")
+            else:
+                for hn, nd in featured:
+                    out.append(f"- `{hn}` &nbsp; ${tex_of_tree(nd, notation)}$")
+            out.append("")
+        if summ:
+            parts = ", ".join(f"{n} {c}" for c, n in sorted(summ.items()))
+            out.append(f"<small>plus {sum(summ.values())} routine conditions "
+                       f"({parts}) — full list in the per-track PDF.</small>")
+            out.append("")
     return "\n".join(out)
 
 
