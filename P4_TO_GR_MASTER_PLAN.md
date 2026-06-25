@@ -274,8 +274,10 @@ item.** Never claim the `1/4`.
   disjoint ⟹ orthogonal `E(A)E(B)=0`. This is the finitely-additive **PV-content** of the position PVM.
   **Brick 5 — the scalar spectral measure ✅**: `⟪f, E(A) f⟫ = ∫_A conj(f)·f dμ = ∫_A ‖f‖² dμ` (`indMul_inner_self`,
   via `L2.inner_def`) — the `L²` mass of `f` on `A` (= `‖E(A)f‖²≥0`); as `A` varies, the `‖f‖²`-weighted scalar
-  spectral measure `μ_f`. Next bricks: σ-additivity (strong `E(⋃Aₙ)=Σ E(Aₙ)`) → bundle the `ProjectionValuedMeasure`;
-  then Fourier-conjugate to the momentum PVM → the boost generator.
+  spectral measure `μ_f`.
+  **Brick 6 — finite additivity ✅**: `M_φ+M_ψ=M_{φ+ψ}` (`mulOp_add`) ⟹ `E(A⊔B)=E(A)+E(B)` for disjoint `A,B`
+  (`indMul_union_disjoint`, via `𝟙_{A∪B}=𝟙_A+𝟙_B`) — the finitely-additive projection-valued measure. Next bricks:
+  σ-additivity (countable / strong `E(⋃Aₙ)=Σ E(Aₙ)`) → bundle the `ProjectionValuedMeasure`; then Fourier conjugation.
   NB the Bochner-over-`scalarMeasure` DCT route hits a `whnf` wall — the `lintegral`/`HasDerivAt` route is the way.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,

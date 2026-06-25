@@ -1357,6 +1357,10 @@ namespace QIQTH.AxiomAudit
 -- ★ MULTIPLICATION PVM brick 5 — the scalar spectral measure (diagonal): ⟪f,E(A)f⟫ = ∫_A conj(f)·f = ∫_A‖f‖² (the L²
 -- mass of f on A; = ‖E(A)f‖²≥0 as E(A) is an orthogonal projection). As A varies this is μ_f, the scalar spectral
 -- measure of the position PVM (via L2.inner_def). Next: σ-additivity (strong) → the genuine PVM; then Fourier.
+#print axioms QIQTH.Spectral.Multiplication.mulOp_add
+#print axioms QIQTH.Spectral.Multiplication.indMul_union_disjoint
+-- ★ MULTIPLICATION PVM brick 6 — finite additivity: M_φ+M_ψ=M_{φ+ψ} (mulOp_add) ⟹ E(A⊔B)=E(A)+E(B) for disjoint A,B
+-- (indMul_union_disjoint, via 𝟙_{A∪B}=𝟙_A+𝟙_B). The finitely-additive projection-valued measure. Next: σ-additivity.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

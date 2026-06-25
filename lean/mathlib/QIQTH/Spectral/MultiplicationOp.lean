@@ -110,6 +110,20 @@ theorem mulOp_const (c : ℂ) :
     (fun _ => le_rfl) f, Lp.coeFn_smul c f] with s e1 e2
   rw [e1, e2, Pi.smul_apply, smul_eq_mul]
 
+/-- **Additivity in the symbol `M_φ + M_ψ = M_{φ+ψ}`.** -/
+theorem mulOp_add {φ ψ : α → ℂ} (hφ : Measurable φ) {Cφ : ℝ} (hCφ0 : 0 ≤ Cφ) (hCφ : ∀ s, ‖φ s‖ ≤ Cφ)
+    (hψ : Measurable ψ) {Cψ : ℝ} (hCψ0 : 0 ≤ Cψ) (hCψ : ∀ s, ‖ψ s‖ ≤ Cψ) :
+    mulOp (μ := μ) hφ hCφ0 hCφ + mulOp (μ := μ) hψ hCψ0 hCψ
+      = mulOp (μ := μ) (hφ.add hψ) (add_nonneg hCφ0 hCψ0)
+          (fun s => (norm_add_le _ _).trans (add_le_add (hCφ s) (hCψ s))) := by
+  refine ContinuousLinearMap.ext fun f => ?_
+  rw [ContinuousLinearMap.add_apply, Lp.ext_iff]
+  filter_upwards [Lp.coeFn_add (mulOp hφ hCφ0 hCφ f) (mulOp hψ hCψ0 hCψ f),
+    mulOp_coeFn hφ hCφ0 hCφ f, mulOp_coeFn hψ hCψ0 hCψ f,
+    mulOp_coeFn (hφ.add hψ) (add_nonneg hCφ0 hCψ0)
+      (fun s => (norm_add_le _ _).trans (add_le_add (hCφ s) (hCψ s))) f] with s e1 e2 e3 e4
+  rw [e1, Pi.add_apply, e2, e3, e4]; ring
+
 /-- `M_φ` depends only on the symbol `φ` (not on the bound witness). -/
 theorem mulOp_congr {φ φ' : α → ℂ} (hφ : Measurable φ) {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ s, ‖φ s‖ ≤ C)
     (hφ' : Measurable φ') {C' : ℝ} (hC0' : 0 ≤ C') (hC' : ∀ s, ‖φ' s‖ ≤ C') (h : φ = φ') :
@@ -205,6 +219,29 @@ theorem indMul_inter {A B : Set α} (hA : MeasurableSet A) (hB : MeasurableSet B
     (indSymbol_measurable hB) zero_le_one (indSymbol_norm_le B)]
   exact mulOp_congr _ _ _ (indSymbol_measurable (hA.inter hB)) zero_le_one (indSymbol_norm_le _)
     (funext fun s => indSymbol_inter A B s)
+
+theorem indSymbol_union_disjoint {A B : Set α} (h : Disjoint A B) :
+    indSymbol (A ∪ B) = fun s => indSymbol A s + indSymbol B s := by
+  funext s
+  simp only [indSymbol]
+  by_cases hA : s ∈ A
+  · rw [Set.indicator_of_mem (Set.mem_union_left B hA), Set.indicator_of_mem hA,
+      Set.indicator_of_notMem (Set.disjoint_left.mp h hA)]; simp
+  · by_cases hB : s ∈ B
+    · rw [Set.indicator_of_mem (Set.mem_union_right A hB), Set.indicator_of_notMem hA,
+        Set.indicator_of_mem hB]; simp
+    · rw [Set.indicator_of_notMem (by simp [Set.mem_union, hA, hB]),
+        Set.indicator_of_notMem hA, Set.indicator_of_notMem hB]; simp
+
+/-- **Finite additivity of the spectral measure `E(A ⊔ B) = E(A) + E(B)`** for disjoint `A, B` — the
+    multiplication PVM is finitely additive (the orthogonal projections onto `L²(A)` and `L²(B)` add). -/
+theorem indMul_union_disjoint {A B : Set α} (hA : MeasurableSet A) (hB : MeasurableSet B)
+    (h : Disjoint A B) :
+    indMul (μ := μ) (hA.union hB) = indMul hA + indMul hB := by
+  simp only [indMul]
+  rw [mulOp_add (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A)
+    (indSymbol_measurable hB) zero_le_one (indSymbol_norm_le B)]
+  exact mulOp_congr _ _ _ _ _ _ (indSymbol_union_disjoint h)
 
 /-- **The scalar spectral measure (diagonal):** `⟪f, E(A) f⟫ = ∫_A conj(f)·f dμ = ∫_A ‖f‖² dμ` — the `L²` mass
     of `f` on `A` (`conj(f a)·f a = ‖f a‖²`).  Since `E(A) = M_{𝟙_A}` is an orthogonal projection this is
