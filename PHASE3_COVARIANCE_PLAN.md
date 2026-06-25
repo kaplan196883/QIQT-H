@@ -60,4 +60,14 @@ energy `X` = the area edge operator, and **Phase 5** the trace.  The `1/4` stays
 sub-step with the `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>` trailer; push via schannel; refresh.
 
 ## Progress log
-- (none yet — Sub-step 3.1 next)
+- **Sub-step 3.1 ✅** (`QIQTH/CrossedProductCovariance.lean`) — **the covariance relation**
+  `clockTransl (-t) ∘L matterRep S a ∘L clockTransl t = matterRep S (modularAut S t a)` (`covariance`), the
+  defining identity of `M ⋊_σ ℝ`. Proof via `refine ContinuousLinearMap.ext fun ξ => ?_` (CLM-level), two
+  nested `ae_eq_comp` shifts (the matter-fiber `ζ` and clock-fiber `λ_t ξ`, both under `(· + (-t))`),
+  `matterRep_apply` to bridge `matterRep`↔`matterRepFun`, and `modularAut_add` for the time arithmetic
+  (both fibers `= modularAut S (t-s) a (ξ s)`). Axiom-free (std 3); wired into AxiomAudit; budget 0.
+  *(Both factors of the crossed product are now joined by the covariant identity.)*
+- **NEXT: Sub-step 3.2** — package the crossed-product algebra: the generating set
+  `Set.range (matterRep S) ∪ Set.range clockTransl` + the covariant-representation bundle (π unital `*`-hom,
+  λ unitary group, covariance), as the `M ⋊_σ ℝ` data. If the Mathlib `VonNeumannAlgebra`/`commutant`
+  generation API is thin, deliver the package + record the full vN object as the lighter follow-on.
