@@ -149,7 +149,15 @@ entanglement = `A/4G_ind`); Solodukhin, *Living Rev. Rel.* 14 (2011) 8 (review, 
   (`ν=½ ⟺ s=0`, i.e. floor ⟺ no entanglement), `twoModeSqueezed_entropy_pos` (any `s≠0` ⟹ strictly positive
   entanglement entropy), `twoModeSqueezed_entropy_zero` (`s=0` ⟹ a product state, zero entropy). This makes the
   abstract formula **non-vacuous on a real physical state** — the irreducible 2-mode area-law model.
-- **PLAN COMPLETE** (A+B+C+/++; only the N-site lattice-*scaling* via the full Williamson spectrum is the
+- **Stage C+++ ✅ (the area-law *seed* — entropy counts only entangled modes)** —
+  `gaussStateEntropy_eq_sum_active` (axiom-free, budget 0, full build green): the total entropy equals the
+  sum over the **strictly-squeezed** modes alone (`νᵢ > 1/2`); pure modes (`νᵢ = 1/2`) drop out. This is the
+  precise structural seed of the area law — *the entropy counts entangled modes* — and isolates the sole
+  remaining (cited) physics: for a lattice ground state those entangled modes localize at the region's
+  **boundary** (the Williamson symplectic spectrum), turning the count into `∝ boundary size`. That last step
+  is the labelled frontier.
+- **PLAN COMPLETE** (A+B+C+/++/+++; only the N-site lattice-*scaling* via the full Williamson spectrum is the
   labelled frontier). Net: the `1/4` is derived (geometric, non-circular — A+B); the Srednicki entropy formula
   `S = Σᵢ S(νᵢ)` and its physics (pure⇔0, monotone, nonneg, strictly positive when entangled) are
-  machine-checked (C/C+), and instantiated on the canonical entangled two-mode squeezed vacuum (C++).
+  machine-checked (C/C+), instantiated on the canonical entangled two-mode squeezed vacuum (C++), and reduced
+  to a sum over the entangled modes only (C+++) — the area-law seed, frontier = "entangled modes ⟹ boundary".

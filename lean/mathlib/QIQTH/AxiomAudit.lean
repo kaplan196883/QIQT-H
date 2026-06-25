@@ -4948,6 +4948,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussianStateEntropy.gaussStateEntropy_nonneg
 #print axioms QIQTH.GaussianStateEntropy.gaussStateEntropy_pure
 #print axioms QIQTH.GaussianStateEntropy.gaussStateEntropy_eq_zero_iff
+-- the area-law SEED: entropy is supported only on the entangled (supra-floor) modes; pure modes drop out.
+#print axioms QIQTH.GaussianStateEntropy.gaussStateEntropy_eq_sum_active
 -- concrete entangled instance: the two-mode squeezed vacuum (ν=cosh(2s)/2) realizes the entropy formula.
 #print axioms QIQTH.GaussianStateEntropy.twoModeSqueezedSympEig_ge_half
 #print axioms QIQTH.GaussianStateEntropy.twoModeSqueezedSympEig_half_iff

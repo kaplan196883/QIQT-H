@@ -141,6 +141,24 @@ theorem gaussStateEntropy_eq_zero_iff {n : ℕ} (ν : Fin n → ℝ) (hν : ∀ 
   by_contra hne
   exact absurd hz (gaussModeEntropy_pos (lt_of_le_of_ne (hν i) (Ne.symm hne))).ne'
 
+/-- **The entanglement entropy is supported only on the entangled (supra-floor) modes** — pure modes
+    (`νᵢ = 1/2`) contribute nothing, so the total entropy is the sum over the strictly-squeezed modes
+    alone.  This is the structural *seed of the area law*: the entropy **counts entangled modes**.  The
+    sole remaining (cited) physics is that, for a lattice ground state, those entangled modes localize at
+    the region's **boundary** (the Williamson symplectic spectrum of the covariance matrix) — which turns
+    this count into `∝ boundary size`, the labelled formalization frontier. -/
+theorem gaussStateEntropy_eq_sum_active {n : ℕ} (ν : Fin n → ℝ) (hν : ∀ i, 1 / 2 ≤ ν i) :
+    gaussStateEntropy ν
+      = ∑ i ∈ Finset.univ.filter (fun i => 1 / 2 < ν i), gaussModeEntropy (ν i) := by
+  rw [gaussStateEntropy,
+    ← Finset.sum_filter_add_sum_filter_not Finset.univ (fun i => 1 / 2 < ν i)]
+  have hzero : ∑ i ∈ Finset.univ.filter (fun i => ¬ 1 / 2 < ν i), gaussModeEntropy (ν i) = 0 := by
+    apply Finset.sum_eq_zero
+    intro i hi
+    rw [Finset.mem_filter] at hi
+    rw [le_antisymm (not_lt.mp hi.2) (hν i), gaussModeEntropy_half]
+  rw [hzero, add_zero]
+
 /-! ### A concrete entangled instance: the two-mode squeezed vacuum
 
 The simplest genuinely-entangled Gaussian state is the **two-mode squeezed vacuum** with squeezing `s`.
