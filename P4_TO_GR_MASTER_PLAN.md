@@ -82,8 +82,11 @@ item.** Never claim the `1/4`.
   finite-energy `fcDomain P f` as a ℂ-submodule: `fcEnergy` `‖c‖²`-homogeneous + sub-additive via the
   parallelogram law). **Bounded-symbol bridge ✅** (`mem_fcDomain_of_bounded`/`fcDomain_eq_top_of_bounded`:
   `|f|≤C ⟹ ∫f²dμ_x ≤ C²‖x‖² ⟹ fcDomain f = ⊤` — the consistency tie to `boundedFC`; `K`'s domain is proper
-  only because `log` is unbounded). Axiom-free, budget 0, wired. NEXT: the operator `fcLinear` on the domain
-  (Riesz rep of `y ↦ ∫ f dμ_{x,y}`) + symmetry + self-adjointness; then `∫g dE = boundedFC g`.
+  only because `log` is unbounded). **L²(μ_x) bridge ✅** (`mem_fcDomain_iff_integrable_sq`: `x ∈ fcDomain f
+  ↔ f square-integrable vs μ_x` — the domain *is* the `L²` condition, opening Mathlib's Cauchy–Schwarz / `f·g
+  ∈ L¹` for the operator). Axiom-free, budget 0, wired. NEXT: the operator `fcLinear` on the domain (Riesz rep
+  of the bounded antilinear `y ↦ ∫ f dμ_{x,y}`, bounded via the now-available L² Cauchy–Schwarz) + symmetry +
+  self-adjointness; then `∫g dE = boundedFC g`.
 - [ ] **M2** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1 closed)
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)

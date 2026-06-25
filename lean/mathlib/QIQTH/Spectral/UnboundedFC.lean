@@ -105,4 +105,17 @@ theorem fcDomain_eq_top_of_bounded {f : Ω → ℝ} {C : ℝ} (hC : ∀ ω, |f �
     P.fcDomain f = ⊤ :=
   Submodule.eq_top_iff'.mpr (P.mem_fcDomain_of_bounded hC)
 
+/-- **The FC domain is the `L²(μ_x)` condition.**  For a measurable symbol `f`, a vector `x` lies in the
+    domain of `∫ f dE` iff `f` is square-integrable against the scalar spectral measure `μ_x`, i.e.
+    `f ∈ L²(μ_x)`.  This is the structural bridge that opens Mathlib's `L²`/integrability machinery
+    (Cauchy–Schwarz, `f·g ∈ L¹` for `g ∈ L²`) for the construction of the operator `∫ f dE` on this
+    domain (the Riesz representation of `y ↦ ∫ f dμ_{x,y}`). -/
+theorem mem_fcDomain_iff_integrable_sq {f : Ω → ℝ} (hf : Measurable f) (x : H) :
+    x ∈ P.fcDomain f ↔ Integrable (fun ω => f ω ^ 2) (P.scalarMeasure x) := by
+  have hnn : 0 ≤ᵐ[P.scalarMeasure x] (fun ω => f ω ^ 2) :=
+    Filter.Eventually.of_forall (fun ω => sq_nonneg _)
+  rw [mem_fcDomain, fcEnergy, ← lt_top_iff_ne_top,
+    ← MeasureTheory.hasFiniteIntegral_iff_ofReal hnn]
+  exact ⟨fun h => ⟨(hf.pow_const 2).aestronglyMeasurable, h⟩, fun h => h.2⟩
+
 end QIQTH.Spectral.ProjectionValuedMeasure
