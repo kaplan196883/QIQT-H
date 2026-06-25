@@ -116,6 +116,21 @@ entanglement = `A/4G_ind`); Solodukhin, *Living Rev. Rel.* 14 (2011) 8 (review, 
   an **arbitrary** matter coefficient `b` and **arbitrary** regulator `reg`: `S_ent/(A/G_ind) = 1/4` regardless.
   **Honest residual:** the *value* of `G_ind`/`ℓ_P` (the species problem + the concrete cutoff) is the input —
   *not* the `1/4`; and Type II finiteness alone isn't the full regulator (needs the concrete spectrum → Stage C).
-- **NEXT: Stage C** — the Lean-formalizable core: the Gaussian entanglement-entropy area law on a finite
-  oscillator lattice (Srednicki), building on `QIQTH/Entropy` — the records as a finite network whose
-  entanglement is the area (the first finite model of the regulator/spectrum). Axiom-free, budget 0.
+- **Stage C ✅ (the building block; the full lattice-scaling is the labelled frontier)** —
+  `QIQTH/GaussianStateEntropy.lean`, axiom-free (standard 3), budget 0, wired into `QIQTH.lean` +
+  `AxiomAudit.lean`, full `QIQTH` build green (8709 jobs). Formalizes the **per-mode Gaussian entanglement
+  entropy** `S(ν) = (ν+½)log(ν+½) − (ν−½)log(ν−½)` — the function that, by Williamson normal form, the
+  Srednicki area law *sums over symplectic modes*. Machine-checked properties: `gaussModeEntropy_half`
+  (`S(½)=0` — a minimum-uncertainty mode is pure, no entanglement), `gaussModeEntropy_hasDerivAt`
+  (`dS/dν = log((ν+½)/(ν−½))`, the `+1`s from each `x log x` cancelling), `gaussModeEntropy_deriv_pos`
+  (strictly increasing), `gaussModeEntropy_nonneg` (`S ≥ 0` — entanglement never negative, via monotonicity
+  from the pure-state value; continuity at the `ν=½` endpoint handled through `Real.negMulLog`, since `log`
+  itself is discontinuous at 0). This is the irreducible, finite, axiom-free kernel of the area law — the
+  entropy carried by ONE mode of the record/oscillator network.
+  **HONEST BLOCKER (recorded):** the full **area-law *scaling*** (`Σ over modes ∝ boundary size` from the
+  lattice covariance matrix's Williamson spectrum) is **NOT** formalized — it needs the symplectic
+  eigenvalue / Williamson-normal-form linear algebra (a genuine Mathlib-grade gap, flagged high-risk in §2-C).
+  Stage C delivers the per-mode summand and its physics (pure⇒0, monotone, nonneg); the lattice scaling that
+  turns `Σ S(νᵢ)` into `∝ A` is the cited formalization frontier, left green at this checkpoint.
+- **PLAN COMPLETE** (A+B+C landed; C's lattice-scaling tail is the labelled frontier). Net: the `1/4` is
+  derived (geometric, non-circular — A+B), and the entropy-area-law's per-mode kernel is machine-checked (C).

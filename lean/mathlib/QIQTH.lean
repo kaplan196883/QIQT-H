@@ -218,6 +218,9 @@ import QIQTH.QiqtGrPPWave
 -- (via area_hasDerivAt_of_covConst) + entropy bound hbound (via shannon_le_log_card) all discharged;
 -- only EOM (hKG) + FQ capacity (hcap) + the localization map (hS/hK) carried.
 import QIQTH.QiqtGrShowcase
+-- Sakharov Stage C: the per-mode Gaussian entanglement entropy S(ν)=(ν+½)log(ν+½)−(ν−½)log(ν−½),
+-- the Srednicki building block summed by the entropy area law. S(½)=0 (pure), increasing, nonneg.
+import QIQTH.GaussianStateEntropy
 -- Born FROM PROJECTORS: the operator bridge grounding the record/area contract. For a
 -- finite orthogonal PVM {P_r} and a normalized Φ, μ(r)=‖P_r Φ‖²=⟨Φ,P_rΦ⟩ is a genuine
 -- RecordContract.RecordLaw — so the contract rests on Born-from-Φ, not a toy distribution.

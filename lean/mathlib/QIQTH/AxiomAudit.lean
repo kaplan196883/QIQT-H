@@ -4937,6 +4937,12 @@ namespace QIQTH.AxiomAudit
 -- complete capstone with hWgeo/hWequil collapsed to one covariant-constancy condition:
 #print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_complete_covCong
 
+-- Sakharov Stage C: per-mode Gaussian entanglement entropy (Srednicki building block of the area law).
+#print axioms QIQTH.GaussianStateEntropy.gaussModeEntropy_half
+#print axioms QIQTH.GaussianStateEntropy.gaussModeEntropy_hasDerivAt
+#print axioms QIQTH.GaussianStateEntropy.gaussModeEntropy_deriv_pos
+#print axioms QIQTH.GaussianStateEntropy.gaussModeEntropy_nonneg
+
 -- Tier A1 of QIQT_GR_DISCHARGEABLE_PLAN: discharge hric_symm.
 #print axioms QIQTH.Curvature.ricci_symm
 -- expected: standard only — Ricci symmetry R_σν=R_νσ via lowered-Riemann pair-symmetry (lowered_riemann_pair_symm:
