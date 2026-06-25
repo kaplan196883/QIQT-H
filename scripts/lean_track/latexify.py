@@ -94,6 +94,59 @@ _IDENT = re.compile(r"[A-Za-z_][A-Za-z0-9_.'!?]*")
 # glyphs that escaped every map during this run (surfaced by the CLI for review)
 _UNMAPPED = set()
 
+# operator commands (NOT atoms): a thin-space must never follow these.
+_OP_WORDS = ["cdot", "le", "ge", "ne", "approx", "equiv", "simeq", "cong",
+             "sim", "propto", "in", "notin", "subseteq", "subset", "supseteq",
+             "cap", "cup", "setminus", "to", "mapsto", "longrightarrow",
+             "wedge", "vee", "neg", "times", "otimes", "oplus", "circ", "pm",
+             "mp", "sum", "prod", "int", "partial", "nabla", "vdash", "mid",
+             "Rightarrow", "Longrightarrow", "Longleftarrow", "ll", "gg"]
+
+
+def _read_arg(pp, i):
+    """Read one application argument from `pp` at offset `i` (after skipping
+    spaces): a balanced (...)/[...] group, or a single atom (identifier / Greek /
+    number) plus any trailing unicode sub/superscripts. Returns (substring, new_i).
+    """
+    n = len(pp)
+    while i < n and pp[i] == " ":
+        i += 1
+    if i >= n:
+        return None, i
+    if pp[i] in "([":
+        close = ")" if pp[i] == "(" else "]"
+        depth, j = 0, i
+        while j < n:
+            if pp[j] in "([":
+                depth += 1
+            elif pp[j] in ")]":
+                depth -= 1
+                if depth == 0:
+                    j += 1
+                    break
+            j += 1
+        return pp[i:j], j
+    m = _IDENT.match(pp, i)
+    if m:
+        j = m.end()
+    elif pp[i].isdigit():
+        j = i
+        while j < n and (pp[j].isdigit() or pp[j] == "."):
+            j += 1
+    else:
+        j = i + 1                      # a single glyph (Greek letter, etc.)
+    while j < n and (pp[j] in SUPERS or pp[j] in SUBS):
+        j += 1
+    return pp[i:j], j
+
+
+def _lookup(tok, notation):
+    """Return the notation entry for a token (full name, then last segment)."""
+    if tok in notation:
+        return notation[tok]
+    last = tok.split(".")[-1]
+    return notation.get(last)
+
 
 def _render_ident(tok, notation):
     """A dotted Lean identifier -> a LaTeX atom.
@@ -156,9 +209,18 @@ def tex_of_pp(pp, notation=None):
             tok = m.group(0)
             i = m.end()
             if tok in KEYWORDS:
-                out.append(KW_TEX[tok])
-            else:
-                out.append(_render_ident(tok, notation))
+                out.append(KW_TEX[tok]); continue
+            val = _lookup(tok, notation)
+            if val is not None and re.search(r"#\d", val):   # applied template
+                argc = max(int(d) for d in re.findall(r"#(\d+)", val))
+                args = []
+                for _ in range(argc):
+                    raw, i = _read_arg(pp, i)
+                    args.append(tex_of_pp(raw, notation) if raw else "")
+                out.append(re.sub(r"#(\d+)",
+                                  lambda mt: args[int(mt.group(1)) - 1], val))
+                continue
+            out.append(_render_ident(tok, notation))
             continue
         if c in SYMBOLS:
             out.append(SYMBOLS[c]); i += 1; continue
@@ -182,6 +244,13 @@ def tex_of_pp(pp, notation=None):
     # fold big-operator binders: `\sum x, body` -> `\sum_{x} body`
     tex = re.sub(r"(\\(?:sum|prod|bigcup|bigcap|int))\s+([^,]+?)\s*,",
                  r"\1_{\2}", tex)
+    # thin-space between juxtaposed application atoms so `g x mu nu` does not
+    # collapse to `gxmunu`; fires only atom->atom (letter/digit/}/) to letter/digit/(),
+    # never before a control word like \mu or an operator.
+    tex = re.sub(r"(?<=[A-Za-z0-9})\]])[ ]+(?=[A-Za-z0-9(])", r"\\,", tex)
+    # ...but the lookbehind also matched the trailing letter of an operator
+    # command (\cdot, \le, ...). Undo the thin-space directly after those.
+    tex = re.sub(r"(\\(?:" + "|".join(_OP_WORDS) + r"))\\,", r"\1 ", tex)
     # safety net: drop any exotic glyph that escaped every map, so output always
     # compiles. Greek/symbols/blackboard are already translated above, so this
     # only removes rare unmapped Lean notation (record any drops for review).

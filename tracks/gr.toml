@@ -93,9 +93,14 @@ name_regex = "^(hsymm|hsymm_gi|hinv|hCg|hCgi|hPP|hPP'|hcong|hT_symm|hbar0|hbar_p
 # Map project / Mathlib operator names to readable math macros. Keys match either a
 # full qualified name or its last segment; anything unmapped becomes \mathrm{name}.
 [latex.notation]
+# Plain atoms (head-symbol replacement).
 "boxField" = "\\Box"
-"kgStress" = "T"
-"einsteinTensor" = "G"
+# Applied-notation templates: #k is the k-th application argument. These typeset
+# the tensors with index subscripts and an explicit evaluation point, e.g.
+#   einsteinTensor g gi μ ν x  ->  G_{μν}(x)
+#   kgStress m φ g gi x μ ν     ->  T_{μν}(x)
+"einsteinTensor" = "G_{#3#4}(#5)"
+"kgStress" = "T_{#6#7}(#5)"
 "covDerivVec" = "\\nabla"
 "expansion" = "\\theta"
 "Shannon" = "S"
