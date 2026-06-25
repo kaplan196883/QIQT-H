@@ -395,4 +395,47 @@ theorem fcSeq_norm_sub_sq {f : Ω → ℝ} (hf : Measurable f) (x : H) (n m : �
           (Filter.Eventually.of_forall fun ω => sq_nonneg _)
           (((fcTrunc_measurable hf m).sub (fcTrunc_measurable hf n)).pow_const 2).aestronglyMeasurable
 
+/-- The **squared-norm Cauchy bound** for the operator sequence (all real, finiteness from the domain):
+    `‖fcSeq m x − fcSeq n x‖² ≤ 2·A_m + 2·A_n` where `A_k = ∫(f−fcTrunc k)² dμ_x` (`.toReal` of the lintegral
+    tails). -/
+theorem fcSeq_norm_sub_sq_le {f : Ω → ℝ} (hf : Measurable f) {x : H} (hx : x ∈ P.fcDomain f) (n m : ℕ) :
+    ‖P.fcSeq hf m x - P.fcSeq hf n x‖ ^ 2
+      ≤ 2 * (∫⁻ ω, ENNReal.ofReal ((f ω - fcTrunc f m ω) ^ 2) ∂(P.scalarMeasure x)).toReal
+        + 2 * (∫⁻ ω, ENNReal.ofReal ((f ω - fcTrunc f n ω) ^ 2) ∂(P.scalarMeasure x)).toReal := by
+  have hAfin : ∀ k, ∫⁻ ω, ENNReal.ofReal ((f ω - fcTrunc f k ω) ^ 2) ∂(P.scalarMeasure x) ≠ ⊤ :=
+    fun k => ne_top_of_le_ne_top (P.mem_fcDomain.mp hx)
+      (MeasureTheory.lintegral_mono fun ω => ENNReal.ofReal_le_ofReal (fcTrunc_sub_sq_le f k ω))
+  rw [P.fcSeq_norm_sub_sq]
+  refine (ENNReal.toReal_mono
+    (ENNReal.add_ne_top.mpr ⟨ENNReal.mul_ne_top (by simp) (hAfin m),
+      ENNReal.mul_ne_top (by simp) (hAfin n)⟩)
+    (P.fcTrunc_diff_lintegral_le hf x n m)).trans (le_of_eq ?_)
+  rw [ENNReal.toReal_add (ENNReal.mul_ne_top (by simp) (hAfin m))
+      (ENNReal.mul_ne_top (by simp) (hAfin n)), ENNReal.toReal_mul, ENNReal.toReal_mul]
+  simp [ENNReal.toReal_ofNat]
+
+/-- **The approximating sequence is Cauchy** on the domain: `boundedFC(fₙ)x` is Cauchy in `H`.  From the
+    squared-norm bound `‖fcSeq m x − fcSeq n x‖² ≤ 2A_m + 2A_n` and the tail-convergence `A_k → 0`.  Its
+    strong limit (next) is the unbounded operator `(∫ f dE) x`. -/
+theorem fcSeq_cauchySeq {f : Ω → ℝ} (hf : Measurable f) {x : H} (hx : x ∈ P.fcDomain f) :
+    CauchySeq (fun n => P.fcSeq hf n x) := by
+  have hA : Filter.Tendsto
+      (fun k => (∫⁻ ω, ENNReal.ofReal ((f ω - fcTrunc f k ω) ^ 2) ∂(P.scalarMeasure x)).toReal)
+      Filter.atTop (nhds 0) := by
+    have := (ENNReal.continuousAt_toReal ENNReal.zero_ne_top).tendsto.comp
+      (P.fcTrunc_lintegral_sub_sq_tendsto hf hx)
+    simpa using this
+  rw [Metric.cauchySeq_iff]
+  intro ε hε
+  rw [Metric.tendsto_atTop] at hA
+  obtain ⟨N, hN⟩ := hA (ε ^ 2 / 8) (by positivity)
+  refine ⟨N, fun m hm n hn => ?_⟩
+  have hAm := hN m hm
+  have hAn := hN n hn
+  rw [Real.dist_eq, sub_zero, abs_of_nonneg ENNReal.toReal_nonneg] at hAm hAn
+  rw [dist_eq_norm]
+  have hsq : ‖P.fcSeq hf m x - P.fcSeq hf n x‖ ^ 2 < ε ^ 2 :=
+    (P.fcSeq_norm_sub_sq_le hf hx n m).trans_lt (by nlinarith [hAm, hAn, pow_pos hε 2])
+  exact lt_of_pow_lt_pow_left₀ 2 hε.le hsq
+
 end QIQTH.Spectral.ProjectionValuedMeasure

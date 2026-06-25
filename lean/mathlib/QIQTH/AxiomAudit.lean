@@ -1212,6 +1212,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcSeq_norm_sub_sq
 -- the operator sequence fcSeq n x := boundedFC(fₙ)x; its diff-norm as a lintegral:
 -- ‖fcSeq m x − fcSeq n x‖² = (∫⁻ ofReal((fₘ−fₙ)²) dμ_x).toReal — bridges to the ℝ≥0∞ Cauchy bound.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcSeq_norm_sub_sq_le
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcSeq_cauchySeq
+-- ★ the approximating sequence boundedFC(fₙ)x is CAUCHY on the domain (‖fcSeq m x−fcSeq n x‖²≤2A_m+2A_n,
+-- A_k→0) — so its strong limit exists (H complete): the unbounded operator (∫f dE)x.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
