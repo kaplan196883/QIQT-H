@@ -91,9 +91,11 @@ item.** Never claim the `1/4`.
   **Real-symbol self-adjointness ✅** (`boundedFC_isSelfAdjoint`: `f̄=f ⟹ boundedFC f` self-adjoint, via the
   polarized form's conj-symmetry — the symmetry seed for `K` and half the norm identity
   `‖boundedFC g x‖²=∫|g|²dμ_x`). **Operator route chosen: truncation limits** `Kx := lim boundedFC(fₙ)x`
-  (reuses the built `boundedFC` + L²-Cauchy; no cross-measure). NEXT: the norm identity
-  `‖boundedFC g x‖²=∫|g|²dμ_x` (needs `boundedFC` adjoint+`boundedFC_mul`) ⟹ the truncations are L²-Cauchy on
-  the domain ⟹ the limit operator `fcLinear` + symmetry; then `∫g dE = boundedFC g`.
+  (reuses the built `boundedFC` + L²-Cauchy; no cross-measure). **Truncation L²-convergence ✅**
+  (`fcTrunc` `=f·𝟙_{|f|≤n}` + `fcTrunc_lintegral_sub_sq_tendsto`: on the domain `∫|f−fₙ|²dμ_x → 0` by
+  dominated convergence, dominated by `f²∈L¹` — the L²-Cauchy engine). NEXT: the norm identity
+  `‖boundedFC g x‖²=∫|g|²dμ_x` (`boundedFC` adjoint + `boundedFC_mul` + diagonal) ⟹ `boundedFC(fₙ)x` Cauchy ⟹
+  the limit operator `fcLinear` + symmetry; then `∫g dE = boundedFC g`.
 - [ ] **M2** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1 closed)
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)

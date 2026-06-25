@@ -144,4 +144,68 @@ theorem boundedFC_isSelfAdjoint {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (
   rw [P.inner_boundedFC hf hC0 hC x y, ← inner_conj_symm, P.inner_boundedFC hf hC0 hC y x,
     P.bilinDiag_conj_symm f x y, show (fun ω => (starRingEnd ℂ) (f ω)) = f from funext hreal]
 
+/-! ### Bounded truncations of the symbol (the operator's `L²`-Cauchy engine)
+
+The unbounded operator `∫ f dE` is built as the strong limit `Kx := limₙ boundedFC(fₙ) x` over the bounded
+truncations `fₙ = f · 𝟙_{|f|≤n}`.  The key analytic fact, proved here, is that on the domain the truncations
+converge to `f` in `L²(μ_x)`: `∫ |f − fₙ|² dμ_x → 0`.  Combined with the norm identity
+`‖boundedFC g x‖² = ∫ |g|² dμ_x` (next increment, from `boundedFC_isSelfAdjoint` + `boundedFC_mul`), this makes
+`boundedFC(fₙ) x` a Cauchy sequence, whose limit is the operator. -/
+
+/-- The bounded truncation `fₙ = f · 𝟙_{|f| ≤ n}`. -/
+noncomputable def fcTrunc (f : Ω → ℝ) (n : ℕ) : Ω → ℝ := {ω | |f ω| ≤ n}.indicator f
+
+theorem fcTrunc_abs_le (f : Ω → ℝ) (n : ℕ) (ω : Ω) : |fcTrunc f n ω| ≤ n := by
+  unfold fcTrunc
+  by_cases h : ω ∈ {ω | |f ω| ≤ (n : ℝ)}
+  · rw [Set.indicator_of_mem h]; exact h
+  · rw [Set.indicator_of_notMem h]; simp
+
+theorem fcTrunc_measurable {f : Ω → ℝ} (hf : Measurable f) (n : ℕ) : Measurable (fcTrunc f n) :=
+  hf.indicator (measurableSet_le (continuous_abs.measurable.comp hf) measurable_const)
+
+theorem fcTrunc_tendsto (f : Ω → ℝ) (ω : Ω) :
+    Filter.Tendsto (fun n => fcTrunc f n ω) Filter.atTop (nhds (f ω)) := by
+  have hev : (fun n => fcTrunc f n ω) =ᶠ[Filter.atTop] (fun _ => f ω) := by
+    obtain ⟨N, hN⟩ := exists_nat_ge |f ω|
+    filter_upwards [Filter.eventually_ge_atTop N] with n hn
+    have hmem : ω ∈ {ω | |f ω| ≤ (n : ℝ)} := hN.trans (by exact_mod_cast hn)
+    simp only [fcTrunc, Set.indicator_of_mem hmem]
+  exact Filter.Tendsto.congr' hev.symm tendsto_const_nhds
+
+theorem fcTrunc_sub_sq_le (f : Ω → ℝ) (n : ℕ) (ω : Ω) :
+    (f ω - fcTrunc f n ω) ^ 2 ≤ (f ω) ^ 2 := by
+  unfold fcTrunc
+  by_cases h : ω ∈ {ω | |f ω| ≤ (n : ℝ)}
+  · rw [Set.indicator_of_mem h]; simp [sq_nonneg]
+  · rw [Set.indicator_of_notMem h]; simp
+
+/-- **On the domain, the truncations converge to `f` in `L²(μ_x)`:** `∫ |f − fₙ|² dμ_x → 0`.  Dominated
+    convergence — the integrand `→ 0` pointwise and is dominated by `f²`, which is `μ_x`-integrable
+    exactly because `x` lies in the FC domain. -/
+theorem fcTrunc_lintegral_sub_sq_tendsto {f : Ω → ℝ} (hf : Measurable f) {x : H}
+    (hx : x ∈ P.fcDomain f) :
+    Filter.Tendsto
+      (fun n => ∫⁻ ω, ENNReal.ofReal ((f ω - fcTrunc f n ω) ^ 2) ∂(P.scalarMeasure x))
+      Filter.atTop (nhds 0) := by
+  have hbound : ∀ n, (fun ω => ENNReal.ofReal ((f ω - fcTrunc f n ω) ^ 2))
+      ≤ᵐ[P.scalarMeasure x] (fun ω => ENNReal.ofReal ((f ω) ^ 2)) := fun n =>
+    Filter.Eventually.of_forall (fun ω => ENNReal.ofReal_le_ofReal (fcTrunc_sub_sq_le f n ω))
+  have hmeas : ∀ n, Measurable (fun ω => ENNReal.ofReal ((f ω - fcTrunc f n ω) ^ 2)) := fun n =>
+    ENNReal.measurable_ofReal.comp ((hf.sub (fcTrunc_measurable hf n)).pow_const 2)
+  have hfin : ∫⁻ ω, ENNReal.ofReal ((f ω) ^ 2) ∂(P.scalarMeasure x) ≠ ⊤ := (P.mem_fcDomain).mp hx
+  have hlim : ∀ᵐ ω ∂(P.scalarMeasure x),
+      Filter.Tendsto (fun n => ENNReal.ofReal ((f ω - fcTrunc f n ω) ^ 2)) Filter.atTop (nhds 0) := by
+    refine Filter.Eventually.of_forall (fun ω => ?_)
+    have : Filter.Tendsto (fun n => (f ω - fcTrunc f n ω) ^ 2) Filter.atTop (nhds 0) := by
+      have h0 : Filter.Tendsto (fun n => f ω - fcTrunc f n ω) Filter.atTop (nhds 0) := by
+        have := (tendsto_const_nhds (x := f ω)).sub (fcTrunc_tendsto f ω)
+        simpa using this
+      simpa using h0.pow 2
+    have := (ENNReal.continuous_ofReal.tendsto 0).comp this
+    simpa using this
+  have := MeasureTheory.tendsto_lintegral_of_dominated_convergence
+    (fun ω => ENNReal.ofReal ((f ω) ^ 2)) hmeas hbound hfin hlim
+  simpa using this
+
 end QIQTH.Spectral.ProjectionValuedMeasure

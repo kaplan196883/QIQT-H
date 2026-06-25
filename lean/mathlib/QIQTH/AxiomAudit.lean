@@ -1182,6 +1182,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_isSelfAdjoint
 -- real symbol (f̄=f) ⟹ boundedFC f self-adjoint (via bilinDiag_conj_symm) — the symmetry seed for K and
 -- half the norm identity ‖boundedFC g x‖²=∫|g|²dμ_x of the truncation route to the operator ∫f dE.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_lintegral_sub_sq_tendsto
+-- on the domain the bounded truncations fₙ=f·𝟙_{|f|≤n} converge to f in L²(μ_x): ∫|f−fₙ|²dμ_x→0 (dominated
+-- convergence, dominated by f²∈L¹) — the L²-Cauchy engine making boundedFC(fₙ)x Cauchy (→ the operator).
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
