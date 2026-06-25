@@ -120,4 +120,15 @@ theorem continuousAt_modFlow (S : StandardSubspace H) {ξ : H}
   (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).continuousAt_boundedFC_expSymbol'
     (kFn_val_measurable S) hdom t₀
 
+/-- **The modular flow is unitary (norm-preserving):** `‖boundedFC(e^{it·kFn}(R)) ξ‖ = ‖ξ‖`, i.e. `Δ^{it}` is
+    an isometry on every vector (a specialization of `norm_boundedFC_expSymbol`).  With the group law + generator
+    + strong continuity, this completes the modular flow as a genuine `C₀` one-parameter **unitary** group.
+    Axiom-free. -/
+theorem norm_modFlow (S : StandardSubspace H) (t : ℝ) (ξ : H) :
+    ‖(PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).boundedFC
+        (QIQTH.Spectral.ProjectionValuedMeasure.measurable_expSymbol (kFn_val_measurable S) t)
+        zero_le_one (QIQTH.Spectral.ProjectionValuedMeasure.norm_expSymbol_le t) ξ‖ = ‖ξ‖ :=
+  (PVM_of_selfAdjoint (rvdRC S) (rvdRC_isSelfAdjoint S)).norm_boundedFC_expSymbol
+    (kFn_val_measurable S) t ξ
+
 end QIQTH.StandardSubspaceModular

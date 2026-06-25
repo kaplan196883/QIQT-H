@@ -986,4 +986,22 @@ theorem continuousAt_boundedFC_expSymbol' {f : Ω → ℝ} (hf : Measurable f) {
   exact (P.boundedFC (measurable_expSymbol hf t₀) zero_le_one
     (norm_expSymbol_le t₀)).continuous.continuousAt.comp hinner
 
+/-- **Unitarity (norm-preservation) of the FC-exponential group:** `‖boundedFC(e^{itf}) x‖ = ‖x‖`.  Since
+    `U_t = boundedFC(e^{itf})` satisfies `U_t⋆ U_t = 1` (`boundedFC_expSymbol_adjoint_mul`), it is an isometry —
+    `⟪U_t x, U_t x⟫ = ⟪x, U_t⋆ U_t x⟫ = ⟪x, x⟫`.  Completes the unitary one-parameter group at the norm level. -/
+theorem norm_boundedFC_expSymbol {f : Ω → ℝ} (hf : Measurable f) (t : ℝ) (x : H) :
+    ‖P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) x‖ = ‖x‖ := by
+  have hadj := P.boundedFC_expSymbol_adjoint_mul hf t
+  have hinner : inner ℂ (P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) x)
+      (P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) x) = inner ℂ x x := by
+    rw [← ContinuousLinearMap.adjoint_inner_right, ← ContinuousLinearMap.mul_apply, hadj,
+      ContinuousLinearMap.one_apply]
+  have hsq : ‖P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) x‖ ^ 2
+      = ‖x‖ ^ 2 := by
+    have := congrArg RCLike.re hinner
+    rwa [inner_self_eq_norm_sq, inner_self_eq_norm_sq] at this
+  have h := Real.sqrt_sq (norm_nonneg
+    (P.boundedFC (measurable_expSymbol hf t) zero_le_one (norm_expSymbol_le t) x))
+  rw [← h, hsq, Real.sqrt_sq (norm_nonneg x)]
+
 end QIQTH.Spectral.ProjectionValuedMeasure

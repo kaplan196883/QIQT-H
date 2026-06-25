@@ -1268,6 +1268,9 @@ namespace QIQTH.AxiomAudit
 -- ★★ STRONG CONTINUITY of the FC-exponential group (the Stone hypothesis): t↦boundedFC(e^{itf})x continuous at 0
 -- (free from the HasDerivAt capstone — differentiable⟹continuous) AND at every t₀ (group law U_{t₀+s}=U_{t₀}U_s).
 -- Resolves the strong-continuity step the earlier Bochner-DCT route could not (the whnf wall); lintegral route delivers it.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.norm_boundedFC_expSymbol
+-- ★ UNITARITY (norm-preservation) of the FC-exponential group: ‖boundedFC(e^{itf})x‖=‖x‖, from U⋆U=1
+-- (boundedFC_expSymbol_adjoint_mul). Completes the unitary one-parameter group at the norm level.
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcTrunc_integral_tendsto
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.fcOp_inner_self
 -- ★ M2 operator-level first law: ⟨x,(∫f dE)x⟩ = ∫ f dμ_x (L¹ DCT tail-conv + inner continuity) — for
@@ -1287,6 +1290,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.continuousAt_modFlow
 -- ★ STRONG CONTINUITY of the modular flow (Stone hypothesis for Δ^{it}): t↦boundedFC(e^{it·kFn}(R))ξ continuous at
 -- every t₀ (domain ξ). Specializes continuousAt_boundedFC_expSymbol'; with group law + unitarity = the full C₀-group.
+#print axioms QIQTH.StandardSubspaceModular.norm_modFlow
+-- ★ UNITARITY of the modular flow: ‖Δ^{it}ξ‖=‖ξ‖ (specializes norm_boundedFC_expSymbol). Completes Δ^{it} as a
+-- genuine C₀ one-parameter UNITARY group: group law + generator iK + strong continuity + norm-preservation.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

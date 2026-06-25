@@ -194,6 +194,10 @@ item.** Never claim the `1/4`.
     previously reverted): the `lintegral`-built `HasDerivAt` delivers it for free. With group law + unitarity +
     generator + strong continuity, the modular flow is now a **full `C₀` one-parameter unitary group with generator
     `iK`** — the complete operator Stone package, axiom-free.
+  • **UNITARITY (norm-preservation) NOW EXPLICIT ✅** — `norm_boundedFC_expSymbol` (`‖boundedFC(e^{itf})x‖=‖x‖`,
+    from `U⋆U=1`) + `norm_modFlow` (`‖Δ^{it}ξ‖=‖ξ‖`): the modular flow preserves the norm of every vector, completing
+    `Δ^{it}` as a genuine `C₀` one-parameter **unitary** group (group law + generator `iK` + strong continuity +
+    norm-preservation), axiom-free.
   NB the Bochner-over-`scalarMeasure` DCT route hits a `whnf` wall — the `lintegral`/`HasDerivAt` route is the way.
 - [~] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first). **`n=1` done ✅**: `oneModeSympEig=√det`
   + Heisenberg floor `ν≥½` (Stage C⁴) + **symplectic invariance** `√det(SMSᵀ)=ν` for `S∈Sp(2,ℝ)` (Stage C⁵,
