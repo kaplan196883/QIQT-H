@@ -95,10 +95,11 @@ item.** Never claim the `1/4`.
   (`fcTrunc` `=f·𝟙_{|f|≤n}` + `fcTrunc_lintegral_sub_sq_tendsto`: on the domain `∫|f−fₙ|²dμ_x → 0` by
   dominated convergence, dominated by `f²∈L¹` — the L²-Cauchy engine). **boundedFC adjoint ✅**
   (`boundedFC_adjoint`: `(boundedFC g)† = boundedFC(conj∘g)` — the bounded FC is a `*`-hom). **Polarization
-  diagonal ✅** (`bilinDiag_self`: `B_g(x,x) = ∫ g dμ_x` — the diagonal expectation, last substrate piece). All
-  ingredients now in hand. NEXT: assemble the norm identity `‖boundedFC g x‖²=∫|g|²dμ_x` (adjoint + mul +
-  `bilinDiag_self` + `conj z·z=‖z‖²`) ⟹ `boundedFC(fₙ)x` Cauchy ⟹ the limit operator `fcLinear` + symmetry;
-  then `∫g dE = boundedFC g`.
+  diagonal ✅** (`bilinDiag_self`: `B_g(x,x) = ∫ g dμ_x`). **Diagonal expectation ✅** (`inner_boundedFC_self`:
+  `⟨x,(∫h dE)x⟩ = ∫ h dμ_x` — the JLMS first-law `⟨K⟩` at the bounded level, from `inner_boundedFC`+
+  `bilinDiag_self`). All ingredients in hand. NEXT: the full norm identity `‖boundedFC g x‖²=∫|g|²dμ_x`
+  (`adjoint_inner_right` + adjoint + `boundedFC_mul` + `inner_boundedFC_self` + `conj z·z=‖z‖²`) ⟹
+  `boundedFC(fₙ)x` Cauchy ⟹ the limit operator `fcLinear` + symmetry; then `∫g dE = boundedFC g`.
 - [ ] **M2** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1 closed)
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)

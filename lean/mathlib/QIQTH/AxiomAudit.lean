@@ -1191,6 +1191,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag_self
 -- the polarized form's diagonal is the original functional: B_g(x,x)=∫g dμ_x (= the diagonal expectation
 -- ⟨x,(∫g dE)x⟩) — the last substrate piece for the norm identity.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.inner_boundedFC_self
+-- the diagonal expectation ⟨x,(∫h dE)x⟩ = ∫ h dμ_x (the JLMS first-law ⟨K⟩ at the bounded level).
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

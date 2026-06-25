@@ -172,6 +172,14 @@ theorem bilinDiag_self (g : Ω → ℂ) (x : H) : P.bilinDiag g x x = P.diagInt 
   push_cast
   ring
 
+/-- **The diagonal expectation of the operator:** `⟨x, (∫h dE) x⟩ = ∫ h dμ_x`.  Immediate from
+    `inner_boundedFC` (`⟨x, boundedFC h y⟩ = B_h(x,y)`) and the polarization diagonal `bilinDiag_self`.
+    This is the JLMS first-law expectation value `⟨K⟩` at the bounded level. -/
+theorem inner_boundedFC_self {h : Ω → ℂ} (hh : Measurable h) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, ‖h ω‖ ≤ C) (x : H) :
+    inner ℂ x (P.boundedFC hh hC0 hC x) = ∫ ω, h ω ∂(P.scalarMeasure x) := by
+  rw [P.inner_boundedFC hh hC0 hC x x, P.bilinDiag_self, diagInt]
+
 /-- **The adjoint of `boundedFC g` is `boundedFC ḡ`** (the bounded functional calculus is a `*`-hom):
     `(boundedFC g)† = boundedFC (conj ∘ g)`.  From `inner_boundedFC` + the symbol-conjugation symmetry
     `bilinDiag_conj_symm` and `conj (conj z) = z`.  Combined with `boundedFC_mul` this gives the norm
