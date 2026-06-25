@@ -130,4 +130,18 @@ theorem integrable_of_mem_fcDomain {f : Ω → ℝ} (hf : Measurable f) {x : H}
       ((P.mem_fcDomain_iff_integrable_sq hf x).mp hx)
   exact memLp_one_iff_integrable.mp (h2.mono_exponent (by norm_num))
 
+/-- **A real (`f̄ = f`) bounded symbol gives a self-adjoint operator.**  Via `inner_boundedFC` and the
+    symbol-conjugation symmetry `conj B_f(y,x) = B_{f̄}(x,y)` of the polarized form.  This is the symmetry
+    seed for the (real) modular Hamiltonian `K`, and the first half of the norm identity
+    `‖boundedFC g x‖² = ∫ |g|² dμ_x` underlying the truncation construction of `∫ f dE`. -/
+theorem boundedFC_isSelfAdjoint {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ ω, ‖f ω‖ ≤ C) (hreal : ∀ ω, (starRingEnd ℂ) (f ω) = f ω) :
+    IsSelfAdjoint (P.boundedFC hf hC0 hC) := by
+  rw [isSelfAdjoint_iff, ContinuousLinearMap.star_eq_adjoint]
+  symm
+  rw [ContinuousLinearMap.eq_adjoint_iff]
+  intro x y
+  rw [P.inner_boundedFC hf hC0 hC x y, ← inner_conj_symm, P.inner_boundedFC hf hC0 hC y x,
+    P.bilinDiag_conj_symm f x y, show (fun ω => (starRingEnd ℂ) (f ω)) = f from funext hreal]
+
 end QIQTH.Spectral.ProjectionValuedMeasure

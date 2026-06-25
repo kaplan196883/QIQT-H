@@ -1179,6 +1179,9 @@ namespace QIQTH.AxiomAudit
 -- for the operator construction (Riesz rep of y ↦ ∫ f dμ_{x,y}).
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.integrable_of_mem_fcDomain
 -- on the domain f∈L¹(μ_x) (L²⊆L¹, μ_x finite) — the diagonal expectation ⟨x,(∫f dE)x⟩=∫f dμ_x converges.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.boundedFC_isSelfAdjoint
+-- real symbol (f̄=f) ⟹ boundedFC f self-adjoint (via bilinDiag_conj_symm) — the symmetry seed for K and
+-- half the norm identity ‖boundedFC g x‖²=∫|g|²dμ_x of the truncation route to the operator ∫f dE.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

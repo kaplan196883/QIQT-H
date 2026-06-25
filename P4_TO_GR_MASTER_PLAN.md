@@ -88,6 +88,12 @@ item.** Never claim the `1/4`.
   of the bounded antilinear `y ↦ ∫ f dμ_{x,y}`, bounded via the now-available L² Cauchy–Schwarz) + symmetry +
   self-adjointness; then `∫g dE = boundedFC g`. **L¹-on-domain ✅** (`integrable_of_mem_fcDomain`: `f ∈ L¹(μ_x)`
   on the domain via `L²⊆L¹` + `μ_x` finite — the diagonal expectation `⟨x,(∫f dE)x⟩ = ∫ f dμ_x` converges).
+  **Real-symbol self-adjointness ✅** (`boundedFC_isSelfAdjoint`: `f̄=f ⟹ boundedFC f` self-adjoint, via the
+  polarized form's conj-symmetry — the symmetry seed for `K` and half the norm identity
+  `‖boundedFC g x‖²=∫|g|²dμ_x`). **Operator route chosen: truncation limits** `Kx := lim boundedFC(fₙ)x`
+  (reuses the built `boundedFC` + L²-Cauchy; no cross-measure). NEXT: the norm identity
+  `‖boundedFC g x‖²=∫|g|²dμ_x` (needs `boundedFC` adjoint+`boundedFC_mul`) ⟹ the truncations are L²-Cauchy on
+  the domain ⟹ the limit operator `fcLinear` + symmetry; then `∫g dE = boundedFC g`.
 - [ ] **M2** — `K` operator + `Δ^{it}=e^{−itK}` (JLMS Stage 1 closed)
 - [ ] **M3** — Williamson `N`-mode area-scaling (frontier; small-`N` first)
 - [ ] **M4** — general Stone → `X = A_edge` (frontier)
