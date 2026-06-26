@@ -476,6 +476,13 @@ item.** Never claim the `1/4`.
   identity via `withDensity_apply` + `ofReal_integral_eq_lintegral_ofReal`). Recorded next target: the position
   Born **expectation** `⟨f(X)⟩=∫ f·|x|²` (`positionPVM.diagInt = ∫ f·|x|²`), via
   `integral_withDensity_eq_integral_smul₀` (the NNReal-weight withDensity-integral step).
+  **The position Born expectation value ✅** (`PositionPVM.lean`, axiom-free, budget 0): `positionPVM_diagInt` —
+  `diagInt f x = ∫ f(a)·‖x a‖² dμ`: the expectation of any bounded function `f` of the position observable `X` in
+  the (unnormalized) state `x` is `∫ f(a)|x(a)|² da` — the **Born expectation rule for position**, read off the
+  spectral measure (`diagInt = ∫ f d(scalarMeasure x)` against the `|x|²` density, via
+  `integral_withDensity_eq_integral_toReal_smul₀`). With the diagonal/off-diagonal scalar measures + this
+  expectation, the position observable's full Born statistics (probabilities + amplitudes + expectation values)
+  are now machine-checked, axiom-free.
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.

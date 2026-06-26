@@ -1,5 +1,6 @@
 import QIQTH.Spectral.MultiplicationOp
 import QIQTH.Spectral.PVM
+import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 
 /-!
 # The position projection-valued measure on `L²(μ)`
@@ -73,5 +74,21 @@ theorem positionPVM_scalarMeasure_eq_withDensity (x : Lp ℂ 2 μ) :
   rw [positionPVM_scalarMeasure x hA, MeasureTheory.withDensity_apply _ hA]
   exact MeasureTheory.ofReal_integral_eq_lintegral_ofReal hxsq.restrict
     (Filter.Eventually.of_forall fun a => sq_nonneg _)
+
+/-- **The position Born expectation value:** the position PVM's diagonal functional is the `|x|²`-weighted
+    integral, `⟪f(X)⟫_x = D_f(x) = ∫ f(a) ‖x a‖² dμ`. The expectation of any bounded function `f` of the
+    position observable in the (unnormalized) state `x` is `∫ f(a) |x(a)|² da` — the Born expectation rule for
+    position, read off the spectral measure (`diagInt = ∫ f d(scalarMeasure x)` against the `|x|²` density). -/
+theorem positionPVM_diagInt (f : α → ℂ) (x : Lp ℂ 2 μ) :
+    (positionPVM (μ := μ)).diagInt f x = ∫ a, f a * (‖x a‖ ^ 2 : ℂ) ∂μ := by
+  rw [ProjectionValuedMeasure.diagInt, positionPVM_scalarMeasure_eq_withDensity,
+    integral_withDensity_eq_integral_toReal_smul₀
+      ((Lp.aestronglyMeasurable x).norm.aemeasurable.pow_const 2).ennreal_ofReal
+      (Filter.Eventually.of_forall fun a => ENNReal.ofReal_lt_top) f]
+  refine MeasureTheory.integral_congr_ae (Filter.Eventually.of_forall fun a => ?_)
+  show (ENNReal.ofReal (‖x a‖ ^ 2)).toReal • f a = f a * (‖x a‖ ^ 2 : ℂ)
+  rw [ENNReal.toReal_ofReal (sq_nonneg _), Complex.real_smul]
+  push_cast
+  ring
 
 end QIQTH.Spectral.Multiplication

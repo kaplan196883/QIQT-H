@@ -1565,6 +1565,12 @@ namespace QIQTH.AxiomAudit
 -- positionPVM_scalarMeasure promoted to a measure identity via withDensity_apply + ofReal_integral_eq_lintegral_ofReal).
 -- Axiom-free. Recorded next target: the position Born EXPECTATION ⟨f(X)⟩=∫f|x|² (positionPVM.diagInt = ∫f·|x|²),
 -- via integral_withDensity_eq_integral_smul₀ (NNReal weight) — the withDensity-integral step.
+#print axioms QIQTH.Spectral.Multiplication.positionPVM_diagInt
+-- ★ THE POSITION BORN EXPECTATION VALUE: positionPVM_diagInt — diagInt f x = ∫ f(a)·‖x a‖² dμ. The expectation
+-- of any bounded function f of the position observable X in the (unnormalized) state x is ∫ f(a)|x(a)|² da — the
+-- Born expectation rule for position, read off the spectral measure (diagInt = ∫ f d(scalarMeasure x) against the
+-- |x|² density, via integral_withDensity_eq_integral_toReal_smul₀). Axiom-free. With the diagonal/off-diagonal
+-- scalar measures + the expectation, the position observable's full Born statistics are machine-checked.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
