@@ -277,10 +277,13 @@ Also ✅ `stoneGen_isClosable` — **the closure `Ā` exists**: `(stoneGen U).Is
 group. The symmetric densely-defined generator has a closed extension (its adjoint `A†`, closed by
 `LinearPMap.adjoint_isClosed` given the dense smooth domain) and `A ⊆ A†`, so it is closable
 (`IsClosable.leIsClosable`) — the prerequisite for forming `Ā = (stoneGen U).closure` and asking `Ā = Ā†`.
-**Remaining (the genuine Mathlib-grade operator-theory gap):** `Range(A ± i)` dense (deficiency indices zero,
-via the resolvent `∫₀^∞ e^{−t} U_t dt`) ⟹ `Ā = Ā†` (essential self-adjointness) ⟹ the Cayley transform / unbounded
-spectral theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has none of these; the Cayley injectivity estimates
-`‖(A±i)x‖²=‖Ax‖²+‖x‖²` are in `Spectral/Stone.lean`.
+Also ✅ the **resolvent foundation** toward `Range(A±i)` dense: `resolvent U x := ∫₀^∞ e^{−t} U_t x dt = (1−iA)⁻¹ x`
++ `resolvent_integrand_integrableOn` — the half-line integrand `e^{−t} U_t x` is `IntegrableOn (0,∞)` (exp decay
+`e^{−t}` dominates the bounded orbit `‖U_t x‖ ≤ ‖x‖`, `∫₀^∞ e^{−t} < ∞` via `exp_neg_integrableOn_Ioi`).
+**Remaining (the genuine Mathlib-grade operator-theory frontier):** `R x ∈ stoneDomain U` + the resolvent identity
+`(A + i)(R x) = i x` (differentiating the half-line integral) ⟹ `Range(A + i) = H` dense ⟹ `Ā = Ā†` (e.s.a.) ⟹
+the Cayley transform / unbounded spectral theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has none of these; the
+Cayley injectivity estimates `‖(A±i)x‖²=‖Ax‖²+‖x‖²` are in `Spectral/Stone.lean`.
 
 ## 3. Dependency graph
 ```

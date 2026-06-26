@@ -4982,6 +4982,12 @@ namespace QIQTH.AxiomAudit
 -- LinearPMap.adjoint_isClosed, given the smooth domain is dense via stoneDomain_dense) — and A⊆A†
 -- (stoneGen_subset_adjoint), so A is closable (IsClosable.leIsClosable). Prerequisite for forming Ā = closure and
 -- asking Ā=Ā† (self-adjointness). Axiom-free. Remaining: Range(A±i) dense ⟹ Ā=Ā† (the Cayley criterion, Mathlib gap).
+#print axioms QIQTH.Spectral.resolvent_integrand_integrableOn
+-- ★ P4 WALL — the RESOLVENT foundation (toward Range(A±i) dense): resolvent U x := ∫₀^∞ e^{−t} U_t x dt = (1−iA)⁻¹ x.
+-- resolvent_integrand_integrableOn — the half-line integrand e^{−t} U_t x is IntegrableOn (0,∞): exp decay e^{−t}
+-- dominates the bounded orbit (‖U_t x‖≤‖x‖) and ∫₀^∞ e^{−t}<∞ (exp_neg_integrableOn_Ioi + Integrable.mono'). Axiom-free.
+-- Foundation of the Range-density witness: formally ∫₀^∞ e^{−t}e^{itA}dt = (1−iA)⁻¹ ⟹ −i(A+i) surjective ⟹ Range(A+i)=H.
+-- Remaining (Mathlib-grade op-theory frontier): R x ∈ stoneDomain + the resolvent identity (A+i)(R x)=i x ⟹ Range dense.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via

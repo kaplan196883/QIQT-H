@@ -28,6 +28,7 @@ import Mathlib.Analysis.Calculus.ParametricIntegral
 import Mathlib.Analysis.Calculus.BumpFunction.Normed
 import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
 import Mathlib.Analysis.Complex.RealDeriv
+import Mathlib.MeasureTheory.Integral.ExpDecay
 
 namespace QIQTH.Spectral
 
@@ -356,6 +357,36 @@ theorem stoneDomain_dense (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + 
   calc ‖y - x‖ ≤ (r / 2) * ∫ t, ‖φ t‖ := hy_le
     _ = r / 2 := by rw [hnorm1, mul_one]
     _ < r := by linarith
+
+/-! ### The resolvent `R = (1 − iA)⁻¹` (toward `Range(A ± i)` dense)
+
+Essential self-adjointness of the symmetric generator `A = stoneGen U` needs `Range(A ± i)` dense. The classical
+witness is the **resolvent** of a one-parameter unitary group: for a contraction-bounded group,
+`R x := ∫₀^∞ e^{−t} U_t x dt` is a bounded operator equal to `(1 − iA)⁻¹` (since formally
+`∫₀^∞ e^{−t} e^{itA} dt = (1 − iA)⁻¹`), so `(1 − iA) = −i(A + i)` is surjective and `Range(A + i) = H`. This file
+lays its foundation: the half-line integrand `e^{−t} U_t x` is integrable (exponential decay dominates the
+bounded orbit). Showing `R x ∈ stoneDomain U` and the resolvent identity `(A + i)(R x) = i x` (differentiating
+the half-line integral) is the genuine Mathlib-grade operator-theory frontier, built on this. -/
+
+/-- The **resolvent integral** `R x = ∫₀^∞ e^{−t} U_t x dt = (1 − iA)⁻¹ x` for the generator `A` of `U_t`. -/
+noncomputable def resolvent (U : ℝ → (H →L[ℂ] H)) (x : H) : H :=
+  ∫ t in Set.Ioi (0 : ℝ), Real.exp (-t) • U t x
+
+/-- The resolvent integrand `t ↦ e^{−t} U_t x` is integrable on `(0, ∞)`: exponential decay `e^{−t}` dominates
+    the uniformly-bounded orbit (`‖U_t x‖ ≤ ‖x‖`), and `∫₀^∞ e^{−t} dt < ∞` (`exp_neg_integrableOn_Ioi`). -/
+theorem resolvent_integrand_integrableOn (U : ℝ → (H →L[ℂ] H)) (x : H)
+    (hUbd : ∀ t, ‖U t x‖ ≤ ‖x‖) (hcont : Continuous (fun t => U t x)) :
+    IntegrableOn (fun t => Real.exp (-t) • U t x) (Set.Ioi (0 : ℝ)) := by
+  have hg : IntegrableOn (fun t => Real.exp (-t) * ‖x‖) (Set.Ioi (0 : ℝ)) := by
+    have h1 : IntegrableOn (fun t : ℝ => Real.exp (-1 * t)) (Set.Ioi (0 : ℝ)) :=
+      exp_neg_integrableOn_Ioi 0 one_pos
+    simp only [neg_one_mul] at h1
+    exact h1.mul_const ‖x‖
+  refine Integrable.mono' hg
+    ((Real.continuous_exp.comp continuous_neg).smul hcont).aestronglyMeasurable ?_
+  refine Filter.Eventually.of_forall fun t => ?_
+  rw [norm_smul, Real.norm_eq_abs, abs_of_pos (Real.exp_pos _)]
+  exact mul_le_mul_of_nonneg_left (hUbd t) (Real.exp_pos _).le
 
 section SelfAdjoint
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
