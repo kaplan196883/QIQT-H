@@ -182,6 +182,17 @@ crossed-product campaign's Phase 4.2/4.3, currently the recorded frontier wall**
 multiplication by `e^{itξ}`, so `X = −i d/ds` is multiplication by frequency `ξ`; blocked only on **vector-valued
 Fourier/Plancherel** on `L²(ℝ;H)`, which Mathlib lacks (scalar only).  Gated on Phase 3 (or that Fourier gap).
 
+**PROGRESS — Phase 4 (clock-group hypotheses) ✅** (`QIQTH/CrossedProductGenerator.lean`, axiom-free, budget 0):
+`clockTransl_inner` — `⟪λ_t a, λ_t b⟫ = ⟪a, b⟫` (clock translation a ℂ-linear isometry, `inner_map_map`), the
+diamond-free **unitary** statement and the third Stone hypothesis (`hUinner`). With `clockTransl_add` (group law)
++ `clockTransl_zero` (`λ_0 = 1`) + `clockTransl_stronglyContinuous`, **all three hypotheses of the general
+`stoneGen` are discharged for the concrete clock group** — so mathematically `X := stoneGen clockTransl` is the
+symmetric clock energy with the Cayley estimates. **Blocker (NOT math):** elaborating `stoneGen clockTransl` at
+the `Lp H 2 volume` type triggers the documented `Lp`-instance `whnf`/`isDefEq` divergence (the
+`(stoneGen _).domain` projection unfolds the heavy instance tower), so the one-line corollaries do not yet
+*elaborate* at the `Lp` type; honestly checkpointed in `CrossedProductGenerator.lean`. The general scaffolding +
+all three clock hypotheses stand; only the concrete `Lp` wiring is gated (an `irreducible`/instance refactor).
+
 ## 3. Dependency graph
 ```
 Phase 1 (unbounded FC ∫f dE) ─→ Phase 2 (Stone for FC-ops; K, Δ^{it}=e^{−itK}) ──→ [JLMS Stage 1 DONE]

@@ -16,6 +16,7 @@ is the cited frontier.  Axiom-free.
 -/
 import QIQTH.CrossedProductTranslation
 import Mathlib.MeasureTheory.Function.LpSpace.ContinuousCompMeasurePreserving
+import Mathlib.MeasureTheory.Function.L2Space
 
 namespace QIQTH.StandardSubspaceModular
 
@@ -41,5 +42,47 @@ theorem clockTransl_stronglyContinuous (ξ : Lp H 2 (volume : Measure ℝ)) :
     ContinuousAt.compMeasurePreservingLp continuousAt_const hg.continuousAt
       (fun t => measurePreserving_addRight_volume t) (by simp)
   exact key
+
+/-! ### Phase 4.3 (operator) — the clock energy `X` as a symmetric unbounded operator
+
+Applying the **general Stone scaffolding** (`QIQTH/Spectral/Stone.lean`) to the strongly-continuous unitary
+group `λ_t = clockTransl t`: its three Stone hypotheses are now all in hand — the group law
+(`clockTransl_add`), `λ_0 = 1` (`clockTransl_zero`), and inner-product preservation
+(`clockTransl_inner`, below, from `λ_t` being a ℂ-linear isometry). This realizes the **clock energy**
+`X := stoneGen clockTransl = −i d/dt λ_t` as a genuine *symmetric* unbounded operator (`LinearPMap`) with the
+Cayley estimates, hence `X ± i` injective. `X` (its closure) is the operator the campaign calls `A_edge`.
+
+Essential self-adjointness of `X` — needed before Stone returns `λ_t = exp(itX)` and before the dual-weight
+trace — requires the Gårding density of the smooth domain (`Range(X ± i)` dense), the carried analytic
+frontier (Phase 3.3); it is NOT claimed here. The 1/4 ratio is derived (`SakharovRatio`); the value of `G` /
+the edge normalization `⟨A_edge⟩ = A/4ℓ_P²` is never claimed. -/
+
+/-- **★ `λ_t` preserves the inner product:** `⟪λ_t a, λ_t b⟫ = ⟪a, b⟫` (it is a ℂ-linear isometry). This is
+    the third Stone hypothesis (`hUinner`) for `clockTransl` — the genuinely *unitary* statement of the clock
+    group (diamond-free, unlike the `star`/adjoint form): with `clockTransl_add` (group law) and
+    `clockTransl_zero` (`λ_0 = 1`), the three hypotheses of the general Stone generator are now all in hand. -/
+theorem clockTransl_inner (t : ℝ) (a b : Lp H 2 (volume : Measure ℝ)) :
+    (inner ℂ (clockTransl t a) (clockTransl t b) : ℂ) = inner ℂ a b :=
+  (Lp.compMeasurePreservingₗᵢ ℂ (· + t) (measurePreserving_addRight_volume t)).inner_map_map a b
+
+/-! ### Phase 4.3 (operator) — the clock energy `X` and the `Lp`-elaboration checkpoint
+
+With `clockTransl_add`, `clockTransl_zero`, `clockTransl_inner` all in hand, the strongly-continuous unitary
+group `λ_t` satisfies the three hypotheses of the **general Stone generator** (`QIQTH/Spectral/Stone.lean`),
+so *mathematically* the clock energy `X := stoneGen clockTransl = −i d/dt λ_t` is a symmetric unbounded
+operator with the Cayley estimates (hence `X ± i` injective), and its closure is the campaign's `A_edge`.
+
+**Honest blocker (Mathlib-grade `Lp`-elaboration wall, NOT mathematics):** forming `stoneGen clockTransl` at
+the concrete type `Lp H 2 volume` makes the elaborator `whnf`-unfold the `LinearPMap` projection
+`(stoneGen clockTransl).domain` through the heavy `Lp`/`InnerProductSpace` instance tower, which diverges
+(`isDefEq`/`whnf` heartbeat timeout, even at 10⁶) — the same divergent-`Lp`-instance friction recorded for
+Phase 1.1/1.3. The instantiated corollaries
+`clockEnergy_isFormalAdjoint_self : (stoneGen clockTransl).IsFormalAdjoint (stoneGen clockTransl)`,
+`clockEnergy_norm_add_smul_I_sq`, `clockEnergy_norm_le_norm_add_smul_I` are immediate term-mode applications of
+the (axiom-free, green) general lemmas `stoneGen_isFormalAdjoint_self` / `_norm_add_smul_I_sq` /
+`_norm_le_norm_add_smul_I` to `clockTransl_add`/`_zero`/`_inner`, but do not currently *elaborate* at the `Lp`
+type. Resolving the `Lp`-instance whnf divergence (an `irreducible`/instance-management refactor, or a Mathlib
+fix) is the carried friction. The general scaffolding stands; the clock hypotheses stand; only the concrete
+wiring is gated. The 1/4 ratio is derived (`SakharovRatio`); `⟨A_edge⟩ = A/4ℓ_P²` (value of `G`) is never claimed. -/
 
 end QIQTH.StandardSubspaceModular
