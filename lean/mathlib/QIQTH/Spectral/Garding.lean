@@ -25,6 +25,9 @@ import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 import Mathlib.MeasureTheory.Group.Integral
 import Mathlib.Analysis.Calculus.ParametricIntegral
+import Mathlib.Analysis.Calculus.BumpFunction.Normed
+import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
+import Mathlib.Analysis.Complex.RealDeriv
 
 namespace QIQTH.Spectral
 
@@ -277,5 +280,81 @@ theorem exists_mem_stoneDomain_norm_sub_le (U : ℝ → (H →L[ℂ] H))
   have hrw : mollify U φ x - x = mollify U φ x - (∫ t, φ t) • x := by rw [hφone]
   rw [hrw]
   exact norm_mollify_sub_le_uniform U φ x ε hε0 hsmall hφ_int hint hintx
+
+/-- **Strong continuity ⟹ the mollifier-support smallness condition.** For a family with `U_0 = 1` and
+    `t ↦ U_t x` continuous, for every `ε > 0` there is `δ > 0` with `‖U_t x − x‖ < ε` for `|t| < δ`. A
+    mollifier supported in `(−δ, δ)` then satisfies the `hsmall` hypothesis of
+    `exists_mem_stoneDomain_norm_sub_le` — the bridge from the `C₀`-group hypothesis to density. -/
+theorem exists_delta_norm_sub_lt (U : ℝ → (H →L[ℂ] H)) (hU0 : U 0 = 1) (x : H)
+    (hcont : Continuous (fun t => U t x)) (ε : ℝ) (hε : 0 < ε) :
+    ∃ δ > 0, ∀ t : ℝ, |t| < δ → ‖U t x - x‖ < ε := by
+  have h0 : U 0 x = x := by rw [hU0, ContinuousLinearMap.one_apply]
+  obtain ⟨δ, hδ, hδ'⟩ := (Metric.continuous_iff.mp hcont) 0 ε hε
+  refine ⟨δ, hδ, fun t ht => ?_⟩
+  have h := hδ' t (by rw [Real.dist_eq, sub_zero]; exact ht)
+  rwa [h0, dist_eq_norm] at h
+
+set_option maxHeartbeats 1000000 in
+/-- **★★ The smooth domain of the Stone generator is DENSE** for a contractive strongly-continuous family
+    (`U_0 = 1`, `‖U_t y‖ ≤ ‖y‖`, `t ↦ U_t y` continuous). Proof: for `x` and `r > 0`, strong continuity gives
+    `δ` with `‖U_t x − x‖ < r/2` for `|t| < δ` (`exists_delta_norm_sub_lt`); a normalized `C^∞` bump `φ`
+    (`ContDiffBump.normed`, `ℝ → ℂ`-coerced) supported in `(−δ/2, δ/2)` then yields, via
+    `exists_mem_stoneDomain_norm_sub_le`, a Gårding vector `x_φ ∈ stoneDomain U` with `‖x_φ − x‖ ≤ (r/2)·1 < r`.
+    **This discharges the density hypothesis of `stoneGen_le_adjoint` — the last analytic input to essential
+    self-adjointness of the Stone generator** (`X = A_edge`, `P`, `K`). -/
+theorem stoneDomain_dense (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖)
+    (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    Dense ((stoneDomain U : Set H)) := by
+  rw [Metric.dense_iff]
+  intro x r hr
+  have hε : 0 < r / 2 := by positivity
+  obtain ⟨δ, hδ, hδ'⟩ := exists_delta_norm_sub_lt U hU0 x (hSC x) (r / 2) hε
+  let f : ContDiffBump (0 : ℝ) := ⟨δ / 4, δ / 2, by positivity, by linarith⟩
+  set g : ℝ → ℝ := f.normed volume with hg
+  set φ : ℝ → ℂ := fun t => (g t : ℂ) with hφ
+  set φ' : ℝ → ℂ := fun t => Complex.ofReal (deriv g t) with hφ'
+  have hgC1 : ContDiff ℝ 1 g := f.contDiff_normed
+  have hgcont : Continuous g := hgC1.continuous
+  have hφcont : Continuous φ := Complex.continuous_ofReal.comp hgcont
+  have hsuppg : HasCompactSupport g := f.hasCompactSupport_normed
+  have hsuppφ : HasCompactSupport φ := hsuppg.comp_left (g := fun r : ℝ => (r : ℂ)) (by simp)
+  have hφ'cont : Continuous φ' :=
+    Complex.continuous_ofReal.comp (hgC1.continuous_deriv (le_refl 1))
+  have hsuppφ' : HasCompactSupport φ' := hsuppg.deriv.comp_left (g := fun r : ℝ => (r : ℂ)) (by simp)
+  have hderiv : ∀ y, HasDerivAt φ (φ' y) y := fun y =>
+    ((hgC1.differentiable one_ne_zero).differentiableAt.hasDerivAt).ofReal_comp
+  have hφint : Integrable φ := hφcont.integrable_of_hasCompactSupport hsuppφ
+  have hint : Integrable (fun t => φ t • U t x) :=
+    mollify_integrable U φ x (hSC x) hφcont hsuppφ
+  have hintx : Integrable (fun t => φ t • x) :=
+    (hφcont.smul continuous_const).integrable_of_hasCompactSupport hsuppφ.smul_right
+  have hintegral : (∫ t, φ t) = 1 := by
+    have hofr : (∫ t, φ t) = ((∫ t, g t : ℝ) : ℂ) := by simp only [hφ]; exact integral_ofReal
+    rw [hofr, hg, f.integral_normed (μ := volume), Complex.ofReal_one]
+  have hφone : (∫ t, φ t) • x = x := by rw [hintegral, one_smul]
+  have hnorm1 : (∫ t, ‖φ t‖) = 1 := by
+    have heq : (fun t => ‖φ t‖) = g := by
+      funext t
+      simp only [hφ, Complex.norm_real]
+      exact abs_of_nonneg (f.nonneg_normed t)
+    rw [heq, hg, f.integral_normed (μ := volume)]
+  have hsmall : ∀ t, φ t ≠ 0 → ‖U t x - x‖ ≤ r / 2 := by
+    intro t ht
+    have htg : g t ≠ 0 := by
+      intro h; apply ht; simp only [hφ, h, Complex.ofReal_zero]
+    have htsupp : t ∈ Function.support g := Function.mem_support.mpr htg
+    rw [hg, f.support_normed_eq (μ := volume), Metric.mem_ball, Real.dist_eq, sub_zero] at htsupp
+    refine le_of_lt (hδ' t ?_)
+    have hlt : |t| < δ / 2 := htsupp
+    linarith
+  obtain ⟨y, hy_mem, hy_le⟩ := exists_mem_stoneDomain_norm_sub_le U hgrp φ φ' hderiv hφcont hsuppφ
+    hφ'cont hsuppφ' x (r / 2) ‖x‖ (le_of_lt hε) (norm_nonneg x) (fun t => hUbd t x) (hSC x)
+    hφint hint hintx hφone hsmall
+  refine ⟨y, ?_, hy_mem⟩
+  rw [Metric.mem_ball, dist_eq_norm]
+  calc ‖y - x‖ ≤ (r / 2) * ∫ t, ‖φ t‖ := hy_le
+    _ = r / 2 := by rw [hnorm1, mul_one]
+    _ < r := by linarith
 
 end QIQTH.Spectral

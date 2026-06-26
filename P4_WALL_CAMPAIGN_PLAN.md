@@ -224,8 +224,13 @@ Also ✅ the **Gårding-approximation identity** (`mollify_sub`: `x_φ − (∫�
 and `→ 0` by strong continuity, i.e. `x_φ → x`. Plus the **density assembly** `exists_mem_stoneDomain_norm_sub_le`
 (combines the two Gårding lemmas: a normalized `C¹_c` mollifier averaging to `x`, supported where `‖U_t x−x‖ ≤ ε`,
 gives `y = x_φ ∈ stoneDomain U` with `‖y − x‖ ≤ ε·∫‖φ‖` ⟹ for every `x,ε` a smooth-domain vector within `ε` =
-density). **Remaining (pure bump construction):** supply the normalized bump (`ContDiffBump.normed`: `C^∞`, `∫=1`,
-`≥0`, compact support) — ℝ→ℂ coercion + derivative `φ'` + small `rOut` — ⟹ `Dense (stoneDomain U)` ⟹ e.s.a. ⟹ Stone.
+density). **★★★ MILESTONE — THE SMOOTH DOMAIN IS DENSE (`stoneDomain_dense`):** for a contractive strongly-continuous
+family, `Dense (stoneDomain U)` — a normalized `C^∞` bump (`ContDiffBump.normed`, ℝ→ℂ-coerced, supported in
+`(−δ/2,δ/2)` with `δ` from strong continuity, `exists_delta_norm_sub_lt`) fed to the density assembly yields a
+Gårding vector `x_φ ∈ stoneDomain U` with `‖x_φ − x‖ < r`. The entire Gårding-density argument is now
+machine-checked, axiom-free. **This discharges the density hypothesis of `stoneGen_le_adjoint` — the last
+analytic input to essential self-adjointness.** Remaining (no new analytic content): wire density + symmetry ⟹
+`A ⊆ A†` ⟹ closure self-adjoint (Cayley/`Range(A±i)`) ⟹ Stone `U_t = exp(it Ā)`, for `X = A_edge`, `P`, `K`.
 
 ### Phase 4 (operators) — the modular Hamiltonian `K` as a symmetric operator ✅ (3rd & LAST C₀ group; trio complete)
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/ModularGenerator.lean`):** the Stone-instantiation pattern

@@ -261,10 +261,16 @@ Also ✅ the **density assembly** `exists_mem_stoneDomain_norm_sub_le`: combinin
 `φ` averaging to `x` (`(∫φ)·x = x`) and supported where `‖U_t x − x‖ ≤ ε` yields `y = x_φ ∈ stoneDomain U` with
 `‖y − x‖ ≤ ε · ∫‖φ‖`. With a Dirac bump (`∫‖φ‖ = 1`, support shrinking) this gives, for every `x` and `ε`, a
 smooth-domain vector within `ε` — i.e. **density of the smooth domain**.
-**Remaining (pure bump construction):** supply the normalized bump from Mathlib `ContDiffBump.normed` (`C^∞`,
-`∫ = 1`, `≥ 0`, compact support in `closedBall 0 rOut`) — coerce `ℝ → ℂ`, extract its derivative `φ'`, pick
-`rOut` small via strong continuity — then conclude `Dense (stoneDomain U)` ⟹ `Range(A ± i)` dense ⟹ `A`
-essentially self-adjoint ⟹ Stone returns `U_t = exp(it Ā)`.
+**★★★ MILESTONE — THE SMOOTH DOMAIN IS DENSE (the Gårding-density argument is complete, axiom-free).**
+✅ `exists_delta_norm_sub_lt` — strong continuity (`U_0 = 1`, `t ↦ U_t x` cont) ⟹ for each `ε > 0`, `∃ δ`,
+`‖U_t x − x‖ < ε` for `|t| < δ`. ✅ `stoneDomain_dense` — for a contractive strongly-continuous family
+(`U_0 = 1`, `‖U_t y‖ ≤ ‖y‖`, `t ↦ U_t y` cont), **`Dense (stoneDomain U)`**: a normalized `C^∞` bump
+(`ContDiffBump.normed`, `ℝ → ℂ`-coerced, supported in `(−δ/2, δ/2)`) fed to `exists_mem_stoneDomain_norm_sub_le`
+yields a Gårding vector `x_φ ∈ stoneDomain U` with `‖x_φ − x‖ < r`. **This discharges the density hypothesis of
+`stoneGen_le_adjoint` — the last analytic input to essential self-adjointness.**
+**Remaining (no new analytic content):** wire density + symmetry (`stoneGen_le_adjoint` with `hdense :=
+stoneDomain_dense`) ⟹ `stoneGen U ⊆ (stoneGen U)†`; closure is self-adjoint (`Ā = Ā†`) via the Cayley/`Range(A±i)`
+criterion ⟹ Stone returns `U_t = exp(it Ā)`, for all three generators (`X = A_edge`, `P`, `K`).
 
 ## 3. Dependency graph
 ```

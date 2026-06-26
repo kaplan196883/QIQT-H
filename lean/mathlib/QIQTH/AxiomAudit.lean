@@ -4961,6 +4961,15 @@ namespace QIQTH.AxiomAudit
 -- ((∫φ)·x=x) and supported where ‖U_t x−x‖≤ε gives y=x_φ ∈ stoneDomain U with ‖y−x‖ ≤ ε·∫‖φ‖. With a Dirac bump
 -- (∫‖φ‖=1, support shrinking) ⟹ for every x,ε a smooth-domain vector within ε ⟹ DENSITY of the smooth domain.
 -- Axiom-free. Only missing piece: supplying the bump (Mathlib ContDiffBump.normed: C^∞, ∫=1, ≥0, compact support).
+#print axioms QIQTH.Spectral.exists_delta_norm_sub_lt
+#print axioms QIQTH.Spectral.stoneDomain_dense
+-- ★★★ P4 WALL MILESTONE — THE SMOOTH DOMAIN OF THE STONE GENERATOR IS DENSE: stoneDomain_dense — for a contractive
+-- strongly-continuous family (U_0=1, ‖U_t y‖≤‖y‖, t↦U_t y continuous), Dense (stoneDomain U). Proof: exists_delta_
+-- norm_sub_lt (strong continuity ⟹ δ with ‖U_t x−x‖<r/2 for |t|<δ) + a normalized C^∞ bump (ContDiffBump.normed,
+-- ℝ→ℂ coerced) supported in (−δ/2,δ/2) fed to exists_mem_stoneDomain_norm_sub_le ⟹ a Gårding vector x_φ ∈ stoneDomain
+-- with ‖x_φ−x‖ ≤ (r/2)·1 < r. THE ENTIRE GÅRDING-DENSITY ARGUMENT IS NOW MACHINE-CHECKED, AXIOM-FREE. This
+-- discharges the density hypothesis of stoneGen_le_adjoint — the last analytic input to essential self-adjointness
+-- of the Stone generator (X=A_edge, P, K). Remaining: wire density+symmetry ⟹ IsSelfAdjoint closure ⟹ Stone (Cayley).
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via
