@@ -516,6 +516,13 @@ Also ✅ `cayley_cfc_tendsto_zero_of_integral` `[Nontrivial H]` — **the L² co
 into **strong operator limits** — the device that (with the rational cutoffs) kills the Cayley atom `μ_x({1})=0` and
 assembles `U_t=exp(itA)` as a strong limit, no PVM. **Next:** the cutoff sequence `ψ_N` + its DCT limits
 (`∫ψ_N dμ_x → μ_x({1})`, `∫|(ω−1)ψ_N|² → 0`) → `μ_x({1})=0` via `cayley_one_sub_injective`.
+Also ✅ `cayley_cfc_cauchySeq_of_integral` `[Nontrivial H]` — **the existence half of the operator-limit toolkit**:
+if `F n` is **Cauchy in `L²(μ_x)`** (`∀ε>0 ∃N ∀m,n≥N, ∫‖F m ω.1−F n ω.1‖²dμ_x<ε`) then `cfc(F n) V x` is a `CauchySeq`
+in `H` (hence converges, `H` complete). From the L²-distance Parseval `cayley_cfc_sub_norm_sq_integral`: an L²-Cauchy
+condition at `ε²` gives `‖·‖²<ε²` ⟹ `‖·‖<ε` (`lt_of_pow_lt_pow_left₀`). With the convergence half this is the **FULL
+bridge** `L²(μ_x)` continuous-function limits ⟶ strong operator limits: any L²-convergent sequence of continuous
+functions yields a convergent `cfc(F n) V x`. Directly enables both `μ_x({1})=0` (the cutoff sequence converges) and
+`U_t=exp(itA)`. **Next:** the cutoff sequence `ψ_N` + its DCT limits → `μ_x({1})=0`.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

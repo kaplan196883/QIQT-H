@@ -391,6 +391,10 @@ Also ✅ `cayley_cfc_norm_sq_integral` `[Nontrivial H]` (**Parseval / L²-isomet
 Also ✅ `cayley_cfc_tendsto_zero_of_integral` `[Nontrivial H]` (**the L² convergence engine** — `∫‖F n ω.1‖²dμ_x→0`
 ⟹ `cfc(F n)V x→0` strongly; the convergence half of the Cauchy/DCT machine turning L²(μ_x)-limits into strong operator
 limits — the device that kills the Cayley atom `μ_x({1})=0` and assembles `U_t=exp(itA)`, no PVM).
+Also ✅ `cayley_cfc_cauchySeq_of_integral` `[Nontrivial H]` (**the existence half** — `F n` Cauchy in L²(μ_x) ⟹
+`cfc(F n)V x` is a `CauchySeq` in H, hence converges; from the L²-distance Parseval + `lt_of_pow_lt_pow_left₀`). With
+the convergence half this is the **FULL bridge** L²(μ_x) continuous-fn limits ⟶ strong operator limits — any
+L²-convergent sequence yields a convergent `cfc(F n)V x`, directly enabling `μ_x({1})=0` and `U_t=exp(itA)`.
 **Next:** bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

@@ -5117,6 +5117,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayley_cfc_sub_norm_sq_integral
 #print axioms QIQTH.Spectral.cayley_cfc_norm_sq_integral
 #print axioms QIQTH.Spectral.cayley_cfc_tendsto_zero_of_integral
+#print axioms QIQTH.Spectral.cayley_cfc_cauchySeq_of_integral
+-- ★★ P4 WALL — THE EXISTENCE HALF OF THE OPERATOR-LIMIT TOOLKIT: cayley_cfc_cauchySeq_of_integral [Nontrivial H]
+-- — if F n is Cauchy in L²(μ_x) (∀ε>0 ∃N ∀m,n≥N, ∫‖F m ω.1−F n ω.1‖²dμ_x<ε) then cfc(F n) V x is a CauchySeq in H
+-- (hence converges, H complete). From the L²-distance Parseval cayley_cfc_sub_norm_sq_integral: L²-Cauchy at ε²
+-- gives ‖·‖²<ε² ⟹ ‖·‖<ε (lt_of_pow_lt_pow_left₀). With cayley_cfc_tendsto_zero_of_integral (convergence half) this
+-- is the FULL bridge L²(μ_x) continuous-fn limits ⟶ strong operator limits — makes cfc(ψ_N)V x converge (atom
+-- μ_x({1})=0) and assembles U_t=exp(itA), no PVM (GPT-5.5-pro route 2026-06-27). Axiom-free.
 -- ★★ P4 WALL — THE PARSEVAL / L²-ISOMETRY (integral form, f-version): cayley_cfc_norm_sq_integral [Nontrivial H]
 -- — ‖cfc f V x‖² = ∫ ω, ‖f ω.1‖² dμ_x for f continuous on σ(V). The g=0 companion of cayley_cfc_sub_norm_sq_integral
 -- (composes cayley_cfc_norm_sq with integral_re_cfc_ofReal at r z=‖f z‖², via star w·w=↑‖w‖²/RCLike.conj_mul). THE

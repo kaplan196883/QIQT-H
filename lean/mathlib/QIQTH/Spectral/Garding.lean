@@ -1732,6 +1732,36 @@ theorem cayley_cfc_tendsto_zero_of_integral [Nontrivial H] (U : ℝ → (H →L[
   simp only [Function.comp_def, Real.sqrt_zero] at hsqrt
   exact hsqrt.congr (fun n => Real.sqrt_sq (norm_nonneg _))
 
+/-- **★★ The existence half of the operator-limit toolkit:** if a sequence of functions `F n` (each continuous on
+    `σ(V)`) is **Cauchy in `L²(μ_x)`** — `∀ ε>0, ∃ N, ∀ m,n ≥ N, ∫ ‖F m ω.1 − F n ω.1‖² dμ_x < ε` — then the
+    operator-vectors `cfc (F n) V x` form a **`CauchySeq` in `H`** (hence converge, `H` complete).  Immediate from
+    the L²-distance Parseval identity `‖cfc (F m) V x − cfc (F n) V x‖² = ∫ ‖F m ω.1 − F n ω.1‖² dμ_x`
+    (`cayley_cfc_sub_norm_sq_integral`): an `L²(μ_x)`-Cauchy condition at `ε²` gives `‖·‖² < ε²`, so `‖·‖ < ε`.
+    Together with `cayley_cfc_tendsto_zero_of_integral` (the convergence half) this is the **full bridge**
+    `L²(μ_x)` continuous-function limits ⟶ strong operator limits — the device that makes the rational-cutoff
+    sequence `cfc (ψ_N) V x` converge (killing the Cayley atom `μ_x({1}) = 0`) and assembles the Stone exponential
+    `U_t = exp(it A)` as a strong limit, with NO projection-valued measure (GPT-5.5-pro route).  Axiom-free. -/
+theorem cayley_cfc_cauchySeq_of_integral [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (F : ℕ → ℂ → ℂ)
+    (hF : ∀ n, ContinuousOn (F n) (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (x : H)
+    (hcauchy : ∀ ε : ℝ, 0 < ε → ∃ N, ∀ m ≥ N, ∀ n ≥ N,
+      ∫ ω, ‖F m ω.1 - F n ω.1‖ ^ 2 ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) < ε) :
+    CauchySeq (fun n => cfc (F n) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x) := by
+  rw [Metric.cauchySeq_iff]
+  intro ε hε
+  obtain ⟨N, hN⟩ := hcauchy (ε ^ 2) (by positivity)
+  refine ⟨N, fun m hm n hn => ?_⟩
+  rw [dist_eq_norm]
+  have hpars := cayley_cfc_sub_norm_sq_integral U hgrp hU0 hUinner hUbd hSC (F m) (F n) (hF m) (hF n) x
+  have hlt : ‖cfc (F m) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x
+      - cfc (F n) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x‖ ^ 2 < ε ^ 2 := by
+    rw [hpars]; exact hN m hm n hn
+  exact lt_of_pow_lt_pow_left₀ 2 hε.le hlt
+
 end SelfAdjoint
 
 end QIQTH.Spectral
