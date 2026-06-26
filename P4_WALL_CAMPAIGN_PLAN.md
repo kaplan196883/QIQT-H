@@ -15,11 +15,23 @@ self-contained, axiom-free, independently-valuable checkpoint (Phase 1 alone is 
 infrastructure; Phase 5 alone gives finite renormalized entropy *internal* to QIQT-H).  Nothing is a monolith
 that only pays off at the end.
 
-**What it will NOT deliver, ever, by construction:** the **`1/4ℓ_P²` coefficient.** That is the UV datum (GPT
-rank-1 fatal obstruction) — it requires a microscopic theory that fixes the entropy density, which no approach
-(including AdS/CFT) derives from below for general screens.  The campaign reduces (P4) to **the single edge-
-operator normalization `⟨A_edge⟩ = A(∂R)/4ℓ_P²`** and derives the *bound* side from positivity — it does not and
-cannot manufacture the coefficient.  Stated up front so no phase is mistaken for "deriving gravity from nothing."
+**The `1/4` — what IS and is NOT derived (precise, three distinct things):**
+1. **The `1/4` geometric RATIO `= (conical 4π)/(EH 16π)` — ✅ DERIVED.**  `SAKHAROV_KG_PLAN.md` (Sakharov /
+   induced-gravity, Stages A+B) derives it non-circularly — independent of the matter coefficient and the UV
+   regulator — and it is **machine-checked axiom-free in `QIQTH/SakharovRatio.lean`** (`sakharov_ratio`,
+   `geometric_quarter`, `heatkernel_ratio_eq_geometric`).  So the *coefficient `1/4`* is NOT a free input.
+2. **The area *scaling* `S ∝ A(∂R)` (entropy ∝ boundary) — frontier (M3).**  The `n=1` Williamson piece is done
+   (`GaussianStateEntropy.lean`); the `N`-mode symplectic scaling is the cited Mathlib-grade frontier.
+3. **The absolute normalization — the *value* of `G`/`ℓ_P` (equivalently the edge normalization
+   `⟨A_edge⟩ = A(∂R)/4ℓ_P²`) — ⛔ carried, never derived, by construction.**  This is the genuine UV/species
+   datum (GPT rank-1 obstruction): it needs a microscopic theory fixing the entropy *density*, which no approach
+   (incl. AdS/CFT) derives from below for general screens.
+
+**So what THIS campaign delivers:** it reduces (P4) to the single edge-operator normalization `⟨A_edge⟩ =
+A(∂R)/4ℓ_P²` and derives the **bound** side `S(ρ_R) ≤ A/4ℓ_P²` from positivity (Phase 6).  Combined with the
+Sakharov-derived `1/4` ratio, the only carried datum is the *value of `G`* (the edge normalization's scale) —
+NOT the coefficient.  Stated up front so no phase is mistaken for "deriving gravity from nothing," and so the
+`1/4` ratio derivation (item 1) is correctly credited rather than lumped into the carried datum.
 
 ## 1. What exists (the foundations to build on)
 
@@ -31,6 +43,13 @@ cannot manufacture the coefficient.  Stated up front so no phase is mistaken for
   `cgpEntropy_nonneg`.
 - **Spectral machinery**: `PVM_of_selfAdjoint`, `borelFC` (bounded Borel functional calculus), `rvdRC`
   (`R = P+Q`), `scalarMeasure`/`specMeasure`.
+- **The `1/4` geometric ratio — DERIVED** (`SAKHAROV_KG_PLAN.md` + `QIQTH/SakharovRatio.lean`, axiom-free):
+  `S_ent/(A/G_ind) = (conical 4π)/(EH 16π) = 1/4`, circularity-clean (independent of matter coefficient and
+  regulator).  So Phase 6's `⟨A_edge⟩ = A(∂R)/4ℓ_P²` carries only the *value of `G`*, not the coefficient.
+- **The position/momentum spectral substrate** (this session, `Spectral/MultiplicationOp`, `PositionPVM`,
+  `MomentumPVM`, `PVMConj`, `TranslationFlow`, `ModulationFlow`): the position & momentum PVMs, both **strongly-
+  continuous one-parameter unitary groups** `e^{itP}` (`translationLp`) and `e^{isX}` (`modulationLp`), the Weyl
+  CCR, both Born-statistics layers.  These C₀-groups are the concrete inputs Stone (Phase 4.2) consumes.
 - **Mathlib**: `MeasureTheory.Lp` (Bochner vector-valued), `DomMulAct`/`DomAddAct` (Lp action by
   measure-preserving translation), `VonNeumannAlgebra` + `.commutant` (structural), `ContinuousLinearMap.adjoint`,
   `LinearPMap` (unclosed unbounded maps), CFC.
