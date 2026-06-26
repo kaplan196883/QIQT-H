@@ -118,9 +118,17 @@ maps `stoneDomain U` into itself (`τ↦U_τ x` differentiable at `s` via `U_τ=
 `HasDerivAt.scomp_of_eq` with `hy : y = h x` named-arg form + `HasFDerivAt.comp_hasDerivAt` with
 `(U s).restrictScalars ℝ` for the ℂ-CLM over the ℝ-curve, and `import Deriv.Comp`). The `U`-invariance — a
 prerequisite for essential self-adjointness (Phase 3.2).
-**NEXT tractable sub-brick:** the symmetry `⟪Ax,y⟫=⟪x,Ay⟫` (from `U_t` unitary, via `HasDerivAt.inner` of
-`⟪U_t x, y⟫` + the adjoint relation `⟪U_t x,y⟫=⟪x,U_{-t}y⟫`); then the density (Gårding)/essential-self-adjointness
-wall (the genuine Mathlib-grade frontier).
+Also ✅ `hasDerivAt_stoneGen_neg` (backward flow `t↦U_{−t}x` deriv `−i·Ax`) + `stoneGen_symmetric` — **the
+generator is SYMMETRIC**: `⟪Ax,y⟫=⟪x,Ay⟫` on the smooth domain for a one-parameter unitary group (`U` group +
+`U_t` inner-preserving). Proof: the unitary relation `⟪U_t x,y⟫=⟪x,U_{−t}y⟫` differentiated at `0` two ways
+(`HasDerivAt.inner` product rule, full-name not dot-notation; `import InnerProductSpace.Calculus`) gives
+`⟪i·Ax,y⟫=⟪x,−i·Ay⟫` ⟹ `−i⟪Ax,y⟫=−i⟪x,Ay⟫` (`Complex.conj_I`+`inner_smul`); cancel `−i`. **The first half of
+self-adjointness — `A` is Hermitian on its domain.**
+**REMAINING wall (Phase 3.2/3.3, the genuine Mathlib-grade frontier):** density of the smooth domain (Gårding:
+the `U`-smoothed vectors `∫φ(t)U_t x dt` are dense) + **essential self-adjointness** (`Range(A±i)` dense / Nelson
+analytic vectors) + the **Cayley transform**/unbounded spectral theorem. Symmetric + densely-defined + e.s.a. ⟹
+`Ā` self-adjoint ⟹ Stone (`U_t=e^{itĀ}`). The Stone scaffolding (domain, generator, derivative, flow-invariance,
+symmetry) is now complete; the e.s.a./Cayley analytic core is the wall.
 
 ### Phase 4 — apply general Stone to the clock energy `X = A_edge`  *(unblocks Wall Phase 4.2/4.3)*
 *Extends `QIQTH/CrossedProductGenerator.lean`.*  Apply Phase 3 to `clockTransl` (`λ_t`, already proved a

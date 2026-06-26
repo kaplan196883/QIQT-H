@@ -1610,6 +1610,15 @@ namespace QIQTH.AxiomAudit
 -- HasDerivAt.scomp_of_eq + HasFDerivAt.comp_hasDerivAt with restrictScalars ℝ for the ℂ-CLM over the ℝ-curve.)
 -- The U-invariance of the smooth domain, a prerequisite for essential self-adjointness (Phase 3.2). Axiom-free.
 -- NEXT: the symmetry ⟪Ax,y⟫=⟪x,Ay⟫ (U_t unitary + HasDerivAt.inner), then the Gårding-density/essential-s.a. wall.
+#print axioms QIQTH.Spectral.hasDerivAt_stoneGen_neg
+#print axioms QIQTH.Spectral.stoneGen_symmetric
+-- ★ STONE 3.1 cont. — THE GENERATOR IS SYMMETRIC (first half of self-adjointness): hasDerivAt_stoneGen_neg
+-- (backward flow t↦U_{−t}x has derivative −i·A x) and stoneGen_symmetric — ⟪A x, y⟫=⟪x, A y⟫ on the smooth domain
+-- for a one-parameter UNITARY group (U group + U_t inner-preserving). Proof: the unitary relation
+-- ⟪U_t x,y⟫=⟪x,U_{−t}y⟫ differentiated at 0 two ways (HasDerivAt.inner product rule) gives ⟪i·Ax,y⟫=⟪x,−i·Ay⟫, i.e.
+-- −i⟪Ax,y⟫=−i⟪x,Ay⟫ (conj_I + inner_smul); cancel −i. The symmetry of A=−i(d/dt U_t) — the operator is Hermitian on
+-- its domain. Axiom-free. REMAINING wall (Phase 3.2/3.3): Gårding density of the domain + essential self-adjointness
+-- (Range(A±i) dense / Nelson analytic vectors) + the Cayley transform/unbounded spectral theorem — the genuine Mathlib gaps.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

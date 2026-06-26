@@ -2,6 +2,7 @@ import Mathlib.Analysis.Calculus.Deriv.Add
 import Mathlib.Analysis.Calculus.Deriv.Mul
 import Mathlib.Analysis.Calculus.Deriv.Comp
 import Mathlib.Analysis.InnerProductSpace.Adjoint
+import Mathlib.Analysis.InnerProductSpace.Calculus
 
 /-!
 # Stone's theorem — the infinitesimal generator (Phase 3.1)
@@ -104,5 +105,39 @@ theorem stoneDomain_apply_mem (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (
     simpa using HasDerivAt.scomp_of_eq (hg := hgs) (hh := (hasDerivAt_id 0).add_const s)
       (hy := (zero_add s).symm)
   exact hfin.differentiableAt
+
+/-- The backward flow `t ↦ U_{−t} x` has derivative `−i · A x` at `0` (chain rule on `hasDerivAt_stoneGen`). -/
+theorem hasDerivAt_stoneGen_neg (U : ℝ → (H →L[ℂ] H)) (x : stoneDomain U) :
+    HasDerivAt (fun t => U (-t) (x : H)) (-(Complex.I • stoneGen U x)) 0 := by
+  simpa using HasDerivAt.scomp_of_eq (hg := hasDerivAt_stoneGen U x)
+    (hh := (hasDerivAt_id (0 : ℝ)).neg) (hy := neg_zero.symm)
+
+section Symmetry
+variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
+
+/-- **The generator is symmetric:** `⟪A x, y⟫ = ⟪x, A y⟫` on the smooth domain, for a one-parameter *unitary*
+    group (`U` a group with `U_t` inner-product-preserving). Symmetry of `A = −i (d/dt U_t)` is the first half of
+    self-adjointness (Stone Phase 3.2). Proof: the unitary relation `⟪U_t x, y⟫ = ⟪x, U_{−t} y⟫` differentiated at
+    `0` two ways gives `⟪i·Ax, y⟫ = ⟪x, −i·Ay⟫`, i.e. `−i⟪Ax,y⟫ = −i⟪x,Ay⟫`; cancel `−i`. -/
+theorem stoneGen_symmetric (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b) (x y : stoneDomain U) :
+    (inner ℂ (stoneGen U x) (y : H) : ℂ) = inner ℂ (x : H) (stoneGen U y) := by
+  have hrel : (fun t => (inner ℂ (U t (x : H)) (y : H) : ℂ))
+      = fun t => (inner ℂ (x : H) (U (-t) (y : H)) : ℂ) := by
+    funext t
+    rw [← hUinner t (x : H) (U (-t) (y : H)), ← ContinuousLinearMap.comp_apply, ← hgrp t (-t),
+      add_neg_cancel, hU0, ContinuousLinearMap.one_apply]
+  have h1 := HasDerivAt.inner ℂ (hasDerivAt_stoneGen U x) (hasDerivAt_const (0 : ℝ) (y : H))
+  have h2 := HasDerivAt.inner ℂ (hasDerivAt_const (0 : ℝ) (x : H)) (hasDerivAt_stoneGen_neg U y)
+  rw [hrel] at h1
+  have hkey := h1.unique h2
+  simp only [inner_zero_right, inner_zero_left, add_zero, zero_add] at hkey
+  rw [inner_smul_left, inner_neg_right, inner_smul_right, Complex.conj_I] at hkey
+  have : (-Complex.I) * (inner ℂ (stoneGen U x) (y : H) : ℂ)
+      = (-Complex.I) * (inner ℂ (x : H) (stoneGen U y) : ℂ) := by linear_combination hkey
+  exact mul_left_cancel₀ (neg_ne_zero.mpr Complex.I_ne_zero) this
+
+end Symmetry
 
 end QIQTH.Spectral
