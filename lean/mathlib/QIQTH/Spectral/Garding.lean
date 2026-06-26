@@ -581,6 +581,54 @@ theorem stoneGen_add_I_surjective (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t,
   rw [smul_sub, smul_smul, neg_mul_neg, Complex.I_mul_I, neg_one_smul, sub_neg_eq_add, neg_smul]
   abel
 
+/-- A smooth vector of `U` is a smooth vector of the **reversed group** `t ↦ U_{−t}` (the orbit `t ↦ U_{−t} x`
+    is differentiable at `0`, `hasDerivAt_stoneGen_neg`). -/
+theorem mem_stoneDomain_reversed (U : ℝ → (H →L[ℂ] H)) (x : H) (hx : x ∈ stoneDomain U) :
+    x ∈ stoneDomain (fun t => U (-t)) :=
+  (hasDerivAt_stoneGen_neg U ⟨x, hx⟩).differentiableAt
+
+/-- **The reversed group's generator is `−A`:** `stoneGen (t ↦ U_{−t}) x = −stoneGen U x`. From
+    `hasDerivAt_stoneGen_neg` (`d/dt U_{−t} x|₀ = −i A x`) and generator identification. The bridge that turns
+    `Range(A + i) = H` for the reversed group into `Range(A − i) = H` for `A`. -/
+theorem stoneGen_reversed_eq (U : ℝ → (H →L[ℂ] H)) (x : H) (hx : x ∈ stoneDomain U) :
+    stoneGen (fun t => U (-t)) ⟨x, mem_stoneDomain_reversed U x hx⟩ = -(stoneGen U ⟨x, hx⟩) := by
+  apply stoneGen_eq_of_hasDerivAt
+  rw [smul_neg]
+  exact hasDerivAt_stoneGen_neg U ⟨x, hx⟩
+
+/-- Reverse of `mem_stoneDomain_reversed`: a smooth vector of `t ↦ U_{−t}` is a smooth vector of `U` (apply the
+    backward-orbit derivative to the reversed group; `U_{−(−t)} = U_t`). -/
+theorem mem_stoneDomain_of_reversed (U : ℝ → (H →L[ℂ] H)) (x : H)
+    (hx : x ∈ stoneDomain (fun t => U (-t))) : x ∈ stoneDomain U := by
+  have h := hasDerivAt_stoneGen_neg (fun t => U (-t)) ⟨x, hx⟩
+  simp only [neg_neg] at h
+  exact h.differentiableAt
+
+/-- **★★ `A − i` is surjective: `Range(A − i) = H`** (the second deficiency index). Apply
+    `stoneGen_add_I_surjective` to the reversed group `t ↦ U_{−t}` (whose generator is `−A`,
+    `stoneGen_reversed_eq`) and the vector `−y`: the witness `w` gives `−A w + i w = −y`, i.e. `A w − i w = y`.
+    Together with `stoneGen_add_I_surjective` (`Range(A + i) = H`), **both deficiency indices of the symmetric
+    generator `A = stoneGen U` are zero** — the essential-self-adjointness criterion is met. -/
+theorem stoneGen_sub_I_surjective (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖)
+    (hSC : ∀ y : H, Continuous (fun t => U t y)) (y : H) :
+    ∃ z : stoneDomain U, stoneGen U z - Complex.I • (z : H) = y := by
+  have hgrp' : ∀ s t, (fun r => U (-r)) (s + t) = (fun r => U (-r)) s ∘L (fun r => U (-r)) t := by
+    intro s t; show U (-(s + t)) = U (-s) ∘L U (-t); rw [neg_add, hgrp]
+  have hU0' : (fun r => U (-r)) 0 = 1 := by show U (-0) = 1; rw [neg_zero, hU0]
+  have hUbd' : ∀ (t : ℝ) (w : H), ‖(fun r => U (-r)) t w‖ ≤ ‖w‖ := fun t w => hUbd (-t) w
+  have hSC' : ∀ w : H, Continuous (fun t => (fun r => U (-r)) t w) := fun w => (hSC w).comp continuous_neg
+  obtain ⟨wsub, hw⟩ := stoneGen_add_I_surjective (fun t => U (-t)) hgrp' hU0' hUbd' hSC' (-y)
+  have hwmemU : (wsub : H) ∈ stoneDomain U := mem_stoneDomain_of_reversed U (wsub : H) wsub.2
+  have hbridge : stoneGen (fun t => U (-t)) wsub = -(stoneGen U ⟨(wsub : H), hwmemU⟩) :=
+    stoneGen_reversed_eq U (wsub : H) hwmemU
+  rw [hbridge] at hw
+  refine ⟨⟨(wsub : H), hwmemU⟩, ?_⟩
+  show stoneGen U ⟨(wsub : H), hwmemU⟩ - Complex.I • (wsub : H) = y
+  have hrw : stoneGen U ⟨(wsub : H), hwmemU⟩ - Complex.I • (wsub : H)
+      = -(-(stoneGen U ⟨(wsub : H), hwmemU⟩) + Complex.I • (wsub : H)) := by abel
+  rw [hrw, hw, neg_neg]
+
 section SelfAdjoint
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 

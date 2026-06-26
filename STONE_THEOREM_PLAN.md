@@ -306,6 +306,16 @@ is now machine-checked.** Also ✅ `stoneGen_add_I_surjective` — **`A + i` is 
 `∀ y, ∃ z ∈ stoneDomain U, A z + i z = y` (witness `z := R(−i y)`, since `(A+i)(R(−i y)) = i(−i y) = y`). So the
 deficiency subspace `Range(A+i)^⊥ = ker(A† − i) = 0` — the essential-self-adjointness criterion (with the `A − i`
 mirror).
+
+**★★ MILESTONE — BOTH deficiency indices are zero (`Range(A ± i) = H`).** The reversed group `t ↦ U_{−t}` has
+generator `−A` (`stoneGen_reversed_eq`, via `hasDerivAt_stoneGen_neg` + `mem_stoneDomain_reversed`/`_of_reversed`);
+applying `stoneGen_add_I_surjective` to it + the bridge gives `stoneGen_sub_I_surjective` —
+**`∀ y, ∃ z ∈ stoneDomain U, A z − i z = y`, i.e. `Range(A − i) = H`**. With `Range(A + i) = H` already proven,
+**both deficiency indices of the symmetric generator `A = stoneGen U` vanish — the essential-self-adjointness
+criterion is fully machine-checked.** The remaining Mathlib-grade gap is the *criterion itself*: bundling
+`A ⊆ A†` + `Range(A ± i) = H` ⟹ `Ā = Ā†` (`IsSelfAdjoint`) via the Cayley transform, then the unbounded spectral
+theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has neither the Cayley transform nor the criterion; all the *inputs*
+are now proven.
 **Remaining (the genuine Mathlib-grade operator-theory frontier):** differentiate the RHS in `s` at `0` (after
 the change of variables `u = s+t` ⟹ `e^s ∫_s^∞ e^{−u} U_u x du`, whose `d/ds|₀ = R x − x` by the **FTC for the
 improper integral with variable lower limit**) ⟹ `R x ∈ stoneDomain U` + the resolvent identity

@@ -247,7 +247,9 @@ so a bounded ℂ-linear operator with `norm_resolvent_le`) + `resolvent_comm_flo
 `resolvent_stoneGen` (**`stoneGen U(Rx) = −i(Rx−x)`**, i.e. `(A+i)(R x)=i x`, so `Range(A+i) ⊇ {i x}=H`). **The
 deficiency-index-zero fact making the generator essentially self-adjoint is now machine-checked.** Also ✅
 `stoneGen_add_I_surjective` — **`A+i` surjective, `Range(A+i)=H`** (`∀ y, ∃ z ∈ stoneDomain, A z + i z = y`, witness
-`z := R(−i y)`). **Remaining:** the `A−i` mirror (`Range(A−i)=H`) ⟹
+`z := R(−i y)`). **★★ MILESTONE — both deficiency indices zero:** `stoneGen_sub_I_surjective` — **`Range(A−i)=H`**
+(via the reversed group `t↦U_{−t}` with generator `−A`, `stoneGen_reversed_eq` + bridge). Both `Range(A±i)=H` ⟹
+the e.s.a. criterion is met. **Remaining (Mathlib gap):** bundle `A⊆A†` + `Range(A±i)=H` ⟹
 `Ā = Ā†` (e.s.a.) ⟹ Cayley/unbounded spectral theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has none of these; Cayley
 injectivity in Stone.lean.
 

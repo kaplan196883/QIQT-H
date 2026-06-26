@@ -5033,6 +5033,14 @@ namespace QIQTH.AxiomAudit
 -- witnessed by z := R(−i y): (A+i)(R(−i y)) = i(−i y) = y (resolvent_stoneGen + the i·(−i)=1 algebra). So the
 -- deficiency subspace Range(A+i)^⊥ = ker(A†−i) = 0 — the essential-self-adjointness criterion (with the A−i mirror)
 -- for the Stone generator. Axiom-free.
+#print axioms QIQTH.Spectral.stoneGen_reversed_eq
+#print axioms QIQTH.Spectral.stoneGen_sub_I_surjective
+-- ★★ P4 WALL MILESTONE — BOTH DEFICIENCY INDICES ZERO (Range(A±i)=H): the reversed group t↦U_{−t} has generator −A
+-- (stoneGen_reversed_eq, via hasDerivAt_stoneGen_neg + mem_stoneDomain_reversed/of_reversed); applying
+-- stoneGen_add_I_surjective to it + the bridge gives stoneGen_sub_I_surjective — ∀ y, ∃ z ∈ stoneDomain, A z − i z = y,
+-- i.e. Range(A−i)=H. With Range(A+i)=H (stoneGen_add_I_surjective), BOTH deficiency indices of the symmetric generator
+-- A = stoneGen U vanish ⟹ the essential-self-adjointness criterion is met. Axiom-free. Remaining (Mathlib gap):
+-- bundle the deficiency facts ⟹ Ā=Ā† (IsSelfAdjoint) ⟹ Cayley transform / unbounded spectral theorem ⟹ Stone.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via
