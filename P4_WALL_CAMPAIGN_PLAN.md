@@ -278,6 +278,10 @@ densely-defined self-adjoint `A`, with `A = i(1+V)(1−V)⁻¹` well-defined on 
 Also ✅ `cayley_one_sub_denseRange` (**`1−V` has dense range** — `ran(1−V)=2i·dom(A)=2i·stoneDomain U`, dense via
 `stoneDomain_dense` + `Homeomorph.smulOfNeZero`): with `ker(1−V)=0` this is the **full** characterization that `V`
 is the Cayley transform of a densely-defined self-adjoint `A`.
+Also ✅ `cayley_spectrum_isCompact` (**`σ(V)` compact** — with circle containment, a compact subset of `S¹`: the
+Riesz–Markov precondition, `C(σV)=C_c(σV)`, for building the scalar spectral measures `μ_x` via `RealRMK.rieszMeasure`).
+**Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
+`E` (`V=∫z dE`) → transport via inverse Cayley to `A=∫λ dE` ⟹ Stone. The bounded-PVM remains the genuine gap.
 **Remaining (Mathlib gap):** the **Borel/PVM** functional calculus on `S¹` for `V` (Mathlib has *continuous* FC
 only) → transport to the unbounded spectral theorem (PVM for self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`.
 

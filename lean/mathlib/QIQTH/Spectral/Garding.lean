@@ -1032,6 +1032,18 @@ theorem cayley_one_sub_denseRange (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t,
   exact (Homeomorph.smulOfNeZero (2 * Complex.I) hc).surjective.denseRange.comp hf
     (Homeomorph.smulOfNeZero (2 * Complex.I) hc).continuous
 
+/-- **★ The spectrum of the Cayley unitary is compact:** `IsCompact (spectrum ℂ V)`. With
+    `cayley_spectrum_subset_circle`, `spectrum ℂ V` is a **compact subset of the unit circle** `S¹`. This is the
+    topological precondition the **Riesz–Markov–Kakutani** construction of the scalar spectral measures consumes:
+    on the compact `σ(V)`, `C(σ(V)) = C_c(σ(V))`, so the positive functional `f ↦ ⟨x, cfc f V x⟩` (the continuous
+    functional calculus is in hand since `V ∈ unitary`, and `H →L[ℂ] H` is a `StarOrderedRing`) yields a finite
+    Borel measure `μ_x` on `S¹` by `RealRMK.rieszMeasure` — the first rung of the operator → PVM keystone. -/
+theorem cayley_spectrum_isCompact (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    IsCompact (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) :=
+  spectrum.isCompact _
+
 end SelfAdjoint
 
 end QIQTH.Spectral

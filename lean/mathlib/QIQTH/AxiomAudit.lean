@@ -5073,6 +5073,12 @@ namespace QIQTH.AxiomAudit
 -- K = stoneGen (modUnitary S) = the JLMS modular Hamiltonian (abstract one-particle space). Each instantiates
 -- stoneGen_isSelfAdjoint with the group's (∘L group law, U_0=1, unitarity, isometry/norm, strong continuity). All
 -- three are GENUINE SELF-ADJOINT UNBOUNDED OPERATORS. Axiom-free. Remaining (Mathlib gap): unbounded spectral theorem.
+#print axioms QIQTH.Spectral.cayley_spectrum_isCompact
+-- ★ P4 WALL — SPECTRUM OF V IS COMPACT (RMK precondition): cayley_spectrum_isCompact — IsCompact (spectrum ℂ
+-- (cayleyUnitary U ⋯)) (spectrum.isCompact). With cayley_spectrum_subset_circle, σ(V) is a compact subset of S¹ —
+-- the topological precondition the Riesz–Markov construction of the scalar spectral measures μ_x consumes:
+-- on compact σ(V), C(σV)=C_c(σV), so f↦⟨x,cfc f V x⟩ (CFC in hand via V∈unitary; H→L[ℂ]H is a StarOrderedRing) gives
+-- a finite Borel μ_x by RealRMK.rieszMeasure — the first rung of the operator→PVM keystone. Axiom-free.
 #print axioms QIQTH.Spectral.cayley_one_sub
 #print axioms QIQTH.Spectral.cayley_one_sub_injective
 #print axioms QIQTH.Spectral.cayley_one_sub_denseRange

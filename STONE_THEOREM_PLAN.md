@@ -367,6 +367,14 @@ Also ✅ `cayley_one_sub_denseRange` — **`1 − V` has dense range** (`DenseRa
 2i·dom(A) = 2i·stoneDomain U`, dense (`stoneDomain_dense`) since scaling by `2i ≠ 0` is a homeomorphism
 (`Homeomorph.smulOfNeZero`). Together with `cayley_one_sub_injective` this is the **complete** characterization:
 `V` is the Cayley transform of a densely-defined self-adjoint `A` (both `ker(1 − V) = 0` *and* `ran(1 − V)` dense).
+Also ✅ `cayley_spectrum_isCompact` — **`spectrum ℂ V` is compact** (`spectrum.isCompact`); with the circle
+containment, `σ(V)` is a *compact subset of `S¹`*. This is the **Riesz–Markov precondition**: on the compact
+`σ(V)`, `C(σV) = C_c(σV)`, so the positive functional `f ↦ ⟨x, cfc f V x⟩` (CFC in hand via `V ∈ unitary`;
+`H →L[ℂ] H` is a `StarOrderedRing`) yields a finite Borel `μ_x` via `RealRMK.rieszMeasure` — the first rung of the
+operator → PVM keystone, now API-identified.
+**Next multi-fire sub-construction (the operator → PVM keystone, RMK + cfc supported):** the scalar spectral
+measures `μ_x` of `V` (positive functional `f ↦ re⟨x, cfc f V x⟩` → `RealRMK.rieszMeasure`), then their assembly
+into a circle-PVM `E` with `V = ∫ z dE`, then transport through inverse Cayley to `A = ∫ λ dE` ⟹ Stone.
 **Remaining (Mathlib gap):** the **Borel/PVM** functional calculus on `S¹` (`∫ z dE` for the unitary `V` — Mathlib
 has the *continuous* FC but not the projection-valued-measure form) → transport to the unbounded spectral theorem
 (PVM `∫ λ dE` for the now-self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`.
