@@ -235,9 +235,10 @@ analytic input to essential self-adjointness.** Also ✅ `stoneGen_subset_adjoin
 density hypothesis. Also ✅ `stoneGen_isClosable` — **the closure `Ā` exists** (`(stoneGen U).IsClosable`): `A`
 has a closed extension `A†` (`adjoint_isClosed` + density) and `A ⊆ A†`, so it is closable. Also ✅ the **resolvent foundation** (`resolvent U x := ∫₀^∞ e^{−t} U_t x dt = (1−iA)⁻¹ x`;
 `resolvent_integrand_integrableOn` — the half-line integrand is `IntegrableOn (0,∞)` via exp-decay domination
-of the bounded orbit). **Remaining (the genuine Mathlib-grade op-theory frontier):** `R x ∈ stoneDomain` + the
-resolvent identity `(A+i)(R x)=i x` ⟹ `Range(A+i)=H` ⟹ `Ā = Ā†` (e.s.a.) ⟹ Cayley/unbounded spectral theorem ⟹
-Stone `U_t = exp(it Ā)`. Mathlib has none of these; the Cayley injectivity estimates are in Stone.lean.
+of the bounded orbit) + `norm_resolvent_le` (**the resolvent is a contraction** `‖R x‖ ≤ ‖x‖`, since
+`∫₀^∞ e^{−t}=1` ⟹ `R=(1−iA)⁻¹` bounded). **Remaining (the genuine Mathlib-grade op-theory frontier):**
+`R x ∈ stoneDomain` + the resolvent identity `(A+i)(R x)=i x` ⟹ `Range(A+i)=H` ⟹ `Ā = Ā†` (e.s.a.) ⟹
+Cayley/unbounded spectral theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has none of these; Cayley injectivity in Stone.lean.
 
 ### Phase 4 (operators) — the modular Hamiltonian `K` as a symmetric operator ✅ (3rd & LAST C₀ group; trio complete)
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/ModularGenerator.lean`):** the Stone-instantiation pattern

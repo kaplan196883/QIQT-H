@@ -280,6 +280,9 @@ group. The symmetric densely-defined generator has a closed extension (its adjoi
 Also ✅ the **resolvent foundation** toward `Range(A±i)` dense: `resolvent U x := ∫₀^∞ e^{−t} U_t x dt = (1−iA)⁻¹ x`
 + `resolvent_integrand_integrableOn` — the half-line integrand `e^{−t} U_t x` is `IntegrableOn (0,∞)` (exp decay
 `e^{−t}` dominates the bounded orbit `‖U_t x‖ ≤ ‖x‖`, `∫₀^∞ e^{−t} < ∞` via `exp_neg_integrableOn_Ioi`).
+Also ✅ `norm_resolvent_le` — **the resolvent is a contraction** `‖R x‖ ≤ ‖x‖` (since `‖e^{−t} U_t x‖ ≤ e^{−t}‖x‖`
+and `∫₀^∞ e^{−t} = 1`, via `integral_exp_neg_Ioi_zero` + `setIntegral_mono_on` + `norm_integral_le_integral_norm`);
+so `R = (1 − iA)⁻¹` is a bounded operator (norm `≤ 1`), giving `1 − iA = −i(A + i)` a bounded right inverse.
 **Remaining (the genuine Mathlib-grade operator-theory frontier):** `R x ∈ stoneDomain U` + the resolvent identity
 `(A + i)(R x) = i x` (differentiating the half-line integral) ⟹ `Range(A + i) = H` dense ⟹ `Ā = Ā†` (e.s.a.) ⟹
 the Cayley transform / unbounded spectral theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has none of these; the

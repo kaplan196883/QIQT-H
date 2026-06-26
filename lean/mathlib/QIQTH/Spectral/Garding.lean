@@ -29,6 +29,7 @@ import Mathlib.Analysis.Calculus.BumpFunction.Normed
 import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
 import Mathlib.Analysis.Complex.RealDeriv
 import Mathlib.MeasureTheory.Integral.ExpDecay
+import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
 
 namespace QIQTH.Spectral
 
@@ -387,6 +388,30 @@ theorem resolvent_integrand_integrableOn (U : ℝ → (H →L[ℂ] H)) (x : H)
   refine Filter.Eventually.of_forall fun t => ?_
   rw [norm_smul, Real.norm_eq_abs, abs_of_pos (Real.exp_pos _)]
   exact mul_le_mul_of_nonneg_left (hUbd t) (Real.exp_pos _).le
+
+/-- **The resolvent is a contraction:** `‖R x‖ ≤ ‖x‖`. Since `‖e^{−t} U_t x‖ ≤ e^{−t}‖x‖` and `∫₀^∞ e^{−t} = 1`,
+    `R = (1 − iA)⁻¹` is a bounded operator (norm `≤ 1`) — so `1 − iA = −i(A + i)` has a bounded right inverse, the
+    step that will give `Range(A + i) = H`. -/
+theorem norm_resolvent_le (U : ℝ → (H →L[ℂ] H)) (x : H)
+    (hUbd : ∀ t, ‖U t x‖ ≤ ‖x‖) (hcont : Continuous (fun t => U t x)) :
+    ‖resolvent U x‖ ≤ ‖x‖ := by
+  have hnormint : IntegrableOn (fun t => ‖Real.exp (-t) • U t x‖) (Set.Ioi (0 : ℝ)) :=
+    (resolvent_integrand_integrableOn U x hUbd hcont).norm
+  have hgint : IntegrableOn (fun t => Real.exp (-t) * ‖x‖) (Set.Ioi (0 : ℝ)) := by
+    have h1 : IntegrableOn (fun t : ℝ => Real.exp (-1 * t)) (Set.Ioi (0 : ℝ)) :=
+      exp_neg_integrableOn_Ioi 0 one_pos
+    simp only [neg_one_mul] at h1
+    exact h1.mul_const ‖x‖
+  calc ‖resolvent U x‖
+      ≤ ∫ t in Set.Ioi (0 : ℝ), ‖Real.exp (-t) • U t x‖ := by
+        rw [resolvent]; exact norm_integral_le_integral_norm _
+    _ ≤ ∫ t in Set.Ioi (0 : ℝ), Real.exp (-t) * ‖x‖ := by
+        refine setIntegral_mono_on hnormint hgint measurableSet_Ioi fun t _ => ?_
+        rw [norm_smul, Real.norm_eq_abs, abs_of_pos (Real.exp_pos _)]
+        exact mul_le_mul_of_nonneg_left (hUbd t) (Real.exp_pos _).le
+    _ = (∫ t in Set.Ioi (0 : ℝ), Real.exp (-t)) * ‖x‖ := integral_mul_const ‖x‖ _
+    _ = 1 * ‖x‖ := by rw [integral_exp_neg_Ioi_zero]
+    _ = ‖x‖ := one_mul _
 
 section SelfAdjoint
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
