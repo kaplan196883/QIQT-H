@@ -1,6 +1,7 @@
 import QIQTH.Spectral.PositionPVM
 import QIQTH.Spectral.PVMConj
 import QIQTH.Spectral.TranslationFlow
+import QIQTH.Spectral.ModulationFlow
 
 /-!
 # Translation-covariance of the position PVM
@@ -77,5 +78,44 @@ theorem positionPVM_conj_translationUnitary (t : ℝ) {A : Set ℝ} (hA : Measur
     with x h_out h_mul h_in h_rhs
   rw [h_out, h_mul, h_in, h_rhs, add_neg_cancel_right]
   congr 1
+
+/-- The modulation unitary as a CLM acts by `e^{isX}`. -/
+theorem modulationUnitary_coe (s : ℝ) :
+    (modulationUnitary s : Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ))
+      = modulationLp s := by
+  ext f; rfl
+
+/-- The inverse modulation unitary as a CLM acts by `e^{-isX}`. -/
+theorem modulationUnitary_symm_coe (s : ℝ) :
+    ((modulationUnitary s).symm : Lp ℂ 2 (volume : Measure ℝ) →L[ℂ] Lp ℂ 2 (volume : Measure ℝ))
+      = modulationLp (-s) := by
+  ext f; rfl
+
+/-- **Invariance of the position observable under modulation (the trivial leg of Weyl covariance):**
+    `e^{isX} E(A) e^{-isX} = E(A)`. Modulation by `e^{isx}` commutes with the position spectral projection
+    `E(A) = M_{𝟙_A}` (both are multiplication operators), so it leaves the position observable invariant —
+    `[e^{isX}, E(A)] = 0`, i.e. `e^{isX}` is a function of `X` and commutes with all functions of `X`. (Contrast
+    the translation covariance, where `τ_t` genuinely *moves* `E(A)`.) Proof: `M_{e^{isx}} M_{𝟙_A} M_{e^{-isx}}
+    = M_{e^{isx} 𝟙_A e^{-isx}} = M_{𝟙_A}` since `e^{isx} e^{-isx} = 1`. -/
+theorem positionPVM_conj_modulationUnitary (s : ℝ) {A : Set ℝ} (hA : MeasurableSet A) :
+    ((positionPVM (μ := (volume : Measure ℝ))).conj (modulationUnitary s)).E A
+      = (positionPVM (μ := (volume : Measure ℝ))).E A := by
+  rw [ProjectionValuedMeasure.conj_E,
+    show (positionPVM (μ := (volume : Measure ℝ))).E A = indMul hA from posPVM_E_eq hA,
+    modulationUnitary_coe, modulationUnitary_symm_coe]
+  simp only [modulationLp, indMul]
+  rw [mulOp_mul (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A)
+      (modSymbol_measurable (-s)) zero_le_one (modSymbol_le_one (-s)),
+    mulOp_mul (modSymbol_measurable s) zero_le_one (modSymbol_le_one s) _ _ _]
+  exact mulOp_congr _ _ _ (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A)
+    (funext fun x => by
+      show modSymbol s x * (indSymbol A x * modSymbol (-s) x) = indSymbol A x
+      have h1 : modSymbol s x * modSymbol (-s) x = 1 := by
+        simp only [modSymbol]; rw [← Complex.exp_add]
+        rw [show (↑(s * x) * Complex.I + ↑(-s * x) * Complex.I) = 0 by push_cast; ring,
+          Complex.exp_zero]
+      calc modSymbol s x * (indSymbol A x * modSymbol (-s) x)
+          = indSymbol A x * (modSymbol s x * modSymbol (-s) x) := by ring
+        _ = indSymbol A x := by rw [h1, mul_one])
 
 end QIQTH.Spectral.Multiplication

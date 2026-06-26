@@ -1534,6 +1534,13 @@ namespace QIQTH.AxiomAudit
 -- translationUnitary; packages e^{isX} in the form the conjugation/modular machinery consumes (e.g.
 -- momentumPVM.conj (modulationUnitary s) = the dual covariance of the momentum observable under position-modulation).
 -- Axiom-free. Both X–P unitary groups are now ≃ₗᵢ-packaged; the (unbounded) Stone generators X,P stay frontier.
+#print axioms QIQTH.Spectral.Multiplication.positionPVM_conj_modulationUnitary
+-- ★ INVARIANCE OF THE POSITION OBSERVABLE UNDER MODULATION (the trivial leg of Weyl covariance):
+-- positionPVM_conj_modulationUnitary — e^{isX} E(A) e^{-isX} = E(A). Modulation commutes with the position
+-- spectral projection E(A)=M_{𝟙_A} (both multiplication operators): M_{e^{isx}}M_{𝟙_A}M_{e^{-isx}}=M_{𝟙_A} since
+-- e^{isx}e^{-isx}=1 (mulOp_mul ×2 + mulOp_congr). So [e^{isX},E(A)]=0 — e^{isX} is a function of X and commutes
+-- with all functions of X. CONTRAST the translation covariance where τ_t genuinely MOVES E(A). Axiom-free. The two
+-- legs of the Weyl covariance are now both machine-checked: τ_t moves position (E(A−t)); e^{isX} leaves it (E(A)).
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

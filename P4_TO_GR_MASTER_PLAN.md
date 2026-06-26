@@ -445,6 +445,14 @@ item.** Never claim the `1/4`.
   `momentumPVM.conj (modulationUnitary s)` = the dual covariance of the momentum observable under
   position-modulation). **Both X–P unitary groups are now `≃ₗᵢ`-packaged.** Recorded next target: the dual
   momentum-covariance `e^{isX} Ê(B) e^{-isX} = Ê(B+s)` (via the conjugation machinery).
+  **Invariance of the position observable under modulation (the trivial leg of Weyl covariance) ✅**
+  (`PositionCovariance.lean`, axiom-free, budget 0): `positionPVM_conj_modulationUnitary` —
+  `e^{isX} E(A) e^{-isX} = E(A)`. Modulation commutes with the position spectral projection `E(A)=M_{𝟙_A}` (both
+  multiplication operators): `M_{e^{isx}}M_{𝟙_A}M_{e^{-isx}}=M_{𝟙_A}` since `e^{isx}e^{-isx}=1` (`mulOp_mul`×2 +
+  `mulOp_congr`). So `[e^{isX},E(A)]=0` — `e^{isX}` is a function of `X` and commutes with all functions of `X`.
+  **The two legs of the Weyl covariance are now both machine-checked**: `τ_t` *moves* position (`E(A−t)`); `e^{isX}`
+  *leaves it* (`E(A)`). The honest dual — momentum covariance `e^{isX}Ê(B)e^{-isX}=Ê(B+s)` — needs the Fourier
+  modulation↔translation duality (convention-dependent), recorded as a frontier.
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.
