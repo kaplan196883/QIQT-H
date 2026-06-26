@@ -110,9 +110,14 @@ the **infinitesimal generator** `A x = −i·(d/dt U_t x)|₀` as a genuine `Lin
 for any operator family; for a strongly-continuous unitary group this is the self-adjoint Stone generator.
 **FRONTIER (recorded):** density of the domain (Gårding), symmetry, essential self-adjointness (3.2, Nelson
 analytic vectors), and the Cayley transform / unbounded spectral theorem (3.3) — the genuine Mathlib gaps.
-**NEXT tractable sub-bricks:** the symmetry of `A` on the domain (`⟪Ax,y⟫=⟪x,Ay⟫` from `U_t` unitary, via the
-derivative of `⟪U_t x, y⟫` — needs strong continuity, in hand for the concrete groups); the `U`-invariance of the
-smooth domain; then the density/essential-self-adjointness wall.
+Also ✅ `hasDerivAt_stoneGen` — the generator–derivative relation `HasDerivAt (t↦U_t x) (i·A x) 0` (the
+`HasDerivAt` form `A x=−i(d/dt U_t x)|₀`), the foundational helper every downstream argument differentiates
+through.
+**NEXT tractable sub-bricks:** (i) the `U`-invariance of the smooth domain (`U_s·domain ⊆ domain`, group law +
+`HasDerivAt.scomp`/`HasFDerivAt.comp_hasDerivAt` — note `.scomp`/`.comp_hasDerivAt` take NO explicit point arg
+and need `scomp_of_eq` when the base point isn't syntactically `h x`); (ii) the symmetry `⟪Ax,y⟫=⟪x,Ay⟫` (from
+`U_t` unitary, via `HasDerivAt.inner` of `⟪U_t x, y⟫` + the adjoint relation `⟪U_t x,y⟫=⟪x,U_{-t}y⟫`); then the
+density (Gårding)/essential-self-adjointness wall.
 
 ### Phase 4 — apply general Stone to the clock energy `X = A_edge`  *(unblocks Wall Phase 4.2/4.3)*
 *Extends `QIQTH/CrossedProductGenerator.lean`.*  Apply Phase 3 to `clockTransl` (`λ_t`, already proved a

@@ -67,4 +67,13 @@ noncomputable def stoneGen (U : ℝ → (H →L[ℂ] H)) : H →ₗ.[ℂ] H wher
 theorem stoneGen_apply (U : ℝ → (H →L[ℂ] H)) (x : stoneDomain U) :
     stoneGen U x = -Complex.I • deriv (fun t => U t (x : H)) 0 := rfl
 
+/-- **The generator–derivative relation:** for `x` in the smooth domain, `t ↦ U_t x` has derivative
+    `i · A x` at `0` (equivalently `A x = −i · (d/dt U_t x)|₀`). This is the `HasDerivAt` form the downstream
+    Stone arguments (symmetry, `U`-invariance, essential self-adjointness) consume. -/
+theorem hasDerivAt_stoneGen (U : ℝ → (H →L[ℂ] H)) (x : stoneDomain U) :
+    HasDerivAt (fun t => U t (x : H)) (Complex.I • stoneGen U x) 0 := by
+  rw [stoneGen_apply, smul_smul, show Complex.I * -Complex.I = 1 by
+    rw [mul_neg, Complex.I_mul_I, neg_neg], one_smul]
+  exact x.2.hasDerivAt
+
 end QIQTH.Spectral

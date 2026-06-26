@@ -1597,6 +1597,12 @@ namespace QIQTH.AxiomAudit
 -- For a strongly-continuous unitary group this IS the self-adjoint Stone generator. FRONTIER (recorded): essential
 -- self-adjointness (Phase 3.2, Nelson analytic vectors) + the Cayley transform/unbounded spectral theorem (3.3)
 -- are the genuine Mathlib-grade gaps; applying this to clockTransl ⟹ X=A_edge (P4-wall 4.3) is gated on them.
+#print axioms QIQTH.Spectral.hasDerivAt_stoneGen
+-- ★ STONE 3.1 cont. — the generator–derivative relation: hasDerivAt_stoneGen — for x in the smooth domain,
+-- HasDerivAt (t↦U_t x) (i·A x) 0 (i.e. A x=−i·(d/dt U_t x)|₀, the HasDerivAt form). The foundational helper every
+-- downstream Stone argument (symmetry ⟪Ax,y⟫=⟪x,Ay⟫, flow-invariance U_s·domain⊆domain, essential self-adjointness)
+-- differentiates through. Axiom-free. NEXT sub-bricks: flow-invariance (group law + HasDerivAt.scomp/comp_hasDerivAt)
+-- then symmetry (U_t unitary + HasDerivAt.inner) — the road to Phase 3.2.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
