@@ -345,7 +345,12 @@ Also ✅ `stoneGen_sub_I_bijective` + `cayley_bijective` — **`V` is a unitary 
 `A−i : dom(A) → H` is a bijection (mirror of `A+i`: injective from `‖x‖ ≤ ‖(A−i)x‖ = ‖(A+i)x‖`, surjective from
 `stoneGen_sub_I_surjective`), and `V = (A−i) ∘ (A+i)⁻¹ = (stoneGen_sub_I_bijective).comp (cayleyEquiv).symm.bijective`
 is bijective. With `norm_cayley` (`‖V y‖ = ‖y‖`), `V` is a **unitary**.
-**Remaining (Mathlib gap):** bundle `V` as a unitary CLM (linearity) → its bounded spectral measure
+Also ✅ `cayleyEquiv_symm_add/_smul` + `cayley_add/_smul` + `cayleyLM` + **`cayleyUnitary : H ≃ₗᵢ[ℂ] H`** —
+`V` is **bundled as a genuine unitary operator**: `(A+i)⁻¹` is ℂ-linear (additive + homogeneous, from injectivity
+of `A+i` + `LinearPMap.map_add/map_smul`), so `V` is ℂ-linear (`cayleyLM : H →ₗ[ℂ] H`), and
+`cayleyUnitary := LinearEquiv.ofBijective cayleyLM cayley_bijective` with `norm_map' := norm_cayley` packages it as
+a `LinearIsometryEquiv`. The three generators `X=A_edge`, `P`, `K` each have a Cayley unitary.
+**Remaining (Mathlib gap):** the bounded spectral measure of `V` (bounded-PVM spectral theorem)
 → transport to the unbounded spectral theorem (PVM `∫ λ dE` for the now-self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`.
 Mathlib has neither the bounded-PVM spectral theorem nor the unbounded spectral theorem.
 **Remaining (the genuine Mathlib-grade operator-theory frontier):** differentiate the RHS in `s` at `0` (after

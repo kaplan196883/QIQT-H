@@ -265,7 +265,10 @@ Also ✅ `cayley` + `norm_cayley` (**the Cayley transform `V=(A−i)(A+i)⁻¹` 
 `cayley y := (A−i)((A+i)⁻¹ y)`; `‖V y‖=‖(A−i)z‖=‖(A+i)z‖=‖y‖` for `z=(A+i)⁻¹y` via the Cayley isometry).
 Also ✅ `stoneGen_sub_I_bijective` + `cayley_bijective` (**`V` is a unitary** — `A−i:dom(A)→H` is also a bijection,
 so `V=(A−i)∘(A+i)⁻¹` is bijective, and with `norm_cayley` `V` is bijective + isometric = unitary).
-**Remaining (Mathlib gap):** bundle `V` as a unitary CLM (linearity) → bounded-PVM →
+Also ✅ `cayleyEquiv_symm_add/_smul`, `cayley_add/_smul`, `cayleyLM`, **`cayleyUnitary : H ≃ₗᵢ[ℂ] H`** (`V` bundled
+as a genuine **unitary operator**: `(A+i)⁻¹` ℂ-linear ⟹ `V` ℂ-linear ⟹ `cayleyLM : H →ₗ[ℂ] H` ⟹
+`cayleyUnitary = LinearEquiv.ofBijective cayleyLM cayley_bijective` + `norm_map' := norm_cayley`).
+**Remaining (Mathlib gap):** the bounded-PVM spectral theorem for `V` → transport to
 the unbounded spectral theorem (PVM for self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`. Mathlib has neither the
 bounded-PVM nor the unbounded spectral theorem; Cayley injectivity in Stone.lean.
 

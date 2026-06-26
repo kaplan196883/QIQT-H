@@ -5073,6 +5073,16 @@ namespace QIQTH.AxiomAudit
 -- K = stoneGen (modUnitary S) = the JLMS modular Hamiltonian (abstract one-particle space). Each instantiates
 -- stoneGen_isSelfAdjoint with the group's (∘L group law, U_0=1, unitarity, isometry/norm, strong continuity). All
 -- three are GENUINE SELF-ADJOINT UNBOUNDED OPERATORS. Axiom-free. Remaining (Mathlib gap): unbounded spectral theorem.
+#print axioms QIQTH.Spectral.cayley_add
+#print axioms QIQTH.Spectral.cayley_smul
+#print axioms QIQTH.Spectral.cayleyUnitary
+-- ★★★ P4 WALL — THE CAYLEY TRANSFORM IS A UNITARY H ≃ₗᵢ[ℂ] H: cayleyEquiv_symm_add/_smul — (A+i)⁻¹ is ℂ-linear
+-- (additive + homogeneous, by injectivity of A+i + LinearPMap.map_add/map_smul of A). cayley_add/cayley_smul —
+-- V=(A−i)(A+i)⁻¹ is ℂ-linear. cayleyLM : H →ₗ[ℂ] H bundles V as a LinearMap; cayleyUnitary : H ≃ₗᵢ[ℂ] H bundles it
+-- as a UNITARY = LinearEquiv.ofBijective cayleyLM cayley_bijective + norm_map' := norm_cayley. This is the bounded
+-- unitary operator of the spectral theorem — the object whose bounded spectral measure, transported back through
+-- the Cayley correspondence, yields the unbounded spectral theorem for the self-adjoint A=stoneGen U (X=A_edge, P,
+-- K). Axiom-free. Remaining (Mathlib gap): the bounded-PVM spectral theorem for V + the transport + Stone exp.
 #print axioms QIQTH.Spectral.stoneGen_sub_I_bijective
 #print axioms QIQTH.Spectral.cayley_bijective
 -- ★★ P4 WALL — THE CAYLEY TRANSFORM IS A UNITARY: stoneGen_sub_I_bijective — A−i : dom(A)→H is a bijection

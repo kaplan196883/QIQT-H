@@ -839,6 +839,105 @@ theorem cayley_bijective (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t
   (stoneGen_sub_I_bijective U hgrp hU0 hUinner hUbd hSC).comp
     (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm.bijective
 
+/-- `(A + i)⁻¹` is **additive**: `(A+i)⁻¹(y₁+y₂) = (A+i)⁻¹y₁ + (A+i)⁻¹y₂`. By injectivity of `A+i`, both sides
+    map under `A+i` to `y₁+y₂` (using `LinearPMap.map_add` for `A`). -/
+theorem cayleyEquiv_symm_add (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (y₁ y₂ : H) :
+    (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm (y₁ + y₂)
+      = (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y₁
+        + (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y₂ := by
+  set e := cayleyEquiv U hgrp hU0 hUinner hUbd hSC with he
+  apply e.injective
+  have hL : e (e.symm (y₁ + y₂)) = y₁ + y₂ := Equiv.apply_symm_apply _ _
+  have h1 : e (e.symm y₁) = y₁ := Equiv.apply_symm_apply _ _
+  have h2 : e (e.symm y₂) = y₂ := Equiv.apply_symm_apply _ _
+  have hR : e (e.symm y₁ + e.symm y₂) = e (e.symm y₁) + e (e.symm y₂) := by
+    show stoneGen U (e.symm y₁ + e.symm y₂)
+        + Complex.I • ((e.symm y₁ + e.symm y₂ : stoneDomain U) : H)
+      = (stoneGen U (e.symm y₁) + Complex.I • (e.symm y₁ : H))
+        + (stoneGen U (e.symm y₂) + Complex.I • (e.symm y₂ : H))
+    have hadd : stoneGen U (e.symm y₁ + e.symm y₂)
+        = stoneGen U (e.symm y₁) + stoneGen U (e.symm y₂) := LinearPMap.map_add (stoneGen U) _ _
+    rw [hadd, show ((e.symm y₁ + e.symm y₂ : stoneDomain U) : H)
+        = (e.symm y₁ : H) + (e.symm y₂ : H) from rfl, smul_add]
+    abel
+  rw [hL, hR, h1, h2]
+
+/-- `(A + i)⁻¹` is **ℂ-homogeneous**: `(A+i)⁻¹(c•y) = c•(A+i)⁻¹y`. By injectivity of `A+i` (using
+    `LinearPMap.map_smul` for `A` and `smul_comm` for the `i•` term). -/
+theorem cayleyEquiv_symm_smul (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (c : ℂ) (y : H) :
+    (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm (c • y)
+      = c • (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y := by
+  set e := cayleyEquiv U hgrp hU0 hUinner hUbd hSC with he
+  apply e.injective
+  have hL : e (e.symm (c • y)) = c • y := Equiv.apply_symm_apply _ _
+  have h1 : e (e.symm y) = y := Equiv.apply_symm_apply _ _
+  have hR : e (c • e.symm y) = c • e (e.symm y) := by
+    show stoneGen U (c • e.symm y) + Complex.I • ((c • e.symm y : stoneDomain U) : H)
+      = c • (stoneGen U (e.symm y) + Complex.I • (e.symm y : H))
+    have hsmul : stoneGen U (c • e.symm y) = c • stoneGen U (e.symm y) :=
+      LinearPMap.map_smul (stoneGen U) c _
+    rw [hsmul, show ((c • e.symm y : stoneDomain U) : H) = c • (e.symm y : H) from rfl, smul_add,
+      smul_comm Complex.I c]
+  rw [hL, hR, h1]
+
+/-- **★ The Cayley transform is additive:** `V(y₁+y₂) = V y₁ + V y₂` (from `cayleyEquiv_symm_add` +
+    `LinearPMap.map_add`). -/
+theorem cayley_add (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (y₁ y₂ : H) :
+    cayley U hgrp hU0 hUinner hUbd hSC (y₁ + y₂)
+      = cayley U hgrp hU0 hUinner hUbd hSC y₁ + cayley U hgrp hU0 hUinner hUbd hSC y₂ := by
+  simp only [cayley, cayleyEquiv_symm_add]
+  have hadd : stoneGen U ((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y₁
+      + (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y₂)
+      = stoneGen U ((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y₁)
+        + stoneGen U ((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y₂) :=
+    LinearPMap.map_add (stoneGen U) _ _
+  rw [hadd,
+    show (((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y₁
+      + (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y₂ : stoneDomain U) : H)
+      = ((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y₁ : H)
+      + ((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y₂ : H) from rfl, smul_add]
+  abel
+
+/-- **★ The Cayley transform is ℂ-homogeneous:** `V(c•y) = c•V y` (from `cayleyEquiv_symm_smul` +
+    `LinearPMap.map_smul`). -/
+theorem cayley_smul (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (c : ℂ) (y : H) :
+    cayley U hgrp hU0 hUinner hUbd hSC (c • y) = c • cayley U hgrp hU0 hUinner hUbd hSC y := by
+  simp only [cayley, cayleyEquiv_symm_smul]
+  have hsmul : stoneGen U (c • (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y)
+      = c • stoneGen U ((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y) :=
+    LinearPMap.map_smul (stoneGen U) c _
+  rw [hsmul,
+    show ((c • (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y : stoneDomain U) : H)
+      = c • ((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y : H) from rfl, smul_sub,
+    smul_comm Complex.I c]
+
+/-- **The Cayley transform as a ℂ-linear map** `V : H →ₗ[ℂ] H` (additive + homogeneous). -/
+noncomputable def cayleyLM (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) : H →ₗ[ℂ] H where
+  toFun := cayley U hgrp hU0 hUinner hUbd hSC
+  map_add' := cayley_add U hgrp hU0 hUinner hUbd hSC
+  map_smul' := cayley_smul U hgrp hU0 hUinner hUbd hSC
+
+/-- **★★★ The Cayley transform `V = (A − i)(A + i)⁻¹` is a unitary** `H ≃ₗᵢ[ℂ] H`: a ℂ-linear (`cayleyLM`),
+    bijective (`cayley_bijective`), norm-preserving (`norm_cayley`) equivalence. This is the bounded unitary
+    operator of the spectral theorem — the object whose (bounded) spectral measure, transported back through the
+    Cayley correspondence, yields the unbounded spectral theorem for the self-adjoint generator `A = stoneGen U`
+    (`X = A_edge`, `P`, `K`). The transport + bounded-PVM spectral theorem are the genuine Mathlib-grade gap. -/
+noncomputable def cayleyUnitary (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) : H ≃ₗᵢ[ℂ] H :=
+  { LinearEquiv.ofBijective (cayleyLM U hgrp hU0 hUinner hUbd hSC) (cayley_bijective U hgrp hU0 hUinner hUbd hSC) with
+    norm_map' := norm_cayley U hgrp hU0 hUinner hUbd hSC }
+
 end SelfAdjoint
 
 end QIQTH.Spectral
