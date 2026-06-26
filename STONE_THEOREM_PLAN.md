@@ -452,6 +452,10 @@ Also ✅ `cayley_norm_cfc_le` `[Nontrivial H]` — **`‖cfc f V‖ ≤ ‖f‖_
 `H →L[ℂ] H` is isometric, `IsStarNormal.instIsometricContinuousFunctionalCalculus`, global). This is the
 **boundedness of `f ↦ cfc f V`** that lets the FC extend from continuous to *bounded-Borel* functions (by
 approximation / dominated convergence over `μ_x`) — the analytic input to the Borel FC and the PVM `E(S)`.
+Also ✅ `cayley_cfc_isSelfAdjoint` `[Nontrivial H]` — **cfc of a real function is self-adjoint**: `(f z).im = 0`
+on `σ(V)` ⟹ `IsSelfAdjoint (cfc f V)` (`star (cfc f V) = cfc (conj∘f) V = cfc f V` via `cfc_star` + `cfc_congr`).
+So spectral operators of real observables of `V` are self-adjoint — the bridge making `⟪x, cfc f V x⟫` real
+(`= ∫ f dμ_x`) and underlying the polarization `μ_{x,y}` toward the PVM.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

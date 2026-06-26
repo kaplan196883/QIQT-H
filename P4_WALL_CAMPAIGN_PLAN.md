@@ -326,6 +326,8 @@ Also ✅ `cayleyScalarMeasure_isProbabilityMeasure` `[Nontrivial H]` (**μ_x is 
 the Born/spectral distribution of measuring a function of V in the normalized state x).
 Also ✅ `cayley_norm_cfc_le` `[Nontrivial H]` (**‖cfc f V‖ ≤ ‖f‖_∞** — boundedness of the FC, the analytic input
 to extend cfc to bounded-Borel functions ⟹ Borel FC / PVM `E(S)`).
+Also ✅ `cayley_cfc_isSelfAdjoint` `[Nontrivial H]` (**cfc of a real function is self-adjoint** — real observables
+of V → self-adjoint operators; makes `⟪x,cfc f V x⟫` real = ∫f dμ_x; bridge to polarization μ_{x,y}).
 **Next:** bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

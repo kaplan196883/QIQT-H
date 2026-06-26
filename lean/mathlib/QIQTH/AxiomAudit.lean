@@ -5094,6 +5094,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_univ
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_isProbabilityMeasure
 #print axioms QIQTH.Spectral.cayley_norm_cfc_le
+#print axioms QIQTH.Spectral.cayley_cfc_isSelfAdjoint
+-- ★★ P4 WALL — cfc OF A REAL FUNCTION IS SELF-ADJOINT (real observables → self-adjoint operators):
+-- cayley_cfc_isSelfAdjoint [Nontrivial H] — (f z).im=0 on σ(V) ⟹ IsSelfAdjoint (cfc f V), via star(cfc f V) =
+-- cfc(conj∘f)V = cfc f V (cfc_star + cfc_congr, conj(f z)=f z on σV). So spectral operators of real observables of V
+-- are self-adjoint — the bridge making ⟪x,cfc f V x⟫ real (= ∫f dμ_x) and underlying the polarization μ_{x,y}
+-- toward the PVM. Axiom-free.
 -- ★★ P4 WALL — cfc OF V IS NORM-BOUNDED BY THE SUP-NORM (boundedness ⟹ Borel-FC extension): cayley_norm_cfc_le
 -- [Nontrivial H] — ‖cfc f V‖ ≤ c when ‖f z‖ ≤ c on σ(V) (norm_cfc_le; the ℂ-normal CFC on H→L[ℂ]H is isometric,
 -- IsStarNormal.instIsometricContinuousFunctionalCalculus, a global instance). This is the boundedness of f↦cfc f V

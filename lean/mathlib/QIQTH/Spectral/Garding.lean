@@ -1449,6 +1449,25 @@ theorem cayley_norm_cfc_le [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
     ‖cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)‖ ≤ c :=
   norm_cfc_le hc h
 
+/-- **★★ The functional calculus of a real function is a self-adjoint observable:** if `f` is real-valued on
+    `σ(V)` (`(f z).im = 0`), then `IsSelfAdjoint (cfc f V)`. Since `star (cfc f V) = cfc (conj ∘ f) V = cfc f V`
+    (`cfc_star` + `cfc_congr`, as `conj (f z) = f z` on `σ(V)`). So the spectral operators of real observables of
+    `V` are self-adjoint — the bridge that makes `⟪x, cfc f V x⟫` *real* (`= ∫ f dμ_x`) and underlies the
+    polarization `μ_{x,y}` toward the projection-valued measure. -/
+theorem cayley_cfc_isSelfAdjoint [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (f : ℂ → ℂ) (hf : ∀ z ∈ spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), (f z).im = 0) :
+    IsSelfAdjoint (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) := by
+  rw [isSelfAdjoint_iff, ← cfc_star]
+  refine cfc_congr ?_
+  intro z hz
+  show star (f z) = f z
+  apply Complex.ext
+  · simp
+  · simp [hf z hz]
+
 end SelfAdjoint
 
 end QIQTH.Spectral
