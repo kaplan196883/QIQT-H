@@ -482,6 +482,10 @@ Also ✅ `cayley_cfc_norm_sq` `[Nontrivial H]` — **L²-isometry (operator side
 `‖cfc f V x‖² = ∫ |f|² dμ_x` — the L² estimate behind the **dominated-convergence / Cauchy argument that builds the
 Stone exponential** `U_t = exp(it A)` as a strong limit of `cfc(e^{it·φₙ}) V x` (GPT-5.5-pro's endorsed Stone-via-
 strong-limit route, NOT the PVM).
+Also ✅ `cayley_cfc_sub_norm_sq` `[Nontrivial H]` — **the L²-distance estimate**:
+`‖cfc f V x − cfc g V x‖² = re⟪x, cfc(|f−g|²) V x⟫` (= `∫ |f−g|² dμ_x`), via `cfc_sub` + `cayley_cfc_norm_sq`.
+This is literally the **Cauchy estimate** making `n ↦ cfc(e^{it·φₙ}) V x` a Cauchy sequence — the next named step
+of the strong-limit Stone-exponential recipe.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

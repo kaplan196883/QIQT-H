@@ -5101,6 +5101,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_le_norm_sq
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_union
 #print axioms QIQTH.Spectral.cayley_cfc_norm_sq
+#print axioms QIQTH.Spectral.cayley_cfc_sub_norm_sq
+-- ★★ P4 WALL — L²-DISTANCE ESTIMATE (the Cauchy estimate for the strong-limit Stone exp): cayley_cfc_sub_norm_sq
+-- [Nontrivial H] — ‖cfc f V x − cfc g V x‖² = re⟪x, cfc(|f−g|²) V x⟫ (cfc_sub ⟹ cfc f V − cfc g V = cfc(f−g)V, then
+-- cayley_cfc_norm_sq at f−g). With the integral identity = ∫|f−g|² dμ_x — the Cauchy/dominated-convergence estimate
+-- making n ↦ cfc(e^{it·φₙ})V x Cauchy, defining U_t=exp(itA) as a strong limit (no PVM). Axiom-free.
 -- ★★ P4 WALL — L²-ISOMETRY OF THE FUNCTIONAL CALCULUS (operator side): cayley_cfc_norm_sq [Nontrivial H] —
 -- ‖cfc f V x‖² = re⟪x, cfc(|f|²) V x⟫ (|f|²=conj f·f), via (cfc f V)⋆(cfc f V)=cfc(conj f·f)V (cfc_star+cfc_mul) +
 -- adjoint_inner_right + inner_self_eq_norm_sq. With the integral identity (re⟪x,cfc(|f|²)V x⟫ = ∫|f|² dμ_x) this is

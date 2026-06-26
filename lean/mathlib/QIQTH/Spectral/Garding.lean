@@ -1583,6 +1583,30 @@ theorem cayley_cfc_norm_sq [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
   simpa using (inner_self_eq_norm_sq
     (𝕜 := ℂ) (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)).symm
 
+/-- **★★ The L²-distance estimate of the functional calculus:** `‖cfc f V x − cfc g V x‖² = re⟪x, cfc(|f−g|²) V x⟫`
+    for `f, g` continuous on `σ(V)`.  Since `cfc f V − cfc g V = cfc (f − g) V` (`cfc_sub`), this is
+    `cayley_cfc_norm_sq` at `f − g`.  Combined with the integral identity it is `‖cfc f V x − cfc g V x‖² =
+    ∫ |f−g|² dμ_x` — **exactly the Cauchy / dominated-convergence estimate** that makes `n ↦ cfc (e^{it·φₙ}) V x`
+    a Cauchy sequence (when `∫|φₙ−φₘ|²‑type quantities → 0`), defining the Stone exponential `U_t = exp(it A)` as a
+    strong limit without a projection-valued measure (GPT-5.5-pro's endorsed route, 2026-06-27). -/
+theorem cayley_cfc_sub_norm_sq [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (f g : ℂ → ℂ) (hf : ContinuousOn f (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (hg : ContinuousOn g (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))) (x : H) :
+    ‖cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x
+        - cfc g (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x‖ ^ 2
+      = (inner ℂ x (cfc (fun z => star (f z - g z) * (f z - g z))
+          (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)).re := by
+  have hsub : cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x
+        - cfc g (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x
+      = cfc (fun z => f z - g z) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x := by
+    rw [cfc_sub (a := (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) (f := f) (g := g)
+      (hf := hf) (hg := hg), ContinuousLinearMap.sub_apply]
+  rw [hsub]
+  exact cayley_cfc_norm_sq U hgrp hU0 hUinner hUbd hSC (fun z => f z - g z) (hf.sub hg) x
+
 end SelfAdjoint
 
 end QIQTH.Spectral
