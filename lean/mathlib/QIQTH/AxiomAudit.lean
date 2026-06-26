@@ -1451,6 +1451,15 @@ namespace QIQTH.AxiomAudit
 -- momentumPVM_scalarMeasure: the momentum-space Born mass of x = the POSITION mass of ℱ⁻¹x, i.e. |x̂(k)|² is the
 -- momentum-probability density — read off the Fourier-conjugated PVM. Axiom-free; the Born rule for momentum as the
 -- Fourier image of the Born rule for position. Completes the position↔momentum PVM Born picture.
+#print axioms QIQTH.Spectral.Multiplication.translationLp
+#print axioms QIQTH.Spectral.Multiplication.coeFn_translationLp
+#print axioms QIQTH.Spectral.Multiplication.translationLp_add
+-- ★ THE TRANSLATION OPERATOR / ONE-PARAMETER GROUP on L²(ℝ): translationLp t ((τ_t f)(x)=f(x+t)) is a ℂ-linear
+-- isometry (Lp.compMeasurePreservingₗᵢ + volume translation-invariance); coeFn_translationLp (pointwise action),
+-- norm_translationLp (isometry), and translationLp_add (the GROUP LAW τ_s∘τ_t=τ_{s+t}, ae-composition via
+-- QuasiMeasurePreserving.tendsto_ae.eventually). t↦τ_t is the one-parameter unitary group whose generator is the
+-- momentum operator P (e^{itP}=τ_t) — the kinematic object behind WedgeKMSFlux #5. FRONTIER (recorded): strong
+-- continuity + identifying the generator with the momentum PVM (P=∫k dÊ, Stone) is the M4 Stone/unbounded-FC frontier.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

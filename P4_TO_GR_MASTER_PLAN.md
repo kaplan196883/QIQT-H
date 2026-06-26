@@ -372,6 +372,15 @@ item.** Never claim the `1/4`.
   momentum-space Born mass of `x` equals the **position** mass of `ℱ⁻¹x`, i.e. `|x̂(k)|²` is the
   momentum-probability density — the **Born rule for momentum** as the Fourier image of the Born rule for
   position. Completes the position↔momentum PVM Born picture, axiom-free.
+  **The translation operator / one-parameter group on L²(ℝ) ✅** (`QIQTH/Spectral/TranslationFlow.lean`,
+  axiom-free, budget 0): `translationLp t` (`(τ_t f)(x)=f(x+t)`) is a ℂ-linear isometry
+  (`Lp.compMeasurePreservingₗᵢ` + volume translation-invariance), with `coeFn_translationLp` (pointwise action),
+  `norm_translationLp` (isometry/unitarity), and `translationLp_add` (**the GROUP LAW** `τ_s∘τ_t=τ_{s+t}`,
+  ae-composition via `QuasiMeasurePreserving.tendsto_ae.eventually`). So `t↦τ_t` is the one-parameter unitary
+  group whose generator is the momentum operator `P` (`e^{itP}=τ_t`) — the kinematic object behind
+  `WedgeKMSFlux #5`. **FRONTIER (honest checkpoint):** strong continuity `t↦τ_t f` + identifying the generator
+  with the momentum PVM (`P=∫k dÊ(k)`, Stone's theorem) is the M4 Stone / unbounded-FC frontier; the GR chain
+  beyond `#5` stays gated on the physical wedge inputs `#1/#3/#4`.
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.
