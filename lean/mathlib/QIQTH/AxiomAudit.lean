@@ -5073,6 +5073,16 @@ namespace QIQTH.AxiomAudit
 -- K = stoneGen (modUnitary S) = the JLMS modular Hamiltonian (abstract one-particle space). Each instantiates
 -- stoneGen_isSelfAdjoint with the group's (∘L group law, U_0=1, unitarity, isometry/norm, strong continuity). All
 -- three are GENUINE SELF-ADJOINT UNBOUNDED OPERATORS. Axiom-free. Remaining (Mathlib gap): unbounded spectral theorem.
+#print axioms QIQTH.Spectral.cayley_isStarNormal
+#print axioms QIQTH.Spectral.nonneg_re_inner_nonneg
+-- ★ P4 WALL — CFC PREDICATE + FUNCTIONAL POSITIVITY (RMK-input infrastructure): cayley_isStarNormal — IsStarNormal
+-- (cayleyUnitary U ⋯) (isStarNormal_of_mem_unitary ∘ cayley_mem_unitary), the predicate the ℂ continuous functional
+-- calculus requires. nonneg_re_inner_nonneg — 0 ≤ T (C*-order on H→L[ℂ]H) ⟹ 0 ≤ re⟪x,Tx⟫
+-- (ContinuousLinearMap.nonneg_iff_isPositive + IsPositive.re_inner_nonneg_right): the functional-positivity step —
+-- once cfc gives 0 ≤ cfc f V for f≥0 on σ(V), f↦re⟪x,cfc f V x⟫ is a positive functional, RMK→μ_x. Axiom-free.
+-- NOTE (honest obstruction discovered): the ℂ-normal CFC is a *local-instance theorem* in Mathlib needing
+-- [Nontrivial A] (nonempty spectrum); over abstract H the cfc-of-V route must thread Nontrivial H / work on the
+-- concrete generators. The PVM keystone (μ_x via RMK → circle-PVM → transport → Stone) stays the genuine gap.
 #print axioms QIQTH.Spectral.cayley_spectrum_isCompact
 -- ★ P4 WALL — SPECTRUM OF V IS COMPACT (RMK precondition): cayley_spectrum_isCompact — IsCompact (spectrum ℂ
 -- (cayleyUnitary U ⋯)) (spectrum.isCompact). With cayley_spectrum_subset_circle, σ(V) is a compact subset of S¹ —

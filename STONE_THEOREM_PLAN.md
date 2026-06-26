@@ -372,6 +372,15 @@ containment, `σ(V)` is a *compact subset of `S¹`*. This is the **Riesz–Marko
 `σ(V)`, `C(σV) = C_c(σV)`, so the positive functional `f ↦ ⟨x, cfc f V x⟩` (CFC in hand via `V ∈ unitary`;
 `H →L[ℂ] H` is a `StarOrderedRing`) yields a finite Borel `μ_x` via `RealRMK.rieszMeasure` — the first rung of the
 operator → PVM keystone, now API-identified.
+Also ✅ `cayley_isStarNormal` — **`IsStarNormal V`** (`isStarNormal_of_mem_unitary ∘ cayley_mem_unitary`), the
+predicate the ℂ continuous functional calculus requires — and `nonneg_re_inner_nonneg` — **`0 ≤ T ⟹ 0 ≤ re⟪x,Tx⟫`**
+(`ContinuousLinearMap.nonneg_iff_isPositive` + `IsPositive.re_inner_nonneg_right`), the **functional-positivity
+step**: once `cfc` gives `0 ≤ cfc f V` for `f ≥ 0` on `σ(V)`, `f ↦ re⟪x, cfc f V x⟫` is a positive functional that
+`RealRMK.rieszMeasure` turns into `μ_x`.
+**Honest obstruction discovered this fire:** the ℂ-normal CFC is a *local-instance theorem* in Mathlib
+(`IsStarNormal.instContinuousFunctionalCalculus`, non-`public`) needing `[Nontrivial A]` (nonempty spectrum). So
+the cfc-of-`V` route over abstract `H` must thread `[Nontrivial H]` or specialize to the concrete generators
+(`X=A_edge`, `P`, `K` — all on nontrivial spaces). The `cfc id V = V` ("`V = ∫ z dE`" shadow) is deferred to that.
 **Next multi-fire sub-construction (the operator → PVM keystone, RMK + cfc supported):** the scalar spectral
 measures `μ_x` of `V` (positive functional `f ↦ re⟨x, cfc f V x⟩` → `RealRMK.rieszMeasure`), then their assembly
 into a circle-PVM `E` with `V = ∫ z dE`, then transport through inverse Cayley to `A = ∫ λ dE` ⟹ Stone.

@@ -33,6 +33,7 @@ import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 import Mathlib.Analysis.InnerProductSpace.Adjoint
 import Mathlib.Analysis.CStarAlgebra.Spectrum
+import Mathlib.Analysis.InnerProductSpace.Positive
 
 namespace QIQTH.Spectral
 
@@ -1043,6 +1044,24 @@ theorem cayley_spectrum_isCompact (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t,
     (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
     IsCompact (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) :=
   spectrum.isCompact _
+
+/-- **★ The Cayley unitary is star-normal:** `IsStarNormal V` (from `cayley_mem_unitary` via
+    `isStarNormal_of_mem_unitary`) — the predicate the continuous functional calculus over `ℂ` requires. -/
+theorem cayley_isStarNormal (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    IsStarNormal (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) :=
+  isStarNormal_of_mem_unitary (cayley_mem_unitary U hgrp hU0 hUinner hUbd hSC)
+
+/-- **★ Positive operator ⟹ nonnegative expectation:** for `0 ≤ T` in the C\*-order on `H →L[ℂ] H`,
+    `0 ≤ re⟪x, T x⟫` for every `x`. This is the **functional-positivity step** of the operator → PVM construction:
+    once the continuous functional calculus delivers `0 ≤ cfc f V` for `f ≥ 0` on `σ(V)` (`V ∈ unitary` is
+    star-normal, so `cfc` applies; `H →L[ℂ] H` is a `StarOrderedRing`), this lemma gives that `f ↦ re⟪x, cfc f V x⟫`
+    is a *positive* linear functional on `C(σ(V), ℝ)` — exactly the input `RealRMK.rieszMeasure` turns into the
+    scalar spectral measure `μ_x` of `V`. Via `ContinuousLinearMap.nonneg_iff_isPositive` + `IsPositive`. -/
+theorem nonneg_re_inner_nonneg {T : H →L[ℂ] H} (hT : 0 ≤ T) (x : H) :
+    0 ≤ (inner ℂ x (T x) : ℂ).re :=
+  ((ContinuousLinearMap.nonneg_iff_isPositive T).mp hT).re_inner_nonneg_right x
 
 end SelfAdjoint
 
