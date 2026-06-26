@@ -458,6 +458,11 @@ item.** Never claim the `1/4`.
   fundamental *general* property of every `ProjectionValuedMeasure` — the observable is a commutative family of
   projections — applying at once to the position PVM, the momentum PVM, and the finite spectral PVM. A clean,
   general, Mathlib-contributable spectral-theory lemma.
+  **Off-diagonal matrix element of the position spectral projection ✅** (`MultiplicationOp.lean`, axiom-free,
+  budget 0): `indMul_inner` — `⟪g, E(A) f⟫ = ∫_A conj(g)·f dμ`, the position-space transition amplitude between
+  `g` and `f` on `A` (the complex off-diagonal scalar spectral measure `μ_{g,f}`, the polarized form of the
+  diagonal `μ_f` from `indMul_inner_self`). The matrix elements `⟪g, f(X) g'⟫` of every bounded function of
+  position integrate against it. Generalizes the diagonal `indMul_inner_self` (`g=f`).
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.

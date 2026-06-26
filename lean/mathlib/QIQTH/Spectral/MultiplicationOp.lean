@@ -356,6 +356,21 @@ theorem indMul_inner_self {A : Set α} (hA : MeasurableSet A) (f : Lp ℂ 2 μ) 
   · simp only [Set.indicator_of_mem h, indSymbol, one_mul]
   · simp [indSymbol, Set.indicator_of_notMem h]
 
+/-- **The off-diagonal matrix element of the position spectral projection:** `⟪g, E(A) f⟫ = ∫_A conj(g)·f dμ`
+    — the position-space transition amplitude between `g` and `f` restricted to `A`.  As `A` varies this is the
+    (complex) off-diagonal scalar spectral measure `μ_{g,f}` of the position PVM (the polarized form of the
+    diagonal `μ_f`); the matrix elements `⟪g, f(X) g'⟫` of every bounded function of position are integrals
+    against it. -/
+theorem indMul_inner {A : Set α} (hA : MeasurableSet A) (g f : Lp ℂ 2 μ) :
+    inner ℂ g (indMul hA f) = ∫ a in A, (starRingEnd ℂ) (g a) * f a ∂μ := by
+  rw [indMul, MeasureTheory.L2.inner_def, ← MeasureTheory.integral_indicator hA]
+  refine MeasureTheory.integral_congr_ae ?_
+  filter_upwards [mulOp_coeFn (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A) f] with a e1
+  rw [e1, RCLike.inner_apply']
+  by_cases h : a ∈ A
+  · simp only [Set.indicator_of_mem h, indSymbol, one_mul]
+  · simp [indSymbol, Set.indicator_of_notMem h]
+
 /-- **The norm of the spectral projection `‖E(A) f‖² = ∫_A ‖f‖² dμ`** — the `L²` mass of `f` on `A`.  As `A`
     varies this is the (genuine, real, nonnegative) scalar spectral measure `μ_f(A) = ∫_A ‖f‖²` of the position
     PVM; it is the key quantitative input to σ-additivity (the tail `∫_{A_N} ‖f‖² → 0`). -/

@@ -1546,6 +1546,11 @@ namespace QIQTH.AxiomAudit
 -- E_inter + Set.inter_comm). A fundamental general property of any ProjectionValuedMeasure — the observable is a
 -- commutative family of projections — applying at once to BOTH the position PVM and the momentum PVM (and the finite
 -- spectral PVM). Axiom-free, general, Mathlib-contributable.
+#print axioms QIQTH.Spectral.Multiplication.indMul_inner
+-- ★ OFF-DIAGONAL MATRIX ELEMENT of the position spectral projection: indMul_inner — ⟪g,E(A)f⟫=∫_A conj(g)·f dμ, the
+-- position-space transition amplitude between g and f restricted to A (the complex off-diagonal scalar spectral
+-- measure μ_{g,f}, polarized form of the diagonal μ_f). Generalizes indMul_inner_self (g=f). Axiom-free; the matrix
+-- elements ⟪g,f(X)g'⟫ of every bounded function of position integrate against it.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
