@@ -491,6 +491,12 @@ wrapper): `∫ h dμ_x = re⟪x, cfcL ha (↑∘h) x⟫` for continuous real `h`
 The clean form the **function-form CFC bridge** `re⟪x, cfc g V x⟫ = ∫ (g∘↑) dμ_x` consumes — removing the `C_c`
 plumbing from the Stone/Parseval development (GPT-5.5-pro recipe). **Next:** `cfc_eq_cfcL` to land the function-form
 bridge, then Parseval `‖cfc f V x‖² = ∫ |f|² dμ_x` and `μ_x({1})=0` (rational cutoffs).
+Also ✅ `integral_re_cfc_ofReal` `[Nontrivial H]` — **the function-form CFC↔measure bridge**:
+`re⟪x, cfc (↑∘r) V x⟫ = ∫ ω, r ω.1 dμ_x` for `r : ℂ→ℝ` continuous on `σ(V)` (`cfc_eq_cfcL` — `cfc(↑∘r)V =
+cfcL ha (restrict(↑∘r))`, defeq to `cfcL ha (↑∘(r∘↑))` — then `cayleyScalarMeasure_integral_C`). The recurring
+dictionary entry connecting the function-form `cfc g V` (operator-side identities) to the `μ_x`-integral; e.g. it
+upgrades `cayley_cfc_sub_norm_sq` to the genuine L² identity `‖cfc f V x − cfc g V x‖² = ∫|f−g|² dμ_x`. **Next:**
+`μ_x({1})=0` (rational cutoffs) → the strong-limit Stone exponential.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

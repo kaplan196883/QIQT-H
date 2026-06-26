@@ -5091,6 +5091,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyScalarMeasure
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_integral
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_integral_C
+#print axioms QIQTH.Spectral.integral_re_cfc_ofReal
+-- ★★ P4 WALL — THE FUNCTION-FORM CFC↔MEASURE BRIDGE: integral_re_cfc_ofReal [Nontrivial H] —
+-- re⟪x, cfc (↑∘r) V x⟫ = ∫ ω, r ω.1 dμ_x for r : ℂ→ℝ continuous on σ(V). Via cfc_eq_cfcL (cfc(↑∘r)V = cfcL ha
+-- (restrict(↑∘r)) = cfcL ha (↑∘(r∘↑)), defeq) + cayleyScalarMeasure_integral_C. Bridges the function-form cfc
+-- (operator-side identities) to the μ_x-integral (measure side) — the recurring dictionary entry, e.g. turns
+-- cayley_cfc_sub_norm_sq into the genuine L² identity ‖cfc f V x − cfc g V x‖² = ∫|f−g|² dμ_x. Axiom-free.
 -- ★ P4 WALL — INTEGRAL IDENTITY ON C(σV,ℝ) (compact-domain wrapper; CFC-bridge piece, GPT-5.5-pro recipe):
 -- cayleyScalarMeasure_integral_C [Nontrivial H] — ∫ h dμ_x = re⟪x, cfcL ha (↑∘h) x⟫ for h : C(σV,ℝ) (continuous;
 -- compact σV ⟹ compactly supported via continuousMapEquiv, so the C_c identity transports to C). Removes the C_c

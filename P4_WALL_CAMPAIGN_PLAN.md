@@ -380,6 +380,8 @@ Also ✅ `cayley_cfc_sub_norm_sq` `[Nontrivial H]` (**L²-distance estimate** �
 re⟪x,cfc(|f−g|²)V x⟫` = `∫|f−g|² dμ_x`; the literal Cauchy estimate for `n ↦ cfc(e^{it·φₙ})V x`).
 Also ✅ `cayleyScalarMeasure_integral_C` `[Nontrivial H]` (**integral identity on C(σV,ℝ)** — `∫h dμ_x = re⟪x,cfcL ha(↑∘h)x⟫`;
 the compact-domain wrapper that removes C_c plumbing from the function-form CFC bridge).
+Also ✅ `integral_re_cfc_ofReal` `[Nontrivial H]` (**function-form CFC↔measure bridge** — `re⟪x,cfc(↑∘r)V x⟫ =
+∫ r ω.1 dμ_x`; the recurring dictionary entry, upgrades L²-distance to `‖cfc f V x−cfc g V x‖²=∫|f−g|²dμ_x`).
 **Next:** bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

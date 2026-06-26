@@ -1387,6 +1387,35 @@ theorem cayleyScalarMeasure_integral_C [Nontrivial H] (U : ℝ → (H →L[ℂ] 
     isCompact_iff_compactSpace.mp (spectrum.isCompact _)
   exact cayleyScalarMeasure_integral U hgrp hU0 hUinner hUbd hSC x (continuousMapEquiv h)
 
+/-- **★★ The function-form CFC ↔ measure bridge:** `re⟪x, cfc (↑∘r) V x⟫ = ∫ ω, r ω.1 dμ_x` for a *function*
+    `r : ℂ → ℝ` continuous on `σ(V)`.  Bridges the function-form `cfc (g : ℂ → ℂ) V` (used by the operator-side
+    identities like `cayley_cfc_norm_sq`) to the `μ_x`-integral (the measure side).  Proof: `cfc (↑∘r) V =
+    cfcL ha (restrict (↑∘r)) = cfcL ha (↑∘(r∘↑))` (`cfc_eq_cfcL`), then `cayleyScalarMeasure_integral_C`.  This is
+    the recurring dictionary entry the Stone/Parseval development needs (GPT-5.5-pro recipe, 2026-06-27) — e.g. it
+    turns `cayley_cfc_sub_norm_sq` into the genuine L² identity `‖cfc f V x − cfc g V x‖² = ∫ |f−g|² dμ_x`. -/
+theorem integral_re_cfc_ofReal [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (r : ℂ → ℝ) (hr : ContinuousOn r (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (x : H) :
+    (inner ℂ x (cfc (fun z => (r z : ℂ)) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)).re
+      = ∫ ω, r ω.1 ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+  haveI : CompactSpace (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) :=
+    isCompact_iff_compactSpace.mp (spectrum.isCompact _)
+  set hR : C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℝ) :=
+    ⟨fun ω => r ω.1, hr.comp_continuous continuous_subtype_val (fun ω => ω.2)⟩ with hRdef
+  have hrC : ContinuousOn (fun z => (r z : ℂ))
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) :=
+    Complex.continuous_ofReal.comp_continuousOn hr
+  have hcfc : cfc (fun z => (r z : ℂ)) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+      = cfcL (cayley_isStarNormal U hgrp hU0 hUinner hUbd hSC)
+          (ContinuousLinearMap.compLeftContinuous ℝ
+            (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) Complex.ofRealCLM hR) :=
+    cfc_eq_cfcL (cayley_isStarNormal U hgrp hU0 hUinner hUbd hSC) hrC
+  rw [hcfc]
+  exact (cayleyScalarMeasure_integral_C U hgrp hU0 hUinner hUbd hSC x hR).symm
+
 /-- **★ The scalar spectral measure is finite:** `IsFiniteMeasure μ_x`. Since `σ(V)` is compact, the Riesz–Markov
     measure of a positive functional on `C_c(σ(V), ℝ)` is finite (`RealRMK`'s `CompactSpace` instance). So `μ_x` is
     a genuine *finite* spectral distribution of the state `x` (total mass `‖x‖²`), and `∫ g dμ_x` is defined for
