@@ -5073,6 +5073,14 @@ namespace QIQTH.AxiomAudit
 -- K = stoneGen (modUnitary S) = the JLMS modular Hamiltonian (abstract one-particle space). Each instantiates
 -- stoneGen_isSelfAdjoint with the group's (∘L group law, U_0=1, unitarity, isometry/norm, strong continuity). All
 -- three are GENUINE SELF-ADJOINT UNBOUNDED OPERATORS. Axiom-free. Remaining (Mathlib gap): unbounded spectral theorem.
+#print axioms QIQTH.Spectral.stoneGen_sub_I_bijective
+#print axioms QIQTH.Spectral.cayley_bijective
+-- ★★ P4 WALL — THE CAYLEY TRANSFORM IS A UNITARY: stoneGen_sub_I_bijective — A−i : dom(A)→H is a bijection
+-- (mirror of A+i: injective from ‖x‖≤‖(A−i)x‖=‖(A+i)x‖ via the Cayley isometry, surjective from
+-- stoneGen_sub_I_surjective). cayley_bijective — V=(A−i)(A+i)⁻¹ is bijective, = (stoneGen_sub_I_bijective).comp
+-- (cayleyEquiv).symm.bijective (composition of the bijection A−i with the bijection (A+i)⁻¹). With norm_cayley
+-- (‖V y‖=‖y‖) this makes V a UNITARY operator. Axiom-free. Remaining (Mathlib gap): bundle V as a unitary CLM +
+-- the bounded-PVM spectral theorem + transport to the unbounded spectral theorem for A ⟹ Stone U_t=exp(itA).
 #print axioms QIQTH.Spectral.cayley
 #print axioms QIQTH.Spectral.norm_cayley
 -- ★★ P4 WALL — THE CAYLEY TRANSFORM IS AN ISOMETRY: cayley U ⋯ y := (A−i)((A+i)⁻¹ y) is the Cayley transform

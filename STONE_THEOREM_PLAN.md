@@ -340,9 +340,12 @@ injective from the bounded-below estimate `‖x‖ ≤ ‖(A + i)x‖`, surjecti
 Also ✅ `cayley` + `norm_cayley` — **the Cayley transform `V = (A − i)(A + i)⁻¹` is built and is an isometry
 `‖V y‖ = ‖y‖`**: `cayleyEquiv := Equiv.ofBijective _ stoneGen_add_I_bijective` is the bijection `A+i : dom(A) ≃ H`,
 its `.symm` is `(A+i)⁻¹`, and `cayley y := (A−i)((A+i)⁻¹ y)`. The isometry is `‖V y‖ = ‖(A−i)z‖ = ‖(A+i)z‖ = ‖y‖`
-where `z = (A+i)⁻¹ y` (the Cayley isometry `stoneGen_norm_cayley_eq` + `apply_symm_apply`). With surjectivity
-(`A−i` also bijective) this makes `V` a **unitary**.
-**Remaining (Mathlib gap):** bundle `V` as a unitary CLM (linearity + surjectivity) → its bounded spectral measure
+where `z = (A+i)⁻¹ y` (the Cayley isometry `stoneGen_norm_cayley_eq` + `apply_symm_apply`).
+Also ✅ `stoneGen_sub_I_bijective` + `cayley_bijective` — **`V` is a unitary (bijective + isometric)**:
+`A−i : dom(A) → H` is a bijection (mirror of `A+i`: injective from `‖x‖ ≤ ‖(A−i)x‖ = ‖(A+i)x‖`, surjective from
+`stoneGen_sub_I_surjective`), and `V = (A−i) ∘ (A+i)⁻¹ = (stoneGen_sub_I_bijective).comp (cayleyEquiv).symm.bijective`
+is bijective. With `norm_cayley` (`‖V y‖ = ‖y‖`), `V` is a **unitary**.
+**Remaining (Mathlib gap):** bundle `V` as a unitary CLM (linearity) → its bounded spectral measure
 → transport to the unbounded spectral theorem (PVM `∫ λ dE` for the now-self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`.
 Mathlib has neither the bounded-PVM spectral theorem nor the unbounded spectral theorem.
 **Remaining (the genuine Mathlib-grade operator-theory frontier):** differentiate the RHS in `s` at `0` (after

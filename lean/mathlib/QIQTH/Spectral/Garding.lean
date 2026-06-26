@@ -806,6 +806,39 @@ theorem norm_cayley (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U
     (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).apply_symm_apply y
   rw [stoneGen_norm_cayley_eq U hgrp hU0 hUinner z, hz]
 
+/-- **`A − i` is a bijection `dom(A) → H`** (the mirror of `stoneGen_add_I_bijective`). Injective from the
+    bounded-below estimate `‖x‖ ≤ ‖(A − i)x‖` (= `‖(A + i)x‖` by the Cayley isometry); surjective from
+    `stoneGen_sub_I_surjective`. So `(A − i)⁻¹ : H → dom(A)` exists too. -/
+theorem stoneGen_sub_I_bijective (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    Function.Bijective (fun z : stoneDomain U => stoneGen U z - Complex.I • (z : H)) := by
+  refine ⟨fun z1 z2 h => ?_, fun y => stoneGen_sub_I_surjective U hgrp hU0 hUbd hSC y⟩
+  have hb := stoneGen_norm_le_norm_add_smul_I U hgrp hU0 hUinner (z1 - z2)
+  rw [← stoneGen_norm_cayley_eq U hgrp hU0 hUinner (z1 - z2)] at hb
+  have hz : stoneGen U (z1 - z2) - Complex.I • ((z1 - z2 : stoneDomain U) : H) = 0 := by
+    have e1 : stoneGen U (z1 - z2) = stoneGen U z1 - stoneGen U z2 := LinearPMap.map_sub (stoneGen U) z1 z2
+    have e2 : ((z1 - z2 : stoneDomain U) : H) = (z1 : H) - (z2 : H) := rfl
+    rw [e1, e2, smul_sub]
+    have hrw : stoneGen U z1 - stoneGen U z2 - (Complex.I • (z1 : H) - Complex.I • (z2 : H))
+        = (stoneGen U z1 - Complex.I • (z1 : H)) - (stoneGen U z2 - Complex.I • (z2 : H)) := by abel
+    rw [hrw, show stoneGen U z1 - Complex.I • (z1 : H) = stoneGen U z2 - Complex.I • (z2 : H) from h, sub_self]
+  rw [hz, norm_zero] at hb
+  have hzz : ((z1 - z2 : stoneDomain U) : H) = 0 := norm_le_zero_iff.mp hb
+  rw [Submodule.coe_sub, sub_eq_zero] at hzz
+  exact Subtype.ext hzz
+
+/-- **★★ The Cayley transform `V = (A − i)(A + i)⁻¹` is a bijection of `H`** (hence, with `norm_cayley`, a
+    **unitary**): `V = (A − i) ∘ (A + i)⁻¹` is the composition of the bijection `A − i : dom(A) → H`
+    (`stoneGen_sub_I_bijective`) with the bijection `(A + i)⁻¹ : H → dom(A)` (`(cayleyEquiv).symm`). This is the
+    operator whose bounded spectral measure (Mathlib gap) transports to the unbounded spectral theorem for `A`. -/
+theorem cayley_bijective (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    Function.Bijective (cayley U hgrp hU0 hUinner hUbd hSC) :=
+  (stoneGen_sub_I_bijective U hgrp hU0 hUinner hUbd hSC).comp
+    (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm.bijective
+
 end SelfAdjoint
 
 end QIQTH.Spectral
