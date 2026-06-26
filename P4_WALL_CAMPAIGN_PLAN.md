@@ -134,9 +134,20 @@ relative entropy ≥ 0). So `S_vN ≤ areaTerm` holds whenever the **JLMS master
 `S_vN + cgpEntropy S ξ ≤ areaTerm` holds (`areaTerm = ⟨A_edge⟩/4ℓ_P²`, the Phase-5 trace's output): the slack
 positivity is no longer hypothesized — only the master inequality remains.
 
-**Remaining to instantiate Phase 6:** the Phase-5 dual-weight trace must supply the master inequality
-`S_vN + cgpEntropy ≤ ⟨A_edge⟩/4ℓ_P²` (equivalently `areaExp`, `bulk`, `D` + the first law) — the genuine
-Mathlib-grade gap. NOT blocked on the PVM/`PVM_of_selfAdjoint` (off the critical path).
+**✅ Phase 6 AS A CERTIFICATE-RELATIVE THEOREM (`QIQTH/FQBoundCGP.lean`, axiom-free; GPT-5.5-pro round-2 strategy
+2026-06-27 — the DonaldSystem typeclass+instance pattern that made the finite core axiom-free):** `class
+Phase5Master (S ξ) (SvN areaTerm : ℝ)` bundles the JLMS balance `SvN + cgpEntropy S ξ + remainder = areaTerm` with
+`remainder_nonneg`; `phase5_master_ineq` derives the master inequality; **`fq_bound_of_phase5` proves P4's bound
+`SvN ≤ areaTerm` UNCONDITIONALLY RELATIVE to the `Phase5Master` certificate** (via `fq_bound_cgp` + the proved
+`cgpEntropy_nonneg`).  So the holographic area floor is now a *theorem modulo a named, non-vacuous physics interface*
+(`Phase5Master`) — not an axiom.
+
+**Remaining to instantiate Phase 6:** the Phase-5 dual-weight trace must produce a `Phase5Master` instance (a `≥ 0`
+remainder + the JLMS balance) — the genuine Mathlib-grade gap. The richer `DualWeightTrace` (τ, dual action θ,
+`τ∘θ_s = e^{−s}τ`, A_edge positivity, area_finite, first law, state_match) extends `Phase5Master`; and a
+`HolographicContext` (spec fields `S_vN = vonNeumannEntropy ρR`, `areaTerm = edgeArea/4ℓ_P²`, `ρR = boundary
+restriction`) makes the final `holographic_area_bound` faithful (the soundness layer). NOT blocked on the
+PVM/`PVM_of_selfAdjoint` (off the critical path).
 Per the same audit, do NOT block this on the PVM/`PVM_of_selfAdjoint` (off the critical path); `IsSelfAdjoint
 A_edge` (already proved) suffices to call the clock energy a genuine observable.
 

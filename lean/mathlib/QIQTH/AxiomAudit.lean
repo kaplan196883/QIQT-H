@@ -5923,6 +5923,15 @@ namespace QIQTH.AxiomAudit
 -- is explicit where needed. Axiom-free (standard 3). The dual-weight trace (Phase 5) remains the genuine gap.
 
 #print axioms QIQTH.fq_bound_cgp
+#print axioms QIQTH.phase5_master_ineq
+#print axioms QIQTH.fq_bound_of_phase5
+-- ★★★ P4 WALL PHASE 6 — THE Phase5Master CERTIFICATE (DonaldSystem-pattern; GPT-5.5-pro round-2 strategy):
+-- class Phase5Master (S ξ) (SvN areaTerm : ℝ) bundles the JLMS balance SvN + cgpEntropy S ξ + remainder = areaTerm
+-- with remainder_nonneg (the Phase-5 trace's positivity obligation). phase5_master_ineq derives the master
+-- inequality SvN + cgpEntropy ≤ areaTerm. fq_bound_of_phase5 — P4's FQ bound SvN ≤ areaTerm UNCONDITIONAL RELATIVE
+-- to the certificate (via fq_bound_cgp + cgpEntropy_nonneg). The holographic area floor is now a theorem modulo a
+-- named, non-vacuous physics interface (Phase5Master), which the dual-weight trace will instance — NOT an axiom.
+-- Axiom-free (standard 3). areaTerm coefficient (1/4ℓ_P²) is the carried UV datum, never assigned.
 -- ★★★ P4 WALL PHASE 6 — FQ BOUND GROUNDED IN THE PROVED RELATIVE ENTROPY: fq_bound_cgp — discharges the 0≤slack
 -- hypothesis of fq_bound_of_slack with the MACHINE-CHECKED cgpEntropy_nonneg (one-particle CGP modular relative
 -- entropy ≥ 0). So the grounded FQ bound S_vN ≤ areaTerm holds whenever the JLMS master inequality
