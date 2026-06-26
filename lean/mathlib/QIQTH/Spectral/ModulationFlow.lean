@@ -1,6 +1,7 @@
 import QIQTH.Spectral.MultiplicationOp
 import QIQTH.Spectral.TranslationFlow
 import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+import Mathlib.MeasureTheory.Integral.DominatedConvergence
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
 /-!
@@ -108,5 +109,72 @@ theorem weyl_relation (s t : ℝ) (f : Lp ℂ 2 (volume : Measure ℝ)) :
 /-- `e^{isX} ∘ e^{-isX} = 1`. -/
 @[simp] theorem modulationLp_comp_neg (s : ℝ) : modulationLp s ∘L modulationLp (-s) = 1 := by
   rw [modulationLp_add, add_neg_cancel, modulationLp_zero]
+
+open Topology in
+/-- **Strong continuity of the modulation group:** `s ↦ e^{isX} f` is continuous `ℝ → L²(ℝ)` for every state
+    `f`. With the group law + unitarity this makes `s ↦ e^{isX}` a strongly-continuous one-parameter unitary
+    group (the `C₀`-group whose generator is the position operator `X`), symmetric to the translation group
+    `e^{itP}`. Proof: `‖e^{isX}f − e^{is₀X}f‖² = ∫ |e^{isx}−e^{is₀x}|²|f(x)|²` (`mulOp_sub` + `norm_mulOp_sq`),
+    which → 0 by dominated convergence (integrand → 0 pointwise as `s → s₀`, dominated by `4|f|²`). -/
+theorem continuous_modulationLp (f : Lp ℂ 2 (volume : Measure ℝ)) :
+    Continuous (fun s => modulationLp s f) := by
+  rw [continuous_iff_continuousAt]
+  intro s₀
+  rw [ContinuousAt, tendsto_iff_norm_sub_tendsto_zero]
+  -- the squared norm of the difference
+  have hGsq : ∀ s, ‖modulationLp s f - modulationLp s₀ f‖ ^ 2
+      = ∫ x, ‖modSymbol s x - modSymbol s₀ x‖ ^ 2 * ‖f x‖ ^ 2 ∂(volume : Measure ℝ) := by
+    intro s
+    rw [← ContinuousLinearMap.sub_apply,
+      show modulationLp s - modulationLp s₀
+          = mulOp ((modSymbol_measurable s).sub (modSymbol_measurable s₀))
+              (add_nonneg zero_le_one zero_le_one)
+              (fun x => (norm_sub_le _ _).trans (add_le_add (modSymbol_le_one s x) (modSymbol_le_one s₀ x)))
+        from mulOp_sub (modSymbol_measurable s) zero_le_one (modSymbol_le_one s)
+            (modSymbol_measurable s₀) zero_le_one (modSymbol_le_one s₀),
+      norm_mulOp_sq]
+  -- dominated convergence: the integral → 0
+  have hbound_int : Integrable (fun x => 4 * ‖f x‖ ^ 2) (volume : Measure ℝ) :=
+    (((MeasureTheory.memLp_two_iff_integrable_sq_norm (Lp.aestronglyMeasurable f)).mp
+      (Lp.memLp f))).const_mul 4
+  have hmeas_int : ∀ s, AEStronglyMeasurable
+      (fun x => ‖modSymbol s x - modSymbol s₀ x‖ ^ 2 * ‖f x‖ ^ 2) (volume : Measure ℝ) := fun s =>
+    (((modSymbol_measurable s).sub (modSymbol_measurable s₀)).norm.pow_const 2).aestronglyMeasurable.mul
+      (((MeasureTheory.memLp_two_iff_integrable_sq_norm (Lp.aestronglyMeasurable f)).mp
+        (Lp.memLp f)).aestronglyMeasurable)
+  have hDCT : Filter.Tendsto
+      (fun s => ∫ x, ‖modSymbol s x - modSymbol s₀ x‖ ^ 2 * ‖f x‖ ^ 2 ∂(volume : Measure ℝ))
+      (𝓝 s₀) (𝓝 0) := by
+    have key := MeasureTheory.tendsto_integral_filter_of_dominated_convergence
+      (fun x => 4 * ‖f x‖ ^ 2)
+      (Filter.Eventually.of_forall hmeas_int)
+      (Filter.Eventually.of_forall fun s => Filter.Eventually.of_forall fun x => by
+        rw [Real.norm_of_nonneg (mul_nonneg (sq_nonneg _) (sq_nonneg _))]
+        have hle : ‖modSymbol s x - modSymbol s₀ x‖ ≤ 2 :=
+          (norm_sub_le _ _).trans (by rw [norm_modSymbol, norm_modSymbol]; norm_num)
+        have h4 : ‖modSymbol s x - modSymbol s₀ x‖ ^ 2 ≤ 4 := by
+          nlinarith [norm_nonneg (modSymbol s x - modSymbol s₀ x), hle]
+        exact mul_le_mul_of_nonneg_right h4 (sq_nonneg ‖f x‖))
+      hbound_int
+      (Filter.Eventually.of_forall fun x => by
+        have h1 : Filter.Tendsto (fun s => modSymbol s x) (𝓝 s₀) (𝓝 (modSymbol s₀ x)) :=
+          (by unfold modSymbol; fun_prop : Continuous fun s => modSymbol s x).continuousAt
+        have hconst : Filter.Tendsto (fun _ : ℝ => modSymbol s₀ x) (𝓝 s₀) (𝓝 (modSymbol s₀ x)) :=
+          tendsto_const_nhds
+        have hsub : Filter.Tendsto (fun s => modSymbol s x - modSymbol s₀ x) (𝓝 s₀) (𝓝 0) := by
+          simpa using h1.sub hconst
+        have := ((hsub.norm).pow 2).mul_const (‖f x‖ ^ 2)
+        simpa using this)
+    simpa using key
+  -- ‖·‖² → 0 ⟹ ‖·‖ → 0
+  have hsq_tendsto : Filter.Tendsto (fun s => ‖modulationLp s f - modulationLp s₀ f‖ ^ 2) (𝓝 s₀) (𝓝 0) := by
+    simp_rw [hGsq]; exact hDCT
+  have heq : (fun s => ‖modulationLp s f - modulationLp s₀ f‖)
+      = fun s => Real.sqrt (‖modulationLp s f - modulationLp s₀ f‖ ^ 2) := by
+    funext s; rw [Real.sqrt_sq (norm_nonneg _)]
+  rw [heq]
+  have hsqrt := (Real.continuous_sqrt.tendsto 0).comp hsq_tendsto
+  rw [Real.sqrt_zero] at hsqrt
+  exact hsqrt
 
 end QIQTH.Spectral.Multiplication

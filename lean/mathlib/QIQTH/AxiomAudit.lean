@@ -1520,6 +1520,13 @@ namespace QIQTH.AxiomAudit
 -- genuine group homomorphism ℝ→unitaries (identity, composition, inverses) — the position-side one-parameter
 -- unitary group is now a full group. Axiom-free. Recorded next target: strong continuity of e^{isX} (s↦e^{isX}f
 -- continuous, via DCT) — making it a full C₀-group symmetric to e^{itP}; then the (unbounded) Stone generator X.
+#print axioms QIQTH.Spectral.Multiplication.continuous_modulationLp
+-- ★ STRONG CONTINUITY of the modulation group: s↦e^{isX}f continuous ℝ→L²(ℝ) for every f (continuous_modulationLp,
+-- via DCT). Proof: ‖e^{isX}f−e^{is₀X}f‖²=∫|e^{isx}−e^{is₀x}|²|f|² (mulOp_sub + norm_mulOp_sq) →0 by
+-- tendsto_integral_filter_of_dominated_convergence (integrand→0 ptwise as s→s₀, dominated by 4|f|²). With the group
+-- law + unitarity + identity/inverses, e^{isX} is now a full STRONGLY-CONTINUOUS one-parameter UNITARY group
+-- (C₀-group, generator = the position operator X) — SYMMETRIC to the translation group e^{itP}. Axiom-free. Both
+-- legs of the canonical X–P pair are now complete C₀-groups; only the (unbounded) Stone generators X,P stay frontier.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

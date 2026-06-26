@@ -429,8 +429,15 @@ item.** Never claim the `1/4`.
   `modulationLp_zero` (`e^{i0X}=1`, via `mulOp_const`) + `modulationLp_neg_comp`/`comp_neg`
   (`e^{∓isX}∘e^{±isX}=1`, from the group law at `(−s)+s=0`). Completes `s↦e^{isX}` as a genuine group
   homomorphism `ℝ→`unitaries (identity, composition, inverses) — the position-side one-parameter unitary group
-  is now a full group. Recorded next target: **strong continuity** of `e^{isX}` (`s↦e^{isX}f` continuous, via
-  DCT) — making it a full `C₀`-group symmetric to `e^{itP}`; then the (unbounded) Stone generator `X`.
+  is now a full group.
+  **Strong continuity of the modulation group ✅** (`ModulationFlow.lean`, axiom-free, budget 0):
+  `continuous_modulationLp` (`s↦e^{isX}f` continuous `ℝ→L²(ℝ)` for every `f`, via DCT). Proof:
+  `‖e^{isX}f−e^{is₀X}f‖²=∫|e^{isx}−e^{is₀x}|²|f|²` (`mulOp_sub` + `norm_mulOp_sq`) → 0 by
+  `tendsto_integral_filter_of_dominated_convergence` (integrand → 0 pointwise, dominated by `4|f|²`). With the
+  group law + unitarity + identity/inverses, `e^{isX}` is now a full **strongly-continuous one-parameter unitary
+  group** (`C₀`-group, generator = the position operator `X`) — **symmetric to the translation group `e^{itP}`.
+  Both legs of the canonical X–P pair are now complete `C₀`-groups.** Only the (unbounded) Stone generators
+  `X=∫x dE`, `P=∫k dÊ` stay frontier (no Stone's theorem in Mathlib).
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.
