@@ -24,6 +24,7 @@ import QIQTH.Spectral.Stone
 import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 import Mathlib.MeasureTheory.Group.Integral
+import Mathlib.Analysis.Calculus.ParametricIntegral
 
 namespace QIQTH.Spectral
 
@@ -132,5 +133,73 @@ theorem exists_support_subset_of_compactSupport (φ' : ℝ → ℂ) (hsupp : Has
   have hb := hρ hmem
   rw [Metric.mem_closedBall, Real.dist_eq, sub_zero] at hb
   exact absurd hb (not_le.mpr hy)
+
+/-- The dominating bound `c · 𝟙_{closedBall 0 R}` is **integrable** — indicator of a compact (finite-measure)
+    set times a constant. The integrability of the Gårding dominating function. -/
+theorem integrable_indicator_closedBall_const (R c : ℝ) :
+    Integrable ((Metric.closedBall (0 : ℝ) R).indicator (fun _ => c)) := by
+  rw [integrable_indicator_iff measurableSet_closedBall]
+  exact integrableOn_const (isCompact_closedBall (0 : ℝ) R).measure_lt_top.ne
+
+/-- **★ Differentiability of the mollified orbit (the Gårding differentiation under the integral).** For a
+    one-parameter family `U` with `t ↦ U_t x` continuous and uniformly bounded (`‖U_t x‖ ≤ M`), and a `C¹`
+    compactly-supported mollifier `φ` (with derivative `φ'`, both `φ, φ'` having compact support), the orbit
+    `s ↦ ∫ φ(u − s) U_u x du` is differentiable at `0` with derivative `∫ (−φ'(u)) U_u x du`. Proof: apply
+    `hasDerivAt_integral_of_dominated_loc_of_deriv_le` with the dominating bound `C·M·𝟙_{closedBall 0 (ρ+1)}`
+    (`C = ‖φ'‖_∞`, `ρ` bounding `supp φ'`); domination is a case split on `|u| ≤ ρ+1`. -/
+theorem mollify_orbit_hasDerivAt (U : ℝ → (H →L[ℂ] H)) (φ φ' : ℝ → ℂ)
+    (hφ' : ∀ y, HasDerivAt φ (φ' y) y) (hφcont : Continuous φ) (hsuppφ : HasCompactSupport φ)
+    (hφ'cont : Continuous φ') (hsupp' : HasCompactSupport φ')
+    (x : H) (M : ℝ) (hM : 0 ≤ M) (hUbd : ∀ t, ‖U t x‖ ≤ M)
+    (hcont : Continuous (fun t => U t x)) :
+    HasDerivAt (fun s => ∫ u, φ (u - s) • U u x) (∫ u, (-φ' u) • U u x) 0 := by
+  obtain ⟨C, hC⟩ := exists_norm_le_of_compactSupport φ' hφ'cont hsupp'
+  obtain ⟨ρ, hρ⟩ := exists_support_subset_of_compactSupport φ' hsupp'
+  have hC0 : 0 ≤ C := le_trans (norm_nonneg _) (hC 0)
+  set bound : ℝ → ℝ := (Metric.closedBall (0 : ℝ) (ρ + 1)).indicator (fun _ => C * M) with hbound
+  have h_bound : ∀ᵐ u ∂(volume : Measure ℝ), ∀ σ ∈ Metric.ball (0 : ℝ) 1,
+      ‖(-φ' (u - σ)) • U u x‖ ≤ bound u := by
+    refine Filter.Eventually.of_forall fun u σ hσ => ?_
+    rw [norm_smul, norm_neg]
+    by_cases hu : u ∈ Metric.closedBall (0 : ℝ) (ρ + 1)
+    · rw [hbound, Set.indicator_of_mem hu]
+      exact mul_le_mul (hC _) (hUbd u) (norm_nonneg _) hC0
+    · have hφz : φ' (u - σ) = 0 := by
+        refine hρ _ ?_
+        rw [Metric.mem_ball, Real.dist_eq, sub_zero] at hσ
+        rw [Metric.mem_closedBall, Real.dist_eq, sub_zero, not_le] at hu
+        have h1 : |u| - |σ| ≤ |u - σ| := abs_sub_abs_le_abs_sub u σ
+        linarith
+      rw [hφz, norm_zero, zero_mul, hbound]
+      exact Set.indicator_nonneg (fun _ _ => mul_nonneg hC0 hM) u
+  have hmain := hasDerivAt_integral_of_dominated_loc_of_deriv_le
+    (F := fun σ u => φ (u - σ) • U u x) (F' := fun σ u => (-φ' (u - σ)) • U u x)
+    (bound := bound) (x₀ := (0 : ℝ)) (Metric.ball_mem_nhds 0 one_pos)
+    (Filter.Eventually.of_forall fun σ => mollify_shifted_aestronglyMeasurable U φ x hcont hφcont σ)
+    (by simpa [sub_zero] using mollify_integrable U φ x hcont hφcont hsuppφ)
+    (by simpa [sub_zero] using
+        mollify_deriv_aestronglyMeasurable U (fun u => -φ' u) x hcont hφ'cont.neg)
+    h_bound (integrable_indicator_closedBall_const (ρ + 1) (C * M))
+    (Filter.Eventually.of_forall fun u σ _ => mollify_integrand_hasDerivAt φ φ' hφ' U x u σ)
+  simpa [sub_zero] using hmain.2
+
+/-- **★ Gårding vectors lie in the smooth domain:** `mollify U φ x ∈ stoneDomain U` for `φ ∈ C¹_c` and a
+    uniformly-bounded strongly-continuous family `U`. The orbit `s ↦ U_s x_φ` equals `∫ φ(u−s) U_u x du`
+    (`mollify_apply_flow_cov`), differentiable at `0` (`mollify_orbit_hasDerivAt`). **This is the first crack in
+    the essential-self-adjointness wall: the smooth domain of the Stone generator is nonempty, and in fact
+    contains every Gårding vector.** Density `{x_φ} dense` (as `φ → δ`) then upgrades this to `Range(A±i)` dense
+    ⟹ `A` essentially self-adjoint — the remaining step. -/
+theorem mollify_mem_stoneDomain (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (φ φ' : ℝ → ℂ) (hφ' : ∀ y, HasDerivAt φ (φ' y) y) (hφcont : Continuous φ)
+    (hsuppφ : HasCompactSupport φ) (hφ'cont : Continuous φ') (hsupp' : HasCompactSupport φ')
+    (x : H) (M : ℝ) (hM : 0 ≤ M) (hUbd : ∀ t, ‖U t x‖ ≤ M)
+    (hcont : Continuous (fun t => U t x)) :
+    mollify U φ x ∈ stoneDomain U := by
+  have hfun : (fun s => U s (mollify U φ x)) = fun s => ∫ u, φ (u - s) • U u x := by
+    funext s; exact mollify_apply_flow_cov U hgrp φ x hcont hφcont hsuppφ s
+  show DifferentiableAt ℝ (fun s => U s (mollify U φ x)) 0
+  rw [hfun]
+  exact (mollify_orbit_hasDerivAt U φ φ' hφ' hφcont hsuppφ hφ'cont hsupp' x M hM hUbd
+    hcont).differentiableAt
 
 end QIQTH.Spectral

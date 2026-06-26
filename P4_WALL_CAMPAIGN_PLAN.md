@@ -211,8 +211,14 @@ generator). **Carried frontier (now a SINGLE hypothesis):** the integrable domin
 (compact support of `φ'` ⟹ indicator of a compact set) is the only missing input to
 `hasDerivAt_integral_of_dominated_loc_of_deriv_le`. Its two analytic pillars are now in hand:
 `exists_norm_le_of_compactSupport` (`φ'` bounded) + `exists_support_subset_of_compactSupport` (`φ'` vanishes
-outside a ball). **Final assembly remaining:** `bound := C·M·𝟙_{closedBall(ρ+nbhd)}` (integrable, compact set) +
-a.e. domination + apply the lemma ⟹ `x_φ ∈ stoneDomain U`, then density (`φ → δ`). (Needs uniform `‖U_u x‖ ≤ M`.)
+outside a ball).
+**★★ MILESTONE — the Gårding differentiation is DONE; the smooth domain is NONEMPTY.**
+`integrable_indicator_closedBall_const` (the bound `C·M·𝟙_K` integrable) + `mollify_orbit_hasDerivAt` (the orbit
+`s ↦ ∫ φ(u−s) U_u x du` differentiable at `0`, derivative `∫ (−φ'(u)) U_u x du`, via the dominated-derivative
+lemma; domination = case split on `\|u\| ≤ ρ+1`, needs uniform `‖U_u x‖ ≤ M`) ⟹ `mollify_mem_stoneDomain`:
+**`mollify U φ x ∈ stoneDomain U`** — every Gårding vector is in the smooth domain of the Stone generator.
+The hardest analytic step (differentiation under the Bochner integral) is complete, axiom-free.
+**Remaining:** density (`{x_φ}` dense as `φ → δ`) ⟹ smooth domain dense ⟹ `Range(·±i)` dense ⟹ e.s.a. ⟹ Stone.
 
 ### Phase 4 (operators) — the modular Hamiltonian `K` as a symmetric operator ✅ (3rd & LAST C₀ group; trio complete)
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/ModularGenerator.lean`):** the Stone-instantiation pattern

@@ -4932,6 +4932,17 @@ namespace QIQTH.AxiomAudit
 -- — φ' vanishes outside a ball {|y|≤ρ} (tsupport bounded + image_eq_zero_of_notMem_tsupport). Axiom-free.
 -- Assembling bound := C·M·𝟙_{closedBall(ρ+nbhd)} (integrable: compact ⟹ finite measure) + applying the diff lemma
 -- ⟹ x_φ ∈ stoneDomain U is the remaining step.
+#print axioms QIQTH.Spectral.integrable_indicator_closedBall_const
+#print axioms QIQTH.Spectral.mollify_orbit_hasDerivAt
+#print axioms QIQTH.Spectral.mollify_mem_stoneDomain
+-- ★★ P4 WALL MILESTONE — GÅRDING DIFFERENTIATION DONE ⟹ THE SMOOTH DOMAIN IS NONEMPTY:
+-- integrable_indicator_closedBall_const — the dominating bound C·M·𝟙_{closedBall} is integrable (compact ⟹ finite
+-- measure). mollify_orbit_hasDerivAt — the orbit s↦∫φ(u−s)U_u x du is differentiable at 0 with derivative
+-- ∫(−φ'(u))U_u x du, via hasDerivAt_integral_of_dominated_loc_of_deriv_le with the bound C·M·𝟙_K (domination = case
+-- split on |u|≤ρ+1; needs uniform ‖U_u x‖≤M). mollify_mem_stoneDomain — mollify U φ x ∈ stoneDomain U: the orbit
+-- U_s x_φ = ∫φ(u−s)U_u x du (mollify_apply_flow_cov) is differentiable ⟹ x_φ in the smooth domain. THE SMOOTH
+-- DOMAIN OF THE STONE GENERATOR IS NONEMPTY (contains every Gårding vector) — the hardest analytic step of e.s.a.
+-- is done. Axiom-free. Remaining: DENSITY {x_φ} dense (φ→δ) ⟹ Range(A±i) dense ⟹ A essentially self-adjoint.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via

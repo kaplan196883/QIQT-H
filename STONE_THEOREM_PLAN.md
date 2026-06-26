@@ -239,10 +239,17 @@ Also ✅ the two compact-support consequences the bound `C·M·𝟙_K` rests on:
 (`φ'` bounded, `C = ‖φ'‖_∞`, via `Continuous.bddAbove_range_of_hasCompactSupport`) +
 `exists_support_subset_of_compactSupport` (`φ'` vanishes outside `{|y| ≤ ρ}`, via `tsupport` bounded +
 `image_eq_zero_of_notMem_tsupport`).
-**Remaining (the final assembly):** combine into `bound := C·M·𝟙_{closedBall(ρ+nbhd)}` (integrable: compact ⟹
-finite measure ⟹ indicator-const integrable), prove the a.e. domination `‖F'(σ,u)‖ ≤ bound u` (case split on
-`|u|` vs `ρ`), apply the differentiation lemma ⟹ `HasDerivAt (s ↦ U_s x_φ) (−x_{φ'}) 0` ⟹ `x_φ ∈ stoneDomain U`;
-then `{x_φ}` dense (approximate identity `φ → δ`). Needs a uniform operator bound `‖U_u x‖ ≤ M` (= `‖x‖` for unitary).
+**★★ MILESTONE — the Gårding differentiation is DONE; the smooth domain is nonempty.**
+✅ `integrable_indicator_closedBall_const` — the dominating bound `C·M·𝟙_{closedBall}` is integrable (compact ⟹
+finite measure). ✅ `mollify_orbit_hasDerivAt` — the orbit `s ↦ ∫ φ(u−s) U_u x du` is **differentiable at `0`**
+with derivative `∫ (−φ'(u)) U_u x du`, via `hasDerivAt_integral_of_dominated_loc_of_deriv_le` with the bound
+`C·M·𝟙_K` (domination = case split on `|u| ≤ ρ+1`; needs a uniform `‖U_u x‖ ≤ M`, `= ‖x‖` for unitary).
+✅ `mollify_mem_stoneDomain` — **`mollify U φ x ∈ stoneDomain U`**: the orbit `U_s x_φ = ∫ φ(u−s) U_u x du`
+(`mollify_apply_flow_cov`) is differentiable ⟹ `x_φ` is in the smooth domain. **The smooth domain of the Stone
+generator is NONEMPTY — it contains every Gårding vector. The hardest analytic step of essential
+self-adjointness (differentiation under the Bochner integral) is complete, axiom-free.**
+**Remaining:** the density `{x_φ}` dense (approximate identity `φ → δ`, so `x_φ → x`) ⟹ smooth domain dense ⟹
+`Range(A ± i)` dense ⟹ `A` essentially self-adjoint ⟹ Stone returns `U_t = exp(it Ā)`.
 
 ## 3. Dependency graph
 ```
