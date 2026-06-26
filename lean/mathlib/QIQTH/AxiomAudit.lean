@@ -1603,6 +1603,15 @@ namespace QIQTH.AxiomAudit
 -- downstream Stone argument (symmetry ⟪Ax,y⟫=⟪x,Ay⟫, flow-invariance U_s·domain⊆domain, essential self-adjointness)
 -- differentiates through. Axiom-free. NEXT sub-bricks: flow-invariance (group law + HasDerivAt.scomp/comp_hasDerivAt)
 -- then symmetry (U_t unitary + HasDerivAt.inner) — the road to Phase 3.2.
+#print axioms QIQTH.Spectral.hasDerivAt_stoneGen_flow
+-- ★ STONE 3.1 cont. — the shifted-orbit derivative: hasDerivAt_stoneGen_flow — t↦U_t(U_s x) has derivative
+-- i•U_s(A x) at 0 (group law + U_s a smooth CLM). The key derivative computation behind BOTH flow-invariance and
+-- the commutation [A,U_s]=0; stoneDomain_apply_mem is now its .differentiableAt. Axiom-free.
+#print axioms QIQTH.Spectral.stoneGen_comm_flow
+-- ★ STONE 3.1 cont. — THE GENERATOR COMMUTES WITH THE FLOW [A,U_s]=0: stoneGen_comm_flow — stoneGen U (U_s x) =
+-- U_s (stoneGen U x) on the smooth domain (from hasDerivAt_stoneGen_flow + generator-identification). The
+-- U-invariance of A that makes the clock energy X=A_edge (Phase 4.3) compatible with the modular flow it is read
+-- off from. Axiom-free.
 #print axioms QIQTH.Spectral.stoneDomain_apply_mem
 -- ★ STONE 3.1 cont. — FLOW-INVARIANCE OF THE SMOOTH DOMAIN: stoneDomain_apply_mem — for a one-parameter GROUP
 -- (U(s+t)=U s∘L U t), U_s maps stoneDomain U into itself. (t↦U_t(U_s x)=U_{t+s}x is differentiable at 0 because

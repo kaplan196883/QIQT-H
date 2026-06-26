@@ -79,33 +79,41 @@ theorem hasDerivAt_stoneGen (U : ℝ → (H →L[ℂ] H)) (x : stoneDomain U) :
     rw [mul_neg, Complex.I_mul_I, neg_neg], one_smul]
   exact x.2.hasDerivAt
 
-/-- **The smooth domain is invariant under the flow:** for a one-parameter *group* (`U (s+t) = U s ∘ U t`),
-    `U_s` maps `stoneDomain U` into itself. (`t ↦ U_t (U_s x) = U_{t+s} x`, differentiable at `0` because the
-    orbit `τ ↦ U_τ x` is differentiable at `s`, via the group law `U_τ = U_s ∘ U_{τ−s}` and `U_s` a smooth CLM.)
-    The `U`-invariance of the smooth domain — a prerequisite for essential self-adjointness (Phase 3.2). -/
-theorem stoneDomain_apply_mem (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
-    (s : ℝ) (x : H) (hx : x ∈ stoneDomain U) : U s x ∈ stoneDomain U := by
-  set d := Complex.I • stoneGen U ⟨x, hx⟩ with hd
-  have hx' : HasDerivAt (fun t => U t x) d 0 := hasDerivAt_stoneGen U ⟨x, hx⟩
+/-- **The shifted orbit `t ↦ U_t (U_s x)` has derivative `i • U_s (A x)` at `0`** (group law +
+    `U_s` a smooth CLM). The key derivative computation behind both flow-invariance of the smooth domain
+    and the commutation `[A, U_s] = 0`. -/
+theorem hasDerivAt_stoneGen_flow (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (s : ℝ) (x : stoneDomain U) :
+    HasDerivAt (fun t => U t (U s (x : H))) (Complex.I • U s (stoneGen U x)) 0 := by
+  set d := Complex.I • stoneGen U x with hd
+  have hx' : HasDerivAt (fun t => U t (x : H)) d 0 := hasDerivAt_stoneGen U x
   -- the orbit `τ ↦ U_τ x` is differentiable at `s`: `U_τ x = U_s (U_{τ−s} x)`
-  have hsub : HasDerivAt (fun τ => U (τ - s) x) d s := by
+  have hsub : HasDerivAt (fun τ => U (τ - s) (x : H)) d s := by
     simpa using HasDerivAt.scomp_of_eq (hg := hx') (hh := (hasDerivAt_id s).sub_const s)
       (hy := (sub_self s).symm)
-  have hgs : HasDerivAt (fun τ => U τ x) ((U s) d) s := by
-    have h2 : (fun τ => U τ x) = fun τ => ((U s).restrictScalars ℝ) (U (τ - s) x) := by
+  have hgs : HasDerivAt (fun τ => U τ (x : H)) ((U s) d) s := by
+    have h2 : (fun τ => U τ (x : H)) = fun τ => ((U s).restrictScalars ℝ) (U (τ - s) (x : H)) := by
       funext τ; rw [ContinuousLinearMap.coe_restrictScalars', ← ContinuousLinearMap.comp_apply,
         ← hgrp s (τ - s), add_sub_cancel]
     rw [h2]
     simpa using HasFDerivAt.comp_hasDerivAt
       (hl := ContinuousLinearMap.hasFDerivAt ((U s).restrictScalars ℝ)) (hf := hsub)
   -- `t ↦ U_t (U_s x) = U_{t+s} x`, differentiable at `0`
-  have hfin : HasDerivAt (fun t => U t (U s x)) ((U s) d) 0 := by
-    have h3 : (fun t => U t (U s x)) = fun t => U (t + s) x := by
+  have hfin : HasDerivAt (fun t => U t (U s (x : H))) ((U s) d) 0 := by
+    have h3 : (fun t => U t (U s (x : H))) = fun t => U (t + s) (x : H) := by
       funext t; rw [← ContinuousLinearMap.comp_apply, ← hgrp t s]
     rw [h3]
     simpa using HasDerivAt.scomp_of_eq (hg := hgs) (hh := (hasDerivAt_id 0).add_const s)
       (hy := (zero_add s).symm)
-  exact hfin.differentiableAt
+  rw [hd, map_smul] at hfin
+  exact hfin
+
+/-- **`U_s` maps `stoneDomain U` into itself** — the orbit `τ ↦ U_τ (U_s x)` is differentiable at `0`
+    (`hasDerivAt_stoneGen_flow`). The `U`-invariance of the smooth domain, a prerequisite for essential
+    self-adjointness (Phase 3.2). -/
+theorem stoneDomain_apply_mem (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (s : ℝ) (x : H) (hx : x ∈ stoneDomain U) : U s x ∈ stoneDomain U :=
+  (hasDerivAt_stoneGen_flow U hgrp s ⟨x, hx⟩).differentiableAt
 
 /-- The backward flow `t ↦ U_{−t} x` has derivative `−i · A x` at `0` (chain rule on `hasDerivAt_stoneGen`). -/
 theorem hasDerivAt_stoneGen_neg (U : ℝ → (H →L[ℂ] H)) (x : stoneDomain U) :
@@ -123,6 +131,17 @@ theorem stoneGen_eq_of_hasDerivAt (U : ℝ → (H →L[ℂ] H)) (x v : H) (hx : 
     stoneGen U ⟨x, hx⟩ = v := by
   have huniq := (hasDerivAt_stoneGen U ⟨x, hx⟩).unique h
   exact smul_right_injective H Complex.I_ne_zero huniq
+
+/-- **The generator commutes with the flow:** `A (U_s x) = U_s (A x)` on the smooth domain, i.e.
+    `[A, U_s] = 0`. Proof: the shifted orbit `t ↦ U_t (U_s x)` has derivative `i • U_s (A x)`
+    (`hasDerivAt_stoneGen_flow`), so by generator-identification `stoneGen U (U_s x) = U_s (A x)`. This
+    `U`-invariance of `A` is what makes the generator (hence the clock energy `X = A_edge`, Phase 4.3)
+    compatible with the modular flow it is read off from. -/
+theorem stoneGen_comm_flow (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (s : ℝ) (x : stoneDomain U) :
+    stoneGen U ⟨U s (x : H), stoneDomain_apply_mem U hgrp s x x.2⟩ = U s (stoneGen U x) :=
+  stoneGen_eq_of_hasDerivAt U (U s (x : H)) (U s (stoneGen U x)) _
+    (hasDerivAt_stoneGen_flow U hgrp s x)
 
 section Symmetry
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]

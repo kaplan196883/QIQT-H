@@ -197,7 +197,9 @@ frontiers (Stone, the trace). The `1/4` coefficient stays the cited UV datum thr
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/Stone.lean`; see `STONE_THEOREM_PLAN.md` Phase 3 for the full
 log):** the general-Stone build-up to essential self-adjointness, Mathlib-integrated —
 `stoneDomain` (smooth-domain submodule) · `stoneGen` (the generator `A = −i d/dt U_t|₀` as a `LinearPMap`) ·
-`hasDerivAt_stoneGen` / `_neg` (forward/backward derivative) · `stoneDomain_apply_mem` (flow-invariance) ·
+`hasDerivAt_stoneGen` / `_neg` (forward/backward derivative) · `stoneDomain_apply_mem` (flow-invariance) · `hasDerivAt_stoneGen_flow` + `stoneGen_comm_flow`
+(**`[A, U_s] = 0`** — the generator commutes with the flow: `A (U_s x) = U_s (A x)`, so `A_edge` is compatible
+with the modular flow it is read off from) ·
 `stoneGen_symmetric` (⟪Ax,y⟫=⟪x,Ay⟫ on the smooth domain) · `stoneGen_eq_of_hasDerivAt` (generator
 **identification** — `stoneGen` pinned by any witnessed derivative; the bridge to identify `stoneGen` of a
 concrete group with a known operator `P`/`K`/`X`) · `stoneGen_isFormalAdjoint_self`

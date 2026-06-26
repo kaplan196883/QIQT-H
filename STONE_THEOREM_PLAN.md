@@ -135,6 +135,13 @@ InnerProductSpace.LinearPMap`). This is the precise `A ⊆ A*` entry point — o
 `stoneGen U ⊆ (stoneGen U)†` (`IsFormalAdjoint.le_adjoint`), and self-adjointness is `Ā = Ā*`. The symmetric
 unbounded operator now lives in Mathlib's adjoint framework, ready for the e.s.a. criteria.
 
+Also ✅ `hasDerivAt_stoneGen_flow` + `stoneGen_comm_flow` — **the generator commutes with the flow**
+`[A, U_s] = 0`: `stoneGen U (U_s x) = U_s (stoneGen U x)` on the smooth domain. The shifted orbit
+`t ↦ U_t (U_s x)` has derivative `i • U_s (A x)` at `0` (factored out as `hasDerivAt_stoneGen_flow` — the key
+derivative computation, of which `stoneDomain_apply_mem` is now simply the `.differentiableAt`), so by
+generator-identification `A (U_s x) = U_s (A x)`. This `U`-invariance of `A` is what makes the generator —
+hence the clock energy `X = A_edge` (Phase 4.3) — compatible with the very modular flow it is read off from.
+
 Also ✅ `stoneGen_eq_of_hasDerivAt` — **generator identification** (the uniqueness half of Stone's
 correspondence): if `HasDerivAt (t ↦ U_t x) (i•v) 0` then `stoneGen U ⟨x,hx⟩ = v` (via `HasDerivAt.unique` +
 `smul_right_injective` on `i ≠ 0`). The generator is *pinned* by any witnessed derivative — the bridge from the
