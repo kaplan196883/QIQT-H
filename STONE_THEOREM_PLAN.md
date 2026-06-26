@@ -460,6 +460,10 @@ Also ✅ `cayley_cfc_inner_self_im_zero` `[Nontrivial H]` — **the expectation 
 `(⟪x, cfc f V x⟫).im = 0` for `f` real on `σ(V)` (from self-adjointness via `adjoint_inner_left` +
 `Complex.conj_eq_iff_im`). Hence `⟪x, cfc f V x⟫ = ↑(∫ f dμ_x)` — the real scalar diagonal the complex polarization
 `μ_{x,y}` extends to the off-diagonal toward the PVM.
+Also ✅ `cayley_norm_inner_cfc_le` `[Nontrivial H]` — **the spectral sesquilinear form is bounded**:
+`‖⟪x, cfc f V y⟫‖ ≤ c·‖x‖·‖y‖` when `‖f z‖ ≤ c` on `σ(V)` (Cauchy–Schwarz + `le_opNorm` + `cayley_norm_cfc_le`).
+This is the boundedness of `(x,y) ↦ ⟪x, cfc f V y⟫` that lets the form — extended to bounded-Borel `f` via `μ_{x,y}`
+— be **Riesz-represented by an operator** `f(V)`; for `f = 1_S` this is the projection `E(S)` of the PVM.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

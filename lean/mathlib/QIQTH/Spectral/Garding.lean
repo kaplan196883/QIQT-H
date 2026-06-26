@@ -1487,6 +1487,29 @@ theorem cayley_cfc_inner_self_im_zero [Nontrivial H] (U : ℝ → (H →L[ℂ] H
     rw [inner_conj_symm, ← ContinuousLinearMap.adjoint_inner_left, hadj]
   exact Complex.conj_eq_iff_im.mp key
 
+/-- **★★ The spectral sesquilinear form is bounded:** `‖⟪x, cfc f V y⟫‖ ≤ c · ‖x‖ · ‖y‖` whenever `‖f z‖ ≤ c` on
+    `σ(V)`. (Cauchy–Schwarz `‖⟪x, w⟫‖ ≤ ‖x‖‖w‖`, the operator-norm estimate `‖cfc f V y‖ ≤ ‖cfc f V‖‖y‖`, and the
+    sup-norm bound `cayley_norm_cfc_le`.) This is the **boundedness of the sesquilinear form** `(x,y) ↦ ⟪x, cfc f V y⟫`
+    — the analytic input that lets the form, extended to *bounded Borel* `f` (via `μ_{x,y}`), be **Riesz-represented
+    by an operator** `f(V)`; for `f = 1_S` this is the projection `E(S)` of the projection-valued measure. -/
+theorem cayley_norm_inner_cfc_le [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (f : ℂ → ℂ) {c : ℝ} (hc : 0 ≤ c)
+    (h : ∀ z ∈ spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ‖f z‖ ≤ c) (x y : H) :
+    ‖inner ℂ x (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) y)‖ ≤ c * ‖x‖ * ‖y‖ := by
+  calc ‖(inner ℂ x (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) y) : ℂ)‖
+      ≤ ‖x‖ * ‖cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) y‖ := norm_inner_le_norm x _
+    _ ≤ ‖x‖ * (c * ‖y‖) := by
+        refine mul_le_mul_of_nonneg_left ?_ (norm_nonneg x)
+        calc ‖cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) y‖
+            ≤ ‖cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)‖ * ‖y‖ :=
+              ContinuousLinearMap.le_opNorm _ y
+          _ ≤ c * ‖y‖ :=
+              mul_le_mul_of_nonneg_right (cayley_norm_cfc_le U hgrp hU0 hUinner hUbd hSC f hc h) (norm_nonneg y)
+    _ = c * ‖x‖ * ‖y‖ := by ring
+
 end SelfAdjoint
 
 end QIQTH.Spectral

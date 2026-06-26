@@ -330,6 +330,8 @@ Also ✅ `cayley_cfc_isSelfAdjoint` `[Nontrivial H]` (**cfc of a real function i
 of V → self-adjoint operators; makes `⟪x,cfc f V x⟫` real = ∫f dμ_x; bridge to polarization μ_{x,y}).
 Also ✅ `cayley_cfc_inner_self_im_zero` `[Nontrivial H]` (**expectation of a real observable is real** —
 `(⟪x,cfc f V x⟫).im = 0`; the real scalar diagonal `⟪x,cfc f V x⟫ = ↑(∫f dμ_x)`).
+Also ✅ `cayley_norm_inner_cfc_le` `[Nontrivial H]` (**spectral sesquilinear form bounded** —
+`‖⟪x,cfc f V y⟫‖ ≤ c·‖x‖·‖y‖`; the Riesz input for the Borel-FC operators f(V), E(S)=1_S(V)).
 **Next:** bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

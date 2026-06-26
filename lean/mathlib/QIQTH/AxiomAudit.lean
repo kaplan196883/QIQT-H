@@ -5096,6 +5096,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayley_norm_cfc_le
 #print axioms QIQTH.Spectral.cayley_cfc_isSelfAdjoint
 #print axioms QIQTH.Spectral.cayley_cfc_inner_self_im_zero
+#print axioms QIQTH.Spectral.cayley_norm_inner_cfc_le
+-- ★★ P4 WALL — SPECTRAL SESQUILINEAR FORM IS BOUNDED (Riesz input for the Borel-FC operators): cayley_norm_inner_
+-- cfc_le [Nontrivial H] — ‖⟪x, cfc f V y⟫‖ ≤ c·‖x‖·‖y‖ when ‖f z‖ ≤ c on σ(V) (Cauchy–Schwarz norm_inner_le_norm +
+-- ContinuousLinearMap.le_opNorm + cayley_norm_cfc_le). The boundedness of (x,y)↦⟪x,cfc f V y⟫ that lets the form
+-- (extended to bounded-Borel f via μ_{x,y}) be Riesz-represented by an operator f(V); for f=1_S this is E(S). Axiom-free.
 -- ★ P4 WALL — EXPECTATION OF A REAL OBSERVABLE IS REAL: cayley_cfc_inner_self_im_zero [Nontrivial H] —
 -- (⟪x, cfc f V x⟫).im = 0 for f real on σ(V), from cayley_cfc_isSelfAdjoint (cfc f V self-adjoint ⟹
 -- conj⟪x,cfc f V x⟫ = ⟪cfc f V x, x⟫ = ⟪x,cfc f V x⟫ via adjoint_inner_left; Complex.conj_eq_iff_im). So
