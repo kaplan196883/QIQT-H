@@ -5091,6 +5091,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyScalarMeasure
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_integral
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_isFiniteMeasure
+#print axioms QIQTH.Spectral.cayleyScalarMeasure_univ
+-- ★★ P4 WALL — TOTAL MASS μ_x(σV) = ‖x‖²: cayleyScalarMeasure_univ [Nontrivial H] —
+-- (cayleyScalarMeasure x Set.univ).toReal = ‖x‖^2. Integral identity at the const 1 (continuousMapEquiv on compact
+-- σV): (μ_x univ).toReal = ∫1 dμ_x = re⟪x, cfc 1 V x⟫ = re⟪x,x⟫ = ‖x‖² (cfc 1 V=1 via map_one cfcHom;
+-- inner_self_eq_norm_sq). So μ_x is the Born-like spectral distribution of the state x, total mass ‖x‖². Axiom-free.
 -- ★ P4 WALL — μ_x IS A FINITE MEASURE: cayleyScalarMeasure_isFiniteMeasure [Nontrivial H] —
 -- IsFiniteMeasure (cayleyScalarMeasure x) (RealRMK's CompactSpace instance, σ(V) compact). So μ_x is a genuine
 -- finite spectral distribution of the state x (total mass ‖x‖²), and ∫ g dμ_x is defined for every bounded Borel g

@@ -1382,6 +1382,41 @@ theorem cayleyScalarMeasure_isFiniteMeasure [Nontrivial H] (U : ℝ → (H →L[
     isCompact_iff_compactSpace.mp (spectrum.isCompact _)
   exact inferInstanceAs (IsFiniteMeasure (RealRMK.rieszMeasure (cfcPLMcc U hgrp hU0 hUinner hUbd hSC x)))
 
+/-- **★★ Total mass of the scalar spectral measure: `μ_x(σ(V)) = ‖x‖²`.** Apply the integral identity at the
+    constant function `1` (transported to `C_c` via `continuousMapEquiv` on the compact spectrum):
+    `(μ_x univ).toReal = ∫ 1 dμ_x = re⟪x, cfc 1 V x⟫ = re⟪x, x⟫ = ‖x‖²` (using `cfc 1 V = 1`, `inner_self_eq_norm_sq`).
+    So `μ_x` is the (Born-like) **spectral distribution of the state `x`**, of total mass `‖x‖²`. -/
+theorem cayleyScalarMeasure_univ [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x Set.univ).toReal = ‖x‖ ^ 2 := by
+  haveI : CompactSpace (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) :=
+    isCompact_iff_compactSpace.mp (spectrum.isCompact _)
+  have h := cayleyScalarMeasure_integral U hgrp hU0 hUinner hUbd hSC x
+    (continuousMapEquiv (1 : C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℝ)))
+  have hL : ∫ ω, (continuousMapEquiv (1 : C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℝ))) ω
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x)
+      = (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x Set.univ).toReal := by
+    have hint : (∫ ω, (continuousMapEquiv (1 : C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℝ))) ω
+          ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+        = ∫ _, (1 : ℝ) ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := rfl
+    rw [hint, integral_const]; simp [measureReal_def]
+  have hcomp : ContinuousLinearMap.compLeftContinuous ℝ
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) Complex.ofRealCLM
+      (continuousMapEquiv (1 : C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℝ))).toContinuousMap
+      = (1 : C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℂ)) := by
+    ext ω
+    show (Complex.ofRealCLM
+        ((continuousMapEquiv (1 : C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℝ))).toContinuousMap ω)
+      : ℂ) = (1 : C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℂ)) ω
+    simp
+  have hcfc : cfcL (cayley_isStarNormal U hgrp hU0 hUinner hUbd hSC)
+      (1 : C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℂ)) = 1 := by
+    rw [cfcL_apply]; exact map_one (cfcHom (cayley_isStarNormal U hgrp hU0 hUinner hUbd hSC))
+  rw [hL, hcomp, hcfc, ContinuousLinearMap.one_apply] at h
+  rw [h]; simpa using inner_self_eq_norm_sq (𝕜 := ℂ) x
+
 end SelfAdjoint
 
 end QIQTH.Spectral

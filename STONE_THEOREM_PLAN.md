@@ -440,6 +440,10 @@ Also ✅ `cayleyScalarMeasure_isFiniteMeasure` `[Nontrivial H]` — **`μ_x` is 
 `CompactSpace` instance): a genuine finite spectral distribution of the state `x` (total mass `‖x‖²`), so
 `∫ g dμ_x` is defined for every *bounded Borel* `g` — the extension beyond continuous functions underlying the
 Borel FC / the PVM `E(S) = ∫ 1_S dE`.
+Also ✅ `cayleyScalarMeasure_univ` `[Nontrivial H]` — **total mass `μ_x(σ(V)) = ‖x‖²`**:
+`(μ_x univ).toReal = ∫ 1 dμ_x = re⟪x, cfc 1 V x⟫ = re⟪x, x⟫ = ‖x‖²` (integral identity at the constant `1` via
+`continuousMapEquiv` on the compact spectrum; `cfc 1 V = 1` from `map_one cfcHom`; `inner_self_eq_norm_sq`). So
+`μ_x` is the **Born-like spectral distribution of the state `x`**, total mass `‖x‖²`.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`
