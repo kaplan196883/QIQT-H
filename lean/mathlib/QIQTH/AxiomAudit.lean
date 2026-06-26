@@ -5055,6 +5055,15 @@ namespace QIQTH.AxiomAudit
 -- (deficiency_add/sub_trivial). So ker(A†∓i)=0 in Mathlib's LinearPMap.adjoint API — the EXACT hypothesis the
 -- self-adjointness criterion (A⊆A† + ker(A†∓i)=0 ⟹ Ā=Ā†) consumes. Axiom-free. Remaining (Mathlib gap): the criterion
 -- itself (Cayley transform) + the unbounded spectral theorem ⟹ Stone.
+#print axioms QIQTH.Spectral.stoneGen_isSelfAdjoint
+-- ★★★ P4 WALL MILESTONE — THE STONE GENERATOR IS SELF-ADJOINT: stoneGen_isSelfAdjoint — IsSelfAdjoint (stoneGen U),
+-- i.e. (stoneGen U).adjoint = stoneGen U, for a contractive strongly-continuous one-parameter UNITARY group. The
+-- BASIC criterion for self-adjointness (symmetric A⊆A† + Range(A±i)=H ⟹ A=A†, NO Cayley transform needed): A⊆A†
+-- (stoneGen_subset_adjoint) + LinearPMap.eq_of_le_of_domain_eq, with the domain equality from surjectivity
+-- (stoneGen_add_I_surjective) + ker(A†+i)=0 (ker_adjoint_add_I_trivial): for y∈dom(A†), ∃z∈dom(A) with (A+i)z=(A†+i)y,
+-- then A†(y−z)=−i(y−z) ⟹ y=z∈dom(A). The generator of a unitary group is a GENUINE SELF-ADJOINT UNBOUNDED OPERATOR
+-- — the spectral theorem's hypothesis, machine-checked. Axiom-free. Remaining (Mathlib gap): unbounded spectral
+-- theorem (PVM via the now-self-adjoint A) ⟹ Stone U_t = exp(it A); applies to X=A_edge, P, K.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via

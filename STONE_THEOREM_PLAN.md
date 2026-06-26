@@ -323,6 +323,17 @@ Also ✅ `ker_adjoint_sub_I_trivial` / `ker_adjoint_add_I_trivial` — **`A†` 
 `LinearPMap.adjoint` API: if `(stoneGen U).adjoint ⟨w,hw⟩ = ±i w` then `w = 0` (via the formal-adjoint relation
 `⟪A z, w⟫ = ⟪z, A† w⟫` from `adjoint_isFormalAdjoint.symm`, reducing to the deficiency lemmas). This is the *exact
 hypothesis* the self-adjointness criterion `A ⊆ A† + ker(A† ∓ i) = 0 ⟹ Ā = Ā†` consumes — now in adjoint form.
+
+**★★★ MILESTONE — THE STONE GENERATOR IS SELF-ADJOINT.** `stoneGen_isSelfAdjoint` —
+`IsSelfAdjoint (stoneGen U)`, i.e. `(stoneGen U).adjoint = stoneGen U`, for a contractive strongly-continuous
+one-parameter unitary group. The **basic criterion for self-adjointness** (symmetric `A ⊆ A†` with
+`Range(A ± i) = H` ⟹ `A = A†`, *no Cayley transform needed*): `A ⊆ A†` + `LinearPMap.eq_of_le_of_domain_eq`,
+with the domain equality `dom(A) = dom(A†)` from surjectivity (`stoneGen_add_I_surjective`) + `ker(A† + i) = 0`
+(`ker_adjoint_add_I_trivial`): for `y ∈ dom(A†)`, `∃ z ∈ dom(A)` with `(A + i)z = (A† + i)y`, then
+`A†(y − z) = −i(y − z)` ⟹ `y = z ∈ dom(A)`. **The generator of a unitary group is a genuine self-adjoint
+unbounded operator** — the spectral theorem's hypothesis, machine-checked axiom-free. Applies to `X = A_edge`,
+`P`, `K`. **Remaining (Mathlib gap):** the unbounded spectral theorem (PVM `∫ λ dE` for the now-self-adjoint
+`A`) ⟹ Stone `U_t = exp(it A)` — Mathlib has no unbounded spectral theorem.
 **Remaining (the genuine Mathlib-grade operator-theory frontier):** differentiate the RHS in `s` at `0` (after
 the change of variables `u = s+t` ⟹ `e^s ∫_s^∞ e^{−u} U_u x du`, whose `d/ds|₀ = R x − x` by the **FTC for the
 improper integral with variable lower limit**) ⟹ `R x ∈ stoneDomain U` + the resolvent identity

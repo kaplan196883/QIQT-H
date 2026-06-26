@@ -719,6 +719,37 @@ theorem ker_adjoint_add_I_trivial (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t,
   rw [inner_sub_left, hfa, inner_smul_right, inner_smul_left, Complex.conj_I]
   ring
 
+/-- **★★★ The Stone generator is self-adjoint: `A† = A`, `IsSelfAdjoint (stoneGen U)`.** The *basic criterion
+    for self-adjointness*: a symmetric operator `A ⊆ A†` with `Range(A ± i) = H` is self-adjoint — no Cayley
+    transform needed. Given `A ⊆ A†` (`stoneGen_subset_adjoint`), it remains to show `A† ⊆ A`: for
+    `y ∈ dom(A†)`, surjectivity gives `z ∈ dom(A)` with `(A + i)z = (A† + i)y`; then `A†(y − z) = −i(y − z)`,
+    so `y − z = 0` by `ker_adjoint_add_I_trivial`, hence `y = z ∈ dom(A)`. Thus `A = A†`. **This is the spectral
+    theorem's hypothesis for `A = stoneGen U` (`X = A_edge`, `P`, `K`): the generator of a contractive
+    strongly-continuous unitary group is a genuine self-adjoint unbounded operator.** -/
+theorem stoneGen_isSelfAdjoint (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    IsSelfAdjoint (stoneGen U) := by
+  have hsub : stoneGen U ≤ (stoneGen U).adjoint := stoneGen_subset_adjoint U hgrp hU0 hUinner hUbd hSC
+  rw [LinearPMap.isSelfAdjoint_def]
+  refine (LinearPMap.eq_of_le_of_domain_eq hsub (le_antisymm hsub.1 fun y hy => ?_)).symm
+  obtain ⟨z, hz⟩ := stoneGen_add_I_surjective U hgrp hU0 hUbd hSC
+    ((stoneGen U).adjoint ⟨y, hy⟩ + Complex.I • y)
+  have hzadj : (z : H) ∈ (stoneGen U).adjoint.domain := hsub.1 z.2
+  have hsubmem : y - (z : H) ∈ (stoneGen U).adjoint.domain := Submodule.sub_mem _ hy hzadj
+  have hAz : (stoneGen U).adjoint ⟨(z : H), hzadj⟩ = stoneGen U z :=
+    (hsub.2 (x := z) (y := ⟨(z : H), hzadj⟩) rfl).symm
+  have heig : (stoneGen U).adjoint ⟨y - (z : H), hsubmem⟩ = -Complex.I • (y - (z : H)) := by
+    have hpair : (⟨y - (z : H), hsubmem⟩ : (stoneGen U).adjoint.domain)
+        = ⟨y, hy⟩ - ⟨(z : H), hzadj⟩ := rfl
+    rw [hpair, LinearPMap.map_sub, hAz]
+    have hzval : stoneGen U z
+        = (stoneGen U).adjoint ⟨y, hy⟩ + Complex.I • y - Complex.I • (z : H) := by rw [← hz]; abel
+    rw [hzval]; module
+  have hzero : y - (z : H) = 0 :=
+    ker_adjoint_add_I_trivial U hgrp hU0 hUbd hSC (y - (z : H)) hsubmem heig
+  rw [sub_eq_zero.mp hzero]; exact z.2
+
 end SelfAdjoint
 
 end QIQTH.Spectral

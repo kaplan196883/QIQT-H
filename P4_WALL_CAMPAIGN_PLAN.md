@@ -252,7 +252,10 @@ deficiency-index-zero fact making the generator essentially self-adjoint is now 
 the e.s.a. criterion is met. Also ✅ `deficiency_add_trivial`/`deficiency_sub_trivial` (**the deficiency subspaces
 are trivial**, `ker(A†∓i)=Range(A±i)^⊥=0` in canonical inner-product form, via `inner_self_eq_zero`) +
 `ker_adjoint_sub_I_trivial`/`ker_adjoint_add_I_trivial` (**`A†` has no `±i`-eigenvectors** in Mathlib's adjoint API,
-via `adjoint_isFormalAdjoint.symm`). **Remaining (Mathlib gap):** the criterion `A⊆A† + ker(A†∓i)=0` ⟹
+via `adjoint_isFormalAdjoint.symm`). **★★★ MILESTONE — the generator is SELF-ADJOINT:** `stoneGen_isSelfAdjoint` —
+`IsSelfAdjoint (stoneGen U)` (`A† = A`), via the *basic criterion* (`A⊆A†` + `Range(A±i)=H` ⟹ `A=A†`,
+`eq_of_le_of_domain_eq`, no Cayley needed). `X=A_edge`, `P`, `K` are genuine self-adjoint unbounded operators.
+**Remaining (Mathlib gap):** the unbounded spectral theorem (PVM for self-adjoint `A`) ⟹
 `Ā = Ā†` (e.s.a.) ⟹ Cayley/unbounded spectral theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has none of these; Cayley
 injectivity in Stone.lean.
 
