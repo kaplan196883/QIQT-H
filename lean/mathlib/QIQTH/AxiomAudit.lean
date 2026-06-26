@@ -5075,6 +5075,13 @@ namespace QIQTH.AxiomAudit
 -- three are GENUINE SELF-ADJOINT UNBOUNDED OPERATORS. Axiom-free. Remaining (Mathlib gap): unbounded spectral theorem.
 #print axioms QIQTH.Spectral.cayley_isStarNormal
 #print axioms QIQTH.Spectral.nonneg_re_inner_nonneg
+#print axioms QIQTH.Spectral.cayley_cfc_id
+-- ★★ P4 WALL — cfc id V = V (the "V = ∫ z dE" continuous-FC shadow): cayley_cfc_id [Nontrivial H] —
+-- cfc (id : ℂ→ℂ) (cayleyUnitary U ⋯) = cayleyUnitary U ⋯ (cfc_id ℂ _ cayley_isStarNormal). The coordinate function
+-- z↦z applied to V through its continuous spectral data returns V — the C(σV)-level form of V = ∫_{S¹} z dE(z),
+-- and the base case the scalar-measure construction integrates against. Resolves last fire's obstruction: the
+-- ℂ-normal CFC local-instance theorem IS enableable via `attribute [local instance]` + importing CStarAlgebra.
+-- ContinuousLinearMap (CStarAlgebra (H→L[ℂ]H)) + CFC.Basic + threading [Nontrivial H]. Axiom-free.
 -- ★ P4 WALL — CFC PREDICATE + FUNCTIONAL POSITIVITY (RMK-input infrastructure): cayley_isStarNormal — IsStarNormal
 -- (cayleyUnitary U ⋯) (isStarNormal_of_mem_unitary ∘ cayley_mem_unitary), the predicate the ℂ continuous functional
 -- calculus requires. nonneg_re_inner_nonneg — 0 ≤ T (C*-order on H→L[ℂ]H) ⟹ 0 ≤ re⟪x,Tx⟫

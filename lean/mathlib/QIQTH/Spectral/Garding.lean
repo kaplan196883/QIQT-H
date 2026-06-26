@@ -34,6 +34,8 @@ import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 import Mathlib.Analysis.InnerProductSpace.Adjoint
 import Mathlib.Analysis.CStarAlgebra.Spectrum
 import Mathlib.Analysis.InnerProductSpace.Positive
+import Mathlib.Analysis.CStarAlgebra.ContinuousLinearMap
+import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Basic
 
 namespace QIQTH.Spectral
 
@@ -1062,6 +1064,26 @@ theorem cayley_isStarNormal (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s 
 theorem nonneg_re_inner_nonneg {T : H →L[ℂ] H} (hT : 0 ≤ T) (x : H) :
     0 ≤ (inner ℂ x (T x) : ℂ).re :=
   ((ContinuousLinearMap.nonneg_iff_isPositive T).mp hT).re_inner_nonneg_right x
+
+-- The ℂ-normal continuous functional calculus is a *local-instance theorem* in Mathlib
+-- (`IsStarNormal.instContinuousFunctionalCalculus`, needs a nonempty spectrum, hence `Nontrivial`); enable it
+-- here so `cfc` applies to the Cayley unitary `V` (the named generators `X=A_edge`, `P`, `K` live on nontrivial
+-- spaces, so `[Nontrivial H]` is harmless).
+attribute [local instance] IsStarNormal.instContinuousFunctionalCalculus
+
+/-- **★★ The continuous functional calculus recovers `V` from the coordinate function:** `cfc id V = V`. This is
+    the `C(σ(V))`-level form of the spectral statement `V = ∫_{S¹} z dE(z)` — the coordinate function `z ↦ z`,
+    applied to `V` through its (continuous) spectral data, returns `V` itself. Once the bounded-PVM `E` on `S¹`
+    exists (the genuine Mathlib gap), this *becomes* `V = ∫ z dE`; here it is the continuous-FC shadow of that
+    identity, and the base case of the functional calculus `cfc f V` (with `cfc_map_id`) the scalar-measure
+    construction integrates against. (`[Nontrivial H]`: the ℂ-normal CFC needs a nonempty spectrum; `X=A_edge`,
+    `P`, `K` all live on nontrivial Hilbert spaces.) -/
+theorem cayley_cfc_id [Nontrivial H] (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    cfc (id : ℂ → ℂ) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+      = cayleyUnitary U hgrp hU0 hUinner hUbd hSC :=
+  cfc_id ℂ _ (cayley_isStarNormal U hgrp hU0 hUinner hUbd hSC)
 
 end SelfAdjoint
 

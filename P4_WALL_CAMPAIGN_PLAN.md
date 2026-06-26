@@ -282,8 +282,10 @@ Also ✅ `cayley_spectrum_isCompact` (**`σ(V)` compact** — with circle contai
 Riesz–Markov precondition, `C(σV)=C_c(σV)`, for building the scalar spectral measures `μ_x` via `RealRMK.rieszMeasure`).
 Also ✅ `cayley_isStarNormal` (**`IsStarNormal V`** — the ℂ-CFC predicate) + `nonneg_re_inner_nonneg`
 (**`0≤T ⟹ 0≤re⟪x,Tx⟫`** — the functional-positivity step: `cfc f V ≥ 0` ⟹ `f↦re⟪x,cfc f V x⟫` positive ⟹ RMK→μ_x).
-*Honest obstruction:* the ℂ-normal CFC is a non-`public` *local-instance theorem* in Mathlib needing `[Nontrivial A]`;
-the cfc-of-`V` route must thread `[Nontrivial H]` / specialize to the concrete generators.
+Also ✅ `cayley_cfc_id` `[Nontrivial H]` (**`cfc id V = V`** — the `C(σV)`-level form of `V=∫_{S¹}z dE(z)`; the
+coordinate function applied to `V` returns `V`, the continuous-FC shadow of the PVM identity).
+*Obstruction RESOLVED:* the ℂ-normal CFC local-instance theorem IS enableable via `attribute [local instance]` +
+`CStarAlgebra.ContinuousLinearMap` + `CFC.Basic` imports + `[Nontrivial H]`; the cfc-of-`V` route is open.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
 `E` (`V=∫z dE`) → transport via inverse Cayley to `A=∫λ dE` ⟹ Stone. The bounded-PVM remains the genuine gap.
 **Remaining (Mathlib gap):** the **Borel/PVM** functional calculus on `S¹` for `V` (Mathlib has *continuous* FC

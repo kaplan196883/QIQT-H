@@ -377,10 +377,15 @@ predicate the ℂ continuous functional calculus requires — and `nonneg_re_inn
 (`ContinuousLinearMap.nonneg_iff_isPositive` + `IsPositive.re_inner_nonneg_right`), the **functional-positivity
 step**: once `cfc` gives `0 ≤ cfc f V` for `f ≥ 0` on `σ(V)`, `f ↦ re⟪x, cfc f V x⟫` is a positive functional that
 `RealRMK.rieszMeasure` turns into `μ_x`.
-**Honest obstruction discovered this fire:** the ℂ-normal CFC is a *local-instance theorem* in Mathlib
-(`IsStarNormal.instContinuousFunctionalCalculus`, non-`public`) needing `[Nontrivial A]` (nonempty spectrum). So
-the cfc-of-`V` route over abstract `H` must thread `[Nontrivial H]` or specialize to the concrete generators
-(`X=A_edge`, `P`, `K` — all on nontrivial spaces). The `cfc id V = V` ("`V = ∫ z dE`" shadow) is deferred to that.
+Also ✅ `cayley_cfc_id` `[Nontrivial H]` — **`cfc id V = V`**, the `C(σ(V))`-level form of `V = ∫_{S¹} z dE(z)`:
+the coordinate function `z ↦ z`, applied to `V` through its continuous spectral data, returns `V` itself. Once the
+bounded-PVM `E` exists this *becomes* the PVM identity; here it is its continuous-FC shadow and the base case the
+scalar-measure construction integrates against.
+**Obstruction (raised last fire) now RESOLVED:** the ℂ-normal CFC is a *local-instance theorem*
+(`IsStarNormal.instContinuousFunctionalCalculus`) needing `[Nontrivial A]`, but it IS enableable —
+`attribute [local instance]` + importing `CStarAlgebra.ContinuousLinearMap` (the `CStarAlgebra (H→L[ℂ]H)` instance)
+and `CFC.Basic` + threading `[Nontrivial H]` (the named generators `X=A_edge`, `P`, `K` are all on nontrivial
+spaces). So the cfc-of-`V` route is open; the scalar measures `μ_x` can now be built.
 **Next multi-fire sub-construction (the operator → PVM keystone, RMK + cfc supported):** the scalar spectral
 measures `μ_x` of `V` (positive functional `f ↦ re⟨x, cfc f V x⟩` → `RealRMK.rieszMeasure`), then their assembly
 into a circle-PVM `E` with `V = ∫ z dE`, then transport through inverse Cayley to `A = ∫ λ dE` ⟹ Stone.
