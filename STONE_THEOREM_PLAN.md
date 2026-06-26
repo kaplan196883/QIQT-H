@@ -302,7 +302,10 @@ R x − x` (product rule `(Real.hasDerivAt_exp 0).smul` on `e^s G(s)` + the FTC 
 — **`R x ∈ stoneDomain U`** (the resolvent maps `H` *into* the generator's domain); `resolvent_stoneGen` —
 **`stoneGen U (R x) = −i(R x − x)`** (generator identification), i.e. `(A + i)(R x) = i x`, so
 `Range(A + i) ⊇ {i x : x} = H`. **The deficiency-index-zero fact that makes the generator essentially self-adjoint
-is now machine-checked.**
+is now machine-checked.** Also ✅ `stoneGen_add_I_surjective` — **`A + i` is surjective, `Range(A + i) = H`**:
+`∀ y, ∃ z ∈ stoneDomain U, A z + i z = y` (witness `z := R(−i y)`, since `(A+i)(R(−i y)) = i(−i y) = y`). So the
+deficiency subspace `Range(A+i)^⊥ = ker(A† − i) = 0` — the essential-self-adjointness criterion (with the `A − i`
+mirror).
 **Remaining (the genuine Mathlib-grade operator-theory frontier):** differentiate the RHS in `s` at `0` (after
 the change of variables `u = s+t` ⟹ `e^s ∫_s^∞ e^{−u} U_u x du`, whose `d/ds|₀ = R x − x` by the **FTC for the
 improper integral with variable lower limit**) ⟹ `R x ∈ stoneDomain U` + the resolvent identity

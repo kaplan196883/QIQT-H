@@ -560,6 +560,27 @@ theorem resolvent_stoneGen (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s +
   convert resolvent_orbit_hasDerivAt U hgrp hU0 x hUbd hcont using 1
   rw [smul_smul, show Complex.I * -Complex.I = 1 by rw [mul_neg, Complex.I_mul_I, neg_neg], one_smul]
 
+/-- **★★ `A + i` is surjective: `Range(A + i) = H`.** For any `y`, the vector `z := R(−i y)` lies in the smooth
+    domain (`resolvent_mem_stoneDomain`) and `(A + i) z = A z + i z = −i(z − (−i y)) + i z = i(−i y) = y`
+    (`resolvent_stoneGen`). So the deficiency subspace `Range(A + i)^⊥ = ker(A† − i) = 0` — the
+    essential-self-adjointness criterion (with the `A − i` mirror) for the Stone generator. -/
+theorem stoneGen_add_I_surjective (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖)
+    (hSC : ∀ y : H, Continuous (fun t => U t y)) (y : H) :
+    ∃ z : stoneDomain U, stoneGen U z + Complex.I • (z : H) = y := by
+  have hmem := resolvent_mem_stoneDomain U hgrp hU0 (-Complex.I • y)
+    (fun t => hUbd t (-Complex.I • y)) (hSC (-Complex.I • y))
+  refine ⟨⟨resolvent U (-Complex.I • y), hmem⟩, ?_⟩
+  have hgen : stoneGen U (⟨resolvent U (-Complex.I • y), hmem⟩ : stoneDomain U)
+      = -Complex.I • (resolvent U (-Complex.I • y) - (-Complex.I • y)) :=
+    resolvent_stoneGen U hgrp hU0 (-Complex.I • y)
+      (fun t => hUbd t (-Complex.I • y)) (hSC (-Complex.I • y))
+  rw [hgen]
+  show -Complex.I • (resolvent U (-Complex.I • y) - (-Complex.I • y))
+    + Complex.I • resolvent U (-Complex.I • y) = y
+  rw [smul_sub, smul_smul, neg_mul_neg, Complex.I_mul_I, neg_one_smul, sub_neg_eq_add, neg_smul]
+  abel
+
 section SelfAdjoint
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 

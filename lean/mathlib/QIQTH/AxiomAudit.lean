@@ -5028,6 +5028,11 @@ namespace QIQTH.AxiomAudit
 -- + U_0=1). resolvent_mem_stoneDomain — R x ∈ stoneDomain U (orbit differentiable ⟹ the resolvent maps H INTO the
 -- generator's domain). resolvent_stoneGen — stoneGen U (R x) = −i(R x − x) (generator identification), i.e.
 -- (A+i)(R x)=i x ⟹ Range(A+i) ⊇ {i x}=H. The deficiency-index-zero fact that makes A essentially self-adjoint. Axiom-free.
+#print axioms QIQTH.Spectral.stoneGen_add_I_surjective
+-- ★★ P4 WALL — A+i IS SURJECTIVE (Range(A+i)=H): stoneGen_add_I_surjective — ∀ y, ∃ z ∈ stoneDomain, A z + i z = y,
+-- witnessed by z := R(−i y): (A+i)(R(−i y)) = i(−i y) = y (resolvent_stoneGen + the i·(−i)=1 algebra). So the
+-- deficiency subspace Range(A+i)^⊥ = ker(A†−i) = 0 — the essential-self-adjointness criterion (with the A−i mirror)
+-- for the Stone generator. Axiom-free.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via
