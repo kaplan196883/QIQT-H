@@ -5073,6 +5073,13 @@ namespace QIQTH.AxiomAudit
 -- K = stoneGen (modUnitary S) = the JLMS modular Hamiltonian (abstract one-particle space). Each instantiates
 -- stoneGen_isSelfAdjoint with the group's (∘L group law, U_0=1, unitarity, isometry/norm, strong continuity). All
 -- three are GENUINE SELF-ADJOINT UNBOUNDED OPERATORS. Axiom-free. Remaining (Mathlib gap): unbounded spectral theorem.
+#print axioms QIQTH.Spectral.stoneGen_add_I_bijective
+-- ★★ P4 WALL — A+i IS A BIJECTION dom(A)→H (the Cayley-transform foundation): stoneGen_add_I_bijective —
+-- Function.Bijective (fun z : stoneDomain U => stoneGen U z + i•(z:H)). Injective from the bounded-below estimate
+-- ‖x‖≤‖(A+i)x‖ (stoneGen_norm_le_norm_add_smul_I + LinearPMap.map_sub), surjective from stoneGen_add_I_surjective.
+-- So (A+i)⁻¹ : H→dom(A) exists — the building block of the Cayley transform V=(A−i)(A+i)⁻¹ (a unitary, by the
+-- Cayley isometry ‖(A−i)x‖=‖(A+i)x‖), whose bounded spectral measure transports to the unbounded spectral theorem
+-- for A ⟹ Stone. Axiom-free. Remaining (Mathlib gap): the Cayley operator + bounded-PVM transport + Stone exp.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via

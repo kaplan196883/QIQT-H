@@ -750,6 +750,31 @@ theorem stoneGen_isSelfAdjoint (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U 
     ker_adjoint_add_I_trivial U hgrp hU0 hUbd hSC (y - (z : H)) hsubmem heig
   rw [sub_eq_zero.mp hzero]; exact z.2
 
+/-- **★★ `A + i` is a bijection `dom(A) → H`** (the Cayley-transform foundation). Injective from the
+    bounded-below estimate `‖x‖ ≤ ‖(A + i)x‖` (`stoneGen_norm_le_norm_add_smul_I`), surjective from
+    `stoneGen_add_I_surjective`. So `(A + i)⁻¹ : H → dom(A)` exists, the building block of the Cayley transform
+    `V = (A − i)(A + i)⁻¹` (a unitary, by the Cayley isometry `‖(A−i)x‖=‖(A+i)x‖`), whose bounded spectral
+    measure transports to the unbounded spectral theorem for `A` ⟹ Stone. -/
+theorem stoneGen_add_I_bijective (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    Function.Bijective (fun z : stoneDomain U => stoneGen U z + Complex.I • (z : H)) := by
+  refine ⟨fun z1 z2 h => ?_, fun y => stoneGen_add_I_surjective U hgrp hU0 hUbd hSC y⟩
+  have hb := stoneGen_norm_le_norm_add_smul_I U hgrp hU0 hUinner (z1 - z2)
+  have hz : stoneGen U (z1 - z2) + Complex.I • ((z1 - z2 : stoneDomain U) : H) = 0 := by
+    have e1 : stoneGen U (z1 - z2) = stoneGen U z1 - stoneGen U z2 :=
+      LinearPMap.map_sub (stoneGen U) z1 z2
+    have e2 : ((z1 - z2 : stoneDomain U) : H) = (z1 : H) - (z2 : H) := rfl
+    rw [e1, e2, smul_sub]
+    have hrw : stoneGen U z1 - stoneGen U z2 + (Complex.I • (z1 : H) - Complex.I • (z2 : H))
+        = (stoneGen U z1 + Complex.I • (z1 : H)) - (stoneGen U z2 + Complex.I • (z2 : H)) := by abel
+    rw [hrw, show stoneGen U z1 + Complex.I • (z1 : H)
+      = stoneGen U z2 + Complex.I • (z2 : H) from h, sub_self]
+  rw [hz, norm_zero] at hb
+  have hzz : ((z1 - z2 : stoneDomain U) : H) = 0 := norm_le_zero_iff.mp hb
+  rw [Submodule.coe_sub, sub_eq_zero] at hzz
+  exact Subtype.ext hzz
+
 end SelfAdjoint
 
 end QIQTH.Spectral

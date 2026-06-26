@@ -258,7 +258,9 @@ via `adjoint_isFormalAdjoint.symm`). **★★★ MILESTONE — the generator is 
 generators:** `clockEnergy_isSelfAdjoint` (`X = A_edge = stoneGen clockTransl`), `momentumOp_isSelfAdjoint`
 (`P = stoneGen translationCLM = −i d/dx`), `modularGen_isSelfAdjoint` (`K = stoneGen (modUnitary S)`, the JLMS
 modular Hamiltonian) — each `IsSelfAdjoint`, axiom-free.
-**Remaining (Mathlib gap):** the unbounded spectral theorem (PVM for self-adjoint `A`) ⟹
+Also ✅ `stoneGen_add_I_bijective` (**`A+i` is a bijection `dom(A)→H`** — injective + surjective — so `(A+i)⁻¹`
+exists, the Cayley-transform foundation). **Remaining (Mathlib gap):** the Cayley transform `V=(A−i)(A+i)⁻¹`
+(bounded unitary) → bounded-PVM → the unbounded spectral theorem (PVM for self-adjoint `A`) ⟹
 `Ā = Ā†` (e.s.a.) ⟹ Cayley/unbounded spectral theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has none of these; Cayley
 injectivity in Stone.lean.
 

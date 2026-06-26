@@ -334,8 +334,13 @@ with the domain equality `dom(A) = dom(A†)` from surjectivity (`stoneGen_add_I
 unbounded operator** — the spectral theorem's hypothesis, machine-checked axiom-free. **Instantiated for all three named generators** (axiom-free): `clockEnergy_isSelfAdjoint`
 (`X = A_edge = stoneGen clockTransl`, Lp), `momentumOp_isSelfAdjoint` (`P = stoneGen translationCLM`, L²(ℝ)),
 `modularGen_isSelfAdjoint` (`K = stoneGen (modUnitary S)`, the JLMS modular Hamiltonian, abstract space).
-**Remaining (Mathlib gap):** the unbounded spectral theorem (PVM `∫ λ dE` for the now-self-adjoint
-`A`) ⟹ Stone `U_t = exp(it A)` — Mathlib has no unbounded spectral theorem.
+Also ✅ `stoneGen_add_I_bijective` — **`A + i` is a bijection `dom(A) → H`** (the Cayley-transform foundation):
+injective from the bounded-below estimate `‖x‖ ≤ ‖(A + i)x‖`, surjective from `stoneGen_add_I_surjective`. So
+`(A + i)⁻¹ : H → dom(A)` exists.
+**Remaining (Mathlib gap):** build the Cayley transform `V = (A − i)(A + i)⁻¹` (a bounded unitary, by the Cayley
+isometry `‖(A−i)x‖=‖(A+i)x‖`) → its bounded spectral measure → transport to the unbounded spectral theorem
+(PVM `∫ λ dE` for the now-self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`. Mathlib has neither the Cayley operator,
+the bounded-PVM spectral theorem, nor the unbounded spectral theorem.
 **Remaining (the genuine Mathlib-grade operator-theory frontier):** differentiate the RHS in `s` at `0` (after
 the change of variables `u = s+t` ⟹ `e^s ∫_s^∞ e^{−u} U_u x du`, whose `d/ds|₀ = R x − x` by the **FTC for the
 improper integral with variable lower limit**) ⟹ `R x ∈ stoneDomain U` + the resolvent identity
