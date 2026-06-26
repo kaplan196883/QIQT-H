@@ -354,8 +354,12 @@ Also ✅ `cayley_mem_unitary` + `cayleyUnitaryElt` — **`V` is a unitary elemen
 (`star V * V = V * star V = 1`, via `LinearIsometryEquiv.star_eq_symm`), bundled as `cayleyUnitaryElt :
 unitary (H →L[ℂ] H)`. This is the **doorway to Mathlib's continuous functional calculus**: `V` is unitary/normal,
 so `cfc f V` exists for continuous `f` and `spectrum ℂ V ⊆ circle`.
-**Remaining (Mathlib gap):** the **Borel/PVM** functional calculus (`∫ z dE` for the unitary `V` — Mathlib has the
-*continuous* FC but not the projection-valued-measure form) → transport to the unbounded spectral theorem
+Also ✅ `cayley_spectrum_subset_circle` — **`spectrum ℂ V ⊆ Metric.sphere 0 1`** (from
+`spectrum.subset_circle_of_unitary` + `cayley_mem_unitary`): the geometric foundation of `V`'s spectral theorem —
+the circle-PVM is supported on `S¹`, and the inverse Cayley map `z ↦ i(1+z)(1−z)⁻¹` pulls `S¹∖{1}` back to the real
+spectrum of `A = stoneGen U`.
+**Remaining (Mathlib gap):** the **Borel/PVM** functional calculus on `S¹` (`∫ z dE` for the unitary `V` — Mathlib
+has the *continuous* FC but not the projection-valued-measure form) → transport to the unbounded spectral theorem
 (PVM `∫ λ dE` for the now-self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`.
 **Remaining (the genuine Mathlib-grade operator-theory frontier):** differentiate the RHS in `s` at `0` (after
 the change of variables `u = s+t` ⟹ `e^s ∫_s^∞ e^{−u} U_u x du`, whose `d/ds|₀ = R x − x` by the **FTC for the

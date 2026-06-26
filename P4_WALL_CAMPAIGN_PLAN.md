@@ -270,8 +270,10 @@ as a genuine **unitary operator**: `(A+i)⁻¹` ℂ-linear ⟹ `V` ℂ-linear �
 `cayleyUnitary = LinearEquiv.ofBijective cayleyLM cayley_bijective` + `norm_map' := norm_cayley`).
 Also ✅ `cayley_mem_unitary` + `cayleyUnitaryElt` (**`V` is a C\*-algebra unitary element** `∈ unitary (H →L[ℂ] H)`,
 `star V * V = V * star V = 1` — the **CFC doorway**: `cfc f V` exists, `spectrum ℂ V ⊆ circle`).
-**Remaining (Mathlib gap):** the **Borel/PVM** functional calculus for `V` (Mathlib has *continuous* FC only) →
-transport to the unbounded spectral theorem (PVM for self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`.
+Also ✅ `cayley_spectrum_subset_circle` (**`spectrum ℂ V ⊆ Metric.sphere 0 1`** — the circle-PVM's support; the
+inverse Cayley map `z↦i(1+z)(1−z)⁻¹` pulls `S¹∖{1}` to the real spectrum of `A`).
+**Remaining (Mathlib gap):** the **Borel/PVM** functional calculus on `S¹` for `V` (Mathlib has *continuous* FC
+only) → transport to the unbounded spectral theorem (PVM for self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`.
 
 ### Phase 4 (operators) — the modular Hamiltonian `K` as a symmetric operator ✅ (3rd & LAST C₀ group; trio complete)
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/ModularGenerator.lean`):** the Stone-instantiation pattern

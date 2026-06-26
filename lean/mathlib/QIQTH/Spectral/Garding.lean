@@ -32,6 +32,7 @@ import Mathlib.MeasureTheory.Integral.ExpDecay
 import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 import Mathlib.Analysis.InnerProductSpace.Adjoint
+import Mathlib.Analysis.CStarAlgebra.Spectrum
 
 namespace QIQTH.Spectral
 
@@ -958,6 +959,17 @@ noncomputable def cayleyUnitaryElt (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t
     (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
     unitary (H →L[ℂ] H) :=
   ⟨cayleyUnitary U hgrp hU0 hUinner hUbd hSC, cayley_mem_unitary U hgrp hU0 hUinner hUbd hSC⟩
+
+/-- **★★ The spectrum of the Cayley unitary lies on the unit circle:** `spectrum ℂ V ⊆ sphere 0 1`. This is the
+    geometric foundation of the spectral theorem for `V = (A − i)(A + i)⁻¹`: its (eventual) spectral measure — the
+    circle-PVM — is supported on `S¹`, and the inverse Cayley map `z ↦ i(1 + z)(1 − z)⁻¹` pulls that circle (minus
+    the excluded point `1`, the image of `∞`) back to the real spectrum of the self-adjoint generator
+    `A = stoneGen U`. Free from `spectrum.subset_circle_of_unitary` applied to `cayley_mem_unitary`. -/
+theorem cayley_spectrum_subset_circle (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) ⊆ Metric.sphere (0 : ℂ) 1 :=
+  spectrum.subset_circle_of_unitary (cayley_mem_unitary U hgrp hU0 hUinner hUbd hSC)
 
 end SelfAdjoint
 

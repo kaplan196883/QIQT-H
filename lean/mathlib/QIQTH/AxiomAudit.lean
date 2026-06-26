@@ -5073,6 +5073,12 @@ namespace QIQTH.AxiomAudit
 -- K = stoneGen (modUnitary S) = the JLMS modular Hamiltonian (abstract one-particle space). Each instantiates
 -- stoneGen_isSelfAdjoint with the group's (∘L group law, U_0=1, unitarity, isometry/norm, strong continuity). All
 -- three are GENUINE SELF-ADJOINT UNBOUNDED OPERATORS. Axiom-free. Remaining (Mathlib gap): unbounded spectral theorem.
+#print axioms QIQTH.Spectral.cayley_spectrum_subset_circle
+-- ★★ P4 WALL — SPECTRUM OF THE CAYLEY UNITARY ON THE UNIT CIRCLE: cayley_spectrum_subset_circle —
+-- spectrum ℂ (cayleyUnitary U ⋯ : H →L[ℂ] H) ⊆ Metric.sphere 0 1 (spectrum.subset_circle_of_unitary applied to
+-- cayley_mem_unitary). The geometric foundation of V's spectral theorem: its (eventual) circle-PVM is supported on
+-- S¹, and the inverse Cayley map z↦i(1+z)(1−z)⁻¹ pulls S¹∖{1} back to the real spectrum of A=stoneGen U. Axiom-free.
+-- Remaining (Mathlib gap): the Borel/PVM functional calculus on S¹ for V + transport to A's unbounded PVM ⟹ Stone.
 #print axioms QIQTH.Spectral.cayley_mem_unitary
 #print axioms QIQTH.Spectral.cayleyUnitaryElt
 -- ★★ P4 WALL — CAYLEY UNITARY IS A C*-ALGEBRA UNITARY ELEMENT (CFC doorway): cayley_mem_unitary —
