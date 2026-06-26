@@ -193,6 +193,16 @@ multiplication that was the "real wall" of Phase 1. The matter side of the cross
 **NEXT (separate):** Phase 2 (translation unitary group λ_t via `DomAddAct`), Phase 3 (covariance), then the
 frontiers (Stone, the trace). The `1/4` coefficient stays the cited UV datum throughout.
 
+### Phase 4 (e.s.a. route) — the Gårding mollifier foundation ✅ (first step into the shared analytic frontier)
+**Delivered (axiom-free, budget 0, `QIQTH/Spectral/Garding.lean`):** the constructive entry to essential
+self-adjointness (= `Range(·±i)` dense), shared by all three generators. `mollify U φ x := ∫ φ(t) U_t x dt`
+(the Gårding mollified vector); `mollify_integrable` (the integrand is integrable — continuous × compact
+support); `mollify_apply_flow` — the **flow-shift identity** `U_s x_φ = ∫ φ(t) U_{s+t} x dt` (`U_s` passes
+through the Bochner integral via `integral_comp_comm`, then the group law shifts the orbit). This is the
+algebraic core: differentiating the RHS in `s` under the integral is exactly what will place `x_φ` in the smooth
+domain (hence the domain dense). **Carried frontier (genuine Mathlib gap):** the differentiation-under-the-Bochner-
+integral step (`x_φ ∈ stoneDomain U`) + the approximate-identity density (`{x_φ}` dense as `φ → δ`).
+
 ### Phase 4 (operators) — the modular Hamiltonian `K` as a symmetric operator ✅ (3rd & LAST C₀ group; trio complete)
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/ModularGenerator.lean`):** the Stone-instantiation pattern
 applied to the **third and last** named C₀ group, the modular flow `Δ^{it} = modUnitary S t` on the

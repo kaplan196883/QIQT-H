@@ -213,6 +213,16 @@ last derived from `modUnitary_adjoint`), then `modularGen := stoneGen (modUnitar
 needed**. **All three named C₀ generators (`X = A_edge`, `P`, `K`) are now concrete symmetric operators with
 `±i` injective.** The shared remaining analytic frontier is e.s.a. = `Range(·±i)` dense (Gårding density).
 
+**PROGRESS — Gårding mollifier foundation ✅** (`QIQTH/Spectral/Garding.lean`, axiom-free, budget 0): the first
+constructive step into the e.s.a. frontier. `mollify U φ x := ∫ φ(t) U_t x dt` (the Gårding mollified vector);
+`mollify_integrable` (the integrand `φ(t)U_t x` is integrable — continuous × compact support, for `φ ∈ Cc` and
+`U` strongly continuous); `mollify_apply_flow` — the **flow-shift identity** `U_s x_φ = ∫ φ(t) U_{s+t} x dt`
+(`U_s` through the Bochner integral via `integral_comp_comm` + the group law). This is the algebraic core of
+Gårding: differentiating the RHS in `s` *under the integral* is exactly what places `x_φ` in the smooth domain.
+**Remaining (the genuine analytic frontier):** the differentiation step (`x_φ ∈ stoneDomain U`, via
+differentiation under the Bochner integral) + the density `{x_φ}` dense (approximate identity `φ → δ`) — built
+on this foundation, not yet claimed.
+
 ## 3. Dependency graph
 ```
 Phase 1 (unbounded FC ∫f dE) ─→ Phase 2 (Stone for FC-ops; K, Δ^{it}=e^{−itK}) ──→ [JLMS Stage 1 DONE]

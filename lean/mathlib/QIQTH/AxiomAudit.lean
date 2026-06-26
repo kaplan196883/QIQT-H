@@ -4905,6 +4905,14 @@ namespace QIQTH.AxiomAudit
 -- bounded below ⟹ injective. Instantiations of the general Stone lemmas for modUnitary_compL/_zero/inner_modUnitary_self
 -- (the latter derived from modUnitary_adjoint). modUnitary lives on the ABSTRACT one-particle space (not Lp), so NO
 -- irreducible/Lp workaround needed. Axiom-free. (e.s.a. = Range(K±i) dense = the carried analytic frontier.)
+#print axioms QIQTH.Spectral.mollify_integrable
+#print axioms QIQTH.Spectral.mollify_apply_flow
+-- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
+-- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
+-- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via
+-- integral_comp_comm + the group law). The algebraic core of Gårding: differentiating its RHS in s (under the
+-- integral) places x_φ in the smooth domain. Axiom-free. (The differentiation step + {x_φ} dense = the carried
+-- analytic frontier — differentiation under the Bochner integral + approximate identity, the genuine Mathlib gap.)
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable
