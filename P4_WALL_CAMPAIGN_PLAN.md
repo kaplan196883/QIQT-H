@@ -192,3 +192,17 @@ multiplication that was the "real wall" of Phase 1. The matter side of the cross
 **Residual:** the `*`-property (adjoint), blocked on an Lp/RCLike instance diamond (not a math gap).
 **NEXT (separate):** Phase 2 (translation unitary group λ_t via `DomAddAct`), Phase 3 (covariance), then the
 frontiers (Stone, the trace). The `1/4` coefficient stays the cited UV datum throughout.
+
+### Phase 4.2 (general Stone) — the symmetric-generator scaffolding COMPLETE; wall narrowed to Gårding density
+**Delivered (axiom-free, budget 0, `QIQTH/Spectral/Stone.lean`; see `STONE_THEOREM_PLAN.md` Phase 3 for the full
+log):** the general-Stone build-up to essential self-adjointness, Mathlib-integrated —
+`stoneDomain` (smooth-domain submodule) · `stoneGen` (the generator `A = −i d/dt U_t|₀` as a `LinearPMap`) ·
+`hasDerivAt_stoneGen` / `_neg` (forward/backward derivative) · `stoneDomain_apply_mem` (flow-invariance) ·
+`stoneGen_symmetric` (⟪Ax,y⟫=⟪x,Ay⟫ on the smooth domain) · `stoneGen_isFormalAdjoint_self`
+(`(stoneGen U).IsFormalAdjoint (stoneGen U)`, the symmetric operator bundled in Mathlib's `LinearPMap` adjoint
+framework) · `stoneGen_le_adjoint` (the **explicit `A ⊆ A†`**, `stoneGen U ≤ (stoneGen U)†`, **conditional on
+`hdense : Dense (stoneGen U).domain`** — `le_adjoint` genuinely requires density). Wired into AxiomAudit; budget 0.
+**Frontier honestly carried (the remaining wall of 4.2):** `Dense (stoneGen U).domain` (**Gårding/mollified-vector
+density**, `x_φ = ∫ φ(t) U_t x dt`) + **essential self-adjointness** (`Range(A±i)` dense / Nelson analytic vectors)
++ the **Cayley transform** / unbounded spectral theorem — genuine Mathlib-grade gaps. With those, `Ā = Ā†` ⟹ Stone
+⟹ apply to `clockTransl` ⟹ `X = A_edge` (4.3) → dual-weight trace (Phase 5) → FQ bound (Phase 6).

@@ -135,6 +135,14 @@ InnerProductSpace.LinearPMap`). This is the precise `A ⊆ A*` entry point — o
 `stoneGen U ⊆ (stoneGen U)†` (`IsFormalAdjoint.le_adjoint`), and self-adjointness is `Ā = Ā*`. The symmetric
 unbounded operator now lives in Mathlib's adjoint framework, ready for the e.s.a. criteria.
 
+Also ✅ `stoneGen_le_adjoint` — the **explicit `A ⊆ A†` containment**, `stoneGen U ≤ (stoneGen U)†` via
+`IsFormalAdjoint.le_adjoint`, **conditional on `hdense : Dense (stoneGen U).domain`** (left as an explicit
+hypothesis — `le_adjoint` genuinely requires it). This is the symmetric-operator containment that
+self-adjointness `Ā = Ā†` upgrades from `⊆` to `=`. The density hypothesis is the honestly-carried wall:
+proving `Dense (stoneGen U).domain` for the concrete C₀ groups (the **Gårding/mollified-vector** argument,
+`x_φ = ∫ φ(t) U_t x dt`) is the genuine Mathlib-grade analytic frontier of Phase 3.2 — the whole symmetric
+operator-theoretic scaffolding above it is now complete and Mathlib-integrated, axiom-free at budget 0.
+
 ### Phase 4 — apply general Stone to the clock energy `X = A_edge`  *(unblocks Wall Phase 4.2/4.3)*
 *Extends `QIQTH/CrossedProductGenerator.lean`.*  Apply Phase 3 to `clockTransl` (`λ_t`, already proved a
 strongly-continuous unitary group via `clockTransl_stronglyContinuous` — the Stone hypothesis is in hand) to get

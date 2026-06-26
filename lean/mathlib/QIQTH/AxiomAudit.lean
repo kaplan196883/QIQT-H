@@ -1626,6 +1626,12 @@ namespace QIQTH.AxiomAudit
 -- ⟺ symmetric), the precise A⊆A* entry point: once the domain is dense, stoneGen U ⊆ (stoneGen U)† (le_adjoint),
 -- and self-adjointness is Ā=Ā*. Axiom-free. REMAINING wall: domain density (Gårding) + essential self-adjointness +
 -- Cayley — the genuine Mathlib gaps.
+#print axioms QIQTH.Spectral.stoneGen_le_adjoint
+-- ★ STONE 3.1 cont. — the EXPLICIT A⊆A† containment, conditional on Gårding density:
+-- stoneGen_le_adjoint — given hdense : Dense (stoneGen U).domain, stoneGen U ≤ (stoneGen U)† (via le_adjoint).
+-- The symmetric-operator containment self-adjointness Ā=Ā† rests on. Density hypothesis left EXPLICIT and
+-- undischarged — proving Dense (stoneGen U).domain for the concrete C₀ groups (Gårding/mollified vectors) is the
+-- honestly-carried Mathlib-grade wall. Axiom-free.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

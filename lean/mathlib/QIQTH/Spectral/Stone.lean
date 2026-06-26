@@ -149,6 +149,20 @@ theorem stoneGen_isFormalAdjoint_self (U : ℝ → (H →L[ℂ] H))
     (stoneGen U).IsFormalAdjoint (stoneGen U) :=
   fun x y => stoneGen_symmetric U hgrp hU0 hUinner x y
 
+/-- **`A ⊆ A†` for the Stone generator** — the explicit symmetric-operator containment, conditional on
+    `hdense`, the density of the smooth domain (Gårding density, the genuine open analytic frontier of
+    Phase 3.2). Given that density, the generator is contained in its `LinearPMap` adjoint:
+    `stoneGen U ≤ (stoneGen U)†`. This is the precise statement on which self-adjointness `Ā = Ā†`
+    rests — essential self-adjointness then upgrades `⊆` to `=` on the closure. The density hypothesis
+    is left explicit and undischarged: proving `Dense (stoneGen U).domain` for the concrete C₀ groups
+    (the Gårding/mollified-vector argument) is the Mathlib-grade wall, honestly carried here. -/
+theorem stoneGen_le_adjoint [CompleteSpace H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hdense : Dense ((stoneGen U).domain : Set H)) :
+    stoneGen U ≤ (stoneGen U).adjoint :=
+  (stoneGen_isFormalAdjoint_self U hgrp hU0 hUinner).le_adjoint (hT := hdense)
+
 end Symmetry
 
 end QIQTH.Spectral
