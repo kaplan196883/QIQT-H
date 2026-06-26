@@ -221,8 +221,11 @@ The hardest analytic step (differentiation under the Bochner integral) is comple
 Also ✅ the **Gårding-approximation identity** (`mollify_sub`: `x_φ − (∫φ)·x = ∫ φ(t)(U_t x − x)`;
 `norm_mollify_sub_le`: `‖x_φ − (∫φ)·x‖ ≤ ∫ ‖φ(t)‖·‖U_t x − x‖`) and the **ε-bound** `norm_mollify_sub_le_uniform`
 (`‖U_t x − x‖ ≤ ε` on `supp φ` ⟹ `‖x_φ − (∫φ)·x‖ ≤ ε·∫‖φ‖`) — with `∫φ = 1`, `φ ≥ 0` near `0`, this is `≤ ε`
-and `→ 0` by strong continuity, i.e. `x_φ → x`. **Remaining:** the Dirac/bump-sequence limit (`φₙ → δ`) + `{x_φ}`
-dense ⟹ smooth domain dense ⟹ `Range(·±i)` dense ⟹ e.s.a. ⟹ Stone.
+and `→ 0` by strong continuity, i.e. `x_φ → x`. Plus the **density assembly** `exists_mem_stoneDomain_norm_sub_le`
+(combines the two Gårding lemmas: a normalized `C¹_c` mollifier averaging to `x`, supported where `‖U_t x−x‖ ≤ ε`,
+gives `y = x_φ ∈ stoneDomain U` with `‖y − x‖ ≤ ε·∫‖φ‖` ⟹ for every `x,ε` a smooth-domain vector within `ε` =
+density). **Remaining (pure bump construction):** supply the normalized bump (`ContDiffBump.normed`: `C^∞`, `∫=1`,
+`≥0`, compact support) — ℝ→ℂ coercion + derivative `φ'` + small `rOut` — ⟹ `Dense (stoneDomain U)` ⟹ e.s.a. ⟹ Stone.
 
 ### Phase 4 (operators) — the modular Hamiltonian `K` as a symmetric operator ✅ (3rd & LAST C₀ group; trio complete)
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/ModularGenerator.lean`):** the Stone-instantiation pattern

@@ -256,8 +256,15 @@ Also ✅ the **Gårding ε-bound** `norm_mollify_sub_le_uniform`: if `‖U_t x �
 (on `supp φ`), then `‖x_φ − (∫φ)·x‖ ≤ ε · ∫‖φ‖` (pointwise integrand bound `‖φ t‖·‖U_t x−x‖ ≤ ε·‖φ t‖` +
 `integral_mono` + `integral_const_mul`). For a Dirac sequence (`∫|φ| = 1`, `φ` supported near `0`) this is `≤ ε`,
 and `→ 0` by strong continuity ⟹ `x_φ → x`.
-**Remaining:** pick the bump sequence `φₙ → δ` (Mathlib `ContDiffBump`, normalized) + the limit ⟹ `{x_φ}` dense ⟹
-smooth domain dense ⟹ `Range(A ± i)` dense ⟹ `A` essentially self-adjoint ⟹ Stone returns `U_t = exp(it Ā)`.
+Also ✅ the **density assembly** `exists_mem_stoneDomain_norm_sub_le`: combining `mollify_mem_stoneDomain`
+(Gårding vector ∈ smooth domain) + `norm_mollify_sub_le_uniform` (the ε-bound) — a normalized `C¹_c` mollifier
+`φ` averaging to `x` (`(∫φ)·x = x`) and supported where `‖U_t x − x‖ ≤ ε` yields `y = x_φ ∈ stoneDomain U` with
+`‖y − x‖ ≤ ε · ∫‖φ‖`. With a Dirac bump (`∫‖φ‖ = 1`, support shrinking) this gives, for every `x` and `ε`, a
+smooth-domain vector within `ε` — i.e. **density of the smooth domain**.
+**Remaining (pure bump construction):** supply the normalized bump from Mathlib `ContDiffBump.normed` (`C^∞`,
+`∫ = 1`, `≥ 0`, compact support in `closedBall 0 rOut`) — coerce `ℝ → ℂ`, extract its derivative `φ'`, pick
+`rOut` small via strong continuity — then conclude `Dense (stoneDomain U)` ⟹ `Range(A ± i)` dense ⟹ `A`
+essentially self-adjoint ⟹ Stone returns `U_t = exp(it Ā)`.
 
 ## 3. Dependency graph
 ```

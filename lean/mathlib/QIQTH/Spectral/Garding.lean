@@ -256,4 +256,26 @@ theorem norm_mollify_sub_le_uniform (U : ℝ → (H →L[ℂ] H)) (φ : ℝ → 
           exact mul_le_mul_of_nonneg_left (hε t h0) (norm_nonneg _)
     _ = ε * ∫ t, ‖φ t‖ := integral_const_mul ε _
 
+/-- **A normalized Gårding mollifier yields a smooth-domain vector `ε`-close to `x`.** Combining
+    `mollify_mem_stoneDomain` (the Gårding vector is in the smooth domain) with `norm_mollify_sub_le_uniform`
+    (the `ε`-bound): if `φ ∈ C¹_c` averages to `x` (`(∫φ)·x = x`, true when `∫φ = 1`) and is supported where
+    `‖U_t x − x‖ ≤ ε`, then `x_φ ∈ stoneDomain U` and `‖x_φ − x‖ ≤ ε · ∫‖φ‖`. With a Dirac bump (`∫‖φ‖ = 1`,
+    support shrinking) this gives, for every `x` and `ε`, a smooth-domain vector within `ε` — i.e. **density of
+    the smooth domain** (the remaining input to essential self-adjointness). The only missing piece is supplying
+    such a bump (Mathlib `ContDiffBump.normed`). -/
+theorem exists_mem_stoneDomain_norm_sub_le (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (φ φ' : ℝ → ℂ)
+    (hφ' : ∀ y, HasDerivAt φ (φ' y) y) (hφcont : Continuous φ) (hsuppφ : HasCompactSupport φ)
+    (hφ'cont : Continuous φ') (hsupp' : HasCompactSupport φ') (x : H) (ε M : ℝ)
+    (hε0 : 0 ≤ ε) (hM : 0 ≤ M) (hUbd : ∀ t, ‖U t x‖ ≤ M) (hcont : Continuous (fun t => U t x))
+    (hφ_int : Integrable φ) (hint : Integrable (fun t => φ t • U t x))
+    (hintx : Integrable (fun t => φ t • x)) (hφone : (∫ t, φ t) • x = x)
+    (hsmall : ∀ t, φ t ≠ 0 → ‖U t x - x‖ ≤ ε) :
+    ∃ y ∈ stoneDomain U, ‖y - x‖ ≤ ε * ∫ t, ‖φ t‖ := by
+  refine ⟨mollify U φ x, mollify_mem_stoneDomain U hgrp φ φ' hφ' hφcont hsuppφ hφ'cont hsupp'
+    x M hM hUbd hcont, ?_⟩
+  have hrw : mollify U φ x - x = mollify U φ x - (∫ t, φ t) • x := by rw [hφone]
+  rw [hrw]
+  exact norm_mollify_sub_le_uniform U φ x ε hε0 hsmall hφ_int hint hintx
+
 end QIQTH.Spectral

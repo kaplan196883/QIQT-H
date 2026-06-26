@@ -4955,6 +4955,12 @@ namespace QIQTH.AxiomAudit
 -- then ‖x_φ − (∫φ)·x‖ ≤ ε·∫‖φ‖ (pointwise integrand bound ‖φ t‖·‖U_t x−x‖ ≤ ε·‖φ t‖ + integral_mono + integral_const_mul).
 -- For a Dirac sequence (∫|φ|=1, φ supported near 0) this is ≤ ε → 0 by strong continuity ⟹ x_φ → x. Axiom-free.
 -- Remaining: pick the bump sequence φₙ → δ + the limit ⟹ {x_φ} dense ⟹ smooth domain dense ⟹ e.s.a.
+#print axioms QIQTH.Spectral.exists_mem_stoneDomain_norm_sub_le
+-- ★ P4 WALL — the DENSITY ASSEMBLY: exists_mem_stoneDomain_norm_sub_le — combines mollify_mem_stoneDomain (Gårding
+-- vector ∈ smooth domain) + norm_mollify_sub_le_uniform (the ε-bound): a normalized C¹_c mollifier φ averaging to x
+-- ((∫φ)·x=x) and supported where ‖U_t x−x‖≤ε gives y=x_φ ∈ stoneDomain U with ‖y−x‖ ≤ ε·∫‖φ‖. With a Dirac bump
+-- (∫‖φ‖=1, support shrinking) ⟹ for every x,ε a smooth-domain vector within ε ⟹ DENSITY of the smooth domain.
+-- Axiom-free. Only missing piece: supplying the bump (Mathlib ContDiffBump.normed: C^∞, ∫=1, ≥0, compact support).
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via
