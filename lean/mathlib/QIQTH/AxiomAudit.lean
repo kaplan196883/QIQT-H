@@ -5899,4 +5899,16 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — Christoffel C^∞ from metric C^∞ (christoffel = ½∑gi·∂g; contDiff_pd: ∂ of C^∞ is C^∞).
 -- Discharges the hC hypothesis of the capstone.
 
+#print axioms QIQTH.FQBound.fq_bound_of_slack
+#print axioms QIQTH.FQBound.fq_bound_of_jlms
+#print axioms QIQTH.FQBound.fq_bound_area_only
+#print axioms QIQTH.FQBound.fq_bound_of_slack_ennreal
+-- ★★★ P4 WALL PHASE 6 — THE CONDITIONAL FQ BOUND (algebraic core; GPT-5.5-pro's highest-leverage increment):
+-- fq_bound_of_slack — 0≤slack ∧ S+slack≤areaTerm ⟹ S≤areaTerm. fq_bound_of_jlms — JLMS first law S = ⟨A_edge⟩·c +
+-- ⟨K_bulk⟩ − D with relative-entropy positivity 0≤D ⟹ S ≤ ⟨A_edge⟩·c + ⟨K_bulk⟩ (P4's BOUND, modulo the Phase-5
+-- trace supplying areaExp/bulk/D/first-law). fq_bound_area_only — + bulk≤0 ⟹ S ≤ ⟨A_edge⟩·c (bare area floor).
+-- fq_bound_of_slack_ennreal — ℝ≥0∞ form via le_self_add (no subtraction-with-∞). Hypotheses are theorem args, NOT
+-- axioms; coefficient c (=1/4ℓ_P²) is the carried UV datum, never assigned; self-adjoint≠positive so area-positivity
+-- is explicit where needed. Axiom-free (standard 3). The dual-weight trace (Phase 5) remains the genuine gap.
+
 end QIQTH.AxiomAudit

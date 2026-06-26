@@ -121,6 +121,16 @@ trace is research-grade).  **Buys:** finite regional entropy from first principl
 **Risk: medium given 1–5.**  **Buys:** (P4) reduced from postulate to "the area-operator normalization," with
 the bound derived — the campaign's goal.
 
+**✅ Phase 6 ALGEBRAIC CORE DONE (`QIQTH/FQBoundConditional.lean`, axiom-free; GPT-5.5-pro's highest-leverage pivot
+2026-06-27):** the conditional FQ bound as pure algebra, hypotheses = the Phase-5/JLMS obligations (theorem args,
+**not** axioms): `fq_bound_of_slack` (`0≤slack ∧ S+slack≤areaTerm ⟹ S≤areaTerm`); `fq_bound_of_jlms` (JLMS first
+law `S = ⟨A_edge⟩·c + ⟨K_bulk⟩ − D` with `0≤D` ⟹ `S ≤ ⟨A_edge⟩·c + ⟨K_bulk⟩`); `fq_bound_area_only` (`+ bulk≤0` ⟹
+bare area floor `S ≤ ⟨A_edge⟩·c`); `fq_bound_of_slack_ennreal` (ℝ≥0∞, no subtraction-with-∞). The coefficient `c =
+1/4ℓ_P²` is a free parameter (carried UV datum, never assigned). **Remaining to instantiate Phase 6:** the Phase-5
+dual-weight trace must supply `areaExp`, `bulk`, `D` and the first law as theorems — the genuine Mathlib-grade gap.
+Per the same audit, do NOT block this on the PVM/`PVM_of_selfAdjoint` (off the critical path); `IsSelfAdjoint
+A_edge` (already proved) suffices to call the clock energy a genuine observable.
+
 ## 3. Dependency graph
 ```
 Phase 1 (π(a)) ─┐
