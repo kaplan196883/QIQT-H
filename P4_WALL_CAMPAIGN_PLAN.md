@@ -206,6 +206,8 @@ concrete group with a known operator `P`/`K`/`X`) · `stoneGen_isFormalAdjoint_s
 (`(stoneGen U).IsFormalAdjoint (stoneGen U)`, the symmetric operator bundled in Mathlib's `LinearPMap` adjoint
 framework) · `stoneGen_norm_add_smul_I_sq` + `stoneGen_norm_sub_smul_I_sq` (the **Cayley estimate** `‖(A±i)x‖²=‖Ax‖²+‖x‖²`
 ⟹ `A±i` injective/bounded-below — the entry point to the Cayley transform + deficiency-index e.s.a. criterion) ·
+`stoneGen_norm_cayley_eq` + `stoneGen_norm_le_norm_add_smul_I` (the **Cayley transform's defining properties**:
+`‖(A−i)x‖=‖(A+i)x‖` ⟹ `V=(A−i)(A+i)⁻¹` is an **isometry** on the range; `‖x‖≤‖(A+i)x‖` ⟹ `A+i` injective) ·
 `stoneGen_le_adjoint` (the **explicit `A ⊆ A†`**, `stoneGen U ≤ (stoneGen U)†`, **conditional on
 `hdense : Dense (stoneGen U).domain`** — `le_adjoint` genuinely requires density). Wired into AxiomAudit; budget 0.
 **Frontier honestly carried (the remaining wall of 4.2):** `Dense (stoneGen U).domain` (**Gårding/mollified-vector

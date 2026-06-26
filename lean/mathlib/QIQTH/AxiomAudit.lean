@@ -1648,6 +1648,12 @@ namespace QIQTH.AxiomAudit
 -- — ⟪Ax,x⟫ real by symmetry, ×i rotates to imaginary axis). So A±i are bounded below (‖(A±i)x‖≥‖x‖), hence
 -- INJECTIVE — the entry point to the Cayley transform (A−i)(A+i)⁻¹ and the deficiency-index criterion for
 -- essential self-adjointness (Phase 3.2/3.3). Axiom-free. (Surjectivity of A±i = the open Range-dense wall.)
+#print axioms QIQTH.Spectral.stoneGen_norm_cayley_eq
+#print axioms QIQTH.Spectral.stoneGen_norm_le_norm_add_smul_I
+-- ★ STONE 3.1 cont. — CAYLEY ISOMETRY + bounded-below: stoneGen_norm_cayley_eq — ‖(A−i)x‖=‖(A+i)x‖ (both
+-- =√(‖Ax‖²+‖x‖²)), so V:(A+i)x↦(A−i)x is norm-preserving — the defining property of the Cayley transform
+-- V=(A−i)(A+i)⁻¹ (isometry Range(A+i)→Range(A−i); unitary ⟺ both ranges dense ⟺ A e.s.a.). And
+-- stoneGen_norm_le_norm_add_smul_I — ‖x‖≤‖(A+i)x‖, so A+i injective. Axiom-free. (Range-density = open wall.)
 #print axioms QIQTH.Spectral.stoneGen_le_adjoint
 -- ★ STONE 3.1 cont. — the EXPLICIT A⊆A† containment, conditional on Gårding density:
 -- stoneGen_le_adjoint — given hdense : Dense (stoneGen U).domain, stoneGen U ≤ (stoneGen U)† (via le_adjoint).

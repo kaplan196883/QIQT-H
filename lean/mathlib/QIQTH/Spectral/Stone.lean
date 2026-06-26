@@ -216,6 +216,33 @@ theorem stoneGen_norm_sub_smul_I_sq (U : ℝ → (H →L[ℂ] H))
     stoneGen_re_inner_smul_I U hgrp hU0 hUinner x, norm_smul, Complex.norm_I, one_mul]
   ring
 
+/-- **The Cayley transform is isometric on the range:** `‖(A − i) x‖ = ‖(A + i) x‖`. Both sides equal
+    `√(‖A x‖² + ‖x‖²)` (the two Cayley estimates), so the map `V : (A + i) x ↦ (A − i) x` is norm-preserving —
+    the defining property of the Cayley transform `V = (A−i)(A+i)⁻¹` (an isometry `Range(A+i) → Range(A−i)`;
+    it is *unitary*, hence `A` essentially self-adjoint, exactly when both ranges are dense — Phase 3.3). -/
+theorem stoneGen_norm_cayley_eq (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b) (x : stoneDomain U) :
+    ‖stoneGen U x - Complex.I • (x : H)‖ = ‖stoneGen U x + Complex.I • (x : H)‖ := by
+  have hsq : ‖stoneGen U x - Complex.I • (x : H)‖ ^ 2
+      = ‖stoneGen U x + Complex.I • (x : H)‖ ^ 2 := by
+    rw [stoneGen_norm_sub_smul_I_sq U hgrp hU0 hUinner x,
+      stoneGen_norm_add_smul_I_sq U hgrp hU0 hUinner x]
+  have := congrArg Real.sqrt hsq
+  rwa [Real.sqrt_sq (norm_nonneg _), Real.sqrt_sq (norm_nonneg _)] at this
+
+/-- **`A + i` is bounded below:** `‖x‖ ≤ ‖(A + i) x‖` (from the Cayley estimate, `‖Ax‖² ≥ 0`). Hence `A + i` is
+    *injective* on the smooth domain — half of the deficiency-index data for essential self-adjointness. -/
+theorem stoneGen_norm_le_norm_add_smul_I (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b) (x : stoneDomain U) :
+    ‖(x : H)‖ ≤ ‖stoneGen U x + Complex.I • (x : H)‖ := by
+  have hsq : ‖(x : H)‖ ^ 2 ≤ ‖stoneGen U x + Complex.I • (x : H)‖ ^ 2 := by
+    rw [stoneGen_norm_add_smul_I_sq U hgrp hU0 hUinner x]
+    nlinarith [sq_nonneg ‖stoneGen U x‖]
+  have h2 := Real.sqrt_le_sqrt hsq
+  rwa [Real.sqrt_sq (norm_nonneg _), Real.sqrt_sq (norm_nonneg _)] at h2
+
 /-- **`A ⊆ A†` for the Stone generator** — the explicit symmetric-operator containment, conditional on
     `hdense`, the density of the smooth domain (Gårding density, the genuine open analytic frontier of
     Phase 3.2). Given that density, the generator is contained in its `LinearPMap` adjoint:

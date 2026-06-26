@@ -135,6 +135,13 @@ InnerProductSpace.LinearPMap`). This is the precise `A ⊆ A*` entry point — o
 `stoneGen U ⊆ (stoneGen U)†` (`IsFormalAdjoint.le_adjoint`), and self-adjointness is `Ā = Ā*`. The symmetric
 unbounded operator now lives in Mathlib's adjoint framework, ready for the e.s.a. criteria.
 
+Also ✅ `stoneGen_norm_cayley_eq` + `stoneGen_norm_le_norm_add_smul_I` — **the Cayley transform's defining
+properties**: `‖(A−i)x‖ = ‖(A+i)x‖` (both `= √(‖Ax‖²+‖x‖²)`), so `V : (A+i)x ↦ (A−i)x` is **norm-preserving** —
+the isometry property of `V = (A−i)(A+i)⁻¹ : Range(A+i) → Range(A−i)`; and `‖x‖ ≤ ‖(A+i)x‖` (`A+i` bounded
+below, hence **injective**). The Cayley transform `V` is now characterized as an isometry on the range; it is
+*unitary* — equivalently `A` is essentially self-adjoint — exactly when both ranges are dense (Phase 3.3, the
+open analytic wall).
+
 Also ✅ `stoneGen_norm_add_smul_I_sq` + `stoneGen_norm_sub_smul_I_sq` (+ aux `stoneGen_re_inner_smul_I`) —
 **the Cayley estimate** `‖(A ± i) x‖² = ‖A x‖² + ‖x‖²` for the symmetric generator. The cross term
 `re⟪A x, i•x⟫ = 0` (since `⟪A x, x⟫` is real by symmetry, and `×i` rotates it to the imaginary axis;
