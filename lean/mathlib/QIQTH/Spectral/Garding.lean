@@ -1201,6 +1201,27 @@ noncomputable def reExpectationCLM (x : H) : (H →L[ℂ] H) →L[ℝ] ℝ :=
 @[simp] theorem reExpectationCLM_apply (x : H) (T : H →L[ℂ] H) :
     reExpectationCLM x T = (inner ℂ x (T x)).re := rfl
 
+/-- **The Riesz–Markov functional on `C(σ(V), ℂ)`** as a bundled **ℝ-linear** continuous map
+    `φ ↦ re⟪x, cfcHom V φ x⟫` = `reExpectationCLM x ∘ (cfcL V)|_ℝ`, where `cfcL V : C(σ(V), ℂ) →L[ℂ] (H →L[ℂ] H)`
+    is the continuous functional calculus bundled as a CLM. Restricting the domain to the real functions
+    `C_c(σ(V), ℝ)` (via the `ℝ↪ℂ` embedding) yields the positive ℝ-linear functional whose positivity
+    (`cayley_cfc_re_inner_nonneg_of_nonneg`) `RealRMK.rieszMeasure` turns into the scalar spectral measure `μ_x`. -/
+noncomputable def cfcReExpectationCLM [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℂ) →L[ℝ] ℝ :=
+  (reExpectationCLM x).comp
+    ((cfcL (cayley_isStarNormal U hgrp hU0 hUinner hUbd hSC)).restrictScalars ℝ)
+
+@[simp] theorem cfcReExpectationCLM_apply [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H)
+    (φ : C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℂ)) :
+    cfcReExpectationCLM U hgrp hU0 hUinner hUbd hSC x φ
+      = (inner ℂ x (cfcL (cayley_isStarNormal U hgrp hU0 hUinner hUbd hSC) φ x)).re := rfl
+
 end SelfAdjoint
 
 end QIQTH.Spectral
