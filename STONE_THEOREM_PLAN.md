@@ -129,6 +129,11 @@ the `U`-smoothed vectors `∫φ(t)U_t x dt` are dense) + **essential self-adjoin
 analytic vectors) + the **Cayley transform**/unbounded spectral theorem. Symmetric + densely-defined + e.s.a. ⟹
 `Ā` self-adjoint ⟹ Stone (`U_t=e^{itĀ}`). The Stone scaffolding (domain, generator, derivative, flow-invariance,
 symmetry) is now complete; the e.s.a./Cayley analytic core is the wall.
+Also ✅ `stoneGen_isFormalAdjoint_self` — the generator bundled as a **symmetric unbounded operator in Mathlib's
+`LinearPMap` framework**: `(stoneGen U).IsFormalAdjoint (stoneGen U)` (direct from `stoneGen_symmetric`; `import
+InnerProductSpace.LinearPMap`). This is the precise `A ⊆ A*` entry point — once the domain is dense,
+`stoneGen U ⊆ (stoneGen U)†` (`IsFormalAdjoint.le_adjoint`), and self-adjointness is `Ā = Ā*`. The symmetric
+unbounded operator now lives in Mathlib's adjoint framework, ready for the e.s.a. criteria.
 
 ### Phase 4 — apply general Stone to the clock energy `X = A_edge`  *(unblocks Wall Phase 4.2/4.3)*
 *Extends `QIQTH/CrossedProductGenerator.lean`.*  Apply Phase 3 to `clockTransl` (`λ_t`, already proved a

@@ -1619,6 +1619,13 @@ namespace QIQTH.AxiomAudit
 -- −i⟪Ax,y⟫=−i⟪x,Ay⟫ (conj_I + inner_smul); cancel −i. The symmetry of A=−i(d/dt U_t) — the operator is Hermitian on
 -- its domain. Axiom-free. REMAINING wall (Phase 3.2/3.3): Gårding density of the domain + essential self-adjointness
 -- (Range(A±i) dense / Nelson analytic vectors) + the Cayley transform/unbounded spectral theorem — the genuine Mathlib gaps.
+#print axioms QIQTH.Spectral.stoneGen_isFormalAdjoint_self
+-- ★ STONE 3.1 cont. — the generator bundled as a SYMMETRIC unbounded operator in Mathlib's framework:
+-- stoneGen_isFormalAdjoint_self — (stoneGen U).IsFormalAdjoint (stoneGen U) for a one-parameter unitary group
+-- (direct from stoneGen_symmetric). This is Mathlib's LinearPMap.IsFormalAdjoint (T is a formal adjoint of itself
+-- ⟺ symmetric), the precise A⊆A* entry point: once the domain is dense, stoneGen U ⊆ (stoneGen U)† (le_adjoint),
+-- and self-adjointness is Ā=Ā*. Axiom-free. REMAINING wall: domain density (Gårding) + essential self-adjointness +
+-- Cayley — the genuine Mathlib gaps.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

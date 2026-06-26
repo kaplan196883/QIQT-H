@@ -3,6 +3,7 @@ import Mathlib.Analysis.Calculus.Deriv.Mul
 import Mathlib.Analysis.Calculus.Deriv.Comp
 import Mathlib.Analysis.InnerProductSpace.Adjoint
 import Mathlib.Analysis.InnerProductSpace.Calculus
+import Mathlib.Analysis.InnerProductSpace.LinearPMap
 
 /-!
 # Stone's theorem — the infinitesimal generator (Phase 3.1)
@@ -137,6 +138,16 @@ theorem stoneGen_symmetric (U : ℝ → (H →L[ℂ] H))
   have : (-Complex.I) * (inner ℂ (stoneGen U x) (y : H) : ℂ)
       = (-Complex.I) * (inner ℂ (x : H) (stoneGen U y) : ℂ) := by linear_combination hkey
   exact mul_left_cancel₀ (neg_ne_zero.mpr Complex.I_ne_zero) this
+
+/-- **The generator is a formal adjoint of itself** (a *symmetric* unbounded operator in Mathlib's
+    `LinearPMap` framework): `(stoneGen U).IsFormalAdjoint (stoneGen U)` for a one-parameter unitary group.
+    Equivalently `stoneGen U ⊆ (stoneGen U)†` once the domain is dense — the `A ⊆ A*` relation that
+    self-adjointness `Ā = Ā*` is built on (Phase 3.2). -/
+theorem stoneGen_isFormalAdjoint_self (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b) :
+    (stoneGen U).IsFormalAdjoint (stoneGen U) :=
+  fun x y => stoneGen_symmetric U hgrp hU0 hUinner x y
 
 end Symmetry
 
