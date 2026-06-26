@@ -259,10 +259,13 @@ generators:** `clockEnergy_isSelfAdjoint` (`X = A_edge = stoneGen clockTransl`),
 (`P = stoneGen translationCLM = −i d/dx`), `modularGen_isSelfAdjoint` (`K = stoneGen (modUnitary S)`, the JLMS
 modular Hamiltonian) — each `IsSelfAdjoint`, axiom-free.
 Also ✅ `stoneGen_add_I_bijective` (**`A+i` is a bijection `dom(A)→H`** — injective + surjective — so `(A+i)⁻¹`
-exists, the Cayley-transform foundation). **Remaining (Mathlib gap):** the Cayley transform `V=(A−i)(A+i)⁻¹`
-(bounded unitary) → bounded-PVM → the unbounded spectral theorem (PVM for self-adjoint `A`) ⟹
-`Ā = Ā†` (e.s.a.) ⟹ Cayley/unbounded spectral theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has none of these; Cayley
-injectivity in Stone.lean.
+exists, the Cayley-transform foundation).
+Also ✅ `cayley` + `norm_cayley` (**the Cayley transform `V=(A−i)(A+i)⁻¹` is built and is an isometry `‖V y‖=‖y‖`**:
+`cayleyEquiv = Equiv.ofBijective _ stoneGen_add_I_bijective` is `A+i:dom(A)≃H`, its `.symm` is `(A+i)⁻¹`,
+`cayley y := (A−i)((A+i)⁻¹ y)`; `‖V y‖=‖(A−i)z‖=‖(A+i)z‖=‖y‖` for `z=(A+i)⁻¹y` via the Cayley isometry. With
+surjectivity `V` is a **unitary**). **Remaining (Mathlib gap):** bundle `V` as a unitary CLM → bounded-PVM →
+the unbounded spectral theorem (PVM for self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`. Mathlib has neither the
+bounded-PVM nor the unbounded spectral theorem; Cayley injectivity in Stone.lean.
 
 ### Phase 4 (operators) — the modular Hamiltonian `K` as a symmetric operator ✅ (3rd & LAST C₀ group; trio complete)
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/ModularGenerator.lean`):** the Stone-instantiation pattern

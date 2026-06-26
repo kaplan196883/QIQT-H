@@ -775,6 +775,37 @@ theorem stoneGen_add_I_bijective (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, 
   rw [Submodule.coe_sub, sub_eq_zero] at hzz
   exact Subtype.ext hzz
 
+/-- The bijection `A + i : dom(A) ≃ H` (from `stoneGen_add_I_bijective`); its inverse `(A + i)⁻¹` is
+    `(cayleyEquiv U ⋯).symm`. -/
+noncomputable def cayleyEquiv (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    stoneDomain U ≃ H :=
+  Equiv.ofBijective _ (stoneGen_add_I_bijective U hgrp hU0 hUinner hUbd hSC)
+
+/-- **The Cayley transform `V = (A − i)(A + i)⁻¹`** of the self-adjoint generator `A = stoneGen U`: for `y ∈ H`,
+    `V y = (A − i) z` where `z = (A + i)⁻¹ y` is the unique smooth vector with `(A + i)z = y`. -/
+noncomputable def cayley (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (y : H) :
+    H :=
+  stoneGen U ((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y)
+    - Complex.I • (((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y : stoneDomain U) : H)
+
+/-- **★★ The Cayley transform is an isometry:** `‖V y‖ = ‖y‖`. With `z = (A + i)⁻¹ y` (so `(A + i)z = y`),
+    `‖V y‖ = ‖(A − i)z‖ = ‖(A + i)z‖ = ‖y‖` (the Cayley isometry `stoneGen_norm_cayley_eq`). Together with
+    surjectivity (`A − i` also bijective) this makes `V` a **unitary** — the operator whose bounded spectral
+    measure transports to the unbounded spectral theorem for the self-adjoint `A`. -/
+theorem norm_cayley (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (y : H) :
+    ‖cayley U hgrp hU0 hUinner hUbd hSC y‖ = ‖y‖ := by
+  rw [cayley]
+  set z := (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y with hzdef
+  have hz : stoneGen U z + Complex.I • (z : H) = y :=
+    (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).apply_symm_apply y
+  rw [stoneGen_norm_cayley_eq U hgrp hU0 hUinner z, hz]
+
 end SelfAdjoint
 
 end QIQTH.Spectral

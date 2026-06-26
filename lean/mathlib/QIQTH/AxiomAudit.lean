@@ -5073,7 +5073,14 @@ namespace QIQTH.AxiomAudit
 -- K = stoneGen (modUnitary S) = the JLMS modular Hamiltonian (abstract one-particle space). Each instantiates
 -- stoneGen_isSelfAdjoint with the group's (∘L group law, U_0=1, unitarity, isometry/norm, strong continuity). All
 -- three are GENUINE SELF-ADJOINT UNBOUNDED OPERATORS. Axiom-free. Remaining (Mathlib gap): unbounded spectral theorem.
-#print axioms QIQTH.Spectral.stoneGen_add_I_bijective
+#print axioms QIQTH.Spectral.cayley
+#print axioms QIQTH.Spectral.norm_cayley
+-- ★★ P4 WALL — THE CAYLEY TRANSFORM IS AN ISOMETRY: cayley U ⋯ y := (A−i)((A+i)⁻¹ y) is the Cayley transform
+-- V=(A−i)(A+i)⁻¹ of the self-adjoint generator A=stoneGen U (cayleyEquiv = the bijection A+i:dom(A)≃H from
+-- stoneGen_add_I_bijective, its .symm = (A+i)⁻¹). norm_cayley — ‖V y‖=‖y‖: with z=(A+i)⁻¹y (so (A+i)z=y),
+-- ‖V y‖=‖(A−i)z‖=‖(A+i)z‖ (the Cayley isometry stoneGen_norm_cayley_eq)=‖y‖. With surjectivity (A−i also
+-- bijective) this makes V a UNITARY — the operator whose bounded spectral measure transports to the unbounded
+-- spectral theorem for A. Axiom-free. Remaining (Mathlib gap): V as a unitary CLM + bounded-PVM + Stone exp.
 -- ★★ P4 WALL — A+i IS A BIJECTION dom(A)→H (the Cayley-transform foundation): stoneGen_add_I_bijective —
 -- Function.Bijective (fun z : stoneDomain U => stoneGen U z + i•(z:H)). Injective from the bounded-below estimate
 -- ‖x‖≤‖(A+i)x‖ (stoneGen_norm_le_norm_add_smul_I + LinearPMap.map_sub), surjective from stoneGen_add_I_surjective.
