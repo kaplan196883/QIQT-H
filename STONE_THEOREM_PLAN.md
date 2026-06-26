@@ -319,6 +319,10 @@ are now proven. Also ✅ `deficiency_add_trivial` / `deficiency_sub_trivial` —
 trivial in canonical inner-product form**: if `⟪(A ± i)x, y⟫ = 0 ∀ x` (i.e. `y ⊥ Range(A ± i)`) then `y = 0`
 (from surjectivity: `y = (A ± i)z` ⟹ `⟪y, y⟫ = 0` ⟹ `y = 0` by `inner_self_eq_zero`). So
 `ker(A† ∓ i) = Range(A ± i)^⊥ = 0` — the textbook essential-self-adjointness criterion's exact content.
+Also ✅ `ker_adjoint_sub_I_trivial` / `ker_adjoint_add_I_trivial` — **`A†` has no `±i`-eigenvectors** in Mathlib's
+`LinearPMap.adjoint` API: if `(stoneGen U).adjoint ⟨w,hw⟩ = ±i w` then `w = 0` (via the formal-adjoint relation
+`⟪A z, w⟫ = ⟪z, A† w⟫` from `adjoint_isFormalAdjoint.symm`, reducing to the deficiency lemmas). This is the *exact
+hypothesis* the self-adjointness criterion `A ⊆ A† + ker(A† ∓ i) = 0 ⟹ Ā = Ā†` consumes — now in adjoint form.
 **Remaining (the genuine Mathlib-grade operator-theory frontier):** differentiate the RHS in `s` at `0` (after
 the change of variables `u = s+t` ⟹ `e^s ∫_s^∞ e^{−u} U_u x du`, whose `d/ds|₀ = R x − x` by the **FTC for the
 improper integral with variable lower limit**) ⟹ `R x ∈ stoneDomain U` + the resolvent identity

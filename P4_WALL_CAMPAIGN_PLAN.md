@@ -250,8 +250,9 @@ deficiency-index-zero fact making the generator essentially self-adjoint is now 
 `z := R(−i y)`). **★★ MILESTONE — both deficiency indices zero:** `stoneGen_sub_I_surjective` — **`Range(A−i)=H`**
 (via the reversed group `t↦U_{−t}` with generator `−A`, `stoneGen_reversed_eq` + bridge). Both `Range(A±i)=H` ⟹
 the e.s.a. criterion is met. Also ✅ `deficiency_add_trivial`/`deficiency_sub_trivial` (**the deficiency subspaces
-are trivial**, `ker(A†∓i)=Range(A±i)^⊥=0` in canonical inner-product form, via `inner_self_eq_zero`). **Remaining
-(Mathlib gap):** bundle `A⊆A†` + `Range(A±i)=H` (or `ker(A†∓i)=0`) ⟹
+are trivial**, `ker(A†∓i)=Range(A±i)^⊥=0` in canonical inner-product form, via `inner_self_eq_zero`) +
+`ker_adjoint_sub_I_trivial`/`ker_adjoint_add_I_trivial` (**`A†` has no `±i`-eigenvectors** in Mathlib's adjoint API,
+via `adjoint_isFormalAdjoint.symm`). **Remaining (Mathlib gap):** the criterion `A⊆A† + ker(A†∓i)=0` ⟹
 `Ā = Ā†` (e.s.a.) ⟹ Cayley/unbounded spectral theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has none of these; Cayley
 injectivity in Stone.lean.
 

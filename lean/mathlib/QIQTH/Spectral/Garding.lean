@@ -688,6 +688,37 @@ theorem deficiency_sub_trivial (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U 
   rw [hz] at hyy
   exact inner_self_eq_zero.mp hyy
 
+/-- **★★ `ker(A† − i) = 0` (adjoint eigenvector form):** if `A† w = i w` then `w = 0`. Using the formal-adjoint
+    relation `⟪A z, w⟫ = ⟪z, A† w⟫`, the condition `A† w = i w` makes `⟪(A + i) z, w⟫ = 0` for all `z`, so
+    `w ⊥ Range(A + i) = H` ⟹ `w = 0` (`deficiency_add_trivial`). This is the precise input
+    (`A†` has no `+i`-eigenvector) of the self-adjointness criterion. -/
+theorem ker_adjoint_sub_I_trivial (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖)
+    (hSC : ∀ y : H, Continuous (fun t => U t y)) (w : H) (hw : w ∈ (stoneGen U).adjoint.domain)
+    (heig : (stoneGen U).adjoint ⟨w, hw⟩ = Complex.I • w) : w = 0 := by
+  apply deficiency_add_trivial U hgrp hU0 hUbd hSC w
+  intro z
+  have hfa := ((LinearPMap.adjoint_isFormalAdjoint (T := stoneGen U)
+    (stoneDomain_dense U hgrp hU0 hUbd hSC)).symm) z ⟨w, hw⟩
+  rw [heig] at hfa
+  rw [inner_add_left, hfa, inner_smul_right, inner_smul_left, Complex.conj_I]
+  ring
+
+/-- **★★ `ker(A† + i) = 0` (adjoint eigenvector form):** if `A† w = −i w` then `w = 0` (mirror, via
+    `deficiency_sub_trivial`). With `ker_adjoint_sub_I_trivial`, `A†` has *no* `±i`-eigenvectors — the textbook
+    essential-self-adjointness criterion (`A ⊆ A†`, both deficiency subspaces trivial). -/
+theorem ker_adjoint_add_I_trivial (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖)
+    (hSC : ∀ y : H, Continuous (fun t => U t y)) (w : H) (hw : w ∈ (stoneGen U).adjoint.domain)
+    (heig : (stoneGen U).adjoint ⟨w, hw⟩ = -Complex.I • w) : w = 0 := by
+  apply deficiency_sub_trivial U hgrp hU0 hUbd hSC w
+  intro z
+  have hfa := ((LinearPMap.adjoint_isFormalAdjoint (T := stoneGen U)
+    (stoneDomain_dense U hgrp hU0 hUbd hSC)).symm) z ⟨w, hw⟩
+  rw [heig] at hfa
+  rw [inner_sub_left, hfa, inner_smul_right, inner_smul_left, Complex.conj_I]
+  ring
+
 end SelfAdjoint
 
 end QIQTH.Spectral

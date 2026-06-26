@@ -5047,6 +5047,14 @@ namespace QIQTH.AxiomAudit
 -- deficiency_sub_trivial — if ⟪(A±i)x, y⟫=0 ∀x∈domain (y ⊥ Range(A±i)) then y=0. From surjectivity (Range(A±i)=H):
 -- y=(A±i)z ⟹ ⟪y,y⟫=0 ⟹ y=0 (inner_self_eq_zero). I.e. ker(A†∓i)=Range(A±i)^⊥=0 — the textbook essential-self-adjointness
 -- criterion's content, now machine-checked. Axiom-free. Remaining (Mathlib gap): the criterion ⟹ Ā=Ā† (Cayley/spectral thm).
+#print axioms QIQTH.Spectral.ker_adjoint_sub_I_trivial
+#print axioms QIQTH.Spectral.ker_adjoint_add_I_trivial
+-- ★★ P4 WALL — A† HAS NO ±i-EIGENVECTORS (the e.s.a. criterion in adjoint form): ker_adjoint_sub_I_trivial /
+-- ker_adjoint_add_I_trivial — if (stoneGen U).adjoint ⟨w,hw⟩ = ±i•w then w=0. Via the formal-adjoint relation
+-- ⟪A z, w⟫ = ⟪z, A† w⟫ (adjoint_isFormalAdjoint.symm), A†w=±iw gives ⟪(A∓i)z, w⟫=0 ∀z ⟹ w ⊥ Range(A∓i)=H ⟹ w=0
+-- (deficiency_add/sub_trivial). So ker(A†∓i)=0 in Mathlib's LinearPMap.adjoint API — the EXACT hypothesis the
+-- self-adjointness criterion (A⊆A† + ker(A†∓i)=0 ⟹ Ā=Ā†) consumes. Axiom-free. Remaining (Mathlib gap): the criterion
+-- itself (Cayley transform) + the unbounded spectral theorem ⟹ Stone.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via
