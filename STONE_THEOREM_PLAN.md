@@ -273,9 +273,14 @@ contractive one-parameter unitary group, composing `stoneGen_le_adjoint` (condit
 `stoneDomain_dense` (which discharges it). The symmetric densely-defined generator is now contained in its
 `LinearPMap` adjoint *with no carried hypotheses* beyond the C₀-unitary-group structure — the textbook
 "symmetric operator" statement, machine-checked.
-**Remaining (structural, no new analytic content):** self-adjointness `Ā = Ā†` of the closure via the
-Cayley/`Range(A ± i)`-dense criterion (the Cayley estimates `‖(A±i)x‖²=‖Ax‖²+‖x‖²` for injectivity are in
-`Spectral/Stone.lean`) ⟹ Stone returns `U_t = exp(it Ā)`, for `X = A_edge`, `P`, `K`.
+Also ✅ `stoneGen_isClosable` — **the closure `Ā` exists**: `(stoneGen U).IsClosable` for a contractive unitary
+group. The symmetric densely-defined generator has a closed extension (its adjoint `A†`, closed by
+`LinearPMap.adjoint_isClosed` given the dense smooth domain) and `A ⊆ A†`, so it is closable
+(`IsClosable.leIsClosable`) — the prerequisite for forming `Ā = (stoneGen U).closure` and asking `Ā = Ā†`.
+**Remaining (the genuine Mathlib-grade operator-theory gap):** `Range(A ± i)` dense (deficiency indices zero,
+via the resolvent `∫₀^∞ e^{−t} U_t dt`) ⟹ `Ā = Ā†` (essential self-adjointness) ⟹ the Cayley transform / unbounded
+spectral theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has none of these; the Cayley injectivity estimates
+`‖(A±i)x‖²=‖Ax‖²+‖x‖²` are in `Spectral/Stone.lean`.
 
 ## 3. Dependency graph
 ```

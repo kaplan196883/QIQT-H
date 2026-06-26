@@ -375,6 +375,20 @@ theorem stoneGen_subset_adjoint (U : ℝ → (H →L[ℂ] H))
     stoneGen U ≤ (stoneGen U).adjoint :=
   stoneGen_le_adjoint U hgrp hU0 hUinner (stoneDomain_dense U hgrp hU0 hUbd hSC)
 
+/-- **★ The Stone generator is closable; its closure `Ā` exists.** A symmetric densely-defined operator has a
+    closed extension — its own adjoint `A†` (closed by `LinearPMap.adjoint_isClosed`, given the smooth domain is
+    dense) — and `A ⊆ A†` (`stoneGen_subset_adjoint`), so `A` is closable (`IsClosable.leIsClosable`). This is
+    the prerequisite for forming the closure `Ā = (stoneGen U).closure` and asking `Ā = Ā†` (self-adjointness). -/
+theorem stoneGen_isClosable (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖)
+    (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    (stoneGen U).IsClosable :=
+  (LinearPMap.adjoint_isClosed (T := stoneGen U)
+      (stoneDomain_dense U hgrp hU0 hUbd hSC)).isClosable.leIsClosable
+    (stoneGen_subset_adjoint U hgrp hU0 hUinner hUbd hSC)
+
 end SelfAdjoint
 
 end QIQTH.Spectral

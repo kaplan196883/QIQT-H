@@ -232,8 +232,10 @@ machine-checked, axiom-free. **This discharges the density hypothesis of `stoneG
 analytic input to essential self-adjointness.** Also ✅ `stoneGen_subset_adjoint` — **the unconditional
 `A ⊆ A†`** (`stoneGen U ≤ (stoneGen U)†`), composing the conditional `stoneGen_le_adjoint` with
 `stoneDomain_dense`: the symmetric densely-defined generator is contained in its adjoint with no carried
-density hypothesis. Remaining (structural, no new analytic content): closure self-adjoint `Ā = Ā†`
-(Cayley/`Range(A±i)`-dense criterion; injectivity estimates already in Stone.lean) ⟹ Stone `U_t = exp(it Ā)`.
+density hypothesis. Also ✅ `stoneGen_isClosable` — **the closure `Ā` exists** (`(stoneGen U).IsClosable`): `A`
+has a closed extension `A†` (`adjoint_isClosed` + density) and `A ⊆ A†`, so it is closable. **Remaining (the
+genuine Mathlib-grade operator-theory gap):** `Range(A±i)` dense ⟹ `Ā = Ā†` (e.s.a.) ⟹ Cayley/unbounded spectral
+theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has none of these; the Cayley injectivity estimates are in Stone.lean.
 
 ### Phase 4 (operators) — the modular Hamiltonian `K` as a symmetric operator ✅ (3rd & LAST C₀ group; trio complete)
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/ModularGenerator.lean`):** the Stone-instantiation pattern

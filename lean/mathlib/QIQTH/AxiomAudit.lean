@@ -4976,6 +4976,12 @@ namespace QIQTH.AxiomAudit
 -- with stoneDomain_dense (which DISCHARGES that density). The symmetric densely-defined generator is contained in
 -- its LinearPMap adjoint — the textbook "symmetric operator" with the density hypothesis no longer carried.
 -- Axiom-free. Self-adjointness Ā=Ā† of the closure then follows from the Cayley/Range(A±i)-dense criterion.
+#print axioms QIQTH.Spectral.stoneGen_isClosable
+-- ★ P4 WALL — CLOSABILITY (the closure Ā exists): stoneGen_isClosable — (stoneGen U).IsClosable for a contractive
+-- unitary group. The symmetric densely-defined generator has a closed extension — its adjoint A† (closed by
+-- LinearPMap.adjoint_isClosed, given the smooth domain is dense via stoneDomain_dense) — and A⊆A†
+-- (stoneGen_subset_adjoint), so A is closable (IsClosable.leIsClosable). Prerequisite for forming Ā = closure and
+-- asking Ā=Ā† (self-adjointness). Axiom-free. Remaining: Range(A±i) dense ⟹ Ā=Ā† (the Cayley criterion, Mathlib gap).
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via
