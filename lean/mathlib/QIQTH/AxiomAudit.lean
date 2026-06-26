@@ -5089,6 +5089,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cfcPLM
 #print axioms QIQTH.Spectral.cfcPLMcc
 #print axioms QIQTH.Spectral.cayleyScalarMeasure
+#print axioms QIQTH.Spectral.cayleyScalarMeasure_integral
+-- ★★★ P4 WALL — μ_x REPRESENTS THE FUNCTIONAL: cayleyScalarMeasure_integral [Nontrivial H] —
+-- ∫ f dμ_x = re⟪x, cfc f V x⟫ for f : C_c(σV,ℝ) (RealRMK.integral_rieszMeasure for cfcPLMcc x). This PINS μ_x to V:
+-- its moments are the expectations of functions of V in the state x (total mass ‖x‖², first moment re⟪x,Vx⟫). The
+-- operator → scalar-spectral-measure half of the spectral theorem is now end-to-end machine-checked. Axiom-free.
 -- ★★★ P4 WALL — THE SCALAR SPECTRAL MEASURE μ_x IS CONSTRUCTED: cayleyScalarMeasure [Nontrivial H] —
 -- Measure (spectrum ℂ V) := RealRMK.rieszMeasure (cfcPLMcc x), the finite Borel measure on σ(V)⊆S¹ from the
 -- Riesz–Markov–Kakutani theorem applied to the positive linear functional f↦re⟪x,cfc f V x⟫. (CompactSpace σ(V)

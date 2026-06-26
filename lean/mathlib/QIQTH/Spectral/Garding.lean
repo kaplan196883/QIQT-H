@@ -1350,6 +1350,24 @@ noncomputable def cayleyScalarMeasure [Nontrivial H] (U : ℝ → (H →L[ℂ] H
     isCompact_iff_compactSpace.mp (spectrum.isCompact _)
   RealRMK.rieszMeasure (cfcPLMcc U hgrp hU0 hUinner hUbd hSC x)
 
+/-- **★★★ The scalar spectral measure represents the functional:** `∫ f dμ_x = re⟪x, cfc f V x⟫` for every
+    `f : C_c(σ(V), ℝ)` (the `↑∘f` here is the `ℝ↪ℂ` lift fed to the continuous functional calculus). This is the
+    Riesz–Markov representation `RealRMK.integral_rieszMeasure` for the functional `cfcPLMcc x` — it pins `μ_x` to
+    `V`: its moments are the expectations of the powers of `V` in the state `x`. -/
+theorem cayleyScalarMeasure_integral [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H)
+    (f : C_c(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℝ)) :
+    ∫ ω, f ω ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x)
+      = (inner ℂ x (cfcL (cayley_isStarNormal U hgrp hU0 hUinner hUbd hSC)
+          (ContinuousLinearMap.compLeftContinuous ℝ
+            (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) Complex.ofRealCLM
+            f.toContinuousMap) x)).re := by
+  haveI : CompactSpace (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) :=
+    isCompact_iff_compactSpace.mp (spectrum.isCompact _)
+  exact RealRMK.integral_rieszMeasure (cfcPLMcc U hgrp hU0 hUinner hUbd hSC x) f
+
 end SelfAdjoint
 
 end QIQTH.Spectral

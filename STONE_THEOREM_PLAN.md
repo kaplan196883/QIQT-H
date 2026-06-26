@@ -431,10 +431,15 @@ Also ✅ `cayleyScalarMeasure` `[Nontrivial H]` — **the scalar spectral measur
 `Measure (spectrum ℂ V) := RealRMK.rieszMeasure (cfcPLMcc x)`, the finite Borel measure on `σ(V) ⊆ S¹` from the
 Riesz–Markov theorem applied to the positive functional `f ↦ re⟪x, cfc f V x⟫`. (`CompactSpace σ(V)` via
 `spectrum.isCompact` ⟹ the `T2`/`MeasurableSpace`/`BorelSpace`/`LocallyCompactSpace` instances all resolve.)
-**Next:** prove the integral identity `∫ f dμ_x = re⟪x, cfc f V x⟫` (`RealRMK.integral_rieszMeasure`, giving total
-mass `‖x‖²` and first moment `re⟪x, V x⟫`); then assemble the family `{μ_x}` into a circle-PVM `E` (the Mathlib gap
-— no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` has its own) with `V = ∫ z dE`, transport to
-`A = ∫ λ dE` ⟹ Stone.
+Also ✅ `cayleyScalarMeasure_integral` `[Nontrivial H]` — **`μ_x` represents the functional**:
+`∫ f dμ_x = re⟪x, cfc f V x⟫` for `f : C_c(σ(V), ℝ)` (`RealRMK.integral_rieszMeasure` for `cfcPLMcc x`). This pins
+`μ_x` to `V` — its moments are the expectations of functions of `V` in the state `x`. **The operator →
+scalar-spectral-measure half of the spectral theorem is now end-to-end machine-checked** (Cayley unitary → cfc
+functional → positivity + linearity → RMK → `μ_x` → integral identity).
+**Next:** assemble the family `{μ_x}` (over `x ∈ H`) into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with
+`V = ∫ z dE` — the genuine Mathlib gap (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its
+own, where the polarization `μ_{x,y}` → genuine projections `E(S)` is `PVM_of_selfAdjoint`, the documented
+residual); then transport `E` through the inverse Cayley to `A = ∫ λ dE` ⟹ Stone `U_t = exp(it A)`.
 **Next multi-fire sub-construction (the operator → PVM keystone, RMK + cfc supported):** the scalar spectral
 measures `μ_x` of `V` (positive functional `f ↦ re⟨x, cfc f V x⟩` → `RealRMK.rieszMeasure`), then their assembly
 into a circle-PVM `E` with `V = ∫ z dE`, then transport through inverse Cayley to `A = ∫ λ dE` ⟹ Stone.

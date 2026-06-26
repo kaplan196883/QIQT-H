@@ -315,8 +315,11 @@ Also ✅ `cfcPLMcc` `[Nontrivial H]` (**the RMK input** `C_c(σV,ℝ)→ₚ[ℝ]
 Also ✅ `cayleyScalarMeasure` `[Nontrivial H]` (**the scalar spectral measure `μ_x` of `V` is CONSTRUCTED** —
 `RealRMK.rieszMeasure (cfcPLMcc x)`, a finite Borel measure on `σ(V)⊆S¹`; CompactSpace σ(V) ⟹ all the Borel/LCH
 instances resolve).
-**Next:** `∫f dμ_x = re⟪x,cfc f V x⟫` (`RealRMK.integral_rieszMeasure`) → assemble `{μ_x}` into the circle-PVM `E`
-(Mathlib gap) → transport to `A=∫λ dE` ⟹ Stone.
+Also ✅ `cayleyScalarMeasure_integral` `[Nontrivial H]` (**`μ_x` represents the functional** —
+`∫f dμ_x = re⟪x,cfc f V x⟫` via `RealRMK.integral_rieszMeasure`; pins μ_x to V). **The operator →
+scalar-spectral-measure half of the spectral theorem is end-to-end machine-checked.**
+**Next:** assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap — polarization μ_{x,y} → projections E(S),
+`PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
 `E` (`V=∫z dE`) → transport via inverse Cayley to `A=∫λ dE` ⟹ Stone. The bounded-PVM remains the genuine gap.
 **Remaining (Mathlib gap):** the **Borel/PVM** functional calculus on `S¹` for `V` (Mathlib has *continuous* FC
