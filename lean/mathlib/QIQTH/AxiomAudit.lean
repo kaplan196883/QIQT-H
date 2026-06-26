@@ -5076,6 +5076,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayley_isStarNormal
 #print axioms QIQTH.Spectral.nonneg_re_inner_nonneg
 #print axioms QIQTH.Spectral.cayley_cfc_id
+#print axioms QIQTH.Spectral.cayley_cfc_one
+#print axioms QIQTH.Spectral.cayley_cfc_sq_re_inner_nonneg
+-- ★★ P4 WALL — SPECTRAL MOMENTS + RMK FUNCTIONAL POSITIVITY: cayley_cfc_one [Nontrivial H] — cfc 1 V = 1
+-- (resolution of identity, ∫1 dE = 1; with cfc_id's ∫z dE = V these pin μ_x's total mass ‖x‖² and first moment).
+-- cayley_cfc_sq_re_inner_nonneg [Nontrivial H] — 0 ≤ re⟪x, cfc(conj f·f) V x⟫ for f continuous on σ(V): since
+-- cfc(conj f·f)V = cfc(star f)V * cfc f V = (cfc f V)⋆(cfc f V) ≥ 0 (cfc_mul + cfc_star + star_mul_self_nonneg),
+-- the expectation = ‖cfc f V x‖² ≥ 0. As |f|² generate the nonneg cone of C(σV,ℝ), this is the POSITIVITY of the
+-- Riesz–Markov functional g↦re⟪x,cfc g V x⟫ — the input RealRMK.rieszMeasure turns into μ_x. Axiom-free.
 -- ★★ P4 WALL — cfc id V = V (the "V = ∫ z dE" continuous-FC shadow): cayley_cfc_id [Nontrivial H] —
 -- cfc (id : ℂ→ℂ) (cayleyUnitary U ⋯) = cayleyUnitary U ⋯ (cfc_id ℂ _ cayley_isStarNormal). The coordinate function
 -- z↦z applied to V through its continuous spectral data returns V — the C(σV)-level form of V = ∫_{S¹} z dE(z),

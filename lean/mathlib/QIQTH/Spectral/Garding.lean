@@ -34,6 +34,7 @@ import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 import Mathlib.Analysis.InnerProductSpace.Adjoint
 import Mathlib.Analysis.CStarAlgebra.Spectrum
 import Mathlib.Analysis.InnerProductSpace.Positive
+import Mathlib.Analysis.InnerProductSpace.StarOrder
 import Mathlib.Analysis.CStarAlgebra.ContinuousLinearMap
 import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Basic
 
@@ -1084,6 +1085,36 @@ theorem cayley_cfc_id [Nontrivial H] (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s
     cfc (id : ℂ → ℂ) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
       = cayleyUnitary U hgrp hU0 hUinner hUbd hSC :=
   cfc_id ℂ _ (cayley_isStarNormal U hgrp hU0 hUinner hUbd hSC)
+
+/-- **★ The continuous functional calculus of the constant `1` is the identity:** `cfc 1 V = 1`. The `C(σ(V))`-level
+    form of `∫_{S¹} 1 dE = 1` — the **resolution of identity** / total mass of `V`'s spectral measure. With
+    `cayley_cfc_id` (`cfc id V = V`, the first moment `∫ z dE = V`), these are the two defining moments the scalar
+    spectral measures `μ_x` are pinned by: total mass `μ_x(σ(V)) = re⟪x, (cfc 1 V) x⟫ = ‖x‖²`, and first moment
+    `∫ z dμ_x = re⟪x, (cfc id V) x⟫ = re⟪x, V x⟫`. -/
+theorem cayley_cfc_one [Nontrivial H] (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    cfc (1 : ℂ → ℂ) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) = 1 :=
+  cfc_one ℂ _ (cayley_isStarNormal U hgrp hU0 hUinner hUbd hSC)
+
+/-- **★★ The scalar spectral functional is positive on `|f|²` test functions:**
+    `0 ≤ re⟪x, cfc (conj f · f) V x⟫` for any `f` continuous on `σ(V)`. Indeed
+    `cfc (conj f · f) V = cfc (star f) V * cfc f V = (cfc f V)⋆ (cfc f V) ≥ 0` (`cfc_mul` + `cfc_star` +
+    `star_mul_self_nonneg`), so the expectation is `‖cfc f V x‖² ≥ 0` by `nonneg_re_inner_nonneg`. Since the
+    functions `conj f · f = |f|²` generate the nonnegative cone of `C(σ(V), ℝ)`, this is the **positivity of the
+    Riesz–Markov functional** `g ↦ re⟪x, cfc g V x⟫` — the property `RealRMK.rieszMeasure` turns into the finite
+    Borel scalar spectral measure `μ_x` of `V` (with `∫ g dμ_x = re⟪x, cfc g V x⟫`). -/
+theorem cayley_cfc_sq_re_inner_nonneg [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (f : ℂ → ℂ) (hf : ContinuousOn f (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (x : H) :
+    0 ≤ (inner ℂ x
+      (cfc (fun z => star (f z) * f z) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)).re := by
+  apply nonneg_re_inner_nonneg
+  rw [cfc_mul (fun z => star (f z)) f _ hf.star hf, cfc_star]
+  exact star_mul_self_nonneg _
 
 end SelfAdjoint
 

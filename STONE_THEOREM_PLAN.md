@@ -386,6 +386,15 @@ scalar-measure construction integrates against.
 `attribute [local instance]` + importing `CStarAlgebra.ContinuousLinearMap` (the `CStarAlgebra (H→L[ℂ]H)` instance)
 and `CFC.Basic` + threading `[Nontrivial H]` (the named generators `X=A_edge`, `P`, `K` are all on nontrivial
 spaces). So the cfc-of-`V` route is open; the scalar measures `μ_x` can now be built.
+Also ✅ `cayley_cfc_one` (`cfc 1 V = 1`, the **resolution of identity** `∫ 1 dE = 1`; with `cayley_cfc_id`'s
+`∫ z dE = V` these are `μ_x`'s total mass and first moment) and `cayley_cfc_sq_re_inner_nonneg` — **the
+Riesz–Markov functional is positive**: `0 ≤ re⟪x, cfc (conj f · f) V x⟫` for `f` continuous on `σ(V)`, since
+`cfc (conj f·f) V = (cfc f V)⋆(cfc f V) ≥ 0` (`cfc_mul`+`cfc_star`+`star_mul_self_nonneg`) so the expectation is
+`‖cfc f V x‖² ≥ 0`. As the `|f|²` generate the nonneg cone of `C(σ(V), ℝ)`, this is exactly the positivity
+`RealRMK.rieszMeasure` consumes to produce `μ_x` (with `∫ g dμ_x = re⟪x, cfc g V x⟫`).
+**Next:** bundle `g ↦ re⟪x, cfc g V x⟫` as `C_c(σ(V), ℝ) →ₚ[ℝ] ℝ` (linearity from `cfcHom` being a ⋆-hom +
+positivity above) and apply `RealRMK.rieszMeasure` ⟹ the scalar spectral measure `μ_x`; then assemble the `μ_x`
+into a circle-PVM `E` (the Mathlib gap — no `ProjectionValuedMeasure` type), transport to `A = ∫ λ dE` ⟹ Stone.
 **Next multi-fire sub-construction (the operator → PVM keystone, RMK + cfc supported):** the scalar spectral
 measures `μ_x` of `V` (positive functional `f ↦ re⟨x, cfc f V x⟩` → `RealRMK.rieszMeasure`), then their assembly
 into a circle-PVM `E` with `V = ∫ z dE`, then transport through inverse Cayley to `A = ∫ λ dE` ⟹ Stone.
