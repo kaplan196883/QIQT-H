@@ -405,6 +405,12 @@ item.** Never claim the `1/4`.
   composed through the measure-preserving shift `·+t`. **The position spectral projection transforms covariantly
   under translation** — exactly the relation making the translation generator (momentum `P`) canonically conjugate
   to position `X`, the kinematic backbone of `#5`. (The earlier scalar-level covariance follows as a corollary.)
+  **General multiplication-operator norm + unimodular isometry criterion ✅** (`MultiplicationOp.lean`, axiom-free,
+  budget 0): `norm_mulOp_sq` (`‖M_φ f‖²=∫‖φ a‖²‖f a‖²` — generalizes brick 8's `𝟙_A` case to any bounded measurable
+  symbol) and `norm_mulOp_of_norm_one` (`‖φ‖≡1 ⟹ ‖M_φ f‖=‖f‖`, the unitarity criterion). This is the foundation for
+  the **position-side one-parameter unitary group `e^{isX}`** (modulation `M_{e^{isx}}`, `|e^{isx}|=1 ⟹` unitary) —
+  the dual of the translation group `e^{itP}`, completing the canonical X–P pair toward the **Weyl CCR**. Recorded
+  next target: the `e^{isX}` modulation group + the Weyl commutation relation `e^{itP}e^{isX}=e^{ist}e^{isX}e^{itP}`.
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.

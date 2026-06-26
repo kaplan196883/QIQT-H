@@ -370,6 +370,17 @@ theorem norm_indMul_sq {A : Set α} (hA : MeasurableSet A) (f : Lp ℂ 2 μ) :
   · simp only [indSymbol, Set.indicator_of_mem h, one_mul]
   · simp [indSymbol, Set.indicator_of_notMem h]
 
+/-- **The norm of a general multiplication operator `‖M_φ f‖² = ∫ ‖φ a‖² ‖f a‖² dμ`** — the `L²` mass of `f`
+    weighted by `‖φ‖²`. Generalizes `norm_indMul_sq` (the `φ = 𝟙_A` case) to any bounded measurable symbol. -/
+theorem norm_mulOp_sq {φ : α → ℂ} (hφ : Measurable φ) {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ s, ‖φ s‖ ≤ C)
+    (f : Lp ℂ 2 μ) :
+    ‖mulOp hφ hC0 hC f‖ ^ 2 = ∫ a, ‖φ a‖ ^ 2 * ‖f a‖ ^ 2 ∂μ := by
+  rw [← inner_self_eq_norm_sq (𝕜 := ℂ), MeasureTheory.L2.inner_def,
+    ← integral_re (MeasureTheory.L2.integrable_inner _ _)]
+  refine MeasureTheory.integral_congr_ae ?_
+  filter_upwards [mulOp_coeFn hφ hC0 hC f] with a e1
+  rw [e1, inner_self_eq_norm_sq (𝕜 := ℂ), norm_mul, mul_pow]
+
 /-- The squared `L²` norm as the integral of the pointwise squared norm, `‖x‖² = ∫ ‖x a‖² dμ` — read off the
     spectral measure at `A = univ` (`E(univ) = 1`). -/
 theorem norm_sq_eq_integral (x : Lp ℂ 2 μ) : ‖x‖ ^ 2 = ∫ a, ‖x a‖ ^ 2 ∂μ := by
@@ -389,6 +400,20 @@ theorem norm_indMul_le {A : Set α} (hA : MeasurableSet A) (x : Lp ℂ 2 μ) :
   calc ‖indMul hA x‖ = Real.sqrt (‖indMul hA x‖ ^ 2) := (Real.sqrt_sq (norm_nonneg _)).symm
     _ ≤ Real.sqrt (‖x‖ ^ 2) := Real.sqrt_le_sqrt hsq
     _ = ‖x‖ := Real.sqrt_sq (norm_nonneg _)
+
+/-- **A multiplication operator by a unimodular symbol is an isometry, `‖M_φ f‖ = ‖f‖`** (when `‖φ‖ ≡ 1`).
+    The unitarity criterion: `M_{e^{i·}}` (modulation, the `e^{isX}` group) preserves the `L²` norm. -/
+theorem norm_mulOp_of_norm_one {φ : α → ℂ} (hφ : Measurable φ) {C : ℝ} (hC0 : 0 ≤ C)
+    (hC : ∀ s, ‖φ s‖ ≤ C) (hφ1 : ∀ a, ‖φ a‖ = 1) (f : Lp ℂ 2 μ) :
+    ‖mulOp hφ hC0 hC f‖ = ‖f‖ := by
+  have hsq : ‖mulOp hφ hC0 hC f‖ ^ 2 = ‖f‖ ^ 2 := by
+    rw [norm_mulOp_sq, norm_sq_eq_integral]
+    refine MeasureTheory.integral_congr_ae (Filter.Eventually.of_forall fun a => ?_)
+    show ‖φ a‖ ^ 2 * ‖f a‖ ^ 2 = ‖f a‖ ^ 2
+    rw [hφ1 a]; ring
+  calc ‖mulOp hφ hC0 hC f‖ = Real.sqrt (‖mulOp hφ hC0 hC f‖ ^ 2) := (Real.sqrt_sq (norm_nonneg _)).symm
+    _ = Real.sqrt (‖f‖ ^ 2) := by rw [hsq]
+    _ = ‖f‖ := Real.sqrt_sq (norm_nonneg _)
 
 /-- **Two-vector orthogonality of the spectral projections:** for disjoint measurable `A, B`,
     `⟪E(A) x, E(B) y⟫ = 0` for *all* `x, y` (the ranges `L²(A) ⟂ L²(B)` are orthogonal subspaces). The form the

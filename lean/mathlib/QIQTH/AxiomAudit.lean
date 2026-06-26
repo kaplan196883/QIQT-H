@@ -1489,6 +1489,13 @@ namespace QIQTH.AxiomAudit
 -- through the measure-preserving shift ·+t (QuasiMeasurePreserving.tendsto_ae.eventually). Axiom-free. This is the
 -- kinematic backbone of WedgeKMSFlux #5: the position spectral projection transforms covariantly under translation,
 -- exactly the relation making the translation generator (momentum P) canonically conjugate to position X.
+#print axioms QIQTH.Spectral.Multiplication.norm_mulOp_sq
+#print axioms QIQTH.Spectral.Multiplication.norm_mulOp_of_norm_one
+-- ★ GENERAL MULTIPLICATION-OPERATOR NORM + UNIMODULAR ISOMETRY CRITERION: norm_mulOp_sq (‖M_φ f‖²=∫‖φ a‖²‖f a‖²,
+-- generalizing brick 8's 𝟙_A case to any bounded measurable symbol) and norm_mulOp_of_norm_one (‖φ‖≡1 ⟹ ‖M_φ f‖=‖f‖,
+-- the unitarity criterion). This is the foundation for the POSITION-side one-parameter unitary group e^{isX}
+-- (modulation M_{e^{isx}}, |e^{isx}|=1 ⟹ unitary) — the dual of the translation group e^{itP}, completing the
+-- canonical X–P pair toward the Weyl CCR. Axiom-free; the e^{isX} group + Weyl CCR is the teed-up next target.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
