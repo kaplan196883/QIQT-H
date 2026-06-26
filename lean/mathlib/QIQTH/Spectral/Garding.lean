@@ -445,6 +445,17 @@ theorem resolvent_smul (U : ℝ → (H →L[ℂ] H)) (hUbd : ∀ (t : ℝ) (y : 
   refine setIntegral_congr_fun measurableSet_Ioi fun t _ => ?_
   rw [map_smul, smul_comm]
 
+/-- **The resolvent commutes with the flow:** `U_s (R x) = R (U_s x)`. From `resolvent_apply_flow`
+    (`U_s (R x) = ∫₀^∞ e^{−t} U_{s+t} x dt`) and `R (U_s x) = ∫₀^∞ e^{−t} U_t (U_s x) dt = ∫₀^∞ e^{−t} U_{t+s} x dt`
+    (group law), which agree since `U_{s+t} = U_{t+s}`. So `R` commutes with `U_s`, hence with the generator
+    `A` — a resolvent/spectral consistency property. -/
+theorem resolvent_comm_flow (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (x : H) (hUbd : ∀ t, ‖U t x‖ ≤ ‖x‖) (hcont : Continuous (fun t => U t x)) (s : ℝ) :
+    U s (resolvent U x) = resolvent U (U s x) := by
+  rw [resolvent_apply_flow U hgrp x hUbd hcont s, resolvent]
+  refine setIntegral_congr_fun measurableSet_Ioi fun t _ => ?_
+  rw [← ContinuousLinearMap.comp_apply, ← hgrp t s, add_comm s t]
+
 section SelfAdjoint
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 

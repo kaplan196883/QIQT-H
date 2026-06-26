@@ -287,7 +287,8 @@ Also ✅ `resolvent_apply_flow` — **the flow-on-resolvent identity** `U_s (R x
 (`U_s` through the set Bochner integral via `integral_comp_comm` + `ContinuousLinearMap.map_smul_of_tower` for
 the `ℝ`-smul + the group law) — the algebraic core of the resolvent identity. Plus `resolvent_add` (`R(x+y)=Rx+Ry`)
 + `resolvent_smul` (`R(c•x)=c•Rx`): **`R` is ℂ-linear**, so with `norm_resolvent_le` it is a bounded ℂ-linear
-operator `(1 − iA)⁻¹`.
+operator `(1 − iA)⁻¹`. Plus `resolvent_comm_flow` — **`R` commutes with the flow** `U_s (R x) = R (U_s x)` (from
+`resolvent_apply_flow` + the group law, `U_{s+t} = U_{t+s}`), hence with the generator `A`.
 **Remaining (the genuine Mathlib-grade operator-theory frontier):** differentiate the RHS in `s` at `0` (after
 the change of variables `u = s+t` ⟹ `e^s ∫_s^∞ e^{−u} U_u x du`, whose `d/ds|₀ = R x − x` by the **FTC for the
 improper integral with variable lower limit**) ⟹ `R x ∈ stoneDomain U` + the resolvent identity

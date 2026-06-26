@@ -5002,6 +5002,11 @@ namespace QIQTH.AxiomAudit
 -- ★ P4 WALL — the RESOLVENT IS ℂ-LINEAR: resolvent_add (R(x+y)=Rx+Ry, integral_add + U_t linear) + resolvent_smul
 -- (R(c•x)=c•Rx, integral_smul + map_smul + smul_comm). With norm_resolvent_le (‖Rx‖≤‖x‖), R = (1−iA)⁻¹ is a bounded
 -- ℂ-linear operator. Axiom-free. Remaining: the resolvent identity (A+i)(R x)=i x (FTC differentiation) ⟹ Range(A+i)=H.
+#print axioms QIQTH.Spectral.resolvent_comm_flow
+-- ★ P4 WALL — the RESOLVENT COMMUTES WITH THE FLOW: resolvent_comm_flow — U_s (R x) = R (U_s x), from
+-- resolvent_apply_flow (U_s(Rx)=∫₀^∞ e^{−t}U_{s+t}x) and R(U_s x)=∫₀^∞ e^{−t}U_t(U_s x)=∫₀^∞ e^{−t}U_{t+s}x (group
+-- law), equal since U_{s+t}=U_{t+s}. So R commutes with U_s hence with the generator A — a resolvent/spectral
+-- consistency property. Axiom-free.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via
