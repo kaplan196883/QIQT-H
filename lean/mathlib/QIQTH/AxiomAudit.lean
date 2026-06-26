@@ -1474,6 +1474,14 @@ namespace QIQTH.AxiomAudit
 -- with translationUnitary_apply/_symm_apply. Upgrades the isometry semigroup to a one-parameter UNITARY group —
 -- the form the conjugation/modular machinery consumes (e.g. positionPVM.conj (translationUnitary t) = the
 -- translation-covariance of the position observable). Axiom-free; the Stone generator (P) remains the frontier for #5.
+#print axioms QIQTH.Spectral.Multiplication.translationUnitary_coe_apply
+#print axioms QIQTH.Spectral.Multiplication.positionPVM_conj_translation_scalarMeasure
+-- ★ TRANSLATION-COVARIANCE of the position observable (scalar level): positionPVM_conj_translation_scalarMeasure —
+-- ((positionPVM.conj (τ_t)).scalarMeasure x)(A) = ∫_A ‖(τ_{-t}x)(a)‖² da. Conjugating the position PVM by
+-- translation-by-t shifts the Born position distribution to that of the translated state τ_{-t}x — the covariance
+-- that makes the translation generator (momentum) conjugate to position (via conj_scalarMeasure +
+-- positionPVM_scalarMeasure + translationUnitary coe lemmas). Axiom-free. The stronger OPERATOR form
+-- τ_t E(A) τ_t⁻¹=E(A−t) is the recorded next tractable target (indicator-shift + 3-step ae-composition).
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

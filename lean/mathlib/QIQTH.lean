@@ -337,6 +337,9 @@ import QIQTH.Spectral.MomentumPVM
 -- The translation operator τ_t on L²(ℝ) ((τ_t f)(x)=f(x+t)): a ℂ-linear isometry, one-parameter group law
 -- τ_s∘τ_t=τ_{s+t}. The unitary family whose generator is the momentum operator P (toward WedgeKMSFlux #5).
 import QIQTH.Spectral.TranslationFlow
+-- Translation-covariance of the position observable: conjugating the position PVM by τ_t shifts the Born
+-- position distribution by t (the covariance making momentum the translation generator, conjugate to position).
+import QIQTH.Spectral.PositionCovariance
 -- Prize Stage 3.1 (finite case): the matrix spectral theorem packaged as a PVM — eigenprojections
 -- Pᵢ = U·diag(δᵢ)·U⋆ with ∑Pᵢ=1 (resolution of identity), Pᵢ²=Pᵢ, PᵢPⱼ=0, Pᵢ⋆=Pᵢ. The finite,
 -- axiom-free case of the bounded-spectral-theorem target (continuum stays open). Standard axioms:

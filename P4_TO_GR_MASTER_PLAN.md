@@ -392,6 +392,13 @@ item.** Never claim the `1/4`.
   `_symm_apply`. Upgrades the isometry semigroup to a one-parameter **unitary** group — the form the
   conjugation/modular machinery consumes (e.g. `positionPVM.conj (translationUnitary t)` is the translation-
   covariance of the position observable). The Stone generator `P` remains the single Lean frontier for `#5`.
+  **Translation-covariance of the position observable (scalar level) ✅** (`QIQTH/Spectral/PositionCovariance.lean`,
+  axiom-free, budget 0): `translationUnitary_coe_apply`/`_symm_coe_apply` (the unitary as a CLM acts by `τ_{±t}`)
+  and `positionPVM_conj_translation_scalarMeasure` — `((positionPVM.conj (τ_t)).scalarMeasure x)(A) =
+  ∫_A ‖(τ_{-t}x)(a)‖² da`: conjugating the position PVM by translation-by-`t` shifts the Born position
+  distribution to that of the translated state `τ_{-t}x`. The covariance that makes the translation generator
+  (momentum) conjugate to position. **Recorded next target:** the stronger *operator* form
+  `τ_t E(A) τ_t⁻¹ = E(A−t)` (indicator-shift `𝟙_A(x+t)=𝟙_{(·+t)⁻¹A}(x)` + 3-step ae-composition).
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.
