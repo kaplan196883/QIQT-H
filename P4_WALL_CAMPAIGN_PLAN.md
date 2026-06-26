@@ -193,21 +193,24 @@ multiplication that was the "real wall" of Phase 1. The matter side of the cross
 **NEXT (separate):** Phase 2 (translation unitary group λ_t via `DomAddAct`), Phase 3 (covariance), then the
 frontiers (Stone, the trace). The `1/4` coefficient stays the cited UV datum throughout.
 
-### Phase 4.3 (operator, partial) — the clock group's three Stone hypotheses all in hand
-**Delivered (axiom-free, budget 0, `QIQTH/CrossedProductGenerator.lean`):** `clockTransl_inner` —
+### Phase 4.3 (operator) — the clock energy `X` as a symmetric operator at the concrete `Lp` type ✅ (Lp-wall cracked)
+**Delivered (axiom-free, budget 0, `QIQTH/CrossedProductGenerator.lean`):** first `clockTransl_inner` —
 `⟪λ_t a, λ_t b⟫ = ⟪a, b⟫` (the clock translation `λ_t` is a ℂ-linear isometry, via
-`LinearIsometry.inner_map_map`), the diamond-free **unitary** statement of the clock group and the third Stone
-hypothesis (`hUinner`). Together with `clockTransl_add` (group law) and `clockTransl_zero` (`λ_0 = 1`), the
-**three hypotheses of the general Stone generator** `stoneGen` are now ALL discharged for the concrete clock
-group `λ_t`. So mathematically the clock energy `X := stoneGen clockTransl = −i d/dt λ_t` IS a symmetric
-unbounded operator with the Cayley estimates (`X ± i` injective), its closure `= A_edge`.
-**Honest blocker (NOT mathematics):** *forming* `stoneGen clockTransl` at the concrete `Lp H 2 volume` type makes
-the elaborator `whnf`-unfold the `LinearPMap.domain` projection through the heavy `Lp`/`InnerProductSpace`
-instance tower → `isDefEq`/`whnf` heartbeat divergence (even at 10⁶), the same divergent-`Lp`-instance friction
-recorded for Phase 1.1/1.3. The instantiated corollaries (`clockEnergy_isFormalAdjoint_self`,
-`clockEnergy_norm_add_smul_I_sq`, `clockEnergy_norm_le_norm_add_smul_I`) are one-line term-mode applications of
-the green general lemmas, but do not currently *elaborate* at the `Lp` type — checkpointed in
-`CrossedProductGenerator.lean`. Resolving it is an `irreducible`/instance-management (or Mathlib) refactor.
+`LinearIsometry.inner_map_map`), the diamond-free **unitary** statement and the third Stone hypothesis
+(`hUinner`); together with `clockTransl_add` (group law) and `clockTransl_zero` (`λ_0 = 1`), all **three Stone
+hypotheses** are discharged for the concrete clock group `λ_t`. Then the concrete clock energy operator itself:
+- `clockEnergy := stoneGen clockTransl = −i d/dt λ_t` (`LinearPMap` on `L²(ℝ;H)`; its closure `= A_edge`);
+- `clockEnergy_isFormalAdjoint_self` — **`X` is symmetric** (`X ⊆ X†` once its domain is dense);
+- `clockEnergy_norm_add_smul_I_sq` — the **Cayley estimate** `‖(X + i) x‖² = ‖X x‖² + ‖x‖²`;
+- `clockEnergy_norm_le_norm_add_smul_I` — **`X + i` bounded below**, hence injective (deficiency-index datum).
+
+These instantiate the general Stone lemmas (the `_dom` projection-typed forms added to `Spectral/Stone.lean`) for
+`clockTransl`. **The `Lp`-elaboration wall (the `whnf`/`isDefEq` divergence on the `(stoneGen _).domain`
+projection through the heavy `Lp` instance tower, Phase-1.1/1.3 friction) is now DEFEATED** via
+`attribute [local irreducible] stoneGen stoneDomain` (so the projection is not unfolded) + pinning the ambient
+space `(H := Lp H 2 volume)` explicitly. **Remaining (analytic) frontier:** essential self-adjointness of `X`
+= `Range(X ± i)` dense (Gårding density) — needed before Stone returns `λ_t = exp(itX)` — is the carried wall,
+NOT claimed. The 1/4 ratio is derived (`SakharovRatio`); `⟨A_edge⟩ = A/4ℓ_P²` (value of `G`) is never claimed.
 
 ### Phase 4.2 (general Stone) — the symmetric-generator scaffolding COMPLETE; wall narrowed to Gårding density
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/Stone.lean`; see `STONE_THEOREM_PLAN.md` Phase 3 for the full

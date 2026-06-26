@@ -182,16 +182,19 @@ crossed-product campaign's Phase 4.2/4.3, currently the recorded frontier wall**
 multiplication by `e^{itξ}`, so `X = −i d/ds` is multiplication by frequency `ξ`; blocked only on **vector-valued
 Fourier/Plancherel** on `L²(ℝ;H)`, which Mathlib lacks (scalar only).  Gated on Phase 3 (or that Fourier gap).
 
-**PROGRESS — Phase 4 (clock-group hypotheses) ✅** (`QIQTH/CrossedProductGenerator.lean`, axiom-free, budget 0):
-`clockTransl_inner` — `⟪λ_t a, λ_t b⟫ = ⟪a, b⟫` (clock translation a ℂ-linear isometry, `inner_map_map`), the
-diamond-free **unitary** statement and the third Stone hypothesis (`hUinner`). With `clockTransl_add` (group law)
-+ `clockTransl_zero` (`λ_0 = 1`) + `clockTransl_stronglyContinuous`, **all three hypotheses of the general
-`stoneGen` are discharged for the concrete clock group** — so mathematically `X := stoneGen clockTransl` is the
-symmetric clock energy with the Cayley estimates. **Blocker (NOT math):** elaborating `stoneGen clockTransl` at
-the `Lp H 2 volume` type triggers the documented `Lp`-instance `whnf`/`isDefEq` divergence (the
-`(stoneGen _).domain` projection unfolds the heavy instance tower), so the one-line corollaries do not yet
-*elaborate* at the `Lp` type; honestly checkpointed in `CrossedProductGenerator.lean`. The general scaffolding +
-all three clock hypotheses stand; only the concrete `Lp` wiring is gated (an `irreducible`/instance refactor).
+**PROGRESS — Phase 4 (the clock energy `X` as a symmetric operator) ✅** (`QIQTH/CrossedProductGenerator.lean`,
+axiom-free, budget 0): `clockTransl_inner` — `⟪λ_t a, λ_t b⟫ = ⟪a, b⟫` (clock translation a ℂ-linear isometry,
+`inner_map_map`), the diamond-free **unitary** statement and the third Stone hypothesis (`hUinner`); with
+`clockTransl_add` + `clockTransl_zero` + `clockTransl_stronglyContinuous`, all three hypotheses of the general
+`stoneGen` are discharged for the concrete clock group. Then the **concrete clock energy operator**:
+`clockEnergy := stoneGen clockTransl` (its closure `= A_edge`), `clockEnergy_isFormalAdjoint_self` (X symmetric),
+`clockEnergy_norm_add_smul_I_sq` (Cayley estimate), `clockEnergy_norm_le_norm_add_smul_I` (X+i bounded below /
+injective) — instantiating the general lemmas (the new `_dom` projection-typed forms) for `clockTransl`.
+**The `Lp`-elaboration wall is DEFEATED:** the `whnf`/`isDefEq` divergence on the `(stoneGen _).domain` projection
+through the heavy `Lp` instance tower (Phase-1.1/1.3 friction) is killed by
+`attribute [local irreducible] stoneGen stoneDomain` + explicit ambient `(H := Lp H 2 volume)`. **Remaining
+analytic frontier:** essential self-adjointness `Range(X ± i)` dense (Gårding density) — needed before Stone
+returns `λ_t = exp(itX)` — stays the carried wall, NOT claimed.
 
 ## 3. Dependency graph
 ```

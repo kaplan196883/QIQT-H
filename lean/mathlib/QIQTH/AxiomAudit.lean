@@ -4875,8 +4875,17 @@ namespace QIQTH.AxiomAudit
 -- ★ P4 WALL Phase 4.3 — the THIRD Stone hypothesis for the clock group: clockTransl_inner — ⟪λ_t a, λ_t b⟫=⟪a,b⟫
 -- (λ_t a ℂ-linear isometry, via LinearIsometry.inner_map_map). The diamond-free UNITARY statement of the clock
 -- group. With clockTransl_add (group law) + clockTransl_zero (λ_0=1), the three hypotheses of the general Stone
--- generator (QIQTH.Spectral.stoneGen) are now ALL in hand for clockTransl. Axiom-free. (Concrete instantiation
--- stoneGen clockTransl is gated by the Lp-instance whnf divergence — checkpointed in CrossedProductGenerator.lean.)
+-- generator (QIQTH.Spectral.stoneGen) are now ALL in hand for clockTransl. Axiom-free.
+#print axioms QIQTH.StandardSubspaceModular.clockEnergy_isFormalAdjoint_self
+#print axioms QIQTH.StandardSubspaceModular.clockEnergy_norm_add_smul_I_sq
+#print axioms QIQTH.StandardSubspaceModular.clockEnergy_norm_le_norm_add_smul_I
+-- ★ P4 WALL Phase 4.3 — THE CLOCK ENERGY X AS A SYMMETRIC OPERATOR (concrete instantiation; Lp-wall CRACKED):
+-- clockEnergy := stoneGen clockTransl = −i d/dt λ_t, the generator of the clock translation group on L²(ℝ;H), its
+-- closure = A_edge. clockEnergy_isFormalAdjoint_self — X is symmetric (X⊆X† once dense); clockEnergy_norm_add_smul_I_sq
+-- — Cayley estimate ‖(X+i)x‖²=‖Xx‖²+‖x‖²; clockEnergy_norm_le_norm_add_smul_I — X+i bounded below ⟹ injective.
+-- All immediate instantiations of the general Stone lemmas (..._dom forms) for clockTransl_add/_zero/_inner. The
+-- Lp-instance whnf divergence was DEFEATED via attribute [local irreducible] stoneGen stoneDomain + explicit ambient
+-- (H := Lp H 2 volume). Axiom-free. (Essential self-adjointness = Range(X±i) dense = the carried analytic frontier.)
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable

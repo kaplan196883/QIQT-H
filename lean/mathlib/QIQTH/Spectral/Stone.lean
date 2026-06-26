@@ -243,6 +243,25 @@ theorem stoneGen_norm_le_norm_add_smul_I (U : ℝ → (H →L[ℂ] H))
   have h2 := Real.sqrt_le_sqrt hsq
   rwa [Real.sqrt_sq (norm_nonneg _), Real.sqrt_sq (norm_nonneg _)] at h2
 
+/-- `(stoneGen U).domain`-stated form of the Cayley estimate — identical content to
+    `stoneGen_norm_add_smul_I_sq` but with `x` typed via the `LinearPMap.domain` projection. This is the form
+    needed to *instantiate* the estimate at a concrete heavy type (e.g. `Lp`) under
+    `attribute [local irreducible] stoneGen`, where `stoneDomain U` and `(stoneGen U).domain` are no longer
+    defeq-interchangeable. -/
+theorem stoneGen_norm_add_smul_I_sq_dom (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b) (x : (stoneGen U).domain) :
+    ‖stoneGen U x + Complex.I • (x : H)‖ ^ 2 = ‖stoneGen U x‖ ^ 2 + ‖(x : H)‖ ^ 2 :=
+  stoneGen_norm_add_smul_I_sq U hgrp hU0 hUinner x
+
+/-- `(stoneGen U).domain`-stated form of the bounded-below bound `‖x‖ ≤ ‖(A + i) x‖` (see
+    `stoneGen_norm_add_smul_I_sq_dom` for why the projection-typed form). -/
+theorem stoneGen_norm_le_norm_add_smul_I_dom (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b) (x : (stoneGen U).domain) :
+    ‖(x : H)‖ ≤ ‖stoneGen U x + Complex.I • (x : H)‖ :=
+  stoneGen_norm_le_norm_add_smul_I U hgrp hU0 hUinner x
+
 /-- **`A ⊆ A†` for the Stone generator** — the explicit symmetric-operator containment, conditional on
     `hdense`, the density of the smooth domain (Gårding density, the genuine open analytic frontier of
     Phase 3.2). Given that density, the generator is contained in its `LinearPMap` adjoint:
