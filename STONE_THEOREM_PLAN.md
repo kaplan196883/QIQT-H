@@ -292,7 +292,10 @@ operator `(1 − iA)⁻¹`. Plus `resolvent_comm_flow` — **`R` commutes with t
 `resolvent_apply_flow_cov` — **the differentiation-ready form** `U_s (R x) = e^s ∫_s^∞ e^{−u} U_u x du` (change of
 variables `u = s+t` via `setIntegral_preimage_emb` for the translation, `(·+s)⁻¹(Ioi s)=Ioi 0`, + `integral_smul`
 + the exponent algebra `e^s·e^{−(t+s)}=e^{−t}`): now the `s`-dependence sits in the smooth `e^s` factor and the
-integration *limit* `s` only.
+integration *limit* `s` only. Plus `resolvent_halfline_hasDerivAt` — **the FTC for the half-line integral**
+`d/ds ∫_s^∞ e^{−u} U_u x du = −(e^{−s} U_s x)` (splitting `∫_{Ioi s} = ∫_{Ioi s₀} − ∫_{s₀}^s` via
+`integral_Ioi_sub_Ioi'`, with `resolvent_integrand_integrableOn_Ioi` for any lower limit, + the FTC
+`integral_hasDerivAt_right` + `HasDerivAt.congr_of_eventuallyEq`).
 **Remaining (the genuine Mathlib-grade operator-theory frontier):** differentiate the RHS in `s` at `0` (after
 the change of variables `u = s+t` ⟹ `e^s ∫_s^∞ e^{−u} U_u x du`, whose `d/ds|₀ = R x − x` by the **FTC for the
 improper integral with variable lower limit**) ⟹ `R x ∈ stoneDomain U` + the resolvent identity

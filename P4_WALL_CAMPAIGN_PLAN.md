@@ -240,9 +240,11 @@ of the bounded orbit) + `norm_resolvent_le` (**the resolvent is a contraction** 
 `U_s (R x) = ∫₀^∞ e^{−t} U_{s+t} x dt`, the algebraic core) + `resolvent_add`/`resolvent_smul` (**`R` is ℂ-linear**,
 so a bounded ℂ-linear operator with `norm_resolvent_le`) + `resolvent_comm_flow` (**`R` commutes with the flow**
 `U_s(Rx)=R(U_s x)`, hence with `A`) + `resolvent_apply_flow_cov` (**the differentiation-ready form**
-`U_s(Rx)=e^s ∫_s^∞ e^{−u}U_u x du`, change of vars `u=s+t` via `setIntegral_preimage_emb`). **Remaining (the genuine
-Mathlib-grade op-theory frontier):** differentiate the RHS at `0` (FTC for the improper integral with variable
-lower limit, `d/ds|₀=Rx−x`) ⟹ `R x ∈ stoneDomain` + resolvent identity `(A+i)(R x)=i x` ⟹ `Range(A+i)=H` ⟹
+`U_s(Rx)=e^s ∫_s^∞ e^{−u}U_u x du`, change of vars `u=s+t` via `setIntegral_preimage_emb`) +
+`resolvent_halfline_hasDerivAt` (**the FTC** `d/ds ∫_s^∞ e^{−u}U_u x du = −(e^{−s}U_s x)`, via the splitting
+`integral_Ioi_sub_Ioi'` + `integral_hasDerivAt_right`). **Remaining (the genuine Mathlib-grade op-theory
+frontier):** the product rule `d/ds(e^s G(s))|₀ = Rx−x` ⟹ `R x ∈ stoneDomain` + resolvent identity
+`(A+i)(R x)=i x` ⟹ `Range(A+i)=H` ⟹
 `Ā = Ā†` (e.s.a.) ⟹ Cayley/unbounded spectral theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has none of these; Cayley
 injectivity in Stone.lean.
 

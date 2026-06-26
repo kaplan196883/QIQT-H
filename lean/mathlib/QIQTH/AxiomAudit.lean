@@ -5013,6 +5013,13 @@ namespace QIQTH.AxiomAudit
 -- the translation, preimage (·+s)⁻¹(Ioi s)=Ioi 0, + integral_smul + the exponent algebra e^s·e^{−(t+s)}=e^{−t}).
 -- Now the s-dependence sits in the smooth e^s factor and the integration LIMIT s only ⟹ the FTC for the improper
 -- integral with variable lower limit gives d/ds|₀ = R x − x ⟹ R x ∈ stoneDomain + the resolvent identity (A+i)(R x)=i x. Axiom-free.
+#print axioms QIQTH.Spectral.resolvent_integrand_integrableOn_Ioi
+#print axioms QIQTH.Spectral.resolvent_halfline_hasDerivAt
+-- ★ P4 WALL — the FTC for the resolvent's half-line integral: resolvent_halfline_hasDerivAt —
+-- d/ds ∫_s^∞ e^{−u}U_u x du = −(e^{−s} U_s x). Via the splitting ∫_{Ioi s}=∫_{Ioi s₀}−∫_{s₀}^s
+-- (intervalIntegral.integral_Ioi_sub_Ioi', needing resolvent_integrand_integrableOn_Ioi for any lower limit) + the
+-- fundamental theorem of calculus (intervalIntegral.integral_hasDerivAt_right, integrand continuous) + HasDerivAt.congr.
+-- The G'(s) feeding the product rule d/ds(e^s G(s))|₀ = R x − x ⟹ R x ∈ stoneDomain + (A+i)(R x)=i x. Axiom-free.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via

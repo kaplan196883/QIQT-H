@@ -30,6 +30,7 @@ import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
 import Mathlib.Analysis.Complex.RealDeriv
 import Mathlib.MeasureTheory.Integral.ExpDecay
 import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
+import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 namespace QIQTH.Spectral
 
@@ -479,6 +480,47 @@ theorem resolvent_apply_flow_cov (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, 
   rw [heq, ← integral_smul]
   refine setIntegral_congr_fun measurableSet_Ioi fun t _ => ?_
   rw [smul_smul, ← Real.exp_add, show s + -(t + s) = -t by ring, add_comm s t]
+
+/-- The resolvent integrand is integrable on `(a, ∞)` for any lower limit `a` (exponential decay; generalizes
+    `resolvent_integrand_integrableOn`, needed for the FTC splitting `∫_{Ioi s} = ∫_{Ioi 0} − ∫_0^s`). -/
+theorem resolvent_integrand_integrableOn_Ioi (U : ℝ → (H →L[ℂ] H)) (x : H) (a : ℝ)
+    (hUbd : ∀ t, ‖U t x‖ ≤ ‖x‖) (hcont : Continuous (fun t => U t x)) :
+    IntegrableOn (fun t => Real.exp (-t) • U t x) (Set.Ioi a) := by
+  have hg : IntegrableOn (fun t => Real.exp (-t) * ‖x‖) (Set.Ioi a) := by
+    have h1 : IntegrableOn (fun t : ℝ => Real.exp (-1 * t)) (Set.Ioi a) :=
+      exp_neg_integrableOn_Ioi a one_pos
+    simp only [neg_one_mul] at h1
+    exact h1.mul_const ‖x‖
+  refine Integrable.mono' hg
+    ((Real.continuous_exp.comp continuous_neg).smul hcont).aestronglyMeasurable ?_
+  refine Filter.Eventually.of_forall fun t => ?_
+  rw [norm_smul, Real.norm_eq_abs, abs_of_pos (Real.exp_pos _)]
+  exact mul_le_mul_of_nonneg_left (hUbd t) (Real.exp_pos _).le
+
+/-- **FTC for the resolvent's half-line integral:** `d/ds ∫_s^∞ e^{−u} U_u x du = −(e^{−s} U_s x)`. Via the
+    splitting `∫_{Ioi s} = ∫_{Ioi s₀} − ∫_{s₀}^s` (`integral_Ioi_sub_Ioi'`) and the fundamental theorem of
+    calculus (`integral_hasDerivAt_right`, the integrand continuous). This is the derivative of `G(s)` that
+    feeds the product rule `d/ds (e^s G(s))|₀ = R x − x`, hence `R x ∈ stoneDomain U` and `(A + i)(R x) = i x`. -/
+theorem resolvent_halfline_hasDerivAt (U : ℝ → (H →L[ℂ] H)) (x : H) (hUbd : ∀ t, ‖U t x‖ ≤ ‖x‖)
+    (hcont : Continuous (fun t => U t x)) (s : ℝ) :
+    HasDerivAt (fun σ => ∫ u in Set.Ioi σ, Real.exp (-u) • U u x)
+      (-(Real.exp (-s) • U s x)) s := by
+  have hfcont : Continuous (fun u => Real.exp (-u) • U u x) :=
+    (Real.continuous_exp.comp continuous_neg).smul hcont
+  have hcongr : (fun σ => ∫ u in Set.Ioi σ, Real.exp (-u) • U u x)
+      =ᶠ[nhds s] fun σ => (∫ u in Set.Ioi s, Real.exp (-u) • U u x)
+        - ∫ u in s..σ, Real.exp (-u) • U u x := by
+    refine Filter.Eventually.of_forall fun σ => ?_
+    rw [eq_sub_iff_add_eq,
+      ← intervalIntegral.integral_Ioi_sub_Ioi' (resolvent_integrand_integrableOn_Ioi U x s hUbd hcont)
+        (resolvent_integrand_integrableOn_Ioi U x σ hUbd hcont)]
+    abel
+  have hftc : HasDerivAt (fun σ => ∫ u in s..σ, Real.exp (-u) • U u x)
+      (Real.exp (-s) • U s x) s :=
+    intervalIntegral.integral_hasDerivAt_right (hfcont.intervalIntegrable s s)
+      (hfcont.stronglyMeasurableAtFilter volume (nhds s)) hfcont.continuousAt
+  refine HasDerivAt.congr_of_eventuallyEq ?_ hcongr
+  simpa using (hasDerivAt_const s (∫ u in Set.Ioi s, Real.exp (-u) • U u x)).sub hftc
 
 section SelfAdjoint
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
