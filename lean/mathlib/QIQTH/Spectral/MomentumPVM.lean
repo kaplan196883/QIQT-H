@@ -81,4 +81,17 @@ theorem momentumPVM_diagInt (f : ℝ → ℂ) (x : Lp (α := ℝ) ℂ 2) :
             (MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ)).diagInt f x from rfl,
     ProjectionValuedMeasure.conj_diagInt, positionPVM_diagInt]
 
+/-- **The momentum scalar spectral measure is the Born `|ℱ⁻¹x|²` density measure:**
+    `scalarMeasure x = volume.withDensity (a ↦ ‖(ℱ⁻¹ x)(a)‖²)` — the momentum-probability distribution of `x`
+    is the measure with Radon–Nikodym density `|ℱ⁻¹x|²` (the momentum-space `|x̂|²`). The measure-level Born
+    rule for momentum, the Fourier image of the position density. -/
+theorem momentumPVM_scalarMeasure_eq_withDensity (x : Lp (α := ℝ) ℂ 2) :
+    momentumPVM.scalarMeasure x
+      = (volume : Measure ℝ).withDensity
+          (fun a => ENNReal.ofReal (‖((MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ).symm x) a‖ ^ 2)) := by
+  rw [show momentumPVM.scalarMeasure x
+        = ((positionPVM (α := ℝ) (μ := (volume : Measure ℝ))).conj
+            (MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ)).scalarMeasure x from rfl,
+    ProjectionValuedMeasure.conj_scalarMeasure_eq, positionPVM_scalarMeasure_eq_withDensity]
+
 end QIQTH.Spectral.Multiplication

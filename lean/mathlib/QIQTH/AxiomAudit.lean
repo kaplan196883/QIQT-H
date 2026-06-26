@@ -1578,6 +1578,11 @@ namespace QIQTH.AxiomAudit
 -- transforms covariantly under conjugation) and momentumPVM_diagInt (instance — momentumPVM.diagInt f x =
 -- ∫ f(a)·‖(ℱ⁻¹x)(a)‖² da: ⟨f(P)⟩ is the POSITION expectation of ℱ⁻¹x). Axiom-free. Both observables X,P now have
 -- their FULL Born statistics machine-checked: probability density, transition amplitudes, AND expectation values.
+#print axioms QIQTH.Spectral.Multiplication.momentumPVM_scalarMeasure_eq_withDensity
+-- ★ MOMENTUM SCALAR MEASURE = THE BORN |ℱ⁻¹x|² DENSITY MEASURE: momentumPVM_scalarMeasure_eq_withDensity —
+-- scalarMeasure x = volume.withDensity (a ↦ ‖(ℱ⁻¹x)(a)‖²): the momentum-probability distribution of x is the
+-- measure with density |ℱ⁻¹x|² (the momentum-space |x̂|²), the Fourier image of the position density (conj_scalarMeasure_eq
+-- + positionPVM_scalarMeasure_eq_withDensity). Axiom-free. Both observables now have the measure-level Born density.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

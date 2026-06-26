@@ -490,6 +490,11 @@ item.** Never claim the `1/4`.
   **position** expectation of `ℱ⁻¹x`). **Both observables X, P now have their full Born statistics machine-checked**:
   probability density, transition amplitudes, AND expectation values — the complete spectral/statistical picture
   of the canonical pair on L²(ℝ), axiom-free.
+  **Momentum scalar measure = the Born `|ℱ⁻¹x|²` density measure ✅** (`MomentumPVM.lean`, axiom-free, budget 0):
+  `momentumPVM_scalarMeasure_eq_withDensity` — `scalarMeasure x = volume.withDensity (a ↦ ‖(ℱ⁻¹x)(a)‖²)`: the
+  momentum-probability distribution is the measure with density `|ℱ⁻¹x|²` (the momentum-space `|x̂|²`), the Fourier
+  image of the position density (`conj_scalarMeasure_eq` + `positionPVM_scalarMeasure_eq_withDensity`). Both
+  observables now have the **measure-level** Born density. The Weyl-system Born picture on L²(ℝ) is fully symmetric.
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.
