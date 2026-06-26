@@ -5095,6 +5095,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_isProbabilityMeasure
 #print axioms QIQTH.Spectral.cayley_norm_cfc_le
 #print axioms QIQTH.Spectral.cayley_cfc_isSelfAdjoint
+#print axioms QIQTH.Spectral.cayley_cfc_inner_self_im_zero
+-- ★ P4 WALL — EXPECTATION OF A REAL OBSERVABLE IS REAL: cayley_cfc_inner_self_im_zero [Nontrivial H] —
+-- (⟪x, cfc f V x⟫).im = 0 for f real on σ(V), from cayley_cfc_isSelfAdjoint (cfc f V self-adjoint ⟹
+-- conj⟪x,cfc f V x⟫ = ⟪cfc f V x, x⟫ = ⟪x,cfc f V x⟫ via adjoint_inner_left; Complex.conj_eq_iff_im). So
+-- ⟪x,cfc f V x⟫ = ↑(∫f dμ_x) — the real scalar diagonal the polarization μ_{x,y} extends. Axiom-free.
 -- ★★ P4 WALL — cfc OF A REAL FUNCTION IS SELF-ADJOINT (real observables → self-adjoint operators):
 -- cayley_cfc_isSelfAdjoint [Nontrivial H] — (f z).im=0 on σ(V) ⟹ IsSelfAdjoint (cfc f V), via star(cfc f V) =
 -- cfc(conj∘f)V = cfc f V (cfc_star + cfc_congr, conj(f z)=f z on σV). So spectral operators of real observables of V

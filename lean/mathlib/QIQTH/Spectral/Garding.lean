@@ -1468,6 +1468,25 @@ theorem cayley_cfc_isSelfAdjoint [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
   · simp
   · simp [hf z hz]
 
+/-- **★ The expectation of a real spectral observable is real:** `(⟪x, cfc f V x⟫).im = 0` for `f` real on `σ(V)`.
+    Immediate from `cayley_cfc_isSelfAdjoint` (`cfc f V` self-adjoint ⟹ `conj⟪x, cfc f V x⟫ = ⟪cfc f V x, x⟫ =
+    ⟪x, cfc f V x⟫`, so the value is real). Hence `⟪x, cfc f V x⟫ = ↑(∫ f dμ_x)` — the **real** scalar spectral
+    diagonal that the complex polarization `μ_{x,y}` extends to the off-diagonal toward the PVM. -/
+theorem cayley_cfc_inner_self_im_zero [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (f : ℂ → ℂ) (hf : ∀ z ∈ spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), (f z).im = 0)
+    (x : H) :
+    (inner ℂ x (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)).im = 0 := by
+  have hsa := cayley_cfc_isSelfAdjoint U hgrp hU0 hUinner hUbd hSC f hf
+  have hadj : ContinuousLinearMap.adjoint (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))
+      = cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) := hsa
+  have key : (starRingEnd ℂ) (inner ℂ x (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x))
+      = inner ℂ x (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x) := by
+    rw [inner_conj_symm, ← ContinuousLinearMap.adjoint_inner_left, hadj]
+  exact Complex.conj_eq_iff_im.mp key
+
 end SelfAdjoint
 
 end QIQTH.Spectral

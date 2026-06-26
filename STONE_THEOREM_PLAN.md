@@ -456,6 +456,10 @@ Also ✅ `cayley_cfc_isSelfAdjoint` `[Nontrivial H]` — **cfc of a real functio
 on `σ(V)` ⟹ `IsSelfAdjoint (cfc f V)` (`star (cfc f V) = cfc (conj∘f) V = cfc f V` via `cfc_star` + `cfc_congr`).
 So spectral operators of real observables of `V` are self-adjoint — the bridge making `⟪x, cfc f V x⟫` real
 (`= ∫ f dμ_x`) and underlying the polarization `μ_{x,y}` toward the PVM.
+Also ✅ `cayley_cfc_inner_self_im_zero` `[Nontrivial H]` — **the expectation of a real observable is real**:
+`(⟪x, cfc f V x⟫).im = 0` for `f` real on `σ(V)` (from self-adjointness via `adjoint_inner_left` +
+`Complex.conj_eq_iff_im`). Hence `⟪x, cfc f V x⟫ = ↑(∫ f dμ_x)` — the real scalar diagonal the complex polarization
+`μ_{x,y}` extends to the off-diagonal toward the PVM.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`
