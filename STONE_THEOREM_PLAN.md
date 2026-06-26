@@ -315,7 +315,10 @@ applying `stoneGen_add_I_surjective` to it + the bridge gives `stoneGen_sub_I_su
 criterion is fully machine-checked.** The remaining Mathlib-grade gap is the *criterion itself*: bundling
 `A ⊆ A†` + `Range(A ± i) = H` ⟹ `Ā = Ā†` (`IsSelfAdjoint`) via the Cayley transform, then the unbounded spectral
 theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has neither the Cayley transform nor the criterion; all the *inputs*
-are now proven.
+are now proven. Also ✅ `deficiency_add_trivial` / `deficiency_sub_trivial` — **the deficiency subspaces are
+trivial in canonical inner-product form**: if `⟪(A ± i)x, y⟫ = 0 ∀ x` (i.e. `y ⊥ Range(A ± i)`) then `y = 0`
+(from surjectivity: `y = (A ± i)z` ⟹ `⟪y, y⟫ = 0` ⟹ `y = 0` by `inner_self_eq_zero`). So
+`ker(A† ∓ i) = Range(A ± i)^⊥ = 0` — the textbook essential-self-adjointness criterion's exact content.
 **Remaining (the genuine Mathlib-grade operator-theory frontier):** differentiate the RHS in `s` at `0` (after
 the change of variables `u = s+t` ⟹ `e^s ∫_s^∞ e^{−u} U_u x du`, whose `d/ds|₀ = R x − x` by the **FTC for the
 improper integral with variable lower limit**) ⟹ `R x ∈ stoneDomain U` + the resolvent identity

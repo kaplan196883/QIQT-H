@@ -661,6 +661,33 @@ theorem stoneGen_isClosable (U : ℝ → (H →L[ℂ] H))
       (stoneDomain_dense U hgrp hU0 hUbd hSC)).isClosable.leIsClosable
     (stoneGen_subset_adjoint U hgrp hU0 hUinner hUbd hSC)
 
+/-- **★★ The `+` deficiency subspace is trivial:** `ker(A† − i) = Range(A + i)^⊥ = 0`. If `y ⊥ Range(A + i)`
+    (`⟪(A + i)x, y⟫ = 0` for all `x` in the domain) then `y = 0`: since `A + i` is surjective
+    (`stoneGen_add_I_surjective`), `y = (A + i)z` for some `z`, so `⟪y, y⟫ = ⟪(A + i)z, y⟫ = 0`. One of the two
+    vanishing deficiency indices that make `A = stoneGen U` essentially self-adjoint. -/
+theorem deficiency_add_trivial (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖)
+    (hSC : ∀ y : H, Continuous (fun t => U t y)) (y : H)
+    (h : ∀ z : stoneDomain U, (inner ℂ (stoneGen U z + Complex.I • (z : H)) y : ℂ) = 0) :
+    y = 0 := by
+  obtain ⟨z, hz⟩ := stoneGen_add_I_surjective U hgrp hU0 hUbd hSC y
+  have hyy := h z
+  rw [hz] at hyy
+  exact inner_self_eq_zero.mp hyy
+
+/-- **★★ The `−` deficiency subspace is trivial:** `ker(A† + i) = Range(A − i)^⊥ = 0` (mirror of
+    `deficiency_add_trivial`, via `stoneGen_sub_I_surjective`). The second vanishing deficiency index. With both,
+    `A = stoneGen U` is essentially self-adjoint. -/
+theorem deficiency_sub_trivial (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖)
+    (hSC : ∀ y : H, Continuous (fun t => U t y)) (y : H)
+    (h : ∀ z : stoneDomain U, (inner ℂ (stoneGen U z - Complex.I • (z : H)) y : ℂ) = 0) :
+    y = 0 := by
+  obtain ⟨z, hz⟩ := stoneGen_sub_I_surjective U hgrp hU0 hUbd hSC y
+  have hyy := h z
+  rw [hz] at hyy
+  exact inner_self_eq_zero.mp hyy
+
 end SelfAdjoint
 
 end QIQTH.Spectral

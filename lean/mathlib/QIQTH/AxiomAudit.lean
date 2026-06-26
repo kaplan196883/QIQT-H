@@ -5041,6 +5041,12 @@ namespace QIQTH.AxiomAudit
 -- i.e. Range(A−i)=H. With Range(A+i)=H (stoneGen_add_I_surjective), BOTH deficiency indices of the symmetric generator
 -- A = stoneGen U vanish ⟹ the essential-self-adjointness criterion is met. Axiom-free. Remaining (Mathlib gap):
 -- bundle the deficiency facts ⟹ Ā=Ā† (IsSelfAdjoint) ⟹ Cayley transform / unbounded spectral theorem ⟹ Stone.
+#print axioms QIQTH.Spectral.deficiency_add_trivial
+#print axioms QIQTH.Spectral.deficiency_sub_trivial
+-- ★★ P4 WALL — the DEFICIENCY SUBSPACES ARE TRIVIAL (canonical inner-product form of n±=0): deficiency_add_trivial /
+-- deficiency_sub_trivial — if ⟪(A±i)x, y⟫=0 ∀x∈domain (y ⊥ Range(A±i)) then y=0. From surjectivity (Range(A±i)=H):
+-- y=(A±i)z ⟹ ⟪y,y⟫=0 ⟹ y=0 (inner_self_eq_zero). I.e. ker(A†∓i)=Range(A±i)^⊥=0 — the textbook essential-self-adjointness
+-- criterion's content, now machine-checked. Axiom-free. Remaining (Mathlib gap): the criterion ⟹ Ā=Ā† (Cayley/spectral thm).
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via
