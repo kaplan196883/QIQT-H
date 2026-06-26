@@ -1545,6 +1545,24 @@ theorem cayleyScalarMeasure_le_norm_sq [Nontrivial H] (U : ℝ → (H →L[ℂ] 
   rw [← cayleyScalarMeasure_univ U hgrp hU0 hUinner hUbd hSC x]
   exact ENNReal.toReal_mono (measure_ne_top _ _) (measure_mono (Set.subset_univ S))
 
+/-- **★ Finite additivity of the spectral distribution over disjoint regions:**
+    `μ_x(S ∪ T) = μ_x(S) + μ_x(T)` for disjoint measurable `S, T`. This is the diagonal shadow of the
+    projection-valued measure's additivity `E(S ∪ T) = E(S) + E(T)` (and, normalized, the additivity of the
+    **Born probabilities** over disjoint spectral outcomes) — a property the eventual PVM `E` refines to full
+    σ-additivity. -/
+theorem cayleyScalarMeasure_union [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H)
+    {S T : Set (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))}
+    (hT : MeasurableSet T) (hd : Disjoint S T) :
+    (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x (S ∪ T)).toReal
+      = (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x S).toReal
+        + (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x T).toReal := by
+  haveI : IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+    cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC x
+  rw [measure_union hd hT, ENNReal.toReal_add (measure_ne_top _ _) (measure_ne_top _ _)]
+
 end SelfAdjoint
 
 end QIQTH.Spectral

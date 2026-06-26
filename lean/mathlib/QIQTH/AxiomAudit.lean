@@ -5099,6 +5099,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayley_norm_inner_cfc_le
 #print axioms QIQTH.Spectral.cayley_cfc_inner_polarization
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_le_norm_sq
+#print axioms QIQTH.Spectral.cayleyScalarMeasure_union
+-- ★ P4 WALL — FINITE ADDITIVITY OF THE SPECTRAL DISTRIBUTION: cayleyScalarMeasure_union [Nontrivial H] —
+-- μ_x(S∪T) = μ_x(S)+μ_x(T) (toReal) for disjoint measurable S,T (measure_union + ENNReal.toReal_add, μ_x finite).
+-- The diagonal shadow of the PVM additivity E(S∪T)=E(S)+E(T) and (normalized) the additivity of the Born
+-- probabilities over disjoint spectral outcomes — refined to σ-additivity by the eventual PVM E. Axiom-free.
 -- ★ P4 WALL — DIAGONAL SPECTRAL CONTENT BOUNDED: cayleyScalarMeasure_le_norm_sq [Nontrivial H] —
 -- (cayleyScalarMeasure x S).toReal ≤ ‖x‖² for any S (μ_x finite, total mass ‖x‖², measure_mono + toReal_mono). This
 -- is the bound the diagonal ⟪x, E(S) x⟫ = μ_x(S) of the spectral projection E(S) must satisfy (0 ≤ E(S) ≤ 1 on x),

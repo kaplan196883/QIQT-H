@@ -473,6 +473,10 @@ Also ✅ `cayleyScalarMeasure_le_norm_sq` `[Nontrivial H]` — **the diagonal sp
 `μ_x(S) ≤ ‖x‖²` for every `S` (`μ_x` finite of total mass `‖x‖²`, monotone). This is the bound the diagonal
 `⟪x, E(S) x⟫ = μ_x(S)` of the spectral projection `E(S)` must satisfy (`0 ≤ E(S) ≤ 1` on `x`) and the boundedness
 controlling the Riesz representation of `(x,y) ↦ ∫ 1_S dμ_{x,y}` into `E(S)`.
+Also ✅ `cayleyScalarMeasure_union` `[Nontrivial H]` — **finite additivity of the spectral distribution**:
+`μ_x(S ∪ T) = μ_x(S) + μ_x(T)` for disjoint measurable `S, T`. The diagonal shadow of the PVM additivity
+`E(S ∪ T) = E(S) + E(T)` (and, normalized, the additivity of the **Born probabilities** over disjoint spectral
+outcomes) — refined to σ-additivity by the eventual PVM `E`.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`
