@@ -1571,6 +1571,13 @@ namespace QIQTH.AxiomAudit
 -- Born expectation rule for position, read off the spectral measure (diagInt = ∫ f d(scalarMeasure x) against the
 -- |x|² density, via integral_withDensity_eq_integral_toReal_smul₀). Axiom-free. With the diagonal/off-diagonal
 -- scalar measures + the expectation, the position observable's full Born statistics are machine-checked.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.conj_diagInt
+#print axioms QIQTH.Spectral.Multiplication.momentumPVM_diagInt
+-- ★ THE MOMENTUM BORN EXPECTATION VALUE (Fourier image of the position one): conj_scalarMeasure_eq +
+-- conj_diagInt (general — (P.conj U).diagInt f x = P.diagInt f (U⁻¹x): the diagonal functional/expectation
+-- transforms covariantly under conjugation) and momentumPVM_diagInt (instance — momentumPVM.diagInt f x =
+-- ∫ f(a)·‖(ℱ⁻¹x)(a)‖² da: ⟨f(P)⟩ is the POSITION expectation of ℱ⁻¹x). Axiom-free. Both observables X,P now have
+-- their FULL Born statistics machine-checked: probability density, transition amplitudes, AND expectation values.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

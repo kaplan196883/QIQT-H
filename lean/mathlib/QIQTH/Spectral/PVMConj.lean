@@ -81,5 +81,19 @@ theorem conj_E_inner (P : ProjectionValuedMeasure Ω H) (U : H ≃ₗᵢ[ℂ] H)
   rw [← LinearIsometryEquiv.inner_map_map U (U.symm g) (P.E A (U.symm f)),
     LinearIsometryEquiv.apply_symm_apply]
 
+/-- The scalar spectral measure transforms covariantly under conjugation, as a full measure equality:
+    `(P.conj U).scalarMeasure x = P.scalarMeasure (U⁻¹ x)`. -/
+theorem conj_scalarMeasure_eq (P : ProjectionValuedMeasure Ω H) (U : H ≃ₗᵢ[ℂ] H) (x : H) :
+    (P.conj U).scalarMeasure x = P.scalarMeasure (U.symm x) :=
+  MeasureTheory.Measure.ext fun _ hA => conj_scalarMeasure P U x hA
+
+/-- **The diagonal functional (expectation form) transforms covariantly under conjugation:**
+    `(P.conj U).diagInt f x = P.diagInt f (U⁻¹ x)` — the expectation of `f` of the conjugated observable in
+    state `x` equals that of the original observable in the rotated state `U⁻¹ x`. (For the Fourier case: the
+    momentum expectation of `x` is the position expectation of `ℱ⁻¹ x`.) -/
+theorem conj_diagInt (P : ProjectionValuedMeasure Ω H) (U : H ≃ₗᵢ[ℂ] H) (f : Ω → ℂ) (x : H) :
+    (P.conj U).diagInt f x = P.diagInt f (U.symm x) := by
+  rw [diagInt, diagInt, conj_scalarMeasure_eq]
+
 end ProjectionValuedMeasure
 end QIQTH.Spectral

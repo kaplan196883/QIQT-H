@@ -483,6 +483,13 @@ item.** Never claim the `1/4`.
   `integral_withDensity_eq_integral_toReal_smul₀`). With the diagonal/off-diagonal scalar measures + this
   expectation, the position observable's full Born statistics (probabilities + amplitudes + expectation values)
   are now machine-checked, axiom-free.
+  **The momentum Born expectation value (Fourier image of the position one) ✅** (`PVMConj.lean` +
+  `MomentumPVM.lean`, axiom-free, budget 0): `conj_scalarMeasure_eq` + `conj_diagInt` (general — the diagonal
+  functional/expectation transforms covariantly under conjugation, `(P.conj U).diagInt f x = P.diagInt f (U⁻¹x)`)
+  and `momentumPVM_diagInt` (instance — `momentumPVM.diagInt f x = ∫ f(a)·‖(ℱ⁻¹x)(a)‖² da`: `⟨f(P)⟩` is the
+  **position** expectation of `ℱ⁻¹x`). **Both observables X, P now have their full Born statistics machine-checked**:
+  probability density, transition amplitudes, AND expectation values — the complete spectral/statistical picture
+  of the canonical pair on L²(ℝ), axiom-free.
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.

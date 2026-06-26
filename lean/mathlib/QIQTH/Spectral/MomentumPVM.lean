@@ -68,4 +68,17 @@ theorem momentumPVM_inner (g f : Lp (α := ℝ) ℂ 2) {B : Set ℝ} (hB : Measu
     show (positionPVM (α := ℝ) (μ := (volume : Measure ℝ))).E B = indMul hB from posPVM_E_eq hB,
     indMul_inner]
 
+/-- **The momentum Born expectation value:** the expectation of any bounded function `f` of the momentum
+    observable `P` in the state `x` is the *position* expectation of its inverse Fourier transform,
+    `⟪f(P)⟫_x = ∫ f(a)·‖(ℱ⁻¹ x)(a)‖² da` — the Born expectation rule for momentum, the Fourier image of the
+    position one. Via the covariance of the diagonal functional under the Fourier conjugation. -/
+theorem momentumPVM_diagInt (f : ℝ → ℂ) (x : Lp (α := ℝ) ℂ 2) :
+    momentumPVM.diagInt f x
+      = ∫ a, f a * (‖((MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ).symm x) a‖ ^ 2 : ℂ)
+          ∂(volume : Measure ℝ) := by
+  rw [show momentumPVM.diagInt f x
+        = ((positionPVM (α := ℝ) (μ := (volume : Measure ℝ))).conj
+            (MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ)).diagInt f x from rfl,
+    ProjectionValuedMeasure.conj_diagInt, positionPVM_diagInt]
+
 end QIQTH.Spectral.Multiplication
