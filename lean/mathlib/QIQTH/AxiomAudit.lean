@@ -5093,6 +5093,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_isFiniteMeasure
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_univ
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_isProbabilityMeasure
+#print axioms QIQTH.Spectral.cayley_norm_cfc_le
+-- ★★ P4 WALL — cfc OF V IS NORM-BOUNDED BY THE SUP-NORM (boundedness ⟹ Borel-FC extension): cayley_norm_cfc_le
+-- [Nontrivial H] — ‖cfc f V‖ ≤ c when ‖f z‖ ≤ c on σ(V) (norm_cfc_le; the ℂ-normal CFC on H→L[ℂ]H is isometric,
+-- IsStarNormal.instIsometricContinuousFunctionalCalculus, a global instance). This is the boundedness of f↦cfc f V
+-- that lets the FC extend from continuous to bounded-Borel functions (approximation/dominated convergence over μ_x)
+-- — the analytic input to the Borel FC and the PVM E(S). Axiom-free.
 -- ★★ P4 WALL — μ_x IS A PROBABILITY MEASURE FOR ‖x‖=1 (Born/spectral distribution): cayleyScalarMeasure_isProbability
 -- Measure [Nontrivial H] — ‖x‖=1 ⟹ IsProbabilityMeasure (cayleyScalarMeasure x). From cayleyScalarMeasure_univ
 -- ((μ_x univ).toReal = ‖x‖²=1) + finiteness ⟹ μ_x univ = 1 (ENNReal.toReal_eq_one_iff). So μ_x is the Born/spectral

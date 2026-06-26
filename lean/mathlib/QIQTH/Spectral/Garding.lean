@@ -39,6 +39,7 @@ import Mathlib.Analysis.CStarAlgebra.ContinuousLinearMap
 import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Basic
 import Mathlib.Topology.ContinuousMap.CompactlySupported
 import Mathlib.MeasureTheory.Integral.RieszMarkovKakutani.Real
+import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Isometric
 
 namespace QIQTH.Spectral
 
@@ -1432,6 +1433,21 @@ theorem cayleyScalarMeasure_isProbabilityMeasure [Nontrivial H] (U : ℝ → (H 
   have hmass := cayleyScalarMeasure_univ U hgrp hU0 hUinner hUbd hSC x
   rw [hx, one_pow] at hmass
   exact ⟨(ENNReal.toReal_eq_one_iff _).mp hmass⟩
+
+/-- **★★ The functional calculus of `V` is norm-bounded by the sup-norm:** `‖cfc f V‖ ≤ c` whenever `‖f z‖ ≤ c`
+    on `σ(V)`. (The ℂ-normal continuous functional calculus on the C\*-algebra `H →L[ℂ] H` is isometric:
+    `IsStarNormal.instIsometricContinuousFunctionalCalculus`.) This is the **boundedness of `f ↦ cfc f V`** that
+    lets the functional calculus extend from continuous functions to *bounded Borel* functions (by approximation /
+    the dominated-convergence over `μ_x`) — the analytic input to the Borel functional calculus and the
+    projection-valued measure `E(S)`. -/
+theorem cayley_norm_cfc_le [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (f : ℂ → ℂ) {c : ℝ} (hc : 0 ≤ c)
+    (h : ∀ z ∈ spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ‖f z‖ ≤ c) :
+    ‖cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)‖ ≤ c :=
+  norm_cfc_le hc h
 
 end SelfAdjoint
 

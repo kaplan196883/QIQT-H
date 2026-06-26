@@ -448,6 +448,10 @@ Also ✅ `cayleyScalarMeasure_isProbabilityMeasure` `[Nontrivial H]` — **for a
 probability measure** (total mass `1`): the spectral-measure realization of the **Born rule** for the Cayley
 unitary of the self-adjoint generator (`μ_x` = the probability distribution of measuring a function of `V` in the
 normalized state `x`).
+Also ✅ `cayley_norm_cfc_le` `[Nontrivial H]` — **`‖cfc f V‖ ≤ ‖f‖_∞`** (`norm_cfc_le`; the ℂ-normal CFC on
+`H →L[ℂ] H` is isometric, `IsStarNormal.instIsometricContinuousFunctionalCalculus`, global). This is the
+**boundedness of `f ↦ cfc f V`** that lets the FC extend from continuous to *bounded-Borel* functions (by
+approximation / dominated convergence over `μ_x`) — the analytic input to the Borel FC and the PVM `E(S)`.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`
