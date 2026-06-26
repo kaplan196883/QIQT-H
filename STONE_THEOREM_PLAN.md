@@ -392,9 +392,15 @@ Riesz–Markov functional is positive**: `0 ≤ re⟪x, cfc (conj f · f) V x⟫
 `cfc (conj f·f) V = (cfc f V)⋆(cfc f V) ≥ 0` (`cfc_mul`+`cfc_star`+`star_mul_self_nonneg`) so the expectation is
 `‖cfc f V x‖² ≥ 0`. As the `|f|²` generate the nonneg cone of `C(σ(V), ℝ)`, this is exactly the positivity
 `RealRMK.rieszMeasure` consumes to produce `μ_x` (with `∫ g dμ_x = re⟪x, cfc g V x⟫`).
-**Next:** bundle `g ↦ re⟪x, cfc g V x⟫` as `C_c(σ(V), ℝ) →ₚ[ℝ] ℝ` (linearity from `cfcHom` being a ⋆-hom +
-positivity above) and apply `RealRMK.rieszMeasure` ⟹ the scalar spectral measure `μ_x`; then assemble the `μ_x`
-into a circle-PVM `E` (the Mathlib gap — no `ProjectionValuedMeasure` type), transport to `A = ∫ λ dE` ⟹ Stone.
+Also ✅ `cayley_cfc_re_inner_nonneg_of_nonneg` — **the RMK functional is positive on the whole nonnegative cone**:
+`0 ≤ re⟪x, cfc g V x⟫` for *any* `g` continuous on `σ(V)` that is real and `≥ 0` there (reduce to the square via
+`g = |√g|²`: `h z = √((g z).re)`, `conj(h)·h = g` on `σ(V)` by `cfc_congr`, then the square lemma; closed with
+`le_of_le_of_eq` + `congrArg` to dodge cfc proof-irrelevance). This is exactly the `0 ≤ g ⟹ 0 ≤ Λg` hypothesis a
+positive linear functional needs.
+**Next:** bundle `g ↦ re⟪x, cfc g V x⟫` as `C_c(σ(V), ℝ) →ₚ[ℝ] ℝ` (linearity from `cfcHom` being a ⋆-hom;
+positivity now fully in hand) and apply `RealRMK.rieszMeasure` ⟹ the scalar spectral measure `μ_x`; then assemble
+the `μ_x` into a circle-PVM `E` (the Mathlib gap — no `ProjectionValuedMeasure` type), transport to `A = ∫ λ dE`
+⟹ Stone.
 **Next multi-fire sub-construction (the operator → PVM keystone, RMK + cfc supported):** the scalar spectral
 measures `μ_x` of `V` (positive functional `f ↦ re⟨x, cfc f V x⟩` → `RealRMK.rieszMeasure`), then their assembly
 into a circle-PVM `E` with `V = ∫ z dE`, then transport through inverse Cayley to `A = ∫ λ dE` ⟹ Stone.

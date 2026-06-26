@@ -1116,6 +1116,36 @@ theorem cayley_cfc_sq_re_inner_nonneg [Nontrivial H] (U : ℝ → (H →L[ℂ] H
   rw [cfc_mul (fun z => star (f z)) f _ hf.star hf, cfc_star]
   exact star_mul_self_nonneg _
 
+/-- **★★ The Riesz–Markov functional is positive on the whole nonnegative cone:**
+    `0 ≤ re⟪x, cfc g V x⟫` for any `g` continuous on `σ(V)` that is real and `≥ 0` there. Reduce to the square case
+    (`cayley_cfc_sq_re_inner_nonneg`) via `g = |√g|²`: with `h z = √((g z).re)` (continuous, real),
+    `conj(h)·h = g` on `σ(V)` (since `g` is real-nonneg there), so `cfc g V = cfc (conj h · h) V` (`cfc_congr`).
+    This is the exact positivity hypothesis `g ↦ re⟪x, cfc g V x⟫` needs to be bundled as a positive linear
+    functional `C_c(σ(V), ℝ) →ₚ[ℝ] ℝ` and fed to `RealRMK.rieszMeasure` ⟹ the scalar spectral measure `μ_x`. -/
+theorem cayley_cfc_re_inner_nonneg_of_nonneg [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (g : ℂ → ℂ) (hg : ContinuousOn g (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (hgnn : ∀ z ∈ spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H),
+      0 ≤ (g z).re ∧ (g z).im = 0) (x : H) :
+    0 ≤ (inner ℂ x (cfc g (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)).re := by
+  have hcont : ContinuousOn (fun z => (Complex.ofReal (Real.sqrt (g z).re) : ℂ))
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) :=
+    Complex.continuous_ofReal.comp_continuousOn
+      (Real.continuous_sqrt.comp_continuousOn (Complex.continuous_re.comp_continuousOn hg))
+  have hpt : (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)).EqOn
+      (fun z => star (Complex.ofReal (Real.sqrt (g z).re)) * Complex.ofReal (Real.sqrt (g z).re)) g := by
+    intro z hz
+    obtain ⟨hge, him⟩ := hgnn z hz
+    show star (Complex.ofReal (Real.sqrt (g z).re)) * Complex.ofReal (Real.sqrt (g z).re) = g z
+    rw [← starRingEnd_apply, Complex.conj_ofReal, ← Complex.ofReal_mul, Real.mul_self_sqrt hge]
+    apply Complex.ext <;> simp [him]
+  have key := cayley_cfc_sq_re_inner_nonneg U hgrp hU0 hUinner hUbd hSC
+    (fun z => Complex.ofReal (Real.sqrt (g z).re)) hcont x
+  exact le_of_le_of_eq key
+    (congrArg (fun T : H →L[ℂ] H => (inner ℂ x (T x)).re) (cfc_congr hpt))
+
 end SelfAdjoint
 
 end QIQTH.Spectral

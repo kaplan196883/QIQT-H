@@ -5078,6 +5078,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayley_cfc_id
 #print axioms QIQTH.Spectral.cayley_cfc_one
 #print axioms QIQTH.Spectral.cayley_cfc_sq_re_inner_nonneg
+#print axioms QIQTH.Spectral.cayley_cfc_re_inner_nonneg_of_nonneg
+-- ★★ P4 WALL — RMK FUNCTIONAL POSITIVE ON THE WHOLE NONNEG CONE: cayley_cfc_re_inner_nonneg_of_nonneg
+-- [Nontrivial H] — 0 ≤ re⟪x, cfc g V x⟫ for any g continuous on σ(V) that is real and ≥ 0 there. Reduce to the
+-- square case via g = |√g|²: h z = √((g z).re) is continuous real, conj(h)·h = g on σ(V) (cfc_congr), so by
+-- cayley_cfc_sq_re_inner_nonneg the expectation = ‖cfc h V x‖² ≥ 0 (closed via le_of_le_of_eq + congrArg to dodge
+-- cfc proof-irrelevance). This is the exact positivity g↦re⟪x,cfc g V x⟫ needs to be a positive linear functional
+-- C_c(σV,ℝ)→ₚ[ℝ]ℝ for RealRMK.rieszMeasure ⟹ μ_x. Axiom-free.
 -- ★★ P4 WALL — SPECTRAL MOMENTS + RMK FUNCTIONAL POSITIVITY: cayley_cfc_one [Nontrivial H] — cfc 1 V = 1
 -- (resolution of identity, ∫1 dE = 1; with cfc_id's ∫z dE = V these pin μ_x's total mass ‖x‖² and first moment).
 -- cayley_cfc_sq_re_inner_nonneg [Nontrivial H] — 0 ≤ re⟪x, cfc(conj f·f) V x⟫ for f continuous on σ(V): since

@@ -289,8 +289,11 @@ coordinate function applied to `V` returns `V`, the continuous-FC shadow of the 
 Also ✅ `cayley_cfc_one` (`cfc 1 V = 1`, resolution of identity `∫1 dE=1`) + `cayley_cfc_sq_re_inner_nonneg`
 (**RMK functional positivity** — `0 ≤ re⟪x, cfc(conj f·f) V x⟫ = ‖cfc f V x‖²` via `(cfc f V)⋆(cfc f V) ≥ 0`; the
 `|f|²` generate the nonneg cone, so `g↦re⟪x,cfc g V x⟫` is a positive functional ⟹ `RealRMK.rieszMeasure` gives μ_x).
-**Next:** bundle the functional as `C_c(σV,ℝ)→ₚ[ℝ]ℝ` → `rieszMeasure` ⟹ μ_x → assemble circle-PVM `E` (Mathlib gap)
-→ transport to `A=∫λ dE` ⟹ Stone.
+Also ✅ `cayley_cfc_re_inner_nonneg_of_nonneg` (**RMK functional positive on the WHOLE nonneg cone** — `0≤re⟪x,cfc g V x⟫`
+for any `g` continuous, real, `≥0` on `σ(V)`, via `g=|√g|²` + `cfc_congr` + the square lemma): the exact
+`0≤g ⟹ 0≤Λg` a positive linear functional needs.
+**Next:** bundle the functional as `C_c(σV,ℝ)→ₚ[ℝ]ℝ` (linearity from `cfcHom` ⋆-hom; positivity done) → `rieszMeasure`
+⟹ μ_x → assemble circle-PVM `E` (Mathlib gap) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
 `E` (`V=∫z dE`) → transport via inverse Cayley to `A=∫λ dE` ⟹ Stone. The bounded-PVM remains the genuine gap.
 **Remaining (Mathlib gap):** the **Borel/PVM** functional calculus on `S¹` for `V` (Mathlib has *continuous* FC
