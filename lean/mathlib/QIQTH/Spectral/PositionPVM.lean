@@ -60,4 +60,18 @@ theorem positionPVM_scalarMeasure (x : Lp ℂ 2 μ) {A : Set α} (hA : Measurabl
   congr 1
   rw [show (positionPVM (μ := μ)).E A = indMul hA from posPVM_E_eq hA, norm_indMul_sq]
 
+/-- **The position scalar spectral measure is the Born `|x|²` density measure:**
+    `scalarMeasure x = μ.withDensity (a ↦ ‖x a‖²)` — the position-probability distribution of the state `x` is
+    the measure with Radon–Nikodym density `|x|²` w.r.t. `μ`. The measure-level form of the Born rule for
+    position (the set-level `positionPVM_scalarMeasure` integrated against `withDensity`). -/
+theorem positionPVM_scalarMeasure_eq_withDensity (x : Lp ℂ 2 μ) :
+    (positionPVM (μ := μ)).scalarMeasure x
+      = μ.withDensity (fun a => ENNReal.ofReal (‖x a‖ ^ 2)) := by
+  have hxsq : MeasureTheory.Integrable (fun a => ‖x a‖ ^ 2) μ :=
+    (MeasureTheory.memLp_two_iff_integrable_sq_norm (Lp.aestronglyMeasurable x)).mp (Lp.memLp x)
+  refine MeasureTheory.Measure.ext fun A hA => ?_
+  rw [positionPVM_scalarMeasure x hA, MeasureTheory.withDensity_apply _ hA]
+  exact MeasureTheory.ofReal_integral_eq_lintegral_ofReal hxsq.restrict
+    (Filter.Eventually.of_forall fun a => sq_nonneg _)
+
 end QIQTH.Spectral.Multiplication

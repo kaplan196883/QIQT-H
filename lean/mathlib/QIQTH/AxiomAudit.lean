@@ -1558,6 +1558,13 @@ namespace QIQTH.AxiomAudit
 -- inner_map_map) and momentumPVM_inner (instance — ⟪g,Ê(B)f⟫=∫_B conj((ℱ⁻¹g)(a))·(ℱ⁻¹f)(a) da: the momentum-space
 -- transition amplitude is the POSITION amplitude of the inverse-Fourier states). Axiom-free; completes the
 -- position↔momentum off-diagonal Born/amplitude picture (diagonal = scalarMeasure, off-diagonal = these).
+#print axioms QIQTH.Spectral.Multiplication.positionPVM_scalarMeasure_eq_withDensity
+-- ★ POSITION SCALAR MEASURE = THE BORN |x|² DENSITY MEASURE: positionPVM_scalarMeasure_eq_withDensity —
+-- scalarMeasure x = μ.withDensity (a ↦ ‖x a‖²), the position-probability distribution of x is the measure with
+-- Radon–Nikodym density |x|² w.r.t. μ (the measure-level Born rule for position; the set-level
+-- positionPVM_scalarMeasure promoted to a measure identity via withDensity_apply + ofReal_integral_eq_lintegral_ofReal).
+-- Axiom-free. Recorded next target: the position Born EXPECTATION ⟨f(X)⟩=∫f|x|² (positionPVM.diagInt = ∫f·|x|²),
+-- via integral_withDensity_eq_integral_smul₀ (NNReal weight) — the withDensity-integral step.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
