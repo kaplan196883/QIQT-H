@@ -1,4 +1,5 @@
 import QIQTH.Spectral.MultiplicationOp
+import QIQTH.Spectral.TranslationFlow
 import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
@@ -62,5 +63,36 @@ theorem modulationLp_add (s s' : ℝ) :
       congr 1
       push_cast
       ring)
+
+/-- Shift identity for the modulation symbol: `e^{is(x+t)} = e^{ist} · e^{isx}`. -/
+theorem modSymbol_add_right (s x t : ℝ) :
+    modSymbol s (x + t) = Complex.exp (↑(s * t) * Complex.I) * modSymbol s x := by
+  simp only [modSymbol]
+  rw [← Complex.exp_add]
+  congr 1
+  push_cast
+  ring
+
+/-- **The Weyl canonical commutation relation** (integrated Heisenberg relation):
+    `e^{itP} e^{isX} = e^{ist} · e^{isX} e^{itP}`, here as `τ_t (e^{isX} f) = e^{ist} • (e^{isX} (τ_t f))`. The
+    translation group `e^{itP}` and the modulation group `e^{isX}` fail to commute by exactly the phase `e^{ist}`
+    — the integrated form of `[X, P] = i`. Proof: both sides act a.e. as `e^{is(x+t)} f(x+t)`, up to the phase
+    `e^{ist}` peeled off via `modSymbol_add_right`. -/
+theorem weyl_relation (s t : ℝ) (f : Lp ℂ 2 (volume : Measure ℝ)) :
+    translationLp t (modulationLp s f)
+      = Complex.exp (↑(s * t) * Complex.I) • modulationLp s (translationLp t f) := by
+  refine Lp.ext ?_
+  have hqm := (measurePreserving_add_right (volume : Measure ℝ) t).quasiMeasurePreserving
+  have h2 : (fun x => (modulationLp s f : ℝ → ℂ) (x + t))
+      =ᵐ[volume] fun x => modSymbol s (x + t) * (f : ℝ → ℂ) (x + t) :=
+    hqm.tendsto_ae.eventually (coeFn_modulationLp s f)
+  filter_upwards [coeFn_translationLp t (modulationLp s f), h2,
+    Lp.coeFn_smul (Complex.exp (↑(s * t) * Complex.I)) (modulationLp s (translationLp t f)),
+    coeFn_modulationLp s (translationLp t f), coeFn_translationLp t f]
+    with x h_out h_mid h_smul h_mod h_tf
+  rw [h_out, h_mid, h_smul]
+  simp only [Pi.smul_apply, smul_eq_mul]
+  rw [h_mod, h_tf, modSymbol_add_right]
+  ring
 
 end QIQTH.Spectral.Multiplication
