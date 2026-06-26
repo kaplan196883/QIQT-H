@@ -358,6 +358,9 @@ Also ✅ `cayleyScalarMeasure_le_norm_sq` `[Nontrivial H]` (**diagonal spectral 
 the bound `⟪x,E(S)x⟫ = μ_x(S)` must satisfy, controlling the Riesz representation of E(S)).
 Also ✅ `cayleyScalarMeasure_union` `[Nontrivial H]` (**finite additivity** — `μ_x(S∪T)=μ_x(S)+μ_x(T)` disjoint; the
 diagonal shadow of E(S∪T)=E(S)+E(T) and the additivity of the Born probabilities over disjoint spectral outcomes).
+Also ✅ `cayley_cfc_norm_sq` `[Nontrivial H]` (**L²-isometry, operator side** — `‖cfc f V x‖² = re⟪x,cfc(|f|²)V x⟫`;
+with the integral identity = Parseval `‖cfc f V x‖² = ∫|f|² dμ_x`, the estimate for the strong-limit Stone exp
+`U_t=exp(itA)`, GPT-5.5-pro's endorsed route — not the PVM).
 **Next:** bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

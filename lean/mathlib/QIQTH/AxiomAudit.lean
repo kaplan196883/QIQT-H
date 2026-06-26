@@ -5100,6 +5100,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayley_cfc_inner_polarization
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_le_norm_sq
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_union
+#print axioms QIQTH.Spectral.cayley_cfc_norm_sq
+-- ★★ P4 WALL — L²-ISOMETRY OF THE FUNCTIONAL CALCULUS (operator side): cayley_cfc_norm_sq [Nontrivial H] —
+-- ‖cfc f V x‖² = re⟪x, cfc(|f|²) V x⟫ (|f|²=conj f·f), via (cfc f V)⋆(cfc f V)=cfc(conj f·f)V (cfc_star+cfc_mul) +
+-- adjoint_inner_right + inner_self_eq_norm_sq. With the integral identity (re⟪x,cfc(|f|²)V x⟫ = ∫|f|² dμ_x) this is
+-- Parseval ‖cfc f V x‖² = ∫|f|² dμ_x — the L² estimate behind the dominated-convergence/Cauchy argument that builds
+-- the Stone exponential U_t=exp(itA) as a strong limit of cfc(e^{it·φₙ})V x (GPT-5.5-pro recipe). Axiom-free.
 -- ★ P4 WALL — FINITE ADDITIVITY OF THE SPECTRAL DISTRIBUTION: cayleyScalarMeasure_union [Nontrivial H] —
 -- μ_x(S∪T) = μ_x(S)+μ_x(T) (toReal) for disjoint measurable S,T (measure_union + ENNReal.toReal_add, μ_x finite).
 -- The diagonal shadow of the PVM additivity E(S∪T)=E(S)+E(T) and (normalized) the additivity of the Born

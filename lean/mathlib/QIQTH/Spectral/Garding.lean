@@ -1563,6 +1563,26 @@ theorem cayleyScalarMeasure_union [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
     cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC x
   rw [measure_union hd hT, ENNReal.toReal_add (measure_ne_top _ _) (measure_ne_top _ _)]
 
+/-- **★★ The L²-isometry of the functional calculus (operator side):** `‖cfc f V x‖² = re⟪x, cfc (|f|²) V x⟫` for
+    `f` continuous on `σ(V)` (`|f|² = conj f · f`).  Since `(cfc f V)⋆(cfc f V) = cfc (conj f · f) V` (`cfc_star` +
+    `cfc_mul`) and `⟪x, (cfc f V)⋆(cfc f V) x⟫ = ⟪cfc f V x, cfc f V x⟫ = ‖cfc f V x‖²` (adjoint).  Combined with the
+    integral identity (`re⟪x, cfc(|f|²) V x⟫ = ∫ |f|² dμ_x`) this is **Parseval/`‖cfc f V x‖² = ∫ |f|² dμ_x`** — the
+    L² estimate behind the dominated-convergence / Cauchy argument that builds the Stone exponential
+    `U_t = exp(it A)` as a strong limit of `cfc (e^{it·φₙ}) V x` (GPT-5.5-pro 2026-06-27). -/
+theorem cayley_cfc_norm_sq [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (f : ℂ → ℂ) (hf : ContinuousOn f (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (x : H) :
+    ‖cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x‖ ^ 2
+      = (inner ℂ x (cfc (fun z => star (f z) * f z)
+          (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)).re := by
+  rw [cfc_mul (fun z => star (f z)) f _ hf.star hf, cfc_star, ContinuousLinearMap.mul_apply,
+    ContinuousLinearMap.star_eq_adjoint, ContinuousLinearMap.adjoint_inner_right]
+  simpa using (inner_self_eq_norm_sq
+    (𝕜 := ℂ) (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)).symm
+
 end SelfAdjoint
 
 end QIQTH.Spectral

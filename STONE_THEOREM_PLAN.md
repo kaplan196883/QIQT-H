@@ -477,6 +477,11 @@ Also ✅ `cayleyScalarMeasure_union` `[Nontrivial H]` — **finite additivity of
 `μ_x(S ∪ T) = μ_x(S) + μ_x(T)` for disjoint measurable `S, T`. The diagonal shadow of the PVM additivity
 `E(S ∪ T) = E(S) + E(T)` (and, normalized, the additivity of the **Born probabilities** over disjoint spectral
 outcomes) — refined to σ-additivity by the eventual PVM `E`.
+Also ✅ `cayley_cfc_norm_sq` `[Nontrivial H]` — **L²-isometry (operator side)**: `‖cfc f V x‖² = re⟪x, cfc(|f|²) V x⟫`
+(`(cfc f V)⋆(cfc f V) = cfc(conj f·f) V` + adjoint). With the integral identity this is Parseval
+`‖cfc f V x‖² = ∫ |f|² dμ_x` — the L² estimate behind the **dominated-convergence / Cauchy argument that builds the
+Stone exponential** `U_t = exp(it A)` as a strong limit of `cfc(e^{it·φₙ}) V x` (GPT-5.5-pro's endorsed Stone-via-
+strong-limit route, NOT the PVM).
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`
