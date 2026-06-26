@@ -4992,6 +4992,11 @@ namespace QIQTH.AxiomAudit
 -- ★ P4 WALL — the RESOLVENT IS A CONTRACTION: norm_resolvent_le — ‖R x‖ ≤ ‖x‖ (‖e^{−t}U_t x‖ ≤ e^{−t}‖x‖,
 -- ∫₀^∞ e^{−t}=1 via integral_exp_neg_Ioi_zero + setIntegral_mono_on + norm_integral_le_integral_norm). R=(1−iA)⁻¹
 -- is a bounded operator (norm ≤1) ⟹ 1−iA = −i(A+i) has a bounded right inverse, the step giving Range(A+i)=H. Axiom-free.
+#print axioms QIQTH.Spectral.resolvent_apply_flow
+-- ★ P4 WALL — the FLOW-ON-RESOLVENT identity: resolvent_apply_flow — U_s (R x) = ∫₀^∞ e^{−t} U_{s+t} x dt (U_s
+-- through the set Bochner integral via integral_comp_comm + ContinuousLinearMap.map_smul_of_tower for the ℝ-smul +
+-- group law). The algebraic core of the resolvent identity: after the change of variables u=s+t (giving
+-- e^s ∫_s^∞ e^{−u}U_u x du), differentiating in s at 0 yields R x − x by the FTC ⟹ (A+i)(R x)=i x ⟹ Range(A+i)=H. Axiom-free.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via

@@ -413,6 +413,19 @@ theorem norm_resolvent_le (U : ℝ → (H →L[ℂ] H)) (x : H)
     _ = 1 * ‖x‖ := by rw [integral_exp_neg_Ioi_zero]
     _ = ‖x‖ := one_mul _
 
+/-- **The flow-on-resolvent identity** `U_s (R x) = ∫₀^∞ e^{−t} U_{s+t} x dt`: the bounded operator `U_s` passes
+    through the (set) Bochner integral (`integral_comp_comm`), then the group law `U_s U_t = U_{s+t}` shifts the
+    orbit. Differentiating its right side in `s` (after the change of variables `u = s+t`, giving
+    `e^s ∫_s^∞ e^{−u} U_u x du`, whose `d/ds|₀ = R x − x` by the FTC) is what gives the resolvent identity
+    `(A + i)(R x) = i x` — the route to `Range(A + i) = H`. -/
+theorem resolvent_apply_flow (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (x : H) (hUbd : ∀ t, ‖U t x‖ ≤ ‖x‖) (hcont : Continuous (fun t => U t x)) (s : ℝ) :
+    U s (resolvent U x) = ∫ t in Set.Ioi (0 : ℝ), Real.exp (-t) • U (s + t) x := by
+  rw [resolvent, ← ContinuousLinearMap.integral_comp_comm (U s)
+      (resolvent_integrand_integrableOn U x hUbd hcont)]
+  refine setIntegral_congr_fun measurableSet_Ioi fun t _ => ?_
+  rw [ContinuousLinearMap.map_smul_of_tower, ← ContinuousLinearMap.comp_apply, ← hgrp s t]
+
 section SelfAdjoint
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 
