@@ -4895,6 +4895,16 @@ namespace QIQTH.AxiomAudit
 -- ‖(P+i)x‖²=‖Px‖²+‖x‖²; momentumOp_norm_le_norm_add_smul_I — P+i bounded below ⟹ injective. Instantiations of the
 -- general Stone lemmas for translationCLM_add/_zero/_inner (τ_t a ℂ-linear isometry). Lp-wall handled by the same
 -- irreducible-stoneGen pattern. Axiom-free. (e.s.a. = Range(P±i) dense = the carried analytic frontier.)
+#print axioms QIQTH.StandardSubspaceModular.modularGen_isFormalAdjoint_self
+#print axioms QIQTH.StandardSubspaceModular.modularGen_norm_add_smul_I_sq
+#print axioms QIQTH.StandardSubspaceModular.modularGen_norm_le_norm_add_smul_I
+-- ★ P4 WALL — THE MODULAR HAMILTONIAN K AS A SYMMETRIC OPERATOR (3rd & last of the 3 C₀ groups):
+-- modularGen := stoneGen (modUnitary S) = −i d/dt Δ^{it}, the generator of the one-particle modular flow Δ^{it},
+-- = the K of JLMS K̃ = A_edge·(1/4ℓ_P²) + K_bulk. modularGen_isFormalAdjoint_self — K symmetric;
+-- modularGen_norm_add_smul_I_sq — Cayley estimate ‖(K+i)x‖²=‖Kx‖²+‖x‖²; modularGen_norm_le_norm_add_smul_I — K+i
+-- bounded below ⟹ injective. Instantiations of the general Stone lemmas for modUnitary_compL/_zero/inner_modUnitary_self
+-- (the latter derived from modUnitary_adjoint). modUnitary lives on the ABSTRACT one-particle space (not Lp), so NO
+-- irreducible/Lp workaround needed. Axiom-free. (e.s.a. = Range(K±i) dense = the carried analytic frontier.)
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable

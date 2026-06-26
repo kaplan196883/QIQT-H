@@ -193,6 +193,22 @@ multiplication that was the "real wall" of Phase 1. The matter side of the cross
 **NEXT (separate):** Phase 2 (translation unitary group λ_t via `DomAddAct`), Phase 3 (covariance), then the
 frontiers (Stone, the trace). The `1/4` coefficient stays the cited UV datum throughout.
 
+### Phase 4 (operators) — the modular Hamiltonian `K` as a symmetric operator ✅ (3rd & LAST C₀ group; trio complete)
+**Delivered (axiom-free, budget 0, `QIQTH/Spectral/ModularGenerator.lean`):** the Stone-instantiation pattern
+applied to the **third and last** named C₀ group, the modular flow `Δ^{it} = modUnitary S t` on the
+one-particle space `H` (built via the bounded Borel FC of `R = P+Q`). The three Stone hypotheses:
+`modUnitary_compL` (group law in `∘L` form, from `modUnitary_add`), `modUnitary_zero` (`Δ^0=1`),
+`inner_modUnitary_self` (unitarity `⟪Δ^{it}a, Δ^{it}b⟫=⟪a,b⟫`, derived from `modUnitary_adjoint`). Then the
+**modular Hamiltonian** `modularGen := stoneGen (modUnitary S) = −i d/dt Δ^{it}` — **the `K` of JLMS
+`K̃ = A_edge·(1/4ℓ_P²) + K_bulk`** — with `modularGen_isFormalAdjoint_self` (**`K` symmetric**),
+`modularGen_norm_add_smul_I_sq` (**Cayley estimate**), `modularGen_norm_le_norm_add_smul_I` (**`K+i` injective**).
+`modUnitary` lives on the **abstract** one-particle space (not a heavy `Lp` type), so the instantiation needed
+**no `irreducible`/`Lp` workaround** — clean term-mode applications of the general Stone lemmas.
+
+**All three named C₀ generators now exist as concrete symmetric operators with `±i` injective:** `X = A_edge`
+(clock), `P` (momentum), `K` (modular). The single shared remaining frontier is e.s.a. = `Range(·±i)` dense
+(Gårding density), the carried analytic wall — with it, Stone returns `U_t = exp(it·gen)` for each.
+
 ### Phase 4.2/4.3 (operators) — the momentum operator `P` as a symmetric operator ✅ (2nd C₀ group instantiated)
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/MomentumGenerator.lean`):** the same Stone-instantiation
 pattern applied to the **second** of the three named C₀ groups, `translationLp t = τ_t = e^{itP}` on `L²(ℝ)`:

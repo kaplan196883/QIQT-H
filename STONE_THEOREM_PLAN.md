@@ -204,6 +204,15 @@ then `momentumOp := stoneGen translationCLM = −i d/dx` with `momentumOp_isForm
 the three named C₀ generators (`X = A_edge`, `P`) now exist as concrete symmetric operators; the modular `Δ^{it}`
 (→ `K`) is the third. e.s.a. (`Range(P ± i)` dense) stays the carried analytic frontier.
 
+**PROGRESS — Phase 4 (the modular Hamiltonian `K`) ✅ — the trio is complete** (`QIQTH/Spectral/ModularGenerator.lean`,
+axiom-free, budget 0): the same pattern applied to the modular flow `Δ^{it} = modUnitary S t` on the abstract
+one-particle space — `modUnitary_compL`/`modUnitary_zero`/`inner_modUnitary_self` (the three Stone hypotheses, the
+last derived from `modUnitary_adjoint`), then `modularGen := stoneGen (modUnitary S) = −i d/dt Δ^{it}` (= the JLMS
+`K`) with `modularGen_isFormalAdjoint_self` (K symmetric), `modularGen_norm_add_smul_I_sq` (Cayley estimate),
+`modularGen_norm_le_norm_add_smul_I` (K+i injective). On the abstract space — **no `Lp`/`irreducible` workaround
+needed**. **All three named C₀ generators (`X = A_edge`, `P`, `K`) are now concrete symmetric operators with
+`±i` injective.** The shared remaining analytic frontier is e.s.a. = `Range(·±i)` dense (Gårding density).
+
 ## 3. Dependency graph
 ```
 Phase 1 (unbounded FC ∫f dE) ─→ Phase 2 (Stone for FC-ops; K, Δ^{it}=e^{−itK}) ──→ [JLMS Stage 1 DONE]
