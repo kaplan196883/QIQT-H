@@ -4925,6 +4925,13 @@ namespace QIQTH.AxiomAudit
 -- the generator. Axiom-free. With mollify_integrable (hF_int) + mollify_integrand_hasDerivAt (h_diff), the ONLY
 -- remaining hypothesis of hasDerivAt_integral_of_dominated_loc_of_deriv_le is the integrable dominating bound
 -- supₛ|φ'(u−s)|·‖x‖ (compact support of φ' ⟹ indicator of a compact set) — the carried analytic gap.
+#print axioms QIQTH.Spectral.exists_norm_le_of_compactSupport
+#print axioms QIQTH.Spectral.exists_support_subset_of_compactSupport
+-- the two compact-support consequences the dominating bound C·M·𝟙_K rests on: exists_norm_le_of_compactSupport —
+-- φ' bounded (C=‖φ'‖_∞, via Continuous.bddAbove_range_of_hasCompactSupport); exists_support_subset_of_compactSupport
+-- — φ' vanishes outside a ball {|y|≤ρ} (tsupport bounded + image_eq_zero_of_notMem_tsupport). Axiom-free.
+-- Assembling bound := C·M·𝟙_{closedBall(ρ+nbhd)} (integrable: compact ⟹ finite measure) + applying the diff lemma
+-- ⟹ x_φ ∈ stoneDomain U is the remaining step.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via

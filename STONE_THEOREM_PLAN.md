@@ -234,8 +234,15 @@ is again a Gårding vector** (`−x_{φ'}`), so the smooth subspace is *closed u
 **Remaining (the genuine analytic frontier — now a SINGLE hypothesis):** with `mollify_integrable` (`hF_int`),
 `mollify_integrand_hasDerivAt` (`h_diff`), the two measurability lemmas (`hF_meas`/`hF'_meas`), the only missing
 hypothesis of `hasDerivAt_integral_of_dominated_loc_of_deriv_le` is the **integrable dominating bound**
-`supₛ |φ'(u−s)|·‖x‖` (from compact support of `φ'` ⟹ indicator of a compact set). That assembled ⟹
-`HasDerivAt (s ↦ U_s x_φ) (−x_{φ'}) 0` ⟹ `x_φ ∈ stoneDomain U`; then `{x_φ}` dense (approximate identity `φ → δ`).
+`supₛ |φ'(u−s)|·‖x‖` (from compact support of `φ'` ⟹ indicator of a compact set).
+Also ✅ the two compact-support consequences the bound `C·M·𝟙_K` rests on: `exists_norm_le_of_compactSupport`
+(`φ'` bounded, `C = ‖φ'‖_∞`, via `Continuous.bddAbove_range_of_hasCompactSupport`) +
+`exists_support_subset_of_compactSupport` (`φ'` vanishes outside `{|y| ≤ ρ}`, via `tsupport` bounded +
+`image_eq_zero_of_notMem_tsupport`).
+**Remaining (the final assembly):** combine into `bound := C·M·𝟙_{closedBall(ρ+nbhd)}` (integrable: compact ⟹
+finite measure ⟹ indicator-const integrable), prove the a.e. domination `‖F'(σ,u)‖ ≤ bound u` (case split on
+`|u|` vs `ρ`), apply the differentiation lemma ⟹ `HasDerivAt (s ↦ U_s x_φ) (−x_{φ'}) 0` ⟹ `x_φ ∈ stoneDomain U`;
+then `{x_φ}` dense (approximate identity `φ → δ`). Needs a uniform operator bound `‖U_u x‖ ≤ M` (= `‖x‖` for unitary).
 
 ## 3. Dependency graph
 ```

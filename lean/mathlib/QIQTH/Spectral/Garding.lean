@@ -107,4 +107,30 @@ theorem mollify_neg_deriv_eq (U : ℝ → (H →L[ℂ] H)) (φ' : ℝ → ℂ) (
   simp_rw [neg_smul]
   rw [integral_neg, mollify]
 
+/-! ### The dominating-bound ingredients (compact-support consequences for the mollifier derivative)
+
+The single remaining hypothesis of `hasDerivAt_integral_of_dominated_loc_of_deriv_le` for the Gårding orbit is
+an *integrable dominating bound* for `‖F'(σ,u)‖ = |φ'(u−σ)|·‖U_u x‖` over `σ` in a neighborhood. With a uniform
+operator bound `‖U_u x‖ ≤ M`, that bound is `C·M·𝟙_K(u)` where `C = ‖φ'‖_∞` and `K` is a ball containing
+`tsupp φ' + nbhd` (compact ⟹ finite measure ⟹ indicator integrable). The two analytic facts it rests on — `φ'`
+bounded, and `φ'` vanishing outside a ball — are isolated here (generic for continuous compactly-supported
+`ℝ → ℂ`). Assembling the bound + applying the differentiation lemma (⟹ `x_φ ∈ stoneDomain U`) is the next step. -/
+
+/-- A continuous compactly-supported `φ' : ℝ → ℂ` is **bounded** — the sup bound `C = ‖φ'‖_∞` for the
+    dominating function. -/
+theorem exists_norm_le_of_compactSupport (φ' : ℝ → ℂ) (hφ' : Continuous φ')
+    (hsupp : HasCompactSupport φ') : ∃ C : ℝ, ∀ y, ‖φ' y‖ ≤ C := by
+  obtain ⟨C, hC⟩ := hφ'.norm.bddAbove_range_of_hasCompactSupport hsupp.norm
+  exact ⟨C, fun y => hC ⟨y, rfl⟩⟩
+
+/-- A compactly-supported `φ' : ℝ → ℂ` **vanishes outside a ball** `{|y| ≤ ρ}` — the uniform support
+    localization that makes the dominating function compactly supported (hence integrable). -/
+theorem exists_support_subset_of_compactSupport (φ' : ℝ → ℂ) (hsupp : HasCompactSupport φ') :
+    ∃ ρ : ℝ, ∀ y, ρ < |y| → φ' y = 0 := by
+  obtain ⟨ρ, hρ⟩ := hsupp.isCompact.isBounded.subset_closedBall (0 : ℝ)
+  refine ⟨ρ, fun y hy => image_eq_zero_of_notMem_tsupport (fun hmem => ?_)⟩
+  have hb := hρ hmem
+  rw [Metric.mem_closedBall, Real.dist_eq, sub_zero] at hb
+  exact absurd hb (not_le.mpr hy)
+
 end QIQTH.Spectral

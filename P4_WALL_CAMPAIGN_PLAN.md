@@ -209,7 +209,10 @@ derivative `−φ'(u−σ₀) • U_u x` (chain rule `scomp` + `smul_const`). Pl
 `mollify_neg_deriv_eq` (the derivative value `= −x_{φ'}`, a Gårding vector — smooth subspace closed under the
 generator). **Carried frontier (now a SINGLE hypothesis):** the integrable dominating bound `supₛ |φ'(u−s)|·‖x‖`
 (compact support of `φ'` ⟹ indicator of a compact set) is the only missing input to
-`hasDerivAt_integral_of_dominated_loc_of_deriv_le`; that assembled ⟹ `x_φ ∈ stoneDomain U`, then density.
+`hasDerivAt_integral_of_dominated_loc_of_deriv_le`. Its two analytic pillars are now in hand:
+`exists_norm_le_of_compactSupport` (`φ'` bounded) + `exists_support_subset_of_compactSupport` (`φ'` vanishes
+outside a ball). **Final assembly remaining:** `bound := C·M·𝟙_{closedBall(ρ+nbhd)}` (integrable, compact set) +
+a.e. domination + apply the lemma ⟹ `x_φ ∈ stoneDomain U`, then density (`φ → δ`). (Needs uniform `‖U_u x‖ ≤ M`.)
 
 ### Phase 4 (operators) — the modular Hamiltonian `K` as a symmetric operator ✅ (3rd & LAST C₀ group; trio complete)
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/ModularGenerator.lean`):** the Stone-instantiation pattern
