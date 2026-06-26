@@ -1466,6 +1466,14 @@ namespace QIQTH.AxiomAudit
 -- law (translationLp_add) + unitarity (norm_translationLp), t↦τ_t is now a genuine STRONGLY-CONTINUOUS one-parameter
 -- unitary group (C₀-group) — the full Stone hypothesis. ONLY REMAINING for #5: identify the generator with the
 -- momentum PVM (P=∫k dÊ(k), Stone's theorem — the unbounded-FC frontier); the GR chain beyond #5 stays gated on #1/#3/#4.
+#print axioms QIQTH.Spectral.Multiplication.translationLp_zero
+#print axioms QIQTH.Spectral.Multiplication.translationUnitary
+#print axioms QIQTH.Spectral.Multiplication.translationUnitary_symm_apply
+-- ★ THE TRANSLATION UNITARY GROUP (≃ₗᵢ packaging): translationLp_zero (τ_0=id) + translationUnitary t (τ_t as a
+-- genuine ≃ₗᵢ[ℂ] unitary, invertible with inverse τ_{-t} via LinearIsometryEquiv.ofSurjective + the group law),
+-- with translationUnitary_apply/_symm_apply. Upgrades the isometry semigroup to a one-parameter UNITARY group —
+-- the form the conjugation/modular machinery consumes (e.g. positionPVM.conj (translationUnitary t) = the
+-- translation-covariance of the position observable). Axiom-free; the Stone generator (P) remains the frontier for #5.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

@@ -67,4 +67,28 @@ theorem continuous_translationLp (F : Lp ℂ 2 (volume : Measure ℝ)) :
     (continuous_const).compMeasurePreservingLp (map_continuous g) hgm (by norm_num)
   exact hcont
 
+/-- The translation at `t = 0` is the identity: `τ_0 = id`. -/
+@[simp] theorem translationLp_zero (g : Lp ℂ 2 (volume : Measure ℝ)) : translationLp 0 g = g := by
+  refine Lp.ext ?_
+  filter_upwards [coeFn_translationLp 0 g] with x e1
+  rw [e1, add_zero]
+
+/-- **The translation operator as a unitary `≃ₗᵢ`** (one-parameter *group* of unitaries): `τ_t` is invertible
+    with inverse `τ_{-t}` (from the group law `τ_t ∘ τ_{-t} = τ_0 = id`). This packages translation as a genuine
+    unitary on `L²(ℝ)` — the form conjugation/modular machinery consumes. -/
+noncomputable def translationUnitary (t : ℝ) :
+    Lp ℂ 2 (volume : Measure ℝ) ≃ₗᵢ[ℂ] Lp ℂ 2 (volume : Measure ℝ) :=
+  LinearIsometryEquiv.ofSurjective (translationLp t)
+    (fun g => ⟨translationLp (-t) g, by
+      rw [translationLp_add, add_neg_cancel, translationLp_zero]⟩)
+
+@[simp] theorem translationUnitary_apply (t : ℝ) (g : Lp ℂ 2 (volume : Measure ℝ)) :
+    translationUnitary t g = translationLp t g := rfl
+
+@[simp] theorem translationUnitary_symm_apply (t : ℝ) (g : Lp ℂ 2 (volume : Measure ℝ)) :
+    (translationUnitary t).symm g = translationLp (-t) g := by
+  apply (translationUnitary t).injective
+  rw [LinearIsometryEquiv.apply_symm_apply, translationUnitary_apply, translationLp_add,
+    add_neg_cancel, translationLp_zero]
+
 end QIQTH.Spectral.Multiplication

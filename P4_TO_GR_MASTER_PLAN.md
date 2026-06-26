@@ -386,6 +386,12 @@ item.** Never claim the `1/4`.
   momentum PVM, `P=∫k dÊ(k)` (Stone's theorem — the unbounded-FC frontier). The C₀-group, the momentum PVM, and the
   position↔momentum Born picture are all in hand; the generator-extraction (Stone) is the single remaining Lean
   step before `#5`, after which the GR chain stays gated only on the physical wedge inputs `#1/#3/#4` + the `1/4` UV datum.
+  **The translation UNITARY group (`≃ₗᵢ` packaging) ✅** (`TranslationFlow.lean`, axiom-free, budget 0):
+  `translationLp_zero` (`τ_0=id`) + `translationUnitary t` — `τ_t` as a genuine `≃ₗᵢ[ℂ]` unitary, invertible with
+  inverse `τ_{-t}` (via `LinearIsometryEquiv.ofSurjective` + the group law), with `translationUnitary_apply`/
+  `_symm_apply`. Upgrades the isometry semigroup to a one-parameter **unitary** group — the form the
+  conjugation/modular machinery consumes (e.g. `positionPVM.conj (translationUnitary t)` is the translation-
+  covariance of the position observable). The Stone generator `P` remains the single Lean frontier for `#5`.
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.
