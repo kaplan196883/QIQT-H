@@ -5087,6 +5087,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.realCfcReExpectationCLM
 #print axioms QIQTH.Spectral.realCfcReExpectation_nonneg
 #print axioms QIQTH.Spectral.cfcPLM
+#print axioms QIQTH.Spectral.cfcPLMcc
+-- ★★★ P4 WALL — THE RMK INPUT C_c(σV,ℝ)→ₚ[ℝ]ℝ: cfcPLMcc [Nontrivial H] — f↦re⟪x,cfc f V x⟫ on the compactly-
+-- supported functions = cfcPLM precomposed with the forgetful C_c(σV,ℝ)→C(σV,ℝ) (σV compact ⟹ bijection);
+-- map_add'/map_smul' via map_add/map_smul of cfcPLM, monotone' via cfcPLM.monotone' ∘ (C_c→C order). This is EXACTLY
+-- the type RealRMK.rieszMeasure consumes ⟹ feeding it gives the scalar spectral measure μ_x of V with
+-- ∫f dμ_x = re⟪x,cfc f V x⟫. Axiom-free. Remaining: rieszMeasure ⟹ μ_x (Borel/LCH instances on σV), then the
+-- PVM assembly (the genuine Mathlib gap).
 -- ★★★ P4 WALL — THE POSITIVE LINEAR FUNCTIONAL C(σV,ℝ)→ₚ[ℝ]ℝ (the RMK input): cfcPLM [Nontrivial H] —
 -- g↦re⟪x,cfc g V x⟫ bundled as a PositiveLinearMap, toLinearMap := (realCfcReExpectationCLM x).toLinearMap,
 -- monotone' from realCfcReExpectation_nonneg (linear map monotone iff 0≤y⟹0≤f y, via f b−f a=f(b−a)≥0). This is

@@ -310,8 +310,10 @@ Also ✅ `realCfcReExpectation_nonneg` `[Nontrivial H]` (**functional monotone/p
 Also ✅ `cfcPLM` `[Nontrivial H]` (**the `C(σV,ℝ)→ₚ[ℝ]ℝ` positive linear functional** — `g↦re⟪x,cfc g V x⟫` bundled
 as a `PositiveLinearMap`: `toLinearMap` = `(realCfcReExpectationCLM x).toLinearMap`, `monotone'` from
 `realCfcReExpectation_nonneg`). **THE input `RealRMK.rieszMeasure` consumes.**
-**Next:** `C(σV,ℝ)≃C_c(σV,ℝ)` transport → `rieszMeasure` ⟹ μ_x → assemble circle-PVM `E` (Mathlib gap) → transport
-to `A=∫λ dE` ⟹ Stone.
+Also ✅ `cfcPLMcc` `[Nontrivial H]` (**the RMK input** `C_c(σV,ℝ)→ₚ[ℝ]ℝ` — `cfcPLM` precomposed with the forgetful
+`C_c→C` on the compact spectrum; exactly the type `RealRMK.rieszMeasure` consumes).
+**Next:** `RealRMK.rieszMeasure cfcPLMcc` ⟹ μ_x (Borel/LCH instances on σV) + `∫f dμ_x = re⟪x,cfc f V x⟫` → assemble
+circle-PVM `E` (Mathlib gap) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
 `E` (`V=∫z dE`) → transport via inverse Cayley to `A=∫λ dE` ⟹ Stone. The bounded-PVM remains the genuine gap.
 **Remaining (Mathlib gap):** the **Borel/PVM** functional calculus on `S¹` for `V` (Mathlib has *continuous* FC

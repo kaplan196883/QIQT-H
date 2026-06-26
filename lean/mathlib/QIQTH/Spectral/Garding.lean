@@ -37,10 +37,13 @@ import Mathlib.Analysis.InnerProductSpace.Positive
 import Mathlib.Analysis.InnerProductSpace.StarOrder
 import Mathlib.Analysis.CStarAlgebra.ContinuousLinearMap
 import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Basic
+import Mathlib.Topology.ContinuousMap.CompactlySupported
 
 namespace QIQTH.Spectral
 
 open MeasureTheory
+open scoped CompactlySupported
+open CompactlySupportedContinuousMap
 
 variable {H : Type*} [NormedAddCommGroup H] [NormedSpace ℂ H] [CompleteSpace H]
 
@@ -1307,6 +1310,30 @@ noncomputable def cfcPLM [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
     (g : C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℝ)) :
     cfcPLM U hgrp hU0 hUinner hUbd hSC x g
       = realCfcReExpectationCLM U hgrp hU0 hUinner hUbd hSC x g := rfl
+
+/-- **★★★ The scalar spectral functional on the compactly-supported functions** `C_c(σ(V), ℝ) →ₚ[ℝ] ℝ`,
+    `f ↦ re⟪x, cfc f V x⟫` — `cfcPLM` precomposed with the forgetful map `C_c(σ(V),ℝ) → C(σ(V),ℝ)` (the spectrum is
+    compact, so this is a bijection). This is **exactly the type `RealRMK.rieszMeasure` consumes**: feeding it
+    yields the scalar spectral measure `μ_x` of `V` with `∫ f dμ_x = re⟪x, cfc f V x⟫`. -/
+noncomputable def cfcPLMcc [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    C_c(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℝ) →ₚ[ℝ] ℝ where
+  toFun f := cfcPLM U hgrp hU0 hUinner hUbd hSC x f.toContinuousMap
+  map_add' f g := by
+    show cfcPLM U hgrp hU0 hUinner hUbd hSC x (f + g).toContinuousMap
+      = cfcPLM U hgrp hU0 hUinner hUbd hSC x f.toContinuousMap
+        + cfcPLM U hgrp hU0 hUinner hUbd hSC x g.toContinuousMap
+    rw [show (f + g).toContinuousMap = f.toContinuousMap + g.toContinuousMap from rfl]
+    exact map_add (cfcPLM U hgrp hU0 hUinner hUbd hSC x) _ _
+  map_smul' c f := by
+    show cfcPLM U hgrp hU0 hUinner hUbd hSC x (c • f).toContinuousMap
+      = c • cfcPLM U hgrp hU0 hUinner hUbd hSC x f.toContinuousMap
+    rw [show (c • f).toContinuousMap = c • f.toContinuousMap from rfl]
+    exact map_smul (cfcPLM U hgrp hU0 hUinner hUbd hSC x) _ _
+  monotone' f g hfg := (cfcPLM U hgrp hU0 hUinner hUbd hSC x).monotone'
+    (ContinuousMap.le_def.mpr (CompactlySupportedContinuousMap.le_def.mp hfg))
 
 end SelfAdjoint
 
