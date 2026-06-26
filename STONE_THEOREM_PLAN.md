@@ -397,10 +397,15 @@ Also ✅ `cayley_cfc_re_inner_nonneg_of_nonneg` — **the RMK functional is posi
 `g = |√g|²`: `h z = √((g z).re)`, `conj(h)·h = g` on `σ(V)` by `cfc_congr`, then the square lemma; closed with
 `le_of_le_of_eq` + `congrArg` to dodge cfc proof-irrelevance). This is exactly the `0 ≤ g ⟹ 0 ≤ Λg` hypothesis a
 positive linear functional needs.
-**Next:** bundle `g ↦ re⟪x, cfc g V x⟫` as `C_c(σ(V), ℝ) →ₚ[ℝ] ℝ` (linearity from `cfcHom` being a ⋆-hom;
-positivity now fully in hand) and apply `RealRMK.rieszMeasure` ⟹ the scalar spectral measure `μ_x`; then assemble
-the `μ_x` into a circle-PVM `E` (the Mathlib gap — no `ProjectionValuedMeasure` type), transport to `A = ∫ λ dE`
-⟹ Stone.
+Also ✅ `cayley_cfc_re_inner_add` + `cayley_cfc_re_inner_smul` — **the functional is ℝ-linear**:
+`re⟪x, cfc (f+g) V x⟫ = re⟪x, cfc f V x⟫ + re⟪x, cfc g V x⟫` (`cfc_add` + `inner_add_right` + `Complex.add_re`) and
+`re⟪x, cfc (↑c·f) V x⟫ = c·re⟪x, cfc f V x⟫` for `c : ℝ` (`cfc_const_mul` + `inner_smul_right` +
+`Complex.re_ofReal_mul`). **With the positivity, `g ↦ re⟪x, cfc g V x⟫` is now a fully machine-checked positive
+ℝ-linear functional** — every mathematical component `RealRMK.rieszMeasure` needs.
+**Next:** the remaining work is *plumbing*, not new math — bundle `g ↦ re⟪x, cfc g V x⟫` into a
+`C_c(σ(V), ℝ) →ₚ[ℝ] ℝ` (`cfcHom`/`ContinuousMap` packaging of the now-proven linearity+positivity) and apply
+`RealRMK.rieszMeasure` ⟹ `μ_x`; then assemble `{μ_x}` into a circle-PVM `E` (the Mathlib gap — no
+`ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` has its own), transport to `A = ∫ λ dE` ⟹ Stone.
 **Next multi-fire sub-construction (the operator → PVM keystone, RMK + cfc supported):** the scalar spectral
 measures `μ_x` of `V` (positive functional `f ↦ re⟨x, cfc f V x⟩` → `RealRMK.rieszMeasure`), then their assembly
 into a circle-PVM `E` with `V = ∫ z dE`, then transport through inverse Cayley to `A = ∫ λ dE` ⟹ Stone.

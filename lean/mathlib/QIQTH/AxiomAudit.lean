@@ -5079,6 +5079,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayley_cfc_one
 #print axioms QIQTH.Spectral.cayley_cfc_sq_re_inner_nonneg
 #print axioms QIQTH.Spectral.cayley_cfc_re_inner_nonneg_of_nonneg
+#print axioms QIQTH.Spectral.cayley_cfc_re_inner_add
+#print axioms QIQTH.Spectral.cayley_cfc_re_inner_smul
+-- ★★ P4 WALL — RMK FUNCTIONAL IS ℝ-LINEAR (completes positive LINEAR functional): cayley_cfc_re_inner_add
+-- [Nontrivial H] — re⟪x,cfc(f+g)V x⟫ = re⟪x,cfc f V x⟫ + re⟪x,cfc g V x⟫ (cfc_add + inner_add_right + Complex.add_re).
+-- cayley_cfc_re_inner_smul [Nontrivial H] — re⟪x,cfc(↑c·f)V x⟫ = c·re⟪x,cfc f V x⟫ for c:ℝ (cfc_const_mul +
+-- inner_smul_right + Complex.re_ofReal_mul). With cayley_cfc_re_inner_nonneg_of_nonneg (positivity), g↦re⟪x,cfc g V x⟫
+-- is a POSITIVE ℝ-LINEAR functional — every component RealRMK.rieszMeasure needs to produce μ_x. Axiom-free.
 -- ★★ P4 WALL — RMK FUNCTIONAL POSITIVE ON THE WHOLE NONNEG CONE: cayley_cfc_re_inner_nonneg_of_nonneg
 -- [Nontrivial H] — 0 ≤ re⟪x, cfc g V x⟫ for any g continuous on σ(V) that is real and ≥ 0 there. Reduce to the
 -- square case via g = |√g|²: h z = √((g z).re) is continuous real, conj(h)·h = g on σ(V) (cfc_congr), so by

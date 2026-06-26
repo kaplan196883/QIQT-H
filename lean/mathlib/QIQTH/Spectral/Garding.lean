@@ -1146,6 +1146,38 @@ theorem cayley_cfc_re_inner_nonneg_of_nonneg [Nontrivial H] (U : ℝ → (H →L
   exact le_of_le_of_eq key
     (congrArg (fun T : H →L[ℂ] H => (inner ℂ x (T x)).re) (cfc_congr hpt))
 
+/-- **★ The scalar spectral functional is additive:**
+    `re⟪x, cfc (f + g) V x⟫ = re⟪x, cfc f V x⟫ + re⟪x, cfc g V x⟫` for `f, g` continuous on `σ(V)`. Via `cfc_add`
+    + inner-product additivity — the additive half of the linearity of the Riesz–Markov functional. -/
+theorem cayley_cfc_re_inner_add [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (f g : ℂ → ℂ)
+    (hf : ContinuousOn f (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (hg : ContinuousOn g (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))) (x : H) :
+    (inner ℂ x (cfc (fun z => f z + g z) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)).re
+      = (inner ℂ x (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)).re
+        + (inner ℂ x (cfc g (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)).re := by
+  rw [cfc_add (a := (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) (f := f) (g := g)
+      (hf := hf) (hg := hg), ContinuousLinearMap.add_apply, inner_add_right, Complex.add_re]
+
+/-- **★ The scalar spectral functional is ℝ-homogeneous:**
+    `re⟪x, cfc (c • f) V x⟫ = c · re⟪x, cfc f V x⟫` for `c : ℝ`, `f` continuous on `σ(V)`. Via `cfc_const_mul`
+    + `inner_smul_right` — the homogeneous half of the linearity of the Riesz–Markov functional. With
+    `cayley_cfc_re_inner_add` and `cayley_cfc_re_inner_nonneg_of_nonneg`, `g ↦ re⟪x, cfc g V x⟫` is a **positive
+    ℝ-linear functional** — every component `RealRMK.rieszMeasure` needs to produce `μ_x`. -/
+theorem cayley_cfc_re_inner_smul [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (c : ℝ) (f : ℂ → ℂ)
+    (hf : ContinuousOn f (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))) (x : H) :
+    (inner ℂ x (cfc (fun z => (c : ℂ) * f z) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)).re
+      = c * (inner ℂ x (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)).re := by
+  rw [cfc_const_mul (c : ℂ) f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) hf,
+    ContinuousLinearMap.smul_apply, inner_smul_right, Complex.re_ofReal_mul]
+
 end SelfAdjoint
 
 end QIQTH.Spectral
