@@ -971,6 +971,37 @@ theorem cayley_spectrum_subset_circle (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ 
     spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) ⊆ Metric.sphere (0 : ℂ) 1 :=
   spectrum.subset_circle_of_unitary (cayley_mem_unitary U hgrp hU0 hUinner hUbd hSC)
 
+/-- **★ The Cayley defect `1 − V`:** `y − V y = 2i · (A + i)⁻¹ y`. With `z = (A + i)⁻¹ y` (so `(A + i)z = y`),
+    `y − V y = (Az + iz) − (Az − iz) = 2i·z`. -/
+theorem cayley_one_sub (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (y : H) :
+    y - cayley U hgrp hU0 hUinner hUbd hSC y
+      = (2 * Complex.I) • ((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y : H) := by
+  rw [cayley]
+  set s := (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y with hs
+  have h0 : (cayleyEquiv U hgrp hU0 hUinner hUbd hSC) s = y :=
+    (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).apply_symm_apply y
+  have hz : stoneGen U s + Complex.I • (s : H) = y := h0
+  rw [← hz]
+  module
+
+/-- **★★ `1` is not an eigenvalue of the Cayley unitary `V`** — `ker(1 − V) = 0`, equivalently `y ↦ y − V y` is
+    injective. This is the precise condition that `V = (A − i)(A + i)⁻¹` is the **Cayley transform of a
+    (densely-defined) self-adjoint operator** `A`: from `cayley_one_sub`, `y − V y = 2i·(A + i)⁻¹ y`, and
+    `(A + i)⁻¹` is injective. (The inverse Cayley map `A = i(1 + V)(1 − V)⁻¹` is thus well-defined on `ran(1 − V)`,
+    the dense smooth domain — the route back from the circle-spectral data to the generator.) -/
+theorem cayley_one_sub_injective (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    Function.Injective (fun y : H => y - cayley U hgrp hU0 hUinner hUbd hSC y) := by
+  intro y₁ y₂ h
+  simp only [cayley_one_sub] at h
+  have hu : ((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y₁ : H)
+      = ((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y₂ : H) :=
+    smul_right_injective H (mul_ne_zero (by norm_num) Complex.I_ne_zero) h
+  exact (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm.injective (Subtype.coe_injective hu)
+
 end SelfAdjoint
 
 end QIQTH.Spectral

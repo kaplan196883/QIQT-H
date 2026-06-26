@@ -272,6 +272,9 @@ Also ✅ `cayley_mem_unitary` + `cayleyUnitaryElt` (**`V` is a C\*-algebra unita
 `star V * V = V * star V = 1` — the **CFC doorway**: `cfc f V` exists, `spectrum ℂ V ⊆ circle`).
 Also ✅ `cayley_spectrum_subset_circle` (**`spectrum ℂ V ⊆ Metric.sphere 0 1`** — the circle-PVM's support; the
 inverse Cayley map `z↦i(1+z)(1−z)⁻¹` pulls `S¹∖{1}` to the real spectrum of `A`).
+Also ✅ `cayley_one_sub` + `cayley_one_sub_injective` (**`1` is not an eigenvalue of `V`**, `ker(1−V)=0`:
+`y−V y = 2i·(A+i)⁻¹y` + `(A+i)⁻¹` injective — the precise condition that `V` is the Cayley transform of a
+densely-defined self-adjoint `A`, with `A = i(1+V)(1−V)⁻¹` well-defined on `ran(1−V)` = the smooth domain).
 **Remaining (Mathlib gap):** the **Borel/PVM** functional calculus on `S¹` for `V` (Mathlib has *continuous* FC
 only) → transport to the unbounded spectral theorem (PVM for self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`.
 

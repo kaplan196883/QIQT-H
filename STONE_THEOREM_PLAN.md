@@ -358,6 +358,11 @@ Also ✅ `cayley_spectrum_subset_circle` — **`spectrum ℂ V ⊆ Metric.sphere
 `spectrum.subset_circle_of_unitary` + `cayley_mem_unitary`): the geometric foundation of `V`'s spectral theorem —
 the circle-PVM is supported on `S¹`, and the inverse Cayley map `z ↦ i(1+z)(1−z)⁻¹` pulls `S¹∖{1}` back to the real
 spectrum of `A = stoneGen U`.
+Also ✅ `cayley_one_sub` + `cayley_one_sub_injective` — **`1` is not an eigenvalue of `V`** (`ker(1 − V) = 0`):
+`y − V y = 2i·(A + i)⁻¹ y` (explicit defect formula), and `(A + i)⁻¹` is injective, so `y ↦ y − V y` is injective.
+This is the precise condition that `V` is the **Cayley transform of a densely-defined self-adjoint operator**: the
+inverse Cayley `A = i(1 + V)(1 − V)⁻¹` is well-defined on `ran(1 − V)` = the smooth domain — the route back from the
+circle-spectral data to the generator.
 **Remaining (Mathlib gap):** the **Borel/PVM** functional calculus on `S¹` (`∫ z dE` for the unitary `V` — Mathlib
 has the *continuous* FC but not the projection-valued-measure form) → transport to the unbounded spectral theorem
 (PVM `∫ λ dE` for the now-self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`.
