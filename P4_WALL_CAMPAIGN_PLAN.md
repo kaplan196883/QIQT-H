@@ -382,6 +382,10 @@ Also ✅ `cayleyScalarMeasure_integral_C` `[Nontrivial H]` (**integral identity 
 the compact-domain wrapper that removes C_c plumbing from the function-form CFC bridge).
 Also ✅ `integral_re_cfc_ofReal` `[Nontrivial H]` (**function-form CFC↔measure bridge** — `re⟪x,cfc(↑∘r)V x⟫ =
 ∫ r ω.1 dμ_x`; the recurring dictionary entry, upgrades L²-distance to `‖cfc f V x−cfc g V x‖²=∫|f−g|²dμ_x`).
+Also ✅ `cayley_cfc_sub_norm_sq_integral` `[Nontrivial H]` (**★★★ the full Parseval / L²-distance identity in honest
+integral form** — `‖cfc f V x − cfc g V x‖² = ∫ ω, ‖f ω.1 − g ω.1‖² dμ_x`; composes `cayley_cfc_sub_norm_sq` with
+`integral_re_cfc_ofReal` at `r z=‖f z−g z‖²`, via `RCLike.conj_mul`. The CFC↔measure dictionary is now COMPLETE:
+`n↦cfc(e^{it·φₙ})V x` Cauchy ⟺ `∫‖e^{itφₙ}−e^{itφₘ}‖²dμ_x→0` — defines `U_t=exp(itA)` as a strong limit, no PVM).
 **Next:** bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

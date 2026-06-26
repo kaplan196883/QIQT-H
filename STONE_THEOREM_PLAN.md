@@ -497,6 +497,15 @@ cfcL ha (restrict(↑∘r))`, defeq to `cfcL ha (↑∘(r∘↑))` — then `cay
 dictionary entry connecting the function-form `cfc g V` (operator-side identities) to the `μ_x`-integral; e.g. it
 upgrades `cayley_cfc_sub_norm_sq` to the genuine L² identity `‖cfc f V x − cfc g V x‖² = ∫|f−g|² dμ_x`. **Next:**
 `μ_x({1})=0` (rational cutoffs) → the strong-limit Stone exponential.
+Also ✅ `cayley_cfc_sub_norm_sq_integral` `[Nontrivial H]` — **the full Parseval / L²-distance identity in honest
+integral form**: `‖cfc f V x − cfc g V x‖² = ∫ ω, ‖f ω.1 − g ω.1‖² dμ_x` for `f,g` continuous on `σ(V)`. Capstone of
+the CFC↔measure dictionary: composes `cayley_cfc_sub_norm_sq` (operator side) with the function-form bridge
+`integral_re_cfc_ofReal` at `r z = ‖f z − g z‖²`, using the pointwise ℂ-identity `star w·w = ↑‖w‖²`
+(`RCLike.conj_mul`, then `norm_cast`). This is the genuine **Parseval/Cauchy estimate in MEASURE form**:
+`n ↦ cfc(e^{it·φₙ}) V x` is Cauchy **iff** `∫ ‖e^{itφₙ} − e^{itφₘ}‖² dμ_x → 0` — exactly what defines the Stone
+exponential `U_t = exp(it A)` as a strong limit without a PVM (GPT-5.5-pro's endorsed route). The L²-side dictionary
+is now complete; the strong-limit construction can proceed entirely in `∫·dμ_x`. **Next:** `μ_x({1})=0` via rational
+cutoffs `ψ_N(ω)=(1+(N+1)‖ω−1‖²)⁻¹` (off the P4 critical path per GPT — Phase 5 dual-weight trace is P4's true gap).
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

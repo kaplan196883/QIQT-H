@@ -5114,6 +5114,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_union
 #print axioms QIQTH.Spectral.cayley_cfc_norm_sq
 #print axioms QIQTH.Spectral.cayley_cfc_sub_norm_sq
+#print axioms QIQTH.Spectral.cayley_cfc_sub_norm_sq_integral
+-- ★★★ P4 WALL — THE FULL PARSEVAL / L²-DISTANCE IDENTITY (integral form): cayley_cfc_sub_norm_sq_integral
+-- [Nontrivial H] — ‖cfc f V x − cfc g V x‖² = ∫ ω, ‖f ω.1 − g ω.1‖² dμ_x for f,g continuous on σ(V). Capstone of the
+-- CFC↔measure dictionary: composes cayley_cfc_sub_norm_sq (operator side: re⟪x, cfc(star(f−g)·(f−g))V x⟫) with the
+-- function-form bridge integral_re_cfc_ofReal at r z=‖f z−g z‖², via the pointwise ℂ-identity star w·w=↑‖w‖²
+-- (RCLike.conj_mul). This is the genuine Parseval/Cauchy estimate in MEASURE form: n↦cfc(e^{it·φₙ})V x is Cauchy
+-- iff ∫‖e^{itφₙ}−e^{itφₘ}‖² dμ_x→0, which defines the Stone exponential U_t=exp(itA) without a PVM (GPT-5.5-pro
+-- endorsed route 2026-06-27). Axiom-free; free scalar; no UV datum touched.
 -- ★★ P4 WALL — L²-DISTANCE ESTIMATE (the Cauchy estimate for the strong-limit Stone exp): cayley_cfc_sub_norm_sq
 -- [Nontrivial H] — ‖cfc f V x − cfc g V x‖² = re⟪x, cfc(|f−g|²) V x⟫ (cfc_sub ⟹ cfc f V − cfc g V = cfc(f−g)V, then
 -- cayley_cfc_norm_sq at f−g). With the integral identity = ∫|f−g|² dμ_x — the Cauchy/dominated-convergence estimate

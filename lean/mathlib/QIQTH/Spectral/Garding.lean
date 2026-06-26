@@ -1654,6 +1654,33 @@ theorem cayley_cfc_sub_norm_sq [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
   rw [hsub]
   exact cayley_cfc_norm_sq U hgrp hU0 hUinner hUbd hSC (fun z => f z - g z) (hf.sub hg) x
 
+/-- **★★★ The full Parseval / L²-distance identity in honest integral form:**
+    `‖cfc f V x − cfc g V x‖² = ∫ ω, ‖f ω.1 − g ω.1‖² dμ_x` for `f, g` continuous on `σ(V)`.  This is the
+    capstone of the CFC↔measure dictionary: it composes the operator-side L²-distance estimate
+    (`cayley_cfc_sub_norm_sq`, giving `re⟪x, cfc(star(f−g)·(f−g)) V x⟫`) with the function-form bridge
+    (`integral_re_cfc_ofReal`) at `r z = ‖f z − g z‖²`, using the pointwise ℂ-identity `star w · w = ↑‖w‖²`
+    (`RCLike.conj_mul`).  The result is the genuine **Parseval/Cauchy estimate** in measure form: the strong
+    limit `n ↦ cfc (e^{it·φₙ}) V x` is Cauchy **iff** `∫ ‖e^{itφₙ} − e^{itφₘ}‖² dμ_x → 0`, which is what defines
+    the Stone exponential `U_t = exp(it A)` without a projection-valued measure (GPT-5.5-pro's endorsed route,
+    2026-06-27).  Axiom-free; free scalar; no UV datum touched. -/
+theorem cayley_cfc_sub_norm_sq_integral [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (f g : ℂ → ℂ) (hf : ContinuousOn f (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (hg : ContinuousOn g (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))) (x : H) :
+    ‖cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x
+        - cfc g (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x‖ ^ 2
+      = ∫ ω, ‖f ω.1 - g ω.1‖ ^ 2 ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+  have hfun : (fun z => star (f z - g z) * (f z - g z))
+      = (fun z => ((‖f z - g z‖ ^ 2 : ℝ) : ℂ)) := by
+    funext z
+    rw [← starRingEnd_apply, RCLike.conj_mul]
+    norm_cast
+  rw [cayley_cfc_sub_norm_sq U hgrp hU0 hUinner hUbd hSC f g hf hg x, hfun]
+  exact integral_re_cfc_ofReal U hgrp hU0 hUinner hUbd hSC (fun z => ‖f z - g z‖ ^ 2)
+    ((hf.sub hg).norm.pow 2) x
+
 end SelfAdjoint
 
 end QIQTH.Spectral
