@@ -1513,6 +1513,13 @@ namespace QIQTH.AxiomAudit
 -- phase e^{ist} peeled via modSymbol_add_right (e^{is(x+t)}=e^{ist}e^{isx}). Axiom-free. The full kinematic algebra
 -- of the position/momentum operators on L²(ℝ) — Born rules, covariance, AND the CCR — is now machine-checked; the
 -- only remaining Lean step for #5 is the (unbounded) Stone generator, a genuine Mathlib gap.
+#print axioms QIQTH.Spectral.Multiplication.modulationLp_zero
+#print axioms QIQTH.Spectral.Multiplication.modulationLp_neg_comp
+-- ★ MODULATION GROUP STRUCTURE (identity + inverses): modulationLp_zero (e^{i0X}=1, via mulOp_const) +
+-- modulationLp_neg_comp/comp_neg (e^{∓isX}∘e^{±isX}=1, from the group law at (−s)+s=0). Completes s↦e^{isX} as a
+-- genuine group homomorphism ℝ→unitaries (identity, composition, inverses) — the position-side one-parameter
+-- unitary group is now a full group. Axiom-free. Recorded next target: strong continuity of e^{isX} (s↦e^{isX}f
+-- continuous, via DCT) — making it a full C₀-group symmetric to e^{itP}; then the (unbounded) Stone generator X.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

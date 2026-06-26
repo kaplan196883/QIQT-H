@@ -95,4 +95,18 @@ theorem weyl_relation (s t : ℝ) (f : Lp ℂ 2 (volume : Measure ℝ)) :
   rw [h_mod, h_tf, modSymbol_add_right]
   ring
 
+/-- The modulation at `s = 0` is the identity: `e^{i0X} = 1` (`e^{i0x} = 1`). -/
+@[simp] theorem modulationLp_zero : modulationLp 0 = 1 := by
+  have hsymm : modSymbol 0 = fun _ : ℝ => (1 : ℂ) := by funext x; simp [modSymbol]
+  rw [modulationLp, mulOp_congr (modSymbol_measurable 0) zero_le_one (modSymbol_le_one 0)
+      measurable_const (norm_nonneg (1 : ℂ)) (fun _ => le_rfl) hsymm, mulOp_const, one_smul]
+
+/-- `e^{-isX} ∘ e^{isX} = 1` — `e^{isX}` is invertible with inverse `e^{-isX}` (the group law at `(-s) + s = 0`). -/
+@[simp] theorem modulationLp_neg_comp (s : ℝ) : modulationLp (-s) ∘L modulationLp s = 1 := by
+  rw [modulationLp_add, neg_add_cancel, modulationLp_zero]
+
+/-- `e^{isX} ∘ e^{-isX} = 1`. -/
+@[simp] theorem modulationLp_comp_neg (s : ℝ) : modulationLp s ∘L modulationLp (-s) = 1 := by
+  rw [modulationLp_add, add_neg_cancel, modulationLp_zero]
+
 end QIQTH.Spectral.Multiplication

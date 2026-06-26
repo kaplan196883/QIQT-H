@@ -425,6 +425,12 @@ item.** Never claim the `1/4`.
   `modSymbol_add_right`. **The full kinematic algebra of position/momentum on L²(ℝ) — Born rules, translation
   covariance, AND the CCR — is now machine-checked, axiom-free.** The only remaining Lean step for `#5` is the
   (unbounded) Stone generator `X=∫x dE` / `P=∫k dÊ` — a genuine Mathlib gap (no Stone's theorem in Mathlib).
+  **Modulation group structure (identity + inverses) ✅** (`ModulationFlow.lean`, axiom-free, budget 0):
+  `modulationLp_zero` (`e^{i0X}=1`, via `mulOp_const`) + `modulationLp_neg_comp`/`comp_neg`
+  (`e^{∓isX}∘e^{±isX}=1`, from the group law at `(−s)+s=0`). Completes `s↦e^{isX}` as a genuine group
+  homomorphism `ℝ→`unitaries (identity, composition, inverses) — the position-side one-parameter unitary group
+  is now a full group. Recorded next target: **strong continuity** of `e^{isX}` (`s↦e^{isX}f` continuous, via
+  DCT) — making it a full `C₀`-group symmetric to `e^{itP}`; then the (unbounded) Stone generator `X`.
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.
