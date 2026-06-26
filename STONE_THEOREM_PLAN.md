@@ -427,10 +427,14 @@ functional**: `toLinearMap := (realCfcReExpectationCLM x).toLinearMap`, `monoton
 Also ✅ `cfcPLMcc` `[Nontrivial H]` — **the RMK input** `C_c(σ(V), ℝ) →ₚ[ℝ] ℝ`, `f ↦ re⟪x, cfc f V x⟫` = `cfcPLM`
 precomposed with the forgetful `C_c(σV,ℝ) → C(σV,ℝ)` (compact spectrum ⟹ bijection); `map_add'`/`map_smul'` from
 `cfcPLM`'s, `monotone'` from `cfcPLM.monotone'`. **This is exactly the type `RealRMK.rieszMeasure` consumes.**
-**Next:** apply `RealRMK.rieszMeasure cfcPLMcc` ⟹ the scalar spectral measure `μ_x` (needs the `BorelSpace` /
-`LocallyCompactSpace` / `MeasurableSpace` instances on the compact `σ(V)`); prove `∫ f dμ_x = re⟪x, cfc f V x⟫`
-(`RealRMK.integral_rieszMeasure`); then assemble `{μ_x}` into a circle-PVM `E` (the Mathlib gap — no
-`ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` has its own), transport to `A = ∫ λ dE` ⟹ Stone.
+Also ✅ `cayleyScalarMeasure` `[Nontrivial H]` — **the scalar spectral measure `μ_x` of `V` is CONSTRUCTED**:
+`Measure (spectrum ℂ V) := RealRMK.rieszMeasure (cfcPLMcc x)`, the finite Borel measure on `σ(V) ⊆ S¹` from the
+Riesz–Markov theorem applied to the positive functional `f ↦ re⟪x, cfc f V x⟫`. (`CompactSpace σ(V)` via
+`spectrum.isCompact` ⟹ the `T2`/`MeasurableSpace`/`BorelSpace`/`LocallyCompactSpace` instances all resolve.)
+**Next:** prove the integral identity `∫ f dμ_x = re⟪x, cfc f V x⟫` (`RealRMK.integral_rieszMeasure`, giving total
+mass `‖x‖²` and first moment `re⟪x, V x⟫`); then assemble the family `{μ_x}` into a circle-PVM `E` (the Mathlib gap
+— no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` has its own) with `V = ∫ z dE`, transport to
+`A = ∫ λ dE` ⟹ Stone.
 **Next multi-fire sub-construction (the operator → PVM keystone, RMK + cfc supported):** the scalar spectral
 measures `μ_x` of `V` (positive functional `f ↦ re⟨x, cfc f V x⟩` → `RealRMK.rieszMeasure`), then their assembly
 into a circle-PVM `E` with `V = ∫ z dE`, then transport through inverse Cayley to `A = ∫ λ dE` ⟹ Stone.

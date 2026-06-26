@@ -312,8 +312,11 @@ as a `PositiveLinearMap`: `toLinearMap` = `(realCfcReExpectationCLM x).toLinearM
 `realCfcReExpectation_nonneg`). **THE input `RealRMK.rieszMeasure` consumes.**
 Also ✅ `cfcPLMcc` `[Nontrivial H]` (**the RMK input** `C_c(σV,ℝ)→ₚ[ℝ]ℝ` — `cfcPLM` precomposed with the forgetful
 `C_c→C` on the compact spectrum; exactly the type `RealRMK.rieszMeasure` consumes).
-**Next:** `RealRMK.rieszMeasure cfcPLMcc` ⟹ μ_x (Borel/LCH instances on σV) + `∫f dμ_x = re⟪x,cfc f V x⟫` → assemble
-circle-PVM `E` (Mathlib gap) → transport to `A=∫λ dE` ⟹ Stone.
+Also ✅ `cayleyScalarMeasure` `[Nontrivial H]` (**the scalar spectral measure `μ_x` of `V` is CONSTRUCTED** —
+`RealRMK.rieszMeasure (cfcPLMcc x)`, a finite Borel measure on `σ(V)⊆S¹`; CompactSpace σ(V) ⟹ all the Borel/LCH
+instances resolve).
+**Next:** `∫f dμ_x = re⟪x,cfc f V x⟫` (`RealRMK.integral_rieszMeasure`) → assemble `{μ_x}` into the circle-PVM `E`
+(Mathlib gap) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
 `E` (`V=∫z dE`) → transport via inverse Cayley to `A=∫λ dE` ⟹ Stone. The bounded-PVM remains the genuine gap.
 **Remaining (Mathlib gap):** the **Borel/PVM** functional calculus on `S¹` for `V` (Mathlib has *continuous* FC

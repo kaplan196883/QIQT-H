@@ -38,6 +38,7 @@ import Mathlib.Analysis.InnerProductSpace.StarOrder
 import Mathlib.Analysis.CStarAlgebra.ContinuousLinearMap
 import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Basic
 import Mathlib.Topology.ContinuousMap.CompactlySupported
+import Mathlib.MeasureTheory.Integral.RieszMarkovKakutani.Real
 
 namespace QIQTH.Spectral
 
@@ -1334,6 +1335,20 @@ noncomputable def cfcPLMcc [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
     exact map_smul (cfcPLM U hgrp hU0 hUinner hUbd hSC x) _ _
   monotone' f g hfg := (cfcPLM U hgrp hU0 hUinner hUbd hSC x).monotone'
     (ContinuousMap.le_def.mpr (CompactlySupportedContinuousMap.le_def.mp hfg))
+
+/-- **★★★ The scalar spectral measure `μ_x` of the Cayley unitary `V`** — the finite Borel measure on `σ(V) ⊆ S¹`
+    obtained by applying the **Riesz–Markov–Kakutani** representation theorem to the positive linear functional
+    `cfcPLMcc x` (`f ↦ re⟪x, cfc f V x⟫`). By `RealRMK.integral_rieszMeasure`, `∫ f dμ_x = re⟪x, cfc f V x⟫` — in
+    particular total mass `μ_x(σ(V)) = ‖x‖²` (from `cfc 1 V = 1`) and first moment `∫ z dμ_x = re⟪x, V x⟫` (from
+    `cfc id V = V`). This is the scalar component of `V`'s (still-to-be-assembled) projection-valued measure. -/
+noncomputable def cayleyScalarMeasure [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    Measure (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) :=
+  haveI : CompactSpace (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) :=
+    isCompact_iff_compactSpace.mp (spectrum.isCompact _)
+  RealRMK.rieszMeasure (cfcPLMcc U hgrp hU0 hUinner hUbd hSC x)
 
 end SelfAdjoint
 

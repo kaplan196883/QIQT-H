@@ -5088,6 +5088,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.realCfcReExpectation_nonneg
 #print axioms QIQTH.Spectral.cfcPLM
 #print axioms QIQTH.Spectral.cfcPLMcc
+#print axioms QIQTH.Spectral.cayleyScalarMeasure
+-- ★★★ P4 WALL — THE SCALAR SPECTRAL MEASURE μ_x IS CONSTRUCTED: cayleyScalarMeasure [Nontrivial H] —
+-- Measure (spectrum ℂ V) := RealRMK.rieszMeasure (cfcPLMcc x), the finite Borel measure on σ(V)⊆S¹ from the
+-- Riesz–Markov–Kakutani theorem applied to the positive linear functional f↦re⟪x,cfc f V x⟫. (CompactSpace σ(V)
+-- via spectrum.isCompact ⟹ the T2/MeasurableSpace/BorelSpace/LocallyCompactSpace instances all resolve.) By
+-- RealRMK.integral_rieszMeasure, ∫f dμ_x = re⟪x,cfc f V x⟫ (total mass ‖x‖² from cfc 1 V=1; first moment re⟪x,Vx⟫
+-- from cfc id V=V). The scalar component of V's PVM. Axiom-free. Remaining: assemble {μ_x} into the PVM E (Mathlib gap).
 -- ★★★ P4 WALL — THE RMK INPUT C_c(σV,ℝ)→ₚ[ℝ]ℝ: cfcPLMcc [Nontrivial H] — f↦re⟪x,cfc f V x⟫ on the compactly-
 -- supported functions = cfcPLM precomposed with the forgetful C_c(σV,ℝ)→C(σV,ℝ) (σV compact ⟹ bijection);
 -- map_add'/map_smul' via map_add/map_smul of cfcPLM, monotone' via cfcPLM.monotone' ∘ (C_c→C order). This is EXACTLY
