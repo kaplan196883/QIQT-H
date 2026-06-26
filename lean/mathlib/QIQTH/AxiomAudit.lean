@@ -4914,8 +4914,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.mollify_integrand_hasDerivAt
 -- mollify_integrand_hasDerivAt — the CALCULUS CORE of the differentiation step (the h_diff hypothesis of
 -- hasDerivAt_integral_of_dominated_loc_of_deriv_le): for φ∈C¹, σ↦φ(u−σ)•U_u x has derivative −φ'(u−σ₀)•U_u x at σ₀
--- (chain rule HasDerivAt.scomp on the inner u−σ, then HasDerivAt.smul_const by U_u x). Axiom-free. (Remaining: the
--- integrable dominating bound + measurability bookkeeping to APPLY the integral lemma = the carried analytic gap.)
+-- (chain rule HasDerivAt.scomp on the inner u−σ, then HasDerivAt.smul_const by U_u x). Axiom-free.
+#print axioms QIQTH.Spectral.mollify_shifted_aestronglyMeasurable
+#print axioms QIQTH.Spectral.mollify_deriv_aestronglyMeasurable
+#print axioms QIQTH.Spectral.mollify_neg_deriv_eq
+-- the remaining (easy) differentiation hypotheses + the derivative-value identification:
+-- mollify_shifted_aestronglyMeasurable (hF_meas, ∀σ) + mollify_deriv_aestronglyMeasurable (hF'_meas) — the
+-- integrands are continuous ⟹ AEStronglyMeasurable. mollify_neg_deriv_eq — ∫(−φ'(u))•U_u x = −mollify U φ' x:
+-- the would-be derivative of U_s x_φ is again a GÅRDING vector (−x_{φ'}), so the smooth subspace is closed under
+-- the generator. Axiom-free. With mollify_integrable (hF_int) + mollify_integrand_hasDerivAt (h_diff), the ONLY
+-- remaining hypothesis of hasDerivAt_integral_of_dominated_loc_of_deriv_le is the integrable dominating bound
+-- supₛ|φ'(u−s)|·‖x‖ (compact support of φ' ⟹ indicator of a compact set) — the carried analytic gap.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via

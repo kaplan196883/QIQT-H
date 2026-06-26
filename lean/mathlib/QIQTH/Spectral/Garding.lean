@@ -83,4 +83,28 @@ theorem mollify_integrand_hasDerivAt (φ φ' : ℝ → ℂ) (hφ' : ∀ y, HasDe
   have hcomp := (hφ' (u - σ₀)).scomp σ₀ hg
   simpa [Function.comp_def] using hcomp.smul_const (U u x)
 
+/-- The shifted parametric integrand `u ↦ φ(u − σ) • U_u x` is `AEStronglyMeasurable` (continuous, for `φ`
+    continuous and `U` strongly continuous at `x`). Supplies the `hF_meas` hypothesis (for every `σ`) of the
+    differentiation-under-the-integral lemma. -/
+theorem mollify_shifted_aestronglyMeasurable (U : ℝ → (H →L[ℂ] H)) (φ : ℝ → ℂ) (x : H)
+    (hcont : Continuous (fun t => U t x)) (hφ : Continuous φ) (σ : ℝ) :
+    AEStronglyMeasurable (fun u => φ (u - σ) • U u x) volume :=
+  ((hφ.comp (continuous_id.sub continuous_const)).smul hcont).aestronglyMeasurable
+
+/-- The derivative integrand `u ↦ φ'(u) • U_u x` is `AEStronglyMeasurable` (continuous). Supplies the
+    `hF'_meas` hypothesis of the differentiation-under-the-integral lemma. -/
+theorem mollify_deriv_aestronglyMeasurable (U : ℝ → (H →L[ℂ] H)) (φ' : ℝ → ℂ) (x : H)
+    (hcont : Continuous (fun t => U t x)) (hφ' : Continuous φ') :
+    AEStronglyMeasurable (fun u => φ' u • U u x) volume :=
+  (hφ'.smul hcont).aestronglyMeasurable
+
+/-- **The would-be derivative of `U_s x_φ` is again a Gårding vector:** `∫ (−φ'(u)) • U_u x du = −x_{φ'}`. So
+    `d/ds U_s x_φ` (once the differentiation under the integral is justified) equals `−mollify U φ' x` — the
+    smooth/Gårding subspace is *closed under the generator* `A = −i d/dt U_t` (it maps Gårding vectors to Gårding
+    vectors), the structural fact behind density and the symmetry of the generator on it. -/
+theorem mollify_neg_deriv_eq (U : ℝ → (H →L[ℂ] H)) (φ' : ℝ → ℂ) (x : H) :
+    (∫ u, (-φ' u) • U u x) = - mollify U φ' x := by
+  simp_rw [neg_smul]
+  rw [integral_neg, mollify]
+
 end QIQTH.Spectral

@@ -204,9 +204,12 @@ domain (hence the domain dense). Plus `mollify_apply_flow_cov` — the orbit in 
 `U_s x_φ = ∫ φ(u − s) U_u x du` (change of variables, `integral_add_right_eq_self`): the `s`-dependence now sits
 entirely in the smooth `φ(u − s)`, the `U_u x` factor `s`-independent. And `mollify_integrand_hasDerivAt` — the
 **calculus core** (the `h_diff` of `hasDerivAt_integral_of_dominated_loc_of_deriv_le`): `σ ↦ φ(u−σ) • U_u x` has
-derivative `−φ'(u−σ₀) • U_u x` (chain rule `scomp` + `smul_const`). **Carried frontier (genuine Mathlib gap):**
-*applying* the integral-differentiation lemma — constructing the integrable dominating bound `supₛ |φ'(u−s)|·‖x‖`
-+ AEStronglyMeasurable bookkeeping — to get `x_φ ∈ stoneDomain U`; then approximate-identity density (`{x_φ}` dense).
+derivative `−φ'(u−σ₀) • U_u x` (chain rule `scomp` + `smul_const`). Plus the measurability hypotheses
+(`mollify_shifted_aestronglyMeasurable` = `hF_meas`, `mollify_deriv_aestronglyMeasurable` = `hF'_meas`) and
+`mollify_neg_deriv_eq` (the derivative value `= −x_{φ'}`, a Gårding vector — smooth subspace closed under the
+generator). **Carried frontier (now a SINGLE hypothesis):** the integrable dominating bound `supₛ |φ'(u−s)|·‖x‖`
+(compact support of `φ'` ⟹ indicator of a compact set) is the only missing input to
+`hasDerivAt_integral_of_dominated_loc_of_deriv_le`; that assembled ⟹ `x_φ ∈ stoneDomain U`, then density.
 
 ### Phase 4 (operators) — the modular Hamiltonian `K` as a symmetric operator ✅ (3rd & LAST C₀ group; trio complete)
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/ModularGenerator.lean`):** the Stone-instantiation pattern

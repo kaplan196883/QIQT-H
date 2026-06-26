@@ -227,10 +227,15 @@ Also ✅ `mollify_integrand_hasDerivAt` — the **calculus core** of the differe
 hypothesis of `hasDerivAt_integral_of_dominated_loc_of_deriv_le`): for `φ ∈ C¹`, `σ ↦ φ(u−σ) • U_u x` has
 derivative `−φ'(u−σ₀) • U_u x` at `σ₀` (chain rule `HasDerivAt.scomp` on the inner `u−σ`, then `smul_const` by
 `U_u x`). The pointwise derivative is now in hand.
-**Remaining (the genuine analytic frontier):** *applying* `hasDerivAt_integral_of_dominated_loc_of_deriv_le` —
-i.e. constructing the integrable dominating bound `supₛ |φ'(u−s)|·‖x‖` (compactly supported in `u`) + the
-AEStronglyMeasurable bookkeeping — to conclude `HasDerivAt (s ↦ U_s x_φ) (−x_{φ'}) 0`, hence `x_φ ∈ stoneDomain U`;
-then the density `{x_φ}` dense (approximate identity `φ → δ`).
+Also ✅ the remaining *easy* differentiation hypotheses: `mollify_shifted_aestronglyMeasurable` (`hF_meas`, ∀σ)
++ `mollify_deriv_aestronglyMeasurable` (`hF'_meas`) — the integrands are continuous ⟹ `AEStronglyMeasurable`;
+and `mollify_neg_deriv_eq` — `∫ (−φ'(u)) • U_u x = −mollify U φ' x`, i.e. **the would-be derivative of `U_s x_φ`
+is again a Gårding vector** (`−x_{φ'}`), so the smooth subspace is *closed under the generator*.
+**Remaining (the genuine analytic frontier — now a SINGLE hypothesis):** with `mollify_integrable` (`hF_int`),
+`mollify_integrand_hasDerivAt` (`h_diff`), the two measurability lemmas (`hF_meas`/`hF'_meas`), the only missing
+hypothesis of `hasDerivAt_integral_of_dominated_loc_of_deriv_le` is the **integrable dominating bound**
+`supₛ |φ'(u−s)|·‖x‖` (from compact support of `φ'` ⟹ indicator of a compact set). That assembled ⟹
+`HasDerivAt (s ↦ U_s x_φ) (−x_{φ'}) 0` ⟹ `x_φ ∈ stoneDomain U`; then `{x_φ}` dense (approximate identity `φ → δ`).
 
 ## 3. Dependency graph
 ```
