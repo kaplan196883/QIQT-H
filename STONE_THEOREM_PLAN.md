@@ -464,6 +464,11 @@ Also ✅ `cayley_norm_inner_cfc_le` `[Nontrivial H]` — **the spectral sesquili
 `‖⟪x, cfc f V y⟫‖ ≤ c·‖x‖·‖y‖` when `‖f z‖ ≤ c` on `σ(V)` (Cauchy–Schwarz + `le_opNorm` + `cayley_norm_cfc_le`).
 This is the boundedness of `(x,y) ↦ ⟪x, cfc f V y⟫` that lets the form — extended to bounded-Borel `f` via `μ_{x,y}`
 — be **Riesz-represented by an operator** `f(V)`; for `f = 1_S` this is the projection `E(S)` of the PVM.
+Also ✅ `cayley_cfc_inner_polarization` `[Nontrivial H]` — **the spectral polarization identity**:
+`⟪cfc f V y, x⟫` = the complex polarization combination of the four diagonals `⟪cfc f V z, z⟫` at
+`z = x±y, x±iy` (`inner_map_polarization`). With the real diagonal (`⟪cfc f V z, z⟫ = ↑(∫ f dμ_z)`), this expresses
+the **full sesquilinear form via the scalar measures `μ_z`** — the formula that *defines* the bounded-Borel operator
+`f(V)` (and `E(S) = 1_S(V)`) once `f` is only bounded Borel: the heart of the PVM construction.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

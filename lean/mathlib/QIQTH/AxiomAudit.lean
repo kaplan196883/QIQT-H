@@ -5097,6 +5097,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayley_cfc_isSelfAdjoint
 #print axioms QIQTH.Spectral.cayley_cfc_inner_self_im_zero
 #print axioms QIQTH.Spectral.cayley_norm_inner_cfc_le
+#print axioms QIQTH.Spectral.cayley_cfc_inner_polarization
+-- ★★ P4 WALL — SPECTRAL POLARIZATION IDENTITY (off-diagonal via diagonals): cayley_cfc_inner_polarization
+-- [Nontrivial H] — ⟪cfc f V y, x⟫ = (⟪cfc f V(x+y),x+y⟫ − ⟪cfc f V(x−y),x−y⟫ + I⟪cfc f V(x+Iy),x+Iy⟫ −
+-- I⟪cfc f V(x−Iy),x−Iy⟫)/4 (inner_map_polarization of (cfc f V).toLinearMap). With the real diagonal
+-- (cayley_cfc_inner_self_im_zero: ⟪cfc f V z,z⟫ = ↑(∫f dμ_z)) this expresses the FULL sesquilinear form via the
+-- scalar measures μ_z — the formula that DEFINES the bounded-Borel operator f(V) and E(S)=1_S(V). Axiom-free.
 -- ★★ P4 WALL — SPECTRAL SESQUILINEAR FORM IS BOUNDED (Riesz input for the Borel-FC operators): cayley_norm_inner_
 -- cfc_le [Nontrivial H] — ‖⟪x, cfc f V y⟫‖ ≤ c·‖x‖·‖y‖ when ‖f z‖ ≤ c on σ(V) (Cauchy–Schwarz norm_inner_le_norm +
 -- ContinuousLinearMap.le_opNorm + cayley_norm_cfc_le). The boundedness of (x,y)↦⟪x,cfc f V y⟫ that lets the form

@@ -1510,6 +1510,26 @@ theorem cayley_norm_inner_cfc_le [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
               mul_le_mul_of_nonneg_right (cayley_norm_cfc_le U hgrp hU0 hUinner hUbd hSC f hc h) (norm_nonneg y)
     _ = c * ‖x‖ * ‖y‖ := by ring
 
+/-- **★★ The spectral polarization identity:** the off-diagonal matrix element `⟪cfc f V y, x⟫` is the complex
+    polarization combination of the four diagonals `⟪cfc f V z, z⟫` at `z = x ± y, x ± i y`. (Mathlib's
+    `inner_map_polarization` for `(cfc f V).toLinearMap`.) Combined with the real diagonal
+    (`cayley_cfc_inner_self_im_zero`, `⟪cfc f V z, z⟫ = ↑(∫ f dμ_z)` for real `f`), this expresses the **full
+    sesquilinear form via the scalar spectral measures** `μ_z` — the formula that *defines* the bounded-Borel
+    operator `f(V)` (and `E(S) = 1_S(V)`) once `f` is only bounded Borel: the heart of the PVM construction. -/
+theorem cayley_cfc_inner_polarization [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (f : ℂ → ℂ) (x y : H) :
+    (inner ℂ (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) y) x : ℂ)
+      = (inner ℂ (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) (x + y)) (x + y)
+          - inner ℂ (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) (x - y)) (x - y)
+          + Complex.I * inner ℂ (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+              (x + Complex.I • y)) (x + Complex.I • y)
+          - Complex.I * inner ℂ (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+              (x - Complex.I • y)) (x - Complex.I • y)) / 4 :=
+  inner_map_polarization (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)).toLinearMap x y
+
 end SelfAdjoint
 
 end QIQTH.Spectral
