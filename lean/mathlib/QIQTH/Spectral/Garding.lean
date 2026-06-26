@@ -1530,6 +1530,21 @@ theorem cayley_cfc_inner_polarization [Nontrivial H] (U : ℝ → (H →L[ℂ] H
               (x - Complex.I • y)) (x - Complex.I • y)) / 4 :=
   inner_map_polarization (cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)).toLinearMap x y
 
+/-- **★ The diagonal spectral content is bounded by `‖x‖²`:** `μ_x(S) ≤ ‖x‖²` for every set `S` (`μ_x` is a finite
+    measure of total mass `‖x‖²`, monotone in `S`). This is the bound the diagonal `⟪x, E(S) x⟫ = μ_x(S)` of the
+    (still-to-be-assembled) spectral projection `E(S)` must satisfy — `0 ≤ E(S) ≤ 1` on the state `x` — and the
+    boundedness that controls the Riesz representation of `(x,y) ↦ ∫ 1_S dμ_{x,y}` into `E(S)`. -/
+theorem cayleyScalarMeasure_le_norm_sq [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H)
+    (S : Set (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))) :
+    (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x S).toReal ≤ ‖x‖ ^ 2 := by
+  haveI : IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+    cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC x
+  rw [← cayleyScalarMeasure_univ U hgrp hU0 hUinner hUbd hSC x]
+  exact ENNReal.toReal_mono (measure_ne_top _ _) (measure_mono (Set.subset_univ S))
+
 end SelfAdjoint
 
 end QIQTH.Spectral

@@ -5098,6 +5098,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayley_cfc_inner_self_im_zero
 #print axioms QIQTH.Spectral.cayley_norm_inner_cfc_le
 #print axioms QIQTH.Spectral.cayley_cfc_inner_polarization
+#print axioms QIQTH.Spectral.cayleyScalarMeasure_le_norm_sq
+-- ★ P4 WALL — DIAGONAL SPECTRAL CONTENT BOUNDED: cayleyScalarMeasure_le_norm_sq [Nontrivial H] —
+-- (cayleyScalarMeasure x S).toReal ≤ ‖x‖² for any S (μ_x finite, total mass ‖x‖², measure_mono + toReal_mono). This
+-- is the bound the diagonal ⟪x, E(S) x⟫ = μ_x(S) of the spectral projection E(S) must satisfy (0 ≤ E(S) ≤ 1 on x),
+-- controlling the Riesz representation of (x,y) ↦ ∫ 1_S dμ_{x,y} into E(S). Axiom-free.
 -- ★★ P4 WALL — SPECTRAL POLARIZATION IDENTITY (off-diagonal via diagonals): cayley_cfc_inner_polarization
 -- [Nontrivial H] — ⟪cfc f V y, x⟫ = (⟪cfc f V(x+y),x+y⟫ − ⟪cfc f V(x−y),x−y⟫ + I⟪cfc f V(x+Iy),x+Iy⟫ −
 -- I⟪cfc f V(x−Iy),x−Iy⟫)/4 (inner_map_polarization of (cfc f V).toLinearMap). With the real diagonal

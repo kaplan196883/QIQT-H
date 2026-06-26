@@ -335,6 +335,8 @@ Also ✅ `cayley_norm_inner_cfc_le` `[Nontrivial H]` (**spectral sesquilinear fo
 Also ✅ `cayley_cfc_inner_polarization` `[Nontrivial H]` (**spectral polarization identity** — off-diagonal
 `⟪cfc f V y,x⟫` = polarization combo of the four diagonals; with the real diagonal = the full form via μ_z, the
 formula defining f(V) and E(S) for bounded-Borel f — the heart of the PVM).
+Also ✅ `cayleyScalarMeasure_le_norm_sq` `[Nontrivial H]` (**diagonal spectral content bounded** — `μ_x(S) ≤ ‖x‖²`;
+the bound `⟪x,E(S)x⟫ = μ_x(S)` must satisfy, controlling the Riesz representation of E(S)).
 **Next:** bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
