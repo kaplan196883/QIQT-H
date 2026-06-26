@@ -301,8 +301,11 @@ Also ✅ `expectationCLM x` (`Φ_x:(H→L[ℂ]H)→L[ℂ]ℂ`, `T↦⟪x,Tx⟫`)
 Also ✅ `cfcReExpectationCLM` `[Nontrivial H]` (**RMK functional on `C(σV,ℂ)`** — `φ↦re⟪x,cfcHom V φ x⟫` =
 `reExpectationCLM x ∘ (cfcL V)|_ℝ`; the **cfcHom precomposition is done**, only `ℝ↪ℂ` restriction + `→ₚ[ℝ]`/`C_c`
 packaging remain).
-**Next:** `ℝ↪ℂ` restriction ⟹ `C(σV,ℝ)→L[ℝ]ℝ` → `C_c(σV,ℝ)→ₚ[ℝ]ℝ` → `rieszMeasure` ⟹ μ_x → assemble circle-PVM `E`
-(Mathlib gap) → transport to `A=∫λ dE` ⟹ Stone.
+Also ✅ `realCfcReExpectationCLM` `[Nontrivial H]` (**RMK functional on the real functions `C(σV,ℝ)`** — `g↦re⟪x,cfcHom V(↑∘g)x⟫`
+= `cfcReExpectationCLM x ∘ (ContinuousLinearMap.compLeftContinuous ℝ σV Complex.ofRealCLM)`; the **`ℝ↪ℂ` restriction is done**,
+the functional is now a concrete `C(σV,ℝ)→L[ℝ]ℝ`).
+**Next:** repackage as `C_c(σV,ℝ)→ₚ[ℝ]ℝ` (bundle proven positivity; `C(σV,ℝ)→C_c` on compact σV) → `rieszMeasure` ⟹ μ_x
+→ assemble circle-PVM `E` (Mathlib gap) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
 `E` (`V=∫z dE`) → transport via inverse Cayley to `A=∫λ dE` ⟹ Stone. The bounded-PVM remains the genuine gap.
 **Remaining (Mathlib gap):** the **Borel/PVM** functional calculus on `S¹` for `V` (Mathlib has *continuous* FC

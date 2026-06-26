@@ -410,10 +410,14 @@ Also ✅ `cfcReExpectationCLM` `[Nontrivial H]` — **the RMK functional on `C(�
 `φ ↦ re⟪x, cfcHom V φ x⟫` = `reExpectationCLM x ∘ (cfcL V)|_ℝ`, where `cfcL V : C(σ(V),ℂ) →L[ℂ] (H→L[ℂ]H)` is the
 continuous functional calculus bundled as a CLM. **The `cfcHom` precomposition is now done** — only the `ℝ↪ℂ`
 domain restriction + the `→ₚ[ℝ]`/`C_c` packaging remain before `RealRMK.rieszMeasure`.
-**Next:** precompose the `ℝ↪ℂ` `ContinuousMap` embedding to land on `C(σ(V),ℝ) →L[ℝ] ℝ`, repackage as
-`C_c(σ(V),ℝ) →ₚ[ℝ] ℝ` (positivity proven), apply `RealRMK.rieszMeasure` ⟹ `μ_x`; then assemble `{μ_x}` into a
-circle-PVM `E` (the Mathlib gap — no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` has its own),
-transport to `A = ∫ λ dE` ⟹ Stone.
+Also ✅ `realCfcReExpectationCLM` `[Nontrivial H]` — **the RMK functional on the real functions `C(σ(V), ℝ)`** as a
+bundled ℝ-linear CLM: `g ↦ re⟪x, cfcHom V (↑∘g) x⟫` = `cfcReExpectationCLM x ∘ (ℝ↪ℂ)`, the `ℝ↪ℂ` embedding being
+`ContinuousLinearMap.compLeftContinuous ℝ (σ(V)) Complex.ofRealCLM`. **The `ℝ↪ℂ` domain restriction is now done** —
+the functional is a concrete `C(σ(V),ℝ) →L[ℝ] ℝ`. Since `σ(V)` is compact, `C(σ(V),ℝ) = C_c(σ(V),ℝ)`.
+**Next:** repackage `realCfcReExpectationCLM` as `C_c(σ(V),ℝ) →ₚ[ℝ] ℝ` (bundle the proven positivity with the
+linear map; convert `C(σV,ℝ)→C_c(σV,ℝ)` on the compact spectrum), apply `RealRMK.rieszMeasure` ⟹ `μ_x`; then
+assemble `{μ_x}` into a circle-PVM `E` (the Mathlib gap — no `ProjectionValuedMeasure` type; QIQTH's
+`Spectral/PVM.lean` has its own), transport to `A = ∫ λ dE` ⟹ Stone.
 **Next multi-fire sub-construction (the operator → PVM keystone, RMK + cfc supported):** the scalar spectral
 measures `μ_x` of `V` (positive functional `f ↦ re⟨x, cfc f V x⟩` → `RealRMK.rieszMeasure`), then their assembly
 into a circle-PVM `E` with `V = ∫ z dE`, then transport through inverse Cayley to `A = ∫ λ dE` ⟹ Stone.

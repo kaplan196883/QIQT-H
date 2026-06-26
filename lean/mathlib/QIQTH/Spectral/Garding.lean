@@ -1222,6 +1222,31 @@ noncomputable def cfcReExpectationCLM [Nontrivial H] (U : ℝ → (H →L[ℂ] H
     cfcReExpectationCLM U hgrp hU0 hUinner hUbd hSC x φ
       = (inner ℂ x (cfcL (cayley_isStarNormal U hgrp hU0 hUinner hUbd hSC) φ x)).re := rfl
 
+/-- **The Riesz–Markov functional on the REAL functions `C(σ(V), ℝ)`** as a bundled ℝ-linear continuous map:
+    `g ↦ re⟪x, cfcHom V (↑∘g) x⟫` = `cfcReExpectationCLM x ∘ (ℝ↪ℂ)`, where the `ℝ↪ℂ` embedding is
+    `Complex.ofRealCLM.compLeftContinuous (σ(V))` (postcompose each `g : C(σ(V),ℝ)` with `Complex.ofReal`). Since
+    `σ(V)` is compact (`cayley_spectrum_isCompact`), `C(σ(V), ℝ) = C_c(σ(V), ℝ)`, so this is — up to that
+    repackaging into `→ₚ[ℝ]` with the proven positivity — exactly the input `RealRMK.rieszMeasure` consumes to
+    build the scalar spectral measure `μ_x`. -/
+noncomputable def realCfcReExpectationCLM [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℝ) →L[ℝ] ℝ :=
+  (cfcReExpectationCLM U hgrp hU0 hUinner hUbd hSC x).comp
+    (ContinuousLinearMap.compLeftContinuous ℝ
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) Complex.ofRealCLM)
+
+@[simp] theorem realCfcReExpectationCLM_apply [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H)
+    (g : C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℝ)) :
+    realCfcReExpectationCLM U hgrp hU0 hUinner hUbd hSC x g
+      = (inner ℂ x (cfcL (cayley_isStarNormal U hgrp hU0 hUinner hUbd hSC)
+          (ContinuousLinearMap.compLeftContinuous ℝ
+            (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) Complex.ofRealCLM g) x)).re := rfl
+
 end SelfAdjoint
 
 end QIQTH.Spectral

@@ -5084,6 +5084,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.expectationCLM
 #print axioms QIQTH.Spectral.reExpectationCLM
 #print axioms QIQTH.Spectral.cfcReExpectationCLM
+#print axioms QIQTH.Spectral.realCfcReExpectationCLM
+-- ★★ P4 WALL — RMK FUNCTIONAL ON THE REAL FUNCTIONS C(σV,ℝ) (ℝ↪ℂ restriction done): realCfcReExpectationCLM
+-- [Nontrivial H] — C(spectrum ℂ V, ℝ) →L[ℝ] ℝ, g ↦ re⟪x, cfcHom V (↑∘g) x⟫ = (cfcReExpectationCLM x) ∘
+-- (ContinuousLinearMap.compLeftContinuous ℝ σV Complex.ofRealCLM) (postcompose each real g with Complex.ofReal).
+-- Since σ(V) is compact (cayley_spectrum_isCompact), C(σV,ℝ)=C_c(σV,ℝ); up to repackaging into →ₚ[ℝ] with the proven
+-- positivity, this is the input RealRMK.rieszMeasure consumes to build μ_x. Axiom-free.
 -- ★★ P4 WALL — RMK FUNCTIONAL ON C(σV,ℂ) (cfcHom precomposition done): cfcReExpectationCLM [Nontrivial H] —
 -- C(spectrum ℂ V, ℂ) →L[ℝ] ℝ, φ ↦ re⟪x, cfcHom V φ x⟫ = (reExpectationCLM x) ∘ (cfcL V).restrictScalars ℝ, where
 -- cfcL V : C(σV,ℂ) →L[ℂ] (H→L[ℂ]H) is the continuous functional calculus bundled as a CLM. Restricting the domain
