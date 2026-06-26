@@ -378,9 +378,14 @@ item.** Never claim the `1/4`.
   `norm_translationLp` (isometry/unitarity), and `translationLp_add` (**the GROUP LAW** `τ_s∘τ_t=τ_{s+t}`,
   ae-composition via `QuasiMeasurePreserving.tendsto_ae.eventually`). So `t↦τ_t` is the one-parameter unitary
   group whose generator is the momentum operator `P` (`e^{itP}=τ_t`) — the kinematic object behind
-  `WedgeKMSFlux #5`. **FRONTIER (honest checkpoint):** strong continuity `t↦τ_t f` + identifying the generator
-  with the momentum PVM (`P=∫k dÊ(k)`, Stone's theorem) is the M4 Stone / unbounded-FC frontier; the GR chain
-  beyond `#5` stays gated on the physical wedge inputs `#1/#3/#4`.
+  `WedgeKMSFlux #5`.
+  **Strong continuity ✅ — `t↦τ_t` is now a STRONGLY-CONTINUOUS one-parameter unitary group (the full Stone
+  hypothesis)**: `continuous_translationLp` (`t↦τ_t F` continuous `ℝ→L²(ℝ)` for every `F`, via `ContinuousMap.curry`
+  of the jointly-continuous `(t,x)↦x+t` + `Continuous.compMeasurePreservingLp`). With the group law + unitarity,
+  `t↦τ_t` is a genuine `C₀`-group. **ONLY REMAINING for #5 (honest checkpoint):** identify the generator with the
+  momentum PVM, `P=∫k dÊ(k)` (Stone's theorem — the unbounded-FC frontier). The C₀-group, the momentum PVM, and the
+  position↔momentum Born picture are all in hand; the generator-extraction (Stone) is the single remaining Lean
+  step before `#5`, after which the GR chain stays gated only on the physical wedge inputs `#1/#3/#4` + the `1/4` UV datum.
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.

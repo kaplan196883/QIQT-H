@@ -1460,6 +1460,12 @@ namespace QIQTH.AxiomAudit
 -- QuasiMeasurePreserving.tendsto_ae.eventually). t↦τ_t is the one-parameter unitary group whose generator is the
 -- momentum operator P (e^{itP}=τ_t) — the kinematic object behind WedgeKMSFlux #5. FRONTIER (recorded): strong
 -- continuity + identifying the generator with the momentum PVM (P=∫k dÊ, Stone) is the M4 Stone/unbounded-FC frontier.
+#print axioms QIQTH.Spectral.Multiplication.continuous_translationLp
+-- ★ STRONG CONTINUITY of the translation group: t↦τ_t F continuous ℝ→L²(ℝ) for every F (continuous_translationLp,
+-- via ContinuousMap.curry of the jointly-continuous (t,x)↦x+t + Continuous.compMeasurePreservingLp). With the group
+-- law (translationLp_add) + unitarity (norm_translationLp), t↦τ_t is now a genuine STRONGLY-CONTINUOUS one-parameter
+-- unitary group (C₀-group) — the full Stone hypothesis. ONLY REMAINING for #5: identify the generator with the
+-- momentum PVM (P=∫k dÊ(k), Stone's theorem — the unbounded-FC frontier); the GR chain beyond #5 stays gated on #1/#3/#4.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

@@ -1,4 +1,5 @@
 import Mathlib.MeasureTheory.Function.LpSpace.Basic
+import Mathlib.MeasureTheory.Function.LpSpace.ContinuousCompMeasurePreserving
 import Mathlib.MeasureTheory.Group.Measure
 import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 
@@ -50,5 +51,20 @@ theorem translationLp_add (s t : ℝ) (g : Lp ℂ 2 (volume : Measure ℝ)) :
   filter_upwards [coeFn_translationLp s (translationLp t g), h2s, coeFn_translationLp (s + t) g]
     with x e1 e2 e3
   rw [e1, e2, e3, add_assoc]
+
+/-- **Strong continuity of the translation group:** `t ↦ τ_t F` is continuous `ℝ → L²(ℝ)` for every state `F`.
+    Together with the group law this makes `t ↦ τ_t` a strongly-continuous one-parameter unitary group — the
+    `C₀`-group hypothesis of Stone's theorem (whose generator is the momentum operator `P`). Proof: the family
+    `t ↦ (· + t) : ℝ → C(ℝ,ℝ)` is continuous (via `ContinuousMap.curry` of the jointly-continuous `(t,x) ↦ x+t`),
+    and `Lp` composition is continuous in the composing map (`Continuous.compMeasurePreservingLp`). -/
+theorem continuous_translationLp (F : Lp ℂ 2 (volume : Measure ℝ)) :
+    Continuous (fun t : ℝ => translationLp t F) := by
+  let Φ : C(ℝ × ℝ, ℝ) := ⟨fun p => p.2 + p.1, by fun_prop⟩
+  let g : C(ℝ, C(ℝ, ℝ)) := Φ.curry
+  have hgm : ∀ t : ℝ, MeasurePreserving (g t) (volume : Measure ℝ) volume :=
+    fun t => measurePreserving_add_right volume t
+  have hcont : Continuous (fun t : ℝ => Lp.compMeasurePreserving (g t) (hgm t) F) :=
+    (continuous_const).compMeasurePreservingLp (map_continuous g) hgm (by norm_num)
+  exact hcont
 
 end QIQTH.Spectral.Multiplication
