@@ -397,8 +397,14 @@ item.** Never claim the `1/4`.
   and `positionPVM_conj_translation_scalarMeasure` — `((positionPVM.conj (τ_t)).scalarMeasure x)(A) =
   ∫_A ‖(τ_{-t}x)(a)‖² da`: conjugating the position PVM by translation-by-`t` shifts the Born position
   distribution to that of the translated state `τ_{-t}x`. The covariance that makes the translation generator
-  (momentum) conjugate to position. **Recorded next target:** the stronger *operator* form
-  `τ_t E(A) τ_t⁻¹ = E(A−t)` (indicator-shift `𝟙_A(x+t)=𝟙_{(·+t)⁻¹A}(x)` + 3-step ae-composition).
+  (momentum) conjugate to position.
+  **Translation-covariance — the OPERATOR (full Weyl) form ✅** (`PositionCovariance.lean`, axiom-free, budget 0):
+  `positionPVM_conj_translationUnitary` — `(positionPVM.conj (τ_t)).E A = positionPVM.E ((·+t)⁻¹A)`, i.e.
+  `τ_t E(A) τ_t⁻¹ = E(A−t)`. Proof: `τ_t M_{𝟙_A} τ_{-t} = M_{𝟙_{(·+t)⁻¹A}}` via the indicator-shift
+  `𝟙_A(x+t)=𝟙_{(·+t)⁻¹A}(x)` (preimage membership is defeq) + the three `coeFn`s of `τ_{-t}, M_{𝟙_A}, τ_t`
+  composed through the measure-preserving shift `·+t`. **The position spectral projection transforms covariantly
+  under translation** — exactly the relation making the translation generator (momentum `P`) canonically conjugate
+  to position `X`, the kinematic backbone of `#5`. (The earlier scalar-level covariance follows as a corollary.)
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.

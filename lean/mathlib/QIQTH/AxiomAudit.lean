@@ -1480,8 +1480,15 @@ namespace QIQTH.AxiomAudit
 -- ((positionPVM.conj (τ_t)).scalarMeasure x)(A) = ∫_A ‖(τ_{-t}x)(a)‖² da. Conjugating the position PVM by
 -- translation-by-t shifts the Born position distribution to that of the translated state τ_{-t}x — the covariance
 -- that makes the translation generator (momentum) conjugate to position (via conj_scalarMeasure +
--- positionPVM_scalarMeasure + translationUnitary coe lemmas). Axiom-free. The stronger OPERATOR form
--- τ_t E(A) τ_t⁻¹=E(A−t) is the recorded next tractable target (indicator-shift + 3-step ae-composition).
+-- positionPVM_scalarMeasure + translationUnitary coe lemmas). Axiom-free.
+#print axioms QIQTH.Spectral.Multiplication.positionPVM_conj_translationUnitary
+-- ★ TRANSLATION-COVARIANCE of the position observable (OPERATOR form — the full Weyl covariance):
+-- positionPVM_conj_translationUnitary — (positionPVM.conj (τ_t)).E A = positionPVM.E ((·+t)⁻¹A), i.e.
+-- τ_t E(A) τ_t⁻¹ = E(A−t). Proof: τ_t M_{𝟙_A} τ_{-t} = M_{𝟙_{(·+t)⁻¹A}} via the indicator-shift
+-- 𝟙_A(x+t)=𝟙_{(·+t)⁻¹A}(x) (preimage membership is defeq) + the three coeFn's of τ_{-t}, M_{𝟙_A}, τ_t composed
+-- through the measure-preserving shift ·+t (QuasiMeasurePreserving.tendsto_ae.eventually). Axiom-free. This is the
+-- kinematic backbone of WedgeKMSFlux #5: the position spectral projection transforms covariantly under translation,
+-- exactly the relation making the translation generator (momentum P) canonically conjugate to position X.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

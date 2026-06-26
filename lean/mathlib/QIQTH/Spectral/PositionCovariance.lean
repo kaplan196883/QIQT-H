@@ -45,13 +45,37 @@ theorem positionPVM_conj_translation_scalarMeasure (t : ℝ) (x : Lp ℂ 2 (volu
   rw [ProjectionValuedMeasure.conj_scalarMeasure _ _ _ hA, translationUnitary_symm_apply,
     positionPVM_scalarMeasure _ hA]
 
-/-
-HONEST CHECKPOINT (recorded): the *operator-level* covariance
-  `positionPVM.conj (translationUnitary t)).E A = positionPVM.E ((· + t)⁻¹' A)`  (i.e. `τ_t E(A) τ_t⁻¹ = E(A - t)`)
-is the stronger Weyl form. Its proof is `τ_t M_{𝟙_A} τ_{-t} = M_{𝟙_{(·+t)⁻¹A}}` via the indicator-shift
-`𝟙_A(x+t) = 𝟙_{(·+t)⁻¹A}(x)` and a three-step ae-composition (the `coeFn`s of `τ_{-t}`, `M_{𝟙_A}`, `τ_t` pushed
-through `· + t`). It is the next tractable target; the scalar-level covariance above already carries the physical
-content (translation shifts the Born position distribution).
--/
+/-- **Translation-covariance of the position PVM (operator form):** `τ_t E(A) τ_t⁻¹ = E((· + t)⁻¹ A)`
+    (`= E(A - t)`). The position spectral projection on `A`, conjugated by translation-by-`t`, is the projection
+    on the shifted set — the Weyl covariance that makes the translation generator (momentum) conjugate to
+    position. Proof: `τ_t M_{𝟙_A} τ_{-t} = M_{𝟙_{(·+t)⁻¹A}}` via the indicator-shift `𝟙_A(x+t)=𝟙_{(·+t)⁻¹A}(x)`
+    and the three `coeFn`s of `τ_{-t}, M_{𝟙_A}, τ_t` composed through the measure-preserving shift `· + t`. -/
+theorem positionPVM_conj_translationUnitary (t : ℝ) {A : Set ℝ} (hA : MeasurableSet A) :
+    ((positionPVM (μ := (volume : Measure ℝ))).conj (translationUnitary t)).E A
+      = (positionPVM (μ := (volume : Measure ℝ))).E ((fun x => x + t) ⁻¹' A) := by
+  have hpre : MeasurableSet ((fun x => x + t) ⁻¹' A) := hA.preimage (measurable_add_const t)
+  rw [ProjectionValuedMeasure.conj_E,
+    show (positionPVM (μ := (volume : Measure ℝ))).E A = indMul hA from posPVM_E_eq hA,
+    show (positionPVM (μ := (volume : Measure ℝ))).E ((fun x => x + t) ⁻¹' A) = indMul hpre
+      from posPVM_E_eq hpre]
+  refine ContinuousLinearMap.ext fun f => ?_
+  rw [ContinuousLinearMap.comp_apply, ContinuousLinearMap.comp_apply,
+    translationUnitary_symm_coe_apply, translationUnitary_coe_apply]
+  show translationLp t (indMul hA (translationLp (-t) f))
+      = mulOp (indSymbol_measurable hpre) zero_le_one (indSymbol_norm_le ((fun x => x + t) ⁻¹' A)) f
+  refine Lp.ext ?_
+  have hqm := (measurePreserving_add_right (volume : Measure ℝ) t).quasiMeasurePreserving
+  have e_mul_s : (fun x => (indMul hA (translationLp (-t) f) : ℝ → ℂ) (x + t))
+      =ᵐ[volume] fun x => indSymbol A (x + t) * (translationLp (-t) f : ℝ → ℂ) (x + t) :=
+    hqm.tendsto_ae.eventually
+      (mulOp_coeFn (indSymbol_measurable hA) zero_le_one (indSymbol_norm_le A) (translationLp (-t) f))
+  have e_in_s : (fun x => (translationLp (-t) f : ℝ → ℂ) (x + t))
+      =ᵐ[volume] fun x => (f : ℝ → ℂ) (x + t + -t) :=
+    hqm.tendsto_ae.eventually (coeFn_translationLp (-t) f)
+  filter_upwards [coeFn_translationLp t (indMul hA (translationLp (-t) f)), e_mul_s, e_in_s,
+    mulOp_coeFn (indSymbol_measurable hpre) zero_le_one (indSymbol_norm_le _) f]
+    with x h_out h_mul h_in h_rhs
+  rw [h_out, h_mul, h_in, h_rhs, add_neg_cancel_right]
+  congr 1
 
 end QIQTH.Spectral.Multiplication
