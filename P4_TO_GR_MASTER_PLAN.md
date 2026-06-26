@@ -453,6 +453,11 @@ item.** Never claim the `1/4`.
   **The two legs of the Weyl covariance are now both machine-checked**: `τ_t` *moves* position (`E(A−t)`); `e^{isX}`
   *leaves it* (`E(A)`). The honest dual — momentum covariance `e^{isX}Ê(B)e^{-isX}=Ê(B+s)` — needs the Fourier
   modulation↔translation duality (convention-dependent), recorded as a frontier.
+  **Spectral projections of any PVM commute ✅** (`PVM.lean`, axiom-free, budget 0): `E_comm` —
+  `E s * E t = E t * E s` for measurable `s, t` (both equal `E(s∩t)`, via `E_inter` + `Set.inter_comm`). A
+  fundamental *general* property of every `ProjectionValuedMeasure` — the observable is a commutative family of
+  projections — applying at once to the position PVM, the momentum PVM, and the finite spectral PVM. A clean,
+  general, Mathlib-contributable spectral-theory lemma.
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.

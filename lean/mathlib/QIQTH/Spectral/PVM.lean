@@ -354,6 +354,13 @@ theorem E_apply_idem {s : Set Ω} (hs : MeasurableSet s) (x : H) :
     P.E s (P.E s x) = P.E s x := by
   rw [← ContinuousLinearMap.mul_apply, P.isIdem hs]
 
+/-- **The spectral projections of a PVM commute:** `E s * E t = E t * E s` for measurable `s, t` (both equal
+    `E (s ∩ t)`). A fundamental property of any projection-valued measure — the observable is a commutative
+    family of projections; applies in particular to the position and momentum PVMs. -/
+theorem E_comm {s t : Set Ω} (hs : MeasurableSet s) (ht : MeasurableSet t) :
+    P.E s * P.E t = P.E t * P.E s := by
+  rw [← P.E_inter hs ht, ← P.E_inter ht hs, Set.inter_comm]
+
 /-- `⟪x, E s x⟫ = ‖E s x‖²` for measurable `s`. -/
 theorem inner_E_self {s : Set Ω} (hs : MeasurableSet s) (x : H) :
     inner ℂ x (P.E s x) = (‖P.E s x‖ : ℂ) ^ 2 := by

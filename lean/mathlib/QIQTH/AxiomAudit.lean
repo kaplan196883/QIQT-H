@@ -1541,6 +1541,11 @@ namespace QIQTH.AxiomAudit
 -- e^{isx}e^{-isx}=1 (mulOp_mul ×2 + mulOp_congr). So [e^{isX},E(A)]=0 — e^{isX} is a function of X and commutes
 -- with all functions of X. CONTRAST the translation covariance where τ_t genuinely MOVES E(A). Axiom-free. The two
 -- legs of the Weyl covariance are now both machine-checked: τ_t moves position (E(A−t)); e^{isX} leaves it (E(A)).
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.E_comm
+-- ★ SPECTRAL PROJECTIONS OF ANY PVM COMMUTE: E_comm (E s * E t = E t * E s for measurable s,t, both = E(s∩t) via
+-- E_inter + Set.inter_comm). A fundamental general property of any ProjectionValuedMeasure — the observable is a
+-- commutative family of projections — applying at once to BOTH the position PVM and the momentum PVM (and the finite
+-- spectral PVM). Axiom-free, general, Mathlib-contributable.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
