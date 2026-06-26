@@ -113,6 +113,17 @@ theorem hasDerivAt_stoneGen_neg (U : ℝ → (H →L[ℂ] H)) (x : stoneDomain U
   simpa using HasDerivAt.scomp_of_eq (hg := hasDerivAt_stoneGen U x)
     (hh := (hasDerivAt_id (0 : ℝ)).neg) (hy := neg_zero.symm)
 
+/-- **Identification of the generator by any witnessed derivative.** If the orbit `t ↦ U_t x` is differentiable
+    at `0` with derivative `i • v`, then `stoneGen U x = v`. The generator is *pinned* by the derivative — this is
+    the bridge from the abstract `stoneGen` to a concrete operator: to show `stoneGen` of a given group equals a
+    known operator `B`, it suffices to exhibit `HasDerivAt (t ↦ U_t x) (i • B x) 0`. (Uniqueness half of Stone's
+    correspondence; no density needed.) -/
+theorem stoneGen_eq_of_hasDerivAt (U : ℝ → (H →L[ℂ] H)) (x v : H) (hx : x ∈ stoneDomain U)
+    (h : HasDerivAt (fun t => U t x) (Complex.I • v) 0) :
+    stoneGen U ⟨x, hx⟩ = v := by
+  have huniq := (hasDerivAt_stoneGen U ⟨x, hx⟩).unique h
+  exact smul_right_injective H Complex.I_ne_zero huniq
+
 section Symmetry
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
 

@@ -198,7 +198,9 @@ frontiers (Stone, the trace). The `1/4` coefficient stays the cited UV datum thr
 log):** the general-Stone build-up to essential self-adjointness, Mathlib-integrated —
 `stoneDomain` (smooth-domain submodule) · `stoneGen` (the generator `A = −i d/dt U_t|₀` as a `LinearPMap`) ·
 `hasDerivAt_stoneGen` / `_neg` (forward/backward derivative) · `stoneDomain_apply_mem` (flow-invariance) ·
-`stoneGen_symmetric` (⟪Ax,y⟫=⟪x,Ay⟫ on the smooth domain) · `stoneGen_isFormalAdjoint_self`
+`stoneGen_symmetric` (⟪Ax,y⟫=⟪x,Ay⟫ on the smooth domain) · `stoneGen_eq_of_hasDerivAt` (generator
+**identification** — `stoneGen` pinned by any witnessed derivative; the bridge to identify `stoneGen` of a
+concrete group with a known operator `P`/`K`/`X`) · `stoneGen_isFormalAdjoint_self`
 (`(stoneGen U).IsFormalAdjoint (stoneGen U)`, the symmetric operator bundled in Mathlib's `LinearPMap` adjoint
 framework) · `stoneGen_le_adjoint` (the **explicit `A ⊆ A†`**, `stoneGen U ≤ (stoneGen U)†`, **conditional on
 `hdense : Dense (stoneGen U).domain`** — `le_adjoint` genuinely requires density). Wired into AxiomAudit; budget 0.

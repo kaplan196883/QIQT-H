@@ -135,6 +135,14 @@ InnerProductSpace.LinearPMap`). This is the precise `A ⊆ A*` entry point — o
 `stoneGen U ⊆ (stoneGen U)†` (`IsFormalAdjoint.le_adjoint`), and self-adjointness is `Ā = Ā*`. The symmetric
 unbounded operator now lives in Mathlib's adjoint framework, ready for the e.s.a. criteria.
 
+Also ✅ `stoneGen_eq_of_hasDerivAt` — **generator identification** (the uniqueness half of Stone's
+correspondence): if `HasDerivAt (t ↦ U_t x) (i•v) 0` then `stoneGen U ⟨x,hx⟩ = v` (via `HasDerivAt.unique` +
+`smul_right_injective` on `i ≠ 0`). The generator is *pinned* by any witnessed derivative — the bridge from the
+abstract `stoneGen` to a concrete operator: to show `stoneGen` of a given group equals a known `B`, it suffices
+to exhibit `HasDerivAt (t ↦ U_t x) (i•B x) 0`. No density needed; this is exactly the tool that will identify
+`stoneGen translationLp = P`, `stoneGen modUnitary = −K`, `stoneGen clockTransl = X` once those derivatives are
+in hand.
+
 Also ✅ `stoneGen_le_adjoint` — the **explicit `A ⊆ A†` containment**, `stoneGen U ≤ (stoneGen U)†` via
 `IsFormalAdjoint.le_adjoint`, **conditional on `hdense : Dense (stoneGen U).domain`** (left as an explicit
 hypothesis — `le_adjoint` genuinely requires it). This is the symmetric-operator containment that

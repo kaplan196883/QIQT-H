@@ -1626,6 +1626,11 @@ namespace QIQTH.AxiomAudit
 -- ⟺ symmetric), the precise A⊆A* entry point: once the domain is dense, stoneGen U ⊆ (stoneGen U)† (le_adjoint),
 -- and self-adjointness is Ā=Ā*. Axiom-free. REMAINING wall: domain density (Gårding) + essential self-adjointness +
 -- Cayley — the genuine Mathlib gaps.
+#print axioms QIQTH.Spectral.stoneGen_eq_of_hasDerivAt
+-- ★ STONE 3.1 cont. — generator IDENTIFICATION (uniqueness half of Stone's correspondence):
+-- stoneGen_eq_of_hasDerivAt — if HasDerivAt (t↦U_t x) (i•v) 0 then stoneGen U x = v. The generator is pinned by
+-- ANY witnessed derivative (via HasDerivAt.unique + smul cancel by i≠0). The bridge from the abstract stoneGen to a
+-- concrete operator: to show stoneGen of a group = a known B, exhibit HasDerivAt (t↦U_t x) (i•B x) 0. No density. Axiom-free.
 #print axioms QIQTH.Spectral.stoneGen_le_adjoint
 -- ★ STONE 3.1 cont. — the EXPLICIT A⊆A† containment, conditional on Gårding density:
 -- stoneGen_le_adjoint — given hdense : Dense (stoneGen U).domain, stoneGen U ≤ (stoneGen U)† (via le_adjoint).
