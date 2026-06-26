@@ -17,6 +17,16 @@ ATOM_WORDS = {
 }
 _SPACED = {"→": r" \to ", ",": ", ", "∧": r" \wedge ", "∨": r" \vee "}
 
+# name -> href URL, for in-formula hyperlinks (set by the caller around a render).
+# When an identifier in a formula names a declaration with an entry, it is wrapped
+# in \href so clicking the symbol jumps to that declaration.
+_LINKS = {}
+
+
+def _wrap_link(name, tex):
+    url = _LINKS.get(name)
+    return (r"\href{" + url + "}{" + tex + "}") if url else tex
+
 
 def tex_atom(s):
     if s in ATOM_WORDS:
@@ -98,7 +108,7 @@ def render(node, notation):
     if k == "ident":
         # full string translation handles Greek + sub/superscripts (e.g. e₁ -> e_{1})
         # and notation; app heads are resolved earlier so this is only operands/indices.
-        return latexify.tex_of_pp(node["v"], notation)
+        return _wrap_link(node["v"], latexify.tex_of_pp(node["v"], notation))
     if k != "node":
         return ""
     kind, A = node["kind"], node["args"]
@@ -112,8 +122,10 @@ def render(node, notation):
             if val and re.search(r"#\d", val):
                 fired = _fire_template(val, rargs)
                 if fired is not None:
-                    return fired
-            return _join_app([latexify._render_ident(head, notation)] + rargs)
+                    # wrap the whole tensor unless an argument already carries a link
+                    return fired if r"\href" in fired else _wrap_link(head, fired)
+            return _join_app([_wrap_link(head, latexify._render_ident(head, notation))]
+                             + rargs)
         return _join_app([render(fn, notation)] + rargs)
 
     if kind == "termIfThenElse":

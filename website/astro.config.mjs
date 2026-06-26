@@ -7,7 +7,12 @@ export default defineConfig({
   site: 'https://qiqt.org',
   markdown: {
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex],
+    // allow \href, but only to internal anchors / same-site paths (no external/JS URLs),
+    // so identifiers inside formulas can link to their definitions on the browser page.
+    rehypePlugins: [[rehypeKatex, {
+      trust: (ctx) => ctx.command === '\\href' && /^(#|\/)/.test(ctx.url),
+      strict: false,
+    }]],
     shikiConfig: { theme: 'github-dark' },
   },
 });
