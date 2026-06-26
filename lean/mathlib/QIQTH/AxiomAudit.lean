@@ -5075,6 +5075,12 @@ namespace QIQTH.AxiomAudit
 -- three are GENUINE SELF-ADJOINT UNBOUNDED OPERATORS. Axiom-free. Remaining (Mathlib gap): unbounded spectral theorem.
 #print axioms QIQTH.Spectral.cayley_one_sub
 #print axioms QIQTH.Spectral.cayley_one_sub_injective
+#print axioms QIQTH.Spectral.cayley_one_sub_denseRange
+-- ★★ P4 WALL — 1−V HAS DENSE RANGE (V = Cayley transform of a DENSELY-DEFINED self-adjoint A): cayley_one_sub_
+-- denseRange — DenseRange (fun y => y − V y). From cayley_one_sub (y−V y = 2i·(A+i)⁻¹y), ran(1−V) = 2i·dom(A) =
+-- 2i·stoneDomain U, dense (stoneDomain_dense) since scaling by 2i≠0 is a homeomorphism (Homeomorph.smulOfNeZero).
+-- With cayley_one_sub_injective (ker(1−V)=0) this is the FULL statement that V is the Cayley transform of a
+-- densely-defined self-adjoint A=i(1+V)(1−V)⁻¹. Axiom-free. Remaining (Mathlib gap): Borel/PVM on S¹ ⟹ Stone.
 -- ★★ P4 WALL — 1 IS NOT AN EIGENVALUE OF V (Cayley consistency): cayley_one_sub — y − V y = 2i·(A+i)⁻¹y (with
 -- z=(A+i)⁻¹y: (Az+iz)−(Az−iz)=2iz). cayley_one_sub_injective — ker(1−V)=0, i.e. y↦y−V y injective (from the
 -- formula + (A+i)⁻¹ injective + 2i≠0). This is the precise condition that V=(A−i)(A+i)⁻¹ is the Cayley transform of

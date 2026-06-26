@@ -1002,6 +1002,36 @@ theorem cayley_one_sub_injective (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, 
     smul_right_injective H (mul_ne_zero (by norm_num) Complex.I_ne_zero) h
   exact (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm.injective (Subtype.coe_injective hu)
 
+/-- **★★ `1 − V` has dense range** — `ran(1 − V)` is dense in `H`. From `cayley_one_sub`,
+    `y − V y = 2i·(A + i)⁻¹ y`, so `ran(1 − V) = 2i · ran((A + i)⁻¹) = 2i · dom(A)`, the smooth domain
+    `stoneDomain U`, which is dense (`stoneDomain_dense`); scaling by the nonzero `2i` (a homeomorphism) preserves
+    density. Together with `cayley_one_sub_injective` (`ker(1 − V) = 0`), this is the **full statement that `V` is
+    the Cayley transform of a densely-defined self-adjoint operator** `A = i(1 + V)(1 − V)⁻¹` — the inverse Cayley
+    is well-defined on a dense domain. -/
+theorem cayley_one_sub_denseRange (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    DenseRange (fun y : H => y - cayley U hgrp hU0 hUinner hUbd hSC y) := by
+  have hc : (2 * Complex.I) ≠ 0 := mul_ne_zero (by norm_num) Complex.I_ne_zero
+  have hrange : Set.range (fun y : H => ((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y : H))
+      = (stoneDomain U : Set H) := by
+    ext z
+    refine ⟨?_, fun hz => ?_⟩
+    · rintro ⟨y, rfl⟩; exact ((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y).2
+    · exact ⟨cayleyEquiv U hgrp hU0 hUinner hUbd hSC ⟨z, hz⟩, by simp⟩
+  have hf : DenseRange (fun y : H => ((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y : H)) := by
+    show Dense (Set.range (fun y : H => ((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y : H)))
+    rw [hrange]; exact stoneDomain_dense U hgrp hU0 hUbd hSC
+  have hcomp : (fun y : H => y - cayley U hgrp hU0 hUinner hUbd hSC y)
+      = (Homeomorph.smulOfNeZero (2 * Complex.I) hc)
+        ∘ (fun y : H => ((cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y : H)) := by
+    funext y
+    simp only [Function.comp_apply, Homeomorph.smulOfNeZero_apply]
+    exact cayley_one_sub U hgrp hU0 hUinner hUbd hSC y
+  rw [hcomp]
+  exact (Homeomorph.smulOfNeZero (2 * Complex.I) hc).surjective.denseRange.comp hf
+    (Homeomorph.smulOfNeZero (2 * Complex.I) hc).continuous
+
 end SelfAdjoint
 
 end QIQTH.Spectral

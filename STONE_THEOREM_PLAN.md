@@ -363,6 +363,10 @@ Also ✅ `cayley_one_sub` + `cayley_one_sub_injective` — **`1` is not an eigen
 This is the precise condition that `V` is the **Cayley transform of a densely-defined self-adjoint operator**: the
 inverse Cayley `A = i(1 + V)(1 − V)⁻¹` is well-defined on `ran(1 − V)` = the smooth domain — the route back from the
 circle-spectral data to the generator.
+Also ✅ `cayley_one_sub_denseRange` — **`1 − V` has dense range** (`DenseRange (fun y => y − V y)`): `ran(1 − V) =
+2i·dom(A) = 2i·stoneDomain U`, dense (`stoneDomain_dense`) since scaling by `2i ≠ 0` is a homeomorphism
+(`Homeomorph.smulOfNeZero`). Together with `cayley_one_sub_injective` this is the **complete** characterization:
+`V` is the Cayley transform of a densely-defined self-adjoint `A` (both `ker(1 − V) = 0` *and* `ran(1 − V)` dense).
 **Remaining (Mathlib gap):** the **Borel/PVM** functional calculus on `S¹` (`∫ z dE` for the unitary `V` — Mathlib
 has the *continuous* FC but not the projection-valued-measure form) → transport to the unbounded spectral theorem
 (PVM `∫ λ dE` for the now-self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`.

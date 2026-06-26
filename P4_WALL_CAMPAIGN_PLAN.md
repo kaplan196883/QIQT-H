@@ -275,6 +275,9 @@ inverse Cayley map `z↦i(1+z)(1−z)⁻¹` pulls `S¹∖{1}` to the real spectr
 Also ✅ `cayley_one_sub` + `cayley_one_sub_injective` (**`1` is not an eigenvalue of `V`**, `ker(1−V)=0`:
 `y−V y = 2i·(A+i)⁻¹y` + `(A+i)⁻¹` injective — the precise condition that `V` is the Cayley transform of a
 densely-defined self-adjoint `A`, with `A = i(1+V)(1−V)⁻¹` well-defined on `ran(1−V)` = the smooth domain).
+Also ✅ `cayley_one_sub_denseRange` (**`1−V` has dense range** — `ran(1−V)=2i·dom(A)=2i·stoneDomain U`, dense via
+`stoneDomain_dense` + `Homeomorph.smulOfNeZero`): with `ker(1−V)=0` this is the **full** characterization that `V`
+is the Cayley transform of a densely-defined self-adjoint `A`.
 **Remaining (Mathlib gap):** the **Borel/PVM** functional calculus on `S¹` for `V` (Mathlib has *continuous* FC
 only) → transport to the unbounded spectral theorem (PVM for self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`.
 
