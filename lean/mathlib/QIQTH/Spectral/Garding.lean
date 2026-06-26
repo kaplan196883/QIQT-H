@@ -456,6 +456,30 @@ theorem resolvent_comm_flow (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s 
   refine setIntegral_congr_fun measurableSet_Ioi fun t _ => ?_
   rw [← ContinuousLinearMap.comp_apply, ← hgrp t s, add_comm s t]
 
+/-- **The resolvent orbit in differentiation-ready form:** `U_s (R x) = e^s ∫_s^∞ e^{−u} U_u x du`. Change of
+    variables `u = s + t` (`setIntegral_preimage_emb` for the translation, `preimage_add_const_Ioi`) applied to
+    `resolvent_apply_flow`, pulling out `e^s`. Now the `s`-dependence sits in the smooth `e^s` factor and the
+    *integration limit* `s` only — so the FTC for the improper integral with variable lower limit gives
+    `d/ds|₀ = R x − x`, placing `R x` in the smooth domain and yielding the resolvent identity `(A + i)(R x) = i x`. -/
+theorem resolvent_apply_flow_cov (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (x : H) (hUbd : ∀ t, ‖U t x‖ ≤ ‖x‖) (hcont : Continuous (fun t => U t x)) (s : ℝ) :
+    U s (resolvent U x) = Real.exp s • ∫ u in Set.Ioi s, Real.exp (-u) • U u x := by
+  rw [resolvent_apply_flow U hgrp x hUbd hcont s]
+  have hpre : (fun t : ℝ => t + s) ⁻¹' Set.Ioi s = Set.Ioi (0 : ℝ) := by
+    ext t
+    simp only [Set.mem_preimage, Set.mem_Ioi]
+    constructor <;> intro h <;> linarith
+  have heq : (∫ u in Set.Ioi s, Real.exp (-u) • U u x)
+      = ∫ t in Set.Ioi (0 : ℝ), Real.exp (-(t + s)) • U (t + s) x := by
+    have h := (measurePreserving_add_right volume s).setIntegral_preimage_emb
+      (MeasurableEquiv.addRight s).measurableEmbedding
+      (fun u => Real.exp (-u) • U u x) (Set.Ioi s)
+    rw [hpre] at h
+    exact h.symm
+  rw [heq, ← integral_smul]
+  refine setIntegral_congr_fun measurableSet_Ioi fun t _ => ?_
+  rw [smul_smul, ← Real.exp_add, show s + -(t + s) = -t by ring, add_comm s t]
+
 section SelfAdjoint
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 

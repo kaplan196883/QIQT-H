@@ -239,9 +239,12 @@ of the bounded orbit) + `norm_resolvent_le` (**the resolvent is a contraction** 
 `∫₀^∞ e^{−t}=1` ⟹ `R=(1−iA)⁻¹` bounded) + `resolvent_apply_flow` (**the flow-on-resolvent identity**
 `U_s (R x) = ∫₀^∞ e^{−t} U_{s+t} x dt`, the algebraic core) + `resolvent_add`/`resolvent_smul` (**`R` is ℂ-linear**,
 so a bounded ℂ-linear operator with `norm_resolvent_le`) + `resolvent_comm_flow` (**`R` commutes with the flow**
-`U_s(Rx)=R(U_s x)`, hence with `A`). **Remaining (the genuine Mathlib-grade op-theory frontier):** differentiate the RHS at `0` (change of vars `u=s+t` ⟹ `e^s ∫_s^∞ e^{−u}U_u x du`, `d/ds|₀=Rx−x` by
-the FTC) ⟹ `R x ∈ stoneDomain` + resolvent identity `(A+i)(R x)=i x` ⟹ `Range(A+i)=H` ⟹ `Ā = Ā†` (e.s.a.) ⟹
-Cayley/unbounded spectral theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has none of these; Cayley injectivity in Stone.lean.
+`U_s(Rx)=R(U_s x)`, hence with `A`) + `resolvent_apply_flow_cov` (**the differentiation-ready form**
+`U_s(Rx)=e^s ∫_s^∞ e^{−u}U_u x du`, change of vars `u=s+t` via `setIntegral_preimage_emb`). **Remaining (the genuine
+Mathlib-grade op-theory frontier):** differentiate the RHS at `0` (FTC for the improper integral with variable
+lower limit, `d/ds|₀=Rx−x`) ⟹ `R x ∈ stoneDomain` + resolvent identity `(A+i)(R x)=i x` ⟹ `Range(A+i)=H` ⟹
+`Ā = Ā†` (e.s.a.) ⟹ Cayley/unbounded spectral theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has none of these; Cayley
+injectivity in Stone.lean.
 
 ### Phase 4 (operators) — the modular Hamiltonian `K` as a symmetric operator ✅ (3rd & LAST C₀ group; trio complete)
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/ModularGenerator.lean`):** the Stone-instantiation pattern

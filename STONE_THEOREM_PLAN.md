@@ -288,7 +288,11 @@ Also ✅ `resolvent_apply_flow` — **the flow-on-resolvent identity** `U_s (R x
 the `ℝ`-smul + the group law) — the algebraic core of the resolvent identity. Plus `resolvent_add` (`R(x+y)=Rx+Ry`)
 + `resolvent_smul` (`R(c•x)=c•Rx`): **`R` is ℂ-linear**, so with `norm_resolvent_le` it is a bounded ℂ-linear
 operator `(1 − iA)⁻¹`. Plus `resolvent_comm_flow` — **`R` commutes with the flow** `U_s (R x) = R (U_s x)` (from
-`resolvent_apply_flow` + the group law, `U_{s+t} = U_{t+s}`), hence with the generator `A`.
+`resolvent_apply_flow` + the group law, `U_{s+t} = U_{t+s}`), hence with the generator `A`. Plus
+`resolvent_apply_flow_cov` — **the differentiation-ready form** `U_s (R x) = e^s ∫_s^∞ e^{−u} U_u x du` (change of
+variables `u = s+t` via `setIntegral_preimage_emb` for the translation, `(·+s)⁻¹(Ioi s)=Ioi 0`, + `integral_smul`
++ the exponent algebra `e^s·e^{−(t+s)}=e^{−t}`): now the `s`-dependence sits in the smooth `e^s` factor and the
+integration *limit* `s` only.
 **Remaining (the genuine Mathlib-grade operator-theory frontier):** differentiate the RHS in `s` at `0` (after
 the change of variables `u = s+t` ⟹ `e^s ∫_s^∞ e^{−u} U_u x du`, whose `d/ds|₀ = R x − x` by the **FTC for the
 improper integral with variable lower limit**) ⟹ `R x ∈ stoneDomain U` + the resolvent identity

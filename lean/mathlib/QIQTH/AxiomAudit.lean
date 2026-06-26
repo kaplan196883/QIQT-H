@@ -5007,6 +5007,12 @@ namespace QIQTH.AxiomAudit
 -- resolvent_apply_flow (U_s(Rx)=∫₀^∞ e^{−t}U_{s+t}x) and R(U_s x)=∫₀^∞ e^{−t}U_t(U_s x)=∫₀^∞ e^{−t}U_{t+s}x (group
 -- law), equal since U_{s+t}=U_{t+s}. So R commutes with U_s hence with the generator A — a resolvent/spectral
 -- consistency property. Axiom-free.
+#print axioms QIQTH.Spectral.resolvent_apply_flow_cov
+-- ★ P4 WALL — the RESOLVENT ORBIT in DIFFERENTIATION-READY form: resolvent_apply_flow_cov —
+-- U_s (R x) = e^s • ∫_s^∞ e^{−u} U_u x du. Change of variables u=s+t (MeasurePreserving.setIntegral_preimage_emb for
+-- the translation, preimage (·+s)⁻¹(Ioi s)=Ioi 0, + integral_smul + the exponent algebra e^s·e^{−(t+s)}=e^{−t}).
+-- Now the s-dependence sits in the smooth e^s factor and the integration LIMIT s only ⟹ the FTC for the improper
+-- integral with variable lower limit gives d/ds|₀ = R x − x ⟹ R x ∈ stoneDomain + the resolvent identity (A+i)(R x)=i x. Axiom-free.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via
