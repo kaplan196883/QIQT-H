@@ -126,8 +126,17 @@ the bound derived — the campaign's goal.
 **not** axioms): `fq_bound_of_slack` (`0≤slack ∧ S+slack≤areaTerm ⟹ S≤areaTerm`); `fq_bound_of_jlms` (JLMS first
 law `S = ⟨A_edge⟩·c + ⟨K_bulk⟩ − D` with `0≤D` ⟹ `S ≤ ⟨A_edge⟩·c + ⟨K_bulk⟩`); `fq_bound_area_only` (`+ bulk≤0` ⟹
 bare area floor `S ≤ ⟨A_edge⟩·c`); `fq_bound_of_slack_ennreal` (ℝ≥0∞, no subtraction-with-∞). The coefficient `c =
-1/4ℓ_P²` is a free parameter (carried UV datum, never assigned). **Remaining to instantiate Phase 6:** the Phase-5
-dual-weight trace must supply `areaExp`, `bulk`, `D` and the first law as theorems — the genuine Mathlib-grade gap.
+1/4ℓ_P²` is a free parameter (carried UV datum, never assigned).
+
+**✅ Phase 6 GROUNDED IN THE PROVED RELATIVE ENTROPY (`QIQTH/FQBoundCGP.lean`, axiom-free):** `fq_bound_cgp`
+discharges the `0 ≤ slack` hypothesis with the *machine-checked* `cgpEntropy_nonneg` (one-particle CGP modular
+relative entropy ≥ 0). So `S_vN ≤ areaTerm` holds whenever the **JLMS master inequality**
+`S_vN + cgpEntropy S ξ ≤ areaTerm` holds (`areaTerm = ⟨A_edge⟩/4ℓ_P²`, the Phase-5 trace's output): the slack
+positivity is no longer hypothesized — only the master inequality remains.
+
+**Remaining to instantiate Phase 6:** the Phase-5 dual-weight trace must supply the master inequality
+`S_vN + cgpEntropy ≤ ⟨A_edge⟩/4ℓ_P²` (equivalently `areaExp`, `bulk`, `D` + the first law) — the genuine
+Mathlib-grade gap. NOT blocked on the PVM/`PVM_of_selfAdjoint` (off the critical path).
 Per the same audit, do NOT block this on the PVM/`PVM_of_selfAdjoint` (off the critical path); `IsSelfAdjoint
 A_edge` (already proved) suffices to call the clock energy a genuine observable.
 

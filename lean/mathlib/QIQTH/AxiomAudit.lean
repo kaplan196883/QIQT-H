@@ -5911,4 +5911,11 @@ namespace QIQTH.AxiomAudit
 -- axioms; coefficient c (=1/4ℓ_P²) is the carried UV datum, never assigned; self-adjoint≠positive so area-positivity
 -- is explicit where needed. Axiom-free (standard 3). The dual-weight trace (Phase 5) remains the genuine gap.
 
+#print axioms QIQTH.fq_bound_cgp
+-- ★★★ P4 WALL PHASE 6 — FQ BOUND GROUNDED IN THE PROVED RELATIVE ENTROPY: fq_bound_cgp — discharges the 0≤slack
+-- hypothesis of fq_bound_of_slack with the MACHINE-CHECKED cgpEntropy_nonneg (one-particle CGP modular relative
+-- entropy ≥ 0). So the grounded FQ bound S_vN ≤ areaTerm holds whenever the JLMS master inequality
+-- S_vN + cgpEntropy S ξ ≤ areaTerm holds (areaTerm = ⟨A_edge⟩/4ℓ_P², the Phase-5 trace's output) — the slack
+-- positivity is no longer hypothesized, only the master inequality remains. Axiom-free (standard 3).
+
 end QIQTH.AxiomAudit

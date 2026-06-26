@@ -529,3 +529,4 @@ import QIQTH.ClausiusToPernull
 import QIQTH.Raychaudhuri
 import QIQTH.Unruh
 import QIQTH.FQBoundConditional
+import QIQTH.FQBoundCGP
