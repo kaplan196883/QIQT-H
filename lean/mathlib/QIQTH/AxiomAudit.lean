@@ -4943,6 +4943,13 @@ namespace QIQTH.AxiomAudit
 -- U_s x_φ = ∫φ(u−s)U_u x du (mollify_apply_flow_cov) is differentiable ⟹ x_φ in the smooth domain. THE SMOOTH
 -- DOMAIN OF THE STONE GENERATOR IS NONEMPTY (contains every Gårding vector) — the hardest analytic step of e.s.a.
 -- is done. Axiom-free. Remaining: DENSITY {x_φ} dense (φ→δ) ⟹ Range(A±i) dense ⟹ A essentially self-adjoint.
+#print axioms QIQTH.Spectral.mollify_sub
+#print axioms QIQTH.Spectral.norm_mollify_sub_le
+-- ★ P4 WALL — the GÅRDING-APPROXIMATION identity (toward density of the smooth domain): mollify_sub —
+-- x_φ − (∫φ)·x = ∫ φ(t)(U_t x − x) dt (subtract the constant field (∫φ)·x = ∫ φ(t)·x via integral_smul_const,
+-- combine via integral_sub). norm_mollify_sub_le — ‖x_φ − (∫φ)·x‖ ≤ ∫ ‖φ(t)‖·‖U_t x − x‖ (norm_integral_le_integral_norm).
+-- With ∫φ=1 and φ≥0 concentrated near 0, the bound → 0 by strong continuity (U_t x → x) ⟹ x_φ → x. Axiom-free.
+-- Remaining: the Dirac-sequence limit + concluding {x_φ} dense (hence the smooth domain dense) ⟹ e.s.a.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via

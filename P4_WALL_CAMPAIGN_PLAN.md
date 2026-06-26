@@ -218,7 +218,10 @@ outside a ball).
 lemma; domination = case split on `\|u\| ≤ ρ+1`, needs uniform `‖U_u x‖ ≤ M`) ⟹ `mollify_mem_stoneDomain`:
 **`mollify U φ x ∈ stoneDomain U`** — every Gårding vector is in the smooth domain of the Stone generator.
 The hardest analytic step (differentiation under the Bochner integral) is complete, axiom-free.
-**Remaining:** density (`{x_φ}` dense as `φ → δ`) ⟹ smooth domain dense ⟹ `Range(·±i)` dense ⟹ e.s.a. ⟹ Stone.
+Also ✅ the **Gårding-approximation identity** (`mollify_sub`: `x_φ − (∫φ)·x = ∫ φ(t)(U_t x − x)`;
+`norm_mollify_sub_le`: `‖x_φ − (∫φ)·x‖ ≤ ∫ ‖φ(t)‖·‖U_t x − x‖`) — with `∫φ = 1`, `φ ≥ 0` near `0`, the bound
+`→ 0` by strong continuity, i.e. `x_φ → x`. **Remaining:** the Dirac-sequence limit + `{x_φ}` dense ⟹ smooth
+domain dense ⟹ `Range(·±i)` dense ⟹ e.s.a. ⟹ Stone.
 
 ### Phase 4 (operators) — the modular Hamiltonian `K` as a symmetric operator ✅ (3rd & LAST C₀ group; trio complete)
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/ModularGenerator.lean`):** the Stone-instantiation pattern

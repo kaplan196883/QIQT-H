@@ -202,4 +202,33 @@ theorem mollify_mem_stoneDomain (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U
   exact (mollify_orbit_hasDerivAt U φ φ' hφ' hφcont hsuppφ hφ'cont hsupp' x M hM hUbd
     hcont).differentiableAt
 
+/-! ### The Gårding-approximation identity (toward density of the smooth domain)
+
+`mollify_mem_stoneDomain` shows the smooth domain *contains* every Gårding vector. Density then needs
+`x_φ → x` as `φ → δ` (a Dirac sequence). The foundation is the identity `x_φ − (∫φ)·x = ∫ φ(t)(U_t x − x) dt`:
+with `∫ φ = 1` and `φ` concentrated near `0`, the right side is small by strong continuity (`U_t x → x` as
+`t → 0`), so `x_φ → x`. -/
+
+/-- **The Gårding-approximation identity:** `x_φ − (∫φ)·x = ∫ φ(t) (U_t x − x) dt`. (Subtract the constant
+    field `∫ φ(t)·x = (∫φ)·x` from the mollified vector and combine under one integral.) With `∫ φ = 1` the left
+    side is `x_φ − x`. -/
+theorem mollify_sub (U : ℝ → (H →L[ℂ] H)) (φ : ℝ → ℂ) (x : H)
+    (hint : Integrable (fun t => φ t • U t x)) (hintx : Integrable (fun t => φ t • x)) :
+    mollify U φ x - (∫ t, φ t) • x = ∫ t, φ t • (U t x - x) := by
+  have h1 : (∫ t, φ t) • x = ∫ t, φ t • x := (integral_smul_const φ x).symm
+  rw [mollify, h1, ← integral_sub hint hintx]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun t => ?_)
+  simp only [smul_sub]
+
+/-- **The Gårding-approximation estimate:** `‖x_φ − (∫φ)·x‖ ≤ ∫ ‖φ(t)‖ ‖U_t x − x‖ dt` (norm of the integral
+    ≤ integral of the norm). With `φ ≥ 0` concentrated near `0` and `∫φ = 1`, the bound `→ 0` by strong
+    continuity — this is the convergence `x_φ → x` that makes the smooth domain dense. -/
+theorem norm_mollify_sub_le (U : ℝ → (H →L[ℂ] H)) (φ : ℝ → ℂ) (x : H)
+    (hint : Integrable (fun t => φ t • U t x)) (hintx : Integrable (fun t => φ t • x)) :
+    ‖mollify U φ x - (∫ t, φ t) • x‖ ≤ ∫ t, ‖φ t‖ * ‖U t x - x‖ := by
+  rw [mollify_sub U φ x hint hintx]
+  refine le_trans (norm_integral_le_integral_norm _) (le_of_eq ?_)
+  refine integral_congr_ae (Filter.Eventually.of_forall fun t => ?_)
+  simp only [norm_smul]
+
 end QIQTH.Spectral

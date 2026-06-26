@@ -248,8 +248,12 @@ with derivative `∫ (−φ'(u)) U_u x du`, via `hasDerivAt_integral_of_dominate
 (`mollify_apply_flow_cov`) is differentiable ⟹ `x_φ` is in the smooth domain. **The smooth domain of the Stone
 generator is NONEMPTY — it contains every Gårding vector. The hardest analytic step of essential
 self-adjointness (differentiation under the Bochner integral) is complete, axiom-free.**
-**Remaining:** the density `{x_φ}` dense (approximate identity `φ → δ`, so `x_φ → x`) ⟹ smooth domain dense ⟹
-`Range(A ± i)` dense ⟹ `A` essentially self-adjoint ⟹ Stone returns `U_t = exp(it Ā)`.
+Also ✅ the **Gårding-approximation identity** toward density: `mollify_sub` — `x_φ − (∫φ)·x = ∫ φ(t)(U_t x − x) dt`
+(subtract the constant field `(∫φ)·x = ∫ φ(t)·x`, via `integral_smul_const` + `integral_sub`); `norm_mollify_sub_le`
+— `‖x_φ − (∫φ)·x‖ ≤ ∫ ‖φ(t)‖·‖U_t x − x‖` (`norm_integral_le_integral_norm`). With `∫φ = 1` and `φ ≥ 0`
+concentrated near `0`, the bound `→ 0` by strong continuity (`U_t x → x`), i.e. `x_φ → x`.
+**Remaining:** the Dirac-sequence limit (`φₙ → δ` ⟹ the bound `→ 0`) + concluding `{x_φ}` dense ⟹ smooth domain
+dense ⟹ `Range(A ± i)` dense ⟹ `A` essentially self-adjoint ⟹ Stone returns `U_t = exp(it Ā)`.
 
 ## 3. Dependency graph
 ```
