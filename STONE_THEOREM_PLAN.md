@@ -113,11 +113,14 @@ analytic vectors), and the Cayley transform / unbounded spectral theorem (3.3) �
 Also ✅ `hasDerivAt_stoneGen` — the generator–derivative relation `HasDerivAt (t↦U_t x) (i·A x) 0` (the
 `HasDerivAt` form `A x=−i(d/dt U_t x)|₀`), the foundational helper every downstream argument differentiates
 through.
-**NEXT tractable sub-bricks:** (i) the `U`-invariance of the smooth domain (`U_s·domain ⊆ domain`, group law +
-`HasDerivAt.scomp`/`HasFDerivAt.comp_hasDerivAt` — note `.scomp`/`.comp_hasDerivAt` take NO explicit point arg
-and need `scomp_of_eq` when the base point isn't syntactically `h x`); (ii) the symmetry `⟪Ax,y⟫=⟪x,Ay⟫` (from
-`U_t` unitary, via `HasDerivAt.inner` of `⟪U_t x, y⟫` + the adjoint relation `⟪U_t x,y⟫=⟪x,U_{-t}y⟫`); then the
-density (Gårding)/essential-self-adjointness wall.
+Also ✅ `stoneDomain_apply_mem` — **flow-invariance of the smooth domain**: for a one-parameter group, `U_s`
+maps `stoneDomain U` into itself (`τ↦U_τ x` differentiable at `s` via `U_τ=U_s∘U_{τ−s}` + chain rule;
+`HasDerivAt.scomp_of_eq` with `hy : y = h x` named-arg form + `HasFDerivAt.comp_hasDerivAt` with
+`(U s).restrictScalars ℝ` for the ℂ-CLM over the ℝ-curve, and `import Deriv.Comp`). The `U`-invariance — a
+prerequisite for essential self-adjointness (Phase 3.2).
+**NEXT tractable sub-brick:** the symmetry `⟪Ax,y⟫=⟪x,Ay⟫` (from `U_t` unitary, via `HasDerivAt.inner` of
+`⟪U_t x, y⟫` + the adjoint relation `⟪U_t x,y⟫=⟪x,U_{-t}y⟫`); then the density (Gårding)/essential-self-adjointness
+wall (the genuine Mathlib-grade frontier).
 
 ### Phase 4 — apply general Stone to the clock energy `X = A_edge`  *(unblocks Wall Phase 4.2/4.3)*
 *Extends `QIQTH/CrossedProductGenerator.lean`.*  Apply Phase 3 to `clockTransl` (`λ_t`, already proved a

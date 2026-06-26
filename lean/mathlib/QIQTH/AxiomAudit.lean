@@ -1603,6 +1603,13 @@ namespace QIQTH.AxiomAudit
 -- downstream Stone argument (symmetry ⟪Ax,y⟫=⟪x,Ay⟫, flow-invariance U_s·domain⊆domain, essential self-adjointness)
 -- differentiates through. Axiom-free. NEXT sub-bricks: flow-invariance (group law + HasDerivAt.scomp/comp_hasDerivAt)
 -- then symmetry (U_t unitary + HasDerivAt.inner) — the road to Phase 3.2.
+#print axioms QIQTH.Spectral.stoneDomain_apply_mem
+-- ★ STONE 3.1 cont. — FLOW-INVARIANCE OF THE SMOOTH DOMAIN: stoneDomain_apply_mem — for a one-parameter GROUP
+-- (U(s+t)=U s∘L U t), U_s maps stoneDomain U into itself. (t↦U_t(U_s x)=U_{t+s}x is differentiable at 0 because
+-- the orbit τ↦U_τ x is differentiable at s, via the group law U_τ=U_s∘U_{τ−s} + U_s a smooth CLM — chain rule
+-- HasDerivAt.scomp_of_eq + HasFDerivAt.comp_hasDerivAt with restrictScalars ℝ for the ℂ-CLM over the ℝ-curve.)
+-- The U-invariance of the smooth domain, a prerequisite for essential self-adjointness (Phase 3.2). Axiom-free.
+-- NEXT: the symmetry ⟪Ax,y⟫=⟪x,Ay⟫ (U_t unitary + HasDerivAt.inner), then the Gårding-density/essential-s.a. wall.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
