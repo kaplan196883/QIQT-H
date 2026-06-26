@@ -4997,6 +4997,11 @@ namespace QIQTH.AxiomAudit
 -- through the set Bochner integral via integral_comp_comm + ContinuousLinearMap.map_smul_of_tower for the ℝ-smul +
 -- group law). The algebraic core of the resolvent identity: after the change of variables u=s+t (giving
 -- e^s ∫_s^∞ e^{−u}U_u x du), differentiating in s at 0 yields R x − x by the FTC ⟹ (A+i)(R x)=i x ⟹ Range(A+i)=H. Axiom-free.
+#print axioms QIQTH.Spectral.resolvent_add
+#print axioms QIQTH.Spectral.resolvent_smul
+-- ★ P4 WALL — the RESOLVENT IS ℂ-LINEAR: resolvent_add (R(x+y)=Rx+Ry, integral_add + U_t linear) + resolvent_smul
+-- (R(c•x)=c•Rx, integral_smul + map_smul + smul_comm). With norm_resolvent_le (‖Rx‖≤‖x‖), R = (1−iA)⁻¹ is a bounded
+-- ℂ-linear operator. Axiom-free. Remaining: the resolvent identity (A+i)(R x)=i x (FTC differentiation) ⟹ Range(A+i)=H.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via

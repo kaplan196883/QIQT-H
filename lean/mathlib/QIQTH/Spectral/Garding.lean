@@ -426,6 +426,25 @@ theorem resolvent_apply_flow (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s
   refine setIntegral_congr_fun measurableSet_Ioi fun t _ => ?_
   rw [ContinuousLinearMap.map_smul_of_tower, ← ContinuousLinearMap.comp_apply, ← hgrp s t]
 
+/-- **The resolvent is additive:** `R (x + y) = R x + R y` (linearity of the integral + `U_t` linear). -/
+theorem resolvent_add (U : ℝ → (H →L[ℂ] H)) (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖)
+    (hSC : ∀ y : H, Continuous (fun t => U t y)) (x y : H) :
+    resolvent U (x + y) = resolvent U x + resolvent U y := by
+  rw [resolvent, resolvent, resolvent,
+    ← integral_add (resolvent_integrand_integrableOn U x (fun t => hUbd t x) (hSC x))
+      (resolvent_integrand_integrableOn U y (fun t => hUbd t y) (hSC y))]
+  refine setIntegral_congr_fun measurableSet_Ioi fun t _ => ?_
+  simp only [map_add, smul_add]
+
+/-- **The resolvent is ℂ-homogeneous:** `R (c • x) = c • R x` (`integral_smul` + `U_t` ℂ-linear). With
+    `resolvent_add` and the contraction bound `norm_resolvent_le`, `R` is a bounded ℂ-linear operator. -/
+theorem resolvent_smul (U : ℝ → (H →L[ℂ] H)) (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖)
+    (hSC : ∀ y : H, Continuous (fun t => U t y)) (c : ℂ) (x : H) :
+    resolvent U (c • x) = c • resolvent U x := by
+  rw [resolvent, resolvent, ← integral_smul]
+  refine setIntegral_congr_fun measurableSet_Ioi fun t _ => ?_
+  rw [map_smul, smul_comm]
+
 section SelfAdjoint
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 
