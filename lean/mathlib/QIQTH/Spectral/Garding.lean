@@ -31,6 +31,7 @@ import Mathlib.Analysis.Complex.RealDeriv
 import Mathlib.MeasureTheory.Integral.ExpDecay
 import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+import Mathlib.Analysis.InnerProductSpace.Adjoint
 
 namespace QIQTH.Spectral
 
@@ -937,6 +938,26 @@ noncomputable def cayleyUnitary (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U
     (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) : H ≃ₗᵢ[ℂ] H :=
   { LinearEquiv.ofBijective (cayleyLM U hgrp hU0 hUinner hUbd hSC) (cayley_bijective U hgrp hU0 hUinner hUbd hSC) with
     norm_map' := norm_cayley U hgrp hU0 hUinner hUbd hSC }
+
+/-- **★★ The Cayley unitary is a unitary element of the C\*-algebra** `H →L[ℂ] H`: `star V * V = V * star V = 1`.
+    Since `star ↑V = ↑V.symm` (`LinearIsometryEquiv.star_eq_symm`) and `V.symm ∘ V = V ∘ V.symm = id`. This places
+    `V = (A − i)(A + i)⁻¹` into Mathlib's `unitary (H →L[ℂ] H)` group — the doorway to the **continuous functional
+    calculus**: `V` is a normal (indeed unitary) C\*-algebra element, so `cfc f V` exists for continuous `f` and
+    `spectrum ℂ V ⊆ circle`. (The *Borel/PVM* functional calculus — `∫ z dE` — is the remaining Mathlib gap.) -/
+theorem cayley_mem_unitary (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) ∈ unitary (H →L[ℂ] H) := by
+  rw [Unitary.mem_iff, LinearIsometryEquiv.star_eq_symm]
+  refine ⟨?_, ?_⟩ <;> · ext x; simp
+
+/-- **The Cayley unitary as an element of `unitary (H →L[ℂ] H)`** — the bundled C\*-algebra unitary, ready for
+    Mathlib's `cfc`/`spectrum` machinery (toward the spectral theorem for the self-adjoint generator `A`). -/
+noncomputable def cayleyUnitaryElt (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    unitary (H →L[ℂ] H) :=
+  ⟨cayleyUnitary U hgrp hU0 hUinner hUbd hSC, cayley_mem_unitary U hgrp hU0 hUinner hUbd hSC⟩
 
 end SelfAdjoint
 

@@ -350,9 +350,13 @@ Also ✅ `cayleyEquiv_symm_add/_smul` + `cayley_add/_smul` + `cayleyLM` + **`cay
 of `A+i` + `LinearPMap.map_add/map_smul`), so `V` is ℂ-linear (`cayleyLM : H →ₗ[ℂ] H`), and
 `cayleyUnitary := LinearEquiv.ofBijective cayleyLM cayley_bijective` with `norm_map' := norm_cayley` packages it as
 a `LinearIsometryEquiv`. The three generators `X=A_edge`, `P`, `K` each have a Cayley unitary.
-**Remaining (Mathlib gap):** the bounded spectral measure of `V` (bounded-PVM spectral theorem)
-→ transport to the unbounded spectral theorem (PVM `∫ λ dE` for the now-self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`.
-Mathlib has neither the bounded-PVM spectral theorem nor the unbounded spectral theorem.
+Also ✅ `cayley_mem_unitary` + `cayleyUnitaryElt` — **`V` is a unitary element of the C\*-algebra** `H →L[ℂ] H`
+(`star V * V = V * star V = 1`, via `LinearIsometryEquiv.star_eq_symm`), bundled as `cayleyUnitaryElt :
+unitary (H →L[ℂ] H)`. This is the **doorway to Mathlib's continuous functional calculus**: `V` is unitary/normal,
+so `cfc f V` exists for continuous `f` and `spectrum ℂ V ⊆ circle`.
+**Remaining (Mathlib gap):** the **Borel/PVM** functional calculus (`∫ z dE` for the unitary `V` — Mathlib has the
+*continuous* FC but not the projection-valued-measure form) → transport to the unbounded spectral theorem
+(PVM `∫ λ dE` for the now-self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`.
 **Remaining (the genuine Mathlib-grade operator-theory frontier):** differentiate the RHS in `s` at `0` (after
 the change of variables `u = s+t` ⟹ `e^s ∫_s^∞ e^{−u} U_u x du`, whose `d/ds|₀ = R x − x` by the **FTC for the
 improper integral with variable lower limit**) ⟹ `R x ∈ stoneDomain U` + the resolvent identity

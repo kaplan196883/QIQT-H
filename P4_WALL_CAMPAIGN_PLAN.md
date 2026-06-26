@@ -268,9 +268,10 @@ so `V=(A−i)∘(A+i)⁻¹` is bijective, and with `norm_cayley` `V` is bijectiv
 Also ✅ `cayleyEquiv_symm_add/_smul`, `cayley_add/_smul`, `cayleyLM`, **`cayleyUnitary : H ≃ₗᵢ[ℂ] H`** (`V` bundled
 as a genuine **unitary operator**: `(A+i)⁻¹` ℂ-linear ⟹ `V` ℂ-linear ⟹ `cayleyLM : H →ₗ[ℂ] H` ⟹
 `cayleyUnitary = LinearEquiv.ofBijective cayleyLM cayley_bijective` + `norm_map' := norm_cayley`).
-**Remaining (Mathlib gap):** the bounded-PVM spectral theorem for `V` → transport to
-the unbounded spectral theorem (PVM for self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`. Mathlib has neither the
-bounded-PVM nor the unbounded spectral theorem; Cayley injectivity in Stone.lean.
+Also ✅ `cayley_mem_unitary` + `cayleyUnitaryElt` (**`V` is a C\*-algebra unitary element** `∈ unitary (H →L[ℂ] H)`,
+`star V * V = V * star V = 1` — the **CFC doorway**: `cfc f V` exists, `spectrum ℂ V ⊆ circle`).
+**Remaining (Mathlib gap):** the **Borel/PVM** functional calculus for `V` (Mathlib has *continuous* FC only) →
+transport to the unbounded spectral theorem (PVM for self-adjoint `A`) ⟹ Stone `U_t = exp(it A)`.
 
 ### Phase 4 (operators) — the modular Hamiltonian `K` as a symmetric operator ✅ (3rd & LAST C₀ group; trio complete)
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/ModularGenerator.lean`):** the Stone-instantiation pattern
