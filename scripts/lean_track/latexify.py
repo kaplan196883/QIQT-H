@@ -87,6 +87,23 @@ DEFAULT_NOTATION = {
     "Complex.exp": r"\exp", "Finset.univ": r"\mathrm{univ}",
     "Finset.sum": r"\sum", "Nat": r"\mathbb{N}", "Int": r"\mathbb{Z}",
     "Rat": r"\mathbb{Q}", "True": r"\top", "False": r"\bot",
+    # Common project / operator-theory names with standard notation, so long
+    # \mathrm{camelCase} identifiers across the dependency closure read as math.
+    # Per-track [latex.notation] overrides any of these.
+    "christoffel": r"\Gamma^{#3}_{#4#5}(#6)",   # g gi a b c x -> Γ^a_{bc}(x)
+    "riemann": r"\mathrm{Riem}", "riemannQuad": r"\mathrm{Riem}",
+    "covDerivRiem": r"\nabla\mathrm{Riem}",
+    "modConj": r"J", "modConjBilin": r"J", "modUnitary": r"\Delta",
+    "modChar": r"\chi_{\mathrm{mod}}", "modCharC": r"\chi_{\mathrm{mod}}",
+    "boostUnitary": r"U", "boostKMS": r"U",
+    "spectrum": r"\mathrm{sp}", "specMeasure": r"\mu_{\mathrm{sp}}",
+    "specProj": r"E", "scalarMeasure": r"\mu",
+    "rvdSqrtR": r"R^{1/2}", "rvdSpecMeasure": r"\mu^{R}",
+    "boundedFC": r"\Phi", "borelFC": r"\Phi_{B}", "cfcCont": r"\Phi_{c}",
+    "starRingEnd": r"\overline{#2}", "fourier": r"\mathcal{F}",
+    "niceWedgeStandardSubspace": r"\mathcal{K}",
+    "niceWedgeClosedSubmodule": r"\mathcal{K}", "niceWedgeGenSet": r"\mathcal{G}",
+    "gaussSmear": r"g", "gaussSmearC": r"g",
 }
 
 _IDENT = re.compile(r"[A-Za-z_][A-Za-z0-9_.'!?]*")

@@ -142,7 +142,7 @@ $$
 *thm* · [Curvature:1078 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L1078)  
 
 $$
-(\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\sigma \nu \mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-pdiffat}{\mathrm{PdiffAt}}\,(\lambda y \mapsto \href{#d-qiqth-curvature-ricci}{R_{{\sigma}{\nu}}({y})})\,\mathrm{lam}\,x
+(\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\sigma \nu \mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-pdiffat}{\mathrm{PdiffAt}}\,(\lambda y \mapsto \href{#d-qiqth-curvature-ricci}{R_{{\sigma}{\nu}}({y})})\,\mathrm{lam}\,x
 $$
 
 **proof uses** [`PdiffAt_riemann`](#d-qiqth-curvature-pdiffat-riemann) [`PdiffAt_sum`](#d-qiqth-curvature-pdiffat-sum) [`riemann`](#d-qiqth-curvature-riemann)
@@ -155,7 +155,7 @@ $$
 *thm* · [Curvature:668 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L668)  
 
 $$
-(\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\rho \sigma \mu \nu \mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-pdiffat}{\mathrm{PdiffAt}}\,(\lambda y \mapsto \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mu\,\nu\,y)\,\mathrm{lam}\,x
+(\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\rho \sigma \mu \nu \mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-pdiffat}{\mathrm{PdiffAt}}\,(\lambda y \mapsto \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mu\,\nu\,y)\,\mathrm{lam}\,x
 $$
 
 **proof uses** [`add`](#d-qiqth-curvature-pdiffat-add) [`mul`](#d-qiqth-curvature-pdiffat-mul) [`sub`](#d-qiqth-curvature-pdiffat-sub) [`PdiffAt_of_contDiff`](#d-qiqth-curvature-pdiffat-of-contdiff) [`PdiffAt_pd`](#d-qiqth-curvature-pdiffat-pd) [`PdiffAt_sum`](#d-qiqth-curvature-pdiffat-sum) [`pd`](#d-qiqth-curvature-pd)
@@ -180,7 +180,7 @@ $$
 *thm* · [Curvature:488 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L488)  
 
 $$
-\sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\rho\,\mathrm{lam}\,\kappa\,x \cdot \href{#d-qiqth-curvature-riemannquad}{\mathrm{riemannQuad}}\,g\,\mathrm{gi}\,\kappa\,\sigma\,\mathrm{mu}\,\nu\,x - \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\kappa\,\mathrm{lam}\,\sigma\,x \cdot \href{#d-qiqth-curvature-riemannquad}{\mathrm{riemannQuad}}\,g\,\mathrm{gi}\,\rho\,\kappa\,\mathrm{mu}\,\nu\,x + (\sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\rho\,\mathrm{mu}\,\kappa\,x \cdot \href{#d-qiqth-curvature-riemannquad}{\mathrm{riemannQuad}}\,g\,\mathrm{gi}\,\kappa\,\sigma\,\nu\,\mathrm{lam}\,x - \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\kappa\,\mathrm{mu}\,\sigma\,x \cdot \href{#d-qiqth-curvature-riemannquad}{\mathrm{riemannQuad}}\,g\,\mathrm{gi}\,\rho\,\kappa\,\nu\,\mathrm{lam}\,x) + (\sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\rho\,\nu\,\kappa\,x \cdot \href{#d-qiqth-curvature-riemannquad}{\mathrm{riemannQuad}}\,g\,\mathrm{gi}\,\kappa\,\sigma\,\mathrm{lam}\,\mathrm{mu}\,x - \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\kappa\,\nu\,\sigma\,x \cdot \href{#d-qiqth-curvature-riemannquad}{\mathrm{riemannQuad}}\,g\,\mathrm{gi}\,\rho\,\kappa\,\mathrm{lam}\,\mathrm{mu}\,x) = 0
+\sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\rho}}_{{\mathrm{lam}}{\kappa}}({x})} \cdot \href{#d-qiqth-curvature-riemannquad}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\kappa\,\sigma\,\mathrm{mu}\,\nu\,x - \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\kappa}}_{{\mathrm{lam}}{\sigma}}({x})} \cdot \href{#d-qiqth-curvature-riemannquad}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\kappa\,\mathrm{mu}\,\nu\,x + (\sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\rho}}_{{\mathrm{mu}}{\kappa}}({x})} \cdot \href{#d-qiqth-curvature-riemannquad}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\kappa\,\sigma\,\nu\,\mathrm{lam}\,x - \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\kappa}}_{{\mathrm{mu}}{\sigma}}({x})} \cdot \href{#d-qiqth-curvature-riemannquad}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\kappa\,\nu\,\mathrm{lam}\,x) + (\sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\rho}}_{{\nu}{\kappa}}({x})} \cdot \href{#d-qiqth-curvature-riemannquad}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\kappa\,\sigma\,\mathrm{lam}\,\mathrm{mu}\,x - \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\kappa}}_{{\nu}{\sigma}}({x})} \cdot \href{#d-qiqth-curvature-riemannquad}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\kappa\,\mathrm{lam}\,\mathrm{mu}\,x) = 0
 $$
 
 **statement uses** [`Point`](#d-qiqth-curvature-point) [`christoffel`](#d-qiqth-curvature-christoffel) [`riemannQuad`](#d-qiqth-curvature-riemannquad)
@@ -192,7 +192,7 @@ $$
 *thm* · [Curvature:578 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L578)  
 
 $$
-(\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\rho \sigma \mathrm{lam} \mathrm{mu} \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \partial_{{\mathrm{lam}}}({\lambda y \mapsto \href{#d-qiqth-curvature-riemannquad}{\mathrm{riemannQuad}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mathrm{mu}\,\nu\,y})({x}) + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\rho\,\mathrm{lam}\,\kappa\,x \cdot \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\kappa\,\sigma\,\mathrm{mu}\,\nu\,x - \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\kappa\,\mathrm{lam}\,\sigma\,x \cdot \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\rho\,\kappa\,\mathrm{mu}\,\nu\,x + (\partial_{{\mathrm{mu}}}({\lambda y \mapsto \href{#d-qiqth-curvature-riemannquad}{\mathrm{riemannQuad}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\nu\,\mathrm{lam}\,y})({x}) + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\rho\,\mathrm{mu}\,\kappa\,x \cdot \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\kappa\,\sigma\,\nu\,\mathrm{lam}\,x - \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\kappa\,\mathrm{mu}\,\sigma\,x \cdot \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\rho\,\kappa\,\nu\,\mathrm{lam}\,x) + (\partial_{{\nu}}({\lambda y \mapsto \href{#d-qiqth-curvature-riemannquad}{\mathrm{riemannQuad}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mathrm{lam}\,\mathrm{mu}\,y})({x}) + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\rho\,\nu\,\kappa\,x \cdot \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\kappa\,\sigma\,\mathrm{lam}\,\mathrm{mu}\,x - \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\kappa\,\nu\,\sigma\,x \cdot \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\rho\,\kappa\,\mathrm{lam}\,\mathrm{mu}\,x) = 0
+(\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\rho \sigma \mathrm{lam} \mathrm{mu} \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \partial_{{\mathrm{lam}}}({\lambda y \mapsto \href{#d-qiqth-curvature-riemannquad}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mathrm{mu}\,\nu\,y})({x}) + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\rho}}_{{\mathrm{lam}}{\kappa}}({x})} \cdot \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\kappa\,\sigma\,\mathrm{mu}\,\nu\,x - \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\kappa}}_{{\mathrm{lam}}{\sigma}}({x})} \cdot \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\rho\,\kappa\,\mathrm{mu}\,\nu\,x + (\partial_{{\mathrm{mu}}}({\lambda y \mapsto \href{#d-qiqth-curvature-riemannquad}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\nu\,\mathrm{lam}\,y})({x}) + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\rho}}_{{\mathrm{mu}}{\kappa}}({x})} \cdot \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\kappa\,\sigma\,\nu\,\mathrm{lam}\,x - \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\kappa}}_{{\mathrm{mu}}{\sigma}}({x})} \cdot \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\rho\,\kappa\,\nu\,\mathrm{lam}\,x) + (\partial_{{\nu}}({\lambda y \mapsto \href{#d-qiqth-curvature-riemannquad}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mathrm{lam}\,\mathrm{mu}\,y})({x}) + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\rho}}_{{\nu}{\kappa}}({x})} \cdot \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\kappa\,\sigma\,\mathrm{lam}\,\mathrm{mu}\,x - \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\kappa}}_{{\nu}{\sigma}}({x})} \cdot \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\rho\,\kappa\,\mathrm{lam}\,\mathrm{mu}\,x) = 0
 $$
 
 **proof uses** [`pd_riemannQuad`](#d-qiqth-curvature-pd-riemannquad)
@@ -205,7 +205,7 @@ $$
 *thm* · [Curvature:460 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L460)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (\rho \sigma \mathrm{lam} \mathrm{mu} \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\kappa\,\mathrm{lam}\,\mathrm{mu}\,x \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\kappa\,\nu\,x + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\kappa\,\mathrm{lam}\,\nu\,x \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mathrm{mu}\,\kappa\,x + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\kappa\,\mathrm{mu}\,\nu\,x \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\kappa\,\mathrm{lam}\,x + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\kappa\,\mathrm{mu}\,\mathrm{lam}\,x \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\nu\,\kappa\,x + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\kappa\,\nu\,\mathrm{lam}\,x \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\kappa\,\mathrm{mu}\,x + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\kappa\,\nu\,\mathrm{mu}\,x \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mathrm{lam}\,\kappa\,x = 0
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (\rho \sigma \mathrm{lam} \mathrm{mu} \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\kappa}}_{{\mathrm{lam}}{\mathrm{mu}}}({x})} \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\kappa\,\nu\,x + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\kappa}}_{{\mathrm{lam}}{\nu}}({x})} \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mathrm{mu}\,\kappa\,x + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\kappa}}_{{\mathrm{mu}}{\nu}}({x})} \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\kappa\,\mathrm{lam}\,x + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\kappa}}_{{\mathrm{mu}}{\mathrm{lam}}}({x})} \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\nu\,\kappa\,x + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\kappa}}_{{\nu}{\mathrm{lam}}}({x})} \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\kappa\,\mathrm{mu}\,x + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\kappa}}_{{\nu}{\mathrm{mu}}}({x})} \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mathrm{lam}\,\kappa\,x = 0
 $$
 
 **proof uses** [`christoffel_symm`](#d-qiqth-curvature-christoffel-symm) [`riemann_antisymm`](#d-qiqth-curvature-riemann-antisymm)
@@ -218,7 +218,7 @@ $$
 *thm* · [ChristoffelSmooth:31 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ChristoffelSmooth.lean#L31)  
 
 $$
-(\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to \forall (\mu \nu \rho : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\mu\,\nu\,\rho\,y})\in C^{\infty}
+(\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to \forall (\mu \nu \rho : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\mu}}_{{\nu}{\rho}}({y})}})\in C^{\infty}
 $$
 
 **proof uses** [`contDiff_pd`](#d-qiqth-curvature-contdiff-pd) [`pd`](#d-qiqth-curvature-pd)
@@ -231,7 +231,7 @@ $$
 *thm* · [Curvature:310 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L310)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), (\forall (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({x}) \cdot g^{{\sigma}{b}}({x}) = \delta_{ab}) \to \forall (\nu \mathrm{lam} \mathrm{mu} : \mathrm{Fin}\,n), \sum_{\sigma} g_{{\sigma}{\nu}}({x}) \cdot \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\sigma\,\mathrm{lam}\,\mathrm{mu}\,x = 1/2 \cdot (\href{#d-qiqth-curvature-pd}{\partial_{{\mathrm{lam}}}({\lambda y \mapsto g_{{\nu}{\mathrm{mu}}}({y})})({x})} + \href{#d-qiqth-curvature-pd}{\partial_{{\mathrm{mu}}}({\lambda y \mapsto g_{{\nu}{\mathrm{lam}}}({y})})({x})} - \href{#d-qiqth-curvature-pd}{\partial_{{\nu}}({\lambda y \mapsto g_{{\mathrm{lam}}{\mathrm{mu}}}({y})})({x})})
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), (\forall (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({x}) \cdot g^{{\sigma}{b}}({x}) = \delta_{ab}) \to \forall (\nu \mathrm{lam} \mathrm{mu} : \mathrm{Fin}\,n), \sum_{\sigma} g_{{\sigma}{\nu}}({x}) \cdot \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\sigma}}_{{\mathrm{lam}}{\mathrm{mu}}}({x})} = 1/2 \cdot (\href{#d-qiqth-curvature-pd}{\partial_{{\mathrm{lam}}}({\lambda y \mapsto g_{{\nu}{\mathrm{mu}}}({y})})({x})} + \href{#d-qiqth-curvature-pd}{\partial_{{\mathrm{mu}}}({\lambda y \mapsto g_{{\nu}{\mathrm{lam}}}({y})})({x})} - \href{#d-qiqth-curvature-pd}{\partial_{{\nu}}({\lambda y \mapsto g_{{\mathrm{lam}}{\mathrm{mu}}}({y})})({x})})
 $$
 
 **proof uses** [`inv_contract`](#d-qiqth-curvature-inv-contract)
@@ -244,7 +244,7 @@ $$
 *thm* · [Curvature:153 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L153)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (\mu \nu \rho : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\mu\,\nu\,\rho\,x = \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\mu\,\rho\,\nu\,x
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (\mu \nu \rho : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\mu}}_{{\nu}{\rho}}({x})} = \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\mu}}_{{\rho}{\nu}}({x})}
 $$
 
 **proof uses** [`pd`](#d-qiqth-curvature-pd)
@@ -283,7 +283,7 @@ $$
 *thm* · [Raychaudhuri:115 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Raychaudhuri.lean#L115)  
 
 $$
-(\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\mu} \href{#d-qiqth-curvature-covderiv2vec}{\mathrm{covDeriv2Vec}}\,g\,\mathrm{gi}\,V\,\nu\,\mu\,\mu\,x = \partial_{{\nu}}({\lambda y \mapsto \href{#d-qiqth-curvature-expansion}{\theta({y})}})({x})
+(\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\mu} \href{#d-qiqth-curvature-covderiv2vec}{\mathrm{covDeriv2Vec}}\,g\,\mathrm{gi}\,V\,\nu\,\mu\,\mu\,x = \partial_{{\nu}}({\lambda y \mapsto \href{#d-qiqth-curvature-expansion}{\theta({y})}})({x})
 $$
 
 **proof uses** [`PdiffAt`](#d-qiqth-curvature-pdiffat) [`add`](#d-qiqth-curvature-pdiffat-add) [`mul`](#d-qiqth-curvature-pdiffat-mul) [`PdiffAt_of_contDiff`](#d-qiqth-curvature-pdiffat-of-contdiff) [`PdiffAt_pd`](#d-qiqth-curvature-pdiffat-pd) [`PdiffAt_sum`](#d-qiqth-curvature-pdiffat-sum) [`covDerivVec`](#d-qiqth-curvature-covderivvec) [`pd_sum`](#d-qiqth-curvature-pd-sum)
@@ -296,7 +296,7 @@ $$
 *thm* · [Curvature:703 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L703)  
 
 $$
-(\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\mathrm{lam} \rho \sigma \mu \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-covderivriem}{\mathrm{covDerivRiem}}\,g\,\mathrm{gi}\,\mathrm{lam}\,\rho\,\sigma\,\mu\,\nu\,x + \href{#d-qiqth-curvature-covderivriem}{\mathrm{covDerivRiem}}\,g\,\mathrm{gi}\,\mathrm{lam}\,\rho\,\sigma\,\nu\,\mu\,x = 0
+(\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\mathrm{lam} \rho \sigma \mu \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-covderivriem}{\nabla\mathrm{Riem}}\,g\,\mathrm{gi}\,\mathrm{lam}\,\rho\,\sigma\,\mu\,\nu\,x + \href{#d-qiqth-curvature-covderivriem}{\nabla\mathrm{Riem}}\,g\,\mathrm{gi}\,\mathrm{lam}\,\rho\,\sigma\,\nu\,\mu\,x = 0
 $$
 
 **proof uses** [`PdiffAt_riemann`](#d-qiqth-curvature-pdiffat-riemann) [`pd`](#d-qiqth-curvature-pd) [`pd_const_mul`](#d-qiqth-curvature-pd-const-mul) [`riemann`](#d-qiqth-curvature-riemann) [`riemann_antisymm`](#d-qiqth-curvature-riemann-antisymm)
@@ -309,7 +309,7 @@ $$
 *thm* · [Curvature:678 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L678)  
 
 $$
-(\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\mathrm{lam} \sigma \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\rho} \href{#d-qiqth-curvature-covderivriem}{\mathrm{covDerivRiem}}\,g\,\mathrm{gi}\,\mathrm{lam}\,\rho\,\sigma\,\rho\,\nu\,x = \href{#d-qiqth-curvature-covderiv02}{\mathrm{covDeriv02}}\,g\,\mathrm{gi}\,(\lambda y a b \mapsto \href{#d-qiqth-curvature-ricci}{R_{{a}{b}}({y})})\,\mathrm{lam}\,\sigma\,\nu\,x
+(\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\mathrm{lam} \sigma \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\rho} \href{#d-qiqth-curvature-covderivriem}{\nabla\mathrm{Riem}}\,g\,\mathrm{gi}\,\mathrm{lam}\,\rho\,\sigma\,\rho\,\nu\,x = \href{#d-qiqth-curvature-covderiv02}{\mathrm{covDeriv02}}\,g\,\mathrm{gi}\,(\lambda y a b \mapsto \href{#d-qiqth-curvature-ricci}{R_{{a}{b}}({y})})\,\mathrm{lam}\,\sigma\,\nu\,x
 $$
 
 **proof uses** [`PdiffAt_riemann`](#d-qiqth-curvature-pdiffat-riemann) [`pd`](#d-qiqth-curvature-pd) [`pd_sum`](#d-qiqth-curvature-pd-sum) [`riemann`](#d-qiqth-curvature-riemann)
@@ -322,7 +322,7 @@ $$
 *thm* · [Curvature:734 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L734)  
 
 $$
-(\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\mathrm{dir} \sigma \mu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\rho} \href{#d-qiqth-curvature-covderivriem}{\mathrm{covDerivRiem}}\,g\,\mathrm{gi}\,\mathrm{dir}\,\rho\,\sigma\,\mu\,\rho\,x = -\href{#d-qiqth-curvature-covderiv02}{\mathrm{covDeriv02}}\,g\,\mathrm{gi}\,(\lambda y a b \mapsto \href{#d-qiqth-curvature-ricci}{R_{{a}{b}}({y})})\,\mathrm{dir}\,\sigma\,\mu\,x
+(\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\mathrm{dir} \sigma \mu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\rho} \href{#d-qiqth-curvature-covderivriem}{\nabla\mathrm{Riem}}\,g\,\mathrm{gi}\,\mathrm{dir}\,\rho\,\sigma\,\mu\,\rho\,x = -\href{#d-qiqth-curvature-covderiv02}{\mathrm{covDeriv02}}\,g\,\mathrm{gi}\,(\lambda y a b \mapsto \href{#d-qiqth-curvature-ricci}{R_{{a}{b}}({y})})\,\mathrm{dir}\,\sigma\,\mu\,x
 $$
 
 **proof uses** [`covDerivRiem_antisymm`](#d-qiqth-curvature-covderivriem-antisymm) [`covDerivRiem_contract`](#d-qiqth-curvature-covderivriem-contract)
@@ -374,7 +374,7 @@ $$
 *thm* · [EinsteinFieldEquation:93 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/EinsteinFieldEquation.lean#L93)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\rho} \sum_{\sigma} \sum_{\nu} g^{{\sigma}{\nu}}({x}) \cdot \href{#d-qiqth-curvature-covderivriem}{\mathrm{covDerivRiem}}\,g\,\mathrm{gi}\,\rho\,\rho\,\sigma\,\nu\,\mathrm{lam}\,x = -(\nabla\!\cdot {\lambda y a b \mapsto \href{#d-qiqth-curvature-ricci}{R_{{a}{b}}({y})}})_{{\mathrm{lam}}}({x})
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\rho} \sum_{\sigma} \sum_{\nu} g^{{\sigma}{\nu}}({x}) \cdot \href{#d-qiqth-curvature-covderivriem}{\nabla\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\rho\,\sigma\,\nu\,\mathrm{lam}\,x = -(\nabla\!\cdot {\lambda y a b \mapsto \href{#d-qiqth-curvature-ricci}{R_{{a}{b}}({y})}})_{{\mathrm{lam}}}({x})
 $$
 
 **proof uses** [`covDeriv02`](#d-qiqth-curvature-covderiv02) [`gi_trace_covDerivRiem_ricci`](#d-qiqth-curvature-gi-trace-covderivriem-ricci) [`pd`](#d-qiqth-curvature-pd)
@@ -400,7 +400,7 @@ $$
 *thm* · [EinsteinFieldEquation:269 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/EinsteinFieldEquation.lean#L269)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (T : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathrm{Fin}\,n \to \mathrm{Fin}\,n \to \mathbb{R}) (f : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathbb{R}) (a : \mathbb{R}) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), (\forall (\rho : \mathrm{Fin}\,n), \href{#d-qiqth-curvature-pdiffat}{\mathrm{PdiffAt}}\,f\,\rho\,x) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a^{\prime} b : \mathrm{Fin}\,n), a \cdot T_{{a^{\prime}}{b}}({y}) = \href{#d-qiqth-curvature-ricci}{R_{{a^{\prime}}{b}}({y})} + f\,y \cdot g_{{a^{\prime}}{b}}({y})) \to (\forall (\nu : \mathrm{Fin}\,n), \href{#d-qiqth-curvature-div02}{(\nabla\!\cdot {\lambda y a^{\prime} b \mapsto a \cdot T_{{a^{\prime}}{b}}({y})})_{{\nu}}({x})} = 0) \to (\forall (\mu \nu : \mathrm{Fin}\,n), a \cdot T_{{\mu}{\nu}}({x}) = \href{#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + (f\,x + 1/2 \cdot \href{#d-qiqth-curvature-scalarcurv}{R({x})}) \cdot g_{{\mu}{\nu}}({x})) \wedge \forall (\nu : \mathrm{Fin}\,n), \partial_{{\nu}}({\lambda y \mapsto f\,y + 1/2 \cdot \href{#d-qiqth-curvature-scalarcurv}{R({y})}})({x}) = 0
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (T : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathrm{Fin}\,n \to \mathrm{Fin}\,n \to \mathbb{R}) (f : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathbb{R}) (a : \mathbb{R}) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), (\forall (\rho : \mathrm{Fin}\,n), \href{#d-qiqth-curvature-pdiffat}{\mathrm{PdiffAt}}\,f\,\rho\,x) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a^{\prime} b : \mathrm{Fin}\,n), a \cdot T_{{a^{\prime}}{b}}({y}) = \href{#d-qiqth-curvature-ricci}{R_{{a^{\prime}}{b}}({y})} + f\,y \cdot g_{{a^{\prime}}{b}}({y})) \to (\forall (\nu : \mathrm{Fin}\,n), \href{#d-qiqth-curvature-div02}{(\nabla\!\cdot {\lambda y a^{\prime} b \mapsto a \cdot T_{{a^{\prime}}{b}}({y})})_{{\nu}}({x})} = 0) \to (\forall (\mu \nu : \mathrm{Fin}\,n), a \cdot T_{{\mu}{\nu}}({x}) = \href{#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + (f\,x + 1/2 \cdot \href{#d-qiqth-curvature-scalarcurv}{R({x})}) \cdot g_{{\mu}{\nu}}({x})) \wedge \forall (\nu : \mathrm{Fin}\,n), \partial_{{\nu}}({\lambda y \mapsto f\,y + 1/2 \cdot \href{#d-qiqth-curvature-scalarcurv}{R({y})}})({x}) = 0
 $$
 
 **proof uses** [`mul`](#d-qiqth-curvature-pdiffat-mul) [`PdiffAt_of_contDiff`](#d-qiqth-curvature-pdiffat-of-contdiff) [`PdiffAt_ricci`](#d-qiqth-curvature-pdiffat-ricci) [`PdiffAt_sum`](#d-qiqth-curvature-pdiffat-sum) [`einstein_field_equation`](#d-qiqth-curvature-einstein-field-equation) [`twice_contracted_bianchi`](#d-qiqth-curvature-twice-contracted-bianchi)
@@ -413,7 +413,7 @@ $$
 *thm* · [EinsteinFieldEquation:300 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/EinsteinFieldEquation.lean#L300)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (T : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathrm{Fin}\,n \to \mathrm{Fin}\,n \to \mathbb{R}) (f : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathbb{R}) (a : \mathbb{R}), (\forall (x : \href{#d-qiqth-curvature-point}{M^{{n}}}) (\rho : \mathrm{Fin}\,n), \href{#d-qiqth-curvature-pdiffat}{\mathrm{PdiffAt}}\,f\,\rho\,x) \to (\mathrm{Differentiable}\,\mathbb{R}\,\lambda y \mapsto f\,y + 1/2 \cdot \href{#d-qiqth-curvature-scalarcurv}{R({y})}) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a^{\prime} b : \mathrm{Fin}\,n), a \cdot T_{{a^{\prime}}{b}}({y}) = \href{#d-qiqth-curvature-ricci}{R_{{a^{\prime}}{b}}({y})} + f\,y \cdot g_{{a^{\prime}}{b}}({y})) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{n}}}) (\nu : \mathrm{Fin}\,n), \href{#d-qiqth-curvature-div02}{(\nabla\!\cdot {\lambda y a^{\prime} b \mapsto a \cdot T_{{a^{\prime}}{b}}({y})})_{{\nu}}({x})} = 0) \to \exists \Lambda, \forall (x : \href{#d-qiqth-curvature-point}{M^{{n}}}) (\mu \nu : \mathrm{Fin}\,n), a \cdot T_{{\mu}{\nu}}({x}) = \href{#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g_{{\mu}{\nu}}({x})
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (T : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathrm{Fin}\,n \to \mathrm{Fin}\,n \to \mathbb{R}) (f : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathbb{R}) (a : \mathbb{R}), (\forall (x : \href{#d-qiqth-curvature-point}{M^{{n}}}) (\rho : \mathrm{Fin}\,n), \href{#d-qiqth-curvature-pdiffat}{\mathrm{PdiffAt}}\,f\,\rho\,x) \to (\mathrm{Differentiable}\,\mathbb{R}\,\lambda y \mapsto f\,y + 1/2 \cdot \href{#d-qiqth-curvature-scalarcurv}{R({y})}) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a^{\prime} b : \mathrm{Fin}\,n), a \cdot T_{{a^{\prime}}{b}}({y}) = \href{#d-qiqth-curvature-ricci}{R_{{a^{\prime}}{b}}({y})} + f\,y \cdot g_{{a^{\prime}}{b}}({y})) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{n}}}) (\nu : \mathrm{Fin}\,n), \href{#d-qiqth-curvature-div02}{(\nabla\!\cdot {\lambda y a^{\prime} b \mapsto a \cdot T_{{a^{\prime}}{b}}({y})})_{{\nu}}({x})} = 0) \to \exists \Lambda, \forall (x : \href{#d-qiqth-curvature-point}{M^{{n}}}) (\mu \nu : \mathrm{Fin}\,n), a \cdot T_{{\mu}{\nu}}({x}) = \href{#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g_{{\mu}{\nu}}({x})
 $$
 
 **proof uses** [`const_of_pd_zero`](#d-qiqth-curvature-const-of-pd-zero) [`einstein_field_equation_real`](#d-qiqth-curvature-einstein-field-equation-real) [`pd`](#d-qiqth-curvature-pd)
@@ -426,7 +426,7 @@ $$
 *thm* · [Raychaudhuri:162 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Raychaudhuri.lean#L162)  
 
 $$
-(\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (\mu : \mathrm{Fin}\,n), \sum_{\nu} V\,y\,\nu \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({y})} = 0) \to \forall (\mu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\nu} (\href{#d-qiqth-curvature-pd}{\partial_{{\mu}}({\lambda y \mapsto V\,y\,\nu})({x})} \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({x})} + V\,x\,\nu \cdot \partial_{{\mu}}({\lambda y \mapsto \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({y})}})({x})) = 0
+(\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (\mu : \mathrm{Fin}\,n), \sum_{\nu} V\,y\,\nu \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({y})} = 0) \to \forall (\mu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\nu} (\href{#d-qiqth-curvature-pd}{\partial_{{\mu}}({\lambda y \mapsto V\,y\,\nu})({x})} \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({x})} + V\,x\,\nu \cdot \partial_{{\mu}}({\lambda y \mapsto \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({y})}})({x})) = 0
 $$
 
 **proof uses** [`PdiffAt`](#d-qiqth-curvature-pdiffat) [`add`](#d-qiqth-curvature-pdiffat-add) [`mul`](#d-qiqth-curvature-pdiffat-mul) [`PdiffAt_of_contDiff`](#d-qiqth-curvature-pdiffat-of-contdiff) [`PdiffAt_pd`](#d-qiqth-curvature-pdiffat-pd) [`PdiffAt_sum`](#d-qiqth-curvature-pdiffat-sum) [`pd_const`](#d-qiqth-curvature-pd-const) [`pd_mul`](#d-qiqth-curvature-pd-mul) [`pd_sum`](#d-qiqth-curvature-pd-sum)
@@ -439,7 +439,7 @@ $$
 *thm* · [Raychaudhuri:186 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Raychaudhuri.lean#L186)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (V : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathrm{Fin}\,n \to \mathbb{R}), (\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (\mu : \mathrm{Fin}\,n), \sum_{\nu} V\,y\,\nu \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({y})} = 0) \to \forall (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\nu} \sum_{\mu} V\,x\,\nu \cdot \href{#d-qiqth-curvature-covderiv2vec}{\mathrm{covDeriv2Vec}}\,g\,\mathrm{gi}\,V\,\mu\,\nu\,\mu\,x = -\sum_{\mu} \sum_{\nu} \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\mu}}{}^{{\nu}}({x})} \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({x})}
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (V : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathrm{Fin}\,n \to \mathbb{R}), (\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (\mu : \mathrm{Fin}\,n), \sum_{\nu} V\,y\,\nu \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({y})} = 0) \to \forall (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\nu} \sum_{\mu} V\,x\,\nu \cdot \href{#d-qiqth-curvature-covderiv2vec}{\mathrm{covDeriv2Vec}}\,g\,\mathrm{gi}\,V\,\mu\,\nu\,\mu\,x = -\sum_{\mu} \sum_{\nu} \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\mu}}{}^{{\nu}}({x})} \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({x})}
 $$
 
 **proof uses** [`geodesic_divergence_leibniz`](#d-qiqth-curvature-geodesic-divergence-leibniz) [`pd`](#d-qiqth-curvature-pd)
@@ -452,7 +452,7 @@ $$
 *thm* · [Curvature:1151 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L1151)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\rho \mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\sigma} \sum_{\nu} g^{{\sigma}{\nu}}({x}) \cdot \href{#d-qiqth-curvature-covderivriem}{\mathrm{covDerivRiem}}\,g\,\mathrm{gi}\,\rho\,\rho\,\sigma\,\nu\,\mathrm{lam}\,x = \partial_{{\rho}}({\lambda y \mapsto \sum_{\sigma} \sum_{\nu} g^{{\sigma}{\nu}}({y}) \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\nu\,\mathrm{lam}\,y})({x}) + \sum_{\sigma} \sum_{\nu} \sum_{\kappa} g^{{\sigma}{\nu}}({x}) \cdot (\href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\rho\,\rho\,\kappa\,x \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\kappa\,\sigma\,\nu\,\mathrm{lam}\,x) - \sum_{\sigma} \sum_{\nu} \sum_{\kappa} g^{{\sigma}{\nu}}({x}) \cdot (\href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\kappa\,\rho\,\mathrm{lam}\,x \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\nu\,\kappa\,x)
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\rho \mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\sigma} \sum_{\nu} g^{{\sigma}{\nu}}({x}) \cdot \href{#d-qiqth-curvature-covderivriem}{\nabla\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\rho\,\sigma\,\nu\,\mathrm{lam}\,x = \partial_{{\rho}}({\lambda y \mapsto \sum_{\sigma} \sum_{\nu} g^{{\sigma}{\nu}}({y}) \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\nu\,\mathrm{lam}\,y})({x}) + \sum_{\sigma} \sum_{\nu} \sum_{\kappa} g^{{\sigma}{\nu}}({x}) \cdot (\href{#d-qiqth-curvature-christoffel}{\Gamma^{{\rho}}_{{\rho}{\kappa}}({x})} \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\kappa\,\sigma\,\nu\,\mathrm{lam}\,x) - \sum_{\sigma} \sum_{\nu} \sum_{\kappa} g^{{\sigma}{\nu}}({x}) \cdot (\href{#d-qiqth-curvature-christoffel}{\Gamma^{{\kappa}}_{{\rho}{\mathrm{lam}}}({x})} \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\nu\,\kappa\,x)
 $$
 
 **proof uses** [`PdiffAt`](#d-qiqth-curvature-pdiffat) [`mul`](#d-qiqth-curvature-pdiffat-mul) [`PdiffAt_of_contDiff`](#d-qiqth-curvature-pdiffat-of-contdiff) [`PdiffAt_riemann`](#d-qiqth-curvature-pdiffat-riemann) [`PdiffAt_sum`](#d-qiqth-curvature-pdiffat-sum) [`covDeriv20`](#d-qiqth-curvature-covderiv20) [`inv_metric_compat`](#d-qiqth-curvature-inv-metric-compat) [`pd_mul`](#d-qiqth-curvature-pd-mul) [`pd_sum`](#d-qiqth-curvature-pd-sum)
@@ -465,7 +465,7 @@ $$
 *thm* · [Curvature:1217 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L1217)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\rho \mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\sigma} \sum_{\nu} g^{{\sigma}{\nu}}({x}) \cdot \href{#d-qiqth-curvature-covderivriem}{\mathrm{covDerivRiem}}\,g\,\mathrm{gi}\,\rho\,\rho\,\sigma\,\nu\,\mathrm{lam}\,x = -\sum_{\beta} g^{{\rho}{\beta}}({x}) \cdot \partial_{{\rho}}({\lambda y \mapsto \href{#d-qiqth-curvature-ricci}{R_{{\beta}{\mathrm{lam}}}({y})}})({x}) + \sum_{\beta} \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\beta\,\rho\,\kappa\,x \cdot g^{{\rho}{\kappa}}({x}) \cdot \href{#d-qiqth-curvature-ricci}{R_{{\beta}{\mathrm{lam}}}({x})} + \sum_{\beta} \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\kappa\,\rho\,\mathrm{lam}\,x \cdot g^{{\rho}{\beta}}({x}) \cdot \href{#d-qiqth-curvature-ricci}{R_{{\beta}{\kappa}}({x})}
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\rho \mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\sigma} \sum_{\nu} g^{{\sigma}{\nu}}({x}) \cdot \href{#d-qiqth-curvature-covderivriem}{\nabla\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\rho\,\sigma\,\nu\,\mathrm{lam}\,x = -\sum_{\beta} g^{{\rho}{\beta}}({x}) \cdot \partial_{{\rho}}({\lambda y \mapsto \href{#d-qiqth-curvature-ricci}{R_{{\beta}{\mathrm{lam}}}({y})}})({x}) + \sum_{\beta} \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\beta}}_{{\rho}{\kappa}}({x})} \cdot g^{{\rho}{\kappa}}({x}) \cdot \href{#d-qiqth-curvature-ricci}{R_{{\beta}{\mathrm{lam}}}({x})} + \sum_{\beta} \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\kappa}}_{{\rho}{\mathrm{lam}}}({x})} \cdot g^{{\rho}{\beta}}({x}) \cdot \href{#d-qiqth-curvature-ricci}{R_{{\beta}{\kappa}}({x})}
 $$
 
 **proof uses** [`PdiffAt`](#d-qiqth-curvature-pdiffat) [`mul`](#d-qiqth-curvature-pdiffat-mul) [`PdiffAt_of_contDiff`](#d-qiqth-curvature-pdiffat-of-contdiff) [`PdiffAt_ricci`](#d-qiqth-curvature-pdiffat-ricci) [`PdiffAt_sum`](#d-qiqth-curvature-pdiffat-sum) [`covDeriv20`](#d-qiqth-curvature-covderiv20) [`gi_trace_covDerivRiem`](#d-qiqth-curvature-gi-trace-covderivriem) [`inv_metric_compat`](#d-qiqth-curvature-inv-metric-compat) [`pd_const_mul`](#d-qiqth-curvature-pd-const-mul) [`pd_mul`](#d-qiqth-curvature-pd-mul) [`pd_sum`](#d-qiqth-curvature-pd-sum) [`ricci_gi_raise`](#d-qiqth-curvature-ricci-gi-raise) [`riemann`](#d-qiqth-curvature-riemann)
@@ -478,7 +478,7 @@ $$
 *thm* · [Curvature:1084 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L1084)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\sigma} \sum_{\nu} g^{{\sigma}{\nu}}({x}) \cdot \href{#d-qiqth-curvature-covderiv02}{\mathrm{covDeriv02}}\,g\,\mathrm{gi}\,(\lambda y a b \mapsto \href{#d-qiqth-curvature-ricci}{R_{{a}{b}}({y})})\,\mathrm{lam}\,\sigma\,\nu\,x = \partial_{{\mathrm{lam}}}({\lambda y \mapsto \href{#d-qiqth-curvature-scalarcurv}{R({y})}})({x})
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\sigma} \sum_{\nu} g^{{\sigma}{\nu}}({x}) \cdot \href{#d-qiqth-curvature-covderiv02}{\mathrm{covDeriv02}}\,g\,\mathrm{gi}\,(\lambda y a b \mapsto \href{#d-qiqth-curvature-ricci}{R_{{a}{b}}({y})})\,\mathrm{lam}\,\sigma\,\nu\,x = \partial_{{\mathrm{lam}}}({\lambda y \mapsto \href{#d-qiqth-curvature-scalarcurv}{R({y})}})({x})
 $$
 
 **proof uses** [`PdiffAt`](#d-qiqth-curvature-pdiffat) [`mul`](#d-qiqth-curvature-pdiffat-mul) [`PdiffAt_of_contDiff`](#d-qiqth-curvature-pdiffat-of-contdiff) [`PdiffAt_ricci`](#d-qiqth-curvature-pdiffat-ricci) [`PdiffAt_sum`](#d-qiqth-curvature-pdiffat-sum) [`covDeriv20`](#d-qiqth-curvature-covderiv20) [`inv_metric_compat`](#d-qiqth-curvature-inv-metric-compat) [`pd_mul`](#d-qiqth-curvature-pd-mul) [`pd_sum`](#d-qiqth-curvature-pd-sum)
@@ -529,7 +529,7 @@ $$
 *thm* · [EinsteinFieldEquation:361 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/EinsteinFieldEquation.lean#L361)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a b : \mathrm{Fin}\,4), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a b : \mathrm{Fin}\,4), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,4), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,4), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,4), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (T : \href{#d-qiqth-curvature-point}{M^{{4}}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}) (a : \mathbb{R}), (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a^{\prime} b : \mathrm{Fin}\,4), T_{{a^{\prime}}{b}}({x}) = T_{{b}{a^{\prime}}}({x})) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a^{\prime} b : \mathrm{Fin}\,4), \href{#d-qiqth-curvature-ricci}{R_{{a^{\prime}}{b}}({x})} = \href{#d-qiqth-curvature-ricci}{R_{{b}{a^{\prime}}}({x})}) \to \forall (P \mathrm{Pinv} : \href{#d-qiqth-curvature-point}{M^{{4}}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}), (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (i j : \mathrm{Fin}\,4), \sum_{k} P_{{i}{k}}({x}) \cdot (P^{-1})_{{k}{j}}({x}) = \delta_{ij}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (i j : \mathrm{Fin}\,4), \sum_{k} (P^{-1})_{{i}{k}}({x}) \cdot P_{{k}{j}}({x}) = \delta_{ij}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (i j : \mathrm{Fin}\,4), g_{{i}{j}}({x}) = \sum_{k} \sum_{l} P_{{k}{i}}({x}) \cdot \href{#d-qiqth-einsteineos-gm}{\eta_{{k}{l}}} \cdot P_{{l}{j}}({x})) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to ({\lambda a^{\prime} b \mapsto a \cdot T_{{a^{\prime}}{b}}({x}) - \href{#d-qiqth-curvature-ricci}{R_{{a^{\prime}}{b}}({x})}})({v},{v}) = 0) \to (\forall (f : \href{#d-qiqth-curvature-point}{M^{{4}}} \to \mathbb{R}), (\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a^{\prime} b : \mathrm{Fin}\,4), a \cdot T_{{a^{\prime}}{b}}({y}) = \href{#d-qiqth-curvature-ricci}{R_{{a^{\prime}}{b}}({y})} + f\,y \cdot g_{{a^{\prime}}{b}}({y})) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (\rho : \mathrm{Fin}\,4), \href{#d-qiqth-curvature-pdiffat}{\mathrm{PdiffAt}}\,f\,\rho\,x) \wedge \mathrm{Differentiable}\,\mathbb{R}\,\lambda y \mapsto f\,y + 1/2 \cdot \href{#d-qiqth-curvature-scalarcurv}{R({y})}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (\nu : \mathrm{Fin}\,4), \href{#d-qiqth-curvature-div02}{(\nabla\!\cdot {\lambda y a^{\prime} b \mapsto a \cdot T_{{a^{\prime}}{b}}({y})})_{{\nu}}({x})} = 0) \to \exists \Lambda, \forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (\mu \nu : \mathrm{Fin}\,4), a \cdot T_{{\mu}{\nu}}({x}) = \href{#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g_{{\mu}{\nu}}({x})
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a b : \mathrm{Fin}\,4), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a b : \mathrm{Fin}\,4), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,4), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,4), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,4), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (T : \href{#d-qiqth-curvature-point}{M^{{4}}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}) (a : \mathbb{R}), (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a^{\prime} b : \mathrm{Fin}\,4), T_{{a^{\prime}}{b}}({x}) = T_{{b}{a^{\prime}}}({x})) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a^{\prime} b : \mathrm{Fin}\,4), \href{#d-qiqth-curvature-ricci}{R_{{a^{\prime}}{b}}({x})} = \href{#d-qiqth-curvature-ricci}{R_{{b}{a^{\prime}}}({x})}) \to \forall (P \mathrm{Pinv} : \href{#d-qiqth-curvature-point}{M^{{4}}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}), (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (i j : \mathrm{Fin}\,4), \sum_{k} P_{{i}{k}}({x}) \cdot (P^{-1})_{{k}{j}}({x}) = \delta_{ij}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (i j : \mathrm{Fin}\,4), \sum_{k} (P^{-1})_{{i}{k}}({x}) \cdot P_{{k}{j}}({x}) = \delta_{ij}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (i j : \mathrm{Fin}\,4), g_{{i}{j}}({x}) = \sum_{k} \sum_{l} P_{{k}{i}}({x}) \cdot \href{#d-qiqth-einsteineos-gm}{\eta_{{k}{l}}} \cdot P_{{l}{j}}({x})) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to ({\lambda a^{\prime} b \mapsto a \cdot T_{{a^{\prime}}{b}}({x}) - \href{#d-qiqth-curvature-ricci}{R_{{a^{\prime}}{b}}({x})}})({v},{v}) = 0) \to (\forall (f : \href{#d-qiqth-curvature-point}{M^{{4}}} \to \mathbb{R}), (\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a^{\prime} b : \mathrm{Fin}\,4), a \cdot T_{{a^{\prime}}{b}}({y}) = \href{#d-qiqth-curvature-ricci}{R_{{a^{\prime}}{b}}({y})} + f\,y \cdot g_{{a^{\prime}}{b}}({y})) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (\rho : \mathrm{Fin}\,4), \href{#d-qiqth-curvature-pdiffat}{\mathrm{PdiffAt}}\,f\,\rho\,x) \wedge \mathrm{Differentiable}\,\mathbb{R}\,\lambda y \mapsto f\,y + 1/2 \cdot \href{#d-qiqth-curvature-scalarcurv}{R({y})}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (\nu : \mathrm{Fin}\,4), \href{#d-qiqth-curvature-div02}{(\nabla\!\cdot {\lambda y a^{\prime} b \mapsto a \cdot T_{{a^{\prime}}{b}}({y})})_{{\nu}}({x})} = 0) \to \exists \Lambda, \forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (\mu \nu : \mathrm{Fin}\,4), a \cdot T_{{\mu}{\nu}}({x}) = \href{#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g_{{\mu}{\nu}}({x})
 $$
 
 **proof uses** [`crux_of_pernull`](#d-qiqth-curvature-crux-of-pernull) [`einstein_field_equation_real_global`](#d-qiqth-curvature-einstein-field-equation-real-global)
@@ -568,7 +568,7 @@ $$
 *thm* · [Curvature:937 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L937)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\rho \sigma \mu \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\alpha} g_{{\rho}{\alpha}}({x}) \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\alpha\,\sigma\,\mu\,\nu\,x + \sum_{\alpha} g_{{\sigma}{\alpha}}({x}) \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\alpha\,\rho\,\mu\,\nu\,x = 0
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\rho \sigma \mu \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\alpha} g_{{\rho}{\alpha}}({x}) \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\alpha\,\sigma\,\mu\,\nu\,x + \sum_{\alpha} g_{{\sigma}{\alpha}}({x}) \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\alpha\,\rho\,\mu\,\nu\,x = 0
 $$
 
 **proof uses** [`PdiffAt`](#d-qiqth-curvature-pdiffat) [`mul`](#d-qiqth-curvature-pdiffat-mul) [`PdiffAt_of_contDiff`](#d-qiqth-curvature-pdiffat-of-contdiff) [`PdiffAt_sum`](#d-qiqth-curvature-pdiffat-sum) [`covDeriv02`](#d-qiqth-curvature-covderiv02) [`lowered_riemann_eq`](#d-qiqth-curvature-lowered-riemann-eq) [`metric_compat`](#d-qiqth-curvature-metric-compat) [`pd`](#d-qiqth-curvature-pd) [`pd_add`](#d-qiqth-curvature-pd-add) [`pd_comm`](#d-qiqth-curvature-pd-comm)
@@ -581,7 +581,7 @@ $$
 *thm* · [Curvature:865 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L865)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\rho \sigma \mu \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\alpha} g_{{\rho}{\alpha}}({x}) \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\alpha\,\sigma\,\mu\,\nu\,x = \partial_{{\mu}}({\lambda y \mapsto \sum_{\alpha} g_{{\rho}{\alpha}}({y}) \cdot \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\alpha\,\nu\,\sigma\,y})({x}) - \partial_{{\nu}}({\lambda y \mapsto \sum_{\alpha} g_{{\rho}{\alpha}}({y}) \cdot \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\alpha\,\mu\,\sigma\,y})({x}) - \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\kappa\,\mu\,\rho\,x \cdot \sum_{\alpha} g_{{\alpha}{\kappa}}({x}) \cdot \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\alpha\,\nu\,\sigma\,x + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\kappa\,\nu\,\rho\,x \cdot \sum_{\alpha} g_{{\alpha}{\kappa}}({x}) \cdot \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\alpha\,\mu\,\sigma\,x
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\rho \sigma \mu \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\alpha} g_{{\rho}{\alpha}}({x}) \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\alpha\,\sigma\,\mu\,\nu\,x = \partial_{{\mu}}({\lambda y \mapsto \sum_{\alpha} g_{{\rho}{\alpha}}({y}) \cdot \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\alpha}}_{{\nu}{\sigma}}({y})}})({x}) - \partial_{{\nu}}({\lambda y \mapsto \sum_{\alpha} g_{{\rho}{\alpha}}({y}) \cdot \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\alpha}}_{{\mu}{\sigma}}({y})}})({x}) - \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\kappa}}_{{\mu}{\rho}}({x})} \cdot \sum_{\alpha} g_{{\alpha}{\kappa}}({x}) \cdot \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\alpha}}_{{\nu}{\sigma}}({x})} + \sum_{\kappa} \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\kappa}}_{{\nu}{\rho}}({x})} \cdot \sum_{\alpha} g_{{\alpha}{\kappa}}({x}) \cdot \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\alpha}}_{{\mu}{\sigma}}({x})}
 $$
 
 **proof uses** [`mul`](#d-qiqth-curvature-pdiffat-mul) [`PdiffAt_of_contDiff`](#d-qiqth-curvature-pdiffat-of-contdiff) [`covDeriv02`](#d-qiqth-curvature-covderiv02) [`metric_compat`](#d-qiqth-curvature-metric-compat) [`pd_mul`](#d-qiqth-curvature-pd-mul) [`pd_sum`](#d-qiqth-curvature-pd-sum)
@@ -594,7 +594,7 @@ $$
 *thm* · [Curvature:988 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L988)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\beta \mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\sigma} \sum_{\nu} g^{{\sigma}{\nu}}({x}) \cdot \sum_{\rho} g_{{\beta}{\rho}}({x}) \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\nu\,\mathrm{lam}\,x = -\href{#d-qiqth-curvature-ricci}{R_{{\beta}{\mathrm{lam}}}({x})}
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\beta \mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\sigma} \sum_{\nu} g^{{\sigma}{\nu}}({x}) \cdot \sum_{\rho} g_{{\beta}{\rho}}({x}) \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\nu\,\mathrm{lam}\,x = -\href{#d-qiqth-curvature-ricci}{R_{{\beta}{\mathrm{lam}}}({x})}
 $$
 
 **proof uses** [`lowered_riemann_antisymm`](#d-qiqth-curvature-lowered-riemann-antisymm)
@@ -607,7 +607,7 @@ $$
 *thm* · [RicciSymm:21 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/RicciSymm.lean#L21)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (a b c d : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\alpha} g_{{a}{\alpha}}({x}) \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\alpha\,b\,c\,d\,x = \sum_{\alpha} g_{{c}{\alpha}}({x}) \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\alpha\,d\,a\,b\,x
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (a b c d : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\alpha} g_{{a}{\alpha}}({x}) \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\alpha\,b\,c\,d\,x = \sum_{\alpha} g_{{c}{\alpha}}({x}) \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\alpha\,d\,a\,b\,x
 $$
 
 **proof uses** [`lowered_riemann_antisymm`](#d-qiqth-curvature-lowered-riemann-antisymm) [`riemann_antisymm`](#d-qiqth-curvature-riemann-antisymm) [`riemann_first_bianchi`](#d-qiqth-curvature-riemann-first-bianchi)
@@ -694,7 +694,7 @@ $$
 *thm* · [Raychaudhuri:36 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Raychaudhuri.lean#L36)  
 
 $$
-(\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\mu \nu \rho : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \partial_{{\mu}}({\lambda y \mapsto \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\rho}}({y})}})({x}) = \partial_{{\mu}}({\lambda y \mapsto \href{#d-qiqth-curvature-pd}{\partial_{{\nu}}({\lambda z \mapsto V\,z\,\rho})({y})}})({x}) + \sum_{\sigma} (\partial_{{\mu}}({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\rho\,\nu\,\sigma\,y})({x}) \cdot V\,x\,\sigma + \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\rho\,\nu\,\sigma\,x \cdot \href{#d-qiqth-curvature-pd}{\partial_{{\mu}}({\lambda y \mapsto V\,y\,\sigma})({x})})
+(\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\mu \nu \rho : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \partial_{{\mu}}({\lambda y \mapsto \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\rho}}({y})}})({x}) = \partial_{{\mu}}({\lambda y \mapsto \href{#d-qiqth-curvature-pd}{\partial_{{\nu}}({\lambda z \mapsto V\,z\,\rho})({y})}})({x}) + \sum_{\sigma} (\partial_{{\mu}}({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\rho}}_{{\nu}{\sigma}}({y})}})({x}) \cdot V\,x\,\sigma + \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\rho}}_{{\nu}{\sigma}}({x})} \cdot \href{#d-qiqth-curvature-pd}{\partial_{{\mu}}({\lambda y \mapsto V\,y\,\sigma})({x})})
 $$
 
 **proof uses** [`PdiffAt`](#d-qiqth-curvature-pdiffat) [`mul`](#d-qiqth-curvature-pdiffat-mul) [`PdiffAt_of_contDiff`](#d-qiqth-curvature-pdiffat-of-contdiff) [`PdiffAt_pd`](#d-qiqth-curvature-pdiffat-pd) [`PdiffAt_sum`](#d-qiqth-curvature-pdiffat-sum) [`pd_add`](#d-qiqth-curvature-pd-add) [`pd_mul`](#d-qiqth-curvature-pd-mul) [`pd_sum`](#d-qiqth-curvature-pd-sum)
@@ -744,7 +744,7 @@ $$
 *thm* · [Curvature:554 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L554)  
 
 $$
-(\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\mathrm{lam} \rho \sigma \mu \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \partial_{{\mathrm{lam}}}({\lambda y \mapsto \href{#d-qiqth-curvature-riemannquad}{\mathrm{riemannQuad}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mu\,\nu\,y})({x}) = \sum_{l} (\partial_{{\mathrm{lam}}}({\lambda w \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\rho\,\mu\,l\,w})({x}) \cdot \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,l\,\nu\,\sigma\,x + \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\rho\,\mu\,l\,x \cdot \partial_{{\mathrm{lam}}}({\lambda w \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,l\,\nu\,\sigma\,w})({x}) - \partial_{{\mathrm{lam}}}({\lambda w \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\rho\,\nu\,l\,w})({x}) \cdot \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,l\,\mu\,\sigma\,x - \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,\rho\,\nu\,l\,x \cdot \partial_{{\mathrm{lam}}}({\lambda w \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,l\,\mu\,\sigma\,w})({x}))
+(\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\mathrm{lam} \rho \sigma \mu \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \partial_{{\mathrm{lam}}}({\lambda y \mapsto \href{#d-qiqth-curvature-riemannquad}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mu\,\nu\,y})({x}) = \sum_{l} (\partial_{{\mathrm{lam}}}({\lambda w \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\rho}}_{{\mu}{l}}({w})}})({x}) \cdot \href{#d-qiqth-curvature-christoffel}{\Gamma^{{l}}_{{\nu}{\sigma}}({x})} + \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\rho}}_{{\mu}{l}}({x})} \cdot \partial_{{\mathrm{lam}}}({\lambda w \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{l}}_{{\nu}{\sigma}}({w})}})({x}) - \partial_{{\mathrm{lam}}}({\lambda w \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\rho}}_{{\nu}{l}}({w})}})({x}) \cdot \href{#d-qiqth-curvature-christoffel}{\Gamma^{{l}}_{{\mu}{\sigma}}({x})} - \href{#d-qiqth-curvature-christoffel}{\Gamma^{{\rho}}_{{\nu}{l}}({x})} \cdot \partial_{{\mathrm{lam}}}({\lambda w \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{l}}_{{\mu}{\sigma}}({w})}})({x}))
 $$
 
 **proof uses** [`PdiffAt`](#d-qiqth-curvature-pdiffat) [`mul`](#d-qiqth-curvature-pdiffat-mul) [`sub`](#d-qiqth-curvature-pdiffat-sub) [`PdiffAt_of_contDiff`](#d-qiqth-curvature-pdiffat-of-contdiff) [`pd_mul`](#d-qiqth-curvature-pd-mul) [`pd_sub`](#d-qiqth-curvature-pd-sub) [`pd_sum`](#d-qiqth-curvature-pd-sum)
@@ -781,7 +781,7 @@ $$
 *thm* · [Raychaudhuri:134 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Raychaudhuri.lean#L134)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (V : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathrm{Fin}\,n \to \mathbb{R}), (\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\nu} V\,x\,\nu \cdot \partial_{{\nu}}({\lambda y \mapsto \href{#d-qiqth-curvature-expansion}{\theta({y})}})({x}) = \sum_{\nu} \sum_{\mu} V\,x\,\nu \cdot \href{#d-qiqth-curvature-covderiv2vec}{\mathrm{covDeriv2Vec}}\,g\,\mathrm{gi}\,V\,\mu\,\nu\,\mu\,x - \sum_{\nu} \sum_{\sigma} \href{#d-qiqth-curvature-ricci}{R_{{\sigma}{\nu}}({x})} \cdot V\,x\,\sigma \cdot V\,x\,\nu
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (V : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathrm{Fin}\,n \to \mathbb{R}), (\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\nu} V\,x\,\nu \cdot \partial_{{\nu}}({\lambda y \mapsto \href{#d-qiqth-curvature-expansion}{\theta({y})}})({x}) = \sum_{\nu} \sum_{\mu} V\,x\,\nu \cdot \href{#d-qiqth-curvature-covderiv2vec}{\mathrm{covDeriv2Vec}}\,g\,\mathrm{gi}\,V\,\mu\,\nu\,\mu\,x - \sum_{\nu} \sum_{\sigma} \href{#d-qiqth-curvature-ricci}{R_{{\sigma}{\nu}}({x})} \cdot V\,x\,\sigma \cdot V\,x\,\nu
 $$
 
 **proof uses** [`covDeriv2Vec_trace`](#d-qiqth-curvature-covderiv2vec-trace) [`ricci_identity_contracted`](#d-qiqth-curvature-ricci-identity-contracted)
@@ -794,7 +794,7 @@ $$
 *thm* · [Raychaudhuri:259 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Raychaudhuri.lean#L259)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (V : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathrm{Fin}\,n \to \mathbb{R}), (\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (\mu : \mathrm{Fin}\,n), \sum_{\nu} V\,y\,\nu \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({y})} = 0) \to \forall (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\mu} \sum_{\nu} \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\mu}}{}^{{\nu}}({x})} \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({x})} = 0 \to \sum_{\nu} V\,x\,\nu \cdot \partial_{{\nu}}({\lambda y \mapsto \href{#d-qiqth-curvature-expansion}{\theta({y})}})({x}) = -\sum_{\nu} \sum_{\sigma} \href{#d-qiqth-curvature-ricci}{R_{{\sigma}{\nu}}({x})} \cdot V\,x\,\sigma \cdot V\,x\,\nu
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (V : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathrm{Fin}\,n \to \mathbb{R}), (\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (\mu : \mathrm{Fin}\,n), \sum_{\nu} V\,y\,\nu \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({y})} = 0) \to \forall (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\mu} \sum_{\nu} \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\mu}}{}^{{\nu}}({x})} \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({x})} = 0 \to \sum_{\nu} V\,x\,\nu \cdot \partial_{{\nu}}({\lambda y \mapsto \href{#d-qiqth-curvature-expansion}{\theta({y})}})({x}) = -\sum_{\nu} \sum_{\sigma} \href{#d-qiqth-curvature-ricci}{R_{{\sigma}{\nu}}({x})} \cdot V\,x\,\sigma \cdot V\,x\,\nu
 $$
 
 **proof uses** [`raychaudhuri_geodesic`](#d-qiqth-curvature-raychaudhuri-geodesic)
@@ -807,7 +807,7 @@ $$
 *thm* · [Raychaudhuri:239 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Raychaudhuri.lean#L239)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (V : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathrm{Fin}\,n \to \mathbb{R}), (\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (\mu : \mathrm{Fin}\,n), \sum_{\nu} V\,y\,\nu \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({y})} = 0) \to \forall (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\nu} V\,x\,\nu \cdot \partial_{{\nu}}({\lambda y \mapsto \href{#d-qiqth-curvature-expansion}{\theta({y})}})({x}) = -\sum_{\mu} \sum_{\nu} \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\mu}}{}^{{\nu}}({x})} \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({x})} - \sum_{\nu} \sum_{\sigma} \href{#d-qiqth-curvature-ricci}{R_{{\sigma}{\nu}}({x})} \cdot V\,x\,\sigma \cdot V\,x\,\nu
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (V : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathrm{Fin}\,n \to \mathbb{R}), (\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (\mu : \mathrm{Fin}\,n), \sum_{\nu} V\,y\,\nu \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({y})} = 0) \to \forall (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\nu} V\,x\,\nu \cdot \partial_{{\nu}}({\lambda y \mapsto \href{#d-qiqth-curvature-expansion}{\theta({y})}})({x}) = -\sum_{\mu} \sum_{\nu} \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\mu}}{}^{{\nu}}({x})} \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({x})} - \sum_{\nu} \sum_{\sigma} \href{#d-qiqth-curvature-ricci}{R_{{\sigma}{\nu}}({x})} \cdot V\,x\,\sigma \cdot V\,x\,\nu
 $$
 
 **proof uses** [`covDeriv2Vec`](#d-qiqth-curvature-covderiv2vec) [`geodesic_leibniz`](#d-qiqth-curvature-geodesic-leibniz) [`raychaudhuri_focusing`](#d-qiqth-curvature-raychaudhuri-focusing)
@@ -833,7 +833,7 @@ $$
 *thm* · [Curvature:1030 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L1030)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\rho \mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\sigma} \sum_{\nu} g^{{\sigma}{\nu}}({x}) \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\nu\,\mathrm{lam}\,x = -\sum_{\beta} g^{{\rho}{\beta}}({x}) \cdot \href{#d-qiqth-curvature-ricci}{R_{{\beta}{\mathrm{lam}}}({x})}
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\rho \mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\sigma} \sum_{\nu} g^{{\sigma}{\nu}}({x}) \cdot \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\nu\,\mathrm{lam}\,x = -\sum_{\beta} g^{{\rho}{\beta}}({x}) \cdot \href{#d-qiqth-curvature-ricci}{R_{{\beta}{\mathrm{lam}}}({x})}
 $$
 
 **proof uses** [`lowered_riemann_gi_trace`](#d-qiqth-curvature-lowered-riemann-gi-trace)
@@ -846,7 +846,7 @@ $$
 *thm* · [Raychaudhuri:57 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Raychaudhuri.lean#L57)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (V : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathrm{Fin}\,n \to \mathbb{R}), (\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\mu \nu \rho : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-covderiv2vec}{\mathrm{covDeriv2Vec}}\,g\,\mathrm{gi}\,V\,\mu\,\nu\,\rho\,x - \href{#d-qiqth-curvature-covderiv2vec}{\mathrm{covDeriv2Vec}}\,g\,\mathrm{gi}\,V\,\nu\,\mu\,\rho\,x = \sum_{\sigma} \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mu\,\nu\,x \cdot V\,x\,\sigma
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (V : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathrm{Fin}\,n \to \mathbb{R}), (\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\mu \nu \rho : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-covderiv2vec}{\mathrm{covDeriv2Vec}}\,g\,\mathrm{gi}\,V\,\mu\,\nu\,\rho\,x - \href{#d-qiqth-curvature-covderiv2vec}{\mathrm{covDeriv2Vec}}\,g\,\mathrm{gi}\,V\,\nu\,\mu\,\rho\,x = \sum_{\sigma} \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mu\,\nu\,x \cdot V\,x\,\sigma
 $$
 
 **proof uses** [`christoffel_symm`](#d-qiqth-curvature-christoffel-symm) [`covDerivVec`](#d-qiqth-curvature-covderivvec) [`pd`](#d-qiqth-curvature-pd) [`pd_comm`](#d-qiqth-curvature-pd-comm) [`pd_covDerivVec`](#d-qiqth-curvature-pd-covderivvec)
@@ -859,7 +859,7 @@ $$
 *thm* · [Raychaudhuri:93 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Raychaudhuri.lean#L93)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (V : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathrm{Fin}\,n \to \mathbb{R}), (\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\mu} (\href{#d-qiqth-curvature-covderiv2vec}{\mathrm{covDeriv2Vec}}\,g\,\mathrm{gi}\,V\,\mu\,\nu\,\mu\,x - \href{#d-qiqth-curvature-covderiv2vec}{\mathrm{covDeriv2Vec}}\,g\,\mathrm{gi}\,V\,\nu\,\mu\,\mu\,x) = \sum_{\sigma} \href{#d-qiqth-curvature-ricci}{R_{{\sigma}{\nu}}({x})} \cdot V\,x\,\sigma
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (V : \href{#d-qiqth-curvature-point}{M^{{n}}} \to \mathrm{Fin}\,n \to \mathbb{R}), (\forall (\mu : \mathrm{Fin}\,n), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \sum_{\mu} (\href{#d-qiqth-curvature-covderiv2vec}{\mathrm{covDeriv2Vec}}\,g\,\mathrm{gi}\,V\,\mu\,\nu\,\mu\,x - \href{#d-qiqth-curvature-covderiv2vec}{\mathrm{covDeriv2Vec}}\,g\,\mathrm{gi}\,V\,\nu\,\mu\,\mu\,x) = \sum_{\sigma} \href{#d-qiqth-curvature-ricci}{R_{{\sigma}{\nu}}({x})} \cdot V\,x\,\sigma
 $$
 
 **proof uses** [`ricci_identity`](#d-qiqth-curvature-ricci-identity) [`riemann`](#d-qiqth-curvature-riemann)
@@ -872,7 +872,7 @@ $$
 *thm* · [RicciSymm:84 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/RicciSymm.lean#L84)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\sigma \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-ricci}{R_{{\sigma}{\nu}}({x})} = \href{#d-qiqth-curvature-ricci}{R_{{\nu}{\sigma}}({x})}
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\sigma \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-ricci}{R_{{\sigma}{\nu}}({x})} = \href{#d-qiqth-curvature-ricci}{R_{{\nu}{\sigma}}({x})}
 $$
 
 **proof uses** [`lowered_riemann_pair_symm`](#d-qiqth-curvature-lowered-riemann-pair-symm) [`riemann`](#d-qiqth-curvature-riemann)
@@ -885,7 +885,7 @@ $$
 *thm* · [Curvature:205 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L205)  
 
 $$
-\href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mu\,\nu\,x = -\href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\nu\,\mu\,x
+\href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mu\,\nu\,x = -\href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\nu\,\mu\,x
 $$
 
 **proof uses** [`christoffel`](#d-qiqth-curvature-christoffel) [`pd`](#d-qiqth-curvature-pd)
@@ -898,7 +898,7 @@ $$
 *thm* · [ChristoffelSmooth:45 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ChristoffelSmooth.lean#L45)  
 
 $$
-(\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to \forall (\rho \sigma \mu \nu : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mu\,\nu\,y})\in C^{\infty}
+(\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to \forall (\rho \sigma \mu \nu : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mu\,\nu\,y})\in C^{\infty}
 $$
 
 **proof uses** [`christoffel`](#d-qiqth-curvature-christoffel) [`christoffel_contDiff`](#d-qiqth-curvature-christoffel-contdiff) [`contDiff_pd`](#d-qiqth-curvature-contdiff-pd) [`pd`](#d-qiqth-curvature-pd)
@@ -911,7 +911,7 @@ $$
 *thm* · [Curvature:354 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L354)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (\rho \sigma \mu \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mu\,\nu\,x + \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\mu\,\nu\,\sigma\,x + \href{#d-qiqth-curvature-riemann}{\mathrm{riemann}}\,g\,\mathrm{gi}\,\rho\,\nu\,\sigma\,\mu\,x = 0
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (\rho \sigma \mu \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mu\,\nu\,x + \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\mu\,\nu\,\sigma\,x + \href{#d-qiqth-curvature-riemann}{\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\nu\,\sigma\,\mu\,x = 0
 $$
 
 **proof uses** [`christoffel`](#d-qiqth-curvature-christoffel) [`christoffel_symm`](#d-qiqth-curvature-christoffel-symm) [`pd`](#d-qiqth-curvature-pd)
@@ -937,7 +937,7 @@ $$
 *thm* · [Curvature:611 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L611)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\rho \sigma \mathrm{lam} \mathrm{mu} \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-covderivriem}{\mathrm{covDerivRiem}}\,g\,\mathrm{gi}\,\mathrm{lam}\,\rho\,\sigma\,\mathrm{mu}\,\nu\,x + \href{#d-qiqth-curvature-covderivriem}{\mathrm{covDerivRiem}}\,g\,\mathrm{gi}\,\mathrm{mu}\,\rho\,\sigma\,\nu\,\mathrm{lam}\,x + \href{#d-qiqth-curvature-covderivriem}{\mathrm{covDerivRiem}}\,g\,\mathrm{gi}\,\nu\,\rho\,\sigma\,\mathrm{lam}\,\mathrm{mu}\,x = 0
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\rho \sigma \mathrm{lam} \mathrm{mu} \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-covderivriem}{\nabla\mathrm{Riem}}\,g\,\mathrm{gi}\,\mathrm{lam}\,\rho\,\sigma\,\mathrm{mu}\,\nu\,x + \href{#d-qiqth-curvature-covderivriem}{\nabla\mathrm{Riem}}\,g\,\mathrm{gi}\,\mathrm{mu}\,\rho\,\sigma\,\nu\,\mathrm{lam}\,x + \href{#d-qiqth-curvature-covderivriem}{\nabla\mathrm{Riem}}\,g\,\mathrm{gi}\,\nu\,\rho\,\sigma\,\mathrm{lam}\,\mathrm{mu}\,x = 0
 $$
 
 **proof uses** [`PdiffAt`](#d-qiqth-curvature-pdiffat) [`mul`](#d-qiqth-curvature-pdiffat-mul) [`sub`](#d-qiqth-curvature-pdiffat-sub) [`PdiffAt_of_contDiff`](#d-qiqth-curvature-pdiffat-of-contdiff) [`PdiffAt_pd`](#d-qiqth-curvature-pdiffat-pd) [`PdiffAt_sum`](#d-qiqth-curvature-pdiffat-sum) [`bianchi_GGG`](#d-qiqth-curvature-bianchi-ggg) [`bianchi_dGamma`](#d-qiqth-curvature-bianchi-dgamma) [`bianchi_extra_terms`](#d-qiqth-curvature-bianchi-extra-terms) [`pd`](#d-qiqth-curvature-pd) [`pd_add`](#d-qiqth-curvature-pd-add) [`riemann`](#d-qiqth-curvature-riemann) [`riemannLin`](#d-qiqth-curvature-riemannlin) [`riemannQuad`](#d-qiqth-curvature-riemannquad) [`second_bianchi_deriv_part`](#d-qiqth-curvature-second-bianchi-deriv-part)
@@ -950,7 +950,7 @@ $$
 *thm* · [Curvature:747 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L747)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\mathrm{lam} \sigma \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-covderiv02}{\mathrm{covDeriv02}}\,g\,\mathrm{gi}\,(\lambda y a b \mapsto \href{#d-qiqth-curvature-ricci}{R_{{a}{b}}({y})})\,\mathrm{lam}\,\sigma\,\nu\,x - \href{#d-qiqth-curvature-covderiv02}{\mathrm{covDeriv02}}\,g\,\mathrm{gi}\,(\lambda y a b \mapsto \href{#d-qiqth-curvature-ricci}{R_{{a}{b}}({y})})\,\nu\,\sigma\,\mathrm{lam}\,x + \sum_{\rho} \href{#d-qiqth-curvature-covderivriem}{\mathrm{covDerivRiem}}\,g\,\mathrm{gi}\,\rho\,\rho\,\sigma\,\nu\,\mathrm{lam}\,x = 0
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\mathrm{lam} \sigma \nu : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), \href{#d-qiqth-curvature-covderiv02}{\mathrm{covDeriv02}}\,g\,\mathrm{gi}\,(\lambda y a b \mapsto \href{#d-qiqth-curvature-ricci}{R_{{a}{b}}({y})})\,\mathrm{lam}\,\sigma\,\nu\,x - \href{#d-qiqth-curvature-covderiv02}{\mathrm{covDeriv02}}\,g\,\mathrm{gi}\,(\lambda y a b \mapsto \href{#d-qiqth-curvature-ricci}{R_{{a}{b}}({y})})\,\nu\,\sigma\,\mathrm{lam}\,x + \sum_{\rho} \href{#d-qiqth-curvature-covderivriem}{\nabla\mathrm{Riem}}\,g\,\mathrm{gi}\,\rho\,\rho\,\sigma\,\nu\,\mathrm{lam}\,x = 0
 $$
 
 **proof uses** [`covDerivRiem_contract`](#d-qiqth-curvature-covderivriem-contract) [`covDerivRiem_contract'`](#d-qiqth-curvature-covderivriem-contract) [`second_bianchi`](#d-qiqth-curvature-second-bianchi)
@@ -963,7 +963,7 @@ $$
 *thm* · [Curvature:389 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Curvature.lean#L389)  
 
 $$
-(\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \partial_{{\mathrm{lam}}}({\lambda y \mapsto \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mathrm{mu}\,\nu\,y})({x}) + \partial_{{\mathrm{mu}}}({\lambda y \mapsto \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\nu\,\mathrm{lam}\,y})({x}) + \partial_{{\nu}}({\lambda y \mapsto \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mathrm{lam}\,\mathrm{mu}\,y})({x}) = 0
+(\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \partial_{{\mathrm{lam}}}({\lambda y \mapsto \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mathrm{mu}\,\nu\,y})({x}) + \partial_{{\mathrm{mu}}}({\lambda y \mapsto \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\nu\,\mathrm{lam}\,y})({x}) + \partial_{{\nu}}({\lambda y \mapsto \href{#d-qiqth-curvature-riemannlin}{\mathrm{riemannLin}}\,g\,\mathrm{gi}\,\rho\,\sigma\,\mathrm{lam}\,\mathrm{mu}\,y})({x}) = 0
 $$
 
 **proof uses** [`PdiffAt`](#d-qiqth-curvature-pdiffat) [`pd_comm`](#d-qiqth-curvature-pd-comm) [`pd_eq_fderiv`](#d-qiqth-curvature-pd-eq-fderiv) [`pd_sub`](#d-qiqth-curvature-pd-sub)
@@ -976,7 +976,7 @@ $$
 *thm* · [EinsteinFieldEquation:130 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/EinsteinFieldEquation.lean#L130)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to \forall (\mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), (\nabla\!\cdot {\lambda y a b \mapsto \href{#d-qiqth-curvature-ricci}{R_{{a}{b}}({y})}})_{{\mathrm{lam}}}({x}) = 1/2 \cdot \partial_{{\mathrm{lam}}}({\lambda y \mapsto \href{#d-qiqth-curvature-scalarcurv}{R({y})}})({x})
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{n}}}) (a b : \mathrm{Fin}\,n), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to \forall (\mathrm{lam} : \mathrm{Fin}\,n) (x : \href{#d-qiqth-curvature-point}{M^{{n}}}), (\nabla\!\cdot {\lambda y a b \mapsto \href{#d-qiqth-curvature-ricci}{R_{{a}{b}}({y})}})_{{\mathrm{lam}}}({x}) = 1/2 \cdot \partial_{{\mathrm{lam}}}({\lambda y \mapsto \href{#d-qiqth-curvature-scalarcurv}{R({y})}})({x})
 $$
 
 **proof uses** [`covDeriv02`](#d-qiqth-curvature-covderiv02) [`covDerivRiem`](#d-qiqth-curvature-covderivriem) [`divRiemann_trace_eq`](#d-qiqth-curvature-divriemann-trace-eq) [`gi_trace_covDeriv_ricci`](#d-qiqth-curvature-gi-trace-covderiv-ricci) [`second_bianchi_contracted`](#d-qiqth-curvature-second-bianchi-contracted)
@@ -1123,7 +1123,7 @@ $$
 *thm* · [BoostKMS:2096 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2096)  
 
 $$
-z = t - i \to (\href{#d-qiqth-fock-boostkms-nicetest-bcf}{\mathrm{bcf}}\,\mathrm{hm}\,N\,M)\,z = \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,(2 \cdot \pi \cdot t))\,N.\mathrm{vec})\,M.\mathrm{vec}
+z = t - i \to (\href{#d-qiqth-fock-boostkms-nicetest-bcf}{\mathrm{bcf}}\,\mathrm{hm}\,N\,M)\,z = \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,(2 \cdot \pi \cdot t))\,N.\mathrm{vec})\,M.\mathrm{vec}
 $$
 
 **proof uses** [`cont`](#d-qiqth-fock-boostkms-nicetest-cont) [`cpt`](#d-qiqth-fock-boostkms-nicetest-cpt) [`f`](#d-qiqth-fock-boostkms-nicetest-f) [`memLp`](#d-qiqth-fock-boostkms-nicetest-memlp) [`real`](#d-qiqth-fock-boostkms-nicetest-real) [`δ`](#d-qiqth-fock-boostkms-nicetest) [`kmsBCF`](#d-qiqth-fock-boostkms-kmsbcf) [`kmsBCF_apply`](#d-qiqth-fock-boostkms-kmsbcf-apply) [`kmsFun`](#d-qiqth-fock-boostkms-kmsfun) [`kmsFun_ofReal_eq_inner`](#d-qiqth-fock-boostkms-kmsfun-ofreal-eq-inner) [`kmsFun_sub_I`](#d-qiqth-fock-boostkms-kmsfun-sub-i) [`memLp_Krep_boostTest`](#d-qiqth-fock-boostkms-memlp-krep-boosttest) [`Krep`](#d-qiqth-fock-localization-krep)
@@ -1136,7 +1136,7 @@ $$
 *thm* · [BoostKMS:2087 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2087)  
 
 $$
-z = t \to (\href{#d-qiqth-fock-boostkms-nicetest-bcf}{\mathrm{bcf}}\,\mathrm{hm}\,N\,M)\,z = \mathrm{inner}\,\mathbb{C}\,M.\mathrm{vec}\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,(2 \cdot \pi \cdot t))\,N.\mathrm{vec})
+z = t \to (\href{#d-qiqth-fock-boostkms-nicetest-bcf}{\mathrm{bcf}}\,\mathrm{hm}\,N\,M)\,z = \mathrm{inner}\,\mathbb{C}\,M.\mathrm{vec}\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,(2 \cdot \pi \cdot t))\,N.\mathrm{vec})
 $$
 
 **proof uses** [`cont`](#d-qiqth-fock-boostkms-nicetest-cont) [`cpt`](#d-qiqth-fock-boostkms-nicetest-cpt) [`f`](#d-qiqth-fock-boostkms-nicetest-f) [`memLp`](#d-qiqth-fock-boostkms-nicetest-memlp) [`real`](#d-qiqth-fock-boostkms-nicetest-real) [`δ`](#d-qiqth-fock-boostkms-nicetest) [`kmsBCF`](#d-qiqth-fock-boostkms-kmsbcf) [`kmsBCF_apply`](#d-qiqth-fock-boostkms-kmsbcf-apply) [`kmsFun`](#d-qiqth-fock-boostkms-kmsfun) [`kmsFun_ofReal_eq_inner`](#d-qiqth-fock-boostkms-kmsfun-ofreal-eq-inner) [`memLp_Krep_boostTest`](#d-qiqth-fock-boostkms-memlp-krep-boosttest)
@@ -1286,7 +1286,7 @@ $$
 *thm* · [BoostKMS:2185 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2185)  
 
 $$
-(\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,a)\,N.\mathrm{vec} = (N.\mathrm{boost}\,a).\mathrm{vec}
+(\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,a)\,N.\mathrm{vec} = (N.\mathrm{boost}\,a).\mathrm{vec}
 $$
 
 **proof uses** [`f`](#d-qiqth-fock-boostkms-nicetest-f) [`memLp`](#d-qiqth-fock-boostkms-nicetest-memlp) [`boostUnitary_KrepL2`](#d-qiqth-fock-oneparticlebw-boostunitary-krepl2)
@@ -1325,7 +1325,7 @@ $$
 *thm* · [BoostKMS:2190 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2190)  
 
 $$
-\mathrm{MapsTo}\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,a))\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathrm{niceWedgeGenSet}}\,m)\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathrm{niceWedgeGenSet}}\,m)
+\mathrm{MapsTo}\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,a))\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathcal{G}}\,m)\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathcal{G}}\,m)
 $$
 
 **proof uses** [`NiceTest`](#d-qiqth-fock-boostkms-nicetest) [`boost`](#d-qiqth-fock-boostkms-nicetest-boost) [`vec`](#d-qiqth-fock-boostkms-nicetest-vec) [`vec_boost`](#d-qiqth-fock-boostkms-nicetest-vec-boost)
@@ -1512,7 +1512,7 @@ $$
 *thm* · [BoostKMS:44 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L44)  
 
 $$
-\mathrm{MemLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,(\href{#d-qiqth-fock-localization-boosttest}{\mathrm{boostTest}}\,(-a)\,f))\,2\,\mathrm{volume} \to \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,g)\,\mathrm{hg})\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,a)\,(\mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f)\,\mathrm{hf})) = \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,g\,\theta) \cdot \href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f\,(\theta - a)
+\mathrm{MemLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,(\href{#d-qiqth-fock-localization-boosttest}{\mathrm{boostTest}}\,(-a)\,f))\,2\,\mathrm{volume} \to \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,g)\,\mathrm{hg})\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,a)\,(\mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f)\,\mathrm{hf})) = \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,g\,\theta) \cdot \href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f\,(\theta - a)
 $$
 
 **proof uses** [`inner_KrepL2`](#d-qiqth-fock-boostkms-inner-krepl2) [`Krep_boost`](#d-qiqth-fock-localization-krep-boost) [`boostUnitary_KrepL2`](#d-qiqth-fock-oneparticlebw-boostunitary-krepl2)
@@ -1732,7 +1732,7 @@ $$
 *thm* · [BoostKMS:101 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L101)  
 
 $$
-\mathrm{MemLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,(\href{#d-qiqth-fock-localization-boosttest}{\mathrm{boostTest}}\,(-(2 \cdot \pi \cdot t))\,f))\,2\,\mathrm{volume} \to \href{#d-qiqth-fock-boostkms-kmsfun}{\mathrm{kmsFun}}\,m\,f\,g\,t = \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,g)\,\mathrm{hg})\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,(2 \cdot \pi \cdot t))\,(\mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f)\,\mathrm{hf}))
+\mathrm{MemLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,(\href{#d-qiqth-fock-localization-boosttest}{\mathrm{boostTest}}\,(-(2 \cdot \pi \cdot t))\,f))\,2\,\mathrm{volume} \to \href{#d-qiqth-fock-boostkms-kmsfun}{\mathrm{kmsFun}}\,m\,f\,g\,t = \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,g)\,\mathrm{hg})\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,(2 \cdot \pi \cdot t))\,(\mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f)\,\mathrm{hf}))
 $$
 
 **proof uses** [`kmsFun_ofReal`](#d-qiqth-fock-boostkms-kmsfun-ofreal) [`symm_edge_eq_inner`](#d-qiqth-fock-boostkms-symm-edge-eq-inner)
@@ -1810,7 +1810,7 @@ $$
 *thm* · [BoostKMS:2111 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2111)  
 
 $$
-\xi \in \href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathrm{niceWedgeGenSet}}\,m \leftrightarrow \exists N, N.\mathrm{vec} = \xi
+\xi \in \href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathcal{G}}\,m \leftrightarrow \exists N, N.\mathrm{vec} = \xi
 $$
 
 **statement uses** [`NiceTest`](#d-qiqth-fock-boostkms-nicetest) [`vec`](#d-qiqth-fock-boostkms-nicetest-vec) [`niceWedgeGenSet`](#d-qiqth-fock-boostkms-nicewedgegenset)
@@ -1835,7 +1835,7 @@ $$
 *thm* · [BoostKMS:2295 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2295)  
 
 $$
-(\href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathrm{niceWedgeClosedSubmodule}}\,m) = \mathrm{closure}\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathrm{niceWedgeGenSet}}\,m)
+(\href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathcal{K}}\,m) = \mathrm{closure}\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathcal{G}}\,m)
 $$
 
 **proof uses** [`niceWedgeSubmodule`](#d-qiqth-fock-boostkms-nicewedgesubmodule)
@@ -1848,7 +1848,7 @@ $$
 *thm* · [BoostKMS:2784 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2784)  
 
 $$
-(\forall (\xi : \mathbb{R}), (\mathrm{fourier}\,N_{0}.\mathrm{vec})\,\xi \ne 0) \to \href{#d-qiqth-fock-boostkms-nicewedgecyclic}{\mathrm{NiceWedgeCyclic}}\,m
+(\forall (\xi : \mathbb{R}), (\mathcal{F}\,N_{0}.\mathrm{vec})\,\xi \ne 0) \to \href{#d-qiqth-fock-boostkms-nicewedgecyclic}{\mathrm{NiceWedgeCyclic}}\,m
 $$
 
 **proof uses** [`boost`](#d-qiqth-fock-boostkms-nicetest-boost) [`f`](#d-qiqth-fock-boostkms-nicetest-f) [`memLp`](#d-qiqth-fock-boostkms-nicetest-memlp) [`vec_boost`](#d-qiqth-fock-boostkms-nicetest-vec-boost) [`inner_KrepL2_general`](#d-qiqth-fock-boostkms-inner-krepl2-general) [`Krep`](#d-qiqth-fock-localization-krep) [`boostUnitary`](#d-qiqth-fock-oneparticle-boostunitary) [`boost_orbit_total_of_fourier_ne_zero`](#d-qiqth-fock-wienerl2-boost-orbit-total-of-fourier-ne-zero)
@@ -1861,7 +1861,7 @@ $$
 *thm* · [BoostKMS:2115 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2115)  
 
 $$
-\xi \in \href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathrm{niceWedgeGenSet}}\,m \to \eta \in \href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathrm{niceWedgeGenSet}}\,m \to \xi + \eta \in \href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathrm{niceWedgeGenSet}}\,m
+\xi \in \href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathcal{G}}\,m \to \eta \in \href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathcal{G}}\,m \to \xi + \eta \in \href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathcal{G}}\,m
 $$
 
 **proof uses** [`NiceTest`](#d-qiqth-fock-boostkms-nicetest) [`add`](#d-qiqth-fock-boostkms-nicetest-add) [`vec`](#d-qiqth-fock-boostkms-nicetest-vec) [`vec_add`](#d-qiqth-fock-boostkms-nicetest-vec-add)
@@ -1874,7 +1874,7 @@ $$
 *thm* · [BoostKMS:2266 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2266)  
 
 $$
-\xi \in \href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathrm{niceWedgeGenSet}}\,m \to c \cdot \xi \in \href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathrm{niceWedgeGenSet}}\,m
+\xi \in \href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathcal{G}}\,m \to c \cdot \xi \in \href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathcal{G}}\,m
 $$
 
 **proof uses** [`NiceTest`](#d-qiqth-fock-boostkms-nicetest) [`smul`](#d-qiqth-fock-boostkms-nicetest-smul) [`vec`](#d-qiqth-fock-boostkms-nicetest-vec) [`vec_smul`](#d-qiqth-fock-boostkms-nicetest-vec-smul)
@@ -1887,7 +1887,7 @@ $$
 *thm* · [BoostKMS:2389 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2389)  
 
 $$
-(\forall (h : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (\forall (N : \href{#d-qiqth-fock-boostkms-nicetest}{\mathrm{NiceTest}}\,m), \mathrm{inner}\,\mathbb{C}\,N.\mathrm{vec}\,h = 0) \to h = 0) \to \mathrm{Dense}\,(\mathrm{span}\,\mathbb{C}\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathrm{niceWedgeGenSet}}\,m))
+(\forall (h : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (\forall (N : \href{#d-qiqth-fock-boostkms-nicetest}{\mathrm{NiceTest}}\,m), \mathrm{inner}\,\mathbb{C}\,N.\mathrm{vec}\,h = 0) \to h = 0) \to \mathrm{Dense}\,(\mathrm{span}\,\mathbb{C}\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathcal{G}}\,m))
 $$
 
 **statement uses** [`NiceTest`](#d-qiqth-fock-boostkms-nicetest) [`vec`](#d-qiqth-fock-boostkms-nicetest-vec) [`niceWedgeGenSet`](#d-qiqth-fock-boostkms-nicewedgegenset)
@@ -1899,7 +1899,7 @@ $$
 *thm* · [BoostKMS:2376 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2376)  
 
 $$
-\mathrm{Dense}\,(\mathrm{span}\,\mathbb{C}\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathrm{niceWedgeGenSet}}\,m)) \to \href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathrm{niceWedgeClosedSubmodule}}\,m(\href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathrm{niceWedgeClosedSubmodule}}\,m).\mathrm{mulI} = \top
+\mathrm{Dense}\,(\mathrm{span}\,\mathbb{C}\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathcal{G}}\,m)) \to \href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathcal{K}}\,m(\href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathcal{K}}\,m).\mathrm{mulI} = \top
 $$
 
 **proof uses** [`ClosedSubmodule_sup_mulI_eq_top_of_dense`](#d-qiqth-fock-boostkms-closedsubmodule-sup-muli-eq-top-of-dense) [`niceWedgeClosedSubmodule_coe`](#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule-coe)
@@ -1912,7 +1912,7 @@ $$
 *thm* · [BoostKMS:2410 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2410)  
 
 $$
-(\forall (h : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (\forall (N : \href{#d-qiqth-fock-boostkms-nicetest}{\mathrm{NiceTest}}\,m), \mathrm{inner}\,\mathbb{C}\,N.\mathrm{vec}\,h = 0) \to h = 0) \to \href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathrm{niceWedgeClosedSubmodule}}\,m(\href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathrm{niceWedgeClosedSubmodule}}\,m).\mathrm{mulI} = \top
+(\forall (h : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (\forall (N : \href{#d-qiqth-fock-boostkms-nicetest}{\mathrm{NiceTest}}\,m), \mathrm{inner}\,\mathbb{C}\,N.\mathrm{vec}\,h = 0) \to h = 0) \to \href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathcal{K}}\,m(\href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathcal{K}}\,m).\mathrm{mulI} = \top
 $$
 
 **proof uses** [`niceWedge_dense_of_total`](#d-qiqth-fock-boostkms-nicewedge-dense-of-total) [`niceWedge_isCyclic_of_dense`](#d-qiqth-fock-boostkms-nicewedge-iscyclic-of-dense)
@@ -1925,7 +1925,7 @@ $$
 *thm* · [BoostKMS:2420 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2420)  
 
 $$
-(\forall (h : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (\forall (N : \href{#d-qiqth-fock-boostkms-nicetest}{\mathrm{NiceTest}}\,m), \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,N.f\,\theta) \cdot h\,\theta = 0) \to h = 0) \to \href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathrm{niceWedgeClosedSubmodule}}\,m(\href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathrm{niceWedgeClosedSubmodule}}\,m).\mathrm{mulI} = \top
+(\forall (h : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (\forall (N : \href{#d-qiqth-fock-boostkms-nicetest}{\mathrm{NiceTest}}\,m), \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,N.f\,\theta) \cdot h\,\theta = 0) \to h = 0) \to \href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathcal{K}}\,m(\href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathcal{K}}\,m).\mathrm{mulI} = \top
 $$
 
 **proof uses** [`memLp`](#d-qiqth-fock-boostkms-nicetest-memlp) [`vec`](#d-qiqth-fock-boostkms-nicetest-vec) [`inner_KrepL2_general`](#d-qiqth-fock-boostkms-inner-krepl2-general) [`niceWedge_isCyclic_of_total`](#d-qiqth-fock-boostkms-nicewedge-iscyclic-of-total)
@@ -1938,7 +1938,7 @@ $$
 *thm* · [BoostKMS:2518 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2518)  
 
 $$
-(\forall v\in \href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathrm{niceWedgeClosedSubmodule}}\,m, i \cdot v \in \href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathrm{niceWedgeClosedSubmodule}}\,m \to v = 0) \to \href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathrm{niceWedgeClosedSubmodule}}\,m(\href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathrm{niceWedgeClosedSubmodule}}\,m).\mathrm{mulI} = \bot
+(\forall v\in \href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathcal{K}}\,m, i \cdot v \in \href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathcal{K}}\,m \to v = 0) \to \href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathcal{K}}\,m(\href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathcal{K}}\,m).\mathrm{mulI} = \bot
 $$
 
 **proof uses** [`closedSubmodule_smul_I_mem_of_mem_mulI`](#d-qiqth-fock-boostkms-closedsubmodule-smul-i-mem-of-mem-muli)
@@ -2129,7 +2129,7 @@ $$
 *thm* · [BoostKMS:2656 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2656)  
 
 $$
-0 < m \to \forall (S : \mathrm{StandardSubspace}\,(\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})) (V : \mathbb{R} \to (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume}) \to L[\mathbb{C}] (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), S.\mathrm{toClosedSubmodule} = \mathrm{closure}\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathrm{niceWedgeGenSet}}\,m) \to (\forall (t : \mathbb{R}) (x : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (V\,t)\,x = (\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,(2 \cdot \pi \cdot t))\,x) \to \forall (t : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t = V\,t
+0 < m \to \forall (S : \mathrm{StandardSubspace}\,(\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})) (V : \mathbb{R} \to (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume}) \to L[\mathbb{C}] (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), S.\mathrm{toClosedSubmodule} = \mathrm{closure}\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathcal{G}}\,m) \to (\forall (t : \mathbb{R}) (x : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (V\,t)\,x = (\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,(2 \cdot \pi \cdot t))\,x) \to \forall (t : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t = V\,t
 $$
 
 **proof uses** [`boostUnitary_mapsTo_niceWedgeGenSet`](#d-qiqth-fock-boostkms-boostunitary-mapsto-nicewedgegenset) [`stripKMSrvd_boostUnitary`](#d-qiqth-fock-boostkms-stripkmsrvd-boostunitary) [`boostUnitary_add_apply`](#d-qiqth-fock-oneparticle-boostunitary-add-apply) [`boostUnitary_zero_apply`](#d-qiqth-fock-oneparticle-boostunitary-zero-apply) [`StripKMSrvd`](#d-qiqth-fock-oneparticlebw-stripkmsrvd) [`continuous_boostUnitary_apply`](#d-qiqth-fock-oneparticlebw-continuous-boostunitary-apply) [`oneParticleBW_complete`](#d-qiqth-fock-oneparticlebw-oneparticlebw-complete) [`gaussSmear`](#d-qiqth-standardsubspacemodular-gausssmear) [`gaussSmear_mem_K`](#d-qiqth-standardsubspacemodular-gausssmear-mem-k) [`mem_K_iff_projK`](#d-qiqth-standardsubspacemodular-mem-k-iff-projk) [`projK`](#d-qiqth-standardsubspacemodular-projk)
@@ -2142,7 +2142,7 @@ $$
 *thm* · [BoostKMS:2706 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2706)  
 
 $$
-0 < m \to \forall (V : \mathbb{R} \to (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume}) \to L[\mathbb{C}] (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (\forall (t : \mathbb{R}) (x : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (V\,t)\,x = (\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,(2 \cdot \pi \cdot t))\,x) \to \forall (\mathrm{hsep} : \href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathrm{niceWedgeClosedSubmodule}}\,m(\href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathrm{niceWedgeClosedSubmodule}}\,m).\mathrm{mulI} = \bot ) (\mathrm{hcyc} : \href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathrm{niceWedgeClosedSubmodule}}\,m(\href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathrm{niceWedgeClosedSubmodule}}\,m).\mathrm{mulI} = \top ) (t : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,(\href{#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathrm{niceWedgeStandardSubspace}}\,m\,\mathrm{hsep}\,\mathrm{hcyc})\,t = V\,t
+0 < m \to \forall (V : \mathbb{R} \to (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume}) \to L[\mathbb{C}] (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (\forall (t : \mathbb{R}) (x : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (V\,t)\,x = (\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,(2 \cdot \pi \cdot t))\,x) \to \forall (\mathrm{hsep} : \href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathcal{K}}\,m(\href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathcal{K}}\,m).\mathrm{mulI} = \bot ) (\mathrm{hcyc} : \href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathcal{K}}\,m(\href{#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule}{\mathcal{K}}\,m).\mathrm{mulI} = \top ) (t : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,(\href{#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathcal{K}}\,m\,\mathrm{hsep}\,\mathrm{hcyc})\,t = V\,t
 $$
 
 **proof uses** [`niceWedgeClosedSubmodule_coe`](#d-qiqth-fock-boostkms-nicewedgeclosedsubmodule-coe) [`oneParticleBW_niceWedge`](#d-qiqth-fock-boostkms-oneparticlebw-nicewedge)
@@ -2155,7 +2155,7 @@ $$
 *thm* · [BoostKMS:2800 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2800)  
 
 $$
-0 < m \to \forall (V : \mathbb{R} \to (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume}) \to L[\mathbb{C}] (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (\forall (t : \mathbb{R}) (x : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (V\,t)\,x = (\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,(2 \cdot \pi \cdot t))\,x) \to \forall (\mathrm{hsep} : \href{#d-qiqth-fock-boostkms-nicewedgeseparating}{\mathrm{NiceWedgeSeparating}}\,m) (\mathrm{hcyc} : \href{#d-qiqth-fock-boostkms-nicewedgecyclic}{\mathrm{NiceWedgeCyclic}}\,m) (t : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,(\href{#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathrm{niceWedgeStandardSubspace}}\,m\,\cdots \,\cdots )\,t = V\,t
+0 < m \to \forall (V : \mathbb{R} \to (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume}) \to L[\mathbb{C}] (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (\forall (t : \mathbb{R}) (x : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (V\,t)\,x = (\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,(2 \cdot \pi \cdot t))\,x) \to \forall (\mathrm{hsep} : \href{#d-qiqth-fock-boostkms-nicewedgeseparating}{\mathrm{NiceWedgeSeparating}}\,m) (\mathrm{hcyc} : \href{#d-qiqth-fock-boostkms-nicewedgecyclic}{\mathrm{NiceWedgeCyclic}}\,m) (t : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,(\href{#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathcal{K}}\,m\,\cdots \,\cdots )\,t = V\,t
 $$
 
 **proof uses** [`oneParticleBW_niceWedge_of_standard`](#d-qiqth-fock-boostkms-oneparticlebw-nicewedge-of-standard)
@@ -2179,7 +2179,7 @@ $$
 *thm* · [BoostKMS:2645 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2645)  
 
 $$
-0 < m \to \href{#d-qiqth-fock-oneparticlebw-stripkmsrvd}{\mathrm{StripKMSrvd}}\,(\lambda t \mapsto (\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,(2 \cdot \pi \cdot t)))\,(\mathrm{closure}\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathrm{niceWedgeGenSet}}\,m))
+0 < m \to \href{#d-qiqth-fock-oneparticlebw-stripkmsrvd}{\mathrm{StripKMSrvd}}\,(\lambda t \mapsto (\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,(2 \cdot \pi \cdot t)))\,(\mathrm{closure}\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathcal{G}}\,m))
 $$
 
 **proof uses** [`stripKMSrvd_closure`](#d-qiqth-fock-boostkms-stripkmsrvd-closure)
@@ -2192,7 +2192,7 @@ $$
 *thm* · [BoostKMS:2535 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2535)  
 
 $$
-0 < m \to \forall \{\xi \eta : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})\}, \xi \in \mathrm{closure}\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathrm{niceWedgeGenSet}}\,m) \to \eta \in \mathrm{closure}\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathrm{niceWedgeGenSet}}\,m) \to \exists F, \mathrm{DiffContOnCl}\,\mathbb{C}\,F\,(\mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-1)\,0) \wedge (\exists C, \forall (z : \mathbb{C}), \|F\,z\| \le C) \wedge (\forall (t : \mathbb{R}), F\,t = \mathrm{inner}\,\mathbb{C}\,\eta\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,(2 \cdot \pi \cdot t))\,\xi)) \wedge \forall (t : \mathbb{R}), F\,(t - i) = \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,(2 \cdot \pi \cdot t))\,\xi)\,\eta
+0 < m \to \forall \{\xi \eta : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})\}, \xi \in \mathrm{closure}\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathcal{G}}\,m) \to \eta \in \mathrm{closure}\,(\href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathcal{G}}\,m) \to \exists F, \mathrm{DiffContOnCl}\,\mathbb{C}\,F\,(\mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-1)\,0) \wedge (\exists C, \forall (z : \mathbb{C}), \|F\,z\| \le C) \wedge (\forall (t : \mathbb{R}), F\,t = \mathrm{inner}\,\mathbb{C}\,\eta\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,(2 \cdot \pi \cdot t))\,\xi)) \wedge \forall (t : \mathbb{R}), F\,(t - i) = \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,(2 \cdot \pi \cdot t))\,\xi)\,\eta
 $$
 
 **proof uses** [`NiceTest`](#d-qiqth-fock-boostkms-nicetest) [`bcf`](#d-qiqth-fock-boostkms-nicetest-bcf) [`bcf_apply_eq_bot`](#d-qiqth-fock-boostkms-nicetest-bcf-apply-eq-bot) [`bcf_apply_eq_top`](#d-qiqth-fock-boostkms-nicetest-bcf-apply-eq-top) [`bcf_cauchySeq`](#d-qiqth-fock-boostkms-nicetest-bcf-cauchyseq) [`cont`](#d-qiqth-fock-boostkms-nicetest-cont) [`cpt`](#d-qiqth-fock-boostkms-nicetest-cpt) [`f`](#d-qiqth-fock-boostkms-nicetest-f) [`hδ`](#d-qiqth-fock-boostkms-nicetest-h) [`margin_le`](#d-qiqth-fock-boostkms-nicetest-margin-le) [`memLp`](#d-qiqth-fock-boostkms-nicetest-memlp) [`real`](#d-qiqth-fock-boostkms-nicetest-real) [`vec`](#d-qiqth-fock-boostkms-nicetest-vec) [`δ`](#d-qiqth-fock-boostkms-nicetest) [`kmsBCF`](#d-qiqth-fock-boostkms-kmsbcf) [`kmsBCF_apply`](#d-qiqth-fock-boostkms-kmsbcf-apply) [`kmsFun`](#d-qiqth-fock-boostkms-kmsfun) [`kmsFun_differentiableOn`](#d-qiqth-fock-boostkms-kmsfun-differentiableon) [`mem_niceWedgeGenSet`](#d-qiqth-fock-boostkms-mem-nicewedgegenset)
@@ -2205,7 +2205,7 @@ $$
 *thm* · [BoostKMS:70 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L70)  
 
 $$
-\mathrm{MemLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,(\href{#d-qiqth-fock-localization-boosttest}{\mathrm{boostTest}}\,(-(2 \cdot \pi \cdot t))\,f))\,2\,\mathrm{volume} \to \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,g\,(\theta + \pi \cdot t)) \cdot \href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f\,(\theta - \pi \cdot t) = \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,g)\,\mathrm{hg})\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,(2 \cdot \pi \cdot t))\,(\mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f)\,\mathrm{hf}))
+\mathrm{MemLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,(\href{#d-qiqth-fock-localization-boosttest}{\mathrm{boostTest}}\,(-(2 \cdot \pi \cdot t))\,f))\,2\,\mathrm{volume} \to \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,g\,(\theta + \pi \cdot t)) \cdot \href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f\,(\theta - \pi \cdot t) = \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,g)\,\mathrm{hg})\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,(2 \cdot \pi \cdot t))\,(\mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f)\,\mathrm{hf}))
 $$
 
 **proof uses** [`inner_boostUnitary_KrepL2`](#d-qiqth-fock-boostkms-inner-boostunitary-krepl2) [`symm_edge_eq_shifted`](#d-qiqth-fock-boostkms-symm-edge-eq-shifted)
@@ -2267,7 +2267,7 @@ $$
 *thm* · [BoostKMS:2262 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2262)  
 
 $$
-0 \in \href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathrm{niceWedgeGenSet}}\,m
+0 \in \href{#d-qiqth-fock-boostkms-nicewedgegenset}{\mathcal{G}}\,m
 $$
 
 **proof uses** [`NiceTest`](#d-qiqth-fock-boostkms-nicetest) [`vec`](#d-qiqth-fock-boostkms-nicetest-vec) [`zero`](#d-qiqth-fock-boostkms-nicetest-zero) [`zero_vec`](#d-qiqth-fock-boostkms-nicetest-zero-vec)
@@ -2484,7 +2484,7 @@ $$
 *thm* · *spine* · [CyclicWitness:693 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/CyclicWitness.lean#L693)  
 
 $$
-(\forall (t : \mathbb{R}) (x : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (V\,t)\,x = (\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,(2 \cdot \pi \cdot t))\,x) \to \forall (t : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,(\href{#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathrm{niceWedgeStandardSubspace}}\,m\,\cdots \,\cdots )\,t = V\,t
+(\forall (t : \mathbb{R}) (x : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (V\,t)\,x = (\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,(2 \cdot \pi \cdot t))\,x) \to \forall (t : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,(\href{#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathcal{K}}\,m\,\cdots \,\cdots )\,t = V\,t
 $$
 
 **proof uses** [`oneParticleBW_niceWedge_reehSchlieder`](#d-qiqth-fock-boostkms-oneparticlebw-nicewedge-reehschlieder)
@@ -2957,7 +2957,7 @@ $$
 *thm* · [OneParticle:127 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/OneParticle.lean#L127)  
 
 $$
-(\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,(s + t))\,g = (\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,s)\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,t)\,g)
+(\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,(s + t))\,g = (\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,s)\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,t)\,g)
 $$
 
 **proof uses** [`unitary_add_apply`](#d-qiqth-fock-oneparticle-mpflow-unitary-add-apply) [`boostFlow`](#d-qiqth-fock-oneparticle-boostflow)
@@ -2970,7 +2970,7 @@ $$
 *thm* · [OneParticle:132 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/OneParticle.lean#L132)  
 
 $$
-(\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,0)\,g = g
+(\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,0)\,g = g
 $$
 
 **proof uses** [`unitary_zero_apply`](#d-qiqth-fock-oneparticle-mpflow-unitary-zero-apply) [`boostFlow`](#d-qiqth-fock-oneparticle-boostflow)
@@ -2983,7 +2983,7 @@ $$
 *thm* · [OneParticleBW:66 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/OneParticleBW.lean#L66)  
 
 $$
-(\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,a)\,(\mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f)\,h) = \mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,(\href{#d-qiqth-fock-localization-boosttest}{\mathrm{boostTest}}\,(-a)\,f))\,h^{\prime}
+(\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,a)\,(\mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f)\,h) = \mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,(\href{#d-qiqth-fock-localization-boosttest}{\mathrm{boostTest}}\,(-a)\,f))\,h^{\prime}
 $$
 
 **proof uses** [`Krep_boost`](#d-qiqth-fock-localization-krep-boost) [`flow`](#d-qiqth-fock-oneparticle-mpflow-flow) [`mp`](#d-qiqth-fock-oneparticle-mpflow-mp) [`unitary_apply`](#d-qiqth-fock-oneparticle-mpflow-unitary-apply) [`boostFlow`](#d-qiqth-fock-oneparticle-boostflow)
@@ -2996,7 +2996,7 @@ $$
 *thm* · [OneParticleBW:110 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/OneParticleBW.lean#L110)  
 
 $$
-(\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,t)\,\xi = \mathrm{mk}\,(-t) +_{v} \xi
+(\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,t)\,\xi = \mathrm{mk}\,(-t) +_{v} \xi
 $$
 
 **proof uses** [`flow`](#d-qiqth-fock-oneparticle-mpflow-flow) [`mp`](#d-qiqth-fock-oneparticle-mpflow-mp) [`unitary_apply`](#d-qiqth-fock-oneparticle-mpflow-unitary-apply) [`boostFlow`](#d-qiqth-fock-oneparticle-boostflow)
@@ -3009,7 +3009,7 @@ $$
 *thm* · [OneParticleBW:96 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/OneParticleBW.lean#L96)  
 
 $$
-((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,a)\,\xi) =[\mathrm{volume}] \lambda \theta \mapsto \xi\,(\theta - a)
+((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,a)\,\xi) =[\mathrm{volume}] \lambda \theta \mapsto \xi\,(\theta - a)
 $$
 
 **proof uses** [`flow`](#d-qiqth-fock-oneparticle-mpflow-flow) [`mp`](#d-qiqth-fock-oneparticle-mpflow-mp) [`unitary_apply`](#d-qiqth-fock-oneparticle-mpflow-unitary-apply) [`boostFlow`](#d-qiqth-fock-oneparticle-boostflow)
@@ -3035,7 +3035,7 @@ $$
 *thm* · [OneParticleBW:131 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/OneParticleBW.lean#L131)  
 
 $$
-\mathrm{Continuous}\,\lambda t \mapsto (\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,t)\,\xi
+\mathrm{Continuous}\,\lambda t \mapsto (\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,t)\,\xi
 $$
 
 **proof uses** [`boostUnitary_eq_vadd`](#d-qiqth-fock-oneparticlebw-boostunitary-eq-vadd)
@@ -3048,7 +3048,7 @@ $$
 *thm* · [OneParticleBW:711 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/OneParticleBW.lean#L711)  
 
 $$
-(\forall \eta\in S.\mathrm{toClosedSubmodule}, \mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (\eta : H) (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (\eta : H) (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (\forall (\eta : H), (V\,0)\,\eta = \eta) \to (\forall \eta\in S.\mathrm{toClosedSubmodule}, \forall (n : \mathbb{R}), 0 < n \to \forall (s : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)) = (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)) \to (\forall \eta\in S.\mathrm{toClosedSubmodule}, \forall (\zeta : H), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta \to \forall (n : \mathbb{R}), 0 < n \to \forall (z : \mathbb{C}), z.\mathrm{im} = -(1/2) \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,z)).\mathrm{im} = 0) \to (\forall \xi\in S.\mathrm{toClosedSubmodule}, \exists \zetas, (\forall (k : \mathbb{N}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,(\mathrm{s}\,k)) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,(\mathrm{s}\,k)) \wedge \mathrm{Tendsto}\,(\lambda k \mapsto (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,(\mathrm{s}\,k))\,\mathrm{atTop}\,(\mathrm{nhds}\,\xi)) \to \href{#d-qiqth-fock-oneparticlebw-gconstancy}{\mathrm{GConstancy}}\,S\,V
+(\forall \eta\in S.\mathrm{toClosedSubmodule}, \mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (\eta : H) (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (\eta : H) (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (\forall (\eta : H), (V\,0)\,\eta = \eta) \to (\forall \eta\in S.\mathrm{toClosedSubmodule}, \forall (n : \mathbb{R}), 0 < n \to \forall (s : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)) = (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)) \to (\forall \eta\in S.\mathrm{toClosedSubmodule}, \forall (\zeta : H), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta \to \forall (n : \mathbb{R}), 0 < n \to \forall (z : \mathbb{C}), z.\mathrm{im} = -(1/2) \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,z)).\mathrm{im} = 0) \to (\forall \xi\in S.\mathrm{toClosedSubmodule}, \exists \zetas, (\forall (k : \mathbb{N}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k)) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k)) \wedge \mathrm{Tendsto}\,(\lambda k \mapsto (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k))\,\mathrm{atTop}\,(\mathrm{nhds}\,\xi)) \to \href{#d-qiqth-fock-oneparticlebw-gconstancy}{\mathrm{GConstancy}}\,S\,V
 $$
 
 **proof uses** [`gConstancy_eta_of_bottom`](#d-qiqth-standardsubspacemodular-gconstancy-eta-of-bottom) [`gConstancy_xi_of_density`](#d-qiqth-standardsubspacemodular-gconstancy-xi-of-density)
@@ -3061,7 +3061,7 @@ $$
 *thm* · [OneParticleBW:595 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/OneParticleBW.lean#L595)  
 
 $$
-0 < n \to \forall \{\eta : H\}, (\mathrm{Continuous}\,\lambda s \mapsto (V\,s)\,\eta) \to (\forall (s : \mathbb{R}), \|(V\,s)\,\eta\| \le \|\eta\|) \to (\forall (s u : \mathbb{R}), (V\,s)\,((V\,u)\,\eta) = (V\,(s + u))\,\eta) \to (\forall (s : \mathbb{R}), (V\,s)\,\eta \in S.\mathrm{toClosedSubmodule}) \to \forall \{\zeta : H\}, (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta \to \href{#d-qiqth-fock-oneparticlebw-stripkmsrvd}{\mathrm{StripKMSrvd}}\,V\,S.\mathrm{toClosedSubmodule} \to \forall (t : \mathbb{R}), (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2)))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,(t - i / 2))).\mathrm{im} = 0
+0 < n \to \forall \{\eta : H\}, (\mathrm{Continuous}\,\lambda s \mapsto (V\,s)\,\eta) \to (\forall (s : \mathbb{R}), \|(V\,s)\,\eta\| \le \|\eta\|) \to (\forall (s u : \mathbb{R}), (V\,s)\,((V\,u)\,\eta) = (V\,(s + u))\,\eta) \to (\forall (s : \mathbb{R}), (V\,s)\,\eta \in S.\mathrm{toClosedSubmodule}) \to \forall \{\zeta : H\}, (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta \to \href{#d-qiqth-fock-oneparticlebw-stripkmsrvd}{\mathrm{StripKMSrvd}}\,V\,S.\mathrm{toClosedSubmodule} \to \forall (t : \mathbb{R}), (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2)))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,(t - i / 2))).\mathrm{im} = 0
 $$
 
 **proof uses** [`gFunction_bottom_real_of_faithful_kms`](#d-qiqth-standardsubspacemodular-gfunction-bottom-real-of-faithful-kms) [`gaussSmear`](#d-qiqth-standardsubspacemodular-gausssmear) [`gaussSmear_mem_K`](#d-qiqth-standardsubspacemodular-gausssmear-mem-k) [`mem_K_iff_projK`](#d-qiqth-standardsubspacemodular-mem-k-iff-projk) [`modUnitary`](#d-qiqth-standardsubspacemodular-modunitary) [`modUnitary_mapsTo_K`](#d-qiqth-standardsubspacemodular-modunitary-mapsto-k) [`kmsHalfStrip`](#d-qiqth-stripuniqueness-kmshalfstrip) [`kmsHalfStripOpen`](#d-qiqth-stripuniqueness-kmshalfstripopen) [`negStrip`](#d-qiqth-stripuniqueness-negstrip) [`real_on_midline_of_conj_flip`](#d-qiqth-stripuniqueness-real-on-midline-of-conj-flip)
@@ -3074,7 +3074,7 @@ $$
 *thm* · [OneParticleBW:259 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/OneParticleBW.lean#L259)  
 
 $$
-\mathrm{Integrable}\,f\,\mathrm{volume} \to \mathrm{Integrable}\,(\lambda \theta \mapsto (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f\,\theta)\,\mathrm{volume} \to \mathrm{AEStronglyMeasurable}\,f\,\mathrm{volume} \to (\forall (x : \mathbb{R}), ({f})'({x})={f^{\prime}\,x}) \to \mathrm{AEStronglyMeasurable}\,f^{\prime}\,\mathrm{volume} \to \forall (B : \mathbb{R}), (\forall (x : \mathbb{R}), \|f^{\prime}\,x\| \le B) \to ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,(-(2 \cdot \pi \cdot t)))\,(\mathrm{toLp}\,f\,\mathrm{hf2}))})'({0})={i \cdot (2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f^{\prime}\,\theta).\mathrm{im}}
+\mathrm{Integrable}\,f\,\mathrm{volume} \to \mathrm{Integrable}\,(\lambda \theta \mapsto (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f\,\theta)\,\mathrm{volume} \to \mathrm{AEStronglyMeasurable}\,f\,\mathrm{volume} \to (\forall (x : \mathbb{R}), ({f})'({x})={f^{\prime}\,x}) \to \mathrm{AEStronglyMeasurable}\,f^{\prime}\,\mathrm{volume} \to \forall (B : \mathbb{R}), (\forall (x : \mathbb{R}), \|f^{\prime}\,x\| \le B) \to ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,(-(2 \cdot \pi \cdot t)))\,(\mathrm{toLp}\,f\,\mathrm{hf2}))})'({0})={i \cdot (2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f^{\prime}\,\theta).\mathrm{im}}
 $$
 
 **proof uses** [`boostUnitary_zero_apply`](#d-qiqth-fock-oneparticle-boostunitary-zero-apply) [`hasDerivAt_inner_boostUnitary_wedge`](#d-qiqth-fock-oneparticlebw-hasderivat-inner-boostunitary-wedge)
@@ -3087,7 +3087,7 @@ $$
 *thm* · [OneParticleBW:193 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/OneParticleBW.lean#L193)  
 
 $$
-\mathrm{Integrable}\,f\,\mathrm{volume} \to \mathrm{Integrable}\,(\lambda \theta \mapsto (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f\,\theta)\,\mathrm{volume} \to \mathrm{AEStronglyMeasurable}\,f\,\mathrm{volume} \to (\forall (x : \mathbb{R}), ({f})'({x})={f^{\prime}\,x}) \to \mathrm{AEStronglyMeasurable}\,f^{\prime}\,\mathrm{volume} \to \forall (B : \mathbb{R}), (\forall (x : \mathbb{R}), \|f^{\prime}\,x\| \le B) \to ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,(-(2 \cdot \pi \cdot t)))\,(\mathrm{toLp}\,f\,\mathrm{hf2}))})'({0})={2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f^{\prime}\,\theta}
+\mathrm{Integrable}\,f\,\mathrm{volume} \to \mathrm{Integrable}\,(\lambda \theta \mapsto (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f\,\theta)\,\mathrm{volume} \to \mathrm{AEStronglyMeasurable}\,f\,\mathrm{volume} \to (\forall (x : \mathbb{R}), ({f})'({x})={f^{\prime}\,x}) \to \mathrm{AEStronglyMeasurable}\,f^{\prime}\,\mathrm{volume} \to \forall (B : \mathbb{R}), (\forall (x : \mathbb{R}), \|f^{\prime}\,x\| \le B) \to ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,(-(2 \cdot \pi \cdot t)))\,(\mathrm{toLp}\,f\,\mathrm{hf2}))})'({0})={2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f^{\prime}\,\theta}
 $$
 
 **proof uses** [`inner_boostUnitary_toLp`](#d-qiqth-fock-oneparticlebw-inner-boostunitary-tolp)
@@ -3100,7 +3100,7 @@ $$
 *thm* · [OneParticleBW:172 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/OneParticleBW.lean#L172)  
 
 $$
-\mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,s)\,(\mathrm{toLp}\,f\,\mathrm{hf2})) = \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f\,(\theta - s)
+\mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,s)\,(\mathrm{toLp}\,f\,\mathrm{hf2})) = \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f\,(\theta - s)
 $$
 
 **proof uses** [`coeFn_boostUnitary`](#d-qiqth-fock-oneparticlebw-coefn-boostunitary)
@@ -3113,7 +3113,7 @@ $$
 *thm* · [OneParticleBW:798 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/OneParticleBW.lean#L798)  
 
 $$
-(\forall \eta\in S.\mathrm{toClosedSubmodule}, \mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (\eta : H) (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (\eta : H) (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (\forall (\eta : H), (V\,0)\,\eta = \eta) \to (\forall \eta\in S.\mathrm{toClosedSubmodule}, \forall (n : \mathbb{R}), 0 < n \to \forall (s : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)) = (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)) \to (\forall (t : \mathbb{R}), \mathrm{MapsTo}\,(V\,t)\,S.\mathrm{toClosedSubmodule}\,S.\mathrm{toClosedSubmodule}) \to \href{#d-qiqth-fock-oneparticlebw-stripkmsrvd}{\mathrm{StripKMSrvd}}\,V\,S.\mathrm{toClosedSubmodule} \to \forall (t : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t = V\,t
+(\forall \eta\in S.\mathrm{toClosedSubmodule}, \mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (\eta : H) (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (\eta : H) (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (\forall (\eta : H), (V\,0)\,\eta = \eta) \to (\forall \eta\in S.\mathrm{toClosedSubmodule}, \forall (n : \mathbb{R}), 0 < n \to \forall (s : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)) = (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)) \to (\forall (t : \mathbb{R}), \mathrm{MapsTo}\,(V\,t)\,S.\mathrm{toClosedSubmodule}\,S.\mathrm{toClosedSubmodule}) \to \href{#d-qiqth-fock-oneparticlebw-stripkmsrvd}{\mathrm{StripKMSrvd}}\,V\,S.\mathrm{toClosedSubmodule} \to \forall (t : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t = V\,t
 $$
 
 **proof uses** [`oneParticleBW_of_stripKMSrvd_density`](#d-qiqth-fock-oneparticlebw-oneparticlebw-of-stripkmsrvd-density)
@@ -3126,7 +3126,7 @@ $$
 *thm* · [OneParticleBW:651 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/OneParticleBW.lean#L651)  
 
 $$
-(\href{#d-qiqth-fock-oneparticlebw-halfstripreal}{\mathrm{HalfStripReal}}\,V\,S.\mathrm{toClosedSubmodule} \to \href{#d-qiqth-fock-oneparticlebw-comparisondatum}{\mathrm{ComparisonDatum}}\,S\,V) \to (\forall (t : \mathbb{R}), \mathrm{MapsTo}\,(V\,t)\,S.\mathrm{toClosedSubmodule}\,S.\mathrm{toClosedSubmodule}) \to \href{#d-qiqth-fock-oneparticlebw-stripkmsrvd}{\mathrm{StripKMSrvd}}\,V\,S.\mathrm{toClosedSubmodule} \to \forall (t : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t = V\,t
+(\href{#d-qiqth-fock-oneparticlebw-halfstripreal}{\mathrm{HalfStripReal}}\,V\,S.\mathrm{toClosedSubmodule} \to \href{#d-qiqth-fock-oneparticlebw-comparisondatum}{\mathrm{ComparisonDatum}}\,S\,V) \to (\forall (t : \mathbb{R}), \mathrm{MapsTo}\,(V\,t)\,S.\mathrm{toClosedSubmodule}\,S.\mathrm{toClosedSubmodule}) \to \href{#d-qiqth-fock-oneparticlebw-stripkmsrvd}{\mathrm{StripKMSrvd}}\,V\,S.\mathrm{toClosedSubmodule} \to \forall (t : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t = V\,t
 $$
 
 **proof uses** [`stripKMSrvd_halfStripReal`](#d-qiqth-fock-oneparticlebw-stripkmsrvd-halfstripreal) [`modUnitary_eq_of_orbit_compare`](#d-qiqth-standardsubspacemodular-modunitary-eq-of-orbit-compare) [`modUnitary_mapsTo_K`](#d-qiqth-standardsubspacemodular-modunitary-mapsto-k) [`projIK`](#d-qiqth-standardsubspacemodular-projik)
@@ -3139,7 +3139,7 @@ $$
 *thm* · [OneParticleBW:738 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/OneParticleBW.lean#L738)  
 
 $$
-(\forall \eta\in S.\mathrm{toClosedSubmodule}, \mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (\eta : H) (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (\eta : H) (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (\forall (\eta : H), (V\,0)\,\eta = \eta) \to (\forall \eta\in S.\mathrm{toClosedSubmodule}, \forall (n : \mathbb{R}), 0 < n \to \forall (s : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)) = (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)) \to (\forall \eta\in S.\mathrm{toClosedSubmodule}, \forall (\zeta : H), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta \to \forall (n : \mathbb{R}), 0 < n \to \forall (z : \mathbb{C}), z.\mathrm{im} = -(1/2) \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,z)).\mathrm{im} = 0) \to (\forall \xi\in S.\mathrm{toClosedSubmodule}, \exists \zetas, (\forall (k : \mathbb{N}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,(\mathrm{s}\,k)) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,(\mathrm{s}\,k)) \wedge \mathrm{Tendsto}\,(\lambda k \mapsto (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,(\mathrm{s}\,k))\,\mathrm{atTop}\,(\mathrm{nhds}\,\xi)) \to (\forall (t : \mathbb{R}), \mathrm{MapsTo}\,(V\,t)\,S.\mathrm{toClosedSubmodule}\,S.\mathrm{toClosedSubmodule}) \to \href{#d-qiqth-fock-oneparticlebw-stripkmsrvd}{\mathrm{StripKMSrvd}}\,V\,S.\mathrm{toClosedSubmodule} \to \forall (t : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t = V\,t
+(\forall \eta\in S.\mathrm{toClosedSubmodule}, \mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (\eta : H) (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (\eta : H) (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (\forall (\eta : H), (V\,0)\,\eta = \eta) \to (\forall \eta\in S.\mathrm{toClosedSubmodule}, \forall (n : \mathbb{R}), 0 < n \to \forall (s : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)) = (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)) \to (\forall \eta\in S.\mathrm{toClosedSubmodule}, \forall (\zeta : H), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta \to \forall (n : \mathbb{R}), 0 < n \to \forall (z : \mathbb{C}), z.\mathrm{im} = -(1/2) \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,z)).\mathrm{im} = 0) \to (\forall \xi\in S.\mathrm{toClosedSubmodule}, \exists \zetas, (\forall (k : \mathbb{N}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k)) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k)) \wedge \mathrm{Tendsto}\,(\lambda k \mapsto (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k))\,\mathrm{atTop}\,(\mathrm{nhds}\,\xi)) \to (\forall (t : \mathbb{R}), \mathrm{MapsTo}\,(V\,t)\,S.\mathrm{toClosedSubmodule}\,S.\mathrm{toClosedSubmodule}) \to \href{#d-qiqth-fock-oneparticlebw-stripkmsrvd}{\mathrm{StripKMSrvd}}\,V\,S.\mathrm{toClosedSubmodule} \to \forall (t : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t = V\,t
 $$
 
 **proof uses** [`HalfStripReal`](#d-qiqth-fock-oneparticlebw-halfstripreal) [`comparisonDatum_of_gConstancy`](#d-qiqth-fock-oneparticlebw-comparisondatum-of-gconstancy) [`gConstancy_of_inputs`](#d-qiqth-fock-oneparticlebw-gconstancy-of-inputs) [`oneParticleBW_of_comparison`](#d-qiqth-fock-oneparticlebw-oneparticlebw-of-comparison)
@@ -3152,7 +3152,7 @@ $$
 *thm* · [OneParticleBW:768 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/OneParticleBW.lean#L768)  
 
 $$
-(\forall \eta\in S.\mathrm{toClosedSubmodule}, \mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (\eta : H) (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (\eta : H) (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (\forall (\eta : H), (V\,0)\,\eta = \eta) \to (\forall \eta\in S.\mathrm{toClosedSubmodule}, \forall (n : \mathbb{R}), 0 < n \to \forall (s : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)) = (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)) \to (\forall \xi\in S.\mathrm{toClosedSubmodule}, \exists \zetas, (\forall (k : \mathbb{N}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,(\mathrm{s}\,k)) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,(\mathrm{s}\,k)) \wedge \mathrm{Tendsto}\,(\lambda k \mapsto (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,(\mathrm{s}\,k))\,\mathrm{atTop}\,(\mathrm{nhds}\,\xi)) \to (\forall (t : \mathbb{R}), \mathrm{MapsTo}\,(V\,t)\,S.\mathrm{toClosedSubmodule}\,S.\mathrm{toClosedSubmodule}) \to \href{#d-qiqth-fock-oneparticlebw-stripkmsrvd}{\mathrm{StripKMSrvd}}\,V\,S.\mathrm{toClosedSubmodule} \to \forall (t : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t = V\,t
+(\forall \eta\in S.\mathrm{toClosedSubmodule}, \mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (\eta : H) (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (\eta : H) (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (\forall (\eta : H), (V\,0)\,\eta = \eta) \to (\forall \eta\in S.\mathrm{toClosedSubmodule}, \forall (n : \mathbb{R}), 0 < n \to \forall (s : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)) = (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)) \to (\forall \xi\in S.\mathrm{toClosedSubmodule}, \exists \zetas, (\forall (k : \mathbb{N}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k)) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k)) \wedge \mathrm{Tendsto}\,(\lambda k \mapsto (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k))\,\mathrm{atTop}\,(\mathrm{nhds}\,\xi)) \to (\forall (t : \mathbb{R}), \mathrm{MapsTo}\,(V\,t)\,S.\mathrm{toClosedSubmodule}\,S.\mathrm{toClosedSubmodule}) \to \href{#d-qiqth-fock-oneparticlebw-stripkmsrvd}{\mathrm{StripKMSrvd}}\,V\,S.\mathrm{toClosedSubmodule} \to \forall (t : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t = V\,t
 $$
 
 **proof uses** [`h1_of_stripKMSrvd`](#d-qiqth-fock-oneparticlebw-h1-of-stripkmsrvd) [`oneParticleBW_of_inputs`](#d-qiqth-fock-oneparticlebw-oneparticlebw-of-inputs) [`gaussSmearC`](#d-qiqth-standardsubspacemodular-gausssmearc) [`modConjBilin`](#d-qiqth-standardsubspacemodular-modconjbilin) [`deviceVecF`](#d-qiqth-devicevecf)
@@ -3846,7 +3846,7 @@ $$
 *thm* · [WienerL2:239 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L239)  
 
 $$
-\mathrm{Integrable}\,k\,\mathrm{volume} \to (\forall (w : \mathbb{R}), \mathrm{fourier}\,k\,w = 0) \to k =[\mathrm{volume}] 0
+\mathrm{Integrable}\,k\,\mathrm{volume} \to (\forall (w : \mathbb{R}), \mathcal{F}\,k\,w = 0) \to k =[\mathrm{volume}] 0
 $$
 
 **used by** [`boost_orbit_total_of_fourier_ne_zero`](#d-qiqth-fock-wienerl2-boost-orbit-total-of-fourier-ne-zero) [`fourierL2_toLp_ne_zero_of_ne_zero`](#d-qiqth-fock-wienerl2-fourierl2-tolp-ne-zero-of-ne-zero)
@@ -3868,7 +3868,7 @@ $$
 *thm* · [WienerL2:591 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L591)  
 
 $$
-m \ne 0 \to \mathrm{AnalyticOnNhd}\,\mathbb{R}\,(\lambda \xi \mapsto \mathrm{fourier}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f)\,\xi)
+m \ne 0 \to \mathrm{AnalyticOnNhd}\,\mathbb{R}\,(\lambda \xi \mapsto \mathcal{F}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f)\,\xi)
 $$
 
 **proof uses** [`analyticOnNhd_ftKrepF_real`](#d-qiqth-fock-wienerl2-analyticonnhd-ftkrepf-real) [`ftKrepF`](#d-qiqth-fock-wienerl2-ftkrepf) [`ftKrepF_eq_fourier`](#d-qiqth-fock-wienerl2-ftkrepf-eq-fourier)
@@ -3894,7 +3894,7 @@ $$
 *thm* · [WienerL2:49 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L49)  
 
 $$
-(\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,a)\,(f.\mathrm{toLp}\,2\,\mathrm{volume}) = ((\href{#d-qiqth-fock-wienerl2-schwartztranslate}{\mathrm{schwartzTranslate}}\,(-a))\,f).\mathrm{toLp}\,2\,\mathrm{volume}
+(\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,a)\,(f.\mathrm{toLp}\,2\,\mathrm{volume}) = ((\href{#d-qiqth-fock-wienerl2-schwartztranslate}{\mathrm{schwartzTranslate}}\,(-a))\,f).\mathrm{toLp}\,2\,\mathrm{volume}
 $$
 
 **proof uses** [`coeFn_boostUnitary`](#d-qiqth-fock-oneparticlebw-coefn-boostunitary) [`schwartzTranslate_apply`](#d-qiqth-fock-wienerl2-schwartztranslate-apply)
@@ -3907,7 +3907,7 @@ $$
 *thm* · [WienerL2:268 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L268)  
 
 $$
-(\forall (\xi : \mathbb{R}), (\mathrm{fourier}\,g_{0})\,\xi \ne 0) \to (\forall (a : \mathbb{R}), \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,a)\,g_{0})\,h = 0) \to h = 0
+(\forall (\xi : \mathbb{R}), (\mathcal{F}\,g_{0})\,\xi \ne 0) \to (\forall (a : \mathbb{R}), \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,a)\,g_{0})\,h = 0) \to h = 0
 $$
 
 **proof uses** [`ae_eq_zero_of_fourier_eq_zero`](#d-qiqth-fock-wienerl2-ae-eq-zero-of-fourier-eq-zero) [`fourier_correlation_eq`](#d-qiqth-fock-wienerl2-fourier-correlation-eq)
@@ -3920,7 +3920,7 @@ $$
 *thm* · [WienerL2:95 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L95)  
 
 $$
-(\href{#d-qiqth-fock-wienerl2-modl2}{\mathrm{modL2}}\,c\,g) =[\mathrm{volume}] \lambda \xi \mapsto \href{#d-qiqth-fock-wienerl2-modchar}{\mathrm{modChar}}\,c\,\xi \cdot g\,\xi
+(\href{#d-qiqth-fock-wienerl2-modl2}{\mathrm{modL2}}\,c\,g) =[\mathrm{volume}] \lambda \xi \mapsto \href{#d-qiqth-fock-wienerl2-modchar}{\chi_{\mathrm{mod}}}\,c\,\xi \cdot g\,\xi
 $$
 
 **proof uses** [`memLp_modChar_smul`](#d-qiqth-fock-wienerl2-memlp-modchar-smul)
@@ -3933,7 +3933,7 @@ $$
 *thm* · [WienerL2:192 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L192)  
 
 $$
-(\mathrm{starRingEnd}\,\mathbb{C})\,(\href{#d-qiqth-fock-wienerl2-modchar}{\mathrm{modChar}}\,c\,\xi) = \href{#d-qiqth-fock-wienerl2-modchar}{\mathrm{modChar}}\,(-c)\,\xi
+(\mathrm{starRingEnd}\,\mathbb{C})\,(\href{#d-qiqth-fock-wienerl2-modchar}{\chi_{\mathrm{mod}}}\,c\,\xi) = \href{#d-qiqth-fock-wienerl2-modchar}{\chi_{\mathrm{mod}}}\,(-c)\,\xi
 $$
 
 **statement uses** [`modChar`](#d-qiqth-fock-wienerl2-modchar)
@@ -3969,7 +3969,7 @@ $$
 *thm* · [WienerL2:80 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L80)  
 
 $$
-\mathrm{Continuous}\,(\href{#d-qiqth-fock-wienerl2-modchar}{\mathrm{modChar}}\,c)
+\mathrm{Continuous}\,(\href{#d-qiqth-fock-wienerl2-modchar}{\chi_{\mathrm{mod}}}\,c)
 $$
 
 **statement uses** [`modChar`](#d-qiqth-fock-wienerl2-modchar)
@@ -3994,7 +3994,7 @@ $$
 *thm* · [WienerL2:669 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L669)  
 
 $$
-\neg \href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,\mathrm{fS} =[\mathrm{volume}] 0 \to \forall (\xi : \mathbb{R}), (\mathrm{fourier}\,(\mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,\mathrm{fS})\,\cdots ))\,\xi \ne 0
+\neg \href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,\mathrm{fS} =[\mathrm{volume}] 0 \to \forall (\xi : \mathbb{R}), (\mathcal{F}\,(\mathrm{toLp}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,\mathrm{fS})\,\cdots ))\,\xi \ne 0
 $$
 
 **proof uses** [`analyticOnNhd_fourier_Krep`](#d-qiqth-fock-wienerl2-analyticonnhd-fourier-krep) [`fourierL2_toLp_ne_zero_of_ne_zero`](#d-qiqth-fock-wienerl2-fourierl2-tolp-ne-zero-of-ne-zero) [`integrable_Krep`](#d-qiqth-fock-wienerl2-integrable-krep)
@@ -4007,7 +4007,7 @@ $$
 *thm* · [WienerL2:163 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L163)  
 
 $$
-\mathrm{fourier}\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,a)\,g) = \href{#d-qiqth-fock-wienerl2-modl2}{\mathrm{modL2}}\,(-(2 \cdot \pi \cdot a))\,(\mathrm{fourier}\,g)
+\mathcal{F}\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,a)\,g) = \href{#d-qiqth-fock-wienerl2-modl2}{\mathrm{modL2}}\,(-(2 \cdot \pi \cdot a))\,(\mathcal{F}\,g)
 $$
 
 **proof uses** [`boostUnitary_toLp`](#d-qiqth-fock-wienerl2-boostunitary-tolp) [`coeFn_modL2`](#d-qiqth-fock-wienerl2-coefn-modl2) [`continuous_modL2`](#d-qiqth-fock-wienerl2-continuous-modl2) [`fourier_schwartzTranslate`](#d-qiqth-fock-wienerl2-fourier-schwartztranslate) [`modChar`](#d-qiqth-fock-wienerl2-modchar) [`schwartzTranslate`](#d-qiqth-fock-wienerl2-schwartztranslate)
@@ -4020,7 +4020,7 @@ $$
 *thm* · [WienerL2:633 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L633)  
 
 $$
-\mathrm{Integrable}\,g\,\mathrm{volume} \to \forall (\mathrm{hg2} : \mathrm{MemLp}\,g\,2\,\mathrm{volume}), (\mathrm{fourier}\,(\mathrm{toLp}\,g\,\mathrm{hg2})) =[\mathrm{volume}] \mathrm{fourier}\,g
+\mathrm{Integrable}\,g\,\mathrm{volume} \to \forall (\mathrm{hg2} : \mathrm{MemLp}\,g\,2\,\mathrm{volume}), (\mathcal{F}\,(\mathrm{toLp}\,g\,\mathrm{hg2})) =[\mathrm{volume}] \mathcal{F}\,g
 $$
 
 **proof uses** [`integral_smul_fourierL2_eq`](#d-qiqth-fock-wienerl2-integral-smul-fourierl2-eq)
@@ -4032,7 +4032,7 @@ $$
 *thm* · [WienerL2:654 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L654)  
 
 $$
-\mathrm{Integrable}\,g\,\mathrm{volume} \to \forall (\mathrm{hg2} : \mathrm{MemLp}\,g\,2\,\mathrm{volume}), \mathrm{AnalyticOnNhd}\,\mathbb{R}\,(\lambda \xi \mapsto \mathrm{fourier}\,g\,\xi) \to \neg g =[\mathrm{volume}] 0 \to \forall (\xi : \mathbb{R}), (\mathrm{fourier}\,(\mathrm{toLp}\,g\,\mathrm{hg2}))\,\xi \ne 0
+\mathrm{Integrable}\,g\,\mathrm{volume} \to \forall (\mathrm{hg2} : \mathrm{MemLp}\,g\,2\,\mathrm{volume}), \mathrm{AnalyticOnNhd}\,\mathbb{R}\,(\lambda \xi \mapsto \mathcal{F}\,g\,\xi) \to \neg g =[\mathrm{volume}] 0 \to \forall (\xi : \mathbb{R}), (\mathcal{F}\,(\mathrm{toLp}\,g\,\mathrm{hg2}))\,\xi \ne 0
 $$
 
 **proof uses** [`ae_eq_zero_of_fourier_eq_zero`](#d-qiqth-fock-wienerl2-ae-eq-zero-of-fourier-eq-zero) [`ae_ne_zero_of_analyticOnNhd`](#d-qiqth-fock-wienerl2-ae-ne-zero-of-analyticonnhd) [`fourierL2_toLp_ae_eq`](#d-qiqth-fock-wienerl2-fourierl2-tolp-ae-eq)
@@ -4044,7 +4044,7 @@ $$
 *thm* · [WienerL2:223 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L223)  
 
 $$
-\mathrm{fourier}\,(\lambda \xi \mapsto (\mathrm{starRingEnd}\,\mathbb{C})\,((\mathrm{fourier}\,g_{0})\,\xi) \cdot (\mathrm{fourier}\,h)\,\xi)\,w = \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,(-w))\,g_{0})\,h
+\mathcal{F}\,(\lambda \xi \mapsto (\mathrm{starRingEnd}\,\mathbb{C})\,((\mathcal{F}\,g_{0})\,\xi) \cdot (\mathcal{F}\,h)\,\xi)\,w = \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,(-w))\,g_{0})\,h
 $$
 
 **proof uses** [`inner_boostUnitary_eq_integral`](#d-qiqth-fock-wienerl2-inner-boostunitary-eq-integral) [`modChar`](#d-qiqth-fock-wienerl2-modchar)
@@ -4057,7 +4057,7 @@ $$
 *thm* · [WienerL2:125 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L125)  
 
 $$
-(\mathrm{fourier}\,((\href{#d-qiqth-fock-wienerl2-schwartztranslate}{\mathrm{schwartzTranslate}}\,(-a))\,f))\,w = \href{#d-qiqth-fock-wienerl2-modchar}{\mathrm{modChar}}\,(-(2 \cdot \pi \cdot a))\,w \cdot (\mathrm{fourier}\,f)\,w
+(\mathcal{F}\,((\href{#d-qiqth-fock-wienerl2-schwartztranslate}{\mathrm{schwartzTranslate}}\,(-a))\,f))\,w = \href{#d-qiqth-fock-wienerl2-modchar}{\chi_{\mathrm{mod}}}\,(-(2 \cdot \pi \cdot a))\,w \cdot (\mathcal{F}\,f)\,w
 $$
 
 **proof uses** [`schwartzTranslate_apply`](#d-qiqth-fock-wienerl2-schwartztranslate-apply)
@@ -4070,7 +4070,7 @@ $$
 *thm* · [WienerL2:577 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L577)  
 
 $$
-\href{#d-qiqth-fock-wienerl2-ftkrepf}{\mathrm{ftKrepF}}\,m\,f\,\xi = \mathrm{fourier}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f)\,\xi
+\href{#d-qiqth-fock-wienerl2-ftkrepf}{\mathrm{ftKrepF}}\,m\,f\,\xi = \mathcal{F}\,(\href{#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f)\,\xi
 $$
 
 **proof uses** [`ftKrep`](#d-qiqth-fock-wienerl2-ftkrep)
@@ -4120,7 +4120,7 @@ $$
 *thm* · [WienerL2:200 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L200)  
 
 $$
-\mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,a)\,g_{0})\,h = \int (\xi : \mathbb{R}), \href{#d-qiqth-fock-wienerl2-modchar}{\mathrm{modChar}}\,(2 \cdot \pi \cdot a)\,\xi \cdot ((\mathrm{starRingEnd}\,\mathbb{C})\,((\mathrm{fourier}\,g_{0})\,\xi) \cdot (\mathrm{fourier}\,h)\,\xi)
+\mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,a)\,g_{0})\,h = \int (\xi : \mathbb{R}), \href{#d-qiqth-fock-wienerl2-modchar}{\chi_{\mathrm{mod}}}\,(2 \cdot \pi \cdot a)\,\xi \cdot ((\mathrm{starRingEnd}\,\mathbb{C})\,((\mathcal{F}\,g_{0})\,\xi) \cdot (\mathcal{F}\,h)\,\xi)
 $$
 
 **proof uses** [`coeFn_modL2`](#d-qiqth-fock-wienerl2-coefn-modl2) [`conj_modChar`](#d-qiqth-fock-wienerl2-conj-modchar) [`fourierL2_boostUnitary`](#d-qiqth-fock-wienerl2-fourierl2-boostunitary) [`modL2`](#d-qiqth-fock-wienerl2-modl2)
@@ -4182,7 +4182,7 @@ $$
 *thm* · [WienerL2:602 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L602)  
 
 $$
-\mathrm{Integrable}\,g\,\mathrm{volume} \to \forall (\mathrm{hg2} : \mathrm{MemLp}\,g\,2\,\mathrm{volume}) (\varphi : \mathrm{SchwartzMap}\,\mathbb{R}\,\mathbb{C}), \int (x : \mathbb{R}), \varphi\,x \cdot (\mathrm{fourier}\,(\mathrm{toLp}\,g\,\mathrm{hg2}))\,x = \int (x : \mathbb{R}), \varphi\,x \cdot \mathrm{fourier}\,g\,x
+\mathrm{Integrable}\,g\,\mathrm{volume} \to \forall (\mathrm{hg2} : \mathrm{MemLp}\,g\,2\,\mathrm{volume}) (\varphi : \mathrm{SchwartzMap}\,\mathbb{R}\,\mathbb{C}), \int (x : \mathbb{R}), \varphi\,x \cdot (\mathcal{F}\,(\mathrm{toLp}\,g\,\mathrm{hg2}))\,x = \int (x : \mathbb{R}), \varphi\,x \cdot \mathcal{F}\,g\,x
 $$
 
 **used by** [`fourierL2_toLp_ae_eq`](#d-qiqth-fock-wienerl2-fourierl2-tolp-ae-eq)
@@ -4217,7 +4217,7 @@ $$
 *thm* · [WienerL2:83 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L83)  
 
 $$
-\mathrm{MemLp}\,(\lambda \xi \mapsto \href{#d-qiqth-fock-wienerl2-modchar}{\mathrm{modChar}}\,c\,\xi \cdot g\,\xi)\,2\,\mathrm{volume}
+\mathrm{MemLp}\,(\lambda \xi \mapsto \href{#d-qiqth-fock-wienerl2-modchar}{\chi_{\mathrm{mod}}}\,c\,\xi \cdot g\,\xi)\,2\,\mathrm{volume}
 $$
 
 **proof uses** [`continuous_modChar`](#d-qiqth-fock-wienerl2-continuous-modchar) [`norm_modChar`](#d-qiqth-fock-wienerl2-norm-modchar)
@@ -4282,7 +4282,7 @@ $$
 *thm* · [WienerL2:76 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/WienerL2.lean#L76)  
 
 $$
-\|\href{#d-qiqth-fock-wienerl2-modchar}{\mathrm{modChar}}\,c\,\xi\| = 1
+\|\href{#d-qiqth-fock-wienerl2-modchar}{\chi_{\mathrm{mod}}}\,c\,\xi\| = 1
 $$
 
 **statement uses** [`modChar`](#d-qiqth-fock-wienerl2-modchar)
@@ -4319,7 +4319,7 @@ $$
 *thm* · *spine* · [FreeFieldHFlux:134 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/FreeFieldHFlux.lean#L134)  
 
 $$
-\mathrm{Integrable}\,f\,\mathrm{volume} \to (\forall (x : \mathbb{R}), ({f})'({x})={f^{\prime}\,x}) \to \mathrm{AEStronglyMeasurable}\,f^{\prime}\,\mathrm{volume} \to \forall (B : \mathbb{R}), (\forall (x : \mathbb{R}), \|f^{\prime}\,x\| \le B) \to \forall (\hbar \mathrm{kd} T_{kk} : \mathbb{R}), 2 \cdot \pi / \hbar \cdot T_{kk} = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f^{\prime}\,\theta)).\mathrm{im} \to ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,(\href{#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathrm{niceWedgeStandardSubspace}}\,m\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,f\,\mathrm{hf2}))})'({0})={i \cdot \mathrm{kd}} \to \mathrm{kd} = 2 \cdot \pi / \hbar \cdot T_{kk}
+\mathrm{Integrable}\,f\,\mathrm{volume} \to (\forall (x : \mathbb{R}), ({f})'({x})={f^{\prime}\,x}) \to \mathrm{AEStronglyMeasurable}\,f^{\prime}\,\mathrm{volume} \to \forall (B : \mathbb{R}), (\forall (x : \mathbb{R}), \|f^{\prime}\,x\| \le B) \to \forall (\hbar \mathrm{kd} T_{kk} : \mathbb{R}), 2 \cdot \pi / \hbar \cdot T_{kk} = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f^{\prime}\,\theta)).\mathrm{im} \to ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,(\href{#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathcal{K}}\,m\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,f\,\mathrm{hf2}))})'({0})={i \cdot \mathrm{kd}} \to \mathrm{kd} = 2 \cdot \pi / \hbar \cdot T_{kk}
 $$
 
 **proof uses** [`freeField_oneParticle_hFlux`](#d-qiqth-fock-freefield-oneparticle-hflux)
@@ -4332,7 +4332,7 @@ $$
 *thm* · [FreeFieldHFlux:40 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/FreeFieldHFlux.lean#L40)  
 
 $$
-({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,\xi\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,(2 \cdot \pi \cdot t))\,\xi)})'({0})={c} \to ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,\xi\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,(\href{#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathrm{niceWedgeStandardSubspace}}\,m\,\cdots \,\cdots )\,t)\,\xi)})'({0})={c}
+({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,\xi\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,(2 \cdot \pi \cdot t))\,\xi)})'({0})={c} \to ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,\xi\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,(\href{#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathcal{K}}\,m\,\cdots \,\cdots )\,t)\,\xi)})'({0})={c}
 $$
 
 **proof uses** [`oneParticleBW_niceWedge_unconditional`](#d-qiqth-fock-cyclicwitness-oneparticlebw-nicewedge-unconditional)
@@ -4345,7 +4345,7 @@ $$
 *thm* · *spine* · [FreeFieldHFlux:104 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/FreeFieldHFlux.lean#L104)  
 
 $$
-\mathrm{Integrable}\,f\,\mathrm{volume} \to (\forall (x : \mathbb{R}), ({f})'({x})={f^{\prime}\,x}) \to \mathrm{AEStronglyMeasurable}\,f^{\prime}\,\mathrm{volume} \to \forall (B : \mathbb{R}), (\forall (x : \mathbb{R}), \|f^{\prime}\,x\| \le B) \to \forall (\hbar T_{kk} : \mathbb{R}), 2 \cdot \pi / \hbar \cdot T_{kk} = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f^{\prime}\,\theta)).\mathrm{im} \to ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,(\href{#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathrm{niceWedgeStandardSubspace}}\,m\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,f\,\mathrm{hf2}))})'({0})={i \cdot (2 \cdot \pi / \hbar \cdot T_{kk})}
+\mathrm{Integrable}\,f\,\mathrm{volume} \to (\forall (x : \mathbb{R}), ({f})'({x})={f^{\prime}\,x}) \to \mathrm{AEStronglyMeasurable}\,f^{\prime}\,\mathrm{volume} \to \forall (B : \mathbb{R}), (\forall (x : \mathbb{R}), \|f^{\prime}\,x\| \le B) \to \forall (\hbar T_{kk} : \mathbb{R}), 2 \cdot \pi / \hbar \cdot T_{kk} = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f^{\prime}\,\theta)).\mathrm{im} \to ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,(\href{#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathcal{K}}\,m\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,f\,\mathrm{hf2}))})'({0})={i \cdot (2 \cdot \pi / \hbar \cdot T_{kk})}
 $$
 
 **proof uses** [`boostUnitary`](#d-qiqth-fock-oneparticle-boostunitary) [`freeField_modularEnergy_eq_boostCharge`](#d-qiqth-fock-freefield-modularenergy-eq-boostcharge) [`hasDerivAt_inner_boostUnitary_imaginary_pos`](#d-qiqth-fock-hasderivat-inner-boostunitary-imaginary-pos)
@@ -4358,7 +4358,7 @@ $$
 *thm* · [FreeFieldHFlux:64 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/FreeFieldHFlux.lean#L64)  
 
 $$
-\mathrm{Integrable}\,f\,\mathrm{volume} \to (\forall (x : \mathbb{R}), ({f})'({x})={f^{\prime}\,x}) \to \mathrm{AEStronglyMeasurable}\,f^{\prime}\,\mathrm{volume} \to \forall (B : \mathbb{R}), (\forall (x : \mathbb{R}), \|f^{\prime}\,x\| \le B) \to ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{\mathrm{boostUnitary}}\,(2 \cdot \pi \cdot t))\,(\mathrm{toLp}\,f\,\mathrm{hf2}))})'({0})={i \cdot (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f^{\prime}\,\theta)).\mathrm{im}}
+\mathrm{Integrable}\,f\,\mathrm{volume} \to (\forall (x : \mathbb{R}), ({f})'({x})={f^{\prime}\,x}) \to \mathrm{AEStronglyMeasurable}\,f^{\prime}\,\mathrm{volume} \to \forall (B : \mathbb{R}), (\forall (x : \mathbb{R}), \|f^{\prime}\,x\| \le B) \to ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\href{#d-qiqth-fock-oneparticle-boostunitary}{U}\,(2 \cdot \pi \cdot t))\,(\mathrm{toLp}\,f\,\mathrm{hf2}))})'({0})={i \cdot (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f^{\prime}\,\theta)).\mathrm{im}}
 $$
 
 **proof uses** [`hasDerivAt_inner_boostUnitary_imaginary`](#d-qiqth-fock-oneparticlebw-hasderivat-inner-boostunitary-imaginary)
@@ -4397,7 +4397,7 @@ $$
 *thm* · [QiqtToGR:32 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/QiqtToGR.lean#L32)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (V : \href{#d-qiqth-curvature-point}{M^{{4}}} \to \mathrm{Fin}\,4 \to \mathbb{R}), (\forall (\mu : \mathrm{Fin}\,4), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,4), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\mathrm{christoffel}}\,g\,\mathrm{gi}\,a\,b\,c\,y})\in C^{\infty}) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (\mu : \mathrm{Fin}\,4), \sum_{\nu} V\,y\,\nu \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({y})} = 0) \to \forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}), \sum_{\mu} \sum_{\nu} \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\mu}}{}^{{\nu}}({x})} \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({x})} = 0 \to \forall (\mathrm{ad} : \mathbb{R}), \mathrm{ad} = -\sum_{\nu} V\,x\,\nu \cdot \partial_{{\nu}}({\lambda y \mapsto \href{#d-qiqth-curvature-expansion}{\theta({y})}})({x}) \to \mathrm{ad} = ({\lambda i j \mapsto \href{#d-qiqth-curvature-ricci}{R_{{i}{j}}({x})}})({V\,x},{V\,x})
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to \forall (V : \href{#d-qiqth-curvature-point}{M^{{4}}} \to \mathrm{Fin}\,4 \to \mathbb{R}), (\forall (\mu : \mathrm{Fin}\,4), ({\lambda y \mapsto V\,y\,\mu})\in C^{\infty}) \to (\forall (a b c : \mathrm{Fin}\,4), ({\lambda y \mapsto \href{#d-qiqth-curvature-christoffel}{\Gamma^{{a}}_{{b}{c}}({y})}})\in C^{\infty}) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (\mu : \mathrm{Fin}\,4), \sum_{\nu} V\,y\,\nu \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({y})} = 0) \to \forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}), \sum_{\mu} \sum_{\nu} \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\mu}}{}^{{\nu}}({x})} \cdot \href{#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\mu}}({x})} = 0 \to \forall (\mathrm{ad} : \mathbb{R}), \mathrm{ad} = -\sum_{\nu} V\,x\,\nu \cdot \partial_{{\nu}}({\lambda y \mapsto \href{#d-qiqth-curvature-expansion}{\theta({y})}})({x}) \to \mathrm{ad} = ({\lambda i j \mapsto \href{#d-qiqth-curvature-ricci}{R_{{i}{j}}({x})}})({V\,x},{V\,x})
 $$
 
 **proof uses** [`raychaudhuri_focusing_at_equilibrium`](#d-qiqth-curvature-raychaudhuri-focusing-at-equilibrium)
@@ -4637,7 +4637,7 @@ $$
 *thm* · [PVM:1048 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1048)  
 
 $$
-(\forall (z : H), \forall i\in t, \mathrm{Integrable}\,(F\,i)\,(P.\mathrm{scalarMeasure}\,z)) \to \forall (x y : H), P.\mathrm{bilinDiag}\,(\lambda \omega \mapsto \sum_{i t} F\,i\,\omega)\,x\,y = \sum_{i t} P.\mathrm{bilinDiag}\,(F\,i)\,x\,y
+(\forall (z : H), \forall i\in t, \mathrm{Integrable}\,(F\,i)\,(P.\mu\,z)) \to \forall (x y : H), P.\mathrm{bilinDiag}\,(\lambda \omega \mapsto \sum_{i t} F\,i\,\omega)\,x\,y = \sum_{i t} P.\mathrm{bilinDiag}\,(F\,i)\,x\,y
 $$
 
 **proof uses** [`diagInt`](#d-qiqth-spectral-projectionvaluedmeasure-diagint) [`diagInt_finsetSum`](#d-qiqth-spectral-projectionvaluedmeasure-diagint-finsetsum)
@@ -4793,7 +4793,7 @@ $$
 *thm* · [PVM:1058 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1058)  
 
 $$
-P.\mathrm{boundedFC}\,\cdots \,\cdots \,\cdots = P.\mathrm{boundedFC}\,\mathrm{hf}\,\mathrm{hCf0}\,\mathrm{hCf} + P.\mathrm{boundedFC}\,\mathrm{hg}\,\mathrm{hCg0}\,\mathrm{hCg}
+P.\Phi\,\cdots \,\cdots \,\cdots = P.\Phi\,\mathrm{hf}\,\mathrm{hCf0}\,\mathrm{hCf} + P.\Phi\,\mathrm{hg}\,\mathrm{hCg0}\,\mathrm{hCg}
 $$
 
 **proof uses** [`bilinDiag`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag) [`bilinDiag_add_f`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag-add-f) [`inner_boundedFC`](#d-qiqth-spectral-projectionvaluedmeasure-inner-boundedfc)
@@ -4806,7 +4806,7 @@ $$
 *thm* · [PVM:1105 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1105)  
 
 $$
-f = f^{\prime} \to P.\mathrm{boundedFC}\,\mathrm{hf}\,\mathrm{hCf0}\,\mathrm{hCf} = P.\mathrm{boundedFC}\,\mathrm{hf}^{\prime}\,\mathrm{hCf0}^{\prime}\,\mathrm{hCf}^{\prime}
+f = f^{\prime} \to P.\Phi\,\mathrm{hf}\,\mathrm{hCf0}\,\mathrm{hCf} = P.\Phi\,\mathrm{hf}^{\prime}\,\mathrm{hCf0}^{\prime}\,\mathrm{hCf}^{\prime}
 $$
 
 **proof uses** [`bilinDiag`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag) [`inner_boundedFC`](#d-qiqth-spectral-projectionvaluedmeasure-inner-boundedfc)
@@ -4819,7 +4819,7 @@ $$
 *thm* · [PVM:1013 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1013)  
 
 $$
-P.\mathrm{boundedFC}\,\cdots \,\cdots \,\cdots = c \cdot 1
+P.\Phi\,\cdots \,\cdots \,\cdots = c \cdot 1
 $$
 
 **proof uses** [`bilinDiag`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag) [`bilinDiag_const`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag-const) [`inner_boundedFC`](#d-qiqth-spectral-projectionvaluedmeasure-inner-boundedfc)
@@ -4832,7 +4832,7 @@ $$
 *thm* · [PVM:1176 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1176)  
 
 $$
-P.\mathrm{boundedFC}\,\cdots \,\cdots \,\cdots = P.\mathrm{integralSimple}\,t\,c\,\mathrm{sets}
+P.\Phi\,\cdots \,\cdots \,\cdots = P.\mathrm{integralSimple}\,t\,c\,\mathrm{sets}
 $$
 
 **proof uses** [`E`](#d-qiqth-spectral-projectionvaluedmeasure-e) [`bilinDiag`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag) [`bilinDiag_finsetSum`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag-finsetsum) [`bilinDiag_indicator`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag-indicator) [`bilinDiag_smul_f`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag-smul-f) [`inner_boundedFC`](#d-qiqth-spectral-projectionvaluedmeasure-inner-boundedfc) [`inner_integralSimple_left`](#d-qiqth-spectral-projectionvaluedmeasure-inner-integralsimple-left) [`integrable_boundedMeasurable`](#d-qiqth-spectral-projectionvaluedmeasure-integrable-boundedmeasurable)
@@ -4845,7 +4845,7 @@ $$
 *thm* · [PVM:1154 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1154)  
 
 $$
-P.\mathrm{boundedFC}\,\cdots \,\cdots \,\cdots = P.E\,s
+P.\Phi\,\cdots \,\cdots \,\cdots = P.E\,s
 $$
 
 **proof uses** [`bilinDiag`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag) [`bilinDiag_indicator`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag-indicator) [`inner_boundedFC`](#d-qiqth-spectral-projectionvaluedmeasure-inner-boundedfc)
@@ -4858,7 +4858,7 @@ $$
 *thm* · [PVM:1433 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1433)  
 
 $$
-P.\mathrm{boundedFC}\,\mathrm{hfp}\,\mathrm{hC0p}\,\mathrm{hCp} = P.\mathrm{boundedFC}\,\mathrm{hf}\,\mathrm{hC0f}\,\mathrm{hCf} \cdot P.\mathrm{boundedFC}\,\mathrm{hg}\,\mathrm{hC0g}\,\mathrm{hCg}
+P.\Phi\,\mathrm{hfp}\,\mathrm{hC0p}\,\mathrm{hCp} = P.\Phi\,\mathrm{hf}\,\mathrm{hC0f}\,\mathrm{hCf} \cdot P.\Phi\,\mathrm{hg}\,\mathrm{hC0g}\,\mathrm{hCg}
 $$
 
 **proof uses** [`approxSeq`](#d-qiqth-spectral-projectionvaluedmeasure-approxseq) [`approxSeq_measurable`](#d-qiqth-spectral-projectionvaluedmeasure-approxseq-measurable) [`approxSeq_norm_le`](#d-qiqth-spectral-projectionvaluedmeasure-approxseq-norm-le) [`approxSeq_tendsto`](#d-qiqth-spectral-projectionvaluedmeasure-approxseq-tendsto) [`bilinDiag`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag) [`boundedFC_mul_simpleFunc_left`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-mul-simplefunc-left) [`inner_boundedFC`](#d-qiqth-spectral-projectionvaluedmeasure-inner-boundedfc) [`tendsto_bilinDiag_of_dominated`](#d-qiqth-spectral-projectionvaluedmeasure-tendsto-bilindiag-of-dominated)
@@ -4871,7 +4871,7 @@ $$
 *thm* · [PVM:1391 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1391)  
 
 $$
-P.\mathrm{boundedFC}\,\mathrm{hfp}\,\mathrm{hC0p}\,\mathrm{hCp} = P.\mathrm{boundedFC}\,\mathrm{hf}\varphi\,\mathrm{hC0}\varphi\,\mathrm{hC}\varphi \cdot P.\mathrm{boundedFC}\,\mathrm{hg}\,\mathrm{hC0g}\,\mathrm{hCg}
+P.\Phi\,\mathrm{hfp}\,\mathrm{hC0p}\,\mathrm{hCp} = P.\Phi\,\mathrm{hf}\varphi\,\mathrm{hC0}\varphi\,\mathrm{hC}\varphi \cdot P.\Phi\,\mathrm{hg}\,\mathrm{hC0g}\,\mathrm{hCg}
 $$
 
 **proof uses** [`approxSeq`](#d-qiqth-spectral-projectionvaluedmeasure-approxseq) [`approxSeq_measurable`](#d-qiqth-spectral-projectionvaluedmeasure-approxseq-measurable) [`approxSeq_norm_le`](#d-qiqth-spectral-projectionvaluedmeasure-approxseq-norm-le) [`approxSeq_tendsto`](#d-qiqth-spectral-projectionvaluedmeasure-approxseq-tendsto) [`bilinDiag`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag) [`boundedFC_simpleFunc_mul`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-simplefunc-mul) [`inner_boundedFC`](#d-qiqth-spectral-projectionvaluedmeasure-inner-boundedfc) [`tendsto_bilinDiag_of_dominated`](#d-qiqth-spectral-projectionvaluedmeasure-tendsto-bilindiag-of-dominated)
@@ -4884,7 +4884,7 @@ $$
 *thm* · [PVM:1095 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1095)  
 
 $$
-\|P.\mathrm{boundedFC}\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC}\| \le 2 \cdot C
+\|P.\Phi\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC}\| \le 2 \cdot C
 $$
 
 **proof uses** [`intBorel`](#d-qiqth-spectral-projectionvaluedmeasure-intborel) [`intBorel_norm_le`](#d-qiqth-spectral-projectionvaluedmeasure-intborel-norm-le)
@@ -4897,7 +4897,7 @@ $$
 *thm* · [PVM:1291 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1291)  
 
 $$
-P.\mathrm{boundedFC}\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC} = P.\mathrm{integralSimple}\,\varphi.\mathrm{range}\,\mathrm{id}\,\lambda y \mapsto \varphi ^{-1}{}' \{y\}
+P.\Phi\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC} = P.\mathrm{integralSimple}\,\varphi.\mathrm{range}\,\mathrm{id}\,\lambda y \mapsto \varphi ^{-1}{}' \{y\}
 $$
 
 **proof uses** [`boundedFC_congr`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-congr) [`boundedFC_eq_integralSimple`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-eq-integralsimple) [`norm_indicatorOne_le`](#d-qiqth-spectral-projectionvaluedmeasure-norm-indicatorone-le) [`simpleFunc_eq_sum`](#d-qiqth-spectral-projectionvaluedmeasure-simplefunc-eq-sum)
@@ -4910,7 +4910,7 @@ $$
 *thm* · [PVM:1300 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1300)  
 
 $$
-P.\mathrm{boundedFC}\,\mathrm{hfp}\,\mathrm{hC0p}\,\mathrm{hCp} = P.\mathrm{boundedFC}\,\mathrm{hf}\varphi\,\mathrm{hC0}\varphi\,\mathrm{hC}\varphi \cdot P.\mathrm{boundedFC}\,\mathrm{hf}\psi\,\mathrm{hC0}\psi\,\mathrm{hC}\psi
+P.\Phi\,\mathrm{hfp}\,\mathrm{hC0p}\,\mathrm{hCp} = P.\Phi\,\mathrm{hf}\varphi\,\mathrm{hC0}\varphi\,\mathrm{hC}\varphi \cdot P.\Phi\,\mathrm{hf}\psi\,\mathrm{hC0}\psi\,\mathrm{hC}\psi
 $$
 
 **proof uses** [`boundedFC_congr`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-congr) [`boundedFC_simpleFunc`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-simplefunc) [`boundedFC_simple_mul`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-simple-mul) [`integralSimple`](#d-qiqth-spectral-projectionvaluedmeasure-integralsimple) [`norm_indicatorOne_le`](#d-qiqth-spectral-projectionvaluedmeasure-norm-indicatorone-le) [`simpleFunc_eq_sum`](#d-qiqth-spectral-projectionvaluedmeasure-simplefunc-eq-sum)
@@ -4923,7 +4923,7 @@ $$
 *thm* · [PVM:1230 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1230)  
 
 $$
-P.\mathrm{boundedFC}\,\cdots \,\cdots \,\cdots = P.\mathrm{integralSimple}\,t\,a\,A \cdot P.\mathrm{integralSimple}\,s\,b\,B
+P.\Phi\,\cdots \,\cdots \,\cdots = P.\mathrm{integralSimple}\,t\,a\,A \cdot P.\mathrm{integralSimple}\,s\,b\,B
 $$
 
 **proof uses** [`boundedFC_congr`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-congr) [`boundedFC_eq_integralSimple`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-eq-integralsimple) [`integralSimple_product_eq`](#d-qiqth-spectral-projectionvaluedmeasure-integralsimple-product-eq)
@@ -4936,7 +4936,7 @@ $$
 *thm* · [PVM:1084 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1084)  
 
 $$
-P.\mathrm{boundedFC}\,\cdots \,\cdots \,\cdots = c \cdot P.\mathrm{boundedFC}\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC}
+P.\Phi\,\cdots \,\cdots \,\cdots = c \cdot P.\Phi\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC}
 $$
 
 **proof uses** [`bilinDiag`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag) [`bilinDiag_smul_f`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag-smul-f) [`inner_boundedFC`](#d-qiqth-spectral-projectionvaluedmeasure-inner-boundedfc)
@@ -5014,7 +5014,7 @@ $$
 *thm* · [PVM:1031 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1031)  
 
 $$
-(\forall i\in t, \mathrm{Integrable}\,(F\,i)\,(P.\mathrm{scalarMeasure}\,z)) \to P.\mathrm{diagInt}\,(\lambda \omega \mapsto \sum_{i t} F\,i\,\omega)\,z = \sum_{i t} P.\mathrm{diagInt}\,(F\,i)\,z
+(\forall i\in t, \mathrm{Integrable}\,(F\,i)\,(P.\mu\,z)) \to P.\mathrm{diagInt}\,(\lambda \omega \mapsto \sum_{i t} F\,i\,\omega)\,z = \sum_{i t} P.\mathrm{diagInt}\,(F\,i)\,z
 $$
 
 **statement uses** [`ProjectionValuedMeasure`](#d-qiqth-spectral-projectionvaluedmeasure) [`diagInt`](#d-qiqth-spectral-projectionvaluedmeasure-diagint) [`scalarMeasure`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure)
@@ -5026,7 +5026,7 @@ $$
 *thm* · [PVM:1125 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1125)  
 
 $$
-\mathrm{MeasurableSet}\,s \to \forall (z : H), P.\mathrm{diagInt}\,(s.\mathrm{indicator}\,\lambda x \mapsto 1)\,z = ((P.\mathrm{scalarMeasure}\,z)\,s).\mathrm{toReal}
+\mathrm{MeasurableSet}\,s \to \forall (z : H), P.\mathrm{diagInt}\,(s.\mathrm{indicator}\,\lambda x \mapsto 1)\,z = ((P.\mu\,z)\,s).\mathrm{toReal}
 $$
 
 **statement uses** [`ProjectionValuedMeasure`](#d-qiqth-spectral-projectionvaluedmeasure) [`diagInt`](#d-qiqth-spectral-projectionvaluedmeasure-diagint) [`scalarMeasure`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure)
@@ -5155,7 +5155,7 @@ $$
 *thm* · [PVM:1007 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1007)  
 
 $$
-\mathrm{inner}\,\mathbb{C}\,x\,((P.\mathrm{boundedFC}\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC})\,y) = P.\mathrm{bilinDiag}\,f\,x\,y
+\mathrm{inner}\,\mathbb{C}\,x\,((P.\Phi\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC})\,y) = P.\mathrm{bilinDiag}\,f\,x\,y
 $$
 
 **proof uses** [`inner_intBorel`](#d-qiqth-spectral-projectionvaluedmeasure-inner-intborel) [`intBorel`](#d-qiqth-spectral-projectionvaluedmeasure-intborel)
@@ -5193,7 +5193,7 @@ $$
 *thm* · [PVM:532 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L532)  
 
 $$
-\mathrm{IsFiniteMeasure}\,(P.\mathrm{scalarMeasure}\,x)
+\mathrm{IsFiniteMeasure}\,(P.\mu\,x)
 $$
 
 **proof uses** [`scalarMeasure_univ`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure-univ)
@@ -5219,7 +5219,7 @@ $$
 *thm* · [PVM:581 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L581)  
 
 $$
-\mathrm{Measurable}\,f \to \forall \{C : \mathbb{R}\}, (\forall (\omega : \Omega), \|f\,\omega\| \le C) \to \forall (x : H), \mathrm{Integrable}\,f\,(P.\mathrm{scalarMeasure}\,x)
+\mathrm{Measurable}\,f \to \forall \{C : \mathbb{R}\}, (\forall (\omega : \Omega), \|f\,\omega\| \le C) \to \forall (x : H), \mathrm{Integrable}\,f\,(P.\mu\,x)
 $$
 
 **proof uses** [`instIsFiniteMeasure_scalarMeasure`](#d-qiqth-spectral-projectionvaluedmeasure-instisfinitemeasure-scalarmeasure)
@@ -5293,7 +5293,7 @@ $$
 *thm* · [PVM:399 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L399)  
 
 $$
-\mathrm{MeasurableSet}\,s \to (P.\mathrm{scalarMeasure}\,x)\,s = {{{\|(P.E\,s)\,x\|}^{2}}}
+\mathrm{MeasurableSet}\,s \to (P.\mu\,x)\,s = {{{\|(P.E\,s)\,x\|}^{2}}}
 $$
 
 **statement uses** [`ProjectionValuedMeasure`](#d-qiqth-spectral-projectionvaluedmeasure) [`E`](#d-qiqth-spectral-projectionvaluedmeasure-e) [`scalarMeasure`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure)
@@ -5305,7 +5305,7 @@ $$
 *thm* · [PVM:723 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L723)  
 
 $$
-0 \le r \to P.\mathrm{scalarMeasure}\,(r \cdot x + y) + {{r}} \cdot P.\mathrm{scalarMeasure}\,(x - y) = P.\mathrm{scalarMeasure}\,(r \cdot x - y) + {{r}} \cdot P.\mathrm{scalarMeasure}\,(x + y)
+0 \le r \to P.\mu\,(r \cdot x + y) + {{r}} \cdot P.\mu\,(x - y) = P.\mu\,(r \cdot x - y) + {{r}} \cdot P.\mu\,(x + y)
 $$
 
 **proof uses** [`E`](#d-qiqth-spectral-projectionvaluedmeasure-e) [`scalarMeasure_apply`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure-apply)
@@ -5318,7 +5318,7 @@ $$
 *thm* · [PVM:563 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L563)  
 
 $$
-P.\mathrm{scalarMeasure}\,(x + y) + P.\mathrm{scalarMeasure}\,(x - y) = 2 \cdot P.\mathrm{scalarMeasure}\,x + 2 \cdot P.\mathrm{scalarMeasure}\,y
+P.\mu\,(x + y) + P.\mu\,(x - y) = 2 \cdot P.\mu\,x + 2 \cdot P.\mu\,y
 $$
 
 **proof uses** [`E`](#d-qiqth-spectral-projectionvaluedmeasure-e) [`scalarMeasure_apply`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure-apply)
@@ -5331,7 +5331,7 @@ $$
 *thm* · [PVM:554 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L554)  
 
 $$
-P.\mathrm{scalarMeasure}\,(c \cdot x) = {{{\|c\|}^{2}}} \cdot P.\mathrm{scalarMeasure}\,x
+P.\mu\,(c \cdot x) = {{{\|c\|}^{2}}} \cdot P.\mu\,x
 $$
 
 **proof uses** [`E`](#d-qiqth-spectral-projectionvaluedmeasure-e) [`scalarMeasure_apply`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure-apply)
@@ -5344,7 +5344,7 @@ $$
 *thm* · [PVM:477 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L477)  
 
 $$
-\mathrm{MeasurableSet}\,s \to ((P.\mathrm{scalarMeasure}\,x)\,s).\mathrm{toReal} = {\|(P.E\,s)\,x\|}^{2}
+\mathrm{MeasurableSet}\,s \to ((P.\mu\,x)\,s).\mathrm{toReal} = {\|(P.E\,s)\,x\|}^{2}
 $$
 
 **proof uses** [`scalarMeasure_apply`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure-apply)
@@ -5357,7 +5357,7 @@ $$
 *thm* · [PVM:404 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L404)  
 
 $$
-(P.\mathrm{scalarMeasure}\,x) = {{{\|x\|}^{2}}}
+(P.\mu\,x) = {{{\|x\|}^{2}}}
 $$
 
 **proof uses** [`E`](#d-qiqth-spectral-projectionvaluedmeasure-e) [`E_univ`](#d-qiqth-spectral-projectionvaluedmeasure-e-univ) [`scalarMeasure_apply`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure-apply)
@@ -5536,7 +5536,7 @@ $$
 *thm* · [SpectralTheorem:1045 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L1045)  
 
 $$
-\mathrm{MeasurableSet}\,s \to \mathrm{MeasurableSet}\,t \to \forall (x v : H), \href{#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,t\,x\,((\href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,s)\,v) = \href{#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,(s \cap t)\,x\,v
+\mathrm{MeasurableSet}\,s \to \mathrm{MeasurableSet}\,t \to \forall (x v : H), \href{#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,t\,x\,((\href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s)\,v) = \href{#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,(s \cap t)\,x\,v
 $$
 
 **proof uses** [`instIsFiniteMeasureElemRealSpectrumContinuousLinearMapComplexIdSpecMeasure`](#d-qiqth-spectraltheorem-instisfinitemeasureelemrealspectrumcontinuouslinearmapcomplexidspecmeasure) [`qForm`](#d-qiqth-spectraltheorem-qform) [`specMeasure`](#d-qiqth-spectraltheorem-specmeasure) [`specProj_engine_measure`](#d-qiqth-spectraltheorem-specproj-engine-measure)
@@ -5614,7 +5614,7 @@ $$
 *thm* · [SpectralTheorem:1137 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L1137)  
 
 $$
-\href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\cdots \,\cdots \,\cdots = c \cdot 1
+\href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\cdots \,\cdots \,\cdots = c \cdot 1
 $$
 
 **proof uses** [`boundedFC_const`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-const) [`PVM_of_selfAdjoint`](#d-qiqth-spectraltheorem-pvm-of-selfadjoint)
@@ -5627,7 +5627,7 @@ $$
 *thm* · [SpectralTheorem:1143 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L1143)  
 
 $$
-\href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\cdots \,\cdots \,\cdots = (\href{#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,T\,\mathrm{ha}).E\,s
+\href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\cdots \,\cdots \,\cdots = (\href{#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,T\,\mathrm{ha}).E\,s
 $$
 
 **proof uses** [`boundedFC_indicator`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-indicator)
@@ -5640,7 +5640,7 @@ $$
 *thm* · [SpectralTheorem:1122 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L1122)  
 
 $$
-\href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hfp}\,\mathrm{hC0p}\,\mathrm{hCp} = \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hC0f}\,\mathrm{hCf} \cdot \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hg}\,\mathrm{hC0g}\,\mathrm{hCg}
+\href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hfp}\,\mathrm{hC0p}\,\mathrm{hCp} = \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hC0f}\,\mathrm{hCf} \cdot \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hg}\,\mathrm{hC0g}\,\mathrm{hCg}
 $$
 
 **proof uses** [`boundedFC_mul`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-mul) [`PVM_of_selfAdjoint`](#d-qiqth-spectraltheorem-pvm-of-selfadjoint)
@@ -5653,7 +5653,7 @@ $$
 *thm* · [SpectralTheorem:1130 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L1130)  
 
 $$
-\href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\cdots \,\cdots \,\cdots = 1
+\href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\cdots \,\cdots \,\cdots = 1
 $$
 
 **proof uses** [`boundedFC`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc) [`boundedFC_const`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-const) [`PVM_of_selfAdjoint`](#d-qiqth-spectraltheorem-pvm-of-selfadjoint)
@@ -5757,7 +5757,7 @@ $$
 *thm* · [SpectralTheorem:1116 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L1116)  
 
 $$
-\mathrm{inner}\,\mathbb{C}\,x\,((\href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC})\,y) = (\href{#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,T\,\mathrm{ha}).\mathrm{bilinDiag}\,f\,x\,y
+\mathrm{inner}\,\mathbb{C}\,x\,((\href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC})\,y) = (\href{#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,T\,\mathrm{ha}).\mathrm{bilinDiag}\,f\,x\,y
 $$
 
 **proof uses** [`inner_boundedFC`](#d-qiqth-spectral-projectionvaluedmeasure-inner-boundedfc)
@@ -5781,7 +5781,7 @@ $$
 *thm* · [SpectralTheorem:580 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L580)  
 
 $$
-\mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,s)\,x)\,y = \href{#d-qiqth-spectraltheorem-cform}{\mathrm{cForm}}\,T\,\mathrm{ha}\,s\,x\,y
+\mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s)\,x)\,y = \href{#d-qiqth-spectraltheorem-cform}{\mathrm{cForm}}\,T\,\mathrm{ha}\,s\,x\,y
 $$
 
 **proof uses** [`cFormCLM`](#d-qiqth-spectraltheorem-cformclm) [`cFormCLM_norm_le`](#d-qiqth-spectraltheorem-cformclm-norm-le)
@@ -5794,7 +5794,7 @@ $$
 *thm* · [SpectralTheorem:124 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L124)  
 
 $$
-\mathrm{IsFiniteMeasure}\,(\href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,x)
+\mathrm{IsFiniteMeasure}\,(\href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,x)
 $$
 
 **proof uses** [`specPLM`](#d-qiqth-spectraltheorem-specplm)
@@ -5807,7 +5807,7 @@ $$
 *thm* · [SpectralTheorem:118 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L118)  
 
 $$
-\int (s : (\mathrm{spectrum}\,\mathbb{R}\,T)), f\,s \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,x = \mathrm{re}\,(\mathrm{inner}\,\mathbb{C}\,x\,(((\mathrm{cfcHom}\,\mathrm{ha})\,f.\mathrm{toContinuousMap})\,x))
+\int (s : (\mathrm{sp}\,\mathbb{R}\,T)), f\,s \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,x = \mathrm{re}\,(\mathrm{inner}\,\mathbb{C}\,x\,(((\mathrm{cfcHom}\,\mathrm{ha})\,f.\mathrm{toContinuousMap})\,x))
 $$
 
 **proof uses** [`specPLM`](#d-qiqth-spectraltheorem-specplm)
@@ -5820,7 +5820,7 @@ $$
 *thm* · [SpectralTheorem:834 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L834)  
 
 $$
-\int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)), h\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,z = \mathrm{re}\,(\mathrm{inner}\,\mathbb{C}\,z\,(((\mathrm{cfcHom}\,\mathrm{ha})\,h)\,z))
+\int (\omega : (\mathrm{sp}\,\mathbb{R}\,T)), h\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,z = \mathrm{re}\,(\mathrm{inner}\,\mathbb{C}\,z\,(((\mathrm{cfcHom}\,\mathrm{ha})\,h)\,z))
 $$
 
 **proof uses** [`integral_specMeasure`](#d-qiqth-spectraltheorem-integral-specmeasure)
@@ -5833,7 +5833,7 @@ $$
 *thm* · [SpectralTheorem:1005 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L1005)  
 
 $$
-\int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)), f\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(w + u) - \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)), f\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(w - u) = 4 \cdot \mathrm{re}\,(\mathrm{inner}\,\mathbb{C}\,w\,(((\mathrm{cfcHom}\,\mathrm{ha})\,f)\,u))
+\int (\omega : (\mathrm{sp}\,\mathbb{R}\,T)), f\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(w + u) - \int (\omega : (\mathrm{sp}\,\mathbb{R}\,T)), f\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(w - u) = 4 \cdot \mathrm{re}\,(\mathrm{inner}\,\mathbb{C}\,w\,(((\mathrm{cfcHom}\,\mathrm{ha})\,f)\,u))
 $$
 
 **proof uses** [`integral_specMeasure_cont`](#d-qiqth-spectraltheorem-integral-specmeasure-cont)
@@ -5846,7 +5846,7 @@ $$
 *thm* · [SpectralTheorem:703 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L703)  
 
 $$
-{\|(\href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,s)\,x\|}^{2} \le \href{#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,x
+{\|(\href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s)\,x\|}^{2} \le \href{#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,x
 $$
 
 **proof uses** [`reApplyInnerSelf_specProj`](#d-qiqth-spectraltheorem-reapplyinnerself-specproj) [`specProj_isPositive`](#d-qiqth-spectraltheorem-specproj-ispositive) [`specProj_isSelfAdjoint`](#d-qiqth-spectraltheorem-specproj-isselfadjoint) [`specProj_le_one`](#d-qiqth-spectraltheorem-specproj-le-one)
@@ -6001,7 +6001,7 @@ $$
 *thm* · [SpectralTheorem:643 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L643)  
 
 $$
-(\href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,s).\mathrm{reApplyInnerSelf}\,x = \href{#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,x
+(\href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s).\mathrm{reApplyInnerSelf}\,x = \href{#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,x
 $$
 
 **proof uses** [`bForm`](#d-qiqth-spectraltheorem-bform) [`bForm_self`](#d-qiqth-spectraltheorem-bform-self) [`cForm`](#d-qiqth-spectraltheorem-cform) [`inner_specProj`](#d-qiqth-spectraltheorem-inner-specproj)
@@ -6014,7 +6014,7 @@ $$
 *thm* · [SpectralTheorem:1090 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L1090)  
 
 $$
-\int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)), \omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,x = \mathrm{re}\,(\mathrm{inner}\,\mathbb{C}\,x\,(T\,x))
+\int (\omega : (\mathrm{sp}\,\mathbb{R}\,T)), \omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,x = \mathrm{re}\,(\mathrm{inner}\,\mathbb{C}\,x\,(T\,x))
 $$
 
 **proof uses** [`integral_specMeasure`](#d-qiqth-spectraltheorem-integral-specmeasure)
@@ -6027,7 +6027,7 @@ $$
 *thm* · [SpectralTheorem:987 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L987)  
 
 $$
-\mathrm{re}\,(\mathrm{inner}\,\mathbb{C}\,x\,(((\mathrm{cfcHom}\,\mathrm{ha})\,h)\,((\href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,s)\,v))) = \href{#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,(((\mathrm{cfcHom}\,\mathrm{ha})\,h)\,x)\,v
+\mathrm{re}\,(\mathrm{inner}\,\mathbb{C}\,x\,(((\mathrm{cfcHom}\,\mathrm{ha})\,h)\,((\href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s)\,v))) = \href{#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,(((\mathrm{cfcHom}\,\mathrm{ha})\,h)\,x)\,v
 $$
 
 **proof uses** [`cForm`](#d-qiqth-spectraltheorem-cform) [`inner_specProj`](#d-qiqth-spectraltheorem-inner-specproj) [`specProj_isSelfAdjoint`](#d-qiqth-spectraltheorem-specproj-isselfadjoint)
@@ -6040,7 +6040,7 @@ $$
 *thm* · [SpectralTheorem:None ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean)  
 
 $$
-x = \mathrm{x\_1} \to \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,x = \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,\mathrm{x\_1}
+x = \mathrm{x\_1} \to \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,x = \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,\mathrm{x\_1}
 $$
 
 **statement uses** [`specMeasure`](#d-qiqth-spectraltheorem-specmeasure)
@@ -6052,7 +6052,7 @@ $$
 *thm* · [SpectralTheorem:227 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L227)  
 
 $$
-\href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x + a + b) + \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x - a) + \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x - b) = \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x - a - b) + \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x + a) + \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x + b)
+\href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x + a + b) + \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x - a) + \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x - b) = \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x - a - b) + \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x + a) + \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x + b)
 $$
 
 **proof uses** [`instIsFiniteMeasureElemRealSpectrumContinuousLinearMapComplexIdSpecMeasure`](#d-qiqth-spectraltheorem-instisfinitemeasureelemrealspectrumcontinuouslinearmapcomplexidspecmeasure) [`integral_specMeasure`](#d-qiqth-spectraltheorem-integral-specmeasure)
@@ -6065,7 +6065,7 @@ $$
 *thm* · [SpectralTheorem:842 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L842)  
 
 $$
-\int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)), h\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(((\mathrm{cfcHom}\,\mathrm{ha})\,g)\,x + v) - \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)), h\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(((\mathrm{cfcHom}\,\mathrm{ha})\,g)\,x - v) = \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)), (h \cdot g)\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x + v) - \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)), (h \cdot g)\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x - v)
+\int (\omega : (\mathrm{sp}\,\mathbb{R}\,T)), h\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(((\mathrm{cfcHom}\,\mathrm{ha})\,g)\,x + v) - \int (\omega : (\mathrm{sp}\,\mathbb{R}\,T)), h\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(((\mathrm{cfcHom}\,\mathrm{ha})\,g)\,x - v) = \int (\omega : (\mathrm{sp}\,\mathbb{R}\,T)), (h \cdot g)\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x + v) - \int (\omega : (\mathrm{sp}\,\mathbb{R}\,T)), (h \cdot g)\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x - v)
 $$
 
 **proof uses** [`inner_cfcHom_mul`](#d-qiqth-spectraltheorem-inner-cfchom-mul) [`integral_specMeasure_cont`](#d-qiqth-spectraltheorem-integral-specmeasure-cont)
@@ -6078,7 +6078,7 @@ $$
 *thm* · [SpectralTheorem:862 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L862)  
 
 $$
-(\forall (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)), 0 \le g\,\omega) \to \forall (x v : H), (\href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(((\mathrm{cfcHom}\,\mathrm{ha})\,g)\,x + v) + (\href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x - v)).\mathrm{withDensity}\,\lambda \omega \mapsto {{g\,\omega}}) = \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(((\mathrm{cfcHom}\,\mathrm{ha})\,g)\,x - v) + (\href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x + v)).\mathrm{withDensity}\,\lambda \omega \mapsto {{g\,\omega}}
+(\forall (\omega : (\mathrm{sp}\,\mathbb{R}\,T)), 0 \le g\,\omega) \to \forall (x v : H), (\href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(((\mathrm{cfcHom}\,\mathrm{ha})\,g)\,x + v) + (\href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x - v)).\mathrm{withDensity}\,\lambda \omega \mapsto {{g\,\omega}}) = \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(((\mathrm{cfcHom}\,\mathrm{ha})\,g)\,x - v) + (\href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x + v)).\mathrm{withDensity}\,\lambda \omega \mapsto {{g\,\omega}}
 $$
 
 **proof uses** [`instIsFiniteMeasureElemRealSpectrumContinuousLinearMapComplexIdSpecMeasure`](#d-qiqth-spectraltheorem-instisfinitemeasureelemrealspectrumcontinuouslinearmapcomplexidspecmeasure) [`specMeasure_engine`](#d-qiqth-spectraltheorem-specmeasure-engine)
@@ -6091,7 +6091,7 @@ $$
 *thm* · [SpectralTheorem:206 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L206)  
 
 $$
-\href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x + y) + \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x - y) = 2 \cdot \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,x + 2 \cdot \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,y
+\href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x + y) + \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x - y) = 2 \cdot \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,x + 2 \cdot \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,y
 $$
 
 **proof uses** [`instIsFiniteMeasureElemRealSpectrumContinuousLinearMapComplexIdSpecMeasure`](#d-qiqth-spectraltheorem-instisfinitemeasureelemrealspectrumcontinuouslinearmapcomplexidspecmeasure) [`integral_specMeasure`](#d-qiqth-spectraltheorem-integral-specmeasure)
@@ -6104,7 +6104,7 @@ $$
 *thm* · [SpectralTheorem:175 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L175)  
 
 $$
-(\href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,z).\mathrm{real}\,B \le {\|z\|}^{2}
+(\href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,z).\mathrm{real}\,B \le {\|z\|}^{2}
 $$
 
 **proof uses** [`instIsFiniteMeasureElemRealSpectrumContinuousLinearMapComplexIdSpecMeasure`](#d-qiqth-spectraltheorem-instisfinitemeasureelemrealspectrumcontinuouslinearmapcomplexidspecmeasure) [`specMeasure_real_univ`](#d-qiqth-spectraltheorem-specmeasure-real-univ)
@@ -6117,7 +6117,7 @@ $$
 *thm* · [SpectralTheorem:130 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L130)  
 
 $$
-(\href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,x).\mathrm{real} = {\|x\|}^{2}
+(\href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,x).\mathrm{real} = {\|x\|}^{2}
 $$
 
 **proof uses** [`integral_specMeasure`](#d-qiqth-spectraltheorem-integral-specmeasure)
@@ -6130,7 +6130,7 @@ $$
 *thm* · [SpectralTheorem:944 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L944)  
 
 $$
-\mathrm{MeasurableSet}\,s \to (\href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(((\mathrm{cfcHom}\,\mathrm{ha})\,g)\,x + v)).\mathrm{real}\,s - (\href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(((\mathrm{cfcHom}\,\mathrm{ha})\,g)\,x - v)).\mathrm{real}\,s = \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)) in s, g\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x + v) - \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)) in s, g\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x - v)
+\mathrm{MeasurableSet}\,s \to (\href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(((\mathrm{cfcHom}\,\mathrm{ha})\,g)\,x + v)).\mathrm{real}\,s - (\href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(((\mathrm{cfcHom}\,\mathrm{ha})\,g)\,x - v)).\mathrm{real}\,s = \int (\omega : (\mathrm{sp}\,\mathbb{R}\,T)) in s, g\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x + v) - \int (\omega : (\mathrm{sp}\,\mathbb{R}\,T)) in s, g\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x - v)
 $$
 
 **proof uses** [`bForm`](#d-qiqth-spectraltheorem-bform) [`bForm_sub_left`](#d-qiqth-spectraltheorem-bform-sub-left) [`instIsFiniteMeasureElemRealSpectrumContinuousLinearMapComplexIdSpecMeasure`](#d-qiqth-spectraltheorem-instisfinitemeasureelemrealspectrumcontinuouslinearmapcomplexidspecmeasure) [`qForm`](#d-qiqth-spectraltheorem-qform) [`specMeasure_setEngine_nonneg`](#d-qiqth-spectraltheorem-specmeasure-setengine-nonneg)
@@ -6143,7 +6143,7 @@ $$
 *thm* · [SpectralTheorem:915 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L915)  
 
 $$
-(\forall (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)), 0 \le g\,\omega) \to \forall (x v : H) \{s : \mathrm{Set}\,(\mathrm{spectrum}\,\mathbb{R}\,T)\}, \mathrm{MeasurableSet}\,s \to (\href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(((\mathrm{cfcHom}\,\mathrm{ha})\,g)\,x + v)).\mathrm{real}\,s - (\href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(((\mathrm{cfcHom}\,\mathrm{ha})\,g)\,x - v)).\mathrm{real}\,s = \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)) in s, g\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x + v) - \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)) in s, g\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x - v)
+(\forall (\omega : (\mathrm{sp}\,\mathbb{R}\,T)), 0 \le g\,\omega) \to \forall (x v : H) \{s : \mathrm{Set}\,(\mathrm{sp}\,\mathbb{R}\,T)\}, \mathrm{MeasurableSet}\,s \to (\href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(((\mathrm{cfcHom}\,\mathrm{ha})\,g)\,x + v)).\mathrm{real}\,s - (\href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(((\mathrm{cfcHom}\,\mathrm{ha})\,g)\,x - v)).\mathrm{real}\,s = \int (\omega : (\mathrm{sp}\,\mathbb{R}\,T)) in s, g\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x + v) - \int (\omega : (\mathrm{sp}\,\mathbb{R}\,T)) in s, g\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x - v)
 $$
 
 **proof uses** [`instIsFiniteMeasureElemRealSpectrumContinuousLinearMapComplexIdSpecMeasure`](#d-qiqth-spectraltheorem-instisfinitemeasureelemrealspectrumcontinuouslinearmapcomplexidspecmeasure) [`specMeasure_engine_measure`](#d-qiqth-spectraltheorem-specmeasure-engine-measure) [`withDensity_real_setIntegral`](#d-qiqth-spectraltheorem-withdensity-real-setintegral)
@@ -6156,7 +6156,7 @@ $$
 *thm* · [SpectralTheorem:193 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L193)  
 
 $$
-\href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(c \cdot x) = {\|c\|_{+}}^{2} \cdot \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,x
+\href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(c \cdot x) = {\|c\|_{+}}^{2} \cdot \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,x
 $$
 
 **proof uses** [`instIsFiniteMeasureElemRealSpectrumContinuousLinearMapComplexIdSpecMeasure`](#d-qiqth-spectraltheorem-instisfinitemeasureelemrealspectrumcontinuouslinearmapcomplexidspecmeasure) [`integral_specMeasure`](#d-qiqth-spectraltheorem-integral-specmeasure)
@@ -6169,7 +6169,7 @@ $$
 *thm* · [SpectralTheorem:263 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L263)  
 
 $$
-\href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,0 = 0
+\href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,0 = 0
 $$
 
 **proof uses** [`congr_simp`](#d-qiqth-spectraltheorem-specmeasure-congr-simp) [`specMeasure_smul`](#d-qiqth-spectraltheorem-specmeasure-smul)
@@ -6182,7 +6182,7 @@ $$
 *thm* · [SpectralTheorem:None ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean)  
 
 $$
-s = \mathrm{s\_1} \to \href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,s = \href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,\mathrm{s\_1}
+s = \mathrm{s\_1} \to \href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s = \href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,\mathrm{s\_1}
 $$
 
 **statement uses** [`specProj`](#d-qiqth-spectraltheorem-specproj)
@@ -6194,7 +6194,7 @@ $$
 *thm* · [SpectralTheorem:591 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L591)  
 
 $$
-\href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,\emptyset = 0
+\href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,\emptyset = 0
 $$
 
 **proof uses** [`cForm`](#d-qiqth-spectraltheorem-cform) [`cForm_empty`](#d-qiqth-spectraltheorem-cform-empty) [`inner_specProj`](#d-qiqth-spectraltheorem-inner-specproj)
@@ -6207,7 +6207,7 @@ $$
 *thm* · [SpectralTheorem:1019 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L1019)  
 
 $$
-\mathrm{MeasurableSet}\,s \to \forall (x v : H), \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x + (\href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,s)\,v) + (\href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x - v)).\mathrm{restrict}\,s = \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x - (\href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,s)\,v) + (\href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,(x + v)).\mathrm{restrict}\,s
+\mathrm{MeasurableSet}\,s \to \forall (x v : H), \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x + (\href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s)\,v) + (\href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x - v)).\mathrm{restrict}\,s = \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x - (\href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s)\,v) + (\href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,(x + v)).\mathrm{restrict}\,s
 $$
 
 **proof uses** [`bForm`](#d-qiqth-spectraltheorem-bform) [`instIsFiniteMeasureElemRealSpectrumContinuousLinearMapComplexIdSpecMeasure`](#d-qiqth-spectraltheorem-instisfinitemeasureelemrealspectrumcontinuouslinearmapcomplexidspecmeasure) [`integral_specMeasure_polarization`](#d-qiqth-spectraltheorem-integral-specmeasure-polarization) [`qForm`](#d-qiqth-spectraltheorem-qform) [`re_inner_cfcHom_specProj`](#d-qiqth-spectraltheorem-re-inner-cfchom-specproj) [`specMeasure_setEngine`](#d-qiqth-spectraltheorem-specmeasure-setengine)
@@ -6220,7 +6220,7 @@ $$
 *thm* · [SpectralTheorem:726 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L726)  
 
 $$
-(\forall (n : \mathbb{N}), \mathrm{MeasurableSet}\,(A\,n)) \to (\mathrm{Pairwise}\,\lambda m n \mapsto \mathrm{Disjoint}\,(A\,m)\,(A\,n)) \to \forall (F : \mathrm{Finset}\,\mathbb{N}), \sum_{n F} \href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,(A\,n) = \href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,(\bigcup n\in F, A\,n)
+(\forall (n : \mathbb{N}), \mathrm{MeasurableSet}\,(A\,n)) \to (\mathrm{Pairwise}\,\lambda m n \mapsto \mathrm{Disjoint}\,(A\,m)\,(A\,n)) \to \forall (F : \mathrm{Finset}\,\mathbb{N}), \sum_{n F} \href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,(A\,n) = \href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,(\bigcup n\in F, A\,n)
 $$
 
 **proof uses** [`congr_simp`](#d-qiqth-spectraltheorem-specproj-congr-simp) [`specProj_empty`](#d-qiqth-spectraltheorem-specproj-empty) [`specProj_union_disjoint`](#d-qiqth-spectraltheorem-specproj-union-disjoint)
@@ -6233,7 +6233,7 @@ $$
 *thm* · [SpectralTheorem:743 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L743)  
 
 $$
-(\forall (n : \mathbb{N}), \mathrm{MeasurableSet}\,(A\,n)) \to (\mathrm{Pairwise}\,\lambda m n \mapsto \mathrm{Disjoint}\,(A\,m)\,(A\,n)) \to \forall (x : H), \mathrm{HasSum}\,(\lambda n \mapsto (\href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,(A\,n))\,x)\,((\href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,(\bigcup n, A\,n))\,x)
+(\forall (n : \mathbb{N}), \mathrm{MeasurableSet}\,(A\,n)) \to (\mathrm{Pairwise}\,\lambda m n \mapsto \mathrm{Disjoint}\,(A\,m)\,(A\,n)) \to \forall (x : H), \mathrm{HasSum}\,(\lambda n \mapsto (\href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,(A\,n))\,x)\,((\href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,(\bigcup n, A\,n))\,x)
 $$
 
 **proof uses** [`instIsFiniteMeasureElemRealSpectrumContinuousLinearMapComplexIdSpecMeasure`](#d-qiqth-spectraltheorem-instisfinitemeasureelemrealspectrumcontinuouslinearmapcomplexidspecmeasure) [`norm_specProj_sq_le`](#d-qiqth-spectraltheorem-norm-specproj-sq-le) [`qForm`](#d-qiqth-spectraltheorem-qform) [`specMeasure`](#d-qiqth-spectraltheorem-specmeasure) [`specProj_finset_sum`](#d-qiqth-spectraltheorem-specproj-finset-sum) [`specProj_union_disjoint`](#d-qiqth-spectraltheorem-specproj-union-disjoint)
@@ -6246,7 +6246,7 @@ $$
 *thm* · [SpectralTheorem:1057 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L1057)  
 
 $$
-\mathrm{MeasurableSet}\,s \to \mathrm{MeasurableSet}\,t \to \href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,(s \cap t) = \href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,s \cdot \href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,t
+\mathrm{MeasurableSet}\,s \to \mathrm{MeasurableSet}\,t \to \href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,(s \cap t) = \href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s \cdot \href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,t
 $$
 
 **proof uses** [`bForm`](#d-qiqth-spectraltheorem-bform) [`bForm_specProj`](#d-qiqth-spectraltheorem-bform-specproj) [`cForm`](#d-qiqth-spectraltheorem-cform) [`inner_specProj`](#d-qiqth-spectraltheorem-inner-specproj) [`specProj_isSelfAdjoint`](#d-qiqth-spectraltheorem-specproj-isselfadjoint)
@@ -6259,7 +6259,7 @@ $$
 *thm* · [SpectralTheorem:654 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L654)  
 
 $$
-(\href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,s).\mathrm{IsPositive}
+(\href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s).\mathrm{IsPositive}
 $$
 
 **proof uses** [`qForm`](#d-qiqth-spectraltheorem-qform) [`qForm_nonneg`](#d-qiqth-spectraltheorem-qform-nonneg) [`reApplyInnerSelf_specProj`](#d-qiqth-spectraltheorem-reapplyinnerself-specproj) [`specProj_isSelfAdjoint`](#d-qiqth-spectraltheorem-specproj-isselfadjoint)
@@ -6272,7 +6272,7 @@ $$
 *thm* · [SpectralTheorem:605 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L605)  
 
 $$
-\mathrm{IsSelfAdjoint}\,(\href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,s)
+\mathrm{IsSelfAdjoint}\,(\href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s)
 $$
 
 **proof uses** [`cForm`](#d-qiqth-spectraltheorem-cform) [`cForm_hermitian`](#d-qiqth-spectraltheorem-cform-hermitian) [`inner_specProj`](#d-qiqth-spectraltheorem-inner-specproj)
@@ -6285,7 +6285,7 @@ $$
 *thm* · [SpectralTheorem:687 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L687)  
 
 $$
-\href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,s \le 1
+\href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s \le 1
 $$
 
 **proof uses** [`qForm`](#d-qiqth-spectraltheorem-qform) [`reApplyInnerSelf_specProj`](#d-qiqth-spectraltheorem-reapplyinnerself-specproj) [`specMeasure_real_le`](#d-qiqth-spectraltheorem-specmeasure-real-le) [`specProj_isSelfAdjoint`](#d-qiqth-spectraltheorem-specproj-isselfadjoint)
@@ -6298,7 +6298,7 @@ $$
 *thm* · [SpectralTheorem:677 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L677)  
 
 $$
-\mathrm{Disjoint}\,s\,t \to \mathrm{MeasurableSet}\,t \to \href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,(s \cup t) = \href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,s + \href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha}\,t
+\mathrm{Disjoint}\,s\,t \to \mathrm{MeasurableSet}\,t \to \href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,(s \cup t) = \href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s + \href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,t
 $$
 
 **proof uses** [`cForm`](#d-qiqth-spectraltheorem-cform) [`cForm_union_disjoint`](#d-qiqth-spectraltheorem-cform-union-disjoint) [`inner_specProj`](#d-qiqth-spectraltheorem-inner-specproj)
@@ -6311,7 +6311,7 @@ $$
 *thm* · [SpectralTheorem:637 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L637)  
 
 $$
-\href{#d-qiqth-spectraltheorem-specproj}{\mathrm{specProj}}\,T\,\mathrm{ha} = 1
+\href{#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha} = 1
 $$
 
 **proof uses** [`cForm`](#d-qiqth-spectraltheorem-cform) [`cForm_univ`](#d-qiqth-spectraltheorem-cform-univ) [`inner_specProj`](#d-qiqth-spectraltheorem-inner-specproj)
@@ -6324,7 +6324,7 @@ $$
 *thm* · [SpectralTheorem:905 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L905)  
 
 $$
-(\forall (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)), 0 \le g\,\omega) \to \forall (z : H) \{s : \mathrm{Set}\,(\mathrm{spectrum}\,\mathbb{R}\,T)\}, \mathrm{MeasurableSet}\,s \to ((\href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,z).\mathrm{withDensity}\,\lambda \omega \mapsto {{g\,\omega}}).\mathrm{real}\,s = \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)) in s, g\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,z
+(\forall (\omega : (\mathrm{sp}\,\mathbb{R}\,T)), 0 \le g\,\omega) \to \forall (z : H) \{s : \mathrm{Set}\,(\mathrm{sp}\,\mathbb{R}\,T)\}, \mathrm{MeasurableSet}\,s \to ((\href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,z).\mathrm{withDensity}\,\lambda \omega \mapsto {{g\,\omega}}).\mathrm{real}\,s = \int (\omega : (\mathrm{sp}\,\mathbb{R}\,T)) in s, g\,\omega \partial \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,z
 $$
 
 **statement uses** [`specMeasure`](#d-qiqth-spectraltheorem-specmeasure)
@@ -6336,7 +6336,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1110 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1110)  
 
 $$
-\href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\cdots \,\cdots \,\cdots = \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hCf0}\,\mathrm{hCf} + \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hg}\,\mathrm{hCg0}\,\mathrm{hCg}
+\href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\cdots \,\cdots \,\cdots = \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hCf0}\,\mathrm{hCf} + \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hg}\,\mathrm{hCg0}\,\mathrm{hCg}
 $$
 
 **proof uses** [`boundedFC_add`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-add) [`PVM_of_selfAdjoint`](#d-qiqth-spectraltheorem-pvm-of-selfadjoint)
@@ -6349,7 +6349,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:134 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L134)  
 
 $$
-\mathrm{adjoint}\,(\href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC}) = \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hcf}\,\mathrm{hC0}^{\prime}\,\mathrm{hcfb}
+\mathrm{adjoint}\,(\href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC}) = \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hcf}\,\mathrm{hC0}^{\prime}\,\mathrm{hcfb}
 $$
 
 **proof uses** [`bilinDiag`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag) [`bilinDiag_conj_symm`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag-conj-symm) [`PVM_of_selfAdjoint`](#d-qiqth-spectraltheorem-pvm-of-selfadjoint) [`inner_borelFC`](#d-qiqth-spectraltheorem-inner-borelfc)
@@ -6362,7 +6362,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:379 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L379)  
 
 $$
-(\mathrm{Measurable}\,\lambda \omega \mapsto f\,\omega \cdot g\,\omega) \to 0 \le \mathrm{Cfg} \to (\forall (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)), \|f\,\omega \cdot g\,\omega\| \le \mathrm{Cfg}) \to (\mathrm{Measurable}\,\lambda \omega \mapsto g\,\omega \cdot f\,\omega) \to 0 \le \mathrm{Cgf} \to (\forall (\omega : (\mathrm{spectrum}\,\mathbb{R}\,T)), \|g\,\omega \cdot f\,\omega\| \le \mathrm{Cgf}) \to \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hC0f}\,\mathrm{hCf} \cdot \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hg}\,\mathrm{hC0g}\,\mathrm{hCg} = \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hg}\,\mathrm{hC0g}\,\mathrm{hCg} \cdot \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hC0f}\,\mathrm{hCf}
+(\mathrm{Measurable}\,\lambda \omega \mapsto f\,\omega \cdot g\,\omega) \to 0 \le \mathrm{Cfg} \to (\forall (\omega : (\mathrm{sp}\,\mathbb{R}\,T)), \|f\,\omega \cdot g\,\omega\| \le \mathrm{Cfg}) \to (\mathrm{Measurable}\,\lambda \omega \mapsto g\,\omega \cdot f\,\omega) \to 0 \le \mathrm{Cgf} \to (\forall (\omega : (\mathrm{sp}\,\mathbb{R}\,T)), \|g\,\omega \cdot f\,\omega\| \le \mathrm{Cgf}) \to \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hC0f}\,\mathrm{hCf} \cdot \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hg}\,\mathrm{hC0g}\,\mathrm{hCg} = \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hg}\,\mathrm{hC0g}\,\mathrm{hCg} \cdot \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hC0f}\,\mathrm{hCf}
 $$
 
 **proof uses** [`borelFC_mul`](#d-qiqth-spectraltheorem-borelfc-mul) [`borelFC_congr`](#d-qiqth-standardsubspacemodular-borelfc-congr)
@@ -6375,7 +6375,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:127 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L127)  
 
 $$
-f = f^{\prime} \to \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hCf0}\,\mathrm{hCf} = \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hf}^{\prime}\,\mathrm{hCf0}^{\prime}\,\mathrm{hCf}^{\prime}
+f = f^{\prime} \to \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hCf0}\,\mathrm{hCf} = \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hf}^{\prime}\,\mathrm{hCf0}^{\prime}\,\mathrm{hCf}^{\prime}
 $$
 
 **proof uses** [`boundedFC_congr`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-congr) [`PVM_of_selfAdjoint`](#d-qiqth-spectraltheorem-pvm-of-selfadjoint)
@@ -6388,7 +6388,7 @@ $$
 *thm* · [KMSCorrelation:512 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L512)  
 
 $$
-(\forall (x : H), f =[\href{#d-qiqth-rvdspecmeasure}{\mathrm{rvdSpecMeasure}}\,S\,x] g) \to \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\mathrm{hf}\,\mathrm{hC0f}\,\mathrm{hCf} = \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\mathrm{hg}\,\mathrm{hC0g}\,\mathrm{hCg}
+(\forall (x : H), f =[\href{#d-qiqth-rvdspecmeasure}{\mu^{R}}\,S\,x] g) \to \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\mathrm{hf}\,\mathrm{hC0f}\,\mathrm{hCf} = \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\mathrm{hg}\,\mathrm{hC0g}\,\mathrm{hCg}
 $$
 
 **proof uses** [`clm_eq_of_inner_self_eq`](#d-qiqth-standardsubspacemodular-clm-eq-of-inner-self-eq) [`rvdSpec_borelFC_diag`](#d-qiqth-rvdspec-borelfc-diag)
@@ -6401,7 +6401,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1127 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1127)  
 
 $$
-\href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\cdots \,\mathrm{hC0}\,\cdots = -\href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC}
+\href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\cdots \,\mathrm{hC0}\,\cdots = -\href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC}
 $$
 
 **proof uses** [`borelFC_congr`](#d-qiqth-standardsubspacemodular-borelfc-congr) [`borelFC_smul`](#d-qiqth-standardsubspacemodular-borelfc-smul)
@@ -6414,7 +6414,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1119 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1119)  
 
 $$
-\href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\cdots \,\cdots \,\cdots = c \cdot \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC}
+\href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\cdots \,\cdots \,\cdots = c \cdot \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC}
 $$
 
 **proof uses** [`boundedFC_smul`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-smul) [`PVM_of_selfAdjoint`](#d-qiqth-spectraltheorem-pvm-of-selfadjoint)
@@ -6427,7 +6427,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1137 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1137)  
 
 $$
-\href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\cdots \,\cdots \,\cdots = \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hCf0}\,\mathrm{hCf} - \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,T\,\mathrm{ha}\,\mathrm{hg}\,\mathrm{hCg0}\,\mathrm{hCg}
+\href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\cdots \,\cdots \,\cdots = \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hf}\,\mathrm{hCf0}\,\mathrm{hCf} - \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,T\,\mathrm{ha}\,\mathrm{hg}\,\mathrm{hCg0}\,\mathrm{hCg}
 $$
 
 **proof uses** [`borelFC_add`](#d-qiqth-standardsubspacemodular-borelfc-add) [`borelFC_neg`](#d-qiqth-standardsubspacemodular-borelfc-neg)
@@ -6440,7 +6440,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1191 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1191)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-cfccont}{\mathrm{cfcCont}}\,S\,(f + g) = \href{#d-qiqth-standardsubspacemodular-cfccont}{\mathrm{cfcCont}}\,S\,f + \href{#d-qiqth-standardsubspacemodular-cfccont}{\mathrm{cfcCont}}\,S\,g
+\href{#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,(f + g) = \href{#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,f + \href{#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,g
 $$
 
 **proof uses** [`borelFC`](#d-qiqth-spectraltheorem-borelfc) [`borelFC_add`](#d-qiqth-standardsubspacemodular-borelfc-add) [`borelFC_congr`](#d-qiqth-standardsubspacemodular-borelfc-congr) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint)
@@ -6453,7 +6453,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1239 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1239)  
 
 $$
-\mathrm{Continuous}\,(\href{#d-qiqth-standardsubspacemodular-cfccont}{\mathrm{cfcCont}}\,S)
+\mathrm{Continuous}\,(\href{#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S)
 $$
 
 **proof uses** [`cfcCont_norm_le`](#d-qiqth-standardsubspacemodular-cfccont-norm-le) [`cfcContₗ`](#d-qiqth-standardsubspacemodular-cfccont)
@@ -6466,7 +6466,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1226 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1226)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-cfccont}{\mathrm{cfcCont}}\,S\,\{\mathrm{toFun} :=\href{#d-qiqth-standardsubspacemodular-speccoord}{\mathrm{specCoord}}\,S , \mathrm{continuous\_toFun} :=\cdots \} = \href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S
+\href{#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,\{\mathrm{toFun} :=\href{#d-qiqth-standardsubspacemodular-speccoord}{\mathrm{specCoord}}\,S , \mathrm{continuous\_toFun} :=\cdots \} = \href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S
 $$
 
 **proof uses** [`borelFC`](#d-qiqth-spectraltheorem-borelfc) [`borelFC_congr`](#d-qiqth-standardsubspacemodular-borelfc-congr) [`rvdRC_eq_borelFC`](#d-qiqth-standardsubspacemodular-rvdrc-eq-borelfc) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint) [`specCoord_measurable`](#d-qiqth-standardsubspacemodular-speccoord-measurable) [`specCoord_norm_le`](#d-qiqth-standardsubspacemodular-speccoord-norm-le)
@@ -6479,7 +6479,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1174 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1174)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-cfccont}{\mathrm{cfcCont}}\,S\,(f \cdot g) = \href{#d-qiqth-standardsubspacemodular-cfccont}{\mathrm{cfcCont}}\,S\,f \cdot \href{#d-qiqth-standardsubspacemodular-cfccont}{\mathrm{cfcCont}}\,S\,g
+\href{#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,(f \cdot g) = \href{#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,f \cdot \href{#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,g
 $$
 
 **proof uses** [`borelFC`](#d-qiqth-spectraltheorem-borelfc) [`borelFC_mul`](#d-qiqth-spectraltheorem-borelfc-mul) [`borelFC_congr`](#d-qiqth-standardsubspacemodular-borelfc-congr) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint)
@@ -6492,7 +6492,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1164 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1164)  
 
 $$
-\|\href{#d-qiqth-standardsubspacemodular-cfccont}{\mathrm{cfcCont}}\,S\,f\| \le 2 \cdot \|f\|
+\|\href{#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,f\| \le 2 \cdot \|f\|
 $$
 
 **proof uses** [`boundedFC`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc) [`boundedFC_norm_le`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-norm-le) [`PVM_of_selfAdjoint`](#d-qiqth-spectraltheorem-pvm-of-selfadjoint) [`borelFC`](#d-qiqth-spectraltheorem-borelfc) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint)
@@ -6505,7 +6505,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1168 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1168)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-cfccont}{\mathrm{cfcCont}}\,S\,1 = 1
+\href{#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,1 = 1
 $$
 
 **proof uses** [`borelFC`](#d-qiqth-spectraltheorem-borelfc) [`borelFC_one`](#d-qiqth-spectraltheorem-borelfc-one) [`borelFC_congr`](#d-qiqth-standardsubspacemodular-borelfc-congr) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint)
@@ -6518,7 +6518,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1205 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1205)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-cfccont}{\mathrm{cfcCont}}\,S\,(c \cdot f) = c \cdot \href{#d-qiqth-standardsubspacemodular-cfccont}{\mathrm{cfcCont}}\,S\,f
+\href{#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,(c \cdot f) = c \cdot \href{#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,f
 $$
 
 **proof uses** [`borelFC`](#d-qiqth-spectraltheorem-borelfc) [`borelFC_congr`](#d-qiqth-standardsubspacemodular-borelfc-congr) [`borelFC_smul`](#d-qiqth-standardsubspacemodular-borelfc-smul) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint)
@@ -6531,7 +6531,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1217 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1217)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-cfccont}{\mathrm{cfcCont}}\,S\,({{f}}^{*}) = {{\href{#d-qiqth-standardsubspacemodular-cfccont}{\mathrm{cfcCont}}\,S\,f}}^{*}
+\href{#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,({{f}}^{*}) = {{\href{#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,f}}^{*}
 $$
 
 **proof uses** [`borelFC`](#d-qiqth-spectraltheorem-borelfc) [`borelFC_adjoint`](#d-qiqth-standardsubspacemodular-borelfc-adjoint) [`borelFC_congr`](#d-qiqth-standardsubspacemodular-borelfc-congr) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint)
@@ -6583,7 +6583,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1613 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1613)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-cfc}{\mathrm{cfc}}\,S\,(\href{#d-qiqth-standardsubspacemodular-h}{\mathrm{h}}\,S\,t) = \href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t \cdot (\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S \cdot \href{#d-qiqth-standardsubspacemodular-rvdtwosubrc}{\mathrm{rvdTwoSubRC}}\,S)
+\href{#d-qiqth-standardsubspacemodular-cfc}{\mathrm{cfc}}\,S\,(\href{#d-qiqth-standardsubspacemodular-h}{\mathrm{h}}\,S\,t) = \href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t \cdot (\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S \cdot \href{#d-qiqth-standardsubspacemodular-rvdtwosubrc}{\mathrm{rvdTwoSubRC}}\,S)
 $$
 
 **proof uses** [`borelFC`](#d-qiqth-spectraltheorem-borelfc) [`borelFC_mul`](#d-qiqth-spectraltheorem-borelfc-mul) [`borelFC_congr`](#d-qiqth-standardsubspacemodular-borelfc-congr) [`cfcCont`](#d-qiqth-standardsubspacemodular-cfccont) [`cfcΩ_coordΩ`](#d-qiqth-standardsubspacemodular-cfc-coord) [`cfcΩ_mul`](#d-qiqth-standardsubspacemodular-cfc-mul) [`cfcΩ_twΩ_coordΩ`](#d-qiqth-standardsubspacemodular-cfc-tw-coord) [`coordΩ`](#d-qiqth-standardsubspacemodular-coord) [`covM`](#d-qiqth-standardsubspacemodular-covm) [`inclΩ`](#d-qiqth-standardsubspacemodular-incl) [`modChar`](#d-qiqth-standardsubspacemodular-modchar) [`modSpecFun`](#d-qiqth-standardsubspacemodular-modspecfun) [`modSpecFun_measurable`](#d-qiqth-standardsubspacemodular-modspecfun-measurable) [`modSpecFun_norm_le`](#d-qiqth-standardsubspacemodular-modspecfun-norm-le) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint) [`tauΩ`](#d-qiqth-standardsubspacemodular-tau) [`twΩ`](#d-qiqth-standardsubspacemodular-tw)
@@ -6785,7 +6785,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:2602 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L2602)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,(t)\,r = \href{#d-qiqth-standardsubspacemodular-modchar}{\mathrm{modChar}}\,t\,r \cdot \sqrt r
+\href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,(t)\,r = \href{#d-qiqth-standardsubspacemodular-modchar}{\chi_{\mathrm{mod}}}\,t\,r \cdot \sqrt r
 $$
 
 **proof uses** [`modCharC`](#d-qiqth-standardsubspacemodular-modcharc) [`modCharC_ofReal`](#d-qiqth-standardsubspacemodular-modcharc-ofreal)
@@ -6837,7 +6837,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:2313 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L2313)  
 
 $$
-0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \mathrm{Differentiable}\,\mathbb{C}\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta)
+0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \mathrm{Differentiable}\,\mathbb{C}\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta)
 $$
 
 **proof uses** [`hasDerivAt_gaussSmearC`](#d-qiqth-standardsubspacemodular-hasderivat-gausssmearc)
@@ -6902,7 +6902,7 @@ $$
 *thm* · [KMSCorrelation:232 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L232)  
 
 $$
-0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (\forall (z : \mathbb{C}), z.\mathrm{im} = 0 \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,z)).\mathrm{im} = 0) \to (\forall (z : \mathbb{C}), z.\mathrm{im} = -(1/2) \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,z)).\mathrm{im} = 0) \to \forall (t : \mathbb{R}), \mathrm{inner}\,\mathbb{C}\,((V\,t)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta))\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta))) = \mathrm{inner}\,\mathbb{C}\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta))
+0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (\forall (z : \mathbb{C}), z.\mathrm{im} = 0 \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,z)).\mathrm{im} = 0) \to (\forall (z : \mathbb{C}), z.\mathrm{im} = -(1/2) \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,z)).\mathrm{im} = 0) \to \forall (t : \mathbb{R}), \mathrm{inner}\,\mathbb{C}\,((V\,t)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta))\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta))) = \mathrm{inner}\,\mathbb{C}\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta))
 $$
 
 **proof uses** [`gFunction_eq_zero_const`](#d-qiqth-standardsubspacemodular-gfunction-eq-zero-const) [`gFunction_real_eq`](#d-qiqth-gfunction-real-eq) [`gFunction_zero`](#d-qiqth-gfunction-zero)
@@ -6915,7 +6915,7 @@ $$
 *thm* · [KMSCorrelation:268 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L268)  
 
 $$
-0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta \to (\forall (s : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)) = (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)) \to (\forall (z : \mathbb{C}), z.\mathrm{im} = -(1/2) \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,z)).\mathrm{im} = 0) \to \forall (t : \mathbb{R}), \mathrm{inner}\,\mathbb{C}\,((V\,t)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta))\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta))) = \mathrm{inner}\,\mathbb{C}\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta))
+0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta \to (\forall (s : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)) = (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)) \to (\forall (z : \mathbb{C}), z.\mathrm{im} = -(1/2) \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,z)).\mathrm{im} = 0) \to \forall (t : \mathbb{R}), \mathrm{inner}\,\mathbb{C}\,((V\,t)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta))\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta))) = \mathrm{inner}\,\mathbb{C}\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta))
 $$
 
 **proof uses** [`gConstancy_entire`](#d-qiqth-standardsubspacemodular-gconstancy-entire) [`gFunction_top_edge_real_all`](#d-qiqth-standardsubspacemodular-gfunction-top-edge-real-all)
@@ -6928,7 +6928,7 @@ $$
 *thm* · [KMSCorrelation:317 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L317)  
 
 $$
-(\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (V\,0)\,\eta = \eta \to (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta \to (\forall (n : \mathbb{R}), 0 < n \to \forall (s : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)) = (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)) \to (\forall (n : \mathbb{R}), 0 < n \to \forall (z : \mathbb{C}), z.\mathrm{im} = -(1/2) \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,z)).\mathrm{im} = 0) \to \forall (t : \mathbb{R}), \mathrm{inner}\,\mathbb{C}\,((V\,t)\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta))) = \mathrm{inner}\,\mathbb{C}\,\eta\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta))
+(\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (V\,0)\,\eta = \eta \to (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta \to (\forall (n : \mathbb{R}), 0 < n \to \forall (s : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)) = (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)) \to (\forall (n : \mathbb{R}), 0 < n \to \forall (z : \mathbb{C}), z.\mathrm{im} = -(1/2) \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,z)).\mathrm{im} = 0) \to \forall (t : \mathbb{R}), \mathrm{inner}\,\mathbb{C}\,((V\,t)\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta))) = \mathrm{inner}\,\mathbb{C}\,\eta\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta))
 $$
 
 **proof uses** [`entireVec`](#d-qiqth-standardsubspacemodular-entirevec) [`gConstancy_entire_of_bottom`](#d-qiqth-standardsubspacemodular-gconstancy-entire-of-bottom) [`gConstancy_of_entireVec_limit`](#d-qiqth-standardsubspacemodular-gconstancy-of-entirevec-limit) [`gConstancy_real_smul`](#d-qiqth-standardsubspacemodular-gconstancy-real-smul)
@@ -6941,7 +6941,7 @@ $$
 *thm* · [KMSCorrelation:288 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L288)  
 
 $$
-(\mathrm{Continuous}\,\lambda s \mapsto (V\,s)\,\eta) \to (\forall (s : \mathbb{R}), \|(V\,s)\,\eta\| \le \|\eta\|) \to (V\,0)\,\eta = \eta \to (\forall (n : \mathbb{R}), 0 < n \to \mathrm{inner}\,\mathbb{C}\,((V\,t)\,(\href{#d-qiqth-standardsubspacemodular-entirevec}{\mathrm{entireVec}}\,V\,n\,\eta))\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)) = \mathrm{inner}\,\mathbb{C}\,(\href{#d-qiqth-standardsubspacemodular-entirevec}{\mathrm{entireVec}}\,V\,n\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)) \to \mathrm{inner}\,\mathbb{C}\,((V\,t)\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)) = \mathrm{inner}\,\mathbb{C}\,\eta\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)
+(\mathrm{Continuous}\,\lambda s \mapsto (V\,s)\,\eta) \to (\forall (s : \mathbb{R}), \|(V\,s)\,\eta\| \le \|\eta\|) \to (V\,0)\,\eta = \eta \to (\forall (n : \mathbb{R}), 0 < n \to \mathrm{inner}\,\mathbb{C}\,((V\,t)\,(\href{#d-qiqth-standardsubspacemodular-entirevec}{\mathrm{entireVec}}\,V\,n\,\eta))\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = \mathrm{inner}\,\mathbb{C}\,(\href{#d-qiqth-standardsubspacemodular-entirevec}{\mathrm{entireVec}}\,V\,n\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) \to \mathrm{inner}\,\mathbb{C}\,((V\,t)\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = \mathrm{inner}\,\mathbb{C}\,\eta\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)
 $$
 
 **proof uses** [`entireVec_tendsto`](#d-qiqth-standardsubspacemodular-entirevec-tendsto) [`gaussSmear`](#d-qiqth-standardsubspacemodular-gausssmear)
@@ -6954,7 +6954,7 @@ $$
 *thm* · [KMSCorrelation:340 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L340)  
 
 $$
-\mathrm{Tendsto}\,\xis\,\mathrm{atTop}\,(\mathrm{nhds}\,\xi) \to (\forall (k : \mathbb{N}), \mathrm{inner}\,\mathbb{C}\,((V\,t)\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,(\mathrm{s}\,k))) = \mathrm{inner}\,\mathbb{C}\,\eta\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,(\mathrm{s}\,k))) \to \mathrm{inner}\,\mathbb{C}\,((V\,t)\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)) = \mathrm{inner}\,\mathbb{C}\,\eta\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)
+\mathrm{Tendsto}\,\xis\,\mathrm{atTop}\,(\mathrm{nhds}\,\xi) \to (\forall (k : \mathbb{N}), \mathrm{inner}\,\mathbb{C}\,((V\,t)\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,(\mathrm{s}\,k))) = \mathrm{inner}\,\mathbb{C}\,\eta\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,(\mathrm{s}\,k))) \to \mathrm{inner}\,\mathbb{C}\,((V\,t)\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = \mathrm{inner}\,\mathbb{C}\,\eta\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)
 $$
 
 **statement uses** [`modConj`](#d-qiqth-standardsubspacemodular-modconj) [`modUnitary`](#d-qiqth-standardsubspacemodular-modunitary)
@@ -6966,7 +6966,7 @@ $$
 *thm* · [KMSCorrelation:308 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L308)  
 
 $$
-\mathrm{inner}\,\mathbb{C}\,((V\,t)\,v)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)) = \mathrm{inner}\,\mathbb{C}\,v\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi) \to \mathrm{inner}\,\mathbb{C}\,((V\,t)\,(c \cdot v))\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)) = \mathrm{inner}\,\mathbb{C}\,(c \cdot v)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)
+\mathrm{inner}\,\mathbb{C}\,((V\,t)\,v)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = \mathrm{inner}\,\mathbb{C}\,v\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi) \to \mathrm{inner}\,\mathbb{C}\,((V\,t)\,(c \cdot v))\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = \mathrm{inner}\,\mathbb{C}\,(c \cdot v)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)
 $$
 
 **statement uses** [`modConj`](#d-qiqth-standardsubspacemodular-modconj) [`modUnitary`](#d-qiqth-standardsubspacemodular-modunitary)
@@ -6978,7 +6978,7 @@ $$
 *thm* · [KMSCorrelation:359 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L359)  
 
 $$
-(\forall (\zeta : H), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta \to \mathrm{inner}\,\mathbb{C}\,((V\,t)\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta))) = \mathrm{inner}\,\mathbb{C}\,\eta\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta))) \to (\forall \xi\in S.\mathrm{toClosedSubmodule}, \exists \zetas, (\forall (k : \mathbb{N}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,(\mathrm{s}\,k)) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,(\mathrm{s}\,k)) \wedge \mathrm{Tendsto}\,(\lambda k \mapsto (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,(\mathrm{s}\,k))\,\mathrm{atTop}\,(\mathrm{nhds}\,\xi)) \to \forall \xi\in S.\mathrm{toClosedSubmodule}, \mathrm{inner}\,\mathbb{C}\,((V\,t)\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)) = \mathrm{inner}\,\mathbb{C}\,\eta\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)
+(\forall (\zeta : H), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta \to \mathrm{inner}\,\mathbb{C}\,((V\,t)\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta))) = \mathrm{inner}\,\mathbb{C}\,\eta\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta))) \to (\forall \xi\in S.\mathrm{toClosedSubmodule}, \exists \zetas, (\forall (k : \mathbb{N}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k)) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k)) \wedge \mathrm{Tendsto}\,(\lambda k \mapsto (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k))\,\mathrm{atTop}\,(\mathrm{nhds}\,\xi)) \to \forall \xi\in S.\mathrm{toClosedSubmodule}, \mathrm{inner}\,\mathbb{C}\,((V\,t)\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = \mathrm{inner}\,\mathbb{C}\,\eta\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)
 $$
 
 **proof uses** [`gConstancy_of_tendsto_xi`](#d-qiqth-standardsubspacemodular-gconstancy-of-tendsto-xi)
@@ -6991,7 +6991,7 @@ $$
 *thm* · [KMSCorrelation:605 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L605)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta \to \forall (w : H) (t : \mathbb{R}), ((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2)))\,w = \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta))\,w
+(\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta \to \forall (w : H) (t : \mathbb{R}), ((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2)))\,w = \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta))\,w
 $$
 
 **proof uses** [`modConj`](#d-qiqth-standardsubspacemodular-modconj) [`modConjBilin_apply`](#d-qiqth-standardsubspacemodular-modconjbilin-apply) [`modConj_deviceVecF_bottom_eq_of_mem_K`](#d-qiqth-standardsubspacemodular-modconj-devicevecf-bottom-eq-of-mem-k)
@@ -7004,7 +7004,7 @@ $$
 *thm* · [KMSCorrelation:734 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L734)  
 
 $$
-0 < n \to \forall (\eta : H) \{\zeta : H\}, (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta \to \forall (t : \mathbb{R}), (\mathrm{Continuous}\,\lambda s \mapsto (V\,s)\,\eta) \to (\forall (s : \mathbb{R}), \|(V\,s)\,\eta\| \le \|\eta\|) \to (\forall (s u : \mathbb{R}), (V\,s)\,((V\,u)\,\eta) = (V\,(s + u))\,\eta) \to \forall \{f : \mathbb{C} \to \mathbb{C}\} \{M : \mathbb{R}\}, \mathrm{DiffContOnCl}\,\mathbb{C}\,f\,\href{#d-qiqth-stripuniqueness-kmshalfstripopen}{\mathrm{kmsHalfStripOpen}} \to (\forall z\in \href{#d-qiqth-stripuniqueness-kmshalfstrip}{\mathrm{kmsHalfStrip}}, \|f\,z\| \le M) \to (\forall (s : \mathbb{R}), f\,s = \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta))\,((V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta))) \to (f\,(t - i / 2)).\mathrm{im} = 0 \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2)))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,(t - i / 2))).\mathrm{im} = 0
+0 < n \to \forall (\eta : H) \{\zeta : H\}, (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta \to \forall (t : \mathbb{R}), (\mathrm{Continuous}\,\lambda s \mapsto (V\,s)\,\eta) \to (\forall (s : \mathbb{R}), \|(V\,s)\,\eta\| \le \|\eta\|) \to (\forall (s u : \mathbb{R}), (V\,s)\,((V\,u)\,\eta) = (V\,(s + u))\,\eta) \to \forall \{f : \mathbb{C} \to \mathbb{C}\} \{M : \mathbb{R}\}, \mathrm{DiffContOnCl}\,\mathbb{C}\,f\,\href{#d-qiqth-stripuniqueness-kmshalfstripopen}{\mathrm{kmsHalfStripOpen}} \to (\forall z\in \href{#d-qiqth-stripuniqueness-kmshalfstrip}{\mathrm{kmsHalfStrip}}, \|f\,z\| \le M) \to (\forall (s : \mathbb{R}), f\,s = \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta))\,((V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta))) \to (f\,(t - i / 2)).\mathrm{im} = 0 \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2)))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,(t - i / 2))).\mathrm{im} = 0
 $$
 
 **proof uses** [`corrC`](#d-qiqth-standardsubspacemodular-corrc) [`gFunction_bottom_real_of_kms_match`](#d-qiqth-standardsubspacemodular-gfunction-bottom-real-of-kms-match) [`gaussSmearC_ofReal`](#d-qiqth-standardsubspacemodular-gausssmearc-ofreal)
@@ -7017,7 +7017,7 @@ $$
 *thm* · [KMSCorrelation:686 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L686)  
 
 $$
-0 < n \to \forall (\eta : H) \{\zeta : H\}, (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta \to \forall (t : \mathbb{R}), (\mathrm{Continuous}\,\lambda s \mapsto (V\,s)\,\eta) \to (\forall (s : \mathbb{R}), \|(V\,s)\,\eta\| \le \|\eta\|) \to \forall \{f : \mathbb{C} \to \mathbb{C}\} \{M : \mathbb{R}\}, \mathrm{DiffContOnCl}\,\mathbb{C}\,f\,\href{#d-qiqth-stripuniqueness-kmshalfstripopen}{\mathrm{kmsHalfStripOpen}} \to (\forall z\in \href{#d-qiqth-stripuniqueness-kmshalfstrip}{\mathrm{kmsHalfStrip}}, \|f\,z\| \le M) \to (\forall (s : \mathbb{R}), f\,s = \href{#d-qiqth-standardsubspacemodular-corrc}{\mathrm{corrC}}\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta))\,V\,n\,\eta\,s) \to (f\,(t - i / 2)).\mathrm{im} = 0 \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2)))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,(t - i / 2))).\mathrm{im} = 0
+0 < n \to \forall (\eta : H) \{\zeta : H\}, (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta \to \forall (t : \mathbb{R}), (\mathrm{Continuous}\,\lambda s \mapsto (V\,s)\,\eta) \to (\forall (s : \mathbb{R}), \|(V\,s)\,\eta\| \le \|\eta\|) \to \forall \{f : \mathbb{C} \to \mathbb{C}\} \{M : \mathbb{R}\}, \mathrm{DiffContOnCl}\,\mathbb{C}\,f\,\href{#d-qiqth-stripuniqueness-kmshalfstripopen}{\mathrm{kmsHalfStripOpen}} \to (\forall z\in \href{#d-qiqth-stripuniqueness-kmshalfstrip}{\mathrm{kmsHalfStrip}}, \|f\,z\| \le M) \to (\forall (s : \mathbb{R}), f\,s = \href{#d-qiqth-standardsubspacemodular-corrc}{\mathrm{corrC}}\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta))\,V\,n\,\eta\,s) \to (f\,(t - i / 2)).\mathrm{im} = 0 \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2)))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,(t - i / 2))).\mathrm{im} = 0
 $$
 
 **proof uses** [`gFunction_bottom_eq_of_mem_K`](#d-qiqth-standardsubspacemodular-gfunction-bottom-eq-of-mem-k)
@@ -7030,7 +7030,7 @@ $$
 *thm* · [KMSCorrelation:192 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L192)  
 
 $$
-0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (z : \mathbb{C}), z.\mathrm{im} = 0 \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,z)).\mathrm{im} = 0) \to (\forall (z : \mathbb{C}), z.\mathrm{im} = -(1/2) \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,z)).\mathrm{im} = 0) \to \forall (t : \mathbb{R}), ((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,t))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,t) = ((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,0))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,0)
+0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (z : \mathbb{C}), z.\mathrm{im} = 0 \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,z)).\mathrm{im} = 0) \to (\forall (z : \mathbb{C}), z.\mathrm{im} = -(1/2) \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,z)).\mathrm{im} = 0) \to \forall (t : \mathbb{R}), ((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,t))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,t) = ((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,0))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,0)
 $$
 
 **proof uses** [`gaussSmearC_norm_le`](#d-qiqth-standardsubspacemodular-gausssmearc-norm-le) [`eqConst_of_im_zero_halfStrip`](#d-qiqth-stripuniqueness-eqconst-of-im-zero-halfstrip) [`kmsHalfStripOpen`](#d-qiqth-stripuniqueness-kmshalfstripopen) [`diffContOnCl_gFunction`](#d-qiqth-diffcontoncl-gfunction) [`gFunction_norm_le`](#d-qiqth-gfunction-norm-le)
@@ -7043,7 +7043,7 @@ $$
 *thm* · [KMSCorrelation:253 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L253)  
 
 $$
-0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta \to (\forall (s : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)) = (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)) \to \forall (z : \mathbb{C}), z.\mathrm{im} = 0 \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,z)).\mathrm{im} = 0
+0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta \to (\forall (s : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)) = (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)) \to \forall (z : \mathbb{C}), z.\mathrm{im} = 0 \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,z)).\mathrm{im} = 0
 $$
 
 **proof uses** [`gFunction_top_edge_real`](#d-qiqth-gfunction-top-edge-real)
@@ -7067,7 +7067,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:2391 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L2391)  
 
 $$
-0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \forall (z : \mathbb{C}), \|\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,z\| \le \exp\,(n \cdot {z.\mathrm{im}}^{2}) \cdot \|\eta\| \cdot \sqrt (\pi / n)
+0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \forall (z : \mathbb{C}), \|\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,z\| \le \exp\,(n \cdot {z.\mathrm{im}}^{2}) \cdot \|\eta\| \cdot \sqrt (\pi / n)
 $$
 
 **proof uses** [`gaussSmearC_integrable`](#d-qiqth-standardsubspacemodular-gausssmearc-integrable)
@@ -7080,7 +7080,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:2143 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L2143)  
 
 $$
-0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to \forall (s : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,s = (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)
+0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to \forall (s : \mathbb{R}), \href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,s = (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)
 $$
 
 **proof uses** [`gaussSmear_smul_left`](#d-qiqth-standardsubspacemodular-gausssmear-smul-left)
@@ -7093,7 +7093,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:2343 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L2343)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,0 = \href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta
+\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,0 = \href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta
 $$
 
 **statement uses** [`gaussSmear`](#d-qiqth-standardsubspacemodular-gausssmear) [`gaussSmearC`](#d-qiqth-standardsubspacemodular-gausssmearc)
@@ -7116,7 +7116,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1926 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1926)  
 
 $$
-0 < n \to \forall \{\eta : H\}, (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (t : \mathbb{R}), (V\,t)\,\eta \in S.\mathrm{toClosedSubmodule}) \to \href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta \in S.\mathrm{toClosedSubmodule}
+0 < n \to \forall \{\eta : H\}, (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (t : \mathbb{R}), (V\,t)\,\eta \in S.\mathrm{toClosedSubmodule}) \to \href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta \in S.\mathrm{toClosedSubmodule}
 $$
 
 **proof uses** [`gaussSmear_integrable`](#d-qiqth-standardsubspacemodular-gausssmear-integrable) [`mem_K_iff_projK`](#d-qiqth-standardsubspacemodular-mem-k-iff-projk) [`projK`](#d-qiqth-standardsubspacemodular-projk)
@@ -7129,7 +7129,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1941 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1941)  
 
 $$
-0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to \forall (s : \mathbb{R}), (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta) = \int (t : \mathbb{R}), \exp\,(-n \cdot {t}^{2}) \cdot (V\,(s + t))\,\eta
+0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to \forall (s : \mathbb{R}), (V\,s)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta) = \int (t : \mathbb{R}), \exp\,(-n \cdot {t}^{2}) \cdot (V\,(s + t))\,\eta
 $$
 
 **proof uses** [`gaussSmear_integrable`](#d-qiqth-standardsubspacemodular-gausssmear-integrable)
@@ -7202,7 +7202,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:2184 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L2184)  
 
 $$
-0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \forall (z_{0} : \mathbb{C}), ({\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta})'({z_{0}})={\int (u : \mathbb{R}), (2 \cdot n \cdot (u - z_{0}) \cdot \exp\,(-n \cdot {(u - z_{0})}^{2})) \cdot (V\,u)\,\eta}
+0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \forall (z_{0} : \mathbb{C}), ({\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta})'({z_{0}})={\int (u : \mathbb{R}), (2 \cdot n \cdot (u - z_{0}) \cdot \exp\,(-n \cdot {(u - z_{0})}^{2})) \cdot (V\,u)\,\eta}
 $$
 
 **proof uses** [`gaussSmearC_integrable`](#d-qiqth-standardsubspacemodular-gausssmearc-integrable) [`integrable_abs_add_mul_exp_neg_mul_sq`](#d-qiqth-standardsubspacemodular-integrable-abs-add-mul-exp-neg-mul-sq)
@@ -7215,7 +7215,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:2506 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L2506)  
 
 $$
-r \in \mathrm{Ioo}\,0\,2 \to \forall (z : \mathbb{C}), ({\lambda z \mapsto \href{#d-qiqth-standardsubspacemodular-modcharc}{\mathrm{modCharC}}\,z\,r})'({z})={i \cdot (\log\,((2 - r) / r)) \cdot \href{#d-qiqth-standardsubspacemodular-modcharc}{\mathrm{modCharC}}\,z\,r}
+r \in \mathrm{Ioo}\,0\,2 \to \forall (z : \mathbb{C}), ({\lambda z \mapsto \href{#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,z\,r})'({z})={i \cdot (\log\,((2 - r) / r)) \cdot \href{#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,z\,r}
 $$
 
 **proof uses** [`modCharC_of_mem`](#d-qiqth-standardsubspacemodular-modcharc-of-mem)
@@ -7265,7 +7265,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:2447 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L2447)  
 
 $$
-\mathrm{Measurable}\,(\href{#d-qiqth-standardsubspacemodular-modcharc}{\mathrm{modCharC}}\,z)
+\mathrm{Measurable}\,(\href{#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,z)
 $$
 
 **statement uses** [`modCharC`](#d-qiqth-standardsubspacemodular-modcharc)
@@ -7289,7 +7289,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:2463 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L2463)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-modcharc}{\mathrm{modCharC}}\,(z + w)\,r = \href{#d-qiqth-standardsubspacemodular-modcharc}{\mathrm{modCharC}}\,z\,r \cdot \href{#d-qiqth-standardsubspacemodular-modcharc}{\mathrm{modCharC}}\,w\,r
+\href{#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,(z + w)\,r = \href{#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,z\,r \cdot \href{#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,w\,r
 $$
 
 **proof uses** [`modCharC_of_mem`](#d-qiqth-standardsubspacemodular-modcharc-of-mem)
@@ -7302,7 +7302,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:2539 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L2539)  
 
 $$
-r \in \mathrm{Ioo}\,0\,2 \to \forall (z : \mathbb{C}), \|\href{#d-qiqth-standardsubspacemodular-modcharc}{\mathrm{modCharC}}\,z\,r\| = \exp\,(-z.\mathrm{im} \cdot \log\,((2 - r) / r))
+r \in \mathrm{Ioo}\,0\,2 \to \forall (z : \mathbb{C}), \|\href{#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,z\,r\| = \exp\,(-z.\mathrm{im} \cdot \log\,((2 - r) / r))
 $$
 
 **proof uses** [`modCharC_of_mem`](#d-qiqth-standardsubspacemodular-modcharc-of-mem)
@@ -7315,7 +7315,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:2460 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L2460)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-modcharc}{\mathrm{modCharC}}\,(t)\,r = \href{#d-qiqth-standardsubspacemodular-modchar}{\mathrm{modChar}}\,t\,r
+\href{#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,(t)\,r = \href{#d-qiqth-standardsubspacemodular-modchar}{\chi_{\mathrm{mod}}}\,t\,r
 $$
 
 **statement uses** [`modChar`](#d-qiqth-standardsubspacemodular-modchar) [`modCharC`](#d-qiqth-standardsubspacemodular-modcharc)
@@ -7327,7 +7327,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:2455 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L2455)  
 
 $$
-r \in \mathrm{Ioo}\,0\,2 \to \forall (z : \mathbb{C}), \href{#d-qiqth-standardsubspacemodular-modcharc}{\mathrm{modCharC}}\,z\,r = \exp\,(i \cdot z \cdot (\log\,((2 - r) / r)))
+r \in \mathrm{Ioo}\,0\,2 \to \forall (z : \mathbb{C}), \href{#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,z\,r = \exp\,(i \cdot z \cdot (\log\,((2 - r) / r)))
 $$
 
 **statement uses** [`modCharC`](#d-qiqth-standardsubspacemodular-modcharc)
@@ -7339,7 +7339,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:2611 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L2611)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-modcharc}{\mathrm{modCharC}}\,0\,r = 1
+\href{#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,0\,r = 1
 $$
 
 **proof uses** [`modCharC_of_mem`](#d-qiqth-standardsubspacemodular-modcharc-of-mem)
@@ -7352,7 +7352,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:70 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L70)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-modchar}{\mathrm{modChar}}\,(s + t)\,r = \href{#d-qiqth-standardsubspacemodular-modchar}{\mathrm{modChar}}\,s\,r \cdot \href{#d-qiqth-standardsubspacemodular-modchar}{\mathrm{modChar}}\,t\,r
+\href{#d-qiqth-standardsubspacemodular-modchar}{\chi_{\mathrm{mod}}}\,(s + t)\,r = \href{#d-qiqth-standardsubspacemodular-modchar}{\chi_{\mathrm{mod}}}\,s\,r \cdot \href{#d-qiqth-standardsubspacemodular-modchar}{\chi_{\mathrm{mod}}}\,t\,r
 $$
 
 **statement uses** [`modChar`](#d-qiqth-standardsubspacemodular-modchar)
@@ -7364,7 +7364,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:81 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L81)  
 
 $$
-(\mathrm{starRingEnd}\,\mathbb{C})\,(\href{#d-qiqth-standardsubspacemodular-modchar}{\mathrm{modChar}}\,t\,r) = \href{#d-qiqth-standardsubspacemodular-modchar}{\mathrm{modChar}}\,(-t)\,r
+(\mathrm{starRingEnd}\,\mathbb{C})\,(\href{#d-qiqth-standardsubspacemodular-modchar}{\chi_{\mathrm{mod}}}\,t\,r) = \href{#d-qiqth-standardsubspacemodular-modchar}{\chi_{\mathrm{mod}}}\,(-t)\,r
 $$
 
 **statement uses** [`modChar`](#d-qiqth-standardsubspacemodular-modchar)
@@ -7376,7 +7376,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:47 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L47)  
 
 $$
-\mathrm{Measurable}\,(\href{#d-qiqth-standardsubspacemodular-modchar}{\mathrm{modChar}}\,t)
+\mathrm{Measurable}\,(\href{#d-qiqth-standardsubspacemodular-modchar}{\chi_{\mathrm{mod}}}\,t)
 $$
 
 **statement uses** [`modChar`](#d-qiqth-standardsubspacemodular-modchar)
@@ -7388,7 +7388,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:54 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L54)  
 
 $$
-\|\href{#d-qiqth-standardsubspacemodular-modchar}{\mathrm{modChar}}\,t\,r\| = 1
+\|\href{#d-qiqth-standardsubspacemodular-modchar}{\chi_{\mathrm{mod}}}\,t\,r\| = 1
 $$
 
 **statement uses** [`modChar`](#d-qiqth-standardsubspacemodular-modchar)
@@ -7400,7 +7400,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1581 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1581)  
 
 $$
-(\mathrm{starRingEnd}\,\mathbb{C})\,(\href{#d-qiqth-standardsubspacemodular-modchar}{\mathrm{modChar}}\,t\,(2 - r)) = \href{#d-qiqth-standardsubspacemodular-modchar}{\mathrm{modChar}}\,t\,r
+(\mathrm{starRingEnd}\,\mathbb{C})\,(\href{#d-qiqth-standardsubspacemodular-modchar}{\chi_{\mathrm{mod}}}\,t\,(2 - r)) = \href{#d-qiqth-standardsubspacemodular-modchar}{\chi_{\mathrm{mod}}}\,t\,r
 $$
 
 **statement uses** [`modChar`](#d-qiqth-standardsubspacemodular-modchar)
@@ -7412,7 +7412,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:63 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L63)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-modchar}{\mathrm{modChar}}\,0\,r = 1
+\href{#d-qiqth-standardsubspacemodular-modchar}{\chi_{\mathrm{mod}}}\,0\,r = 1
 $$
 
 **statement uses** [`modChar`](#d-qiqth-standardsubspacemodular-modchar)
@@ -7424,7 +7424,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:766 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L766)  
 
 $$
-((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,v)\,w = \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,v)\,w
+((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,v)\,w = \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,v)\,w
 $$
 
 **statement uses** [`modConj`](#d-qiqth-standardsubspacemodular-modconj) [`modConjBilin`](#d-qiqth-standardsubspacemodular-modconjbilin)
@@ -7436,7 +7436,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:838 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L838)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi))))) = (\href{#d-qiqth-standardsubspacemodular-rvdtwosubrc}{\mathrm{rvdTwoSubRC}}\,S)\,\xi
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi))))) = (\href{#d-qiqth-standardsubspacemodular-rvdtwosubrc}{\mathrm{rvdTwoSubRC}}\,S)\,\xi
 $$
 
 **proof uses** [`modConj_rvdRC_modConj`](#d-qiqth-standardsubspacemodular-modconj-rvdrc-modconj) [`modConj_sq`](#d-qiqth-standardsubspacemodular-modconj-sq) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc) [`rvdSqrtR_mul_self`](#d-qiqth-standardsubspacemodular-rvdsqrtr-mul-self)
@@ -7449,7 +7449,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1879 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1879)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,\eta) = (\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\eta)
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\eta) = (\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\eta)
 $$
 
 **proof uses** [`modConj_rvdT`](#d-qiqth-standardsubspacemodular-modconj-rvdt) [`modUnitary_commute_rvdPmQ`](#d-qiqth-standardsubspacemodular-modunitary-commute-rvdpmq) [`modUnitary_commute_rvdT`](#d-qiqth-standardsubspacemodular-modunitary-commute-rvdt) [`rvdPmQ`](#d-qiqth-standardsubspacemodular-rvdpmq) [`rvdT`](#d-qiqth-standardsubspacemodular-rvdt) [`rvdT_restrictScalars_denseRange`](#d-qiqth-standardsubspacemodular-rvdt-restrictscalars-denserange)
@@ -7462,7 +7462,7 @@ $$
 *thm* · [KMSCorrelation:562 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L562)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,(-(i / 2))\,\cdots \,\cdots )\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\zeta)
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,(-(i / 2))\,\cdots \,\cdots )\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\zeta)
 $$
 
 **proof uses** [`deviceOpC_neg_half_eq`](#d-qiqth-standardsubspacemodular-deviceopc-neg-half-eq) [`modConj_rvdSqrtTwoSubR_modConj`](#d-qiqth-standardsubspacemodular-modconj-rvdsqrttwosubr-modconj) [`modConj_sq`](#d-qiqth-standardsubspacemodular-modconj-sq) [`rvdSqrtTwoSubR`](#d-qiqth-standardsubspacemodular-rvdsqrttwosubr)
@@ -7475,7 +7475,7 @@ $$
 *thm* · [KMSCorrelation:575 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L575)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2)) = (\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\zeta))
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2)) = (\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\zeta))
 $$
 
 **proof uses** [`modConj_deviceOpC_neg_half`](#d-qiqth-standardsubspacemodular-modconj-deviceopc-neg-half) [`deviceOpC`](#d-qiqth-deviceopc) [`modConj_deviceVecF_bottom`](#d-qiqth-modconj-devicevecf-bottom)
@@ -7488,7 +7488,7 @@ $$
 *thm* · [KMSCorrelation:584 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L584)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\zeta = \zeta \to \forall (t : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2)) = (\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta)
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\zeta = \zeta \to \forall (t : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2)) = (\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta)
 $$
 
 **proof uses** [`modConj_deviceVecF_bottom_eq`](#d-qiqth-standardsubspacemodular-modconj-devicevecf-bottom-eq)
@@ -7501,7 +7501,7 @@ $$
 *thm* · [KMSCorrelation:594 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L594)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta \to \forall (t : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2)) = (\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta)
+(\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta \to \forall (t : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2)) = (\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta)
 $$
 
 **proof uses** [`modConj_deviceVecF_bottom_eq_fixed`](#d-qiqth-standardsubspacemodular-modconj-devicevecf-bottom-eq-fixed) [`modConj_fixed_of_sqrtR_mem_K`](#d-qiqth-standardsubspacemodular-modconj-fixed-of-sqrtr-mem-k)
@@ -7514,7 +7514,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1718 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1718)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta \to (\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\zeta = \zeta
+(\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta \to (\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\zeta = \zeta
 $$
 
 **proof uses** [`modConj_rvdSqrtR`](#d-qiqth-standardsubspacemodular-modconj-rvdsqrtr) [`rvdSqrtR_commute_rvdSqrtTwoSubR`](#d-qiqth-standardsubspacemodular-rvdsqrtr-commute-rvdsqrttwosubr) [`rvdSqrtTwoSubR`](#d-qiqth-standardsubspacemodular-rvdsqrttwosubr) [`rvdT`](#d-qiqth-standardsubspacemodular-rvdt) [`rvdT_injective`](#d-qiqth-standardsubspacemodular-rvdt-injective)
@@ -7527,7 +7527,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:777 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L777)  
 
 $$
-\mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\zeta) = (\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{inner}\,\mathbb{C}\,\eta\,\zeta)
+\mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\zeta) = (\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{inner}\,\mathbb{C}\,\eta\,\zeta)
 $$
 
 **proof uses** [`modConj_inner_map`](#d-qiqth-standardsubspacemodular-modconj-inner-map) [`modConj_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-modconj-isselfadjoint) [`modConj_smul_I`](#d-qiqth-standardsubspacemodular-modconj-smul-i) [`modConj_sq`](#d-qiqth-standardsubspacemodular-modconj-sq)
@@ -7540,7 +7540,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:643 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L643)  
 
 $$
-\mathrm{inner}\,\mathbb{R}\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\zeta) = \mathrm{inner}\,\mathbb{R}\,\eta\,\zeta
+\mathrm{inner}\,\mathbb{R}\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\eta)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\zeta) = \mathrm{inner}\,\mathbb{R}\,\eta\,\zeta
 $$
 
 **proof uses** [`modConj_norm`](#d-qiqth-standardsubspacemodular-modconj-norm)
@@ -7553,7 +7553,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:665 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L665)  
 
 $$
-\mathrm{inner}\,\mathbb{R}\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\eta)\,\zeta = \mathrm{inner}\,\mathbb{R}\,\eta\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\zeta)
+\mathrm{inner}\,\mathbb{R}\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\eta)\,\zeta = \mathrm{inner}\,\mathbb{R}\,\eta\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\zeta)
 $$
 
 **proof uses** [`modConj_rvdT`](#d-qiqth-standardsubspacemodular-modconj-rvdt) [`rvdPmQ`](#d-qiqth-standardsubspacemodular-rvdpmq) [`rvdPmQ_commute_rvdT_apply`](#d-qiqth-standardsubspacemodular-rvdpmq-commute-rvdt-apply) [`rvdPmQ_real_inner_symm`](#d-qiqth-standardsubspacemodular-rvdpmq-real-inner-symm) [`rvdT`](#d-qiqth-standardsubspacemodular-rvdt) [`rvdT_real_inner_symm`](#d-qiqth-standardsubspacemodular-rvdt-real-inner-symm) [`rvdT_restrictScalars_denseRange`](#d-qiqth-standardsubspacemodular-rvdt-restrictscalars-denserange)
@@ -7566,7 +7566,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:634 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L634)  
 
 $$
-\|(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\eta\| = \|\eta\|
+\|(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\eta\| = \|\eta\|
 $$
 
 **proof uses** [`modConj_rvdT`](#d-qiqth-standardsubspacemodular-modconj-rvdt) [`rvdPmQ`](#d-qiqth-standardsubspacemodular-rvdpmq) [`rvdT`](#d-qiqth-standardsubspacemodular-rvdt) [`rvdT_norm_eq`](#d-qiqth-standardsubspacemodular-rvdt-norm-eq) [`rvdT_restrictScalars_denseRange`](#d-qiqth-standardsubspacemodular-rvdt-restrictscalars-denserange)
@@ -7579,7 +7579,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:941 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L941)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-projik}{\mathrm{projIK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)) = \xi - (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,\xi
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-projik}{\mathrm{projIK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = \xi - (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,\xi
 $$
 
 **proof uses** [`modConj_rvdPmQ_modConj`](#d-qiqth-standardsubspacemodular-modconj-rvdpmq-modconj) [`modConj_rvdRC_modConj`](#d-qiqth-standardsubspacemodular-modconj-rvdrc-modconj) [`rvdPmQ`](#d-qiqth-standardsubspacemodular-rvdpmq) [`rvdR`](#d-qiqth-standardsubspacemodular-rvdr) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc) [`rvdRC_apply`](#d-qiqth-standardsubspacemodular-rvdrc-apply) [`rvdR_apply`](#d-qiqth-standardsubspacemodular-rvdr-apply) [`rvdTwoSubRC`](#d-qiqth-standardsubspacemodular-rvdtwosubrc) [`rvdTwoSubRC_apply`](#d-qiqth-standardsubspacemodular-rvdtwosubrc-apply)
@@ -7592,7 +7592,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:967 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L967)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)) = \xi - (\href{#d-qiqth-standardsubspacemodular-projik}{\mathrm{projIK}}\,S)\,\xi
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = \xi - (\href{#d-qiqth-standardsubspacemodular-projik}{\mathrm{projIK}}\,S)\,\xi
 $$
 
 **proof uses** [`modConj_rvdPmQ_modConj`](#d-qiqth-standardsubspacemodular-modconj-rvdpmq-modconj) [`modConj_rvdRC_modConj`](#d-qiqth-standardsubspacemodular-modconj-rvdrc-modconj) [`rvdPmQ`](#d-qiqth-standardsubspacemodular-rvdpmq) [`rvdR`](#d-qiqth-standardsubspacemodular-rvdr) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc) [`rvdRC_apply`](#d-qiqth-standardsubspacemodular-rvdrc-apply) [`rvdR_apply`](#d-qiqth-standardsubspacemodular-rvdr-apply) [`rvdTwoSubRC`](#d-qiqth-standardsubspacemodular-rvdtwosubrc) [`rvdTwoSubRC_apply`](#d-qiqth-standardsubspacemodular-rvdtwosubrc-apply)
@@ -7605,7 +7605,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:935 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L935)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)) = (\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = (\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi
 $$
 
 **proof uses** [`modConj_rvdT`](#d-qiqth-standardsubspacemodular-modconj-rvdt) [`modConj_sq`](#d-qiqth-standardsubspacemodular-modconj-sq) [`rvdT`](#d-qiqth-standardsubspacemodular-rvdt) [`rvdT_modConj`](#d-qiqth-standardsubspacemodular-rvdt-modconj)
@@ -7618,7 +7618,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:832 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L832)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)) = (\href{#d-qiqth-standardsubspacemodular-rvdtwosubrc}{\mathrm{rvdTwoSubRC}}\,S)\,\xi
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = (\href{#d-qiqth-standardsubspacemodular-rvdtwosubrc}{\mathrm{rvdTwoSubRC}}\,S)\,\xi
 $$
 
 **proof uses** [`modConj_rvdRC_reflect`](#d-qiqth-standardsubspacemodular-modconj-rvdrc-reflect) [`modConj_sq`](#d-qiqth-standardsubspacemodular-modconj-sq)
@@ -7631,7 +7631,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:820 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L820)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdtwosubrc}{\mathrm{rvdTwoSubRC}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdtwosubrc}{\mathrm{rvdTwoSubRC}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)
 $$
 
 **proof uses** [`modConj_rvdT`](#d-qiqth-standardsubspacemodular-modconj-rvdt) [`rvdPmQ`](#d-qiqth-standardsubspacemodular-rvdpmq) [`rvdPmQ_rvdRC`](#d-qiqth-standardsubspacemodular-rvdpmq-rvdrc) [`rvdRC_commute_rvdT`](#d-qiqth-standardsubspacemodular-rvdrc-commute-rvdt) [`rvdT`](#d-qiqth-standardsubspacemodular-rvdt) [`rvdT_restrictScalars_denseRange`](#d-qiqth-standardsubspacemodular-rvdt-restrictscalars-denserange)
@@ -7644,7 +7644,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:899 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L899)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,y) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrttwosubr}{\mathrm{rvdSqrtTwoSubR}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,y)
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,y) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrttwosubr}{\mathrm{rvdSqrtTwoSubR}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,y)
 $$
 
 **proof uses** [`modConj_rvdSqrtR_modConj`](#d-qiqth-standardsubspacemodular-modconj-rvdsqrtr-modconj) [`modConj_sq`](#d-qiqth-standardsubspacemodular-modconj-sq)
@@ -7657,7 +7657,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:848 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L848)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrttwosubr}{\mathrm{rvdSqrtTwoSubR}}\,S)\,\xi
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrttwosubr}{\mathrm{rvdSqrtTwoSubR}}\,S)\,\xi
 $$
 
 **proof uses** [`modConjSqrtR_sq`](#d-qiqth-standardsubspacemodular-modconjsqrtr-sq) [`modConj_inner_conj`](#d-qiqth-standardsubspacemodular-modconj-inner-conj) [`modConj_smul_conj`](#d-qiqth-standardsubspacemodular-modconj-smul-conj) [`modConj_sq`](#d-qiqth-standardsubspacemodular-modconj-sq) [`rvdSqrtR_nonneg`](#d-qiqth-standardsubspacemodular-rvdsqrtr-nonneg) [`rvdTwoSubRC`](#d-qiqth-standardsubspacemodular-rvdtwosubrc)
@@ -7670,7 +7670,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:891 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L891)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrttwosubr}{\mathrm{rvdSqrtTwoSubR}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\xi
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrttwosubr}{\mathrm{rvdSqrtTwoSubR}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\xi
 $$
 
 **proof uses** [`modConj_rvdSqrtR_modConj`](#d-qiqth-standardsubspacemodular-modconj-rvdsqrtr-modconj) [`modConj_sq`](#d-qiqth-standardsubspacemodular-modconj-sq)
@@ -7683,7 +7683,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:628 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L628)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi
 $$
 
 **proof uses** [`rvdT_norm_eq`](#d-qiqth-standardsubspacemodular-rvdt-norm-eq) [`rvdT_restrictScalars_denseRange`](#d-qiqth-standardsubspacemodular-rvdt-restrictscalars-denserange)
@@ -7696,7 +7696,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:915 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L915)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi)) = (\href{#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,\xi
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = (\href{#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,\xi
 $$
 
 **proof uses** [`modConj_rvdSqrtR`](#d-qiqth-standardsubspacemodular-modconj-rvdsqrtr) [`modConj_rvdSqrtTwoSubR_modConj`](#d-qiqth-standardsubspacemodular-modconj-rvdsqrttwosubr-modconj) [`rvdSqrtR`](#d-qiqth-standardsubspacemodular-rvdsqrtr) [`rvdSqrtR_commute_rvdSqrtTwoSubR`](#d-qiqth-standardsubspacemodular-rvdsqrtr-commute-rvdsqrttwosubr) [`rvdSqrtTwoSubR`](#d-qiqth-standardsubspacemodular-rvdsqrttwosubr)
@@ -7709,7 +7709,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:693 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L693)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,(i \cdot \eta) = -i \cdot (\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\eta
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,(i \cdot \eta) = -i \cdot (\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\eta
 $$
 
 **proof uses** [`modConj_rvdT`](#d-qiqth-standardsubspacemodular-modconj-rvdt) [`projIK`](#d-qiqth-standardsubspacemodular-projik) [`projIK_smul_I`](#d-qiqth-standardsubspacemodular-projik-smul-i) [`projK`](#d-qiqth-standardsubspacemodular-projk) [`projK_smul_I`](#d-qiqth-standardsubspacemodular-projk-smul-i) [`rvdPmQ`](#d-qiqth-standardsubspacemodular-rvdpmq) [`rvdT`](#d-qiqth-standardsubspacemodular-rvdt) [`rvdT_restrictScalars_denseRange`](#d-qiqth-standardsubspacemodular-rvdt-restrictscalars-denserange)
@@ -7722,7 +7722,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:730 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L730)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,(c \cdot \eta) = (\mathrm{starRingEnd}\,\mathbb{C})\,c \cdot (\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\eta
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,(c \cdot \eta) = (\mathrm{starRingEnd}\,\mathbb{C})\,c \cdot (\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\eta
 $$
 
 **proof uses** [`modConj_smul_I`](#d-qiqth-standardsubspacemodular-modconj-smul-i)
@@ -7735,7 +7735,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:688 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L688)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\eta) = \eta
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\eta) = \eta
 $$
 
 **proof uses** [`modConj_inner_map`](#d-qiqth-standardsubspacemodular-modconj-inner-map) [`modConj_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-modconj-isselfadjoint)
@@ -7774,7 +7774,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:174 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L174)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,(s + t) = \href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,s \cdot \href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t
+\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,(s + t) = \href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,s \cdot \href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t
 $$
 
 **proof uses** [`borelFC`](#d-qiqth-spectraltheorem-borelfc) [`borelFC_mul`](#d-qiqth-spectraltheorem-borelfc-mul) [`borelFC_congr`](#d-qiqth-standardsubspacemodular-borelfc-congr) [`modChar_add`](#d-qiqth-standardsubspacemodular-modchar-add) [`modSpecFun`](#d-qiqth-standardsubspacemodular-modspecfun) [`modSpecFun_measurable`](#d-qiqth-standardsubspacemodular-modspecfun-measurable) [`modSpecFun_norm_le`](#d-qiqth-standardsubspacemodular-modspecfun-norm-le) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint)
@@ -7787,7 +7787,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:190 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L190)  
 
 $$
-\mathrm{adjoint}\,(\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t) = \href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,(-t)
+\mathrm{adjoint}\,(\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t) = \href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,(-t)
 $$
 
 **proof uses** [`borelFC`](#d-qiqth-spectraltheorem-borelfc) [`borelFC_adjoint`](#d-qiqth-standardsubspacemodular-borelfc-adjoint) [`borelFC_congr`](#d-qiqth-standardsubspacemodular-borelfc-congr) [`modChar_conj`](#d-qiqth-standardsubspacemodular-modchar-conj) [`modSpecFun`](#d-qiqth-standardsubspacemodular-modspecfun) [`modSpecFun_measurable`](#d-qiqth-standardsubspacemodular-modspecfun-measurable) [`modSpecFun_norm_le`](#d-qiqth-standardsubspacemodular-modspecfun-norm-le) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint)
@@ -7800,7 +7800,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:328 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L328)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,\xi) \to (\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,\xi) \to (\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,\xi)
+(\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi) \to (\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi) \to (\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)
 $$
 
 **proof uses** [`rvdR_add_rvdPmQ_eq`](#d-qiqth-standardsubspacemodular-rvdr-add-rvdpmq-eq)
@@ -7813,7 +7813,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1851 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1851)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,\xi)
+(\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)
 $$
 
 **proof uses** [`modUnitary_commute_rvdPmQ_rs`](#d-qiqth-standardsubspacemodular-modunitary-commute-rvdpmq-rs)
@@ -7826,7 +7826,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1830 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1830)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S \cdot \mathrm{restrictScalars}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t) = \mathrm{restrictScalars}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t) \cdot \href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S
+\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S \cdot \mathrm{restrictScalars}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t) = \mathrm{restrictScalars}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t) \cdot \href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S
 $$
 
 **proof uses** [`cfcΩ`](#d-qiqth-standardsubspacemodular-cfc) [`cfcΩ_hΩ`](#d-qiqth-standardsubspacemodular-cfc-h) [`cfcΩ_intertwine`](#d-qiqth-standardsubspacemodular-cfc-intertwine) [`covM`](#d-qiqth-standardsubspacemodular-covm) [`hΩ`](#d-qiqth-standardsubspacemodular-h) [`projIK`](#d-qiqth-standardsubspacemodular-projik) [`projK`](#d-qiqth-standardsubspacemodular-projk) [`rvdPmQ_commute_A`](#d-qiqth-standardsubspacemodular-rvdpmq-commute-a) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc) [`rvdRC_mul_rvdTwoSubRC_denseRange`](#d-qiqth-standardsubspacemodular-rvdrc-mul-rvdtwosubrc-denserange) [`rvdTwoSubRC`](#d-qiqth-standardsubspacemodular-rvdtwosubrc) [`rvdTwoSubRC_apply`](#d-qiqth-standardsubspacemodular-rvdtwosubrc-apply) [`twΩ`](#d-qiqth-standardsubspacemodular-tw) [`twΩ_hΩ`](#d-qiqth-standardsubspacemodular-tw-h)
@@ -7839,7 +7839,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:482 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L482)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,\xi)
+(\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)
 $$
 
 **proof uses** [`modUnitary_commute_rvdRC`](#d-qiqth-standardsubspacemodular-modunitary-commute-rvdrc) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc)
@@ -7852,7 +7852,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:463 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L463)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t \cdot \href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S = \href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S \cdot \href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t
+\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t \cdot \href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S = \href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S \cdot \href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t
 $$
 
 **proof uses** [`borelFC`](#d-qiqth-spectraltheorem-borelfc) [`borelFC_comm`](#d-qiqth-standardsubspacemodular-borelfc-comm) [`modSpecFun`](#d-qiqth-standardsubspacemodular-modspecfun) [`modSpecFun_measurable`](#d-qiqth-standardsubspacemodular-modspecfun-measurable) [`modSpecFun_norm_le`](#d-qiqth-standardsubspacemodular-modspecfun-norm-le) [`rvdRC_eq_borelFC`](#d-qiqth-standardsubspacemodular-rvdrc-eq-borelfc) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint) [`specCoord`](#d-qiqth-standardsubspacemodular-speccoord) [`specCoord_measurable`](#d-qiqth-standardsubspacemodular-speccoord-measurable) [`specCoord_norm_le`](#d-qiqth-standardsubspacemodular-speccoord-norm-le)
@@ -7865,7 +7865,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1866 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1866)  
 
 $$
-\mathrm{Commute}\,(\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,(\href{#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)
+\mathrm{Commute}\,(\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,(\href{#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)
 $$
 
 **proof uses** [`modUnitary_commute_rvdRC`](#d-qiqth-standardsubspacemodular-modunitary-commute-rvdrc) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc) [`rvdSqrtR`](#d-qiqth-standardsubspacemodular-rvdsqrtr) [`rvdSqrtTwoSubR`](#d-qiqth-standardsubspacemodular-rvdsqrttwosubr) [`rvdTwoSubRC`](#d-qiqth-standardsubspacemodular-rvdtwosubrc)
@@ -7878,7 +7878,7 @@ $$
 *thm* · [KMSCorrelation:474 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/KMSCorrelation.lean#L474)  
 
 $$
-(\forall \eta\in S.\mathrm{toClosedSubmodule}, (V\,t)\,\eta \in S.\mathrm{toClosedSubmodule}) \to (\forall \eta\in S.\mathrm{toClosedSubmodule}, (\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,\eta \in S.\mathrm{toClosedSubmodule}) \to (\forall \eta\in S.\mathrm{toClosedSubmodule}, \forall (w : H), (\href{#d-qiqth-standardsubspacemodular-projik}{\mathrm{projIK}}\,S)\,w = 0 \to \mathrm{inner}\,\mathbb{C}\,w\,((V\,t)\,\eta) = \mathrm{inner}\,\mathbb{C}\,w\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,\eta)) \to \href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t = V\,t
+(\forall \eta\in S.\mathrm{toClosedSubmodule}, (V\,t)\,\eta \in S.\mathrm{toClosedSubmodule}) \to (\forall \eta\in S.\mathrm{toClosedSubmodule}, (\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\eta \in S.\mathrm{toClosedSubmodule}) \to (\forall \eta\in S.\mathrm{toClosedSubmodule}, \forall (w : H), (\href{#d-qiqth-standardsubspacemodular-projik}{\mathrm{projIK}}\,S)\,w = 0 \to \mathrm{inner}\,\mathbb{C}\,w\,((V\,t)\,\eta) = \mathrm{inner}\,\mathbb{C}\,w\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\eta)) \to \href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t = V\,t
 $$
 
 **proof uses** [`clm_eq_of_eqOn_K`](#d-qiqth-standardsubspacemodular-clm-eq-of-eqon-k) [`eq_of_mem_K_of_inner_perp_IK`](#d-qiqth-standardsubspacemodular-eq-of-mem-k-of-inner-perp-ik) [`mem_K_iff_projK`](#d-qiqth-standardsubspacemodular-mem-k-iff-projk) [`projK`](#d-qiqth-standardsubspacemodular-projk)
@@ -7891,7 +7891,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1858 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1858)  
 
 $$
-\forall \xi\in S.\mathrm{toClosedSubmodule}, (\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,\xi \in S.\mathrm{toClosedSubmodule}
+\forall \xi\in S.\mathrm{toClosedSubmodule}, (\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi \in S.\mathrm{toClosedSubmodule}
 $$
 
 **proof uses** [`modUnitary_commute_rvdPmQ`](#d-qiqth-standardsubspacemodular-modunitary-commute-rvdpmq) [`modUnitary_mapsTo_K_of_commute_D`](#d-qiqth-standardsubspacemodular-modunitary-mapsto-k-of-commute-d)
@@ -7904,7 +7904,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:340 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L340)  
 
 $$
-(\forall (\xi : H), (\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,\xi)) \to (\forall (\xi : H), (\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,\xi)) \to \forall \xi\in S.\mathrm{toClosedSubmodule}, (\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,\xi \in S.\mathrm{toClosedSubmodule}
+(\forall (\xi : H), (\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)) \to (\forall (\xi : H), (\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)) \to \forall \xi\in S.\mathrm{toClosedSubmodule}, (\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi \in S.\mathrm{toClosedSubmodule}
 $$
 
 **proof uses** [`mem_K_iff_projK`](#d-qiqth-standardsubspacemodular-mem-k-iff-projk) [`modUnitary_commute_projK_of`](#d-qiqth-standardsubspacemodular-modunitary-commute-projk-of) [`projK`](#d-qiqth-standardsubspacemodular-projk)
@@ -7917,7 +7917,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:489 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L489)  
 
 $$
-(\forall (\xi : H), (\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,\xi)) \to \forall \xi\in S.\mathrm{toClosedSubmodule}, (\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,\xi \in S.\mathrm{toClosedSubmodule}
+(\forall (\xi : H), (\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi) = (\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)) \to \forall \xi\in S.\mathrm{toClosedSubmodule}, (\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi \in S.\mathrm{toClosedSubmodule}
 $$
 
 **proof uses** [`modUnitary_commute_rvdR`](#d-qiqth-standardsubspacemodular-modunitary-commute-rvdr) [`modUnitary_mapsTo_K_of_commute`](#d-qiqth-standardsubspacemodular-modunitary-mapsto-k-of-commute)
@@ -7930,7 +7930,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:166 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L166)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,0 = 1
+\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,0 = 1
 $$
 
 **proof uses** [`borelFC`](#d-qiqth-spectraltheorem-borelfc) [`borelFC_one`](#d-qiqth-spectraltheorem-borelfc-one) [`borelFC_congr`](#d-qiqth-standardsubspacemodular-borelfc-congr) [`modChar_zero`](#d-qiqth-standardsubspacemodular-modchar-zero) [`modSpecFun`](#d-qiqth-standardsubspacemodular-modspecfun) [`modSpecFun_measurable`](#d-qiqth-standardsubspacemodular-modspecfun-measurable) [`modSpecFun_norm_le`](#d-qiqth-standardsubspacemodular-modspecfun-norm-le) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint)
@@ -7991,7 +7991,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:956 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L956)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,\xi = \xi \to (\href{#d-qiqth-standardsubspacemodular-projik}{\mathrm{projIK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\xi) = 0
+(\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,\xi = \xi \to (\href{#d-qiqth-standardsubspacemodular-projik}{\mathrm{projIK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi) = 0
 $$
 
 **proof uses** [`modConj_projIK_modConj`](#d-qiqth-standardsubspacemodular-modconj-projik-modconj) [`modConj_sq`](#d-qiqth-standardsubspacemodular-modconj-sq)
@@ -8040,7 +8040,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:982 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L982)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-projik}{\mathrm{projIK}}\,S)\,w = 0 \to (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,w) = (\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,w
+(\href{#d-qiqth-standardsubspacemodular-projik}{\mathrm{projIK}}\,S)\,w = 0 \to (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,w) = (\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,w
 $$
 
 **proof uses** [`modConj_projK_modConj`](#d-qiqth-standardsubspacemodular-modconj-projk-modconj) [`modConj_sq`](#d-qiqth-standardsubspacemodular-modconj-sq)
@@ -8331,7 +8331,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:441 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L441)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S = \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\cdots \,\cdots \,\cdots
+\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S = \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\cdots \,\cdots \,\cdots
 $$
 
 **proof uses** [`bilinDiag`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag) [`diagInt`](#d-qiqth-spectral-projectionvaluedmeasure-diagint) [`PVM_of_selfAdjoint`](#d-qiqth-spectraltheorem-pvm-of-selfadjoint) [`inner_borelFC`](#d-qiqth-spectraltheorem-inner-borelfc) [`diagInt_specCoord`](#d-qiqth-standardsubspacemodular-diagint-speccoord)
@@ -8615,7 +8615,7 @@ $$
 *thm* · [StandardSubspaceModular:504 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModular.lean#L504)  
 
 $$
-\mathrm{Commute}\,(\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,(\href{#d-qiqth-standardsubspacemodular-rvdsqrttwosubr}{\mathrm{rvdSqrtTwoSubR}}\,S)
+\mathrm{Commute}\,(\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\href{#d-qiqth-standardsubspacemodular-rvdsqrttwosubr}{\mathrm{rvdSqrtTwoSubR}}\,S)
 $$
 
 **proof uses** [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc) [`rvdRC_commute_rvdTwoSubRC`](#d-qiqth-standardsubspacemodular-rvdrc-commute-rvdtwosubrc) [`rvdTwoSubRC`](#d-qiqth-standardsubspacemodular-rvdtwosubrc)
@@ -8628,7 +8628,7 @@ $$
 *thm* · [StandardSubspaceModular:489 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModular.lean#L489)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S \cdot \href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S = \href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S
+\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S \cdot \href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S = \href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S
 $$
 
 **proof uses** [`rvdRC_nonneg`](#d-qiqth-standardsubspacemodular-rvdrc-nonneg)
@@ -8641,7 +8641,7 @@ $$
 *thm* · [StandardSubspaceModular:483 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModular.lean#L483)  
 
 $$
-0 \le \href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S
+0 \le \href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S
 $$
 
 **proof uses** [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc)
@@ -8706,7 +8706,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:926 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L926)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,\eta) = (\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\eta
+(\href{#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\eta) = (\href{#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\eta
 $$
 
 **proof uses** [`modConj_rvdT`](#d-qiqth-standardsubspacemodular-modconj-rvdt) [`modConj_rvdT_modConj`](#d-qiqth-standardsubspacemodular-modconj-rvdt-modconj) [`modConj_sq`](#d-qiqth-standardsubspacemodular-modconj-sq)
@@ -8849,7 +8849,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:94 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L94)  
 
 $$
-(\href{#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,T\,\mathrm{ha}).\mathrm{scalarMeasure}\,x = \href{#d-qiqth-spectraltheorem-specmeasure}{\mathrm{specMeasure}}\,T\,\mathrm{ha}\,x
+(\href{#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,T\,\mathrm{ha}).\mu\,x = \href{#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,x
 $$
 
 **proof uses** [`E`](#d-qiqth-spectral-projectionvaluedmeasure-e) [`scalarMeasure_apply`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure-apply) [`instIsFiniteMeasureElemRealSpectrumContinuousLinearMapComplexIdSpecMeasure`](#d-qiqth-spectraltheorem-instisfinitemeasureelemrealspectrumcontinuouslinearmapcomplexidspecmeasure) [`qForm`](#d-qiqth-spectraltheorem-qform) [`reApplyInnerSelf_specProj`](#d-qiqth-spectraltheorem-reapplyinnerself-specproj) [`specProj`](#d-qiqth-spectraltheorem-specproj) [`specProj_inter`](#d-qiqth-spectraltheorem-specproj-inter) [`specProj_isSelfAdjoint`](#d-qiqth-spectraltheorem-specproj-isselfadjoint)
@@ -8886,7 +8886,7 @@ $$
 *thm* · [StandardSubspaceModularFlow:1254 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1254)  
 
 $$
-\mathrm{spectrum}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S) \subseteq \mathrm{Icc}\,(-\href{#d-qiqth-standardsubspacemodular-covm}{\mathrm{covM}}\,S)\,(2 + \href{#d-qiqth-standardsubspacemodular-covm}{\mathrm{covM}}\,S)
+\mathrm{sp}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S) \subseteq \mathrm{Icc}\,(-\href{#d-qiqth-standardsubspacemodular-covm}{\mathrm{covM}}\,S)\,(2 + \href{#d-qiqth-standardsubspacemodular-covm}{\mathrm{covM}}\,S)
 $$
 
 **statement uses** [`covM`](#d-qiqth-standardsubspacemodular-covm) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc)
@@ -9037,7 +9037,7 @@ $$
 *thm* · [QiqtGrFreeField:52 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/QiqtGrFreeField.lean#L52)  
 
 $$
-(\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{Integrable}\,(f\,x\,v)\,\mathrm{volume}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}) (\theta : \mathbb{R}), ({f\,x\,v})'({\theta})={f^{\prime}\,x\,v\,\theta}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{AEStronglyMeasurable}\,(f^{\prime}\,x\,v)\,\mathrm{volume}) \to \forall (B : \href{#d-qiqth-curvature-point}{M^{{4}}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}), (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}) (\theta : \mathbb{R}), \|f^{\prime}\,x\,v\,\theta\| \le B\,x\,v) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to 2 \cdot \pi / \hbar \cdot \href{#d-qiqth-einsteineos-bl}{({T\,x})({v},{v})} = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,x\,v\,\theta) \cdot f^{\prime}\,x\,v\,\theta)).\mathrm{im}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,(f\,x\,v)\,\cdots )\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,(\href{#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathrm{niceWedgeStandardSubspace}}\,(\mathrm{mw}\,x\,v)\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,(f\,x\,v)\,\cdots ))})'({0})={i \cdot (\dot{K}({x},{v}))}) \to \forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to \dot{K}({x},{v}) = 2 \cdot \pi / \hbar \cdot \href{#d-qiqth-einsteineos-bl}{({T\,x})({v},{v})}
+(\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{Integrable}\,(f\,x\,v)\,\mathrm{volume}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}) (\theta : \mathbb{R}), ({f\,x\,v})'({\theta})={f^{\prime}\,x\,v\,\theta}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{AEStronglyMeasurable}\,(f^{\prime}\,x\,v)\,\mathrm{volume}) \to \forall (B : \href{#d-qiqth-curvature-point}{M^{{4}}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}), (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}) (\theta : \mathbb{R}), \|f^{\prime}\,x\,v\,\theta\| \le B\,x\,v) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to 2 \cdot \pi / \hbar \cdot \href{#d-qiqth-einsteineos-bl}{({T\,x})({v},{v})} = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,x\,v\,\theta) \cdot f^{\prime}\,x\,v\,\theta)).\mathrm{im}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,(f\,x\,v)\,\cdots )\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,(\href{#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathcal{K}}\,(\mathrm{mw}\,x\,v)\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,(f\,x\,v)\,\cdots ))})'({0})={i \cdot (\dot{K}({x},{v}))}) \to \forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to \dot{K}({x},{v}) = 2 \cdot \pi / \hbar \cdot \href{#d-qiqth-einsteineos-bl}{({T\,x})({v},{v})}
 $$
 
 **proof uses** [`freeField_component_hFlux`](#d-qiqth-fock-freefield-component-hflux)
@@ -9050,7 +9050,7 @@ $$
 *thm* · *spine* · [QiqtGrFreeField:85 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/QiqtGrFreeField.lean#L85)  
 
 $$
-(\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a b : \mathrm{Fin}\,4), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a b : \mathrm{Fin}\,4), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,4), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,4), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to \forall (\varphi : \href{#d-qiqth-curvature-point}{M^{{4}}} \to \mathbb{R}) (m \eta \hbar a : \mathbb{R}), \hbar \ne 0 \to \eta \ne 0 \to a = 2 \cdot \pi / (\hbar \cdot \eta) \to ({\varphi})\in C^{\infty} \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}), \href{#d-qiqth-curvature-boxfield}{(\Box {\varphi})({x})} = {m}^{2} \cdot \varphi\,x) \to \forall (P \mathrm{Pinv} : \href{#d-qiqth-curvature-point}{M^{{4}}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}), (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (i j : \mathrm{Fin}\,4), \sum_{k} P_{{i}{k}}({x}) \cdot (P^{-1})_{{k}{j}}({x}) = \delta_{ij}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (i j : \mathrm{Fin}\,4), \sum_{k} (P^{-1})_{{i}{k}}({x}) \cdot P_{{k}{j}}({x}) = \delta_{ij}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (i j : \mathrm{Fin}\,4), g_{{i}{j}}({x}) = \sum_{k} \sum_{l} P_{{k}{i}}({x}) \cdot \href{#d-qiqth-einsteineos-gm}{\eta_{{k}{l}}} \cdot P_{{l}{j}}({x})) \to \forall (\mathrm{Sf} \mathrm{KE} A : \href{#d-qiqth-curvature-point}{M^{{4}}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}) (\mathrm{sd} \mathrm{kd} \mathrm{ad} : \href{#d-qiqth-curvature-point}{M^{{4}}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}), (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to ({\mathrm{Sf}\,x\,v})'({0})={\dot{S}({x},{v})}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to ({\mathrm{KE}\,x\,v})'({0})={\dot{K}({x},{v})}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to ({A\,x\,v})'({0})={\dot{A}({x},{v})}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to \text{for }t\text{ near }0,\; \mathrm{Sf}\,x\,v\,t \le \eta \cdot A({x},{v},{t})) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A({x},{v},{0})) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to \forall (t : \mathbb{R}), 0 \le \mathrm{KE}({x},{v},{t}) - \mathrm{Sf}\,x\,v\,t) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to \mathrm{KE}({x},{v},{0}) - \mathrm{Sf}\,x\,v\,0 = 0) \to \forall (\mathrm{mw} : \href{#d-qiqth-curvature-point}{M^{{4}}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}) (\mathrm{hmw} : \forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v) (\mathrm{ff} \mathrm{ff}^{\prime} : \href{#d-qiqth-curvature-point}{M^{{4}}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}) (\mathrm{hf2} : \forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{MemLp}\,(\mathrm{ff}\,x\,v)\,2\,\mathrm{volume}), (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{Integrable}\,(\mathrm{ff}\,x\,v)\,\mathrm{volume}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}) (\theta : \mathbb{R}), ({\mathrm{ff}\,x\,v})'({\theta})={\mathrm{ff}^{\prime}\,x\,v\,\theta}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{AEStronglyMeasurable}\,(\mathrm{ff}^{\prime}\,x\,v)\,\mathrm{volume}) \to \forall (\mathrm{Bd} : \href{#d-qiqth-curvature-point}{M^{{4}}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}), (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}) (\theta : \mathbb{R}), \|\mathrm{ff}^{\prime}\,x\,v\,\theta\| \le \mathrm{Bd}\,x\,v) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to 2 \cdot \pi / \hbar \cdot ({\href{#d-qiqth-curvature-kgstress}{T({x})}})({v},{v}) = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{ff}\,x\,v\,\theta) \cdot \mathrm{ff}^{\prime}\,x\,v\,\theta)).\mathrm{im}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,(\mathrm{ff}\,x\,v)\,\cdots )\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,(\href{#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathrm{niceWedgeStandardSubspace}}\,(\mathrm{mw}\,x\,v)\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,(\mathrm{ff}\,x\,v)\,\cdots ))})'({0})={i \cdot (\dot{K}({x},{v}))}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to \dot{A}({x},{v}) = ({\lambda i j \mapsto \href{#d-qiqth-curvature-ricci}{R_{{i}{j}}({x})}})({v},{v})) \to \exists \Lambda, \forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (\mu \nu : \mathrm{Fin}\,4), a \cdot \href{#d-qiqth-curvature-kgstress}{T({x})\,\mu\,\nu} = \href{#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g_{{\mu}{\nu}}({x})
+(\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a b : \mathrm{Fin}\,4), g_{{a}{b}}({y}) = g_{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a b : \mathrm{Fin}\,4), g^{{a}{b}}({y}) = g^{{b}{a}}({y})) \to (\forall (y : \href{#d-qiqth-curvature-point}{M^{{4}}}) (a b : \mathrm{Fin}\,4), \sum_{\sigma} g_{{a}{\sigma}}({y}) \cdot g^{{\sigma}{b}}({y}) = \delta_{ab}) \to (\forall (a b : \mathrm{Fin}\,4), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,4), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to \forall (\varphi : \href{#d-qiqth-curvature-point}{M^{{4}}} \to \mathbb{R}) (m \eta \hbar a : \mathbb{R}), \hbar \ne 0 \to \eta \ne 0 \to a = 2 \cdot \pi / (\hbar \cdot \eta) \to ({\varphi})\in C^{\infty} \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}), \href{#d-qiqth-curvature-boxfield}{(\Box {\varphi})({x})} = {m}^{2} \cdot \varphi\,x) \to \forall (P \mathrm{Pinv} : \href{#d-qiqth-curvature-point}{M^{{4}}} \to \mathrm{Fin}\,4 \to \mathrm{Fin}\,4 \to \mathbb{R}), (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (i j : \mathrm{Fin}\,4), \sum_{k} P_{{i}{k}}({x}) \cdot (P^{-1})_{{k}{j}}({x}) = \delta_{ij}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (i j : \mathrm{Fin}\,4), \sum_{k} (P^{-1})_{{i}{k}}({x}) \cdot P_{{k}{j}}({x}) = \delta_{ij}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (i j : \mathrm{Fin}\,4), g_{{i}{j}}({x}) = \sum_{k} \sum_{l} P_{{k}{i}}({x}) \cdot \href{#d-qiqth-einsteineos-gm}{\eta_{{k}{l}}} \cdot P_{{l}{j}}({x})) \to \forall (\mathrm{Sf} \mathrm{KE} A : \href{#d-qiqth-curvature-point}{M^{{4}}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{R}) (\mathrm{sd} \mathrm{kd} \mathrm{ad} : \href{#d-qiqth-curvature-point}{M^{{4}}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}), (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to ({\mathrm{Sf}\,x\,v})'({0})={\dot{S}({x},{v})}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to ({\mathrm{KE}\,x\,v})'({0})={\dot{K}({x},{v})}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to ({A\,x\,v})'({0})={\dot{A}({x},{v})}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to \text{for }t\text{ near }0,\; \mathrm{Sf}\,x\,v\,t \le \eta \cdot A({x},{v},{t})) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to \mathrm{Sf}\,x\,v\,0 = \eta \cdot A({x},{v},{0})) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to \forall (t : \mathbb{R}), 0 \le \mathrm{KE}({x},{v},{t}) - \mathrm{Sf}\,x\,v\,t) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to \mathrm{KE}({x},{v},{0}) - \mathrm{Sf}\,x\,v\,0 = 0) \to \forall (\mathrm{mw} : \href{#d-qiqth-curvature-point}{M^{{4}}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}) (\mathrm{hmw} : \forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), 0 < \mathrm{mw}\,x\,v) (\mathrm{ff} \mathrm{ff}^{\prime} : \href{#d-qiqth-curvature-point}{M^{{4}}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R} \to \mathbb{C}) (\mathrm{hf2} : \forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{MemLp}\,(\mathrm{ff}\,x\,v)\,2\,\mathrm{volume}), (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{Integrable}\,(\mathrm{ff}\,x\,v)\,\mathrm{volume}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}) (\theta : \mathbb{R}), ({\mathrm{ff}\,x\,v})'({\theta})={\mathrm{ff}^{\prime}\,x\,v\,\theta}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \mathrm{AEStronglyMeasurable}\,(\mathrm{ff}^{\prime}\,x\,v)\,\mathrm{volume}) \to \forall (\mathrm{Bd} : \href{#d-qiqth-curvature-point}{M^{{4}}} \to (\mathrm{Fin}\,4 \to \mathbb{R}) \to \mathbb{R}), (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}) (\theta : \mathbb{R}), \|\mathrm{ff}^{\prime}\,x\,v\,\theta\| \le \mathrm{Bd}\,x\,v) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to 2 \cdot \pi / \hbar \cdot ({\href{#d-qiqth-curvature-kgstress}{T({x})}})({v},{v}) = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{ff}\,x\,v\,\theta) \cdot \mathrm{ff}^{\prime}\,x\,v\,\theta)).\mathrm{im}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,(\mathrm{ff}\,x\,v)\,\cdots )\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,(\href{#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathcal{K}}\,(\mathrm{mw}\,x\,v)\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,(\mathrm{ff}\,x\,v)\,\cdots ))})'({0})={i \cdot (\dot{K}({x},{v}))}) \to (\forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (v : \mathrm{Fin}\,4 \to \mathbb{R}), \href{#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to \dot{A}({x},{v}) = ({\lambda i j \mapsto \href{#d-qiqth-curvature-ricci}{R_{{i}{j}}({x})}})({v},{v})) \to \exists \Lambda, \forall (x : \href{#d-qiqth-curvature-point}{M^{{4}}}) (\mu \nu : \mathrm{Fin}\,4), a \cdot \href{#d-qiqth-curvature-kgstress}{T({x})\,\mu\,\nu} = \href{#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g_{{\mu}{\nu}}({x})
 $$
 
 **proof uses** [`PdiffAt`](#d-qiqth-curvature-pdiffat) [`hreg_kg`](#d-qiqth-curvature-hreg-kg) [`kgLagr`](#d-qiqth-curvature-kglagr) [`pd`](#d-qiqth-curvature-pd) [`scalarCurv`](#d-qiqth-curvature-scalarcurv) [`freeField_kd_conclusion`](#d-qiqth-wedgekmstogr-freefield-kd-conclusion) [`qiqt_gr_from_flux_complete`](#d-qiqth-wedgekmstogr-qiqt-gr-from-flux-complete)
@@ -9153,7 +9153,7 @@ $$
 *thm* · [ModularRelativeEntropy:656 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L656)  
 
 $$
-{\|(\href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\mathrm{hg}\,\mathrm{hC0}\,\mathrm{hC})\,\zeta\|}^{2} = \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S))), {\|g\,\omega\|}^{2} \partial \href{#d-qiqth-rvdspecmeasure}{\mathrm{rvdSpecMeasure}}\,S\,\zeta
+{\|(\href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\mathrm{hg}\,\mathrm{hC0}\,\mathrm{hC})\,\zeta\|}^{2} = \int (\omega : (\mathrm{sp}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S))), {\|g\,\omega\|}^{2} \partial \href{#d-qiqth-rvdspecmeasure}{\mu^{R}}\,S\,\zeta
 $$
 
 **proof uses** [`borelFC_inner_self`](#d-qiqth-borelfc-inner-self)
@@ -9166,7 +9166,7 @@ $$
 *thm* · [ModularRelativeEntropy:632 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L632)  
 
 $$
-\mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\mathrm{hg}\,\mathrm{hC0}\,\mathrm{hC})\,\zeta)\,((\href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\mathrm{hg}\,\mathrm{hC0}\,\mathrm{hC})\,\zeta) = \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S))), (\mathrm{starRingEnd}\,\mathbb{C})\,(g\,\omega) \cdot g\,\omega \partial \href{#d-qiqth-rvdspecmeasure}{\mathrm{rvdSpecMeasure}}\,S\,\zeta
+\mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\mathrm{hg}\,\mathrm{hC0}\,\mathrm{hC})\,\zeta)\,((\href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\mathrm{hg}\,\mathrm{hC0}\,\mathrm{hC})\,\zeta) = \int (\omega : (\mathrm{sp}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S))), (\mathrm{starRingEnd}\,\mathbb{C})\,(g\,\omega) \cdot g\,\omega \partial \href{#d-qiqth-rvdspecmeasure}{\mu^{R}}\,S\,\zeta
 $$
 
 **proof uses** [`bilinDiag`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag) [`diagInt`](#d-qiqth-spectral-projectionvaluedmeasure-diagint) [`scalarMeasure`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure) [`PVM_of_selfAdjoint`](#d-qiqth-spectraltheorem-pvm-of-selfadjoint) [`borelFC_mul`](#d-qiqth-spectraltheorem-borelfc-mul) [`inner_borelFC`](#d-qiqth-spectraltheorem-inner-borelfc) [`borelFC_adjoint`](#d-qiqth-standardsubspacemodular-borelfc-adjoint)
@@ -9179,7 +9179,7 @@ $$
 *thm* · [ModularRelativeEntropy:541 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L541)  
 
 $$
-\href{#d-qiqth-standardsubspacemodular-cfccont}{\mathrm{cfcCont}}\,S\,\{\mathrm{toFun} :=\lambda \omega \mapsto \sqrt (2 - \omega) , \mathrm{continuous\_toFun} :=\cdots \} = \href{#d-qiqth-standardsubspacemodular-rvdsqrttwosubr}{\mathrm{rvdSqrtTwoSubR}}\,S
+\href{#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,\{\mathrm{toFun} :=\lambda \omega \mapsto \sqrt (2 - \omega) , \mathrm{continuous\_toFun} :=\cdots \} = \href{#d-qiqth-standardsubspacemodular-rvdsqrttwosubr}{\mathrm{rvdSqrtTwoSubR}}\,S
 $$
 
 **proof uses** [`cfcCont_add`](#d-qiqth-standardsubspacemodular-cfccont-add) [`cfcCont_coord`](#d-qiqth-standardsubspacemodular-cfccont-coord) [`cfcCont_mul`](#d-qiqth-standardsubspacemodular-cfccont-mul) [`cfcCont_one`](#d-qiqth-standardsubspacemodular-cfccont-one) [`cfcCont_smul`](#d-qiqth-standardsubspacemodular-cfccont-smul) [`cfcCont_star`](#d-qiqth-standardsubspacemodular-cfccont-star) [`rvdRC_spectrum_mem_Icc`](#d-qiqth-standardsubspacemodular-rvdrc-spectrum-mem-icc) [`rvdTwoSubRC`](#d-qiqth-standardsubspacemodular-rvdtwosubrc) [`specCoord`](#d-qiqth-standardsubspacemodular-speccoord)
@@ -9244,7 +9244,7 @@ $$
 *thm* · [ModularRelativeEntropy:724 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L724)  
 
 $$
-\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,(t - i / 2)\,\cdots \,\cdots = \href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t \cdot \href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,(-(i / 2))\,\cdots \,\cdots
+\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,(t - i / 2)\,\cdots \,\cdots = \href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t \cdot \href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,(-(i / 2))\,\cdots \,\cdots
 $$
 
 **proof uses** [`borelFC`](#d-qiqth-spectraltheorem-borelfc) [`borelFC_mul`](#d-qiqth-spectraltheorem-borelfc-mul) [`borelFC_congr`](#d-qiqth-standardsubspacemodular-borelfc-congr) [`devChar`](#d-qiqth-standardsubspacemodular-devchar) [`devChar_norm_le_Icc`](#d-qiqth-standardsubspacemodular-devchar-norm-le-icc) [`measurable_devChar`](#d-qiqth-standardsubspacemodular-measurable-devchar) [`modChar`](#d-qiqth-standardsubspacemodular-modchar) [`modCharC`](#d-qiqth-standardsubspacemodular-modcharc) [`modCharC_add`](#d-qiqth-standardsubspacemodular-modcharc-add) [`modCharC_ofReal`](#d-qiqth-standardsubspacemodular-modcharc-ofreal) [`modSpecFun`](#d-qiqth-standardsubspacemodular-modspecfun) [`modSpecFun_measurable`](#d-qiqth-standardsubspacemodular-modspecfun-measurable) [`modSpecFun_norm_le`](#d-qiqth-standardsubspacemodular-modspecfun-norm-le) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint) [`rvdRC_spectrum_mem_Icc`](#d-qiqth-standardsubspacemodular-rvdrc-spectrum-mem-icc)
@@ -9257,7 +9257,7 @@ $$
 *thm* · [ModularRelativeEntropy:1198 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L1198)  
 
 $$
-{\|(\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,z\,\mathrm{hz2}\,\mathrm{hz1})\,\zeta - (\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,z_{0}\,\mathrm{hz02}\,\mathrm{hz01})\,\zeta\|}^{2} = \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S))), {\|\href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z\,\omega - \href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z_{0}\,\omega\|}^{2} \partial \href{#d-qiqth-rvdspecmeasure}{\mathrm{rvdSpecMeasure}}\,S\,\zeta
+{\|(\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,z\,\mathrm{hz2}\,\mathrm{hz1})\,\zeta - (\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,z_{0}\,\mathrm{hz02}\,\mathrm{hz01})\,\zeta\|}^{2} = \int (\omega : (\mathrm{sp}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S))), {\|\href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z\,\omega - \href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z_{0}\,\omega\|}^{2} \partial \href{#d-qiqth-rvdspecmeasure}{\mu^{R}}\,S\,\zeta
 $$
 
 **proof uses** [`borelFC`](#d-qiqth-spectraltheorem-borelfc) [`devChar_norm_le_Icc`](#d-qiqth-standardsubspacemodular-devchar-norm-le-icc) [`measurable_devChar`](#d-qiqth-standardsubspacemodular-measurable-devchar) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint) [`rvdRC_spectrum_mem_Icc`](#d-qiqth-standardsubspacemodular-rvdrc-spectrum-mem-icc) [`borelFC_apply_norm_sq`](#d-qiqth-borelfc-apply-norm-sq) [`deviceOpC_sub`](#d-qiqth-deviceopc-sub)
@@ -9295,7 +9295,7 @@ $$
 *thm* · [ModularRelativeEntropy:991 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L991)  
 
 $$
-{\|{(z - z_{0})}^{-1} \cdot ((\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,z\,\mathrm{hz2}\,\mathrm{hz1})\,\zeta - (\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,z_{0}\,\mathrm{hz02}\,\mathrm{hz01})\,\zeta) - (\href{#d-qiqth-devicederivopc}{\mathrm{deviceDerivOpC}}\,S\,z_{0}\,h\beta_{0}\,h\beta_{1}\,\mathrm{hz}_{0})\,\zeta\|}^{2} = \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S))), {\|(\href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z\,\omega - \href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z_{0}\,\omega) / (z - z_{0}) - i \cdot (\log\,((2 - \omega) / \omega)) \cdot \href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z_{0}\,\omega\|}^{2} \partial \href{#d-qiqth-rvdspecmeasure}{\mathrm{rvdSpecMeasure}}\,S\,\zeta
+{\|{(z - z_{0})}^{-1} \cdot ((\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,z\,\mathrm{hz2}\,\mathrm{hz1})\,\zeta - (\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,z_{0}\,\mathrm{hz02}\,\mathrm{hz01})\,\zeta) - (\href{#d-qiqth-devicederivopc}{\mathrm{deviceDerivOpC}}\,S\,z_{0}\,h\beta_{0}\,h\beta_{1}\,\mathrm{hz}_{0})\,\zeta\|}^{2} = \int (\omega : (\mathrm{sp}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S))), {\|(\href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z\,\omega - \href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z_{0}\,\omega) / (z - z_{0}) - i \cdot (\log\,((2 - \omega) / \omega)) \cdot \href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z_{0}\,\omega\|}^{2} \partial \href{#d-qiqth-rvdspecmeasure}{\mu^{R}}\,S\,\zeta
 $$
 
 **proof uses** [`borelFC`](#d-qiqth-spectraltheorem-borelfc) [`borelFC_smul`](#d-qiqth-standardsubspacemodular-borelfc-smul) [`borelFC_sub`](#d-qiqth-standardsubspacemodular-borelfc-sub) [`devChar_norm_le_Icc`](#d-qiqth-standardsubspacemodular-devchar-norm-le-icc) [`measurable_devChar`](#d-qiqth-standardsubspacemodular-measurable-devchar) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint) [`rvdRC_spectrum_mem_Icc`](#d-qiqth-standardsubspacemodular-rvdrc-spectrum-mem-icc) [`borelFC_apply_norm_sq`](#d-qiqth-borelfc-apply-norm-sq) [`devCharDeriv_norm_le_slab`](#d-qiqth-devcharderiv-norm-le-slab) [`deviceOpC_sub`](#d-qiqth-deviceopc-sub)
@@ -9308,7 +9308,7 @@ $$
 *thm* · [ModularRelativeEntropy:950 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L950)  
 
 $$
-\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,z\,\mathrm{hz2}\,\mathrm{hz1} - \href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,z_{0}\,\mathrm{hz02}\,\mathrm{hz01} = \href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\cdots \,\cdots \,\cdots
+\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,z\,\mathrm{hz2}\,\mathrm{hz1} - \href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,z_{0}\,\mathrm{hz02}\,\mathrm{hz01} = \href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\cdots \,\cdots \,\cdots
 $$
 
 **proof uses** [`borelFC_sub`](#d-qiqth-standardsubspacemodular-borelfc-sub)
@@ -9321,7 +9321,7 @@ $$
 *thm* · [ModularRelativeEntropy:605 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L605)  
 
 $$
-\href{#d-qiqth-deviceopreal}{\mathrm{deviceOpReal}}\,S\,t = \href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t \cdot \href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S
+\href{#d-qiqth-deviceopreal}{\mathrm{deviceOpReal}}\,S\,t = \href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t \cdot \href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S
 $$
 
 **proof uses** [`borelFC`](#d-qiqth-spectraltheorem-borelfc) [`borelFC_mul`](#d-qiqth-spectraltheorem-borelfc-mul) [`borelFC_congr`](#d-qiqth-standardsubspacemodular-borelfc-congr) [`devChar_ofReal`](#d-qiqth-standardsubspacemodular-devchar-ofreal) [`devChar_zero`](#d-qiqth-standardsubspacemodular-devchar-zero) [`modChar`](#d-qiqth-standardsubspacemodular-modchar) [`modSpecFun`](#d-qiqth-standardsubspacemodular-modspecfun) [`modSpecFun_measurable`](#d-qiqth-standardsubspacemodular-modspecfun-measurable) [`modSpecFun_norm_le`](#d-qiqth-standardsubspacemodular-modspecfun-norm-le) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint) [`devSpecReal`](#d-qiqth-devspecreal) [`devSpecReal_measurable`](#d-qiqth-devspecreal-measurable) [`devSpecReal_norm_le`](#d-qiqth-devspecreal-norm-le) [`deviceOpReal_zero`](#d-qiqth-deviceopreal-zero)
@@ -9334,7 +9334,7 @@ $$
 *thm* · [ModularRelativeEntropy:495 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L495)  
 
 $$
-\href{#d-qiqth-deviceopreal}{\mathrm{deviceOpReal}}\,S\,0 = \href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S
+\href{#d-qiqth-deviceopreal}{\mathrm{deviceOpReal}}\,S\,0 = \href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S
 $$
 
 **proof uses** [`borelFC`](#d-qiqth-spectraltheorem-borelfc) [`borelFC_congr`](#d-qiqth-standardsubspacemodular-borelfc-congr) [`cfcCont`](#d-qiqth-standardsubspacemodular-cfccont) [`cfcCont_coord`](#d-qiqth-standardsubspacemodular-cfccont-coord) [`cfcCont_mul`](#d-qiqth-standardsubspacemodular-cfccont-mul) [`cfcCont_star`](#d-qiqth-standardsubspacemodular-cfccont-star) [`devChar`](#d-qiqth-standardsubspacemodular-devchar) [`devChar_zero`](#d-qiqth-standardsubspacemodular-devchar-zero) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint) [`rvdRC_spectrum_mem_Icc`](#d-qiqth-standardsubspacemodular-rvdrc-spectrum-mem-icc) [`specCoord`](#d-qiqth-standardsubspacemodular-speccoord) [`devSpecReal`](#d-qiqth-devspecreal) [`devSpecReal_measurable`](#d-qiqth-devspecreal-measurable) [`devSpecReal_norm_le`](#d-qiqth-devspecreal-norm-le)
@@ -9347,7 +9347,7 @@ $$
 *thm* · [ModularRelativeEntropy:1138 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L1138)  
 
 $$
-\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2) = (\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,(-(i / 2))\,\cdots \,\cdots )\,\zeta)
+\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2) = (\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,(-(i / 2))\,\cdots \,\cdots )\,\zeta)
 $$
 
 **proof uses** [`deviceOpC_bottomEdge_eq`](#d-qiqth-deviceopc-bottomedge-eq) [`deviceVecF_eq_of_mem`](#d-qiqth-devicevecf-eq-of-mem)
@@ -9398,7 +9398,7 @@ $$
 *thm* · [ModularRelativeEntropy:1062 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L1062)  
 
 $$
-\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,t = (\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta)
+\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,t = (\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta)
 $$
 
 **proof uses** [`deviceOpC`](#d-qiqth-deviceopc) [`deviceOpC_ofReal`](#d-qiqth-deviceopc-ofreal) [`deviceOpReal`](#d-qiqth-deviceopreal) [`deviceOpReal_eq`](#d-qiqth-deviceopreal-eq) [`deviceVecF_eq_of_mem`](#d-qiqth-devicevecf-eq-of-mem)
@@ -9411,7 +9411,7 @@ $$
 *thm* · [ModularRelativeEntropy:1089 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L1089)  
 
 $$
-\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,0 = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta
+\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,0 = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta
 $$
 
 **proof uses** [`modUnitary`](#d-qiqth-standardsubspacemodular-modunitary) [`modUnitary_zero`](#d-qiqth-standardsubspacemodular-modunitary-zero) [`deviceVecF_real_eq`](#d-qiqth-devicevecf-real-eq)
@@ -9424,7 +9424,7 @@ $$
 *thm* · [ModularRelativeEntropy:1279 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L1279)  
 
 $$
-0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \mathrm{DiffContOnCl}\,\mathbb{C}\,(\lambda z \mapsto ((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,z))\,(\mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-(1/2))\,0)
+0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \mathrm{DiffContOnCl}\,\mathbb{C}\,(\lambda z \mapsto ((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,z))\,(\mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-(1/2))\,0)
 $$
 
 **proof uses** [`differentiable_gaussSmearC`](#d-qiqth-standardsubspacemodular-differentiable-gausssmearc) [`deviceVecF_continuousOn`](#d-qiqth-devicevecf-continuouson) [`differentiableOn_gFunction`](#d-qiqth-differentiableon-gfunction)
@@ -9450,7 +9450,7 @@ $$
 *thm* · [ModularRelativeEntropy:1072 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L1072)  
 
 $$
-0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \mathrm{DifferentiableOn}\,\mathbb{C}\,(\lambda z \mapsto ((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,z))\,(\mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-(1/2))\,0)
+0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \mathrm{DifferentiableOn}\,\mathbb{C}\,(\lambda z \mapsto ((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,z))\,(\mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-(1/2))\,0)
 $$
 
 **proof uses** [`differentiable_gaussSmearC`](#d-qiqth-standardsubspacemodular-differentiable-gausssmearc) [`differentiableOn_deviceVecF`](#d-qiqth-differentiableon-devicevecf)
@@ -9463,7 +9463,7 @@ $$
 *thm* · [ModularRelativeEntropy:1182 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L1182)  
 
 $$
-\|((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,z)\| \le 2 \cdot \sqrt 2 \cdot \|\zeta\| \cdot \|\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,z\|
+\|((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,z))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,z)\| \le 2 \cdot \sqrt 2 \cdot \|\zeta\| \cdot \|\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,z\|
 $$
 
 **proof uses** [`modConj`](#d-qiqth-standardsubspacemodular-modconj) [`modConjBilin_apply`](#d-qiqth-standardsubspacemodular-modconjbilin-apply) [`modConj_norm`](#d-qiqth-standardsubspacemodular-modconj-norm) [`deviceVecF_norm_le`](#d-qiqth-devicevecf-norm-le)
@@ -9476,7 +9476,7 @@ $$
 *thm* · [ModularRelativeEntropy:1107 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L1107)  
 
 $$
-0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to \forall (t : \mathbb{R}), ((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,t))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,t) = \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta)))\,((V\,t)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta))
+0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to \forall (t : \mathbb{R}), ((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,t))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,t) = \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta)))\,((V\,t)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta))
 $$
 
 **proof uses** [`gaussSmearC_ofReal`](#d-qiqth-standardsubspacemodular-gausssmearc-ofreal) [`modConjBilin_apply`](#d-qiqth-standardsubspacemodular-modconjbilin-apply) [`modConj_commute_modUnitary`](#d-qiqth-standardsubspacemodular-modconj-commute-modunitary) [`deviceVecF_real_eq`](#d-qiqth-devicevecf-real-eq)
@@ -9489,7 +9489,7 @@ $$
 *thm* · [ModularRelativeEntropy:1120 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L1120)  
 
 $$
-0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta \to \forall (t : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((V\,t)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)) = (V\,t)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta) \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,t))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,t)).\mathrm{im} = 0
+0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (s t : \mathbb{R}), (V\,s)\,((V\,t)\,\eta) = (V\,(s + t))\,\eta) \to (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta) = (\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta \to \forall (t : \mathbb{R}), (\href{#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((V\,t)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)) = (V\,t)\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta) \to (((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,t))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,t)).\mathrm{im} = 0
 $$
 
 **proof uses** [`inner_real_of_mem_K_perp_IK`](#d-qiqth-standardsubspacemodular-inner-real-of-mem-k-perp-ik) [`mem_K_iff_projK`](#d-qiqth-standardsubspacemodular-mem-k-iff-projk) [`modConj`](#d-qiqth-standardsubspacemodular-modconj) [`modConj_commute_modUnitary`](#d-qiqth-standardsubspacemodular-modconj-commute-modunitary) [`modUnitary`](#d-qiqth-standardsubspacemodular-modunitary) [`modUnitary_mapsTo_K`](#d-qiqth-standardsubspacemodular-modunitary-mapsto-k) [`projIK_modConj_eq_zero_of_mem_K`](#d-qiqth-standardsubspacemodular-projik-modconj-eq-zero-of-mem-k) [`gFunction_real_eq`](#d-qiqth-gfunction-real-eq)
@@ -9502,7 +9502,7 @@ $$
 *thm* · [ModularRelativeEntropy:1098 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L1098)  
 
 $$
-((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{\mathrm{modConjBilin}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,0))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{\mathrm{gaussSmearC}}\,V\,n\,\eta\,0) = \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{\mathrm{rvdSqrtR}}\,S)\,\zeta))\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{\mathrm{gaussSmear}}\,V\,n\,\eta)
+((\href{#d-qiqth-standardsubspacemodular-modconjbilin}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,0))\,(\href{#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,0) = \mathrm{inner}\,\mathbb{C}\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta))\,(\href{#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta)
 $$
 
 **proof uses** [`gaussSmearC_zero`](#d-qiqth-standardsubspacemodular-gausssmearc-zero) [`modConjBilin_apply`](#d-qiqth-standardsubspacemodular-modconjbilin-apply) [`deviceVecF_zero`](#d-qiqth-devicevecf-zero)
@@ -9528,7 +9528,7 @@ $$
 *thm* · [ModularRelativeEntropy:1156 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L1156)  
 
 $$
-(\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2)) = (\href{#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{\mathrm{modConj}}\,S)\,((\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,(-(i / 2))\,\cdots \,\cdots )\,\zeta))
+(\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,(\href{#d-qiqth-devicevecf}{\mathrm{deviceVecF}}\,S\,\zeta\,(t - i / 2)) = (\href{#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{#d-qiqth-deviceopc}{\mathrm{deviceOpC}}\,S\,(-(i / 2))\,\cdots \,\cdots )\,\zeta))
 $$
 
 **proof uses** [`modConj_commute_modUnitary`](#d-qiqth-standardsubspacemodular-modconj-commute-modunitary) [`deviceVecF_bottom_eq`](#d-qiqth-devicevecf-bottom-eq)
@@ -9541,7 +9541,7 @@ $$
 *thm* · [ModularRelativeEntropy:712 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L712)  
 
 $$
-(\href{#d-qiqth-rvdspecmeasure}{\mathrm{rvdSpecMeasure}}\,S\,x)\,\{\omega|\omega = 0 \vee \omega = 2\} = 0
+(\href{#d-qiqth-rvdspecmeasure}{\mu^{R}}\,S\,x)\,\{\omega|\omega = 0 \vee \omega = 2\} = 0
 $$
 
 **proof uses** [`rvdSpecMeasure_two_levelSet`](#d-qiqth-rvdspecmeasure-two-levelset) [`rvdSpecMeasure_zero_levelSet`](#d-qiqth-rvdspecmeasure-zero-levelset)
@@ -9554,7 +9554,7 @@ $$
 *thm* · [ModularRelativeEntropy:701 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L701)  
 
 $$
-(\href{#d-qiqth-rvdspecmeasure}{\mathrm{rvdSpecMeasure}}\,S\,x)\,\{\omega|\omega = 2\} = 0
+(\href{#d-qiqth-rvdspecmeasure}{\mu^{R}}\,S\,x)\,\{\omega|\omega = 2\} = 0
 $$
 
 **proof uses** [`E`](#d-qiqth-spectral-projectionvaluedmeasure-e) [`scalarMeasure`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure) [`scalarMeasure_apply`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure-apply) [`PVM_of_selfAdjoint`](#d-qiqth-spectraltheorem-pvm-of-selfadjoint) [`rvdRC_E_two_levelSet`](#d-qiqth-standardsubspacemodular-rvdrc-e-two-levelset) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint)
@@ -9567,7 +9567,7 @@ $$
 *thm* · [ModularRelativeEntropy:690 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L690)  
 
 $$
-(\href{#d-qiqth-rvdspecmeasure}{\mathrm{rvdSpecMeasure}}\,S\,x)\,\{\omega|\omega = 0\} = 0
+(\href{#d-qiqth-rvdspecmeasure}{\mu^{R}}\,S\,x)\,\{\omega|\omega = 0\} = 0
 $$
 
 **proof uses** [`E`](#d-qiqth-spectral-projectionvaluedmeasure-e) [`scalarMeasure`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure) [`scalarMeasure_apply`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure-apply) [`PVM_of_selfAdjoint`](#d-qiqth-spectraltheorem-pvm-of-selfadjoint) [`rvdRC_E_zero_levelSet`](#d-qiqth-standardsubspacemodular-rvdrc-e-zero-levelset) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint)
@@ -9580,7 +9580,7 @@ $$
 *thm* · [ModularRelativeEntropy:677 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L677)  
 
 $$
-\mathrm{inner}\,\mathbb{C}\,x\,((\href{#d-qiqth-spectraltheorem-borelfc}{\mathrm{borelFC}}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC})\,x) = \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S))), f\,\omega \partial \href{#d-qiqth-rvdspecmeasure}{\mathrm{rvdSpecMeasure}}\,S\,x
+\mathrm{inner}\,\mathbb{C}\,x\,((\href{#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC})\,x) = \int (\omega : (\mathrm{sp}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S))), f\,\omega \partial \href{#d-qiqth-rvdspecmeasure}{\mu^{R}}\,S\,x
 $$
 
 **proof uses** [`bilinDiag`](#d-qiqth-spectral-projectionvaluedmeasure-bilindiag) [`diagInt`](#d-qiqth-spectral-projectionvaluedmeasure-diagint) [`scalarMeasure`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure) [`PVM_of_selfAdjoint`](#d-qiqth-spectraltheorem-pvm-of-selfadjoint) [`inner_borelFC`](#d-qiqth-spectraltheorem-inner-borelfc)
@@ -9606,7 +9606,7 @@ $$
 *thm* · [ModularRelativeEntropy:1213 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L1213)  
 
 $$
-z_{0}.\mathrm{im} \le 0 \to -(1/2) \le z_{0}.\mathrm{im} \to \mathrm{Tendsto}\,(\lambda z \mapsto \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S))), {\|\href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z\,\omega - \href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z_{0}\,\omega\|}^{2} \partial \href{#d-qiqth-rvdspecmeasure}{\mathrm{rvdSpecMeasure}}\,S\,\zeta)\,(\mathrm{nhdsWithin}\,z_{0}\,(\mathrm{im} ^{-1}{}' \mathrm{Icc}\,(-(1/2))\,0))\,(\mathrm{nhds}\,0)
+z_{0}.\mathrm{im} \le 0 \to -(1/2) \le z_{0}.\mathrm{im} \to \mathrm{Tendsto}\,(\lambda z \mapsto \int (\omega : (\mathrm{sp}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S))), {\|\href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z\,\omega - \href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z_{0}\,\omega\|}^{2} \partial \href{#d-qiqth-rvdspecmeasure}{\mu^{R}}\,S\,\zeta)\,(\mathrm{nhdsWithin}\,z_{0}\,(\mathrm{im} ^{-1}{}' \mathrm{Icc}\,(-(1/2))\,0))\,(\mathrm{nhds}\,0)
 $$
 
 **proof uses** [`instIsFiniteMeasure_scalarMeasure`](#d-qiqth-spectral-projectionvaluedmeasure-instisfinitemeasure-scalarmeasure) [`scalarMeasure`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure) [`PVM_of_selfAdjoint`](#d-qiqth-spectraltheorem-pvm-of-selfadjoint) [`devChar_norm_le_Icc`](#d-qiqth-standardsubspacemodular-devchar-norm-le-icc) [`hasDerivAt_devChar_Icc`](#d-qiqth-standardsubspacemodular-hasderivat-devchar-icc) [`measurable_devChar`](#d-qiqth-standardsubspacemodular-measurable-devchar) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint) [`rvdRC_spectrum_mem_Icc`](#d-qiqth-standardsubspacemodular-rvdrc-spectrum-mem-icc)
@@ -9619,7 +9619,7 @@ $$
 *thm* · [ModularRelativeEntropy:874 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L874)  
 
 $$
-0 < \beta_{0} \to \beta_{1} < 1/2 \to \forall \{z_{0} : \mathbb{C}\}, z_{0} \in \mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-\beta_{1})\,(-\beta_{0}) \to \mathrm{Tendsto}\,(\lambda z \mapsto \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S))), {\|(\href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z\,\omega - \href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z_{0}\,\omega) / (z - z_{0}) - i \cdot (\log\,((2 - \omega) / \omega)) \cdot \href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z_{0}\,\omega\|}^{2} \partial \href{#d-qiqth-rvdspecmeasure}{\mathrm{rvdSpecMeasure}}\,S\,\zeta)\,(\mathrm{nhdsWithin}\,z_{0}\,\{z_{0}\}^{c})\,(\mathrm{nhds}\,0)
+0 < \beta_{0} \to \beta_{1} < 1/2 \to \forall \{z_{0} : \mathbb{C}\}, z_{0} \in \mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-\beta_{1})\,(-\beta_{0}) \to \mathrm{Tendsto}\,(\lambda z \mapsto \int (\omega : (\mathrm{sp}\,\mathbb{R}\,(\href{#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S))), {\|(\href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z\,\omega - \href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z_{0}\,\omega) / (z - z_{0}) - i \cdot (\log\,((2 - \omega) / \omega)) \cdot \href{#d-qiqth-standardsubspacemodular-devchar}{\mathrm{devChar}}\,z_{0}\,\omega\|}^{2} \partial \href{#d-qiqth-rvdspecmeasure}{\mu^{R}}\,S\,\zeta)\,(\mathrm{nhdsWithin}\,z_{0}\,\{z_{0}\}^{c})\,(\mathrm{nhds}\,0)
 $$
 
 **proof uses** [`instIsFiniteMeasure_scalarMeasure`](#d-qiqth-spectral-projectionvaluedmeasure-instisfinitemeasure-scalarmeasure) [`scalarMeasure`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure) [`PVM_of_selfAdjoint`](#d-qiqth-spectraltheorem-pvm-of-selfadjoint) [`measurable_devChar`](#d-qiqth-standardsubspacemodular-measurable-devchar) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint) [`devCharDeriv_norm_le_slab`](#d-qiqth-devcharderiv-norm-le-slab) [`devChar_slope_norm_le`](#d-qiqth-devchar-slope-norm-le) [`tendsto_devChar_slope`](#d-qiqth-tendsto-devchar-slope)
