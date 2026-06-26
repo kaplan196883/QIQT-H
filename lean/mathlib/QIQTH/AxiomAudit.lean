@@ -5081,6 +5081,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayley_cfc_re_inner_nonneg_of_nonneg
 #print axioms QIQTH.Spectral.cayley_cfc_re_inner_add
 #print axioms QIQTH.Spectral.cayley_cfc_re_inner_smul
+#print axioms QIQTH.Spectral.expectationCLM
+#print axioms QIQTH.Spectral.reExpectationCLM
+-- ★ P4 WALL — BUNDLED EXPECTATION FUNCTIONALS (RMK-functional packaging): expectationCLM x : (H→L[ℂ]H)→L[ℂ]ℂ,
+-- T↦⟪x,Tx⟫ = (innerSL ℂ x)∘(ContinuousLinearMap.apply ℂ H x). reExpectationCLM x : (H→L[ℂ]H)→L[ℝ]ℝ, T↦re⟪x,Tx⟫
+-- = Complex.reCLM ∘ (expectationCLM x).restrictScalars ℝ. Precomposed with cfcHom V and restricted to C_c(σV,ℝ),
+-- reExpectationCLM is the bundled Riesz–Markov functional whose positivity + ℝ-linearity are the proven →ₚ[ℝ] data
+-- RealRMK.rieszMeasure consumes to build μ_x. Axiom-free.
 -- ★★ P4 WALL — RMK FUNCTIONAL IS ℝ-LINEAR (completes positive LINEAR functional): cayley_cfc_re_inner_add
 -- [Nontrivial H] — re⟪x,cfc(f+g)V x⟫ = re⟪x,cfc f V x⟫ + re⟪x,cfc g V x⟫ (cfc_add + inner_add_right + Complex.add_re).
 -- cayley_cfc_re_inner_smul [Nontrivial H] — re⟪x,cfc(↑c·f)V x⟫ = c·re⟪x,cfc f V x⟫ for c:ℝ (cfc_const_mul +

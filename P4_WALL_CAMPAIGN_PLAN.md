@@ -295,8 +295,11 @@ for any `g` continuous, real, `≥0` on `σ(V)`, via `g=|√g|²` + `cfc_congr` 
 Also ✅ `cayley_cfc_re_inner_add` + `cayley_cfc_re_inner_smul` (**the functional is ℝ-linear** — additive via
 `cfc_add`, homogeneous via `cfc_const_mul`). **With positivity, `g↦re⟪x,cfc g V x⟫` is now a fully machine-checked
 positive ℝ-linear functional.**
-**Next (plumbing, not new math):** bundle as `C_c(σV,ℝ)→ₚ[ℝ]ℝ` → `rieszMeasure` ⟹ μ_x → assemble circle-PVM `E`
-(Mathlib gap) → transport to `A=∫λ dE` ⟹ Stone.
+Also ✅ `expectationCLM x` (`Φ_x:(H→L[ℂ]H)→L[ℂ]ℂ`, `T↦⟪x,Tx⟫`) + `reExpectationCLM x` (`(H→L[ℂ]H)→L[ℝ]ℝ`,
+`T↦re⟪x,Tx⟫`) — **the bundled RMK functional** (postcomposition `Complex.reCLM∘Φ_x` done); precompose `cfcHom V` +
+`ℝ↪ℂ` embedding and it *is* `g↦re⟪x,cfc g V x⟫`.
+**Next:** precompose `cfcHom V` ⟹ `C_c(σV,ℝ)→ₚ[ℝ]ℝ` → `rieszMeasure` ⟹ μ_x → assemble circle-PVM `E` (Mathlib gap)
+→ transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
 `E` (`V=∫z dE`) → transport via inverse Cayley to `A=∫λ dE` ⟹ Stone. The bounded-PVM remains the genuine gap.
 **Remaining (Mathlib gap):** the **Borel/PVM** functional calculus on `S¹` for `V` (Mathlib has *continuous* FC

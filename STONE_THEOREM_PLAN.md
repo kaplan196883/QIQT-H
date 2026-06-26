@@ -402,8 +402,11 @@ Also ✅ `cayley_cfc_re_inner_add` + `cayley_cfc_re_inner_smul` — **the functi
 `re⟪x, cfc (↑c·f) V x⟫ = c·re⟪x, cfc f V x⟫` for `c : ℝ` (`cfc_const_mul` + `inner_smul_right` +
 `Complex.re_ofReal_mul`). **With the positivity, `g ↦ re⟪x, cfc g V x⟫` is now a fully machine-checked positive
 ℝ-linear functional** — every mathematical component `RealRMK.rieszMeasure` needs.
-**Next:** the remaining work is *plumbing*, not new math — bundle `g ↦ re⟪x, cfc g V x⟫` into a
-`C_c(σ(V), ℝ) →ₚ[ℝ] ℝ` (`cfcHom`/`ContinuousMap` packaging of the now-proven linearity+positivity) and apply
+Also ✅ `expectationCLM x` (`Φ_x : (H→L[ℂ]H) →L[ℂ] ℂ`, `T ↦ ⟪x,Tx⟫` = `innerSL ℂ x ∘ eval_x`) and
+`reExpectationCLM x` (`(H→L[ℂ]H) →L[ℝ] ℝ`, `T ↦ re⟪x,Tx⟫` = `Complex.reCLM ∘ Φ_x|_ℝ`) — **the bundled
+Riesz–Markov functional** (postcomposition complete): precomposed with `cfcHom V` and restricted to `C_c(σ(V),ℝ)`,
+`reExpectationCLM` *is* `g ↦ re⟪x, cfc g V x⟫`, whose positivity + ℝ-linearity (proven) are the `→ₚ[ℝ]` data.
+**Next:** precompose `cfcHom V` + the `ℝ↪ℂ` `ContinuousMap` embedding to land on `C_c(σ(V),ℝ) →ₚ[ℝ] ℝ`, apply
 `RealRMK.rieszMeasure` ⟹ `μ_x`; then assemble `{μ_x}` into a circle-PVM `E` (the Mathlib gap — no
 `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` has its own), transport to `A = ∫ λ dE` ⟹ Stone.
 **Next multi-fire sub-construction (the operator → PVM keystone, RMK + cfc supported):** the scalar spectral

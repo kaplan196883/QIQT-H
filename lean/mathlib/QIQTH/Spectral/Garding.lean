@@ -1178,6 +1178,29 @@ theorem cayley_cfc_re_inner_smul [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
   rw [cfc_const_mul (c : ℂ) f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) hf,
     ContinuousLinearMap.smul_apply, inner_smul_right, Complex.re_ofReal_mul]
 
+/-- **The expectation functional** `Φ_x : (H →L[ℂ] H) →L[ℂ] ℂ`, `T ↦ ⟪x, T x⟫`, bundled as a ℂ-linear continuous
+    map (`innerSL ℂ x` ∘ the evaluation `T ↦ T x`). Precomposed with `cfcHom V` (the ⋆-algebra hom of the
+    continuous functional calculus) and postcomposed with `Complex.reCLM`, this is exactly the Riesz–Markov
+    functional `g ↦ re⟪x, cfc g V x⟫` whose positivity (`cayley_cfc_re_inner_nonneg_of_nonneg`) and linearity
+    (`cayley_cfc_re_inner_add`/`_smul`) are now proven — the bundled object the `μ_x` construction packages as a
+    `C_c(σ(V), ℝ) →ₚ[ℝ] ℝ` and feeds to `RealRMK.rieszMeasure`. -/
+noncomputable def expectationCLM (x : H) : (H →L[ℂ] H) →L[ℂ] ℂ :=
+  (innerSL ℂ x).comp (ContinuousLinearMap.apply ℂ H x)
+
+@[simp] theorem expectationCLM_apply (x : H) (T : H →L[ℂ] H) :
+    expectationCLM x T = inner ℂ x (T x) := rfl
+
+/-- **The real expectation functional** `T ↦ re⟪x, T x⟫` as an **ℝ-linear** continuous map
+    `(H →L[ℂ] H) →L[ℝ] ℝ` (`Complex.reCLM ∘ Φ_x`, restricting scalars to `ℝ`). Precomposed with `cfcHom V` and
+    restricted to the real continuous functions `C_c(σ(V), ℝ)`, this is the bundled Riesz–Markov functional
+    `g ↦ re⟪x, cfc g V x⟫` — its positivity (`cayley_cfc_re_inner_nonneg_of_nonneg`) and ℝ-linearity
+    (`cayley_cfc_re_inner_add`/`_smul`) are exactly the `→ₚ[ℝ]` data `RealRMK.rieszMeasure` consumes to build `μ_x`. -/
+noncomputable def reExpectationCLM (x : H) : (H →L[ℂ] H) →L[ℝ] ℝ :=
+  Complex.reCLM.comp ((expectationCLM x).restrictScalars ℝ)
+
+@[simp] theorem reExpectationCLM_apply (x : H) (T : H →L[ℂ] H) :
+    reExpectationCLM x T = (inner ℂ x (T x)).re := rfl
+
 end SelfAdjoint
 
 end QIQTH.Spectral
