@@ -21,6 +21,7 @@ so the instantiation needs no `Lp`-elaboration workaround. Essential self-adjoin
 -/
 import QIQTH.StandardSubspaceModularFlow
 import QIQTH.Spectral.Stone
+import QIQTH.Spectral.Garding
 
 namespace QIQTH.StandardSubspaceModular
 
@@ -67,5 +68,15 @@ theorem modularGen_norm_le_norm_add_smul_I (S : StandardSubspace H) (x : (stoneG
     ‖(x : H)‖ ≤ ‖stoneGen (modUnitary S) x + Complex.I • (x : H)‖ :=
   stoneGen_norm_le_norm_add_smul_I (modUnitary S) (modUnitary_compL S) (modUnitary_zero S)
     (inner_modUnitary_self S) x
+
+/-- **★★★ The modular Hamiltonian `K` is self-adjoint:** `IsSelfAdjoint (stoneGen (modUnitary S))`. The generic
+    `stoneGen_isSelfAdjoint` instantiated for the modular flow `Δ^{it} = modUnitary S t` (group law, `Δ^0 = 1`,
+    unitarity `inner_modUnitary_self`, the contraction `modUnitary_norm`, strong continuity). So `K` is a genuine
+    self-adjoint unbounded operator — the spectral theorem's hypothesis for the JLMS modular Hamiltonian. -/
+theorem modularGen_isSelfAdjoint (S : StandardSubspace H) :
+    IsSelfAdjoint (stoneGen (modUnitary S)) :=
+  stoneGen_isSelfAdjoint (modUnitary S) (modUnitary_compL S) (modUnitary_zero S)
+    (inner_modUnitary_self S) (fun t y => le_of_eq (modUnitary_norm S t y))
+    (modUnitary_stronglyContinuous S)
 
 end QIQTH.StandardSubspaceModular

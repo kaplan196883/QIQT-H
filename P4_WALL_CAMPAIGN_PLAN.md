@@ -254,7 +254,10 @@ are trivial**, `ker(A†∓i)=Range(A±i)^⊥=0` in canonical inner-product form
 `ker_adjoint_sub_I_trivial`/`ker_adjoint_add_I_trivial` (**`A†` has no `±i`-eigenvectors** in Mathlib's adjoint API,
 via `adjoint_isFormalAdjoint.symm`). **★★★ MILESTONE — the generator is SELF-ADJOINT:** `stoneGen_isSelfAdjoint` —
 `IsSelfAdjoint (stoneGen U)` (`A† = A`), via the *basic criterion* (`A⊆A†` + `Range(A±i)=H` ⟹ `A=A†`,
-`eq_of_le_of_domain_eq`, no Cayley needed). `X=A_edge`, `P`, `K` are genuine self-adjoint unbounded operators.
+`eq_of_le_of_domain_eq`, no Cayley needed). `X=A_edge`, `P`, `K` are genuine self-adjoint unbounded operators. **★★★ Instantiated for all three named
+generators:** `clockEnergy_isSelfAdjoint` (`X = A_edge = stoneGen clockTransl`), `momentumOp_isSelfAdjoint`
+(`P = stoneGen translationCLM = −i d/dx`), `modularGen_isSelfAdjoint` (`K = stoneGen (modUnitary S)`, the JLMS
+modular Hamiltonian) — each `IsSelfAdjoint`, axiom-free.
 **Remaining (Mathlib gap):** the unbounded spectral theorem (PVM for self-adjoint `A`) ⟹
 `Ā = Ā†` (e.s.a.) ⟹ Cayley/unbounded spectral theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has none of these; Cayley
 injectivity in Stone.lean.

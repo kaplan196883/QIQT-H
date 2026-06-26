@@ -21,6 +21,7 @@ the heavy `Lp`/`InnerProductSpace` instance tower) is handled by the same patter
 -/
 import QIQTH.Spectral.TranslationFlow
 import QIQTH.Spectral.Stone
+import QIQTH.Spectral.Garding
 import Mathlib.MeasureTheory.Function.L2Space
 
 namespace QIQTH.Spectral.Multiplication
@@ -85,5 +86,15 @@ theorem momentumOp_norm_le_norm_add_smul_I (x : (stoneGen translationCLM).domain
       ≤ ‖stoneGen translationCLM x + Complex.I • (x : Lp ℂ 2 (volume : Measure ℝ))‖ :=
   stoneGen_norm_le_norm_add_smul_I_dom (H := Lp ℂ 2 (volume : Measure ℝ)) translationCLM
     translationCLM_add translationCLM_zero translationCLM_inner x
+
+/-- **★★★ The momentum operator `P` is self-adjoint:** `IsSelfAdjoint (stoneGen translationCLM)`. The generic
+    `stoneGen_isSelfAdjoint` instantiated for the translation group `τ_t = e^{itP}` (group law, `τ_0 = 1`,
+    unitarity `translationCLM_inner`, the isometry `norm_translationLp`, strong continuity
+    `continuous_translationLp`). So `P = −i d/dx` is a genuine self-adjoint unbounded operator. -/
+theorem momentumOp_isSelfAdjoint : IsSelfAdjoint (stoneGen translationCLM) :=
+  stoneGen_isSelfAdjoint (H := Lp ℂ 2 (volume : Measure ℝ)) translationCLM
+    translationCLM_add translationCLM_zero translationCLM_inner
+    (fun t y => le_of_eq (by rw [translationCLM_apply]; exact norm_translationLp t y))
+    (fun y => by simp only [translationCLM_apply]; exact continuous_translationLp y)
 
 end QIQTH.Spectral.Multiplication

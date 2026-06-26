@@ -16,6 +16,7 @@ is the cited frontier.  Axiom-free.
 -/
 import QIQTH.CrossedProductTranslation
 import QIQTH.Spectral.Stone
+import QIQTH.Spectral.Garding
 import Mathlib.MeasureTheory.Function.LpSpace.ContinuousCompMeasurePreserving
 import Mathlib.MeasureTheory.Function.L2Space
 
@@ -112,5 +113,16 @@ theorem clockEnergy_norm_le_norm_add_smul_I (x : (stoneGen (clockTransl (H := H)
       ≤ ‖stoneGen (clockTransl (H := H)) x + Complex.I • (x : Lp H 2 (volume : Measure ℝ))‖ :=
   stoneGen_norm_le_norm_add_smul_I_dom (H := Lp H 2 (volume : Measure ℝ)) (clockTransl (H := H))
     clockTransl_add clockTransl_zero clockTransl_inner x
+
+/-- **★★★ The clock energy `X = A_edge` is self-adjoint:** `IsSelfAdjoint (stoneGen clockTransl)`. The generic
+    `stoneGen_isSelfAdjoint` instantiated for the clock translation group `λ_t = clockTransl t` (group law,
+    `λ_0 = 1`, unitarity `clockTransl_inner`, the isometry `clockTransl_norm`, strong continuity). So the clock
+    energy `X` (whose closure the campaign calls `A_edge`) is a genuine self-adjoint unbounded operator — the
+    spectral theorem's hypothesis, now machine-checked. -/
+theorem clockEnergy_isSelfAdjoint :
+    IsSelfAdjoint (stoneGen (clockTransl (H := H))) :=
+  stoneGen_isSelfAdjoint (H := Lp H 2 (volume : Measure ℝ)) clockTransl
+    clockTransl_add clockTransl_zero clockTransl_inner
+    (fun t y => le_of_eq (clockTransl_norm t y)) clockTransl_stronglyContinuous
 
 end QIQTH.StandardSubspaceModular

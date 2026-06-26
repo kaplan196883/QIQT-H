@@ -5064,6 +5064,15 @@ namespace QIQTH.AxiomAudit
 -- then A†(y−z)=−i(y−z) ⟹ y=z∈dom(A). The generator of a unitary group is a GENUINE SELF-ADJOINT UNBOUNDED OPERATOR
 -- — the spectral theorem's hypothesis, machine-checked. Axiom-free. Remaining (Mathlib gap): unbounded spectral
 -- theorem (PVM via the now-self-adjoint A) ⟹ Stone U_t = exp(it A); applies to X=A_edge, P, K.
+#print axioms QIQTH.StandardSubspaceModular.clockEnergy_isSelfAdjoint
+#print axioms QIQTH.Spectral.Multiplication.momentumOp_isSelfAdjoint
+#print axioms QIQTH.StandardSubspaceModular.modularGen_isSelfAdjoint
+-- ★★★ P4 WALL — THE THREE NAMED GENERATORS ARE SELF-ADJOINT (concrete payoff of stoneGen_isSelfAdjoint):
+-- clockEnergy_isSelfAdjoint — X = A_edge = stoneGen clockTransl (the clock energy, Lp ℂ²(ℝ;H), irreducible-stoneGen
+-- pattern); momentumOp_isSelfAdjoint — P = stoneGen translationCLM = −i d/dx (L²(ℝ)); modularGen_isSelfAdjoint —
+-- K = stoneGen (modUnitary S) = the JLMS modular Hamiltonian (abstract one-particle space). Each instantiates
+-- stoneGen_isSelfAdjoint with the group's (∘L group law, U_0=1, unitarity, isometry/norm, strong continuity). All
+-- three are GENUINE SELF-ADJOINT UNBOUNDED OPERATORS. Axiom-free. Remaining (Mathlib gap): unbounded spectral theorem.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via

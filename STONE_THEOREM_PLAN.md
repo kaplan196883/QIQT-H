@@ -331,8 +331,10 @@ one-parameter unitary group. The **basic criterion for self-adjointness** (symme
 with the domain equality `dom(A) = dom(A†)` from surjectivity (`stoneGen_add_I_surjective`) + `ker(A† + i) = 0`
 (`ker_adjoint_add_I_trivial`): for `y ∈ dom(A†)`, `∃ z ∈ dom(A)` with `(A + i)z = (A† + i)y`, then
 `A†(y − z) = −i(y − z)` ⟹ `y = z ∈ dom(A)`. **The generator of a unitary group is a genuine self-adjoint
-unbounded operator** — the spectral theorem's hypothesis, machine-checked axiom-free. Applies to `X = A_edge`,
-`P`, `K`. **Remaining (Mathlib gap):** the unbounded spectral theorem (PVM `∫ λ dE` for the now-self-adjoint
+unbounded operator** — the spectral theorem's hypothesis, machine-checked axiom-free. **Instantiated for all three named generators** (axiom-free): `clockEnergy_isSelfAdjoint`
+(`X = A_edge = stoneGen clockTransl`, Lp), `momentumOp_isSelfAdjoint` (`P = stoneGen translationCLM`, L²(ℝ)),
+`modularGen_isSelfAdjoint` (`K = stoneGen (modUnitary S)`, the JLMS modular Hamiltonian, abstract space).
+**Remaining (Mathlib gap):** the unbounded spectral theorem (PVM `∫ λ dE` for the now-self-adjoint
 `A`) ⟹ Stone `U_t = exp(it A)` — Mathlib has no unbounded spectral theorem.
 **Remaining (the genuine Mathlib-grade operator-theory frontier):** differentiate the RHS in `s` at `0` (after
 the change of variables `u = s+t` ⟹ `e^s ∫_s^∞ e^{−u} U_u x du`, whose `d/ds|₀ = R x − x` by the **FTC for the
