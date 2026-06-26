@@ -252,8 +252,12 @@ Also ✅ the **Gårding-approximation identity** toward density: `mollify_sub` �
 (subtract the constant field `(∫φ)·x = ∫ φ(t)·x`, via `integral_smul_const` + `integral_sub`); `norm_mollify_sub_le`
 — `‖x_φ − (∫φ)·x‖ ≤ ∫ ‖φ(t)‖·‖U_t x − x‖` (`norm_integral_le_integral_norm`). With `∫φ = 1` and `φ ≥ 0`
 concentrated near `0`, the bound `→ 0` by strong continuity (`U_t x → x`), i.e. `x_φ → x`.
-**Remaining:** the Dirac-sequence limit (`φₙ → δ` ⟹ the bound `→ 0`) + concluding `{x_φ}` dense ⟹ smooth domain
-dense ⟹ `Range(A ± i)` dense ⟹ `A` essentially self-adjoint ⟹ Stone returns `U_t = exp(it Ā)`.
+Also ✅ the **Gårding ε-bound** `norm_mollify_sub_le_uniform`: if `‖U_t x − x‖ ≤ ε` wherever `φ(t) ≠ 0`
+(on `supp φ`), then `‖x_φ − (∫φ)·x‖ ≤ ε · ∫‖φ‖` (pointwise integrand bound `‖φ t‖·‖U_t x−x‖ ≤ ε·‖φ t‖` +
+`integral_mono` + `integral_const_mul`). For a Dirac sequence (`∫|φ| = 1`, `φ` supported near `0`) this is `≤ ε`,
+and `→ 0` by strong continuity ⟹ `x_φ → x`.
+**Remaining:** pick the bump sequence `φₙ → δ` (Mathlib `ContDiffBump`, normalized) + the limit ⟹ `{x_φ}` dense ⟹
+smooth domain dense ⟹ `Range(A ± i)` dense ⟹ `A` essentially self-adjoint ⟹ Stone returns `U_t = exp(it Ā)`.
 
 ## 3. Dependency graph
 ```

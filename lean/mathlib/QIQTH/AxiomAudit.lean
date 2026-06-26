@@ -4950,6 +4950,11 @@ namespace QIQTH.AxiomAudit
 -- combine via integral_sub). norm_mollify_sub_le — ‖x_φ − (∫φ)·x‖ ≤ ∫ ‖φ(t)‖·‖U_t x − x‖ (norm_integral_le_integral_norm).
 -- With ∫φ=1 and φ≥0 concentrated near 0, the bound → 0 by strong continuity (U_t x → x) ⟹ x_φ → x. Axiom-free.
 -- Remaining: the Dirac-sequence limit + concluding {x_φ} dense (hence the smooth domain dense) ⟹ e.s.a.
+#print axioms QIQTH.Spectral.norm_mollify_sub_le_uniform
+-- ★ P4 WALL — the GÅRDING ε-BOUND: norm_mollify_sub_le_uniform — if ‖U_t x − x‖ ≤ ε wherever φ(t)≠0 (on supp φ),
+-- then ‖x_φ − (∫φ)·x‖ ≤ ε·∫‖φ‖ (pointwise integrand bound ‖φ t‖·‖U_t x−x‖ ≤ ε·‖φ t‖ + integral_mono + integral_const_mul).
+-- For a Dirac sequence (∫|φ|=1, φ supported near 0) this is ≤ ε → 0 by strong continuity ⟹ x_φ → x. Axiom-free.
+-- Remaining: pick the bump sequence φₙ → δ + the limit ⟹ {x_φ} dense ⟹ smooth domain dense ⟹ e.s.a.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via

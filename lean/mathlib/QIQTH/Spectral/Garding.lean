@@ -231,4 +231,29 @@ theorem norm_mollify_sub_le (U : ℝ → (H →L[ℂ] H)) (φ : ℝ → ℂ) (x 
   refine integral_congr_ae (Filter.Eventually.of_forall fun t => ?_)
   simp only [norm_smul]
 
+/-- **The Gårding-approximation ε-bound:** if `‖U_t x − x‖ ≤ ε` wherever `φ(t) ≠ 0` (i.e. on `supp φ`), then
+    `‖x_φ − (∫φ)·x‖ ≤ ε · ∫ ‖φ‖`. For a Dirac sequence (`∫|φ| = 1`, `φ` supported in a shrinking neighborhood
+    of `0`) this is `≤ ε` and `→ 0` by strong continuity — the convergence `x_φ → x` driving density of the
+    smooth domain. -/
+theorem norm_mollify_sub_le_uniform (U : ℝ → (H →L[ℂ] H)) (φ : ℝ → ℂ) (x : H) (ε : ℝ) (hε0 : 0 ≤ ε)
+    (hε : ∀ t, φ t ≠ 0 → ‖U t x - x‖ ≤ ε) (hφ_int : Integrable φ)
+    (hint : Integrable (fun t => φ t • U t x)) (hintx : Integrable (fun t => φ t • x)) :
+    ‖mollify U φ x - (∫ t, φ t) • x‖ ≤ ε * ∫ t, ‖φ t‖ := by
+  refine le_trans (norm_mollify_sub_le U φ x hint hintx) ?_
+  have hf_int : Integrable (fun t => ‖φ t‖ * ‖U t x - x‖) := by
+    have h2 : (fun t => ‖φ t‖ * ‖U t x - x‖) = fun t => ‖φ t • (U t x - x)‖ := by
+      funext t; rw [norm_smul]
+    rw [h2]
+    exact ((hint.sub hintx).congr
+      (Filter.Eventually.of_forall fun t => (smul_sub (φ t) (U t x) x).symm)).norm
+  have hg_int : Integrable (fun t => ε * ‖φ t‖) := hφ_int.norm.const_mul ε
+  calc ∫ t, ‖φ t‖ * ‖U t x - x‖
+      ≤ ∫ t, ε * ‖φ t‖ := by
+        refine integral_mono hf_int hg_int (fun t => ?_)
+        rcases eq_or_ne (φ t) 0 with h0 | h0
+        · simp [h0]
+        · rw [mul_comm ε]
+          exact mul_le_mul_of_nonneg_left (hε t h0) (norm_nonneg _)
+    _ = ε * ∫ t, ‖φ t‖ := integral_const_mul ε _
+
 end QIQTH.Spectral
