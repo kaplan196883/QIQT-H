@@ -179,6 +179,43 @@ theorem stoneGen_isFormalAdjoint_self (U : ℝ → (H →L[ℂ] H))
     (stoneGen U).IsFormalAdjoint (stoneGen U) :=
   fun x y => stoneGen_symmetric U hgrp hU0 hUinner x y
 
+/-- Auxiliary: for the symmetric generator, the cross term `re⟪A x, i • x⟫ = 0`. (`⟪A x, x⟫` is real by
+    symmetry; multiplying by `i` rotates it to the imaginary axis.) The cancellation behind the Cayley
+    estimate. -/
+theorem stoneGen_re_inner_smul_I (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b) (x : stoneDomain U) :
+    RCLike.re (Complex.I * (inner ℂ (stoneGen U x) (x : H) : ℂ)) = 0 := by
+  have hsym : (inner ℂ (stoneGen U x) (x : H) : ℂ) = inner ℂ (x : H) (stoneGen U x) :=
+    stoneGen_symmetric U hgrp hU0 hUinner x x
+  have h : (starRingEnd ℂ) (inner ℂ (stoneGen U x) (x : H)) = inner ℂ (stoneGen U x) (x : H) :=
+    (inner_conj_symm (x : H) (stoneGen U x)).trans hsym.symm
+  have hreal : RCLike.im (inner ℂ (stoneGen U x) (x : H) : ℂ) = 0 := RCLike.conj_eq_iff_im.mp h
+  rw [show (Complex.I : ℂ) = RCLike.I from rfl, RCLike.I_mul_re, hreal, neg_zero]
+
+/-- **The Cayley estimate** `‖(A + i) x‖² = ‖A x‖² + ‖x‖²` for the symmetric generator. The cross term
+    vanishes (`stoneGen_re_inner_smul_I`). This bounds `A + i` below (`‖(A+i)x‖ ≥ ‖x‖`), so it is *injective*
+    — the entry point to the Cayley transform `(A−i)(A+i)⁻¹` and the deficiency-index criterion for essential
+    self-adjointness (Phase 3.2/3.3). -/
+theorem stoneGen_norm_add_smul_I_sq (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b) (x : stoneDomain U) :
+    ‖stoneGen U x + Complex.I • (x : H)‖ ^ 2 = ‖stoneGen U x‖ ^ 2 + ‖(x : H)‖ ^ 2 := by
+  rw [norm_add_sq (𝕜 := ℂ), inner_smul_right,
+    stoneGen_re_inner_smul_I U hgrp hU0 hUinner x, norm_smul, Complex.norm_I, one_mul]
+  ring
+
+/-- **The Cayley estimate** `‖(A − i) x‖² = ‖A x‖² + ‖x‖²` — the `A − i` companion bounding `A − i` below,
+    hence injective. Together with `stoneGen_norm_add_smul_I_sq` this is the deficiency-index pair for the
+    Cayley transform / essential self-adjointness (Phase 3.2/3.3). -/
+theorem stoneGen_norm_sub_smul_I_sq (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b) (x : stoneDomain U) :
+    ‖stoneGen U x - Complex.I • (x : H)‖ ^ 2 = ‖stoneGen U x‖ ^ 2 + ‖(x : H)‖ ^ 2 := by
+  rw [norm_sub_sq (𝕜 := ℂ), inner_smul_right,
+    stoneGen_re_inner_smul_I U hgrp hU0 hUinner x, norm_smul, Complex.norm_I, one_mul]
+  ring
+
 /-- **`A ⊆ A†` for the Stone generator** — the explicit symmetric-operator containment, conditional on
     `hdense`, the density of the smooth domain (Gårding density, the genuine open analytic frontier of
     Phase 3.2). Given that density, the generator is contained in its `LinearPMap` adjoint:

@@ -204,7 +204,9 @@ with the modular flow it is read off from) ·
 **identification** — `stoneGen` pinned by any witnessed derivative; the bridge to identify `stoneGen` of a
 concrete group with a known operator `P`/`K`/`X`) · `stoneGen_isFormalAdjoint_self`
 (`(stoneGen U).IsFormalAdjoint (stoneGen U)`, the symmetric operator bundled in Mathlib's `LinearPMap` adjoint
-framework) · `stoneGen_le_adjoint` (the **explicit `A ⊆ A†`**, `stoneGen U ≤ (stoneGen U)†`, **conditional on
+framework) · `stoneGen_norm_add_smul_I_sq` + `stoneGen_norm_sub_smul_I_sq` (the **Cayley estimate** `‖(A±i)x‖²=‖Ax‖²+‖x‖²`
+⟹ `A±i` injective/bounded-below — the entry point to the Cayley transform + deficiency-index e.s.a. criterion) ·
+`stoneGen_le_adjoint` (the **explicit `A ⊆ A†`**, `stoneGen U ≤ (stoneGen U)†`, **conditional on
 `hdense : Dense (stoneGen U).domain`** — `le_adjoint` genuinely requires density). Wired into AxiomAudit; budget 0.
 **Frontier honestly carried (the remaining wall of 4.2):** `Dense (stoneGen U).domain` (**Gårding/mollified-vector
 density**, `x_φ = ∫ φ(t) U_t x dt`) + **essential self-adjointness** (`Range(A±i)` dense / Nelson analytic vectors)

@@ -135,6 +135,14 @@ InnerProductSpace.LinearPMap`). This is the precise `A ⊆ A*` entry point — o
 `stoneGen U ⊆ (stoneGen U)†` (`IsFormalAdjoint.le_adjoint`), and self-adjointness is `Ā = Ā*`. The symmetric
 unbounded operator now lives in Mathlib's adjoint framework, ready for the e.s.a. criteria.
 
+Also ✅ `stoneGen_norm_add_smul_I_sq` + `stoneGen_norm_sub_smul_I_sq` (+ aux `stoneGen_re_inner_smul_I`) —
+**the Cayley estimate** `‖(A ± i) x‖² = ‖A x‖² + ‖x‖²` for the symmetric generator. The cross term
+`re⟪A x, i•x⟫ = 0` (since `⟪A x, x⟫` is real by symmetry, and `×i` rotates it to the imaginary axis;
+`RCLike.I_mul_re` + `RCLike.conj_eq_iff_im`). Consequence: `A ± i` are **bounded below** (`‖(A±i)x‖ ≥ ‖x‖`),
+hence **injective** — this is the entry point to the **Cayley transform** `V = (A−i)(A+i)⁻¹` and the
+**deficiency-index** criterion for essential self-adjointness. (Injectivity is unconditional/algebraic here;
+*surjectivity* of `A ± i`, i.e. `Range(A±i)` dense, is the open analytic wall of Phase 3.3.)
+
 Also ✅ `hasDerivAt_stoneGen_flow` + `stoneGen_comm_flow` — **the generator commutes with the flow**
 `[A, U_s] = 0`: `stoneGen U (U_s x) = U_s (stoneGen U x)` on the smooth domain. The shifted orbit
 `t ↦ U_t (U_s x)` has derivative `i • U_s (A x)` at `0` (factored out as `hasDerivAt_stoneGen_flow` — the key

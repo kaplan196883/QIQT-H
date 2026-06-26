@@ -1640,6 +1640,14 @@ namespace QIQTH.AxiomAudit
 -- stoneGen_eq_of_hasDerivAt — if HasDerivAt (t↦U_t x) (i•v) 0 then stoneGen U x = v. The generator is pinned by
 -- ANY witnessed derivative (via HasDerivAt.unique + smul cancel by i≠0). The bridge from the abstract stoneGen to a
 -- concrete operator: to show stoneGen of a group = a known B, exhibit HasDerivAt (t↦U_t x) (i•B x) 0. No density. Axiom-free.
+#print axioms QIQTH.Spectral.stoneGen_re_inner_smul_I
+#print axioms QIQTH.Spectral.stoneGen_norm_add_smul_I_sq
+#print axioms QIQTH.Spectral.stoneGen_norm_sub_smul_I_sq
+-- ★ STONE 3.1 cont. — THE CAYLEY ESTIMATE (deficiency-index pair): for the symmetric generator,
+-- ‖(A±i)x‖² = ‖Ax‖² + ‖x‖² (stoneGen_norm_add/sub_smul_I_sq). The cross term re⟪Ax,i•x⟫=0 (stoneGen_re_inner_smul_I
+-- — ⟪Ax,x⟫ real by symmetry, ×i rotates to imaginary axis). So A±i are bounded below (‖(A±i)x‖≥‖x‖), hence
+-- INJECTIVE — the entry point to the Cayley transform (A−i)(A+i)⁻¹ and the deficiency-index criterion for
+-- essential self-adjointness (Phase 3.2/3.3). Axiom-free. (Surjectivity of A±i = the open Range-dense wall.)
 #print axioms QIQTH.Spectral.stoneGen_le_adjoint
 -- ★ STONE 3.1 cont. — the EXPLICIT A⊆A† containment, conditional on Gårding density:
 -- stoneGen_le_adjoint — given hdense : Dense (stoneGen U).domain, stoneGen U ≤ (stoneGen U)† (via le_adjoint).
