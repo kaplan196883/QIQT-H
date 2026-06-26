@@ -346,6 +346,7 @@ import QIQTH.Spectral.ModulationFlow
 -- STONE Phase 3.1 (P4-wall Phase 4.2): the infinitesimal generator A x=−i(d/dt U_t x)|₀ of a one-parameter operator
 -- family, as an unbounded operator (LinearPMap) on the smooth domain. Self-adjointness (Cayley) is the frontier.
 import QIQTH.Spectral.Stone
+import QIQTH.Spectral.MomentumGenerator
 -- Prize Stage 3.1 (finite case): the matrix spectral theorem packaged as a PVM — eigenprojections
 -- Pᵢ = U·diag(δᵢ)·U⋆ with ∑Pᵢ=1 (resolution of identity), Pᵢ²=Pᵢ, PᵢPⱼ=0, Pᵢ⋆=Pᵢ. The finite,
 -- axiom-free case of the bounded-spectral-theorem target (continuum stays open). Standard axioms:

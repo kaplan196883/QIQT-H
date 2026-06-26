@@ -196,6 +196,14 @@ through the heavy `Lp` instance tower (Phase-1.1/1.3 friction) is killed by
 analytic frontier:** essential self-adjointness `Range(X ± i)` dense (Gårding density) — needed before Stone
 returns `λ_t = exp(itX)` — stays the carried wall, NOT claimed.
 
+**PROGRESS — Phase 4 (the momentum operator `P`) ✅** (`QIQTH/Spectral/MomentumGenerator.lean`, axiom-free,
+budget 0): the same instantiation pattern applied to the translation group `τ_t = translationLp t = e^{itP}` on
+`L²(ℝ)` — `translationCLM` (CLM form) with `translationCLM_zero`/`_add`/`_inner` (the three Stone hypotheses),
+then `momentumOp := stoneGen translationCLM = −i d/dx` with `momentumOp_isFormalAdjoint_self` (P symmetric),
+`momentumOp_norm_add_smul_I_sq` (Cayley estimate), `momentumOp_norm_le_norm_add_smul_I` (P+i injective). Two of
+the three named C₀ generators (`X = A_edge`, `P`) now exist as concrete symmetric operators; the modular `Δ^{it}`
+(→ `K`) is the third. e.s.a. (`Range(P ± i)` dense) stays the carried analytic frontier.
+
 ## 3. Dependency graph
 ```
 Phase 1 (unbounded FC ∫f dE) ─→ Phase 2 (Stone for FC-ops; K, Δ^{it}=e^{−itK}) ──→ [JLMS Stage 1 DONE]

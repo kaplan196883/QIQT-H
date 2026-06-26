@@ -193,6 +193,19 @@ multiplication that was the "real wall" of Phase 1. The matter side of the cross
 **NEXT (separate):** Phase 2 (translation unitary group λ_t via `DomAddAct`), Phase 3 (covariance), then the
 frontiers (Stone, the trace). The `1/4` coefficient stays the cited UV datum throughout.
 
+### Phase 4.2/4.3 (operators) — the momentum operator `P` as a symmetric operator ✅ (2nd C₀ group instantiated)
+**Delivered (axiom-free, budget 0, `QIQTH/Spectral/MomentumGenerator.lean`):** the same Stone-instantiation
+pattern applied to the **second** of the three named C₀ groups, `translationLp t = τ_t = e^{itP}` on `L²(ℝ)`:
+`translationCLM` (the CLM form of the isometry) with `translationCLM_zero` (`τ_0=1`), `translationCLM_add` (group
+law), `translationCLM_inner` (`τ_t` a ℂ-linear isometry — the third Stone hypothesis); then the **momentum
+operator** `momentumOp := stoneGen translationCLM = −i d/dt τ_t = −i d/dx` with `momentumOp_isFormalAdjoint_self`
+(**`P` symmetric**), `momentumOp_norm_add_smul_I_sq` (**Cayley estimate** `‖(P+i)x‖²=‖Px‖²+‖x‖²`),
+`momentumOp_norm_le_norm_add_smul_I` (**`P+i` bounded below ⟹ injective**). Same `Lp`-wall handling
+(`attribute [local irreducible] stoneGen stoneDomain` + explicit ambient `(H := Lp ℂ 2 volume)`); here the group
+is fully concrete (no implicit fiber), so the instantiation is even cleaner. **Remaining frontier:** e.s.a. of
+`P` = `Range(P ± i)` dense (Gårding), the carried analytic wall. Two of three C₀ generators (`X = A_edge`, `P`)
+now exist as concrete symmetric operators; only `modUnitary`/`Δ^{it}` (the modular `K`) remains to instantiate.
+
 ### Phase 4.3 (operator) — the clock energy `X` as a symmetric operator at the concrete `Lp` type ✅ (Lp-wall cracked)
 **Delivered (axiom-free, budget 0, `QIQTH/CrossedProductGenerator.lean`):** first `clockTransl_inner` —
 `⟪λ_t a, λ_t b⟫ = ⟪a, b⟫` (the clock translation `λ_t` is a ℂ-linear isometry, via

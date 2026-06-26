@@ -4886,6 +4886,15 @@ namespace QIQTH.AxiomAudit
 -- All immediate instantiations of the general Stone lemmas (..._dom forms) for clockTransl_add/_zero/_inner. The
 -- Lp-instance whnf divergence was DEFEATED via attribute [local irreducible] stoneGen stoneDomain + explicit ambient
 -- (H := Lp H 2 volume). Axiom-free. (Essential self-adjointness = Range(X±i) dense = the carried analytic frontier.)
+#print axioms QIQTH.Spectral.Multiplication.momentumOp_isFormalAdjoint_self
+#print axioms QIQTH.Spectral.Multiplication.momentumOp_norm_add_smul_I_sq
+#print axioms QIQTH.Spectral.Multiplication.momentumOp_norm_le_norm_add_smul_I
+-- ★ P4 WALL — THE MOMENTUM OPERATOR P AS A SYMMETRIC OPERATOR (2nd of the 3 C₀ groups; same Lp-pattern):
+-- momentumOp := stoneGen translationCLM = −i d/dt τ_t = −i d/dx, the generator of the L²(ℝ) translation group
+-- e^{itP}. momentumOp_isFormalAdjoint_self — P symmetric; momentumOp_norm_add_smul_I_sq — Cayley estimate
+-- ‖(P+i)x‖²=‖Px‖²+‖x‖²; momentumOp_norm_le_norm_add_smul_I — P+i bounded below ⟹ injective. Instantiations of the
+-- general Stone lemmas for translationCLM_add/_zero/_inner (τ_t a ℂ-linear isometry). Lp-wall handled by the same
+-- irreducible-stoneGen pattern. Axiom-free. (e.s.a. = Range(P±i) dense = the carried analytic frontier.)
 #print axioms QIQTH.borelFC_apply_norm_sq
 -- expected: standard only — L² ISOMETRY (real form): ‖f(R)ζ‖²=∫‖f(ω)‖²dμ^R_ζ. Real restatement of
 -- borelFC_inner_self (⟪x,x⟫=↑‖x‖², conj(f)·f=↑‖f‖² via Complex.mul_conj+normSq_eq_norm_sq). The directly-usable
