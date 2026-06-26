@@ -414,10 +414,17 @@ Also ✅ `realCfcReExpectationCLM` `[Nontrivial H]` — **the RMK functional on 
 bundled ℝ-linear CLM: `g ↦ re⟪x, cfcHom V (↑∘g) x⟫` = `cfcReExpectationCLM x ∘ (ℝ↪ℂ)`, the `ℝ↪ℂ` embedding being
 `ContinuousLinearMap.compLeftContinuous ℝ (σ(V)) Complex.ofRealCLM`. **The `ℝ↪ℂ` domain restriction is now done** —
 the functional is a concrete `C(σ(V),ℝ) →L[ℝ] ℝ`. Since `σ(V)` is compact, `C(σ(V),ℝ) = C_c(σ(V),ℝ)`.
-**Next:** repackage `realCfcReExpectationCLM` as `C_c(σ(V),ℝ) →ₚ[ℝ] ℝ` (bundle the proven positivity with the
-linear map; convert `C(σV,ℝ)→C_c(σV,ℝ)` on the compact spectrum), apply `RealRMK.rieszMeasure` ⟹ `μ_x`; then
-assemble `{μ_x}` into a circle-PVM `E` (the Mathlib gap — no `ProjectionValuedMeasure` type; QIQTH's
-`Spectral/PVM.lean` has its own), transport to `A = ∫ λ dE` ⟹ Stone.
+Also ✅ `realCfcReExpectation_nonneg` `[Nontrivial H]` — **the functional is monotone/positive**: `0 ≤ g ⟹ 0 ≤
+realCfcReExpectationCLM x g` for `g : C(σ(V),ℝ)`. Bridge `cfcL ha (↑∘g) = cfcHom ha (↑∘g) = cfc (extend (↑∘g)) V`
+(`cfcL_apply` + `cfcHom_eq_cfc_extend`); the extended function is `ContinuousOn σ(V)` and real-`≥0` there, so
+`cayley_cfc_re_inner_nonneg_of_nonneg` applies. **This is the `→o`/`monotone'` field** — with the ℝ-linearity
+(`realCfcReExpectationCLM` is a CLM), `realCfcReExpectationCLM x` upgrades to a `C(σ(V),ℝ) →ₚ[ℝ] ℝ` positive linear
+functional.
+**Next:** bundle `realCfcReExpectationCLM x` + `realCfcReExpectation_nonneg` into a `PositiveLinearMap` (the
+`→ₚ[ℝ]` structure = LinearMap + this monotonicity), transport `C(σV,ℝ) ≃ C_c(σV,ℝ)` (`continuousMapEquiv`, compact
+spectrum), apply `RealRMK.rieszMeasure` ⟹ `μ_x` (with the Borel/locally-compact instances on `σ(V)`); then assemble
+`{μ_x}` into a circle-PVM `E` (the Mathlib gap — no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` has
+its own), transport to `A = ∫ λ dE` ⟹ Stone.
 **Next multi-fire sub-construction (the operator → PVM keystone, RMK + cfc supported):** the scalar spectral
 measures `μ_x` of `V` (positive functional `f ↦ re⟨x, cfc f V x⟩` → `RealRMK.rieszMeasure`), then their assembly
 into a circle-PVM `E` with `V = ∫ z dE`, then transport through inverse Cayley to `A = ∫ λ dE` ⟹ Stone.

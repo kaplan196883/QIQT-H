@@ -5085,6 +5085,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.reExpectationCLM
 #print axioms QIQTH.Spectral.cfcReExpectationCLM
 #print axioms QIQTH.Spectral.realCfcReExpectationCLM
+#print axioms QIQTH.Spectral.realCfcReExpectation_nonneg
+-- ★★ P4 WALL — RMK FUNCTIONAL IS MONOTONE/POSITIVE (the →ₚ[ℝ] monotone' field): realCfcReExpectation_nonneg
+-- [Nontrivial H] — 0 ≤ g ⟹ 0 ≤ realCfcReExpectationCLM x g for g : C(σ(V),ℝ). Bridge cfcL ha (↑∘g) = cfcHom ha (↑∘g)
+-- = cfc (Function.extend Subtype.val (↑∘g) 0) V (cfcL_apply + cfcHom_eq_cfc_extend); the extend is ContinuousOn σ(V)
+-- and real-≥0 there (= ↑(g ω) on the spectrum), so cayley_cfc_re_inner_nonneg_of_nonneg applies. With ℝ-linearity
+-- (realCfcReExpectationCLM is a CLM) this is the →o/monotone' field upgrading it to C(σV,ℝ)→ₚ[ℝ]ℝ — the positive
+-- linear functional RealRMK.rieszMeasure consumes to build μ_x. Axiom-free.
 -- ★★ P4 WALL — RMK FUNCTIONAL ON THE REAL FUNCTIONS C(σV,ℝ) (ℝ↪ℂ restriction done): realCfcReExpectationCLM
 -- [Nontrivial H] — C(spectrum ℂ V, ℝ) →L[ℝ] ℝ, g ↦ re⟪x, cfcHom V (↑∘g) x⟫ = (cfcReExpectationCLM x) ∘
 -- (ContinuousLinearMap.compLeftContinuous ℝ σV Complex.ofRealCLM) (postcompose each real g with Complex.ofReal).

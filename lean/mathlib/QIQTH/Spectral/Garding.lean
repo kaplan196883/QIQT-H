@@ -1247,6 +1247,41 @@ noncomputable def realCfcReExpectationCLM [Nontrivial H] (U : ℝ → (H →L[�
           (ContinuousLinearMap.compLeftContinuous ℝ
             (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) Complex.ofRealCLM g) x)).re := rfl
 
+/-- **★★ The Riesz–Markov functional is monotone (positive):** `0 ≤ g ⟹ 0 ≤ realCfcReExpectationCLM x g` for
+    `g : C(σ(V), ℝ)`. Bridging `cfcL ha (↑∘g) = cfcHom ha (↑∘g) = cfc (extend (↑∘g)) V` (`cfcL_apply` +
+    `cfcHom_eq_cfc_extend`), the extended function is continuous on `σ(V)` and real-`≥ 0` there (it equals `↑(g ω)`
+    on the spectrum), so `cayley_cfc_re_inner_nonneg_of_nonneg` applies. With the ℝ-linearity of
+    `realCfcReExpectationCLM` (it is a CLM), this is exactly the `→o`/`monotone'` field that upgrades it to a
+    **`C(σ(V), ℝ) →ₚ[ℝ] ℝ` positive linear functional** — the input `RealRMK.rieszMeasure` consumes to build `μ_x`. -/
+theorem realCfcReExpectation_nonneg [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H)
+    (g : C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℝ)) (hg : 0 ≤ g) :
+    0 ≤ realCfcReExpectationCLM U hgrp hU0 hUinner hUbd hSC x g := by
+  rw [realCfcReExpectationCLM_apply]
+  set φ : C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℂ) :=
+    ContinuousLinearMap.compLeftContinuous ℝ
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) Complex.ofRealCLM g with hφ
+  have hbridge : cfcL (cayley_isStarNormal U hgrp hU0 hUinner hUbd hSC) φ
+      = cfc (Function.extend Subtype.val φ (0 : ℂ → ℂ))
+          (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) := by
+    rw [cfcL_apply]
+    exact cfcHom_eq_cfc_extend 0 (cayley_isStarNormal U hgrp hU0 hUinner hUbd hSC) φ
+  rw [hbridge]
+  refine cayley_cfc_re_inner_nonneg_of_nonneg U hgrp hU0 hUinner hUbd hSC _ ?_ ?_ x
+  · rw [continuousOn_iff_continuous_restrict]
+    have h : (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)).restrict
+        (Function.extend Subtype.val φ (0 : ℂ → ℂ)) = φ := by ext z; simp
+    rw [h]; exact map_continuous φ
+  · intro z hz
+    have hval : φ ⟨z, hz⟩ = (Complex.ofReal (g ⟨z, hz⟩) : ℂ) := rfl
+    have hz2 : Function.extend Subtype.val φ (0 : ℂ → ℂ) z = (Complex.ofReal (g ⟨z, hz⟩) : ℂ) :=
+      (Subtype.val_injective.extend_apply φ (0 : ℂ → ℂ) ⟨z, hz⟩).trans hval
+    rw [hz2]
+    exact ⟨by rw [Complex.ofReal_re]; exact (ContinuousMap.le_def.mp hg) ⟨z, hz⟩,
+      Complex.ofReal_im _⟩
+
 end SelfAdjoint
 
 end QIQTH.Spectral
