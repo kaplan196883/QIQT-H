@@ -200,8 +200,12 @@ self-adjointness (= `Range(·±i)` dense), shared by all three generators. `moll
 support); `mollify_apply_flow` — the **flow-shift identity** `U_s x_φ = ∫ φ(t) U_{s+t} x dt` (`U_s` passes
 through the Bochner integral via `integral_comp_comm`, then the group law shifts the orbit). This is the
 algebraic core: differentiating the RHS in `s` under the integral is exactly what will place `x_φ` in the smooth
-domain (hence the domain dense). **Carried frontier (genuine Mathlib gap):** the differentiation-under-the-Bochner-
-integral step (`x_φ ∈ stoneDomain U`) + the approximate-identity density (`{x_φ}` dense as `φ → δ`).
+domain (hence the domain dense). Plus `mollify_apply_flow_cov` — the orbit in **differentiation-ready form**
+`U_s x_φ = ∫ φ(u − s) U_u x du` (change of variables, `integral_add_right_eq_self`): the `s`-dependence now sits
+entirely in the smooth `φ(u − s)`, the `U_u x` factor `s`-independent. **Carried frontier (genuine Mathlib gap):**
+the differentiation-under-the-Bochner-integral step itself (`x_φ ∈ stoneDomain U`, via
+`hasDerivAt_integral_of_dominated_loc_of_deriv_le` + a constructed integrable dominating bound) + the
+approximate-identity density (`{x_φ}` dense as `φ → δ`).
 
 ### Phase 4 (operators) — the modular Hamiltonian `K` as a symmetric operator ✅ (3rd & LAST C₀ group; trio complete)
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/ModularGenerator.lean`):** the Stone-instantiation pattern

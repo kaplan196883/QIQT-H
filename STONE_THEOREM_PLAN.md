@@ -219,9 +219,13 @@ constructive step into the e.s.a. frontier. `mollify U φ x := ∫ φ(t) U_t x d
 `U` strongly continuous); `mollify_apply_flow` — the **flow-shift identity** `U_s x_φ = ∫ φ(t) U_{s+t} x dt`
 (`U_s` through the Bochner integral via `integral_comp_comm` + the group law). This is the algebraic core of
 Gårding: differentiating the RHS in `s` *under the integral* is exactly what places `x_φ` in the smooth domain.
-**Remaining (the genuine analytic frontier):** the differentiation step (`x_φ ∈ stoneDomain U`, via
-differentiation under the Bochner integral) + the density `{x_φ}` dense (approximate identity `φ → δ`) — built
-on this foundation, not yet claimed.
+Also ✅ `mollify_apply_flow_cov` — the orbit in **differentiation-ready form** `U_s x_φ = ∫ φ(u − s) U_u x du`
+(change of variables `u = s + t`, `integral_add_right_eq_self`). Now the `s`-dependence sits *entirely* in the
+smooth scalar `φ(u − s)` — the `U_u x` factor is `s`-independent — so the orbit is set up for differentiation
+under the integral (`d/ds|₀ = −∫ φ'(u) U_u x du`).
+**Remaining (the genuine analytic frontier):** the differentiation step itself (`x_φ ∈ stoneDomain U`, via
+`hasDerivAt_integral_of_dominated_loc_of_deriv_le` — needs a constructed integrable dominating bound
+`supₛ |φ'(u−s)|·‖x‖`) + the density `{x_φ}` dense (approximate identity `φ → δ`) — built on this foundation.
 
 ## 3. Dependency graph
 ```

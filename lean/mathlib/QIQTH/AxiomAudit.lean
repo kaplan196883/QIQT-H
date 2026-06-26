@@ -4907,6 +4907,10 @@ namespace QIQTH.AxiomAudit
 -- irreducible/Lp workaround needed. Axiom-free. (e.s.a. = Range(K±i) dense = the carried analytic frontier.)
 #print axioms QIQTH.Spectral.mollify_integrable
 #print axioms QIQTH.Spectral.mollify_apply_flow
+#print axioms QIQTH.Spectral.mollify_apply_flow_cov
+-- mollify_apply_flow_cov — the orbit in DIFFERENTIATION-READY form: U_s x_φ = ∫ φ(u−s) U_u x du (change of
+-- variables u=s+t, integral_add_right_eq_self). Now the s-dependence sits ENTIRELY in the smooth scalar φ(u−s);
+-- the U_u x factor is s-independent ⟹ ready for differentiation under the integral (d/ds|₀ = −∫ φ'(u) U_u x du).
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via

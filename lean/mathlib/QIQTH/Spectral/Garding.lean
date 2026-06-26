@@ -23,6 +23,7 @@ Axiom-free.
 import QIQTH.Spectral.Stone
 import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+import Mathlib.MeasureTheory.Group.Integral
 
 namespace QIQTH.Spectral
 
@@ -55,5 +56,19 @@ theorem mollify_apply_flow (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s +
   refine integral_congr_ae (Filter.Eventually.of_forall fun t => ?_)
   dsimp only
   rw [map_smul, ← ContinuousLinearMap.comp_apply, ← hgrp s t]
+
+/-- **The orbit of a mollified vector in differentiation-ready form:** `U_s x_φ = ∫ φ(u − s) U_u x du`. Change
+    of variables `u = s + t` (translation invariance of `volume`, `integral_add_right_eq_self`) applied to the
+    flow-shift identity. Now the `s`-dependence sits *entirely* in the smooth scalar `φ(u − s)` — the
+    `U_u x` factor is `s`-independent — so the orbit `s ↦ U_s x_φ` is ready for differentiation under the
+    integral (`d/ds|₀ = −∫ φ'(u) U_u x du`), the step that places `x_φ` in the smooth domain. -/
+theorem mollify_apply_flow_cov (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (φ : ℝ → ℂ) (x : H) (hcont : Continuous (fun t => U t x)) (hφ : Continuous φ)
+    (hsupp : HasCompactSupport φ) (s : ℝ) :
+    U s (mollify U φ x) = ∫ u, φ (u - s) • U u x := by
+  rw [mollify_apply_flow U hgrp φ x hcont hφ hsupp s,
+    ← integral_add_right_eq_self (fun u => φ (u - s) • U u x) s]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun t => ?_)
+  simp only [add_sub_cancel_right, add_comm s t]
 
 end QIQTH.Spectral
