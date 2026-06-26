@@ -1588,6 +1588,15 @@ namespace QIQTH.AxiomAudit
 -- Fourier transform is an L² isometry, so the momentum density |ℱ⁻¹x|² integrates to the same total mass ‖x‖² as
 -- the position density |x|² — the Born total-probability is conserved between the position and momentum
 -- representations (norm_sq_eq_integral + LinearIsometryEquiv.norm_map). Axiom-free.
+#print axioms QIQTH.Spectral.stoneDomain
+#print axioms QIQTH.Spectral.stoneGen
+-- ★ STONE Phase 3.1 — THE INFINITESIMAL GENERATOR (the first brick of breaking the P4 wall / general Stone):
+-- stoneDomain U = {x : t↦U_t x differentiable at 0} (a ℂ-submodule, since each U_t is ℂ-linear) and
+-- stoneGen U : H →ₗ.[ℂ] H = the unbounded operator A x = −i·(d/dt U_t x)|₀ on that smooth domain (a genuine
+-- LinearPMap; linearity from deriv_add/deriv_const_smul on the differentiable domain, no hypotheses on U needed).
+-- For a strongly-continuous unitary group this IS the self-adjoint Stone generator. FRONTIER (recorded): essential
+-- self-adjointness (Phase 3.2, Nelson analytic vectors) + the Cayley transform/unbounded spectral theorem (3.3)
+-- are the genuine Mathlib-grade gaps; applying this to clockTransl ⟹ X=A_edge (P4-wall 4.3) is gated on them.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

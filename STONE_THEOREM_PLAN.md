@@ -102,6 +102,18 @@ unitary spectral theorem) are open Mathlib targets in their own right.  **Honest
 generator + density, tractable) and checkpoint at 3.2/3.3, recording the Cayley/essential-self-adjointness wall —
 unless the unitary spectral theorem (3.3) factors cleanly through the existing `PVM_of_selfAdjoint` on `Re V`.
 
+**PROGRESS — Sub-step 3.1 (the generator) ✅** (`QIQTH/Spectral/Stone.lean`, axiom-free, budget 0, full build
+green): `stoneDomain U = {x : t↦U_t x differentiable at 0}` is a **ℂ-submodule** (each `U_t` ℂ-linear ⟹ closed
+under `+`/`•`, via `map_add`/`map_smul` + `DifferentiableAt.add`/`.const_smul`), and `stoneGen U : H →ₗ.[ℂ] H` is
+the **infinitesimal generator** `A x = −i·(d/dt U_t x)|₀` as a genuine `LinearPMap` (linearity from
+`deriv_add`/`deriv_const_smul` on the smooth domain; `stoneGen_apply` the action). No hypotheses on `U` — works
+for any operator family; for a strongly-continuous unitary group this is the self-adjoint Stone generator.
+**FRONTIER (recorded):** density of the domain (Gårding), symmetry, essential self-adjointness (3.2, Nelson
+analytic vectors), and the Cayley transform / unbounded spectral theorem (3.3) — the genuine Mathlib gaps.
+**NEXT tractable sub-bricks:** the symmetry of `A` on the domain (`⟪Ax,y⟫=⟪x,Ay⟫` from `U_t` unitary, via the
+derivative of `⟪U_t x, y⟫` — needs strong continuity, in hand for the concrete groups); the `U`-invariance of the
+smooth domain; then the density/essential-self-adjointness wall.
+
 ### Phase 4 — apply general Stone to the clock energy `X = A_edge`  *(unblocks Wall Phase 4.2/4.3)*
 *Extends `QIQTH/CrossedProductGenerator.lean`.*  Apply Phase 3 to `clockTransl` (`λ_t`, already proved a
 strongly-continuous unitary group via `clockTransl_stronglyContinuous` — the Stone hypothesis is in hand) to get
