@@ -199,7 +199,7 @@ when $ \href{/browser#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 $&nbsp;:
 - `hDnn` &nbsp; $\forall (t : \mathbb{R}), 0 \le \mathrm{KE}({x},{v},{t}) - \mathrm{Sf}\,x\,v\,t$
 - `hD0` &nbsp; $\mathrm{KE}({x},{v},{0}) - \mathrm{Sf}\,x\,v\,0 = 0$
 - `hTkk` &nbsp; $2 \cdot \pi / \hbar \cdot ({\href{/browser#d-qiqth-curvature-kgstress}{T({x})}})({v},{v}) = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{ff}\,x\,v\,\theta) \cdot \mathrm{ff}^{\prime}\,x\,v\,\theta)).\mathrm{im}$
-- `hbridge` &nbsp; $({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,(\mathrm{ff}\,x\,v)\,\cdots )\,((\href{/browser#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,(\href{/browser#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathcal{K}}\,(\mathrm{mw}\,x\,v)\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,(\mathrm{ff}\,x\,v)\,\cdots ))})'({0})={i \cdot (\dot{K}({x},{v}))}$
+- `hbridge` &nbsp; $({\lambda t \mapsto \langle {\mathrm{toLp}\,(\mathrm{ff}\,x\,v)\,\cdots },{(\href{/browser#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,(\href{/browser#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathcal{K}}\,(\mathrm{mw}\,x\,v)\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,(\mathrm{ff}\,x\,v)\,\cdots )}\rangle})'({0})={i \cdot (\dot{K}({x},{v}))}$
 - `hFocus` &nbsp; $\dot{A}({x},{v}) = ({\lambda i j \mapsto \href{/browser#d-qiqth-curvature-ricci}{R_{{i}{j}}({x})}})({v},{v})$
 
 and
@@ -281,7 +281,7 @@ $$ \href{/browser#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,(\href{/b
 
 `freeField_oneParticle_hFlux` · *spine* —  we have
 
-$$ ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\href{/browser#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,(\href{/browser#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathcal{K}}\,m\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,f\,\mathrm{hf2}))})'({0})={i \cdot (2 \cdot \pi / \hbar \cdot T_{kk})} $$
+$$ ({\lambda t \mapsto \langle {\mathrm{toLp}\,f\,\mathrm{hf2}},{(\href{/browser#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,(\href{/browser#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathcal{K}}\,m\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,f\,\mathrm{hf2})}\rangle})'({0})={i \cdot (2 \cdot \pi / \hbar \cdot T_{kk})} $$
 
 *assuming*
 
@@ -298,7 +298,7 @@ $$ \mathrm{kd} = 2 \cdot \pi / \hbar \cdot T_{kk} $$
 *assuming*
 
 - `hTkk` &nbsp; $2 \cdot \pi / \hbar \cdot T_{kk} = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f^{\prime}\,\theta)).\mathrm{im}$
-- `hbridge` &nbsp; $({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\href{/browser#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,(\href{/browser#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathcal{K}}\,m\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,f\,\mathrm{hf2}))})'({0})={i \cdot \mathrm{kd}}$
+- `hbridge` &nbsp; $({\lambda t \mapsto \langle {\mathrm{toLp}\,f\,\mathrm{hf2}},{(\href{/browser#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,(\href{/browser#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathcal{K}}\,m\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,f\,\mathrm{hf2})}\rangle})'({0})={i \cdot \mathrm{kd}}$
 
 <small>plus 6 routine conditions (6 regularity) — full list in the per-track PDF.</small>
 

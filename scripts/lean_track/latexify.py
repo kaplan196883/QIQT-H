@@ -104,6 +104,37 @@ DEFAULT_NOTATION = {
     "niceWedgeStandardSubspace": r"\mathcal{K}",
     "niceWedgeClosedSubmodule": r"\mathcal{K}", "niceWedgeGenSet": r"\mathcal{G}",
     "gaussSmear": r"g", "gaussSmearC": r"g",
+    # second pass — remaining recurring closure operators (short, recognisable
+    # abbreviations of the Lean name; tune per-track if a different symbol is wanted)
+    "toClosedSubmodule": r"\mathrm{cl}", "closure": r"\overline{#1}",
+    "bilinDiag": r"\mathrm{bd}", "diagInt": r"\textstyle\int",
+    "integralSimple": r"\textstyle\int",
+    "rvdTwoSubRC": r"(2-R)", "rvdSqrtTwoSubR": r"\sqrt{2-R}", "rvdTwoSubR": r"(2-R)",
+    "deviceVecF": r"\mathrm{dev}", "deviceOpC": r"\mathrm{dev}_{\mathbb{C}}",
+    "deviceOpReal": r"\mathrm{dev}", "devChar": r"\chi_{\mathrm{dev}}",
+    "kmsFunCut": r"\mathrm{kms}", "kmsStripOpen": r"S^{\circ}",
+    "kmsHalfStripOpen": r"S^{\circ}_{1/2}", "negStrip": r"S^{-}",
+    "negStripOpen": r"S^{-}",
+    "lorentzBoost": r"\mathrm{L}", "lorentzBoostₗ": r"\mathrm{L}",
+    "riemannLin": r"\mathrm{Riem}", "covDeriv2Vec": r"\nabla^{2}",
+    "covDeriv02": r"\nabla^{2}", "kernelDeriv": r"\mathrm{K}'",
+    "minkowskiFourier": r"\mathcal{F}", "minkowskiDot": r"\eta",
+    "minkowskiDotℂ": r"\eta", "massShell": r"\mathrm{MS}", "massShellℂ": r"\mathrm{MS}",
+    "indicator": r"\mathbf{1}", "adjoint": r"{#1}^{\dagger}", "unitary": r"\mathrm{U}",
+    "specCoord": r"\mathrm{sc}", "modSpecFun": r"f_{\mathrm{mod}}",
+    "boostTest": r"\phi_{B}", "entireVec": r"\mathrm{ev}",
+    "schwartzTranslate": r"\tau", "closedBall": r"\bar{B}",
+    "ftKrep'": r"\hat{K}", "ftKrepF": r"\hat{K}",
+    "restrictScalars": r"\mathrm{res}", "compMeasurePreserving": r"\mathrm{cmp}",
+    "nhdsWithin": r"\mathcal{N}", "withDensity": r"\mathrm{wd}",
+    "approxSeq": r"\mathrm{aseq}", "restrict": r"\mathrm{restr}",
+    "bumpRealW": r"\mathrm{bump}",
+    "minkBilin": r"\eta", "iteratedFDeriv": r"\mathrm{D}", "intBorel": r"\textstyle\int",
+    "kmsHalfStrip": r"S_{1/2}", "kmsStrip": r"S", "devSpecReal": r"\chi_{\mathrm{dev}}",
+    "deviceDerivOpC": r"\mathrm{dev}'", "elemental": r"\mathrm{elem}",
+    "negMulLog": r"\mathrm{nml}", "fourierChar": r"\mathrm{e}", "fourierIntegral": r"\mathcal{F}",
+    "covDeriv20": r"\nabla^{2}", "realCommutant": r"\mathcal{M}'",
+    "inner": r"\langle #2,#3\rangle",   # inner 𝕜 x y -> ⟨x, y⟩
 }
 
 _IDENT = re.compile(r"[A-Za-z_][A-Za-z0-9_.'!?]*")
