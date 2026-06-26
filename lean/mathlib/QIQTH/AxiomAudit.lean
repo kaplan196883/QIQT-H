@@ -1527,6 +1527,13 @@ namespace QIQTH.AxiomAudit
 -- law + unitarity + identity/inverses, e^{isX} is now a full STRONGLY-CONTINUOUS one-parameter UNITARY group
 -- (C₀-group, generator = the position operator X) — SYMMETRIC to the translation group e^{itP}. Axiom-free. Both
 -- legs of the canonical X–P pair are now complete C₀-groups; only the (unbounded) Stone generators X,P stay frontier.
+#print axioms QIQTH.Spectral.Multiplication.modulationUnitary
+#print axioms QIQTH.Spectral.Multiplication.modulationUnitary_symm_apply
+-- ★ THE MODULATION UNITARY (≃ₗᵢ packaging): modulationUnitary s — e^{isX} as a genuine ≃ₗᵢ[ℂ] unitary, invertible
+-- with inverse e^{-isX} (from modulationLp_neg_comp/comp_neg), with modulationUnitary_apply/_symm_apply. Parallels
+-- translationUnitary; packages e^{isX} in the form the conjugation/modular machinery consumes (e.g.
+-- momentumPVM.conj (modulationUnitary s) = the dual covariance of the momentum observable under position-modulation).
+-- Axiom-free. Both X–P unitary groups are now ≃ₗᵢ-packaged; the (unbounded) Stone generators X,P stay frontier.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg

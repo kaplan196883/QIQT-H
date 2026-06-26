@@ -438,6 +438,13 @@ item.** Never claim the `1/4`.
   group** (`C₀`-group, generator = the position operator `X`) — **symmetric to the translation group `e^{itP}`.
   Both legs of the canonical X–P pair are now complete `C₀`-groups.** Only the (unbounded) Stone generators
   `X=∫x dE`, `P=∫k dÊ` stay frontier (no Stone's theorem in Mathlib).
+  **The modulation unitary (`≃ₗᵢ` packaging) ✅** (`ModulationFlow.lean`, axiom-free, budget 0):
+  `modulationUnitary s` — `e^{isX}` as a genuine `≃ₗᵢ[ℂ]` unitary, invertible with inverse `e^{-isX}` (from
+  `modulationLp_neg_comp`/`comp_neg`), with `modulationUnitary_apply`/`_symm_apply`. Parallels `translationUnitary`;
+  packages `e^{isX}` in the form the conjugation/modular machinery consumes (e.g.
+  `momentumPVM.conj (modulationUnitary s)` = the dual covariance of the momentum observable under
+  position-modulation). **Both X–P unitary groups are now `≃ₗᵢ`-packaged.** Recorded next target: the dual
+  momentum-covariance `e^{isX} Ê(B) e^{-isX} = Ê(B+s)` (via the conjugation machinery).
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.

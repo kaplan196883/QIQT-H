@@ -177,4 +177,25 @@ theorem continuous_modulationLp (f : Lp ℂ 2 (volume : Measure ℝ)) :
   rw [Real.sqrt_zero] at hsqrt
   exact hsqrt
 
+/-- **The modulation operator as a unitary `≃ₗᵢ`** (one-parameter *group* of unitaries): `e^{isX}` is invertible
+    with inverse `e^{-isX}` (from `e^{∓isX} ∘ e^{±isX} = 1`). This packages modulation as a genuine unitary on
+    `L²(ℝ)` — the form conjugation/modular machinery consumes (e.g. `momentumPVM.conj (modulationUnitary s)`). -/
+noncomputable def modulationUnitary (s : ℝ) :
+    Lp ℂ 2 (volume : Measure ℝ) ≃ₗᵢ[ℂ] Lp ℂ 2 (volume : Measure ℝ) where
+  toFun := modulationLp s
+  invFun := modulationLp (-s)
+  left_inv := fun f => by
+    rw [← ContinuousLinearMap.comp_apply, modulationLp_neg_comp, ContinuousLinearMap.one_apply]
+  right_inv := fun f => by
+    rw [← ContinuousLinearMap.comp_apply, modulationLp_comp_neg, ContinuousLinearMap.one_apply]
+  map_add' := (modulationLp s).map_add
+  map_smul' := (modulationLp s).map_smul
+  norm_map' := norm_modulationLp s
+
+@[simp] theorem modulationUnitary_apply (s : ℝ) (f : Lp ℂ 2 (volume : Measure ℝ)) :
+    modulationUnitary s f = modulationLp s f := rfl
+
+@[simp] theorem modulationUnitary_symm_apply (s : ℝ) (f : Lp ℂ 2 (volume : Measure ℝ)) :
+    (modulationUnitary s).symm f = modulationLp (-s) f := rfl
+
 end QIQTH.Spectral.Multiplication
