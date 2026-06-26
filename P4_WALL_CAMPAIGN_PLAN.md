@@ -318,7 +318,9 @@ instances resolve).
 Also ✅ `cayleyScalarMeasure_integral` `[Nontrivial H]` (**`μ_x` represents the functional** —
 `∫f dμ_x = re⟪x,cfc f V x⟫` via `RealRMK.integral_rieszMeasure`; pins μ_x to V). **The operator →
 scalar-spectral-measure half of the spectral theorem is end-to-end machine-checked.**
-**Next:** assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap — polarization μ_{x,y} → projections E(S),
+Also ✅ `cayleyScalarMeasure_isFiniteMeasure` `[Nontrivial H]` (**μ_x is a finite measure** — finite spectral
+distribution, total mass ‖x‖²; ⟹ `∫g dμ_x` defined for bounded Borel g, the entry to the Borel FC).
+**Next:** bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
 `E` (`V=∫z dE`) → transport via inverse Cayley to `A=∫λ dE` ⟹ Stone. The bounded-PVM remains the genuine gap.

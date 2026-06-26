@@ -436,10 +436,15 @@ Also ✅ `cayleyScalarMeasure_integral` `[Nontrivial H]` — **`μ_x` represents
 `μ_x` to `V` — its moments are the expectations of functions of `V` in the state `x`. **The operator →
 scalar-spectral-measure half of the spectral theorem is now end-to-end machine-checked** (Cayley unitary → cfc
 functional → positivity + linearity → RMK → `μ_x` → integral identity).
-**Next:** assemble the family `{μ_x}` (over `x ∈ H`) into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with
-`V = ∫ z dE` — the genuine Mathlib gap (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its
-own, where the polarization `μ_{x,y}` → genuine projections `E(S)` is `PVM_of_selfAdjoint`, the documented
-residual); then transport `E` through the inverse Cayley to `A = ∫ λ dE` ⟹ Stone `U_t = exp(it A)`.
+Also ✅ `cayleyScalarMeasure_isFiniteMeasure` `[Nontrivial H]` — **`μ_x` is a finite measure** (`RealRMK`'s
+`CompactSpace` instance): a genuine finite spectral distribution of the state `x` (total mass `‖x‖²`), so
+`∫ g dμ_x` is defined for every *bounded Borel* `g` — the extension beyond continuous functions underlying the
+Borel FC / the PVM `E(S) = ∫ 1_S dE`.
+**Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
+family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
+(no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`
+→ genuine projections `E(S)` is `PVM_of_selfAdjoint`, the documented residual); then transport `E` through the
+inverse Cayley to `A = ∫ λ dE` ⟹ Stone `U_t = exp(it A)`.
 **Next multi-fire sub-construction (the operator → PVM keystone, RMK + cfc supported):** the scalar spectral
 measures `μ_x` of `V` (positive functional `f ↦ re⟨x, cfc f V x⟩` → `RealRMK.rieszMeasure`), then their assembly
 into a circle-PVM `E` with `V = ∫ z dE`, then transport through inverse Cayley to `A = ∫ λ dE` ⟹ Stone.

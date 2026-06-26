@@ -5090,6 +5090,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cfcPLMcc
 #print axioms QIQTH.Spectral.cayleyScalarMeasure
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_integral
+#print axioms QIQTH.Spectral.cayleyScalarMeasure_isFiniteMeasure
+-- ★ P4 WALL — μ_x IS A FINITE MEASURE: cayleyScalarMeasure_isFiniteMeasure [Nontrivial H] —
+-- IsFiniteMeasure (cayleyScalarMeasure x) (RealRMK's CompactSpace instance, σ(V) compact). So μ_x is a genuine
+-- finite spectral distribution of the state x (total mass ‖x‖²), and ∫ g dμ_x is defined for every bounded Borel g
+-- — the extension beyond continuous functions underlying the Borel FC / the PVM E(S)=∫1_S dE. Axiom-free.
 -- ★★★ P4 WALL — μ_x REPRESENTS THE FUNCTIONAL: cayleyScalarMeasure_integral [Nontrivial H] —
 -- ∫ f dμ_x = re⟪x, cfc f V x⟫ for f : C_c(σV,ℝ) (RealRMK.integral_rieszMeasure for cfcPLMcc x). This PINS μ_x to V:
 -- its moments are the expectations of functions of V in the state x (total mass ‖x‖², first moment re⟪x,Vx⟫). The

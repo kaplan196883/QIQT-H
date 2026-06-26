@@ -1368,6 +1368,20 @@ theorem cayleyScalarMeasure_integral [Nontrivial H] (U : ℝ → (H →L[ℂ] H)
     isCompact_iff_compactSpace.mp (spectrum.isCompact _)
   exact RealRMK.integral_rieszMeasure (cfcPLMcc U hgrp hU0 hUinner hUbd hSC x) f
 
+/-- **★ The scalar spectral measure is finite:** `IsFiniteMeasure μ_x`. Since `σ(V)` is compact, the Riesz–Markov
+    measure of a positive functional on `C_c(σ(V), ℝ)` is finite (`RealRMK`'s `CompactSpace` instance). So `μ_x` is
+    a genuine *finite* spectral distribution of the state `x` (total mass `‖x‖²`), and `∫ g dμ_x` is defined for
+    every *bounded Borel* `g` — the extension beyond continuous functions that underlies the Borel functional
+    calculus / the projection-valued measure `E(S) = ∫ 1_S dE`. -/
+theorem cayleyScalarMeasure_isFiniteMeasure [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+  haveI : CompactSpace (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) :=
+    isCompact_iff_compactSpace.mp (spectrum.isCompact _)
+  exact inferInstanceAs (IsFiniteMeasure (RealRMK.rieszMeasure (cfcPLMcc U hgrp hU0 hUinner hUbd hSC x)))
+
 end SelfAdjoint
 
 end QIQTH.Spectral
