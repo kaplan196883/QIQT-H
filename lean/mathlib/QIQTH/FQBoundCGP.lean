@@ -74,4 +74,18 @@ theorem fq_bound_of_phase5 (S : StandardSubspace H) {ξ : H} (hξ : projK S ξ =
     {SvN areaTerm : ℝ} [Phase5Master S ξ SvN areaTerm] : SvN ≤ areaTerm :=
   fq_bound_cgp S hξ ha ha1 hspec phase5_master_ineq
 
+/-- **★★★ The holographic area floor in manifest form `S ≤ A/4ℓ_P²`, relative to the Phase-5 certificate.**
+    Specializing `fq_bound_of_phase5` to `areaTerm = edgeArea / (4·ℓ_P²)` exhibits P4's bound in its physical shape:
+    the entropy `SvN` is at most the **area over `4ℓ_P²`**.  Here `edgeArea` (`= ⟨A_edge⟩ = A(∂R)`, the **carried UV
+    datum** whose value is *never* asserted) and `ellP` (the Planck length, physically `> 0`) are explicit; the
+    coefficient `1/4ℓ_P²` is now manifest in the statement rather than hidden in `areaTerm`.  Axiom-free, relative
+    only to the named `Phase5Master` certificate (the dual-weight trace's obligation).  The `1/4` *ratio* is derived
+    separately (`SakharovRatio`); free scalar. -/
+theorem holographic_area_floor (S : StandardSubspace H) {ξ : H} (hξ : projK S ξ = ξ)
+    {a : ℝ} (ha : 0 < a) (ha1 : a ≤ 1)
+    (hspec : ∀ ω : spectrum ℝ (rvdRC S), a ≤ (ω : ℝ) ∧ (ω : ℝ) ≤ 2 - a)
+    {SvN edgeArea ellP : ℝ} [Phase5Master S ξ SvN (edgeArea / (4 * ellP ^ 2))] :
+    SvN ≤ edgeArea / (4 * ellP ^ 2) :=
+  fq_bound_of_phase5 S hξ ha ha1 hspec
+
 end QIQTH

@@ -5925,6 +5925,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.fq_bound_cgp
 #print axioms QIQTH.phase5_master_ineq
 #print axioms QIQTH.fq_bound_of_phase5
+#print axioms QIQTH.holographic_area_floor
+-- ★★★ P4 WALL — THE HOLOGRAPHIC AREA FLOOR IN MANIFEST FORM: holographic_area_floor [Phase5Master S ξ SvN
+-- (edgeArea/(4*ellP^2))] — SvN ≤ edgeArea / (4*ellP^2), i.e. S ≤ A/4ℓ_P² in its physical shape (fq_bound_of_phase5
+-- specialized to areaTerm = edgeArea/(4ℓ_P²)). edgeArea (= ⟨A_edge⟩ = A(∂R), the carried UV datum, never assigned)
+-- and ellP (Planck length) explicit; the 1/4ℓ_P² coefficient is now manifest. Axiom-free, relative only to the
+-- named Phase5Master certificate. The 1/4 ratio is derived (SakharovRatio); free scalar.
 -- ★★★ P4 WALL PHASE 6 — THE Phase5Master CERTIFICATE (DonaldSystem-pattern; GPT-5.5-pro round-2 strategy):
 -- class Phase5Master (S ξ) (SvN areaTerm : ℝ) bundles the JLMS balance SvN + cgpEntropy S ξ + remainder = areaTerm
 -- with remainder_nonneg (the Phase-5 trace's positivity obligation). phase5_master_ineq derives the master

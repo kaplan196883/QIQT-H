@@ -142,12 +142,16 @@ Phase5Master (S ξ) (SvN areaTerm : ℝ)` bundles the JLMS balance `SvN + cgpEnt
 `cgpEntropy_nonneg`).  So the holographic area floor is now a *theorem modulo a named, non-vacuous physics interface*
 (`Phase5Master`) — not an axiom.
 
+**✅ Manifest holographic form (`holographic_area_floor`):** specializing to `areaTerm = edgeArea/(4·ℓ_P²)`, the
+exported bound now reads literally **`SvN ≤ edgeArea/(4ℓ_P²)`** = `S ≤ A/4ℓ_P²` (the `1/4ℓ_P²` coefficient manifest
+in the statement; `edgeArea = ⟨A_edge⟩ = A(∂R)` the carried UV datum, never assigned; `ellP` the Planck length).
+
 **Remaining to instantiate Phase 6:** the Phase-5 dual-weight trace must produce a `Phase5Master` instance (a `≥ 0`
 remainder + the JLMS balance) — the genuine Mathlib-grade gap. The richer `DualWeightTrace` (τ, dual action θ,
 `τ∘θ_s = e^{−s}τ`, A_edge positivity, area_finite, first law, state_match) extends `Phase5Master`; and a
-`HolographicContext` (spec fields `S_vN = vonNeumannEntropy ρR`, `areaTerm = edgeArea/4ℓ_P²`, `ρR = boundary
-restriction`) makes the final `holographic_area_bound` faithful (the soundness layer). NOT blocked on the
-PVM/`PVM_of_selfAdjoint` (off the critical path).
+`HolographicContext` (spec fields `S_vN = vonNeumannEntropy ρR`, `ρR = boundary restriction`) would make the final
+statement faithful to the actual von Neumann entropy (the deeper soundness layer, needing Phase-5 objects). NOT
+blocked on the PVM/`PVM_of_selfAdjoint` (off the critical path).
 Per the same audit, do NOT block this on the PVM/`PVM_of_selfAdjoint` (off the critical path); `IsSelfAdjoint
 A_edge` (already proved) suffices to call the clock energy a genuine observable.
 
