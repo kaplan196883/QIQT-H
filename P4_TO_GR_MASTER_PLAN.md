@@ -463,6 +463,12 @@ item.** Never claim the `1/4`.
   `g` and `f` on `A` (the complex off-diagonal scalar spectral measure `μ_{g,f}`, the polarized form of the
   diagonal `μ_f` from `indMul_inner_self`). The matrix elements `⟪g, f(X) g'⟫` of every bounded function of
   position integrate against it. Generalizes the diagonal `indMul_inner_self` (`g=f`).
+  **Matrix elements under unitary conjugation + the momentum transition amplitude ✅** (`PVMConj.lean` +
+  `MomentumPVM.lean`, axiom-free, budget 0): `conj_E_inner` (general — `⟪g,(P.conj U).E A f⟫=⟪U⁻¹g,P.E A (U⁻¹f)⟫`,
+  the off-diagonal companion of `conj_scalarMeasure`, via `U` isometry + `inner_map_map`) and `momentumPVM_inner`
+  (instance — `⟪g, Ê(B) f⟫ = ∫_B conj((ℱ⁻¹g)(a))·(ℱ⁻¹f)(a) da`: the momentum-space transition amplitude is the
+  **position** amplitude of the inverse-Fourier states). Completes the position↔momentum off-diagonal
+  Born/amplitude picture (diagonal = `scalarMeasure`; off-diagonal = these matrix elements).
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.

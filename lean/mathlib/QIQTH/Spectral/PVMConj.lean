@@ -67,5 +67,19 @@ theorem conj_scalarMeasure (P : ProjectionValuedMeasure Ω H) (U : H ≃ₗᵢ[�
     (P.conj U).scalarMeasure x A = P.scalarMeasure (U.symm x) A := by
   rw [(P.conj U).scalarMeasure_apply x hA, P.scalarMeasure_apply (U.symm x) hA, norm_conj_E]
 
+/-- **Matrix elements transform covariantly under unitary conjugation:** the off-diagonal matrix element of the
+    conjugated spectral projection equals that of the original projection between `U⁻¹`-rotated states,
+    `⟪g, (P.conj U).E A f⟫ = ⟪U⁻¹ g, P.E A (U⁻¹ f)⟫` (`U` is a unitary, so it moves to the other slot as `U⁻¹`).
+    The off-diagonal companion of `conj_scalarMeasure`; for the Fourier case it gives the momentum-space
+    transition amplitude as the position amplitude of the inverse-transformed states. -/
+theorem conj_E_inner (P : ProjectionValuedMeasure Ω H) (U : H ≃ₗᵢ[ℂ] H) (A : Set Ω) (g f : H) :
+    inner ℂ g ((P.conj U).E A f) = inner ℂ (U.symm g) (P.E A (U.symm f)) := by
+  rw [conj_E]
+  simp only [ContinuousLinearMap.comp_apply, LinearIsometryEquiv.toContinuousLinearEquiv_symm,
+    ContinuousLinearEquiv.coe_coe, LinearIsometryEquiv.coe_toContinuousLinearEquiv,
+    LinearIsometryEquiv.coe_symm_toContinuousLinearEquiv]
+  rw [← LinearIsometryEquiv.inner_map_map U (U.symm g) (P.E A (U.symm f)),
+    LinearIsometryEquiv.apply_symm_apply]
+
 end ProjectionValuedMeasure
 end QIQTH.Spectral

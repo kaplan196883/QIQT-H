@@ -54,4 +54,18 @@ theorem momentumPVM_scalarMeasure (x : Lp (α := ℝ) ℂ 2) {A : Set ℝ} (hA :
             (MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ)).scalarMeasure x A from rfl,
     ProjectionValuedMeasure.conj_scalarMeasure _ _ _ hA, positionPVM_scalarMeasure _ hA]
 
+/-- **The momentum-space transition amplitude:** the off-diagonal matrix element of the momentum spectral
+    projection equals the *position* transition amplitude of the inverse-Fourier-transformed states,
+    `⟪g, Ê(B) f⟫ = ∫_B conj((ℱ⁻¹ g)(a))·(ℱ⁻¹ f)(a) da`. So the momentum matrix elements `⟪g, Ê(B) f⟫` are the
+    position integrals of `ℱ⁻¹ g, ℱ⁻¹ f` over `B` — the momentum-space Born amplitudes. -/
+theorem momentumPVM_inner (g f : Lp (α := ℝ) ℂ 2) {B : Set ℝ} (hB : MeasurableSet B) :
+    inner ℂ g (momentumPVM.E B f)
+      = ∫ a in B, (starRingEnd ℂ) ((MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ).symm g a)
+          * ((MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ).symm f) a ∂(volume : Measure ℝ) := by
+  rw [show momentumPVM.E B = ((positionPVM (α := ℝ) (μ := (volume : Measure ℝ))).conj
+        (MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ)).E B from rfl,
+    ProjectionValuedMeasure.conj_E_inner,
+    show (positionPVM (α := ℝ) (μ := (volume : Measure ℝ))).E B = indMul hB from posPVM_E_eq hB,
+    indMul_inner]
+
 end QIQTH.Spectral.Multiplication

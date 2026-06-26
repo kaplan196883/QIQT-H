@@ -1551,6 +1551,13 @@ namespace QIQTH.AxiomAudit
 -- position-space transition amplitude between g and f restricted to A (the complex off-diagonal scalar spectral
 -- measure μ_{g,f}, polarized form of the diagonal μ_f). Generalizes indMul_inner_self (g=f). Axiom-free; the matrix
 -- elements ⟪g,f(X)g'⟫ of every bounded function of position integrate against it.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.conj_E_inner
+#print axioms QIQTH.Spectral.Multiplication.momentumPVM_inner
+-- ★ MATRIX ELEMENTS UNDER UNITARY CONJUGATION + THE MOMENTUM TRANSITION AMPLITUDE: conj_E_inner (general —
+-- ⟪g,(P.conj U).E A f⟫=⟪U⁻¹g,P.E A (U⁻¹f)⟫, the off-diagonal companion of conj_scalarMeasure, via U isometry +
+-- inner_map_map) and momentumPVM_inner (instance — ⟪g,Ê(B)f⟫=∫_B conj((ℱ⁻¹g)(a))·(ℱ⁻¹f)(a) da: the momentum-space
+-- transition amplitude is the POSITION amplitude of the inverse-Fourier states). Axiom-free; completes the
+-- position↔momentum off-diagonal Born/amplitude picture (diagonal = scalarMeasure, off-diagonal = these).
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
