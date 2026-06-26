@@ -229,8 +229,11 @@ family, `Dense (stoneDomain U)` — a normalized `C^∞` bump (`ContDiffBump.nor
 `(−δ/2,δ/2)` with `δ` from strong continuity, `exists_delta_norm_sub_lt`) fed to the density assembly yields a
 Gårding vector `x_φ ∈ stoneDomain U` with `‖x_φ − x‖ < r`. The entire Gårding-density argument is now
 machine-checked, axiom-free. **This discharges the density hypothesis of `stoneGen_le_adjoint` — the last
-analytic input to essential self-adjointness.** Remaining (no new analytic content): wire density + symmetry ⟹
-`A ⊆ A†` ⟹ closure self-adjoint (Cayley/`Range(A±i)`) ⟹ Stone `U_t = exp(it Ā)`, for `X = A_edge`, `P`, `K`.
+analytic input to essential self-adjointness.** Also ✅ `stoneGen_subset_adjoint` — **the unconditional
+`A ⊆ A†`** (`stoneGen U ≤ (stoneGen U)†`), composing the conditional `stoneGen_le_adjoint` with
+`stoneDomain_dense`: the symmetric densely-defined generator is contained in its adjoint with no carried
+density hypothesis. Remaining (structural, no new analytic content): closure self-adjoint `Ā = Ā†`
+(Cayley/`Range(A±i)`-dense criterion; injectivity estimates already in Stone.lean) ⟹ Stone `U_t = exp(it Ā)`.
 
 ### Phase 4 (operators) — the modular Hamiltonian `K` as a symmetric operator ✅ (3rd & LAST C₀ group; trio complete)
 **Delivered (axiom-free, budget 0, `QIQTH/Spectral/ModularGenerator.lean`):** the Stone-instantiation pattern

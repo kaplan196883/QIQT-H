@@ -4970,6 +4970,12 @@ namespace QIQTH.AxiomAudit
 -- with ‖x_φ−x‖ ≤ (r/2)·1 < r. THE ENTIRE GÅRDING-DENSITY ARGUMENT IS NOW MACHINE-CHECKED, AXIOM-FREE. This
 -- discharges the density hypothesis of stoneGen_le_adjoint — the last analytic input to essential self-adjointness
 -- of the Stone generator (X=A_edge, P, K). Remaining: wire density+symmetry ⟹ IsSelfAdjoint closure ⟹ Stone (Cayley).
+#print axioms QIQTH.Spectral.stoneGen_subset_adjoint
+-- ★★ P4 WALL — A⊆A† UNCONDITIONAL: stoneGen_subset_adjoint — stoneGen U ≤ (stoneGen U)† for a contractive
+-- one-parameter UNITARY group, combining stoneGen_le_adjoint (the conditional A⊆A†, needing smooth-domain density)
+-- with stoneDomain_dense (which DISCHARGES that density). The symmetric densely-defined generator is contained in
+-- its LinearPMap adjoint — the textbook "symmetric operator" with the density hypothesis no longer carried.
+-- Axiom-free. Self-adjointness Ā=Ā† of the closure then follows from the Cayley/Range(A±i)-dense criterion.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via

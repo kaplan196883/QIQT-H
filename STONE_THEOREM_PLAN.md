@@ -268,9 +268,14 @@ smooth-domain vector within `ε` — i.e. **density of the smooth domain**.
 (`ContDiffBump.normed`, `ℝ → ℂ`-coerced, supported in `(−δ/2, δ/2)`) fed to `exists_mem_stoneDomain_norm_sub_le`
 yields a Gårding vector `x_φ ∈ stoneDomain U` with `‖x_φ − x‖ < r`. **This discharges the density hypothesis of
 `stoneGen_le_adjoint` — the last analytic input to essential self-adjointness.**
-**Remaining (no new analytic content):** wire density + symmetry (`stoneGen_le_adjoint` with `hdense :=
-stoneDomain_dense`) ⟹ `stoneGen U ⊆ (stoneGen U)†`; closure is self-adjoint (`Ā = Ā†`) via the Cayley/`Range(A±i)`
-criterion ⟹ Stone returns `U_t = exp(it Ā)`, for all three generators (`X = A_edge`, `P`, `K`).
+Also ✅ `stoneGen_subset_adjoint` — **the unconditional `A ⊆ A†`**: `stoneGen U ≤ (stoneGen U)†` for a
+contractive one-parameter unitary group, composing `stoneGen_le_adjoint` (conditional on density) with
+`stoneDomain_dense` (which discharges it). The symmetric densely-defined generator is now contained in its
+`LinearPMap` adjoint *with no carried hypotheses* beyond the C₀-unitary-group structure — the textbook
+"symmetric operator" statement, machine-checked.
+**Remaining (structural, no new analytic content):** self-adjointness `Ā = Ā†` of the closure via the
+Cayley/`Range(A ± i)`-dense criterion (the Cayley estimates `‖(A±i)x‖²=‖Ax‖²+‖x‖²` for injectivity are in
+`Spectral/Stone.lean`) ⟹ Stone returns `U_t = exp(it Ā)`, for `X = A_edge`, `P`, `K`.
 
 ## 3. Dependency graph
 ```

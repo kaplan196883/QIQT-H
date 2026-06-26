@@ -357,4 +357,24 @@ theorem stoneDomain_dense (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + 
     _ = r / 2 := by rw [hnorm1, mul_one]
     _ < r := by linarith
 
+section SelfAdjoint
+variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
+
+/-- **★★ The Stone generator is contained in its adjoint, unconditionally:** `stoneGen U ⊆ (stoneGen U)†`
+    for a contractive one-parameter *unitary* group. This combines `stoneGen_le_adjoint` (the conditional
+    `A ⊆ A†`, needing density of the smooth domain) with `stoneDomain_dense` (which now *discharges* that
+    density). The symmetric densely-defined generator is contained in its `LinearPMap` adjoint — the textbook
+    "symmetric operator" statement, with the density hypothesis no longer carried. Self-adjointness `Ā = Ā†`
+    of the closure then follows from the Cayley/`Range(A ± i)`-dense criterion (the remaining structural step;
+    the Cayley estimates `‖(A±i)x‖² = ‖Ax‖²+‖x‖²` giving injectivity are already in `Spectral/Stone.lean`). -/
+theorem stoneGen_subset_adjoint (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖)
+    (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    stoneGen U ≤ (stoneGen U).adjoint :=
+  stoneGen_le_adjoint U hgrp hU0 hUinner (stoneDomain_dense U hgrp hU0 hUbd hSC)
+
+end SelfAdjoint
+
 end QIQTH.Spectral
