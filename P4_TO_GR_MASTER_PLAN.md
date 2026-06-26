@@ -495,6 +495,11 @@ item.** Never claim the `1/4`.
   momentum-probability distribution is the measure with density `|ℱ⁻¹x|²` (the momentum-space `|x̂|²`), the Fourier
   image of the position density (`conj_scalarMeasure_eq` + `positionPVM_scalarMeasure_eq_withDensity`). Both
   observables now have the **measure-level** Born density. The Weyl-system Born picture on L²(ℝ) is fully symmetric.
+  **Plancherel / conservation of total probability ✅** (`MomentumPVM.lean`, axiom-free, budget 0):
+  `fourier_integral_norm_sq` — `∫ ‖(ℱ⁻¹x)(a)‖² da = ‖x‖²`. The Fourier transform is an `L²` isometry, so the
+  momentum density `|ℱ⁻¹x|²` integrates to the same total mass `‖x‖²` as the position density `|x|²` — the Born
+  **total probability is conserved** between the position and momentum representations
+  (`norm_sq_eq_integral` + `LinearIsometryEquiv.norm_map`).
   Original next line: Fourier-Plancherel
   conjugation `ℱ : L²→L²` carries `positionPVM` to the **momentum PVM**, whose generator is the translation/boost
   generator (`WedgeKMSFlux #5`) — gated, beyond the PVM infrastructure, on the physical wedge inputs #1/#3/#4.

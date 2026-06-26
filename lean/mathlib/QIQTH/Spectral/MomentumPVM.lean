@@ -94,4 +94,12 @@ theorem momentumPVM_scalarMeasure_eq_withDensity (x : Lp (α := ℝ) ℂ 2) :
             (MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ)).scalarMeasure x from rfl,
     ProjectionValuedMeasure.conj_scalarMeasure_eq, positionPVM_scalarMeasure_eq_withDensity]
 
+/-- **Plancherel / conservation of total probability:** the total momentum probability equals the total
+    position probability, `∫ ‖(ℱ⁻¹ x)(a)‖² da = ‖x‖²`. The Fourier transform is an `L²` isometry, so the
+    momentum-space density `|ℱ⁻¹x|²` integrates to the same total mass `‖x‖²` as the position density `|x|²` —
+    the Born total-probability is conserved between position and momentum representations. -/
+theorem fourier_integral_norm_sq (x : Lp (α := ℝ) ℂ 2) :
+    ∫ a, ‖((MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ).symm x) a‖ ^ 2 ∂(volume : Measure ℝ) = ‖x‖ ^ 2 := by
+  rw [← norm_sq_eq_integral, LinearIsometryEquiv.norm_map]
+
 end QIQTH.Spectral.Multiplication

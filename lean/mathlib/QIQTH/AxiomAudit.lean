@@ -1583,6 +1583,11 @@ namespace QIQTH.AxiomAudit
 -- scalarMeasure x = volume.withDensity (a ↦ ‖(ℱ⁻¹x)(a)‖²): the momentum-probability distribution of x is the
 -- measure with density |ℱ⁻¹x|² (the momentum-space |x̂|²), the Fourier image of the position density (conj_scalarMeasure_eq
 -- + positionPVM_scalarMeasure_eq_withDensity). Axiom-free. Both observables now have the measure-level Born density.
+#print axioms QIQTH.Spectral.Multiplication.fourier_integral_norm_sq
+-- ★ PLANCHEREL / CONSERVATION OF TOTAL PROBABILITY: fourier_integral_norm_sq — ∫‖(ℱ⁻¹x)(a)‖² da = ‖x‖². The
+-- Fourier transform is an L² isometry, so the momentum density |ℱ⁻¹x|² integrates to the same total mass ‖x‖² as
+-- the position density |x|² — the Born total-probability is conserved between the position and momentum
+-- representations (norm_sq_eq_integral + LinearIsometryEquiv.norm_map). Axiom-free.
 
 -- Phase 1.3 (bounded spectral theorem): scalar-measure construction for PVM_of_selfAdjoint
 #print axioms QIQTH.SpectralTheorem.re_inner_cfc_nonneg
