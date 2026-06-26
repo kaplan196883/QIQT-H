@@ -223,9 +223,14 @@ Also ✅ `mollify_apply_flow_cov` — the orbit in **differentiation-ready form*
 (change of variables `u = s + t`, `integral_add_right_eq_self`). Now the `s`-dependence sits *entirely* in the
 smooth scalar `φ(u − s)` — the `U_u x` factor is `s`-independent — so the orbit is set up for differentiation
 under the integral (`d/ds|₀ = −∫ φ'(u) U_u x du`).
-**Remaining (the genuine analytic frontier):** the differentiation step itself (`x_φ ∈ stoneDomain U`, via
-`hasDerivAt_integral_of_dominated_loc_of_deriv_le` — needs a constructed integrable dominating bound
-`supₛ |φ'(u−s)|·‖x‖`) + the density `{x_φ}` dense (approximate identity `φ → δ`) — built on this foundation.
+Also ✅ `mollify_integrand_hasDerivAt` — the **calculus core** of the differentiation step (the `h_diff`
+hypothesis of `hasDerivAt_integral_of_dominated_loc_of_deriv_le`): for `φ ∈ C¹`, `σ ↦ φ(u−σ) • U_u x` has
+derivative `−φ'(u−σ₀) • U_u x` at `σ₀` (chain rule `HasDerivAt.scomp` on the inner `u−σ`, then `smul_const` by
+`U_u x`). The pointwise derivative is now in hand.
+**Remaining (the genuine analytic frontier):** *applying* `hasDerivAt_integral_of_dominated_loc_of_deriv_le` —
+i.e. constructing the integrable dominating bound `supₛ |φ'(u−s)|·‖x‖` (compactly supported in `u`) + the
+AEStronglyMeasurable bookkeeping — to conclude `HasDerivAt (s ↦ U_s x_φ) (−x_{φ'}) 0`, hence `x_φ ∈ stoneDomain U`;
+then the density `{x_φ}` dense (approximate identity `φ → δ`).
 
 ## 3. Dependency graph
 ```

@@ -71,4 +71,16 @@ theorem mollify_apply_flow_cov (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U 
   refine integral_congr_ae (Filter.Eventually.of_forall fun t => ?_)
   simp only [add_sub_cancel_right, add_comm s t]
 
+/-- **The parametric integrand is differentiable in the shift parameter:** for `φ ∈ C¹` (witnessed by `φ'`),
+    `σ ↦ φ(u − σ) • U_u x` has derivative `−φ'(u − σ₀) • U_u x` at `σ₀` (chain rule on the inner `u − σ`,
+    then `smul` by the constant `U_u x`). This is the pointwise `h_diff` hypothesis of
+    `hasDerivAt_integral_of_dominated_loc_of_deriv_le` — the calculus core of differentiating `U_s x_φ` (in the
+    `mollify_apply_flow_cov` form) under the integral, which places `x_φ` in the smooth domain. -/
+theorem mollify_integrand_hasDerivAt (φ φ' : ℝ → ℂ) (hφ' : ∀ y, HasDerivAt φ (φ' y) y)
+    (U : ℝ → (H →L[ℂ] H)) (x : H) (u σ₀ : ℝ) :
+    HasDerivAt (fun σ => φ (u - σ) • U u x) ((-φ' (u - σ₀)) • U u x) σ₀ := by
+  have hg : HasDerivAt (fun σ => u - σ) (-1 : ℝ) σ₀ := (hasDerivAt_id σ₀).const_sub u
+  have hcomp := (hφ' (u - σ₀)).scomp σ₀ hg
+  simpa [Function.comp_def] using hcomp.smul_const (U u x)
+
 end QIQTH.Spectral

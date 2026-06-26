@@ -4911,6 +4911,11 @@ namespace QIQTH.AxiomAudit
 -- mollify_apply_flow_cov — the orbit in DIFFERENTIATION-READY form: U_s x_φ = ∫ φ(u−s) U_u x du (change of
 -- variables u=s+t, integral_add_right_eq_self). Now the s-dependence sits ENTIRELY in the smooth scalar φ(u−s);
 -- the U_u x factor is s-independent ⟹ ready for differentiation under the integral (d/ds|₀ = −∫ φ'(u) U_u x du).
+#print axioms QIQTH.Spectral.mollify_integrand_hasDerivAt
+-- mollify_integrand_hasDerivAt — the CALCULUS CORE of the differentiation step (the h_diff hypothesis of
+-- hasDerivAt_integral_of_dominated_loc_of_deriv_le): for φ∈C¹, σ↦φ(u−σ)•U_u x has derivative −φ'(u−σ₀)•U_u x at σ₀
+-- (chain rule HasDerivAt.scomp on the inner u−σ, then HasDerivAt.smul_const by U_u x). Axiom-free. (Remaining: the
+-- integrable dominating bound + measurability bookkeeping to APPLY the integral lemma = the carried analytic gap.)
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via
