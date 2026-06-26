@@ -5086,6 +5086,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cfcReExpectationCLM
 #print axioms QIQTH.Spectral.realCfcReExpectationCLM
 #print axioms QIQTH.Spectral.realCfcReExpectation_nonneg
+#print axioms QIQTH.Spectral.cfcPLM
+-- ★★★ P4 WALL — THE POSITIVE LINEAR FUNCTIONAL C(σV,ℝ)→ₚ[ℝ]ℝ (the RMK input): cfcPLM [Nontrivial H] —
+-- g↦re⟪x,cfc g V x⟫ bundled as a PositiveLinearMap, toLinearMap := (realCfcReExpectationCLM x).toLinearMap,
+-- monotone' from realCfcReExpectation_nonneg (linear map monotone iff 0≤y⟹0≤f y, via f b−f a=f(b−a)≥0). This is
+-- THE input RealRMK.rieszMeasure consumes: transported to C_c(σV,ℝ) (compact spectrum) it yields the scalar
+-- spectral measure μ_x of V with ∫g dμ_x = re⟪x,cfc g V x⟫. Axiom-free. Remaining: C_c transport + rieszMeasure ⟹ μ_x,
+-- then the PVM assembly (the genuine Mathlib gap).
 -- ★★ P4 WALL — RMK FUNCTIONAL IS MONOTONE/POSITIVE (the →ₚ[ℝ] monotone' field): realCfcReExpectation_nonneg
 -- [Nontrivial H] — 0 ≤ g ⟹ 0 ≤ realCfcReExpectationCLM x g for g : C(σ(V),ℝ). Bridge cfcL ha (↑∘g) = cfcHom ha (↑∘g)
 -- = cfc (Function.extend Subtype.val (↑∘g) 0) V (cfcL_apply + cfcHom_eq_cfc_extend); the extend is ContinuousOn σ(V)

@@ -420,11 +420,14 @@ realCfcReExpectationCLM x g` for `g : C(σ(V),ℝ)`. Bridge `cfcL ha (↑∘g) =
 `cayley_cfc_re_inner_nonneg_of_nonneg` applies. **This is the `→o`/`monotone'` field** — with the ℝ-linearity
 (`realCfcReExpectationCLM` is a CLM), `realCfcReExpectationCLM x` upgrades to a `C(σ(V),ℝ) →ₚ[ℝ] ℝ` positive linear
 functional.
-**Next:** bundle `realCfcReExpectationCLM x` + `realCfcReExpectation_nonneg` into a `PositiveLinearMap` (the
-`→ₚ[ℝ]` structure = LinearMap + this monotonicity), transport `C(σV,ℝ) ≃ C_c(σV,ℝ)` (`continuousMapEquiv`, compact
-spectrum), apply `RealRMK.rieszMeasure` ⟹ `μ_x` (with the Borel/locally-compact instances on `σ(V)`); then assemble
-`{μ_x}` into a circle-PVM `E` (the Mathlib gap — no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` has
-its own), transport to `A = ∫ λ dE` ⟹ Stone.
+Also ✅ `cfcPLM` `[Nontrivial H]` — **the scalar spectral functional as a `C(σ(V), ℝ) →ₚ[ℝ] ℝ` positive linear
+functional**: `toLinearMap := (realCfcReExpectationCLM x).toLinearMap`, `monotone'` from
+`realCfcReExpectation_nonneg` (a linear map is monotone iff `0 ≤ y ⟹ 0 ≤ f y`, via `f b − f a = f (b − a) ≥ 0`).
+**This is THE input `RealRMK.rieszMeasure` consumes.**
+**Next:** transport `cfcPLM` along `C(σV,ℝ) ≃ C_c(σV,ℝ)` (`continuousMapEquiv`, compact spectrum) to a
+`C_c(σV,ℝ) →ₚ[ℝ] ℝ`, apply `RealRMK.rieszMeasure` ⟹ the scalar spectral measure `μ_x` (with the Borel /
+locally-compact instances on `σ(V)`); then assemble `{μ_x}` into a circle-PVM `E` (the Mathlib gap — no
+`ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` has its own), transport to `A = ∫ λ dE` ⟹ Stone.
 **Next multi-fire sub-construction (the operator → PVM keystone, RMK + cfc supported):** the scalar spectral
 measures `μ_x` of `V` (positive functional `f ↦ re⟨x, cfc f V x⟩` → `RealRMK.rieszMeasure`), then their assembly
 into a circle-PVM `E` with `V = ∫ z dE`, then transport through inverse Cayley to `A = ∫ λ dE` ⟹ Stone.

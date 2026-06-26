@@ -1282,6 +1282,32 @@ theorem realCfcReExpectation_nonneg [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
     exact ⟨by rw [Complex.ofReal_re]; exact (ContinuousMap.le_def.mp hg) ⟨z, hz⟩,
       Complex.ofReal_im _⟩
 
+/-- **★★★ The scalar spectral functional as a positive linear functional** `C(σ(V), ℝ) →ₚ[ℝ] ℝ`,
+    `g ↦ re⟪x, cfc g V x⟫`. Bundles the ℝ-linear `realCfcReExpectationCLM x` with the monotonicity
+    `realCfcReExpectation_nonneg` (a linear map is monotone iff `0 ≤ y ⟹ 0 ≤ f y`, via `f b − f a = f (b − a) ≥ 0`).
+    This is **the input the Riesz–Markov–Kakutani theorem consumes**: transported to `C_c(σ(V), ℝ)` (compact
+    spectrum) and fed to `RealRMK.rieszMeasure`, it yields the **scalar spectral measure `μ_x`** of `V` with
+    `∫ g dμ_x = re⟪x, cfc g V x⟫` (total mass `‖x‖²`, first moment `re⟪x, V x⟫`). -/
+noncomputable def cfcPLM [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℝ) →ₚ[ℝ] ℝ where
+  toLinearMap := (realCfcReExpectationCLM U hgrp hU0 hUinner hUbd hSC x).toLinearMap
+  monotone' := by
+    intro a b hab
+    have h := realCfcReExpectation_nonneg U hgrp hU0 hUinner hUbd hSC x (b - a) (sub_nonneg.mpr hab)
+    rw [map_sub] at h
+    exact sub_nonneg.mp h
+
+@[simp] theorem cfcPLM_apply [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H)
+    (g : C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℝ)) :
+    cfcPLM U hgrp hU0 hUinner hUbd hSC x g
+      = realCfcReExpectationCLM U hgrp hU0 hUinner hUbd hSC x g := rfl
+
 end SelfAdjoint
 
 end QIQTH.Spectral

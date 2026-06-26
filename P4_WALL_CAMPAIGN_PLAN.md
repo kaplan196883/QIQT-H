@@ -307,8 +307,11 @@ the functional is now a concrete `C(σV,ℝ)→L[ℝ]ℝ`).
 Also ✅ `realCfcReExpectation_nonneg` `[Nontrivial H]` (**functional monotone/positive** — `0≤g ⟹ 0≤Λ_x g` via
 `cfcL=cfcHom=cfc(extend)` bridge + `cayley_cfc_re_inner_nonneg_of_nonneg`; the `→o`/`monotone'` field): with
 ℝ-linearity, `realCfcReExpectationCLM x` is a `C(σV,ℝ)→ₚ[ℝ]ℝ` positive linear functional.
-**Next:** bundle into a `PositiveLinearMap` (LinearMap + this monotonicity) → `C(σV,ℝ)≃C_c(σV,ℝ)` → `rieszMeasure`
-⟹ μ_x → assemble circle-PVM `E` (Mathlib gap) → transport to `A=∫λ dE` ⟹ Stone.
+Also ✅ `cfcPLM` `[Nontrivial H]` (**the `C(σV,ℝ)→ₚ[ℝ]ℝ` positive linear functional** — `g↦re⟪x,cfc g V x⟫` bundled
+as a `PositiveLinearMap`: `toLinearMap` = `(realCfcReExpectationCLM x).toLinearMap`, `monotone'` from
+`realCfcReExpectation_nonneg`). **THE input `RealRMK.rieszMeasure` consumes.**
+**Next:** `C(σV,ℝ)≃C_c(σV,ℝ)` transport → `rieszMeasure` ⟹ μ_x → assemble circle-PVM `E` (Mathlib gap) → transport
+to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
 `E` (`V=∫z dE`) → transport via inverse Cayley to `A=∫λ dE` ⟹ Stone. The bounded-PVM remains the genuine gap.
 **Remaining (Mathlib gap):** the **Borel/PVM** functional calculus on `S¹` for `V` (Mathlib has *continuous* FC
