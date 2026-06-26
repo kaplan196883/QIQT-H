@@ -26,13 +26,13 @@ links — see the [**theorem browser**](/browser). Regenerate with
 
 `qiqt_gr_freefield_complete` · *capstone* —  there is $\Lambda$ such that
 
-$$ a \cdot T({x})\,\mu\,\nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
+$$ a \cdot \href{/browser#d-qiqth-curvature-kgstress}{T({x})\,\mu\,\nu} = \href{/browser#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
 
 *assuming*
 
-- `hKG` &nbsp; $(\Box {\varphi})({x}) = {m}^{2} \cdot \varphi\,x$
+- `hKG` &nbsp; $\href{/browser#d-qiqth-curvature-boxfield}{(\Box {\varphi})({x})} = {m}^{2} \cdot \varphi\,x$
 - `hcap` &nbsp; $\eta \cdot A({x},{v},{0}) = \log\,(\#\,\iota)$
-- `hbound` &nbsp; $({g\,x})({v},{v}) = 0 \to \text{for }t\text{ near }0,\; S({p\,x\,v\,t}) \le \eta \cdot A({x},{v},{t})$
+- `hbound` &nbsp; $\href{/browser#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 \to \text{for }t\text{ near }0,\; \href{/browser#d-qiqth-branchledger-shannon}{S({p\,x\,v\,t})} \le \eta \cdot A({x},{v},{t})$
 
 <small>plus 25 routine conditions (17 regularity, 7 setup, 1 typeclass) — full list in the per-track PDF.</small>
 
@@ -40,14 +40,14 @@ $$ a \cdot T({x})\,\mu\,\nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}
 
 `qiqt_gr_ppwave_showcase` · *spine* —  there is $\Lambda$ such that
 
-$$ a \cdot T({x})\,\mu\,\nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g^{\mathrm{pp}}\,H\,x\,\mu\,\nu $$
+$$ a \cdot \href{/browser#d-qiqth-curvature-kgstress}{T({x})\,\mu\,\nu} = \href{/browser#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g^{\mathrm{pp}}\,H\,x\,\mu\,\nu $$
 
 *assuming*
 
 - `hCH` &nbsp; $({H})\in C^{\infty}$
-- `hKG` &nbsp; $(\Box {\varphi})({x}) = {m}^{2} \cdot \varphi\,x$
+- `hKG` &nbsp; $\href{/browser#d-qiqth-curvature-boxfield}{(\Box {\varphi})({x})} = {m}^{2} \cdot \varphi\,x$
 - `hcap` &nbsp; $\eta \cdot c = \log\,(\#\,\iota)$
-- `hcov` &nbsp; $(\nabla {W\,x\,v})_{{p}}{}^{{q}}({y}) = 0$
+- `hcov` &nbsp; $\href{/browser#d-qiqth-curvature-covderivvec}{(\nabla {W\,x\,v})_{{p}}{}^{{q}}({y})} = 0$
 
 <small>plus 14 routine conditions (9 regularity, 4 setup, 1 typeclass) — full list in the per-track PDF.</small>
 
@@ -55,21 +55,21 @@ $$ a \cdot T({x})\,\mu\,\nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g^{\mathrm{pp}
 
 `qiqt_gr_freefield_gaussian` · *spine* —  there is $\Lambda$ such that
 
-$$ a \cdot T({x})\,\mu\,\nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
+$$ a \cdot \href{/browser#d-qiqth-curvature-kgstress}{T({x})\,\mu\,\nu} = \href{/browser#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
 
 *assuming*
 
-when $ ({g\,x})({v},{v}) = 0 $&nbsp;:
+when $ \href{/browser#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 $&nbsp;:
 
 - `hbound` &nbsp; $\text{for }t\text{ near }0,\; \mathrm{Sf}\,x\,v\,t \le \eta \cdot A({x},{v},{t})$
 - `hsat` &nbsp; $\mathrm{Sf}\,x\,v\,0 = \eta \cdot A({x},{v},{0})$
 - `hDnn` &nbsp; $\forall (t : \mathbb{R}), 0 \le \mathrm{KE}({x},{v},{t}) - \mathrm{Sf}\,x\,v\,t$
 - `hD0` &nbsp; $\mathrm{KE}({x},{v},{0}) - \mathrm{Sf}\,x\,v\,0 = 0$
-- `hWarea` &nbsp; $\dot{A}({x},{v}) = -\sum_{\nu} W\,x\,v\,x\,\nu \cdot \partial_{{\nu}}({\lambda y \mapsto \theta({y})})({x})$
+- `hWarea` &nbsp; $\dot{A}({x},{v}) = -\sum_{\nu} W\,x\,v\,x\,\nu \cdot \partial_{{\nu}}({\lambda y \mapsto \href{/browser#d-qiqth-curvature-expansion}{\theta({y})}})({x})$
 
 and
 
-- `hKG` &nbsp; $(\Box {\varphi})({x}) = {m}^{2} \cdot \varphi\,x$
+- `hKG` &nbsp; $\href{/browser#d-qiqth-curvature-boxfield}{(\Box {\varphi})({x})} = {m}^{2} \cdot \varphi\,x$
 
 <small>plus 21 routine conditions (14 regularity, 7 setup) — full list in the per-track PDF.</small>
 
@@ -77,18 +77,18 @@ and
 
 `qiqt_gr_freefield_thermo` · *spine* —  there is $\Lambda$ such that
 
-$$ a \cdot T({x})\,\mu\,\nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
+$$ a \cdot \href{/browser#d-qiqth-curvature-kgstress}{T({x})\,\mu\,\nu} = \href{/browser#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
 
 *assuming*
 
-when $ ({g\,x})({v},{v}) = 0 $&nbsp;:
+when $ \href{/browser#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 $&nbsp;:
 
-- `hbound` &nbsp; $\text{for }t\text{ near }0,\; S({p\,x\,v\,t}) \le \eta \cdot A({x},{v},{t})$
-- `hTkk` &nbsp; $2 \cdot \pi / \hbar \cdot {(\sum_{b} v\,b \cdot \partial_{{b}}({\varphi})({x}))}^{2} = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{ff}\,x\,v\,\theta) \cdot \mathrm{ff}^{\prime}\,x\,v\,\theta)).\mathrm{im}$
+- `hbound` &nbsp; $\text{for }t\text{ near }0,\; \href{/browser#d-qiqth-branchledger-shannon}{S({p\,x\,v\,t})} \le \eta \cdot A({x},{v},{t})$
+- `hTkk` &nbsp; $2 \cdot \pi / \hbar \cdot {(\sum_{b} v\,b \cdot \href{/browser#d-qiqth-curvature-pd}{\partial_{{b}}({\varphi})({x})})}^{2} = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{ff}\,x\,v\,\theta) \cdot \mathrm{ff}^{\prime}\,x\,v\,\theta)).\mathrm{im}$
 
 and
 
-- `hKG` &nbsp; $(\Box {\varphi})({x}) = {m}^{2} \cdot \varphi\,x$
+- `hKG` &nbsp; $\href{/browser#d-qiqth-curvature-boxfield}{(\Box {\varphi})({x})} = {m}^{2} \cdot \varphi\,x$
 - `hcap` &nbsp; $\eta \cdot A({x},{v},{0}) = \log\,(\#\,\iota)$
 
 <small>plus 29 routine conditions (21 regularity, 7 setup, 1 typeclass) — full list in the per-track PDF.</small>
@@ -97,21 +97,21 @@ and
 
 `qiqt_gr_freefield_geom` · *spine* —  there is $\Lambda$ such that
 
-$$ a \cdot T({x})\,\mu\,\nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
+$$ a \cdot \href{/browser#d-qiqth-curvature-kgstress}{T({x})\,\mu\,\nu} = \href{/browser#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
 
 *assuming*
 
-when $ ({g\,x})({v},{v}) = 0 $&nbsp;:
+when $ \href{/browser#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 $&nbsp;:
 
 - `hbound` &nbsp; $\text{for }t\text{ near }0,\; \mathrm{Sf}\,x\,v\,t \le \eta \cdot A({x},{v},{t})$
 - `hsat` &nbsp; $\mathrm{Sf}\,x\,v\,0 = \eta \cdot A({x},{v},{0})$
 - `hDnn` &nbsp; $\forall (t : \mathbb{R}), 0 \le \mathrm{KE}({x},{v},{t}) - \mathrm{Sf}\,x\,v\,t$
 - `hD0` &nbsp; $\mathrm{KE}({x},{v},{0}) - \mathrm{Sf}\,x\,v\,0 = 0$
-- `hTkk` &nbsp; $2 \cdot \pi / \hbar \cdot {(\sum_{b} v\,b \cdot \partial_{{b}}({\varphi})({x}))}^{2} = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{ff}\,x\,v\,\theta) \cdot \mathrm{ff}^{\prime}\,x\,v\,\theta)).\mathrm{im}$
+- `hTkk` &nbsp; $2 \cdot \pi / \hbar \cdot {(\sum_{b} v\,b \cdot \href{/browser#d-qiqth-curvature-pd}{\partial_{{b}}({\varphi})({x})})}^{2} = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{ff}\,x\,v\,\theta) \cdot \mathrm{ff}^{\prime}\,x\,v\,\theta)).\mathrm{im}$
 
 and
 
-- `hKG` &nbsp; $(\Box {\varphi})({x}) = {m}^{2} \cdot \varphi\,x$
+- `hKG` &nbsp; $\href{/browser#d-qiqth-curvature-boxfield}{(\Box {\varphi})({x})} = {m}^{2} \cdot \varphi\,x$
 
 <small>plus 25 routine conditions (18 regularity, 7 setup) — full list in the per-track PDF.</small>
 
@@ -119,22 +119,22 @@ and
 
 `qiqt_gr_freefield_nullEnergy` · *spine* —  there is $\Lambda$ such that
 
-$$ a \cdot T({x})\,\mu\,\nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
+$$ a \cdot \href{/browser#d-qiqth-curvature-kgstress}{T({x})\,\mu\,\nu} = \href{/browser#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
 
 *assuming*
 
-when $ ({g\,x})({v},{v}) = 0 $&nbsp;:
+when $ \href{/browser#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 $&nbsp;:
 
 - `hbound` &nbsp; $\text{for }t\text{ near }0,\; \mathrm{Sf}\,x\,v\,t \le \eta \cdot A({x},{v},{t})$
 - `hsat` &nbsp; $\mathrm{Sf}\,x\,v\,0 = \eta \cdot A({x},{v},{0})$
 - `hDnn` &nbsp; $\forall (t : \mathbb{R}), 0 \le \mathrm{KE}({x},{v},{t}) - \mathrm{Sf}\,x\,v\,t$
 - `hD0` &nbsp; $\mathrm{KE}({x},{v},{0}) - \mathrm{Sf}\,x\,v\,0 = 0$
-- `hTkk` &nbsp; $2 \cdot \pi / \hbar \cdot {(\sum_{b} v\,b \cdot \partial_{{b}}({\varphi})({x}))}^{2} = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{ff}\,x\,v\,\theta) \cdot \mathrm{ff}^{\prime}\,x\,v\,\theta)).\mathrm{im}$
-- `hWarea` &nbsp; $\dot{A}({x},{v}) = -\sum_{\nu} W\,x\,v\,x\,\nu \cdot \partial_{{\nu}}({\lambda y \mapsto \theta({y})})({x})$
+- `hTkk` &nbsp; $2 \cdot \pi / \hbar \cdot {(\sum_{b} v\,b \cdot \href{/browser#d-qiqth-curvature-pd}{\partial_{{b}}({\varphi})({x})})}^{2} = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{ff}\,x\,v\,\theta) \cdot \mathrm{ff}^{\prime}\,x\,v\,\theta)).\mathrm{im}$
+- `hWarea` &nbsp; $\dot{A}({x},{v}) = -\sum_{\nu} W\,x\,v\,x\,\nu \cdot \partial_{{\nu}}({\lambda y \mapsto \href{/browser#d-qiqth-curvature-expansion}{\theta({y})}})({x})$
 
 and
 
-- `hKG` &nbsp; $(\Box {\varphi})({x}) = {m}^{2} \cdot \varphi\,x$
+- `hKG` &nbsp; $\href{/browser#d-qiqth-curvature-boxfield}{(\Box {\varphi})({x})} = {m}^{2} \cdot \varphi\,x$
 
 <small>plus 25 routine conditions (18 regularity, 7 setup) — full list in the per-track PDF.</small>
 
@@ -142,22 +142,22 @@ and
 
 `qiqt_gr_freefield_localized'` · *spine* —  there is $\Lambda$ such that
 
-$$ a \cdot T({x})\,\mu\,\nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
+$$ a \cdot \href{/browser#d-qiqth-curvature-kgstress}{T({x})\,\mu\,\nu} = \href{/browser#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
 
 *assuming*
 
-when $ ({g\,x})({v},{v}) = 0 $&nbsp;:
+when $ \href{/browser#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 $&nbsp;:
 
 - `hbound` &nbsp; $\text{for }t\text{ near }0,\; \mathrm{Sf}\,x\,v\,t \le \eta \cdot A({x},{v},{t})$
 - `hsat` &nbsp; $\mathrm{Sf}\,x\,v\,0 = \eta \cdot A({x},{v},{0})$
 - `hDnn` &nbsp; $\forall (t : \mathbb{R}), 0 \le \mathrm{KE}({x},{v},{t}) - \mathrm{Sf}\,x\,v\,t$
 - `hD0` &nbsp; $\mathrm{KE}({x},{v},{0}) - \mathrm{Sf}\,x\,v\,0 = 0$
-- `hTkk` &nbsp; $2 \cdot \pi / \hbar \cdot ({T({x})})({v},{v}) = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{ff}\,x\,v\,\theta) \cdot \mathrm{ff}^{\prime}\,x\,v\,\theta)).\mathrm{im}$
-- `hWarea` &nbsp; $\dot{A}({x},{v}) = -\sum_{\nu} W\,x\,v\,x\,\nu \cdot \partial_{{\nu}}({\lambda y \mapsto \theta({y})})({x})$
+- `hTkk` &nbsp; $2 \cdot \pi / \hbar \cdot ({\href{/browser#d-qiqth-curvature-kgstress}{T({x})}})({v},{v}) = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{ff}\,x\,v\,\theta) \cdot \mathrm{ff}^{\prime}\,x\,v\,\theta)).\mathrm{im}$
+- `hWarea` &nbsp; $\dot{A}({x},{v}) = -\sum_{\nu} W\,x\,v\,x\,\nu \cdot \partial_{{\nu}}({\lambda y \mapsto \href{/browser#d-qiqth-curvature-expansion}{\theta({y})}})({x})$
 
 and
 
-- `hKG` &nbsp; $(\Box {\varphi})({x}) = {m}^{2} \cdot \varphi\,x$
+- `hKG` &nbsp; $\href{/browser#d-qiqth-curvature-boxfield}{(\Box {\varphi})({x})} = {m}^{2} \cdot \varphi\,x$
 
 <small>plus 25 routine conditions (18 regularity, 7 setup) — full list in the per-track PDF.</small>
 
@@ -165,22 +165,22 @@ and
 
 `qiqt_gr_freefield_localized` · *spine* —  there is $\Lambda$ such that
 
-$$ a \cdot T({x})\,\mu\,\nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
+$$ a \cdot \href{/browser#d-qiqth-curvature-kgstress}{T({x})\,\mu\,\nu} = \href{/browser#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
 
 *assuming*
 
-when $ ({g\,x})({v},{v}) = 0 $&nbsp;:
+when $ \href{/browser#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 $&nbsp;:
 
 - `hbound` &nbsp; $\text{for }t\text{ near }0,\; \mathrm{Sf}\,x\,v\,t \le \eta \cdot A({x},{v},{t})$
 - `hsat` &nbsp; $\mathrm{Sf}\,x\,v\,0 = \eta \cdot A({x},{v},{0})$
 - `hDnn` &nbsp; $\forall (t : \mathbb{R}), 0 \le \mathrm{KE}({x},{v},{t}) - \mathrm{Sf}\,x\,v\,t$
 - `hD0` &nbsp; $\mathrm{KE}({x},{v},{0}) - \mathrm{Sf}\,x\,v\,0 = 0$
-- `hTkk` &nbsp; $2 \cdot \pi / \hbar \cdot ({T({x})})({v},{v}) = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{ff}\,x\,v\,\theta) \cdot \mathrm{ff}^{\prime}\,x\,v\,\theta)).\mathrm{im}$
-- `hFocus` &nbsp; $\dot{A}({x},{v}) = ({\lambda i j \mapsto R_{{i}{j}}({x})})({v},{v})$
+- `hTkk` &nbsp; $2 \cdot \pi / \hbar \cdot ({\href{/browser#d-qiqth-curvature-kgstress}{T({x})}})({v},{v}) = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{ff}\,x\,v\,\theta) \cdot \mathrm{ff}^{\prime}\,x\,v\,\theta)).\mathrm{im}$
+- `hFocus` &nbsp; $\dot{A}({x},{v}) = ({\lambda i j \mapsto \href{/browser#d-qiqth-curvature-ricci}{R_{{i}{j}}({x})}})({v},{v})$
 
 and
 
-- `hKG` &nbsp; $(\Box {\varphi})({x}) = {m}^{2} \cdot \varphi\,x$
+- `hKG` &nbsp; $\href{/browser#d-qiqth-curvature-boxfield}{(\Box {\varphi})({x})} = {m}^{2} \cdot \varphi\,x$
 
 <small>plus 21 routine conditions (18 regularity, 3 setup) — full list in the per-track PDF.</small>
 
@@ -188,23 +188,23 @@ and
 
 `qiqt_gr_freefield` · *spine* —  there is $\Lambda$ such that
 
-$$ a \cdot T({x})\,\mu\,\nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
+$$ a \cdot \href{/browser#d-qiqth-curvature-kgstress}{T({x})\,\mu\,\nu} = \href{/browser#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
 
 *assuming*
 
-when $ ({g\,x})({v},{v}) = 0 $&nbsp;:
+when $ \href{/browser#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 $&nbsp;:
 
 - `hbound` &nbsp; $\text{for }t\text{ near }0,\; \mathrm{Sf}\,x\,v\,t \le \eta \cdot A({x},{v},{t})$
 - `hsat` &nbsp; $\mathrm{Sf}\,x\,v\,0 = \eta \cdot A({x},{v},{0})$
 - `hDnn` &nbsp; $\forall (t : \mathbb{R}), 0 \le \mathrm{KE}({x},{v},{t}) - \mathrm{Sf}\,x\,v\,t$
 - `hD0` &nbsp; $\mathrm{KE}({x},{v},{0}) - \mathrm{Sf}\,x\,v\,0 = 0$
-- `hTkk` &nbsp; $2 \cdot \pi / \hbar \cdot ({T({x})})({v},{v}) = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{ff}\,x\,v\,\theta) \cdot \mathrm{ff}^{\prime}\,x\,v\,\theta)).\mathrm{im}$
-- `hbridge` &nbsp; $({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,(\mathrm{ff}\,x\,v)\,\cdots )\,((\mathrm{modUnitary}\,(\mathrm{niceWedgeStandardSubspace}\,(\mathrm{mw}\,x\,v)\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,(\mathrm{ff}\,x\,v)\,\cdots ))})'({0})={i \cdot (\dot{K}({x},{v}))}$
-- `hFocus` &nbsp; $\dot{A}({x},{v}) = ({\lambda i j \mapsto R_{{i}{j}}({x})})({v},{v})$
+- `hTkk` &nbsp; $2 \cdot \pi / \hbar \cdot ({\href{/browser#d-qiqth-curvature-kgstress}{T({x})}})({v},{v}) = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{ff}\,x\,v\,\theta) \cdot \mathrm{ff}^{\prime}\,x\,v\,\theta)).\mathrm{im}$
+- `hbridge` &nbsp; $({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,(\mathrm{ff}\,x\,v)\,\cdots )\,((\href{/browser#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,(\href{/browser#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathrm{niceWedgeStandardSubspace}}\,(\mathrm{mw}\,x\,v)\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,(\mathrm{ff}\,x\,v)\,\cdots ))})'({0})={i \cdot (\dot{K}({x},{v}))}$
+- `hFocus` &nbsp; $\dot{A}({x},{v}) = ({\lambda i j \mapsto \href{/browser#d-qiqth-curvature-ricci}{R_{{i}{j}}({x})}})({v},{v})$
 
 and
 
-- `hKG` &nbsp; $(\Box {\varphi})({x}) = {m}^{2} \cdot \varphi\,x$
+- `hKG` &nbsp; $\href{/browser#d-qiqth-curvature-boxfield}{(\Box {\varphi})({x})} = {m}^{2} \cdot \varphi\,x$
 
 <small>plus 21 routine conditions (18 regularity, 3 setup) — full list in the per-track PDF.</small>
 
@@ -212,22 +212,22 @@ and
 
 `qiqt_gr_explicit_kg` · *spine* —  there is $\Lambda$ such that
 
-$$ a \cdot T({x})\,\mu\,\nu = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
+$$ a \cdot \href{/browser#d-qiqth-curvature-kgstress}{T({x})\,\mu\,\nu} = \href{/browser#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
 
 *assuming*
 
-when $ ({g\,x})({v},{v}) = 0 $&nbsp;:
+when $ \href{/browser#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 $&nbsp;:
 
 - `hbound` &nbsp; $\text{for }t\text{ near }0,\; \mathrm{Sf}\,x\,v\,t \le \eta \cdot A({x},{v},{t})$
 - `hsat` &nbsp; $\mathrm{Sf}\,x\,v\,0 = \eta \cdot A({x},{v},{0})$
 - `hDnn` &nbsp; $\forall (t : \mathbb{R}), 0 \le \mathrm{KE}({x},{v},{t}) - \mathrm{Sf}\,x\,v\,t$
 - `hD0` &nbsp; $\mathrm{KE}({x},{v},{0}) - \mathrm{Sf}\,x\,v\,0 = 0$
-- `hFocus` &nbsp; $\dot{A}({x},{v}) = ({\lambda i j \mapsto R_{{i}{j}}({x})})({v},{v})$
+- `hFocus` &nbsp; $\dot{A}({x},{v}) = ({\lambda i j \mapsto \href{/browser#d-qiqth-curvature-ricci}{R_{{i}{j}}({x})}})({v},{v})$
 
 and
 
-- `hKG` &nbsp; $(\Box {\varphi})({x}) = {m}^{2} \cdot \varphi\,x$
-- `hKMS` &nbsp; $\mathrm{WedgeKMSFlux\_complete}\,g\,(\mathrm{kgStress}\,m\,\varphi\,g\,\mathrm{gi})\,\mathrm{kd}\,\hbar$
+- `hKG` &nbsp; $\href{/browser#d-qiqth-curvature-boxfield}{(\Box {\varphi})({x})} = {m}^{2} \cdot \varphi\,x$
+- `hKMS` &nbsp; $\mathrm{WedgeKMSFlux\_complete}\,g\,(\href{/browser#d-qiqth-curvature-kgstress}{\mathrm{kgStress}}\,m\,\varphi\,g\,\mathrm{gi})\,\mathrm{kd}\,\hbar$
 
 <small>plus 15 routine conditions (12 regularity, 3 setup) — full list in the per-track PDF.</small>
 
@@ -235,18 +235,18 @@ and
 
 `qiqt_gr_from_flux_complete` · *spine* —  there is $\Lambda$ such that
 
-$$ a \cdot T_{{\mu}{\nu}}({x}) = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
+$$ a \cdot T_{{\mu}{\nu}}({x}) = \href{/browser#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
 
 *assuming*
 
-when $ ({g\,x})({v},{v}) = 0 $&nbsp;:
+when $ \href{/browser#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 $&nbsp;:
 
 - `hbound` &nbsp; $\text{for }t\text{ near }0,\; \mathrm{Sf}\,x\,v\,t \le \eta \cdot A({x},{v},{t})$
 - `hsat` &nbsp; $\mathrm{Sf}\,x\,v\,0 = \eta \cdot A({x},{v},{0})$
 - `hDnn` &nbsp; $\forall (t : \mathbb{R}), 0 \le \mathrm{KE}({x},{v},{t}) - \mathrm{Sf}\,x\,v\,t$
 - `hD0` &nbsp; $\mathrm{KE}({x},{v},{0}) - \mathrm{Sf}\,x\,v\,0 = 0$
-- `hflux` &nbsp; $\dot{K}({x},{v}) = 2 \cdot \pi / \hbar \cdot ({T\,x})({v},{v})$
-- `hFocus` &nbsp; $\dot{A}({x},{v}) = ({\lambda i j \mapsto R_{{i}{j}}({x})})({v},{v})$
+- `hflux` &nbsp; $\dot{K}({x},{v}) = 2 \cdot \pi / \hbar \cdot \href{/browser#d-qiqth-einsteineos-bl}{({T\,x})({v},{v})}$
+- `hFocus` &nbsp; $\dot{A}({x},{v}) = ({\lambda i j \mapsto \href{/browser#d-qiqth-curvature-ricci}{R_{{i}{j}}({x})}})({v},{v})$
 
 <small>plus 17 routine conditions (14 regularity, 3 setup) — full list in the per-track PDF.</small>
 
@@ -254,18 +254,18 @@ when $ ({g\,x})({v},{v}) = 0 $&nbsp;:
 
 `qiqt_bekenstein_gives_gr` · *spine* —  there is $\Lambda$ such that
 
-$$ a \cdot T_{{\mu}{\nu}}({x}) = G_{{\mu}{\nu}}({x}) + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
+$$ a \cdot T_{{\mu}{\nu}}({x}) = \href{/browser#d-qiqth-curvature-einsteintensor}{G_{{\mu}{\nu}}({x})} + \Lambda \cdot g_{{\mu}{\nu}}({x}) $$
 
 *assuming*
 
-when $ ({g\,x})({v},{v}) = 0 $&nbsp;:
+when $ \href{/browser#d-qiqth-einsteineos-bl}{({g\,x})({v},{v})} = 0 $&nbsp;:
 
 - `hbound` &nbsp; $\text{for }t\text{ near }0,\; S({x},{v},{t}) \le \eta \cdot A({x},{v},{t})$
 - `hsat` &nbsp; $S({x},{v},{0}) = \eta \cdot A({x},{v},{0})$
 - `hDnn` &nbsp; $\forall (t : \mathbb{R}), 0 \le \mathrm{KE}({x},{v},{t}) - S({x},{v},{t})$
 - `hD0` &nbsp; $\mathrm{KE}({x},{v},{0}) - S({x},{v},{0}) = 0$
-- `hFlux` &nbsp; $\dot{K}({x},{v}) = 2 \cdot \pi / \hbar \cdot ({T\,x})({v},{v})$
-- `hFocus` &nbsp; $\dot{A}({x},{v}) = ({\lambda i j \mapsto R_{{i}{j}}({x})})({v},{v})$
+- `hFlux` &nbsp; $\dot{K}({x},{v}) = 2 \cdot \pi / \hbar \cdot \href{/browser#d-qiqth-einsteineos-bl}{({T\,x})({v},{v})}$
+- `hFocus` &nbsp; $\dot{A}({x},{v}) = ({\lambda i j \mapsto \href{/browser#d-qiqth-curvature-ricci}{R_{{i}{j}}({x})}})({v},{v})$
 
 <small>plus 17 routine conditions (14 regularity, 3 setup) — full list in the per-track PDF.</small>
 
@@ -273,7 +273,7 @@ when $ ({g\,x})({v},{v}) = 0 $&nbsp;:
 
 `oneParticleBW_niceWedge_unconditional` · *spine* —  we have
 
-$$ \mathrm{modUnitary}\,(\mathrm{niceWedgeStandardSubspace}\,m\,\cdots \,\cdots )\,t = V\,t $$
+$$ \href{/browser#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,(\href{/browser#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathrm{niceWedgeStandardSubspace}}\,m\,\cdots \,\cdots )\,t = V\,t $$
 
 <small>plus 2 routine conditions (2 regularity) — full list in the per-track PDF.</small>
 
@@ -281,7 +281,7 @@ $$ \mathrm{modUnitary}\,(\mathrm{niceWedgeStandardSubspace}\,m\,\cdots \,\cdots 
 
 `freeField_oneParticle_hFlux` · *spine* —  we have
 
-$$ ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\mathrm{modUnitary}\,(\mathrm{niceWedgeStandardSubspace}\,m\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,f\,\mathrm{hf2}))})'({0})={i \cdot (2 \cdot \pi / \hbar \cdot T_{kk})} $$
+$$ ({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\href{/browser#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,(\href{/browser#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathrm{niceWedgeStandardSubspace}}\,m\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,f\,\mathrm{hf2}))})'({0})={i \cdot (2 \cdot \pi / \hbar \cdot T_{kk})} $$
 
 *assuming*
 
@@ -298,7 +298,7 @@ $$ \mathrm{kd} = 2 \cdot \pi / \hbar \cdot T_{kk} $$
 *assuming*
 
 - `hTkk` &nbsp; $2 \cdot \pi / \hbar \cdot T_{kk} = (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(f\,\theta) \cdot f^{\prime}\,\theta)).\mathrm{im}$
-- `hbridge` &nbsp; $({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\mathrm{modUnitary}\,(\mathrm{niceWedgeStandardSubspace}\,m\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,f\,\mathrm{hf2}))})'({0})={i \cdot \mathrm{kd}}$
+- `hbridge` &nbsp; $({\lambda t \mapsto \mathrm{inner}\,\mathbb{C}\,(\mathrm{toLp}\,f\,\mathrm{hf2})\,((\href{/browser#d-qiqth-standardsubspacemodular-modunitary}{\mathrm{modUnitary}}\,(\href{/browser#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathrm{niceWedgeStandardSubspace}}\,m\,\cdots \,\cdots )\,t)\,(\mathrm{toLp}\,f\,\mathrm{hf2}))})'({0})={i \cdot \mathrm{kd}}$
 
 <small>plus 6 routine conditions (6 regularity) — full list in the per-track PDF.</small>
 

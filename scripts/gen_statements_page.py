@@ -11,7 +11,7 @@ import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from lean_track import latex_tree, latexify, probe  # noqa: E402
+from lean_track import browser, latex_tree, latexify, probe  # noqa: E402
 
 REPO = HERE.parent
 TRACKS = [
@@ -42,6 +42,12 @@ links — see the [**theorem browser**](/browser). Regenerate with
 
 
 def main():
+    # in-formula links point into the browser page (which has the full declaration set),
+    # so clicking a symbol on the clean statements page jumps to its entry there.
+    closure_path = REPO / "reports" / "browser" / "closure.json"
+    if closure_path.exists():
+        names = [d["name"] for d in json.loads(closure_path.read_text(encoding="utf-8"))]
+        latex_tree._LINKS = {n: f"/browser#{browser._slug(n)}" for n in names}
     body, total = [FRONTMATTER], 0
     for tid, subtitle in TRACKS:
         cfg = probe.load_config(REPO / "tracks" / f"{tid}.toml")
