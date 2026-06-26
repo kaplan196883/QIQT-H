@@ -386,6 +386,11 @@ Also ✅ `cayley_cfc_sub_norm_sq_integral` `[Nontrivial H]` (**★★★ the ful
 integral form** — `‖cfc f V x − cfc g V x‖² = ∫ ω, ‖f ω.1 − g ω.1‖² dμ_x`; composes `cayley_cfc_sub_norm_sq` with
 `integral_re_cfc_ofReal` at `r z=‖f z−g z‖²`, via `RCLike.conj_mul`. The CFC↔measure dictionary is now COMPLETE:
 `n↦cfc(e^{it·φₙ})V x` Cauchy ⟺ `∫‖e^{itφₙ}−e^{itφₘ}‖²dμ_x→0` — defines `U_t=exp(itA)` as a strong limit, no PVM).
+Also ✅ `cayley_cfc_norm_sq_integral` `[Nontrivial H]` (**Parseval / L²-isometry, integral form, f-version** —
+`‖cfc f V x‖²=∫‖f ω.1‖²dμ_x`; `f↦cfc f V x` is an L²(μ_x)→H isometry on continuous functions).
+Also ✅ `cayley_cfc_tendsto_zero_of_integral` `[Nontrivial H]` (**the L² convergence engine** — `∫‖F n ω.1‖²dμ_x→0`
+⟹ `cfc(F n)V x→0` strongly; the convergence half of the Cauchy/DCT machine turning L²(μ_x)-limits into strong operator
+limits — the device that kills the Cayley atom `μ_x({1})=0` and assembles `U_t=exp(itA)`, no PVM).
 **Next:** bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

@@ -1681,6 +1681,57 @@ theorem cayley_cfc_sub_norm_sq_integral [Nontrivial H] (U : ℝ → (H →L[ℂ]
   exact integral_re_cfc_ofReal U hgrp hU0 hUinner hUbd hSC (fun z => ‖f z - g z‖ ^ 2)
     ((hf.sub hg).norm.pow 2) x
 
+/-- **★★ The Parseval / L²-isometry identity in honest integral form:** `‖cfc f V x‖² = ∫ ω, ‖f ω.1‖² dμ_x`
+    for `f` continuous on `σ(V)`.  The `f`-form companion of `cayley_cfc_sub_norm_sq_integral` (the `g = 0` case,
+    proved directly): composes the operator-side L²-isometry `cayley_cfc_norm_sq` with the function-form bridge
+    `integral_re_cfc_ofReal` at `r z = ‖f z‖²`, via the pointwise ℂ-identity `star w · w = ↑‖w‖²`
+    (`RCLike.conj_mul`).  This is *the* Parseval identity the Stone/Borel-FC development repeatedly targets: the
+    functional calculus `f ↦ cfc f V x` is an **L²(μ_x) → H isometry** on continuous functions — the core of the
+    strong-limit Stone exponential `U_t = exp(it A)` (GPT-5.5-pro's endorsed route, 2026-06-27).  Axiom-free. -/
+theorem cayley_cfc_norm_sq_integral [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (f : ℂ → ℂ) (hf : ContinuousOn f (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (x : H) :
+    ‖cfc f (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x‖ ^ 2
+      = ∫ ω, ‖f ω.1‖ ^ 2 ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+  have hfun : (fun z => star (f z) * f z) = (fun z => ((‖f z‖ ^ 2 : ℝ) : ℂ)) := by
+    funext z
+    rw [← starRingEnd_apply, RCLike.conj_mul]
+    norm_cast
+  rw [cayley_cfc_norm_sq U hgrp hU0 hUinner hUbd hSC f hf x, hfun]
+  exact integral_re_cfc_ofReal U hgrp hU0 hUinner hUbd hSC (fun z => ‖f z‖ ^ 2) (hf.norm.pow 2) x
+
+/-- **★★ The L² convergence engine for the strong-limit Stone exponential:** if a sequence of functions `F n`
+    (each continuous on `σ(V)`) has `∫ ‖F n ω.1‖² dμ_x → 0`, then `cfc (F n) V x → 0` strongly in `H`.  Immediate
+    from the Parseval identity `‖cfc (F n) V x‖² = ∫ ‖F n ω.1‖² dμ_x` (`cayley_cfc_norm_sq_integral`):
+    `‖cfc(F n)V x‖² → 0` ⟹ `‖cfc(F n)V x‖ = √(‖·‖²) → 0` ⟹ `cfc(F n)V x → 0`.  This is the convergence half of the
+    Cauchy/dominated-convergence machine that turns `L²(μ_x)`-limits of continuous functions into **strong limits
+    of operators** — the device that (with rational cutoffs) kills the Cayley atom `μ_x({1}) = 0` and assembles
+    `U_t = exp(it A)` as a strong limit, with NO projection-valued measure (GPT-5.5-pro route).  Axiom-free. -/
+theorem cayley_cfc_tendsto_zero_of_integral [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (F : ℕ → ℂ → ℂ)
+    (hF : ∀ n, ContinuousOn (F n) (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (x : H)
+    (hint : Filter.Tendsto
+      (fun n => ∫ ω, ‖F n ω.1‖ ^ 2 ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+      Filter.atTop (nhds 0)) :
+    Filter.Tendsto (fun n => cfc (F n) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)
+      Filter.atTop (nhds 0) := by
+  have heq : (fun n => ∫ ω, ‖F n ω.1‖ ^ 2 ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+      = (fun n => ‖cfc (F n) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x‖ ^ 2) := by
+    funext n
+    exact (cayley_cfc_norm_sq_integral U hgrp hU0 hUinner hUbd hSC (F n) (hF n) x).symm
+  rw [heq] at hint
+  rw [tendsto_zero_iff_norm_tendsto_zero]
+  have hsqrt := (Real.continuous_sqrt.tendsto 0).comp hint
+  simp only [Function.comp_def, Real.sqrt_zero] at hsqrt
+  exact hsqrt.congr (fun n => Real.sqrt_sq (norm_nonneg _))
+
 end SelfAdjoint
 
 end QIQTH.Spectral

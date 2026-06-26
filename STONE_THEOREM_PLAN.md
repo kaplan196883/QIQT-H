@@ -506,6 +506,16 @@ the CFC↔measure dictionary: composes `cayley_cfc_sub_norm_sq` (operator side) 
 exponential `U_t = exp(it A)` as a strong limit without a PVM (GPT-5.5-pro's endorsed route). The L²-side dictionary
 is now complete; the strong-limit construction can proceed entirely in `∫·dμ_x`. **Next:** `μ_x({1})=0` via rational
 cutoffs `ψ_N(ω)=(1+(N+1)‖ω−1‖²)⁻¹` (off the P4 critical path per GPT — Phase 5 dual-weight trace is P4's true gap).
+Also ✅ `cayley_cfc_norm_sq_integral` `[Nontrivial H]` — **the Parseval / L²-isometry identity (integral form, f-version)**:
+`‖cfc f V x‖² = ∫ ω, ‖f ω.1‖² dμ_x` for `f` continuous on `σ(V)` (the `g=0` companion of the sub-version; composes
+`cayley_cfc_norm_sq` with `integral_re_cfc_ofReal` at `r z=‖f z‖²`). This is *the* Parseval identity: `f ↦ cfc f V x`
+is an **L²(μ_x) → H isometry** on continuous functions.
+Also ✅ `cayley_cfc_tendsto_zero_of_integral` `[Nontrivial H]` — **the L² convergence engine**: `∫‖F n ω.1‖² dμ_x → 0`
+⟹ `cfc(F n) V x → 0` strongly in `H` (from Parseval, then `‖·‖=√(‖·‖²)→0` via `tendsto_zero_iff_norm_tendsto_zero`
++ `Real.sqrt_sq`). The convergence half of the Cauchy/DCT machine that turns `L²(μ_x)`-limits of continuous functions
+into **strong operator limits** — the device that (with the rational cutoffs) kills the Cayley atom `μ_x({1})=0` and
+assembles `U_t=exp(itA)` as a strong limit, no PVM. **Next:** the cutoff sequence `ψ_N` + its DCT limits
+(`∫ψ_N dμ_x → μ_x({1})`, `∫|(ω−1)ψ_N|² → 0`) → `μ_x({1})=0` via `cayley_one_sub_injective`.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

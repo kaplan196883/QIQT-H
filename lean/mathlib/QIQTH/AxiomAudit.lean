@@ -5115,6 +5115,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayley_cfc_norm_sq
 #print axioms QIQTH.Spectral.cayley_cfc_sub_norm_sq
 #print axioms QIQTH.Spectral.cayley_cfc_sub_norm_sq_integral
+#print axioms QIQTH.Spectral.cayley_cfc_norm_sq_integral
+#print axioms QIQTH.Spectral.cayley_cfc_tendsto_zero_of_integral
+-- ★★ P4 WALL — THE PARSEVAL / L²-ISOMETRY (integral form, f-version): cayley_cfc_norm_sq_integral [Nontrivial H]
+-- — ‖cfc f V x‖² = ∫ ω, ‖f ω.1‖² dμ_x for f continuous on σ(V). The g=0 companion of cayley_cfc_sub_norm_sq_integral
+-- (composes cayley_cfc_norm_sq with integral_re_cfc_ofReal at r z=‖f z‖², via star w·w=↑‖w‖²/RCLike.conj_mul). THE
+-- Parseval identity: f↦cfc f V x is an L²(μ_x)→H isometry on continuous functions. Axiom-free.
+-- ★★ P4 WALL — THE L² CONVERGENCE ENGINE (strong-limit Stone exp): cayley_cfc_tendsto_zero_of_integral
+-- [Nontrivial H] — ∫‖F n ω.1‖² dμ_x → 0 ⟹ cfc(F n) V x → 0 strongly. From Parseval ‖cfc(F n)V x‖²=∫‖F n‖²dμ_x
+-- (‖·‖²→0 ⟹ ‖·‖=√(‖·‖²)→0 ⟹ →0; tendsto_zero_iff_norm_tendsto_zero + Real.sqrt_sq). The convergence half of the
+-- Cauchy/DCT machine turning L²(μ_x)-limits of continuous fns into strong operator limits — kills the Cayley atom
+-- μ_x({1})=0 and assembles U_t=exp(itA), no PVM (GPT-5.5-pro route 2026-06-27). Axiom-free.
 -- ★★★ P4 WALL — THE FULL PARSEVAL / L²-DISTANCE IDENTITY (integral form): cayley_cfc_sub_norm_sq_integral
 -- [Nontrivial H] — ‖cfc f V x − cfc g V x‖² = ∫ ω, ‖f ω.1 − g ω.1‖² dμ_x for f,g continuous on σ(V). Capstone of the
 -- CFC↔measure dictionary: composes cayley_cfc_sub_norm_sq (operator side: re⟪x, cfc(star(f−g)·(f−g))V x⟫) with the
