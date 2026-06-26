@@ -13,32 +13,39 @@ from . import latexify
 # atoms that are whole words rather than single glyphs
 ATOM_WORDS = {
     "fun": r"\lambda ", "=>": r" \mapsto ", "↦": r" \mapsto ",
-    "↑": "", "⇑": "", "↥": "", "⁻¹": "^{-1}", ":": " : ",
+    "↑": "", "⇑": "", "↥": "", "⁻¹": "^{-1}", "⁻¹'": "^{-1}", ":": " : ",
 }
+_SPACED = {"→": r" \to ", ",": ", ", "∧": r" \wedge ", "∨": r" \vee "}
 
 
 def tex_atom(s):
     if s in ATOM_WORDS:
         return ATOM_WORDS[s]
-    out = []
-    _SPACED = {"→": r" \to ", ",": ", ", "∧": r" \wedge ", "∨": r" \vee "}
-    for ch in s:
+    out, i, n = [], 0, len(s)
+    while i < n:
+        ch = s[i]
         if ch in _SPACED:
-            out.append(_SPACED[ch])
+            out.append(_SPACED[ch]); i += 1
         elif ch == "*":
-            out.append(r"\cdot")
+            out.append(r"\cdot"); i += 1
         elif ch in "{}":                 # literal set-builder braces -> \{ \}
-            out.append("\\" + ch)
+            out.append("\\" + ch); i += 1
+        elif ch in latexify.SUPERS:      # collapse a RUN of superscripts (⁻¹ -> ^{-1})
+            run = ""
+            while i < n and s[i] in latexify.SUPERS:
+                run += latexify.SUPERS[s[i]]; i += 1
+            out.append("^{" + run + "}")
         elif ch in latexify.SUBS:
-            out.append("_{" + latexify.SUBS[ch] + "}")
-        elif ch in latexify.SUPERS:
-            out.append("^{" + latexify.SUPERS[ch] + "}")
+            run = ""
+            while i < n and s[i] in latexify.SUBS:
+                run += latexify.SUBS[s[i]]; i += 1
+            out.append("_{" + run + "}")
         elif ch in latexify.SYMBOLS:
-            out.append(latexify.SYMBOLS[ch])
+            out.append(latexify.SYMBOLS[ch]); i += 1
         elif ch in latexify.GREEK:
-            out.append(latexify.GREEK[ch])
+            out.append(latexify.GREEK[ch]); i += 1
         else:
-            out.append(ch)
+            out.append(ch); i += 1
     return "".join(out)
 
 
@@ -193,6 +200,9 @@ def _eventually(A, notation):
 def tex_of_tree(node, notation=None):
     notation = {**latexify.DEFAULT_NOTATION, **(notation or {})}
     tex = render(node, notation)
+    # a prime ' immediately after a braced super/subscript is a second superscript
+    # to KaTeX ("Double superscript"): insert an empty group to separate them.
+    tex = tex.replace("}'", "}{}'")
     # safety net: drop any glyph that escaped every map so output always compiles,
     # recording it (shared with latexify) for review.
     leftover = sorted({ch for ch in tex if ord(ch) > 0x7F})

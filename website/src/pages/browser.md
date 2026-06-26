@@ -1492,7 +1492,7 @@ $$
 *thm* · [BoostKMS:801 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L801)  
 
 $$
-0 \le m \to \forall \{f g : V \to \mathbb{C}\}, \mathrm{Continuous}\,f \to \mathrm{HasCompactSupport}\,f \to \mathrm{Continuous}\,g \to \mathrm{HasCompactSupport}\,g \to \forall \{\delta : \mathbb{R}\}, 0 \le \delta \to (\forall (x : V), f\,x \ne 0 \to \delta \le x\,1 - x\,0 \wedge \delta \le x\,1 + x\,0) \to (\forall (x : V), g\,x \ne 0 \to \delta \le x\,1 - x\,0 \wedge \delta \le x\,1 + x\,0) \to \forall (\mathrm{Rc} : \mathbb{R}), \mathrm{ContinuousOn}\,(\mathrm{kmsFunCut}\,m\,f\,g\,\mathrm{Rc})\,(\mathrm{im} ^{-}^{1}' \mathrm{Icc}\,(-1)\,0)
+0 \le m \to \forall \{f g : V \to \mathbb{C}\}, \mathrm{Continuous}\,f \to \mathrm{HasCompactSupport}\,f \to \mathrm{Continuous}\,g \to \mathrm{HasCompactSupport}\,g \to \forall \{\delta : \mathbb{R}\}, 0 \le \delta \to (\forall (x : V), f\,x \ne 0 \to \delta \le x\,1 - x\,0 \wedge \delta \le x\,1 + x\,0) \to (\forall (x : V), g\,x \ne 0 \to \delta \le x\,1 - x\,0 \wedge \delta \le x\,1 + x\,0) \to \forall (\mathrm{Rc} : \mathbb{R}), \mathrm{ContinuousOn}\,(\mathrm{kmsFunCut}\,m\,f\,g\,\mathrm{Rc})\,(\mathrm{im} ^{-1}{}' \mathrm{Icc}\,(-1)\,0)
 $$
 
 **uses** [`continuous_kmsIntegrand_in_theta`](#d-qiqth-fock-boostkms-continuous-kmsintegrand-in-theta) [`differentiable_kmsIntegrand`](#d-qiqth-fock-boostkms-differentiable-kmsintegrand) [`kmsFunCut`](#d-qiqth-fock-boostkms-kmsfuncut) [`V`](#d-qiqth-fock-localization-v) [`KrepCont`](#d-qiqth-fock-wedgeanalyticity-krepcont) [`norm_KrepCont_le_const`](#d-qiqth-fock-wedgeanalyticity-norm-krepcont-le-const)
@@ -1516,7 +1516,7 @@ $$
 *thm* · [BoostKMS:790 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L790)  
 
 $$
-0 < m \to \forall \{f g : V \to \mathbb{C}\}, \mathrm{Continuous}\,f \to \mathrm{HasCompactSupport}\,f \to \mathrm{Continuous}\,g \to \mathrm{HasCompactSupport}\,g \to \forall \{\delta : \mathbb{R}\}, 0 < \delta \to (\forall (x : V), f\,x \ne 0 \to \delta \le x\,1 - x\,0 \wedge \delta \le x\,1 + x\,0) \to (\forall (x : V), g\,x \ne 0 \to \delta \le x\,1 - x\,0 \wedge \delta \le x\,1 + x\,0) \to \forall (\mathrm{Rc} : \mathbb{R}), \mathrm{DifferentiableOn}\,\mathbb{C}\,(\mathrm{kmsFunCut}\,m\,f\,g\,\mathrm{Rc})\,(\mathrm{im} ^{-}^{1}' \mathrm{Ioo}\,(-1)\,0)
+0 < m \to \forall \{f g : V \to \mathbb{C}\}, \mathrm{Continuous}\,f \to \mathrm{HasCompactSupport}\,f \to \mathrm{Continuous}\,g \to \mathrm{HasCompactSupport}\,g \to \forall \{\delta : \mathbb{R}\}, 0 < \delta \to (\forall (x : V), f\,x \ne 0 \to \delta \le x\,1 - x\,0 \wedge \delta \le x\,1 + x\,0) \to (\forall (x : V), g\,x \ne 0 \to \delta \le x\,1 - x\,0 \wedge \delta \le x\,1 + x\,0) \to \forall (\mathrm{Rc} : \mathbb{R}), \mathrm{DifferentiableOn}\,\mathbb{C}\,(\mathrm{kmsFunCut}\,m\,f\,g\,\mathrm{Rc})\,(\mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-1)\,0)
 $$
 
 **uses** [`kmsFunCut`](#d-qiqth-fock-boostkms-kmsfuncut) [`kmsFunCut_differentiableAt`](#d-qiqth-fock-boostkms-kmsfuncut-differentiableat) [`V`](#d-qiqth-fock-localization-v)
@@ -1612,7 +1612,7 @@ $$
 *thm* · [BoostKMS:559 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L559)  
 
 $$
-0 < m \to \forall \{f g : V \to \mathbb{C}\}, \mathrm{Continuous}\,f \to \mathrm{HasCompactSupport}\,f \to \mathrm{Continuous}\,g \to \mathrm{HasCompactSupport}\,g \to \forall \{\delta : \mathbb{R}\}, 0 < \delta \to (\forall (x : V), f\,x \ne 0 \to \delta \le x\,1 - x\,0 \wedge \delta \le x\,1 + x\,0) \to (\forall (x : V), g\,x \ne 0 \to \delta \le x\,1 - x\,0 \wedge \delta \le x\,1 + x\,0) \to \mathrm{DifferentiableOn}\,\mathbb{C}\,(\mathrm{kmsFun}\,m\,f\,g)\,(\mathrm{im} ^{-}^{1}' \mathrm{Ioo}\,(-1)\,0)
+0 < m \to \forall \{f g : V \to \mathbb{C}\}, \mathrm{Continuous}\,f \to \mathrm{HasCompactSupport}\,f \to \mathrm{Continuous}\,g \to \mathrm{HasCompactSupport}\,g \to \forall \{\delta : \mathbb{R}\}, 0 < \delta \to (\forall (x : V), f\,x \ne 0 \to \delta \le x\,1 - x\,0 \wedge \delta \le x\,1 + x\,0) \to (\forall (x : V), g\,x \ne 0 \to \delta \le x\,1 - x\,0 \wedge \delta \le x\,1 + x\,0) \to \mathrm{DifferentiableOn}\,\mathbb{C}\,(\mathrm{kmsFun}\,m\,f\,g)\,(\mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-1)\,0)
 $$
 
 **uses** [`kmsFun`](#d-qiqth-fock-boostkms-kmsfun) [`kmsFun_differentiableAt`](#d-qiqth-fock-boostkms-kmsfun-differentiableat) [`V`](#d-qiqth-fock-localization-v)
@@ -1936,7 +1936,7 @@ $$
 *thm* · [BoostKMS:937 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L937)  
 
 $$
-\mathrm{DifferentiableOn}\,\mathbb{C}\,\Phi\,(\mathrm{im} ^{-}^{1}' \mathrm{Ioo}\,(-1)\,0) \to \mathrm{ContinuousOn}\,\Phi\,(\mathrm{im} ^{-}^{1}' \mathrm{Icc}\,(-1)\,0) \to \mathrm{BddAbove}\,(\mathrm{norm} \circ \Phi '' \mathrm{im} ^{-}^{1}' \mathrm{Icc}\,(-1)\,0) \to (\forall (t : \mathbb{R}), \|\Phi\,t\| \le b) \to (\forall (t : \mathbb{R}), \|\Phi\,(t - i)\| \le b) \to \forall \{z : \mathbb{C}\}, -1 \le z.\mathrm{im} \to z.\mathrm{im} \le 0 \to \|\Phi\,z\| \le b
+\mathrm{DifferentiableOn}\,\mathbb{C}\,\Phi\,(\mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-1)\,0) \to \mathrm{ContinuousOn}\,\Phi\,(\mathrm{im} ^{-1}{}' \mathrm{Icc}\,(-1)\,0) \to \mathrm{BddAbove}\,(\mathrm{norm} \circ \Phi '' \mathrm{im} ^{-1}{}' \mathrm{Icc}\,(-1)\,0) \to (\forall (t : \mathbb{R}), \|\Phi\,t\| \le b) \to (\forall (t : \mathbb{R}), \|\Phi\,(t - i)\| \le b) \to \forall \{z : \mathbb{C}\}, -1 \le z.\mathrm{im} \to z.\mathrm{im} \le 0 \to \|\Phi\,z\| \le b
 $$
 
 **used by** [`norm_kmsFunCut_diff_le`](#d-qiqth-fock-boostkms-norm-kmsfuncut-diff-le)
@@ -2065,7 +2065,7 @@ $$
 *thm* · [BoostKMS:2535 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/BoostKMS.lean#L2535)  
 
 $$
-0 < m \to \forall \{\xi \eta : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})\}, \xi \in \mathrm{closure}\,(\mathrm{niceWedgeGenSet}\,m) \to \eta \in \mathrm{closure}\,(\mathrm{niceWedgeGenSet}\,m) \to \exists F, \mathrm{DiffContOnCl}\,\mathbb{C}\,F\,(\mathrm{im} ^{-}^{1}' \mathrm{Ioo}\,(-1)\,0) \wedge (\exists C, \forall (z : \mathbb{C}), \|F\,z\| \le C) \wedge (\forall (t : \mathbb{R}), F\,t = \mathrm{inner}\,\mathbb{C}\,\eta\,((\mathrm{boostUnitary}\,(2 \cdot \pi \cdot t))\,\xi)) \wedge \forall (t : \mathbb{R}), F\,(t - i) = \mathrm{inner}\,\mathbb{C}\,((\mathrm{boostUnitary}\,(2 \cdot \pi \cdot t))\,\xi)\,\eta
+0 < m \to \forall \{\xi \eta : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})\}, \xi \in \mathrm{closure}\,(\mathrm{niceWedgeGenSet}\,m) \to \eta \in \mathrm{closure}\,(\mathrm{niceWedgeGenSet}\,m) \to \exists F, \mathrm{DiffContOnCl}\,\mathbb{C}\,F\,(\mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-1)\,0) \wedge (\exists C, \forall (z : \mathbb{C}), \|F\,z\| \le C) \wedge (\forall (t : \mathbb{R}), F\,t = \mathrm{inner}\,\mathbb{C}\,\eta\,((\mathrm{boostUnitary}\,(2 \cdot \pi \cdot t))\,\xi)) \wedge \forall (t : \mathbb{R}), F\,(t - i) = \mathrm{inner}\,\mathbb{C}\,((\mathrm{boostUnitary}\,(2 \cdot \pi \cdot t))\,\xi)\,\eta
 $$
 
 **uses** [`NiceTest`](#d-qiqth-fock-boostkms-nicetest) [`bcf`](#d-qiqth-fock-boostkms-nicetest-bcf) [`bcf_apply_eq_bot`](#d-qiqth-fock-boostkms-nicetest-bcf-apply-eq-bot) [`bcf_apply_eq_top`](#d-qiqth-fock-boostkms-nicetest-bcf-apply-eq-top) [`bcf_cauchySeq`](#d-qiqth-fock-boostkms-nicetest-bcf-cauchyseq) [`cont`](#d-qiqth-fock-boostkms-nicetest-cont) [`cpt`](#d-qiqth-fock-boostkms-nicetest-cpt) [`f`](#d-qiqth-fock-boostkms-nicetest-f) [`hδ`](#d-qiqth-fock-boostkms-nicetest-h) [`margin_le`](#d-qiqth-fock-boostkms-nicetest-margin-le) [`memLp`](#d-qiqth-fock-boostkms-nicetest-memlp) [`real`](#d-qiqth-fock-boostkms-nicetest-real) [`vec`](#d-qiqth-fock-boostkms-nicetest-vec) [`δ`](#d-qiqth-fock-boostkms-nicetest) [`kmsBCF`](#d-qiqth-fock-boostkms-kmsbcf) [`kmsBCF_apply`](#d-qiqth-fock-boostkms-kmsbcf-apply) [`kmsFun`](#d-qiqth-fock-boostkms-kmsfun) [`kmsFun_differentiableOn`](#d-qiqth-fock-boostkms-kmsfun-differentiableon) [`mem_niceWedgeGenSet`](#d-qiqth-fock-boostkms-mem-nicewedgegenset) [`niceWedgeGenSet`](#d-qiqth-fock-boostkms-nicewedgegenset) [`boostUnitary`](#d-qiqth-fock-oneparticle-boostunitary)
@@ -2351,7 +2351,7 @@ $$
 *thm* · [CyclicWitness:468 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/CyclicWitness.lean#L468)  
 
 $$
-\mathrm{DifferentiableOn}\,\mathbb{C}\,\Phi\,(\mathrm{im} ^{-}^{1}' \mathrm{Ioo}\,(-1)\,0) \to \mathrm{ContinuousOn}\,\Phi\,(\mathrm{im} ^{-}^{1}' \mathrm{Icc}\,(-1)\,0) \to \mathrm{BddAbove}\,(\mathrm{norm} \circ \Phi '' \mathrm{im} ^{-}^{1}' \mathrm{Icc}\,(-1)\,0) \to (\forall (t : \mathbb{R}), \Phi\,t = 0) \to \forall (t : \mathbb{R}), \Phi\,(t - i) = 0
+\mathrm{DifferentiableOn}\,\mathbb{C}\,\Phi\,(\mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-1)\,0) \to \mathrm{ContinuousOn}\,\Phi\,(\mathrm{im} ^{-1}{}' \mathrm{Icc}\,(-1)\,0) \to \mathrm{BddAbove}\,(\mathrm{norm} \circ \Phi '' \mathrm{im} ^{-1}{}' \mathrm{Icc}\,(-1)\,0) \to (\forall (t : \mathbb{R}), \Phi\,t = 0) \to \forall (t : \mathbb{R}), \Phi\,(t - i) = 0
 $$
 
 **used by** [`niceWedgeSeparating_pos_mass`](#d-qiqth-fock-cyclicwitness-nicewedgeseparating-pos-mass)
@@ -2996,7 +2996,7 @@ $$
 *thm* · [OneParticleBW:510 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/OneParticleBW.lean#L510)  
 
 $$
-\mathrm{StripKMSrvd}\,V\,K \to \forall \{\xi \eta : H\}, \xi \in K \to \eta \in K \to \exists f, \mathrm{DiffContOnCl}\,\mathbb{C}\,f\,(\mathrm{im} ^{-}^{1}' \mathrm{Ioo}\,(-1)\,0) \wedge (\forall (t : \mathbb{R}), f\,t = \mathrm{inner}\,\mathbb{C}\,\eta\,((V\,t)\,\xi)) \wedge \forall (t : \mathbb{R}), (f\,(t - i / 2)).\mathrm{im} = 0
+\mathrm{StripKMSrvd}\,V\,K \to \forall \{\xi \eta : H\}, \xi \in K \to \eta \in K \to \exists f, \mathrm{DiffContOnCl}\,\mathbb{C}\,f\,(\mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-1)\,0) \wedge (\forall (t : \mathbb{R}), f\,t = \mathrm{inner}\,\mathbb{C}\,\eta\,((V\,t)\,\xi)) \wedge \forall (t : \mathbb{R}), (f\,(t - i / 2)).\mathrm{im} = 0
 $$
 
 **uses** [`StripKMSrvd`](#d-qiqth-fock-oneparticlebw-stripkmsrvd) [`negStrip`](#d-qiqth-stripuniqueness-negstrip) [`real_on_midline_of_conj_flip`](#d-qiqth-stripuniqueness-real-on-midline-of-conj-flip)
@@ -4623,7 +4623,7 @@ $$
 *thm* · [PVM:1291 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1291)  
 
 $$
-P.\mathrm{boundedFC}\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC} = P.\mathrm{integralSimple}\,\varphi.\mathrm{range}\,\mathrm{id}\,\lambda y \mapsto \varphi ^{-}^{1}' \{y\}
+P.\mathrm{boundedFC}\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC} = P.\mathrm{integralSimple}\,\varphi.\mathrm{range}\,\mathrm{id}\,\lambda y \mapsto \varphi ^{-1}{}' \{y\}
 $$
 
 **uses** [`ProjectionValuedMeasure`](#d-qiqth-spectral-projectionvaluedmeasure) [`boundedFC`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc) [`boundedFC_congr`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-congr) [`boundedFC_eq_integralSimple`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-eq-integralsimple) [`integralSimple`](#d-qiqth-spectral-projectionvaluedmeasure-integralsimple) [`norm_indicatorOne_le`](#d-qiqth-spectral-projectionvaluedmeasure-norm-indicatorone-le) [`simpleFunc_eq_sum`](#d-qiqth-spectral-projectionvaluedmeasure-simplefunc-eq-sum)
@@ -5066,7 +5066,7 @@ $$
 *thm* · [PVM:1277 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1277)  
 
 $$
-\varphi\,a = \sum_{y \varphi \mathrm{range}} y \cdot (\varphi ^{-}^{1}' \{y\}).\mathrm{indicator}\,(\lambda x \mapsto 1)\,a
+\varphi\,a = \sum_{y \varphi \mathrm{range}} y \cdot (\varphi ^{-1}{}' \{y\}).\mathrm{indicator}\,(\lambda x \mapsto 1)\,a
 $$
 
 **used by** [`boundedFC_simpleFunc`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-simplefunc) [`boundedFC_simpleFunc_mul`](#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-simplefunc-mul)
@@ -8641,7 +8641,7 @@ $$
 *thm* · [ModularRelativeEntropy:778 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L778)  
 
 $$
-0 < \beta_{0} \to \beta_{1} < 1/2 \to \forall \{w : \mathbb{C}\}, w \in \mathrm{im} ^{-}^{1}' \mathrm{Ioo}\,(-\beta_{1})\,(-\beta_{0}) \to \|i \cdot (\log\,((2 - \omega) / \omega)) \cdot \mathrm{devChar}\,w\,\omega\| \le \sqrt 2 \cdot (2 / \beta_{0} + \log\,2) + \sqrt 2 \cdot (2 / (1/2 - \beta_{1}) + \log\,2)
+0 < \beta_{0} \to \beta_{1} < 1/2 \to \forall \{w : \mathbb{C}\}, w \in \mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-\beta_{1})\,(-\beta_{0}) \to \|i \cdot (\log\,((2 - \omega) / \omega)) \cdot \mathrm{devChar}\,w\,\omega\| \le \sqrt 2 \cdot (2 / \beta_{0} + \log\,2) + \sqrt 2 \cdot (2 / (1/2 - \beta_{1}) + \log\,2)
 $$
 
 **uses** [`devChar`](#d-qiqth-standardsubspacemodular-devchar) [`devChar_deriv_norm_le`](#d-qiqth-standardsubspacemodular-devchar-deriv-norm-le) [`modCharC`](#d-qiqth-standardsubspacemodular-modcharc) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc) [`rvdRC_spectrum_mem_Icc`](#d-qiqth-standardsubspacemodular-rvdrc-spectrum-mem-icc)
@@ -8653,7 +8653,7 @@ $$
 *thm* · [ModularRelativeEntropy:807 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L807)  
 
 $$
-0 < \beta_{0} \to \beta_{1} < 1/2 \to \forall \{z z_{0} : \mathbb{C}\}, z \in \mathrm{im} ^{-}^{1}' \mathrm{Ioo}\,(-\beta_{1})\,(-\beta_{0}) \to z_{0} \in \mathrm{im} ^{-}^{1}' \mathrm{Ioo}\,(-\beta_{1})\,(-\beta_{0}) \to \|\mathrm{devChar}\,z\,\omega - \mathrm{devChar}\,z_{0}\,\omega\| \le (\sqrt 2 \cdot (2 / \beta_{0} + \log\,2) + \sqrt 2 \cdot (2 / (1/2 - \beta_{1}) + \log\,2)) \cdot \|z - z_{0}\|
+0 < \beta_{0} \to \beta_{1} < 1/2 \to \forall \{z z_{0} : \mathbb{C}\}, z \in \mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-\beta_{1})\,(-\beta_{0}) \to z_{0} \in \mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-\beta_{1})\,(-\beta_{0}) \to \|\mathrm{devChar}\,z\,\omega - \mathrm{devChar}\,z_{0}\,\omega\| \le (\sqrt 2 \cdot (2 / \beta_{0} + \log\,2) + \sqrt 2 \cdot (2 / (1/2 - \beta_{1}) + \log\,2)) \cdot \|z - z_{0}\|
 $$
 
 **uses** [`devChar`](#d-qiqth-standardsubspacemodular-devchar) [`devChar_deriv_norm_le`](#d-qiqth-standardsubspacemodular-devchar-deriv-norm-le) [`hasDerivAt_devChar_Icc`](#d-qiqth-standardsubspacemodular-hasderivat-devchar-icc) [`modCharC`](#d-qiqth-standardsubspacemodular-modcharc) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc) [`rvdRC_spectrum_mem_Icc`](#d-qiqth-standardsubspacemodular-rvdrc-spectrum-mem-icc)
@@ -8797,7 +8797,7 @@ $$
 *thm* · [ModularRelativeEntropy:1257 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L1257)  
 
 $$
-\mathrm{ContinuousOn}\,(\mathrm{deviceVecF}\,S\,\zeta)\,(\mathrm{im} ^{-}^{1}' \mathrm{Icc}\,(-(1/2))\,0)
+\mathrm{ContinuousOn}\,(\mathrm{deviceVecF}\,S\,\zeta)\,(\mathrm{im} ^{-1}{}' \mathrm{Icc}\,(-(1/2))\,0)
 $$
 
 **uses** [`devChar`](#d-qiqth-standardsubspacemodular-devchar) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc) [`deviceOpC`](#d-qiqth-deviceopc) [`deviceOpC_diff_normSq`](#d-qiqth-deviceopc-diff-normsq) [`deviceVecF`](#d-qiqth-devicevecf) [`deviceVecF_eq_of_mem`](#d-qiqth-devicevecf-eq-of-mem) [`rvdSpecMeasure`](#d-qiqth-rvdspecmeasure) [`tendsto_integral_devChar_diff_sq`](#d-qiqth-tendsto-integral-devchar-diff-sq)
@@ -8857,7 +8857,7 @@ $$
 *thm* · [ModularRelativeEntropy:1279 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L1279)  
 
 $$
-0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \mathrm{DiffContOnCl}\,\mathbb{C}\,(\lambda z \mapsto ((\mathrm{modConjBilin}\,S)\,(\mathrm{deviceVecF}\,S\,\zeta\,z))\,(\mathrm{gaussSmearC}\,V\,n\,\eta\,z))\,(\mathrm{im} ^{-}^{1}' \mathrm{Ioo}\,(-(1/2))\,0)
+0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \mathrm{DiffContOnCl}\,\mathbb{C}\,(\lambda z \mapsto ((\mathrm{modConjBilin}\,S)\,(\mathrm{deviceVecF}\,S\,\zeta\,z))\,(\mathrm{gaussSmearC}\,V\,n\,\eta\,z))\,(\mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-(1/2))\,0)
 $$
 
 **uses** [`differentiable_gaussSmearC`](#d-qiqth-standardsubspacemodular-differentiable-gausssmearc) [`gaussSmearC`](#d-qiqth-standardsubspacemodular-gausssmearc) [`modConjBilin`](#d-qiqth-standardsubspacemodular-modconjbilin) [`deviceVecF`](#d-qiqth-devicevecf) [`deviceVecF_continuousOn`](#d-qiqth-devicevecf-continuouson) [`differentiableOn_gFunction`](#d-qiqth-differentiableon-gfunction)
@@ -8869,7 +8869,7 @@ $$
 *thm* · [ModularRelativeEntropy:1048 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L1048)  
 
 $$
-\mathrm{DifferentiableOn}\,\mathbb{C}\,(\mathrm{deviceVecF}\,S\,\zeta)\,(\mathrm{im} ^{-}^{1}' \mathrm{Ioo}\,(-(1/2))\,0)
+\mathrm{DifferentiableOn}\,\mathbb{C}\,(\mathrm{deviceVecF}\,S\,\zeta)\,(\mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-(1/2))\,0)
 $$
 
 **uses** [`deviceDerivOpC`](#d-qiqth-devicederivopc) [`deviceVecF`](#d-qiqth-devicevecf) [`hasDerivAt_deviceVecF`](#d-qiqth-hasderivat-devicevecf)
@@ -8881,7 +8881,7 @@ $$
 *thm* · [ModularRelativeEntropy:1072 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L1072)  
 
 $$
-0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \mathrm{DifferentiableOn}\,\mathbb{C}\,(\lambda z \mapsto ((\mathrm{modConjBilin}\,S)\,(\mathrm{deviceVecF}\,S\,\zeta\,z))\,(\mathrm{gaussSmearC}\,V\,n\,\eta\,z))\,(\mathrm{im} ^{-}^{1}' \mathrm{Ioo}\,(-(1/2))\,0)
+0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \mathrm{DifferentiableOn}\,\mathbb{C}\,(\lambda z \mapsto ((\mathrm{modConjBilin}\,S)\,(\mathrm{deviceVecF}\,S\,\zeta\,z))\,(\mathrm{gaussSmearC}\,V\,n\,\eta\,z))\,(\mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-(1/2))\,0)
 $$
 
 **uses** [`differentiable_gaussSmearC`](#d-qiqth-standardsubspacemodular-differentiable-gausssmearc) [`gaussSmearC`](#d-qiqth-standardsubspacemodular-gausssmearc) [`modConjBilin`](#d-qiqth-standardsubspacemodular-modconjbilin) [`deviceVecF`](#d-qiqth-devicevecf) [`differentiableOn_deviceVecF`](#d-qiqth-differentiableon-devicevecf)
@@ -9025,7 +9025,7 @@ $$
 *thm* · [ModularRelativeEntropy:1213 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L1213)  
 
 $$
-z_{0}.\mathrm{im} \le 0 \to -(1/2) \le z_{0}.\mathrm{im} \to \mathrm{Tendsto}\,(\lambda z \mapsto \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,(\mathrm{rvdRC}\,S))), {\|\mathrm{devChar}\,z\,\omega - \mathrm{devChar}\,z_{0}\,\omega\|}^{2} \partial \mathrm{rvdSpecMeasure}\,S\,\zeta)\,(\mathrm{nhdsWithin}\,z_{0}\,(\mathrm{im} ^{-}^{1}' \mathrm{Icc}\,(-(1/2))\,0))\,(\mathrm{nhds}\,0)
+z_{0}.\mathrm{im} \le 0 \to -(1/2) \le z_{0}.\mathrm{im} \to \mathrm{Tendsto}\,(\lambda z \mapsto \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,(\mathrm{rvdRC}\,S))), {\|\mathrm{devChar}\,z\,\omega - \mathrm{devChar}\,z_{0}\,\omega\|}^{2} \partial \mathrm{rvdSpecMeasure}\,S\,\zeta)\,(\mathrm{nhdsWithin}\,z_{0}\,(\mathrm{im} ^{-1}{}' \mathrm{Icc}\,(-(1/2))\,0))\,(\mathrm{nhds}\,0)
 $$
 
 **uses** [`instIsFiniteMeasure_scalarMeasure`](#d-qiqth-spectral-projectionvaluedmeasure-instisfinitemeasure-scalarmeasure) [`scalarMeasure`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure) [`PVM_of_selfAdjoint`](#d-qiqth-spectraltheorem-pvm-of-selfadjoint) [`devChar`](#d-qiqth-standardsubspacemodular-devchar) [`devChar_norm_le_Icc`](#d-qiqth-standardsubspacemodular-devchar-norm-le-icc) [`hasDerivAt_devChar_Icc`](#d-qiqth-standardsubspacemodular-hasderivat-devchar-icc) [`measurable_devChar`](#d-qiqth-standardsubspacemodular-measurable-devchar) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint) [`rvdRC_spectrum_mem_Icc`](#d-qiqth-standardsubspacemodular-rvdrc-spectrum-mem-icc) [`rvdSpecMeasure`](#d-qiqth-rvdspecmeasure)
@@ -9037,7 +9037,7 @@ $$
 *thm* · [ModularRelativeEntropy:874 ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ModularRelativeEntropy.lean#L874)  
 
 $$
-0 < \beta_{0} \to \beta_{1} < 1/2 \to \forall \{z_{0} : \mathbb{C}\}, z_{0} \in \mathrm{im} ^{-}^{1}' \mathrm{Ioo}\,(-\beta_{1})\,(-\beta_{0}) \to \mathrm{Tendsto}\,(\lambda z \mapsto \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,(\mathrm{rvdRC}\,S))), {\|(\mathrm{devChar}\,z\,\omega - \mathrm{devChar}\,z_{0}\,\omega) / (z - z_{0}) - i \cdot (\log\,((2 - \omega) / \omega)) \cdot \mathrm{devChar}\,z_{0}\,\omega\|}^{2} \partial \mathrm{rvdSpecMeasure}\,S\,\zeta)\,(\mathrm{nhdsWithin}\,z_{0}\,\{z_{0}\}^{c})\,(\mathrm{nhds}\,0)
+0 < \beta_{0} \to \beta_{1} < 1/2 \to \forall \{z_{0} : \mathbb{C}\}, z_{0} \in \mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-\beta_{1})\,(-\beta_{0}) \to \mathrm{Tendsto}\,(\lambda z \mapsto \int (\omega : (\mathrm{spectrum}\,\mathbb{R}\,(\mathrm{rvdRC}\,S))), {\|(\mathrm{devChar}\,z\,\omega - \mathrm{devChar}\,z_{0}\,\omega) / (z - z_{0}) - i \cdot (\log\,((2 - \omega) / \omega)) \cdot \mathrm{devChar}\,z_{0}\,\omega\|}^{2} \partial \mathrm{rvdSpecMeasure}\,S\,\zeta)\,(\mathrm{nhdsWithin}\,z_{0}\,\{z_{0}\}^{c})\,(\mathrm{nhds}\,0)
 $$
 
 **uses** [`instIsFiniteMeasure_scalarMeasure`](#d-qiqth-spectral-projectionvaluedmeasure-instisfinitemeasure-scalarmeasure) [`scalarMeasure`](#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure) [`PVM_of_selfAdjoint`](#d-qiqth-spectraltheorem-pvm-of-selfadjoint) [`devChar`](#d-qiqth-standardsubspacemodular-devchar) [`measurable_devChar`](#d-qiqth-standardsubspacemodular-measurable-devchar) [`rvdRC`](#d-qiqth-standardsubspacemodular-rvdrc) [`rvdRC_isSelfAdjoint`](#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint) [`devCharDeriv_norm_le_slab`](#d-qiqth-devcharderiv-norm-le-slab) [`devChar_slope_norm_le`](#d-qiqth-devchar-slope-norm-le) [`rvdSpecMeasure`](#d-qiqth-rvdspecmeasure) [`tendsto_devChar_slope`](#d-qiqth-tendsto-devchar-slope)
