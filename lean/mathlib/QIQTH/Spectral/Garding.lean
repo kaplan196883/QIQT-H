@@ -1369,6 +1369,24 @@ theorem cayleyScalarMeasure_integral [Nontrivial H] (U : ℝ → (H →L[ℂ] H)
     isCompact_iff_compactSpace.mp (spectrum.isCompact _)
   exact RealRMK.integral_rieszMeasure (cfcPLMcc U hgrp hU0 hUinner hUbd hSC x) f
 
+/-- **★ The integral identity on `C(σ(V), ℝ)`** (compact-domain wrapper of `cayleyScalarMeasure_integral`):
+    `∫ h dμ_x = re⟪x, cfcL ha (↑∘h) x⟫` for a *continuous* real `h : C(σ(V), ℝ)`.  Since `σ(V)` is compact, `h` is
+    automatically compactly supported (`continuousMapEquiv`), so this is the `C_c` identity transported to `C`.
+    This is the clean form the function-form CFC bridge (`re⟪x, cfc g V x⟫ = ∫ (g∘↑) dμ_x`) consumes — removing the
+    `C_c` plumbing from the rest of the Stone/Parseval development (GPT-5.5-pro recipe, 2026-06-27). -/
+theorem cayleyScalarMeasure_integral_C [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H)
+    (h : C(spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H), ℝ)) :
+    ∫ ω, h ω ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x)
+      = (inner ℂ x (cfcL (cayley_isStarNormal U hgrp hU0 hUinner hUbd hSC)
+          (ContinuousLinearMap.compLeftContinuous ℝ
+            (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) Complex.ofRealCLM h) x)).re := by
+  haveI : CompactSpace (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) :=
+    isCompact_iff_compactSpace.mp (spectrum.isCompact _)
+  exact cayleyScalarMeasure_integral U hgrp hU0 hUinner hUbd hSC x (continuousMapEquiv h)
+
 /-- **★ The scalar spectral measure is finite:** `IsFiniteMeasure μ_x`. Since `σ(V)` is compact, the Riesz–Markov
     measure of a positive functional on `C_c(σ(V), ℝ)` is finite (`RealRMK`'s `CompactSpace` instance). So `μ_x` is
     a genuine *finite* spectral distribution of the state `x` (total mass `‖x‖²`), and `∫ g dμ_x` is defined for

@@ -5090,6 +5090,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cfcPLMcc
 #print axioms QIQTH.Spectral.cayleyScalarMeasure
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_integral
+#print axioms QIQTH.Spectral.cayleyScalarMeasure_integral_C
+-- ★ P4 WALL — INTEGRAL IDENTITY ON C(σV,ℝ) (compact-domain wrapper; CFC-bridge piece, GPT-5.5-pro recipe):
+-- cayleyScalarMeasure_integral_C [Nontrivial H] — ∫ h dμ_x = re⟪x, cfcL ha (↑∘h) x⟫ for h : C(σV,ℝ) (continuous;
+-- compact σV ⟹ compactly supported via continuousMapEquiv, so the C_c identity transports to C). Removes the C_c
+-- plumbing from the function-form CFC bridge re⟪x, cfc g V x⟫ = ∫(g∘↑) dμ_x consumed by the Stone/Parseval build.
+-- Axiom-free.
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_isFiniteMeasure
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_univ
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_isProbabilityMeasure

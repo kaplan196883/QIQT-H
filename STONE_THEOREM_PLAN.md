@@ -486,6 +486,11 @@ Also ✅ `cayley_cfc_sub_norm_sq` `[Nontrivial H]` — **the L²-distance estima
 `‖cfc f V x − cfc g V x‖² = re⟪x, cfc(|f−g|²) V x⟫` (= `∫ |f−g|² dμ_x`), via `cfc_sub` + `cayley_cfc_norm_sq`.
 This is literally the **Cauchy estimate** making `n ↦ cfc(e^{it·φₙ}) V x` a Cauchy sequence — the next named step
 of the strong-limit Stone-exponential recipe.
+Also ✅ `cayleyScalarMeasure_integral_C` `[Nontrivial H]` — **integral identity on `C(σ(V), ℝ)`** (compact-domain
+wrapper): `∫ h dμ_x = re⟪x, cfcL ha (↑∘h) x⟫` for continuous real `h` (via `continuousMapEquiv`, σ(V) compact).
+The clean form the **function-form CFC bridge** `re⟪x, cfc g V x⟫ = ∫ (g∘↑) dμ_x` consumes — removing the `C_c`
+plumbing from the Stone/Parseval development (GPT-5.5-pro recipe). **Next:** `cfc_eq_cfcL` to land the function-form
+bridge, then Parseval `‖cfc f V x‖² = ∫ |f|² dμ_x` and `μ_x({1})=0` (rational cutoffs).
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`
