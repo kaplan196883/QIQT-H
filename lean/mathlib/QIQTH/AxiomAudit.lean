@@ -5092,6 +5092,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_integral
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_isFiniteMeasure
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_univ
+#print axioms QIQTH.Spectral.cayleyScalarMeasure_isProbabilityMeasure
+-- ★★ P4 WALL — μ_x IS A PROBABILITY MEASURE FOR ‖x‖=1 (Born/spectral distribution): cayleyScalarMeasure_isProbability
+-- Measure [Nontrivial H] — ‖x‖=1 ⟹ IsProbabilityMeasure (cayleyScalarMeasure x). From cayleyScalarMeasure_univ
+-- ((μ_x univ).toReal = ‖x‖²=1) + finiteness ⟹ μ_x univ = 1 (ENNReal.toReal_eq_one_iff). So μ_x is the Born/spectral
+-- probability distribution of measuring (a function of) V in the normalized state x. Axiom-free.
 -- ★★ P4 WALL — TOTAL MASS μ_x(σV) = ‖x‖²: cayleyScalarMeasure_univ [Nontrivial H] —
 -- (cayleyScalarMeasure x Set.univ).toReal = ‖x‖^2. Integral identity at the const 1 (continuousMapEquiv on compact
 -- σV): (μ_x univ).toReal = ∫1 dμ_x = re⟪x, cfc 1 V x⟫ = re⟪x,x⟫ = ‖x‖² (cfc 1 V=1 via map_one cfcHom;

@@ -444,6 +444,10 @@ Also ✅ `cayleyScalarMeasure_univ` `[Nontrivial H]` — **total mass `μ_x(σ(V
 `(μ_x univ).toReal = ∫ 1 dμ_x = re⟪x, cfc 1 V x⟫ = re⟪x, x⟫ = ‖x‖²` (integral identity at the constant `1` via
 `continuousMapEquiv` on the compact spectrum; `cfc 1 V = 1` from `map_one cfcHom`; `inner_self_eq_norm_sq`). So
 `μ_x` is the **Born-like spectral distribution of the state `x`**, total mass `‖x‖²`.
+Also ✅ `cayleyScalarMeasure_isProbabilityMeasure` `[Nontrivial H]` — **for a unit vector `‖x‖ = 1`, `μ_x` is a
+probability measure** (total mass `1`): the spectral-measure realization of the **Born rule** for the Cayley
+unitary of the self-adjoint generator (`μ_x` = the probability distribution of measuring a function of `V` in the
+normalized state `x`).
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

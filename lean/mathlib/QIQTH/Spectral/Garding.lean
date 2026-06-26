@@ -1417,6 +1417,22 @@ theorem cayleyScalarMeasure_univ [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
   rw [hL, hcomp, hcfc, ContinuousLinearMap.one_apply] at h
   rw [h]; simpa using inner_self_eq_norm_sq (𝕜 := ℂ) x
 
+/-- **★★ For a unit vector, the scalar spectral measure is a probability measure.** Since `μ_x(σ(V)) = ‖x‖²`
+    (`cayleyScalarMeasure_univ`), a normalized state `‖x‖ = 1` gives `μ_x(σ(V)) = 1`: `μ_x` is the **Born/spectral
+    probability distribution** of the outcome of measuring (a function of) `V` in the state `x`. This is the
+    spectral-measure realization of the Born rule for the Cayley unitary of the self-adjoint generator. -/
+theorem cayleyScalarMeasure_isProbabilityMeasure [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (x : H) (hx : ‖x‖ = 1) :
+    IsProbabilityMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+  haveI : IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+    cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC x
+  have hmass := cayleyScalarMeasure_univ U hgrp hU0 hUinner hUbd hSC x
+  rw [hx, one_pow] at hmass
+  exact ⟨(ENNReal.toReal_eq_one_iff _).mp hmass⟩
+
 end SelfAdjoint
 
 end QIQTH.Spectral

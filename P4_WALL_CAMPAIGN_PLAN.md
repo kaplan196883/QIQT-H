@@ -322,6 +322,8 @@ Also ✅ `cayleyScalarMeasure_isFiniteMeasure` `[Nontrivial H]` (**μ_x is a fin
 distribution, total mass ‖x‖²; ⟹ `∫g dμ_x` defined for bounded Borel g, the entry to the Borel FC).
 Also ✅ `cayleyScalarMeasure_univ` `[Nontrivial H]` (**total mass `μ_x(σV)=‖x‖²`** — the Born-like spectral
 distribution of the state x: `(μ_x univ).toReal = ∫1 dμ_x = re⟪x,cfc 1 V x⟫ = re⟪x,x⟫ = ‖x‖²`).
+Also ✅ `cayleyScalarMeasure_isProbabilityMeasure` `[Nontrivial H]` (**μ_x is a probability measure for ‖x‖=1** —
+the Born/spectral distribution of measuring a function of V in the normalized state x).
 **Next:** bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
