@@ -522,6 +522,44 @@ theorem resolvent_halfline_hasDerivAt (U : ℝ → (H →L[ℂ] H)) (x : H) (hUb
   refine HasDerivAt.congr_of_eventuallyEq ?_ hcongr
   simpa using (hasDerivAt_const s (∫ u in Set.Ioi s, Real.exp (-u) • U u x)).sub hftc
 
+/-- **The resolvent orbit is differentiable at `0` with derivative `R x − x`.** Product rule on the
+    differentiation-ready form `U_s (R x) = e^s G(s)` (`resolvent_apply_flow_cov`): `d/ds(e^s G(s))|₀ =
+    e^0 G(0) + e^0 G'(0) = R x + (−U_0 x) = R x − x`, using `G(0) = R x`, `G'(0) = −U_0 x`
+    (`resolvent_halfline_hasDerivAt`), `U_0 = 1`. So **`R x` lies in the smooth domain** (the orbit is
+    differentiable at `0`) and the derivative `R x − x` will give the resolvent identity `(A + i)(R x) = i x`. -/
+theorem resolvent_orbit_hasDerivAt (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (x : H) (hUbd : ∀ t, ‖U t x‖ ≤ ‖x‖) (hcont : Continuous (fun t => U t x)) :
+    HasDerivAt (fun s => U s (resolvent U x)) (resolvent U x - x) 0 := by
+  have hfun : (fun s => U s (resolvent U x))
+      = fun s => Real.exp s • ∫ u in Set.Ioi s, Real.exp (-u) • U u x := by
+    funext s; exact resolvent_apply_flow_cov U hgrp x hUbd hcont s
+  rw [hfun]
+  have hprod := (Real.hasDerivAt_exp 0).smul (resolvent_halfline_hasDerivAt U x hUbd hcont 0)
+  convert hprod using 1
+  simp only [Real.exp_zero, one_smul, neg_zero, hU0, ContinuousLinearMap.one_apply]
+  rw [show (∫ u in Set.Ioi (0 : ℝ), Real.exp (-u) • U u x) = resolvent U x from rfl]
+  abel
+
+/-- **★ The resolvent lands in the smooth domain:** `R x ∈ stoneDomain U`. The orbit `s ↦ U_s (R x)` is
+    differentiable at `0` (`resolvent_orbit_hasDerivAt`). So *every* `R x` is a smooth vector — the resolvent
+    maps `H` into the generator's domain, the key to `Range(A + i) = H`. -/
+theorem resolvent_mem_stoneDomain (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (x : H) (hUbd : ∀ t, ‖U t x‖ ≤ ‖x‖) (hcont : Continuous (fun t => U t x)) :
+    resolvent U x ∈ stoneDomain U :=
+  (resolvent_orbit_hasDerivAt U hgrp hU0 x hUbd hcont).differentiableAt
+
+/-- **★ The resolvent identity (generator form):** `A (R x) = −i (R x − x)`, i.e. `stoneGen U (R x) =
+    −i (R x − x)`. From the orbit derivative `d/ds U_s(R x)|₀ = R x − x` and the generator identification
+    `i • A y = d/ds U_s y|₀`. Equivalently `(A + i)(R x) = i x` — so `Range(A + i) ⊇ {i x : x ∈ H} = H`, the
+    deficiency-index-zero fact that makes `A` essentially self-adjoint. -/
+theorem resolvent_stoneGen (U : ℝ → (H →L[ℂ] H)) (hgrp : ∀ s t, U (s + t) = U s ∘L U t)
+    (hU0 : U 0 = 1) (x : H) (hUbd : ∀ t, ‖U t x‖ ≤ ‖x‖) (hcont : Continuous (fun t => U t x)) :
+    stoneGen U ⟨resolvent U x, resolvent_mem_stoneDomain U hgrp hU0 x hUbd hcont⟩
+      = -Complex.I • (resolvent U x - x) := by
+  apply stoneGen_eq_of_hasDerivAt
+  convert resolvent_orbit_hasDerivAt U hgrp hU0 x hUbd hcont using 1
+  rw [smul_smul, show Complex.I * -Complex.I = 1 by rw [mul_neg, Complex.I_mul_I, neg_neg], one_smul]
+
 section SelfAdjoint
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 

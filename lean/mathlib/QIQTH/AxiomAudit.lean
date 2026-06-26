@@ -5020,6 +5020,14 @@ namespace QIQTH.AxiomAudit
 -- (intervalIntegral.integral_Ioi_sub_Ioi', needing resolvent_integrand_integrableOn_Ioi for any lower limit) + the
 -- fundamental theorem of calculus (intervalIntegral.integral_hasDerivAt_right, integrand continuous) + HasDerivAt.congr.
 -- The G'(s) feeding the product rule d/ds(e^s G(s))|₀ = R x − x ⟹ R x ∈ stoneDomain + (A+i)(R x)=i x. Axiom-free.
+#print axioms QIQTH.Spectral.resolvent_orbit_hasDerivAt
+#print axioms QIQTH.Spectral.resolvent_mem_stoneDomain
+#print axioms QIQTH.Spectral.resolvent_stoneGen
+-- ★★ P4 WALL MILESTONE — THE RESOLVENT IDENTITY (A+i)(R x)=i x: resolvent_orbit_hasDerivAt — d/ds U_s(R x)|₀ = R x − x
+-- (product rule (Real.hasDerivAt_exp 0).smul on the e^s G(s) form + resolvent_apply_flow_cov + resolvent_halfline_hasDerivAt
+-- + U_0=1). resolvent_mem_stoneDomain — R x ∈ stoneDomain U (orbit differentiable ⟹ the resolvent maps H INTO the
+-- generator's domain). resolvent_stoneGen — stoneGen U (R x) = −i(R x − x) (generator identification), i.e.
+-- (A+i)(R x)=i x ⟹ Range(A+i) ⊇ {i x}=H. The deficiency-index-zero fact that makes A essentially self-adjoint. Axiom-free.
 -- ★ P4 WALL — GÅRDING MOLLIFIED VECTORS (entry to essential self-adjointness): mollify U φ x := ∫ φ(t) U_t x dt.
 -- mollify_integrable — the integrand φ(t)U_t x is integrable (continuous × compact support, φ∈Cc, U strongly cont).
 -- mollify_apply_flow — the FLOW-SHIFT identity U_s x_φ = ∫ φ(t) U_{s+t}x dt (U_s through the Bochner integral via

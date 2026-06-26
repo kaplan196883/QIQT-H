@@ -242,9 +242,11 @@ so a bounded ℂ-linear operator with `norm_resolvent_le`) + `resolvent_comm_flo
 `U_s(Rx)=R(U_s x)`, hence with `A`) + `resolvent_apply_flow_cov` (**the differentiation-ready form**
 `U_s(Rx)=e^s ∫_s^∞ e^{−u}U_u x du`, change of vars `u=s+t` via `setIntegral_preimage_emb`) +
 `resolvent_halfline_hasDerivAt` (**the FTC** `d/ds ∫_s^∞ e^{−u}U_u x du = −(e^{−s}U_s x)`, via the splitting
-`integral_Ioi_sub_Ioi'` + `integral_hasDerivAt_right`). **Remaining (the genuine Mathlib-grade op-theory
-frontier):** the product rule `d/ds(e^s G(s))|₀ = Rx−x` ⟹ `R x ∈ stoneDomain` + resolvent identity
-`(A+i)(R x)=i x` ⟹ `Range(A+i)=H` ⟹
+`integral_Ioi_sub_Ioi'` + `integral_hasDerivAt_right`). **★★ MILESTONE — the RESOLVENT IDENTITY**:
+`resolvent_orbit_hasDerivAt` (`d/ds U_s(Rx)|₀ = Rx−x`) ⟹ `resolvent_mem_stoneDomain` (**`R x ∈ stoneDomain U`**) +
+`resolvent_stoneGen` (**`stoneGen U(Rx) = −i(Rx−x)`**, i.e. `(A+i)(R x)=i x`, so `Range(A+i) ⊇ {i x}=H`). **The
+deficiency-index-zero fact making the generator essentially self-adjoint is now machine-checked.** **Remaining:**
+bundle `Range(A+i)=H` (and the `A−i` mirror) ⟹
 `Ā = Ā†` (e.s.a.) ⟹ Cayley/unbounded spectral theorem ⟹ Stone `U_t = exp(it Ā)`. Mathlib has none of these; Cayley
 injectivity in Stone.lean.
 

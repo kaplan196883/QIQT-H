@@ -296,6 +296,13 @@ integration *limit* `s` only. Plus `resolvent_halfline_hasDerivAt` — **the FTC
 `d/ds ∫_s^∞ e^{−u} U_u x du = −(e^{−s} U_s x)` (splitting `∫_{Ioi s} = ∫_{Ioi s₀} − ∫_{s₀}^s` via
 `integral_Ioi_sub_Ioi'`, with `resolvent_integrand_integrableOn_Ioi` for any lower limit, + the FTC
 `integral_hasDerivAt_right` + `HasDerivAt.congr_of_eventuallyEq`).
+
+**★★ MILESTONE — the RESOLVENT IDENTITY `(A + i)(R x) = i x`.** `resolvent_orbit_hasDerivAt` — `d/ds U_s(R x)|₀ =
+R x − x` (product rule `(Real.hasDerivAt_exp 0).smul` on `e^s G(s)` + the FTC + `U_0 = 1`); `resolvent_mem_stoneDomain`
+— **`R x ∈ stoneDomain U`** (the resolvent maps `H` *into* the generator's domain); `resolvent_stoneGen` —
+**`stoneGen U (R x) = −i(R x − x)`** (generator identification), i.e. `(A + i)(R x) = i x`, so
+`Range(A + i) ⊇ {i x : x} = H`. **The deficiency-index-zero fact that makes the generator essentially self-adjoint
+is now machine-checked.**
 **Remaining (the genuine Mathlib-grade operator-theory frontier):** differentiate the RHS in `s` at `0` (after
 the change of variables `u = s+t` ⟹ `e^s ∫_s^∞ e^{−u} U_u x du`, whose `d/ds|₀ = R x − x` by the **FTC for the
 improper integral with variable lower limit**) ⟹ `R x ∈ stoneDomain U` + the resolvent identity
