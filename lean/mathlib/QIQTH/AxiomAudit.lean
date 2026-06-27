@@ -6303,5 +6303,12 @@ namespace QIQTH.AxiomAudit
 -- equation specialized to edgeArea/(4·ellP²). edgeArea (= ⟨A_edge⟩ = A(∂R), carried UV datum, never assigned)
 -- and ellP (Planck length) are free reals; the 1/4 ratio is derived elsewhere (SakharovRatio). Still a typeclass
 -- hypothesis, not a Lean axiom. Axiom-free (standard 3).
+#print axioms QIQTH.area_floor_saturates
+-- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-3): area_floor_saturates [MicrostatePostulate R areaTerm] [Nonempty R]
+-- — Shannon univ (fun _ => (card R)⁻¹) = areaTerm. The area floor is an EQUALITY (not just a bound) at the
+-- maximally-mixed record p ≡ 1/|𝓗_R| — the equilibrium / horizon local-equilibrium regime — via the Jensen
+-- saturation shannon_uniform_eq_log_card rewritten through the P4-MICRO capacity equation. So P4-MICRO delivers
+-- both the bound (area_floor_of_microstate) AND its saturation. Area coefficient = carried UV datum, never
+-- assigned. Axiom-free (standard 3).
 
 end QIQTH.AxiomAudit

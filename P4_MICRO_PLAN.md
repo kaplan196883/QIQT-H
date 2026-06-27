@@ -113,7 +113,8 @@ via the trace, P4-MICRO supplies it via finite capacity.
   (`QIQTH/FQBoundMicro.lean`): green, `#print axioms` = standard 3, budget 0, wired into `QIQTH.lean` + `AxiomAudit.lean`.
 - [x] **M-2 manifest area form** — `MicrostatePostulateArea` + `holographic_area_floor_micro` (`S ≤ edgeArea/(4ℓ_P²)`).
   ✅ LANDED 2026-06-27: green, `#print axioms` standard 3, budget 0.
-- [ ] **M-3 saturation** — `area_floor_saturates` (equality at the maximally-mixed record).
+- [x] **M-3 saturation** — `area_floor_saturates` (equality at the maximally-mixed record). ✅ LANDED 2026-06-27:
+  green, `#print axioms` standard 3, budget 0.
 - [ ] **M-4 non-vacuity witness** — concrete `Fin n` instance + `example` firing the bound (proves the interface non-empty).
 - [ ] **M-5 bridge remark** — connect to `FQBoundCGP.holographic_area_floor`; note Route 1 vs Route 2 deliver the same area term.
 - [ ] **M-6 paper hook** — one paragraph in the foundations paper / scope note: "P4 as a corollary of the finite
@@ -140,6 +141,11 @@ AND the `P4_WALL_CAMPAIGN_PLAN.md` checklist (note the P4-MICRO endpoint beside 
   `S ≤ A/(4ℓ_P²)` shape, the `1/4ℓ_P²` coefficient explicit in the statement (`edgeArea`, `ellP` free reals; UV
   datum never assigned). Green, `#print axioms` standard 3, budget 0, wired into `AxiomAudit.lean`. Next: **M-3**
   (`area_floor_saturates`, equality at the maximally-mixed record via `shannon_uniform_eq_log_card`).
+- 2026-06-27 — **M-3 LANDED.** `area_floor_saturates` (`[MicrostatePostulate R areaTerm] [Nonempty R] →
+  Shannon univ (fun _ => (card R)⁻¹) = areaTerm`): the area floor is an EQUALITY at the maximally-mixed record
+  (equilibrium regime), via `shannon_uniform_eq_log_card` ∘ `capacity`. So P4-MICRO gives both bound and
+  saturation. Green, `#print axioms` standard 3, budget 0, wired into `AxiomAudit.lean`. Next: **M-4** (concrete
+  `Fin n` non-vacuity witness firing the bound).
 
 ## 7. Files
 

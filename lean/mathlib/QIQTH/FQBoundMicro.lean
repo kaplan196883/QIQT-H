@@ -74,4 +74,15 @@ theorem holographic_area_floor_micro {R : Type*} [Fintype R] {edgeArea ellP : �
   rw [← h.capacity]
   exact QIQTH.RecordContract.shannon_le_log_card p hp h1
 
+/-- **Capacity saturation under P4-MICRO** — at the maximally-mixed record `p ≡ 1/|𝓗_R|` the area floor is an
+    EQUALITY `S = areaTerm`, not just a bound.  This is the equilibrium / horizon local-equilibrium regime (the
+    maximum-entropy state), via the Jensen saturation `shannon_uniform_eq_log_card` rewritten through the P4-MICRO
+    `capacity` equation.  So P4-MICRO delivers both the bound (`area_floor_of_microstate`) and the saturation: the
+    area floor is achieved exactly when the region is maximally mixed.  Axiom-free; the area coefficient is the
+    carried UV datum, never assigned. -/
+theorem area_floor_saturates {R : Type*} [Fintype R] [Nonempty R] {areaTerm : ℝ}
+    [h : MicrostatePostulate R areaTerm] :
+    QIQTH.BranchLedger.Shannon Finset.univ (fun _ : R => (Fintype.card R : ℝ)⁻¹) = areaTerm := by
+  rw [QIQTH.RecordContract.shannon_uniform_eq_log_card, h.capacity]
+
 end QIQTH
