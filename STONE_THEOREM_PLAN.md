@@ -548,6 +548,13 @@ is `integral_indicator_one`; `{1}` measurable via `isClosed_eq`. With `∫ψ_N d
 `w = lim cfc(ψ_N)V x` must reproduce. **Next (remaining for μ_x({1})=0):** DCT-2 `∫‖ψ_N−1_{{1}}‖²→0` (⟹ L²-Cauchy
 ⟹ `cfc(ψ_N)V x→w` via existence-half) + DCT-3 `∫‖(ω−1)ψ_N‖²→0` (⟹ `(V−1)cfc(ψ_N)V x→0` via convergence-half
 ⟹ `(V−1)w=0` ⟹ `w=0` by `cayley_one_sub_injective`); then `μ_x({1})=lim∫ψ_N=re⟪x,w⟫=0`.
+Also ✅ `cayleyCutoff_defect_integral_tendsto_zero` `[Nontrivial H]` — **DCT-3, the third DCT step**:
+`∫ ‖(ω−1)·ψ_N(ω)‖² dμ_x → 0`. Dominated convergence with the `(z−1)`-weighted cutoff: integrand
+`‖(ω−1)ψ_N‖²=‖ω−1‖²ψ_N² ≤ 4` (since `σ(V)⊆S¹` ⟹ `‖(ω:ℂ)‖=1` ⟹ `‖ω−1‖≤2`, and `ψ_N≤1`), continuous, `→0` ptwise
+(`cayleyCutoff_sq_mul_tendsto_zero`). Stated in the form `∫‖F_N ω.1‖²dμ_x→0` with `F_N(z)=(z−1)ψ_N(z)` — it feeds
+`cayley_cfc_tendsto_zero_of_integral` to give `(V−1)cfc(ψ_N)V x = cfc((z−1)ψ_N)V x → 0`, forcing `(V−1)w=0` ⟹ `w=0`.
+**Next (remaining for μ_x({1})=0):** DCT-2 `∫‖ψ_N−1_{{1}}‖²→0` (⟹ L²-Cauchy ⟹ `cfc(ψ_N)V x→w` via existence-half) +
+the final assembly (`(V−1)w=0` ⟹ `w=0`; `μ_x({1})=lim∫ψ_N=re⟪x,w⟫=0`).
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

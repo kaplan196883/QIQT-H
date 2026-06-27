@@ -5126,6 +5126,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyCutoff_tendsto_indicator
 #print axioms QIQTH.Spectral.cayleyCutoff_sq_mul_tendsto_zero
 #print axioms QIQTH.Spectral.cayleyCutoff_integral_tendsto_atom
+#print axioms QIQTH.Spectral.cayleyCutoff_defect_integral_tendsto_zero
+-- ★★ P4 WALL — THE THIRD DCT STEP OF THE ATOM-KILLING: cayleyCutoff_defect_integral_tendsto_zero [Nontrivial H]
+-- — ∫ ‖(ω−1)·ψ_N(ω)‖² dμ_x → 0. Dominated convergence with the (z−1)-weighted cutoff: integrand
+-- ‖(ω−1)ψ_N‖²=‖ω−1‖²ψ_N² ≤ 4 (σ(V)⊆S¹ ⟹ ‖(ω:ℂ)‖=1 ⟹ ‖ω−1‖≤2; ψ_N≤1), continuous, → 0 ptwise
+-- (cayleyCutoff_sq_mul_tendsto_zero). In the form ∫‖F_N ω.1‖²dμ_x→0 with F_N(z)=(z−1)ψ_N(z), feeds
+-- cayley_cfc_tendsto_zero_of_integral ⟹ (V−1)cfc(ψ_N)V x=cfc((z−1)ψ_N)V x→0 ⟹ (V−1)w=0 ⟹ w=0 (ker(1−V)=0).
+-- Axiom-free.
 -- ★★ P4 WALL — THE FIRST DCT STEP OF THE ATOM-KILLING: cayleyCutoff_integral_tendsto_atom [Nontrivial H] —
 -- ∫ ψ_N(ω) dμ_x → μ_x({1}) where {1} = {ω ∈ σ(V) | (ω:ℂ)=1}. Dominated convergence
 -- (tendsto_integral_of_dominated_convergence) with the cutoff scaffolding: ψ_N∘↑ continuous, ≤1 (integrable

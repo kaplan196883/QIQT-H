@@ -406,8 +406,11 @@ device that kills the atom).
 Also ✅ `cayleyCutoff_integral_tendsto_atom` `[Nontrivial H]` (**the first DCT step** — `∫ψ_N(ω)dμ_x→μ_x({1})`,
 `{1}={ω∈σ(V)|(ω:ℂ)=1}`; dominated convergence with the cutoff scaffolding, limit `∫1_{{1}}dμ_x=μ_x({1})` via
 `integral_indicator_one`, `{1}` measurable via `isClosed_eq`).
-**Next (remaining for μ_x({1})=0):** DCT-2 `∫‖ψ_N−1_{{1}}‖²→0` (⟹ L²-Cauchy ⟹ `cfc(ψ_N)V x→w`) + DCT-3
-`∫‖(ω−1)ψ_N‖²→0` (⟹ `(V−1)w=0` ⟹ `w=0` by `ker(1−V)=0`) ⟹ `μ_x({1})=re⟪x,w⟫=0`;
+Also ✅ `cayleyCutoff_defect_integral_tendsto_zero` `[Nontrivial H]` (**DCT-3** — `∫‖(ω−1)ψ_N‖²dμ_x→0`; dominated
+convergence, integrand `‖ω−1‖²ψ_N²≤4` via the circle bound `‖(ω:ℂ)‖=1`+`ψ_N≤1`, `→0` ptwise; in the form
+`∫‖F_N ω.1‖²dμ_x→0`, `F_N(z)=(z−1)ψ_N(z)` — feeds `cayley_cfc_tendsto_zero_of_integral` ⟹ `(V−1)w=0`).
+**Next (remaining for μ_x({1})=0):** DCT-2 `∫‖ψ_N−1_{{1}}‖²→0` (⟹ L²-Cauchy ⟹ `cfc(ψ_N)V x→w`) + final assembly
+(`(V−1)w=0` ⟹ `w=0` by `ker(1−V)=0`) ⟹ `μ_x({1})=re⟪x,w⟫=0`;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

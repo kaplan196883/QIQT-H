@@ -1886,6 +1886,57 @@ theorem cayleyCutoff_integral_tendsto_atom [Nontrivial H] (U : ℝ → (H →L[�
     rw [heq]
     exact cayleyCutoff_tendsto_indicator (ω : ℂ)
 
+/-- **★★ The third dominated-convergence step of the atom-killing:** `∫ ‖(ω − 1)·ψ_N(ω)‖² dμ_x → 0`.  Dominated
+    convergence with the `(z−1)`-weighted cutoff: the integrand `‖(ω−1)·ψ_N‖² = ‖ω−1‖²·ψ_N²` is bounded by the
+    integrable constant `4` (since `σ(V) ⊆ S¹` gives `‖(ω:ℂ)‖ = 1`, so `‖ω−1‖ ≤ 2`, and `ψ_N ≤ 1`), continuous
+    (hence measurable), and tends pointwise to `0` (`cayleyCutoff_sq_mul_tendsto_zero`).  In the form
+    `∫ ‖F_N ω.1‖² dμ_x → 0` with `F_N(z) = (z−1)·ψ_N(z)`, this feeds `cayley_cfc_tendsto_zero_of_integral` to give
+    `(V−1)·cfc(ψ_N) V x = cfc((z−1)ψ_N) V x → 0` — which forces `(V−1) w = 0` (hence `w = 0` by
+    `cayley_one_sub_injective`) for the strong limit `w = lim cfc(ψ_N) V x`.  Axiom-free; free scalar; no UV datum. -/
+theorem cayleyCutoff_defect_integral_tendsto_zero [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    Filter.Tendsto
+      (fun N => ∫ ω, ‖((ω : ℂ) - 1) * ((cayleyCutoff N (ω : ℂ) : ℂ))‖ ^ 2
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+      Filter.atTop (nhds 0) := by
+  haveI : IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+    cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC x
+  set μ := cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x with hμ
+  rw [show (0 : ℝ) = ∫ _ω, (0 : ℝ) ∂μ by simp]
+  apply tendsto_integral_of_dominated_convergence (bound := fun _ => (4 : ℝ))
+  · intro N
+    refine Continuous.aestronglyMeasurable ?_
+    exact (((continuous_subtype_val.sub continuous_const).mul
+      (Complex.continuous_ofReal.comp ((cayleyCutoff_continuous N).comp continuous_subtype_val))).norm.pow 2)
+  · exact integrable_const 4
+  · intro N
+    filter_upwards with ω
+    have hcirc : ‖(ω : ℂ)‖ = 1 := by
+      have hmem := cayley_spectrum_subset_circle U hgrp hU0 hUinner hUbd hSC ω.2
+      rwa [mem_sphere_zero_iff_norm] at hmem
+    have hsub : ‖(ω : ℂ) - 1‖ ≤ 2 := by
+      calc ‖(ω : ℂ) - 1‖ ≤ ‖(ω : ℂ)‖ + ‖(1 : ℂ)‖ := norm_sub_le _ _
+        _ = 2 := by rw [hcirc]; norm_num
+    have hpsi : ‖((cayleyCutoff N (ω : ℂ) : ℂ))‖ ≤ 1 := by
+      rw [Complex.norm_real, Real.norm_of_nonneg (cayleyCutoff_pos N _).le]
+      exact cayleyCutoff_le_one N _
+    rw [Real.norm_of_nonneg (by positivity), norm_mul, mul_pow]
+    have h1 : ‖(ω : ℂ) - 1‖ ^ 2 ≤ 4 := by nlinarith [hsub, norm_nonneg ((ω : ℂ) - 1)]
+    have h2 : ‖((cayleyCutoff N (ω : ℂ) : ℂ))‖ ^ 2 ≤ 1 := by
+      nlinarith [hpsi, norm_nonneg ((cayleyCutoff N (ω : ℂ) : ℂ))]
+    calc ‖(ω : ℂ) - 1‖ ^ 2 * ‖((cayleyCutoff N (ω : ℂ) : ℂ))‖ ^ 2
+        ≤ 4 * 1 := mul_le_mul h1 h2 (sq_nonneg _) (by norm_num)
+      _ = 4 := by norm_num
+  · filter_upwards with ω
+    have hfe : (fun N => ‖((ω : ℂ) - 1) * ((cayleyCutoff N (ω : ℂ) : ℂ))‖ ^ 2)
+        = (fun N => ‖(ω : ℂ) - 1‖ ^ 2 * (cayleyCutoff N (ω : ℂ)) ^ 2) := by
+      funext N
+      rw [norm_mul, mul_pow, Complex.norm_real, Real.norm_of_nonneg (cayleyCutoff_pos N _).le]
+    rw [hfe]
+    exact cayleyCutoff_sq_mul_tendsto_zero (ω : ℂ)
+
 end SelfAdjoint
 
 end QIQTH.Spectral
