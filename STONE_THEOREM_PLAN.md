@@ -712,9 +712,21 @@ These supply the `invFun`/`left_inv`/`right_inv` upgrading the linear isometry `
 `cayleyStoneU`). *Built green first try.* **The continuum Stone exponential `t ↦ U_t = exp(it A)` is now a complete
 one-parameter GROUP OF UNITARIES** — linear, isometric, `U_0=1`, `U_s U_t = U_{s+t}`, invertible — all axiom-free
 with NO PVM and NO UV datum.
-**Then (remaining for full general Stone):** strong continuity `t ↦ U_t x` (route: the **limit Parseval**
-`‖U_t x − U_s x‖² = ∫‖e_t − e_s‖²dμ_x` — pass `N→∞` in `cayley_cfc_sub_norm_sq_integral` with `η_N²→1` DCT — then
-`∫‖e_t − e_s‖²dμ_x → 0` as `t→s` by DCT, `e_r` continuous in `r`, dominated by `4`); then generator ⟹ Stone.
+Also ✅ `cayleyStoneU_sub_norm_sq` — **★★★★★ THE LIMIT PARSEVAL** `‖U_t x − U_s x‖² = ∫‖e_t − e_s‖²dμ_x`
+(`StoneExp.lean`, axiom-free, budget 0): the `L²`-isometry transported through the strong limit. The cutoff
+differences satisfy `‖cfc(g_{t,N})Vx − cfc(g_{s,N})Vx‖² = ∫‖g_{t,N}−g_{s,N}‖²dμ_x`
+(`cayley_cfc_sub_norm_sq_integral`); **(A)** the LHS `→ ‖U_t x − U_s x‖²` (`(cayleyStoneU_tendsto.sub).norm.pow 2`),
+**(B)** `= ∫‖g_{t,N}−g_{s,N}‖²` (no congr needed), **(C)** the RHS `→ ∫‖e_t − e_s‖²dμ_x` by **dominated
+convergence** (`tendsto_integral_of_dominated_convergence`, bound `4`): the integrand `‖g_{t,N}−g_{s,N}‖²` is
+ContinuousOn `σ(V)` (`cayleyExpBump_continuousOn.comp_continuous` — the **bump form keeps it measurable**, `e_r`
+alone is singular at `1`), `g_{t,N}−g_{s,N}=η_N(e_t−e_s)` so the integrand `= η_N²‖e_t−e_s‖² → ‖e_t−e_s‖²` `μ_x`-a.e.
+(`η_N→1` off the atom via `cayleyCutoff_tendsto_zero_of_ne`, atom null by `cayleyScalarMeasure_atom_eq_zero`),
+dominated by `4` (`‖g_{t,N}−g_{s,N}‖≤2η_N≤2`). `tendsto_nhds_unique` of (A)∘(B) vs (C) ⟹ the identity. *Built green
+(1 fix: pin the `∀ᵐ ω` binder type to the spectrum subtype — `(ω:ℂ)` had made it infer `ω:ℂ`).*
+**Then (remaining for full general Stone):** **strong continuity** `Continuous (t ↦ U_t x)` — now one DCT away:
+`‖U_t x − U_s x‖² = ∫‖e_t − e_s‖²dμ_x → 0` as `t → s` because `e_r(ω)=exp(i r·c(ω))` is continuous in `r` (pointwise)
+and dominated by `4`; reduce continuity to sequences (`ℝ` first-countable) + `tendsto_integral_of_dominated_-
+convergence`. Then generator ⟹ Stone.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

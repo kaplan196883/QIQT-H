@@ -885,6 +885,87 @@ noncomputable def cayleyStoneLIE [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
     (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (t : ℝ) (x : H) :
     cayleyStoneLIE U hgrp hU0 hUinner hUbd hSC t x = cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x := rfl
 
+/-- **The limit Parseval identity for the Stone group:** `‖U_t x − U_s x‖² = ∫ ‖e_t − e_s‖² dμ_x`, where
+    `e_r(ω) = cayleyExp r ω = exp(it·c(ω))` is the (bounded Borel) Stone-exponential symbol.  This transports the
+    `L²`-isometry through the strong limit: the cutoff differences satisfy `‖cfc(g_{t,N}) V x − cfc(g_{s,N}) V x‖² =
+    ∫ ‖g_{t,N} − g_{s,N}‖² dμ_x` (`cayley_cfc_sub_norm_sq_integral`), the left side `→ ‖U_t x − U_s x‖²` (norm
+    continuity along `cayleyStoneU_tendsto`), and the right side `→ ∫ ‖e_t − e_s‖² dμ_x` by dominated convergence
+    (`g_{t,N} − g_{s,N} = η_N(e_t − e_s)`, `η_N² → 1` `μ_x`-a.e. since `μ_x({1}) = 0`, dominated by the constant `4`).
+    Uniqueness of limits gives the identity — the bridge to strong continuity (`t ↦ U_t x`), since the RHS `→ 0` as
+    `t → s` by a second dominated-convergence pass. -/
+theorem cayleyStoneU_sub_norm_sq [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (s t : ℝ) (x : H) :
+    ‖cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x - cayleyStoneU U hgrp hU0 hUinner hUbd hSC s x‖ ^ 2
+      = ∫ ω, ‖cayleyExp t (ω : ℂ) - cayleyExp s (ω : ℂ)‖ ^ 2
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+  haveI : IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+    cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC x
+  -- (A) the cutoff-difference squared norm → ‖U_t x − U_s x‖²
+  have hA : Filter.Tendsto (fun N => ‖cfc (cayleyExpBump t N)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x
+      - cfc (cayleyExpBump s N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x‖ ^ 2)
+      Filter.atTop (nhds (‖cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x
+        - cayleyStoneU U hgrp hU0 hUinner hUbd hSC s x‖ ^ 2)) :=
+    (((cayleyStoneU_tendsto U hgrp hU0 hUinner hUbd hSC t x).sub
+      (cayleyStoneU_tendsto U hgrp hU0 hUinner hUbd hSC s x)).norm).pow 2
+  -- (B) and equals the L² integral of the symbol difference
+  have hB : ∀ N, ‖cfc (cayleyExpBump t N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x
+      - cfc (cayleyExpBump s N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x‖ ^ 2
+      = ∫ ω, ‖cayleyExpBump t N (ω : ℂ) - cayleyExpBump s N (ω : ℂ)‖ ^ 2
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := fun N =>
+    cayley_cfc_sub_norm_sq_integral U hgrp hU0 hUinner hUbd hSC (cayleyExpBump t N) (cayleyExpBump s N)
+      (cayleyExpBump_continuousOn U hgrp hU0 hUinner hUbd hSC t N)
+      (cayleyExpBump_continuousOn U hgrp hU0 hUinner hUbd hSC s N) x
+  -- (C) the L² integral → ∫ ‖e_t − e_s‖² dμ_x  (dominated convergence, η_N² ≤ 1, η_N² → 1 a.e.)
+  have hC : Filter.Tendsto (fun N => ∫ ω, ‖cayleyExpBump t N (ω : ℂ) - cayleyExpBump s N (ω : ℂ)‖ ^ 2
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x)) Filter.atTop
+      (nhds (∫ ω, ‖cayleyExp t (ω : ℂ) - cayleyExp s (ω : ℂ)‖ ^ 2
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))) := by
+    apply tendsto_integral_of_dominated_convergence (bound := fun _ => (4 : ℝ))
+    · intro N
+      refine Continuous.aestronglyMeasurable ?_
+      exact ((((cayleyExpBump_continuousOn U hgrp hU0 hUinner hUbd hSC t N).comp_continuous
+          continuous_subtype_val (fun ω => ω.2)).sub
+        ((cayleyExpBump_continuousOn U hgrp hU0 hUinner hUbd hSC s N).comp_continuous
+          continuous_subtype_val (fun ω => ω.2))).norm.pow 2)
+    · exact integrable_const 4
+    · intro N
+      filter_upwards with ω
+      have hcirc : ‖(ω : ℂ)‖ = 1 := by
+        have hmem := cayley_spectrum_subset_circle U hgrp hU0 hUinner hUbd hSC ω.2
+        rwa [mem_sphere_zero_iff_norm] at hmem
+      rw [Real.norm_of_nonneg (by positivity)]
+      have hd : ‖cayleyExpBump t N (ω : ℂ) - cayleyExpBump s N (ω : ℂ)‖ ≤ 2 := by
+        calc ‖cayleyExpBump t N (ω : ℂ) - cayleyExpBump s N (ω : ℂ)‖
+            ≤ ‖cayleyExpBump t N (ω : ℂ)‖ + ‖cayleyExpBump s N (ω : ℂ)‖ := norm_sub_le _ _
+          _ = cayleyBump N (ω : ℂ) + cayleyBump N (ω : ℂ) := by
+              rw [cayleyExpBump_norm t N hcirc, cayleyExpBump_norm s N hcirc]
+          _ ≤ 2 := by nlinarith [cayleyBump_le_one N (ω : ℂ), cayleyBump_nonneg N (ω : ℂ)]
+      nlinarith [hd, norm_nonneg (cayleyExpBump t N (ω : ℂ) - cayleyExpBump s N (ω : ℂ))]
+    · have hnull : ∀ᵐ (ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))
+          ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x), (ω : ℂ) ≠ 1 := by
+        rw [ae_iff]; simp only [not_ne_iff]
+        exact cayleyScalarMeasure_atom_eq_zero U hgrp hU0 hUinner hUbd hSC x
+      filter_upwards [hnull] with ω hω
+      have hfac : ∀ N, ‖cayleyExpBump t N (ω : ℂ) - cayleyExpBump s N (ω : ℂ)‖ ^ 2
+          = (cayleyBump N (ω : ℂ)) ^ 2 * ‖cayleyExp t (ω : ℂ) - cayleyExp s (ω : ℂ)‖ ^ 2 := by
+        intro N
+        have he : cayleyExpBump t N (ω : ℂ) - cayleyExpBump s N (ω : ℂ)
+            = (cayleyBump N (ω : ℂ) : ℂ) * (cayleyExp t (ω : ℂ) - cayleyExp s (ω : ℂ)) := by
+          simp only [cayleyExpBump]; ring
+        rw [he, norm_mul, mul_pow, Complex.norm_real, Real.norm_of_nonneg (cayleyBump_nonneg N _)]
+      simp only [hfac]
+      have hb1 : Filter.Tendsto (fun N => cayleyBump N (ω : ℂ)) Filter.atTop (nhds 1) := by
+        have h : Filter.Tendsto (fun N => 1 - cayleyCutoff N (ω : ℂ)) Filter.atTop (nhds (1 - 0)) :=
+          tendsto_const_nhds.sub (cayleyCutoff_tendsto_zero_of_ne hω)
+        simpa [cayleyBump] using h
+      have hlim := (hb1.pow 2).mul_const (‖cayleyExp t (ω : ℂ) - cayleyExp s (ω : ℂ)‖ ^ 2)
+      simpa using hlim
+  simp only [hB] at hA
+  exact tendsto_nhds_unique hA hC
+
 
 end SelfAdjoint
 

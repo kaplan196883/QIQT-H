@@ -481,8 +481,12 @@ axiom-free, budget 0): `U_{−t}` is a two-sided inverse (group law + `cayleySto
 into a `LinearIsometryEquiv` `cayleyStoneLIE` (`cayleyStoneLIE_apply` acts as `cayleyStoneU`). **Built green first
 try.** The continuum `t↦U_t=exp(itA)` is now a complete **one-parameter GROUP OF UNITARIES** (linear, isometric,
 `U_0=1`, `U_s U_t=U_{s+t}`, invertible) — no PVM, no UV datum.
-**Next (toward U_t=exp(itA)):** strong continuity `t↦U_t x` [route: limit Parseval `‖U_t x−U_s x‖²=∫‖e_t−e_s‖²dμ_x`
-via N→∞ DCT, then `→0` as t→s by DCT]; generator ⟹ Stone;
+Also ✅ **`cayleyStoneU_sub_norm_sq` — THE LIMIT PARSEVAL** `‖U_t x−U_s x‖²=∫‖e_t−e_s‖²dμ_x` (`StoneExp.lean`,
+axiom-free, budget 0): the L²-isometry through the strong limit. (A) `‖cfc(g_{t,N})Vx−cfc(g_{s,N})Vx‖²→‖U_t x−U_s x‖²`;
+(B) `=∫‖g_{t,N}−g_{s,N}‖²` (`cayley_cfc_sub_norm_sq_integral`); (C) `→∫‖e_t−e_s‖²` by DCT (`η_N²→1` a.e., bound `4`,
+bump-form keeps it measurable); uniqueness. **Built green.** The bridge to strong continuity.
+**Next (toward U_t=exp(itA)):** strong continuity `Continuous(t↦U_t x)` — one DCT away [`∫‖e_t−e_s‖²→0` as t→s,
+`e_r` cont. in r, dominated by 4; sequential reduction]; then generator ⟹ Stone;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

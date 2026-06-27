@@ -5167,6 +5167,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyStoneU_neg_right
 #print axioms QIQTH.Spectral.cayleyStoneLIE
 #print axioms QIQTH.Spectral.cayleyStoneLIE_apply
+#print axioms QIQTH.Spectral.cayleyStoneU_sub_norm_sq
+-- ★★★★★ P4 WALL — THE LIMIT PARSEVAL FOR THE STONE GROUP: cayleyStoneU_sub_norm_sq [Nontrivial H] —
+-- ‖U_t x − U_s x‖² = ∫‖e_t − e_s‖²dμ_x (e_r=cayleyExp r the bounded-Borel Stone symbol). Transports the L²-isometry
+-- through the strong limit: ‖cfc(g_{t,N})Vx − cfc(g_{s,N})Vx‖²=∫‖g_{t,N}−g_{s,N}‖² (cayley_cfc_sub_norm_sq_integral),
+-- LHS→‖U_t x−U_s x‖² (norm cont. along cayleyStoneU_tendsto), RHS→∫‖e_t−e_s‖² by DCT (g_{t,N}−g_{s,N}=η_N(e_t−e_s),
+-- η_N²→1 a.e. since μ_x({1})=0, dominated by 4); uniqueness. The bridge to strong continuity (RHS→0 as t→s, 2nd DCT). Axiom-free.
 -- ★★★★★ P4 WALL — U_t IS A UNITARY H ≃ₗᵢ[ℂ] H: cayleyStoneU_neg_left/right (U_{-t} is a two-sided inverse of U_t,
 -- from cayleyStoneU_group + cayleyStoneU_zero, (-t)+t=0) ⟹ cayleyStoneLIE := the LinearIsometryEquiv bundling U_t as
 -- a genuine unitary (cayleyStoneLIE_apply: acts as cayleyStoneU). The continuum Stone exponential t↦U_t=exp(itA) is
