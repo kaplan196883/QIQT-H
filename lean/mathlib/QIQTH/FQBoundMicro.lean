@@ -143,6 +143,35 @@ theorem area_floor_vonNeumann {n : Type*} [Fintype n] [DecidableEq n] {areaTerm 
     QIQTH.QuantumEntropy.vonNeumannEntropy h ≤ areaTerm :=
   le_trans (vonNeumannEntropy_le_log_card h) hcap.bound
 
+/-! ### Bridge: Route 1 (Type II trace) vs Route 2 (finite capacity) — same area term, different levels
+
+P4's bound `S_vN ≤ A/4ℓ_P²` now has **two** conditional Lean endpoints with the **same conclusion** but different
+hypotheses, at different logical levels:
+
+* **Route 1 — `QIQTH.holographic_area_floor` (`FQBoundCGP.lean`):** `[Phase5Master S ξ SvN (edgeArea/(4·ellP²))]`
+  `→ SvN ≤ edgeArea/(4·ellP²)`.  The hypothesis `Phase5Master` is *exactly* the JLMS master inequality
+  `SvN + cgpEntropy ≤ areaTerm` — the output the crossed-product **dual-weight trace** must supply.  This is the
+  **DYNAMICAL / modular** route: it would *explain why* the bound is the area (modular origin), at the cost of the
+  open Type II frontier.
+* **Route 2 — `holographic_area_floor_micro_vonNeumann` (below):** `[HolographicCapacityBound n (edgeArea/(4·ellP²))]`
+  `→ S_vN(ρ) ≤ edgeArea/(4·ellP²)`.  The hypothesis is the finite holographic-capacity postulate.  This is the
+  **KINEMATIC** route: capacity ⇒ bound, via the proven finite max-entropy theorem; it *postulates* "capacity ∝ area"
+  rather than deriving it.
+
+Both deliver the identical area term `edgeArea/(4·ellP²)` (the carried UV datum, never assigned).  They are
+**complementary, not competing**: Route 2 is the shippable reduction; Route 1 is the open derivation of the very
+capacity law Route 2 assumes.  Neither claims "axiom-free area law" — each carries its named hypothesis. -/
+
+/-- **★ Route 2's manifest von Neumann area floor `S_vN(ρ) ≤ A/4ℓ_P²`** — the capacity-conditional analogue of
+    Route 1's `FQBoundCGP.holographic_area_floor`, with the **identical conclusion** `≤ edgeArea/(4·ellP²)` but
+    conditional on `HolographicCapacityBound` (finite capacity) instead of `Phase5Master` (the dual-weight trace).
+    Just `area_floor_vonNeumann` specialized to `areaTerm = edgeArea/(4·ellP²)`.  Axiom-free; carried UV datum. -/
+theorem holographic_area_floor_micro_vonNeumann {n : Type*} [Fintype n] [DecidableEq n] {edgeArea ellP : ℝ}
+    [HolographicCapacityBound n (edgeArea / (4 * ellP ^ 2))] {ρ : Matrix n n ℂ}
+    (h : QIQTH.QuantumEntropy.IsDensity ρ) :
+    QIQTH.QuantumEntropy.vonNeumannEntropy h ≤ edgeArea / (4 * ellP ^ 2) :=
+  area_floor_vonNeumann h
+
 /-! ### Non-vacuity witness — the interface is inhabited and the floor is non-vacuous
 
 A concrete capacity postulate, mirroring `Phase5Master.of_le`: `Fin n` carries capacity `log n` (since

@@ -242,8 +242,12 @@ via the trace, P4-MICRO supplies it via finite capacity.
   pollution) + two `example`s firing `area_floor_of_microstate` (bound) and `area_floor_saturates` (exact) on it.
   Proves the interface is inhabited and the bounds non-vacuous (mirrors `Phase5Master.of_le`). Green, standard 3,
   budget 0.
-- [ ] **M-8 bridge remark** — connect to `FQBoundCGP.holographic_area_floor`; Route 1 (trace) vs Route 2 (capacity)
-  deliver the same area term at different logical levels (kinematic vs dynamical).
+- [x] **M-8 bridge remark** — ✅ **LANDED 2026-06-27**: `holographic_area_floor_micro_vonNeumann`
+  (`[HolographicCapacityBound n (edgeArea/(4·ellP²))] → S_vN(ρ) ≤ edgeArea/(4·ellP²)`) — the capacity-conditional
+  analogue of Route 1's `FQBoundCGP.holographic_area_floor` (identical conclusion; conditional on capacity not
+  `Phase5Master`). + a doc "Bridge" section: Route 2 kinematic (capacity⇒bound) vs Route 1 dynamical (the trace that
+  would derive the capacity); complementary, same area term, each carries a named hypothesis. Green, standard 3,
+  budget 0.
 - [ ] **M-9 paper hook** — the GPT-5.5-pro one-paragraph framing (§3.1 verbatim-adapted): regional capacity `N_R`,
   holographic content `log N_R ≤ A/4ℓ_P²` (equality only in the ideal saturating sector), Sakharov `1/4`, finite-dim
   max-entropy ⇒ P4; Route 1 retained to *derive* the capacity law. *(doc-only)*
@@ -320,6 +324,12 @@ AND the `P4_WALL_CAMPAIGN_PLAN.md` checklist (note the P4-MICRO endpoint beside 
   `area_floor_saturates` on it — the interface is inhabited, the bounds non-vacuous (fixed a `↑n+1` vs `↑(n+1)` cast
   mismatch by stating saturation over a generic `m` with `[Nonempty (Fin m)]`). Green, standard 3, budget 0, full
   `QIQTH` green. Next: **M-8** (bridge remark to `FQBoundCGP.holographic_area_floor` — Route 1 vs Route 2).
+- 2026-06-27 — **M-8 LANDED (the Route-1/Route-2 bridge).** `holographic_area_floor_micro_vonNeumann`:
+  `[HolographicCapacityBound n (edgeArea/(4·ellP²))] → S_vN(ρ) ≤ edgeArea/(4·ellP²)` — same conclusion as Route 1's
+  `FQBoundCGP.holographic_area_floor`, conditional on finite capacity rather than `Phase5Master` (the dual-weight
+  trace). + a doc "Bridge" section making the two endpoints explicit (kinematic capacity⇒bound vs dynamical
+  modular-trace derivation; complementary, same carried UV datum). Green, standard 3, budget 0, wired into
+  `AxiomAudit.lean`. Next: **M-9** (doc-only paper hook, the §3.1/§3.2 framing).
 
 ## 7. Files
 

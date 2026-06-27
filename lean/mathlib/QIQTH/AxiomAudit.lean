@@ -6333,5 +6333,13 @@ namespace QIQTH.AxiomAudit
 -- the floor non-vacuous (mirrors Phase5Master.of_le). A @[reducible] def, NOT a global instance — a deliberately
 -- asserted physics witness, never auto-applied by typeclass resolution. The two `example`s in FQBoundMicro.lean fire
 -- area_floor_of_microstate (bound form) and area_floor_saturates (exact form) on it. Axiom-free (standard 3).
+#print axioms QIQTH.holographic_area_floor_micro_vonNeumann
+-- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-8, the Route-1/Route-2 bridge): holographic_area_floor_micro_vonNeumann
+-- [HolographicCapacityBound n (edgeArea/(4·ellP²))] — S_vN(ρ) ≤ edgeArea/(4·ellP²). The capacity-conditional
+-- analogue of Route 1's FQBoundCGP.holographic_area_floor (= same conclusion ≤ edgeArea/(4·ellP²), but conditional
+-- on HolographicCapacityBound = finite capacity, NOT on Phase5Master = the dual-weight trace). Route 2 (kinematic:
+-- capacity⇒bound) vs Route 1 (dynamical: the modular trace that would DERIVE the capacity). Complementary, not
+-- competing; both carry a named hypothesis (neither is "axiom-free area law"). Same carried UV datum. Axiom-free
+-- (standard 3).
 
 end QIQTH.AxiomAudit
