@@ -723,10 +723,23 @@ alone is singular at `1`), `g_{t,N}−g_{s,N}=η_N(e_t−e_s)` so the integrand 
 (`η_N→1` off the atom via `cayleyCutoff_tendsto_zero_of_ne`, atom null by `cayleyScalarMeasure_atom_eq_zero`),
 dominated by `4` (`‖g_{t,N}−g_{s,N}‖≤2η_N≤2`). `tendsto_nhds_unique` of (A)∘(B) vs (C) ⟹ the identity. *Built green
 (1 fix: pin the `∀ᵐ ω` binder type to the spectrum subtype — `(ω:ℂ)` had made it infer `ω:ℂ`).*
-**Then (remaining for full general Stone):** **strong continuity** `Continuous (t ↦ U_t x)` — now one DCT away:
-`‖U_t x − U_s x‖² = ∫‖e_t − e_s‖²dμ_x → 0` as `t → s` because `e_r(ω)=exp(i r·c(ω))` is continuous in `r` (pointwise)
-and dominated by `4`; reduce continuity to sequences (`ℝ` first-countable) + `tendsto_integral_of_dominated_-
-convergence`. Then generator ⟹ Stone.
+Also ✅ `cayleyExp_measurable` + `cayleyStoneU_continuous` — **★★★★★ STRONG CONTINUITY** `Continuous (t ↦ U_t x)`
+(`StoneExp.lean`, axiom-free, budget 0): the last analytic ingredient. By the limit Parseval,
+`‖U_t x − U_s x‖ = √(∫‖e_t − e_s‖²dμ_x)`, and the integral `→ 0` as `t → s` by **dominated convergence on the
+countably-generated filter `𝓝 s`** (`tendsto_integral_filter_of_dominated_convergence`, no sequential reduction
+needed): for each `ω`, `e_t(ω)=exp(i t·c(ω))` is continuous in `t` so `‖e_t − e_s‖² → 0`, dominated by `4`
+(`‖e_r‖=1` on `σ(V)⊆S¹`). The `AEStronglyMeasurable` hypothesis (where the bump form is unavailable) comes from
+`cayleyExp_measurable` — `cayleyExp t` is **Borel measurable** on `ℂ` (built from continuous ops + a complex
+division `Measurable.div`; the singularity at `1` is one point). Then `√` continuity + `Real.sqrt_zero` ⟹
+`‖U_t x − U_s x‖ → 0`, i.e. `U_t x → U_s x`; `continuous_iff_continuousAt` + `tendsto_iff_norm_sub_tendsto_zero`.
+*Built green (3 fixes: `unfold` not `simp only` for the partially-applied def; `Measurable.pow_const` not `.pow`;
+pin the `tendsto_const_nhds` value).*
+**🎯 MILESTONE — the continuum Stone exponential `t ↦ U_t = exp(it A)` is now a COMPLETE STRONGLY CONTINUOUS
+ONE-PARAMETER GROUP OF UNITARIES**: ℂ-linear, isometric, `U_0 = 1`, `U_s U_t = U_{s+t}`, invertible (`∈ unitary(H)`),
+and strongly continuous — all axiom-free, NO PVM, NO UV datum. The unitary-group side of Stone's theorem is done.
+**Then (the converse half — remaining):** the **generator** `A x := −i d/dt U_t x|₀` (the infinitesimal generator
+on its Gårding domain) and the identification `U_t = exp(it A)` with `A` the Cayley-defined self-adjoint operator
+(`stoneGen`), i.e. that THIS `U` is the Stone group of its own generator — Stone's correspondence, both directions.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

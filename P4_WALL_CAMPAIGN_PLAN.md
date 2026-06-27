@@ -485,8 +485,15 @@ Also ✅ **`cayleyStoneU_sub_norm_sq` — THE LIMIT PARSEVAL** `‖U_t x−U_s x
 axiom-free, budget 0): the L²-isometry through the strong limit. (A) `‖cfc(g_{t,N})Vx−cfc(g_{s,N})Vx‖²→‖U_t x−U_s x‖²`;
 (B) `=∫‖g_{t,N}−g_{s,N}‖²` (`cayley_cfc_sub_norm_sq_integral`); (C) `→∫‖e_t−e_s‖²` by DCT (`η_N²→1` a.e., bound `4`,
 bump-form keeps it measurable); uniqueness. **Built green.** The bridge to strong continuity.
-**Next (toward U_t=exp(itA)):** strong continuity `Continuous(t↦U_t x)` — one DCT away [`∫‖e_t−e_s‖²→0` as t→s,
-`e_r` cont. in r, dominated by 4; sequential reduction]; then generator ⟹ Stone;
+Also ✅ **`cayleyStoneU_continuous` — STRONG CONTINUITY** `Continuous(t↦U_t x)` (+ helper `cayleyExp_measurable`;
+`StoneExp.lean`, axiom-free, budget 0): `‖U_t x−U_s x‖=√(∫‖e_t−e_s‖²dμ_x)→0` as t→s by DCT on the filter `𝓝 s`
+(`tendsto_integral_filter_of_dominated_convergence`; `e_t` cont. in t, dominated by 4; measurability via
+`cayleyExp_measurable`, `e_t` Borel). **Built green.**
+**🎯 MILESTONE:** `t↦U_t=exp(itA)` is now a **COMPLETE STRONGLY CONTINUOUS ONE-PARAMETER GROUP OF UNITARIES**
+(ℂ-linear, isometric, `U_0=1`, `U_s U_t=U_{s+t}`, `∈unitary(H)`, strongly continuous) — axiom-free, no PVM, no UV
+datum. **The unitary-group side of Stone's theorem is DONE.**
+**Next (the converse — toward X=A_edge):** the **generator** `A x:=−i d/dt U_t x|₀` and the identification `U_t=exp(itA)`
+with `A=stoneGen` the Cayley self-adjoint operator (Stone's correspondence both directions); then X=A_edge → Phase 5;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

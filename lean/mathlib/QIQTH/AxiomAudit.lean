@@ -5168,6 +5168,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyStoneLIE
 #print axioms QIQTH.Spectral.cayleyStoneLIE_apply
 #print axioms QIQTH.Spectral.cayleyStoneU_sub_norm_sq
+#print axioms QIQTH.Spectral.cayleyExp_measurable
+#print axioms QIQTH.Spectral.cayleyStoneU_continuous
+-- ★★★★★ P4 WALL — STRONG CONTINUITY of the Stone group: cayleyStoneU_continuous [Nontrivial H] — Continuous(t↦U_t x).
+-- By the limit Parseval ‖U_t x−U_s x‖=√(∫‖e_t−e_s‖²dμ_x), and ∫‖e_t−e_s‖²→0 as t→s by dominated convergence on the
+-- countably-generated filter 𝓝 s (tendsto_integral_filter_of_dominated_convergence): e_t=exp(i t·c(ω)) is cont. in t
+-- so ‖e_t−e_s‖²→0 pointwise, dominated by 4 (‖e_r‖=1 on σ(V)⊆S¹), AEStronglyMeasurable via cayleyExp_measurable (e_t
+-- Borel: built from continuous ops + a complex division). With linearity/isometry/U_0=1/group law/unitarity, t↦U_t is
+-- a STRONGLY CONTINUOUS ONE-PARAMETER GROUP OF UNITARIES — the unitary-group side of Stone's theorem, complete. Axiom-free.
 -- ★★★★★ P4 WALL — THE LIMIT PARSEVAL FOR THE STONE GROUP: cayleyStoneU_sub_norm_sq [Nontrivial H] —
 -- ‖U_t x − U_s x‖² = ∫‖e_t − e_s‖²dμ_x (e_r=cayleyExp r the bounded-Borel Stone symbol). Transports the L²-isometry
 -- through the strong limit: ‖cfc(g_{t,N})Vx − cfc(g_{s,N})Vx‖²=∫‖g_{t,N}−g_{s,N}‖² (cayley_cfc_sub_norm_sq_integral),

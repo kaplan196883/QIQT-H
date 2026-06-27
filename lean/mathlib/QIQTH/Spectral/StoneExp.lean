@@ -966,6 +966,78 @@ theorem cayleyStoneU_sub_norm_sq [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
   simp only [hB] at hA
   exact tendsto_nhds_unique hA hC
 
+/-- **The Stone symbol is Borel measurable.**  `cayleyExp t ω = exp(i·t·c(ω))` with `c(ω) = i(1+ω)/(1−ω)` is built
+    from continuous operations and a complex division, hence Borel measurable on all of `ℂ` (the singularity at the
+    excluded point `1` is a single point, harmless for measurability).  This supplies the `AEStronglyMeasurable`
+    hypothesis for the strong-continuity dominated-convergence pass, where the bump form is unavailable. -/
+theorem cayleyExp_measurable (t : ℝ) : Measurable (cayleyExp t) := by
+  have hinv : Measurable cayleyInv := by
+    unfold cayleyInv
+    exact (measurable_const.mul (measurable_const.add measurable_id)).div (measurable_const.sub measurable_id)
+  unfold cayleyExp
+  exact Complex.continuous_exp.measurable.comp (measurable_const.mul (measurable_const.mul hinv))
+
+/-- **★★★★★ STRONG CONTINUITY of the Stone group:** `t ↦ U_t x` is continuous.  By the limit Parseval
+    (`cayleyStoneU_sub_norm_sq`), `‖U_t x − U_s x‖ = √(∫ ‖e_t − e_s‖² dμ_x)`, and the integral `→ 0` as `t → s` by
+    dominated convergence (`tendsto_integral_filter_of_dominated_convergence` on the countably-generated filter
+    `𝓝 s`): for each `ω`, `e_t(ω) = exp(i·t·c(ω))` is continuous in `t` so `‖e_t − e_s‖² → 0`, dominated by `4`
+    (`‖e_r‖ = 1` on `σ(V) ⊆ S¹`).  So `‖U_t x − U_s x‖ → 0`, i.e. `U_t x → U_s x`.  With the group law and the
+    isometry, this is the last analytic ingredient of Stone's theorem: `t ↦ U_t` is a **strongly continuous
+    one-parameter group of unitaries**.  Axiom-free; free scalar; no UV datum. -/
+theorem cayleyStoneU_continuous [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    Continuous (fun t => cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x) := by
+  haveI : IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+    cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC x
+  refine continuous_iff_continuousAt.mpr (fun s => ?_)
+  -- the symbol-difference integral tends to 0 as t → s (dominated convergence on 𝓝 s)
+  have hint : Filter.Tendsto (fun t => ∫ ω, ‖cayleyExp t (ω : ℂ) - cayleyExp s (ω : ℂ)‖ ^ 2
+      ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x)) (nhds s)
+      (nhds (∫ _ω, (0 : ℝ) ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))) := by
+    apply tendsto_integral_filter_of_dominated_convergence (bound := fun _ => (4 : ℝ))
+    · refine Filter.Eventually.of_forall (fun t => ?_)
+      refine Measurable.aestronglyMeasurable ?_
+      exact ((((cayleyExp_measurable t).comp measurable_subtype_coe).sub
+        ((cayleyExp_measurable s).comp measurable_subtype_coe)).norm.pow_const 2)
+    · refine Filter.Eventually.of_forall (fun t => ?_)
+      filter_upwards with ω
+      have hcirc : ‖(ω : ℂ)‖ = 1 := by
+        have hmem := cayley_spectrum_subset_circle U hgrp hU0 hUinner hUbd hSC ω.2
+        rwa [mem_sphere_zero_iff_norm] at hmem
+      rw [Real.norm_of_nonneg (sq_nonneg _)]
+      have hd : ‖cayleyExp t (ω : ℂ) - cayleyExp s (ω : ℂ)‖ ≤ 2 := by
+        calc ‖cayleyExp t (ω : ℂ) - cayleyExp s (ω : ℂ)‖
+            ≤ ‖cayleyExp t (ω : ℂ)‖ + ‖cayleyExp s (ω : ℂ)‖ := norm_sub_le _ _
+          _ = 2 := by rw [cayleyExp_abs_circle hcirc, cayleyExp_abs_circle hcirc]; norm_num
+      nlinarith [hd, norm_nonneg (cayleyExp t (ω : ℂ) - cayleyExp s (ω : ℂ))]
+    · exact integrable_const 4
+    · filter_upwards with ω
+      have hcont : Continuous (fun r : ℝ => cayleyExp r (ω : ℂ)) := by
+        simp only [cayleyExp]
+        exact Complex.continuous_exp.comp
+          (continuous_const.mul (Complex.continuous_ofReal.mul continuous_const))
+      have h2 := (((hcont.tendsto s).sub
+        (tendsto_const_nhds (x := cayleyExp s (ω : ℂ)))).norm).pow 2
+      simpa using h2
+  rw [integral_zero] at hint
+  -- ‖U_t x − U_s x‖ = √(∫ ‖e_t − e_s‖²) → √0 = 0, so U_t x → U_s x
+  have heq : (fun t => ‖cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x
+        - cayleyStoneU U hgrp hU0 hUinner hUbd hSC s x‖)
+      = (fun t => Real.sqrt (∫ ω, ‖cayleyExp t (ω : ℂ) - cayleyExp s (ω : ℂ)‖ ^ 2
+          ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))) := by
+    funext t
+    rw [← cayleyStoneU_sub_norm_sq U hgrp hU0 hUinner hUbd hSC s t x]
+    exact (Real.sqrt_sq (norm_nonneg _)).symm
+  have hnorm : Filter.Tendsto (fun t => ‖cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x
+      - cayleyStoneU U hgrp hU0 hUinner hUbd hSC s x‖) (nhds s) (nhds 0) := by
+    rw [heq]
+    have h := (Real.continuous_sqrt.tendsto 0).comp hint
+    rwa [Real.sqrt_zero] at h
+  rw [ContinuousAt, tendsto_iff_norm_sub_tendsto_zero]
+  exact hnorm
+
 
 end SelfAdjoint
 
