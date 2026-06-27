@@ -5142,6 +5142,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyBump_nonneg
 #print axioms QIQTH.Spectral.cayleyBump_le_one
 #print axioms QIQTH.Spectral.cayleyBump_tendsto_indicator
+#print axioms QIQTH.Spectral.cayleyExp_abs_circle
+#print axioms QIQTH.Spectral.cayleyExpBump_sub_norm
+-- ★ P4 WALL — THE CUTOFF-SYMBOL L²-DEFECT (algebra toward the L²-convergence g_{t,N}→e_t): cayleyExp_abs_circle
+-- (‖e_t(ω)‖=1 on the WHOLE circle incl. the junk point ω=1 where cayleyInv 1=i·2/0=0 ⟹ e_t(1)=exp 0=1) +
+-- cayleyExpBump_sub_norm (‖e_t(ω)·η_N(ω) − e_t(ω)‖ = ψ_N(ω) on the circle: e_t·(η_N−1), ‖e_t‖=1, |η_N−1|=|−ψ_N|=ψ_N).
+-- Hence ‖g_{t,N}−e_t‖²=ψ_N² ⟹ ∫‖g−e_t‖²dμ_x = ∫ψ_N²dμ_x ≤ ∫ψ_N dμ_x → μ_x({1})=0: the cutoff symbol → e_t in
+-- L²(μ_x), the input to U_t = lim cfc(g_{t,N})V x. Axiom-free.
 -- ★ P4 WALL — THE CONTINUOUS BUMP CUTOFF (the symbol's L²-approximation device): cayleyBump N ω := 1−cayleyCutoff N ω
 -- — complementary to the rational cutoff. cayleyBump_continuous + _nonneg + _le_one (η_N∈[0,1] cts, the DCT
 -- dominator) + _tendsto_indicator (η_N(ω)→ if ω=1 then 0 else 1, i.e. → indicator of ℂ∖{1}; from

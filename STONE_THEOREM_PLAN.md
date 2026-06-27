@@ -600,10 +600,15 @@ three Stone-group axioms at the symbol level (strong continuity `t↦U_t x` is t
 Also ✅ `cayleyBump` + `_continuous` + `_nonneg` + `_le_one` + `_tendsto_indicator` — **the continuous bump cutoff**
 `η_N(ω)=1−ψ_N(ω)` (the symbol's L²-approximation device, complementary to `cayleyCutoff`): `η_N∈[0,1]` continuous (the
 DCT dominator), `η_N(ω)→(if ω=1 then 0 else 1)` (indicator of `ℂ∖{1}`, from `cayleyCutoff_tendsto_indicator`). `η_N(1)=0`
-tames `e_t`'s discontinuity at `1`. *Built green.* **Next:** the cutoff symbol `g_{t,N}=e_t·η_N` is `ContinuousOn σ(V)`
-(`η_N→0` kills the discontinuity at `1` — the squeeze `‖e_t·η_N‖≤η_N` + `cayleyExp_abs`) and `→ e_t` in `L²(μ_x)`
-(DCT, `‖e_t·η_N − e_t‖² = ‖e_t‖²(1−η_N)² ≤ (1−η_N)² → 0`, atom gone) ⟹ L²-Cauchy ⟹ existence-half ⟹
-`U_t x := lim cfc(g_{t,N})V x`; then lift `cayleyExp_add`/`_zero` to the group law, strong continuity, generator ⟹ Stone.
+tames `e_t`'s discontinuity at `1`. *Built green.*
+Also ✅ `cayleyExp_abs_circle` (`‖e_t(ω)‖=1` on the **whole** circle incl. the junk point `ω=1` where `cayleyInv 1=
+i·2/0=0` ⟹ `e_t(1)=exp 0=1`) + `cayleyExpBump_sub_norm` (`‖e_t·η_N − e_t‖ = ψ_N` on the circle: `e_t·(η_N−1)`,
+`‖e_t‖=1`, `|η_N−1|=|−ψ_N|=ψ_N`). *Both built green first try.* Hence the cutoff-symbol L²-defect integrand
+`‖g_{t,N}−e_t‖² = ψ_N²`, so `∫‖g−e_t‖²dμ_x = ∫ψ_N²dμ_x ≤ ∫ψ_N dμ_x → μ_x({1})=0` (squeeze: `ψ_N²≤ψ_N` + DCT-1 +
+atom). **Next:** (a) `∫ψ_N²dμ_x→0` (the squeeze) ⟹ `∫‖g_{t,N}−e_t‖²dμ_x→0` (the L²-convergence); (b) the cutoff
+symbol `g_{t,N}=e_t·η_N` is `ContinuousOn σ(V)` (the squeeze `‖e_t·η_N‖=η_N→0` at `1` + `cayleyExp_abs_circle`);
+then L²-Cauchy (triangle) ⟹ existence-half ⟹ `U_t x := lim cfc(g_{t,N})V x`; lift group law; strong continuity;
+generator ⟹ Stone.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

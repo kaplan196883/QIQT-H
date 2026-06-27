@@ -2320,6 +2320,29 @@ theorem cayleyBump_tendsto_indicator (ω : ℂ) :
   rw [heq] at h
   exact h
 
+/-- **The Stone-exponential symbol has modulus `1` on the *whole* unit circle**, including the excluded point `1`:
+    `‖e_t(ω)‖ = 1` for `‖ω‖ = 1`.  At `ω ≠ 1` this is `cayleyExp_abs`; at `ω = 1` the junk value
+    `cayleyInv 1 = i·2/0 = 0` gives `e_t(1) = exp 0 = 1`, of modulus `1`.  So `‖e_t‖ = 1` on all of `σ(V) ⊆ S¹` —
+    the uniform bound that makes the cutoff symbol `e_t · η_N` an `L²(μ_x)` approximant of `e_t`. -/
+theorem cayleyExp_abs_circle {t : ℝ} {ω : ℂ} (h1 : ‖ω‖ = 1) : ‖cayleyExp t ω‖ = 1 := by
+  by_cases hne : ω = 1
+  · subst hne; simp [cayleyExp, cayleyInv]
+  · exact cayleyExp_abs h1 hne
+
+/-- **The pointwise `L²`-defect of the cutoff symbol on the circle:** `‖e_t(ω)·η_N(ω) − e_t(ω)‖ = ψ_N(ω)` for
+    `‖ω‖ = 1`.  Since `e_t·η_N − e_t = e_t·(η_N − 1)` and `‖e_t‖ = 1` on the circle (`cayleyExp_abs_circle`),
+    `‖e_t·(η_N − 1)‖ = |η_N − 1| = |−ψ_N| = ψ_N` (`η_N = 1 − ψ_N`, `ψ_N ≥ 0`).  Hence `‖e_t·η_N − e_t‖² = ψ_N²`,
+    which `→ 0` in `L²(μ_x)` (since `∫ ψ_N² dμ_x ≤ ∫ ψ_N dμ_x → μ_x({1}) = 0`): the cutoff symbol converges to the
+    symbol in `L²(μ_x)`, the input to the strong-limit definition of `U_t`. -/
+theorem cayleyExpBump_sub_norm (t : ℝ) (N : ℕ) {ω : ℂ} (h1 : ‖ω‖ = 1) :
+    ‖cayleyExp t ω * (cayleyBump N ω : ℂ) - cayleyExp t ω‖ = cayleyCutoff N ω := by
+  have habs : ‖cayleyExp t ω‖ = 1 := cayleyExp_abs_circle h1
+  have hfac : cayleyExp t ω * (cayleyBump N ω : ℂ) - cayleyExp t ω
+      = cayleyExp t ω * (((cayleyBump N ω - 1 : ℝ)) : ℂ) := by push_cast; ring
+  rw [hfac, norm_mul, habs, one_mul, Complex.norm_real, cayleyBump,
+    show (1 - cayleyCutoff N ω - 1 : ℝ) = -cayleyCutoff N ω by ring,
+    Real.norm_eq_abs, abs_neg, abs_of_nonneg (cayleyCutoff_pos N ω).le]
+
 end SelfAdjoint
 
 end QIQTH.Spectral
