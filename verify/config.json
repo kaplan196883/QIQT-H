@@ -1,0 +1,37 @@
+{
+  "_comment": "Capstones the capsule certifies + the human-readable input ledger. Edit to add targets or refine annotations; verify.sh / audit.py read this.",
+
+  "standard_axioms": ["propext", "Classical.choice", "Quot.sound"],
+
+  "forbidden_axioms": ["sorryAx", "Lean.ofReduceBool", "Lean.trustCompiler"],
+
+  "capstones": [
+    {
+      "name": "QIQTH.WedgeKMSToGR.qiqt_gr_freefield_complete",
+      "track": "gr",
+      "claim": "For the explicit free Klein-Gordon field, the Einstein field equations follow from the QIQT-H entropy/heat law with all geometric and field-regularity inputs discharged, leaving only the labelled physical hypotheses below.",
+      "scope": "This certifies a CONDITIONAL mathematical entailment (if the listed hypotheses, then the equations), kernel-checked and axiom-free. It does NOT assert that GR is physically true of our universe, nor that these Lean definitions faithfully model QIQT-H / GR (an adequacy judgment left to the reader via the rendered statement)."
+    }
+  ],
+
+  "_input_notes": "Annotations for prop-hypothesis binders by exact name or by prefix (longest match wins). 'role' is purely descriptive: 'physical-input' = a load-bearing assumption that is the honest residue; 'regularity'/'setup' = routine. Unannotated prop binders are reported as '(assumption — see source)'.",
+  "input_notes": {
+    "hKG":      {"role": "physical-input", "desc": "the matter field obeys the Klein-Gordon equation of motion"},
+    "hcap":     {"role": "physical-input", "desc": "FQ reference identification: the regional holographic capacity is Q_R = A / 4 l_P^2"},
+    "hbound":   {"role": "physical-input", "desc": "the dynamical FQ capacity bound (the finite-information ceiling that replaces collapse)"},
+    "hS":       {"role": "physical-input", "desc": "realization derivative of the entropy functional S"},
+    "hK":       {"role": "physical-input", "desc": "realization derivative of the heat/modular functional K"},
+    "hA":       {"role": "physical-input", "desc": "area-derivative hypothesis (the geometric area variation)"},
+    "hflux":    {"role": "physical-input", "desc": "the +2 pi flux normalization wiring one-particle Bisognano-Wichmann into the heat"},
+    "hFlux":    {"role": "physical-input", "desc": "the +2 pi flux normalization wiring one-particle Bisognano-Wichmann into the heat"},
+    "hsat":     {"role": "physical-input", "desc": "Clausius / area-saturation law (the one irreducible thermodynamic input)"},
+    "hbridge":  {"role": "setup", "desc": "the localized-mode bridge identity (discharged in the localization construction)"},
+    "hFocus":   {"role": "setup", "desc": "Raychaudhuri focusing setup"},
+    "hWarea":   {"role": "setup", "desc": "wedge-area geometric setup"},
+    "hDnn":     {"role": "regularity", "desc": "non-negativity of the deficit functional"},
+    "hD0":      {"role": "regularity", "desc": "vanishing of the deficit at the reference"},
+    "hsymm":    {"role": "regularity", "desc": "symmetry of the metric tensor"},
+    "hcong":    {"role": "setup", "desc": "geodesic congruence / Raychaudhuri setup"},
+    "h":        {"role": "regularity", "desc": "a regularity / smoothness hypothesis"}
+  }
+}

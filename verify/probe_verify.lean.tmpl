@@ -1,0 +1,66 @@
+/-
+  AUTO-GENERATED verification probe (filled + run by verify/audit.py). Lean facts only.
+
+  For each capstone target, emits a JSON record carrying everything the claim card and
+  the Stage-3 audit need from the kernel's own view of the *built* environment:
+
+    • present : is the constant in the environment at all?
+    • axioms  : the COMPLETE transitive axiom dependency set (`Lean.collectAxioms`,
+                the same engine behind `#print axioms`). `sorryAx` and
+                `Lean.ofReduceBool` (the `native_decide` tell) appear here if present.
+    • binders : the hypothesis ledger — every argument of the statement, classified
+                data / instance / prop, with its delaborated+parenthesized type tree.
+    • concl   : the delaborated conclusion as a Syntax tree (for readable rendering).
+
+  Placeholders @@IMPORT@@, @@TARGETS@@, @@OUTPUT@@ are filled by Python.
+-/
+import @@IMPORT@@
+
+open Lean Elab Command Meta PrettyPrinter
+
+def reportTargets : List Name := [@@TARGETS@@]
+
+partial def synToJson : Syntax → Json
+  | Syntax.missing => Json.mkObj [("k", Json.str "missing")]
+  | Syntax.atom _ v => Json.mkObj [("k", Json.str "atom"), ("v", Json.str v)]
+  | Syntax.ident _ _ v _ =>
+      Json.mkObj [("k", Json.str "ident"), ("v", Json.str v.toString)]
+  | Syntax.node _ kind args =>
+      Json.mkObj [("k", Json.str "node"), ("kind", Json.str kind.toString),
+                  ("args", Json.arr (args.map synToJson))]
+
+/-- Delaborate `e` and run Lean's own parenthesizer so precedence parens materialise. -/
+def delabP (e : Expr) : MetaM (Option Syntax) :=
+  (do let t ← delab e; let s ← parenthesizeTerm t.raw; pure (some s)) <|>
+  (do try pure (some (← delab e).raw) catch _ => pure none)
+
+def probeOne (tgt : Name) : MetaM Json := do
+  let env ← getEnv
+  if !env.contains tgt then
+    return Json.mkObj [("name", Json.str tgt.toString), ("present", Json.bool false),
+                       ("axioms", Json.arr #[])]
+  let axs ← Lean.collectAxioms tgt
+  let info ← getConstInfo tgt
+  forallTelescopeReducing info.type fun args concl => do
+    let mut binders : Array Json := #[]
+    for a in args do
+      let ld ← a.fvarId!.getDecl
+      let isP ← isProp ld.type
+      let bk := if isP then "prop"
+                else if ld.binderInfo == .instImplicit then "instance" else "data"
+      let stx ← delabP ld.type
+      binders := binders.push (Json.mkObj [
+        ("name", Json.str ld.userName.toString), ("kind", Json.str bk),
+        ("type", match stx with | some s => synToJson s | none => Json.null)])
+    let cStx ← delabP concl
+    return Json.mkObj [
+      ("name", Json.str tgt.toString), ("present", Json.bool true),
+      ("axioms", Json.arr (axs.map (fun n => Json.str n.toString))),
+      ("binders", Json.arr binders),
+      ("concl", match cStx with | some s => synToJson s | none => Json.null)]
+
+run_cmd liftTermElabM do
+  let mut objs : Array Json := #[]
+  for tgt in reportTargets do
+    objs := objs.push (← probeOne tgt)
+  IO.FS.writeFile "@@OUTPUT@@" (Json.arr objs).compress
