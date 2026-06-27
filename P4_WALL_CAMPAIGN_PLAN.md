@@ -456,7 +456,12 @@ Also ✅ **`cayleyStoneU_zero` — `U_0 = id`** (`StoneExp.lean`, axiom-free, bu
 At `t=0`, `e_0≡1` (`cayleyExp_zero`) ⟹ `g_{0,N}=η_N=1−ψ_N` ⟹ `cfc(g_{0,N})V x = x − cfc(ψ_N)V x` (`cfc_sub`+
 `cayley_cfc_one`); atom-killing `cfc(ψ_N)V x→0` (`cayleyCutoff_cfc_tendsto_zero`, `μ_x({1})=0`) ⟹ `x−0=x` by
 `tendsto_nhds_unique`. **First of the 3 remaining unitary-group bricks done.**
-**Next (toward U_t=exp(itA)):** `‖U_t x‖=‖x‖` (isometry, `∫|g_{t,N}|²=∫η_N²→‖x‖²`); bundle `U_t:H→L[ℂ]H`; lift group
+Also ✅ **`cayleyStoneU_isometry` — `‖U_t x‖ = ‖x‖`** (+ helper `cayleyBump_sq_integral_tendsto`; `StoneExp.lean`,
+axiom-free, budget 0): Parseval (`cayley_cfc_norm_sq_integral`) ⟹ `‖cfc(g_{t,N})V x‖²=∫‖g_{t,N}‖²dμ_x`, `=∫η_N²dμ_x`
+on `σ(V)⊆S¹` (`cayleyExpBump_norm`, `‖e_t‖=1`); `∫η_N²=μ_x(σV).toReal−2∫ψ_N+∫ψ_N² → ‖x‖²−0+0` (`cayleyScalarMeasure_-
+univ` + atom-killing `cayleyCutoff_integral_tendsto_atom`/`_sq_integral_tendsto_zero`). Same seq → `‖U_t x‖²`
+(`(cayleyStoneU_tendsto).norm.pow 2`) ⟹ `‖U_t x‖²=‖x‖²` ⟹ `‖U_t x‖=‖x‖` (`Real.sqrt_sq`). **2nd of 3 bricks done.**
+**Next (toward U_t=exp(itA)):** bundle `U_t:H→L[ℂ]H` (linear+isometry ⟹ bounded); lift group
 law `U_s U_t=U_{s+t}` (cfc mult + `cayleyExp_add`); strong continuity; generator ⟹ Stone;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.

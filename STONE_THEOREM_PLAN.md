@@ -651,8 +651,22 @@ cutoff symbol collapses to `g_{0,N} = e_0·η_N = η_N = 1 − ψ_N`; hence `cfc
 against the defining strong limit `cayleyStoneU_tendsto` closes it. *Built green (1 fix: pin the constant in
 `tendsto_const_nhds.sub` by rewriting `nhds x = nhds (x−0)` first — the bare `have :=` couldn't infer it.)* The
 **first of the three remaining unitary-group bricks** is done.
-**Next:** `‖U_t x‖=‖x‖` (isometry, `∫|g_{t,N}|²=∫η_N²→‖x‖²` since `μ_x({1})=0` and `‖e_t‖=1` on `S¹`); bundle
-`U_t : H→L[ℂ]H` (linear + isometry ⟹ bounded `ContinuousLinearMap`); lift the group law `U_s U_t=U_{s+t}`
+
+Also ✅ `cayleyBump_sq_integral_tendsto` + `cayleyStoneU_isometry` — **★★★★ `‖U_t x‖ = ‖x‖`, THE STONE EXPONENTIAL
+IS AN ISOMETRY** (`StoneExp.lean`, axiom-free, budget 0): the **second of the three remaining unitary-group bricks**.
+Parseval (`cayley_cfc_norm_sq_integral`) gives `‖cfc(g_{t,N})V x‖² = ∫‖g_{t,N}‖²dμ_x`, and on `σ(V) ⊆ S¹` the symbol
+has modulus `‖g_{t,N}(ω)‖ = η_N(ω)` (`cayleyExpBump_norm`, `‖e_t‖=1`), so `‖cfc(g_{t,N})V x‖² = ∫η_N²dμ_x`. The
+helper `cayleyBump_sq_integral_tendsto` evaluates the limit: expand `η_N² = (1−ψ_N)² = 1 − 2ψ_N + ψ_N²`, integrate
+termwise (`integral_add`/`_sub`/`_const_mul`, all bounded on the finite `μ_x`), giving `∫η_N² = μ_x(σV).toReal −
+2∫ψ_N + ∫ψ_N²`; total mass `μ_x(σV).toReal = ‖x‖²` (`cayleyScalarMeasure_univ`) and the two atom-killing limits
+`∫ψ_N → μ_x({1}) = 0` (`cayleyCutoff_integral_tendsto_atom` + `cayleyScalarMeasure_atom_eq_zero`) and `∫ψ_N² → 0`
+(`cayleyCutoff_sq_integral_tendsto_zero`) ⟹ `∫η_N² → ‖x‖² − 0 + 0 = ‖x‖²`. The same sequence also → `‖U_t x‖²`
+(norm continuous along `cayleyStoneU_tendsto`: `(·.norm).pow 2`), so `‖U_t x‖² = ‖x‖²` by `tendsto_nhds_unique`,
+hence `‖U_t x‖ = ‖x‖` (both nonneg, `Real.sqrt_sq`). *Built green (2 fixes: annotate the RHS λ-binder with the
+spectrum-subtype type in the square-expansion `funext`; and split the integral via `have`-with-explicit-type
+equations `e1/e2/e3` — `rw [integral_add …]` failed keyed-matching on the grouped integrand — plus factor `∫1 = ‖x‖²`
+through `exact cayleyScalarMeasure_univ` to bridge the `Measure.real` vs `.toReal` defeq.)*
+**Next:** bundle `U_t : H→L[ℂ]H` (linear + isometry ⟹ bounded `ContinuousLinearMap`); lift the group law `U_s U_t=U_{s+t}`
 (cfc multiplicativity + `cayleyExp_add`); strong continuity; generator ⟹ Stone.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap

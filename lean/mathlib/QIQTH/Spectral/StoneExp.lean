@@ -453,6 +453,130 @@ theorem cayleyStoneU_zero [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
     exact tendsto_const_nhds.sub (cayleyCutoff_cfc_tendsto_zero U hgrp hU0 hUinner hUbd hSC x)
   exact tendsto_nhds_unique htends hlim
 
+/-- **`∫ η_N² dμ_x → ‖x‖²`** — the `L²`-mass of the cutoff bump fills out the whole spectral measure.  Expand
+    `η_N² = (1 − ψ_N)² = 1 − 2ψ_N + ψ_N²`; integrate termwise (all integrands bounded on the finite measure `μ_x`):
+    `∫ η_N² dμ_x = μ_x(σ(V)).toReal − 2 ∫ ψ_N dμ_x + ∫ ψ_N² dμ_x`.  The total mass is `μ_x(σ(V)).toReal = ‖x‖²`
+    (`cayleyScalarMeasure_univ`), and both cutoff integrals vanish: `∫ ψ_N → μ_x({1}) = 0`
+    (`cayleyCutoff_integral_tendsto_atom` + `cayleyScalarMeasure_atom_eq_zero`) and `∫ ψ_N² → 0`
+    (`cayleyCutoff_sq_integral_tendsto_zero`).  Hence `∫ η_N² → ‖x‖² − 0 + 0 = ‖x‖²` — the limiting `L²`-norm of the
+    cutoff symbol equals the total Born mass, the source of the `U_t` isometry. -/
+theorem cayleyBump_sq_integral_tendsto [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    Filter.Tendsto
+      (fun N => ∫ ω, (cayleyBump N (ω : ℂ)) ^ 2 ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+      Filter.atTop (nhds (‖x‖ ^ 2)) := by
+  haveI : IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+    cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC x
+  have hIψ : ∀ N, Integrable
+      (fun ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) => cayleyCutoff N (ω : ℂ))
+      (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+    intro N
+    refine (integrable_const (1 : ℝ)).mono' ?_ ?_
+    · exact ((cayleyCutoff_continuous N).comp continuous_subtype_val).aestronglyMeasurable
+    · filter_upwards with ω
+      rw [Real.norm_of_nonneg (cayleyCutoff_pos N _).le]; exact cayleyCutoff_le_one N _
+  have hIψ2 : ∀ N, Integrable
+      (fun ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) =>
+        (cayleyCutoff N (ω : ℂ)) ^ 2)
+      (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+    intro N
+    refine (integrable_const (1 : ℝ)).mono' ?_ ?_
+    · exact (((cayleyCutoff_continuous N).comp continuous_subtype_val).pow 2).aestronglyMeasurable
+    · filter_upwards with ω
+      rw [Real.norm_of_nonneg (sq_nonneg _)]
+      nlinarith [(cayleyCutoff_pos N (ω : ℂ)).le, cayleyCutoff_le_one N (ω : ℂ)]
+  -- `∫ η_N² = ‖x‖² − 2 ∫ ψ_N + ∫ ψ_N²` (expand the square, integrate termwise, total mass `= ‖x‖²`)
+  have hexp : ∀ N, (∫ ω, (cayleyBump N (ω : ℂ)) ^ 2 ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+      = ‖x‖ ^ 2 - 2 * (∫ ω, cayleyCutoff N (ω : ℂ) ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+        + (∫ ω, (cayleyCutoff N (ω : ℂ)) ^ 2 ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x)) := by
+    intro N
+    have hpt : (fun ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) =>
+        (cayleyBump N (ω : ℂ)) ^ 2)
+        = (fun ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) =>
+            ((1 : ℝ) - 2 * cayleyCutoff N (ω : ℂ)) + (cayleyCutoff N (ω : ℂ)) ^ 2) := by
+      funext ω; simp only [cayleyBump]; ring
+    -- split the integral termwise (`have`-with-explicit-type forces defeq elaboration of `integral_add`/`_sub`)
+    have e1 : (∫ ω, ((1 : ℝ) - 2 * cayleyCutoff N (ω : ℂ)) + (cayleyCutoff N (ω : ℂ)) ^ 2
+          ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+        = (∫ ω, ((1 : ℝ) - 2 * cayleyCutoff N (ω : ℂ))
+            ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+          + ∫ ω, (cayleyCutoff N (ω : ℂ)) ^ 2 ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+      integral_add ((integrable_const (1 : ℝ)).sub ((hIψ N).const_mul 2)) (hIψ2 N)
+    have e2 : (∫ ω, ((1 : ℝ) - 2 * cayleyCutoff N (ω : ℂ))
+          ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+        = (∫ ω, (1 : ℝ) ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+          - ∫ ω, 2 * cayleyCutoff N (ω : ℂ) ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+      integral_sub (integrable_const (1 : ℝ)) ((hIψ N).const_mul 2)
+    have e3 : (∫ ω, 2 * cayleyCutoff N (ω : ℂ) ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+        = 2 * ∫ ω, cayleyCutoff N (ω : ℂ) ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+      integral_const_mul 2 _
+    have e4 : (∫ ω, (1 : ℝ) ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x)) = ‖x‖ ^ 2 := by
+      rw [integral_const, smul_eq_mul, mul_one]
+      exact cayleyScalarMeasure_univ U hgrp hU0 hUinner hUbd hSC x
+    rw [hpt, e1, e2, e3, e4]
+  -- `∫ ψ_N → μ_x({1}) = 0` and `∫ ψ_N² → 0`
+  have hatom : Filter.Tendsto
+      (fun N => ∫ ω, cayleyCutoff N (ω : ℂ) ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+      Filter.atTop (nhds 0) := by
+    have h := cayleyCutoff_integral_tendsto_atom U hgrp hU0 hUinner hUbd hSC x
+    rwa [cayleyScalarMeasure_atom_eq_zero U hgrp hU0 hUinner hUbd hSC x, ENNReal.toReal_zero] at h
+  have hsq := cayleyCutoff_sq_integral_tendsto_zero U hgrp hU0 hUinner hUbd hSC x
+  simp only [hexp]
+  have key : Filter.Tendsto
+      (fun N => ‖x‖ ^ 2 - 2 * (∫ ω, cayleyCutoff N (ω : ℂ)
+          ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+        + (∫ ω, (cayleyCutoff N (ω : ℂ)) ^ 2 ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x)))
+      Filter.atTop (nhds (‖x‖ ^ 2 - 2 * 0 + 0)) :=
+    (tendsto_const_nhds.sub (hatom.const_mul 2)).add hsq
+  simpa using key
+
+/-- **`‖U_t x‖ = ‖x‖` — the Stone exponential is an isometry** (toward `U_t ∈ unitary(H)`).  By Parseval
+    (`cayley_cfc_norm_sq_integral`) the cutoff vectors have squared norm `‖cfc(g_{t,N}) V x‖² = ∫ ‖g_{t,N}‖² dμ_x`,
+    and on `σ(V) ⊆ S¹` the symbol has modulus `‖g_{t,N}(ω)‖ = η_N(ω)` (`cayleyExpBump_norm`, since `‖e_t‖ = 1`), so
+    `‖cfc(g_{t,N}) V x‖² = ∫ η_N² dμ_x → ‖x‖²` (`cayleyBump_sq_integral_tendsto`).  The same sequence also tends to
+    `‖U_t x‖²` (norm is continuous along the defining strong limit `cayleyStoneU_tendsto`), so by uniqueness
+    `‖U_t x‖² = ‖x‖²`, hence `‖U_t x‖ = ‖x‖` (both nonnegative, `Real.sqrt_sq`).  The second of the three remaining
+    unitary-group bricks.  Axiom-free; free scalar; no UV datum. -/
+theorem cayleyStoneU_isometry [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (t : ℝ) (x : H) :
+    ‖cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x‖ = ‖x‖ := by
+  -- `‖cfc(g_{t,N}) V x‖² = ∫ η_N² dμ_x` (Parseval + `‖g_{t,N}‖ = η_N` on the circle)
+  have hnormsq : ∀ N, ‖cfc (cayleyExpBump t N)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x‖ ^ 2
+      = ∫ ω, (cayleyBump N (ω : ℂ)) ^ 2 ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+    intro N
+    rw [cayley_cfc_norm_sq_integral U hgrp hU0 hUinner hUbd hSC (cayleyExpBump t N)
+      (cayleyExpBump_continuousOn U hgrp hU0 hUinner hUbd hSC t N) x]
+    refine integral_congr_ae (Filter.Eventually.of_forall (fun ω => ?_))
+    have hcirc : ‖(ω : ℂ)‖ = 1 := by
+      have hmem := cayley_spectrum_subset_circle U hgrp hU0 hUinner hUbd hSC ω.2
+      rwa [mem_sphere_zero_iff_norm] at hmem
+    show ‖cayleyExpBump t N (ω : ℂ)‖ ^ 2 = (cayleyBump N (ω : ℂ)) ^ 2
+    rw [cayleyExpBump_norm t N hcirc]
+  -- the squared-norm sequence tends to `‖x‖²` …
+  have hsqlim : Filter.Tendsto (fun N => ‖cfc (cayleyExpBump t N)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x‖ ^ 2)
+      Filter.atTop (nhds (‖x‖ ^ 2)) := by
+    simp only [hnormsq]
+    exact cayleyBump_sq_integral_tendsto U hgrp hU0 hUinner hUbd hSC x
+  -- … and also to `‖U_t x‖²` (norm continuous along the defining strong limit)
+  have hsqlim2 : Filter.Tendsto (fun N => ‖cfc (cayleyExpBump t N)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x‖ ^ 2)
+      Filter.atTop (nhds (‖cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x‖ ^ 2)) :=
+    ((cayleyStoneU_tendsto U hgrp hU0 hUinner hUbd hSC t x).norm).pow 2
+  -- uniqueness of limits ⟹ `‖U_t x‖² = ‖x‖²`, then take square roots (both nonnegative)
+  have h2 : ‖cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x‖ ^ 2 = ‖x‖ ^ 2 :=
+    tendsto_nhds_unique hsqlim2 hsqlim
+  calc ‖cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x‖
+      = Real.sqrt (‖cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x‖ ^ 2) :=
+        (Real.sqrt_sq (norm_nonneg _)).symm
+    _ = Real.sqrt (‖x‖ ^ 2) := by rw [h2]
+    _ = ‖x‖ := Real.sqrt_sq (norm_nonneg _)
+
 
 end SelfAdjoint
 

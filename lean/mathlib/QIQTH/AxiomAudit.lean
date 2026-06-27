@@ -5153,6 +5153,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyStoneU_add
 #print axioms QIQTH.Spectral.cayleyStoneU_smul
 #print axioms QIQTH.Spectral.cayleyStoneU_zero
+#print axioms QIQTH.Spectral.cayleyBump_sq_integral_tendsto
+#print axioms QIQTH.Spectral.cayleyStoneU_isometry
+-- ★★★★ P4 WALL — ‖U_t x‖ = ‖x‖, THE STONE EXPONENTIAL IS AN ISOMETRY (2nd of 3 remaining unitary-group bricks):
+-- cayleyStoneU_isometry [Nontrivial H]. By Parseval (cayley_cfc_norm_sq_integral) ‖cfc(g_{t,N})V x‖²=∫‖g_{t,N}‖²dμ_x,
+-- and on σ(V)⊆S¹ ‖g_{t,N}(ω)‖=η_N(ω) (cayleyExpBump_norm, ‖e_t‖=1) so =∫η_N²dμ_x → ‖x‖² (cayleyBump_sq_integral_-
+-- tendsto: ∫η_N²=∫(1−ψ_N)²=μ_x(σV).toReal−2∫ψ_N+∫ψ_N² → ‖x‖²−0+0, via cayleyScalarMeasure_univ + the two atom-killing
+-- limits cayleyCutoff_integral_tendsto_atom/cayleyCutoff_sq_integral_tendsto_zero). The same sequence → ‖U_t x‖²
+-- (norm continuous along cayleyStoneU_tendsto), so ‖U_t x‖²=‖x‖² by uniqueness ⟹ ‖U_t x‖=‖x‖ (Real.sqrt_sq). Axiom-free.
 -- ★★★★ P4 WALL — U_0 = id (Stone group identity): cayleyStoneU_zero [Nontrivial H] — U_0 x = x. At t=0 the symbol
 -- is e_0 ≡ 1 (cayleyExp_zero), so g_{0,N}=η_N=1−ψ_N and cfc(g_{0,N})V x = x − cfc(ψ_N)V x; the atom-killing limit
 -- cfc(ψ_N)V x → 0 (cayleyCutoff_cfc_tendsto_zero, μ_x({1})=0) gives x−0=x by uniqueness of strong limits. The first
