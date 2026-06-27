@@ -581,11 +581,26 @@ WITHOUT a PVM. Also ✅ this fire: `translationCLM_norm_le`/`_continuous` (named
 (`Nontrivial L²(ℝ)`) — the prerequisites for instantiating `stoneGen_cfc_h_mul` on `translationCLM`; the instantiation
 itself is **checkpointed** (the `Lp` cfc-coercion `whnf` plumbing, `↑↑(cayleyUnitary)` mismatch — documented in
 `MomentumGenerator.lean`, purely mechanical, the abstract identity is proven).
-**Next (the genuine remaining frontier — Phase 5):** the **dual-weight trace + Type II scaling** `τ∘θ_s = e^{−s}τ` ⟹
-the FQ bound `S(ρ_R) ≤ A/4ℓ_P²`, via the **narrow conditional interface** (state the bound CONDITIONALLY under
-`τ(θ_s a)=e^{−s}τ(a)` + `K̃=A_edge/4ℓ_P²`, NOT a full crossed-product/vN-weights construction — Mathlib lacks it; per
-GPT-5.5-pro this frontier EXPANDS unless narrowly interfaced). This — plus the optional `Lp`-plumbing instantiation —
-is all that remains toward P4's bound.
+Also ✅ **`Phase5Master.of_le` — THE Phase-5 INTERFACE IS EXACTLY THE JLMS MASTER INEQUALITY** (`FQBoundCGP.lean`,
+axiom-free, budget 0): `SvN + cgpEntropy S ξ ≤ areaTerm ⟹ Phase5Master S ξ SvN areaTerm` (witness `remainder =
+areaTerm − SvN − cgpEntropy ≥ 0`) — the converse of `phase5_master_ineq`. So the `Phase5Master` certificate (on which
+`holographic_area_floor : S ≤ A/4ℓ_P²` is conditional) carries **neither more nor less** than the single inequality
+`SvN + cgpEntropy ≤ areaTerm`: **NON-VACUOUS** (not instanceable for arbitrary entropy/area) and **MINIMAL** (the
+dual-weight trace's ONLY obligation is that one inequality). **Built green.** Confirms the conditional FQ bound assumes
+exactly the Phase-5 trace's output — nothing more.
+**📊 HONEST STATE OF P4 (this session's endpoint):** the campaign has reached its **conditional citable endpoint**.
+(1) **The pivotal wall — general Stone — is COMPLETE**, axiom-free, no PVM: self-adjoint generators
+(`stoneGen_isSelfAdjoint` ⟹ `clockEnergy_isSelfAdjoint` = `X = A_edge`, `momentumOp`, `modularGen`) + the full unitary
+group `U_t = exp(itA)` + the spectral action `stoneGen U = mult by c` (`stoneGen_cfc_h_mul`). (2) **P4's bound
+`S(ρ_R) ≤ A/4ℓ_P²` is a THEOREM** (`holographic_area_floor`), axiom-free, conditional ONLY on the named, **non-vacuous,
+minimal** `Phase5Master` certificate (now proven equivalent to the JLMS master inequality). (3) The **1/4 ratio** is
+derived (`SakharovRatio`); `⟨A_edge⟩ = A/4ℓ_P²` (value of `G`) is the carried UV datum, never claimed.
+**The ONE genuine remaining Mathlib-grade gap:** the **Phase-5 dual-weight trace / Type II scaling `τ∘θ_s = e^{−s}τ`**
+that would *instance* `Phase5Master` (i.e. derive the master inequality from the trace's area first law). Per
+GPT-5.5-pro, this frontier EXPANDS unless narrowly interfaced — and it now IS (the `Phase5Master` interface is exactly
+its one obligation). Building the full crossed-product/vN-weights construction is beyond Mathlib's current
+infrastructure (no vN weights, crossed products, modular theory, semifinite traces); honestly checkpointed as the
+cited frontier. (Plus the optional `Lp`-plumbing instantiation of `stoneGen_cfc_h_mul` on the concrete groups.)
 **(Superseded) earlier framing — the direct identity `stoneGen U (φ(V)z)=(c·φ)(V)z` via the
 resolvent factorization above (B); then instantiate translationLp/modUnitary/clockTransl ⟹ X=A_edge; then Phase 5
 via the conditional interface;

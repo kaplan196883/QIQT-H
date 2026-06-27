@@ -61,6 +61,18 @@ theorem phase5_master_ineq {S : StandardSubspace H} {ξ : H} {SvN areaTerm : ℝ
   have hb := h.jlms_balance
   linarith
 
+/-- **The Phase-5 certificate is EXACTLY the JLMS master inequality** (the converse of `phase5_master_ineq`):
+    the certificate is constructible iff `SvN + cgpEntropy S ξ ≤ areaTerm`.  The witnessing remainder is the *gap*
+    `areaTerm − SvN − cgpEntropy S ξ ≥ 0`.  Combined with `phase5_master_ineq`, this proves `Phase5Master` carries
+    **neither more nor less** than the single inequality `SvN + cgpEntropy S ξ ≤ areaTerm` — confirming the interface
+    is **non-vacuous** (it cannot be instanced for arbitrary `SvN`, `areaTerm`) and **minimal** (the dual-weight
+    trace's *only* obligation is to supply that one inequality, via the JLMS area first law).  Axiom-free. -/
+noncomputable def Phase5Master.of_le {S : StandardSubspace H} {ξ : H} {SvN areaTerm : ℝ}
+    (h : SvN + cgpEntropy S ξ ≤ areaTerm) : Phase5Master S ξ SvN areaTerm where
+  remainder := areaTerm - SvN - cgpEntropy S ξ
+  remainder_nonneg := by linarith
+  jlms_balance := by ring
+
 /-- **★★★ P4's FQ bound, unconditional relative to the Phase-5 certificate:**
     `SvN ≤ areaTerm`.  Given the `Phase5Master` certificate (the JLMS balance with nonnegative remainder) and the
     standard CGP positivity hypotheses, the von Neumann entropy is at most the area term `⟨A_edge⟩/4ℓ_P²`.  This is

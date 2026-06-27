@@ -6260,6 +6260,13 @@ namespace QIQTH.AxiomAudit
 
 #print axioms QIQTH.fq_bound_cgp
 #print axioms QIQTH.phase5_master_ineq
+#print axioms QIQTH.Phase5Master.of_le
+-- ★★★ P4 WALL PHASE 6 — THE Phase5Master INTERFACE IS EXACTLY THE JLMS MASTER INEQUALITY (minimality + non-vacuity):
+-- Phase5Master.of_le — SvN + cgpEntropy S ξ ≤ areaTerm ⟹ Phase5Master S ξ SvN areaTerm (witness remainder =
+-- areaTerm − SvN − cgpEntropy ≥ 0). The converse of phase5_master_ineq, so the certificate carries NEITHER MORE NOR
+-- LESS than the single inequality SvN+cgpEntropy≤areaTerm: it is NON-VACUOUS (not instanceable for arbitrary SvN/
+-- areaTerm) and MINIMAL (the dual-weight trace's ONLY obligation is that one inequality via the JLMS area first law).
+-- Confirms the conditional FQ bound holographic_area_floor assumes exactly the trace's output, nothing more. Axiom-free.
 #print axioms QIQTH.fq_bound_of_phase5
 #print axioms QIQTH.holographic_area_floor
 -- ★★★ P4 WALL — THE HOLOGRAPHIC AREA FLOOR IN MANIFEST FORM: holographic_area_floor [Phase5Master S ξ SvN
