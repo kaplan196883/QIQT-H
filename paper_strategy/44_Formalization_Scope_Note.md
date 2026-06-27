@@ -55,12 +55,43 @@ or a short appendix; it is the exact wording that maximizes credibility and prev
 | Fock modular flow $\Gamma(\Delta^{it})$, $\sigma_t(W(u))=W(\Delta^{it}u)$ | **Machine-checked** |
 | Coherent-state relative modular operator + Connes cocycle + chain rule | **Machine-checked** |
 | Entropy reduction $S_{\mathrm{Araki}}(\omega_{W(f)\Omega}\|\omega_\Omega)=S_{\mathrm{CGP}}(f)$ | **Machine-checked** |
-| Holographic capacity axiom FQ; $S_{\mathrm{ren}}\le Q_R$ | Not formalized (postulate) |
+| Holographic capacity axiom FQ ($\log N_R \le Q_R = A/4\ell_P^2$) | Postulate (now a *typeclass hypothesis* `HolographicCapacityBound`, **not** a Lean `axiom`) |
+| $S_{\mathrm{vN}}(\rho_R)\le Q_R = A/4\ell_P^2$ **given** FQ | **Machine-checked** (Route 2 / P4-MICRO: `area_floor_vonNeumann`, conditional on the capacity postulate) |
 | CPW/Witten crossed-product Type II construction | Not formalized (borrowed) |
 | Macroscopic Definiteness Conjecture (H2) | Not formalized (central postulate) |
 | Donald's identity (Type II) + Fano step of Theorem 6 | Not formalized |
 | Decoherence / Quantum Darwinism (H3) | Not formalized |
 | Born rule from typicality | Not formalized (open problem) |
+
+## P4-MICRO (Route 2) — the area floor as a machine-checked corollary of finite capacity
+
+*(Drop-in paragraph; machine-checked in `QIQTH/FQBoundMicro.lean`, axiom-free, conditional on the named capacity
+postulate.)*
+
+> In the finite-capacity formulation we do not take the entropy–area inequality itself as primitive. For each
+> physical regulated region — or fixed boundary-area sector — we postulate a finite operational capacity $N_R$, the
+> number of mutually distinguishable regional microstates ($\mathcal H_R$ is a finite type-I/code cutoff of the
+> genuinely type-III$_1$ local algebra). The holographic content of the postulate is $\log N_R \le A(\partial
+> R)/4\ell_P^2$, with equality only in the ideal saturating sector; the $1/4$ normalization is supplied separately
+> by the Sakharov-ratio result (machine-checked, regulator- and matter-independent). The finite-dimensional
+> quantum max-entropy theorem, $S_{\mathrm{vN}}(\rho_R)\le\log\dim\mathcal H_R=\log N_R$ (machine-checked, axiom-free),
+> then gives P4 immediately — $S_{\mathrm{vN}}(\rho_R)\le A/4\ell_P^2$ — with saturation at the maximally-mixed
+> state. Thus P4-MICRO derives the area floor from a holographic *capacity* postulate; it does **not** derive that
+> capacity scales with boundary area (the holographic input) nor the value of $G$ (the carried UV datum). The
+> Type-II / dual-weight-trace route (Route 1) is retained precisely to *derive or justify* that holographic capacity
+> law and its modular area origin — it is not superseded.
+
+**Honest framing rules (do not violate):**
+- Say "**P4 is a theorem conditional on the holographic capacity postulate**," never "the area law is derived" or
+  "axiom-free area law." The postulate is a typeclass hypothesis (`HolographicCapacityBound`), not a Lean `axiom`.
+- The value of $G$ / $\langle A_{\mathrm{edge}}\rangle = A/4\ell_P^2$ is the **carried UV datum** — a free real, never
+  assigned. The $1/4$ *ratio* is derived (Sakharov); the *value* is not.
+- **"P4-MICRO $\Rightarrow$ GR" is FALSE as written.** In the machine-checked Jacobson theorem
+  (`jacobson_einstein_from_area_law`), P4-MICRO fills only the entropy slots (`hbound`, `hsat`); the **thermal**
+  inputs (`htemp` Unruh, `hClausius` — Bisognano–Wichmann / KMS) are irreducibly modular (Route 1), and a microstate
+  *count* cannot produce a *temperature* (the saturated state is $\beta=0$, not the Unruh $\beta$). For the free
+  field the thermal side is independently discharged via BW; the honest claim is "P4-MICRO supplies the area-law
+  input to a Jacobson derivation whose thermal inputs are established separately."
 
 ## Upgrades this licenses in the paper body
 

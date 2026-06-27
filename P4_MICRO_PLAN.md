@@ -248,9 +248,12 @@ via the trace, P4-MICRO supplies it via finite capacity.
   `Phase5Master`). + a doc "Bridge" section: Route 2 kinematic (capacity⇒bound) vs Route 1 dynamical (the trace that
   would derive the capacity); complementary, same area term, each carries a named hypothesis. Green, standard 3,
   budget 0.
-- [ ] **M-9 paper hook** — the GPT-5.5-pro one-paragraph framing (§3.1 verbatim-adapted): regional capacity `N_R`,
-  holographic content `log N_R ≤ A/4ℓ_P²` (equality only in the ideal saturating sector), Sakharov `1/4`, finite-dim
-  max-entropy ⇒ P4; Route 1 retained to *derive* the capacity law. *(doc-only)*
+- [x] **M-9 paper hook** — ✅ **LANDED 2026-06-27**: added a "P4-MICRO (Route 2)" section to
+  `paper_strategy/44_Formalization_Scope_Note.md` (the drop-in paragraph + honest-framing rules: "theorem
+  conditional on the capacity postulate" not "area law derived"; carried UV datum; "P4-MICRO ⟹ GR" false alone) and
+  updated the "what is / is not formalized" table — the capacity *axiom* stays a postulate (now a typeclass
+  hypothesis, not a Lean axiom), but `S_vN ≤ Q_R` GIVEN it is now **machine-checked** (`area_floor_vonNeumann`).
+  Doc-only.
 - [ ] **M-10 (GR bridge) `gr_from_p4micro` against `QiqtToGR.qiqt_bekenstein_gives_gr`** — REVISED per §3.3: do NOT
   re-route through `jacobson_einstein_from_area_law`'s `hAreaLaw`; instead instantiate the free-field capstone
   `qiqt_bekenstein_gives_gr`, whose entropy slots are *already* P4-MICRO's outputs:
@@ -330,6 +333,11 @@ AND the `P4_WALL_CAMPAIGN_PLAN.md` checklist (note the P4-MICRO endpoint beside 
   trace). + a doc "Bridge" section making the two endpoints explicit (kinematic capacity⇒bound vs dynamical
   modular-trace derivation; complementary, same carried UV datum). Green, standard 3, budget 0, wired into
   `AxiomAudit.lean`. Next: **M-9** (doc-only paper hook, the §3.1/§3.2 framing).
+- 2026-06-27 — **M-9 LANDED (paper hook, doc-only).** Added the P4-MICRO drop-in paragraph + honest-framing rules
+  to `paper_strategy/44_Formalization_Scope_Note.md`, and updated its formalization table: the FQ capacity *axiom*
+  stays a postulate (now a typeclass hypothesis, not a Lean axiom), while `S_vN(ρ_R) ≤ Q_R = A/4ℓ_P²` GIVEN FQ is
+  now **machine-checked** (`area_floor_vonNeumann`). Includes the "P4-MICRO ⟹ GR is false alone" caveat. Next:
+  **M-10** (the GR bridge `gr_from_p4micro` against `QiqtToGR.qiqt_bekenstein_gives_gr` — the headline increment).
 
 ## 7. Files
 
