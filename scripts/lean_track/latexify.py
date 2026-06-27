@@ -135,6 +135,20 @@ DEFAULT_NOTATION = {
     "negMulLog": r"\mathrm{nml}", "fourierChar": r"\mathrm{e}", "fourierIntegral": r"\mathcal{F}",
     "covDeriv20": r"\nabla^{2}", "realCommutant": r"\mathcal{M}'",
     "inner": r"\langle #2,#3\rangle",   # inner 𝕜 x y -> ⟨x, y⟩
+    # third pass — the highest-frequency long names still surviving into the math,
+    # each given its OWN docstring's symbol (faithful, not invented):
+    "Krep": r"K", "KrepCont": r"K_{\mathbb{C}}",          # localization map (K f)(θ)
+    "projK": r"P", "projIK": r"Q",                        # RvD projections onto 𝒦, i𝒦
+    "rvdR": r"R", "rvdRC": r"R", "rvdPmQ": r"(P-Q)", "rvdT": r"T",  # RvD R=P+Q, P−Q, T
+    "qForm": r"q", "bForm": r"b", "cForm": r"c",          # spectral quad/bilinear/complex forms
+    "kmsFun": r"F", "kmsBCF": r"F", "gaussMode": r"g_{0}",  # KMS function F(z); reference profile g₀
+    # standard Mathlib operators with conventional math notation:
+    "lam": r"\lambda",
+    "volume": r"\mathrm{vol}", "MeasureTheory.volume": r"\mathrm{vol}",
+    "Ioo": r"(#1,#2)", "Icc": r"[#1,#2]", "Ico": r"[#1,#2)", "Ioc": r"(#1,#2]",
+    "nhds": r"\mathcal{N}", "deriv": r"\mathrm{D}", "span": r"\mathrm{span}",
+    "cfc": r"#1(#2)",                                    # functional calculus: cfc f a = f(a)
+    "min": r"\min(#1,#2)", "max": r"\max(#1,#2)",
 }
 
 _IDENT = re.compile(r"[A-Za-z_][A-Za-z0-9_.'!?]*")

@@ -15,7 +15,7 @@ description: QIQTH.StandardSubspaceModularFlow — definitions, lemmas and theor
 The RvD modular character `u_t(r)`, a globally bounded Borel function on `ℝ`: on `(0,2)` it is `exp(i·t·log((2−r)/r))`, and `1` outside (the endpoint convention makes the group law hold pointwise).
 
 $$
-\chi_{\mathrm{mod}}\,t \;:=\; (\mathrm{Ioo}\,0\,2).\mathrm{piecewise}\,(\lambda r \mapsto \exp\,(i \cdot t \cdot (\log\,((2 - r) / r))))\,\lambda x \mapsto 1
+\chi_{\mathrm{mod}}\,t \;:=\; (({0},{2})).\mathrm{piecewise}\,(\lambda r \mapsto \exp\,(i \cdot t \cdot (\log\,((2 - r) / r))))\,\lambda x \mapsto 1
 $$
 
 <small>Used by [`deviceOpReal_eq`](/browser/qiqth-modularrelativeentropy#d-qiqth-deviceopreal-eq), [`deviceOpC_bottomEdge_eq`](/browser/qiqth-modularrelativeentropy#d-qiqth-deviceopc-bottomedge-eq), [`modChar_measurable`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modchar-measurable), [`modChar_norm`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modchar-norm), [`modChar_zero`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modchar-zero), [`modChar_add`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modchar-add), [`modChar_conj`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modchar-conj), [`modSpecFun`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modspecfun), and 7 more.</small>
@@ -120,7 +120,7 @@ $$
 `u_t` restricted to the spectrum of `R` — the function fed to the bounded Borel FC.
 
 $$
-f_{\mathrm{mod}}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,S\,t\,\omega \;:=\; \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modchar}{\chi_{\mathrm{mod}}}\,t\,\omega
+f_{\mathrm{mod}}\,H\,S\,t\,\omega \;:=\; \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modchar}{\chi_{\mathrm{mod}}}\,t\,\omega
 $$
 
 <small>Used by [`deviceOpReal_eq`](/browser/qiqth-modularrelativeentropy#d-qiqth-deviceopreal-eq), [`deviceOpC_bottomEdge_eq`](/browser/qiqth-modularrelativeentropy#d-qiqth-deviceopc-bottomedge-eq), [`modSpecFun_measurable`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modspecfun-measurable), [`modSpecFun_norm_le`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modspecfun-norm-le), [`modUnitary`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary), [`modUnitary_zero`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary-zero), [`modUnitary_add`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary-add), [`modUnitary_adjoint`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary-adjoint), and 2 more.</small>
@@ -153,7 +153,7 @@ $$
 `R = rvdRC S` is self-adjoint (it is positive).
 
 $$
-\mathrm{IsSelfAdjoint}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)
+\mathrm{IsSelfAdjoint}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S)
 $$
 
 *Proof.* By [`rvdRC_nonneg`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc-nonneg). $\square$
@@ -166,7 +166,7 @@ $$
 **The continuum modular unitary `U_t = Δ^{it} = u_t(R)`** via the bounded Borel FC of `R`.
 
 $$
-\Delta\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,S\,t \;:=\; \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\cdots \,\cdots \,\cdots
+\Delta\,H\,S\,t \;:=\; \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S)\,\cdots \,\cdots \,\cdots \,\cdots
 $$
 
 <small>Used by [`oneParticleBW_niceWedge`](/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-oneparticlebw-nicewedge), [`oneParticleBW_niceWedge_of_standard`](/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-oneparticlebw-nicewedge-of-standard), [`oneParticleBW_niceWedge_reehSchlieder`](/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-oneparticlebw-nicewedge-reehschlieder), [`oneParticleBW_niceWedge_unconditional`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-oneparticlebw-nicewedge-unconditional), [`hasDerivAt_modularEnergy_of_boost_pos`](/browser/qiqth-fock-freefieldhflux#d-qiqth-fock-hasderivat-modularenergy-of-boost-pos), [`freeField_modularEnergy_eq_boostCharge`](/browser/qiqth-fock-freefieldhflux#d-qiqth-fock-freefield-modularenergy-eq-boostcharge), [`freeField_oneParticle_hFlux`](/browser/qiqth-fock-freefieldhflux#d-qiqth-fock-freefield-oneparticle-hflux), [`freeField_component_hFlux`](/browser/qiqth-fock-freefieldhflux#d-qiqth-fock-freefield-component-hflux), and 53 more.</small>
@@ -216,7 +216,7 @@ $$
 **`R + D = 2·P`** (RvD `P = ½(R+D)`): `(P+Q) + (P−Q) = 2P`.
 
 $$
-\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S + \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S = 2 \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S
+\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{R}\,S + \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S = 2 \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S
 $$
 
 *Proof.* By [`projIK`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik). $\square$
@@ -229,7 +229,7 @@ $$
 `𝒦`-membership via its projection: `ξ ∈ 𝒦 ↔ P ξ = ξ`.
 
 $$
-\xi \in S.\mathrm{cl} \leftrightarrow (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,\xi = \xi
+\xi \in S.\mathrm{cl} \leftrightarrow (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S)\,\xi = \xi
 $$
 
 *Proof.* Immediate from the definitions. $\square$
@@ -242,7 +242,7 @@ $$
 **Reduction of `[U_t, P] = 0` to `[U_t, R] = 0 ∧ [U_t, D] = 0`** via `P = ½(R+D)`.
 
 $$
-(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi) \to (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi) \to (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)
+(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{R}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{R}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi) \to (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi) \to (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)
 $$
 
 *Proof.* By [`rvdR_add_rvdPmQ_eq`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdr-add-rvdpmq-eq). $\square$
@@ -255,7 +255,7 @@ $$
 **Conditional standard-subspace invariance:** if `U_t` commutes with `R` and `D` (pointwise), then `U_t 𝒦 ⊆ 𝒦`.  With unitarity this gives `U_t 𝒦 = 𝒦` — the property certifying `Δ^{it}` is the modular flow OF `𝒦`.  The hypotheses are the two commutators isolated above.
 
 $$
-(\forall (\xi : H), (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)) \to (\forall (\xi : H), (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)) \to \forall \xi\in S.\mathrm{cl}, (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi \in S.\mathrm{cl}
+(\forall (\xi : H), (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{R}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{R}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)) \to (\forall (\xi : H), (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)) \to \forall \xi\in S.\mathrm{cl}, (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi \in S.\mathrm{cl}
 $$
 
 *Proof.* By [`projK`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk), [`mem_K_iff_projK`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-mem-k-iff-projk), [`modUnitary_commute_projK_of`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary-commute-projk-of). $\square$
@@ -281,7 +281,7 @@ $$
 The coordinate function `λ ↦ λ` on `σ(R)` — the integrand of `R = ∫λ dE`.
 
 $$
-\mathrm{sc}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,S\,\omega \;:=\; \omega
+\mathrm{sc}\,H\,S\,\omega \;:=\; \omega
 $$
 
 <small>Used by [`deviceOpReal_zero`](/browser/qiqth-modularrelativeentropy#d-qiqth-deviceopreal-zero), [`cfcCont_sqrtTwoSub_eq`](/browser/qiqth-modularrelativeentropy#d-qiqth-cfccont-sqrttwosub-eq), [`specCoord_measurable`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord-measurable), [`specCoord_norm_le`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord-norm-le), [`diagInt_specCoord`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-diagint-speccoord), [`rvdRC_eq_borelFC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-eq-borelfc), [`modUnitary_commute_rvdRC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary-commute-rvdrc), [`cfcCont_coord`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfccont-coord), and 2 more.</small>
@@ -301,7 +301,7 @@ $$
 **Lemma 832** (`specCoord_norm_le`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L399)</small>
 
 $$
-\|\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord}{\mathrm{sc}}\,S\,\omega\| \le \|\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S\| \cdot \|1\|
+\|\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord}{\mathrm{sc}}\,S\,\omega\| \le \|\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S\| \cdot \|1\|
 $$
 
 *Proof.* Immediate from the definitions. $\square$
@@ -314,7 +314,7 @@ $$
 **The spectrum of `R = P + Q` lies in `[0, 2]`** (the TIGHT bound, from the RvD order relations `0 ≤ R` and `0 ≤ 2 − R`, not the loose norm margin `spectrum_subset_covΩ`).  Lower: `0 ≤ R` (`rvdRC_nonneg`) gives `0 ≤ ω` via `StarOrderedRing.nonneg_iff_spectrum_nonneg`.  Upper: for `ω ∈ σ(R)`, `2 − ω ∈ {2} − σ(R) = σ(2·1 − R) = σ(2 − R)` (`spectrum.singleton_sub_eq`), and `0 ≤ 2 − R` (`rvdTwoSubRC_nonneg`) gives `0 ≤ 2 − ω`, i.e. `ω ≤ 2`.  This is the spectral location the `borelFC` construction of the operator device vector `(2−R)^{iz}R^{−iz+1/2}ζ = d_z(R)ζ` consumes (`devChar_norm_le_Icc` bounds `d_z` exactly on `[0,2]`).
 
 $$
-\omega \in \mathrm{Icc}\,0\,2
+\omega \in [{0},{2}]
 $$
 
 *Proof.* By [`rvdRC_nonneg`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc-nonneg), [`rvdTwoSubRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc), [`rvdTwoSubRC_isPositive`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc-ispositive), [`rvdTwoSubRC_nonneg`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc-nonneg), [`rvdRC_isSelfAdjoint`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint). $\square$
@@ -327,7 +327,7 @@ $$
 `diagInt(coord) z = ⟪z, R z⟫` (the `scalarMeasure=specMeasure` bridge + `re_inner_T_eq_integral` + self-adjoint realness).
 
 $$
-(\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots ).\textstyle\int\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord}{\mathrm{sc}}\,S)\,z = \langle {z},{(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,z}\rangle
+(\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S)\,\cdots ).\textstyle\int\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord}{\mathrm{sc}}\,S)\,z = \langle {z},{(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S)\,z}\rangle
 $$
 
 *Proof.* By [`scalarMeasure`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure), [`specMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure), [`re_inner_T_eq_integral`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-re-inner-t-eq-integral), [`rvdRC_isSymmetric`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc-issymmetric), [`scalarMeasure_eq_specMeasure`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-scalarmeasure-eq-specmeasure). $\square$
@@ -340,7 +340,7 @@ $$
 **`R = borelFC(coord) = ∫λ dE`** — the operator spectral theorem for `R`, via polarization.
 
 $$
-\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\cdots \,\cdots \,\cdots
+\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S)\,\cdots \,\cdots \,\cdots \,\cdots
 $$
 
 *Proof.* By [`diagInt`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-diagint), [`bilinDiag`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-bilindiag), [`PVM_of_selfAdjoint`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-pvm-of-selfadjoint), [`inner_borelFC`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-inner-borelfc), [`diagInt_specCoord`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-diagint-speccoord). $\square$
@@ -353,7 +353,7 @@ $$
 **`[U_t, R] = 0`** (operator form): the modular flow commutes with `R`.
 
 $$
-\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S = \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S \cdot \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t
+\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S = \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S \cdot \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t
 $$
 
 *Proof.* By [`borelFC`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-borelfc), [`modSpecFun`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modspecfun), [`modSpecFun_measurable`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modspecfun-measurable), [`modSpecFun_norm_le`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modspecfun-norm-le), [`rvdRC_isSelfAdjoint`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint), [`borelFC_comm`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-borelfc-comm), [`specCoord`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord), [`specCoord_measurable`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord-measurable), [`specCoord_norm_le`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord-norm-le), [`rvdRC_eq_borelFC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-eq-borelfc). $\square$
@@ -366,7 +366,7 @@ $$
 **`[U_t, R] = 0`** (pointwise on `rvdR`): `U_t(R ξ) = R(U_t ξ)`.
 
 $$
-(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)
+(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{R}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{R}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)
 $$
 
 *Proof.* By [`rvdRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc), [`modUnitary_commute_rvdRC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary-commute-rvdrc). $\square$
@@ -379,7 +379,7 @@ $$
 **Standard-subspace invariance modulo the covariance:** with `[U_t,R]=0` discharged, `U_t 𝒦 ⊆ 𝒦` follows from the SINGLE remaining obligation `[U_t, D] = 0` (the covariance).
 
 $$
-(\forall (\xi : H), (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)) \to \forall \xi\in S.\mathrm{cl}, (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi \in S.\mathrm{cl}
+(\forall (\xi : H), (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)) \to \forall \xi\in S.\mathrm{cl}, (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi \in S.\mathrm{cl}
 $$
 
 *Proof.* By [`modUnitary_mapsTo_K_of_commute`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary-mapsto-k-of-commute), [`modUnitary_commute_rvdR`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary-commute-rvdr). $\square$
@@ -404,9 +404,6 @@ $$
 
 The **real commutant** of a self-adjoint `D : H →L[ℝ] H`, as a real `*`-subalgebra of `H →L[ℂ] H` (over `ℝ` only, since `D` is antilinear).
 
-$$
-\mathcal{M}'\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,D\,\mathrm{hD} \;:=\; \{\mathrm{carrier} :=\{Y|D \cdot \mathrm{res}\,\mathbb{R}\,Y = \mathrm{res}\,\mathbb{R}\,Y \cdot D\} , \mathrm{mul\_mem}^{\prime} :=\cdots , \mathrm{one\_mem}^{\prime} :=\cdots , \mathrm{add\_mem}^{\prime} :=\cdots , \mathrm{zero\_mem}^{\prime} :=\cdots , \mathrm{algebraMap\_mem}^{\prime} :=\cdots , \mathrm{star\_mem}^{\prime} :=\cdots \}
-$$
 
 <small>Used by [`realCommutant_isClosed`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-realcommutant-isclosed), [`commute_of_mem_elemental`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-commute-of-mem-elemental).</small>
 
@@ -453,7 +450,7 @@ $$
 **`D·T = T·D`** (operator form): the antilinear modular conjugation `D` commutes with the positive modulus `T = √(R(2−R))`.  Whence `J = D·T⁻¹` is self-adjoint and `J² = 1`.
 
 $$
-\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S \cdot \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S) = \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S) \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S
+\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S \cdot \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{T}\,S) = \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{T}\,S) \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S
 $$
 
 *Proof.* By [`projK`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk), [`projIK`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik), [`rvdRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc), [`rvdRC_nonneg`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc-nonneg), [`rvdPmQ_isSelfAdjoint`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq-isselfadjoint), [`rvdTwoSubRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc), [`rvdTwoSubRC_apply`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc-apply), [`rvdTwoSubRC_nonneg`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc-nonneg), [`rvdRC_commute_rvdTwoSubRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc-commute-rvdtwosubrc), [`rvdT_sq`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt-sq), [`rvdT_nonneg`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt-nonneg), [`rvdPmQ_commute_A`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq-commute-a), [`commute_of_mem_elemental`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-commute-of-mem-elemental), [`sqrt_mem_elemental`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-sqrt-mem-elemental). $\square$
@@ -466,7 +463,7 @@ $$
 **`D·T = T·D`** (pointwise): `D(T ξ) = T(D ξ)`.
 
 $$
-(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi)
+(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{T}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{T}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,\xi)
 $$
 
 *Proof.* By [`rvdPmQ_commute_rvdT`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdpmq-commute-rvdt). $\square$
@@ -479,7 +476,7 @@ $$
 `range T` is dense (`T` injective self-adjoint ⟹ `(range T)ᗮ = ker T = ⊥`).
 
 $$
-\mathrm{DenseRange}\,(\mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S))
+\mathrm{DenseRange}\,(\mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{T}\,S))
 $$
 
 *Proof.* By [`rvdT_isSelfAdjoint`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt-isselfadjoint), [`rvdT_injective`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt-injective), [`restrictScalars_star`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-restrictscalars-star). $\square$
@@ -492,7 +489,7 @@ $$
 **The modular conjugation `J`** — the ℝ-linear extension of `T ξ ↦ D ξ`.
 
 $$
-J\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,S \;:=\; ((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)).\mathrm{extendOfNorm}\,(\mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S))
+J\,H\,S \;:=\; ((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)).\mathrm{extendOfNorm}\,(\mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{T}\,S))
 $$
 
 <small>Used by [`GConstancy`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-gconstancy), [`comparisonDatum_of_gConstancy`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-comparisondatum-of-gconstancy), [`gConstancy_entire`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gconstancy-entire), [`gConstancy_entire_of_bottom`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gconstancy-entire-of-bottom), [`gConstancy_of_entireVec_limit`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gconstancy-of-entirevec-limit), [`gConstancy_real_smul`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gconstancy-real-smul), [`gConstancy_eta_of_bottom`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gconstancy-eta-of-bottom), [`gConstancy_of_tendsto_xi`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gconstancy-of-tendsto-xi), and 41 more.</small>
@@ -501,7 +498,7 @@ $$
 **Lemma 848** (`modConj_rvdT`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L628)</small>
 
 $$
-(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi
+(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{T}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,\xi
 $$
 
 *Proof.* By [`rvdT_norm_eq`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt-norm-eq), [`rvdT_restrictScalars_denseRange`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdt-restrictscalars-denserange). $\square$
@@ -540,7 +537,7 @@ $$
 `T` is real-symmetric — via ℂ-self-adjointness (fast: primary ℂ instance, no scoped-ℝ adjoint).
 
 $$
-\langle {(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,x},{y}\rangle = \langle {x},{(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,y}\rangle
+\langle {(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{T}\,S)\,x},{y}\rangle = \langle {x},{(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{T}\,S)\,y}\rangle
 $$
 
 *Proof.* By [`rvdT_isSelfAdjoint`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt-isselfadjoint). $\square$
@@ -553,7 +550,7 @@ $$
 `D = P − Q` is real-symmetric — via the projection symmetry (fast, no adjoint).
 
 $$
-\langle {(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,x},{y}\rangle = \langle {x},{(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,y}\rangle
+\langle {(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,x},{y}\rangle = \langle {x},{(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,y}\rangle
 $$
 
 *Proof.* Immediate from the definitions. $\square$
@@ -617,9 +614,6 @@ $$
 
 **The J-twisted bilinear form** `B(v,w) = ⟪J v, w⟫` as a continuous ℂ-BILINEAR map `H →L[ℂ] H →L[ℂ] ℂ`. ℂ-linear in `v` by the J-cancellation (`inner_modConj_smul_left`: `J` antilinear ∘ inner conj-linear = ℂ-linear), ℂ-linear in `w` (inner second slot), bounded by `‖v‖·‖w‖` (`modConj_norm` isometry + Cauchy–Schwarz).  This is the bilinear form whose composition with two HOLOMORPHIC curves `g(z) = B(d_z(R)ζ, V_z η)` is holomorphic — the device-vector RvD g-function.
 
-$$
-J\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,S \;:=\; (\mathrm{mk}\,\mathbb{C}\,(\lambda v w \mapsto \langle {(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,v},{w}\rangle)\,\cdots \,\cdots \,\cdots \,\cdots ).\mathrm{mkContinuous}_{2}\,1\,\cdots
-$$
 
 <small>Used by [`h1_of_stripKMSrvd`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-h1-of-stripkmsrvd), [`gConstancy_of_inputs`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-gconstancy-of-inputs), [`oneParticleBW_of_inputs`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-oneparticlebw-of-inputs), [`oneParticleBW_of_stripKMSrvd_density`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-oneparticlebw-of-stripkmsrvd-density), [`gFunction_eq_zero_const`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gfunction-eq-zero-const), [`gConstancy_entire`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gconstancy-entire), [`gFunction_top_edge_real_all`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gfunction-top-edge-real-all), [`gConstancy_entire_of_bottom`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gconstancy-entire-of-bottom), and 11 more.</small>
 
@@ -655,7 +649,7 @@ $$
 `T` commutes with `R` (both are continuous functions of `R`).
 
 $$
-\mathrm{Commute}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)
+\mathrm{Commute}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S)\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{T}\,S)
 $$
 
 *Proof.* By [`rvdTwoSubRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc), [`rvdSqrtR`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr), [`rvdSqrtTwoSubR`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrttwosubr), [`rvdRC_commute_rvdTwoSubRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc-commute-rvdtwosubrc). $\square$
@@ -668,7 +662,7 @@ $$
 `D R = (2 − R) D` pointwise — from the anticommutation `D(R−1) = −(R−1)D`.
 
 $$
-(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi)
+(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,\xi)
 $$
 
 *Proof.* By [`rvdR`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr), [`rvdPmQ_anticommute_rvdR_sub_one`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq-anticommute-rvdr-sub-one). $\square$
@@ -681,7 +675,7 @@ $$
 `J R = (2 − R) J` pointwise (the reflection intertwiner), by density from `range T`.
 
 $$
-(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)
+(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)
 $$
 
 *Proof.* By [`rvdPmQ`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq), [`rvdT`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt), [`rvdT_restrictScalars_denseRange`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdt-restrictscalars-denserange), [`modConj_rvdT`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdt), [`rvdRC_commute_rvdT`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-commute-rvdt), [`rvdPmQ_rvdRC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdpmq-rvdrc). $\square$
@@ -694,7 +688,7 @@ $$
 **`J R J = 2 − R`** — the modular conjugation reflects `R` (the bounded shadow of `J Δ J = Δ⁻¹`). One of the canonical Tomita–Takesaki relations, and a prerequisite for the CGP spectral balance.
 
 $$
-(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S)\,\xi
+(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S)\,\xi
 $$
 
 *Proof.* By [`modConj_sq`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-sq), [`modConj_rvdRC_reflect`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdrc-reflect). $\square$
@@ -759,7 +753,7 @@ $$
 **`J T J = T`** — the modular conjugation commutes with the polar radius `T = R^{1/2}(2−R)^{1/2}`. `J T J = (J R^{1/2} J)(J (2−R)^{1/2} J) = (2−R)^{1/2} R^{1/2} = R^{1/2}(2−R)^{1/2} = T`, using both sqrt-reflections and that the square roots commute (`rvdSqrtR_commute_rvdSqrtTwoSubR`).  Hence `[J, T] = 0`, the keystone giving `J D J = D` and thence `J P J = 1 − Q` (`J𝒦 = (i𝒦)^⊥`).
 
 $$
-(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,\xi
+(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{T}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{T}\,S)\,\xi
 $$
 
 *Proof.* By [`rvdSqrtR`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr), [`rvdSqrtTwoSubR`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrttwosubr), [`rvdSqrtR_commute_rvdSqrtTwoSubR`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr-commute-rvdsqrttwosubr), [`modConj_rvdSqrtTwoSubR_modConj`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdsqrttwosubr-modconj), [`modConj_rvdSqrtR`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdsqrtr). $\square$
@@ -772,7 +766,7 @@ $$
 **`T J = D`** — combining `[J, T] = 0` (`J T J = T`) with `J T = D` (`modConj_rvdT`). `T(J η) = J(T η) = D η`.
 
 $$
-(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\eta) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\eta
+(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{T}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\eta) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,\eta
 $$
 
 *Proof.* By [`modConj_rvdT`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdt), [`modConj_sq`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-sq), [`modConj_rvdT_modConj`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdt-modconj). $\square$
@@ -785,7 +779,7 @@ $$
 **`J D J = D`** — the modular conjugation commutes with `D = P − Q`.  From `T J = D` (`rvdT_modConj`): `J(D(J ξ)) = J(T(J(J ξ))) = J(T ξ) = D ξ`.  With `J R J = 2 − R` this gives `J P J = 1 − Q`.
 
 $$
-(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi
+(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,\xi
 $$
 
 *Proof.* By [`rvdT`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt), [`modConj_rvdT`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdt), [`modConj_sq`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-sq), [`rvdT_modConj`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdt-modconj). $\square$
@@ -798,7 +792,7 @@ $$
 **`J Q J = 1 − P`** — the modular conjugation reflects the projection `Q = projIK` onto `1 − P`. `J Q J = (J R J − J D J)/2 = ((2−R) − D)/2 = 1 − P` (`J R J = 2−R`, `J D J = D`).  Concretely `J(Q(J ξ)) = ξ − P ξ`.  This is RvD Prop 2.2(5): `J` carries `i𝒦` onto `𝒦^⊥` and `𝒦` onto `(i𝒦)^⊥`.
 
 $$
-(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik}{\mathrm{projIK}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = \xi - (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,\xi
+(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik}{Q}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = \xi - (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S)\,\xi
 $$
 
 *Proof.* By [`rvdR`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr), [`rvdR_apply`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr-apply), [`rvdRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc), [`rvdRC_apply`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc-apply), [`rvdPmQ`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq), [`rvdTwoSubRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc), [`rvdTwoSubRC_apply`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc-apply), [`modConj_rvdRC_modConj`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdrc-modconj), [`modConj_rvdPmQ_modConj`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdpmq-modconj). $\square$
@@ -811,7 +805,7 @@ $$
 **`J 𝒦 ⊆ (i𝒦)^⊥`** (RvD Prop 2.2(5)): for `ξ ∈ 𝒦` (`P ξ = ξ`), `J ξ ⊥ i𝒦` (`projIK (J ξ) = 0`). From `J Q J = 1 − P` (`modConj_projIK_modConj`): `J(Q(J ξ)) = ξ − P ξ = 0`, and `J` is injective (`J² = 1`), so `Q(J ξ) = 0`.  This places the modular-conjugated standard-subspace vectors — the `J`-twisted `w`-vectors of RvD Theorem 3.8's `g`-function — in `(i𝒦)^⊥`.
 
 $$
-(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,\xi = \xi \to (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik}{\mathrm{projIK}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi) = 0
+(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S)\,\xi = \xi \to (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik}{Q}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi) = 0
 $$
 
 *Proof.* By [`modConj_sq`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-sq), [`modConj_projIK_modConj`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-projik-modconj). $\square$
@@ -824,7 +818,7 @@ $$
 **`J P J = 1 − Q`** — the symmetric reflection: `J(P(J ξ)) = ξ − Q ξ`.  `J P J = (J R J + J D J)/2 = ((2−R) + D)/2 = 1 − Q` (`J R J = 2−R`, `J D J = D`).  With `J Q J = 1 − P` this is the full RvD Prop 2.2(5): `J` swaps `(𝒦, i𝒦)` with `((i𝒦)^⊥, 𝒦^⊥)`.
 
 $$
-(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = \xi - (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik}{\mathrm{projIK}}\,S)\,\xi
+(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = \xi - (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik}{Q}\,S)\,\xi
 $$
 
 *Proof.* By [`rvdR`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr), [`rvdR_apply`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr-apply), [`rvdRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc), [`rvdRC_apply`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc-apply), [`rvdPmQ`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq), [`rvdTwoSubRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc), [`rvdTwoSubRC_apply`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc-apply), [`modConj_rvdRC_modConj`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdrc-modconj), [`modConj_rvdPmQ_modConj`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdpmq-modconj). $\square$
@@ -837,7 +831,7 @@ $$
 **`(i𝒦)^⊥ ⊆ J𝒦`** — the reverse inclusion, giving the equality `J𝒦 = (i𝒦)^⊥`.  For `w ⊥ i𝒦` (`projIK w = 0`), `J P J` at `w` gives `J(P(J w)) = w − Q w = w`, and `J²=1` injectivity yields `P(J w) = J w`, i.e. `J w ∈ 𝒦`; hence `w = J(J w) ∈ J𝒦`.  So the `(i𝒦)^⊥` `w`-supply of the orbit-identity framework is *exactly* the `J`-images of `𝒦`.
 
 $$
-(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik}{\mathrm{projIK}}\,S)\,w = 0 \to (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,w) = (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,w
+(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik}{Q}\,S)\,w = 0 \to (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,w) = (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,w
 $$
 
 *Proof.* By [`modConj_sq`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-sq), [`modConj_projK_modConj`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-projk-modconj). $\square$
@@ -850,7 +844,7 @@ $$
 **Bounded Tomita fixedness:** for `ξ ∈ 𝒦` (`P ξ = ξ`), `D ξ = (2 − R) ξ`.
 
 $$
-(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,\xi = \xi \to (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S)\,\xi
+(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S)\,\xi = \xi \to (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,\xi = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S)\,\xi
 $$
 
 *Proof.* By [`projIK`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik), [`rvdR`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr), [`rvdRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc). $\square$
@@ -863,7 +857,7 @@ $$
 For `ξ ∈ 𝒦`, `J(T ξ) = (2 − R) ξ` — the modular form of the bounded Tomita fixedness, equating the two bounded objects whose `R`-spectral measures drive the CGP balance.
 
 $$
-(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,\xi = \xi \to (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S)\,\xi
+(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S)\,\xi = \xi \to (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{T}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S)\,\xi
 $$
 
 *Proof.* By [`rvdPmQ`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq), [`modConj_rvdT`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdt), [`rvdPmQ_eq_of_mem_K`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdpmq-eq-of-mem-k). $\square$
@@ -876,7 +870,7 @@ $$
 **Generic `projK`-commutation:** a continuous ℂ-linear `A` commuting with `rvdR` (`= R`) and `rvdPmQ` (`= D`) pointwise commutes with `projK = (R + D)/2`.  The operator-generic form of `modUnitary_commute_projK_of`.
 
 $$
-(\forall (\xi : H), A\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{\mathrm{rvdR}}\,S)\,(A\,\xi)) \to (\forall (\xi : H), A\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,(A\,\xi)) \to \forall (\xi : H), A\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,(A\,\xi)
+(\forall (\xi : H), A\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{R}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr}{R}\,S)\,(A\,\xi)) \to (\forall (\xi : H), A\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,(A\,\xi)) \to \forall (\xi : H), A\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S)\,(A\,\xi)
 $$
 
 *Proof.* By [`rvdR_add_rvdPmQ_eq`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdr-add-rvdpmq-eq). $\square$
@@ -889,7 +883,7 @@ $$
 **`[A, D] = 0` from `[A, J] = [A, T] = 0`:** since `D = J·T` (`modConj_rvdT`: `J(Tξ) = Dξ`), an operator commuting with the modular conjugation `J` and the polar radius `T` commutes with `D = rvdPmQ`.  For a real *symmetric* `f`, `cfcCont f` commutes with both (`J` via `modConj_cfcΩ`/`twΩ`, `T` as a function of `R`), so it commutes with `D` — the `[·, D] = 0` "frontier" step, available for symmetric symbols.
 
 $$
-(\forall (\xi : H), A\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,(A\,\xi)) \to (\forall (\xi : H), A\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,(A\,\xi)) \to \forall (\xi : H), A\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,(A\,\xi)
+(\forall (\xi : H), A\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,(A\,\xi)) \to (\forall (\xi : H), A\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{T}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{T}\,S)\,(A\,\xi)) \to \forall (\xi : H), A\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,(A\,\xi)
 $$
 
 *Proof.* By [`modConj_rvdT`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdt). $\square$
@@ -902,7 +896,7 @@ $$
 **RvD Proposition 2.3 — reality across `𝒦` and `(i𝒦)^⊥`.**  If `x ∈ 𝒦` (`projK x = x`) and `y ⊥ i𝒦` (`projIK y = 0`), then `⟨x, y⟩_ℂ` is *real*.  Reason: `Im⟨x, y⟩ = ⟨i·x, y⟩_ℝ`, and `i·x ∈ i𝒦` while `y ⊥ i𝒦`, so this real inner product vanishes.  This is the reality used in RvD Theorem 3.8 to show the correlation `g(t) = ⟨U_t η, J(2−R)^{1/2}R^{−1/2}ζ⟩` is real on the real axis (and, after the KMS flip, on the lower edge), the input to "real on both edges ⟹ constant".
 
 $$
-(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,x = x \to (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik}{\mathrm{projIK}}\,S)\,y = 0 \to (\langle {x},{y}\rangle).\mathrm{im} = 0
+(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S)\,x = x \to (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik}{Q}\,S)\,y = 0 \to (\langle {x},{y}\rangle).\mathrm{im} = 0
 $$
 
 *Proof.* By [`projIK_isSelfAdjoint`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik-isselfadjoint), [`projIK_smul_I`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik-smul-i). $\square$
@@ -915,7 +909,7 @@ $$
 **Totality of `(i𝒦)^⊥` against `𝒦`** (RvD Theorem 3.8 closeout): two vectors of `𝒦` with equal inner products against *every* `w ⊥ i𝒦` (`projIK w = 0`) are equal.  Their difference `d ∈ 𝒦` is orthogonal to all of `(i𝒦)^⊥`: taking `w = d − Q d ∈ (i𝒦)^⊥` gives `‖d − Q d‖² = Re⟨w, d⟩ = 0`, so `d = Q d ∈ i𝒦`; then `d ∈ 𝒦 ⊓ i𝒦 = {0}` (`IsSeparating`).  This is the totality step: combined with `orbit_inner_eq_of_entire` for `V` and `Δ^{it}` (both giving `⟨w, ·_t η⟩ = ⟨w, η⟩`) it yields `V_t η = Δ^{it} η` on `𝒦`.
 
 $$
-(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,a = a \to (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,b = b \to (\forall (w : H), (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik}{\mathrm{projIK}}\,S)\,w = 0 \to \langle {w},{a}\rangle = \langle {w},{b}\rangle) \to a = b
+(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S)\,a = a \to (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S)\,b = b \to (\forall (w : H), (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik}{Q}\,S)\,w = 0 \to \langle {w},{a}\rangle = \langle {w},{b}\rangle) \to a = b
 $$
 
 *Proof.* By [`projIK_idem`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik-idem). $\square$
@@ -980,7 +974,7 @@ $$
 The bounded Borel FC of `R = rvdRC S` on a continuous function, with the automatic compact-sup bound `‖f ω‖ ≤ ‖f‖`.
 
 $$
-\Phi_{c}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,S\,f \;:=\; \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots \,\cdots \,\cdots \,\cdots
+\Phi_{c}\,H\,S\,f \;:=\; \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-borelfc}{\Phi_{B}}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S)\,\cdots \,\cdots \,\cdots \,\cdots
 $$
 
 <small>Used by [`deviceOpC_neg_half_eq`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-deviceopc-neg-half-eq), [`deviceOpReal_zero`](/browser/qiqth-modularrelativeentropy#d-qiqth-deviceopreal-zero), [`cfcCont_sqrtTwoSub_eq`](/browser/qiqth-modularrelativeentropy#d-qiqth-cfccont-sqrttwosub-eq), [`cfcCont_norm_le`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfccont-norm-le), [`cfcCont_one`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfccont-one), [`cfcCont_mul`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfccont-mul), [`cfcCont_add`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfccont-add), [`cfcCont_smul`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfccont-smul), and 12 more.</small>
@@ -1057,7 +1051,7 @@ $$
 `cfcCont` sends the coordinate function to `R`.
 
 $$
-\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,\{\mathrm{toFun} :=\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord}{\mathrm{sc}}\,S , \mathrm{continuous\_toFun} :=\cdots \} = \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S
+\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,\{\mathrm{toFun} :=\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord}{\mathrm{sc}}\,S , \mathrm{continuous\_toFun} :=\cdots \} = \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S
 $$
 
 *Proof.* By [`borelFC`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-borelfc), [`borelFC_congr`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-borelfc-congr), [`rvdRC_isSelfAdjoint`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint), [`specCoord_measurable`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord-measurable), [`specCoord_norm_le`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord-norm-le), [`rvdRC_eq_borelFC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-eq-borelfc). $\square$
@@ -1070,7 +1064,7 @@ $$
 `cfcCont` as a ℂ-linear map (for the continuity bound).
 
 $$
-\mathrm{cfcContₗ}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,S \;:=\; \{\mathrm{toFun} :=\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S , \mathrm{map\_add}^{\prime} :=\cdots , \mathrm{map\_smul}^{\prime} :=\cdots \}
+\mathrm{cfcContₗ}\,H\,S \;:=\; \{\mathrm{toFun} :=\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S , \mathrm{map\_add}^{\prime} :=\cdots , \mathrm{map\_smul}^{\prime} :=\cdots \}
 $$
 
 <small>Used by [`cfcCont_continuous`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfccont-continuous).</small>
@@ -1092,7 +1086,7 @@ $$
 The radius `M = ‖R‖·‖1‖` bounding the spectrum.
 
 $$
-\mathrm{covM}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,S \;:=\; \|\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S\| \cdot \|1\|
+\mathrm{covM}\,H\,S \;:=\; \|\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S\| \cdot \|1\|
 $$
 
 <small>Used by [`spectrum_subset_covΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-spectrum-subset-cov), [`inclΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-incl), [`tauΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tau), [`cfcΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc), [`cfcΩ_one`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-one), [`cfcΩ_mul`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-mul), [`cfcΩ_add`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-add), [`cfcΩ_smul`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-smul), and 14 more.</small>
@@ -1101,7 +1095,7 @@ $$
 **Lemma 896** (`spectrum_subset_covΩ`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1254)</small>
 
 $$
-\mathrm{sp}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S) \subseteq \mathrm{Icc}\,(-\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-covm}{\mathrm{covM}}\,S)\,(2 + \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-covm}{\mathrm{covM}}\,S)
+\mathrm{sp}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S) \subseteq [{-\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-covm}{\mathrm{covM}}\,S},{2 + \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-covm}{\mathrm{covM}}\,S}]
 $$
 
 *Proof.* Immediate from the definitions. $\square$
@@ -1114,7 +1108,7 @@ $$
 The inclusion `σℝ R ↪ Ω` as a continuous map.
 
 $$
-\mathrm{inclΩ}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,S \;:=\; \{\mathrm{toFun} :=\mathrm{inclusion}\,\cdots , \mathrm{continuous\_toFun} :=\cdots \}
+\mathrm{inclΩ}\,H\,S \;:=\; \{\mathrm{toFun} :=\mathrm{inclusion}\,\cdots , \mathrm{continuous\_toFun} :=\cdots \}
 $$
 
 <small>Used by [`cfcΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc), [`cfcΩ_one`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-one), [`cfcΩ_mul`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-mul), [`cfcΩ_add`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-add), [`cfcΩ_smul`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-smul), [`cfcΩ_continuous`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-continuous), [`cfcΩ_coordΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-coord), [`cfcΩ_hΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-h).</small>
@@ -1125,7 +1119,7 @@ $$
 The involution `τ(r) = 2 − r` on the symmetric `Ω`.
 
 $$
-\mathrm{tauΩ}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,S \;:=\; \{\mathrm{toFun} :=\lambda x \mapsto \langle 2 - x , \cdots \rangle , \mathrm{continuous\_toFun} :=\cdots \}
+\mathrm{tauΩ}\,H\,S \;:=\; \{\mathrm{toFun} :=\lambda x \mapsto \langle 2 - x , \cdots \rangle , \mathrm{continuous\_toFun} :=\cdots \}
 $$
 
 <small>Used by [`twΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tw), [`twΩ_add`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tw-add), [`twΩ_mul`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tw-mul), [`cfcΩ_intertwine`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-intertwine), [`cfcΩ_hΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-h).</small>
@@ -1136,7 +1130,7 @@ $$
 `cfcΩ f = f(R)` for `f` continuous on the symmetric domain `Ω`.
 
 $$
-\mathrm{cfcΩ}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,S\,f \;:=\; \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,(f.\mathrm{comp}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-incl}{\mathrm{incl}}\,S))
+\mathrm{cfcΩ}\,H\,S\,f \;:=\; \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfccont}{\Phi_{c}}\,S\,(f.\mathrm{comp}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-incl}{\mathrm{incl}}\,S))
 $$
 
 <small>Used by [`cfcΩ_one`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-one), [`cfcΩ_mul`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-mul), [`cfcΩ_add`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-add), [`cfcΩ_smul`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-smul), [`cfcΩ_continuous`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-continuous), [`cfcΩ_coordΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-coord), [`cfcΩ_sub`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-sub), [`cfcΩ_twΩ_coordΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-tw-coord), and 3 more.</small>
@@ -1202,7 +1196,7 @@ $$
 The coordinate function `x ↦ x.1` on `Ω` (real-valued ⟹ self-adjoint, the SW generator).
 
 $$
-\mathrm{coordΩ}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,S \;:=\; \{\mathrm{toFun} :=\lambda x \mapsto x , \mathrm{continuous\_toFun} :=\cdots \}
+\mathrm{coordΩ}\,H\,S \;:=\; \{\mathrm{toFun} :=\lambda x \mapsto x , \mathrm{continuous\_toFun} :=\cdots \}
 $$
 
 <small>Used by [`coordΩ_star`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-coord-star), [`cfcΩ_coordΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-coord), [`cfcΩ_twΩ_coordΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-tw-coord), [`cfcΩ_intertwine`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-intertwine), [`cfcΩ_hΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-h).</small>
@@ -1224,7 +1218,7 @@ $$
 The twist `(twΩ f)(r) = conj(f(2−r))`.
 
 $$
-\mathrm{twΩ}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,S\,f \;:=\; {{f.\mathrm{comp}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tau}{\mathrm{tau}}\,S)}}^{*}
+\mathrm{twΩ}\,H\,S\,f \;:=\; {{f.\mathrm{comp}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tau}{\mathrm{tau}}\,S)}}^{*}
 $$
 
 <small>Used by [`twΩ_add`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tw-add), [`twΩ_mul`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tw-mul), [`cfcΩ_twΩ_coordΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-tw-coord), [`cfcΩ_intertwine`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-intertwine), [`twΩ_hΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tw-h), [`cfcΩ_hΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-h), [`modUnitary_commute_rvdPmQ_rs`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary-commute-rvdpmq-rs).</small>
@@ -1255,7 +1249,7 @@ $$
 **Lemma 910** (`cfcΩ_coordΩ`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1322)</small>
 
 $$
-\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc}{\mathrm{cfc}}\,S\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-coord}{\mathrm{coord}}\,S) = \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S
+\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc}{\mathrm{cfc}}\,S\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-coord}{\mathrm{coord}}\,S) = \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S
 $$
 
 *Proof.* By [`borelFC`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-borelfc), [`borelFC_congr`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-borelfc-congr), [`rvdRC_isSelfAdjoint`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint), [`specCoord`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord), [`specCoord_measurable`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord-measurable), [`specCoord_norm_le`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord-norm-le), [`rvdRC_eq_borelFC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-eq-borelfc), [`cfcCont`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfccont), [`covM`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-covm), [`inclΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-incl). $\square$
@@ -1290,7 +1284,7 @@ $$
 The base case of the intertwiner: `D·R = (2−R)·D` in `restrictScalars` form.
 
 $$
-\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S \cdot \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S) = \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S) \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S
+\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S \cdot \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S) = \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S) \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S
 $$
 
 *Proof.* By [`rvdR`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr), [`rvdTwoSubRC_apply`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc-apply), [`rvdPmQ_mul_rvdR`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq-mul-rvdr). $\square$
@@ -1303,7 +1297,7 @@ $$
 **The continuous intertwiner `D·f(R) = conj(f(2−·))(R)·D`** for every CONTINUOUS `f` on the symmetric domain `Ω`.  Proved by complex Stone–Weierstrass: both sides are continuous in `f`, the `coordΩ`-generated subalgebra is dense, and they agree there (base case `D·R=(2−R)·D` + the algebra structure).  `D` is antilinear, so the relation is conjugate-linear — hence the "good set" is a plain `Subalgebra` (not a `*`-subalgebra), but `coordΩ` is self-adjoint so the generated subalgebra still has dense closure.
 
 $$
-\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S \cdot \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc}{\mathrm{cfc}}\,S\,f) = \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc}{\mathrm{cfc}}\,S\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tw}{\mathrm{tw}}\,S\,f)) \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S
+\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S \cdot \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc}{\mathrm{cfc}}\,S\,f) = \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc}{\mathrm{cfc}}\,S\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tw}{\mathrm{tw}}\,S\,f)) \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S
 $$
 
 *Proof.* By [`rvdRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc), [`rvdTwoSubRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc), [`rvdPmQ_smul_conj`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq-smul-conj), [`tauΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tau), [`cfcΩ_one`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-one), [`cfcΩ_mul`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-mul), [`cfcΩ_add`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-add), [`cfcΩ_smul`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-smul), [`cfcΩ_continuous`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-continuous), [`coordΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-coord), [`coordΩ_star`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-coord-star), [`twΩ_add`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tw-add), [`twΩ_mul`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tw-mul), [`cfcΩ_coordΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-coord), [`cfcΩ_twΩ_coordΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-tw-coord), [`rvdPmQ_mul_rvdRC_rs`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdpmq-mul-rvdrc-rs). $\square$
@@ -1316,7 +1310,7 @@ $$
 **The `√R`-range density in `𝒦` (`hdense`)** — RvD's `ξ = R^{1/2}ζ` reconciliation, the LAST analytic input of the device g-function discharge.  Every `ξ ∈ 𝒦` is a limit of vectors `√R ζ_k ∈ 𝒦`. …
 
 $$
-\forall \xi\in S.\mathrm{cl}, \exists \zetas, (\forall (k : \mathbb{N}), (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k)) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k)) \wedge \mathrm{Tendsto}\,(\lambda k \mapsto (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k))\,\mathrm{atTop}\,(\mathrm{nhds}\,\xi)
+\forall \xi\in S.\mathrm{cl}, \exists \zetas, (\forall (k : \mathbb{N}), (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k)) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k)) \wedge \mathrm{Tendsto}\,(\lambda k \mapsto (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k))\,\mathrm{atTop}\,(\mathcal{N}\,\xi)
 $$
 
 *Proof.* By [`rvdR`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdr), [`projK_idem`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk-idem), [`rvdRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc), [`rvdSqrtTwoSubR`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrttwosubr), [`rvdT`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt), [`mem_K_iff_projK`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-mem-k-iff-projk), [`rvdT_restrictScalars_denseRange`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdt-restrictscalars-denserange), [`modConj`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj), [`modConj_sq`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-sq), [`rvdRC_commute_rvdT`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-commute-rvdt), [`modConj_rvdT_modConj`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdt-modconj), [`commute_projK_of_commute_R_D`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-commute-projk-of-commute-r-d), [`commute_rvdPmQ_of_commute_modConj_rvdT`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-commute-rvdpmq-of-commute-modconj-rvdt). $\square$
@@ -1342,7 +1336,7 @@ $$
 The **damped modular function** as a continuous map on `Ω`.
 
 $$
-\mathrm{hΩ}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,S\,t \;:=\; \{\mathrm{toFun} :=\lambda x \mapsto \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modchar}{\chi_{\mathrm{mod}}}\,t\,x \cdot (x \cdot (2 - x)) , \mathrm{continuous\_toFun} :=\cdots \}
+\mathrm{hΩ}\,H\,S\,t \;:=\; \{\mathrm{toFun} :=\lambda x \mapsto \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modchar}{\chi_{\mathrm{mod}}}\,t\,x \cdot (x \cdot (2 - x)) , \mathrm{continuous\_toFun} :=\cdots \}
 $$
 
 <small>Used by [`twΩ_hΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tw-h), [`cfcΩ_hΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-h), [`modUnitary_commute_rvdPmQ_rs`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary-commute-rvdpmq-rs).</small>
@@ -1366,7 +1360,7 @@ $$
 `cfcΩ(hΩ) = U_t · A` with `A = R(2−R)` — the damped FC factors as the modular unitary times the polynomial damping (`borelFC_mul`).
 
 $$
-\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc}{\mathrm{cfc}}\,S\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-h}{\mathrm{h}}\,S\,t) = \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t \cdot (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S)
+\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc}{\mathrm{cfc}}\,S\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-h}{\mathrm{h}}\,S\,t) = \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t \cdot (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S)
 $$
 
 *Proof.* By [`borelFC`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-borelfc), [`borelFC_mul`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-borelfc-mul), [`modChar`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modchar), [`borelFC_congr`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-borelfc-congr), [`modSpecFun`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modspecfun), [`modSpecFun_measurable`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modspecfun-measurable), [`modSpecFun_norm_le`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modspecfun-norm-le), [`rvdRC_isSelfAdjoint`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint), [`cfcCont`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfccont), [`covM`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-covm), [`inclΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-incl), [`tauΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tau), [`cfcΩ_mul`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-mul), [`coordΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-coord), [`twΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tw), [`cfcΩ_coordΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-coord), [`cfcΩ_twΩ_coordΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-tw-coord). $\square$
@@ -1379,7 +1373,7 @@ $$
 `A = R(2−R)` is self-adjoint.
 
 $$
-\mathrm{IsSelfAdjoint}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S)
+\mathrm{IsSelfAdjoint}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S)
 $$
 
 *Proof.* By [`rvdRC_commute_rvdTwoSubRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc-commute-rvdtwosubrc), [`rvdRC_isSelfAdjoint`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-isselfadjoint). $\square$
@@ -1392,7 +1386,7 @@ $$
 `A = R(2−R) = D²` is injective (`D` injective).
 
 $$
-\mathrm{Injective}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S)
+\mathrm{Injective}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S)
 $$
 
 *Proof.* By [`rvdPmQ`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq), [`rvdPmQ_injective`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq-injective), [`rvdRC_mul_rvdTwoSubRC_apply`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc-mul-rvdtwosubrc-apply). $\square$
@@ -1405,7 +1399,7 @@ $$
 **`R = rvdRC` is injective** (toward the `√R`-range density, the `ξ = √R ζ` reconciliation of the device g-function discharge).  From `R(2−R)` injective (`rvdRC_mul_rvdTwoSubRC_injective`): `R a = R b` gives `R(2−R)a = (2−R)(R a) = (2−R)(R b) = R(2−R)b` (commute), hence `a = b`.  As a self-adjoint operator, `R` injective ⟹ `√R` injective ⟹ `√R` has DENSE RANGE in `H` — the structural basis of the `√R`-range density that lifts GConstancy from `ξ = √R ζ` to all of `𝒦`.
 
 $$
-\mathrm{Injective}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)
+\mathrm{Injective}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S)
 $$
 
 *Proof.* By [`rvdTwoSubRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc), [`rvdRC_commute_rvdTwoSubRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc-commute-rvdtwosubrc), [`rvdRC_mul_rvdTwoSubRC_injective`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-mul-rvdtwosubrc-injective). $\square$
@@ -1457,7 +1451,7 @@ $$
 **RvD Proposition 3.7 (bounded Tomita on `√R`):** for `ξ ∈ 𝒦`, `√R (Jξ) = √(2−R) ξ`.  This is the BOUNDED form of `Δ^{1/2}ξ = Jξ` (with `Δ^{1/2} = √(2−R)·√R⁻¹`): from `J(Tξ) = (2−R)ξ` (`modConj_rvdT_of_mem_K`, `T = √R √(2−R)`) expand `J(√R(√(2−R)ξ)) = √(2−R)(√R(Jξ))` (the two sqrt reflections), so `√(2−R)(√R(Jξ)) = (2−R)ξ = √(2−R)(√(2−R)ξ)`, and cancel one `√(2−R)`.
 
 $$
-(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,\xi = \xi \to (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrttwosubr}{\sqrt{2-R}}\,S)\,\xi
+(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S)\,\xi = \xi \to (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrttwosubr}{\sqrt{2-R}}\,S)\,\xi
 $$
 
 *Proof.* By [`rvdTwoSubRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc), [`rvdSqrtTwoSubR_mul_self`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrttwosubr-mul-self), [`rvdT`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt), [`modConj_rvdSqrtR`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdsqrtr), [`modConj_rvdT_of_mem_K`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdt-of-mem-k), [`modConj_rvdSqrtTwoSubR`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdsqrttwosubr), [`rvdSqrtTwoSubR_injective`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdsqrttwosubr-injective). $\square$
@@ -1470,7 +1464,7 @@ $$
 **`√Rζ ∈ 𝒦 ⟹ Jζ = ζ`** — the bottom-edge condition reconciliation.  Resolves the gap between the `gConstancy_eta_of_bottom` hypothesis `√Rζ ∈ 𝒦` and the `J`-fixedness `Jζ = ζ` the bottom-edge g-vector simplification needs.  From `√R(J(√Rζ)) = √(2−R)(√Rζ)` (`rvdSqrtR_modConj_of_mem_K` at `ξ = √Rζ`) and `J(√Rζ) = √(2−R)(Jζ)` (`modConj_rvdSqrtR`): `√R√(2−R)(Jζ) = √(2−R)√R ζ = √R√(2−R) ζ` (commute), so `rvdT(Jζ) = rvdT ζ`, and `rvdT` injective gives `Jζ = ζ`.  (So `√Rζ ∈ 𝒦` makes `ζ` `J`-fixed: `Jξ = Δ^{1/2}ξ` on `𝒦` forces `Jζ = ζ` here.)
 
 $$
-(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta \to (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\zeta = \zeta
+(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{P}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,\zeta \to (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\zeta = \zeta
 $$
 
 *Proof.* By [`rvdSqrtTwoSubR`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrttwosubr), [`rvdSqrtR_commute_rvdSqrtTwoSubR`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr-commute-rvdsqrttwosubr), [`rvdT`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt), [`rvdT_injective`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt-injective), [`modConj_rvdSqrtR`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj-rvdsqrtr), [`rvdSqrtR_modConj_of_mem_K`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdsqrtr-modconj-of-mem-k). $\square$
@@ -1483,7 +1477,7 @@ $$
 **Spectral-atom eigen-relation** `R · E({λ = c}) = c · E({λ = c})`: the bounded Borel FC sends the coordinate `λ` to multiplication, so on the level set `{λ = c}` the operator `R = ∫λ dE` acts as the scalar `c`.  Route: `R = borelFC(coord)` (`rvdRC_eq_borelFC`), `E(s) = borelFC(𝟙_s)` (`borelFC_indicator`), the pointwise identity `coord·𝟙_s = c·𝟙_s`, then `borelFC_mul` + `borelFC_const`. With `R`/`2−R` injectivity this kills the endpoint spectral atoms (`E({0}) = E({2}) = 0`).
 
 $$
-\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S \cdot (\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots ).E\,\{\omega|\omega = c\} = c \cdot (\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots ).E\,\{\omega|\omega = c\}
+\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S \cdot (\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S)\,\cdots ).E\,\{\omega|\omega = c\} = c \cdot (\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S)\,\cdots ).E\,\{\omega|\omega = c\}
 $$
 
 *Proof.* By [`norm_indicatorOne_le`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-norm-indicatorone-le), [`borelFC`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-borelfc), [`borelFC_mul`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-borelfc-mul), [`borelFC_const`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-borelfc-const), [`borelFC_indicator`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-borelfc-indicator), [`borelFC_congr`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-borelfc-congr), [`specCoord`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord), [`specCoord_measurable`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord-measurable), [`specCoord_norm_le`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-speccoord-norm-le), [`rvdRC_eq_borelFC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-eq-borelfc). $\square$
@@ -1496,7 +1490,7 @@ $$
 **`E({λ = 0}) = 0`** — no spectral atom at `0`: from `R · E({0}) = 0` (`rvdRC_mul_E_levelSet` at `c = 0`) and `R` injective (`rvdRC_injective`).  So `0` is not an eigenvalue of `R`.
 
 $$
-(\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots ).E\,\{\omega|\omega = 0\} = 0
+(\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S)\,\cdots ).E\,\{\omega|\omega = 0\} = 0
 $$
 
 *Proof.* By [`rvdRC_injective`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-injective), [`rvdRC_mul_E_levelSet`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-mul-e-levelset). $\square$
@@ -1509,7 +1503,7 @@ $$
 **`E({λ = 2}) = 0`** — no spectral atom at `2`: from `R · E({2}) = 2 · E({2})`, so `(2 − R) · E({2}) = 0`, and `2 − R` injective (`rvdTwoSubRC_injective`).
 
 $$
-(\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,\cdots ).E\,\{\omega|\omega = 2\} = 0
+(\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S)\,\cdots ).E\,\{\omega|\omega = 2\} = 0
 $$
 
 *Proof.* By [`projK`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk), [`projIK`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik), [`rvdTwoSubRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc), [`rvdTwoSubRC_apply`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc-apply), [`rvdTwoSubRC_injective`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdtwosubrc-injective), [`rvdRC_mul_E_levelSet`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-mul-e-levelset). $\square$
@@ -1522,7 +1516,7 @@ $$
 `A.restrictScalars ℝ` has dense range (self-adjoint + injective).
 
 $$
-\mathrm{DenseRange}\,(\mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S))
+\mathrm{DenseRange}\,(\mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{R}\,S \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S))
 $$
 
 *Proof.* By [`restrictScalars_star`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-restrictscalars-star), [`rvdRC_mul_rvdTwoSubRC_isSelfAdjoint`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-mul-rvdtwosubrc-isselfadjoint), [`rvdRC_mul_rvdTwoSubRC_injective`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-mul-rvdtwosubrc-injective). $\square$
@@ -1535,7 +1529,7 @@ $$
 **The modular covariance `[U_t, D] = 0`** (operator form): the modular flow commutes with the antilinear `D = P−Q`.  From the intertwiner applied to the θ-fixed damped function `hΩ` (`D·(U_t·A)=(U_t·A)·D`), `D·A=A·D`, and cancelling `A` by its dense range.
 
 $$
-\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S \cdot \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t) = \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t) \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S
+\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S \cdot \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t) = \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t) \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S
 $$
 
 *Proof.* By [`projK`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk), [`projIK`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projik), [`rvdRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc), [`rvdTwoSubRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc), [`rvdTwoSubRC_apply`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc-apply), [`rvdPmQ_commute_A`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq-commute-a), [`covM`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-covm), [`cfcΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc), [`twΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tw), [`cfcΩ_intertwine`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-intertwine), [`hΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-h), [`twΩ_hΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tw-h), [`cfcΩ_hΩ`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc-h), [`rvdRC_mul_rvdTwoSubRC_denseRange`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rvdrc-mul-rvdtwosubrc-denserange). $\square$
@@ -1548,7 +1542,7 @@ $$
 **The modular covariance `[U_t, D] = 0`** (pointwise): `U_t(D ξ) = D(U_t ξ)`.  Combined with `[U_t, R] = 0` this gives full standard-subspace invariance `U_t 𝒦 = 𝒦`.
 
 $$
-(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)
+(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{(P-Q)}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)
 $$
 
 *Proof.* By [`modUnitary_commute_rvdPmQ_rs`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary-commute-rvdpmq-rs). $\square$
@@ -1574,7 +1568,7 @@ $$
 `U_t` commutes with `T = √(R(2−R))` (both functions of `R`; via `[U_t,R]=0` and `Commute.cfc_real`).
 
 $$
-\mathrm{Commute}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)
+\mathrm{Commute}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{T}\,S)
 $$
 
 *Proof.* By [`rvdRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc), [`rvdTwoSubRC`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc), [`rvdSqrtR`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr), [`rvdSqrtTwoSubR`](/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrttwosubr), [`modUnitary_commute_rvdRC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary-commute-rvdrc). $\square$
@@ -1600,7 +1594,7 @@ $$
 The **Gaussian-smeared vector** `(n/π)^{1/2}∫ e^{−n t²} V_t η dt` (without the normalisation constant): the construction RvD use to produce a dense set of entire vectors inside the real subspace `K`.
 
 $$
-g\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,V\,n\,\eta \;:=\; \int (t : \mathbb{R}), \exp\,(-n \cdot {t}^{2}) \cdot (V\,t)\,\eta
+g\,H\,V\,n\,\eta \;:=\; \int (t : \mathbb{R}), \exp\,(-n \cdot {t}^{2}) \cdot (V\,t)\,\eta
 $$
 
 <small>Used by [`oneParticleBW_niceWedge`](/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-oneparticlebw-nicewedge), [`h1_of_stripKMSrvd`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-h1-of-stripkmsrvd), [`gConstancy_of_inputs`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-gconstancy-of-inputs), [`oneParticleBW_of_inputs`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-oneparticlebw-of-inputs), [`oneParticleBW_of_stripKMSrvd_density`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-oneparticlebw-of-stripkmsrvd-density), [`oneParticleBW_complete`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-oneparticlebw-complete), [`oneParticleBW_wedge_complete`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-oneparticlebw-wedge-complete), [`gConstancy_entire`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gconstancy-entire), and 14 more.</small>
@@ -1611,7 +1605,7 @@ $$
 The smeared integrand is Bochner-integrable: dominated by `e^{−n t²}·‖η‖` (a Gaussian), since `V_t` is norm-non-increasing and the orbit is continuous.
 
 $$
-0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \mathrm{Integrable}\,(\lambda t \mapsto \exp\,(-n \cdot {t}^{2}) \cdot (V\,t)\,\eta)\,\mathrm{volume}
+0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \mathrm{Integrable}\,(\lambda t \mapsto \exp\,(-n \cdot {t}^{2}) \cdot (V\,t)\,\eta)\,\mathrm{vol}
 $$
 
 *Proof.* Immediate from the definitions. $\square$
@@ -1650,7 +1644,7 @@ $$
 The **normalised entire vector** `η_n = √(n/π)·gaussSmear V n η` — RvD's dense entire vectors in `K`.
 
 $$
-\mathrm{ev}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,V\,n\,\eta \;:=\; \sqrt (n / \pi) \cdot \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta
+\mathrm{ev}\,H\,V\,n\,\eta \;:=\; \sqrt (n / \pi) \cdot \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta
 $$
 
 <small>Used by [`gConstancy_of_entireVec_limit`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gconstancy-of-entirevec-limit), [`gConstancy_eta_of_bottom`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gconstancy-eta-of-bottom), [`entireVec_sub`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-entirevec-sub), [`entireVec_sub_norm_le`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-entirevec-sub-norm-le), [`entireVec_tendsto`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-entirevec-tendsto).</small>
@@ -1700,7 +1694,7 @@ $$
 **The fixed-Gaussian mollifier limit** (dominated convergence): for bounded continuous `f`, `∫ e^{−u²}·f(u/√n) du → ∫ e^{−u²}·f(0) du` as `n → ∞`.  Since `u/√n → 0` and `f` is continuous, `f(u/√n) → f(0)` pointwise, dominated by `e^{−u²}·M`.
 
 $$
-\mathrm{Continuous}\,f \to (\forall (t : \mathbb{R}), |f\,t| \le M) \to \mathrm{Tendsto}\,(\lambda n \mapsto \int (u : \mathbb{R}), \exp\,(-{u}^{2}) \cdot f\,(u / \sqrt n))\,\mathrm{atTop}\,(\mathrm{nhds}\,(\int (u : \mathbb{R}), \exp\,(-{u}^{2}) \cdot f\,0))
+\mathrm{Continuous}\,f \to (\forall (t : \mathbb{R}), |f\,t| \le M) \to \mathrm{Tendsto}\,(\lambda n \mapsto \int (u : \mathbb{R}), \exp\,(-{u}^{2}) \cdot f\,(u / \sqrt n))\,\mathrm{atTop}\,(\mathcal{N}\,(\int (u : \mathbb{R}), \exp\,(-{u}^{2}) \cdot f\,0))
 $$
 
 *Proof.* Immediate from the definitions. $\square$
@@ -1713,7 +1707,7 @@ $$
 **The scalar Gaussian density** `√(n/π)·∫ e^{−n t²}·f(t) dt → f(0)` as `n → ∞`, for bounded continuous `f`.  Combines the change of variables `u = √n·t` (`gauss_mollifier_change_of_var`) with the fixed-Gaussian limit (`gauss_mollifier_integral_tendsto`): `√(n/π)·∫ e^{−n t²}f = √(1/π)·∫ e^{−u²}f(u/√n) → √(1/π)·∫ e^{−u²}f(0) = f(0)`. Applied to `f(t) = ‖V_t η − η‖` (bounded by `2‖η‖`, vanishing at `0`) this lands the RvD entire-vector density `η_n → η`.
 
 $$
-\mathrm{Continuous}\,f \to (\forall (t : \mathbb{R}), |f\,t| \le M) \to \mathrm{Tendsto}\,(\lambda n \mapsto \sqrt (n / \pi) \cdot \int (t : \mathbb{R}), \exp\,(-n \cdot {t}^{2}) \cdot f\,t)\,\mathrm{atTop}\,(\mathrm{nhds}\,(f\,0))
+\mathrm{Continuous}\,f \to (\forall (t : \mathbb{R}), |f\,t| \le M) \to \mathrm{Tendsto}\,(\lambda n \mapsto \sqrt (n / \pi) \cdot \int (t : \mathbb{R}), \exp\,(-n \cdot {t}^{2}) \cdot f\,t)\,\mathrm{atTop}\,(\mathcal{N}\,(f\,0))
 $$
 
 *Proof.* By [`gauss_mollifier_change_of_var`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-gauss-mollifier-change-of-var), [`gauss_mollifier_integral_tendsto`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-gauss-mollifier-integral-tendsto). $\square$
@@ -1726,7 +1720,7 @@ $$
 **RvD entire-vector density** `η_n → η`: the normalised entire vectors `η_n = √(n/π)·∫ e^{−n t²}·V_t η dt` converge to `η` as `n → ∞`, for any strongly-continuous one-parameter contraction `V` with `V_0 η = η`. Squeeze: `0 ≤ ‖η_n − η‖ ≤ √(n/π)·∫ e^{−n t²}·‖V_t η − η‖ → ‖V_0 η − η‖ = 0` (`entireVec_sub_norm_le` + `gauss_density_tendsto` on the bounded continuous `t ↦ ‖V_t η − η‖`). With `entireVec_mem_K` this makes the entire vectors a *dense* subset of the real subspace `K` — the totality input for the RvD Theorem 3.8 KMS-uniqueness argument (`hUniq`).
 
 $$
-(\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (V\,0)\,\eta = \eta \to \mathrm{Tendsto}\,(\lambda n \mapsto \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-entirevec}{\mathrm{ev}}\,V\,n\,\eta)\,\mathrm{atTop}\,(\mathrm{nhds}\,\eta)
+(\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (V\,0)\,\eta = \eta \to \mathrm{Tendsto}\,(\lambda n \mapsto \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-entirevec}{\mathrm{ev}}\,V\,n\,\eta)\,\mathrm{atTop}\,(\mathcal{N}\,\eta)
 $$
 
 *Proof.* By [`entireVec_sub_norm_le`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-entirevec-sub-norm-le), [`gauss_density_tendsto`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-gauss-density-tendsto). $\square$
@@ -1739,7 +1733,7 @@ $$
 The **complex orbit** of the smeared vector: `G(z) = ∫ e^{−n(u−z)²}·V_u η du`, an `H`-valued function of complex time `z`.  On the real axis it is `V_s(gaussSmear V n η)`; it is entire in `z`.
 
 $$
-g\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,V\,n\,\eta\,z \;:=\; \int (u : \mathbb{R}), \exp\,(-n \cdot {(u - z)}^{2}) \cdot (V\,u)\,\eta
+g\,H\,V\,n\,\eta\,z \;:=\; \int (u : \mathbb{R}), \exp\,(-n \cdot {(u - z)}^{2}) \cdot (V\,u)\,\eta
 $$
 
 <small>Used by [`h1_of_stripKMSrvd`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-h1-of-stripkmsrvd), [`gConstancy_of_inputs`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-gconstancy-of-inputs), [`oneParticleBW_of_inputs`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-oneparticlebw-of-inputs), [`oneParticleBW_of_stripKMSrvd_density`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-oneparticlebw-of-stripkmsrvd-density), [`gFunction_eq_zero_const`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gfunction-eq-zero-const), [`gConstancy_entire`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gconstancy-entire), [`gFunction_top_edge_real_all`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gfunction-top-edge-real-all), [`gConstancy_entire_of_bottom`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gconstancy-entire-of-bottom), and 17 more.</small>
@@ -1750,7 +1744,7 @@ $$
 The complex-orbit integrand is Bochner-integrable for every fixed `z`: dominated by the shifted Gaussian `e^{n·(Im z)²}·e^{−n(u−Re z)²}·‖η‖` (since `Re(−n(u−z)²) = −n(u−Re z)² + n(Im z)²`).
 
 $$
-0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \forall (z : \mathbb{C}), \mathrm{Integrable}\,(\lambda u \mapsto \exp\,(-n \cdot {(u - z)}^{2}) \cdot (V\,u)\,\eta)\,\mathrm{volume}
+0 < n \to \forall (\eta : H), (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to \forall (z : \mathbb{C}), \mathrm{Integrable}\,(\lambda u \mapsto \exp\,(-n \cdot {(u - z)}^{2}) \cdot (V\,u)\,\eta)\,\mathrm{vol}
 $$
 
 *Proof.* Immediate from the definitions. $\square$
@@ -1776,7 +1770,7 @@ $$
 **Linear×Gaussian integrability** `Integrable (u ↦ (|u| + c)·e^{−b u²})` for `b > 0` — a degree-one polynomial against a Gaussian.  `|u|·e^{−b u²}` is integrable (norm of `u·e^{−b u²}`, `integrable_mul_exp_neg_mul_sq`) and `c·e^{−b u²}` is integrable; their sum dominates the derivative of the complex orbit (the `‖2n(u−z)·e^{−n(u−z)²}‖` bound), so this is the integrable dominating function for the holomorphy of `gaussSmearC`.
 
 $$
-0 < b \to \mathrm{Integrable}\,(\lambda u \mapsto (|u| + c) \cdot \exp\,(-b \cdot {u}^{2}))\,\mathrm{volume}
+0 < b \to \mathrm{Integrable}\,(\lambda u \mapsto (|u| + c) \cdot \exp\,(-b \cdot {u}^{2}))\,\mathrm{vol}
 $$
 
 *Proof.* Immediate from the definitions. $\square$
@@ -1815,7 +1809,7 @@ $$
 The **KMS two-point correlation** of two entire vectors, `corrC ξ V n η z = ⟨ξ, gaussSmearC V n η z⟩` — the analytic object the strip-uniqueness step compares between two candidate modular flows.
 
 $$
-\mathrm{corrC}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\xi\,V\,n\,\eta\,z \;:=\; ((\mathrm{innerSL}\,\mathbb{C})\,\xi)\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,z)
+\mathrm{corrC}\,H\,\xi\,V\,n\,\eta\,z \;:=\; ((\mathrm{innerSL}\,\mathbb{C})\,\xi)\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-gausssmearc}{g}\,V\,n\,\eta\,z)
 $$
 
 <small>Used by [`corrC_bdd_halfStrip`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-corrc-bdd-halfstrip), [`gFunction_bottom_real_of_kms_match`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gfunction-bottom-real-of-kms-match), [`gFunction_bottom_real_of_faithful_kms`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gfunction-bottom-real-of-faithful-kms), [`differentiable_corrC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-differentiable-corrc), [`corrC_norm_le`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-corrc-norm-le).</small>
@@ -1878,7 +1872,7 @@ $$
 The **complexified modular character** `u_z(r) = exp(i·z·log((2−r)/r))` on `(0,2)` (and `1` outside) — the analytic continuation of `modChar` to complex time `z`.
 
 $$
-\chi_{\mathrm{mod}}\,z \;:=\; (\mathrm{Ioo}\,0\,2).\mathrm{piecewise}\,(\lambda r \mapsto \exp\,(i \cdot z \cdot (\log\,((2 - r) / r))))\,\lambda x \mapsto 1
+\chi_{\mathrm{mod}}\,z \;:=\; (({0},{2})).\mathrm{piecewise}\,(\lambda r \mapsto \exp\,(i \cdot z \cdot (\log\,((2 - r) / r))))\,\lambda x \mapsto 1
 $$
 
 <small>Used by [`deviceOpC_bottomEdge_eq`](/browser/qiqth-modularrelativeentropy#d-qiqth-deviceopc-bottomedge-eq), [`devCharDeriv_norm_le_slab`](/browser/qiqth-modularrelativeentropy#d-qiqth-devcharderiv-norm-le-slab), [`devChar_slope_norm_le`](/browser/qiqth-modularrelativeentropy#d-qiqth-devchar-slope-norm-le), [`measurable_modCharC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-measurable-modcharc), [`modCharC_of_mem`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc-of-mem), [`modCharC_ofReal`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc-ofreal), [`modCharC_add`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc-add), [`hasDerivAt_modCharC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-hasderivat-modcharc), and 12 more.</small>
@@ -1902,7 +1896,7 @@ $$
 On `(0,2)` the complexified character is the bare exponential.
 
 $$
-r \in \mathrm{Ioo}\,0\,2 \to \forall (z : \mathbb{C}), \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,z\,r = \exp\,(i \cdot z \cdot (\log\,((2 - r) / r)))
+r \in ({0},{2}) \to \forall (z : \mathbb{C}), \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,z\,r = \exp\,(i \cdot z \cdot (\log\,((2 - r) / r)))
 $$
 
 *Proof.* Immediate from the definitions. $\square$
@@ -1941,7 +1935,7 @@ $$
 **The complex `z`-derivative of the modular character**: `d/dz u_z(r) = i·log((2−r)/r)·u_z(r)`.  This is the pointwise derivative that, integrated against the spectral measure and dominated in the regular regime, gives holomorphy of the strip extension `z ↦ ∫ u_z dμ` under the integral sign.
 
 $$
-r \in \mathrm{Ioo}\,0\,2 \to \forall (z : \mathbb{C}), ({\lambda z \mapsto \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,z\,r})'({z})={i \cdot (\log\,((2 - r) / r)) \cdot \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,z\,r}
+r \in ({0},{2}) \to \forall (z : \mathbb{C}), ({\lambda z \mapsto \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,z\,r})'({z})={i \cdot (\log\,((2 - r) / r)) \cdot \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,z\,r}
 $$
 
 *Proof.* By [`modCharC_of_mem`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc-of-mem). $\square$
@@ -1954,7 +1948,7 @@ $$
 **The exact modulus of the complexified character on the strip**: `‖u_z(r)‖ = exp(−Im(z)·log((2−r)/r))`. On the real axis (`Im z = 0`) this is `1`; for `Im z ∈ (0,1]` it is the modular weight raised to `−Im z`. This is the seed of the *boundedness* of the strip extension of `⟪ξ, Δ^{it} ξ⟫` in the regular spectral regime (`σ(R) ⊆ [a, 2−a]`), where the exponent stays bounded.
 
 $$
-r \in \mathrm{Ioo}\,0\,2 \to \forall (z : \mathbb{C}), \|\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,z\,r\| = \exp\,(-z.\mathrm{im} \cdot \log\,((2 - r) / r))
+r \in ({0},{2}) \to \forall (z : \mathbb{C}), \|\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc}{\chi_{\mathrm{mod}}}\,z\,r\| = \exp\,(-z.\mathrm{im} \cdot \log\,((2 - r) / r))
 $$
 
 *Proof.* By [`modCharC_of_mem`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc-of-mem). $\square$
@@ -2030,7 +2024,7 @@ $$
 **Device character at the bottom edge `z = −i/2` is `√(2−r)`** (`= (2−R)^{1/2}` at the operator level): `d_{−i/2}(r) = √(2−r)` for `r ∈ (0,2)`.  The device interpolation ends at `(2−R)^{1/2}` (so `deviceOpC (−i/2) ζ = (2−R)^{1/2}ζ = Jξ`, the half-modular-shift `Δ^{1/2} = J` on `𝒦`).  Computed from `Complex.exp(I·(−I/2)·log((2−r)/r))·√r = √((2−r)/r)·√r = √(2−r)`.
 
 $$
-r \in \mathrm{Ioo}\,0\,2 \to \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,(-(i / 2))\,r = \sqrt (2 - r)
+r \in ({0},{2}) \to \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,(-(i / 2))\,r = \sqrt (2 - r)
 $$
 
 *Proof.* By [`modCharC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc), [`modCharC_of_mem`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc-of-mem). $\square$
@@ -2043,7 +2037,7 @@ $$
 **The device character is bounded by `√2` on the half-strip** `{−1/2 ≤ Im z ≤ 0}`, uniformly over the spectrum `r ∈ (0,2)` — with NO regular-window assumption (RvD Lemma 3.6 / Prop 3.7).  Writing `b = −Im z ∈ [0, 1/2]`, `‖d_z(r)‖ = exp(b·log((2−r)/r))·√r`; in log form `b·log(2−r) + (1/2 − b)·log r ≤ (1/2)·log 2` since `log(2−r), log r ≤ log 2` and the coefficients `b, 1/2 − b` are nonnegative and sum to `1/2`.  The `√r` factor (the `+1/2` exponent of `R^{−iz+1/2}`) is exactly what cancels the `r^{−iz}` blow-up, so the device continuation is *bounded*-holomorphic on the half-strip for ANY standard subspace — the U-side boundedness the strip-uniqueness comparison consumes.
 
 $$
-z.\mathrm{im} \le 0 \to -(1/2) \le z.\mathrm{im} \to \forall \{r : \mathbb{R}\}, r \in \mathrm{Ioo}\,0\,2 \to \|\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,z\,r\| \le \sqrt 2
+z.\mathrm{im} \le 0 \to -(1/2) \le z.\mathrm{im} \to \forall \{r : \mathbb{R}\}, r \in ({0},{2}) \to \|\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,z\,r\| \le \sqrt 2
 $$
 
 *Proof.* By [`modCharC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc), [`modCharC_norm`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc-norm). $\square$
@@ -2056,7 +2050,7 @@ $$
 **The device character is bounded by `√2` on the CLOSED interval `[0,2]`** (the spectrum-ready strengthening of `devChar_norm_le`).  On the open interior `(0,2)` this is `devChar_norm_le`; at the endpoints `r ∈ {0,2}` the modular character collapses to `1` (`r ∉ (0,2)`), so `d_z(r) = √r` with `‖d_z(r)‖ = √r ≤ √2`.  In particular `d_z(0) = 0` (the `√r` factor kills the `r → 0` singularity outright).  Since `0 ≤ R ≤ 2`, the spectrum of `R` lies in `[0,2]`, so this is the bound the `borelFC` construction of the operator device vector `(2−R)^{iz}R^{−iz+1/2}ζ = d_z(R)ζ` consumes.
 
 $$
-z.\mathrm{im} \le 0 \to -(1/2) \le z.\mathrm{im} \to \forall \{r : \mathbb{R}\}, r \in \mathrm{Icc}\,0\,2 \to \|\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,z\,r\| \le \sqrt 2
+z.\mathrm{im} \le 0 \to -(1/2) \le z.\mathrm{im} \to \forall \{r : \mathbb{R}\}, r \in [{0},{2}] \to \|\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,z\,r\| \le \sqrt 2
 $$
 
 *Proof.* By [`modCharC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc), [`devChar_norm_le`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar-norm-le). $\square$
@@ -2069,7 +2063,7 @@ $$
 **The device-character modulus in `rpow` form**: `‖d_z(r)‖ = (2−r)^{−Im z}·r^{1/2+Im z}` on `(0,2)`. From `‖d_z(r)‖ = exp(−Im z·log((2−r)/r))·√r` (`modCharC_norm`), converting `exp(c·log x) = x^c`, `((2−r)/r)^c = (2−r)^c·r^{−c}`, and `r^{−Im z}·r^{1/2} = r^{1/2+Im z}`.  This exposes the two `rpow`-with-nonnegative-exponent factors (`−Im z ∈ (0,1/2)`, `1/2+Im z ∈ (0,1/2)` on the open half-strip) that `rpow_mul_abs_log_le` pairs against the `log((2−r)/r)` of the derivative.
 
 $$
-r \in \mathrm{Ioo}\,0\,2 \to \|\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,z\,r\| = {(2 - r)}^{(-z.\mathrm{im})} \cdot {r}^{(1/2 + z.\mathrm{im})}
+r \in ({0},{2}) \to \|\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,z\,r\| = {(2 - r)}^{(-z.\mathrm{im})} \cdot {r}^{(1/2 + z.\mathrm{im})}
 $$
 
 *Proof.* By [`modCharC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc), [`modCharC_norm`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc-norm). $\square$
@@ -2095,7 +2089,7 @@ $$
 **Uniform domination of the device `z`-derivative on a half-strip slab** (the assembled dominator for holomorphy of `devCorrExt`).  For `z` with `−Im z = b ∈ [β₀, β₁] ⊂ (0, 1/2)` and `r ∈ (0,2)`, the derivative coefficient `|log((2−r)/r)|·‖d_z(r)‖` is bounded by the constant `√2·(2/β₀ + log2) + √2·(2/(1/2−β₁) + log2)`, uniformly in `r` and over the slab.  Proof: write `‖d_z(r)‖ = (2−r)^b·r^{1/2−b}` (`devChar_norm_eq`), split `|log((2−r)/r)| ≤ |log(2−r)| + |log r|`, and apply `rpow_mul_abs_log_le` to `(2−r)^b·|log(2−r)|` and `r^{1/2−b}·|log r|`, bounding the complementary `rpow` factors by `√2`.  This is the integrable constant dominator (`μ` finite) that `hasDerivAt_integral_of_dominated_loc_of_deriv_le` consumes — with NO regular-window assumption.
 
 $$
-0 < \beta_{0} \to \beta_{1} < 1/2 \to z.\mathrm{im} \le -\beta_{0} \to -\beta_{1} \le z.\mathrm{im} \to \forall \{r : \mathbb{R}\}, r \in \mathrm{Ioo}\,0\,2 \to |\log\,((2 - r) / r)| \cdot \|\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,z\,r\| \le \sqrt 2 \cdot (2 / \beta_{0} + \log\,2) + \sqrt 2 \cdot (2 / (1/2 - \beta_{1}) + \log\,2)
+0 < \beta_{0} \to \beta_{1} < 1/2 \to z.\mathrm{im} \le -\beta_{0} \to -\beta_{1} \le z.\mathrm{im} \to \forall \{r : \mathbb{R}\}, r \in ({0},{2}) \to |\log\,((2 - r) / r)| \cdot \|\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,z\,r\| \le \sqrt 2 \cdot (2 / \beta_{0} + \log\,2) + \sqrt 2 \cdot (2 / (1/2 - \beta_{1}) + \log\,2)
 $$
 
 *Proof.* By [`devChar_norm_eq`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar-norm-eq), [`rpow_mul_abs_log_le`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-rpow-mul-abs-log-le). $\square$
@@ -2108,7 +2102,7 @@ $$
 **The complex `z`-derivative of the device character**: `d/dz d_z(r) = i·log((2−r)/r)·d_z(r)` (same modular frequency as `modCharC`, since the `√r` factor is `z`-constant).  This is the pointwise derivative that, integrated against the spectral measure and dominated on the *open* half-strip (where `−Im z ∈ (0,1/2)`, so the `r^{1/2+Im z}` factor of `‖d_z‖` keeps `log·d_z` bounded), gives holomorphy of `devCorrExt`.
 
 $$
-r \in \mathrm{Ioo}\,0\,2 \to \forall (z : \mathbb{C}), ({\lambda z \mapsto \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,z\,r})'({z})={i \cdot (\log\,((2 - r) / r)) \cdot \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,z\,r}
+r \in ({0},{2}) \to \forall (z : \mathbb{C}), ({\lambda z \mapsto \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,z\,r})'({z})={i \cdot (\log\,((2 - r) / r)) \cdot \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,z\,r}
 $$
 
 *Proof.* By [`modCharC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc), [`hasDerivAt_modCharC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-hasderivat-modcharc). $\square$
@@ -2121,7 +2115,7 @@ $$
 **The device-character `z`-derivative on the CLOSED interval `[0,2]`** (covering the spectrum endpoints). On `(0,2)` this is `hasDerivAt_devChar`.  At `r ∈ {0,2}` the modular character collapses to `1`, so `d_z(r) = √r` is `z`-constant (derivative `0`), and the formula's coefficient also vanishes because `(2−r)/r = 0` there (`2/0 = 0` at `r=0`, `0/2 = 0` at `r=2`) gives `log 0 = 0`.  So the same `HasDerivAt` statement holds across `[0,2]` — the form the differentiate-under-the-spectral-integral holomorphy of `devCorrExt` needs (the spectrum `σ(R) ⊆ [0,2]` may include the endpoints).
 
 $$
-r \in \mathrm{Icc}\,0\,2 \to \forall (z : \mathbb{C}), ({\lambda z \mapsto \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,z\,r})'({z})={i \cdot (\log\,((2 - r) / r)) \cdot \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,z\,r}
+r \in [{0},{2}] \to \forall (z : \mathbb{C}), ({\lambda z \mapsto \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,z\,r})'({z})={i \cdot (\log\,((2 - r) / r)) \cdot \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-devchar}{\chi_{\mathrm{dev}}}\,z\,r}
 $$
 
 *Proof.* By [`modCharC`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modcharc), [`hasDerivAt_devChar`](/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-hasderivat-devchar). $\square$

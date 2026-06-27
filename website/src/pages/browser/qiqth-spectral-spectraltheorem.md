@@ -13,7 +13,7 @@ description: QIQTH.Spectral.SpectralTheorem — definitions, lemmas and theorems
 **Lemma 670** (`congr_simp`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean)</small>
 
 $$
-s = \mathrm{s\_1} \to \forall (z \mathrm{z\_1} : H), z = \mathrm{z\_1} \to \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,z = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,\mathrm{s\_1}\,\mathrm{z\_1}
+s = \mathrm{s\_1} \to \forall (z \mathrm{z\_1} : H), z = \mathrm{z\_1} \to \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,z = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,\mathrm{s\_1}\,\mathrm{z\_1}
 $$
 
 *Proof.* Immediate from the definitions. $\square$
@@ -24,7 +24,7 @@ $$
 **Lemma 671** (`congr_simp`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean)</small>
 
 $$
-s = \mathrm{s\_1} \to \forall (u \mathrm{u\_1} : H), u = \mathrm{u\_1} \to \forall (v \mathrm{v\_1} : H), v = \mathrm{v\_1} \to \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,v = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,\mathrm{s\_1}\,\mathrm{u\_1}\,\mathrm{v\_1}
+s = \mathrm{s\_1} \to \forall (u \mathrm{u\_1} : H), u = \mathrm{u\_1} \to \forall (v \mathrm{v\_1} : H), v = \mathrm{v\_1} \to \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,v = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,\mathrm{s\_1}\,\mathrm{u\_1}\,\mathrm{v\_1}
 $$
 
 *Proof.* Immediate from the definitions. $\square$
@@ -59,7 +59,7 @@ $$
 The scalar spectral functional as an ℝ-linear map on compactly-supported continuous functions on the spectrum: `f ↦ re ⟪x, f(T) x⟫`, where `f(T) := cfcHom ha f`.
 
 $$
-\mathrm{specFunctional}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,T\,\mathrm{ha}\,x \;:=\; \{\mathrm{toFun} :=\lambda f \mapsto \mathrm{re}\,(\langle {x},{((\mathrm{cfcHom}\,\mathrm{ha})\,f.\mathrm{toContinuousMap})\,x}\rangle) , \mathrm{map\_add}^{\prime} :=\cdots , \mathrm{map\_smul}^{\prime} :=\cdots \}
+\mathrm{specFunctional}\,H\,T\,x \;:=\; \{\mathrm{toFun} :=\lambda f \mapsto \mathrm{re}\,(\langle {x},{((\mathrm{cfcHom}\,\mathrm{ha})\,f.\mathrm{toContinuousMap})\,x}\rangle) , \mathrm{map\_add}^{\prime} :=\cdots , \mathrm{map\_smul}^{\prime} :=\cdots \}
 $$
 
 <small>Used by [`specPLM`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specplm).</small>
@@ -69,9 +69,6 @@ $$
 
 The scalar spectral functional bundled as a **positive** linear functional `Λ_x : C_c(spectrum ℝ T, ℝ) →ₚ[ℝ] ℝ`.
 
-$$
-\mathrm{specPLM}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,T\,\mathrm{ha}\,x \;:=\; \mathrm{mk}\,(\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specfunctional}{\mathrm{specFunctional}}\,T\,\mathrm{ha}\,x)\,\cdots
-$$
 
 <small>Used by [`specMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure), [`integral_specMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-integral-specmeasure), [`instIsFiniteMeasureElemRealSpectrumContinuousLinearMapComplexIdSpecMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-instisfinitemeasureelemrealspectrumcontinuouslinearmapcomplexidspecmeasure).</small>
 
@@ -81,7 +78,7 @@ $$
 The **scalar spectral measure** `μ_x` of a self-adjoint `T` at a vector `x`: the Riesz–Markov measure of the positive functional `Λ_x = specPLM`.
 
 $$
-\mu_{\mathrm{sp}}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,T\,\mathrm{ha}\,x \;:=\; \mathrm{rieszMeasure}\,(\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specplm}{\mathrm{specPLM}}\,T\,\mathrm{ha}\,x)
+\mu_{\mathrm{sp}}\,H\,T\,x \;:=\; \mathrm{rieszMeasure}\,(\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specplm}{\mathrm{specPLM}}\,T\,\mathrm{ha}\,x)
 $$
 
 <small>Used by [`congr_simp`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure-congr-simp), [`integral_specMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-integral-specmeasure), [`instIsFiniteMeasureElemRealSpectrumContinuousLinearMapComplexIdSpecMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-instisfinitemeasureelemrealspectrumcontinuouslinearmapcomplexidspecmeasure), [`specMeasure_real_univ`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure-real-univ), [`specMeasure_real_le`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure-real-le), [`specMeasure_smul`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure-smul), [`specMeasure_parallelogram`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure-parallelogram), [`specMeasure_add`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure-add), and 22 more.</small>
@@ -183,7 +180,7 @@ $$
 The diagonal quadratic form `q_s(z) = μ_z(s)` (real, nonnegative).
 
 $$
-\mathrm{qForm}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,T\,\mathrm{ha}\,s\,z \;:=\; (\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,z).\mathrm{real}\,s
+q\,H\,T\,s\,z \;:=\; (\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure}{\mu_{\mathrm{sp}}}\,T\,\mathrm{ha}\,z).\mathrm{real}\,s
 $$
 
 <small>Used by [`congr_simp`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-congr-simp), [`qForm_nonneg`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-nonneg), [`qForm_zero`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-zero), [`qForm_smul`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-smul), [`qForm_neg`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-neg), [`qForm_parallelogram`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-parallelogram), [`qForm_add`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-add), [`bForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform), and 23 more.</small>
@@ -192,7 +189,7 @@ $$
 **Lemma 685** (`qForm_nonneg`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L260)</small>
 
 $$
-0 \le \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,z
+0 \le \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,z
 $$
 
 *Proof.* By [`specMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure). $\square$
@@ -216,7 +213,7 @@ $$
 **Lemma 687** (`qForm_zero`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L268)</small>
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,0 = 0
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,0 = 0
 $$
 
 *Proof.* By [`specMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure), [`specMeasure_zero`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure-zero). $\square$
@@ -227,7 +224,7 @@ $$
 **Lemma 688** (`qForm_smul`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L272)</small>
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,(c \cdot z) = {\|c\|}^{2} \cdot \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,z
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,(c \cdot z) = {\|c\|}^{2} \cdot \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,z
 $$
 
 *Proof.* By [`specMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure), [`specMeasure_smul`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure-smul). $\square$
@@ -238,7 +235,7 @@ $$
 **Lemma 689** (`qForm_neg`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L277)</small>
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,(-z) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,z
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,(-z) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,z
 $$
 
 *Proof.* By [`congr_simp`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-congr-simp), [`qForm_smul`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-smul). $\square$
@@ -249,7 +246,7 @@ $$
 **Lemma 690** (`qForm_parallelogram`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L282)</small>
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,(x + y) + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,(x - y) = 2 \cdot \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,x + 2 \cdot \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,y
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,(x + y) + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,(x - y) = 2 \cdot \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,x + 2 \cdot \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,y
 $$
 
 *Proof.* By [`specMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure), [`instIsFiniteMeasureElemRealSpectrumContinuousLinearMapComplexIdSpecMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-instisfinitemeasureelemrealspectrumcontinuouslinearmapcomplexidspecmeasure), [`specMeasure_parallelogram`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure-parallelogram). $\square$
@@ -260,7 +257,7 @@ $$
 **Lemma 691** (`qForm_add`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L294)</small>
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,(x + a + b) + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,(x - a) + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,(x - b) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,(x - a - b) + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,(x + a) + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,(x + b)
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,(x + a + b) + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,(x - a) + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,(x - b) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,(x - a - b) + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,(x + a) + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,(x + b)
 $$
 
 *Proof.* By [`specMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure), [`instIsFiniteMeasureElemRealSpectrumContinuousLinearMapComplexIdSpecMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-instisfinitemeasureelemrealspectrumcontinuouslinearmapcomplexidspecmeasure), [`specMeasure_add`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure-add). $\square$
@@ -273,7 +270,7 @@ $$
 The polarized bilinear form `b_s(u,v) = ¼(q_s(u+v) − q_s(u−v))`.
 
 $$
-\mathrm{bForm}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,T\,\mathrm{ha}\,s\,u\,v \;:=\; (\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,(u + v) - \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,(u - v)) / 4
+b\,H\,T\,s\,u\,v \;:=\; (\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,(u + v) - \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,(u - v)) / 4
 $$
 
 <small>Used by [`congr_simp`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-congr-simp), [`qForm_add_expand`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-add-expand), [`bForm_self`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-self), [`bForm_comm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-comm), [`bForm_add_right`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-add-right), [`bForm_zero_right`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-zero-right), [`bFormRight`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bformright), [`bForm_sq_le`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-sq-le), and 22 more.</small>
@@ -284,7 +281,7 @@ $$
 Expansion identity: `q_s(p+q) = q_s(p) + q_s(q) + 2 b_s(p,q)` (from the parallelogram law).
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,(p + q) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,p + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,q + 2 \cdot \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,p\,q
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,(p + q) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,p + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,q + 2 \cdot \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,p\,q
 $$
 
 *Proof.* By [`qForm_parallelogram`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-parallelogram). $\square$
@@ -297,7 +294,7 @@ $$
 `b_s(u,u) = q_s(u)`.
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,u = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,u
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,u = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,u
 $$
 
 *Proof.* By [`qForm_zero`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-zero), [`qForm_smul`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-smul). $\square$
@@ -310,7 +307,7 @@ $$
 `b_s` is symmetric.
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,v = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,v\,u
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,v = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,v\,u
 $$
 
 *Proof.* By [`qForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform), [`qForm_neg`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-neg). $\square$
@@ -323,7 +320,7 @@ $$
 `b_s` is additive in its right argument.
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,(v + w) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,v + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,w
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,(v + w) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,v + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,w
 $$
 
 *Proof.* By [`qForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform), [`qForm_add`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-add). $\square$
@@ -336,7 +333,7 @@ $$
 Real-scalar version of the scaling law: `q_s(r•z) = r²·q_s(z)`.
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,(r \cdot z) = {r}^{2} \cdot \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,z
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,(r \cdot z) = {r}^{2} \cdot \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,z
 $$
 
 *Proof.* By [`qForm_smul`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-smul). $\square$
@@ -347,7 +344,7 @@ $$
 **Lemma 698** (`bForm_zero_right`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L344)</small>
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,0 = 0
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,0 = 0
 $$
 
 *Proof.* By [`congr_simp`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-congr-simp), [`qForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform). $\square$
@@ -360,7 +357,7 @@ $$
 `b_s(u, ·)` bundled as an additive homomorphism (used for ℚ-homogeneity in Cauchy–Schwarz).
 
 $$
-\mathrm{bFormRight}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,T\,\mathrm{ha}\,s\,u \;:=\; \{\mathrm{toFun} :=\lambda w \mapsto \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,w , \mathrm{map\_zero}^{\prime} :=\cdots , \mathrm{map\_add}^{\prime} :=\cdots \}
+\mathrm{bFormRight}\,H\,T\,s\,u \;:=\; \{\mathrm{toFun} :=\lambda w \mapsto \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,w , \mathrm{map\_zero}^{\prime} :=\cdots , \mathrm{map\_add}^{\prime} :=\cdots \}
 $$
 
 <small>Used by [`bForm_sq_le`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-sq-le), [`bForm_real_smul_right`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-real-smul-right).</small>
@@ -371,7 +368,7 @@ $$
 **Cauchy–Schwarz** for the spectral form: `b_s(u,v)² ≤ q_s(u)·q_s(v)`. Because `q_s ≥ 0`, the quadratic `t ↦ q_s(u + t•v) = q_s(v)·t² + 2 b_s(u,v)·t + q_s(u)` is nonnegative on `ℚ` (hence on `ℝ` by density), so its discriminant is `≤ 0`.
 
 $$
-{\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,v}^{2} \le \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,u \cdot \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,v
+{\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,v}^{2} \le \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,u \cdot \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,v
 $$
 
 *Proof.* By [`qForm_nonneg`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-nonneg), [`qForm_add_expand`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-add-expand), [`qForm_real_smul`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-real-smul), [`bFormRight`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bformright). $\square$
@@ -384,7 +381,7 @@ $$
 `b_s` is subtractive in its right argument.
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,(v - w) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,v - \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,w
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,(v - w) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,v - \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,w
 $$
 
 *Proof.* By [`bForm_add_right`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-add-right). $\square$
@@ -397,7 +394,7 @@ $$
 **Boundedness** of the spectral form: `|b_s(u,v)| ≤ ‖u‖·‖v‖` (from Cauchy–Schwarz and `q_s(z) ≤ ‖z‖²`).
 
 $$
-|\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,v| \le \|u\| \cdot \|v\|
+|\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,v| \le \|u\| \cdot \|v\|
 $$
 
 *Proof.* By [`specMeasure_real_le`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure-real-le), [`qForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform), [`qForm_nonneg`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-nonneg), [`bForm_sq_le`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-sq-le). $\square$
@@ -410,7 +407,7 @@ $$
 `b_s(u, ·)` is continuous (Lipschitz with constant `‖u‖`).
 
 $$
-\mathrm{Continuous}\,\lambda v \mapsto \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,v
+\mathrm{Continuous}\,\lambda v \mapsto \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,v
 $$
 
 *Proof.* By [`bForm_sub_right`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-sub-right), [`bForm_abs_le`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-abs-le). $\square$
@@ -423,7 +420,7 @@ $$
 **ℝ-homogeneity** of `b_s(u, ·)` (continuity + `map_real_smul`).
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,(r \cdot v) = r \cdot \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,v
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,(r \cdot v) = r \cdot \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,v
 $$
 
 *Proof.* By [`bFormRight`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bformright), [`bForm_continuous_right`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-continuous-right). $\square$
@@ -434,7 +431,7 @@ $$
 **Lemma 705** (`bForm_neg_right`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L421)</small>
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,(-v) = -\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,v
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,(-v) = -\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,v
 $$
 
 *Proof.* By [`congr_simp`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-congr-simp), [`bForm_real_smul_right`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-real-smul-right). $\square$
@@ -447,7 +444,7 @@ $$
 `b_s` is invariant under simultaneous multiplication by `i`: `b_s(I•u, I•v) = b_s(u,v)` (from the `i`-invariance `q_s(I•z) = q_s(z)`).
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,(i \cdot u)\,(i \cdot v) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,v
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,(i \cdot u)\,(i \cdot v) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,v
 $$
 
 *Proof.* By [`qForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform), [`qForm_smul`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-smul). $\square$
@@ -460,7 +457,7 @@ $$
 The `i`-twist: `b_s(I•x, y) = − b_s(x, I•y)`.
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,(i \cdot x)\,y = -\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,x\,(i \cdot y)
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,(i \cdot x)\,y = -\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,x\,(i \cdot y)
 $$
 
 *Proof.* By [`bForm_neg_right`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-neg-right), [`bForm_I_smul`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-i-smul). $\square$
@@ -473,7 +470,7 @@ $$
 The complex spectral form `c_s(x,y) = b_s(x,y) − i·b_s(x, I•y)`; its Riesz representation will be the spectral projection `E(s)`, with `⟪E(s) x, y⟫ = c_s(x,y)`.
 
 $$
-\mathrm{cForm}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,T\,\mathrm{ha}\,s\,x\,y \;:=\; (\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,x\,y) - i \cdot (\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,x\,(i \cdot y))
+c\,H\,T\,s\,x\,y \;:=\; (\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,x\,y) - i \cdot (\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,x\,(i \cdot y))
 $$
 
 <small>Used by [`cForm_add_right`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform-add-right), [`cForm_norm_le`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform-norm-le), [`cFormCLM`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cformclm), [`cFormCLM_norm_le`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cformclm-norm-le), [`inner_specProj`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-inner-specproj), [`cForm_empty`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform-empty), [`specProj_empty`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj-empty), [`cForm_hermitian`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform-hermitian), and 8 more.</small>
@@ -482,7 +479,7 @@ $$
 **Lemma 709** (`cForm_add_right`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/SpectralTheorem.lean#L448)</small>
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{\mathrm{cForm}}\,T\,\mathrm{ha}\,s\,x\,(y + z) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{\mathrm{cForm}}\,T\,\mathrm{ha}\,s\,x\,y + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{\mathrm{cForm}}\,T\,\mathrm{ha}\,s\,x\,z
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{c}\,T\,\mathrm{ha}\,s\,x\,(y + z) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{c}\,T\,\mathrm{ha}\,s\,x\,y + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{c}\,T\,\mathrm{ha}\,s\,x\,z
 $$
 
 *Proof.* By [`bForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform), [`bForm_add_right`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-add-right). $\square$
@@ -495,7 +492,7 @@ $$
 **Norm bound**: `‖c_s(x,y)‖ ≤ 2·‖x‖·‖y‖`.
 
 $$
-\|\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{\mathrm{cForm}}\,T\,\mathrm{ha}\,s\,x\,y\| \le 2 \cdot \|x\| \cdot \|y\|
+\|\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{c}\,T\,\mathrm{ha}\,s\,x\,y\| \le 2 \cdot \|x\| \cdot \|y\|
 $$
 
 *Proof.* By [`bForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform), [`bForm_abs_le`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-abs-le). $\square$
@@ -508,7 +505,7 @@ $$
 `c_s(x, ·)` bundled as a continuous ℂ-linear functional `H →L[ℂ] ℂ`.
 
 $$
-\mathrm{cFormCLM}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,T\,\mathrm{ha}\,s\,x \;:=\; \{\mathrm{toFun} :=\lambda y \mapsto \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{\mathrm{cForm}}\,T\,\mathrm{ha}\,s\,x\,y , \mathrm{map\_add}^{\prime} :=\cdots , \mathrm{map\_smul}^{\prime} :=\cdots \}.\mathrm{mkContinuous}\,(2 \cdot \|x\|)\,\cdots
+\mathrm{cFormCLM}\,H\,T\,s\,x \;:=\; \{\mathrm{toFun} :=\lambda y \mapsto \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{c}\,T\,\mathrm{ha}\,s\,x\,y , \mathrm{map\_add}^{\prime} :=\cdots , \mathrm{map\_smul}^{\prime} :=\cdots \}.\mathrm{mkContinuous}\,(2 \cdot \|x\|)\,\cdots
 $$
 
 <small>Used by [`cFormCLM_norm_le`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cformclm-norm-le), [`specProj`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj), [`inner_specProj`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-inner-specproj).</small>
@@ -530,7 +527,7 @@ $$
 The **spectral projection** `E(s) : H →L[ℂ] H`, obtained by Riesz-representing the bounded sesquilinear form `c_s` (`⟪E(s) x, y⟫ = c_s(x,y)`).
 
 $$
-E\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,T\,\mathrm{ha}\,s \;:=\; \mathrm{continuousLinearMapOfBilin}\,(\{\mathrm{toFun} :=\lambda x \mapsto \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cformclm}{\mathrm{cFormCLM}}\,T\,\mathrm{ha}\,s\,x , \mathrm{map\_add}^{\prime} :=\cdots , \mathrm{map\_smul}^{\prime} :=\cdots \}.\mathrm{mkContinuous}\,2\,\cdots )
+E\,H\,T\,s \;:=\; \mathrm{continuousLinearMapOfBilin}\,(\{\mathrm{toFun} :=\lambda x \mapsto \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cformclm}{\mathrm{cFormCLM}}\,T\,\mathrm{ha}\,s\,x , \mathrm{map\_add}^{\prime} :=\cdots , \mathrm{map\_smul}^{\prime} :=\cdots \}.\mathrm{mkContinuous}\,2\,\cdots )
 $$
 
 <small>Used by [`congr_simp`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj-congr-simp), [`inner_specProj`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-inner-specproj), [`specProj_empty`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj-empty), [`specProj_isSelfAdjoint`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj-isselfadjoint), [`specProj_univ`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj-univ), [`reApplyInnerSelf_specProj`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-reapplyinnerself-specproj), [`specProj_isPositive`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj-ispositive), [`specProj_union_disjoint`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj-union-disjoint), and 10 more.</small>
@@ -541,7 +538,7 @@ $$
 **Defining identity of the spectral projection**: `⟪E(s) x, y⟫ = c_s(x,y)`.
 
 $$
-\langle {(\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s)\,x},{y}\rangle = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{\mathrm{cForm}}\,T\,\mathrm{ha}\,s\,x\,y
+\langle {(\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s)\,x},{y}\rangle = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{c}\,T\,\mathrm{ha}\,s\,x\,y
 $$
 
 *Proof.* By [`cFormCLM`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cformclm), [`cFormCLM_norm_le`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cformclm-norm-le). $\square$
@@ -554,7 +551,7 @@ $$
 `c_∅ = 0`.
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{\mathrm{cForm}}\,T\,\mathrm{ha}\,\emptyset \,x\,y = 0
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{c}\,T\,\mathrm{ha}\,\emptyset \,x\,y = 0
 $$
 
 *Proof.* By [`specMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure), [`qForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform), [`bForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform). $\square$
@@ -580,7 +577,7 @@ $$
 **Hermitian symmetry** of the form: `conj(c_s(y,x)) = c_s(x,y)`.
 
 $$
-(\mathrm{starRingEnd}\,\mathbb{C})\,(\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{\mathrm{cForm}}\,T\,\mathrm{ha}\,s\,y\,x) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{\mathrm{cForm}}\,T\,\mathrm{ha}\,s\,x\,y
+(\mathrm{starRingEnd}\,\mathbb{C})\,(\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{c}\,T\,\mathrm{ha}\,s\,y\,x) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{c}\,T\,\mathrm{ha}\,s\,x\,y
 $$
 
 *Proof.* By [`bForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform), [`bForm_comm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-comm), [`bForm_I_comm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-i-comm). $\square$
@@ -606,7 +603,7 @@ $$
 `q_univ(z) = ‖z‖²`.
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,z = {\|z\|}^{2}
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,z = {\|z\|}^{2}
 $$
 
 *Proof.* By [`specMeasure_real_univ`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure-real-univ). $\square$
@@ -619,7 +616,7 @@ $$
 `b_univ(x,y) = re ⟪x,y⟫` (polarization of the norm).
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,x\,y = \mathrm{re}\,(\langle {x},{y}\rangle)
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,x\,y = \mathrm{re}\,(\langle {x},{y}\rangle)
 $$
 
 *Proof.* By [`qForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform), [`qForm_univ`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-univ). $\square$
@@ -632,7 +629,7 @@ $$
 `c_univ(x,y) = ⟪x,y⟫`.
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{\mathrm{cForm}}\,T\,\mathrm{ha}\,x\,y = \langle {x},{y}\rangle
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{c}\,T\,\mathrm{ha}\,x\,y = \langle {x},{y}\rangle
 $$
 
 *Proof.* By [`bForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform), [`bForm_univ`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-univ). $\square$
@@ -658,7 +655,7 @@ $$
 The diagonal of the spectral form is the (real, nonnegative) quadratic form: `re ⟪E(s) x, x⟫ = q_s(x)`.
 
 $$
-(\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s).\mathrm{reApplyInnerSelf}\,x = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,x
+(\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s).\mathrm{reApplyInnerSelf}\,x = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,x
 $$
 
 *Proof.* By [`bForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform), [`bForm_self`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-self), [`cForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform), [`inner_specProj`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-inner-specproj). $\square$
@@ -684,7 +681,7 @@ $$
 Finite additivity of the diagonal form on disjoint sets.
 
 $$
-\mathrm{Disjoint}\,s\,t \to \mathrm{MeasurableSet}\,t \to \forall (z : H), \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,(s \cup t)\,z = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,z + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,t\,z
+\mathrm{Disjoint}\,s\,t \to \mathrm{MeasurableSet}\,t \to \forall (z : H), \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,(s \cup t)\,z = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,z + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,t\,z
 $$
 
 *Proof.* By [`specMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure), [`instIsFiniteMeasureElemRealSpectrumContinuousLinearMapComplexIdSpecMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-instisfinitemeasureelemrealspectrumcontinuouslinearmapcomplexidspecmeasure). $\square$
@@ -697,7 +694,7 @@ $$
 Finite additivity of the complex form on disjoint sets.
 
 $$
-\mathrm{Disjoint}\,s\,t \to \mathrm{MeasurableSet}\,t \to \forall (x y : H), \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{\mathrm{cForm}}\,T\,\mathrm{ha}\,(s \cup t)\,x\,y = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{\mathrm{cForm}}\,T\,\mathrm{ha}\,s\,x\,y + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{\mathrm{cForm}}\,T\,\mathrm{ha}\,t\,x\,y
+\mathrm{Disjoint}\,s\,t \to \mathrm{MeasurableSet}\,t \to \forall (x y : H), \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{c}\,T\,\mathrm{ha}\,(s \cup t)\,x\,y = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{c}\,T\,\mathrm{ha}\,s\,x\,y + \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform}{c}\,T\,\mathrm{ha}\,t\,x\,y
 $$
 
 *Proof.* By [`qForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform), [`bForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform), [`qForm_union`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform-union). $\square$
@@ -736,7 +733,7 @@ $$
 **Effect estimate**: for the positive contraction `E(s)`, `‖E(s) x‖² ≤ q_s(x)`. (From `E(s)² ≤ E(s)`, i.e. `E(s)·(1−E(s)) ≥ 0` for commuting positives.)
 
 $$
-{\|(\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s)\,x\|}^{2} \le \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{\mathrm{qForm}}\,T\,\mathrm{ha}\,s\,x
+{\|(\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s)\,x\|}^{2} \le \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform}{q}\,T\,\mathrm{ha}\,s\,x
 $$
 
 *Proof.* By [`specProj_isSelfAdjoint`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj-isselfadjoint), [`reApplyInnerSelf_specProj`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-reapplyinnerself-specproj), [`specProj_isPositive`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj-ispositive), [`specProj_le_one`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj-le-one). $\square$
@@ -853,7 +850,7 @@ $$
 `b_s` is subtractive in its left argument.
 
 $$
-\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,(u - w)\,v = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,u\,v - \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,w\,v
+\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,(u - w)\,v = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,u\,v - \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,w\,v
 $$
 
 *Proof.* By [`bForm_comm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-comm), [`bForm_sub_right`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform-sub-right). $\square$
@@ -879,7 +876,7 @@ $$
 **Diagonal–`E(s)` identity**: `re ⟪x, h(T)(E(s)v)⟫ = b_s(h(T)x, v)` for continuous `h`. (Move `h(T)` and `E(s)` across by self-adjointness; the imaginary part of `c_s` drops under `re`.)
 
 $$
-\mathrm{re}\,(\langle {x},{((\mathrm{cfcHom}\,\mathrm{ha})\,h)\,((\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s)\,v)}\rangle) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,s\,(((\mathrm{cfcHom}\,\mathrm{ha})\,h)\,x)\,v
+\mathrm{re}\,(\langle {x},{((\mathrm{cfcHom}\,\mathrm{ha})\,h)\,((\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s)\,v)}\rangle) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,s\,(((\mathrm{cfcHom}\,\mathrm{ha})\,h)\,x)\,v
 $$
 
 *Proof.* By [`cForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-cform), [`inner_specProj`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-inner-specproj), [`specProj_isSelfAdjoint`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj-isselfadjoint). $\square$
@@ -918,7 +915,7 @@ $$
 **The intersection identity at the form level**: `b_t(x, E(s)v) = b_{s∩t}(x, v)` (evaluate `specProj_engine_measure` at `t` via `.real`).
 
 $$
-\mathrm{MeasurableSet}\,s \to \mathrm{MeasurableSet}\,t \to \forall (x v : H), \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,t\,x\,((\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s)\,v) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{\mathrm{bForm}}\,T\,\mathrm{ha}\,(s \cap t)\,x\,v
+\mathrm{MeasurableSet}\,s \to \mathrm{MeasurableSet}\,t \to \forall (x v : H), \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,t\,x\,((\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha}\,s)\,v) = \href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-bform}{b}\,T\,\mathrm{ha}\,(s \cap t)\,x\,v
 $$
 
 *Proof.* By [`specMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specmeasure), [`instIsFiniteMeasureElemRealSpectrumContinuousLinearMapComplexIdSpecMeasure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-instisfinitemeasureelemrealspectrumcontinuouslinearmapcomplexidspecmeasure), [`qForm`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-qform), [`specProj_engine_measure`](/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj-engine-measure). $\square$
@@ -944,7 +941,7 @@ $$
 **The bounded spectral theorem (PVM form)**: every bounded self-adjoint `T : H →L[ℂ] H` induces a projection-valued measure on `spectrum ℝ T`, with `E(s) = specProj`.  All structure fields are the lemmas proved above; `isIdem` is `E_inter` at `s = t`.
 
 $$
-\mathrm{PVM\_of\_selfAdjoint}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,T\,\mathrm{ha} \;:=\; \{E :=\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha} , \mathrm{isSA} :=\cdots , \mathrm{isIdem} :=\cdots , \mathrm{E\_empty} :=\cdots , \mathrm{E\_univ} :=\cdots , \mathrm{E\_inter} :=\cdots , \mathrm{hasSum\_iUnion} :=\cdots \}
+\mathrm{PVM\_of\_selfAdjoint}\,H\,T \;:=\; \{E :=\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-specproj}{E}\,T\,\mathrm{ha} , \mathrm{isSA} :=\cdots , \mathrm{isIdem} :=\cdots , \mathrm{E\_empty} :=\cdots , \mathrm{E\_univ} :=\cdots , \mathrm{E\_inter} :=\cdots , \mathrm{hasSum\_iUnion} :=\cdots \}
 $$
 
 <small>Used by [`rvdSpecMeasure`](/browser/qiqth-modularrelativeentropy#d-qiqth-rvdspecmeasure), [`deviceOpC_norm_le`](/browser/qiqth-modularrelativeentropy#d-qiqth-deviceopc-norm-le), [`borelFC_inner_self`](/browser/qiqth-modularrelativeentropy#d-qiqth-borelfc-inner-self), [`rvdSpec_borelFC_diag`](/browser/qiqth-modularrelativeentropy#d-qiqth-rvdspec-borelfc-diag), [`rvdSpecMeasure_zero_levelSet`](/browser/qiqth-modularrelativeentropy#d-qiqth-rvdspecmeasure-zero-levelset), [`rvdSpecMeasure_two_levelSet`](/browser/qiqth-modularrelativeentropy#d-qiqth-rvdspecmeasure-two-levelset), [`tendsto_integral_devChar_remainder_sq`](/browser/qiqth-modularrelativeentropy#d-qiqth-tendsto-integral-devchar-remainder-sq), [`tendsto_integral_devChar_diff_sq`](/browser/qiqth-modularrelativeentropy#d-qiqth-tendsto-integral-devchar-diff-sq), and 17 more.</small>
@@ -968,7 +965,7 @@ $$
 The **bounded Borel functional calculus** of a bounded self-adjoint `T`: `f(T)` for bounded measurable `f : σ(T) → ℂ`.
 
 $$
-\Phi_{B}\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,T\,\mathrm{ha}\,f\,\mathrm{hf}\,C\,\mathrm{hC0}\,\mathrm{hC} \;:=\; (\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,T\,\mathrm{ha}).\Phi\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC}
+\Phi_{B}\,H\,T\,f\,C \;:=\; (\href{/browser/qiqth-spectral-spectraltheorem#d-qiqth-spectraltheorem-pvm-of-selfadjoint}{\mathrm{PVM\_of\_selfAdjoint}}\,T\,\mathrm{ha}).\Phi\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC}
 $$
 
 <small>Used by [`borelFC_congr_ae`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-borelfc-congr-ae), [`deviceOpC_neg_half_eq`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-deviceopc-neg-half-eq), [`deviceOpReal`](/browser/qiqth-modularrelativeentropy#d-qiqth-deviceopreal), [`deviceOpC`](/browser/qiqth-modularrelativeentropy#d-qiqth-deviceopc), [`deviceOpC_norm_le`](/browser/qiqth-modularrelativeentropy#d-qiqth-deviceopc-norm-le), [`deviceOpReal_zero`](/browser/qiqth-modularrelativeentropy#d-qiqth-deviceopreal-zero), [`deviceOpReal_eq`](/browser/qiqth-modularrelativeentropy#d-qiqth-deviceopreal-eq), [`borelFC_inner_self`](/browser/qiqth-modularrelativeentropy#d-qiqth-borelfc-inner-self), and 36 more.</small>

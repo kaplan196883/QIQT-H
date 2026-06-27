@@ -37,7 +37,7 @@ $$
 **Bridge**: the bespoke Minkowski-Fourier transform IS a `VectorFourier.fourierIntegral` for the bilinear form `minkBilin` (with the standard `2π` Fourier character).  This is what lets us import Mathlib's decay estimates.
 
 $$
-\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-minkowskifourier}{\mathcal{F}}\,f\,p = \mathcal{F}\,\mathrm{e}\,\mathrm{volume}\,\href{/browser/qiqth-fock-schwartzdecay#d-qiqth-fock-localization-minkbilin}{\eta}.\mathrm{toLinearMap}_{12}\,f\,p
+\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-minkowskifourier}{\mathcal{F}}\,f\,p = \mathcal{F}\,\mathrm{e}\,\mathrm{vol}\,\href{/browser/qiqth-fock-schwartzdecay#d-qiqth-fock-localization-minkbilin}{\eta}.\mathrm{toLinearMap}_{12}\,f\,p
 $$
 
 *Proof.* By [`minkowskiDot`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-minkowskidot), [`minkBilin_apply`](/browser/qiqth-fock-schwartzdecay#d-qiqth-fock-localization-minkbilin-apply). $\square$
@@ -63,7 +63,7 @@ $$
 **General Schwartz `1/cosh` decay** of the localized amplitude.  For any Schwartz `f` and `m ≠ 0`, `‖Krep m f θ‖ ≤ C · (cosh θ)⁻¹` with `C = 4πS / (√2·|m|)`, where `S = ∫‖f‖ + ∫‖D f‖` is a finite Schwartz constant.  Hence `Krep m f ∈ L²(ℝ)`.
 
 $$
-m \ne 0 \to \mathrm{MemLp}\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f)\,2\,\mathrm{volume}
+m \ne 0 \to \mathrm{MemLp}\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{K}\,m\,f)\,2\,\mathrm{vol}
 $$
 
 *Proof.* By [`massShell`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-massshell), [`minkowskiFourier`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-minkowskifourier), [`Krep_memLp_of_decay`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep-memlp-of-decay), [`minkBilin`](/browser/qiqth-fock-schwartzdecay#d-qiqth-fock-localization-minkbilin), [`minkBilin_apply`](/browser/qiqth-fock-schwartzdecay#d-qiqth-fock-localization-minkbilin-apply), [`minkowskiFourier_eq_fourierIntegral`](/browser/qiqth-fock-schwartzdecay#d-qiqth-fock-localization-minkowskifourier-eq-fourierintegral), [`abs_sinh_le_cosh`](/browser/qiqth-fock-schwartzdecay#d-qiqth-fock-localization-abs-sinh-le-cosh). $\square$
@@ -76,7 +76,7 @@ $$
 **General Schwartz `1/cosh²` decay** of the localized amplitude (one derivative more than `schwartz_Krep_memLp`).  For any Schwartz `f` and `m ≠ 0`, `‖Krep m f θ‖ ≤ 16π²·S₂/(√2·m²) · (cosh θ)⁻²` with `S₂ = ∫‖f‖ + ∫‖Df‖ + ∫‖D²f‖`.  The `(cosh θ)⁻²` decay (via the `n = 2` Fourier-decay estimate) is what makes the horizon amplitude `L¹` and differentiable at the bifurcation surface `x = 0` (the softer Route-B regularity).
 
 $$
-m \ne 0 \to \forall (\theta : \mathbb{R}), \|\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,(f)\,\theta\| \le 16 \cdot {\pi}^{2} \cdot (((\int (v : \href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-v}{V}), \|f\,v\|) + \int (v : \href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-v}{V}), \|\mathrm{D}\,\mathbb{R}\,1\,(f)\,v\|) + \int (v : \href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-v}{V}), \|\mathrm{D}\,\mathbb{R}\,2\,(f)\,v\|) / (\sqrt 2 \cdot {m}^{2}) \cdot {({\cosh\,\theta}^{2})}^{-1}
+m \ne 0 \to \forall (\theta : \mathbb{R}), \|\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{K}\,m\,(f)\,\theta\| \le 16 \cdot {\pi}^{2} \cdot (((\int (v : \href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-v}{V}), \|f\,v\|) + \int (v : \href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-v}{V}), \|\mathrm{D}\,\mathbb{R}\,1\,(f)\,v\|) + \int (v : \href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-v}{V}), \|\mathrm{D}\,\mathbb{R}\,2\,(f)\,v\|) / (\sqrt 2 \cdot {m}^{2}) \cdot {({\cosh\,\theta}^{2})}^{-1}
 $$
 
 *Proof.* By [`massShell`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-massshell), [`minkowskiFourier`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-minkowskifourier), [`minkBilin`](/browser/qiqth-fock-schwartzdecay#d-qiqth-fock-localization-minkbilin), [`minkBilin_apply`](/browser/qiqth-fock-schwartzdecay#d-qiqth-fock-localization-minkbilin-apply), [`minkowskiFourier_eq_fourierIntegral`](/browser/qiqth-fock-schwartzdecay#d-qiqth-fock-localization-minkowskifourier-eq-fourierintegral), [`abs_sinh_le_cosh`](/browser/qiqth-fock-schwartzdecay#d-qiqth-fock-localization-abs-sinh-le-cosh). $\square$

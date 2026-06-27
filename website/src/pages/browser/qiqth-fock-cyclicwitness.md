@@ -15,7 +15,7 @@ description: QIQTH.Fock.CyclicWitness — definitions, lemmas and theorems with 
 A width-`R` 1D bump (`rIn = R/2`, `rOut = R`).
 
 $$
-\mathrm{bump1W}\,R\,\mathrm{hR}\,c \;:=\; \{\mathrm{rIn} :=R / 2 , \mathrm{rOut} :=R , \mathrm{rIn\_pos} :=\cdots , \mathrm{rIn\_lt\_rOut} :=\cdots \}
+\mathrm{bump1W}\,R\,c \;:=\; \{\mathrm{rIn} :=R / 2 , \mathrm{rOut} :=R , \mathrm{rIn\_pos} :=\cdots , \mathrm{rIn\_lt\_rOut} :=\cdots \}
 $$
 
 <small>Used by [`bump1W_rOut`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bump1w-rout), [`bump1W_rIn`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bump1w-rin), [`bumpRealW`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumprealw), [`bumpRealW_contDiff`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumprealw-contdiff), [`bumpCW_contDiff`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumpcw-contdiff), [`bumpRealW_support_subset`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumprealw-support-subset), [`minkowskiFourier_bumpCW`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-minkowskifourier-bumpcw), [`Krep_bumpCW_zero`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-krep-bumpcw-zero), and 3 more.</small>
@@ -48,7 +48,7 @@ $$
 The width-`R` 2D product bump on `V = Fin 2 → ℝ`.
 
 $$
-\mathrm{bump}\,R\,\mathrm{hR}\,\mathrm{cT}\,\mathrm{cX}\,x \;:=\; (\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bump1w}{\mathrm{bump1W}}\,R\,\mathrm{hR}\,\mathrm{cT})\,(x\,0) \cdot (\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bump1w}{\mathrm{bump1W}}\,R\,\mathrm{hR}\,\mathrm{cX})\,(x\,1)
+\mathrm{bump}\,R\,\mathrm{cT}\,\mathrm{cX}\,x \;:=\; (\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bump1w}{\mathrm{bump1W}}\,R\,\mathrm{hR}\,\mathrm{cT})\,(x\,0) \cdot (\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bump1w}{\mathrm{bump1W}}\,R\,\mathrm{hR}\,\mathrm{cX})\,(x\,1)
 $$
 
 <small>Used by [`bumpCW`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumpcw), [`bumpRealW_contDiff`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumprealw-contdiff), [`bumpRealW_support_subset`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumprealw-support-subset), [`bumpCW_hasCompactSupport`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumpcw-hascompactsupport).</small>
@@ -57,7 +57,7 @@ $$
 **Definition 213** (`bumpCW`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/CyclicWitness.lean#L230)</small>
 
 $$
-\mathrm{bumpCW}\,R\,\mathrm{hR}\,\mathrm{cT}\,\mathrm{cX}\,x \;:=\; (\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumprealw}{\mathrm{bump}}\,R\,\mathrm{hR}\,\mathrm{cT}\,\mathrm{cX}\,x)
+\mathrm{bumpCW}\,R\,\mathrm{cT}\,\mathrm{cX}\,x \;:=\; (\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumprealw}{\mathrm{bump}}\,R\,\mathrm{hR}\,\mathrm{cT}\,\mathrm{cX}\,x)
 $$
 
 <small>Used by [`bumpCW_contDiff`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumpcw-contdiff), [`bumpCW_continuous`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumpcw-continuous), [`bumpCW_hasCompactSupport`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumpcw-hascompactsupport), [`bumpNiceTestW`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumpnicetestw), [`niceWedgeCyclic_bumpW`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-nicewedgecyclic-bumpw), [`minkowskiFourier_bumpCW`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-minkowskifourier-bumpcw), [`Krep_bumpCW_zero`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-krep-bumpcw-zero), [`Krep_bumpCW_ne_zero_of`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-krep-bumpcw-ne-zero-of).</small>
@@ -123,7 +123,7 @@ $$
 A width-`R` wedge-supported nice generator centred at `(0, cX)` with `2R < cX` (margin `δ = cX − 2R`).
 
 $$
-\mathrm{bumpNiceTestW}\,m\,R\,\mathrm{cX}\,\mathrm{hR}\,\mathrm{hm}\,\mathrm{hcX} \;:=\; \{f :=\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumpcw}{\mathrm{bumpCW}}\,R\,\mathrm{hR}\,0\,\mathrm{cX} , \mathrm{cont} :=\cdots , \mathrm{cpt} :=\cdots , \delta :=\mathrm{cX} - 2 \cdot R , h\delta :=\cdots , \mathrm{margin} :=\cdots , \mathrm{real} :=\cdots , \mathrm{memLp} :=\cdots \}
+\mathrm{bumpNiceTestW}\,m\,R\,\mathrm{cX} \;:=\; \{f :=\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumpcw}{\mathrm{bumpCW}}\,R\,\mathrm{hR}\,0\,\mathrm{cX} , \mathrm{cont} :=\cdots , \mathrm{cpt} :=\cdots , \delta :=\mathrm{cX} - 2 \cdot R , h\delta :=\cdots , \mathrm{margin} :=\cdots , \mathrm{real} :=\cdots , \mathrm{memLp} :=\cdots \}
 $$
 
 <small>Used by [`niceWedgeCyclic_bumpW`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-nicewedgecyclic-bumpw).</small>
@@ -134,7 +134,7 @@ $$
 `NiceWedgeCyclic` from the width-`R` bump generator, modulo its amplitude being nonzero.
 
 $$
-m \ne 0 \to 2 \cdot R < \mathrm{cX} \to \neg \href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,(\cdots .\mathrm{toSchwartzMap}\,\cdots ) =[\mathrm{volume}] 0 \to \href{/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-nicewedgecyclic}{\mathrm{NiceWedgeCyclic}}\,m
+m \ne 0 \to 2 \cdot R < \mathrm{cX} \to \neg \href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{K}\,m\,(\cdots .\mathrm{toSchwartzMap}\,\cdots ) =[\mathrm{vol}] 0 \to \href{/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-nicewedgecyclic}{\mathrm{NiceWedgeCyclic}}\,m
 $$
 
 *Proof.* By [`niceWedgeCyclic_of_fourier_ne_zero`](/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-nicewedgecyclic-of-fourier-ne-zero), [`bumpNiceTestW`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumpnicetestw), [`fourierL2_Krep_ne_zero`](/browser/qiqth-fock-wienerl2#d-qiqth-fock-wienerl2-fourierl2-krep-ne-zero). $\square$
@@ -160,7 +160,7 @@ $$
 The width-`R` bump amplitude at `θ = 0`, factored.
 
 $$
-\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,(\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumpcw}{\mathrm{bumpCW}}\,R\,\mathrm{hR}\,\mathrm{cT}\,\mathrm{cX})\,0 = 1 / \sqrt 2 \cdot ((\int (y : \mathbb{R}), \exp\,(-i \cdot (m \cdot y)) \cdot ((\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bump1w}{\mathrm{bump1W}}\,R\,\mathrm{hR}\,\mathrm{cT})\,y)) \cdot \int (y : \mathbb{R}), ((\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bump1w}{\mathrm{bump1W}}\,R\,\mathrm{hR}\,\mathrm{cX})\,y))
+\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{K}\,m\,(\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumpcw}{\mathrm{bumpCW}}\,R\,\mathrm{hR}\,\mathrm{cT}\,\mathrm{cX})\,0 = 1 / \sqrt 2 \cdot ((\int (y : \mathbb{R}), \exp\,(-i \cdot (m \cdot y)) \cdot ((\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bump1w}{\mathrm{bump1W}}\,R\,\mathrm{hR}\,\mathrm{cT})\,y)) \cdot \int (y : \mathbb{R}), ((\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bump1w}{\mathrm{bump1W}}\,R\,\mathrm{hR}\,\mathrm{cX})\,y))
 $$
 
 *Proof.* By [`minkowskiFourier_bumpCW`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-minkowskifourier-bumpcw), [`massShell`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-massshell), [`minkowskiFourier`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-minkowskifourier). $\square$
@@ -173,7 +173,7 @@ $$
 The width-`R` amplitude is `≢ 0` as soon as the 1D integral `∫ e^{−imy}·bump1W R cT(y) dy ≠ 0`.
 
 $$
-\int (y : \mathbb{R}), \exp\,(-i \cdot (m \cdot y)) \cdot ((\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bump1w}{\mathrm{bump1W}}\,R\,\mathrm{hR}\,\mathrm{cT})\,y) \ne 0 \to \neg \href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,(\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumpcw}{\mathrm{bumpCW}}\,R\,\mathrm{hR}\,\mathrm{cT}\,\mathrm{cX}) =[\mathrm{volume}] 0
+\int (y : \mathbb{R}), \exp\,(-i \cdot (m \cdot y)) \cdot ((\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bump1w}{\mathrm{bump1W}}\,R\,\mathrm{hR}\,\mathrm{cT})\,y) \ne 0 \to \neg \href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{K}\,m\,(\href{/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumpcw}{\mathrm{bumpCW}}\,R\,\mathrm{hR}\,\mathrm{cT}\,\mathrm{cX}) =[\mathrm{vol}] 0
 $$
 
 *Proof.* By [`bumpCW_continuous`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumpcw-continuous), [`bumpCW_hasCompactSupport`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-bumpcw-hascompactsupport), [`Krep_bumpCW_zero`](/browser/qiqth-fock-cyclicwitness#d-qiqth-fock-cyclicwitness-krep-bumpcw-zero), [`V`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-v), [`Krep_continuous`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep-continuous). $\square$
@@ -238,7 +238,7 @@ $$
 **Strip boundary-uniqueness (top edge zero ⟹ bottom edge zero).**  A function `Φ` holomorphic on the open strip `{−1 < Im z < 0}`, continuous and bounded on the closed strip, that vanishes on the *entire* top edge (`Φ(t) = 0 ∀ real t`), vanishes on the bottom edge too (`Φ(t − i) = 0 ∀ t`).  Proof: the asymmetric Hadamard three-lines bound with top constant `0` gives `‖Φ z‖ ≤ 0^{1−s}·B^{s}` (`s = −Im z`), which is `0` for every interior point (`s < 1`), so `Φ` vanishes on the open strip; the bottom edge then follows by continuity (approach `t − i` from inside).  This is the modular/KMS uniqueness that the separating proof needs.
 
 $$
-\mathrm{DifferentiableOn}\,\mathbb{C}\,\Phi\,(\mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-1)\,0) \to \mathrm{ContinuousOn}\,\Phi\,(\mathrm{im} ^{-1}{}' \mathrm{Icc}\,(-1)\,0) \to \mathrm{BddAbove}\,(\mathrm{norm} \circ \Phi '' \mathrm{im} ^{-1}{}' \mathrm{Icc}\,(-1)\,0) \to (\forall (t : \mathbb{R}), \Phi\,t = 0) \to \forall (t : \mathbb{R}), \Phi\,(t - i) = 0
+\mathrm{DifferentiableOn}\,\mathbb{C}\,\Phi\,(\mathrm{im} ^{-1}{}' ({-1},{0})) \to \mathrm{ContinuousOn}\,\Phi\,(\mathrm{im} ^{-1}{}' [{-1},{0}]) \to \mathrm{BddAbove}\,(\mathrm{norm} \circ \Phi '' \mathrm{im} ^{-1}{}' [{-1},{0}]) \to (\forall (t : \mathbb{R}), \Phi\,t = 0) \to \forall (t : \mathbb{R}), \Phi\,(t - i) = 0
 $$
 
 *Proof.* Immediate from the definitions. $\square$
@@ -264,7 +264,7 @@ $$
 **THE free-field one-particle Bisognano–Wichmann — FULLY UNCONDITIONAL, axiom-free.** For every mass `m > 0` and every candidate boost representation `V t = boostUnitary(2πt)`, the modular flow of the nice-core wedge standard subspace equals the boost: `modUnitary S t = V t`, with NO Reeh–Schlieder hypotheses whatsoever.  BOTH analytic inputs are now discharged internally and unconditionally: `niceWedgeSeparating_pos_mass` (Pauli–Jordan symplectic non-degeneracy, via the KMS uniqueness argument) and `niceWedgeCyclic_pos_mass` (wedge-totality, via the Wiener–Tauberian theorem). …
 
 $$
-(\forall (t : \mathbb{R}) (x : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{volume})), (V\,t)\,x = (\href{/browser/qiqth-fock-oneparticle#d-qiqth-fock-oneparticle-boostunitary}{U}\,(2 \cdot \pi \cdot t))\,x) \to \forall (t : \mathbb{R}), \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,(\href{/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathcal{K}}\,m\,\cdots \,\cdots )\,t = V\,t
+(\forall (t : \mathbb{R}) (x : (\mathrm{Lp}\,\mathbb{C}\,2\,\mathrm{vol})), (V\,t)\,x = (\href{/browser/qiqth-fock-oneparticle#d-qiqth-fock-oneparticle-boostunitary}{U}\,(2 \cdot \pi \cdot t))\,x) \to \forall (t : \mathbb{R}), \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,(\href{/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-nicewedgestandardsubspace}{\mathcal{K}}\,m\,\cdots \,\cdots )\,t = V\,t
 $$
 
 *Proof.* By [`oneParticleBW_niceWedge_reehSchlieder`](/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-oneparticlebw-nicewedge-reehschlieder). $\square$

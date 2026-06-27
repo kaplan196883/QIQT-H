@@ -39,7 +39,7 @@ $$
 **Definition 588** (`E`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L334)</small>
 
 $$
-E\,\Omega\,H\,\mathrm{MeasurableSpace}\,\Omega\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,\mathrm{self} \;:=\; \mathrm{self}.1
+E\,\Omega\,H\,\mathrm{self} \;:=\; \mathrm{self}.1
 $$
 
 <small>Used by [`rvdSpecMeasure_zero_levelSet`](/browser/qiqth-modularrelativeentropy#d-qiqth-rvdspecmeasure-zero-levelset), [`rvdSpecMeasure_two_levelSet`](/browser/qiqth-modularrelativeentropy#d-qiqth-rvdspecmeasure-two-levelset), [`isSA`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-issa), [`isIdem`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-isidem), [`E_univ`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-e-univ), [`E_inter`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-e-inter), [`adjoint_eq`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-adjoint-eq), [`E_apply_idem`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-e-apply-idem), and 21 more.</small>
@@ -128,9 +128,6 @@ $$
 
 **The scalar spectral measure** `μ_x` — now a genuine `MeasureTheory.Measure Ω` (this is Phase-1 target T1, PROVED): the strong- operator σ-additivity of `E` (`hasSum_iUnion`) pushed through the bounded linear functional `⟪x,·⟫` gives σ-additivity of `s ↦ ‖E s x‖²`.
 
-$$
-\mu\,\Omega\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,\mathrm{MeasurableSpace}\,\Omega\,P\,x \;:=\; \mathrm{ofMeasurable}\,(\lambda s \mathrm{x\_1} \mapsto {{{\|(P.E\,s)\,x\|}^{2}}})\,\cdots \,\cdots
-$$
 
 <small>Used by [`rvdSpecMeasure`](/browser/qiqth-modularrelativeentropy#d-qiqth-rvdspecmeasure), [`borelFC_inner_self`](/browser/qiqth-modularrelativeentropy#d-qiqth-borelfc-inner-self), [`rvdSpec_borelFC_diag`](/browser/qiqth-modularrelativeentropy#d-qiqth-rvdspec-borelfc-diag), [`rvdSpecMeasure_zero_levelSet`](/browser/qiqth-modularrelativeentropy#d-qiqth-rvdspecmeasure-zero-levelset), [`rvdSpecMeasure_two_levelSet`](/browser/qiqth-modularrelativeentropy#d-qiqth-rvdspecmeasure-two-levelset), [`tendsto_integral_devChar_remainder_sq`](/browser/qiqth-modularrelativeentropy#d-qiqth-tendsto-integral-devchar-remainder-sq), [`tendsto_integral_devChar_diff_sq`](/browser/qiqth-modularrelativeentropy#d-qiqth-tendsto-integral-devchar-diff-sq), [`scalarMeasure_apply`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure-apply), and 23 more.</small>
 
@@ -166,7 +163,7 @@ $$
 **Spectral integral of a simple function** on the genuine PVM: `∫(∑ᵢ cᵢ 𝟙_{sᵢ}) dE = ∑ᵢ cᵢ E sᵢ`.
 
 $$
-\textstyle\int\,\Omega\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,\mathrm{MeasurableSpace}\,\Omega\,P\,\iota\,t\,c\,\mathrm{sets} \;:=\; \sum_{i t} c\,i \cdot P.E\,(\mathrm{sets}\,i)
+\textstyle\int\,\Omega\,H\,P\,\iota\,t\,c\,\mathrm{sets} \;:=\; \sum_{i t} c\,i \cdot P.E\,(\mathrm{sets}\,i)
 $$
 
 <small>Used by [`inner_integralSimple_left`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-inner-integralsimple-left), [`boundedFC_eq_integralSimple`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-eq-integralsimple), [`integralSimple_mul_eq`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-integralsimple-mul-eq), [`integralSimple_product_eq`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-integralsimple-product-eq), [`boundedFC_simple_mul`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-simple-mul), [`boundedFC_simpleFunc`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-simplefunc), [`boundedFC_simpleFunc_mul`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-simplefunc-mul).</small>
@@ -255,7 +252,7 @@ $$
 **The diagonal functional** `D_f(x) := ∫ f dμ_x` (E2a of the bounded-Borel FC sub-plan).  Its homogeneity `D_f(c·x) = ‖c‖² D_f(x)` and parallelogram law are what make the polarized form `B_f(x,y)` sesquilinear.
 
 $$
-\textstyle\int\,\Omega\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,\mathrm{MeasurableSpace}\,\Omega\,P\,f\,x \;:=\; \int (\omega : \Omega), f\,\omega \partial P.\mu\,x
+\textstyle\int\,\Omega\,H\,P\,f\,x \;:=\; \int (\omega : \Omega), f\,\omega \partial P.\mu\,x
 $$
 
 <small>Used by [`borelFC_inner_self`](/browser/qiqth-modularrelativeentropy#d-qiqth-borelfc-inner-self), [`rvdSpec_borelFC_diag`](/browser/qiqth-modularrelativeentropy#d-qiqth-rvdspec-borelfc-diag), [`diagInt_smul`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-diagint-smul), [`diagInt_parallelogram`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-diagint-parallelogram), [`bilinDiag`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-bilindiag), [`bilinDiag_add_left`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-bilindiag-add-left), [`diagInt_unit_smul`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-diagint-unit-smul), [`diagInt_neg`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-diagint-neg), and 26 more.</small>
@@ -292,7 +289,7 @@ $$
 **E2b — the polarized sesquilinear form** `B_f(x,y)`, mirroring Mathlib's Fréchet–von Neumann–Jordan `inner_` but with the quadratic functional `D_f = diagInt f` in place of `‖·‖²`.  Its diagonal is `D_f` and (once shown sesquilinear + bounded) it represents `∫ f dE` via `continuousLinearMapOfBilin`.
 
 $$
-\mathrm{bd}\,\Omega\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,\mathrm{MeasurableSpace}\,\Omega\,P\,f\,x\,y \;:=\; {4}^{-1} \cdot (P.\textstyle\int\,f\,(x + y) - P.\textstyle\int\,f\,(x - y) + i \cdot P.\textstyle\int\,f\,(i \cdot x + y) - i \cdot P.\textstyle\int\,f\,(i \cdot x - y))
+\mathrm{bd}\,\Omega\,H\,P\,f\,x\,y \;:=\; {4}^{-1} \cdot (P.\textstyle\int\,f\,(x + y) - P.\textstyle\int\,f\,(x - y) + i \cdot P.\textstyle\int\,f\,(i \cdot x + y) - i \cdot P.\textstyle\int\,f\,(i \cdot x - y))
 $$
 
 <small>Used by [`borelFC_inner_self`](/browser/qiqth-modularrelativeentropy#d-qiqth-borelfc-inner-self), [`rvdSpec_borelFC_diag`](/browser/qiqth-modularrelativeentropy#d-qiqth-rvdspec-borelfc-diag), [`bilinDiag_add_left`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-bilindiag-add-left), [`bilinDiag_conj_symm`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-bilindiag-conj-symm), [`bilinDiag_add_right`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-bilindiag-add-right), [`bilinDiag_I_smul_left`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-bilindiag-i-smul-left), [`bilinDiag_real_smul_left_nonneg`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-bilindiag-real-smul-left-nonneg), [`bilinDiag_zero_left`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-bilindiag-zero-left), and 28 more.</small>
@@ -576,7 +573,7 @@ $$
 The polarized form as a **bundled sesquilinear `LinearMap`** `H →ₗ⋆[ℂ] H →ₗ[ℂ] ℂ` (conjugate-linear in the first slot, linear in the second), mirroring `innerₛₗ`.
 
 $$
-\mathrm{bilinDiagₗ}\,\Omega\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,\mathrm{MeasurableSpace}\,\Omega\,P\,f\,\mathrm{hf}\,C\,\mathrm{hC} \;:=\; \mathrm{mk'}\,(\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{id}\,\mathbb{C})\,(\lambda x y \mapsto P.\mathrm{bd}\,f\,x\,y)\,\cdots \,\cdots \,\cdots \,\cdots
+\mathrm{bilinDiagₗ}\,\Omega\,H\,P\,f\,C \;:=\; \mathrm{mk'}\,(\mathrm{starRingEnd}\,\mathbb{C})\,(\mathrm{id}\,\mathbb{C})\,(\lambda x y \mapsto P.\mathrm{bd}\,f\,x\,y)\,\cdots \,\cdots \,\cdots \,\cdots
 $$
 
 <small>Used by [`intBorel`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-intborel), [`inner_intBorel`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-inner-intborel).</small>
@@ -587,7 +584,7 @@ $$
 **The bounded-Borel functional calculus `∫ f dE`** (E2c), defined via the Riesz representation `continuousLinearMapOfBilin` of the bounded sesquilinear form `B_f`.  Requires `0 ≤ C` and `‖f‖ ≤ C`.
 
 $$
-\textstyle\int\,\Omega\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,\mathrm{MeasurableSpace}\,\Omega\,P\,f\,\mathrm{hf}\,C\,\mathrm{hC0}\,\mathrm{hC} \;:=\; \mathrm{continuousLinearMapOfBilin}\,((P.\mathrm{bd}_{l}\,\mathrm{hf}\,\mathrm{hC}).\mathrm{mkContinuous}_{2}\,(2 \cdot C)\,\cdots )
+\textstyle\int\,\Omega\,H\,P\,f\,C \;:=\; \mathrm{continuousLinearMapOfBilin}\,((P.\mathrm{bd}_{l}\,\mathrm{hf}\,\mathrm{hC}).\mathrm{mkContinuous}_{2}\,(2 \cdot C)\,\cdots )
 $$
 
 <small>Used by [`inner_intBorel`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-inner-intborel), [`intBorel_norm_le`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-intborel-norm-le), [`boundedFC`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-boundedfc), [`inner_boundedFC`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-inner-boundedfc), [`boundedFC_norm_le`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-norm-le).</small>
@@ -650,7 +647,7 @@ $$
 **The correctly-oriented bounded-Borel functional calculus** `Φ(f) := (∫f dE)*` (the adjoint of the Riesz operator), so that `⟪x, Φ(f) y⟫ = B_f(x,y) = ∫ f dμ_{x,y}` with the operator on the SECOND slot — the standard convention.
 
 $$
-\Phi\,\Omega\,H\,\mathrm{NormedAddCommGroup}\,H\,\mathrm{InnerProductSpace}\,H\,\mathrm{CompleteSpace}\,H\,\mathrm{MeasurableSpace}\,\Omega\,P\,f\,\mathrm{hf}\,C\,\mathrm{hC0}\,\mathrm{hC} \;:=\; {{P.\textstyle\int\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC}}}^{\dagger}
+\Phi\,\Omega\,H\,P\,f\,C \;:=\; {{P.\textstyle\int\,\mathrm{hf}\,\mathrm{hC0}\,\mathrm{hC}}}^{\dagger}
 $$
 
 <small>Used by [`deviceOpC_norm_le`](/browser/qiqth-modularrelativeentropy#d-qiqth-deviceopc-norm-le), [`inner_boundedFC`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-inner-boundedfc), [`boundedFC_const`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-const), [`boundedFC_add`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-add), [`boundedFC_smul`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-smul), [`boundedFC_norm_le`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-norm-le), [`boundedFC_congr`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-congr), [`boundedFC_indicator`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-indicator), and 9 more.</small>
@@ -973,7 +970,7 @@ $$
 **Dominated/bounded convergence for the diagonal functional:** if `fₙ → f` pointwise with a common bound `C`, then `D_{fₙ}(z) → D_f(z)`.  (DCT against the finite measure `μ_z`.)  The engine for extending FC identities from simple to all bounded Borel functions.
 
 $$
-(\forall (n : \mathbb{N}), \mathrm{Measurable}\,(f\,n)) \to (\forall (n : \mathbb{N}) (\omega : \Omega), \|f\,n\,\omega\| \le C) \to (\forall (\omega : \Omega), \mathrm{Tendsto}\,(\lambda n \mapsto f\,n\,\omega)\,\mathrm{atTop}\,(\mathrm{nhds}\,(g\,\omega))) \to \forall (z : H), \mathrm{Tendsto}\,(\lambda n \mapsto P.\textstyle\int\,(f\,n)\,z)\,\mathrm{atTop}\,(\mathrm{nhds}\,(P.\textstyle\int\,g\,z))
+(\forall (n : \mathbb{N}), \mathrm{Measurable}\,(f\,n)) \to (\forall (n : \mathbb{N}) (\omega : \Omega), \|f\,n\,\omega\| \le C) \to (\forall (\omega : \Omega), \mathrm{Tendsto}\,(\lambda n \mapsto f\,n\,\omega)\,\mathrm{atTop}\,(\mathcal{N}\,(g\,\omega))) \to \forall (z : H), \mathrm{Tendsto}\,(\lambda n \mapsto P.\textstyle\int\,(f\,n)\,z)\,\mathrm{atTop}\,(\mathcal{N}\,(P.\textstyle\int\,g\,z))
 $$
 
 *Proof.* By [`scalarMeasure`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-scalarmeasure), [`instIsFiniteMeasure_scalarMeasure`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-instisfinitemeasure-scalarmeasure). $\square$
@@ -986,7 +983,7 @@ $$
 Bound-free form of the normality engine: `B_{fₙ}(x,y) → B_f(x,y)` under bounded pointwise convergence (the limit `f` needs no bound — `bilinDiag` carries none). This is the workhorse for the simple→bounded-Borel multiplicativity extension.
 
 $$
-(\forall (n : \mathbb{N}), \mathrm{Measurable}\,(f\,n)) \to (\forall (n : \mathbb{N}) (\omega : \Omega), \|f\,n\,\omega\| \le C) \to (\forall (\omega : \Omega), \mathrm{Tendsto}\,(\lambda n \mapsto f\,n\,\omega)\,\mathrm{atTop}\,(\mathrm{nhds}\,(g\,\omega))) \to \forall (x y : H), \mathrm{Tendsto}\,(\lambda n \mapsto P.\mathrm{bd}\,(f\,n)\,x\,y)\,\mathrm{atTop}\,(\mathrm{nhds}\,(P.\mathrm{bd}\,g\,x\,y))
+(\forall (n : \mathbb{N}), \mathrm{Measurable}\,(f\,n)) \to (\forall (n : \mathbb{N}) (\omega : \Omega), \|f\,n\,\omega\| \le C) \to (\forall (\omega : \Omega), \mathrm{Tendsto}\,(\lambda n \mapsto f\,n\,\omega)\,\mathrm{atTop}\,(\mathcal{N}\,(g\,\omega))) \to \forall (x y : H), \mathrm{Tendsto}\,(\lambda n \mapsto P.\mathrm{bd}\,(f\,n)\,x\,y)\,\mathrm{atTop}\,(\mathcal{N}\,(P.\mathrm{bd}\,g\,x\,y))
 $$
 
 *Proof.* By [`diagInt`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-diagint), [`tendsto_diagInt_of_dominated`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-tendsto-diagint-of-dominated). $\square$
@@ -999,7 +996,7 @@ $$
 The `approxOn` simple-function sequence for a bounded measurable `f` (base point `0`, set `univ`): `approxSeq f hf n` is a `SimpleFunc`, `→ f` pointwise, with `‖approxSeq f hf n ω‖ ≤ 2‖f ω‖`.
 
 $$
-\mathrm{aseq}\,\Omega\,\mathrm{MeasurableSpace}\,\Omega\,f\,\mathrm{hf}\,n \;:=\; \mathrm{approxOn}\,f\,\mathrm{hf}\,0\,\mathrm{\_proof\_2}\,n
+\mathrm{aseq}\,\Omega\,f\,n \;:=\; \mathrm{approxOn}\,f\,\mathrm{hf}\,0\,\mathrm{\_proof\_2}\,n
 $$
 
 <small>Used by [`approxSeq_tendsto`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-approxseq-tendsto), [`approxSeq_norm_le`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-approxseq-norm-le), [`approxSeq_measurable`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-approxseq-measurable), [`boundedFC_mul_simpleFunc_left`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-mul-simplefunc-left), [`boundedFC_mul`](/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-boundedfc-mul).</small>
@@ -1008,7 +1005,7 @@ $$
 **Lemma 665** (`approxSeq_tendsto`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Spectral/PVM.lean#L1383)</small>
 
 $$
-\mathrm{Tendsto}\,(\lambda n \mapsto (\href{/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-approxseq}{\mathrm{aseq}}\,f\,\mathrm{hf}\,n)\,\omega)\,\mathrm{atTop}\,(\mathrm{nhds}\,(f\,\omega))
+\mathrm{Tendsto}\,(\lambda n \mapsto (\href{/browser/qiqth-spectral-pvm#d-qiqth-spectral-projectionvaluedmeasure-approxseq}{\mathrm{aseq}}\,f\,\mathrm{hf}\,n)\,\omega)\,\mathrm{atTop}\,(\mathcal{N}\,(f\,\omega))
 $$
 
 *Proof.* Immediate from the definitions. $\square$

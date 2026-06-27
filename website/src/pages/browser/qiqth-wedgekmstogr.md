@@ -14,7 +14,6 @@ description: QIQTH.WedgeKMSToGR — definitions, lemmas and theorems with explan
 
 **The wedge KMS property with the genuine, non-vacuous KMS condition.**  Identical to `WedgeKMSFlux` except the bundled opaque `hUniq` (the KMS-uniqueness implication) and the trivially-satisfiable `StripKMS` are replaced by the single genuine RvD Definition 3.4 predicate `StripKMSrvd V 𝒦_W` — from which the BW identification `modUnitary = boostUnitary` is DERIVED (`oneParticleBW_wedge_complete`, via the RvD Theorem 3.8 discharge `oneParticleBW_complete`).  So the wedge KMS input is now exactly: standardness of the wedge subspace, `V = boostUnitary(−2π·)`, the genuine KMS condition, the boost-charge = stress-flux identity, and the localization identity — with NO assumed uniqueness implication.
 
-A definition, built from [`Point`](/browser/qiqth-curvature#d-qiqth-curvature-point) — see source for the body.
 
 <small>Used by [`qiqt_gr_explicit_kg`](/browser/qiqth-qiqtgrexplicitkg#d-qiqth-wedgekmstogr-qiqt-gr-explicit-kg), [`hFlux_of_wedgeKMS_complete`](/browser/qiqth-wedgekmstogr#d-qiqth-wedgekmstogr-hflux-of-wedgekms-complete), [`qiqt_gr_from_wedge_kms_complete`](/browser/qiqth-wedgekmstogr#d-qiqth-wedgekmstogr-qiqt-gr-from-wedge-kms-complete).</small>
 

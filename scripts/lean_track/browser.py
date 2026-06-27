@@ -58,39 +58,64 @@ def _peel_lambda(node):
             continue
         # basicFun: [binders, atom"=>", body]
         def collect(n):
-            if isinstance(n, dict):
-                if n.get("k") == "ident":
-                    binders.append(n)
-                else:
-                    for a in n.get("args", []):
-                        collect(a)
+            if not isinstance(n, dict):
+                return
+            kind = n.get("kind")
+            if kind == "Lean.Parser.Term.instBinder":
+                return                          # [inst : TypeClass …] — not data, drop it
+            if kind in ("Lean.Parser.Term.implicitBinder",
+                        "Lean.Parser.Term.explicitBinder",
+                        "Lean.Parser.Term.strictImplicitBinder"):
+                collect(n["args"][1])           # take the binder NAMES, not the type ascription
+                return
+            if n.get("k") == "ident":
+                binders.append(n)
+                return
+            for a in n.get("args", []):
+                collect(a)
         collect(args[0])
         node = args[-1]
     return binders, node
 
 
-def _definition_tex(d, notation, max_len=900):
+# Lean names that, in a definition body, signal it is bundling-boilerplate rather than
+# math (constructors / packaging) — show the docstring instead of dumping these.
+_BOILERPLATE = re.compile(r"\\mathrm\{(of[A-Z]\w*|toLp|MemLp|mk|restr|"
+                          r"NormedAddCommGroup|InnerProductSpace|CompleteSpace)\}")
+
+
+def _is_hyp_binder(node):
+    """A `fun … =>` binder that is a proof hypothesis, not data: by this codebase's
+    convention its name is `h` followed by another letter (hf, hgc, hδ, hUniq, …)."""
+    nm = node.get("v", "") if isinstance(node, dict) else ""
+    return bool(re.match(r"h[A-Za-zα-ωΑ-Ω]", nm))
+
+
+def _definition_tex(d, notation, max_len=320):
     """`LHS := body` for a definition with a body. Uses the notation template for the
     LHS only when its arity matches the binder count (else a plain `name args` LHS, to
-    avoid mis-indexed output like R_{giσ}(ν))."""
+    avoid mis-indexed output like R_{giσ}(ν)). Proof-hypothesis binders (hf, hgc, …) are
+    dropped from the LHS, and bundling-boilerplate / oversized bodies are suppressed so
+    the entry falls back to the docstring explanation."""
     val = d.get("value")
     if not val:
         return None
     binders, body = _peel_lambda(val)
+    data = [b for b in binders if not _is_hyp_binder(b)]    # drop hypothesis binders
     name = d["name"]
     tmpl = latexify._lookup(name, notation) or latexify._lookup(name.split(".")[-1], notation)
     argc = max((int(x) for x in re.findall(r"#(\d+)", tmpl)), default=0) if tmpl else 0
-    if binders and argc and len(binders) == argc:
+    if data and argc and len(data) == argc:
         head = {"k": "ident", "v": name}
         lhs = latex_tree.tex_of_tree(
             {"k": "node", "kind": "Lean.Parser.Term.app",
-             "args": [head, {"k": "node", "kind": "null", "args": binders}]}, notation)
+             "args": [head, {"k": "node", "kind": "null", "args": data}]}, notation)
     else:                                 # plain signature: name b1 … bn
         parts = [latexify._render_ident(name, notation)]
-        parts += [latex_tree.tex_of_tree(b, notation) for b in binders]
+        parts += [latex_tree.tex_of_tree(b, notation) for b in data]
         lhs = r"\,".join(parts)
     rhs = latex_tree.tex_of_tree(body, notation)
-    if len(rhs) > max_len:               # huge body -> don't dump it
+    if len(rhs) > max_len or _BOILERPLATE.search(rhs):     # boilerplate/huge -> use docstring
         return None
     return lhs + r" \;:=\; " + rhs
 
@@ -149,7 +174,7 @@ def _entry_md(d, notation, label, cite_list, usedby, ref):
         body = _definition_tex(d, notation)
         if body:
             out += ["$$", body, "$$"]
-        else:
+        elif not lead:                      # no docstring either -> a minimal pointer
             dlist = cite_list(d.get("usesStmt", []))
             out.append("A definition" + (f", built from {dlist}" if dlist else "")
                        + " — see source for the body.")

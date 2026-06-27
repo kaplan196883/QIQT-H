@@ -106,9 +106,6 @@ $$
 
 The inverse frame `Pinv = P⁻¹`.
 
-$$
-\mathrm{ppFrameInv}\,H\,x\,a\,b \;:=\; \text{if }a = 0 \wedge b = 0\text{ then }-1\text{ else }\text{if }a = 0 \wedge b = 1\text{ then }1\text{ else }\text{if }a = 1 \wedge b = 0\text{ then }(H\,x + 1) / 2\text{ else }\text{if }a = 1 \wedge b = 1\text{ then }-(H\,x - 1) / 2\text{ else }\text{if }a = 2 \wedge b = 2 \vee a = 3 \wedge b = 3\text{ then }1\text{ else }0
-$$
 
 <small>Used by [`ppFrame_pp`](/browser/qiqth-ppwavemetric#d-qiqth-curvature-ppframe-pp), [`ppFrame_pp'`](/browser/qiqth-ppwavemetric#d-qiqth-curvature-ppframe-pp), [`qiqt_gr_ppwave`](/browser/qiqth-qiqtgrppwave#d-qiqth-wedgekmstogr-qiqt-gr-ppwave).</small>
 

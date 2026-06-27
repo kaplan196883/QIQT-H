@@ -175,7 +175,7 @@ $$
 **The boost preserves the Lebesgue volume** (unit Jacobian) — the measure-preservation needed for the Fourier change of variables in boost-equivariance.  (Stated on `Fin 2 → ℝ` explicitly so the `volume` Haar instance synthesizes; `V` is the same type but the reducible abbrev blocks instance search.)
 
 $$
-\mathrm{MeasurePreserving}\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-lorentzboost}{\mathrm{L}}\,a)\,\mathrm{volume}\,\mathrm{volume}
+\mathrm{MeasurePreserving}\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-lorentzboost}{\mathrm{L}}\,a)\,\mathrm{vol}\,\mathrm{vol}
 $$
 
 *Proof.* By [`lorentzBoostₗ`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-lorentzboost), [`lorentzBoostₗ_apply`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-lorentzboost-apply), [`det_lorentzBoost`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-det-lorentzboost). $\square$
@@ -187,9 +187,6 @@ $$
 
 The boost as a (continuous) linear equivalence of `Fin 2 → ℝ` — gives a measurable embedding.
 
-$$
-\mathrm{lorentzBoostLE}\,a \;:=\; \mathrm{ofLinear}\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-lorentzboost}{\mathrm{L}}\,a)\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-lorentzboost}{\mathrm{L}}\,(-a))\,\cdots \,\cdots
-$$
 
 <small>Used by [`measurableEmbedding_lorentzBoost`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-measurableembedding-lorentzboost).</small>
 
@@ -247,7 +244,7 @@ $$
 **The localized rapidity amplitude** `(K f)(θ) = 2^{-1/2} · f̂_M(p_m θ)` — the value of the localization map on the positive mass shell, in rapidity coordinates (before the `L²` packaging).  The `1/√2` is the invariant-measure normalization `dp/(2ω) = dθ/2` (soundness trap #1: omitting it scales the symplectic form by 2).
 
 $$
-\mathrm{Krep}\,m\,f\,\theta \;:=\; 1 / \sqrt 2 \cdot \href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-minkowskifourier}{\mathcal{F}}\,f\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-massshell}{\mathrm{MS}}\,m\,\theta)
+K\,m\,f\,\theta \;:=\; 1 / \sqrt 2 \cdot \href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-minkowskifourier}{\mathcal{F}}\,f\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-massshell}{\mathrm{MS}}\,m\,\theta)
 $$
 
 <small>Used by [`inner_KrepL2`](/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-inner-krepl2), [`inner_KrepL2_general`](/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-inner-krepl2-general), [`inner_boostUnitary_KrepL2`](/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-inner-boostunitary-krepl2), [`symm_edge_eq_shifted`](/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-symm-edge-eq-shifted), [`symm_edge_eq_inner`](/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-symm-edge-eq-inner), [`kmsFun_ofReal`](/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-kmsfun-ofreal), [`kmsFun_ofReal_eq_inner`](/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-kmsfun-ofreal-eq-inner), [`kmsFun_sub_I`](/browser/qiqth-fock-boostkms#d-qiqth-fock-boostkms-kmsfun-sub-i), and 68 more.</small>
@@ -258,7 +255,7 @@ $$
 **The localization is boost-covariant at the amplitude level**: boosting the spacetime test function *translates* the localized rapidity amplitude, `(K (β_a f))(θ) = (K f)(θ + a)`.  So the Lorentz boost acts on the localized one-particle amplitude as the rapidity translation `θ ↦ θ + a` — exactly the action implemented by the one-particle unitary `OneParticle.boostUnitary`.  Immediate from the Phase-1c keystone `minkowskiFourier_boost` and the shell geometry `massShell_boost`.
 
 $$
-\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-boosttest}{\phi_{B}}\,a\,f)\,\theta = \href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f\,(\theta + a)
+\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{K}\,m\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-boosttest}{\phi_{B}}\,a\,f)\,\theta = \href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{K}\,m\,f\,(\theta + a)
 $$
 
 *Proof.* By [`massShell`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-massshell), [`lorentzBoost`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-lorentzboost), [`massShell_boost`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-massshell-boost), [`minkowskiFourier`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-minkowskifourier), [`minkowskiFourier_boost`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-minkowskifourier-boost). $\square$
@@ -284,7 +281,7 @@ $$
 The localized amplitude of the zero function is the zero function.
 
 $$
-(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,\lambda x \mapsto 0) = 0
+(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{K}\,m\,\lambda x \mapsto 0) = 0
 $$
 
 *Proof.* By [`massShell`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-massshell), [`minkowskiFourier`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-minkowskifourier), [`minkowskiFourier_zero`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-minkowskifourier-zero). $\square$
@@ -323,7 +320,7 @@ $$
 **The Minkowski-Fourier transform of an integrable function is continuous** (Riemann–Lebesgue continuity, via dominated convergence; the exponential has modulus one and `f` dominates).
 
 $$
-\mathrm{Integrable}\,f\,\mathrm{volume} \to \mathrm{Continuous}\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-minkowskifourier}{\mathcal{F}}\,f)
+\mathrm{Integrable}\,f\,\mathrm{vol} \to \mathrm{Continuous}\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-minkowskifourier}{\mathcal{F}}\,f)
 $$
 
 *Proof.* By [`minkowskiDot`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-minkowskidot), [`continuous_minkowskiDot_fst`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-continuous-minkowskidot-fst), [`continuous_minkowskiDot_snd`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-continuous-minkowskidot-snd). $\square$
@@ -349,7 +346,7 @@ $$
 **The localized rapidity amplitude is continuous** for an integrable test function, hence (part (a) of `MemLp`) almost-everywhere strongly measurable.  The remaining part (b) — the `L²` bound from Schwartz–Fourier decay on the mass shell — is the isolated multi-week analytic core.
 
 $$
-\mathrm{Integrable}\,f\,\mathrm{volume} \to \mathrm{Continuous}\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f)
+\mathrm{Integrable}\,f\,\mathrm{vol} \to \mathrm{Continuous}\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{K}\,m\,f)
 $$
 
 *Proof.* By [`massShell`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-massshell), [`minkowskiFourier`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-minkowskifourier), [`minkowskiFourier_continuous`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-minkowskifourier-continuous), [`continuous_massShell`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-continuous-massshell). $\square$
@@ -360,7 +357,7 @@ $$
 **Lemma 265** (`Krep_aestronglyMeasurable`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Fock/Localization.lean#L380)</small>
 
 $$
-\mathrm{Integrable}\,f\,\mathrm{volume} \to \mathrm{AEStronglyMeasurable}\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f)\,\mathrm{volume}
+\mathrm{Integrable}\,f\,\mathrm{vol} \to \mathrm{AEStronglyMeasurable}\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{K}\,m\,f)\,\mathrm{vol}
 $$
 
 *Proof.* By [`Krep_continuous`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep-continuous). $\square$
@@ -386,7 +383,7 @@ $$
 `1/cosh²` is integrable on `ℝ` (dominated by the Cauchy density `(1+θ²)⁻¹`).
 
 $$
-\mathrm{Integrable}\,(\lambda \theta \mapsto {({\cosh\,\theta}^{2})}^{-1})\,\mathrm{volume}
+\mathrm{Integrable}\,(\lambda \theta \mapsto {({\cosh\,\theta}^{2})}^{-1})\,\mathrm{vol}
 $$
 
 *Proof.* By [`one_add_sq_le_cosh_sq`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-one-add-sq-le-cosh-sq). $\square$
@@ -399,7 +396,7 @@ $$
 `1/cosh ∈ L²(ℝ)` — the comparison function for the localized-amplitude boundedness.
 
 $$
-\mathrm{MemLp}\,(\lambda \theta \mapsto {(\cosh\,\theta)}^{-1})\,2\,\mathrm{volume}
+\mathrm{MemLp}\,(\lambda \theta \mapsto {(\cosh\,\theta)}^{-1})\,2\,\mathrm{vol}
 $$
 
 *Proof.* By [`integrable_cosh_inv_sq`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-integrable-cosh-inv-sq). $\square$
@@ -412,7 +409,7 @@ $$
 **Boundedness from a `1/cosh` decay bound**: if the localized rapidity amplitude is dominated by `C/cosh θ`, then it lies in `L²(ℝ)`.  This reduces the `MemLp` obligation of `LocalTest` to the sharp pointwise Fourier-decay estimate `‖(K f)(θ)‖ ≤ C/cosh θ` — the genuine remaining analytic content (the Fourier transform of a smooth test function decays on the mass shell).  The integrability is fully discharged here.
 
 $$
-\mathrm{Integrable}\,f\,\mathrm{volume} \to \forall \{C : \mathbb{R}\}, (\forall (\theta : \mathbb{R}), \|\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f\,\theta\| \le C \cdot {(\cosh\,\theta)}^{-1}) \to \mathrm{MemLp}\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{\mathrm{Krep}}\,m\,f)\,2\,\mathrm{volume}
+\mathrm{Integrable}\,f\,\mathrm{vol} \to \forall \{C : \mathbb{R}\}, (\forall (\theta : \mathbb{R}), \|\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{K}\,m\,f\,\theta\| \le C \cdot {(\cosh\,\theta)}^{-1}) \to \mathrm{MemLp}\,(\href{/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep}{K}\,m\,f)\,2\,\mathrm{vol}
 $$
 
 *Proof.* By [`Krep_aestronglyMeasurable`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-krep-aestronglymeasurable), [`memLp_cosh_inv`](/browser/qiqth-fock-localization#d-qiqth-fock-localization-memlp-cosh-inv). $\square$

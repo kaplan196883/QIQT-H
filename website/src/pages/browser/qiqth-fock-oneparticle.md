@@ -39,7 +39,7 @@ $$
 The flow map at time `t`.
 
 $$
-\mathrm{flow}\,X\,\mathrm{MeasurableSpace}\,X\,\mu\,\mathrm{self} \;:=\; \mathrm{self}.1
+\mathrm{flow}\,X\,\mu\,\mathrm{self} \;:=\; \mathrm{self}.1
 $$
 
 <small>Used by [`mp`](/browser/qiqth-fock-oneparticle#d-qiqth-fock-oneparticle-mpflow-mp), [`flow_zero`](/browser/qiqth-fock-oneparticle#d-qiqth-fock-oneparticle-mpflow-flow-zero), [`flow_add`](/browser/qiqth-fock-oneparticle#d-qiqth-fock-oneparticle-mpflow-flow-add), [`comp_chain`](/browser/qiqth-fock-oneparticle#d-qiqth-fock-oneparticle-mpflow-comp-chain), [`unitary`](/browser/qiqth-fock-oneparticle#d-qiqth-fock-oneparticle-mpflow-unitary), [`unitary_apply`](/browser/qiqth-fock-oneparticle#d-qiqth-fock-oneparticle-mpflow-unitary-apply), [`unitary_add_apply`](/browser/qiqth-fock-oneparticle#d-qiqth-fock-oneparticle-mpflow-unitary-add-apply), [`unitary_zero_apply`](/browser/qiqth-fock-oneparticle#d-qiqth-fock-oneparticle-mpflow-unitary-zero-apply), and 3 more.</small>
@@ -101,9 +101,6 @@ $$
 
 **The boost unitary** at flow-time `t`: the unitary `ψ ↦ ψ ∘ χ_{-t}` on `L²(μ)`.  A genuine unitary (surjective linear isometry); unitarity is automatic from measure-preservation.
 
-$$
-\mathrm{U}\,X\,\mathrm{MeasurableSpace}\,X\,\mu\,\Phi\,t \;:=\; \mathrm{ofSurjective}\,(\mathrm{compMeasurePreserving}\,\mathbb{C}\,(\Phi.\mathrm{flow}\,(-t))\,\cdots )\,\cdots
-$$
 
 <small>Used by [`unitary_apply`](/browser/qiqth-fock-oneparticle#d-qiqth-fock-oneparticle-mpflow-unitary-apply), [`unitary_add_apply`](/browser/qiqth-fock-oneparticle#d-qiqth-fock-oneparticle-mpflow-unitary-add-apply), [`unitary_zero_apply`](/browser/qiqth-fock-oneparticle#d-qiqth-fock-oneparticle-mpflow-unitary-zero-apply), [`boostUnitary`](/browser/qiqth-fock-oneparticle#d-qiqth-fock-oneparticle-boostunitary).</small>
 

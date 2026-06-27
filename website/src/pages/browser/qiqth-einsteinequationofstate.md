@@ -25,9 +25,6 @@ $$
 
 The quadratic form of a *symmetric* tensor `C` evaluated on a 4-vector `(x0,x1,x2,x3)` — i.e. `∑_{μν} C_{μν} x^μ x^ν`, written out using `C i j = C j i`.
 
-$$
-\mathrm{QF}\,C\,x_{0}\,x_{1}\,x_{2}\,x_{3} \;:=\; C\,0\,0 \cdot {x_{0}}^{2} + C\,1\,1 \cdot {x_{1}}^{2} + C\,2\,2 \cdot {x_{2}}^{2} + C\,3\,3 \cdot {x_{3}}^{2} + 2 \cdot C\,0\,1 \cdot x_{0} \cdot x_{1} + 2 \cdot C\,0\,2 \cdot x_{0} \cdot x_{2} + 2 \cdot C\,0\,3 \cdot x_{0} \cdot x_{3} + 2 \cdot C\,1\,2 \cdot x_{1} \cdot x_{2} + 2 \cdot C\,1\,3 \cdot x_{1} \cdot x_{3} + 2 \cdot C\,2\,3 \cdot x_{2} \cdot x_{3}
-$$
 
 <small>Used by [`symmTensor_eq_smul_metric_of_null`](/browser/qiqth-einsteinequationofstate#d-qiqth-einsteineos-symmtensor-eq-smul-metric-of-null), [`QF_eq_BL`](/browser/qiqth-einsteinequationofstate#d-qiqth-einsteineos-qf-eq-bl), [`symmTensor_eq_smul_metric_of_null_general`](/browser/qiqth-einsteinequationofstate#d-qiqth-einsteineos-symmtensor-eq-smul-metric-of-null-general).</small>
 

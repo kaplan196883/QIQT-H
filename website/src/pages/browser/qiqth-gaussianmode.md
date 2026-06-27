@@ -15,7 +15,7 @@ description: QIQTH.GaussianMode — definitions, lemmas and theorems with explan
 Normalization constant `C = (ℏ√π)^{−1/2}` of the Gaussian reference profile.
 
 $$
-\mathrm{gaussC}\,\hbar \;:=\; {(\sqrt (\hbar \cdot \sqrt \pi))}^{-1}
+\mathrm{gaussC} \;:=\; {(\sqrt (\hbar \cdot \sqrt \pi))}^{-1}
 $$
 
 <small>Used by [`gaussMode`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode), [`gaussC_sq_mul_sqrt`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc-sq-mul-sqrt), [`gaussMode_normSq`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-normsq), [`gaussMode_conj_mul`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-conj-mul), [`gaussMode_integrable`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-integrable), [`gaussMode_calibration`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-calibration), [`gaussC_pos`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc-pos), [`gaussMode_norm`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-norm), and 7 more.</small>
@@ -26,7 +26,7 @@ $$
 The Gaussian wave-packet reference profile `g₀(θ) = C·exp(−θ²/2 − iθ)`.
 
 $$
-\mathrm{gaussMode}\,\hbar\,\theta \;:=\; (\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc}{\mathrm{gaussC}}\,\hbar) \cdot \exp\,((-{\theta}^{2} / 2) - \theta \cdot i)
+g_{0}\,\theta \;:=\; (\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc}{\mathrm{gaussC}}\,\hbar) \cdot \exp\,((-{\theta}^{2} / 2) - \theta \cdot i)
 $$
 
 <small>Used by [`gaussMode'`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode), [`gaussMode_normSq`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-normsq), [`gaussMode_conj_mul`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-conj-mul), [`gaussMode_integrable`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-integrable), [`gaussMode_calibration`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-calibration), [`gaussMode_norm`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-norm), [`gaussMode_continuous`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-continuous), [`gaussMode_hasDerivAt`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-hasderivat), and 7 more.</small>
@@ -37,7 +37,7 @@ $$
 Its derivative profile `g₀'(θ) = g₀(θ)·(−θ − i)`.
 
 $$
-\mathrm{gaussMode}^{\prime}\,\hbar\,\theta \;:=\; \href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}}\,\hbar\,\theta \cdot (-\theta - i)
+\mathrm{gaussMode}^{\prime}\,\theta \;:=\; \href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{g_{0}}\,\hbar\,\theta \cdot (-\theta - i)
 $$
 
 <small>Used by [`gaussMode_conj_mul`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-conj-mul), [`gaussMode_integrable`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-integrable), [`gaussMode_calibration`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-calibration), [`gaussMode_hasDerivAt`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-hasderivat), [`gaussMode'_continuous`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-continuous), [`gaussMode'_norm_le`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-norm-le), [`qiqt_gr_freefield_complete`](/browser/qiqth-qiqtgrcomplete#d-qiqth-wedgekmstogr-qiqt-gr-freefield-complete), [`qiqt_gr_freefield_gaussian`](/browser/qiqth-qiqtgrgaussian#d-qiqth-wedgekmstogr-qiqt-gr-freefield-gaussian).</small>
@@ -61,7 +61,7 @@ $$
 `normSq(g₀ θ) = C²·e^{−θ²}` — the Gaussian envelope.
 
 $$
-\mathrm{normSq}\,(\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}}\,\hbar\,\theta) = {\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc}{\mathrm{gaussC}}\,\hbar}^{2} \cdot \exp\,(-{\theta}^{2})
+\mathrm{normSq}\,(\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{g_{0}}\,\hbar\,\theta) = {\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc}{\mathrm{gaussC}}\,\hbar}^{2} \cdot \exp\,(-{\theta}^{2})
 $$
 
 *Proof.* Immediate from the definitions. $\square$
@@ -74,7 +74,7 @@ $$
 The pointwise boost-charge density: `conj(g₀ θ)·g₀'(θ) = ↑(C²·e^{−θ²})·(−θ − i)`.
 
 $$
-(\mathrm{starRingEnd}\,\mathbb{C})\,(\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}}\,\hbar\,\theta) \cdot \href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}^{\prime}}\,\hbar\,\theta = ({\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc}{\mathrm{gaussC}}\,\hbar}^{2} \cdot \exp\,(-{\theta}^{2})) \cdot (-\theta - i)
+(\mathrm{starRingEnd}\,\mathbb{C})\,(\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{g_{0}}\,\hbar\,\theta) \cdot \href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}^{\prime}}\,\hbar\,\theta = ({\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc}{\mathrm{gaussC}}\,\hbar}^{2} \cdot \exp\,(-{\theta}^{2})) \cdot (-\theta - i)
 $$
 
 *Proof.* By [`gaussMode_normSq`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-normsq). $\square$
@@ -87,7 +87,7 @@ $$
 The boost-charge integrand is integrable (Gaussian × polynomial).
 
 $$
-\mathrm{Integrable}\,(\lambda \theta \mapsto (\mathrm{starRingEnd}\,\mathbb{C})\,(\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}}\,\hbar\,\theta) \cdot \href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}^{\prime}}\,\hbar\,\theta)\,\mathrm{volume}
+\mathrm{Integrable}\,(\lambda \theta \mapsto (\mathrm{starRingEnd}\,\mathbb{C})\,(\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{g_{0}}\,\hbar\,\theta) \cdot \href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}^{\prime}}\,\hbar\,\theta)\,\mathrm{vol}
 $$
 
 *Proof.* By [`gaussC`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc), [`gaussMode_conj_mul`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-conj-mul). $\square$
@@ -100,7 +100,7 @@ $$
 **The Gaussian profile satisfies the calibration** `(−2π ∫ conj(g₀)·g₀').im = 2π/ℏ`.  Combined with `localized_mode_hTkk`, the per-generator `hTkk` is fully discharged for the canonical Gaussian localization.
 
 $$
-0 < \hbar \to (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}}\,\hbar\,\theta) \cdot \href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}^{\prime}}\,\hbar\,\theta)).\mathrm{im} = 2 \cdot \pi / \hbar
+0 < \hbar \to (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{g_{0}}\,\hbar\,\theta) \cdot \href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}^{\prime}}\,\hbar\,\theta)).\mathrm{im} = 2 \cdot \pi / \hbar
 $$
 
 *Proof.* By [`gaussC`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc), [`gaussC_sq_mul_sqrt`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc-sq-mul-sqrt), [`gaussMode_conj_mul`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-conj-mul), [`gaussMode_integrable`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-integrable). $\square$
@@ -124,7 +124,7 @@ $$
 `‖g₀(θ)‖ = C·e^{−θ²/2}` (from `normSq = C²e^{−θ²}`).
 
 $$
-0 < \hbar \to \forall (\theta : \mathbb{R}), \|\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}}\,\hbar\,\theta\| = \href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc}{\mathrm{gaussC}}\,\hbar \cdot \exp\,(-{\theta}^{2} / 2)
+0 < \hbar \to \forall (\theta : \mathbb{R}), \|\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{g_{0}}\,\hbar\,\theta\| = \href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc}{\mathrm{gaussC}}\,\hbar \cdot \exp\,(-{\theta}^{2} / 2)
 $$
 
 *Proof.* By [`gaussMode_normSq`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-normsq), [`gaussC_pos`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc-pos). $\square$
@@ -135,7 +135,7 @@ $$
 **Lemma 438** (`gaussMode_continuous`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/GaussianMode.lean#L131)</small>
 
 $$
-\mathrm{Continuous}\,(\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}}\,\hbar)
+\mathrm{Continuous}\,(\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{g_{0}}\,\hbar)
 $$
 
 *Proof.* By [`gaussC`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc). $\square$
@@ -146,7 +146,7 @@ $$
 **Lemma 439** (`gaussMode_hasDerivAt`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/GaussianMode.lean#L134)</small>
 
 $$
-({\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}}\,\hbar})'({\theta})={\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}^{\prime}}\,\hbar\,\theta}
+({\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{g_{0}}\,\hbar})'({\theta})={\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}^{\prime}}\,\hbar\,\theta}
 $$
 
 *Proof.* By [`gaussC`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc). $\square$
@@ -181,7 +181,7 @@ $$
 **Lemma 442** (`gaussMode_sq_integrable`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/GaussianMode.lean#L182)</small>
 
 $$
-\mathrm{Integrable}\,(\lambda \theta \mapsto {\|\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}}\,\hbar\,\theta\|}^{2})\,\mathrm{volume}
+\mathrm{Integrable}\,(\lambda \theta \mapsto {\|\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{g_{0}}\,\hbar\,\theta\|}^{2})\,\mathrm{vol}
 $$
 
 *Proof.* By [`gaussC`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc), [`gaussMode_normSq`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-normsq). $\square$
@@ -192,7 +192,7 @@ $$
 **Lemma 443** (`gaussMode_memLp`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/GaussianMode.lean#L192)</small>
 
 $$
-\mathrm{MemLp}\,(\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}}\,\hbar)\,2\,\mathrm{volume}
+\mathrm{MemLp}\,(\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{g_{0}}\,\hbar)\,2\,\mathrm{vol}
 $$
 
 *Proof.* By [`gaussMode_continuous`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-continuous), [`gaussMode_sq_integrable`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-sq-integrable). $\square$
@@ -203,7 +203,7 @@ $$
 **Lemma 444** (`gaussMode_integrable_fn`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/GaussianMode.lean#L196)</small>
 
 $$
-0 < \hbar \to \mathrm{Integrable}\,(\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}}\,\hbar)\,\mathrm{volume}
+0 < \hbar \to \mathrm{Integrable}\,(\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{g_{0}}\,\hbar)\,\mathrm{vol}
 $$
 
 *Proof.* By [`gaussC`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussc), [`gaussMode_norm`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-norm), [`gaussMode_continuous`](/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode-continuous). $\square$

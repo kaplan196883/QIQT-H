@@ -14,9 +14,6 @@ description: QIQTH.Raychaudhuri — definitions, lemmas and theorems with explan
 
 **Second covariant derivative of a vector field**, `∇_μ ∇_ν V^ρ`. Treating `W^ρ_ν := ∇_ν V^ρ` (`= covDerivVec`) as a `(1,1)` tensor: `∇_μ W^ρ_ν = ∂_μ W^ρ_ν + Γ^ρ_{μσ} W^σ_ν − Γ^σ_{μν} W^ρ_σ`.
 
-$$
-\nabla^{2}\,n\,g\,\mathrm{gi}\,V\,\mu\,\nu\,\rho\,x \;:=\; \partial_{{\mu}}({\lambda y \mapsto \href{/browser/qiqth-curvature#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\rho}}({y})}})({x}) + \sum_{\sigma} \href{/browser/qiqth-curvature#d-qiqth-curvature-christoffel}{\Gamma^{{\rho}}_{{\mu}{\sigma}}({x})} \cdot \href{/browser/qiqth-curvature#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\nu}}{}^{{\sigma}}({x})} - \sum_{\sigma} \href{/browser/qiqth-curvature#d-qiqth-curvature-christoffel}{\Gamma^{{\sigma}}_{{\mu}{\nu}}({x})} \cdot \href{/browser/qiqth-curvature#d-qiqth-curvature-covderivvec}{(\nabla {V})_{{\sigma}}{}^{{\rho}}({x})}
-$$
 
 <small>Used by [`ricci_identity`](/browser/qiqth-raychaudhuri#d-qiqth-curvature-ricci-identity), [`ricci_identity_contracted`](/browser/qiqth-raychaudhuri#d-qiqth-curvature-ricci-identity-contracted), [`covDeriv2Vec_trace`](/browser/qiqth-raychaudhuri#d-qiqth-curvature-covderiv2vec-trace), [`raychaudhuri_focusing`](/browser/qiqth-raychaudhuri#d-qiqth-curvature-raychaudhuri-focusing), [`geodesic_leibniz`](/browser/qiqth-raychaudhuri#d-qiqth-curvature-geodesic-leibniz), [`raychaudhuri_geodesic`](/browser/qiqth-raychaudhuri#d-qiqth-curvature-raychaudhuri-geodesic).</small>
 

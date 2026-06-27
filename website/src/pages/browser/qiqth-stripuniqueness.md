@@ -15,7 +15,7 @@ description: QIQTH.StripUniqueness — definitions, lemmas and theorems with exp
 The (closed) **KMS strip** `{0 ≤ Im z ≤ 1}` — the inverse temperature is normalised to `β = 1`.
 
 $$
-S \;:=\; \mathrm{im} ^{-1}{}' \mathrm{Icc}\,0\,1
+S \;:=\; \mathrm{im} ^{-1}{}' [{0},{1}]
 $$
 
 <small>Used by [`im_zero_on_strip`](/browser/qiqth-stripuniqueness#d-qiqth-stripuniqueness-im-zero-on-strip), [`eqConst_of_im_zero_strip`](/browser/qiqth-stripuniqueness#d-qiqth-stripuniqueness-eqconst-of-im-zero-strip).</small>
@@ -26,7 +26,7 @@ $$
 The **open** KMS strip `{0 < Im z < 1}`.
 
 $$
-S^{\circ} \;:=\; \mathrm{im} ^{-1}{}' \mathrm{Ioo}\,0\,1
+S^{\circ} \;:=\; \mathrm{im} ^{-1}{}' ({0},{1})
 $$
 
 <small>Used by [`im_zero_on_strip`](/browser/qiqth-stripuniqueness#d-qiqth-stripuniqueness-im-zero-on-strip), [`eqConst_of_im_zero_strip`](/browser/qiqth-stripuniqueness#d-qiqth-stripuniqueness-eqconst-of-im-zero-strip), [`eqConst_of_im_zero_halfStrip`](/browser/qiqth-stripuniqueness#d-qiqth-stripuniqueness-eqconst-of-im-zero-halfstrip).</small>
@@ -63,7 +63,7 @@ $$
 The (closed) **half KMS strip** `{−1/2 ≤ Im z ≤ 0}` — the strip RvD Theorem 3.8 / Prop 3.5 actually use: the `g`-function lives here, with the lower edge `Im = −1/2` (the half-shift `Δ^{1/2} = J`).
 
 $$
-S_{1/2} \;:=\; \mathrm{im} ^{-1}{}' \mathrm{Icc}\,(-(1/2))\,0
+S_{1/2} \;:=\; \mathrm{im} ^{-1}{}' [{-(1/2)},{0}]
 $$
 
 <small>Used by [`h1_of_stripKMSrvd`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-h1-of-stripkmsrvd), [`corrC_bdd_halfStrip`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-corrc-bdd-halfstrip), [`gFunction_bottom_real_of_kms_match`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gfunction-bottom-real-of-kms-match), [`gFunction_bottom_real_of_faithful_kms`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gfunction-bottom-real-of-faithful-kms), [`eqZero_of_im_zero_edge_halfStrip`](/browser/qiqth-stripuniqueness#d-qiqth-stripuniqueness-eqzero-of-im-zero-edge-halfstrip), [`eqOn_of_im_zero_edge_halfStrip`](/browser/qiqth-stripuniqueness#d-qiqth-stripuniqueness-eqon-of-im-zero-edge-halfstrip).</small>
@@ -74,7 +74,7 @@ $$
 The **open** half KMS strip `{−1/2 < Im z < 0}`.
 
 $$
-S^{\circ}_{1/2} \;:=\; \mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-(1/2))\,0
+S^{\circ}_{1/2} \;:=\; \mathrm{im} ^{-1}{}' ({-(1/2)},{0})
 $$
 
 <small>Used by [`h1_of_stripKMSrvd`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-h1-of-stripkmsrvd), [`gFunction_eq_zero_const`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gfunction-eq-zero-const), [`gFunction_bottom_real_of_kms_match`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gfunction-bottom-real-of-kms-match), [`gFunction_bottom_real_of_faithful_kms`](/browser/qiqth-kmscorrelation#d-qiqth-standardsubspacemodular-gfunction-bottom-real-of-faithful-kms), [`eqZero_of_im_zero_edge_halfStrip`](/browser/qiqth-stripuniqueness#d-qiqth-stripuniqueness-eqzero-of-im-zero-edge-halfstrip), [`eqOn_of_im_zero_edge_halfStrip`](/browser/qiqth-stripuniqueness#d-qiqth-stripuniqueness-eqon-of-im-zero-edge-halfstrip), [`eqConst_of_im_zero_halfStrip`](/browser/qiqth-stripuniqueness#d-qiqth-stripuniqueness-eqconst-of-im-zero-halfstrip).</small>
@@ -124,7 +124,7 @@ $$
 The **unit KMS strip** `{−1 ≤ Im z ≤ 0}` and its interior — the strip of RvD Definition 3.4 (the full-width KMS condition, before Proposition 3.5 folds it to the half-strip).
 
 $$
-S^{-} \;:=\; \mathrm{im} ^{-1}{}' \mathrm{Icc}\,(-1)\,0
+S^{-} \;:=\; \mathrm{im} ^{-1}{}' [{-1},{0}]
 $$
 
 <small>Used by [`stripKMSrvd_real_midline`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-stripkmsrvd-real-midline), [`h1_of_stripKMSrvd`](/browser/qiqth-fock-oneparticlebw#d-qiqth-fock-oneparticlebw-h1-of-stripkmsrvd), [`eqZero_of_im_zero_edge_negStrip`](/browser/qiqth-stripuniqueness#d-qiqth-stripuniqueness-eqzero-of-im-zero-edge-negstrip), [`eqOn_of_im_zero_edge_negStrip`](/browser/qiqth-stripuniqueness#d-qiqth-stripuniqueness-eqon-of-im-zero-edge-negstrip), [`real_on_midline_of_conj_flip`](/browser/qiqth-stripuniqueness#d-qiqth-stripuniqueness-real-on-midline-of-conj-flip).</small>
@@ -133,7 +133,7 @@ $$
 **Definition 989** (`negStripOpen`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StripUniqueness.lean#L371)</small>
 
 $$
-S^{-} \;:=\; \mathrm{im} ^{-1}{}' \mathrm{Ioo}\,(-1)\,0
+S^{-} \;:=\; \mathrm{im} ^{-1}{}' ({-1},{0})
 $$
 
 <small>Used by [`eqZero_of_im_zero_edge_negStrip`](/browser/qiqth-stripuniqueness#d-qiqth-stripuniqueness-eqzero-of-im-zero-edge-negstrip), [`eqOn_of_im_zero_edge_negStrip`](/browser/qiqth-stripuniqueness#d-qiqth-stripuniqueness-eqon-of-im-zero-edge-negstrip), [`real_on_midline_of_conj_flip`](/browser/qiqth-stripuniqueness#d-qiqth-stripuniqueness-real-on-midline-of-conj-flip).</small>

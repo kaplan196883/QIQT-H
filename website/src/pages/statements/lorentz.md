@@ -21,13 +21,13 @@ description: "Lorentz covariance — QIQT-H headline statements machine-translat
 
 `evaluation_covariance` · *spine* —  we have
 
-$$ \mathrm{selector}\,(\mathrm{actSection}\,g\,\mathrm{lam})\,(g.\mathrm{act}\,D) = (g.\gamma\,D)\,(\mathrm{selector}\,\mathrm{lam}\,D) $$
+$$ \mathrm{selector}\,(\mathrm{actSection}\,g\,\lambda)\,(g.\mathrm{act}\,D) = (g.\gamma\,D)\,(\mathrm{selector}\,\lambda\,D) $$
 
 ## `group_evaluation_covariance`
 
 `group_evaluation_covariance` · *spine* —  we have
 
-$$ \mathrm{selector}\,(\mathrm{actSection}\,(A.\mathrm{toPoincare}\,g)\,\mathrm{lam})\,((A.\mathrm{act}\,g)\,D) = (A.\gamma\,g\,D)\,(\mathrm{selector}\,\mathrm{lam}\,D) $$
+$$ \mathrm{selector}\,(\mathrm{actSection}\,(A.\mathrm{toPoincare}\,g)\,\lambda)\,((A.\mathrm{act}\,g)\,D) = (A.\gamma\,g\,D)\,(\mathrm{selector}\,\lambda\,D) $$
 
 ## `freeFieldMeasure_boost_invariant`
 
@@ -70,7 +70,7 @@ $$ \mathrm{map}\,(\mathrm{diagBoost}\,e)\,(\mathrm{freeFieldMeasure}\,\nu) = \ma
 
 `continuum_volume_selects` · *spine* —  we have
 
-$$ \mathrm{volume}\,\{\mathrm{seed}|\mathrm{selects}\,(\mathrm{contWeights}\,S\,\xi\,s)\,\mathrm{seed}\,k\} = {{\mathrm{contWeights}\,S\,\xi\,s\,k}} $$
+$$ \mathrm{vol}\,\{\mathrm{seed}|\mathrm{selects}\,(\mathrm{contWeights}\,S\,\xi\,s)\,\mathrm{seed}\,k\} = {{\mathrm{contWeights}\,S\,\xi\,s\,k}} $$
 
 <small>plus 1 routine conditions (1 typeclass) — full list in the per-track PDF.</small>
 
