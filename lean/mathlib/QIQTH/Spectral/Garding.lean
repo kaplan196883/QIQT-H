@@ -2014,6 +2014,100 @@ theorem cayleyCutoff_L2_tendsto_zero [Nontrivial H] (U : ℝ → (H →L[ℂ] H)
   · filter_upwards with ω
     exact cayleyCutoff_sub_indicator_sq_tendsto_zero (ω : ℂ)
 
+/-- **★★★ The cutoff functional-calculus vectors form a Cauchy sequence:** `cfc(ψ_N) V x` is a `CauchySeq` in `H`
+    (hence converges, `H` complete).  The existence input of the atom-killing.  Derivation: the cutoff sequence is
+    `L²(μ_x)`-Cauchy — from DCT-2 (`cayleyCutoff_L2_tendsto_zero`, `∫ ‖ψ_N − 1_{{1}}‖² → 0`) and the pointwise
+    quadratic triangle `‖a − b‖² ≤ 2‖a − c‖² + 2‖b − c‖²` (with `c = 1_{{1}}`) integrated via
+    `integral_mono_of_nonneg`: `∫ ‖ψ_m − ψ_n‖² ≤ 2∫‖ψ_m − 1_{{1}}‖² + 2∫‖ψ_n − 1_{{1}}‖² < ε` for `m, n` large.
+    Then `cayley_cfc_cauchySeq_of_integral` (the existence half of the L²→strong-operator bridge) turns the
+    `L²(μ_x)`-Cauchy condition into a `CauchySeq` of operator-vectors.  Axiom-free; free scalar; no UV datum. -/
+theorem cayleyCutoff_cfc_cauchySeq [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    CauchySeq (fun N => cfc (fun z => (cayleyCutoff N z : ℂ))
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x) := by
+  haveI : IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+    cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC x
+  -- the indicator measurability / AESM
+  have hSmeas : MeasurableSet
+      {ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) | (ω : ℂ) = 1} :=
+    (isClosed_eq continuous_subtype_val continuous_const).measurableSet
+  have hindeq : (fun ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) =>
+        if (ω : ℂ) = 1 then (1 : ℂ) else 0)
+      = {ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) | (ω : ℂ) = 1}.indicator
+          (fun _ => (1 : ℂ)) := by
+    funext ω; simp only [Set.indicator_apply, Set.mem_setOf_eq]
+  have hindm : AEStronglyMeasurable
+      (fun ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) =>
+        if (ω : ℂ) = 1 then (1 : ℂ) else 0) (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+    rw [hindeq]; exact (measurable_const.indicator hSmeas).aestronglyMeasurable
+  -- each ‖ψ_N − 1_{{1}}‖² is integrable (bounded by 4, finite measure)
+  have hint : ∀ N, Integrable
+      (fun ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) =>
+        ‖(cayleyCutoff N (ω : ℂ) : ℂ) - (if (ω : ℂ) = 1 then (1 : ℂ) else 0)‖ ^ 2)
+      (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+    intro N
+    refine (integrable_const (4 : ℝ)).mono' ?_ ?_
+    · exact (((Complex.continuous_ofReal.comp
+        ((cayleyCutoff_continuous N).comp continuous_subtype_val)).aestronglyMeasurable.sub hindm).norm.pow 2)
+    · filter_upwards with ω
+      have hpsi : ‖(cayleyCutoff N (ω : ℂ) : ℂ)‖ ≤ 1 := by
+        rw [Complex.norm_real, Real.norm_of_nonneg (cayleyCutoff_pos N _).le]
+        exact cayleyCutoff_le_one N _
+      have hind : ‖(if (ω : ℂ) = 1 then (1 : ℂ) else 0)‖ ≤ 1 := by
+        by_cases hω : (ω : ℂ) = 1 <;> simp [hω]
+      have hb : ‖(cayleyCutoff N (ω : ℂ) : ℂ) - (if (ω : ℂ) = 1 then (1 : ℂ) else 0)‖ ≤ 2 := by
+        calc ‖(cayleyCutoff N (ω : ℂ) : ℂ) - (if (ω : ℂ) = 1 then (1 : ℂ) else 0)‖
+            ≤ ‖(cayleyCutoff N (ω : ℂ) : ℂ)‖ + ‖(if (ω : ℂ) = 1 then (1 : ℂ) else 0)‖ := norm_sub_le _ _
+          _ ≤ 2 := by linarith
+      rw [Real.norm_of_nonneg (sq_nonneg _)]
+      nlinarith [hb, norm_nonneg ((cayleyCutoff N (ω : ℂ) : ℂ) - (if (ω : ℂ) = 1 then (1 : ℂ) else 0))]
+  -- DCT-2: the L² norms tend to 0
+  have hL2 := cayleyCutoff_L2_tendsto_zero U hgrp hU0 hUinner hUbd hSC x
+  rw [Metric.tendsto_atTop] at hL2
+  -- assemble the L²-Cauchy condition and invoke the existence half
+  refine cayley_cfc_cauchySeq_of_integral U hgrp hU0 hUinner hUbd hSC
+    (fun N z => (cayleyCutoff N z : ℂ))
+    (fun N => (Complex.continuous_ofReal.comp (cayleyCutoff_continuous N)).continuousOn) x ?_
+  intro ε hε
+  obtain ⟨N, hN⟩ := hL2 (ε / 4) (by positivity)
+  refine ⟨N, fun m hm n hn => ?_⟩
+  have key : ∀ k, N ≤ k → ∫ ω, ‖(cayleyCutoff k (ω : ℂ) : ℂ)
+      - (if (ω : ℂ) = 1 then (1 : ℂ) else 0)‖ ^ 2
+      ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) < ε / 4 := by
+    intro k hk
+    have hd := hN k hk
+    have hnn : 0 ≤ ∫ ω, ‖(cayleyCutoff k (ω : ℂ) : ℂ) - (if (ω : ℂ) = 1 then (1 : ℂ) else 0)‖ ^ 2
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+      integral_nonneg (fun ω => sq_nonneg _)
+    rwa [Real.dist_eq, sub_zero, abs_of_nonneg hnn] at hd
+  show ∫ ω, ‖(cayleyCutoff m (ω : ℂ) : ℂ) - (cayleyCutoff n (ω : ℂ) : ℂ)‖ ^ 2
+      ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) < ε
+  calc ∫ ω, ‖(cayleyCutoff m (ω : ℂ) : ℂ) - (cayleyCutoff n (ω : ℂ) : ℂ)‖ ^ 2
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x)
+      ≤ ∫ ω, (2 * ‖(cayleyCutoff m (ω : ℂ) : ℂ) - (if (ω : ℂ) = 1 then (1 : ℂ) else 0)‖ ^ 2
+          + 2 * ‖(cayleyCutoff n (ω : ℂ) : ℂ) - (if (ω : ℂ) = 1 then (1 : ℂ) else 0)‖ ^ 2)
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+        apply integral_mono_of_nonneg
+        · exact Filter.Eventually.of_forall (fun ω => sq_nonneg _)
+        · exact ((hint m).const_mul 2).add ((hint n).const_mul 2)
+        refine Filter.Eventually.of_forall (fun ω => ?_)
+        set a := (cayleyCutoff m (ω : ℂ) : ℂ)
+        set b := (cayleyCutoff n (ω : ℂ) : ℂ)
+        set c := (if (ω : ℂ) = 1 then (1 : ℂ) else 0)
+        have h1 : ‖a - b‖ ≤ ‖a - c‖ + ‖b - c‖ := by
+          have he : a - b = (a - c) - (b - c) := by ring
+          rw [he]; exact norm_sub_le _ _
+        nlinarith [h1, norm_nonneg (a - b), norm_nonneg (a - c), norm_nonneg (b - c),
+          sq_nonneg (‖a - c‖ - ‖b - c‖)]
+    _ = 2 * (∫ ω, ‖(cayleyCutoff m (ω : ℂ) : ℂ) - (if (ω : ℂ) = 1 then (1 : ℂ) else 0)‖ ^ 2
+          ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+        + 2 * (∫ ω, ‖(cayleyCutoff n (ω : ℂ) : ℂ) - (if (ω : ℂ) = 1 then (1 : ℂ) else 0)‖ ^ 2
+          ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x)) := by
+        rw [integral_add ((hint m).const_mul 2) ((hint n).const_mul 2), integral_const_mul, integral_const_mul]
+    _ < ε := by have hbm := key m hm; have hbn := key n hn; linarith
+
 end SelfAdjoint
 
 end QIQTH.Spectral

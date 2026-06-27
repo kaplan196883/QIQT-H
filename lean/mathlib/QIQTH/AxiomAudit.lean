@@ -5129,6 +5129,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyCutoff_defect_integral_tendsto_zero
 #print axioms QIQTH.Spectral.cayleyCutoff_sub_indicator_sq_tendsto_zero
 #print axioms QIQTH.Spectral.cayleyCutoff_L2_tendsto_zero
+#print axioms QIQTH.Spectral.cayleyCutoff_cfc_cauchySeq
+-- ★★★ P4 WALL — THE CUTOFF CFC VECTORS FORM A CAUCHY SEQUENCE (the existence input): cayleyCutoff_cfc_cauchySeq
+-- [Nontrivial H] — cfc(ψ_N) V x is a CauchySeq in H (hence converges, H complete). The cutoff sequence is
+-- L²(μ_x)-Cauchy from DCT-2 (cayleyCutoff_L2_tendsto_zero) + the pointwise quadratic triangle ‖a−b‖²≤2‖a−c‖²+2‖b−c‖²
+-- (c=1_{{1}}) integrated via integral_mono_of_nonneg: ∫‖ψ_m−ψ_n‖²≤2∫‖ψ_m−1_{{1}}‖²+2∫‖ψ_n−1_{{1}}‖²<ε. Then
+-- cayley_cfc_cauchySeq_of_integral (the existence half of the L²→strong bridge) turns the L²-Cauchy condition into
+-- a CauchySeq of operator-vectors. Axiom-free.
 -- ★★ P4 WALL — THE SECOND DCT STEP (L²-Cauchy input): cayleyCutoff_L2_tendsto_zero [Nontrivial H] —
 -- ∫ ‖ψ_N(ω) − 1_{{1}}(ω)‖² dμ_x → 0, i.e. the cutoff → the indicator of {1} in L²(μ_x). Dominated convergence:
 -- integrand ‖ψ_N − 1_{{1}}‖² ≤ 4 (ψ_N≤1, ‖1_{{1}}‖≤1), AEStronglyMeasurable (continuous cutoff − indicator of the

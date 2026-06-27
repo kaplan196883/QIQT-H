@@ -559,9 +559,18 @@ Also ✅ `cayleyCutoff_sub_indicator_sq_tendsto_zero` (helper: `‖(ψ_N z:ℂ)�
 `AEStronglyMeasurable` (continuous cutoff − indicator of the measurable `{1}`, `Measurable.indicator`+`isClosed_eq`),
 `→0` ptwise (the helper). An L²-convergent sequence is L²-Cauchy, so this feeds `cayley_cfc_cauchySeq_of_integral`
 (via the triangle ineq) ⟹ the **strong limit** `w = lim cfc(ψ_N)V x` (`H` complete) — the existence input.
-**ALL THREE DCT LIMITS NOW DONE.** **Next (the final assembly ⟹ μ_x({1})=0):** L²-Cauchy from DCT-2 (triangle:
-`∫‖ψ_m−ψ_n‖² ≤ 2∫‖ψ_m−1_{{1}}‖²+2∫‖ψ_n−1_{{1}}‖²`) ⟹ existence-half ⟹ `cfc(ψ_N)V x→w`; DCT-3 ⟹ `(V−1)w=0` ⟹
-`w=0` (`cayley_one_sub_injective`); DCT-1 + `re⟪x,cfc(ψ_N)V x⟫=∫ψ_N` + inner-continuity ⟹ `μ_x({1})=re⟪x,w⟫=0`.
+**ALL THREE DCT LIMITS NOW DONE.**
+Also ✅ `cayleyCutoff_cfc_cauchySeq` `[Nontrivial H]` — **★★★ the cutoff CFC vectors form a `CauchySeq`** (the
+existence input): `cfc(ψ_N) V x` is a `CauchySeq` in `H` (hence converges, `H` complete). The cutoff sequence is
+`L²(μ_x)`-Cauchy from DCT-2 + the pointwise quadratic triangle `‖a−b‖²≤2‖a−c‖²+2‖b−c‖²` (`c=1_{{1}}`) integrated via
+`integral_mono_of_nonneg`: `∫‖ψ_m−ψ_n‖² ≤ 2∫‖ψ_m−1_{{1}}‖²+2∫‖ψ_n−1_{{1}}‖² < ε`; then
+`cayley_cfc_cauchySeq_of_integral` (the existence half) gives the `CauchySeq`. *(Build notes: removed `set μ/V`
+— `set` made them opaque, breaking defeq with the lemma-produced goals; used `apply integral_mono_of_nonneg` so
+`f/g/μ` unify from the goal before the subgoals; `integral_nonneg`/`sq_nonneg` need the integrand pinned via an
+explicit `have`.)* **Next (the final assembly ⟹ μ_x({1})=0):** `cauchySeq_tendsto_of_complete` ⟹ `cfc(ψ_N)V x→w`;
+DCT-3 + convergence-half ⟹ `(V−1)cfc(ψ_N)V x=cfc((z−1)ψ_N)V x→0` and `→(V−1)w`, so `(V−1)w=0` ⟹ `w=0`
+(`cayley_one_sub_injective`); DCT-1 + `re⟪x,cfc(ψ_N)V x⟫=∫ψ_N` (`integral_re_cfc_ofReal`) + inner-continuity ⟹
+`μ_x({1})=re⟪x,w⟫=0`.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`
