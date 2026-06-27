@@ -15,7 +15,12 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
       exactly one of them <em>actual</em>. One wave function, one world. The holographic capacity bound
       gives the finite record <em>stage</em> (how many distinguishable records a region can hold) — it does
       <em>not</em> force the single outcome: the honest crux is that the single record is λ's doing (an
-      Everett-like selection), not capacity's, and that selection is a postulate, not yet derived.</p>
+      Everett-like selection), not capacity's, and that selection is a postulate, not yet derived.
+      What the capacity bound <em>does</em> do — read as a finite-microstate postulate — is now a
+      machine-checked theorem: it <strong>derives</strong> the holographic area floor
+      S<sub>vN</sub>(ρ<sub>R</sub>) ≤ A/4ℓ<sub>P</sub>² and, for the free field, feeds the
+      <strong>Einstein field equations</strong> (P4-MICRO). Capacity is the kinematic engine of gravity;
+      λ is the source of definiteness — two different jobs.</p>
     <div class="cta">
       <a class="btn btn-primary" href="/idea">Read the idea</a>
       <a class="btn btn-ghost" href="/theory">The mathematics</a>
@@ -73,9 +78,14 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
       <strong>P3 · Microcausality.</strong> Spacelike-separated regions commute — the Lorentz input.
       <em>Not</em> the source of Born: it is a machine-checked theorem that observable microcausality does
       <em>not</em> entail selector no-signalling.<br/><br/>
-      <strong>P4 · Finite holographic capacity (FQ). ★</strong> Regional entropy ≤ <span set:html={QRcap} />. The one
-      distinctive physical postulate — and the sole genuine input to the machine-checked Einstein-equation
-      chain.<br/><br/>
+      <strong>P4 · Finite holographic capacity (FQ). ★</strong> The postulate is the finite regional
+      <em>capacity</em>, log&nbsp;N<sub>R</sub> ≤ <span set:html={QRcap} />. The <em>area floor</em>
+      S<sub>vN</sub>(ρ<sub>R</sub>) ≤ Q<sub>R</sub> is now a <strong>derived theorem</strong> (P4-MICRO,
+      <code>area_floor_vonNeumann</code>) — the elementary max-entropy bound S<sub>vN</sub> ≤ log&nbsp;dim — not a
+      separate postulate. This is the one distinctive physical postulate, and it is <em>kinematic</em>: it gives
+      the area law and, for the free field, the Einstein equations — but it does <strong>not</strong> select
+      outcomes (that is λ's job). There is <em>no</em> “capacity forbids superpositions” (H2 / Macroscopic
+      Definiteness) postulate: that claim is <strong>retired as a category error</strong>.<br/><br/>
       <strong>P5 · Quantum equilibrium of λ's measure.</strong> The typicality measure is refinement-equivariant
       (Dürr–Goldstein–Zanghì / Valentini). <strong>This single principle grounds <em>all</em> of Born</strong> —
       both the additivity bridge and the μ-selection.
@@ -109,9 +119,11 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
   <section class="section"><div class="wrap">
     <h2>What is proven, what is open</h2>
     <p class="sub">Honesty is the point. The axiom-free Lean development verifies the modular /
-      relative-entropy calculus (<span set:html={chiR} />), the covariant consistent Born measure, and the
-      Born-from-typicality reduction — not the (FQ) holographic axiom, not λ's dynamical law, not the
-      continuum. (The original "capacity forbids records" conjecture is retired, not pending.)</p>
+      relative-entropy calculus (<span set:html={chiR} />), the covariant consistent Born measure, the
+      Born-from-typicality reduction, and the holographic area floor S<sub>vN</sub> ≤ Q<sub>R</sub>
+      <em>derived</em> from the finite-capacity postulate (P4-MICRO) — but <em>not</em> the (FQ) capacity
+      postulate itself, not λ's dynamical law, not the continuum. (The original "capacity forbids records"
+      conjecture is retired as a category error, not pending.)</p>
     <StatusTable />
   </div></section>
 
@@ -129,6 +141,16 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
       <em>derived</em> for the Klein–Gordon stress tensor. The differential area law δS = ηδA, the
       modular-energy = stress-flux identity, the Christoffel / Ricci / curvature regularity, and Raychaudhuri
       focusing are all <em>derived</em>, not assumed.</p>
+    <p class="sub"><strong>How the capacity enters — P4-MICRO.</strong> The entropy side of this chain is no longer
+      an extra hypothesis: <code>gr_from_p4micro</code> feeds the <em>derived</em> area floor
+      (S<sub>vN</sub> ≤ Q<sub>R</sub>, obtained from the finite-capacity postulate via
+      <code>area_floor_vonNeumann</code>) into the Jacobson capstone, leaving as residual inputs <em>exactly</em>
+      the Bisognano–Wichmann / Unruh thermal flux (itself discharged for the free field), Raychaudhuri focusing,
+      conservation, and metric regularity. The Lean now <em>enforces</em> the honest boundary:
+      <strong>the capacity postulate alone does not give gravity</strong> — a microstate <em>count</em> cannot
+      supply a <em>temperature</em>, so the thermal input is irreducibly modular (the open Type&nbsp;II frontier
+      would derive it). The 1/4 coefficient is the separately-derived Sakharov ratio; the value of G is a carried
+      datum.</p>
     <p class="sub"><strong>The floor laid bare.</strong> A single <em>showcase</em> theorem
       (<code>qiqt_gr_ppwave_showcase</code>) instantiates the chain for an explicit curved <strong>pp-wave</strong>
       spacetime and <em>discharges every geometric and analytic premise</em> — the metric and tetrad, the
