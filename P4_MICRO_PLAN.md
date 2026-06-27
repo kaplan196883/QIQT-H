@@ -111,7 +111,8 @@ via the trace, P4-MICRO supplies it via finite capacity.
 
 - [x] **M-1 `area_floor_of_microstate`** — the core corollary + `MicrostatePostulate` class. ✅ LANDED 2026-06-27
   (`QIQTH/FQBoundMicro.lean`): green, `#print axioms` = standard 3, budget 0, wired into `QIQTH.lean` + `AxiomAudit.lean`.
-- [ ] **M-2 manifest area form** — `MicrostatePostulateArea` + `holographic_area_floor_micro` (`S ≤ edgeArea/(4ℓ_P²)`).
+- [x] **M-2 manifest area form** — `MicrostatePostulateArea` + `holographic_area_floor_micro` (`S ≤ edgeArea/(4ℓ_P²)`).
+  ✅ LANDED 2026-06-27: green, `#print axioms` standard 3, budget 0.
 - [ ] **M-3 saturation** — `area_floor_saturates` (equality at the maximally-mixed record).
 - [ ] **M-4 non-vacuity witness** — concrete `Fin n` instance + `example` firing the bound (proves the interface non-empty).
 - [ ] **M-5 bridge remark** — connect to `FQBoundCGP.holographic_area_floor`; note Route 1 vs Route 2 deliver the same area term.
@@ -134,6 +135,11 @@ AND the `P4_WALL_CAMPAIGN_PLAN.md` checklist (note the P4-MICRO endpoint beside 
   green, `#print axioms` = standard 3, budget 0, full `QIQTH` green; wired into `QIQTH.lean` + `AxiomAudit.lean`.
   P4's area floor is now a theorem conditional on the finite-microstate postulate (Route 2 endpoint), beside the
   Type II trace (Route 1, open). Next: **M-2** (manifest `S ≤ edgeArea/(4ℓ_P²)` form).
+- 2026-06-27 — **M-2 LANDED.** `MicrostatePostulateArea` class + `holographic_area_floor_micro`
+  (`[MicrostatePostulateArea R edgeArea ellP] → Shannon univ p ≤ edgeArea/(4·ellP²)`): the area floor in manifest
+  `S ≤ A/(4ℓ_P²)` shape, the `1/4ℓ_P²` coefficient explicit in the statement (`edgeArea`, `ellP` free reals; UV
+  datum never assigned). Green, `#print axioms` standard 3, budget 0, wired into `AxiomAudit.lean`. Next: **M-3**
+  (`area_floor_saturates`, equality at the maximally-mixed record via `shannon_uniform_eq_log_card`).
 
 ## 7. Files
 

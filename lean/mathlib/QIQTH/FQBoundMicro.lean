@@ -54,4 +54,24 @@ theorem area_floor_of_microstate {R : Type*} [Fintype R] {areaTerm : ℝ}
   rw [← h.capacity]
   exact QIQTH.RecordContract.shannon_le_log_card p hp h1
 
+/-- **P4-MICRO in manifest physical form** — the capacity equation specialized to `edgeArea/(4·ellP²)`, so the
+    area floor reads `S ≤ A/(4ℓ_P²)` with the `1/4ℓ_P²` coefficient explicit in the statement rather than hidden in
+    an abstract `areaTerm`.  `edgeArea` (`= ⟨A_edge⟩ = A(∂R)`, the carried UV datum, never assigned a value) and
+    `ellP` (the Planck length) are explicit fields.  Still a typeclass hypothesis, not a Lean `axiom`. -/
+class MicrostatePostulateArea (R : Type*) [Fintype R] (edgeArea ellP : ℝ) where
+  /-- The holographic capacity equation in manifest form: `log|𝓗_R| = A/(4ℓ_P²)`. -/
+  capacity : Real.log (Fintype.card R) = edgeArea / (4 * ellP ^ 2)
+
+/-- **★★★ The holographic area floor in manifest form `S ≤ A/(4ℓ_P²)`, as a corollary of P4-MICRO.**  For any
+    Born record law `p` on the finite microstate set `R`, the Shannon entropy is at most the **area over `4ℓ_P²`**.
+    Exhibits P4's bound in its physical shape (`area_floor_of_microstate` with the capacity specialized to
+    `edgeArea/(4·ellP²)`).  The coefficient `1/4ℓ_P²` is manifest in the statement; its value is the carried UV datum,
+    never asserted (`edgeArea`, `ellP` free reals).  The `1/4` *ratio* is derived elsewhere (`SakharovRatio`).
+    Axiom-free, relative only to the named `MicrostatePostulateArea` postulate. -/
+theorem holographic_area_floor_micro {R : Type*} [Fintype R] {edgeArea ellP : ℝ}
+    [h : MicrostatePostulateArea R edgeArea ellP] (p : R → ℝ) (hp : ∀ i, 0 ≤ p i) (h1 : ∑ i, p i = 1) :
+    QIQTH.BranchLedger.Shannon Finset.univ p ≤ edgeArea / (4 * ellP ^ 2) := by
+  rw [← h.capacity]
+  exact QIQTH.RecordContract.shannon_le_log_card p hp h1
+
 end QIQTH

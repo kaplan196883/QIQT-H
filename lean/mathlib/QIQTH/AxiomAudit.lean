@@ -6296,5 +6296,12 @@ namespace QIQTH.AxiomAudit
 -- postulate now retires the area-law postulate. MicrostatePostulate is a TYPECLASS HYPOTHESIS, not a Lean axiom
 -- (budget stays 0). The area coefficient is the carried UV datum, never assigned; the holographic input log|𝓗_R|∝A
 -- stays the labelled frontier (the Type II dual-weight trace that would DERIVE it). Axiom-free (standard 3).
+#print axioms QIQTH.holographic_area_floor_micro
+-- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-2): holographic_area_floor_micro [MicrostatePostulateArea R edgeArea
+-- ellP] — Shannon univ p ≤ edgeArea / (4*ellP^2), i.e. S ≤ A/(4ℓ_P²) in MANIFEST form (the 1/4ℓ_P² coefficient
+-- explicit in the statement, not hidden in an abstract areaTerm). area_floor_of_microstate with the capacity
+-- equation specialized to edgeArea/(4·ellP²). edgeArea (= ⟨A_edge⟩ = A(∂R), carried UV datum, never assigned)
+-- and ellP (Planck length) are free reals; the 1/4 ratio is derived elsewhere (SakharovRatio). Still a typeclass
+-- hypothesis, not a Lean axiom. Axiom-free (standard 3).
 
 end QIQTH.AxiomAudit
