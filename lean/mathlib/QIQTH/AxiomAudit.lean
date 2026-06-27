@@ -6286,5 +6286,15 @@ namespace QIQTH.AxiomAudit
 -- entropy ≥ 0). So the grounded FQ bound S_vN ≤ areaTerm holds whenever the JLMS master inequality
 -- S_vN + cgpEntropy S ξ ≤ areaTerm holds (areaTerm = ⟨A_edge⟩/4ℓ_P², the Phase-5 trace's output) — the slack
 -- positivity is no longer hypothesized, only the master inequality remains. Axiom-free (standard 3).
+#print axioms QIQTH.area_floor_of_microstate
+-- ★★★ P4-MICRO (Route 2 — the SHIPPABLE P4 endpoint; P4_MICRO_PLAN.md M-1): area_floor_of_microstate
+-- [MicrostatePostulate R areaTerm] — for any Born record law p on the finite microstate set R,
+-- Shannon univ p ≤ areaTerm. P4's holographic area floor as a COROLLARY of the finite-microstate postulate:
+-- shannon_le_log_card (axiom-free Jensen/Gibbs: S ≤ log|𝓗_R|) rewritten through the P4-MICRO capacity equation
+-- log|𝓗_R| = areaTerm (= A/4ℓ_P²). P4 is no longer an independent postulate but a theorem conditional on the
+-- framework's OWN finite-capacity postulate (the "QI" core) — the same finite-Q_max move that removes the collapse
+-- postulate now retires the area-law postulate. MicrostatePostulate is a TYPECLASS HYPOTHESIS, not a Lean axiom
+-- (budget stays 0). The area coefficient is the carried UV datum, never assigned; the holographic input log|𝓗_R|∝A
+-- stays the labelled frontier (the Type II dual-weight trace that would DERIVE it). Axiom-free (standard 3).
 
 end QIQTH.AxiomAudit

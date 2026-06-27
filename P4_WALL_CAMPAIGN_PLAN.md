@@ -155,6 +155,17 @@ blocked on the PVM/`PVM_of_selfAdjoint` (off the critical path).
 Per the same audit, do NOT block this on the PVM/`PVM_of_selfAdjoint` (off the critical path); `IsSelfAdjoint
 A_edge` (already proved) suffices to call the clock energy a genuine observable.
 
+**✅ ROUTE 2 — P4-MICRO, the SHIPPABLE P4 endpoint (`QIQTH/FQBoundMicro.lean`, axiom-free; see `P4_MICRO_PLAN.md`):**
+the Type II dual-weight trace above is Route 1 (it *explains why the bound is the area*, but is a multi-year Mathlib
+frontier). Route 2 instead postulates the **finite microstate count** directly (`MicrostatePostulate R areaTerm`:
+`log|𝓗_R| = areaTerm`, the "QI" core) and derives P4's bound as a COROLLARY of the already-proven finite max-entropy
+theorem `shannon_le_log_card` (`area_floor_of_microstate` M-1, landed 2026-06-27): `Shannon univ p ≤ areaTerm`. P4 is
+then a theorem conditional on the framework's *own* finite-capacity postulate, not on the trace. HONEST: the area
+coefficient is the same carried UV datum (never assigned); `MicrostatePostulate` is a typeclass hypothesis, not an
+axiom (budget 0); Route 2 does NOT reproduce Route 1's modular-origin explanation of *why area* (the holographic
+input `log|𝓗_R| ∝ A` stays the labelled frontier — exactly what the dual-weight trace would derive). The two routes
+deliver the **same area term**: Route 1 via the trace, Route 2 via finite capacity.
+
 ## 3. Dependency graph
 ```
 Phase 1 (π(a)) ─┐
