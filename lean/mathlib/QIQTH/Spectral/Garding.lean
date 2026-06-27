@@ -2530,6 +2530,67 @@ theorem cayleyExpBump_cfc_cauchySeq [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
         rw [integral_add ((hint m).const_mul 2) ((hint n).const_mul 2), integral_const_mul, integral_const_mul]
     _ < ε := by have hbm := key m hm; have hbn := key n hn; linarith
 
+/-- **★★★ The continuum Stone exponential `U_t x = exp(it A) x`** — defined as the strong limit of the cutoff
+    functional-calculus vectors `U_t x := lim_N cfc(g_{t,N}) V x` (which exists by `cayleyExpBump_cfc_cauchySeq` and
+    completeness of `H`).  This is `cfc(e_t) V x` for the (bounded Borel, `μ_x`-a.e. continuous) Stone-exponential
+    symbol `e_t(ω) = exp(it · invCayley(ω))`, the genuine continuum unitary group of the self-adjoint generator
+    `A = i(1 + V)(1 − V)⁻¹` — built with NO projection-valued measure.  Axiom-free; free scalar; no UV datum. -/
+noncomputable def cayleyStoneU [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (t : ℝ) (x : H) : H :=
+  (cauchySeq_tendsto_of_complete (cayleyExpBump_cfc_cauchySeq U hgrp hU0 hUinner hUbd hSC t x)).choose
+
+/-- **The defining property of `U_t`:** `cfc(g_{t,N}) V x → U_t x` strongly (`U_t` is the strong limit). -/
+theorem cayleyStoneU_tendsto [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (t : ℝ) (x : H) :
+    Filter.Tendsto (fun N => cfc (cayleyExpBump t N)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)
+      Filter.atTop (nhds (cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x)) :=
+  (cauchySeq_tendsto_of_complete (cayleyExpBump_cfc_cauchySeq U hgrp hU0 hUinner hUbd hSC t x)).choose_spec
+
+/-- **`U_t` is additive:** `U_t(x + y) = U_t x + U_t y`.  Each `cfc(g_{t,N}) V` is a (linear) bounded operator, so
+    `cfc(g_{t,N}) V (x+y) = cfc(g_{t,N}) V x + cfc(g_{t,N}) V y`; pass to the strong limit (`Tendsto.add` + uniqueness).
+    With `cayleyStoneU_smul`, `U_t` is a ℂ-linear operator (toward `U_t ∈ unitary(H)`). -/
+theorem cayleyStoneU_add [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (t : ℝ) (x y : H) :
+    cayleyStoneU U hgrp hU0 hUinner hUbd hSC t (x + y)
+      = cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x + cayleyStoneU U hgrp hU0 hUinner hUbd hSC t y := by
+  have hxy := cayleyStoneU_tendsto U hgrp hU0 hUinner hUbd hSC t (x + y)
+  have hsum := (cayleyStoneU_tendsto U hgrp hU0 hUinner hUbd hSC t x).add
+    (cayleyStoneU_tendsto U hgrp hU0 hUinner hUbd hSC t y)
+  have heq : (fun N => cfc (cayleyExpBump t N)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) (x + y))
+      = (fun N => cfc (cayleyExpBump t N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x
+          + cfc (cayleyExpBump t N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) y) := by
+    funext N; rw [map_add]
+  rw [heq] at hxy
+  exact tendsto_nhds_unique hxy hsum
+
+/-- **`U_t` is ℂ-homogeneous:** `U_t(c • x) = c • U_t x`.  As `cayleyStoneU_add`, from the linearity of each
+    `cfc(g_{t,N}) V` (`map_smul`) and `Tendsto.const_smul` + uniqueness. -/
+theorem cayleyStoneU_smul [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (t : ℝ) (c : ℂ) (x : H) :
+    cayleyStoneU U hgrp hU0 hUinner hUbd hSC t (c • x)
+      = c • cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x := by
+  have hcx := cayleyStoneU_tendsto U hgrp hU0 hUinner hUbd hSC t (c • x)
+  have hsm := (cayleyStoneU_tendsto U hgrp hU0 hUinner hUbd hSC t x).const_smul c
+  have heq : (fun N => cfc (cayleyExpBump t N)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) (c • x))
+      = (fun N => c • cfc (cayleyExpBump t N)
+          (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x) := by
+    funext N; rw [map_smul]
+  rw [heq] at hcx
+  exact tendsto_nhds_unique hcx hsm
+
 end SelfAdjoint
 
 end QIQTH.Spectral

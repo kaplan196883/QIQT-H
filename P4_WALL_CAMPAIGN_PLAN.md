@@ -449,8 +449,11 @@ Also ✅ `cayleyExpBump_cfc_cauchySeq` `[Nontrivial H]` (**★★★ the Stone-e
 strong limit IS `U_t x`: `cfc(g_{t,N})V x` CauchySeq in H. L²-convergent ⟹ L²-Cauchy (quadratic triangle, `c=e_t`)
 ⟹ existence-half. The continuum Stone exponential as a strong limit, NO PVM). Built green (1 fix: `simp[cayleyExpBump]`
 before `set`).
-**Next (toward U_t=exp(itA)):** define `U_t x:=lim cfc(g_{t,N})V x` (`cauchySeq_tendsto_of_complete`); lift group law
-(`cayleyExp_add`/`_zero`); strong continuity; generator ⟹ Stone;
+Also ✅ `cayleyStoneU` (def) + `cayleyStoneU_tendsto`/`_add`/`_smul` (**★★★★ THE CONTINUUM STONE EXPONENTIAL `U_t` IS
+DEFINED**: `cayleyStoneU t x:=lim_N cfc(g_{t,N})V x`, the strong limit; `cayleyStoneU_tendsto` = defining property;
+`_add`/`_smul` ⟹ `U_t` ℂ-LINEAR. This IS `exp(itA)x`, no PVM). All built green first try.
+**Next (toward U_t=exp(itA)):** `U_0 x=x`; `‖U_t x‖=‖x‖` (isometry); bundle `U_t:H→L[ℂ]H`; lift group law
+`U_s U_t=U_{s+t}` (cfc mult + `cayleyExp_add`); strong continuity; generator ⟹ Stone;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

@@ -5149,6 +5149,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyExpBump_norm
 #print axioms QIQTH.Spectral.cayleyExpBump_continuousOn
 #print axioms QIQTH.Spectral.cayleyExpBump_cfc_cauchySeq
+#print axioms QIQTH.Spectral.cayleyStoneU_tendsto
+#print axioms QIQTH.Spectral.cayleyStoneU_add
+#print axioms QIQTH.Spectral.cayleyStoneU_smul
+-- ★★★★ P4 WALL — THE CONTINUUM STONE EXPONENTIAL U_t IS DEFINED: cayleyStoneU [Nontrivial H] U ... t x :=
+-- lim_N cfc(g_{t,N}) V x (the strong limit, exists by cayleyExpBump_cfc_cauchySeq + completeness). This IS
+-- cfc(e_t) V x = exp(itA) x for the self-adjoint A=i(1+V)(1−V)⁻¹, built with NO PVM. cayleyStoneU_tendsto (the
+-- defining strong-limit property) + cayleyStoneU_add (U_t(x+y)=U_t x+U_t y) + cayleyStoneU_smul (U_t(c•x)=c•U_t x)
+-- ⟹ U_t is ℂ-LINEAR (map_add/map_smul of each cfc(g_{t,N})V + Tendsto.add/const_smul + tendsto_nhds_unique).
+-- Toward U_t ∈ unitary(H), the one-parameter group law (cayleyExp_add/_zero), strong continuity, generator.
+-- Axiom-free.
 -- ★★★ P4 WALL — THE STONE-EXP CFC VECTORS FORM A CAUCHY SEQUENCE (the strong limit IS U_t x):
 -- cayleyExpBump_cfc_cauchySeq [Nontrivial H] — cfc(g_{t,N}) V x is a CauchySeq in H (converges, H complete), whose
 -- strong limit is the Stone unitary U_t x. g_{t,N}=e_t·η_N is ContinuousOn σ(V) (cayleyExpBump_continuousOn) and

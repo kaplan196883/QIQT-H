@@ -626,6 +626,14 @@ integrability of `‖g_N−e_t‖²` via the a.e. equality to `ψ_N²` + `Integr
 `U_t=exp(itA)` as a strong limit of continuous functional calculi, NO PVM.** **Next:** define `U_t x := lim cfc(g_{t,N}) V x`
 (`cauchySeq_tendsto_of_complete`); lift `cayleyExp_add`/`_zero` to `U_0=1`/`U_s U_t=U_{s+t}`; strong continuity `t↦U_t x`;
 generator identification ⟹ Stone.
+Also ✅ `cayleyStoneU` (def) + `cayleyStoneU_tendsto` + `cayleyStoneU_add` + `cayleyStoneU_smul` — **★★★★ THE CONTINUUM
+STONE EXPONENTIAL `U_t` IS DEFINED**: `cayleyStoneU U ... t x := lim_N cfc(g_{t,N}) V x` (the strong limit, exists by
+`cayleyExpBump_cfc_cauchySeq` + completeness; `cauchySeq_tendsto_of_complete.choose`). `cayleyStoneU_tendsto` is the
+defining strong-limit property; `cayleyStoneU_add`/`_smul` ⟹ **`U_t` is ℂ-LINEAR** (`map_add`/`map_smul` of each
+`cfc(g_{t,N})V` + `Tendsto.add`/`const_smul` + `tendsto_nhds_unique`). This IS `cfc(e_t)V x = exp(itA)x` for the
+self-adjoint `A=i(1+V)(1−V)⁻¹`, built with NO PVM. *All built green first try.* **Next:** `U_0 x=x`
+(`cfc(η_N)V x→cfc(1)V x=x`); `‖U_t x‖=‖x‖` (isometry, `∫η_N²→‖x‖²`); bundle `U_t : H→L[ℂ]H`; lift the group law
+`U_s U_t=U_{s+t}` (cfc multiplicativity + `cayleyExp_add`); strong continuity; generator ⟹ Stone.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`
