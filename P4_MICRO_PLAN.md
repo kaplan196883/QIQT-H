@@ -109,6 +109,49 @@ thermality and standard boost-flux/Raychaudhuri geometry, the Lean-checked Jacob
 field equations `G_{μν}+Λg_{μν}=8πG T_{μν}`."*  Scope the free-field claim as "only Gap-2 remains **on the
 thermal/BW side**" — not "only Gap-2 remains" for the whole chain (`hQ`,`hRay`,regularity,conservation persist).
 
+## 3.3 Verified P4-MICRO ⟹ GR chain map (agentic search, 2026-06-27) — exact theorem ledger
+
+Three parallel Explore agents read the actual signatures of the entire chain. Two findings change the roadmap:
+
+**Update 1 — GR-T2 (the static→variational bridge) is ALREADY machine-checked.** I had called `S=ηA ⟹ δS=ηδA`
+an open assumption. It is a proven lemma: `QIQTH.DifferentialAreaLaw.differential_area_law_of_relEntropy` derives
+`δS = η·δA` from exactly `hbound : S t ≤ η·A t` (= `area_floor`), `hsat : S 0 = η·A 0` (= `area_floor_saturates`),
+and `hDnn, hD0` (the entanglement first law — Klein positivity, proven). So the bridge LOGIC is done; what remains
+of GR-T2 is only that the capacity family be SMOOTH (differentiable in the horizon deformation), a regularity
+condition — not a conceptual gap.
+
+**Update 2 — the GR capstones already expose EXACTLY P4-MICRO's outputs as their entropy slots.**
+`QIQTH.QiqtToGR.qiqt_bekenstein_gives_gr` (and `WedgeKMSToGR.qiqt_gr_from_flux_complete`,
+`qiqt_gr_from_wedge_kms_complete`) take the entropy side as four hypotheses and leave the thermal/geometry inputs
+labelled:
+```
+hbound : BL(g x)v=0 → ∀ᶠ t, S x v t ≤ η·A x v t        ← area_floor_of_microstate  (P4-MICRO)
+hsat   : BL(g x)v=0 → S x v 0 = η·A x v 0               ← area_floor_saturates       (P4-MICRO)
+hDnn   : BL(g x)v=0 → ∀ t, 0 ≤ KE x v t − S x v t        ← entanglement first law (Klein, PROVEN)
+hD0    : BL(g x)v=0 → KE x v 0 − S x v 0 = 0
+hFlux  : kd x v = 2π/ℏ · BL(T x)v   ← Bisognano–Wichmann boost flux = Unruh/Clausius (THERMAL — cited; derived
+                                       for the free field via Fock.OneParticleBW.oneParticleBW_complete, RvD 3.8)
+hFocus : ad x v = BL(ricci…)v        ← Raychaudhuri (geometry)
+hreg, conserv                        ← f-regularity + ∇·T=0
+```
+So the entire chain is: **P4-MICRO fills `hbound`+`hsat`; Klein fills `hDnn`+`hD0`; `hFlux` (BW/Unruh) is the one
+irreducible thermal input** (GR-T1 confirmed — the thermal slot is the only thing P4-MICRO cannot touch).
+
+**Exact theorem ledger (signatures loaded, axiom-free unless noted):**
+- Entropy engine: `RecordContract.shannon_le_log_card`, `…shannon_uniform_eq_log_card`,
+  `BranchLedger.Shannon`, `QuantumRelativeEntropy.{IsDensity, vonNeumannEntropy, relEntropy_nonneg (Klein)}`,
+  `SpectralSum.{vonNeumannEntropy_diagonal, vonNeumannEntropy_unitaryConj}`. **GAP:** no `vonNeumannEntropy ≤ log
+  card` exists (= M-4); proof path: eigenvalues are a prob vector → `shannon_le_log_card`.
+- Jacobson: `ClausiusToPernull.jacobson_einstein_from_area_law` (5 premises: `hAreaLaw, htemp, hClausius, hQ, hRay`
+  + geometry), `DifferentialAreaLaw.{differential_area_law, differential_area_law_of_relEntropy}`,
+  `EinsteinFieldEquation.{jacobson_einstein_equation_of_state, einstein_field_equation_real, twice_contracted_bianchi,
+  einsteinTensor_divergence_zero}`, `EinsteinEquationOfState.symmTensor_eq_smul_metric_of_null(_general)`.
+- Free-field thermal/BW: `QiqtToGR.qiqt_bekenstein_gives_gr`, `WedgeKMSToGR.{qiqt_gr_from_flux_complete,
+  qiqt_gr_from_wedge_kms_complete, hFlux_of_wedgeKMS_complete, WedgeKMSFlux_complete}`,
+  `Fock.OneParticleBW.{oneParticleBW_complete, oneParticleBW_wedge_complete, wedge_hBoostCharge_of_smooth}`,
+  `EntanglementFirstLaw.{firstLaw_of_stationary, gibbs_first_law}`, `ArakiEntropy.{vonNeumann_le_modEnergy,
+  firstLaw_saturation}`, `SakharovRatio.sakharov_ratio` (η=1/4).
+
 ## 4. Lean design — `QIQTH/FQBoundMicro.lean` (new)
 
 Mirrors the `Phase5Master`/`DonaldSystem` typeclass-interface pattern: P4-MICRO is a **named typeclass**, P4's
@@ -172,10 +215,14 @@ via the trace, P4-MICRO supplies it via finite capacity.
 *Bricks below revised per the GPT-5.5-pro review (§3.1). C1/C2/C3 take priority over the original M-4/5/6.*
 
 - [ ] **M-4 (C1) honest von Neumann max-entropy bound** — `vonNeumannEntropy_le_log_card : S_vN(ρ) ≤ log dim 𝓗_R`
-  (Shannon applied to the *spectrum* / eigenvalues, reusing `SpectralSum.vonNeumannEntropy_diagonal` +
-  `shannon_le_log_card`), then `area_floor_vonNeumann [HolographicCapacityBound] : S_vN(ρ) ≤ areaTerm`. This is the
-  HONEST P4 (von Neumann, not record-law Shannon). Keep the landed Shannon theorems, relabelled as the
-  decohered/record-entropy bound with `S_vN ≤ H(record)`. *(highest value — the real fix)*
+  (`[Fintype n]`, `h : QuantumEntropy.IsDensity ρ`). VERIFIED proof path (agentic search §3.3): `vonNeumannEntropy h
+  = ∑ negMulLog(h.eigenvalues)` by def; the eigenvalues are a probability vector (nonneg + sum = 1, from `IsDensity`
+  PosSemidef + trace 1) → apply `RecordContract.shannon_le_log_card h.eigenvalues _ _` after `shannon_eq_sum_negMulLog`.
+  First confirm the exact eigenvalue-nonneg / sum-one lemma names on `IsDensity` (e.g. `h.eigenvalues_nonneg`,
+  trace→`∑ eigenvalues = 1`); if absent, add the 2 short lemmas. Then `area_floor_vonNeumann
+  [HolographicCapacityBound] : S_vN(ρ) ≤ areaTerm`. This is the HONEST P4 (von Neumann, not record-law Shannon).
+  Keep the landed Shannon theorems, relabelled as the decohered/record-entropy bound with `S_vN ≤ H(record)`.
+  *(highest value — the real fix; proof path now fully scoped)*
 - [ ] **M-5 (C2) split + rename the postulate** — `HolographicCapacityBound` (`log dim ≤ areaTerm`, for the floor)
   vs `HolographicCapacityExact` (`= areaTerm`, for saturation only). Migrate M-1/M-2/M-3 onto the bound form; keep
   exact only where equality is genuinely used (`area_floor_saturates`).
@@ -188,13 +235,21 @@ via the trace, P4-MICRO supplies it via finite capacity.
 - [ ] **M-9 paper hook** — the GPT-5.5-pro one-paragraph framing (§3.1 verbatim-adapted): regional capacity `N_R`,
   holographic content `log N_R ≤ A/4ℓ_P²` (equality only in the ideal saturating sector), Sakharov `1/4`, finite-dim
   max-entropy ⇒ P4; Route 1 retained to *derive* the capacity law. *(doc-only)*
-- [ ] **M-10 (GR bridge) `jacobson_einstein_from_p4micro_area_law`** — wire P4-MICRO-exact into the `hAreaLaw` slot
-  of `jacobson_einstein_from_area_law`, via an EXPLICIT named **saturated-variational bridge** lemma `hSatVar`
-  (static `S=ηA` + local-eq tracking ⟹ `δS=η δA`; GR-T2). Resulting theorem keeps EXACTLY `htemp, hClausius, hQ,
-  hRay`, geometry/conservation as remaining hypotheses — making "P4-MICRO closes 1 of 5, the thermal 2 are Route 1 /
-  BW" a checkable Lean dependency, not prose. HONEST: temperature stays modular (do NOT route `htemp` through
-  counting — GR-T1); type-separate the record entropy from Jacobson's `dS` (the Gap-2 localization, exposed as
-  such). *(the high-value GR increment; do after M-4..M-6)*
+- [ ] **M-10 (GR bridge) `gr_from_p4micro` against `QiqtToGR.qiqt_bekenstein_gives_gr`** — REVISED per §3.3: do NOT
+  re-route through `jacobson_einstein_from_area_law`'s `hAreaLaw`; instead instantiate the free-field capstone
+  `qiqt_bekenstein_gives_gr`, whose entropy slots are *already* P4-MICRO's outputs:
+  · `hbound` ← `area_floor_of_microstate` (over a smooth family of `MicrostatePostulate` instances with
+    `log N(t) = η·A(t)` — the only residual GR-T2 content, a SMOOTHNESS condition; the bridge logic
+    `δS=ηδA` is already proven in `DifferentialAreaLaw.differential_area_law_of_relEntropy`),
+  · `hsat` ← `area_floor_saturates`,
+  · `hDnn`/`hD0` ← the entanglement first law (`EntanglementFirstLaw.firstLaw_of_stationary`, Klein — PROVEN).
+  Resulting theorem keeps EXACTLY `hFlux` (BW/Unruh — the one thermal input; derived for the free field via
+  `Fock.OneParticleBW.oneParticleBW_complete`), `hFocus` (Raychaudhuri), `hreg`, `conserv` as residual hypotheses —
+  making "P4-MICRO fills the entropy slots; the thermal slot is BW/Route-1" a checkable Lean dependency, not prose.
+  HONEST: temperature stays modular (GR-T1 — do not route `hFlux` through counting); the capacity-tracks-area family
+  (`log N(t)=η A(t)`) and the record-entropy = horizon-`dS` identification are the Gap-2 localization, exposed as
+  such. Optionally instantiate `η` with the Sakharov `1/4` (`SakharovRatio.sakharov_ratio`) so the output coupling is
+  `8πG`. *(the high-value GR increment; do after M-4..M-6)*
 
 Each Lean brick: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.FQBoundMicro` green · `#print axioms` standard 3 ·
 `bash scripts/axiom_budget_check.sh` budget 0 · wire into `QIQTH.lean` + `AxiomAudit.lean` · ONE commit on main with
@@ -225,6 +280,12 @@ AND the `P4_WALL_CAMPAIGN_PLAN.md` checklist (note the P4-MICRO endpoint beside 
   fix), C2 (split/rename postulate into `…Bound` `≤` vs `…Exact` `=`), C3 (regional `Q_R` / type-III cutoff
   caveat). M-1/M-2/M-3 stand as theorems but get relabelled (record-law entropy) and migrated onto the bound form.
   Next: **M-4** (von Neumann max-entropy bound + `area_floor_vonNeumann`).
+- 2026-06-27 — **GR question + chain mapped** (§3.2 review #2 + §3.3 agentic search). Verdict: "P4-MICRO ⟹ GR" is
+  false alone; conditional yes. Two findings refined the roadmap: GR-T2 (static→variational bridge) is already
+  machine-checked (`differential_area_law_of_relEntropy`); and the free-field capstone `qiqt_bekenstein_gives_gr`
+  already exposes P4-MICRO's outputs (`area_floor`, `area_floor_saturates`) as its `hbound`/`hsat` slots, with the
+  entanglement first law filling `hDnn`/`hD0` and `hFlux` (BW/Unruh) the one residual thermal input. M-4 proof path
+  and M-10 wiring now fully scoped against exact theorem names. Next: **M-4** (von Neumann max-entropy bound).
 
 ## 7. Files
 
