@@ -532,10 +532,24 @@ Also ✅ **`cayleyStoneCLM_zero`/`_comp`/`_inner`/`_norm_le`/`_continuous` — c
 (`StoneExp.lean`, axiom-free, budget 0): the reconstructed group satisfies the 5 C₀-group hypotheses (group law,
 U_0=1, inner-preservation via the LinearIsometryEquiv, contraction, strong continuity). **All built green first try.**
 So it's a bona-fide input to the Gårding/stoneGen machinery (density, recovery, iteration).
-**Next (toward X=A_edge, Phase 4.3):** (a) `c·η_N∈C(σV)` (at-1 squeeze) ⟹ bump vectors are core vectors ⟹ formal
-density of `stoneDomain(cayleyStoneCLM)`; (b) **THE RECOVERY** `cayleyStoneCLM U = U` (⟺ `stoneGen U = mult by c`) —
-the e.s.a./Stone-uniqueness wall (`cayleyUnitary U` IS Cayley of `stoneGen U` via resolvent `R=(1−iA)⁻¹`; recovery
-needs C₀-group uniqueness). Once recovered, instantiate translationLp/modUnitary/clockTransl ⟹ X=A_edge; then Phase 5;
+**🧭 STRATEGIC REDIRECT (GPT-5.5-pro, 2026-06-XX):** do NOT make the recovery `cayleyStoneCLM U = U` the bottleneck.
+The real payload toward X=A_edge is the **DIRECT spectral identity for the ORIGINAL group's generator**:
+`stoneGen U (φ(V) z) = (c·φ)(V) z` for φ, c·φ ∈ C(σV) — i.e. `stoneGen U = A_V = mult by c` on the cfc core (recovery
+is then a corollary, not a prerequisite, and the e.s.a. wall is sidestepped). **Route (most pieces already built):**
+(A) `stoneGen U (R x) = −i•(R x − x)` — the resolvent generator formula — **ALREADY DONE** (`resolvent_stoneGen`,
+Garding.lean), as is `Range(A+i)=H` (deficiency-index zero). (B) the resolvent↔Cayley relation `R = h(V)`,
+`h(ω)=(1−ω)/2` (so `V=1−2R`); factor any core φ as `φ = h·ψ` (continuity of `c·φ` ⟺ continuity of `ψ` near the
+excluded point 1), giving `φ(V)z = R·ψ(V)z` (cfc_mul); then (A) + the algebra `c·h = i(1+ω)/2` and `1−R=(1+V)/2` ⟹
+`stoneGen U (φ(V)z) = i((1+V)/2)ψ(V)z = (c·φ)(V)z`. (C) recovery as corollary via a local **C₀-uniqueness lemma**
+(two strongly-continuous unitary groups whose generators agree on a dense invariant subspace are equal — proof:
+`F(s)=W_{t−s}U_s y` has `F'=0`, OR Gronwall on `‖U_t y − W_t y‖²`; NO full e.s.a. needed). **Then CAP Stone** at
+`stoneGen U = A_V`; pivot to Phase 5 via a **NARROW AXIOMATIZED interface** (state the FQ bound CONDITIONALLY under
+`τ(θ_s a)=e^{−s}τ(a)` + `K̃=A_edge/4ℓ_P²`, avoiding the full crossed-product/vN-weights infrastructure explosion —
+Mathlib lacks vN weights, crossed products, modular theory, semifinite traces). Stone is a closeable sprint; Type II
+will EXPAND unless narrowly interfaced.
+**Next (toward X=A_edge, Phase 4.3, redirected):** the direct identity `stoneGen U (φ(V)z)=(c·φ)(V)z` via the
+resolvent factorization above (B); then instantiate translationLp/modUnitary/clockTransl ⟹ X=A_edge; then Phase 5
+via the conditional interface;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
