@@ -839,6 +839,52 @@ theorem cayleyStoneU_group [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
     exact cayleyProdSymbol_cfc_tendsto U hgrp hU0 hUinner hUbd hSC (s + t) x
   exact tendsto_nhds_unique hstep1 hstep2
 
+/-- **`U_{-t}` is a left inverse of `U_t`:** `U_{-t}(U_t x) = x`.  Immediate from the group law
+    (`cayleyStoneU_group` with `s = -t`) and the identity `U_0 = 1` (`cayleyStoneU_zero`), since `(-t) + t = 0`. -/
+theorem cayleyStoneU_neg_left [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (t : ℝ) (x : H) :
+    cayleyStoneU U hgrp hU0 hUinner hUbd hSC (-t)
+      (cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x) = x := by
+  rw [cayleyStoneU_group U hgrp hU0 hUinner hUbd hSC (-t) t x, neg_add_cancel]
+  exact cayleyStoneU_zero U hgrp hU0 hUinner hUbd hSC x
+
+/-- **`U_{-t}` is a right inverse of `U_t`:** `U_t(U_{-t} x) = x` (group law with `s = t`, `(-t)`; `t + (-t) = 0`). -/
+theorem cayleyStoneU_neg_right [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (t : ℝ) (x : H) :
+    cayleyStoneU U hgrp hU0 hUinner hUbd hSC t
+      (cayleyStoneU U hgrp hU0 hUinner hUbd hSC (-t) x) = x := by
+  rw [cayleyStoneU_group U hgrp hU0 hUinner hUbd hSC t (-t) x, add_neg_cancel]
+  exact cayleyStoneU_zero U hgrp hU0 hUinner hUbd hSC x
+
+/-- **`U_t` bundled as a unitary** `H ≃ₗᵢ[ℂ] H`.  The group law upgrades the linear isometry `cayleyStoneLI` to a
+    surjective one: `U_{-t}` is a two-sided inverse (`cayleyStoneU_neg_left`/`cayleyStoneU_neg_right`), so `U_t` is a
+    `LinearIsometryEquiv` — i.e. `U_t ∈ unitary(H)`.  The continuum Stone exponential is now a genuine one-parameter
+    group of unitaries `t ↦ U_t = exp(it A)`, all axiom-free with no PVM and no UV datum; only strong continuity and
+    the generator identification remain for the full Stone correspondence. -/
+noncomputable def cayleyStoneLIE [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (t : ℝ) :
+    H ≃ₗᵢ[ℂ] H where
+  toFun := cayleyStoneU U hgrp hU0 hUinner hUbd hSC t
+  map_add' := cayleyStoneU_add U hgrp hU0 hUinner hUbd hSC t
+  map_smul' := cayleyStoneU_smul U hgrp hU0 hUinner hUbd hSC t
+  invFun := cayleyStoneU U hgrp hU0 hUinner hUbd hSC (-t)
+  left_inv := cayleyStoneU_neg_left U hgrp hU0 hUinner hUbd hSC t
+  right_inv := cayleyStoneU_neg_right U hgrp hU0 hUinner hUbd hSC t
+  norm_map' := cayleyStoneU_isometry U hgrp hU0 hUinner hUbd hSC t
+
+/-- The bundled unitary acts as the strong-limit map: `cayleyStoneLIE U … t x = cayleyStoneU U … t x`. -/
+@[simp] theorem cayleyStoneLIE_apply [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (t : ℝ) (x : H) :
+    cayleyStoneLIE U hgrp hU0 hUinner hUbd hSC t x = cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x := rfl
+
 
 end SelfAdjoint
 

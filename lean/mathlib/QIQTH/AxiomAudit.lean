@@ -5163,6 +5163,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyExpBump_cfc_comp
 #print axioms QIQTH.Spectral.cayleyProdSymbol_cfc_tendsto
 #print axioms QIQTH.Spectral.cayleyStoneU_group
+#print axioms QIQTH.Spectral.cayleyStoneU_neg_left
+#print axioms QIQTH.Spectral.cayleyStoneU_neg_right
+#print axioms QIQTH.Spectral.cayleyStoneLIE
+#print axioms QIQTH.Spectral.cayleyStoneLIE_apply
+-- ★★★★★ P4 WALL — U_t IS A UNITARY H ≃ₗᵢ[ℂ] H: cayleyStoneU_neg_left/right (U_{-t} is a two-sided inverse of U_t,
+-- from cayleyStoneU_group + cayleyStoneU_zero, (-t)+t=0) ⟹ cayleyStoneLIE := the LinearIsometryEquiv bundling U_t as
+-- a genuine unitary (cayleyStoneLIE_apply: acts as cayleyStoneU). The continuum Stone exponential t↦U_t=exp(itA) is
+-- now a one-parameter GROUP OF UNITARIES — no PVM, no UV datum; only strong continuity + generator remain for Stone.
 -- ★★★★★ P4 WALL — THE ONE-PARAMETER GROUP LAW U_s U_t = U_{s+t} (cayleyStoneU_group [Nontrivial H]): the missing
 -- multiplicative structure of the continuum Stone exponential. With A_N:=cfc(g_{s,N})V, y_N:=cfc(g_{t,N})V x, the
 -- composite A_N y_N → U_s(U_t x) [operator-limit: contraction cayleyExpBump_cfc_norm_le + cayleyStoneU_tendsto via

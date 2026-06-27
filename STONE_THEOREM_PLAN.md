@@ -702,7 +702,19 @@ cayleyBump_continuous`). `tendsto_nhds_unique` ⟹ `U_s(U_t x) = U_{s+t}x`. *Bot
 (ii): the degree-4 bound `(η ψ)² ≤ ψ²` needed the explicit hint `0 ≤ (1−η²)ψ²`).*  Combined with `cayleyStoneU_zero`
 (`U_0 = 1`), this gives `U_{−t} U_t = U_0 = 1`, so **each `U_t` is surjective — hence `U_t ∈ unitary(H)`** (the
 isometry `cayleyStoneLI` is now invertible).
-**Then:** strong continuity `t ↦ U_t x`; generator ⟹ Stone.
+
+Also ✅ `cayleyStoneU_neg_left`/`cayleyStoneU_neg_right` + `cayleyStoneLIE` (+ `cayleyStoneLIE_apply`) — **★★★★★ `U_t`
+IS A UNITARY `H ≃ₗᵢ[ℂ] H`** (`StoneExp.lean`, axiom-free, budget 0): the unitarity made concrete. `U_{−t}` is a
+**two-sided inverse** of `U_t` (`cayleyStoneU_neg_left : U_{−t}(U_t x) = x`, `cayleyStoneU_neg_right : U_t(U_{−t}x) =
+x`; each one line — `cayleyStoneU_group` with `s=−t`/`t,−t` then `neg_add_cancel`/`add_neg_cancel` + `cayleyStoneU_zero`).
+These supply the `invFun`/`left_inv`/`right_inv` upgrading the linear isometry `cayleyStoneLI` to a
+**`LinearIsometryEquiv`** `cayleyStoneLIE : H ≃ₗᵢ[ℂ] H` — i.e. `U_t ∈ unitary(H)` (`cayleyStoneLIE_apply` acts as
+`cayleyStoneU`). *Built green first try.* **The continuum Stone exponential `t ↦ U_t = exp(it A)` is now a complete
+one-parameter GROUP OF UNITARIES** — linear, isometric, `U_0=1`, `U_s U_t = U_{s+t}`, invertible — all axiom-free
+with NO PVM and NO UV datum.
+**Then (remaining for full general Stone):** strong continuity `t ↦ U_t x` (route: the **limit Parseval**
+`‖U_t x − U_s x‖² = ∫‖e_t − e_s‖²dμ_x` — pass `N→∞` in `cayley_cfc_sub_norm_sq_integral` with `η_N²→1` DCT — then
+`∫‖e_t − e_s‖²dμ_x → 0` as `t→s` by DCT, `e_r` continuous in `r`, dominated by `4`); then generator ⟹ Stone.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

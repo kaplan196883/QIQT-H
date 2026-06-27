@@ -476,7 +476,13 @@ AND `=cfc(e_{s+t}η_N²)V x` [(b)] → `U_{s+t}x` [(ii): `‖·−cfc(g_{s+t,N})
 `U_s(U_t x)=U_{s+t}x`. **Both built green first try.** With `cayleyStoneU_zero` (`U_0=1`): `U_{−t}U_t=1` ⟹ each `U_t`
 is **surjective ⟹ `U_t ∈ unitary(H)`**. `t↦U_t` is now a one-parameter group of isometries — only strong continuity
 + generator remain for full Stone.
-**Next (toward U_t=exp(itA)):** strong continuity `t↦U_t x`; generator ⟹ Stone;
+Also ✅ **`cayleyStoneU_neg_left`/`_right` + `cayleyStoneLIE` — `U_t` IS A UNITARY `H ≃ₗᵢ[ℂ] H`** (`StoneExp.lean`,
+axiom-free, budget 0): `U_{−t}` is a two-sided inverse (group law + `cayleyStoneU_zero`), bundling `cayleyStoneLI`
+into a `LinearIsometryEquiv` `cayleyStoneLIE` (`cayleyStoneLIE_apply` acts as `cayleyStoneU`). **Built green first
+try.** The continuum `t↦U_t=exp(itA)` is now a complete **one-parameter GROUP OF UNITARIES** (linear, isometric,
+`U_0=1`, `U_s U_t=U_{s+t}`, invertible) — no PVM, no UV datum.
+**Next (toward U_t=exp(itA)):** strong continuity `t↦U_t x` [route: limit Parseval `‖U_t x−U_s x‖²=∫‖e_t−e_s‖²dμ_x`
+via N→∞ DCT, then `→0` as t→s by DCT]; generator ⟹ Stone;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
