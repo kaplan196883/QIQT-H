@@ -47,6 +47,54 @@ def _claim_tex(d, notation):
     return [latex_tree.tex_of_tree(c, notation) for c in latex_tree._conjuncts(body)]
 
 
+def _peel_lambda(node):
+    """A `fun a b … => body` value -> ([binder ident nodes], body node)."""
+    binders = []
+    while isinstance(node, dict) and node.get("kind") in (
+            "Lean.Parser.Term.fun", "Lean.Parser.Term.basicFun"):
+        args = node["args"]
+        if node["kind"] == "Lean.Parser.Term.fun":          # [atom"fun", basicFun]
+            node = args[-1]
+            continue
+        # basicFun: [binders, atom"=>", body]
+        def collect(n):
+            if isinstance(n, dict):
+                if n.get("k") == "ident":
+                    binders.append(n)
+                else:
+                    for a in n.get("args", []):
+                        collect(a)
+        collect(args[0])
+        node = args[-1]
+    return binders, node
+
+
+def _definition_tex(d, notation, max_len=900):
+    """`LHS := body` for a definition with a body. Uses the notation template for the
+    LHS only when its arity matches the binder count (else a plain `name args` LHS, to
+    avoid mis-indexed output like R_{giσ}(ν))."""
+    val = d.get("value")
+    if not val:
+        return None
+    binders, body = _peel_lambda(val)
+    name = d["name"]
+    tmpl = latexify._lookup(name, notation) or latexify._lookup(name.split(".")[-1], notation)
+    argc = max((int(x) for x in re.findall(r"#(\d+)", tmpl)), default=0) if tmpl else 0
+    if binders and argc and len(binders) == argc:
+        head = {"k": "ident", "v": name}
+        lhs = latex_tree.tex_of_tree(
+            {"k": "node", "kind": "Lean.Parser.Term.app",
+             "args": [head, {"k": "node", "kind": "null", "args": binders}]}, notation)
+    else:                                 # plain signature: name b1 … bn
+        parts = [latexify._render_ident(name, notation)]
+        parts += [latex_tree.tex_of_tree(b, notation) for b in binders]
+        lhs = r"\,".join(parts)
+    rhs = latex_tree.tex_of_tree(body, notation)
+    if len(rhs) > max_len:               # huge body -> don't dump it
+        return None
+    return lhs + r" \;:=\; " + rhs
+
+
 def render_browser(decls, notation=None, roles=None, ref="main"):
     notation = {**latexify.DEFAULT_NOTATION, **(notation or {})}
     roles = roles or {}
@@ -66,14 +114,19 @@ def render_browser(decls, notation=None, roles=None, ref="main"):
                 usedby[u].append(d["name"])
 
     def cite(name):
-        if name in label:
-            num, kw = label[name]
-            return f"[{_ABBR[kw]} {num}](#{_slug(name)})"
-        return f"`{name.split('.')[-1]}`"   # outside the closure -> plain
+        # cite by NAME (informative), linked to its numbered entry
+        short = name.split(".")[-1]
+        if name in present:
+            return f"[`{short}`](#{_slug(name)})"
+        return f"`{short}`"                 # outside the closure -> plain
 
-    def cite_list(names):
+    def cite_list(names, cap=None):
         names = [n for n in dict.fromkeys(names) if n in present]
-        return ", ".join(cite(n) for n in sorted(names, key=lambda n: label[n][0]))
+        names.sort(key=lambda n: label[n][0])
+        if cap and len(names) > cap:
+            shown = ", ".join(cite(n) for n in names[:cap])
+            return f"{shown}, and {len(names) - cap} more"
+        return ", ".join(cite(n) for n in names)
 
     out = []
     # table of contents (sections = modules, in reading order)
@@ -99,9 +152,15 @@ def render_browser(decls, notation=None, roles=None, ref="main"):
         out.append(f"**{kw} {num}** (`{short}`).{srctag}")
         out.append("")
         if kw == "Definition":
-            dlist = cite_list(d.get("usesStmt", []))
-            out.append("A definition" + (f", built from {dlist}" if dlist else "")
-                       + " — see source for the body.")
+            body = _definition_tex(d, notation)
+            if body:
+                out.append("$$")
+                out.append(body)
+                out.append("$$")
+            else:
+                dlist = cite_list(d.get("usesStmt", []))
+                out.append("A definition" + (f", built from {dlist}" if dlist else "")
+                           + " — see source for the body.")
         else:
             parts = _claim_tex(d, notation)
             if len(parts) > 1:                 # multi-part conclusion -> stacked displays
@@ -121,9 +180,9 @@ def render_browser(decls, notation=None, roles=None, ref="main"):
                 out.append(f"*Proof.* By {cites}. $\\square$")
             else:
                 out.append(r"*Proof.* Immediate from the definitions. $\square$")
-        ub = cite_list(usedby.get(name, []))
+        ub = cite_list(usedby.get(name, []), cap=8)
         if ub:
             out.append("")
-            out.append(f"<small>Referenced in {ub}.</small>")
+            out.append(f"<small>Used by {ub}.</small>")
         out.append("")
     return "\n".join(out)
