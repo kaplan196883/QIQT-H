@@ -83,6 +83,32 @@ Route 1 (Type II) is **not** superseded: Route 2 = the completed *kinematic* fin
 bound); Route 1 = the open *dynamical/modular* derivation of *why* capacity is holographic (area generator, JLMS,
 type-III resolution). Present them as different logical levels.
 
+## 3.2 GPT-5.5-pro review #2 (2026-06-27) — "does P4-MICRO give GR?" → NO alone; conditional yes
+
+Consulted `gpt-5.5-pro`. Verdict on the GR question: **"P4-MICRO ⟹ GR" is FALSE as written.** The
+machine-checked `jacobson_einstein_from_area_law` (`ClausiusToPernull.lean:181`) takes FIVE labelled physics
+premises; P4-MICRO discharges only `hAreaLaw` (`δS = η δA`). The thermal pair `htemp` (Unruh `T=ℏκ/2π`) +
+`hClausius` (`δQ=TδS`) and the geometric `hQ`,`hRay` are separate. Two tightenings (now binding):
+
+- **GR-T1 — capacity provably CANNOT supply the temperature (decisive countermodel).** Fix `N` + self-adjoint
+  boost `X`; P4-MICRO holds via `dim 𝓗_R = N`, but the saturated state `ρ_sat = I/N` has `β = 0` (infinite
+  temperature) relative to `X`, NOT the Unruh `β = 2π/ℏκ`. A count fixes a max-entropy *number*, not a Gibbs
+  weight. `dE = T dS` is no escape (boost-`E` ⇒ it *is* Clausius; modular-`E` ⇒ `T=1` in modular units, Unruh
+  re-enters only via BW). So `htemp`/`hClausius` are irreducibly modular/KMS = **Route 1's job** — fundamental,
+  not a formalization gap.
+- **GR-T2 — static saturation ≠ the differential area law.** `shannon_eq_area_at_saturation` gives the *static*
+  `S = ηA` at one equilibrium record; `hAreaLaw` is the *variational* `δS = η δA` under matter flux. The static
+  fact implies the differential law only via a **saturated-variational bridge** (smooth family of local-eq horizon
+  records + capacity tracks instantaneous area + the record entropy IS Jacobson's `dS` = the Gap-2 localization).
+  So the honest statement is "P4-MICRO **+ the saturated-variational bridge** ⟹ `hAreaLaw`", not flatly "supplies
+  `hAreaLaw`". Also flag the discrete-`N` vs smooth-`dA` subtlety (real-capacity model / large-area limit).
+
+Honest paper sentence (GPT-5.5-pro): *"QIQT-H's finite holographic capacity postulate supplies the saturated local
+horizon entropy–area variation `dS = dA/(4ℓ_P²)`; combined with independently established Unruh/KMS–Clausius
+thermality and standard boost-flux/Raychaudhuri geometry, the Lean-checked Jacobson theorem yields the Einstein
+field equations `G_{μν}+Λg_{μν}=8πG T_{μν}`."*  Scope the free-field claim as "only Gap-2 remains **on the
+thermal/BW side**" — not "only Gap-2 remains" for the whole chain (`hQ`,`hRay`,regularity,conservation persist).
+
 ## 4. Lean design — `QIQTH/FQBoundMicro.lean` (new)
 
 Mirrors the `Phase5Master`/`DonaldSystem` typeclass-interface pattern: P4-MICRO is a **named typeclass**, P4's
@@ -162,6 +188,13 @@ via the trace, P4-MICRO supplies it via finite capacity.
 - [ ] **M-9 paper hook** — the GPT-5.5-pro one-paragraph framing (§3.1 verbatim-adapted): regional capacity `N_R`,
   holographic content `log N_R ≤ A/4ℓ_P²` (equality only in the ideal saturating sector), Sakharov `1/4`, finite-dim
   max-entropy ⇒ P4; Route 1 retained to *derive* the capacity law. *(doc-only)*
+- [ ] **M-10 (GR bridge) `jacobson_einstein_from_p4micro_area_law`** — wire P4-MICRO-exact into the `hAreaLaw` slot
+  of `jacobson_einstein_from_area_law`, via an EXPLICIT named **saturated-variational bridge** lemma `hSatVar`
+  (static `S=ηA` + local-eq tracking ⟹ `δS=η δA`; GR-T2). Resulting theorem keeps EXACTLY `htemp, hClausius, hQ,
+  hRay`, geometry/conservation as remaining hypotheses — making "P4-MICRO closes 1 of 5, the thermal 2 are Route 1 /
+  BW" a checkable Lean dependency, not prose. HONEST: temperature stays modular (do NOT route `htemp` through
+  counting — GR-T1); type-separate the record entropy from Jacobson's `dS` (the Gap-2 localization, exposed as
+  such). *(the high-value GR increment; do after M-4..M-6)*
 
 Each Lean brick: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.FQBoundMicro` green · `#print axioms` standard 3 ·
 `bash scripts/axiom_budget_check.sh` budget 0 · wire into `QIQTH.lean` + `AxiomAudit.lean` · ONE commit on main with
