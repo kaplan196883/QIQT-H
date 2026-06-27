@@ -1262,6 +1262,106 @@ theorem cayleyExp_sub_one_norm_le {ω : ℂ} (h1 : ‖ω‖ = 1) (hne : ω ≠ 1
       ≤ ‖t * (cayleyInv ω).re‖ := Real.norm_exp_I_mul_ofReal_sub_one_le
     _ = |t| * ‖cayleyInv ω‖ := by rw [Real.norm_eq_abs, abs_mul, hnorm]
 
+/-- **The inverse-Cayley map is Borel measurable** (`c(ω) = i(1+ω)/(1−ω)`: continuous operations + a complex
+    division).  Supplies the measurability of the generator's difference-quotient integrand, where `c` appears
+    standalone (not protected by `φ`). -/
+theorem cayleyInv_measurable : Measurable cayleyInv := by
+  unfold cayleyInv
+  exact (measurable_const.mul (measurable_const.add measurable_id)).div
+    (measurable_const.sub measurable_id)
+
+/-- **★★★★★ The scalar generator dominated-convergence pass** (the analytic heart of the generator):
+    `∫ ‖((e_τ − 1)/τ − i·c)·φ‖² dμ_z → 0` as `τ → 0` (`τ ≠ 0`), for `φ` and `c·φ` continuous on `σ(V)`.  This is the
+    squared `L²(μ_z)`-norm of the difference between the symbol difference quotient `(e_τ·φ − φ)/τ` and its formal
+    limit `i·c·φ`, and it vanishes by dominated convergence on the countably-generated filter `𝓝[≠] 0`: the integrand
+    `→ 0` `μ_z`-a.e. (`cayleyExp_slope_tendsto`: `(e_τ − 1)/τ → i·c`), and is dominated by `4‖c·φ‖²` (integrable,
+    since `c·φ ∈ C(σV)` is bounded on the compact `σ(V)`) because `‖(e_τ − 1)/τ‖ ≤ ‖c‖` on `σ(V) ⊆ S¹`
+    (`cayleyExp_sub_one_norm_le`).  Combined with Parseval (`‖cfc(s_τ) V z‖² = ∫‖s_τ‖²dμ_z`) and the cfc-algebra, this
+    yields `HasDerivAt (t ↦ U_t(cfc φ V z)) (i·cfc(c·φ) V z) 0` — the generator on the cfc core.  Axiom-free. -/
+theorem cayleyExp_gen_integrand_tendsto [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (φ : ℂ → ℂ)
+    (hφ : ContinuousOn φ (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (hcφ : ContinuousOn (fun ω => cayleyInv ω * φ ω)
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))) (z : H) :
+    Filter.Tendsto (fun τ : ℝ => ∫ ω, ‖((cayleyExp τ (ω : ℂ) - 1) / (τ : ℂ)
+        - Complex.I * cayleyInv (ω : ℂ)) * φ (ω : ℂ)‖ ^ 2
+      ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC z))
+      (nhdsWithin (0 : ℝ) {(0 : ℝ)}ᶜ) (nhds 0) := by
+  haveI : IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC z) :=
+    cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC z
+  have hnull : ∀ᵐ (ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))
+      ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC z), (ω : ℂ) ≠ 1 := by
+    rw [ae_iff]; simp only [not_ne_iff]
+    exact cayleyScalarMeasure_atom_eq_zero U hgrp hU0 hUinner hUbd hSC z
+  have hφm : Measurable (fun ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+      => φ (ω : ℂ)) :=
+    (hφ.comp_continuous continuous_subtype_val (fun ω => ω.2)).measurable
+  suffices hconv : Filter.Tendsto (fun τ : ℝ => ∫ ω, ‖((cayleyExp τ (ω : ℂ) - 1) / (τ : ℂ)
+        - Complex.I * cayleyInv (ω : ℂ)) * φ (ω : ℂ)‖ ^ 2
+      ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC z))
+      (nhdsWithin (0 : ℝ) {(0 : ℝ)}ᶜ)
+      (nhds (∫ _ω, (0 : ℝ) ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC z))) by
+    rwa [integral_zero] at hconv
+  refine tendsto_integral_filter_of_dominated_convergence
+    (F := fun (τ : ℝ) (ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) =>
+      ‖((cayleyExp τ (ω : ℂ) - 1) / (τ : ℂ) - Complex.I * cayleyInv (ω : ℂ)) * φ (ω : ℂ)‖ ^ 2)
+    (f := fun _ => (0 : ℝ)) (bound := fun ω => 4 * ‖cayleyInv (ω : ℂ) * φ (ω : ℂ)‖ ^ 2) ?_ ?_ ?_ ?_
+  · -- AEStronglyMeasurable of each integrand
+    filter_upwards with τ
+    refine Measurable.aestronglyMeasurable ?_
+    have hem : Measurable (fun ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+        => cayleyExp τ (ω : ℂ)) := (cayleyExp_measurable τ).comp measurable_subtype_coe
+    have hcm : Measurable (fun ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+        => cayleyInv (ω : ℂ)) := cayleyInv_measurable.comp measurable_subtype_coe
+    exact ((((hem.sub measurable_const).div measurable_const).sub
+      (measurable_const.mul hcm)).mul hφm).norm.pow_const 2
+  · -- domination
+    filter_upwards [self_mem_nhdsWithin] with τ hτ
+    filter_upwards [hnull] with ω hω
+    have hτ0 : τ ≠ 0 := hτ
+    have hcirc : ‖(ω : ℂ)‖ = 1 := by
+      have hmem := cayley_spectrum_subset_circle U hgrp hU0 hUinner hUbd hSC ω.2
+      rwa [mem_sphere_zero_iff_norm] at hmem
+    rw [Real.norm_of_nonneg (sq_nonneg _), norm_mul, mul_pow]
+    have hb : ‖(cayleyExp τ (ω : ℂ) - 1) / (τ : ℂ) - Complex.I * cayleyInv (ω : ℂ)‖
+        ≤ 2 * ‖cayleyInv (ω : ℂ)‖ := by
+      calc ‖(cayleyExp τ (ω : ℂ) - 1) / (τ : ℂ) - Complex.I * cayleyInv (ω : ℂ)‖
+          ≤ ‖(cayleyExp τ (ω : ℂ) - 1) / (τ : ℂ)‖ + ‖Complex.I * cayleyInv (ω : ℂ)‖ := norm_sub_le _ _
+        _ ≤ ‖cayleyInv (ω : ℂ)‖ + ‖cayleyInv (ω : ℂ)‖ := by
+            gcongr
+            · rw [norm_div, Complex.norm_real, Real.norm_eq_abs, div_le_iff₀ (abs_pos.mpr hτ0), mul_comm]
+              exact cayleyExp_sub_one_norm_le hcirc hω τ
+            · rw [norm_mul, Complex.norm_I, one_mul]
+        _ = 2 * ‖cayleyInv (ω : ℂ)‖ := by ring
+    have hd := norm_nonneg ((cayleyExp τ (ω : ℂ) - 1) / (τ : ℂ) - Complex.I * cayleyInv (ω : ℂ))
+    have hsq : ‖(cayleyExp τ (ω : ℂ) - 1) / (τ : ℂ) - Complex.I * cayleyInv (ω : ℂ)‖ ^ 2
+        ≤ 4 * ‖cayleyInv (ω : ℂ)‖ ^ 2 := by nlinarith [hb, hd, norm_nonneg (cayleyInv (ω : ℂ))]
+    have hcφnorm : ‖cayleyInv (ω : ℂ) * φ (ω : ℂ)‖ ^ 2
+        = ‖cayleyInv (ω : ℂ)‖ ^ 2 * ‖φ (ω : ℂ)‖ ^ 2 := by rw [norm_mul, mul_pow]
+    rw [hcφnorm]
+    nlinarith [hsq, sq_nonneg ‖φ (ω : ℂ)‖, norm_nonneg (cayleyInv (ω : ℂ))]
+  · -- bound integrable: `4‖c·φ‖²` is continuous on the compact `σ(V)`, hence bounded, hence integrable
+    obtain ⟨M, hM⟩ := (cayley_spectrum_isCompact U hgrp hU0 hUinner hUbd hSC).exists_bound_of_continuousOn hcφ
+    have hcont : Continuous (fun ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+        => cayleyInv (ω : ℂ) * φ (ω : ℂ)) :=
+      hcφ.comp_continuous continuous_subtype_val (fun ω => ω.2)
+    refine (integrable_const (4 * M ^ 2)).mono' ?_ ?_
+    · exact (continuous_const.mul (hcont.norm.pow 2)).aestronglyMeasurable
+    · filter_upwards with ω
+      rw [Real.norm_of_nonneg (by positivity)]
+      nlinarith [hM (ω : ℂ) ω.2, norm_nonneg (cayleyInv (ω : ℂ) * φ (ω : ℂ))]
+  · -- pointwise limit a.e.
+    filter_upwards with ω
+    have hsl := cayleyExp_slope_tendsto (ω : ℂ)
+    have h0 : Filter.Tendsto (fun τ : ℝ => (cayleyExp τ (ω : ℂ) - 1) / (τ : ℂ)
+        - Complex.I * cayleyInv (ω : ℂ)) (nhdsWithin (0 : ℝ) {(0 : ℝ)}ᶜ) (nhds 0) := by
+      have := hsl.sub_const (Complex.I * cayleyInv (ω : ℂ))
+      simpa using this
+    have h1 := ((h0.mul_const (φ (ω : ℂ))).norm).pow 2
+    simpa using h1
+
 
 end SelfAdjoint
 

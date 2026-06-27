@@ -781,14 +781,24 @@ there (`cayleyInv_im_eq_zero`), so `e_t(ω) = exp(i·↑(t·c.re))` and `‖exp(
 (`Real.norm_exp_I_mul_ofReal_sub_one_le`) — hence `‖(e_t − 1)/t‖ ≤ ‖c‖`, the **uniform dominating function**.
 *Both built green (2 fixes: `Complex.norm_real` gives the real norm so chain `Real.norm_eq_abs`; the lemma is
 `Real.norm_exp_I_mul_ofReal_sub_one_le`, in `namespace Real`).*
-**Remaining wall (Phase 3.2) — now reduced to ONE assembly:** the generator on the cfc core
-`HasDerivAt (fun t => U_t(cfc φ V z)) (i•cfc(c·φ) V z) 0` (for φ with `c·φ ∈ C(σV)`), via the **scalar DCT** (not
-operator-norm Banach calculus): `slope_0 (t) = t⁻¹•(cfc(e_t φ)Vz − cfc φ Vz) = cfc((e_t−1)/t·φ)Vz` (cfc_sub/_smul),
-so `‖slope_0(t) − i•cfc(cφ)Vz‖² = ∫|((e_t−1)/t − ic)·φ|²dμ_z → 0` by `tendsto_integral_filter_of_dominated_-
-convergence` on `𝓝[≠]0` — integrand `→ 0` pointwise by (a), dominated by `4|cφ|²` (integrable since `cφ ∈ C(σV)`
-bounded) via (b) (`|(e_t−1)/t| ≤ ‖c‖`). Then `stoneGen_eq_of_hasDerivAt` reads off `stoneGen(cayleyStoneCLM) (cfc φ V z)
-= cfc(cφ)Vz` — the generator is multiplication by the spectral value `c`. The two scalar inputs are now in hand; the
-remaining content is the cfc-algebra bookkeeping + the punctured-filter DCT assembly + Gårding-core packaging.
+Also ✅ `cayleyInv_measurable` + `cayleyExp_gen_integrand_tendsto` — **★★★★★ THE SCALAR GENERATOR DCT (the analytic
+heart of the generator)** (`StoneExp.lean`, axiom-free, budget 0): `∫‖((e_τ−1)/τ − i·c)·φ‖²dμ_z → 0` as `τ → 0`
+(`τ ≠ 0`), for `φ`, `c·φ` ContinuousOn `σ(V)`. This is the squared `L²(μ_z)`-norm of the gap between the symbol
+difference quotient `(e_τ·φ−φ)/τ` and its formal limit `i·c·φ`. By **dominated convergence on `𝓝[≠]0`**
+(`tendsto_integral_filter_of_dominated_convergence`, F/f/bound pinned to dodge HO-unification): the integrand `→ 0`
+`μ_z`-a.e. (input (a) `cayleyExp_slope_tendsto`), dominated by `4‖c·φ‖²` (integrable — `c·φ ∈ C(σV)` bounded on the
+compact `σ(V)`) because `‖(e_τ−1)/τ‖ ≤ ‖c‖` on `σ(V) ⊆ S¹` (input (b) `cayleyExp_sub_one_norm_le`).
+`cayleyInv_measurable` (the inverse-Cayley map is Borel) supplies the standalone-`c` measurability in the integrand.
+*Built green (4 fixes: pin `F`/`f` in the DCT vs HO-unification; `suffices … nhds (∫0)` then `integral_zero` so the
+`rw` doesn't hit the filter's base `0`; `Real.norm_eq_abs` after `Complex.norm_real`; `sq_nonneg ‖φ‖` not `sq_nonneg φ`
+since `ℂ` is unordered).*
+**Remaining wall (Phase 3.2) — now ONE operator-side step:** wrap this scalar DCT into the generator
+`HasDerivAt (t ↦ U_t(cfc φ V z)) (i•cfc(c·φ) V z) 0`. With `cayleyStoneU_cfc` (`U_t(cfc φ Vz) = cfc(e_t φ)Vz`),
+`hasDerivAt_iff_tendsto_slope`, and Parseval (`‖cfc(s_τ)Vz‖² = ∫‖s_τ‖²dμ_z`), the slope-minus-limit vector is
+`cfc(s_τ)Vz` with `s_τ = ((e_τ−1)/τ − ic)·φ` (cfc_sub/_smul, real↔ℂ smul via `algebraMap_smul`), so its norm² is
+exactly `cayleyExp_gen_integrand_tendsto`'s integral `→ 0`. Then `stoneGen_eq_of_hasDerivAt` (Stone.lean) reads off
+`stoneGen(cayleyStoneCLM) (cfc φ V z) = cfc(c·φ)Vz` — generator = multiplication by the spectral value `c`. The
+analytic content is fully discharged; only the cfc-algebra/smul bookkeeping + Gårding-core packaging remain.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

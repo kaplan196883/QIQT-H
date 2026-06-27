@@ -509,10 +509,14 @@ axiom-free, budget 0): (a) `(e_t(ω)−1)/t → i·c(ω)` (pointwise limit, from
 `hasDerivAt_iff_tendsto_slope`); (b) `‖e_t(ω)−1‖ ≤ |t|·‖c(ω)‖` on σ(V) (c real there, `‖exp(iθ)−1‖≤|θ|`) ⟹
 `‖(e_t−1)/t‖≤‖c‖`, the t-independent domination. **Both built green.** Exactly the pointwise limit + domination the
 generator DCT consumes.
-**Next (the converse — toward X=A_edge):** assemble the **generator** on the cfc core
-`HasDerivAt(t↦U_t(cfc φ V z)) (i•cfc(c·φ)V z) 0` via the scalar DCT [`‖slope−i•cfc(cφ)Vz‖²=∫|((e_t−1)/t−ic)φ|²→0`,
-inputs (a)+(b), dominated by `4|cφ|²`] + `stoneGen_eq_of_hasDerivAt` ⟹ generator = mult by `c`; then e.s.a./Gårding-core
-(Phase 3.2); then X=A_edge → Phase 5;
+Also ✅ **`cayleyExp_gen_integrand_tendsto` (+`cayleyInv_measurable`) — THE SCALAR GENERATOR DCT** (`StoneExp.lean`,
+axiom-free, budget 0): `∫‖((e_τ−1)/τ−i·c)·φ‖²dμ_z → 0` as τ→0 — the squared L²-gap between the difference quotient
+and `i·c·φ`, by DCT on `𝓝[≠]0` (integrand→0 a.e. via input (a), dominated by `4‖c·φ‖²` via input (b)). **Built green.**
+The analytic heart of the generator.
+**Next (the converse — toward X=A_edge):** ONE operator-side wrap: `HasDerivAt(t↦U_t(cfc φ V z)) (i•cfc(c·φ)V z) 0`
+via `cayleyStoneU_cfc` + `hasDerivAt_iff_tendsto_slope` + Parseval — the slope-minus-limit vector is `cfc(s_τ)Vz`,
+`s_τ=((e_τ−1)/τ−ic)·φ`, whose norm² IS the scalar DCT's integral →0; then `stoneGen_eq_of_hasDerivAt` ⟹ generator =
+mult by `c` (cfc-algebra/smul bookkeeping + Gårding-core remain); then X=A_edge → Phase 5;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

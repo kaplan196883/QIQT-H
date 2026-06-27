@@ -5176,6 +5176,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyExp_hasDerivAt
 #print axioms QIQTH.Spectral.cayleyExp_slope_tendsto
 #print axioms QIQTH.Spectral.cayleyExp_sub_one_norm_le
+#print axioms QIQTH.Spectral.cayleyInv_measurable
+#print axioms QIQTH.Spectral.cayleyExp_gen_integrand_tendsto
+-- ★★★★★ P4 WALL — THE SCALAR GENERATOR DCT (the analytic heart of the generator): cayleyExp_gen_integrand_tendsto
+-- [Nontrivial H] — ∫‖((e_τ−1)/τ − i·c)·φ‖²dμ_z → 0 as τ→0 (τ≠0), for φ, c·φ ContinuousOn σ(V). The squared L²-norm of
+-- the gap between the symbol difference quotient (e_τ·φ−φ)/τ and its formal limit i·c·φ, → 0 by dominated convergence
+-- on 𝓝[≠]0 (tendsto_integral_filter_of_dominated_convergence): integrand → 0 a.e. (cayleyExp_slope_tendsto),
+-- dominated by 4‖c·φ‖² (integrable, c·φ∈C(σV) bounded) via ‖(e_τ−1)/τ‖≤‖c‖ (cayleyExp_sub_one_norm_le). With Parseval
+-- + the cfc-algebra this gives HasDerivAt(t↦U_t(cfc φ V z)) (i·cfc(c·φ)V z) 0 = the generator on the cfc core. Axiom-free.
 -- ★★★★ P4 WALL — THE TWO GENERATOR-DCT INPUTS: cayleyExp_slope_tendsto — (e_t(ω)−1)/t → i·c(ω) as t→0
 -- (the pointwise difference-quotient convergence, from cayleyExp_hasDerivAt_zero via hasDerivAt_iff_tendsto_slope);
 -- cayleyExp_sub_one_norm_le — ‖e_t(ω)−1‖ ≤ |t|·‖c(ω)‖ on σ(V)⊆S¹ (c real there by cayleyInv_im_eq_zero, so
