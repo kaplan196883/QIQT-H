@@ -6310,5 +6310,15 @@ namespace QIQTH.AxiomAudit
 -- saturation shannon_uniform_eq_log_card rewritten through the P4-MICRO capacity equation. So P4-MICRO delivers
 -- both the bound (area_floor_of_microstate) AND its saturation. Area coefficient = carried UV datum, never
 -- assigned. Axiom-free (standard 3).
+#print axioms QIQTH.vonNeumannEntropy_le_log_card
+#print axioms QIQTH.area_floor_vonNeumann
+-- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-4, the GPT-5.5-pro C1 fix): the HONEST von Neumann form.
+-- vonNeumannEntropy_le_log_card [IsDensity ρ] — S_vN(ρ) ≤ Real.log (Fintype.card n): the genuine max-entropy bound
+-- S_vN = ∑ negMulLog(eigenvalues) (Shannon of the SPECTRUM — eigenvalues are a prob vector) fed into the axiom-free
+-- shannon_le_log_card. NOT the record-law Shannon entropy of area_floor_of_microstate (dephasing only raises
+-- entropy: S_vN ≤ H(record) one-way; a pure superposition has H=log d but S_vN=0). area_floor_vonNeumann
+-- [MicrostatePostulate n areaTerm] — S_vN(ρ) ≤ areaTerm: P4 for the genuine regional von Neumann entropy, via the
+-- capacity equation. The correct object for P4. Area coefficient = carried UV datum; typeclass hypothesis, not a
+-- Lean axiom. Axiom-free (standard 3).
 
 end QIQTH.AxiomAudit

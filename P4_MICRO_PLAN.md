@@ -222,7 +222,9 @@ via the trace, P4-MICRO supplies it via finite capacity.
   trace→`∑ eigenvalues = 1`); if absent, add the 2 short lemmas. Then `area_floor_vonNeumann
   [HolographicCapacityBound] : S_vN(ρ) ≤ areaTerm`. This is the HONEST P4 (von Neumann, not record-law Shannon).
   Keep the landed Shannon theorems, relabelled as the decohered/record-entropy bound with `S_vN ≤ H(record)`.
-  *(highest value — the real fix; proof path now fully scoped)*
+  *(highest value — the real fix; proof path now fully scoped)* — ✅ **LANDED 2026-06-27**:
+  `vonNeumannEntropy_le_log_card` + `area_floor_vonNeumann` in `FQBoundMicro.lean` (used the existing `=`-form
+  `MicrostatePostulate`; M-5 splits the `≤`-form). Green, `#print axioms` standard 3, budget 0.
 - [ ] **M-5 (C2) split + rename the postulate** — `HolographicCapacityBound` (`log dim ≤ areaTerm`, for the floor)
   vs `HolographicCapacityExact` (`= areaTerm`, for saturation only). Migrate M-1/M-2/M-3 onto the bound form; keep
   exact only where equality is genuinely used (`area_floor_saturates`).
@@ -286,6 +288,12 @@ AND the `P4_WALL_CAMPAIGN_PLAN.md` checklist (note the P4-MICRO endpoint beside 
   already exposes P4-MICRO's outputs (`area_floor`, `area_floor_saturates`) as its `hbound`/`hsat` slots, with the
   entanglement first law filling `hDnn`/`hD0` and `hFlux` (BW/Unruh) the one residual thermal input. M-4 proof path
   and M-10 wiring now fully scoped against exact theorem names. Next: **M-4** (von Neumann max-entropy bound).
+- 2026-06-27 — **M-4 LANDED (the C1 fix).** `FQBoundMicro.lean`: `vonNeumannEntropy_le_log_card`
+  (`[IsDensity ρ] → S_vN(ρ) ≤ log (card n)`, via `shannon_le_log_card` on the eigenvalue prob-vector +
+  `shannon_eq_sum_negMulLog`) and `area_floor_vonNeumann` (`[MicrostatePostulate n areaTerm] → S_vN(ρ) ≤ areaTerm`).
+  P4 is now stated for the genuine regional VON NEUMANN entropy, not the record-law Shannon entropy. Added
+  `import QIQTH.QuantumRelativeEntropy`; green, `#print axioms` standard 3, budget 0, full `QIQTH` green; wired into
+  `AxiomAudit.lean`. Next: **M-5** (split/rename `HolographicCapacityBound` `≤` vs `…Exact` `=`).
 
 ## 7. Files
 

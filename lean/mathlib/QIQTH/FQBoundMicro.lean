@@ -28,6 +28,7 @@ input `log|𝓗_R| ∝ A` is assumed here and stays the labelled open frontier (
 `1/4` *ratio* is derived elsewhere (`SakharovRatio`); it is not re-asserted here.  Free scalar only; no `sorry`.
 -/
 import QIQTH.RecordContract
+import QIQTH.QuantumRelativeEntropy
 
 namespace QIQTH
 
@@ -84,5 +85,40 @@ theorem area_floor_saturates {R : Type*} [Fintype R] [Nonempty R] {areaTerm : �
     [h : MicrostatePostulate R areaTerm] :
     QIQTH.BranchLedger.Shannon Finset.univ (fun _ : R => (Fintype.card R : ℝ)⁻¹) = areaTerm := by
   rw [QIQTH.RecordContract.shannon_uniform_eq_log_card, h.capacity]
+
+/-! ### The HONEST von Neumann form (GPT-5.5-pro C1 fix)
+
+The bounds above are stated for the SHANNON entropy of a Born record law `p` over the microstates — the
+*decohered / record* entropy.  P4 proper is about the VON NEUMANN entropy `S_vN(ρ_R)` of a regional density
+matrix; routing it through a record law is honest only because `S_vN(ρ) = H(spectrum of ρ)`, i.e. Shannon applied
+to the *eigenvalues* (dephasing only raises entropy, so `S_vN ≤ H(record)` one-way — a pure superposition has
+`H = log d` but `S_vN = 0`).  The lemmas below state the genuine von Neumann max-entropy bound directly. -/
+
+/-- **The honest von Neumann max-entropy bound** `S_vN(ρ) ≤ log dim 𝓗_R`.  For a finite-dimensional density
+    matrix `ρ` (`IsDensity`: positive semidefinite, unit trace), the von Neumann entropy is at most the log of the
+    Hilbert-space dimension.  This is `S_vN = ∑ negMulLog(λ_i)` (Shannon of the *spectrum* — the eigenvalues form a
+    probability vector by `eigenvalues_nonneg` + `sum_eigenvalues`) fed into the axiom-free Jensen/Gibbs bound
+    `shannon_le_log_card`.  This is the correct object for P4 — von Neumann entropy, not the record-law Shannon
+    entropy of `area_floor_of_microstate`. Axiom-free. -/
+theorem vonNeumannEntropy_le_log_card {n : Type*} [Fintype n] [DecidableEq n] {ρ : Matrix n n ℂ}
+    (h : QIQTH.QuantumEntropy.IsDensity ρ) :
+    QIQTH.QuantumEntropy.vonNeumannEntropy h ≤ Real.log (Fintype.card n) := by
+  have key := QIQTH.RecordContract.shannon_le_log_card h.eigenvalues h.eigenvalues_nonneg h.sum_eigenvalues
+  rw [QIQTH.RecordContract.shannon_eq_sum_negMulLog] at key
+  simpa only [QIQTH.QuantumEntropy.vonNeumannEntropy] using key
+
+/-- **★★★ P4's holographic area floor for the VON NEUMANN entropy** (the honest C1 form).  Under the
+    finite-microstate postulate `MicrostatePostulate n areaTerm` (`log dim 𝓗_R = areaTerm = A/4ℓ_P²`), the von
+    Neumann entropy of any regional density matrix obeys `S_vN(ρ) ≤ areaTerm`.  This is P4 stated for the genuine
+    regional entropy `S_vN(ρ_R)`, not the record-law Shannon entropy — `vonNeumannEntropy_le_log_card` rewritten
+    through the capacity equation.  (The `=`-form `MicrostatePostulate` suffices since `=` implies `≤`; M-5 will
+    split out the weaker `≤`-form `HolographicCapacityBound`.)  Axiom-free; the area coefficient is the carried UV
+    datum, never assigned; the postulate is a typeclass hypothesis, not a Lean axiom. -/
+theorem area_floor_vonNeumann {n : Type*} [Fintype n] [DecidableEq n] {areaTerm : ℝ}
+    [hcap : MicrostatePostulate n areaTerm] {ρ : Matrix n n ℂ}
+    (h : QIQTH.QuantumEntropy.IsDensity ρ) :
+    QIQTH.QuantumEntropy.vonNeumannEntropy h ≤ areaTerm := by
+  rw [← hcap.capacity]
+  exact vonNeumannEntropy_le_log_card h
 
 end QIQTH
