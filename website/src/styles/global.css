@@ -170,7 +170,12 @@ code,.mono{font-family:"SFMono-Regular",ui-monospace,"Cascadia Code",Consolas,mo
 pre{background:#1b1d22;color:#e6e2d8;padding:16px 18px;border-radius:10px;overflow:auto;font-size:.86rem}
 pre code{background:none;color:inherit;padding:0}
 /* KaTeX display blocks shouldn't overflow narrow screens */
-.katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0}
+.katex-display{overflow-x:auto;overflow-y:hidden;overflow-wrap:normal;max-width:100%;padding:2px 0}
+/* the MathML annotation is for screen readers only — keep it accessible but remove it
+   from layout so wide formulas don't push the page width */
+.katex .katex-mathml{position:absolute;clip:rect(1px,1px,1px,1px);width:1px;height:1px;overflow:hidden;padding:0;border:0}
+/* per-formula scrollbars live inside .katex-display; clip any residual page overflow */
+html{overflow-x:hidden}
 
 /* ---- footer ---- */
 .foot{padding:40px 0;color:var(--muted);font-size:.9rem}

@@ -23,75 +23,107 @@ def _source_url(module, line, ref="main"):
     return f"{REPO_URL}/blob/{ref}/{path}{anchor}"
 
 
-def _statement(d, notation):
-    """Conclusion (for theorems) or full signature (for defs) as a LaTeX string."""
-    ty = d.get("type")
-    if d["kind"] in ("thm", "axiom", "opaque"):
-        _, body = latex_tree._claim(ty, notation)
-        return latex_tree.tex_of_tree(body, notation)
-    return latex_tree.tex_of_tree(ty, notation)
+def _modslug(module):
+    return "sec-" + re.sub(r"[^A-Za-z0-9]+", "-", module).strip("-").lower()
+
+
+def _kindword(d, roles):
+    """Book environment for a declaration."""
+    if roles.get(d["name"]):
+        return "Theorem"              # the tracked headline results
+    if d["kind"] == "def":
+        return "Definition"
+    if d["kind"] == "axiom":
+        return "Axiom"
+    return "Lemma"
+
+
+_ABBR = {"Theorem": "Thm", "Definition": "Def", "Lemma": "Lem", "Axiom": "Ax"}
+
+
+def _claim_tex(d, notation):
+    """A theorem's conclusion as one or more LaTeX strings (∧ split into parts)."""
+    _, body = latex_tree._claim(d.get("type"), notation)
+    return [latex_tree.tex_of_tree(c, notation) for c in latex_tree._conjuncts(body)]
 
 
 def render_browser(decls, notation=None, roles=None, ref="main"):
     notation = {**latexify.DEFAULT_NOTATION, **(notation or {})}
     roles = roles or {}
     present = {d["name"]: d for d in decls}
-    # in-formula hyperlinks: every named declaration links to its entry's anchor
-    latex_tree._LINKS = {n: f"#{_slug(n)}" for n in present}
-    # "used by" backlinks (a theorem is used in the proof/statement of ...)
+    latex_tree._LINKS = {n: f"#{_slug(n)}" for n in present}    # in-formula links
+
+    # reading order: by module, then by source line — and number the whole book.
+    order = sorted(decls, key=lambda d: (d.get("module", ""), d.get("line") or 0))
+    label = {}                          # name -> (number, kindword)
+    for i, d in enumerate(order, 1):
+        label[d["name"]] = (i, _kindword(d, roles))
+
     usedby = {n: [] for n in present}
     for d in decls:
         for u in d.get("usesStmt", []) + d.get("usesProof", []):
             if u in usedby:
                 usedby[u].append(d["name"])
 
-    def link(name):
-        short = name.split(".")[-1]
-        if name in present:
-            return f"[`{short}`](#{_slug(name)})"
-        return f"`{short}`"
+    def cite(name):
+        if name in label:
+            num, kw = label[name]
+            return f"[{_ABBR[kw]} {num}](#{_slug(name)})"
+        return f"`{name.split('.')[-1]}`"   # outside the closure -> plain
 
-    def link_row(label, names):
-        names = [n for n in names if n in present]
-        if not names:
-            return None
-        return f"**{label}** " + " ".join(link(n) for n in sorted(set(names)))
+    def cite_list(names):
+        names = [n for n in dict.fromkeys(names) if n in present]
+        return ", ".join(cite(n) for n in sorted(names, key=lambda n: label[n][0]))
 
     out = []
-    by_mod = {}
-    for d in decls:
-        by_mod.setdefault(d.get("module", "?"), []).append(d)
-    out.append("## Index\n")
-    for mod in sorted(by_mod):
-        names = ", ".join(link(d["name"]) for d in
-                          sorted(by_mod[mod], key=lambda d: d["name"]))
-        out.append(f"- **{mod.split('.')[-1] or mod}** &nbsp; {names}")
-    out.append("\n## Declarations\n")
-    order = sorted(decls, key=lambda d: (d["kind"] != "thm", d["name"]))
+    # table of contents (sections = modules, in reading order)
+    mods = list(dict.fromkeys(d.get("module", "?") for d in order))
+    out.append("## Contents\n")
+    for m in mods:
+        out.append(f"- [{m}](#{_modslug(m)})")
+    out.append("")
+
+    cur = None
     for d in order:
-        name = d["name"]
-        short = name.split(".")[-1]
-        out.append(f'<a id="{_slug(name)}"></a>')
-        role = roles.get(name)
-        src = _source_url(d.get("module"), d.get("line"), ref)
-        meta = f"*{d['kind']}*" + (f" · *{role}*" if role else "")
-        if src:
-            meta += f" · [{d.get('module','').split('.')[-1]}:{d.get('line','')} ↗]({src})"
-        out.append(f"### `{short}`")
-        out.append("")
-        out.append(meta + "  ")
-        out.append("")
-        if d["kind"] in ("thm", "axiom", "opaque"):
-            out.append("$$")           # delimiters on their own lines -> display block
-            out.append(_statement(d, notation))
-            out.append("$$")
+        name, short = d["name"], d["name"].split(".")[-1]
+        mod = d.get("module", "?")
+        if mod != cur:
+            cur = mod
+            out.append(f'<a id="{_modslug(mod)}"></a>')
+            out.append(f"## {mod}")
             out.append("")
-        # the proof network: the lemmas this proof invokes are the edges to dig into.
-        prooflabel = "defined using" if d["kind"] == "def" else "proof uses"
-        for row in (link_row(prooflabel, d.get("usesProof", [])),
-                    link_row("statement uses", d.get("usesStmt", [])),
-                    link_row("used by", usedby.get(name, []))):
-            if row:
-                out.append(row)
+        num, kw = label[name]
+        src = _source_url(mod, d.get("line"), ref)
+        srctag = f" &nbsp;<small>[source ↗]({src})</small>" if src else ""
+        out.append(f'<a id="{_slug(name)}"></a>')
+        out.append(f"**{kw} {num}** (`{short}`).{srctag}")
+        out.append("")
+        if kw == "Definition":
+            dlist = cite_list(d.get("usesStmt", []))
+            out.append("A definition" + (f", built from {dlist}" if dlist else "")
+                       + " — see source for the body.")
+        else:
+            parts = _claim_tex(d, notation)
+            if len(parts) > 1:                 # multi-part conclusion -> stacked displays
+                out.append("The following hold.")
+                out.append("")
+                for k, p in enumerate(parts, 1):
+                    out.append("$$")
+                    out.append(rf"\text{{({k})}}\quad {p}")
+                    out.append("$$")
+            else:
+                out.append("$$")
+                out.append(parts[0])
+                out.append("$$")
+            out.append("")
+            cites = cite_list(d.get("usesProof", []))
+            if cites:
+                out.append(f"*Proof.* By {cites}. $\\square$")
+            else:
+                out.append(r"*Proof.* Immediate from the definitions. $\square$")
+        ub = cite_list(usedby.get(name, []))
+        if ub:
+            out.append("")
+            out.append(f"<small>Referenced in {ub}.</small>")
         out.append("")
     return "\n".join(out)

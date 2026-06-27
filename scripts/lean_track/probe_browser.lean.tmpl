@@ -70,6 +70,10 @@ partial def crawl (visited : IO.Ref NameSet) (out : IO.Ref (Array Json)) (n : Na
   for c in proofConsts info do
     if c != n && isProj c && !stmt.contains c && !prf.contains c then prf := prf.push c
   let tyStx ← delabP info.type
+  -- for definitions, also delaborate the body so the entry can show what it *is*
+  let valStx ← match info with
+    | .defnInfo d => delabP d.value
+    | _ => pure none
   out.modify (·.push (Json.mkObj [
     ("name", Json.str n.toString),
     ("kind", Json.str (kindStr info)),
@@ -77,7 +81,8 @@ partial def crawl (visited : IO.Ref NameSet) (out : IO.Ref (Array Json)) (n : Na
     ("line", match (← lineOf n) with | some l => Json.num l | none => Json.null),
     ("usesStmt", Json.arr (stmt.map (fun c => Json.str c.toString))),
     ("usesProof", Json.arr (prf.map (fun c => Json.str c.toString))),
-    ("type", match tyStx with | some s => synToJson s | none => Json.null)]))
+    ("type", match tyStx with | some s => synToJson s | none => Json.null),
+    ("value", match valStx with | some s => synToJson s | none => Json.null)]))
   for c in stmt do crawl visited out c
   for c in prf do crawl visited out c
 

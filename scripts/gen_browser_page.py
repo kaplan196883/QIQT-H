@@ -21,15 +21,17 @@ CLOSURE = REPO / "reports" / "browser" / "closure.json"
 
 FRONTMATTER = """---
 layout: ../layouts/Deep.astro
-title: Theorem browser
-eyebrow: Hyperlinked dependency network
-description: Browse the QIQT-H Lean development as a network of nicely-printed theorems — follow the uses / used-by links deeper, jump to the Lean source.
+title: The development as a book
+eyebrow: Definitions · theorems · lemmas · proofs
+description: The QIQT-H Lean development presented as a hyperlinked math book — definitions, theorems and lemmas in printed math, each proof citing the lemmas it uses, all linked down to the Lean source.
 ---
 
-A hyperlinked browser over the Lean development. Each **theorem** is rendered in printed math
-(its conclusion; free variables are implicitly universally quantified); **definitions** are
-navigation nodes. Follow the dependency network through the *uses* and *used by* links, or jump
-to the exact **Lean source** line on GitHub. Regenerate with `scripts/gen_browser_page.py`.
+The Lean development, presented as a **hyperlinked math book**. It is organized into sections (one
+per Lean module, in dependency order); each entry is a numbered **Definition**, **Theorem** or
+**Lemma**, typeset in printed math (free variables are implicitly universally quantified). Every
+**Proof** cites the lemmas it rests on — click a citation to jump to that result, read it, and
+follow *its* proof deeper; symbols inside the formulas link to their definitions; and a *source ↗*
+link on each entry opens the exact Lean line. Regenerate with `scripts/gen_browser_page.py`.
 """
 
 
