@@ -225,9 +225,12 @@ via the trace, P4-MICRO supplies it via finite capacity.
   *(highest value — the real fix; proof path now fully scoped)* — ✅ **LANDED 2026-06-27**:
   `vonNeumannEntropy_le_log_card` + `area_floor_vonNeumann` in `FQBoundMicro.lean` (used the existing `=`-form
   `MicrostatePostulate`; M-5 splits the `≤`-form). Green, `#print axioms` standard 3, budget 0.
-- [ ] **M-5 (C2) split + rename the postulate** — `HolographicCapacityBound` (`log dim ≤ areaTerm`, for the floor)
-  vs `HolographicCapacityExact` (`= areaTerm`, for saturation only). Migrate M-1/M-2/M-3 onto the bound form; keep
-  exact only where equality is genuinely used (`area_floor_saturates`).
+- [x] **M-5 (C2) split + rename the postulate** — `HolographicCapacityBound` (`log dim ≤ areaTerm`, for the floor)
+  vs `HolographicCapacityExact` (`= areaTerm`, for saturation only). ✅ **LANDED 2026-06-27**: + instance
+  `instCapacityBoundOfExact` (`=⟹≤`); `area_floor_of_microstate`/`holographic_area_floor_micro`/`area_floor_vonNeumann`
+  migrated to `Bound`; `area_floor_saturates` keeps `Exact`; `MicrostatePostulateArea` deleted
+  (`holographic_area_floor_micro` is now a one-line corollary of `area_floor_of_microstate`). Green, standard 3,
+  budget 0, full `QIQTH` green.
 - [ ] **M-6 (C3) regional `Q_R` framing + type-III caveat** — module header + plan: capacity = max distinguishable
   *regional* microstates (finite regional algebra / fixed-area sector), an explicit type-I/code CUTOFF; the
   continuum local algebra is type III (no finite trace) — labelled, not hidden. *(doc + def-rename; minimal Lean)*
@@ -294,6 +297,12 @@ AND the `P4_WALL_CAMPAIGN_PLAN.md` checklist (note the P4-MICRO endpoint beside 
   P4 is now stated for the genuine regional VON NEUMANN entropy, not the record-law Shannon entropy. Added
   `import QIQTH.QuantumRelativeEntropy`; green, `#print axioms` standard 3, budget 0, full `QIQTH` green; wired into
   `AxiomAudit.lean`. Next: **M-5** (split/rename `HolographicCapacityBound` `≤` vs `…Exact` `=`).
+- 2026-06-27 — **M-5 LANDED (the C2 split).** `MicrostatePostulate` → `HolographicCapacityBound` (`log card ≤
+  areaTerm`, the floor) + `HolographicCapacityExact` (`= areaTerm`, saturation), with `instCapacityBoundOfExact`
+  (`=⟹≤`). Floor theorems (`area_floor_of_microstate`, `holographic_area_floor_micro`, `area_floor_vonNeumann`)
+  migrated to the weaker `Bound` via `le_trans`; `area_floor_saturates` keeps `Exact`; `MicrostatePostulateArea`
+  deleted (manifest form is now a corollary). No dangling refs; green, standard 3, budget 0, full `QIQTH` green;
+  `AxiomAudit` prose synced. Next: **M-6** (C3 regional `Q_R` framing + type-III/code-cutoff caveat in the header).
 
 ## 7. Files
 

@@ -37,43 +37,50 @@ namespace QIQTH
     `capacity : log|𝓗_R| = areaTerm`.  This is the **holographic** input `log|𝓗_R| = A/4ℓ_P²`; the area
     coefficient is the carried UV datum (a free real parameter, never assigned).  Carried as a *typeclass
     hypothesis*, never as a Lean `axiom` — the budget stays 0. -/
-class MicrostatePostulate (R : Type*) [Fintype R] (areaTerm : ℝ) where
-  /-- The holographic capacity equation `log|𝓗_R| = areaTerm` (`= A/4ℓ_P²`, the carried UV datum). -/
+class HolographicCapacityBound (R : Type*) [Fintype R] (areaTerm : ℝ) where
+  /-- The holographic capacity **bound** `log|𝓗_R| ≤ areaTerm` (`= A/4ℓ_P²`, the carried UV datum). This is all
+      P4's *floor* needs (GPT-5.5-pro C2). -/
+  bound : Real.log (Fintype.card R) ≤ areaTerm
+
+/-- **P4-MICRO, exact (saturation) form** — the holographic capacity *equality* `log|𝓗_R| = areaTerm`.  Strictly
+    stronger than `HolographicCapacityBound`; needed only where the area floor is achieved as an EQUALITY (the
+    maximally-mixed / local-equilibrium record, `area_floor_saturates`).  The area coefficient is the carried UV
+    datum; a typeclass hypothesis, never a Lean `axiom`.  (Formerly `MicrostatePostulate`.) -/
+class HolographicCapacityExact (R : Type*) [Fintype R] (areaTerm : ℝ) where
+  /-- The holographic capacity equation `log|𝓗_R| = areaTerm`. -/
   capacity : Real.log (Fintype.card R) = areaTerm
+
+/-- **`=` implies `≤`:** every exact capacity postulate is a fortiori a bound postulate.  So all the *floor*
+    theorems (stated for `HolographicCapacityBound`) fire from an exact postulate too; only saturation needs the
+    exact form. -/
+instance instCapacityBoundOfExact {R : Type*} [Fintype R] {areaTerm : ℝ}
+    [h : HolographicCapacityExact R areaTerm] : HolographicCapacityBound R areaTerm :=
+  ⟨le_of_eq h.capacity⟩
 
 /-- **★★★ P4's holographic area floor as a COROLLARY of P4-MICRO.**  For any Born record law `p` on the finite
     microstate set `R` (nonnegative weights summing to `1`), the Shannon entropy is at most the area term — by the
     axiom-free finite max-entropy bound `shannon_le_log_card` rewritten through the P4-MICRO `capacity` equation.
 
-    This is P4's bound *derived*, modulo the named `MicrostatePostulate` interface: P4 is no longer an independent
-    postulate but a theorem conditional on the framework's finite-capacity postulate.  Axiom-free; the area
-    coefficient is never assigned a value (carried UV datum); the holographic content `log|𝓗_R| = areaTerm` lives
-    entirely in the typeclass hypothesis. -/
+    This is P4's bound *derived*, modulo the named `HolographicCapacityBound` interface: P4 is no longer an
+    independent postulate but a theorem conditional on the framework's finite-capacity postulate.  Axiom-free; the
+    area coefficient is never assigned a value (carried UV datum); the holographic content `log|𝓗_R| ≤ areaTerm`
+    lives entirely in the typeclass hypothesis. -/
 theorem area_floor_of_microstate {R : Type*} [Fintype R] {areaTerm : ℝ}
-    [h : MicrostatePostulate R areaTerm] (p : R → ℝ) (hp : ∀ i, 0 ≤ p i) (h1 : ∑ i, p i = 1) :
-    QIQTH.BranchLedger.Shannon Finset.univ p ≤ areaTerm := by
-  rw [← h.capacity]
-  exact QIQTH.RecordContract.shannon_le_log_card p hp h1
-
-/-- **P4-MICRO in manifest physical form** — the capacity equation specialized to `edgeArea/(4·ellP²)`, so the
-    area floor reads `S ≤ A/(4ℓ_P²)` with the `1/4ℓ_P²` coefficient explicit in the statement rather than hidden in
-    an abstract `areaTerm`.  `edgeArea` (`= ⟨A_edge⟩ = A(∂R)`, the carried UV datum, never assigned a value) and
-    `ellP` (the Planck length) are explicit fields.  Still a typeclass hypothesis, not a Lean `axiom`. -/
-class MicrostatePostulateArea (R : Type*) [Fintype R] (edgeArea ellP : ℝ) where
-  /-- The holographic capacity equation in manifest form: `log|𝓗_R| = A/(4ℓ_P²)`. -/
-  capacity : Real.log (Fintype.card R) = edgeArea / (4 * ellP ^ 2)
+    [h : HolographicCapacityBound R areaTerm] (p : R → ℝ) (hp : ∀ i, 0 ≤ p i) (h1 : ∑ i, p i = 1) :
+    QIQTH.BranchLedger.Shannon Finset.univ p ≤ areaTerm :=
+  le_trans (QIQTH.RecordContract.shannon_le_log_card p hp h1) h.bound
 
 /-- **★★★ The holographic area floor in manifest form `S ≤ A/(4ℓ_P²)`, as a corollary of P4-MICRO.**  For any
     Born record law `p` on the finite microstate set `R`, the Shannon entropy is at most the **area over `4ℓ_P²`**.
-    Exhibits P4's bound in its physical shape (`area_floor_of_microstate` with the capacity specialized to
-    `edgeArea/(4·ellP²)`).  The coefficient `1/4ℓ_P²` is manifest in the statement; its value is the carried UV datum,
-    never asserted (`edgeArea`, `ellP` free reals).  The `1/4` *ratio* is derived elsewhere (`SakharovRatio`).
-    Axiom-free, relative only to the named `MicrostatePostulateArea` postulate. -/
+    This is just `area_floor_of_microstate` specialized to `areaTerm = edgeArea/(4·ellP²)` (no separate class needed
+    — the bound postulate is already parameterized by an arbitrary `areaTerm`).  The coefficient `1/4ℓ_P²` is
+    manifest in the statement; its value is the carried UV datum, never asserted (`edgeArea`, `ellP` free reals).
+    The `1/4` *ratio* is derived elsewhere (`SakharovRatio`).  Axiom-free, relative only to the bound postulate. -/
 theorem holographic_area_floor_micro {R : Type*} [Fintype R] {edgeArea ellP : ℝ}
-    [h : MicrostatePostulateArea R edgeArea ellP] (p : R → ℝ) (hp : ∀ i, 0 ≤ p i) (h1 : ∑ i, p i = 1) :
-    QIQTH.BranchLedger.Shannon Finset.univ p ≤ edgeArea / (4 * ellP ^ 2) := by
-  rw [← h.capacity]
-  exact QIQTH.RecordContract.shannon_le_log_card p hp h1
+    [HolographicCapacityBound R (edgeArea / (4 * ellP ^ 2))]
+    (p : R → ℝ) (hp : ∀ i, 0 ≤ p i) (h1 : ∑ i, p i = 1) :
+    QIQTH.BranchLedger.Shannon Finset.univ p ≤ edgeArea / (4 * ellP ^ 2) :=
+  area_floor_of_microstate p hp h1
 
 /-- **Capacity saturation under P4-MICRO** — at the maximally-mixed record `p ≡ 1/|𝓗_R|` the area floor is an
     EQUALITY `S = areaTerm`, not just a bound.  This is the equilibrium / horizon local-equilibrium regime (the
@@ -82,7 +89,7 @@ theorem holographic_area_floor_micro {R : Type*} [Fintype R] {edgeArea ellP : �
     area floor is achieved exactly when the region is maximally mixed.  Axiom-free; the area coefficient is the
     carried UV datum, never assigned. -/
 theorem area_floor_saturates {R : Type*} [Fintype R] [Nonempty R] {areaTerm : ℝ}
-    [h : MicrostatePostulate R areaTerm] :
+    [h : HolographicCapacityExact R areaTerm] :
     QIQTH.BranchLedger.Shannon Finset.univ (fun _ : R => (Fintype.card R : ℝ)⁻¹) = areaTerm := by
   rw [QIQTH.RecordContract.shannon_uniform_eq_log_card, h.capacity]
 
@@ -111,14 +118,13 @@ theorem vonNeumannEntropy_le_log_card {n : Type*} [Fintype n] [DecidableEq n] {�
     finite-microstate postulate `MicrostatePostulate n areaTerm` (`log dim 𝓗_R = areaTerm = A/4ℓ_P²`), the von
     Neumann entropy of any regional density matrix obeys `S_vN(ρ) ≤ areaTerm`.  This is P4 stated for the genuine
     regional entropy `S_vN(ρ_R)`, not the record-law Shannon entropy — `vonNeumannEntropy_le_log_card` rewritten
-    through the capacity equation.  (The `=`-form `MicrostatePostulate` suffices since `=` implies `≤`; M-5 will
-    split out the weaker `≤`-form `HolographicCapacityBound`.)  Axiom-free; the area coefficient is the carried UV
-    datum, never assigned; the postulate is a typeclass hypothesis, not a Lean axiom. -/
+    through the capacity bound (`HolographicCapacityBound`, the `≤`-form — all the floor needs).  Axiom-free; the
+    area coefficient is the carried UV datum, never assigned; the postulate is a typeclass hypothesis, not a Lean
+    axiom. -/
 theorem area_floor_vonNeumann {n : Type*} [Fintype n] [DecidableEq n] {areaTerm : ℝ}
-    [hcap : MicrostatePostulate n areaTerm] {ρ : Matrix n n ℂ}
+    [hcap : HolographicCapacityBound n areaTerm] {ρ : Matrix n n ℂ}
     (h : QIQTH.QuantumEntropy.IsDensity ρ) :
-    QIQTH.QuantumEntropy.vonNeumannEntropy h ≤ areaTerm := by
-  rw [← hcap.capacity]
-  exact vonNeumannEntropy_le_log_card h
+    QIQTH.QuantumEntropy.vonNeumannEntropy h ≤ areaTerm :=
+  le_trans (vonNeumannEntropy_le_log_card h) hcap.bound
 
 end QIQTH

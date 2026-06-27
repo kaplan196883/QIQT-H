@@ -6288,23 +6288,23 @@ namespace QIQTH.AxiomAudit
 -- positivity is no longer hypothesized, only the master inequality remains. Axiom-free (standard 3).
 #print axioms QIQTH.area_floor_of_microstate
 -- ★★★ P4-MICRO (Route 2 — the SHIPPABLE P4 endpoint; P4_MICRO_PLAN.md M-1): area_floor_of_microstate
--- [MicrostatePostulate R areaTerm] — for any Born record law p on the finite microstate set R,
+-- [HolographicCapacityBound R areaTerm] — for any Born record law p on the finite microstate set R,
 -- Shannon univ p ≤ areaTerm. P4's holographic area floor as a COROLLARY of the finite-microstate postulate:
 -- shannon_le_log_card (axiom-free Jensen/Gibbs: S ≤ log|𝓗_R|) rewritten through the P4-MICRO capacity equation
 -- log|𝓗_R| = areaTerm (= A/4ℓ_P²). P4 is no longer an independent postulate but a theorem conditional on the
 -- framework's OWN finite-capacity postulate (the "QI" core) — the same finite-Q_max move that removes the collapse
--- postulate now retires the area-law postulate. MicrostatePostulate is a TYPECLASS HYPOTHESIS, not a Lean axiom
+-- postulate now retires the area-law postulate. HolographicCapacityBound is a TYPECLASS HYPOTHESIS, not a Lean axiom
 -- (budget stays 0). The area coefficient is the carried UV datum, never assigned; the holographic input log|𝓗_R|∝A
 -- stays the labelled frontier (the Type II dual-weight trace that would DERIVE it). Axiom-free (standard 3).
 #print axioms QIQTH.holographic_area_floor_micro
--- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-2): holographic_area_floor_micro [MicrostatePostulateArea R edgeArea
+-- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-2): holographic_area_floor_micro [HolographicCapacityBound R (edgeArea/(4·ellP²))] (edgeArea
 -- ellP] — Shannon univ p ≤ edgeArea / (4*ellP^2), i.e. S ≤ A/(4ℓ_P²) in MANIFEST form (the 1/4ℓ_P² coefficient
 -- explicit in the statement, not hidden in an abstract areaTerm). area_floor_of_microstate with the capacity
 -- equation specialized to edgeArea/(4·ellP²). edgeArea (= ⟨A_edge⟩ = A(∂R), carried UV datum, never assigned)
 -- and ellP (Planck length) are free reals; the 1/4 ratio is derived elsewhere (SakharovRatio). Still a typeclass
 -- hypothesis, not a Lean axiom. Axiom-free (standard 3).
 #print axioms QIQTH.area_floor_saturates
--- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-3): area_floor_saturates [MicrostatePostulate R areaTerm] [Nonempty R]
+-- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-3): area_floor_saturates [HolographicCapacityExact R areaTerm] [Nonempty R]
 -- — Shannon univ (fun _ => (card R)⁻¹) = areaTerm. The area floor is an EQUALITY (not just a bound) at the
 -- maximally-mixed record p ≡ 1/|𝓗_R| — the equilibrium / horizon local-equilibrium regime — via the Jensen
 -- saturation shannon_uniform_eq_log_card rewritten through the P4-MICRO capacity equation. So P4-MICRO delivers
@@ -6317,8 +6317,15 @@ namespace QIQTH.AxiomAudit
 -- S_vN = ∑ negMulLog(eigenvalues) (Shannon of the SPECTRUM — eigenvalues are a prob vector) fed into the axiom-free
 -- shannon_le_log_card. NOT the record-law Shannon entropy of area_floor_of_microstate (dephasing only raises
 -- entropy: S_vN ≤ H(record) one-way; a pure superposition has H=log d but S_vN=0). area_floor_vonNeumann
--- [MicrostatePostulate n areaTerm] — S_vN(ρ) ≤ areaTerm: P4 for the genuine regional von Neumann entropy, via the
+-- [HolographicCapacityBound n areaTerm] — S_vN(ρ) ≤ areaTerm: P4 for the genuine regional von Neumann entropy, via the
 -- capacity equation. The correct object for P4. Area coefficient = carried UV datum; typeclass hypothesis, not a
 -- Lean axiom. Axiom-free (standard 3).
+#print axioms QIQTH.instCapacityBoundOfExact
+-- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-5, the GPT-5.5-pro C2 split): the postulate is split into
+-- HolographicCapacityBound (log|𝓗_R| ≤ areaTerm — all the FLOOR needs) and HolographicCapacityExact
+-- (= areaTerm — only for saturation). instCapacityBoundOfExact : [HolographicCapacityExact] → HolographicCapacityBound
+-- (= implies ≤), so every floor theorem fires from an exact postulate too. The floor theorems
+-- (area_floor_of_microstate, holographic_area_floor_micro, area_floor_vonNeumann) now take the weaker Bound;
+-- area_floor_saturates keeps Exact. Formerly the single =-form MicrostatePostulate. Axiom-free (standard 3).
 
 end QIQTH.AxiomAudit
