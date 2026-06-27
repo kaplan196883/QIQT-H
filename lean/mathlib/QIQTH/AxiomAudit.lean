@@ -5183,6 +5183,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyStoneCLM_cfc_mem_stoneDomain
 #print axioms QIQTH.Spectral.cayleyStoneCLM_stoneGen_cfc
 #print axioms QIQTH.Spectral.cayleyBump_cfc_tendsto
+#print axioms QIQTH.Spectral.cayleyStoneCLM_zero
+#print axioms QIQTH.Spectral.cayleyStoneCLM_comp
+#print axioms QIQTH.Spectral.cayleyStoneCLM_inner
+#print axioms QIQTH.Spectral.cayleyStoneCLM_norm_le
+#print axioms QIQTH.Spectral.cayleyStoneCLM_continuous
+-- ★★★★ P4 WALL — cayleyStoneCLM IS A C₀ UNITARY GROUP: the reconstructed Stone group satisfies the five abstract
+-- C₀-group hypotheses — cayleyStoneCLM_zero (U_0=1), _comp (U_{s+t}=U_s∘U_t, group law), _inner (preserves inner
+-- product, it's the LinearIsometryEquiv cayleyStoneLIE), _norm_le (‖U_t y‖≤‖y‖), _continuous (strong continuity). So
+-- cayleyStoneCLM is a bona-fide input to the Gårding/stoneGen machinery (density, the recovery cayleyStoneCLM U = U),
+-- and the whole Stone construction can be iterated/fed back on the reconstructed group. Axiom-free.
 -- ★★★★ P4 WALL — THE cfc CORE IS DENSE (approximate identity): cayleyBump_cfc_tendsto — cfc(η_N)V z → z, η_N=cayleyBump.
 -- Since η_N=1−ψ_N, cfc(η_N)V z = z − cfc(ψ_N)V z (cfc_sub + cayley_cfc_one), and the atom-killing cfc(ψ_N)V z→0
 -- (cayleyCutoff_cfc_tendsto_zero, μ_z({1})=0) gives z. The η_N vanish quadratically at the excluded point 1, so the

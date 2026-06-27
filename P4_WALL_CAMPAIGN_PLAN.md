@@ -528,6 +528,10 @@ PVM, no UV datum — **the pivotal wall (general Stone, Phase 4.2) is BROKEN on 
 Also ✅ **`cayleyBump_cfc_tendsto` — THE cfc CORE IS DENSE** (`StoneExp.lean`, axiom-free, budget 0): `cfc(η_N)V z → z`
 (atom-killing `cfc(ψ_N)V z→0` + `cfc_sub`/`cayley_cfc_one`); the η_N vanish quadratically at 1 so the bump vectors are
 spectral-core vectors ⟹ **the smooth domain of the Stone group is dense**. **Built green first try.**
+Also ✅ **`cayleyStoneCLM_zero`/`_comp`/`_inner`/`_norm_le`/`_continuous` — cayleyStoneCLM IS A C₀ UNITARY GROUP**
+(`StoneExp.lean`, axiom-free, budget 0): the reconstructed group satisfies the 5 C₀-group hypotheses (group law,
+U_0=1, inner-preservation via the LinearIsometryEquiv, contraction, strong continuity). **All built green first try.**
+So it's a bona-fide input to the Gårding/stoneGen machinery (density, recovery, iteration).
 **Next (toward X=A_edge, Phase 4.3):** (a) `c·η_N∈C(σV)` (at-1 squeeze) ⟹ bump vectors are core vectors ⟹ formal
 density of `stoneDomain(cayleyStoneCLM)`; (b) **THE RECOVERY** `cayleyStoneCLM U = U` (⟺ `stoneGen U = mult by c`) —
 the e.s.a./Stone-uniqueness wall (`cayleyUnitary U` IS Cayley of `stoneGen U` via resolvent `R=(1−iA)⁻¹`; recovery

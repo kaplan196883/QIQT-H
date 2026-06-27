@@ -1569,6 +1569,64 @@ theorem cayleyBump_cfc_tendsto [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
   rw [h0]
   exact tendsto_const_nhds.sub (cayleyCutoff_cfc_tendsto_zero U hgrp hU0 hUinner hUbd hSC z)
 
+/-! ### `cayleyStoneCLM` is itself a `C₀` unitary group
+
+The reconstructed Stone group `t ↦ cayleyStoneCLM U … t` satisfies the five hypotheses of the abstract
+strongly-continuous one-parameter unitary group (`hgrp`, `hU0`, `hUinner`, `hUbd`, `hSC`).  This packages it as a
+bona-fide input to the Gårding/`stoneGen` machinery (density, the recovery `cayleyStoneCLM U = U`), and lets the
+whole Stone construction be iterated/fed back on the reconstructed group. -/
+
+/-- `cayleyStoneCLM … 0 = 1` — the group identity (from `cayleyStoneU_zero`). -/
+theorem cayleyStoneCLM_zero [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    cayleyStoneCLM U hgrp hU0 hUinner hUbd hSC 0 = 1 := by
+  ext x
+  simp only [cayleyStoneCLM_apply, ContinuousLinearMap.one_apply]
+  exact cayleyStoneU_zero U hgrp hU0 hUinner hUbd hSC x
+
+/-- `cayleyStoneCLM … (s+t) = cayleyStoneCLM … s ∘L cayleyStoneCLM … t` — the group law (from `cayleyStoneU_group`). -/
+theorem cayleyStoneCLM_comp [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (s t : ℝ) :
+    cayleyStoneCLM U hgrp hU0 hUinner hUbd hSC (s + t)
+      = cayleyStoneCLM U hgrp hU0 hUinner hUbd hSC s ∘L cayleyStoneCLM U hgrp hU0 hUinner hUbd hSC t := by
+  ext x
+  simp only [cayleyStoneCLM_apply, ContinuousLinearMap.comp_apply]
+  exact (cayleyStoneU_group U hgrp hU0 hUinner hUbd hSC s t x).symm
+
+/-- `cayleyStoneCLM … t` preserves the inner product (it is a `LinearIsometryEquiv`, `cayleyStoneLIE`). -/
+theorem cayleyStoneCLM_inner [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (t : ℝ) (a b : H) :
+    (inner ℂ (cayleyStoneCLM U hgrp hU0 hUinner hUbd hSC t a)
+        (cayleyStoneCLM U hgrp hU0 hUinner hUbd hSC t b) : ℂ) = inner ℂ a b := by
+  rw [cayleyStoneCLM_apply, cayleyStoneCLM_apply, ← cayleyStoneLIE_apply U hgrp hU0 hUinner hUbd hSC t a,
+    ← cayleyStoneLIE_apply U hgrp hU0 hUinner hUbd hSC t b]
+  exact LinearIsometryEquiv.inner_map_map (cayleyStoneLIE U hgrp hU0 hUinner hUbd hSC t) a b
+
+/-- `‖cayleyStoneCLM … t y‖ ≤ ‖y‖` — the contraction bound (in fact an isometry, `cayleyStoneCLM_norm_map`). -/
+theorem cayleyStoneCLM_norm_le [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (t : ℝ) (y : H) :
+    ‖cayleyStoneCLM U hgrp hU0 hUinner hUbd hSC t y‖ ≤ ‖y‖ :=
+  (cayleyStoneCLM_norm_map U hgrp hU0 hUinner hUbd hSC t y).le
+
+/-- `t ↦ cayleyStoneCLM … t y` is continuous — strong continuity (from `cayleyStoneU_continuous`). -/
+theorem cayleyStoneCLM_continuous [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (y : H) :
+    Continuous (fun t => cayleyStoneCLM U hgrp hU0 hUinner hUbd hSC t y) := by
+  have heq : (fun t => cayleyStoneCLM U hgrp hU0 hUinner hUbd hSC t y)
+      = (fun t => cayleyStoneU U hgrp hU0 hUinner hUbd hSC t y) := by
+    funext t; exact cayleyStoneCLM_apply U hgrp hU0 hUinner hUbd hSC t y
+  rw [heq]; exact cayleyStoneU_continuous U hgrp hU0 hUinner hUbd hSC y
+
 
 end SelfAdjoint
 

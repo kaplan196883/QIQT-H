@@ -830,6 +830,13 @@ budget 0): `cfc(η_N) V z → z` (`η_N = cayleyBump N`). Since `η_N = 1 − ψ
 `c ~ 1/|ω−1|` singularity so `c·η_N` extends continuously), so the bump vectors `cfc(η_N) V z` are genuine
 spectral-core vectors — hence **the smooth domain of the Stone group is DENSE**: every `z` is a limit of core vectors
 on which the generator acts as multiplication by the spectral value `c`. *Built green first try.*
+Also ✅ `cayleyStoneCLM_zero`/`_comp`/`_inner`/`_norm_le`/`_continuous` — **★★★★ `cayleyStoneCLM` IS A C₀ UNITARY
+GROUP** (`StoneExp.lean`, axiom-free, budget 0): the reconstructed Stone group satisfies the five abstract C₀-group
+hypotheses (`U_0=1` from `cayleyStoneU_zero`; group law `U_{s+t}=U_s∘L U_t` from `cayleyStoneU_group`; inner-product
+preservation from the `LinearIsometryEquiv` `cayleyStoneLIE` via `LinearIsometryEquiv.inner_map_map`; `‖U_t y‖≤‖y‖`
+from `cayleyStoneCLM_norm_map`; strong continuity from `cayleyStoneU_continuous`). *All built green first try.* So
+`cayleyStoneCLM` is a **bona-fide input to the Gårding/`stoneGen` machinery** — `exists_mem_stoneDomain_norm_sub_le`,
+the recovery, iteration — closing the gap between "a C₀ group" and "the Stone machine's input".
 **Next (toward X = A_edge, Phase 4.3):** (a) **`c·η_N ∈ C(σV)`** (the at-`1` squeeze `|c·η_N| ≤ |1+ω|·(N+1)|ω−1| → 0`,
 mirroring `cayleyExpBump_continuousOn`) ⟹ the bump vectors are *core* vectors ⟹ combine with `cayleyBump_cfc_tendsto`
 for the formal **density of `stoneDomain(cayleyStoneCLM)`** (the generator is a genuine densely-defined operator with
