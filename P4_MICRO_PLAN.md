@@ -231,9 +231,12 @@ via the trace, P4-MICRO supplies it via finite capacity.
   migrated to `Bound`; `area_floor_saturates` keeps `Exact`; `MicrostatePostulateArea` deleted
   (`holographic_area_floor_micro` is now a one-line corollary of `area_floor_of_microstate`). Green, standard 3,
   budget 0, full `QIQTH` green.
-- [ ] **M-6 (C3) regional `Q_R` framing + type-III caveat** — module header + plan: capacity = max distinguishable
-  *regional* microstates (finite regional algebra / fixed-area sector), an explicit type-I/code CUTOFF; the
-  continuum local algebra is type III (no finite trace) — labelled, not hidden. *(doc + def-rename; minimal Lean)*
+- [x] **M-6 (C3) regional `Q_R` framing + type-III caveat** — ✅ **LANDED 2026-06-27**: added a "WHAT THE CAPACITY
+  IS — REGIONAL, AND A TYPE-I/CODE CUTOFF" block to the `FQBoundMicro.lean` module header (capacity = `Q_R = log N_R`
+  = max distinguishable *regional* microstates / finite regional algebra / fixed-area sector / code subspace; the
+  continuum local algebra is type III₁ — no finite trace, no `ρ_R` — so a finite-dim `R` is itself the holographic
+  cutoff, not bookkeeping; `≤` is the safe form). Bound-class docstring rewritten to the regional `Q_R` reading.
+  Doc-only; green.
 - [ ] **M-7 non-vacuity witness** — concrete `Fin n` instance + `example` firing the (bound-form) theorem.
 - [ ] **M-8 bridge remark** — connect to `FQBoundCGP.holographic_area_floor`; Route 1 (trace) vs Route 2 (capacity)
   deliver the same area term at different logical levels (kinematic vs dynamical).
@@ -303,6 +306,11 @@ AND the `P4_WALL_CAMPAIGN_PLAN.md` checklist (note the P4-MICRO endpoint beside 
   migrated to the weaker `Bound` via `le_trans`; `area_floor_saturates` keeps `Exact`; `MicrostatePostulateArea`
   deleted (manifest form is now a corollary). No dangling refs; green, standard 3, budget 0, full `QIQTH` green;
   `AxiomAudit` prose synced. Next: **M-6** (C3 regional `Q_R` framing + type-III/code-cutoff caveat in the header).
+- 2026-06-27 — **M-6 LANDED (the C3 framing).** Added the regional-`Q_R` + type-III/finite-type-I-code-cutoff
+  caveat to the `FQBoundMicro.lean` module header and rewrote the `HolographicCapacityBound` docstring: capacity is
+  `Q_R = log N_R` (distinguishable *regional* microstates / fixed-area sector / code subspace), an explicit type-I
+  cutoff of the genuinely type-III₁ local algebra — granting finite-dim `R` is the holographic regularization, not
+  bookkeeping. Doc-only; green. Next: **M-7** (`Fin n` non-vacuity witness firing the bound-form theorem).
 
 ## 7. Files
 

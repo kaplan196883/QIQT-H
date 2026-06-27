@@ -16,27 +16,43 @@ floor falls out of an **already-proven finite theorem**:
 
 So P4 stops being an independent postulate and becomes a theorem *conditional on the framework's own finite-capacity
 postulate* — on-thesis: the same finite-`Q_max` move that removes the collapse postulate now also retires the
-area-law postulate.  This file lands the core corollary (`area_floor_of_microstate`) via the `MicrostatePostulate`
-typeclass, mirroring the `Phase5Master`/`DonaldSystem` interface discipline that kept the QIQT-H core axiom-free.
+area-law postulate.  This file lands the core corollary (`area_floor_of_microstate`) via the
+`HolographicCapacityBound`/`HolographicCapacityExact` typeclasses, mirroring the `Phase5Master`/`DonaldSystem`
+interface discipline that kept the QIQT-H core axiom-free.
 
 HONEST SCOPE.  The value of `G` / the edge normalization `⟨A_edge⟩ = A/4ℓ_P²` is the **carried UV datum**: the
-`capacity` equation contains the dimensionful area term, but its coefficient is a **free real parameter**, never
+capacity hypothesis contains the dimensionful area term, but its coefficient is a **free real parameter**, never
 assigned a value.  The pivot RELOCATES where the datum sits (macroscopic entropy postulate → microscopic counting
-postulate); it does NOT derive the value of `G`.  `P4-MICRO` is a **typeclass hypothesis, not a Lean `axiom`** (the
-budget stays 0).  Route 2 does NOT reproduce Route 1's modular-origin explanation of *why area* — the holographic
-input `log|𝓗_R| ∝ A` is assumed here and stays the labelled open frontier (the Type II dual-weight trace).  The
-`1/4` *ratio* is derived elsewhere (`SakharovRatio`); it is not re-asserted here.  Free scalar only; no `sorry`.
+postulate); it does NOT derive the value of `G`.  The capacity postulate is a **typeclass hypothesis, not a Lean
+`axiom`** (the budget stays 0).  Route 2 does NOT reproduce Route 1's modular-origin explanation of *why area* — the
+holographic input `log|𝓗_R| ∝ A` is assumed here and stays the labelled open frontier (the Type II dual-weight
+trace).  The `1/4` *ratio* is derived elsewhere (`SakharovRatio`); it is not re-asserted here.  Free scalar only;
+no `sorry`.
+
+WHAT THE CAPACITY IS — REGIONAL, AND A TYPE-I/CODE CUTOFF (GPT-5.5-pro C3).  `Fintype.card R` here is **not** a
+global Hilbert-space dimension.  It is the **regional operational capacity** `Q_R = log N_R` — the number `N_R` of
+mutually distinguishable microstates accessible to the region `R` (equivalently, the dimension of a finite regional
+effective Hilbert space / a fixed-area sector / a code subspace).  This is a deliberate **finite type-I cutoff**:
+the *actual* local algebra of a region in continuum QFT is **type III₁** — it has NO finite trace, NO tensor-factor
+density matrix `ρ_R`, and a divergent local entanglement entropy.  Granting a finite-dimensional `R` (so that `ρ_R`
+and `S_vN(ρ_R)` even exist) is therefore itself the holographic/quantum-gravity regularization — the finite-`Q_max`
+postulate — *not* bookkeeping.  We state it as such: the bound is read in a fixed-area sector, `≤` is the safe form
+(area-operator fluctuations make exact `log dim = ⟨A⟩/4` suspect — hence `HolographicCapacityBound`), and the
+type-III obstruction is exactly what the Type II dual-weight trace (Route 1) would have to resolve to *derive* this
+capacity rather than postulate it.
 -/
 import QIQTH.RecordContract
 import QIQTH.QuantumRelativeEntropy
 
 namespace QIQTH
 
-/-- **P4-MICRO** — the finite-microstate (quantized-information) postulate for a region `R`.
-    `R` has a finite effective Hilbert space (`Fintype R`) whose log-dimension equals the area term:
-    `capacity : log|𝓗_R| = areaTerm`.  This is the **holographic** input `log|𝓗_R| = A/4ℓ_P²`; the area
-    coefficient is the carried UV datum (a free real parameter, never assigned).  Carried as a *typeclass
-    hypothesis*, never as a Lean `axiom` — the budget stays 0. -/
+/-- **P4-MICRO, bound form** — the finite-microstate (quantized-information) postulate for a region `R`, in the
+    form P4's *floor* actually needs.  `R` is the finite set of mutually distinguishable **regional** microstates
+    (a finite effective Hilbert space / fixed-area sector / code subspace — a type-I/code cutoff of the genuinely
+    type-III local algebra; see the module header), and its log-capacity is **bounded** by the area term:
+    `bound : log N_R ≤ areaTerm`.  This is the **holographic** input `Q_R = log N_R ≤ A/4ℓ_P²`; the area coefficient
+    is the carried UV datum (a free real parameter, never assigned).  Carried as a *typeclass hypothesis*, never as
+    a Lean `axiom` — the budget stays 0. -/
 class HolographicCapacityBound (R : Type*) [Fintype R] (areaTerm : ℝ) where
   /-- The holographic capacity **bound** `log|𝓗_R| ≤ areaTerm` (`= A/4ℓ_P²`, the carried UV datum). This is all
       P4's *floor* needs (GPT-5.5-pro C2). -/
