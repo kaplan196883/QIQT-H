@@ -24,6 +24,22 @@ instantiable content, not merely about thermodynamic entropy: the renormalized i
 region actually realizes obeys $S_{\mathrm{ren}} \le Q_R$. Grounding this bound from a more primitive
 principle, and stating it cleanly in the continuum, is one of the [open problems](/open-problems).
 
+**Update (P4-MICRO, 2026): the area floor is now a *derived theorem*, not a separate postulate.** Taken as a
+finite *capacity* postulate — the region has a finite number $N_R$ of distinguishable regional microstates with
+$\log N_R \le Q_R$ — the area floor $S_{\mathrm{vN}}(\rho_R) \le Q_R$ follows as a one-line corollary of the
+elementary maximum-entropy bound $S_{\mathrm{vN}} \le \log\dim$, machine-checked and axiom-free
+(`area_floor_vonNeumann` in `QIQTH/FQBoundMicro.lean`). So the holographic area floor is no longer postulated — it
+is a *theorem conditional on the finite-capacity postulate*. The honest fine print, enforced in the Lean: the bound
+is on the **von Neumann** entropy of the spectrum (not the Shannon entropy of a decohered record law — the two
+differ off-diagonally); only the inequality is needed (equality is reserved for the maximally-mixed sector); and
+$N_R$ is a finite type-I/code cutoff of the genuinely type-III$_1$ local algebra, not a global dimension. Feeding
+this derived floor into the machine-checked Jacobson construction (`gr_from_p4micro` in `QIQTH/GRFromMicro.lean`)
+yields the **free-field Einstein field equations** — but the capacity postulate *alone* does **not** give gravity:
+a microstate count cannot supply a temperature, so the Bisognano–Wichmann / Unruh thermal input remains a separate
+(free-field-discharged) ingredient. The $1/4$ coefficient is the separately-derived Sakharov induced-gravity ratio;
+the value of $G$ is a carried datum. Grounding the capacity *law* itself (replacing the postulate by a modular
+identity) remains [open](/open-problems).
+
 <figure style="margin:1.8em 0">
 <img src="/bekenstein_flow.png" alt="Log–log plot of information versus region radius from the hydrogen atom to the cosmological horizon, showing the holographic R² capacity envelope, Bekenstein R⁴ energy bounds for several densities meeting it at black-hole collapse, the realized-entropy R³ track far below, the ~20-order entropy jump at collapse, and the cosmological horizon saturating at ~10^122 bits with the universe realizing only ~10^104." style="width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,0.1)" />
 <figcaption style="font-size:0.82em;opacity:0.78;margin-top:0.7em;line-height:1.55">
@@ -160,9 +176,11 @@ the continuum/interacting realization. Born is an honest *reduction*, not yet a 
 
 ---
 
-The status, at a glance: **(FQ)** postulate · **$\chi_R$ calculus** machine-verified · **H2** *retired*
-(category error — capacity does not forbid records) · **single record** supplied by λ (selection postulate;
-covariance + contextuality + no-signaling machine-checked; dynamical-realization gap open) · **Born** reduced
-(axiom-free) to a state-supervenience premise. The whole development is **axiom-free**. The
+The status, at a glance: **(FQ) capacity** postulate · **area floor $S_{\mathrm{vN}}\le Q_R$** now a *derived
+theorem* from it (P4-MICRO, axiom-free) · **$\chi_R$ calculus** machine-verified · **free-field Einstein equations**
+machine-checked from the derived floor + a labelled Bisognano–Wichmann thermal input (`gr_from_p4micro`; capacity
+alone ≠ GR) · **H2** *retired* (category error — capacity does not forbid records) · **single record** supplied by
+λ (selection postulate; covariance + contextuality + no-signaling machine-checked; dynamical-realization gap open) ·
+**Born** reduced (axiom-free) to a state-supervenience premise. The whole development is **axiom-free**. The
 [formalization](/formalization) page documents exactly which pieces are checked; the
 [open problems](/open-problems) page lays out the remaining frontier (λ's law, the continuum).
