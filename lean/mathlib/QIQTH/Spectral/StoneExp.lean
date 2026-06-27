@@ -577,6 +577,47 @@ theorem cayleyStoneU_isometry [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
     _ = Real.sqrt (‖x‖ ^ 2) := by rw [h2]
     _ = ‖x‖ := Real.sqrt_sq (norm_nonneg _)
 
+/-- **`U_t` bundled as a ℂ-linear isometry** `H →ₗᵢ[ℂ] H`.  The strong-limit map `cayleyStoneU` is additive
+    (`cayleyStoneU_add`), ℂ-homogeneous (`cayleyStoneU_smul`) and norm-preserving (`cayleyStoneU_isometry`), so it
+    assembles into a genuine `LinearIsometry`.  (Surjectivity — hence `U_t ∈ unitary(H)` — needs the group law
+    `U_{-t} U_t = 1`, a later brick; an isometry is already injective with closed range.) -/
+noncomputable def cayleyStoneLI [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (t : ℝ) :
+    H →ₗᵢ[ℂ] H where
+  toFun := cayleyStoneU U hgrp hU0 hUinner hUbd hSC t
+  map_add' := cayleyStoneU_add U hgrp hU0 hUinner hUbd hSC t
+  map_smul' := cayleyStoneU_smul U hgrp hU0 hUinner hUbd hSC t
+  norm_map' := cayleyStoneU_isometry U hgrp hU0 hUinner hUbd hSC t
+
+/-- **`U_t` bundled as a bounded operator** `H →L[ℂ] H` (the continuous linear map underlying the isometry
+    `cayleyStoneLI`).  This is the packaging Stone's theorem consumes: the one-parameter group `t ↦ U_t` lives in
+    `H →L[ℂ] H`, where the group law `U_s U_t = U_{s+t}` reads as operator composition and the generator is read off
+    by differentiation. -/
+noncomputable def cayleyStoneCLM [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (t : ℝ) :
+    H →L[ℂ] H :=
+  (cayleyStoneLI U hgrp hU0 hUinner hUbd hSC t).toContinuousLinearMap
+
+/-- The bundled operator acts as the strong-limit map: `cayleyStoneCLM U … t x = cayleyStoneU U … t x`. -/
+@[simp] theorem cayleyStoneCLM_apply [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (t : ℝ) (x : H) :
+    cayleyStoneCLM U hgrp hU0 hUinner hUbd hSC t x = cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x := rfl
+
+/-- The bundled operator is an isometry: `‖cayleyStoneCLM U … t x‖ = ‖x‖` (restating `cayleyStoneU_isometry`
+    at the `H →L[ℂ] H` level). -/
+theorem cayleyStoneCLM_norm_map [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (t : ℝ) (x : H) :
+    ‖cayleyStoneCLM U hgrp hU0 hUinner hUbd hSC t x‖ = ‖x‖ :=
+  cayleyStoneU_isometry U hgrp hU0 hUinner hUbd hSC t x
+
 
 end SelfAdjoint
 

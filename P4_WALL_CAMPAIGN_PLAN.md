@@ -461,7 +461,11 @@ axiom-free, budget 0): Parseval (`cayley_cfc_norm_sq_integral`) ⟹ `‖cfc(g_{t
 on `σ(V)⊆S¹` (`cayleyExpBump_norm`, `‖e_t‖=1`); `∫η_N²=μ_x(σV).toReal−2∫ψ_N+∫ψ_N² → ‖x‖²−0+0` (`cayleyScalarMeasure_-
 univ` + atom-killing `cayleyCutoff_integral_tendsto_atom`/`_sq_integral_tendsto_zero`). Same seq → `‖U_t x‖²`
 (`(cayleyStoneU_tendsto).norm.pow 2`) ⟹ `‖U_t x‖²=‖x‖²` ⟹ `‖U_t x‖=‖x‖` (`Real.sqrt_sq`). **2nd of 3 bricks done.**
-**Next (toward U_t=exp(itA)):** bundle `U_t:H→L[ℂ]H` (linear+isometry ⟹ bounded); lift group
+Also ✅ **`cayleyStoneLI`/`cayleyStoneCLM` — `U_t` bundled as `H →L[ℂ] H`** (`StoneExp.lean`, axiom-free, budget 0):
+`cayleyStoneU_add`/`_smul`/`_isometry` are exactly the `LinearIsometry` fields ⟹ `cayleyStoneLI : H →ₗᵢ[ℂ] H` ⟹
+`cayleyStoneCLM := .toContinuousLinearMap : H →L[ℂ] H` (with `cayleyStoneCLM_apply`/`_norm_map`). The group `t↦U_t`
+now lives in `H →L[ℂ] H` (where `U_s U_t=U_{s+t}` is `∘L`). **3rd brick's packaging done.**
+**Next (toward U_t=exp(itA)):** lift group
 law `U_s U_t=U_{s+t}` (cfc mult + `cayleyExp_add`); strong continuity; generator ⟹ Stone;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.

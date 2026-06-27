@@ -5155,6 +5155,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyStoneU_zero
 #print axioms QIQTH.Spectral.cayleyBump_sq_integral_tendsto
 #print axioms QIQTH.Spectral.cayleyStoneU_isometry
+#print axioms QIQTH.Spectral.cayleyStoneLI
+#print axioms QIQTH.Spectral.cayleyStoneCLM
+#print axioms QIQTH.Spectral.cayleyStoneCLM_apply
+#print axioms QIQTH.Spectral.cayleyStoneCLM_norm_map
+-- ★★★★ P4 WALL — U_t BUNDLED AS A BOUNDED OPERATOR H →L[ℂ] H: cayleyStoneLI (the ℂ-linear isometry H →ₗᵢ[ℂ] H from
+-- cayleyStoneU_add/_smul/_isometry) → cayleyStoneCLM := cayleyStoneLI.toContinuousLinearMap (the H →L[ℂ] H packaging
+-- Stone consumes; cayleyStoneCLM_apply: acts as cayleyStoneU; cayleyStoneCLM_norm_map: ‖U_t x‖=‖x‖ at the operator
+-- level). The one-parameter group t↦U_t now lives in H →L[ℂ] H where U_s U_t=U_{s+t} is operator composition. Axiom-free.
 -- ★★★★ P4 WALL — ‖U_t x‖ = ‖x‖, THE STONE EXPONENTIAL IS AN ISOMETRY (2nd of 3 remaining unitary-group bricks):
 -- cayleyStoneU_isometry [Nontrivial H]. By Parseval (cayley_cfc_norm_sq_integral) ‖cfc(g_{t,N})V x‖²=∫‖g_{t,N}‖²dμ_x,
 -- and on σ(V)⊆S¹ ‖g_{t,N}(ω)‖=η_N(ω) (cayleyExpBump_norm, ‖e_t‖=1) so =∫η_N²dμ_x → ‖x‖² (cayleyBump_sq_integral_-

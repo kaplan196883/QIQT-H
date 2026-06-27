@@ -666,8 +666,19 @@ hence `‖U_t x‖ = ‖x‖` (both nonneg, `Real.sqrt_sq`). *Built green (2 fix
 spectrum-subtype type in the square-expansion `funext`; and split the integral via `have`-with-explicit-type
 equations `e1/e2/e3` — `rw [integral_add …]` failed keyed-matching on the grouped integrand — plus factor `∫1 = ‖x‖²`
 through `exact cayleyScalarMeasure_univ` to bridge the `Measure.real` vs `.toReal` defeq.)*
-**Next:** bundle `U_t : H→L[ℂ]H` (linear + isometry ⟹ bounded `ContinuousLinearMap`); lift the group law `U_s U_t=U_{s+t}`
-(cfc multiplicativity + `cayleyExp_add`); strong continuity; generator ⟹ Stone.
+
+Also ✅ `cayleyStoneLI` + `cayleyStoneCLM` (+ `cayleyStoneCLM_apply`/`cayleyStoneCLM_norm_map`) — **★★★★ `U_t`
+BUNDLED AS A BOUNDED OPERATOR `H →L[ℂ] H`** (`StoneExp.lean`, axiom-free, budget 0): the **third remaining
+unitary-group brick's packaging step**. The strong-limit map `cayleyStoneU` is additive (`cayleyStoneU_add`),
+ℂ-homogeneous (`cayleyStoneU_smul`) and norm-preserving (`cayleyStoneU_isometry`), exactly the `LinearIsometry`
+fields, so `cayleyStoneLI : H →ₗᵢ[ℂ] H` assembles directly (`{ toFun, map_add', map_smul', norm_map' }`); then
+`cayleyStoneCLM := cayleyStoneLI.toContinuousLinearMap : H →L[ℂ] H` is the bounded-operator packaging Stone consumes
+(`cayleyStoneCLM_apply : U_t x = cayleyStoneU … x` by `rfl`; `cayleyStoneCLM_norm_map : ‖U_t x‖ = ‖x‖`). The
+one-parameter family `t ↦ U_t` now lives in `H →L[ℂ] H`, where the group law `U_s U_t = U_{s+t}` reads as operator
+composition `∘L` and the generator is read off by differentiation. *Built green first try.* (Surjectivity — hence
+`U_t ∈ unitary(H)` — still needs the group law `U_{−t} U_t = 1`; an isometry is already injective with closed range.)
+**Next:** lift the group law `U_s U_t = U_{s+t}` (cfc multiplicativity + `cayleyExp_add`); strong continuity;
+generator ⟹ Stone.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`
