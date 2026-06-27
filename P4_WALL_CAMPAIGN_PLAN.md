@@ -568,10 +568,24 @@ pointwise `ring` identity `−i((1−ω)/2·ψ − ψ) = i(1+ω)/2·ψ` closes i
 subtype transport — use `Subtype.ext`+`key.trans`; `cfc_add` has IMPLICIT `a` so was unusable — replaced the `(1+ω)`
 expansion with the direct `cfc_sub`/`cfc_const_mul`+ring; pin the finishing `Eq` type; scalar facts unneeded since the
 identity is linear in `i`).* **THE GPT-5.5-pro ROUTE TO X=A_edge IS COMPLETE on the abstract C₀ group.**
-**Next (redirected, FINAL Stone step):** (iv) **instantiate** the concrete C₀ groups — feed `clockTransl λ_t`
-(resp. `translationLp`, `modUnitary`) into `stoneGen_cfc_h_mul` ⟹ the clock energy `X = stoneGen clockTransl = mult by
-c` = `A_edge` (the area operator's spectral form). Then Phase 5 (dual-weight trace) via the **narrow conditional
-interface** (state `S(ρ_R) ≤ A/4ℓ_P²` under `τ(θ_s a)=e^{−s}τ` + `K̃=A_edge/4ℓ_P²`, no full crossed-product).
+**🧭 MAJOR STATUS CORRECTION (verified in codebase + AxiomAudit this fire):** the "essential-self-adjointness wall"
+that the plan (and several recent checkpoints) treated as the remaining Stone frontier is **ALREADY BROKEN, axiom-free**:
+`stoneGen_isSelfAdjoint` (Garding.lean) proves the Stone generator of ANY contractive C₀ group is **self-adjoint**
+(basic criterion: symmetric `A ⊆ A†` + `Range(A±i)=H`, both already proven — NO Cayley transform / PVM needed). It is
+**already instantiated** for all three named generators: `clockEnergy_isSelfAdjoint` (= **`X = A_edge = stoneGen
+clockTransl`**, the clock energy — so the operator-theoretic `X = A_edge` of Phase 4.3 is DONE), `momentumOp_isSelfAdjoint`
+(`P = −i d/dx`), `modularGen_isSelfAdjoint` (`K`). So **Phase 4.2–4.3 (general Stone + self-adjoint X = A_edge) is
+COMPLETE.** This session's Cayley/cfc work (the unitary group `U_t = exp(itA)` + the spectral action `stoneGen U = mult
+by c`, `stoneGen_cfc_h_mul`) is the COMPLEMENTARY spectral content (the "unbounded spectral theorem" payload) built
+WITHOUT a PVM. Also ✅ this fire: `translationCLM_norm_le`/`_continuous` (named hUbd/hSC) + `instNontrivialLp2`
+(`Nontrivial L²(ℝ)`) — the prerequisites for instantiating `stoneGen_cfc_h_mul` on `translationCLM`; the instantiation
+itself is **checkpointed** (the `Lp` cfc-coercion `whnf` plumbing, `↑↑(cayleyUnitary)` mismatch — documented in
+`MomentumGenerator.lean`, purely mechanical, the abstract identity is proven).
+**Next (the genuine remaining frontier — Phase 5):** the **dual-weight trace + Type II scaling** `τ∘θ_s = e^{−s}τ` ⟹
+the FQ bound `S(ρ_R) ≤ A/4ℓ_P²`, via the **narrow conditional interface** (state the bound CONDITIONALLY under
+`τ(θ_s a)=e^{−s}τ(a)` + `K̃=A_edge/4ℓ_P²`, NOT a full crossed-product/vN-weights construction — Mathlib lacks it; per
+GPT-5.5-pro this frontier EXPANDS unless narrowly interfaced). This — plus the optional `Lp`-plumbing instantiation —
+is all that remains toward P4's bound.
 **(Superseded) earlier framing — the direct identity `stoneGen U (φ(V)z)=(c·φ)(V)z` via the
 resolvent factorization above (B); then instantiate translationLp/modUnitary/clockTransl ⟹ X=A_edge; then Phase 5
 via the conditional interface;

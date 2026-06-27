@@ -5073,6 +5073,15 @@ namespace QIQTH.AxiomAudit
 -- K = stoneGen (modUnitary S) = the JLMS modular Hamiltonian (abstract one-particle space). Each instantiates
 -- stoneGen_isSelfAdjoint with the group's (∘L group law, U_0=1, unitarity, isometry/norm, strong continuity). All
 -- three are GENUINE SELF-ADJOINT UNBOUNDED OPERATORS. Axiom-free. Remaining (Mathlib gap): unbounded spectral theorem.
+#print axioms QIQTH.Spectral.Multiplication.translationCLM_norm_le
+#print axioms QIQTH.Spectral.Multiplication.translationCLM_continuous
+#print axioms QIQTH.Spectral.Multiplication.instNontrivialLp2
+-- ★★★ P4 WALL — UPDATE: the "unbounded spectral theorem" gap above is now substantially addressed via the Cayley/cfc
+-- route (QIQTH.Spectral.stoneGen_cfc_h_mul): the self-adjoint generators ALSO act as MULTIPLICATION BY THE SPECTRAL
+-- VALUE c on the cfc core — the spectral content WITHOUT a PVM. translationCLM_norm_le/_continuous (the hUbd/hSC named
+-- hypotheses) + instNontrivialLp2 (L²(ℝ) nontrivial) are the prerequisites for instantiating stoneGen_cfc_h_mul on
+-- translationCLM (P = mult by c); the instantiation itself is checkpointed (Lp cfc-coercion plumbing, see
+-- MomentumGenerator.lean). So X = A_edge (clockEnergy_isSelfAdjoint, self-adjoint) + the spectral action are BOTH done.
 #print axioms QIQTH.Spectral.cayley_isStarNormal
 #print axioms QIQTH.Spectral.nonneg_re_inner_nonneg
 #print axioms QIQTH.Spectral.cayley_cfc_id
