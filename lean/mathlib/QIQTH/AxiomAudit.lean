@@ -5119,6 +5119,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayley_cfc_tendsto_zero_of_integral
 #print axioms QIQTH.Spectral.cayley_cfc_cauchySeq_of_integral
 #print axioms QIQTH.Spectral.cayley_defect_energy
+#print axioms QIQTH.Spectral.cayleyCutoff_pos
+#print axioms QIQTH.Spectral.cayleyCutoff_le_one
+#print axioms QIQTH.Spectral.cayleyCutoff_continuous
+#print axioms QIQTH.Spectral.cayleyCutoff_tendsto_zero_of_ne
+#print axioms QIQTH.Spectral.cayleyCutoff_tendsto_indicator
+#print axioms QIQTH.Spectral.cayleyCutoff_sq_mul_tendsto_zero
+-- ★ P4 WALL — THE RATIONAL CUTOFF SCAFFOLDING (toward μ_x({1})=0): cayleyCutoff N z := (1+(N+1)‖z−1‖²)⁻¹ and its
+-- analytic properties — cayleyCutoff_pos (0<ψ_N), _le_one (ψ_N≤1, the DCT dominator), _continuous (each ψ_N cts),
+-- _tendsto_zero_of_ne (z≠1 ⟹ ψ_N(z)→0, denom→∞ via inv_tendsto_atTop), _tendsto_indicator (ψ_N→1_{z=1} ptwise,
+-- the DCT limit for ∫ψ_N dμ_x→μ_x({1})), _sq_mul_tendsto_zero (‖z−1‖²·ψ_N²→0, the integrand for ∫‖(ω−1)ψ_N‖²→0,
+-- dominated by the defect-energy integrand). Pure real analysis, U-independent. Feeds the L²→strong bridge to kill
+-- the Cayley atom μ_x({1})=0. Axiom-free.
 -- ★★ P4 WALL — THE CAYLEY DEFECT-ENERGY IDENTITY: cayley_defect_energy [Nontrivial H] — ‖V x − x‖² =
 -- ∫ ω, ‖(ω:ℂ)−1‖² dμ_x. The f=z−1 specialization of the Parseval f-isometry cayley_cfc_norm_sq_integral, using
 -- cfc(z↦z−1)V = V−1 (cfc_sub + keystones cayley_cfc_id `cfc id V=V` & cayley_cfc_one `cfc 1 V=1`). Quantitatively

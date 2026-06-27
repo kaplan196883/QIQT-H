@@ -532,6 +532,13 @@ cutoff `ψ_N(ω)=(1+(N+1)‖ω−1‖²)⁻¹` (continuous, `0<ψ_N≤1`, `ψ_N�
 [`∫ψ_N dμ_x→μ_x({1})`, `∫‖ψ_N−ψ_M‖²→0` (L²-Cauchy), `∫‖(ω−1)ψ_N‖²→0`]; existence-half ⟹ `cfc(ψ_N)V x→w`;
 convergence-half ⟹ `(V−1)cfc(ψ_N)V x = cfc((ω−1)ψ_N)V x → 0`, so `(V−1)w=0` ⟹ `w=0` (`cayley_one_sub_injective`);
 `re⟪x,cfc(ψ_N)V x⟫=∫ψ_N dμ_x → μ_x({1})` and `→ re⟪x,w⟫=0`, hence `μ_x({1})=0`.
+Also ✅ `cayleyCutoff` + scaffolding (`cayleyCutoff_pos`/`_le_one`/`_continuous`/`_tendsto_zero_of_ne`/
+`_tendsto_indicator`/`_sq_mul_tendsto_zero`) — **the rational cutoff sequence** `ψ_N(z)=(1+(N+1)‖z−1‖²)⁻¹` and its
+analytic properties: `0<ψ_N≤1` (the DCT dominator), each `ψ_N` continuous, `ψ_N(z)→0` for `z≠1` (denom→∞ via
+`Filter.Tendsto.inv_tendsto_atTop`), the **pointwise limit `ψ_N→1_{z=1}`** (the convergence DCT consumes for
+`∫ψ_N dμ_x→μ_x({1})`), and `‖z−1‖²·ψ_N²→0` (the integrand for `∫‖(ω−1)ψ_N‖²→0`, dominated by the defect-energy
+integrand `‖ω−1‖²`). Pure real analysis, `U`-independent. **Next:** the 3 DCT limits over `μ_x` (using these +
+`cayley_defect_energy` as the dominator) + the L²→strong bridge ⟹ `μ_x({1})=0`.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

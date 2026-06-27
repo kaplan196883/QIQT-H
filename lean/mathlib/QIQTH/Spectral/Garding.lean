@@ -1787,6 +1787,63 @@ theorem cayley_defect_energy [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
   rw [hcoord, ContinuousLinearMap.sub_apply, ContinuousLinearMap.one_apply] at hpars
   exact hpars
 
+/-- **The rational cutoff sequence** `ψ_N(z) = (1 + (N+1)‖z − 1‖²)⁻¹` on `ℂ`.  As `N → ∞` it descends to the
+    indicator of `{1}`: `ψ_N(1) = 1` for all `N`, while `ψ_N(z) → 0` for `z ≠ 1`.  Each `ψ_N` is continuous and
+    valued in `(0, 1]`.  This is the approximation device that, fed through the L²(μ_x) → strong-operator bridge
+    (`cayley_cfc_cauchySeq_of_integral` + `cayley_cfc_tendsto_zero_of_integral`), kills the Cayley spectral atom
+    `μ_x({1}) = 0` (and so makes the inverse-Cayley / Stone exponential symbol `μ_x`-a.e. defined).  Pure analysis,
+    independent of the operator `U`. -/
+noncomputable def cayleyCutoff (N : ℕ) (z : ℂ) : ℝ := (1 + ((N : ℝ) + 1) * ‖z - 1‖ ^ 2)⁻¹
+
+/-- The cutoff is strictly positive (its denominator is `≥ 1 > 0`). -/
+theorem cayleyCutoff_pos (N : ℕ) (z : ℂ) : 0 < cayleyCutoff N z :=
+  inv_pos.mpr (by positivity)
+
+/-- The cutoff is bounded by `1` (its denominator is `≥ 1`); so `‖ψ_N‖ ≤ 1`, the integrable dominator for DCT. -/
+theorem cayleyCutoff_le_one (N : ℕ) (z : ℂ) : cayleyCutoff N z ≤ 1 :=
+  inv_le_one_of_one_le₀ (le_add_of_nonneg_right (by positivity))
+
+/-- Each cutoff `ψ_N` is continuous on `ℂ` (continuous denominator, bounded below by `1`). -/
+theorem cayleyCutoff_continuous (N : ℕ) : Continuous (cayleyCutoff N) := by
+  refine Continuous.inv₀ ?_ (fun z => by positivity)
+  exact continuous_const.add
+    (continuous_const.mul ((continuous_id.sub continuous_const).norm.pow 2))
+
+/-- For `z ≠ 1` the cutoff vanishes in the limit: `ψ_N(z) → 0` (the denominator `→ ∞`). -/
+theorem cayleyCutoff_tendsto_zero_of_ne {z : ℂ} (h : z ≠ 1) :
+    Filter.Tendsto (fun N => cayleyCutoff N z) Filter.atTop (nhds 0) := by
+  have hc : 0 < ‖z - 1‖ ^ 2 := pow_pos (norm_pos_iff.mpr (sub_ne_zero.mpr h)) 2
+  have hdiv : Filter.Tendsto (fun N : ℕ => 1 + ((N : ℝ) + 1) * ‖z - 1‖ ^ 2) Filter.atTop Filter.atTop := by
+    refine Filter.tendsto_atTop_mono (fun N => ?_) (tendsto_natCast_atTop_atTop.atTop_mul_const hc)
+    nlinarith [hc.le, Nat.cast_nonneg (α := ℝ) N]
+  exact hdiv.inv_tendsto_atTop
+
+/-- **The pointwise limit of the cutoff sequence is the indicator of `{1}`:**
+    `ψ_N(z) → (if z = 1 then 1 else 0)`.  At `z = 1` it is constantly `1`; off `1` it tends to `0`
+    (`cayleyCutoff_tendsto_zero_of_ne`).  This is the convergence DCT consumes to evaluate `∫ ψ_N dμ_x → μ_x({1})`. -/
+theorem cayleyCutoff_tendsto_indicator (z : ℂ) :
+    Filter.Tendsto (fun N => cayleyCutoff N z) Filter.atTop (nhds (if z = 1 then (1 : ℝ) else 0)) := by
+  by_cases h : z = 1
+  · rw [if_pos h]
+    have : (fun N : ℕ => cayleyCutoff N z) = (fun _ => (1 : ℝ)) := by
+      funext N; simp [cayleyCutoff, h]
+    rw [this]; exact tendsto_const_nhds
+  · rw [if_neg h]; exact cayleyCutoff_tendsto_zero_of_ne h
+
+/-- **The `(z − 1)`-weighted square of the cutoff vanishes pointwise:** `‖z − 1‖² · ψ_N(z)² → 0`.  At `z = 1` the
+    factor `‖z − 1‖² = 0`; off `1`, `ψ_N(z) → 0`.  This is the integrand convergence DCT consumes to show
+    `∫ ‖(ω − 1) ψ_N‖² dμ_x → 0` (dominated by the defect-energy integrand `‖ω − 1‖²`, `cayley_defect_energy`),
+    which forces `(V − 1) w = 0` (hence `w = 0`) for the strong limit `w` of `cfc(ψ_N) V x`. -/
+theorem cayleyCutoff_sq_mul_tendsto_zero (z : ℂ) :
+    Filter.Tendsto (fun N => ‖z - 1‖ ^ 2 * (cayleyCutoff N z) ^ 2) Filter.atTop (nhds 0) := by
+  by_cases h : z = 1
+  · have : (fun N : ℕ => ‖z - 1‖ ^ 2 * (cayleyCutoff N z) ^ 2) = (fun _ => (0 : ℝ)) := by
+      funext N; simp [h]
+    rw [this]; exact tendsto_const_nhds
+  · have ht := (cayleyCutoff_tendsto_zero_of_ne h).pow 2
+    rw [show (0 : ℝ) = ‖z - 1‖ ^ 2 * (0 : ℝ) ^ 2 by ring]
+    exact ht.const_mul (‖z - 1‖ ^ 2)
+
 end SelfAdjoint
 
 end QIQTH.Spectral

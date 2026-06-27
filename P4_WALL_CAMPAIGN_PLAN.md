@@ -399,7 +399,12 @@ Also ✅ `cayley_defect_energy` `[Nontrivial H]` (**the Cayley defect-energy ide
 the `f=z−1` specialization of the Parseval f-isometry, via `cfc(z↦z−1)V=V−1` from `cfc_sub`+`cayley_cfc_id`/`_one`).
 Spectral mass × squared distance-to-1 = the Cayley defect `‖(V−1)x‖²` — the integral witnessing `ker(1−V)=0`; the
 inverse-Cayley generator is obstructed only by the spectral atom `μ_x({1})` (next brick).
-**Next:** `μ_x({1})=0` via cutoffs `ψ_N=(1+(N+1)‖ω−1‖²)⁻¹` + 3 DCT limits + the L²→strong bridge + `ker(1−V)=0`;
+Also ✅ `cayleyCutoff` + scaffolding (`_pos`/`_le_one`/`_continuous`/`_tendsto_zero_of_ne`/`_tendsto_indicator`/
+`_sq_mul_tendsto_zero`) (**the rational cutoff sequence** `ψ_N(z)=(1+(N+1)‖z−1‖²)⁻¹`: `0<ψ_N≤1`, continuous,
+`ψ_N→0` off 1, `ψ_N→1_{z=1}` ptwise, `‖z−1‖²ψ_N²→0`; pure real analysis, `U`-independent — the DCT approximation
+device that kills the atom).
+**Next:** `μ_x({1})=0` via the 3 DCT limits over `μ_x` (using the cutoff scaffolding + `cayley_defect_energy`
+dominator) + the L²→strong bridge + `ker(1−V)=0`;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
