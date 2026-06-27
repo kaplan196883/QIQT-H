@@ -419,8 +419,12 @@ via `integral_mono_of_nonneg`, fed to `cayley_cfc_cauchySeq_of_integral`).
 Also ✅ `cayleyCutoff_cfc_tendsto_zero` `[Nontrivial H]` (**★★★ the cutoff CFC vectors → 0** — the operator heart:
 `cfc(ψ_N)V x → 0`. Existence (CauchySeq→w) + `(V−1)w=0` (DCT-3 + convergence-half + continuity + `tendsto_nhds_unique`)
 + `w=0` (`ker(1−V)=0`). `cfc(z−1)V=V−1` via `cfc_mul`+`cfc_sub`+`cayley_cfc_id`/`_one`. Built green first try).
-**Next (SHORT final step ⟹ μ_x({1})=0):** DCT-1 + `∫ψ_N dμ=re⟪x,cfc(ψ_N)V x⟫` (`integral_re_cfc_ofReal`) +
-inner/re-continuity on `cfc(ψ_N)V x→0` ⟹ `μ_x({1}).toReal=re⟪x,0⟫=0` ⟹ `μ_x({1})=0`;
+Also ✅ `cayleyScalarMeasure_atom_eq_zero` `[Nontrivial H]` (**★★★★ THE CAYLEY SPECTRAL ATOM VANISHES: `μ_x({1})=0`** —
+no mass on the exceptional point `1∈S¹`. DCT-1 + `∫ψ_N dμ=re⟪x,cfc(ψ_N)V x⟫` + `cfc(ψ_N)V x→0` + inner/re-continuity ⟹
+`μ_x({1}).toReal=0` ⟹ `μ_x({1})=0`. Built green first try). **ATOM-KILLING COMPLETE** — the inverse-Cayley/Stone
+exponential symbol `exp(it·invCayley(ω))` is now `μ_x`-a.e. defined, the precondition for `U_t=exp(itA)`.
+**Next (toward U_t=exp(itA)):** assemble the strong limit `U_t x=lim cfc(g_{t,N})V x` (`g_{t,N}` continuous cutoffs of
+`exp(it·invCayley(·))`, defined a.e. now the atom is gone — the convergence + existence bridges feed this directly);
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

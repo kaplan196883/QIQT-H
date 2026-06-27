@@ -2170,6 +2170,50 @@ theorem cayleyCutoff_cfc_tendsto_zero [Nontrivial H] (U : ℝ → (H →L[ℂ] H
     show cayley U hgrp hU0 hUinner hUbd hSC 0
       = (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) 0 from rfl, map_zero, sub_zero]
 
+/-- **★★★ The Cayley spectral atom vanishes: `μ_x({1}) = 0`.**  The scalar spectral measure of the Cayley unitary
+    `V = (A−i)(A+i)⁻¹` puts **no mass** on the exceptional point `1 ∈ S¹` (the image of `∞` under the inverse
+    Cayley map).  Proof: DCT-1 (`cayleyCutoff_integral_tendsto_atom`) gives `∫ ψ_N dμ_x → μ_x({1})`; the integral
+    identity `∫ ψ_N dμ_x = re⟪x, cfc(ψ_N) V x⟫` (`integral_re_cfc_ofReal`) and the strong limit
+    `cfc(ψ_N) V x → 0` (`cayleyCutoff_cfc_tendsto_zero`, with inner-product and `re` continuity) give
+    `∫ ψ_N dμ_x → re⟪x, 0⟫ = 0`; uniqueness of limits forces `μ_x({1}).toReal = 0`, hence `μ_x({1}) = 0` (`μ_x`
+    finite).  **Consequence:** the inverse-Cayley / Stone-exponential symbol `exp(it·invCayley(ω))` — continuous and
+    bounded off `ω = 1` — is now `μ_x`-a.e. defined, the precondition for building the strong-limit Stone exponential
+    `U_t = exp(it A)`.  Axiom-free; free scalar; no UV datum. -/
+theorem cayleyScalarMeasure_atom_eq_zero [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x
+      {ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) | (ω : ℂ) = 1} = 0 := by
+  haveI : IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+    cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC x
+  -- ∫ ψ_N dμ_x = re⟪x, cfc(ψ_N) V x⟫
+  have heq : ∀ N, ∫ ω, cayleyCutoff N (ω : ℂ)
+      ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x)
+      = (inner ℂ x (cfc (fun z => (cayleyCutoff N z : ℂ))
+          (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)).re := fun N =>
+    (integral_re_cfc_ofReal U hgrp hU0 hUinner hUbd hSC (cayleyCutoff N)
+      ((cayleyCutoff_continuous N).continuousOn) x).symm
+  -- re⟪x, cfc(ψ_N) V x⟫ → 0  (from cfc(ψ_N) V x → 0, inner + re continuity)
+  have htends : Filter.Tendsto (fun N => (inner ℂ x (cfc (fun z => (cayleyCutoff N z : ℂ))
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)).re) Filter.atTop (nhds 0) := by
+    have h2 : Filter.Tendsto (fun N => inner ℂ x (cfc (fun z => (cayleyCutoff N z : ℂ))
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)) Filter.atTop (nhds (inner ℂ x (0 : H))) :=
+      tendsto_const_nhds.inner (cayleyCutoff_cfc_tendsto_zero U hgrp hU0 hUinner hUbd hSC x)
+    rw [inner_zero_right] at h2
+    have h3 := (Complex.continuous_re.tendsto (0 : ℂ)).comp h2
+    simpa using h3
+  -- DCT-1: ∫ ψ_N dμ_x → μ_x({1}).toReal ; combined with heq it also → 0, so the atom's toReal is 0
+  have hatom := cayleyCutoff_integral_tendsto_atom U hgrp hU0 hUinner hUbd hSC x
+  rw [funext heq] at hatom
+  have hreal : (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x
+      {ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) | (ω : ℂ) = 1}).toReal = 0 :=
+    tendsto_nhds_unique hatom htends
+  rw [ENNReal.toReal_eq_zero_iff] at hreal
+  rcases hreal with h | h
+  · exact h
+  · exact absurd h (measure_ne_top _ _)
+
 end SelfAdjoint
 
 end QIQTH.Spectral

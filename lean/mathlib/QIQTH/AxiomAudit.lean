@@ -5131,6 +5131,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyCutoff_L2_tendsto_zero
 #print axioms QIQTH.Spectral.cayleyCutoff_cfc_cauchySeq
 #print axioms QIQTH.Spectral.cayleyCutoff_cfc_tendsto_zero
+#print axioms QIQTH.Spectral.cayleyScalarMeasure_atom_eq_zero
+-- ★★★★ P4 WALL — THE CAYLEY SPECTRAL ATOM VANISHES: cayleyScalarMeasure_atom_eq_zero [Nontrivial H] —
+-- μ_x({1}) = 0, i.e. the scalar spectral measure of the Cayley unitary V puts NO mass on the exceptional point
+-- 1 ∈ S¹ (image of ∞ under inverse Cayley). DCT-1 (∫ψ_N dμ→μ_x({1})) + ∫ψ_N dμ=re⟪x,cfc(ψ_N)V x⟫
+-- (integral_re_cfc_ofReal) + cfc(ψ_N)V x→0 (cayleyCutoff_cfc_tendsto_zero, inner+re continuity) ⟹ ∫ψ_N→re⟪x,0⟫=0;
+-- tendsto_nhds_unique ⟹ μ_x({1}).toReal=0 ⟹ μ_x({1})=0 (μ_x finite). CONSEQUENCE: the inverse-Cayley/Stone
+-- exponential symbol exp(it·invCayley(ω)) (continuous+bounded off ω=1) is now μ_x-a.e. defined — the precondition
+-- for the strong-limit Stone exponential U_t=exp(itA). Axiom-free.
 -- ★★★ P4 WALL — THE CUTOFF CFC VECTORS TEND TO 0 (the operator heart of the atom-killing):
 -- cayleyCutoff_cfc_tendsto_zero [Nontrivial H] — cfc(ψ_N) V x → 0 strongly in H. Assembles: (existence) the
 -- CauchySeq converges to w (cauchySeq_tendsto_of_complete on cayleyCutoff_cfc_cauchySeq); ((V−1)w=0) the defect

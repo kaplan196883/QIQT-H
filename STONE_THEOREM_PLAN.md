@@ -573,9 +573,16 @@ Also ✅ `cayleyCutoff_cfc_tendsto_zero` `[Nontrivial H]` — **★★★ the cu
 on the CauchySeq ⟹ `cfc(ψ_N)V x→w`; (`(V−1)w=0`) the defect `(V−1)cfc(ψ_N)V x = cfc((z−1)ψ_N)V x → 0` (DCT-3 fed
 through `cayley_cfc_tendsto_zero_of_integral`, the convergence half — the `cfc(z−1)V=V−1` step is `cfc_mul`+`cfc_sub`
 +`cayley_cfc_id`/`_one`) and `→ (V−1)w` by continuity of `V−1`, so `tendsto_nhds_unique` ⟹ `(V−1)w=0`; (`w=0`)
-`ker(1−V)=0` (`cayley_one_sub_injective`). *Built green first try.* **Next (the SHORT final step ⟹ μ_x({1})=0):**
-DCT-1 (`∫ψ_N dμ→μ_x({1})`) + `∫ψ_N dμ = re⟪x,cfc(ψ_N)V x⟫` (`integral_re_cfc_ofReal`) + inner/re-continuity on
-`cfc(ψ_N)V x→0` ⟹ `μ_x({1}).toReal = re⟪x,0⟫ = 0` ⟹ `μ_x({1})=0` (finite measure).
+`ker(1−V)=0` (`cayley_one_sub_injective`). *Built green first try.*
+Also ✅ `cayleyScalarMeasure_atom_eq_zero` `[Nontrivial H]` — **★★★★ the Cayley spectral atom VANISHES: `μ_x({1})=0`.**
+The scalar spectral measure of the Cayley unitary `V` puts **no mass** on the exceptional point `1∈S¹` (image of `∞`
+under inverse Cayley). DCT-1 (`∫ψ_N dμ→μ_x({1})`) + `∫ψ_N dμ=re⟪x,cfc(ψ_N)V x⟫` (`integral_re_cfc_ofReal`) +
+`cfc(ψ_N)V x→0` (with `Filter.Tendsto.inner` + `Complex.continuous_re`) ⟹ `∫ψ_N→re⟪x,0⟫=0`; `tendsto_nhds_unique`
+⟹ `μ_x({1}).toReal=0` ⟹ `μ_x({1})=0` (`ENNReal.toReal_eq_zero_iff` + `measure_ne_top`). *Built green first try.*
+**ATOM-KILLING COMPLETE.** **Consequence:** the inverse-Cayley / Stone-exponential symbol `exp(it·invCayley(ω))`
+(continuous + bounded off `ω=1`) is now `μ_x`-a.e. defined — the precondition for the strong-limit Stone exponential
+`U_t=exp(itA)`. **Next:** assemble the strong limit `U_t x = lim cfc(g_{t,N}) V x` with `g_{t,N}` continuous cutoffs
+of `exp(it·invCayley(·))` (the convergence + existence bridges + the now-vanishing atom feed this directly).
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`
