@@ -1539,6 +1539,36 @@ theorem cayleyStoneCLM_stoneGen_cfc [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
   rw [heq]
   exact cayleyStoneU_cfc_hasDerivAt U hgrp hU0 hUinner hUbd hSC φ hφ hetφ hcφ z
 
+/-- **The cfc bump vectors are an approximate identity:** `cfc(η_N) V z → z`, where `η_N = cayleyBump N`.  Since
+    `η_N = 1 − ψ_N`, `cfc(η_N) V z = z − cfc(ψ_N) V z` (`cfc_sub` + `cayley_cfc_one`), and the atom-killing limit
+    `cfc(ψ_N) V z → 0` (`cayleyCutoff_cfc_tendsto_zero`, `μ_z({1}) = 0`) gives `z − 0 = z`.  Because each `η_N` is
+    continuous on `σ(V)` and vanishes (quadratically) at the excluded point `1` — so the bump vectors `cfc(η_N) V z`
+    are genuine spectral-core vectors — this shows the **smooth domain of the Stone group is dense**: every `z` is a
+    limit of core vectors on which the generator acts as multiplication by the spectral value `c`.  Axiom-free. -/
+theorem cayleyBump_cfc_tendsto [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (z : H) :
+    Filter.Tendsto (fun N => cfc (fun ω => (cayleyBump N ω : ℂ))
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z) Filter.atTop (nhds z) := by
+  have hrw : (fun N => cfc (fun ω => (cayleyBump N ω : ℂ))
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)
+      = (fun N => z - cfc (fun ω => (cayleyCutoff N ω : ℂ))
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z) := by
+    funext N
+    have hsymb : (fun ω => (cayleyBump N ω : ℂ))
+        = (fun z => (1 : ℂ → ℂ) z - (fun w => (cayleyCutoff N w : ℂ)) z) := by
+      funext ω; simp only [cayleyBump, Pi.one_apply]; push_cast; ring
+    rw [hsymb, cfc_sub (f := (1 : ℂ → ℂ)) (g := fun w => (cayleyCutoff N w : ℂ))
+        (a := (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))
+        (hg := (Complex.continuous_ofReal.comp (cayleyCutoff_continuous N)).continuousOn),
+      cayley_cfc_one U hgrp hU0 hUinner hUbd hSC]
+    simp [ContinuousLinearMap.sub_apply]
+  rw [hrw]
+  have h0 : nhds z = nhds (z - 0) := by rw [sub_zero]
+  rw [h0]
+  exact tendsto_const_nhds.sub (cayleyCutoff_cfc_tendsto_zero U hgrp hU0 hUinner hUbd hSC z)
+
 
 end SelfAdjoint
 

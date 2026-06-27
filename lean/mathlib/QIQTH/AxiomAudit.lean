@@ -5182,6 +5182,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyStoneU_cfc_hasDerivAt
 #print axioms QIQTH.Spectral.cayleyStoneCLM_cfc_mem_stoneDomain
 #print axioms QIQTH.Spectral.cayleyStoneCLM_stoneGen_cfc
+#print axioms QIQTH.Spectral.cayleyBump_cfc_tendsto
+-- ★★★★ P4 WALL — THE cfc CORE IS DENSE (approximate identity): cayleyBump_cfc_tendsto — cfc(η_N)V z → z, η_N=cayleyBump.
+-- Since η_N=1−ψ_N, cfc(η_N)V z = z − cfc(ψ_N)V z (cfc_sub + cayley_cfc_one), and the atom-killing cfc(ψ_N)V z→0
+-- (cayleyCutoff_cfc_tendsto_zero, μ_z({1})=0) gives z. The η_N vanish quadratically at the excluded point 1, so the
+-- bump vectors cfc(η_N)V z are genuine spectral-core vectors → the smooth domain of the Stone group is DENSE: every z
+-- is a limit of core vectors on which the generator acts as multiplication by the spectral value c. Axiom-free.
 -- ★★★★★ P4 WALL — STONE'S CORRESPONDENCE PACKAGED: the generator of the reconstructed unitary group IS multiplication
 -- by the spectral value. cayleyStoneCLM_cfc_mem_stoneDomain — cfc φ V z ∈ stoneDomain(cayleyStoneCLM) (differentiable
 -- ⟹ in the smooth domain, via cayleyStoneCLM_apply). cayleyStoneCLM_stoneGen_cfc — stoneGen(cayleyStoneCLM)⟨cfc φ V z⟩

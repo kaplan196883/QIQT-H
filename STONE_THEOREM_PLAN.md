@@ -823,12 +823,22 @@ identification: `stoneGen_eq_of_hasDerivAt` applied to the generator `HasDerivAt
 one-parameter unitary group (forward) AND `A = stoneGen U = mult by c` is its self-adjoint generator (converse) —
 fully axiom-free via Cayley/cfc, NO PVM, NO UV datum. The pivotal wall (general Stone, Phase 3 = P4_WALL 4.2) is
 **broken on the spectral core.**
-**Next (toward X = A_edge, Phase 4.3):** (a) the Gårding/spectral-core **density** — that `{cfc φ V z : φ, c·φ ∈
-C(σV)}` is dense / a core for `stoneGen`, so the generator is determined everywhere (the smooth-domain density was
-already scaffolded in `Garding.lean` via mollified vectors; connect the cfc core to it); (b) **apply the whole
-machine to the concrete C₀ groups** (`translationLp e^{itP}`, `modUnitary Δ^{it}`, `clockTransl λ_t`) — instantiate
-`U` with each, giving their generators as `stoneGen`, ⟹ the clock energy `X = A_edge`. Then Phase 5 (dual-weight
-trace) — the other genuine Mathlib-grade frontier.
+Also ✅ `cayleyBump_cfc_tendsto` — **★★★★ THE cfc CORE IS DENSE (approximate identity)** (`StoneExp.lean`, axiom-free,
+budget 0): `cfc(η_N) V z → z` (`η_N = cayleyBump N`). Since `η_N = 1 − ψ_N`, `cfc(η_N) V z = z − cfc(ψ_N) V z`
+(`cfc_sub` + `cayley_cfc_one`), and the atom-killing limit `cfc(ψ_N) V z → 0` (`cayleyCutoff_cfc_tendsto_zero`,
+`μ_z({1}) = 0`) gives `z`. The `η_N` vanish **quadratically** at the excluded point `1` (`η_N ~ |ω−1|²`, killing the
+`c ~ 1/|ω−1|` singularity so `c·η_N` extends continuously), so the bump vectors `cfc(η_N) V z` are genuine
+spectral-core vectors — hence **the smooth domain of the Stone group is DENSE**: every `z` is a limit of core vectors
+on which the generator acts as multiplication by the spectral value `c`. *Built green first try.*
+**Next (toward X = A_edge, Phase 4.3):** (a) **`c·η_N ∈ C(σV)`** (the at-`1` squeeze `|c·η_N| ≤ |1+ω|·(N+1)|ω−1| → 0`,
+mirroring `cayleyExpBump_continuousOn`) ⟹ the bump vectors are *core* vectors ⟹ combine with `cayleyBump_cfc_tendsto`
+for the formal **density of `stoneDomain(cayleyStoneCLM)`** (the generator is a genuine densely-defined operator with
+spectral action `mult by c`); (b) **the recovery** `cayleyStoneCLM U = U` (equivalently `stoneGen U = mult by c`) — the
+genuine **e.s.a./uniqueness wall**: `cayleyUnitary U` IS the Cayley transform of `stoneGen U` (via the resolvent
+`R = (1−iA)⁻¹`), so the inverse-Cayley should recover `stoneGen U = A_V`; this needs Stone uniqueness (two C₀ groups
+with the same generator are equal), which is the essential-self-adjointness content flagged from the start (Phase 3.2).
+Once recovered, instantiating the concrete C₀ groups (`translationLp`, `modUnitary`, `clockTransl`) gives `X = A_edge`.
+Then Phase 5 (dual-weight trace) — the other genuine Mathlib-grade frontier.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

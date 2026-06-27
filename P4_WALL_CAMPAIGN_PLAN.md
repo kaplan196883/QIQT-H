@@ -525,9 +525,13 @@ Also ✅ **🎯 `cayleyStoneCLM_stoneGen_cfc` (+`cayleyStoneCLM_cfc_mem_stoneDom
 Wraps the generator `HasDerivAt` with `stoneGen_eq_of_hasDerivAt` via `cayleyStoneCLM_apply`. **Both built green.**
 **STONE'S THEOREM IS NOW BOTH DIRECTIONS on the cfc core** (unitary group ⊕ self-adjoint generator), axiom-free, no
 PVM, no UV datum — **the pivotal wall (general Stone, Phase 4.2) is BROKEN on the spectral core.**
-**Next (toward X=A_edge, Phase 4.3):** (a) Gårding/spectral-core density (`{cfc φ V z}` a core for stoneGen — connect
-to the mollified-vector density already in Garding.lean); (b) instantiate `U` with the concrete C₀ groups
-(translationLp/modUnitary/clockTransl) ⟹ their generators as stoneGen ⟹ X=A_edge; then Phase 5 (dual-weight trace);
+Also ✅ **`cayleyBump_cfc_tendsto` — THE cfc CORE IS DENSE** (`StoneExp.lean`, axiom-free, budget 0): `cfc(η_N)V z → z`
+(atom-killing `cfc(ψ_N)V z→0` + `cfc_sub`/`cayley_cfc_one`); the η_N vanish quadratically at 1 so the bump vectors are
+spectral-core vectors ⟹ **the smooth domain of the Stone group is dense**. **Built green first try.**
+**Next (toward X=A_edge, Phase 4.3):** (a) `c·η_N∈C(σV)` (at-1 squeeze) ⟹ bump vectors are core vectors ⟹ formal
+density of `stoneDomain(cayleyStoneCLM)`; (b) **THE RECOVERY** `cayleyStoneCLM U = U` (⟺ `stoneGen U = mult by c`) —
+the e.s.a./Stone-uniqueness wall (`cayleyUnitary U` IS Cayley of `stoneGen U` via resolvent `R=(1−iA)⁻¹`; recovery
+needs C₀-group uniqueness). Once recovered, instantiate translationLp/modUnitary/clockTransl ⟹ X=A_edge; then Phase 5;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
