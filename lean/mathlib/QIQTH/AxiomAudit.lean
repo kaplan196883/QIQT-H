@@ -6341,5 +6341,19 @@ namespace QIQTH.AxiomAudit
 -- capacity⇒bound) vs Route 1 (dynamical: the modular trace that would DERIVE the capacity). Complementary, not
 -- competing; both carry a named hypothesis (neither is "axiom-free area law"). Same carried UV datum. Axiom-free
 -- (standard 3).
+#print axioms QIQTH.GRFromMicro.hbound_hsat_of_capacity_family
+#print axioms QIQTH.GRFromMicro.gr_from_p4micro
+-- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-10, the GR bridge): gr_from_p4micro wires P4-MICRO into the
+-- machine-checked Jacobson chain QiqtToGR.qiqt_bekenstein_gives_gr. hbound_hsat_of_capacity_family shows the two
+-- ENTROPY slots are exactly P4-MICRO's outputs: from a finite-capacity family (a finite microstate type R x v t per
+-- horizon patch with record law p, Shannon entropy = S, log-capacity log N = η·A) area_floor_of_microstate gives
+-- hbound (S ≤ η·A) and area_floor_saturates gives hsat (S 0 = η·A 0). gr_from_p4micro plugs these in, leaving as the
+-- HONEST residual: hDnn/hD0 (entanglement first law / Klein), hFlux (Bisognano–Wichmann / Unruh — the irreducibly
+-- MODULAR thermal input a count cannot supply; GR-T1; derived for the free field via Fock.OneParticleBW, not by
+-- P4-MICRO), hFocus (Raychaudhuri), hreg, conserv, + structural metric inputs. So "P4-MICRO fills the entropy slots;
+-- the thermal slot is Route-1/BW" is now a CHECKABLE Lean dependency. NOT "P4-MICRO ⟹ GR" (false alone). The
+-- capacity-tracks-area family (log N=η·A) + record-entropy = horizon-dS are the Gap-2 localization, carried as
+-- explicit hypotheses; η (= 1/4ℓ_P²) is a free real (1/4 ratio derived via Sakharov, value of G never assigned);
+-- the capacity is a typeclass hypothesis, not a Lean axiom. Axiom-free (standard 3).
 
 end QIQTH.AxiomAudit

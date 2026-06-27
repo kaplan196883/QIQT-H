@@ -166,6 +166,16 @@ axiom (budget 0); Route 2 does NOT reproduce Route 1's modular-origin explanatio
 input `log|𝓗_R| ∝ A` stays the labelled frontier — exactly what the dual-weight trace would derive). The two routes
 deliver the **same area term**: Route 1 via the trace, Route 2 via finite capacity.
 
+**✅ ROUTE 2 reaches GR (free field) — `QIQTH/GRFromMicro.lean` (axiom-free):** `gr_from_p4micro` wires P4-MICRO into
+the machine-checked Jacobson capstone `QiqtToGR.qiqt_bekenstein_gives_gr`. `hbound_hsat_of_capacity_family` proves a
+finite-capacity family (`log N(x,v,t) = η·A(x,v,t)`) supplies *exactly* the capstone's two entropy slots
+(`hbound`/`hsat`) via `area_floor_of_microstate` + `area_floor_saturates`; the conclusion is `∃ Λ, a·T = G + Λ·g`,
+leaving the HONEST residual `hDnn,hD0` (Klein first law), `hFlux` (Bisognano–Wichmann/Unruh — the irreducibly
+**modular** thermal input, GR-T1: a count cannot make a temperature; discharged for the free field via
+`Fock.OneParticleBW`), `hFocus,hreg,conserv`. So **"P4-MICRO ⟹ GR" is FALSE alone** — P4-MICRO fills only the
+entropy slots; the thermal slot stays Route 1 / BW. The capacity-tracks-area family + record-entropy = horizon-`dS`
+are the Gap-2 localization, carried as explicit hypotheses; `η = 1/4ℓ_P²` free (1/4 ratio derived via Sakharov).
+
 ## 3. Dependency graph
 ```
 Phase 1 (π(a)) ─┐

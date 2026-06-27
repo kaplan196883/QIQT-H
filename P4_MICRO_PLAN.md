@@ -268,7 +268,11 @@ via the trace, P4-MICRO supplies it via finite capacity.
   HONEST: temperature stays modular (GR-T1 — do not route `hFlux` through counting); the capacity-tracks-area family
   (`log N(t)=η A(t)`) and the record-entropy = horizon-`dS` identification are the Gap-2 localization, exposed as
   such. Optionally instantiate `η` with the Sakharov `1/4` (`SakharovRatio.sakharov_ratio`) so the output coupling is
-  `8πG`. *(the high-value GR increment; do after M-4..M-6)*
+  `8πG`. *(the high-value GR increment; do after M-4..M-6)* — ✅ **LANDED 2026-06-27**: new file
+  `QIQTH/GRFromMicro.lean` — `hbound_hsat_of_capacity_family` (finite-capacity family ⟹ `hbound` ∧ `hsat`, via
+  `area_floor_of_microstate` + `area_floor_saturates`) + `gr_from_p4micro` (plugs them into
+  `qiqt_bekenstein_gives_gr`, leaving `hDnn,hD0,hFlux,hFocus,hreg,conserv` + structural as residual). Green, both
+  standard 3, budget 0, full `QIQTH` green; wired into `QIQTH.lean` + `AxiomAudit.lean`.
 
 Each Lean brick: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.FQBoundMicro` green · `#print axioms` standard 3 ·
 `bash scripts/axiom_budget_check.sh` budget 0 · wire into `QIQTH.lean` + `AxiomAudit.lean` · ONE commit on main with
@@ -338,6 +342,16 @@ AND the `P4_WALL_CAMPAIGN_PLAN.md` checklist (note the P4-MICRO endpoint beside 
   stays a postulate (now a typeclass hypothesis, not a Lean axiom), while `S_vN(ρ_R) ≤ Q_R = A/4ℓ_P²` GIVEN FQ is
   now **machine-checked** (`area_floor_vonNeumann`). Includes the "P4-MICRO ⟹ GR is false alone" caveat. Next:
   **M-10** (the GR bridge `gr_from_p4micro` against `QiqtToGR.qiqt_bekenstein_gives_gr` — the headline increment).
+- 2026-06-27 — **M-10 LANDED — ALL 10 BRICKS COMPLETE.** New file `QIQTH/GRFromMicro.lean`:
+  `hbound_hsat_of_capacity_family` proves a smooth finite-capacity family (microstate type `R x v t` per horizon
+  patch, record law `p`, `Shannon = S`, `log N = η·A`) yields exactly the Jacobson capstone's two entropy slots
+  `hbound`/`hsat` (via `area_floor_of_microstate` + `area_floor_saturates`); `gr_from_p4micro` plugs them into
+  `qiqt_bekenstein_gives_gr`, concluding `∃ Λ, a·T = G + Λ·g` with the HONEST residual `hDnn,hD0` (Klein first law),
+  `hFlux` (BW/Unruh — the irreducibly modular thermal input, GR-T1, not from counting), `hFocus,hreg,conserv` +
+  structural. Fixed a duplicate-`Fintype`-instance defeq error (dropped the `haveI := hfin` and let the
+  instance-binder resolve consistently). Green, both standard 3, budget 0, full `QIQTH` green; wired into
+  `QIQTH.lean` + `AxiomAudit.lean`. **The P4-MICRO checklist (M-1…M-10) is complete.** Remaining beyond this plan =
+  the Gap-2 localization + general (non-free-field) thermal side = Route 1 (Type II), the labelled open frontier.
 
 ## 7. Files
 
