@@ -513,10 +513,14 @@ Also ✅ **`cayleyExp_gen_integrand_tendsto` (+`cayleyInv_measurable`) — THE S
 axiom-free, budget 0): `∫‖((e_τ−1)/τ−i·c)·φ‖²dμ_z → 0` as τ→0 — the squared L²-gap between the difference quotient
 and `i·c·φ`, by DCT on `𝓝[≠]0` (integrand→0 a.e. via input (a), dominated by `4‖c·φ‖²` via input (b)). **Built green.**
 The analytic heart of the generator.
-**Next (the converse — toward X=A_edge):** ONE operator-side wrap: `HasDerivAt(t↦U_t(cfc φ V z)) (i•cfc(c·φ)V z) 0`
-via `cayleyStoneU_cfc` + `hasDerivAt_iff_tendsto_slope` + Parseval — the slope-minus-limit vector is `cfc(s_τ)Vz`,
-`s_τ=((e_τ−1)/τ−ic)·φ`, whose norm² IS the scalar DCT's integral →0; then `stoneGen_eq_of_hasDerivAt` ⟹ generator =
-mult by `c` (cfc-algebra/smul bookkeeping + Gårding-core remain); then X=A_edge → Phase 5;
+Also ✅ **🎯 `cayleyStoneU_cfc_hasDerivAt` (+`cayleyStoneU_slope_norm_sq`) — THE GENERATOR ON THE cfc CORE / STONE'S
+CONVERSE** (`StoneExp.lean`, axiom-free, budget 0): `HasDerivAt(t↦U_t(cfc φ V z)) (i·cfc(c·φ)V z) 0` — on the spectral
+core `U_t=exp(itA)` is differentiable, `d/dt|₀ = i·(mult by c=cayleyInv)`, i.e. the **generator A = multiplication by
+the spectral value c**. Via the operator norm²=∫DCT identity (`cfc_sub`/`cfc_const_mul`+Parseval) + the scalar DCT +
+`hasDerivAt_iff_tendsto_slope`. **Both built green.** **BOTH HALVES OF STONE NOW DONE on the cfc core** (unitary group
+forward + generator converse), axiom-free via Cayley/cfc, no PVM, no UV datum.
+**Next (packaging, toward X=A_edge):** wrap with `stoneGen_eq_of_hasDerivAt` ⟹ `stoneGen(cayleyStoneCLM)=cfc(c·φ)Vz`
+(+ Gårding/spectral-core density that `{cfc φ V z}` is a core); then apply to the concrete C₀ groups ⟹ X=A_edge → Phase 5;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

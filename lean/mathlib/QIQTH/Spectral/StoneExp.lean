@@ -1362,6 +1362,130 @@ theorem cayleyExp_gen_integrand_tendsto [Nontrivial H] (U : ℝ → (H →L[ℂ]
     have h1 := ((h0.mul_const (φ (ω : ℂ))).norm).pow 2
     simpa using h1
 
+/-- **The operator difference-quotient as a single cfc, with its `L²` norm** (the cfc-algebra bridge from the scalar
+    generator DCT to the operator generator):
+    `‖τ⁻¹·(cfc(e_τ·φ) V z − cfc φ V z) − i·cfc(c·φ) V z‖² = ∫ ‖((e_τ−1)/τ − i·c)·φ‖² dμ_z`.
+    The left vector equals `cfc(s_τ) V z` with `s_τ = τ⁻¹·(e_τ·φ − φ) − i·(c·φ)` (`cfc_sub` + `cfc_const_mul`); its
+    squared norm is `∫‖s_τ‖²dμ_z` (Parseval, `cayley_cfc_norm_sq_integral`), and `s_τ(ω) = ((e_τ−1)/τ − i·c)·φ`
+    pointwise (`ring`), matching the integrand of `cayleyExp_gen_integrand_tendsto`.  This is the last operator-side
+    bookkeeping before the generator `HasDerivAt`.  Axiom-free. -/
+theorem cayleyStoneU_slope_norm_sq [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (φ : ℂ → ℂ)
+    (hφ : ContinuousOn φ (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (hetφ : ∀ r : ℝ, ContinuousOn (fun ω => cayleyExp r ω * φ ω)
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (hcφ : ContinuousOn (fun ω => cayleyInv ω * φ ω)
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))) (τ : ℝ) (z : H) :
+    ‖(τ : ℂ)⁻¹ • (cfc (fun ω => cayleyExp τ ω * φ ω)
+            (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z
+          - cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)
+        - Complex.I • cfc (fun ω => cayleyInv ω * φ ω)
+          (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z‖ ^ 2
+      = ∫ ω, ‖((cayleyExp τ (ω : ℂ) - 1) / (τ : ℂ) - Complex.I * cayleyInv (ω : ℂ)) * φ (ω : ℂ)‖ ^ 2
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC z) := by
+  -- the operator identity: `cfc s_τ V = τ⁻¹ • (cfc(e_τφ) V − cfc φ V) − i • cfc(c·φ) V`
+  have hop : cfc (fun ω => (τ : ℂ)⁻¹ * (cayleyExp τ ω * φ ω - φ ω) - Complex.I * (cayleyInv ω * φ ω))
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+      = (τ : ℂ)⁻¹ • (cfc (fun ω => cayleyExp τ ω * φ ω)
+            (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+          - cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))
+        - Complex.I • cfc (fun ω => cayleyInv ω * φ ω)
+          (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) := by
+    rw [cfc_sub (fun ω => (τ : ℂ)⁻¹ * (cayleyExp τ ω * φ ω - φ ω))
+        (fun ω => Complex.I * (cayleyInv ω * φ ω))
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+        (continuousOn_const.mul ((hetφ τ).sub hφ)) (continuousOn_const.mul hcφ),
+      cfc_const_mul (τ : ℂ)⁻¹ (fun ω => cayleyExp τ ω * φ ω - φ ω)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) ((hetφ τ).sub hφ),
+      cfc_const_mul Complex.I (fun ω => cayleyInv ω * φ ω)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) hcφ,
+      cfc_sub (fun ω => cayleyExp τ ω * φ ω) φ
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) (hetφ τ) hφ]
+  -- apply to `z`
+  have hvec : (τ : ℂ)⁻¹ • (cfc (fun ω => cayleyExp τ ω * φ ω)
+          (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z
+        - cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)
+      - Complex.I • cfc (fun ω => cayleyInv ω * φ ω)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z
+      = cfc (fun ω => (τ : ℂ)⁻¹ * (cayleyExp τ ω * φ ω - φ ω) - Complex.I * (cayleyInv ω * φ ω))
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z := by
+    rw [hop]; simp [ContinuousLinearMap.smul_apply, ContinuousLinearMap.sub_apply]
+  rw [hvec, cayley_cfc_norm_sq_integral U hgrp hU0 hUinner hUbd hSC
+    (fun ω => (τ : ℂ)⁻¹ * (cayleyExp τ ω * φ ω - φ ω) - Complex.I * (cayleyInv ω * φ ω))
+    ((continuousOn_const.mul ((hetφ τ).sub hφ)).sub (continuousOn_const.mul hcφ)) z]
+  apply integral_congr_ae
+  filter_upwards with ω
+  congr 1
+  rw [show (τ : ℂ)⁻¹ * (cayleyExp τ (ω : ℂ) * φ (ω : ℂ) - φ (ω : ℂ))
+        - Complex.I * (cayleyInv (ω : ℂ) * φ (ω : ℂ))
+      = ((cayleyExp τ (ω : ℂ) - 1) / (τ : ℂ) - Complex.I * cayleyInv (ω : ℂ)) * φ (ω : ℂ) from by ring]
+
+/-- **★★★★★ THE GENERATOR ON THE cfc CORE — Stone's converse:**
+    `HasDerivAt (t ↦ U_t(cfc φ V z)) (i·cfc(c·φ) V z) 0` for `φ`, `e_r·φ`, `c·φ` continuous on `σ(V)`.
+    On the spectral-calculus core, the Stone group `U_t = exp(it A)` is **differentiable in `t`**, and its derivative
+    at `0` is `i` times multiplication by the spectral value `c(ω) = cayleyInv ω` — i.e. the **generator `A` is
+    multiplication by `c`** (the spectral form of `A = i(1+V)(1−V)⁻¹`).  Proof: rewrite `U_t(cfc φ V z) = cfc(e_t·φ) V z`
+    (`cayleyStoneU_cfc`); via `hasDerivAt_iff_tendsto_slope`, the slope minus the claimed derivative has norm `→ 0`,
+    because its **square** is `∫‖((e_τ−1)/τ − i·c)·φ‖²dμ_z` (`cayleyStoneU_slope_norm_sq`, the cfc-algebra+Parseval
+    bridge) which `→ 0` (`cayleyExp_gen_integrand_tendsto`, the scalar DCT), through `√`-continuity.  Axiom-free; free
+    scalar; no UV datum.  This is the converse half of Stone's theorem for the Cayley/cfc construction — the group is
+    the exponential of its own generator on a core. -/
+theorem cayleyStoneU_cfc_hasDerivAt [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (φ : ℂ → ℂ)
+    (hφ : ContinuousOn φ (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (hetφ : ∀ r : ℝ, ContinuousOn (fun ω => cayleyExp r ω * φ ω)
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (hcφ : ContinuousOn (fun ω => cayleyInv ω * φ ω)
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))) (z : H) :
+    HasDerivAt (fun t => cayleyStoneU U hgrp hU0 hUinner hUbd hSC t
+        (cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z))
+      (Complex.I • cfc (fun ω => cayleyInv ω * φ ω)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z) 0 := by
+  have hfeq : (fun t => cayleyStoneU U hgrp hU0 hUinner hUbd hSC t
+        (cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z))
+      = (fun t => cfc (fun ω => cayleyExp t ω * φ ω)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z) := by
+    funext t; exact cayleyStoneU_cfc U hgrp hU0 hUinner hUbd hSC φ hφ hetφ t z
+  have hg0 : cfc (fun ω => cayleyExp (0 : ℝ) ω * φ ω)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z
+      = cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z := by
+    have hsymb : (fun ω => cayleyExp (0 : ℝ) ω * φ ω) = φ := by
+      funext ω; rw [cayleyExp_zero, one_mul]
+    rw [hsymb]
+  rw [hfeq, hasDerivAt_iff_tendsto_slope, tendsto_iff_norm_sub_tendsto_zero]
+  -- the slope minus the claimed derivative, rewritten into the norm²-identity form
+  have heq : ∀ τ : ℝ, slope (fun t => cfc (fun ω => cayleyExp t ω * φ ω)
+          (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z) 0 τ
+        - Complex.I • cfc (fun ω => cayleyInv ω * φ ω)
+          (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z
+      = (τ : ℂ)⁻¹ • (cfc (fun ω => cayleyExp τ ω * φ ω)
+            (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z
+          - cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)
+        - Complex.I • cfc (fun ω => cayleyInv ω * φ ω)
+          (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z := by
+    intro τ
+    rw [slope_def_module, sub_zero, hg0, ← Complex.coe_smul τ⁻¹, Complex.ofReal_inv]
+  simp only [heq]
+  have heqn : (fun τ : ℝ => ‖(τ : ℂ)⁻¹ • (cfc (fun ω => cayleyExp τ ω * φ ω)
+          (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z
+        - cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)
+      - Complex.I • cfc (fun ω => cayleyInv ω * φ ω)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z‖)
+      = (fun τ => Real.sqrt (∫ ω, ‖((cayleyExp τ (ω : ℂ) - 1) / (τ : ℂ)
+          - Complex.I * cayleyInv (ω : ℂ)) * φ (ω : ℂ)‖ ^ 2
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC z))) := by
+    funext τ
+    rw [← cayleyStoneU_slope_norm_sq U hgrp hU0 hUinner hUbd hSC φ hφ hetφ hcφ τ z,
+      Real.sqrt_sq (norm_nonneg _)]
+  rw [heqn]
+  have h := (Real.continuous_sqrt.tendsto 0).comp
+    (cayleyExp_gen_integrand_tendsto U hgrp hU0 hUinner hUbd hSC φ hφ hcφ z)
+  rwa [Real.sqrt_zero] at h
+
 
 end SelfAdjoint
 

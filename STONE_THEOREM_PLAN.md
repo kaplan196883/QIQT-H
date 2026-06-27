@@ -792,13 +792,29 @@ compact `σ(V)`) because `‖(e_τ−1)/τ‖ ≤ ‖c‖` on `σ(V) ⊆ S¹` (i
 *Built green (4 fixes: pin `F`/`f` in the DCT vs HO-unification; `suffices … nhds (∫0)` then `integral_zero` so the
 `rw` doesn't hit the filter's base `0`; `Real.norm_eq_abs` after `Complex.norm_real`; `sq_nonneg ‖φ‖` not `sq_nonneg φ`
 since `ℂ` is unordered).*
-**Remaining wall (Phase 3.2) — now ONE operator-side step:** wrap this scalar DCT into the generator
-`HasDerivAt (t ↦ U_t(cfc φ V z)) (i•cfc(c·φ) V z) 0`. With `cayleyStoneU_cfc` (`U_t(cfc φ Vz) = cfc(e_t φ)Vz`),
-`hasDerivAt_iff_tendsto_slope`, and Parseval (`‖cfc(s_τ)Vz‖² = ∫‖s_τ‖²dμ_z`), the slope-minus-limit vector is
-`cfc(s_τ)Vz` with `s_τ = ((e_τ−1)/τ − ic)·φ` (cfc_sub/_smul, real↔ℂ smul via `algebraMap_smul`), so its norm² is
-exactly `cayleyExp_gen_integrand_tendsto`'s integral `→ 0`. Then `stoneGen_eq_of_hasDerivAt` (Stone.lean) reads off
-`stoneGen(cayleyStoneCLM) (cfc φ V z) = cfc(c·φ)Vz` — generator = multiplication by the spectral value `c`. The
-analytic content is fully discharged; only the cfc-algebra/smul bookkeeping + Gårding-core packaging remain.
+Also ✅ `cayleyStoneU_slope_norm_sq` + `cayleyStoneU_cfc_hasDerivAt` — **🎯🎯🎯 THE GENERATOR ON THE cfc CORE —
+STONE'S CONVERSE** (`StoneExp.lean`, axiom-free, budget 0):
+`HasDerivAt (t ↦ U_t(cfc φ V z)) (i·cfc(c·φ) V z) 0` for `φ`, `e_r·φ`, `c·φ` ContinuousOn `σ(V)`. **On the spectral
+core the Stone group `U_t = exp(it A)` is DIFFERENTIABLE in `t`, with `d/dt|₀ = i·(multiplication by the spectral
+value `c = cayleyInv`)` — i.e. the GENERATOR `A` is multiplication by `c` (= the spectral form of `i(1+V)(1−V)⁻¹`).**
+The construction:
+(i) `cayleyStoneU_slope_norm_sq` — the **operator norm²=∫DCT identity**: the slope-minus-claimed-derivative vector
+`τ⁻¹·(cfc(e_τφ)Vz − cfc φ Vz) − i·cfc(cφ)Vz` equals `cfc(s_τ)Vz` (`cfc_sub` + `cfc_const_mul` at the OPERATOR level,
+then applied to `z` via `ContinuousLinearMap.smul_apply`/`sub_apply`), and its squared norm is
+`∫‖((e_τ−1)/τ − ic)·φ‖²dμ_z` (Parseval `cayley_cfc_norm_sq_integral` + `integral_congr` with the pointwise `ring`
+identity `s_τ(ω) = ((e_τ−1)/τ − ic)·φ`). *Built green first try.*
+(ii) `cayleyStoneU_cfc_hasDerivAt` — rewrite `U_t(cfc φ Vz) = cfc(e_t φ)Vz` (`cayleyStoneU_cfc`);
+`hasDerivAt_iff_tendsto_slope` + `tendsto_iff_norm_sub_tendsto_zero`; the real-`τ⁻¹` slope ↔ `(↑τ)⁻¹` via
+`Complex.coe_smul`/`ofReal_inv` + `e_0·φ = φ`; then the norm = `√(∫‖DCT‖²)` (the (i)-identity + `Real.sqrt_sq`) which
+`→ 0` (`cayleyExp_gen_integrand_tendsto` + `√`-continuity). *Built green (1 fix: `hg0` `cfc(e_0φ)Vz = cfc φ Vz` via a
+symbol-equality `have` + `rw`, not `congr 1; funext`.)* **This is the converse half of Stone's theorem for the
+Cayley/cfc construction — the group is the exponential of its own generator on a core.**
+**Both halves of Stone now DONE on the cfc core:** the unitary group `U_t = exp(it A)` (forward) AND the generator
+`A = mult by c` (converse), all axiom-free via Cayley/cfc, NO PVM, NO UV datum.
+**Next (packaging, tractable):** wrap (ii) with `stoneGen_eq_of_hasDerivAt` (Stone.lean) to read off
+`stoneGen(cayleyStoneCLM) ⟨cfc φ V z, _⟩ = cfc(c·φ)Vz` (needs `cayleyStoneCLM_apply` to bridge `cayleyStoneU`↔`CLM`),
++ the Gårding/spectral-core density (that `{cfc φ V z}` is a core) — the genuine remaining packaging; then apply to
+the concrete C₀ groups ⟹ X = A_edge (Phase 4.3).
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

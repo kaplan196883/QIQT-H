@@ -5178,6 +5178,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyExp_sub_one_norm_le
 #print axioms QIQTH.Spectral.cayleyInv_measurable
 #print axioms QIQTH.Spectral.cayleyExp_gen_integrand_tendsto
+#print axioms QIQTH.Spectral.cayleyStoneU_slope_norm_sq
+#print axioms QIQTH.Spectral.cayleyStoneU_cfc_hasDerivAt
+-- ★★★★★ P4 WALL — THE GENERATOR ON THE cfc CORE (Stone's CONVERSE): cayleyStoneU_cfc_hasDerivAt [Nontrivial H] —
+-- HasDerivAt (t↦U_t(cfc φ V z)) (i·cfc(c·φ)V z) 0, for φ, e_r·φ, c·φ ContinuousOn σ(V). On the spectral core the Stone
+-- group U_t=exp(itA) is DIFFERENTIABLE in t, with d/dt|₀ = i·(mult by the spectral value c=cayleyInv) — i.e. the
+-- GENERATOR A is multiplication by c (= i(1+V)(1−V)⁻¹). Proof: U_t(cfc φ Vz)=cfc(e_tφ)Vz (cayleyStoneU_cfc);
+-- hasDerivAt_iff_tendsto_slope, the slope−deriv has norm→0 since its SQUARE = ∫‖((e_τ−1)/τ−ic)φ‖²dμ_z
+-- (cayleyStoneU_slope_norm_sq, the cfc-algebra+Parseval bridge) → 0 (cayleyExp_gen_integrand_tendsto, the scalar DCT),
+-- via √-continuity. The converse half of Stone for the Cayley/cfc construction — the group is exp of its own generator
+-- on a core. cayleyStoneU_slope_norm_sq is the operator norm²=∫DCT identity (cfc_sub/cfc_const_mul + Parseval). Axiom-free.
 -- ★★★★★ P4 WALL — THE SCALAR GENERATOR DCT (the analytic heart of the generator): cayleyExp_gen_integrand_tendsto
 -- [Nontrivial H] — ∫‖((e_τ−1)/τ − i·c)·φ‖²dμ_z → 0 as τ→0 (τ≠0), for φ, c·φ ContinuousOn σ(V). The squared L²-norm of
 -- the gap between the symbol difference quotient (e_τ·φ−φ)/τ and its formal limit i·c·φ, → 0 by dominated convergence
