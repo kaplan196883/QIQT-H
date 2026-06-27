@@ -97,7 +97,7 @@ $$
 <a id="d-qiqth-wedgekmstogr-gaussmode-calibration"></a>
 **Lemma 435** (`gaussMode_calibration`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/GaussianMode.lean#L86)</small>
 
-** The Gaussian profile satisfies the calibration** `(−2π ∫ conj(g₀)·g₀').im = 2π/ℏ`.  Combined with `localized_mode_hTkk`, the per-generator `hTkk` is fully discharged for the canonical Gaussian localization.
+**The Gaussian profile satisfies the calibration** `(−2π ∫ conj(g₀)·g₀').im = 2π/ℏ`.  Combined with `localized_mode_hTkk`, the per-generator `hTkk` is fully discharged for the canonical Gaussian localization.
 
 $$
 0 < \hbar \to (-(2 \cdot \pi \cdot \int (\theta : \mathbb{R}), (\mathrm{starRingEnd}\,\mathbb{C})\,(\href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}}\,\hbar\,\theta) \cdot \href{/browser/qiqth-gaussianmode#d-qiqth-wedgekmstogr-gaussmode}{\mathrm{gaussMode}^{\prime}}\,\hbar\,\theta)).\mathrm{im} = 2 \cdot \pi / \hbar

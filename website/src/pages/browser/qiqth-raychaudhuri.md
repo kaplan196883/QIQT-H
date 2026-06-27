@@ -146,7 +146,7 @@ $$
 <a id="d-qiqth-curvature-raychaudhuri-focusing-at-equilibrium"></a>
 **Lemma 574** (`raychaudhuri_focusing_at_equilibrium`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/Raychaudhuri.lean#L259)</small>
 
-** Leading-order Raychaudhuri focusing at equilibrium — the geometric content of Jacobson's `hFocus`.**  At a moment of *local equilibrium* (a stationary/bifurcation horizon, where the shear–expansion quadratic `(∇_μV^ν)(∇_νV^μ)` vanishes — `θ = σ = ω = 0`, the condition Jacobson imposes), the Raychaudhuri equation collapses to **pure Ricci focusing**:
+**Leading-order Raychaudhuri focusing at equilibrium — the geometric content of Jacobson's `hFocus`.**  At a moment of *local equilibrium* (a stationary/bifurcation horizon, where the shear–expansion quadratic `(∇_μV^ν)(∇_νV^μ)` vanishes — `θ = σ = ω = 0`, the condition Jacobson imposes), the Raychaudhuri equation collapses to **pure Ricci focusing**:
 
 `V^ν ∂_ν θ = − R_{σν} V^σ V^ν`   (i.e. …
 

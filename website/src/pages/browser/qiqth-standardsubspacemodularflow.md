@@ -350,7 +350,7 @@ $$
 <a id="d-qiqth-standardsubspacemodular-modunitary-commute-rvdrc"></a>
 **Lemma 836** (`modUnitary_commute_rvdRC`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L463)</small>
 
-** `[U_t, R] = 0`** (operator form): the modular flow commutes with `R`.
+**`[U_t, R] = 0`** (operator form): the modular flow commutes with `R`.
 
 $$
 \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S = \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S \cdot \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t
@@ -450,7 +450,7 @@ $$
 <a id="d-qiqth-standardsubspacemodular-rvdpmq-commute-rvdt"></a>
 **Lemma 844** (`rvdPmQ_commute_rvdT`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L571)</small>
 
-** `D·T = T·D`** (operator form): the antilinear modular conjugation `D` commutes with the positive modulus `T = √(R(2−R))`.  Whence `J = D·T⁻¹` is self-adjoint and `J² = 1`.
+**`D·T = T·D`** (operator form): the antilinear modular conjugation `D` commutes with the positive modulus `T = √(R(2−R))`.  Whence `J = D·T⁻¹` is self-adjoint and `J² = 1`.
 
 $$
 \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S \cdot \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S) = \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S) \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S
@@ -463,7 +463,7 @@ $$
 <a id="d-qiqth-standardsubspacemodular-rvdpmq-commute-rvdt-apply"></a>
 **Lemma 845** (`rvdPmQ_commute_rvdT_apply`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L589)</small>
 
-** `D·T = T·D`** (pointwise): `D(T ξ) = T(D ξ)`.
+**`D·T = T·D`** (pointwise): `D(T ξ) = T(D ξ)`.
 
 $$
 (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdt}{\mathrm{rvdT}}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi)
@@ -576,7 +576,7 @@ $$
 <a id="d-qiqth-standardsubspacemodular-modconj-sq"></a>
 **Lemma 854** (`modConj_sq`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L688)</small>
 
-** `J² = 1`** — the modular conjugation is an involution (`⟪ζ, J²η⟫ = ⟪Jζ, Jη⟫ = ⟪ζ, η⟫`).
+**`J² = 1`** — the modular conjugation is an involution (`⟪ζ, J²η⟫ = ⟪Jζ, Jη⟫ = ⟪ζ, η⟫`).
 
 $$
 (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\eta) = \eta
@@ -691,7 +691,7 @@ $$
 <a id="d-qiqth-standardsubspacemodular-modconj-rvdrc-modconj"></a>
 **Lemma 863** (`modConj_rvdRC_modConj`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L832)</small>
 
-** `J R J = 2 − R`** — the modular conjugation reflects `R` (the bounded shadow of `J Δ J = Δ⁻¹`). One of the canonical Tomita–Takesaki relations, and a prerequisite for the CGP spectral balance.
+**`J R J = 2 − R`** — the modular conjugation reflects `R` (the bounded shadow of `J Δ J = Δ⁻¹`). One of the canonical Tomita–Takesaki relations, and a prerequisite for the CGP spectral balance.
 
 $$
 (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdrc}{\mathrm{rvdRC}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdtwosubrc}{(2-R)}\,S)\,\xi
@@ -717,7 +717,7 @@ $$
 <a id="d-qiqth-standardsubspacemodular-modconj-rvdsqrtr-modconj"></a>
 **Lemma 865** (`modConj_rvdSqrtR_modConj`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L848)</small>
 
-** The sqrt-reflection `J R^{1/2} J = (2−R)^{1/2}`** (RvD Prop 2.2(5) engine), reached via square-root UNIQUENESS — NOT general antilinear CFC.  Bundle `B ξ = J(R^{1/2}(J ξ))` as a ℂ-linear operator (ℂ-linear by `modConj_smul_conj` applied twice), self-adjoint and positive (the antiunitary `modConj_inner_conj` reduces `⟨B x, y⟩` to `conj⟨R^{1/2}(J x), J y⟩`, and `R^{1/2} ≥ 0`), with `B·B = 2−R` (`modConjSqrtR_sq`). `CFC.sqrt_unique` then identifies `B` with `(2−R)^{1/2} = rvdSqrtTwoSubR`.
+**The sqrt-reflection `J R^{1/2} J = (2−R)^{1/2}`** (RvD Prop 2.2(5) engine), reached via square-root UNIQUENESS — NOT general antilinear CFC.  Bundle `B ξ = J(R^{1/2}(J ξ))` as a ℂ-linear operator (ℂ-linear by `modConj_smul_conj` applied twice), self-adjoint and positive (the antiunitary `modConj_inner_conj` reduces `⟨B x, y⟩` to `conj⟨R^{1/2}(J x), J y⟩`, and `R^{1/2} ≥ 0`), with `B·B = 2−R` (`modConjSqrtR_sq`). `CFC.sqrt_unique` then identifies `B` with `(2−R)^{1/2} = rvdSqrtTwoSubR`.
 
 $$
 (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\xi)) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrttwosubr}{\sqrt{2-R}}\,S)\,\xi
@@ -1300,7 +1300,7 @@ $$
 <a id="d-qiqth-standardsubspacemodular-cfc-intertwine"></a>
 **Lemma 914** (`cfcΩ_intertwine`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1348)</small>
 
-** The continuous intertwiner `D·f(R) = conj(f(2−·))(R)·D`** for every CONTINUOUS `f` on the symmetric domain `Ω`.  Proved by complex Stone–Weierstrass: both sides are continuous in `f`, the `coordΩ`-generated subalgebra is dense, and they agree there (base case `D·R=(2−R)·D` + the algebra structure).  `D` is antilinear, so the relation is conjugate-linear — hence the "good set" is a plain `Subalgebra` (not a `*`-subalgebra), but `coordΩ` is self-adjoint so the generated subalgebra still has dense closure.
+**The continuous intertwiner `D·f(R) = conj(f(2−·))(R)·D`** for every CONTINUOUS `f` on the symmetric domain `Ω`.  Proved by complex Stone–Weierstrass: both sides are continuous in `f`, the `coordΩ`-generated subalgebra is dense, and they agree there (base case `D·R=(2−R)·D` + the algebra structure).  `D` is antilinear, so the relation is conjugate-linear — hence the "good set" is a plain `Subalgebra` (not a `*`-subalgebra), but `coordΩ` is self-adjoint so the generated subalgebra still has dense closure.
 
 $$
 \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S \cdot \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc}{\mathrm{cfc}}\,S\,f) = \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-cfc}{\mathrm{cfc}}\,S\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-tw}{\mathrm{tw}}\,S\,f)) \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S
@@ -1313,7 +1313,7 @@ $$
 <a id="d-qiqth-standardsubspacemodular-rvdsqrtr-range-dense-in-k"></a>
 **Lemma 915** (`rvdSqrtR_range_dense_in_K`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1540)</small>
 
-** The `√R`-range density in `𝒦` (`hdense`)** — RvD's `ξ = R^{1/2}ζ` reconciliation, the LAST analytic input of the device g-function discharge.  Every `ξ ∈ 𝒦` is a limit of vectors `√R ζ_k ∈ 𝒦`. …
+**The `√R`-range density in `𝒦` (`hdense`)** — RvD's `ξ = R^{1/2}ζ` reconciliation, the LAST analytic input of the device g-function discharge.  Every `ξ ∈ 𝒦` is a limit of vectors `√R ζ_k ∈ 𝒦`. …
 
 $$
 \forall \xi\in S.\mathrm{cl}, \exists \zetas, (\forall (k : \mathbb{N}), (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-projk}{\mathrm{projK}}\,S)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k)) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k)) \wedge \mathrm{Tendsto}\,(\lambda k \mapsto (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdsqrtr}{R^{1/2}}\,S)\,(\mathrm{s}\,k))\,\mathrm{atTop}\,(\mathrm{nhds}\,\xi)
@@ -1532,7 +1532,7 @@ $$
 <a id="d-qiqth-standardsubspacemodular-modunitary-commute-rvdpmq-rs"></a>
 **Lemma 932** (`modUnitary_commute_rvdPmQ_rs`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1830)</small>
 
-** The modular covariance `[U_t, D] = 0`** (operator form): the modular flow commutes with the antilinear `D = P−Q`.  From the intertwiner applied to the θ-fixed damped function `hΩ` (`D·(U_t·A)=(U_t·A)·D`), `D·A=A·D`, and cancelling `A` by its dense range.
+**The modular covariance `[U_t, D] = 0`** (operator form): the modular flow commutes with the antilinear `D = P−Q`.  From the intertwiner applied to the θ-fixed damped function `hΩ` (`D·(U_t·A)=(U_t·A)·D`), `D·A=A·D`, and cancelling `A` by its dense range.
 
 $$
 \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S \cdot \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t) = \mathrm{res}\,\mathbb{R}\,(\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t) \cdot \href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S
@@ -1545,7 +1545,7 @@ $$
 <a id="d-qiqth-standardsubspacemodular-modunitary-commute-rvdpmq"></a>
 **Lemma 933** (`modUnitary_commute_rvdPmQ`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1851)</small>
 
-** The modular covariance `[U_t, D] = 0`** (pointwise): `U_t(D ξ) = D(U_t ξ)`.  Combined with `[U_t, R] = 0` this gives full standard-subspace invariance `U_t 𝒦 = 𝒦`.
+**The modular covariance `[U_t, D] = 0`** (pointwise): `U_t(D ξ) = D(U_t ξ)`.  Combined with `[U_t, R] = 0` this gives full standard-subspace invariance `U_t 𝒦 = 𝒦`.
 
 $$
 (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,\xi) = (\href{/browser/qiqth-standardsubspacemodular#d-qiqth-standardsubspacemodular-rvdpmq}{\mathrm{rvdPmQ}}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi)
@@ -1558,7 +1558,7 @@ $$
 <a id="d-qiqth-standardsubspacemodular-modunitary-mapsto-k"></a>
 **Lemma 934** (`modUnitary_mapsTo_K`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1858)</small>
 
-** Full standard-subspace invariance `U_t 𝒦 ⊆ 𝒦`** — both obligations (`[U_t,R]=0` and the covariance `[U_t,D]=0`) now discharged.
+**Full standard-subspace invariance `U_t 𝒦 ⊆ 𝒦`** — both obligations (`[U_t,R]=0` and the covariance `[U_t,D]=0`) now discharged.
 
 $$
 \forall \xi\in S.\mathrm{cl}, (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\xi \in S.\mathrm{cl}
@@ -1584,7 +1584,7 @@ $$
 <a id="d-qiqth-standardsubspacemodular-modconj-commute-modunitary"></a>
 **Lemma 936** (`modConj_commute_modUnitary`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1879)</small>
 
-** `J Δ^{it} = Δ^{it} J`** — the modular conjugation `J` commutes with the modular flow.  Now UNBLOCKED by the covariance `[U_t,D]=0`: since `D = J·T` and `U_t` commutes with both `D` and `T`, `J` commutes with `U_t` on the dense `range T`.  (One of the canonical Tomita–Takesaki relations.)
+**`J Δ^{it} = Δ^{it} J`** — the modular conjugation `J` commutes with the modular flow.  Now UNBLOCKED by the covariance `[U_t,D]=0`: since `D = J·T` and `U_t` commutes with both `D` and `T`, `J` commutes with `U_t` on the dense `range T`.  (One of the canonical Tomita–Takesaki relations.)
 
 $$
 (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,\eta) = (\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modunitary}{\Delta}\,S\,t)\,((\href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-modconj}{J}\,S)\,\eta)
@@ -1621,7 +1621,7 @@ $$
 <a id="d-qiqth-standardsubspacemodular-gausssmear-mem-k"></a>
 **Lemma 939** (`gaussSmear_mem_K`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/StandardSubspaceModularFlow.lean#L1926)</small>
 
-** The smeared vector lands in `K`.**  Since `e^{−n t²} ≥ 0` is a real scalar and `V_t η ∈ K` (real-subspace invariance), the Bochner integral stays in the closed real subspace `K` — because the `ℝ`-linear orthogonal projection `projK` commutes with the integral and fixes the integrand (`ContinuousLinearMap.integral_comp_comm`).  First brick of the entire-vector construction.
+**The smeared vector lands in `K`.**  Since `e^{−n t²} ≥ 0` is a real scalar and `V_t η ∈ K` (real-subspace invariance), the Bochner integral stays in the closed real subspace `K` — because the `ℝ`-linear orthogonal projection `projK` commutes with the integral and fixes the integrand (`ContinuousLinearMap.integral_comp_comm`).  First brick of the entire-vector construction.
 
 $$
 0 < n \to \forall \{\eta : H\}, (\mathrm{Continuous}\,\lambda t \mapsto (V\,t)\,\eta) \to (\forall (t : \mathbb{R}), \|(V\,t)\,\eta\| \le \|\eta\|) \to (\forall (t : \mathbb{R}), (V\,t)\,\eta \in S.\mathrm{cl}) \to \href{/browser/qiqth-standardsubspacemodularflow#d-qiqth-standardsubspacemodular-gausssmear}{g}\,V\,n\,\eta \in S.\mathrm{cl}

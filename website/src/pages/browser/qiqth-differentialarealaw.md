@@ -25,7 +25,7 @@ $$
 <a id="d-qiqth-differentialarealaw-differential-area-law"></a>
 **Lemma 72** (`differential_area_law`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/DifferentialAreaLaw.lean#L53)</small>
 
-** THE DIFFERENTIAL AREA LAW, DERIVED.**  Along a one-parameter deformation `t`, with `S` the horizon entropy, `KE` the modular energy `⟨K⟩`, `A` the area, and a constant `η`:
+**THE DIFFERENTIAL AREA LAW, DERIVED.**  Along a one-parameter deformation `t`, with `S` the horizon entropy, `KE` the modular energy `⟨K⟩`, `A` the area, and a constant `η`:
 
 HYPOTHESES (note: NONE asserts `S = ηA` or `δS = ηδA`): * `hbound` — the capacity **bound** `S ≤ η·A` near `0` (QIQT-H's `shannon_le_log_card`); * `hsat`   — **saturation at the reference** `S 0 = η·A 0` (equilibrium, `shannon_uniform_eq_log_card`); * `hfl`    — the **entanglement first law** datum: `KE − S` has a local minimum at `0` (relative entropy `≥ 0`, `= 0` at the reference); * differentiability of `S, KE, A` at `0`.
 

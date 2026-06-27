@@ -101,6 +101,7 @@ def _doc_lead(doc, max_len=760):
     if not doc:
         return None
     s = doc.replace("★", "").replace("☆", "").strip()
+    s = re.sub(r"(^|\s)\*\*[ \t]+", r"\1**", s)   # heal '** text' opener left by stripped stars
     paras = [re.sub(r"\s*\n\s*", " ", p).strip() for p in re.split(r"\n\s*\n", s)]
     paras = [p for p in paras if p]
     if not paras:

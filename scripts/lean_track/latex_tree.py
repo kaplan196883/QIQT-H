@@ -312,7 +312,7 @@ def _claim(concl, notation):
     return "we have", _peel_forall(concl)
 
 
-def render_web(trees, cfg, notation=None, roles=None, heading="###"):
+def render_web(trees, cfg, notation=None, roles=None, heading="###", docs=None):
     """Paper-style Markdown (KaTeX) rendering of a track's statements for the website.
 
     Reads like a theorem list, not a hypothesis dump: leading ∀/types are factored
@@ -322,6 +322,7 @@ def render_web(trees, cfg, notation=None, roles=None, heading="###"):
     """
     notation = {**latexify.DEFAULT_NOTATION, **(notation or {})}
     roles = roles or {}
+    docs = docs or {}
     rules = cfg.get("category_rules", [])
     displays = {t["name"]: t.get("display") for t in cfg.get("theorems", [])}
     out = []
@@ -332,6 +333,9 @@ def render_web(trees, cfg, notation=None, roles=None, heading="###"):
         title = displays.get(nm) or f"`{short}`"
         out.append(f"{heading} {title}")
         out.append("")
+        if docs.get(nm):                  # the author's docstring as lead prose
+            out.append(docs[nm])
+            out.append("")
         tag = f"`{short}`" + (f" · *{role}*" if role else "")
         if not t.get("present"):
             out.append(f"{tag} — *(not in the current build)*\n")

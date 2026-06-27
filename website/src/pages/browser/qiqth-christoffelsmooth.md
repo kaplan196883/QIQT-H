@@ -25,7 +25,7 @@ $$
 <a id="d-qiqth-curvature-christoffel-contdiff"></a>
 **Lemma 7** (`christoffel_contDiff`). &nbsp;<small>[source ↗](https://github.com/kaplan196883/QIQT-H/blob/main/lean/mathlib/QIQTH/ChristoffelSmooth.lean#L31)</small>
 
-** Christoffel symbols are `C^∞`** — discharges `hC`.  `christoffel g gi μ ν ρ = ½·∑α gi_{μα}(∂_ν g_{αρ} + ∂_ρ g_{αν} − ∂_α g_{νρ})` is a finite sum of products of `gi` (`C^∞` by `hCgi`) and partial derivatives of `g` (`C^∞` by `contDiff_pd` + `hCg`).
+**Christoffel symbols are `C^∞`** — discharges `hC`.  `christoffel g gi μ ν ρ = ½·∑α gi_{μα}(∂_ν g_{αρ} + ∂_ρ g_{αν} − ∂_α g_{νρ})` is a finite sum of products of `gi` (`C^∞` by `hCgi`) and partial derivatives of `g` (`C^∞` by `contDiff_pd` + `hCg`).
 
 $$
 (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g_{{a}{b}}({y})})\in C^{\infty}) \to (\forall (a b : \mathrm{Fin}\,n), ({\lambda y \mapsto g^{{a}{b}}({y})})\in C^{\infty}) \to \forall (\mu \nu \rho : \mathrm{Fin}\,n), ({\lambda y \mapsto \href{/browser/qiqth-curvature#d-qiqth-curvature-christoffel}{\Gamma^{{\mu}}_{{\nu}{\rho}}({y})}})\in C^{\infty}
