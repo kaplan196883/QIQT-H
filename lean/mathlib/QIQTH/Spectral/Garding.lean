@@ -2401,6 +2401,55 @@ theorem cayleyExpBump_L2_tendsto_zero [Nontrivial H] (U : ℝ → (H →L[ℂ] H
   simp only [heq]
   exact cayleyCutoff_sq_integral_tendsto_zero U hgrp hU0 hUinner hUbd hSC x
 
+/-- **The cutoff Stone-exponential symbol** `g_{t,N}(ω) = e_t(ω) · η_N(ω)` — the continuous approximant of the symbol
+    `e_t`, with the bump `η_N` taming `e_t`'s discontinuity at the excluded point `1` (`η_N(1) = 0`).  Its cfc
+    `cfc(g_{t,N}) V x` is a continuous-function functional-calculus vector; as `N → ∞` these converge (the L²→strong
+    bridge, since `g_{t,N} → e_t` in `L²(μ_x)`) to define the Stone unitary `U_t x = lim cfc(g_{t,N}) V x`. -/
+noncomputable def cayleyExpBump (t : ℝ) (N : ℕ) (ω : ℂ) : ℂ := cayleyExp t ω * (cayleyBump N ω : ℂ)
+
+/-- The cutoff symbol has norm `η_N` on the unit circle: `‖g_{t,N}(ω)‖ = η_N(ω)` for `‖ω‖ = 1` (`‖e_t‖ = 1`,
+    `η_N ≥ 0`).  This is the squeeze that gives `g_{t,N}` continuity at the excluded point `1` (`‖g‖ = η_N → 0`). -/
+theorem cayleyExpBump_norm (t : ℝ) (N : ℕ) {ω : ℂ} (h1 : ‖ω‖ = 1) :
+    ‖cayleyExpBump t N ω‖ = cayleyBump N ω := by
+  rw [cayleyExpBump, norm_mul, cayleyExp_abs_circle h1, one_mul, Complex.norm_real,
+    Real.norm_of_nonneg (cayleyBump_nonneg N ω)]
+
+/-- **★★ The cutoff symbol is continuous on `σ(V)`:** `ContinuousOn (g_{t,N}) (spectrum ℂ V)`.  Off the excluded
+    point `1` it is a product of continuous functions (`cayleyExp_continuousOn`, `cayleyBump_continuous`); at `1`
+    (if `1 ∈ σ(V)`) the value is `g_{t,N}(1) = e_t(1)·0 = 0`, and `‖g_{t,N}(ω)‖ = η_N(ω) → η_N(1) = 0`
+    (`cayleyExpBump_norm` on `σ(V) ⊆ S¹` + `η_N` continuous) — the squeeze giving `ContinuousWithinAt` at `1`.
+    So `cfc(g_{t,N}) V` is well-defined (the cfc needs `ContinuousOn (σ(V))`), the operator whose strong limit is
+    `U_t`.  Axiom-free; free scalar; no UV datum. -/
+theorem cayleyExpBump_continuousOn [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (t : ℝ) (N : ℕ) :
+    ContinuousOn (cayleyExpBump t N)
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) := by
+  intro ω hω
+  by_cases hne : ω = 1
+  · -- at the excluded point: the norm squeeze ‖g‖ = η_N → 0
+    subst hne
+    have hg1 : cayleyExpBump t N 1 = 0 := by simp [cayleyExpBump, cayleyBump, cayleyCutoff]
+    rw [ContinuousWithinAt, hg1, tendsto_zero_iff_norm_tendsto_zero]
+    have heqon : Set.EqOn (fun ω => ‖cayleyExpBump t N ω‖) (cayleyBump N)
+        (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) := by
+      intro ω hωs
+      have hc : ‖ω‖ = 1 := by
+        have hmem := cayley_spectrum_subset_circle U hgrp hU0 hUinner hUbd hSC hωs
+        rwa [mem_sphere_zero_iff_norm] at hmem
+      exact cayleyExpBump_norm t N hc
+    refine Filter.Tendsto.congr' (eventuallyEq_nhdsWithin_of_eqOn heqon.symm) ?_
+    have hb1 : cayleyBump N 1 = 0 := by simp [cayleyBump, cayleyCutoff]
+    rw [← hb1]
+    exact (cayleyBump_continuous N).continuousWithinAt
+  · -- off the excluded point: product of continuous-at functions
+    have he : ContinuousAt (cayleyExp t) ω :=
+      (cayleyExp_continuousOn t).continuousAt (isOpen_ne.mem_nhds hne)
+    have hb : ContinuousAt (fun z => (cayleyBump N z : ℂ)) ω :=
+      (Complex.continuous_ofReal.comp (cayleyBump_continuous N)).continuousAt
+    exact (he.mul hb).continuousWithinAt
+
 end SelfAdjoint
 
 end QIQTH.Spectral

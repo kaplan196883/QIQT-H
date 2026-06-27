@@ -610,10 +610,15 @@ Also ✅ `cayleyCutoff_sq_integral_tendsto_zero` (`∫ψ_N²dμ_x→0` — the s
 `integral_mono_of_nonneg` (`ψ_N²≤ψ_N`) + DCT-1 + atom-killing + `squeeze_zero`) + `cayleyExpBump_L2_tendsto_zero`
 `[Nontrivial H]` — **★★ the cutoff symbol converges to the symbol in L²(μ_x)**: `∫‖e_t·η_N − e_t‖²dμ_x→0`. Integrand
 `= ψ_N(ω.1)²` on `σ(V)⊆S¹` (`cayleyExpBump_sub_norm` + `integral_congr_ae`) ⟹ `= ∫ψ_N²→0`. *Built green (2 fixes:
-`ENNReal.toReal_zero` name; `show` to beta-reduce the integrand lambda for `rw`).* **Next:** (a) the cutoff symbol
-`g_{t,N}=e_t·η_N` is `ContinuousOn σ(V)` (the squeeze `‖e_t·η_N‖=η_N→0` at `1` + `cayleyExp_abs_circle`); (b) L²-Cauchy
-(triangle from the L²-convergence, as in `cayleyCutoff_cfc_cauchySeq`) ⟹ existence-half ⟹ `U_t x := lim cfc(g_{t,N})V x`;
-lift group law; strong continuity; generator ⟹ Stone.
+`ENNReal.toReal_zero` name; `show` to beta-reduce the integrand lambda for `rw`).*
+Also ✅ `cayleyExpBump` (def `g_{t,N}(ω)=e_t(ω)·η_N(ω)`) + `cayleyExpBump_norm` (`‖g_{t,N}(ω)‖=η_N(ω)` on the circle)
++ `cayleyExpBump_continuousOn` `[Nontrivial H]` — **★★ the cutoff symbol is `ContinuousOn σ(V)`**: off the excluded
+point `1` a product of `ContinuousAt` fns (`cayleyExp_continuousOn` on the open `{ω≠1}` + bump cts); AT `1` the value
+is `g(1)=e_t(1)·0=0` and `‖g(ω)‖=η_N(ω)→η_N(1)=0` (the squeeze, via `cayleyExpBump_norm` on `σ(V)⊆S¹` +
+`eventuallyEq_nhdsWithin_of_eqOn` + `tendsto_zero_iff_norm_tendsto_zero`) ⟹ `ContinuousWithinAt`. *Built green first
+try.* So `cfc(g_{t,N}) V` is well-defined (cfc needs `ContinuousOn σ(V)`). **Next:** L²-Cauchy (triangle from the
+L²-convergence `cayleyExpBump_L2_tendsto_zero`, as in `cayleyCutoff_cfc_cauchySeq`) ⟹ existence-half ⟹
+`U_t x := lim cfc(g_{t,N}) V x`; lift group law; strong continuity; generator ⟹ Stone.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

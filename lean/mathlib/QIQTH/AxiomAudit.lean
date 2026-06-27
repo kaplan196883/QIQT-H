@@ -5146,6 +5146,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyExpBump_sub_norm
 #print axioms QIQTH.Spectral.cayleyCutoff_sq_integral_tendsto_zero
 #print axioms QIQTH.Spectral.cayleyExpBump_L2_tendsto_zero
+#print axioms QIQTH.Spectral.cayleyExpBump_norm
+#print axioms QIQTH.Spectral.cayleyExpBump_continuousOn
+-- ★★ P4 WALL — THE CUTOFF SYMBOL IS CONTINUOUS ON σ(V): cayleyExpBump t N ω := e_t(ω)·η_N(ω); cayleyExpBump_norm
+-- (‖g_{t,N}(ω)‖=η_N(ω) on the circle) + cayleyExpBump_continuousOn [Nontrivial H] (ContinuousOn (g_{t,N}) σ(V)):
+-- off the excluded point 1 a product of ContinuousAt fns (cayleyExp_continuousOn on the open {ω≠1} + bump cts);
+-- AT 1 the value is g(1)=e_t(1)·0=0 and ‖g(ω)‖=η_N(ω)→η_N(1)=0 (cayleyExpBump_norm on σ(V)⊆S¹ + η_N cts +
+-- eventuallyEq_nhdsWithin_of_eqOn + tendsto_zero_iff_norm_tendsto_zero) — the squeeze ⟹ ContinuousWithinAt. So
+-- cfc(g_{t,N})V is well-defined (cfc needs ContinuousOn σ(V)), the operator whose strong limit is U_t. Axiom-free.
 -- ★★ P4 WALL — THE CUTOFF SYMBOL CONVERGES TO THE SYMBOL IN L²(μ_x): cayleyExpBump_L2_tendsto_zero [Nontrivial H]
 -- — ∫‖e_t·η_N − e_t‖² dμ_x → 0. Integrand = ψ_N(ω.1)² on σ(V)⊆S¹ (cayleyExpBump_sub_norm, integral_congr_ae) ⟹
 -- = cayleyCutoff_sq_integral_tendsto_zero (∫ψ_N²→0): the squeeze 0≤∫ψ_N²≤∫ψ_N→μ_x({1})=0 (integral_mono_of_nonneg
