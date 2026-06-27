@@ -523,6 +523,15 @@ condition at `ε²` gives `‖·‖²<ε²` ⟹ `‖·‖<ε` (`lt_of_pow_lt_pow
 bridge** `L²(μ_x)` continuous-function limits ⟶ strong operator limits: any L²-convergent sequence of continuous
 functions yields a convergent `cfc(F n) V x`. Directly enables both `μ_x({1})=0` (the cutoff sequence converges) and
 `U_t=exp(itA)`. **Next:** the cutoff sequence `ψ_N` + its DCT limits → `μ_x({1})=0`.
+Also ✅ `cayley_defect_energy` `[Nontrivial H]` — **the Cayley defect-energy identity**: `‖V x − x‖² =
+∫ ω, ‖(ω:ℂ)−1‖² dμ_x` (the `f=z−1` specialization of `cayley_cfc_norm_sq_integral`, using `cfc(z↦z−1)V = V−1`
+via `cfc_sub` + the keystones `cayley_cfc_id`/`cayley_cfc_one`). The spectral mass weighted by squared distance-to-1
+= the Cayley defect `‖(V−1)x‖²` — the integral witnessing `ker(1−V)=0`. The inverse-Cayley generator
+`A=i(1+V)(1−V)⁻¹` is obstructed only by the spectral **atom** `μ_x({1})`. **Next (μ_x({1})=0, full recipe):**
+cutoff `ψ_N(ω)=(1+(N+1)‖ω−1‖²)⁻¹` (continuous, `0<ψ_N≤1`, `ψ_N→1_{{1}}` ptwise); 3 DCT limits
+[`∫ψ_N dμ_x→μ_x({1})`, `∫‖ψ_N−ψ_M‖²→0` (L²-Cauchy), `∫‖(ω−1)ψ_N‖²→0`]; existence-half ⟹ `cfc(ψ_N)V x→w`;
+convergence-half ⟹ `(V−1)cfc(ψ_N)V x = cfc((ω−1)ψ_N)V x → 0`, so `(V−1)w=0` ⟹ `w=0` (`cayley_one_sub_injective`);
+`re⟪x,cfc(ψ_N)V x⟫=∫ψ_N dμ_x → μ_x({1})` and `→ re⟪x,w⟫=0`, hence `μ_x({1})=0`.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

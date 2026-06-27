@@ -1762,6 +1762,31 @@ theorem cayley_cfc_cauchySeq_of_integral [Nontrivial H] (U : ℝ → (H →L[ℂ
     rw [hpars]; exact hN m hm n hn
   exact lt_of_pow_lt_pow_left₀ 2 hε.le hlt
 
+/-- **★★ The Cayley defect-energy identity:** `‖V x − x‖² = ∫ ω, ‖(ω : ℂ) − 1‖² dμ_x`.  The `f = z − 1`
+    specialization of the Parseval f-isometry `cayley_cfc_norm_sq_integral`, using `cfc (z ↦ z − 1) V = V − 1`
+    (`cfc_sub` + the keystones `cayley_cfc_id` `cfc id V = V` and `cayley_cfc_one` `cfc 1 V = 1`).  Quantitatively:
+    the spectral mass weighted by the squared distance-to-`1` equals the **Cayley defect** `‖(V − 1) x‖²` — the
+    integral that witnesses `ker(1 − V) = 0` (`cayley_one_sub_injective`).  The inverse-Cayley generator
+    `A = i(1 + V)(1 − V)⁻¹` (whose spectral symbol is finite exactly off `ω = 1`) is obstructed only by the spectral
+    **atom** `μ_x({1})` — whose vanishing (the next brick, via the L²→strong bridge + the rational cutoffs) makes the
+    Stone exponential symbol `exp(it·invCayley(ω))` `μ_x`-a.e. defined.  Axiom-free; free scalar; no UV datum. -/
+theorem cayley_defect_energy [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    ‖(cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x - x‖ ^ 2
+      = ∫ ω, ‖(ω : ℂ) - 1‖ ^ 2 ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+  have hcoord : cfc (fun z : ℂ => z - 1) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+      = (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) - 1 := by
+    rw [show (fun z : ℂ => z - 1) = (fun z => (id : ℂ → ℂ) z - (1 : ℂ → ℂ) z) from by funext z; simp]
+    rw [cfc_sub (f := (id : ℂ → ℂ)) (g := (1 : ℂ → ℂ))
+      (a := (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)),
+      cayley_cfc_id U hgrp hU0 hUinner hUbd hSC, cayley_cfc_one U hgrp hU0 hUinner hUbd hSC]
+  have hpars := cayley_cfc_norm_sq_integral U hgrp hU0 hUinner hUbd hSC (fun z : ℂ => z - 1)
+    ((continuous_id.sub continuous_const).continuousOn) x
+  rw [hcoord, ContinuousLinearMap.sub_apply, ContinuousLinearMap.one_apply] at hpars
+  exact hpars
+
 end SelfAdjoint
 
 end QIQTH.Spectral

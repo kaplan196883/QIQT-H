@@ -5118,6 +5118,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayley_cfc_norm_sq_integral
 #print axioms QIQTH.Spectral.cayley_cfc_tendsto_zero_of_integral
 #print axioms QIQTH.Spectral.cayley_cfc_cauchySeq_of_integral
+#print axioms QIQTH.Spectral.cayley_defect_energy
+-- ★★ P4 WALL — THE CAYLEY DEFECT-ENERGY IDENTITY: cayley_defect_energy [Nontrivial H] — ‖V x − x‖² =
+-- ∫ ω, ‖(ω:ℂ)−1‖² dμ_x. The f=z−1 specialization of the Parseval f-isometry cayley_cfc_norm_sq_integral, using
+-- cfc(z↦z−1)V = V−1 (cfc_sub + keystones cayley_cfc_id `cfc id V=V` & cayley_cfc_one `cfc 1 V=1`). Quantitatively
+-- the spectral mass weighted by squared distance-to-1 = the Cayley defect ‖(V−1)x‖² — the integral witnessing
+-- ker(1−V)=0 (cayley_one_sub_injective). The inverse-Cayley generator A=i(1+V)(1−V)⁻¹ is obstructed only by the
+-- spectral ATOM μ_x({1}) (the next brick — vanishing via the L²→strong bridge + rational cutoffs). Axiom-free.
 -- ★★ P4 WALL — THE EXISTENCE HALF OF THE OPERATOR-LIMIT TOOLKIT: cayley_cfc_cauchySeq_of_integral [Nontrivial H]
 -- — if F n is Cauchy in L²(μ_x) (∀ε>0 ∃N ∀m,n≥N, ∫‖F m ω.1−F n ω.1‖²dμ_x<ε) then cfc(F n) V x is a CauchySeq in H
 -- (hence converges, H complete). From the L²-distance Parseval cayley_cfc_sub_norm_sq_integral: L²-Cauchy at ε²
