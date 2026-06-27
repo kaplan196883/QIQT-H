@@ -5188,6 +5188,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyStoneCLM_inner
 #print axioms QIQTH.Spectral.cayleyStoneCLM_norm_le
 #print axioms QIQTH.Spectral.cayleyStoneCLM_continuous
+#print axioms QIQTH.Spectral.cayley_resolvent_symbol_cfc
+-- ★★★★ P4 WALL — RESOLVENT SYMBOL cfc (GPT-5.5-pro direct-identity route): cayley_resolvent_symbol_cfc —
+-- cfc((1−ω)/2) V = ½(1−V) (pure cfc linearity: cfc_const_mul + cfc_sub + cayley_cfc_one/_id). With the resolvent↔
+-- Cayley relation R=½(1−V) (V=1−2R, next) ⟹ resolvent U = cfc(h)V, h=(1−ω)/2 — the bridge from resolvent_stoneGen
+-- (stoneGen U (Rx)=−i(Rx−x)) to the DIRECT identity stoneGen U (cfc φ V z)=cfc(c·φ)V z (factor φ=h·ψ), identifying
+-- the ORIGINAL group's generator with mult-by-c WITHOUT the recovery / essential-self-adjointness wall. Axiom-free.
 -- ★★★★ P4 WALL — cayleyStoneCLM IS A C₀ UNITARY GROUP: the reconstructed Stone group satisfies the five abstract
 -- C₀-group hypotheses — cayleyStoneCLM_zero (U_0=1), _comp (U_{s+t}=U_s∘U_t, group law), _inner (preserves inner
 -- product, it's the LinearIsometryEquiv cayleyStoneLIE), _norm_le (‖U_t y‖≤‖y‖), _continuous (strong continuity). So

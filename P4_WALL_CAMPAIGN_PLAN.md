@@ -547,7 +547,16 @@ excluded point 1), giving `φ(V)z = R·ψ(V)z` (cfc_mul); then (A) + the algebra
 `τ(θ_s a)=e^{−s}τ(a)` + `K̃=A_edge/4ℓ_P²`, avoiding the full crossed-product/vN-weights infrastructure explosion —
 Mathlib lacks vN weights, crossed products, modular theory, semifinite traces). Stone is a closeable sprint; Type II
 will EXPAND unless narrowly interfaced.
-**Next (toward X=A_edge, Phase 4.3, redirected):** the direct identity `stoneGen U (φ(V)z)=(c·φ)(V)z` via the
+Also ✅ **`cayley_resolvent_symbol_cfc` — RESOLVENT SYMBOL cfc** (`StoneExp.lean`, axiom-free, budget 0):
+`cfc((1−ω)/2) V = ½(1−V)` (pure cfc linearity: `cfc_const_mul`+`cfc_sub`+`cayley_cfc_one`/`_id`). **Built green.** The
+first ingredient of `resolvent U = cfc(h)V` (`h=(1−ω)/2`) — meets the resolvent↔Cayley relation at `½(1−V)`.
+**Next (redirected, sub-bricks):** (i) the **resolvent↔Cayley relation** `cayleyUnitary U y = y − 2•(resolvent U y)`
+(`V=1−2R`): via `cayleyEquiv.symm y = −i•(R y)` [proof: `cayleyEquiv⟨−i•Ry,_⟩ = stoneGen U⟨−i•Ry,_⟩ + i•(−i•Ry) =
+(y−Ry)+Ry = y`, using `LinearPMap.map_smul` + `resolvent_stoneGen`], then unfold `cayley`; (ii) combine (i)+
+`cayley_resolvent_symbol_cfc` ⟹ `resolvent U x = cfc(h) V x`; (iii) the **direct identity** `stoneGen U (cfc φ V z) =
+cfc(c·φ) V z` (factor `φ=h·ψ`, `cfc_mul`, `resolvent_stoneGen`, algebra `c·h=i(1+ω)/2`); (iv) instantiate
+translationLp/modUnitary/clockTransl ⟹ X=A_edge; then Phase 5 via the conditional interface.
+**(Superseded) earlier framing — the direct identity `stoneGen U (φ(V)z)=(c·φ)(V)z` via the
 resolvent factorization above (B); then instantiate translationLp/modUnitary/clockTransl ⟹ X=A_edge; then Phase 5
 via the conditional interface;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —

@@ -1627,6 +1627,26 @@ theorem cayleyStoneCLM_continuous [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
     funext t; exact cayleyStoneCLM_apply U hgrp hU0 hUinner hUbd hSC t y
   rw [heq]; exact cayleyStoneU_continuous U hgrp hU0 hUinner hUbd hSC y
 
+/-- **The resolvent symbol's functional calculus:** `cfc((1−ω)/2) V = ½(1 − V)`.  Pure `cfc` linearity
+    (`cfc_const_mul` + `cfc_sub` + `cayley_cfc_one` `cfc 1 V = 1` + `cayley_cfc_id` `cfc id V = V`).  Combined with the
+    resolvent↔Cayley relation `R = ½(1 − V)` (i.e. `V = 1 − 2R`, to come), this yields `resolvent U = cfc(h) V` with
+    `h(ω) = (1−ω)/2` — the bridge that turns `resolvent_stoneGen` (`stoneGen U (R x) = −i(Rx − x)`) into the **direct
+    spectral identity** `stoneGen U (cfc φ V z) = cfc(c·φ) V z` (factor `φ = h·ψ`, GPT-5.5-pro route), identifying the
+    ORIGINAL group's generator with multiplication by the spectral value `c` — without the recovery / e.s.a. wall. -/
+theorem cayley_resolvent_symbol_cfc [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) :
+    cfc (fun ω => (1 - ω) / 2 : ℂ → ℂ) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+      = (2 : ℂ)⁻¹ • ((1 : H →L[ℂ] H) - (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) := by
+  have hfun : (fun ω : ℂ => (1 - ω) / 2)
+      = (fun ω => (2 : ℂ)⁻¹ * ((1 : ℂ → ℂ) ω - (id : ℂ → ℂ) ω)) := by
+    funext ω; simp only [Pi.one_apply, id]; ring
+  rw [hfun, cfc_const_mul (2 : ℂ)⁻¹ (fun ω => (1 : ℂ → ℂ) ω - (id : ℂ → ℂ) ω)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H),
+    cfc_sub (1 : ℂ → ℂ) (id : ℂ → ℂ) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H),
+    cayley_cfc_one U hgrp hU0 hUinner hUbd hSC, cayley_cfc_id U hgrp hU0 hUinner hUbd hSC]
+
 
 end SelfAdjoint
 
