@@ -596,10 +596,14 @@ Bounded + cts off `1`, and `μ_x({1})=0` ⟹ `e_t` is `μ_x`-a.e. cts/bounded.
 Also ✅ `cayleyExp_zero` (`e_0(ω)=1`, `exp 0=1` — symbol-level seed of `U_0=1`) + `cayleyExp_add`
 (`e_s(ω)·e_t(ω)=e_{s+t}(ω)` via `Complex.exp_add` — the symbol-level seed of the **Stone group law** `U_s U_t=U_{s+t}`:
 `cfc(e_s)V·cfc(e_t)V = cfc(e_s·e_t)V = cfc(e_{s+t})V` by cfc multiplicativity). *Built green first try.* Two of the
-three Stone-group axioms at the symbol level (strong continuity `t↦U_t x` is the third). **Next:** continuous cutoffs
-`g_{t,N}` of `e_t` (e.g. `e_t·η_N` with `η_N` a continuous bump → 0 near `1`); show `g_{t,N}` L²(μ_x)-Cauchy (DCT, the
-atom gone) ⟹ existence-half ⟹ `U_t x := lim cfc(g_{t,N})V x`; then lift `cayleyExp_add`/`_zero` to the group law,
-prove strong continuity, identify the generator ⟹ Stone.
+three Stone-group axioms at the symbol level (strong continuity `t↦U_t x` is the third).
+Also ✅ `cayleyBump` + `_continuous` + `_nonneg` + `_le_one` + `_tendsto_indicator` — **the continuous bump cutoff**
+`η_N(ω)=1−ψ_N(ω)` (the symbol's L²-approximation device, complementary to `cayleyCutoff`): `η_N∈[0,1]` continuous (the
+DCT dominator), `η_N(ω)→(if ω=1 then 0 else 1)` (indicator of `ℂ∖{1}`, from `cayleyCutoff_tendsto_indicator`). `η_N(1)=0`
+tames `e_t`'s discontinuity at `1`. *Built green.* **Next:** the cutoff symbol `g_{t,N}=e_t·η_N` is `ContinuousOn σ(V)`
+(`η_N→0` kills the discontinuity at `1` — the squeeze `‖e_t·η_N‖≤η_N` + `cayleyExp_abs`) and `→ e_t` in `L²(μ_x)`
+(DCT, `‖e_t·η_N − e_t‖² = ‖e_t‖²(1−η_N)² ≤ (1−η_N)² → 0`, atom gone) ⟹ L²-Cauchy ⟹ existence-half ⟹
+`U_t x := lim cfc(g_{t,N})V x`; then lift `cayleyExp_add`/`_zero` to the group law, strong continuity, generator ⟹ Stone.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

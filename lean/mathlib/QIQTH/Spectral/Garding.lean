@@ -2287,6 +2287,39 @@ theorem cayleyExp_add (s t : ℝ) (ω : ℂ) : cayleyExp s ω * cayleyExp t ω =
   push_cast
   ring
 
+/-- **The continuous bump cutoff** `η_N(ω) = 1 − ψ_N(ω)`, complementary to the rational cutoff `cayleyCutoff`.
+    As `N → ∞` it rises to the indicator of `ℂ \ {1}`: `η_N(1) = 0` for all `N` (so it vanishes at the Cayley
+    exceptional point, taming the symbol's discontinuity there), while `η_N(ω) → 1` for `ω ≠ 1`.  Each `η_N` is
+    continuous and valued in `[0, 1]`.  The cutoff symbol `e_t · η_N` is then **continuous on `σ(V)`** (`η_N → 0`
+    kills `e_t`'s discontinuity at `1`) and converges to `e_t` in `L²(μ_x)` (since `μ_x({1}) = 0`), so its
+    cfc-vectors converge to define the Stone unitary `U_t x = lim cfc(e_t · η_N) V x`. -/
+noncomputable def cayleyBump (N : ℕ) (ω : ℂ) : ℝ := 1 - cayleyCutoff N ω
+
+/-- Each bump `η_N` is continuous on `ℂ` (`1 −` a continuous function). -/
+theorem cayleyBump_continuous (N : ℕ) : Continuous (cayleyBump N) :=
+  continuous_const.sub (cayleyCutoff_continuous N)
+
+/-- The bump is nonnegative (`ψ_N ≤ 1`). -/
+theorem cayleyBump_nonneg (N : ℕ) (ω : ℂ) : 0 ≤ cayleyBump N ω :=
+  sub_nonneg.mpr (cayleyCutoff_le_one N ω)
+
+/-- The bump is bounded by `1` (`0 < ψ_N`); so `η_N ∈ [0, 1]` is an integrable DCT dominator. -/
+theorem cayleyBump_le_one (N : ℕ) (ω : ℂ) : cayleyBump N ω ≤ 1 := by
+  have := (cayleyCutoff_pos N ω).le
+  simp only [cayleyBump]; linarith
+
+/-- **The pointwise limit of the bump sequence is the indicator of `ℂ \ {1}`:**
+    `η_N(ω) → (if ω = 1 then 0 else 1)`.  Complementary to `cayleyCutoff_tendsto_indicator` (`ψ_N → 1_{ω=1}`):
+    `η_N = 1 − ψ_N → 1 − 1_{ω=1}`.  This is the convergence DCT consumes to show `e_t · η_N → e_t` in `L²(μ_x)`. -/
+theorem cayleyBump_tendsto_indicator (ω : ℂ) :
+    Filter.Tendsto (fun N => cayleyBump N ω) Filter.atTop
+      (nhds (if ω = 1 then (0 : ℝ) else 1)) := by
+  have h := (tendsto_const_nhds (x := (1 : ℝ))).sub (cayleyCutoff_tendsto_indicator ω)
+  have heq : (1 : ℝ) - (if ω = 1 then (1 : ℝ) else 0) = (if ω = 1 then (0 : ℝ) else 1) := by
+    by_cases hω : ω = 1 <;> simp [hω]
+  rw [heq] at h
+  exact h
+
 end SelfAdjoint
 
 end QIQTH.Spectral

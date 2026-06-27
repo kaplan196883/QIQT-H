@@ -5138,6 +5138,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyExp_abs
 #print axioms QIQTH.Spectral.cayleyExp_zero
 #print axioms QIQTH.Spectral.cayleyExp_add
+#print axioms QIQTH.Spectral.cayleyBump_continuous
+#print axioms QIQTH.Spectral.cayleyBump_nonneg
+#print axioms QIQTH.Spectral.cayleyBump_le_one
+#print axioms QIQTH.Spectral.cayleyBump_tendsto_indicator
+-- ★ P4 WALL — THE CONTINUOUS BUMP CUTOFF (the symbol's L²-approximation device): cayleyBump N ω := 1−cayleyCutoff N ω
+-- — complementary to the rational cutoff. cayleyBump_continuous + _nonneg + _le_one (η_N∈[0,1] cts, the DCT
+-- dominator) + _tendsto_indicator (η_N(ω)→ if ω=1 then 0 else 1, i.e. → indicator of ℂ∖{1}; from
+-- cayleyCutoff_tendsto_indicator). η_N(1)=0 tames e_t's discontinuity at 1: the cutoff symbol e_t·η_N is cts on σ(V)
+-- and → e_t in L²(μ_x) (μ_x({1})=0), so cfc(e_t·η_N)V x converges to define U_t x = strong-limit Stone exponential.
+-- Axiom-free.
 -- ★ P4 WALL — THE ONE-PARAMETER GROUP STRUCTURE OF THE SYMBOL: cayleyExp_zero (e_0(ω)=1, exp 0=1 — seed of U_0=1)
 -- + cayleyExp_add (e_s(ω)·e_t(ω)=e_{s+t}(ω) via Complex.exp_add — the symbol-level seed of the Stone group law
 -- U_s U_t = U_{s+t}: cfc(e_s)V·cfc(e_t)V = cfc(e_s·e_t)V = cfc(e_{s+t})V by cfc multiplicativity). Two of the three

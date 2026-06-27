@@ -433,8 +433,12 @@ whose cfc `cfc(e_t)V` IS `U_t=exp(itA)`: continuous off `1`, **modulus 1** on th
 Also ✅ `cayleyExp_zero` (`e_0=1`) + `cayleyExp_add` (`e_s·e_t=e_{s+t}` via `Complex.exp_add` — symbol-level seed of the
 **Stone group law** `U_s U_t=U_{s+t}` by cfc multiplicativity). Built green first try. Two of the three Stone-group
 axioms at the symbol level (strong continuity is the third).
-**Next (toward U_t=exp(itA)):** continuous cutoffs `g_{t,N}` of `e_t` → L²(μ_x)-Cauchy (atom gone) ⟹ existence-half ⟹
-`U_t x:=lim cfc(g_{t,N})V x`; lift `cayleyExp_add`/`_zero` to the group law; strong continuity; generator ⟹ Stone;
+Also ✅ `cayleyBump` + `_continuous`/`_nonneg`/`_le_one`/`_tendsto_indicator` (**the continuous bump cutoff**
+`η_N=1−ψ_N`: `η_N∈[0,1]` cts, `η_N→1_{ω≠1}`, `η_N(1)=0` tames `e_t`'s discontinuity at `1` — the symbol's
+L²-approximation device). Built green.
+**Next (toward U_t=exp(itA)):** the cutoff symbol `g_{t,N}=e_t·η_N` is `ContinuousOn σ(V)` + `→ e_t` in L²(μ_x)
+(atom gone) ⟹ L²-Cauchy ⟹ existence-half ⟹ `U_t x:=lim cfc(g_{t,N})V x`; lift group law; strong continuity; generator
+⟹ Stone;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
