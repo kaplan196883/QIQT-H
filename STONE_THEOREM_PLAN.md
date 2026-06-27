@@ -581,8 +581,15 @@ under inverse Cayley). DCT-1 (`∫ψ_N dμ→μ_x({1})`) + `∫ψ_N dμ=re⟪x,c
 ⟹ `μ_x({1}).toReal=0` ⟹ `μ_x({1})=0` (`ENNReal.toReal_eq_zero_iff` + `measure_ne_top`). *Built green first try.*
 **ATOM-KILLING COMPLETE.** **Consequence:** the inverse-Cayley / Stone-exponential symbol `exp(it·invCayley(ω))`
 (continuous + bounded off `ω=1`) is now `μ_x`-a.e. defined — the precondition for the strong-limit Stone exponential
-`U_t=exp(itA)`. **Next:** assemble the strong limit `U_t x = lim cfc(g_{t,N}) V x` with `g_{t,N}` continuous cutoffs
-of `exp(it·invCayley(·))` (the convergence + existence bridges + the now-vanishing atom feed this directly).
+`U_t=exp(itA)`.
+Also ✅ `cayleyInv` + `cayleyInv_continuousOn` + `cayleyInv_im_eq_zero` — **the inverse Cayley map** `c(ω)=i(1+ω)/(1−ω)`
+(the Stone-exp symbol's argument): continuous off the excluded point `1`, and **real on the unit circle** (off `1`):
+`(c(ω)).im=0` for `‖ω‖=1, ω≠1` (i.e. `A=i(1+V)(1−V)⁻¹` is **self-adjoint** ⟹ `exp(it·c(ω))` has modulus 1 ⟹ `U_t`
+unitary). Proof of real-valuedness: on the circle `conj ω=ω⁻¹` (`RCLike.mul_conj`+`h1`) + `div_eq_div_iff` +
+`linear_combination (2I)·(ω·conj ω=1)`. *Built green (one fix: `field_simp/ring` couldn't reduce `ω⁻¹`; switched to
+keeping `conj ω` + `linear_combination`).* **Next:** assemble the strong limit `U_t x = lim cfc(g_{t,N}) V x` with
+`g_{t,N}` continuous cutoffs of `exp(it·c(·))` (continuous+bounded off `1`, `μ_x`-a.e. defined since `μ_x({1})=0`;
+the convergence + existence bridges feed this) ⟹ group law / strong continuity / generator ⟹ Stone.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

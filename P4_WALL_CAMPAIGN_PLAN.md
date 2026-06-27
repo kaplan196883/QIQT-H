@@ -423,8 +423,11 @@ Also ✅ `cayleyScalarMeasure_atom_eq_zero` `[Nontrivial H]` (**★★★★ THE
 no mass on the exceptional point `1∈S¹`. DCT-1 + `∫ψ_N dμ=re⟪x,cfc(ψ_N)V x⟫` + `cfc(ψ_N)V x→0` + inner/re-continuity ⟹
 `μ_x({1}).toReal=0` ⟹ `μ_x({1})=0`. Built green first try). **ATOM-KILLING COMPLETE** — the inverse-Cayley/Stone
 exponential symbol `exp(it·invCayley(ω))` is now `μ_x`-a.e. defined, the precondition for `U_t=exp(itA)`.
+Also ✅ `cayleyInv` + `cayleyInv_continuousOn` + `cayleyInv_im_eq_zero` (**the inverse Cayley map** `c(ω)=i(1+ω)/(1−ω)`:
+continuous off `1`, and **real on the unit circle** off `1` ⟹ `A=i(1+V)(1−V)⁻¹` self-adjoint ⟹ `exp(it·c)` modulus 1.
+Real-valuedness via `conj ω=ω⁻¹` on circle + `div_eq_div_iff` + `linear_combination`).
 **Next (toward U_t=exp(itA)):** assemble the strong limit `U_t x=lim cfc(g_{t,N})V x` (`g_{t,N}` continuous cutoffs of
-`exp(it·invCayley(·))`, defined a.e. now the atom is gone — the convergence + existence bridges feed this directly);
+`exp(it·c(·))`, `μ_x`-a.e. defined now the atom is gone — the convergence + existence bridges feed this directly);
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

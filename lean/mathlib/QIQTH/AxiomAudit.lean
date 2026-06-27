@@ -5132,6 +5132,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyCutoff_cfc_cauchySeq
 #print axioms QIQTH.Spectral.cayleyCutoff_cfc_tendsto_zero
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_atom_eq_zero
+#print axioms QIQTH.Spectral.cayleyInv_continuousOn
+#print axioms QIQTH.Spectral.cayleyInv_im_eq_zero
+-- ★ P4 WALL — THE INVERSE CAYLEY MAP (Stone-exp symbol foundation): cayleyInv ω := i(1+ω)/(1−ω) and
+-- cayleyInv_continuousOn (continuous off the excluded point 1, denom 1−ω≠0) + cayleyInv_im_eq_zero (REAL on the
+-- unit circle off 1: (c(ω)).im=0 for ‖ω‖=1, ω≠1 — i.e. A=i(1+V)(1−V)⁻¹ is self-adjoint, so exp(it·c(ω)) has
+-- modulus 1; proof: conj ω=ω⁻¹ on the circle (RCLike.mul_conj) + div_eq_div_iff + linear_combination). The symbol
+-- exp(it·cayleyInv(ω)) is continuous+bounded off ω=1, and μ_x({1})=0, so it is μ_x-a.e. defined — the data the
+-- strong-limit Stone exponential U_t=exp(itA) consumes. Axiom-free.
 -- ★★★★ P4 WALL — THE CAYLEY SPECTRAL ATOM VANISHES: cayleyScalarMeasure_atom_eq_zero [Nontrivial H] —
 -- μ_x({1}) = 0, i.e. the scalar spectral measure of the Cayley unitary V puts NO mass on the exceptional point
 -- 1 ∈ S¹ (image of ∞ under inverse Cayley). DCT-1 (∫ψ_N dμ→μ_x({1})) + ∫ψ_N dμ=re⟪x,cfc(ψ_N)V x⟫

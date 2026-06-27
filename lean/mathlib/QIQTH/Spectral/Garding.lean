@@ -2214,6 +2214,39 @@ theorem cayleyScalarMeasure_atom_eq_zero [Nontrivial H] (U : ℝ → (H →L[ℂ
   · exact h
   · exact absurd h (measure_ne_top _ _)
 
+/-- **The inverse Cayley map** `c(ω) = i(1 + ω)/(1 − ω)` on `ℂ \ {1}`.  It is the inverse of the Cayley transform
+    `z ↦ (z − i)/(z + i)`: on the unit circle (minus the excluded point `1`, the image of `∞`) it returns the
+    **real** spectral value of the self-adjoint generator `A = i(1 + V)(1 − V)⁻¹` whose Cayley transform is `V`.
+    The Stone-exponential symbol is `ω ↦ exp(it · c(ω))`; since `c` is real on `σ(V) \ {1}` (`cayleyInv_im_eq_zero`)
+    that symbol has modulus `1`, and since `μ_x({1}) = 0` (`cayleyScalarMeasure_atom_eq_zero`) it is `μ_x`-a.e.
+    defined and bounded — the data the strong-limit Stone exponential `U_t = exp(it A)` consumes. -/
+noncomputable def cayleyInv (ω : ℂ) : ℂ := Complex.I * (1 + ω) / (1 - ω)
+
+/-- The inverse Cayley map is continuous off the excluded point `1` (the denominator `1 − ω` is nonzero there). -/
+theorem cayleyInv_continuousOn : ContinuousOn cayleyInv {ω : ℂ | ω ≠ 1} :=
+  (continuous_const.mul (continuous_const.add continuous_id)).continuousOn.div
+    (continuous_const.sub continuous_id).continuousOn
+    (fun _ hω => sub_ne_zero.mpr (Ne.symm hω))
+
+/-- **The inverse Cayley map is real on the unit circle** (off `1`): `(c(ω)).im = 0` for `‖ω‖ = 1`, `ω ≠ 1`.
+    This is the statement that the generator `A = i(1 + V)(1 − V)⁻¹` is **self-adjoint** (its spectral values are
+    real), so the Stone-exponential symbol `exp(it · c(ω))` has modulus `1` (hence `U_t` is unitary).  Proof: on
+    the circle `conj ω = ω⁻¹` (`RCLike.inv_eq_conj`), and a direct computation gives `conj(c(ω)) = c(ω)`
+    (`field_simp`/`ring`), i.e. `c(ω)` is real. -/
+theorem cayleyInv_im_eq_zero {ω : ℂ} (h1 : ‖ω‖ = 1) (hne : ω ≠ 1) : (cayleyInv ω).im = 0 := by
+  have hcc : ω * (starRingEnd ℂ) ω = 1 := by rw [RCLike.mul_conj, h1]; norm_num
+  have hd1 : (1 : ℂ) - ω ≠ 0 := sub_ne_zero.mpr (Ne.symm hne)
+  have hd2 : (1 : ℂ) - (starRingEnd ℂ) ω ≠ 0 := by
+    rw [sub_ne_zero]
+    intro h
+    apply hne
+    have : (starRingEnd ℂ) ((starRingEnd ℂ) ω) = (starRingEnd ℂ) 1 := congrArg _ h.symm
+    simpa using this
+  rw [← Complex.conj_eq_iff_im]
+  simp only [cayleyInv, map_div₀, map_mul, map_add, map_sub, map_one, Complex.conj_I]
+  rw [div_eq_div_iff hd2 hd1]
+  linear_combination (2 * Complex.I) * hcc
+
 end SelfAdjoint
 
 end QIQTH.Spectral
