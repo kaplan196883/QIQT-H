@@ -504,9 +504,15 @@ Also ✅ **`cayleyExp_hasDerivAt_zero`/`cayleyExp_hasDerivAt` — THE STONE SYMB
 axiom-free, budget 0): `d/dt e_t(ω)|₀=i·c(ω)` (and `|ₛ=e_s·i·c` everywhere) — the fibrewise generator is mult by
 `i·c(ω)` = spectral form of `i·A`. Via `HasDerivAt.cexp` + `Complex.ofRealCLM.hasDerivAt`. **Both built green first
 try.** On the cfc core this is formally `d/dt U_t(cfc φ V z)|₀=cfc(i·c·φ)V z`.
-**Next (the converse — toward X=A_edge):** transfer the symbol derivative through `cfc` **uniformly on σ(V)** (`cfc(·)V z`
-bounded linear; needs `t↦e_t·φ` HasDerivAt in `C(σV)`, Taylor remainder `≤(t²/2)‖c²φ‖∞`, φ vanishing fast at 1) +
-e.s.a./Gårding-core (Phase 3.2) — the genuine remaining analytic wall; then X=A_edge → Phase 5;
+Also ✅ **`cayleyExp_slope_tendsto` + `cayleyExp_sub_one_norm_le` — THE TWO GENERATOR-DCT INPUTS** (`StoneExp.lean`,
+axiom-free, budget 0): (a) `(e_t(ω)−1)/t → i·c(ω)` (pointwise limit, from the symbol derivative via
+`hasDerivAt_iff_tendsto_slope`); (b) `‖e_t(ω)−1‖ ≤ |t|·‖c(ω)‖` on σ(V) (c real there, `‖exp(iθ)−1‖≤|θ|`) ⟹
+`‖(e_t−1)/t‖≤‖c‖`, the t-independent domination. **Both built green.** Exactly the pointwise limit + domination the
+generator DCT consumes.
+**Next (the converse — toward X=A_edge):** assemble the **generator** on the cfc core
+`HasDerivAt(t↦U_t(cfc φ V z)) (i•cfc(c·φ)V z) 0` via the scalar DCT [`‖slope−i•cfc(cφ)Vz‖²=∫|((e_t−1)/t−ic)φ|²→0`,
+inputs (a)+(b), dominated by `4|cφ|²`] + `stoneGen_eq_of_hasDerivAt` ⟹ generator = mult by `c`; then e.s.a./Gårding-core
+(Phase 3.2); then X=A_edge → Phase 5;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

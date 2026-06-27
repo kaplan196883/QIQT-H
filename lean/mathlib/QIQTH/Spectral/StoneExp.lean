@@ -1224,6 +1224,44 @@ theorem cayleyExp_hasDerivAt (s : ℝ) (ω : ℂ) :
       (Complex.I * cayleyInv ω) s := h2.const_mul Complex.I
   simpa [cayleyExp] using h3.cexp
 
+/-- **The difference quotient of the Stone symbol converges to its derivative:**
+    `(e_t(ω) − 1)/t → i·c(ω)` as `t → 0` (`t ≠ 0`).  Immediate from `cayleyExp_hasDerivAt_zero` via
+    `hasDerivAt_iff_tendsto_slope` (the slope at `0` is `t⁻¹•(e_t(ω) − e_0(ω)) = (e_t(ω) − 1)/t`, since `e_0 = 1`).
+    This is the **pointwise convergence** the generator's dominated-convergence pass consumes. -/
+theorem cayleyExp_slope_tendsto (ω : ℂ) :
+    Filter.Tendsto (fun t : ℝ => (cayleyExp t ω - 1) / (t : ℂ))
+      (nhdsWithin (0 : ℝ) {(0 : ℝ)}ᶜ) (nhds (Complex.I * cayleyInv ω)) := by
+  have h := hasDerivAt_iff_tendsto_slope.mp (cayleyExp_hasDerivAt_zero ω)
+  refine Filter.Tendsto.congr' ?_ h
+  filter_upwards [self_mem_nhdsWithin] with t ht
+  have ht0 : t ≠ 0 := ht
+  rw [slope_def_module, sub_zero, cayleyExp_zero, Complex.real_smul, Complex.ofReal_inv]
+  rw [div_eq_mul_inv, mul_comm]
+
+/-- **A `t`-independent bound on the Stone-symbol increment over `σ(V)`:** for `ω` on the unit circle (minus the
+    excluded point `1`), `‖e_t(ω) − 1‖ ≤ |t|·‖c(ω)‖`.  On `σ(V) ⊆ S¹` the spectral value `c(ω) = cayleyInv ω` is
+    **real** (`cayleyInv_im_eq_zero`), so `e_t(ω) = exp(i·↑(t·c.re))` lies on the unit circle and
+    `‖exp(iθ) − 1‖ ≤ |θ|` (`Complex.norm_exp_I_mul_ofReal_sub_one_le`) gives the bound.  Hence
+    `‖(e_t(ω) − 1)/t‖ ≤ ‖c(ω)‖` — the uniform dominating function the generator's dominated-convergence pass needs
+    (it makes the difference quotients dominated by `‖c·φ‖`, integrable on a core where `c·φ` is bounded). -/
+theorem cayleyExp_sub_one_norm_le {ω : ℂ} (h1 : ‖ω‖ = 1) (hne : ω ≠ 1) (t : ℝ) :
+    ‖cayleyExp t ω - 1‖ ≤ |t| * ‖cayleyInv ω‖ := by
+  have hc : cayleyInv ω = ((cayleyInv ω).re : ℂ) := by
+    apply Complex.ext <;> simp [cayleyInv_im_eq_zero h1 hne]
+  have hnorm : ‖cayleyInv ω‖ = |(cayleyInv ω).re| := by
+    conv_lhs => rw [hc]
+    rw [Complex.norm_real, Real.norm_eq_abs]
+  have hrw : cayleyExp t ω = Complex.exp (Complex.I * ((t * (cayleyInv ω).re : ℝ) : ℂ)) := by
+    rw [cayleyExp]
+    congr 2
+    conv_lhs => rw [hc]
+    push_cast
+    ring
+  rw [hrw]
+  calc ‖Complex.exp (Complex.I * ((t * (cayleyInv ω).re : ℝ) : ℂ)) - 1‖
+      ≤ ‖t * (cayleyInv ω).re‖ := Real.norm_exp_I_mul_ofReal_sub_one_le
+    _ = |t| * ‖cayleyInv ω‖ := by rw [Real.norm_eq_abs, abs_mul, hnorm]
+
 
 end SelfAdjoint
 

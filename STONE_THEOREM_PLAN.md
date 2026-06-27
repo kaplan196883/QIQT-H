@@ -770,12 +770,25 @@ the spectral value) and `d/dt e_t(ω)|ₛ = e_s(ω)·i·c(ω)` everywhere (`cayl
 `Complex.ofRealCLM.hasDerivAt` (the `↑t` derivative) + `mul_const`/`const_mul`. *Both built green first try.* So the
 **fibrewise infinitesimal generator is multiplication by `i·c(ω)`** = the spectral form of `i·A`; on the cfc core
 (`cayleyStoneU_cfc`) this gives, formally, `d/dt U_t(cfc φ V z)|₀ = cfc(i·c·φ) V z`.
-**Remaining wall (Phase 3.2):** transfer this pointwise derivative through `cfc` *uniformly on `σ(V)`* — i.e. show
-`t ↦ cfc(e_t·φ) V z` is `HasDerivAt` with derivative `cfc(i·c·φ) V z`. Route: `cfc(·) V z : C(σV) → H` is a bounded
-linear map (`‖cfc f V z‖² = ∫|f|²dμ_z ≤ ‖f‖∞²‖z‖²`), so it suffices that `t ↦ (e_t·φ)|_{σV}` is `HasDerivAt` in the
-sup-norm `C(σV)` with derivative `(i·c·φ)|_{σV}` — the Taylor remainder `‖e_t φ − φ − it·cφ‖∞ ≤ (t²/2)‖c²φ‖∞`
-requires `c²·φ` bounded on `σ(V)` (φ vanishing fast at `1`). That uniform-in-`σV` step + the Gårding-core packaging
-is the genuine remaining analytic content; the pointwise (per-`ω`) derivative is now done.
+Also ✅ `cayleyExp_slope_tendsto` + `cayleyExp_sub_one_norm_le` — **★★★★ THE TWO GENERATOR-DCT INPUTS**
+(`StoneExp.lean`, axiom-free, budget 0): the pointwise limit + the `t`-independent domination that the generator's
+dominated-convergence pass consumes.
+(a) `cayleyExp_slope_tendsto` — **`(e_t(ω) − 1)/t → i·c(ω)`** as `t → 0` (`t ≠ 0`): from `cayleyExp_hasDerivAt_zero`
+via `hasDerivAt_iff_tendsto_slope` (the slope at `0` is `t⁻¹•(e_t − e_0) = (e_t − 1)/t`, `e_0 = 1`;
+`slope_def_module` + `Complex.real_smul`/`ofReal_inv`).
+(b) `cayleyExp_sub_one_norm_le` — **`‖e_t(ω) − 1‖ ≤ |t|·‖c(ω)‖` on `σ(V) ⊆ S¹`**: `c = cayleyInv ω` is **real**
+there (`cayleyInv_im_eq_zero`), so `e_t(ω) = exp(i·↑(t·c.re))` and `‖exp(iθ) − 1‖ ≤ |θ|`
+(`Real.norm_exp_I_mul_ofReal_sub_one_le`) — hence `‖(e_t − 1)/t‖ ≤ ‖c‖`, the **uniform dominating function**.
+*Both built green (2 fixes: `Complex.norm_real` gives the real norm so chain `Real.norm_eq_abs`; the lemma is
+`Real.norm_exp_I_mul_ofReal_sub_one_le`, in `namespace Real`).*
+**Remaining wall (Phase 3.2) — now reduced to ONE assembly:** the generator on the cfc core
+`HasDerivAt (fun t => U_t(cfc φ V z)) (i•cfc(c·φ) V z) 0` (for φ with `c·φ ∈ C(σV)`), via the **scalar DCT** (not
+operator-norm Banach calculus): `slope_0 (t) = t⁻¹•(cfc(e_t φ)Vz − cfc φ Vz) = cfc((e_t−1)/t·φ)Vz` (cfc_sub/_smul),
+so `‖slope_0(t) − i•cfc(cφ)Vz‖² = ∫|((e_t−1)/t − ic)·φ|²dμ_z → 0` by `tendsto_integral_filter_of_dominated_-
+convergence` on `𝓝[≠]0` — integrand `→ 0` pointwise by (a), dominated by `4|cφ|²` (integrable since `cφ ∈ C(σV)`
+bounded) via (b) (`|(e_t−1)/t| ≤ ‖c‖`). Then `stoneGen_eq_of_hasDerivAt` reads off `stoneGen(cayleyStoneCLM) (cfc φ V z)
+= cfc(cφ)Vz` — the generator is multiplication by the spectral value `c`. The two scalar inputs are now in hand; the
+remaining content is the cfc-algebra bookkeeping + the punctured-filter DCT assembly + Gårding-core packaging.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

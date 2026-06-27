@@ -5174,6 +5174,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyStoneU_cfc
 #print axioms QIQTH.Spectral.cayleyExp_hasDerivAt_zero
 #print axioms QIQTH.Spectral.cayleyExp_hasDerivAt
+#print axioms QIQTH.Spectral.cayleyExp_slope_tendsto
+#print axioms QIQTH.Spectral.cayleyExp_sub_one_norm_le
+-- ★★★★ P4 WALL — THE TWO GENERATOR-DCT INPUTS: cayleyExp_slope_tendsto — (e_t(ω)−1)/t → i·c(ω) as t→0
+-- (the pointwise difference-quotient convergence, from cayleyExp_hasDerivAt_zero via hasDerivAt_iff_tendsto_slope);
+-- cayleyExp_sub_one_norm_le — ‖e_t(ω)−1‖ ≤ |t|·‖c(ω)‖ on σ(V)⊆S¹ (c real there by cayleyInv_im_eq_zero, so
+-- e_t=exp(i↑(t·c.re)) and ‖exp(iθ)−1‖≤|θ| via Real.norm_exp_I_mul_ofReal_sub_one_le). These are exactly the pointwise
+-- limit + t-independent domination the generator's dominated-convergence pass on the cfc core consumes. Axiom-free.
 -- ★★★★ P4 WALL — THE STONE SYMBOL DERIVATIVE (the pointwise generator): cayleyExp_hasDerivAt_zero — d/dt e_t(ω)|₀ =
 -- i·c(ω) (e_0=1, c=cayleyInv the spectral value); cayleyExp_hasDerivAt — d/dt e_t(ω)|ₛ = e_s(ω)·i·c(ω) everywhere
 -- (each fibre solves f'=(i·c)f). Via HasDerivAt.cexp on exp(i·t·c) + Complex.ofRealCLM.hasDerivAt. The fibrewise
