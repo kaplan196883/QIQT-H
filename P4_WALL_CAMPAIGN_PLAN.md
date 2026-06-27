@@ -430,8 +430,11 @@ Also ✅ `cayleyExp` + `cayleyExp_continuousOn` + `cayleyExp_abs` (**the Stone-e
 whose cfc `cfc(e_t)V` IS `U_t=exp(itA)`: continuous off `1`, **modulus 1** on the circle off `1` — `c(ω)` real ⟹
 `i·t·c(ω)` purely imaginary ⟹ `‖exp‖=1` (`Complex.norm_exp`). Built green first try). Bounded+cts off `1` + `μ_x({1})=0`
 ⟹ `e_t` is `μ_x`-a.e. cts/bounded.
+Also ✅ `cayleyExp_zero` (`e_0=1`) + `cayleyExp_add` (`e_s·e_t=e_{s+t}` via `Complex.exp_add` — symbol-level seed of the
+**Stone group law** `U_s U_t=U_{s+t}` by cfc multiplicativity). Built green first try. Two of the three Stone-group
+axioms at the symbol level (strong continuity is the third).
 **Next (toward U_t=exp(itA)):** continuous cutoffs `g_{t,N}` of `e_t` → L²(μ_x)-Cauchy (atom gone) ⟹ existence-half ⟹
-`U_t x:=lim cfc(g_{t,N})V x`; then group law / strong continuity / generator ⟹ Stone;
+`U_t x:=lim cfc(g_{t,N})V x`; lift `cayleyExp_add`/`_zero` to the group law; strong continuity; generator ⟹ Stone;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

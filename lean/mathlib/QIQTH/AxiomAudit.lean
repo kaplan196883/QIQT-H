@@ -5136,6 +5136,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyInv_im_eq_zero
 #print axioms QIQTH.Spectral.cayleyExp_continuousOn
 #print axioms QIQTH.Spectral.cayleyExp_abs
+#print axioms QIQTH.Spectral.cayleyExp_zero
+#print axioms QIQTH.Spectral.cayleyExp_add
+-- ★ P4 WALL — THE ONE-PARAMETER GROUP STRUCTURE OF THE SYMBOL: cayleyExp_zero (e_0(ω)=1, exp 0=1 — seed of U_0=1)
+-- + cayleyExp_add (e_s(ω)·e_t(ω)=e_{s+t}(ω) via Complex.exp_add — the symbol-level seed of the Stone group law
+-- U_s U_t = U_{s+t}: cfc(e_s)V·cfc(e_t)V = cfc(e_s·e_t)V = cfc(e_{s+t})V by cfc multiplicativity). Two of the three
+-- Stone-group axioms at the symbol level (strong continuity t↦U_t x is the third). Axiom-free.
 -- ★ P4 WALL — THE STONE-EXPONENTIAL SYMBOL: cayleyExp t ω := exp(i·t·cayleyInv ω) — the bounded Borel function
 -- whose cfc cfc(e_t) V IS the Stone unitary U_t=exp(itA), A=cayleyInv(V). cayleyExp_continuousOn (cts off the
 -- excluded point 1, exp∘cts) + cayleyExp_abs (modulus 1 on the circle off 1: ‖e_t(ω)‖=1 since cayleyInv ω real ⟹

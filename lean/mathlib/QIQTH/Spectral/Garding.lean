@@ -2271,6 +2271,22 @@ theorem cayleyExp_abs {t : ℝ} {ω : ℂ} (h1 : ‖ω‖ = 1) (hne : ω ≠ 1) 
     simp [Complex.mul_re, Complex.mul_im, hc]
   rw [cayleyExp, Complex.norm_exp, him, Real.exp_zero]
 
+/-- **The Stone-exponential symbol at `t = 0` is the constant `1`:** `e_0(ω) = 1` (`exp 0 = 1`).  The symbol-level
+    seed of `U_0 = cfc(e_0) V = cfc 1 V = 1` — the identity element of the one-parameter unitary group. -/
+theorem cayleyExp_zero (ω : ℂ) : cayleyExp 0 ω = 1 := by
+  simp [cayleyExp]
+
+/-- **The one-parameter group law of the Stone-exponential symbol:** `e_s(ω) · e_t(ω) = e_{s+t}(ω)`.  Immediate
+    from `exp` (`Complex.exp_add`): `exp(i s c)·exp(i t c) = exp(i(s+t)c)`.  This is the symbol-level seed of the
+    **one-parameter unitary group law** `U_s U_t = U_{s+t}` (`cfc(e_s) V · cfc(e_t) V = cfc(e_s·e_t) V =
+    cfc(e_{s+t}) V`, by multiplicativity of the functional calculus), one of the two Stone-group axioms (with
+    `cayleyExp_zero`); strong continuity `t ↦ U_t x` is the third. -/
+theorem cayleyExp_add (s t : ℝ) (ω : ℂ) : cayleyExp s ω * cayleyExp t ω = cayleyExp (s + t) ω := by
+  rw [cayleyExp, cayleyExp, cayleyExp, ← Complex.exp_add]
+  congr 1
+  push_cast
+  ring
+
 end SelfAdjoint
 
 end QIQTH.Spectral

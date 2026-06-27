@@ -592,9 +592,14 @@ Also ✅ `cayleyExp` + `cayleyExp_continuousOn` + `cayleyExp_abs` — **the Ston
 the bounded Borel function whose cfc `cfc(e_t) V` IS the Stone unitary `U_t=exp(itA)` (`A=cayleyInv(V)`): continuous
 off `1` (`exp∘cts`), and **modulus 1** on the circle off `1` (`‖e_t(ω)‖=1` — since `c(ω)` real, `i·t·c(ω)` purely
 imaginary, `‖exp‖=exp((·).re)=exp 0=1` via `Complex.norm_exp` + `simp[mul_re,mul_im,c.im=0]`). *Built green first try.*
-Bounded + cts off `1`, and `μ_x({1})=0` ⟹ `e_t` is `μ_x`-a.e. cts/bounded. **Next:** continuous cutoffs `g_{t,N}` of
-`e_t` (e.g. `e_t·η_N` with `η_N` a continuous bump → 0 near `1`); show `g_{t,N}` L²(μ_x)-Cauchy (DCT, the atom gone) ⟹
-existence-half ⟹ `U_t x := lim cfc(g_{t,N})V x`; then group law / strong continuity / generator ⟹ Stone.
+Bounded + cts off `1`, and `μ_x({1})=0` ⟹ `e_t` is `μ_x`-a.e. cts/bounded.
+Also ✅ `cayleyExp_zero` (`e_0(ω)=1`, `exp 0=1` — symbol-level seed of `U_0=1`) + `cayleyExp_add`
+(`e_s(ω)·e_t(ω)=e_{s+t}(ω)` via `Complex.exp_add` — the symbol-level seed of the **Stone group law** `U_s U_t=U_{s+t}`:
+`cfc(e_s)V·cfc(e_t)V = cfc(e_s·e_t)V = cfc(e_{s+t})V` by cfc multiplicativity). *Built green first try.* Two of the
+three Stone-group axioms at the symbol level (strong continuity `t↦U_t x` is the third). **Next:** continuous cutoffs
+`g_{t,N}` of `e_t` (e.g. `e_t·η_N` with `η_N` a continuous bump → 0 near `1`); show `g_{t,N}` L²(μ_x)-Cauchy (DCT, the
+atom gone) ⟹ existence-half ⟹ `U_t x := lim cfc(g_{t,N})V x`; then lift `cayleyExp_add`/`_zero` to the group law,
+prove strong continuity, identify the generator ⟹ Stone.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`
