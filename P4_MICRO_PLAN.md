@@ -55,6 +55,34 @@ Together ⟹ P4.
 - **No `sorry`; free scalar only; standard-3 axioms; budget 0.** The `1/4` ratio is derived elsewhere
   (`SakharovRatio`), never re-asserted here.
 
+## 3.1 GPT-5.5-pro review (2026-06-27) — verdict **sound-with-fix**, 3 corrections to fold in
+
+Consulted via the OpenAI MCP (`mcp__OpenAI__ask`, model `gpt-5.5-pro`). Verdict: the pivot is mathematically
+sound as a **conditional finite-capacity theorem** — it does NOT derive holography from nothing, it replaces the
+entropy-area postulate with a holographic *capacity / microstate-count* postulate; legitimate iff stated honestly
+("P4 is a theorem **conditional on** the holographic capacity postulate", never "axiom-free / area law derived").
+Three highest-value corrections (now the corrected design):
+
+- **C1 — object mismatch (BIGGEST, technical).** `shannon_le_log_card` bounds the SHANNON entropy of an arbitrary
+  Born *record law* `p`; P4 is about the VON NEUMANN entropy `S_vN(ρ_R)`. Routing P4 through "Shannon of a record
+  law" is a category slip unless `p` is the *spectrum* of `ρ` (dephasing only *raises* entropy: a pure equal
+  superposition has `H(p)=log d` but `S_vN=0`, so `S_vN ≤ H(p)` one-way only). **Fix:** state the honest
+  finite-dim max-entropy theorem `S_vN(ρ) ≤ log rank ρ ≤ log dim 𝓗_R` (Shannon applied to the *eigenvalues*), and
+  present the record-law bound separately as the decohered/record entropy with `S_vN ≤ H(record)`.
+- **C2 — split & rename the postulate.** P4 needs only the INEQUALITY `log N_R ≤ areaTerm`; exact equality
+  `log N_R = areaTerm` belongs to a *separate* saturation postulate. Rename `MicrostatePostulate` →
+  `HolographicCapacity`, with `…Bound` (`≤`, for the floor) and `…Exact` (`=`, for saturation only).
+- **C3 — capacity is a regional operational invariant, not global Hilbert cardinality.** `Q_R := log N_R` = max
+  number of mutually distinguishable *regional* microstates (capacity of the finite regional algebra / area
+  sector). Continuum local algebras are **type III** (no finite trace, no factorized `ρ_R`): a literal
+  finite-dim `𝓗_R` is already a type-I/code CUTOFF — acceptable inside QIQT-H but must be stated explicitly, as a
+  fixed-area-sector / code-subspace capacity, not a global dimension. Prefer fixed-area sectors (area-as-operator
+  fluctuations make exact `log dim = ⟨A⟩/4` suspect; `≤` is the safe form).
+
+Route 1 (Type II) is **not** superseded: Route 2 = the completed *kinematic* finite-capacity reduction (capacity ⇒
+bound); Route 1 = the open *dynamical/modular* derivation of *why* capacity is holographic (area generator, JLMS,
+type-III resolution). Present them as different logical levels.
+
 ## 4. Lean design — `QIQTH/FQBoundMicro.lean` (new)
 
 Mirrors the `Phase5Master`/`DonaldSystem` typeclass-interface pattern: P4-MICRO is a **named typeclass**, P4's
@@ -115,11 +143,25 @@ via the trace, P4-MICRO supplies it via finite capacity.
   ✅ LANDED 2026-06-27: green, `#print axioms` standard 3, budget 0.
 - [x] **M-3 saturation** — `area_floor_saturates` (equality at the maximally-mixed record). ✅ LANDED 2026-06-27:
   green, `#print axioms` standard 3, budget 0.
-- [ ] **M-4 non-vacuity witness** — concrete `Fin n` instance + `example` firing the bound (proves the interface non-empty).
-- [ ] **M-5 bridge remark** — connect to `FQBoundCGP.holographic_area_floor`; note Route 1 vs Route 2 deliver the same area term.
-- [ ] **M-6 paper hook** — one paragraph in the foundations paper / scope note: "P4 as a corollary of the finite
-  capacity postulate (machine-checked), with the Type II trace as the open frontier that would derive the
-  holographic postulate." *(doc-only; no Lean)*
+*Bricks below revised per the GPT-5.5-pro review (§3.1). C1/C2/C3 take priority over the original M-4/5/6.*
+
+- [ ] **M-4 (C1) honest von Neumann max-entropy bound** — `vonNeumannEntropy_le_log_card : S_vN(ρ) ≤ log dim 𝓗_R`
+  (Shannon applied to the *spectrum* / eigenvalues, reusing `SpectralSum.vonNeumannEntropy_diagonal` +
+  `shannon_le_log_card`), then `area_floor_vonNeumann [HolographicCapacityBound] : S_vN(ρ) ≤ areaTerm`. This is the
+  HONEST P4 (von Neumann, not record-law Shannon). Keep the landed Shannon theorems, relabelled as the
+  decohered/record-entropy bound with `S_vN ≤ H(record)`. *(highest value — the real fix)*
+- [ ] **M-5 (C2) split + rename the postulate** — `HolographicCapacityBound` (`log dim ≤ areaTerm`, for the floor)
+  vs `HolographicCapacityExact` (`= areaTerm`, for saturation only). Migrate M-1/M-2/M-3 onto the bound form; keep
+  exact only where equality is genuinely used (`area_floor_saturates`).
+- [ ] **M-6 (C3) regional `Q_R` framing + type-III caveat** — module header + plan: capacity = max distinguishable
+  *regional* microstates (finite regional algebra / fixed-area sector), an explicit type-I/code CUTOFF; the
+  continuum local algebra is type III (no finite trace) — labelled, not hidden. *(doc + def-rename; minimal Lean)*
+- [ ] **M-7 non-vacuity witness** — concrete `Fin n` instance + `example` firing the (bound-form) theorem.
+- [ ] **M-8 bridge remark** — connect to `FQBoundCGP.holographic_area_floor`; Route 1 (trace) vs Route 2 (capacity)
+  deliver the same area term at different logical levels (kinematic vs dynamical).
+- [ ] **M-9 paper hook** — the GPT-5.5-pro one-paragraph framing (§3.1 verbatim-adapted): regional capacity `N_R`,
+  holographic content `log N_R ≤ A/4ℓ_P²` (equality only in the ideal saturating sector), Sakharov `1/4`, finite-dim
+  max-entropy ⇒ P4; Route 1 retained to *derive* the capacity law. *(doc-only)*
 
 Each Lean brick: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.FQBoundMicro` green · `#print axioms` standard 3 ·
 `bash scripts/axiom_budget_check.sh` budget 0 · wire into `QIQTH.lean` + `AxiomAudit.lean` · ONE commit on main with
@@ -144,8 +186,12 @@ AND the `P4_WALL_CAMPAIGN_PLAN.md` checklist (note the P4-MICRO endpoint beside 
 - 2026-06-27 — **M-3 LANDED.** `area_floor_saturates` (`[MicrostatePostulate R areaTerm] [Nonempty R] →
   Shannon univ (fun _ => (card R)⁻¹) = areaTerm`): the area floor is an EQUALITY at the maximally-mixed record
   (equilibrium regime), via `shannon_uniform_eq_log_card` ∘ `capacity`. So P4-MICRO gives both bound and
-  saturation. Green, `#print axioms` standard 3, budget 0, wired into `AxiomAudit.lean`. Next: **M-4** (concrete
-  `Fin n` non-vacuity witness firing the bound).
+  saturation. Green, `#print axioms` standard 3, budget 0, wired into `AxiomAudit.lean`.
+- 2026-06-27 — **GPT-5.5-pro review** (§3.1): verdict **sound-with-fix**. Folded 3 corrections into the design and
+  revised the checklist: C1 (honest von Neumann max-entropy `S_vN ≤ log dim`, not Shannon-of-record-law — the real
+  fix), C2 (split/rename postulate into `…Bound` `≤` vs `…Exact` `=`), C3 (regional `Q_R` / type-III cutoff
+  caveat). M-1/M-2/M-3 stand as theorems but get relabelled (record-law entropy) and migrated onto the bound form.
+  Next: **M-4** (von Neumann max-entropy bound + `area_floor_vonNeumann`).
 
 ## 7. Files
 
