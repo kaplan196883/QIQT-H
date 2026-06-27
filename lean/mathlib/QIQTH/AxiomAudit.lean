@@ -5148,6 +5148,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyExpBump_L2_tendsto_zero
 #print axioms QIQTH.Spectral.cayleyExpBump_norm
 #print axioms QIQTH.Spectral.cayleyExpBump_continuousOn
+#print axioms QIQTH.Spectral.cayleyExpBump_cfc_cauchySeq
+-- ★★★ P4 WALL — THE STONE-EXP CFC VECTORS FORM A CAUCHY SEQUENCE (the strong limit IS U_t x):
+-- cayleyExpBump_cfc_cauchySeq [Nontrivial H] — cfc(g_{t,N}) V x is a CauchySeq in H (converges, H complete), whose
+-- strong limit is the Stone unitary U_t x. g_{t,N}=e_t·η_N is ContinuousOn σ(V) (cayleyExpBump_continuousOn) and
+-- → e_t in L²(μ_x) (cayleyExpBump_L2_tendsto_zero); L²-convergent ⟹ L²-Cauchy (quadratic triangle ‖g_m−g_n‖²≤
+-- 2‖g_m−e_t‖²+2‖g_n−e_t‖² with c=e_t, integral_mono_of_nonneg; integrability via the a.e. equality to ψ_N²), then
+-- cayley_cfc_cauchySeq_of_integral (the existence half). The continuum Stone exponential U_t=exp(itA) as a strong
+-- limit of continuous functional calculi, NO PVM. Axiom-free.
 -- ★★ P4 WALL — THE CUTOFF SYMBOL IS CONTINUOUS ON σ(V): cayleyExpBump t N ω := e_t(ω)·η_N(ω); cayleyExpBump_norm
 -- (‖g_{t,N}(ω)‖=η_N(ω) on the circle) + cayleyExpBump_continuousOn [Nontrivial H] (ContinuousOn (g_{t,N}) σ(V)):
 -- off the excluded point 1 a product of ContinuousAt fns (cayleyExp_continuousOn on the open {ω≠1} + bump cts);

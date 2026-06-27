@@ -2450,6 +2450,86 @@ theorem cayleyExpBump_continuousOn [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
       (Complex.continuous_ofReal.comp (cayleyBump_continuous N)).continuousAt
     exact (he.mul hb).continuousWithinAt
 
+/-- **★★★ The cutoff Stone-exponential cfc vectors form a Cauchy sequence:** `cfc(g_{t,N}) V x` is a `CauchySeq`
+    in `H` (hence converges, `H` complete) — whose **strong limit is the Stone unitary `U_t x`**.  The cutoff
+    symbol `g_{t,N} = e_t·η_N` is `ContinuousOn σ(V)` (`cayleyExpBump_continuousOn`, so the cfc applies) and converges
+    to `e_t` in `L²(μ_x)` (`cayleyExpBump_L2_tendsto_zero`); an `L²(μ_x)`-convergent sequence is `L²`-Cauchy (the
+    quadratic triangle `‖g_m − g_n‖² ≤ 2‖g_m − e_t‖² + 2‖g_n − e_t‖²` with `c = e_t`, integrated via
+    `integral_mono_of_nonneg`), so `cayley_cfc_cauchySeq_of_integral` (the existence half of the L²→strong bridge)
+    yields the `CauchySeq`.  This is the construction of the continuum Stone exponential `U_t = exp(it A)` as a strong
+    limit of continuous functional calculi, with NO projection-valued measure.  Axiom-free; free scalar; no UV datum. -/
+theorem cayleyExpBump_cfc_cauchySeq [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (t : ℝ) (x : H) :
+    CauchySeq (fun N => cfc (cayleyExpBump t N)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x) := by
+  haveI : IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+    cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC x
+  -- each ‖g_N − e_t‖² is integrable (a.e. equal to ψ_N², which is continuous and bounded)
+  have hint : ∀ N, Integrable
+      (fun ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) =>
+        ‖cayleyExp t (ω : ℂ) * (cayleyBump N (ω : ℂ) : ℂ) - cayleyExp t (ω : ℂ)‖ ^ 2)
+      (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+    intro N
+    have hψint : Integrable
+        (fun ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) =>
+          (cayleyCutoff N (ω : ℂ)) ^ 2) (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+      refine (integrable_const (1 : ℝ)).mono' ?_ ?_
+      · exact (((cayleyCutoff_continuous N).comp continuous_subtype_val).pow 2).aestronglyMeasurable
+      · filter_upwards with ω
+        rw [Real.norm_of_nonneg (sq_nonneg _)]
+        nlinarith [(cayleyCutoff_pos N (ω : ℂ)).le, cayleyCutoff_le_one N (ω : ℂ)]
+    refine hψint.congr ?_
+    filter_upwards with ω
+    have hc : ‖(ω : ℂ)‖ = 1 := by
+      have hmem := cayley_spectrum_subset_circle U hgrp hU0 hUinner hUbd hSC ω.2
+      rwa [mem_sphere_zero_iff_norm] at hmem
+    rw [cayleyExpBump_sub_norm t N hc]
+  -- the L² norms tend to 0
+  have hL2 := cayleyExpBump_L2_tendsto_zero U hgrp hU0 hUinner hUbd hSC t x
+  rw [Metric.tendsto_atTop] at hL2
+  -- assemble the L²-Cauchy condition and invoke the existence half
+  refine cayley_cfc_cauchySeq_of_integral U hgrp hU0 hUinner hUbd hSC
+    (fun N z => cayleyExpBump t N z) (fun N => cayleyExpBump_continuousOn U hgrp hU0 hUinner hUbd hSC t N) x ?_
+  intro ε hε
+  obtain ⟨N, hN⟩ := hL2 (ε / 4) (by positivity)
+  refine ⟨N, fun m hm n hn => ?_⟩
+  have key : ∀ k, N ≤ k → ∫ ω, ‖cayleyExp t (ω : ℂ) * (cayleyBump k (ω : ℂ) : ℂ) - cayleyExp t (ω : ℂ)‖ ^ 2
+      ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) < ε / 4 := by
+    intro k hk
+    have hd := hN k hk
+    have hnn : 0 ≤ ∫ ω, ‖cayleyExp t (ω : ℂ) * (cayleyBump k (ω : ℂ) : ℂ) - cayleyExp t (ω : ℂ)‖ ^ 2
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+      integral_nonneg (fun ω => sq_nonneg _)
+    rwa [Real.dist_eq, sub_zero, abs_of_nonneg hnn] at hd
+  show ∫ ω, ‖cayleyExpBump t m (ω : ℂ) - cayleyExpBump t n (ω : ℂ)‖ ^ 2
+      ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) < ε
+  calc ∫ ω, ‖cayleyExpBump t m (ω : ℂ) - cayleyExpBump t n (ω : ℂ)‖ ^ 2
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x)
+      ≤ ∫ ω, (2 * ‖cayleyExp t (ω : ℂ) * (cayleyBump m (ω : ℂ) : ℂ) - cayleyExp t (ω : ℂ)‖ ^ 2
+          + 2 * ‖cayleyExp t (ω : ℂ) * (cayleyBump n (ω : ℂ) : ℂ) - cayleyExp t (ω : ℂ)‖ ^ 2)
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+        apply integral_mono_of_nonneg
+        · exact Filter.Eventually.of_forall (fun ω => sq_nonneg _)
+        · exact ((hint m).const_mul 2).add ((hint n).const_mul 2)
+        refine Filter.Eventually.of_forall (fun ω => ?_)
+        simp only [cayleyExpBump]
+        set c := cayleyExp t (ω : ℂ) with hcdef
+        set a := c * (cayleyBump m (ω : ℂ) : ℂ) with ha
+        set b := c * (cayleyBump n (ω : ℂ) : ℂ) with hb
+        have h1 : ‖a - b‖ ≤ ‖a - c‖ + ‖b - c‖ := by
+          have he : a - b = (a - c) - (b - c) := by ring
+          rw [he]; exact norm_sub_le _ _
+        nlinarith [h1, norm_nonneg (a - b), norm_nonneg (a - c), norm_nonneg (b - c),
+          sq_nonneg (‖a - c‖ - ‖b - c‖)]
+    _ = 2 * (∫ ω, ‖cayleyExp t (ω : ℂ) * (cayleyBump m (ω : ℂ) : ℂ) - cayleyExp t (ω : ℂ)‖ ^ 2
+          ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+        + 2 * (∫ ω, ‖cayleyExp t (ω : ℂ) * (cayleyBump n (ω : ℂ) : ℂ) - cayleyExp t (ω : ℂ)‖ ^ 2
+          ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x)) := by
+        rw [integral_add ((hint m).const_mul 2) ((hint n).const_mul 2), integral_const_mul, integral_const_mul]
+    _ < ε := by have hbm := key m hm; have hbn := key n hn; linarith
+
 end SelfAdjoint
 
 end QIQTH.Spectral

@@ -445,8 +445,12 @@ Built green (2 fixes: `ENNReal.toReal_zero`; `show` to beta-reduce for `rw`).
 Also ✅ `cayleyExpBump` (def) + `cayleyExpBump_norm` + `cayleyExpBump_continuousOn` (**★★ `g_{t,N}=e_t·η_N` is
 `ContinuousOn σ(V)`**: product of `ContinuousAt` off `1`; at `1` the squeeze `‖g‖=η_N→0` + `g(1)=0`). Built green first
 try. ⟹ `cfc(g_{t,N})V` well-defined.
-**Next (toward U_t=exp(itA)):** L²-Cauchy (triangle from the L²-convergence) ⟹ existence-half ⟹ `U_t x:=lim cfc(g_{t,N})V x`;
-lift group law; strong continuity; generator ⟹ Stone;
+Also ✅ `cayleyExpBump_cfc_cauchySeq` `[Nontrivial H]` (**★★★ the Stone-exp cfc vectors are a `CauchySeq`** — whose
+strong limit IS `U_t x`: `cfc(g_{t,N})V x` CauchySeq in H. L²-convergent ⟹ L²-Cauchy (quadratic triangle, `c=e_t`)
+⟹ existence-half. The continuum Stone exponential as a strong limit, NO PVM). Built green (1 fix: `simp[cayleyExpBump]`
+before `set`).
+**Next (toward U_t=exp(itA)):** define `U_t x:=lim cfc(g_{t,N})V x` (`cauchySeq_tendsto_of_complete`); lift group law
+(`cayleyExp_add`/`_zero`); strong continuity; generator ⟹ Stone;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

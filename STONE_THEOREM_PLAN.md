@@ -616,9 +616,16 @@ Also ✅ `cayleyExpBump` (def `g_{t,N}(ω)=e_t(ω)·η_N(ω)`) + `cayleyExpBump_
 point `1` a product of `ContinuousAt` fns (`cayleyExp_continuousOn` on the open `{ω≠1}` + bump cts); AT `1` the value
 is `g(1)=e_t(1)·0=0` and `‖g(ω)‖=η_N(ω)→η_N(1)=0` (the squeeze, via `cayleyExpBump_norm` on `σ(V)⊆S¹` +
 `eventuallyEq_nhdsWithin_of_eqOn` + `tendsto_zero_iff_norm_tendsto_zero`) ⟹ `ContinuousWithinAt`. *Built green first
-try.* So `cfc(g_{t,N}) V` is well-defined (cfc needs `ContinuousOn σ(V)`). **Next:** L²-Cauchy (triangle from the
-L²-convergence `cayleyExpBump_L2_tendsto_zero`, as in `cayleyCutoff_cfc_cauchySeq`) ⟹ existence-half ⟹
-`U_t x := lim cfc(g_{t,N}) V x`; lift group law; strong continuity; generator ⟹ Stone.
+try.* So `cfc(g_{t,N}) V` is well-defined (cfc needs `ContinuousOn σ(V)`).
+Also ✅ `cayleyExpBump_cfc_cauchySeq` `[Nontrivial H]` — **★★★ the Stone-exp cfc vectors form a `CauchySeq`** (whose
+strong limit IS `U_t x`): `cfc(g_{t,N}) V x` is `CauchySeq` in `H`. `g_{t,N}` `ContinuousOn σ(V)` + `→ e_t` in `L²(μ_x)`
+⟹ L²-Cauchy (the quadratic triangle `‖g_m−g_n‖²≤2‖g_m−e_t‖²+2‖g_n−e_t‖²` with `c=e_t`, `integral_mono_of_nonneg`;
+integrability of `‖g_N−e_t‖²` via the a.e. equality to `ψ_N²` + `Integrable.congr`), then `cayley_cfc_cauchySeq_of_integral`
+(the existence half). *Built green (1 fix: in the triangle bullet, `simp only [cayleyExpBump]` to unfold the LHS before
+`set c/a/b` — `set` had folded the goal's `e_t` but not the `have`'s literal).* **This is the continuum Stone exponential
+`U_t=exp(itA)` as a strong limit of continuous functional calculi, NO PVM.** **Next:** define `U_t x := lim cfc(g_{t,N}) V x`
+(`cauchySeq_tendsto_of_complete`); lift `cayleyExp_add`/`_zero` to `U_0=1`/`U_s U_t=U_{s+t}`; strong continuity `t↦U_t x`;
+generator identification ⟹ Stone.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`
