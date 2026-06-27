@@ -1193,6 +1193,37 @@ theorem cayleyStoneU_cfc [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
     simpa using h
   exact tendsto_nhds_unique hL hL2
 
+/-- **The pointwise `t`-derivative of the Stone symbol at `0`:** `d/dt e_t(ω)|₀ = i·c(ω)`, where
+    `e_t(ω) = cayleyExp t ω = exp(i·t·c(ω))` and `c(ω) = cayleyInv ω` is the spectral value.  Since `e_0 = 1`, the
+    derivative is exactly `i·c(ω)` (no exponential factor).  This is the pointwise building block of the generator:
+    on the cfc core (`cayleyStoneU_cfc`) `U_t(cfc φ V z) = cfc(e_t·φ) V z`, so formally
+    `d/dt U_t(cfc φ V z)|₀ = cfc(i·c·φ) V z = i·(A acting on cfc φ V z)` — the generator `A` is multiplication by
+    the spectral value `c(ω)`.  (Transferring this pointwise derivative through `cfc` in the parameter `t`, uniformly
+    on `σ(V)`, is the remaining analytic step.) -/
+theorem cayleyExp_hasDerivAt_zero (ω : ℂ) :
+    HasDerivAt (fun t => cayleyExp t ω) (Complex.I * cayleyInv ω) 0 := by
+  have h1 : HasDerivAt (fun t : ℝ => (↑t : ℂ)) 1 0 := by
+    simpa using Complex.ofRealCLM.hasDerivAt
+  have h2 : HasDerivAt (fun t : ℝ => (↑t : ℂ) * cayleyInv ω) (cayleyInv ω) 0 := by
+    simpa using h1.mul_const (cayleyInv ω)
+  have h3 : HasDerivAt (fun t : ℝ => Complex.I * ((↑t : ℂ) * cayleyInv ω))
+      (Complex.I * cayleyInv ω) 0 := h2.const_mul Complex.I
+  simpa [cayleyExp] using h3.cexp
+
+/-- **The pointwise `t`-derivative of the Stone symbol everywhere:** `d/dt e_t(ω)|ₛ = e_s(ω)·i·c(ω)`.  The
+    one-parameter-group form of `cayleyExp_hasDerivAt_zero` (which is the `s = 0` case, `e_0 = 1`).  This says each
+    spectral fibre `t ↦ e_t(ω)` solves the scalar ODE `f' = (i·c)·f` — the fibrewise infinitesimal generator is
+    multiplication by `i·c(ω)`, exactly the spectral form of `i·A`. -/
+theorem cayleyExp_hasDerivAt (s : ℝ) (ω : ℂ) :
+    HasDerivAt (fun t => cayleyExp t ω) (cayleyExp s ω * (Complex.I * cayleyInv ω)) s := by
+  have h1 : HasDerivAt (fun t : ℝ => (↑t : ℂ)) 1 s := by
+    simpa using Complex.ofRealCLM.hasDerivAt
+  have h2 : HasDerivAt (fun t : ℝ => (↑t : ℂ) * cayleyInv ω) (cayleyInv ω) s := by
+    simpa using h1.mul_const (cayleyInv ω)
+  have h3 : HasDerivAt (fun t : ℝ => Complex.I * ((↑t : ℂ) * cayleyInv ω))
+      (Complex.I * cayleyInv ω) s := h2.const_mul Complex.I
+  simpa [cayleyExp] using h3.cexp
+
 
 end SelfAdjoint
 

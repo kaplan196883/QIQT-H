@@ -500,9 +500,13 @@ budget 0): on the cfc-vector core (φ, e_r·φ ContinuousOn σ(V)), `U_t` acts b
 `e_t(ω)=exp(it·c(ω))` — `cfc(g_{t,N})V(cfc φ V z)=cfc(g_{t,N}·φ)V z`→`U_t(cfc φ V z)` and `cfc(g_{t,N}·φ)V z`→
 `cfc(e_t·φ)V z` (L²-defect `∫ψ_N²|φ|²≤M²∫ψ_N²→0`). **Built green.** Identifies `U_t` with the bounded-Borel
 functional calculus `cfc(e_t·)` on a core — the concrete `U_t=exp(itA)` and the gateway to the generator.
-**Next (the converse — toward X=A_edge):** the **generator** — differentiate `t↦cfc(e_t·φ)V z` at 0 (formally
-`=cfc(i·c·φ)V z`, generator = mult by `i·c(ω)`); the parametrized-cfc derivative + e.s.a./Gårding-core (Phase 3.2)
-wall; then X=A_edge → Phase 5;
+Also ✅ **`cayleyExp_hasDerivAt_zero`/`cayleyExp_hasDerivAt` — THE STONE SYMBOL DERIVATIVE** (`StoneExp.lean`,
+axiom-free, budget 0): `d/dt e_t(ω)|₀=i·c(ω)` (and `|ₛ=e_s·i·c` everywhere) — the fibrewise generator is mult by
+`i·c(ω)` = spectral form of `i·A`. Via `HasDerivAt.cexp` + `Complex.ofRealCLM.hasDerivAt`. **Both built green first
+try.** On the cfc core this is formally `d/dt U_t(cfc φ V z)|₀=cfc(i·c·φ)V z`.
+**Next (the converse — toward X=A_edge):** transfer the symbol derivative through `cfc` **uniformly on σ(V)** (`cfc(·)V z`
+bounded linear; needs `t↦e_t·φ` HasDerivAt in `C(σV)`, Taylor remainder `≤(t²/2)‖c²φ‖∞`, φ vanishing fast at 1) +
+e.s.a./Gårding-core (Phase 3.2) — the genuine remaining analytic wall; then X=A_edge → Phase 5;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

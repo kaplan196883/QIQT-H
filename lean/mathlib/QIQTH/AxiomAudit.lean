@@ -5172,6 +5172,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyStoneU_continuous
 #print axioms QIQTH.Spectral.cayleyStoneU_comm_cayleyUnitary
 #print axioms QIQTH.Spectral.cayleyStoneU_cfc
+#print axioms QIQTH.Spectral.cayleyExp_hasDerivAt_zero
+#print axioms QIQTH.Spectral.cayleyExp_hasDerivAt
+-- ★★★★ P4 WALL — THE STONE SYMBOL DERIVATIVE (the pointwise generator): cayleyExp_hasDerivAt_zero — d/dt e_t(ω)|₀ =
+-- i·c(ω) (e_0=1, c=cayleyInv the spectral value); cayleyExp_hasDerivAt — d/dt e_t(ω)|ₛ = e_s(ω)·i·c(ω) everywhere
+-- (each fibre solves f'=(i·c)f). Via HasDerivAt.cexp on exp(i·t·c) + Complex.ofRealCLM.hasDerivAt. The fibrewise
+-- generator is multiplication by i·c(ω) = spectral form of i·A; on the cfc core (cayleyStoneU_cfc) this gives, formally,
+-- d/dt U_t(cfc φ V z)|₀ = cfc(i·c·φ)V z. Transferring through cfc uniformly on σ(V) is the remaining wall. Axiom-free.
 -- ★★★★ P4 WALL — THE SPECTRAL ACTION OF THE STONE GROUP ON THE cfc CORE: cayleyStoneU_cfc [Nontrivial H] —
 -- U_t (cfc φ V z) = cfc(e_t·φ) V z, for φ and every e_r·φ ContinuousOn σ(V) (e.g. φ vanishing at the excluded point 1).
 -- The abstract strong-limit U_t acts by multiplying the symbol by e_t(ω)=exp(it·c(ω)): cfc(g_{t,N})V(cfc φ V z)=

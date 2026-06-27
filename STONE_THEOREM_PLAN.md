@@ -762,6 +762,20 @@ i·(A acting on cfc φ V z)` — i.e. the generator is multiplication by `i·c(�
 self-adjoint `A`). The remaining analytic content is differentiating the cfc in the parameter `t` (a parametrized-cfc
 derivative) + the essential-self-adjointness/Gårding-core packaging (Phase 3.2) — the hard analytic core flagged from
 the start. The entire unitary-group side beneath it is now complete and axiom-free.
+
+Also ✅ `cayleyExp_hasDerivAt_zero` + `cayleyExp_hasDerivAt` — **★★★★ THE STONE SYMBOL DERIVATIVE (the pointwise
+generator)** (`StoneExp.lean`, axiom-free, budget 0): `d/dt e_t(ω)|₀ = i·c(ω)` (`_zero`, `e_0 = 1`, `c = cayleyInv`
+the spectral value) and `d/dt e_t(ω)|ₛ = e_s(ω)·i·c(ω)` everywhere (`cayleyExp_hasDerivAt`) — each spectral fibre
+`t ↦ e_t(ω)` solves the scalar ODE `f' = (i·c)·f`. Proof: `HasDerivAt.cexp` on `exp(i·t·c)` +
+`Complex.ofRealCLM.hasDerivAt` (the `↑t` derivative) + `mul_const`/`const_mul`. *Both built green first try.* So the
+**fibrewise infinitesimal generator is multiplication by `i·c(ω)`** = the spectral form of `i·A`; on the cfc core
+(`cayleyStoneU_cfc`) this gives, formally, `d/dt U_t(cfc φ V z)|₀ = cfc(i·c·φ) V z`.
+**Remaining wall (Phase 3.2):** transfer this pointwise derivative through `cfc` *uniformly on `σ(V)`* — i.e. show
+`t ↦ cfc(e_t·φ) V z` is `HasDerivAt` with derivative `cfc(i·c·φ) V z`. Route: `cfc(·) V z : C(σV) → H` is a bounded
+linear map (`‖cfc f V z‖² = ∫|f|²dμ_z ≤ ‖f‖∞²‖z‖²`), so it suffices that `t ↦ (e_t·φ)|_{σV}` is `HasDerivAt` in the
+sup-norm `C(σV)` with derivative `(i·c·φ)|_{σV}` — the Taylor remainder `‖e_t φ − φ − it·cφ‖∞ ≤ (t²/2)‖c²φ‖∞`
+requires `c²·φ` bounded on `σ(V)` (φ vanishing fast at `1`). That uniform-in-`σV` step + the Gårding-core packaging
+is the genuine remaining analytic content; the pointwise (per-`ω`) derivative is now done.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`
