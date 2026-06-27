@@ -5189,6 +5189,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyStoneCLM_norm_le
 #print axioms QIQTH.Spectral.cayleyStoneCLM_continuous
 #print axioms QIQTH.Spectral.cayley_resolvent_symbol_cfc
+#print axioms QIQTH.Spectral.cayleyUnitary_eq_sub_two_resolvent
+#print axioms QIQTH.Spectral.resolvent_eq_cfc
+-- ★★★★ P4 WALL — RESOLVENT = cfc(h) V (the bridge to the direct generator identity): cayleyUnitary_eq_sub_two_-
+-- resolvent — V y = y − 2·R y (V=1−2R; via cayleyEquiv.symm y = −i·R y, LinearPMap.map_smul + resolvent_stoneGen);
+-- resolvent_eq_cfc — resolvent U y = cfc((1−ω)/2) V y (combine V=1−2R with cfc((1−ω)/2)V=½(1−V)). This turns the
+-- resolvent generator formula resolvent_stoneGen (stoneGen U (R x)=−i(Rx−x), original group) into a cfc-of-V
+-- statement; factoring a symbol φ=h·ψ then yields the DIRECT identity stoneGen U (cfc φ V z)=cfc(c·φ)V z — the
+-- ORIGINAL group's generator = mult by the spectral value c, sidestepping the recovery / e.s.a. wall. Axiom-free.
 -- ★★★★ P4 WALL — RESOLVENT SYMBOL cfc (GPT-5.5-pro direct-identity route): cayley_resolvent_symbol_cfc —
 -- cfc((1−ω)/2) V = ½(1−V) (pure cfc linearity: cfc_const_mul + cfc_sub + cayley_cfc_one/_id). With the resolvent↔
 -- Cayley relation R=½(1−V) (V=1−2R, next) ⟹ resolvent U = cfc(h)V, h=(1−ω)/2 — the bridge from resolvent_stoneGen

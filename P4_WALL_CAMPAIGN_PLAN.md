@@ -550,11 +550,17 @@ will EXPAND unless narrowly interfaced.
 Also ✅ **`cayley_resolvent_symbol_cfc` — RESOLVENT SYMBOL cfc** (`StoneExp.lean`, axiom-free, budget 0):
 `cfc((1−ω)/2) V = ½(1−V)` (pure cfc linearity: `cfc_const_mul`+`cfc_sub`+`cayley_cfc_one`/`_id`). **Built green.** The
 first ingredient of `resolvent U = cfc(h)V` (`h=(1−ω)/2`) — meets the resolvent↔Cayley relation at `½(1−V)`.
-**Next (redirected, sub-bricks):** (i) the **resolvent↔Cayley relation** `cayleyUnitary U y = y − 2•(resolvent U y)`
-(`V=1−2R`): via `cayleyEquiv.symm y = −i•(R y)` [proof: `cayleyEquiv⟨−i•Ry,_⟩ = stoneGen U⟨−i•Ry,_⟩ + i•(−i•Ry) =
-(y−Ry)+Ry = y`, using `LinearPMap.map_smul` + `resolvent_stoneGen`], then unfold `cayley`; (ii) combine (i)+
-`cayley_resolvent_symbol_cfc` ⟹ `resolvent U x = cfc(h) V x`; (iii) the **direct identity** `stoneGen U (cfc φ V z) =
-cfc(c·φ) V z` (factor `φ=h·ψ`, `cfc_mul`, `resolvent_stoneGen`, algebra `c·h=i(1+ω)/2`); (iv) instantiate
+Also ✅ **`cayleyUnitary_eq_sub_two_resolvent` + `resolvent_eq_cfc` — RESOLVENT = cfc(h) V** (`StoneExp.lean`,
+axiom-free, budget 0): (i) `V y = y − 2·R y` (`V=1−2R`) — via `cayleyEquiv.symm y = −i·R y` (`LinearPMap.map_smul`
++ `resolvent_stoneGen` + `module` with the scalar facts `(−i)(−i)=−1`, `i(−i)=1` supplied since `ring` treats `i`
+opaque); (ii) `resolvent U y = cfc((1−ω)/2) V y` (combine (i) with `cayley_resolvent_symbol_cfc` `cfc(h)V=½(1−V)`:
+`cfc(h)V y = ½(y−Vy) = ½(y−(y−2Ry)) = Ry`). **Both built green** (2 fixes: state the rewrite facts typed with the
+local membership `hRmem` so `rw` matches under proof-irrelevance; supply `i·i=−1` to `module`). **This is the
+resolvent→cfc bridge — most of the GPT-5.5-pro route is now built.**
+**Next (redirected, remaining):** (iii) the **direct identity** `stoneGen U (cfc φ V z) = cfc(c·φ) V z` for φ, c·φ
+∈ C(σV): factor `φ = h·ψ` (`ψ = 2φ/(1−ω)`, continuous iff c·φ continuous near 1), so `cfc φ V z = cfc h V (cfc ψ V z)
+= R(cfc ψ V z)` (`cfc_mul` + `resolvent_eq_cfc`), then `resolvent_stoneGen` + the algebra `c·h = i(1+ω)/2`,
+`1−R=(1+V)/2` ⟹ `stoneGen U (cfc φ V z) = i((1+V)/2)(cfc ψ V z) = cfc(c·φ) V z`; (iv) instantiate
 translationLp/modUnitary/clockTransl ⟹ X=A_edge; then Phase 5 via the conditional interface.
 **(Superseded) earlier framing — the direct identity `stoneGen U (φ(V)z)=(c·φ)(V)z` via the
 resolvent factorization above (B); then instantiate translationLp/modUnitary/clockTransl ⟹ X=A_edge; then Phase 5

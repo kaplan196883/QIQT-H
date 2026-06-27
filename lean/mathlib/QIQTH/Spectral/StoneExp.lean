@@ -1647,6 +1647,66 @@ theorem cayley_resolvent_symbol_cfc [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
     cfc_sub (1 : ℂ → ℂ) (id : ℂ → ℂ) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H),
     cayley_cfc_one U hgrp hU0 hUinner hUbd hSC, cayley_cfc_id U hgrp hU0 hUinner hUbd hSC]
 
+/-- **The resolvent↔Cayley relation:** `V y = y − 2·R y`, i.e. `V = 1 − 2R` (`R = ½(1 − V)`).  Algebraically
+    `V = (A−i)(A+i)⁻¹ = 1 − 2i(A+i)⁻¹` and `R = (1−iA)⁻¹ = i(A+i)⁻¹`, so `1 − V = 2i(A+i)⁻¹ = 2R`.  Proof: the inverse
+    Cayley datum `(A+i)⁻¹ y = (cayleyEquiv).symm y` equals `−i·R y` (since `(A+i)(−i R y) = y`, using
+    `LinearPMap.map_smul` + `resolvent_stoneGen` `stoneGen U (R y) = −i(R y − y)`); substitute into
+    `cayley y = stoneGen U ((A+i)⁻¹ y) − i·((A+i)⁻¹ y)` and simplify (`module`).  Combined with
+    `cayley_resolvent_symbol_cfc` (`cfc((1−ω)/2) V = ½(1−V)`) this gives `resolvent U = cfc(h) V`, `h(ω)=(1−ω)/2` —
+    the bridge from `resolvent_stoneGen` to the direct identity `stoneGen U = mult by c` (GPT-5.5-pro route). -/
+theorem cayleyUnitary_eq_sub_two_resolvent [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (y : H) :
+    (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) y
+      = y - (2 : ℂ) • resolvent U y := by
+  have hub : ∀ t, ‖U t y‖ ≤ ‖y‖ := fun t => hUbd t y
+  have hcont : Continuous (fun t => U t y) := hSC y
+  have hRmem : resolvent U y ∈ stoneDomain U := resolvent_mem_stoneDomain U hgrp hU0 y hub hcont
+  -- scalar identities (`module`/`ring` treats `i` as opaque, so supply `i·i = −1`)
+  have e1 : (-Complex.I) * (-Complex.I) = (-1 : ℂ) := by rw [neg_mul_neg, Complex.I_mul_I]
+  have e2 : Complex.I * (-Complex.I) = (1 : ℂ) := by rw [mul_neg, Complex.I_mul_I, neg_neg]
+  -- the three rewrite facts, stated with `hRmem` so they match syntactically (proof irrelevance)
+  have hsmul1 : stoneGen U ((-Complex.I) • (⟨resolvent U y, hRmem⟩ : stoneDomain U))
+      = (-Complex.I) • stoneGen U (⟨resolvent U y, hRmem⟩ : stoneDomain U) :=
+    LinearPMap.map_smul (stoneGen U) (-Complex.I) _
+  have hRgen : stoneGen U (⟨resolvent U y, hRmem⟩ : stoneDomain U)
+      = -Complex.I • (resolvent U y - y) :=
+    resolvent_stoneGen U hgrp hU0 y hub hcont
+  have hcoe : (((-Complex.I) • (⟨resolvent U y, hRmem⟩ : stoneDomain U) : stoneDomain U) : H)
+      = (-Complex.I) • resolvent U y := rfl
+  -- the inverse Cayley datum is `−i·R y`
+  have hequiv : cayleyEquiv U hgrp hU0 hUinner hUbd hSC
+      ((-Complex.I) • (⟨resolvent U y, hRmem⟩ : stoneDomain U)) = y := by
+    show stoneGen U ((-Complex.I) • (⟨resolvent U y, hRmem⟩ : stoneDomain U))
+        + Complex.I • (((-Complex.I) • (⟨resolvent U y, hRmem⟩ : stoneDomain U) : stoneDomain U) : H) = y
+    rw [hsmul1, hRgen, hcoe]; simp only [smul_smul, e1, e2]; module
+  have hsymm : (cayleyEquiv U hgrp hU0 hUinner hUbd hSC).symm y
+      = (-Complex.I) • (⟨resolvent U y, hRmem⟩ : stoneDomain U) :=
+    (Equiv.symm_apply_eq _).mpr hequiv.symm
+  show cayley U hgrp hU0 hUinner hUbd hSC y = y - (2 : ℂ) • resolvent U y
+  simp only [cayley, hsymm]
+  rw [hsmul1, hRgen, hcoe]; simp only [smul_smul, e1, e2]; module
+
+/-- **★★★★ The resolvent IS the functional calculus of the Cayley unitary:** `R y = cfc((1−ω)/2) V y`, i.e.
+    `resolvent U = cfc(h) V` with `h(ω) = (1−ω)/2`.  Combines `cayleyUnitary_eq_sub_two_resolvent` (`V y = y − 2R y`)
+    with `cayley_resolvent_symbol_cfc` (`cfc(h) V = ½(1 − V)`): `cfc(h) V y = ½(y − V y) = ½(y − (y − 2R y)) = R y`.
+    This is the bridge GPT-5.5-pro identified: it turns `resolvent_stoneGen` (`stoneGen U (R x) = −i(Rx − x)`, the
+    resolvent generator formula for the ORIGINAL group) into a statement about `cfc` of `V`, which — by factoring a
+    spectral symbol `φ = h·ψ` — yields the **direct identity** `stoneGen U (cfc φ V z) = cfc(c·φ) V z` (the original
+    group's generator is multiplication by the spectral value `c`), sidestepping the recovery / e.s.a. wall. -/
+theorem resolvent_eq_cfc [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (y : H) :
+    resolvent U y
+      = cfc (fun ω => (1 - ω) / 2 : ℂ → ℂ) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) y := by
+  have hV := cayleyUnitary_eq_sub_two_resolvent U hgrp hU0 hUinner hUbd hSC y
+  rw [cayley_resolvent_symbol_cfc U hgrp hU0 hUinner hUbd hSC]
+  simp only [ContinuousLinearMap.smul_apply, ContinuousLinearMap.sub_apply,
+    ContinuousLinearMap.one_apply]
+  rw [hV]; module
+
 
 end SelfAdjoint
 
