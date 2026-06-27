@@ -439,9 +439,11 @@ L²-approximation device). Built green.
 Also ✅ `cayleyExp_abs_circle` (`‖e_t‖=1` on the whole circle incl. junk point `1`) + `cayleyExpBump_sub_norm`
 (`‖e_t·η_N − e_t‖=ψ_N` on the circle). Both built green first try. ⟹ `‖g_{t,N}−e_t‖²=ψ_N²` ⟹
 `∫‖g−e_t‖²=∫ψ_N²≤∫ψ_N→μ_x({1})=0` (squeeze).
-**Next (toward U_t=exp(itA)):** `∫ψ_N²→0` (squeeze) ⟹ L²-convergence `g_{t,N}→e_t`; `g_{t,N}` ContinuousOn σ(V)
-(squeeze `‖e_t·η_N‖=η_N→0` at `1`); ⟹ L²-Cauchy ⟹ existence-half ⟹ `U_t x:=lim cfc(g_{t,N})V x`; lift group law;
-strong continuity; generator ⟹ Stone;
+Also ✅ `cayleyCutoff_sq_integral_tendsto_zero` (`∫ψ_N²→0` squeeze) + `cayleyExpBump_L2_tendsto_zero` (**★★ the cutoff
+symbol → e_t in L²(μ_x)**: `∫‖e_t·η_N − e_t‖²dμ_x→0`; integrand `=ψ_N²` via `cayleyExpBump_sub_norm`+`integral_congr_ae`).
+Built green (2 fixes: `ENNReal.toReal_zero`; `show` to beta-reduce for `rw`).
+**Next (toward U_t=exp(itA)):** `g_{t,N}` ContinuousOn σ(V) (squeeze `‖e_t·η_N‖=η_N→0` at `1`); ⟹ L²-Cauchy (triangle)
+⟹ existence-half ⟹ `U_t x:=lim cfc(g_{t,N})V x`; lift group law; strong continuity; generator ⟹ Stone;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

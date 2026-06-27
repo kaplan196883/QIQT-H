@@ -605,10 +605,15 @@ Also ✅ `cayleyExp_abs_circle` (`‖e_t(ω)‖=1` on the **whole** circle incl.
 i·2/0=0` ⟹ `e_t(1)=exp 0=1`) + `cayleyExpBump_sub_norm` (`‖e_t·η_N − e_t‖ = ψ_N` on the circle: `e_t·(η_N−1)`,
 `‖e_t‖=1`, `|η_N−1|=|−ψ_N|=ψ_N`). *Both built green first try.* Hence the cutoff-symbol L²-defect integrand
 `‖g_{t,N}−e_t‖² = ψ_N²`, so `∫‖g−e_t‖²dμ_x = ∫ψ_N²dμ_x ≤ ∫ψ_N dμ_x → μ_x({1})=0` (squeeze: `ψ_N²≤ψ_N` + DCT-1 +
-atom). **Next:** (a) `∫ψ_N²dμ_x→0` (the squeeze) ⟹ `∫‖g_{t,N}−e_t‖²dμ_x→0` (the L²-convergence); (b) the cutoff
-symbol `g_{t,N}=e_t·η_N` is `ContinuousOn σ(V)` (the squeeze `‖e_t·η_N‖=η_N→0` at `1` + `cayleyExp_abs_circle`);
-then L²-Cauchy (triangle) ⟹ existence-half ⟹ `U_t x := lim cfc(g_{t,N})V x`; lift group law; strong continuity;
-generator ⟹ Stone.
+atom).
+Also ✅ `cayleyCutoff_sq_integral_tendsto_zero` (`∫ψ_N²dμ_x→0` — the squeeze `0≤∫ψ_N²≤∫ψ_N→μ_x({1})=0` via
+`integral_mono_of_nonneg` (`ψ_N²≤ψ_N`) + DCT-1 + atom-killing + `squeeze_zero`) + `cayleyExpBump_L2_tendsto_zero`
+`[Nontrivial H]` — **★★ the cutoff symbol converges to the symbol in L²(μ_x)**: `∫‖e_t·η_N − e_t‖²dμ_x→0`. Integrand
+`= ψ_N(ω.1)²` on `σ(V)⊆S¹` (`cayleyExpBump_sub_norm` + `integral_congr_ae`) ⟹ `= ∫ψ_N²→0`. *Built green (2 fixes:
+`ENNReal.toReal_zero` name; `show` to beta-reduce the integrand lambda for `rw`).* **Next:** (a) the cutoff symbol
+`g_{t,N}=e_t·η_N` is `ContinuousOn σ(V)` (the squeeze `‖e_t·η_N‖=η_N→0` at `1` + `cayleyExp_abs_circle`); (b) L²-Cauchy
+(triangle from the L²-convergence, as in `cayleyCutoff_cfc_cauchySeq`) ⟹ existence-half ⟹ `U_t x := lim cfc(g_{t,N})V x`;
+lift group law; strong continuity; generator ⟹ Stone.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

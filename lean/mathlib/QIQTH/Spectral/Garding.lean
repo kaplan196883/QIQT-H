@@ -2343,6 +2343,64 @@ theorem cayleyExpBump_sub_norm (t : ℝ) (N : ℕ) {ω : ℂ} (h1 : ‖ω‖ = 1
     show (1 - cayleyCutoff N ω - 1 : ℝ) = -cayleyCutoff N ω by ring,
     Real.norm_eq_abs, abs_neg, abs_of_nonneg (cayleyCutoff_pos N ω).le]
 
+/-- **`∫ ψ_N² dμ_x → 0`** — the squeeze closing the atom-killing into an `L²` statement.  Since `0 ≤ ψ_N ≤ 1`,
+    `ψ_N² ≤ ψ_N`, so `0 ≤ ∫ ψ_N² ≤ ∫ ψ_N` (`integral_mono_of_nonneg`); and `∫ ψ_N dμ_x → μ_x({1}) = 0` (DCT-1
+    `cayleyCutoff_integral_tendsto_atom` + the atom-killing `cayleyScalarMeasure_atom_eq_zero`).  By the squeeze
+    `∫ ψ_N² dμ_x → 0`.  This is the `L²(μ_x)`-defect of the cutoff symbol (`cayleyExpBump_sub_norm`: `‖g−e_t‖² = ψ_N²`),
+    so it gives the `L²` convergence `g_{t,N} → e_t`. -/
+theorem cayleyCutoff_sq_integral_tendsto_zero [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    Filter.Tendsto
+      (fun N => ∫ ω, (cayleyCutoff N (ω : ℂ)) ^ 2 ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+      Filter.atTop (nhds 0) := by
+  haveI : IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+    cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC x
+  have hint : ∀ N, Integrable
+      (fun ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) => cayleyCutoff N (ω : ℂ))
+      (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+    intro N
+    refine (integrable_const (1 : ℝ)).mono' ?_ ?_
+    · exact ((cayleyCutoff_continuous N).comp continuous_subtype_val).aestronglyMeasurable
+    · filter_upwards with ω
+      rw [Real.norm_of_nonneg (cayleyCutoff_pos N _).le]; exact cayleyCutoff_le_one N _
+  have hatom := cayleyCutoff_integral_tendsto_atom U hgrp hU0 hUinner hUbd hSC x
+  rw [cayleyScalarMeasure_atom_eq_zero U hgrp hU0 hUinner hUbd hSC x, ENNReal.toReal_zero] at hatom
+  refine squeeze_zero (fun N => integral_nonneg (fun ω => sq_nonneg _)) (fun N => ?_) hatom
+  apply integral_mono_of_nonneg
+  · exact Filter.Eventually.of_forall (fun ω => sq_nonneg _)
+  · exact hint N
+  · filter_upwards with ω
+    nlinarith [(cayleyCutoff_pos N (ω : ℂ)).le, cayleyCutoff_le_one N (ω : ℂ)]
+
+/-- **★★ The cutoff symbol converges to the symbol in `L²(μ_x)`:**
+    `∫ ‖e_t·η_N − e_t‖² dμ_x → 0`.  By `cayleyExpBump_sub_norm` the integrand is `ψ_N(ω.1)²` on `σ(V) ⊆ S¹`
+    (`integral_congr_ae`), so this is `cayleyCutoff_sq_integral_tendsto_zero` (`∫ ψ_N² → 0`).  Combined with the
+    `L²`-distance Parseval, it gives the `L²(μ_x)`-Cauchy condition for `cfc(e_t·η_N) V x`, whose strong limit is
+    the Stone unitary `U_t x = lim cfc(e_t·η_N) V x`.  Axiom-free; free scalar; no UV datum. -/
+theorem cayleyExpBump_L2_tendsto_zero [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (t : ℝ) (x : H) :
+    Filter.Tendsto
+      (fun N => ∫ ω, ‖cayleyExp t (ω : ℂ) * (cayleyBump N (ω : ℂ) : ℂ) - cayleyExp t (ω : ℂ)‖ ^ 2
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+      Filter.atTop (nhds 0) := by
+  have heq : ∀ N, (∫ ω, ‖cayleyExp t (ω : ℂ) * (cayleyBump N (ω : ℂ) : ℂ) - cayleyExp t (ω : ℂ)‖ ^ 2
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+      = ∫ ω, (cayleyCutoff N (ω : ℂ)) ^ 2 ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+    intro N
+    refine integral_congr_ae (Filter.Eventually.of_forall (fun ω => ?_))
+    have hcirc : ‖(ω : ℂ)‖ = 1 := by
+      have hmem := cayley_spectrum_subset_circle U hgrp hU0 hUinner hUbd hSC ω.2
+      rwa [mem_sphere_zero_iff_norm] at hmem
+    show ‖cayleyExp t (ω : ℂ) * (cayleyBump N (ω : ℂ) : ℂ) - cayleyExp t (ω : ℂ)‖ ^ 2
+      = (cayleyCutoff N (ω : ℂ)) ^ 2
+    rw [cayleyExpBump_sub_norm t N hcirc]
+  simp only [heq]
+  exact cayleyCutoff_sq_integral_tendsto_zero U hgrp hU0 hUinner hUbd hSC x
+
 end SelfAdjoint
 
 end QIQTH.Spectral

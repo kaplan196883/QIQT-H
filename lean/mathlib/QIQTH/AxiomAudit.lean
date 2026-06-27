@@ -5144,6 +5144,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyBump_tendsto_indicator
 #print axioms QIQTH.Spectral.cayleyExp_abs_circle
 #print axioms QIQTH.Spectral.cayleyExpBump_sub_norm
+#print axioms QIQTH.Spectral.cayleyCutoff_sq_integral_tendsto_zero
+#print axioms QIQTH.Spectral.cayleyExpBump_L2_tendsto_zero
+-- ★★ P4 WALL — THE CUTOFF SYMBOL CONVERGES TO THE SYMBOL IN L²(μ_x): cayleyExpBump_L2_tendsto_zero [Nontrivial H]
+-- — ∫‖e_t·η_N − e_t‖² dμ_x → 0. Integrand = ψ_N(ω.1)² on σ(V)⊆S¹ (cayleyExpBump_sub_norm, integral_congr_ae) ⟹
+-- = cayleyCutoff_sq_integral_tendsto_zero (∫ψ_N²→0): the squeeze 0≤∫ψ_N²≤∫ψ_N→μ_x({1})=0 (integral_mono_of_nonneg
+-- ψ_N²≤ψ_N + DCT-1 + atom-killing + ENNReal.toReal_zero + squeeze_zero). The cutoff symbol → e_t in L²(μ_x), which
+-- (with the L²-distance Parseval, via triangle) gives the L²-Cauchy condition for cfc(e_t·η_N)V x ⟹ strong limit
+-- U_t x = lim cfc(e_t·η_N)V x. Axiom-free.
 -- ★ P4 WALL — THE CUTOFF-SYMBOL L²-DEFECT (algebra toward the L²-convergence g_{t,N}→e_t): cayleyExp_abs_circle
 -- (‖e_t(ω)‖=1 on the WHOLE circle incl. the junk point ω=1 where cayleyInv 1=i·2/0=0 ⟹ e_t(1)=exp 0=1) +
 -- cayleyExpBump_sub_norm (‖e_t(ω)·η_N(ω) − e_t(ω)‖ = ψ_N(ω) on the circle: e_t·(η_N−1), ‖e_t‖=1, |η_N−1|=|−ψ_N|=ψ_N).
