@@ -5191,6 +5191,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayley_resolvent_symbol_cfc
 #print axioms QIQTH.Spectral.cayleyUnitary_eq_sub_two_resolvent
 #print axioms QIQTH.Spectral.resolvent_eq_cfc
+#print axioms QIQTH.Spectral.cfc_h_mul_eq_resolvent
+#print axioms QIQTH.Spectral.cfc_h_mul_mem_stoneDomain
+#print axioms QIQTH.Spectral.stoneGen_cfc_h_mul
+-- ★★★★★ P4 WALL — THE DIRECT GENERATOR IDENTITY (the ORIGINAL group's generator = mult by the spectral value c):
+-- stoneGen_cfc_h_mul [Nontrivial H] — stoneGen U ⟨cfc(h·ψ)V z, _⟩ = cfc(i(1+ω)/2·ψ)V z for ψ∈C(σV), h(ω)=(1−ω)/2.
+-- Every cfc-core symbol φ with c·φ∈C(σV) factors as φ=h·ψ, and c·φ=c·h·ψ=i(1+ω)/2·ψ (c·h=i(1+ω)/2), so this IS
+-- stoneGen U (cfc φ V z)=cfc(c·φ)V z — the generator of the ORIGINAL C₀ group U is multiplication by the spectral
+-- value c, derived DIRECTLY from resolvent_stoneGen (no recovery / essential-self-adjointness). Proof: cfc(h·ψ)V z=
+-- R(cfc ψ V z) (cfc_h_mul_eq_resolvent), resolvent_stoneGen gives −i(R w−w), and cfc-linearity + the pointwise ring
+-- identity −i((1−ω)/2·ψ−ψ)=i(1+ω)/2·ψ closes it. cfc_h_mul_mem_stoneDomain: the core vector is in the smooth domain.
+-- THE GPT-5.5-pro ROUTE TO X=A_edge IS COMPLETE on the abstract C₀ group — instantiate clockTransl ⟹ X=A_edge. Axiom-free.
 -- ★★★★ P4 WALL — RESOLVENT = cfc(h) V (the bridge to the direct generator identity): cayleyUnitary_eq_sub_two_-
 -- resolvent — V y = y − 2·R y (V=1−2R; via cayleyEquiv.symm y = −i·R y, LinearPMap.map_smul + resolvent_stoneGen);
 -- resolvent_eq_cfc — resolvent U y = cfc((1−ω)/2) V y (combine V=1−2R with cfc((1−ω)/2)V=½(1−V)). This turns the

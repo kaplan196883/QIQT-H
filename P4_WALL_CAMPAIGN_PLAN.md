@@ -557,11 +557,21 @@ opaque); (ii) `resolvent U y = cfc((1−ω)/2) V y` (combine (i) with `cayley_re
 `cfc(h)V y = ½(y−Vy) = ½(y−(y−2Ry)) = Ry`). **Both built green** (2 fixes: state the rewrite facts typed with the
 local membership `hRmem` so `rw` matches under proof-irrelevance; supply `i·i=−1` to `module`). **This is the
 resolvent→cfc bridge — most of the GPT-5.5-pro route is now built.**
-**Next (redirected, remaining):** (iii) the **direct identity** `stoneGen U (cfc φ V z) = cfc(c·φ) V z` for φ, c·φ
-∈ C(σV): factor `φ = h·ψ` (`ψ = 2φ/(1−ω)`, continuous iff c·φ continuous near 1), so `cfc φ V z = cfc h V (cfc ψ V z)
-= R(cfc ψ V z)` (`cfc_mul` + `resolvent_eq_cfc`), then `resolvent_stoneGen` + the algebra `c·h = i(1+ω)/2`,
-`1−R=(1+V)/2` ⟹ `stoneGen U (cfc φ V z) = i((1+V)/2)(cfc ψ V z) = cfc(c·φ) V z`; (iv) instantiate
-translationLp/modUnitary/clockTransl ⟹ X=A_edge; then Phase 5 via the conditional interface.
+Also ✅ **🎯🎯🎯 `stoneGen_cfc_h_mul` (+`cfc_h_mul_eq_resolvent`/`cfc_h_mul_mem_stoneDomain`) — THE DIRECT GENERATOR
+IDENTITY** (`StoneExp.lean`, axiom-free, budget 0): `stoneGen U ⟨cfc(h·ψ) V z, _⟩ = cfc(i(1+ω)/2·ψ) V z` for
+ψ ∈ C(σV), `h(ω)=(1−ω)/2`. Every cfc-core symbol `φ` with `c·φ ∈ C(σV)` factors as `φ=h·ψ`, and `c·φ=c·h·ψ=
+i(1+ω)/2·ψ` (`c·h=i(1+ω)/2`), so this **IS** `stoneGen U (cfc φ V z) = cfc(c·φ) V z` — **the generator of the ORIGINAL
+C₀ group `U` is multiplication by the spectral value `c`**, derived DIRECTLY from `resolvent_stoneGen`, NO recovery /
+essential-self-adjointness. Proof: `cfc(h·ψ) V z = R(cfc ψ V z)` (`cfc_h_mul_eq_resolvent`: `cfc_mul`+`resolvent_eq_cfc`);
+`resolvent_stoneGen` gives `−i(R w − w)`; then cfc-linearity (`cfc_sub`+`cfc_const_mul`, both with explicit `a`) + the
+pointwise `ring` identity `−i((1−ω)/2·ψ − ψ) = i(1+ω)/2·ψ` closes it. *Built green (4 fixes: avoid `set` which broke the
+subtype transport — use `Subtype.ext`+`key.trans`; `cfc_add` has IMPLICIT `a` so was unusable — replaced the `(1+ω)`
+expansion with the direct `cfc_sub`/`cfc_const_mul`+ring; pin the finishing `Eq` type; scalar facts unneeded since the
+identity is linear in `i`).* **THE GPT-5.5-pro ROUTE TO X=A_edge IS COMPLETE on the abstract C₀ group.**
+**Next (redirected, FINAL Stone step):** (iv) **instantiate** the concrete C₀ groups — feed `clockTransl λ_t`
+(resp. `translationLp`, `modUnitary`) into `stoneGen_cfc_h_mul` ⟹ the clock energy `X = stoneGen clockTransl = mult by
+c` = `A_edge` (the area operator's spectral form). Then Phase 5 (dual-weight trace) via the **narrow conditional
+interface** (state `S(ρ_R) ≤ A/4ℓ_P²` under `τ(θ_s a)=e^{−s}τ` + `K̃=A_edge/4ℓ_P²`, no full crossed-product).
 **(Superseded) earlier framing — the direct identity `stoneGen U (φ(V)z)=(c·φ)(V)z` via the
 resolvent factorization above (B); then instantiate translationLp/modUnitary/clockTransl ⟹ X=A_edge; then Phase 5
 via the conditional interface;

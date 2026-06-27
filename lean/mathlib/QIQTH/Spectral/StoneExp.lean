@@ -1707,6 +1707,97 @@ theorem resolvent_eq_cfc [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
     ContinuousLinearMap.one_apply]
   rw [hV]; module
 
+/-- **Factoring a core symbol through the resolvent:** `cfc(h·ψ) V z = R (cfc ψ V z)`, where `h(ω) = (1−ω)/2`.
+    By `cfc` multiplicativity `cfc(h·ψ) V = cfc(h) V ∘ cfc(ψ) V`, and `cfc(h) V = R` (`resolvent_eq_cfc`), so
+    `cfc(h·ψ) V z = R (cfc ψ V z)`.  Every cfc-core symbol `φ` with `c·φ ∈ C(σV)` factors as `φ = h·ψ` with
+    `ψ ∈ C(σV)` (`ψ = 2φ/(1−ω)`, continuous near `1` exactly when `c·φ` is), so this puts every core vector in the
+    range of the resolvent — the form on which `resolvent_stoneGen` computes the generator. -/
+theorem cfc_h_mul_eq_resolvent [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (ψ : ℂ → ℂ)
+    (hψ : ContinuousOn ψ (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))) (z : H) :
+    cfc (fun ω => (1 - ω) / 2 * ψ ω) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z
+      = resolvent U (cfc ψ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z) := by
+  have hh : ContinuousOn (fun ω : ℂ => (1 - ω) / 2)
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) :=
+    (by fun_prop : Continuous (fun ω : ℂ => (1 - ω) / 2)).continuousOn
+  rw [cfc_mul (fun ω => (1 - ω) / 2) ψ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) hh hψ,
+    ContinuousLinearMap.mul_apply,
+    ← resolvent_eq_cfc U hgrp hU0 hUinner hUbd hSC
+      (cfc ψ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)]
+
+/-- The core vector `cfc(h·ψ) V z` lies in the smooth domain of `stoneGen U` (it equals `R(cfc ψ V z)`,
+    `cfc_h_mul_eq_resolvent`, and the resolvent lands in the smooth domain, `resolvent_mem_stoneDomain`). -/
+theorem cfc_h_mul_mem_stoneDomain [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (ψ : ℂ → ℂ)
+    (hψ : ContinuousOn ψ (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))) (z : H) :
+    cfc (fun ω => (1 - ω) / 2 * ψ ω) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z
+      ∈ stoneDomain U := by
+  rw [cfc_h_mul_eq_resolvent U hgrp hU0 hUinner hUbd hSC ψ hψ z]
+  exact resolvent_mem_stoneDomain U hgrp hU0
+    (cfc ψ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)
+    (fun t => hUbd t _) (hSC _)
+
+/-- **★★★★★ THE DIRECT GENERATOR IDENTITY** (GPT-5.5-pro route to `X = A_edge`):
+    `stoneGen U (cfc(h·ψ) V z) = cfc(i(1+ω)/2 · ψ) V z` for `ψ ∈ C(σV)`, `h(ω) = (1−ω)/2`.  Since every cfc-core
+    symbol `φ` with `c·φ ∈ C(σV)` factors as `φ = h·ψ` and then `c·φ = c·h·ψ = i(1+ω)/2 · ψ` (`c·h = i(1+ω)/2`), this
+    IS the identity `stoneGen U (cfc φ V z) = cfc(c·φ) V z` — **the ORIGINAL group's generator is multiplication by the
+    spectral value `c`**, on the cfc core, derived directly from `resolvent_stoneGen` WITHOUT the recovery /
+    essential-self-adjointness wall.  Proof: `cfc(h·ψ) V z = R(cfc ψ V z)` (`cfc_h_mul_eq_resolvent`), so
+    `resolvent_stoneGen` gives `−i(R w − w)` with `w = cfc ψ V z`; expand `R w = ½(w − V w)`
+    (`resolvent_eq_cfc`+`cayley_resolvent_symbol_cfc`) and the target `cfc(i(1+ω)/2 ψ) V z = (i/2)(w + V w)`
+    (`cfc_const_mul`/`cfc_add`/`cfc_mul`+`cayley_cfc_id`); the two sides agree by `module` (linear in `i`, no `i²`).
+    Axiom-free; free scalar; no UV datum. -/
+theorem stoneGen_cfc_h_mul [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (ψ : ℂ → ℂ)
+    (hψ : ContinuousOn ψ (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))) (z : H) :
+    stoneGen U ⟨cfc (fun ω => (1 - ω) / 2 * ψ ω)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z,
+        cfc_h_mul_mem_stoneDomain U hgrp hU0 hUinner hUbd hSC ψ hψ z⟩
+      = cfc (fun ω => Complex.I * (1 + ω) / 2 * ψ ω)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z := by
+  -- transport the subtype to `⟨R (cfc ψ V z), _⟩` and apply `resolvent_stoneGen`
+  have key : stoneGen U (⟨cfc (fun ω => (1 - ω) / 2 * ψ ω)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z,
+        cfc_h_mul_mem_stoneDomain U hgrp hU0 hUinner hUbd hSC ψ hψ z⟩ : stoneDomain U)
+      = -Complex.I • (resolvent U (cfc ψ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)
+        - cfc ψ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z) := by
+    have hval : (⟨cfc (fun ω => (1 - ω) / 2 * ψ ω)
+          (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z,
+          cfc_h_mul_mem_stoneDomain U hgrp hU0 hUinner hUbd hSC ψ hψ z⟩ : stoneDomain U)
+        = ⟨resolvent U (cfc ψ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z),
+            resolvent_mem_stoneDomain U hgrp hU0
+              (cfc ψ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)
+              (fun t => hUbd t _) (hSC _)⟩ :=
+      Subtype.ext (cfc_h_mul_eq_resolvent U hgrp hU0 hUinner hUbd hSC ψ hψ z)
+    rw [hval]
+    exact resolvent_stoneGen U hgrp hU0
+      (cfc ψ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z) (fun t => hUbd t _) (hSC _)
+  -- `−i·(R(cfc ψ V z) − cfc ψ V z) = cfc(i(1+ω)/2·ψ) V z`, purely by cfc-linearity + a pointwise `ring`
+  have hmul_hψ : ContinuousOn (fun ω : ℂ => (1 - ω) / 2 * ψ ω)
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) :=
+    ((by fun_prop : Continuous (fun ω : ℂ => (1 - ω) / 2)).continuousOn).mul hψ
+  have hsym : (fun ω => -Complex.I * ((1 - ω) / 2 * ψ ω - ψ ω))
+      = (fun ω => Complex.I * (1 + ω) / 2 * ψ ω) := by funext ω; ring
+  have hfin : -Complex.I • (resolvent U (cfc ψ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)
+        - cfc ψ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)
+      = cfc (fun ω => Complex.I * (1 + ω) / 2 * ψ ω)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z := by
+    rw [← cfc_h_mul_eq_resolvent U hgrp hU0 hUinner hUbd hSC ψ hψ z,
+      ← ContinuousLinearMap.sub_apply,
+      ← cfc_sub (fun ω => (1 - ω) / 2 * ψ ω) ψ
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) hmul_hψ hψ,
+      ← ContinuousLinearMap.smul_apply,
+      ← cfc_const_mul (-Complex.I) (fun ω => (1 - ω) / 2 * ψ ω - ψ ω)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) (hmul_hψ.sub hψ),
+      hsym]
+  exact key.trans hfin
+
 
 end SelfAdjoint
 
