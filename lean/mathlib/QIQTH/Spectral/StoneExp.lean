@@ -1486,6 +1486,59 @@ theorem cayleyStoneU_cfc_hasDerivAt [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
     (cayleyExp_gen_integrand_tendsto U hgrp hU0 hUinner hUbd hSC φ hφ hcφ z)
   rwa [Real.sqrt_zero] at h
 
+/-- **The cfc core lies in the smooth domain of the bundled Stone group:** `cfc φ V z ∈ stoneDomain(cayleyStoneCLM)`.
+    Immediate from `cayleyStoneU_cfc_hasDerivAt` (differentiable ⟹ in the domain), through
+    `cayleyStoneCLM_apply` (`cayleyStoneCLM … t x = cayleyStoneU … t x`). -/
+theorem cayleyStoneCLM_cfc_mem_stoneDomain [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (φ : ℂ → ℂ)
+    (hφ : ContinuousOn φ (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (hetφ : ∀ r : ℝ, ContinuousOn (fun ω => cayleyExp r ω * φ ω)
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (hcφ : ContinuousOn (fun ω => cayleyInv ω * φ ω)
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))) (z : H) :
+    cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z
+      ∈ stoneDomain (cayleyStoneCLM U hgrp hU0 hUinner hUbd hSC) := by
+  show DifferentiableAt ℝ (fun t => (cayleyStoneCLM U hgrp hU0 hUinner hUbd hSC t)
+    (cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)) 0
+  have heq : (fun t => (cayleyStoneCLM U hgrp hU0 hUinner hUbd hSC t)
+        (cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z))
+      = (fun t => cayleyStoneU U hgrp hU0 hUinner hUbd hSC t
+        (cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)) := by
+    funext t; exact cayleyStoneCLM_apply U hgrp hU0 hUinner hUbd hSC t _
+  rw [heq]
+  exact (cayleyStoneU_cfc_hasDerivAt U hgrp hU0 hUinner hUbd hSC φ hφ hetφ hcφ z).differentiableAt
+
+/-- **★★★★★ THE GENERATOR OF THE STONE GROUP IS MULTIPLICATION BY THE SPECTRAL VALUE** (Stone's correspondence,
+    packaged): `stoneGen (cayleyStoneCLM) ⟨cfc φ V z, _⟩ = cfc(c·φ) V z`, where `c(ω) = cayleyInv ω`.  This identifies
+    the infinitesimal generator `A x = −i d/dt U_t x|₀` of the reconstructed unitary group with the Cayley-defined
+    self-adjoint operator `A = i(1+V)(1−V)⁻¹` acting (via the bounded Borel calculus) on the spectral core: `A` is
+    multiplication by `c`.  Wraps `cayleyStoneU_cfc_hasDerivAt` with `stoneGen_eq_of_hasDerivAt` through
+    `cayleyStoneCLM_apply`.  This is the precise sense in which **`U_t = exp(it A)` is the Stone group of its own
+    generator** — Stone's theorem, both directions, on the cfc core.  Axiom-free; free scalar; no UV datum. -/
+theorem cayleyStoneCLM_stoneGen_cfc [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (φ : ℂ → ℂ)
+    (hφ : ContinuousOn φ (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (hetφ : ∀ r : ℝ, ContinuousOn (fun ω => cayleyExp r ω * φ ω)
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (hcφ : ContinuousOn (fun ω => cayleyInv ω * φ ω)
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))) (z : H) :
+    stoneGen (cayleyStoneCLM U hgrp hU0 hUinner hUbd hSC)
+        ⟨cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z,
+          cayleyStoneCLM_cfc_mem_stoneDomain U hgrp hU0 hUinner hUbd hSC φ hφ hetφ hcφ z⟩
+      = cfc (fun ω => cayleyInv ω * φ ω) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z := by
+  apply stoneGen_eq_of_hasDerivAt
+  have heq : (fun t => (cayleyStoneCLM U hgrp hU0 hUinner hUbd hSC t)
+        (cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z))
+      = (fun t => cayleyStoneU U hgrp hU0 hUinner hUbd hSC t
+        (cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)) := by
+    funext t; exact cayleyStoneCLM_apply U hgrp hU0 hUinner hUbd hSC t _
+  rw [heq]
+  exact cayleyStoneU_cfc_hasDerivAt U hgrp hU0 hUinner hUbd hSC φ hφ hetφ hcφ z
+
 
 end SelfAdjoint
 

@@ -519,8 +519,15 @@ core `U_t=exp(itA)` is differentiable, `d/dt|₀ = i·(mult by c=cayleyInv)`, i.
 the spectral value c**. Via the operator norm²=∫DCT identity (`cfc_sub`/`cfc_const_mul`+Parseval) + the scalar DCT +
 `hasDerivAt_iff_tendsto_slope`. **Both built green.** **BOTH HALVES OF STONE NOW DONE on the cfc core** (unitary group
 forward + generator converse), axiom-free via Cayley/cfc, no PVM, no UV datum.
-**Next (packaging, toward X=A_edge):** wrap with `stoneGen_eq_of_hasDerivAt` ⟹ `stoneGen(cayleyStoneCLM)=cfc(c·φ)Vz`
-(+ Gårding/spectral-core density that `{cfc φ V z}` is a core); then apply to the concrete C₀ groups ⟹ X=A_edge → Phase 5;
+Also ✅ **🎯 `cayleyStoneCLM_stoneGen_cfc` (+`cayleyStoneCLM_cfc_mem_stoneDomain`) — STONE'S CORRESPONDENCE PACKAGED**
+(`StoneExp.lean`, axiom-free, budget 0): `stoneGen(cayleyStoneCLM)⟨cfc φ V z⟩ = cfc(c·φ)V z` — the abstract generator
+`A x=−i d/dt U_t x|₀` IS the Cayley self-adjoint `A=i(1+V)(1−V)⁻¹` = **mult by the spectral value c** on the cfc core.
+Wraps the generator `HasDerivAt` with `stoneGen_eq_of_hasDerivAt` via `cayleyStoneCLM_apply`. **Both built green.**
+**STONE'S THEOREM IS NOW BOTH DIRECTIONS on the cfc core** (unitary group ⊕ self-adjoint generator), axiom-free, no
+PVM, no UV datum — **the pivotal wall (general Stone, Phase 4.2) is BROKEN on the spectral core.**
+**Next (toward X=A_edge, Phase 4.3):** (a) Gårding/spectral-core density (`{cfc φ V z}` a core for stoneGen — connect
+to the mollified-vector density already in Garding.lean); (b) instantiate `U` with the concrete C₀ groups
+(translationLp/modUnitary/clockTransl) ⟹ their generators as stoneGen ⟹ X=A_edge; then Phase 5 (dual-weight trace);
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

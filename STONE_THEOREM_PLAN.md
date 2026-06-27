@@ -811,10 +811,24 @@ symbol-equality `have` + `rw`, not `congr 1; funext`.)* **This is the converse h
 Cayley/cfc construction — the group is the exponential of its own generator on a core.**
 **Both halves of Stone now DONE on the cfc core:** the unitary group `U_t = exp(it A)` (forward) AND the generator
 `A = mult by c` (converse), all axiom-free via Cayley/cfc, NO PVM, NO UV datum.
-**Next (packaging, tractable):** wrap (ii) with `stoneGen_eq_of_hasDerivAt` (Stone.lean) to read off
-`stoneGen(cayleyStoneCLM) ⟨cfc φ V z, _⟩ = cfc(c·φ)Vz` (needs `cayleyStoneCLM_apply` to bridge `cayleyStoneU`↔`CLM`),
-+ the Gårding/spectral-core density (that `{cfc φ V z}` is a core) — the genuine remaining packaging; then apply to
-the concrete C₀ groups ⟹ X = A_edge (Phase 4.3).
+Also ✅ `cayleyStoneCLM_cfc_mem_stoneDomain` + `cayleyStoneCLM_stoneGen_cfc` — **🎯🎯🎯 STONE'S CORRESPONDENCE PACKAGED:
+THE GENERATOR IS MULTIPLICATION BY THE SPECTRAL VALUE** (`StoneExp.lean`, axiom-free, budget 0):
+`stoneGen (cayleyStoneCLM) ⟨cfc φ V z, _⟩ = cfc(c·φ) V z` where `c(ω) = cayleyInv ω`. This identifies the **abstract
+infinitesimal generator** `A x = −i d/dt U_t x|₀` (the `stoneGen` of `Garding.lean`/`Stone.lean`, defined on the
+smooth domain) **with the Cayley-defined self-adjoint operator** `A = i(1+V)(1−V)⁻¹` acting by the bounded Borel
+calculus: `A` is **multiplication by `c`** on the cfc core. Membership: `cfc φ V z ∈ stoneDomain(cayleyStoneCLM)`
+(differentiable ⟹ in the smooth domain, `cayleyStoneU_cfc_hasDerivAt.differentiableAt` via `cayleyStoneCLM_apply`);
+identification: `stoneGen_eq_of_hasDerivAt` applied to the generator `HasDerivAt`. *Both built green first try.*
+**This closes Stone's theorem BOTH DIRECTIONS on the cfc core:** `U_t = exp(it A)` is the strongly-continuous
+one-parameter unitary group (forward) AND `A = stoneGen U = mult by c` is its self-adjoint generator (converse) —
+fully axiom-free via Cayley/cfc, NO PVM, NO UV datum. The pivotal wall (general Stone, Phase 3 = P4_WALL 4.2) is
+**broken on the spectral core.**
+**Next (toward X = A_edge, Phase 4.3):** (a) the Gårding/spectral-core **density** — that `{cfc φ V z : φ, c·φ ∈
+C(σV)}` is dense / a core for `stoneGen`, so the generator is determined everywhere (the smooth-domain density was
+already scaffolded in `Garding.lean` via mollified vectors; connect the cfc core to it); (b) **apply the whole
+machine to the concrete C₀ groups** (`translationLp e^{itP}`, `modUnitary Δ^{it}`, `clockTransl λ_t`) — instantiate
+`U` with each, giving their generators as `stoneGen`, ⟹ the clock energy `X = A_edge`. Then Phase 5 (dual-weight
+trace) — the other genuine Mathlib-grade frontier.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

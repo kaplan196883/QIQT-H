@@ -5180,6 +5180,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyExp_gen_integrand_tendsto
 #print axioms QIQTH.Spectral.cayleyStoneU_slope_norm_sq
 #print axioms QIQTH.Spectral.cayleyStoneU_cfc_hasDerivAt
+#print axioms QIQTH.Spectral.cayleyStoneCLM_cfc_mem_stoneDomain
+#print axioms QIQTH.Spectral.cayleyStoneCLM_stoneGen_cfc
+-- ★★★★★ P4 WALL — STONE'S CORRESPONDENCE PACKAGED: the generator of the reconstructed unitary group IS multiplication
+-- by the spectral value. cayleyStoneCLM_cfc_mem_stoneDomain — cfc φ V z ∈ stoneDomain(cayleyStoneCLM) (differentiable
+-- ⟹ in the smooth domain, via cayleyStoneCLM_apply). cayleyStoneCLM_stoneGen_cfc — stoneGen(cayleyStoneCLM)⟨cfc φ V z⟩
+-- = cfc(c·φ)V z, identifying A x=−i d/dt U_t x|₀ with the Cayley self-adjoint A=i(1+V)(1−V)⁻¹ = mult by c=cayleyInv on
+-- the cfc core (wraps cayleyStoneU_cfc_hasDerivAt with stoneGen_eq_of_hasDerivAt). U_t=exp(itA) is the Stone group of
+-- its own generator — Stone's theorem BOTH DIRECTIONS on the cfc core. Axiom-free, no PVM, no UV datum.
 -- ★★★★★ P4 WALL — THE GENERATOR ON THE cfc CORE (Stone's CONVERSE): cayleyStoneU_cfc_hasDerivAt [Nontrivial H] —
 -- HasDerivAt (t↦U_t(cfc φ V z)) (i·cfc(c·φ)V z) 0, for φ, e_r·φ, c·φ ContinuousOn σ(V). On the spectral core the Stone
 -- group U_t=exp(itA) is DIFFERENTIABLE in t, with d/dt|₀ = i·(mult by the spectral value c=cayleyInv) — i.e. the
