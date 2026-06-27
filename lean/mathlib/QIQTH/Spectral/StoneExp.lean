@@ -414,6 +414,45 @@ theorem cayleyStoneU_smul [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
   rw [heq] at hcx
   exact tendsto_nhds_unique hcx hsm
 
+/-- **`U_0 = id`** — the identity element of the Stone group.  At `t = 0` the symbol is `e_0 ≡ 1`
+    (`cayleyExp_zero`), so the cutoff symbol is `g_{0,N} = e_0 · η_N = η_N = 1 − ψ_N`, hence
+    `cfc(g_{0,N}) V x = x − cfc(ψ_N) V x`.  The atom-killing limit `cfc(ψ_N) V x → 0`
+    (`cayleyCutoff_cfc_tendsto_zero`, valid because `μ_x({1}) = 0`) then gives `x − 0 = x`, and by
+    uniqueness of strong limits `U_0 x = x`.  The first of the three remaining unitary-group bricks
+    (`U_0 = 1`, isometry `‖U_t x‖ = ‖x‖`, group law `U_s U_t = U_{s+t}`). -/
+theorem cayleyStoneU_zero [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    cayleyStoneU U hgrp hU0 hUinner hUbd hSC 0 x = x := by
+  -- the defining strong limit at `t = 0`
+  have htends := cayleyStoneU_tendsto U hgrp hU0 hUinner hUbd hSC 0 x
+  -- at `t = 0` the cutoff symbol is `g_{0,N} = η_N = 1 − ψ_N`, so `cfc(g_{0,N}) V x = x − cfc(ψ_N) V x`
+  have hrw : (fun N => cfc (cayleyExpBump 0 N)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)
+      = (fun N => x - cfc (fun z => (cayleyCutoff N z : ℂ))
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x) := by
+    funext N
+    have hsymb : cayleyExpBump 0 N
+        = (fun z => (1 : ℂ → ℂ) z - (fun w => (cayleyCutoff N w : ℂ)) z) := by
+      funext ω
+      simp only [cayleyExpBump, cayleyExp_zero, cayleyBump, one_mul, Pi.one_apply]
+      push_cast
+      ring
+    rw [hsymb, cfc_sub (f := (1 : ℂ → ℂ)) (g := fun w => (cayleyCutoff N w : ℂ))
+        (a := (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))
+        (hg := (Complex.continuous_ofReal.comp (cayleyCutoff_continuous N)).continuousOn),
+      cayley_cfc_one U hgrp hU0 hUinner hUbd hSC]
+    simp [ContinuousLinearMap.sub_apply]
+  rw [hrw] at htends
+  -- `x − cfc(ψ_N) V x → x − 0 = x`
+  have hlim : Filter.Tendsto (fun N => x - cfc (fun z => (cayleyCutoff N z : ℂ))
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x) Filter.atTop (nhds x) := by
+    have h0 : nhds x = nhds (x - 0) := by rw [sub_zero]
+    rw [h0]
+    exact tendsto_const_nhds.sub (cayleyCutoff_cfc_tendsto_zero U hgrp hU0 hUinner hUbd hSC x)
+  exact tendsto_nhds_unique htends hlim
+
 
 end SelfAdjoint
 

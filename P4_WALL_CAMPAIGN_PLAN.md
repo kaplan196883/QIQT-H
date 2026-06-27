@@ -452,8 +452,12 @@ before `set`).
 Also ✅ `cayleyStoneU` (def) + `cayleyStoneU_tendsto`/`_add`/`_smul` (**★★★★ THE CONTINUUM STONE EXPONENTIAL `U_t` IS
 DEFINED**: `cayleyStoneU t x:=lim_N cfc(g_{t,N})V x`, the strong limit; `cayleyStoneU_tendsto` = defining property;
 `_add`/`_smul` ⟹ `U_t` ℂ-LINEAR. This IS `exp(itA)x`, no PVM). All built green first try.
-**Next (toward U_t=exp(itA)):** `U_0 x=x`; `‖U_t x‖=‖x‖` (isometry); bundle `U_t:H→L[ℂ]H`; lift group law
-`U_s U_t=U_{s+t}` (cfc mult + `cayleyExp_add`); strong continuity; generator ⟹ Stone;
+Also ✅ **`cayleyStoneU_zero` — `U_0 = id`** (`StoneExp.lean`, axiom-free, budget 0): the Stone-group identity.
+At `t=0`, `e_0≡1` (`cayleyExp_zero`) ⟹ `g_{0,N}=η_N=1−ψ_N` ⟹ `cfc(g_{0,N})V x = x − cfc(ψ_N)V x` (`cfc_sub`+
+`cayley_cfc_one`); atom-killing `cfc(ψ_N)V x→0` (`cayleyCutoff_cfc_tendsto_zero`, `μ_x({1})=0`) ⟹ `x−0=x` by
+`tendsto_nhds_unique`. **First of the 3 remaining unitary-group bricks done.**
+**Next (toward U_t=exp(itA)):** `‖U_t x‖=‖x‖` (isometry, `∫|g_{t,N}|²=∫η_N²→‖x‖²`); bundle `U_t:H→L[ℂ]H`; lift group
+law `U_s U_t=U_{s+t}` (cfc mult + `cayleyExp_add`); strong continuity; generator ⟹ Stone;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

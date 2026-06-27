@@ -5152,6 +5152,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyStoneU_tendsto
 #print axioms QIQTH.Spectral.cayleyStoneU_add
 #print axioms QIQTH.Spectral.cayleyStoneU_smul
+#print axioms QIQTH.Spectral.cayleyStoneU_zero
+-- ★★★★ P4 WALL — U_0 = id (Stone group identity): cayleyStoneU_zero [Nontrivial H] — U_0 x = x. At t=0 the symbol
+-- is e_0 ≡ 1 (cayleyExp_zero), so g_{0,N}=η_N=1−ψ_N and cfc(g_{0,N})V x = x − cfc(ψ_N)V x; the atom-killing limit
+-- cfc(ψ_N)V x → 0 (cayleyCutoff_cfc_tendsto_zero, μ_x({1})=0) gives x−0=x by uniqueness of strong limits. The first
+-- of the three remaining unitary-group bricks (U_0=1 ✓, isometry ‖U_t x‖=‖x‖, group law U_s U_t=U_{s+t}). Axiom-free.
 -- ★★★★ P4 WALL — THE CONTINUUM STONE EXPONENTIAL U_t IS DEFINED: cayleyStoneU [Nontrivial H] U ... t x :=
 -- lim_N cfc(g_{t,N}) V x (the strong limit, exists by cayleyExpBump_cfc_cauchySeq + completeness). This IS
 -- cfc(e_t) V x = exp(itA) x for the self-adjoint A=i(1+V)(1−V)⁻¹, built with NO PVM. cayleyStoneU_tendsto (the

@@ -642,9 +642,18 @@ QIQTH.Spectral`), so `AxiomAudit.lean` resolves unchanged; full `QIQTH` builds g
 sorry. Edits to the Stone-exp frontier now recompile only the ~420-line `StoneExp` module and build in parallel
 with the rest of the tree — the iteration-speed enabler for the remaining Stone bricks below.
 
-**Next:** `U_0 x=x`
-(`cfc(η_N)V x→cfc(1)V x=x`); `‖U_t x‖=‖x‖` (isometry, `∫η_N²→‖x‖²`); bundle `U_t : H→L[ℂ]H`; lift the group law
-`U_s U_t=U_{s+t}` (cfc multiplicativity + `cayleyExp_add`); strong continuity; generator ⟹ Stone.
+Also ✅ `cayleyStoneU_zero` — **★★★★ `U_0 = id`, the Stone-group identity** (`QIQTH/Spectral/StoneExp.lean`,
+axiom-free, budget 0): `cayleyStoneU U ... 0 x = x`. At `t=0` the symbol is `e_0 ≡ 1` (`cayleyExp_zero`), so the
+cutoff symbol collapses to `g_{0,N} = e_0·η_N = η_N = 1 − ψ_N`; hence `cfc(g_{0,N})V x = x − cfc(ψ_N)V x`
+(`cfc_sub` + `cayley_cfc_one` `cfc 1 V = 1`, with the symbol rewrite `cayleyExpBump 0 N = fun z ↦ 1 − ψ_N(z)` via
+`cayleyExp_zero`/`one_mul`/`push_cast`). The **atom-killing** limit `cfc(ψ_N)V x → 0`
+(`cayleyCutoff_cfc_tendsto_zero`, valid because `μ_x({1}) = 0`) gives `x − 0 = x`, and `tendsto_nhds_unique`
+against the defining strong limit `cayleyStoneU_tendsto` closes it. *Built green (1 fix: pin the constant in
+`tendsto_const_nhds.sub` by rewriting `nhds x = nhds (x−0)` first — the bare `have :=` couldn't infer it.)* The
+**first of the three remaining unitary-group bricks** is done.
+**Next:** `‖U_t x‖=‖x‖` (isometry, `∫|g_{t,N}|²=∫η_N²→‖x‖²` since `μ_x({1})=0` and `‖e_t‖=1` on `S¹`); bundle
+`U_t : H→L[ℂ]H` (linear + isometry ⟹ bounded `ContinuousLinearMap`); lift the group law `U_s U_t=U_{s+t}`
+(cfc multiplicativity + `cayleyExp_add`); strong continuity; generator ⟹ Stone.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`
