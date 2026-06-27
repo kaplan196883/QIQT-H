@@ -469,10 +469,14 @@ Also ✅ **`cayleyExpBump_cfc_norm_le` + `cayleyExpBump_cfc_comp` — GROUP-LAW 
 axiom-free, budget 0): (a) the cutoff cfc operators are **contractions** `‖cfc(g_{t,N})V z‖≤‖z‖` (Parseval
 `∫η_N²≤∫1=‖z‖²`); (b) **cfc multiplicativity** `cfc(g_{s,N})V (cfc(g_{t,N})V x)=cfc(e_{s+t}·η_N²)V x` (`cfc_mul`+
 `cayleyExp_add`). The two ingredients the group-law limit-assembly consumes. **Both built green first try.**
-**CHECKPOINT (group law `U_s U_t=U_{s+t}`, next fire):** combine (a)+(b) via — (i) operator-limit
-`A_N y_N→U_s(U_t x)` [`squeeze_zero_norm` + contraction (a) + `cayleyStoneU_tendsto`]; (ii) product-symbol conv.
-`cfc(e_{s+t}η_N²)Vx→U_{s+t}x` [`‖·−cfc(g_{s+t,N})Vx‖²=∫η_N²ψ_N²≤∫ψ_N²→0`]; `cayleyExpBump_cfc_comp`+uniqueness.
-**Next (toward U_t=exp(itA)):** the group-law assembly above; then strong continuity; generator ⟹ Stone;
+Also ✅ **`cayleyStoneU_group` — THE ONE-PARAMETER GROUP LAW `U_s U_t = U_{s+t}`** (+ helper
+`cayleyProdSymbol_cfc_tendsto`; `StoneExp.lean`, axiom-free, budget 0): `A_N y_N` (with `A_N=cfc(g_{s,N})V`,
+`y_N=cfc(g_{t,N})V x`) → `U_s(U_t x)` [operator-limit: contraction (a) + `cayleyStoneU_tendsto` + `squeeze_zero_norm`]
+AND `=cfc(e_{s+t}η_N²)V x` [(b)] → `U_{s+t}x` [(ii): `‖·−cfc(g_{s+t,N})Vx‖²=∫η_N²ψ_N²≤∫ψ_N²→0`]; uniqueness ⟹
+`U_s(U_t x)=U_{s+t}x`. **Both built green first try.** With `cayleyStoneU_zero` (`U_0=1`): `U_{−t}U_t=1` ⟹ each `U_t`
+is **surjective ⟹ `U_t ∈ unitary(H)`**. `t↦U_t` is now a one-parameter group of isometries — only strong continuity
++ generator remain for full Stone.
+**Next (toward U_t=exp(itA)):** strong continuity `t↦U_t x`; generator ⟹ Stone;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

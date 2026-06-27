@@ -5161,6 +5161,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyStoneCLM_norm_map
 #print axioms QIQTH.Spectral.cayleyExpBump_cfc_norm_le
 #print axioms QIQTH.Spectral.cayleyExpBump_cfc_comp
+#print axioms QIQTH.Spectral.cayleyProdSymbol_cfc_tendsto
+#print axioms QIQTH.Spectral.cayleyStoneU_group
+-- ★★★★★ P4 WALL — THE ONE-PARAMETER GROUP LAW U_s U_t = U_{s+t} (cayleyStoneU_group [Nontrivial H]): the missing
+-- multiplicative structure of the continuum Stone exponential. With A_N:=cfc(g_{s,N})V, y_N:=cfc(g_{t,N})V x, the
+-- composite A_N y_N → U_s(U_t x) [operator-limit: contraction cayleyExpBump_cfc_norm_le + cayleyStoneU_tendsto via
+-- A_N y_N − U_s(U_t x)=A_N(y_N−U_t x)+(A_N(U_t x)−U_s(U_t x)), squeeze_zero_norm] AND A_N y_N=cfc(e_{s+t}η_N²)V x →
+-- U_{s+t}x [cayleyExpBump_cfc_comp + cayleyProdSymbol_cfc_tendsto, the latter via ‖cfc(e_r η_N²)Vx−cfc(g_{r,N})Vx‖²=
+-- ∫η_N²ψ_N²≤∫ψ_N²→0]; uniqueness ⟹ U_s(U_t x)=U_{s+t}x. t↦U_t is now a one-parameter group of isometries. Axiom-free.
 -- ★★★★ P4 WALL — GROUP-LAW PREREQUISITES (toward U_s U_t = U_{s+t}): cayleyExpBump_cfc_norm_le — the cutoff cfc
 -- operators are CONTRACTIONS ‖cfc(g_{t,N})V z‖≤‖z‖ (Parseval ∫‖g_{t,N}‖²=∫η_N²≤∫1=‖z‖², since η_N≤1); the uniform
 -- operator bound the group-law operator-limit step consumes. cayleyExpBump_cfc_comp — cfc MULTIPLICATIVITY:

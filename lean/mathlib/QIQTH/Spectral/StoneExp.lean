@@ -687,6 +687,158 @@ theorem cayleyExpBump_cfc_comp [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
       (cayleyExpBump_continuousOn U hgrp hU0 hUinner hUbd hSC t N),
     hsymb]
 
+/-- **The squared cutoff symbol converges to the same Stone limit:** `cfc(e_r·η_N²) V x → U_r x`.  The squared
+    bump `e_r η_N²` differs from the single bump `g_{r,N} = e_r η_N` by `e_r η_N(η_N − 1) = −e_r η_N ψ_N`, whose
+    `L²(μ_x)`-norm² is `∫ η_N² ψ_N² dμ_x ≤ ∫ ψ_N² dμ_x → 0` (`cayley_cfc_sub_norm_sq_integral` +
+    `cayleyCutoff_sq_integral_tendsto_zero`).  So `cfc(e_r η_N²) V x` and `cfc(g_{r,N}) V x` share the limit, and the
+    latter is `U_r x` by `cayleyStoneU_tendsto`.  This is the right-hand `N → ∞` half of the group law:
+    `cayleyExpBump_cfc_comp` writes `U_s U_t` as the limit of `cfc(e_{s+t} η_N²) V x`, which this lemma identifies
+    with `U_{s+t} x`. -/
+theorem cayleyProdSymbol_cfc_tendsto [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (r : ℝ) (x : H) :
+    Filter.Tendsto (fun N => cfc (fun ω => cayleyExp r ω * ((cayleyBump N ω : ℂ)) ^ 2)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)
+      Filter.atTop (nhds (cayleyStoneU U hgrp hU0 hUinner hUbd hSC r x)) := by
+  haveI : IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+    cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC x
+  -- the squared symbol is continuous on σ(V): `e_r η_N² = g_{r,N} · η_N`
+  have hcont : ∀ N, ContinuousOn (fun ω => cayleyExp r ω * ((cayleyBump N ω : ℂ)) ^ 2)
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)) := by
+    intro N
+    have heq : (fun ω => cayleyExp r ω * ((cayleyBump N ω : ℂ)) ^ 2)
+        = (fun ω => cayleyExpBump r N ω * (cayleyBump N ω : ℂ)) := by
+      funext ω; simp only [cayleyExpBump]; ring
+    rw [heq]
+    exact (cayleyExpBump_continuousOn U hgrp hU0 hUinner hUbd hSC r N).mul
+      ((Complex.continuous_ofReal.comp (cayleyBump_continuous N)).continuousOn)
+  -- the single-bump vectors converge to U_r x
+  have hg := cayleyStoneU_tendsto U hgrp hU0 hUinner hUbd hSC r x
+  -- the difference `cfc(g_{r,N}) - cfc(e_r η_N²)` → 0 in L² hence strongly
+  have hdiff : Filter.Tendsto (fun N => cfc (cayleyExpBump r N)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x
+      - cfc (fun ω => cayleyExp r ω * ((cayleyBump N ω : ℂ)) ^ 2)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x) Filter.atTop (nhds 0) := by
+    rw [tendsto_zero_iff_norm_tendsto_zero]
+    have hψsq := cayleyCutoff_sq_integral_tendsto_zero U hgrp hU0 hUinner hUbd hSC x
+    have hsqrt : Filter.Tendsto (fun N => Real.sqrt
+        (∫ ω, (cayleyCutoff N (ω : ℂ)) ^ 2 ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x)))
+        Filter.atTop (nhds 0) := by
+      have h := (Real.continuous_sqrt.tendsto 0).comp hψsq
+      rwa [Real.sqrt_zero] at h
+    refine squeeze_zero (fun N => norm_nonneg _) (fun N => ?_) hsqrt
+    have hb : ‖cfc (cayleyExpBump r N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x
+          - cfc (fun ω => cayleyExp r ω * ((cayleyBump N ω : ℂ)) ^ 2)
+            (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x‖ ^ 2
+        ≤ ∫ ω, (cayleyCutoff N (ω : ℂ)) ^ 2 ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) := by
+      rw [cayley_cfc_sub_norm_sq_integral U hgrp hU0 hUinner hUbd hSC (cayleyExpBump r N)
+        (fun ω => cayleyExp r ω * ((cayleyBump N ω : ℂ)) ^ 2)
+        (cayleyExpBump_continuousOn U hgrp hU0 hUinner hUbd hSC r N) (hcont N) x]
+      apply integral_mono_of_nonneg (Filter.Eventually.of_forall (fun ω => sq_nonneg _))
+      · refine (integrable_const (1 : ℝ)).mono' ?_ ?_
+        · exact (((cayleyCutoff_continuous N).comp continuous_subtype_val).pow 2).aestronglyMeasurable
+        · filter_upwards with ω
+          rw [Real.norm_of_nonneg (sq_nonneg _)]
+          nlinarith [(cayleyCutoff_pos N (ω : ℂ)).le, cayleyCutoff_le_one N (ω : ℂ)]
+      · filter_upwards with ω
+        have hcirc : ‖(ω : ℂ)‖ = 1 := by
+          have hmem := cayley_spectrum_subset_circle U hgrp hU0 hUinner hUbd hSC ω.2
+          rwa [mem_sphere_zero_iff_norm] at hmem
+        have hfac : cayleyExpBump r N (ω : ℂ) - cayleyExp r (ω : ℂ) * ((cayleyBump N (ω : ℂ) : ℂ)) ^ 2
+            = cayleyExp r (ω : ℂ) * ((cayleyBump N (ω : ℂ) : ℂ)) * ((cayleyCutoff N (ω : ℂ) : ℂ)) := by
+          simp only [cayleyExpBump, cayleyBump]; push_cast; ring
+        rw [hfac, norm_mul, norm_mul, cayleyExp_abs_circle hcirc, one_mul, Complex.norm_real,
+          Complex.norm_real, Real.norm_of_nonneg (cayleyBump_nonneg N _),
+          Real.norm_of_nonneg (cayleyCutoff_pos N _).le]
+        have hη2 : cayleyBump N (ω : ℂ) ^ 2 ≤ 1 := by
+          nlinarith [cayleyBump_nonneg N (ω : ℂ), cayleyBump_le_one N (ω : ℂ)]
+        nlinarith [mul_nonneg (sub_nonneg.mpr hη2) (sq_nonneg (cayleyCutoff N (ω : ℂ)))]
+    calc ‖cfc (cayleyExpBump r N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x
+            - cfc (fun ω => cayleyExp r ω * ((cayleyBump N ω : ℂ)) ^ 2)
+              (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x‖
+        = Real.sqrt (‖cfc (cayleyExpBump r N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x
+            - cfc (fun ω => cayleyExp r ω * ((cayleyBump N ω : ℂ)) ^ 2)
+              (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x‖ ^ 2) :=
+          (Real.sqrt_sq (norm_nonneg _)).symm
+      _ ≤ Real.sqrt (∫ ω, (cayleyCutoff N (ω : ℂ)) ^ 2
+            ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x)) := Real.sqrt_le_sqrt hb
+  -- `cfc(e_r η_N²) V x = cfc(g_{r,N}) V x − (difference) → U_r x − 0`
+  have hcomb := hg.sub hdiff
+  simpa using hcomb
+
+/-- **★★★★★ THE ONE-PARAMETER GROUP LAW** `U_s U_t = U_{s+t}` for the continuum Stone exponential.  With
+    `A_N := cfc(g_{s,N}) V`, `y_N := cfc(g_{t,N}) V x` and `y := U_t x`, the composite `A_N y_N` converges two ways:
+    **(i)** to `U_s (U_t x)` — splitting `A_N y_N − U_s(U_t x) = A_N(y_N − y) + (A_N y − U_s y)`, the first summand
+    `→ 0` because `A_N` is a contraction (`cayleyExpBump_cfc_norm_le`) and `y_N → y` (`cayleyStoneU_tendsto`), the
+    second by `cayleyStoneU_tendsto` at the fixed vector `y`; and **(ii)** to `U_{s+t} x` — because
+    `A_N y_N = cfc(e_{s+t} η_N²) V x` (`cayleyExpBump_cfc_comp`) and that tends to `U_{s+t} x`
+    (`cayleyProdSymbol_cfc_tendsto`).  Uniqueness of limits gives `U_s (U_t x) = U_{s+t} x`.  This is the missing
+    multiplicative structure: `t ↦ U_t` is now a genuine one-parameter group of isometries.  Axiom-free; free scalar;
+    no UV datum. -/
+theorem cayleyStoneU_group [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (s t : ℝ) (x : H) :
+    cayleyStoneU U hgrp hU0 hUinner hUbd hSC s (cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x)
+      = cayleyStoneU U hgrp hU0 hUinner hUbd hSC (s + t) x := by
+  -- (i) the operator-limit `A_N y_N → U_s (U_t x)`
+  have hy := cayleyStoneU_tendsto U hgrp hU0 hUinner hUbd hSC t x
+  have hAy := cayleyStoneU_tendsto U hgrp hU0 hUinner hUbd hSC s
+    (cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x)
+  have hynorm : Filter.Tendsto (fun N => ‖cfc (cayleyExpBump t N)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x
+      - cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x‖) Filter.atTop (nhds 0) := by
+    have h := (hy.sub (tendsto_const_nhds (x := cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x))).norm
+    simpa using h
+  have hT1 : Filter.Tendsto (fun N => cfc (cayleyExpBump s N)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+      (cfc (cayleyExpBump t N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x
+        - cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x)) Filter.atTop (nhds 0) :=
+    squeeze_zero_norm (fun N => cayleyExpBump_cfc_norm_le U hgrp hU0 hUinner hUbd hSC s N _) hynorm
+  have hT2 : Filter.Tendsto (fun N => cfc (cayleyExpBump s N)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+      (cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x)
+      - cayleyStoneU U hgrp hU0 hUinner hUbd hSC s (cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x))
+      Filter.atTop (nhds 0) := by
+    have h := hAy.sub (tendsto_const_nhds
+      (x := cayleyStoneU U hgrp hU0 hUinner hUbd hSC s (cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x)))
+    simpa using h
+  have hstep1 : Filter.Tendsto (fun N => cfc (cayleyExpBump s N)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+      (cfc (cayleyExpBump t N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x))
+      Filter.atTop (nhds (cayleyStoneU U hgrp hU0 hUinner hUbd hSC s
+        (cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x))) := by
+    have hcombine : (fun N => cfc (cayleyExpBump s N)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+        (cfc (cayleyExpBump t N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x))
+        = (fun N => (cfc (cayleyExpBump s N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+              (cfc (cayleyExpBump t N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x
+                - cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x))
+            + (cfc (cayleyExpBump s N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+                (cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x)
+              - cayleyStoneU U hgrp hU0 hUinner hUbd hSC s (cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x))
+            + cayleyStoneU U hgrp hU0 hUinner hUbd hSC s
+                (cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x)) := by
+      funext N; rw [map_sub]; abel
+    rw [hcombine]
+    simpa using (hT1.add hT2).add (tendsto_const_nhds
+      (x := cayleyStoneU U hgrp hU0 hUinner hUbd hSC s (cayleyStoneU U hgrp hU0 hUinner hUbd hSC t x)))
+  -- (ii) the same composite equals `cfc(e_{s+t} η_N²) V x → U_{s+t} x`
+  have hstep2 : Filter.Tendsto (fun N => cfc (cayleyExpBump s N)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+      (cfc (cayleyExpBump t N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x))
+      Filter.atTop (nhds (cayleyStoneU U hgrp hU0 hUinner hUbd hSC (s + t) x)) := by
+    have hcomp : (fun N => cfc (cayleyExpBump s N)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+        (cfc (cayleyExpBump t N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x))
+        = (fun N => cfc (fun ω => cayleyExp (s + t) ω * ((cayleyBump N ω : ℂ)) ^ 2)
+            (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x) := by
+      funext N; exact cayleyExpBump_cfc_comp U hgrp hU0 hUinner hUbd hSC s t N x
+    rw [hcomp]
+    exact cayleyProdSymbol_cfc_tendsto U hgrp hU0 hUinner hUbd hSC (s + t) x
+  exact tendsto_nhds_unique hstep1 hstep2
+
 
 end SelfAdjoint
 

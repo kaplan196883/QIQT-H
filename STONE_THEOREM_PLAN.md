@@ -688,14 +688,20 @@ monotone). This is the **uniform** operator bound `‖cfc(g_{t,N})V‖≤1` the 
 via `cfc_mul` (both symbols `ContinuousOn σ(V)`) + the product-symbol identity `g_{s,N}·g_{t,N} = (e_s η_N)(e_t η_N)
 = e_{s+t}η_N²` (`cayleyExp_add`; `← ContinuousLinearMap.mul_apply` + `← cfc_mul` + `funext;ring`). The **algebraic
 half** of the group law. *Both built green first try.*
-**ASSEMBLY RECIPE (next fire — the group law `cayleyStoneU` group):** with `A_N := cfc(g_{s,N})V`,
-`y_N := cfc(g_{t,N})V x`, `y := U_t x`: **(i) operator-limit** `A_N y_N → U_s(U_t x)` — write `A_N y_N − U_s(U_t x)
-= A_N(y_N − y) + (A_N y − U_s y)` (`map_sub`/`abel`); first summand `→ 0` by `squeeze_zero_norm` with the contraction
-bound (a) and `y_N → y` (`cayleyStoneU_tendsto`), second by `cayleyStoneU_tendsto … s y` minus const. **(ii)
-product-symbol convergence** `cfc(e_{s+t}η_N²)V x → U_{s+t}x` — `cfc(e_{s+t}η_N²)Vx − cfc(g_{s+t,N})Vx → 0` since
-its squared norm `= ∫‖e_{s+t}η_N(η_N−1)‖²dμ = ∫η_N²ψ_N²dμ ≤ ∫ψ_N² → 0` (`cayley_cfc_sub_norm_sq_integral` +
-`cayleyCutoff_sq_integral_tendsto_zero`, `Real.sqrt` route), and `cfc(g_{s+t,N})Vx → U_{s+t}x`
-(`cayleyStoneU_tendsto`). Combine (i),(ii) through `cayleyExpBump_cfc_comp` + `tendsto_nhds_unique`.
+Also ✅ `cayleyProdSymbol_cfc_tendsto` + `cayleyStoneU_group` — **★★★★★ THE ONE-PARAMETER GROUP LAW
+`U_s U_t = U_{s+t}`** (`StoneExp.lean`, axiom-free, budget 0): the missing multiplicative structure — `t ↦ U_t` is
+now a genuine **one-parameter group of isometries**. With `A_N := cfc(g_{s,N})V`, `y_N := cfc(g_{t,N})V x`,
+`y := U_t x`, the composite `A_N y_N` converges two ways: **(i)** to `U_s(U_t x)` — `A_N y_N − U_s(U_t x) =
+A_N(y_N − y) + (A_N y − U_s y)` (`map_sub`/`abel`), first summand `→ 0` by `squeeze_zero_norm` + the contraction
+`cayleyExpBump_cfc_norm_le` + `y_N → y` (`cayleyStoneU_tendsto`), second by `cayleyStoneU_tendsto … s y` minus
+const; **(ii)** to `U_{s+t}x` — `A_N y_N = cfc(e_{s+t}η_N²)V x` (`cayleyExpBump_cfc_comp`) which `→ U_{s+t}x`
+(`cayleyProdSymbol_cfc_tendsto`: the squared bump differs from `g_{s+t,N}` by `e_{s+t}η_N ψ_N` with `L²`-norm²
+`∫η_N²ψ_N² ≤ ∫ψ_N² → 0`, via `cayley_cfc_sub_norm_sq_integral` + `cayleyCutoff_sq_integral_tendsto_zero` and the
+`Real.sqrt` route; continuity of `e_{s+t}η_N² = g_{s+t,N}·η_N` on `σ(V)` from `cayleyExpBump_continuousOn ·mul
+cayleyBump_continuous`). `tendsto_nhds_unique` ⟹ `U_s(U_t x) = U_{s+t}x`. *Both built green first try (1 fix in
+(ii): the degree-4 bound `(η ψ)² ≤ ψ²` needed the explicit hint `0 ≤ (1−η²)ψ²`).*  Combined with `cayleyStoneU_zero`
+(`U_0 = 1`), this gives `U_{−t} U_t = U_0 = 1`, so **each `U_t` is surjective — hence `U_t ∈ unitary(H)`** (the
+isometry `cayleyStoneLI` is now invertible).
 **Then:** strong continuity `t ↦ U_t x`; generator ⟹ Stone.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
