@@ -677,8 +677,26 @@ fields, so `cayleyStoneLI : H →ₗᵢ[ℂ] H` assembles directly (`{ toFun, ma
 one-parameter family `t ↦ U_t` now lives in `H →L[ℂ] H`, where the group law `U_s U_t = U_{s+t}` reads as operator
 composition `∘L` and the generator is read off by differentiation. *Built green first try.* (Surjectivity — hence
 `U_t ∈ unitary(H)` — still needs the group law `U_{−t} U_t = 1`; an isometry is already injective with closed range.)
-**Next:** lift the group law `U_s U_t = U_{s+t}` (cfc multiplicativity + `cayleyExp_add`); strong continuity;
-generator ⟹ Stone.
+
+Also ✅ `cayleyExpBump_cfc_norm_le` + `cayleyExpBump_cfc_comp` — **★★★★ GROUP-LAW PREREQUISITES** (`StoneExp.lean`,
+axiom-free, budget 0): the two ingredients the `U_s U_t = U_{s+t}` limit-assembly consumes.
+(a) `cayleyExpBump_cfc_norm_le` — **the cutoff cfc operators are contractions** `‖cfc(g_{t,N})V z‖ ≤ ‖z‖`: by
+Parseval the squared norm is `∫‖g_{t,N}‖²dμ_z = ∫η_N²dμ_z ≤ ∫1 dμ_z = ‖z‖²` (on `σ(V)⊆S¹`, `‖g_{t,N}‖=η_N≤1` via
+`cayleyExpBump_norm`/`cayleyBump_le_one`; `integral_mono_of_nonneg` + `cayleyScalarMeasure_univ`, then `Real.sqrt`
+monotone). This is the **uniform** operator bound `‖cfc(g_{t,N})V‖≤1` the operator-limit step needs.
+(b) `cayleyExpBump_cfc_comp` — **cfc multiplicativity**: `cfc(g_{s,N})V (cfc(g_{t,N})V x) = cfc(e_{s+t}·η_N²)V x`,
+via `cfc_mul` (both symbols `ContinuousOn σ(V)`) + the product-symbol identity `g_{s,N}·g_{t,N} = (e_s η_N)(e_t η_N)
+= e_{s+t}η_N²` (`cayleyExp_add`; `← ContinuousLinearMap.mul_apply` + `← cfc_mul` + `funext;ring`). The **algebraic
+half** of the group law. *Both built green first try.*
+**ASSEMBLY RECIPE (next fire — the group law `cayleyStoneU` group):** with `A_N := cfc(g_{s,N})V`,
+`y_N := cfc(g_{t,N})V x`, `y := U_t x`: **(i) operator-limit** `A_N y_N → U_s(U_t x)` — write `A_N y_N − U_s(U_t x)
+= A_N(y_N − y) + (A_N y − U_s y)` (`map_sub`/`abel`); first summand `→ 0` by `squeeze_zero_norm` with the contraction
+bound (a) and `y_N → y` (`cayleyStoneU_tendsto`), second by `cayleyStoneU_tendsto … s y` minus const. **(ii)
+product-symbol convergence** `cfc(e_{s+t}η_N²)V x → U_{s+t}x` — `cfc(e_{s+t}η_N²)Vx − cfc(g_{s+t,N})Vx → 0` since
+its squared norm `= ∫‖e_{s+t}η_N(η_N−1)‖²dμ = ∫η_N²ψ_N²dμ ≤ ∫ψ_N² → 0` (`cayley_cfc_sub_norm_sq_integral` +
+`cayleyCutoff_sq_integral_tendsto_zero`, `Real.sqrt` route), and `cfc(g_{s+t,N})Vx → U_{s+t}x`
+(`cayleyStoneU_tendsto`). Combine (i),(ii) through `cayleyExpBump_cfc_comp` + `tendsto_nhds_unique`.
+**Then:** strong continuity `t ↦ U_t x`; generator ⟹ Stone.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

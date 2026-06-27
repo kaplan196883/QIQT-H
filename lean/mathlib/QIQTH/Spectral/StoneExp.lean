@@ -618,6 +618,75 @@ theorem cayleyStoneCLM_norm_map [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
     ‖cayleyStoneCLM U hgrp hU0 hUinner hUbd hSC t x‖ = ‖x‖ :=
   cayleyStoneU_isometry U hgrp hU0 hUinner hUbd hSC t x
 
+/-- **The cutoff cfc operators are contractions:** `‖cfc(g_{t,N}) V z‖ ≤ ‖z‖`.  By Parseval the squared norm is
+    `∫ ‖g_{t,N}‖² dμ_z`, and on `σ(V) ⊆ S¹` the symbol has modulus `‖g_{t,N}(ω)‖ = η_N(ω) ≤ 1`
+    (`cayleyExpBump_norm`, `cayleyBump_le_one`), so `∫ ‖g_{t,N}‖² dμ_z ≤ ∫ 1 dμ_z = ‖z‖²`.  This uniform operator
+    bound (`‖cfc(g_{t,N}) V‖ ≤ 1` for every `N`) is what the operator-limit step of the group law `U_s U_t = U_{s+t}`
+    consumes: a uniformly bounded net of operators converging strongly composes with a convergent vector net. -/
+theorem cayleyExpBump_cfc_norm_le [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (t : ℝ) (N : ℕ) (z : H) :
+    ‖cfc (cayleyExpBump t N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z‖ ≤ ‖z‖ := by
+  haveI : IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC z) :=
+    cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC z
+  have hsq : ‖cfc (cayleyExpBump t N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z‖ ^ 2
+      ≤ ‖z‖ ^ 2 := by
+    rw [cayley_cfc_norm_sq_integral U hgrp hU0 hUinner hUbd hSC (cayleyExpBump t N)
+      (cayleyExpBump_continuousOn U hgrp hU0 hUinner hUbd hSC t N) z]
+    have hle : (∫ ω, ‖cayleyExpBump t N (ω : ℂ)‖ ^ 2
+          ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC z))
+        ≤ ∫ ω, (1 : ℝ) ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC z) := by
+      apply integral_mono_of_nonneg
+      · exact Filter.Eventually.of_forall (fun ω => sq_nonneg _)
+      · exact integrable_const 1
+      · filter_upwards with ω
+        have hcirc : ‖(ω : ℂ)‖ = 1 := by
+          have hmem := cayley_spectrum_subset_circle U hgrp hU0 hUinner hUbd hSC ω.2
+          rwa [mem_sphere_zero_iff_norm] at hmem
+        rw [cayleyExpBump_norm t N hcirc]
+        nlinarith [cayleyBump_nonneg N (ω : ℂ), cayleyBump_le_one N (ω : ℂ)]
+    have he4 : (∫ ω, (1 : ℝ) ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC z)) = ‖z‖ ^ 2 := by
+      rw [integral_const, smul_eq_mul, mul_one]
+      exact cayleyScalarMeasure_univ U hgrp hU0 hUinner hUbd hSC z
+    exact hle.trans_eq he4
+  calc ‖cfc (cayleyExpBump t N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z‖
+      = Real.sqrt (‖cfc (cayleyExpBump t N)
+          (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z‖ ^ 2) :=
+        (Real.sqrt_sq (norm_nonneg _)).symm
+    _ ≤ Real.sqrt (‖z‖ ^ 2) := Real.sqrt_le_sqrt hsq
+    _ = ‖z‖ := Real.sqrt_sq (norm_nonneg _)
+
+/-- **cfc multiplicativity for the cutoff operators:** `cfc(g_{s,N}) V (cfc(g_{t,N}) V x) = cfc(e_{s+t}·η_N²) V x`.
+    Since both cutoff symbols are continuous on `σ(V)` (`cayleyExpBump_continuousOn`), the continuous functional
+    calculus is multiplicative: `cfc(g_{s,N}) V ∘ cfc(g_{t,N}) V = cfc(g_{s,N}·g_{t,N}) V`, and the product symbol
+    is `g_{s,N}·g_{t,N} = (e_s η_N)(e_t η_N) = e_s e_t η_N² = e_{s+t} η_N²` (`cayleyExp_add`).  This is the algebraic
+    half of the group law `U_s U_t = U_{s+t}`: passing `N → ∞` on the right (`e_{s+t} η_N² → e_{s+t}` in `L²`) and on
+    the left (operator-limit of the contractions `cayleyExpBump_cfc_norm_le`) yields the group law. -/
+theorem cayleyExpBump_cfc_comp [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y))
+    (s t : ℝ) (N : ℕ) (x : H) :
+    cfc (cayleyExpBump s N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+        (cfc (cayleyExpBump t N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x)
+      = cfc (fun ω => cayleyExp (s + t) ω * ((cayleyBump N ω : ℂ)) ^ 2)
+          (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x := by
+  have hsymb : (fun ω : ℂ => cayleyExpBump s N ω * cayleyExpBump t N ω)
+      = (fun ω : ℂ => cayleyExp (s + t) ω * ((cayleyBump N ω : ℂ)) ^ 2) := by
+    funext ω
+    simp only [cayleyExpBump]
+    have hr : cayleyExp s ω * (cayleyBump N ω : ℂ) * (cayleyExp t ω * (cayleyBump N ω : ℂ))
+        = (cayleyExp s ω * cayleyExp t ω) * ((cayleyBump N ω : ℂ)) ^ 2 := by ring
+    rw [hr, cayleyExp_add]
+  rw [← ContinuousLinearMap.mul_apply,
+    ← cfc_mul (cayleyExpBump s N) (cayleyExpBump t N)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+      (cayleyExpBump_continuousOn U hgrp hU0 hUinner hUbd hSC s N)
+      (cayleyExpBump_continuousOn U hgrp hU0 hUinner hUbd hSC t N),
+    hsymb]
+
 
 end SelfAdjoint
 

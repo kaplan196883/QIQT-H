@@ -5159,6 +5159,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyStoneCLM
 #print axioms QIQTH.Spectral.cayleyStoneCLM_apply
 #print axioms QIQTH.Spectral.cayleyStoneCLM_norm_map
+#print axioms QIQTH.Spectral.cayleyExpBump_cfc_norm_le
+#print axioms QIQTH.Spectral.cayleyExpBump_cfc_comp
+-- ★★★★ P4 WALL — GROUP-LAW PREREQUISITES (toward U_s U_t = U_{s+t}): cayleyExpBump_cfc_norm_le — the cutoff cfc
+-- operators are CONTRACTIONS ‖cfc(g_{t,N})V z‖≤‖z‖ (Parseval ∫‖g_{t,N}‖²=∫η_N²≤∫1=‖z‖², since η_N≤1); the uniform
+-- operator bound the group-law operator-limit step consumes. cayleyExpBump_cfc_comp — cfc MULTIPLICATIVITY:
+-- cfc(g_{s,N})V (cfc(g_{t,N})V x) = cfc(e_{s+t}·η_N²)V x (cfc_mul + e_s·e_t=e_{s+t}); the algebraic half of the group
+-- law. Remaining: pass N→∞ (operator-limit of contractions on the left, e_{s+t}η_N²→e_{s+t} in L² on the right). Axiom-free.
 -- ★★★★ P4 WALL — U_t BUNDLED AS A BOUNDED OPERATOR H →L[ℂ] H: cayleyStoneLI (the ℂ-linear isometry H →ₗᵢ[ℂ] H from
 -- cayleyStoneU_add/_smul/_isometry) → cayleyStoneCLM := cayleyStoneLI.toContinuousLinearMap (the H →L[ℂ] H packaging
 -- Stone consumes; cayleyStoneCLM_apply: acts as cayleyStoneU; cayleyStoneCLM_norm_map: ‖U_t x‖=‖x‖ at the operator

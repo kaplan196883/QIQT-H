@@ -465,8 +465,14 @@ Also ✅ **`cayleyStoneLI`/`cayleyStoneCLM` — `U_t` bundled as `H →L[ℂ] H`
 `cayleyStoneU_add`/`_smul`/`_isometry` are exactly the `LinearIsometry` fields ⟹ `cayleyStoneLI : H →ₗᵢ[ℂ] H` ⟹
 `cayleyStoneCLM := .toContinuousLinearMap : H →L[ℂ] H` (with `cayleyStoneCLM_apply`/`_norm_map`). The group `t↦U_t`
 now lives in `H →L[ℂ] H` (where `U_s U_t=U_{s+t}` is `∘L`). **3rd brick's packaging done.**
-**Next (toward U_t=exp(itA)):** lift group
-law `U_s U_t=U_{s+t}` (cfc mult + `cayleyExp_add`); strong continuity; generator ⟹ Stone;
+Also ✅ **`cayleyExpBump_cfc_norm_le` + `cayleyExpBump_cfc_comp` — GROUP-LAW PREREQUISITES** (`StoneExp.lean`,
+axiom-free, budget 0): (a) the cutoff cfc operators are **contractions** `‖cfc(g_{t,N})V z‖≤‖z‖` (Parseval
+`∫η_N²≤∫1=‖z‖²`); (b) **cfc multiplicativity** `cfc(g_{s,N})V (cfc(g_{t,N})V x)=cfc(e_{s+t}·η_N²)V x` (`cfc_mul`+
+`cayleyExp_add`). The two ingredients the group-law limit-assembly consumes. **Both built green first try.**
+**CHECKPOINT (group law `U_s U_t=U_{s+t}`, next fire):** combine (a)+(b) via — (i) operator-limit
+`A_N y_N→U_s(U_t x)` [`squeeze_zero_norm` + contraction (a) + `cayleyStoneU_tendsto`]; (ii) product-symbol conv.
+`cfc(e_{s+t}η_N²)Vx→U_{s+t}x` [`‖·−cfc(g_{s+t,N})Vx‖²=∫η_N²ψ_N²≤∫ψ_N²→0`]; `cayleyExpBump_cfc_comp`+uniqueness.
+**Next (toward U_t=exp(itA)):** the group-law assembly above; then strong continuity; generator ⟹ Stone;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
