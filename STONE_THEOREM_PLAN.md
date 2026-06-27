@@ -631,7 +631,18 @@ STONE EXPONENTIAL `U_t` IS DEFINED**: `cayleyStoneU U ... t x := lim_N cfc(g_{t,
 `cayleyExpBump_cfc_cauchySeq` + completeness; `cauchySeq_tendsto_of_complete.choose`). `cayleyStoneU_tendsto` is the
 defining strong-limit property; `cayleyStoneU_add`/`_smul` ⟹ **`U_t` is ℂ-LINEAR** (`map_add`/`map_smul` of each
 `cfc(g_{t,N})V` + `Tendsto.add`/`const_smul` + `tendsto_nhds_unique`). This IS `cfc(e_t)V x = exp(itA)x` for the
-self-adjoint `A=i(1+V)(1−V)⁻¹`, built with NO PVM. *All built green first try.* **Next:** `U_0 x=x`
+self-adjoint `A=i(1+V)(1−V)⁻¹`, built with NO PVM. *All built green first try.*
+
+**🔧 REFACTOR (tooling, commit 63dfb39):** `Garding.lean` had grown to ~2600 lines (per-edit recompile ~45s, all
+Stone-exp work serialized behind the cfc/measure machinery). Split the self-contained **Stone-exponential layer**
+(`cayleyInv → cayleyStoneU_smul`, the entire block from the inverse-Cayley map through the ℂ-linear `U_t`) into a
+new module **`QIQTH/Spectral/StoneExp.lean`** (420 lines, `import QIQTH.Spectral.Garding`). `Garding.lean` now ends
+at the atom-killing `cayleyScalarMeasure_atom_eq_zero`. No declarations renamed (all stay in `namespace
+QIQTH.Spectral`), so `AxiomAudit.lean` resolves unchanged; full `QIQTH` builds green (8726 jobs), budget 0, no
+sorry. Edits to the Stone-exp frontier now recompile only the ~420-line `StoneExp` module and build in parallel
+with the rest of the tree — the iteration-speed enabler for the remaining Stone bricks below.
+
+**Next:** `U_0 x=x`
 (`cfc(η_N)V x→cfc(1)V x=x`); `‖U_t x‖=‖x‖` (isometry, `∫η_N²→‖x‖²`); bundle `U_t : H→L[ℂ]H`; lift the group law
 `U_s U_t=U_{s+t}` (cfc multiplicativity + `cayleyExp_add`); strong continuity; generator ⟹ Stone.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
