@@ -6355,5 +6355,11 @@ namespace QIQTH.AxiomAudit
 -- capacity-tracks-area family (log N=η·A) + record-entropy = horizon-dS are the Gap-2 localization, carried as
 -- explicit hypotheses; η (= 1/4ℓ_P²) is a free real (1/4 ratio derived via Sakharov, value of G never assigned);
 -- the capacity is a typeclass hypothesis, not a Lean axiom. Axiom-free (standard 3).
+#print axioms QIQTH.oneDensity_isDensity
+-- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-11, von Neumann non-vacuity witness): oneDensity_isDensity —
+-- IsDensity (1 : Matrix (Fin 1) (Fin 1) ℂ), the one-microstate pure state (1×1 identity), a genuine density
+-- (PosSemidef.one + trace_one). Completes the witness story (M-7 only witnessed the record-law/Shannon floor): the
+-- example in FQBoundMicro fires area_floor_vonNeumann (the honest M-4 von Neumann P4) on it — S_vN = 0 ≤ log 1 — so
+-- the von Neumann floor is non-vacuous on a concrete density matrix. Axiom-free (standard 3).
 
 end QIQTH.AxiomAudit

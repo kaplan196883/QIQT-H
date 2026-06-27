@@ -279,6 +279,11 @@ Each Lean brick: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.FQBoundMicro` 
 the Co-Authored-By trailer · push via `git -c http.sslBackend=schannel push origin main` · update §6 progress log
 AND the `P4_WALL_CAMPAIGN_PLAN.md` checklist (note the P4-MICRO endpoint beside the Type II frontier).
 
+- [x] **M-11 (bonus) von Neumann non-vacuity witness** — ✅ **LANDED 2026-06-27**: `oneDensity_isDensity :
+  IsDensity (1 : Matrix (Fin 1) (Fin 1) ℂ)` (the one-microstate pure state, via `PosSemidef.one` + `trace_one`) +
+  an `example` firing `area_floor_vonNeumann` on it (`S_vN = 0 ≤ log 1`). Completes M-7's Shannon-only witness with
+  the von Neumann side. Needed `open scoped ComplexOrder` (ℂ's order is scoped). Green, standard 3, budget 0.
+
 ## 6. Progress log
 
 - 2026-06-27 — plan authored. Confirmed engine `shannon_le_log_card` (`QIQTH/RecordContract.lean:132`) and
@@ -352,6 +357,13 @@ AND the `P4_WALL_CAMPAIGN_PLAN.md` checklist (note the P4-MICRO endpoint beside 
   instance-binder resolve consistently). Green, both standard 3, budget 0, full `QIQTH` green; wired into
   `QIQTH.lean` + `AxiomAudit.lean`. **The P4-MICRO checklist (M-1…M-10) is complete.** Remaining beyond this plan =
   the Gap-2 localization + general (non-free-field) thermal side = Route 1 (Type II), the labelled open frontier.
+- 2026-06-27 — **M-11 LANDED (bonus — von Neumann non-vacuity witness).** `oneDensity_isDensity : IsDensity (1 :
+  Matrix (Fin 1) (Fin 1) ℂ)` (one-microstate pure state via `Matrix.PosSemidef.one` + `Matrix.trace_one`) + an
+  `example` firing `area_floor_vonNeumann` on it (`S_vN = 0 ≤ log 1`) — completes M-7's Shannon-only witness with the
+  honest von Neumann side. (A first attempt with the maximally-mixed `I/d` was reverted — ℂ-order/PosSemidef
+  plumbing; the `Fin 1` identity is the clean route. Needed `open scoped ComplexOrder` since ℂ's order is scoped.)
+  Green, standard 3, budget 0, full `QIQTH` green; wired into `AxiomAudit.lean`. The checklist + bonus are now done;
+  the genuine open frontier is Route 1 / Gap-2 (a separate plan).
 
 ## 7. Files
 

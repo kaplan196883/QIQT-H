@@ -43,8 +43,11 @@ capacity rather than postulate it.
 -/
 import QIQTH.RecordContract
 import QIQTH.QuantumRelativeEntropy
+import Mathlib.Analysis.Complex.Order
 
 namespace QIQTH
+
+open scoped ComplexOrder
 
 /-- **P4-MICRO, bound form** — the finite-microstate (quantized-information) postulate for a region `R`, in the
     form P4's *floor* actually needs.  `R` is the finite set of mutually distinguishable **regional** microstates
@@ -198,5 +201,22 @@ example (m : ℕ) [Nonempty (Fin m)] :
       = Real.log m :=
   letI := finCapacityExact m
   area_floor_saturates
+
+/-! ### Von Neumann non-vacuity witness
+
+`M-7` witnessed only the *record-law* (Shannon) floor; the genuine von Neumann floor (`area_floor_vonNeumann`, the
+honest P4 of M-4) needs a concrete `IsDensity`.  The simplest is the one-microstate pure state — the `1×1` identity
+on `Fin 1` — a genuine density (positive semidefinite, unit trace).  Below, `area_floor_vonNeumann` fires on it:
+`S_vN = 0 ≤ log 1`.  So the von Neumann floor is not vacuous. -/
+
+/-- The one-microstate pure state — the `1×1` identity on `Fin 1` — is a genuine density matrix
+    (positive semidefinite, unit trace). -/
+theorem oneDensity_isDensity : QIQTH.QuantumEntropy.IsDensity (1 : Matrix (Fin 1) (Fin 1) ℂ) :=
+  ⟨Matrix.PosSemidef.one, by rw [Matrix.trace_one, Fintype.card_fin]; norm_num⟩
+
+/-- The honest von Neumann floor fires on the concrete density `oneDensity_isDensity`: `S_vN ≤ log 1`. -/
+example : QIQTH.QuantumEntropy.vonNeumannEntropy oneDensity_isDensity ≤ Real.log 1 := by
+  letI : HolographicCapacityBound (Fin 1) (Real.log 1) := ⟨by simp⟩
+  exact area_floor_vonNeumann oneDensity_isDensity
 
 end QIQTH
