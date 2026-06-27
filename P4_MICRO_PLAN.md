@@ -237,7 +237,11 @@ via the trace, P4-MICRO supplies it via finite capacity.
   continuum local algebra is type III₁ — no finite trace, no `ρ_R` — so a finite-dim `R` is itself the holographic
   cutoff, not bookkeeping; `≤` is the safe form). Bound-class docstring rewritten to the regional `Q_R` reading.
   Doc-only; green.
-- [ ] **M-7 non-vacuity witness** — concrete `Fin n` instance + `example` firing the (bound-form) theorem.
+- [x] **M-7 non-vacuity witness** — ✅ **LANDED 2026-06-27**: `finCapacityExact n : HolographicCapacityExact (Fin n)
+  (Real.log n)` (a `@[reducible] def`, NOT a global instance — a deliberately-asserted witness, no resolution
+  pollution) + two `example`s firing `area_floor_of_microstate` (bound) and `area_floor_saturates` (exact) on it.
+  Proves the interface is inhabited and the bounds non-vacuous (mirrors `Phase5Master.of_le`). Green, standard 3,
+  budget 0.
 - [ ] **M-8 bridge remark** — connect to `FQBoundCGP.holographic_area_floor`; Route 1 (trace) vs Route 2 (capacity)
   deliver the same area term at different logical levels (kinematic vs dynamical).
 - [ ] **M-9 paper hook** — the GPT-5.5-pro one-paragraph framing (§3.1 verbatim-adapted): regional capacity `N_R`,
@@ -311,6 +315,11 @@ AND the `P4_WALL_CAMPAIGN_PLAN.md` checklist (note the P4-MICRO endpoint beside 
   `Q_R = log N_R` (distinguishable *regional* microstates / fixed-area sector / code subspace), an explicit type-I
   cutoff of the genuinely type-III₁ local algebra — granting finite-dim `R` is the holographic regularization, not
   bookkeeping. Doc-only; green. Next: **M-7** (`Fin n` non-vacuity witness firing the bound-form theorem).
+- 2026-06-27 — **M-7 LANDED (non-vacuity witness).** `finCapacityExact n : HolographicCapacityExact (Fin n)
+  (Real.log n)` (`@[reducible] def`, not a global instance) + two `example`s firing `area_floor_of_microstate` and
+  `area_floor_saturates` on it — the interface is inhabited, the bounds non-vacuous (fixed a `↑n+1` vs `↑(n+1)` cast
+  mismatch by stating saturation over a generic `m` with `[Nonempty (Fin m)]`). Green, standard 3, budget 0, full
+  `QIQTH` green. Next: **M-8** (bridge remark to `FQBoundCGP.holographic_area_floor` — Route 1 vs Route 2).
 
 ## 7. Files
 

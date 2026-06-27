@@ -131,7 +131,7 @@ theorem vonNeumannEntropy_le_log_card {n : Type*} [Fintype n] [DecidableEq n] {�
   simpa only [QIQTH.QuantumEntropy.vonNeumannEntropy] using key
 
 /-- **★★★ P4's holographic area floor for the VON NEUMANN entropy** (the honest C1 form).  Under the
-    finite-microstate postulate `MicrostatePostulate n areaTerm` (`log dim 𝓗_R = areaTerm = A/4ℓ_P²`), the von
+    finite-microstate postulate `HolographicCapacityBound n areaTerm` (`log dim 𝓗_R ≤ areaTerm = A/4ℓ_P²`), the von
     Neumann entropy of any regional density matrix obeys `S_vN(ρ) ≤ areaTerm`.  This is P4 stated for the genuine
     regional entropy `S_vN(ρ_R)`, not the record-law Shannon entropy — `vonNeumannEntropy_le_log_card` rewritten
     through the capacity bound (`HolographicCapacityBound`, the `≤`-form — all the floor needs).  Axiom-free; the
@@ -142,5 +142,32 @@ theorem area_floor_vonNeumann {n : Type*} [Fintype n] [DecidableEq n] {areaTerm 
     (h : QIQTH.QuantumEntropy.IsDensity ρ) :
     QIQTH.QuantumEntropy.vonNeumannEntropy h ≤ areaTerm :=
   le_trans (vonNeumannEntropy_le_log_card h) hcap.bound
+
+/-! ### Non-vacuity witness — the interface is inhabited and the floor is non-vacuous
+
+A concrete capacity postulate, mirroring `Phase5Master.of_le`: `Fin n` carries capacity `log n` (since
+`card (Fin n) = n`).  It is provided as a `def`, **not** a global `instance` — it is a *physics postulate* (asserted
+only where wanted), so it must not pollute typeclass resolution by making every `Fin n` automatically holographic.
+The `example`s below construct it locally (`letI`) and fire the floor theorems on it, demonstrating that
+`HolographicCapacityBound`/`HolographicCapacityExact` are non-empty and the bounds are not vacuous. -/
+
+/-- A concrete witness postulate: the `n`-microstate set `Fin n` has capacity exactly `log n`.  `@[reducible]`
+    (not `instance`) so it stays a deliberately-asserted witness, never auto-applied by typeclass resolution. -/
+@[reducible] def finCapacityExact (n : ℕ) : HolographicCapacityExact (Fin n) (Real.log n) :=
+  ⟨by rw [Fintype.card_fin]⟩
+
+/-- The bound-form floor fires on the witness: any Born record law on the `n` microstates obeys `S ≤ log n`. -/
+example (n : ℕ) (p : Fin n → ℝ) (hp : ∀ i, 0 ≤ p i) (h1 : ∑ i, p i = 1) :
+    QIQTH.BranchLedger.Shannon Finset.univ p ≤ Real.log n :=
+  letI := finCapacityExact n
+  area_floor_of_microstate p hp h1
+
+/-- The exact-form saturation fires on the witness: the maximally-mixed record on the `m` microstates saturates,
+    `S = log m` exactly. -/
+example (m : ℕ) [Nonempty (Fin m)] :
+    QIQTH.BranchLedger.Shannon Finset.univ (fun _ : Fin m => (Fintype.card (Fin m) : ℝ)⁻¹)
+      = Real.log m :=
+  letI := finCapacityExact m
+  area_floor_saturates
 
 end QIQTH

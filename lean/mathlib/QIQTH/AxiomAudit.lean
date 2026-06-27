@@ -6327,5 +6327,11 @@ namespace QIQTH.AxiomAudit
 -- (= implies ≤), so every floor theorem fires from an exact postulate too. The floor theorems
 -- (area_floor_of_microstate, holographic_area_floor_micro, area_floor_vonNeumann) now take the weaker Bound;
 -- area_floor_saturates keeps Exact. Formerly the single =-form MicrostatePostulate. Axiom-free (standard 3).
+#print axioms QIQTH.finCapacityExact
+-- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-7, non-vacuity witness): finCapacityExact n : HolographicCapacityExact
+-- (Fin n) (Real.log n) — a CONCRETE capacity postulate (card (Fin n) = n), proving the interface is INHABITED and
+-- the floor non-vacuous (mirrors Phase5Master.of_le). A @[reducible] def, NOT a global instance — a deliberately
+-- asserted physics witness, never auto-applied by typeclass resolution. The two `example`s in FQBoundMicro.lean fire
+-- area_floor_of_microstate (bound form) and area_floor_saturates (exact form) on it. Axiom-free (standard 3).
 
 end QIQTH.AxiomAudit
