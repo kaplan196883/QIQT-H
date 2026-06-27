@@ -1937,6 +1937,83 @@ theorem cayleyCutoff_defect_integral_tendsto_zero [Nontrivial H] (U : ℝ → (H
     rw [hfe]
     exact cayleyCutoff_sq_mul_tendsto_zero (ω : ℂ)
 
+/-- **The cutoff approaches the indicator of `{1}` in pointwise `L²`:** `‖(ψ_N z : ℂ) − 1_{z=1}‖² → 0`.  At `z = 1`
+    the cutoff is constantly `1` (= the indicator), so the difference is `0`; off `1`, `ψ_N(z) → 0` and the indicator
+    is `0`.  The pointwise integrand convergence DCT-2 consumes to show `∫ ‖ψ_N − 1_{{1}}‖² dμ_x → 0` (the L²-Cauchy
+    input). -/
+theorem cayleyCutoff_sub_indicator_sq_tendsto_zero (z : ℂ) :
+    Filter.Tendsto
+      (fun N => ‖(cayleyCutoff N z : ℂ) - (if z = 1 then (1 : ℂ) else 0)‖ ^ 2) Filter.atTop (nhds 0) := by
+  by_cases h : z = 1
+  · simp only [if_pos h]
+    have hfe : (fun N => ‖(cayleyCutoff N z : ℂ) - 1‖ ^ 2) = (fun _ => (0 : ℝ)) := by
+      funext N
+      have : (cayleyCutoff N z : ℂ) = 1 := by simp [cayleyCutoff, h]
+      rw [this, sub_self, norm_zero]; norm_num
+    rw [hfe]; exact tendsto_const_nhds
+  · simp only [if_neg h]
+    have hfe : (fun N => ‖(cayleyCutoff N z : ℂ) - 0‖ ^ 2) = (fun N => (cayleyCutoff N z) ^ 2) := by
+      funext N
+      rw [sub_zero, Complex.norm_real, Real.norm_of_nonneg (cayleyCutoff_pos N _).le]
+    rw [hfe]
+    simpa using (cayleyCutoff_tendsto_zero_of_ne h).pow 2
+
+/-- **★★ The second dominated-convergence step (the L²-Cauchy input):** `∫ ‖ψ_N(ω) − 1_{{1}}(ω)‖² dμ_x → 0`, i.e.
+    the cutoff sequence converges to the indicator of `{1}` in `L²(μ_x)`.  Dominated convergence with the
+    `(z − 1)`-free cutoff: the integrand `‖ψ_N − 1_{{1}}‖²` is bounded by the integrable constant `4`
+    (`ψ_N ≤ 1`, `‖1_{{1}}‖ ≤ 1`), `AEStronglyMeasurable` (continuous cutoff minus the indicator of the measurable
+    `{1}`), and `→ 0` pointwise (`cayleyCutoff_sub_indicator_sq_tendsto_zero`).  An `L²(μ_x)`-convergent sequence is
+    `L²`-Cauchy, so this feeds `cayley_cfc_cauchySeq_of_integral` (via the triangle inequality) to give the **strong
+    limit** `w = lim cfc(ψ_N) V x` (`H` complete) — the existence input the atom-killing needs.  Axiom-free. -/
+theorem cayleyCutoff_L2_tendsto_zero [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    Filter.Tendsto
+      (fun N => ∫ ω, ‖(cayleyCutoff N (ω : ℂ) : ℂ)
+          - (if (ω : ℂ) = 1 then (1 : ℂ) else 0)‖ ^ 2
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+      Filter.atTop (nhds 0) := by
+  haveI : IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+    cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC x
+  set μ := cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x with hμ
+  have hSmeas : MeasurableSet
+      {ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) | (ω : ℂ) = 1} :=
+    (isClosed_eq continuous_subtype_val continuous_const).measurableSet
+  have hindeq : (fun ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) =>
+        if (ω : ℂ) = 1 then (1 : ℂ) else 0)
+      = {ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) | (ω : ℂ) = 1}.indicator
+          (fun _ => (1 : ℂ)) := by
+    funext ω; simp only [Set.indicator_apply, Set.mem_setOf_eq]
+  rw [show (0 : ℝ) = ∫ _ω, (0 : ℝ) ∂μ by simp]
+  apply tendsto_integral_of_dominated_convergence (bound := fun _ => (4 : ℝ))
+  · intro N
+    have hg1 : AEStronglyMeasurable
+        (fun ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) =>
+          (cayleyCutoff N (ω : ℂ) : ℂ)) μ :=
+      (Complex.continuous_ofReal.comp ((cayleyCutoff_continuous N).comp continuous_subtype_val)).aestronglyMeasurable
+    have hg2 : AEStronglyMeasurable
+        (fun ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) =>
+          if (ω : ℂ) = 1 then (1 : ℂ) else 0) μ := by
+      rw [hindeq]; exact (measurable_const.indicator hSmeas).aestronglyMeasurable
+    exact (hg1.sub hg2).norm.pow 2
+  · exact integrable_const 4
+  · intro N
+    filter_upwards with ω
+    have hpsi : ‖(cayleyCutoff N (ω : ℂ) : ℂ)‖ ≤ 1 := by
+      rw [Complex.norm_real, Real.norm_of_nonneg (cayleyCutoff_pos N _).le]
+      exact cayleyCutoff_le_one N _
+    have hind : ‖(if (ω : ℂ) = 1 then (1 : ℂ) else 0)‖ ≤ 1 := by
+      by_cases hω : (ω : ℂ) = 1 <;> simp [hω]
+    rw [Real.norm_of_nonneg (by positivity)]
+    have hb : ‖(cayleyCutoff N (ω : ℂ) : ℂ) - (if (ω : ℂ) = 1 then (1 : ℂ) else 0)‖ ≤ 2 := by
+      calc ‖(cayleyCutoff N (ω : ℂ) : ℂ) - (if (ω : ℂ) = 1 then (1 : ℂ) else 0)‖
+          ≤ ‖(cayleyCutoff N (ω : ℂ) : ℂ)‖ + ‖(if (ω : ℂ) = 1 then (1 : ℂ) else 0)‖ := norm_sub_le _ _
+        _ ≤ 2 := by linarith
+    nlinarith [hb, norm_nonneg ((cayleyCutoff N (ω : ℂ) : ℂ) - (if (ω : ℂ) = 1 then (1 : ℂ) else 0))]
+  · filter_upwards with ω
+    exact cayleyCutoff_sub_indicator_sq_tendsto_zero (ω : ℂ)
+
 end SelfAdjoint
 
 end QIQTH.Spectral

@@ -553,8 +553,15 @@ Also ✅ `cayleyCutoff_defect_integral_tendsto_zero` `[Nontrivial H]` — **DCT-
 `‖(ω−1)ψ_N‖²=‖ω−1‖²ψ_N² ≤ 4` (since `σ(V)⊆S¹` ⟹ `‖(ω:ℂ)‖=1` ⟹ `‖ω−1‖≤2`, and `ψ_N≤1`), continuous, `→0` ptwise
 (`cayleyCutoff_sq_mul_tendsto_zero`). Stated in the form `∫‖F_N ω.1‖²dμ_x→0` with `F_N(z)=(z−1)ψ_N(z)` — it feeds
 `cayley_cfc_tendsto_zero_of_integral` to give `(V−1)cfc(ψ_N)V x = cfc((z−1)ψ_N)V x → 0`, forcing `(V−1)w=0` ⟹ `w=0`.
-**Next (remaining for μ_x({1})=0):** DCT-2 `∫‖ψ_N−1_{{1}}‖²→0` (⟹ L²-Cauchy ⟹ `cfc(ψ_N)V x→w` via existence-half) +
-the final assembly (`(V−1)w=0` ⟹ `w=0`; `μ_x({1})=lim∫ψ_N=re⟪x,w⟫=0`).
+Also ✅ `cayleyCutoff_sub_indicator_sq_tendsto_zero` (helper: `‖(ψ_N z:ℂ)−1_{z=1}‖²→0` ptwise, by cases) +
+`cayleyCutoff_L2_tendsto_zero` `[Nontrivial H]` — **DCT-2, the L²-Cauchy input**: `∫ ‖ψ_N(ω)−1_{{1}}(ω)‖² dμ_x → 0`
+(the cutoff → the indicator of `{1}` in `L²(μ_x)`). Dominated convergence: integrand `≤ 4` (`ψ_N≤1`, `‖1_{{1}}‖≤1`),
+`AEStronglyMeasurable` (continuous cutoff − indicator of the measurable `{1}`, `Measurable.indicator`+`isClosed_eq`),
+`→0` ptwise (the helper). An L²-convergent sequence is L²-Cauchy, so this feeds `cayley_cfc_cauchySeq_of_integral`
+(via the triangle ineq) ⟹ the **strong limit** `w = lim cfc(ψ_N)V x` (`H` complete) — the existence input.
+**ALL THREE DCT LIMITS NOW DONE.** **Next (the final assembly ⟹ μ_x({1})=0):** L²-Cauchy from DCT-2 (triangle:
+`∫‖ψ_m−ψ_n‖² ≤ 2∫‖ψ_m−1_{{1}}‖²+2∫‖ψ_n−1_{{1}}‖²`) ⟹ existence-half ⟹ `cfc(ψ_N)V x→w`; DCT-3 ⟹ `(V−1)w=0` ⟹
+`w=0` (`cayley_one_sub_injective`); DCT-1 + `re⟪x,cfc(ψ_N)V x⟫=∫ψ_N` + inner-continuity ⟹ `μ_x({1})=re⟪x,w⟫=0`.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

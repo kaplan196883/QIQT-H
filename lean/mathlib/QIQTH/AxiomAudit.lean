@@ -5127,6 +5127,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyCutoff_sq_mul_tendsto_zero
 #print axioms QIQTH.Spectral.cayleyCutoff_integral_tendsto_atom
 #print axioms QIQTH.Spectral.cayleyCutoff_defect_integral_tendsto_zero
+#print axioms QIQTH.Spectral.cayleyCutoff_sub_indicator_sq_tendsto_zero
+#print axioms QIQTH.Spectral.cayleyCutoff_L2_tendsto_zero
+-- ★★ P4 WALL — THE SECOND DCT STEP (L²-Cauchy input): cayleyCutoff_L2_tendsto_zero [Nontrivial H] —
+-- ∫ ‖ψ_N(ω) − 1_{{1}}(ω)‖² dμ_x → 0, i.e. the cutoff → the indicator of {1} in L²(μ_x). Dominated convergence:
+-- integrand ‖ψ_N − 1_{{1}}‖² ≤ 4 (ψ_N≤1, ‖1_{{1}}‖≤1), AEStronglyMeasurable (continuous cutoff − indicator of the
+-- measurable {1}), → 0 ptwise (cayleyCutoff_sub_indicator_sq_tendsto_zero, the helper). An L²-convergent sequence
+-- is L²-Cauchy, so this feeds cayley_cfc_cauchySeq_of_integral (via the triangle ineq) ⟹ strong limit
+-- w = lim cfc(ψ_N)V x (H complete) — the EXISTENCE input the atom-killing needs. Axiom-free.
 -- ★★ P4 WALL — THE THIRD DCT STEP OF THE ATOM-KILLING: cayleyCutoff_defect_integral_tendsto_zero [Nontrivial H]
 -- — ∫ ‖(ω−1)·ψ_N(ω)‖² dμ_x → 0. Dominated convergence with the (z−1)-weighted cutoff: integrand
 -- ‖(ω−1)ψ_N‖²=‖ω−1‖²ψ_N² ≤ 4 (σ(V)⊆S¹ ⟹ ‖(ω:ℂ)‖=1 ⟹ ‖ω−1‖≤2; ψ_N≤1), continuous, → 0 ptwise

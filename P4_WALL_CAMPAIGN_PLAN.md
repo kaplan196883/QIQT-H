@@ -409,8 +409,12 @@ Also ✅ `cayleyCutoff_integral_tendsto_atom` `[Nontrivial H]` (**the first DCT 
 Also ✅ `cayleyCutoff_defect_integral_tendsto_zero` `[Nontrivial H]` (**DCT-3** — `∫‖(ω−1)ψ_N‖²dμ_x→0`; dominated
 convergence, integrand `‖ω−1‖²ψ_N²≤4` via the circle bound `‖(ω:ℂ)‖=1`+`ψ_N≤1`, `→0` ptwise; in the form
 `∫‖F_N ω.1‖²dμ_x→0`, `F_N(z)=(z−1)ψ_N(z)` — feeds `cayley_cfc_tendsto_zero_of_integral` ⟹ `(V−1)w=0`).
-**Next (remaining for μ_x({1})=0):** DCT-2 `∫‖ψ_N−1_{{1}}‖²→0` (⟹ L²-Cauchy ⟹ `cfc(ψ_N)V x→w`) + final assembly
-(`(V−1)w=0` ⟹ `w=0` by `ker(1−V)=0`) ⟹ `μ_x({1})=re⟪x,w⟫=0`;
+Also ✅ `cayleyCutoff_sub_indicator_sq_tendsto_zero` (helper) + `cayleyCutoff_L2_tendsto_zero` `[Nontrivial H]`
+(**DCT-2, the L²-Cauchy input** — `∫‖ψ_N−1_{{1}}‖²dμ_x→0`; dominated convergence, integrand `≤4`, indicator
+measurability via `Measurable.indicator`+`isClosed_eq`, `→0` ptwise; ⟹ L²-Cauchy ⟹ `cfc(ψ_N)V x→w` via the
+existence-half). **ALL THREE DCT LIMITS DONE.**
+**Next (final assembly ⟹ μ_x({1})=0):** L²-Cauchy from DCT-2 (triangle) ⟹ existence-half ⟹ `cfc(ψ_N)V x→w`;
+DCT-3 ⟹ `(V−1)w=0` ⟹ `w=0` (`ker(1−V)=0`); DCT-1 + inner-continuity ⟹ `μ_x({1})=re⟪x,w⟫=0`;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
