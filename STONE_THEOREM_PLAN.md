@@ -567,10 +567,15 @@ existence input): `cfc(ψ_N) V x` is a `CauchySeq` in `H` (hence converges, `H` 
 `cayley_cfc_cauchySeq_of_integral` (the existence half) gives the `CauchySeq`. *(Build notes: removed `set μ/V`
 — `set` made them opaque, breaking defeq with the lemma-produced goals; used `apply integral_mono_of_nonneg` so
 `f/g/μ` unify from the goal before the subgoals; `integral_nonneg`/`sq_nonneg` need the integrand pinned via an
-explicit `have`.)* **Next (the final assembly ⟹ μ_x({1})=0):** `cauchySeq_tendsto_of_complete` ⟹ `cfc(ψ_N)V x→w`;
-DCT-3 + convergence-half ⟹ `(V−1)cfc(ψ_N)V x=cfc((z−1)ψ_N)V x→0` and `→(V−1)w`, so `(V−1)w=0` ⟹ `w=0`
-(`cayley_one_sub_injective`); DCT-1 + `re⟪x,cfc(ψ_N)V x⟫=∫ψ_N` (`integral_re_cfc_ofReal`) + inner-continuity ⟹
-`μ_x({1})=re⟪x,w⟫=0`.
+explicit `have`.)*
+Also ✅ `cayleyCutoff_cfc_tendsto_zero` `[Nontrivial H]` — **★★★ the cutoff CFC vectors tend to `0`**: `cfc(ψ_N) V x →
+0` strongly in `H` (the operator heart of the atom-killing). Assembles: (existence) `cauchySeq_tendsto_of_complete`
+on the CauchySeq ⟹ `cfc(ψ_N)V x→w`; (`(V−1)w=0`) the defect `(V−1)cfc(ψ_N)V x = cfc((z−1)ψ_N)V x → 0` (DCT-3 fed
+through `cayley_cfc_tendsto_zero_of_integral`, the convergence half — the `cfc(z−1)V=V−1` step is `cfc_mul`+`cfc_sub`
++`cayley_cfc_id`/`_one`) and `→ (V−1)w` by continuity of `V−1`, so `tendsto_nhds_unique` ⟹ `(V−1)w=0`; (`w=0`)
+`ker(1−V)=0` (`cayley_one_sub_injective`). *Built green first try.* **Next (the SHORT final step ⟹ μ_x({1})=0):**
+DCT-1 (`∫ψ_N dμ→μ_x({1})`) + `∫ψ_N dμ = re⟪x,cfc(ψ_N)V x⟫` (`integral_re_cfc_ofReal`) + inner/re-continuity on
+`cfc(ψ_N)V x→0` ⟹ `μ_x({1}).toReal = re⟪x,0⟫ = 0` ⟹ `μ_x({1})=0` (finite measure).
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

@@ -2108,6 +2108,68 @@ theorem cayleyCutoff_cfc_cauchySeq [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
         rw [integral_add ((hint m).const_mul 2) ((hint n).const_mul 2), integral_const_mul, integral_const_mul]
     _ < ε := by have hbm := key m hm; have hbn := key n hn; linarith
 
+/-- **★★★ The cutoff functional-calculus vectors tend to `0`:** `cfc(ψ_N) V x → 0` strongly in `H`.  This is the
+    operator heart of the atom-killing, assembling: (existence) the `CauchySeq` converges to some `w`
+    (`cauchySeq_tendsto_of_complete` on `cayleyCutoff_cfc_cauchySeq`); (`(V−1)w = 0`) the defect
+    `(V−1)·cfc(ψ_N) V x = cfc((z−1)ψ_N) V x → 0` (DCT-3 fed through `cayley_cfc_tendsto_zero_of_integral`, the
+    convergence half) and also `→ (V−1)w` by continuity of `V−1`, so by uniqueness of limits `(V−1)w = 0`;
+    (`w = 0`) `ker(1−V) = 0` (`cayley_one_sub_injective`).  Hence the limit is `0`.  Combined with
+    `∫ ψ_N dμ_x = re⟪x, cfc(ψ_N) V x⟫ → re⟪x, 0⟫ = 0` and DCT-1, this kills the Cayley spectral atom `μ_x({1}) = 0`.
+    Axiom-free; free scalar; no UV datum. -/
+theorem cayleyCutoff_cfc_tendsto_zero [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    Filter.Tendsto (fun N => cfc (fun z => (cayleyCutoff N z : ℂ))
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x) Filter.atTop (nhds 0) := by
+  -- (existence) the Cauchy sequence converges to some w
+  obtain ⟨w, hw⟩ := cauchySeq_tendsto_of_complete (cayleyCutoff_cfc_cauchySeq U hgrp hU0 hUinner hUbd hSC x)
+  -- it suffices to show w = 0
+  suffices hw0 : w = 0 by rwa [hw0] at hw
+  -- cfc((z−1)ψ_N) V x = (V−1)(cfc(ψ_N) V x), the operator defect
+  have hcoord : cfc (fun z : ℂ => z - 1) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+      = (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) - 1 := by
+    rw [show (fun z : ℂ => z - 1) = (fun z => (id : ℂ → ℂ) z - (1 : ℂ → ℂ) z) from by funext z; simp]
+    rw [cfc_sub (f := (id : ℂ → ℂ)) (g := (1 : ℂ → ℂ))
+      (a := (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)),
+      cayley_cfc_id U hgrp hU0 hUinner hUbd hSC, cayley_cfc_one U hgrp hU0 hUinner hUbd hSC]
+  have hid : ∀ N, cfc (fun z => (z - 1) * (cayleyCutoff N z : ℂ))
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x
+      = ((cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) - 1)
+        (cfc (fun z => (cayleyCutoff N z : ℂ)) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x) := by
+    intro N
+    rw [cfc_mul (fun z => z - 1) (fun z => (cayleyCutoff N z : ℂ))
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+        ((continuous_id.sub continuous_const).continuousOn)
+        (Complex.continuous_ofReal.comp (cayleyCutoff_continuous N)).continuousOn,
+      ContinuousLinearMap.mul_apply, hcoord]
+  -- the defect tends to 0 (DCT-3 through the convergence half)
+  have hdefect := cayley_cfc_tendsto_zero_of_integral U hgrp hU0 hUinner hUbd hSC
+    (fun N z => (z - 1) * (cayleyCutoff N z : ℂ))
+    (fun N => ((continuous_id.sub continuous_const).mul
+      (Complex.continuous_ofReal.comp (cayleyCutoff_continuous N))).continuousOn) x
+    (cayleyCutoff_defect_integral_tendsto_zero U hgrp hU0 hUinner hUbd hSC x)
+  simp only [hid] at hdefect
+  -- the defect also tends to (V−1)w by continuity
+  have hcont : Filter.Tendsto
+      (fun N => ((cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) - 1)
+        (cfc (fun z => (cayleyCutoff N z : ℂ)) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) x))
+      Filter.atTop (nhds (((cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) - 1) w)) :=
+    (((cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) - 1).continuous.tendsto w).comp hw
+  -- uniqueness of limits ⟹ (V−1)w = 0
+  have hVw : ((cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) - 1) w = 0 :=
+    (tendsto_nhds_unique hdefect hcont).symm
+  -- w = 0 via ker(1−V) = 0
+  have hVwEq : (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) w = w := by
+    rw [ContinuousLinearMap.sub_apply, ContinuousLinearMap.one_apply, sub_eq_zero] at hVw
+    exact hVw
+  apply cayley_one_sub_injective U hgrp hU0 hUinner hUbd hSC
+  show w - cayley U hgrp hU0 hUinner hUbd hSC w = 0 - cayley U hgrp hU0 hUinner hUbd hSC 0
+  rw [show cayley U hgrp hU0 hUinner hUbd hSC w
+      = (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) w from rfl, hVwEq, sub_self,
+    show cayley U hgrp hU0 hUinner hUbd hSC 0
+      = (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) 0 from rfl, map_zero, sub_zero]
+
 end SelfAdjoint
 
 end QIQTH.Spectral

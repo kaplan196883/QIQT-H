@@ -5130,6 +5130,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyCutoff_sub_indicator_sq_tendsto_zero
 #print axioms QIQTH.Spectral.cayleyCutoff_L2_tendsto_zero
 #print axioms QIQTH.Spectral.cayleyCutoff_cfc_cauchySeq
+#print axioms QIQTH.Spectral.cayleyCutoff_cfc_tendsto_zero
+-- ★★★ P4 WALL — THE CUTOFF CFC VECTORS TEND TO 0 (the operator heart of the atom-killing):
+-- cayleyCutoff_cfc_tendsto_zero [Nontrivial H] — cfc(ψ_N) V x → 0 strongly in H. Assembles: (existence) the
+-- CauchySeq converges to w (cauchySeq_tendsto_of_complete on cayleyCutoff_cfc_cauchySeq); ((V−1)w=0) the defect
+-- (V−1)cfc(ψ_N)V x = cfc((z−1)ψ_N)V x → 0 (DCT-3 via cayley_cfc_tendsto_zero_of_integral, the convergence half)
+-- and → (V−1)w by continuity, so tendsto_nhds_unique ⟹ (V−1)w=0; (w=0) ker(1−V)=0 (cayley_one_sub_injective).
+-- The cfc(z−1)V=V−1 step is cfc_mul + cfc_sub + cayley_cfc_id/_one. With DCT-1 + inner-continuity this kills the
+-- Cayley spectral atom μ_x({1})=0. Axiom-free.
 -- ★★★ P4 WALL — THE CUTOFF CFC VECTORS FORM A CAUCHY SEQUENCE (the existence input): cayleyCutoff_cfc_cauchySeq
 -- [Nontrivial H] — cfc(ψ_N) V x is a CauchySeq in H (hence converges, H complete). The cutoff sequence is
 -- L²(μ_x)-Cauchy from DCT-2 (cayleyCutoff_L2_tendsto_zero) + the pointwise quadratic triangle ‖a−b‖²≤2‖a−c‖²+2‖b−c‖²
