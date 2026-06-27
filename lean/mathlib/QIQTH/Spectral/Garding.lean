@@ -1844,6 +1844,48 @@ theorem cayleyCutoff_sq_mul_tendsto_zero (z : ℂ) :
     rw [show (0 : ℝ) = ‖z - 1‖ ^ 2 * (0 : ℝ) ^ 2 by ring]
     exact ht.const_mul (‖z - 1‖ ^ 2)
 
+/-- **★★ The first dominated-convergence step of the atom-killing:** `∫ ψ_N(ω) dμ_x → μ_x({1})`, where `{1}` is
+    the singleton `{ω ∈ σ(V) | (ω : ℂ) = 1}` (the Cayley exceptional point).  Dominated convergence
+    (`tendsto_integral_of_dominated_convergence`) with the cutoff scaffolding: each `ψ_N ∘ ↑` is continuous (hence
+    measurable), bounded by the integrable constant `1` (`cayleyCutoff_le_one`, `μ_x` finite), and converges
+    pointwise to the indicator of `{1}` (`cayleyCutoff_tendsto_indicator`); the limit integral
+    `∫ 𝟙_{{1}} dμ_x = μ_x({1})` is `integral_indicator_one`.  Combined with the integral identity
+    `∫ ψ_N dμ_x = re⟪x, cfc(ψ_N) V x⟫`, this evaluates the diagonal limit of the spectral projection toward `1` —
+    the value the strong limit `w = lim cfc(ψ_N) V x` must reproduce (and which `ker(1 − V) = 0` forces to `0`).
+    Axiom-free; free scalar; no UV datum. -/
+theorem cayleyCutoff_integral_tendsto_atom [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (x : H) :
+    Filter.Tendsto
+      (fun N => ∫ ω, cayleyCutoff N (ω : ℂ) ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x))
+      Filter.atTop
+      (nhds ((cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x
+        {ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) | (ω : ℂ) = 1}).toReal)) := by
+  haveI : IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x) :=
+    cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC x
+  set μ := cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC x with hμ
+  have hSmeas : MeasurableSet
+      {ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) | (ω : ℂ) = 1} :=
+    (isClosed_eq continuous_subtype_val continuous_const).measurableSet
+  rw [show (μ {ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) | (ω : ℂ) = 1}).toReal
+      = ∫ ω, ({ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) | (ω : ℂ) = 1}).indicator
+          (fun _ => (1 : ℝ)) ω ∂μ from (integral_indicator_one hSmeas).symm]
+  apply tendsto_integral_of_dominated_convergence (bound := fun _ => (1 : ℝ))
+  · intro N
+    exact ((cayleyCutoff_continuous N).comp continuous_subtype_val).aestronglyMeasurable
+  · exact integrable_const 1
+  · intro N
+    filter_upwards with ω
+    rw [Real.norm_of_nonneg (cayleyCutoff_pos N _).le]
+    exact cayleyCutoff_le_one N _
+  · filter_upwards with ω
+    have heq : ({ω : spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) | (ω : ℂ) = 1}).indicator
+        (fun _ => (1 : ℝ)) ω = if (ω : ℂ) = 1 then (1 : ℝ) else 0 := by
+      simp only [Set.indicator_apply, Set.mem_setOf_eq]
+    rw [heq]
+    exact cayleyCutoff_tendsto_indicator (ω : ℂ)
+
 end SelfAdjoint
 
 end QIQTH.Spectral

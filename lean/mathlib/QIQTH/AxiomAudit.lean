@@ -5125,6 +5125,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyCutoff_tendsto_zero_of_ne
 #print axioms QIQTH.Spectral.cayleyCutoff_tendsto_indicator
 #print axioms QIQTH.Spectral.cayleyCutoff_sq_mul_tendsto_zero
+#print axioms QIQTH.Spectral.cayleyCutoff_integral_tendsto_atom
+-- ★★ P4 WALL — THE FIRST DCT STEP OF THE ATOM-KILLING: cayleyCutoff_integral_tendsto_atom [Nontrivial H] —
+-- ∫ ψ_N(ω) dμ_x → μ_x({1}) where {1} = {ω ∈ σ(V) | (ω:ℂ)=1}. Dominated convergence
+-- (tendsto_integral_of_dominated_convergence) with the cutoff scaffolding: ψ_N∘↑ continuous, ≤1 (integrable
+-- dominator, μ_x finite), → 1_{{1}} ptwise (cayleyCutoff_tendsto_indicator); limit ∫1_{{1}}dμ_x=μ_x({1})
+-- (integral_indicator_one); {1} measurable via isClosed_eq. With ∫ψ_N dμ_x=re⟪x,cfc(ψ_N)V x⟫ this evaluates the
+-- diagonal limit of the spectral projection toward 1 — the value lim cfc(ψ_N)V x must reproduce (forced to 0 by
+-- ker(1−V)=0). Axiom-free.
 -- ★ P4 WALL — THE RATIONAL CUTOFF SCAFFOLDING (toward μ_x({1})=0): cayleyCutoff N z := (1+(N+1)‖z−1‖²)⁻¹ and its
 -- analytic properties — cayleyCutoff_pos (0<ψ_N), _le_one (ψ_N≤1, the DCT dominator), _continuous (each ψ_N cts),
 -- _tendsto_zero_of_ne (z≠1 ⟹ ψ_N(z)→0, denom→∞ via inv_tendsto_atTop), _tendsto_indicator (ψ_N→1_{z=1} ptwise,

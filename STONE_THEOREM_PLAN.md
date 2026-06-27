@@ -539,6 +539,15 @@ analytic properties: `0<ψ_N≤1` (the DCT dominator), each `ψ_N` continuous, `
 `∫ψ_N dμ_x→μ_x({1})`), and `‖z−1‖²·ψ_N²→0` (the integrand for `∫‖(ω−1)ψ_N‖²→0`, dominated by the defect-energy
 integrand `‖ω−1‖²`). Pure real analysis, `U`-independent. **Next:** the 3 DCT limits over `μ_x` (using these +
 `cayley_defect_energy` as the dominator) + the L²→strong bridge ⟹ `μ_x({1})=0`.
+Also ✅ `cayleyCutoff_integral_tendsto_atom` `[Nontrivial H]` — **the first DCT step of the atom-killing**:
+`∫ ψ_N(ω) dμ_x → μ_x({1})` where `{1} = {ω ∈ σ(V) | (ω:ℂ)=1}`. Dominated convergence
+(`tendsto_integral_of_dominated_convergence`) with the cutoff scaffolding: `ψ_N∘↑` continuous, `≤1` (the integrable
+dominator, `μ_x` finite), `→1_{{1}}` ptwise (`cayleyCutoff_tendsto_indicator`); the limit `∫1_{{1}}dμ_x=μ_x({1})`
+is `integral_indicator_one`; `{1}` measurable via `isClosed_eq`. With `∫ψ_N dμ_x = re⟪x,cfc(ψ_N)V x⟫`
+(`integral_re_cfc_ofReal`) this evaluates the diagonal limit of the spectral projection toward `1` — the value
+`w = lim cfc(ψ_N)V x` must reproduce. **Next (remaining for μ_x({1})=0):** DCT-2 `∫‖ψ_N−1_{{1}}‖²→0` (⟹ L²-Cauchy
+⟹ `cfc(ψ_N)V x→w` via existence-half) + DCT-3 `∫‖(ω−1)ψ_N‖²→0` (⟹ `(V−1)cfc(ψ_N)V x→0` via convergence-half
+⟹ `(V−1)w=0` ⟹ `w=0` by `cayley_one_sub_injective`); then `μ_x({1})=lim∫ψ_N=re⟪x,w⟫=0`.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`

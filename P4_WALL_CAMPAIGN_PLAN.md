@@ -403,8 +403,11 @@ Also ✅ `cayleyCutoff` + scaffolding (`_pos`/`_le_one`/`_continuous`/`_tendsto_
 `_sq_mul_tendsto_zero`) (**the rational cutoff sequence** `ψ_N(z)=(1+(N+1)‖z−1‖²)⁻¹`: `0<ψ_N≤1`, continuous,
 `ψ_N→0` off 1, `ψ_N→1_{z=1}` ptwise, `‖z−1‖²ψ_N²→0`; pure real analysis, `U`-independent — the DCT approximation
 device that kills the atom).
-**Next:** `μ_x({1})=0` via the 3 DCT limits over `μ_x` (using the cutoff scaffolding + `cayley_defect_energy`
-dominator) + the L²→strong bridge + `ker(1−V)=0`;
+Also ✅ `cayleyCutoff_integral_tendsto_atom` `[Nontrivial H]` (**the first DCT step** — `∫ψ_N(ω)dμ_x→μ_x({1})`,
+`{1}={ω∈σ(V)|(ω:ℂ)=1}`; dominated convergence with the cutoff scaffolding, limit `∫1_{{1}}dμ_x=μ_x({1})` via
+`integral_indicator_one`, `{1}` measurable via `isClosed_eq`).
+**Next (remaining for μ_x({1})=0):** DCT-2 `∫‖ψ_N−1_{{1}}‖²→0` (⟹ L²-Cauchy ⟹ `cfc(ψ_N)V x→w`) + DCT-3
+`∫‖(ω−1)ψ_N‖²→0` (⟹ `(V−1)w=0` ⟹ `w=0` by `ker(1−V)=0`) ⟹ `μ_x({1})=re⟪x,w⟫=0`;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM
