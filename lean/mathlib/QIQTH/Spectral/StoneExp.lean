@@ -1088,6 +1088,111 @@ theorem cayleyStoneU_comm_cayleyUnitary [Nontrivial H] (U : ℝ → (H →L[ℂ]
   rw [heq] at hL
   exact tendsto_nhds_unique hL hR
 
+/-- **★★★★ The spectral action of the Stone group on the cfc core:** `U_t (cfc φ V z) = cfc(e_t·φ) V z`.  On the
+    spectral-calculus vectors `cfc φ V z` (with `φ` and every `e_t·φ` continuous on `σ(V)` — e.g. `φ` vanishing at the
+    excluded point `1`, so the symbol stays continuous), the abstract strong-limit group `U_t` acts by **multiplying
+    the symbol by `e_t(ω) = exp(it·c(ω))`**.  Proof: `cfc(g_{t,N}) V (cfc φ V z) = cfc(g_{t,N}·φ) V z` (`cfc_mul`),
+    `→ U_t(cfc φ V z)` (`cayleyStoneU_tendsto`); and `cfc(g_{t,N}·φ) V z → cfc(e_t·φ) V z` since the `L²`-defect is
+    `∫ ‖(g_{t,N} − e_t)φ‖² = ∫ ψ_N²|φ|² ≤ M²∫ ψ_N² → 0` (`cayley_cfc_sub_norm_sq_integral` +
+    `cayleyExpBump_sub_norm` + `cayleyCutoff_sq_integral_tendsto_zero`, `M` the sup of `|φ|` on the compact `σ(V)`);
+    uniqueness.  This identifies the abstract `U_t` with the **bounded-Borel functional calculus `cfc(e_t·)`** on a
+    core — the concrete spectral meaning of `U_t = exp(it A)`, and the gateway to differentiating `t ↦ U_t (cfc φ V z)`
+    to read off the generator.  Axiom-free; free scalar; no UV datum. -/
+theorem cayleyStoneU_cfc [Nontrivial H] (U : ℝ → (H →L[ℂ] H))
+    (hgrp : ∀ s t, U (s + t) = U s ∘L U t) (hU0 : U 0 = 1)
+    (hUinner : ∀ t a b, (inner ℂ (U t a) (U t b) : ℂ) = inner ℂ a b)
+    (hUbd : ∀ (t : ℝ) (y : H), ‖U t y‖ ≤ ‖y‖) (hSC : ∀ y : H, Continuous (fun t => U t y)) (φ : ℂ → ℂ)
+    (hφ : ContinuousOn φ (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)))
+    (hetφ : ∀ r : ℝ, ContinuousOn (fun ω => cayleyExp r ω * φ ω)
+      (spectrum ℂ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H))) (t : ℝ) (z : H) :
+    cayleyStoneU U hgrp hU0 hUinner hUbd hSC t
+        (cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)
+      = cfc (fun ω => cayleyExp t ω * φ ω)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z := by
+  haveI : IsFiniteMeasure (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC z) :=
+    cayleyScalarMeasure_isFiniteMeasure U hgrp hU0 hUinner hUbd hSC z
+  obtain ⟨M, hM⟩ := (cayley_spectrum_isCompact U hgrp hU0 hUinner hUbd hSC).exists_bound_of_continuousOn hφ
+  -- `U_t (cfc φ V z)` is the strong limit of `cfc(g_{t,N}·φ) V z`
+  have hmul : ∀ N, cfc (cayleyExpBump t N) (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+        (cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)
+      = cfc (fun ω => cayleyExpBump t N ω * φ ω)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z := by
+    intro N
+    rw [← ContinuousLinearMap.mul_apply,
+      ← cfc_mul (cayleyExpBump t N) φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H)
+        (cayleyExpBump_continuousOn U hgrp hU0 hUinner hUbd hSC t N) hφ]
+  have hL : Filter.Tendsto (fun N => cfc (fun ω => cayleyExpBump t N ω * φ ω)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z) Filter.atTop
+      (nhds (cayleyStoneU U hgrp hU0 hUinner hUbd hSC t
+        (cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z))) := by
+    have h := cayleyStoneU_tendsto U hgrp hU0 hUinner hUbd hSC t
+      (cfc φ (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)
+    simpa only [hmul] using h
+  -- `cfc(g_{t,N}·φ) V z → cfc(e_t·φ) V z` in `L²` hence strongly
+  have hdiff : Filter.Tendsto (fun N => cfc (fun ω => cayleyExpBump t N ω * φ ω)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z
+      - cfc (fun ω => cayleyExp t ω * φ ω)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z) Filter.atTop (nhds 0) := by
+    rw [tendsto_zero_iff_norm_tendsto_zero]
+    have hψsq := cayleyCutoff_sq_integral_tendsto_zero U hgrp hU0 hUinner hUbd hSC z
+    have hsqrt : Filter.Tendsto (fun N => Real.sqrt (M ^ 2 * ∫ ω, (cayleyCutoff N (ω : ℂ)) ^ 2
+        ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC z))) Filter.atTop (nhds 0) := by
+      have h := (Real.continuous_sqrt.tendsto (M ^ 2 * 0)).comp (hψsq.const_mul (M ^ 2))
+      simpa using h
+    have hint2 : ∀ N, Integrable (fun ω : spectrum ℂ
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) => (cayleyCutoff N (ω : ℂ)) ^ 2)
+        (cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC z) := by
+      intro N
+      refine (integrable_const (1 : ℝ)).mono' ?_ ?_
+      · exact (((cayleyCutoff_continuous N).comp continuous_subtype_val).pow 2).aestronglyMeasurable
+      · filter_upwards with ω
+        rw [Real.norm_of_nonneg (sq_nonneg _)]
+        nlinarith [(cayleyCutoff_pos N (ω : ℂ)).le, cayleyCutoff_le_one N (ω : ℂ)]
+    refine squeeze_zero (fun N => norm_nonneg _) (fun N => ?_) hsqrt
+    have hb : ‖cfc (fun ω => cayleyExpBump t N ω * φ ω)
+          (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z
+        - cfc (fun ω => cayleyExp t ω * φ ω)
+          (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z‖ ^ 2
+        ≤ M ^ 2 * ∫ ω, (cayleyCutoff N (ω : ℂ)) ^ 2
+          ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC z) := by
+      rw [cayley_cfc_sub_norm_sq_integral U hgrp hU0 hUinner hUbd hSC
+          (fun ω => cayleyExpBump t N ω * φ ω) (fun ω => cayleyExp t ω * φ ω)
+          ((cayleyExpBump_continuousOn U hgrp hU0 hUinner hUbd hSC t N).mul hφ) (hetφ t) z,
+        ← integral_const_mul]
+      apply integral_mono_of_nonneg (Filter.Eventually.of_forall (fun ω => sq_nonneg _))
+        ((hint2 N).const_mul (M ^ 2))
+      filter_upwards with ω
+      have hcirc : ‖(ω : ℂ)‖ = 1 := by
+        have hmem := cayley_spectrum_subset_circle U hgrp hU0 hUinner hUbd hSC ω.2
+        rwa [mem_sphere_zero_iff_norm] at hmem
+      have hfac : cayleyExpBump t N (ω : ℂ) * φ (ω : ℂ) - cayleyExp t (ω : ℂ) * φ (ω : ℂ)
+          = (cayleyExpBump t N (ω : ℂ) - cayleyExp t (ω : ℂ)) * φ (ω : ℂ) := by ring
+      have hsub : ‖cayleyExpBump t N (ω : ℂ) - cayleyExp t (ω : ℂ)‖ = cayleyCutoff N (ω : ℂ) := by
+        simpa only [cayleyExpBump] using cayleyExpBump_sub_norm t N hcirc
+      rw [hfac, norm_mul, mul_pow, hsub]
+      have hφ2 : ‖φ (ω : ℂ)‖ ^ 2 ≤ M ^ 2 := by
+        nlinarith [hM (ω : ℂ) ω.2, norm_nonneg (φ (ω : ℂ))]
+      nlinarith [mul_le_mul_of_nonneg_left hφ2 (sq_nonneg (cayleyCutoff N (ω : ℂ)))]
+    calc ‖cfc (fun ω => cayleyExpBump t N ω * φ ω)
+            (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z
+          - cfc (fun ω => cayleyExp t ω * φ ω)
+            (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z‖
+        = Real.sqrt (‖cfc (fun ω => cayleyExpBump t N ω * φ ω)
+            (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z
+          - cfc (fun ω => cayleyExp t ω * φ ω)
+            (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z‖ ^ 2) :=
+          (Real.sqrt_sq (norm_nonneg _)).symm
+      _ ≤ Real.sqrt (M ^ 2 * ∫ ω, (cayleyCutoff N (ω : ℂ)) ^ 2
+            ∂(cayleyScalarMeasure U hgrp hU0 hUinner hUbd hSC z)) := Real.sqrt_le_sqrt hb
+  have hL2 : Filter.Tendsto (fun N => cfc (fun ω => cayleyExpBump t N ω * φ ω)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z) Filter.atTop
+      (nhds (cfc (fun ω => cayleyExp t ω * φ ω)
+        (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z)) := by
+    have h := hdiff.add (tendsto_const_nhds (x := cfc (fun ω => cayleyExp t ω * φ ω)
+      (cayleyUnitary U hgrp hU0 hUinner hUbd hSC : H →L[ℂ] H) z))
+    simpa using h
+  exact tendsto_nhds_unique hL hL2
+
 
 end SelfAdjoint
 
