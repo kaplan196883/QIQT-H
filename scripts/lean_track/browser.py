@@ -95,17 +95,103 @@ def _definition_tex(d, notation, max_len=900):
     return lhs + r" \;:=\; " + rhs
 
 
+def _doc_lead(doc, max_len=760):
+    """The author's docstring as book prose: drop priority stars, collapse intra-paragraph
+    line wraps, keep paragraph breaks, and cap politely at a sentence boundary."""
+    if not doc:
+        return None
+    s = doc.replace("★", "").replace("☆", "").strip()
+    paras = [re.sub(r"\s*\n\s*", " ", p).strip() for p in re.split(r"\n\s*\n", s)]
+    paras = [p for p in paras if p]
+    if not paras:
+        return None
+    lead, i = paras[0], 1
+    while i < len(paras) and len(lead) + len(paras[i]) + 2 < max_len:
+        lead += "\n\n" + paras[i]
+        i += 1
+    if len(lead) > max_len or i < len(paras):
+        cut = lead[:max_len]
+        m = max(cut.rfind(". "), cut.rfind(".\n"))
+        if m > max_len * 0.5:
+            cut = cut[:m + 1]
+        lead = cut.rstrip().rstrip(".") + ". …"
+    return lead
+
+
+def _pageslug(module):
+    return re.sub(r"[^a-z0-9]+", "-", (module or "misc").lower()).strip("-")
+
+
+def browser_href_map(decls):
+    """name -> /browser/<page>#<anchor> for every declaration (for cross-page links from
+    other pages, e.g. the statements page)."""
+    return {d["name"]: f"/browser/{_pageslug(d.get('module', '?'))}#{_slug(d['name'])}"
+            for d in decls}
+
+
+def _entry_md(d, notation, label, cite_list, usedby, ref):
+    """One book entry (definition/lemma/theorem) as a list of markdown lines."""
+    name, short = d["name"], d["name"].split(".")[-1]
+    mod = d.get("module", "?")
+    num, kw = label[name]
+    out = []
+    src = _source_url(mod, d.get("line"), ref)
+    srctag = f" &nbsp;<small>[source ↗]({src})</small>" if src else ""
+    out.append(f'<a id="{_slug(name)}"></a>')
+    out.append(f"**{kw} {num}** (`{short}`).{srctag}")
+    out.append("")
+    lead = _doc_lead(d.get("doc"))          # the author's own prose explanation
+    if lead:
+        out.append(lead)
+        out.append("")
+    if kw == "Definition":
+        body = _definition_tex(d, notation)
+        if body:
+            out += ["$$", body, "$$"]
+        else:
+            dlist = cite_list(d.get("usesStmt", []))
+            out.append("A definition" + (f", built from {dlist}" if dlist else "")
+                       + " — see source for the body.")
+    else:
+        parts = _claim_tex(d, notation)
+        if len(parts) > 1:                  # multi-part conclusion -> stacked displays
+            out += ["The following hold.", ""]
+            for k, p in enumerate(parts, 1):
+                out += ["$$", rf"\text{{({k})}}\quad {p}", "$$"]
+        else:
+            out += ["$$", parts[0], "$$"]
+        out.append("")
+        cites = cite_list(d.get("usesProof", []))
+        if cites:
+            out.append(f"*Proof.* By {cites}. $\\square$")
+        else:
+            out.append(r"*Proof.* Immediate from the definitions. $\square$")
+    ub = cite_list(usedby.get(name, []), cap=8)
+    if ub:
+        out += ["", f"<small>Used by {ub}.</small>"]
+    out.append("")
+    return out
+
+
 def render_browser(decls, notation=None, roles=None, ref="main"):
+    """Render the closure as a *nested* book: an index plus one page per Lean module.
+    Returns {"index": <body>, "pages": [ {slug,title,group,count,body}, … ]} with all
+    cross-references (citations + in-formula symbol links) pointing across pages."""
     notation = {**latexify.DEFAULT_NOTATION, **(notation or {})}
     roles = roles or {}
     present = {d["name"]: d for d in decls}
-    latex_tree._LINKS = {n: f"#{_slug(n)}" for n in present}    # in-formula links
 
     # reading order: by module, then by source line — and number the whole book.
     order = sorted(decls, key=lambda d: (d.get("module", ""), d.get("line") or 0))
-    label = {}                          # name -> (number, kindword)
+    label, page_of = {}, {}
     for i, d in enumerate(order, 1):
         label[d["name"]] = (i, _kindword(d, roles))
+        page_of[d["name"]] = _pageslug(d.get("module", "?"))
+
+    # cross-page hrefs: /browser/<page>#<anchor> (works same-page and across pages).
+    def href(name):
+        return f"/browser/{page_of[name]}#{_slug(name)}"
+    latex_tree._LINKS = {n: href(n) for n in present}          # in-formula symbol links
 
     usedby = {n: [] for n in present}
     for d in decls:
@@ -114,11 +200,11 @@ def render_browser(decls, notation=None, roles=None, ref="main"):
                 usedby[u].append(d["name"])
 
     def cite(name):
-        # cite by NAME (informative), linked to its numbered entry
         short = name.split(".")[-1]
         if name in present:
-            return f"[`{short}`](#{_slug(name)})"
+            return f"[`{short}`]({href(name)})"
         return f"`{short}`"                 # outside the closure -> plain
+    cite.__wrapped_present__ = present
 
     def cite_list(names, cap=None):
         names = [n for n in dict.fromkeys(names) if n in present]
@@ -128,61 +214,45 @@ def render_browser(decls, notation=None, roles=None, ref="main"):
             return f"{shown}, and {len(names) - cap} more"
         return ", ".join(cite(n) for n in names)
 
-    out = []
-    # table of contents (sections = modules, in reading order)
+    # one page per module, in reading order.
     mods = list(dict.fromkeys(d.get("module", "?") for d in order))
-    out.append("## Contents\n")
-    for m in mods:
-        out.append(f"- [{m}](#{_modslug(m)})")
-    out.append("")
+    by_mod = {m: [d for d in order if d.get("module", "?") == m] for m in mods}
 
-    cur = None
-    for d in order:
-        name, short = d["name"], d["name"].split(".")[-1]
-        mod = d.get("module", "?")
-        if mod != cur:
-            cur = mod
-            out.append(f'<a id="{_modslug(mod)}"></a>')
-            out.append(f"## {mod}")
-            out.append("")
-        num, kw = label[name]
-        src = _source_url(mod, d.get("line"), ref)
-        srctag = f" &nbsp;<small>[source ↗]({src})</small>" if src else ""
-        out.append(f'<a id="{_slug(name)}"></a>')
-        out.append(f"**{kw} {num}** (`{short}`).{srctag}")
-        out.append("")
-        if kw == "Definition":
-            body = _definition_tex(d, notation)
-            if body:
-                out.append("$$")
-                out.append(body)
-                out.append("$$")
-            else:
-                dlist = cite_list(d.get("usesStmt", []))
-                out.append("A definition" + (f", built from {dlist}" if dlist else "")
-                           + " — see source for the body.")
-        else:
-            parts = _claim_tex(d, notation)
-            if len(parts) > 1:                 # multi-part conclusion -> stacked displays
-                out.append("The following hold.")
-                out.append("")
-                for k, p in enumerate(parts, 1):
-                    out.append("$$")
-                    out.append(rf"\text{{({k})}}\quad {p}")
-                    out.append("$$")
-            else:
-                out.append("$$")
-                out.append(parts[0])
-                out.append("$$")
-            out.append("")
-            cites = cite_list(d.get("usesProof", []))
-            if cites:
-                out.append(f"*Proof.* By {cites}. $\\square$")
-            else:
-                out.append(r"*Proof.* Immediate from the definitions. $\square$")
-        ub = cite_list(usedby.get(name, []), cap=8)
-        if ub:
-            out.append("")
-            out.append(f"<small>Used by {ub}.</small>")
-        out.append("")
-    return "\n".join(out)
+    def group_of(module):                   # 2nd namespace component, e.g. QIQTH.Fock.* -> Fock
+        parts = (module or "").split(".")
+        return parts[1] if len(parts) > 2 else (parts[-1] if parts else "misc")
+
+    pages = []
+    for idx, m in enumerate(mods):
+        ds = by_mod[m]
+        nums = [label[d["name"]][0] for d in ds]
+        prev_m, next_m = (mods[idx - 1] if idx else None), (mods[idx + 1] if idx + 1 < len(mods) else None)
+        nav = ['<small>[← all sections](/browser)']
+        if prev_m:
+            nav.append(f"· [← {prev_m.split('.')[-1]}](/browser/{_pageslug(prev_m)})")
+        if next_m:
+            nav.append(f"· [{next_m.split('.')[-1]} →](/browser/{_pageslug(next_m)})")
+        nav.append("</small>")
+        body = [" ".join(nav), "",
+                f"<small>{group_of(m)} · entries {nums[0]}–{nums[-1]} of {len(order)}</small>", ""]
+        for d in ds:
+            body += _entry_md(d, notation, label, cite_list, usedby, ref)
+        body += ["---", " ".join(nav)]
+        pages.append({"slug": _pageslug(m), "title": m, "group": group_of(m),
+                      "count": len(ds), "body": "\n".join(body),
+                      "nums": (nums[0], nums[-1])})
+
+    # index: sections grouped by top-level namespace, each linking to its page.
+    groups = list(dict.fromkeys(p["group"] for p in pages))
+    ix = [f"A hyperlinked math book in **{len(pages)} sections** ({len(order)} numbered "
+          "definitions, lemmas and theorems). Pick a section:", ""]
+    for g in groups:
+        gp = [p for p in pages if p["group"] == g]
+        tot = sum(p["count"] for p in gp)
+        ix.append(f"### {g} &nbsp;<small>({tot})</small>")
+        ix.append("")
+        for p in gp:
+            ix.append(f"- [{p['title']}](/browser/{p['slug']}) "
+                      f"&nbsp;<small>{p['count']} entries (#{p['nums'][0]}–{p['nums'][1]})</small>")
+        ix.append("")
+    return {"index": "\n".join(ix), "pages": pages}

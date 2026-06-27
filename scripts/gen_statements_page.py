@@ -46,8 +46,8 @@ def main():
     # so clicking a symbol on the clean statements page jumps to its entry there.
     closure_path = REPO / "reports" / "browser" / "closure.json"
     if closure_path.exists():
-        names = [d["name"] for d in json.loads(closure_path.read_text(encoding="utf-8"))]
-        latex_tree._LINKS = {n: f"/browser#{browser._slug(n)}" for n in names}
+        decls = json.loads(closure_path.read_text(encoding="utf-8"))
+        latex_tree._LINKS = browser.browser_href_map(decls)
     body, total = [FRONTMATTER], 0
     for tid, subtitle in TRACKS:
         cfg = probe.load_config(REPO / "tracks" / f"{tid}.toml")
