@@ -5134,6 +5134,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.cayleyScalarMeasure_atom_eq_zero
 #print axioms QIQTH.Spectral.cayleyInv_continuousOn
 #print axioms QIQTH.Spectral.cayleyInv_im_eq_zero
+#print axioms QIQTH.Spectral.cayleyExp_continuousOn
+#print axioms QIQTH.Spectral.cayleyExp_abs
+-- ★ P4 WALL — THE STONE-EXPONENTIAL SYMBOL: cayleyExp t ω := exp(i·t·cayleyInv ω) — the bounded Borel function
+-- whose cfc cfc(e_t) V IS the Stone unitary U_t=exp(itA), A=cayleyInv(V). cayleyExp_continuousOn (cts off the
+-- excluded point 1, exp∘cts) + cayleyExp_abs (modulus 1 on the circle off 1: ‖e_t(ω)‖=1 since cayleyInv ω real ⟹
+-- i·t·c(ω) purely imaginary ⟹ ‖exp‖=exp((·).re)=exp 0=1, Complex.norm_exp). Bounded+cts off 1, and μ_x({1})=0, so
+-- e_t is μ_x-a.e. cts/bounded — approximable in L²(μ_x), whose cfc-vectors converge (L²→strong bridge) to define
+-- U_t x as a strong limit. Axiom-free.
 -- ★ P4 WALL — THE INVERSE CAYLEY MAP (Stone-exp symbol foundation): cayleyInv ω := i(1+ω)/(1−ω) and
 -- cayleyInv_continuousOn (continuous off the excluded point 1, denom 1−ω≠0) + cayleyInv_im_eq_zero (REAL on the
 -- unit circle off 1: (c(ω)).im=0 for ‖ω‖=1, ω≠1 — i.e. A=i(1+V)(1−V)⁻¹ is self-adjoint, so exp(it·c(ω)) has

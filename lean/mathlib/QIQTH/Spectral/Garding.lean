@@ -2247,6 +2247,30 @@ theorem cayleyInv_im_eq_zero {ω : ℂ} (h1 : ‖ω‖ = 1) (hne : ω ≠ 1) : (
   rw [div_eq_div_iff hd2 hd1]
   linear_combination (2 * Complex.I) * hcc
 
+/-- **The Stone-exponential symbol** `e_t(ω) = exp(i · t · c(ω))`, where `c = cayleyInv`.  This is the bounded Borel
+    function whose functional calculus `cfc(e_t) V` *is* the Stone unitary `U_t = exp(it A)` of the self-adjoint
+    generator `A = i(1 + V)(1 − V)⁻¹` (`A = cayleyInv(V)`).  It is continuous off the excluded point `1`
+    (`cayleyExp_continuousOn`) and has **modulus `1`** on the unit circle off `1` (`cayleyExp_abs`, since `c` is real
+    there) — so it is bounded.  Because `μ_x({1}) = 0` (`cayleyScalarMeasure_atom_eq_zero`) it is `μ_x`-a.e.
+    continuous and bounded, hence approximable in `L²(μ_x)` by continuous functions, whose cfc-vectors converge
+    (the L²→strong bridge) to define `U_t x` as a strong limit — the genuine continuum Stone exponential. -/
+noncomputable def cayleyExp (t : ℝ) (ω : ℂ) : ℂ := Complex.exp (Complex.I * ((t : ℂ) * cayleyInv ω))
+
+/-- The Stone-exponential symbol is continuous off the excluded point `1` (`exp` ∘ a function continuous there). -/
+theorem cayleyExp_continuousOn (t : ℝ) : ContinuousOn (cayleyExp t) {ω : ℂ | ω ≠ 1} :=
+  Complex.continuous_exp.comp_continuousOn
+    ((cayleyInv_continuousOn.const_mul (t : ℂ)).const_mul Complex.I)
+
+/-- **The Stone-exponential symbol has modulus `1` on the unit circle** (off `1`): `‖e_t(ω)‖ = 1` for `‖ω‖ = 1`,
+    `ω ≠ 1`.  Since `c(ω)` is real there (`cayleyInv_im_eq_zero`), `i · t · c(ω)` is purely imaginary, so
+    `‖exp(i t c(ω))‖ = exp((i t c(ω)).re) = exp(0) = 1` (`Complex.norm_exp`).  This is the unitarity of the Stone
+    exponential `U_t = cfc(e_t) V` and the boundedness that makes `e_t ∈ L²(μ_x)`. -/
+theorem cayleyExp_abs {t : ℝ} {ω : ℂ} (h1 : ‖ω‖ = 1) (hne : ω ≠ 1) : ‖cayleyExp t ω‖ = 1 := by
+  have hc : (cayleyInv ω).im = 0 := cayleyInv_im_eq_zero h1 hne
+  have him : (Complex.I * ((t : ℂ) * cayleyInv ω)).re = 0 := by
+    simp [Complex.mul_re, Complex.mul_im, hc]
+  rw [cayleyExp, Complex.norm_exp, him, Real.exp_zero]
+
 end SelfAdjoint
 
 end QIQTH.Spectral

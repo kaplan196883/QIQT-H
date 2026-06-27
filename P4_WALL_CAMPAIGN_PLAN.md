@@ -426,8 +426,12 @@ exponential symbol `exp(it·invCayley(ω))` is now `μ_x`-a.e. defined, the prec
 Also ✅ `cayleyInv` + `cayleyInv_continuousOn` + `cayleyInv_im_eq_zero` (**the inverse Cayley map** `c(ω)=i(1+ω)/(1−ω)`:
 continuous off `1`, and **real on the unit circle** off `1` ⟹ `A=i(1+V)(1−V)⁻¹` self-adjoint ⟹ `exp(it·c)` modulus 1.
 Real-valuedness via `conj ω=ω⁻¹` on circle + `div_eq_div_iff` + `linear_combination`).
-**Next (toward U_t=exp(itA)):** assemble the strong limit `U_t x=lim cfc(g_{t,N})V x` (`g_{t,N}` continuous cutoffs of
-`exp(it·c(·))`, `μ_x`-a.e. defined now the atom is gone — the convergence + existence bridges feed this directly);
+Also ✅ `cayleyExp` + `cayleyExp_continuousOn` + `cayleyExp_abs` (**the Stone-exponential symbol** `e_t(ω)=exp(i·t·c(ω))`,
+whose cfc `cfc(e_t)V` IS `U_t=exp(itA)`: continuous off `1`, **modulus 1** on the circle off `1` — `c(ω)` real ⟹
+`i·t·c(ω)` purely imaginary ⟹ `‖exp‖=1` (`Complex.norm_exp`). Built green first try). Bounded+cts off `1` + `μ_x({1})=0`
+⟹ `e_t` is `μ_x`-a.e. cts/bounded.
+**Next (toward U_t=exp(itA)):** continuous cutoffs `g_{t,N}` of `e_t` → L²(μ_x)-Cauchy (atom gone) ⟹ existence-half ⟹
+`U_t x:=lim cfc(g_{t,N})V x`; then group law / strong continuity / generator ⟹ Stone;
 then bounded-Borel `∫g dμ_x` + polarization μ_{x,y} → assemble `{μ_x}` into the circle-PVM `E` (Mathlib gap —
 `PVM_of_selfAdjoint`) → transport to `A=∫λ dE` ⟹ Stone.
 **Next (operator→PVM keystone, RMK+cfc supported):** scalar measures `μ_x` (`f↦re⟨x,cfc f V x⟩` → RMK) → circle-PVM

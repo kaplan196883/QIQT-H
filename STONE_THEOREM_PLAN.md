@@ -587,9 +587,14 @@ Also ✅ `cayleyInv` + `cayleyInv_continuousOn` + `cayleyInv_im_eq_zero` — **t
 `(c(ω)).im=0` for `‖ω‖=1, ω≠1` (i.e. `A=i(1+V)(1−V)⁻¹` is **self-adjoint** ⟹ `exp(it·c(ω))` has modulus 1 ⟹ `U_t`
 unitary). Proof of real-valuedness: on the circle `conj ω=ω⁻¹` (`RCLike.mul_conj`+`h1`) + `div_eq_div_iff` +
 `linear_combination (2I)·(ω·conj ω=1)`. *Built green (one fix: `field_simp/ring` couldn't reduce `ω⁻¹`; switched to
-keeping `conj ω` + `linear_combination`).* **Next:** assemble the strong limit `U_t x = lim cfc(g_{t,N}) V x` with
-`g_{t,N}` continuous cutoffs of `exp(it·c(·))` (continuous+bounded off `1`, `μ_x`-a.e. defined since `μ_x({1})=0`;
-the convergence + existence bridges feed this) ⟹ group law / strong continuity / generator ⟹ Stone.
+keeping `conj ω` + `linear_combination`).*
+Also ✅ `cayleyExp` + `cayleyExp_continuousOn` + `cayleyExp_abs` — **the Stone-exponential symbol** `e_t(ω)=exp(i·t·c(ω))`,
+the bounded Borel function whose cfc `cfc(e_t) V` IS the Stone unitary `U_t=exp(itA)` (`A=cayleyInv(V)`): continuous
+off `1` (`exp∘cts`), and **modulus 1** on the circle off `1` (`‖e_t(ω)‖=1` — since `c(ω)` real, `i·t·c(ω)` purely
+imaginary, `‖exp‖=exp((·).re)=exp 0=1` via `Complex.norm_exp` + `simp[mul_re,mul_im,c.im=0]`). *Built green first try.*
+Bounded + cts off `1`, and `μ_x({1})=0` ⟹ `e_t` is `μ_x`-a.e. cts/bounded. **Next:** continuous cutoffs `g_{t,N}` of
+`e_t` (e.g. `e_t·η_N` with `η_N` a continuous bump → 0 near `1`); show `g_{t,N}` L²(μ_x)-Cauchy (DCT, the atom gone) ⟹
+existence-half ⟹ `U_t x := lim cfc(g_{t,N})V x`; then group law / strong continuity / generator ⟹ Stone.
 **Next:** the bounded-Borel functional `g ↦ ∫ g dμ_x` (now well-defined) + polarization `μ_{x,y}`; assemble the
 family `{μ_x}` into a **projection-valued measure** `E` on `σ(V) ⊆ S¹` with `V = ∫ z dE` — the genuine Mathlib gap
 (no `ProjectionValuedMeasure` type; QIQTH's `Spectral/PVM.lean` defines its own, where the polarization `μ_{x,y}`
