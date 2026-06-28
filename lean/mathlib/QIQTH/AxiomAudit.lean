@@ -6603,6 +6603,12 @@ namespace QIQTH.AxiomAudit
 -- conserved by the field-level modular flow (the §0/E8 records decision, conserved by σ_t at the continuum level).
 -- Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.fermiSecondQuantModFlow_comp_parity
+-- ELECTRON_FIELD E5/§0 (the modular flow keeps records as records): fermiSecondQuantModFlow_isEven — IsEven x →
+-- IsEven (Γ₋(Δ^it) x). The even (record/observable) sector is mapped into itself by the continuum modular dynamics
+-- (a consequence of the parity-commute). The electron's records (even bilinears j^μ, T_μν, number) remain records
+-- under the field-level modular flow σ_t — modular dynamics conserves the even/observable algebra at the continuum.
+-- Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.fermiSecondQuantModFlow_isEven
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy

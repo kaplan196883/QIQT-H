@@ -33,6 +33,7 @@ only.
 -/
 import QIQTH.StandardSubspaceModularFlow
 import QIQTH.Fock.Dirac.Parity
+import QIQTH.Fock.Dirac.EvenObservables
 import Mathlib.LinearAlgebra.ExteriorAlgebra.Basic
 
 namespace QIQTH.Fock.Dirac
@@ -114,5 +115,18 @@ theorem fermiSecondQuantModFlow_comp_parity (S : StandardSubspace H) (t : ℝ) :
   show fermiSecondQuantModFlow S t (parity ℂ H (ExteriorAlgebra.ι ℂ f))
       = parity ℂ H (fermiSecondQuantModFlow S t (ExteriorAlgebra.ι ℂ f))
   rw [parity_ι, map_neg, fermiSecondQuantModFlow_ι, parity_ι]
+
+/-- **The modular flow keeps records as records**: `IsEven x → IsEven (Γ₋(Δ^{it}) x)`.  The even
+(record/observable) sector is mapped into itself by the continuum modular dynamics — a direct consequence
+of `fermiSecondQuantModFlow_comp_parity`.  So the electron's records (the even bilinears `j^μ`, `T_μν`,
+number) remain records under the field-level modular flow `σ_t`: modular dynamics conserves the
+even/observable algebra, at the continuum. -/
+theorem fermiSecondQuantModFlow_isEven (S : StandardSubspace H) (t : ℝ)
+    {x : ExteriorAlgebra ℂ H} (hx : IsEven x) : IsEven (fermiSecondQuantModFlow S t x) := by
+  have h := AlgHom.congr_fun (fermiSecondQuantModFlow_comp_parity S t) x
+  simp only [AlgHom.comp_apply] at h
+  unfold IsEven at hx ⊢
+  rw [hx] at h
+  exact h.symm
 
 end QIQTH.Fock.Dirac

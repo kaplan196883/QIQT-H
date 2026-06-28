@@ -593,3 +593,12 @@ EXTERNAL libraries; QIQT-H built its own.
   finite-level `electron_modAut_numberOp`/`electron_sigmaDiag_fixes_numberOp`). `lake build
   QIQTH.Fock.Dirac.CARModularFlow` green (3549 jobs); standard-3; budget 0. Remaining E5: the antilinear
   fermionic modular conjugation `J_W = Z·Γ₋(j)` (the genuine antilinear-functor / Mathlib gap).
+- 2026-06-28 — **E5/§0: the modular flow keeps records as records** (added to `CARModularFlow.lean`,
+  axiom-free, budget 0). **`fermiSecondQuantModFlow_isEven`** — `IsEven x → IsEven (Γ₋(Δ^{it}) x)`: the
+  even (record/observable) sector is mapped into itself by the continuum modular dynamics (a consequence
+  of the parity-commute). So the electron's records (even bilinears `j^μ`, `T_μν`, number) **remain
+  records under the field-level modular flow `σ_t`** — modular dynamics conserves the even/observable
+  algebra at the continuum. `lake build QIQTH.Fock.Dirac.CARModularFlow` green (3550 jobs); standard-3;
+  budget 0. The continuum modular-flow ↔ records connection is now complete at the element level.
+  Remaining E5: the antilinear fermionic modular conjugation `J_W = Z·Γ₋(j)` (the genuine
+  antilinear-functor / Mathlib gap).
