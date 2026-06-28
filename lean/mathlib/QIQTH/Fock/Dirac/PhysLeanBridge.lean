@@ -24,6 +24,7 @@ PhysLean's `WickAlgebra` is the follow-on E2-full/E5 work.
 -/
 import Physlib.QFT.PerturbationTheory.FieldStatistics.Basic
 import Physlib.QFT.PerturbationTheory.FieldStatistics.ExchangeSign
+import Physlib.QFT.PerturbationTheory.FieldSpecification.Basic
 import QIQTH.Fock.Dirac.DiracGamma
 
 namespace QIQTH.Fock.Dirac
@@ -66,5 +67,20 @@ theorem electron_exchangeSign :
     FieldStatistic.exchangeSign electronStatistic electronStatistic = -1 := by
   rw [FieldStatistic.exchangeSign_eq_if]
   simp [electronStatistic]
+
+/-- **The electron field specification** in PhysLean's framework: a single field, **fermionic**, with
+trivial position/asymptotic labels (the minimal free-Dirac content).  This is the `FieldSpecification`
+on which PhysLean's `CrAnFieldOp` / `WickAlgebra` / `superCommute` (the CAR creation/annihilation
+operator layer) are built — the entry point to the QIQT-H E2-full / E5 operator tier. -/
+def electronFieldSpec : FieldSpecification where
+  Field := Unit
+  PositionLabel := fun _ => Unit
+  AsymptoticLabel := fun _ => Unit
+  statistic := fun _ => FieldStatistic.fermionic
+
+/-- The electron field is **fermionic** (its statistic in the PhysLean field specification) — matching
+`electronStatistic` and the substrate's odd/CAR grading. -/
+@[simp] theorem electronFieldSpec_statistic (f : electronFieldSpec.Field) :
+    electronFieldSpec.statistic f = FieldStatistic.fermionic := rfl
 
 end QIQTH.Fock.Dirac

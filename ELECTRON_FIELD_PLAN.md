@@ -379,3 +379,12 @@ This closes the "build vs reuse" decision for the operator layer: **reuse PhysLe
   anticommutation carry the identical Pauli sign — the first substantive use of PhysLean inside the
   substrate. `lake build QIQTH.Fock.Dirac.PhysLeanBridge` green (2097 jobs); standard-3; budget 0. Next:
   build the CAR a/a† operators on Physlib `CrAnFieldOp`/`WickAlgebra`/`SuperCommute` (E2-full/E5).
+- 2026-06-28 — **PhysLean: the electron FieldSpecification** (added to `PhysLeanBridge.lean`, axiom-free,
+  budget 0). **`electronFieldSpec : FieldSpecification`** — the electron's field content in PhysLean's
+  framework (a single **fermionic** field, trivial position/asymptotic labels: the minimal free-Dirac
+  content); **`electronFieldSpec_statistic`** — the field is fermionic (no axioms). This is the
+  `FieldSpecification` on which PhysLean's `CrAnFieldOp` / `WickAlgebra` / `superCommute` (the CAR
+  creation/annihilation operator layer) are built — **the entry point to the E2-full/E5 operator tier**.
+  `lake build QIQTH.Fock.Dirac.PhysLeanBridge` green (3117 jobs); standard-3; budget 0. Next: instantiate
+  `CrAnFieldOp` for `electronFieldSpec` and state the CAR anticommutation via `superCommute`
+  (`[a,a†]ₛ`, with `superCommute_create_create` / `superCommute_diff_statistic`).

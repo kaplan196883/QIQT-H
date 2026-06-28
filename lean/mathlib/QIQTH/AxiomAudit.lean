@@ -6488,6 +6488,11 @@ namespace QIQTH.AxiomAudit
 -- ι_mul_ι_swap (ι a·ι b = −ι b·ι a). PhysLean's exchange sign and the QIQT-H CAR anticommutation carry the
 -- identical Pauli sign. Axiom-free (standard 3 / fewer).
 #print axioms QIQTH.Fock.Dirac.electron_exchangeSign
+-- electronFieldSpec: the electron's PhysLean FieldSpecification (single fermionic field, trivial labels) — the
+-- field-content structure on which PhysLean's CrAnFieldOp / WickAlgebra / superCommute (the CAR a/a† operator layer)
+-- are built. electronFieldSpec_statistic: the electron field is fermionic. The entry point to the E2-full/E5
+-- operator tier. Axiom-free (standard 3 / fewer).
+#print axioms QIQTH.Fock.Dirac.electronFieldSpec_statistic
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy
