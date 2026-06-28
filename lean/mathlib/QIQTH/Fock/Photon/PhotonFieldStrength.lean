@@ -28,6 +28,7 @@ Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`).  No `sorry`.  F
 -/
 import Mathlib.Algebra.Module.LinearMap.Defs
 import Mathlib.Data.Complex.Basic
+import Mathlib.LinearAlgebra.Quotient.Basic
 
 namespace QIQTH.Fock.Photon
 
@@ -57,5 +58,19 @@ theorem bianchi_identity (dF : A →ₗ[ℂ] F) (dNext : F →ₗ[ℂ] G)
     dNext (dF a) = 0 := by
   have h := LinearMap.congr_fun hdd a
   simpa using h
+
+/-- **The field strength descends to the gauge quotient** — the physical configuration space.  Since the
+pure-gauge potentials `range d_gauge` lie in `ker d_F` (the `d²=0` condition), the field strength `F = dA`
+factors through the quotient `A ⧸ range d_gauge`: there is a well-defined `F̄ : (A ⧸ range d_gauge) →ₗ F`
+with `F̄ ∘ mkQ = d_F` (`Submodule.liftQ`).  So the photon's physical observable (the field strength) is a
+genuine function of the **gauge-equivalence class** `[A]`, not of the gauge representative `A` — the
+clean statement that the photon's records live on the physical (gauge-quotient) configuration space, the
+"records = gauge-invariant" thesis (§0/P6) in its sharpest form. -/
+theorem fieldStrength_descends_to_quotient (dGauge : Λ →ₗ[ℂ] A) (dF : A →ₗ[ℂ] F)
+    (hdd : dF ∘ₗ dGauge = 0) :
+    ((LinearMap.range dGauge).liftQ dF (by
+      rw [LinearMap.range_le_ker_iff]; exact hdd)).comp
+        (LinearMap.range dGauge).mkQ = dF :=
+  (LinearMap.range dGauge).liftQ_mkQ dF _
 
 end QIQTH.Fock.Photon

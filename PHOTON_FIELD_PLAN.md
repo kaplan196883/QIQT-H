@@ -239,3 +239,10 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   homogeneous Maxwell eqs `dF=0`. Both the gauge-invariance of `F` and its closedness are the two faces of
   the single condition `d²=0`. Wired into `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0. (The full
   continuum Maxwell `F`-net CCR from de Rham test 2-forms remains the deferred P10 frontier.)
+- 2026-06-29 — **P6 (sharpest form): the field strength descends to the gauge quotient** (added to
+  `PhotonFieldStrength.lean`, axiom-free standard-3, budget 0, 1177 jobs green). **`fieldStrength_descends_
+  to_quotient`**: since `range d_gauge ⊆ ker d_F` (`d²=0`), `F=dA` factors as `F̄ ∘ mkQ` through the quotient
+  `A ⧸ range d_gauge` (`Submodule.liftQ`) — so the photon's physical observable is a function of the
+  **gauge-equivalence class** `[A]`, not the gauge representative `A`. The "records live on the physical
+  (gauge-quotient) configuration space" thesis (§0/P6) in its sharpest form. (Added
+  `import Mathlib.LinearAlgebra.Quotient.Basic`.) Wired into `AxiomAudit.lean`; standard-3; budget 0.
