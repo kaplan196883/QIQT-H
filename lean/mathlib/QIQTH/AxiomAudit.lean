@@ -6439,6 +6439,15 @@ namespace QIQTH.AxiomAudit
 -- regions) is the next E8 sub-item. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.ι_mul_ι_swap
 #print axioms QIQTH.Fock.Dirac.ι_mul_ι_comm_ι
+-- ★★★ ELECTRON_FIELD_PLAN E1 (spinor core — the Dirac gamma / Clifford algebra): the electron is a Dirac spinor;
+-- its spin/Lorentz structure is the Clifford algebra of the metric. diracGamma Q v = the gamma operator in direction
+-- v (Clifford generator ι Q v); for an orthonormal Minkowski basis γ_μ = diracGamma Q e_μ. diracGamma_sq: γ(v)²=Q v
+-- (γ_μ²=η_μμ); diracGamma_anticomm: {γ_a,γ_b} = 2η(a,b) = polar Q a b (THE defining Dirac/Clifford relation
+-- {γ^μ,γ^ν}=2η^{μν}); diracGamma_anticomm_ortho / diracGamma_swap_ortho: {γ_μ,γ_ν}=0, γ_μγ_ν=−γ_νγ_μ for μ≠ν. The
+-- spinor-representation core of E1. HONEST: the full Dirac one-particle Hilbert space (±energy splitting, Dirac
+-- inner product, Wigner Poincaré rep) + the S_D=(iγ·∂+m)Δ_m causal kernel remain the E1 frontier. Axiom-free.
+#print axioms QIQTH.Fock.Dirac.diracGamma_anticomm
+#print axioms QIQTH.Fock.Dirac.diracGamma_sq
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy

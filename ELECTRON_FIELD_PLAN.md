@@ -294,3 +294,16 @@ frontier.
   product across spacelike-separated regions) is the next E8 sub-item. Remaining frontier (checkpointed):
   **E5** (operator-algebra BW data / twisted-duality theorem / GNS), **E1** (Dirac one-particle + `S_D`),
   **E8 bipartite** (graded tensor product), **E9** (Dirac `T_μν` → Jacobson hook).
+- 2026-06-28 — **E1 spinor core (Dirac gamma / Clifford algebra) DONE**
+  (`QIQTH/Fock/Dirac/DiracGamma.lean`, axiom-free, budget 0). The electron is a Dirac spinor; its
+  spin/Lorentz structure is the Clifford algebra of the metric. `diracGamma Q v` = the gamma operator in
+  direction `v` (Clifford generator `ι Q v`; for an orthonormal Minkowski basis `γ_μ = diracGamma Q e_μ`).
+  **`diracGamma_sq`** : `γ(v)² = Q v` (`γ_μ²=η_μμ`); **`diracGamma_anticomm`** : `{γ_a,γ_b} = polar Q a b
+  = 2η(a,b)` — THE defining Dirac/Clifford relation `{γ^μ,γ^ν}=2η^{μν}`; `diracGamma_anticomm_ortho` /
+  `diracGamma_swap_ortho` : `{γ_μ,γ_ν}=0`, `γ_μγ_ν=−γ_νγ_μ` for `μ≠ν`. The spinor-representation core of
+  E1, on Mathlib's `CliffordAlgebra`. Wired into `QIQTH.lean` + `AxiomAudit.lean` (standard-3);
+  `lake build QIQTH.Fock.Dirac.DiracGamma` green (1766 jobs); budget 0. **Honest:** the full Dirac
+  one-particle Hilbert space (±energy splitting, Dirac inner product, Wigner Poincaré rep) + the causal
+  kernel `S_D=(iγ·∂+m)Δ_m` (need the field in momentum space) remain the E1 frontier (checkpointed).
+  Remaining: **E5** (operator-algebra BW data / twisted-duality theorem / GNS), **E1 field** (one-particle
+  space + `S_D`), **E8 bipartite** (graded tensor product), **E9** (Dirac `T_μν` → Jacobson hook).

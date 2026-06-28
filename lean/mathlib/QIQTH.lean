@@ -498,6 +498,7 @@ import QIQTH.Fock.Dirac.KleinTwist
 import QIQTH.Fock.Dirac.KleinTwistUnitary
 import QIQTH.Fock.Dirac.FermiDirac
 import QIQTH.Fock.Dirac.EvenObservables
+import QIQTH.Fock.Dirac.DiracGamma
 import QIQTH.Fock.Dirac.GradedCapacity
 
 import QIQTH.RefinementBorn
