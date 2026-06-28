@@ -260,3 +260,13 @@ frontier.
   (checkpointed): **E5** (operator-algebra BW data / twisted-duality theorem / GNS), **E1** (Dirac
   one-particle + `S_D`), E4 **Z-unitary** (`StarRing`), **E8** (even-observable no-signaling), **E9**
   (Dirac `T_μν` → Jacobson hook).
+- 2026-06-28 — **E6→E5 bridge (per-mode modular Hamiltonian) DONE** (added to `FermiDirac.lean`,
+  axiom-free, budget 0). **`fermiDirac_logit`** — for a fermionic mode with occupation
+  `n = fermiDirac β ω`, the modular energy is the logit `log((1−n)/n) = βω`. This is the **single-mode
+  form of the fermionic modular Hamiltonian `K = log((1−C)/C)`** (the quasi-free modular generator of
+  `QuasiFreeEntropy`): the logit of the occupation IS the inverse-temperature-scaled mode energy,
+  linking the E6 occupation to the modular generator `Δ^{it}=e^{−itK}` (the E5 target). Wired into
+  `AxiomAudit.lean` (standard-3); `lake build QIQTH.Fock.Dirac.FermiDirac` green (1925 jobs); budget 0.
+  Remaining frontier (checkpointed): **E5** (full operator-algebra BW data / twisted-duality theorem /
+  GNS), **E1** (Dirac one-particle + `S_D`), E4 **Z-unitary** (star-algebra), **E8** (even-observable
+  no-signaling), **E9** (Dirac `T_μν` → Jacobson hook).

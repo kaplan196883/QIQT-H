@@ -6407,6 +6407,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Dirac.fermiDirac_kms_balance
 #print axioms QIQTH.Fock.Dirac.fermiDirac_unique
 #print axioms QIQTH.Fock.Dirac.boseEinstein_kms_balance
+-- ★★★ ELECTRON_FIELD_PLAN E6→E5 bridge (per-mode modular Hamiltonian): fermiDirac_logit — for a fermionic mode with
+-- occupation n = fermiDirac β ω, the modular energy is the logit log((1−n)/n) = βω. This is the single-mode form of
+-- the fermionic modular Hamiltonian K = log((1−C)/C) (QuasiFreeEntropy / quasi-free modular generator): the logit of
+-- the occupation IS the inverse-temperature-scaled mode energy, linking the E6 occupation to the modular generator
+-- Δ^{it}=e^{−itK} (the E5 target). Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.fermiDirac_logit
 -- ★★★ ELECTRON_FIELD_PLAN E7/E8-seed (the even/observable algebra — the §0 "which algebra" decision): for the
 -- electron, records/capacity attach to the EVEN (parity-fixed) subalgebra, NOT the full graded field algebra.
 -- IsEven a := parity a = a (Γ-eigenvalue +1); evenSubalgebra = the Γ-fixed Subalgebra (closed under +,*, contains

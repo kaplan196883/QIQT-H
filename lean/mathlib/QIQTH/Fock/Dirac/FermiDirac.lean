@@ -29,6 +29,7 @@ is that, GIVEN the balance, the occupation is uniquely Fermi–Dirac, valid, and
 Bose.  Free Dirac only.
 -/
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
 namespace QIQTH.Fock.Dirac
 
@@ -90,6 +91,22 @@ theorem boseEinstein_kms_balance {β ω : ℝ} (h : Real.exp (β * ω) ≠ 1) :
   have he : Real.exp (β * ω) ≠ 0 := (Real.exp_pos _).ne'
   field_simp
   ring
+
+/-- **The per-mode modular Hamiltonian (logit of the occupation).**  For a fermionic mode with
+occupation `n = fermiDirac β ω`, the modular energy is recovered as `log((1 − n)/n) = β ω`.  This is the
+single-mode form of the fermionic modular Hamiltonian `K = log((1 − C)/C)` (`QuasiFreeEntropy` / the
+quasi-free modular generator): the logit of the occupation IS the inverse-temperature-scaled mode
+energy.  It links the E6 occupation to the modular generator `Δ^{it} = e^{−itK}` (the E5 target). -/
+theorem fermiDirac_logit (β ω : ℝ) :
+    Real.log ((1 - fermiDirac β ω) / fermiDirac β ω) = β * ω := by
+  have hfd : fermiDirac β ω ≠ 0 := (fermiDirac_pos β ω).ne'
+  have hb := fermiDirac_kms_balance β ω
+  have key : Real.exp (β * ω) * fermiDirac β ω = 1 - fermiDirac β ω := by
+    nth_rewrite 1 [hb]
+    rw [← mul_assoc, ← Real.exp_add, add_neg_cancel, Real.exp_zero, one_mul]
+  have h : (1 - fermiDirac β ω) / fermiDirac β ω = Real.exp (β * ω) := by
+    rw [div_eq_iff hfd]; linarith [key]
+  rw [h, Real.log_exp]
 
 /-- The **Rindler/Unruh occupation** of a fermionic mode: the Fermi–Dirac occupation at the Unruh
 inverse temperature `β = 2π`, `n_ω = 1/(e^{2πω} + 1)`. -/
