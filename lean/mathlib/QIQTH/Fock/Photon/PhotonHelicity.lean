@@ -29,6 +29,19 @@ variable (Hplus Hminus : Type*)
   [AddCommGroup Hplus] [Module ℂ Hplus] [Module.Finite ℂ Hplus]
   [AddCommGroup Hminus] [Module ℂ Hminus] [Module.Finite ℂ Hminus]
 
+/-- **The photon helicity operator** `Λ = (+1) on h_{+1}, (−1) on h_{−1}` — the spin projection along the
+momentum, `+1` on the positive-helicity sector and `−1` on the negative.  (Massless spin-1: helicity is
+`±1`, never `0`.) -/
+def helicityOp : (Hplus × Hminus) →ₗ[ℂ] (Hplus × Hminus) :=
+  LinearMap.prodMap LinearMap.id (-LinearMap.id)
+
+/-- **The photon helicity squares to the identity: `Λ² = 1` (eigenvalues `±1`).**  The photon is a massless
+spin-1 particle with exactly two helicities `±1`; the helicity operator has `Λ² = 1`, its eigenvalues being
+`±1` — the spin-1 (vs the would-be longitudinal helicity `0` of a *massive* vector, absent here). -/
+theorem helicityOp_sq :
+    (helicityOp Hplus Hminus).comp (helicityOp Hplus Hminus) = LinearMap.id := by
+  ext p <;> simp [helicityOp]
+
 /-- **The transverse one-particle dimension splits over the two helicities**:
 `dim h_γ = dim h_{+1} + dim h_{−1}` for `h_γ = h_{+1} ⊕ h_{−1}`. -/
 theorem photon_helicity_finrank :

@@ -310,3 +310,8 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   `(1+n)log(1+n) − n log n = log(1+n) + n·log((1+n)/n)` is a sum of two non-negative terms (`log(1+n) ≥ 0`
   since `1+n ≥ 1`; `n·log((1+n)/n) ≥ 0` since `(1+n)/n ≥ 1`) — the thermal/Unruh photon entropy is a genuine
   (non-negative) entropy. Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **P1: the photon helicity operator (spin-1, helicity ±1)** (`PhotonHelicity.lean`, axiom-free
+  standard-3, budget 0, 2943 jobs green). **`helicityOp`** = `(+1 on h_{+1}, −1 on h_{−1})`, the spin
+  projection along the momentum; **`helicityOp_sq`**: `Λ² = 1` (eigenvalues `±1`) — the photon is massless
+  spin-1 with exactly two helicities `±1` (never the longitudinal `0` of a *massive* vector). Pins the
+  spin-1/2-polarization structure at the operator level. Wired into `AxiomAudit.lean`; standard-3; budget 0.
