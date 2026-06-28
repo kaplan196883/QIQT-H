@@ -83,4 +83,62 @@ theorem gamma_rotation_sq : γ1 * γ2 * (γ1 * γ2) = -1 := by
     _ = -((-1 : Matrix (Fin 4) (Fin 4) ℂ) * (-1)) := by rw [γ1_mul_γ1, γ2_mul_γ2]
     _ = -1 := by simp
 
+/-! ### The spinor Lorentz algebra closes on PhysLean's Dirac matrices (E9)
+
+The spinor Lorentz generators are the gamma bilinears `M_ab = γ_aγ_b` (the boost generators `M_{0i}` and the
+rotation generators `M_{ij}`, up to the standard `½` normalization).  These two theorems show the **Dirac-rep
+Lorentz algebra `so(1,3)` closes** under the commutator — built entirely from the per-pair `γμγν=−γνγμ` +
+`γμ²=±1` facts, no new input.  The boost generator `M_{01}=γ₀γ₁` is the spinor part of the wedge modular/Unruh
+generator (`2πK_boost`, E9), so its commutation structure is the algebraic skeleton of how modular boosts
+compose. -/
+
+/-- **★ Two boosts compose to a rotation** (`so(1,3)` closure, the seed of **Thomas–Wigner precession**):
+`[γ₀γ₁, γ₀γ₂] = −2 γ₁γ₂`.  The commutator of the two boost generators `M_{01}, M_{02}` is the *rotation*
+generator `M_{12}` — boosts do **not** form a subalgebra; composing boosts in different planes generates a
+spatial rotation.  Since `γ₀γ₁` is the spinor part of the wedge modular boost (E9 `2πK_boost`), this is the
+algebraic skeleton of how modular boosts in different wedges interrelate. -/
+theorem spinor_boost_boost_comm :
+    γ0 * γ1 * (γ0 * γ2) - γ0 * γ2 * (γ0 * γ1) = (-2 : ℂ) • (γ1 * γ2) := by
+  have h1 : γ0 * γ1 * (γ0 * γ2) = -(γ1 * γ2) := by
+    calc γ0 * γ1 * (γ0 * γ2)
+        = γ0 * (γ1 * γ0) * γ2 := by noncomm_ring
+      _ = γ0 * (-(γ0 * γ1)) * γ2 := by rw [γ1_mul_γ0]
+      _ = -(γ0 * γ0 * (γ1 * γ2)) := by noncomm_ring
+      _ = -((1 : Matrix (Fin 4) (Fin 4) ℂ) * (γ1 * γ2)) := by rw [γ0_mul_γ0]
+      _ = -(γ1 * γ2) := by rw [one_mul]
+  have h2 : γ0 * γ2 * (γ0 * γ1) = γ1 * γ2 := by
+    calc γ0 * γ2 * (γ0 * γ1)
+        = γ0 * (γ2 * γ0) * γ1 := by noncomm_ring
+      _ = γ0 * (-(γ0 * γ2)) * γ1 := by rw [γ2_mul_γ0]
+      _ = -(γ0 * γ0 * (γ2 * γ1)) := by noncomm_ring
+      _ = -((1 : Matrix (Fin 4) (Fin 4) ℂ) * (γ2 * γ1)) := by rw [γ0_mul_γ0]
+      _ = -(γ2 * γ1) := by rw [one_mul]
+      _ = -(-(γ1 * γ2)) := by rw [γ2_mul_γ1]
+      _ = γ1 * γ2 := by rw [neg_neg]
+  rw [h1, h2]; module
+
+/-- **★ Boost ∘ rotation = boost** (`so(1,3)` closure): `[γ₀γ₁, γ₁γ₂] = −2 γ₀γ₂`.  The commutator of the
+boost generator `M_{01}` with the rotation generator `M_{12}` is the boost generator `M_{02}` — rotations
+rotate the boost direction.  With `spinor_boost_boost_comm` this exhibits the non-abelian Lorentz structure of
+the spinor generators on PhysLean's concrete Dirac representation. -/
+theorem spinor_boost_rotation_comm :
+    γ0 * γ1 * (γ1 * γ2) - γ1 * γ2 * (γ0 * γ1) = (-2 : ℂ) • (γ0 * γ2) := by
+  have h1 : γ0 * γ1 * (γ1 * γ2) = -(γ0 * γ2) := by
+    calc γ0 * γ1 * (γ1 * γ2)
+        = γ0 * (γ1 * γ1) * γ2 := by noncomm_ring
+      _ = γ0 * (-1 : Matrix (Fin 4) (Fin 4) ℂ) * γ2 := by rw [γ1_mul_γ1]
+      _ = -(γ0 * γ2) := by noncomm_ring
+  have h2 : γ1 * γ2 * (γ0 * γ1) = γ0 * γ2 := by
+    calc γ1 * γ2 * (γ0 * γ1)
+        = γ1 * (γ2 * γ0) * γ1 := by noncomm_ring
+      _ = γ1 * (-(γ0 * γ2)) * γ1 := by rw [γ2_mul_γ0]
+      _ = -(γ1 * γ0 * (γ2 * γ1)) := by noncomm_ring
+      _ = -((-(γ0 * γ1)) * (γ2 * γ1)) := by rw [γ1_mul_γ0]
+      _ = γ0 * γ1 * (γ2 * γ1) := by noncomm_ring
+      _ = γ0 * γ1 * (-(γ1 * γ2)) := by rw [γ2_mul_γ1]
+      _ = -(γ0 * (γ1 * γ1) * γ2) := by noncomm_ring
+      _ = -(γ0 * (-1 : Matrix (Fin 4) (Fin 4) ℂ) * γ2) := by rw [γ1_mul_γ1]
+      _ = γ0 * γ2 := by noncomm_ring
+  rw [h1, h2]; module
+
 end QIQTH.Fock.Dirac

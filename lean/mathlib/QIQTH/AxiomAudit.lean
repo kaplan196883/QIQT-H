@@ -6728,6 +6728,14 @@ namespace QIQTH.AxiomAudit
 -- concretely on PhysLean's matrices, mirroring abstract diracGamma_mul_sq_boost/_rotation. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.gamma_boost_sq
 #print axioms QIQTH.Fock.Dirac.gamma_rotation_sq
+-- ★★★ ELECTRON_FIELD E9 (the spinor Lorentz algebra so(1,3) CLOSES on PhysLean's Dirac matrices): the gamma bilinears
+-- M_ab=γaγb are the spinor Lorentz generators (boosts M_0i, rotations M_ij). spinor_boost_boost_comm: [γ0γ1,γ0γ2]=−2γ1γ2
+-- — two BOOSTS compose to a ROTATION (the seed of Thomas–Wigner precession; boosts are NOT a subalgebra).
+-- spinor_boost_rotation_comm: [γ0γ1,γ1γ2]=−2γ0γ2 — boost∘rotation = boost. Built only from the per-pair γμγν=−γνγμ +
+-- γμ²=±1 facts (noncomm_ring + module). Since γ0γ1 is the spinor part of the wedge modular/Unruh boost (E9 2πK_boost),
+-- this is the algebraic skeleton of how modular boosts compose. Axiom-free (standard 3); free Dirac.
+#print axioms QIQTH.Fock.Dirac.spinor_boost_boost_comm
+#print axioms QIQTH.Fock.Dirac.spinor_boost_rotation_comm
 -- ★★★ ELECTRON_FIELD E5/E6 (electron mode wired into the EXISTING Tomita–Takesaki machinery): QIQT-H already has
 -- the finite modular flow (FiniteModularTheory: modAut ρ x = ρ x ⅟ρ, stateOf, the proved kms_condition) and the
 -- continuum Δ^it = modFlow (Spectral/SpectralTheorem). electron_occupation_eq_fermiDirac: for a single fermionic

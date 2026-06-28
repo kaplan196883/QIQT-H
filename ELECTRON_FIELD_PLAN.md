@@ -872,3 +872,17 @@ EXTERNAL libraries; QIQT-H built its own.
   the abstract `DiracGamma.diracGamma_mul_sq_boost`/`_rotation`), via the per-pair `γμγν=−γνγμ` + `γμ²=±1`
   lemmas + `noncomm_ring`. The boost square `(γ₀γ₁)²=+1` is the spinor seed of the modular/boost generator.
   Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **★ E9: the spinor Lorentz algebra `so(1,3)` CLOSES on PhysLean's Dirac matrices** (extended
+  `PhysLeanGammaBridge.lean`, axiom-free standard-3, budget 0, 2088 jobs green). The gamma bilinears
+  `M_ab=γ_aγ_b` are the spinor Lorentz generators (boosts `M_{0i}`, rotations `M_{ij}`).
+  **`spinor_boost_boost_comm`**: `[γ₀γ₁, γ₀γ₂] = −2 γ₁γ₂` — **two boosts compose to a rotation** (the seed of
+  **Thomas–Wigner precession**; boosts are NOT a subalgebra). **`spinor_boost_rotation_comm`**:
+  `[γ₀γ₁, γ₁γ₂] = −2 γ₀γ₂` — boost∘rotation = boost. Built only from the per-pair `γμγν=−γνγμ` + `γμ²=±1`
+  facts (`noncomm_ring` + `module`). Since `γ₀γ₁` is the spinor part of the wedge modular/Unruh boost (E9
+  `2πK_boost`), this is the algebraic skeleton of how modular boosts compose. Wired into `AxiomAudit.lean`;
+  standard-3; budget 0.
+  **E1 microcausality checkpoint (honest):** the *scalar* Pauli–Jordan microcausality IS proved exactly —
+  `Fock/PauliJordan.lean`'s **`Kform_im_eq_zero_of_spacelike`** (the smeared commutator's imaginary part
+  vanishes for spacelike-separated test functions, EXACT not a regularized Tendsto). The Dirac inheritance
+  `S_D=(iγ·∂+m)Δ_m` is NOT a one-line wiring: it needs the Dirac *smeared* commutator + spinor test-function
+  + `(iγ·∂+m)`-on-test-functions infrastructure — a genuine E1 build, deferred (labelled frontier).
