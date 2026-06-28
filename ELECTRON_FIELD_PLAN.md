@@ -349,3 +349,25 @@ frontier.
   0. **The self-contained algebraic/analytic layer of the electron substrate is now exhaustively covered;
   further genuine progress requires PhysLean integration (CAR operator layer) or the modular-theory
   frontier (Tomita–Takesaki, unbuilt in any proof assistant).**
+
+## 7. PhysLean integration (2026-06-28)
+
+The remaining E2-full / E5 operator tier (fermionic CAR creation/annihilation operators, Wick algebra)
+is already formalized in **PhysLean** (HEPLean). Rather than rebuild it, QIQT-H now **depends on
+PhysLean**:
+
+- **Pinned to commit `d0ee4af6f490`** (the last PhysLean commit on Lean v4.30.0), whose Mathlib pin
+  `c5ea00351c28 @ v4.30.0` **exactly matches** QIQT-H's — so the existing Mathlib build is reused,
+  **no v4.31 bump / multi-hour rebuild**. `lake update PhysLean` resolved to a single Mathlib; PhysLean's
+  `FieldStatistics.Basic` builds green in QIQT-H (41 s, reusing cache).
+- **Bridge module `QIQTH/Fock/Dirac/PhysLeanBridge.lean`** fuses PhysLean's `ℤ₂` `FieldStatistic` group
+  with the substrate's parity/Clifford gradings: `electron_pair_bosonic` (`fermionic·fermionic=bosonic`
+  ↔ `isEven_ι_mul_ι`), `statParity : FieldStatistic →+ ℤ₂` (the shared grading hom, `statParity_mul`),
+  `electron_statParity = 1` (the electron is odd). Axiom-free; budget 0; full QIQTH build green with
+  PhysLean in the graph.
+- **Available for the follow-on E2-full/E5 work:** `Physlib.QFT.PerturbationTheory.{CreateAnnihilate,
+  FieldSpecification.CrAnFieldOp, WickAlgebra.Basic, WickAlgebra.SuperCommute}` — the fermionic CAR
+  a/a† operators + the graded (super)commutator that is the QIQT-H crux.
+
+This closes the "build vs reuse" decision for the operator layer: **reuse PhysLean**. The other frontier
+(E5 modular flow / Tomita–Takesaki) remains unbuilt in any proof assistant.

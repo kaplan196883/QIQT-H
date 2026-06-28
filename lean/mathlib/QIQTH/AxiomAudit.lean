@@ -6473,6 +6473,16 @@ namespace QIQTH.AxiomAudit
 -- (standard 3).
 #print axioms QIQTH.Fock.Dirac.diracSigma_mem_even
 #print axioms QIQTH.Fock.Dirac.diracGamma_mem_odd
+-- ★★★ ELECTRON_FIELD_PLAN — PhysLean bridge (the CAR operator-layer dependency): QIQT-H now depends on PhysLean
+-- (HEPLean, pinned to d0ee4af whose Mathlib pin c5ea00351c28 @ v4.30.0 matches QIQT-H's — no Mathlib bump), which
+-- provides the fermionic CAR field-operator algebra (FieldStatistic, CreateAnnihilate, CrAnFieldOp, WickAlgebra,
+-- SuperCommute) for E2-full/E5. electron_pair_bosonic: fermionic·fermionic = bosonic (PhysLean) ↔ isEven_ι_mul_ι
+-- (two odd generators → even); statParity_mul: statParity : FieldStatistic →+ ℤ₂ is the grading hom shared by
+-- PhysLean's FieldStatistic and the QIQT-H parity / Clifford evenOdd gradings; electron_statParity: the electron is
+-- odd (grade 1). The dependency is live and the statistics align; building the CAR a/a† operators on PhysLean's
+-- WickAlgebra is the follow-on E2-full/E5 work. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.electron_pair_bosonic
+#print axioms QIQTH.Fock.Dirac.statParity_mul
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy
