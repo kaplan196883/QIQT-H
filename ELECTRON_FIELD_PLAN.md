@@ -806,3 +806,10 @@ EXTERNAL libraries; QIQT-H built its own.
   complement invariant (the planar nature of a Lorentz transformation). With `diracSigma_comm_gamma_left`
   (rotates the plane) this fully characterizes the spinor action of `σ_ab` on the gamma 4-vector. Wired
   into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **E1: boost vs rotation, concrete `(γ_aγ_b)² = ∓1`** (added to `DiracGamma.lean`, axiom-free,
+  budget 0, 1775 jobs green). **`diracGamma_mul_sq_rotation`**: for a *rotation plane* (`Q(a)·Q(b)=1`),
+  `(γ_aγ_b)²=−1` — `γ_aγ_b` is a **complex structure** (square root of `−1`, generating the elliptic `U(1)`
+  rotation `e^{θγ_aγ_b}=cos θ+sin θ·γ_aγ_b`). **`diracGamma_mul_sq_boost`**: for a *boost plane*
+  (`Q(a)·Q(b)=−1`, time⟂space), `(γ_aγ_b)²=+1` — a **hyperbolic** generator (`e^{η γ_aγ_b}=cosh η+sinh
+  η·γ_aγ_b`, the unbounded boost whose `Δ^{it}` is the modular flow). The concrete elliptic-vs-hyperbolic
+  realization of the boost/rotation dichotomy. Wired into `AxiomAudit.lean`; standard-3; budget 0.

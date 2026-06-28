@@ -126,6 +126,20 @@ theorem diracGamma_mul_sq_ortho {a b : M} (h : Q.IsOrtho a b) :
       = -((diracGamma Q a * diracGamma Q a) * (diracGamma Q b * diracGamma Q b)) := by noncomm_ring
   rw [e2, diracGamma_sq, diracGamma_sq, ← map_mul, ← map_neg]
 
+/-- **Rotation plane ⟹ `γ_aγ_b` is a COMPLEX STRUCTURE: `(γ_aγ_b)² = −1`** (when `Q(a)·Q(b) = 1`, e.g. two
+unit spacelike directions, or two unit timelike — a *rotation* plane).  So `γ_aγ_b` is a square root of
+`−1`, generating a `U(1)` rotation (`e^{θγ_aγ_b}` is `cos θ + sin θ·γ_aγ_b`, *elliptic*). -/
+theorem diracGamma_mul_sq_rotation {a b : M} (h : Q.IsOrtho a b) (hQ : Q a * Q b = 1) :
+    (diracGamma Q a * diracGamma Q b) * (diracGamma Q a * diracGamma Q b) = -1 := by
+  rw [diracGamma_mul_sq_ortho Q h, hQ, map_neg, map_one]
+
+/-- **Boost plane ⟹ `(γ_aγ_b)² = +1`** (when `Q(a)·Q(b) = −1`, i.e. one unit timelike ⟂ one unit
+spacelike — a *boost* plane).  So `γ_aγ_b` squares to `+1` (a "reflection"-like, *hyperbolic* generator:
+`e^{η γ_aγ_b} = cosh η + sinh η·γ_aγ_b` — the unbounded boost, whose `Δ^{it}` is the modular flow). -/
+theorem diracGamma_mul_sq_boost {a b : M} (h : Q.IsOrtho a b) (hQ : Q a * Q b = -1) :
+    (diracGamma Q a * diracGamma Q b) * (diracGamma Q a * diracGamma Q b) = 1 := by
+  rw [diracGamma_mul_sq_ortho Q h, hQ, neg_neg, map_one]
+
 /-- **The Lorentz generator squares to a scalar: `σ_ab² = −4·η(a)·η(b)` (orthogonal `a ⟂ b`).**  Since
 `σ_ab = 2γ_aγ_b` and `(γ_aγ_b)² = −η(a)η(b)` (`diracGamma_mul_sq_ortho`), the spin generator squares to the
 *scalar* `−4·Q(a)·Q(b)`.  This **distinguishes boosts from rotations**: with the Minkowski metric

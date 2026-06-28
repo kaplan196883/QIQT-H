@@ -6505,6 +6505,11 @@ namespace QIQTH.AxiomAudit
 -- complete orthogonal system of projections. Axiom-free (standard 3); free Maxwell.
 #print axioms QIQTH.Fock.Photon.helicityOp_eq_proj
 #print axioms QIQTH.Fock.Photon.helicityProj_orthogonal
+-- PHOTON_FIELD_PLAN P1 (the helicity eigenvalues ±1, concrete): helicityOp_plus — Λ(x,0)=(x,0) (a positive-helicity
+-- photon is a Λ=+1 eigenvector); helicityOp_minus — Λ(0,y)=(0,−y) (a negative-helicity photon is a Λ=−1 eigenvector).
+-- The two eigenvalues ±1 are the photon's two transverse helicities. Axiom-free (standard 3); free Maxwell.
+#print axioms QIQTH.Fock.Photon.helicityOp_plus
+#print axioms QIQTH.Fock.Photon.helicityOp_minus
 -- ★★★ ELECTRON_FIELD_PLAN E6→E5 bridge (per-mode modular Hamiltonian): fermiDirac_logit — for a fermionic mode with
 -- occupation n = fermiDirac β ω, the modular energy is the logit log((1−n)/n) = βω. This is the single-mode form of
 -- the fermionic modular Hamiltonian K = log((1−C)/C) (QuasiFreeEntropy / quasi-free modular generator): the logit of
@@ -6584,6 +6589,12 @@ namespace QIQTH.AxiomAudit
 -- a Lorentz transformation). With diracSigma_comm_gamma_left (rotates the plane) this fully characterizes the spinor
 -- action of σ_ab on the gamma 4-vector. Axiom-free (standard 3); free Dirac.
 #print axioms QIQTH.Fock.Dirac.diracSigma_comm_gamma_ortho
+-- ELECTRON_FIELD E1 (boost vs rotation, concrete): diracGamma_mul_sq_rotation — for a rotation plane (Q(a)·Q(b)=1),
+-- (γ_aγ_b)²=−1: γ_aγ_b is a COMPLEX STRUCTURE (square root of −1, generating an elliptic U(1) rotation).
+-- diracGamma_mul_sq_boost — for a boost plane (Q(a)·Q(b)=−1, time⟂space), (γ_aγ_b)²=+1: a hyperbolic generator
+-- (e^{η γ_aγ_b}=cosh η+sinh η·γ_aγ_b, the unbounded boost whose Δ^it is the modular flow). Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.diracGamma_mul_sq_rotation
+#print axioms QIQTH.Fock.Dirac.diracGamma_mul_sq_boost
 -- ★★★ ELECTRON_FIELD_PLAN — PhysLean bridge (the CAR operator-layer dependency): QIQT-H now depends on PhysLean
 -- (HEPLean, pinned to d0ee4af whose Mathlib pin c5ea00351c28 @ v4.30.0 matches QIQT-H's — no Mathlib bump), which
 -- provides the fermionic CAR field-operator algebra (FieldStatistic, CreateAnnihilate, CrAnFieldOp, WickAlgebra,
