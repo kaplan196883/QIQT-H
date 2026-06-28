@@ -386,3 +386,12 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   rotates it by the tensor rule: the gauge-invariant records form a **closed, Lorentz-covariant family**,
   the photon analogue of the electron's "modular flow preserves the even/observable algebra" (P7).  Wired
   into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **★ P6 completion: the Maxwell action/energy density is a gauge-invariant record** (the
+  `T_μν`/energy half; extended `PhysLeanEMBridge.lean`, axiom-free standard-3, budget 0, 3298 jobs green).
+  **`photonAction_gauge_invariant`**: the Maxwell Lagrangian kinetic term `−¼F_μνF^μν/μ₀` (PhysLean's
+  `kineticTerm`) is built purely from `F` (`kineticTerm_eq_sum_fieldStrengthMatrix`), so — since `F` is
+  gauge-invariant (`photonRecord_gauge_invariant`) — the action density is **unchanged under `A→A+∂χ`**.
+  This is the energy/stress (`T_μν`) companion of the field-strength record `F_μν`: the photon's *energy*
+  observable, like its field strength, does not see the pure-gauge redundancy — completing the §2/P6
+  "records = gauge-invariant observables `F_μν`/`T_μν`" decision (both halves now grounded in PhysLean's
+  reviewed EM dynamics). Wired into `AxiomAudit.lean`; standard-3; budget 0.

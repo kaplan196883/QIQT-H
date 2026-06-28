@@ -6552,6 +6552,12 @@ namespace QIQTH.AxiomAudit
 -- rule: the gauge-invariant records form a closed Lorentz-covariant family (the photon analogue of the electron's
 -- "modular flow preserves the even/observable algebra"). Axiom-free (standard 3); free Maxwell.
 #print axioms QIQTH.Fock.Photon.photonRecord_lorentz_covariant
+-- ★★★ PHOTON_FIELD_PLAN P6 (the T_μν/energy half — the Maxwell action density is a gauge-invariant record):
+-- photonAction_gauge_invariant — the Maxwell Lagrangian kinetic term −¼F_μνF^μν/μ₀ (PhysLean kineticTerm) is built
+-- purely from F (kineticTerm_eq_sum_fieldStrengthMatrix), so since F is gauge-invariant the action density is unchanged
+-- under A→A+∂χ. The energy/stress (T_μν) companion of the field-strength record F_μν: the photon's ENERGY observable,
+-- like its field strength, does not see the pure-gauge redundancy (completing P6 "records = F_μν/T_μν"). Standard 3.
+#print axioms QIQTH.Fock.Photon.photonAction_gauge_invariant
 -- ★★★ ELECTRON_FIELD_PLAN E6→E5 bridge (per-mode modular Hamiltonian): fermiDirac_logit — for a fermionic mode with
 -- occupation n = fermiDirac β ω, the modular energy is the logit log((1−n)/n) = βω. This is the single-mode form of
 -- the fermionic modular Hamiltonian K = log((1−C)/C) (QuasiFreeEntropy / quasi-free modular generator): the logit of

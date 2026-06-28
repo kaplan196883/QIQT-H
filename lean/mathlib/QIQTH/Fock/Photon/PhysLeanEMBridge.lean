@@ -25,6 +25,7 @@ continuum frontier (P10).  Axiom-free (standard `propext`/`Classical.choice`/`Qu
 Free Maxwell only.
 -/
 import Physlib.Electromagnetism.Kinematics.GaugeTransformation
+import Physlib.Electromagnetism.Dynamics.KineticTerm
 
 namespace QIQTH.Fock.Photon
 
@@ -87,5 +88,19 @@ theorem photonRecord_lorentz_covariant (A : ElectromagneticPotential d) (Λ : Lo
       = ∑ κ, ∑ ρ, (Λ.1 μ κ * Λ.1 ν ρ) * photonRecord A (Λ⁻¹ • x) (κ, ρ) := by
   unfold photonRecord
   exact ElectromagneticPotential.fieldStrengthMatrix_equivariant A Λ hA x μ ν
+
+/-- **★ The Maxwell action/energy density is a gauge-invariant record** (P6, the `T_μν`/energy half).  The
+Maxwell Lagrangian kinetic term `−¼ F_μν F^μν / μ₀` (PhysLean's `kineticTerm`) is built purely from the
+field strength `F` (`kineticTerm_eq_sum_fieldStrengthMatrix`), so — since `F` is gauge-invariant
+(`photonRecord_gauge_invariant`) — the action density is **unchanged under `A → A + ∂χ`**.  This is the
+energy/stress (`T_μν`) companion of the field-strength record `F_μν`: the photon's *energy* observable, like
+its field strength, does not see the pure-gauge redundancy.  (The Maxwell stress–energy `T_μν` is likewise a
+quadratic-in-`F` gauge-invariant; the action density is its scalar Lagrangian.) -/
+theorem photonAction_gauge_invariant (𝓕 : FreeSpace) (A : ElectromagneticPotential d)
+    (χ : SpaceTime d → ℝ) (hA : Differentiable ℝ A) (hχ : ContDiff ℝ 2 χ) (x : SpaceTime d) :
+    (ElectromagneticPotential.gaugeTransform χ A).kineticTerm 𝓕 x = A.kineticTerm 𝓕 x := by
+  rw [ElectromagneticPotential.kineticTerm_eq_sum_fieldStrengthMatrix,
+      ElectromagneticPotential.kineticTerm_eq_sum_fieldStrengthMatrix,
+      ElectromagneticPotential.fieldStrengthMatrix_gaugeTransform A χ hA hχ x]
 
 end QIQTH.Fock.Photon
