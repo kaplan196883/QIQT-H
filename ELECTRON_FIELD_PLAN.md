@@ -583,3 +583,13 @@ EXTERNAL libraries; QIQT-H built its own.
   electron CAR net at the continuum level. `lake build QIQTH.Fock.Dirac.CARModularFlow` green (3526 jobs);
   standard-3; budget 0. The continuum modular flow is now a genuine one-parameter automorphism group.
   Remaining E5: the fermionic modular conjugation `J_W = Z·Γ₋(j)` (antilinear — the genuine remaining gap).
+- 2026-06-28 — **E5/§0: the continuum modular flow preserves the even/record sector** (added to
+  `CARModularFlow.lean`, axiom-free, budget 0). **`fermiSecondQuantModFlow_comp_parity`** —
+  `Γ₋(Δ^{it}) ∘ Γ = Γ ∘ Γ₋(Δ^{it})`: the continuum modular flow **commutes with the fermion parity
+  `Γ = (−1)^F`** (both graded algebra homs, agreeing on the `ι` generators). Hence the modular flow
+  **preserves the ℤ₂ grading — the even (record/observable) sector is invariant under the modular
+  dynamics**: the record/charge is conserved by the field-level modular flow (the §0/E8 "records attach
+  to the even algebra" decision, now conserved by `σ_t` at the **continuum** level, matching the
+  finite-level `electron_modAut_numberOp`/`electron_sigmaDiag_fixes_numberOp`). `lake build
+  QIQTH.Fock.Dirac.CARModularFlow` green (3549 jobs); standard-3; budget 0. Remaining E5: the antilinear
+  fermionic modular conjugation `J_W = Z·Γ₋(j)` (the genuine antilinear-functor / Mathlib gap).

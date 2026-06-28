@@ -32,6 +32,7 @@ rides the `StandardSubspace`/Type-III₁ continuum frontier (`TOMITA_TAKESAKI_RO
 only.
 -/
 import QIQTH.StandardSubspaceModularFlow
+import QIQTH.Fock.Dirac.Parity
 import Mathlib.LinearAlgebra.ExteriorAlgebra.Basic
 
 namespace QIQTH.Fock.Dirac
@@ -99,5 +100,19 @@ noncomputable def fermiModFlowEquiv (S : StandardSubspace H) (t : ℝ) :
 
 @[simp] theorem fermiModFlowEquiv_apply (S : StandardSubspace H) (t : ℝ)
     (x : ExteriorAlgebra ℂ H) : fermiModFlowEquiv S t x = fermiSecondQuantModFlow S t x := rfl
+
+/-- **The modular flow commutes with the fermion parity `Γ = (−1)^F`** (`Parity.parity`):
+`Γ₋(Δ^{it}) ∘ Γ = Γ ∘ Γ₋(Δ^{it})`.  Both are graded algebra homs (`Γ₋(Δ^{it}) = map U` preserves
+exterior degree; `Γ` is the grade involution), so they agree on the one-particle generators.  Hence the
+continuum modular flow **preserves the ℤ₂ grading — the even (record/observable) sector is invariant
+under the modular dynamics**: the record/charge is conserved by the field-level modular flow (the §0/E8
+"records attach to the even algebra" decision, conserved by `σ_t`). -/
+theorem fermiSecondQuantModFlow_comp_parity (S : StandardSubspace H) (t : ℝ) :
+    (fermiSecondQuantModFlow S t).comp (parity ℂ H)
+      = (parity ℂ H).comp (fermiSecondQuantModFlow S t) := by
+  ext f
+  show fermiSecondQuantModFlow S t (parity ℂ H (ExteriorAlgebra.ι ℂ f))
+      = parity ℂ H (fermiSecondQuantModFlow S t (ExteriorAlgebra.ι ℂ f))
+  rw [parity_ι, map_neg, fermiSecondQuantModFlow_ι, parity_ι]
 
 end QIQTH.Fock.Dirac

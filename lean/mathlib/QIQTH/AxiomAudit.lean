@@ -6596,6 +6596,13 @@ namespace QIQTH.AxiomAudit
 -- for the electron CAR net. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.fermiSecondQuantModFlow_comp_neg
 #print axioms QIQTH.Fock.Dirac.fermiModFlowEquiv
+-- ★★★ ELECTRON_FIELD E5/§0 (the continuum modular flow preserves the even/record sector):
+-- fermiSecondQuantModFlow_comp_parity — Γ₋(Δ^it)∘Γ = Γ∘Γ₋(Δ^it), the continuum modular flow commutes with the
+-- fermion parity Γ=(−1)^F (both graded algebra homs, agreeing on the ι generators). Hence the modular flow PRESERVES
+-- the ℤ₂ grading — the even (record/observable) sector is invariant under the modular dynamics: the record/charge is
+-- conserved by the field-level modular flow (the §0/E8 records decision, conserved by σ_t at the continuum level).
+-- Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.fermiSecondQuantModFlow_comp_parity
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy
