@@ -6699,5 +6699,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Photon.boseEinstein_gt_fermiDirac
 #print axioms QIQTH.Fock.Photon.rindlerOccupationBose_balance
 #print axioms QIQTH.Fock.Photon.rindlerOccupationBose_pos
+-- ★★★ PHOTON_FIELD_PLAN P1/P5 (the photon continuum modular flow IS the bosonic Γ_s(Δ^it) — REUSE): the photon is
+-- bosonic, so its field-level wedge modular flow Δ_γ^it = Γ_s(Δ^it) is EXACTLY the existing bosonic secondQuantModFlow
+-- (vs the electron's fermionic Γ₋ = ExteriorAlgebra.map). Nothing new is built; this names the reuse in the photon
+-- namespace. photonModFlow := secondQuantModFlow on the transverse helicity-±1 one-particle space; photonModFlow_expVec
+-- (Γ_s(Δ^it)e(f)=e(Δ^it f)), _vacuum, _zero (=id), _add (the one-parameter group law), _isometric (preserves the Fock
+-- inner product). photonModFlowH (Hilbert-space completion) + _isometry + _vacuum. So Δ_γ^it is a one-parameter
+-- isometric automorphism group fixing the vacuum, reused wholesale. Axiom-free (standard 3). Free Maxwell only.
+#print axioms QIQTH.Fock.Photon.photonModFlow_expVec
+#print axioms QIQTH.Fock.Photon.photonModFlow_zero
+#print axioms QIQTH.Fock.Photon.photonModFlow_add
+#print axioms QIQTH.Fock.Photon.photonModFlow_isometric
+#print axioms QIQTH.Fock.Photon.photonModFlowH_isometry
+#print axioms QIQTH.Fock.Photon.photonModFlowH_vacuum
 
 end QIQTH.AxiomAudit

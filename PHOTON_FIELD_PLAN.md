@@ -168,3 +168,13 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   `_balance` + `_pos` (the Unruh occupation at the BW temperature `β=2π`; requires `βω≠0`, the photon
   zero-mode = gauge/IR frontier P10). Wired into `QIQTH.lean`+`AxiomAudit.lean`. Next: **P1/P5** reuse
   wiring (`PhotonFock=Γ_s h_γ`; `Δ^it_γ=Γ_s(Δ^it_1)=secondQuantModFlow`), then **P6** (gauge-invariant records).
+- 2026-06-28 — **P1/P5 DONE** (`QIQTH/Fock/Photon/PhotonModularFlow.lean`, axiom-free standard-3, budget 0,
+  3528 jobs green). Certifies the **reuse**: the photon's continuum field-level modular flow
+  `Δ_γ^{it}=Γ_s(Δ^{it})` IS the existing bosonic `secondQuantModFlow` (vs the electron's fermionic
+  `Γ₋=ExteriorAlgebra.map`) — nothing new built; named in the photon namespace on the transverse
+  helicity-±1 one-particle space. **`photonModFlow`** + `_expVec` (`Γ_s(Δ^it)e(f)=e(Δ^it f)`), `_vacuum`,
+  `_zero` (=id), **`_add`** (the one-parameter group law), `_isometric`; **`photonModFlowH`** (Hilbert
+  completion) + `_isometry` + `_vacuum`. So `Δ_γ^{it}` is a one-parameter isometric automorphism group
+  fixing the vacuum, reused wholesale. Wired into `QIQTH.lean`+`AxiomAudit.lean`. Next: **P6** (the
+  gauge-invariant observable predicate/subalgebra — records = `F_μν`/`T_μν`), then **P7** (the modular
+  flow preserves the gauge-invariant records — the photon analogue of `fermiSecondQuantModFlow_isEven`).
