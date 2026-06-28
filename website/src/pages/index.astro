@@ -78,17 +78,22 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
       <strong>P3 · Microcausality.</strong> Spacelike-separated regions commute — the Lorentz input.
       <em>Not</em> the source of Born: it is a machine-checked theorem that observable microcausality does
       <em>not</em> entail selector no-signalling.<br/><br/>
-      <strong>P4 · The finite-microstate postulate (P4-MICRO / FQ). ★</strong> A region <em>R</em> has a
-      <em>finite</em> number N<sub>R</sub> of mutually distinguishable microstates — a finite effective Hilbert
-      space — bounded holographically by its boundary area: <strong>log&nbsp;N<sub>R</sub> ≤
-      <span set:html={QRcap} /></strong>. <em>This finite microstate count is the postulate</em> (the area enters
-      only as the value of the bound). It is the one distinctive physical input — and it is <em>kinematic</em>:
-      from it the holographic <em>area floor</em> S<sub>vN</sub>(ρ<sub>R</sub>) ≤ Q<sub>R</sub> is a
-      <strong>derived theorem</strong> (<code>area_floor_vonNeumann</code> — the elementary max-entropy bound
-      S<sub>vN</sub> ≤ log&nbsp;dim), and for the free field the <strong>Einstein equations</strong> follow
-      (<code>gr_from_p4micro</code>). It does <strong>not</strong> select outcomes (that is λ's job), and there is
-      <em>no</em> separate “capacity forbids superpositions” (H2 / Macroscopic Definiteness) postulate — that claim
-      is <strong>retired as a category error</strong>.<br/><br/>
+      <strong>P4 · The finite-information postulate (P4-MICRO / FQ). ★</strong> The postulate is just that a region
+      has a <em>finite</em> information capacity — a finite number N<sub>R</sub> of distinguishable microstates, a
+      UV-finite record structure. <em>That finiteness is the entire distinctive input</em> (the “Quantized
+      Information” core). The <strong>holographic form is not postulated</strong>: that the capacity scales with the
+      boundary <em>area</em> (log&nbsp;N<sub>R</sub> ∝ A) and with coefficient <strong>1/4</strong>
+      (log&nbsp;N<sub>R</sub> ≤ A/4ℓ<sub>P</sub>²) is <strong>derived</strong> — Sakharov induced gravity: the area
+      law <em>emerges</em> from the conical-deficit geometry (the cone curvature is a δ-function on the boundary,
+      whose integral is the area), and the 1/4 is the regulator-independent geometric ratio 4π/16π (the ratio
+      machine-checked, <code>sakharov_ratio</code>). The only carried datum is the <em>value</em> of ℓ<sub>P</sub>²
+      = G (the species/cutoff scale). From the finite capacity the <em>area floor</em>
+      S<sub>vN</sub>(ρ<sub>R</sub>) ≤ A/4ℓ<sub>P</sub>² is a <strong>derived theorem</strong>
+      (<code>area_floor_vonNeumann</code> — max-entropy S<sub>vN</sub> ≤ log&nbsp;dim), and for the free field the
+      <strong>Einstein equations</strong> follow (<code>gr_from_p4micro</code>). It is <em>kinematic</em>: it does
+      <strong>not</strong> select outcomes (that is λ's job), and there is <em>no</em> “capacity forbids
+      superpositions” (H2 / Macroscopic Definiteness) postulate — that is <strong>retired as a category
+      error</strong>.<br/><br/>
       <strong>P5 · Quantum equilibrium of λ's measure.</strong> The typicality measure is refinement-equivariant
       (Dürr–Goldstein–Zanghì / Valentini). <strong>This single principle grounds <em>all</em> of Born</strong> —
       both the additivity bridge and the μ-selection.

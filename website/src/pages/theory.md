@@ -19,14 +19,20 @@ A bounded region $R$ with boundary area $A$ carries a finite information capacit
 $$ Q_R \;=\; \frac{A}{4\ell_P^2}, $$
 
 the holographic / Bekenstein–Hawking bound, with $A$ the boundary area of the region and $Q_R$ in natural
-entropy units (divide by $\ln 2$ for bits). In QIQT-H this enters as a **postulate** about physically
-instantiable content, not merely about thermodynamic entropy: the renormalized information of any state the
-region actually realizes obeys $S_{\mathrm{ren}} \le Q_R$. Grounding this bound from a more primitive
-principle, and stating it cleanly in the continuum, is one of the [open problems](/open-problems).
+entropy units (divide by $\ln 2$ for bits). **What QIQT-H postulates is only that the capacity is _finite_** — a
+UV-finite record structure (the "Quantized Information" core). The *holographic form* of the bound is **not**
+postulated: that the capacity scales with the boundary **area** ($\log N_R \propto A$) and carries the coefficient
+**1/4** ($S_{\mathrm{ren}} \le Q_R = A/4\ell_P^2$) is **derived** — by Sakharov induced gravity the area law
+$S \propto A$ *emerges* from the conical-deficit geometry (the cone curvature is a δ-function on the boundary,
+whose integral is the area), and the 1/4 is the regulator-independent geometric ratio $(4\pi)/(16\pi)$ (the 1/4
+ratio machine-checked; the area-law emergence is the standard Susskind–Uglum/Solodukhin heat-kernel result, Stage B
+of the Sakharov derivation). The **only** carried input is the *value* of $\ell_P^2 = G$ — the species/cutoff
+problem, the genuine residual.
 
-**Update (P4-MICRO, 2026): the area floor is now a *derived theorem*, not a separate postulate.** Taken as a
-finite *capacity* postulate — the region has a finite number $N_R$ of distinguishable regional microstates with
-$\log N_R \le Q_R$ — the area floor $S_{\mathrm{vN}}(\rho_R) \le Q_R$ follows as a one-line corollary of the
+**Update (P4-MICRO, 2026): the area floor is a *derived theorem*, not a separate postulate.** From the
+finiteness postulate alone — the region has a finite number $N_R$ of distinguishable microstates, with the
+holographic bound $\log N_R \le Q_R$ supplied by the Sakharov derivation above — the area floor
+$S_{\mathrm{vN}}(\rho_R) \le Q_R$ follows as a one-line corollary of the
 elementary maximum-entropy bound $S_{\mathrm{vN}} \le \log\dim$, machine-checked and axiom-free
 (`area_floor_vonNeumann` in `QIQTH/FQBoundMicro.lean`). So the holographic area floor is no longer postulated — it
 is a *theorem conditional on the finite-capacity postulate*. The honest fine print, enforced in the Lean: the bound
