@@ -6568,6 +6568,11 @@ namespace QIQTH.AxiomAudit
 -- Hamiltonian ∝ the number operator (the record), with the modular energy βω = 2π × the boost energy at β=2π.
 -- Axiom-free (standard 3 / fewer).
 #print axioms QIQTH.Fock.Dirac.electron_number_raising_comm
+-- ELECTRON_FIELD E6/E9 (single-mode thermal/entanglement entropy S = log Z + β⟨E⟩): electron_mode_entropy —
+-- binaryEntropy(n) = log(1+e^{−βω}) + βω·n, n=fermiDirac β ω, Z=1+e^{−βω}, mean energy ⟨E⟩=ω·n (so βω·n=β⟨E⟩=⟨K⟩
+-- up to the constant log Z). The bridge S ↔ ⟨K⟩ — the input to the entanglement first law δS=δ⟨K⟩ that drives the
+-- area law, for the electron mode. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.electron_mode_entropy
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy

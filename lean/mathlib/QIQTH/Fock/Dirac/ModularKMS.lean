@@ -28,6 +28,7 @@ fermionic `J` is `QIQTH/Fock/Dirac/KleinTwist*`.  Free Dirac only.
 -/
 import QIQTH.FiniteModularTheory
 import QIQTH.Fock.Dirac.FermiDirac
+import QIQTH.Fock.Dirac.QuasiFreeEntropy
 
 namespace QIQTH.Fock.Dirac
 
@@ -254,5 +255,32 @@ theorem electron_number_lowering_comm :
   fin_cases i <;> fin_cases j <;>
     simp [Matrix.sub_apply, Matrix.mul_apply, Fin.sum_univ_two, Matrix.diagonal_apply, Matrix.single,
       Matrix.neg_apply]
+
+/-- **The single-mode thermal / entanglement entropy: `S = log Z + β⟨E⟩`.**  The von Neumann entropy of
+the electron mode equals the log partition function plus `β` times the mean energy:
+`binaryEntropy(n) = log(1 + e^{−βω}) + βω·n`, with `n = fermiDirac β ω`, `Z = 1 + e^{−βω}` and the mean
+energy `⟨E⟩ = ω·n` (so `βω·n = β⟨E⟩`, and `βω·n = ⟨K⟩` is the modular-energy expectation up to the
+constant `log Z`).  This is the bridge `S ↔ ⟨K⟩` — the input to the entanglement first law `δS = δ⟨K⟩`
+that drives the area law. -/
+theorem electron_mode_entropy (β ω : ℝ) :
+    binaryEntropy (fermiDirac β ω)
+      = Real.log (1 + Real.exp (-(β * ω))) + (β * ω) * fermiDirac β ω := by
+  have hn0 : (0 : ℝ) < fermiDirac β ω := fermiDirac_pos β ω
+  have hn1 : fermiDirac β ω < 1 := fermiDirac_lt_one β ω
+  have hlogn : Real.log (fermiDirac β ω) = - Real.log (Real.exp (β * ω) + 1) := by
+    unfold fermiDirac; rw [one_div, Real.log_inv]
+  have h1mn_eq : 1 - fermiDirac β ω = Real.exp (β * ω) * fermiDirac β ω := by
+    have hb := fermiDirac_kms_balance β ω
+    rw [Real.exp_neg] at hb
+    have he : Real.exp (β * ω) ≠ 0 := (Real.exp_pos _).ne'
+    field_simp at hb ⊢; linarith [hb]
+  have hlog1mn : Real.log (1 - fermiDirac β ω) = β * ω - Real.log (Real.exp (β * ω) + 1) := by
+    rw [h1mn_eq, Real.log_mul (Real.exp_pos _).ne' hn0.ne', Real.log_exp, hlogn]; ring
+  have hlogZ : Real.log (1 + Real.exp (-(β * ω))) = Real.log (Real.exp (β * ω) + 1) - β * ω := by
+    rw [Real.exp_neg,
+        show (1 : ℝ) + (Real.exp (β * ω))⁻¹ = (Real.exp (β * ω) + 1) / Real.exp (β * ω) by field_simp,
+        Real.log_div (by positivity) (Real.exp_pos _).ne', Real.log_exp]
+  simp only [binaryEntropy, Real.negMulLog_def, hlogn, hlog1mn, hlogZ]
+  ring
 
 end QIQTH.Fock.Dirac

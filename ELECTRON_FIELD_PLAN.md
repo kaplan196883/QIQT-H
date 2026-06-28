@@ -542,3 +542,13 @@ EXTERNAL libraries; QIQT-H built its own.
   identification at the mode level. `lake build QIQTH.Fock.Dirac.ModularKMS` green (2944 jobs); standard-3;
   budget 0. The single-mode modular/boost dictionary is now complete (state · KMS · flow · spectrum ·
   generator). Remaining E5: the continuum CAR-net lift via `modFlow` (the operator-algebra frontier).
+- 2026-06-28 — **E6/E9: single-mode thermal/entanglement entropy `S = log Z + β⟨E⟩`** (added to
+  `ModularKMS.lean`, axiom-free, budget 0). **`electron_mode_entropy`** —
+  `binaryEntropy(n) = log(1 + e^{−βω}) + βω·n`, with `n = fermiDirac β ω`, partition function
+  `Z = 1 + e^{−βω}`, and mean energy `⟨E⟩ = ω·n` (so `βω·n = β⟨E⟩ = ⟨K⟩` up to the constant `log Z`). The
+  **bridge `S ↔ ⟨K⟩`** — the input to the entanglement first law `δS = δ⟨K⟩` that drives the area law,
+  realized for the electron mode. Proof: log-algebra on the FD occupation (`fermiDirac` def + KMS
+  balance + `log_div`/`log_mul`/`log_exp`). `lake build QIQTH.Fock.Dirac.ModularKMS` green (3055 jobs);
+  standard-3; budget 0. (Imported `QuasiFreeEntropy` for `binaryEntropy`.) The single-mode modular tier
+  now connects the entropy to the modular energy — the area-law input. Remaining E5: the continuum
+  CAR-net lift via `modFlow`.
