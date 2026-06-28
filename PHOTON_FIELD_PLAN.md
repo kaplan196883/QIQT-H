@@ -159,3 +159,12 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   large `N` ⟹ `log dim → ∞` — the "sup S=∞ without a cutoff" contrast with the cutoff-free electron.
   Wired into `QIQTH.lean` + `AxiomAudit.lean`. Next: **P4** (extend the `boseEinstein` stub: `n>0`, the
   Unruh `S_ω=(n+1)log(n+1)−n log n`), then **P1/P5** reuse wiring (`PhotonFock=Γ_s h_γ`, `Δ^it_γ=Γ_s(Δ^it_1)`).
+- 2026-06-28 — **P4 DONE** (`QIQTH/Fock/Photon/PhotonUnruh.lean`, axiom-free standard-3, budget 0, 1926
+  jobs green). The Bose–Einstein photon Unruh occupation `n_ω=1/(e^{βω}−1)` (the `−1`/CCR analog of the
+  electron FD cluster): **`boseEinstein_pos`** (`0<n` for `βω>0`), **`boseEinstein_unique`** (any `n`
+  solving the CCR KMS balance `n=e^{−βω}(1+n)` is the BE occupation — bosonic mirror of `fermiDirac_unique`),
+  **`boseEinstein_gt_fermiDirac`** (`n_BE>n_FD` — more occupation, NO Pauli ceiling; the occupation-level
+  reason the photon needs a number cutoff, P2/P3), **`rindlerOccupationBose`** (`=boseEinstein 2π ω`) +
+  `_balance` + `_pos` (the Unruh occupation at the BW temperature `β=2π`; requires `βω≠0`, the photon
+  zero-mode = gauge/IR frontier P10). Wired into `QIQTH.lean`+`AxiomAudit.lean`. Next: **P1/P5** reuse
+  wiring (`PhotonFock=Γ_s h_γ`; `Δ^it_γ=Γ_s(Δ^it_1)=secondQuantModFlow`), then **P6** (gauge-invariant records).

@@ -6675,5 +6675,18 @@ namespace QIQTH.AxiomAudit
 -- "sup S=∞ without a cutoff" contrast with the electron). Axiom-free (standard 3). Free Maxwell; area coeff never set.
 #print axioms QIQTH.Fock.Photon.photon_capacity_bound
 #print axioms QIQTH.Fock.Photon.photon_capacity_unbounded
+-- ★★★ PHOTON_FIELD_PLAN P4 (the Bose–Einstein photon Unruh occupation — the −1/CCR analog of the electron FD cluster):
+-- the photon is bosonic so its Rindler/Unruh occupation is n_ω = 1/(e^{βω}−1) (the −1, vs the electron's +1).
+-- boseEinstein_pos: 0 < n for βω>0. boseEinstein_unique: any n solving the CCR KMS balance n=e^{−βω}(1+n) equals the
+-- Bose–Einstein occupation (the bosonic mirror of fermiDirac_unique). boseEinstein_gt_fermiDirac: n_BE > n_FD (more
+-- occupation, and NO Pauli ceiling — the occupation-level reason the photon's regional capacity needs a number cutoff,
+-- P2/P3, while the electron's CAR capacity is intrinsically finite). rindlerOccupationBose (=boseEinstein 2π ω) +
+-- _balance + _pos: the photon Unruh occupation at the Bisognano–Wichmann temperature β=2π. Requires βω≠0 (the photon
+-- zero-mode is the gauge/IR frontier P10). Axiom-free (standard 3). Free Maxwell only.
+#print axioms QIQTH.Fock.Photon.boseEinstein_pos
+#print axioms QIQTH.Fock.Photon.boseEinstein_unique
+#print axioms QIQTH.Fock.Photon.boseEinstein_gt_fermiDirac
+#print axioms QIQTH.Fock.Photon.rindlerOccupationBose_balance
+#print axioms QIQTH.Fock.Photon.rindlerOccupationBose_pos
 
 end QIQTH.AxiomAudit
