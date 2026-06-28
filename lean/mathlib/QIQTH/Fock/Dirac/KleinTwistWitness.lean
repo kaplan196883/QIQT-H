@@ -16,6 +16,7 @@ field-level second-quantized `Γ = (−1)^F` on the full CAR Fock + the operator
 *theorem* `𝓕(W)'=Z𝓕(W')Z*` remain the E5 GNS frontier; this witnesses the algebra on the single mode.)
 -/
 import QIQTH.Fock.Dirac.KleinTwistUnitary
+import QIQTH.Fock.Dirac.ModularKMS
 import Mathlib.LinearAlgebra.Matrix.Hermitian
 
 namespace QIQTH.Fock.Dirac
@@ -60,5 +61,25 @@ theorem electron_kleinTwist_unitary :
 theorem electron_kleinTwist_comm :
     kleinTwist fermionParity * fermionParity = fermionParity * kleinTwist fermionParity :=
   kleinTwist_comm_gamma fermionParity
+
+/-- **Parity is `(−1)^N`**: `Γ = 1 − 2N` on the single mode.  The fermion parity operator (the Klein-twist
+input) is exactly `(−1)^N` of the number operator (the modular-Hamiltonian input, `K = βω·N`): `diag(1,−1)
+= 1 − 2·diag(0,1)`.  This ties the twisted-duality grading to the modular dynamics — `Γ` and `K = βω·N` are
+both functions of `N`, hence simultaneously diagonal. -/
+theorem fermionParity_eq_one_sub_two_numberOp :
+    fermionParity = 1 - (2 : ℂ) • numberOp := by
+  unfold fermionParity numberOp
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [Matrix.sub_apply, Matrix.smul_apply, Matrix.one_apply, Matrix.diagonal_apply,
+      smul_eq_mul] <;> norm_num
+
+/-- **The modular flow preserves the parity grading**: `σ_t(Γ) = Γ`.  Since `Γ = (−1)^N = diag(1,−1)` is
+diagonal, the electron's real-time modular flow fixes it (`electron_sigmaDiag_fixes_diagonal`).  So the
+fermion-parity grading — the `ℤ₂` structure carrying the even/odd records — is **conserved by the modular
+dynamics** at the concrete operator level: a record of definite parity stays that parity under `σ_t`. -/
+theorem electron_sigmaDiag_fixes_parity (β ω t : ℝ) :
+    QIQTH.FiniteModularTheory.sigmaDiag (electronModeOcc β ω) t fermionParity = fermionParity :=
+  electron_sigmaDiag_fixes_diagonal β ω t ![1, -1]
 
 end QIQTH.Fock.Dirac

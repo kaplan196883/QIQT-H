@@ -6437,6 +6437,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Dirac.electron_kleinTwist_star_unitary
 #print axioms QIQTH.Fock.Dirac.electron_kleinTwist_unitary
 #print axioms QIQTH.Fock.Dirac.electron_kleinTwist_comm
+-- ELECTRON_FIELD E4/E5 (parity = (−1)^N, tying the Klein-twist grading to the modular Hamiltonian): fermionParity_eq_
+-- one_sub_two_numberOp — Γ = 1 − 2N (diag(1,−1) = 1 − 2·diag(0,1)): the parity operator (Klein-twist input) is exactly
+-- (−1)^N of the number operator (modular-Hamiltonian input K=βω·N), so Γ and K are both functions of N, simultaneously
+-- diagonal. electron_sigmaDiag_fixes_parity — σ_t(Γ)=Γ: the modular flow preserves the parity grading (Γ is diagonal),
+-- so a record of definite parity stays that parity under the modular dynamics (records conserved, concrete level).
+-- Axiom-free (standard 3); free Dirac.
+#print axioms QIQTH.Fock.Dirac.fermionParity_eq_one_sub_two_numberOp
+#print axioms QIQTH.Fock.Dirac.electron_sigmaDiag_fixes_parity
 -- ★★★ ELECTRON_FIELD_PLAN E6 (Fermi–Dirac Unruh occupation — the CAR +1 vs Bose −1 signature): for a Rindler mode
 -- of the free Dirac field the vacuum is boost-KMS at β=2π (Unruh temperature, SAME as the scalar); the fermionic
 -- difference is the occupation. fermiDirac β ω = 1/(e^{βω}+1); fermiDirac_kms_balance: n = e^{−βω}(1−n) (KMS thermal
@@ -6850,5 +6858,13 @@ namespace QIQTH.AxiomAudit
 -- physical (gauge) configuration. The honest §0/P9 caveat — the boundary-flux center exists only when the cohomology
 -- (closed-mod-exact) is nontrivial. Axiom-free (standard 3); free Maxwell.
 #print axioms QIQTH.Fock.Photon.fieldStrength_eq_iff_gauge_of_trivial_cohomology
+-- PHOTON_FIELD_PLAN P1 (the transverse helicity-±1 one-particle space — 2 physical polarizations): the photon is massless
+-- spin-1 with exactly 2 helicities ±1; model h_γ = h_{+1}⊕h_{−1}. photon_helicity_finrank: dim h_γ = dim h_+ + dim h_−.
+-- photon_two_polarizations: dim(ℂ×ℂ)=2 — exactly 2 transverse polarizations per momentum (vs the 4 components of A_μ, 2
+-- unphysical gauge/longitudinal modes excluded by working on the positive physical space). photon_capacity_helicity:
+-- dim Γ_s^{≤N}(h_γ) = C(dim h_+ + dim h_− + N, N) — the cutoff bosonic capacity counts the 2 polarizations. Std 3; free Maxwell.
+#print axioms QIQTH.Fock.Photon.photon_helicity_finrank
+#print axioms QIQTH.Fock.Photon.photon_two_polarizations
+#print axioms QIQTH.Fock.Photon.photon_capacity_helicity
 
 end QIQTH.AxiomAudit

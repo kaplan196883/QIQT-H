@@ -722,3 +722,12 @@ EXTERNAL libraries; QIQT-H built its own.
   observables — number, occupation, charge) are **conserved by the modular dynamics** at the finite
   single-mode level — the finite-KMS counterpart of the continuum `fermiSecondQuantModFlow_isEven`. Wired
   into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **E4/E5: parity = `(−1)^N`, tying the Klein-twist grading to the modular Hamiltonian**
+  (added to `KleinTwistWitness.lean`, axiom-free, budget 0, 3098 jobs green).
+  **`fermionParity_eq_one_sub_two_numberOp`**: `Γ = 1 − 2N` (`diag(1,−1) = 1 − 2·diag(0,1)`) — the parity
+  operator (Klein-twist input) is exactly `(−1)^N` of the number operator (modular-Hamiltonian input
+  `K=βω·N`), so `Γ` and `K` are both functions of `N`, simultaneously diagonal.
+  **`electron_sigmaDiag_fixes_parity`**: `σ_t(Γ)=Γ` — the modular flow preserves the parity grading
+  (`Γ` is diagonal, via `electron_sigmaDiag_fixes_diagonal`): a record of definite parity stays that parity
+  under the modular dynamics (records conserved, concrete operator level). Wired into `AxiomAudit.lean`;
+  standard-3; budget 0.
