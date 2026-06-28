@@ -42,6 +42,30 @@ theorem helicityOp_sq :
     (helicityOp Hplus Hminus).comp (helicityOp Hplus Hminus) = LinearMap.id := by
   ext p <;> simp [helicityOp]
 
+/-- The **positive-helicity projection** `P_{+1}` onto `h_{+1}` (the `Λ = +1` eigenspace): `(x, y) ↦
+(x, 0)`. -/
+def helicityProjPlus : (Hplus × Hminus) →ₗ[ℂ] (Hplus × Hminus) :=
+  LinearMap.prodMap LinearMap.id 0
+
+/-- The **negative-helicity projection** `P_{−1}` onto `h_{−1}` (the `Λ = −1` eigenspace): `(x, y) ↦
+(0, y)`. -/
+def helicityProjMinus : (Hplus × Hminus) →ₗ[ℂ] (Hplus × Hminus) :=
+  LinearMap.prodMap 0 LinearMap.id
+
+/-- **The two polarizations resolve the identity: `P_{+1} + P_{−1} = 1`.**  The two transverse helicity
+projections sum to the identity on the physical one-particle space `h_γ = h_{+1} ⊕ h_{−1}` — the photon's
+**two physical polarizations form a complete set** (no third, longitudinal mode: a resolution of the
+identity by exactly the two transverse helicities). -/
+theorem helicityProj_complete :
+    helicityProjPlus Hplus Hminus + helicityProjMinus Hplus Hminus = LinearMap.id := by
+  ext p <;> simp [helicityProjPlus, helicityProjMinus]
+
+/-- The positive-helicity projection is **idempotent** `P_{+1}² = P_{+1}` (a genuine projection). -/
+theorem helicityProjPlus_idem :
+    (helicityProjPlus Hplus Hminus).comp (helicityProjPlus Hplus Hminus)
+      = helicityProjPlus Hplus Hminus := by
+  ext p <;> simp [helicityProjPlus]
+
 /-- **The transverse one-particle dimension splits over the two helicities**:
 `dim h_γ = dim h_{+1} + dim h_{−1}` for `h_γ = h_{+1} ⊕ h_{−1}`. -/
 theorem photon_helicity_finrank :

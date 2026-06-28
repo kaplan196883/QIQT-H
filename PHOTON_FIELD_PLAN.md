@@ -315,3 +315,9 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   projection along the momentum; **`helicityOp_sq`**: `Λ² = 1` (eigenvalues `±1`) — the photon is massless
   spin-1 with exactly two helicities `±1` (never the longitudinal `0` of a *massive* vector). Pins the
   spin-1/2-polarization structure at the operator level. Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **P1: the two polarizations resolve the identity `P_{+1} + P_{−1} = 1`** (`PhotonHelicity.lean`,
+  axiom-free standard-3, budget 0, 2943 jobs green). **`helicityProjPlus`/`helicityProjMinus`** (the `Λ=±1`
+  eigen-projections onto `h_{+1}`/`h_{−1}`); **`helicityProj_complete`**: `P_{+1} + P_{−1} = 1` — the two
+  transverse helicity projections sum to the identity (the photon's **two physical polarizations form a
+  complete set**, no third longitudinal mode); **`helicityProjPlus_idem`**: `P_{+1}²=P_{+1}` (a genuine
+  projection). Wired into `AxiomAudit.lean`; standard-3; budget 0.
