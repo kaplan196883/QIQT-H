@@ -401,3 +401,13 @@ This closes the "build vs reuse" decision for the operator layer: **reuse PhysLe
   `WickAlgebra.SuperCommute`.) The free-Dirac CAR operator layer (E2-full/E5 kinematics) is now in place
   on PhysLean; the irreducible remaining frontier is **E5 modular flow / Tomita–Takesaki** (`Δ_W^it`),
   unbuilt in any proof assistant.
+- 2026-06-28 — **E5: the nonzero CAR anticommutator `{a, a†}`** (added to `PhysLeanBridge.lean`,
+  axiom-free, budget 0). **`electron_anPart_crPart_anticomm`** — because the electron is fermionic
+  (exchange sign `−1`), PhysLean's super-commutator of the annihilation part `anPart φ` (`a`) and the
+  creation part `crPart φ'` (`a†`) of two field operators is literally the **anticommutator** (the `+`
+  sign): `[anPart φ, crPart φ']ₛ = anPart φ · crPart φ' + crPart φ' · anPart φ = {a(φ), a†(φ')}`. The
+  defining nonzero CAR relation, the kinematic heart of the electron's second quantization — completing
+  the four CAR relations (`{a†,a†}=0`, `{a,a}=0`, `{a,a†}` central + now its explicit anticommutator
+  form). `lake build QIQTH.Fock.Dirac.PhysLeanBridge` green (3129 jobs); standard-3; budget 0. **The
+  free-Dirac CAR second-quantization kinematics are now complete on PhysLean.** Sole remaining frontier:
+  **E5 modular dynamics** `Δ_W^it = U(Λ_W(−2πt))` (Tomita–Takesaki) — unbuilt in any proof assistant.

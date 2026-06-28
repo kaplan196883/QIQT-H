@@ -115,4 +115,22 @@ theorem electron_superCommute_mem_center (φ φ' : electronFieldSpec.CrAnFieldOp
     [ofCrAnOp φ, ofCrAnOp φ']ₛ ∈ Subalgebra.center ℂ (WickAlgebra electronFieldSpec) :=
   superCommute_ofCrAnOp_ofCrAnOp_mem_center φ φ'
 
+open FieldSpecification FieldSpecification.WickAlgebra in
+/-- **The CAR anticommutator `{a, a†}` for the electron.**  Because the electron is fermionic (exchange
+sign `−1`, `electron_exchangeSign`), PhysLean's super-commutator of the **annihilation** part `anPart φ`
+(`a`) and the **creation** part `crPart φ'` (`a†`) of two field operators is literally the
+*anticommutator* (the `+` sign):
+`[anPart φ, crPart φ']ₛ = anPart φ · crPart φ' + crPart φ' · anPart φ`.
+This is the defining nonzero CAR relation `{a(φ), a†(φ')}` — the kinematic heart of the electron's
+second quantization. -/
+theorem electron_anPart_crPart_anticomm (φ φ' : electronFieldSpec.FieldOp) :
+    [anPart φ, crPart φ']ₛ = anPart φ * crPart φ' + crPart φ' * anPart φ := by
+  rw [superCommute_anPart_crPart]
+  have hs : FieldStatistic.exchangeSign (electronFieldSpec |>ₛ φ) (electronFieldSpec |>ₛ φ') = -1 := by
+    rw [show (electronFieldSpec |>ₛ φ) = FieldStatistic.fermionic from rfl,
+        show (electronFieldSpec |>ₛ φ') = FieldStatistic.fermionic from rfl,
+        FieldStatistic.exchangeSign_eq_if]
+    simp
+  rw [hs, neg_one_smul, neg_mul, sub_neg_eq_add]
+
 end QIQTH.Fock.Dirac

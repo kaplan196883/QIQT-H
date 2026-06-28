@@ -6501,6 +6501,12 @@ namespace QIQTH.AxiomAudit
 -- The actual E5 operator content, machine-checked on PhysLean's WickAlgebra. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.electron_create_create_zero
 #print axioms QIQTH.Fock.Dirac.electron_superCommute_mem_center
+-- ★★★ ELECTRON_FIELD E5 (the nonzero CAR anticommutator {a,a†}): electron_anPart_crPart_anticomm — because the
+-- electron is fermionic (exchange sign −1), PhysLean's super-commutator of the annihilation part anPart φ (a) and
+-- creation part crPart φ' (a†) of two field operators is literally the ANTICOMMUTATOR (+ sign):
+-- [anPart φ, crPart φ']ₛ = anPart φ · crPart φ' + crPart φ' · anPart φ = {a(φ), a†(φ')}. The defining nonzero CAR
+-- relation, the kinematic heart of the electron's second quantization. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.electron_anPart_crPart_anticomm
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy
