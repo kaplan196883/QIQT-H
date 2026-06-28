@@ -12,15 +12,16 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
     <h1>One wave function, one world.</h1>
     <p class="lede">The global wave function Φ evolves exactly unitarily — no collapse term, ever.
       Decoherence makes the macroscopic records non-interfering; a non-dynamical selector <em>λ</em> makes
-      exactly one of them <em>actual</em>. One wave function, one world. The holographic capacity bound
-      gives the finite record <em>stage</em> (how many distinguishable records a region can hold) — it does
-      <em>not</em> force the single outcome: the honest crux is that the single record is λ's doing (an
-      Everett-like selection), not capacity's, and that selection is a postulate, not yet derived.
-      What the capacity bound <em>does</em> do — read as a finite-microstate postulate — is now a
-      machine-checked theorem: it <strong>derives</strong> the holographic area floor
-      S<sub>vN</sub>(ρ<sub>R</sub>) ≤ A/4ℓ<sub>P</sub>² and, for the free field, feeds the
-      <strong>Einstein field equations</strong> (P4-MICRO). Capacity is the kinematic engine of gravity;
-      λ is the source of definiteness — two different jobs.</p>
+      exactly one of them <em>actual</em>. One wave function, one world. The <strong>finite-capacity
+      postulate</strong> bounds how many distinguishable records a region can hold — it does <em>not</em> force the
+      single outcome: the single record is λ's doing (an Everett-like selection), a postulate, not yet derived.
+      What that finite capacity <em>does</em> drive, under stated bridge assumptions, is a Lean-checked
+      <em>conditional</em> chain: finite capacity ⇒ S<sub>vN</sub> ≤ log&nbsp;N<sub>R</sub>; with the Sakharov
+      bridge, an <strong>area-law entropy bound</strong> S<sub>vN</sub>(ρ<sub>R</sub>) ≤ A/4ℓ<sub>P</sub>²; and, for
+      the free Klein–Gordon field, a conditional Jacobson-style derivation of an <strong>Einstein-form
+      equation</strong> (P4-MICRO). Finite capacity is the kinematic <em>input</em> to the gravity chain; λ is the
+      source of definiteness — two different jobs. (<strong>Not</strong> “P4 ⇒ GR”: the thermodynamic step also
+      needs the Bisognano–Wichmann/Unruh and reference-state inputs, and the value of G is not derived.)</p>
     <div class="cta">
       <a class="btn btn-primary" href="/idea">Read the idea</a>
       <a class="btn btn-ghost" href="/theory">The mathematics</a>
@@ -28,9 +29,9 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
     </div>
     <div class="chips">
       <span class="chip"><span class="dot" style="background:var(--st-conditional)"></span>
-        <b>A research program</b>, not a finished theory — conditional, Born reduced but still open</span>
+        <b>A research program</b>, not a finished theory — conditional; Born isolated to P5 (still primitive)</span>
       <span class="chip"><span class="dot" style="background:var(--st-verified)"></span>
-        <b>Machine-verified</b> in Lean&nbsp;4 / Mathlib · no <code>sorry</code> · reproducible</span>
+        <b>Machine-checked implications</b> (Lean&nbsp;4, no <code>sorry</code>) <em>from the declared assumptions</em> — not a check of the physical premises</span>
     </div>
   </div></header>
 
@@ -44,17 +45,18 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
       outcome in a unitary theory. Single outcomes are λ's doing. <strong>(2) Emergent gravity (the “Holographic”
       half).</strong> A region's <em>finite</em> information capacity (the “Quantized Information” core) — via the
       Sakharov conical-deficit bridge that <em>derives</em> the holographic area form (the ∝A scaling and the 1/4)
-      — feeds the machine-checked Jacobson construction to the free-field <strong>Einstein field
-      equations</strong>. <strong>Capacity is the kinematic engine of gravity; λ is the source of definiteness —
-      two different jobs.</strong></p>
+      — feeds a conditional, Lean-checked Jacobson-style derivation of an <strong>Einstein-form equation</strong>
+      for the free field (the value of G is not derived). <strong>Finite capacity is the kinematic input to the
+      gravity chain; λ is the source of definiteness — two different jobs.</strong></p>
     <div class="note">
       <strong>Where each finiteness lives.</strong> On the gravity axis, the finite capacity is the
       <em>postulate</em> (finiteness only); the area form ∝A and the 1/4 are <em>derived</em> (Sakharov bridge),
       and even the entropy-area variation δS = η·δA is a derived theorem — the genuine residual is the
-      reference-state identification, plus the value of G. On the foundations axis, λ is a finite
-      <strong>index</strong> over the records carrying the <em>exact</em> Born weights (<em>Born-transparent</em>,
-      so operationally = Everett — not a new prediction); putting the finiteness in the <em>probability law</em>
-      instead (a “grid” rounding the weights) provably breaks envariance/no-signalling and is retired. The two
+      reference-state identification, plus the value of G. On the foundations axis, λ selects a finite record
+      <strong>label</strong>; its equilibrium measure μ is a <em>primitive</em> (P5) that yields the <em>exact</em>
+      Born weights (<em>Born-transparent</em>, so operationally = Everett — not a new prediction). Putting the
+      finiteness in the <em>probability law</em> instead (a “grid” rounding the weights) provably breaks
+      envariance/no-signalling and is retired. The two
       axes share only the word “finite”; neither does the other's job. <a href="/selection">See the construction →</a>
     </div>
   </div></section>
@@ -108,8 +110,9 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
       superpositions” (H2 / Macroscopic Definiteness) postulate — that is <strong>retired as a category
       error</strong>.<br/><br/>
       <strong>P5 · Quantum equilibrium of λ's measure.</strong> The typicality measure is refinement-equivariant
-      (Dürr–Goldstein–Zanghì / Valentini). <strong>This single principle grounds <em>all</em> of Born</strong> —
-      both the additivity bridge and the μ-selection.
+      (Dürr–Goldstein–Zanghì / Valentini). This single <em>primitive</em> supplies the equilibrium measure from
+      which the operational Born rule follows — both the additivity bridge and the μ-selection reduce to it. Born is
+      <em>not</em> derived from nothing: it is <strong>isolated to P5</strong>, and deriving P5 remains open.
     </div>
     <p class="sub">So the irreducible <em>physics</em> reduces to <strong>P4 + P5</strong>, on the P1 ontology,
       with P2–P3 the standard quantum-relativistic arena — and the no-go theorems prove P5 cannot be removed and
@@ -141,7 +144,7 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
     <h2>What is proven, what is open</h2>
     <p class="sub">Honesty is the point. The axiom-free Lean development verifies the modular /
       relative-entropy calculus (<span set:html={chiR} />), the covariant consistent Born measure, the
-      Born-from-typicality reduction, and the holographic area floor S<sub>vN</sub> ≤ Q<sub>R</sub>
+      Born-from-typicality reduction (conditional on P5), and the area-law entropy bound S<sub>vN</sub> ≤ Q<sub>R</sub>
       <em>derived</em> from the finite-capacity postulate (P4-MICRO) — but <em>not</em> the (FQ) capacity
       postulate itself, not λ's dynamical law, not the continuum. (The original "capacity forbids records"
       conjecture is retired as a category error, not pending.)</p>
@@ -149,25 +152,27 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
   </div></section>
 
   <section class="section"><div class="wrap">
-    <h2>Emergent gravity: the Einstein equations, machine-checked</h2>
-    <p class="sub">A second, self-contained axiom-free thread formalizes Jacobson's <em>“Einstein equation of
-      state”</em> route to general relativity — with the thermodynamic input grounded in QIQT-H's own
-      holographic capacity bound. The headline theorem (<code>qiqt_gr_freefield</code>) gives the
-      <strong>Einstein field equations</strong> <em>a·T = G + Λg</em> — genuine Einstein tensor, constant Λ —
-      for an explicit free <strong>Klein–Gordon field</strong>, with the <em>entire</em> modular /
-      Bisognano–Wichmann / boost-charge / stress-flux / conservation / curvature sector now
-      <strong>machine-checked axiom-free</strong>. In particular the free-field one-particle
+    <h2>Emergent gravitational dynamics: a conditional, Lean-checked Einstein-form equation</h2>
+    <p class="sub">A second, self-contained, Lean-checked thread (standard axioms only, no project axioms)
+      formalizes a <em>conditional</em> Jacobson <em>“Einstein equation of state”</em> route to gravitational
+      <em>dynamics</em> — the field equations on a <em>pre-existing</em> spacetime, <strong>not</strong> emergent
+      spacetime. Under the declared assumptions, the free-field capstone (<code>qiqt_gr_freefield</code>) derives an
+      <strong>Einstein-form equation</strong> <em>G + Λg = α·T</em> — genuine Einstein tensor, constant Λ — for an
+      explicit free <strong>Klein–Gordon field</strong>; the coupling <em>α</em> (hence the measured value of G) is
+      <strong>not</strong> derived. The <em>entire</em> modular / Bisognano–Wichmann / boost-charge / stress-flux /
+      conservation / curvature sector beneath it is <strong>machine-checked from those assumptions</strong>. In particular the free-field one-particle
       <strong>Bisognano–Wichmann theorem</strong> (modular flow = geometric boost) is now a <em>fully
       unconditional Lean theorem</em> — no longer a cited input — and matter conservation <em>∇·T = 0</em> is
       <em>derived</em> for the Klein–Gordon stress tensor. The differential area law δS = ηδA, the
       modular-energy = stress-flux identity, the Christoffel / Ricci / curvature regularity, and Raychaudhuri
       focusing are all <em>derived</em>, not assumed.</p>
     <p class="sub"><strong>How the capacity enters — P4-MICRO.</strong> The entropy side of this chain is no longer
-      an extra hypothesis: <code>gr_from_p4micro</code> feeds the <em>derived</em> area floor
+      an extra hypothesis: <code>gr_from_p4micro</code> feeds the <em>derived</em> area-law entropy bound
       (S<sub>vN</sub> ≤ Q<sub>R</sub>, obtained from the finite-capacity postulate via
-      <code>area_floor_vonNeumann</code>) into the Jacobson capstone, leaving as residual inputs <em>exactly</em>
-      the Bisognano–Wichmann / Unruh thermal flux (itself discharged for the free field), Raychaudhuri focusing,
-      conservation, and metric regularity. The Lean now <em>enforces</em> the honest boundary:
+      <code>area_floor_vonNeumann</code>) into the Jacobson capstone. For the free-KG capstone the
+      Bisognano–Wichmann/Unruh flux and stress-energy conservation (∇·T=0) are <em>discharged inside the model</em>;
+      the genuine residual is the <strong>joint reference-state identification</strong> (below), together with the
+      Raychaudhuri/regularity background. The Lean now <em>enforces</em> the honest boundary:
       <strong>the capacity postulate alone does not give gravity</strong> — a microstate <em>count</em> cannot
       supply a <em>temperature</em>, so the thermal input is irreducibly modular (the open Type&nbsp;II frontier
       would derive it). Two further honesties: Jacobson needs the entropy-area <em>variation</em>
@@ -178,6 +183,11 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
       cosmological constant Λ, on a <em>pre-existing</em> Lorentzian causal geometry — emergence of the field
       <em>equations</em>, not of spacetime itself. The 1/4 is the separately-derived Sakharov ratio; the value of
       G (and Λ, higher-curvature terms) is carried.</p>
+    <p class="sub"><strong>The formal chain, at a glance.</strong> P4 (finite capacity) ⇒ S<sub>vN</sub> ≤
+      log&nbsp;N<sub>R</sub>; + the Sakharov/conical bridge ⇒ area-law bound S<sub>vN</sub> ≤ A/4ℓ<sub>P</sub>²;
+      + the joint BW/capacity reference state + the first law ⇒ δS = η·δA; + the Jacobson geometry/QFT hypotheses
+      ⇒ an Einstein-form equation (coupling/G undetermined). The free-KG capstone discharges the BW/conservation
+      pieces inside the model. <strong>Not: P4 alone ⇒ GR.</strong></p>
     <p class="sub"><strong>The floor laid bare.</strong> A single <em>showcase</em> theorem
       (<code>qiqt_gr_ppwave_showcase</code>) instantiates the chain for an explicit curved <strong>pp-wave</strong>
       spacetime and <em>discharges every geometric and analytic premise</em> — the metric and tetrad, the
@@ -230,7 +240,8 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
         <span class="arrow">The picture →</span></a>
       <a class="card" href="/formalization"><h3>Formalization</h3>
         <p>The Lean&nbsp;4 / Mathlib machine-checked substrate, theorem index, reproducible build — now
-          including a conditional axiom-free derivation of the Einstein field equations (emergent gravity).</p>
+          including a conditional, Lean-checked derivation of an Einstein-form equation (emergent gravitational
+          dynamics on a pre-existing spacetime).</p>
         <span class="arrow">See the proofs →</span></a>
       <a class="card" href="/open-problems"><h3>Open Problems</h3>
         <p>The four gaps between a research program and a theory, and what closing each buys.</p>
