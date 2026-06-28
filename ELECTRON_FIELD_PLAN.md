@@ -574,3 +574,12 @@ EXTERNAL libraries; QIQT-H built its own.
   `Δ_W^{it}` for the electron**, on QIQT-H's existing TT machinery. `lake build
   QIQTH.Fock.Dirac.CARModularFlow` green (3526 jobs); standard-3; budget 0. Remaining E5: the fermionic
   modular conjugation `J_W = Z·Γ₋(j)` (Klein twist ∘ second-quantized reflection) + the twisted duality.
+- 2026-06-28 — **E5 continuum: the modular flow acts by algebra automorphisms** (added to
+  `CARModularFlow.lean`, axiom-free, budget 0). **`fermiSecondQuantModFlow_one`** (`Γ₋(Δ^{it}) Ω = Ω`,
+  vacuum invariance); **`fermiSecondQuantModFlow_comp_neg`** (`Γ₋(Δ^{it}) ∘ Γ₋(Δ^{−it}) = id`, so
+  `Δ^{−it}` is the inverse); **`fermiModFlowEquiv`** — `Γ₋(Δ^{it})` bundled as an **`AlgEquiv`** (an
+  algebra *isomorphism* of the CAR Fock with inverse `Γ₋(Δ^{−it})`). This is the defining Tomita–Takesaki
+  property that the modular automorphism group `σ_t = Γ₋(Δ^{it})` lands in `Aut(𝓕)`, realized for the
+  electron CAR net at the continuum level. `lake build QIQTH.Fock.Dirac.CARModularFlow` green (3526 jobs);
+  standard-3; budget 0. The continuum modular flow is now a genuine one-parameter automorphism group.
+  Remaining E5: the fermionic modular conjugation `J_W = Z·Γ₋(j)` (antilinear — the genuine remaining gap).

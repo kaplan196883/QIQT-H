@@ -77,4 +77,27 @@ theorem fermiSecondQuantModFlow_add (S : StandardSubspace H) (s t : ℝ) :
   show modUnitary S s (modUnitary S t x) = modUnitary S (s + t) x
   rw [modUnitary_add]; rfl
 
+/-- **Vacuum invariance** `Γ₋(Δ^{it}) Ω = Ω`: the modular flow fixes the vacuum (the unit of the
+exterior/CAR algebra), since `Γ₋(Δ^{it})` is an algebra hom. -/
+@[simp] theorem fermiSecondQuantModFlow_one (S : StandardSubspace H) (t : ℝ) :
+    fermiSecondQuantModFlow S t 1 = 1 := map_one _
+
+/-- `Γ₋(Δ^{it}) ∘ Γ₋(Δ^{−it}) = id` — the modular flow at time `−t` is its inverse. -/
+theorem fermiSecondQuantModFlow_comp_neg (S : StandardSubspace H) (t : ℝ) :
+    (fermiSecondQuantModFlow S t).comp (fermiSecondQuantModFlow S (-t))
+      = AlgHom.id ℂ (ExteriorAlgebra ℂ H) := by
+  rw [fermiSecondQuantModFlow_add, add_neg_cancel, fermiSecondQuantModFlow_zero]
+
+/-- **The modular flow acts by ALGEBRA AUTOMORPHISMS.**  `Γ₋(Δ^{it})` is an algebra *isomorphism* of the
+CAR Fock `⋀ H` with inverse `Γ₋(Δ^{−it})` — the defining Tomita–Takesaki property that the modular
+automorphism group `σ_t = Γ₋(Δ^{it})` lands in `Aut(𝓕)`.  Bundled as an `AlgEquiv`. -/
+noncomputable def fermiModFlowEquiv (S : StandardSubspace H) (t : ℝ) :
+    ExteriorAlgebra ℂ H ≃ₐ[ℂ] ExteriorAlgebra ℂ H :=
+  AlgEquiv.ofAlgHom (fermiSecondQuantModFlow S t) (fermiSecondQuantModFlow S (-t))
+    (fermiSecondQuantModFlow_comp_neg S t)
+    (by have h := fermiSecondQuantModFlow_comp_neg S (-t); rwa [neg_neg] at h)
+
+@[simp] theorem fermiModFlowEquiv_apply (S : StandardSubspace H) (t : ℝ)
+    (x : ExteriorAlgebra ℂ H) : fermiModFlowEquiv S t x = fermiSecondQuantModFlow S t x := rfl
+
 end QIQTH.Fock.Dirac

@@ -6589,6 +6589,13 @@ namespace QIQTH.AxiomAudit
 -- Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.fermiSecondQuantModFlow_add
 #print axioms QIQTH.Fock.Dirac.fermiSecondQuantModFlow_ι
+-- ELECTRON_FIELD E5 (the continuum modular flow acts by ALGEBRA AUTOMORPHISMS): fermiSecondQuantModFlow_one
+-- (Γ₋(Δ^it) Ω = Ω, vacuum invariance); fermiSecondQuantModFlow_comp_neg (Γ₋(Δ^it)∘Γ₋(Δ^-it)=id, so Δ^-it is the
+-- inverse); fermiModFlowEquiv — Γ₋(Δ^it) bundled as an AlgEquiv (algebra ISOMORPHISM of the CAR Fock with inverse
+-- Γ₋(Δ^-it)). The defining Tomita–Takesaki property that the modular automorphism group σ_t=Γ₋(Δ^it) lands in Aut(𝓕),
+-- for the electron CAR net. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.fermiSecondQuantModFlow_comp_neg
+#print axioms QIQTH.Fock.Dirac.fermiModFlowEquiv
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy
