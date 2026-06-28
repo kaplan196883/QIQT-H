@@ -6525,6 +6525,11 @@ namespace QIQTH.AxiomAudit
 -- the second-quantized algebra — the §0 "records attach to the even/observable algebra" decision, now on PhysLean.
 -- Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.electron_bilinear_bosonic
+-- ELECTRON_FIELD §0 at the operator level (one-particle = odd, completing the even/odd grading): electron_single_fermionic
+-- — a single field operator ofCrAnList [φ] is in the FERMIONIC (odd) submodule, so a single fermion is NOT a record;
+-- with electron_bilinear_bosonic (bilinears even) this is the operator-level even/odd grading, identical to the Clifford
+-- diracGamma_mem_odd and the exterior parity_one_particle across all three layers. Axiom-free (standard 3); free Dirac.
+#print axioms QIQTH.Fock.Dirac.electron_single_fermionic
 -- ★★★ ELECTRON_FIELD E5/E6 (electron mode wired into the EXISTING Tomita–Takesaki machinery): QIQT-H already has
 -- the finite modular flow (FiniteModularTheory: modAut ρ x = ρ x ⅟ρ, stateOf, the proved kms_condition) and the
 -- continuum Δ^it = modFlow (Spectral/SpectralTheorem). electron_occupation_eq_fermiDirac: for a single fermionic

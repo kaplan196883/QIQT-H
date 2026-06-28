@@ -667,3 +667,11 @@ EXTERNAL libraries; QIQT-H built its own.
   budget 0. (HONEST: the Dirac one-particle space + the causal kernel `S_D=(iγ·∂+m)Δ_m` microcausality —
   inheriting from the proved scalar Pauli–Jordan spacelike vanishing `pauliJordan_spacelike_tendsto_zero`
   via "a local differential operator preserves spacelike support" — remain the analytic E1 frontier.)
+- 2026-06-29 — **§0 (operator level): a single electron field operator is odd (NOT a record)** (added to
+  `PhysLeanBridge.lean`, axiom-free, budget 0, 3130 jobs green). **`electron_single_fermionic`**:
+  `ofCrAnList [φ]` lies in the FERMIONIC (odd) `statSubmodule` of PhysLean's Wick algebra — a single fermion
+  is odd, so not an even observable / record. With `electron_bilinear_bosonic` (bilinears even) this
+  completes the operator-level even/odd grading, **identical across all three layers**: the exterior CAR
+  (`parity_one_particle` / `isEven_ι_mul_ι`), the Clifford (`diracGamma_mem_odd` / `diracGamma_mul_mem_even`),
+  and PhysLean's `WickAlgebra` — the §0 "records = even bilinears, one-particle = odd" decision realized
+  uniformly. Wired into `AxiomAudit.lean`; standard-3; budget 0.

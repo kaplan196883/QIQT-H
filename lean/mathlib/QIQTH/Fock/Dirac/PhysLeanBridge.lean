@@ -148,4 +148,19 @@ theorem electron_bilinear_bosonic (φ φ' : electronFieldSpec.CrAnFieldOp) :
   rw [FieldStatistic.ofList_cons_eq_mul, FieldStatistic.ofList_singleton]
   rfl
 
+open FieldSpecification FieldSpecification.WickAlgebra in
+/-- **A single electron field operator is fermionic (odd) — NOT a record.**  A single
+creation/annihilation operator `ofCrAnList [φ]` lies in the **fermionic** (odd) graded submodule of the
+Wick algebra.  Together with `electron_bilinear_bosonic` (bilinears are even) this is the operator-level
+even/odd grading — the PhysLean counterpart of the Clifford `diracGamma_mem_odd` (a single `γ` is odd) and
+the exterior `parity_one_particle` (`Γ(ι m) = −ι m`): a single fermion is odd, so it is *not* an even
+observable / record, while products of two are even (records) — the §0 "records = even bilinears" decision
+realized identically in all three layers (exterior CAR, Clifford, PhysLean `WickAlgebra`). -/
+theorem electron_single_fermionic (φ : electronFieldSpec.CrAnFieldOp) :
+    ofCrAnList [φ] ∈ statSubmodule (𝓕 := electronFieldSpec) FieldStatistic.fermionic := by
+  apply ofCrAnList_mem_statSubmodule_of_eq
+  show (electronFieldSpec |>ₛ [φ]) = FieldStatistic.fermionic
+  rw [FieldStatistic.ofList_singleton]
+  rfl
+
 end QIQTH.Fock.Dirac
