@@ -2,17 +2,19 @@
 Copyright (c) 2026 PK. All rights reserved.
 Released under Apache 2.0 license.
 
-# The Wall, Phase 4.1 — strong continuity of the clock group `λ_t`
+# The Wall, Phase 4 — the clock energy `X = A_edge` as a self-adjoint operator (COMPLETE)
 
-Toward the clock energy `X` = the generator of `λ_t = clockTransl t` (see `PHASE4_GENERATOR_PLAN.md`), the first
-(tractable) step is **strong continuity**: `t ↦ λ_t ξ` is continuous in `L²(ℝ;H)` for each `ξ`.  With the group
-law + isometry (Phase 2), this completes "`λ_t` is a **strongly-continuous one-parameter unitary group**" — the
-exact hypothesis of **Stone's theorem**, which would then yield `X` (the next, frontier step).
+The clock energy `X` = the generator of `λ_t = clockTransl t` (see `PHASE4_GENERATOR_PLAN.md`).  Strong
+continuity `t ↦ λ_t ξ` (in `L²(ℝ;H)`) + the group law + isometry (Phase 2) make `λ_t` a **strongly-continuous
+one-parameter unitary group** — the exact hypothesis of **Stone's theorem**.  Stone is now BUILT
+(`QIQTH/Spectral/Stone.lean` + `Garding.lean`), so `X := stoneGen clockTransl` is realized here and proved
+**self-adjoint** (`clockEnergy_isSelfAdjoint`, via `stoneGen_isSelfAdjoint` / Gårding density).  So Phase 4
+(`X = A_edge` a genuine self-adjoint operator) is COMPLETE — not a carried frontier.
 
-Built from Mathlib's `Lp.ContinuousAt.compMeasurePreservingLp` (continuity of `L^p`-composition with a
-continuously-varying measure-preserving map) — the varying map being translation `(· + t)`, continuous into
-`C(ℝ,ℝ)` as the curry of continuous addition.  Bounded operators only; Stone (`X` as a self-adjoint operator)
-is the cited frontier.  Axiom-free.
+Strong continuity is built from Mathlib's `Lp.ContinuousAt.compMeasurePreservingLp` (continuity of
+`L^p`-composition with a continuously-varying measure-preserving map) — the varying map being translation
+`(· + t)`, continuous into `C(ℝ,ℝ)` as the curry of continuous addition.  Axiom-free.  (Earlier header
+revisions called Stone / `X`-self-adjointness "the cited frontier"; that is stale.)
 -/
 import QIQTH.CrossedProductTranslation
 import QIQTH.Spectral.Stone
@@ -34,7 +36,7 @@ noncomputable def translMap : C(ℝ, C(ℝ, ℝ)) :=
 
 /-- **★ Phase 4.1 — strong continuity of the clock group.**  `t ↦ λ_t ξ` is continuous in `L²(ℝ;H)`.  With the
     group law (`clockTransl_add`) and isometry (`clockTransl_norm`), `λ_t` is a strongly-continuous one-parameter
-    unitary group — Stone's theorem hypothesis (the generator `X` is the next, frontier, step). -/
+    unitary group — Stone's theorem hypothesis (the generator `X` is then self-adjoint, `clockEnergy_isSelfAdjoint`). -/
 theorem clockTransl_stronglyContinuous (ξ : Lp H 2 (volume : Measure ℝ)) :
     Continuous (fun t => clockTransl t ξ) := by
   have hg : Continuous (fun t : ℝ => translMap t) := translMap.continuous
@@ -55,9 +57,12 @@ group `λ_t = clockTransl t`: its three Stone hypotheses are now all in hand —
 Cayley estimates, hence `X ± i` injective. `X` (its closure) is the operator the campaign calls `A_edge`.
 
 Essential self-adjointness of `X` — needed before Stone returns `λ_t = exp(itX)` and before the dual-weight
-trace — requires the Gårding density of the smooth domain (`Range(X ± i)` dense), the carried analytic
-frontier (Phase 3.3); it is NOT claimed here. The 1/4 ratio is derived (`SakharovRatio`); the value of `G` /
-the edge normalization `⟨A_edge⟩ = A/4ℓ_P²` is never claimed. -/
+trace — **IS now proved**: `clockEnergy_isSelfAdjoint` (below) gives `IsSelfAdjoint X` (`X = X†`) via the
+general `stoneGen_isSelfAdjoint` (`QIQTH/Spectral/Garding.lean`, Gårding density / `Range(X+i)=H`).  So
+`X = A_edge` is a genuine self-adjoint unbounded operator and the Phase-3.3/Phase-4 "carried frontier" is
+closed (earlier revisions of this header labelled it unclaimed; that is stale).  Still honestly NOT claimed:
+the 1/4 ratio is derived (`SakharovRatio`) but the value of `G` / the edge normalization
+`⟨A_edge⟩ = A/4ℓ_P²` is never claimed. -/
 
 /-- **★ `λ_t` preserves the inner product:** `⟪λ_t a, λ_t b⟫ = ⟪a, b⟫` (it is a ℂ-linear isometry). This is
     the third Stone hypothesis (`hUinner`) for `clockTransl` — the genuinely *unitary* statement of the clock
@@ -79,9 +84,10 @@ and `X ± i` injective via the Cayley estimates. Its closure is the campaign's `
 `Lp H 2 volume` type makes the elaborator `whnf`-unfold the `LinearPMap.domain` projection through the heavy
 `Lp`/`InnerProductSpace` instance tower → `isDefEq`/`whnf` divergence (the Phase-1.1/1.3 friction). Fixed by
 `attribute [local irreducible] stoneGen stoneDomain` (so the projection is not unfolded) + pinning the ambient
-space `(H := Lp H 2 volume)` explicitly. Essential self-adjointness of `X` — needed before Stone returns
-`λ_t = exp(itX)` — still requires `Range(X ± i)` dense (Gårding density), the carried analytic frontier (NOT
-claimed). The 1/4 ratio is derived (`SakharovRatio`); `⟨A_edge⟩ = A/4ℓ_P²` (value of `G`) is never claimed. -/
+space `(H := Lp H 2 volume)` explicitly. Essential self-adjointness of `X` IS proved
+(`clockEnergy_isSelfAdjoint`, via `stoneGen_isSelfAdjoint` / Gårding density), so `X` is genuinely
+self-adjoint here. Still honestly NOT claimed: the 1/4 ratio is derived (`SakharovRatio`) but
+`⟨A_edge⟩ = A/4ℓ_P²` (value of `G`) is never claimed. -/
 
 attribute [local irreducible] QIQTH.Spectral.stoneGen QIQTH.Spectral.stoneDomain
 
@@ -107,7 +113,7 @@ theorem clockEnergy_norm_add_smul_I_sq (x : (stoneGen (clockTransl (H := H))).do
     clockTransl_add clockTransl_zero clockTransl_inner x
 
 /-- **★ `X + i` is bounded below** — `‖x‖ ≤ ‖(X + i) x‖`, so `X + i` is injective on the smooth domain (half
-    the deficiency-index data; essential self-adjointness needs `Range(X ± i)` dense, the carried frontier). -/
+    the deficiency-index data; the other half — `Range(X ± i)` dense — is proved in `clockEnergy_isSelfAdjoint`). -/
 theorem clockEnergy_norm_le_norm_add_smul_I (x : (stoneGen (clockTransl (H := H))).domain) :
     ‖(x : Lp H 2 (volume : Measure ℝ))‖
       ≤ ‖stoneGen (clockTransl (H := H)) x + Complex.I • (x : Lp H 2 (volume : Measure ℝ))‖ :=
