@@ -66,6 +66,20 @@ theorem helicityProjPlus_idem :
       = helicityProjPlus Hplus Hminus := by
   ext p <;> simp [helicityProjPlus]
 
+/-- **The spectral decomposition of the helicity: `Λ = (+1)·P_{+1} + (−1)·P_{−1}`**, i.e.
+`Λ = P_{+1} − P_{−1}`.  The helicity operator is its two eigen-projections weighted by the eigenvalues
+`±1` — the spectral (eigen-)decomposition of the photon helicity. -/
+theorem helicityOp_eq_proj :
+    helicityOp Hplus Hminus = helicityProjPlus Hplus Hminus - helicityProjMinus Hplus Hminus := by
+  ext p <;> simp [helicityOp, helicityProjPlus, helicityProjMinus]
+
+/-- **The helicity projections are orthogonal: `P_{+1}·P_{−1} = 0`.**  The positive- and negative-helicity
+sectors are orthogonal (a photon has a *definite* helicity `+1` or `−1`) — together with completeness
+`P_{+1}+P_{−1}=1` and idempotence, the `P_{±1}` form a complete orthogonal system of projections. -/
+theorem helicityProj_orthogonal :
+    (helicityProjPlus Hplus Hminus).comp (helicityProjMinus Hplus Hminus) = 0 := by
+  ext p <;> simp [helicityProjPlus, helicityProjMinus]
+
 /-- **The transverse one-particle dimension splits over the two helicities**:
 `dim h_γ = dim h_{+1} + dim h_{−1}` for `h_γ = h_{+1} ⊕ h_{−1}`. -/
 theorem photon_helicity_finrank :

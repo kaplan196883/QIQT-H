@@ -321,3 +321,9 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   transverse helicity projections sum to the identity (the photon's **two physical polarizations form a
   complete set**, no third longitudinal mode); **`helicityProjPlus_idem`**: `P_{+1}²=P_{+1}` (a genuine
   projection). Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **P1: the spectral decomposition of the helicity** (`PhotonHelicity.lean`, axiom-free
+  standard-3, budget 0, 2943 jobs green). **`helicityOp_eq_proj`**: `Λ = P_{+1} − P_{−1}`
+  (`= (+1)P_{+1}+(−1)P_{−1}`), the eigen-decomposition of the photon helicity. **`helicityProj_orthogonal`**:
+  `P_{+1}·P_{−1} = 0` — the `±1` sectors are orthogonal (a photon has a *definite* helicity); so with
+  completeness + idempotence the `P_{±1}` form a **complete orthogonal system of projections**. Wired into
+  `AxiomAudit.lean`; standard-3; budget 0.
