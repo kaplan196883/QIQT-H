@@ -198,3 +198,16 @@ frontier.
   (both standard-3); `lake build QIQTH.Fock.Dirac.Parity` green (2400 jobs); budget 0. Next: **E4**
   (the even/odd ±1 eigenspace decomposition `⋀M = (⋀M)₊⊕(⋀M)₋`, then the Klein twist `Z` over `𝕜=ℂ`
   and the abstract twisted-duality statement `𝓕(W)'=Z𝓕(W')Z*`), or **E1** (Dirac one-particle).
+- 2026-06-28 — **E4 crux (Klein-twist algebra) DONE** (`QIQTH/Fock/Dirac/KleinTwist.lean`, axiom-free,
+  budget 0). The **Klein twist** `kleinTwist γ = (1+iγ)/(1+i)` for an involution `γ` in a ℂ-algebra, with
+  its defining identity **`kleinTwist_sq : Z² = γ`** (proof: expand, push central ℂ-scalars through `γ`,
+  collapse `γ·γ=1`, and the two ℂ-scalar facts `α²+β²=0`, `2αβ=1` with `α=(1+i)⁻¹`, `β=i(1+i)⁻¹`) and
+  **`kleinTwist_sq_sq : Z⁴ = 1`**. For `γ=Γ=(−1)^F` (Parity.lean) this is the Klein twist whose twisted
+  duality `𝓕(W)'=Z𝓕(W')Z*` is the AQFT spin–statistics form for the electron — the crux that the
+  modular flow stays the geometric boost (no sign) while the **commutant/J carries the twist**. Wired
+  into `QIQTH.lean` + `AxiomAudit.lean` (both standard-3); `lake build QIQTH.Fock.Dirac.KleinTwist` green
+  (2401 jobs); budget 0. **Checkpointed (next, not blocked):** Z unitary `Z*Z=1` (needs `StarRing`, `γ`
+  self-adjoint); the operator-algebra twisted-duality theorem + instantiating `γ` as the second-quantized
+  parity unitary `u_Γ` on the CAR inner-product space (**E5** — needs the inner product / GNS, the
+  genuine operator-algebra frontier). Next: **E5/E6** (one-particle BW data → `Δ_W^it`=boost, `J_W=Z·Expₐ(j_W)`,
+  boost-KMS β=2π, Fermi–Dirac), or **E1** (Dirac one-particle + `S_D` kernel).

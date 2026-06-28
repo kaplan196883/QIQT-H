@@ -6385,6 +6385,16 @@ namespace QIQTH.AxiomAudit
 -- (standard 3).
 #print axioms QIQTH.Fock.Dirac.parity_ι
 #print axioms QIQTH.Fock.Dirac.parity_involutive
+-- ★★★ ELECTRON_FIELD_PLAN E4 (THE CRUX — Z₂-graded twisted modular duality): kleinTwist γ = (1+iγ)/(1+i) for an
+-- involution γ in a ℂ-algebra. kleinTwist_sq: Z² = γ — the DEFINING identity the twisted duality 𝓕(W)'=Z𝓕(W')Z*
+-- rests on (applying the duality twice = parity Γ-conjugation); kleinTwist_sq_sq: Z⁴ = 1 (order-4, fourth root of
+-- the parity involution). For γ = Γ=(−1)^F (Parity.lean) this is the Klein twist whose twisted duality is the AQFT
+-- form of spin–statistics for the electron — the conceptual crux that the modular flow stays the geometric boost
+-- (NOT a sign) while the COMMUTANT/J carries the fermionic twist. CHECKPOINTED (next increments, not blocked): Z
+-- unitary Z*Z=1 (needs StarRing, γ self-adjoint); the operator-algebra twisted-duality theorem + instantiation of γ
+-- as the second-quantized parity unitary (E5). Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.kleinTwist_sq
+#print axioms QIQTH.Fock.Dirac.kleinTwist_sq_sq
 -- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-11, von Neumann non-vacuity witness): oneDensity_isDensity —
 -- IsDensity (1 : Matrix (Fin 1) (Fin 1) ℂ), the one-microstate pure state (1×1 identity), a genuine density
 -- (PosSemidef.one + trace_one). Completes the witness story (M-7 only witnessed the record-law/Shannon floor): the
