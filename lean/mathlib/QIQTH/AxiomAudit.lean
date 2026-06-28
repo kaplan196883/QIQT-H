@@ -6464,6 +6464,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Dirac.fermiDirac_kms_balance
 #print axioms QIQTH.Fock.Dirac.fermiDirac_unique
 #print axioms QIQTH.Fock.Dirac.boseEinstein_kms_balance
+-- ELECTRON_FIELD/PHOTON_FIELD (the spin-statistics enhancement factors, symmetric pair): fermiDirac_one_sub —
+-- 1−n = e^{βω}·n (the fermionic Pauli-blocking depletion factor); boseEinstein_one_add — 1+n = e^{βω}·n (the bosonic
+-- spontaneous+stimulated enhancement). The −n (Pauli) vs +n (stimulated) is the spin-statistics signature carried to the
+-- occupation algebra. Axiom-free (standard 3); free Dirac / free Maxwell.
+#print axioms QIQTH.Fock.Dirac.fermiDirac_one_sub
+#print axioms QIQTH.Fock.Photon.boseEinstein_one_add
 -- ★★★ ELECTRON_FIELD_PLAN E6→E5 bridge (per-mode modular Hamiltonian): fermiDirac_logit — for a fermionic mode with
 -- occupation n = fermiDirac β ω, the modular energy is the logit log((1−n)/n) = βω. This is the single-mode form of
 -- the fermionic modular Hamiltonian K = log((1−C)/C) (QuasiFreeEntropy / quasi-free modular generator): the logit of

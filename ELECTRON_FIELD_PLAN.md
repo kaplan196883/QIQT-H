@@ -746,3 +746,9 @@ EXTERNAL libraries; QIQT-H built its own.
   the modular partition function (whose `log Z` is the `S = log Z + β⟨E⟩` of `electron_mode_entropy`) — the
   "modular state = Gibbs state" statement at the entry level (the matrix-exp `ρ = e^{−K}/Z` form is the
   cited fiddly-but-tractable follow-on). Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **E6: the fermionic depletion factor `1 − n = e^{βω}·n`** (`fermiDirac_one_sub`, in
+  `FermiDirac.lean`, axiom-free, budget 0, 1925 jobs green). The `(1−n)` Pauli-blocking factor equals
+  `e^{βω}` times the occupation — the multiplicative KMS+CAR balance, the **exact fermionic mirror of the
+  photon's bosonic enhancement** `1 + n = e^{βω}·n` (`boseEinstein_one_add`). The `−n` (Pauli) vs `+n`
+  (stimulated) is the spin–statistics signature carried to the occupation algebra, now stated symmetrically
+  on both sides. Wired into `AxiomAudit.lean`; standard-3; budget 0.

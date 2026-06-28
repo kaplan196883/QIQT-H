@@ -68,6 +68,18 @@ theorem fermiDirac_kms_balance (β ω : ℝ) :
   field_simp
   ring
 
+/-- **The fermionic depletion factor `1 − n = e^{βω}·n`.**  The `(1−n)` Pauli-blocking factor equals
+`e^{βω}` times the occupation — the multiplicative form of the KMS+CAR balance.  The exact fermionic
+mirror of the bosonic enhancement `1 + n = e^{βω}·n` (`boseEinstein_one_add`): the **`−n` (Pauli) vs `+n`
+(stimulated)** is the spin–statistics signature, the `∓` carried through to the occupation algebra. -/
+theorem fermiDirac_one_sub (β ω : ℝ) :
+    1 - fermiDirac β ω = Real.exp (β * ω) * fermiDirac β ω := by
+  have hb := fermiDirac_kms_balance β ω
+  rw [Real.exp_neg] at hb
+  have he : Real.exp (β * ω) ≠ 0 := (Real.exp_pos _).ne'
+  field_simp at hb ⊢
+  linarith [hb]
+
 /-- **Uniqueness.**  Any `n` solving the KMS+CAR balance `n = e^{−βω}(1 − n)` equals the Fermi–Dirac
 occupation.  So `1/(e^{βω}+1)` is THE occupation of a fermionic Rindler mode. -/
 theorem fermiDirac_unique {β ω n : ℝ} (h : n = Real.exp (-(β * ω)) * (1 - n)) :
