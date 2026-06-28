@@ -327,3 +327,8 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   `P_{+1}·P_{−1} = 0` — the `±1` sectors are orthogonal (a photon has a *definite* helicity); so with
   completeness + idempotence the `P_{±1}` form a **complete orthogonal system of projections**. Wired into
   `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **P1: the helicity eigenvalues `±1`, concrete** (`PhotonHelicity.lean`, axiom-free standard-3,
+  budget 0, 2943 jobs green). **`helicityOp_plus`**: `Λ(x,0)=(x,0)` (a positive-helicity photon is a `Λ=+1`
+  eigenvector); **`helicityOp_minus`**: `Λ(0,y)=(0,−y)` (a negative-helicity photon is a `Λ=−1`
+  eigenvector). The two eigenvalues `±1` are the photon's two transverse helicities, exhibited on concrete
+  eigenvectors. Wired into `AxiomAudit.lean`; standard-3; budget 0.

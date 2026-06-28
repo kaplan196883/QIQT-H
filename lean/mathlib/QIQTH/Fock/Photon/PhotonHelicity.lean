@@ -52,6 +52,16 @@ def helicityProjPlus : (Hplus × Hminus) →ₗ[ℂ] (Hplus × Hminus) :=
 def helicityProjMinus : (Hplus × Hminus) →ₗ[ℂ] (Hplus × Hminus) :=
   LinearMap.prodMap 0 LinearMap.id
 
+/-- **Helicity `+1` on the positive sector**: `Λ(x, 0) = +1·(x, 0)` — a positive-helicity photon is a
+`Λ = +1` eigenvector. -/
+@[simp] theorem helicityOp_plus (x : Hplus) :
+    helicityOp Hplus Hminus (x, 0) = (x, 0) := by simp [helicityOp]
+
+/-- **Helicity `−1` on the negative sector**: `Λ(0, y) = −1·(0, y) = (0, −y)` — a negative-helicity photon
+is a `Λ = −1` eigenvector.  (The two eigenvalues `±1` are the photon's two transverse helicities.) -/
+@[simp] theorem helicityOp_minus (y : Hminus) :
+    helicityOp Hplus Hminus (0, y) = (0, -y) := by simp [helicityOp]
+
 /-- **The two polarizations resolve the identity: `P_{+1} + P_{−1} = 1`.**  The two transverse helicity
 projections sum to the identity on the physical one-particle space `h_γ = h_{+1} ⊕ h_{−1}` — the photon's
 **two physical polarizations form a complete set** (no third, longitudinal mode: a resolution of the
