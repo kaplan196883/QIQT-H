@@ -731,3 +731,10 @@ EXTERNAL libraries; QIQT-H built its own.
   (`Γ` is diagonal, via `electron_sigmaDiag_fixes_diagonal`): a record of definite parity stays that parity
   under the modular dynamics (records conserved, concrete operator level). Wired into `AxiomAudit.lean`;
   standard-3; budget 0.
+- 2026-06-29 — **E4/E6: the twisted-duality intertwiner `Z` commutes with the modular Hamiltonian** (added
+  to `KleinTwistWitness.lean`, axiom-free, budget 0, 3098 jobs green). Since `Z` commutes with `Γ=1−2N`
+  (`kleinTwist_comm_gamma`) and `N=(1−Γ)/2`, **`electron_kleinTwist_comm_numberOp`** gives `Z·N=N·Z`;
+  scaling by `βω`, **`electron_kleinTwist_comm_modHamiltonian`** gives `Z·K=K·Z` (`K=βω·N`). So the Klein
+  twist is a **modular invariant** — it commutes with the modular Hamiltonian (hence the modular flow `σ_t`),
+  so the twisted duality `𝓕(W)'=Z𝓕(W')Z*` is **compatible with the modular dynamics** (the E4 twist
+  consistent with the E6/E9 modular tier). Wired into `AxiomAudit.lean`; standard-3; budget 0.

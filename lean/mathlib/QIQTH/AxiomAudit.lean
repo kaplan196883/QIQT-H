@@ -6445,6 +6445,13 @@ namespace QIQTH.AxiomAudit
 -- Axiom-free (standard 3); free Dirac.
 #print axioms QIQTH.Fock.Dirac.fermionParity_eq_one_sub_two_numberOp
 #print axioms QIQTH.Fock.Dirac.electron_sigmaDiag_fixes_parity
+-- ELECTRON_FIELD E4/E6 (the twisted-duality intertwiner Z commutes with the modular Hamiltonian): since Z commutes with
+-- Γ=1−2N (kleinTwist_comm_gamma) and N=(1−Γ)/2, electron_kleinTwist_comm_numberOp gives Z·N=N·Z; scaling by βω,
+-- electron_kleinTwist_comm_modHamiltonian gives Z·K=K·Z (K=βω·N). So the Klein twist is a MODULAR INVARIANT — it
+-- commutes with the modular Hamiltonian/flow, so the twisted duality 𝓕(W)'=Z𝓕(W')Z* is compatible with the modular
+-- dynamics (the E4 twist consistent with the E6/E9 modular tier). Axiom-free (standard 3); free Dirac.
+#print axioms QIQTH.Fock.Dirac.electron_kleinTwist_comm_numberOp
+#print axioms QIQTH.Fock.Dirac.electron_kleinTwist_comm_modHamiltonian
 -- ★★★ ELECTRON_FIELD_PLAN E6 (Fermi–Dirac Unruh occupation — the CAR +1 vs Bose −1 signature): for a Rindler mode
 -- of the free Dirac field the vacuum is boost-KMS at β=2π (Unruh temperature, SAME as the scalar); the fermionic
 -- difference is the occupation. fermiDirac β ω = 1/(e^{βω}+1); fermiDirac_kms_balance: n = e^{−βω}(1−n) (KMS thermal
@@ -6866,5 +6873,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Photon.photon_helicity_finrank
 #print axioms QIQTH.Fock.Photon.photon_two_polarizations
 #print axioms QIQTH.Fock.Photon.photon_capacity_helicity
+-- PHOTON_FIELD_PLAN P1/P3 (the 2-polarization capacity): photon_capacity_two_helicity — for d modes per helicity the
+-- photon capacity is C(2d+N, N) (the two transverse polarizations doubling the mode count). photon_capacity_helicity_ge:
+-- truncFockDim d N ≤ truncFockDim (2d) N — the second polarization enlarges the capacity (the photon carries more
+-- information than a single-component scalar-like field of the same per-helicity mode count). Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Photon.photon_capacity_two_helicity
+#print axioms QIQTH.Fock.Photon.photon_capacity_helicity_ge
 
 end QIQTH.AxiomAudit

@@ -82,4 +82,27 @@ theorem electron_sigmaDiag_fixes_parity (β ω t : ℝ) :
     QIQTH.FiniteModularTheory.sigmaDiag (electronModeOcc β ω) t fermionParity = fermionParity :=
   electron_sigmaDiag_fixes_diagonal β ω t ![1, -1]
 
+/-- **The Klein twist commutes with the number operator**: `Z·N = N·Z`.  Since `Z` commutes with the parity
+`Γ = 1 − 2N` (`kleinTwist_comm_gamma`) and `N = (1 − Γ)/2`, the twist commutes with `N` too — both `Z` and
+`N` are functions of the single conserved `N`. -/
+theorem electron_kleinTwist_comm_numberOp :
+    kleinTwist fermionParity * numberOp = numberOp * kleinTwist fermionParity := by
+  set Z := kleinTwist fermionParity with hZ
+  have h : Z * fermionParity = fermionParity * Z := kleinTwist_comm_gamma fermionParity
+  rw [fermionParity_eq_one_sub_two_numberOp] at h
+  simp only [mul_sub, sub_mul, mul_one, one_mul, mul_smul_comm, smul_mul_assoc] at h
+  exact smul_right_injective _ two_ne_zero (sub_right_inj.mp h)
+
+/-- **The twisted-duality intertwiner `Z` commutes with the modular Hamiltonian `K = βω·N`**: `Z·K = K·Z`.
+Since `Z` commutes with `N` (`electron_kleinTwist_comm_numberOp`) and `K = βω·N`, the Klein twist is a
+**modular invariant** — it commutes with the modular Hamiltonian, hence with the modular flow `σ_t`.  So the
+twisted modular duality `𝓕(W)'=Z𝓕(W')Z*` is **compatible with the modular dynamics**: the spin–statistics
+twist `Z` is conserved by the boost/modular flow (the consistency of the E4 twisted duality with the E6/E9
+modular tier). -/
+theorem electron_kleinTwist_comm_modHamiltonian (β ω : ℝ) :
+    kleinTwist fermionParity * modHamiltonian β ω
+      = modHamiltonian β ω * kleinTwist fermionParity := by
+  unfold modHamiltonian
+  rw [mul_smul_comm, smul_mul_assoc, electron_kleinTwist_comm_numberOp]
+
 end QIQTH.Fock.Dirac
