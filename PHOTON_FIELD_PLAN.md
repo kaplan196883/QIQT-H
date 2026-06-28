@@ -230,3 +230,12 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   photon thermodynamic chain (occupation → mode entropy → first law `δS=δ⟨K⟩` that drives the area law).
   (Added `import Mathlib.Analysis.SpecialFunctions.Log.NegMulLog`.) Wired into `AxiomAudit.lean`;
   standard-3; budget 0.
+- 2026-06-29 — **P6/P10 bridge: the field strength `F=dA` is gauge-invariant + the Bianchi identity, via
+  `d²=0`** (`QIQTH/Fock/Photon/PhotonFieldStrength.lean`, axiom-free standard-3, budget 0, 799 jobs green).
+  The concrete reason the photon's records are the gauge-invariant `F_μν` (P6): modelling `d_gauge:Λ→ₗA`
+  (`Λ↦dΛ`, pure gauge) and `d_F:A→ₗF` (`F=dA`) with the cochain condition `d_F∘d_gauge=0`. **`fieldStrength_
+  gauge_invariant`**: `d_F(A + d_gauge Λ) = d_F A` — `F=dA` is unchanged by `A↦A+dΛ` (the pure-gauge shift
+  lands in `ker d_F`), so records are `F`, NOT `A`. **`bianchi_identity`**: `d_next(F)=0` for `F=dA` — the
+  homogeneous Maxwell eqs `dF=0`. Both the gauge-invariance of `F` and its closedness are the two faces of
+  the single condition `d²=0`. Wired into `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0. (The full
+  continuum Maxwell `F`-net CCR from de Rham test 2-forms remains the deferred P10 frontier.)
