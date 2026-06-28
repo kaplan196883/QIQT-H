@@ -785,3 +785,10 @@ EXTERNAL libraries; QIQT-H built its own.
   (compact, *elliptic*). The sign of `σ²` is the boost-vs-rotation (non-compact-vs-compact) dichotomy of the
   Lorentz spin generators. (Added `import Mathlib.Tactic.NoncommRing`.) Wired into `AxiomAudit.lean`;
   standard-3; budget 0.
+- 2026-06-29 — **E1: the fundamental orthogonal-gamma square `(γ_aγ_b)² = −Q(a)Q(b)`** (extracted/exported in
+  `DiracGamma.lean`, axiom-free, budget 0, 1775 jobs green). **`diracGamma_mul_sq_ortho`**: the building
+  block of `diracSigma_sq_ortho` (`σ²=4×` this), now a standalone lemma. So `γ_aγ_b` is a *square root* of
+  `−Q(a)Q(b)`: for a **rotation plane** (`Q(a)Q(b)>0`) it is a **complex structure** (`(γ_aγ_b)²<0`, the `i`
+  generating the `U(1)` rotation); for a **boost plane** (`Q(a)Q(b)<0`, time⟂space) it squares to a positive
+  scalar (hyperbolic). `diracSigma_sq_ortho` refactored to use it. Wired into `AxiomAudit.lean`; standard-3;
+  budget 0.

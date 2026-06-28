@@ -108,27 +108,34 @@ theorem diracSigma_ortho {a b : M} (h : Q.IsOrtho a b) :
     rw [diracGamma_swap_ortho Q h, neg_neg]
   rw [hh, sub_neg_eq_add]
 
+/-- **The product of two orthogonal gammas squares to a scalar: `(γ_aγ_b)² = −Q(a)·Q(b)` (`a ⟂ b`).**
+The fundamental fact: `(γ_aγ_b)² = γ_a(γ_bγ_a)γ_b = −γ_a²γ_b² = −Q(a)Q(b)` (using the orthogonal swap
+`γ_bγ_a = −γ_aγ_b` and `γ_v² = Q(v)`).  So `γ_aγ_b` is a square root of the scalar `−Q(a)Q(b)`: for a
+**rotation plane** (`Q(a)Q(b) > 0`) it is a **complex structure** `(γ_aγ_b)² = −|Q(a)Q(b)| < 0` (the `i`
+generating the `U(1)` rotation); for a **boost plane** (`Q(a)Q(b) < 0`, time ⟂ space) it squares to a
+*positive* scalar (hyperbolic).  The building block of the Lorentz spin generators. -/
+theorem diracGamma_mul_sq_ortho {a b : M} (h : Q.IsOrtho a b) :
+    (diracGamma Q a * diracGamma Q b) * (diracGamma Q a * diracGamma Q b)
+      = algebraMap ℝ (CliffordAlgebra Q) (-(Q a * Q b)) := by
+  have hba : diracGamma Q b * diracGamma Q a = -(diracGamma Q a * diracGamma Q b) := by
+    rw [diracGamma_swap_ortho Q h, neg_neg]
+  have e1 : (diracGamma Q a * diracGamma Q b) * (diracGamma Q a * diracGamma Q b)
+      = diracGamma Q a * (diracGamma Q b * diracGamma Q a) * diracGamma Q b := by noncomm_ring
+  rw [e1, hba]
+  have e2 : diracGamma Q a * -(diracGamma Q a * diracGamma Q b) * diracGamma Q b
+      = -((diracGamma Q a * diracGamma Q a) * (diracGamma Q b * diracGamma Q b)) := by noncomm_ring
+  rw [e2, diracGamma_sq, diracGamma_sq, ← map_mul, ← map_neg]
+
 /-- **The Lorentz generator squares to a scalar: `σ_ab² = −4·η(a)·η(b)` (orthogonal `a ⟂ b`).**  Since
-`σ_ab = 2γ_aγ_b` and `(γ_aγ_b)² = −γ_a²γ_b² = −η(a)η(b)`, the spin generator squares to the *scalar*
-`−4·Q(a)·Q(b)`.  This **distinguishes boosts from rotations**: with the Minkowski metric `η = (+,−,−,−)`,
-the **boost** generator `σ_{0i}` has `η(e₀)η(eᵢ) = (+1)(−1) = −1`, so `σ_{0i}² = +4 > 0` (non-compact,
-*hyperbolic* — the generator of the unbounded Rindler boost, whose `Δ^{it}` is the modular flow); a
-**rotation** `σ_{ij}` has `η(eᵢ)η(eⱼ) = (−1)(−1) = +1`, so `σ_{ij}² = −4 < 0` (compact, *elliptic*).  The
-sign of `σ²` is exactly the boost-vs-rotation (non-compact-vs-compact) dichotomy of the Lorentz spin
-generators. -/
+`σ_ab = 2γ_aγ_b` and `(γ_aγ_b)² = −η(a)η(b)` (`diracGamma_mul_sq_ortho`), the spin generator squares to the
+*scalar* `−4·Q(a)·Q(b)`.  This **distinguishes boosts from rotations**: with the Minkowski metric
+`η = (+,−,−,−)`, the **boost** generator `σ_{0i}` has `η(e₀)η(eᵢ) = (+1)(−1) = −1`, so `σ_{0i}² = +4 > 0`
+(non-compact, *hyperbolic* — the generator of the unbounded Rindler boost, whose `Δ^{it}` is the modular
+flow); a **rotation** `σ_{ij}` has `η(eᵢ)η(eⱼ) = (−1)(−1) = +1`, so `σ_{ij}² = −4 < 0` (compact,
+*elliptic*).  The sign of `σ²` is exactly the boost-vs-rotation (non-compact-vs-compact) dichotomy. -/
 theorem diracSigma_sq_ortho {a b : M} (h : Q.IsOrtho a b) :
     diracSigma Q a b * diracSigma Q a b
       = algebraMap ℝ (CliffordAlgebra Q) (-(4 * Q a * Q b)) := by
-  have hba : diracGamma Q b * diracGamma Q a = -(diracGamma Q a * diracGamma Q b) := by
-    rw [diracGamma_swap_ortho Q h, neg_neg]
-  have key : (diracGamma Q a * diracGamma Q b) * (diracGamma Q a * diracGamma Q b)
-      = algebraMap ℝ (CliffordAlgebra Q) (-(Q a * Q b)) := by
-    have e1 : (diracGamma Q a * diracGamma Q b) * (diracGamma Q a * diracGamma Q b)
-        = diracGamma Q a * (diracGamma Q b * diracGamma Q a) * diracGamma Q b := by noncomm_ring
-    rw [e1, hba]
-    have e2 : diracGamma Q a * -(diracGamma Q a * diracGamma Q b) * diracGamma Q b
-        = -((diracGamma Q a * diracGamma Q a) * (diracGamma Q b * diracGamma Q b)) := by noncomm_ring
-    rw [e2, diracGamma_sq, diracGamma_sq, ← map_mul, ← map_neg]
   rw [diracSigma_ortho Q h,
       show (diracGamma Q a * diracGamma Q b + diracGamma Q a * diracGamma Q b)
           * (diracGamma Q a * diracGamma Q b + diracGamma Q a * diracGamma Q b)
@@ -136,7 +143,7 @@ theorem diracSigma_sq_ortho {a b : M} (h : Q.IsOrtho a b) :
           + (diracGamma Q a * diracGamma Q b) * (diracGamma Q a * diracGamma Q b)
           + (diracGamma Q a * diracGamma Q b) * (diracGamma Q a * diracGamma Q b)
           + (diracGamma Q a * diracGamma Q b) * (diracGamma Q a * diracGamma Q b) from by noncomm_ring,
-      key, ← map_add, ← map_add, ← map_add]
+      diracGamma_mul_sq_ortho Q h, ← map_add, ← map_add, ← map_add]
   congr 1
   ring
 
