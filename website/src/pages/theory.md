@@ -20,14 +20,19 @@ $$ Q_R \;=\; \frac{A}{4\ell_P^2}, $$
 
 the holographic / Bekenstein–Hawking bound, with $A$ the boundary area of the region and $Q_R$ in natural
 entropy units (divide by $\ln 2$ for bits). **What QIQT-H postulates is only that the capacity is _finite_** — a
-UV-finite record structure (the "Quantized Information" core). The *holographic form* of the bound is **not**
-postulated: that the capacity scales with the boundary **area** ($\log N_R \propto A$) and carries the coefficient
-**1/4** ($S_{\mathrm{ren}} \le Q_R = A/4\ell_P^2$) is **derived** — by Sakharov induced gravity the area law
-$S \propto A$ *emerges* from the conical-deficit geometry (the cone curvature is a δ-function on the boundary,
-whose integral is the area), and the 1/4 is the regulator-independent geometric ratio $(4\pi)/(16\pi)$ (the 1/4
-ratio machine-checked; the area-law emergence is the standard Susskind–Uglum/Solodukhin heat-kernel result, Stage B
-of the Sakharov derivation). The **only** carried input is the *value* of $\ell_P^2 = G$ — the species/cutoff
-problem, the genuine residual.
+UV-finite record structure (the "Quantized Information" core). Finiteness *alone* gives only
+$S_{\mathrm{ren}} \le \log N_R$; it does **not** by itself fix whether $\log N_R$ scales with **area** or volume
+(a generic finite local cutoff gives *volume*-scaling maximum entropy — the area law is a fact about *vacuum
+entanglement*, not an automatic property of the capacity). That the bound takes the **holographic area form**
+($S_{\mathrm{ren}} \le Q_R = A/4\ell_P^2$) is **derived** — but in a *conditional* Sakharov / induced-gravity
+**bridge** (assuming local relativistic QFT on a smooth background with a covariant UV cutoff identified with the
+finite microstructure), **not** from finiteness alone: there the area law $S \propto A$ *emerges* from the
+conical-deficit geometry (the cone curvature is a δ-function on the boundary, whose integral is the area), and the
+**1/4** is the universal ratio between the conical replica-entropy coefficient and the induced Einstein–Hilbert
+coefficient — two quantities sharing one UV coefficient (the *ratio* machine-checked, `sakharov_ratio`; the
+emergence is the standard Susskind–Uglum/Solodukhin heat-kernel result, Stage B). The carried inputs are the
+*value* of $\ell_P^2 = G$ (the species/cutoff problem) and, for the full effective action, $\Lambda$ and
+higher-curvature terms.
 
 **Update (P4-MICRO, 2026): the area floor is a *derived theorem*, not a separate postulate.** From the
 finiteness postulate alone — the region has a finite number $N_R$ of distinguishable microstates, with the

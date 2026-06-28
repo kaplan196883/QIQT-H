@@ -80,14 +80,18 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
       <em>not</em> entail selector no-signalling.<br/><br/>
       <strong>P4 · The finite-information postulate (P4-MICRO / FQ). ★</strong> The postulate is just that a region
       has a <em>finite</em> information capacity — a finite number N<sub>R</sub> of distinguishable microstates, a
-      UV-finite record structure. <em>That finiteness is the entire distinctive input</em> (the “Quantized
-      Information” core). The <strong>holographic form is not postulated</strong>: that the capacity scales with the
-      boundary <em>area</em> (log&nbsp;N<sub>R</sub> ∝ A) and with coefficient <strong>1/4</strong>
-      (log&nbsp;N<sub>R</sub> ≤ A/4ℓ<sub>P</sub>²) is <strong>derived</strong> — Sakharov induced gravity: the area
-      law <em>emerges</em> from the conical-deficit geometry (the cone curvature is a δ-function on the boundary,
-      whose integral is the area), and the 1/4 is the regulator-independent geometric ratio 4π/16π (the ratio
-      machine-checked, <code>sakharov_ratio</code>). The only carried datum is the <em>value</em> of ℓ<sub>P</sub>²
-      = G (the species/cutoff scale). From the finite capacity the <em>area floor</em>
+      UV-finite record structure. <em>That finiteness is the whole distinctive input</em> (the “Quantized
+      Information” core) — and it gives only S<sub>vN</sub>(ρ<sub>R</sub>) ≤ log&nbsp;N<sub>R</sub>; by itself it
+      does <strong>not</strong> fix whether log&nbsp;N<sub>R</sub> scales with <em>area</em> or volume. That the
+      bound takes the <strong>holographic area form</strong> (log&nbsp;N<sub>R</sub> ≤ A/4ℓ<sub>P</sub>²) is
+      <em>derived</em> — but in a <em>conditional</em> Sakharov / induced-gravity <strong>bridge</strong> (the
+      conical-deficit heat-kernel calculation, assuming local relativistic QFT on a smooth background with a
+      covariant UV cutoff identified with the finite microstructure), <strong>not</strong> from finiteness alone.
+      There the area law emerges (cone curvature = δ on the boundary, integral = area) and the <strong>1/4</strong>
+      is the universal ratio between the conical replica-entropy coefficient and the induced Einstein–Hilbert
+      coefficient — two quantities sharing one UV coefficient; the <em>ratio</em> is machine-checked
+      (<code>sakharov_ratio</code>), the <em>value</em> of G is not. Carried inputs: the value of ℓ<sub>P</sub>² = G
+      (species/cutoff), and — for the full effective action — Λ and higher-curvature terms. From the finite capacity the <em>area floor</em>
       S<sub>vN</sub>(ρ<sub>R</sub>) ≤ A/4ℓ<sub>P</sub>² is a <strong>derived theorem</strong>
       (<code>area_floor_vonNeumann</code> — max-entropy S<sub>vN</sub> ≤ log&nbsp;dim), and for the free field the
       <strong>Einstein equations</strong> follow (<code>gr_from_p4micro</code>). It is <em>kinematic</em>: it does
@@ -157,8 +161,12 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
       conservation, and metric regularity. The Lean now <em>enforces</em> the honest boundary:
       <strong>the capacity postulate alone does not give gravity</strong> — a microstate <em>count</em> cannot
       supply a <em>temperature</em>, so the thermal input is irreducibly modular (the open Type&nbsp;II frontier
-      would derive it). The 1/4 coefficient is the separately-derived Sakharov ratio; the value of G is a carried
-      datum.</p>
+      would derive it). Two further honesties: Jacobson needs the entropy-area <em>variation</em>
+      δS&nbsp;=&nbsp;η·δA (a saturation / local-equilibrium step, supplied by <code>area_floor_saturates</code> +
+      the first law), not merely the ≤ bound; and the output is the Einstein equation <em>up to</em> a
+      cosmological constant Λ, on a <em>pre-existing</em> Lorentzian causal geometry — emergence of the field
+      <em>equations</em>, not of spacetime itself. The 1/4 is the separately-derived Sakharov ratio; the value of
+      G (and Λ, higher-curvature terms) is carried.</p>
     <p class="sub"><strong>The floor laid bare.</strong> A single <em>showcase</em> theorem
       (<code>qiqt_gr_ppwave_showcase</code>) instantiates the chain for an explicit curved <strong>pp-wave</strong>
       spacetime and <em>discharges every geometric and analytic premise</em> — the metric and tetrad, the
