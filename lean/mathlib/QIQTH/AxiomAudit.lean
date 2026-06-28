@@ -6426,6 +6426,13 @@ namespace QIQTH.AxiomAudit
 -- single log(Σ n_q) needs a Jensen/log-sum step over the sector weights (next E7 sub-item). Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.gradedShannon_chain_rule
 #print axioms QIQTH.Fock.Dirac.gradedShannon_capacity_le
+-- ★★★ ELECTRON_FIELD_PLAN E7 (completion — full graded capacity S ≤ log dim(⊕M_{n_q})): entropy_add_avgLogCard_le
+-- is the Gibbs/log-sum collapse H(p) + Σ_q p_q log n_q ≤ log(Σ_q n_q) (via log x ≤ x−1 per sector; equality at the
+-- maximally-mixed p_q ∝ n_q). gradedShannon_le_log_total chains chain-rule + per-sector capacity + this collapse to
+-- the headline S(ρ_R) ≤ log(Σ_q n_q) = log dim(⊕_q M_{n_q}) — the fermionic S_vN ≤ log N_R on the charge/parity-
+-- graded (even/observable) regional algebra to which records attach (§0). Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.entropy_add_avgLogCard_le
+#print axioms QIQTH.Fock.Dirac.gradedShannon_le_log_total
 -- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-11, von Neumann non-vacuity witness): oneDensity_isDensity —
 -- IsDensity (1 : Matrix (Fin 1) (Fin 1) ℂ), the one-microstate pure state (1×1 identity), a genuine density
 -- (PosSemidef.one + trace_one). Completes the witness story (M-7 only witnessed the record-law/Shannon floor): the

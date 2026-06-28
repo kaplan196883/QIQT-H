@@ -75,4 +75,60 @@ theorem gradedShannon_capacity_le (p : Q → ℝ) (w : ∀ q, I q → ℝ)
   rw [← QIQTH.RecordContract.shannon_eq_sum_negMulLog]
   exact QIQTH.RecordContract.shannon_le_log_card (w q) (hw0 q) (hw q)
 
+variable [Nonempty Q] [∀ q, Nonempty (I q)]
+
+/-- **The Gibbs / log-sum collapse.**  The mixing entropy plus the average sector log-capacity is bounded
+by the log of the TOTAL dimension: `H(p) + Σ_q p_q · log n_q ≤ log (Σ_q n_q)`.  Proof = Gibbs'
+inequality `log x ≤ x − 1` per sector (the maximally-mixed-over-the-whole-algebra bound).  Equality holds
+when `p_q ∝ n_q` (the maximally mixed state on `⊕_q M_{n_q}`). -/
+theorem entropy_add_avgLogCard_le (p : Q → ℝ) (hp : ∀ q, 0 ≤ p q) (h1 : ∑ q, p q = 1) :
+    ∑ q, (Real.negMulLog (p q) + p q * Real.log (Fintype.card (I q)))
+      ≤ Real.log (∑ q, (Fintype.card (I q) : ℝ)) := by
+  set N := ∑ q, (Fintype.card (I q) : ℝ) with hN
+  have hNpos : 0 < N := by
+    rw [hN]
+    refine Finset.sum_pos (fun q _ => ?_) Finset.univ_nonempty
+    have : 0 < Fintype.card (I q) := Fintype.card_pos
+    exact_mod_cast this
+  have hNn : N ≠ 0 := ne_of_gt hNpos
+  -- per-sector Gibbs bound
+  have key : ∀ q, Real.negMulLog (p q) + p q * Real.log (Fintype.card (I q)) - p q * Real.log N
+      ≤ (Fintype.card (I q) : ℝ) / N - p q := by
+    intro q
+    rcases (hp q).lt_or_eq with hpos | h0
+    · have hc : (0 : ℝ) < (Fintype.card (I q) : ℝ) := by exact_mod_cast Fintype.card_pos
+      have hpn : p q ≠ 0 := ne_of_gt hpos
+      have hz : 0 < (Fintype.card (I q) : ℝ) / (p q * N) := by positivity
+      have hcombine : Real.negMulLog (p q) + p q * Real.log (Fintype.card (I q)) - p q * Real.log N
+          = p q * Real.log ((Fintype.card (I q) : ℝ) / (p q * N)) := by
+        rw [Real.log_div (ne_of_gt hc) (mul_ne_zero hpn hNn),
+            Real.log_mul hpn hNn, Real.negMulLog_def]; ring
+      rw [hcombine]
+      calc p q * Real.log ((Fintype.card (I q) : ℝ) / (p q * N))
+          ≤ p q * ((Fintype.card (I q) : ℝ) / (p q * N) - 1) :=
+            mul_le_mul_of_nonneg_left (Real.log_le_sub_one_of_pos hz) (le_of_lt hpos)
+        _ = (Fintype.card (I q) : ℝ) / N - p q := by field_simp
+    · rw [← h0]
+      simp only [Real.negMulLog_zero, zero_mul, zero_add, sub_zero, add_zero]
+      exact div_nonneg (Nat.cast_nonneg _) hNpos.le
+  have hsum := Finset.sum_le_sum (fun q (_ : q ∈ Finset.univ) => key q)
+  have hLHS : ∑ q, (Real.negMulLog (p q) + p q * Real.log (Fintype.card (I q)) - p q * Real.log N)
+      = (∑ q, (Real.negMulLog (p q) + p q * Real.log (Fintype.card (I q)))) - Real.log N := by
+    rw [Finset.sum_sub_distrib, ← Finset.sum_mul, h1, one_mul]
+  have hRHS : ∑ q, ((Fintype.card (I q) : ℝ) / N - p q) = 0 := by
+    rw [Finset.sum_sub_distrib, ← Finset.sum_div, ← hN, h1, div_self hNn, sub_self]
+  rw [hLHS, hRHS] at hsum
+  linarith [hsum]
+
+/-- **The full graded capacity bound: `S(ρ_R) ≤ log dim(⊕_q M_{n_q})`.**  Combining the chain rule, the
+per-sector capacity, and the Gibbs/log-sum collapse: the graded regional record entropy is bounded by
+the log of the total dimension `Σ_q n_q = dim(⊕_q M_{n_q})` of the charge/parity-graded regional algebra
+— the fermionic `S_vN ≤ log N_R` on the graded (even/observable) algebra to which records attach. -/
+theorem gradedShannon_le_log_total (p : Q → ℝ) (w : ∀ q, I q → ℝ)
+    (hp : ∀ q, 0 ≤ p q) (h1 : ∑ q, p q = 1) (hw0 : ∀ q i, 0 ≤ w q i) (hw : ∀ q, ∑ i, w q i = 1) :
+    ∑ q, ∑ i, Real.negMulLog (p q * w q i) ≤ Real.log (∑ q, (Fintype.card (I q) : ℝ)) := by
+  refine le_trans (gradedShannon_capacity_le p w hp hw0 hw) ?_
+  rw [← Finset.sum_add_distrib]
+  exact entropy_add_avgLogCard_le p hp h1
+
 end QIQTH.Fock.Dirac

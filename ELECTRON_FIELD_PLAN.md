@@ -249,3 +249,14 @@ frontier.
   weights (next E7 sub-item). Remaining frontier (checkpointed): **E5** (operator-algebra BW data /
   twisted-duality theorem / GNS), **E1** (Dirac one-particle + `S_D`), E4 **Z-unitary** (`StarRing`),
   **E8** (even-observable no-signaling), **E9** (Dirac `T_μν` → Jacobson hook).
+- 2026-06-28 — **E7 completion (full graded capacity) DONE** (added to `GradedCapacity.lean`,
+  axiom-free, budget 0). The Gibbs/log-sum collapse closing E7: **`entropy_add_avgLogCard_le`** —
+  `H(p) + Σ_q p_q log n_q ≤ log(Σ_q n_q)` (via `log x ≤ x−1` per sector; equality at the maximally-mixed
+  `p_q ∝ n_q`), and **`gradedShannon_le_log_total`** — chaining chain-rule + per-sector capacity +
+  collapse to the **headline `S(ρ_R) ≤ log(Σ_q n_q) = log dim(⊕_q M_{n_q})`**: the fermionic
+  `S_vN ≤ log N_R` on the charge/parity-graded (even/observable) regional algebra. Wired into
+  `AxiomAudit.lean` (both standard-3); `lake build QIQTH.Fock.Dirac.GradedCapacity` green (3055 jobs);
+  budget 0. **E7 now complete** (chain rule → per-block bound → total `log dim`). Remaining frontier
+  (checkpointed): **E5** (operator-algebra BW data / twisted-duality theorem / GNS), **E1** (Dirac
+  one-particle + `S_D`), E4 **Z-unitary** (`StarRing`), **E8** (even-observable no-signaling), **E9**
+  (Dirac `T_μν` → Jacobson hook).
