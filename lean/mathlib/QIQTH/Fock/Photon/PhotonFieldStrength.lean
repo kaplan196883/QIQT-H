@@ -73,4 +73,22 @@ theorem fieldStrength_descends_to_quotient (dGauge : Λ →ₗ[ℂ] A) (dF : A �
         (LinearMap.range dGauge).mkQ = dF :=
   (LinearMap.range dGauge).liftQ_mkQ dF _
 
+/-- **The field-strength fibers are `ker d_F` cosets**: two potentials give the same field strength iff
+they differ by a **closed** element, `d_F a = d_F a' ↔ a − a' ∈ ker d_F`.  So the configurations with a
+given `F` form an affine coset of `ker d_F`. -/
+theorem fieldStrength_eq_iff_sub_mem_ker (dF : A →ₗ[ℂ] F) (a a' : A) :
+    dF a = dF a' ↔ a - a' ∈ LinearMap.ker dF := by
+  rw [LinearMap.mem_ker, map_sub, sub_eq_zero]
+
+/-- **Closed ⊇ exact: `range d_gauge ≤ ker d_F`** — the `d² = 0` cochain condition as a submodule
+inclusion.  The **pure-gauge** (exact) configurations `range d_gauge` are all **closed** (`ker d_F`): a
+gauge shift never changes the field strength.  The quotient `ker d_F ⧸ range d_gauge` is the first
+cohomology — the **topological / boundary-flux sectors** (the `closed`-but-not-`exact` configurations),
+i.e. the algebraic home of the photon's edge-mode center (`PhotonFluxSectors`, P9): nontrivial cohomology
+= nontrivial boundary flux.  (For a contractible region the cohomology is trivial — the regional algebra is
+a factor, no center; the §0 honest caveat.) -/
+theorem pureGauge_le_ker (dGauge : Λ →ₗ[ℂ] A) (dF : A →ₗ[ℂ] F) (hdd : dF ∘ₗ dGauge = 0) :
+    LinearMap.range dGauge ≤ LinearMap.ker dF :=
+  LinearMap.range_le_ker_iff.mpr hdd
+
 end QIQTH.Fock.Photon
