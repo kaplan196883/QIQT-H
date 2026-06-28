@@ -718,3 +718,17 @@ self-contained unbounded Stone theorem + spectral theory that Mathlib still lack
 dual-weight trace / Type II) + the `Lp`-`*` adjoint instance diamond (Phase 1.3), NOT Stone. With `X=A_edge` a
 self-adjoint operator: → dual-weight trace (Phase 5) → FQ bound (Phase 6, where Route 2 / P4-MICRO already ships
 to GR, `gr_from_p4micro`).
+
+### Increment 1c CORE — the SUM of commuting self-adjoint generators is self-adjoint ✅ (2026-06-29, axiom-free)
+**`QIQTH/Spectral/StoneProduct.lean` — `stoneGen_prod_isSelfAdjoint`.**  The dressed modular Hamiltonian
+`K̃ = K_bulk + A_edge·(1/4ℓ_P²)` needs the *sum* of two unbounded self-adjoint operators to be self-adjoint —
+which holds iff they **strongly commute**.  Supplied in one-parameter-group form: for two strongly-continuous
+unitary groups `A_t=e^{itK}`, `B_t=e^{itX}` that commute (`A_s∘B_t=B_t∘A_s`), the product `V_t=A_t∘B_t=e^{it(K+X)}`
+is again a C₀ unitary group, so **`stoneGen V = K+X` is self-adjoint** (via `stoneGen_isSelfAdjoint`).  The five
+C₀-group hypotheses for `V` follow elementarily from those of `A`,`B` + commutativity (group law uses `[A_s,B_t]=0`;
+strong continuity = the diagonal `t↦A_t(B_t y)`, controlled by `A_t` contractive + both groups SC).  Since
+`K=modularGen` and `X=A_edge` are each self-adjoint and act on different `L²(ℝ;H)` tensor factors (hence commute),
+`K̃` is self-adjoint — **Increment 1c's operator-theoretic core, the sum-of-commuting-self-adjoint theorem Mathlib
+lacks.**  Remaining for the full 1c: instantiate this on the specific lifted bulk-modular + clock flows (wiring the
+`A_edge`/`K_bulk` C₀ groups into `stoneGen_prod_isSelfAdjoint`).  Wired into `QIQTH.lean`+`AxiomAudit.lean`;
+standard-3; budget 0.

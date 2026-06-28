@@ -5073,6 +5073,15 @@ namespace QIQTH.AxiomAudit
 -- K = stoneGen (modUnitary S) = the JLMS modular Hamiltonian (abstract one-particle space). Each instantiates
 -- stoneGen_isSelfAdjoint with the group's (∘L group law, U_0=1, unitarity, isometry/norm, strong continuity). All
 -- three are GENUINE SELF-ADJOINT UNBOUNDED OPERATORS. Axiom-free. Remaining (Mathlib gap): unbounded spectral theorem.
+-- ★★★ P4 WALL — INCREMENT 1c CORE (the SUM of commuting self-adjoint generators is self-adjoint): stoneGen_prod_is
+-- SelfAdjoint — for two STRONGLY COMMUTING C₀ unitary groups A_t=e^{itK}, B_t=e^{itX}, the product V_t=A_t B_t=e^{it(K+X)}
+-- is again a C₀ unitary group, so its Stone generator (the SUM K+X) is self-adjoint (via stoneGen_isSelfAdjoint). The
+-- five C₀-group hypotheses for V follow elementarily from those of A,B + commutativity (group law uses [A_s,B_t]=0;
+-- strong continuity = the diagonal t↦A_t(B_t y), bounded by A_t contractive + both SC). This is the operator-theoretic
+-- core of the JLMS DRESSED modular Hamiltonian K̃ = K_bulk + A_edge·(1/4ℓ²) (Increment 1c): K=modularGen and X=A_edge
+-- are each self-adjoint and act on different L²(ℝ;H) tensor factors (so they commute), hence K̃ is self-adjoint. The
+-- sum-of-commuting-self-adjoint-operators theorem (which Mathlib lacks), in unitary-group form. Axiom-free (standard 3).
+#print axioms QIQTH.Spectral.stoneGen_prod_isSelfAdjoint
 #print axioms QIQTH.Spectral.Multiplication.translationCLM_norm_le
 #print axioms QIQTH.Spectral.Multiplication.translationCLM_continuous
 #print axioms QIQTH.Spectral.Multiplication.instNontrivialLp2
