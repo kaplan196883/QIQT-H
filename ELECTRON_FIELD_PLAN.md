@@ -224,3 +224,15 @@ frontier.
   FROM the balance. Next: **E5** (CAR 2nd-quant of one-particle BW data — the operator-algebra frontier:
   `Δ_W^it`=boost, `J_W=Z·Expₐ(j_W)`, twisted duality; needs inner product/GNS), or **E1** (Dirac
   one-particle + `S_D` kernel), or the **Z-unitary** checkpoint from E4.
+- 2026-06-28 — **E7/E8-seed (even/observable algebra) DONE** (`QIQTH/Fock/Dirac/EvenObservables.lean`,
+  axiom-free, budget 0). The §0 "which algebra" decision, formalized: `IsEven a := parity a = a` (the
+  Γ-fixed, eigenvalue-`+1` observables); closure (`isEven_one/zero/add/mul/smul/algebraMap`); and the
+  bundled **`evenSubalgebra 𝕜 M : Subalgebra`** — the Γ-fixed subalgebra to which records/capacity
+  attach. The load-bearing physical fact **`isEven_ι_mul_ι`**: a product of two one-particle (odd)
+  generators is EVEN, so **fermion bilinears (ψ̄ψ, j^μ, T_μν) are Γ-fixed even observables** (the
+  records), while one-particle states are odd (`parity_one_particle : Γ(ι m)=−ι m`) — exactly why
+  records = even bilinears and the χ_R c-number calculus does not transfer. Wired into `QIQTH.lean` +
+  `AxiomAudit.lean` (both standard-3); `lake build QIQTH.Fock.Dirac.EvenObservables` green (2401 jobs);
+  budget 0. Next E7/E8: graded regional capacity block decomposition `S(ρ_R)=H(p_q)+Σp_q S(ρ_q)` +
+  even-observable no-signaling. Remaining frontier (checkpointed): **E5** (operator-algebra BW data /
+  twisted-duality theorem / GNS), **E1** (Dirac one-particle + `S_D`), E4 **Z-unitary** (`StarRing`).

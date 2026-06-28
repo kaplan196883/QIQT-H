@@ -6407,6 +6407,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Dirac.fermiDirac_kms_balance
 #print axioms QIQTH.Fock.Dirac.fermiDirac_unique
 #print axioms QIQTH.Fock.Dirac.boseEinstein_kms_balance
+-- ★★★ ELECTRON_FIELD_PLAN E7/E8-seed (the even/observable algebra — the §0 "which algebra" decision): for the
+-- electron, records/capacity attach to the EVEN (parity-fixed) subalgebra, NOT the full graded field algebra.
+-- IsEven a := parity a = a (Γ-eigenvalue +1); evenSubalgebra = the Γ-fixed Subalgebra (closed under +,*, contains
+-- scalars). isEven_ι_mul_ι: a product of two one-particle (odd) generators is EVEN — so fermion bilinears (ψ̄ψ,
+-- j^μ=ψ̄γ^μψ, T_μν) are Γ-fixed even observables (the physical records), while one-particle states are odd
+-- (parity_one_particle Γ(ι m)=−ι m). This is why records = even bilinears and the χ_R coherent-sector c-number
+-- calculus does NOT transfer (§0). Next E7/E8: graded regional capacity block decomposition + even-observable
+-- no-signaling. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.isEven_ι_mul_ι
+#print axioms QIQTH.Fock.Dirac.evenSubalgebra
 -- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-11, von Neumann non-vacuity witness): oneDensity_isDensity —
 -- IsDensity (1 : Matrix (Fin 1) (Fin 1) ℂ), the one-microstate pure state (1×1 identity), a genuine density
 -- (PosSemidef.one + trace_one). Completes the witness story (M-7 only witnessed the record-law/Shannon floor): the
