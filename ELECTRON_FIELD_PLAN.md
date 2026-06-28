@@ -341,3 +341,11 @@ frontier.
   unbuilt in any proof assistant), **E1 field** (`S_D` momentum space), **E8 bipartite** (graded tensor
   product), **E9** (Dirac `T_μν`). NOTE (web search 2026-06-28): PhysLean has fermionic CAR/Wick
   second-quantization — leverage it for the E2-full/E5 operator layer rather than rebuild.
+- 2026-06-28 — **E6 (particle–hole symmetry) DONE** (added to `FermiDirac.lean`, axiom-free, budget 0).
+  **`fermiDirac_particle_hole`** — `n(βω) + n(−βω) = 1`: flipping the sign of the mode energy
+  (particle ↔ hole / charge conjugation) sends `n ↦ 1−n`. The distribution-level shadow of the
+  electron's particle/antiparticle (Dirac-sea) structure — a hole at `+ω` is a particle at `−ω`. Wired
+  into `AxiomAudit.lean` (standard-3); `lake build QIQTH.Fock.Dirac.FermiDirac` green (1925 jobs); budget
+  0. **The self-contained algebraic/analytic layer of the electron substrate is now exhaustively covered;
+  further genuine progress requires PhysLean integration (CAR operator layer) or the modular-theory
+  frontier (Tomita–Takesaki, unbuilt in any proof assistant).**

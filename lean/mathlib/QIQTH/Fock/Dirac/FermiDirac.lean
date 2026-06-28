@@ -108,6 +108,18 @@ theorem fermiDirac_logit (β ω : ℝ) :
     rw [div_eq_iff hfd]; linarith [key]
   rw [h, Real.log_exp]
 
+/-- **Particle–hole symmetry of the Fermi–Dirac occupation:** `n(βω) + n(−βω) = 1`.  Flipping the sign
+of the mode energy (particle ↔ hole / charge conjugation) sends occupation `n` to `1 − n`.  This is the
+distribution-level shadow of the electron's particle/antiparticle (Dirac-sea) structure: a hole at `+ω`
+is a particle at `−ω`. -/
+theorem fermiDirac_particle_hole (β ω : ℝ) : fermiDirac β ω + fermiDirac β (-ω) = 1 := by
+  unfold fermiDirac
+  rw [mul_neg, Real.exp_neg]
+  have he : Real.exp (β * ω) ≠ 0 := (Real.exp_pos _).ne'
+  have he1 : Real.exp (β * ω) + 1 ≠ 0 := by positivity
+  field_simp
+  ring
+
 /-- The **Rindler/Unruh occupation** of a fermionic mode: the Fermi–Dirac occupation at the Unruh
 inverse temperature `β = 2π`, `n_ω = 1/(e^{2πω} + 1)`. -/
 noncomputable def rindlerOccupationFermi (ω : ℝ) : ℝ := fermiDirac (2 * Real.pi) ω

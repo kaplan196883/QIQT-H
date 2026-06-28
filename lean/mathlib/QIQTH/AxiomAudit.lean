@@ -6428,6 +6428,10 @@ namespace QIQTH.AxiomAudit
 -- the occupation IS the inverse-temperature-scaled mode energy, linking the E6 occupation to the modular generator
 -- Δ^{it}=e^{−itK} (the E5 target). Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.fermiDirac_logit
+-- ★★★ ELECTRON_FIELD_PLAN E6 (particle–hole symmetry): fermiDirac_particle_hole — n(βω) + n(−βω) = 1. Flipping the
+-- sign of the mode energy (particle ↔ hole / charge conjugation) sends n ↦ 1−n: the distribution-level shadow of
+-- the electron's particle/antiparticle (Dirac-sea) structure — a hole at +ω is a particle at −ω. Axiom-free (std 3).
+#print axioms QIQTH.Fock.Dirac.fermiDirac_particle_hole
 -- ★★★ ELECTRON_FIELD_PLAN E7/E8-seed (the even/observable algebra — the §0 "which algebra" decision): for the
 -- electron, records/capacity attach to the EVEN (parity-fixed) subalgebra, NOT the full graded field algebra.
 -- IsEven a := parity a = a (Γ-eigenvalue +1); evenSubalgebra = the Γ-fixed Subalgebra (closed under +,*, contains
