@@ -552,3 +552,12 @@ EXTERNAL libraries; QIQT-H built its own.
   standard-3; budget 0. (Imported `QuasiFreeEntropy` for `binaryEntropy`.) The single-mode modular tier
   now connects the entropy to the modular energy — the area-law input. Remaining E5: the continuum
   CAR-net lift via `modFlow`.
+- 2026-06-28 — **E9: the entanglement first law `δS = δ⟨K⟩` for the electron mode** (added to
+  `ModularKMS.lean`, axiom-free, budget 0). **`hasDerivAt_binaryEntropy`** — `d/dn S(n) = log((1−n)/n)`
+  (the modular-energy logit; via `Real.hasDerivAt_negMulLog` + chain rule). **`electron_firstLaw`** — at
+  the KMS/Unruh occupation `n = fermiDirac β ω`, `HasDerivAt binaryEntropy (βω) n`: the entropy's
+  derivative wrt occupation **IS the modular energy `βω`**. Since `⟨K⟩ = βω·N + c`, `d⟨K⟩/dn = βω = dS/dn`
+  — the **differential entanglement first law `δS = δ⟨K⟩`** that drives the area law, realized for the
+  electron mode. `lake build QIQTH.Fock.Dirac.ModularKMS` green (3055 jobs); standard-3; budget 0. The
+  single-mode chain *FD occupation → KMS state → modular flow = boost → K ∝ N → S = log Z + β⟨E⟩ → δS =
+  δ⟨K⟩* is now complete. Remaining E5: the continuum CAR-net lift via `modFlow`.

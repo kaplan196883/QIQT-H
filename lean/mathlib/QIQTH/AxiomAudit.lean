@@ -6573,6 +6573,12 @@ namespace QIQTH.AxiomAudit
 -- up to the constant log Z). The bridge S ↔ ⟨K⟩ — the input to the entanglement first law δS=δ⟨K⟩ that drives the
 -- area law, for the electron mode. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.electron_mode_entropy
+-- ★★★ ELECTRON_FIELD E9 (the entanglement first law δS=δ⟨K⟩ for the electron mode): hasDerivAt_binaryEntropy —
+-- d/dn binaryEntropy(n) = log((1−n)/n) (the modular-energy logit). electron_firstLaw: at the KMS/Unruh occupation
+-- n=fermiDirac β ω, HasDerivAt binaryEntropy (βω) n — the entropy's derivative wrt occupation IS the modular energy
+-- βω. Since ⟨K⟩=βω·n+c, d⟨K⟩/dn=βω=dS/dn: the differential entanglement first law δS=δ⟨K⟩ that drives the area law,
+-- realized for the electron mode. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.electron_firstLaw
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy

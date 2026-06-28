@@ -283,4 +283,31 @@ theorem electron_mode_entropy (β ω : ℝ) :
   simp only [binaryEntropy, Real.negMulLog_def, hlogn, hlog1mn, hlogZ]
   ring
 
+/-- **The entropy derivative is the modular energy (logit).**  `d/dn binaryEntropy(n) = log((1−n)/n)`
+for `n ∈ (0,1)`.  At the KMS occupation `n = fermiDirac β ω` this equals `βω` (`fermiDirac_logit`) — the
+differential entanglement first law `δS = (modular energy)·δn`. -/
+theorem hasDerivAt_binaryEntropy {x : ℝ} (hx0 : 0 < x) (hx1 : x < 1) :
+    HasDerivAt binaryEntropy (Real.log ((1 - x) / x)) x := by
+  have hxne : x ≠ 0 := hx0.ne'
+  have h1xne : (1 : ℝ) - x ≠ 0 := by linarith
+  have hinner : HasDerivAt (fun n : ℝ => 1 - n) (-1) x := (hasDerivAt_id x).const_sub 1
+  have h2 : HasDerivAt (fun n => Real.negMulLog (1 - n)) (Real.log (1 - x) + 1) x := by
+    have h := (Real.hasDerivAt_negMulLog h1xne).comp x hinner
+    convert h using 1; ring
+  have key : HasDerivAt (fun n => Real.negMulLog n + Real.negMulLog (1 - n))
+      (Real.log ((1 - x) / x)) x := by
+    have h := (Real.hasDerivAt_negMulLog hxne).add h2
+    convert h using 1
+    rw [Real.log_div h1xne hxne]; ring
+  exact key
+
+/-- **The entanglement first law for the electron mode (`δS = δ⟨K⟩`).**  At the KMS/Unruh occupation the
+entropy's derivative with respect to occupation IS the modular energy `βω`:
+`HasDerivAt binaryEntropy (βω) (fermiDirac β ω)`.  Since `⟨K⟩ = βω·n + c`, `d⟨K⟩/dn = βω = dS/dn` — the
+first law that drives the area law, realized for the electron mode. -/
+theorem electron_firstLaw (β ω : ℝ) :
+    HasDerivAt binaryEntropy (β * ω) (fermiDirac β ω) := by
+  have h := hasDerivAt_binaryEntropy (fermiDirac_pos β ω) (fermiDirac_lt_one β ω)
+  rwa [fermiDirac_logit] at h
+
 end QIQTH.Fock.Dirac
