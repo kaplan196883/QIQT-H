@@ -329,3 +329,15 @@ frontier.
   Quot.sound]`); `lake build QIQTH.Fock.Dirac.EvenObservables` green (2401 jobs); budget 0. Remaining
   frontier (checkpointed): **E5** (GNS / twisted-duality theorem), **E1 field** (`S_D` momentum space),
   **E8 bipartite** (graded tensor product assigning records to spacelike regions), **E9** (Dirac `T_μν`).
+- 2026-06-28 — **E3 (CAR / Araki relative entropy positivity) DONE** (added to `QuasiFreeEntropy.lean`,
+  axiom-free, budget 0). The fermionic relative entropy (the optional E3 item): `fermionicBinaryRelEntropy
+  c d = c·log(c/d) + (1−c)·log((1−c)/(1−d))` (binary KL divergence), **`fermionicBinaryRelEntropy_nonneg`**
+  (`0 ≤ D(c‖d)` via Gibbs `log x ≤ x−1` — the fermionic mirror of Klein's inequality
+  `QuantumRelativeEntropy.relEntropy_nonneg`), and **`fermionicGaussianRelEntropy_nonneg`** (`S(ρ_C‖ρ_D) ≥ 0`,
+  the CAR/Araki relative entropy positivity, summed over modes). Relative entropy — not the bare vN
+  entropy — controls the modular / entanglement-first-law side of the area law, so this is the fermionic
+  input to that route. Wired into `AxiomAudit.lean` (standard-3); `lake build QIQTH.Fock.Dirac.QuasiFreeEntropy`
+  green (2179 jobs); budget 0. Remaining frontier (checkpointed): **E5** (GNS / modular flow theorem —
+  unbuilt in any proof assistant), **E1 field** (`S_D` momentum space), **E8 bipartite** (graded tensor
+  product), **E9** (Dirac `T_μν`). NOTE (web search 2026-06-28): PhysLean has fermionic CAR/Wick
+  second-quantization — leverage it for the E2-full/E5 operator layer rather than rebuild.

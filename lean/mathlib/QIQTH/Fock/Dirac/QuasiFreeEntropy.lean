@@ -118,4 +118,53 @@ theorem fermionicGaussianEntropy_le_log_dim {ι : Type*} [Fintype ι] {c : ι �
   rw [Real.log_pow]
   exact fermionicGaussianEntropy_le_card_log_two hc0 hc1
 
+/-! ### The fermionic (CAR / Araki) relative entropy
+
+The relative entropy of two quasi-free fermionic states, in terms of their one-particle correlation
+spectra `c, d ∈ (0,1)`, is the sum over modes of the **binary relative entropy** (KL divergence)
+`D(c‖d) = c·log(c/d) + (1−c)·log((1−c)/(1−d))`.  Its **nonnegativity** is the fermionic mirror of
+Klein's inequality (`QuantumRelativeEntropy.relEntropy_nonneg`) — the CAR/Araki relative entropy at the
+mode level.  Relative entropy (not the bare von Neumann entropy) is the quantity that controls the
+modular / entanglement-first-law side of the area law, so this is the fermionic input to that route. -/
+
+/-- The single-mode (binary) fermionic relative entropy / KL divergence
+`D(c‖d) = c·log(c/d) + (1−c)·log((1−c)/(1−d))`. -/
+noncomputable def fermionicBinaryRelEntropy (c d : ℝ) : ℝ :=
+  c * Real.log (c / d) + (1 - c) * Real.log ((1 - c) / (1 - d))
+
+/-- **Binary relative-entropy positivity (Gibbs' inequality):** `0 ≤ D(c‖d)` for occupations
+`c, d ∈ (0,1)`.  Proof = `log x ≤ x − 1` per term.  The fermionic mirror of Klein's inequality. -/
+theorem fermionicBinaryRelEntropy_nonneg {c d : ℝ} (hc0 : 0 < c) (hc1 : c < 1)
+    (hd0 : 0 < d) (hd1 : d < 1) : 0 ≤ fermionicBinaryRelEntropy c d := by
+  have hlog1 : Real.log (c / d) = - Real.log (d / c) := by
+    rw [Real.log_div hc0.ne' hd0.ne', Real.log_div hd0.ne' hc0.ne']; ring
+  have hlog2 : Real.log ((1 - c) / (1 - d)) = - Real.log ((1 - d) / (1 - c)) := by
+    rw [Real.log_div (by linarith) (by linarith), Real.log_div (by linarith) (by linarith)]; ring
+  have t1 : c * Real.log (d / c) ≤ d - c := by
+    have hcne : c ≠ 0 := hc0.ne'
+    calc c * Real.log (d / c) ≤ c * (d / c - 1) :=
+          mul_le_mul_of_nonneg_left (Real.log_le_sub_one_of_pos (div_pos hd0 hc0)) hc0.le
+      _ = d - c := by field_simp
+  have t2 : (1 - c) * Real.log ((1 - d) / (1 - c)) ≤ c - d := by
+    have h1cne : (1 : ℝ) - c ≠ 0 := by linarith
+    calc (1 - c) * Real.log ((1 - d) / (1 - c))
+          ≤ (1 - c) * ((1 - d) / (1 - c) - 1) :=
+          mul_le_mul_of_nonneg_left (Real.log_le_sub_one_of_pos (div_pos (by linarith) (by linarith)))
+            (by linarith)
+      _ = c - d := by field_simp; ring
+  unfold fermionicBinaryRelEntropy
+  rw [hlog1, hlog2, mul_neg, mul_neg]
+  linarith [t1, t2]
+
+/-- The **fermionic (CAR/Araki) relative entropy** of two quasi-free states, summed over the mode
+spectra `c, d`. -/
+noncomputable def fermionicGaussianRelEntropy {ι : Type*} [Fintype ι] (c d : ι → ℝ) : ℝ :=
+  ∑ i, fermionicBinaryRelEntropy (c i) (d i)
+
+/-- **CAR relative-entropy positivity** `S(ρ_C ‖ ρ_D) ≥ 0` — the fermionic Araki/Klein inequality. -/
+theorem fermionicGaussianRelEntropy_nonneg {ι : Type*} [Fintype ι] {c d : ι → ℝ}
+    (hc0 : ∀ i, 0 < c i) (hc1 : ∀ i, c i < 1) (hd0 : ∀ i, 0 < d i) (hd1 : ∀ i, d i < 1) :
+    0 ≤ fermionicGaussianRelEntropy c d :=
+  Finset.sum_nonneg (fun i _ => fermionicBinaryRelEntropy_nonneg (hc0 i) (hc1 i) (hd0 i) (hd1 i))
+
 end QIQTH.Fock.Dirac

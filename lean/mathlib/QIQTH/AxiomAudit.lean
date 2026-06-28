@@ -6367,6 +6367,14 @@ namespace QIQTH.AxiomAudit
 -- kernel E7 consumes. Free Dirac only; QED/edge-modes/DHR deferred (cited). Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.fermionicGaussianEntropy_le_log_dim
 #print axioms QIQTH.Fock.Dirac.binaryEntropy_le_log_two
+-- ★★★ ELECTRON_FIELD_PLAN E3 (CAR / Araki relative entropy positivity — fermionic Klein): the relative entropy of
+-- two quasi-free fermionic states (mode spectra c,d∈(0,1)) is Σ over modes of the binary relative entropy / KL
+-- divergence D(c‖d) = c·log(c/d) + (1−c)·log((1−c)/(1−d)). fermionicBinaryRelEntropy_nonneg: 0 ≤ D(c‖d) (Gibbs,
+-- log x ≤ x−1 per term) — the fermionic mirror of Klein's inequality (QuantumRelativeEntropy.relEntropy_nonneg);
+-- fermionicGaussianRelEntropy_nonneg: S(ρ_C‖ρ_D) ≥ 0, the CAR/Araki relative entropy positivity. Relative entropy
+-- (not bare vN entropy) controls the modular / entanglement-first-law side of the area law. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.fermionicBinaryRelEntropy_nonneg
+#print axioms QIQTH.Fock.Dirac.fermionicGaussianRelEntropy_nonneg
 -- ★★★ ELECTRON_FIELD_PLAN E2 (antisymmetric/CAR Fock space): the fermionic (electron) Fock space is the
 -- exterior algebra ⋀ M (CAR counterpart of the bosonic symmetric Fock space). finrank_CARFock: dim(⋀ M)=2^n for
 -- an n-mode region — each fermionic mode is a qubit (Mathlib Module.Basis.ExteriorAlgebra indexed by Finset I,
