@@ -342,3 +342,12 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   single-nilpotent (BRST) cohomology, complementing the de Rham `F=dA` cohomology. (HONEST: the
   indefinite-metric Krein space + metric descent to a *positive* form + no-ghost theorem are the deferred
   continuum P10 frontier.) Wired into `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **P10: BRST-invariant observables descend to the physical (cohomology) states** (extended
+  `PhotonBRST.lean`, axiom-free standard-3, budget 0, 1162 jobs green). A BRST-invariant observable `O`
+  (`[O,Q]=0`, i.e. `O∘Q=Q∘O`) preserves both physical submodules: **`BRST.closed_mem_of_comm`** (`O` maps
+  `ker Q → ker Q`: `Q(Ov)=O(Qv)=0`, a physical/BRST-closed state stays physical) and
+  **`BRST.exact_mem_of_comm`** (`O` maps `im Q → im Q`: `O(Qx)=Q(Ox)`, a BRST-trivial state stays trivial).
+  Together they say a BRST-invariant observable **descends to a well-defined operator on the cohomology
+  `H_Q`** — the physical (gauge-invariant) photon observables act on the physical photon states (the §0/P6
+  "records = gauge-invariant observables" decision realized at the cohomology level). Wired into
+  `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.

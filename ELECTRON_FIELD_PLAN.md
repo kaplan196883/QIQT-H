@@ -824,3 +824,13 @@ EXTERNAL libraries; QIQT-H built its own.
   wall), **with no new analytic input**. (HONEST: abstract backbone; the concrete `Δ_m` needs packaging as
   *exact* open-set vanishing, not the regularized limit — the remaining E1 analytic step.) Wired into
   `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **★ E5 FRONTIER CORE: the field-level Klein twist `Z` on the FULL CAR Fock (operator form)**
+  (new module `FockKleinTwist.lean`, axiom-free, budget 0, 2402 jobs green; GPT-5.5-pro frontier core #2).
+  The single-mode `Z=(1+iΓ)/(1+i)` (witnessed on the 2×2 parity `diag(1,−1)`) lifted to the **field level**
+  as an actual operator `Module.End ℂ (⋀ V)` built from the field parity `Γ=(−1)^F=parity` (the grade
+  involution). **`fockParity_involutive`** (`Γ²=1`, from `parity_parity`) lets the abstract `kleinTwist`
+  algebra *instantiate* on `Module.End ℂ (⋀ V)`: **`fockKleinTwist_sq`** (`Z²=Γ`), **`fockKleinTwist_order4`**
+  (`Z⁴=1`), **`fockKleinTwist_comm_parity`** (`[Z,Γ]=0` — the twisted duality `𝓕(W)'=Z𝓕(W')Z*` does **not**
+  mix even/odd, so records stay even). This lifts the single-mode Klein twist to a genuine full-Fock operator.
+  (HONEST: unitarity `Z*Z=1` + the operator-algebra twisted-duality *theorem* need the Fock inner-product /
+  adjoint — the deferred GNS frontier.) Wired into `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.

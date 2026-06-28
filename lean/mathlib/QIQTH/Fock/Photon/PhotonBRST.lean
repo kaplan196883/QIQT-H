@@ -77,4 +77,22 @@ theorem cohomology_trivial_iff (Q : V →ₗ[R] V) (hQ : Q.comp Q = 0) :
     obtain ⟨x, hx⟩ := h v hv
     exact ⟨x, Subtype.ext hx⟩
 
+/-- **A BRST-invariant observable preserves the closed (physical) states.**  If `O` commutes with the
+BRST charge `Q` (`O∘Q = Q∘O`, i.e. `O` is BRST-invariant / `[O,Q]=0`), then `O` maps `ker Q` into `ker Q`:
+a physical (BRST-closed) state stays physical under `O`.  So the **BRST-invariant observables act on the
+physical photon states** — `Q(Ov) = O(Qv) = 0`. -/
+theorem closed_mem_of_comm {Q O : V →ₗ[R] V} (hO : O.comp Q = Q.comp O) {v : V}
+    (hv : v ∈ closed Q) : O v ∈ closed Q := by
+  rw [closed, LinearMap.mem_ker] at hv ⊢
+  rw [show Q (O v) = O (Q v) by rw [← LinearMap.comp_apply, ← hO, LinearMap.comp_apply], hv, map_zero]
+
+/-- **A BRST-invariant observable preserves the exact (BRST-trivial) states.**  If `O∘Q = Q∘O`, then `O`
+maps `im Q` into `im Q` (`O(Qx) = Q(Ox)`): a BRST-trivial state stays BRST-trivial.  Together with
+`closed_mem_of_comm`, a BRST-invariant `O` therefore **descends to a well-defined operator on the
+cohomology `H_Q`** — the physical observables act on the physical (cohomology) states. -/
+theorem exact_mem_of_comm {Q O : V →ₗ[R] V} (hO : O.comp Q = Q.comp O) {v : V}
+    (hv : v ∈ exact Q) : O v ∈ exact Q := by
+  obtain ⟨x, rfl⟩ := hv
+  exact ⟨O x, by rw [← LinearMap.comp_apply, ← hO, LinearMap.comp_apply]⟩
+
 end QIQTH.Fock.Photon.BRST

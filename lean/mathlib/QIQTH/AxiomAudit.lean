@@ -6519,6 +6519,13 @@ namespace QIQTH.AxiomAudit
 -- theorem are the deferred continuum P10 frontier. GPT-5.5-pro-identified foothold. Axiom-free (standard 3); free Maxwell.
 #print axioms QIQTH.Fock.Photon.BRST.exact_le_closed
 #print axioms QIQTH.Fock.Photon.BRST.cohomology_trivial_iff
+-- ★★★ PHOTON_FIELD_PLAN P10 (BRST-invariant observables act on the physical states): a BRST-invariant observable O
+-- ([O,Q]=0, i.e. O∘Q=Q∘O) preserves BOTH the closed and the exact submodules — closed_mem_of_comm (O maps ker Q → ker Q:
+-- Q(Ov)=O(Qv)=0, a physical state stays physical) and exact_mem_of_comm (O maps im Q → im Q: O(Qx)=Q(Ox), a BRST-trivial
+-- state stays BRST-trivial). Together: a BRST-invariant observable DESCENDS to a well-defined operator on the cohomology
+-- H_Q — the physical (gauge-invariant) photon observables act on the physical photon states. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Photon.BRST.closed_mem_of_comm
+#print axioms QIQTH.Fock.Photon.BRST.exact_mem_of_comm
 -- ★★★ ELECTRON_FIELD_PLAN E6→E5 bridge (per-mode modular Hamiltonian): fermiDirac_logit — for a fermionic mode with
 -- occupation n = fermiDirac β ω, the modular energy is the logit log((1−n)/n) = βω. This is the single-mode form of
 -- the fermionic modular Hamiltonian K = log((1−C)/C) (QuasiFreeEntropy / quasi-free modular generator): the logit of
@@ -6614,6 +6621,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Dirac.LocalDifferential.firstOrderOp_eq_zero_of_eqOn_open
 #print axioms QIQTH.Fock.Dirac.LocalDifferential.support_firstOrderOp_subset_closure
 #print axioms QIQTH.Fock.Dirac.LocalDifferential.support_firstOrderOp_subset_of_closed
+-- ★★★ ELECTRON_FIELD_PLAN E5 (field-level Klein twist Z on the FULL CAR Fock — operator form): the single-mode Klein
+-- twist Z=(1+iΓ)/(1+i) (witnessed on the 2×2 fermion parity diag(1,−1)) lifted to the field level as an actual operator
+-- Module.End ℂ (⋀ V) built from the field parity Γ=(−1)^F=parity (the grade involution). fockParity_involutive: Γ²=1
+-- (from parity_parity). fockKleinTwist_sq: Z²=Γ; fockKleinTwist_order4: Z⁴=1; fockKleinTwist_comm_parity: [Z,Γ]=0 (so
+-- the twisted duality 𝓕(W)'=Z𝓕(W')Z* does not mix even/odd — records stay even). The abstract kleinTwist algebra
+-- INSTANTIATED on the full CAR Fock. HONEST: unitarity Z*Z=1 + the operator-algebra twisted-duality theorem need the
+-- Fock inner-product/adjoint (deferred GNS frontier). GPT-5.5-pro frontier core #2. Axiom-free (standard 3); free Dirac.
+#print axioms QIQTH.Fock.Dirac.fockParity_involutive
+#print axioms QIQTH.Fock.Dirac.fockKleinTwist_sq
+#print axioms QIQTH.Fock.Dirac.fockKleinTwist_order4
+#print axioms QIQTH.Fock.Dirac.fockKleinTwist_comm_parity
 -- ★★★ ELECTRON_FIELD_PLAN — PhysLean bridge (the CAR operator-layer dependency): QIQT-H now depends on PhysLean
 -- (HEPLean, pinned to d0ee4af whose Mathlib pin c5ea00351c28 @ v4.30.0 matches QIQT-H's — no Mathlib bump), which
 -- provides the fermionic CAR field-operator algebra (FieldStatistic, CreateAnnihilate, CrAnFieldOp, WickAlgebra,
