@@ -151,3 +151,11 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   into `QIQTH.lean` + `AxiomAudit.lean`. Next: **P3** (the capacity bound `S ≤ log C(dim h_γ+N, N)` —
   reuse `shannon_le_log_card` with `card = truncFockDim d N`), then **P4** (extend the existing
   `boseEinstein` stub: KMS balance done, add `n>0`, the Unruh `S_ω=(n+1)log(n+1)−n log n`).
+- 2026-06-28 — **P3 DONE** (`QIQTH/Fock/Photon/PhotonCapacity.lean`, axiom-free standard-3, budget 0,
+  3195 jobs green). **`photon_capacity_bound : S_vN(ρ) ≤ log C(dim h_γ+N, N)`** for any density `ρ` on the
+  number-cutoff bosonic Fock `Γ_s^{≤N}(h_γ)` — the bosonic mirror of the electron CAR `S_vN ≤ log dim(⋀h_R)`,
+  via the cutoff-free `vonNeumannEntropy_le_log_card` (`FQBoundMicro`) on `Fin (truncFockDim d N)` + P2's
+  `truncFockDim_eq_choose`. `photon_capacity_unbounded` (`d≥1`): the truncated dim exceeds any `B` for
+  large `N` ⟹ `log dim → ∞` — the "sup S=∞ without a cutoff" contrast with the cutoff-free electron.
+  Wired into `QIQTH.lean` + `AxiomAudit.lean`. Next: **P4** (extend the `boseEinstein` stub: `n>0`, the
+  Unruh `S_ω=(n+1)log(n+1)−n log n`), then **P1/P5** reuse wiring (`PhotonFock=Γ_s h_γ`, `Δ^it_γ=Γ_s(Δ^it_1)`).

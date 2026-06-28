@@ -6653,5 +6653,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Photon.truncFockDim_eq_choose
 #print axioms QIQTH.Fock.Photon.truncFockDim_mono
 #print axioms QIQTH.Fock.Photon.truncFockDim_strictMono
+-- ★★★ PHOTON_FIELD_PLAN P3 (the photon finite-capacity bound): photon_capacity_bound — for any density ρ on the
+-- number-cutoff bosonic Fock Γ_s^{≤N}(h_γ) (dim = truncFockDim d N = C(d+N,N)), S_vN(ρ) ≤ log C(dim h_γ+N, N). The
+-- bosonic mirror of the electron CAR S_vN ≤ log dim(⋀h_R) (vonNeumannEntropy_le_log_card on Fin (truncFockDim d N),
+-- rewritten through Fintype.card_fin + the P2 closed form) — but FINITE only by the photon-number cutoff N (the
+-- bosonic Fock is infinite-dim). photon_capacity_unbounded — for d≥1 the truncated dimension exceeds any B for large
+-- N (truncFockDim_strictMono), so log dim → ∞: the photon capacity has no finite ceiling without the cutoff (the
+-- "sup S=∞ without a cutoff" contrast with the electron). Axiom-free (standard 3). Free Maxwell; area coeff never set.
+#print axioms QIQTH.Fock.Photon.photon_capacity_bound
+#print axioms QIQTH.Fock.Photon.photon_capacity_unbounded
 
 end QIQTH.AxiomAudit

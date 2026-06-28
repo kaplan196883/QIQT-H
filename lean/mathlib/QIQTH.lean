@@ -505,6 +505,7 @@ import QIQTH.Fock.Dirac.CARModularFlow
 import QIQTH.Fock.Dirac.GradedCapacity
 
 import QIQTH.Fock.Photon.PhotonFock
+import QIQTH.Fock.Photon.PhotonCapacity
 
 import QIQTH.RefinementBorn
 import QIQTH.SBSBoolean
