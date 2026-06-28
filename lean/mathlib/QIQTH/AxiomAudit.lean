@@ -6615,6 +6615,11 @@ namespace QIQTH.AxiomAudit
 -- relation. Axiom-free (standard 3); free Dirac; value of G never assigned.
 #print axioms QIQTH.Fock.Dirac.electron_modHamiltonian_expectation
 #print axioms QIQTH.Fock.Dirac.electron_boost_modEnergy
+-- ELECTRON_FIELD E9 (the modular Hamiltonian K=βω·N is self-adjoint): electron_modHamiltonian_isHermitian — a real
+-- multiple of the real-diagonal number operator is Hermitian, so K is a genuine self-adjoint generator and Δ^it=e^{−itK}
+-- is a UNITARY one-parameter group (the Stone/Tomita–Takesaki form). Completes the single-mode E9 generator: K
+-- self-adjoint + ladder commutators (modular frequencies ∓βω) + expectation ⟨K⟩=βω·n. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.electron_modHamiltonian_isHermitian
 -- ★★★ ELECTRON_FIELD E5 (CONTINUUM CAR-net modular flow Γ₋(Δ^it)): the continuum wedge modular flow for the electron
 -- CAR net is the FERMIONIC second quantization of the one-particle continuum Δ^it = modUnitary S t
 -- (StandardSubspaceModularFlow, already built). fermiSecondQuantModFlow S t = ExteriorAlgebra.map (modUnitary S t)

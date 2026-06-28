@@ -29,6 +29,7 @@ fermionic `J` is `QIQTH/Fock/Dirac/KleinTwist*`.  Free Dirac only.
 import QIQTH.FiniteModularTheory
 import QIQTH.Fock.Dirac.FermiDirac
 import QIQTH.Fock.Dirac.QuasiFreeEntropy
+import Mathlib.LinearAlgebra.Matrix.Hermitian
 
 namespace QIQTH.Fock.Dirac
 
@@ -320,6 +321,23 @@ theorem electron_boost_modEnergy (ω : ℝ) :
         (modHamiltonian (2 * Real.pi) ω)
       = ((2 * Real.pi * ω : ℝ) : ℂ) * (rindlerOccupationFermi ω : ℂ) :=
   electron_modHamiltonian_expectation (2 * Real.pi) ω
+
+/-- **The modular Hamiltonian `K = βω·N` is self-adjoint (Hermitian).**  A real multiple (`βω` is real,
+self-adjoint in `ℂ`) of the real-diagonal number operator is Hermitian — so `K` is a genuine self-adjoint
+generator and `Δ^{it} = e^{−itK}` is a *unitary* one-parameter group (the Stone/Tomita–Takesaki form of
+the modular flow).  Completes the E9 single-mode generator: `K` is self-adjoint, its ladder commutators
+give the modular frequencies `∓βω`, and `⟨K⟩ = βω·n`. -/
+theorem electron_modHamiltonian_isHermitian (β ω : ℝ) :
+    Matrix.IsHermitian (modHamiltonian β ω) := by
+  have hN : Matrix.IsHermitian numberOp := by
+    have hsa : IsSelfAdjoint (![0, 1] : Fin 2 → ℂ) := by
+      rw [isSelfAdjoint_iff]; ext i; fin_cases i <;> simp
+    unfold numberOp
+    exact Matrix.isHermitian_diagonal_of_self_adjoint _ hsa
+  have hk : IsSelfAdjoint ((β * ω : ℝ) : ℂ) := by
+    rw [isSelfAdjoint_iff]; exact Complex.conj_ofReal _
+  unfold modHamiltonian
+  exact Matrix.IsHermitian.smul hN hk
 
 /-- **The single-mode thermal / entanglement entropy: `S = log Z + β⟨E⟩`.**  The von Neumann entropy of
 the electron mode equals the log partition function plus `β` times the mean energy:

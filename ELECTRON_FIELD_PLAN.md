@@ -650,3 +650,11 @@ EXTERNAL libraries; QIQT-H built its own.
   boost-energy expectation feeding the Clausius/Jacobson area relation `δS=δ⟨K_W⟩`. Closes the single-mode
   E9 loop: generator `K` (commutators) → expectation `⟨K⟩` → entropy/first law. Wired into
   `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **E9: the modular Hamiltonian `K=βω·N` is self-adjoint** (added to `ModularKMS.lean`,
+  axiom-free, budget 0, 3058 jobs green). **`electron_modHamiltonian_isHermitian`**: a real multiple of
+  the real-diagonal number operator is Hermitian (`Matrix.IsHermitian.smul` of
+  `isHermitian_diagonal_of_self_adjoint`), so `K` is a genuine self-adjoint generator and `Δ^{it}=e^{−itK}`
+  is a **unitary** one-parameter group (the Stone/Tomita–Takesaki form). Closes the single-mode E9
+  generator triad: `K` self-adjoint + ladder commutators (modular frequencies `∓βω`) + expectation
+  `⟨K⟩=βω·n`. (Added `import Mathlib.LinearAlgebra.Matrix.Hermitian`.) Wired into `AxiomAudit.lean`;
+  standard-3; budget 0.
