@@ -6376,6 +6376,15 @@ namespace QIQTH.AxiomAudit
 -- grading + the Klein-twist/twisted-duality crux (E4) are the next sub-items. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.finrank_CARFock
 #print axioms QIQTH.Fock.Dirac.fermionicGaussianEntropy_le_log_carFockDim
+-- ★★★ ELECTRON_FIELD_PLAN E2/E4-seed (fermion parity Γ=(−1)^F): parity 𝕜 M — the grade involution on the CAR Fock
+-- space ⋀ M (algebra automorphism negating each one-particle generator: parity_ι Γ(ι m)=−ι m; parity_one Γ1=1 —
+-- vacuum even; parity_involutive Γ∘Γ=id). The exterior-algebra mirror of Mathlib CliffordAlgebra.involute, built via
+-- the universal property (lift of −ι). This is the SEED of the E4 crux: the Klein twist Z=(1+iΓ)/(1+i) is built from
+-- Γ, and the twisted modular duality 𝓕(W)'=Z𝓕(W')Z* is the AQFT spin–statistics form for the electron; Γ also
+-- singles out the EVEN/observable subalgebra to which records/capacity attach (ELECTRON_FIELD_PLAN §0). Axiom-free
+-- (standard 3).
+#print axioms QIQTH.Fock.Dirac.parity_ι
+#print axioms QIQTH.Fock.Dirac.parity_involutive
 -- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-11, von Neumann non-vacuity witness): oneDensity_isDensity —
 -- IsDensity (1 : Matrix (Fin 1) (Fin 1) ℂ), the one-microstate pure state (1×1 identity), a genuine density
 -- (PosSemidef.one + trace_one). Completes the witness story (M-7 only witnessed the record-law/Shannon floor): the

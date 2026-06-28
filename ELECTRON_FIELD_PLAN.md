@@ -188,3 +188,13 @@ frontier.
   `{a(f),a(g)}=0` + parity `Γ=(−1)^F` from the existing Mathlib grading
   `DirectSum.Decomposition (fun n ↦ ⋀[𝕜]^n M)`. Next: **E1** (Dirac one-particle + `S_D` kernel) or the
   E2 operator-algebra sub-item; then **E4** (Klein twist / twisted duality — the crux).
+- 2026-06-28 — **E2 parity / E4-seed DONE** (`QIQTH/Fock/Dirac/Parity.lean`, axiom-free, budget 0). The
+  fermion parity `Γ=(−1)^F` as the grade involution on `⋀ M`: **`parity 𝕜 M : ⋀M →ₐ ⋀M`** built via the
+  exterior-algebra universal property (`lift (−ι)`, the mirror of Mathlib `CliffordAlgebra.involute`);
+  `parity_ι : Γ(ι m) = −ι m` (one-particle/odd → eigenvalue −1), `parity_one : Γ1 = 1` (vacuum even,
+  +1), `parity_comp_parity`/`parity_involutive`/`parity_parity` (`Γ∘Γ=id`), and `parityEquiv` (Γ as an
+  `AlgEquiv`, the form E4 consumes). This is the **seed of the E4 crux** (Klein twist `Z=(1+iΓ)/(1+i)`
+  needs Γ) and of the even/observable algebra (E7/E8). Wired into `QIQTH.lean` + `AxiomAudit.lean`
+  (both standard-3); `lake build QIQTH.Fock.Dirac.Parity` green (2400 jobs); budget 0. Next: **E4**
+  (the even/odd ±1 eigenspace decomposition `⋀M = (⋀M)₊⊕(⋀M)₋`, then the Klein twist `Z` over `𝕜=ℂ`
+  and the abstract twisted-duality statement `𝓕(W)'=Z𝓕(W')Z*`), or **E1** (Dirac one-particle).
