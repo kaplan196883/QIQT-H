@@ -104,4 +104,14 @@ theorem kleinTwist_sq_sq {γ : A} (hγ : γ * γ = 1) :
     (kleinTwist γ * kleinTwist γ) * (kleinTwist γ * kleinTwist γ) = 1 := by
   rw [kleinTwist_sq hγ, hγ]
 
+/-- **The Klein twist commutes with the involution `γ` it is built from**: `Z·γ = γ·Z`.  Since
+`Z = α·1 + β·γ` with central scalars `α, β`, it commutes with `γ` (scalars are central; `γ` commutes with
+itself).  For `γ = Γ = (−1)^F` this says the Klein twist **preserves the parity grading** (`[Z, Γ] = 0`):
+the twisted duality `𝓕(W)' = Z𝓕(W')Z*` does not mix the even/odd sectors, so the electron's even records
+stay even under the twist — consistent with §0 ("records attach to the even algebra"). -/
+theorem kleinTwist_comm_gamma (γ : A) : kleinTwist γ * γ = γ * kleinTwist γ := by
+  unfold kleinTwist
+  exact (Algebra.commute_algebraMap_left _ γ).add_left
+    ((Algebra.commute_algebraMap_left _ γ).mul_left (Commute.refl γ))
+
 end QIQTH.Fock.Dirac

@@ -6420,6 +6420,11 @@ namespace QIQTH.AxiomAudit
 -- forces Z*=Z³, hence ZZ*=Z⁴=1. So Z is a genuine (two-sided) unitary — the full intertwiner the twisted duality
 -- 𝓕(W)'=Z𝓕(W')Z* requires. The Klein-twist algebra is now complete: Z²=Γ, Z⁴=1, Z*Z=ZZ*=1. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.kleinTwist_mul_star_self
+-- ELECTRON_FIELD E4/E5 (the Klein twist preserves the parity grading): kleinTwist_comm_gamma — Z·γ = γ·Z (Z commutes
+-- with the involution γ it is built from, since Z=α·1+β·γ has central scalars). For γ=Γ=(−1)^F this is [Z,Γ]=0: the
+-- twisted duality 𝓕(W)'=Z𝓕(W')Z* does not mix even/odd sectors, so the electron's even records stay even under the
+-- twist (consistent with §0 "records attach to the even algebra"). Axiom-free (standard 3); free Dirac.
+#print axioms QIQTH.Fock.Dirac.kleinTwist_comm_gamma
 -- ★★★ ELECTRON_FIELD_PLAN E6 (Fermi–Dirac Unruh occupation — the CAR +1 vs Bose −1 signature): for a Rindler mode
 -- of the free Dirac field the vacuum is boost-KMS at β=2π (Unruh temperature, SAME as the scalar); the fermionic
 -- difference is the occupation. fermiDirac β ω = 1/(e^{βω}+1); fermiDirac_kms_balance: n = e^{−βω}(1−n) (KMS thermal
@@ -6808,5 +6813,10 @@ namespace QIQTH.AxiomAudit
 -- (Bianchi). Both gauge-invariance and closedness of F are the two faces of d²=0. Axiom-free (standard 3); free Maxwell.
 #print axioms QIQTH.Fock.Photon.fieldStrength_gauge_invariant
 #print axioms QIQTH.Fock.Photon.bianchi_identity
+-- PHOTON_FIELD_PLAN P6 (sharpest form — the field strength descends to the gauge quotient): fieldStrength_descends_to_
+-- quotient — since range d_gauge ⊆ ker d_F (d²=0), F=dA factors as F̄∘mkQ through A ⧸ range d_gauge (Submodule.liftQ),
+-- so the photon's physical observable is a function of the GAUGE-EQUIVALENCE CLASS, not the gauge representative — the
+-- "records live on the physical (gauge-quotient) configuration space" thesis (§0/P6). Axiom-free (standard 3); free Maxwell.
+#print axioms QIQTH.Fock.Photon.fieldStrength_descends_to_quotient
 
 end QIQTH.AxiomAudit

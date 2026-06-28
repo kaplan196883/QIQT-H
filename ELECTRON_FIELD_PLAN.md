@@ -698,3 +698,10 @@ EXTERNAL libraries; QIQT-H built its own.
   `𝓕(W)'=Z𝓕(W')Z*` requires. **The Klein-twist algebra is now complete: `Z²=Γ`, `Z⁴=1`, `Z*Z=ZZ*=1`.**
   Wired into `AxiomAudit.lean`; standard-3; budget 0. (The operator-algebra twisted-duality *theorem* +
   `γ` = the second-quantized parity unitary on the CAR space remain the E5 GNS frontier.)
+- 2026-06-29 — **E4/E5: the Klein twist preserves the parity grading `[Z, Γ] = 0`** (added to
+  `KleinTwist.lean`, axiom-free, budget 0, 2401 jobs green). **`kleinTwist_comm_gamma`**: `Z·γ = γ·Z` — the
+  Klein twist commutes with the involution `γ` it is built from (since `Z = α·1 + β·γ` has *central*
+  scalars; proved cleanly via `Commute.add_left`/`mul_left`). For `γ = Γ = (−1)^F` this is `[Z, Γ] = 0`:
+  the twisted duality `𝓕(W)'=Z𝓕(W')Z*` does **not mix the even/odd sectors**, so the electron's even
+  records stay even under the twist — exactly the §0 "records attach to the even algebra" requirement,
+  now compatible with the twisted duality. Wired into `AxiomAudit.lean`; standard-3; budget 0.
