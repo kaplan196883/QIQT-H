@@ -280,3 +280,10 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   higher-energy photon modes are thermally less occupied (`1/(e^{βω}−1)` antitone in `βω`). The expected
   monotone falloff of the thermal/Unruh photon spectrum with energy. Wired into `AxiomAudit.lean`;
   standard-3; budget 0.
+- 2026-06-29 — **P4: the bosonic enhancement factor `1 + n = e^{βω}·n`** (`boseEinstein_one_add`, in
+  `PhotonUnruh.lean`, axiom-free standard-3, budget 0, 2180 jobs green). The `(n+1)` of bosonic emission
+  (spontaneous `1` + stimulated `n`) equals `e^{βω}` times the occupation — the multiplicative CCR/KMS
+  balance, and the source of the Bose–Einstein distribution. The **exact bosonic mirror of the fermionic
+  depletion** `1 − n = e^{βω}·n` (`fermiDirac_one_sub`): the `+n` (stimulated) vs `−n` (Pauli) is the
+  spin–statistics signature, now stated symmetrically on both sides. Wired into `AxiomAudit.lean`;
+  standard-3; budget 0.

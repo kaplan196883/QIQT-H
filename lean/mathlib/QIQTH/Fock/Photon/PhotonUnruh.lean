@@ -84,6 +84,18 @@ temperature `β = 2π`. -/
 theorem rindlerOccupationBose_pos {ω : ℝ} (h : 0 < ω) : 0 < rindlerOccupationBose ω :=
   boseEinstein_pos (by positivity)
 
+/-- **The bosonic enhancement factor `1 + n = e^{βω}·n`** (for `e^{βω} ≠ 1`).  The `(n+1)` of bosonic
+emission (spontaneous `1` + stimulated `n`) equals `e^{βω}` times the occupation — the multiplicative
+form of the CCR/KMS balance `n = e^{−βω}(1+n)` (`boseEinstein_kms_balance`), and the source of the
+Bose–Einstein distribution.  (Contrast the fermionic `1 − n = e^{βω}·n`, `fermiDirac`'s `+1` denominator:
+the bosonic `+n` vs fermionic `−n` is the spin–statistics signature.) -/
+theorem boseEinstein_one_add {β ω : ℝ} (h : Real.exp (β * ω) ≠ 1) :
+    1 + boseEinstein β ω = Real.exp (β * ω) * boseEinstein β ω := by
+  unfold boseEinstein
+  have hsub : Real.exp (β * ω) - 1 ≠ 0 := sub_ne_zero.mpr h
+  field_simp
+  ring
+
 /-- **The Bose–Einstein occupation decreases with mode energy**: for `0 < βω₁ ≤ βω₂`,
 `n(βω₂) ≤ n(βω₁)`.  Higher-energy photon modes are (thermally) less occupied — the Bose occupation
 `1/(e^{βω}−1)` is antitone in `βω` (since `e^{βω}−1` is increasing and positive).  The expected monotone
