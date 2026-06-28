@@ -6480,6 +6480,11 @@ namespace QIQTH.AxiomAudit
 -- the geometric (Bose) distribution with Boltzmann factor e^{−2πω} (the β=2π specialization of boseEinstein_gibbs_form).
 -- Axiom-free (standard 3); free Maxwell.
 #print axioms QIQTH.Fock.Photon.rindlerOccupationBose_gibbs_form
+-- PHOTON_FIELD_PLAN P4 (the bosonic partition function is n+1): boseEinstein_add_one_mul — (n+1)(1−e^{−βω})=1, i.e.
+-- n+1 = 1/(1−e^{−βω}) = Z_bose = ∑_k e^{−βωk} (the geometric-series sum over number states). The (n+1) enhancement
+-- factor IS the single-mode bosonic partition function. Contrast Z_fermi=1+e^{−βω} (two-level): geometric vs two-level
+-- partition function is the spin-statistics signature at the partition level. Axiom-free (standard 3); free Maxwell.
+#print axioms QIQTH.Fock.Photon.boseEinstein_add_one_mul
 -- ★★★ ELECTRON_FIELD_PLAN E6→E5 bridge (per-mode modular Hamiltonian): fermiDirac_logit — for a fermionic mode with
 -- occupation n = fermiDirac β ω, the modular energy is the logit log((1−n)/n) = βω. This is the single-mode form of
 -- the fermionic modular Hamiltonian K = log((1−C)/C) (QuasiFreeEntropy / quasi-free modular generator): the logit of
@@ -6723,6 +6728,10 @@ namespace QIQTH.AxiomAudit
 -- Tomita–Takesaki property — the modular state is the Gibbs state of K — now a machine-checked matrix identity.
 -- Axiom-free (standard 3); free Dirac.
 #print axioms QIQTH.Fock.Dirac.electron_thermalState_gibbs
+-- ELECTRON_FIELD E6 (the explicit normalized Gibbs state): electron_thermalState_eq_gibbs — ρ = (1/Z)·e^{−K}, the
+-- canonical normalized form of the Gibbs identity (the modular state written explicitly as e^{−K}/Z, Z=1+e^{−βω}).
+-- Axiom-free (standard 3); free Dirac.
+#print axioms QIQTH.Fock.Dirac.electron_thermalState_eq_gibbs
 -- ★★★ ELECTRON_FIELD E5 (CONTINUUM CAR-net modular flow Γ₋(Δ^it)): the continuum wedge modular flow for the electron
 -- CAR net is the FERMIONIC second quantization of the one-particle continuum Δ^it = modUnitary S t
 -- (StandardSubspaceModularFlow, already built). fermiSecondQuantModFlow S t = ExteriorAlgebra.map (modUnitary S t)

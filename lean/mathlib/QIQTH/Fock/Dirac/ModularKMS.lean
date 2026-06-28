@@ -445,6 +445,18 @@ theorem electron_thermalState_gibbs (β ω : ℝ) :
     push_cast at h ⊢
     linear_combination h
 
+/-- **The explicit Gibbs state `ρ = (1/Z)·e^{−K}`.**  The canonical normalized form of
+`electron_thermalState_gibbs`: the electron's KMS/thermal density matrix is `e^{−K}/Z` with
+`Z = 1 + e^{−βω}` — the modular state written explicitly as the normalized Gibbs operator of the modular
+Hamiltonian `K = βω·N`. -/
+theorem electron_thermalState_eq_gibbs (β ω : ℝ) :
+    electronModeThermalState β ω
+      = (((1 + Real.exp (-(β * ω)))⁻¹ : ℝ) : ℂ) • NormedSpace.exp (-(modHamiltonian β ω)) := by
+  rw [← electron_thermalState_gibbs, smul_smul,
+      show (((1 + Real.exp (-(β * ω)))⁻¹ : ℝ) : ℂ) * ((1 + Real.exp (-(β * ω)) : ℝ) : ℂ) = 1 from by
+        rw [← Complex.ofReal_mul, inv_mul_cancel₀ (by positivity), Complex.ofReal_one],
+      one_smul]
+
 /-- **Every diagonal observable is a modular invariant `σ_t(D) = D`.**  The electron's real-time modular
 flow `σ_t = Δ^{it}` fixes *every* diagonal matrix `D = diag(d)` — generalizing `electron_sigmaDiag_fixes_
 numberOp` (which is the special case `D = N`) to the whole **classical / pointer (record) basis**.  Since

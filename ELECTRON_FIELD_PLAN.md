@@ -771,3 +771,8 @@ EXTERNAL libraries; QIQT-H built its own.
   matrix identity. This closes the electron modular thermodynamic dictionary at the operator level
   (`K`, `e^{−K}`, `Z=Tr e^{−K}`, `ρ=e^{−K}/Z`, Gibbs weights, `⟨K⟩`, `S=log Z+β⟨E⟩`, first law). Wired into
   `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **E6: the explicit normalized Gibbs state `ρ = (1/Z)·e^{−K}`** (`electron_thermalState_eq_gibbs`,
+  in `ModularKMS.lean`, axiom-free, budget 0, 3113 jobs green). The canonical normalized form of the Gibbs
+  identity — the modular/KMS state written explicitly as `e^{−K}/Z` (`Z = 1 + e^{−βω}`), the standard
+  "Gibbs state" statement (from `Z·ρ = e^{−K}` via `smul_smul` + `inv_mul_cancel₀`). Wired into
+  `AxiomAudit.lean`; standard-3; budget 0.
