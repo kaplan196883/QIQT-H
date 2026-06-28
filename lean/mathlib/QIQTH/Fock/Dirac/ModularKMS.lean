@@ -310,4 +310,50 @@ theorem electron_firstLaw (β ω : ℝ) :
   have h := hasDerivAt_binaryEntropy (fermiDirac_pos β ω) (fermiDirac_lt_one β ω)
   rwa [fermiDirac_logit] at h
 
+/-! ### E6 capstone — the electron Unruh effect at the Bisognano–Wichmann temperature `β = 2π`
+
+At `β = 2π` the finite modular flow `σ_t = Δ^{it}` (`electron_sigmaDiag_*`) is the geometric Rindler boost
+(Bisognano–Wichmann), so the electron mode's KMS state is the thermal state seen by the uniformly
+accelerated/Rindler observer.  The lemmas below specialize the modular tier to that temperature: the
+Rindler–Fermi (Unruh) occupation, its Pauli bound (the contrast with the photon), the Unruh thermal
+entropy, and the Unruh first law — tying the already-built modular flow to the boost-KMS Unruh law. -/
+
+/-- **★ The electron Unruh occupation (Bisognano–Wichmann, `β = 2π`).**  At the boost-KMS inverse
+temperature `β = 2π` — the modular temperature of the Rindler wedge, where the modular flow `σ_t = Δ^{it}`
+IS the geometric boost `U(Λ_W(−2πt))` — the electron mode's number expectation in the KMS/modular state is
+the **Rindler–Fermi occupation** `n_ω = 1/(e^{2πω} + 1)`: `ω(N) = rindlerOccupationFermi ω`.  The electron
+Unruh effect as the modular-state expectation (E6), wiring the FD/Unruh occupation into the project's
+boost-KMS modular flow at the BW temperature. -/
+theorem electron_unruh_occupation (ω : ℝ) :
+    QIQTH.FiniteModularTheory.stateOf (electronModeThermalState (2 * Real.pi) ω) numberOp
+      = (rindlerOccupationFermi ω : ℂ) := by
+  rw [electron_occupation_eq_fermiDirac]; rfl
+
+/-- **The electron Unruh occupation obeys the Pauli bound** `0 < n_ω < 1` (`fermiDirac_mem_Ioo`): at most
+one fermion per mode (Pauli exclusion).  The sharp **contrast with the photon**: the *bosonic* Unruh
+occupation `1/(e^{2πω} − 1)` is unbounded — so the photon's regional capacity needs a number cutoff
+(`PHOTON_FIELD_PLAN` P2/P3, `truncFockDim_*`) — whereas the fermionic `n_ω < 1` makes the electron's
+per-mode capacity intrinsically finite (the CAR `dim ⋀h = 2^(dim h)`, no cutoff). -/
+theorem electron_unruh_occupation_mem_Ioo (ω : ℝ) :
+    rindlerOccupationFermi ω ∈ Set.Ioo (0 : ℝ) 1 :=
+  fermiDirac_mem_Ioo (2 * Real.pi) ω
+
+/-- **The electron Unruh thermal entropy** at `β = 2π`: `S(n_ω) = log(1 + e^{−2πω}) + 2πω·n_ω`
+(`electron_mode_entropy` at `β = 2π`), the `log Z + β⟨E⟩` form with `n_ω` the Rindler–Fermi occupation —
+the thermal entropy of the electron mode as seen by the Rindler/Unruh observer, whose first law
+`δS = δ⟨K⟩` feeds the area law. -/
+theorem electron_unruh_entropy (ω : ℝ) :
+    binaryEntropy (rindlerOccupationFermi ω)
+      = Real.log (1 + Real.exp (-(2 * Real.pi * ω)))
+        + (2 * Real.pi * ω) * rindlerOccupationFermi ω :=
+  electron_mode_entropy (2 * Real.pi) ω
+
+/-- **The electron Unruh first law** `δS = δ⟨K⟩` at `β = 2π`: `HasDerivAt binaryEntropy (2πω) (n_ω)`
+(`electron_firstLaw` at `β = 2π`) — the entanglement first law at the Bisognano–Wichmann/Unruh
+temperature, with modular energy `2πω = 2π × (boost energy)` (the `+2π` wiring one-particle BW into the
+area law). -/
+theorem electron_unruh_firstLaw (ω : ℝ) :
+    HasDerivAt binaryEntropy (2 * Real.pi * ω) (rindlerOccupationFermi ω) :=
+  electron_firstLaw (2 * Real.pi) ω
+
 end QIQTH.Fock.Dirac

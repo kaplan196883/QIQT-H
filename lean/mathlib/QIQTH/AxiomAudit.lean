@@ -6584,6 +6584,19 @@ namespace QIQTH.AxiomAudit
 -- βω. Since ⟨K⟩=βω·n+c, d⟨K⟩/dn=βω=dS/dn: the differential entanglement first law δS=δ⟨K⟩ that drives the area law,
 -- realized for the electron mode. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.electron_firstLaw
+-- ★★★ ELECTRON_FIELD E6 capstone (the electron Unruh effect at the Bisognano–Wichmann temperature β=2π): at β=2π the
+-- finite modular flow σ_t=Δ^it is the geometric Rindler boost (BW), so the electron KMS state is the Rindler/Unruh
+-- thermal state. electron_unruh_occupation: ω(N) = rindlerOccupationFermi ω = 1/(e^{2πω}+1) — the FD/Unruh occupation
+-- as the modular-state expectation. electron_unruh_occupation_mem_Ioo: the Pauli bound 0<n_ω<1 (≤1 fermion/mode) — the
+-- contrast with the photon's UNBOUNDED bosonic Unruh occupation 1/(e^{2πω}−1) (which needs a number cutoff, PHOTON P2/P3),
+-- so the electron's per-mode capacity is intrinsically finite (CAR dim ⋀h=2^n, no cutoff). electron_unruh_entropy:
+-- S(n_ω)=log(1+e^{−2πω})+2πω·n_ω (the log Z+β⟨E⟩ thermal entropy at the BW temperature). electron_unruh_firstLaw:
+-- HasDerivAt binaryEntropy (2πω) n_ω — the first law δS=δ⟨K⟩ at the Unruh temperature, modular energy 2πω (the +2π
+-- wiring one-particle BW into the area law). All axiom-free (standard 3); free Dirac; G never assigned.
+#print axioms QIQTH.Fock.Dirac.electron_unruh_occupation
+#print axioms QIQTH.Fock.Dirac.electron_unruh_occupation_mem_Ioo
+#print axioms QIQTH.Fock.Dirac.electron_unruh_entropy
+#print axioms QIQTH.Fock.Dirac.electron_unruh_firstLaw
 -- ★★★ ELECTRON_FIELD E5 (CONTINUUM CAR-net modular flow Γ₋(Δ^it)): the continuum wedge modular flow for the electron
 -- CAR net is the FERMIONIC second quantization of the one-particle continuum Δ^it = modUnitary S t
 -- (StandardSubspaceModularFlow, already built). fermiSecondQuantModFlow S t = ExteriorAlgebra.map (modUnitary S t)

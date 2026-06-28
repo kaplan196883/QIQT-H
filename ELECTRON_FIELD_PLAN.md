@@ -618,3 +618,15 @@ EXTERNAL libraries; QIQT-H built its own.
   defining property of the CAR/Araki relative entropy, and exactly what makes the first law `δS=δ⟨K⟩` the
   statement that `D(n‖n_KMS)` is *minimized* (=0) at the KMS occupation. `lake build
   QIQTH.Fock.Dirac.QuasiFreeEntropy` green (2179 jobs); standard-3; budget 0.
+- 2026-06-28 — **E6 CAPSTONE: the electron Unruh effect at the Bisognano–Wichmann temperature `β=2π`**
+  (added to `ModularKMS.lean`, axiom-free, budget 0, 3055 jobs green). At `β=2π` the finite modular flow
+  `σ_t=Δ^{it}` is the geometric Rindler boost (BW), so the electron KMS state is the Rindler/Unruh thermal
+  state. **`electron_unruh_occupation`**: `ω(N) = rindlerOccupationFermi ω = 1/(e^{2πω}+1)` — the FD/Unruh
+  occupation as the modular-state expectation. **`electron_unruh_occupation_mem_Ioo`**: the Pauli bound
+  `0<n_ω<1` (≤1 fermion/mode) — the sharp **contrast with the photon's UNBOUNDED bosonic** Unruh occupation
+  `1/(e^{2πω}−1)` (which needs a number cutoff, `PHOTON_FIELD_PLAN` P2/P3), so the electron's per-mode
+  capacity is intrinsically finite (CAR `dim ⋀h=2^n`, no cutoff). **`electron_unruh_entropy`**:
+  `S(n_ω)=log(1+e^{−2πω})+2πω·n_ω` (the `log Z+β⟨E⟩` thermal entropy at the BW temperature).
+  **`electron_unruh_firstLaw`**: `HasDerivAt binaryEntropy (2πω) n_ω` — the first law `δS=δ⟨K⟩` at the Unruh
+  temperature, modular energy `2πω` (the `+2π` wiring one-particle BW into the area law). Ties the
+  already-built modular flow to the boost-KMS Unruh law. Wired into `AxiomAudit.lean`; standard-3; budget 0.
