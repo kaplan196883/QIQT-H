@@ -129,4 +129,14 @@ theorem fermiSecondQuantModFlow_isEven (S : StandardSubspace H) (t : ℝ)
   rw [hx] at h
   exact h.symm
 
+/-- **A record transforms covariantly under the modular/boost flow**:
+`Γ₋(Δ^{it})(ι f · ι g) = ι(Δ^{it} f) · ι(Δ^{it} g)`.  A fermion bilinear (a current / `T_μν`-type record,
+`isEven_ι_mul_ι`) is carried by the modular flow to the bilinear of the boosted one-particle states —
+the records transform covariantly under the modular flow `σ_t` (`Δ^{it} = U(boost)`).  Immediate from
+`Γ₋(Δ^{it})` being an algebra hom. -/
+@[simp] theorem fermiSecondQuantModFlow_ι_mul_ι (S : StandardSubspace H) (t : ℝ) (f g : H) :
+    fermiSecondQuantModFlow S t (ExteriorAlgebra.ι ℂ f * ExteriorAlgebra.ι ℂ g)
+      = ExteriorAlgebra.ι ℂ (modUnitary S t f) * ExteriorAlgebra.ι ℂ (modUnitary S t g) := by
+  rw [map_mul, fermiSecondQuantModFlow_ι, fermiSecondQuantModFlow_ι]
+
 end QIQTH.Fock.Dirac

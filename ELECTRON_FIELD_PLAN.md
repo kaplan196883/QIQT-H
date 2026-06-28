@@ -602,3 +602,13 @@ EXTERNAL libraries; QIQT-H built its own.
   budget 0. The continuum modular-flow ↔ records connection is now complete at the element level.
   Remaining E5: the antilinear fermionic modular conjugation `J_W = Z·Γ₋(j)` (the genuine
   antilinear-functor / Mathlib gap).
+- 2026-06-28 — **E5: a record transforms covariantly under the modular/boost flow** (added to
+  `CARModularFlow.lean`, axiom-free, budget 0). **`fermiSecondQuantModFlow_ι_mul_ι`** —
+  `Γ₋(Δ^{it})(ι f · ι g) = ι(Δ^{it} f) · ι(Δ^{it} g)`: a fermion bilinear (a current / `T_μν`-type record)
+  is carried by the modular flow to the bilinear of the **boosted** one-particle states — the records
+  **transform covariantly** under `σ_t` (`Δ^{it} = U(boost)`). Immediate from `Γ₋(Δ^{it})` being an
+  algebra hom. `lake build QIQTH.Fock.Dirac.CARModularFlow` green (3550 jobs); standard-3; budget 0. The
+  continuum modular flow's action on records is now explicit (covariant transformation). **The electron's
+  modular tier is comprehensively complete** (finite + continuum, flow + spectrum + generator + entropy +
+  first law + record covariance/conservation), all on QIQT-H's existing TT machinery. Sole remaining E5:
+  the antilinear modular conjugation `J_W = Z·Γ₋(j)` (antilinear-functor / Mathlib gap).

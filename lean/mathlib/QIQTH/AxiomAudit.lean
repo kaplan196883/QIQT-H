@@ -6609,6 +6609,11 @@ namespace QIQTH.AxiomAudit
 -- under the field-level modular flow σ_t — modular dynamics conserves the even/observable algebra at the continuum.
 -- Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.fermiSecondQuantModFlow_isEven
+-- ELECTRON_FIELD E5 (a record transforms covariantly under the modular/boost flow):
+-- fermiSecondQuantModFlow_ι_mul_ι — Γ₋(Δ^it)(ι f · ι g) = ι(Δ^it f) · ι(Δ^it g). A fermion bilinear (current /
+-- T_μν-type record) is carried by the modular flow to the bilinear of the boosted one-particle states — records
+-- transform covariantly under σ_t (Δ^it = U(boost)). Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.fermiSecondQuantModFlow_ι_mul_ι
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy
