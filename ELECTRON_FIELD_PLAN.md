@@ -523,3 +523,12 @@ EXTERNAL libraries; QIQT-H built its own.
   Proof: the diagonal–matrix-unit–diagonal conjugation (`fin_cases` + `ring`). `lake build
   QIQTH.Fock.Dirac.ModularKMS` green (2944 jobs); standard-3; budget 0. The finite modular tier now has
   the operator-level eigenoperator action; next: the continuum lift to the CAR net via `modFlow`.
+- 2026-06-28 — **E5: the lowering operator `a` is the dual modular eigenoperator (full spectral
+  decomposition)** (added to `ModularKMS.lean`, axiom-free, budget 0). **`electron_sigmaDiag_lowering`**
+  — `σ_t(a) = (p₀^{it} p₁^{−it})·a` (`loweringOp = Matrix.single 0 1 1 = E_{0,1}`), the modular flow
+  rotates `a` by the **inverse** modular phase `((1−n)/n)^{it} = e^{+it·βω}`. With
+  `electron_sigmaDiag_raising` (`a†` rotates by `e^{−it·βω}`) this is the **full modular spectral
+  decomposition**: `a†` raises the modular energy by `βω`, `a` lowers it, and `N = a†a` is fixed
+  (`electron_sigmaDiag_fixes_numberOp`) — the single-mode `Δ^{it} = U(boost)` Bohr-frequency rotation.
+  `lake build QIQTH.Fock.Dirac.ModularKMS` green (2944 jobs); standard-3; budget 0. The finite/single-mode
+  modular tier is now spectrally complete; the remaining E5 is the continuum CAR-net lift via `modFlow`.

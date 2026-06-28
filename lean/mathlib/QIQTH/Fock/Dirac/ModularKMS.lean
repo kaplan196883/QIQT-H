@@ -209,4 +209,23 @@ theorem electron_sigmaDiag_raising (β ω t : ℝ) :
       Matrix.smul_apply, smul_eq_mul] <;>
     ring
 
+/-- The electron mode's **lowering operator** `a` (matrix unit `E_{0,1}`: occupied ↦ empty). -/
+noncomputable def loweringOp : Matrix (Fin 2) (Fin 2) ℂ := Matrix.single 0 1 1
+
+/-- **The lowering operator `a` is the dual modular eigenoperator**: `σ_t(a) = (p₀^{it} p₁^{−it})·a`.
+The modular flow rotates `a` by the *inverse* modular phase `((1−n)/n)^{it} = e^{+it·βω}` — together with
+`electron_sigmaDiag_raising` (`σ_t(a†) = e^{−it·βω}·a†`) this is the full modular spectral decomposition:
+`a†` raises the modular energy by `βω`, `a` lowers it, and `N = a†a` is fixed
+(`electron_sigmaDiag_fixes_numberOp`).  The single-mode `Δ^{it} = U(boost)` Bohr-frequency rotation. -/
+theorem electron_sigmaDiag_lowering (β ω t : ℝ) :
+    QIQTH.FiniteModularTheory.sigmaDiag (electronModeOcc β ω) t loweringOp
+      = ((electronModeOcc β ω 0 : ℂ) ^ (Complex.I * (t : ℂ))
+          * (electronModeOcc β ω 1 : ℂ) ^ (Complex.I * ((-t : ℝ) : ℂ))) • loweringOp := by
+  unfold QIQTH.FiniteModularTheory.sigmaDiag QIQTH.FiniteModularTheory.diagPow loweringOp
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [Matrix.mul_apply, Fin.sum_univ_two, Matrix.diagonal_apply, Matrix.single,
+      Matrix.smul_apply, smul_eq_mul] <;>
+    ring
+
 end QIQTH.Fock.Dirac

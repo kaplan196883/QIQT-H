@@ -6555,6 +6555,12 @@ namespace QIQTH.AxiomAudit
 -- automorphism with the modular frequency βω (= the boost energy at β=2π). The operator-level Δ^it = U(boost)
 -- action on the creation operator. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.electron_sigmaDiag_raising
+-- ELECTRON_FIELD E5 (the lowering operator is the dual modular eigenoperator — full spectral decomposition):
+-- electron_sigmaDiag_lowering — σ_t(a) = (p₀^{it} p₁^{−it})·a, the modular flow rotates a by the INVERSE modular
+-- phase ((1−n)/n)^{it} = e^{+it·βω}. With electron_sigmaDiag_raising (a† rotates by e^{−it·βω}) this is the full
+-- modular spectral decomposition: a† raises the modular energy by βω, a lowers it, N=a†a fixed — the single-mode
+-- Δ^it = U(boost) Bohr-frequency rotation. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.electron_sigmaDiag_lowering
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy
