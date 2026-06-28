@@ -31,6 +31,8 @@ import QIQTH.Fock.Dirac.FermiDirac
 import QIQTH.Fock.Dirac.QuasiFreeEntropy
 import QIQTH.RecordContract
 import Mathlib.LinearAlgebra.Matrix.Hermitian
+import Mathlib.Analysis.Normed.Algebra.MatrixExponential
+import Mathlib.Analysis.SpecialFunctions.Exponential
 
 namespace QIQTH.Fock.Dirac
 
@@ -358,6 +360,38 @@ theorem electron_modHamiltonian_trace (β ω : ℝ) :
     Matrix.trace (modHamiltonian β ω) = ((β * ω : ℝ) : ℂ) := by
   rw [electron_modHamiltonian_diag, Matrix.trace_diagonal, Fin.sum_univ_two]
   simp
+
+/-- **The modular partition operator `e^{−K} = diag(1, e^{−βω})`.**  The matrix exponential of `−K`
+(`K = βω·N = diag(0, βω)`, `electron_modHamiltonian_diag`) is the diagonal matrix of Boltzmann factors
+`e^{−Eᵢ}` over the modular spectrum `{E₀=0, E₁=βω}`: `e^{−K} = diag(e^{−0}, e^{−βω}) = diag(1, e^{−βω})`.
+This is the unnormalized Gibbs operator whose normalization `e^{−K}/Z` is the KMS/modular state. -/
+theorem electron_exp_neg_modHamiltonian (β ω : ℝ) :
+    NormedSpace.exp (-(modHamiltonian β ω))
+      = Matrix.diagonal ![1, ((Real.exp (-(β * ω)) : ℝ) : ℂ)] := by
+  have hneg : -(modHamiltonian β ω) = Matrix.diagonal ![0, ((-(β * ω) : ℝ) : ℂ)] := by
+    rw [electron_modHamiltonian_diag, Matrix.diagonal_neg]
+    congr 1
+    funext i
+    fin_cases i <;> simp
+  rw [hneg, Matrix.exp_diagonal]
+  congr 1
+  funext i
+  simp only [Pi.exp_def]
+  fin_cases i
+  · simp
+  · show NormedSpace.exp (((-(β * ω) : ℝ) : ℂ)) = ((Real.exp (-(β * ω)) : ℝ) : ℂ)
+    rw [← Complex.exp_eq_exp_ℂ, ← Complex.ofReal_exp]
+
+/-- **The modular partition function `Z = Tr e^{−K} = 1 + e^{−βω}`.**  The trace of the Gibbs operator
+(the sum of Boltzmann factors over the modular spectrum `{0, βω}`) is the partition function `Z`, whose
+`log Z` is the `S = log Z + β⟨E⟩` of `electron_mode_entropy` — the operator-level (`Tr e^{−K}`)
+realization of the modular partition function. -/
+theorem electron_partition_trace (β ω : ℝ) :
+    Matrix.trace (NormedSpace.exp (-(modHamiltonian β ω))) = ((1 + Real.exp (-(β * ω)) : ℝ) : ℂ) := by
+  rw [electron_exp_neg_modHamiltonian, Matrix.trace_diagonal, Fin.sum_univ_two]
+  simp only [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons]
+  push_cast
+  ring
 
 /-- **The ground-state Gibbs weight** `(1−n)·Z = e^{−E₀} = 1` (with `Z = 1 + e^{−βω}`, `E₀ = 0`).  The
 empty-mode occupation `1−n` is exactly the Boltzmann weight `e^{−E₀}/Z` of the lower modular energy level

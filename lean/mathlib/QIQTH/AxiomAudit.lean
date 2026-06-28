@@ -6470,6 +6470,11 @@ namespace QIQTH.AxiomAudit
 -- occupation algebra. Axiom-free (standard 3); free Dirac / free Maxwell.
 #print axioms QIQTH.Fock.Dirac.fermiDirac_one_sub
 #print axioms QIQTH.Fock.Photon.boseEinstein_one_add
+-- PHOTON_FIELD_PLAN P4 (the bosonic Gibbs form): boseEinstein_gibbs_form — n = e^{−βω}/(1−e^{−βω}), the mean of the
+-- geometric (Bose) distribution p_k=(1−x)x^k over number states k=0,1,2,…, Boltzmann factor x=e^{−βω}, single-mode
+-- partition function Z=1/(1−x), n=x·Z. The bosonic 1−x denominator vs the fermionic 1+x (n=x/(1+x)) is the
+-- geometric-vs-two-level spin-statistics signature. Axiom-free (standard 3); free Maxwell.
+#print axioms QIQTH.Fock.Photon.boseEinstein_gibbs_form
 -- ★★★ ELECTRON_FIELD_PLAN E6→E5 bridge (per-mode modular Hamiltonian): fermiDirac_logit — for a fermionic mode with
 -- occupation n = fermiDirac β ω, the modular energy is the logit log((1−n)/n) = βω. This is the single-mode form of
 -- the fermionic modular Hamiltonian K = log((1−C)/C) (QuasiFreeEntropy / quasi-free modular generator): the logit of
@@ -6699,6 +6704,14 @@ namespace QIQTH.AxiomAudit
 -- electron_mode_entropy) — the modular state = Gibbs state, at the entry level. Axiom-free (standard 3); free Dirac.
 #print axioms QIQTH.Fock.Dirac.electron_gibbs_weight_ground
 #print axioms QIQTH.Fock.Dirac.electron_gibbs_weight_excited
+-- ★★★ ELECTRON_FIELD E6 (the modular partition OPERATOR, via the matrix exponential): electron_exp_neg_modHamiltonian —
+-- e^{−K} = NormedSpace.exp(−K) = diag(1, e^{−βω}), the matrix exp of −K=−βω·N=diag(0,−βω) is the diagonal of Boltzmann
+-- factors e^{−Eᵢ} over the modular spectrum {0,βω} (Matrix.exp_diagonal + Complex.exp_eq_exp_ℂ). electron_partition_trace —
+-- Z = Tr e^{−K} = 1 + e^{−βω}: the modular partition function as a TRACE (the operator-level realization, whose log Z is
+-- the S=log Z+β⟨E⟩ of electron_mode_entropy). With the Gibbs weights this is the full "modular state = Gibbs state e^{−K}/Z"
+-- picture at the operator level. Axiom-free (standard 3); free Dirac.
+#print axioms QIQTH.Fock.Dirac.electron_exp_neg_modHamiltonian
+#print axioms QIQTH.Fock.Dirac.electron_partition_trace
 -- ★★★ ELECTRON_FIELD E5 (CONTINUUM CAR-net modular flow Γ₋(Δ^it)): the continuum wedge modular flow for the electron
 -- CAR net is the FERMIONIC second quantization of the one-particle continuum Δ^it = modUnitary S t
 -- (StandardSubspaceModularFlow, already built). fermiSecondQuantModFlow S t = ExteriorAlgebra.map (modUnitary S t)

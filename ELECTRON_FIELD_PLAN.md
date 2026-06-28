@@ -752,3 +752,13 @@ EXTERNAL libraries; QIQT-H built its own.
   photon's bosonic enhancement** `1 + n = e^{βω}·n` (`boseEinstein_one_add`). The `−n` (Pauli) vs `+n`
   (stimulated) is the spin–statistics signature carried to the occupation algebra, now stated symmetrically
   on both sides. Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **★ E6 CAPSTONE: the modular partition OPERATOR `e^{−K} = diag(1, e^{−βω})`, via the matrix
+  exponential** (added to `ModularKMS.lean`, axiom-free standard-3, budget 0, 3113 jobs green — the deferred
+  matrix-exp piece, now landed). **`electron_exp_neg_modHamiltonian`**: `NormedSpace.exp(−K) = diag(1, e^{−βω})`
+  — the matrix exponential of `−K = −βω·N = diag(0,−βω)` is the diagonal of Boltzmann factors `e^{−Eᵢ}` over
+  the modular spectrum `{0, βω}` (via `Matrix.exp_diagonal` + `Complex.exp_eq_exp_ℂ`).
+  **`electron_partition_trace`**: `Z = Tr e^{−K} = 1 + e^{−βω}` — the modular partition function as a **trace**
+  (the operator-level realization, whose `log Z` is the `S = log Z + β⟨E⟩` of `electron_mode_entropy`). With
+  the Gibbs weights this completes the **"modular state = Gibbs state `e^{−K}/Z`"** picture at the operator
+  level. (Added imports `Mathlib.Analysis.Normed.Algebra.MatrixExponential`, `…SpecialFunctions.Exponential`.)
+  Wired into `AxiomAudit.lean`; standard-3; budget 0.
