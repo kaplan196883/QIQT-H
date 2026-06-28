@@ -561,3 +561,16 @@ EXTERNAL libraries; QIQT-H built its own.
   electron mode. `lake build QIQTH.Fock.Dirac.ModularKMS` green (3055 jobs); standard-3; budget 0. The
   single-mode chain *FD occupation → KMS state → modular flow = boost → K ∝ N → S = log Z + β⟨E⟩ → δS =
   δ⟨K⟩* is now complete. Remaining E5: the continuum CAR-net lift via `modFlow`.
+- 2026-06-28 — **E5 CONTINUUM: the CAR field-net modular flow `Γ₋(Δ^{it})`** (`QIQTH/Fock/Dirac/
+  CARModularFlow.lean`, axiom-free, budget 0). The continuum wedge modular flow for the electron CAR net
+  is the **fermionic second quantization** of the one-particle continuum `Δ^{it} = modUnitary S t`
+  (`StandardSubspaceModularFlow`, already built): **`fermiSecondQuantModFlow S t = ExteriorAlgebra.map
+  (modUnitary S t)`** on the antisymmetric (exterior/CAR) Fock `⋀ H` — the fermionic analog of the
+  bosonic `secondQuantModFlow`, **reusing the same one-particle `Δ^{it}`** (the modular flow is
+  statistics-independent at the one-particle level; only the second-quantization functor differs,
+  symmetric ↦ antisymmetric). **`fermiSecondQuantModFlow_ι`** (`Γ₋(Δ^{it})(ι f)=ι(Δ^{it} f)`),
+  **`_zero`** (`Γ₋(Δ^0)=id`), **`_add`** (the one-parameter group law `Γ₋(Δ^{is})∘Γ₋(Δ^{it})=Γ₋(Δ^{i(s+t)})`,
+  from `modUnitary_add` + `ExteriorAlgebra.map` functoriality). **This is the continuum field-level
+  `Δ_W^{it}` for the electron**, on QIQT-H's existing TT machinery. `lake build
+  QIQTH.Fock.Dirac.CARModularFlow` green (3526 jobs); standard-3; budget 0. Remaining E5: the fermionic
+  modular conjugation `J_W = Z·Γ₋(j)` (Klein twist ∘ second-quantized reflection) + the twisted duality.

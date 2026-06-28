@@ -6579,6 +6579,16 @@ namespace QIQTH.AxiomAudit
 -- βω. Since ⟨K⟩=βω·n+c, d⟨K⟩/dn=βω=dS/dn: the differential entanglement first law δS=δ⟨K⟩ that drives the area law,
 -- realized for the electron mode. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.electron_firstLaw
+-- ★★★ ELECTRON_FIELD E5 (CONTINUUM CAR-net modular flow Γ₋(Δ^it)): the continuum wedge modular flow for the electron
+-- CAR net is the FERMIONIC second quantization of the one-particle continuum Δ^it = modUnitary S t
+-- (StandardSubspaceModularFlow, already built). fermiSecondQuantModFlow S t = ExteriorAlgebra.map (modUnitary S t)
+-- on the antisymmetric (exterior/CAR) Fock ⋀H — the fermionic analog of the bosonic secondQuantModFlow, reusing the
+-- SAME one-particle Δ^it. fermiSecondQuantModFlow_ι: Γ₋(Δ^it)(ι f)=ι(Δ^it f); fermiSecondQuantModFlow_zero: Γ₋(Δ^0)=
+-- id; fermiSecondQuantModFlow_add: Γ₋(Δ^is)∘Γ₋(Δ^it)=Γ₋(Δ^{i(s+t)}) (group law from modUnitary_add + ExteriorAlgebra
+-- .map functoriality). The continuum field-level Δ_W^it for the electron, on QIQT-H's existing TT machinery.
+-- Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.fermiSecondQuantModFlow_add
+#print axioms QIQTH.Fock.Dirac.fermiSecondQuantModFlow_ι
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy
