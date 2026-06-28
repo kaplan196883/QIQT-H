@@ -792,3 +792,10 @@ EXTERNAL libraries; QIQT-H built its own.
   generating the `U(1)` rotation); for a **boost plane** (`Q(a)Q(b)<0`, time⟂space) it squares to a positive
   scalar (hyperbolic). `diracSigma_sq_ortho` refactored to use it. Wired into `AxiomAudit.lean`; standard-3;
   budget 0.
+- 2026-06-29 — **E1: `γ` transforms as a vector under the spin generator `[σ_ab, γ_a] = −4·Q(a)·γ_b`**
+  (added to `DiracGamma.lean`, axiom-free, budget 0, 1775 jobs green). **`diracSigma_comm_gamma_left`**:
+  `σ_ab γ_a − γ_a σ_ab = −4·Q(a)·γ_b` (`a⟂b`) — the commutator of the Lorentz spin generator with a gamma in
+  its plane rotates it into the other. The **defining property of the spinor representation**: the gamma
+  matrices `γ_μ` transform as a **4-vector** under the Lorentz generators `σ_μν` (the source of
+  `[σ_μν,γ_ρ]=2(η_νργ_μ−η_μργ_ν)` covariance), the spinor realization of the Lorentz boost/rotation acting
+  on the vector index. Wired into `AxiomAudit.lean`; standard-3; budget 0.

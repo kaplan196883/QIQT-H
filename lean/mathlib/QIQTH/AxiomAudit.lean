@@ -6493,6 +6493,12 @@ namespace QIQTH.AxiomAudit
 -- the spin projection along the momentum. helicityOp_sq: Λ²=1 (eigenvalues ±1) — the photon is massless spin-1 with
 -- exactly two helicities ±1 (never the longitudinal 0 of a massive vector). Axiom-free (standard 3); free Maxwell.
 #print axioms QIQTH.Fock.Photon.helicityOp_sq
+-- PHOTON_FIELD_PLAN P1 (the two polarizations resolve the identity): helicityProj_complete — P_{+1} + P_{−1} = 1, the
+-- two transverse helicity projections sum to the identity on h_γ = h_{+1}⊕h_{−1} (the photon's two physical polarizations
+-- form a complete set, no third longitudinal mode). helicityProjPlus_idem — P_{+1}²=P_{+1} (a genuine projection).
+-- Axiom-free (standard 3); free Maxwell.
+#print axioms QIQTH.Fock.Photon.helicityProj_complete
+#print axioms QIQTH.Fock.Photon.helicityProjPlus_idem
 -- ★★★ ELECTRON_FIELD_PLAN E6→E5 bridge (per-mode modular Hamiltonian): fermiDirac_logit — for a fermionic mode with
 -- occupation n = fermiDirac β ω, the modular energy is the logit log((1−n)/n) = βω. This is the single-mode form of
 -- the fermionic modular Hamiltonian K = log((1−C)/C) (QuasiFreeEntropy / quasi-free modular generator): the logit of
@@ -6561,6 +6567,11 @@ namespace QIQTH.AxiomAudit
 -- COMPLEX STRUCTURE ((γ_aγ_b)²<0, the i generating U(1)); for a boost plane (Q(a)Q(b)<0) it squares to a positive scalar
 -- (hyperbolic). Axiom-free (standard 3); free Dirac.
 #print axioms QIQTH.Fock.Dirac.diracGamma_mul_sq_ortho
+-- ELECTRON_FIELD E1 (γ transforms as a vector under the spin generator): diracSigma_comm_gamma_left — [σ_ab, γ_a] =
+-- σ_ab γ_a − γ_a σ_ab = −4·Q(a)·γ_b (a⟂b): the commutator of the Lorentz spin generator σ_ab with a gamma in its plane
+-- rotates it into the other. The defining property of the spinor representation — γ_μ transform as a 4-VECTOR under the
+-- Lorentz generators σ_μν (the source of [σ_μν,γ_ρ]=2(η_νργ_μ−η_μργ_ν) covariance). Axiom-free (standard 3); free Dirac.
+#print axioms QIQTH.Fock.Dirac.diracSigma_comm_gamma_left
 -- ★★★ ELECTRON_FIELD_PLAN — PhysLean bridge (the CAR operator-layer dependency): QIQT-H now depends on PhysLean
 -- (HEPLean, pinned to d0ee4af whose Mathlib pin c5ea00351c28 @ v4.30.0 matches QIQT-H's — no Mathlib bump), which
 -- provides the fermionic CAR field-operator algebra (FieldStatistic, CreateAnnihilate, CrAnFieldOp, WickAlgebra,

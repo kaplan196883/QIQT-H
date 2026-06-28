@@ -147,4 +147,31 @@ theorem diracSigma_sq_ortho {a b : M} (h : Q.IsOrtho a b) :
   congr 1
   ring
 
+/-- **`γ` transforms as a vector under the spin generator: `[σ_ab, γ_a] = −4·Q(a)·γ_b` (`a ⟂ b`).**  The
+commutator of the Lorentz spin generator `σ_ab` with a gamma in its plane rotates it into the other:
+`σ_ab γ_a − γ_a σ_ab = −4·Q(a)·γ_b`.  This is the defining property of the spinor representation — the
+gamma matrices `γ_μ` **transform as a 4-vector** under the Lorentz generators `σ_μν` (the source of the
+`[σ_μν, γ_ρ] = 2(η_νρ γ_μ − η_μρ γ_ν)` covariance), the spin–statistics-compatible spinor realization of
+the Lorentz boost/rotation acting on the vector index. -/
+theorem diracSigma_comm_gamma_left {a b : M} (h : Q.IsOrtho a b) :
+    diracSigma Q a b * diracGamma Q a - diracGamma Q a * diracSigma Q a b
+      = algebraMap ℝ (CliffordAlgebra Q) (-(4 * Q a)) * diracGamma Q b := by
+  have hba : diracGamma Q b * diracGamma Q a = -(diracGamma Q a * diracGamma Q b) := by
+    rw [diracGamma_swap_ortho Q h, neg_neg]
+  have t1 : diracGamma Q a * (diracGamma Q b * diracGamma Q a)
+      = -(algebraMap ℝ (CliffordAlgebra Q) (Q a) * diracGamma Q b) := by
+    rw [hba,
+        show diracGamma Q a * -(diracGamma Q a * diracGamma Q b)
+          = -((diracGamma Q a * diracGamma Q a) * diracGamma Q b) from by noncomm_ring,
+        diracGamma_sq]
+  rw [diracSigma_ortho Q h,
+      show (diracGamma Q a * diracGamma Q b + diracGamma Q a * diracGamma Q b) * diracGamma Q a
+          - diracGamma Q a * (diracGamma Q a * diracGamma Q b + diracGamma Q a * diracGamma Q b)
+        = diracGamma Q a * (diracGamma Q b * diracGamma Q a)
+          + diracGamma Q a * (diracGamma Q b * diracGamma Q a)
+          - (diracGamma Q a * diracGamma Q a) * diracGamma Q b
+          - (diracGamma Q a * diracGamma Q a) * diracGamma Q b from by noncomm_ring,
+      t1, diracGamma_sq, map_neg, map_mul, map_ofNat]
+  noncomm_ring
+
 end QIQTH.Fock.Dirac
