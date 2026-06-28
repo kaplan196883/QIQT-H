@@ -848,3 +848,16 @@ EXTERNAL libraries; QIQT-H built its own.
   GENUINE spectral entropy of the modular/KMS state. Closes **E6 (KMS state) ⇒ E3 (capacity)** at the
   operator-entropy level (not just the scalar function). Wired into `QIQTH.lean`+`AxiomAudit.lean`;
   standard-3; budget 0.
+- 2026-06-29 — **★ E1/E9: the Clifford/Dirac relation GROUNDED in PhysLean's gamma matrices** (new module
+  `PhysLeanGammaBridge.lean`, axiom-free standard-3, budget 0, 2088 jobs green). The **third PhysLean
+  bridge** (after the Dirac CAR/`WickAlgebra` one and the photon EM one) — acts on the PhysLean-reuse gap:
+  QIQT-H's `DiracGamma.lean` works *abstractly* with `CliffordAlgebra Q`; PhysLean's
+  `Relativity.CliffordAlgebra` gives the **concrete** 4×4 Dirac-rep matrices `γ0..γ3` (`γ0²=1`, `γi²=−1`,
+  off-diagonal `γμγν=−γνγμ`). **`gamma_sq_eq_eta`**: `γ_μγ_μ = η_μμ·1` (`η=diag(+1,−1,−1,−1)`).
+  **`gamma_anticomm`**: `{γ_μ,γ_ν}=γ_μγ_ν+γ_νγ_μ=2η_μν·1` — the packaged Clifford/Dirac anticommutation
+  relation on the **concrete** matrices (proved by `fin_cases`×16 + the PhysLean per-pair lemmas + `module`),
+  realizing QIQT-H's abstract `DiracGamma.diracGamma_mul_add` on PhysLean's reviewed representation. The
+  defining relation of the Dirac algebra — the seed of microcausality (spacelike Dirac fields anticommute)
+  and of the spinor Lorentz generators `σ_μν=[γ_μ,γ_ν]`. (HONEST: algebraic relation only; the `S_D=(iγ·∂+m)
+  Δ_m` propagator, its microcausality, and Belinfante `T_μν→2πK_boost→Jacobson` stay the labelled E1/E9
+  frontier.) Wired into `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.

@@ -6697,6 +6697,16 @@ namespace QIQTH.AxiomAudit
 -- with electron_bilinear_bosonic (bilinears even) this is the operator-level even/odd grading, identical to the Clifford
 -- diracGamma_mem_odd and the exterior parity_one_particle across all three layers. Axiom-free (standard 3); free Dirac.
 #print axioms QIQTH.Fock.Dirac.electron_single_fermionic
+-- ★★★ ELECTRON_FIELD E1/E9 (the Clifford/Dirac relation GROUNDED in PhysLean's gamma matrices): the THIRD PhysLean
+-- bridge (after the CAR/WickAlgebra and photon-EM bridges). QIQT-H's DiracGamma works abstractly with CliffordAlgebra Q;
+-- PhysLean's Relativity.CliffordAlgebra gives the concrete 4×4 Dirac-rep matrices γ0..γ3 (γ0²=1, γi²=−1, off-diagonal
+-- γμγν=−γνγμ). gamma_sq_eq_eta: γμγμ = η_μμ•1 (η=diag(+1,−1,−1,−1)). gamma_anticomm: {γμ,γν}=γμγν+γνγμ=2η_μν•1 — the
+-- packaged Clifford/Dirac anticommutation relation on the CONCRETE matrices, realizing the abstract DiracGamma
+-- diracGamma_mul_add ({γa,γb}=2·polar Q a b) on PhysLean's reviewed representation. The defining relation of the Dirac
+-- algebra (seed of microcausality + the spinor Lorentz generators σμν=[γμ,γν]). HONEST: algebraic relation only; S_D
+-- propagator + microcausality + Belinfante→Jacobson stay the labelled E1/E9 frontier. Axiom-free (standard 3); free Dirac.
+#print axioms QIQTH.Fock.Dirac.gamma_sq_eq_eta
+#print axioms QIQTH.Fock.Dirac.gamma_anticomm
 -- ★★★ ELECTRON_FIELD E5/E6 (electron mode wired into the EXISTING Tomita–Takesaki machinery): QIQT-H already has
 -- the finite modular flow (FiniteModularTheory: modAut ρ x = ρ x ⅟ρ, stateOf, the proved kms_condition) and the
 -- continuum Δ^it = modFlow (Spectral/SpectralTheorem). electron_occupation_eq_fermiDirac: for a single fermionic

@@ -503,6 +503,7 @@ import QIQTH.Fock.Dirac.DiracGamma
 import QIQTH.Fock.Dirac.LocalDifferentialSupport
 import QIQTH.Fock.Dirac.FockKleinTwist
 import QIQTH.Fock.Dirac.PhysLeanBridge
+import QIQTH.Fock.Dirac.PhysLeanGammaBridge
 import QIQTH.Fock.Dirac.ModularKMS
 import QIQTH.Fock.Dirac.CARModularFlow
 import QIQTH.Fock.Dirac.GradedCapacity
