@@ -26,6 +26,7 @@ the E1 frontier (checkpointed).  Free Dirac only.
 import Mathlib.LinearAlgebra.CliffordAlgebra.Basic
 import Mathlib.LinearAlgebra.CliffordAlgebra.Grading
 import Mathlib.Data.Real.Basic
+import Mathlib.Tactic.NoncommRing
 
 namespace QIQTH.Fock.Dirac
 
@@ -106,5 +107,37 @@ theorem diracSigma_ortho {a b : M} (h : Q.IsOrtho a b) :
   have hh : diracGamma Q b * diracGamma Q a = -(diracGamma Q a * diracGamma Q b) := by
     rw [diracGamma_swap_ortho Q h, neg_neg]
   rw [hh, sub_neg_eq_add]
+
+/-- **The Lorentz generator squares to a scalar: `σ_ab² = −4·η(a)·η(b)` (orthogonal `a ⟂ b`).**  Since
+`σ_ab = 2γ_aγ_b` and `(γ_aγ_b)² = −γ_a²γ_b² = −η(a)η(b)`, the spin generator squares to the *scalar*
+`−4·Q(a)·Q(b)`.  This **distinguishes boosts from rotations**: with the Minkowski metric `η = (+,−,−,−)`,
+the **boost** generator `σ_{0i}` has `η(e₀)η(eᵢ) = (+1)(−1) = −1`, so `σ_{0i}² = +4 > 0` (non-compact,
+*hyperbolic* — the generator of the unbounded Rindler boost, whose `Δ^{it}` is the modular flow); a
+**rotation** `σ_{ij}` has `η(eᵢ)η(eⱼ) = (−1)(−1) = +1`, so `σ_{ij}² = −4 < 0` (compact, *elliptic*).  The
+sign of `σ²` is exactly the boost-vs-rotation (non-compact-vs-compact) dichotomy of the Lorentz spin
+generators. -/
+theorem diracSigma_sq_ortho {a b : M} (h : Q.IsOrtho a b) :
+    diracSigma Q a b * diracSigma Q a b
+      = algebraMap ℝ (CliffordAlgebra Q) (-(4 * Q a * Q b)) := by
+  have hba : diracGamma Q b * diracGamma Q a = -(diracGamma Q a * diracGamma Q b) := by
+    rw [diracGamma_swap_ortho Q h, neg_neg]
+  have key : (diracGamma Q a * diracGamma Q b) * (diracGamma Q a * diracGamma Q b)
+      = algebraMap ℝ (CliffordAlgebra Q) (-(Q a * Q b)) := by
+    have e1 : (diracGamma Q a * diracGamma Q b) * (diracGamma Q a * diracGamma Q b)
+        = diracGamma Q a * (diracGamma Q b * diracGamma Q a) * diracGamma Q b := by noncomm_ring
+    rw [e1, hba]
+    have e2 : diracGamma Q a * -(diracGamma Q a * diracGamma Q b) * diracGamma Q b
+        = -((diracGamma Q a * diracGamma Q a) * (diracGamma Q b * diracGamma Q b)) := by noncomm_ring
+    rw [e2, diracGamma_sq, diracGamma_sq, ← map_mul, ← map_neg]
+  rw [diracSigma_ortho Q h,
+      show (diracGamma Q a * diracGamma Q b + diracGamma Q a * diracGamma Q b)
+          * (diracGamma Q a * diracGamma Q b + diracGamma Q a * diracGamma Q b)
+        = (diracGamma Q a * diracGamma Q b) * (diracGamma Q a * diracGamma Q b)
+          + (diracGamma Q a * diracGamma Q b) * (diracGamma Q a * diracGamma Q b)
+          + (diracGamma Q a * diracGamma Q b) * (diracGamma Q a * diracGamma Q b)
+          + (diracGamma Q a * diracGamma Q b) * (diracGamma Q a * diracGamma Q b) from by noncomm_ring,
+      key, ← map_add, ← map_add, ← map_add]
+  congr 1
+  ring
 
 end QIQTH.Fock.Dirac

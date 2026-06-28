@@ -6485,6 +6485,10 @@ namespace QIQTH.AxiomAudit
 -- factor IS the single-mode bosonic partition function. Contrast Z_fermi=1+e^{−βω} (two-level): geometric vs two-level
 -- partition function is the spin-statistics signature at the partition level. Axiom-free (standard 3); free Maxwell.
 #print axioms QIQTH.Fock.Photon.boseEinstein_add_one_mul
+-- PHOTON_FIELD_PLAN P4 (the bosonic thermal entropy is non-negative): boseEntropy_nonneg — S_BE(n)=(1+n)log(1+n)−n log n
+-- = log(1+n) + n·log((1+n)/n) ≥ 0 for n>0 (a sum of two nonneg terms: log(1+n)≥0 since 1+n≥1; n·log((1+n)/n)≥0 since
+-- (1+n)/n≥1). The thermal/Unruh photon entropy is a genuine (nonneg) entropy. Axiom-free (standard 3); free Maxwell.
+#print axioms QIQTH.Fock.Photon.boseEntropy_nonneg
 -- ★★★ ELECTRON_FIELD_PLAN E6→E5 bridge (per-mode modular Hamiltonian): fermiDirac_logit — for a fermionic mode with
 -- occupation n = fermiDirac β ω, the modular energy is the logit log((1−n)/n) = βω. This is the single-mode form of
 -- the fermionic modular Hamiltonian K = log((1−C)/C) (QuasiFreeEntropy / quasi-free modular generator): the logit of
@@ -6542,6 +6546,12 @@ namespace QIQTH.AxiomAudit
 -- the Rindler boost whose flow is the electron's modular Δ^it (E1/E9). Axiom-free (standard 3); free Dirac.
 #print axioms QIQTH.Fock.Dirac.diracSigma_antisymm
 #print axioms QIQTH.Fock.Dirac.diracSigma_ortho
+-- ELECTRON_FIELD E1 (the spin generator squares to a scalar — boost vs rotation): diracSigma_sq_ortho — for orthogonal
+-- a⟂b, σ_ab² = −4·Q(a)·Q(b) (a SCALAR, since σ_ab=2γ_aγ_b and (γ_aγ_b)²=−γ_a²γ_b²=−Q(a)Q(b)). This distinguishes
+-- BOOSTS from ROTATIONS: with η=(+,−,−,−), the boost σ_{0i} has Q(e₀)Q(eᵢ)=(+1)(−1)=−1 ⟹ σ²=+4>0 (non-compact,
+-- hyperbolic — the Rindler boost generator whose Δ^it is the modular flow); a rotation σ_{ij} has (−1)(−1)=+1 ⟹ σ²=−4<0
+-- (compact, elliptic). The sign of σ² is the boost-vs-rotation (non-compact-vs-compact) dichotomy. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.diracSigma_sq_ortho
 -- ★★★ ELECTRON_FIELD_PLAN — PhysLean bridge (the CAR operator-layer dependency): QIQT-H now depends on PhysLean
 -- (HEPLean, pinned to d0ee4af whose Mathlib pin c5ea00351c28 @ v4.30.0 matches QIQT-H's — no Mathlib bump), which
 -- provides the fermionic CAR field-operator algebra (FieldStatistic, CreateAnnihilate, CrAnFieldOp, WickAlgebra,

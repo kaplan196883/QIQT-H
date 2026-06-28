@@ -776,3 +776,12 @@ EXTERNAL libraries; QIQT-H built its own.
   identity — the modular/KMS state written explicitly as `e^{−K}/Z` (`Z = 1 + e^{−βω}`), the standard
   "Gibbs state" statement (from `Z·ρ = e^{−K}` via `smul_smul` + `inv_mul_cancel₀`). Wired into
   `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **E1: the spin generator squares to a scalar — boost vs rotation `σ_ab² = −4·Q(a)Q(b)`**
+  (added to `DiracGamma.lean`, axiom-free, budget 0, 1775 jobs green). **`diracSigma_sq_ortho`**: for
+  orthogonal `a⟂b`, `σ_ab² = −4·Q(a)·Q(b)` (a *scalar*, since `σ_ab=2γ_aγ_b` and
+  `(γ_aγ_b)²=−γ_a²γ_b²=−Q(a)Q(b)`). This **distinguishes boosts from rotations**: with `η=(+,−,−,−)`, the
+  **boost** `σ_{0i}` has `Q(e₀)Q(eᵢ)=(+1)(−1)=−1 ⟹ σ²=+4>0` (non-compact, *hyperbolic* — the Rindler boost
+  generator whose `Δ^{it}` is the modular flow); a **rotation** `σ_{ij}` has `(−1)(−1)=+1 ⟹ σ²=−4<0`
+  (compact, *elliptic*). The sign of `σ²` is the boost-vs-rotation (non-compact-vs-compact) dichotomy of the
+  Lorentz spin generators. (Added `import Mathlib.Tactic.NoncommRing`.) Wired into `AxiomAudit.lean`;
+  standard-3; budget 0.
