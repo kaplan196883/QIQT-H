@@ -282,3 +282,15 @@ frontier.
   twisted-duality theorem / GNS — instantiating `γ` = second-quantized parity unitary on the CAR
   inner-product space), **E1** (Dirac one-particle + `S_D`), **E8** (even-observable no-signaling),
   **E9** (Dirac `T_μν` → Jacobson hook).
+- 2026-06-28 — **E8 seed (even records commute with field operators) DONE** (added to
+  `EvenObservables.lean`, axiom-free, budget 0). The no-signaling kernel: **`ι_mul_ι_swap`** — the
+  one-particle (odd) generators anticommute `ι a·ι b = −ι b·ι a` (from `ι v·ι v = 0` on `a+b`); hence
+  **`ι_mul_ι_comm_ι`** — a fermion bilinear `ι a·ι b` (an even observable/record, `isEven_ι_mul_ι`)
+  **commutes** with a field operator `ι c`: `(ι a·ι b)·ι c = ι c·(ι a·ι b)`. So the electron's records
+  (even bilinears `j^μ`, `T_μν`) commute with the odd field operators — a record measurement cannot
+  signal through the field algebra. (Both depend only on `[propext, Quot.sound]`.) Wired into
+  `AxiomAudit.lean`; `lake build QIQTH.Fock.Dirac.EvenObservables` green (2401 jobs); budget 0. **Honest:**
+  this is the single-algebra generator-level kernel; the full bipartite no-signaling (graded tensor
+  product across spacelike-separated regions) is the next E8 sub-item. Remaining frontier (checkpointed):
+  **E5** (operator-algebra BW data / twisted-duality theorem / GNS), **E1** (Dirac one-particle + `S_D`),
+  **E8 bipartite** (graded tensor product), **E9** (Dirac `T_μν` → Jacobson hook).

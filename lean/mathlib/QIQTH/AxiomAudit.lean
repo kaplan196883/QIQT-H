@@ -6430,6 +6430,15 @@ namespace QIQTH.AxiomAudit
 -- no-signaling. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.isEven_ι_mul_ι
 #print axioms QIQTH.Fock.Dirac.evenSubalgebra
+-- ★★★ ELECTRON_FIELD_PLAN E8-seed (even records commute with field operators — the no-signaling kernel):
+-- ι_mul_ι_swap — one-particle (odd) generators anticommute ι a·ι b = −ι b·ι a (from ι v·ι v = 0 on a+b);
+-- ι_mul_ι_comm_ι — hence a fermion bilinear ι a·ι b (an even observable/record, isEven_ι_mul_ι) COMMUTES with a
+-- field operator ι c: (ι a·ι b)·ι c = ι c·(ι a·ι b). This is the algebraic kernel of even-observable no-signaling:
+-- the electron's records (even bilinears j^μ, T_μν) commute with the odd field operators, so a record measurement
+-- cannot signal through the field algebra. The full bipartite statement (graded tensor product across spacelike
+-- regions) is the next E8 sub-item. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.ι_mul_ι_swap
+#print axioms QIQTH.Fock.Dirac.ι_mul_ι_comm_ι
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy

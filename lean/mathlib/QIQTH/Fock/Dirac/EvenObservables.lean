@@ -82,4 +82,29 @@ def evenSubalgebra (𝕜 : Type*) (M : Type*) [Field 𝕜] [AddCommGroup M] [Mod
 @[simp] theorem mem_evenSubalgebra {a : ExteriorAlgebra 𝕜 M} :
     a ∈ evenSubalgebra 𝕜 M ↔ IsEven a := Iff.rfl
 
+/-! ### E8 seed — even records commute with field operators (the no-signaling kernel)
+
+The one-particle (odd) generators **anticommute**, `ι a · ι b = − ι b · ι a`; consequently a fermion
+**bilinear** `ι a · ι b` (an even observable / record) **commutes** with every one-particle field
+operator `ι c`.  This is the algebraic kernel of even-observable no-signaling: the electron's records,
+being even bilinears, commute with the (odd) field operators — so measuring a record cannot signal
+through the field algebra.  (The full bipartite statement uses the graded tensor product across
+spacelike-separated regions; this is the single-algebra generator-level core.) -/
+
+/-- The one-particle (odd) generators **anticommute**: `ι a · ι b = − (ι b · ι a)`.  (From
+`ι v · ι v = 0` applied to `a + b`.) -/
+theorem ι_mul_ι_swap (a b : M) : ι 𝕜 a * ι 𝕜 b = - (ι 𝕜 b * ι 𝕜 a) := by
+  have h := ExteriorAlgebra.ι_sq_zero (R := 𝕜) (a + b)
+  rw [map_add, add_mul, mul_add, mul_add, ExteriorAlgebra.ι_sq_zero, ExteriorAlgebra.ι_sq_zero,
+      zero_add, add_zero] at h
+  exact eq_neg_of_add_eq_zero_left h
+
+/-- **An even bilinear record commutes with a field operator.**  `(ι a · ι b) · ι c = ι c · (ι a · ι b)`:
+the fermion bilinear (an even observable / record, `isEven_ι_mul_ι`) commutes with the one-particle
+field operator `ι c`.  Proof = two applications of the generator anticommutation.  The no-signaling
+kernel for the electron's even records. -/
+theorem ι_mul_ι_comm_ι (a b c : M) :
+    (ι 𝕜 a * ι 𝕜 b) * ι 𝕜 c = ι 𝕜 c * (ι 𝕜 a * ι 𝕜 b) := by
+  rw [mul_assoc, ι_mul_ι_swap b c, mul_neg, ← mul_assoc, ι_mul_ι_swap a c, neg_mul, neg_neg, mul_assoc]
+
 end QIQTH.Fock.Dirac
