@@ -305,3 +305,8 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   enhancement factor IS the single-mode bosonic partition function. Contrast `Z_fermi = 1+e^{−βω}` (two-level):
   geometric `1/(1−x)` vs two-level `1+x` is the spin–statistics signature at the partition level. Wired into
   `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **P4: the bosonic thermal entropy is non-negative `S_BE(n) ≥ 0`** (`boseEntropy_nonneg`, in
+  `PhotonUnruh.lean`, axiom-free standard-3, budget 0, 2180 jobs green). The photon mode entropy
+  `(1+n)log(1+n) − n log n = log(1+n) + n·log((1+n)/n)` is a sum of two non-negative terms (`log(1+n) ≥ 0`
+  since `1+n ≥ 1`; `n·log((1+n)/n) ≥ 0` since `(1+n)/n ≥ 1`) — the thermal/Unruh photon entropy is a genuine
+  (non-negative) entropy. Wired into `AxiomAudit.lean`; standard-3; budget 0.

@@ -150,6 +150,20 @@ entropy of a thermal harmonic oscillator at occupation `n` (the bosonic mirror o
 `binaryEntropy`). -/
 noncomputable def boseEntropy (n : ℝ) : ℝ := (1 + n) * Real.log (1 + n) - n * Real.log n
 
+/-- **The bosonic thermal entropy is non-negative** `S_BE(n) ≥ 0` (for `n > 0`).  The photon mode entropy
+`(1+n)log(1+n) − n log n = log(1+n) + n·log((1+n)/n)` is a sum of two non-negative terms (`log(1+n) ≥ 0`
+since `1+n ≥ 1`; `n·log((1+n)/n) ≥ 0` since `(1+n)/n ≥ 1`).  The thermal/Unruh photon entropy is a genuine
+(non-negative) entropy. -/
+theorem boseEntropy_nonneg {n : ℝ} (hn : 0 < n) : 0 ≤ boseEntropy n := by
+  unfold boseEntropy
+  have key : (1 + n) * Real.log (1 + n) - n * Real.log n
+      = Real.log (1 + n) + n * (Real.log (1 + n) - Real.log n) := by ring
+  rw [key]
+  have t1 : 0 ≤ Real.log (1 + n) := Real.log_nonneg (by linarith)
+  have t2 : 0 ≤ n * (Real.log (1 + n) - Real.log n) :=
+    mul_nonneg hn.le (by rw [sub_nonneg]; exact Real.log_le_log hn (by linarith))
+  linarith
+
 /-- **The photon Unruh thermal entropy** `S_BE = log Z + βω·n` (for `βω > 0`).  For a bosonic (photon) mode
 with Bose–Einstein occupation `n = 1/(e^{βω}−1)`, the mode entropy equals the log partition function
 `log Z = −log(1 − e^{−βω})` plus `βω` times the occupation (`= β⟨E⟩`):
