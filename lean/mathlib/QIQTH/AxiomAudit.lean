@@ -6475,6 +6475,11 @@ namespace QIQTH.AxiomAudit
 -- partition function Z=1/(1−x), n=x·Z. The bosonic 1−x denominator vs the fermionic 1+x (n=x/(1+x)) is the
 -- geometric-vs-two-level spin-statistics signature. Axiom-free (standard 3); free Maxwell.
 #print axioms QIQTH.Fock.Photon.boseEinstein_gibbs_form
+-- PHOTON_FIELD_PLAN P4 (the Unruh photon occupation in Gibbs form): rindlerOccupationBose_gibbs_form — at β=2π,
+-- n_ω = e^{−2πω}/(1−e^{−2πω}): the Rindler/Unruh photon occupation at the Bisognano–Wichmann temperature is the mean of
+-- the geometric (Bose) distribution with Boltzmann factor e^{−2πω} (the β=2π specialization of boseEinstein_gibbs_form).
+-- Axiom-free (standard 3); free Maxwell.
+#print axioms QIQTH.Fock.Photon.rindlerOccupationBose_gibbs_form
 -- ★★★ ELECTRON_FIELD_PLAN E6→E5 bridge (per-mode modular Hamiltonian): fermiDirac_logit — for a fermionic mode with
 -- occupation n = fermiDirac β ω, the modular energy is the logit log((1−n)/n) = βω. This is the single-mode form of
 -- the fermionic modular Hamiltonian K = log((1−C)/C) (QuasiFreeEntropy / quasi-free modular generator): the logit of
@@ -6712,6 +6717,12 @@ namespace QIQTH.AxiomAudit
 -- picture at the operator level. Axiom-free (standard 3); free Dirac.
 #print axioms QIQTH.Fock.Dirac.electron_exp_neg_modHamiltonian
 #print axioms QIQTH.Fock.Dirac.electron_partition_trace
+-- ★★★ ELECTRON_FIELD E6 (THE modular state = Gibbs state, full matrix identity): electron_thermalState_gibbs —
+-- (1+e^{−βω})·ρ = e^{−K}, i.e. the FD thermal state ρ=diag(1−n,n) IS the normalized Gibbs operator e^{−K}/Z of the
+-- modular Hamiltonian K=βω·N (combining electron_exp_neg_modHamiltonian with the Gibbs weights). The defining
+-- Tomita–Takesaki property — the modular state is the Gibbs state of K — now a machine-checked matrix identity.
+-- Axiom-free (standard 3); free Dirac.
+#print axioms QIQTH.Fock.Dirac.electron_thermalState_gibbs
 -- ★★★ ELECTRON_FIELD E5 (CONTINUUM CAR-net modular flow Γ₋(Δ^it)): the continuum wedge modular flow for the electron
 -- CAR net is the FERMIONIC second quantization of the one-particle continuum Δ^it = modUnitary S t
 -- (StandardSubspaceModularFlow, already built). fermiSecondQuantModFlow S t = ExteriorAlgebra.map (modUnitary S t)

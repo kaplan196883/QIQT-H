@@ -762,3 +762,12 @@ EXTERNAL libraries; QIQT-H built its own.
   the Gibbs weights this completes the **"modular state = Gibbs state `e^{−K}/Z`"** picture at the operator
   level. (Added imports `Mathlib.Analysis.Normed.Algebra.MatrixExponential`, `…SpecialFunctions.Exponential`.)
   Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **★★ E6 FULL CAPSTONE: the modular state IS the Gibbs state `Z·ρ = e^{−K}`** (`ModularKMS.lean`,
+  axiom-free standard-3, budget 0, 3113 jobs green). **`electron_thermalState_gibbs`**: `(1+e^{−βω})·ρ =
+  e^{−K}` — the FD thermal state `ρ = diag(1−n, n)` IS the normalized Gibbs operator `e^{−K}/Z` of the
+  modular Hamiltonian `K = βω·N`, combining the partition operator (`electron_exp_neg_modHamiltonian`) with
+  the Gibbs weights via `Matrix.diagonal_smul` + cast `linear_combination`. The **defining Tomita–Takesaki
+  property** — the modular/KMS state is the Gibbs state of the modular Hamiltonian — now a machine-checked
+  matrix identity. This closes the electron modular thermodynamic dictionary at the operator level
+  (`K`, `e^{−K}`, `Z=Tr e^{−K}`, `ρ=e^{−K}/Z`, Gibbs weights, `⟨K⟩`, `S=log Z+β⟨E⟩`, first law). Wired into
+  `AxiomAudit.lean`; standard-3; budget 0.

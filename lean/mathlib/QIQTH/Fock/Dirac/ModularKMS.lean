@@ -419,6 +419,32 @@ theorem electron_gibbs_weight_excited (β ω : ℝ) :
   have hd : Real.exp (β * ω) + 1 ≠ 0 := by positivity
   field_simp
 
+/-- **★ The modular state IS the Gibbs state: `Z · ρ = e^{−K}`.**  The electron's KMS/thermal density
+matrix `ρ = electronModeThermalState β ω = diag(1−n, n)` is the normalized Gibbs operator of the modular
+Hamiltonian: `(1 + e^{−βω}) · ρ = e^{−K}`, i.e. `ρ = e^{−K}/Z` with `Z = Tr e^{−K}`.  This is the defining
+Tomita–Takesaki property — the modular state is the Gibbs state `e^{−K}/Z` of the modular Hamiltonian `K =
+βω·N` — now a *matrix identity* (combining the partition operator `electron_exp_neg_modHamiltonian` with
+the Gibbs weights `electron_gibbs_weight_ground/_excited`).  Free Dirac; the boost-KMS at `β = 2π` (Unruh)
+is the special case. -/
+theorem electron_thermalState_gibbs (β ω : ℝ) :
+    ((1 + Real.exp (-(β * ω)) : ℝ) : ℂ) • electronModeThermalState β ω
+      = NormedSpace.exp (-(modHamiltonian β ω)) := by
+  rw [electron_exp_neg_modHamiltonian, electronModeThermalState, ← Matrix.diagonal_smul]
+  congr 1
+  funext i
+  fin_cases i
+  · simp only [Matrix.cons_val_zero, Pi.smul_apply, smul_eq_mul]
+    have h : (((1 - fermiDirac β ω) * (1 + Real.exp (-(β * ω))) : ℝ) : ℂ) = 1 := by
+      rw [electron_gibbs_weight_ground]; norm_num
+    push_cast at h ⊢
+    linear_combination h
+  · simp only [Matrix.cons_val_one, Matrix.head_cons, Pi.smul_apply, smul_eq_mul]
+    have h : ((fermiDirac β ω * (1 + Real.exp (-(β * ω))) : ℝ) : ℂ)
+        = ((Real.exp (-(β * ω)) : ℝ) : ℂ) := by
+      rw [electron_gibbs_weight_excited]
+    push_cast at h ⊢
+    linear_combination h
+
 /-- **Every diagonal observable is a modular invariant `σ_t(D) = D`.**  The electron's real-time modular
 flow `σ_t = Δ^{it}` fixes *every* diagonal matrix `D = diag(d)` — generalizing `electron_sigmaDiag_fixes_
 numberOp` (which is the special case `D = N`) to the whole **classical / pointer (record) basis**.  Since
