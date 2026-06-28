@@ -6367,6 +6367,15 @@ namespace QIQTH.AxiomAudit
 -- kernel E7 consumes. Free Dirac only; QED/edge-modes/DHR deferred (cited). Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.fermionicGaussianEntropy_le_log_dim
 #print axioms QIQTH.Fock.Dirac.binaryEntropy_le_log_two
+-- ★★★ ELECTRON_FIELD_PLAN E2 (antisymmetric/CAR Fock space): the fermionic (electron) Fock space is the
+-- exterior algebra ⋀ M (CAR counterpart of the bosonic symmetric Fock space). finrank_CARFock: dim(⋀ M)=2^n for
+-- an n-mode region — each fermionic mode is a qubit (Mathlib Module.Basis.ExteriorAlgebra indexed by Finset I,
+-- card = 2^card I). fermionicGaussianEntropy_le_log_carFockDim combines this with E3 so the capacity bound reads
+-- S_vN ≤ log N_R with N_R = dim(CARFock 𝕜 h_R) the LITERAL antisymmetric Fock dimension — the fermionic
+-- S_vN ≤ log N_R. HONEST: this is the Fock DIMENSION; the full CAR a/a† anticommutator algebra + parity Γ=(−1)^F
+-- grading + the Klein-twist/twisted-duality crux (E4) are the next sub-items. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.finrank_CARFock
+#print axioms QIQTH.Fock.Dirac.fermionicGaussianEntropy_le_log_carFockDim
 -- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-11, von Neumann non-vacuity witness): oneDensity_isDensity —
 -- IsDensity (1 : Matrix (Fin 1) (Fin 1) ℂ), the one-microstate pure state (1×1 identity), a genuine density
 -- (PosSemidef.one + trace_one). Completes the witness story (M-7 only witnessed the record-law/Shannon floor): the

@@ -176,5 +176,15 @@ frontier.
   **`fermionicGaussianEntropy_le_log_dim`** (≤ log(2ⁿ) = log dim(⋀ h_R)) — the fermionic mirror of
   `shannon_le_log_card`, i.e. `S_vN ≤ log N_R` survives bosons → fermions. Wired into `QIQTH.lean` +
   `AxiomAudit.lean` (both theorems standard-3). Build green (`lake build QIQTH.AxiomAudit`, 8729 jobs);
-  `axiom_budget_check.sh` raw count 0. Next: **E2** (`CAR.lean` — antisymmetric/exterior Fock + CAR
-  relations, giving `dim(⋀ h) = 2ⁿ` to make E3's `2ⁿ` literally the Fock dimension), then **E1/E4**.
+  `axiom_budget_check.sh` raw count 0.
+- 2026-06-28 — **E2 (dimension) DONE** (`QIQTH/Fock/Dirac/CAR.lean`, axiom-free, budget 0). The
+  antisymmetric (CAR) Fock space = the exterior algebra `CARFock 𝕜 M := ExteriorAlgebra 𝕜 M`.
+  **`finrank_CARFock : dim(⋀ M) = 2 ^ finrank M`** (each mode is a qubit; via Mathlib
+  `Module.Basis.ExteriorAlgebra` indexed by `Finset I`, `card = 2^card I`). **`fermionicGaussianEntropy_le_log_carFockDim`**
+  combines it with E3 so the bound reads `S_vN ≤ log N_R` with `N_R = dim(CARFock 𝕜 h_R)` the **literal**
+  Fock dimension — closing the E3↔Fock loop. Wired into `QIQTH.lean` + `AxiomAudit.lean` (both
+  standard-3); `lake build QIQTH.Fock.Dirac.CAR` green (2399 jobs); budget 0. **Deferred E2 sub-item**
+  (checkpointed, not blocked): the full CAR operator algebra `a(f),a†(g)` with `{a(f),a†(g)}=⟪f,g⟫`,
+  `{a(f),a(g)}=0` + parity `Γ=(−1)^F` from the existing Mathlib grading
+  `DirectSum.Decomposition (fun n ↦ ⋀[𝕜]^n M)`. Next: **E1** (Dirac one-particle + `S_D` kernel) or the
+  E2 operator-algebra sub-item; then **E4** (Klein twist / twisted duality — the crux).
