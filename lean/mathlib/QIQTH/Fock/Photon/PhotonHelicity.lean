@@ -50,4 +50,20 @@ theorem photon_capacity_helicity (N : ℕ) :
       = (Module.finrank ℂ Hplus + Module.finrank ℂ Hminus + N).choose N := by
   rw [truncFockDim_eq_choose, Module.finrank_prod]
 
+/-- **For `d` spatial modes per helicity the photon capacity is `C(2d + N, N)`** — the two transverse
+polarizations doubling the mode count, the explicit parity-symmetric (`d_{+1} = d_{−1} = d`) form. -/
+theorem photon_capacity_two_helicity (d N : ℕ) :
+    truncFockDim (2 * d) N = (2 * d + N).choose N :=
+  truncFockDim_eq_choose (2 * d) N
+
+/-- **The second polarization enlarges the capacity**: the two-helicity (`2d`-mode) photon Fock has at
+least as many states as a single-helicity (`d`-mode) one, `truncFockDim d N ≤ truncFockDim (2d) N`.  Both
+transverse polarizations contribute to the photon's regional capacity — it carries *more* information than
+a single-component (scalar-like) field of the same per-helicity mode count.  (Via `Nat.choose_le_choose`,
+`d + N ≤ 2d + N`.) -/
+theorem photon_capacity_helicity_ge (d N : ℕ) :
+    truncFockDim d N ≤ truncFockDim (2 * d) N := by
+  rw [truncFockDim_eq_choose, truncFockDim_eq_choose]
+  exact Nat.choose_le_choose N (by omega)
+
 end QIQTH.Fock.Photon

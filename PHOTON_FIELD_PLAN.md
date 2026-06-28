@@ -269,3 +269,9 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   unphysical gauge/longitudinal modes excluded by working on the positive physical space).
   **`photon_capacity_helicity`**: `dim Γ_s^{≤N}(h_γ) = C(dim h_+ + dim h_− + N, N)` — the cutoff bosonic
   capacity (P2/P3) counts the 2 polarizations. Wired into `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **P1/P3: the 2-polarization capacity, explicit** (`PhotonHelicity.lean`, axiom-free
+  standard-3, budget 0, 2943 jobs green). **`photon_capacity_two_helicity`**: for `d` modes per helicity the
+  photon capacity is `C(2d+N, N)` (the two transverse polarizations doubling the mode count, parity-symmetric
+  `d_{+1}=d_{−1}=d`). **`photon_capacity_helicity_ge`**: `truncFockDim d N ≤ truncFockDim (2d) N` — the second
+  polarization enlarges the capacity (the photon carries more information than a single-component scalar-like
+  field of the same per-helicity mode count). Wired into `AxiomAudit.lean`; standard-3; budget 0.
