@@ -6714,6 +6714,14 @@ namespace QIQTH.AxiomAudit
 -- propagator + microcausality + Belinfante→Jacobson stay the labelled E1/E9 frontier. Axiom-free (standard 3); free Dirac.
 #print axioms QIQTH.Fock.Dirac.gamma_sq_eq_eta
 #print axioms QIQTH.Fock.Dirac.gamma_anticomm
+-- ★★★ ELECTRON_FIELD E9 (the boost-vs-rotation dichotomy of the spinor generators, on PhysLean's concrete Dirac rep):
+-- gamma_boost_sq — (γ0γ1)²=+1, the BOOST plane (timelike⟂spacelike, η(e0)η(e1)=−1): γ0γ1 is the HYPERBOLIC/non-compact
+-- generator, e^{ηγ0γ1}=cosh+sinh·γ0γ1 = the unbounded Rindler boost whose Δ^it IS the wedge modular flow (the E9 boost
+-- modular Hamiltonian 2πK_boost). gamma_rotation_sq — (γ1γ2)²=−1, the ROTATION plane (two spacelike, η=+1): γ1γ2 is a
+-- COMPLEX STRUCTURE (√−1), the elliptic/compact U(1) rotation. The boost/rotation = non-compact/compact dichotomy
+-- concretely on PhysLean's matrices, mirroring abstract diracGamma_mul_sq_boost/_rotation. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.gamma_boost_sq
+#print axioms QIQTH.Fock.Dirac.gamma_rotation_sq
 -- ★★★ ELECTRON_FIELD E5/E6 (electron mode wired into the EXISTING Tomita–Takesaki machinery): QIQT-H already has
 -- the finite modular flow (FiniteModularTheory: modAut ρ x = ρ x ⅟ρ, stateOf, the proved kms_condition) and the
 -- continuum Δ^it = modFlow (Spectral/SpectralTheorem). electron_occupation_eq_fermiDirac: for a single fermionic

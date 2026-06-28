@@ -861,3 +861,14 @@ EXTERNAL libraries; QIQT-H built its own.
   and of the spinor Lorentz generators `σ_μν=[γ_μ,γ_ν]`. (HONEST: algebraic relation only; the `S_D=(iγ·∂+m)
   Δ_m` propagator, its microcausality, and Belinfante `T_μν→2πK_boost→Jacobson` stay the labelled E1/E9
   frontier.) Wired into `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **★ E9: the boost-vs-rotation dichotomy of the spinor generators, on PhysLean's concrete
+  Dirac rep** (extended `PhysLeanGammaBridge.lean`, axiom-free standard-3, budget 0, 2088 jobs green).
+  Building on `gamma_anticomm`: **`gamma_boost_sq`** — `(γ₀γ₁)² = +1`, the **boost** plane
+  (timelike⟂spacelike, `η(e₀)η(e₁)=−1`): `γ₀γ₁` is the **hyperbolic/non-compact** generator,
+  `e^{ηγ₀γ₁}=cosh η+sinh η·γ₀γ₁` = the unbounded **Rindler boost** whose `Δ^{it}` IS the wedge modular flow
+  (the E9 boost modular Hamiltonian `2πK_boost`). **`gamma_rotation_sq`** — `(γ₁γ₂)² = −1`, the **rotation**
+  plane (two spacelike, `η=+1`): `γ₁γ₂` is a **complex structure** (√−1), the elliptic/compact `U(1)`
+  rotation. The boost/rotation = non-compact/compact dichotomy concretely on PhysLean's matrices (mirroring
+  the abstract `DiracGamma.diracGamma_mul_sq_boost`/`_rotation`), via the per-pair `γμγν=−γνγμ` + `γμ²=±1`
+  lemmas + `noncomm_ring`. The boost square `(γ₀γ₁)²=+1` is the spinor seed of the modular/boost generator.
+  Wired into `AxiomAudit.lean`; standard-3; budget 0.

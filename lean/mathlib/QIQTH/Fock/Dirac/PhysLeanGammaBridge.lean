@@ -25,6 +25,7 @@ spacelike wall), and the Belinfante `T_μν → 2πK_boost → Jacobson` chain r
 frontier.  Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`).  No `sorry`.  Free Dirac only.
 -/
 import Physlib.Relativity.CliffordAlgebra
+import Mathlib.Tactic.NoncommRing
 
 namespace QIQTH.Fock.Dirac
 
@@ -53,5 +54,33 @@ theorem gamma_anticomm (μ ν : Fin 4) :
       γ0_mul_γ0, γ1_mul_γ1, γ2_mul_γ2, γ3_mul_γ3,
       γ1_mul_γ0, γ2_mul_γ0, γ3_mul_γ0, γ2_mul_γ1, γ3_mul_γ1, γ3_mul_γ2] <;>
     module
+
+/-- **★ Boost plane ⟹ `(γ₀γ₁)² = +1`** on PhysLean's concrete Dirac matrices — the **hyperbolic**
+(non-compact) generator.  `γ₀γ₁` mixes a timelike (`γ₀²=+1`) and a spacelike (`γ₁²=−1`) direction
+(`η(e₀)η(e₁) = (+1)(−1) = −1`), so `(γ₀γ₁)² = +1`: `e^{ηγ₀γ₁} = cosh η + sinh η·γ₀γ₁` is the **unbounded
+Rindler boost**, the spinor generator whose `Δ^{it}` IS the wedge modular flow (the E9 boost modular
+Hamiltonian `2πK_boost`).  Concrete realization of the abstract `DiracGamma.diracGamma_mul_sq_boost` on
+PhysLean's reviewed representation. -/
+theorem gamma_boost_sq : γ0 * γ1 * (γ0 * γ1) = 1 := by
+  calc γ0 * γ1 * (γ0 * γ1)
+      = γ0 * (γ1 * γ0) * γ1 := by noncomm_ring
+    _ = γ0 * (-(γ0 * γ1)) * γ1 := by rw [γ1_mul_γ0]
+    _ = -(γ0 * γ0 * (γ1 * γ1)) := by noncomm_ring
+    _ = -((1 : Matrix (Fin 4) (Fin 4) ℂ) * (-1)) := by rw [γ0_mul_γ0, γ1_mul_γ1]
+    _ = 1 := by simp
+
+/-- **★ Rotation plane ⟹ `(γ₁γ₂)² = −1`** on PhysLean's concrete Dirac matrices — the **elliptic**
+(compact) generator.  `γ₁γ₂` mixes two spacelike directions (`γ₁²=γ₂²=−1`, `η(e₁)η(e₂) = (−1)(−1) = +1`),
+so `(γ₁γ₂)² = −1`: `γ₁γ₂` is a **complex structure** (square root of `−1`), `e^{θγ₁γ₂} = cos θ + sin θ·γ₁γ₂`
+the bounded `U(1)` spatial rotation.  Together with `gamma_boost_sq` this is the **boost-vs-rotation
+(non-compact-vs-compact) dichotomy** of the spinor Lorentz generators, concretely on PhysLean's rep
+(mirroring the abstract `DiracGamma.diracGamma_mul_sq_rotation`). -/
+theorem gamma_rotation_sq : γ1 * γ2 * (γ1 * γ2) = -1 := by
+  calc γ1 * γ2 * (γ1 * γ2)
+      = γ1 * (γ2 * γ1) * γ2 := by noncomm_ring
+    _ = γ1 * (-(γ1 * γ2)) * γ2 := by rw [γ2_mul_γ1]
+    _ = -(γ1 * γ1 * (γ2 * γ2)) := by noncomm_ring
+    _ = -((-1 : Matrix (Fin 4) (Fin 4) ℂ) * (-1)) := by rw [γ1_mul_γ1, γ2_mul_γ2]
+    _ = -1 := by simp
 
 end QIQTH.Fock.Dirac
