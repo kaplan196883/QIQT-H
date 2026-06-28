@@ -491,3 +491,15 @@ EXTERNAL libraries; QIQT-H built its own.
   (2944 jobs); standard-3; budget 0. The finite Tomita–Takesaki realization of the electron mode is now
   complete (KMS state · KMS condition · σ-invariance · detailed balance · record conservation). Next:
   the continuum wedge `Δ_W^it` via `modFlow`/`Spectral` (the StandardSubspace/crossed-product frontier).
+- 2026-06-28 — **E5: the electron's genuine real-time modular flow `Δ^{it}·Δ^{−it}`** (added to
+  `ModularKMS.lean`, axiom-free, budget 0). Using `FiniteModularTheory.sigmaDiag` (the genuine real
+  one-parameter modular flow, `σ_t = Δ^{it}·x·Δ^{−it}`) at the FD occupations
+  `electronModeOcc β ω = (1−n, n)`: **`electron_sigmaDiag_comp`** — `σ_s(σ_t x) = σ_{s+t} x`, the
+  **one-parameter ℝ-action** (the real-time Tomita–Takesaki group property a single imaginary-time
+  conjugation cannot state); **`electron_sigmaDiag_fixes_numberOp`** — `σ_t(N) = N`, the record/charge is
+  conserved under the **real-time modular FLOW** (its phases rotate the off-diagonals; the diagonal
+  record is fixed). `electronModeOcc_ne_zero` (both occupations nonzero, `0<n<1`) supplies the group-law
+  hypothesis. So the electron now carries the genuine `Δ^{it}` modular flow at the finite level. `lake
+  build QIQTH.Fock.Dirac.ModularKMS` green (2944 jobs); standard-3; budget 0. Next: lift to the continuum
+  wedge `Δ_W^it` for the CAR net via `Spectral/SpectralTheorem.modFlow` (the StandardSubspace/crossed-
+  product frontier).

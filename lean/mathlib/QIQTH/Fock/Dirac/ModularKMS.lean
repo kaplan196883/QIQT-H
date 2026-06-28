@@ -136,4 +136,44 @@ electron's modular flow fixes the number operator — the QIQT-H statement that 
   unfold QIQTH.FiniteModularTheory.modAut
   rw [hcomm, mul_assoc, mul_invOf_self, mul_one]
 
+/-! ### The genuine real one-parameter modular flow `σ_t = Δ^{it} · Δ^{−it}` for the electron -/
+
+/-- The electron mode's occupation eigenvalues `(1 − n, n)` (a positive diagonal density),
+`n = fermiDirac β ω` — the data of the real one-parameter modular flow `sigmaDiag`. -/
+noncomputable def electronModeOcc (β ω : ℝ) : Fin 2 → ℝ :=
+  ![1 - fermiDirac β ω, fermiDirac β ω]
+
+/-- Both occupations are nonzero (`0 < n < 1`), so `Δ^{it}` is well-defined and the group law applies. -/
+theorem electronModeOcc_ne_zero (β ω : ℝ) (i : Fin 2) : (electronModeOcc β ω i : ℂ) ≠ 0 := by
+  fin_cases i
+  · have h : (0 : ℝ) < 1 - fermiDirac β ω := by linarith [fermiDirac_lt_one β ω]
+    simpa [electronModeOcc] using Complex.ofReal_ne_zero.mpr h.ne'
+  · simpa [electronModeOcc] using Complex.ofReal_ne_zero.mpr (fermiDirac_pos β ω).ne'
+
+/-- **The electron's genuine real-time modular flow `σ_t = Δ^{it}·Δ^{−it}` is an ℝ-action:**
+`σ_s(σ_t x) = σ_{s+t} x`.  This is the real-time Tomita–Takesaki modular flow of the electron mode
+(`FiniteModularTheory.sigmaDiag` at the Fermi–Dirac occupations) — the one-parameter-group property that
+a single (imaginary-time) conjugation cannot state. -/
+theorem electron_sigmaDiag_comp (β ω : ℝ) (s t : ℝ) (x : Matrix (Fin 2) (Fin 2) ℂ) :
+    QIQTH.FiniteModularTheory.sigmaDiag (electronModeOcc β ω) s
+        (QIQTH.FiniteModularTheory.sigmaDiag (electronModeOcc β ω) t x)
+      = QIQTH.FiniteModularTheory.sigmaDiag (electronModeOcc β ω) (s + t) x :=
+  QIQTH.FiniteModularTheory.sigmaDiag_comp (electronModeOcc β ω) (electronModeOcc_ne_zero β ω) s t x
+
+/-- **The modular flow fixes the number operator (record) at all modular times:** `σ_t(N) = N`.  The
+genuine real-time `Δ^{it}` flow leaves the record/charge invariant (its phases rotate the off-diagonals;
+the diagonal record is fixed) — record conservation under the modular FLOW, not just the KMS
+conjugation. -/
+theorem electron_sigmaDiag_fixes_numberOp (β ω : ℝ) (t : ℝ) :
+    QIQTH.FiniteModularTheory.sigmaDiag (electronModeOcc β ω) t numberOp = numberOp := by
+  have hcomm : QIQTH.FiniteModularTheory.diagPow (electronModeOcc β ω) t * numberOp
+      = numberOp * QIQTH.FiniteModularTheory.diagPow (electronModeOcc β ω) t := by
+    unfold QIQTH.FiniteModularTheory.diagPow numberOp
+    rw [Matrix.diagonal_mul_diagonal, Matrix.diagonal_mul_diagonal]
+    congr 1; funext i; ring
+  unfold QIQTH.FiniteModularTheory.sigmaDiag
+  rw [hcomm, mul_assoc,
+      QIQTH.FiniteModularTheory.diagPow_mul (electronModeOcc β ω) (electronModeOcc_ne_zero β ω) t (-t),
+      show t + -t = 0 from by ring, QIQTH.FiniteModularTheory.diagPow_zero, mul_one]
+
 end QIQTH.Fock.Dirac

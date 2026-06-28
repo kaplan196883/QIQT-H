@@ -6535,6 +6535,14 @@ namespace QIQTH.AxiomAudit
 -- is a modular invariant, since N and ρ are both diagonal hence commute). The QIQT-H statement that the modular
 -- (KMS) dynamics conserves the record/charge, for the electron. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.electron_modAut_numberOp
+-- ELECTRON_FIELD E5 (the electron's genuine real-time modular flow Δ^it·Δ^-it): electron_sigmaDiag_comp — the
+-- electron mode's real one-parameter modular flow σ_t = sigmaDiag(electronModeOcc) (FiniteModularTheory's genuine
+-- Δ^it conjugation at the FD occupations) is an ℝ-action, σ_s(σ_t x)=σ_{s+t}x — the one-parameter-group Tomita–
+-- Takesaki property a single imaginary-time conjugation cannot state. electron_sigmaDiag_fixes_numberOp: σ_t(N)=N,
+-- the record/charge is conserved under the real-time modular FLOW. The genuine continuum-style Δ^it for the electron
+-- at the finite level. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.electron_sigmaDiag_comp
+#print axioms QIQTH.Fock.Dirac.electron_sigmaDiag_fixes_numberOp
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy
