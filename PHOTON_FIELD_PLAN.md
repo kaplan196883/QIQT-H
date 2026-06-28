@@ -364,3 +364,17 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   + induced cohomology operator); the remaining P10 is the genuinely-blocked continuum frontier
   (Gupta–Bleuler/BRST indefinite-metric Krein space + positive-form descent + no-ghost theorem; Maxwell
   `F`-net CCR from test 2-forms; Gauss-law boundary algebra + Kabat contact determinant; interacting QED).
+- 2026-06-29 — **★ P6/P7: the gauge-invariant record GROUNDED in PhysLean's EM kinematics** (new module
+  `PhysLeanEMBridge.lean`, axiom-free standard-3, budget 0, 3290 jobs green). The **second PhysLean bridge**
+  (after the Dirac CAR/`WickAlgebra` one): rather than rely only on QIQT-H's hand-built `F=dA`
+  (`PhotonFieldStrength`/`PhotonGaugeRecords`), the photon's **gauge-invariant record** is now *defined as*
+  PhysLean's reviewed electromagnetic `fieldStrengthMatrix` `F_μν=∂_μA_ν−∂_νA_μ` (the positive/physical
+  content, never the indefinite `A_μ`). **`photonRecord_gauge_invariant`**: `F` is unchanged under the gauge
+  transform `A→A+∂χ` (PhysLean's `fieldStrengthMatrix_gaugeTransform`) — the §0/P6 "records = gauge-invariant"
+  decision now resting on PhysLean's `Electromagnetism.Kinematics`. **`photonRecord_antisymm`** (`F_μν=−F_νμ`)
+  + **`photonRecord_diag_zero`** (`F_μμ=0`): the record is a genuine antisymmetric 2-form (the physical
+  polarizations). **`photonRecord_gaugeTransform_eq`**: the whole-tensor function form `F[A+∂χ]=F[A]`.
+  (HONEST: this is the *kinematic* classical-field gauge invariance, grounded in PhysLean; the BRST/Krein
+  quantization + `F`-net CCR + Kabat remain deferred P10.) Wired into `QIQTH.lean`+`AxiomAudit.lean`;
+  standard-3; budget 0. Acts on the PhysLean-reuse gap: the photon's gauge layer now rests on PhysLean's
+  vetted EM, shrinking QIQT-H's own trusted surface.

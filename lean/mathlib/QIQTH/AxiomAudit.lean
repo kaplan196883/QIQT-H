@@ -6533,6 +6533,18 @@ namespace QIQTH.AxiomAudit
 -- states — the well-defined induced map, not just the preservation facts. Axiom-free (standard 3); free Maxwell.
 #print axioms QIQTH.Fock.Photon.BRST.closedRestrict
 #print axioms QIQTH.Fock.Photon.BRST.inducedCohomologyMap
+-- ★★★ PHOTON_FIELD_PLAN P6/P7 (the gauge-invariant record, GROUNDED in PhysLean's EM kinematics): the SECOND PhysLean
+-- bridge (after the CAR/WickAlgebra one) — the photon record is DEFINED as PhysLean's electromagnetic fieldStrengthMatrix
+-- F_μν=∂_μA_ν−∂_νA_μ (positive/physical content, not the indefinite A_μ). photonRecord_gauge_invariant: F is unchanged
+-- under the gauge transform A→A+∂χ (PhysLean fieldStrengthMatrix_gaugeTransform) — the §0/P6 "records = gauge-invariant"
+-- decision now resting on PhysLean's reviewed Electromagnetism, not only QIQT-H's hand-built F=dA. photonRecord_antisymm
+-- (F_μν=−F_νμ) + photonRecord_diag_zero (F_μμ=0): the record is a genuine antisymmetric 2-form (physical polarizations).
+-- photonRecord_gaugeTransform_eq: the whole-tensor function form F[A+∂χ]=F[A]. HONEST: kinematic (classical-field) gauge
+-- invariance; the BRST/Krein quantization + F-net CCR + Kabat are deferred P10. Axiom-free (standard 3); free Maxwell.
+#print axioms QIQTH.Fock.Photon.photonRecord_gauge_invariant
+#print axioms QIQTH.Fock.Photon.photonRecord_antisymm
+#print axioms QIQTH.Fock.Photon.photonRecord_diag_zero
+#print axioms QIQTH.Fock.Photon.photonRecord_gaugeTransform_eq
 -- ★★★ ELECTRON_FIELD_PLAN E6→E5 bridge (per-mode modular Hamiltonian): fermiDirac_logit — for a fermionic mode with
 -- occupation n = fermiDirac β ω, the modular energy is the logit log((1−n)/n) = βω. This is the single-mode form of
 -- the fermionic modular Hamiltonian K = log((1−C)/C) (QuasiFreeEntropy / quasi-free modular generator): the logit of

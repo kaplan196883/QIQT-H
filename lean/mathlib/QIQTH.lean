@@ -517,6 +517,7 @@ import QIQTH.Fock.Photon.PhotonFluxSectors
 import QIQTH.Fock.Photon.PhotonBRST
 import QIQTH.Fock.Photon.PhotonFieldStrength
 import QIQTH.Fock.Photon.PhotonHelicity
+import QIQTH.Fock.Photon.PhysLeanEMBridge
 
 import QIQTH.RefinementBorn
 import QIQTH.SBSBoolean
