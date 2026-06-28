@@ -190,3 +190,15 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   analogue of `fermiSecondQuantModFlow_isEven` (modular dynamics keeps records as records). Wired into
   `QIQTH.lean`+`AxiomAudit.lean`. Next: **P8** (the centered edge-mode entropy decomposition
   `S=H(p_q)+Σ p_q S_q` over boundary-flux sectors — reuse `GradedCapacity` relabelled), then **P9**.
+- 2026-06-29 — **P8 DONE** (`QIQTH/Fock/Photon/PhotonEdgeModes.lean`, axiom-free standard-3, budget 0,
+  3056 jobs green). The centered (edge-mode) entropy decomposition: the photon's regional algebra is a
+  centered flux-sector algebra `⊕_q 𝓑(𝓗_{R,q})` (Gauss-law ⟹ boundary-flux center), so
+  `S(ρ_R)=H(p_q)+Σ_q p_q S(ρ_{R,q})` — the edge-mode/Kabat contact-term structure, the SAME decomposition
+  as the electron's graded capacity with label = boundary flux (not parity). **`photon_edge_entropy_decomp`**
+  (= `gradedShannon_chain_rule` relabelled); **`photon_edge_term_nonneg`** (the boundary-flux Shannon term
+  `H(p_q)≥0` — at finite cutoff the edge modes add positively, vanishing iff the flux is definite = a
+  factor); **`photon_edge_capacity_le`** (`S≤log Σ_q dim 𝓗_{R,q}`, = `gradedShannon_le_log_total`). HONEST:
+  the continuum Kabat contact-term SIGN is a renormalization subtlety beyond this finite-cutoff positivity;
+  the Gauss-law boundary algebra + heat-kernel determinant are deferred P10. Wired into
+  `QIQTH.lean`+`AxiomAudit.lean`. Next: **P9** (abstract boundary-flux sectors — model the electric-center
+  flux labels `q`, the capacity contribution `H(p_q)`, the fixed-sector bulk entropy).

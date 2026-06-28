@@ -6737,5 +6737,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Photon.gaugeInvariantSubalgebra
 #print axioms QIQTH.Fock.Photon.isGaugeInvariant_of_trivial
 #print axioms QIQTH.Fock.Photon.isGaugeInvariant_map_of_comm
+-- ★★★ PHOTON_FIELD_PLAN P8 (the centered edge-mode entropy decomposition): the photon's regional algebra is a CENTERED
+-- flux-sector algebra ⊕_q 𝓑(𝓗_{R,q}) (Gauss-law constraint ⟹ boundary-flux center), so the entanglement entropy splits
+-- S(ρ_R)=H(p_q)+Σ_q p_q S(ρ_{R,q}) — the edge-mode/Kabat contact-term structure, the SAME decomposition as the electron's
+-- graded capacity with label = boundary flux (not parity). photon_edge_entropy_decomp (= gradedShannon_chain_rule
+-- relabelled). photon_edge_term_nonneg: the boundary-flux Shannon term H(p_q)≥0 — at finite cutoff the edge modes add
+-- POSITIVELY, vanishing iff the flux is definite (a factor, no center). photon_edge_capacity_le: S≤log(Σ_q dim 𝓗_{R,q})
+-- (= gradedShannon_le_log_total). HONEST: the continuum Kabat contact-term SIGN is a renormalization subtlety beyond this
+-- finite-cutoff positivity; the Gauss-law boundary algebra + heat-kernel determinant are deferred P10. Axiom-free (std 3).
+#print axioms QIQTH.Fock.Photon.photon_edge_entropy_decomp
+#print axioms QIQTH.Fock.Photon.photon_edge_term_nonneg
+#print axioms QIQTH.Fock.Photon.photon_edge_capacity_le
 
 end QIQTH.AxiomAudit
