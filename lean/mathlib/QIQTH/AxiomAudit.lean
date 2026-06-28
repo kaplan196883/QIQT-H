@@ -6734,6 +6734,14 @@ namespace QIQTH.AxiomAudit
 -- βω→0⁺, n→∞ and S→∞ — the entropy-level reason the photon needs a number cutoff (P2/P3), the sharp contrast with the
 -- electron's Pauli ceiling S≤log 2 (electron_mode_entropy_le_log2). Axiom-free (standard 3); free Maxwell.
 #print axioms QIQTH.Fock.Photon.photon_mode_entropy
+-- PHOTON_FIELD_PLAN P4 (the photon entanglement first law δS=δ⟨K⟩): boseEinstein_logit — log((1+n)/n)=βω at the BE
+-- occupation (the CCR analog of fermiDirac_logit). hasDerivAt_boseEntropy — d/dn S_BE = log((1+n)/n) (via
+-- S_BE=negMulLog n − negMulLog(1+n)). photon_firstLaw — HasDerivAt boseEntropy (βω) (boseEinstein β ω): at the
+-- Unruh occupation the bosonic mode entropy's derivative IS the modular energy βω (=2πω at the BW temperature), the
+-- bosonic mirror of electron_firstLaw — the first law δS=δ⟨K⟩ that drives the area law. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Photon.boseEinstein_logit
+#print axioms QIQTH.Fock.Photon.hasDerivAt_boseEntropy
+#print axioms QIQTH.Fock.Photon.photon_firstLaw
 -- ★★★ PHOTON_FIELD_PLAN P1/P5 (the photon continuum modular flow IS the bosonic Γ_s(Δ^it) — REUSE): the photon is
 -- bosonic, so its field-level wedge modular flow Δ_γ^it = Γ_s(Δ^it) is EXACTLY the existing bosonic secondQuantModFlow
 -- (vs the electron's fermionic Γ₋ = ExteriorAlgebra.map). Nothing new is built; this names the reuse in the photon

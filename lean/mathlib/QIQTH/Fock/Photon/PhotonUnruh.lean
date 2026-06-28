@@ -23,6 +23,7 @@ gauge/IR frontier (P10), not formalized here.
 Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`).  No `sorry`.  Free Maxwell only.
 -/
 import QIQTH.Fock.Dirac.FermiDirac
+import Mathlib.Analysis.SpecialFunctions.Log.NegMulLog
 
 namespace QIQTH.Fock.Photon
 
@@ -119,5 +120,53 @@ theorem photon_mode_entropy {β ω : ℝ} (h : 0 < β * ω) :
   have hlogZ : -Real.log (1 - Real.exp (-(β * ω))) = β * ω - Real.log (Real.exp (β * ω) - 1) := by
     rw [hfrac, Real.log_div hsubne (Real.exp_pos _).ne', Real.log_exp]; ring
   rw [boseEntropy, hlog1n, hlogn, hlogZ]; ring
+
+/-- **The bosonic logit at the Unruh occupation**: `log((1+n)/n) = βω` at `n = boseEinstein β ω`
+(`βω > 0`).  Since `(1+n)/n = e^{βω}` for the Bose–Einstein occupation, the bosonic "modular energy"
+recovered from the occupation is `βω` — the CCR analog of `fermiDirac_logit` (`log((1−n)/n) = βω`). -/
+theorem boseEinstein_logit {β ω : ℝ} (h : 0 < β * ω) :
+    Real.log ((1 + boseEinstein β ω) / boseEinstein β ω) = β * ω := by
+  have hexp1 : 1 < Real.exp (β * ω) := by
+    have h2 := Real.exp_lt_exp.mpr h; rwa [Real.exp_zero] at h2
+  have hsubne : Real.exp (β * ω) - 1 ≠ 0 := by
+    have : (0 : ℝ) < Real.exp (β * ω) - 1 := by linarith
+    exact ne_of_gt this
+  have hnpos : 0 < boseEinstein β ω := boseEinstein_pos h
+  have h1n : Real.exp (β * ω) * boseEinstein β ω = 1 + boseEinstein β ω := by
+    have hb1 : boseEinstein β ω * (Real.exp (β * ω) - 1) = 1 := by
+      unfold boseEinstein; exact one_div_mul_cancel hsubne
+    linear_combination hb1
+  have hfrac : (1 + boseEinstein β ω) / boseEinstein β ω = Real.exp (β * ω) := by
+    rw [← h1n, mul_div_assoc, div_self hnpos.ne', mul_one]
+  rw [hfrac, Real.log_exp]
+
+/-- **`d/dn S_BE = log((1+n)/n)`** — the bosonic mode entropy's derivative with respect to occupation.
+Writing `S_BE(n) = (1+n)log(1+n) − n log n = negMulLog(n) − negMulLog(1+n)`, the derivative is
+`log(1+n) − log n = log((1+n)/n)` (the bosonic modular energy). -/
+theorem hasDerivAt_boseEntropy {n : ℝ} (hn0 : 0 < n) :
+    HasDerivAt boseEntropy (Real.log ((1 + n) / n)) n := by
+  have hnne : n ≠ 0 := hn0.ne'
+  have h1nne : (1 : ℝ) + n ≠ 0 := by positivity
+  have hinner : HasDerivAt (fun m : ℝ => 1 + m) 1 n := (hasDerivAt_id n).const_add 1
+  have h2 : HasDerivAt (fun m => Real.negMulLog (1 + m)) (-Real.log (1 + n) - 1) n := by
+    have h := (Real.hasDerivAt_negMulLog h1nne).comp n hinner
+    simpa using h
+  have key : HasDerivAt (fun m => Real.negMulLog m - Real.negMulLog (1 + m))
+      (Real.log ((1 + n) / n)) n := by
+    have h := (Real.hasDerivAt_negMulLog hnne).sub h2
+    convert h using 1
+    rw [Real.log_div h1nne hnne]; ring
+  have hbe : boseEntropy = fun m => Real.negMulLog m - Real.negMulLog (1 + m) := by
+    funext m; simp only [boseEntropy, Real.negMulLog_def]; ring
+  rw [hbe]; exact key
+
+/-- **The photon entanglement first law `δS = δ⟨K⟩`** (`βω > 0`): at the Bose–Einstein/Unruh occupation the
+bosonic mode entropy's derivative IS the modular energy `βω` — `HasDerivAt boseEntropy (βω) (boseEinstein β ω)`.
+The bosonic mirror of `electron_firstLaw`: the first law `δS = δ⟨K⟩` (modular energy `βω`, `= 2πω` at the
+Bisognano–Wichmann temperature) that drives the area law, now realized for the photon mode. -/
+theorem photon_firstLaw {β ω : ℝ} (h : 0 < β * ω) :
+    HasDerivAt boseEntropy (β * ω) (boseEinstein β ω) := by
+  have hd := hasDerivAt_boseEntropy (boseEinstein_pos h)
+  rwa [boseEinstein_logit h] at hd
 
 end QIQTH.Fock.Photon

@@ -221,3 +221,12 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   `βω→0⁺`, `n→∞` and `S→∞` (the entropy-level reason the photon needs a number cutoff, P2/P3) — the sharp
   contrast with the electron's Pauli ceiling `S≤log 2` (`electron_mode_entropy_le_log2`). Wired into
   `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **P4 completion: the photon entanglement first law `δS=δ⟨K⟩`** (`PhotonUnruh.lean`,
+  axiom-free standard-3, budget 0, 2180 jobs green). **`boseEinstein_logit`** (`log((1+n)/n)=βω` at the BE
+  occupation — the CCR analog of `fermiDirac_logit`); **`hasDerivAt_boseEntropy`** (`d/dn S_BE =
+  log((1+n)/n)`, via `S_BE = negMulLog n − negMulLog(1+n)`); **`photon_firstLaw`**: `HasDerivAt boseEntropy
+  (βω) (boseEinstein β ω)` — at the Unruh occupation the bosonic mode entropy's derivative IS the modular
+  energy `βω` (`=2πω` at the BW temperature), the bosonic mirror of `electron_firstLaw`. Completes the
+  photon thermodynamic chain (occupation → mode entropy → first law `δS=δ⟨K⟩` that drives the area law).
+  (Added `import Mathlib.Analysis.SpecialFunctions.Log.NegMulLog`.) Wired into `AxiomAudit.lean`;
+  standard-3; budget 0.
