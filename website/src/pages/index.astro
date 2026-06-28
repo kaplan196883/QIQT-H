@@ -162,8 +162,10 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
       <strong>the capacity postulate alone does not give gravity</strong> — a microstate <em>count</em> cannot
       supply a <em>temperature</em>, so the thermal input is irreducibly modular (the open Type&nbsp;II frontier
       would derive it). Two further honesties: Jacobson needs the entropy-area <em>variation</em>
-      δS&nbsp;=&nbsp;η·δA (a saturation / local-equilibrium step, supplied by <code>area_floor_saturates</code> +
-      the first law), not merely the ≤ bound; and the output is the Einstein equation <em>up to</em> a
+      δS&nbsp;=&nbsp;η·δA, not merely the ≤ bound — and that variation is itself a <strong>derived theorem</strong>
+      (<code>differential_area_law</code>, from the capacity bound + point-saturation <code>area_floor_saturates</code>
+      + the first law; <em>not</em> a postulate), with only the localization fixing which state is the reference; and
+      the output is the Einstein equation <em>up to</em> a
       cosmological constant Λ, on a <em>pre-existing</em> Lorentzian causal geometry — emergence of the field
       <em>equations</em>, not of spacetime itself. The 1/4 is the separately-derived Sakharov ratio; the value of
       G (and Λ, higher-curvature terms) is carried.</p>
@@ -182,10 +184,15 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
     <div class="note">
       <strong>Honest scope — still a conditional formalization, not “GR from nothing.”</strong> The result remains
       conditional on a clearly-labelled <em>physics floor</em>, kept as explicit hypotheses,
-      <strong>never</strong> as axioms: the <strong>Clausius / area-saturation law</strong> (the Jacobson
-      thermodynamic postulate), the matter <strong>equation of motion</strong>, Raychaudhuri <strong>focusing</strong>,
-      and the per-horizon <strong>localization map</strong> — which free-field wedge mode realizes each null horizon
-      generator (a genuine dynamical-realization step, not mechanical cleanup). What changed this round: the modular /
+      <strong>never</strong> as axioms: the matter <strong>equation of motion</strong>, Raychaudhuri
+      <strong>focusing</strong>, and the per-horizon <strong>localization map</strong> — which free-field wedge mode
+      realizes each null horizon generator, and the identification of the horizon local-equilibrium reference with
+      the capacity-saturating (maximally-mixed) record (a genuine dynamical-realization step, not mechanical
+      cleanup). Note the entropy-area <em>variation</em> δS&nbsp;=&nbsp;η·δA is itself a <strong>derived
+      theorem</strong> (<code>differential_area_law</code>: from the capacity bound + that point-saturation + the
+      entanglement first law — <em>no</em> hypothesis asserts S=ηA or δS=ηδA), so there is <strong>no separate
+      “Clausius / area-saturation postulate”</strong> — only the localization that fixes which state is the
+      reference. What changed this round: the modular /
       wedge-KMS input that earlier versions had to <em>cite</em> from algebraic QFT is now <em>formalized</em> for the
       free field, so the labelled surface is reduced to exactly that genuine physics — every modular,
       Bisognano–Wichmann, boost-charge, stress-flux, conservation, and curvature step beneath it is machine-checked
