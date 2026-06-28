@@ -178,3 +178,15 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   fixing the vacuum, reused wholesale. Wired into `QIQTH.lean`+`AxiomAudit.lean`. Next: **P6** (the
   gauge-invariant observable predicate/subalgebra — records = `F_μν`/`T_μν`), then **P7** (the modular
   flow preserves the gauge-invariant records — the photon analogue of `fermiSecondQuantModFlow_isEven`).
+- 2026-06-28 — **P6+P7 DONE** (`QIQTH/Fock/Photon/PhotonGaugeRecords.lean`, axiom-free standard-3, budget
+  0, 1062 jobs green). The first **genuinely new** (non-reuse) photon structure — the gauge-invariant
+  observable algebra (records), the photon analogue of the electron's even subalgebra. **P6**:
+  `IsGaugeInvariant a := ∀ gauge transf gaugeAct Λ, gaugeAct Λ a = a` (the gauge-fixed points = records
+  `F_μν`/`T_μν`/energy, NOT raw `A_μ`); **`gaugeInvariantSubalgebra`** (the records form a `Subalgebra` —
+  closed under `+`,`*`,scalars); **`isGaugeInvariant_of_trivial`** (on the positive physical transverse
+  space the gauge action is trivial ⟹ every physical observable IS a record — why one builds on `F=dA`,
+  not indefinite `A_μ`). **P7**: **`isGaugeInvariant_map_of_comm`** — any algebra map commuting with the
+  gauge action (e.g. `photonModFlow`, gauge-blind on the physical space) preserves records — the photon
+  analogue of `fermiSecondQuantModFlow_isEven` (modular dynamics keeps records as records). Wired into
+  `QIQTH.lean`+`AxiomAudit.lean`. Next: **P8** (the centered edge-mode entropy decomposition
+  `S=H(p_q)+Σ p_q S_q` over boundary-flux sectors — reuse `GradedCapacity` relabelled), then **P9**.

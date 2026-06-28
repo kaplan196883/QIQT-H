@@ -6719,5 +6719,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Photon.photonModFlow_isometric
 #print axioms QIQTH.Fock.Photon.photonModFlowH_isometry
 #print axioms QIQTH.Fock.Photon.photonModFlowH_vacuum
+-- ★★★ PHOTON_FIELD_PLAN P6/P7 (the gauge-invariant observable algebra = the photon's records): per §0, records/capacity
+-- attach to the GAUGE-INVARIANT observables (F_μν, T_μν, energy/helicity), NOT the raw potential A_μ — the photon
+-- analogue of the electron's even (parity-fixed) subalgebra (EvenObservables). IsGaugeInvariant a := ∀ gauge transf
+-- gaugeAct Λ, gaugeAct Λ a = a (the gauge-fixed points). gaugeInvariantSubalgebra: the records form a Subalgebra
+-- (closed under +,*,scalars — isGaugeInvariant_{one,zero,add,mul,smul,algebraMap}). isGaugeInvariant_of_trivial: on the
+-- positive physical (transverse) space the gauge action is trivial so EVERY physical observable is a record (why one
+-- builds on F=dA, not indefinite A_μ). P7 isGaugeInvariant_map_of_comm: any algebra map commuting with the gauge action
+-- (e.g. the modular flow photonModFlow, gauge-blind on the physical space) preserves records — the photon analogue of
+-- fermiSecondQuantModFlow_isEven (modular dynamics keeps records as records). Axiom-free (standard 3). Free Maxwell.
+#print axioms QIQTH.Fock.Photon.isGaugeInvariant_mul
+#print axioms QIQTH.Fock.Photon.gaugeInvariantSubalgebra
+#print axioms QIQTH.Fock.Photon.isGaugeInvariant_of_trivial
+#print axioms QIQTH.Fock.Photon.isGaugeInvariant_map_of_comm
 
 end QIQTH.AxiomAudit

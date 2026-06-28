@@ -508,6 +508,7 @@ import QIQTH.Fock.Photon.PhotonFock
 import QIQTH.Fock.Photon.PhotonCapacity
 import QIQTH.Fock.Photon.PhotonUnruh
 import QIQTH.Fock.Photon.PhotonModularFlow
+import QIQTH.Fock.Photon.PhotonGaugeRecords
 
 import QIQTH.RefinementBorn
 import QIQTH.SBSBoolean
