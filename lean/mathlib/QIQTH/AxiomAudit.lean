@@ -6478,6 +6478,12 @@ namespace QIQTH.AxiomAudit
 -- (standard 3).
 #print axioms QIQTH.Fock.Dirac.diracSigma_mem_even
 #print axioms QIQTH.Fock.Dirac.diracGamma_mem_odd
+-- ELECTRON_FIELD E1 (the Dirac Lorentz/spin generator structure): diracSigma_antisymm — σ_ab=−σ_ba, the defining
+-- antisymmetry of the spin generators σ_μν (6 independent = 3 rotations + 3 boosts). diracSigma_ortho — for orthogonal
+-- directions σ_ab=2γ_aγ_b; in particular the boost generator σ_{0i}=2γ_0γ_i (time⟂space), the spinor representation of
+-- the Rindler boost whose flow is the electron's modular Δ^it (E1/E9). Axiom-free (standard 3); free Dirac.
+#print axioms QIQTH.Fock.Dirac.diracSigma_antisymm
+#print axioms QIQTH.Fock.Dirac.diracSigma_ortho
 -- ★★★ ELECTRON_FIELD_PLAN — PhysLean bridge (the CAR operator-layer dependency): QIQT-H now depends on PhysLean
 -- (HEPLean, pinned to d0ee4af whose Mathlib pin c5ea00351c28 @ v4.30.0 matches QIQT-H's — no Mathlib bump), which
 -- provides the fermionic CAR field-operator algebra (FieldStatistic, CreateAnnihilate, CrAnFieldOp, WickAlgebra,

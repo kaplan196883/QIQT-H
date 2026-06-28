@@ -90,4 +90,21 @@ theorem diracSigma_mem_even (a b : M) : diracSigma Q a b ∈ CliffordAlgebra.eve
   unfold diracSigma
   exact Submodule.sub_mem _ (diracGamma_mul_mem_even Q a b) (diracGamma_mul_mem_even Q b a)
 
+/-- **The Lorentz generator is antisymmetric in its indices**: `σ_ab = − σ_ba`.  The defining
+antisymmetry of the spin/Lorentz generators `σ_μν` (so `σ_μμ = 0`, and the independent generators are the
+6 = 3 rotations + 3 boosts of `σ_{μν}`, `μ < ν`).  Immediate from `σ_ab = [γ_a, γ_b]`. -/
+theorem diracSigma_antisymm (a b : M) : diracSigma Q a b = -(diracSigma Q b a) := by
+  unfold diracSigma; abel
+
+/-- **For orthogonal directions the Lorentz generator is `σ_ab = 2 γ_a γ_b`.**  When `η(a,b) = 0` the
+gammas anticommute (`diracGamma_swap_ortho`), so the commutator `σ_ab = γ_a γ_b − γ_b γ_a` collapses to
+twice the product.  In particular the boost generator `σ_{0i} = 2 γ_0 γ_i` (time ⟂ space) — the spinor
+representation of the Rindler boost whose flow is the electron's modular `Δ^{it}` (E1/E9). -/
+theorem diracSigma_ortho {a b : M} (h : Q.IsOrtho a b) :
+    diracSigma Q a b = diracGamma Q a * diracGamma Q b + diracGamma Q a * diracGamma Q b := by
+  unfold diracSigma
+  have hh : diracGamma Q b * diracGamma Q a = -(diracGamma Q a * diracGamma Q b) := by
+    rw [diracGamma_swap_ortho Q h, neg_neg]
+  rw [hh, sub_neg_eq_add]
+
 end QIQTH.Fock.Dirac

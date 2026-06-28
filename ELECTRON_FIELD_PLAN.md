@@ -658,3 +658,12 @@ EXTERNAL libraries; QIQT-H built its own.
   generator triad: `K` self-adjoint + ladder commutators (modular frequencies `∓βω`) + expectation
   `⟨K⟩=βω·n`. (Added `import Mathlib.LinearAlgebra.Matrix.Hermitian`.) Wired into `AxiomAudit.lean`;
   standard-3; budget 0.
+- 2026-06-29 — **E1: the Dirac Lorentz/spin generator structure** (added to `DiracGamma.lean`, axiom-free,
+  budget 0, 1774 jobs green). **`diracSigma_antisymm`**: `σ_ab = −σ_ba` — the defining antisymmetry of the
+  spin generators `σ_μν` (6 independent = 3 rotations + 3 boosts). **`diracSigma_ortho`**: for orthogonal
+  directions `σ_ab = 2γ_aγ_b`; in particular the boost generator `σ_{0i} = 2γ_0γ_i` (time⟂space) — the
+  spinor representation of the Rindler boost whose flow is the electron's modular `Δ^{it}` (ties E1's
+  Clifford/spin core to the E6/E9 boost-modular structure). Wired into `AxiomAudit.lean`; standard-3;
+  budget 0. (HONEST: the Dirac one-particle space + the causal kernel `S_D=(iγ·∂+m)Δ_m` microcausality —
+  inheriting from the proved scalar Pauli–Jordan spacelike vanishing `pauliJordan_spacelike_tendsto_zero`
+  via "a local differential operator preserves spacelike support" — remain the analytic E1 frontier.)
