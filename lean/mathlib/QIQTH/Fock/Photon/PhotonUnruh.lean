@@ -84,6 +84,19 @@ temperature `β = 2π`. -/
 theorem rindlerOccupationBose_pos {ω : ℝ} (h : 0 < ω) : 0 < rindlerOccupationBose ω :=
   boseEinstein_pos (by positivity)
 
+/-- **The bosonic Gibbs form of the occupation** `n = e^{−βω}/(1 − e^{−βω})` (for `e^{βω} ≠ 1`).  The
+Bose–Einstein occupation is the **mean of the geometric (Bose) distribution** `p_k = (1−x)x^k` over the
+number states `k = 0,1,2,…`, with Boltzmann factor `x = e^{−βω}` and single-mode partition function
+`Z = 1/(1−x)` — i.e. `n = x/(1−x) = x·Z`.  (Contrast the fermionic 2-state `n = x/(1+x)`: the bosonic
+`1−x` denominator vs the fermionic `1+x` is the geometric-vs-two-level spin–statistics signature.) -/
+theorem boseEinstein_gibbs_form {β ω : ℝ} (h : Real.exp (β * ω) ≠ 1) :
+    boseEinstein β ω = Real.exp (-(β * ω)) / (1 - Real.exp (-(β * ω))) := by
+  have hfrac : 1 - Real.exp (-(β * ω)) = (Real.exp (β * ω) - 1) / Real.exp (β * ω) := by
+    rw [Real.exp_neg, eq_div_iff (Real.exp_pos _).ne', sub_mul, one_mul,
+        inv_mul_cancel₀ (Real.exp_pos _).ne']
+  unfold boseEinstein
+  rw [hfrac, Real.exp_neg, div_div_eq_mul_div, inv_mul_cancel₀ (Real.exp_pos _).ne']
+
 /-- **The bosonic enhancement factor `1 + n = e^{βω}·n`** (for `e^{βω} ≠ 1`).  The `(n+1)` of bosonic
 emission (spontaneous `1` + stimulated `n`) equals `e^{βω}` times the occupation — the multiplicative
 form of the CCR/KMS balance `n = e^{−βω}(1+n)` (`boseEinstein_kms_balance`), and the source of the

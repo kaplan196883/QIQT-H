@@ -287,3 +287,10 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   depletion** `1 − n = e^{βω}·n` (`fermiDirac_one_sub`): the `+n` (stimulated) vs `−n` (Pauli) is the
   spin–statistics signature, now stated symmetrically on both sides. Wired into `AxiomAudit.lean`;
   standard-3; budget 0.
+- 2026-06-29 — **P4: the bosonic Gibbs form `n = e^{−βω}/(1−e^{−βω})`** (`boseEinstein_gibbs_form`, in
+  `PhotonUnruh.lean`, axiom-free standard-3, budget 0, 2180 jobs green). The Bose occupation is the **mean
+  of the geometric (Bose) distribution** `p_k=(1−x)x^k` over number states `k=0,1,2,…`, Boltzmann factor
+  `x=e^{−βω}`, single-mode partition function `Z=1/(1−x)`, `n=x·Z`. The bosonic `1−x` denominator vs the
+  fermionic `1+x` (`n=x/(1+x)`) is the geometric-vs-two-level spin–statistics signature — the bosonic
+  partition picture mirroring the electron's (fermionic 2-state). Wired into `AxiomAudit.lean`; standard-3;
+  budget 0.
