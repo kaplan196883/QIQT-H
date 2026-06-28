@@ -29,6 +29,7 @@ fermionic `J` is `QIQTH/Fock/Dirac/KleinTwist*`.  Free Dirac only.
 import QIQTH.FiniteModularTheory
 import QIQTH.Fock.Dirac.FermiDirac
 import QIQTH.Fock.Dirac.QuasiFreeEntropy
+import QIQTH.RecordContract
 import Mathlib.LinearAlgebra.Matrix.Hermitian
 
 namespace QIQTH.Fock.Dirac
@@ -365,6 +366,28 @@ theorem electron_mode_entropy (β ω : ℝ) :
         Real.log_div (by positivity) (Real.exp_pos _).ne', Real.log_exp]
   simp only [binaryEntropy, Real.negMulLog_def, hlogn, hlog1mn, hlogZ]
   ring
+
+/-- **The Pauli per-mode capacity ceiling `S ≤ log 2`.**  The electron mode's thermal entropy is at most
+`log 2` — a fermionic mode is a *qubit* (occupied or empty, Pauli exclusion), so its entropy is bounded by
+the log of its `2`-dimensional state space.  The sharp **contrast with the photon**: the bosonic mode
+entropy `(1+n)log(1+n) − n log n` is *unbounded* (no cutoff, `PHOTON_FIELD_PLAN` P2/P4), whereas the
+electron's per-mode entropy has the hard ceiling `log 2` — the entropy-level shadow of the CAR finite
+capacity `dim ⋀h = 2^n`.  (Gibbs/Jensen on the 2-outcome occupation distribution `{n, 1−n}`.) -/
+theorem electron_mode_entropy_le_log2 (β ω : ℝ) :
+    binaryEntropy (fermiDirac β ω) ≤ Real.log 2 := by
+  set c := fermiDirac β ω with hc
+  have hp0 : ∀ i : Fin 2, 0 ≤ ![c, 1 - c] i := by
+    intro i; fin_cases i
+    · show 0 ≤ c; rw [hc]; exact (fermiDirac_pos β ω).le
+    · show 0 ≤ 1 - c; rw [hc]; linarith [fermiDirac_lt_one β ω]
+  have h1 : ∑ i : Fin 2, ![c, 1 - c] i = 1 := by
+    rw [Fin.sum_univ_two]; show c + (1 - c) = 1; ring
+  have hkey := QIQTH.RecordContract.shannon_le_log_card (![c, 1 - c]) hp0 h1
+  rw [QIQTH.RecordContract.shannon_eq_sum_negMulLog] at hkey
+  simp only [Fin.sum_univ_two, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+    Fintype.card_fin, Nat.cast_ofNat] at hkey
+  rw [binaryEntropy]
+  exact hkey
 
 /-- **The entropy derivative is the modular energy (logit).**  `d/dn binaryEntropy(n) = log((1−n)/n)`
 for `n ∈ (0,1)`.  At the KMS occupation `n = fermiDirac β ω` this equals `βω` (`fermiDirac_logit`) — the

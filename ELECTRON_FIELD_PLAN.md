@@ -675,3 +675,11 @@ EXTERNAL libraries; QIQT-H built its own.
   (`parity_one_particle` / `isEven_ι_mul_ι`), the Clifford (`diracGamma_mem_odd` / `diracGamma_mul_mem_even`),
   and PhysLean's `WickAlgebra` — the §0 "records = even bilinears, one-particle = odd" decision realized
   uniformly. Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **E6/capacity: the Pauli per-mode entropy ceiling `S ≤ log 2`** (added to `ModularKMS.lean`,
+  axiom-free, budget 0, 3061 jobs green). **`electron_mode_entropy_le_log2`**: the electron mode's thermal
+  entropy `binaryEntropy(fermiDirac β ω) ≤ log 2` — a fermionic mode is a *qubit* (occupied or empty, Pauli
+  exclusion), so its entropy is bounded by `log 2` (Gibbs/Jensen `shannon_le_log_card` on the 2-outcome
+  occupation `{n, 1−n}`). The sharp **contrast with the photon**: the bosonic mode entropy is *unbounded*
+  (no cutoff, `PHOTON_FIELD_PLAN` P2/P4), whereas the electron's per-mode entropy has the hard ceiling
+  `log 2` — the entropy-level shadow of the CAR finite capacity `dim ⋀h = 2^n`. (Added
+  `import QIQTH.RecordContract`.) Wired into `AxiomAudit.lean`; standard-3; budget 0.

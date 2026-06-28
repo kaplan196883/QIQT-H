@@ -6631,6 +6631,12 @@ namespace QIQTH.AxiomAudit
 -- is a UNITARY one-parameter group (the Stone/Tomita–Takesaki form). Completes the single-mode E9 generator: K
 -- self-adjoint + ladder commutators (modular frequencies ∓βω) + expectation ⟨K⟩=βω·n. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.electron_modHamiltonian_isHermitian
+-- ELECTRON_FIELD (the Pauli per-mode capacity ceiling): electron_mode_entropy_le_log2 — the electron mode's thermal
+-- entropy ≤ log 2 (a fermionic mode is a qubit, Pauli exclusion: occupied or empty), via Gibbs/Jensen
+-- (shannon_le_log_card) on the 2-outcome occupation distribution {n,1−n}. The sharp contrast with the photon: the bosonic
+-- mode entropy is UNBOUNDED (no cutoff), whereas the electron's per-mode entropy has the hard ceiling log 2 — the
+-- entropy-level shadow of the CAR finite capacity dim ⋀h=2^n. Axiom-free (standard 3); free Dirac.
+#print axioms QIQTH.Fock.Dirac.electron_mode_entropy_le_log2
 -- ★★★ ELECTRON_FIELD E5 (CONTINUUM CAR-net modular flow Γ₋(Δ^it)): the continuum wedge modular flow for the electron
 -- CAR net is the FERMIONIC second quantization of the one-particle continuum Δ^it = modUnitary S t
 -- (StandardSubspaceModularFlow, already built). fermiSecondQuantModFlow S t = ExteriorAlgebra.map (modUnitary S t)
