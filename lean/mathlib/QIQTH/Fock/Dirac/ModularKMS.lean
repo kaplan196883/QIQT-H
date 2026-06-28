@@ -228,4 +228,31 @@ theorem electron_sigmaDiag_lowering (β ω t : ℝ) :
       Matrix.smul_apply, smul_eq_mul] <;>
     ring
 
+/-! ### The number operator is the modular generator: the canonical ladder commutators
+
+The eigenoperator phases `e^{∓it·βω}` (`electron_sigmaDiag_raising`/`_lowering`) are `βω × (∓1)`, the
+`∓1` being the number eigenvalue raised/lowered by `a†`/`a`.  This is because the modular Hamiltonian is
+affine in the number operator, `K = βω·N + c·I`, so `[K, a†] = βω·a†` — the canonical commutator
+`[N, a†] = a†` scaled by the modular energy `βω`.  These are the matrix facts behind that. -/
+
+/-- **`[N, a†] = a†`** — the number operator raises `a†` by one quantum (`a†` is the raising operator).
+Combined with `K = βω·N + c`, this gives `[K, a†] = βω·a†`, the source of the modular phase `e^{−it·βω}`
+on `a†`. -/
+theorem electron_number_raising_comm :
+    numberOp * raisingOp - raisingOp * numberOp = raisingOp := by
+  unfold numberOp raisingOp
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [Matrix.sub_apply, Matrix.mul_apply, Fin.sum_univ_two, Matrix.diagonal_apply, Matrix.single]
+
+/-- **`[N, a] = −a`** — the number operator lowers `a` by one quantum (`a` is the lowering operator).
+With `K = βω·N + c`, `[K, a] = −βω·a`, the source of the modular phase `e^{+it·βω}` on `a`. -/
+theorem electron_number_lowering_comm :
+    numberOp * loweringOp - loweringOp * numberOp = -loweringOp := by
+  unfold numberOp loweringOp
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [Matrix.sub_apply, Matrix.mul_apply, Fin.sum_univ_two, Matrix.diagonal_apply, Matrix.single,
+      Matrix.neg_apply]
+
 end QIQTH.Fock.Dirac

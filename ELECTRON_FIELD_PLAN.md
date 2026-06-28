@@ -532,3 +532,13 @@ EXTERNAL libraries; QIQT-H built its own.
   (`electron_sigmaDiag_fixes_numberOp`) — the single-mode `Δ^{it} = U(boost)` Bohr-frequency rotation.
   `lake build QIQTH.Fock.Dirac.ModularKMS` green (2944 jobs); standard-3; budget 0. The finite/single-mode
   modular tier is now spectrally complete; the remaining E5 is the continuum CAR-net lift via `modFlow`.
+- 2026-06-28 — **E5/E9: the number operator is the modular generator (canonical ladder commutators)**
+  (added to `ModularKMS.lean`, axiom-free, budget 0). **`electron_number_raising_comm`** (`[N, a†] = a†`)
+  and **`electron_number_lowering_comm`** (`[N, a] = −a`): the number operator raises/lowers `a†`/`a` by
+  one quantum. Since the modular Hamiltonian is affine in `N` (`K = βω·N + c·I`), these give
+  `[K, a†] = βω·a†` and `[K, a] = −βω·a` — the source of the modular phases `e^{∓it·βω}`
+  (`electron_sigmaDiag_raising`/`_lowering`). So the **modular Hamiltonian ∝ the number operator (the
+  record)**, with the modular energy `βω = 2π × the boost energy` at `β = 2π` — the E9 `2π K_boost`
+  identification at the mode level. `lake build QIQTH.Fock.Dirac.ModularKMS` green (2944 jobs); standard-3;
+  budget 0. The single-mode modular/boost dictionary is now complete (state · KMS · flow · spectrum ·
+  generator). Remaining E5: the continuum CAR-net lift via `modFlow` (the operator-algebra frontier).
