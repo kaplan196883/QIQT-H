@@ -5082,6 +5082,16 @@ namespace QIQTH.AxiomAudit
 -- are each self-adjoint and act on different L²(ℝ;H) tensor factors (so they commute), hence K̃ is self-adjoint. The
 -- sum-of-commuting-self-adjoint-operators theorem (which Mathlib lacks), in unitary-group form. Axiom-free (standard 3).
 #print axioms QIQTH.Spectral.stoneGen_prod_isSelfAdjoint
+-- ★★★ P4 WALL — INCREMENT 1c INSTANTIATION (the fiberwise bulk modular flow Δ̂^{it} on L²(ℝ;H), toward the dressed K̃):
+-- fiberModFlow S t := (modUnitary S t).compLpL = postcompose each fiber with the one-particle modular flow Δ^{it}; its
+-- generator is K_bulk. Structural C₀-group bricks: fiberModFlow_zero (Δ̂^{i0}=1), fiberModFlow_add (group law
+-- Δ̂^{i(s+t)}=Δ̂^{is}∘Δ̂^{it}), fiberModFlow_norm_le (contraction ‖Δ̂^{it}ξ‖≤‖ξ‖, from ‖Δ^{it}‖≤1). ★ fiberModFlow_comm_
+-- clockTransl: Δ̂^{it} COMMUTES with the clock group λ_s (fiberwise postcomposition vs measure-preserving base-shift act
+-- on different slots) — the STRONG-COMMUTATIVITY hypothesis stoneGen_prod_isSelfAdjoint needs (K_bulk and A_edge commute).
+-- Remaining to assemble full Increment 1c (labelled): Δ̂'s unitarity (L²(ℝ;H) inner product) + strong continuity (DCT on
+-- Lp), then stoneGen_prod_isSelfAdjoint ⟹ K̃=K_bulk+A_edge self-adjoint. Axiom-free (standard 3).
+#print axioms QIQTH.StandardSubspaceModular.fiberModFlow_add
+#print axioms QIQTH.StandardSubspaceModular.fiberModFlow_comm_clockTransl
 #print axioms QIQTH.Spectral.Multiplication.translationCLM_norm_le
 #print axioms QIQTH.Spectral.Multiplication.translationCLM_continuous
 #print axioms QIQTH.Spectral.Multiplication.instNontrivialLp2

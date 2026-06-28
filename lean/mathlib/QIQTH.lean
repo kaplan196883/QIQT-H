@@ -382,6 +382,7 @@ import QIQTH.CrossedProductCovariance
 -- The Wall, Phase 4.1: strong continuity of the clock group λ_t — t ↦ λ_t ξ continuous in L²(ℝ;H), completing
 -- "λ_t is a strongly-continuous one-parameter unitary group" (Stone's theorem hypothesis; X = the frontier).
 import QIQTH.CrossedProductGenerator
+import QIQTH.CrossedProductModularFlow
 -- MODULAR RELATIVE ENTROPY (Phase B, one-particle / standard-subspace continuum object): the
 -- Casini–Grillo–Pontello relative entropy of a coherent state vs vacuum, as the SCALAR spectral
 -- integral S(ξ)=−∫log((2−r)/r)dμ^R_ξ over the bounded RvD operator R=P+Q (no unbounded log Δ).

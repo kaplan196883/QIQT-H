@@ -732,3 +732,17 @@ strong continuity = the diagonal `t↦A_t(B_t y)`, controlled by `A_t` contracti
 lacks.**  Remaining for the full 1c: instantiate this on the specific lifted bulk-modular + clock flows (wiring the
 `A_edge`/`K_bulk` C₀ groups into `stoneGen_prod_isSelfAdjoint`).  Wired into `QIQTH.lean`+`AxiomAudit.lean`;
 standard-3; budget 0.
+
+### Increment 1c INSTANTIATION — the fiberwise bulk modular flow `Δ̂^{it}` on `L²(ℝ;H)` ✅ (structural bricks; 2026-06-29)
+**`QIQTH/CrossedProductModularFlow.lean` — `fiberModFlow`.**  The second summand's group: `Δ̂^{it} :=
+(modUnitary S t).compLpL 2 volume` — postcompose each `L²(ℝ;H)` fiber with the one-particle modular flow
+`Δ^{it}` (Mathlib `compLpL`); its Stone generator is `K_bulk`.  Delivered axiom-free: **`fiberModFlow_zero`**
+(`Δ̂^{i0}=1`), **`fiberModFlow_add`** (group law `Δ̂^{i(s+t)}=Δ̂^{is}∘Δ̂^{it}`, from `modUnitary_add` + `compLpL`
+functoriality via `coeFn_compLpL`), **`fiberModFlow_norm_le`** (contraction `‖Δ̂^{it}ξ‖≤‖ξ‖`, from `‖Δ^{it}‖≤1`),
+and the key **`fiberModFlow_comm_clockTransl`** (`Δ̂^{it} ∘ λ_s = λ_s ∘ Δ̂^{it}` — fiberwise postcomposition
+commutes with the measure-preserving base-shift; the `ae_eq_comp`-through-shift proof, mirroring
+`clockTransl_add`).  **So `K_bulk` and `A_edge` strongly commute** — the hypothesis `stoneGen_prod_isSelfAdjoint`
+consumes.  **Remaining to assemble the full dressed `K̃` self-adjoint:** the two analytic C₀-group hyps of `Δ̂` —
+inner-product preservation (`L²(ℝ;H)` unitarity, via the fiber integral) + strong continuity (DCT on `Lp`) — then
+`stoneGen_prod_isSelfAdjoint` ⟹ `stoneGen (Δ̂^{i·} ∘ λ_·) = K̃ = K_bulk + A_edge` self-adjoint.  Wired into
+`QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.
