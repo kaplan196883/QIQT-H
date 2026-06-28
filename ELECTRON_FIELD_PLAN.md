@@ -834,3 +834,17 @@ EXTERNAL libraries; QIQT-H built its own.
   mix even/odd, so records stay even). This lifts the single-mode Klein twist to a genuine full-Fock operator.
   (HONEST: unitarity `Z*Z=1` + the operator-algebra twisted-duality *theorem* need the Fock inner-product /
   adjoint — the deferred GNS frontier.) Wired into `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **★ E6⇒E3: the SPECTRAL (operator) entropy of the electron KMS state** (added to
+  `ModularKMS.lean`, axiom-free, budget 0, 3200 jobs green). The existing modular-thermodynamics
+  identities (`electron_mode_entropy`, `electron_unruh_entropy`) work with the *scalar* `binaryEntropy`;
+  these bridge it to the project's genuine **spectral `vonNeumannEntropy`** — the `S=∑negMulLog λᵢ` operator
+  entropy the capacity bound (`vonNeumannEntropy_le_log_card`) is stated in. **`electronModeThermalState_is
+  Density`**: the literal finite Tomita–Takesaki KMS density `ρ=diag(1−n, n)` is a bona-fide density matrix
+  (PSD via `posSemidef_diagonal_iff` + `0<n<1`, unit trace). **`electron_thermalState_vonNeumannEntropy`**:
+  `S_vN(ρ)=H₂(n)` — the operator von Neumann entropy of the KMS density **equals** the binary entropy of its
+  Fermi–Dirac occupation (via `SpectralSum.vonNeumannEntropy_diagonal` on eigenvalues `(1−n, n)`;
+  proof-irrelevance transport along `electronModeThermalState_eq_diagonal`). **`electron_thermalState_von
+  NeumannEntropy_le_log_two`**: `S_vN(ρ)≤log 2 = log dim(one qubit)` — the one-mode CAR capacity bound for the
+  GENUINE spectral entropy of the modular/KMS state. Closes **E6 (KMS state) ⇒ E3 (capacity)** at the
+  operator-entropy level (not just the scalar function). Wired into `QIQTH.lean`+`AxiomAudit.lean`;
+  standard-3; budget 0.

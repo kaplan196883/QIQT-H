@@ -29,6 +29,7 @@ fermionic `J` is `QIQTH/Fock/Dirac/KleinTwist*`.  Free Dirac only.
 import QIQTH.FiniteModularTheory
 import QIQTH.Fock.Dirac.FermiDirac
 import QIQTH.Fock.Dirac.QuasiFreeEntropy
+import QIQTH.SpectralSum
 import QIQTH.RecordContract
 import Mathlib.LinearAlgebra.Matrix.Hermitian
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
@@ -596,5 +597,75 @@ area law). -/
 theorem electron_unruh_firstLaw (ω : ℝ) :
     HasDerivAt binaryEntropy (2 * Real.pi * ω) (rindlerOccupationFermi ω) :=
   electron_firstLaw (2 * Real.pi) ω
+
+/-! ### The spectral (operator) entropy of the electron KMS state
+
+The thermodynamic identities above (`electron_mode_entropy`, `electron_unruh_entropy`) work with the
+*scalar* `binaryEntropy` function.  The following bridges that to the project's genuine **spectral
+`vonNeumannEntropy`** — the `S(ρ) = ∑ negMulLog(λᵢ)` operator entropy that the capacity bound
+(`vonNeumannEntropy_le_log_card`) is stated in.  This closes the loop **E6 ⇒ E3**: the von Neumann
+entropy of the literal finite Tomita–Takesaki KMS *density matrix* `ρ = diag(1−n, n)` IS the binary
+entropy of its Fermi–Dirac occupation, and is bounded by `log 2 = log dim(one qubit)`. -/
+
+/-- The electron thermal/KMS state written in canonical real-diagonal form (its eigenvalues `(1−n, n)` =
+`electronModeOcc`), the form the spectral entropy lemma `SpectralSum.vonNeumannEntropy_diagonal` consumes. -/
+theorem electronModeThermalState_eq_diagonal (β ω : ℝ) :
+    electronModeThermalState β ω
+      = Matrix.diagonal (fun i => ((electronModeOcc β ω i : ℝ) : ℂ)) := by
+  unfold electronModeThermalState electronModeOcc
+  congr 1
+  funext i
+  fin_cases i <;> simp <;> push_cast <;> ring
+
+open QIQTH.QuantumEntropy in
+open scoped ComplexOrder in
+/-- **The electron thermal/KMS state is a genuine density matrix** (PSD + unit trace), so the finite
+Tomita–Takesaki state `ω(·) = tr(ρ ·)` is a bona-fide normal state with a spectral entropy. -/
+theorem electronModeThermalState_isDensity (β ω : ℝ) :
+    IsDensity (electronModeThermalState β ω) where
+  posSemidef := by
+    rw [electronModeThermalState_eq_diagonal]
+    refine Matrix.posSemidef_diagonal_iff.mpr (fun i => RCLike.ofReal_nonneg.mpr ?_)
+    fin_cases i
+    · show (0 : ℝ) ≤ 1 - fermiDirac β ω
+      linarith [fermiDirac_lt_one β ω]
+    · show (0 : ℝ) ≤ fermiDirac β ω
+      linarith [fermiDirac_pos β ω]
+  trace_one := electronModeThermalState_trace β ω
+
+open QIQTH.QuantumEntropy in
+/-- Spectral entropy is a function of the matrix alone (`IsDensity` is a `Prop`, so definitional proof
+irrelevance applies): equal density matrices have equal von Neumann entropy. -/
+private theorem vonNeumannEntropy_congr {ρ σ : Matrix (Fin 2) (Fin 2) ℂ}
+    (hρ : IsDensity ρ) (hσ : IsDensity σ) (e : ρ = σ) :
+    vonNeumannEntropy hρ = vonNeumannEntropy hσ := by
+  subst e; rfl
+
+open QIQTH.QuantumEntropy in
+/-- **★ The von Neumann entropy of the electron KMS state equals the binary entropy of its occupation:**
+`S(ρ) = H₂(n)` with `ρ = diag(1−n, n)`, `n = fermiDirac β ω`.  The *operator/spectral* entropy
+(`∑ negMulLog λᵢ`, the object the capacity bound uses) of the literal finite Tomita–Takesaki density
+matrix is exactly the binary entropy — so the scalar thermodynamics above is the genuine spectral
+entropy of the KMS state.  (Via `SpectralSum.vonNeumannEntropy_diagonal` on the eigenvalues `(1−n, n)`.) -/
+theorem electron_thermalState_vonNeumannEntropy (β ω : ℝ) :
+    vonNeumannEntropy (electronModeThermalState_isDensity β ω)
+      = binaryEntropy (fermiDirac β ω) := by
+  have hd : IsDensity (Matrix.diagonal (fun i => ((electronModeOcc β ω i : ℝ) : ℂ))) :=
+    electronModeThermalState_eq_diagonal β ω ▸ electronModeThermalState_isDensity β ω
+  rw [vonNeumannEntropy_congr (electronModeThermalState_isDensity β ω) hd
+        (electronModeThermalState_eq_diagonal β ω),
+      SpectralSum.vonNeumannEntropy_diagonal (electronModeOcc β ω) hd]
+  simp only [electronModeOcc, Fin.sum_univ_two, Matrix.cons_val_zero, Matrix.cons_val_one,
+    Matrix.head_cons, binaryEntropy]
+  ring
+
+open QIQTH.QuantumEntropy in
+/-- **The electron KMS-state entropy is bounded by `log 2`** = `log dim` of a single qubit mode — the
+one-mode form of the CAR capacity bound `S_vN ≤ log dim(⋀h_R)`, now for the genuine spectral entropy of
+the modular/KMS state.  (`H₂(n) ≤ log 2`, max at `n = 1/2`.) -/
+theorem electron_thermalState_vonNeumannEntropy_le_log_two (β ω : ℝ) :
+    vonNeumannEntropy (electronModeThermalState_isDensity β ω) ≤ Real.log 2 := by
+  rw [electron_thermalState_vonNeumannEntropy]
+  exact binaryEntropy_le_log_two (fermiDirac_pos β ω).le (fermiDirac_lt_one β ω).le
 
 end QIQTH.Fock.Dirac

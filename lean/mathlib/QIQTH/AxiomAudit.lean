@@ -6791,6 +6791,18 @@ namespace QIQTH.AxiomAudit
 -- (the total/sum of modular energy levels). Axiom-free (standard 3); free Dirac.
 #print axioms QIQTH.Fock.Dirac.electron_modHamiltonian_diag
 #print axioms QIQTH.Fock.Dirac.electron_modHamiltonian_trace
+-- ★★★ ELECTRON_FIELD E6⇒E3 (the SPECTRAL/operator entropy of the KMS state): the thermodynamic identities above use
+-- the SCALAR binaryEntropy; these bridge it to the project's genuine spectral vonNeumannEntropy (S=∑negMulLog λᵢ, the
+-- object the capacity bound vonNeumannEntropy_le_log_card is stated in). electronModeThermalState_isDensity: the literal
+-- finite Tomita–Takesaki KMS density ρ=diag(1−n,n) is a bona-fide density matrix (PSD via posSemidef_diagonal_iff +
+-- 0<n<1, unit trace). electron_thermalState_vonNeumannEntropy: S_vN(ρ)=H₂(n) — the OPERATOR von Neumann entropy of the
+-- KMS density EQUALS the binary entropy of its FD occupation (via SpectralSum.vonNeumannEntropy_diagonal on eigenvalues
+-- (1−n,n); proof-irrelevance transport along electronModeThermalState_eq_diagonal). electron_thermalState_vonNeumannEntropy
+-- _le_log_two: S_vN(ρ)≤log 2 = log dim(one qubit) — the one-mode CAR capacity bound for the GENUINE spectral entropy of
+-- the modular/KMS state. Closes E6 (KMS state) ⇒ E3 (capacity) at the operator-entropy level. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.electronModeThermalState_isDensity
+#print axioms QIQTH.Fock.Dirac.electron_thermalState_vonNeumannEntropy
+#print axioms QIQTH.Fock.Dirac.electron_thermalState_vonNeumannEntropy_le_log_two
 -- ELECTRON_FIELD E5/§0 (every diagonal record is a modular invariant): electron_sigmaDiag_fixes_diagonal — the real-time
 -- modular flow σ_t=Δ^it fixes EVERY diagonal matrix diag(d), generalizing electron_sigmaDiag_fixes_numberOp (the D=N
 -- case) to the whole classical/pointer (record) basis. Since Δ^it=diagPow is diagonal and diagonals commute, σ_t(D)=D.
