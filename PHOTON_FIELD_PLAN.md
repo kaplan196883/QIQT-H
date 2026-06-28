@@ -261,3 +261,11 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   is a **complete** invariant of the physical (gauge) configuration. The honest §0/P9 caveat made precise —
   the boundary-flux center exists *only* when the cohomology (closed-mod-exact) is nontrivial. Wired into
   `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **P1: the transverse helicity-±1 one-particle space (2 physical polarizations)**
+  (`QIQTH/Fock/Photon/PhotonHelicity.lean`, axiom-free standard-3, budget 0, 2943 jobs green). The photon is
+  massless spin-1 with exactly 2 helicities ±1; model `h_γ = h_{+1}⊕h_{−1}`.
+  **`photon_helicity_finrank`**: `dim h_γ = dim h_+ + dim h_−`. **`photon_two_polarizations`**: `dim(ℂ×ℂ)=2`
+  — exactly **2 transverse polarizations per momentum** (vs the 4 components of `A_μ`, the extra 2 being the
+  unphysical gauge/longitudinal modes excluded by working on the positive physical space).
+  **`photon_capacity_helicity`**: `dim Γ_s^{≤N}(h_γ) = C(dim h_+ + dim h_− + N, N)` — the cutoff bosonic
+  capacity (P2/P3) counts the 2 polarizations. Wired into `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.
