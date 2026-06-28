@@ -6608,6 +6608,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Dirac.electron_modHamiltonian_raising_comm
 #print axioms QIQTH.Fock.Dirac.electron_modHamiltonian_lowering_comm
 #print axioms QIQTH.Fock.Dirac.electron_boost_modHamiltonian_raising_comm
+-- ELECTRON_FIELD E9 (the modular-energy expectation ⟨K⟩=βω·n): electron_modHamiltonian_expectation — the KMS-state
+-- expectation of K=βω·N is βω times the FD occupation (stateOf linearity + electron_occupation_eq_fermiDirac); this
+-- ⟨K⟩=β⟨E⟩ is the modular-energy term in S=log Z+β⟨E⟩ and the δ⟨K⟩ of the first law δS=δ⟨K⟩.
+-- electron_boost_modEnergy: at β=2π, ⟨K_W⟩=2πω·n_ω — the boost-energy expectation feeding the Clausius/Jacobson area
+-- relation. Axiom-free (standard 3); free Dirac; value of G never assigned.
+#print axioms QIQTH.Fock.Dirac.electron_modHamiltonian_expectation
+#print axioms QIQTH.Fock.Dirac.electron_boost_modEnergy
 -- ★★★ ELECTRON_FIELD E5 (CONTINUUM CAR-net modular flow Γ₋(Δ^it)): the continuum wedge modular flow for the electron
 -- CAR net is the FERMIONIC second quantization of the one-particle continuum Δ^it = modUnitary S t
 -- (StandardSubspaceModularFlow, already built). fermiSecondQuantModFlow S t = ExteriorAlgebra.map (modUnitary S t)

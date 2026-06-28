@@ -299,6 +299,28 @@ theorem electron_boost_modHamiltonian_raising_comm (ω : ℝ) :
       = ((2 * Real.pi * ω : ℝ) : ℂ) • raisingOp :=
   electron_modHamiltonian_raising_comm (2 * Real.pi) ω
 
+/-- **The modular-energy expectation `⟨K⟩ = βω·n`.**  The KMS/modular-state expectation of the modular
+Hamiltonian `K = βω·N` is `βω` times the Fermi–Dirac occupation `n = fermiDirac β ω`
+(`electron_occupation_eq_fermiDirac` scaled by the linearity of `stateOf`).  This `⟨K⟩ = βω·n = β⟨E⟩` is
+exactly the modular-energy term in the thermal entropy `S = log Z + β⟨E⟩` (`electron_mode_entropy`) and the
+quantity whose variation is `δ⟨K⟩` in the entanglement first law `δS = δ⟨K⟩` (`electron_firstLaw`). -/
+theorem electron_modHamiltonian_expectation (β ω : ℝ) :
+    QIQTH.FiniteModularTheory.stateOf (electronModeThermalState β ω) (modHamiltonian β ω)
+      = ((β * ω : ℝ) : ℂ) * (fermiDirac β ω : ℂ) := by
+  have h := electron_occupation_eq_fermiDirac β ω
+  simp only [QIQTH.FiniteModularTheory.stateOf, modHamiltonian] at h ⊢
+  rw [mul_smul_comm, Matrix.trace_smul, smul_eq_mul, h]
+
+/-- **The boost-energy expectation `⟨K_W⟩ = 2πω·n_ω` (Bisognano–Wichmann, `β = 2π`).**  The expectation of
+the boost modular Hamiltonian `K_W = 2πK_boost` in the Rindler/Unruh KMS state is `2πω` times the
+Rindler–Fermi occupation — the modular energy `⟨K_W⟩` that enters the Clausius/Jacobson area relation
+`δS = δ⟨K_W⟩` (the electron's contribution to the `+2π`-normalized boost energy feeding the area law). -/
+theorem electron_boost_modEnergy (ω : ℝ) :
+    QIQTH.FiniteModularTheory.stateOf (electronModeThermalState (2 * Real.pi) ω)
+        (modHamiltonian (2 * Real.pi) ω)
+      = ((2 * Real.pi * ω : ℝ) : ℂ) * (rindlerOccupationFermi ω : ℂ) :=
+  electron_modHamiltonian_expectation (2 * Real.pi) ω
+
 /-- **The single-mode thermal / entanglement entropy: `S = log Z + β⟨E⟩`.**  The von Neumann entropy of
 the electron mode equals the log partition function plus `β` times the mean energy:
 `binaryEntropy(n) = log(1 + e^{−βω}) + βω·n`, with `n = fermiDirac β ω`, `Z = 1 + e^{−βω}` and the mean

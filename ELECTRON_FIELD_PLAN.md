@@ -642,3 +642,11 @@ EXTERNAL libraries; QIQT-H built its own.
   E9 modular-energy object that connects the modular flow to the area law. Wired into `AxiomAudit.lean`;
   standard-3; budget 0. (HONEST: the Dirac Belinfante `T_μν` → `K_W` *geometric integral* and the full
   Jacobson assembly remain the cited E9 frontier; this lands the single-mode generator `K=βω·N` itself.)
+- 2026-06-28 — **E9: the modular-energy expectation `⟨K⟩=βω·n`** (added to `ModularKMS.lean`, axiom-free,
+  budget 0, 3055 jobs green). **`electron_modHamiltonian_expectation`**: the KMS/modular-state expectation
+  of `K=βω·N` is `βω·n` (`stateOf` linearity + `electron_occupation_eq_fermiDirac`) — the `⟨K⟩=β⟨E⟩`
+  modular-energy term in `S=log Z+β⟨E⟩` (`electron_mode_entropy`) and the `δ⟨K⟩` of the first law
+  `δS=δ⟨K⟩` (`electron_firstLaw`). **`electron_boost_modEnergy`**: at `β=2π`, `⟨K_W⟩=2πω·n_ω` — the
+  boost-energy expectation feeding the Clausius/Jacobson area relation `δS=δ⟨K_W⟩`. Closes the single-mode
+  E9 loop: generator `K` (commutators) → expectation `⟨K⟩` → entropy/first law. Wired into
+  `AxiomAudit.lean`; standard-3; budget 0.
