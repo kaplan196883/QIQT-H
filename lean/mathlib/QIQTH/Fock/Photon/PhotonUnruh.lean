@@ -84,6 +84,20 @@ temperature `β = 2π`. -/
 theorem rindlerOccupationBose_pos {ω : ℝ} (h : 0 < ω) : 0 < rindlerOccupationBose ω :=
   boseEinstein_pos (by positivity)
 
+/-- **The Bose–Einstein occupation decreases with mode energy**: for `0 < βω₁ ≤ βω₂`,
+`n(βω₂) ≤ n(βω₁)`.  Higher-energy photon modes are (thermally) less occupied — the Bose occupation
+`1/(e^{βω}−1)` is antitone in `βω` (since `e^{βω}−1` is increasing and positive).  The expected monotone
+falloff of the thermal/Unruh photon spectrum with energy. -/
+theorem boseEinstein_le_of_le {β ω₁ ω₂ : ℝ} (h1 : 0 < β * ω₁) (h : β * ω₁ ≤ β * ω₂) :
+    boseEinstein β ω₂ ≤ boseEinstein β ω₁ := by
+  unfold boseEinstein
+  have he1 : 1 < Real.exp (β * ω₁) := by
+    have h2 := Real.exp_lt_exp.mpr h1; rwa [Real.exp_zero] at h2
+  have hpos : (0 : ℝ) < Real.exp (β * ω₁) - 1 := by linarith
+  have hle : Real.exp (β * ω₁) - 1 ≤ Real.exp (β * ω₂) - 1 := by
+    have := Real.exp_le_exp.mpr h; linarith
+  exact one_div_le_one_div_of_le hpos hle
+
 /-- The single bosonic-mode (photon) thermal entropy `S_BE(n) = (1+n)log(1+n) − n log n` — the von Neumann
 entropy of a thermal harmonic oscillator at occupation `n` (the bosonic mirror of the electron's
 `binaryEntropy`). -/

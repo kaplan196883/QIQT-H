@@ -275,3 +275,8 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   `d_{+1}=d_{−1}=d`). **`photon_capacity_helicity_ge`**: `truncFockDim d N ≤ truncFockDim (2d) N` — the second
   polarization enlarges the capacity (the photon carries more information than a single-component scalar-like
   field of the same per-helicity mode count). Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **P4: the Bose occupation decreases with mode energy** (`PhotonUnruh.lean`, axiom-free
+  standard-3, budget 0, 2180 jobs green). **`boseEinstein_le_of_le`**: for `0<βω₁≤βω₂`, `n(βω₂) ≤ n(βω₁)` —
+  higher-energy photon modes are thermally less occupied (`1/(e^{βω}−1)` antitone in `βω`). The expected
+  monotone falloff of the thermal/Unruh photon spectrum with energy. Wired into `AxiomAudit.lean`;
+  standard-3; budget 0.
