@@ -95,4 +95,26 @@ theorem exact_mem_of_comm {Q O : V →ₗ[R] V} (hO : O.comp Q = Q.comp O) {v : 
   obtain ⟨x, rfl⟩ := hv
   exact ⟨O x, by rw [← LinearMap.comp_apply, ← hO, LinearMap.comp_apply]⟩
 
+/-- A BRST-invariant observable `O` (`O∘Q = Q∘O`), restricted to the closed states `ker Q` it preserves
+(`closed_mem_of_comm`). -/
+def closedRestrict {Q O : V →ₗ[R] V} (hO : O.comp Q = Q.comp O) : closed Q →ₗ[R] closed Q :=
+  O.restrict (fun _ hv => closed_mem_of_comm hO hv)
+
+/-- **A BRST-invariant observable descends to a well-defined linear operator on the BRST cohomology
+`H_Q = ker Q ⧸ im Q`.**  Building on `closed_mem_of_comm` + `exact_mem_of_comm`: `O` preserves both the
+closed states `ker Q` (so `closedRestrict` is well-defined) and the exact states `im Q` inside them, hence
+by `Submodule.mapQ` it induces a genuine operator `inducedCohomologyMap : H_Q →ₗ H_Q`.  This **constructs**
+(not merely asserts) the action of a gauge-invariant photon observable on the physical (cohomology) states:
+the physical observables act on the space of physical photon states. -/
+noncomputable def inducedCohomologyMap {Q O : V →ₗ[R] V} (hQ : Q.comp Q = 0)
+    (hO : O.comp Q = Q.comp O) : cohomology Q hQ →ₗ[R] cohomology Q hQ :=
+  Submodule.mapQ (exactInClosed Q hQ) (exactInClosed Q hQ) (closedRestrict hO) (by
+    rintro x ⟨v, hv⟩
+    refine ⟨O v, ?_⟩
+    apply Subtype.ext
+    have hxv : (x : V) = Q v := by rw [← hv]; rfl
+    show Q (O v) = ((closedRestrict hO x : closed Q) : V)
+    show Q (O v) = O (x : V)
+    rw [hxv, ← LinearMap.comp_apply, ← hO, LinearMap.comp_apply])
+
 end QIQTH.Fock.Photon.BRST

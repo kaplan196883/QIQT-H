@@ -351,3 +351,16 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   `H_Q`** — the physical (gauge-invariant) photon observables act on the physical photon states (the §0/P6
   "records = gauge-invariant observables" decision realized at the cohomology level). Wired into
   `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **P10: the induced operator on the cohomology — CONSTRUCTED (not asserted)** (extended
+  `PhotonBRST.lean`, axiom-free standard-3, budget 0, 1162 jobs green). The previous increment proved a
+  BRST-invariant `O` *preserves* `ker Q` and `im Q`; this **builds** the descended map.
+  **`BRST.closedRestrict`**: `O` restricted to the closed states `ker Q` it preserves (a genuine
+  `closed Q →ₗ closed Q`). **`BRST.inducedCohomologyMap`**: via `Submodule.mapQ`, the well-defined induced
+  operator **`H_Q →ₗ H_Q`** on the BRST cohomology — using that `closedRestrict` maps `im Q → im Q`
+  (`Q(Ov)=O(Qv)`). So a gauge-invariant photon observable genuinely **acts on the space of physical
+  (cohomology) photon states** — the constructed operator, completing the "descends to a well-defined
+  operator on `H_Q`" claim of the prior increment. Wired into `QIQTH.lean`+`AxiomAudit.lean`; standard-3;
+  budget 0. **★ This exhausts the tractable P10 algebraic footholds** (BRST cohomology + observable descent
+  + induced cohomology operator); the remaining P10 is the genuinely-blocked continuum frontier
+  (Gupta–Bleuler/BRST indefinite-metric Krein space + positive-form descent + no-ghost theorem; Maxwell
+  `F`-net CCR from test 2-forms; Gauss-law boundary algebra + Kabat contact determinant; interacting QED).

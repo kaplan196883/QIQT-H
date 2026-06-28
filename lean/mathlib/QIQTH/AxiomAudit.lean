@@ -6526,6 +6526,13 @@ namespace QIQTH.AxiomAudit
 -- H_Q — the physical (gauge-invariant) photon observables act on the physical photon states. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Photon.BRST.closed_mem_of_comm
 #print axioms QIQTH.Fock.Photon.BRST.exact_mem_of_comm
+-- ★★★ PHOTON_FIELD_PLAN P10 (the induced operator on cohomology — CONSTRUCTED, not asserted): closed_mem_of_comm +
+-- exact_mem_of_comm say a BRST-invariant O preserves ker Q and im Q; inducedCohomologyMap actually BUILDS the descended
+-- linear operator H_Q →ₗ H_Q via Submodule.mapQ (closedRestrict = O restricted to ker Q, which maps im Q → im Q since
+-- Q(Ov)=O(Qv)). So a gauge-invariant photon observable genuinely ACTS on the space of physical (cohomology) photon
+-- states — the well-defined induced map, not just the preservation facts. Axiom-free (standard 3); free Maxwell.
+#print axioms QIQTH.Fock.Photon.BRST.closedRestrict
+#print axioms QIQTH.Fock.Photon.BRST.inducedCohomologyMap
 -- ★★★ ELECTRON_FIELD_PLAN E6→E5 bridge (per-mode modular Hamiltonian): fermiDirac_logit — for a fermionic mode with
 -- occupation n = fermiDirac β ω, the modular energy is the logit log((1−n)/n) = βω. This is the single-mode form of
 -- the fermionic modular Hamiltonian K = log((1−C)/C) (QuasiFreeEntropy / quasi-free modular generator): the logit of
