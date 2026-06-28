@@ -26,6 +26,7 @@ import Physlib.QFT.PerturbationTheory.FieldStatistics.Basic
 import Physlib.QFT.PerturbationTheory.FieldStatistics.ExchangeSign
 import Physlib.QFT.PerturbationTheory.FieldSpecification.Basic
 import Physlib.QFT.PerturbationTheory.WickAlgebra.SuperCommute
+import Physlib.QFT.PerturbationTheory.WickAlgebra.Grading
 import QIQTH.Fock.Dirac.DiracGamma
 
 namespace QIQTH.Fock.Dirac
@@ -132,5 +133,19 @@ theorem electron_anPart_crPart_anticomm (φ φ' : electronFieldSpec.FieldOp) :
         FieldStatistic.exchangeSign_eq_if]
     simp
   rw [hs, neg_one_smul, neg_mul, sub_neg_eq_add]
+
+open FieldSpecification FieldSpecification.WickAlgebra in
+/-- **An electron bilinear is bosonic (even) — a record.**  A product of two electron
+creation/annihilation operators `ofCrAnList [φ, φ']` lies in the **bosonic** (even) graded submodule of
+the Wick algebra: `fermionic · fermionic = bosonic`.  This is the §0 "records = even bilinears"
+decision at the PhysLean operator level — the operator-algebra counterpart of `isEven_ι_mul_ι`
+(`ι a · ι b` is even) and `electron_pair_bosonic`.  So the electron's records (number/current/`T_μν`,
+all even bilinears) live in the even sector of the second-quantized algebra. -/
+theorem electron_bilinear_bosonic (φ φ' : electronFieldSpec.CrAnFieldOp) :
+    ofCrAnList [φ, φ'] ∈ statSubmodule (𝓕 := electronFieldSpec) FieldStatistic.bosonic := by
+  apply ofCrAnList_mem_statSubmodule_of_eq
+  show (electronFieldSpec |>ₛ [φ, φ']) = FieldStatistic.bosonic
+  rw [FieldStatistic.ofList_cons_eq_mul, FieldStatistic.ofList_singleton]
+  rfl
 
 end QIQTH.Fock.Dirac

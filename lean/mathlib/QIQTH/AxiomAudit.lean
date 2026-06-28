@@ -6507,6 +6507,13 @@ namespace QIQTH.AxiomAudit
 -- [anPart φ, crPart φ']ₛ = anPart φ · crPart φ' + crPart φ' · anPart φ = {a(φ), a†(φ')}. The defining nonzero CAR
 -- relation, the kinematic heart of the electron's second quantization. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.electron_anPart_crPart_anticomm
+-- ★★★ ELECTRON_FIELD E8/§0 at the operator level (records = even bilinears): electron_bilinear_bosonic — a product
+-- of two electron creation/annihilation operators ofCrAnList [φ,φ'] lies in the BOSONIC (even) graded submodule of
+-- PhysLean's Wick algebra (fermionic·fermionic = bosonic). The operator-algebra counterpart of isEven_ι_mul_ι and
+-- electron_pair_bosonic: the electron's records (number/current/T_μν, even bilinears) live in the even sector of
+-- the second-quantized algebra — the §0 "records attach to the even/observable algebra" decision, now on PhysLean.
+-- Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.electron_bilinear_bosonic
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy

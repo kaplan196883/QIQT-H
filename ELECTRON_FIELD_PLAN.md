@@ -411,3 +411,14 @@ This closes the "build vs reuse" decision for the operator layer: **reuse PhysLe
   form). `lake build QIQTH.Fock.Dirac.PhysLeanBridge` green (3129 jobs); standard-3; budget 0. **The
   free-Dirac CAR second-quantization kinematics are now complete on PhysLean.** Sole remaining frontier:
   **E5 modular dynamics** `Δ_W^it = U(Λ_W(−2πt))` (Tomita–Takesaki) — unbuilt in any proof assistant.
+- 2026-06-28 — **E8/§0 at the operator level: electron bilinear is bosonic (a record)** (added to
+  `PhysLeanBridge.lean`, axiom-free, budget 0). **`electron_bilinear_bosonic`** — a product of two
+  electron creation/annihilation operators `ofCrAnList [φ, φ']` lies in the **bosonic (even)** graded
+  submodule of PhysLean's Wick algebra (`fermionic·fermionic = bosonic`). The operator-algebra
+  counterpart of `isEven_ι_mul_ι` and `electron_pair_bosonic`: the electron's records
+  (number/current/`T_μν`, all even bilinears) live in the **even sector** of the second-quantized
+  algebra — the §0 "records attach to the even/observable algebra" decision, now machine-checked on
+  PhysLean. `lake build QIQTH.Fock.Dirac.PhysLeanBridge` green (3130 jobs); standard-3; budget 0.
+  (Imported `WickAlgebra.Grading`.) **The §0 records decision is now established at BOTH levels** (the
+  exterior-algebra `IsEven` and the PhysLean Wick grading). Sole remaining frontier: **E5 modular
+  dynamics** `Δ_W^it` (Tomita–Takesaki), unbuilt in any proof assistant.
