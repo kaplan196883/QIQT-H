@@ -6522,6 +6522,14 @@ namespace QIQTH.AxiomAudit
 -- the project's finite Tomita–Takesaki KMS state; ρ is a faithful state (trace 1, invertible 0<n<1) so kms_condition
 -- applies. The E6 boost-KMS content realized inside the existing modular flow, not a separate axiom. Axiom-free.
 #print axioms QIQTH.Fock.Dirac.electron_occupation_eq_fermiDirac
+-- ELECTRON_FIELD E5/E6 (electron mode IS a faithful KMS state of QIQT-H's finite Tomita–Takesaki): the electron
+-- thermal state ρ = diag(1−n,n), n=fermiDirac β ω, is invertible (faithful, 0<n<1) so the PROVED
+-- FiniteModularTheory.kms_condition and modAut_stateOf_invariant apply. electron_kms_condition: ω(x·y)=ω(y·σ(x)) for
+-- the electron (the defining KMS relation); electron_modAut_invariant: ω(σ(x))=ω(x) (the electron's modular flow
+-- conserves its Born/Gibbs expectations); electron_gibbs_ratio: n/(1−n)=e^{−βω} (the Gibbs–Boltzmann detailed-balance
+-- factor, the multiplicative KMS content). The electron realizes the finite TT KMS structure. Axiom-free (std 3).
+#print axioms QIQTH.Fock.Dirac.electron_kms_condition
+#print axioms QIQTH.Fock.Dirac.electron_gibbs_ratio
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy

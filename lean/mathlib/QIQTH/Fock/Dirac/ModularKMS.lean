@@ -61,4 +61,57 @@ theorem electron_occupation_eq_fermiDirac (β ω : ℝ) :
   rw [Matrix.diagonal_mul_diagonal, Matrix.trace_diagonal, Fin.sum_univ_two]
   simp
 
+/-- The electron mode's thermal state is **faithful (invertible)** — both occupations are nonzero
+(`0 < n < 1`), so it is a genuine cyclic-separating modular state and the proved `kms_condition` /
+`modAut_stateOf_invariant` of `FiniteModularTheory` apply to it. -/
+noncomputable instance electronModeThermalState_invertible (β ω : ℝ) :
+    Invertible (electronModeThermalState β ω) := by
+  apply Matrix.invertibleOfIsUnitDet
+  rw [electronModeThermalState, Matrix.det_diagonal, Fin.prod_univ_two]
+  rw [isUnit_iff_ne_zero]
+  have hn0 : (fermiDirac β ω : ℂ) ≠ 0 := by
+    exact_mod_cast (fermiDirac_pos β ω).ne'
+  have hn1 : (1 : ℂ) - (fermiDirac β ω : ℂ) ≠ 0 := by
+    have : ((1 - fermiDirac β ω : ℝ) : ℂ) ≠ 0 := by
+      exact_mod_cast (by linarith [fermiDirac_lt_one β ω] : (1 - fermiDirac β ω : ℝ) ≠ 0)
+    simpa using this
+  simp only [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons]
+  exact mul_ne_zero hn1 hn0
+
+/-- **The electron thermal state satisfies the Tomita–Takesaki KMS condition.**  Instantiating the
+proved `FiniteModularTheory.kms_condition` for the electron mode: `ω(x·y) = ω(y·σ(x))` where
+`ω = stateOf ρ` is the FD/Unruh KMS state and `σ = modAut ρ` is its modular automorphism — the defining
+KMS relation, now holding for the electron. -/
+theorem electron_kms_condition (β ω : ℝ) (x y : Matrix (Fin 2) (Fin 2) ℂ) :
+    QIQTH.FiniteModularTheory.stateOf (electronModeThermalState β ω) (x * y)
+      = QIQTH.FiniteModularTheory.stateOf (electronModeThermalState β ω)
+          (y * QIQTH.FiniteModularTheory.modAut (electronModeThermalState β ω) x) :=
+  QIQTH.FiniteModularTheory.kms_condition (electronModeThermalState β ω) x y
+
+/-- **The electron's modular flow conserves its thermal (Born/Gibbs) expectations**:
+`ω(σ(x)) = ω(x)` — the σ-invariance of the modular state (`modAut_stateOf_invariant`) for the electron
+KMS state. -/
+theorem electron_modAut_invariant (β ω : ℝ) (x : Matrix (Fin 2) (Fin 2) ℂ) :
+    QIQTH.FiniteModularTheory.stateOf (electronModeThermalState β ω)
+        (QIQTH.FiniteModularTheory.modAut (electronModeThermalState β ω) x)
+      = QIQTH.FiniteModularTheory.stateOf (electronModeThermalState β ω) x :=
+  QIQTH.FiniteModularTheory.modAut_stateOf_invariant (electronModeThermalState β ω) x
+
+/-- **Detailed balance / the Gibbs–Boltzmann factor**: the ratio of occupied to empty probability is the
+Boltzmann factor, `n/(1−n) = e^{−βω}`.  This is the multiplicative (KMS detailed-balance) form of the
+Fermi–Dirac occupation — the content of the KMS condition for a single mode. -/
+theorem electron_gibbs_ratio (β ω : ℝ) :
+    fermiDirac β ω / (1 - fermiDirac β ω) = Real.exp (-(β * ω)) := by
+  have hpos := fermiDirac_pos β ω
+  have hlt := fermiDirac_lt_one β ω
+  have h1 : 1 - fermiDirac β ω = Real.exp (β * ω) * fermiDirac β ω := by
+    have hb := fermiDirac_kms_balance β ω
+    rw [Real.exp_neg] at hb
+    have he : Real.exp (β * ω) ≠ 0 := (Real.exp_pos _).ne'
+    field_simp at hb ⊢
+    linarith [hb]
+  rw [h1, Real.exp_neg]
+  rw [div_eq_iff (by positivity)]
+  field_simp
+
 end QIQTH.Fock.Dirac

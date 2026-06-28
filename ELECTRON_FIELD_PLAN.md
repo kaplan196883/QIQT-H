@@ -471,3 +471,14 @@ EXTERNAL libraries; QIQT-H built its own.
   `lake build QIQTH.Fock.Dirac.ModularKMS` green (2944 jobs); standard-3; budget 0. Next: the continuum
   wedge `Δ_W^{it}=U(Λ_W(−2πt))` for the CAR net via `modFlow`/`Spectral` + the `StandardSubspace`/
   crossed-product tracks, with the fermionic `J` from the Klein twist.
+- 2026-06-28 — **E5/E6: the electron mode IS a faithful KMS state of QIQT-H's finite Tomita–Takesaki**
+  (added to `ModularKMS.lean`, axiom-free, budget 0). The electron thermal state `ρ = diag(1−n, n)`,
+  `n = fermiDirac β ω`, is **invertible/faithful** (`electronModeThermalState_invertible`, since
+  `0<n<1`), so the proved `FiniteModularTheory.kms_condition` and `modAut_stateOf_invariant` apply:
+  **`electron_kms_condition`** (`ω(x·y) = ω(y·σ(x))` — the defining KMS relation for the electron),
+  **`electron_modAut_invariant`** (`ω(σ(x)) = ω(x)` — the electron's modular flow conserves its
+  Born/Gibbs expectations), and **`electron_gibbs_ratio`** (`n/(1−n) = e^{−βω}` — the Gibbs–Boltzmann
+  detailed-balance factor, the multiplicative KMS content). The electron now **realizes the finite
+  Tomita–Takesaki KMS structure** of the project — E5/E6 on the existing machinery, not a separate
+  axiom. `lake build QIQTH.Fock.Dirac.ModularKMS` green (2944 jobs); standard-3; budget 0. Next: the
+  continuum wedge `Δ_W^it` for the CAR net via `modFlow`/`Spectral` + the fermionic `J` (Klein twist).
