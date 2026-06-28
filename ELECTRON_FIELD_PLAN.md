@@ -813,3 +813,14 @@ EXTERNAL libraries; QIQT-H built its own.
   (`Q(a)·Q(b)=−1`, time⟂space), `(γ_aγ_b)²=+1` — a **hyperbolic** generator (`e^{η γ_aγ_b}=cosh η+sinh
   η·γ_aγ_b`, the unbounded boost whose `Δ^{it}` is the modular flow). The concrete elliptic-vs-hyperbolic
   realization of the boost/rotation dichotomy. Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **★ E1 FRONTIER CORE: local first-order operators preserve closed support** (the genuine
+  analytic backbone of `S_D` microcausality; new module `LocalDifferentialSupport.lean`, axiom-free, budget
+  0, 1910 jobs green; GPT-5.5-pro-identified). The Dirac kernel `S_D=(iγ·∂+m)Δ_m` is a first-order LOCAL
+  operator applied to the scalar Pauli–Jordan kernel `Δ_m`, so it cannot enlarge the support.
+  **`firstOrderOp_eq_zero_of_eqOn_open`**: `(A·f + B·∂f)` vanishes where `f` vanishes on an open set (`f≡0`
+  near `x` ⟹ `fderiv f = 0`, via `hasFDerivAt_const.congr_of_eventuallyEq`).
+  **`support_firstOrderOp_subset_of_closed`**: if `support f ⊆ C` (the closed light cone), then
+  `support(L f) ⊆ C` — so `S_D` inherits `Δ_m`'s spacelike vanishing (the *proved* scalar Pauli–Jordan
+  wall), **with no new analytic input**. (HONEST: abstract backbone; the concrete `Δ_m` needs packaging as
+  *exact* open-set vanishing, not the regularized limit — the remaining E1 analytic step.) Wired into
+  `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.

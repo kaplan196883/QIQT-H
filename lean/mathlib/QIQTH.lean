@@ -500,6 +500,7 @@ import QIQTH.Fock.Dirac.KleinTwistWitness
 import QIQTH.Fock.Dirac.FermiDirac
 import QIQTH.Fock.Dirac.EvenObservables
 import QIQTH.Fock.Dirac.DiracGamma
+import QIQTH.Fock.Dirac.LocalDifferentialSupport
 import QIQTH.Fock.Dirac.PhysLeanBridge
 import QIQTH.Fock.Dirac.ModularKMS
 import QIQTH.Fock.Dirac.CARModularFlow
@@ -512,6 +513,7 @@ import QIQTH.Fock.Photon.PhotonModularFlow
 import QIQTH.Fock.Photon.PhotonGaugeRecords
 import QIQTH.Fock.Photon.PhotonEdgeModes
 import QIQTH.Fock.Photon.PhotonFluxSectors
+import QIQTH.Fock.Photon.PhotonBRST
 import QIQTH.Fock.Photon.PhotonFieldStrength
 import QIQTH.Fock.Photon.PhotonHelicity
 

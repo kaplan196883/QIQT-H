@@ -6510,6 +6510,15 @@ namespace QIQTH.AxiomAudit
 -- The two eigenvalues ±1 are the photon's two transverse helicities. Axiom-free (standard 3); free Maxwell.
 #print axioms QIQTH.Fock.Photon.helicityOp_plus
 #print axioms QIQTH.Fock.Photon.helicityOp_minus
+-- ★★★ PHOTON_FIELD_PLAN P10 (foothold — abstract BRST cohomology): the covariant (Gupta-Bleuler/BRST) photon handles the
+-- gauge redundancy + unphysical modes via a nilpotent BRST charge Q (Q²=0); the physical states are the BRST cohomology
+-- H_Q = ker Q ⧸ im Q. BRST.exact_le_closed: im Q ⊆ ker Q (every exact/BRST-trivial state is closed/BRST-invariant).
+-- BRST.cohomology = ker Q ⧸ im Q (the physical photon states: the 2 transverse polarizations, unphysical modes quotiented).
+-- BRST.cohomology_trivial_iff: trivial H_Q ⟺ every closed is exact. The single-nilpotent (BRST) cohomology, complementing
+-- the de Rham F=dA cohomology. HONEST: the indefinite-metric Krein space + metric descent to a positive form + no-ghost
+-- theorem are the deferred continuum P10 frontier. GPT-5.5-pro-identified foothold. Axiom-free (standard 3); free Maxwell.
+#print axioms QIQTH.Fock.Photon.BRST.exact_le_closed
+#print axioms QIQTH.Fock.Photon.BRST.cohomology_trivial_iff
 -- ★★★ ELECTRON_FIELD_PLAN E6→E5 bridge (per-mode modular Hamiltonian): fermiDirac_logit — for a fermionic mode with
 -- occupation n = fermiDirac β ω, the modular energy is the logit log((1−n)/n) = βω. This is the single-mode form of
 -- the fermionic modular Hamiltonian K = log((1−C)/C) (QuasiFreeEntropy / quasi-free modular generator): the logit of
@@ -6595,6 +6604,16 @@ namespace QIQTH.AxiomAudit
 -- (e^{η γ_aγ_b}=cosh η+sinh η·γ_aγ_b, the unbounded boost whose Δ^it is the modular flow). Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.diracGamma_mul_sq_rotation
 #print axioms QIQTH.Fock.Dirac.diracGamma_mul_sq_boost
+-- ★★★ ELECTRON_FIELD E1 (the S_D microcausality core — local first-order operators preserve closed support): the Dirac
+-- causal kernel S_D=(iγ·∂+m)Δ_m is a first-order LOCAL operator applied to the scalar Pauli-Jordan kernel Δ_m, so it
+-- cannot enlarge the support. firstOrderOp_eq_zero_of_eqOn_open: (A·f+B·∂f) vanishes where f vanishes on an open set
+-- (f≡0 near x ⟹ fderiv f=0). support_firstOrderOp_subset_of_closed: if support f ⊆ C (closed light cone), then
+-- support(L f) ⊆ C — so S_D inherits Δ_m's spacelike vanishing (the proved scalar Pauli-Jordan wall), no new analytic
+-- input. The genuine analytic backbone of electron microcausality (abstract; concrete Δ_m needs exact-vanishing
+-- packaging). GPT-5.5-pro-identified frontier core. Axiom-free (standard 3); free Dirac.
+#print axioms QIQTH.Fock.Dirac.LocalDifferential.firstOrderOp_eq_zero_of_eqOn_open
+#print axioms QIQTH.Fock.Dirac.LocalDifferential.support_firstOrderOp_subset_closure
+#print axioms QIQTH.Fock.Dirac.LocalDifferential.support_firstOrderOp_subset_of_closed
 -- ★★★ ELECTRON_FIELD_PLAN — PhysLean bridge (the CAR operator-layer dependency): QIQT-H now depends on PhysLean
 -- (HEPLean, pinned to d0ee4af whose Mathlib pin c5ea00351c28 @ v4.30.0 matches QIQT-H's — no Mathlib bump), which
 -- provides the fermionic CAR field-operator algebra (FieldStatistic, CreateAnnihilate, CrAnFieldOp, WickAlgebra,
