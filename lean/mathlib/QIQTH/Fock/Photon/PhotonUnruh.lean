@@ -123,6 +123,14 @@ theorem boseEinstein_le_of_le {β ω₁ ω₂ : ℝ} (h1 : 0 < β * ω₁) (h : 
     have := Real.exp_le_exp.mpr h; linarith
   exact one_div_le_one_div_of_le hpos hle
 
+/-- **The photon Unruh occupation in Gibbs form** (`β = 2π`): `n_ω = e^{−2πω}/(1 − e^{−2πω})`.  The
+Rindler/Unruh photon occupation at the Bisognano–Wichmann temperature is the mean of the geometric (Bose)
+distribution with Boltzmann factor `e^{−2πω}` — the `β = 2π` specialization of `boseEinstein_gibbs_form`. -/
+theorem rindlerOccupationBose_gibbs_form {ω : ℝ} (h : Real.exp (2 * Real.pi * ω) ≠ 1) :
+    rindlerOccupationBose ω
+      = Real.exp (-(2 * Real.pi * ω)) / (1 - Real.exp (-(2 * Real.pi * ω))) :=
+  boseEinstein_gibbs_form h
+
 /-- The single bosonic-mode (photon) thermal entropy `S_BE(n) = (1+n)log(1+n) − n log n` — the von Neumann
 entropy of a thermal harmonic oscillator at occupation `n` (the bosonic mirror of the electron's
 `binaryEntropy`). -/
