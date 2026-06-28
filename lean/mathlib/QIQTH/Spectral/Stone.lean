@@ -17,11 +17,13 @@ This is **Phase 3.1 of `STONE_THEOREM_PLAN.md`** (= the pivotal P4-wall Phase 4.
 submodule and `A` is ℂ-linear on it for *any* operator family (each `U_t` is a CLM, so `t ↦ U_t(x+y)` and
 `t ↦ U_t(c•x)` split, and `deriv` is additive/homogeneous on the differentiable domain).
 
-**Honest scope:** this delivers the generator as an unbounded operator. Its **self-adjointness** (Phase 3.2,
-essential self-adjointness via the group / Nelson analytic vectors) and the **Cayley transform + unbounded
-spectral theorem** (Phase 3.3) are the genuine Mathlib-grade frontiers — no Stone's theorem and no unbounded
-self-adjoint spectral theory exist in Mathlib. Applying this to `clockTransl` (`λ_t`) to get the clock energy
-`X = A_edge` (P4-wall Phase 4.3) is gated on 3.2/3.3.
+**Scope of THIS file:** it delivers the generator as an unbounded operator and proves it *symmetric*
+(`stoneGen_subset_adjoint`, `K ⊆ K†`).  **NOTE (updated):** Phases 3.2/3.3 are no longer open — essential
+**self-adjointness** (`K = K†`) and the **Cayley transform** are now PROVED downstream in
+`QIQTH/Spectral/Garding.lean` (`stoneGen_isSelfAdjoint` via Gårding density / `Range(K+i)=H`; `cayleyEquiv`),
+and the bounded spectral theorem / PVM is `QIQTH/Spectral/SpectralTheorem.lean` (`PVM_of_selfAdjoint`,
+`boundedFC_mul`).  So QIQT-H has a self-contained unbounded Stone theorem + spectral theory (which Mathlib
+itself still lacks), all axiom-free; the clock energy `X = A_edge` (P4-wall) instantiation rides those.
 -/
 
 namespace QIQTH.Spectral

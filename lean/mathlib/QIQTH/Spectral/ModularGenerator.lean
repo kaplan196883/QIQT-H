@@ -16,8 +16,15 @@ This is the **third** of the three C₀ groups the wall-campaign instantiates (t
 `QIQTH/CrossedProductGenerator.lean`; the momentum `P`, `QIQTH/Spectral/MomentumGenerator.lean`; the modular
 `Δ^{it}` here). `modularGen` is the `K` of the JLMS modular Hamiltonian `K̃ = A_edge·(1/4ℓ_P²) + K_bulk`.
 Unlike the clock/momentum groups (on heavy `Lp` types), `modUnitary` lives on the abstract one-particle space,
-so the instantiation needs no `Lp`-elaboration workaround. Essential self-adjointness of `modularGen`
-(`Range(modularGen ± i)` dense / Gårding density) is the carried analytic frontier — NOT claimed. Axiom-free.
+so the instantiation needs no `Lp`-elaboration workaround.
+
+**Essential self-adjointness IS now proved** (the Gårding-density / deficiency-index route was closed in
+`QIQTH/Spectral/Garding.lean`): `modularGen_isSelfAdjoint` below gives `IsSelfAdjoint (modularGen S)` in the
+genuine `LinearPMap` sense `K = K†`, via `stoneGen_isSelfAdjoint` (symmetry `K ⊆ K†` + the hard surjectivity
+`Range(K + i) = H` from `stoneGen_add_I_surjective`, Gårding density + `ker(K† + i) = 0`).  So `K = modularGen`
+is a genuine self-adjoint unbounded operator and `Δ^{it} = e^{itK}` is available via the spectral theorem —
+the continuum modular Hamiltonian, not a carried frontier.  (Earlier revisions of this header labelled it
+unclaimed; that is stale.)  Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`).
 -/
 import QIQTH.StandardSubspaceModularFlow
 import QIQTH.Spectral.Stone
