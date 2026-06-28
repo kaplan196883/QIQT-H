@@ -254,3 +254,10 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   boundary-flux sectors** (closed-but-not-exact) — the algebraic home of the photon's edge-mode center
   (P9 `PhotonFluxSectors`): nontrivial cohomology = nontrivial boundary flux; trivial for a contractible
   region (a factor, no center — the §0 honest caveat). Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **P6/P9: trivial cohomology ⟹ `F` determines `A` up to gauge** (`PhotonFieldStrength.lean`,
+  axiom-free standard-3, budget 0, 1177 jobs green). **`fieldStrength_eq_iff_gauge_of_trivial_cohomology`**:
+  when `ker d_F = range d_gauge` (every closed is exact — a **contractible** region, no flux sectors, the
+  regional algebra a *factor*), `d_F a = d_F a' ↔ a−a' ∈ range d_gauge`: the field-strength record `F=dA`
+  is a **complete** invariant of the physical (gauge) configuration. The honest §0/P9 caveat made precise —
+  the boundary-flux center exists *only* when the cohomology (closed-mod-exact) is nontrivial. Wired into
+  `AxiomAudit.lean`; standard-3; budget 0.

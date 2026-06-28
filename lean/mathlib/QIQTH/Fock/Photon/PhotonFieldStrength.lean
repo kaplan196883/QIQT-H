@@ -91,4 +91,16 @@ theorem pureGauge_le_ker (dGauge : Λ →ₗ[ℂ] A) (dF : A →ₗ[ℂ] F) (hdd
     LinearMap.range dGauge ≤ LinearMap.ker dF :=
   LinearMap.range_le_ker_iff.mpr hdd
 
+/-- **Trivial cohomology ⟹ `F` determines `A` up to gauge.**  When the first cohomology is trivial — every
+**closed** configuration is **exact**, `ker d_F = range d_gauge` (a *contractible* region: no topological
+flux sectors, the regional algebra is a *factor*) — two potentials have the same field strength **iff they
+are gauge-equivalent**: `d_F a = d_F a' ↔ a − a' ∈ range d_gauge`.  So for a contractible region the
+gauge-invariant record `F = dA` is a *complete* invariant of the physical (gauge) configuration — the
+honest §0/P9 caveat that the boundary-flux center is present only when the cohomology (the
+closed-mod-exact quotient) is nontrivial. -/
+theorem fieldStrength_eq_iff_gauge_of_trivial_cohomology (dGauge : Λ →ₗ[ℂ] A) (dF : A →ₗ[ℂ] F)
+    (h : LinearMap.ker dF = LinearMap.range dGauge) (a a' : A) :
+    dF a = dF a' ↔ a - a' ∈ LinearMap.range dGauge := by
+  rw [fieldStrength_eq_iff_sub_mem_ker, h]
+
 end QIQTH.Fock.Photon
