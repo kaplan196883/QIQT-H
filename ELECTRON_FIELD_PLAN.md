@@ -422,3 +422,31 @@ This closes the "build vs reuse" decision for the operator layer: **reuse PhysLe
   (Imported `WickAlgebra.Grading`.) **The §0 records decision is now established at BOTH levels** (the
   exterior-algebra `IsEven` and the PhysLean Wick grading). Sole remaining frontier: **E5 modular
   dynamics** `Δ_W^it` (Tomita–Takesaki), unbuilt in any proof assistant.
+
+## 8. Loop closed (2026-06-28) — substrate complete; remaining work is research-frontier
+
+The ELECTRON_FIELD `/loop` (cron `32d4f581`) is **cancelled**: its productive phase is complete. The
+free-Dirac electron substrate is delivered, axiom-free (budget 0), across the full §2 checklist's
+**kinematic + records tiers**, at both the exterior-algebra and PhysLean-operator levels:
+
+- **E1** spinor/Clifford `{γ^μ,γ^ν}=2η^{μν}` + ℤ₂ grading (Lorentz generators even).
+- **E2** CAR antisymmetric-Fock dim `2ⁿ` + PhysLean CAR operators.
+- **E3** capacity bound `S ≤ log dim(⋀h)` + Araki/CAR relative-entropy positivity.
+- **E4** the complete Klein-twist crux: `Z²=Γ`, `Z⁴=1`, `Z*Z=1`.
+- **E5** CAR 2nd-quant operators + **all four CAR relations** (`{a†,a†}=0` Pauli, `{a,a}=0`,
+  `{a,a†}` central, and the explicit anticommutator) via PhysLean.
+- **E6** Fermi–Dirac occupation + modular energy `log((1−n)/n)=βω` + particle–hole symmetry.
+- **E7** graded regional capacity → `log dim(⊕M)` (chain rule + Gibbs collapse).
+- **E8** even-observable subalgebra + records-commute (no-signaling) + operator-level grading
+  (bilinears are bosonic = records).
+
+**Verified-blocked frontier (every remaining item routes through an existing open wall):**
+- **E5 modular flow `Δ_W^it=U(Λ_W(−2πt))`, E6 boost-KMS state, E9 Dirac `T_μν`→Jacobson** — all need
+  **Tomita–Takesaki / Type II–III modular theory**, which exists in **no proof assistant** (the shared
+  QIQT-H frontier).
+- **E1 `S_D=(iγ·∂+m)Δ_m` microcausality** — inherits from the **scalar Pauli–Jordan spacelike-support
+  theorem** (`Fock/PauliJordan.lean`), itself an open QIQT-H analytic wall (the OP3b prize input).
+
+No clean tractable increment remains. The genuine next frontier is **formalizing CAR modular theory**
+(Tomita–Takesaki for the CAR algebra), which would simultaneously unblock E5/E6/E9 here AND the
+Type II/III capstone of the whole QIQT-H program — a deliberate research program, not a loop tick.
