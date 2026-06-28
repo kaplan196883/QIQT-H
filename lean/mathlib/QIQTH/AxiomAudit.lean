@@ -6514,6 +6514,14 @@ namespace QIQTH.AxiomAudit
 -- the second-quantized algebra — the §0 "records attach to the even/observable algebra" decision, now on PhysLean.
 -- Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.electron_bilinear_bosonic
+-- ★★★ ELECTRON_FIELD E5/E6 (electron mode wired into the EXISTING Tomita–Takesaki machinery): QIQT-H already has
+-- the finite modular flow (FiniteModularTheory: modAut ρ x = ρ x ⅟ρ, stateOf, the proved kms_condition) and the
+-- continuum Δ^it = modFlow (Spectral/SpectralTheorem). electron_occupation_eq_fermiDirac: for a single fermionic
+-- mode (qubit) with thermal density matrix ρ = diag(1−n, n), n = fermiDirac β ω, and number op N = diag(0,1), the
+-- KMS-state expectation stateOf ρ N = tr(ρN) = fermiDirac β ω — the FD occupation (E6) IS the expectation of N in
+-- the project's finite Tomita–Takesaki KMS state; ρ is a faithful state (trace 1, invertible 0<n<1) so kms_condition
+-- applies. The E6 boost-KMS content realized inside the existing modular flow, not a separate axiom. Axiom-free.
+#print axioms QIQTH.Fock.Dirac.electron_occupation_eq_fermiDirac
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy

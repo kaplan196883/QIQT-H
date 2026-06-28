@@ -450,3 +450,24 @@ free-Dirac electron substrate is delivered, axiom-free (budget 0), across the fu
 No clean tractable increment remains. The genuine next frontier is **formalizing CAR modular theory**
 (Tomita–Takesaki for the CAR algebra), which would simultaneously unblock E5/E6/E9 here AND the
 Type II/III capstone of the whole QIQT-H program — a deliberate research program, not a loop tick.
+
+## 9. CORRECTION (2026-06-28): Tomita–Takesaki is already in QIQT-H — E5/E6 wired in
+
+I wrongly closed §8 claiming E5/E6 were "blocked on unbuilt Tomita–Takesaki." **QIQT-H already has the
+modular machinery, axiom-free:** `FiniteModularTheory.lean` (`modAut ρ x = ρ x ⅟ρ` = Δ-conjugation,
+`stateOf`, the proved `kms_condition`, `modAut_stateOf_invariant`) and the continuum `Δ^{it} = modFlow`
+(`Spectral/SpectralTheorem.lean`: `PVM_of_selfAdjoint`, `borelFC`, bounded Stone), plus
+`CrossedProduct*.lean`, `Araki*.lean`, `Fock/BoostKMS.lean`, `Fock/{SecondQuant,Relative}ModularFlow.lean`
+(`TOMITA_TAKESAKI_ROADMAP.md`: Phase 1 + Phase 2 core DONE). The "no proof assistant has TT" was about
+EXTERNAL libraries; QIQT-H built its own.
+
+- 2026-06-28 — **E5/E6: electron mode wired into the existing TT machinery** (`ModularKMS.lean`,
+  axiom-free, budget 0). **`electron_occupation_eq_fermiDirac`** — for a single fermionic mode (qubit)
+  with thermal density matrix `ρ = diag(1−n, n)`, `n = fermiDirac β ω`, and number op `N = diag(0,1)`:
+  `stateOf ρ N = tr(ρN) = fermiDirac β ω`. The FD occupation (E6) **IS** the expectation of `N` in the
+  project's finite Tomita–Takesaki KMS state `ω(·)=tr(ρ·)`; `ρ` is a faithful state
+  (`electronModeThermalState_trace : tr ρ = 1`, invertible since `0<n<1`) so the proved `kms_condition`
+  applies. The E6 boost-KMS content realized inside the existing modular flow, not a separate axiom.
+  `lake build QIQTH.Fock.Dirac.ModularKMS` green (2944 jobs); standard-3; budget 0. Next: the continuum
+  wedge `Δ_W^{it}=U(Λ_W(−2πt))` for the CAR net via `modFlow`/`Spectral` + the `StandardSubspace`/
+  crossed-product tracks, with the fermionic `J` from the Klein twist.
