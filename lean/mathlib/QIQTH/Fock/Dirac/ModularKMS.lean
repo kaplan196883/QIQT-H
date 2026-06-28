@@ -359,6 +359,24 @@ theorem electron_modHamiltonian_trace (β ω : ℝ) :
   rw [electron_modHamiltonian_diag, Matrix.trace_diagonal, Fin.sum_univ_two]
   simp
 
+/-- **Every diagonal observable is a modular invariant `σ_t(D) = D`.**  The electron's real-time modular
+flow `σ_t = Δ^{it}` fixes *every* diagonal matrix `D = diag(d)` — generalizing `electron_sigmaDiag_fixes_
+numberOp` (which is the special case `D = N`) to the whole **classical / pointer (record) basis**.  Since
+`Δ^{it} = diagPow` is diagonal and diagonals commute, `Δ^{it}·D·Δ^{−it} = D·(Δ^{it}·Δ^{−it}) = D`.  So the
+electron's records — the diagonal/decohered observables (number, occupation, charge) — are **conserved by
+the modular dynamics** at the finite single-mode level (the finite-KMS counterpart of the continuum
+`fermiSecondQuantModFlow_isEven`: modular flow keeps records as records). -/
+theorem electron_sigmaDiag_fixes_diagonal (β ω : ℝ) (t : ℝ) (d : Fin 2 → ℂ) :
+    QIQTH.FiniteModularTheory.sigmaDiag (electronModeOcc β ω) t (Matrix.diagonal d)
+      = Matrix.diagonal d := by
+  unfold QIQTH.FiniteModularTheory.sigmaDiag QIQTH.FiniteModularTheory.diagPow
+  rw [Matrix.diagonal_mul_diagonal, Matrix.diagonal_mul_diagonal]
+  congr 1
+  funext i
+  rw [mul_right_comm, ← Complex.cpow_add _ _ (electronModeOcc_ne_zero β ω i),
+      show Complex.I * (t : ℂ) + Complex.I * ((-t : ℝ) : ℂ) = 0 from by push_cast; ring,
+      Complex.cpow_zero, one_mul]
+
 /-- **The single-mode thermal / entanglement entropy: `S = log Z + β⟨E⟩`.**  The von Neumann entropy of
 the electron mode equals the log partition function plus `β` times the mean energy:
 `binaryEntropy(n) = log(1 + e^{−βω}) + βω·n`, with `n = fermiDirac β ω`, `Z = 1 + e^{−βω}` and the mean

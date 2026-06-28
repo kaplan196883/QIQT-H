@@ -714,3 +714,11 @@ EXTERNAL libraries; QIQT-H built its own.
   **`electron_kleinTwist_comm`** (`[Z,Γ]=0`) — the twisted-duality intertwiner realized on the *real*
   electron parity, not just postulated. Wired into `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.
   (The field-level `(−1)^F` on the full CAR Fock + the operator-algebra duality *theorem* = E5 GNS frontier.)
+- 2026-06-29 — **E5/§0: every diagonal record is a modular invariant** (added to `ModularKMS.lean`,
+  axiom-free, budget 0, 3061 jobs green). **`electron_sigmaDiag_fixes_diagonal`**: the real-time modular
+  flow `σ_t=Δ^{it}` fixes *every* diagonal matrix `diag(d)` — generalizing `electron_sigmaDiag_fixes_numberOp`
+  (the `D=N` case) to the **whole classical/pointer (record) basis**. Since `Δ^{it}=diagPow` is diagonal
+  and diagonals commute, `σ_t(D)=D·(Δ^{it}Δ^{−it})=D`. So the electron's records (the diagonal/decohered
+  observables — number, occupation, charge) are **conserved by the modular dynamics** at the finite
+  single-mode level — the finite-KMS counterpart of the continuum `fermiSecondQuantModFlow_isEven`. Wired
+  into `AxiomAudit.lean`; standard-3; budget 0.

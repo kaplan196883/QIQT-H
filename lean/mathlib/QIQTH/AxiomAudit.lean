@@ -6665,6 +6665,12 @@ namespace QIQTH.AxiomAudit
 -- (the total/sum of modular energy levels). Axiom-free (standard 3); free Dirac.
 #print axioms QIQTH.Fock.Dirac.electron_modHamiltonian_diag
 #print axioms QIQTH.Fock.Dirac.electron_modHamiltonian_trace
+-- ELECTRON_FIELD E5/§0 (every diagonal record is a modular invariant): electron_sigmaDiag_fixes_diagonal — the real-time
+-- modular flow σ_t=Δ^it fixes EVERY diagonal matrix diag(d), generalizing electron_sigmaDiag_fixes_numberOp (the D=N
+-- case) to the whole classical/pointer (record) basis. Since Δ^it=diagPow is diagonal and diagonals commute, σ_t(D)=D.
+-- So the electron's records (the diagonal/decohered observables — number, occupation, charge) are CONSERVED by the
+-- modular dynamics (finite-KMS counterpart of the continuum fermiSecondQuantModFlow_isEven). Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.electron_sigmaDiag_fixes_diagonal
 -- ★★★ ELECTRON_FIELD E5 (CONTINUUM CAR-net modular flow Γ₋(Δ^it)): the continuum wedge modular flow for the electron
 -- CAR net is the FERMIONIC second quantization of the one-particle continuum Δ^it = modUnitary S t
 -- (StandardSubspaceModularFlow, already built). fermiSecondQuantModFlow S t = ExteriorAlgebra.map (modUnitary S t)
@@ -6838,5 +6844,11 @@ namespace QIQTH.AxiomAudit
 -- center). Axiom-free (standard 3); free Maxwell.
 #print axioms QIQTH.Fock.Photon.fieldStrength_eq_iff_sub_mem_ker
 #print axioms QIQTH.Fock.Photon.pureGauge_le_ker
+-- PHOTON_FIELD_PLAN P6/P9 (trivial cohomology ⟹ F determines A up to gauge): fieldStrength_eq_iff_gauge_of_trivial_
+-- cohomology — when ker d_F = range d_gauge (every closed is exact; a CONTRACTIBLE region, no flux sectors, the regional
+-- algebra a factor), d_F a = d_F a' ↔ a−a' ∈ range d_gauge: the field-strength record F=dA is a COMPLETE invariant of the
+-- physical (gauge) configuration. The honest §0/P9 caveat — the boundary-flux center exists only when the cohomology
+-- (closed-mod-exact) is nontrivial. Axiom-free (standard 3); free Maxwell.
+#print axioms QIQTH.Fock.Photon.fieldStrength_eq_iff_gauge_of_trivial_cohomology
 
 end QIQTH.AxiomAudit
