@@ -211,3 +211,16 @@ frontier.
   parity unitary `u_Γ` on the CAR inner-product space (**E5** — needs the inner product / GNS, the
   genuine operator-algebra frontier). Next: **E5/E6** (one-particle BW data → `Δ_W^it`=boost, `J_W=Z·Expₐ(j_W)`,
   boost-KMS β=2π, Fermi–Dirac), or **E1** (Dirac one-particle + `S_D` kernel).
+- 2026-06-28 — **E6 (Fermi–Dirac Unruh occupation) DONE** (`QIQTH/Fock/Dirac/FermiDirac.lean`,
+  axiom-free, budget 0). The CAR `+1` vs Bose `−1` thermal signature: `fermiDirac β ω = 1/(e^{βω}+1)`,
+  **`fermiDirac_kms_balance : n = e^{−βω}(1−n)`** (KMS thermal condition + CAR `bb†=1−b†b`),
+  **`fermiDirac_unique`** (the balance's unique solution is Fermi–Dirac), `fermiDirac_mem_Ioo` (`0<n<1`,
+  Pauli — at most singly occupied), and **`boseEinstein_kms_balance`** (the CCR sign `aa†=1+a†a` gives
+  `n=e^{−βω}(1+n) → 1/(e^{βω}−1)`: same Unruh temperature, denominator sign `−1` vs CAR `+1` — the
+  spin–statistics signature at the occupation level); `rindlerOccupationFermi ω = fermiDirac (2π) ω`
+  (Unruh `β=2π`). Wired into `QIQTH.lean` + `AxiomAudit.lean` (all standard-3); `lake build
+  QIQTH.Fock.Dirac.FermiDirac` green (1913 jobs); budget 0. **Honest:** the *balance relation* is the
+  KMS+CAR input (presupposes the modular/KMS state — cited E5 machinery); derived here is the occupation
+  FROM the balance. Next: **E5** (CAR 2nd-quant of one-particle BW data — the operator-algebra frontier:
+  `Δ_W^it`=boost, `J_W=Z·Expₐ(j_W)`, twisted duality; needs inner product/GNS), or **E1** (Dirac
+  one-particle + `S_D` kernel), or the **Z-unitary** checkpoint from E4.

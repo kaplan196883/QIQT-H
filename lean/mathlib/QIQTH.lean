@@ -495,6 +495,7 @@ import QIQTH.Fock.Dirac.QuasiFreeEntropy
 import QIQTH.Fock.Dirac.CAR
 import QIQTH.Fock.Dirac.Parity
 import QIQTH.Fock.Dirac.KleinTwist
+import QIQTH.Fock.Dirac.FermiDirac
 
 import QIQTH.RefinementBorn
 import QIQTH.SBSBoolean

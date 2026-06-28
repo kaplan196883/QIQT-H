@@ -6395,6 +6395,18 @@ namespace QIQTH.AxiomAudit
 -- as the second-quantized parity unitary (E5). Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.kleinTwist_sq
 #print axioms QIQTH.Fock.Dirac.kleinTwist_sq_sq
+-- ★★★ ELECTRON_FIELD_PLAN E6 (Fermi–Dirac Unruh occupation — the CAR +1 vs Bose −1 signature): for a Rindler mode
+-- of the free Dirac field the vacuum is boost-KMS at β=2π (Unruh temperature, SAME as the scalar); the fermionic
+-- difference is the occupation. fermiDirac β ω = 1/(e^{βω}+1); fermiDirac_kms_balance: n = e^{−βω}(1−n) (KMS thermal
+-- condition + CAR anticommutator bb†=1−b†b); fermiDirac_unique: that balance has the Fermi–Dirac occupation as its
+-- UNIQUE solution; fermiDirac_mem_Ioo: 0<n<1 (Pauli — at most singly occupied). boseEinstein_kms_balance shows the
+-- CCR sign (aa†=1+a†a) gives n=e^{−βω}(1+n) → 1/(e^{βω}−1): same Unruh temperature, denominator sign −1 vs the CAR
+-- +1 — the spin–statistics signature at the thermal occupation. rindlerOccupationFermi ω = fermiDirac (2π) ω.
+-- HONEST (§0): the balance relation is the KMS+CAR input (presupposes the modular/KMS state, cited E5 machinery);
+-- what is derived is the occupation FROM the balance (uniqueness, validity, Bose contrast). Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.fermiDirac_kms_balance
+#print axioms QIQTH.Fock.Dirac.fermiDirac_unique
+#print axioms QIQTH.Fock.Dirac.boseEinstein_kms_balance
 -- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-11, von Neumann non-vacuity witness): oneDensity_isDensity —
 -- IsDensity (1 : Matrix (Fin 1) (Fin 1) ℂ), the one-microstate pure state (1×1 identity), a genuine density
 -- (PosSemidef.one + trace_one). Completes the witness story (M-7 only witnessed the record-law/Shannon floor): the
