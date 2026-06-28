@@ -6558,6 +6558,13 @@ namespace QIQTH.AxiomAudit
 -- under A→A+∂χ. The energy/stress (T_μν) companion of the field-strength record F_μν: the photon's ENERGY observable,
 -- like its field strength, does not see the pure-gauge redundancy (completing P6 "records = F_μν/T_μν"). Standard 3.
 #print axioms QIQTH.Fock.Photon.photonAction_gauge_invariant
+-- ★★★ PHOTON_FIELD_PLAN (the DYNAMICAL law is gauge-invariant): photonEOM_gauge_invariant — the free Maxwell equation
+-- of motion ∂_μF^μν=μ₀J^ν (PhysLean IsExtrema / isExtrema_iff_fieldStrengthMatrix) is a condition stated PURELY on the
+-- field strength F. Since F is gauge-invariant, the EOM condition is unchanged under A→A+∂χ: IsExtrema 𝓕 (A+∂χ) J ↔
+-- IsExtrema 𝓕 A J. So the photon's EQUATION OF MOTION is a law about the gauge-invariant RECORD F, not the gauge-
+-- dependent potential A — completing the dynamical picture (records gauge-invariant + modular-covariant + action
+-- gauge-invariant + EOM gauge-invariant). Free Maxwell = J=0 case. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Photon.photonEOM_gauge_invariant
 -- ★★★ ELECTRON_FIELD_PLAN E6→E5 bridge (per-mode modular Hamiltonian): fermiDirac_logit — for a fermionic mode with
 -- occupation n = fermiDirac β ω, the modular energy is the logit log((1−n)/n) = βω. This is the single-mode form of
 -- the fermionic modular Hamiltonian K = log((1−C)/C) (QuasiFreeEntropy / quasi-free modular generator): the logit of

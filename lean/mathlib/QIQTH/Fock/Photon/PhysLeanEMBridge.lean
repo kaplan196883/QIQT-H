@@ -26,10 +26,12 @@ Free Maxwell only.
 -/
 import Physlib.Electromagnetism.Kinematics.GaugeTransformation
 import Physlib.Electromagnetism.Dynamics.KineticTerm
+import Physlib.Electromagnetism.Dynamics.IsExtrema
 
 namespace QIQTH.Fock.Photon
 
 open Electromagnetism
+open scoped ContDiff
 
 variable {d : ℕ}
 
@@ -102,5 +104,29 @@ theorem photonAction_gauge_invariant (𝓕 : FreeSpace) (A : ElectromagneticPote
   rw [ElectromagneticPotential.kineticTerm_eq_sum_fieldStrengthMatrix,
       ElectromagneticPotential.kineticTerm_eq_sum_fieldStrengthMatrix,
       ElectromagneticPotential.fieldStrengthMatrix_gaugeTransform A χ hA hχ x]
+
+/-- **★ The Maxwell equation of motion is gauge-invariant** (the *dynamical* law, not just the kinematics).
+The free Maxwell EOM is `∂_μ F^μν = μ₀ J^ν` (PhysLean's `IsExtrema` / `isExtrema_iff_fieldStrengthMatrix`) — a
+condition stated **purely on the field strength `F`**.  Since `F` is gauge-invariant
+(`photonRecord_gauge_invariant`), the EOM condition is **unchanged under `A → A + ∂χ`**:
+`IsExtrema 𝓕 (A+∂χ) J ↔ IsExtrema 𝓕 A J`.  So the photon's *equation of motion* is a law about the
+gauge-invariant **record** `F`, not about the gauge-dependent potential `A` — completing the picture
+alongside `photonRecord_gauge_invariant` (records are gauge-invariant), `photonRecord_lorentz_covariant`
+(the modular/boost flow acts covariantly on them), and `photonAction_gauge_invariant` (the action is
+gauge-invariant).  (Free Maxwell = the `J = 0` case; the invariance holds for any external current `J`.) -/
+theorem photonEOM_gauge_invariant (𝓕 : FreeSpace) (A : ElectromagneticPotential d)
+    (χ : SpaceTime d → ℝ) (J : LorentzCurrentDensity d)
+    (hAd : Differentiable ℝ A)
+    (hA : ContDiff ℝ ∞ A) (hgA : ContDiff ℝ ∞ (ElectromagneticPotential.gaugeTransform χ A))
+    (hJ : ContDiff ℝ ∞ J) (hχ : ContDiff ℝ 2 χ) :
+    ElectromagneticPotential.IsExtrema 𝓕 (ElectromagneticPotential.gaugeTransform χ A) J
+      ↔ ElectromagneticPotential.IsExtrema 𝓕 A J := by
+  rw [ElectromagneticPotential.isExtrema_iff_fieldStrengthMatrix _ hgA J hJ,
+      ElectromagneticPotential.isExtrema_iff_fieldStrengthMatrix A hA J hJ]
+  have hFfun : (ElectromagneticPotential.gaugeTransform χ A).fieldStrengthMatrix
+             = A.fieldStrengthMatrix :=
+    funext fun y =>
+      ElectromagneticPotential.fieldStrengthMatrix_gaugeTransform A χ hAd hχ y
+  rw [hFfun]
 
 end QIQTH.Fock.Photon

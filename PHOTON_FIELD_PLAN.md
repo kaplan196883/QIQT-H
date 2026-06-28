@@ -395,3 +395,14 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   observable, like its field strength, does not see the pure-gauge redundancy — completing the §2/P6
   "records = gauge-invariant observables `F_μν`/`T_μν`" decision (both halves now grounded in PhysLean's
   reviewed EM dynamics). Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **★ The photon's DYNAMICAL law is gauge-invariant** (the equation of motion, not just the
+  kinematics; extended `PhysLeanEMBridge.lean`, axiom-free standard-3, budget 0, 3302 jobs green).
+  **`photonEOM_gauge_invariant`**: the free Maxwell EOM `∂_μF^μν = μ₀J^ν` (PhysLean's `IsExtrema` /
+  `isExtrema_iff_fieldStrengthMatrix`) is a condition stated **purely on the field strength `F`**, so — since
+  `F` is gauge-invariant — the EOM condition is **unchanged under `A→A+∂χ`**:
+  `IsExtrema 𝓕 (A+∂χ) J ↔ IsExtrema 𝓕 A J`. The photon's *equation of motion* is therefore a law about the
+  gauge-invariant **record `F`**, not the gauge-dependent potential `A`. This completes the dynamical picture
+  for the photon record: gauge-invariant (`photonRecord_gauge_invariant`) · modular/boost-covariant
+  (`photonRecord_lorentz_covariant`) · action gauge-invariant (`photonAction_gauge_invariant`) · **EOM
+  gauge-invariant** (here). (Free Maxwell = the `J=0` case; the invariance holds for any external `J`.) Wired
+  into `AxiomAudit.lean`; standard-3; budget 0.
