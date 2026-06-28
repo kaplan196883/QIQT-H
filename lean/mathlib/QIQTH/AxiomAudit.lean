@@ -6728,6 +6728,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Photon.boseEinstein_gt_fermiDirac
 #print axioms QIQTH.Fock.Photon.rindlerOccupationBose_balance
 #print axioms QIQTH.Fock.Photon.rindlerOccupationBose_pos
+-- PHOTON_FIELD_PLAN P4 (the photon Unruh thermal entropy): photon_mode_entropy — for a bosonic photon mode with
+-- Bose–Einstein occupation n=1/(e^{βω}−1), the mode entropy boseEntropy(n)=(1+n)log(1+n)−n log n equals the log
+-- partition function −log(1−e^{−βω}) + βω·n (the bosonic mirror of electron_mode_entropy S=log Z+β⟨E⟩). UNBOUNDED: as
+-- βω→0⁺, n→∞ and S→∞ — the entropy-level reason the photon needs a number cutoff (P2/P3), the sharp contrast with the
+-- electron's Pauli ceiling S≤log 2 (electron_mode_entropy_le_log2). Axiom-free (standard 3); free Maxwell.
+#print axioms QIQTH.Fock.Photon.photon_mode_entropy
 -- ★★★ PHOTON_FIELD_PLAN P1/P5 (the photon continuum modular flow IS the bosonic Γ_s(Δ^it) — REUSE): the photon is
 -- bosonic, so its field-level wedge modular flow Δ_γ^it = Γ_s(Δ^it) is EXACTLY the existing bosonic secondQuantModFlow
 -- (vs the electron's fermionic Γ₋ = ExteriorAlgebra.map). Nothing new is built; this names the reuse in the photon

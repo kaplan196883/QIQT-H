@@ -83,4 +83,41 @@ temperature `β = 2π`. -/
 theorem rindlerOccupationBose_pos {ω : ℝ} (h : 0 < ω) : 0 < rindlerOccupationBose ω :=
   boseEinstein_pos (by positivity)
 
+/-- The single bosonic-mode (photon) thermal entropy `S_BE(n) = (1+n)log(1+n) − n log n` — the von Neumann
+entropy of a thermal harmonic oscillator at occupation `n` (the bosonic mirror of the electron's
+`binaryEntropy`). -/
+noncomputable def boseEntropy (n : ℝ) : ℝ := (1 + n) * Real.log (1 + n) - n * Real.log n
+
+/-- **The photon Unruh thermal entropy** `S_BE = log Z + βω·n` (for `βω > 0`).  For a bosonic (photon) mode
+with Bose–Einstein occupation `n = 1/(e^{βω}−1)`, the mode entropy equals the log partition function
+`log Z = −log(1 − e^{−βω})` plus `βω` times the occupation (`= β⟨E⟩`):
+`(1+n)log(1+n) − n log n = −log(1 − e^{−βω}) + βω·n`.  The bosonic mirror of the electron's
+`electron_mode_entropy` (`S = log Z + β⟨E⟩`) — but with **no `log 2` ceiling**: as `βω → 0⁺` the occupation
+`n → ∞` and `S_BE → ∞`, the *unbounded* photon mode entropy (the entropy-level reason the photon needs a
+number cutoff, `PHOTON_FIELD_PLAN` P2/P3), in sharp contrast with the electron's Pauli ceiling
+`S ≤ log 2`. -/
+theorem photon_mode_entropy {β ω : ℝ} (h : 0 < β * ω) :
+    boseEntropy (boseEinstein β ω)
+      = -Real.log (1 - Real.exp (-(β * ω))) + (β * ω) * boseEinstein β ω := by
+  have hexp1 : 1 < Real.exp (β * ω) := by
+    have h2 := Real.exp_lt_exp.mpr h; rwa [Real.exp_zero] at h2
+  have hsub : (0 : ℝ) < Real.exp (β * ω) - 1 := by linarith
+  have hsubne : Real.exp (β * ω) - 1 ≠ 0 := ne_of_gt hsub
+  set n := boseEinstein β ω with hn
+  have hnpos : 0 < n := boseEinstein_pos h
+  have h1n : Real.exp (β * ω) * n = 1 + n := by
+    have hb1 : n * (Real.exp (β * ω) - 1) = 1 := by
+      rw [hn]; unfold boseEinstein; exact one_div_mul_cancel hsubne
+    linear_combination hb1
+  have hlog1n : Real.log (1 + n) = β * ω + Real.log n := by
+    rw [← h1n, Real.log_mul (Real.exp_pos _).ne' hnpos.ne', Real.log_exp]
+  have hlogn : Real.log n = -Real.log (Real.exp (β * ω) - 1) := by
+    rw [hn]; unfold boseEinstein; rw [one_div, Real.log_inv]
+  have hfrac : 1 - Real.exp (-(β * ω)) = (Real.exp (β * ω) - 1) / Real.exp (β * ω) := by
+    rw [Real.exp_neg, eq_div_iff (Real.exp_pos _).ne', sub_mul, one_mul,
+        inv_mul_cancel₀ (Real.exp_pos _).ne']
+  have hlogZ : -Real.log (1 - Real.exp (-(β * ω))) = β * ω - Real.log (Real.exp (β * ω) - 1) := by
+    rw [hfrac, Real.log_div hsubne (Real.exp_pos _).ne', Real.log_exp]; ring
+  rw [boseEntropy, hlog1n, hlogn, hlogZ]; ring
+
 end QIQTH.Fock.Photon

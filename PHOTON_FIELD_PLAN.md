@@ -214,3 +214,10 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   reuse (P1/P5), gauge-invariant records (P6/P7), centered edge-mode entropy (P8), boundary-flux sectors (P9).
   Remaining = the cited continuum frontier **P10** (Gupta–Bleuler/BRST indefinite metric; Maxwell `F=dA` CCR
   from test 2-forms + Pauli–Jordan; Gauss-law boundary algebra; Kabat contact determinant; interacting QED).
+- 2026-06-29 — **P4 completion: the photon Unruh thermal entropy** (`PhotonUnruh.lean`, axiom-free
+  standard-3, budget 0, 1926 jobs green). **`boseEntropy n := (1+n)log(1+n) − n log n`** (the thermal
+  harmonic-oscillator entropy); **`photon_mode_entropy`** (`βω>0`): `boseEntropy(1/(e^{βω}−1)) =
+  −log(1−e^{−βω}) + βω·n = log Z + β⟨E⟩` — the bosonic mirror of `electron_mode_entropy`. **UNBOUNDED**: as
+  `βω→0⁺`, `n→∞` and `S→∞` (the entropy-level reason the photon needs a number cutoff, P2/P3) — the sharp
+  contrast with the electron's Pauli ceiling `S≤log 2` (`electron_mode_entropy_le_log2`). Wired into
+  `AxiomAudit.lean`; standard-3; budget 0.
