@@ -6483,6 +6483,11 @@ namespace QIQTH.AxiomAudit
 -- WickAlgebra is the follow-on E2-full/E5 work. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.electron_pair_bosonic
 #print axioms QIQTH.Fock.Dirac.statParity_mul
+-- electron_exchangeSign: 𝓢(fermionic,fermionic) = −1 (PhysLean exchangeSign) — exactly the graded-commutation sign
+-- (−1)^{|F₁||F₂|} of the crux F₁F₂=(−1)^{|F₁||F₂|}F₂F₁ for two fermions, the same −1 as the substrate's
+-- ι_mul_ι_swap (ι a·ι b = −ι b·ι a). PhysLean's exchange sign and the QIQT-H CAR anticommutation carry the
+-- identical Pauli sign. Axiom-free (standard 3 / fewer).
+#print axioms QIQTH.Fock.Dirac.electron_exchangeSign
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy

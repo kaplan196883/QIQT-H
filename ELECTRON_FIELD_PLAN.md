@@ -371,3 +371,11 @@ PhysLean**:
 
 This closes the "build vs reuse" decision for the operator layer: **reuse PhysLean**. The other frontier
 (E5 modular flow / Tomita–Takesaki) remains unbuilt in any proof assistant.
+- 2026-06-28 — **PhysLean bridge increment: electron exchange sign = −1** (added to
+  `PhysLeanBridge.lean`, axiom-free, budget 0). **`electron_exchangeSign`** — `𝓢(fermionic, fermionic)
+  = −1` (PhysLean `exchangeSign`): exactly the graded-commutation sign `(−1)^{|F₁||F₂|}` of the crux
+  `F₁F₂ = (−1)^{|F₁||F₂|}F₂F₁` for two fermions, the **same `−1`** as the substrate's
+  `ι_mul_ι_swap : ι a·ι b = −(ι b·ι a)`. PhysLean's exchange-sign machinery and the QIQT-H CAR
+  anticommutation carry the identical Pauli sign — the first substantive use of PhysLean inside the
+  substrate. `lake build QIQTH.Fock.Dirac.PhysLeanBridge` green (2097 jobs); standard-3; budget 0. Next:
+  build the CAR a/a† operators on Physlib `CrAnFieldOp`/`WickAlgebra`/`SuperCommute` (E2-full/E5).

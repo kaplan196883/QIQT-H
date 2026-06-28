@@ -23,6 +23,7 @@ dependency is live and the statistics align; building the CAR creation/annihilat
 PhysLean's `WickAlgebra` is the follow-on E2-full/E5 work.
 -/
 import Physlib.QFT.PerturbationTheory.FieldStatistics.Basic
+import Physlib.QFT.PerturbationTheory.FieldStatistics.ExchangeSign
 import QIQTH.Fock.Dirac.DiracGamma
 
 namespace QIQTH.Fock.Dirac
@@ -55,5 +56,15 @@ def statParity : FieldStatistic → ZMod 2
 /-- The electron carries odd grade `1` — consistent with `diracGamma_mem_odd` (a one-particle gamma is
 odd) and with the CAR parity `Γ` acting as `−1` on one-particle states. -/
 theorem electron_statParity : statParity electronStatistic = 1 := rfl
+
+/-- **The electron exchange sign is `−1`**: `𝓢(fermionic, fermionic) = −1` (PhysLean
+`exchangeSign`).  This is exactly the graded-commutation sign `(−1)^{|F₁||F₂|}` of the
+ELECTRON_FIELD crux `F₁F₂ = (−1)^{|F₁||F₂|} F₂F₁` for two fermions — the same `−1` that appears in the
+substrate's one-particle anticommutation `ι_mul_ι_swap : ι a · ι b = −(ι b · ι a)`.  So PhysLean's
+exchange-sign machinery and the QIQT-H CAR anticommutation carry the identical Pauli sign. -/
+theorem electron_exchangeSign :
+    FieldStatistic.exchangeSign electronStatistic electronStatistic = -1 := by
+  rw [FieldStatistic.exchangeSign_eq_if]
+  simp [electronStatistic]
 
 end QIQTH.Fock.Dirac
