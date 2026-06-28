@@ -74,4 +74,18 @@ theorem photonRecord_gaugeTransform_eq (A : ElectromagneticPotential d) (χ : Sp
   funext x μν
   exact photonRecord_gauge_invariant A χ hA hχ x μν
 
+/-- **★ The photon record is Lorentz-covariant** (PhysLean-grounded, P7): under a Lorentz transformation
+`Λ` (the **boost** is the modular/Unruh flow for the wedge), the gauge-invariant record `F` transforms as a
+genuine rank-2 tensor — `F(Λ·A)_μν = Σ_κρ Λ_μκ Λ_νρ · F(A)_κρ(Λ⁻¹·x)` (PhysLean's
+`fieldStrengthMatrix_equivariant`).  So the modular/boost flow acts **covariantly** on the gauge-invariant
+records: it does not leave the record set, it rotates it by the tensor rule — the photon analogue of the
+electron's "modular flow preserves the even/observable algebra" (P7).  The records are a closed,
+Lorentz-covariant family, exactly as a relativistic observable algebra must be. -/
+theorem photonRecord_lorentz_covariant (A : ElectromagneticPotential d) (Λ : LorentzGroup d)
+    (hA : Differentiable ℝ A) (x : SpaceTime d) (μ ν : Fin 1 ⊕ Fin d) :
+    photonRecord (Λ • A) x (μ, ν)
+      = ∑ κ, ∑ ρ, (Λ.1 μ κ * Λ.1 ν ρ) * photonRecord A (Λ⁻¹ • x) (κ, ρ) := by
+  unfold photonRecord
+  exact ElectromagneticPotential.fieldStrengthMatrix_equivariant A Λ hA x μ ν
+
 end QIQTH.Fock.Photon

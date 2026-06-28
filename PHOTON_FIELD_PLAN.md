@@ -378,3 +378,11 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   quantization + `F`-net CCR + Kabat remain deferred P10.) Wired into `QIQTH.lean`+`AxiomAudit.lean`;
   standard-3; budget 0. Acts on the PhysLean-reuse gap: the photon's gauge layer now rests on PhysLean's
   vetted EM, shrinking QIQT-H's own trusted surface.
+- 2026-06-29 — **★ P7: the modular/boost flow acts COVARIANTLY on the gauge-invariant records** (extended
+  `PhysLeanEMBridge.lean`, axiom-free standard-3, budget 0, 3290 jobs green). **`photonRecord_lorentz_
+  covariant`**: under a Lorentz transformation `Λ` (the **boost** is the wedge modular/Unruh flow), the
+  record `F` transforms as a genuine rank-2 tensor `F(Λ·A)_μν = Σ_κρ Λ_μκ Λ_νρ · F(A)_κρ(Λ⁻¹·x)` (PhysLean's
+  `fieldStrengthMatrix_equivariant`).  So the modular/boost flow does **not** leave the record family — it
+  rotates it by the tensor rule: the gauge-invariant records form a **closed, Lorentz-covariant family**,
+  the photon analogue of the electron's "modular flow preserves the even/observable algebra" (P7).  Wired
+  into `AxiomAudit.lean`; standard-3; budget 0.

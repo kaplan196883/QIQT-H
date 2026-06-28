@@ -6545,6 +6545,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Photon.photonRecord_antisymm
 #print axioms QIQTH.Fock.Photon.photonRecord_diag_zero
 #print axioms QIQTH.Fock.Photon.photonRecord_gaugeTransform_eq
+-- ★★★ PHOTON_FIELD_PLAN P7 (the modular/boost flow acts COVARIANTLY on the gauge-invariant records):
+-- photonRecord_lorentz_covariant — under a Lorentz transformation Λ (the boost IS the wedge modular/Unruh flow), the
+-- record F transforms as a genuine rank-2 tensor F(Λ·A)_μν = Σ_κρ Λ_μκ Λ_νρ F(A)_κρ(Λ⁻¹x) (PhysLean's
+-- fieldStrengthMatrix_equivariant). So the modular flow does NOT leave the record family — it rotates it by the tensor
+-- rule: the gauge-invariant records form a closed Lorentz-covariant family (the photon analogue of the electron's
+-- "modular flow preserves the even/observable algebra"). Axiom-free (standard 3); free Maxwell.
+#print axioms QIQTH.Fock.Photon.photonRecord_lorentz_covariant
 -- ★★★ ELECTRON_FIELD_PLAN E6→E5 bridge (per-mode modular Hamiltonian): fermiDirac_logit — for a fermionic mode with
 -- occupation n = fermiDirac β ω, the modular energy is the logit log((1−n)/n) = βω. This is the single-mode form of
 -- the fermionic modular Hamiltonian K = log((1−C)/C) (QuasiFreeEntropy / quasi-free modular generator): the logit of
