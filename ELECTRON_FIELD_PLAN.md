@@ -738,3 +738,11 @@ EXTERNAL libraries; QIQT-H built its own.
   twist is a **modular invariant** — it commutes with the modular Hamiltonian (hence the modular flow `σ_t`),
   so the twisted duality `𝓕(W)'=Z𝓕(W')Z*` is **compatible with the modular dynamics** (the E4 twist
   consistent with the E6/E9 modular tier). Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **E6: the modular state is the Gibbs state over the spectrum `{0, βω}`** (added to
+  `ModularKMS.lean`, axiom-free, budget 0, 3061 jobs green). **`electron_gibbs_weight_ground`**:
+  `(1−n)·Z = e^{−E₀} = 1` (`E₀=0`); **`electron_gibbs_weight_excited`**: `n·Z = e^{−E₁} = e^{−βω}` (`E₁=βω`),
+  `Z = 1 + e^{−βω}`. So the electron's KMS/modular occupations are **exactly the Boltzmann weights
+  `e^{−Eᵢ}/Z`** of the modular energy spectrum `{0, βω}` (`electron_modHamiltonian_diag`), with `Z = Σᵢ e^{−Eᵢ}`
+  the modular partition function (whose `log Z` is the `S = log Z + β⟨E⟩` of `electron_mode_entropy`) — the
+  "modular state = Gibbs state" statement at the entry level (the matrix-exp `ρ = e^{−K}/Z` form is the
+  cited fiddly-but-tractable follow-on). Wired into `AxiomAudit.lean`; standard-3; budget 0.

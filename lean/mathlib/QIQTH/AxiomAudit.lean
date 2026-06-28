@@ -6686,6 +6686,13 @@ namespace QIQTH.AxiomAudit
 -- So the electron's records (the diagonal/decohered observables — number, occupation, charge) are CONSERVED by the
 -- modular dynamics (finite-KMS counterpart of the continuum fermiSecondQuantModFlow_isEven). Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.electron_sigmaDiag_fixes_diagonal
+-- ELECTRON_FIELD E6 (the modular state as the Gibbs state over the spectrum {0,βω}): electron_gibbs_weight_ground —
+-- (1−n)·Z = e^{−E₀} = 1 (E₀=0); electron_gibbs_weight_excited — n·Z = e^{−E₁} = e^{−βω} (E₁=βω), Z=1+e^{−βω}. So the
+-- electron's KMS/modular occupations are EXACTLY the Boltzmann weights e^{−Eᵢ}/Z of the modular energy spectrum {0,βω}
+-- (electron_modHamiltonian_diag), Z=Σᵢ e^{−Eᵢ} the modular partition function (whose log Z is the S=log Z+β⟨E⟩ of
+-- electron_mode_entropy) — the modular state = Gibbs state, at the entry level. Axiom-free (standard 3); free Dirac.
+#print axioms QIQTH.Fock.Dirac.electron_gibbs_weight_ground
+#print axioms QIQTH.Fock.Dirac.electron_gibbs_weight_excited
 -- ★★★ ELECTRON_FIELD E5 (CONTINUUM CAR-net modular flow Γ₋(Δ^it)): the continuum wedge modular flow for the electron
 -- CAR net is the FERMIONIC second quantization of the one-particle continuum Δ^it = modUnitary S t
 -- (StandardSubspaceModularFlow, already built). fermiSecondQuantModFlow S t = ExteriorAlgebra.map (modUnitary S t)
@@ -6783,6 +6790,10 @@ namespace QIQTH.AxiomAudit
 -- βω→0⁺, n→∞ and S→∞ — the entropy-level reason the photon needs a number cutoff (P2/P3), the sharp contrast with the
 -- electron's Pauli ceiling S≤log 2 (electron_mode_entropy_le_log2). Axiom-free (standard 3); free Maxwell.
 #print axioms QIQTH.Fock.Photon.photon_mode_entropy
+-- PHOTON_FIELD_PLAN P4 (the Bose occupation decreases with mode energy): boseEinstein_le_of_le — for 0<βω₁≤βω₂,
+-- n(βω₂) ≤ n(βω₁): higher-energy photon modes are thermally less occupied (1/(e^{βω}−1) is antitone in βω). The expected
+-- monotone falloff of the thermal/Unruh photon spectrum with energy. Axiom-free (standard 3); free Maxwell.
+#print axioms QIQTH.Fock.Photon.boseEinstein_le_of_le
 -- PHOTON_FIELD_PLAN P4 (the photon entanglement first law δS=δ⟨K⟩): boseEinstein_logit — log((1+n)/n)=βω at the BE
 -- occupation (the CCR analog of fermiDirac_logit). hasDerivAt_boseEntropy — d/dn S_BE = log((1+n)/n) (via
 -- S_BE=negMulLog n − negMulLog(1+n)). photon_firstLaw — HasDerivAt boseEntropy (βω) (boseEinstein β ω): at the

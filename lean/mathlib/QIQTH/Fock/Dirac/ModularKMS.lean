@@ -359,6 +359,32 @@ theorem electron_modHamiltonian_trace (β ω : ℝ) :
   rw [electron_modHamiltonian_diag, Matrix.trace_diagonal, Fin.sum_univ_two]
   simp
 
+/-- **The ground-state Gibbs weight** `(1−n)·Z = e^{−E₀} = 1` (with `Z = 1 + e^{−βω}`, `E₀ = 0`).  The
+empty-mode occupation `1−n` is exactly the Boltzmann weight `e^{−E₀}/Z` of the lower modular energy level
+`E₀ = 0` (the empty state has zero modular energy, `electron_modHamiltonian_diag`). -/
+theorem electron_gibbs_weight_ground (β ω : ℝ) :
+    (1 - fermiDirac β ω) * (1 + Real.exp (-(β * ω))) = 1 := by
+  unfold fermiDirac
+  rw [Real.exp_neg]
+  have he : Real.exp (β * ω) ≠ 0 := (Real.exp_pos _).ne'
+  have hd : Real.exp (β * ω) + 1 ≠ 0 := by positivity
+  field_simp
+  ring
+
+/-- **The excited-state Gibbs weight** `n·Z = e^{−E₁} = e^{−βω}` (with `Z = 1 + e^{−βω}`, `E₁ = βω`).  The
+occupied-mode occupation `n = fermiDirac β ω` is exactly the Boltzmann weight `e^{−βω}/Z` of the upper
+modular energy level `E₁ = βω` (the boost energy quantum).  Together with `electron_gibbs_weight_ground`
+this exhibits the electron's KMS/modular state as the **Gibbs state over the modular spectrum `{0, βω}`**:
+the occupations are the Boltzmann weights `e^{−Eᵢ}/Z`, `Z = Σᵢ e^{−Eᵢ} = 1 + e^{−βω}` the modular
+partition function (whose `log Z` is the `S = log Z + β⟨E⟩` of `electron_mode_entropy`). -/
+theorem electron_gibbs_weight_excited (β ω : ℝ) :
+    fermiDirac β ω * (1 + Real.exp (-(β * ω))) = Real.exp (-(β * ω)) := by
+  unfold fermiDirac
+  rw [Real.exp_neg]
+  have he : Real.exp (β * ω) ≠ 0 := (Real.exp_pos _).ne'
+  have hd : Real.exp (β * ω) + 1 ≠ 0 := by positivity
+  field_simp
+
 /-- **Every diagonal observable is a modular invariant `σ_t(D) = D`.**  The electron's real-time modular
 flow `σ_t = Δ^{it}` fixes *every* diagonal matrix `D = diag(d)` — generalizing `electron_sigmaDiag_fixes_
 numberOp` (which is the special case `D = N`) to the whole **classical / pointer (record) basis**.  Since
