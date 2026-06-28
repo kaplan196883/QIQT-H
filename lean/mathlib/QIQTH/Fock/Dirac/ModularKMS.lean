@@ -256,6 +256,49 @@ theorem electron_number_lowering_comm :
     simp [Matrix.sub_apply, Matrix.mul_apply, Fin.sum_univ_two, Matrix.diagonal_apply, Matrix.single,
       Matrix.neg_apply]
 
+/-! ### E9 — the modular Hamiltonian `K = βω·N` and the boost Hamiltonian `2πK_boost`
+
+The modular automorphism is `σ_t = Δ^{it} = e^{−itK}` with the modular Hamiltonian `K` *affine in the
+number operator*, `K = βω·N (+ c·I)` — the single-mode realization of the Bisognano–Wichmann result that
+the Rindler modular Hamiltonian is `2π` times the boost generator.  The constant `c·I` is central
+(commutes with everything), so it drops out of all commutators; the load-bearing object is `K = βω·N`,
+whose ladder commutators `[K, a†] = βω·a†`, `[K, a] = −βω·a` reproduce the eigenoperator modular
+frequencies `∓βω` (`electron_sigmaDiag_raising`/`_lowering`).  At `β = 2π` the modular energy is `2πω =
+2π × (mode energy ω)` — the boost modular Hamiltonian `K_W = 2πK_boost` whose `⟨K_W⟩` feeds the
+Clausius/Jacobson area relation (E9). -/
+
+/-- The **modular Hamiltonian** `K = βω·N` of the electron mode (the number-affine generator of `Δ^{it}`,
+dropping the central constant `c·I` which is immaterial to the dynamics). -/
+noncomputable def modHamiltonian (β ω : ℝ) : Matrix (Fin 2) (Fin 2) ℂ :=
+  ((β * ω : ℝ) : ℂ) • numberOp
+
+/-- **`[K, a†] = βω·a†`** — the modular Hamiltonian raises `a†` by the modular energy `βω`.  Scaling the
+canonical `[N, a†] = a†` (`electron_number_raising_comm`) by `βω`: `a†` is a modular eigenoperator with
+eigenvalue `βω`, the generator-level source of the phase `σ_t(a†) = e^{−it·βω}·a†`. -/
+theorem electron_modHamiltonian_raising_comm (β ω : ℝ) :
+    modHamiltonian β ω * raisingOp - raisingOp * modHamiltonian β ω
+      = ((β * ω : ℝ) : ℂ) • raisingOp := by
+  unfold modHamiltonian
+  rw [smul_mul_assoc, mul_smul_comm, ← smul_sub, electron_number_raising_comm]
+
+/-- **`[K, a] = −βω·a`** — the modular Hamiltonian lowers `a` by the modular energy `βω` (the dual of
+`electron_modHamiltonian_raising_comm`), the source of `σ_t(a) = e^{+it·βω}·a`. -/
+theorem electron_modHamiltonian_lowering_comm (β ω : ℝ) :
+    modHamiltonian β ω * loweringOp - loweringOp * modHamiltonian β ω
+      = -(((β * ω : ℝ) : ℂ) • loweringOp) := by
+  unfold modHamiltonian
+  rw [smul_mul_assoc, mul_smul_comm, ← smul_sub, electron_number_lowering_comm, smul_neg]
+
+/-- **The boost modular Hamiltonian `K_W = 2πK_boost` (Bisognano–Wichmann).**  At the BW inverse
+temperature `β = 2π`, `[K_W, a†] = 2πω·a†` — the modular energy is `2πω = 2π × (mode energy ω)`, i.e. the
+Rindler modular Hamiltonian is `2π` times the boost generator `K_boost = ω·N`.  This `2πK_boost` is the
+modular-energy object whose expectation `⟨K_W⟩` enters the Clausius/Jacobson area relation `δS = δ⟨K_W⟩`
+(E9, the `+2π` that wires one-particle BW into the area law). -/
+theorem electron_boost_modHamiltonian_raising_comm (ω : ℝ) :
+    modHamiltonian (2 * Real.pi) ω * raisingOp - raisingOp * modHamiltonian (2 * Real.pi) ω
+      = ((2 * Real.pi * ω : ℝ) : ℂ) • raisingOp :=
+  electron_modHamiltonian_raising_comm (2 * Real.pi) ω
+
 /-- **The single-mode thermal / entanglement entropy: `S = log Z + β⟨E⟩`.**  The von Neumann entropy of
 the electron mode equals the log partition function plus `β` times the mean energy:
 `binaryEntropy(n) = log(1 + e^{−βω}) + βω·n`, with `n = fermiDirac β ω`, `Z = 1 + e^{−βω}` and the mean

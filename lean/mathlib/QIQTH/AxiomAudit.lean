@@ -6597,6 +6597,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Dirac.electron_unruh_occupation_mem_Ioo
 #print axioms QIQTH.Fock.Dirac.electron_unruh_entropy
 #print axioms QIQTH.Fock.Dirac.electron_unruh_firstLaw
+-- ★★★ ELECTRON_FIELD E9 (the modular Hamiltonian K=βω·N and the boost Hamiltonian 2πK_boost): the modular
+-- automorphism σ_t=Δ^it=e^{−itK} has K affine in the number operator (BW: the Rindler modular Hamiltonian is 2π× the
+-- boost generator); the central constant c·I drops from all commutators. modHamiltonian β ω := (βω)•numberOp.
+-- electron_modHamiltonian_raising_comm: [K,a†]=βω·a† (scaling [N,a†]=a† by βω) — a† is a modular eigenoperator with
+-- eigenvalue βω, the generator source of σ_t(a†)=e^{−itβω}a†. electron_modHamiltonian_lowering_comm: [K,a]=−βω·a.
+-- electron_boost_modHamiltonian_raising_comm: at β=2π, [K_W,a†]=2πω·a† — the boost modular Hamiltonian K_W=2πK_boost
+-- whose ⟨K_W⟩ feeds the Clausius/Jacobson area relation δS=δ⟨K_W⟩ (the +2π wiring one-particle BW into the area law).
+-- Axiom-free (standard 3); free Dirac; value of G never assigned.
+#print axioms QIQTH.Fock.Dirac.electron_modHamiltonian_raising_comm
+#print axioms QIQTH.Fock.Dirac.electron_modHamiltonian_lowering_comm
+#print axioms QIQTH.Fock.Dirac.electron_boost_modHamiltonian_raising_comm
 -- ★★★ ELECTRON_FIELD E5 (CONTINUUM CAR-net modular flow Γ₋(Δ^it)): the continuum wedge modular flow for the electron
 -- CAR net is the FERMIONIC second quantization of the one-particle continuum Δ^it = modUnitary S t
 -- (StandardSubspaceModularFlow, already built). fermiSecondQuantModFlow S t = ExteriorAlgebra.map (modUnitary S t)

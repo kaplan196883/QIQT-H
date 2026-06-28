@@ -630,3 +630,15 @@ EXTERNAL libraries; QIQT-H built its own.
   **`electron_unruh_firstLaw`**: `HasDerivAt binaryEntropy (2πω) n_ω` — the first law `δS=δ⟨K⟩` at the Unruh
   temperature, modular energy `2πω` (the `+2π` wiring one-particle BW into the area law). Ties the
   already-built modular flow to the boost-KMS Unruh law. Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-28 — **E9: the modular Hamiltonian `K=βω·N` and the boost Hamiltonian `2πK_boost`** (added to
+  `ModularKMS.lean`, axiom-free, budget 0, 3055 jobs green). `σ_t=Δ^{it}=e^{−itK}` has `K` affine in the
+  number operator (BW: the Rindler modular Hamiltonian is `2π×` the boost generator); the central `c·I`
+  drops from all commutators. **`modHamiltonian β ω := (βω)•numberOp`**;
+  **`electron_modHamiltonian_raising_comm`** (`[K,a†]=βω·a†` — scaling `[N,a†]=a†`; `a†` is a modular
+  eigenoperator with eigenvalue `βω`, the generator source of `σ_t(a†)=e^{−itβω}a†`);
+  **`electron_modHamiltonian_lowering_comm`** (`[K,a]=−βω·a`);
+  **`electron_boost_modHamiltonian_raising_comm`** (at `β=2π`, `[K_W,a†]=2πω·a†` — the boost modular
+  Hamiltonian `K_W=2πK_boost` whose `⟨K_W⟩` feeds the Clausius/Jacobson area relation `δS=δ⟨K_W⟩`). The
+  E9 modular-energy object that connects the modular flow to the area law. Wired into `AxiomAudit.lean`;
+  standard-3; budget 0. (HONEST: the Dirac Belinfante `T_μν` → `K_W` *geometric integral* and the full
+  Jacobson assembly remain the cited E9 frontier; this lands the single-mode generator `K=βω·N` itself.)
