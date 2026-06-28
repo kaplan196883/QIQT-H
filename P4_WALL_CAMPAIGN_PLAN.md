@@ -742,7 +742,15 @@ functoriality via `coeFn_compLpL`), **`fiberModFlow_norm_le`** (contraction `‖
 and the key **`fiberModFlow_comm_clockTransl`** (`Δ̂^{it} ∘ λ_s = λ_s ∘ Δ̂^{it}` — fiberwise postcomposition
 commutes with the measure-preserving base-shift; the `ae_eq_comp`-through-shift proof, mirroring
 `clockTransl_add`).  **So `K_bulk` and `A_edge` strongly commute** — the hypothesis `stoneGen_prod_isSelfAdjoint`
-consumes.  **Remaining to assemble the full dressed `K̃` self-adjoint:** the two analytic C₀-group hyps of `Δ̂` —
-inner-product preservation (`L²(ℝ;H)` unitarity, via the fiber integral) + strong continuity (DCT on `Lp`) — then
-`stoneGen_prod_isSelfAdjoint` ⟹ `stoneGen (Δ̂^{i·} ∘ λ_·) = K̃ = K_bulk + A_edge` self-adjoint.  Wired into
+consumes.
+
+**UPDATE (2026-06-29) — `Δ̂`'s UNITARITY done; only strong continuity remains.**  `fiberModFlow_inner`:
+`Δ̂^{it}` preserves the `L²(ℝ;H)` inner product `⟪Δ̂^{it}a, Δ̂^{it}b⟫ = ⟪a,b⟫` (via the fiber integral
+`⟪f,g⟫=∫⟪f s,g s⟫ ds` + the one-particle unitarity `modUnitary_inner`).  So `Δ̂^{it}` now has **4/5** C₀-group
+hypotheses (`fiberModFlow_zero`, `_add`, **`_inner`**, `_norm_le`) plus the commutativity.  **The single remaining
+blocker for the full dressed `K̃ = K_bulk + A_edge` self-adjoint is `Δ̂`'s STRONG CONTINUITY** — `t ↦ Δ̂^{it}ξ`
+continuous in `Lp`, a dominated-convergence argument on the *infinite* measure `volume` (Mathlib's `tendsto_Lp_
+finite_of_tendsto_ae` needs `IsFiniteMeasure`; the σ-finite domination version `tendsto_Lp_of_tendsto_eLpNorm`
++ DCT for `eLpNorm` is the route).  Once that lands: `stoneGen_prod_isSelfAdjoint (fiberModFlow S) clockTransl
+… ⟹ stoneGen (fun t => fiberModFlow S t ∘L clockTransl t) = K̃` self-adjoint — Increment 1c complete.  Wired into
 `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.

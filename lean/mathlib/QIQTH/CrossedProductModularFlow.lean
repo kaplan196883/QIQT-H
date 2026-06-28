@@ -25,6 +25,7 @@ from `stoneGen_prod_isSelfAdjoint`.  Axiom-free (standard `propext`/`Classical.c
 import QIQTH.StandardSubspaceModularFlow
 import QIQTH.CrossedProductTranslation
 import Mathlib.MeasureTheory.Function.LpSpace.Basic
+import Mathlib.MeasureTheory.Function.L2Space
 
 namespace QIQTH.StandardSubspaceModular
 
@@ -75,6 +76,24 @@ theorem fiberModFlow_norm_le (S : StandardSubspace H) (t : ℝ) (ξ : Lp H 2 (vo
   calc ‖fiberModFlow S t ξ‖ ≤ ‖fiberModFlow S t‖ * ‖ξ‖ := (fiberModFlow S t).le_opNorm ξ
     _ ≤ 1 * ‖ξ‖ := by gcongr
     _ = ‖ξ‖ := one_mul _
+
+/-- The one-particle modular flow preserves the inner product (unitary): `⟪Δ^{it} x, Δ^{it} y⟫ = ⟪x, y⟫`
+(from `Δ^{it}⋆ = Δ^{-it}` and the group law). -/
+theorem modUnitary_inner (S : StandardSubspace H) (t : ℝ) (x y : H) :
+    (inner ℂ (modUnitary S t x) (modUnitary S t y) : ℂ) = inner ℂ x y := by
+  rw [← ContinuousLinearMap.adjoint_inner_right, modUnitary_adjoint,
+    ← ContinuousLinearMap.mul_apply, ← modUnitary_add, neg_add_cancel, modUnitary_zero,
+    ContinuousLinearMap.one_apply]
+
+/-- **The fiberwise modular flow preserves the `L²(ℝ; H)` inner product** (unitarity): `⟪Δ̂^{it} a, Δ̂^{it} b⟫ =
+⟪a, b⟫`, from the fiber integral `⟪f, g⟫ = ∫ ⟪f s, g s⟫ ds` and the one-particle unitarity `modUnitary_inner`.
+The `hAinner` C₀-unitary-group hypothesis of `Δ̂^{it}` for `stoneGen_prod_isSelfAdjoint`. -/
+theorem fiberModFlow_inner (S : StandardSubspace H) (t : ℝ) (a b : Lp H 2 (volume : Measure ℝ)) :
+    (inner ℂ (fiberModFlow S t a) (fiberModFlow S t b) : ℂ) = inner ℂ a b := by
+  rw [MeasureTheory.L2.inner_def, MeasureTheory.L2.inner_def]
+  refine integral_congr_ae ?_
+  filter_upwards [fiberModFlow_coeFn S t a, fiberModFlow_coeFn S t b] with s e1 e2
+  rw [e1, e2, modUnitary_inner]
 
 /-- **★ The fiberwise modular flow commutes with the clock group:** `Δ̂^{it} ∘ λ_s = λ_s ∘ Δ̂^{it}`.  Postcomposing
 each fiber with `Δ^{it}` and shifting the base argument by `s` act on different "slots" (the `H`-fiber value vs
