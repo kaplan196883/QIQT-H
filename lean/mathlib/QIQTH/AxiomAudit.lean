@@ -6425,6 +6425,18 @@ namespace QIQTH.AxiomAudit
 -- twisted duality 𝓕(W)'=Z𝓕(W')Z* does not mix even/odd sectors, so the electron's even records stay even under the
 -- twist (consistent with §0 "records attach to the even algebra"). Axiom-free (standard 3); free Dirac.
 #print axioms QIQTH.Fock.Dirac.kleinTwist_comm_gamma
+-- ELECTRON_FIELD E4 (witness — the Klein twist on the ACTUAL fermion parity): fermionParity = (−1)^N = diag(1,−1), a
+-- concrete 2×2 self-adjoint unitary involution on the single-fermion Fock space ℂ² (fermionParity_involutive Γ²=1,
+-- fermionParity_selfAdjoint Γ*=Γ). The four abstract Klein-twist relations are WITNESSED non-vacuously on it:
+-- electron_kleinTwist_sq (Z²=Γ), electron_kleinTwist_star_unitary (Z*Z=1), electron_kleinTwist_unitary (ZZ*=1),
+-- electron_kleinTwist_comm ([Z,Γ]=0) — the twisted-duality intertwiner realized on the real electron parity, not just
+-- postulated. Axiom-free (standard 3); free Dirac. (Field-level (−1)^F + the operator duality theorem = E5 GNS frontier.)
+#print axioms QIQTH.Fock.Dirac.fermionParity_involutive
+#print axioms QIQTH.Fock.Dirac.fermionParity_selfAdjoint
+#print axioms QIQTH.Fock.Dirac.electron_kleinTwist_sq
+#print axioms QIQTH.Fock.Dirac.electron_kleinTwist_star_unitary
+#print axioms QIQTH.Fock.Dirac.electron_kleinTwist_unitary
+#print axioms QIQTH.Fock.Dirac.electron_kleinTwist_comm
 -- ★★★ ELECTRON_FIELD_PLAN E6 (Fermi–Dirac Unruh occupation — the CAR +1 vs Bose −1 signature): for a Rindler mode
 -- of the free Dirac field the vacuum is boost-KMS at β=2π (Unruh temperature, SAME as the scalar); the fermionic
 -- difference is the occupation. fermiDirac β ω = 1/(e^{βω}+1); fermiDirac_kms_balance: n = e^{−βω}(1−n) (KMS thermal
@@ -6818,5 +6830,13 @@ namespace QIQTH.AxiomAudit
 -- so the photon's physical observable is a function of the GAUGE-EQUIVALENCE CLASS, not the gauge representative — the
 -- "records live on the physical (gauge-quotient) configuration space" thesis (§0/P6). Axiom-free (standard 3); free Maxwell.
 #print axioms QIQTH.Fock.Photon.fieldStrength_descends_to_quotient
+-- PHOTON_FIELD_PLAN P6/P9 bridge (the cohomological closed/exact structure): fieldStrength_eq_iff_sub_mem_ker — d_F a =
+-- d_F a' ↔ a−a' ∈ ker d_F (the F-fibers are closed-element cosets). pureGauge_le_ker — range d_gauge ≤ ker d_F (d²=0 as a
+-- submodule inclusion: exact ⊆ closed; a gauge shift never changes F). The quotient ker d_F ⧸ range d_gauge is the first
+-- cohomology = the topological/boundary-flux sectors (closed-but-not-exact) — the algebraic home of the photon's edge-mode
+-- center (P9 PhotonFluxSectors): nontrivial cohomology = nontrivial flux; trivial for a contractible region (factor, no
+-- center). Axiom-free (standard 3); free Maxwell.
+#print axioms QIQTH.Fock.Photon.fieldStrength_eq_iff_sub_mem_ker
+#print axioms QIQTH.Fock.Photon.pureGauge_le_ker
 
 end QIQTH.AxiomAudit

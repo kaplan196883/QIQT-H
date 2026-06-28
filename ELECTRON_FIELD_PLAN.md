@@ -705,3 +705,12 @@ EXTERNAL libraries; QIQT-H built its own.
   the twisted duality `𝓕(W)'=Z𝓕(W')Z*` does **not mix the even/odd sectors**, so the electron's even
   records stay even under the twist — exactly the §0 "records attach to the even algebra" requirement,
   now compatible with the twisted duality. Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **E4 WITNESS: the Klein twist on the actual fermion parity `(−1)^N`** (`QIQTH/Fock/Dirac/
+  KleinTwistWitness.lean`, axiom-free standard-3, budget 0, 2406 jobs green). **`fermionParity = (−1)^N =
+  diag(1,−1)`** — a concrete `2×2` self-adjoint unitary involution on the single-fermion Fock space `ℂ²`
+  (`fermionParity_involutive` `Γ²=1`, `fermionParity_selfAdjoint` `Γ*=Γ`). All four abstract Klein-twist
+  relations are **witnessed non-vacuously** on it: **`electron_kleinTwist_sq`** (`Z²=Γ`),
+  **`electron_kleinTwist_star_unitary`** (`Z*Z=1`), **`electron_kleinTwist_unitary`** (`ZZ*=1`),
+  **`electron_kleinTwist_comm`** (`[Z,Γ]=0`) — the twisted-duality intertwiner realized on the *real*
+  electron parity, not just postulated. Wired into `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.
+  (The field-level `(−1)^F` on the full CAR Fock + the operator-algebra duality *theorem* = E5 GNS frontier.)
