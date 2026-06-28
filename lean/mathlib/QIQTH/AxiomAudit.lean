@@ -6356,6 +6356,17 @@ namespace QIQTH.AxiomAudit
 -- explicit hypotheses; η (= 1/4ℓ_P²) is a free real (1/4 ratio derived via Sakharov, value of G never assigned);
 -- the capacity is a typeclass hypothesis, not a Lean axiom. Axiom-free (standard 3).
 #print axioms QIQTH.oneDensity_isDensity
+-- ★★★ ELECTRON_FIELD_PLAN E3 (the free Dirac electron — first "matter beyond scalars"):
+-- fermionicGaussianEntropy_le_log_dim — the CAR capacity bound. The von Neumann entropy of a quasi-free
+-- (Gaussian) fermionic state, S = −Tr[C log C + (1−C)log(1−C)] = Σ binaryEntropy(eigenvalue), is bounded by
+-- log(2^n) = log dim(⋀ h_R): each fermionic mode is a qubit (binaryEntropy_le_log_two, via concavity of negMulLog,
+-- maximized log 2 at occupation 1/2). This is the fermionic mirror of shannon_le_log_card — the finite-capacity
+-- bound S_vN ≤ log N_R survives the bosons → fermions transition. HONEST (ELECTRON_FIELD_PLAN §0): the crux for the
+-- electron is the Z₂-graded CAR net + twisted modular duality (NOT a boost sign); WHICH regional algebra the
+-- capacity attaches to (even / U(1)-invariant observables) is the E7 question; this E3 bound is the per-spectrum
+-- kernel E7 consumes. Free Dirac only; QED/edge-modes/DHR deferred (cited). Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.fermionicGaussianEntropy_le_log_dim
+#print axioms QIQTH.Fock.Dirac.binaryEntropy_le_log_two
 -- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-11, von Neumann non-vacuity witness): oneDensity_isDensity —
 -- IsDensity (1 : Matrix (Fin 1) (Fin 1) ℂ), the one-microstate pure state (1×1 identity), a genuine density
 -- (PosSemidef.one + trace_one). Completes the witness story (M-7 only witnessed the record-law/Shannon floor): the

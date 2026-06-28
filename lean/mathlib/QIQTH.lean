@@ -491,6 +491,7 @@ import QIQTH.Fock.LocalizedWitness
 import QIQTH.Fock.CyclicWitness
 import QIQTH.Fock.FreeFieldHFlux
 import QIQTH.Fock.TranslationCovariance
+import QIQTH.Fock.Dirac.QuasiFreeEntropy
 
 import QIQTH.RefinementBorn
 import QIQTH.SBSBoolean

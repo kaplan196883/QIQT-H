@@ -167,5 +167,14 @@ frontier.
 
 ## 6. Progress log
 - 2026-06-28 — plan opened (GPT-5.5-pro-vetted). Crux = Z₂-graded CAR net + twisted duality; records on
-  even/observable algebra. Next: **E3** (`QuasiFreeEntropy.lean` — `binaryEntropy_le_log_two` →
-  `fermionicGaussianEntropy_le_log_card`, the CAR capacity bound).
+  even/observable algebra.
+- 2026-06-28 — **E3 DONE** (`QIQTH/Fock/Dirac/QuasiFreeEntropy.lean`, axiom-free, budget 0). The CAR
+  capacity bound: `binaryEntropy c = negMulLog c + negMulLog(1−c)`, `binaryEntropy_le_log_two`
+  (≤ log 2, via concavity of `negMulLog` — Jensen at `c, 1−c`, max at `c=1/2`), `binaryEntropy_half`
+  (= log 2), `binaryEntropy_nonneg`; `fermionicGaussianEntropy c = ∑ binaryEntropy(c i)`,
+  `fermionicGaussianEntropy_nonneg`, **`fermionicGaussianEntropy_le_card_log_two`** (≤ n·log 2) and
+  **`fermionicGaussianEntropy_le_log_dim`** (≤ log(2ⁿ) = log dim(⋀ h_R)) — the fermionic mirror of
+  `shannon_le_log_card`, i.e. `S_vN ≤ log N_R` survives bosons → fermions. Wired into `QIQTH.lean` +
+  `AxiomAudit.lean` (both theorems standard-3). Build green (`lake build QIQTH.AxiomAudit`, 8729 jobs);
+  `axiom_budget_check.sh` raw count 0. Next: **E2** (`CAR.lean` — antisymmetric/exterior Fock + CAR
+  relations, giving `dim(⋀ h) = 2ⁿ` to make E3's `2ⁿ` literally the Fock dimension), then **E1/E4**.
