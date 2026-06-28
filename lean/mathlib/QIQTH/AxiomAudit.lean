@@ -6415,6 +6415,11 @@ namespace QIQTH.AxiomAudit
 -- ᾱα+β̄β=1, ᾱβ+β̄α=0. The Klein-twist ALGEBRA is now complete (Z²=Γ, Z⁴=1, Z*Z=1); the operator-algebra
 -- twisted-duality theorem + γ = second-quantized parity unitary remain E5 (GNS frontier). Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.kleinTwist_star_mul_self
+-- ★★★ ELECTRON_FIELD_PLAN E4 (Z is a TWO-SIDED unitary): kleinTwist_mul_star_self — ZZ*=1, the complement of Z*Z=1.
+-- Proved elegantly via the order-4 relation: Z⁴=1 (kleinTwist_sq_sq) makes Z³ a two-sided inverse, which with Z*Z=1
+-- forces Z*=Z³, hence ZZ*=Z⁴=1. So Z is a genuine (two-sided) unitary — the full intertwiner the twisted duality
+-- 𝓕(W)'=Z𝓕(W')Z* requires. The Klein-twist algebra is now complete: Z²=Γ, Z⁴=1, Z*Z=ZZ*=1. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.kleinTwist_mul_star_self
 -- ★★★ ELECTRON_FIELD_PLAN E6 (Fermi–Dirac Unruh occupation — the CAR +1 vs Bose −1 signature): for a Rindler mode
 -- of the free Dirac field the vacuum is boost-KMS at β=2π (Unruh temperature, SAME as the scalar); the fermionic
 -- difference is the occupation. fermiDirac β ω = 1/(e^{βω}+1); fermiDirac_kms_balance: n = e^{−βω}(1−n) (KMS thermal
@@ -6796,5 +6801,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Fock.Photon.photon_flux_entropy_nonneg
 #print axioms QIQTH.Fock.Photon.photon_flux_entropy_le_log_card
 #print axioms QIQTH.Fock.Photon.photon_centered_entropy_eq
+-- PHOTON_FIELD_PLAN P6/P10 bridge (the field strength F=dA is gauge-invariant + the Bianchi identity, via d²=0):
+-- fieldStrength_gauge_invariant — F=dA is unchanged by a gauge shift A↦A+dΛ (because the pure-gauge dΛ ∈ ker d_F, the
+-- d²=0 cochain condition d_F∘d_gauge=0); the concrete reason the photon's records are the gauge-invariant F_μν, NOT the
+-- gauge-variant A_μ (§0/P6). bianchi_identity — d_next(F)=0 for F=dA (d_next∘d_F=0): the homogeneous Maxwell eqs dF=0
+-- (Bianchi). Both gauge-invariance and closedness of F are the two faces of d²=0. Axiom-free (standard 3); free Maxwell.
+#print axioms QIQTH.Fock.Photon.fieldStrength_gauge_invariant
+#print axioms QIQTH.Fock.Photon.bianchi_identity
 
 end QIQTH.AxiomAudit

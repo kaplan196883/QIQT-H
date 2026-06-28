@@ -89,4 +89,24 @@ theorem kleinTwist_star_mul_self {γ : A} (hsa : star γ = γ) (hγ : γ * γ = 
   rw [add_mul, mul_add, mul_add, t2, t3, t4, hγ, mul_one, hpbp, hpbq, hqbp, hqbq, rearr,
       hS1, hS2, zero_mul, add_zero]
 
+/-- **The Klein twist is a TWO-SIDED unitary: `Z Z* = 1`** (the complement of `Z* Z = 1`).  Rather than
+re-expanding, this follows elegantly from the order-4 relation: `Z⁴ = 1` (`kleinTwist_sq_sq`) makes `Z³`
+a two-sided inverse of `Z`, and combined with the proved `Z* Z = 1` it forces `Z* = Z³`; hence
+`Z Z* = Z·Z³ = Z⁴ = 1`.  Together with `kleinTwist_star_mul_self` this makes `Z` a genuine (two-sided)
+unitary — exactly the intertwiner the twisted duality `𝓕(W)' = Z 𝓕(W') Z*` requires. -/
+theorem kleinTwist_mul_star_self {γ : A} (hsa : star γ = γ) (hγ : γ * γ = 1) :
+    kleinTwist γ * star (kleinTwist γ) = 1 := by
+  set Z := kleinTwist γ with hZ
+  have hsz : star Z * Z = 1 := kleinTwist_star_mul_self hsa hγ
+  -- `Z³` is a two-sided inverse of `Z` (from `Z⁴ = 1`)
+  have hZw : Z * (Z * Z * Z) = 1 := by
+    have e : Z * (Z * Z * Z) = (Z * Z) * (Z * Z) := by noncomm_ring
+    rw [e]; exact kleinTwist_sq_sq hγ
+  -- hence `Z* = Z³`
+  have hstar : star Z = Z * Z * Z :=
+    calc star Z = star Z * (Z * (Z * Z * Z)) := by rw [hZw, mul_one]
+      _ = (star Z * Z) * (Z * Z * Z) := by noncomm_ring
+      _ = Z * Z * Z := by rw [hsz, one_mul]
+  rw [hstar]; exact hZw
+
 end QIQTH.Fock.Dirac

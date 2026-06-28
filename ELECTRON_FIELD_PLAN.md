@@ -690,3 +690,11 @@ EXTERNAL libraries; QIQT-H built its own.
   **`electron_modHamiltonian_trace`**: `Tr K = βω` (the sum of modular energy levels). Makes the modular
   Hamiltonian's spectrum explicit, completing the E9 generator picture (form `K=βω·N` + commutators +
   expectation `⟨K⟩` + self-adjoint + spectrum `{0,βω}`). Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **E4: the Klein twist is a TWO-SIDED unitary `Z Z* = 1`** (added to `KleinTwistUnitary.lean`,
+  axiom-free, budget 0, 2402 jobs green). **`kleinTwist_mul_star_self`**: the complement of the existing
+  `Z* Z = 1`, proved *elegantly* via the order-4 relation — `Z⁴=1` (`kleinTwist_sq_sq`) makes `Z³` a
+  two-sided inverse of `Z`, which with `Z* Z = 1` forces `Z* = Z³`, hence `Z Z* = Z⁴ = 1` (no re-expansion
+  needed). So `Z` is a genuine **two-sided unitary** — the full intertwiner the twisted duality
+  `𝓕(W)'=Z𝓕(W')Z*` requires. **The Klein-twist algebra is now complete: `Z²=Γ`, `Z⁴=1`, `Z*Z=ZZ*=1`.**
+  Wired into `AxiomAudit.lean`; standard-3; budget 0. (The operator-algebra twisted-duality *theorem* +
+  `γ` = the second-quantized parity unitary on the CAR space remain the E5 GNS frontier.)
