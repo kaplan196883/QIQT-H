@@ -332,3 +332,13 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   eigenvector); **`helicityOp_minus`**: `Λ(0,y)=(0,−y)` (a negative-helicity photon is a `Λ=−1`
   eigenvector). The two eigenvalues `±1` are the photon's two transverse helicities, exhibited on concrete
   eigenvectors. Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **★ P10 FOOTHOLD: abstract BRST cohomology `H_Q = ker Q ⧸ im Q`** (new module
+  `PhotonBRST.lean`, axiom-free standard-3, budget 0, 1162 jobs green; GPT-5.5-pro-identified). The covariant
+  (Gupta–Bleuler/BRST) photon handles the gauge redundancy + unphysical modes via a nilpotent BRST charge
+  `Q` (`Q²=0`); the physical states are the BRST cohomology. **`BRST.exact_le_closed`**: `im Q ⊆ ker Q`
+  (every exact/BRST-trivial state is closed/BRST-invariant). **`BRST.cohomology = ker Q ⧸ im Q`** (the
+  physical photon states — the 2 transverse polarizations, unphysical longitudinal/temporal/ghost modes
+  quotiented out). **`BRST.cohomology_trivial_iff`** (trivial `H_Q` ⟺ every closed is exact). The
+  single-nilpotent (BRST) cohomology, complementing the de Rham `F=dA` cohomology. (HONEST: the
+  indefinite-metric Krein space + metric descent to a *positive* form + no-ghost theorem are the deferred
+  continuum P10 frontier.) Wired into `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.
