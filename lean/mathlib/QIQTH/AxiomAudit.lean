@@ -6417,6 +6417,15 @@ namespace QIQTH.AxiomAudit
 -- no-signaling. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.isEven_ι_mul_ι
 #print axioms QIQTH.Fock.Dirac.evenSubalgebra
+-- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
+-- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
+-- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy
+-- chain identity Real.negMulLog_mul. gradedShannon_capacity_le: each block contributes ≤ log n_q (per-sector
+-- shannon_le_log_card / the CAR S≤log dim of E3), so S(ρ_R) ≤ H(p) + Σ_q p_q log n_q — the finite-capacity bound
+-- passes to the graded regional algebra to which (per §0) records/capacity attach. HONEST: the further collapse to a
+-- single log(Σ n_q) needs a Jensen/log-sum step over the sector weights (next E7 sub-item). Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.gradedShannon_chain_rule
+#print axioms QIQTH.Fock.Dirac.gradedShannon_capacity_le
 -- ★★★ P4-MICRO (Route 2; P4_MICRO_PLAN.md M-11, von Neumann non-vacuity witness): oneDensity_isDensity —
 -- IsDensity (1 : Matrix (Fin 1) (Fin 1) ℂ), the one-microstate pure state (1×1 identity), a genuine density
 -- (PosSemidef.one + trace_one). Completes the witness story (M-7 only witnessed the record-law/Shannon floor): the

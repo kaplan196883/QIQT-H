@@ -236,3 +236,16 @@ frontier.
   budget 0. Next E7/E8: graded regional capacity block decomposition `S(ρ_R)=H(p_q)+Σp_q S(ρ_q)` +
   even-observable no-signaling. Remaining frontier (checkpointed): **E5** (operator-algebra BW data /
   twisted-duality theorem / GNS), **E1** (Dirac one-particle + `S_D`), E4 **Z-unitary** (`StarRing`).
+- 2026-06-28 — **E7 (graded regional capacity) DONE** (`QIQTH/Fock/Dirac/GradedCapacity.lean`,
+  axiom-free, budget 0). The charge/parity block decomposition for the graded regional algebra
+  `𝒜_R ≃ ⊕_q M_{n_q}`: **`gradedShannon_chain_rule`** — the record entropy decomposes as
+  `S = H(p) + Σ_q p_q S(w_q)` (sector mixing entropy + average within-sector entropy), via the entropy
+  chain identity `Real.negMulLog_mul`; and **`gradedShannon_capacity_le`** — each block contributes
+  `≤ log n_q` (per-sector `RecordContract.shannon_le_log_card` / the E3 CAR `S ≤ log dim`), so
+  `S(ρ_R) ≤ H(p) + Σ_q p_q log n_q`: **the finite-capacity bound passes to the graded regional algebra**
+  to which (§0) records/capacity attach. Wired into `QIQTH.lean` + `AxiomAudit.lean` (both standard-3);
+  `lake build QIQTH.Fock.Dirac.GradedCapacity` green (3055 jobs); budget 0. **Honest:** the further
+  collapse to a single `log(Σ_q n_q) = log dim(⊕M_{n_q})` needs a Jensen/log-sum step over the sector
+  weights (next E7 sub-item). Remaining frontier (checkpointed): **E5** (operator-algebra BW data /
+  twisted-duality theorem / GNS), **E1** (Dirac one-particle + `S_D`), E4 **Z-unitary** (`StarRing`),
+  **E8** (even-observable no-signaling), **E9** (Dirac `T_μν` → Jacobson hook).
