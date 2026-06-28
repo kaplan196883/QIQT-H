@@ -6640,5 +6640,18 @@ namespace QIQTH.AxiomAudit
 -- (PosSemidef.one + trace_one). Completes the witness story (M-7 only witnessed the record-law/Shannon floor): the
 -- example in FQBoundMicro fires area_floor_vonNeumann (the honest M-4 von Neumann P4) on it — S_vN = 0 ≤ log 1 — so
 -- the von Neumann floor is non-vacuous on a concrete density matrix. Axiom-free (standard 3).
+-- ★★★ PHOTON_FIELD_PLAN P2 (the truncated bosonic Fock dimension — the analytic core of the photon capacity bound):
+-- the photon is BOSONIC (symmetric Fock Γ_s), infinite-dim even for finite-dim one-particle h, so its regional
+-- capacity is UNBOUNDED without a photon-number cutoff (the structural contrast with the electron's finite CAR
+-- dim ⋀h = 2^(dim h)). truncFockDim d N := Σ_{k=0}^N multichoose(d,k) = dim Γ_s^{≤N}(h) for d = dim h. truncFockDim_succ:
+-- the cutoff recurrence (+ multichoose(d,N+1) per added photon). truncFockDim_eq_choose: the closed form
+-- dim Γ_s^{≤N}(h) = C(d+N, N) (induction + Pascal Nat.choose_succ_succ) — the FINITE dimension that exists only by the
+-- number cutoff N; the bosonic mirror of the electron CAR S≤log dim, giving the photon bound S ≤ log C(dim h_γ+N, N) (P3).
+-- truncFockDim_mono / truncFockDim_strictMono: dim is (weakly/strictly for d≥1) increasing in N — the finite-N shadow
+-- of the photon's unbounded capacity (the "sup S = ∞ without a cutoff" corollary). Axiom-free (standard 3). Free Maxwell.
+#print axioms QIQTH.Fock.Photon.truncFockDim_succ
+#print axioms QIQTH.Fock.Photon.truncFockDim_eq_choose
+#print axioms QIQTH.Fock.Photon.truncFockDim_mono
+#print axioms QIQTH.Fock.Photon.truncFockDim_strictMono
 
 end QIQTH.AxiomAudit

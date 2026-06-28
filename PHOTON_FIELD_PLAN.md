@@ -142,3 +142,12 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   gauge/edge-center (records = gauge-invariant; regional = centered flux-sector; capacity needs a
   CUTOFF). Bose–Einstein `−1` (vs electron `+1`). Next: **P2** (`PhotonFock.lean` — truncated bosonic
   Fock dimension `C(dim h+N, N)`), then **P3** (the cutoff capacity bound).
+- 2026-06-28 — **P2 DONE** (`QIQTH/Fock/Photon/PhotonFock.lean`, axiom-free standard-3, budget 0, 2942
+  jobs green). `truncFockDim d N := Σ_{k=0}^N multichoose(d,k) = dim Γ_s^{≤N}(h)`; `truncFockDim_succ`
+  (cutoff recurrence); **`truncFockDim_eq_choose : truncFockDim d N = C(d+N, N)`** (induction + Pascal
+  `Nat.choose_succ_succ`) — the closed-form truncated bosonic Fock dimension, FINITE only by the number
+  cutoff `N`; plus `truncFockDim_mono`/`truncFockDim_strictMono` (dim ↑ in `N` for `d≥1` — the
+  finite-`N` shadow of the photon's unbounded capacity, the "sup S=∞ without a cutoff" corollary). Wired
+  into `QIQTH.lean` + `AxiomAudit.lean`. Next: **P3** (the capacity bound `S ≤ log C(dim h_γ+N, N)` —
+  reuse `shannon_le_log_card` with `card = truncFockDim d N`), then **P4** (extend the existing
+  `boseEinstein` stub: KMS balance done, add `n>0`, the Unruh `S_ω=(n+1)log(n+1)−n log n`).
