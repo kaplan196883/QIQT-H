@@ -6395,6 +6395,13 @@ namespace QIQTH.AxiomAudit
 -- as the second-quantized parity unitary (E5). Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.kleinTwist_sq
 #print axioms QIQTH.Fock.Dirac.kleinTwist_sq_sq
+-- ★★★ ELECTRON_FIELD_PLAN E4 (crux completion — Z is UNITARY): kleinTwist_star_mul_self — for a self-adjoint
+-- involution γ (star γ = γ, γ·γ = 1) in a ℂ-*-algebra, Z*Z = 1. With kleinTwist_sq (Z²=γ) this makes the Klein
+-- twist a unitary of order 4 (a unitary fourth root of the parity Γ) — the genuine intertwiner the twisted modular
+-- duality 𝓕(W)'=Z𝓕(W')Z* requires. Same expansion as kleinTwist_sq with conjugate scalars ᾱ,β̄ and the identities
+-- ᾱα+β̄β=1, ᾱβ+β̄α=0. The Klein-twist ALGEBRA is now complete (Z²=Γ, Z⁴=1, Z*Z=1); the operator-algebra
+-- twisted-duality theorem + γ = second-quantized parity unitary remain E5 (GNS frontier). Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.kleinTwist_star_mul_self
 -- ★★★ ELECTRON_FIELD_PLAN E6 (Fermi–Dirac Unruh occupation — the CAR +1 vs Bose −1 signature): for a Rindler mode
 -- of the free Dirac field the vacuum is boost-KMS at β=2π (Unruh temperature, SAME as the scalar); the fermionic
 -- difference is the occupation. fermiDirac β ω = 1/(e^{βω}+1); fermiDirac_kms_balance: n = e^{−βω}(1−n) (KMS thermal

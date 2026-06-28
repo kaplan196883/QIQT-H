@@ -270,3 +270,15 @@ frontier.
   Remaining frontier (checkpointed): **E5** (full operator-algebra BW data / twisted-duality theorem /
   GNS), **E1** (Dirac one-particle + `S_D`), E4 **Z-unitary** (star-algebra), **E8** (even-observable
   no-signaling), **E9** (Dirac `T_μν` → Jacobson hook).
+- 2026-06-28 — **E4 Z-unitary (crux completion) DONE** (`QIQTH/Fock/Dirac/KleinTwistUnitary.lean`,
+  axiom-free, budget 0). **`kleinTwist_star_mul_self`** — for a self-adjoint involution `γ`
+  (`star γ = γ`, `γ·γ=1`) in a ℂ-*-algebra, **`Z*Z = 1`**: the Klein twist is **unitary**. With
+  `kleinTwist_sq` (`Z²=Γ`) this makes `Z` a unitary of order 4 (a unitary fourth root of the parity `Γ`)
+  — the genuine intertwiner the twisted modular duality `𝓕(W)'=Z𝓕(W')Z*` requires. Proof = the
+  `kleinTwist_sq` expansion with conjugate scalars `ᾱ,β̄` and the identities `ᾱα+β̄β=1`, `ᾱβ+β̄α=0`
+  (`α=(1+i)⁻¹`, `β=i(1+i)⁻¹`). **The Klein-twist ALGEBRA is now complete: `Z²=Γ`, `Z⁴=1`, `Z*Z=1`.**
+  Wired into `QIQTH.lean` + `AxiomAudit.lean` (standard-3); `lake build QIQTH.Fock.Dirac.KleinTwistUnitary`
+  green (2402 jobs); budget 0. Remaining frontier (checkpointed): **E5** (full operator-algebra BW data /
+  twisted-duality theorem / GNS — instantiating `γ` = second-quantized parity unitary on the CAR
+  inner-product space), **E1** (Dirac one-particle + `S_D`), **E8** (even-observable no-signaling),
+  **E9** (Dirac `T_μν` → Jacobson hook).
