@@ -167,4 +167,22 @@ theorem fermionicGaussianRelEntropy_nonneg {ι : Type*} [Fintype ι] {c d : ι �
     0 ≤ fermionicGaussianRelEntropy c d :=
   Finset.sum_nonneg (fun i _ => fermionicBinaryRelEntropy_nonneg (hc0 i) (hc1 i) (hd0 i) (hd1 i))
 
+/-- **Faithfulness (binary):** `D(c‖c) = 0` — the relative entropy of a state with itself vanishes.
+With `fermionicBinaryRelEntropy_nonneg` (≥ 0, with equality iff equal), this is the second defining
+property of relative entropy; it is exactly what makes the first law `δS = δ⟨K⟩` the statement that the
+relative entropy `D(n ‖ n_KMS)` is *minimized* (= 0) at the KMS occupation. -/
+@[simp] theorem fermionicBinaryRelEntropy_self (c : ℝ) : fermionicBinaryRelEntropy c c = 0 := by
+  unfold fermionicBinaryRelEntropy
+  rcases eq_or_ne c 0 with hc | hc
+  · subst hc; simp
+  · rcases eq_or_ne (1 - c) 0 with hc1 | hc1
+    · rw [hc1, div_self hc]; simp
+    · rw [div_self hc, div_self hc1, Real.log_one]; ring
+
+/-- **Faithfulness (CAR/Araki):** `S(ρ ‖ ρ) = 0` — the fermionic relative entropy of a quasi-free state
+with itself vanishes. -/
+@[simp] theorem fermionicGaussianRelEntropy_self {ι : Type*} [Fintype ι] (c : ι → ℝ) :
+    fermionicGaussianRelEntropy c c = 0 := by
+  simp [fermionicGaussianRelEntropy]
+
 end QIQTH.Fock.Dirac

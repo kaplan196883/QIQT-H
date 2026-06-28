@@ -6375,6 +6375,11 @@ namespace QIQTH.AxiomAudit
 -- (not bare vN entropy) controls the modular / entanglement-first-law side of the area law. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.fermionicBinaryRelEntropy_nonneg
 #print axioms QIQTH.Fock.Dirac.fermionicGaussianRelEntropy_nonneg
+-- ELECTRON_FIELD E3/E9 (CAR relative-entropy FAITHFULNESS): fermionicBinaryRelEntropy_self D(c‖c)=0 and
+-- fermionicGaussianRelEntropy_self S(ρ‖ρ)=0. With the positivity (≥0), this is the second defining property of the
+-- CAR/Araki relative entropy; it is exactly what makes the first law δS=δ⟨K⟩ the statement that D(n‖n_KMS) is
+-- minimized (=0) at the KMS occupation. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.fermionicBinaryRelEntropy_self
 -- ★★★ ELECTRON_FIELD_PLAN E2 (antisymmetric/CAR Fock space): the fermionic (electron) Fock space is the
 -- exterior algebra ⋀ M (CAR counterpart of the bosonic symmetric Fock space). finrank_CARFock: dim(⋀ M)=2^n for
 -- an n-mode region — each fermionic mode is a qubit (Mathlib Module.Basis.ExteriorAlgebra indexed by Finset I,

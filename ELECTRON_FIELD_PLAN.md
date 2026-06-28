@@ -612,3 +612,9 @@ EXTERNAL libraries; QIQT-H built its own.
   modular tier is comprehensively complete** (finite + continuum, flow + spectrum + generator + entropy +
   first law + record covariance/conservation), all on QIQT-H's existing TT machinery. Sole remaining E5:
   the antilinear modular conjugation `J_W = Z·Γ₋(j)` (antilinear-functor / Mathlib gap).
+- 2026-06-28 — **E3/E9: CAR relative-entropy faithfulness `D(c‖c)=0`** (added to `QuasiFreeEntropy.lean`,
+  axiom-free, budget 0). **`fermionicBinaryRelEntropy_self`** (`D(c‖c)=0`) and
+  **`fermionicGaussianRelEntropy_self`** (`S(ρ‖ρ)=0`). With the positivity (`≥0`), this is the second
+  defining property of the CAR/Araki relative entropy, and exactly what makes the first law `δS=δ⟨K⟩` the
+  statement that `D(n‖n_KMS)` is *minimized* (=0) at the KMS occupation. `lake build
+  QIQTH.Fock.Dirac.QuasiFreeEntropy` green (2179 jobs); standard-3; budget 0.
