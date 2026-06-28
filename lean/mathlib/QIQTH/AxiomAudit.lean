@@ -6637,6 +6637,12 @@ namespace QIQTH.AxiomAudit
 -- mode entropy is UNBOUNDED (no cutoff), whereas the electron's per-mode entropy has the hard ceiling log 2 — the
 -- entropy-level shadow of the CAR finite capacity dim ⋀h=2^n. Axiom-free (standard 3); free Dirac.
 #print axioms QIQTH.Fock.Dirac.electron_mode_entropy_le_log2
+-- ELECTRON_FIELD E9 (the modular-energy spectrum): electron_modHamiltonian_diag — K=βω·N = diag(0, βω): the modular
+-- energy levels are exactly {0, βω} (empty mode 0, occupied mode βω = the boost energy quantum, =2πω at the BW
+-- temperature β=2π), the gap that drives the modular phase σ_t(a†)=e^{−itβω}a†. electron_modHamiltonian_trace: Tr K = βω
+-- (the total/sum of modular energy levels). Axiom-free (standard 3); free Dirac.
+#print axioms QIQTH.Fock.Dirac.electron_modHamiltonian_diag
+#print axioms QIQTH.Fock.Dirac.electron_modHamiltonian_trace
 -- ★★★ ELECTRON_FIELD E5 (CONTINUUM CAR-net modular flow Γ₋(Δ^it)): the continuum wedge modular flow for the electron
 -- CAR net is the FERMIONIC second quantization of the one-particle continuum Δ^it = modUnitary S t
 -- (StandardSubspaceModularFlow, already built). fermiSecondQuantModFlow S t = ExteriorAlgebra.map (modUnitary S t)

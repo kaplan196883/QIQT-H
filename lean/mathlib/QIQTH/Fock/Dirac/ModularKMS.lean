@@ -340,6 +340,25 @@ theorem electron_modHamiltonian_isHermitian (β ω : ℝ) :
   unfold modHamiltonian
   exact Matrix.IsHermitian.smul hN hk
 
+/-- **The modular-energy spectrum `K = diag(0, βω)`.**  The modular Hamiltonian is the diagonal matrix
+with eigenvalues `0` (the empty mode) and `βω` (the occupied mode): the modular energy levels are exactly
+`{0, βω}`, the empty state carrying zero modular energy and the occupied state carrying `βω` — the boost
+energy quantum (`= 2πω` at the Bisognano–Wichmann temperature `β = 2π`), the gap that drives the modular
+phase `σ_t(a†) = e^{−it·βω}·a†` (`electron_sigmaDiag_raising`). -/
+theorem electron_modHamiltonian_diag (β ω : ℝ) :
+    modHamiltonian β ω = Matrix.diagonal ![0, ((β * ω : ℝ) : ℂ)] := by
+  unfold modHamiltonian numberOp
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [Matrix.smul_apply, Matrix.diagonal_apply, smul_eq_mul]
+
+/-- **The total modular energy `Tr K = βω`.**  The trace of the modular Hamiltonian (the sum of the
+modular energy levels `0 + βω`) is `βω` — at `β = 2π`, the boost energy `2πω`. -/
+theorem electron_modHamiltonian_trace (β ω : ℝ) :
+    Matrix.trace (modHamiltonian β ω) = ((β * ω : ℝ) : ℂ) := by
+  rw [electron_modHamiltonian_diag, Matrix.trace_diagonal, Fin.sum_univ_two]
+  simp
+
 /-- **The single-mode thermal / entanglement entropy: `S = log Z + β⟨E⟩`.**  The von Neumann entropy of
 the electron mode equals the log partition function plus `β` times the mean energy:
 `binaryEntropy(n) = log(1 + e^{−βω}) + βω·n`, with `n = fermiDirac β ω`, `Z = 1 + e^{−βω}` and the mean

@@ -683,3 +683,10 @@ EXTERNAL libraries; QIQT-H built its own.
   (no cutoff, `PHOTON_FIELD_PLAN` P2/P4), whereas the electron's per-mode entropy has the hard ceiling
   `log 2` — the entropy-level shadow of the CAR finite capacity `dim ⋀h = 2^n`. (Added
   `import QIQTH.RecordContract`.) Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **E9: the modular-energy spectrum `K = diag(0, βω)`** (added to `ModularKMS.lean`,
+  axiom-free, budget 0, 3061 jobs green). **`electron_modHamiltonian_diag`**: `K = βω·N = diag(0, βω)` —
+  the modular energy levels are exactly `{0, βω}` (empty mode `0`, occupied mode `βω` = the boost energy
+  quantum, `= 2πω` at the BW temperature), the gap driving the modular phase `σ_t(a†)=e^{−itβω}a†`.
+  **`electron_modHamiltonian_trace`**: `Tr K = βω` (the sum of modular energy levels). Makes the modular
+  Hamiltonian's spectrum explicit, completing the E9 generator picture (form `K=βω·N` + commutators +
+  expectation `⟨K⟩` + self-adjoint + spectrum `{0,βω}`). Wired into `AxiomAudit.lean`; standard-3; budget 0.
