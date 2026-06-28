@@ -25,6 +25,7 @@ PhysLean's `WickAlgebra` is the follow-on E2-full/E5 work.
 import Physlib.QFT.PerturbationTheory.FieldStatistics.Basic
 import Physlib.QFT.PerturbationTheory.FieldStatistics.ExchangeSign
 import Physlib.QFT.PerturbationTheory.FieldSpecification.Basic
+import Physlib.QFT.PerturbationTheory.WickAlgebra.SuperCommute
 import QIQTH.Fock.Dirac.DiracGamma
 
 namespace QIQTH.Fock.Dirac
@@ -82,5 +83,36 @@ def electronFieldSpec : FieldSpecification where
 `electronStatistic` and the substrate's odd/CAR grading. -/
 @[simp] theorem electronFieldSpec_statistic (f : electronFieldSpec.Field) :
     electronFieldSpec.statistic f = FieldStatistic.fermionic := rfl
+
+/-! ### CAR relations for the electron (via PhysLean's `superCommute`)
+
+For the fermionic electron the **super-commutator `[·,·]ₛ` IS the anticommutator** (the graded commutator
+with exchange sign `−1`, `electron_exchangeSign`).  PhysLean's `WickAlgebra.superCommute` then yields the
+canonical anticommutation (CAR) relations for the electron's creation/annihilation operators — the
+E2-full/E5 operator content. -/
+
+open FieldSpecification FieldSpecification.WickAlgebra in
+/-- **Pauli exclusion `{a†, a†} = 0`**: the super-commutator (= anticommutator) of two electron
+*creation* operators vanishes — two electrons cannot be created in the same mode. -/
+theorem electron_create_create_zero {φ φ' : electronFieldSpec.CrAnFieldOp}
+    (h : (electronFieldSpec |>ᶜ φ) = .create) (h' : (electronFieldSpec |>ᶜ φ') = .create) :
+    [ofCrAnOp φ, ofCrAnOp φ']ₛ = 0 :=
+  superCommute_create_create h h'
+
+open FieldSpecification FieldSpecification.WickAlgebra in
+/-- **`{a, a} = 0`**: the super-commutator (= anticommutator) of two electron *annihilation* operators
+vanishes — the Pauli relation for annihilation operators. -/
+theorem electron_annihilate_annihilate_zero {φ φ' : electronFieldSpec.CrAnFieldOp}
+    (h : (electronFieldSpec |>ᶜ φ) = .annihilate) (h' : (electronFieldSpec |>ᶜ φ') = .annihilate) :
+    [ofCrAnOp φ, ofCrAnOp φ']ₛ = 0 :=
+  superCommute_annihilate_annihilate h h'
+
+open FieldSpecification FieldSpecification.WickAlgebra in
+/-- **The anticommutator is a c-number**: the super-commutator of any two electron creation/annihilation
+operators lies in the centre of the algebra — the defining CAR property that `{a, a†}` is a scalar (the
+one-particle inner product), not an operator. -/
+theorem electron_superCommute_mem_center (φ φ' : electronFieldSpec.CrAnFieldOp) :
+    [ofCrAnOp φ, ofCrAnOp φ']ₛ ∈ Subalgebra.center ℂ (WickAlgebra electronFieldSpec) :=
+  superCommute_ofCrAnOp_ofCrAnOp_mem_center φ φ'
 
 end QIQTH.Fock.Dirac

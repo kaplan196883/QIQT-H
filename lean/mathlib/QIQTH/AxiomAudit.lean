@@ -6493,6 +6493,14 @@ namespace QIQTH.AxiomAudit
 -- are built. electronFieldSpec_statistic: the electron field is fermionic. The entry point to the E2-full/E5
 -- operator tier. Axiom-free (standard 3 / fewer).
 #print axioms QIQTH.Fock.Dirac.electronFieldSpec_statistic
+-- ★★★ ELECTRON_FIELD E2-full/E5 (CAR relations for the electron via PhysLean superCommute): for the fermionic
+-- electron the super-commutator [·,·]ₛ IS the anticommutator (graded commutator with exchange sign −1). The CAR
+-- relations: electron_create_create_zero {a†,a†}=0 (PAULI EXCLUSION — two electrons can't be created in one mode);
+-- electron_annihilate_annihilate_zero {a,a}=0; electron_superCommute_mem_center — {a,a†} lies in the centre, the
+-- defining CAR property that the anticommutator is a c-number (the one-particle inner product), not an operator.
+-- The actual E5 operator content, machine-checked on PhysLean's WickAlgebra. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.electron_create_create_zero
+#print axioms QIQTH.Fock.Dirac.electron_superCommute_mem_center
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy

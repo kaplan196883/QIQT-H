@@ -388,3 +388,16 @@ This closes the "build vs reuse" decision for the operator layer: **reuse PhysLe
   `lake build QIQTH.Fock.Dirac.PhysLeanBridge` green (3117 jobs); standard-3; budget 0. Next: instantiate
   `CrAnFieldOp` for `electronFieldSpec` and state the CAR anticommutation via `superCommute`
   (`[a,a†]ₛ`, with `superCommute_create_create` / `superCommute_diff_statistic`).
+- 2026-06-28 — **E2-full/E5: CAR relations for the electron (via PhysLean `superCommute`)** (added to
+  `PhysLeanBridge.lean`, axiom-free, budget 0). For the fermionic electron the super-commutator `[·,·]ₛ`
+  IS the anticommutator (graded commutator with exchange sign `−1`). The canonical anticommutation (CAR)
+  relations, on PhysLean's `WickAlgebra electronFieldSpec`: **`electron_create_create_zero`**
+  (`{a†,a†}=0` — **Pauli exclusion**, two electrons can't be created in one mode);
+  **`electron_annihilate_annihilate_zero`** (`{a,a}=0`); **`electron_superCommute_mem_center`** (the
+  `{a,a†}` super-commutator lies in the centre — the defining CAR property that the anticommutator is a
+  **c-number** = the one-particle inner product, not an operator). **This is the actual E5 operator
+  content** — the CAR/Pauli relations machine-checked for the electron on the PhysLean operator algebra.
+  `lake build QIQTH.Fock.Dirac.PhysLeanBridge` green (3129 jobs); standard-3; budget 0. (Imported
+  `WickAlgebra.SuperCommute`.) The free-Dirac CAR operator layer (E2-full/E5 kinematics) is now in place
+  on PhysLean; the irreducible remaining frontier is **E5 modular flow / Tomita–Takesaki** (`Δ_W^it`),
+  unbuilt in any proof assistant.
