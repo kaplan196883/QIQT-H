@@ -299,3 +299,9 @@ corollary — the bosonic capacity is unbounded, the structural difference from 
   `n_ω = e^{−2πω}/(1−e^{−2πω})`: the Rindler/Unruh photon occupation at the Bisognano–Wichmann temperature
   is the mean of the geometric (Bose) distribution with Boltzmann factor `e^{−2πω}` — the `β=2π`
   specialization of `boseEinstein_gibbs_form`. Wired into `AxiomAudit.lean`; standard-3; budget 0.
+- 2026-06-29 — **P4: the bosonic partition function is `n+1`** (`boseEinstein_add_one_mul`, in
+  `PhotonUnruh.lean`, axiom-free standard-3, budget 0, 2180 jobs green). `(n+1)(1−e^{−βω}) = 1`, i.e.
+  `n+1 = 1/(1−e^{−βω}) = Z_bose = ∑_k e^{−βωk}` (the geometric-series sum over number states): the `(n+1)`
+  enhancement factor IS the single-mode bosonic partition function. Contrast `Z_fermi = 1+e^{−βω}` (two-level):
+  geometric `1/(1−x)` vs two-level `1+x` is the spin–statistics signature at the partition level. Wired into
+  `AxiomAudit.lean`; standard-3; budget 0.

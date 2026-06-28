@@ -84,6 +84,20 @@ temperature `β = 2π`. -/
 theorem rindlerOccupationBose_pos {ω : ℝ} (h : 0 < ω) : 0 < rindlerOccupationBose ω :=
   boseEinstein_pos (by positivity)
 
+/-- **The bosonic partition function is `n + 1`**: `(n + 1)(1 − e^{−βω}) = 1`, i.e. `n + 1 = 1/(1 − e^{−βω})
+= Z_bose` (for `e^{βω} ≠ 1`).  The `(n+1)` enhancement factor IS the single-mode bosonic partition function
+`Z_bose = ∑_k e^{−βωk} = 1/(1 − e^{−βω})` — the geometric-series sum over the number states.  (Contrast the
+fermionic 2-state `Z_fermi = 1 + e^{−βω}`, `electron_gibbs_weight_*`: the bosonic geometric `1/(1−x)` vs the
+fermionic two-level `1+x` partition function — the spin–statistics signature at the partition level.) -/
+theorem boseEinstein_add_one_mul {β ω : ℝ} (h : Real.exp (β * ω) ≠ 1) :
+    (1 + boseEinstein β ω) * (1 - Real.exp (-(β * ω))) = 1 := by
+  unfold boseEinstein
+  rw [Real.exp_neg]
+  have he : Real.exp (β * ω) ≠ 0 := (Real.exp_pos _).ne'
+  have hsub : Real.exp (β * ω) - 1 ≠ 0 := sub_ne_zero.mpr h
+  field_simp
+  ring
+
 /-- **The bosonic Gibbs form of the occupation** `n = e^{−βω}/(1 − e^{−βω})` (for `e^{βω} ≠ 1`).  The
 Bose–Einstein occupation is the **mean of the geometric (Bose) distribution** `p_k = (1−x)x^k` over the
 number states `k = 0,1,2,…`, with Boltzmann factor `x = e^{−βω}` and single-mode partition function
