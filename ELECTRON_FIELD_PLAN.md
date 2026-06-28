@@ -320,3 +320,12 @@ frontier.
   (one-particle space + `S_D` in momentum space), **E8 bipartite** (graded tensor product), **E9**
   (Dirac `T_μν` → Jacobson hook). These need GNS / momentum-space field operators / graded tensor
   products — the operator-algebra/QFT-construction tier beyond the self-contained algebraic spine.
+- 2026-06-28 — **E8 (even records pairwise commute) DONE** (added to `EvenObservables.lean`, axiom-free,
+  budget 0). **`evenBilinear_comm`** — two fermion bilinears commute,
+  `(ι a·ι b)·(ι c·ι d) = (ι c·ι d)·(ι a·ι b)`: the electron's even records (`j^μ`, `T_μν`) pairwise
+  commute, so they are jointly measurable and cannot signal between one another — the no-signaling
+  statement for the even records themselves (a step beyond `ι_mul_ι_comm_ι`). Proof = the bilinear
+  commutes with each generator, moved through twice. Wired into `AxiomAudit.lean` (`[propext,
+  Quot.sound]`); `lake build QIQTH.Fock.Dirac.EvenObservables` green (2401 jobs); budget 0. Remaining
+  frontier (checkpointed): **E5** (GNS / twisted-duality theorem), **E1 field** (`S_D` momentum space),
+  **E8 bipartite** (graded tensor product assigning records to spacelike regions), **E9** (Dirac `T_μν`).

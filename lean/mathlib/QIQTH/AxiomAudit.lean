@@ -6439,6 +6439,11 @@ namespace QIQTH.AxiomAudit
 -- regions) is the next E8 sub-item. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.ι_mul_ι_swap
 #print axioms QIQTH.Fock.Dirac.ι_mul_ι_comm_ι
+-- ★★★ ELECTRON_FIELD_PLAN E8 (even records pairwise commute): evenBilinear_comm — two fermion bilinears
+-- (ι a·ι b)·(ι c·ι d) = (ι c·ι d)·(ι a·ι b) commute. Commuting observables are jointly measurable and cannot
+-- signal between one another, so this is the no-signaling statement for the electron's even records (j^μ, T_μν)
+-- themselves — a step beyond ι_mul_ι_comm_ι. Axiom-free (standard 3 / fewer).
+#print axioms QIQTH.Fock.Dirac.evenBilinear_comm
 -- ★★★ ELECTRON_FIELD_PLAN E1 (spinor core — the Dirac gamma / Clifford algebra): the electron is a Dirac spinor;
 -- its spin/Lorentz structure is the Clifford algebra of the metric. diracGamma Q v = the gamma operator in direction
 -- v (Clifford generator ι Q v); for an orthonormal Minkowski basis γ_μ = diracGamma Q e_μ. diracGamma_sq: γ(v)²=Q v

@@ -107,4 +107,13 @@ theorem ι_mul_ι_comm_ι (a b c : M) :
     (ι 𝕜 a * ι 𝕜 b) * ι 𝕜 c = ι 𝕜 c * (ι 𝕜 a * ι 𝕜 b) := by
   rw [mul_assoc, ι_mul_ι_swap b c, mul_neg, ← mul_assoc, ι_mul_ι_swap a c, neg_mul, neg_neg, mul_assoc]
 
+/-- **Two even bilinear records commute.**  `(ι a · ι b) · (ι c · ι d) = (ι c · ι d) · (ι a · ι b)`:
+fermion bilinears — the electron's even records (`j^μ`, `T_μν`) — pairwise commute.  Commuting
+observables are jointly measurable and cannot signal between one another, so this is the no-signaling
+statement for the even records themselves (a step beyond `ι_mul_ι_comm_ι`).  Proof = the bilinear
+commutes with each generator (`ι_mul_ι_comm_ι`), moved through twice. -/
+theorem evenBilinear_comm (a b c d : M) :
+    (ι 𝕜 a * ι 𝕜 b) * (ι 𝕜 c * ι 𝕜 d) = (ι 𝕜 c * ι 𝕜 d) * (ι 𝕜 a * ι 𝕜 b) := by
+  rw [← mul_assoc, ι_mul_ι_comm_ι a b c, mul_assoc, ι_mul_ι_comm_ι a b d, ← mul_assoc]
+
 end QIQTH.Fock.Dirac
