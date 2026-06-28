@@ -6530,6 +6530,11 @@ namespace QIQTH.AxiomAudit
 -- factor, the multiplicative KMS content). The electron realizes the finite TT KMS structure. Axiom-free (std 3).
 #print axioms QIQTH.Fock.Dirac.electron_kms_condition
 #print axioms QIQTH.Fock.Dirac.electron_gibbs_ratio
+-- ELECTRON_FIELD E5/E6 (the modular flow conserves the records): electron_modAut_self (σ(ρ)=ρ, the KMS state is a
+-- fixed point of its modular automorphism); electron_modAut_numberOp (σ(N)=N — the number operator / record / charge
+-- is a modular invariant, since N and ρ are both diagonal hence commute). The QIQT-H statement that the modular
+-- (KMS) dynamics conserves the record/charge, for the electron. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.electron_modAut_numberOp
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy

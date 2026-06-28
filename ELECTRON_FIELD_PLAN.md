@@ -482,3 +482,12 @@ EXTERNAL libraries; QIQT-H built its own.
   Tomita–Takesaki KMS structure** of the project — E5/E6 on the existing machinery, not a separate
   axiom. `lake build QIQTH.Fock.Dirac.ModularKMS` green (2944 jobs); standard-3; budget 0. Next: the
   continuum wedge `Δ_W^it` for the CAR net via `modFlow`/`Spectral` + the fermionic `J` (Klein twist).
+- 2026-06-28 — **E5/E6: the electron's modular flow conserves the records** (added to `ModularKMS.lean`,
+  axiom-free, budget 0). **`electron_modAut_self`** (`σ(ρ)=ρ` — the KMS state is a fixed point of its
+  own modular automorphism) and **`electron_modAut_numberOp`** (`σ(N)=N` — the **number operator /
+  record / charge is a modular invariant**, since `N` and `ρ` are both diagonal hence commute). This is
+  the QIQT-H statement that the modular (KMS) dynamics **conserves the record/charge**, realized for the
+  electron on the project's `FiniteModularTheory.modAut`. `lake build QIQTH.Fock.Dirac.ModularKMS` green
+  (2944 jobs); standard-3; budget 0. The finite Tomita–Takesaki realization of the electron mode is now
+  complete (KMS state · KMS condition · σ-invariance · detailed balance · record conservation). Next:
+  the continuum wedge `Δ_W^it` via `modFlow`/`Spectral` (the StandardSubspace/crossed-product frontier).

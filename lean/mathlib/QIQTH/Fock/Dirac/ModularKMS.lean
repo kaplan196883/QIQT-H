@@ -114,4 +114,26 @@ theorem electron_gibbs_ratio (β ω : ℝ) :
   rw [div_eq_iff (by positivity)]
   field_simp
 
+/-- **The electron's modular flow fixes its own state**: `σ(ρ) = ρ` (`modAut ρ ρ = ρ`).  The KMS state
+is a fixed point of its modular automorphism. -/
+@[simp] theorem electron_modAut_self (β ω : ℝ) :
+    QIQTH.FiniteModularTheory.modAut (electronModeThermalState β ω) (electronModeThermalState β ω)
+      = electronModeThermalState β ω := by
+  unfold QIQTH.FiniteModularTheory.modAut
+  rw [mul_assoc, mul_invOf_self, mul_one]
+
+/-- **The number operator (the record/charge) is a modular invariant**: `σ(N) = N`
+(`modAut ρ N = N`).  Because `N` and the thermal state `ρ` are both diagonal they commute, so the
+electron's modular flow fixes the number operator — the QIQT-H statement that the modular (KMS) dynamics
+**conserves the record / charge**.  (The record `N` is among the even observables of §0.) -/
+@[simp] theorem electron_modAut_numberOp (β ω : ℝ) :
+    QIQTH.FiniteModularTheory.modAut (electronModeThermalState β ω) numberOp = numberOp := by
+  have hcomm : electronModeThermalState β ω * numberOp
+      = numberOp * electronModeThermalState β ω := by
+    unfold electronModeThermalState numberOp
+    rw [Matrix.diagonal_mul_diagonal, Matrix.diagonal_mul_diagonal]
+    congr 1; funext i; ring
+  unfold QIQTH.FiniteModularTheory.modAut
+  rw [hcomm, mul_assoc, mul_invOf_self, mul_one]
+
 end QIQTH.Fock.Dirac
