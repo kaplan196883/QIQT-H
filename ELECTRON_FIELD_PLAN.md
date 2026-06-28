@@ -307,3 +307,16 @@ frontier.
   kernel `S_D=(iγ·∂+m)Δ_m` (need the field in momentum space) remain the E1 frontier (checkpointed).
   Remaining: **E5** (operator-algebra BW data / twisted-duality theorem / GNS), **E1 field** (one-particle
   space + `S_D`), **E8 bipartite** (graded tensor product), **E9** (Dirac `T_μν` → Jacobson hook).
+- 2026-06-28 — **E1 Clifford ℤ₂-grading (Lorentz generators are even) DONE** (added to `DiracGamma.lean`,
+  axiom-free, budget 0). The Clifford algebra carries a `ℤ₂`-grading `evenOdd Q i` parallel to the CAR
+  parity `Γ=(−1)^F`: **`diracGamma_mem_odd`** (a single gamma `γ_μ` is **odd**, grade 1),
+  **`diracGamma_mul_mem_even`** (a product of two gammas is **even**, grade 0), `diracSigma a b =
+  γ_aγ_b−γ_bγ_a` (the **Lorentz generator** `σ_μν=(i/4)[γ_μ,γ_ν]`), and **`diracSigma_mem_even`**
+  (`σ_ab ∈ evenOdd Q 0` — the spinor representation of the Lorentz group sits in the **even** Clifford
+  subalgebra). This is the gamma-side parallel of the CAR parity grading — both axes (Clifford spin /
+  CAR statistics) carry the same `ℤ₂` even/odd structure that is the crux. Wired into `AxiomAudit.lean`
+  (standard-3); `lake build QIQTH.Fock.Dirac.DiracGamma` green (1774 jobs); budget 0. Remaining frontier
+  (checkpointed): **E5** (operator-algebra BW data / twisted-duality theorem / GNS), **E1 field**
+  (one-particle space + `S_D` in momentum space), **E8 bipartite** (graded tensor product), **E9**
+  (Dirac `T_μν` → Jacobson hook). These need GNS / momentum-space field operators / graded tensor
+  products — the operator-algebra/QFT-construction tier beyond the self-contained algebraic spine.

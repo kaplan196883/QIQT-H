@@ -6448,6 +6448,14 @@ namespace QIQTH.AxiomAudit
 -- inner product, Wigner Poincaré rep) + the S_D=(iγ·∂+m)Δ_m causal kernel remain the E1 frontier. Axiom-free.
 #print axioms QIQTH.Fock.Dirac.diracGamma_anticomm
 #print axioms QIQTH.Fock.Dirac.diracGamma_sq
+-- ★★★ ELECTRON_FIELD_PLAN E1 (Clifford ℤ₂-grading — Lorentz generators are even): the Clifford algebra carries a
+-- ℤ₂-grading evenOdd Q i parallel to the CAR parity Γ=(−1)^F. diracGamma_mem_odd: a single gamma γ_μ is ODD (grade
+-- 1); diracGamma_mul_mem_even: a product of two gammas is EVEN (grade 0); diracSigma a b = γ_aγ_b−γ_bγ_a (the
+-- Lorentz generator σ_μν=(i/4)[γ_μ,γ_ν]); diracSigma_mem_even: σ_ab ∈ evenOdd Q 0 — the spinor representation of the
+-- Lorentz group sits in the EVEN Clifford subalgebra (the gamma-side parallel of the CAR parity grading). Axiom-free
+-- (standard 3).
+#print axioms QIQTH.Fock.Dirac.diracSigma_mem_even
+#print axioms QIQTH.Fock.Dirac.diracGamma_mem_odd
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy

@@ -24,6 +24,7 @@ the causal anticommutator kernel `S_D = (iγ·∂ + m)Δ_m` (which need the fiel
 the E1 frontier (checkpointed).  Free Dirac only.
 -/
 import Mathlib.LinearAlgebra.CliffordAlgebra.Basic
+import Mathlib.LinearAlgebra.CliffordAlgebra.Grading
 import Mathlib.Data.Real.Basic
 
 namespace QIQTH.Fock.Dirac
@@ -59,5 +60,34 @@ theorem diracGamma_anticomm_ortho {a b : M} (h : Q.IsOrtho a b) :
 theorem diracGamma_swap_ortho {a b : M} (h : Q.IsOrtho a b) :
     diracGamma Q a * diracGamma Q b = -(diracGamma Q b * diracGamma Q a) := by
   unfold diracGamma; exact CliffordAlgebra.ι_mul_ι_comm_of_isOrtho h
+
+/-! ### The Clifford ℤ₂-grading: single gammas are odd, the Lorentz generators are even
+
+The Clifford algebra carries a `ℤ₂`-grading `evenOdd Q i` parallel to the CAR parity `Γ = (−1)^F`
+(`QIQTH/Fock/Dirac/Parity.lean`).  A single gamma `γ_μ` is **odd**; a product of two gammas — and hence
+the **Lorentz generator** `σ_ab = γ_a γ_b − γ_b γ_a` (∝ the spin generator `σ_μν = (i/4)[γ_μ,γ_ν]`) — is
+**even**.  So the spinor representation of the Lorentz group sits in the even Clifford subalgebra: the
+gamma-side of the even/odd structure that is the ELECTRON_FIELD_PLAN crux. -/
+
+/-- A single Dirac gamma is **odd** (grade 1) in the Clifford `ℤ₂`-grading. -/
+theorem diracGamma_mem_odd (v : M) : diracGamma Q v ∈ CliffordAlgebra.evenOdd Q 1 := by
+  unfold diracGamma; exact CliffordAlgebra.ι_mem_evenOdd_one Q v
+
+/-- A product of two gammas is **even** (grade 0): the bilinear / even Clifford sector. -/
+theorem diracGamma_mul_mem_even (a b : M) :
+    diracGamma Q a * diracGamma Q b ∈ CliffordAlgebra.evenOdd Q 0 := by
+  unfold diracGamma; exact CliffordAlgebra.ι_mul_ι_mem_evenOdd_zero Q a b
+
+/-- The **Dirac Lorentz generator** `σ_ab = γ_a γ_b − γ_b γ_a` (the commutator `[γ_a, γ_b]`, ∝ the spin
+generator `σ_μν = (i/4)[γ_μ,γ_ν]` of the Lorentz spinor representation). -/
+noncomputable def diracSigma (a b : M) : CliffordAlgebra Q :=
+  diracGamma Q a * diracGamma Q b - diracGamma Q b * diracGamma Q a
+
+/-- **The Lorentz generators live in the EVEN Clifford subalgebra.**  `σ_ab ∈ evenOdd Q 0`: the spinor
+representation of the Lorentz group sits in the even part of the Clifford `ℤ₂`-grading (while single
+gammas are odd) — the gamma-side parallel of the CAR parity grading `Γ = (−1)^F`. -/
+theorem diracSigma_mem_even (a b : M) : diracSigma Q a b ∈ CliffordAlgebra.evenOdd Q 0 := by
+  unfold diracSigma
+  exact Submodule.sub_mem _ (diracGamma_mul_mem_even Q a b) (diracGamma_mul_mem_even Q b a)
 
 end QIQTH.Fock.Dirac
