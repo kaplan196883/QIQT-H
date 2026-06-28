@@ -6549,6 +6549,12 @@ namespace QIQTH.AxiomAudit
 -- modular Hamiltonian K) has eigenvalue gap βω, and at the Unruh value β=2π this is 2π·ω = 2π × (boost generator
 -- eigenvalue) — the Δ^it = U(boost) content at the single-mode level (toward E9's 2π K_boost). Axiom-free (std 3).
 #print axioms QIQTH.Fock.Dirac.electron_modular_phase
+-- ELECTRON_FIELD E5 (the raising operator is a modular eigenoperator): electron_sigmaDiag_raising —
+-- σ_t(a†) = (p₁^{it} p₀^{−it})·a† (raisingOp = the matrix unit E_{1,0}). The real-time modular flow Δ^it rotates a†
+-- by the modular phase (n/(1−n))^{it} = e^{−it·βω} (electron_modular_phase); a† is an eigenvector of the modular
+-- automorphism with the modular frequency βω (= the boost energy at β=2π). The operator-level Δ^it = U(boost)
+-- action on the creation operator. Axiom-free (standard 3).
+#print axioms QIQTH.Fock.Dirac.electron_sigmaDiag_raising
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy

@@ -191,4 +191,22 @@ theorem electron_modular_phase (β ω t : ℝ) :
   congr 1
   ring
 
+/-- The electron mode's **raising operator** `a†` (matrix unit `E_{1,0}`: empty ↦ occupied). -/
+noncomputable def raisingOp : Matrix (Fin 2) (Fin 2) ℂ := Matrix.single 1 0 1
+
+/-- **The raising operator `a†` is a modular eigenoperator**: `σ_t(a†) = (p₁^{it} p₀^{−it})·a†`.  The
+real-time modular flow `Δ^{it}` rotates `a†` by the modular phase `(n/(1−n))^{it} = e^{−it·βω}`
+(`electron_modular_phase`) — `a†` is an eigenvector of the modular automorphism with the modular
+frequency `βω` (the boost energy at `β = 2π`).  This is the operator-level `Δ^{it} = U(boost)` action. -/
+theorem electron_sigmaDiag_raising (β ω t : ℝ) :
+    QIQTH.FiniteModularTheory.sigmaDiag (electronModeOcc β ω) t raisingOp
+      = ((electronModeOcc β ω 1 : ℂ) ^ (Complex.I * (t : ℂ))
+          * (electronModeOcc β ω 0 : ℂ) ^ (Complex.I * ((-t : ℝ) : ℂ))) • raisingOp := by
+  unfold QIQTH.FiniteModularTheory.sigmaDiag QIQTH.FiniteModularTheory.diagPow raisingOp
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [Matrix.mul_apply, Fin.sum_univ_two, Matrix.diagonal_apply, Matrix.single,
+      Matrix.smul_apply, smul_eq_mul] <;>
+    ring
+
 end QIQTH.Fock.Dirac

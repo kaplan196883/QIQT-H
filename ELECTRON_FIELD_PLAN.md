@@ -514,3 +514,12 @@ EXTERNAL libraries; QIQT-H built its own.
   green (2944 jobs); standard-3; budget 0. The finite modular tier now includes the **modular energy =
   boost** identification. Next: the continuum wedge `Δ_W^it` for the CAR net (the StandardSubspace/
   crossed-product frontier).
+- 2026-06-28 — **E5: the raising operator `a†` is a modular eigenoperator** (added to `ModularKMS.lean`,
+  axiom-free, budget 0). **`electron_sigmaDiag_raising`** — `σ_t(a†) = (p₁^{it} p₀^{−it})·a†` (with
+  `raisingOp = Matrix.single 1 0 1`, the matrix unit `E_{1,0}` = `a†`). The real-time modular flow
+  `Δ^{it}` rotates `a†` by the modular phase `(n/(1−n))^{it} = e^{−it·βω}` (`electron_modular_phase`):
+  **`a†` is an eigenvector of the modular automorphism with the modular frequency `βω`** (= the boost
+  energy at `β = 2π`). This is the operator-level `Δ^{it} = U(boost)` action on the creation operator.
+  Proof: the diagonal–matrix-unit–diagonal conjugation (`fin_cases` + `ring`). `lake build
+  QIQTH.Fock.Dirac.ModularKMS` green (2944 jobs); standard-3; budget 0. The finite modular tier now has
+  the operator-level eigenoperator action; next: the continuum lift to the CAR net via `modFlow`.
