@@ -6543,6 +6543,12 @@ namespace QIQTH.AxiomAudit
 -- at the finite level. Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Dirac.electron_sigmaDiag_comp
 #print axioms QIQTH.Fock.Dirac.electron_sigmaDiag_fixes_numberOp
+-- ELECTRON_FIELD E5/E9 (modular phase = modular Hamiltonian eigenvalue = mode energy βω): electron_modular_phase —
+-- the ratio of Δ^it's occupied/empty eigenvalues is the Gibbs factor^it, (n/(1−n))^{it} = e^{−it·βω}. So the modular
+-- flow rotates the off-diagonal raising/lowering operators by the modular frequency βω; the generator of σ_t (the
+-- modular Hamiltonian K) has eigenvalue gap βω, and at the Unruh value β=2π this is 2π·ω = 2π × (boost generator
+-- eigenvalue) — the Δ^it = U(boost) content at the single-mode level (toward E9's 2π K_boost). Axiom-free (std 3).
+#print axioms QIQTH.Fock.Dirac.electron_modular_phase
 -- ★★★ ELECTRON_FIELD_PLAN E7 (graded regional capacity — the charge/parity block decomposition): the electron's
 -- even/U(1)-invariant regional algebra is graded 𝒜_R ≃ ⊕_q M_{n_q}. gradedShannon_chain_rule: the record entropy
 -- decomposes as S = H(p) + Σ_q p_q S(w_q) (sector mixing entropy + average within-sector entropy), via the entropy

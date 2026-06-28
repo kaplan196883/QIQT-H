@@ -176,4 +176,19 @@ theorem electron_sigmaDiag_fixes_numberOp (β ω : ℝ) (t : ℝ) :
       QIQTH.FiniteModularTheory.diagPow_mul (electronModeOcc β ω) (electronModeOcc_ne_zero β ω) t (-t),
       show t + -t = 0 from by ring, QIQTH.FiniteModularTheory.diagPow_zero, mul_one]
 
+/-- **The modular phase = `e^{−it·βω}`: the modular Hamiltonian eigenvalue is the mode energy `βω`.**
+The ratio of `Δ^{it}`'s occupied/empty eigenvalues is the Gibbs factor raised to `it`,
+`(n/(1−n))^{it} = e^{−it·βω}`.  So the modular flow rotates the off-diagonal (raising/lowering) operators
+by the modular frequency `βω` — i.e. the generator of `σ_t` (the modular Hamiltonian `K`) has eigenvalue
+gap `βω`, and at the Unruh value `β = 2π` this is `2π·ω` = `2π × (boost generator eigenvalue)`.  This is
+the `Δ^{it} = U(boost)` content at the single-mode level (toward E9's `2π K_boost`). -/
+theorem electron_modular_phase (β ω t : ℝ) :
+    ((fermiDirac β ω / (1 - fermiDirac β ω) : ℝ) : ℂ) ^ (Complex.I * (t : ℂ))
+      = Complex.exp (-(Complex.I * (t : ℂ) * ((β * ω : ℝ) : ℂ))) := by
+  rw [electron_gibbs_ratio,
+      Complex.cpow_def_of_ne_zero (by exact_mod_cast (Real.exp_pos _).ne'),
+      ← Complex.ofReal_log (Real.exp_pos _).le, Real.log_exp, Complex.ofReal_neg]
+  congr 1
+  ring
+
 end QIQTH.Fock.Dirac

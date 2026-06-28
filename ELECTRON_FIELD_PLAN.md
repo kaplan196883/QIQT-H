@@ -503,3 +503,14 @@ EXTERNAL libraries; QIQT-H built its own.
   build QIQTH.Fock.Dirac.ModularKMS` green (2944 jobs); standard-3; budget 0. Next: lift to the continuum
   wedge `Δ_W^it` for the CAR net via `Spectral/SpectralTheorem.modFlow` (the StandardSubspace/crossed-
   product frontier).
+- 2026-06-28 — **E5/E9: the modular phase = `e^{−it·βω}` (modular Hamiltonian eigenvalue = mode energy
+  `βω`)** (added to `ModularKMS.lean`, axiom-free, budget 0). **`electron_modular_phase`** — the ratio of
+  `Δ^{it}`'s occupied/empty eigenvalues is the Gibbs factor raised to `it`,
+  `(n/(1−n))^{it} = e^{−it·βω}`. So the modular flow rotates the off-diagonal (raising/lowering)
+  operators by the modular frequency `βω`; the generator of `σ_t` (the modular Hamiltonian `K`) has
+  eigenvalue gap `βω`, and at the Unruh value `β = 2π` this is `2π·ω = 2π × (boost generator eigenvalue)`
+  — the **`Δ^{it} = U(boost)` content at the single-mode level** (toward E9's `2π K_boost`). Proof: the
+  Gibbs ratio + `cpow` of a positive real = `exp` + `Real.log_exp`. `lake build QIQTH.Fock.Dirac.ModularKMS`
+  green (2944 jobs); standard-3; budget 0. The finite modular tier now includes the **modular energy =
+  boost** identification. Next: the continuum wedge `Δ_W^it` for the CAR net (the StandardSubspace/
+  crossed-product frontier).
