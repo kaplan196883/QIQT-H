@@ -7153,5 +7153,13 @@ namespace QIQTH.AxiomAudit
 -- Axiom-free (standard 3).
 #print axioms QIQTH.CodeCapacityBridge.encoded_record_expectation
 #print axioms QIQTH.CodeCapacityBridge.encoded_trace
+-- ★★★★ CODE–CAPACITY BRIDGE M4 (THE PAYOFF — the chained code→capacity area bound): encoded_field_entropy_le_area —
+-- the field's regional density ρ lives on its CODE space dC, kept SEPARATE from the microstate space 𝓗 (connected
+-- only by the fitting condition card dC ≤ card 𝓗); then under HolographicCapacityBound 𝓗 areaTerm (log|𝓗_R|≤A/4ℓ_P²),
+-- S_vN(ρ) ≤ log(card dC) ≤ log(card 𝓗) ≤ A/4ℓ_P². So the FREE FIELD's regional entropy obeys the holographic area
+-- floor once its code sector fits the microstate space — the genuine machine-checked electron/photon ↔ microstate
+-- link, WITHOUT identifying the field state space with the microstate space (capacity bounds the field only through
+-- the fitting inequality; contrast area_floor_vonNeumann which puts ρ on 𝓗). Axiom-free (standard 3); value of G never claimed.
+#print axioms QIQTH.CodeCapacityBridge.encoded_field_entropy_le_area
 
 end QIQTH.AxiomAudit

@@ -107,3 +107,14 @@ the honest-scope note from §0.
   preservation half `S(VρVᴴ)=S(ρ)` is the fiddly spectral piece — same NONZERO spectrum — and is NOT load-bearing
   for the area bound, which only needs the dimension comparison; labelled follow-on.)* Next: **M3/M4** (the
   entropy ≤ log card + chained area bound `S_vN ≤ log dC ≤ log d𝓗 ≤ A/4ℓ_P²`).
+- 2026-06-29 — **M3 noted DONE (pre-existing) + M4 DONE (THE PAYOFF)** (`encoded_field_entropy_le_area`,
+  axiom-free standard-3, budget 0, full QIQTH green 8873 jobs). M3 (`S_vN ≤ log card`) is already
+  `FQBoundMicro.vonNeumannEntropy_le_log_card` — cited, not rebuilt. **M4** is the genuine new content: the
+  field's regional density `ρ` lives on its CODE space `dC`, kept **SEPARATE** from the microstate space `𝓗`,
+  connected only by the fitting condition `card dC ≤ card 𝓗` (M1); then under `HolographicCapacityBound 𝓗
+  areaTerm`, `S_vN(ρ) ≤ log(card dC) ≤ log(card 𝓗) ≤ A/4ℓ_P²`. **The free field's regional entropy obeys the
+  holographic area floor once its code sector fits the microstate space** — the genuine machine-checked
+  electron/photon ↔ microstate link, WITHOUT identifying the field state space with the microstate space (capacity
+  bounds the field only through the fitting inequality; contrast `area_floor_vonNeumann` which puts `ρ` on `𝓗`).
+  Wired into `QIQTH.lean`+`AxiomAudit.lean`. Next: **M5** (field instantiations: electron `2^{n_F}`, photon
+  `C(d+N,N)` ⟹ the fitting condition for the actual CAR/symmetric Fock dims).

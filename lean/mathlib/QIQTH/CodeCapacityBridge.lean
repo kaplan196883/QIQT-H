@@ -22,6 +22,7 @@ import Mathlib.Data.Complex.Basic
 import Mathlib.Analysis.InnerProductSpace.Basic
 import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
 import Mathlib.Tactic.NoncommRing
+import QIQTH.FQBoundMicro
 
 namespace QIQTH.CodeCapacityBridge
 
@@ -73,6 +74,37 @@ theorem encoded_trace (V : Matrix d𝓗 dC ℂ) (hV : Vᴴ * V = 1) (ρ : Matrix
   rw [Matrix.trace_mul_comm, ← Matrix.mul_assoc, hV, Matrix.one_mul]
 
 end Encoding
+
+section AreaBound
+
+open QIQTH.QuantumEntropy
+
+/-- **★★★ M4 — the chained code→capacity area bound (the payoff).**  The field's regional density `ρ` lives on
+its own **code space** `dC`, kept SEPARATE from the **microstate space** `𝓗` (= `𝓗_R`); they are connected only
+by the *fitting condition* `card dC ≤ card 𝓗` (M1: the field sector encodes into the microstate space).  Then,
+under the finite-microstate / holographic postulate `HolographicCapacityBound 𝓗 areaTerm` (`log|𝓗_R| ≤
+areaTerm = A/4ℓ_P²`):
+
+  `S_vN(ρ) ≤ log(card dC) ≤ log(card 𝓗) ≤ A/4ℓ_P²`.
+
+So the **free field's regional entropy obeys the holographic area floor once its code sector fits the microstate
+space** — the genuine machine-checked link between the electron/photon and QIQT-H's finite microstates.  Note
+this does NOT identify the field state space with the microstate space (that would be the slogan): the field
+lives on `dC`, the microstates on `𝓗`, and capacity bounds the field only *through the fitting inequality*.
+(Contrast `FQBoundMicro.area_floor_vonNeumann`, which puts `ρ` directly on `𝓗`.) -/
+theorem encoded_field_entropy_le_area {dC 𝓗 : Type*}
+    [Fintype dC] [DecidableEq dC] [Nonempty dC] [Fintype 𝓗] {areaTerm : ℝ}
+    [hcap : HolographicCapacityBound 𝓗 areaTerm]
+    (hfit : Fintype.card dC ≤ Fintype.card 𝓗)
+    {ρ : Matrix dC dC ℂ} (h : IsDensity ρ) :
+    vonNeumannEntropy h ≤ areaTerm :=
+  calc vonNeumannEntropy h
+      ≤ Real.log (Fintype.card dC) := vonNeumannEntropy_le_log_card h
+    _ ≤ Real.log (Fintype.card 𝓗) :=
+        Real.log_le_log (by exact_mod_cast Fintype.card_pos) (by exact_mod_cast hfit)
+    _ ≤ areaTerm := hcap.bound
+
+end AreaBound
 
 /-- **★ M0 — Exact finite-dimensional CCR is impossible** (the photon needs a cutoff).  On a *nonzero*
 finite-dimensional space there are no operators `a, a†` satisfying the canonical commutation relation
