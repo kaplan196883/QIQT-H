@@ -170,6 +170,30 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
       entropy, or matter from information. Capacity constrains the field's entropy and records <em>through</em>
       the fitting inequality; it does not generate the field.</p>
     </div>
+
+    <div class="note">
+      <p><strong>New — the corner construction: the field's records inside the microstate memory (2026).</strong>
+      A follow-on axiom-free module (<code>CornerConstruction.lean</code>) deepens the bridge into a faithful
+      representation of the field's records inside the microstate space. The honest device is the
+      <em>corner</em>: everything carried by the encoding A ↦ VAV† lands in P·End(𝓗<sub>R</sub>)·P with the code
+      projector P = VV† as its unit — <em>never</em> the ambient identity 1<sub>𝓗</sub> unless the code fills
+      the whole space. Within that discipline, all machine-checked (standard three axioms), the field's records
+      are: <strong>faithfully read back</strong> (encoded n-point correlators equal the bare ones);
+      <strong>Born-weighted with area-bounded information</strong> (the Born record law's Shannon entropy ≤
+      A/4ℓ<sub>P</sub>²); <strong>algebraically represented</strong> — the electron's CAR transports to the
+      corner, &#123;ι(a), ι(a†)&#125; = ⟨f,g⟩·P, with a guard proving that ambient-identity CAR would force P = 1, while
+      the photon carries an <em>explicit, surviving</em> truncation defect [ι(a), ι(a)†] = P − N·ι(|N−1⟩⟨N−1|)
+      (the boson is necessarily truncated in finite capacity — error quantified, not hidden);
+      <strong>modularly structured</strong> (a finite KMS relation on the code, its modular flow living in the
+      corner); and <strong>dynamically faithful</strong> (a supplied field flow is <em>preserved</em> through the
+      encoding, with two-time correlators intact). Finally the equiprobable typicality measure (P5) is
+      <em>isolated</em>: a permutation-invariant outcome law is forced uniform.</p>
+      <p style="margin-top:.5rem"><strong>What this is — and is not.</strong> Statements about the field's
+      <em>records and states</em>, not a construction of the field or its dynamics from microstates. Capacity
+      stays a <em>constraint, not a generator</em> — it never derives the electron or photon — and removes
+      neither P5 nor the capacity postulate. The continuum real-time modular flow (ρ<sup>it</sup>, Type III) and
+      the Gaussian/Williamson entropy–area derivation are the cited research-grade frontiers.</p>
+    </div>
   </div></section>
 
   <section class="section"><div class="wrap">
