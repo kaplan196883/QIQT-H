@@ -133,3 +133,14 @@ ONE commit on `main` (Co-Authored-By trailer); push via schannel; update §3; re
   `A ↦ U A Uᴴ` into `EuclideanSpace ℂ (n×n)`) is a `/- ... -/` checkpoint — the generic bound already carries
   the content. (No new import needed; the normed/LinearIsometry machinery was already in scope.) _Next: C6
   (Alexandrov intervals + capacity-volume)._
+- 2026-06-30 — **C6 DONE (intervals + capacity-volume) + longest-chain checkpointed** (axiom-free standard-3,
+  budget 0, full QIQTH green 8876 jobs). `EmergentSpacetime.lean` (`section CausalGeometry`): the Lorentzian
+  causal-order route on the existing preorder. `StrictReach` (strict causal precedence, `strictReach_irrefl`
+  + `strictReach_trans`); `causalFutureFinset`/`causalPastFinset`; **`AlexandrovInterval sig x y = J⁺(x)∩J⁻(y)`**
+  (the finite causal diamond) with `mem_AlexandrovInterval` + endpoint lemmas; `capacityVolume cap S = ∑_{v∈S}
+  cap v` (`capacityVolume_nonneg`, `capacityVolume_mono`); and **`intervalCapacityVolume`** — capacity-as-volume
+  of the diamond (the Malament/HKM causal-order + volume reconstruction). Honest: a *supplied* orientation `sig`
+  + capacity `cap`; a volume **proxy/constraint**, NOT a generator of the causal order, NOT a 4D Lorentzian
+  manifold; a directed order needs a supplied time arrow. **Checkpointed:** the longest-chain timelike proxy
+  (needs a `Fintype` on the dependent `CausalChain` structure + the reverse-triangle chain combinatorics) — a
+  week-level increment. _Next: C2 (finite shortest-path graph metric, week+) → C8 (certificate)._

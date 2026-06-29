@@ -595,4 +595,79 @@ machinery).  Self-contained finite linear algebra, deferred; the *generic* bound
 
 end ApproxNoGo
 
+section CausalGeometry
+
+open scoped Classical
+
+variable {V : Type*}
+
+/-- **Strict causal precedence**: `x` reaches `y` but not conversely (a genuine timelike/causal step). -/
+def StrictReach (sig : V → V → Prop) (x y : V) : Prop := Reach sig x y ∧ ¬ Reach sig y x
+
+theorem strictReach_irrefl (sig : V → V → Prop) : Irreflexive (StrictReach sig) :=
+  fun _ h => h.2 h.1
+
+theorem strictReach_trans (sig : V → V → Prop) {x y z : V}
+    (hxy : StrictReach sig x y) (hyz : StrictReach sig y z) : StrictReach sig x z :=
+  ⟨reach_trans sig hxy.1 hyz.1, fun hzx => hxy.2 (reach_trans sig hyz.1 hzx)⟩
+
+/-- The causal **future** `J⁺(x)` as a finite set. -/
+noncomputable def causalFutureFinset [Fintype V] (sig : V → V → Prop) (x : V) : Finset V :=
+  Finset.univ.filter (fun y => Reach sig x y)
+
+/-- The causal **past** `J⁻(x)` as a finite set. -/
+noncomputable def causalPastFinset [Fintype V] (sig : V → V → Prop) (x : V) : Finset V :=
+  Finset.univ.filter (fun y => Reach sig y x)
+
+/-- **★★ C6 — the Alexandrov interval** `⟨x,y⟩ = J⁺(x) ∩ J⁻(y)`: the finite causal diamond of events
+causally between `x` and `y`.  The basic building block of the Lorentzian (causal-order) route. -/
+noncomputable def AlexandrovInterval [Fintype V] (sig : V → V → Prop) (x y : V) : Finset V :=
+  causalFutureFinset sig x ∩ causalPastFinset sig y
+
+theorem mem_AlexandrovInterval [Fintype V] {sig : V → V → Prop} {x y z : V} :
+    z ∈ AlexandrovInterval sig x y ↔ Reach sig x z ∧ Reach sig z y := by
+  simp [AlexandrovInterval, causalFutureFinset, causalPastFinset]
+
+theorem left_mem_AlexandrovInterval_of_reach [Fintype V] {sig : V → V → Prop} {x y : V}
+    (hxy : Reach sig x y) : x ∈ AlexandrovInterval sig x y :=
+  mem_AlexandrovInterval.mpr ⟨reach_refl sig x, hxy⟩
+
+theorem right_mem_AlexandrovInterval_of_reach [Fintype V] {sig : V → V → Prop} {x y : V}
+    (hxy : Reach sig x y) : y ∈ AlexandrovInterval sig x y :=
+  mem_AlexandrovInterval.mpr ⟨hxy, reach_refl sig y⟩
+
+/-- **Capacity as a finite volume measure** on regions: `vol(S) = ∑_{v∈S} cap v`. -/
+def capacityVolume (cap : V → ℝ) (S : Finset V) : ℝ := ∑ v ∈ S, cap v
+
+theorem capacityVolume_nonneg {cap : V → ℝ} (hcap : ∀ v, 0 ≤ cap v) (S : Finset V) :
+    0 ≤ capacityVolume cap S :=
+  Finset.sum_nonneg (fun v _ => hcap v)
+
+theorem capacityVolume_mono {cap : V → ℝ} (hcap : ∀ v, 0 ≤ cap v) {S T : Finset V}
+    (hST : S ⊆ T) : capacityVolume cap S ≤ capacityVolume cap T :=
+  Finset.sum_le_sum_of_subset_of_nonneg hST (fun v _ _ => hcap v)
+
+/-- **★★ C6 — the causal-volume of an Alexandrov interval**: a finite proxy for the spacetime volume of
+the diamond `⟨x,y⟩` (the capacity-as-volume of the causal-order + volume reconstruction, Malament/HKM).
+**Honest scope:** a *supplied* orientation `sig` and capacity `cap`; this is a volume *proxy / constraint*,
+NOT a generator of the causal order, and NOT a 4D Lorentzian manifold (cited frontier).  A directed causal
+order needs a supplied time orientation — a reversible unitary runtime does not provide one. -/
+noncomputable def intervalCapacityVolume [Fintype V] (sig : V → V → Prop) (cap : V → ℝ) (x y : V) : ℝ :=
+  capacityVolume cap (AlexandrovInterval sig x y)
+
+theorem intervalCapacityVolume_nonneg [Fintype V] {sig : V → V → Prop} {cap : V → ℝ}
+    (hcap : ∀ v, 0 ≤ cap v) (x y : V) : 0 ≤ intervalCapacityVolume sig cap x y :=
+  capacityVolume_nonneg hcap _
+
+/- **C6 — longest-chain timelike proxy (CHECKPOINTED).**  The discrete "timelike separation" between two
+causally-related events is the length of the *longest strict-reachability chain* between them
+(`longestChainLen sig x y = sup over CausalChain sig x y of the chain length`, bounded by `card V` by
+strict-order acyclicity).  Its definition needs a `Fintype (CausalChain sig x y)` instance on a
+*dependent* chain structure (`v : Fin (n+1) → V` with `n : Fin (card V + 1)`), and the reverse-triangle
+`longestChainLen x y + longestChainLen y z ≤ longestChainLen x z` is a genuine chain-combinatorics theorem
+(append + acyclic no-repetition).  Deferred as a self-contained week-level increment; the Alexandrov
+interval + capacity-volume above already give the finite causal skeleton + volume proxy. -/
+
+end CausalGeometry
+
 end QIQTH.EmergentSpacetime

@@ -7392,6 +7392,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EmergentSpacetime.approx_scaling_gap_mul_norm_le
 #print axioms QIQTH.EmergentSpacetime.norm_le_div_of_approx_scaling_gap
 
+-- ★★ EMERGENT SPACETIME (Track C, C6) — Alexandrov intervals + capacity-volume (Lorentzian route):
+-- StrictReach (strict causal precedence, irreflexive+transitive); AlexandrovInterval sig x y = J⁺(x)∩J⁻(y) (the
+-- finite causal diamond), mem_AlexandrovInterval + endpoint lemmas. capacityVolume cap S = ∑_{v∈S} cap v (nonneg,
+-- monotone); intervalCapacityVolume — capacity-as-volume of the diamond (Malament/HKM causal-order+volume route).
+-- Honest: SUPPLIED orientation sig + capacity cap; a volume PROXY/constraint, NOT a generator of the causal order,
+-- NOT a 4D Lorentzian manifold; a directed order needs a supplied time arrow. (Longest-chain timelike proxy
+-- checkpointed.) Std 3.
+#print axioms QIQTH.EmergentSpacetime.strictReach_trans
+#print axioms QIQTH.EmergentSpacetime.mem_AlexandrovInterval
+#print axioms QIQTH.EmergentSpacetime.capacityVolume_mono
+#print axioms QIQTH.EmergentSpacetime.intervalCapacityVolume_nonneg
+
 -- ★★ FREE-FIELD CORNER (A1) — unified corner transport for free SM field content (Track A):
 -- gradedBracket ε x y = x y + ε•(y x) (ε=1 anticommutator/CAR, ε=-1 commutator/CCR). encode_gradedBracket —
 -- the encoding carries the code graded bracket to the corner: [ι_V(x),ι_V(y)]_ε = ι_V([x,y]_ε), the SINGLE
