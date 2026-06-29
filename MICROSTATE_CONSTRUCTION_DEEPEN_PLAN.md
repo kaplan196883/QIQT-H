@@ -272,3 +272,15 @@ Cannot remove P5, but can isolate it cleanly.
   **`photon_modes_le_area`** — the truncated photon's log capacity `log C(d+N,N) ≤ log|𝓗_R| ≤ A/4ℓ_P²`
   (occupation cutoff `N` explicit). Wired into `AxiomAudit.lean`. _Next: D6 (finite modular flow + KMS on the
   code; conditional BW descent)._
+- 2026-06-29 — **D6 DONE (algebraic core) + frontier checkpointed** (axiom-free standard-3, budget 0, full
+  QIQTH green 8874 jobs). **Finite modular flow + KMS on the code** (`section Modular`): `modConj ρ A = ρ A ρ⁻¹`
+  (the imaginary-time modular automorphism `σ_{-i}`); `modConj_one`/`modConj_mul` (it is a unital algebra
+  automorphism); the centerpiece **`finite_KMS`** — `φ(A·σ_{-i}(B)) = Tr(ρ A ρ B ρ⁻¹) = Tr(ρ B A) = φ(B A)`,
+  the finite (Type-I) KMS relation = the algebraic analogue of the wedge/Bisognano–Wichmann KMS condition,
+  proved by trace cyclicity; and **`encoded_modConj_corner`** — the encoded flow IS the corner flow of the
+  encoded density `VρVᴴ` and its **corner-inverse** `Vρ⁻¹Vᴴ` (`(VρVᴴ)(Vρ⁻¹Vᴴ) = P`, the corner unit, NOT
+  `1_𝓗`): the modular flow lives in the corner. **Checkpointed frontier (research-grade, plan-flagged):** the
+  *continuous* real-time `ρ^{it}` flow (needs CFC complex powers) and the conditional BW descent — recorded as
+  a `/- ... -/` note (the repo's `FiniteModularTheory.lean` carries the diagonal `sigmaDiag`/`diagPow`
+  real-time flow; wiring it through the corner is the next sub-step). _Next: D7 (dynamics preservation under
+  intertwining)._

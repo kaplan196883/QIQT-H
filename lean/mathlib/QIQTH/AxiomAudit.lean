@@ -7261,4 +7261,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CornerConstruction.encoded_truncated_ladder_commutator
 #print axioms QIQTH.CornerConstruction.photon_modes_le_area
 
+-- ★★ CORNER CONSTRUCTION (D6) — finite modular flow + KMS on the code (algebraic Tomita–Takesaki core):
+-- modConj ρ A = ρ A ρ⁻¹ is the imaginary-time modular automorphism (σ_{-i}); modConj_one/modConj_mul: it is a
+-- unital algebra automorphism. finite_KMS: φ(A·σ_{-i}(B)) = Tr(ρ A ρ B ρ⁻¹) = Tr(ρ B A) = φ(B A) — the finite
+-- (Type-I) KMS relation, the analogue of the wedge/BW KMS condition, proved by trace cyclicity.
+-- encoded_modConj_corner: the encoded flow IS the corner flow of the encoded density VρVᴴ and its CORNER-inverse
+-- Vρ⁻¹Vᴴ — (VρVᴴ)(Vρ⁻¹Vᴴ)=P (corner unit, NOT 1_𝓗); the modular flow lives in the corner. The continuous
+-- real-time ρ^{it} flow + Bisognano–Wichmann descent are the checkpointed (research-grade) frontier. Std 3.
+#print axioms QIQTH.CornerConstruction.modConj_one
+#print axioms QIQTH.CornerConstruction.modConj_mul
+#print axioms QIQTH.CornerConstruction.finite_KMS
+#print axioms QIQTH.CornerConstruction.encoded_modConj_corner
+
 end QIQTH.AxiomAudit

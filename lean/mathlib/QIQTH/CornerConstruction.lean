@@ -462,4 +462,69 @@ theorem photon_modes_le_area {d N : ℕ} {𝓗 : Type*} [Fintype 𝓗] {areaTerm
 
 end Photon
 
+section Modular
+
+variable {dC d𝓗 : Type*} [Fintype dC] [DecidableEq dC] [Fintype d𝓗] [DecidableEq d𝓗]
+
+/-- The **finite (imaginary-time) modular automorphism** of a faithful density `ρ`:
+`modConj ρ A = ρ A ρ⁻¹`.  This is the algebraic heart of finite Tomita–Takesaki — the modular flow
+`σ_ρ(t)(A) = ρ^{it} A ρ^{-it}` analytically continued to `t = -i` (so `ρ^{it}` becomes the genuine power
+`ρ`), capturing the modular structure without the continuum CFC `ρ^{it}` (the continuous real-time flow is
+the checkpointed frontier below). -/
+noncomputable def modConj (ρ A : Matrix dC dC ℂ) : Matrix dC dC ℂ := ρ * A * ρ⁻¹
+
+/-- The modular automorphism fixes the identity: `modConj ρ 1 = 1` (for nonsingular `ρ`). -/
+theorem modConj_one (ρ : Matrix dC dC ℂ) (hρ : IsUnit ρ.det) :
+    modConj ρ (1 : Matrix dC dC ℂ) = 1 := by
+  rw [modConj, Matrix.mul_one, Matrix.mul_nonsing_inv ρ hρ]
+
+/-- The modular automorphism is **multiplicative** (an algebra automorphism), for nonsingular `ρ`:
+`modConj ρ (A B) = modConj ρ A · modConj ρ B`. -/
+theorem modConj_mul (ρ : Matrix dC dC ℂ) (hρ : IsUnit ρ.det) (A B : Matrix dC dC ℂ) :
+    modConj ρ (A * B) = modConj ρ A * modConj ρ B := by
+  simp only [modConj, Matrix.mul_assoc]
+  rw [← Matrix.mul_assoc ρ⁻¹ ρ (B * ρ⁻¹), Matrix.nonsing_inv_mul ρ hρ, Matrix.one_mul]
+
+/-- **★★ D6 — the finite KMS relation on the code (Type-I Tomita–Takesaki).**  For a faithful density `ρ`
+on the code `C_R` and the state `φ(X) = Tr(ρ X)`, the modular automorphism satisfies the **KMS condition**
+at the analytic point `σ_{-i}(B) = modConj ρ B = ρ B ρ⁻¹`:
+
+  `φ(A · σ_{-i}(B)) = Tr(ρ · A · ρ B ρ⁻¹) = Tr(ρ · B · A) = φ(B A)`.
+
+This is the finite (Type I) analogue of the wedge/Bisognano–Wichmann KMS condition — proved purely by
+trace cyclicity, axiom-free.  It is genuine finite modular theory; it does **not** by itself give the
+continuum Type-III₁ wedge flow (that is the frontier below). -/
+theorem finite_KMS (ρ : Matrix dC dC ℂ) (hρ : IsUnit ρ.det) (A B : Matrix dC dC ℂ) :
+    (ρ * A * modConj ρ B).trace = (ρ * B * A).trace := by
+  have key : ρ * A * modConj ρ B = ρ * A * ρ * B * ρ⁻¹ := by
+    simp only [modConj, Matrix.mul_assoc]
+  rw [key, Matrix.trace_mul_comm]
+  simp only [← Matrix.mul_assoc]
+  rw [Matrix.nonsing_inv_mul ρ hρ, Matrix.one_mul, Matrix.mul_assoc, Matrix.trace_mul_comm]
+
+/-- **★★ D6 — the modular flow descends to the corner.**  The encoded modular automorphism is the corner
+modular automorphism of the **encoded density** `VρVᴴ` and its **corner-inverse** `Vρ⁻¹Vᴴ`:
+
+  `ι_V(modConj ρ A) = (VρVᴴ) · ι_V(A) · (Vρ⁻¹Vᴴ)`.
+
+Note `Vρ⁻¹Vᴴ` is the inverse of `VρVᴴ` **on the corner** (`(VρVᴴ)(Vρ⁻¹Vᴴ) = V Vᴴ = P`, the corner unit,
+NOT `1_𝓗`): the encoded density is faithful only on the code subspace, so its modular flow lives in the
+corner `P · End(𝓗_R) · P` — the honest stand-in, never the ambient `1_𝓗`. -/
+theorem encoded_modConj_corner (V : Matrix d𝓗 dC ℂ) (hV : Vᴴ * V = 1) (ρ A : Matrix dC dC ℂ) :
+    encode V (modConj ρ A) = (V * ρ * Vᴴ) * encode V A * (V * ρ⁻¹ * Vᴴ) := by
+  simp only [modConj, encode_def, Matrix.mul_assoc]
+  rw [← Matrix.mul_assoc Vᴴ V (A * (Vᴴ * (V * (ρ⁻¹ * Vᴴ)))), hV, Matrix.one_mul,
+    ← Matrix.mul_assoc Vᴴ V (ρ⁻¹ * Vᴴ), hV, Matrix.one_mul]
+
+/- **D6 — CHECKPOINTED FRONTIER (continuous real-time flow + BW descent).**
+The remaining D6 content is the *continuous* real-time modular flow `σ_ρ(t)(A) = ρ^{it} A ρ^{-it}` (needing
+the CFC complex power `ρ^{it}` of a positive matrix — Type-I, but analytically heavy), and the **conditional
+Bisognano–Wichmann descent**: if the code projector `P` commutes with the one-particle BW generator `K_BW`
+and `ρ_C = Z⁻¹ exp(-2π K_BW|_C)`, then `σ_{ρ_C} = ` boost flow on the code.  These are deferred: finite KMS
+(`finite_KMS`) is real and axiom-free, but the automatic descent of the continuum wedge (Type-III₁) modular
+flow to the finite records is research-grade (the repo's `QIQTH/FiniteModularTheory.lean` carries the
+diagonal real-time `sigmaDiag`/`diagPow` flow; wiring it through the corner is the next sub-step). -/
+
+end Modular
+
 end QIQTH.CornerConstruction
