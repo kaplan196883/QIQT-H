@@ -7404,6 +7404,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EmergentSpacetime.capacityVolume_mono
 #print axioms QIQTH.EmergentSpacetime.intervalCapacityVolume_nonneg
 
+-- ★★ EMERGENT SPACETIME (Track C, C2) — graph-geodesic (shortest-path) distance:
+-- graphDist G x y = G.dist x y (Mathlib SimpleGraph hop-count). graphDist_isPseudometric — on a connected
+-- supplied connectivity graph it is a finite pseudometric (zero diag/symm/triangle, riding SimpleGraph.dist).
+-- graphDist_isFiniteMetric — a genuine finite METRIC (separates points) on a connected graph. SEPARATES distance
+-- from cut-area (a graph geodesic, NOT a cut/RT-area). Graph adjacency is SUPPLIED (entanglement/locality data);
+-- edge-weighted lengths from C1 probes are a refinement checkpoint. Std 3.
+#print axioms QIQTH.EmergentSpacetime.graphDist_isPseudometric
+#print axioms QIQTH.EmergentSpacetime.graphDist_isFiniteMetric
+
 -- ★★ FREE-FIELD CORNER (A1) — unified corner transport for free SM field content (Track A):
 -- gradedBracket ε x y = x y + ε•(y x) (ε=1 anticommutator/CAR, ε=-1 commutator/CCR). encode_gradedBracket —
 -- the encoding carries the code graded bracket to the corner: [ι_V(x),ι_V(y)]_ε = ι_V([x,y]_ε), the SINGLE

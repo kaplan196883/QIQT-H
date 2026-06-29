@@ -144,3 +144,12 @@ ONE commit on `main` (Co-Authored-By trailer); push via schannel; update §3; re
   manifold; a directed order needs a supplied time arrow. **Checkpointed:** the longest-chain timelike proxy
   (needs a `Fintype` on the dependent `CausalChain` structure + the reverse-triangle chain combinatorics) — a
   week-level increment. _Next: C2 (finite shortest-path graph metric, week+) → C8 (certificate)._
+- 2026-06-30 — **C2 DONE (cleaner route)** (axiom-free standard-3, budget 0, full QIQTH green 8876 jobs).
+  Instead of the bespoke `SimpleWalk`/loop-erasure (week+), used **Mathlib's `SimpleGraph.dist`** (the
+  hop-count graph-geodesic distance, with `dist_self`/`dist_comm`/`Connected.dist_triangle`/`dist_eq_zero_iff`
+  all already proven). `EmergentSpacetime.lean` (`section ShortestPath`): `graphDist G x y = (G.dist x y : ℝ)`;
+  **`graphDist_isPseudometric`** (on a connected graph: zero-diag/symm/triangle); **`graphDist_isFiniteMetric`**
+  (a genuine finite *metric* — separates points, via `Connected.dist_eq_zero_iff`). **Separates distance from
+  cut-area**: a graph geodesic, NOT a cut/RT-area. Graph adjacency is *supplied* (entanglement/locality data,
+  e.g. the C4 Markov graph); edge-weighted lengths from C1 probes are a refinement checkpoint. (import
+  `Mathlib.Combinatorics.SimpleGraph.Metric`.) _Next: C8 (reconstruction certificate)._

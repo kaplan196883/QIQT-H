@@ -18,6 +18,7 @@ Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`).  No `sorry`.
 -/
 import Mathlib.LinearAlgebra.Matrix.PosDef
 import Mathlib.Analysis.Complex.Basic
+import Mathlib.Combinatorics.SimpleGraph.Metric
 import QIQTH.FQBoundMicro
 
 namespace QIQTH.EmergentSpacetime
@@ -669,5 +670,39 @@ strict-order acyclicity).  Its definition needs a `Fintype (CausalChain sig x y)
 interval + capacity-volume above already give the finite causal skeleton + volume proxy. -/
 
 end CausalGeometry
+
+section ShortestPath
+
+variable {V : Type*} (G : SimpleGraph V)
+
+/-- The real-valued **graph hop-count / geodesic distance** `d(x,y) = G.dist(x,y)`. -/
+noncomputable def graphDist (x y : V) : ℝ := (G.dist x y : ℝ)
+
+/-- **★★ C2 — the graph-geodesic distance is a finite pseudometric.**  On a connected *supplied*
+connectivity graph `G` (adjacency from entanglement/locality data — e.g. the Markov-locality graph of C4),
+the hop-count distance is a genuine finite distance: zero diagonal, symmetric, triangle inequality (riding
+Mathlib's `SimpleGraph.dist`).  This **separates distance from cut-area** — it is a *graph geodesic*, NOT a
+cut/RT-area (cf. `minCut_area_not_metric`).  (Edge-weighted lengths from the C1 probes are a refinement
+checkpoint; the unweighted geodesic is the honest first reconstruction.) -/
+theorem graphDist_isPseudometric (hconn : G.Connected) :
+    IsApproxPseudometric 0 (graphDist G) where
+  nonneg := fun x y => by unfold graphDist; positivity
+  self := fun x => by simp [graphDist, SimpleGraph.dist_self]
+  symm := fun x y => by unfold graphDist; rw [SimpleGraph.dist_comm]
+  triangle := fun x y z => by
+    have h : G.dist x z ≤ G.dist x y + G.dist y z := hconn.dist_triangle
+    simp only [graphDist, add_zero]
+    exact_mod_cast h
+
+/-- **★★★ C2 — on a connected graph the geodesic distance is a genuine finite *metric*** (it separates
+points: `d(x,y) = 0 → x = y`).  So a *supplied* connectivity graph reconstructs a finite metric — the
+honest geodesic distance reconstruction, distinct from the L¹/Crofton route (C1) and never a cut-area. -/
+theorem graphDist_isFiniteMetric (hconn : G.Connected) : IsFiniteMetric (graphDist G) where
+  toApprox := graphDist_isPseudometric G hconn
+  eq_of_dist_eq_zero := fun {x y} h => by
+    have h0 : G.dist x y = 0 := by unfold graphDist at h; exact_mod_cast h
+    exact (hconn.dist_eq_zero_iff).mp h0
+
+end ShortestPath
 
 end QIQTH.EmergentSpacetime
