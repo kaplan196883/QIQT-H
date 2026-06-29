@@ -7383,6 +7383,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EmergentSpacetime.deltaEntropy_le_deltaModular_of_relEnt_nonneg
 #print axioms QIQTH.EmergentSpacetime.deltaEntropy_le_eta_deltaArea
 
+-- ★★ EMERGENT SPACETIME (Track C, C5) — approximate modular/scaling no-go:
+-- approx_scaling_gap_mul_norm_le — a linear isometry T with ‖T A − q•A‖ ≤ ε forces |‖q‖−1|·‖A‖ ≤ ε (isometry
+-- preserves norm, q• rescales). norm_le_div_of_approx_scaling_gap — with a gap |‖q‖−1|>0, ‖A‖ ≤ ε/|‖q‖−1|.
+-- Strengthens finiteDim_scaling_forces_zero: approximate non-unit-modulus scaling (Borchers dilation over an
+-- error window) bounds the operator norm — emergence stays APPROXIMATE, bound explicit. (HS/Frobenius matrix
+-- instantiation checkpointed.) Std 3.
+#print axioms QIQTH.EmergentSpacetime.approx_scaling_gap_mul_norm_le
+#print axioms QIQTH.EmergentSpacetime.norm_le_div_of_approx_scaling_gap
+
 -- ★★ FREE-FIELD CORNER (A1) — unified corner transport for free SM field content (Track A):
 -- gradedBracket ε x y = x y + ε•(y x) (ε=1 anticommutator/CAR, ε=-1 commutator/CCR). encode_gradedBracket —
 -- the encoding carries the code graded bracket to the corner: [ι_V(x),ι_V(y)]_ε = ι_V([x,y]_ε), the SINGLE

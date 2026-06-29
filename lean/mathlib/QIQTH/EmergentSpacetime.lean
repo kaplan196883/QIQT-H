@@ -558,4 +558,41 @@ theorem deltaEntropy_le_eta_deltaArea {S Area : α → ℝ} (η : ℝ) {ρ σ : 
 
 end FirstLaw
 
+section ApproxNoGo
+
+/-- **★★ C5 — the approximate modular/scaling no-go.**  Strengthening `finiteDim_scaling_forces_zero`: a
+linear *isometry* `T` cannot even *approximately* rescale a vector by a non-unit-modulus factor without that
+vector being small.  If `‖T A − q·A‖ ≤ ε` then `|‖q‖ − 1|·‖A‖ ≤ ε` (isometry preserves norm, but `q·`
+rescales it).  So an approximate Borchers dilation over an error window `ε` bounds the operator norm —
+emergence stays *approximate*, with the bound made explicit. -/
+theorem approx_scaling_gap_mul_norm_le {𝕜 E : Type*} [NormedField 𝕜]
+    [SeminormedAddCommGroup E] [NormedSpace 𝕜 E]
+    (T : E →ₗᵢ[𝕜] E) (q : 𝕜) (A : E) {ε : ℝ} (happrox : ‖T A - q • A‖ ≤ ε) :
+    |‖q‖ - 1| * ‖A‖ ≤ ε := by
+  have h1 : |‖T A‖ - ‖q • A‖| ≤ ‖T A - q • A‖ := abs_norm_sub_norm_le _ _
+  rw [T.norm_map, norm_smul] at h1
+  have h2 : |‖A‖ - ‖q‖ * ‖A‖| = |‖q‖ - 1| * ‖A‖ := by
+    rw [show ‖A‖ - ‖q‖ * ‖A‖ = -((‖q‖ - 1) * ‖A‖) from by ring, abs_neg, abs_mul,
+      abs_of_nonneg (norm_nonneg A)]
+  rw [h2] at h1
+  linarith
+
+/-- **★ C5 — the norm bound, divided out.**  With a genuine gap `|‖q‖ − 1| > 0`, the operator norm is
+controlled by the error: `‖A‖ ≤ ε / |‖q‖ − 1|`. -/
+theorem norm_le_div_of_approx_scaling_gap {𝕜 E : Type*} [NormedField 𝕜]
+    [SeminormedAddCommGroup E] [NormedSpace 𝕜 E]
+    (T : E →ₗᵢ[𝕜] E) (q : 𝕜) (A : E) {ε : ℝ} (hgap : 0 < |‖q‖ - 1|)
+    (happrox : ‖T A - q • A‖ ≤ ε) : ‖A‖ ≤ ε / |‖q‖ - 1| := by
+  rw [le_div_iff₀ hgap, mul_comm]
+  exact approx_scaling_gap_mul_norm_le T q A happrox
+
+/- **C5 — HS/Frobenius matrix instantiation (CHECKPOINTED).**  Specializing the generic bound to unitary
+conjugation `T(A) = U A Uᴴ` on the Hilbert–Schmidt space of matrices (the modular setting) requires
+exhibiting `A ↦ U A Uᴴ` as a `LinearIsometry` for the Frobenius/HS norm — i.e. vectorizing matrices into
+`EuclideanSpace ℂ (n × n)` and proving conjugation preserves the Euclidean norm (or reusing the D6 HS
+machinery).  Self-contained finite linear algebra, deferred; the *generic* bound above already delivers the
+"approximate scaling ⟹ small norm" content. -/
+
+end ApproxNoGo
+
 end QIQTH.EmergentSpacetime

@@ -123,3 +123,13 @@ ONE commit on `main` (Co-Authored-By trailer); push via schannel; update §3; re
   η·Area`), `D ≥ 0 ⟹ ΔS ≤ η·ΔA`, the entropy–area variation underlying Jacobson. A finite thermodynamic
   inequality, conditional on `D ≥ 0` + the area identification; NOT a geometry reconstruction. Wired into
   `AxiomAudit.lean`. _Next: C5 (approximate modular no-go, generic normed)._
+- 2026-06-30 — **C5 DONE (generic) + HS-matrix checkpointed** (axiom-free standard-3, budget 0, full QIQTH
+  green 8876 jobs). `EmergentSpacetime.lean` (`section ApproxNoGo`): **`approx_scaling_gap_mul_norm_le`** — a
+  linear isometry `T` with `‖T A − q·A‖ ≤ ε` forces `|‖q‖−1|·‖A‖ ≤ ε` (isometry preserves the norm, `q·`
+  rescales it; via `abs_norm_sub_norm_le`, `LinearIsometry.norm_map`, `norm_smul`); and
+  **`norm_le_div_of_approx_scaling_gap`** — with a gap `|‖q‖−1| > 0`, `‖A‖ ≤ ε/|‖q‖−1|`. Strengthens
+  `finiteDim_scaling_forces_zero`: an *approximate* Borchers dilation over an error window bounds the operator
+  norm — emergence stays approximate, the bound explicit. The HS/Frobenius matrix instantiation (vectorize
+  `A ↦ U A Uᴴ` into `EuclideanSpace ℂ (n×n)`) is a `/- ... -/` checkpoint — the generic bound already carries
+  the content. (No new import needed; the normed/LinearIsometry machinery was already in scope.) _Next: C6
+  (Alexandrov intervals + capacity-volume)._
