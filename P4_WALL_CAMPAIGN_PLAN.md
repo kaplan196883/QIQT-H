@@ -746,6 +746,18 @@ S t ∘L clockTransl t))`** = `K̃ = K_bulk + A_edge` self-adjoint.  The dressed
 analytic frontier of the wall.**  Wired into `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.  (Value of `G`
 never claimed.)
 
+**NEXT TARGETS (after Increment 1c; ranked by tractability):**
+1. **Phase 6.2 — the explicit JLMS generator-sum `stoneGen(Δ̂^{i·}∘λ_·) = K_bulk + A_edge`** (moderate; the
+   "`K̃` splits" theorem).  *Recipe:* for `ξ ∈ stoneDomain Δ̂ ∩ stoneDomain λ`, write `V_t ξ − ξ =
+   Δ̂_t(λ_t ξ − ξ) + (Δ̂_t ξ − ξ)`; divide by `t`, `t→0`: `(Δ̂_t ξ − ξ)/t → i·stoneGen Δ̂ ξ` (def of
+   `stoneDomain`) and `Δ̂_t·((λ_t ξ − ξ)/t) → i·stoneGen λ ξ` via the **key sub-lemma** `Δ̂_t v_t → v₀` when
+   `v_t → v₀` + `Δ̂` strongly continuous to `1` + contraction (ε/2: `‖Δ̂_t v_t − v₀‖ ≤ ‖v_t − v₀‖ +
+   ‖Δ̂_t v₀ − v₀‖`).  Sum ⟹ `stoneGen V ξ = stoneGen Δ̂ ξ + stoneGen λ ξ = K_bulk ξ + A_edge ξ`.  Needs the
+   smooth-domain `HasDerivAt` API (`stoneDomain`, `hasDerivAt_stoneGen`) + the strong-continuity interchange.
+2. **Phase 5 — the dual-weight trace / Type II** (DEEP / research-grade): the canonical f.n.s. trace `τ` on
+   `M ⋊_σ ℝ` + the `τ∘θ_s = e^{−s}τ` scaling.  The operator `K̃` it acts on now exists (Increment 1c).  This is
+   the genuine multi-effort frontier; the FQ bound itself already exists via Route 2 / P4-MICRO (`gr_from_p4micro`).
+
 ### Increment 1c INSTANTIATION — the fiberwise bulk modular flow `Δ̂^{it}` on `L²(ℝ;H)` ✅ (structural bricks; 2026-06-29)
 **`QIQTH/CrossedProductModularFlow.lean` — `fiberModFlow`.**  The second summand's group: `Δ̂^{it} :=
 (modUnitary S t).compLpL 2 volume` — postcompose each `L²(ℝ;H)` fiber with the one-particle modular flow
