@@ -7312,6 +7312,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EmergentSpacetime.minCut_area_not_metric
 #print axioms QIQTH.EmergentSpacetime.embedDist_isPseudometric
 
+-- ★★ EMERGENT SPACETIME (B2) — finite graph RT/capacity entropy skeleton:
+-- cut w S = ∑_{i∈S}∑_{j∉S} w(i,j) is the edge-cut AREA primitive (min-cut's correct role). cut_nonneg —
+-- nonneg for nonneg weights. cut_compl — PURITY S(A)=S(Aᶜ) (cut w Sᶜ = cut w S for symmetric graphs), the
+-- finite analogue of RT entanglement-entropy purity of a globally pure state. cut_union_le — SUBADDITIVITY
+-- S(A∪B) ≤ S(A)+S(B) for disjoint regions (nonneg weights), the finite RT/min-cut analogue of subadditivity
+-- of entanglement entropy. Assumes the graph; does not derive geometry or saturate (Tier-2 skeleton). Std 3.
+#print axioms QIQTH.EmergentSpacetime.cut_nonneg
+#print axioms QIQTH.EmergentSpacetime.cut_compl
+#print axioms QIQTH.EmergentSpacetime.cut_union_le
+
 -- ★★ FREE-FIELD CORNER (A1) — unified corner transport for free SM field content (Track A):
 -- gradedBracket ε x y = x y + ε•(y x) (ε=1 anticommutator/CAR, ε=-1 commutator/CCR). encode_gradedBracket —
 -- the encoding carries the code graded bracket to the corner: [ι_V(x),ι_V(y)]_ε = ι_V([x,y]_ε), the SINGLE

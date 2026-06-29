@@ -138,3 +138,11 @@ Per increment: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green;
   the metric-VALID replacement, the `L¹`/coordinate-embedding `|f x − f y|` is an exact pseudometric
   (`IsApproxPseudometric 0`), the honest first Tier-3 distance reconstruction; min-cut keeps its correct
   role as the area/entropy primitive. _Track B next: B2 (finite graph RT/capacity entropy skeleton)._
+- 2026-06-29 — **B2 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8876 jobs). `EmergentSpacetime.lean`
+  (`section GraphRT`): the finite graph RT/capacity entropy skeleton. `cut w S = ∑_{i∈S}∑_{j∉S} w(i,j)` (the
+  edge-cut **area** primitive — min-cut's *correct* role, not the metric); **`cut_nonneg`**;
+  **`cut_compl`** — **purity `S(A) = S(Aᶜ)`** (the finite analogue of RT entanglement-entropy purity of a
+  globally pure state); **`cut_union_le`** — **subadditivity `S(A∪B) ≤ S(A) + S(B)`** for disjoint regions
+  (the finite RT/min-cut analogue of entanglement-entropy subadditivity). Assumes the graph; does not derive
+  geometry or saturation (a Tier-2 skeleton). _Track B next: B3 (tensor-network cut bound `S_vN(ρ_A) ≤ log
+  dim(cut) ≤ minCut`, wired to the corner codes)._

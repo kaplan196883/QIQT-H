@@ -136,4 +136,43 @@ theorem embedDist_isPseudometric {X : Type*} (f : X → ℝ) :
 
 end Metric
 
+section GraphRT
+
+variable {V : Type*} [Fintype V] [DecidableEq V]
+
+/-- The **edge-cut "area"** of a region `S` on a finite weighted graph: the total edge weight crossing the
+boundary `∂S`, `cut w S = ∑_{i∈S} ∑_{j∉S} w(i,j)`.  This is the finite RT/min-cut *area/entropy* primitive
+(its **correct** role — recall it is NOT a metric, `minCut_area_not_metric`). -/
+noncomputable def cut (w : V → V → ℝ) (S : Finset V) : ℝ := ∑ i ∈ S, ∑ j ∈ Sᶜ, w i j
+
+/-- **★ B2 — the cut area is nonnegative** (for nonnegative edge weights). -/
+theorem cut_nonneg (w : V → V → ℝ) (hw : ∀ i j, 0 ≤ w i j) (S : Finset V) : 0 ≤ cut w S :=
+  Finset.sum_nonneg (fun i _ => Finset.sum_nonneg (fun j _ => hw i j))
+
+/-- **★★ B2 — purity: `S(A) = S(Aᶜ)`.**  The cut area of a region equals that of its complement
+(`cut w Sᶜ = cut w S`), for a symmetric graph — the finite analogue of the RT/entanglement-entropy purity
+`S(A) = S(Aᶜ)` of a globally pure state (the boundary `∂S = ∂Sᶜ` carries the same crossing edges). -/
+theorem cut_compl (w : V → V → ℝ) (hsymm : ∀ i j, w i j = w j i) (S : Finset V) :
+    cut w Sᶜ = cut w S := by
+  unfold cut
+  rw [compl_compl, Finset.sum_comm]
+  exact Finset.sum_congr rfl (fun a _ => Finset.sum_congr rfl (fun b _ => hsymm b a))
+
+/-- **★★ B2 — subadditivity: `S(A ∪ B) ≤ S(A) + S(B)`.**  For disjoint regions the cut area is
+subadditive (nonnegative weights) — the finite RT/min-cut analogue of subadditivity of entanglement
+entropy.  (Crossing edges of `∂(A∪B)` are a subset of `∂A ∪ ∂B`.) -/
+theorem cut_union_le (w : V → V → ℝ) (hw : ∀ i j, 0 ≤ w i j) (A B : Finset V) (hAB : Disjoint A B) :
+    cut w (A ∪ B) ≤ cut w A + cut w B := by
+  unfold cut
+  rw [Finset.sum_union hAB]
+  apply add_le_add
+  · refine Finset.sum_le_sum (fun i _ => ?_)
+    exact Finset.sum_le_sum_of_subset_of_nonneg
+      (Finset.compl_subset_compl.mpr Finset.subset_union_left) (fun j _ _ => hw i j)
+  · refine Finset.sum_le_sum (fun i _ => ?_)
+    exact Finset.sum_le_sum_of_subset_of_nonneg
+      (Finset.compl_subset_compl.mpr Finset.subset_union_right) (fun j _ _ => hw i j)
+
+end GraphRT
+
 end QIQTH.EmergentSpacetime
