@@ -7332,6 +7332,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EmergentSpacetime.entropy_le_log_cutDim_of_factor
 #print axioms QIQTH.EmergentSpacetime.entropy_le_cut
 
+-- ★★ EMERGENT SPACETIME (B4) — operational causal preorder (finite causal structure):
+-- Reach sig = reflexive-transitive closure of a SUPPLIED one-step signalling relation. reach_refl/reach_trans —
+-- the causal preorder laws. future sig x = the causal future cone. future_subset_of_reach — cone monotonicity /
+-- no-signalling-outside-cone (causal future is transitively closed). causalEquiv_equivalence — mutual reachability
+-- is an equivalence ⟹ events quotient into a causal POSET. Honest: a DIRECTED order needs a supplied orientation
+-- (a unitary runtime is reversible); finite operational causal order, NOT Lorentzian light-cones from nothing.
+-- (These depend on NO axioms — purely constructive.)
+#print axioms QIQTH.EmergentSpacetime.reach_refl
+#print axioms QIQTH.EmergentSpacetime.reach_trans
+#print axioms QIQTH.EmergentSpacetime.future_subset_of_reach
+#print axioms QIQTH.EmergentSpacetime.causalEquiv_equivalence
+
 -- ★★ FREE-FIELD CORNER (A1) — unified corner transport for free SM field content (Track A):
 -- gradedBracket ε x y = x y + ε•(y x) (ε=1 anticommutator/CAR, ε=-1 commutator/CCR). encode_gradedBracket —
 -- the encoding carries the code graded bracket to the corner: [ι_V(x),ι_V(y)]_ε = ι_V([x,y]_ε), the SINGLE

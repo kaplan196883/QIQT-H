@@ -218,4 +218,54 @@ theorem entropy_le_cut {dCut : Type*} [Fintype dCut] [DecidableEq dCut] {ρ : Ma
 
 end TensorNetworkCut
 
+section Causal
+
+variable {E : Type*} (sig : E → E → Prop)
+
+/-- **Causal reachability**: the reflexive–transitive closure of the *supplied* one-step signalling
+relation `sig`.  **Honest caveat:** a *directed* causal order requires the orientation of `sig` to be
+SUPPLIED (an input/output slicing, channel orientation, or record order) — a reversible unitary runtime
+alone does NOT provide a time direction.  This builds the operational causal order from that supplied
+signalling structure; it does not derive Lorentzian light-cones from nothing. -/
+def Reach : E → E → Prop := Relation.ReflTransGen sig
+
+/-- Causal reachability is **reflexive** (every event reaches itself). -/
+theorem reach_refl (x : E) : Reach sig x x := Relation.ReflTransGen.refl
+
+/-- Causal reachability is **transitive** — the preorder law of the causal order. -/
+theorem reach_trans {x y z : E} (h1 : Reach sig x y) (h2 : Reach sig y z) : Reach sig x z :=
+  Relation.ReflTransGen.trans h1 h2
+
+/-- The **causal future cone** of an event `x`: all events it can causally influence. -/
+def future (x : E) : Set E := {y | Reach sig x y}
+
+theorem mem_future_self (x : E) : x ∈ future sig x := reach_refl sig x
+
+/-- **★★ B4 — causal-cone monotonicity (no signalling outside the cone).**  If `x` causally precedes `y`,
+then `y`'s future cone is contained in `x`'s: `future y ⊆ future x`.  Equivalently the causal future is
+transitively closed — nothing reachable from a successor escapes the predecessor's cone, the operational
+light-cone structure. -/
+theorem future_subset_of_reach {x y : E} (h : Reach sig x y) : future sig y ⊆ future sig x :=
+  fun _ hz => reach_trans sig h hz
+
+/-- **★ B4 — outside the cone = not reachable.**  An event is outside `x`'s causal future *iff* it cannot
+be reached from `x` (the definitional content of the light-cone: causal influence is exactly
+reachability). -/
+theorem not_mem_future_iff {x y : E} : y ∉ future sig x ↔ ¬ Reach sig x y := Iff.rfl
+
+/-- **Causal equivalence**: mutual reachability `x ⤳ y ∧ y ⤳ x` (a causal "diamond" / the events on a
+common causal cycle). -/
+def CausalEquiv (x y : E) : Prop := Reach sig x y ∧ Reach sig y x
+
+/-- **★★ B4 — mutual reachability is an equivalence relation.**  `CausalEquiv` is reflexive, symmetric,
+and transitive — so the events quotient into causal classes on which `Reach` descends to an
+*antisymmetric* partial order (the causal poset).  This is the finite operational causal structure: a
+preorder by reachability, a partial order after identifying mutually-reachable events. -/
+theorem causalEquiv_equivalence : Equivalence (CausalEquiv sig) where
+  refl x := ⟨reach_refl sig x, reach_refl sig x⟩
+  symm h := ⟨h.2, h.1⟩
+  trans h1 h2 := ⟨reach_trans sig h1.1 h2.1, reach_trans sig h2.2 h1.2⟩
+
+end Causal
+
 end QIQTH.EmergentSpacetime

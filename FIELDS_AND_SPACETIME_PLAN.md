@@ -164,3 +164,19 @@ Per increment: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green;
   network's defining property, NOT derived), then `S_vN(ρ) ≤ cut w S` = the boundary area `∂S` — the finite,
   honest **Ryu–Takayanagi inequality** on the substrate. Rides `vonNeumannEntropy_le_log_card`. Does NOT
   derive geometry/metric/saturation `S = area`. _Track B next: B4 (operational causal preorder)._
+- 2026-06-29 — **B4 DONE — ✅ TRACK B CORES COMPLETE (B0–B4)** (axiom-free; B4 depends on *no* axioms at all,
+  purely constructive; budget 0, full QIQTH green 8876 jobs). `EmergentSpacetime.lean` (`section Causal`): the
+  operational causal structure. `Reach sig` = reflexive–transitive closure of a *supplied* one-step
+  signalling relation; **`reach_refl`/`reach_trans`** (the causal preorder laws); **`future sig x`** = the
+  causal future cone, with **`future_subset_of_reach`** (cone monotonicity / no-signalling-outside-cone — the
+  future is transitively closed) and `not_mem_future_iff`; **`causalEquiv_equivalence`** — mutual reachability
+  is an equivalence, so events quotient into a causal **poset** (preorder by reachability, partial order after
+  identifying mutually-reachable events). Honest: a *directed* order needs a SUPPLIED orientation (a unitary
+  runtime is reversible) — this is a finite operational causal order, NOT Lorentzian light-cones from nothing.
+
+  **TRACK B (emergent-spacetime finite cores) COMPLETE.** B0 no-go guards · B1 min-cut≠metric + ApproxMetric ·
+  B2 graph-RT entropy skeleton · B3 tensor-network cut / finite-RT inequality · B4 causal preorder. The
+  honest finite proto-spacetime: an exact-symmetry guard, a corrected metric reconstruction, the RT
+  area/entropy inequalities, and an operational causal order — all axiom-free, all error-tagged, none
+  claiming the 4D manifold. Cited frontiers (unchanged): Borchers/HSMI continuum, background-independent 4D,
+  Gaussian/Williamson. _Track A continues: A4 (Higgs) → A5 (capstone)._
