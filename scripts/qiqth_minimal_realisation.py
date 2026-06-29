@@ -218,6 +218,46 @@ print(f"        min-cuts: λ(0,1)={lam[(0,1)]}, λ(1,2)={lam[(1,2)]}, λ(0,2)={l
       f"   →   {lam[(0,2)]} > {lam[(0,1)]+lam[(1,2)]}  (so min-cut is NOT a metric)")
 
 # ----------------------------------------------------------------------------------------
+# 10. TOY (c) — the THERMAL half in finite form (as far as finite objects reach toward GR).
+#     A finite modular/Gibbs state has a genuine temperature (finite KMS, D6); the entanglement
+#     first law δS = δ⟨K⟩ is exact; and with the modular Hamiltonian ∝ area (K = η·A_op, the
+#     BW/edge identification) it gives δS = η δA — the entropy–area VARIATION Jacobson needs.
+#     This is the half a finite microstate count, equipped with a modular flow, CAN supply.
+#     It still does NOT give the Einstein equations: those need the continuum smooth-background
+#     Raychaudhuri step δA ↔ T_kk, which no finite toy can reach (the honest checkpoint).
+# ----------------------------------------------------------------------------------------
+print("\n[10] TOY (c) — thermal half: finite modular/Gibbs + KMS + first law → δS = η δA")
+
+# (i) finite modular flow + KMS (D6): φ(A·σ_{-i}(B)) = φ(B A), σ_{-i}(B) = ρ B ρ⁻¹, φ(X)=Tr(ρX)
+rho_g = sp.diag(Rational(1,2), Rational(1,3), Rational(1,6))      # a faithful finite Gibbs state
+rho_gi = rho_g.inv()
+Amat = Matrix([[0,1,0],[2,0,1],[0,3,0]])
+Bmat = Matrix([[1,0,2],[0,1,0],[1,0,0]])
+kms_lhs = (rho_g*Amat*(rho_g*Bmat*rho_gi)).trace()
+kms_rhs = (rho_g*Bmat*Amat).trace()
+check("finite KMS  φ(A·σ₋ᵢ(B)) = φ(B A)", simplify(kms_lhs - kms_rhs) == 0, "finite_KMS (D6)")
+
+# (ii) entanglement first law δS = δ⟨K⟩, exact, around a reference Gibbs state (eigenbasis)
+p1, p2, d1, d2, s, eta, a1, a2, a3 = sp.symbols('p1 p2 d1 d2 s eta a1 a2 a3', positive=True)
+p3sym = 1 - p1 - p2                                # normalization Σp=1
+pvec = [p1, p2, p3sym]
+dvec = [d1, d2, -d1 - d2]                           # traceless perturbation Σδ=0
+S_of   = lambda x: -sum((pvec[i] + x*dvec[i]) * sp.log(pvec[i] + x*dvec[i]) for i in range(3))
+Keig   = [-sp.log(pvec[i]) for i in range(3)]       # modular Hamiltonian K = -log ρ_ref
+Kexp_of= lambda x: sum(Keig[i] * (pvec[i] + x*dvec[i]) for i in range(3))
+dS = sp.diff(S_of(s), s).subs(s, 0)
+dK = sp.diff(Kexp_of(s), s).subs(s, 0)
+check("entanglement first law  δS = δ⟨K⟩", simplify(dS - dK) == 0, "DifferentialAreaLaw (first law)")
+
+# (iii) area identification K = η·A_op  ⟹  δS = η δA  (the entropy–area variation Jacobson uses)
+aeig    = [a1, a2, a3]                              # area-operator eigenvalues
+dKarea  = sp.diff(sum(eta*aeig[i]*(pvec[i] + s*dvec[i]) for i in range(3)), s).subs(s, 0)
+dArea   = sp.diff(sum(aeig[i]*(pvec[i] + s*dvec[i]) for i in range(3)), s).subs(s, 0)
+check("δ⟨K⟩ = η δA  (K = η·area)",       simplify(dKarea - eta*dArea) == 0, "δS = η δA (area identification)")
+print("        finite temperature + δS = η δA reached;  Einstein still needs the continuum")
+print("        smooth-background Raychaudhuri step δA ↔ T_kk — NOT finite-toy-reachable.")
+
+# ----------------------------------------------------------------------------------------
 print("\n" + "="*78)
 print("RESULT:", "ALL BOUNDARY CONDITIONS SATISFIED — this toy is a realisation of QIQT-H."
       if ok else "SOME CHECK FAILED.")
@@ -234,8 +274,16 @@ Two extensions confirm the program stays consistent under composition:
   (b) TENSOR-NETWORK / RT — a 3-node graph whose cut is the area primitive (purity S(A)=S(Aᶜ),
       subadditivity), with the RT inequality S_vN(ρ_A) ≤ cut(A) and min-cut violating the triangle
       inequality (so it is an AREA, never a distance).
+  (c) THERMAL HALF — a finite modular/Gibbs state has a genuine temperature (finite KMS), the
+      entanglement first law δS = δ⟨K⟩ is exact, and with the modular Hamiltonian ∝ area it gives
+      δS = η δA (the entropy–area variation Jacobson needs). This is as far as a finite microstate
+      count, equipped with a modular flow, reaches toward GR.
 What it does NOT do (and a realisation need not, at this minimal level): supply interactions,
-gauge dynamics, a spacetime metric, or the value of G — those are the generative frontiers.
+gauge dynamics, or the value of G — and crucially it does NOT yield the Einstein field equations.
+Those need the continuum smooth-background Raychaudhuri step δA ↔ T_kk, which no finite toy can
+reach: a gravitational realisation (e.g. the free Klein–Gordon field on a smooth background,
+`qiqt_gr_ppwave_showcase`) is required. The finite toys realise the kinematic + thermal boundary
+conditions; GR is a property of the richer continuum realisation, not of these.
 """)
 import sys
 sys.exit(0 if ok else 1)
