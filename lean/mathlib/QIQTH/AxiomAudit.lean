@@ -7146,5 +7146,12 @@ namespace QIQTH.AxiomAudit
 -- (M4: S_vN ≤ log finrank C ≤ log finrank 𝓗 ≤ A/4ℓ_P²). Keeps C and 𝓗 SEPARATE (connected by V), not identified.
 -- Axiom-free (standard 3).
 #print axioms QIQTH.CodeCapacityBridge.finrank_le_of_codeIsometry
+-- ★★★ CODE–CAPACITY BRIDGE M2 (the encoding preserves records): encoded_record_expectation — for a matrix isometry
+-- V (VᴴV=1, a Stiefel/partial-isometry encoding into the microstate space) and any field state ρ + record O,
+-- Tr((VρVᴴ)(VOVᴴ))=Tr(ρO): VᴴV=1 collapses the middle, then Tr cycles Vᴴ to the front. So encoding the field sector
+-- into the holographic microstate space changes NO record statistic. encoded_trace: Tr(VρVᴴ)=Tr ρ (states → states).
+-- Axiom-free (standard 3).
+#print axioms QIQTH.CodeCapacityBridge.encoded_record_expectation
+#print axioms QIQTH.CodeCapacityBridge.encoded_trace
 
 end QIQTH.AxiomAudit

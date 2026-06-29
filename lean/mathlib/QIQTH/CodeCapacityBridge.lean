@@ -21,6 +21,7 @@ import Mathlib.LinearAlgebra.Matrix.Trace
 import Mathlib.Data.Complex.Basic
 import Mathlib.Analysis.InnerProductSpace.Basic
 import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+import Mathlib.Tactic.NoncommRing
 
 namespace QIQTH.CodeCapacityBridge
 
@@ -46,6 +47,32 @@ theorem finrank_le_of_codeIsometry (V : C →ₗᵢ[ℂ] 𝓗) :
   V.toLinearMap.finrank_le_finrank_of_injective V.injective
 
 end CodeFits
+
+section Encoding
+
+variable {dC d𝓗 : Type*} [Fintype dC] [DecidableEq dC] [Fintype d𝓗] [DecidableEq d𝓗]
+
+/-- **★ M2 — the encoding preserves record expectations.**  A code encoding into the microstate space is a
+matrix isometry `V : d𝓗 × dC` with `Vᴴ V = 1` (columns orthonormal — a Stiefel/partial-isometry encoding).
+For any field state `ρ` and any **record** observable `O` on the code space, the encoded expectation equals the
+bare one:  `Tr_{𝓗}((VρVᴴ)(VOVᴴ)) = Tr_{C}(ρ O)` (since `VᴴV = 1` collapses the middle: `VρVᴴ·VOVᴴ = Vρ·O·Vᴴ`,
+then `Tr` cycles `Vᴴ` to the front).  So encoding the field sector into the holographic microstate space changes
+**no record statistic** — the records of the electron/photon are faithfully carried into the microstate
+description. -/
+theorem encoded_record_expectation (V : Matrix d𝓗 dC ℂ) (hV : Vᴴ * V = 1) (ρ O : Matrix dC dC ℂ) :
+    (V * ρ * Vᴴ * (V * O * Vᴴ)).trace = (ρ * O).trace := by
+  have key : V * ρ * Vᴴ * (V * O * Vᴴ) = V * (ρ * O) * Vᴴ := by
+    simp only [Matrix.mul_assoc]
+    rw [← Matrix.mul_assoc Vᴴ V (O * Vᴴ), hV, Matrix.one_mul]
+  rw [key, Matrix.trace_mul_comm, ← Matrix.mul_assoc, hV, Matrix.one_mul]
+
+/-- The encoded state `VρVᴴ` has unit trace when `ρ` does (`Tr(VρVᴴ) = Tr ρ`) — the encoding maps states to
+states (`VᴴV = 1`), a special case of `encoded_record_expectation` with `O = 1`. -/
+theorem encoded_trace (V : Matrix d𝓗 dC ℂ) (hV : Vᴴ * V = 1) (ρ : Matrix dC dC ℂ) :
+    (V * ρ * Vᴴ).trace = ρ.trace := by
+  rw [Matrix.trace_mul_comm, ← Matrix.mul_assoc, hV, Matrix.one_mul]
+
+end Encoding
 
 /-- **★ M0 — Exact finite-dimensional CCR is impossible** (the photon needs a cutoff).  On a *nonzero*
 finite-dimensional space there are no operators `a, a†` satisfying the canonical commutation relation

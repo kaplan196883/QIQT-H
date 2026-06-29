@@ -98,3 +98,12 @@ the honest-scope note from §0.
   by `V`, not identified. This is the direction that chains into the area bound (M4). *(Converse — `finrank ≤ ⟹
   ∃ isometry` — is the labelled fiddly `OrthonormalBasis`-extension follow-on, not needed for the payoff.)* Wired
   into `QIQTH.lean`+`AxiomAudit.lean`. Next: **M2** (encoding preserves entropy + record expectations).
+- 2026-06-29 — **M2 DONE (record half)** (`encoded_record_expectation`, `encoded_trace`, axiom-free standard-3,
+  budget 0, full QIQTH green 8873 jobs). For a matrix isometry `V` (`VᴴV=1`, Stiefel/partial-isometry encoding):
+  **`encoded_record_expectation`** `Tr((VρVᴴ)(VOVᴴ)) = Tr(ρO)` (the `VᴴV=1` collapses the middle, then `Tr`
+  cycles `Vᴴ` to the front) — encoding the field sector into the microstate space changes **no record
+  statistic**; **`encoded_trace`** `Tr(VρVᴴ)=Tr ρ` (states→states). The load-bearing "records preserved" content,
+  clean trace algebra (`Matrix.mul_assoc`+`trace_mul_comm`, NOT noncomm_ring — rectangular). *(The entropy-
+  preservation half `S(VρVᴴ)=S(ρ)` is the fiddly spectral piece — same NONZERO spectrum — and is NOT load-bearing
+  for the area bound, which only needs the dimension comparison; labelled follow-on.)* Next: **M3/M4** (the
+  entropy ≤ log card + chained area bound `S_vN ≤ log dC ≤ log d𝓗 ≤ A/4ℓ_P²`).
