@@ -110,3 +110,14 @@ Per increment: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green;
   be *approximate / scaling-limit*, the honest constraint, not a defect. (Import note: `RCLike ℂ` lives in
   `Mathlib.Analysis.Complex.Basic`, needed for the `ComplexOrder` scoped order instances.) Wired into
   `QIQTH.lean` + `AxiomAudit.lean`. _Track B next: B1 (`minCut_not_metric` + `ApproxMetric` reconstruction)._
+- 2026-06-29 — **A1 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8876 jobs). New module
+  `QIQTH/FreeFieldCorner.lean` (`section GradedBracket`): the **unified corner transport** for free SM
+  field content. `gradedBracket ε x y = x y + ε•(y x)` (ε=1 anticommutator/CAR fermions, ε=-1
+  commutator/CCR bosons); **`encode_gradedBracket`** — `[ι_V(x),ι_V(y)]_ε = ι_V([x,y]_ε)`, the *single*
+  transport theorem unifying the electron (D4, ε=1) and photon (D5, ε=-1); **`encoded_bracket_of_eq`** —
+  any code relation `[x,y]_ε = M` transports to `[ι_V(x),ι_V(y)]_ε = ι_V(M)` (in the corner, never the
+  ambient `1_𝓗`); **`encoded_CAR_bracket`** — the ε=1 instance recovers D4 (`{x,y}=c•1 ⟹ {ι(x),ι(y)}=c•P`).
+  So every free SM field's defining algebra is an *instance* of one transport. Honest: transport of a
+  SUPPLIED free-field algebra, NOT its construction; interactions/gauge/confinement/chirality/SSB are cited
+  frontiers. Wired into `QIQTH.lean` + `AxiomAudit.lean`. _Track A next: A2 (quark/lepton multi-flavor CAR
+  instances)._

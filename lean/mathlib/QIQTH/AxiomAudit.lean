@@ -7303,4 +7303,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EmergentSpacetime.finiteDim_scaling_forces_zero
 #print axioms QIQTH.EmergentSpacetime.scaling_of_nonzero_forces_unit_modulus
 
+-- ★★ FREE-FIELD CORNER (A1) — unified corner transport for free SM field content (Track A):
+-- gradedBracket ε x y = x y + ε•(y x) (ε=1 anticommutator/CAR, ε=-1 commutator/CCR). encode_gradedBracket —
+-- the encoding carries the code graded bracket to the corner: [ι_V(x),ι_V(y)]_ε = ι_V([x,y]_ε), the SINGLE
+-- transport unifying electron (D4, ε=1) and photon (D5, ε=-1). encoded_bracket_of_eq — any code relation
+-- [x,y]_ε = M transports to [ι_V(x),ι_V(y)]_ε = ι_V(M) (in the corner, never ambient 1_𝓗). encoded_CAR_bracket
+-- — the ε=1 instance recovers D4: {x,y}=c•1 ⟹ corner {ι(x),ι(y)}=c•P. Transport of a SUPPLIED free-field
+-- algebra, NOT its construction; interactions/gauge/confinement/chirality/SSB are cited frontiers. Std 3.
+#print axioms QIQTH.FreeFieldCorner.encode_gradedBracket
+#print axioms QIQTH.FreeFieldCorner.encoded_bracket_of_eq
+#print axioms QIQTH.FreeFieldCorner.encoded_CAR_bracket
+
 end QIQTH.AxiomAudit

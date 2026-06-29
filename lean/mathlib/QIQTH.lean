@@ -566,3 +566,4 @@ import QIQTH.GRFromMicro
 import QIQTH.CodeCapacityBridge
 import QIQTH.CornerConstruction
 import QIQTH.EmergentSpacetime
+import QIQTH.FreeFieldCorner
