@@ -7380,4 +7380,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FreeFieldCorner.encoded_higgs_commutator
 #print axioms QIQTH.FreeFieldCorner.higgs_doublet_modes_le_area
 
+-- ★★★★ FREE-FIELD CORNER (A5 capstone) — the free Standard-Model field content in the corner:
+-- sm_free_field_in_corner — for ANY free SM field sector (fermions ε=1 / gauge bosons ε=-1 / Higgs) encoded by
+-- an isometry V:C_R↪𝓗_R that fits (card C_R ≤ card 𝓗_R) under the holographic postulate, BOTH hold axiom-free:
+-- (1) every graded-bracket relation transports into the corner [ι(x),ι(y)]_ε = ι([x,y]_ε) (corner unit P, never
+-- 1_𝓗); (2) every field density's von Neumann entropy obeys the area floor S_vN ≤ A/4ℓ_P². So the whole free SM
+-- field content = a Born-weighted, algebra-faithful, area-bounded record structure in the capacity-bounded corner.
+-- Transport of a SUPPLIED free field algebra, NOT construction; interactions/gauge/YM-mass-gap/confinement/
+-- chirality/SSB are cited frontiers; bosonic fields necessarily truncated. Std 3. (Completes Track A, A1–A5.)
+#print axioms QIQTH.FreeFieldCorner.sm_free_field_in_corner
+
 end QIQTH.AxiomAudit

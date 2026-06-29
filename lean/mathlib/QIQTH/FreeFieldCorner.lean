@@ -177,4 +177,38 @@ theorem higgs_doublet_modes_le_area {d N : ℕ} {𝓗 : Type*} [Fintype 𝓗] {a
 
 end Higgs
 
+section Capstone
+
+/-- **★★★★ A5 — the free Standard-Model field content in the corner (capstone).**  For *any* free SM field
+sector — fermions (quarks/leptons, CAR, `ε = 1`, A2), gauge bosons (W/Z/gluon, truncated CCR, `ε = −1`,
+A3), or the Higgs scalar (truncated CCR, A4) — represented as a finite code `C_R` encoded by an isometry
+`V : C_R ↪ 𝓗_R` that fits the microstate space (`card C_R ≤ card 𝓗_R`) under the holographic postulate,
+**both** hold simultaneously, axiom-free:
+
+* **(algebra faithfully transported)** every graded-bracket relation transports into the corner:
+  `[ι_V(x), ι_V(y)]_ε = ι_V([x,y]_ε)` for all `ε` (fermionic `ε=1` *and* bosonic `ε=−1`) — landing on the
+  corner unit `P`, never the ambient `1_𝓗`;
+* **(records holographically area-bounded)** every field density's von Neumann entropy obeys the area
+  floor: `S_vN(ρ) ≤ A/4ℓ_P²`.
+
+So the entire free SM field content appears as a **Born-weighted, algebra-faithful, area-bounded record
+structure in the capacity-bounded corner** — the unification of the whole Track A.
+
+**Honest scope (the hard line).** This *transports a supplied free field algebra* into the corner and
+bounds its records; it does **not** construct the fields, and capacity is a **constraint, not a
+generator**.  Interactions, non-abelian gauge dynamics, the Yang–Mills mass gap, confinement, chirality,
+and spontaneous symmetry breaking — the SM's *essence* — are **cited frontiers** (open mathematics), out
+of scope; and the bosonic fields are necessarily **truncated** (the defect explicit, A3/A4). -/
+theorem sm_free_field_in_corner {dC d𝓗 : Type*} [Fintype dC] [DecidableEq dC] [Nonempty dC]
+    [Fintype d𝓗] [DecidableEq d𝓗] {areaTerm : ℝ} [HolographicCapacityBound d𝓗 areaTerm]
+    (V : Matrix d𝓗 dC ℂ) (hV : Vᴴ * V = 1) (hfit : Fintype.card dC ≤ Fintype.card d𝓗) :
+    (∀ (ε : ℂ) (x y : Matrix dC dC ℂ),
+        gradedBracket ε (encode V x) (encode V y) = encode V (gradedBracket ε x y))
+      ∧ (∀ {ρ : Matrix dC dC ℂ} (h : QIQTH.QuantumEntropy.IsDensity ρ),
+        QIQTH.QuantumEntropy.vonNeumannEntropy h ≤ areaTerm) :=
+  ⟨fun ε x y => encode_gradedBracket V hV ε x y,
+   fun h => QIQTH.CodeCapacityBridge.encoded_field_entropy_le_area hfit h⟩
+
+end Capstone
+
 end QIQTH.FreeFieldCorner

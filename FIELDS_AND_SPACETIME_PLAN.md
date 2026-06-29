@@ -148,6 +148,23 @@ Per increment: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green;
   content in the corner)._
 - 2026-06-29 — **Track B (B0–B4) reported COMPLETE; its /loop (job 49fea657) stopped.** Only D9
   (Gaussian/Williamson) and the continuum frontiers remain on Track B, all cited research-grade.
+- 2026-06-29 — **A5 DONE — ✅ TRACK A COMPLETE (A1–A5); BOTH TRACKS COMPLETE** (axiom-free standard-3,
+  budget 0, full QIQTH green 8876 jobs). `FreeFieldCorner.lean` (`section Capstone`): the capstone
+  **`sm_free_field_in_corner`** — for *any* free SM field sector (fermions `ε=1` / gauge bosons `ε=-1` /
+  Higgs) encoded by an isometry `V : C_R ↪ 𝓗_R` that fits (`card C_R ≤ card 𝓗_R`) under the holographic
+  postulate, **both** hold: (1) every graded-bracket relation transports into the corner `[ι(x),ι(y)]_ε =
+  ι([x,y]_ε)` (corner unit `P`, never `1_𝓗`); (2) every field density's von Neumann entropy obeys the area
+  floor `S_vN ≤ A/4ℓ_P²`. So the whole free SM field content = a **Born-weighted, algebra-faithful,
+  area-bounded record structure in the capacity-bounded corner**. Transport of a SUPPLIED algebra, NOT
+  construction; interactions/gauge/YM-mass-gap/confinement/chirality/SSB are cited frontiers; bosonic fields
+  necessarily truncated. Track A's /loop (job 74417971) stopped.
+
+  **★ BOTH TRACKS COMPLETE.** Track A (A1–A5): the free SM field content — unified graded-bracket transport,
+  fermions, gauge bosons, Higgs, capstone — faithfully in the corner, area-bounded. Track B (B0–B4): finite
+  proto-spacetime — no-go guards, corrected metric reconstruction, RT area/entropy, finite-RT inequality,
+  causal preorder. All axiom-free (standard-3), budget 0, honest scope throughout. Cited frontiers (unchanged,
+  not ground): interacting SM (YM mass gap, confinement, chirality, SSB), background-independent 4D spacetime,
+  Borchers/HSMI continuum, Gaussian/Williamson.
 - 2026-06-29 — **B1 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8876 jobs).
   `EmergentSpacetime.lean` (`section Metric`): the corrected metric core. `IsApproxPseudometric ε d`
   (nonneg/self/symm/triangle-up-to-ε — the target type for any emergent-distance reconstruction);
