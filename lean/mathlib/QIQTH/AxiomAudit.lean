@@ -7177,5 +7177,14 @@ namespace QIQTH.AxiomAudit
 -- inequality, it does NOT generate them. The honest culmination of the code→capacity bridge. Axiom-free (standard 3).
 #print axioms QIQTH.CodeCapacityBridge.record_card_le_finrank
 #print axioms QIQTH.CodeCapacityBridge.record_log_card_le_area
+-- ★★★★ CODE–CAPACITY BRIDGE — THE UNIFICATION (Born × capacity from ONE microstate fine-graining):
+-- records_born_and_area_bounded — for a finite equal-amplitude orthonormal fine-graining f : I → 𝓗_R (the
+-- microstate atoms) with record readout sec : I → K, the SAME atom set I does double duty: (1) the uniform measure's
+-- outcome-marginal = (sectorAmp k)² = |c_k|² (Born, the Zurek amplitude→count bridge, uniform_marginal_eq_sectorAmp_sq;
+-- the equiprobable measure's canonicity is the named P5 premise), AND (2) log|I| ≤ A/4ℓ_P² under HolographicCapacity
+-- Bound (record_log_card_le_area). So the electron's/photon's regional records are Born-weighted AND holographically
+-- capacity-bounded by one and the same microstate count — capacity = the ceiling, Born = the partition. A statement
+-- about the field's RECORDS, not a construction of the field; does not remove P5 or the capacity postulate. Std 3.
+#print axioms QIQTH.CodeCapacityBridge.records_born_and_area_bounded
 
 end QIQTH.AxiomAudit

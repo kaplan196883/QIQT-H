@@ -24,6 +24,7 @@ import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
 import Mathlib.Tactic.NoncommRing
 import Mathlib.Analysis.InnerProductSpace.PiL2
 import QIQTH.FQBoundMicro
+import QIQTH.BornEquiprobable
 
 namespace QIQTH.CodeCapacityBridge
 
@@ -169,6 +170,41 @@ theorem record_log_card_le_area {dC : Type*} [Fintype dC] [DecidableEq dC]
     _ ≤ areaTerm := HolographicCapacityBound.bound
 
 end RecordCapacity
+
+section Unification
+
+open QIQTH.BornEquiprobable QIQTH.BornTypicality QIQTH.NoBornFromNothing
+
+/-- **★★★★ The unifying theorem — Born weights AND the area capacity, from ONE microstate fine-graining.**
+Take the regional field sector as a finite **equal-amplitude orthonormal fine-graining** `f : I → 𝓗_R` (the
+microstate atoms in `𝓗_R = ℂ^{d𝓗}`) with an outcome/record readout `sec : I → K`.  Then the *same* atom set
+`I` does **double duty**:
+
+* **(Born, typicality)** — the uniform (equiprobable) measure over the atoms has outcome-marginal *exactly* the
+  squared amplitude, `outcomeMarginal sec (1/|I|) k = (sectorAmp f sec k)² = |c_k|²` (the Zurek amplitude→count
+  bridge, `uniform_marginal_eq_sectorAmp_sq` — axiom-free; the *canonicity* of this equiprobable measure is the
+  named P5 premise);
+* **(Capacity, holography)** — under `HolographicCapacityBound 𝓗 areaTerm`, the atom count is area-bounded,
+  `log|I| ≤ A/4ℓ_P²` (`record_log_card_le_area`), and hence so is the number of distinguishable records (`|K|`
+  realized values, each occupying ≥ 1 atom).
+
+So the **electron's (or photon's) regional records are Born-weighted *and* holographically capacity-bounded by one
+and the same microstate count** — capacity is the *ceiling* on the count `|I|`, Born is the *partition* of it into
+sector fractions.  This is the honest point of contact between the code–capacity bridge and Born-from-typicality:
+the finite microstate fine-graining is simultaneously the capacity bookkeeping and the probability-measure
+carrier.  (It remains a statement about the field's *records/states*: it does **not** construct the field, derive
+`G`, or remove the P5 / `HolographicCapacityBound` premises.)  Instantiates for the electron (CAR Fock, `|I|≤2^n`)
+and the photon (truncated symmetric Fock, `|I|≤C(d+N,N)`). -/
+theorem records_born_and_area_bounded
+    {d𝓗 : Type*} [Fintype d𝓗] [DecidableEq d𝓗] {areaTerm : ℝ} [HolographicCapacityBound d𝓗 areaTerm]
+    {I K : Type*} [Fintype I] [DecidableEq I] [Nonempty I] [DecidableEq K]
+    (f : I → EuclideanSpace ℂ d𝓗) (hf : Orthonormal ℂ f) (sec : I → K) :
+    (∀ k, outcomeMarginal sec (fun _ => 1 / (Fintype.card I : ℝ)) k = (sectorAmp f sec k) ^ 2)
+      ∧ Real.log (Fintype.card I) ≤ areaTerm :=
+  ⟨fun k => uniform_marginal_eq_sectorAmp_sq hf sec k,
+   record_log_card_le_area (𝓗 := d𝓗) (le_refl _) hf⟩
+
+end Unification
 
 /-- **★ M0 — Exact finite-dimensional CCR is impossible** (the photon needs a cutoff).  On a *nonzero*
 finite-dimensional space there are no operators `a, a†` satisfying the canonical commutation relation

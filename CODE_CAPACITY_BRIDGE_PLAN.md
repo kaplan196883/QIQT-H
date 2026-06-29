@@ -131,3 +131,15 @@ the honest-scope note from §0.
   generates it).** Deferred (non-load-bearing, labelled): the M2 entropy-preservation spectral half, the M1
   converse (∃ isometry from `finrank ≤`), and the Phase-5 dual-weight trace (the genuine Type-II microstate
   counting). Wired into `QIQTH.lean`+`AxiomAudit.lean`.
+- 2026-06-29 — **★ THE UNIFICATION** (`records_born_and_area_bounded`, axiom-free standard-3, budget 0, full
+  QIQTH green 8873 jobs). Joins the code–capacity bridge with the (now-clarified, axiom-free) Born-from-typicality
+  result: for ONE finite equal-amplitude orthonormal fine-graining `f : I → 𝓗_R` (the microstate atoms) with a
+  record readout `sec : I → K`, the **same atom set `I` does double duty** — (1) **Born**: the uniform measure's
+  outcome-marginal `= (sectorAmp k)² = |c_k|²` (`BornEquiprobable.uniform_marginal_eq_sectorAmp_sq`, the Zurek
+  amplitude→count bridge; the equiprobable measure's *canonicity* is the named P5 premise), AND (2) **capacity**:
+  `log|I| ≤ A/4ℓ_P²` (`record_log_card_le_area`, under `HolographicCapacityBound`). So the electron's/photon's
+  regional **records are Born-weighted AND holographically capacity-bounded by one and the same microstate count**
+  — capacity = the ceiling on `|I|`, Born = the partition of it into sector fractions. The honest point of contact
+  between the bridge and Born-from-typicality (the finite fine-graining is simultaneously the capacity bookkeeping
+  and the probability-measure carrier). Still a statement about the field's *records*, not a construction of the
+  field; removes neither P5 nor the capacity postulate. Wired into `QIQTH.lean`+`AxiomAudit.lean`.
