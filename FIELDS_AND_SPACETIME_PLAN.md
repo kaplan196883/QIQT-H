@@ -138,6 +138,16 @@ Per increment: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green;
   `G`-component truncated Fock: `G·log C(d+N,N) = log(C(d+N,N)^G) ≤ log|𝓗_R| ≤ A/4ℓ_P²` (cutoff `N` explicit).
   Honest: transport of a SUPPLIED truncated-bosonic family, not its construction. _Track A next: A4 (Higgs
   scalar)._
+- 2026-06-29 — **A4 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8876 jobs). `FreeFieldCorner.lean`
+  (`section Higgs`): the Higgs scalar. **`encoded_higgs_commutator`** — the SM's fundamental scalar (spin 0,
+  free/pre-SSB) is a truncated boson; `[a,a†]=M` transports to the corner `ι_V(M) = P − N·ι(|top⟩⟨top|)`
+  (truncation defect explicit); **`higgs_doublet_modes_le_area`** — the 4-real-component Higgs doublet:
+  `4·log C(d+N,N) = log(C(d+N,N)^4) ≤ log|𝓗_R| ≤ A/4ℓ_P²` (the `G=4` instance of `gauge_boson_modes_le_area`).
+  **Honest frontier:** SSB / the Higgs vacuum / mass generation / the Higgs potential are interacting physics,
+  OUT of scope — this transports only the free scalar algebra. _Track A next: A5 (capstone — free SM field
+  content in the corner)._
+- 2026-06-29 — **Track B (B0–B4) reported COMPLETE; its /loop (job 49fea657) stopped.** Only D9
+  (Gaussian/Williamson) and the continuum frontiers remain on Track B, all cited research-grade.
 - 2026-06-29 — **B1 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8876 jobs).
   `EmergentSpacetime.lean` (`section Metric`): the corrected metric core. `IsApproxPseudometric ε d`
   (nonneg/self/symm/triangle-up-to-ε — the target type for any emergent-distance reconstruction);

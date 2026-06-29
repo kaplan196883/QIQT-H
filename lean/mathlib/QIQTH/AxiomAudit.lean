@@ -7372,4 +7372,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FreeFieldCorner.encoded_gauge_boson_commutator
 #print axioms QIQTH.FreeFieldCorner.gauge_boson_modes_le_area
 
+-- ★★ FREE-FIELD CORNER (A4) — Higgs scalar:
+-- encoded_higgs_commutator — the SM's fundamental scalar (free, pre-SSB) is a truncated boson; [a,a†]=M
+-- transports to the corner ι_V(M) = P − N·ι(|top⟩⟨top|) (truncation defect explicit). higgs_doublet_modes_le_area
+-- — the 4-real-component Higgs doublet: 4·log C(d+N,N) = log(C(d+N,N)^4) ≤ log|𝓗_R| ≤ A/4ℓ_P². Honest frontier:
+-- SSB / the Higgs vacuum / mass generation / the Higgs potential are interacting physics, OUT of scope. Std 3.
+#print axioms QIQTH.FreeFieldCorner.encoded_higgs_commutator
+#print axioms QIQTH.FreeFieldCorner.higgs_doublet_modes_le_area
+
 end QIQTH.AxiomAudit

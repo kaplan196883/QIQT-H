@@ -145,4 +145,36 @@ theorem gauge_boson_modes_le_area {d N G : ℕ} {𝓗 : Type*} [Fintype 𝓗] {a
 
 end GaugeBosons
 
+section Higgs
+
+variable {dC d𝓗 : Type*} [Fintype dC] [DecidableEq dC] [Fintype d𝓗] [DecidableEq d𝓗]
+
+/-- **★★ A4 — the Higgs scalar in the corner.**  The Higgs is the SM's fundamental *scalar* (spin 0);
+as a *free* field (pre-SSB) it is a truncated bosonic mode.  Its commutator `[a, a†] = M` on the code
+transports into the corner as `ι_V(M)` — bosonic, so `M` is the **truncated-oscillator defect**
+(`1 − N·|N-1⟩⟨N-1|`, D5) and the corner value is `P − N·ι_V(|top⟩⟨top|)`: the Higgs on a finite-capacity
+sector is necessarily **truncated**, the defect explicit.  **Honest frontier:** spontaneous symmetry
+breaking (the Higgs *vacuum*), mass generation, and the Higgs *potential* are interacting/SSB physics —
+**cited frontiers**, out of scope; this transports only the free scalar algebra. -/
+theorem encoded_higgs_commutator (V : Matrix d𝓗 dC ℂ) (hV : Vᴴ * V = 1)
+    (a adag M : Matrix dC dC ℂ) (hCCR : gradedBracket (-1) a adag = M) :
+    gradedBracket (-1) (encode V a) (encode V adag) = encode V M :=
+  encoded_bracket_of_eq V hV (-1) a adag M hCCR
+
+/-- **★ A4 — the Higgs-doublet mode count is area-bounded.**  The complex Higgs doublet has 4 real scalar
+components; the corresponding truncated bosonic sector has dimension `C(d+N,N)^4`.  If it fits the
+microstate space under the holographic postulate, its log capacity obeys the area floor:
+
+  `4·log C(d+N,N) = log(C(d+N,N)^4) ≤ log|𝓗_R| ≤ A/4ℓ_P²`.
+
+(The `G = 4` instance of `gauge_boson_modes_le_area`; cutoff `N` explicit — the scalar Fock is
+infinite-dimensional without it.) -/
+theorem higgs_doublet_modes_le_area {d N : ℕ} {𝓗 : Type*} [Fintype 𝓗] {areaTerm : ℝ}
+    [HolographicCapacityBound 𝓗 areaTerm] (hfit : ((d + N).choose N) ^ 4 ≤ Fintype.card 𝓗) :
+    (4 : ℝ) * Real.log ((d + N).choose N) ≤ areaTerm := by
+  have h := gauge_boson_modes_le_area (d := d) (N := N) (G := 4) (𝓗 := 𝓗) (areaTerm := areaTerm) hfit
+  exact_mod_cast h
+
+end Higgs
+
 end QIQTH.FreeFieldCorner
