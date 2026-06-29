@@ -7225,4 +7225,14 @@ namespace QIQTH.AxiomAudit
 -- honest matrix-entry algebra over Fin N, deferred to the next increment.)
 #print axioms QIQTH.CornerConstruction.finite_weyl_qpow_eq_one
 
+-- ★★ CORNER CONSTRUCTION (D3b) — the truncated-oscillator commutator (photon's finite-capacity defect):
+-- truncated_ladder_commutator — for the N-level truncated oscillator a eₖ = √k e_{k-1} on ℂ^N,
+-- [a, aᴴ] = 1 − N·|N-1⟩⟨N-1|, i.e. the bosonic commutator equals the identity EXCEPT a −N defect localized at
+-- the top level (conjTranspose_lowering_mul: aᴴa = diag(0,…,N-1) number operator; lowering_mul_conjTranspose:
+-- a aᴴ = diag(1,…,N-1,0)). The CONCRETE form of no_finiteDim_CCR/finite_weyl_qpow_eq_one: exact CCR is
+-- impossible in finite capacity and the failure is exactly the top-level truncation — quantified, not hidden. Std 3.
+#print axioms QIQTH.CornerConstruction.conjTranspose_lowering_mul
+#print axioms QIQTH.CornerConstruction.lowering_mul_conjTranspose
+#print axioms QIQTH.CornerConstruction.truncated_ladder_commutator
+
 end QIQTH.AxiomAudit

@@ -237,3 +237,15 @@ Cannot remove P5, but can isolate it cleanly.
   in `CornerConstruction.lean` as a `/- ... -/` frontier note and deferred to the next loop fire.
   `finite_weyl_qpow_eq_one` already delivers the D3 no-go content; D3b only makes the defect explicit.
   _Next: D3b (truncated-oscillator commutator), then D4 (CAR operators in the corner — electron)._
+- 2026-06-29 — **D3b DONE — D3 COMPLETE** (axiom-free standard-3, budget 0, full QIQTH green 8874 jobs).
+  The explicit **truncated-oscillator commutator** is now machine-checked, not just paper-verified. New in
+  `CornerConstruction.lean` (`section Photon`): `lowering N` (the `N`-level ladder `a eₖ = √k e_{k-1}` on
+  `ℂ^N`); `conjTranspose_lowering_mul` (**number operator** `aᴴ a = diag(0,…,N-1)`);
+  `lowering_mul_conjTranspose` (`a aᴴ = diag(1,…,N-1,0)`, with the truncation `0` at the top level); and the
+  capstone **`truncated_ladder_commutator`** — `[a, aᴴ] = 1 − N·|N-1⟩⟨N-1|`: the bosonic commutator equals
+  the identity EXCEPT for a `−N` defect localized at the top level. This is the CONCRETE form of
+  `no_finiteDim_CCR` / `finite_weyl_qpow_eq_one` — exact CCR is impossible in finite capacity and the failure
+  is **exactly the top-level truncation, quantified not hidden** (honest photon scope). Proof: entry-level
+  matrix algebra over `Fin N` via value-/successor-form finite-sum helpers (`sum_fin_ite_val`,
+  `sum_fin_ite_succ`) + `Real.mul_self_sqrt`. Wired into `AxiomAudit.lean`. _Next: D4 (CAR operators in the
+  corner — electron)._

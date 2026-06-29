@@ -220,18 +220,122 @@ theorem finite_weyl_qpow_eq_one {n : Type*} [Fintype n] [DecidableEq n]
     rw [one_mul]; exact hdet.symm
   exact mul_right_cancel₀ hne hcancel
 
-/- **D3b — truncated-oscillator commutator (CHECKPOINTED FRONTIER, not yet built).**
-The remaining half of D3 is the explicit `N`-level oscillator identity
-  `[a, aᴴ] = 1 - N · |N-1⟩⟨N-1|`,  with corollary  `Tr(ρ [a, aᴴ]) = 1 - N · ρ_{top}`,
-for the truncated lowering operator `a eₖ = √k e_{k-1}` on `ℂ^N`.  This is the CONCRETE form of the
-photon's finite-capacity truncation: the bosonic commutator equals the identity EXCEPT for a `-N` defect
-localized at the top level, quantifying the truncation error by the top-level occupation `ρ_{top}`.
+/-- The **truncated lowering operator** `a` on the `N`-level Fock space `ℂ^N` (occupations `0,…,N-1`):
+`a eₖ = √k e_{k-1}`, i.e. `a_{ij} = √j` exactly when `i+1 = j`, else `0`.  Its adjoint `aᴴ` is the
+truncated raising operator, with `aᴴ e_{N-1} = 0` (the truncation: there is no level `N`). -/
+noncomputable def lowering (N : ℕ) : Matrix (Fin N) (Fin N) ℂ :=
+  Matrix.of fun i j => if (i : ℕ) + 1 = (j : ℕ) then (Real.sqrt (j : ℕ) : ℂ) else 0
 
-It is honest mathematics (verified on paper: `aᴴa = diag(0,…,N-1)`, `a aᴴ = diag(1,…,N-1,0)`, so the
-commutator is `diag(1,…,1,-(N-1)) = 1 - N|N-1⟩⟨N-1|`), but its Lean proof is an entry-level matrix
-computation over `Fin N` with `√`-cast bookkeeping and successor-form index sums — a self-contained
-several-step increment, deferred to the next loop fire.  `finite_weyl_qpow_eq_one` (above) already
-delivers the D3 no-go content axiom-free; this only makes the truncation defect explicit. -/
+/-- Value-form finite-sum: `∑_{j:Fin N} [a = (j)] g(j) = [a < N] g(a)`. -/
+private lemma sum_fin_ite_val {N : ℕ} (a : ℕ) (g : ℕ → ℂ) :
+    (∑ j : Fin N, (if a = (j : ℕ) then g (j : ℕ) else 0)) = if a < N then g a else 0 := by
+  rw [Fin.sum_univ_eq_sum_range (fun jn => if a = jn then g jn else 0) N,
+    Finset.sum_ite_eq (Finset.range N) a g]
+  simp only [Finset.mem_range]
+
+/-- Successor-form finite-sum: `∑_{j:Fin N} [(j)+1 = a] g(j) = [1 ≤ a ≤ N] g(a-1)`. -/
+private lemma sum_fin_ite_succ {N : ℕ} (a : ℕ) (g : ℕ → ℂ) :
+    (∑ j : Fin N, (if (j : ℕ) + 1 = a then g (j : ℕ) else 0))
+      = if 1 ≤ a ∧ a ≤ N then g (a - 1) else 0 := by
+  rw [Fin.sum_univ_eq_sum_range (fun jn => if jn + 1 = a then g jn else 0) N]
+  by_cases hcond : 1 ≤ a ∧ a ≤ N
+  · obtain ⟨ha1, haN⟩ := hcond
+    rw [if_pos ⟨ha1, haN⟩, Finset.sum_eq_single (a - 1)]
+    · rw [Nat.sub_add_cancel ha1, if_pos rfl]
+    · intro jn _ hne; rw [if_neg (by omega)]
+    · intro hmem; exact absurd (Finset.mem_range.mpr (by omega)) hmem
+  · rw [if_neg hcond]
+    refine Finset.sum_eq_zero (fun jn hjn => ?_)
+    rw [Finset.mem_range] at hjn
+    rw [if_neg (by omega)]
+
+/-- The adjoint entry, made explicit: `aᴴ_{ij} = √i` exactly when `j+1 = i`, else `0` (the raising
+operator). -/
+private lemma lowering_conjTranspose_apply (N : ℕ) (i j : Fin N) :
+    (lowering N)ᴴ i j = if (j : ℕ) + 1 = (i : ℕ) then (Real.sqrt (i : ℕ) : ℂ) else 0 := by
+  simp only [Matrix.conjTranspose_apply, lowering, Matrix.of_apply, apply_ite star, star_zero,
+    Complex.star_def, Complex.conj_ofReal]
+
+/-- **The number operator** `aᴴ a = diag(0,1,…,N-1)` — the occupation `(aᴴ a) eₖ = k eₖ`. -/
+theorem conjTranspose_lowering_mul (N : ℕ) :
+    (lowering N)ᴴ * lowering N = Matrix.diagonal (fun i : Fin N => ((i : ℕ) : ℂ)) := by
+  ext i k
+  rw [Matrix.mul_apply, Matrix.diagonal_apply]
+  by_cases hik : i = k
+  · subst hik
+    rw [if_pos rfl]
+    have hsum : (∑ j : Fin N, (lowering N)ᴴ i j * lowering N j i)
+        = ∑ j : Fin N, if (j : ℕ) + 1 = (i : ℕ) then ((i : ℕ) : ℂ) else 0 := by
+      refine Finset.sum_congr rfl (fun j _ => ?_)
+      rw [lowering_conjTranspose_apply]
+      simp only [lowering, Matrix.of_apply]
+      split_ifs with h
+      · rw [← Complex.ofReal_mul, Real.mul_self_sqrt (by positivity), Complex.ofReal_natCast]
+      · ring
+    rw [hsum, sum_fin_ite_succ (i : ℕ) (fun _ => ((i : ℕ) : ℂ))]
+    rcases Nat.eq_zero_or_pos (i : ℕ) with h0 | h0
+    · rw [if_neg (by omega), h0]; simp
+    · rw [if_pos ⟨h0, by omega⟩]
+  · rw [if_neg hik]
+    refine Finset.sum_eq_zero (fun j _ => ?_)
+    rw [lowering_conjTranspose_apply]
+    simp only [lowering, Matrix.of_apply]
+    have : (i : ℕ) ≠ (k : ℕ) := fun h => hik (Fin.ext h)
+    split_ifs with h1 h2 <;>
+      first
+      | exact absurd (by omega : (i : ℕ) = (k : ℕ)) this
+      | ring
+
+/-- **The truncated raising∘lowering** `a aᴴ = diag(1,2,…,N-1,0)` — note the `0` at the top level
+(`a aᴴ e_{N-1} = 0`, the truncation defect). -/
+theorem lowering_mul_conjTranspose (N : ℕ) :
+    lowering N * (lowering N)ᴴ
+      = Matrix.diagonal (fun i : Fin N => if (i : ℕ) + 1 < N then (((i : ℕ) + 1 : ℕ) : ℂ) else 0) := by
+  ext i k
+  rw [Matrix.mul_apply, Matrix.diagonal_apply]
+  by_cases hik : i = k
+  · subst hik
+    rw [if_pos rfl]
+    have hsum : (∑ j : Fin N, lowering N i j * (lowering N)ᴴ j i)
+        = ∑ j : Fin N, if (i : ℕ) + 1 = (j : ℕ) then ((j : ℕ) : ℂ) else 0 := by
+      refine Finset.sum_congr rfl (fun j _ => ?_)
+      rw [lowering_conjTranspose_apply]
+      simp only [lowering, Matrix.of_apply]
+      split_ifs with h
+      · rw [← Complex.ofReal_mul, Real.mul_self_sqrt (by positivity), Complex.ofReal_natCast]
+      · ring
+    rw [hsum, sum_fin_ite_val ((i : ℕ) + 1) (fun jn => ((jn : ℕ) : ℂ))]
+  · rw [if_neg hik]
+    refine Finset.sum_eq_zero (fun j _ => ?_)
+    rw [lowering_conjTranspose_apply]
+    simp only [lowering, Matrix.of_apply]
+    have : (i : ℕ) ≠ (k : ℕ) := fun h => hik (Fin.ext h)
+    split_ifs with h1 h2 <;>
+      first
+      | exact absurd (by omega : (i : ℕ) = (k : ℕ)) this
+      | ring
+
+/-- **★★ D3b — the truncated-oscillator commutator (the photon's finite-capacity defect, made
+explicit).**  For the `N`-level truncated oscillator `a eₖ = √k e_{k-1}` on `ℂ^N`:
+
+  `[a, aᴴ] = 1 − N · |N-1⟩⟨N-1|`,
+
+i.e. the bosonic commutator equals the identity EXCEPT for a `−N` defect localized at the top level
+`N-1` (`aᴴ a = diag(0,…,N-1)`, `a aᴴ = diag(1,…,N-1,0)`, so `[a,aᴴ] = diag(1,…,1,−(N-1))`).  This is the
+CONCRETE form of `no_finiteDim_CCR` / `finite_weyl_qpow_eq_one`: the photon cannot satisfy exact CCR in
+finite capacity, and the failure is exactly the top-level truncation — quantified, not hidden. -/
+theorem truncated_ladder_commutator (N : ℕ) :
+    lowering N * (lowering N)ᴴ - (lowering N)ᴴ * lowering N
+      = Matrix.diagonal (fun i : Fin N => if (i : ℕ) + 1 = N then (1 - (N : ℂ)) else 1) := by
+  rw [lowering_mul_conjTranspose, conjTranspose_lowering_mul, Matrix.diagonal_sub]
+  refine congrArg Matrix.diagonal (funext fun i => ?_)
+  have hiN : (i : ℕ) + 1 ≤ N := i.2
+  by_cases htop : (i : ℕ) + 1 = N
+  · rw [if_neg (by omega), if_pos htop]
+    have : (N : ℂ) = ((i : ℕ) : ℂ) + 1 := by exact_mod_cast htop.symm
+    rw [this]; ring
+  · rw [if_pos (by omega), if_neg htop]
+    push_cast; ring
 
 end Photon
 
