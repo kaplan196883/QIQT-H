@@ -7187,4 +7187,21 @@ namespace QIQTH.AxiomAudit
 -- about the field's RECORDS, not a construction of the field; does not remove P5 or the capacity postulate. Std 3.
 #print axioms QIQTH.CodeCapacityBridge.records_born_and_area_bounded
 
+-- ★★★ CORNER CONSTRUCTION (D1) — faithful encoding / read-back into the capacity-bounded microstate memory:
+-- the encoding ι_V(A) = V A Vᴴ is a ⋆-homomorphism (encode_mul, encode_conjTranspose) that is unital ONTO THE
+-- CORNER (encode_one: ι_V(1) = P = VVᴴ, the code projector, NOT the ambient 1_𝓗 — the audit tripwire made explicit;
+-- codeProjector_eq_one_iff_encode_one: ambient-unital ⟺ the code fills 𝓗_R). codeProjector_mul_self / _conjTranspose:
+-- P is an orthogonal projector. encoded_npoint: Tr((VρVᴴ)·ι_V(A₁)···ι_V(Aₙ)) = Tr(ρ·A₁···Aₙ) — storing the field and
+-- reading back any product of records reproduces the bare statistics (generalizes M2 to a full n-point correlator).
+-- Preservation / faithful read-back, NOT emergence: dimension-agnostic, covers electron & photon uniformly. Std 3.
+#print axioms QIQTH.CornerConstruction.codeProjector_mul_self
+#print axioms QIQTH.CornerConstruction.codeProjector_conjTranspose
+#print axioms QIQTH.CornerConstruction.encode_mul
+#print axioms QIQTH.CornerConstruction.encode_conjTranspose
+#print axioms QIQTH.CornerConstruction.encode_one
+#print axioms QIQTH.CornerConstruction.codeProjector_eq_one_iff_encode_one
+#print axioms QIQTH.CornerConstruction.encode_prod
+#print axioms QIQTH.CornerConstruction.encoded_npoint
+#print axioms QIQTH.CornerConstruction.encoded_twopoint
+
 end QIQTH.AxiomAudit
