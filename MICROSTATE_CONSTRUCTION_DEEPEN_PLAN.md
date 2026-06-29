@@ -261,3 +261,14 @@ Cannot remove P5, but can isolate it cleanly.
   area-bounded, `n·log 2 = log(2^n) ≤ log|𝓗_R| ≤ A/4ℓ_P²` (complements `electron_entropy_le_area`). Honest:
   **transport of a supplied CAR rep, not its construction** — capacity does not generate the fermion. Wired
   into `AxiomAudit.lean`. _Next: D5 (truncated-Fock operators in the corner — photon)._
+- 2026-06-29 — **D5 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8874 jobs). **Truncated-Fock
+  ladder in the corner** (`section Photon`), the photon counterpart of D4: `encode_sub` (encoding respects
+  subtraction); `topProjector N` (the top-level `|N-1⟩⟨N-1|` truncation site); `truncated_ladder_commutator'`
+  (the projector form `[a,aᴴ] = 1 − N·|N-1⟩⟨N-1|`); the capstone **`encoded_truncated_ladder_commutator`** —
+  transporting D3b through `ι_V`, the encoded ladder `E = ι_V(a)` (adjoint `Eᴴ = ι_V(aᴴ)`) satisfies
+  `[E, Eᴴ] = P − N·ι_V(|N-1⟩⟨N-1|)`: the **corner unit `P` minus the encoded truncation defect**. The honest
+  contrast with the electron: where D4's CAR gives a clean `{·,·} = c·P`, the photon's `−N` defect **survives
+  the encoding** — the photon on a finite corner is necessarily truncated, error quantified not hidden. Plus
+  **`photon_modes_le_area`** — the truncated photon's log capacity `log C(d+N,N) ≤ log|𝓗_R| ≤ A/4ℓ_P²`
+  (occupation cutoff `N` explicit). Wired into `AxiomAudit.lean`. _Next: D6 (finite modular flow + KMS on the
+  code; conditional BW descent)._

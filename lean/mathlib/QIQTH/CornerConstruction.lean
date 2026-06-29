@@ -210,6 +210,11 @@ theorem encode_smul (V : Matrix d𝓗 dC ℂ) (c : ℂ) (A : Matrix dC dC ℂ) :
     encode V (c • A) = c • encode V A := by
   simp only [encode_def, Matrix.smul_mul, Matrix.mul_smul]
 
+/-- The encoding respects subtraction: `ι_V(A - B) = ι_V(A) - ι_V(B)`. -/
+theorem encode_sub (V : Matrix d𝓗 dC ℂ) (A B : Matrix dC dC ℂ) :
+    encode V (A - B) = encode V A - encode V B := by
+  simp only [encode_def, Matrix.sub_mul, Matrix.mul_sub]
+
 /-- **★★ D4 — CAR transport into the corner (ELECTRON).**  The encoding carries any **fermionic
 anticommutation relation** on the code into the microstate corner, with the **corner unit `P` in place
 of the ambient `1_𝓗`**.  If two code operators `a, b` (e.g. `a(f)` and `a†(g)`) satisfy
@@ -401,6 +406,59 @@ theorem truncated_ladder_commutator (N : ℕ) :
     rw [this]; ring
   · rw [if_pos (by omega), if_neg htop]
     push_cast; ring
+
+/-- The **top-level (truncation-site) projector** `|N-1⟩⟨N-1|` on the code `ℂ^N` — the single level where
+the bosonic commutator defect lives. -/
+noncomputable def topProjector (N : ℕ) : Matrix (Fin N) (Fin N) ℂ :=
+  Matrix.diagonal (fun i : Fin N => if (i : ℕ) + 1 = N then (1 : ℂ) else 0)
+
+/-- The truncated commutator in **projector form**: `[a, aᴴ] = 1 − N · |N-1⟩⟨N-1|` (the identity minus the
+top-level defect), the manifestly-honest restatement of `truncated_ladder_commutator`. -/
+theorem truncated_ladder_commutator' (N : ℕ) :
+    lowering N * (lowering N)ᴴ - (lowering N)ᴴ * lowering N = 1 - (N : ℂ) • topProjector N := by
+  rw [truncated_ladder_commutator, topProjector]
+  ext i j
+  by_cases hij : i = j
+  · subst hij
+    simp only [Matrix.sub_apply, Matrix.smul_apply, Matrix.diagonal_apply_eq, Matrix.one_apply_eq,
+      smul_eq_mul]
+    split_ifs <;> ring
+  · simp only [Matrix.sub_apply, Matrix.smul_apply, Matrix.diagonal_apply_ne _ hij,
+      Matrix.one_apply_ne hij, smul_eq_mul, mul_zero, sub_zero]
+
+/-- **★★ D5 — the truncated-Fock ladder commutator in the corner (PHOTON).**  Transporting D3b's
+truncated-oscillator identity through the encoding `ι_V`: the encoded photon ladder operator
+`E := ι_V(a)` (with adjoint `Eᴴ = ι_V(aᴴ)` by `encode_conjTranspose`) satisfies
+
+  `[E, Eᴴ] = E Eᴴ − Eᴴ E = P − N · ι_V(|N-1⟩⟨N-1|)`,
+
+i.e. the **corner unit `P` minus the encoded top-level truncation defect** (`N` times the encoded
+top-level projector).  Contrast the electron's clean `{·,·} = c·P` (`encoded_anticomm`): the photon's
+commutator is NOT `c·P` — the `−N` truncation defect *survives the encoding*, quantified by the encoded
+top-level occupation.  The photon on a finite-microstate corner is necessarily **truncated**, and this
+makes the truncation error explicit, not hidden. -/
+theorem encoded_truncated_ladder_commutator {N : ℕ} {d𝓗 : Type*} [Fintype d𝓗] [DecidableEq d𝓗]
+    (V : Matrix d𝓗 (Fin N) ℂ) (hV : Vᴴ * V = 1) :
+    encode V (lowering N) * (encode V (lowering N))ᴴ
+        - (encode V (lowering N))ᴴ * encode V (lowering N)
+      = codeProjector V - (N : ℂ) • encode V (topProjector N) := by
+  rw [← encode_conjTranspose V (lowering N), ← encode_mul V hV, ← encode_mul V hV, ← encode_sub,
+    truncated_ladder_commutator', encode_sub, encode_one, encode_smul]
+
+/-- **★ D5 — the photon's occupation-cutoff capacity is area-bounded.**  The number-cutoff symmetric Fock
+`Γ_s^{≤N}(ℂ^d)` has dimension `C(d+N, N)`.  If it fits the microstate space (`C(d+N,N) ≤ |𝓗_R|`) under the
+holographic postulate, its **log dimension** — the maximal record capacity of the truncated photon sector —
+obeys the area floor: `log C(d+N,N) ≤ log|𝓗_R| ≤ A/4ℓ_P²`.  The occupation cutoff `N` is explicit: without
+it the bosonic Fock is infinite-dimensional (`no_finiteDim_CCR`) and fits no finite sector.  Complements
+`CodeCapacityBridge.photon_entropy_le_area` (the entropy form). -/
+theorem photon_modes_le_area {d N : ℕ} {𝓗 : Type*} [Fintype 𝓗] {areaTerm : ℝ}
+    [hcap : HolographicCapacityBound 𝓗 areaTerm] (hfit : (d + N).choose N ≤ Fintype.card 𝓗) :
+    Real.log ((d + N).choose N) ≤ areaTerm := by
+  have hpos : 0 < (((d + N).choose N : ℕ) : ℝ) := by
+    exact_mod_cast Nat.choose_pos (Nat.le_add_left N d)
+  calc Real.log (((d + N).choose N : ℕ) : ℝ)
+      ≤ Real.log (Fintype.card 𝓗) := Real.log_le_log hpos (by exact_mod_cast hfit)
+    _ ≤ areaTerm := hcap.bound
 
 end Photon
 

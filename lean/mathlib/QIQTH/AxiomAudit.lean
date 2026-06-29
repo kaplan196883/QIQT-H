@@ -7249,4 +7249,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CornerConstruction.lowering_mul_conjTranspose
 #print axioms QIQTH.CornerConstruction.truncated_ladder_commutator
 
+-- ★★ CORNER CONSTRUCTION (D5) — truncated-Fock ladder commutator in the corner (PHOTON):
+-- encoded_truncated_ladder_commutator — transporting D3b's truncated oscillator through ι_V: the encoded ladder
+-- E = ι_V(a) (adjoint Eᴴ = ι_V(aᴴ)) satisfies [E,Eᴴ] = P − N·ι_V(|N-1⟩⟨N-1|) — the corner unit P MINUS the
+-- encoded top-level truncation defect. Contrast the electron's clean {·,·}=c·P: the photon's −N defect SURVIVES
+-- encoding (the photon on a finite corner is necessarily truncated; the error is quantified, not hidden).
+-- truncated_ladder_commutator' — the projector form [a,aᴴ] = 1 − N·|N-1⟩⟨N-1| on the code. photon_modes_le_area —
+-- the truncated photon's log capacity log C(d+N,N) ≤ log|𝓗_R| ≤ A/4ℓ_P² (occupation cutoff N explicit). Std 3.
+#print axioms QIQTH.CornerConstruction.encode_sub
+#print axioms QIQTH.CornerConstruction.truncated_ladder_commutator'
+#print axioms QIQTH.CornerConstruction.encoded_truncated_ladder_commutator
+#print axioms QIQTH.CornerConstruction.photon_modes_le_area
+
 end QIQTH.AxiomAudit
