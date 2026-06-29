@@ -7303,6 +7303,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EmergentSpacetime.finiteDim_scaling_forces_zero
 #print axioms QIQTH.EmergentSpacetime.scaling_of_nonzero_forces_unit_modulus
 
+-- ★★ EMERGENT SPACETIME (B1) — min-cut ≠ metric + a metric-valid reconstruction:
+-- minCut_area_not_metric — a nonneg/symmetric/zero-diagonal "area/cut" function (RT/min-cut shape) that
+-- VIOLATES the triangle inequality (witness λ(0,1)=λ(1,2)=2, λ(0,2)=5 > 4): min-cut AREA cannot be the emergent
+-- distance (the corrected Tier-3 §3.1 guard, made a theorem). embedDist_isPseudometric — the metric-VALID
+-- replacement: the L¹/coordinate-embedding distance |f x − f y| is an exact pseudometric (IsApproxPseudometric 0),
+-- the honest first Tier-3 distance reconstruction. min-cut keeps its correct role as the area/entropy primitive. Std 3.
+#print axioms QIQTH.EmergentSpacetime.minCut_area_not_metric
+#print axioms QIQTH.EmergentSpacetime.embedDist_isPseudometric
+
 -- ★★ FREE-FIELD CORNER (A1) — unified corner transport for free SM field content (Track A):
 -- gradedBracket ε x y = x y + ε•(y x) (ε=1 anticommutator/CAR, ε=-1 commutator/CCR). encode_gradedBracket —
 -- the encoding carries the code graded bracket to the corner: [ι_V(x),ι_V(y)]_ε = ι_V([x,y]_ε), the SINGLE

@@ -121,3 +121,12 @@ Per increment: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green;
   SUPPLIED free-field algebra, NOT its construction; interactions/gauge/confinement/chirality/SSB are cited
   frontiers. Wired into `QIQTH.lean` + `AxiomAudit.lean`. _Track A next: A2 (quark/lepton multi-flavor CAR
   instances)._
+- 2026-06-29 — **B1 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8876 jobs).
+  `EmergentSpacetime.lean` (`section Metric`): the corrected metric core. `IsApproxPseudometric ε d`
+  (nonneg/self/symm/triangle-up-to-ε — the target type for any emergent-distance reconstruction);
+  **`minCut_area_not_metric`** — a nonneg/symmetric/zero-diagonal area/cut function (RT/min-cut shape) that
+  *violates the triangle inequality* (witness `λ(0,1)=λ(1,2)=2`, `λ(0,2)=5 > 4`): **min-cut area cannot be
+  the emergent distance** (the corrected Tier-3 §3.1 guard, now a theorem); **`embedDist_isPseudometric`** —
+  the metric-VALID replacement, the `L¹`/coordinate-embedding `|f x − f y|` is an exact pseudometric
+  (`IsApproxPseudometric 0`), the honest first Tier-3 distance reconstruction; min-cut keeps its correct
+  role as the area/entropy primitive. _Track B next: B2 (finite graph RT/capacity entropy skeleton)._

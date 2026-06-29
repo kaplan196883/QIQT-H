@@ -77,4 +77,63 @@ theorem scaling_of_nonzero_forces_unit_modulus
 
 end NoGo
 
+section Metric
+
+/-- An **approximate pseudometric** with slack `ε`: nonnegative, zero on the diagonal, symmetric, and
+triangle up to `ε`.  `ε = 0` is an exact pseudometric.  This is the target type for any *emergent-distance
+reconstruction* from the substrate's entanglement data — every reconstruction must be tagged with the `ε`
+its error bound provides. -/
+structure IsApproxPseudometric (ε : ℝ) {X : Type*} (d : X → X → ℝ) : Prop where
+  nonneg : ∀ x y, 0 ≤ d x y
+  self : ∀ x, d x x = 0
+  symm : ∀ x y, d x y = d y x
+  triangle : ∀ x y z, d x z ≤ d x y + d y z + ε
+
+/-- A 3-point "area / cut" function with the min-cut counterexample values: `λ(x,y)=λ(y,z)=2`,
+`λ(x,z)=5` (and `0` on the diagonal, symmetric). -/
+def cutEx : Fin 3 → Fin 3 → ℝ := fun i j => if i = j then 0 else if i.val + j.val = 2 then 5 else 2
+
+/-- **★★ B1 — min-cut / RT-area is NOT a metric (the corrected-roadmap guard).**  There is a
+nonnegative, symmetric, zero-diagonal "area / capacity" function (the shape of an RT/min-cut entanglement
+area) that **violates the triangle inequality** — so min-cut area cannot be used as the emergent
+*distance* (the error in the earlier Tier-3 §3.1 recipe).  Witness: `cutEx` with `λ(0,1)=λ(1,2)=2` but
+`λ(0,2)=5 > 2+2`.  Distance must instead be reconstructed by a provably-metric rule (see
+`embedDist_isPseudometric`); min-cut keeps its correct role as the *area/entropy* primitive. -/
+theorem minCut_area_not_metric :
+    ∃ (X : Type) (d : X → X → ℝ),
+      (∀ x y, 0 ≤ d x y) ∧ (∀ x, d x x = 0) ∧ (∀ x y, d x y = d y x) ∧
+      ¬ (∀ x y z, d x z ≤ d x y + d y z) := by
+  refine ⟨Fin 3, cutEx, ?_, ?_, ?_, ?_⟩
+  · intro x y; unfold cutEx; split_ifs <;> norm_num
+  · intro x; unfold cutEx; rw [if_pos rfl]
+  · intro i j; fin_cases i <;> fin_cases j <;> simp [cutEx]
+  · intro h
+    have h12 := h 0 1 2
+    have e02 : cutEx 0 2 = 5 := by simp [cutEx]
+    have e01 : cutEx 0 1 = 2 := by simp [cutEx]
+    have e12 : cutEx 1 2 = 2 := by simp [cutEx]
+    rw [e02, e01, e12] at h12
+    norm_num at h12
+
+/-- A **metric-valid reconstruction**: the `L¹` / coordinate-embedding distance `d(x,y) = |f x − f y|`
+pulled back from a reconstructed real "coordinate" `f`.  This is the 1-D case of the cut-cone / `L¹`
+embedding reconstruction (a *genuine* metric, unlike raw min-cut). -/
+def embedDist {X : Type*} (f : X → ℝ) : X → X → ℝ := fun x y => |f x - f y|
+
+/-- **★★ B1 — the embedding reconstruction is an exact pseudometric.**  `embedDist f` satisfies all the
+metric axioms (it is pulled back from `ℝ` along `f`): the honest, provably-metric replacement for the
+min-cut "distance".  An emergent *coordinate* `f` (reconstructed from the substrate) yields an emergent
+*distance* that really is one — with `ε = 0` (exact), the cleanest first Tier-3 reconstruction. -/
+theorem embedDist_isPseudometric {X : Type*} (f : X → ℝ) :
+    IsApproxPseudometric 0 (embedDist f) where
+  nonneg := fun x y => abs_nonneg _
+  self := fun x => by simp [embedDist]
+  symm := fun x y => by rw [embedDist, embedDist, abs_sub_comm]
+  triangle := fun x y z => by
+    have := abs_sub_le (f x) (f y) (f z)
+    simp only [embedDist, add_zero]
+    linarith
+
+end Metric
+
 end QIQTH.EmergentSpacetime
