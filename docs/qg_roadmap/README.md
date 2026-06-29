@@ -97,7 +97,9 @@ RT) as evidence for emergence — that is the circularity the recut exists to fo
    approximate continuum QFT limit *without* breaking locality/unitarity/Lorentz beyond bounded error?
    **This de-risks the program more than any further continuum-entropy manipulation.**
 4. **Tier 3** — *metric/causal-structure reconstruction* from the Tier-2 substrate's entanglement
-   data (min-cut → distance), matched against the Tier-1 RT skeleton.
+   data (entanglement → distance via a *metric-valid* rule — shortest-path / cut-cone-L¹ /
+   variation-of-information; **not** raw min-cut, which is the *area* primitive, not a metric — see the
+   §3.1 correction in `TIER_3_EMERGENCE_AND_MATCHING.md`), matched against the Tier-1 RT skeleton.
 5. **Tier 4** — *parameterized-phenomenology bounds paper*: the most general low-energy deformation
    compatible with complete positivity + no-signaling + approximate Lorentz, confronted with
    oscillation data. (Likely outcome: most effects are Planck-suppressed or already constrained —

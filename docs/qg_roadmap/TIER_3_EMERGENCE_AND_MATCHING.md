@@ -18,16 +18,32 @@ geometry on the *output* side.
 ## 3.1 Metric / causal-structure reconstruction  *(category (c); the first emergence deliverable)*
 
 **Claim to establish.** From the Tier-2 substrate's entanglement data, reconstruct a metric and causal
-structure: **entanglement / min-cut → distance** (the "ER=EPR / entanglement builds geometry" mechanism,
+structure: **entanglement → distance** (the "ER=EPR / entanglement builds geometry" mechanism,
 Van Raamsdonk), and operational signalling order → causal/light-cone structure. In a holographic code
 this is the bulk-geometry-from-boundary-entanglement map; QIQT-H's distinctive demand is that it work
 from a **finite** substrate with bounded error.
 
-**First concrete deliverable (highest-value for Tier 3).** In the §2.1 toy substrate, compute the
-emergent distance from mutual information / min-cut and show it satisfies metric axioms (symmetry,
-triangle inequality) up to controlled error, and matches the Tier-1 RT skeleton. Formalize the
-finite-combinatorial core (min-cut metric properties) in Lean; the "this is *the* spacetime metric"
-identification is the physics claim, tagged by error bound.
+> ⚠️ **Correction (2026-06-29, GPT-5.5-pro audit) — min-cut is NOT a metric.** An earlier draft of this
+> section said "min-cut → distance" and listed "min-cut metric properties" as the Lean core. That is
+> **false**: min-cut (equivalently the RT/entanglement *area*) does **not** satisfy the triangle
+> inequality, so it is not a distance. Counterexample: on a weighted graph with `c(x,y)=c(y,z)=1`,
+> `c(x,z)=4`, the pairwise min-cuts are `λ(x,y)=λ(y,z)=2` but `λ(x,z)=5 > 2+2`. Min-cut is an
+> **area / capacity / entropy** primitive, not a distance primitive — it belongs in §3.2 (RT) and in the
+> Tier-2 capacity skeleton, *not* in the metric reconstruction. The distance must be built by a
+> reconstruction rule that **is** a metric: a **shortest-path / graph-geodesic** distance, a **cut-cone /
+> L¹** embedding distance, a **`−log`(similarity)** distance under a multiplicative-triangle hypothesis,
+> or the **variation-of-information** metric `VI(X,Y)=H(X|Y)+H(Y|X)` on record partitions. See the
+> Corrections log at the end of this file.
+
+**First concrete deliverable (highest-value for Tier 3).** In the §2.1 toy substrate, compute an emergent
+**distance** from the entanglement data via a reconstruction rule that is provably a metric (shortest-path
+/ cut-cone-L¹ / `−log`-similarity / variation-of-information), show it satisfies the metric axioms
+(non-negativity, symmetry, triangle inequality) up to controlled error, and match it against the Tier-1
+geometry; keep **min-cut** in its correct role as the *area/entropy* quantity (§3.2 / Tier-2 capacity).
+Formalize in Lean **two** finite-combinatorial cores: (i) the guard theorem `minCut_not_metric` (min-cut
+violates the triangle inequality — the counterexample above), and (ii) the chosen reconstruction's metric
+axioms (`ApproxMetric ε`). The "this is *the* spacetime metric" identification remains a physics claim,
+tagged by error bound.
 
 **Honest status (c):** doing this for a substrate that *also* recovers QFT+GR is the central
 emergent-spacetime problem; doing it in the toy is **(b)** and is the right first step.
@@ -106,12 +122,32 @@ substrate. The honest framing for any external communication: *Tier 3 is the goa
 schedule.* Progress is real and reportable at the toy/matching level (§3.1–3.2); the full tier is the
 open problem.
 
-**First concrete move:** §3.1 — emergent-distance reconstruction in the Tier-2 toy substrate (min-cut /
-mutual-information metric), matched against the Tier-1 RT skeleton, with the finite-combinatorial core
-in Lean.
+**First concrete move:** §3.1 — emergent-distance reconstruction in the Tier-2 toy substrate via a
+**metric-valid** rule (shortest-path / cut-cone-L¹ / `−log`-similarity / variation-of-information — NOT
+raw min-cut, which is the *area* primitive, see the §3.1 correction), matched against the Tier-1 RT
+skeleton, with the finite-combinatorial core in Lean (the `minCut_not_metric` guard + the reconstruction's
+`ApproxMetric` axioms).
 
 **Exit criterion:** the Tier-1 skeleton (metric, area operator, RT, JLMS, Type II, linearized
 Einstein) is **derived from** the Tier-2 substrate with controlled error, a spin-2 graviton with
 universal coupling emerges, the constraint algebra and a diffeomorphism-invariant `μ` are in hand, and
 the nonlinear Einstein equations hold as operator equations in the appropriate limit. **Only when Tier
 2 + Tier 3 are both met is "quantum gravity" an honest word for QIQT-H.**
+
+---
+
+## Corrections log
+
+- **2026-06-29 (GPT-5.5-pro emergent-spacetime scope audit) — §3.1 min-cut ≠ metric.** Earlier drafts of
+  §3.1 (and the §3 "first concrete move" + the Tier-3 line of `README.md`) specified the emergent-distance
+  reconstruction as "min-cut → distance" with "min-cut metric properties" as the Lean core. This was a
+  **mathematical error**: the min-cut (= RT/entanglement *area* across a bipartition) does **not** obey the
+  triangle inequality and is therefore not a distance. Counterexample: weighted graph `c(x,y)=c(y,z)=1`,
+  `c(x,z)=4` gives `λ(x,y)=λ(y,z)=2`, `λ(x,z)=5 > 4`. Nothing built in Lean depended on this (it was a
+  *planned* deliverable, not a proved theorem), so no proof is affected — but the recipe was mis-specified.
+  **Fix:** min-cut is retained in its correct role as the *area/capacity/entropy* primitive (§3.2 RT and the
+  Tier-2 capacity skeleton); the *distance* is now reconstructed by a rule that is provably a metric
+  (shortest-path / cut-cone-L¹ / `−log`-similarity / variation-of-information), and the planned Lean core is
+  split into (i) the guard `minCut_not_metric` and (ii) the reconstruction's `ApproxMetric ε` axioms. This
+  also sharpens the Tier-1/Tier-3 boundary: area-from-entanglement (RT) and distance-from-entanglement
+  (geodesic) are *different* reconstructions and must not be conflated.
