@@ -437,4 +437,89 @@ theorem markov_screening_of_locality {S : Finset V → ℝ} {sig : V → V → P
 
 end MarkovLocality
 
+section Flow
+
+variable {V : Type*} [Fintype V] [DecidableEq V]
+
+/-- The **cut capacity** of a region `C` = the `cut` (area) of `C` for the capacity weights. -/
+noncomputable def cutCapacity (cap : V → V → ℝ) (C : Finset V) : ℝ := cut cap C
+
+/-- Total flow leaving `C`: `∑_{u∈C} ∑_{v∉C} f(u,v)`. -/
+def outAcross (f : V → V → ℝ) (C : Finset V) : ℝ := ∑ u ∈ C, ∑ v ∈ Cᶜ, f u v
+
+/-- Total flow entering `C`: `∑_{u∉C} ∑_{v∈C} f(u,v)`. -/
+def inAcross (f : V → V → ℝ) (C : Finset V) : ℝ := ∑ u ∈ Cᶜ, ∑ v ∈ C, f u v
+
+/-- Net flow across `∂C` = out − in. -/
+def netAcross (f : V → V → ℝ) (C : Finset V) : ℝ := outAcross f C - inAcross f C
+
+/-- The excess (out − in) at a vertex. -/
+def vertexExcess (f : V → V → ℝ) (u : V) : ℝ := (∑ v, f u v) - (∑ v, f v u)
+
+/-- The value of an `s`-`t` flow = the excess at the source. -/
+def flowValue (f : V → V → ℝ) (s : V) : ℝ := vertexExcess f s
+
+/-- An **`s`-`t` flow**: nonnegative, capacity-respecting, conserved away from `s`/`t`. -/
+structure IsSTFlow (cap : V → V → ℝ) (s t : V) (f : V → V → ℝ) : Prop where
+  nonneg : ∀ u v, 0 ≤ f u v
+  capacity : ∀ u v, f u v ≤ cap u v
+  conserve : ∀ v, v ≠ s → v ≠ t → vertexExcess f v = 0
+
+/-- The sum of vertex excesses over a region equals the net flow across its boundary (internal
+flow cancels). -/
+theorem sum_vertexExcess_eq_netAcross (f : V → V → ℝ) (C : Finset V) :
+    (∑ u ∈ C, vertexExcess f u) = netAcross f C := by
+  have hOut : (∑ u ∈ C, ∑ v, f u v) = (∑ u ∈ C, ∑ v ∈ C, f u v) + outAcross f C := by
+    rw [outAcross, ← Finset.sum_add_distrib]
+    exact Finset.sum_congr rfl (fun u _ => (Finset.sum_add_sum_compl C (f u)).symm)
+  have hIn : (∑ u ∈ C, ∑ v, f v u) = (∑ u ∈ C, ∑ v ∈ C, f v u) + inAcross f C := by
+    have e1 : (∑ u ∈ C, ∑ v, f v u)
+        = (∑ u ∈ C, ∑ v ∈ C, f v u) + (∑ u ∈ C, ∑ v ∈ Cᶜ, f v u) := by
+      rw [← Finset.sum_add_distrib]
+      exact Finset.sum_congr rfl (fun u _ => (Finset.sum_add_sum_compl C (fun v => f v u)).symm)
+    have e2 : (∑ u ∈ C, ∑ v ∈ Cᶜ, f v u) = inAcross f C := by
+      rw [inAcross]; exact Finset.sum_comm
+    rw [e1, e2]
+  have hCC : (∑ u ∈ C, ∑ v ∈ C, f v u) = (∑ u ∈ C, ∑ v ∈ C, f u v) := Finset.sum_comm
+  unfold vertexExcess netAcross
+  rw [Finset.sum_sub_distrib, hOut, hIn, hCC]; ring
+
+/-- For an `s`-`t` flow with `s ∈ C`, `t ∉ C`, the flow value equals the net flow across `∂C`
+(conservation kills every interior vertex). -/
+theorem flowValue_eq_netAcross_of_isSTFlow {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (hf : IsSTFlow cap s t f) {C : Finset V} (hs : s ∈ C) (ht : t ∉ C) :
+    flowValue f s = netAcross f C := by
+  unfold flowValue
+  rw [← sum_vertexExcess_eq_netAcross]
+  refine (Finset.sum_eq_single s ?_ ?_).symm
+  · intro u huC hus
+    exact hf.conserve u hus (fun heq => ht (heq ▸ huC))
+  · intro hsC; exact absurd hs hsC
+
+theorem netAcross_le_outAcross_of_nonneg {f : V → V → ℝ} (hf : ∀ u v, 0 ≤ f u v) (C : Finset V) :
+    netAcross f C ≤ outAcross f C := by
+  unfold netAcross
+  have : 0 ≤ inAcross f C :=
+    Finset.sum_nonneg (fun u _ => Finset.sum_nonneg (fun v _ => hf u v))
+  linarith
+
+theorem outAcross_le_cutCapacity {cap f : V → V → ℝ} (hcap : ∀ u v, f u v ≤ cap u v) (C : Finset V) :
+    outAcross f C ≤ cutCapacity cap C := by
+  unfold outAcross cutCapacity cut
+  exact Finset.sum_le_sum (fun u _ => Finset.sum_le_sum (fun v _ => hcap u v))
+
+/-- **★★ C3 — flow weak duality.**  Every `s`-`t` flow value is bounded by every separating cut's
+capacity: `flowValue f s ≤ cutCapacity cap C` for `s ∈ C`, `t ∉ C`.  The *easy half* of max-flow/min-cut
+(net flow across `∂C` ≤ out-flow ≤ cut capacity), purely finite-sum bookkeeping — extends the B2 `cut`
+area.  Honest: this is the **inequality only**; existence of a *maximizing* flow / full max-flow=min-cut
+duality is the cited research-grade frontier (Mathlib has no max-flow theorem). -/
+theorem flow_weak_duality {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (hf : IsSTFlow cap s t f) {C : Finset V} (hs : s ∈ C) (ht : t ∉ C) :
+    flowValue f s ≤ cutCapacity cap C := by
+  rw [flowValue_eq_netAcross_of_isSTFlow hf hs ht]
+  exact le_trans (netAcross_le_outAcross_of_nonneg hf.nonneg C)
+    (outAcross_le_cutCapacity hf.capacity C)
+
+end Flow
+
 end QIQTH.EmergentSpacetime

@@ -7365,6 +7365,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EmergentSpacetime.cmi_nonneg_of_SSA
 #print axioms QIQTH.EmergentSpacetime.markov_screening_of_locality
 
+-- ★★ EMERGENT SPACETIME (Track C, C3) — flow weak duality (easy half of max-flow/min-cut):
+-- IsSTFlow (nonneg, capacity-respecting, conserved away from s/t); flowValue f s = vertexExcess f s.
+-- sum_vertexExcess_eq_netAcross — ∑_{u∈C} excess = net flow across ∂C (internal flow cancels).
+-- flow_weak_duality — flowValue f s ≤ cutCapacity cap C for s∈C, t∉C (net flow ≤ out-flow ≤ cut capacity).
+-- Extends the B2 cut area. INEQUALITY only; full max-flow=min-cut duality is the cited research-grade frontier
+-- (Mathlib has no max-flow theorem). Std 3.
+#print axioms QIQTH.EmergentSpacetime.sum_vertexExcess_eq_netAcross
+#print axioms QIQTH.EmergentSpacetime.flow_weak_duality
+
 -- ★★ FREE-FIELD CORNER (A1) — unified corner transport for free SM field content (Track A):
 -- gradedBracket ε x y = x y + ε•(y x) (ε=1 anticommutator/CAR, ε=-1 commutator/CCR). encode_gradedBracket —
 -- the encoding carries the code graded bracket to the corner: [ι_V(x),ι_V(y)]_ε = ι_V([x,y]_ε), the SINGLE

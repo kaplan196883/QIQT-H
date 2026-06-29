@@ -107,3 +107,11 @@ ONE commit on `main` (Co-Authored-By trailer); push via schannel; update §3; re
   graph-separating `B` screens `A` from `C` (`0 ≤ I(A:C|B) ≤ δ`), i.e. a separator in the *supplied* signalling
   graph is an approximate Markov blanket. Honest: reconstructs proto-structure (locality/patch-gluing), NOT a
   metric or manifold; `sig` and SSA are supplied. Wired into `AxiomAudit.lean`. _Next: C3 (flow weak duality)._
+- 2026-06-30 — **C3 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8876 jobs). `EmergentSpacetime.lean`
+  (`section Flow`): the easy half of max-flow/min-cut, extending the B2 `cut`. `cutCapacity = cut`,
+  `outAcross`/`inAcross`/`netAcross`, `vertexExcess`, `flowValue`, `IsSTFlow` (nonneg + capacity + conservation);
+  **`sum_vertexExcess_eq_netAcross`** (∑_{u∈C} excess = net flow across ∂C — internal flow cancels by
+  `Finset.sum_comm`); `flowValue_eq_netAcross_of_isSTFlow` (conservation kills interior vertices); capstone
+  **`flow_weak_duality`** — `flowValue f s ≤ cutCapacity cap C` for `s∈C, t∉C` (net ≤ out ≤ cut capacity). Honest:
+  the **inequality only**; full max-flow=min-cut duality is the cited research-grade frontier (no Mathlib
+  max-flow). Wired into `AxiomAudit.lean`. _Next: C7 (abstract finite first-law ΔS ≤ Δ⟨K⟩)._
