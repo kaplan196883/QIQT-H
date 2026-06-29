@@ -98,3 +98,12 @@ ONE commit on `main` (Co-Authored-By trailer); push via schannel; update §3; re
   min-cut area is never a distance, but a separating family of weighted cut/entanglement probes reconstructs a
   provable metric. Honest: weights/probes from SUPPLIED entanglement data (else circular); a finite
   proto-distance, NOT the physical metric. Wired into `AxiomAudit.lean`. _Next: C4 (CMI≥0 + Markov screening)._
+- 2026-06-30 — **C4 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8876 jobs). `EmergentSpacetime.lean`
+  (`section MarkovLocality`): locality/connectivity from conditional independence. `StrongSubadditive S`
+  (submodularity, a *hypothesis* — no quantum-SSA axiom); `cmi S A B C = S(A∪B)+S(B∪C)−S(B)−S(A∪B∪C)`;
+  **`cmi_nonneg_of_SSA`** — `I(A:C|B) ≥ 0` for disjoint `A,C` (via `union_inter_union_eq_middle_of_disjoint`:
+  `(A∪B)∩(B∪C)=B`); `AvoidingRel`/`GraphSeparatedBy` (separation by chains avoiding `B`, riding
+  `Relation.ReflTransGen`); `IsMarkovScreen`/`MarkovLocality`; capstone **`markov_screening_of_locality`** — a
+  graph-separating `B` screens `A` from `C` (`0 ≤ I(A:C|B) ≤ δ`), i.e. a separator in the *supplied* signalling
+  graph is an approximate Markov blanket. Honest: reconstructs proto-structure (locality/patch-gluing), NOT a
+  metric or manifold; `sig` and SSA are supplied. Wired into `AxiomAudit.lean`. _Next: C3 (flow weak duality)._

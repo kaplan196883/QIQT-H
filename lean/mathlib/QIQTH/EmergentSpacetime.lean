@@ -365,4 +365,76 @@ theorem weightedCutDist_singleton_eq_embedDist {X : Type*} (f : X → ℝ) :
 
 end CroftonMetric
 
+section MarkovLocality
+
+variable {V : Type*} [DecidableEq V]
+
+/-- **Strong subadditivity / submodularity** of an entropy functional `S` on finite regions:
+`S(A∪B) + S(A∩B) ≤ S(A) + S(B)`.  Supplied as a *hypothesis* (no quantum-SSA axiom is asserted). -/
+def StrongSubadditive (S : Finset V → ℝ) : Prop :=
+  ∀ A B : Finset V, S (A ∪ B) + S (A ∩ B) ≤ S A + S B
+
+/-- The **conditional mutual information** `I(A:C|B) = S(A∪B) + S(B∪C) − S(B) − S(A∪B∪C)`. -/
+def cmi (S : Finset V → ℝ) (A B C : Finset V) : ℝ :=
+  S (A ∪ B) + S (B ∪ C) - S B - S (A ∪ B ∪ C)
+
+/-- For disjoint `A, C`, the overlap of `A∪B` and `B∪C` is exactly `B`. -/
+theorem union_inter_union_eq_middle_of_disjoint {A B C : Finset V} (hAC : Disjoint A C) :
+    (A ∪ B) ∩ (B ∪ C) = B := by
+  ext x
+  simp only [Finset.mem_inter, Finset.mem_union]
+  constructor
+  · rintro ⟨hAB, hBC⟩
+    rcases hAB with hA | hB
+    · rcases hBC with hB | hC
+      · exact hB
+      · exact absurd hC (Finset.disjoint_left.mp hAC hA)
+    · exact hB
+  · intro hB; exact ⟨Or.inr hB, Or.inl hB⟩
+
+/-- **★★ C4 — conditional mutual information is nonnegative** (strong subadditivity).  For disjoint
+`A, C`, `I(A:C|B) ≥ 0`.  This is the finite SSA inequality, derived from the `StrongSubadditive` hypothesis
+on `S` — no quantum-information axiom. -/
+theorem cmi_nonneg_of_SSA {S : Finset V → ℝ} (hSSA : StrongSubadditive S)
+    {A B C : Finset V} (hAC : Disjoint A C) : 0 ≤ cmi S A B C := by
+  unfold cmi
+  have h := hSSA (A ∪ B) (B ∪ C)
+  rw [union_inter_union_eq_middle_of_disjoint hAC] at h
+  have hunion : (A ∪ B) ∪ (B ∪ C) = A ∪ B ∪ C := by ext x; simp only [Finset.mem_union]; tauto
+  rw [hunion] at h
+  linarith
+
+/-- The one-step signalling relation **avoiding** a region `B` (neither endpoint in `B`). -/
+def AvoidingRel (sig : V → V → Prop) (B : Finset V) : V → V → Prop :=
+  fun x y => x ∉ B ∧ y ∉ B ∧ sig x y
+
+/-- `B` **graph-separates** `A` from `C`: no point of `A` reaches a point of `C` by a chain that avoids
+`B` (a Markov blanket / screening surface). -/
+def GraphSeparatedBy (sig : V → V → Prop) (B A C : Finset V) : Prop :=
+  ∀ ⦃a c : V⦄, a ∈ A → c ∈ C → ¬ Relation.ReflTransGen (AvoidingRel sig B) a c
+
+/-- `B` **Markov-screens** `A` from `C` to accuracy `δ`: `0 ≤ I(A:C|B) ≤ δ`. -/
+def IsMarkovScreen (S : Finset V → ℝ) (δ : ℝ) (A B C : Finset V) : Prop :=
+  0 ≤ cmi S A B C ∧ cmi S A B C ≤ δ
+
+/-- **Markov locality** of `(S, sig)` at accuracy `δ`: whenever `B` graph-separates `A` from `C`, the
+conditional mutual information is `≤ δ` (small CMI ≈ approximate recoverability — the entanglement
+locality/connectivity diagnostic). A *supplied* relation `sig`. -/
+def MarkovLocality (S : Finset V → ℝ) (sig : V → V → Prop) (δ : ℝ) : Prop :=
+  ∀ A B C : Finset V, Disjoint A B → Disjoint B C → Disjoint A C →
+    GraphSeparatedBy sig B A C → cmi S A B C ≤ δ
+
+/-- **★★ C4 — Markov screening from locality.**  If `S` is strongly subadditive and `(S, sig)` is
+Markov-local at `δ`, then any graph-separating region `B` screens `A` from `C`: `0 ≤ I(A:C|B) ≤ δ`.  So a
+separator in the (supplied) signalling graph is an (approximate) Markov blanket — the finite locality /
+connectivity certificate.  **Honest scope:** this reconstructs *proto-structure* (locality, patch-gluing),
+NOT a metric or a manifold; the relation `sig` and the SSA property are supplied. -/
+theorem markov_screening_of_locality {S : Finset V → ℝ} {sig : V → V → Prop} {δ : ℝ}
+    (hSSA : StrongSubadditive S) (hLoc : MarkovLocality S sig δ)
+    {A B C : Finset V} (hAB : Disjoint A B) (hBC : Disjoint B C) (hAC : Disjoint A C)
+    (hSep : GraphSeparatedBy sig B A C) : IsMarkovScreen S δ A B C :=
+  ⟨cmi_nonneg_of_SSA hSSA hAC, hLoc A B C hAB hBC hAC hSep⟩
+
+end MarkovLocality
+
 end QIQTH.EmergentSpacetime

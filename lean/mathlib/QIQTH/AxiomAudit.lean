@@ -7356,6 +7356,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EmergentSpacetime.weightedCutDist_isFiniteMetric_iff
 #print axioms QIQTH.EmergentSpacetime.weightedCutDist_singleton_eq_embedDist
 
+-- ★★ EMERGENT SPACETIME (Track C, C4) — conditional mutual information + Markov-screening locality:
+-- cmi S A B C = S(A∪B)+S(B∪C)−S(B)−S(A∪B∪C). cmi_nonneg_of_SSA — I(A:C|B) ≥ 0 for disjoint A,C, from the
+-- StrongSubadditive HYPOTHESIS on S (finite SSA; NO quantum-information axiom). markov_screening_of_locality —
+-- if S is SSA and (S,sig) is Markov-local at δ, a graph-separating region B screens A from C: 0 ≤ I(A:C|B) ≤ δ
+-- (a separator in the SUPPLIED signalling graph is an approximate Markov blanket). Reconstructs proto-structure
+-- (locality/connectivity), NOT a metric/manifold; sig and SSA are supplied. Std 3.
+#print axioms QIQTH.EmergentSpacetime.cmi_nonneg_of_SSA
+#print axioms QIQTH.EmergentSpacetime.markov_screening_of_locality
+
 -- ★★ FREE-FIELD CORNER (A1) — unified corner transport for free SM field content (Track A):
 -- gradedBracket ε x y = x y + ε•(y x) (ε=1 anticommutator/CAR, ε=-1 commutator/CCR). encode_gradedBracket —
 -- the encoding carries the code graded bracket to the corner: [ι_V(x),ι_V(y)]_ε = ι_V([x,y]_ε), the SINGLE
