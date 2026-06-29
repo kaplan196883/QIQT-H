@@ -733,6 +733,19 @@ lacks.**  Remaining for the full 1c: instantiate this on the specific lifted bul
 `A_edge`/`K_bulk` C₀ groups into `stoneGen_prod_isSelfAdjoint`).  Wired into `QIQTH.lean`+`AxiomAudit.lean`;
 standard-3; budget 0.
 
+### Increment 1c COMPLETE ✅✅✅ — the dressed JLMS modular Hamiltonian `K̃ = K_bulk + A_edge` is SELF-ADJOINT (2026-06-29)
+**`QIQTH/CrossedProductModularFlow.lean` — `dressedModularGen_isSelfAdjoint`** (axiom-free, standard-3, budget 0).
+`fiberModFlow_stronglyContinuous` closed the last hypothesis (`t↦Δ̂^{it}ξ` continuous in `Lp`, via
+`tendsto_lintegral_filter_of_dominated_convergence'` with bound `(2‖ξ‖ₑ)²` + pointwise `→0` from
+`modUnitary_stronglyContinuous` + `ENNReal.continuous_rpow_const`), so all FIVE C₀-group hypotheses of the
+fiberwise bulk modular flow `Δ̂^{it}` hold.  Then `stoneGen_prod_isSelfAdjoint (fiberModFlow S) clockTransl
+(Δ̂'s 5 hyps) (λ's 5 hyps) (fiberModFlow_comm_clockTransl) ⟹` **`IsSelfAdjoint (stoneGen (fun t => fiberModFlow
+S t ∘L clockTransl t))`** = `K̃ = K_bulk + A_edge` self-adjoint.  The dressed JLMS modular Hamiltonian is a
+**genuine self-adjoint unbounded operator** — the sum of two commuting self-adjoint operators, the object the
+**dual-weight trace (Phase 5)** acts on.  **Increment 1c done; Phase 5 (Type II trace) is now the sole remaining
+analytic frontier of the wall.**  Wired into `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.  (Value of `G`
+never claimed.)
+
 ### Increment 1c INSTANTIATION — the fiberwise bulk modular flow `Δ̂^{it}` on `L²(ℝ;H)` ✅ (structural bricks; 2026-06-29)
 **`QIQTH/CrossedProductModularFlow.lean` — `fiberModFlow`.**  The second summand's group: `Δ̂^{it} :=
 (modUnitary S t).compLpL 2 volume` — postcompose each `L²(ℝ;H)` fiber with the one-particle modular flow

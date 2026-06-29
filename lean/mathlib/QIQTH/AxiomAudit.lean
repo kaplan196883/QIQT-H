@@ -5089,12 +5089,21 @@ namespace QIQTH.AxiomAudit
 -- clockTransl: Δ̂^{it} COMMUTES with the clock group λ_s (fiberwise postcomposition vs measure-preserving base-shift act
 -- on different slots) — the STRONG-COMMUTATIVITY hypothesis stoneGen_prod_isSelfAdjoint needs (K_bulk and A_edge commute).
 -- fiberModFlow_inner: Δ̂^{it} preserves the L²(ℝ;H) inner product (UNITARITY, via the fiber integral ⟪f,g⟫=∫⟪f s,g s⟫ +
--- one-particle modUnitary_inner). So Δ̂ now has 4/5 C₀-group hyps (zero, add, inner, contraction) + commutativity. The
--- ONLY remaining hyp to assemble full Increment 1c (K̃=K_bulk+A_edge self-adjoint via stoneGen_prod_isSelfAdjoint) is
--- Δ̂'s STRONG CONTINUITY — the DCT-on-Lp step (infinite-measure domination, the carried analytic frontier). Standard 3.
+-- one-particle modUnitary_inner). fiberModFlow_stronglyContinuous: t↦Δ̂^{it}ξ continuous in Lp — the DCT-on-Lp step
+-- (infinite-measure domination by (2‖ξ‖)², pointwise → 0 via modUnitary strong continuity), the last C₀-group hyp.
 #print axioms QIQTH.StandardSubspaceModular.fiberModFlow_add
 #print axioms QIQTH.StandardSubspaceModular.fiberModFlow_inner
 #print axioms QIQTH.StandardSubspaceModular.fiberModFlow_comm_clockTransl
+#print axioms QIQTH.StandardSubspaceModular.fiberModFlow_stronglyContinuous
+-- ★★★★ P4 WALL — INCREMENT 1c COMPLETE: the DRESSED JLMS MODULAR HAMILTONIAN K̃ = K_bulk + A_edge IS SELF-ADJOINT.
+-- dressedModularGen_isSelfAdjoint: IsSelfAdjoint (stoneGen (fun t => fiberModFlow S t ∘L clockTransl t)). K̃ is the Stone
+-- generator of the product flow V_t = Δ̂^{it}∘λ_t = e^{itK̃} of the two COMMUTING C₀ unitary groups (fiberwise bulk
+-- modular Δ̂^{it}=K_bulk + clock λ_t=A_edge); stoneGen_prod_isSelfAdjoint applied to fiberModFlow + clockTransl with all
+-- five hyps each (Δ̂: zero/add/inner/norm/SC; λ: clockTransl_*) + commutativity (fiberModFlow_comm_clockTransl). So the
+-- JLMS dressed modular Hamiltonian is a GENUINE self-adjoint unbounded operator — the sum of two commuting self-adjoint
+-- operators (K_bulk + A_edge), the operator the dual-weight trace (Phase 5) acts on. Axiom-free (standard 3). The value
+-- of G / ⟨A_edge⟩=A/4ℓ_P² is never claimed.
+#print axioms QIQTH.StandardSubspaceModular.dressedModularGen_isSelfAdjoint
 #print axioms QIQTH.Spectral.Multiplication.translationCLM_norm_le
 #print axioms QIQTH.Spectral.Multiplication.translationCLM_continuous
 #print axioms QIQTH.Spectral.Multiplication.instNontrivialLp2

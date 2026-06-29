@@ -17,19 +17,27 @@ Delivered here (axiom-free): the group law `Δ̂^{i(s+t)} = Δ̂^{is} ∘ Δ̂^{
 group `λ_s`** (fiberwise postcomposition commutes with the measure-preserving base-shift).  So the two summands
 of `K̃` strongly commute, the hypothesis `stoneGen_prod_isSelfAdjoint` consumes.
 
-HONEST scope: the two remaining C₀-group hypotheses of `Δ̂^{it}` — inner-product preservation (unitarity on
-`L²(ℝ;H)`, via the fiber integral) and strong continuity (via dominated convergence on `Lp`) — are the labelled
-analytic steps to *assemble* the full dressed-generator self-adjointness (`stoneGen (Δ̂^{i·} ∘ λ_·)` self-adjoint)
-from `stoneGen_prod_isSelfAdjoint`.  Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`).  No `sorry`.
+**INCREMENT 1c COMPLETE:** all five C₀-group hypotheses of `Δ̂^{it}` are proved — group law, `Δ̂^{i0}=1`,
+inner-product preservation (`fiberModFlow_inner`, `L²(ℝ;H)` unitarity), contraction, and **strong continuity**
+(`fiberModFlow_stronglyContinuous`, via dominated convergence on the infinite measure `volume`) — so
+`stoneGen_prod_isSelfAdjoint` assembles **`dressedModularGen_isSelfAdjoint`**: the dressed JLMS modular
+Hamiltonian `K̃ = K_bulk + A_edge` (`= stoneGen (Δ̂^{i·} ∘ λ_·)`) is a **genuine self-adjoint unbounded operator**.
+Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`).  No `sorry`.  (The value of `G` /
+`⟨A_edge⟩ = A/4ℓ_P²` is never claimed.)
 -/
 import QIQTH.StandardSubspaceModularFlow
 import QIQTH.CrossedProductTranslation
+import QIQTH.CrossedProductGenerator
+import QIQTH.Spectral.StoneProduct
 import Mathlib.MeasureTheory.Function.LpSpace.Basic
 import Mathlib.MeasureTheory.Function.L2Space
+import Mathlib.MeasureTheory.Function.LpSpace.Complete
+import Mathlib.MeasureTheory.Integral.Lebesgue.DominatedConvergence
 
 namespace QIQTH.StandardSubspaceModular
 
-open MeasureTheory
+open MeasureTheory Filter Topology
+open scoped ENNReal NNReal
 
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 
@@ -116,5 +124,86 @@ theorem fiberModFlow_comm_clockTransl (S : StandardSubspace H) (t s : ℝ) :
     clockTransl_coeFn s (fiberModFlow S t ξ), h3'] with u e1 e2 e3 e4
   -- LHS: (Δ̂ (λ_s ξ))(u) = Δ^{it}((λ_s ξ)(u)) = Δ^{it}(ξ(u+s));  RHS: (λ_s (Δ̂ ξ))(u) = Δ^{it}(ξ(u+s))
   rw [e1, e2, e3, e4]
+
+/-- **★ The fiberwise modular flow is strongly continuous** `t ↦ Δ̂^{it} ξ` in `L²(ℝ; H)` — the last
+`C₀`-unitary-group hypothesis.  `‖Δ̂^{it}ξ − Δ̂^{it₀}ξ‖²_{L²} = ∫ ‖Δ^{it}(ξ s) − Δ^{it₀}(ξ s)‖² ds → 0` by
+dominated convergence on the (infinite) measure `volume`: the integrand `→ 0` pointwise (the one-particle
+modular flow `modUnitary` is strongly continuous) and is dominated by `(2‖ξ s‖)²`, integrable as `ξ ∈ L²`. -/
+theorem fiberModFlow_stronglyContinuous (S : StandardSubspace H) (ξ : Lp H 2 (volume : Measure ℝ)) :
+    Continuous (fun t => fiberModFlow S t ξ) := by
+  refine continuous_iff_continuousAt.mpr fun t₀ => ?_
+  rw [ContinuousAt, Lp.tendsto_Lp_iff_tendsto_eLpNorm']
+  have hcongr : (fun t => eLpNorm (⇑(fiberModFlow S t ξ) - ⇑(fiberModFlow S t₀ ξ)) 2 volume)
+      = fun t => eLpNorm (fun s => modUnitary S t (ξ s) - modUnitary S t₀ (ξ s)) 2 volume := by
+    funext t
+    refine eLpNorm_congr_ae ?_
+    filter_upwards [fiberModFlow_coeFn S t ξ, fiberModFlow_coeFn S t₀ ξ] with s e1 e2
+    simp only [Pi.sub_apply, e1, e2]
+  rw [hcongr]
+  have hξ : MemLp (fun s => ξ s) 2 volume := Lp.memLp ξ
+  set F : ℝ → ℝ → ℝ≥0∞ :=
+    fun t s => ‖modUnitary S t (ξ s) - modUnitary S t₀ (ξ s)‖ₑ ^ (2 : ℝ) with hF
+  have hlint : Tendsto (fun t => ∫⁻ s, F t s ∂volume) (𝓝 t₀) (𝓝 0) := by
+    have hzero : (0 : ℝ≥0∞) = ∫⁻ (_s : ℝ), (0 : ℝ≥0∞) ∂volume := by simp
+    rw [hzero]
+    refine tendsto_lintegral_filter_of_dominated_convergence'
+      (fun s => (2 * ‖ξ s‖ₑ) ^ (2 : ℝ)) ?_ ?_ ?_ ?_
+    · filter_upwards with t
+      have hm : AEStronglyMeasurable (fun s => modUnitary S t (ξ s) - modUnitary S t₀ (ξ s)) volume :=
+        ((modUnitary S t).continuous.comp_aestronglyMeasurable hξ.aestronglyMeasurable).sub
+          ((modUnitary S t₀).continuous.comp_aestronglyMeasurable hξ.aestronglyMeasurable)
+      exact ENNReal.continuous_rpow_const.measurable.comp_aemeasurable hm.enorm
+    · filter_upwards with t
+      filter_upwards with s
+      have htri : ‖modUnitary S t (ξ s) - modUnitary S t₀ (ξ s)‖ₑ ≤ 2 * ‖ξ s‖ₑ := by
+        refine le_trans enorm_sub_le ?_
+        rw [two_mul]
+        gcongr <;> rw [← enorm_norm, modUnitary_norm, enorm_norm]
+      exact ENNReal.rpow_le_rpow htri (by norm_num)
+    · have heq : ∫⁻ s, (2 * ‖ξ s‖ₑ) ^ (2 : ℝ) ∂volume
+          = (2:ℝ≥0∞) ^ (2:ℝ) * ∫⁻ s, ‖ξ s‖ₑ ^ (2:ℝ) ∂volume := by
+        rw [← lintegral_const_mul' _ _ (by simp)]
+        refine lintegral_congr fun s => ?_
+        rw [ENNReal.mul_rpow_of_nonneg _ _ (by norm_num)]
+      rw [heq]
+      have hfin : ∫⁻ s, ‖ξ s‖ₑ ^ (2:ℝ) ∂volume ≠ ∞ :=
+        (lintegral_rpow_enorm_lt_top_of_eLpNorm_lt_top (by norm_num) (by norm_num)
+          hξ.eLpNorm_lt_top).ne
+      exact ENNReal.mul_ne_top (by simp) hfin
+    · filter_upwards with s
+      have h0 : Tendsto (fun t => modUnitary S t (ξ s) - modUnitary S t₀ (ξ s)) (𝓝 t₀) (𝓝 0) := by
+        have hc := (modUnitary_stronglyContinuous S (ξ s)).continuousAt (x := t₀)
+        simpa using hc.sub_const (modUnitary S t₀ (ξ s))
+      have he : Tendsto (fun t => ‖modUnitary S t (ξ s) - modUnitary S t₀ (ξ s)‖ₑ) (𝓝 t₀) (𝓝 0) := by
+        simpa using (continuous_enorm.continuousAt.tendsto.comp h0)
+      have h2 := (ENNReal.continuous_rpow_const (y := (2:ℝ))).continuousAt.tendsto.comp he
+      simp only [hF]
+      rwa [ENNReal.zero_rpow_of_pos (by norm_num)] at h2
+  have hconv :
+      (fun t => eLpNorm (fun s => modUnitary S t (ξ s) - modUnitary S t₀ (ξ s)) 2 volume)
+        = fun t => (∫⁻ s, F t s ∂volume) ^ (1 / (2:ℝ)) := by
+    funext t
+    rw [eLpNorm_eq_eLpNorm' (by norm_num) (by norm_num), eLpNorm'_eq_lintegral_enorm]
+    simp only [hF, ENNReal.toReal_ofNat]
+  rw [hconv]
+  have hpow : Tendsto (fun t => (∫⁻ s, F t s ∂volume) ^ (1 / (2:ℝ))) (𝓝 t₀)
+      (𝓝 ((0 : ℝ≥0∞) ^ (1 / (2:ℝ)))) :=
+    (ENNReal.continuous_rpow_const).continuousAt.tendsto.comp hlint
+  rwa [ENNReal.zero_rpow_of_pos (by norm_num)] at hpow
+
+/-- **★★★ The dressed JLMS modular Hamiltonian `K̃ = K_bulk + A_edge` is self-adjoint.**  `K̃` is the Stone
+generator of the product flow `V_t = Δ̂^{it} ∘ λ_t = e^{it K̃}` of the two **commuting** unitary groups (the
+fiberwise bulk modular `Δ̂^{it}`, generator `K_bulk`, and the clock `λ_t`, generator `X = A_edge`).  Since each
+is a strongly-continuous unitary group and they commute (`fiberModFlow_comm_clockTransl`),
+`stoneGen_prod_isSelfAdjoint` gives `K̃ = stoneGen V` self-adjoint — **the crossed-product / P4-wall Increment 1c
+complete**, axiom-free.  (`⟨A_edge⟩ = A/4ℓ_P²` / the value of `G` is never claimed.) -/
+theorem dressedModularGen_isSelfAdjoint (S : StandardSubspace H) :
+    IsSelfAdjoint (Spectral.stoneGen (fun t => fiberModFlow S t ∘L clockTransl t)) :=
+  Spectral.stoneGen_prod_isSelfAdjoint (fiberModFlow S) clockTransl
+    (fiberModFlow_add S) (fiberModFlow_zero S) (fiberModFlow_inner S) (fiberModFlow_norm_le S)
+    (fiberModFlow_stronglyContinuous S)
+    clockTransl_add clockTransl_zero clockTransl_inner
+    (fun t y => le_of_eq (clockTransl_norm t y)) clockTransl_stronglyContinuous
+    (fun s t => fiberModFlow_comm_clockTransl S s t)
 
 end QIQTH.StandardSubspaceModular
