@@ -196,4 +196,43 @@ theorem born_readout_entropy_le_area {d𝓗 : Type*} [Fintype d𝓗] {K : Type*}
 
 end Records
 
+section Photon
+
+open Matrix
+
+/-- **★★ D3 — the finite Weyl obstruction (operational CCR no-go).**  Sharpens `no_finiteDim_CCR` from
+the additive commutator to the **multiplicative Weyl form**.  If two *invertible* operators `U, V` on a
+finite-dimensional space satisfy a Weyl/`q`-commutation `U V = q · V U`, then the phase is a root of
+unity: `q^(dim) = 1`.  (Take determinants: `det U · det V = q^{dim} · det V · det U`, and cancel the
+nonzero `det U · det V`.)  So the **continuous** Weyl relations of a bosonic mode — which require an
+*irrational* / generic phase `q = e^{iθ}` with `θ ∉ 2πℚ`, hence `q^n ≠ 1` for all `n` — **cannot** be
+realized in any finite-microstate sector.  This is the multiplicative companion to the photon's
+additive-CCR impossibility: the bosonic oscillator is necessarily *truncated* in finite capacity. -/
+theorem finite_weyl_qpow_eq_one {n : Type*} [Fintype n] [DecidableEq n]
+    (U V : Matrix n n ℂ) (hU : U.det ≠ 0) (hV : V.det ≠ 0) (q : ℂ)
+    (h : U * V = q • (V * U)) : q ^ (Fintype.card n) = 1 := by
+  have hdet : U.det * V.det = q ^ (Fintype.card n) * (V.det * U.det) := by
+    have hc := congrArg Matrix.det h
+    rwa [Matrix.det_mul, Matrix.det_smul, Matrix.det_mul] at hc
+  rw [mul_comm V.det U.det] at hdet
+  have hne : U.det * V.det ≠ 0 := mul_ne_zero hU hV
+  have hcancel : q ^ (Fintype.card n) * (U.det * V.det) = 1 * (U.det * V.det) := by
+    rw [one_mul]; exact hdet.symm
+  exact mul_right_cancel₀ hne hcancel
+
+/- **D3b — truncated-oscillator commutator (CHECKPOINTED FRONTIER, not yet built).**
+The remaining half of D3 is the explicit `N`-level oscillator identity
+  `[a, aᴴ] = 1 - N · |N-1⟩⟨N-1|`,  with corollary  `Tr(ρ [a, aᴴ]) = 1 - N · ρ_{top}`,
+for the truncated lowering operator `a eₖ = √k e_{k-1}` on `ℂ^N`.  This is the CONCRETE form of the
+photon's finite-capacity truncation: the bosonic commutator equals the identity EXCEPT for a `-N` defect
+localized at the top level, quantifying the truncation error by the top-level occupation `ρ_{top}`.
+
+It is honest mathematics (verified on paper: `aᴴa = diag(0,…,N-1)`, `a aᴴ = diag(1,…,N-1,0)`, so the
+commutator is `diag(1,…,1,-(N-1)) = 1 - N|N-1⟩⟨N-1|`), but its Lean proof is an entry-level matrix
+computation over `Fin N` with `√`-cast bookkeeping and successor-form index sums — a self-contained
+several-step increment, deferred to the next loop fire.  `finite_weyl_qpow_eq_one` (above) already
+delivers the D3 no-go content axiom-free; this only makes the truncation defect explicit. -/
+
+end Photon
+
 end QIQTH.CornerConstruction

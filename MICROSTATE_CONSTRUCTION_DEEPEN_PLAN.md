@@ -222,3 +222,18 @@ Cannot remove P5, but can isolate it cleanly.
   So M7's "log #records ≤ area" is sharpened to "the *information* in the Born-weighted records ≤ area."
   Honest scope unchanged: about the field's records; does not remove P5 or the capacity postulate. Wired
   into `AxiomAudit.lean`. _Next: D3 (finite-Weyl/CCR no-go + truncated-oscillator commutator)._
+- 2026-06-29 — **D3a DONE** (axiom-free standard-3, budget 0, full QIQTH green 8874 jobs). The **finite
+  Weyl obstruction** `finite_weyl_qpow_eq_one` in `CornerConstruction.lean` (`section Photon`): invertible
+  `U, V` on a finite-dim space with a Weyl `q`-commutation `U V = q·(V U)` force `q^(dim) = 1` (determinant
+  argument: `det U det V = q^dim det V det U`, cancel the nonzero product). So the *continuous* Weyl
+  relations of a bosonic mode (generic phase `q = e^{iθ}`, `θ ∉ 2πℚ` ⟹ `q^n ≠ 1 ∀n`) cannot be realized in
+  any finite-microstate sector — the **multiplicative companion** to `no_finiteDim_CCR`'s additive
+  impossibility: the photon is necessarily truncated in finite capacity. Wired into `AxiomAudit.lean`.
+- 2026-06-29 — **D3b CHECKPOINTED (frontier, not yet built).** The explicit truncated-oscillator commutator
+  `[a, aᴴ] = 1 − N·|N-1⟩⟨N-1|` (corollary `Tr(ρ[a,aᴴ]) = 1 − N·ρ_top`) for `a eₖ = √k e_{k-1}` on `ℂ^N`.
+  Honest mathematics (paper-verified: `aᴴa = diag(0,…,N-1)`, `a aᴴ = diag(1,…,N-1,0)`), but its Lean proof
+  is an entry-level matrix computation over `Fin N` with `√`-cast bookkeeping and *successor-form* index
+  sums (`[a, aᴴ]` defect localized at the top level) — a self-contained several-step increment, recorded
+  in `CornerConstruction.lean` as a `/- ... -/` frontier note and deferred to the next loop fire.
+  `finite_weyl_qpow_eq_one` already delivers the D3 no-go content; D3b only makes the defect explicit.
+  _Next: D3b (truncated-oscillator commutator), then D4 (CAR operators in the corner — electron)._

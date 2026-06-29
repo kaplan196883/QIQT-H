@@ -7216,4 +7216,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CornerConstruction.sum_uniform_outcomeMarginal
 #print axioms QIQTH.CornerConstruction.born_readout_entropy_le_area
 
+-- ★★ CORNER CONSTRUCTION (D3a) — the finite Weyl obstruction (operational CCR no-go, PHOTON):
+-- finite_weyl_qpow_eq_one — invertible U,V on a finite-dim space with a Weyl q-commutation U V = q•(V U)
+-- force q^(dim) = 1 (determinant argument). So the CONTINUOUS Weyl relations of a bosonic mode (generic
+-- phase q = e^{iθ}, θ ∉ 2πℚ ⟹ q^n ≠ 1 ∀n) cannot be realized in finite capacity — the multiplicative
+-- companion to no_finiteDim_CCR's additive impossibility; the photon is necessarily truncated. Std 3.
+-- (D3b — the explicit truncated-oscillator commutator [a,aᴴ]=1−N|top⟩⟨top| — is a checkpointed frontier,
+-- honest matrix-entry algebra over Fin N, deferred to the next increment.)
+#print axioms QIQTH.CornerConstruction.finite_weyl_qpow_eq_one
+
 end QIQTH.AxiomAudit
