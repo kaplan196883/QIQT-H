@@ -5082,6 +5082,12 @@ namespace QIQTH.AxiomAudit
 -- are each self-adjoint and act on different L²(ℝ;H) tensor factors (so they commute), hence K̃ is self-adjoint. The
 -- sum-of-commuting-self-adjoint-operators theorem (which Mathlib lacks), in unitary-group form. Axiom-free (standard 3).
 #print axioms QIQTH.Spectral.stoneGen_prod_isSelfAdjoint
+-- ★★★ P4 WALL — toward Phase 6.2 (the explicit JLMS split K̃=K_bulk+A_edge): tendsto_strongFamily_apply — the
+-- strong-family interchange: a CONTRACTION family A_t strongly continuous with A_0=1, applied to w_t→w₀ along l→0,
+-- gives A_t(w_t)→w₀ (ε/2: ‖A_t w_t−w₀‖ ≤ ‖w_t−w₀‖ + ‖A_t w₀−w₀‖). The crux of one-parameter semigroup calculus, used
+-- to differentiate a PRODUCT of commuting flows t↦A_t(B_t ξ): the cross term A_t·((B_t ξ−ξ)/t) → 1·(d/dt B_t ξ) by
+-- this lemma — the building block of the JLMS generator-sum stoneGen(Δ̂∘λ)=K_bulk+A_edge. Axiom-free (standard 3).
+#print axioms QIQTH.Spectral.tendsto_strongFamily_apply
 -- ★★★ P4 WALL — INCREMENT 1c INSTANTIATION (the fiberwise bulk modular flow Δ̂^{it} on L²(ℝ;H), toward the dressed K̃):
 -- fiberModFlow S t := (modUnitary S t).compLpL = postcompose each fiber with the one-particle modular flow Δ^{it}; its
 -- generator is K_bulk. Structural C₀-group bricks: fiberModFlow_zero (Δ̂^{i0}=1), fiberModFlow_add (group law

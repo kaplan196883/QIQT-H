@@ -748,7 +748,10 @@ never claimed.)
 
 **NEXT TARGETS (after Increment 1c; ranked by tractability):**
 1. **Phase 6.2 — the explicit JLMS generator-sum `stoneGen(Δ̂^{i·}∘λ_·) = K_bulk + A_edge`** (moderate; the
-   "`K̃` splits" theorem).  *Recipe:* for `ξ ∈ stoneDomain Δ̂ ∩ stoneDomain λ`, write `V_t ξ − ξ =
+   "`K̃` splits" theorem).  **★ Key sub-lemma DONE (2026-06-29):** `Spectral.tendsto_strongFamily_apply` — the
+   strong-family interchange `A_t(w_t) → w₀` (contraction + strong continuity + `A_0=1`, `w_t→w₀`), the ε/2
+   crux.  Remaining: feed it the difference-quotient decomposition below + `stoneGen_eq_of_hasDerivAt`.
+   *Recipe:* for `ξ ∈ stoneDomain Δ̂ ∩ stoneDomain λ`, write `V_t ξ − ξ =
    Δ̂_t(λ_t ξ − ξ) + (Δ̂_t ξ − ξ)`; divide by `t`, `t→0`: `(Δ̂_t ξ − ξ)/t → i·stoneGen Δ̂ ξ` (def of
    `stoneDomain`) and `Δ̂_t·((λ_t ξ − ξ)/t) → i·stoneGen λ ξ` via the **key sub-lemma** `Δ̂_t v_t → v₀` when
    `v_t → v₀` + `Δ̂` strongly continuous to `1` + contraction (ε/2: `‖Δ̂_t v_t − v₀‖ ≤ ‖v_t − v₀‖ +

@@ -102,4 +102,40 @@ theorem stoneGen_prod_isSelfAdjoint
     have := hdiff.add (tendsto_const_nhds (x := (A t₀ ∘L B t₀) y))
     simpa using this
 
+/-- **★ Strong-family interchange:** if a *contraction* family `A_t` (`‖A_t y‖ ≤ ‖y‖`) is strongly continuous
+with `A_0 = 1`, and `w_t → w₀` along a filter `l` that tends to `0` (`l ≤ 𝓝 0`), then `A_t (w_t) → w₀`.  The
+ε/2 heart of one-parameter semigroup calculus — `‖A_t w_t − w₀‖ ≤ ‖w_t − w₀‖ + ‖A_t w₀ − w₀‖` — used to
+differentiate a *product* of commuting flows `t ↦ A_t (B_t ξ)` (the JLMS generator-sum
+`stoneGen(Δ̂^{i·} ∘ λ_·) = K_bulk + A_edge`, P4-wall Phase 6.2): the cross term `A_t·((B_t ξ − ξ)/t)` has limit
+`1·(d/dt B_t ξ)` precisely by this lemma. -/
+theorem tendsto_strongFamily_apply {l : Filter ℝ} (hl : l ≤ 𝓝 0)
+    (A : ℝ → (H →L[ℂ] H)) (hA0 : A 0 = 1)
+    (hAbd : ∀ (t : ℝ) (y : H), ‖A t y‖ ≤ ‖y‖) (hAcont : ∀ y : H, Continuous fun t => A t y)
+    {w : ℝ → H} {w₀ : H} (hw : Tendsto w l (𝓝 w₀)) :
+    Tendsto (fun t => A t (w t)) l (𝓝 w₀) := by
+  have hbound : ∀ t, ‖A t (w t) - w₀‖ ≤ ‖w t - w₀‖ + ‖A t w₀ - w₀‖ := by
+    intro t
+    calc ‖A t (w t) - w₀‖
+        = ‖(A t (w t) - A t w₀) + (A t w₀ - w₀)‖ := by rw [sub_add_sub_cancel]
+      _ ≤ ‖A t (w t) - A t w₀‖ + ‖A t w₀ - w₀‖ := norm_add_le _ _
+      _ = ‖A t (w t - w₀)‖ + ‖A t w₀ - w₀‖ := by rw [map_sub]
+      _ ≤ ‖w t - w₀‖ + ‖A t w₀ - w₀‖ := by gcongr; exact hAbd t _
+  have hg1 : Tendsto (fun t => ‖w t - w₀‖) l (𝓝 0) := by
+    have h0 : Tendsto (fun t => w t - w₀) l (𝓝 0) := by simpa using hw.sub_const w₀
+    have hn := h0.norm
+    rwa [norm_zero] at hn
+  have hg2 : Tendsto (fun t => ‖A t w₀ - w₀‖) l (𝓝 0) := by
+    have hc : Tendsto (fun t => A t w₀) l (𝓝 w₀) := by
+      have hc0 : Tendsto (fun t => A t w₀) (𝓝 0) (𝓝 w₀) := by
+        have h := (hAcont w₀).tendsto 0
+        simp only [hA0, ContinuousLinearMap.one_apply] at h
+        exact h
+      exact hc0.mono_left hl
+    have h0 : Tendsto (fun t => A t w₀ - w₀) l (𝓝 0) := by simpa using hc.sub_const w₀
+    have hn := h0.norm
+    rwa [norm_zero] at hn
+  have hsum : Tendsto (fun t => ‖w t - w₀‖ + ‖A t w₀ - w₀‖) l (𝓝 0) := by simpa using hg1.add hg2
+  have hdiff : Tendsto (fun t => A t (w t) - w₀) l (𝓝 0) := squeeze_zero_norm hbound hsum
+  simpa using hdiff.add (tendsto_const_nhds (x := w₀))
+
 end QIQTH.Spectral
