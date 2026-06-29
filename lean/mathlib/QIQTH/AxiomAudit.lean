@@ -7140,5 +7140,11 @@ namespace QIQTH.AxiomAudit
 -- finite and fits exactly. The single genuine "reverse" content of the capacity postulate (capacity is a CONSTRAINT,
 -- not a generator; spin-statistics proper needs locality/Poincaré, NOT capacity). Axiom-free (standard 3).
 #print axioms QIQTH.CodeCapacityBridge.no_finiteDim_CCR
+-- ★★★ CODE–CAPACITY BRIDGE M1 (the code-fitting bound): finrank_le_of_codeIsometry — if the field code space C
+-- admits a record/inner-product-preserving encoding V : C ↪ 𝓗 (LinearIsometry, hence injective) into the microstate
+-- space 𝓗, then finrank C ≤ finrank 𝓗. The substantive "fits holographically" direction; chains into the area bound
+-- (M4: S_vN ≤ log finrank C ≤ log finrank 𝓗 ≤ A/4ℓ_P²). Keeps C and 𝓗 SEPARATE (connected by V), not identified.
+-- Axiom-free (standard 3).
+#print axioms QIQTH.CodeCapacityBridge.finrank_le_of_codeIsometry
 
 end QIQTH.AxiomAudit

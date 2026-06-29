@@ -91,3 +91,10 @@ the honest-scope note from §0.
   CANNOT live in a finite-microstate sector without a cutoff — the CAR fermion's `⋀h` fits exactly; the single
   genuine "reverse" content of capacity. Wired into `QIQTH.lean`+`AxiomAudit.lean`. Next: **M1
   `code_fits_iff_finrank_le`**.
+- 2026-06-29 — **M1 DONE** (`finrank_le_of_codeIsometry`, axiom-free standard-3, budget 0, full QIQTH green 8873
+  jobs). The **code-fitting bound (necessary direction):** for finite-dim inner-product spaces, a code-encoding
+  isometry `V : C ↪ 𝓗` (record/inner-product-preserving, hence injective) forces `finrank C ≤ finrank 𝓗`
+  (`LinearMap.finrank_le_finrank_of_injective`). Keeps `C` (field code) and `𝓗` (microstate) SEPARATE — connected
+  by `V`, not identified. This is the direction that chains into the area bound (M4). *(Converse — `finrank ≤ ⟹
+  ∃ isometry` — is the labelled fiddly `OrthonormalBasis`-extension follow-on, not needed for the payoff.)* Wired
+  into `QIQTH.lean`+`AxiomAudit.lean`. Next: **M2** (encoding preserves entropy + record expectations).

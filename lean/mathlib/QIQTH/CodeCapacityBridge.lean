@@ -19,10 +19,33 @@ Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`).  No `sorry`.
 -/
 import Mathlib.LinearAlgebra.Matrix.Trace
 import Mathlib.Data.Complex.Basic
+import Mathlib.Analysis.InnerProductSpace.Basic
+import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
 
 namespace QIQTH.CodeCapacityBridge
 
 open Matrix
+
+section CodeFits
+
+variable {C 𝓗 : Type*}
+  [NormedAddCommGroup C] [InnerProductSpace ℂ C] [Module.Finite ℂ C]
+  [NormedAddCommGroup 𝓗] [InnerProductSpace ℂ 𝓗] [Module.Finite ℂ 𝓗]
+
+/-- **★ M1 — the code-fitting bound (necessary condition).**  If the field's regional **code space** `C` admits
+a (record- and inner-product-preserving) encoding `V : C ↪ 𝓗` into the **microstate space** `𝓗` — a
+`LinearIsometry`, hence injective — then its dimension fits: `finrank C ≤ finrank 𝓗`.  This is the substantive
+"fits holographically" direction: an encodable field sector cannot have more dimensions than the microstate
+space allows.  It chains into the area bound (M4): `S_vN ≤ log finrank C ≤ log finrank 𝓗 ≤ A/4ℓ_P²`.
+
+(The converse — `finrank C ≤ finrank 𝓗 ⟹ such an isometry exists` — holds by orthonormal-basis extension; it is
+the labelled follow-on, fiddly `OrthonormalBasis` index-injection bookkeeping, not needed for the bridge's
+payoff which takes `V` as a hypothesis.) -/
+theorem finrank_le_of_codeIsometry (V : C →ₗᵢ[ℂ] 𝓗) :
+    Module.finrank ℂ C ≤ Module.finrank ℂ 𝓗 :=
+  V.toLinearMap.finrank_le_finrank_of_injective V.injective
+
+end CodeFits
 
 /-- **★ M0 — Exact finite-dimensional CCR is impossible** (the photon needs a cutoff).  On a *nonzero*
 finite-dimensional space there are no operators `a, a†` satisfying the canonical commutation relation
