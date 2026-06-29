@@ -749,8 +749,17 @@ consumes.
 `⟪f,g⟫=∫⟪f s,g s⟫ ds` + the one-particle unitarity `modUnitary_inner`).  So `Δ̂^{it}` now has **4/5** C₀-group
 hypotheses (`fiberModFlow_zero`, `_add`, **`_inner`**, `_norm_le`) plus the commutativity.  **The single remaining
 blocker for the full dressed `K̃ = K_bulk + A_edge` self-adjoint is `Δ̂`'s STRONG CONTINUITY** — `t ↦ Δ̂^{it}ξ`
-continuous in `Lp`, a dominated-convergence argument on the *infinite* measure `volume` (Mathlib's `tendsto_Lp_
-finite_of_tendsto_ae` needs `IsFiniteMeasure`; the σ-finite domination version `tendsto_Lp_of_tendsto_eLpNorm`
-+ DCT for `eLpNorm` is the route).  Once that lands: `stoneGen_prod_isSelfAdjoint (fiberModFlow S) clockTransl
-… ⟹ stoneGen (fun t => fiberModFlow S t ∘L clockTransl t) = K̃` self-adjoint — Increment 1c complete.  Wired into
-`QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.
+continuous in `Lp`, a dominated-convergence argument on the *infinite* measure `volume`.
+
+**CONCRETE PROOF RECIPE (worked out 2026-06-29; constructible, all lemmas verified to exist — a dedicated
+focused session, ~80 lines, blocked only on `eLpNorm`/`enorm`/`lintegral` API friction, NOT on missing math):**
+`continuousAt` at `t₀` → `Lp.tendsto_Lp_iff_tendsto_eLpNorm'` reduces to `eLpNorm(coeFn diff) → 0` →
+`eLpNorm_congr_ae` (`fiberModFlow_coeFn`) replaces the coeFn diff by the explicit fiber diff `s ↦ Δ^{it}(ξ s) −
+Δ^{it₀}(ξ s)` → `eLpNorm_eq_eLpNorm'` + `eLpNorm'_eq_lintegral_enorm` rewrite as `(∫⁻ ‖·‖ₑ² )^{1/2}` →
+`tendsto_lintegral_filter_of_dominated_convergence'` (filter version, `𝓝 t₀` countably generated) with
+**bound** `s ↦ (2‖ξ s‖ₑ)²` (`h_fin` via `lintegral_rpow_enorm_lt_top_of_eLpNorm_lt_top` + `MemLp.eLpNorm_lt_top`
+on `Lp.memLp ξ`; **domination** via `enorm_sub_le` + `modUnitary_norm`; **pointwise** `→ 0` via
+`modUnitary_stronglyContinuous` + `continuous_enorm`) → `ENNReal.continuous_rpow_const` + `ENNReal.zero_rpow_of_
+pos` finish (`0^{1/2}=0`).  Then `stoneGen_prod_isSelfAdjoint (fiberModFlow S) clockTransl (group/0/inner/norm/SC
+hyps) (clockTransl_* hyps) fiberModFlow_comm_clockTransl ⟹ stoneGen (fun t => fiberModFlow S t ∘L clockTransl t)
+= K̃ self-adjoint` — **Increment 1c complete.**  Wired into `QIQTH.lean`+`AxiomAudit.lean`; standard-3; budget 0.
