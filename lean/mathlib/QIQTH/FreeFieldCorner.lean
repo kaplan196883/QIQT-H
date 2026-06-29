@@ -105,4 +105,44 @@ theorem fermion_flavor_modes_le_area {F m : ℕ} {𝓗 : Type*} [Fintype 𝓗] {
 
 end Fermions
 
+section GaugeBosons
+
+variable {dC d𝓗 : Type*} [Fintype dC] [DecidableEq dC] [Fintype d𝓗] [DecidableEq d𝓗]
+
+/-- **★★ A3 — gauge-boson content (W/Z/gluon): the gauge-indexed commutator transports with its
+truncation defect.**  The SM's massive vector bosons (W, Z) and gluons are *bosonic*, indexed by a finite
+gauge/polarization type `G` (8 gluon colors, the 3 weak bosons, polarizations).  Each component's
+commutator `[a(g), a†(g)] = M(g)` on the code transports into the corner as `ι_V(M(g))` — and because
+the field is bosonic, `M(g)` is **not** a clean `c·1` but the **truncated-oscillator defect**
+(`M(g) = 1 − N·|N-1⟩⟨N-1|`, D5), so the corner value is `P − N·ι_V(|top⟩⟨top|)`: the gauge boson on a
+finite-capacity sector is necessarily **truncated**, the defect carried explicitly (contrast the clean
+fermion `c·P` of A2).  This is the ε = −1 (commutator) instance of the unified A1 transport. -/
+theorem encoded_gauge_boson_commutator {G : Type*} (V : Matrix d𝓗 dC ℂ) (hV : Vᴴ * V = 1)
+    (a adag M : G → Matrix dC dC ℂ)
+    (hCCR : ∀ g, gradedBracket (-1) (a g) (adag g) = M g) (g : G) :
+    gradedBracket (-1) (encode V (a g)) (encode V (adag g)) = encode V (M g) :=
+  encoded_bracket_of_eq V hV (-1) (a g) (adag g) (M g) (hCCR g)
+
+/-- **★ A3 — the gauge-boson mode count is area-bounded.**  A `G`-component truncated bosonic sector (the
+`G` gauge/polarization components, each a number-cutoff symmetric Fock `Γ_s^{≤N}(ℂ^d)` of dimension
+`C(d+N,N)`) has total dimension `C(d+N,N)^G`.  If it fits the microstate space (`C(d+N,N)^G ≤ |𝓗_R|`)
+under the holographic postulate, its log capacity obeys the area floor:
+
+  `G·log C(d+N,N) = log(C(d+N,N)^G) ≤ log|𝓗_R| ≤ A/4ℓ_P²`.
+
+The occupation cutoff `N` is explicit — without it the bosonic Fock is infinite-dimensional and fits no
+finite sector (`no_finiteDim_CCR`).  Multi-component generalization of
+`CornerConstruction.photon_modes_le_area`. -/
+theorem gauge_boson_modes_le_area {d N G : ℕ} {𝓗 : Type*} [Fintype 𝓗] {areaTerm : ℝ}
+    [hcap : HolographicCapacityBound 𝓗 areaTerm] (hfit : ((d + N).choose N) ^ G ≤ Fintype.card 𝓗) :
+    (G : ℝ) * Real.log ((d + N).choose N) ≤ areaTerm := by
+  have hpos : (0 : ℝ) < ((d + N).choose N : ℝ) ^ G :=
+    pow_pos (by exact_mod_cast Nat.choose_pos (Nat.le_add_left N d)) G
+  rw [← Real.log_pow]
+  calc Real.log (((d + N).choose N : ℝ) ^ G)
+      ≤ Real.log (Fintype.card 𝓗) := Real.log_le_log hpos (by exact_mod_cast hfit)
+    _ ≤ areaTerm := hcap.bound
+
+end GaugeBosons
+
 end QIQTH.FreeFieldCorner

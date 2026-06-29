@@ -7351,4 +7351,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FreeFieldCorner.encoded_flavor_CAR
 #print axioms QIQTH.FreeFieldCorner.fermion_flavor_modes_le_area
 
+-- ★★ FREE-FIELD CORNER (A3) — gauge-boson content (W/Z/gluon, truncated-bosonic):
+-- encoded_gauge_boson_commutator — a finite gauge/polarization type G with per-component commutator
+-- [a(g),a†(g)]=M(g) transports to the corner ι_V(M(g)); bosonic ⟹ M(g) is the truncated-oscillator DEFECT
+-- (1−N|top⟩⟨top|, D5), so the corner value is P − N·ι(|top⟩⟨top|) (necessarily truncated, defect explicit —
+-- contrast the fermion clean c·P). ε=-1 instance of A1. gauge_boson_modes_le_area — G-component truncated Fock:
+-- G·log C(d+N,N) = log(C(d+N,N)^G) ≤ log|𝓗_R| ≤ A/4ℓ_P² (cutoff N explicit). Transport not construction. Std 3.
+#print axioms QIQTH.FreeFieldCorner.encoded_gauge_boson_commutator
+#print axioms QIQTH.FreeFieldCorner.gauge_boson_modes_le_area
+
 end QIQTH.AxiomAudit

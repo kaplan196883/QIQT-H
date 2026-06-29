@@ -129,6 +129,15 @@ Per increment: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green;
   ≤ log|𝓗_R| ≤ A/4ℓ_P²` (the multi-flavor fermion mode count is area-bounded, generalizing
   `fermion_modes_le_area`). Honest: transport of a SUPPLIED CAR family, not its construction. _Track A next:
   A3 (W/Z + gluons as truncated-bosonic instances)._
+- 2026-06-29 — **A3 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8876 jobs). `FreeFieldCorner.lean`
+  (`section GaugeBosons`): W/Z/gluon content. **`encoded_gauge_boson_commutator`** — a finite gauge/polarization
+  type `G` (8 gluon colors, weak bosons, polarizations) with per-component commutator `[a(g),a†(g)] = M(g)`
+  transports to the corner `ι_V(M(g))`; bosonic ⟹ `M(g)` is the **truncated-oscillator defect** (`1 −
+  N·|top⟩⟨top|`, D5), so the corner value is `P − N·ι(|top⟩⟨top|)` — necessarily truncated, defect explicit
+  (the ε = −1 instance of A1, contrast the fermion clean `c·P`). **`gauge_boson_modes_le_area`** —
+  `G`-component truncated Fock: `G·log C(d+N,N) = log(C(d+N,N)^G) ≤ log|𝓗_R| ≤ A/4ℓ_P²` (cutoff `N` explicit).
+  Honest: transport of a SUPPLIED truncated-bosonic family, not its construction. _Track A next: A4 (Higgs
+  scalar)._
 - 2026-06-29 — **B1 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8876 jobs).
   `EmergentSpacetime.lean` (`section Metric`): the corrected metric core. `IsApproxPseudometric ε d`
   (nonneg/self/symm/triangle-up-to-ε — the target type for any emergent-distance reconstruction);
