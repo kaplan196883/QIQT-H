@@ -7294,4 +7294,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CornerConstruction.uniform_of_permInvariant
 #print axioms QIQTH.CornerConstruction.permInvariant_unique
 
+-- ★★ EMERGENT SPACETIME (B0) — finite exact-continuum no-go guard (Track B):
+-- finiteDim_scaling_forces_zero — on a finite-dim space, a unitary conjugation cannot rescale a nonzero
+-- operator: U isometry (Uᴴ U=1), U P Uᴴ = r•P with star r·r ≠ 1 (|r|≠1) ⟹ P=0 (Hilbert–Schmidt norm is
+-- conjugation-invariant but r• rescales it). So NO exact finite Borchers dilation / Weyl / boost scaling — Tier-2
+-- emergence must be APPROXIMATE/scaling-limit (the honest constraint). scaling_of_nonzero_forces_unit_modulus —
+-- contrapositive: a nonzero P forces star r·r = 1 (|r|=1). Std 3. (Finite proto-spacetime guard, NOT a manifold.)
+#print axioms QIQTH.EmergentSpacetime.finiteDim_scaling_forces_zero
+#print axioms QIQTH.EmergentSpacetime.scaling_of_nonzero_forces_unit_modulus
+
 end QIQTH.AxiomAudit

@@ -565,3 +565,4 @@ import QIQTH.FQBoundMicro
 import QIQTH.GRFromMicro
 import QIQTH.CodeCapacityBridge
 import QIQTH.CornerConstruction
+import QIQTH.EmergentSpacetime
