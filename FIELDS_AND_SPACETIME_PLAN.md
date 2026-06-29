@@ -146,3 +146,12 @@ Per increment: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green;
   (the finite RT/min-cut analogue of entanglement-entropy subadditivity). Assumes the graph; does not derive
   geometry or saturation (a Tier-2 skeleton). _Track B next: B3 (tensor-network cut bound `S_vN(ρ_A) ≤ log
   dim(cut) ≤ minCut`, wired to the corner codes)._
+- 2026-06-29 — **B3 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8876 jobs). `EmergentSpacetime.lean`
+  (`section TensorNetworkCut`): the tensor-network cut / RT bound. **`entropy_le_log_cutDim`** — a region's
+  reduced state on a cut/bond space has `S_vN ≤ log(card dCut)` (Schmidt/bond bound);
+  **`entropy_le_log_cutDim_of_factor`** — a code factoring through a cut (`card dC ≤ card dCut`) has
+  `S_vN ≤ log` bond dim; capstone **`entropy_le_cut`** — wired to B2's `cut`: *if* the bond dimension fits the
+  cut area (`log(card dCut) ≤ cut w S`, the tensor-network/holographic bond bound — an *assumption*, the
+  network's defining property, NOT derived), then `S_vN(ρ) ≤ cut w S` = the boundary area `∂S` — the finite,
+  honest **Ryu–Takayanagi inequality** on the substrate. Rides `vonNeumannEntropy_le_log_card`. Does NOT
+  derive geometry/metric/saturation `S = area`. _Track B next: B4 (operational causal preorder)._

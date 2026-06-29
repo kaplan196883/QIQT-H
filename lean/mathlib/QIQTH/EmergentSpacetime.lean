@@ -18,6 +18,7 @@ Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`).  No `sorry`.
 -/
 import Mathlib.LinearAlgebra.Matrix.PosDef
 import Mathlib.Analysis.Complex.Basic
+import QIQTH.FQBoundMicro
 
 namespace QIQTH.EmergentSpacetime
 
@@ -174,5 +175,47 @@ theorem cut_union_le (w : V → V → ℝ) (hw : ∀ i j, 0 ≤ w i j) (A B : Fi
       (Finset.compl_subset_compl.mpr Finset.subset_union_right) (fun j _ _ => hw i j)
 
 end GraphRT
+
+section TensorNetworkCut
+
+open QIQTH.QuantumEntropy
+
+/-- **★ B3 — the bond/Schmidt entropy bound.**  A region's reduced state represented on a **cut / bond
+space** of dimension `card dCut` has von Neumann entropy at most `log(card dCut)` — the Schmidt-rank /
+bond-dimension bound across the cut (just `vonNeumannEntropy_le_log_card` read at the cut space). -/
+theorem entropy_le_log_cutDim {dCut : Type*} [Fintype dCut] [DecidableEq dCut]
+    {ρ : Matrix dCut dCut ℂ} (h : IsDensity ρ) :
+    vonNeumannEntropy h ≤ Real.log (Fintype.card dCut) :=
+  vonNeumannEntropy_le_log_card h
+
+/-- **★★ B3 — the tensor-network cut bound (factor-through form).**  If a region's code state factors
+through a cut of dimension `card dCut` (`card dC ≤ card dCut`, the bond cutting the network), its entropy
+is bounded by the **log bond dimension**: `S_vN(ρ) ≤ log(card dC) ≤ log(card dCut)`.  The honest finite
+statement of "entanglement across a cut ≤ log of the bond dimension". -/
+theorem entropy_le_log_cutDim_of_factor {dC dCut : Type*} [Fintype dC] [DecidableEq dC] [Nonempty dC]
+    [Fintype dCut] {ρ : Matrix dC dC ℂ} (h : IsDensity ρ) (hfit : Fintype.card dC ≤ Fintype.card dCut) :
+    vonNeumannEntropy h ≤ Real.log (Fintype.card dCut) := by
+  calc vonNeumannEntropy h
+      ≤ Real.log (Fintype.card dC) := vonNeumannEntropy_le_log_card h
+    _ ≤ Real.log (Fintype.card dCut) :=
+        Real.log_le_log (by exact_mod_cast Fintype.card_pos) (by exact_mod_cast hfit)
+
+/-- **★★★ B3 — the RT/min-cut entropy bound (wired to B2's `cut`).**  When the **bond dimension across
+the cut fits the cut area** (`log(card dCut) ≤ cut w S`, the tensor-network / holographic bond bound — an
+*assumption*, the network's defining property, NOT derived), the region's entanglement entropy obeys the
+**RT/min-cut bound**:
+
+  `S_vN(ρ) ≤ cut w S = ` the boundary area `∂S`.
+
+So entanglement is bounded by the area through the cut — the finite, honest Ryu–Takayanagi inequality on
+the substrate (`cut` in its correct *area* role, B2).  It does NOT derive the geometry, the metric, or the
+saturation `S = area`; it is the inequality, conditional on the bond-fits-area hypothesis. -/
+theorem entropy_le_cut {dCut : Type*} [Fintype dCut] [DecidableEq dCut] {ρ : Matrix dCut dCut ℂ}
+    (h : IsDensity ρ) {V : Type*} [Fintype V] [DecidableEq V] (w : V → V → ℝ) (S : Finset V)
+    (hbond : Real.log (Fintype.card dCut) ≤ cut w S) :
+    vonNeumannEntropy h ≤ cut w S :=
+  le_trans (vonNeumannEntropy_le_log_card h) hbond
+
+end TensorNetworkCut
 
 end QIQTH.EmergentSpacetime

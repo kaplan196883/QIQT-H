@@ -7322,6 +7322,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EmergentSpacetime.cut_compl
 #print axioms QIQTH.EmergentSpacetime.cut_union_le
 
+-- ★★ EMERGENT SPACETIME (B3) — tensor-network cut bound (entanglement ≤ area through the cut):
+-- entropy_le_log_cutDim — a region's reduced state on a cut/bond space has S_vN ≤ log(card dCut) (Schmidt/bond
+-- bound). entropy_le_log_cutDim_of_factor — code factors through a cut (card dC ≤ card dCut) ⟹ S_vN ≤ log bond dim.
+-- entropy_le_cut — RT/min-cut bound wired to B2's cut: IF the bond dim fits the cut area (log dim ≤ cut w S, the
+-- tensor-network/holographic bond bound, an ASSUMPTION not derived), then S_vN(ρ) ≤ cut w S — entanglement ≤ the
+-- boundary area ∂S. The finite RT inequality; does NOT derive geometry/metric/saturation S=area. Std 3.
+#print axioms QIQTH.EmergentSpacetime.entropy_le_log_cutDim
+#print axioms QIQTH.EmergentSpacetime.entropy_le_log_cutDim_of_factor
+#print axioms QIQTH.EmergentSpacetime.entropy_le_cut
+
 -- ★★ FREE-FIELD CORNER (A1) — unified corner transport for free SM field content (Track A):
 -- gradedBracket ε x y = x y + ε•(y x) (ε=1 anticommutator/CAR, ε=-1 commutator/CCR). encode_gradedBracket —
 -- the encoding carries the code graded bracket to the corner: [ι_V(x),ι_V(y)]_ε = ι_V([x,y]_ε), the SINGLE
