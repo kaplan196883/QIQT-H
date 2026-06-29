@@ -36,7 +36,7 @@ and (c) the explicitly-listed physical inputs.
 | Stage | What it removes from your trust | How |
 |------|----------------------------------|-----|
 | **1** clean-room rebuild | trust in the authors' cached build artifacts | wipes the project's `.olean`s and rebuilds `QIQTH` from source; the kernel re-checks every project proof |
-| **2** independent re-check | trust in Lean's *elaborator* | `lean4checker` replays the environment through the kernel logic alone (catches `unsafe` / `@[implemented_by]` escapes) |
+| **2** independent re-check | trust in Lean's *elaborator* | `leanchecker` (built into the toolchain) replays each capstone's import closure through the kernel logic alone (catches `unsafe` / `@[implemented_by]` escapes) |
 | **3** axiom / soundness audit | trust in the authors' axiom accounting | `Lean.collectAxioms` over each capstone; **fail-closed** if the transitive set leaves `{propext, Classical.choice, Quot.sound}` or contains a forbidden axiom (`sorryAx`, `Lean.ofReduceBool`) |
 | **card** | trust in the authors' description of the claim | renders the *exact* formal statement + the *complete* hypothesis ledger, flagging the load-bearing physical inputs |
 
@@ -57,13 +57,16 @@ Bruijn criterion); Stage 2 makes that check independent of the much larger elabo
   trusted base, full hypothesis ledger, scope.
 - `axioms.json` — the raw `collectAxioms` facts per capstone.
 
-## Stage 2: installing `lean4checker`
+## Stage 2: `leanchecker`
 
-`lean4checker` is the independent re-checker. If it is not on `PATH` (or available as
-`lake exe lean4checker`), Stage 2 is **skipped with a loud warning** and the certificate
-is marked incomplete. To install, build it against the **same** toolchain
-(`lean-toolchain` here) from <https://github.com/leanprover/lean4checker> and put it on
-`PATH`, or add it as a `require` in the lake project.
+The independent re-checker is **built into the Lean toolchain** as `leanchecker` (since
+v4.28; the old standalone `lean4checker` repo is deprecated). Because it ships with the
+toolchain, its version always matches the oleans and **nothing needs installing** —
+`lake env leanchecker <module>` just works. Stage 2 re-checks the import closure of each
+capstone's module (which covers every declaration the certified proof touches); this
+replays the kernel over Mathlib too, so it can take many minutes. If `leanchecker` is
+somehow absent (a pre-v4.28 toolchain), Stage 2 is **skipped with a loud warning** and the
+certificate is marked incomplete.
 
 ## Gold standard: full from-source clean room (optional)
 

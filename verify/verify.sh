@@ -50,21 +50,29 @@ echo "        from-source clean room (Mathlib included), use the Docker recipe i
 )
 echo "[stage1] OK — project built; the kernel accepted every proof during the build."
 
-# ── Stage 2 — independent re-check (lean4checker) ────────────────────────────
-hr; echo "[stage2] independent kernel re-check (lean4checker)"
-L4C=""
-if command -v lean4checker >/dev/null 2>&1; then L4C="lean4checker"
-elif ( cd "$MATHLIB" && "$LAKE" exe lean4checker --help >/dev/null 2>&1 ); then L4C="$LAKE exe lean4checker"
-fi
-if [ -n "$L4C" ]; then
-  ( cd "$MATHLIB" && $L4C QIQTH )
-  echo "[stage2] OK — lean4checker re-verified the environment independently of the elaborator."
+# ── Stage 2 — independent re-check (leanchecker) ─────────────────────────────
+# `leanchecker` ships *inside* the Lean toolchain (v4.28+), so the version always
+# matches the oleans. It replays the module's full import closure through the kernel
+# alone, independent of the elaborator. We re-check the module of each capstone — that
+# closure covers every declaration the certified proof actually touches.
+hr; echo "[stage2] independent kernel re-check (leanchecker, built into the toolchain)"
+HAVE_LC=0
+if ( cd "$MATHLIB" && "$LAKE" env bash -c 'command -v leanchecker >/dev/null 2>&1 || command -v leanchecker.exe >/dev/null 2>&1' ); then HAVE_LC=1; fi
+# capstone modules = each capstone name minus its last segment
+MODS="$(cd "$REPO" && python -c "import json;print(' '.join(sorted({'.'.join(c['name'].split('.')[:-1]) for c in json.load(open('verify/config.json'))['capstones']})))")"
+if [ "$HAVE_LC" -eq 1 ]; then
+  echo "  re-checking the import closure of: $MODS"
+  echo "  (this replays the kernel over the closure incl. Mathlib — may take many minutes)"
+  for m in $MODS; do
+    echo "  -> leanchecker $m"
+    ( cd "$MATHLIB" && "$LAKE" env leanchecker "$m" )
+  done
+  echo "[stage2] OK — leanchecker re-verified each capstone's closure independently of the elaborator."
 else
-  echo "[stage2] SKIPPED — lean4checker not installed."
-  echo "         The independent re-check is the strongest anti-fraud step; install it for a"
-  echo "         complete certificate (see verify/README.md → 'Stage 2'). Stage 1's build"
-  echo "         already had the kernel check every proof; lean4checker additionally removes"
-  echo "         trust in the elaborator."
+  echo "[stage2] SKIPPED — leanchecker not found in this toolchain (expected v4.28+)."
+  echo "         Stage 1's build already had the kernel check every proof; leanchecker"
+  echo "         additionally removes trust in the elaborator. Certificate is INCOMPLETE"
+  echo "         without it (see verify/README.md → 'Stage 2')."
 fi
 
 # ── Stage 3 + claim card — axiom audit (fail-closed) ─────────────────────────
