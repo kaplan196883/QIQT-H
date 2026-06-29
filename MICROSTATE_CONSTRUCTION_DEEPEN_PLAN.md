@@ -284,3 +284,12 @@ Cannot remove P5, but can isolate it cleanly.
   a `/- ... -/` note (the repo's `FiniteModularTheory.lean` carries the diagonal `sigmaDiag`/`diagPow`
   real-time flow; wiring it through the corner is the next sub-step). _Next: D7 (dynamics preservation under
   intertwining)._
+- 2026-06-29 — **D7 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8874 jobs). **Dynamics
+  preservation under intertwining** (`section Dynamics`): given a *supplied* code Heisenberg flow `α(A) = Uᴴ A U`
+  and ambient flow `β(X) = Wᴴ X W` intertwined by the encoding (`Wᴴ V = V Uᴴ`, `Vᴴ W = U Vᴴ`), the core
+  **`encoded_heisenberg_intertwining`** — `β(ι_V(A)) = ι_V(α(A))`: the encoding carries the code flow to the
+  ambient flow. Corollaries **`dynamical_expectation_preserved`** (the evolved expectation equals the code
+  one) and **`dynamical_twopoint_preserved`** (the two-*time* correlator survives encoding intact — a genuine
+  fragment of dynamics). Honest: **preservation, NOT generation** — both `U` and `W` are supplied; capacity
+  does not produce the dynamics. Wired into `AxiomAudit.lean`. _Next: D8 (P5 isolation / envariance
+  uniqueness)._

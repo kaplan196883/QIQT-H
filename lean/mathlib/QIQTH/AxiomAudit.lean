@@ -7273,4 +7273,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CornerConstruction.finite_KMS
 #print axioms QIQTH.CornerConstruction.encoded_modConj_corner
 
+-- ★★ CORNER CONSTRUCTION (D7) — dynamics preservation under intertwining (PRESERVATION, NOT generation):
+-- encoded_heisenberg_intertwining — given a supplied code flow α(A)=Uᴴ A U and ambient flow β(X)=Wᴴ X W
+-- intertwined by the encoding (Wᴴ V = V Uᴴ, Vᴴ W = U Vᴴ), β(ι_V(A)) = ι_V(α(A)): the encoding carries the
+-- supplied field dynamics to the ambient dynamics. dynamical_expectation_preserved / dynamical_twopoint_preserved
+-- — the evolved expectation and the two-TIME correlator of encoded records equal the code ones: the field's
+-- temporal correlations survive encoding intact. Both U,W are SUPPLIED — the theorem certifies the encoding
+-- respects them; capacity does not generate the dynamics. Std 3.
+#print axioms QIQTH.CornerConstruction.encoded_heisenberg_intertwining
+#print axioms QIQTH.CornerConstruction.dynamical_expectation_preserved
+#print axioms QIQTH.CornerConstruction.dynamical_twopoint_preserved
+
 end QIQTH.AxiomAudit

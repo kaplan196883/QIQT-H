@@ -527,4 +527,54 @@ diagonal real-time `sigmaDiag`/`diagPow` flow; wiring it through the corner is t
 
 end Modular
 
+section Dynamics
+
+variable {dC d𝓗 : Type*} [Fintype dC] [DecidableEq dC] [Fintype d𝓗] [DecidableEq d𝓗]
+
+/-- **★★ D7 — dynamics preservation under intertwining (Heisenberg form).**  Suppose the field code carries
+a *supplied* one-step dynamics `α(A) = Uᴴ A U` (Heisenberg, `U` the code propagator) and the microstate
+space carries `β(X) = Wᴴ X W` (`W` the ambient propagator), **intertwined** by the encoding —
+`Wᴴ V = V Uᴴ` and `Vᴴ W = U Vᴴ` (the two adjoint forms of `W V = V U`, automatic for unitary propagators).
+Then the encoding **carries the code flow to the ambient flow**:
+
+  `β(ι_V(A)) = Wᴴ · ι_V(A) · W = ι_V(Uᴴ A U) = ι_V(α(A))`.
+
+So evolving an encoded record by the ambient dynamics and reading it back equals evolving it on the code:
+the microstate description **preserves** the supplied field dynamics.  This is *preservation, NOT
+generation* — both `U` and `W` are supplied; the theorem only certifies the encoding respects them
+(capacity does not produce the dynamics). -/
+theorem encoded_heisenberg_intertwining (V : Matrix d𝓗 dC ℂ) (W : Matrix d𝓗 d𝓗 ℂ) (U : Matrix dC dC ℂ)
+    (hWV : Wᴴ * V = V * Uᴴ) (hVW : Vᴴ * W = U * Vᴴ) (A : Matrix dC dC ℂ) :
+    Wᴴ * encode V A * W = encode V (Uᴴ * A * U) := by
+  simp only [encode_def, Matrix.mul_assoc]
+  rw [hVW, ← Matrix.mul_assoc Wᴴ V (A * (U * Vᴴ)), hWV]
+  simp only [Matrix.mul_assoc]
+
+/-- **★ D7 — the evolved expectation is preserved.**  The expectation of an ambient-time-evolved encoded
+record equals the code-time-evolved expectation: `Tr(VρVᴴ · β(ι_V(A))) = Tr(ρ · α(A))`.  (Composes
+`encoded_heisenberg_intertwining` with M2.) -/
+theorem dynamical_expectation_preserved (V : Matrix d𝓗 dC ℂ) (W : Matrix d𝓗 d𝓗 ℂ) (U : Matrix dC dC ℂ)
+    (hWV : Wᴴ * V = V * Uᴴ) (hVW : Vᴴ * W = U * Vᴴ) (hV : Vᴴ * V = 1) (ρ A : Matrix dC dC ℂ) :
+    (V * ρ * Vᴴ * (Wᴴ * encode V A * W)).trace = (ρ * (Uᴴ * A * U)).trace := by
+  rw [encoded_heisenberg_intertwining V W U hWV hVW, encode_def]
+  exact QIQTH.CodeCapacityBridge.encoded_record_expectation V hV ρ (Uᴴ * A * U)
+
+/-- **★★ D7 — the two-time dynamical correlator is preserved (a genuine fragment of dynamics).**  The
+ambient-evolved two-point function of encoded records equals the code two-point function:
+
+  `Tr(VρVᴴ · β(ι_V(A)) · β(ι_V(B))) = Tr(ρ · α(A) · α(B))`.
+
+So the supplied field's *temporal correlations* survive encoding into the capacity-bounded microstate
+memory intact — the honest sense in which the microstate description reproduces field dynamics
+(preservation of supplied correlators, not their generation). -/
+theorem dynamical_twopoint_preserved (V : Matrix d𝓗 dC ℂ) (W : Matrix d𝓗 d𝓗 ℂ) (U : Matrix dC dC ℂ)
+    (hWV : Wᴴ * V = V * Uᴴ) (hVW : Vᴴ * W = U * Vᴴ) (hV : Vᴴ * V = 1) (ρ A B : Matrix dC dC ℂ) :
+    (V * ρ * Vᴴ * ((Wᴴ * encode V A * W) * (Wᴴ * encode V B * W))).trace
+      = (ρ * ((Uᴴ * A * U) * (Uᴴ * B * U))).trace := by
+  rw [encoded_heisenberg_intertwining V W U hWV hVW A, encoded_heisenberg_intertwining V W U hWV hVW B,
+    ← encode_mul V hV, encode_def]
+  exact QIQTH.CodeCapacityBridge.encoded_record_expectation V hV ρ ((Uᴴ * A * U) * (Uᴴ * B * U))
+
+end Dynamics
+
 end QIQTH.CornerConstruction
