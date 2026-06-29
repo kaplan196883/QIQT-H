@@ -149,6 +149,24 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
       postulate itself, not λ's dynamical law, not the continuum. (The original "capacity forbids records"
       conjecture is retired as a category error, not pending.)</p>
     <StatusTable />
+    <div class="note">
+      <p><strong>New — the Lean-verified code–capacity bridge (2026).</strong> A small axiom-free module
+      (<code>CodeCapacityBridge.lean</code>) connects the free-field substrate to the finite-microstate layer
+      without conflating them: it keeps the field's <em>code space</em> C separate from the microstate space
+      𝓗<sub>R</sub> and links them only by an explicit isometric encoding V : C ↪ 𝓗<sub>R</sub>. The encoding
+      preserves every record expectation, and — <em>assuming</em> the holographic-capacity postulate
+      log dim 𝓗<sub>R</sub> ≤ A/4ℓ<sub>P</sub>² — it transports that bound to the field: a code that fits gives
+      S<sub>vN</sub>(ρ) ≤ log dim C ≤ A/4ℓ<sub>P</sub>² and a record-count bound log(#records) ≤ A/4ℓ<sub>P</sub>²,
+      instantiated for the actual CAR (2<sup>n</sup>) and truncated-bosonic (C(d+N, N)) field dimensions. The same
+      formalization enforces the one structural caveat with teeth: <em>exact finite-dimensional bosonic CCR modes
+      are impossible</em> (Tr[a, a†] = 0 ≠ dim 𝓗), so the photon needs a number/energy cutoff to fit a finite
+      sector, whereas a fermionic CAR sector ⋀h is finite and fits exactly.</p>
+      <p style="margin-top:.5rem"><strong>What this is — and is not.</strong> A capacity <em>constraint</em>,
+      machine-checked: it transports an <em>assumed</em> finite microstate capacity through an isometric code
+      encoding. It does <em>not</em> derive the holographic bound, the value of G, the Type-II renormalized
+      entropy, or matter from information. Capacity constrains the field's entropy and records <em>through</em>
+      the fitting inequality; it does not generate the field.</p>
+    </div>
   </div></section>
 
   <section class="section"><div class="wrap">
