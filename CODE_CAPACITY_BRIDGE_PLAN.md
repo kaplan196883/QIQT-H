@@ -118,3 +118,16 @@ the honest-scope note from §0.
   bounds the field only through the fitting inequality; contrast `area_floor_vonNeumann` which puts `ρ` on `𝓗`).
   Wired into `QIQTH.lean`+`AxiomAudit.lean`. Next: **M5** (field instantiations: electron `2^{n_F}`, photon
   `C(d+N,N)` ⟹ the fitting condition for the actual CAR/symmetric Fock dims).
+- 2026-06-29 — **M5 + M6 + M7 DONE — BRIDGE COMPLETE** (axiom-free standard-3, budget 0, full QIQTH green 8873
+  jobs; done in one pass at Pawel's "go now"). **M5** field instantiations: `electron_entropy_le_area` (CAR Fock
+  `dim 2^n`, `finrank_CARFock`, as `Fin(2^n)`; `2^n ≤ |𝓗_R| ⟹ S_vN ≤ A/4ℓ_P²`) and `photon_entropy_le_area`
+  (truncated symmetric Fock `dim C(d+N,N)`, `truncFockDim_eq_choose`, as `Fin(C(d+N,N))`; `C(d+N,N) ≤ |𝓗_R| ⟹
+  S_vN ≤ A/4ℓ_P²` — without the cutoff `∞`-dim, can't fit, cf `no_finiteDim_CCR`). **M6** `record_card_le_finrank`
+  (perfectly distinguishable records = orthonormal family ⟹ `|I| ≤ finrank C`). **M7 CAPSTONE**
+  `record_log_card_le_area` (Theorem D): when the code fits the microstate space, `log|I| ≤ log(card dC) ≤ log|𝓗_R|
+  ≤ A/4ℓ_P²` — the number of macroscopically distinguishable records the electron/photon carries in a region is
+  holographically bounded, `log(#records) ≤ A/4ℓ_P²`. **The complete machine-checked electron/photon ↔ QIQT-H
+  microstate connection, honest throughout (capacity bounds the field THROUGH the fitting inequality, never
+  generates it).** Deferred (non-load-bearing, labelled): the M2 entropy-preservation spectral half, the M1
+  converse (∃ isometry from `finrank ≤`), and the Phase-5 dual-weight trace (the genuine Type-II microstate
+  counting). Wired into `QIQTH.lean`+`AxiomAudit.lean`.

@@ -22,6 +22,7 @@ import Mathlib.Data.Complex.Basic
 import Mathlib.Analysis.InnerProductSpace.Basic
 import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
 import Mathlib.Tactic.NoncommRing
+import Mathlib.Analysis.InnerProductSpace.PiL2
 import QIQTH.FQBoundMicro
 
 namespace QIQTH.CodeCapacityBridge
@@ -104,7 +105,70 @@ theorem encoded_field_entropy_le_area {dC 𝓗 : Type*}
         Real.log_le_log (by exact_mod_cast Fintype.card_pos) (by exact_mod_cast hfit)
     _ ≤ areaTerm := hcap.bound
 
+/-- **★ M5 (electron) — the CAR-Fock instantiation.**  The electron's regional code space is the CAR (exterior)
+Fock of `n` one-particle modes, of dimension `2^n` (`Fock/Dirac/CAR.finrank_CARFock`: `dim ⋀h = 2^{finrank h}`),
+here realized as `Fin (2^n)`.  If it fits the microstate space (`2^n ≤ |𝓗_R|`), its regional von Neumann entropy
+obeys the holographic area floor: `S_vN(ρ) ≤ A/4ℓ_P²`. -/
+theorem electron_entropy_le_area {n : ℕ} {𝓗 : Type*} [Fintype 𝓗] {areaTerm : ℝ}
+    [HolographicCapacityBound 𝓗 areaTerm] (hfit : 2 ^ n ≤ Fintype.card 𝓗)
+    {ρ : Matrix (Fin (2 ^ n)) (Fin (2 ^ n)) ℂ} (h : IsDensity ρ) :
+    vonNeumannEntropy h ≤ areaTerm := by
+  haveI : NeZero (2 ^ n) := ⟨pow_ne_zero n two_ne_zero⟩
+  exact encoded_field_entropy_le_area (by simpa using hfit) h
+
+/-- **★ M5 (photon) — the truncated-symmetric-Fock instantiation.**  The photon's regional code space is the
+number-cutoff symmetric Fock `Γ_s^{≤N}(h_γ)` of dimension `C(d+N,N)` (`Fock/Photon/PhotonFock.truncFockDim_eq_
+choose`), here realized as `Fin (C(d+N,N))`.  If it fits the microstate space (`C(d+N,N) ≤ |𝓗_R|`), its regional
+von Neumann entropy obeys the holographic area floor `S_vN(ρ) ≤ A/4ℓ_P²`.  (Without the cutoff `N` the bosonic
+Fock is infinite-dimensional — `no_finiteDim_CCR` — so it cannot fit any finite microstate sector.) -/
+theorem photon_entropy_le_area {d N : ℕ} {𝓗 : Type*} [Fintype 𝓗] {areaTerm : ℝ}
+    [HolographicCapacityBound 𝓗 areaTerm] (hfit : (d + N).choose N ≤ Fintype.card 𝓗)
+    {ρ : Matrix (Fin ((d + N).choose N)) (Fin ((d + N).choose N)) ℂ} (h : IsDensity ρ) :
+    vonNeumannEntropy h ≤ areaTerm := by
+  haveI : NeZero ((d + N).choose N) := ⟨(Nat.choose_pos (Nat.le_add_left N d)).ne'⟩
+  exact encoded_field_entropy_le_area (by simpa using hfit) h
+
 end AreaBound
+
+section RecordCapacity
+
+/-- **★ M6 — record capacity ≤ code dimension.**  A family of *perfectly distinguishable* records is an
+orthonormal family `e : I → C` of record states (orthonormal ⟹ linearly independent), so their count is bounded
+by the code dimension: `|I| ≤ finrank C`.  ("How many distinguishable records the field's regional sector can
+carry" is its dimension.) -/
+theorem record_card_le_finrank {C : Type*}
+    [NormedAddCommGroup C] [InnerProductSpace ℂ C] [Module.Finite ℂ C]
+    {I : Type*} [Fintype I] {e : I → C} (he : Orthonormal ℂ e) :
+    Fintype.card I ≤ Module.finrank ℂ C :=
+  he.linearIndependent.fintype_card_le_finrank
+
+/-- **★★★ M7 — the record→area capstone (Theorem D).**  Combining M6 with the chained area bound: a family of
+perfectly distinguishable records `e : I → ℂ^{dC}` in the field's code space, when the code fits the microstate
+space (`card dC ≤ |𝓗_R|`) under the holographic postulate, has its **log record count** bounded by the area:
+
+  `log |I| ≤ log(card dC) ≤ log|𝓗_R| ≤ A/4ℓ_P²`.
+
+So the number of macroscopically distinguishable records the electron/photon can carry in a region is
+holographically bounded — `log(#records) ≤ A/4ℓ_P²` — once the code sector fits the finite microstate space.
+This is the honest culmination of the bridge (capacity bounds the field's records THROUGH the fitting
+inequality; it does not generate them). -/
+theorem record_log_card_le_area {dC : Type*} [Fintype dC] [DecidableEq dC]
+    {𝓗 : Type*} [Fintype 𝓗] {areaTerm : ℝ} [HolographicCapacityBound 𝓗 areaTerm]
+    (hfit : Fintype.card dC ≤ Fintype.card 𝓗)
+    {I : Type*} [Fintype I] [Nonempty I] {e : I → EuclideanSpace ℂ dC} (he : Orthonormal ℂ e) :
+    Real.log (Fintype.card I) ≤ areaTerm := by
+  have h1 : Fintype.card I ≤ Module.finrank ℂ (EuclideanSpace ℂ dC) :=
+    he.linearIndependent.fintype_card_le_finrank
+  rw [finrank_euclideanSpace] at h1
+  have hIpos : 0 < Fintype.card I := Fintype.card_pos
+  calc Real.log (Fintype.card I)
+      ≤ Real.log (Fintype.card dC) :=
+        Real.log_le_log (by exact_mod_cast hIpos) (by exact_mod_cast h1)
+    _ ≤ Real.log (Fintype.card 𝓗) :=
+        Real.log_le_log (by exact_mod_cast lt_of_lt_of_le hIpos h1) (by exact_mod_cast hfit)
+    _ ≤ areaTerm := HolographicCapacityBound.bound
+
+end RecordCapacity
 
 /-- **★ M0 — Exact finite-dimensional CCR is impossible** (the photon needs a cutoff).  On a *nonzero*
 finite-dimensional space there are no operators `a, a†` satisfying the canonical commutation relation

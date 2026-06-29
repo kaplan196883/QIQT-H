@@ -7161,5 +7161,21 @@ namespace QIQTH.AxiomAudit
 -- link, WITHOUT identifying the field state space with the microstate space (capacity bounds the field only through
 -- the fitting inequality; contrast area_floor_vonNeumann which puts ρ on 𝓗). Axiom-free (standard 3); value of G never claimed.
 #print axioms QIQTH.CodeCapacityBridge.encoded_field_entropy_le_area
+-- ★★★ CODE–CAPACITY BRIDGE M5 (field instantiations of the area bound): electron_entropy_le_area — the electron's
+-- CAR-Fock code (dim 2^n, finrank_CARFock) realized as Fin(2^n); if 2^n ≤ |𝓗_R| then S_vN ≤ A/4ℓ_P². photon_entropy_
+-- le_area — the photon's truncated symmetric Fock code (dim C(d+N,N), truncFockDim_eq_choose) as Fin(C(d+N,N)); if
+-- C(d+N,N) ≤ |𝓗_R| then S_vN ≤ A/4ℓ_P² (without the cutoff N the bosonic Fock is ∞-dim — no_finiteDim_CCR — so cannot
+-- fit). The actual free fields' regional entropy obeying the holographic floor once their code fits. Axiom-free (std 3).
+#print axioms QIQTH.CodeCapacityBridge.electron_entropy_le_area
+#print axioms QIQTH.CodeCapacityBridge.photon_entropy_le_area
+-- ★★★★ CODE–CAPACITY BRIDGE M6+M7 (record capacity → area, the capstone): record_card_le_finrank — a family of
+-- perfectly distinguishable records (orthonormal e : I → C, hence lin. indep.) has |I| ≤ finrank C (record count ≤
+-- code dimension). record_log_card_le_area (Theorem D / CAPSTONE) — combining with the chained area bound: when the
+-- code fits the microstate space (card dC ≤ |𝓗_R|) under HolographicCapacityBound, log|I| ≤ log(card dC) ≤ log|𝓗_R|
+-- ≤ A/4ℓ_P². So the number of macroscopically distinguishable records the electron/photon carries in a region is
+-- holographically bounded, log(#records) ≤ A/4ℓ_P² — capacity bounds the field's records THROUGH the fitting
+-- inequality, it does NOT generate them. The honest culmination of the code→capacity bridge. Axiom-free (standard 3).
+#print axioms QIQTH.CodeCapacityBridge.record_card_le_finrank
+#print axioms QIQTH.CodeCapacityBridge.record_log_card_le_area
 
 end QIQTH.AxiomAudit
