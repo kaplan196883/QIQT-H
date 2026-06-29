@@ -577,4 +577,44 @@ theorem dynamical_twopoint_preserved (V : Matrix d𝓗 dC ℂ) (W : Matrix d𝓗
 
 end Dynamics
 
+section P5Isolation
+
+/-- **★★ D8 — P5 isolation: the equiprobable measure is the UNIQUE permutation-invariant probability.**
+If a probability law `μ` over a finite outcome set `I` is invariant under *every* relabelling of the
+outcomes (`μ ∘ σ = μ` for all permutations `σ` — the envariance/symmetry premise), then it is forced to be
+**uniform**: `μ i = 1/|I|`.  (Permutation invariance makes `μ` constant — any two outcomes are swapped by a
+transposition — and normalization fixes the constant.)
+
+This **isolates premise P5** of the Born-from-typicality derivation (`BornEquiprobable`): the load-bearing
+assumption is precisely that `λ` is symmetric/envariant over the equal-amplitude atoms; *given* that
+symmetry, the equiprobable measure is not a choice but a theorem.  Honest scope: this proves uniqueness
+*under* the symmetry hypothesis — it does **not** discharge the physical premise that `λ` respects the
+symmetry (P5 is isolated and sharpened, not eliminated). -/
+theorem uniform_of_permInvariant {I : Type*} [Fintype I] [DecidableEq I] [Nonempty I] (μ : I → ℝ)
+    (hsum : ∑ i, μ i = 1) (hinv : ∀ (σ : Equiv.Perm I) (i : I), μ (σ i) = μ i) (i : I) :
+    μ i = 1 / (Fintype.card I : ℝ) := by
+  have hconst : ∀ j, μ j = μ i := by
+    intro j
+    have h := hinv (Equiv.swap i j) j
+    rw [Equiv.swap_apply_right] at h
+    exact h.symm
+  have hcard : (Fintype.card I : ℝ) ≠ 0 := by
+    exact_mod_cast (Fintype.card_pos).ne'
+  have key : (Fintype.card I : ℝ) * μ i = 1 := by
+    rw [← hsum, Finset.sum_congr rfl (fun j _ => hconst j), Finset.sum_const, Finset.card_univ,
+      nsmul_eq_mul]
+  rw [eq_div_iff hcard, mul_comm]
+  exact key
+
+/-- **★ D8 — uniqueness corollary.**  Any two permutation-invariant probability laws over a finite outcome
+set coincide (both equal the equiprobable measure).  So the symmetric/envariant `λ` is *unique* — there is
+no residual freedom in the measure once envariance is imposed. -/
+theorem permInvariant_unique {I : Type*} [Fintype I] [DecidableEq I] [Nonempty I] (μ ν : I → ℝ)
+    (hμsum : ∑ i, μ i = 1) (hμinv : ∀ (σ : Equiv.Perm I) (i : I), μ (σ i) = μ i)
+    (hνsum : ∑ i, ν i = 1) (hνinv : ∀ (σ : Equiv.Perm I) (i : I), ν (σ i) = ν i) (i : I) :
+    μ i = ν i := by
+  rw [uniform_of_permInvariant μ hμsum hμinv i, uniform_of_permInvariant ν hνsum hνinv i]
+
+end P5Isolation
+
 end QIQTH.CornerConstruction

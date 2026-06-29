@@ -293,3 +293,20 @@ Cannot remove P5, but can isolate it cleanly.
   fragment of dynamics). Honest: **preservation, NOT generation** — both `U` and `W` are supplied; capacity
   does not produce the dynamics. Wired into `AxiomAudit.lean`. _Next: D8 (P5 isolation / envariance
   uniqueness)._
+- 2026-06-29 — **D8 DONE — ✅ PROGRAM COMPLETE (D1–D8, D9 = cited frontier)** (axiom-free standard-3,
+  budget 0, full QIQTH green 8874 jobs). **P5 isolation / envariance uniqueness** (`section P5Isolation`):
+  **`uniform_of_permInvariant`** — a probability law invariant under *every* relabelling of outcomes
+  (`μ∘σ = μ` for all permutations `σ`) is forced **uniform** `μ i = 1/|I|` (permutation invariance ⟹ constant
+  ⟹ normalized). This **isolates premise P5** of Born-from-typicality: given envariance/symmetry of `λ` over
+  the equal-amplitude atoms, the equiprobable measure is a *theorem*, not a choice.
+  **`permInvariant_unique`** — any two permutation-invariant probabilities coincide (no residual measure
+  freedom). Honest: uniqueness *under* the symmetry hypothesis; it does **not** discharge the physical premise
+  that `λ` respects the symmetry (P5 isolated and sharpened, not eliminated). Wired into `AxiomAudit.lean`.
+
+  **DEEPENING PROGRAM COMPLETE.** The honest slogan of §0 is now fully machine-checked: *finite field-code
+  fragments, encoded into capacity-bounded microstate spaces, appear as Born-weighted (D2), dynamically-
+  faithful (D7), area-bounded (D2/D4/D5) record structures — for both the electron (CAR, D4) and the photon
+  (truncated, D3/D5) — with their CAR/ladder algebra (D4/D5) and modular/KMS structure (D6) transported into
+  the corner `P` (D1), never the ambient `1_𝓗`.* **D9** (Gaussian/Williamson entropy–area) remains the cited
+  research-grade frontier (Mathlib lacks real-symplectic/Williamson), as do the continuum `ρ^{it}`/Type-III
+  pieces of D6 — these are honestly checkpointed, not ground.

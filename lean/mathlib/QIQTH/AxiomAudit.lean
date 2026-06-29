@@ -7284,4 +7284,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CornerConstruction.dynamical_expectation_preserved
 #print axioms QIQTH.CornerConstruction.dynamical_twopoint_preserved
 
+-- ★★ CORNER CONSTRUCTION (D8) — P5 isolation / envariance uniqueness:
+-- uniform_of_permInvariant — a probability law invariant under EVERY relabelling of outcomes (μ∘σ=μ ∀ perm σ)
+-- is forced uniform μ i = 1/|I| (permutation invariance ⟹ constant ⟹ normalized). This ISOLATES premise P5 of
+-- Born-from-typicality: given envariance/symmetry of λ over the equal-amplitude atoms, the equiprobable measure
+-- is a THEOREM, not a choice. permInvariant_unique — any two perm-invariant probabilities coincide (no residual
+-- measure freedom). Honest: uniqueness UNDER the symmetry hypothesis; does not discharge the physical premise
+-- that λ respects the symmetry (P5 isolated/sharpened, not eliminated). Std 3.
+#print axioms QIQTH.CornerConstruction.uniform_of_permInvariant
+#print axioms QIQTH.CornerConstruction.permInvariant_unique
+
 end QIQTH.AxiomAudit
