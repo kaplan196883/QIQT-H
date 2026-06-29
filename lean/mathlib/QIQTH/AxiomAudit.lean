@@ -7204,4 +7204,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CornerConstruction.encoded_npoint
 #print axioms QIQTH.CornerConstruction.encoded_twopoint
 
+-- ★★ CORNER CONSTRUCTION (D2) — Born record entropy ≤ area (the entropy upgrade of M7):
+-- born_record_entropy_le_area — the Shannon entropy of a Born record distribution p : K → ℝ obeys the area floor
+-- once the records fit the microstate space (card K ≤ card 𝓗): H(p) ≤ log(card K) ≤ log(card 𝓗) ≤ A/4ℓ_P²
+-- (Gibbs/Jensen shannon_le_log_card + the bridge fitting+capacity chain). born_readout_entropy_le_area (Layer-C
+-- tie) — the ACTUAL Born readout (sectorAmp k)² = |c_k|² of the unifying theorem has area-bounded Shannon entropy
+-- (joins the typicality-derived Born weights to the capacity layer in entropy form). sum_uniform_outcomeMarginal —
+-- the uniform measure's outcome-marginals sum to 1. A statement about the field's RECORDS; does not remove P5 or
+-- the capacity postulate. Std 3.
+#print axioms QIQTH.CornerConstruction.born_record_entropy_le_area
+#print axioms QIQTH.CornerConstruction.sum_uniform_outcomeMarginal
+#print axioms QIQTH.CornerConstruction.born_readout_entropy_le_area
+
 end QIQTH.AxiomAudit

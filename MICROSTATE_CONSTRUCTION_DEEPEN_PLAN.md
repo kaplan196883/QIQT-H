@@ -211,3 +211,14 @@ Cannot remove P5, but can isolate it cleanly.
   covers electron & photon uniformly. Honest: faithful encoding / read-back, NOT emergence of the
   field or its dynamics. Wired into `QIQTH.lean` + `AxiomAudit.lean`. _Next: D2 (sharp-record Born
   entropy ≤ area)._
+- 2026-06-29 — **D2 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8874 jobs). The **entropy
+  upgrade of M7** in `CornerConstruction.lean` (`section Records`): `born_record_entropy_le_area` — the
+  actual **Shannon entropy** of a Born record distribution `p : K → ℝ` obeys the area floor once the
+  records fit the microstate space, `H(p) ≤ log(card K) ≤ log(card 𝓗) ≤ A/4ℓ_P²` (rides the existing
+  Gibbs/Jensen `RecordContract.shannon_le_log_card` + the bridge's fitting+capacity chain). Layer-C tie
+  **`born_readout_entropy_le_area`** — the *actual* Born readout `(sectorAmp k)² = |c_k|²` of the unifying
+  theorem has area-bounded entropy (joins the typicality-derived Born weights to the capacity layer in
+  entropy form), with helper `sum_uniform_outcomeMarginal` (the uniform measure's marginals sum to 1).
+  So M7's "log #records ≤ area" is sharpened to "the *information* in the Born-weighted records ≤ area."
+  Honest scope unchanged: about the field's records; does not remove P5 or the capacity postulate. Wired
+  into `AxiomAudit.lean`. _Next: D3 (finite-Weyl/CCR no-go + truncated-oscillator commutator)._

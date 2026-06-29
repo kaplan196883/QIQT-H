@@ -24,6 +24,7 @@ See `MICROSTATE_CONSTRUCTION_DEEPEN_PLAN.md`.
 import Mathlib.LinearAlgebra.Matrix.Trace
 import Mathlib.Data.Complex.Basic
 import QIQTH.CodeCapacityBridge
+import QIQTH.RecordContract
 
 namespace QIQTH.CornerConstruction
 
@@ -124,5 +125,75 @@ theorem encoded_twopoint (V : Matrix d𝓗 dC ℂ) (hV : Vᴴ * V = 1) (ρ A B :
   exact QIQTH.CodeCapacityBridge.encoded_record_expectation V hV ρ (A * B)
 
 end Corner
+
+section Records
+
+open QIQTH.BornEquiprobable QIQTH.NoBornFromNothing
+
+/-- **★★ D2 — Born record entropy ≤ area (the entropy upgrade of M7).**  Where `record_log_card_le_area`
+bounds the *log count* of distinguishable records, this bounds the actual **Shannon entropy** of the Born
+record distribution `p : K → ℝ` (a probability law over the distinguishable outcomes `K`).  Once the
+records fit the microstate space (`card K ≤ card 𝓗`, the capacity-fitting condition) under the
+holographic postulate:
+
+  `H(p) ≤ log(card K) ≤ log(card 𝓗) ≤ A/4ℓ_P²`.
+
+The first step is the Gibbs/Jensen maximum-entropy bound `shannon_le_log_card`; the rest is the bridge's
+fitting + capacity chain.  So the **information content of a region's distinguishable records is
+holographically area-bounded** — the sharp (entropy, not cardinality) form of the record→area capstone. -/
+theorem born_record_entropy_le_area {K 𝓗 : Type*} [Fintype K] [Fintype 𝓗] {areaTerm : ℝ}
+    [hcap : HolographicCapacityBound 𝓗 areaTerm] (hfit : Fintype.card K ≤ Fintype.card 𝓗)
+    (p : K → ℝ) (hp : ∀ k, 0 ≤ p k) (h1 : ∑ k, p k = 1) :
+    QIQTH.BranchLedger.Shannon Finset.univ p ≤ areaTerm := by
+  have hKpos : 0 < Fintype.card K := by
+    rcases Nat.eq_zero_or_pos (Fintype.card K) with h0 | h0
+    · haveI : IsEmpty K := Fintype.card_eq_zero_iff.mp h0
+      simp only [Finset.univ_eq_empty, Finset.sum_empty] at h1
+      exact absurd h1 (by norm_num)
+    · exact h0
+  calc QIQTH.BranchLedger.Shannon Finset.univ p
+      ≤ Real.log (Fintype.card K) := QIQTH.RecordContract.shannon_le_log_card p hp h1
+    _ ≤ Real.log (Fintype.card 𝓗) :=
+        Real.log_le_log (by exact_mod_cast hKpos) (by exact_mod_cast hfit)
+    _ ≤ areaTerm := hcap.bound
+
+/-- The outcome-marginal of the uniform measure over the fine-graining is a normalized law: its weights
+sum to one (`∑_k outcomeMarginal sec (1/|I|) k = 1`), since the marginals repartition the uniform total. -/
+theorem sum_uniform_outcomeMarginal {I K : Type*} [Fintype I] [Fintype K] [DecidableEq K] [Nonempty I]
+    (sec : I → K) :
+    ∑ k, outcomeMarginal sec (fun _ => 1 / (Fintype.card I : ℝ)) k = 1 := by
+  unfold outcomeMarginal
+  rw [Finset.sum_comm]
+  have hinner : ∀ γ : I, (∑ k, if sec γ = k then (1 / (Fintype.card I : ℝ)) else 0)
+      = 1 / (Fintype.card I : ℝ) := fun γ => by
+    rw [Finset.sum_ite_eq Finset.univ (sec γ) (fun _ => (1 / (Fintype.card I : ℝ)))]
+    simp
+  simp_rw [hinner]
+  rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul, mul_one_div,
+    div_self (by exact_mod_cast Fintype.card_ne_zero)]
+
+/-- **★★★ D2 (Layer-C tie) — the Born readout's entropy is area-bounded.**  Specializing
+`born_record_entropy_le_area` to the *actual Born weights* of the unifying theorem: for an equal-amplitude
+orthonormal fine-graining `f : I → 𝓗_R` with readout `sec : I → K`, the Born readout distribution
+`p k = (sectorAmp f sec k)² = |c_k|²` (the uniform measure's outcome-marginal,
+`uniform_marginal_eq_sectorAmp_sq`) has Shannon entropy bounded by the area, once the outcomes fit the
+microstate space (`card K ≤ card 𝓗_R`):
+
+  `H((sectorAmp ·)²) ≤ A/4ℓ_P²`.
+
+So the **information carried by the electron's/photon's Born-weighted records is holographically
+area-bounded** — joining the Born layer (the weights are `|c_k|²`, derived from typicality) to the
+capacity layer (their entropy obeys the area floor) in entropy form.  Honest scope unchanged: a statement
+about the field's *records*; it does not derive the field, `G`, or remove P5 / the capacity postulate. -/
+theorem born_readout_entropy_le_area {d𝓗 : Type*} [Fintype d𝓗] {K : Type*} [Fintype K] [DecidableEq K]
+    {areaTerm : ℝ} [HolographicCapacityBound d𝓗 areaTerm] (hfit : Fintype.card K ≤ Fintype.card d𝓗)
+    {I : Type*} [Fintype I] [DecidableEq I] [Nonempty I]
+    {f : I → EuclideanSpace ℂ d𝓗} (hf : Orthonormal ℂ f) (sec : I → K) :
+    QIQTH.BranchLedger.Shannon Finset.univ (fun k => (sectorAmp f sec k) ^ 2) ≤ areaTerm := by
+  refine born_record_entropy_le_area hfit _ (fun k => sq_nonneg _) ?_
+  rw [← sum_uniform_outcomeMarginal sec]
+  exact Finset.sum_congr rfl (fun k _ => (uniform_marginal_eq_sectorAmp_sq hf sec k).symm)
+
+end Records
 
 end QIQTH.CornerConstruction
