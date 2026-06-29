@@ -7216,6 +7216,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CornerConstruction.sum_uniform_outcomeMarginal
 #print axioms QIQTH.CornerConstruction.born_readout_entropy_le_area
 
+-- ★★ CORNER CONSTRUCTION (D4) — CAR transport into the corner (ELECTRON):
+-- encoded_anticomm — the encoding carries any fermionic anticommutation relation {a,b}=a b+b a=c•1 on the code
+-- into the corner with the CORNER UNIT P (not the ambient 1_𝓗): {ι_V(a),ι_V(b)} = c•P. Instantiates the CAR
+-- algebra exactly: {ι_V(a(f)),ι_V(a†(g))}=⟪f,g⟫·P (c=⟪f,g⟫) and {ι_V(a(f)),ι_V(a(g))}=0 (c=0). Transport of a
+-- SUPPLIED CAR rep, not its construction. encoded_CAR_ambient_forces_full — the no-overclaim guard: encoded CAR
+-- with the ambient 1_𝓗 (c≠0) forces P=1_𝓗 (code fills 𝓗_R) — compressed CAR cannot be ambient from a proper
+-- sub-code. fermion_modes_le_area — the electron mode count is area-bounded: n·log2 = log(2^n) ≤ log|𝓗_R| ≤
+-- A/4ℓ_P². encode_add/encode_smul: the encoding is ℂ-linear. Std 3.
+#print axioms QIQTH.CornerConstruction.encode_add
+#print axioms QIQTH.CornerConstruction.encode_smul
+#print axioms QIQTH.CornerConstruction.encoded_anticomm
+#print axioms QIQTH.CornerConstruction.encoded_CAR_ambient_forces_full
+#print axioms QIQTH.CornerConstruction.fermion_modes_le_area
+
 -- ★★ CORNER CONSTRUCTION (D3a) — the finite Weyl obstruction (operational CCR no-go, PHOTON):
 -- finite_weyl_qpow_eq_one — invertible U,V on a finite-dim space with a Weyl q-commutation U V = q•(V U)
 -- force q^(dim) = 1 (determinant argument). So the CONTINUOUS Weyl relations of a bosonic mode (generic

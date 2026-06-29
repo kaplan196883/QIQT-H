@@ -249,3 +249,15 @@ Cannot remove P5, but can isolate it cleanly.
   matrix algebra over `Fin N` via value-/successor-form finite-sum helpers (`sum_fin_ite_val`,
   `sum_fin_ite_succ`) + `Real.mul_self_sqrt`. Wired into `AxiomAudit.lean`. _Next: D4 (CAR operators in the
   corner — electron)._
+- 2026-06-29 — **D4 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8874 jobs). **CAR transport into
+  the corner** in `CornerConstruction.lean` (`section Electron`): `encode_add`/`encode_smul` (the encoding is
+  ℂ-linear); the workhorse **`encoded_anticomm`** — the encoding carries any fermionic anticommutator
+  `{a,b} = a b + b a = c•1` on the code into the corner with the **corner unit `P`** (not the ambient `1_𝓗`):
+  `{ι_V(a), ι_V(b)} = c•P`. This instantiates the electron's CAR algebra exactly —
+  `{ι_V(a(f)), ι_V(a†(g))} = ⟪f,g⟫·P` (`c = ⟪f,g⟫`) and `{ι_V(a(f)), ι_V(a(g))} = 0` (`c = 0`). The
+  **no-overclaim guard `encoded_CAR_ambient_forces_full`** — if the encoded CAR holds with the ambient `1_𝓗`
+  (and `c ≠ 0`), then `P = 1_𝓗` (the code fills `𝓗_R`): compressed CAR cannot be ambient from a proper
+  sub-code — the formal tripwire honored. Plus **`fermion_modes_le_area`** — the electron mode count is
+  area-bounded, `n·log 2 = log(2^n) ≤ log|𝓗_R| ≤ A/4ℓ_P²` (complements `electron_entropy_le_area`). Honest:
+  **transport of a supplied CAR rep, not its construction** — capacity does not generate the fermion. Wired
+  into `AxiomAudit.lean`. _Next: D5 (truncated-Fock operators in the corner — photon)._

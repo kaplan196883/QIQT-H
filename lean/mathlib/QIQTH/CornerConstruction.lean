@@ -196,6 +196,71 @@ theorem born_readout_entropy_le_area {d𝓗 : Type*} [Fintype d𝓗] {K : Type*}
 
 end Records
 
+section Electron
+
+variable {dC d𝓗 : Type*} [Fintype dC] [DecidableEq dC] [Fintype d𝓗] [DecidableEq d𝓗]
+
+/-- The encoding is additive: `ι_V(A + B) = ι_V(A) + ι_V(B)`. -/
+theorem encode_add (V : Matrix d𝓗 dC ℂ) (A B : Matrix dC dC ℂ) :
+    encode V (A + B) = encode V A + encode V B := by
+  simp only [encode_def, Matrix.add_mul, Matrix.mul_add]
+
+/-- The encoding is scalar-linear: `ι_V(c • A) = c • ι_V(A)`. -/
+theorem encode_smul (V : Matrix d𝓗 dC ℂ) (c : ℂ) (A : Matrix dC dC ℂ) :
+    encode V (c • A) = c • encode V A := by
+  simp only [encode_def, Matrix.smul_mul, Matrix.mul_smul]
+
+/-- **★★ D4 — CAR transport into the corner (ELECTRON).**  The encoding carries any **fermionic
+anticommutation relation** on the code into the microstate corner, with the **corner unit `P` in place
+of the ambient `1_𝓗`**.  If two code operators `a, b` (e.g. `a(f)` and `a†(g)`) satisfy
+`{a, b} = a b + b a = c • 1` on the code `C_R` (the CAR datum, `c = ⟪f,g⟫`), then their encodings satisfy
+
+  `{ι_V(a), ι_V(b)} = ι_V(a) ι_V(b) + ι_V(b) ι_V(a) = c • P`.
+
+So the electron's CAR algebra is represented *exactly* in the corner — `{ι_V(a(f)), ι_V(a†(g))} = ⟪f,g⟫·P`
+(canonical, `c = ⟪f,g⟫`), and `{ι_V(a(f)), ι_V(a(g))} = 0` (the nilpotent relations, `c = 0`).  This is
+**transport of a supplied CAR representation**, not its construction (capacity does not generate the
+fermion); the corner unit `P` is the honest stand-in for `1_𝓗`. -/
+theorem encoded_anticomm (V : Matrix d𝓗 dC ℂ) (hV : Vᴴ * V = 1)
+    (a b : Matrix dC dC ℂ) (c : ℂ) (hCAR : a * b + b * a = c • 1) :
+    encode V a * encode V b + encode V b * encode V a = c • codeProjector V := by
+  rw [← encode_mul V hV, ← encode_mul V hV, ← encode_add, hCAR, encode_smul, encode_one]
+
+/-- **★★ D4 — the no-overclaim guard (the audit tripwire for CAR).**  The encoded CAR operators satisfy
+the anticommutation relation with the **ambient identity `1_𝓗`** (rather than the corner unit `P`) *only
+if* the code fills the entire microstate space (`P = 1_𝓗`).  Concretely: if
+`{ι_V(a), ι_V(b)} = c • 1_𝓗` for some `c ≠ 0` while `{a, b} = c • 1` on the code, then `codeProjector V =
+1`.  So compressed CAR operators **cannot** satisfy ambient-identity CAR from a proper sub-code — the
+formal guard against silently replacing `P` by `1_𝓗`. -/
+theorem encoded_CAR_ambient_forces_full (V : Matrix d𝓗 dC ℂ) (hV : Vᴴ * V = 1)
+    (a b : Matrix dC dC ℂ) (c : ℂ) (hc : c ≠ 0) (hCAR : a * b + b * a = c • 1)
+    (hfull : encode V a * encode V b + encode V b * encode V a = c • (1 : Matrix d𝓗 d𝓗 ℂ)) :
+    codeProjector V = 1 := by
+  have h1 := encoded_anticomm V hV a b c hCAR
+  rw [h1] at hfull
+  exact smul_right_injective (Matrix d𝓗 d𝓗 ℂ) hc hfull
+
+/-- **★ D4 — the electron's fermionic mode count is area-bounded.**  The CAR (exterior) Fock space of
+`n` one-particle modes has dimension `2^n`.  If it fits the microstate space (`2^n ≤ |𝓗_R|`) under the
+holographic postulate, the **number of fermionic modes** obeys the area floor:
+
+  `n · log 2 = log(2^n) ≤ log|𝓗_R| ≤ A/4ℓ_P²`.
+
+So a region can carry only `≲ A/(4ℓ_P² log 2)` electron modes — capacity bounds the *mode count*
+through the fitting inequality (it does not generate the modes).  Complements
+`CodeCapacityBridge.electron_entropy_le_area` (the entropy form) with the bare mode-count form. -/
+theorem fermion_modes_le_area {n : ℕ} {𝓗 : Type*} [Fintype 𝓗] {areaTerm : ℝ}
+    [hcap : HolographicCapacityBound 𝓗 areaTerm]
+    (hfit : 2 ^ n ≤ Fintype.card 𝓗) :
+    (n : ℝ) * Real.log 2 ≤ areaTerm := by
+  rw [← Real.log_pow]
+  calc Real.log ((2 : ℝ) ^ n)
+      ≤ Real.log (Fintype.card 𝓗) :=
+        Real.log_le_log (by positivity) (by exact_mod_cast hfit)
+    _ ≤ areaTerm := hcap.bound
+
+end Electron
+
 section Photon
 
 open Matrix
