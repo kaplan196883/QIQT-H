@@ -563,3 +563,4 @@ import QIQTH.FQBoundConditional
 import QIQTH.FQBoundCGP
 import QIQTH.FQBoundMicro
 import QIQTH.GRFromMicro
+import QIQTH.CodeCapacityBridge

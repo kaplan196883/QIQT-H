@@ -7133,5 +7133,12 @@ namespace QIQTH.AxiomAudit
 -- information than a single-component scalar-like field of the same per-helicity mode count). Axiom-free (standard 3).
 #print axioms QIQTH.Fock.Photon.photon_capacity_two_helicity
 #print axioms QIQTH.Fock.Photon.photon_capacity_helicity_ge
+-- ★★★ CODE–CAPACITY BRIDGE M0 (the free field meets the finite microstates — the CAR/CCR dichotomy): no_finiteDim_CCR
+-- — exact finite-dimensional CCR is IMPOSSIBLE: no a,a† on a nonzero finite-dim space satisfy [a,a†]=a a†−a† a=1,
+-- since trace([a,a†])=0 (trace_mul_comm) but trace 1 = dim H ≠ 0. So the photon's bosonic mode CANNOT live in a
+-- finite-microstate (holographic-capacity) sector without a number/energy cutoff — whereas the CAR fermion's ⋀h is
+-- finite and fits exactly. The single genuine "reverse" content of the capacity postulate (capacity is a CONSTRAINT,
+-- not a generator; spin-statistics proper needs locality/Poincaré, NOT capacity). Axiom-free (standard 3).
+#print axioms QIQTH.CodeCapacityBridge.no_finiteDim_CCR
 
 end QIQTH.AxiomAudit
