@@ -7323,4 +7323,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FreeFieldCorner.encoded_bracket_of_eq
 #print axioms QIQTH.FreeFieldCorner.encoded_CAR_bracket
 
+-- ★★ FREE-FIELD CORNER (A2) — quark/lepton content (multi-flavor CAR):
+-- encoded_flavor_CAR — a finite flavor type Φ (generations×colors×leptons) with flavor-resolved anticommutator
+-- {a(α),a†(β)}=c(α,β)•1 transports to the corner {ι(a α),ι(a† β)}=c(α,β)•P (instance of A1, never ambient 1_𝓗).
+-- fermion_flavor_modes_le_area — F flavors × m modes ⟹ (F·m)·log2 = log(2^(F·m)) ≤ log|𝓗_R| ≤ A/4ℓ_P² (the
+-- multi-flavor mode count is area-bounded). Transport of a SUPPLIED CAR family, not its construction. Std 3.
+#print axioms QIQTH.FreeFieldCorner.encoded_flavor_CAR
+#print axioms QIQTH.FreeFieldCorner.fermion_flavor_modes_le_area
+
 end QIQTH.AxiomAudit

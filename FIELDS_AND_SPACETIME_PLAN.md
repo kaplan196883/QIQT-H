@@ -121,6 +121,14 @@ Per increment: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green;
   SUPPLIED free-field algebra, NOT its construction; interactions/gauge/confinement/chirality/SSB are cited
   frontiers. Wired into `QIQTH.lean` + `AxiomAudit.lean`. _Track A next: A2 (quark/lepton multi-flavor CAR
   instances)._
+- 2026-06-29 — **A2 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8876 jobs). `FreeFieldCorner.lean`
+  (`section Fermions`): quark/lepton content. **`encoded_flavor_CAR`** — a finite flavor type `Φ`
+  (generations × colors × leptons) with the flavor-resolved anticommutator `{a(α),a†(β)} = c(α,β)•1`
+  transports to the corner `{ι(a α),ι(a† β)} = c(α,β)•P` (instance of A1's `encoded_CAR_bracket`, never the
+  ambient `1_𝓗`); **`fermion_flavor_modes_le_area`** — `F` flavors × `m` modes ⟹ `(F·m)·log 2 = log(2^(F·m))
+  ≤ log|𝓗_R| ≤ A/4ℓ_P²` (the multi-flavor fermion mode count is area-bounded, generalizing
+  `fermion_modes_le_area`). Honest: transport of a SUPPLIED CAR family, not its construction. _Track A next:
+  A3 (W/Z + gluons as truncated-bosonic instances)._
 - 2026-06-29 — **B1 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8876 jobs).
   `EmergentSpacetime.lean` (`section Metric`): the corrected metric core. `IsApproxPseudometric ε d`
   (nonneg/self/symm/triangle-up-to-ε — the target type for any emergent-distance reconstruction);

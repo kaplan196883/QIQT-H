@@ -71,4 +71,38 @@ theorem encoded_CAR_bracket (V : Matrix d𝓗 dC ℂ) (hV : Vᴴ * V = 1)
 
 end GradedBracket
 
+section Fermions
+
+variable {dC d𝓗 : Type*} [Fintype dC] [DecidableEq dC] [Fintype d𝓗] [DecidableEq d𝓗]
+
+/-- **★★ A2 — quark/lepton content: flavor-indexed CAR transports into the corner.**  The SM's fermion
+content is a family of CAR modes indexed by a finite **flavor** type `Φ` (generations × colors × leptons),
+with the flavor-resolved anticommutator `{a(α), a†(β)} = c(α,β)·1` on the code (`c(α,β) = ⟪f_α,g_β⟫`,
+flavor-diagonal for orthogonal flavors).  Each transports to the corner with the corner unit `P`:
+
+  `{ι_V(a(α)), ι_V(a†(β))} = c(α,β)·P`.
+
+So the whole multi-flavor free-fermion algebra is an instance of the unified A1 transport — never the
+ambient `1_𝓗`.  (Quarks and leptons together; transport of a supplied CAR family, not its construction.) -/
+theorem encoded_flavor_CAR {Φ : Type*} (V : Matrix d𝓗 dC ℂ) (hV : Vᴴ * V = 1)
+    (a adag : Φ → Matrix dC dC ℂ) (c : Φ → Φ → ℂ)
+    (hCAR : ∀ α β, gradedBracket 1 (a α) (adag β) = c α β • (1 : Matrix dC dC ℂ)) (α β : Φ) :
+    gradedBracket 1 (encode V (a α)) (encode V (adag β)) = c α β • codeProjector V :=
+  encoded_CAR_bracket V hV (a α) (adag β) (c α β) (hCAR α β)
+
+/-- **★ A2 — the multi-flavor fermion mode count is area-bounded.**  The CAR (exterior) Fock of `F`
+flavors each with `m` one-particle modes has dimension `2^(F·m)`.  If it fits the microstate space
+(`2^(F·m) ≤ |𝓗_R|`) under the holographic postulate, the total fermionic mode count obeys the area floor:
+
+  `(F·m)·log 2 = log(2^(F·m)) ≤ log|𝓗_R| ≤ A/4ℓ_P²`.
+
+So a region carries only `≲ A/(4ℓ_P² log 2)` quark+lepton modes — capacity bounds the *mode count* (it does
+not generate the fermions).  Generalizes `CornerConstruction.fermion_modes_le_area` to multi-flavor. -/
+theorem fermion_flavor_modes_le_area {F m : ℕ} {𝓗 : Type*} [Fintype 𝓗] {areaTerm : ℝ}
+    [HolographicCapacityBound 𝓗 areaTerm] (hfit : 2 ^ (F * m) ≤ Fintype.card 𝓗) :
+    ((F * m : ℕ) : ℝ) * Real.log 2 ≤ areaTerm :=
+  fermion_modes_le_area hfit
+
+end Fermions
+
 end QIQTH.FreeFieldCorner
