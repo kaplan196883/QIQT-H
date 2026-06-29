@@ -115,3 +115,11 @@ ONE commit on `main` (Co-Authored-By trailer); push via schannel; update §3; re
   **`flow_weak_duality`** — `flowValue f s ≤ cutCapacity cap C` for `s∈C, t∉C` (net ≤ out ≤ cut capacity). Honest:
   the **inequality only**; full max-flow=min-cut duality is the cited research-grade frontier (no Mathlib
   max-flow). Wired into `AxiomAudit.lean`. _Next: C7 (abstract finite first-law ΔS ≤ Δ⟨K⟩)._
+- 2026-06-30 — **C7 DONE** (axiom-free standard-3, budget 0, full QIQTH green 8876 jobs). `EmergentSpacetime.lean`
+  (`section FirstLaw`): the finite entanglement first law. `delta F ρ σ = F ρ − F σ`; `relEntFromModular S Kexp
+  ρ σ = Δ⟨K⟩ − ΔS`; **`deltaEntropy_le_deltaModular_of_relEnt_nonneg`** — `D(ρ‖σ) ≥ 0 ⟹ ΔS ≤ Δ⟨K⟩` (entropy
+  change bounded by modular energy; positivity of `D` is the *supplied* input, Klein /
+  `QuantumEntropy.relEntropy_nonneg`); and **`deltaEntropy_le_eta_deltaArea`** — with `K ∝ area` (`Kexp =
+  η·Area`), `D ≥ 0 ⟹ ΔS ≤ η·ΔA`, the entropy–area variation underlying Jacobson. A finite thermodynamic
+  inequality, conditional on `D ≥ 0` + the area identification; NOT a geometry reconstruction. Wired into
+  `AxiomAudit.lean`. _Next: C5 (approximate modular no-go, generic normed)._

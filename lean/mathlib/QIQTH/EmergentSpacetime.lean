@@ -522,4 +522,40 @@ theorem flow_weak_duality {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ
 
 end Flow
 
+section FirstLaw
+
+variable {α : Type*}
+
+/-- A finite difference of a real functional between two states, `Δ F = F(ρ) − F(σ)`. -/
+def delta (F : α → ℝ) (ρ σ : α) : ℝ := F ρ - F σ
+
+/-- The **relative entropy in modular form**, `D(ρ‖σ) = Δ⟨K⟩ − ΔS`, where `Kexp ρ = ⟨K_σ⟩_ρ` is the
+modular-Hamiltonian expectation in `ρ` and `S` the entropy.  (The content of the entanglement first law.) -/
+def relEntFromModular (S Kexp : α → ℝ) (ρ σ : α) : ℝ := delta Kexp ρ σ - delta S ρ σ
+
+/-- **★★ C7 — the finite entanglement first law (inequality form).**  Nonnegativity of the modular
+relative entropy `D(ρ‖σ) = Δ⟨K⟩ − ΔS ≥ 0` gives `ΔS ≤ Δ⟨K⟩`: the entropy change is bounded by the
+modular-energy change.  (Positivity of `D` is the *supplied* input — Klein's inequality / concrete quantum
+relative entropy, `QuantumEntropy.relEntropy_nonneg`; this states the consequence abstractly.)  A finite
+thermodynamic inequality, NOT a geometry reconstruction. -/
+theorem deltaEntropy_le_deltaModular_of_relEnt_nonneg {S Kexp : α → ℝ} {ρ σ : α}
+    (hrel : 0 ≤ relEntFromModular S Kexp ρ σ) : delta S ρ σ ≤ delta Kexp ρ σ := by
+  unfold relEntFromModular at hrel
+  unfold delta at hrel ⊢
+  linarith
+
+/-- **★★ C7 — the entropy–area variation `δS ≤ η δA`** as the area instance of the first law: when the
+modular Hamiltonian is `∝` area (`Kexp = η·Area`, the BW/edge identification), `D ≥ 0` gives `ΔS ≤ η ΔA`.
+This is the entropy–area inequality underlying Jacobson — finite, conditional on `D ≥ 0` and the area
+identification; it does NOT reconstruct geometry. -/
+theorem deltaEntropy_le_eta_deltaArea {S Area : α → ℝ} (η : ℝ) {ρ σ : α}
+    (hrel : 0 ≤ relEntFromModular S (fun x => η * Area x) ρ σ) :
+    delta S ρ σ ≤ η * delta Area ρ σ := by
+  have h := deltaEntropy_le_deltaModular_of_relEnt_nonneg hrel
+  simp only [delta] at h ⊢
+  have hr : η * (Area ρ - Area σ) = η * Area ρ - η * Area σ := by ring
+  linarith [h, hr]
+
+end FirstLaw
+
 end QIQTH.EmergentSpacetime

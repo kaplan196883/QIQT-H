@@ -7374,6 +7374,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EmergentSpacetime.sum_vertexExcess_eq_netAcross
 #print axioms QIQTH.EmergentSpacetime.flow_weak_duality
 
+-- ★★ EMERGENT SPACETIME (Track C, C7) — finite entanglement first law (modular/thermodynamic):
+-- relEntFromModular S Kexp ρ σ = Δ⟨K⟩ − ΔS (relative entropy in modular form).
+-- deltaEntropy_le_deltaModular_of_relEnt_nonneg — D≥0 ⟹ ΔS ≤ Δ⟨K⟩ (entropy change bounded by modular energy;
+-- positivity of D is the SUPPLIED input — Klein/QuantumEntropy.relEntropy_nonneg). deltaEntropy_le_eta_deltaArea
+-- — with K ∝ area (Kexp=η·Area), D≥0 ⟹ ΔS ≤ η·ΔA (the entropy–area variation underlying Jacobson). A finite
+-- thermodynamic inequality, conditional on D≥0 + area identification; NOT a geometry reconstruction. Std 3.
+#print axioms QIQTH.EmergentSpacetime.deltaEntropy_le_deltaModular_of_relEnt_nonneg
+#print axioms QIQTH.EmergentSpacetime.deltaEntropy_le_eta_deltaArea
+
 -- ★★ FREE-FIELD CORNER (A1) — unified corner transport for free SM field content (Track A):
 -- gradedBracket ε x y = x y + ε•(y x) (ε=1 anticommutator/CAR, ε=-1 commutator/CCR). encode_gradedBracket —
 -- the encoding carries the code graded bracket to the corner: [ι_V(x),ι_V(y)]_ε = ι_V([x,y]_ε), the SINGLE
