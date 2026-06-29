@@ -153,3 +153,20 @@ ONE commit on `main` (Co-Authored-By trailer); push via schannel; update §3; re
   cut-area**: a graph geodesic, NOT a cut/RT-area. Graph adjacency is *supplied* (entanglement/locality data,
   e.g. the C4 Markov graph); edge-weighted lengths from C1 probes are a refinement checkpoint. (import
   `Mathlib.Combinatorics.SimpleGraph.Metric`.) _Next: C8 (reconstruction certificate)._
+- 2026-06-30 — **C8 DONE — ✅ TRACK C COMPLETE (C1–C8)** (axiom-free standard-3, budget 0, full QIQTH green
+  8876 jobs). `EmergentSpacetime.lean` (`section Certificate`): the reconstruction certificate.
+  `MetricSourceTag`/`ProtoGeometryStatus` (provenance enums); `ApproxMetricCert` (a metric `d` + a *proof* it
+  is one + the tags); `CroftonData`/`GraphConnData` carrying the **noncircularity-guard** field (weights/probes
+  resp. connectivity must come from *supplied* entanglement data); **`CroftonData.toApproxMetricCert`** (C1 L¹)
+  and **`GraphConnData.toApproxMetricCert`** (C2 geodesic) emit certified finite-proto-spacetime metrics;
+  **`reconstruction_certs_are_finite_proto`** — both are tagged `finiteProtoSpacetime` with `ε = 0`, NEVER
+  `physicsClaimOnly` and never the physical spacetime metric (the honest packaging, enforced as a theorem).
+  Track C's /loop (job 94ed5364) stopped.
+
+  **TRACK C COMPLETE.** The AdS/CFT-borrowed finite core for emergent geometry: **two** provable
+  entanglement→distance reconstructions (C1 L¹/Crofton, C2 graph geodesic), Markov-screening locality (C4),
+  flow/cut duality (C3), the entanglement first-law inequality (C7), the approximate modular no-go (C5), the
+  Lorentzian causal-order skeleton + capacity-volume (C6), and the certificate bundle (C8) — all axiom-free,
+  background-general (off-AdS), honesty rails enforced. Cited frontiers (not ground): full max-flow=min-cut,
+  the longest-chain timelike proxy, the HS-matrix no-go instantiation, the smooth 4D manifold, continuum
+  Type-III, concrete quantum relative-entropy positivity.

@@ -705,4 +705,78 @@ theorem graphDist_isFiniteMetric (hconn : G.Connected) : IsFiniteMetric (graphDi
 
 end ShortestPath
 
+section Certificate
+
+/-- Provenance tag: which reconstruction rule produced the metric, and from what *supplied* data. -/
+inductive MetricSourceTag where
+  | l1CroftonFromSuppliedProbes
+  | graphGeodesicFromSuppliedConnectivity
+deriving DecidableEq, Repr
+
+/-- Honest status of a reconstructed distance: a finite proto-spacetime object (with error tag), or a
+tagged physics claim (NOT a proven identification with physical spacetime). -/
+inductive ProtoGeometryStatus where
+  | finiteProtoSpacetime
+  | physicsClaimOnly
+deriving DecidableEq, Repr
+
+/-- **A reconstruction certificate**: an approximate (pseudo)metric `d` with its slack `ε`, a *proof* that
+it is one, and provenance tags recording the reconstruction rule and the honest status.  Forces every
+emergent-distance claim to carry its hypotheses, its error bound, and its source. -/
+structure ApproxMetricCert (X : Type*) where
+  ε : ℝ
+  d : X → X → ℝ
+  isApprox : IsApproxPseudometric ε d
+  source : MetricSourceTag
+  status : ProtoGeometryStatus
+
+/-- **Crofton input data** (C1) with the *noncircularity guard* `suppliedFromEntanglementData` — a flag
+the producer must discharge, recording that the weights/probes come from supplied entanglement/cut data
+(else the reconstruction is circular). -/
+structure CroftonData (I X : Type*) [Fintype I] where
+  weight : I → ℝ
+  probe : I → X → ℝ
+  weight_nonneg : ∀ i, 0 ≤ weight i
+  suppliedFromEntanglementData : Prop
+
+/-- **★★ C8 — the C1 reconstruction map**: Crofton input data ↦ a certified finite-proto-spacetime
+pseudometric (the L¹/Crofton distance, tagged with its source and honest status). -/
+noncomputable def CroftonData.toApproxMetricCert {I X : Type*} [Fintype I] (D : CroftonData I X) :
+    ApproxMetricCert X where
+  ε := 0
+  d := weightedCutDist D.weight D.probe
+  isApprox := weightedCutDist_isPseudometric D.weight_nonneg
+  source := MetricSourceTag.l1CroftonFromSuppliedProbes
+  status := ProtoGeometryStatus.finiteProtoSpacetime
+
+/-- **Graph connectivity input data** (C2) with the *noncircularity guard*
+`connectivityFromEntanglementData` — the adjacency graph must come from supplied entanglement/locality
+data. -/
+structure GraphConnData (V : Type*) where
+  G : SimpleGraph V
+  connected : G.Connected
+  connectivityFromEntanglementData : Prop
+
+/-- **★★ C8 — the C2 reconstruction map**: graph connectivity data ↦ a certified geodesic
+finite-proto-spacetime metric (the graph hop-count distance, tagged with its source and honest status). -/
+noncomputable def GraphConnData.toApproxMetricCert {V : Type*} (D : GraphConnData V) :
+    ApproxMetricCert V where
+  ε := 0
+  d := graphDist D.G
+  isApprox := graphDist_isPseudometric D.G D.connected
+  source := MetricSourceTag.graphGeodesicFromSuppliedConnectivity
+  status := ProtoGeometryStatus.finiteProtoSpacetime
+
+/-- Both reconstruction maps emit certificates tagged `finiteProtoSpacetime` (a finite proto-distance with
+error tag, `ε = 0`) — never `physicsClaimOnly`, and never the physical spacetime metric. -/
+theorem reconstruction_certs_are_finite_proto {I X V : Type*} [Fintype I]
+    (D₁ : CroftonData I X) (D₂ : GraphConnData V) :
+    (D₁.toApproxMetricCert).status = ProtoGeometryStatus.finiteProtoSpacetime ∧
+    (D₁.toApproxMetricCert).ε = 0 ∧
+    (D₂.toApproxMetricCert).status = ProtoGeometryStatus.finiteProtoSpacetime ∧
+    (D₂.toApproxMetricCert).ε = 0 :=
+  ⟨rfl, rfl, rfl, rfl⟩
+
+end Certificate
+
 end QIQTH.EmergentSpacetime

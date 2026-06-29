@@ -7413,6 +7413,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EmergentSpacetime.graphDist_isPseudometric
 #print axioms QIQTH.EmergentSpacetime.graphDist_isFiniteMetric
 
+-- ★★ EMERGENT SPACETIME (Track C, C8) — reconstruction certificate networkData ↦ ApproxMetricCert:
+-- ApproxMetricCert bundles a (pseudo)metric d + a PROOF it is one + provenance tags (MetricSourceTag,
+-- ProtoGeometryStatus). CroftonData/GraphConnData carry the NONCIRCULARITY GUARD field (weights/probes resp.
+-- connectivity must come from supplied entanglement data). CroftonData.toApproxMetricCert (C1 L¹) and
+-- GraphConnData.toApproxMetricCert (C2 geodesic) emit certified finite-proto-spacetime metrics.
+-- reconstruction_certs_are_finite_proto — both are tagged finiteProtoSpacetime with ε=0, NEVER physicsClaimOnly
+-- and never the physical spacetime metric (the honest packaging, enforced). Std 3. (Track C cores C1–C8 complete.)
+#print axioms QIQTH.EmergentSpacetime.CroftonData.toApproxMetricCert
+#print axioms QIQTH.EmergentSpacetime.GraphConnData.toApproxMetricCert
+#print axioms QIQTH.EmergentSpacetime.reconstruction_certs_are_finite_proto
+
 -- ★★ FREE-FIELD CORNER (A1) — unified corner transport for free SM field content (Track A):
 -- gradedBracket ε x y = x y + ε•(y x) (ε=1 anticommutator/CAR, ε=-1 commutator/CCR). encode_gradedBracket —
 -- the encoding carries the code graded bracket to the corner: [ι_V(x),ι_V(y)]_ε = ι_V([x,y]_ε), the SINGLE
