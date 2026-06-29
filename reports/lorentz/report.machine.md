@@ -1,7 +1,7 @@
 # Track state — Lorentz covariance
 *Target 2 — QIQT-H compatible with Lorentz (covariance spine + selector no-go)*
 
-_Generated 2026-06-24 23:02 UTC · git `9072cd1` · 11 theorems · tool lean_track_ · provenance: [L]=Lean fact [P]=Lean-checked prober [D]=derived [C]=curation_
+_Generated 2026-06-29 02:00 UTC · git `69351b4` · 11 theorems · tool lean_track_ · provenance: [L]=Lean fact [P]=Lean-checked prober [D]=derived [C]=curation_
 
 ## Axiom status  [L]
 - Project-specific (non-standard) axioms: **0**
