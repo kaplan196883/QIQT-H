@@ -268,4 +268,101 @@ theorem causalEquiv_equivalence : Equivalence (CausalEquiv sig) where
 
 end Causal
 
+section CroftonMetric
+
+/-- An **exact finite metric**: a `0`-approximate pseudometric that additionally *separates points*
+(`d x y = 0 → x = y`).  (`IsApproxPseudometric 0` alone permits zero distance between distinct points.) -/
+structure IsFiniteMetric {X : Type*} (d : X → X → ℝ) : Prop where
+  toApprox : IsApproxPseudometric (0 : ℝ) d
+  eq_of_dist_eq_zero : ∀ {x y : X}, d x y = 0 → x = y
+
+/-- **★★ C1 — the weighted cut / L¹-Crofton distance.**  `d(x,y) = ∑ᵢ ωᵢ·|χᵢ(x) − χᵢ(y)|`: an L¹
+embedding along a finite family of nonnegative-weighted *separating-cut / probe* coordinates `χ : I → X → ℝ`.
+This is the honest **entanglement → distance** reconstruction (the cut-cone / L¹ rule), generalizing the
+single-coordinate `embedDist` and *repairing* `minCut_area_not_metric` (min-cut area is never a distance;
+this *is* a provable metric).  **Honest invariant:** the weights `ω` and probes `χ` must come from SUPPLIED
+entanglement/cut data — the claim is conditional on that data, and the reconstructed metric is a *finite
+proto-distance*, not identified with the physical spacetime metric. -/
+def weightedCutDist {I X : Type*} [Fintype I] (ω : I → ℝ) (χ : I → X → ℝ) (x y : X) : ℝ :=
+  ∑ i : I, ω i * |χ i x - χ i y|
+
+/-- The probe family **separates points**: any two distinct points are distinguished by some positive-weight
+probe. -/
+def WeightedProbesSeparate {I X : Type*} (ω : I → ℝ) (χ : I → X → ℝ) : Prop :=
+  ∀ {x y : X}, x ≠ y → ∃ i : I, 0 < ω i ∧ χ i x ≠ χ i y
+
+theorem weightedCutDist_nonneg {I X : Type*} [Fintype I] {ω : I → ℝ} {χ : I → X → ℝ}
+    (hω : ∀ i, 0 ≤ ω i) (x y : X) : 0 ≤ weightedCutDist ω χ x y :=
+  Finset.sum_nonneg (fun i _ => mul_nonneg (hω i) (abs_nonneg _))
+
+theorem weightedCutDist_self {I X : Type*} [Fintype I] (ω : I → ℝ) (χ : I → X → ℝ) (x : X) :
+    weightedCutDist ω χ x x = 0 := by
+  simp [weightedCutDist]
+
+theorem weightedCutDist_symm {I X : Type*} [Fintype I] (ω : I → ℝ) (χ : I → X → ℝ) (x y : X) :
+    weightedCutDist ω χ x y = weightedCutDist ω χ y x := by
+  unfold weightedCutDist
+  exact Finset.sum_congr rfl (fun i _ => by rw [abs_sub_comm])
+
+theorem weightedCutDist_triangle {I X : Type*} [Fintype I] {ω : I → ℝ} {χ : I → X → ℝ}
+    (hω : ∀ i, 0 ≤ ω i) (x y z : X) :
+    weightedCutDist ω χ x z ≤ weightedCutDist ω χ x y + weightedCutDist ω χ y z := by
+  unfold weightedCutDist
+  rw [← Finset.sum_add_distrib]
+  refine Finset.sum_le_sum (fun i _ => ?_)
+  calc ω i * |χ i x - χ i z|
+      ≤ ω i * (|χ i x - χ i y| + |χ i y - χ i z|) :=
+        mul_le_mul_of_nonneg_left (abs_sub_le _ _ _) (hω i)
+    _ = ω i * |χ i x - χ i y| + ω i * |χ i y - χ i z| := by ring
+
+/-- **★★ C1 — the weighted Crofton distance is an exact pseudometric** (for nonnegative weights). -/
+theorem weightedCutDist_isPseudometric {I X : Type*} [Fintype I] {ω : I → ℝ} {χ : I → X → ℝ}
+    (hω : ∀ i, 0 ≤ ω i) : IsApproxPseudometric 0 (weightedCutDist ω χ) where
+  nonneg := weightedCutDist_nonneg hω
+  self := weightedCutDist_self ω χ
+  symm := weightedCutDist_symm ω χ
+  triangle := fun x y z => by simpa using weightedCutDist_triangle hω x y z
+
+/-- The distance vanishes exactly when every positive-weight probe agrees on the two points. -/
+theorem weightedCutDist_eq_zero_iff {I X : Type*} [Fintype I] {ω : I → ℝ} {χ : I → X → ℝ}
+    (hω : ∀ i, 0 ≤ ω i) (x y : X) :
+    weightedCutDist ω χ x y = 0 ↔ ∀ i : I, 0 < ω i → χ i x = χ i y := by
+  unfold weightedCutDist
+  rw [Finset.sum_eq_zero_iff_of_nonneg (fun i _ => mul_nonneg (hω i) (abs_nonneg _))]
+  constructor
+  · intro h i hi
+    rcases mul_eq_zero.mp (h i (Finset.mem_univ i)) with h0 | h0
+    · exact absurd h0 (ne_of_gt hi)
+    · exact sub_eq_zero.mp (abs_eq_zero.mp h0)
+  · intro h i _
+    rcases eq_or_lt_of_le (hω i) with hi | hi
+    · rw [← hi, zero_mul]
+    · rw [h i hi, sub_self, abs_zero, mul_zero]
+
+/-- **★★★ C1 — `weightedCutDist` is a genuine finite *metric* iff the probe family separates points.**
+So an emergent distance reconstructed from a *separating* family of entanglement/cut probes really is a
+metric — the honest finite Tier-3 reconstruction (a proto-distance, tagged; not the physical metric). -/
+theorem weightedCutDist_isFiniteMetric_iff {I X : Type*} [Fintype I] {ω : I → ℝ} {χ : I → X → ℝ}
+    (hω : ∀ i, 0 ≤ ω i) :
+    IsFiniteMetric (weightedCutDist ω χ) ↔ WeightedProbesSeparate ω χ := by
+  constructor
+  · intro hm x y hxy
+    by_contra hcon
+    push_neg at hcon
+    exact hxy (hm.eq_of_dist_eq_zero ((weightedCutDist_eq_zero_iff hω x y).mpr hcon))
+  · intro hsep
+    refine ⟨weightedCutDist_isPseudometric hω, ?_⟩
+    intro x y hxy0
+    by_contra hne
+    obtain ⟨i, hi, hne'⟩ := hsep hne
+    exact hne' ((weightedCutDist_eq_zero_iff hω x y).mp hxy0 i hi)
+
+/-- C1 recovers the B1 single-coordinate `embedDist` as the one-probe, unit-weight case. -/
+theorem weightedCutDist_singleton_eq_embedDist {X : Type*} (f : X → ℝ) :
+    weightedCutDist (fun _ : PUnit => (1 : ℝ)) (fun _ => f) = embedDist f := by
+  funext x y
+  simp [weightedCutDist, embedDist]
+
+end CroftonMetric
+
 end QIQTH.EmergentSpacetime

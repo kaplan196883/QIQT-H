@@ -7344,6 +7344,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EmergentSpacetime.future_subset_of_reach
 #print axioms QIQTH.EmergentSpacetime.causalEquiv_equivalence
 
+-- ★★ EMERGENT SPACETIME (Track C, C1) — weighted cut / L¹-Crofton metric (entanglement → distance):
+-- weightedCutDist ω χ x y = ∑ ω_i·|χ_i x − χ_i y| — the honest entanglement→distance reconstruction (cut-cone/L¹),
+-- generalizing embedDist and REPAIRING minCut_area_not_metric (min-cut area is never a distance; this is a provable
+-- metric). weightedCutDist_isPseudometric (nonneg/self/symm/triangle, ω≥0); weightedCutDist_eq_zero_iff (vanishes ⟺
+-- all positive-weight probes agree); weightedCutDist_isFiniteMetric_iff (a genuine finite METRIC ⟺ the probe family
+-- separates points). Honest: weights/probes from SUPPLIED entanglement/cut data (else circular); a finite
+-- proto-distance with error tag, NOT the physical spacetime metric. Std 3.
+#print axioms QIQTH.EmergentSpacetime.weightedCutDist_isPseudometric
+#print axioms QIQTH.EmergentSpacetime.weightedCutDist_eq_zero_iff
+#print axioms QIQTH.EmergentSpacetime.weightedCutDist_isFiniteMetric_iff
+#print axioms QIQTH.EmergentSpacetime.weightedCutDist_singleton_eq_embedDist
+
 -- ★★ FREE-FIELD CORNER (A1) — unified corner transport for free SM field content (Track A):
 -- gradedBracket ε x y = x y + ε•(y x) (ε=1 anticommutator/CAR, ε=-1 commutator/CCR). encode_gradedBracket —
 -- the encoding carries the code graded bracket to the corner: [ι_V(x),ι_V(y)]_ε = ι_V([x,y]_ε), the SINGLE
