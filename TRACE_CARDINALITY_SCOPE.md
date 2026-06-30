@@ -120,6 +120,21 @@ algebraic bridge* (K1–K3) plus a *years-deep construction* (K4–K6). The brid
 hypothesis (a minimal record cell / Holevo capacity), which is mild and decoherence-level, not a UV cutoff.
 Never claim QG or the value of `G`; the `1/4` ratio is derived (`SakharovRatio.lean`).
 
+> ⚠️ **RED-TEAM CORRECTION (GPT-5.5-pro adversarial second opinion, 2026-06-30).** The "months-tractable bridge"
+> framing above is **too optimistic** and is corrected here. A red-team finds trace→cardinality is **probably the
+> FATAL obstruction**, not a minor bridge: **(1)** the "atomic center + min-cell" fix (K2) *destroys* the diffuse
+> Type II/III structure that the CPSUV escape (C4) relied on — you cannot use Type III₁ to keep matter covariant
+> AND have literal finite atomic records in the same region (Type III has no atoms, no finite trace). **(2)** the
+> Holevo route (K3) is not a "bridge" — proving `C_χ(D) ≤ Q_D` is essentially proving the capacity postulate
+> itself. **(3)** deeper structural tension: noncompact Lorentz has **no nontrivial finite-dimensional unitary
+> reps**, so a literal finite per-diamond Hilbert/record space + exact Lorentz is representation-theoretically
+> fraught; and generalized entropy ≠ log dim (category error). So K1 (the diffuse counterexample) likely shows
+> the obstruction is **genuine and deep**, and K4–K6 are the real (years-level) content — with a real chance the
+> honest outcome is that literal finite per-diamond cardinality is **incompatible** with the covariant Type
+> III/II structure, i.e. QIQT-H must either give up literal finiteness (keep only finite *renormalized entropy*)
+> or give up the clean CLPW escape. The K-series remains the right decomposition; the *difficulty/optimism* was
+> mis-stated. Substantive viability of "finite card + exact Lorentz" ≈ 10–20% (red-team).
+
 ## 6. References
 
 Murray–von Neumann; Takesaki (Type II factors, traces, conditional expectations); Connes (Type III/II, crossed

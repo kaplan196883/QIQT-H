@@ -140,9 +140,36 @@ Lean: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green; `#print 
   decision-critical: J6 shows the modular structure enters covariantly (via the trace), not as a matter cutoff,
   so the modular-mode kernel is not the matter regulator. Recorded as an optional frontier diagnostic, not a gate.
 
-## 6. CAMPAIGN VERDICT (J1–J6, 2026-06-30)
+## 6′. CAMPAIGN VERDICT — CORRECTED after the GPT-5.5-pro adversarial red-team (2026-06-30)
 
-**Does QIQT-H's covariant per-diamond capacity escape CPSUV? — YES (the CPSUV objection is avoided), with one
+**The earlier "§6: YES, escapes" verdict was TOO OPTIMISTIC and is retracted.** An adversarial second opinion
+(GPT-5.5-pro) finds the "escape" (J6/C4) is the **weakest** link, not the strongest, and faces a **dilemma**:
+- **(i) vacuous** — if matter propagators are genuinely unmodified, the finite capacity does no matter-UV work;
+  loops see ordinary infinite-mode Type III₁ QFT, and "finiteness" is just relabelled into a trace that regulates
+  nothing. CPSUV is avoided only by relocating the claim where CPSUV can't see it.
+- **(ii) reopens** — if capacity is made literal/operational, it must restrict states/records/channels, which
+  likely destroys the Type III₁ structure C4 leans on OR reintroduces modular-time/observer data that can act
+  like a preferred frame, regenerating the `B·(u·p)²` term.
+
+Plus deeper structural tensions the campaign tunnel-visioned past: **Type III₁ has no atoms / no finite trace**
+(a literal finite `card(P.X D)` cannot live there); **noncompact Lorentz has no nontrivial finite-dim unitary
+reps**; **generalized entropy ≠ log dim** (a category error). The Lean `EscapeCertificate` is a **conditional
+near-tautology** (it assumes the decoupling), not a proof of physical escape. Red-team probabilities: narrow
+"sharp-cutoff CPSUV doesn't directly apply to covariant Type III matter" ≈ **75–85%**; substantive "literal
+finite per-diamond capacity AND exact Lorentz via CLPW" ≈ **10–20%**; a fatal flaw within 5 years ≈ **70–85%**.
+**Most likely fatal flaw: the trace/cardinality/type mismatch (C5).** Honest status: the program is **more likely
+quietly inconsistent or vacuous than sound-but-unproven** — NOT "escaped."
+
+What still stands (narrow, defensible): J1 (the LV source is regulator anisotropy), J3 (Δc²=0 ⟺ B=0, a true
+diagnostic), J2 (QIQT-H's capacity is a record-count, so the *naive local-cutoff* CPSUV diagram doesn't directly
+apply). What is NOT established: that this constitutes a genuine finite-capacity-matter theory compatible with
+exact Lorentz. Never claim QG or the value of `G`; the `1/4` ratio is derived (`SakharovRatio.lean`).
+
+---
+
+### (superseded) §6. earlier verdict, retained for the record
+
+**Does QIQT-H's covariant per-diamond capacity escape CPSUV? — [RETRACTED: see §6′] with one
 honest remaining construction obstruction.**
 - The kill (I4) is of the *local-cutoff strawman*; QIQT-H's capacity is an algebraic record-count (J2), not a
   mode cutoff, and the escape is `B=0` (J3) = a Lorentz-scalar matter kernel. A modular/diamond *cutoff* always

@@ -28,6 +28,20 @@ upgrade from the Type II trace entropy bound to QIQT-H's *literal per-diamond re
 all-diamonds Standard-Model-plus-gravity crossed-product construction; and `τ(p_D) = exp(A(∂D)/4ℓ_P²)` per
 causal diamond. Those remain research-grade. Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`);
 never claim the value of `G`; the `1/4` ratio is derived (`SakharovRatio.lean`).
+
+⚠️ **RED-TEAM CAVEAT (GPT-5.5-pro adversarial second opinion, 2026-06-30).** The theorems below are TRUE but
+**conditional / near-tautological**: they *assume* the decoupling (Lorentz-scalar matter `B = 0` AND an
+independent capacity sector) and conclude `Δc² = 0` ∧ finite capacity. They do **NOT** prove the physical
+decoupling. The substantive claim "QIQT-H escapes CPSUV" is **NOT established** and faces a dilemma: (i) if the
+matter propagators are genuinely unmodified, the finite capacity does no matter-UV work — the "escape" is
+**vacuous** (ordinary Type III₁ QFT with finiteness relabelled into a trace); (ii) if capacity is made literal/
+operational, it must restrict states/records and likely destroys the Type III₁ structure or reintroduces a
+modular-time/observer frame — **reopening CPSUV**. Worse, a literal finite `card(P.X D)` is in structural tension
+with the diffuse Type III₁ matter algebra (no atoms, no finite trace, and noncompact Lorentz has no nontrivial
+finite-dim unitary reps). The red-team estimate for the substantive claim is **only ~10–20%**, with the
+trace/cardinality/type mismatch the most likely **fatal** flaw. So read this file as a *structural conditional*
+(the algebra of the decoupling IF it holds), NOT as a proof that QIQT-H reconciles finite capacity with Lorentz.
+See `COVARIANT_CAPACITY_CPSUV_PLAN.md` §6′ and `TRACE_CARDINALITY_SCOPE.md`.
 -/
 import QIQTH.QG.WardSpeedSplitting
 
