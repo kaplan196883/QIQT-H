@@ -472,5 +472,58 @@ theorem record_capacity (T : ι → ι → ℝ) (hT : ∀ i j, 0 ≤ T i j)
 
 end Confusion
 
+/-! ### B4 — the energy/Bekenstein (microcanonical) bound
+
+    This is what makes the operational record count a finite *number*: under an energy constraint the entropy is
+    bounded by the Gibbs free energy. **This is the Bekenstein bound — standard holography, the finiteness is the
+    *imported* energy cutoff, NOT derived from the area law.** Proved classically from `kl_nonneg` (KL against the
+    Gibbs distribution `gᵢ = e^{−βEᵢ}/Z`), no matrix-exponential infrastructure needed. -/
+
+/-- **Classical Gibbs / microcanonical entropy bound (Bekenstein-class).** For a probability distribution `p` on a
+    finite set with energies `E` and inverse temperature `β`, the Shannon entropy obeys
+    `H(p) ≤ β·⟨E⟩ + log Z(β)`, `⟨E⟩ = ∑ pᵢEᵢ`, `Z(β) = ∑ e^{−βEᵢ}`. Under a mean-energy cutoff `⟨E⟩ ≤ E_max`
+    this is the finite microcanonical bound `H ≤ βE_max + log Z` — the entropy budget the operational record
+    capacity then turns into a finite count. Proof: `0 ≤ D(p‖g)` (`kl_nonneg`) against the Gibbs state `g`.
+
+    ⚠ This is the **Bekenstein bound** — standard holography, **NOT new physics**; the finiteness is the
+    *imported* energy cutoff, not derived from any QIQT-H area law. -/
+theorem gibbs_entropy_bound {α : Type*} [Fintype α] (p E : α → ℝ) (β : ℝ)
+    (hp : ∀ i, 0 ≤ p i) (hpsum : ∑ i, p i = 1) :
+    ShannonFano.H Finset.univ p ≤ β * (∑ i, p i * E i) + Real.log (∑ i, Real.exp (-β * E i)) := by
+  set Z := ∑ i, Real.exp (-β * E i) with hZdef
+  have hne : (Finset.univ : Finset α).Nonempty := by
+    rcases isEmpty_or_nonempty α with h | h
+    · haveI := h; simp at hpsum
+    · exact Finset.univ_nonempty_iff.mpr h
+  have hZ : 0 < Z := Finset.sum_pos (fun i _ => Real.exp_pos _) hne
+  set g := fun i => Real.exp (-β * E i) / Z with hgdef
+  have hg_nn : ∀ i, 0 ≤ g i := fun i => div_nonneg (Real.exp_pos _).le hZ.le
+  have hg_sum : ∑ i, g i = 1 := by
+    simp_rw [hgdef, div_eq_mul_inv]
+    rw [← Finset.sum_mul, ← hZdef]
+    exact mul_inv_cancel₀ hZ.ne'
+  have hsupp : ∀ i, p i ≠ 0 → 0 < g i := fun i _ => div_pos (Real.exp_pos _) hZ
+  have hkl := kl_nonneg p g hp hg_nn hsupp hpsum hg_sum
+  have hlogg : ∀ i, p i * Real.log (p i / g i)
+      = p i * Real.log (p i) - p i * (-β * E i - Real.log Z) := by
+    intro i
+    rcases eq_or_lt_of_le (hp i) with h0 | hpos
+    · rw [← h0]; simp
+    · have hgi : 0 < g i := div_pos (Real.exp_pos _) hZ
+      have hlg : Real.log (g i) = -β * E i - Real.log Z := by
+        rw [hgdef, Real.log_div (Real.exp_pos _).ne' hZ.ne', Real.log_exp]
+      rw [Real.log_div hpos.ne' hgi.ne', hlg]; ring
+  have hsum_eq : ∑ i, p i * Real.log (p i / g i)
+      = (∑ i, p i * Real.log (p i)) - ∑ i, p i * (-β * E i - Real.log Z) := by
+    rw [← Finset.sum_sub_distrib]
+    exact Finset.sum_congr rfl (fun i _ => hlogg i)
+  have h2 : ∑ i, p i * (-β * E i - Real.log Z) = -β * (∑ i, p i * E i) - Real.log Z := by
+    have hpt : ∀ i, p i * (-β * E i - Real.log Z) = (-β) * (p i * E i) - p i * Real.log Z := fun i => by ring
+    simp_rw [hpt]
+    rw [Finset.sum_sub_distrib, ← Finset.mul_sum, ← Finset.sum_mul, hpsum, one_mul]
+  rw [hsum_eq, h2] at hkl
+  show -∑ i, p i * Real.log (p i) ≤ β * (∑ i, p i * E i) + Real.log Z
+  linarith [hkl]
+
 end OperationalCapacity
 end QIQTH

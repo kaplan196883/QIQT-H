@@ -7645,5 +7645,9 @@ namespace QIQTH.AxiomAudit
 -- NOT new physics, NOT from the area law (EntropyNotCardinality). Axiom-free (std 3).
 #print axioms QIQTH.OperationalCapacity.confusionMI_ge_fano
 #print axioms QIQTH.OperationalCapacity.record_capacity
+-- B4: the energy/Bekenstein (microcanonical) bound H(p) ≤ β⟨E⟩ + log Z(β) — what makes the operational record
+-- count a finite NUMBER under an energy cutoff. THE BEKENSTEIN BOUND (standard holography); the finiteness is the
+-- IMPORTED energy cutoff, NOT derived from the area law. Proved classically from kl_nonneg vs the Gibbs state. Std 3.
+#print axioms QIQTH.OperationalCapacity.gibbs_entropy_bound
 
 end QIQTH.AxiomAudit

@@ -198,3 +198,11 @@ the count layer to an operational Holevo bound** — genuinely buildable, genuin
   **NEXT → B4 (the energy/Bekenstein microcanonical form — the "finite number" version, `S_vN(ρ) ≤ βE + log Z`
   from `relEntropy_nonneg` vs the Gibbs state, OR a finite-rank-cutoff `M ≤ d(E)` version); then Track A docs to
   point at the now-built `record_capacity`.**
+- **2026-06-30 — B4 ✅ DONE (the energy/Bekenstein bound).** Built **`gibbs_entropy_bound`**: the classical
+  Gibbs / microcanonical entropy bound `H(p) ≤ β·⟨E⟩ + log Z(β)` (`Z = ∑ e^{−βEᵢ}`) — what makes the operational
+  record count a finite *number* under an energy cutoff. Proved **classically from `kl_nonneg`** (KL against the
+  Gibbs distribution `gᵢ = e^{−βEᵢ}/Z`), NO matrix-exp/CFC infrastructure needed (the route GPT flagged as the
+  bottleneck is sidestepped). Axiom-free std-3, pinned, budget 0. The docstring states plainly: **this IS the
+  Bekenstein bound — standard holography, the finiteness is the *imported* energy cutoff, NOT derived from the
+  area law.** **NEXT → B5: point the Track-A guardrail docs (inventory/ledger/site/paper) at the now-built theorem
+  names (`record_capacity`, `gibbs_entropy_bound`); the Lean theorem is otherwise COMPLETE.**
