@@ -234,3 +234,11 @@ inventory-backed.
   continuum Type III₁), provably distinct (`EntropyNotCardinality`), never a finite matter Hilbert space. The
   §1.1a "fork" paragraph (line 110) already carried the continuum=entropy reading. **DONE — the capacity postulate
   is now stated as the verified two-layer truth across inventory, plan, website (idea/theory), and paper (§1.1a).**
+- **2026-06-30 — A4 (ledger) aligned to the two-layer reference; two-layer fix now COMPLETE across all 5 surfaces.**
+  Updated `CLAIMS_LEDGER.md`: rewrote row C3 (was the single-gloss "finite ENTROPY") to the two-layer statement
+  (count `HolographicCapacityBound` vs entropy `Phase5Master`, inequivalent by `EntropyNotCardinality`); sharpened
+  C5 as "the bridge proving the two layers are inequivalent"; corrected the top one-line scope quote; added a
+  cross-source-agreement bullet recording the two-layer consistency; and added a guardrail to "claims we DON'T
+  make" (✗ conflating the entropy bound with a record count — the conflation that made the AdS/CFT reasoning
+  fail). **The capacity postulate now reads as the verified two-layer truth across inventory · plan · website ·
+  paper · ledger — every surface, same qualifiers, with `EntropyNotCardinality` cited as the guardrail.**

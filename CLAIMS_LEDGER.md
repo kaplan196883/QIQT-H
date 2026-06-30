@@ -16,8 +16,10 @@ after A1 (code-comment hygiene), A2 (website), and A3 (paper) landed.
 
 > **The one-line honest scope** (inventory §9): *a rigorously machine-verified single-world interpretation + a
 > substantial formalized operator-algebra/entropy library + a re-derivation of induced-gravity results* — modest
-> on novel physics, strong on rigor and breadth. "Finite capacity" is a finite-**entropy**/holographic statement,
-> **not** a finite-matter theory.
+> on novel physics, strong on rigor and breadth. "Finite capacity" has **two provably-distinct layers** — a record
+> **count** (`card R ≤ e^{Q_R}`, finite-dim model) and a finite **entropy** bound (`S_vN+S_rel ≤ Q_R`, continuum
+> Type III₁), with `EntropyNotCardinality` proving the entropy bound is *not* a count — and is **never** a
+> finite-matter theory (D2/D3).
 
 ---
 
@@ -48,9 +50,9 @@ after A1 (code-comment hygiene), A2 (website), and A3 (paper) landed.
 |---|---|---|---|---|---|
 | C1 | "The area floor `S_vN(ρ_R) ≤ Q_R` is a **theorem** (finite-dim max-entropy), given the finite-capacity postulate." | §1.1a (96); `theory`, `born` | §2 `FQBoundMicro.area_floor_vonNeumann`, conditional on `HolographicCapacityBound` | **[AF·cond:HolographicCapacityBound]** | ✓ |
 | C2 | "The bound is on the **von Neumann** entropy (not Shannon record-count); only `≤` is needed; `N_R` is the **regional** cutoff of a Type III₁ algebra." | §1.1a (96) | §2 (`HolographicCapacityBound` vs `…Exact`; regional, not global) | **[AF·cond]** | ✓ |
-| C3 | "'Finite capacity' = finite **ENTROPY** over covariant (Type III₁) matter, **NOT** a finite matter Hilbert space." | §1.1a (110 fork); `theory`, `open-problems` | §2 (D2/D3); §9 | **[no-go]** (D2/D3) + scope | ✓ |
+| C3 | "'Finite capacity' has **two provably-distinct machine-checked layers**: a record **COUNT** (`card R ≤ e^{Q_R}`) in the finite-dim model and a finite **ENTROPY** bound (`S_vN+S_rel ≤ Q_R`) in the continuum Type III₁ setting — **never** a finite matter Hilbert space." | §1.1a (96 two-layer note, 110 fork); `idea`, `theory`, `open-problems` | §2 (two-layer ⚠-note: `HolographicCapacityBound` = count vs `Phase5Master` = entropy); §9 | **[AF·cond]** (both layers) + **[no-go]** (D2/D3) | ✓ |
 | C4 | "Finite matter + exact Lorentz ⟹ H=0 ∧ P=0 (literal finite-matter reading untenable)." | §1.1a (110) | §2 `FiniteMatterNoLorentz.finitePoincare_trivial` (D2) | **[no-go]** | ✓ |
-| C5 | "A bounded entropy does **not** imply bounded cardinality." | §1.1a (110, fork) | §2 `EntropyNotCardinality.entropy_bound_not_cardinality_bound` (D3) | **[no-go]** | ✓ |
+| C5 | "A bounded entropy does **not** imply bounded cardinality — **the bridge proving the two C3 layers are inequivalent** (the continuum entropy bound is *not* a record count)." | §1.1a (96, 110 fork); `idea`, `theory` | §2 `EntropyNotCardinality.entropy_bound_not_cardinality_bound` (D3) | **[no-go]** | ✓ |
 | C6 | "Capacity is **kinematic** — it bounds S(ρ_R) and feeds the field equations — not a mechanism for single outcomes." | §1.1a; §6.8 banner; §7.5; `born`, `about` | §2, §7 (`measure_needs_only_finiteness`) | scope | ✓ |
 
 ## D. Gravity / Sakharov 1/4 / Einstein equation
@@ -125,12 +127,19 @@ below are tracked, not silent.
   inventory §4/§6c. ✓ *(A1 fixed the AxiomAudit "carried frontier" under-claim; A2 fixed the site "BW package
   cited" over-claim.)*
 - **Lieb/DPI/SSA tower credited** — now in the abstract, `formalization`, inventory §6b. ✓ *(was uncredited.)*
+- **Capacity postulate = two provably-distinct layers (count vs entropy)** — now identical across inventory §2/§9,
+  plan §0 #1, `idea`/`theory`, and paper §1.1a. ✓ *(verified 100% from the hypothesis classes: `HolographicCapacityBound`
+  = `log card R ≤ areaTerm` (count) vs `Phase5Master` = `S_vN+cgp ≤ areaTerm` (entropy); `EntropyNotCardinality`
+  proves them inequivalent. Earlier surfaces glossed it as a single "finite entropy" or single "cardinality" claim.)*
 
 **Claims we deliberately DO NOT make** (the honesty boundary — never assert these):
 - ✗ "QIQT-H gives quantum gravity" / derives the value of **G** or ℓ_P. (Inventory §8 frontier; G is carried.)
 - ✗ "An axiom-free **area law**." The area floor is **[AF·cond:HolographicCapacityBound]**; the area *form*
   (`S∝A`) is the conditional Sakharov bridge, not unconditional.
 - ✗ "Finite **matter** Hilbert space" / "finite capacity forbids two records." (Retired; D2/D3 no-gos.)
+- ✗ Conflating the **finite entropy** bound with a **finite record count** (or stating either alone as "the"
+  postulate). `EntropyNotCardinality` proves the continuum entropy bound is *not* a count; the two are distinct
+  layers — see C3. (This is the conflation that made the AdS/CFT "realises finiteness" reasoning fail.)
 - ✗ "Born **derived** from unitarity." (Reduced to P5.)
 - ✗ "The 1/4 is a **novel** result." (A machine-checked re-derivation of standard induced gravity.)
 - ✗ "QIQT-H **escapes** CPSUV / is established Lorentz-natural." (~10–20%; the "escapes" verdict was retracted.)
