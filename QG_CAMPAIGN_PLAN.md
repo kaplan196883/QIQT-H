@@ -15,8 +15,11 @@ category **(c)** — the open problem. See `docs/qg_roadmap/`.
 
 ## 0. Honest invariants (enforced every increment)
 
-- **Never claim QG, the value of `G`, or the `1/4` coefficient.** The `1/4` *ratio* is derived (`SakharovRatio`);
-  the value of `G` and the area normalization `⟨A_edge⟩ = A(∂R)` are the carried UV datum.
+- **Never claim QG or the value of `G`.** The `1/4` *ratio* IS derived and machine-checked
+  (`SakharovRatio.lean`, circularity-clean Sakharov A+B: `S_ent·G_ind/A = 1/4`, regulator/matter/π all cancel,
+  the geometric `(4π)/(16π)`) — claim it, but as the induced-gravity *ratio*, not a microstate count. The carried
+  UV datum is the **value of `G`** (≡ `ℓ_P²`, the area normalization `⟨A_edge⟩ = A/4ℓ_P²`) and the N-mode
+  Williamson scaling — NOT the `1/4`.
 - **Finiteness is a BET to be tested, not assumed.** The central tension (GPT-5.5-pro, 2026-06-30): an *exact*
   finite cutoff conflicts with *exact* Lorentz invariance. The campaign's first job is to *measure* whether
   finite capacity coexists with **bounded, suppressed** Lorentz violation — not to assume it does.
@@ -145,7 +148,8 @@ Per simulation: a reproducible `scripts/qg/` script + the measured error-scaling
   capacity, `remainder=log|n|−S_vN` the genuine entropy deficit proved ≥0 by `vonNeumannEntropy_le_log_card`
   (Jensen) — NOT `Phase5Master.of_le` on an assumed inequality. `finiteTrace_area_floor`: P4's floor obtained
   THROUGH the interface. Type I/II₁ shadow (continuum Type II_∞ dual-weight trace = the §4 / scope-doc frontier);
-  1/4 & G never asserted. Axiom-free (std 3), full `QIQTH` green, budget 0; wired in.
+  the value of G / area normalization never asserted (the 1/4 ratio IS derived — `SakharovRatio`). Axiom-free
+  (std 3), full `QIQTH` green, budget 0; wired in.
 - **2026-06-30 — I6 ✅ DONE** (`QIQTH/QG/ExactRT.lean`, Phase C / Tier-3 §3.2): exact finite RT via the
   **optimality certificate** — `exact_rt_of_saturating`: a saturating witness (`flowValue f s = cutCapacity
   cap C`) certifies `max-flow = min-cut` (`f` maximizes flow, `C` minimizes cut, both from Track C
@@ -181,4 +185,5 @@ All seven planned increments landed axiom-free (std-3, budget 0) / verified-repr
 bet and found the real obstruction is **dynamical Lorentz naturalness** (I4), not the kinematics (I3/I6/I7 fine).
 The single highest-leverage open frontier: a **Lorentzian finite-capacity substrate that demonstrably shows
 `Δc²(Λ) → 0`** — without it, P4 cannot be realized as a local cutoff. Tier-3 (graviton, constraints, nonlinear
-Einstein, diff-invariant μ) remains category (c), untouched. Never claimed QG / G / the 1/4.
+Einstein, diff-invariant μ) remains category (c), untouched. Never claimed QG or the value of G (the 1/4 *ratio*
+IS derived — `SakharovRatio.lean`).

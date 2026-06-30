@@ -25,7 +25,8 @@ dimension), and the inequality is the **output** of a proved theorem; the `remai
 entropy deficit (`> 0` off saturation, `= 0` exactly at the maximally-mixed record). So the interface to which
 P4's floor was reduced is genuinely instantiable. This is a *finite Type I/II₁ shadow*, not the continuum
 Type II_∞ trace — the `e^{−s}` dual-action scaling and the unbounded clock stay the §4 frontier. The
-identification `log|n| = A/4ℓ_P²` is the carried UV datum; the value of `G` / the `1/4` is never asserted.
+identification `log|n| = A/4ℓ_P²` carries the **value of `G`** (≡ `ℓ_P²`) as the UV datum, never asserted; the
+`1/4` *ratio* itself is separately derived (`SakharovRatio.lean`, circularity-clean Sakharov).
 Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`).
 -/
 import QIQTH.FQBoundCGP

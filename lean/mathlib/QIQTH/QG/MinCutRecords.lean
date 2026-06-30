@@ -18,8 +18,9 @@ record information is bounded by the min-cut area:
     log N ≤ cut w S.
 
 This is the area (not volume) law for the *distinguishable-record* capacity, as a theorem about the code's cut,
-built on Track C's `cut` (B2). The matching *physics* claim "this min-cut is the geometric area `A/4ℓ_P²`" stays
-the carried UV datum; the value of `G` / the `1/4` is never asserted. Axiom-free
+built on Track C's `cut` (B2). The matching *physics* claim "this min-cut is the geometric area `A/4ℓ_P²`" carries
+the **value of `G`** (≡ `ℓ_P²`) as the UV datum, never asserted; the `1/4` *ratio* itself is separately derived
+(`SakharovRatio.lean`, circularity-clean Sakharov). Axiom-free
 (standard `propext`/`Classical.choice`/`Quot.sound`).
 -/
 import QIQTH.EmergentSpacetime

@@ -50,5 +50,6 @@ holographic substrate). That is the **next frontier**, not a static tensor netwo
 
 The finite-capacity substrate exhibits the holographic **kinematics** cleanly (RT/area law, machine-checked
 bound). The **dynamics** — the part I4 showed is the real obstruction — remains open and now has a sharp,
-measurable bar: build a Lorentzian finite-capacity substrate and show `Δc²(Λ) → 0`. The `1/4` and the value of
-`G` are never asserted; `min-cut = A/4ℓ_P²` stays the carried UV datum.
+measurable bar: build a Lorentzian finite-capacity substrate and show `Δc²(Λ) → 0`. The value of `G` (≡ `ℓ_P²`,
+the area normalization in `min-cut = A/4ℓ_P²`) stays the carried UV datum; the `1/4` *ratio* is separately
+derived and machine-checked (`SakharovRatio.lean`, circularity-clean Sakharov).
