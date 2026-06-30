@@ -947,11 +947,12 @@ theorem schur_classification_real
       • `step1c_collapse_of_perm_symmetric` : permutation-symmetric
         coefficient families collapse to two scalars.
 
-    The single remaining Step-1 interface axiom in the project is the
-    top-level `GoldsteinStruyveFinDim.step1_schur_classification`
-    (the full Schur classification of unitary-equivariant maps); the
-    two conjugation lemmas above are the concrete building blocks of
-    its eventual discharge.  -/
+    Step 1 is now AXIOM-FREE: the former top-level interface axiom
+    `step1_schur_classification` has been DISCHARGED by the proved
+    `schur_classification_real` (the full Schur classification of
+    unitary-equivariant maps); the two conjugation lemmas above are its
+    concrete building blocks.  `step1_via_sub_lemmas` depends only on the
+    standard three (verified via `#print axioms`).  -/
 
 /-- **Step 1 (delegation).**
 
@@ -959,11 +960,12 @@ theorem schur_classification_real
     (d ≥ 2) has the Schur form `D = α · canonical + β · uniform` for
     some `α, β ∈ ℝ`.
 
-    Delegates to the single top-level interface axiom
-    `GoldsteinStruyveFinDim.step1_schur_classification`.  The concrete
+    Delegates to the proved classification
+    `schur_classification_real` (the former interface axiom
+    `step1_schur_classification`, now DISCHARGED).  The concrete
     foundation lemmas proved in this module (`permutation_conj_matrixUnit`,
     `diagonalU_conj_matrixUnit`, `step1c_collapse_of_perm_symmetric`)
-    are the building blocks of that axiom's eventual full discharge. -/
+    are its building blocks.  Axiom-free (standard three). -/
 theorem step1_via_sub_lemmas
     (d : ℕ) (hd : 1 < d)
     (D : @GoldsteinStruyveFinDim.DensityFunctional d)

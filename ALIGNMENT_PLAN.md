@@ -91,4 +91,18 @@ inventory-backed.
   audit surfaced). Website builds green (66 pages). Remaining A2 (later passes): a light "re-derivation of
   standard Sakharov" note on the 1/4; a scale line (296 files / budget 0); verify the BW "cited" caveat isn't
   stale-underclaiming now that one-particle BW is unconditional.
-- **NEXT → finish A2 (remaining refinements) → A3 (paper) → A4 (claims ledger).**
+- **2026-06-30 — A1 ✅ FULLY DONE** (closed the remaining tail items): fixed the stale *under*-claiming
+  P4-WALL comments in `AxiomAudit.lean` — three "e.s.a. = the carried analytic frontier" parentheticals
+  (4888/4897/4907) now read "DISCHARGED downstream: clockEnergy/momentumOp/modularGen_isSelfAdjoint" (those
+  generators ARE proved self-adjoint at 5058–5075), and the "Remaining: the criterion itself (Cayley
+  transform)" note (5056) now records that the self-adjointness criterion IS discharged (basic Range(A±i)=H
+  form, no Cayley). Corrected the two stale `#print axioms` "expected" annotations (216–220) from "standard +
+  4/5 sub-axioms + abstract Step-1 axiom" → **"standard ONLY (verified)"** — confirmed by an actual `#print
+  axioms` probe: both `canonical_ic_measure_principle` and `step1_via_sub_lemmas` depend on **only** the
+  standard three. Also fixed the matching stale narrative inside `GoldsteinStruyveStep1.lean` (the header /
+  docstring still called `step1_schur_classification` "the single remaining interface axiom" — it was
+  DISCHARGED by the proved `schur_classification_real`). `SakharovRatio.sakharov_ratio` was already pinned
+  (AxiomAudit:6266). Both touched modules build green (8885 jobs); budget-check **0**, no regressions, only the
+  one documented `le _ _ := True` indiscrete-preorder site. A1 PASS = no stale "axiomatized"/"frontier"
+  under-claims on proved results; terminal theorems pinned & verified.
+- **NEXT → finish A2 (remaining refinements: 1/4 "re-derivation" note, scale line, BW caveat) → A3 (paper) → A4 (claims ledger).**

@@ -214,10 +214,12 @@ namespace QIQTH.AxiomAudit
 -- expected: standard only — λ-identification with independence made an explicit named input
 
 #print axioms QIQTH.FQEquivarianceUniqueness.canonical_ic_measure_principle
--- expected: standard + 4 acknowledged sub-axioms
+-- expected: standard ONLY (verified) — the former 4 sub-axioms are DISCHARGED; now a thin wrapper over the
+-- fully-proved GoldsteinStruyveFinDim.goldstein_struyve_findim.
 
 #print axioms QIQTH.GoldsteinStruyveStep1.step1_via_sub_lemmas
--- expected: standard + 5 sub-axioms + the abstract Step 1 axiom
+-- expected: standard ONLY (verified) — the 5 placeholder sub-lemma axioms were DELETED (three were false as
+-- stated) and the former abstract Step-1 axiom is discharged by the proved schur_classification_real.
 
 -- ── A1/A2/A4/A6 strengthening pass (PROVED concretely) ──────────────
 -- All of these should depend only on standard Lean/Mathlib axioms.
@@ -4885,7 +4887,7 @@ namespace QIQTH.AxiomAudit
 -- — Cayley estimate ‖(X+i)x‖²=‖Xx‖²+‖x‖²; clockEnergy_norm_le_norm_add_smul_I — X+i bounded below ⟹ injective.
 -- All immediate instantiations of the general Stone lemmas (..._dom forms) for clockTransl_add/_zero/_inner. The
 -- Lp-instance whnf divergence was DEFEATED via attribute [local irreducible] stoneGen stoneDomain + explicit ambient
--- (H := Lp H 2 volume). Axiom-free. (Essential self-adjointness = Range(X±i) dense = the carried analytic frontier.)
+-- (H := Lp H 2 volume). Axiom-free. (e.s.a. = Range(X±i) dense — now DISCHARGED downstream: clockEnergy_isSelfAdjoint.)
 #print axioms QIQTH.Spectral.Multiplication.momentumOp_isFormalAdjoint_self
 #print axioms QIQTH.Spectral.Multiplication.momentumOp_norm_add_smul_I_sq
 #print axioms QIQTH.Spectral.Multiplication.momentumOp_norm_le_norm_add_smul_I
@@ -4894,7 +4896,7 @@ namespace QIQTH.AxiomAudit
 -- e^{itP}. momentumOp_isFormalAdjoint_self — P symmetric; momentumOp_norm_add_smul_I_sq — Cayley estimate
 -- ‖(P+i)x‖²=‖Px‖²+‖x‖²; momentumOp_norm_le_norm_add_smul_I — P+i bounded below ⟹ injective. Instantiations of the
 -- general Stone lemmas for translationCLM_add/_zero/_inner (τ_t a ℂ-linear isometry). Lp-wall handled by the same
--- irreducible-stoneGen pattern. Axiom-free. (e.s.a. = Range(P±i) dense = the carried analytic frontier.)
+-- irreducible-stoneGen pattern. Axiom-free. (e.s.a. = Range(P±i) dense — now DISCHARGED downstream: momentumOp_isSelfAdjoint.)
 #print axioms QIQTH.StandardSubspaceModular.modularGen_isFormalAdjoint_self
 #print axioms QIQTH.StandardSubspaceModular.modularGen_norm_add_smul_I_sq
 #print axioms QIQTH.StandardSubspaceModular.modularGen_norm_le_norm_add_smul_I
@@ -4904,7 +4906,7 @@ namespace QIQTH.AxiomAudit
 -- modularGen_norm_add_smul_I_sq — Cayley estimate ‖(K+i)x‖²=‖Kx‖²+‖x‖²; modularGen_norm_le_norm_add_smul_I — K+i
 -- bounded below ⟹ injective. Instantiations of the general Stone lemmas for modUnitary_compL/_zero/inner_modUnitary_self
 -- (the latter derived from modUnitary_adjoint). modUnitary lives on the ABSTRACT one-particle space (not Lp), so NO
--- irreducible/Lp workaround needed. Axiom-free. (e.s.a. = Range(K±i) dense = the carried analytic frontier.)
+-- irreducible/Lp workaround needed. Axiom-free. (e.s.a. = Range(K±i) dense — now DISCHARGED downstream: modularGen_isSelfAdjoint.)
 #print axioms QIQTH.Spectral.mollify_integrable
 #print axioms QIQTH.Spectral.mollify_apply_flow
 #print axioms QIQTH.Spectral.mollify_apply_flow_cov
@@ -5053,8 +5055,9 @@ namespace QIQTH.AxiomAudit
 -- ker_adjoint_add_I_trivial — if (stoneGen U).adjoint ⟨w,hw⟩ = ±i•w then w=0. Via the formal-adjoint relation
 -- ⟪A z, w⟫ = ⟪z, A† w⟫ (adjoint_isFormalAdjoint.symm), A†w=±iw gives ⟪(A∓i)z, w⟫=0 ∀z ⟹ w ⊥ Range(A∓i)=H ⟹ w=0
 -- (deficiency_add/sub_trivial). So ker(A†∓i)=0 in Mathlib's LinearPMap.adjoint API — the EXACT hypothesis the
--- self-adjointness criterion (A⊆A† + ker(A†∓i)=0 ⟹ Ā=Ā†) consumes. Axiom-free. Remaining (Mathlib gap): the criterion
--- itself (Cayley transform) + the unbounded spectral theorem ⟹ Stone.
+-- self-adjointness criterion (A⊆A† + ker(A†∓i)=0 ⟹ Ā=Ā†) consumes. Axiom-free. (The criterion ITSELF is now DISCHARGED
+-- below — stoneGen_isSelfAdjoint, via the BASIC Range(A±i)=H form, NO Cayley needed. Genuine remaining gap: the unbounded
+-- spectral theorem / PVM ⟹ Stone U_t=exp(itA), itself substantially addressed via the cfc route — see ~5116 below.)
 #print axioms QIQTH.Spectral.stoneGen_isSelfAdjoint
 -- ★★★ P4 WALL MILESTONE — THE STONE GENERATOR IS SELF-ADJOINT: stoneGen_isSelfAdjoint — IsSelfAdjoint (stoneGen U),
 -- i.e. (stoneGen U).adjoint = stoneGen U, for a contractive strongly-continuous one-parameter UNITARY group. The
