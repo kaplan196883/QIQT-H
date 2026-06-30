@@ -111,5 +111,15 @@ verdict citing exact code/postulates. One commit per increment with the
   probability family with `S_τ = Q` — cardinality unbounded at fixed entropy). ⟹ `S_τ ≤ Q_D ⇏ card ≤ exp Q_D`:
   **Fork A's capacity is genuinely an ENTROPY bound, not a literal state count** (a cardinality bound needs an
   extra minimal-cell/Holevo hypothesis). Axiom-free (std 3), full `QIQTH` green, budget 0; wired in.
-- **NEXT → D4** (Fork A distinctiveness audit — the irreducible claim = (Φ,λ) ontology + holographic *entropy*;
-  restate "finite capacity" as finite entropy not finite matter), then D5 (resolution + adversarial re-check).
+- **2026-06-30 — D4 ✅ DONE** (`scripts/qg/D4_distinctiveness_audit.md`): the Fork-A distinctiveness audit.
+  **Verdict: on Fork A, QIQT-H's irreducible distinctive content is an INTERPRETATION, not a finite substrate** —
+  a single-world (Φ,λ) ontology with a *machine-checked Born-from-typicality derivation*
+  (`BornEquiprobable.born_from_equiprobability` + the P5 canonicity premise) and an algebraic regional-content
+  reframing, layered on standard covariant QFT + the holographic *entropy* bound + decoherence. The covariant QFT
+  and the entropy bound (≈ Bousso) are not distinctive; the "finite quantized information / finite capacity"
+  branding **overclaims** (D3: it is finite *entropy*, not a finite count). **Honest restatement: QIQT-H is a
+  typicality-based single-world interpretation with a holographic *entropy* bound — NOT a finite-matter /
+  discrete-Hilbert-space theory.** Legitimate, non-vacuous, but must be branded as an interpretation. The genuine
+  open problems are interpretational (λ's law; P5 canonicity), not substrate-theoretic.
+- **NEXT → D5** (the resolution: synthesize D1–D4, adversarial GPT-5.5-pro re-check, and the papers/site/memory
+  punch-list to align with "finite entropy, not finite matter").
