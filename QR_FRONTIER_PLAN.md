@@ -103,6 +103,13 @@ distinctive — with its falsifiable prediction — clearly labelled as a postul
 `√V_gen` coefficient, the value of `G`, and any data comparison stay cited frontiers.
 
 ## Progress log
-- **2026-07-01** — plan created from the GPT-5.5-pro distinctive-`Q_R` consult. NEXT → Track A guardrail (cheapest),
-  then Track B bottom-up (B0 spectrum/two-entropies → B1 gap≥0 → B2 the no-go → B3 capacity of entanglement →
-  B4 the bridge postulate + conditional prediction → B5 wire-in).
+- **2026-07-01** — plan created from the GPT-5.5-pro distinctive-`Q_R` consult.
+- **2026-07-01 — Track A ✅ DONE (the sharpened guardrail).** Updated inventory §2 (added the "distinctive `Q_R`
+  is a POSTULATE not a derivation" bullet), ledger row C7 (sharpened "open frontier" → "cannot derive; max-entropy
+  bridge postulate"), website `open-problems` (the honest-edge paragraph), and paper §1.1a — all stating: a `Q_R`
+  ≠ `S_gen` **cannot be derived** (conditional no-go: `S_vN`-area + count-independence + λ-inertness); possible
+  only via the explicit **max-entropy bridge postulate** (`Q_R = S_max`, the count), a *new postulate not a
+  derivation*, predicting the capacity-of-entanglement gap `Q_R − S_gen = S_max − S_vN ~ √V_gen`; coefficient + `G`
+  = frontiers; `EntropyNotCardinality` cited. Website builds green (66 pages). **NEXT → Track B Lean bottom-up
+  (B0 spectrum/two-entropies → B1 gap≥0 → B2 the no-go `svn_underdetermines_smax` → B3 capacity of entanglement →
+  B4 the bridge postulate + conditional prediction → B5 wire-in).**

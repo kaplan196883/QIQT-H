@@ -144,7 +144,11 @@ below are tracked, not silent.
 - ✗ "The **count layer is derived** from the area/entropy bound." It is not (the no-go forbids it); a finite
   operational count needs an **imported energy cutoff** and is then the **Bekenstein** bound — see C7.
 - ✗ "The operational record-capacity bound is **new physics**." It is Holevo/Bekenstein-class; distinctive only
-  if QIQT-H derives a `Q_R` differing from standard generalized entropy (open frontier, not built).
+  if QIQT-H had a `Q_R` differing from standard generalized entropy — which it **cannot derive** (conditional
+  no-go: `S_vN`-area + count-independence + λ-inertness). The only route is the explicit **max-entropy bridge
+  postulate** (`Q_R = S_max`, the count, not `S_vN`) — a *new postulate, not a derivation* — predicting the
+  capacity-of-entanglement gap `Q_R − S_gen = S_max − S_vN ~ √V_gen` (`QR_FRONTIER_PLAN.md`,
+  `MaxEntropyCapacity.lean`; coefficient + `G` = frontier).
 - ✗ "Born **derived** from unitarity." (Reduced to P5.)
 - ✗ "The 1/4 is a **novel** result." (A machine-checked re-derivation of standard induced gravity.)
 - ✗ "QIQT-H **escapes** CPSUV / is established Lorentz-natural." (~10–20%; the "escapes" verdict was retracted.)

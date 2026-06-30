@@ -205,8 +205,16 @@ $\epsilon$-decodable under a relative-entropy bound $Q$; it becomes a finite *nu
 energy cutoff**, where it is just the **Bekenstein / microcanonical** bound — standard holography, *not* new
 physics. This operational bound is now itself **machine-checked, axiom-free** (`QIQTH/OperationalCapacity.lean`:
 `record_capacity`, and the Bekenstein `gibbs_entropy_bound`), built straight on the `EntropyNotCardinality`
-guardrail. So QIQT-H's "finite information" is distinctive here **only** if it can derive a capacity $Q_R$
-*different* from standard generalized entropy — which it does not yet. That derivation is the open frontier.
+guardrail. So QIQT-H's "finite information" is distinctive here **only** via a capacity $Q_R$ *different* from
+standard generalized entropy $S_{\rm gen}=A/4G+S_{\rm bulk}$ — and such a $Q_R$ **cannot be derived** from the
+program's principles (a conditional no-go: area/JLMS use $S_{\rm vN}$, the finite *count* is independent of
+$S_{\rm vN}$, and $\lambda$ is inert). It is possible **only** by *adding* the explicit **max-entropy bridge
+postulate** — gravity's capacity is $S_{\max}$ (the finite record **count**), not $S_{\rm vN}$. That postulate
+(a new assumption, **not** a derivation) makes the one genuinely-falsifiable distinctive prediction
+$Q_R-S_{\rm gen}=S_{\max}-S_{\rm vN}$, governed by the **capacity of entanglement** $\sqrt{V_{\rm gen}}$ —
+finite-size Page-time / quantum-extremal-surface shifts; the coefficient and the value of $G$ are open frontiers.
+This is the honest edge of the program: *not* a hidden derivation waiting to be found, but a single sharp
+*postulate* with a checkable consequence (`QR_FRONTIER_PLAN.md`, `MaxEntropyCapacity.lean`).
 
 </div>
 

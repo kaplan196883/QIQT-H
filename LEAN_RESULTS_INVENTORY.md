@@ -87,6 +87,16 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 >   `exact_distinguishable_capacity` (the `ε=0` form `M ≤ e^Q`), and `gibbs_entropy_bound` (the Bekenstein /
 >   microcanonical `H ≤ β⟨E⟩ + log Z` — the energy cutoff that makes the count finite). All Holevo/Bekenstein-class,
 >   none deriving the count from the area law or a new `Q_R`.
+> - **The distinctive `Q_R` is a POSTULATE, not a derivation** (GPT-5.5-pro scoping consult, 2026-07-01;
+>   `QR_FRONTIER_PLAN.md`). A `Q_R` differing from standard generalized entropy `S_gen = A/4G + S_bulk` **cannot be
+>   derived** from QIQT-H's principles — conditional no-go: area/JLMS/GSL use `S_vN`, the finite count is
+>   independent of `S_vN` (`EntropyNotCardinality`), and `λ` is inert (cannot back-react on geometry). It is
+>   possible **only** by ADDING the explicit **max-entropy bridge postulate** — gravity's capacity is `S_max`
+>   (= log-rank = the finite *count*), NOT `S_vN`. That postulate makes the falsifiable prediction
+>   `Q_R − S_gen = S_max − S_vN ≥ 0`, governed by the **capacity of entanglement** `√V_gen` (finite-size
+>   Page-time/QES shifts). The bridge is a **new assumption, not a result**; the `√V_gen` coefficient and the value
+>   of `G` are cited frontiers. Formalized (the no-go + the gap + the conditional prediction) in
+>   `QIQTH/MaxEntropyCapacity.lean` (`QR_FRONTIER_PLAN.md`).
 
 - `area_floor_vonNeumann` **[AF·cond: HolographicCapacityBound]** — `S_vN(ρ_R) ≤ areaTerm`. **A von Neumann
   ENTROPY bound.** `HolographicCapacityBound`'s field is `log(card R) ≤ areaTerm`; its header states `R` is the
