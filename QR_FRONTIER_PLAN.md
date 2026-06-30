@@ -122,3 +122,12 @@ distinctive — with its falsifiable prediction — clearly labelled as a postul
   **NEXT → B2: the conditional no-go `svn_underdetermines_smax` (∀ Q N, ∃ spectrum with `Svn = Q` but `Smax`
   arbitrarily large — the area fixes `S_vN`, not the count; mirrors `EntropyNotCardinality`) → B3 capacity of
   entanglement → B4 the bridge postulate + conditional prediction.**
+- **2026-07-01 — B2 ✅ DONE (the conditional no-go — the honest core).** Built `svn_underdetermines_smax`: for
+  every dimension `N ≥ 1`, a **pure state** (`S_vN = 0`) on `Fin N` has `S_max = log N` — so a fixed von Neumann
+  entropy is compatible with arbitrarily large log-count (`N → ∞`). Hence the area (which fixes `S_vN` via JLMS)
+  does **not** fix the count `S_max`: a count-based `Q_R` is *independent data*, not derivable from `S_gen`. This
+  is the sharpest `EntropyNotCardinality` for the max-entropy capacity — and the result that **forces** the bridge
+  to be a *postulate, not a derivation*. Axiom-free std-3, pinned, budget 0 (Dirac state; `negMulLog 0 = negMulLog
+  1 = 0`). **NEXT → B3: the capacity of entanglement `capEnt p = ∑ p(log p)² − (∑ p log p)²` (= Var(−log p)) +
+  `capEnt_nonneg` + `capEnt_zero_iff_flat` → B4 the bridge postulate `MaxEntropyCapacity` + conditional
+  `distinctive_gap`.**

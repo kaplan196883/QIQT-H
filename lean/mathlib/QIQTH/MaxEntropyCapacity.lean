@@ -57,5 +57,28 @@ theorem gap_nonneg {ι : Type*} [Fintype ι] (p : ι → ℝ)
     (hp : ∀ i, 0 ≤ p i) (h1 : ∑ i, p i = 1) : 0 ≤ gap p := by
   unfold gap; linarith [smax_ge_svn p hp h1]
 
+/-! ### B2 — the conditional no-go: the area (`S_vN`) does not fix the count (`S_max`) -/
+
+/-- **The no-go forcing the postulate: `S_vN` does NOT determine `S_max`.** For every dimension `N ≥ 1`, a PURE
+    state (`S_vN = 0`) on `Fin N` has `S_max = log N`. So a fixed von Neumann entropy (here `0`) is compatible
+    with an *arbitrarily large* log-count `S_max` (as `N → ∞`). Hence `S_vN` — what the area / `S_gen` measures —
+    does **not** determine or bound the count `S_max`: a count-based `Q_R` is *independent data*, not derivable
+    from the geometric `S_gen`. This is exactly why a distinctive `Q_R` requires an *added* postulate, not a
+    derivation (the sharpest `EntropyNotCardinality` for the max-entropy capacity). -/
+theorem svn_underdetermines_smax (N : ℕ) (hN : 0 < N) :
+    ∃ p : Fin N → ℝ, (∀ i, 0 ≤ p i) ∧ (∑ i, p i = 1) ∧ Svn p = 0 ∧ Smax (Fin N) = Real.log N := by
+  classical
+  refine ⟨fun i => if i = ⟨0, hN⟩ then 1 else 0, ?_, ?_, ?_, ?_⟩
+  · intro i
+    show (0 : ℝ) ≤ if i = (⟨0, hN⟩ : Fin N) then 1 else 0
+    split_ifs <;> norm_num
+  · simp
+  · unfold Svn
+    rw [QIQTH.RecordContract.shannon_eq_sum_negMulLog]
+    refine Finset.sum_eq_zero (fun i _ => ?_)
+    show Real.negMulLog (if i = (⟨0, hN⟩ : Fin N) then 1 else 0) = 0
+    split_ifs <;> simp [Real.negMulLog]
+  · unfold Smax; rw [Fintype.card_fin]
+
 end MaxEntropyCapacity
 end QIQTH

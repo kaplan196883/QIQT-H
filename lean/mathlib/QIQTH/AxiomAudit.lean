@@ -7657,5 +7657,10 @@ namespace QIQTH.AxiomAudit
 -- Axiom-free (std 3).
 #print axioms QIQTH.MaxEntropyCapacity.smax_ge_svn
 #print axioms QIQTH.MaxEntropyCapacity.gap_nonneg
+-- B2: the conditional no-go svn_underdetermines_smax — a PURE state (S_vN=0) on Fin N has S_max=log N, so the
+-- area (which fixes S_vN) does NOT fix the count (S_max); the distinctive Q_R is independent data, not derivable
+-- from S_gen. The sharpest EntropyNotCardinality for the max-entropy capacity — this is what FORCES the bridge
+-- postulate (it cannot be a derivation). Axiom-free (std 3).
+#print axioms QIQTH.MaxEntropyCapacity.svn_underdetermines_smax
 
 end QIQTH.AxiomAudit
