@@ -196,4 +196,12 @@ inventory-backed.
   (Sakharov bridge), $G$ is carried, and the area **floor** $S_{\mathrm{vN}}\le Q_R$ + the 1/4 are *theorems*.
   Also aligned `formalization.md`'s GR-showcase `hcap` row ("postulate P4, $Q_R=A/4\ell_P^2$" → "finite-capacity
   input — finiteness postulated, area form derived") and added a P4-MICRO cross-reference to the `ladder.md`
-  pedagogy note. Website builds green (66 pages). (Paper abstract has the parallel issue — fixed next as A3.)
+  pedagogy note. Website builds green (66 pages).
+- **2026-06-30 — maintenance (A3): same P4-MICRO pointer added to the paper's high-level statements.** The paper's
+  §3/§4 *formal* FQ-axiom statements ("we postulate the bound") are the axiom's definition and are legitimately
+  refined by §1.1a's P4-MICRO note — left as-is. But the **abstract** (line 12) and the §11.2 "what we deliver"
+  recap (line 1178) stated "the bound is postulated"/"not a theorem" with **no** pointer to the refinement — the
+  same conflation that misled in conversation. Added a tight P4-MICRO clause to both: only *finiteness* is
+  irreducibly postulated; the area floor `area_floor_vonNeumann` is a *derived theorem*, the area form ∝A is the
+  Sakharov bridge, only the value of G is carried. Now the abstract, §1.1a, §11.2, and the website all carry the
+  same finiteness-postulated / floor-derived distinction.
