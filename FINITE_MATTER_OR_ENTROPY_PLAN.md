@@ -88,4 +88,15 @@ verdict citing exact code/postulates. One commit per increment with the
 `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>` trailer; push via schannel; update §5.
 
 ## 5. Progress log
-- **2026-06-30** — plan created (post red-team). Starting **D1** (the fork audit).
+- **2026-06-30** — plan created (post red-team).
+- **2026-06-30 — D1 ✅ DONE** (`scripts/qg/D1_fork_audit.md`): the fork audit. **Verdict: QIQT-H is committed to
+  Fork A (operational/entropy), with Fork B only as gloss + proxy.** The rigorous capacity bound is a *von
+  Neumann ENTROPY* bound (`area_floor_vonNeumann`: `S_vN(ρ_R) ≤ A/4ℓ_P²`); `HolographicCapacityBound`'s own header
+  disclaims the matter reading (*"operational capacity Q_R=log N_R, NOT Hilbert-space dimension"*; *"type-III
+  local algebra"*; exact `log dim=⟨A⟩/4` *"suspect"*); the finite cardinality lives on the **decoherent records**
+  (`LorentzSelection.card_le`, the einselected `P.X D`), not matter modes; the finite-dim `Matrix`/corner models
+  are acknowledged **proxies**. ⟹ the red-team's structural no-gos hit only the Fork-B gloss/proxy, which QIQT-H
+  does NOT rigorously require. Honest resolution: restate the postulate as Fork A (drop "finite effective
+  dimension").
+- **NEXT → D2** (Lean: finite-dim matter + exact boost + H≥0 ⟹ H=0, strengthen I1 — confirm Fork B untenable for
+  exact Lorentz), then D3 (Lean: bounded entropy ⇏ bounded cardinality), D4/D5 (restate the distinctive claim).
