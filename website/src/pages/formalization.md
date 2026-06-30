@@ -8,7 +8,10 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`).
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **296 files and ~3,300
+theorems** with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
+to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
+never as Lean axioms).
 
 <div class="note">
 
@@ -116,19 +119,21 @@ entropy-bound step machine-checked and discharged.
 <div class="note">
 
 <strong>Honest scope — a conditional formalization milestone, not "GR from nothing."</strong> This is a
-rigorous, axiom-free, <em>conditional</em> derivation: the chain still rests on three labelled inputs that are
-kept as explicit hypotheses and <strong>never</strong> as Lean axioms. The wedge KMS property bottoms out in
-cited algebraic-QFT facts (KMS-uniqueness, the strip property, standardness — the Bisognano–Wichmann package),
-which we <em>cite rather than formalize</em>: they are standard, true theorems, but a Lean proof would require
-operator-algebra infrastructure (unbounded Tomita–Takesaki theory, Hardy-strip methods) that Mathlib does not
-yet have — a substantial separate undertaking, not an impossibility. The boost-charge's final identification needs the free-field stress tensor
-(one scalar identity, not yet built); and matter conservation $\nabla^\mu T_{\mu\nu}=0$ is a physical
-postulate. What QIQT-H supplies as <em>theorems</em> is the inequality side of the area law; what makes the
-output <em>general relativity</em> is Jacobson's argument, here machine-checked end to end. The work this
-session <em>drained</em> the analytic and geometric content out of two of the three inputs into theorems
-(the modular-flow$=$boost story and Raychaudhuri focusing), sharpening each labelled input to its irreducible
-kernel. It is a verified <em>formalization</em> result — not a new physical prediction, and it does not by
-itself establish that our universe's gravity <em>is</em> emergent.
+rigorous, axiom-free, <em>conditional</em> derivation: the chain rests on labelled inputs kept as explicit
+hypotheses and <strong>never</strong> as Lean axioms. For the explicit free Klein–Gordon showcase these reduce
+to <strong>three</strong>: the matter <strong>equation of motion</strong> (Klein–Gordon on the background), the
+holographic <strong>capacity</strong> (P4, $Q_R=A/4\ell_P^2$), and the <strong>localization map</strong> (the
+field-coupled record law — Gap 2). The wedge-modular-flow$=$boost story is <em>no longer</em> among them: the
+one-particle Bisognano–Wichmann is now a fully unconditional Lean theorem, Raychaudhuri focusing is a theorem,
+and matter conservation $\nabla^\mu T_{\mu\nu}=0$ is <em>derived</em> for the KG stress tensor — the modular and
+geometric content has been <em>drained into theorems</em> for the free field. (The <em>algebraic</em> wedge-KMS
+package — KMS-uniqueness, the strip property, standardness — remains cited rather than formalized only for the
+<strong>general interacting</strong> algebra, where a Lean proof would require operator-algebra infrastructure —
+unbounded Tomita–Takesaki theory, Hardy-strip methods — that Mathlib does not yet have; a substantial separate
+undertaking, not an impossibility.) What QIQT-H supplies as <em>theorems</em> is the inequality side of the area
+law; what makes the output <em>general relativity</em> is Jacobson's argument, here machine-checked end to end.
+It is a verified <em>formalization</em> result — not a new physical prediction, and it does not by itself
+establish that our universe's gravity <em>is</em> emergent.
 
 </div>
 

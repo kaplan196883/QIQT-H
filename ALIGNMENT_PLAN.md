@@ -105,4 +105,17 @@ inventory-backed.
   (AxiomAudit:6266). Both touched modules build green (8885 jobs); budget-check **0**, no regressions, only the
   one documented `le _ _ := True` indiscrete-preorder site. A1 PASS = no stale "axiomatized"/"frontier"
   under-claims on proved results; terminal theorems pinned & verified.
-- **NEXT → finish A2 (remaining refinements: 1/4 "re-derivation" note, scale line, BW caveat) → A3 (paper) → A4 (claims ledger).**
+- **2026-06-30 — A2 ✅ DONE** (website remaining refinements, all 3 landed): (1) fixed a genuinely **stale**
+  internal inconsistency in `formalization.md`'s GR honest-scope note — it still listed "the Bisognano–Wichmann
+  package" among the *cited* inputs and called matter conservation "a physical postulate," contradicting the
+  same page's body (BW is "a fully unconditional Lean theorem"; conservation is "*derived* for the KG stress
+  tensor") and the inventory (§3: for the free field the BW/modular flux is **[AF]**, the genuine cited inputs
+  are the **area law + localization map**). Rewrote the note so the free-field showcase's three labelled inputs
+  are correctly the matter EoM (KG) + P4 capacity + localization map (Gap 2); the modular/BW/Raychaudhuri/
+  conservation content is "drained into theorems"; the *algebraic* wedge-KMS package is cited **only** for the
+  general interacting algebra. (2) Made the 1/4's "**re-derivation** of standard induced-gravity, not unique to
+  finiteness" explicit in `theory.md` (§0 #3) — it already cited Susskind–Uglum/Solodukhin; now says so in the
+  §0 words. (3) Added the **scale line** (≈296 files / ~3,300 theorems / budget 0) to the formalization intro
+  (§0 #6, credit the breadth). Website builds green (66 pages). A2 PASS = pages map to inventory entries with
+  matching qualifiers; the one stale GR-note under/over-claim fixed; breadth credited.
+- **NEXT → A3 (paper `QIQT_Foundations_Paper.md`, section by section vs inventory) → A4 (claims ledger).**

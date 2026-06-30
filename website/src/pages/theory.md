@@ -30,7 +30,9 @@ finite microstructure), **not** from finiteness alone: there the area law $S \pr
 conical-deficit geometry (the cone curvature is a δ-function on the boundary, whose integral is the area), and the
 **1/4** is the universal ratio between the conical replica-entropy coefficient and the induced Einstein–Hilbert
 coefficient — two quantities sharing one UV coefficient (the *ratio* machine-checked, `sakharov_ratio`; the
-emergence is the standard Susskind–Uglum/Solodukhin heat-kernel result, Stage B). The carried inputs are the
+emergence is the standard Susskind–Uglum/Solodukhin heat-kernel result, Stage B). This is a machine-checked
+**re-derivation** of the standard induced-gravity 1/4 — true and verified, but *not* unique to finiteness (any
+local relativistic QFT with the same UV coefficient yields it). The carried inputs are the
 *value* of $\ell_P^2 = G$ (the species/cutoff problem) and, for the full effective action, $\Lambda$ and
 higher-curvature terms.
 
