@@ -111,5 +111,11 @@ the count layer to an operational Holevo bound** — genuinely buildable, genuin
 
 ## Progress log
 - **2026-06-30** — plan created from the GPT-5.5-pro consult. Verified the reusable pieces exist (`Donald`,
-  `HolevoCoarseGraining`, `ShannonFano`, relEntropy/Shannon). NEXT → Track A guardrail (cheapest) then Track B
-  bottom-up (B0 → B1 Fano → B2 → B3 capstone → B4 energy → B5 wire-in).
+  `HolevoCoarseGraining`, `ShannonFano`, relEntropy/Shannon).
+- **2026-06-30 — Track A ✅ DONE (the honesty guardrail, all 4 surfaces).** Added the "count layer NOT derivable
+  from the entropy/area bound; operational form = Holevo–Bekenstein, NOT new physics; distinctive only via a new
+  `Q_R` = cited frontier" guardrail to: inventory §2 (extended the two-layer ⚠-note), `CLAIMS_LEDGER.md` (new row
+  C7 + two "claims we DON'T make" guardrails), website `open-problems.md` (the fork div), and paper §1.1a (the
+  two-layer note). Website builds green (66 pages). `EntropyNotCardinality` cited everywhere as the guardrail.
+  **NEXT → Track B Lean (B0 binEntropy + discrimination model → B1 quantitative Fano → B2 Holevo glue → B3
+  capstone → B4 energy/Bekenstein → B5 wire-in).**

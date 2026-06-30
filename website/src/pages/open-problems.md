@@ -198,6 +198,14 @@ is deciding which fork QIQT-H is on. **This does not threaten the (Φ, λ) recor
 holographic *entropy* bound** — both are entropy-level and Lorentz-safe — but it does mean the literal
 finite-*matter* reading is the part under genuine pressure.
 
+A sharper consequence (adversarial review, 2026): the finite-record-*count* layer is **not derivable** from the
+entropy/area bound — the machine-checked `EntropyNotCardinality` no-go forbids it. The only sound *operational*
+count is a **Holevo capacity**, $\log M_\epsilon \le (Q + h_2(\epsilon))/(1-\epsilon)$, for records
+$\epsilon$-decodable under a relative-entropy bound $Q$; it becomes a finite *number* only under an **imported
+energy cutoff**, where it is just the **Bekenstein / microcanonical** bound — standard holography, *not* new
+physics. So QIQT-H's "finite information" is distinctive here **only** if it can derive a capacity $Q_R$
+*different* from standard generalized entropy — which it does not yet. That derivation is the open frontier.
+
 </div>
 
 ## Exploratory — is λ a *fact* or a *generator*? (a falsifiable alternative)

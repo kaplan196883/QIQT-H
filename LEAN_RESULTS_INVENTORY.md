@@ -75,6 +75,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 >   inequivalent. The continuum/physical/GR-relevant claim is **entropy**; the finite **count** is the tractable
 >   finite-dim shadow only (and is strictly stronger). "Finite capacity" therefore = finite *record count* in the
 >   finite model, finite *entropy* in the continuum — never a finite MATTER Hilbert space (D2/D3).
+> - **The count layer is NOT derivable from the entropy/area bound** (GPT-5.5-pro consult, 2026-06-30). By the
+>   no-go above, no finite record count follows from `S(ρ_R) ≤ Q`. The only sound *operational* count is a **Holevo
+>   capacity** — `log M_ε ≤ (Q + h₂(ε))/(1−ε)` for records ε-decodable by a common POVM under a relative-entropy
+>   bound `Q` (survives the no-go: it bounds recoverable mutual information, not support cardinality) — and it
+>   becomes a finite *number* only under an **imported energy cutoff**, where it is the **Bekenstein /
+>   microcanonical** bound (standard holography, **NOT new physics**). QIQT-H is distinctive here *only* if it
+>   derives a `Q_R` differing from standard generalized entropy — which it does not (the **cited frontier**). The
+>   operational bound itself is being formalized in `QIQTH/OperationalCapacity.lean` (`OPERATIONAL_CAPACITY_PLAN.md`).
 
 - `area_floor_vonNeumann` **[AF·cond: HolographicCapacityBound]** — `S_vN(ρ_R) ≤ areaTerm`. **A von Neumann
   ENTROPY bound.** `HolographicCapacityBound`'s field is `log(card R) ≤ areaTerm`; its header states `R` is the

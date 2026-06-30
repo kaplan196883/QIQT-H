@@ -53,6 +53,7 @@ after A1 (code-comment hygiene), A2 (website), and A3 (paper) landed.
 | C3 | "'Finite capacity' has **two provably-distinct machine-checked layers**: a record **COUNT** (`card R ≤ e^{Q_R}`) in the finite-dim model and a finite **ENTROPY** bound (`S_vN+S_rel ≤ Q_R`) in the continuum Type III₁ setting — **never** a finite matter Hilbert space." | §1.1a (96 two-layer note, 110 fork); `idea`, `theory`, `open-problems` | §2 (two-layer ⚠-note: `HolographicCapacityBound` = count vs `Phase5Master` = entropy); §9 | **[AF·cond]** (both layers) + **[no-go]** (D2/D3) | ✓ |
 | C4 | "Finite matter + exact Lorentz ⟹ H=0 ∧ P=0 (literal finite-matter reading untenable)." | §1.1a (110) | §2 `FiniteMatterNoLorentz.finitePoincare_trivial` (D2) | **[no-go]** | ✓ |
 | C5 | "A bounded entropy does **not** imply bounded cardinality — **the bridge proving the two C3 layers are inequivalent** (the continuum entropy bound is *not* a record count)." | §1.1a (96, 110 fork); `idea`, `theory` | §2 `EntropyNotCardinality.entropy_bound_not_cardinality_bound` (D3) | **[no-go]** | ✓ |
+| C7 | "The count layer is **not derivable** from the entropy/area bound; the operational record count is a **Holevo–Bekenstein** capacity `log M_ε ≤ (Q+h₂(ε))/(1−ε)` (finite only via an imported energy cutoff) — **not new physics**; distinctive only via a `Q_R` ≠ standard generalized entropy (open frontier)." | `OPERATIONAL_CAPACITY_PLAN.md`; (docs being aligned) | §2 (guardrail); `OperationalCapacity.lean` (in progress) | **[frontier]** + scope | building |
 | C6 | "Capacity is **kinematic** — it bounds S(ρ_R) and feeds the field equations — not a mechanism for single outcomes." | §1.1a; §6.8 banner; §7.5; `born`, `about` | §2, §7 (`measure_needs_only_finiteness`) | scope | ✓ |
 
 ## D. Gravity / Sakharov 1/4 / Einstein equation
@@ -140,6 +141,10 @@ below are tracked, not silent.
 - ✗ Conflating the **finite entropy** bound with a **finite record count** (or stating either alone as "the"
   postulate). `EntropyNotCardinality` proves the continuum entropy bound is *not* a count; the two are distinct
   layers — see C3. (This is the conflation that made the AdS/CFT "realises finiteness" reasoning fail.)
+- ✗ "The **count layer is derived** from the area/entropy bound." It is not (the no-go forbids it); a finite
+  operational count needs an **imported energy cutoff** and is then the **Bekenstein** bound — see C7.
+- ✗ "The operational record-capacity bound is **new physics**." It is Holevo/Bekenstein-class; distinctive only
+  if QIQT-H derives a `Q_R` differing from standard generalized entropy (open frontier, not built).
 - ✗ "Born **derived** from unitarity." (Reduced to P5.)
 - ✗ "The 1/4 is a **novel** result." (A machine-checked re-derivation of standard induced gravity.)
 - ✗ "QIQT-H **escapes** CPSUV / is established Lorentz-natural." (~10–20%; the "escapes" verdict was retracted.)
