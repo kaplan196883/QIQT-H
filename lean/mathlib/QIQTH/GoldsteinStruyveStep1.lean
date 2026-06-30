@@ -27,11 +27,11 @@
   `P_σ · E_ij · P_σ* = E_{σ(i), σ(j)}` that drives step 1c's
   coefficient transport.
 
-  Sub-lemmas 1a, 1b, 1d, 1e remain axioms at the interface layer.
-  Discharging 1b concretely requires complex-exponential infrastructure
-  for diagonal unitaries `D(θ)_{kk} = e^{iθ_k}` plus a multi-θ
-  separating-character argument; this is left to a future Mathlib-
-  integration round.
+  (Update 2026-06 — axioms retired.) Sub-lemmas 1a, 1b, 1d, 1e are now
+  PROVED: the complex-exponential / diagonal-unitary `D(θ)_{kk}=e^{iθ_k}`
+  infrastructure and the multi-θ separating-character argument were built,
+  and `schur_classification_real` (`:879`) is the full, axiom-free Schur
+  classification.  This module carries no project axioms (std-3 only).
 -/
 
 import Mathlib.Data.Matrix.Basic

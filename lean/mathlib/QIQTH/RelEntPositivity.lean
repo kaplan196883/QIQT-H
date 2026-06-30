@@ -4,11 +4,14 @@
   Statement:  D(ρ ‖ σ) ≥ 0,  with equality iff ρ = σ.
 
   At the Araki / vN level this is Lindblad / Uhlmann, requiring
-  operator-convexity of x ↦ −log x.  Mathlib doesn't yet have it for
-  states on vN algebras.  We axiomatize the statement at the Donald-
-  axiomatization level, and provide a finite *classical* KL companion
-  using `Real.log` inequalities (this part is fully constructive once
-  we plug into a future classical-relative-entropy module).
+  operator-convexity of x ↦ −log x.  (Update 2026-06: the former
+  `D_nonneg`/`D_eq_zero_iff` AXIOMS are DISCHARGED — this module carries
+  no project axioms (std-3 only).  `D_weighted_nonneg` (`:41`) and the
+  finite *classical* `KL_classical_nonneg` (`:88`) are full theorems via
+  `Real.log` inequalities; quantum nonnegativity is supplied as an explicit
+  hypothesis where used, and proved finite-dim in `Entropy/` as
+  `QuantumEntropy.relEntropy_nonneg` (Klein).  The continuum / vN-algebra
+  Uhlmann case is the cited frontier.)
 -/
 
 import QIQTH.Donald

@@ -7570,4 +7570,11 @@ namespace QIQTH.AxiomAudit
 -- arbitrarily large cardinality N ⟹ S_τ≤Q_D ⇏ card≤exp Q_D. Fork A's capacity is genuinely an ENTROPY bound
 -- (Lorentz-safe, over covariant Type III₁), not a literal state count. Never assert G; the 1/4 ratio is derived.
 
+-- Alignment A1 — pin the Entropy/ tower's terminal capstones (were sorry-free but unaudited; coverage gap closed).
+#print axioms QIQTH.Entropy.strong_subadditivity
+#print axioms QIQTH.Entropy.condMutualInfo_nonneg
+-- expected: standard only — the Lieb-concavity/DPI tower's top results: strong subadditivity
+-- S(ρ_ABC)+S(ρ_B) ≤ S(ρ_AB)+S(ρ_BC) (Lieb–Ruskai) and I(A:C|B) ≥ 0, built from partial_trace_dpi via a
+-- from-scratch discrete-Weyl 1-design. Axiom-free (std 3); a genuine Mathlib-grade formalization.
+
 end QIQTH.AxiomAudit

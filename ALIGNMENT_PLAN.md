@@ -74,4 +74,12 @@ inventory-backed.
 
 ## 4. Progress log
 - **2026-06-30** — plan created; `LEAN_RESULTS_INVENTORY.md` built (full 296-file coverage); `vacuity_lint.sh`
-  extended to subdirs (tree clean). Starting **A1** (code-comment hygiene).
+  extended to subdirs (tree clean).
+- **2026-06-30 — A1 ✅ DONE** (code-comment hygiene): fixed 4 stale docstrings that *under*-claimed now-proved
+  results — `ArakiInterface.lean` ("two results remain axioms" → both PROVED, no project axioms),
+  `RelEntPositivity.lean` ("we axiomatize" → discharged), `GoldsteinStruyveFinDim.lean` + `GoldsteinStruyveStep1.lean`
+  ("Steps 1,3 / sub-lemmas axiomatized" → fully PROVED). Pinned the two unaudited Entropy/ capstones
+  (`strong_subadditivity`, `condMutualInfo_nonneg`) in `AxiomAudit.lean` — both std-3, budget 0 (coverage gap
+  closed). All touched modules green. (Remaining audit-pin gaps for other terminal theorems can be added in later
+  A1 passes.)
+- **NEXT → A2** (website page-by-page against the inventory) → A3 (paper) → A4 (claims ledger).

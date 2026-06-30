@@ -18,7 +18,10 @@
   Step 2 (PROVED): IsNormalized (schurForm α β) ⇒ α + β = 1.
   Step 4 (PROVED): Schur form + non-degeneracy on a pure state ⇒
                     (α, β) = (1, 0).
-  Steps 1, 3 (axiomatized): cleanly stated with concrete matrix content.
+  Steps 1, 3 (PROVED, 2026-06 — axioms retired): Step 1 is the full
+  `GoldsteinStruyveStep1.schur_classification_real` (`:879`); Step 3 is
+  `step3_tensor_multiplicativity`/`step3_tensor_narrowing` (`:180`,`:237`).
+  This module carries no project axioms (std-3 only).
 
   NOTE (2026-06): `QIQTH.EffectGleason.finite_effect_gleason` now gives an INDEPENDENT,
   fully axiom-free finite-dimensional Born-uniqueness result (effect/POVM Gleason:

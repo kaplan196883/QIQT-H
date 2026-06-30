@@ -17,9 +17,10 @@
   HONEST SCOPE (per the original GPT-5.5-pro audit): in the genuine Araki / Tomita–Takesaki setting
   the cross-entropy object is unbounded and `AkRelEnt` can be `+∞`; this module is the *finite-dim
   model*, where those pathologies are absent — the unconditional abstract axioms become the honest
-  conditional (density-matrix) theorems.  Two results remain axioms here, as the cited frontier:
-  `IHol_le_Shannon` (Holevo's bound) and `AkRelEnt_eq_zero_iff` (the Klein *equality* case — only the
-  trivial direction `ρ = σ ⟹ D = 0` is finite-dim immediate; the converse is a deeper milestone).
+  conditional (density-matrix) theorems.  (Update 2026-06: ALL 11 former axioms are now discharged.
+  `IHol_le_Shannon` (Holevo's bound, `:176`) and `AkRelEnt_eq_zero_iff` (the Klein *equality* case,
+  `:216`) — once described here as the remaining axioms — are now full theorems; this module carries
+  **no project axioms** (std-3 only).  The continuum / Type II–III relative entropy is the cited frontier.)
 -/
 
 import QIQTH.QuantumRelativeEntropy
