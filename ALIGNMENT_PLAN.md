@@ -227,4 +227,10 @@ inventory-backed.
   **`idea.md`** and **`theory.md`**: finiteness has two machine-checked layers — a record **count**
   (`card R ≤ e^{Q_R}`) in the finite-dim model, a finite **entropy** bound `S_vN+S_rel ≤ Q_R` in the continuum
   Type III₁ setting — provably distinct (`EntropyNotCardinality`), never a finite matter Hilbert space. Website
-  builds green (66 pages). **NEXT → A3 (paper §1.1a "finite N_R" framing → add the same two-layer note).**
+  builds green (66 pages).
+- **2026-06-30 — A3 (paper) aligned to the two-layer reference.** Added the two-layer note to §1.1a's P4-MICRO
+  paragraph (the "the postulate is only that the regional capacity is finite — $N_R<\infty$" spot): finiteness =
+  a record **count** (`HolographicCapacityBound`, finite-dim) *and* a finite **entropy** bound (`Phase5Master`,
+  continuum Type III₁), provably distinct (`EntropyNotCardinality`), never a finite matter Hilbert space. The
+  §1.1a "fork" paragraph (line 110) already carried the continuum=entropy reading. **DONE — the capacity postulate
+  is now stated as the verified two-layer truth across inventory, plan, website (idea/theory), and paper (§1.1a).**
