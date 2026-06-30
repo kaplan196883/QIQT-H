@@ -214,7 +214,10 @@ postulate** — gravity's capacity is $S_{\max}$ (the finite record **count**), 
 $Q_R-S_{\rm gen}=S_{\max}-S_{\rm vN}$, governed by the **capacity of entanglement** $\sqrt{V_{\rm gen}}$ —
 finite-size Page-time / quantum-extremal-surface shifts; the coefficient and the value of $G$ are open frontiers.
 This is the honest edge of the program: *not* a hidden derivation waiting to be found, but a single sharp
-*postulate* with a checkable consequence (`QR_FRONTIER_PLAN.md`, `MaxEntropyCapacity.lean`).
+*postulate* with a checkable consequence. The no-go (that the area does not fix the count), the gap, the
+capacity of entanglement, and the conditional prediction under the postulate are all **machine-checked,
+axiom-free** (`QIQTH/MaxEntropyCapacity.lean`: `svn_underdetermines_smax`, `gap_nonneg`, `capEnt_nonneg`,
+`distinctive_gap`; `QR_FRONTIER_PLAN.md`).
 
 </div>
 

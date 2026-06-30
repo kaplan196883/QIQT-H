@@ -95,8 +95,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 >   (= log-rank = the finite *count*), NOT `S_vN`. That postulate makes the falsifiable prediction
 >   `Q_R − S_gen = S_max − S_vN ≥ 0`, governed by the **capacity of entanglement** `√V_gen` (finite-size
 >   Page-time/QES shifts). The bridge is a **new assumption, not a result**; the `√V_gen` coefficient and the value
->   of `G` are cited frontiers. Formalized (the no-go + the gap + the conditional prediction) in
->   `QIQTH/MaxEntropyCapacity.lean` (`QR_FRONTIER_PLAN.md`).
+>   of `G` are cited frontiers. **Now PROVED axiom-free** in `QIQTH/MaxEntropyCapacity.lean` **[AF]**:
+>   `svn_underdetermines_smax` (the no-go — a pure state has `S_vN = 0` but `S_max = log N`, so the area does not
+>   fix the count), `gap_nonneg` (`S_max − S_vN ≥ 0`), `capEnt_nonneg` / `capEnt_eq_zero_iff` (the capacity of
+>   entanglement `V_gen ≥ 0`, = 0 iff flat), and the conditional `distinctive_gap` under the `MaxEntropyCapacity`
+>   typeclass postulate (GIVEN the postulate, `Q_R − S_gen = gap ≥ 0`). The no-go forces it to be a postulate, not
+>   a derivation; the `√V_gen` continuum coefficient and `G` stay cited frontiers.
 
 - `area_floor_vonNeumann` **[AF·cond: HolographicCapacityBound]** — `S_vN(ρ_R) ≤ areaTerm`. **A von Neumann
   ENTROPY bound.** `HolographicCapacityBound`'s field is `log(card R) ≤ areaTerm`; its header states `R` is the

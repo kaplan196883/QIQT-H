@@ -147,8 +147,10 @@ below are tracked, not silent.
   if QIQT-H had a `Q_R` differing from standard generalized entropy — which it **cannot derive** (conditional
   no-go: `S_vN`-area + count-independence + λ-inertness). The only route is the explicit **max-entropy bridge
   postulate** (`Q_R = S_max`, the count, not `S_vN`) — a *new postulate, not a derivation* — predicting the
-  capacity-of-entanglement gap `Q_R − S_gen = S_max − S_vN ~ √V_gen` (`QR_FRONTIER_PLAN.md`,
-  `MaxEntropyCapacity.lean`; coefficient + `G` = frontier).
+  capacity-of-entanglement gap `Q_R − S_gen = S_max − S_vN ~ √V_gen` — the no-go (`svn_underdetermines_smax`),
+  the gap (`gap_nonneg`), the capacity of entanglement (`capEnt_nonneg`/`_eq_zero_iff`), and the conditional
+  prediction (`distinctive_gap` under the `MaxEntropyCapacity` typeclass) are **PROVED axiom-free** in
+  `MaxEntropyCapacity.lean`; the `√V_gen` coefficient + `G` = frontier (`QR_FRONTIER_PLAN.md`).
 - ✗ "Born **derived** from unitarity." (Reduced to P5.)
 - ✗ "The 1/4 is a **novel** result." (A machine-checked re-derivation of standard induced gravity.)
 - ✗ "QIQT-H **escapes** CPSUV / is established Lorentz-natural." (~10–20%; the "escapes" verdict was retracted.)

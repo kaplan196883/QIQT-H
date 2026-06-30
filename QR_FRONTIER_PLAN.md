@@ -1,6 +1,7 @@
 # The distinctive `Q_R` frontier — the max-entropy bridge + the capacity-of-entanglement gap
 
-**Status:** ACTIVE (2026-07-01). **Origin:** the GPT-5.5-pro adversarial scoping consult on QIQT-H's *only*
+**Status:** ✅ COMPLETE (2026-07-01) — Track A (sharpened guardrail, all surfaces) + Track B (the axiom-free
+no-go + capacity-of-entanglement gap + the max-entropy bridge postulate & its conditional prediction) both done. **Origin:** the GPT-5.5-pro adversarial scoping consult on QIQT-H's *only*
 genuinely-distinctive open target (a capacity `Q_R` differing from standard generalized entropy
 `S_gen = A/4G + S_bulk`). **Verdict (settled, take as given):**
 
@@ -147,3 +148,11 @@ distinctive — with its falsifiable prediction — clearly labelled as a postul
   the *one postulate* that makes it distinctive + its conditional, falsifiable consequence. **NEXT → B5 only:
   point the Track-A guardrails (inventory/ledger/site/paper) at the built theorem names
   (`svn_underdetermines_smax`, `distinctive_gap`, `capEnt_nonneg`).**
+- **2026-07-01 — B5 ✅ DONE; PLAN COMPLETE.** Pointed the Track-A guardrails (inventory §2, ledger, paper §1.1a,
+  website `open-problems`) at the built, axiom-free theorem names (`svn_underdetermines_smax`, `gap_nonneg`,
+  `capEnt_nonneg`/`_eq_zero_iff`, `distinctive_gap` under `MaxEntropyCapacity`). Website builds green (66 pages).
+  **Both tracks complete.** The honest distinctive-`Q_R` frontier is now a machine-checked package: the **no-go**
+  proves it can't be derived; the **max-entropy bridge postulate** (a typeclass, never an axiom) + the
+  **conditional prediction** `distinctive_gap` are the one postulate that would make QIQT-H distinctive + its
+  falsifiable, capacity-of-entanglement consequence. Honest rail held throughout: *postulate, not derivation*;
+  the `√V_gen` coefficient and the value of `G` stay cited frontiers; never claimed QG or that nature picks it.
