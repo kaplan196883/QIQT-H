@@ -142,6 +142,19 @@ modular-invariance, Born rule (on the genuine Fock *vacuum state* — the Weyl-b
 $(1\pm e^{-\lVert u\rVert^2/2})/2$), and selection event all axiom-free (`SecondQuantCLM`, `ContinuumLambdaField`,
 `FieldBorn`, `FieldSelection`).
 
+**Toward grounding the bound (claim b) — the area-operator crossed product.** Separately from selection, the
+FQ-grounding use of the Type II crossed product (CLPW's gravitational dressing, where the *area* enters as a
+trace shift) now has its **operator layer machine-checked and axiom-free**: the modular automorphism $\sigma_t$,
+the covariant representation $\pi(a)$/$\lambda_t$ on $L^2(\mathbb{R};H)$, the **clock energy $A_{\mathrm{edge}}$ as
+a genuine self-adjoint operator** (via the now-built Stone's theorem), and the **dressed modular Hamiltonian
+$\tilde K = K_{\mathrm{bulk}} + A_{\mathrm{edge}}$ proved self-adjoint** (`CrossedProduct*`,
+`dressedModularGen_isSelfAdjoint`). With these, P4's holographic floor $S\le A/4\ell_P^2$ is **reduced to a single,
+non-vacuous inequality** — the `Phase5Master` certificate, proved equivalent (both directions) to the JLMS master
+inequality $S_{\mathrm{vN}} + D \le \langle A_{\mathrm{edge}}\rangle/4\ell_P^2$ — whose slack positivity
+($D\ge 0$, `cgpEntropy_nonneg`) is *proved*. The lone remaining input is the **Type II dual-weight trace** that
+supplies that one inequality; the coefficient $1/4$ stays the carried UV datum. This is the *area-operator* use of
+the crossed product — distinct from selection, where the red-team retired it.
+
 **What is open.** With the continuum schema now built (above), the residual walls are sharply two: the
 **Haagerup natural-cone existence** in Mathlib (we state the Born rule directly on vector states; the canonical
 state↦vector identification is cited, not yet formalized) and the **interacting / general-state** case (the free
