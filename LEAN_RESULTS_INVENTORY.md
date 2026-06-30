@@ -82,7 +82,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 >   becomes a finite *number* only under an **imported energy cutoff**, where it is the **Bekenstein /
 >   microcanonical** bound (standard holography, **NOT new physics**). QIQT-H is distinctive here *only* if it
 >   derives a `Q_R` differing from standard generalized entropy — which it does not (the **cited frontier**). The
->   operational bound itself is being formalized in `QIQTH/OperationalCapacity.lean` (`OPERATIONAL_CAPACITY_PLAN.md`).
+>   operational bound itself is now **PROVED axiom-free** in `QIQTH/OperationalCapacity.lean` **[AF]**:
+>   `record_capacity` (`(1−ε)·log M ≤ Q + h₂(ε)` carrying the confusion-matrix Holevo bound `I(T) ≤ Q`),
+>   `exact_distinguishable_capacity` (the `ε=0` form `M ≤ e^Q`), and `gibbs_entropy_bound` (the Bekenstein /
+>   microcanonical `H ≤ β⟨E⟩ + log Z` — the energy cutoff that makes the count finite). All Holevo/Bekenstein-class,
+>   none deriving the count from the area law or a new `Q_R`.
 
 - `area_floor_vonNeumann` **[AF·cond: HolographicCapacityBound]** — `S_vN(ρ_R) ≤ areaTerm`. **A von Neumann
   ENTROPY bound.** `HolographicCapacityBound`'s field is `log(card R) ≤ areaTerm`; its header states `R` is the

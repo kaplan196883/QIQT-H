@@ -1,6 +1,6 @@
 # Operational record-capacity — plan (the Holevo–Bekenstein bound) + the honesty guardrail
 
-**Status:** ACTIVE (2026-06-30). **Origin:** an adversarial GPT-5.5-pro consult on whether QIQT-H's *finite-count*
+**Status:** ✅ COMPLETE (2026-06-30) — Track A (guardrail, all 5 surfaces) + Track B (axiom-free Lean theorem) both done. **Origin:** an adversarial GPT-5.5-pro consult on whether QIQT-H's *finite-count*
 capacity layer can be made non-trivial. **Verdict (take as settled):**
 
 - **Literal finite regional cardinality is provably DEAD** relative to the entropy layer — `EntropyNotCardinality`
@@ -206,3 +206,13 @@ the count layer to an operational Holevo bound** — genuinely buildable, genuin
   Bekenstein bound — standard holography, the finiteness is the *imported* energy cutoff, NOT derived from the
   area law.** **NEXT → B5: point the Track-A guardrail docs (inventory/ledger/site/paper) at the now-built theorem
   names (`record_capacity`, `gibbs_entropy_bound`); the Lean theorem is otherwise COMPLETE.**
+- **2026-06-30 — B5 ✅ DONE; PLAN COMPLETE.** Pointed the Track-A guardrails at the now-built theorem names:
+  inventory §2 ("being formalized" → "**PROVED axiom-free** [AF]: `record_capacity`, `exact_distinguishable_capacity`,
+  `gibbs_entropy_bound`"), ledger row C7 (status "building" → **✓ [AF]**, with the theorem names), paper §1.1a
+  ("formalized" → "now *proved* axiom-free"), and the website `open-problems` ("machine-checked, axiom-free … built
+  on the `EntropyNotCardinality` guardrail"). Website builds green (66 pages). **Both tracks complete: Track A
+  (the count-layer honesty guardrail across all 5 surfaces) + Track B (the axiom-free operational Holevo–Bekenstein
+  record-capacity theorem — capstone both forms, ε=0 corollary, full confusion-matrix grounding, and the
+  Bekenstein/microcanonical energy bound).** Honest scope held throughout: Holevo/Bekenstein-class, NOT new
+  physics, does NOT derive the count from the area law (`EntropyNotCardinality`), distinctive only via a new `Q_R`
+  (the cited frontier, untouched).
