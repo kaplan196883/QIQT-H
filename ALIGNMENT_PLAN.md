@@ -187,3 +187,13 @@ inventory-backed.
   line-start `theorem|lemma` count = 3,320). Aligned the paper (2 spots) and the ledger (2 spots) **down** to the
   reference figure "~3,300", so the inventory, website, paper, and ledger now all read identically: **296 files /
   ~3,300 theorems / 2,213 `#print axioms` directives / 256 modules / budget 0**.
+- **2026-06-30 — maintenance (A2): fix the "what is postulated" conflation on the explainer pages.** Prompted by a
+  live correction (the postulate is *finiteness*, NOT the holographic bound — P4-MICRO). The homepage
+  (`index.astro`) was already correct (lines 53/132/165/219/311: "postulate is finiteness only; the area form
+  and floor are derived"). But `idea.md`'s primary "The hypothesis" section still bundled the area form into the
+  postulate ("finite capacity… $Q_R=A/4\ell_P^2$… Finite, as a postulate") — the exact pre-P4-MICRO conflation.
+  Rewrote it: *finiteness* ($N_R<\infty$) is the postulate; the area **form** $Q_R=A/4\ell_P^2$ is *derived*
+  (Sakharov bridge), $G$ is carried, and the area **floor** $S_{\mathrm{vN}}\le Q_R$ + the 1/4 are *theorems*.
+  Also aligned `formalization.md`'s GR-showcase `hcap` row ("postulate P4, $Q_R=A/4\ell_P^2$" → "finite-capacity
+  input — finiteness postulated, area form derived") and added a P4-MICRO cross-reference to the `ladder.md`
+  pedagogy note. Website builds green (66 pages). (Paper abstract has the parallel issue — fixed next as A3.)

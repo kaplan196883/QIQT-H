@@ -14,9 +14,13 @@ multiverse. Both are answers to the same question: why one world?
 ## The hypothesis
 
 QIQT-H starts from a single physical premise drawn from black-hole thermodynamics and holography:
-**a bounded region of space has only a finite amount of operational information capacity**, on the order of
-its boundary area in Planck units, $Q_R = A/4\ell_P^2$ (in natural entropy units). Finite, as a postulate
-of the program.
+**a bounded region of space has only a finite amount of operational information capacity** — a finite number
+$N_R$ of distinguishable records ($N_R<\infty$). *Finiteness is the postulate* (the "Quantized Information"
+core). That the capacity then takes the holographic **area form** $Q_R = A/4\ell_P^2$ — scaling with boundary
+*area*, not volume — is **not** part of the postulate: it is *derived* in a conditional Sakharov / induced-gravity
+bridge (with the value of $G/\ell_P$ carried as a datum, not derived). Finiteness *alone* gives only
+$S_{\mathrm{vN}}(\rho_R)\le\log N_R$; the area floor $S_{\mathrm{vN}}(\rho_R)\le Q_R$ and the $1/4$ are then
+*theorems*, not postulates.
 
 Here is the sharp point — and getting it right took the program a while. Finite capacity *by itself* does
 **not** forbid a superposition in the wave function $\Phi$: a superposition of two records is one vector in

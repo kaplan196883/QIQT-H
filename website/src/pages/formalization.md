@@ -106,7 +106,7 @@ premise** and exhibits exactly what GR rests on:
 | what it carries — *exactly the floor* | meaning |
 | --- | --- |
 | `hKG` | the matter **equation of motion** (Klein–Gordon on the pp-wave background) |
-| `hcap` ($\eta\,c=\log\lvert R\rvert$) | the **FQ holographic capacity** — postulate **P4**, $Q_R=A/4\ell_P^2$ |
+| `hcap` ($\eta\,c=\log\lvert R\rvert$) | the **finite-capacity** input (P4-MICRO: *finiteness* is the postulate; the area form $Q_R=A/4\ell_P^2$ is itself *derived* via the Sakharov bridge, and $G$ is carried) |
 | `hS`, `hK` | the **localization map** — the field-coupled record law whose entropy rate equals the stress flux $2\pi/\hbar\cdot T_{kk}$ |
 
 The localization map is **provably not** dischargeable by analysis: at the uniform reference the Shannon
