@@ -7624,5 +7624,8 @@ namespace QIQTH.AxiomAudit
 -- B1.3: the Fano-form success bound s·log M − h₂(1−s) ≤ D₂(s‖1/M) (the heart of the ε>0 capstone), via the
 -- exact identity D₂(s‖1/M) = s·log M − h₂(1−s) − (1−s)log(1−1/M) + the sign of log(1−1/M). Axiom-free (std 3).
 #print axioms QIQTH.OperationalCapacity.binaryKL_success_bound
+-- B1.4: the log-sum inequality P·log(P/Q) ≤ ∑ pₐ log(pₐ/qₐ) (via mulLog_div_lower at the tilted target +
+-- mul_log_div_mul) — the data-processing engine that gives binary coarse-graining (kl_partition_two). Std 3.
+#print axioms QIQTH.OperationalCapacity.logsum_le
 
 end QIQTH.AxiomAudit

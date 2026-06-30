@@ -165,3 +165,9 @@ the count layer to an operational Holevo bound** — genuinely buildable, genuin
   normalizing) → `kl_partition_two` (binary coarse-graining DPI) → the confusion-matrix mutual-info `I(T)` +
   `diag_mass_product` (`∑Rᵢᵢ=1/M`) → assemble `confusionMI_ge_fano` → capstone `(1−ε)log M ≤ Q + binEntropy ε`
   (with `I(T) ≤ Q` carried as the Holevo bound).**
+- **2026-06-30 — B1.4 ✅ DONE** (the data-processing engine). Built `mul_log_div_mul` (`p·log(p/(q·c)) =
+  p·log(p/q) − p·log c`, the tilt-pull-out identity) and **`logsum_le`** (`P·log(P/Q) ≤ ∑ pₐ log(pₐ/qₐ)`, via
+  `mulLog_div_lower` at the tilted target `qₐ·P/Q` — lower bounds collapse to `P − Q·(P/Q) = 0` — then pulling the
+  tilt out). Axiom-free std-3, pinned, budget 0. **NEXT → `kl_partition_two`: `D₂(P(A)‖Q(A)) ≤ ∑ pₐ log(pₐ/qₐ)`
+  (apply `logsum_le` to `A` and `Aᶜ`, sum) → confusion `I(T)` + `diag_mass_product` (`∑Rᵢᵢ = 1/M`) →
+  `confusionMI_ge_fano` (chain B1.3 success bound ≤ kl_partition_two on the diagonal) → capstone (carry I(T) ≤ Q).**

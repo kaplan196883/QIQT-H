@@ -245,5 +245,54 @@ lemma binaryKL_success_bound {s M : ℝ} (hs0 : 0 ≤ s) (hs1 : s ≤ 1) (hM : 1
   rw [e1, e2, hbin, hlogr]
   nlinarith [hprod]
 
+/-! ### B1.4 — the log-sum inequality and binary coarse-graining (the data-processing side) -/
+
+/-- `p·log(p/(q·c)) = p·log(p/q) − p·log c` for `p ≥ 0`, `q > 0` (when `p ≠ 0`), `c > 0`. The per-term identity
+    behind the log-sum inequality (pull the common tilt `c` out of every term). -/
+lemma mul_log_div_mul {p q c : ℝ} (hp : 0 ≤ p) (hq : p ≠ 0 → 0 < q) (hc : 0 < c) :
+    p * Real.log (p / (q * c)) = p * Real.log (p / q) - p * Real.log c := by
+  rcases eq_or_lt_of_le hp with h0 | hpos
+  · rw [← h0]; simp
+  · have hqp : 0 < q := hq hpos.ne'
+    rw [Real.log_div hpos.ne' (mul_ne_zero hqp.ne' hc.ne'), Real.log_mul hqp.ne' hc.ne',
+      Real.log_div hpos.ne' hqp.ne']
+    ring
+
+/-- **The log-sum inequality.** For nonnegative weights `p, q` on a finite set `s` (with `q` supporting `p`,
+    `P = ∑p > 0`, `Q = ∑q > 0`): `P·log(P/Q) ≤ ∑ pₐ·log(pₐ/qₐ)`. Proof: apply `mulLog_div_lower` to each
+    `(pₐ, qₐ·P/Q)` (lower bounds sum to `P − Q·(P/Q) = 0`), then pull the tilt `P/Q` out via `mul_log_div_mul`. -/
+lemma logsum_le {α : Type*} (s : Finset α) (p q : α → ℝ)
+    (hp : ∀ a ∈ s, 0 ≤ p a) (hq : ∀ a ∈ s, 0 ≤ q a)
+    (hsupp : ∀ a ∈ s, p a ≠ 0 → 0 < q a)
+    (hP : 0 < ∑ a ∈ s, p a) (hQ : 0 < ∑ a ∈ s, q a) :
+    (∑ a ∈ s, p a) * Real.log ((∑ a ∈ s, p a) / (∑ a ∈ s, q a))
+      ≤ ∑ a ∈ s, p a * Real.log (p a / q a) := by
+  set P := ∑ a ∈ s, p a with hPdef
+  set Q := ∑ a ∈ s, q a with hQdef
+  set c := P / Q with hc
+  have hcpos : 0 < c := div_pos hP hQ
+  -- termwise lower bound from mulLog_div_lower at (pₐ, qₐ·c)
+  have hterm : ∀ a ∈ s, p a - q a * c ≤ p a * Real.log (p a / (q a * c)) := by
+    intro a ha
+    refine mulLog_div_lower (hp a ha) (mul_nonneg (hq a ha) (le_of_lt hcpos)) ?_
+    intro hpa; exact mul_pos (hsupp a ha hpa) hcpos
+  have hsum : ∑ a ∈ s, (p a - q a * c) ≤ ∑ a ∈ s, p a * Real.log (p a / (q a * c)) :=
+    Finset.sum_le_sum hterm
+  -- left sum collapses: ∑(pₐ − qₐ·c) = P − Q·c = P − P = 0
+  have hQc : Q * c = P := by rw [hc]; field_simp
+  have hlhs : ∑ a ∈ s, (p a - q a * c) = 0 := by
+    rw [Finset.sum_sub_distrib, ← Finset.sum_mul, ← hPdef, ← hQdef, hQc]; ring
+  -- right sum pulls out the tilt: ∑ pₐ log(pₐ/(qₐc)) = ∑ pₐ log(pₐ/qₐ) − P·log c
+  have hPc : P * Real.log c = ∑ a ∈ s, p a * Real.log c := by
+    rw [← Finset.sum_mul, ← hPdef]
+  have hrhs : ∑ a ∈ s, p a * Real.log (p a / (q a * c))
+      = (∑ a ∈ s, p a * Real.log (p a / q a)) - P * Real.log c := by
+    rw [hPc, ← Finset.sum_sub_distrib]
+    exact Finset.sum_congr rfl (fun a ha => mul_log_div_mul (hp a ha) (hsupp a ha) hcpos)
+  rw [hlhs, hrhs] at hsum
+  -- 0 ≤ ∑ pₐ log(pₐ/qₐ) − P log c, and log c = log(P/Q)
+  have : P * Real.log c = P * Real.log (P / Q) := by rw [hc]
+  linarith [hsum]
+
 end OperationalCapacity
 end QIQTH
