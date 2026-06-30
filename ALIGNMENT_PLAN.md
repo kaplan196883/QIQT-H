@@ -177,3 +177,13 @@ inventory-backed.
   `theory.md` — lacked the §0 #3 qualifier. Added the matching "machine-checked **re-derivation** of the standard
   induced-gravity 1/4, *not* unique to finiteness" clause to its detailed gravity section. Website builds green
   (66 pages). No other drift.
+- **2026-06-30 — maintenance pass: full-paper sweep + cross-source number reconciliation.** Swept the whole
+  paper for overclaim/stale patterns — clean (the two "derives Born"/"finite matter" hits are honest: a true
+  remark *about Gleason's theorem* explicitly disclaimed as not QIQT-H's route, and the honest fork-dilemma
+  framing). Confirmed **no Lean drift**: the only `lean/` commits since the inventory was built (`3eddca2`) are
+  the alignment comment/pin commits — no new theorems or retractions, so the inventory is still current ground
+  truth. Found + fixed one **cross-source number inconsistency I introduced**: the paper said "~3,450 theorems"
+  (my A3 count *including* `@[…] theorem` attributed forms) while the inventory + website say "~3,300" (the
+  line-start `theorem|lemma` count = 3,320). Aligned the paper (2 spots) and the ledger (2 spots) **down** to the
+  reference figure "~3,300", so the inventory, website, paper, and ledger now all read identically: **296 files /
+  ~3,300 theorems / 2,213 `#print axioms` directives / 256 modules / budget 0**.

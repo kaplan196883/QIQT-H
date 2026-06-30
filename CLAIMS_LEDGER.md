@@ -27,7 +27,7 @@ after A1 (code-comment hygiene), A2 (website), and A3 (paper) landed.
 |---|---|---|---|---|---|
 | A1 | "Machine-checked, **axiom-free**: every audited theorem depends only on `propext`/`Classical.choice`/`Quot.sound`; no `sorry`; no project axioms; CI budget 0." | abstract; `formalization`, `index`, `about` | §0 (zero raw `axiom`, zero `sorry`, budget-check = 0) | **[AF]** | ✓ |
 | A2 | "The budget genuinely fell **57 → … → 0** by real discharge, not relabeling." | abstract; §11.4 banner | §0 (verified across Entropy/ tower + top-level clusters) | fact | ✓ |
-| A3 | "**~296 files / ~3,450 theorems**; the `#print axioms` audit carries **2,213 directives over 256 modules**." | abstract; §11.4 banner; `formalization` (scale line) | §0 (~2,213 directives; 296 files) — counted directly in A3 | fact | ✓ (numbers corrected in A3; were stale 830/192/2,010) |
+| A3 | "**~296 files / ~3,300 theorems**; the `#print axioms` audit carries **2,213 directives over 256 modules**." | abstract; §11.4 banner; `formalization` (scale line) | §0 (~2,213 directives; 296 files) — counted directly in A3 | fact | ✓ (numbers corrected in A3; were stale 830/192/2,010) |
 | A4 | "Axiom-free does **not** mean the physical postulates are derived — FQ/P4, KMS/Clausius, P5, the value of G stay labelled hypotheses/frontiers." | abstract; §11.2a table; `formalization` note | §0, §8 | honest scope | ✓ |
 | A5 | "A vacuity lint guards against `True`-antecedent trivialization; one benign indiscrete-preorder site remains." | §11.2a | §0 (`LorentzWitness.lean:180`, the only `:= True`) | [scaffold] | ✓ |
 
@@ -118,7 +118,7 @@ below are tracked, not silent.
   places.)*
 - **1/4 = re-derivation of standard Sakharov, G carried** — consistent across §1.1a/`theory`/`realisations`/
   `statements/gr`, inventory §3. ✓
-- **Audit scale (296 files / ~3,450 thms / 2,213 directives / 256 modules / budget 0)** — now identical in the
+- **Audit scale (296 files / ~3,300 thms / 2,213 directives / 256 modules / budget 0)** — now identical in the
   abstract, the §11.4 banner, the `formalization` scale line, and inventory §0. ✓ *(was 830/192/2,010 in two
   places before A3.)*
 - **One-particle BW unconditional; Type II trace = frontier** — consistent across `formalization`/§1.1a,
