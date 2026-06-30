@@ -7502,4 +7502,13 @@ namespace QIQTH.AxiomAudit
 -- x−x³/4); optimal is 1/12. The CHEAP, KNOWN pass of the Lorentz-cutoff stress test — NOT yet decisive (the
 -- decisive test is the one-loop Δc²=Z_s/Z_t−1, I4). Per GPT-5.5-pro QG audit 2026-06-30.
 
+-- QG campaign, Phase C — I5: a NON-VACUOUS Phase5Master instance from a finite trace (T1 of the crossed-product).
+#print axioms QIQTH.QG.phase5_of_finite_trace
+#print axioms QIQTH.QG.finiteTrace_area_floor
+-- expected: standard only — ★ I5: discharges the Phase5Master certificate (to which P4's floor was reduced,
+-- FQBoundCGP) in a concrete finite trace model: ξ=0 (cgpEntropy_zero), areaTerm=log|n| (the DERIVED capacity),
+-- remainder=log|n|−S_vN the genuine entropy deficit, proved ≥0 by vonNeumannEntropy_le_log_card (Jensen) — NOT
+-- Phase5Master.of_le on an assumed inequality. finiteTrace_area_floor: P4's floor S_vN ≤ log|n| obtained THROUGH
+-- the interface. Type I/II₁ shadow (continuum Type II_∞ dual-weight trace = §4 frontier); 1/4 & G never asserted.
+
 end QIQTH.AxiomAudit

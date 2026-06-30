@@ -139,5 +139,12 @@ Per simulation: a reproducible `scripts/qg/` script + the measured error-scaling
   dim-4 Lorentz violation. Finite capacity survives ONLY with a protection mechanism (exact symmetry / SUSY-like
   cancellation / deformed-statistical Lorentz invariance / nonlocal-holographic substrate). This sharpens Tier-2
   §2.5 into a HARD criterion: any substrate (I7) must show Δc²(Λ)→0 parametrically, not merely small at tree level.
-- **NEXT → I5** (T1 crossed-product finite trace, Lean) → I6 (exact finite RT) → I7 (HaPPY/RTN substrate — now
-  with the I4 pass/fail criterion built in).
+- **2026-06-30 — I5 ✅ DONE** (`QIQTH/QG/FiniteTracePhase5.lean`, Phase C / T1): a **non-vacuous `Phase5Master`
+  instance from a finite trace** — `phase5_of_finite_trace` discharges the certificate (to which P4's floor was
+  reduced) in a concrete finite density-matrix model: `ξ=0` (`cgpEntropy_zero`), `areaTerm=log|n|` the DERIVED
+  capacity, `remainder=log|n|−S_vN` the genuine entropy deficit proved ≥0 by `vonNeumannEntropy_le_log_card`
+  (Jensen) — NOT `Phase5Master.of_le` on an assumed inequality. `finiteTrace_area_floor`: P4's floor obtained
+  THROUGH the interface. Type I/II₁ shadow (continuum Type II_∞ dual-weight trace = the §4 / scope-doc frontier);
+  1/4 & G never asserted. Axiom-free (std 3), full `QIQTH` green, budget 0; wired in.
+- **NEXT → I6** (exact finite RT, the hard half of max-flow=min-cut) → I7 (HaPPY/RTN substrate, with the I4
+  Δc²(Λ)→0 pass/fail criterion built in).
