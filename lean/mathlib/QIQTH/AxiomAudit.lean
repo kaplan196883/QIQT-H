@@ -7617,5 +7617,9 @@ namespace QIQTH.AxiomAudit
 -- B1.1: classical relative entropy ≥ 0 (Gibbs inequality, via log t ≤ t−1) — the confusion-matrix workhorse for
 -- the ε>0 Fano-free capacity route (GPT-5.5-pro path). Axiom-free (std 3).
 #print axioms QIQTH.OperationalCapacity.kl_nonneg
+-- B1.2: the termwise engine (mulLog_div_lower: x−y ≤ x·log(x/y)) + binary relative entropy D₂ ≥ 0
+-- (binaryKL_nonneg) — the coarse-grained "decoded correctly" KL of the Fano-free route. Axiom-free (std 3).
+#print axioms QIQTH.OperationalCapacity.mulLog_div_lower
+#print axioms QIQTH.OperationalCapacity.binaryKL_nonneg
 
 end QIQTH.AxiomAudit

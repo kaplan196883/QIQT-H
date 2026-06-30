@@ -177,5 +177,35 @@ lemma kl_nonneg {α : Type*} [Fintype α] (a b : α → ℝ)
     rw [Finset.sum_sub_distrib, hasum, hbsum]; ring
   linarith [hsum, hzero]
 
+/-- **The termwise relative-entropy lower bound** `x − y ≤ x·log(x/y)` (the engine of every KL bound here):
+    from `Real.log_le_sub_one_of_pos` applied to `y/x`. `x = 0` ⟹ `−y ≤ 0`; `x > 0` ⟹ `y > 0` and the log bound. -/
+lemma mulLog_div_lower {x y : ℝ} (hx : 0 ≤ x) (hy0 : 0 ≤ y) (hy : x ≠ 0 → 0 < y) :
+    x - y ≤ x * Real.log (x / y) := by
+  rcases eq_or_lt_of_le hx with h0 | hpos
+  · rw [← h0]; simp only [zero_mul]; linarith
+  · have hyp : 0 < y := hy hpos.ne'
+    have hlog : Real.log (y / x) ≤ y / x - 1 := Real.log_le_sub_one_of_pos (by positivity)
+    have hinv : Real.log (x / y) = - Real.log (y / x) := by rw [← Real.log_inv, inv_div]
+    have hmul : x * Real.log (y / x) ≤ x * (y / x - 1) := mul_le_mul_of_nonneg_left hlog (le_of_lt hpos)
+    have hcancel : x * (y / x - 1) = y - x := by field_simp
+    rw [hinv]; nlinarith [hmul, hcancel]
+
+/-- **Binary (2-point) relative entropy** `D₂(s‖r) = s log(s/r) + (1−s) log((1−s)/(1−r))`. The coarse-grained KL
+    of the partition into "decoded correctly" (mass `s`) vs not, which lower-bounds the confusion-matrix
+    mutual information in the Fano-free record-capacity route. -/
+noncomputable def binaryKL (s r : ℝ) : ℝ :=
+  s * Real.log (s / r) + (1 - s) * Real.log ((1 - s) / (1 - r))
+
+/-- **Binary relative entropy is nonnegative.** Two applications of `mulLog_div_lower` to `(s,r)` and
+    `(1−s, 1−r)`: the lower bounds sum to `(s−r) + ((1−s)−(1−r)) = 0`. -/
+lemma binaryKL_nonneg {s r : ℝ} (hs0 : 0 ≤ s) (hs1 : s ≤ 1) (hr0 : 0 < r) (hr1 : r < 1) :
+    0 ≤ binaryKL s r := by
+  have t1 : s - r ≤ s * Real.log (s / r) :=
+    mulLog_div_lower hs0 (le_of_lt hr0) (fun _ => hr0)
+  have t2 : (1 - s) - (1 - r) ≤ (1 - s) * Real.log ((1 - s) / (1 - r)) :=
+    mulLog_div_lower (by linarith) (by linarith) (fun _ => by linarith)
+  unfold binaryKL
+  linarith [t1, t2]
+
 end OperationalCapacity
 end QIQTH

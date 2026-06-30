@@ -151,3 +151,9 @@ the count layer to an operational Holevo bound** — genuinely buildable, genuin
   normalizing) → `kl_partition_two` (binary coarse-graining) → `diag_mass_product` (`∑ Rᵢᵢ = 1/M`, the killer
   simplification) → `binaryKL_success_bound` (`D₂(s‖1/M) ≥ (1−ε)log M − h₂(ε)`) → `confusionMI_ge_fano` →
   capstone `record_capacity_of_confusionMI_bound`: `(1−ε)·log M ≤ Q + binEntropy ε`.**
+- **2026-06-30 — B1.2 ✅ DONE.** Extracted `mulLog_div_lower` (the termwise engine `x − y ≤ x·log(x/y)`, from
+  `Real.log_le_sub_one_of_pos`) and defined `binaryKL` (`D₂(s‖r)`) + proved `binaryKL_nonneg` (two applications
+  of the engine, lower bounds sum to 0). Axiom-free std-3, pinned, budget 0. **NEXT → `binaryKL_success_bound`:
+  `binaryKL s (1/M) ≥ s·log M − binEntropy(1−s)` (M ≥ 2). NOTE: needs s=0 / s=1 / s∈(0,1) case handling because
+  `log(s·M) = log s + log M` fails at s=0 — deliberate, not rushed. Then `logsum_le` (from `mulLog_div_lower`,
+  unnormalized form) → `kl_partition_two` → `diag_mass_product` → `confusionMI_ge_fano` → capstone.**
