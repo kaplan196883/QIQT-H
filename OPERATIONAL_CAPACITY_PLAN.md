@@ -171,3 +171,13 @@ the count layer to an operational Holevo bound** — genuinely buildable, genuin
   tilt out). Axiom-free std-3, pinned, budget 0. **NEXT → `kl_partition_two`: `D₂(P(A)‖Q(A)) ≤ ∑ pₐ log(pₐ/qₐ)`
   (apply `logsum_le` to `A` and `Aᶜ`, sum) → confusion `I(T)` + `diag_mass_product` (`∑Rᵢᵢ = 1/M`) →
   `confusionMI_ge_fano` (chain B1.3 success bound ≤ kl_partition_two on the diagonal) → capstone (carry I(T) ≤ Q).**
+- **2026-06-30 — B1.5 + B3 CAPSTONE ✅ DONE (the operational record-capacity bound is PROVED).** Built
+  `kl_partition_two` (binary coarse-graining DPI — `logsum_le` on `A` and `Aᶜ`, summed; needed `[DecidableEq α]`
+  for `Aᶜ`) and the capstone **`record_capacity_of_binaryKL_bound`**: `s·log M ≤ Q + h₂(1−s)`, i.e.
+  **`(1−ε)·log M ≤ Q + h₂(ε)`** (`log M_ε ≤ (Q+h₂(ε))/(1−ε)`), from the data-processed Holevo bound
+  `D₂(s‖1/M) ≤ Q` via `binaryKL_success_bound`. Axiom-free std-3, pinned, budget 0. The target capstone form is
+  DONE. Honest scope in the docstring: Holevo/Bekenstein-class, NOT new physics, NOT from the area law
+  (`EntropyNotCardinality`); the carried `D₂ ≤ Q` is the Holevo bound after one coarse-graining (by
+  `kl_partition_two` it ≤ the confusion mutual info ≤ Q). **REMAINING (refinement, not blocking): the full ι×ι
+  grounding — define the joint law `P_ij = T_ij/M`, product `R_ij`, diagonal `Δ`, prove `∑_Δ P = s` and
+  `∑_Δ R = 1/M`, so the capstone carries `I(T) ≤ Q` directly instead of `D₂ ≤ Q`; then B4 energy/Bekenstein form.**

@@ -7627,5 +7627,10 @@ namespace QIQTH.AxiomAudit
 -- B1.4: the log-sum inequality P·log(P/Q) ≤ ∑ pₐ log(pₐ/qₐ) (via mulLog_div_lower at the tilted target +
 -- mul_log_div_mul) — the data-processing engine that gives binary coarse-graining (kl_partition_two). Std 3.
 #print axioms QIQTH.OperationalCapacity.logsum_le
+-- B1.5 + B3 CAPSTONE: kl_partition_two (binary coarse-graining DPI = logsum_le on A,Aᶜ) and the operational
+-- record-capacity capstone record_capacity_of_binaryKL_bound: (1−ε)·log M ≤ Q + h₂(ε) from the data-processed
+-- Holevo bound D₂(s‖1/M) ≤ Q. Holevo/Bekenstein-class, NOT new physics, NOT from the area law. Axiom-free (std 3).
+#print axioms QIQTH.OperationalCapacity.kl_partition_two
+#print axioms QIQTH.OperationalCapacity.record_capacity_of_binaryKL_bound
 
 end QIQTH.AxiomAudit

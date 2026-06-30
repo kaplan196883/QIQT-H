@@ -294,5 +294,54 @@ lemma logsum_le {α : Type*} (s : Finset α) (p q : α → ℝ)
   have : P * Real.log c = P * Real.log (P / Q) := by rw [hc]
   linarith [hsum]
 
+/-- **Binary coarse-graining (data-processing).** For distributions `p, q` on a finite type and an event `A`
+    (with both `A` and `Aᶜ` carrying positive `p`- and `q`-mass), the binary relative entropy of the
+    coarse-grained `(A, Aᶜ)` law is at most the full relative entropy: `D₂(p(A)‖q(A)) ≤ ∑ pₐ log(pₐ/qₐ)`. Proof:
+    `logsum_le` on `A` and on `Aᶜ`, then `∑_A + ∑_{Aᶜ} = ∑`. -/
+lemma kl_partition_two {α : Type*} [Fintype α] [DecidableEq α] (p q : α → ℝ) (A : Finset α)
+    (hp : ∀ a, 0 ≤ p a) (hq : ∀ a, 0 ≤ q a) (hsupp : ∀ a, p a ≠ 0 → 0 < q a)
+    (hpsum : ∑ a, p a = 1) (hqsum : ∑ a, q a = 1)
+    (hPA : 0 < ∑ a ∈ A, p a) (hPAc : 0 < ∑ a ∈ Aᶜ, p a)
+    (hQA : 0 < ∑ a ∈ A, q a) (hQAc : 0 < ∑ a ∈ Aᶜ, q a) :
+    binaryKL (∑ a ∈ A, p a) (∑ a ∈ A, q a) ≤ ∑ a, p a * Real.log (p a / q a) := by
+  have hPcp : (1 : ℝ) - ∑ a ∈ A, p a = ∑ a ∈ Aᶜ, p a := by
+    have h := Finset.sum_add_sum_compl A p; rw [hpsum] at h; linarith
+  have hQcp : (1 : ℝ) - ∑ a ∈ A, q a = ∑ a ∈ Aᶜ, q a := by
+    have h := Finset.sum_add_sum_compl A q; rw [hqsum] at h; linarith
+  have hA := logsum_le A p q (fun a _ => hp a) (fun a _ => hq a) (fun a _ h => hsupp a h) hPA hQA
+  have hAc := logsum_le Aᶜ p q (fun a _ => hp a) (fun a _ => hq a) (fun a _ h => hsupp a h) hPAc hQAc
+  have hsplit : (∑ a ∈ A, p a * Real.log (p a / q a)) + (∑ a ∈ Aᶜ, p a * Real.log (p a / q a))
+      = ∑ a, p a * Real.log (p a / q a) := Finset.sum_add_sum_compl A _
+  unfold binaryKL
+  rw [hPcp, hQcp]
+  calc (∑ a ∈ A, p a) * Real.log ((∑ a ∈ A, p a) / (∑ a ∈ A, q a))
+        + (∑ a ∈ Aᶜ, p a) * Real.log ((∑ a ∈ Aᶜ, p a) / (∑ a ∈ Aᶜ, q a))
+      ≤ (∑ a ∈ A, p a * Real.log (p a / q a)) + (∑ a ∈ Aᶜ, p a * Real.log (p a / q a)) :=
+        add_le_add hA hAc
+    _ = ∑ a, p a * Real.log (p a / q a) := hsplit
+
+/-! ### B3 — the operational record-capacity capstone -/
+
+/-- **Operational record-capacity capstone (the Holevo–Bekenstein bound).** With error `ε := 1 − s`, if the
+    binary "decoded-correctly" relative entropy is bounded, `D₂(s‖1/M) ≤ Q`, then
+    `s·log M ≤ Q + h₂(1−s)`, i.e. **`(1 − ε)·log M ≤ Q + h₂(ε)`**, i.e. `log M_ε ≤ (Q + h₂(ε))/(1 − ε)`.
+
+    The hypothesis `D₂(s‖1/M) ≤ Q` is the **data-processed Holevo / fixed-reference relative-entropy bound**: by
+    `kl_partition_two` (binary coarse-graining to the "decoded correctly" event), `D₂(s‖1/M)` is at most the full
+    confusion-matrix mutual information `I(T) = ∑ P log(P/R)`, which the Holevo bound bounds by `Q`. So the carried
+    hypothesis is the Holevo bound after one classical coarse-graining — `Q` is the fixed-reference relative
+    entropy `D(ω‖σ_R)`, never an area datum.
+
+    ⚠ Holevo/Bekenstein-class — **NOT new physics**. It does **NOT** derive the count from the area law
+    (`EntropyNotCardinality`: a bare `S(ρ_R) ≤ Q` does not bound the count — here the bound is on the *Holevo
+    information of the decoding ensemble*). Finite as a *number* only under an imported energy cutoff (B4 =
+    Bekenstein/microcanonical). Distinctive only via a `Q_R` differing from standard generalized entropy
+    (the cited frontier). -/
+theorem record_capacity_of_binaryKL_bound {s M Q : ℝ} (hs0 : 0 ≤ s) (hs1 : s ≤ 1) (hM : 1 < M)
+    (hbound : binaryKL s M⁻¹ ≤ Q) :
+    s * Real.log M ≤ Q + binEntropy (1 - s) := by
+  have h := binaryKL_success_bound hs0 hs1 hM
+  linarith
+
 end OperationalCapacity
 end QIQTH
