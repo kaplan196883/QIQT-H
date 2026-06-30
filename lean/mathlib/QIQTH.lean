@@ -571,3 +571,4 @@ import QIQTH.QG.FinitePoincareNoGo
 import QIQTH.QG.FiniteModularRecurrence
 import QIQTH.QG.LatticeDispersion
 import QIQTH.QG.FiniteTracePhase5
+import QIQTH.QG.ExactRT

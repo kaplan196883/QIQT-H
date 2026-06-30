@@ -7511,4 +7511,14 @@ namespace QIQTH.AxiomAudit
 -- Phase5Master.of_le on an assumed inequality. finiteTrace_area_floor: P4's floor S_vN ≤ log|n| obtained THROUGH
 -- the interface. Type I/II₁ shadow (continuum Type II_∞ dual-weight trace = §4 frontier); 1/4 & G never asserted.
 
+-- QG campaign, Phase C — I6: exact finite RT, the optimality-certificate half of max-flow = min-cut.
+#print axioms QIQTH.QG.saturating_flow_isMax
+#print axioms QIQTH.QG.saturated_cut_isMin
+#print axioms QIQTH.QG.exact_rt_of_saturating
+#print axioms QIQTH.QG.minCut_attained
+-- expected: standard only — ★ I6: a saturating witness (flowValue f s = cutCapacity cap C) certifies exact RT
+-- (max-flow = min-cut): f maximizes flow, C minimizes cut (both from Track C flow_weak_duality). minCut_attained:
+-- the min-cut is achieved (finitely many cuts). Reduces exact RT to producing a saturating witness; the witness
+-- existence (Ford–Fulkerson / Menger) is the cited Mathlib-gap frontier (Mathlib has no max-flow theorem).
+
 end QIQTH.AxiomAudit

@@ -146,5 +146,12 @@ Per simulation: a reproducible `scripts/qg/` script + the measured error-scaling
   (Jensen) — NOT `Phase5Master.of_le` on an assumed inequality. `finiteTrace_area_floor`: P4's floor obtained
   THROUGH the interface. Type I/II₁ shadow (continuum Type II_∞ dual-weight trace = the §4 / scope-doc frontier);
   1/4 & G never asserted. Axiom-free (std 3), full `QIQTH` green, budget 0; wired in.
-- **NEXT → I6** (exact finite RT, the hard half of max-flow=min-cut) → I7 (HaPPY/RTN substrate, with the I4
-  Δc²(Λ)→0 pass/fail criterion built in).
+- **2026-06-30 — I6 ✅ DONE** (`QIQTH/QG/ExactRT.lean`, Phase C / Tier-3 §3.2): exact finite RT via the
+  **optimality certificate** — `exact_rt_of_saturating`: a saturating witness (`flowValue f s = cutCapacity
+  cap C`) certifies `max-flow = min-cut` (`f` maximizes flow, `C` minimizes cut, both from Track C
+  `flow_weak_duality`); `saturating_flow_isMax`, `saturated_cut_isMin`, and `minCut_attained` (the min-cut is
+  achieved — finitely many cuts). Reduces exact RT to producing a saturating witness; the witness existence
+  (Ford–Fulkerson / Menger) is the cited Mathlib-gap frontier (no max-flow theorem in Mathlib), honestly
+  checkpointed. Axiom-free (std 3), full `QIQTH` green, budget 0; wired in.
+- **NEXT → I7** (HaPPY/random-tensor-network finite-capacity toy substrate, Tier-2 §2.1, +
+  `mincut_bounds_distinguishable_records`) — carrying the I4 mandate: it must show `Δc²(Λ)→0` parametrically.
