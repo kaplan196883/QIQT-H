@@ -1,0 +1,77 @@
+# Alignment plan — make every public claim match the Lean ground truth
+
+**Status:** ACTIVE (2026-06-30). **Ground truth:** `LEAN_RESULTS_INVENTORY.md` (built from a full-coverage,
+10-agent audit of all 296 `.lean` files). **Goal:** every claim in code comments, the website, and the paper is
+checkable against the inventory and accurately scoped — no overclaim, no stale under-claim. The loop iterates over
+the areas below, most-impactful-first; each iteration checks one area against the inventory and fixes
+misalignments, one commit.
+
+## 0. Honest invariants
+- The inventory is the reference. A claim is **aligned** iff the inventory supports it with the same qualifiers
+  (axiom-free? conditional-on-what? frontier? re-derivation? no-go?).
+- Standing scope corrections to enforce everywhere (from the inventory):
+  1. **"Finite capacity / finite quantized information" → "finite holographic ENTROPY over covariant (Type III₁)
+     matter."** NOT a finite matter Hilbert space (D2/D3). Load-bearing for the gravity/area thread, NOT for the
+     selection mechanism (`measure_needs_only_finiteness`).
+  2. **Born is REDUCED to one premise (P5/noncontextual canonical measure), not DERIVED from unitarity.**
+  3. **The 1/4 ratio is a machine-checked *re-derivation* of standard Sakharov/induced-gravity** (heat-kernel
+     coefficients cited; G carried) — true & verified, but not unique to finiteness.
+  4. **Single outcomes = λ + decoherence, NOT capacity** (H2 retired). Do not say capacity forbids multi-record.
+  5. **The Einstein equation is conditional & free-field only.** The CPSUV "escape" is NOT established (~10–20%).
+  6. **Credit what is genuinely strong:** full formal verification (296 files / ~3300 thms, budget 0); the
+     Lieb-concavity/DPI/SSA tower (Mathlib-grade); the unconditional one-particle BW + the OP3b boost-invariant
+     measure; the Born reduction. Don't *under*-claim these.
+- Ship one area per iteration; commit + push; update §4 log.
+
+## 1. Areas to align (the loop's work-list, most-impactful-first)
+
+### A1 — Code-comment hygiene *(Lean docstrings + AxiomAudit; the cheapest, clearest)*
+Fix stale docstrings that **under-claim** (say "axiom"/"frontier" for now-proved results), per the audit:
+- `ArakiInterface.lean` header ("`IHol_le_Shannon`/`AkRelEnt` remain axioms" → both PROVED).
+- `RelEntPositivity.lean:8-9` ("we axiomatize" → discharged; Gibbs proved).
+- `GoldsteinStruyveFinDim.lean:21`, `GoldsteinStruyveStep1.lean:30` ("Steps 1,3 axiomatized" → fully PROVED).
+- `AxiomAudit.lean:~4882-4897` (clock-energy/momentum "e.s.a. = carried frontier" → `clockEnergy_isSelfAdjoint`
+  PROVED at ~5067); `AxiomAudit.lean:~216-220` (GS "standard + sub-axioms" → discharged); the `StoneProduct.lean`
+  header "wiring is the follow-on" (→ `dressedModularGen_isSelfAdjoint` DONE).
+Add missing `#print axioms` pins for terminal theorems: `strong_subadditivity`, `condMutualInfo_nonneg`,
+`SakharovRatio.sakharov_ratio`, `ValueSelection.*`, and the GR/crossed-product capstones (~55 modules) — closes
+the audit-coverage gap. PASS = no stale "axiomatized" claims; terminal theorems pinned.
+
+### A2 — Website *(public-facing; highest external impact)*
+Page by page (`website/src/pages/`: `index.astro`, `idea`, `theory`, `formalization`, `papers`,
+`open-problems`, `reach`, `ladder`, `selection`, `born`, `realisations`, `about`, the `statements/` and
+`browser/` pages): check each claim against the inventory. **Enforce the scope corrections (§0).** Especially:
+the homepage/`idea`/`theory` "finite quantized information" headline → finite *entropy* + interpretation framing;
+any "derives Born" → "reduces Born to P5"; any "finite capacity forbids two records" → retired; the 1/4 as
+"derived" → note re-derivation. **Credit** the genuine breadth (the formalization scale, the DPI/Lieb tower).
+PASS = every page's claims map to an inventory entry with matching qualifiers.
+
+### A3 — Paper *(`QIQT_Foundations_Paper.md`)*
+Section by section (abstract, §1.1/§1.1a, §3, §4, §7, §11.4, the formal-verification paragraph): same checks.
+The Lorentz-naturalness frontier paragraph is already added; verify the abstract/§1 "finite capacity (FQ)"
+framing is the entropy reading, the Born framing is "reduced to P5," and the 1/4 is a re-derivation. PASS = the
+paper's claims match the inventory; the formal-verification paragraph reflects the true scope (incl. the Lieb/DPI
+tower and the budget-0 / 296-file scale).
+
+### A4 — A claims ledger + final consistency pass
+Build `CLAIMS_LEDGER.md`: each headline public claim (paper + site) → the supporting inventory entry +
+status. Final pass: no claim without a ledger row; the inventory, paper, and site agree. PASS = a complete,
+cross-referenced ledger.
+
+## 2. Verification (per iteration)
+Code edits: rebuild the touched module(s) green; if `#print axioms` lines added, run `bash scripts/
+axiom_budget_check.sh` (budget 0). Website edits: `NODE_OPTIONS=--use-system-ca npm run build` green. One commit
+per area with the `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>` trailer; push via schannel; update
+§4. Never claim QG or the value of `G`; the `1/4` ratio is derived (a re-derivation).
+
+## 3. Honest difficulty
+A1 is days (mechanical comment/pin fixes + small rebuilds). A2/A3 are the bulk (claim-by-claim reading against
+the inventory) — a few iterations each. A4 is a synthesis. The whole alignment is **weeks of iterations**, but
+each iteration is a self-contained, shippable, honest increment. Expected net effect: the public framing moves
+from "finite-information foundation (new physics)" to "a rigorously verified single-world interpretation + a
+substantial formalized operator-algebra/entropy library + induced-gravity re-derivations," with every claim
+inventory-backed.
+
+## 4. Progress log
+- **2026-06-30** — plan created; `LEAN_RESULTS_INVENTORY.md` built (full 296-file coverage); `vacuity_lint.sh`
+  extended to subdirs (tree clean). Starting **A1** (code-comment hygiene).

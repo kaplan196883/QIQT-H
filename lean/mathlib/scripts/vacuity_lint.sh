@@ -19,17 +19,17 @@
 set -uo pipefail
 ROOT="$(cd "$(dirname "$0")/../QIQTH" && pwd)"
 
-echo "[vacuity-lint] scanning $ROOT/*.lean for vacuous Prop bodies ..."
+echo "[vacuity-lint] scanning $ROOT/ (recursively, incl. subdirs) for vacuous Prop bodies ..."
 # Strip line comments FIRST (so a trailing `-- ...` cannot hide a `True` body),
 # then match a definition / quantifier / implication body that is exactly `True`:
 #   `:= True` , `↦ True` , `→ True` , `, True`  (the last catches `∀…,True` / `∃…,True`).
 PAT=':=[[:space:]]*True\b|↦[[:space:]]*True\b|→[[:space:]]*True\b|,[[:space:]]*True[[:space:]]*$'
 hits=""
-for f in "$ROOT"/*.lean; do
+while IFS= read -r f; do
   while IFS= read -r m; do
     hits="${hits}${f}:${m}"$'\n'
   done < <(sed -E 's/[[:space:]]*--.*$//' "$f" | grep -nE "$PAT")
-done
+done < <(find "$ROOT" -name '*.lean')
 hits=$(printf '%s' "$hits" | grep -E . || true)
 
 if [ -z "$hits" ]; then
