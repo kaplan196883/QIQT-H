@@ -121,5 +121,18 @@ verdict citing exact code/postulates. One commit per increment with the
   typicality-based single-world interpretation with a holographic *entropy* bound — NOT a finite-matter /
   discrete-Hilbert-space theory.** Legitimate, non-vacuous, but must be branded as an interpretation. The genuine
   open problems are interpretational (λ's law; P5 canonicity), not substrate-theoretic.
-- **NEXT → D5** (the resolution: synthesize D1–D4, adversarial GPT-5.5-pro re-check, and the papers/site/memory
-  punch-list to align with "finite entropy, not finite matter").
+- **2026-06-30 — D5 ✅ DONE — CAMPAIGN COMPLETE** (`scripts/qg/D5_resolution.md`): the resolution + a second
+  adversarial GPT-5.5-pro re-check + the punch-list. **Verdict (no charity, two red-teams): QIQT-H is Fork A —
+  standard covariant QFT + decoherence + a single-world λ-selector + a Born-typicality axiom (P5) + an assumed
+  Bousso-style holographic ENTROPY bound + standard induced gravity. Classification (b): a competent repackaging
+  with useful formal cleanup; the distinctive "finite quantized information as fundamental" did NOT survive.**
+  Four concessions: (1) "finite capacity" is NOT load-bearing for the interpretation (it holds over infinite-dim
+  QFT with no capacity bound) — it is branding; the finite record cardinality is a separate selection-rule
+  assumption, not a holographic consequence (D3); (2) the entropy bound ≈ Bousso under new branding; (3)
+  Born-from-typicality is a conditional reduction to P5 (which carries the empirical content — the disputed
+  Deutsch–Wallace/Zurek bridge), not a probability-free derivation; (4) 1/4 + Einstein are re-derivations of
+  Sakharov/Jacobson, not unique. **What survives:** a clean, machine-checked single-world interpretation + a Born
+  REDUCTION to one premise + honest discipline. **Path to (a):** derive a regulator-independent covariant finite
+  *operational record-capacity* bound with the A/4G coefficient from QIQT-H's own ontology (not by assuming
+  Bousso/Jacobson/P5) and make it indispensable. Punch-list (paper/site reframe to "finite entropy not finite
+  matter") = recommended for the author's approval. Loop d9187ef2 stopped.
