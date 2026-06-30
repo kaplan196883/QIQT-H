@@ -1,0 +1,29 @@
+================================================================================
+J1 — covariant-capacity regulator symbol test:  A_F = <k4^2 - k_x^2>_F  (0 <=> Δc²=0)
+  weight w=1/(k^2+M^2)^3, M=1, covariant scale Λ=4.0
+================================================================================
+
+  Reg A (covariant Gaussian, F=f(k_E^2)) :  A_F =  0.000e+00   -> 0  (PASS, Lorentz-scalar)
+  Reg K (modular Θ(Λ_K−s), Λ_K= 6.0)        :  A_F =  3.328e-01   != 0  (FAIL, frame-picking)
+  Reg K (modular Θ(Λ_K−s), Λ_K=10.0)        :  A_F =  3.308e-01   != 0  (FAIL, frame-picking)
+  Reg K (modular Θ(Λ_K−s), Λ_K=16.0)        :  A_F =  3.234e-01   != 0  (FAIL, frame-picking)
+
+  Reg C (modular+covariant, n=2):  F = exp[-(k_E²/Λ²)ⁿ]·exp[-(k₄²/Λ_K²)ⁿ]
+    α=Λ_K/Λ      A_F          interpretation
+    ----------------------------------------------------
+     0.25     -4.239e-01   modular ACTIVE -> LV
+     0.50     -2.238e-01   modular ACTIVE -> LV
+     1.00     -4.472e-02   modular ACTIVE -> LV
+     2.00     -3.519e-03   modular ACTIVE -> LV
+     4.00     -2.240e-04   crossover
+     8.00     -1.402e-05   modular inactive -> covariant
+    16.00     -8.761e-07   modular inactive -> covariant
+
+================================================================================
+VERDICT: A_F = 0 iff the regulator's symbol is Lorentz-scalar (covariant) <=> Δc²=0.
+  Reg A (covariant) -> 0.  Reg K (modular/mode-truncation) -> != 0 (FAILs CPSUV, the I4 4/3 class).
+  Reg C: A_F -> 0 only as α=Λ_K/Λ -> ∞ (modular cutoff inactive); active modular cutoff -> A_F != 0.
+  => Covariance of the per-diamond FAMILY does NOT buy Δc²=0; only a Lorentz-SCALAR symbol does.
+  A covariant finite-capacity escape requires capacity as a NONLOCAL/algebraic constraint over a
+  covariant kernel (J6), NOT a per-diamond mode/modular-energy truncation.
+================================================================================

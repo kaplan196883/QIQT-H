@@ -96,5 +96,13 @@ Lean: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green; `#print 
 `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>` trailer; push via schannel; update §5.
 
 ## 5. Progress log
-- **2026-06-30** — plan created (GPT-5.5-pro consult). Starting **J1** (numerical regulator comparison: covariant
-  control → 0, modular cutoff → 4/3, modular+covariant scan).
+- **2026-06-30** — plan created (GPT-5.5-pro consult).
+- **2026-06-30 — J1 ✅ DONE** (`scripts/qg/covariant_capacity_regulators.py` + `J1_regulator_symbol_result.md`):
+  the regulator symbol test via the LV-sourcing anisotropy `A_F = ⟨k₄²−k_x²⟩_F` (=0 ⟺ Lorentz-scalar ⟺ Δc²=0).
+  **Reg A (covariant) → A_F=0.000** (PASS); **Reg K (modular/diamond cutoff Θ(Λ_K−s)) → A_F≈0.33, un-suppressed
+  in Λ_K** (FAIL — the I4 4/3 CPSUV class); **Reg C (modular+covariant) → A_F→0 only as α=Λ_K/Λ→∞** (modular
+  factor must be parametrically inactive). Numerically confirms the crux: **covariance of the per-diamond FAMILY
+  does NOT buy Δc²=0 — only a Lorentz-SCALAR symbol does.** A mode/modular-truncation capacity FAILs.
+- **NEXT → J2** (THE KEY): the local-symbol AUDIT of QIQT-H's actual `Q_D = log #Atoms ≤ A(∂D)/4ℓ_P²`
+  (`LorentzSelection.lean`) — mode/modular truncation (FAIL) or nonlocal algebraic count over a covariant kernel
+  (escape candidate)? This decides the answer.
