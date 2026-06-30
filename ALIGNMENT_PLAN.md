@@ -1,6 +1,6 @@
 # Alignment plan — make every public claim match the Lean ground truth
 
-**Status:** ACTIVE (2026-06-30). **Ground truth:** `LEAN_RESULTS_INVENTORY.md` (built from a full-coverage,
+**Status:** A1–A4 COMPLETE (2026-06-30) → maintenance mode (re-run on inventory changes). **Ground truth:** `LEAN_RESULTS_INVENTORY.md` (built from a full-coverage,
 10-agent audit of all 296 `.lean` files). **Goal:** every claim in code comments, the website, and the paper is
 checkable against the inventory and accurately scoped — no overclaim, no stale under-claim. The loop iterates over
 the areas below, most-impactful-first; each iteration checks one area against the inventory and fixes
@@ -138,4 +138,24 @@ inventory-backed.
   files — verified count — the Mathlib-grade breadth, §0 #6). A3 PASS = the paper's claims map to inventory
   entries with matching qualifiers; the audit numbers, the H2 retraction, the open-problem set, and the
   formal-verification scope are all consistent.
-- **NEXT → A4 (build CLAIMS_LEDGER.md: each headline public claim → inventory entry + status; final consistency pass).**
+- **2026-06-30 — A4 ✅ DONE; ALIGNMENT COMPLETE.** Built `CLAIMS_LEDGER.md`: ~40 headline public claims (paper +
+  site) organized into 8 clusters (substrate meta · Born/λ · capacity/area-floor · gravity/1/4 · modular/BW/OP3b ·
+  corner/SM/spacetime · Lieb/DPI tower · CPSUV frontier), each row mapping the public wording → the inventory
+  entry (§ + theorem name) → the matching status qualifier ([AF] / [AF·cond:H] / [no-go] / [frontier] /
+  [re-derivation]) → aligned ✓. Plus a **final consistency pass**: cross-source agreement table (paper ⇄ site ⇄
+  inventory all agree on Born→P5, H2-retired, 1/4=re-derivation, finite=entropy-not-matter, audit scale, BW
+  unconditional, the tower credited); an explicit **"claims we deliberately DO NOT make"** boundary (no QG, no
+  value of G, no axiom-free area law, no finite-matter, no Born-from-unitarity, no novel-1/4, no CPSUV-escape, no
+  done-frontiers); and the tracked residual completeness gap (~55 unpinned terminal theorems, low risk —
+  `#print axioms` is transitive). **Verification:** spot-checked 11 cited theorem names — all exist at the cited
+  modules (`finitePoincare_trivial`, `area_floor_vonNeumann`, `oneParticleBW_niceWedge_unconditional`,
+  `no_covariant_selector`, `sm_free_field_in_corner`, `minCut_area_not_metric`, `positive_ray_certain_forces_born`,
+  `stoneGen_isSelfAdjoint`, …) — the ledger is grounded, not phantom citations.
+- **— ALL FOUR AREAS COMPLETE (A1 code-comments · A2 website · A3 paper · A4 ledger).** The recurring meta-finding
+  across all four: the project was **under-claiming, not over-claiming** — proved self-adjointness/axiom-discharge
+  was still labelled "frontier"/"axiom" in docstrings; genuine breadth (the Lieb/DPI tower, unconditional BW,
+  budget-0/296-file scale) was uncredited on the site & in the paper; and the H2 retraction (already in §1.1a)
+  **had not propagated to the paper body** (the single biggest fix, A3). Public framing is now: *a rigorously
+  machine-verified single-world interpretation + a substantial formalized operator-algebra/entropy library +
+  induced-gravity re-derivations*, every claim inventory-backed with matching qualifiers. **Maintenance mode:**
+  re-run this loop whenever the inventory changes (new Lean results, retractions) to keep code/site/paper aligned.
