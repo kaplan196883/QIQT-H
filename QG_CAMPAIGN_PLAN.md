@@ -117,5 +117,12 @@ Per simulation: a reproducible `scripts/qg/` script + the measured error-scaling
   H=0, via `Matrix.PosSemidef.trace_eq_zero_iff`), and the contrapositive `no_boost_of_pos_ne_zero`. Axiom-free
   (std 3), full `QIQTH` build green (8876 jobs), budget 0; wired into `QIQTH.lean` + `AxiomAudit.lean`. Finite
   capacity carries boosts only approximately — the finite modular/spectral claims are finite-time/low-energy.
-- **NEXT → I2** (gate C, BW-recurrence bound), then Phase B (the Lorentz-cutoff stress test, I3 dispersion bound
-  + I4 the decisive one-loop Δc²).
+- **2026-06-30 — I2 ✅ DONE** (`QIQTH/QG/FiniteModularRecurrence.lean`, gate C): `modHam_spectrum_finite` /
+  `modHam_real_spectrum_finite` (a finite modular Hamiltonian `K=log Δ` has finite spectrum, via
+  `Matrix.finite_real_spectrum`), `exists_energy_outside_finite_spectrum` (it MISSES real energies — `ℝ` is
+  infinite), `finite_modular_spectrum_ne_real_line` (`spectrum ℝ K ≠ ℝ`). The continuum BW generator (the boost)
+  has spectrum all of `ℝ` (a.c., mixing) ⟹ no finite modular flow equals it; finite modular flow is
+  almost-periodic/recurrent — a finite-time/low-energy shadow. Axiom-free (std 3), full `QIQTH` green, budget 0;
+  wired into `QIQTH.lean` + `AxiomAudit.lean`.
+- **NEXT → Phase B (the de-risking centerpiece):** I3 (free-dispersion Lorentz-defect bound, Lean), then **I4**
+  (the decisive one-loop Δc² naturalness test, Python).

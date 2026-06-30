@@ -7481,4 +7481,15 @@ namespace QIQTH.AxiomAudit
 -- QG audit 2026-06-30). NOT a universal "finite forbids Lorentz" (false — spin chains/QCAs are counterexamples).
 #print axioms QIQTH.QG.no_boost_of_pos_ne_zero
 
+-- QG campaign, Phase A — falsification gate C: the finite modular flow has discrete spectrum (BW-recurrence).
+#print axioms QIQTH.QG.modHam_spectrum_finite
+#print axioms QIQTH.QG.modHam_real_spectrum_finite
+#print axioms QIQTH.QG.exists_energy_outside_finite_spectrum
+#print axioms QIQTH.QG.finite_modular_spectrum_ne_real_line
+-- expected: standard only — ★ GATE C: a finite modular Hamiltonian K (= log Δ) has FINITE spectrum (≤|n|
+-- modular energies, Matrix.finite_real_spectrum), so it MISSES real energies and spectrum ℝ K ≠ univ. The
+-- continuum Bisognano–Wichmann generator (the boost) has spectrum ALL of ℝ (a.c., mixing) — hence no finite
+-- modular flow equals it; finite modular flow is almost-periodic/recurrent, a finite-time/low-energy shadow.
+-- Bounds QIQT-H's finite modular/spectral claims (per GPT-5.5-pro QG audit 2026-06-30).
+
 end QIQTH.AxiomAudit
