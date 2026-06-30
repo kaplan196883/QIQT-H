@@ -127,3 +127,18 @@ the count layer to an operational Holevo bound** — genuinely buildable, genuin
   the count from the area law, cites `EntropyNotCardinality`). **NEXT → B1: the quantitative Fano inequality
   `H(X|Y) ≤ binEntropy ε + ε·log(M−1)` (the main new lemma — heavier; extend `ShannonFano`'s partial content) →
   B2 accessible ≤ Holevo χ ≤ Q (reuse Donald/HolevoCoarseGraining) → B3 capstone.**
+- **2026-06-30 — B1-exact ✅ DONE** (the exact ε=0 capstone, axiom-free std-3, pinned, budget 0). Built
+  `H_uniform` (the equiprobable record law has `H = log M` — the Holevo info of `M` perfectly-distinguishable
+  equiprobable records) and `exact_distinguishable_capacity`: a capacity bound `Q` on that distinguishable
+  ensemble (`χ = log M ≤ Q`) gives the record-**count** bound `M ≤ e^Q`. This is the honest ε=0 operational
+  record-capacity theorem, fully self-contained — `Q` enters as the carried Holevo/relative-entropy bound, and
+  the count bound holds because `Q` bounds the *Holevo info of the distinguishable ensemble* (= `log M`), NOT
+  merely some `S(ρ_R) ≤ Q` (which `EntropyNotCardinality` forbids from bounding the count). Docstring keeps the
+  Bekenstein-class / not-new-physics / not-from-area-law scope.
+  **NEXT → B1-full: the ε > 0 robustness — the quantitative Fano inequality `H(X|Y) ≤ h₂(ε) + ε·log(M−1)`.
+  ⚠ HONEST BLOCKER NOTE: this needs conditional/joint Shannon-entropy infrastructure (joint law, `H(X,Y)`,
+  `H(X|Y)`) that neither `ShannonFano` nor Mathlib packages — a real multi-lemma build, not a 10-min increment.
+  Options for the loop: (i) build the minimal joint/conditional-entropy layer then Fano; (ii) land the weaker
+  `H(X|Y) ≤ h₂(ε) + ε·log M` form (suffices for the capacity bound, slightly easier); (iii) if both stall,
+  checkpoint and proceed to B4 (the energy/Bekenstein finite-rank cutoff, which is independent and may be more
+  tractable). Then B2 (Holevo glue) + B3 (full capstone).**

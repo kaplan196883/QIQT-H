@@ -103,5 +103,38 @@ theorem exact_record_capacity {M : ℝ} (hM : 0 < M) {Q : ℝ}
   calc M = Real.exp (Real.log M) := (Real.exp_log hM).symm
     _ ≤ Real.exp Q := Real.exp_le_exp.mpr hlog
 
+/-- **The equiprobable ensemble's Shannon entropy is `log M`.** For a finite
+    nonempty record set `s` (`M = |s|`), the uniform record law `p_i = 1/M` has
+    `H(p) = log M`. This is the Holevo information `χ = S(ρ̄) − avg S(ρ_i)` of `M`
+    equiprobable *perfectly-distinguishable* records (each pure, `S(ρ_i)=0`,
+    `ρ̄` maximally mixed on the `M`-dim support). -/
+lemma H_uniform {ι : Type*} (s : Finset ι) (hs : s.Nonempty) :
+    ShannonFano.H s (fun _ => (s.card : ℝ)⁻¹) = Real.log s.card := by
+  have hpos : 0 < s.card := Finset.card_pos.mpr hs
+  have hne : (s.card : ℝ) ≠ 0 := Nat.cast_ne_zero.mpr hpos.ne'
+  unfold ShannonFano.H
+  rw [Finset.sum_const, nsmul_eq_mul, Real.log_inv]
+  field_simp
+
+/-- **Exact operational record-capacity theorem (ε = 0).** If the Holevo /
+    relative-entropy information `χ` of `M = |s|` equiprobable
+    perfectly-distinguishable records is bounded by `Q` — and for such records
+    `χ = H(uniform) = log M` (`H_uniform`) — then the record count obeys
+    `M ≤ e^Q`. The bound `Q` is the **carried** Holevo / fixed-reference
+    relative-entropy bound (the `D(ω‖σ_R) ≤ Q` input); the theorem turns it into
+    a record-*count* bound for the distinguishable case.
+
+    ⚠ Holevo/Bekenstein-class — **NOT new physics**, and it does **NOT** derive
+    the count from the area law (`EntropyNotCardinality`: a bare entropy bound
+    does not bound cardinality — here the count bound holds because `Q` bounds the
+    *Holevo information of the distinguishable ensemble*, which equals `log M`,
+    not merely some `S(ρ_R) ≤ Q`). The ε > 0 robust version needs the Fano step. -/
+theorem exact_distinguishable_capacity {ι : Type*} (s : Finset ι) (hs : s.Nonempty)
+    {Q : ℝ} (hcap : ShannonFano.H s (fun _ => (s.card : ℝ)⁻¹) ≤ Q) :
+    (s.card : ℝ) ≤ Real.exp Q := by
+  have hpos : (0 : ℝ) < s.card := by exact_mod_cast Finset.card_pos.mpr hs
+  rw [H_uniform s hs] at hcap
+  exact exact_record_capacity hpos hcap
+
 end OperationalCapacity
 end QIQTH

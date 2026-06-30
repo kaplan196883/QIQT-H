@@ -7610,5 +7610,9 @@ namespace QIQTH.AxiomAudit
 -- are the next increments. Axiom-free (std 3).
 #print axioms QIQTH.OperationalCapacity.exact_record_capacity
 #print axioms QIQTH.OperationalCapacity.binEntropy_nonneg
+-- B1-exact: the equiprobable ensemble entropy = log M (H_uniform) and the exact (ε=0) distinguishable-records
+-- capacity bound M ≤ e^Q (Holevo bound on the distinguishable ensemble = log M ⟹ count ≤ e^Q). Axiom-free (std 3).
+#print axioms QIQTH.OperationalCapacity.H_uniform
+#print axioms QIQTH.OperationalCapacity.exact_distinguishable_capacity
 
 end QIQTH.AxiomAudit
