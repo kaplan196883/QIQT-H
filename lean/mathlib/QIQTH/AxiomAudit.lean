@@ -7639,5 +7639,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OperationalCapacity.prodLaw_sum
 #print axioms QIQTH.OperationalCapacity.diag_jointLaw
 #print axioms QIQTH.OperationalCapacity.diag_prodLaw
+-- B3.2 GROUNDED CAPSTONE: confusionMI_ge_fano (D₂(s‖1/M) ≤ I(T) via kl_partition_two on the diagonal) and
+-- record_capacity: the operational record-capacity bound s·log M ≤ Q + h₂(1−s), i.e. (1−ε)log M ≤ Q + h₂(ε),
+-- carrying the NATURAL Holevo bound I(T) ≤ Q on the confusion-matrix mutual information. Holevo/Bekenstein-class,
+-- NOT new physics, NOT from the area law (EntropyNotCardinality). Axiom-free (std 3).
+#print axioms QIQTH.OperationalCapacity.confusionMI_ge_fano
+#print axioms QIQTH.OperationalCapacity.record_capacity
 
 end QIQTH.AxiomAudit

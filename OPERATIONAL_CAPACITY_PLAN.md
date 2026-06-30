@@ -189,3 +189,12 @@ the count layer to an operational Holevo bound** — genuinely buildable, genuin
   budget 0. **NEXT → `confusionMI_ge_fano`: define `confusionMI T = ∑ P log(P/R)` and apply `kl_partition_two`
   with `A = diagSet` (+ the supp/positivity side-conditions) to get `binaryKL(avgSuccess, 1/M) ≤ confusionMI T`;
   then the grounded capstone carrying `confusionMI T ≤ Q`. Then B4 energy/Bekenstein.**
+- **2026-06-30 — B3.2 GROUNDED CAPSTONE ✅ DONE.** Built `confusionMI T = ∑ P log(P/R)` and `confusionMI_ge_fano`
+  (`D₂(avgSuccess‖1/M) ≤ I(T)` via `kl_partition_two` on `A = diagSet`, discharging all its supp/positivity
+  side-conditions from `T ≥ 0`, row-stochasticity, `M > 1`, `0 < s < 1`), then the **grounded capstone
+  `record_capacity`**: `s·log M ≤ Q + h₂(1−s)`, i.e. `(1−ε)log M ≤ Q + h₂(ε)`, carrying the **natural Holevo
+  bound `I(T) ≤ Q`** on the confusion-matrix mutual information. Axiom-free std-3, pinned, budget 0. The
+  operational record-capacity theorem is now COMPLETE in its natural form. Honest scope in docstrings unchanged.
+  **NEXT → B4 (the energy/Bekenstein microcanonical form — the "finite number" version, `S_vN(ρ) ≤ βE + log Z`
+  from `relEntropy_nonneg` vs the Gibbs state, OR a finite-rank-cutoff `M ≤ d(E)` version); then Track A docs to
+  point at the now-built `record_capacity`.**

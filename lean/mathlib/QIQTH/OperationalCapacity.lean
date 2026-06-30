@@ -414,6 +414,62 @@ lemma diag_prodLaw (T : ι → ι → ℝ) (hrow : ∀ i, ∑ j, T i j = 1)
   rw [← Finset.sum_div, outMarg_sum T hrow hN]
   rw [one_div]
 
+/-- The **confusion-matrix mutual information** `I(T) = ∑ P(i,j) log(P(i,j)/R(i,j))` (joint vs product law). -/
+noncomputable def confusionMI (T : ι → ι → ℝ) : ℝ :=
+  ∑ p : ι × ι, jointLaw T p * Real.log (jointLaw T p / prodLaw T p)
+
+/-- **`I(T)` lower-bounds the Fano expression** via binary coarse-graining to the diagonal: for a row-stochastic
+    nonnegative `T` with `M > 1` and average success `s = avgSuccess T ∈ (0,1)`,
+    `D₂(s‖1/M) ≤ I(T)`. (`kl_partition_two` on `A = diagSet`, with the diagonal masses `s` and `1/M`.) -/
+theorem confusionMI_ge_fano (T : ι → ι → ℝ) (hT : ∀ i j, 0 ≤ T i j)
+    (hrow : ∀ i, ∑ j, T i j = 1) (hM : 1 < (Fintype.card ι : ℝ))
+    (hs0 : 0 < avgSuccess T) (hs1 : avgSuccess T < 1) :
+    binaryKL (avgSuccess T) (Fintype.card ι : ℝ)⁻¹ ≤ confusionMI T := by
+  have hN0 : (0 : ℝ) < Fintype.card ι := by linarith
+  have hjnn : ∀ a, 0 ≤ jointLaw T a := fun a => by
+    unfold jointLaw; exact div_nonneg (hT a.1 a.2) hN0.le
+  have hom_nn : ∀ j, 0 ≤ outMarg T j := fun j => by
+    unfold outMarg; exact div_nonneg (Finset.sum_nonneg (fun i _ => hT i j)) hN0.le
+  have hrnn : ∀ a, 0 ≤ prodLaw T a := fun a => by
+    unfold prodLaw; exact div_nonneg (hom_nn a.2) hN0.le
+  have hsupp : ∀ a, jointLaw T a ≠ 0 → 0 < prodLaw T a := by
+    intro a ha
+    have hTne : T a.1 a.2 ≠ 0 := fun h => ha (by unfold jointLaw; rw [h, zero_div])
+    have hTpos : 0 < T a.1 a.2 := lt_of_le_of_ne (hT a.1 a.2) (Ne.symm hTne)
+    have hsum : 0 < ∑ i, T i a.2 :=
+      lt_of_lt_of_le hTpos (Finset.single_le_sum (fun i _ => hT i a.2) (Finset.mem_univ a.1))
+    unfold prodLaw outMarg
+    exact div_pos (div_pos hsum hN0) hN0
+  have hjs := jointLaw_sum T hrow hN0
+  have hps := prodLaw_sum T hrow hN0
+  have hPA : 0 < ∑ p ∈ diagSet, jointLaw T p := by rw [diag_jointLaw]; exact hs0
+  have hQA : 0 < ∑ p ∈ diagSet, prodLaw T p := by rw [diag_prodLaw T hrow hN0]; exact inv_pos.mpr hN0
+  have hPAc : 0 < ∑ p ∈ diagSetᶜ, jointLaw T p := by
+    have h := Finset.sum_add_sum_compl diagSet (jointLaw T); rw [hjs, diag_jointLaw] at h; linarith
+  have hQAc : 0 < ∑ p ∈ diagSetᶜ, prodLaw T p := by
+    have h := Finset.sum_add_sum_compl diagSet (prodLaw T)
+    rw [hps, diag_prodLaw T hrow hN0] at h
+    have hinv : (Fintype.card ι : ℝ)⁻¹ < 1 := by rw [inv_lt_one₀ hN0]; exact hM
+    linarith
+  have key := kl_partition_two (jointLaw T) (prodLaw T) diagSet hjnn hrnn hsupp hjs hps hPA hPAc hQA hQAc
+  rwa [diag_jointLaw, diag_prodLaw T hrow hN0] at key
+
+/-- **Grounded operational record-capacity capstone.** For a row-stochastic nonnegative confusion matrix `T`
+    with `M = |ι| > 1` and average decoding success `s = avgSuccess T ∈ (0,1)`, if the confusion mutual
+    information is bounded by the Holevo / fixed-reference relative entropy, `I(T) ≤ Q`, then
+    `s·log M ≤ Q + h₂(1−s)`, i.e. **`(1 − ε)·log M ≤ Q + h₂(ε)`** with `ε = 1 − s`. This is the operational
+    record-capacity bound in its natural form (carrying the genuine `I(T) ≤ Q`).
+
+    ⚠ Holevo/Bekenstein-class — **NOT new physics**, does **NOT** derive the count from the area law
+    (`EntropyNotCardinality`), finite as a number only via an imported energy cutoff, distinctive only via a
+    `Q_R` differing from standard generalized entropy (cited frontier). -/
+theorem record_capacity (T : ι → ι → ℝ) (hT : ∀ i j, 0 ≤ T i j)
+    (hrow : ∀ i, ∑ j, T i j = 1) (hM : 1 < (Fintype.card ι : ℝ))
+    (hs0 : 0 < avgSuccess T) (hs1 : avgSuccess T < 1) {Q : ℝ} (hQ : confusionMI T ≤ Q) :
+    avgSuccess T * Real.log (Fintype.card ι) ≤ Q + binEntropy (1 - avgSuccess T) :=
+  record_capacity_of_binaryKL_bound hs0.le hs1.le hM
+    (le_trans (confusionMI_ge_fano T hT hrow hM hs0 hs1) hQ)
+
 end Confusion
 
 end OperationalCapacity
