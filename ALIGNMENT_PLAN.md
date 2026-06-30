@@ -169,3 +169,11 @@ inventory-backed.
   AxiomAudit builds green (8885 jobs); budget-check **0**, no regressions, only the one documented `le _ _ := True`
   site. Updated `CLAIMS_LEDGER.md`'s residual-gap note: the headline terminal capstones are now individually pinned;
   what remains unpinned is minor, non-headline, and transitively certified.
+- **2026-06-30 — maintenance drift-check (A2): homepage 1/4 sharpened.** Swept ALL site pages (incl. the not-yet-
+  individually-audited `papers`/`reach`/`statements`/`browser`) for overclaim/retired patterns — all clean
+  (every "forbids/derive/QG" hit resolves to a correct retraction notice or honest denial; the "830"/"932"
+  matches are auto-generated theorem *numbers*, not stale audit counts). One genuine sharpening found: the
+  **homepage** (`index.astro`, highest-visibility) called the 1/4 "derived (Sakharov bridge)" but — unlike
+  `theory.md` — lacked the §0 #3 qualifier. Added the matching "machine-checked **re-derivation** of the standard
+  induced-gravity 1/4, *not* unique to finiteness" clause to its detailed gravity section. Website builds green
+  (66 pages). No other drift.

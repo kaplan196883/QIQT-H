@@ -141,7 +141,9 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
       There the area law emerges (cone curvature = δ on the boundary, integral = area) and the <strong>1/4</strong>
       is the universal ratio between the conical replica-entropy coefficient and the induced Einstein–Hilbert
       coefficient — two quantities sharing one UV coefficient; the <em>ratio</em> is machine-checked
-      (<code>sakharov_ratio</code>), the <em>value</em> of G is not. Carried inputs: the value of ℓ<sub>P</sub>² = G
+      (<code>sakharov_ratio</code>), the <em>value</em> of G is not. This is a machine-checked
+      <strong>re-derivation</strong> of the standard induced-gravity 1/4 — verified, but <em>not</em> unique to
+      finiteness (any local relativistic QFT with the same UV coefficient yields it). Carried inputs: the value of ℓ<sub>P</sub>² = G
       (species/cutoff), and — for the full effective action — Λ and higher-curvature terms. From the finite capacity the <em>area floor</em>
       S<sub>vN</sub>(ρ<sub>R</sub>) ≤ A/4ℓ<sub>P</sub>² is a <strong>derived theorem</strong>
       (<code>area_floor_vonNeumann</code> — max-entropy S<sub>vN</sub> ≤ log&nbsp;dim), and for the free field the
