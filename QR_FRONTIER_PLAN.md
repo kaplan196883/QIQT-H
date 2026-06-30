@@ -138,3 +138,12 @@ distinctive — with its falsifiable prediction — clearly labelled as a postul
   MaxEntropyCapacity` (`Q_R = Smax`, a typeclass NEVER a Lean axiom) + the conditional `distinctive_gap` (under
   the postulate, `Q_R − S_gen = gap ≥ 0`) — the finite shadow of the `√V_gen` prediction; plus `capEnt_zero_iff_*`
   (the "no shift iff maximally mixed" characterization). Then B5 wire-in + point docs at the theorems.**
+- **2026-07-01 — B4 ✅ DONE (the postulate + the conditional prediction — the payoff).** Built the bridge
+  postulate `class MaxEntropyCapacity p Q_R S_gen` (a **typeclass, NEVER a Lean axiom**: `capacity_is_max`
+  `Q_R = Smax`, `sgen_is_vn` `S_gen = Svn`), the conditional theorem **`distinctive_gap`** (GIVEN the postulate,
+  `Q_R − S_gen = S_max − S_vN = gap ≥ 0` — the finite shadow of the `√V_gen` prediction), and `capEnt_eq_zero_iff`
+  (the shift vanishes iff the surprisal is flat = maximally mixed). Axiom-free std-3, pinned, budget 0. **The
+  mathematical content of the frontier is COMPLETE**: the no-go (B2) proves it can't be derived, and B4 packages
+  the *one postulate* that makes it distinctive + its conditional, falsifiable consequence. **NEXT → B5 only:
+  point the Track-A guardrails (inventory/ledger/site/paper) at the built theorem names
+  (`svn_underdetermines_smax`, `distinctive_gap`, `capEnt_nonneg`).**

@@ -7667,5 +7667,11 @@ namespace QIQTH.AxiomAudit
 -- Axiom-free (std 3).
 #print axioms QIQTH.MaxEntropyCapacity.capEnt_eq_variance
 #print axioms QIQTH.MaxEntropyCapacity.capEnt_nonneg
+#print axioms QIQTH.MaxEntropyCapacity.capEnt_eq_zero_iff
+-- B4: the max-entropy bridge POSTULATE (class MaxEntropyCapacity — a typeclass, NEVER a Lean axiom) + the
+-- CONDITIONAL distinctive prediction distinctive_gap: GIVEN the postulate, Q_R − S_gen = S_max − S_vN = gap ≥ 0
+-- (the finite shadow of the √V_gen prediction; vanishes iff flat). It is NOT a derivation — QIQT-H posits the
+-- capacity and derives this consequence; svn_underdetermines_smax forces it to be a postulate. Axiom-free (std 3).
+#print axioms QIQTH.MaxEntropyCapacity.distinctive_gap
 
 end QIQTH.AxiomAudit

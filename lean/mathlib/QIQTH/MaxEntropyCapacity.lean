@@ -111,5 +111,50 @@ theorem capEnt_nonneg {ι : Type*} [Fintype ι] (p : ι → ℝ)
   rw [capEnt_eq_variance p h1]
   exact Finset.sum_nonneg (fun i _ => mul_nonneg (hp i) (sq_nonneg _))
 
+/-- **`V_gen = 0` iff the surprisal is constant on the support** — i.e. the spectrum is flat (maximally mixed):
+    every `pᵢ` is either `0` or has `log pᵢ = μ` (`μ = ∑ p log p`). So the capacity of entanglement vanishes
+    exactly when there is *no* distinctive shift — the maximally-mixed sector. -/
+theorem capEnt_eq_zero_iff {ι : Type*} [Fintype ι] (p : ι → ℝ)
+    (hp : ∀ i, 0 ≤ p i) (h1 : ∑ i, p i = 1) :
+    capEnt p = 0 ↔ ∀ i, p i = 0 ∨ Real.log (p i) = (∑ j, p j * Real.log (p j)) := by
+  rw [capEnt_eq_variance p h1,
+    Finset.sum_eq_zero_iff_of_nonneg (fun i _ => mul_nonneg (hp i) (sq_nonneg _))]
+  constructor
+  · intro h i
+    rcases mul_eq_zero.mp (h i (Finset.mem_univ i)) with h0 | hsq
+    · exact Or.inl h0
+    · exact Or.inr (by have := pow_eq_zero_iff (n := 2) (by norm_num) |>.mp hsq; linarith)
+  · intro h i _
+    rcases h i with h0 | hlog
+    · rw [h0]; ring
+    · rw [hlog]; ring
+
+/-! ### B4 — the max-entropy bridge POSTULATE + the conditional distinctive prediction -/
+
+/-- **The MAX-ENTROPY BRIDGE POSTULATE** (a typeclass — **NEVER a Lean `axiom`**, exactly like
+    `HolographicCapacityBound`): gravity's reconstruction capacity `Q_R` is the **max-entropy / log-count**
+    `S_max` (the finite record COUNT), and standard generalized entropy `S_gen` is the von Neumann entropy
+    `S_vN` of the spectrum. This is an ADDED assumption — it is **not derivable** (`svn_underdetermines_smax`:
+    the area fixes `S_vN`, not the count) and is the *only* route to a distinctive `Q_R`. -/
+class MaxEntropyCapacity {ι : Type*} [Fintype ι] (p : ι → ℝ) (Q_R S_gen : ℝ) : Prop where
+  /-- The postulate: capacity = the max-entropy / log-count (not `S_vN`). -/
+  capacity_is_max : Q_R = Smax ι
+  /-- Standard generalized entropy is the von Neumann entropy. -/
+  sgen_is_vn : S_gen = Svn p
+
+/-- **The distinctive prediction — CONDITIONAL on the bridge postulate (NOT a derivation).** *Given* the
+    max-entropy postulate, the capacity differs from standard generalized entropy by exactly the count/entropy
+    gap: `Q_R − S_gen = S_max − S_vN = gap p ≥ 0`. This is the finite shadow of the continuum `√V_gen`
+    (capacity-of-entanglement) prediction; the shift vanishes exactly on the flat (maximally-mixed) spectrum
+    (`capEnt_eq_zero_iff`), and is strictly positive otherwise. It holds **only given the postulate** — QIQT-H
+    does not *derive* a distinctive `Q_R`; it *posits* one and derives this consequence. The continuum `√V_gen`
+    coefficient and the value of `G` are cited frontiers. -/
+theorem distinctive_gap {ι : Type*} [Fintype ι] (p : ι → ℝ) (Q_R S_gen : ℝ)
+    [h : MaxEntropyCapacity p Q_R S_gen] (hp : ∀ i, 0 ≤ p i) (h1 : ∑ i, p i = 1) :
+    Q_R - S_gen = gap p ∧ 0 ≤ Q_R - S_gen := by
+  have hg : Q_R - S_gen = gap p := by
+    unfold gap; rw [h.capacity_is_max, h.sgen_is_vn]
+  exact ⟨hg, by rw [hg]; exact gap_nonneg p hp h1⟩
+
 end MaxEntropyCapacity
 end QIQTH
