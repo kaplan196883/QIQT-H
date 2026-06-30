@@ -14,9 +14,16 @@ real prospect.
 > under interactions — exactly like the cutoff — *unless an actual protecting symmetry or a covariant/nonlocal
 > regulator forbids them.* No interacting 3+1D finite-local-Hilbert QCA is known for which a one-loop `Δc²` has
 > been shown to vanish without tuning. So the "Lorentzian QCA" frontier splits into two very different things:
-> **(A) a decisive falsification experiment** (expected to FAIL — and that failure is informative), and **(B) the
-> real QIQT-H route: covariant *holographic/nonlocal* finite capacity**, where the I4 kill — of the *local-cutoff
-> strawman* — may simply not apply. (B) is a research program, not a QCA simulation.
+> **(A) a decisive control/falsification experiment** (the QCA, expected to FAIL — that failure isolates *what*
+> matters), and **(B) the real QIQT-H route: covariant *holographic/nonlocal* finite capacity**, where the I4
+> kill — of the *local-cutoff strawman* — may simply not apply.
+>
+> **Crucially (§3): route (B)'s architecture is ALREADY machine-checked** in the Open Problem 3b Lorentz thread —
+> QIQT-H imposes capacity *covariantly, per causal diamond* (`Q_D = A(∂D)/4ℓ_P²`), on a Poincaré-equivariant net
+> with a boost-invariant measure (`LorentzSelection`, `FreeFieldTypicality.freeFieldMeasure_boost_invariant`,
+> `CovariantGluing.no_covariant_selector`). So (B) is NOT an unbuilt research program; its skeleton exists, and the
+> open step narrows to one sharp question: does the per-diamond (informational, non-local) capacity reintroduce a
+> preferred-frame regulator in interacting *matter* loops, or not?
 
 ---
 
@@ -88,7 +95,7 @@ FAIL (the likely outcome) rigorously closes the "unprotected QCA escape" and for
 
 ---
 
-## 3. The real route — covariant holographic/nonlocal finite capacity *(research program; where the answer lives)*
+## 3. The real route — covariant holographic/nonlocal finite capacity *(architecture ALREADY BUILT; one step open)*
 
 The I4/CPSUV kill is specifically a kill of the **local-cutoff strawman**: independent Planck cells, a local
 spatial-`|k|` cutoff, a preferred frame. It does **not** prove that *every* finite regional/holographic
@@ -96,15 +103,41 @@ Hilbert-space theory radiatively violates Lorentz invariance. QIQT-H's capacity 
 a local UV lattice — so a genuinely holographic finite capacity would not regulate loops by cutting spatial
 modes in a preferred frame, and the dim-4 LV operators could simply be **absent**.
 
-**But this is a burden, not a slogan.** To be more than hope, QIQT-H must establish at least one of:
-1. **No preferred `n^μ`** in the low-energy effective action (the finite capacity leaves no frame vector), or
-2. **Ward identities forcing `Z_t = Z_s`** (an exact Lorentz/diffeomorphism symmetry of the UV completion), or
-3. **Covariant low-energy amplitudes** after the holographic UV completion (computed, not assumed).
+**⚠️ This route's architecture is ALREADY MACHINE-CHECKED in the Open Problem 3b Lorentz thread** (added to this
+scope 2026-06-30 after auditing the existing code — the earlier draft wrongly called route (d) an unbuilt
+"research program"). QIQT-H already imposes its finite capacity **covariantly, per causal diamond**, NOT as a
+local spatial cutoff:
+- `QIQTH/LorentzSelection.lean` + `LorentzSelectionStrong.lean` — a **Poincaré-equivariant causal-diamond net**
+  with **per-diamond capacity `log #Atoms ≤ Q_D = A(∂D)/4ℓ_P²`** and the covariance capstone
+  `evaluation_covariance` (`A_{gD}[U_gΦ, g·λ] = g·A_D[Φ,λ]`);
+- `QIQTH/FreeFieldTypicality.lean` — `freeFieldMeasure_boost_invariant`: the typicality measure `μ∞` is
+  **boost-invariant** (covariant Born measure, free-field finite-mode);
+- `QIQTH/CovariantGluing.lean` — `no_covariant_selector`: covariant *measure* yes, covariant *selector* no (λ is a
+  symmetry-breaking sample of a covariant law) — the honest OP3b content;
+- `QIQTH/LorentzWitness.lean`, `QIQTH/DiamondSwapNet.lean` — concrete non-vacuous, geometry-moving witnesses.
 
-This is the honest frontier. Concrete (research-grade) sub-questions: does the regional capacity bound, imposed
-*covariantly* (per causal diamond, à la Bousso/CEB — not per spatial cell), avoid sourcing a preferred frame? Do
-the edge/gauge/code degrees of freedom carry the Lorentz Ward identity? This is where the crossed-product /
-modular-flow machinery (which IS covariant) plausibly reconnects — modular flow has no preferred lab frame.
+So burden (1) below is **structurally discharged for the selection/measure layer**: the net is Poincaré-
+equivariant, capacity is per-diamond `A(∂D)/4ℓ_P²` (Bousso-covariant), no preferred frame.
+
+**What that thread does NOT close** (the genuinely open step, and where CPSUV bites): it proves the covariance of
+the **(Φ, λ, μ) selection/record layer on a given net** — it does *not* compute **interacting matter** loop
+corrections. The per-diamond bound constrains the *record content* (`log #Atoms ≤ Q_D`), not directly the matter
+field's `Z_t / Z_s`. So the honest remaining burden narrows from "establish covariance" to **one sharp question**:
+
+> **Does imposing capacity informationally / per causal diamond (as QIQT-H already does) reintroduce a
+> preferred-frame regulator in interacting *matter* self-energies — or not?** If not, CPSUV never fires (there was
+> never a local spatial cutoff to source the LV).
+
+Make this rigorous via at least one of:
+1. **No preferred `n^μ`** in the matter effective action — *partially done* (the net is equivariant; extend it to
+   the matter loop regulator);
+2. **Ward identities forcing `Z_t = Z_s`** from the covariant per-diamond / modular structure; or
+3. **Covariant matter amplitudes** computed with the diamond-capacity regulator (not a spatial cutoff).
+
+This is where the crossed-product / modular-flow machinery (which IS frame-free) reconnects: modular flow has no
+preferred lab frame, and the capacity already enters covariantly as `Q_D = A(∂D)/4ℓ_P²`. The remaining work is to
+connect that covariant net to a matter self-energy computation — far more tractable than building a Lorentzian QCA
+from scratch, because the covariant scaffolding exists.
 
 ---
 
