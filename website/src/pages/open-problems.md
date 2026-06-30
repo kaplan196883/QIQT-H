@@ -219,6 +219,19 @@ capacity of entanglement, and the conditional prediction under the postulate are
 axiom-free** (`QIQTH/MaxEntropyCapacity.lean`: `svn_underdetermines_smax`, `gap_nonneg`, `capEnt_nonneg`,
 `distinctive_gap`; `QR_FRONTIER_PLAN.md`).
 
+**The honest verdict, on first contact with real holography (2026).** We tested it. Against a genuine
+holographic spectrum — a two-fixed-area-sector state (Dong–Harlow–Marolf), the canonical Page-transition
+density matrix — the universal $\sqrt{V_{\rm gen}}$ prediction is **falsified**: the *exact* one-shot shift
+saturates while $z_\epsilon\sqrt{V_{\rm gen}}$ overshoots by $\sim\!2.3\times$ and exceeds the physical ceiling
+(predicting more records than the Hilbert space holds). $\sqrt{V_{\rm gen}}$ turns out to be a *Gaussianity*
+approximation — it "works" only in the Haar / many-copy regime, where it says nothing new. And the surviving
+content — *gravity's capacity is the smooth one-shot / max-entanglement-wedge entropy* — is already
+**known holography** (Akers–Penington, [arXiv:2008.03319](https://arxiv.org/abs/2008.03319)): distinctive
+relative to the naive "RT always uses $S_{\rm vN}$," but **not new physics, and not a new $Q_R$**. So
+QIQT-H's one distinctive frontier, honestly tested, **reduces to known one-shot entanglement-wedge physics**
+(`scripts/qr/twosector_killtest.py`). That is the calibrated end of the line: no quantum gravity, no value of
+$G$, no surviving novel prediction — but a precise, machine-checked map of exactly where the program stands.
+
 </div>
 
 ## Exploratory — is λ a *fact* or a *generator*? (a falsifiable alternative)

@@ -165,3 +165,16 @@ distinctive — with its falsifiable prediction — clearly labelled as a postul
   `n → ∞`). Reproducible (seeded); plot at `scripts/qr/maxent_pagecurve.png`. Confirms the predicted shift is
   well-defined, spectrum-dependent, and governed by `√V_gen` — turning it into physics still needs the postulate's
   coefficient fixed + an independent holographic comparison (the cited frontier).
+- **2026-07-01 — HOLOGRAPHIC CONFRONTATION: the postulate falsifies/reduces (the calibrated endpoint).**
+  GPT-5.5-pro expert review + `scripts/qr/twosector_killtest.py` ran the first independent test against real
+  holography. **(i) FALSIFIED:** the universal `√V_gen` prediction fails at the Page/island transition — a
+  two-fixed-area-sector state (Dong–Harlow–Marolf): the *exact* one-shot shift `H₀^ε − S_vN` saturates (ceiling
+  `log(D₁+D₂) − S`) while `z_ε√V_gen` overshoots ~2.3× and exceeds it (predicting more records than the space
+  holds). `√V_gen` is a **Gaussianity** approximation (second-order source coding, Tomamichel–Hayashi) — it works
+  only in the Haar/CLT regime where it says nothing new (control in the same script). **(ii) REDUCES:** the
+  surviving content — "capacity = the smooth one-shot / max-entanglement-wedge entropy" — is **known** holography
+  (Akers–Penington `2008.03319`; Dong–Harlow–Marolf `1811.05382` fixed-area states): distinctive vs the naive
+  "RT always uses `S_vN`," but **not new physics, not a new `Q_R`**. **Net: QIQT-H's one distinctive frontier
+  reduces, on contact with real holography, to known one-shot entanglement-wedge physics — no QG, no value of `G`,
+  no surviving novel prediction.** Recorded honestly across inventory §2, ledger, website. *This closes the
+  distinctive-content question.*

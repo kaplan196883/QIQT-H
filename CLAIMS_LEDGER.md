@@ -143,6 +143,12 @@ below are tracked, not silent.
   layers — see C3. (This is the conflation that made the AdS/CFT "realises finiteness" reasoning fail.)
 - ✗ "The **count layer is derived** from the area/entropy bound." It is not (the no-go forbids it); a finite
   operational count needs an **imported energy cutoff** and is then the **Bekenstein** bound — see C7.
+- ✗ "The max-entropy postulate's `√V_gen` shift is a distinctive **holographic law**." Tested (GPT-5.5-pro +
+  `scripts/qr/twosector_killtest.py`): it is **falsified** at the Page/island transition (a two-fixed-area-sector
+  state — the exact one-shot shift saturates, `z√V` overshoots ~2.3× and exceeds the physical ceiling). `√V` is a
+  *Gaussianity* approximation (second-order source coding); the surviving claim ("capacity = the smooth one-shot /
+  max-EW entropy") is **known** Akers–Penington one-shot holography (`2008.03319`), distinctive vs naive `S_vN` but
+  **not new physics**. QIQT-H's distinctive frontier **reduces to known one-shot entanglement-wedge physics**.
 - ✗ "The operational record-capacity bound is **new physics**." It is Holevo/Bekenstein-class; distinctive only
   if QIQT-H had a `Q_R` differing from standard generalized entropy — which it **cannot derive** (conditional
   no-go: `S_vN`-area + count-independence + λ-inertness). The only route is the explicit **max-entropy bridge

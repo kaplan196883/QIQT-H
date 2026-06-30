@@ -101,6 +101,16 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 >   entanglement `V_gen ≥ 0`, = 0 iff flat), and the conditional `distinctive_gap` under the `MaxEntropyCapacity`
 >   typeclass postulate (GIVEN the postulate, `Q_R − S_gen = gap ≥ 0`). The no-go forces it to be a postulate, not
 >   a derivation; the `√V_gen` continuum coefficient and `G` stay cited frontiers.
+> - **Holographic confrontation — the postulate FALSIFIES/reduces** (GPT-5.5-pro expert review +
+>   `scripts/qr/twosector_killtest.py`, 2026-07-01). First independent test against real holography: **(i)** the
+>   postulate's universal `√V_gen` prediction is **FALSIFIED** at the Page/island transition (a two-fixed-area-sector
+>   state — Dong–Harlow–Marolf): the *exact* one-shot shift `H₀^ε − S_vN` saturates (bounded by `log(D₁+D₂) − S`)
+>   while `z_ε√V_gen` overshoots ~2.3× and violates that ceiling. `√V_gen` is a **Gaussianity** approximation
+>   (second-order source coding, Tomamichel–Hayashi), not a holographic law — it "works" only in the Haar/CLT
+>   regime where it says nothing new. **(ii)** What survives — "capacity = the smooth one-shot / max-entanglement-wedge
+>   entropy" — is the **known** one-shot holography (Akers–Penington `2008.03319`), distinctive vs the naive
+>   "RT always uses `S_vN`" but **NOT new physics, NOT a new `Q_R`**. **Net: QIQT-H's one distinctive frontier
+>   reduces, on contact with real holography, to known one-shot entanglement-wedge physics.**
 
 - `area_floor_vonNeumann` **[AF·cond: HolographicCapacityBound]** — `S_vN(ρ_R) ≤ areaTerm`. **A von Neumann
   ENTROPY bound.** `HolographicCapacityBound`'s field is `log(card R) ≤ areaTerm`; its header states `R` is the
