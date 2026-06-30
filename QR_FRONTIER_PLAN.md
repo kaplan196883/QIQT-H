@@ -156,3 +156,12 @@ distinctive — with its falsifiable prediction — clearly labelled as a postul
   **conditional prediction** `distinctive_gap` are the one postulate that would make QIQT-H distinctive + its
   falsifiable, capacity-of-entanglement consequence. Honest rail held throughout: *postulate, not derivation*;
   the `√V_gen` coefficient and the value of `G` stay cited frontiers; never claimed QG or that nature picks it.
+- **2026-07-01 — numerical illustration (`scripts/qr/maxent_pagecurve.py`).** A standard random-tensor-network /
+  Haar Page-curve simulation that *conditionally* checks the postulate's prediction (NOT a claim about nature):
+  **(A)** the distinctive shift `gap = S_max − S_vN` and the scale `√V_gen` both **peak at the Page transition**
+  (`dA ≈ dB`) and **vanish for near-flat spectra** (small subsystem) — matching `capEnt_eq_zero_iff`; **(B)** the
+  shift scales as `√(n·V_gen)` for `n` copies (the second-order / one-shot law), verified by sampling the n-copy
+  surprisal (`std(X_n)/√n → √V_gen`; the smooth-max-entropy shift matches `√(n·V_gen)·z_ε` with ratio → 1 as
+  `n → ∞`). Reproducible (seeded); plot at `scripts/qr/maxent_pagecurve.png`. Confirms the predicted shift is
+  well-defined, spectrum-dependent, and governed by `√V_gen` — turning it into physics still needs the postulate's
+  coefficient fixed + an independent holographic comparison (the cited frontier).
