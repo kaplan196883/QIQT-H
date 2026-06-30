@@ -7553,4 +7553,13 @@ namespace QIQTH.AxiomAudit
 -- inference). Does NOT prove trace-entropy ⟹ literal record-cardinality, nor the full SM+gravity construction
 -- (GPT-5.5-pro's single remaining obstruction = the cited frontier). Never assert G; the 1/4 ratio is derived.
 
+-- Finite-matter-or-entropy campaign (FINITE_MATTER_OR_ENTROPY_PLAN.md), D2 — the Fork-B no-go.
+#print axioms QIQTH.QG.finitePoincare_trivial
+#print axioms QIQTH.QG.no_finitePoincareRep_of_nontrivial_energy
+-- expected: standard only — ★ D2: a finite-dim rep of the (1+1) Poincaré algebra [K,P]=iH, [K,H]=iP with H⪰0
+-- forces H=0 AND P=0 (total triviality) — strengthening I1 (which gave H=0). So literal finite-MATTER capacity
+-- (Fork B) is incompatible with exact Lorentz + nonzero positive energy ⟹ QIQT-H must be Fork A (finite
+-- entropy/records over covariant Type III₁ matter). The rep-theoretic shadow of "non-compact Lorentz has no
+-- nontrivial finite-dim unitary rep". Never assert the value of G; the 1/4 ratio is derived (SakharovRatio.lean).
+
 end QIQTH.AxiomAudit

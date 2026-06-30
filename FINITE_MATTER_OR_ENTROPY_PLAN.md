@@ -98,5 +98,12 @@ verdict citing exact code/postulates. One commit per increment with the
   are acknowledged **proxies**. ⟹ the red-team's structural no-gos hit only the Fork-B gloss/proxy, which QIQT-H
   does NOT rigorously require. Honest resolution: restate the postulate as Fork A (drop "finite effective
   dimension").
-- **NEXT → D2** (Lean: finite-dim matter + exact boost + H≥0 ⟹ H=0, strengthen I1 — confirm Fork B untenable for
-  exact Lorentz), then D3 (Lean: bounded entropy ⇏ bounded cardinality), D4/D5 (restate the distinctive claim).
+- **2026-06-30 — D2 ✅ DONE** (`QIQTH/QG/FiniteMatterNoLorentz.lean`): the Fork-B no-go, machine-checked.
+  `FinitePoincareRep` (a finite-dim rep of `[K,P]=iH`, `[K,H]=iP`, `H⪰0`); **`finitePoincare_trivial`: forces
+  `H=0` AND `P=0`** (total triviality — strengthens I1's `H=0` via the second relation); `no_finitePoincareRep_
+  of_nontrivial_energy` (a nonzero positive `H` admits no consistent exact boost). ⟹ literal finite-MATTER
+  capacity + exact Lorentz + nonzero positive energy is **impossible** in finite dim (the rep-theoretic shadow of
+  "non-compact Lorentz has no nontrivial finite-dim unitary rep"). **Fork B is untenable; QIQT-H must be Fork A.**
+  Axiom-free (std 3), full `QIQTH` green, budget 0; wired in.
+- **NEXT → D3** (Lean: bounded entropy ⇏ bounded cardinality — the K1 counterexample, confirming Fork A's capacity
+  is entropy not a state count), then D4/D5 (restate the distinctive claim + adversarial re-check).
