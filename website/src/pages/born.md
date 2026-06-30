@@ -5,6 +5,21 @@ eyebrow: The interpretation, in plain language
 description: Probabilities |c_k|² as typicality, not a dice-roll — the one ingredient Born needs, why it cannot be avoided, and why it is nonetheless unique and forced. The honest version.
 ---
 
+<div class="note">
+
+<strong>Status — Born is <em>reduced</em>, not <em>derived</em> (and not "open/unsolved" either).</strong>
+Machine-checked and axiom-free: <em>given</em> one premise — <strong>P5</strong>, the canonical, non-contextual
+typicality measure — the Born weights $|c_k|^2$ are the <strong>unique, forced</strong> answer
+(<code>positive_ray_certain_forces_born</code>), and an honest <strong>no-go</strong> proves that <em>some</em>
+such premise is <strong>unavoidable</strong> (<code>NoBornFromNothing</code> — you cannot squeeze Born out of
+structure, decoherence, and no-signalling alone). What stays genuinely <strong>open</strong> is that single
+ingredient itself — P5, the canonical IC measure (why $\lambda$ is $\mu$-typical) — which is
+<a href="/open-problems">Open Problem 1</a>. So Born here is neither "derived from nothing" nor "unsolved": it
+is <strong>reduced to one named, irreducible premise</strong>, with the reduction proved and that premise the
+open problem.
+
+</div>
+
 There is one wave function, it never collapses, and it just keeps evolving smoothly. Decoherence makes the
 macroscopic records non-interfering and redundantly objective — but that does **not** make one of them
 *actual*. What does is a single non-dynamical fact, $\lambda$: of the many records the wave function carries,
