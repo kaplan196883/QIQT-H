@@ -159,3 +159,13 @@ inventory-backed.
   machine-verified single-world interpretation + a substantial formalized operator-algebra/entropy library +
   induced-gravity re-derivations*, every claim inventory-backed with matching qualifiers. **Maintenance mode:**
   re-run this loop whenever the inventory changes (new Lean results, retractions) to keep code/site/paper aligned.
+- **2026-06-30 — A1/A4 follow-up: terminal-coverage pins (closed the audit-coverage gap on the ledger's headline
+  capstones).** Probed then pinned 13 sorry-free-but-unaudited terminal theorems in `AxiomAudit.lean`, all verified
+  **std-3**: `ValueSelection` actual-value/actual-history terminals (`actualValue_spec`, `actualValue_eq_of_mem`,
+  `existsUnique_actualHistory`); the Entropy/ Lieb–DPI tower rungs (`trace_function_convex`, `star_inv_subadditive`,
+  `gmean_mono`, `lieb_superadditive`, `dpi_mixed_unitary`, `partial_trace_dpi` — backing ledger G1); the Einstein
+  capstones (`Curvature.jacobson_einstein_equation_of_state`, `EinsteinEOS.einstein_tensor_eq_of_state` — ledger
+  D2/D3); the crossed-product terminals (`StandardSubspaceModular.covariance`, `modularAut_mul` — ledger E2/E6).
+  AxiomAudit builds green (8885 jobs); budget-check **0**, no regressions, only the one documented `le _ _ := True`
+  site. Updated `CLAIMS_LEDGER.md`'s residual-gap note: the headline terminal capstones are now individually pinned;
+  what remains unpinned is minor, non-headline, and transitively certified.

@@ -136,11 +136,16 @@ below are tracked, not silent.
 - ✗ "QIQT-H **escapes** CPSUV / is established Lorentz-natural." (~10–20%; the "escapes" verdict was retracted.)
 - ✗ "Continuum Type III₁ / Type II trace / interacting SM / the 3+1 manifold are done." (Cited frontiers, §8.)
 
-**Residual completeness gap (tracked, low risk):** ~55 modules' *terminal* theorems are not individually
-`#print axioms`-pinned (`#print axioms` is transitive, so any lemma feeding an audited downstream theorem is
-already certified — soundness risk is low; the gap is in per-terminal-result coverage). A1 pinned the two
-Entropy/ capstones and confirmed `SakharovRatio.sakharov_ratio` was already pinned; further terminal pins
-(`ValueSelection.*`, the GR/crossed-product capstones) can be added in later A1 passes.
+**Residual completeness gap (tracked, low risk — now substantially closed):** `#print axioms` is transitive, so
+any lemma feeding an audited downstream theorem is already certified — soundness risk was always low; the gap was
+in per-terminal-result coverage. The **headline terminal capstones backing this ledger are now individually
+pinned** (verified std-3 via probe before pinning): the GR/crossed-product capstones and `SakharovRatio.sakharov_ratio`
+were already pinned; A1 pinned the two Entropy/ capstones (`strong_subadditivity`, `condMutualInfo_nonneg`); and a
+follow-up A4 pass pinned the `ValueSelection` actual-value/actual-history terminals (rows B5/§1), the Entropy/
+Lieb–DPI tower rungs `trace_function_convex`/`star_inv_subadditive`/`gmean_mono`/`lieb_superadditive`/
+`dpi_mixed_unitary`/`partial_trace_dpi` (row G1), the Einstein capstones `jacobson_einstein_equation_of_state`/
+`einstein_tensor_eq_of_state` (rows D2/D3), and the crossed-product `covariance`/`modularAut_mul` (rows E2/E6).
+What remains unpinned is minor, non-headline, and transitively certified.
 
 **Verdict.** Every headline public claim now maps to an inventory entry with a matching qualifier; the paper, the
 site, and the inventory agree on the load-bearing scope (Born→P5, H2 retired, 1/4 = re-derivation, finite =

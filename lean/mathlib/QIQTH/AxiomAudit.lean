@@ -7580,4 +7580,28 @@ namespace QIQTH.AxiomAudit
 -- S(ρ_ABC)+S(ρ_B) ≤ S(ρ_AB)+S(ρ_BC) (Lieb–Ruskai) and I(A:C|B) ≥ 0, built from partial_trace_dpi via a
 -- from-scratch discrete-Weyl 1-design. Axiom-free (std 3); a genuine Mathlib-grade formalization.
 
+-- ── Alignment A4 — terminal-coverage pins (close the audit gap on the ledger's headline capstones) ──────────
+-- Each terminal theorem below was sorry-free but not individually #print-axioms-pinned. All verified std-3.
+-- (1) ValueSelection terminals — the (Φ,λ) actual-value / actual-history existence-and-uniqueness capstones.
+#print axioms QIQTH.PointerValue.ValueSelection.actualValue_spec
+#print axioms QIQTH.PointerValue.ValueSelection.actualValue_eq_of_mem
+#print axioms QIQTH.PointerValue.existsUnique_actualHistory
+-- (2) Entropy/ Lieb-concavity / DPI tower terminals (ledger G1 — the credited Mathlib-grade breadth):
+--     trace-function convexity (Peierls), operator-convex parallel-sum subadditivity, geometric-mean monotonicity,
+--     Lieb superadditivity, the mixed-unitary DPI, and the partial-trace DPI — the load-bearing rungs below
+--     strong_subadditivity (already pinned above). Axiom-free (std 3).
+#print axioms QIQTH.Entropy.trace_function_convex
+#print axioms QIQTH.Entropy.star_inv_subadditive
+#print axioms QIQTH.Entropy.gmean_mono
+#print axioms QIQTH.Entropy.lieb_superadditive
+#print axioms QIQTH.Entropy.dpi_mixed_unitary
+#print axioms QIQTH.Entropy.partial_trace_dpi
+-- (3) Einstein-equation terminals (ledger D2/D3 — the conditional, free-field GR capstones, all diff-geo [AF]):
+#print axioms QIQTH.Curvature.jacobson_einstein_equation_of_state
+#print axioms QIQTH.EinsteinEOS.einstein_tensor_eq_of_state
+-- (4) Crossed-product terminals (ledger E2/E6 — the Type II modular layer; covariance + modular-automorphism law):
+#print axioms QIQTH.StandardSubspaceModular.covariance
+#print axioms QIQTH.StandardSubspaceModular.modularAut_mul
+-- expected (all 13): standard only [propext, Classical.choice, Quot.sound] — verified via probe before pinning.
+
 end QIQTH.AxiomAudit
