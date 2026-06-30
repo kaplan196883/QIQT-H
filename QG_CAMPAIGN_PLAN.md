@@ -153,5 +153,32 @@ Per simulation: a reproducible `scripts/qg/` script + the measured error-scaling
   achieved — finitely many cuts). Reduces exact RT to producing a saturating witness; the witness existence
   (Ford–Fulkerson / Menger) is the cited Mathlib-gap frontier (no max-flow theorem in Mathlib), honestly
   checkpointed. Axiom-free (std 3), full `QIQTH` green, budget 0; wired in.
-- **NEXT → I7** (HaPPY/random-tensor-network finite-capacity toy substrate, Tier-2 §2.1, +
-  `mincut_bounds_distinguishable_records`) — carrying the I4 mandate: it must show `Δc²(Λ)→0` parametrically.
+- **2026-06-30 — I7 ✅ DONE** (`QIQTH/QG/MinCutRecords.lean` + `scripts/qg/rtn_rt_substrate.py` +
+  `I7_rtn_result.md`, Phase D / Tier-2 §2.1–§2.2): the finite-capacity toy substrate. **Lean:**
+  `mincut_bounds_distinguishable_records` (`log #records ≤ cut`, the area-not-volume capacity law) +
+  `record_count_le_exp_cut`. **Sim:** a random tensor network on a ring — `S(A)/(min-cut·log D)` rises
+  monotonically toward 1 FROM BELOW (0.50→0.98 m=1, 0.42→0.87 m=2 over D=2→12), never exceeding 1, i.e.
+  saturating the RT bound `S ≤ min-cut·log D` (= the Lean theorem). RT / capacity-is-area holds **kinematically**.
+  **Honest checkpoint:** a static RTN has NO Lorentzian dynamics, so the I4 Δc² mandate is NOT testable here —
+  it requires a LORENTZIAN QCA substrate (the next frontier); the RTN's RT success must not be read as passing
+  I4. Axiom-free (std 3), full `QIQTH` green, budget 0; wired in.
+
+---
+
+## CAMPAIGN COMPLETE (planned increments I1–I7, 2026-06-30)
+
+All seven planned increments landed axiom-free (std-3, budget 0) / verified-reproducible. Honest summary:
+- **I1–I2** (no-gos): finite capacity carries boosts only approximately (gate B) and finite modular flow has
+  discrete spectrum ≠ continuum BW (gate C) — the finite claims are honestly fenced.
+- **I3** (cheap pass): the free lattice dispersion's Lorentz defect is `O(a²p⁴)`, no rapidity floor (α=2).
+- **I4 (THE DECISIVE TEST) = FAIL (CPSUV):** one-loop Δc² → (4/3)·g²/16π² ≠ 0 — a naive finite-capacity-as-LV-
+  hard-cutoff is dead; finite capacity survives only with a protection mechanism. The pivotal result.
+- **I5** (P4 thread): a non-vacuous `Phase5Master` instance from a finite trace — P4's floor grounded in a model.
+- **I6** (RT): exact RT from an optimality certificate (Ford–Fulkerson the cited gap).
+- **I7** (substrate): RTN exhibits RT/capacity-area kinematically; the dynamical Lorentz mandate is the frontier.
+
+**Net verdict (unchanged, now evidenced):** QIQT-H is NOT quantum gravity. The campaign de-risked the finiteness
+bet and found the real obstruction is **dynamical Lorentz naturalness** (I4), not the kinematics (I3/I6/I7 fine).
+The single highest-leverage open frontier: a **Lorentzian finite-capacity substrate that demonstrably shows
+`Δc²(Λ) → 0`** — without it, P4 cannot be realized as a local cutoff. Tier-3 (graviton, constraints, nonlinear
+Einstein, diff-invariant μ) remains category (c), untouched. Never claimed QG / G / the 1/4.

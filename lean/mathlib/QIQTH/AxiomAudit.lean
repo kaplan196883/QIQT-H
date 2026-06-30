@@ -7521,4 +7521,12 @@ namespace QIQTH.AxiomAudit
 -- the min-cut is achieved (finitely many cuts). Reduces exact RT to producing a saturating witness; the witness
 -- existence (Ford–Fulkerson / Menger) is the cited Mathlib-gap frontier (Mathlib has no max-flow theorem).
 
+-- QG campaign, Phase D — I7: min-cut bounds the distinguishable-record capacity (RT-from-QEC, finite form).
+#print axioms QIQTH.QG.mincut_bounds_distinguishable_records
+#print axioms QIQTH.QG.record_count_le_exp_cut
+-- expected: standard only — ★ I7 (Lean core): the distinguishable-record capacity across a cut obeys the
+-- min-cut AREA bound, log(#records) ≤ cut w S (and #records ≤ exp(cut)). The finite area-law (not volume-law)
+-- capacity statement a HaPPY/RTN substrate exhibits (sim: scripts/qg/rtn_rt_substrate.py — S(A) saturates
+-- min-cut·log D from below). The min-cut=area identification (A/4ℓ_P²) is the carried UV datum; 1/4 & G never asserted.
+
 end QIQTH.AxiomAudit

@@ -1,0 +1,40 @@
+==============================================================================
+QG I7 — random tensor network on a ring: S(A) -> (min-cut bonds) * log D  (RT)
+  n = 5 nodes, boundary leg dim d = D, contiguous arc A of m legs, 48 random seeds
+  (numpy BLAS multithreads the SVD/einsum across cores)
+==============================================================================
+
+ region A = 1 leg(s)   (RT min-cut = 1 bond(s); RT bound S <= 1*log D)
+   D     <S(A)> (nats)   1*log D     S/(1*log D)   <= 1 (Lean bound)
+   ----------------------------------------------------------
+    2     0.34886       0.69315      0.50330     ok
+    3     0.83511       1.09861      0.76015     ok
+    4     1.20513       1.38629      0.86932     ok
+    5     1.47708       1.60944      0.91776     ok
+    6     1.67215       1.79176      0.93324     ok
+    8     2.00069       2.07944      0.96213     ok
+   10     2.24004       2.30259      0.97284     ok
+   12     2.43561       2.48491      0.98016     ok
+   -> S/(min-cut*log D) increases toward 1 FROM BELOW (saturating the RT bound); D=12 gives 0.980.
+
+ region A = 2 leg(s)   (RT min-cut = 2 bond(s); RT bound S <= 2*log D)
+   D     <S(A)> (nats)   2*log D     S/(2*log D)   <= 1 (Lean bound)
+   ----------------------------------------------------------
+    2     0.58177       1.38629      0.41966     ok
+    3     1.31068       2.19722      0.59652     ok
+    4     1.92746       2.77259      0.69519     ok
+    5     2.43207       3.21888      0.75556     ok
+    6     2.81207       3.58352      0.78472     ok
+    8     3.45223       4.15888      0.83008     ok
+   10     3.94088       4.60517      0.85575     ok
+   12     4.33121       4.96981      0.87150     ok
+   -> S/(min-cut*log D) increases toward 1 FROM BELOW (saturating the RT bound); D=12 gives 0.872.
+
+==============================================================================
+RESULT: S(A) tracks (min-cut bonds) * log D -> the RT / capacity-is-area law holds in the
+  finite RTN code (KINEMATIC holographic structure).  Lean core: mincut_bounds_distinguishable_records.
+HONEST CHECKPOINT (I4 mandate): a static RTN has NO Lorentzian dynamics, so the decisive
+  Delta c^2 Lorentz-violation test is NOT measurable here.  The dynamical mandate -- a substrate
+  must show Delta c^2(Lambda) -> 0 -- requires a LORENTZIAN QCA substrate, the next frontier,
+  NOT a static tensor network.  The RTN's RT success is kinematic only; it does not pass I4.
+==============================================================================
