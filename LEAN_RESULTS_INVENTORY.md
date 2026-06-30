@@ -61,6 +61,21 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 
 ## 2. Finite capacity / holographic area floor
 
+> **⚠ The capacity postulate has TWO machine-checked LAYERS, and they are PROVABLY DIFFERENT (verified 2026-06-30
+> by direct read of the hypothesis classes).** Do not state either alone as "the" postulate.
+> - **Finite-dim model (P4-MICRO) → CARDINALITY.** `HolographicCapacityBound` (`FQBoundMicro.lean:59`) is
+>   `bound : Real.log (Fintype.card R) ≤ areaTerm` over a **finite** record type `R` — a literal record-**count**
+>   bound `card R ≤ e^{areaTerm}`. Feeds `area_floor_vonNeumann` and the P4-MICRO GR route (`gr_from_p4micro`,
+>   the pp-wave showcase via `η·c = log|R|`).
+> - **Continuum / Fork-A → ENTROPY.** `Phase5Master` (`FQBoundCGP.lean:48`) is `SvN + cgpEntropy S ξ ≤ areaTerm`
+>   over an infinite-dim `StandardSubspace H` (no cardinality); `TraceCapacity` (`CpsuvEscape.lean:73`) is
+>   `Sren ≤ Q`. Feeds the JLMS GR route (`holographic_area_floor`, `qiqt_gr_from_wedge_kms`) and the CPSUV analysis.
+> - **The bridge no-go:** `EntropyNotCardinality.entropy_bound_not_cardinality_bound` proves the continuum ENTROPY
+>   bound `S_τ ≤ Q` does **NOT** imply the cardinality bound `card ≤ e^Q` — so the two layers are genuinely
+>   inequivalent. The continuum/physical/GR-relevant claim is **entropy**; the finite **count** is the tractable
+>   finite-dim shadow only (and is strictly stronger). "Finite capacity" therefore = finite *record count* in the
+>   finite model, finite *entropy* in the continuum — never a finite MATTER Hilbert space (D2/D3).
+
 - `area_floor_vonNeumann` **[AF·cond: HolographicCapacityBound]** — `S_vN(ρ_R) ≤ areaTerm`. **A von Neumann
   ENTROPY bound.** `HolographicCapacityBound`'s field is `log(card R) ≤ areaTerm`; its header states `R` is the
   **operational/regional capacity `Q_R = log N_R`, NOT a global Hilbert-space dimension**, and the matter algebra
@@ -238,8 +253,11 @@ Lorentz-naturalness of interacting matter (CPSUV escape — open, ~10–20%).
 
 QIQT-H's machine-checked content is: **a single-world (Φ,λ) interpretation with the Born rule REDUCED to one
 named premise (P5/noncontextual-canonical-measure)** — not derived from unitarity; **a holographic ENTROPY bound
-`S_vN ≤ A/4ℓ_P²` conditional on the finite-capacity postulate** over a Type III₁ matter algebra (the finiteness
-is on *entropy/records*, not a finite matter Hilbert space — D2/D3); **a genuine axiom-free one-particle Tomita–
+`S_vN ≤ A/4ℓ_P²` conditional on the finite-capacity postulate** over a Type III₁ matter algebra — where the
+postulate has **two provably-distinct layers** (see §2): a finite record **count** `card R ≤ e^{A/4ℓ_P²}` in the
+finite-dim model, and a finite **entropy** bound `S_vN + S_rel ≤ A/4ℓ_P²` in the continuum/Fork-A setting (the
+`EntropyNotCardinality` no-go proves the entropy bound is *not* a count) — the finiteness is on
+*records/entropy*, **never** a finite matter Hilbert space (D2/D3); **a genuine axiom-free one-particle Tomita–
 Takesaki + crossed-product operator-algebra layer** (the *unconditional* one-particle Bisognano–Wichmann is a
 real theorem; only the Type II trace is frontier); **a covariant record-selection layer** with the honest
 `no_covariant_selector` and an **axiom-free boost-invariant typicality measure on the 1+1D free field**; **the
@@ -247,7 +265,8 @@ free-field SM content (CAR/gauge/stress-tensor) transported into the capacity co
 formalization of the Lieb-concavity / DPI / strong-subadditivity tower** (a genuine contribution to formalized
 mathematics, Mathlib-grade); and **a machine-checked re-derivation of the Sakharov 1/4 ratio and a conditional,
 free-field Einstein equation** (standard induced-gravity/Jacobson physics, not unique to finiteness). "Finite
-capacity" is honestly a **finite-entropy/holographic** statement, **not** a finite-matter theory; its
+capacity" is a **finite record-*count*** statement in the finite-dim model and a **finite-*entropy*** statement in the
+continuum/Fork-A setting (provably distinct — `EntropyNotCardinality`), **never** a finite-matter theory; its
 load-bearing role is in the gravity/area thread, *not* the selection mechanism (`measure_needs_only_finiteness`).
 
 **Net (the calibrated read, now full-coverage):** the *distinctive new physics* claim ("finite information as

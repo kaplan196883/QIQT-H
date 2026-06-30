@@ -10,9 +10,13 @@ misalignments, one commit.
 - The inventory is the reference. A claim is **aligned** iff the inventory supports it with the same qualifiers
   (axiom-free? conditional-on-what? frontier? re-derivation? no-go?).
 - Standing scope corrections to enforce everywhere (from the inventory):
-  1. **"Finite capacity / finite quantized information" → "finite holographic ENTROPY over covariant (Type III₁)
-     matter."** NOT a finite matter Hilbert space (D2/D3). Load-bearing for the gravity/area thread, NOT for the
-     selection mechanism (`measure_needs_only_finiteness`).
+  1. **"Finite capacity / finite quantized information" → the TWO-LAYER finiteness (verified 2026-06-30, inventory
+     §2).** The postulate has two provably-distinct machine-checked layers: a finite record **COUNT**
+     `card R ≤ e^{A/4ℓ_P²}` in the finite-dim model (`HolographicCapacityBound`), and a finite **ENTROPY** bound
+     `S_vN + S_rel ≤ A/4ℓ_P²` in the continuum/Fork-A setting (`Phase5Master`/`TraceCapacity`) — with
+     `EntropyNotCardinality` proving the entropy bound is NOT a count. NEVER a finite matter Hilbert space (D2/D3).
+     Do not collapse the two layers or state "finite entropy" alone as the postulate. Load-bearing for the
+     gravity/area thread, NOT for the selection mechanism (`measure_needs_only_finiteness`).
   2. **Born is REDUCED to one premise (P5/noncontextual canonical measure), not DERIVED from unitarity.**
   3. **The 1/4 ratio is a machine-checked *re-derivation* of standard Sakharov/induced-gravity** (heat-kernel
      coefficients cited; G carried) — true & verified, but not unique to finiteness.
@@ -205,3 +209,14 @@ inventory-backed.
   irreducibly postulated; the area floor `area_floor_vonNeumann` is a *derived theorem*, the area form ∝A is the
   Sakharov bridge, only the value of G is carried. Now the abstract, §1.1a, §11.2, and the website all carry the
   same finiteness-postulated / floor-derived distinction.
+- **2026-06-30 — REFERENCE CORRECTION: the capacity postulate is TWO layers, verified 100% from the Lean.**
+  Prompted by an adversarial AdS/CFT check + a 100%-verification request. Direct read of the hypothesis classes
+  settled it: `HolographicCapacityBound` (`FQBoundMicro:59`) is a record-**COUNT** bound `log(card R) ≤ areaTerm`
+  on a finite type (the finite-dim/P4-MICRO model); `Phase5Master` (`FQBoundCGP:48`) is an **ENTROPY** balance
+  `SvN + cgpEntropy ≤ areaTerm` over an infinite-dim StandardSubspace, and `TraceCapacity` (`CpsuvEscape:73`) is
+  `Sren ≤ Q` (the continuum/Fork-A claim — what feeds the JLMS GR route + CPSUV); and `EntropyNotCardinality`
+  PROVES the entropy bound is NOT a count, so the layers are inequivalent. The inventory's earlier single-gloss
+  "finite-entropy statement" was imprecise. Corrected the REFERENCE: added a two-layer ⚠-note atop inventory §2,
+  refined §9, and rewrote plan §0 scope-correction #1 to the layered truth. (This also corrects my own AdS/CFT
+  answer: AdS/CFT has finite *entropy* but no finite *count* — it matches the continuum layer, not the finite
+  one.) **NEXT → align website (A2) + paper (A3) to the corrected two-layer reference.**
