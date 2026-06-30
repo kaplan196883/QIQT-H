@@ -569,3 +569,4 @@ import QIQTH.EmergentSpacetime
 import QIQTH.FreeFieldCorner
 import QIQTH.QG.FinitePoincareNoGo
 import QIQTH.QG.FiniteModularRecurrence
+import QIQTH.QG.LatticeDispersion

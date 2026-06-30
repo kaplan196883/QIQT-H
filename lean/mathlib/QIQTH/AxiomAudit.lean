@@ -7492,4 +7492,14 @@ namespace QIQTH.AxiomAudit
 -- modular flow equals it; finite modular flow is almost-periodic/recurrent, a finite-time/low-energy shadow.
 -- Bounds QIQT-H's finite modular/spectral claims (per GPT-5.5-pro QG audit 2026-06-30).
 
+-- QG campaign, Phase B — I3: the free-dispersion Lorentz-defect bound (cheap pass of the stress test).
+#print axioms QIQTH.QG.abs_sin_sq_sub_sq_le
+#print axioms QIQTH.QG.latticeDispSq_le_contDispSq
+#print axioms QIQTH.QG.latticeDisp_lorentz_defect
+-- expected: standard only — ★ I3: for the lattice/QCA dispersion E_a(p)²=m²+(4/a²)sin²(ap/2), the Lorentz defect
+-- |E_a(p)²−(m²+p²)| ≤ a²p⁴/8 in the sub-cutoff regime a·p ≤ 2 (and E_a(p)² ≤ m²+p² everywhere). Defect ~(ap)²,
+-- vanishes as a→0 — NO rapidity-independent floor (α=2). Constant 1/8 = honest Mathlib value (sin_gt_sub_cube's
+-- x−x³/4); optimal is 1/12. The CHEAP, KNOWN pass of the Lorentz-cutoff stress test — NOT yet decisive (the
+-- decisive test is the one-loop Δc²=Z_s/Z_t−1, I4). Per GPT-5.5-pro QG audit 2026-06-30.
+
 end QIQTH.AxiomAudit

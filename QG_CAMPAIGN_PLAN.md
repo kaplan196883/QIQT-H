@@ -124,5 +124,11 @@ Per simulation: a reproducible `scripts/qg/` script + the measured error-scaling
   has spectrum all of `ℝ` (a.c., mixing) ⟹ no finite modular flow equals it; finite modular flow is
   almost-periodic/recurrent — a finite-time/low-energy shadow. Axiom-free (std 3), full `QIQTH` green, budget 0;
   wired into `QIQTH.lean` + `AxiomAudit.lean`.
-- **NEXT → Phase B (the de-risking centerpiece):** I3 (free-dispersion Lorentz-defect bound, Lean), then **I4**
-  (the decisive one-loop Δc² naturalness test, Python).
+- **2026-06-30 — I3 ✅ DONE** (`QIQTH/QG/LatticeDispersion.lean`, Phase B cheap pass): for the lattice/QCA
+  dispersion `E_a(p)²=m²+(4/a²)sin²(ap/2)`, `latticeDispSq_le_contDispSq` (`E_a(p)² ≤ m²+p²` everywhere) and
+  `latticeDisp_lorentz_defect` (`|E_a(p)²−(m²+p²)| ≤ a²p⁴/8` in the sub-cutoff regime `a·p ≤ 2`), via the core
+  `abs_sin_sq_sub_sq_le` (`|sin²x−x²|≤x⁴/2` on `[0,1]`, from `sin_sq_le_sq` + `sin_gt_sub_cube`). Defect ~(ap)²,
+  vanishes as a→0 — **NO rapidity-independent floor (α=2)**. Constant 1/8 = honest Mathlib value (optimal 1/12).
+  Axiom-free (std 3), full `QIQTH` green, budget 0; wired in. The cheap/known pass — NOT yet decisive.
+- **NEXT → I4 (THE DECISIVE TEST):** the one-loop Δc²=Z_s/Z_t−1 naturalness test (Python, `scripts/qg/`). Nonzero
+  O(g²/16π²) as Λ→∞ ⟹ CPSUV ⟹ naive finite-cutoff branch dead. This is the pass/fail gate for the finiteness bet.
