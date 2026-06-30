@@ -2,7 +2,7 @@
 layout: ../layouts/Deep.astro
 title: Open problems
 eyebrow: The frontier
-description: The honest frontier after H2 was retired — λ's law (the central problem), Born from typicality (reduced to one premise), and the continuum (Type III₁). What is closed, what is reduced, and what is a wall.
+description: The honest frontier — λ's law (the central problem), Born from typicality (reduced to one premise), the continuum (Type III₁), and Lorentz naturalness (does finite capacity survive radiative Lorentz violation?). What is closed, what is reduced, and what is a wall.
 ---
 
 QIQT-H is a coherent, *conditional* single-world interpretation. This page is current as of the **2026-06-15
@@ -167,6 +167,38 @@ That is a more tractable continuum entry point than the abandoned crossed-produc
 
 **Difficulty.** Very hard — a multi-year Mathlib-grade wall (unbounded operator theory, Type III classification
 that Mathlib lacks). Not a blocker for the conditional interpretation; the honestly-cited frontier.
+
+## Gap 4 — Lorentz naturalness: is finite capacity compatible with *exact* Lorentz invariance?
+
+This is the **sharpest current frontier**, and the result is honest and sobering. We stress-tested the
+finite-capacity postulate (P4) against **radiatively-induced Lorentz violation** — the
+Collins–Perez–Sudarsky–Urrutia–Vucetich (CPSUV) one-loop speed splitting $\Delta c^2 = Z_s/Z_t - 1$. The chain
+(scripts + Lean under `scripts/qg/`, `QIQTH/QG/`):
+
+- **A naive "finite capacity = local Lorentz-violating cutoff" is dead** (machine-verified numerics): a sharp
+  3-momentum cutoff radiatively generates $\Delta c^2 \to \tfrac43\cdot g^2/16\pi^2 \neq 0$, an *unsuppressed*
+  dimension-4 Lorentz violation. A Lorentz-invariant regulator gives $0$. The violation is sourced purely by the
+  regulator's frame anisotropy; the escape condition is machine-checked to be a single scalar ($\Delta c^2 = 0
+  \Leftrightarrow$ the matter kernel is Lorentz-scalar).
+- **QIQT-H's *actual* capacity is not such a cutoff.** It is a holographic bound on the **distinguishable-record /
+  entropy** content per causal diamond ($\mathrm{card} \le e^{Q_D}$, $Q_D = A(\partial D)/4\ell_P^2$), with no
+  field-momentum or modular-energy truncation — so the naive CPSUV failure **does not directly apply**.
+
+<div class="note">
+
+**The honest dilemma (adversarial review, 2026-06-30).** Whether this constitutes a genuine *escape* is **not
+established**, and a deliberate red-team puts the strong claim — *literal finite per-region capacity together with
+exact Lorentz invariance* — at only **≈10–20%**. The crossed-product (Type II) construction that would reconcile
+them faces a fork: either **(A)** matter stays ordinary covariant (Type III₁) field theory and "finite capacity"
+is only a finite *renormalized entropy* in a trace — consistent, but then the finiteness does no matter-physics
+work and the "finite information" framing means finite *entropy*, not a finite matter Hilbert space; or **(B)**
+the finiteness is made literal for matter — which collides with structural facts (Type III₁ has no atoms or
+finite trace; non-compact Lorentz has no non-trivial finite-dimensional unitary representations). The active work
+is deciding which fork QIQT-H is on. **This does not threaten the (Φ, λ) record-selection ontology or the
+holographic *entropy* bound** — both are entropy-level and Lorentz-safe — but it does mean the literal
+finite-*matter* reading is the part under genuine pressure.
+
+</div>
 
 ## Exploratory — is λ a *fact* or a *generator*? (a falsifiable alternative)
 
