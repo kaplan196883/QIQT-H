@@ -136,5 +136,46 @@ theorem exact_distinguishable_capacity {ι : Type*} (s : Finset ι) (hs : s.None
   rw [H_uniform s hs] at hcap
   exact exact_record_capacity hpos hcap
 
+/-! ### B1.1 — classical relative entropy (Gibbs inequality), the confusion-matrix workhorse
+
+    The shortest rigorous path to the ε > 0 capstone (GPT-5.5-pro, 2026-06-30) avoids conditional entropy
+    entirely: bound the decoding **confusion matrix**'s mutual information below via one binary coarse-graining to
+    the event "decoded correctly," using only classical KL-nonnegativity + log-sum. The base lemma is the classical
+    **Gibbs inequality** `∑ aᵢ log(aᵢ/bᵢ) ≥ 0`, proved from `log t ≤ t − 1`. -/
+
+/-- **Classical relative entropy is nonnegative (Gibbs inequality).** For finite probability distributions `a`,
+    `b` (with `b` supporting `a`), `∑ aᵢ log(aᵢ/bᵢ) ≥ 0`. Proof: the termwise bound `aᵢ − bᵢ ≤ aᵢ log(aᵢ/bᵢ)`
+    (from `Real.log_le_sub_one_of_pos` applied to `bᵢ/aᵢ`), summed, with `∑(aᵢ−bᵢ) = 1−1 = 0`. The workhorse of
+    the confusion-matrix record-capacity route. -/
+lemma kl_nonneg {α : Type*} [Fintype α] (a b : α → ℝ)
+    (ha : ∀ i, 0 ≤ a i) (hb : ∀ i, 0 ≤ b i)
+    (hsupp : ∀ i, a i ≠ 0 → 0 < b i)
+    (hasum : ∑ i, a i = 1) (hbsum : ∑ i, b i = 1) :
+    0 ≤ ∑ i, a i * Real.log (a i / b i) := by
+  have term : ∀ i ∈ Finset.univ, a i - b i ≤ a i * Real.log (a i / b i) := by
+    intro i _
+    rcases eq_or_lt_of_le (ha i) with h0 | hpos
+    · -- a i = 0: LHS = −b i ≤ 0 = RHS
+      rw [← h0]
+      simp only [zero_mul]
+      linarith [hb i]
+    · -- a i > 0 ⟹ b i > 0
+      have hbi : 0 < b i := hsupp i hpos.ne'
+      have hlog : Real.log (b i / a i) ≤ b i / a i - 1 :=
+        Real.log_le_sub_one_of_pos (by positivity)
+      have hinv : Real.log (a i / b i) = - Real.log (b i / a i) := by
+        rw [← Real.log_inv, inv_div]
+      have hmul : a i * Real.log (b i / a i) ≤ a i * (b i / a i - 1) :=
+        mul_le_mul_of_nonneg_left hlog (le_of_lt hpos)
+      have hcancel : a i * (b i / a i - 1) = b i - a i := by
+        field_simp
+      rw [hinv]
+      nlinarith [hmul, hcancel]
+  have hsum : ∑ i, (a i - b i) ≤ ∑ i, a i * Real.log (a i / b i) :=
+    Finset.sum_le_sum term
+  have hzero : ∑ i, (a i - b i) = 0 := by
+    rw [Finset.sum_sub_distrib, hasum, hbsum]; ring
+  linarith [hsum, hzero]
+
 end OperationalCapacity
 end QIQTH

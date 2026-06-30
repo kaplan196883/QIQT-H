@@ -142,3 +142,12 @@ the count layer to an operational Holevo bound** — genuinely buildable, genuin
   `H(X|Y) ≤ h₂(ε) + ε·log M` form (suffices for the capacity bound, slightly easier); (iii) if both stall,
   checkpoint and proceed to B4 (the energy/Bekenstein finite-rank cutoff, which is independent and may be more
   tractable). Then B2 (Holevo glue) + B3 (full capstone).**
+- **2026-06-30 — B1-route chosen + B1.1 ✅ DONE (GPT-5.5-pro consult).** Consulted on the shortest rigorous Lean
+  path; verdict: the **confusion-matrix Fano-free route** is shortest — avoid conditional entropy entirely, bound
+  the decoding confusion matrix's mutual info below via ONE binary coarse-graining to "decoded correctly," all
+  reducing to `Real.log_le_sub_one_of_pos`. Built the workhorse **`kl_nonneg`** (classical Gibbs inequality
+  `∑ aᵢ log(aᵢ/bᵢ) ≥ 0` for finite distributions, via the termwise bound `aᵢ−bᵢ ≤ aᵢ log(aᵢ/bᵢ)`). Axiom-free
+  std-3, pinned, budget 0. **NEXT (confusion-matrix route, in order): `logsum_le` (log-sum, from `kl_nonneg` by
+  normalizing) → `kl_partition_two` (binary coarse-graining) → `diag_mass_product` (`∑ Rᵢᵢ = 1/M`, the killer
+  simplification) → `binaryKL_success_bound` (`D₂(s‖1/M) ≥ (1−ε)log M − h₂(ε)`) → `confusionMI_ge_fano` →
+  capstone `record_capacity_of_confusionMI_bound`: `(1−ε)·log M ≤ Q + binEntropy ε`.**

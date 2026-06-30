@@ -7614,5 +7614,8 @@ namespace QIQTH.AxiomAudit
 -- capacity bound M ≤ e^Q (Holevo bound on the distinguishable ensemble = log M ⟹ count ≤ e^Q). Axiom-free (std 3).
 #print axioms QIQTH.OperationalCapacity.H_uniform
 #print axioms QIQTH.OperationalCapacity.exact_distinguishable_capacity
+-- B1.1: classical relative entropy ≥ 0 (Gibbs inequality, via log t ≤ t−1) — the confusion-matrix workhorse for
+-- the ε>0 Fano-free capacity route (GPT-5.5-pro path). Axiom-free (std 3).
+#print axioms QIQTH.OperationalCapacity.kl_nonneg
 
 end QIQTH.AxiomAudit
