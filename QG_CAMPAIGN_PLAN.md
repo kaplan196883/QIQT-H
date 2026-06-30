@@ -130,5 +130,14 @@ Per simulation: a reproducible `scripts/qg/` script + the measured error-scaling
   `abs_sin_sq_sub_sq_le` (`|sin²x−x²|≤x⁴/2` on `[0,1]`, from `sin_sq_le_sq` + `sin_gt_sub_cube`). Defect ~(ap)²,
   vanishes as a→0 — **NO rapidity-independent floor (α=2)**. Constant 1/8 = honest Mathlib value (optimal 1/12).
   Axiom-free (std 3), full `QIQTH` green, budget 0; wired in. The cheap/known pass — NOT yet decisive.
-- **NEXT → I4 (THE DECISIVE TEST):** the one-loop Δc²=Z_s/Z_t−1 naturalness test (Python, `scripts/qg/`). Nonzero
-  O(g²/16π²) as Λ→∞ ⟹ CPSUV ⟹ naive finite-cutoff branch dead. This is the pass/fail gate for the finiteness bet.
+- **2026-06-30 — I4 ✅ DONE — THE DECISIVE TEST, result = FAIL (CPSUV)** (`scripts/qg/cpsuv_speed_splitting.py`,
+  `scripts/qg/I4_cpsuv_result.md`). One-loop Yukawa speed splitting under a preferred-frame hard spatial cutoff:
+  **Δc² → (4/3)·g²/16π² ≠ 0**, an UNSUPPRESSED O(g²/16π²) plateau (not power- or log-suppressed). Closed form
+  `Δc²=(g²/12π²)(2u⁵−u³)`; numerics reproduce it to 6e-16, sympy verifies the antiderivative, and the O(4)
+  Lorentz-invariant regulator gives 0 (root cause = regulator frame-dependence, computed not assumed). **A naive
+  finite-capacity-as-LV-hard-cutoff is DEAD** — ordinary interactions radiatively generate experimentally-excluded
+  dim-4 Lorentz violation. Finite capacity survives ONLY with a protection mechanism (exact symmetry / SUSY-like
+  cancellation / deformed-statistical Lorentz invariance / nonlocal-holographic substrate). This sharpens Tier-2
+  §2.5 into a HARD criterion: any substrate (I7) must show Δc²(Λ)→0 parametrically, not merely small at tree level.
+- **NEXT → I5** (T1 crossed-product finite trace, Lean) → I6 (exact finite RT) → I7 (HaPPY/RTN substrate — now
+  with the I4 pass/fail criterion built in).
