@@ -220,3 +220,11 @@ inventory-backed.
   refined §9, and rewrote plan §0 scope-correction #1 to the layered truth. (This also corrects my own AdS/CFT
   answer: AdS/CFT has finite *entropy* but no finite *count* — it matches the continuum layer, not the finite
   one.) **NEXT → align website (A2) + paper (A3) to the corrected two-layer reference.**
+- **2026-06-30 — A2 (website) aligned to the two-layer reference.** The site already had the pieces (the
+  "$Q_R$ is a cardinality bound" mentions on theory/open-problems/ladder/selection are correct for the *finite*
+  layer; `open-problems` §"the fork" already states the continuum reading is finite *entropy*). The gap was the
+  two primary "what is postulated" pages presenting *only* the count layer. Added the explicit two-layer note to
+  **`idea.md`** and **`theory.md`**: finiteness has two machine-checked layers — a record **count**
+  (`card R ≤ e^{Q_R}`) in the finite-dim model, a finite **entropy** bound `S_vN+S_rel ≤ Q_R` in the continuum
+  Type III₁ setting — provably distinct (`EntropyNotCardinality`), never a finite matter Hilbert space. Website
+  builds green (66 pages). **NEXT → A3 (paper §1.1a "finite N_R" framing → add the same two-layer note).**

@@ -16,7 +16,12 @@ multiverse. Both are answers to the same question: why one world?
 QIQT-H starts from a single physical premise drawn from black-hole thermodynamics and holography:
 **a bounded region of space has only a finite amount of operational information capacity** — a finite number
 $N_R$ of distinguishable records ($N_R<\infty$). *Finiteness is the postulate* (the "Quantized Information"
-core). That the capacity then takes the holographic **area form** $Q_R = A/4\ell_P^2$ — scaling with boundary
+core). This finiteness has **two machine-checked layers** (and they are *provably different*): in the
+finite-dimensional model it is a literal record **count** ($\mathrm{card}\,R \le e^{Q_R}$); in the continuum —
+where the matter algebra is the *infinite* Type III$_1$ of relativistic QFT — it is the corresponding finite
+**entropy** bound $S_{\mathrm{vN}}+S_{\mathrm{rel}}\le Q_R$, which is machine-checked (`EntropyNotCardinality`)
+to be strictly *weaker* than a count. The finiteness is always on the **records/entropy**, never on the matter
+Hilbert space. That the capacity then takes the holographic **area form** $Q_R = A/4\ell_P^2$ — scaling with boundary
 *area*, not volume — is **not** part of the postulate: it is *derived* in a conditional Sakharov / induced-gravity
 bridge (with the value of $G/\ell_P$ carried as a datum, not derived). Finiteness *alone* gives only
 $S_{\mathrm{vN}}(\rho_R)\le\log N_R$; the area floor $S_{\mathrm{vN}}(\rho_R)\le Q_R$ and the $1/4$ are then

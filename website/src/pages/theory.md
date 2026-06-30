@@ -20,7 +20,10 @@ $$ Q_R \;=\; \frac{A}{4\ell_P^2}, $$
 
 the holographic / Bekenstein–Hawking bound, with $A$ the boundary area of the region and $Q_R$ in natural
 entropy units (divide by $\ln 2$ for bits). **What QIQT-H postulates is only that the capacity is _finite_** — a
-UV-finite record structure (the "Quantized Information" core). Finiteness *alone* gives only
+UV-finite record structure (the "Quantized Information" core). This finiteness has two provably-distinct
+machine-checked layers: a record **count** ($\mathrm{card}\,R\le e^{Q_R}$) in the finite-dimensional model, and
+a finite **entropy** bound $S_{\mathrm{vN}}+S_{\mathrm{rel}}\le Q_R$ in the continuum Type III$_1$ setting — the
+`EntropyNotCardinality` no-go proving the entropy bound is *not* a count. Finiteness *alone* gives only
 $S_{\mathrm{ren}} \le \log N_R$; it does **not** by itself fix whether $\log N_R$ scales with **area** or volume
 (a generic finite local cutoff gives *volume*-scaling maximum entropy — the area law is a fact about *vacuum
 entanglement*, not an automatic property of the capacity). That the bound takes the **holographic area form**
