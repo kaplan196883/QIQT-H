@@ -126,5 +126,30 @@ Lean: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green; `#print 
   the matter regulator). **No regime exists where a modular cutoff is both the active matter UV regulator AND
   Lorentz-safe.** Quantitatively closes the numerical side: escape needs `B=0` (J3) = a Lorentz-scalar matter
   kernel (J6), not a modular cut.
-- **NEXT → J5** (Rindler/wedge modular-mode check — frontier checkpoint), J6 (covariant proper-time/PV UV kernel +
-  capacity as a nonlocal crossed-product-trace constraint — the real construction, checkpoint).
+- **2026-06-30 — J6 ✅ DONE (the capstone)** (`QIQTH/QG/CpsuvEscape.lean`; GPT-5.5-pro J6 consult): the
+  **escape-in-principle certificate**. GPT-5.5-pro verdict (rigorous): the **crossed-product Type II
+  construction** (CLPW/Witten) genuinely escapes CPSUV — matter stays **Type III₁ covariant** (propagators
+  unmodified ⟹ `B=0` ⟹ `Δc²=0`), the modular boost crossed in is **wedge-covariant** (`τ_{gW}∘Φ_g=τ_W`, no
+  preferred frame), and finiteness is the **Type II trace** `S_ren ≤ Q`, **NOT** a mode cutoff. So capacity and
+  Lorentz-covariance are **structurally decoupled.** Lean: `MatterSector`/`TraceCapacity` with **independent
+  type parameters** `MatterFrame`/`ClockFrame`; `MatterSector.Δc2_eq_zero` (B=0 ⟹ Δc²=0 via J3); `escape_core`
+  (both hold simultaneously); `escape_certificate_exists` (non-vacuous); **`capacity_not_force_anisotropy`**
+  (finite capacity does NOT force `B≠0` — refutes the CPSUV inference). Axiom-free (std 3), full `QIQTH` green,
+  budget 0; wired in.
+- **J5 — checkpointed as subsumed.** The Rindler/wedge modular-mode numerical probe (weeks–months) is no longer
+  decision-critical: J6 shows the modular structure enters covariantly (via the trace), not as a matter cutoff,
+  so the modular-mode kernel is not the matter regulator. Recorded as an optional frontier diagnostic, not a gate.
+
+## 6. CAMPAIGN VERDICT (J1–J6, 2026-06-30)
+
+**Does QIQT-H's covariant per-diamond capacity escape CPSUV? — YES (the CPSUV objection is avoided), with one
+honest remaining construction obstruction.**
+- The kill (I4) is of the *local-cutoff strawman*; QIQT-H's capacity is an algebraic record-count (J2), not a
+  mode cutoff, and the escape is `B=0` (J3) = a Lorentz-scalar matter kernel. A modular/diamond *cutoff* always
+  fails (J1/J4), but the crossed-product Type II *trace* makes entropy finite **without** cutting matter modes,
+  keeping the matter Type III₁ covariant (J6, GPT-5.5-pro). Capacity ⊥ Lorentz-violation: **machine-checked**
+  (`capacity_not_force_anisotropy`).
+- **The single remaining genuine obstruction (cited frontier, not a no-go):** upgrade the Type II trace-entropy
+  bound `S_ren ≤ Q_D` to QIQT-H's *literal per-diamond record cardinality* `card(P.X D) ≤ exp(Q_D)` (Type II is
+  diffuse; trace-dimension ≠ Hilbert dimension), and build the concrete finite-`G`, all-diamonds construction.
+  Research-grade. Never claim QG or the value of `G`; the `1/4` ratio is derived (`SakharovRatio.lean`).

@@ -574,3 +574,4 @@ import QIQTH.QG.FiniteTracePhase5
 import QIQTH.QG.ExactRT
 import QIQTH.QG.MinCutRecords
 import QIQTH.QG.WardSpeedSplitting
+import QIQTH.QG.CpsuvEscape

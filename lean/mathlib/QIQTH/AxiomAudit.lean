@@ -7541,4 +7541,16 @@ namespace QIQTH.AxiomAudit
 -- frame anisotropy A_F (J1, numerics); QIQT-H's capacity is an algebraic record-count silent on B (J2) ⟹ B set
 -- by the separately-supplied matter UV kernel (J6). Never assert the value of G; the 1/4 ratio is derived.
 
+-- CPSUV-escape campaign, J6 — the escape-in-principle certificate (capacity ⊕ Lorentz-covariance decoupled).
+#print axioms QIQTH.QG.MatterSector.Δc2_eq_zero
+#print axioms QIQTH.QG.EscapeCertificate.escape_core
+#print axioms QIQTH.QG.escape_certificate_exists
+#print axioms QIQTH.QG.capacity_not_force_anisotropy
+-- expected: standard only — ★ J6 capstone: the crossed-product Type II construction escapes CPSUV — matter stays
+-- covariant Type III₁ (B=0 ⟹ Δc²=0, propagators unmodified) while finiteness is the Type II TRACE (S_ren ≤ Q),
+-- structurally DECOUPLED (independent MatterFrame/ClockFrame type params). escape_certificate_exists: the two
+-- coexist non-vacuously; capacity_not_force_anisotropy: finite capacity does NOT force B≠0 (refutes the CPSUV
+-- inference). Does NOT prove trace-entropy ⟹ literal record-cardinality, nor the full SM+gravity construction
+-- (GPT-5.5-pro's single remaining obstruction = the cited frontier). Never assert G; the 1/4 ratio is derived.
+
 end QIQTH.AxiomAudit
