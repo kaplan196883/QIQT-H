@@ -145,6 +145,26 @@ Toolchain `leanprover/lean4:v4.30.0` · verified in `QIQTH/AxiomAudit.lean`.
 | --- | --- |
 | `arakiEntropy_eq_relEntropy` | $S_{\mathrm{Araki}}(\rho\Vert\sigma)=\operatorname{tr}\rho(\log\rho-\log\sigma)$ (Umegaki) |
 
+### Operator convexity → Lieb's concavity → DPI → strong subadditivity
+
+A complete, axiom-free, finite-dimensional formalization of the Carlen DPI–Lieb tower — operator-convexity
+machinery that Mathlib does **not** have — built bottom-up, every result standard-3. This is an
+independently-useful contribution to formalized mathematics, and it is what *discharged* the program's former
+entropy-interface axioms (Donald, DPI, ArakiInterface, EntropyBridge) outright.
+
+| theorem | statement |
+| --- | --- |
+| `peierls_inequality` | Peierls (Carlen 2.9): $\sum_j f(B_{jj}) \le \operatorname{tr} f(B)$, convex $f$ |
+| `trace_function_convex` | $A \mapsto \operatorname{tr} f(A)$ convex for convex $f$ (2.10) |
+| `matrix_sqrt_le_sqrt` | Löwner–Heinz: $0\le A\le B \Rightarrow \sqrt A\le\sqrt B$ |
+| `star_inv_subadditive` | Ando's joint convexity of $(A,B)\mapsto B^\ast A^{-1}B$ |
+| `gmean_superadditive` | joint concavity of the operator geometric mean $A\#B$ |
+| `lieb_superadditive` | **Lieb's concavity theorem** — $(A,B)\mapsto\operatorname{tr}(K^\ast A^{1-t}K\,B^t)$ jointly concave |
+| `relEntropy_subadditive` | joint convexity of quantum relative entropy |
+| `dpi_mixed_unitary`, `partial_trace_dpi` | the **data-processing inequality** $D(\Phi\rho\Vert\Phi\sigma)\le D(\rho\Vert\sigma)$ |
+| `strong_subadditivity` | **strong subadditivity** $S(\rho_{ABC})+S(\rho_B)\le S(\rho_{AB})+S(\rho_{BC})$ |
+| `condMutualInfo_nonneg` | conditional mutual information $I(A{:}C\mid B)\ge 0$ |
+
 ### Bounded Tomita–Takesaki (standard subspace)
 
 | theorem | statement |

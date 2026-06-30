@@ -82,4 +82,13 @@ inventory-backed.
   (`strong_subadditivity`, `condMutualInfo_nonneg`) in `AxiomAudit.lean` — both std-3, budget 0 (coverage gap
   closed). All touched modules green. (Remaining audit-pin gaps for other terminal theorems can be added in later
   A1 passes.)
-- **NEXT → A2** (website page-by-page against the inventory) → A3 (paper) → A4 (claims ledger).
+- **2026-06-30 — A2 (website) in progress.** Survey finding: the site is **already well-aligned and honest** on
+  the load-bearing scope — Born is framed as "input/reduced, not derived" (formalization/ladder/selection/
+  open-problems), the H2 "capacity forbids records" reading is retired everywhere (about/born/idea/index), finite
+  capacity is the conditional *entropy* chain (not finite matter), and the 1/4 is attributed to Sakharov. So A2
+  is mostly the *under*-claim direction. **This pass:** added the missing **Operator-convexity → Lieb → DPI →
+  strong-subadditivity** table to `formalization.md` (the Mathlib-grade entropy library, the genuine breadth the
+  audit surfaced). Website builds green (66 pages). Remaining A2 (later passes): a light "re-derivation of
+  standard Sakharov" note on the 1/4; a scale line (296 files / budget 0); verify the BW "cited" caveat isn't
+  stale-underclaiming now that one-particle BW is unconditional.
+- **NEXT → finish A2 (remaining refinements) → A3 (paper) → A4 (claims ledger).**
