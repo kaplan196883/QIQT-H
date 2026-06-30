@@ -103,6 +103,14 @@ Lean: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green; `#print 
   in Λ_K** (FAIL — the I4 4/3 CPSUV class); **Reg C (modular+covariant) → A_F→0 only as α=Λ_K/Λ→∞** (modular
   factor must be parametrically inactive). Numerically confirms the crux: **covariance of the per-diamond FAMILY
   does NOT buy Δc²=0 — only a Lorentz-SCALAR symbol does.** A mode/modular-truncation capacity FAILs.
-- **NEXT → J2** (THE KEY): the local-symbol AUDIT of QIQT-H's actual `Q_D = log #Atoms ≤ A(∂D)/4ℓ_P²`
-  (`LorentzSelection.lean`) — mode/modular truncation (FAIL) or nonlocal algebraic count over a covariant kernel
-  (escape candidate)? This decides the answer.
+- **2026-06-30 — J2 ✅ DONE (the decisive audit)** (`scripts/qg/J2_capacity_symbol_audit.md`): read QIQT-H's
+  actual capacity — `RecordedHistoryNet.card_le : Fintype.card (P.X D) ≤ N D ≈ exp(Q_D)`, a **cardinality bound on
+  the decoherent record-sector fibre** per causal diamond (`LorentzSelection.lean`). **Verdict: class (b) — an
+  algebraic STATE-COUNT, NOT a mode/modular-energy truncation** (there is no field momentum or modular spectrum in
+  the structure; `P.X D` is an abstract finite record-atom type with the decoherence measure `ω`). Two-sided
+  consequence: **(+)** it has no frame-picking matter-field UV symbol ⟹ the I4/CPSUV kill **does NOT apply** (not
+  FAIL); **(−)** but it is **silent on the matter-field UV regulator** ⟹ not an escape either. **Status: "not
+  FAIL, not yet ESCAPE."** A full escape requires pairing the algebraic count with a Lorentz-scalar matter kernel
+  = J6. This is exactly the plan's anticipated outcome, now grounded in the code.
+- **NEXT → J3** (the Ward dichotomy as an axiom-free Lean theorem: isotropic `Γ⁽²⁾=F(p²)` ⟹ Δc²=0; anisotropic
+  `Γ⁽²⁾=A·p²+B·(u·p)²` ⟹ Δc²=B/A — reducing the escape question to `B=0`), then J4 (full scan), J5/J6 (frontier).
