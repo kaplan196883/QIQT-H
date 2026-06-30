@@ -118,4 +118,24 @@ inventory-backed.
   §0 words. (3) Added the **scale line** (≈296 files / ~3,300 theorems / budget 0) to the formalization intro
   (§0 #6, credit the breadth). Website builds green (66 pages). A2 PASS = pages map to inventory entries with
   matching qualifiers; the one stale GR-note under/over-claim fixed; breadth credited.
-- **NEXT → A3 (paper `QIQT_Foundations_Paper.md`, section by section vs inventory) → A4 (claims ledger).**
+- **2026-06-30 — A3 ✅ DONE** (paper `QIQT_Foundations_Paper.md`, section by section vs inventory). Survey
+  finding (as with the site): §1.1a is already heavily revised and aligned — full H2-retraction paragraph, the
+  Lorentz fork frontier (~10–20%), P4-MICRO area-floor-as-theorem, the 1/4-as-Sakharov framing, (P1)–(P5) with
+  λ+decoherence. So A3 was mostly mopping up **residual stale spots** the §1.1a revision didn't reach. Fixes,
+  all inventory-aligned: **(1)** corrected the **stale audit numbers** in *two* places (abstract + §11.4 banner):
+  "830 directives / 192 modules / ~2,010 theorems" → the verified "**2,213 directives / 256 modules**, within
+  **296 files / ~3,450 theorems**" (counted directly). **(2)** Removed the **retired Macroscopic Definiteness
+  Conjecture** from every place it was still listed as an *open problem / open postulate*: abstract open-problems
+  list, §11.2a status table (1203), the §11.2a research-agenda sentence (1198), and noted OP2's purpose-clause
+  ("feeds Open Problem 3") is void since OP3 is withdrawn. **(3)** Fixed the **uncovered "capacity forbids a
+  ≥2-record state" / "finite-information restriction makes single-ness" overclaims** that lacked a retraction
+  pointer — §6.4 (462, a bolded assertion), §6.8 (added a banner + fixed 541), §6.10 (592), §7.5, §10.1 (1041),
+  §10.6 (1061), §11.1 summary (1138), and the final summary (1632) — each rewritten to the λ+decoherence account
+  (capacity is kinematic, single-ness is λ's role), so the paper is now **internally consistent** on the
+  retraction (the §7.6 body stays under its existing banner as historical record). **(4)** §1.2 → λ+decoherence
+  framing + "four open problems." **(5)** Credited the **Lieb/DPI/SSA tower** in the formal-verification
+  paragraph (the axiom-free operator-convexity → Lieb → DPI → strong-subadditivity tower, `QIQTH/Entropy/`, 19
+  files — verified count — the Mathlib-grade breadth, §0 #6). A3 PASS = the paper's claims map to inventory
+  entries with matching qualifiers; the audit numbers, the H2 retraction, the open-problem set, and the
+  formal-verification scope are all consistent.
+- **NEXT → A4 (build CLAIMS_LEDGER.md: each headline public claim → inventory entry + status; final consistency pass).**
