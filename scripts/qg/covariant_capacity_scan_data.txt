@@ -1,0 +1,37 @@
+====================================================================================
+J4 — Reg C anisotropy A_F(α, n) scan  (A_F = ⟨k₄²−k_x²⟩_F ∝ Δc²; 0 ⟺ Lorentz-scalar)
+  F = exp[−(k_E²/Λ²)ⁿ]·exp[−(k₄²/Λ_K²)ⁿ], Λ=4.0, α=Λ_K/Λ, threshold τ=|A_F|<3.3e-03
+====================================================================================
+   α \ n           n=1         n=2         n=4         n=8
+   -------------------------------------------------------
+    0.250     -3.99e-01   -4.24e-01   -4.47e-01   -4.58e-01
+    0.354     -3.28e-01   -3.34e-01   -3.48e-01   -3.56e-01
+    0.500     -2.49e-01   -2.24e-01   -2.18e-01   -2.18e-01
+    0.707     -1.72e-01   -1.17e-01   -8.55e-02   -7.31e-02
+    1.000     -1.08e-01   -4.47e-02   -1.39e-02   -3.44e-03
+    1.414     -6.25e-02   -1.33e-02   -1.05e-03   -1.60e-05
+    2.000     -3.41e-02   -3.52e-03   -6.62e-05   -6.24e-08
+    2.828     -1.79e-02   -8.93e-04   -4.15e-06   -2.44e-10
+    4.000     -9.16e-03   -2.24e-04   -2.59e-07   -9.52e-13
+    5.657     -4.64e-03   -5.60e-05   -1.62e-08   -3.69e-15
+    8.000     -2.33e-03   -1.40e-05   -1.01e-09    0.00e+00
+   11.300     -1.17e-03   -3.52e-06   -6.38e-11    0.00e+00
+   16.000     -5.86e-04   -8.76e-07   -3.95e-12    0.00e+00
+
+  threshold α*(n) = smallest α with |A_F| < τ (modular cutoff parametrically inactive):
+    n      α*(n)        |A_F| just above / at α*
+    --------------------------------------------
+    1       8.000      |A_F(α*)| = 2.33e-03
+    2       2.828      |A_F(α*)| = 8.93e-04
+    4       1.414      |A_F(α*)| = 1.05e-03
+    8       1.414      |A_F(α*)| = 1.60e-05
+
+====================================================================================
+VERDICT: |A_F| → 0 only as α=Λ_K/Λ grows past α*(n) (modular cutoff switched off); for α ≲ 1 the
+  temporal modular cutoff is active and A_F ≠ 0 (Δc² ≠ 0).  Sharper cutoffs (larger n) reach safety
+  at a SMALLER α* (8.0→2.8→1.4→1.4 for n=1,2,4,8: a sharper modular factor switches off faster), but
+  in ALL cases α* ≳ 1 — the modular scale Λ_K must EXCEED the covariant UV scale Λ.  So a modular/
+  diamond cutoff is Lorentz-safe ONLY when it does NO UV work below Λ — i.e. it is NOT the matter
+  regulator.  Consistent with J1–J3: escape requires B=0, a genuinely Lorentz-SCALAR matter UV kernel
+  (J6), not a modular/diamond cutoff.
+====================================================================================

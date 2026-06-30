@@ -119,5 +119,12 @@ Lean: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green; `#print 
   matter-loop regulator carries no preferred-`u` term); `speedSplitting_aniso_ne_zero_of_B_ne_zero`. Standard-3,
   full `QIQTH` green, budget 0; wired in. Ties the threads: B is sourced by the regulator anisotropy `A_F` (J1);
   QIQT-H's capacity is silent on B (J2) ⟹ B is set by the separately-supplied matter UV kernel (J6).
-- **NEXT → J4** (full Reg-C scan Δc²(α,n), locate the threshold), then J5 (Rindler/wedge modular modes —
-  frontier checkpoint), J6 (covariant kernel + algebraic capacity = the real construction — checkpoint).
+- **2026-06-30 — J4 ✅ DONE** (`scripts/qg/covariant_capacity_scan.py` + `J4_scan_result.md`): full 2D scan of
+  `|A_F|(α, n)` (∝ Δc²) for Reg C. `|A_F|` falls with α; threshold `α*(n)` (where `|A_F|<3.3e-3`) = **8.0, 2.83,
+  1.41, 1.41** for `n=1,2,4,8`. In **all** cases `α* ≳ 1`: the modular scale `Λ_K` must EXCEED the covariant UV
+  scale `Λ` ⟹ a modular/diamond cutoff is Lorentz-safe **only when it does no UV work below `Λ`** (i.e. it is NOT
+  the matter regulator). **No regime exists where a modular cutoff is both the active matter UV regulator AND
+  Lorentz-safe.** Quantitatively closes the numerical side: escape needs `B=0` (J3) = a Lorentz-scalar matter
+  kernel (J6), not a modular cut.
+- **NEXT → J5** (Rindler/wedge modular-mode check — frontier checkpoint), J6 (covariant proper-time/PV UV kernel +
+  capacity as a nonlocal crossed-product-trace constraint — the real construction, checkpoint).
