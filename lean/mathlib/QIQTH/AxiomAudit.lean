@@ -7529,4 +7529,16 @@ namespace QIQTH.AxiomAudit
 -- capacity statement a HaPPY/RTN substrate exhibits (sim: scripts/qg/rtn_rt_substrate.py — S(A) saturates
 -- min-cut·log D from below). The min-cut=area identification (A/4ℓ_P²) is the carried UV datum; 1/4 & G never asserted.
 
+-- CPSUV-escape campaign (COVARIANT_CAPACITY_CPSUV_PLAN.md), J3 — the Ward dichotomy for the speed splitting.
+#print axioms QIQTH.QG.speedSplitting_eq_zero_of_isotropic
+#print axioms QIQTH.QG.speedSplitting_eq_zero_iff
+#print axioms QIQTH.QG.speedSplitting_aniso
+#print axioms QIQTH.QG.speedSplitting_aniso_eq_zero_iff
+#print axioms QIQTH.QG.speedSplitting_aniso_ne_zero_of_B_ne_zero
+-- expected: standard only — ★ J3: Δc² = Z_s/Z_t − 1 vanishes IFF isotropic (Z_t=Z_s); for the anisotropic form
+-- Γ⁽²⁾=A·p²+B·(u·p)² (Z_t=A+B, Z_s=A, Δc²=−B/(A+B)), Δc²=0 ⟺ B=0. Reduces the CPSUV-escape question to the
+-- single scalar condition B=0 (the matter-loop regulator is Lorentz-scalar). B is sourced by the regulator's
+-- frame anisotropy A_F (J1, numerics); QIQT-H's capacity is an algebraic record-count silent on B (J2) ⟹ B set
+-- by the separately-supplied matter UV kernel (J6). Never assert the value of G; the 1/4 ratio is derived.
+
 end QIQTH.AxiomAudit

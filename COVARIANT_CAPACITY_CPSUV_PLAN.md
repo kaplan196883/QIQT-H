@@ -112,5 +112,12 @@ Lean: `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green; `#print 
   FAIL); **(−)** but it is **silent on the matter-field UV regulator** ⟹ not an escape either. **Status: "not
   FAIL, not yet ESCAPE."** A full escape requires pairing the algebraic count with a Lorentz-scalar matter kernel
   = J6. This is exactly the plan's anticipated outcome, now grounded in the code.
-- **NEXT → J3** (the Ward dichotomy as an axiom-free Lean theorem: isotropic `Γ⁽²⁾=F(p²)` ⟹ Δc²=0; anisotropic
-  `Γ⁽²⁾=A·p²+B·(u·p)²` ⟹ Δc²=B/A — reducing the escape question to `B=0`), then J4 (full scan), J5/J6 (frontier).
+- **2026-06-30 — J3 ✅ DONE** (`QIQTH/QG/WardSpeedSplitting.lean`): the Ward dichotomy as axiom-free Lean.
+  `speedSplitting Zt Zs = Zs/Zt − 1`; `speedSplitting_eq_zero_iff` (Δc²=0 ⟺ Zt=Zs, the Lorentz-scalar Ward
+  identity); `speedSplitting_aniso` (the form `Γ⁽²⁾=A·p²+B·(u·p)²` gives Zt=A+B, Zs=A, Δc²=−B/(A+B)); **★
+  `speedSplitting_aniso_eq_zero_iff` — Δc²=0 ⟺ B=0** (the escape reduces to the single scalar condition: the
+  matter-loop regulator carries no preferred-`u` term); `speedSplitting_aniso_ne_zero_of_B_ne_zero`. Standard-3,
+  full `QIQTH` green, budget 0; wired in. Ties the threads: B is sourced by the regulator anisotropy `A_F` (J1);
+  QIQT-H's capacity is silent on B (J2) ⟹ B is set by the separately-supplied matter UV kernel (J6).
+- **NEXT → J4** (full Reg-C scan Δc²(α,n), locate the threshold), then J5 (Rindler/wedge modular modes —
+  frontier checkpoint), J6 (covariant kernel + algebraic capacity = the real construction — checkpoint).
