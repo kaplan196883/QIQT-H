@@ -113,3 +113,12 @@ distinctive — with its falsifiable prediction — clearly labelled as a postul
   = frontiers; `EntropyNotCardinality` cited. Website builds green (66 pages). **NEXT → Track B Lean bottom-up
   (B0 spectrum/two-entropies → B1 gap≥0 → B2 the no-go `svn_underdetermines_smax` → B3 capacity of entanglement →
   B4 the bridge postulate + conditional prediction → B5 wire-in).**
+- **2026-07-01 — B0+B1 ✅ DONE** (`QIQTH/MaxEntropyCapacity.lean`, axiom-free std-3, wired into `QIQTH.lean` +
+  `AxiomAudit.lean`, budget 0). Built the two entropies — `Smax ι = log(dim)` (the log-count / max-entropy
+  capacity, what the bridge postulate proposes gravity uses) and `Svn p = BranchLedger.Shannon` (the von Neumann
+  entropy `S_gen`/the area measures) — the `gap = Smax − Svn` (the distinctive `Q_R − S_gen`), and `smax_ge_svn`
+  / `gap_nonneg` (`S_vN ≤ S_max`, gap `≥ 0`, via the existing `RecordContract.shannon_le_log_card` Jensen bound;
+  equality iff flat). Header carries the full honest scope (postulate not derivation; cites `EntropyNotCardinality`).
+  **NEXT → B2: the conditional no-go `svn_underdetermines_smax` (∀ Q N, ∃ spectrum with `Svn = Q` but `Smax`
+  arbitrarily large — the area fixes `S_vN`, not the count; mirrors `EntropyNotCardinality`) → B3 capacity of
+  entanglement → B4 the bridge postulate + conditional prediction.**

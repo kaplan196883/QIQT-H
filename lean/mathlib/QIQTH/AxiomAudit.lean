@@ -7650,4 +7650,12 @@ namespace QIQTH.AxiomAudit
 -- IMPORTED energy cutoff, NOT derived from the area law. Proved classically from kl_nonneg vs the Gibbs state. Std 3.
 #print axioms QIQTH.OperationalCapacity.gibbs_entropy_bound
 
+-- ── MaxEntropyCapacity (the distinctive-Q_R frontier; QR_FRONTIER_PLAN.md) ─────────────────────────────────────
+-- B0+B1: the max-entropy/log-count capacity Smax = log(dim) vs the von Neumann Svn, and the count/entropy GAP
+-- ≥ 0 (Smax ≥ Svn, Jensen). The gap is the distinctive Q_R − S_gen the max-entropy bridge POSTULATE predicts —
+-- a NEW POSTULATE, NOT a derivation (the no-go svn_underdetermines_smax forces it; cite EntropyNotCardinality).
+-- Axiom-free (std 3).
+#print axioms QIQTH.MaxEntropyCapacity.smax_ge_svn
+#print axioms QIQTH.MaxEntropyCapacity.gap_nonneg
+
 end QIQTH.AxiomAudit

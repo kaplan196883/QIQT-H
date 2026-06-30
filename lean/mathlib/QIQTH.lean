@@ -37,6 +37,7 @@ import QIQTH.HolevoCoarseGraining
 import QIQTH.DPI
 import QIQTH.ShannonFano
 import QIQTH.OperationalCapacity
+import QIQTH.MaxEntropyCapacity
 import QIQTH.BellMarginal
 import QIQTH.Bell
 import QIQTH.Tsirelson
