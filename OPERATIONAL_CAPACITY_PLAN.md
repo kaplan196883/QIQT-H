@@ -181,3 +181,11 @@ the count layer to an operational Holevo bound** — genuinely buildable, genuin
   `kl_partition_two` it ≤ the confusion mutual info ≤ Q). **REMAINING (refinement, not blocking): the full ι×ι
   grounding — define the joint law `P_ij = T_ij/M`, product `R_ij`, diagonal `Δ`, prove `∑_Δ P = s` and
   `∑_Δ R = 1/M`, so the capstone carries `I(T) ≤ Q` directly instead of `D₂ ≤ Q`; then B4 energy/Bekenstein form.**
+- **2026-06-30 — B3.1 ✅ DONE (confusion-matrix grounding foundation).** Built the joint/marginal/product laws
+  (`jointLaw P(i,j)=T_ij/M`, `outMarg`, `prodLaw R(i,j)=q_j/M`, `avgSuccess`), the diagonal-sum collapse
+  `sum_diagSet` (`∑_Δ f = ∑_i f(i,i)`, via `Finset.sum_filter` + `Fintype.sum_prod_type` + `sum_ite_eq`), the
+  distribution facts `jointLaw_sum`/`prodLaw_sum` (`∑P=∑R=1`), and the **diagonal masses** `diag_jointLaw`
+  (`∑_Δ P = avgSuccess`) + `diag_prodLaw` (`∑_Δ R = 1/M`, the killer simplification). Axiom-free std-3, pinned,
+  budget 0. **NEXT → `confusionMI_ge_fano`: define `confusionMI T = ∑ P log(P/R)` and apply `kl_partition_two`
+  with `A = diagSet` (+ the supp/positivity side-conditions) to get `binaryKL(avgSuccess, 1/M) ≤ confusionMI T`;
+  then the grounded capstone carrying `confusionMI T ≤ Q`. Then B4 energy/Bekenstein.**

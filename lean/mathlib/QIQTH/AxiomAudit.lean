@@ -7632,5 +7632,12 @@ namespace QIQTH.AxiomAudit
 -- Holevo bound D₂(s‖1/M) ≤ Q. Holevo/Bekenstein-class, NOT new physics, NOT from the area law. Axiom-free (std 3).
 #print axioms QIQTH.OperationalCapacity.kl_partition_two
 #print axioms QIQTH.OperationalCapacity.record_capacity_of_binaryKL_bound
+-- B3.1: the confusion-matrix grounding — joint/product laws are distributions (jointLaw_sum, prodLaw_sum) and the
+-- diagonal masses ∑_Δ P = avgSuccess, ∑_Δ R = 1/M (the killer simplification) — so the capstone will carry the
+-- natural Holevo bound I(T) ≤ Q (next: confusionMI_ge_fano). Axiom-free (std 3).
+#print axioms QIQTH.OperationalCapacity.jointLaw_sum
+#print axioms QIQTH.OperationalCapacity.prodLaw_sum
+#print axioms QIQTH.OperationalCapacity.diag_jointLaw
+#print axioms QIQTH.OperationalCapacity.diag_prodLaw
 
 end QIQTH.AxiomAudit

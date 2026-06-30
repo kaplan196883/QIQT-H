@@ -343,5 +343,78 @@ theorem record_capacity_of_binaryKL_bound {s M Q : ℝ} (hs0 : 0 ≤ s) (hs1 : s
   have h := binaryKL_success_bound hs0 hs1 hM
   linarith
 
+/-! ### B3.1 — the confusion-matrix grounding (so the capstone carries `I(T) ≤ Q` directly) -/
+
+section Confusion
+variable {ι : Type*} [Fintype ι] [DecidableEq ι]
+
+/-- Joint law of (input, output), uniform input prior: `P(i,j) = T i j / M`, `M = |ι|`. -/
+noncomputable def jointLaw (T : ι → ι → ℝ) (p : ι × ι) : ℝ := T p.1 p.2 / Fintype.card ι
+
+/-- Output marginal `q j = ∑ᵢ T i j / M`. -/
+noncomputable def outMarg (T : ι → ι → ℝ) (j : ι) : ℝ := (∑ i, T i j) / Fintype.card ι
+
+/-- Product law `U × q`: `R(i,j) = q j / M`. -/
+noncomputable def prodLaw (T : ι → ι → ℝ) (p : ι × ι) : ℝ := outMarg T p.2 / Fintype.card ι
+
+/-- Average decoding success `s = ∑ᵢ T i i / M` (the diagonal mass of the joint law). -/
+noncomputable def avgSuccess (T : ι → ι → ℝ) : ℝ := (∑ i, T i i) / Fintype.card ι
+
+/-- The diagonal event `{(i,i)} ⊆ ι × ι`. -/
+def diagSet : Finset (ι × ι) := Finset.univ.filter (fun p => p.1 = p.2)
+
+/-- Summing over the diagonal collapses to the trace-like sum `∑ᵢ f(i,i)`. -/
+lemma sum_diagSet {f : ι × ι → ℝ} : ∑ p ∈ diagSet, f p = ∑ i, f (i, i) := by
+  unfold diagSet
+  rw [Finset.sum_filter, Fintype.sum_prod_type]
+  refine Finset.sum_congr rfl (fun i _ => ?_)
+  rw [Finset.sum_ite_eq Finset.univ i (fun j => f (i, j))]
+  simp
+
+/-- The joint law is a probability distribution (`∑ P = 1`), for a row-stochastic `T`. -/
+lemma jointLaw_sum (T : ι → ι → ℝ) (hrow : ∀ i, ∑ j, T i j = 1)
+    (hN : 0 < (Fintype.card ι : ℝ)) : ∑ p, jointLaw T p = 1 := by
+  unfold jointLaw
+  rw [Fintype.sum_prod_type]
+  have h : ∀ i, ∑ j, T i j / (Fintype.card ι : ℝ) = 1 / (Fintype.card ι : ℝ) := by
+    intro i; rw [← Finset.sum_div, hrow i]
+  simp_rw [h]
+  rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+  rw [one_div]; exact mul_inv_cancel₀ hN.ne'
+
+/-- The output marginal sums to `1`. -/
+lemma outMarg_sum (T : ι → ι → ℝ) (hrow : ∀ i, ∑ j, T i j = 1)
+    (hN : 0 < (Fintype.card ι : ℝ)) : ∑ j, outMarg T j = 1 := by
+  unfold outMarg
+  rw [← Finset.sum_div, Finset.sum_comm]
+  simp_rw [hrow]
+  rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul, mul_one, div_self hN.ne']
+
+/-- The product law is a probability distribution (`∑ R = 1`). -/
+lemma prodLaw_sum (T : ι → ι → ℝ) (hrow : ∀ i, ∑ j, T i j = 1)
+    (hN : 0 < (Fintype.card ι : ℝ)) : ∑ p, prodLaw T p = 1 := by
+  unfold prodLaw
+  rw [Fintype.sum_prod_type]
+  have hinner : ∀ i : ι, (∑ j, outMarg T j / (Fintype.card ι : ℝ)) = (Fintype.card ι : ℝ)⁻¹ := by
+    intro i; rw [← Finset.sum_div, outMarg_sum T hrow hN, one_div]
+  rw [Finset.sum_congr rfl (fun i _ => hinner i)]
+  rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+  exact mul_inv_cancel₀ hN.ne'
+
+/-- **Diagonal mass of the joint law = average success.** `∑_Δ P = s`. -/
+lemma diag_jointLaw (T : ι → ι → ℝ) : ∑ p ∈ diagSet, jointLaw T p = avgSuccess T := by
+  rw [sum_diagSet]; unfold jointLaw avgSuccess; rw [Finset.sum_div]
+
+/-- **Diagonal mass of the product law = `1/M`** (the killer simplification). `∑_Δ R = 1/M`. -/
+lemma diag_prodLaw (T : ι → ι → ℝ) (hrow : ∀ i, ∑ j, T i j = 1)
+    (hN : 0 < (Fintype.card ι : ℝ)) :
+    ∑ p ∈ diagSet, prodLaw T p = (Fintype.card ι : ℝ)⁻¹ := by
+  rw [sum_diagSet]
+  unfold prodLaw
+  rw [← Finset.sum_div, outMarg_sum T hrow hN]
+  rw [one_div]
+
+end Confusion
+
 end OperationalCapacity
 end QIQTH
