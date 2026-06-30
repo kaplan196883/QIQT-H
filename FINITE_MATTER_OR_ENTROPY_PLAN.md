@@ -105,5 +105,11 @@ verdict citing exact code/postulates. One commit per increment with the
   capacity + exact Lorentz + nonzero positive energy is **impossible** in finite dim (the rep-theoretic shadow of
   "non-compact Lorentz has no nontrivial finite-dim unitary rep"). **Fork B is untenable; QIQT-H must be Fork A.**
   Axiom-free (std 3), full `QIQTH` green, budget 0; wired in.
-- **NEXT → D3** (Lean: bounded entropy ⇏ bounded cardinality — the K1 counterexample, confirming Fork A's capacity
-  is entropy not a state count), then D4/D5 (restate the distinctive claim + adversarial re-check).
+- **2026-06-30 — D3 ✅ DONE** (`QIQTH/QG/EntropyNotCardinality.lean`): bounded entropy does NOT bound cardinality,
+  machine-checked. `traceEntropy_uniform_weighted` (a uniform `N`-atom state with trace weights `e^Q/N` has
+  trace-entropy EXACTLY `Q` for all `N`); **`entropy_bound_not_cardinality_bound`** (∀ Q, ∀ N≥1, ∃ an `N`-atom
+  probability family with `S_τ = Q` — cardinality unbounded at fixed entropy). ⟹ `S_τ ≤ Q_D ⇏ card ≤ exp Q_D`:
+  **Fork A's capacity is genuinely an ENTROPY bound, not a literal state count** (a cardinality bound needs an
+  extra minimal-cell/Holevo hypothesis). Axiom-free (std 3), full `QIQTH` green, budget 0; wired in.
+- **NEXT → D4** (Fork A distinctiveness audit — the irreducible claim = (Φ,λ) ontology + holographic *entropy*;
+  restate "finite capacity" as finite entropy not finite matter), then D5 (resolution + adversarial re-check).

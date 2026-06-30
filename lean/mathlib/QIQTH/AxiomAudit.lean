@@ -7562,4 +7562,12 @@ namespace QIQTH.AxiomAudit
 -- entropy/records over covariant Type III₁ matter). The rep-theoretic shadow of "non-compact Lorentz has no
 -- nontrivial finite-dim unitary rep". Never assert the value of G; the 1/4 ratio is derived (SakharovRatio.lean).
 
+-- Finite-matter-or-entropy campaign, D3 — bounded entropy does NOT bound cardinality (Fork A = entropy not count).
+#print axioms QIQTH.QG.traceEntropy_uniform_weighted
+#print axioms QIQTH.QG.entropy_bound_not_cardinality_bound
+-- expected: standard only — ★ D3: the K1 counterexample. A uniform N-atom record state with trace weights e^Q/N
+-- has trace-entropy EXACTLY Q for ALL N (H(uniform)=log N cancels ∑qᵢ log tᵢ = Q−log N). So S_τ≤Q is met at
+-- arbitrarily large cardinality N ⟹ S_τ≤Q_D ⇏ card≤exp Q_D. Fork A's capacity is genuinely an ENTROPY bound
+-- (Lorentz-safe, over covariant Type III₁), not a literal state count. Never assert G; the 1/4 ratio is derived.
+
 end QIQTH.AxiomAudit
