@@ -7621,5 +7621,8 @@ namespace QIQTH.AxiomAudit
 -- (binaryKL_nonneg) — the coarse-grained "decoded correctly" KL of the Fano-free route. Axiom-free (std 3).
 #print axioms QIQTH.OperationalCapacity.mulLog_div_lower
 #print axioms QIQTH.OperationalCapacity.binaryKL_nonneg
+-- B1.3: the Fano-form success bound s·log M − h₂(1−s) ≤ D₂(s‖1/M) (the heart of the ε>0 capstone), via the
+-- exact identity D₂(s‖1/M) = s·log M − h₂(1−s) − (1−s)log(1−1/M) + the sign of log(1−1/M). Axiom-free (std 3).
+#print axioms QIQTH.OperationalCapacity.binaryKL_success_bound
 
 end QIQTH.AxiomAudit

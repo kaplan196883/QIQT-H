@@ -207,5 +207,43 @@ lemma binaryKL_nonneg {s r : ℝ} (hs0 : 0 ≤ s) (hs1 : s ≤ 1) (hr0 : 0 < r) 
   unfold binaryKL
   linarith [t1, t2]
 
+/-- `s·log(s/r) = s·log s − s·log r` for `s ≥ 0`, `r ≠ 0`. Holds even at `s = 0` (both sides `0`) because of the
+    leading `s` — sidesteps the `log(s/r) ≠ log s − log r` failure there. -/
+lemma mul_log_div_split {s r : ℝ} (hs : 0 ≤ s) (hr : r ≠ 0) :
+    s * Real.log (s / r) = s * Real.log s - s * Real.log r := by
+  rcases eq_or_lt_of_le hs with h0 | hpos
+  · rw [← h0]; simp
+  · rw [Real.log_div hpos.ne' hr]; ring
+
+/-- **The Fano-form success bound.** For `M > 1`, the binary relative entropy of the "decoded correctly"
+    partition (success mass `s`, reference `1/M`) lower-bounds the Fano expression:
+    `s·log M − h₂(1−s) ≤ D₂(s‖1/M)`. Exact identity `D₂(s‖1/M) = s·log M − h₂(1−s) − (1−s)·log(1−1/M)` plus
+    `(1−s)·log(1−1/M) ≤ 0` (since `1−1/M ∈ (0,1]`, `1−s ≥ 0`). With `s = 1−ε` this is `(1−ε)log M − h₂(ε)`. -/
+lemma binaryKL_success_bound {s M : ℝ} (hs0 : 0 ≤ s) (hs1 : s ≤ 1) (hM : 1 < M) :
+    s * Real.log M - binEntropy (1 - s) ≤ binaryKL s M⁻¹ := by
+  have hMpos : 0 < M := by linarith
+  have hrne : (M⁻¹ : ℝ) ≠ 0 := by positivity
+  have hM1 : (M⁻¹ : ℝ) < 1 := by rw [inv_lt_one₀ hMpos]; exact hM
+  have h1r_pos : (0 : ℝ) < 1 - M⁻¹ := by linarith
+  have h1r_le : (1 - M⁻¹ : ℝ) ≤ 1 := by
+    have : (0 : ℝ) < M⁻¹ := by positivity
+    linarith
+  have h1rne : (1 - M⁻¹ : ℝ) ≠ 0 := ne_of_gt h1r_pos
+  have hlog1r_nonpos : Real.log (1 - M⁻¹) ≤ 0 := Real.log_nonpos (le_of_lt h1r_pos) h1r_le
+  have e1 : s * Real.log (s / M⁻¹) = s * Real.log s - s * Real.log M⁻¹ := mul_log_div_split hs0 hrne
+  have e2 : (1 - s) * Real.log ((1 - s) / (1 - M⁻¹))
+      = (1 - s) * Real.log (1 - s) - (1 - s) * Real.log (1 - M⁻¹) :=
+    mul_log_div_split (by linarith) h1rne
+  have hbin : binEntropy (1 - s) = -((1 - s) * Real.log (1 - s)) - s * Real.log s := by
+    unfold binEntropy
+    rw [show (1 : ℝ) - (1 - s) = s from by ring]
+    simp only [Real.negMulLog]; ring
+  have hlogr : Real.log M⁻¹ = - Real.log M := Real.log_inv M
+  have hprod : (1 - s) * Real.log (1 - M⁻¹) ≤ 0 :=
+    mul_nonpos_of_nonneg_of_nonpos (by linarith) hlog1r_nonpos
+  unfold binaryKL
+  rw [e1, e2, hbin, hlogr]
+  nlinarith [hprod]
+
 end OperationalCapacity
 end QIQTH

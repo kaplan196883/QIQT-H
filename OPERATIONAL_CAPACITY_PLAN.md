@@ -157,3 +157,11 @@ the count layer to an operational Holevo bound** — genuinely buildable, genuin
   `binaryKL s (1/M) ≥ s·log M − binEntropy(1−s)` (M ≥ 2). NOTE: needs s=0 / s=1 / s∈(0,1) case handling because
   `log(s·M) = log s + log M` fails at s=0 — deliberate, not rushed. Then `logsum_le` (from `mulLog_div_lower`,
   unnormalized form) → `kl_partition_two` → `diag_mass_product` → `confusionMI_ge_fano` → capstone.**
+- **2026-06-30 — B1.3 ✅ DONE** (the Fano-form heart). Built `mul_log_div_split` (`s·log(s/r) = s·log s − s·log r`,
+  valid even at s=0 thanks to the leading `s` — sidesteps the case-split pain) and **`binaryKL_success_bound`**:
+  `s·log M − h₂(1−s) ≤ D₂(s‖1/M)` for `M > 1`, via the exact identity `D₂(s‖1/M) = s·log M − h₂(1−s) −
+  (1−s)log(1−1/M)` + `log(1−1/M) ≤ 0`. With `s = 1−ε` this is `(1−ε)log M − h₂(ε)` — the Fano lower bound, done.
+  Axiom-free std-3, pinned, budget 0. **NEXT → `logsum_le` (general log-sum, from `mulLog_div_lower` by
+  normalizing) → `kl_partition_two` (binary coarse-graining DPI) → the confusion-matrix mutual-info `I(T)` +
+  `diag_mass_product` (`∑Rᵢᵢ=1/M`) → assemble `confusionMI_ge_fano` → capstone `(1−ε)log M ≤ Q + binEntropy ε`
+  (with `I(T) ≤ Q` carried as the Holevo bound).**
