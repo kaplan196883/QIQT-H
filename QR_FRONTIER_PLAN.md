@@ -131,3 +131,10 @@ distinctive — with its falsifiable prediction — clearly labelled as a postul
   1 = 0`). **NEXT → B3: the capacity of entanglement `capEnt p = ∑ p(log p)² − (∑ p log p)²` (= Var(−log p)) +
   `capEnt_nonneg` + `capEnt_zero_iff_flat` → B4 the bridge postulate `MaxEntropyCapacity` + conditional
   `distinctive_gap`.**
+- **2026-07-01 — B3 ✅ DONE (the capacity of entanglement).** Built `capEnt p = ∑ p(log p)² − (∑ p log p)²`
+  (= `Var_p(−log p)`, the finite `V_gen` governing the continuum `√V_gen` prediction), `capEnt_eq_variance`
+  (= `∑ p(log p − μ)²`, the variance identity, μ = `∑ p log p`), and **`capEnt_nonneg`** (`V_gen ≥ 0` — it's a
+  variance, sum of `p·(·)²`). Axiom-free std-3, pinned, budget 0. **NEXT → B4: the bridge postulate `class
+  MaxEntropyCapacity` (`Q_R = Smax`, a typeclass NEVER a Lean axiom) + the conditional `distinctive_gap` (under
+  the postulate, `Q_R − S_gen = gap ≥ 0`) — the finite shadow of the `√V_gen` prediction; plus `capEnt_zero_iff_*`
+  (the "no shift iff maximally mixed" characterization). Then B5 wire-in + point docs at the theorems.**

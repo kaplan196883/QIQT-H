@@ -7662,5 +7662,10 @@ namespace QIQTH.AxiomAudit
 -- from S_gen. The sharpest EntropyNotCardinality for the max-entropy capacity — this is what FORCES the bridge
 -- postulate (it cannot be a derivation). Axiom-free (std 3).
 #print axioms QIQTH.MaxEntropyCapacity.svn_underdetermines_smax
+-- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
+-- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
+-- Axiom-free (std 3).
+#print axioms QIQTH.MaxEntropyCapacity.capEnt_eq_variance
+#print axioms QIQTH.MaxEntropyCapacity.capEnt_nonneg
 
 end QIQTH.AxiomAudit

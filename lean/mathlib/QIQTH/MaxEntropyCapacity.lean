@@ -80,5 +80,36 @@ theorem svn_underdetermines_smax (N : ℕ) (hN : 0 < N) :
     split_ifs <;> simp [Real.negMulLog]
   · unfold Smax; rw [Fintype.card_fin]
 
+/-! ### B3 — the capacity of entanglement (the prediction's quantity) -/
+
+/-- The **capacity of entanglement** `V_gen = ∑ pᵢ(log pᵢ)² − (∑ pᵢ log pᵢ)² = Var_p(−log p)` — the variance of
+    the surprisal / modular Hamiltonian. The continuum `√V_gen` governs the distinctive `Q_R − S_gen` shift the
+    max-entropy bridge postulate predicts (finite-size Page-time / QES shifts); this is its finite-dim form. -/
+noncomputable def capEnt {ι : Type*} [Fintype ι] (p : ι → ℝ) : ℝ :=
+  (∑ i, p i * (Real.log (p i)) ^ 2) - (∑ i, p i * Real.log (p i)) ^ 2
+
+/-- **The capacity of entanglement is the variance** `∑ pᵢ(log pᵢ − μ)²` with `μ = ∑ pᵢ log pᵢ`. -/
+lemma capEnt_eq_variance {ι : Type*} [Fintype ι] (p : ι → ℝ) (h1 : ∑ i, p i = 1) :
+    capEnt p = ∑ i, p i * (Real.log (p i) - (∑ j, p j * Real.log (p j))) ^ 2 := by
+  set μ := ∑ j, p j * Real.log (p j) with hμ
+  have e : ∀ i, p i * (Real.log (p i) - μ) ^ 2
+      = p i * (Real.log (p i)) ^ 2 - μ * (2 * (p i * Real.log (p i))) + μ ^ 2 * p i :=
+    fun i => by ring
+  rw [Finset.sum_congr rfl (fun i _ => e i)]
+  rw [Finset.sum_add_distrib, Finset.sum_sub_distrib]
+  have h2 : ∑ i, μ * (2 * (p i * Real.log (p i))) = 2 * μ ^ 2 := by
+    rw [← Finset.mul_sum]; rw [show ∑ i, 2 * (p i * Real.log (p i)) = 2 * μ from by
+      rw [← Finset.mul_sum, ← hμ]]; ring
+  have h3 : ∑ i, μ ^ 2 * p i = μ ^ 2 := by rw [← Finset.mul_sum, h1, mul_one]
+  rw [h2, h3]
+  unfold capEnt
+  rw [← hμ]; ring
+
+/-- **The capacity of entanglement is nonnegative** (`V_gen ≥ 0`) — it is a variance. -/
+theorem capEnt_nonneg {ι : Type*} [Fintype ι] (p : ι → ℝ)
+    (hp : ∀ i, 0 ≤ p i) (h1 : ∑ i, p i = 1) : 0 ≤ capEnt p := by
+  rw [capEnt_eq_variance p h1]
+  exact Finset.sum_nonneg (fun i _ => mul_nonneg (hp i) (sq_nonneg _))
+
 end MaxEntropyCapacity
 end QIQTH
