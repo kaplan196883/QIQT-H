@@ -119,3 +119,11 @@ the count layer to an operational Holevo bound** — genuinely buildable, genuin
   two-layer note). Website builds green (66 pages). `EntropyNotCardinality` cited everywhere as the guardrail.
   **NEXT → Track B Lean (B0 binEntropy + discrimination model → B1 quantitative Fano → B2 Holevo glue → B3
   capstone → B4 energy/Bekenstein → B5 wire-in).**
+- **2026-06-30 — B0 ✅ DONE** (`QIQTH/OperationalCapacity.lean`, axiom-free std-3, wired into `QIQTH.lean` +
+  `AxiomAudit.lean`, budget 0). Built: `binEntropy` (h₂ in nats) with `binEntropy_zero/_one/_symm/_nonneg`; the
+  `RecordModel` finite record-discrimination structure (`succ`/`avgSucc`/`avgErr`); and the exact (ε=0) capacity
+  helper `exact_record_capacity` (`log M ≤ Q ⟹ M ≤ e^Q`, exp-monotonicity — the Bekenstein-class count bound's
+  ε=0 corollary). Header carries the full honest scope (Holevo/Bekenstein-class, NOT new physics, does not derive
+  the count from the area law, cites `EntropyNotCardinality`). **NEXT → B1: the quantitative Fano inequality
+  `H(X|Y) ≤ binEntropy ε + ε·log(M−1)` (the main new lemma — heavier; extend `ShannonFano`'s partial content) →
+  B2 accessible ≤ Holevo χ ≤ Q (reuse Donald/HolevoCoarseGraining) → B3 capstone.**

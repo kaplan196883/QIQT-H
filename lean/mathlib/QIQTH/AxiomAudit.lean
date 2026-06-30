@@ -7604,4 +7604,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.modularAut_mul
 -- expected (all 13): standard only [propext, Classical.choice, Quot.sound] — verified via probe before pinning.
 
+-- ── OperationalCapacity (the Holevo–Bekenstein record-capacity bound; OPERATIONAL_CAPACITY_PLAN.md) ──────────
+-- B0 foundation: binary entropy h₂ + the exact (ε=0) count bound M ≤ e^Q (Bekenstein-class, NOT new physics;
+-- never derives the count from the area law — EntropyNotCardinality). Quantitative Fano (B1) + Holevo glue (B2)
+-- are the next increments. Axiom-free (std 3).
+#print axioms QIQTH.OperationalCapacity.exact_record_capacity
+#print axioms QIQTH.OperationalCapacity.binEntropy_nonneg
+
 end QIQTH.AxiomAudit
