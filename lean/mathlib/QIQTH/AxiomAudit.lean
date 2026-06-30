@@ -7470,4 +7470,15 @@ namespace QIQTH.AxiomAudit
 -- chirality/SSB are cited frontiers; bosonic fields necessarily truncated. Std 3. (Completes Track A, A1–A5.)
 #print axioms QIQTH.FreeFieldCorner.sm_free_field_in_corner
 
+-- QG campaign (QG_CAMPAIGN_PLAN.md), Phase A — falsification gate B: the finite Poincaré trace no-go.
+#print axioms QIQTH.QG.trace_commutator
+#print axioms QIQTH.QG.trace_eq_zero_of_boost_relation
+#print axioms QIQTH.QG.no_exact_finite_boost
+-- expected: standard only — ★ GATE B: on a finite-dim space [K,P]=i·H with H ⪰ 0 forces H=0 (trace of a
+-- commutator is 0 ⟹ tr H=0; PosSemidef + trace 0 ⟹ 0, via Matrix.PosSemidef.trace_eq_zero_iff). So an EXACT
+-- finite-region Poincaré algebra has a trivial Hamiltonian — finite capacity carries boosts only approximately.
+-- Honestly bounds QIQT-H's finite modular/spectral claims to the finite-time/low-energy regime (per GPT-5.5-pro
+-- QG audit 2026-06-30). NOT a universal "finite forbids Lorentz" (false — spin chains/QCAs are counterexamples).
+#print axioms QIQTH.QG.no_boost_of_pos_ne_zero
+
 end QIQTH.AxiomAudit
