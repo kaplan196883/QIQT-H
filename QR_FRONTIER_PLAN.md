@@ -1,0 +1,108 @@
+# The distinctive `Q_R` frontier — the max-entropy bridge + the capacity-of-entanglement gap
+
+**Status:** ACTIVE (2026-07-01). **Origin:** the GPT-5.5-pro adversarial scoping consult on QIQT-H's *only*
+genuinely-distinctive open target (a capacity `Q_R` differing from standard generalized entropy
+`S_gen = A/4G + S_bulk`). **Verdict (settled, take as given):**
+
+- **A distinctive `Q_R` cannot be DERIVED** from QIQT-H's own principles. Conditional no-go: given (1) area/JLMS/GSL
+  use the **von Neumann** entropy `S_vN` + relative entropy, (2) the finite **count** is *independent* data not
+  fixed by `S_vN` (`EntropyNotCardinality`), (3) `λ` is **inert** (so it cannot back-react on geometry), any
+  count-based `Q_R` is necessarily *non-geometric bookkeeping*, *standard Rényi/one-shot physics*, or *a new
+  postulate*. Routes (B) einselected-record-count and (D) (Φ,λ)-back-reaction are **dead**; (C) finite-`N` log
+  corrections have no QIQT-H-predicted coefficient.
+- **The one surviving route is an explicit POSTULATE, not a derivation** — the "max-entropy / one-shot" bridge:
+  **gravitational/reconstruction capacity is the smooth max-entropy `H_max^ε` (≈ log-rank, Rényi-0) of the finite
+  Type-I record algebra, NOT `S_vN`.** QIQT-H's finite-**count** layer points naturally at `S_max`, not `S_vN`.
+- **It makes a sharp, falsifiable, distinctive prediction:** `Q_R − S_gen = S_max − S_vN ≥ 0` (the count/entropy
+  gap), governed in the continuum by `Q_R^ε − S_gen ≈ z_ε·√(V_gen) + O(log A)`, where `V_gen = Var(K_gen)` is the
+  **capacity of entanglement** (modular variance, measurable from Rényi data near `n=1`) — showing up as finite-size
+  Page-time / QES-transition shifts in random tensor networks, JT/SYK, finite-dim holographic codes.
+
+**This plan builds the HONEST version of that frontier, in QIQT-H's tractable style:** (1) the conditional no-go
+(derivation is impossible), (2) the finite, classical **count/entropy gap** and the **capacity of entanglement**
+with their key properties, (3) the explicit **max-entropy bridge postulate** + its conditional distinctive
+prediction (the gap), all axiom-free, with the continuum `√V_gen` coefficient and the value of `G` as cited
+frontiers.
+
+**Honest invariants (enforce every increment):** NO `sorry`; `#print axioms` = std-3; budget 0. The bridge is a
+**NEW POSTULATE, NOT a derivation** — never say QIQT-H *derives* a distinctive `Q_R`; the prediction is
+**conditional on the postulate**; never claim nature picks it, never claim QG or the value of `G`; the continuum
+`√V_gen` form and the coefficient are **cited frontiers**; cite `EntropyNotCardinality` as the no-go that forces
+the postulate.
+
+---
+
+## Track A — the honesty guardrail (docs)
+
+State consistently across inventory §2/§9, ledger (row C7/new C8), website (`open-problems`/`theory`), paper §1.1a:
+
+> *Deriving a `Q_R` distinct from standard generalized entropy is **impossible** from QIQT-H's principles
+> (conditional no-go: `S_vN`-area + count-independence + λ-inertness). It is possible **only** by adding the explicit
+> **max-entropy bridge postulate** — gravity's capacity is `S_max` (the finite record **count**), not `S_vN`. That
+> postulate (a new assumption, NOT a derivation) makes the falsifiable prediction `Q_R − S_gen = S_max − S_vN`,
+> governed by the **capacity of entanglement** `√V_gen` — finite-size Page-time/QES shifts. The coefficient and the
+> value of `G` are cited frontiers.*
+
+PASS = every surface states it the same way, with "postulate not derivation" explicit and `EntropyNotCardinality` cited.
+
+---
+
+## Track B — Lean (`QIQTH/MaxEntropyCapacity.lean`)
+
+Finite-dim / classical (work on the eigenvalue/RT **spectrum** `p : ι → ℝ`, a finite probability distribution).
+Reuse `ShannonFano.H` (`= −∑ p log p = S_vN`), `negMulLog`, `vonNeumannEntropy_le_log_card`/`shannon_le_log_card`,
+and the `OperationalCapacity` KL machinery. Each phase an axiom-free green checkpoint.
+
+### B0 — spectrum + the two entropies *(tractable)*
+- `Smax p := Real.log (support card)` (= log-rank = Rényi-0 = the **count** capacity). `Svn := ShannonFano.H univ p`.
+- `gap p := Smax p − Svn p` (the count/entropy gap — the distinctive quantity).
+
+### B1 — `smax_ge_svn` + `gap_nonneg` *(near-free; reuse `shannon_le_log_card`)*
+`Svn p ≤ Smax p` (Shannon ≤ log support), so `gap p ≥ 0`. Equality iff the spectrum is flat (maximally mixed).
+
+### B2 — the conditional no-go `svn_underdetermines_smax` *(the honest negative; mirrors `EntropyNotCardinality`)*
+For any `Q : ℝ` and any `N`, ∃ a spectrum with `Svn = Q` but `Smax` (log-rank) arbitrarily large — i.e. the area
+(which fixes `S_vN` via JLMS) does **NOT** fix the count `S_max`. Hence a count-based `Q_R` is **independent** of
+the geometric `S_gen` and cannot be derived from it. *(Reuse `EntropyNotCardinality.traceEntropy_uniform_weighted`
+or build directly: a near-flat spectrum on `N` points with one tunable atom.)*
+
+### B3 — the capacity of entanglement `V_gen` *(the prediction's quantity; classical variance)*
+- `capEnt p := (∑ p_i (log p_i)²) − (∑ p_i log p_i)²` (= `Var_p(−log p)` = modular variance).
+- `capEnt_nonneg` (variance ≥ 0 — Cauchy–Schwarz / `inner_mul_le_norm`, or `Finset.inner_mul_le_norm`-style).
+- `capEnt_zero_iff_flat` (= 0 iff spectrum flat ⟺ `gap = 0` ⟺ `Svn = Smax`).
+
+### B4 — the bridge postulate + the conditional distinctive prediction *(the payoff)*
+- `class MaxEntropyCapacity` (the **postulate**, a typeclass like `HolographicCapacityBound`, never a Lean axiom):
+  `Q_R = Smax p` — gravity's capacity is the max-entropy/count.
+- `distinctive_gap` (conditional theorem): under `MaxEntropyCapacity`, `Q_R − Sgen = Smax − Svn = gap p ≥ 0`, with
+  `gap = 0 ⟺ capEnt = 0 ⟺ flat`. So the postulate predicts a **strictly positive** capacity gap exactly when the
+  spectrum is non-flat (the generic case) — the finite shadow of the `√V_gen` prediction. Docstring: NEW POSTULATE,
+  conditional, the continuum `√V_gen` coefficient + value of `G` are frontiers.
+
+### B5 — wire-in + audit + point Track-A docs at the built theorems
+`QIQTH.lean` import, `AxiomAudit.lean` pins (std-3), `axiom_budget_check.sh` budget 0; flip the guardrails to the
+theorem names.
+
+PASS = the no-go (`svn_underdetermines_smax`), the gap (`gap_nonneg`), the capacity of entanglement
+(`capEnt_nonneg`/`_zero_iff_flat`), and the conditional `distinctive_gap` all proved axiom-free; docs state
+"postulate not derivation."
+
+---
+
+## Verification (per increment)
+`cd lean/mathlib && ~/.elan/bin/lake build QIQTH.MaxEntropyCapacity` green; `#print axioms` std-3;
+`bash scripts/axiom_budget_check.sh` budget 0; ONE commit per increment with the `Co-Authored-By: Claude Opus 4.8
+<noreply@anthropic.com>` trailer; push via schannel; update the Progress log. Website edits build green (66 pages).
+NO `sorry`. Never claim a *derivation*, QG, the value of `G`, or that nature picks the postulate.
+
+## Honest scale
+B0–B3 are days (finite-dim classical, most pieces exist). B4 is the conditional packaging. The whole thing is the
+**honest distinctive frontier**: it proves derivation is impossible (the no-go), builds the distinctive *quantity*
+(the count/entropy gap = capacity of entanglement), and states the *one postulate* that would make QIQT-H
+distinctive — with its falsifiable prediction — clearly labelled as a postulate, not a result. The continuum
+`√V_gen` coefficient, the value of `G`, and any data comparison stay cited frontiers.
+
+## Progress log
+- **2026-07-01** — plan created from the GPT-5.5-pro distinctive-`Q_R` consult. NEXT → Track A guardrail (cheapest),
+  then Track B bottom-up (B0 spectrum/two-entropies → B1 gap≥0 → B2 the no-go → B3 capacity of entanglement →
+  B4 the bridge postulate + conditional prediction → B5 wire-in).
