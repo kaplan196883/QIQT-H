@@ -27,7 +27,7 @@ misalignments, one commit.
      `A/4G`); **(c)** the value of `G` (carried/open). Register: `AXIOM_CONTRACTS.md` §"Postulate/derivation contract".
   4. **Single outcomes = λ + decoherence, NOT capacity** (H2 retired). Do not say capacity forbids multi-record.
   5. **The Einstein equation is conditional & free-field only.** The CPSUV "escape" is NOT established (~10–20%).
-  6. **Credit what is genuinely strong:** full formal verification (296 files / ~3300 thms, budget 0); the
+  6. **Credit what is genuinely strong:** full formal verification (299 files / ~3300 thms, budget 0); the
      Lieb-concavity/DPI/SSA tower (Mathlib-grade); the unconditional one-particle BW + the OP3b boost-invariant
      measure; the Born reduction. Don't *under*-claim these.
 - Ship one area per iteration; commit + push; update §4 log.
@@ -196,6 +196,18 @@ inventory-backed.
   line-start `theorem|lemma` count = 3,320). Aligned the paper (2 spots) and the ledger (2 spots) **down** to the
   reference figure "~3,300", so the inventory, website, paper, and ledger now all read identically: **296 files /
   ~3,300 theorems / 2,213 `#print axioms` directives / 256 modules / budget 0**.
+- **2026-07-01 — maintenance sync: inventory → paper + website + ledger (scale numbers + the modular-energy bound).**
+  Prompted by an inventory-completeness check that found the inventory had drifted from the live tree (296→299 files;
+  the modular-energy bound B1–B7 under-represented). After refreshing the inventory (`ModularEnergyBound` §4 entry;
+  299 files; ~2,263 pins), re-synced the downstream surfaces to it: **(1) scale numbers** — `296 files → 299`,
+  `2,213 directives → 2,263`, `256 modules → 259` (`~3,300` theorems unchanged) in the **paper** (abstract L16 +
+  §11.4 banner L1220), **website** (`formalization` scale line), and **ledger** (rows A3 + audit-scale bullet); all
+  four surfaces + inventory again read identically **299 / ~3,300 / 2,263 / 259 / budget 0**. **(2)** Added the
+  **free-field modular-energy bound** (`ModularEnergyBound` — Umegaki/Casini/first-law/rigidity, `ΔS ≤ 2π Δ⟨B_boost⟩`
+  via BW; formalized modular QFT, NOT an `A/4G` derivation) to the paper's formal-verification content list (it was
+  in §1.1a + the website `formalization` table but missing from the abstract's verified-content enumeration). Website
+  builds green (66 pages). PASS = paper/site/ledger scale numbers match the refreshed inventory; the modular-energy
+  bound is credited on every surface.
 - **2026-06-30 — maintenance (A2): fix the "what is postulated" conflation on the explainer pages.** Prompted by a
   live correction (the postulate is *finiteness*, NOT the holographic bound — P4-MICRO). The homepage
   (`index.astro`) was already correct (lines 53/132/165/219/311: "postulate is finiteness only; the area form
