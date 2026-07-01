@@ -7689,6 +7689,13 @@ namespace QIQTH.AxiomAudit
 -- B6': the BW boost-energy form finiteCorner_wedge_saturation_BW — ΔS = 2π Δ⟨K_boost⟩ ⟺ ρ = σ. Both axiom-free.
 #print axioms QIQTH.ModularEnergyBound.modular_casini_saturation
 #print axioms QIQTH.ModularEnergyBound.finiteCorner_wedge_saturation_BW
+-- B7 (campaign capstone): B7a finiteCorner_wedge_BW_deficit_eq_relEntropy — the exact deficit 2π Δ⟨K_boost⟩ − ΔS
+-- = D(ρ‖σ); B7b finiteCorner_wedge_Casini_BW_strict — strict bound ΔS < 2π Δ⟨K_boost⟩ off the reference; and
+-- freeField_modularEnergyBound_finiteCorner_BW — the bundled citable statement (bound ∧ exact-deficit ∧ rigidity).
+-- Formalized modular free-field QFT; NOT a derivation of A/4G. All axiom-free (std 3).
+#print axioms QIQTH.ModularEnergyBound.finiteCorner_wedge_BW_deficit_eq_relEntropy
+#print axioms QIQTH.ModularEnergyBound.finiteCorner_wedge_Casini_BW_strict
+#print axioms QIQTH.ModularEnergyBound.freeField_modularEnergyBound_finiteCorner_BW
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

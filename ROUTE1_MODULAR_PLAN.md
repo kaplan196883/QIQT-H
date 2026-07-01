@@ -171,3 +171,19 @@ modular QFT — and honestly checkpoints `A/4G` as the gravitational input it is
   axiom-free std-3, pinned, budget 0. This gives the modular-energy bound its **rigidity** companion — the bound
   AND exactly when it is an equality. Formalized modular QFT; no `A/4G`, no gravity. **Track-B tractable rungs now
   fully exhausted** (B1–B6 + B4′ + B6′); only the labelled multi-year cited frontiers remain.
+- **2026-07-01 — B7 ✅ DONE + CAMPAIGN COMPLETE (capstone; tractable surface expert-confirmed exhausted).**
+  Consulted GPT-5.5-pro on whether any tractable in-scope lemma remained: verdict = *substantive surface exhausted*,
+  with one genuinely-useful capstone worth adding (the exact-deficit / bundled citable theorem). Built it:
+  **`finiteCorner_wedge_BW_deficit_eq_relEntropy`** (B7a) — the *exact deficit* `2π·Δ⟨K_boost⟩ − ΔS = D(ρ‖σ)`
+  (the sharpest form: the Unruh-bound slack IS the Umegaki relative entropy); **`finiteCorner_wedge_Casini_BW_strict`**
+  (B7b) — strict bound `ΔS < 2π·Δ⟨K_boost⟩` off the reference (B3 + B6′); and the campaign capstone
+  **`freeField_modularEnergyBound_finiteCorner_BW`** — a single citable statement bundling *bound ∧ exact-deficit ∧
+  rigidity*. All axiom-free std-3, pinned, budget 0; capstone surfaced on the website `formalization` page (green,
+  66 pages). **THE CAMPAIGN IS COMPLETE.** The free-field modular-energy bound is a fully machine-checked, axiom-free
+  theorem set — identity (B1) → bound (B2) → BW/Unruh rewrite (B3) → first law, stationarity + explicit (B4, B4′) →
+  rigidity (B6, B6′) → exact-deficit + bundled capstone (B7) — upgrading `Phase5Master`'s modular pieces from a
+  carried hypothesis to derived results. Honest deliverable: **formalized modular free-field QFT, NOT a derivation
+  of the holographic `A/4G` bound**. The `A/4G`/area identification stays a gravitational input; the labelled
+  multi-year cited frontiers (Fock lift of one-particle BW, clock-dressed product-standard-subspace split, continuum
+  Type III₁→II crossed-product dual-weight trace where `A/4G` lives) are the only remaining work and are OUT of this
+  campaign's scope. **Next ROUTE1 fires: no tractable in-scope item remains — the honest state is CHECKPOINTED COMPLETE.**

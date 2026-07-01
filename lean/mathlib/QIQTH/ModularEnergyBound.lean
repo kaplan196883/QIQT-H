@@ -194,5 +194,53 @@ theorem finiteCorner_wedge_saturation_BW {ρ σ : Matrix n n ℂ} (hρ : ρ.PosD
     modEnergy_of_BW hρd hσ.1 Kboost c hBW, modEnergy_of_BW hσd hσ.1 Kboost c hBW]
   constructor <;> intro h <;> linarith
 
+/-- **B7a — the deficit is exactly the relative entropy.** Under the BW identification, the *deficit* in the Unruh
+    bound — boost-modular-energy variation minus entropy variation — is **precisely** the Umegaki relative entropy
+    `D(ρ‖σ)`: `2π·Δ⟨K_boost⟩ − ΔS = D(ρ‖σ)`. (Combined with `relEntropy_nonneg` this re-proves B3; combined with
+    faithfulness it re-proves B6′. The exact-equality form is the sharpest statement of the modular-energy bound.)
+    Formalized modular QFT; no `A/4G`, no gravity. -/
+theorem finiteCorner_wedge_BW_deficit_eq_relEntropy {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDef)
+    (hρd : IsDensity ρ) (hσd : IsDensity σ) (Kboost : Matrix n n ℂ) (c : ℝ)
+    (hBW : modHam hσ.1 = (2 * Real.pi) • Kboost + c • (1 : Matrix n n ℂ)) :
+    2 * Real.pi * (boostEnergy ρ Kboost - boostEnergy σ Kboost)
+      - (vonNeumannEntropy hρd - vonNeumannEntropy hσd) = relEntropy hρ.1 hσ.1 := by
+  have hid := modular_relEnt_identity hρ hσ hρd hσd
+  rw [modEnergy_of_BW hρd hσ.1 Kboost c hBW, modEnergy_of_BW hσd hσ.1 Kboost c hBW] at hid
+  rw [hid]; ring
+
+/-- **B7b — strict bound off the reference.** For `ρ ≠ σ` the Unruh bound is **strict**:
+    `ΔS < 2π·Δ⟨K_boost⟩` (immediate from the Casini bound B3 + the saturation rigidity B6′). -/
+theorem finiteCorner_wedge_Casini_BW_strict {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDef)
+    (hρd : IsDensity ρ) (hσd : IsDensity σ) (Kboost : Matrix n n ℂ) (c : ℝ)
+    (hBW : modHam hσ.1 = (2 * Real.pi) • Kboost + c • (1 : Matrix n n ℂ)) (hne : ρ ≠ σ) :
+    vonNeumannEntropy hρd - vonNeumannEntropy hσd
+      < 2 * Real.pi * (boostEnergy ρ Kboost - boostEnergy σ Kboost) := by
+  have hle := finiteCorner_wedge_Casini_BW hρ hσ hρd hσd Kboost c hBW
+  have hne' : vonNeumannEntropy hρd - vonNeumannEntropy hσd
+      ≠ 2 * Real.pi * (boostEnergy ρ Kboost - boostEnergy σ Kboost) := fun h =>
+    hne ((finiteCorner_wedge_saturation_BW hρ hσ hρd hσd Kboost c hBW).mp h)
+  exact lt_of_le_of_ne hle hne'
+
+/-- **B7 — the free-field modular-energy bound (the campaign capstone).** A single citable statement bundling the
+    whole deliverable for a finite Type-I corner under the Bisognano–Wichmann identification `K_σ = 2π·K_boost + c·1`:
+    (1) the **Unruh bound** `ΔS ≤ 2π·Δ⟨K_boost⟩`; (2) the **exact deficit** `2π·Δ⟨K_boost⟩ − ΔS = D(ρ‖σ)`; and
+    (3) **rigidity** — equality holds iff `ρ = σ`. In words: the entropy increase is bounded by the boost modular
+    energy, the deficit is exactly the Umegaki relative entropy, and the bound is saturated only at the reference
+    vacuum. This is **formalized modular free-field QFT — NOT** a derivation of the holographic `A/4G` bound; the
+    `A/4G`/area identification stays a gravitational input, and the continuum Type III₁→II dual-weight trace where
+    it would live is a multi-year cited frontier. -/
+theorem freeField_modularEnergyBound_finiteCorner_BW {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDef)
+    (hρd : IsDensity ρ) (hσd : IsDensity σ) (Kboost : Matrix n n ℂ) (c : ℝ)
+    (hBW : modHam hσ.1 = (2 * Real.pi) • Kboost + c • (1 : Matrix n n ℂ)) :
+    (vonNeumannEntropy hρd - vonNeumannEntropy hσd
+        ≤ 2 * Real.pi * (boostEnergy ρ Kboost - boostEnergy σ Kboost))
+    ∧ (2 * Real.pi * (boostEnergy ρ Kboost - boostEnergy σ Kboost)
+        - (vonNeumannEntropy hρd - vonNeumannEntropy hσd) = relEntropy hρ.1 hσ.1)
+    ∧ (vonNeumannEntropy hρd - vonNeumannEntropy hσd
+        = 2 * Real.pi * (boostEnergy ρ Kboost - boostEnergy σ Kboost) ↔ ρ = σ) :=
+  ⟨finiteCorner_wedge_Casini_BW hρ hσ hρd hσd Kboost c hBW,
+   finiteCorner_wedge_BW_deficit_eq_relEntropy hρ hσ hρd hσd Kboost c hBW,
+   finiteCorner_wedge_saturation_BW hρ hσ hρd hσd Kboost c hBW⟩
+
 end ModularEnergyBound
 end QIQTH

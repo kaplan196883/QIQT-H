@@ -64,6 +64,9 @@ $K_\sigma = 2\pi B_{\rm boost}$ is the Unruh bound $\Delta S \le 2\pi\,\Delta\la
 | `modular_casini_bound` | $S(\rho)-S(\sigma) \le \langle K_\sigma\rangle_\rho-\langle K_\sigma\rangle_\sigma$ (from Klein positivity) |
 | `finiteCorner_wedge_Casini_BW` | with $K_\sigma=2\pi K_{\rm boost}+c$ (BW identification, **explicit** hypothesis): $\Delta S \le 2\pi\,\Delta\langle K_{\rm boost}\rangle$ |
 | `finiteCorner_firstLaw` | the first law $\delta S = \delta\langle K_\sigma\rangle$ at the reference (relative-entropy stationarity) |
+| `finiteCorner_firstLaw_boostEnergy` | the explicit first law $\delta S = 2\pi\,\delta\langle K_{\rm boost}\rangle$ |
+| `finiteCorner_wedge_saturation_BW` | **rigidity**: $\Delta S = 2\pi\,\Delta\langle K_{\rm boost}\rangle \iff \rho=\sigma$ (tight only at the reference) |
+| `freeField_modularEnergyBound_finiteCorner_BW` | **capstone**: bound $\wedge$ exact deficit $2\pi\Delta\langle K_{\rm boost}\rangle-\Delta S=D(\rho\Vert\sigma)$ $\wedge$ rigidity |
 
 This upgrades the *modular* pieces of the carried `Phase5Master` hypothesis from an assumption to derived
 results. It is **formalized modular QFT — not a derivation of the holographic $A/4G$ bound**; the continuum
