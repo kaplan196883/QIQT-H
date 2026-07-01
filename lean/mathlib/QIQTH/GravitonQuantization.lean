@@ -139,6 +139,30 @@ theorem hamiltonian_one_particle (ω : ℂ) (i : Fin 2) : hamiltonian ω (X i) =
   simp only [hamiltonian, totalNumber, LinearMap.smul_apply, LinearMap.add_apply, LinearMap.id_apply]
   fin_cases i <;> simp [numberOp_one_particle] <;> module
 
+/-! ### Q4 — helicity as the little-group charge (tying the occupation to the kinematic spin-2) -/
+
+/-- The **helicity operator** `J = 2(N₀ − N₁)` — the rotation charge about the propagation axis. Mode `0` (`e₊`)
+    carries helicity `+2`, mode `1` (`e₋`) carries helicity `−2` — the massless little-group labelling of the
+    quantized graviton, matching the kinematic helicity-±2 eigenstates of `EmergentDynamics` (`eR_helicity`/
+    `eL_helicity`). -/
+def helicityOp : Fock →ₗ[ℂ] Fock := (2 : ℂ) • (numberOp 0 - numberOp 1)
+
+/-- **A mode-0 graviton has helicity +2** `J|1₀⟩ = +2|1₀⟩` — the quantized realization of the spin-2 polarization
+    `e₊` (helicity +2). -/
+theorem helicityOp_plus : helicityOp (X 0) = (2 : ℂ) • (X 0) := by
+  simp only [helicityOp, LinearMap.smul_apply, LinearMap.sub_apply]
+  simp [numberOp_one_particle]
+
+/-- **A mode-1 graviton has helicity −2** `J|1₁⟩ = −2|1₁⟩` — the quantized realization of `e₋` (helicity −2).
+    Together with `helicityOp_plus`, the one-graviton states are exactly the helicity ±2 quanta. -/
+theorem helicityOp_minus : helicityOp (X 1) = (-2 : ℂ) • (X 1) := by
+  simp only [helicityOp, LinearMap.smul_apply, LinearMap.sub_apply]
+  simp [numberOp_one_particle]
+
+/-- **The vacuum carries zero helicity** `J|0⟩ = 0`. -/
+theorem helicityOp_vacuum : helicityOp (1 : Fock) = 0 := by
+  simp [helicityOp, numberOp_vacuum, LinearMap.smul_apply, LinearMap.sub_apply]
+
 end
 
 end QIQTH.GravitonQuant

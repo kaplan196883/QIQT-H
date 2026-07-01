@@ -29,9 +29,10 @@ on an actual field. The quantization core is now started.
   **`hamiltonian_vacuum`** `H|0⟩=ω|0⟩` (the graviton **zero-point energy** ω), **`hamiltonian_one_particle`**
   `H|1_i⟩=2ω|1_i⟩` (one quantum ω above zero-point). All [AF] std-3, pinned, budget 0. (Full monomial spectrum
   `H|m,n⟩=ω(m+n+1)|m,n⟩` = a follow-on.)
-- [ ] **Q4 — helicity as the little-group charge.** Wire the mode labels to the G11a helicity eigenstates `e_±`:
-  the helicity operator `J = 2(N₀ − N₁)` gives a one-graviton state helicity `±2` (eigenvalue on `|1_i⟩`), tying the
-  quantized occupation to the kinematic spin-2.
+- [x] **Q4 — helicity as the little-group charge ✅.** `helicityOp = 2(N₀ − N₁)`; **`helicityOp_plus`** `J|1₀⟩=+2|1₀⟩`
+  (mode 0 = `e₊`, helicity +2), **`helicityOp_minus`** `J|1₁⟩=−2|1₁⟩` (mode 1 = `e₋`, helicity −2),
+  `helicityOp_vacuum` `J|0⟩=0`. Ties the quantized occupation to the kinematic helicity-±2 eigenstates
+  (`EmergentDynamics` `eR`/`eL_helicity`). All [AF] std-3, pinned, budget 0.
 - [ ] **Q5 — coherent states / the classical limit.** Coherent states `e^{αa†}|0⟩` as eigenstates of `a`; the
   classical graviton wave (G11c) recovered as the coherent-state expectation — the field→classical bridge.
 - [ ] **Q6 — multi-mode: the momentum continuum (frontier scoping).** Index the CCR by momentum `k` (add `X_{k,λ}`),
@@ -53,3 +54,5 @@ interacting; NOT a claim of quantum gravity (this is standard free-field QFT, ma
   `N_i|n_i⟩=n|n_i⟩` (spectrum ℕ); vacuum/one-particle occupation. All [AF] std-3, budget 0.
 - **2026-07-02 — Q3 ✅** the Hamiltonian `H=ω(N₀+N₁+1)`; the graviton zero-point energy `H|0⟩=ω|0⟩` and the
   one-graviton energy `H|1_i⟩=2ω|1_i⟩`. All [AF] std-3, budget 0.
+- **2026-07-02 — Q4 ✅** the helicity operator `J=2(N₀−N₁)`; one-graviton states carry helicity `±2`
+  (`J|1₀⟩=+2|1₀⟩`, `J|1₁⟩=−2|1₁⟩`), tying the occupation to the kinematic spin-2. All [AF] std-3, budget 0.

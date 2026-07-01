@@ -268,8 +268,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **`number_one_particle`** `N_i|1_j⟩=δ_ij|1_i⟩` (the number operator `N_i=a†_i a_i` counts occupation). ⚠ **Free
   graviton, single momentum mode** — the exact operator content of the quantized graviton's polarization d.o.f. as a
   genuine Fock rep of the CCR; the full momentum-space field `h_{μν}(x)=∑_λ∫(a_λ(k)e^λe^{ikx}+h.c.)` and interactions
-  are additive extensions of this same CCR core (Q2–Q6 in the plan). Standard free-field QFT, machine-checked — NOT a
-  claim of quantum gravity.
+  are additive extensions of this same CCR core (Q5–Q6 in the plan). **Q2** — the number operator `N_i=a†_i a_i`
+  (`numberOp`) with occupation eigenstates `X_i^n=|n_i⟩`, `numberOp_pow` (`N_i|n_i⟩=n|n_i⟩`, spectrum ℕ),
+  `numberOp_vacuum`/`numberOp_one_particle`. **Q3** — the Hamiltonian `H=ω(N₀+N₁+1)` (`hamiltonian`), the graviton
+  **zero-point energy** `hamiltonian_vacuum` (`H|0⟩=ω|0⟩`) and one-graviton energy `hamiltonian_one_particle`
+  (`H|1_i⟩=2ω|1_i⟩`). **Q4** — the **helicity operator** `J=2(N₀−N₁)` (`helicityOp`): `helicityOp_plus`/`_minus`
+  give one-graviton helicity `±2`, tying the quantized occupation to the kinematic spin-2 eigenstates. Standard
+  free-field QFT, machine-checked — NOT a claim of quantum gravity.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

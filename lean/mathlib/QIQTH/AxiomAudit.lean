@@ -7857,6 +7857,12 @@ namespace QIQTH.AxiomAudit
 -- graviton = one quantum ω above zero-point). Free graviton, single mode. Std 3.
 #print axioms QIQTH.GravitonQuant.hamiltonian_vacuum
 #print axioms QIQTH.GravitonQuant.hamiltonian_one_particle
+-- G-QUANT Q4: HELICITY as the little-group charge J = 2(N₀−N₁). helicityOp_plus J|1₀⟩=+2|1₀⟩ (mode 0 = e₊,
+-- helicity +2), helicityOp_minus J|1₁⟩=−2|1₁⟩ (mode 1 = e₋, helicity −2), helicityOp_vacuum J|0⟩=0. Ties the
+-- quantized occupation to the KINEMATIC helicity-±2 eigenstates (EmergentDynamics eR/eL_helicity). Std 3.
+#print axioms QIQTH.GravitonQuant.helicityOp_plus
+#print axioms QIQTH.GravitonQuant.helicityOp_minus
+#print axioms QIQTH.GravitonQuant.helicityOp_vacuum
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
