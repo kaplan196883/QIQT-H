@@ -93,4 +93,34 @@ theorem area_law_saturation (S : ScreenCut ι) (G : ℝ)
   rw [Finset.sum_div]
   exact Finset.sum_congr rfl hsat
 
+/-- **S1d — the min-cut (RT-flavored) area law.** A region's encodable capacity `capR` is bounded by *every* screen
+    that separates it (each cut is an upper bound, `capR ≤ codeCap (S k)`). Given a nonempty finite family of such
+    packing-satisfying cuts, `capR` is bounded by the **minimum** area over the family:
+    `capR ≤ min_k screenArea(S k)/(4G)` — the Ryu–Takayanagi-style min-cut bound (the honest easy half). The screen
+    family is **supplied/fixed** (NOT background-independent); this is a kinematic bound, not gravity. -/
+theorem mincut_area_law {κ : Type*} {F : Finset κ} (hF : F.Nonempty) (S : κ → ScreenCut ι)
+    (G : ℝ) (hG : 0 < G) (capR : ℝ)
+    (hpack : ∀ k ∈ F, Packing (S k) G)
+    (hbound : ∀ k ∈ F, capR ≤ codeCap (S k)) :
+    capR ≤ F.inf' hF (fun k => screenArea (S k) / (4 * G)) := by
+  rw [Finset.le_inf'_iff]
+  intro k hk
+  exact le_trans (hbound k hk) (area_law_of_packing (S k) G hG (hpack k hk))
+
+/-- **Area additivity (disjoint screens).** For screens sharing the area-weight assignment, the area charge is
+    additive over a disjoint union of their links: `screenArea (A ⊔ B) = screenArea A + screenArea B`. -/
+theorem screenArea_union_of_disjoint [DecidableEq ι] (S T : ScreenCut ι) (hwt : S.areaWt = T.areaWt)
+    (hdisj : Disjoint S.links T.links) :
+    (∑ e ∈ (S.links ∪ T.links), S.areaWt e) = screenArea S + screenArea T := by
+  unfold screenArea
+  rw [Finset.sum_union hdisj, hwt]
+
+/-- **Area monotonicity.** A larger screen carries at least as much area charge: if two screens share the
+    area-weight assignment and `S.links ⊆ T.links`, then `screenArea S ≤ screenArea T`. -/
+theorem screenArea_le_of_subset (S T : ScreenCut ι) (hwt : S.areaWt = T.areaWt)
+    (hsub : S.links ⊆ T.links) : screenArea S ≤ screenArea T := by
+  unfold screenArea
+  rw [hwt]
+  exact Finset.sum_le_sum_of_subset_of_nonneg hsub (fun e _ _ => T.areaWt_nonneg e)
+
 end QIQTH.ScreenCode

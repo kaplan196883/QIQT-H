@@ -7723,6 +7723,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ScreenCode.area_dim_independent
 #print axioms QIQTH.ScreenCode.area_law_of_packing
 #print axioms QIQTH.ScreenCode.area_law_saturation
+-- S1d: the RT-flavored min-cut bound + area additivity/monotonicity. mincut_area_law: a region capacity bounded by
+-- EVERY separating cut is bounded by the MIN area over a nonempty cut family (capR ≤ min_k screenArea/4G) -- the
+-- easy half of RT; the screen family is FIXED/supplied (not background-independent). screenArea_union_of_disjoint
+-- (additive over disjoint links), screenArea_le_of_subset (monotone). Still a toy kinematic interface, NOT gravity.
+#print axioms QIQTH.ScreenCode.mincut_area_law
+#print axioms QIQTH.ScreenCode.screenArea_union_of_disjoint
+#print axioms QIQTH.ScreenCode.screenArea_le_of_subset
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

@@ -122,3 +122,12 @@ weeks, and by construction does **not** close the mechanism gap — it delivers 
   gravitons/background-independence/non-circular-`G` cited as untouched frontiers. Inventory entry added.
   **NEXT → S1d** (min-cut over a family of cuts / area additivity — explicit-family or two-cut case if the general
   min-cut is heavy) → **S1e** (finish audit polish).
+- **2026-07-01 — S1d ✅ DONE** ([AF] std-3, pinned, budget 0). The min-cut / RT-flavored bound and area algebra:
+  **`mincut_area_law`** — a region capacity `capR` bounded by *every* separating cut (`capR ≤ codeCap (S k)`) is
+  bounded by the **minimum** area over a nonempty finite cut family, `capR ≤ min_k screenArea(S k)/(4G)` (indexed
+  by `κ` to avoid `DecidableEq (ScreenCut)`; via `Finset.le_inf'_iff` + `area_law_of_packing`) — the easy half of
+  Ryu–Takayanagi; the cut family is **supplied/fixed** (NOT background-independent). **`screenArea_union_of_disjoint`**
+  (area charge additive over disjoint link-sets) and **`screenArea_le_of_subset`** (a larger screen carries ≥ area).
+  Still a toy kinematic interface, NOT gravity. **NEXT → S1e** (audit polish — the wiring is already done: `QIQTH.lean`
+  import + `AxiomAudit` pins present for S1a–S1d; S1e is any residual inventory/plan tidy, then the plan's tractable
+  toy surface is exhausted and the frontiers stay cited).
