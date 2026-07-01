@@ -118,6 +118,27 @@ theorem numberOp_one_particle (i j : Fin 2) :
   · have hji : j ≠ i := fun h' => h h'.symm
     simp [numberOp_apply, MvPolynomial.pderiv_X, h, hji]
 
+/-! ### Q3 — the Hamiltonian and the graviton zero-point energy -/
+
+/-- The **total number operator** `N = N₀ + N₁` — the total graviton occupation of the mode. -/
+def totalNumber : Fock →ₗ[ℂ] Fock := numberOp 0 + numberOp 1
+
+/-- The **Hamiltonian** `H = ω(N₀ + N₁ + 1)` of the free graviton mode (`ω` the frequency; the `+1` is the two
+    helicity oscillators' zero-point energy `½+½`). -/
+def hamiltonian (ω : ℂ) : Fock →ₗ[ℂ] Fock := ω • (totalNumber + LinearMap.id)
+
+/-- **The graviton zero-point energy** `H|0⟩ = ω|0⟩`: the vacuum is an eigenstate of `H` with energy `ω` (the
+    irreducible zero-point energy of the two helicity oscillators). -/
+theorem hamiltonian_vacuum (ω : ℂ) : hamiltonian ω (1 : Fock) = ω • (1 : Fock) := by
+  simp [hamiltonian, totalNumber, numberOp_vacuum, LinearMap.add_apply, LinearMap.id_apply,
+    LinearMap.smul_apply]
+
+/-- **A one-graviton state has energy `2ω`** `H|1_i⟩ = 2ω|1_i⟩` — one quantum of energy `ω` above the zero-point
+    `ω`. Combined with `hamiltonian_vacuum`, the spectrum climbs by `ω` per graviton. -/
+theorem hamiltonian_one_particle (ω : ℂ) (i : Fin 2) : hamiltonian ω (X i) = (2 * ω) • (X i) := by
+  simp only [hamiltonian, totalNumber, LinearMap.smul_apply, LinearMap.add_apply, LinearMap.id_apply]
+  fin_cases i <;> simp [numberOp_one_particle] <;> module
+
 end
 
 end QIQTH.GravitonQuant

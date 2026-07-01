@@ -7852,6 +7852,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GravitonQuant.numberOp_pow
 #print axioms QIQTH.GravitonQuant.numberOp_vacuum
 #print axioms QIQTH.GravitonQuant.numberOp_one_particle
+-- G-QUANT Q3: the HAMILTONIAN H = ω(N₀+N₁+1) and the graviton ZERO-POINT ENERGY. hamiltonian_vacuum H|0⟩=ω|0⟩ (the
+-- irreducible zero-point energy ω of the two helicity oscillators); hamiltonian_one_particle H|1_i⟩=2ω|1_i⟩ (one
+-- graviton = one quantum ω above zero-point). Free graviton, single mode. Std 3.
+#print axioms QIQTH.GravitonQuant.hamiltonian_vacuum
+#print axioms QIQTH.GravitonQuant.hamiltonian_one_particle
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

@@ -25,8 +25,10 @@ on an actual field. The quantization core is now started.
   `numberOp_apply` (`N_i p = X_i·∂_i p`); **`numberOp_pow`** — the monomials `X_i^n = |n_i⟩` diagonalize `N_i` with
   eigenvalue `n` (`N_i|n_i⟩ = n|n_i⟩`, spectrum = ℕ = bosonic occupation); `numberOp_vacuum` (`N_i|0⟩=0`),
   `numberOp_one_particle` (`N_i|1_j⟩=δ_ij|1_i⟩`). All [AF] std-3, pinned, budget 0.
-- [ ] **Q3 — the Hamiltonian + zero-point energy.** `H = ω(N₀ + N₁ + 1)` on the mode; `H|m,n⟩ = ω(m+n+1)|m,n⟩`;
-  the vacuum energy `ω` (the graviton zero-point). Positivity of `H`.
+- [x] **Q3 — the Hamiltonian + zero-point energy ✅.** `totalNumber = N₀+N₁`; `hamiltonian ω = ω•(N₀+N₁+1)`;
+  **`hamiltonian_vacuum`** `H|0⟩=ω|0⟩` (the graviton **zero-point energy** ω), **`hamiltonian_one_particle`**
+  `H|1_i⟩=2ω|1_i⟩` (one quantum ω above zero-point). All [AF] std-3, pinned, budget 0. (Full monomial spectrum
+  `H|m,n⟩=ω(m+n+1)|m,n⟩` = a follow-on.)
 - [ ] **Q4 — helicity as the little-group charge.** Wire the mode labels to the G11a helicity eigenstates `e_±`:
   the helicity operator `J = 2(N₀ − N₁)` gives a one-graviton state helicity `±2` (eigenvalue on `|1_i⟩`), tying the
   quantized occupation to the kinematic spin-2.
@@ -49,3 +51,5 @@ interacting; NOT a claim of quantum gravity (this is standard free-field QFT, ma
   quantization of the free graviton's polarization d.o.f. All [AF] std-3, budget 0.
 - **2026-07-02 — Q2 ✅** the number operator `N_i=a†_i a_i`; the occupation eigenstates `X_i^n=|n_i⟩` with
   `N_i|n_i⟩=n|n_i⟩` (spectrum ℕ); vacuum/one-particle occupation. All [AF] std-3, budget 0.
+- **2026-07-02 — Q3 ✅** the Hamiltonian `H=ω(N₀+N₁+1)`; the graviton zero-point energy `H|0⟩=ω|0⟩` and the
+  one-graviton energy `H|1_i⟩=2ω|1_i⟩`. All [AF] std-3, budget 0.
