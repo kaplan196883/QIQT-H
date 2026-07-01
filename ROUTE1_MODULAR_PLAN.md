@@ -125,3 +125,16 @@ modular QFT — and honestly checkpoints `A/4G` as the gravitational input it is
   does NOT preserve BW flow — the modular-invariant-corner caveat lives there, not silently). Axiom-free std-3,
   pinned, budget 0. **NEXT → B4 `finiteCorner_wedge_firstLaw_BW` (differentiate `S(ρ_t)` at `ρ_0=σ`, traceless
   perturbation ⟹ `δS = 2π⟨δρ·K_boost⟩`) → finish Track A (website/ledger) → B5 wire-in.**
+- **2026-07-01 — B4 ✅ DONE** (the entanglement first law). Built **`finiteCorner_firstLaw`**: along any
+  differentiable family of states `ρ_t` through the reference `ρ_0`, the relative entropy `D(ρ_t‖ρ_0)` is
+  **stationary** at `t=0` (`D' = 0`). The honest, tractable form: rather than differentiate the von Neumann
+  entropy directly (eigenvalue perturbation — genuinely hard), use that `D(ρ_t‖ρ_0) ≥ 0 = D(ρ_0‖ρ_0)` makes
+  `t=0` a minimum, so a differentiable function's derivative vanishes there (`IsLocalMin.hasDerivAt_eq_zero`).
+  Since `D = ⟨K_σ⟩ − S` (B1), that stationarity **IS** the first law `δS = δ⟨K_σ⟩` — the entropy variation
+  equals the modular-energy variation at the reference (with BW, `δS = 2π δ⟨K_boost⟩`). The differentiability
+  of `D` is the analytic input, carried as an explicit hypothesis. Axiom-free std-3, pinned, budget 0.
+  **The four mathematical rungs B1–B4 are now all theorems** — the free-field modular-energy chain (Umegaki
+  identity → Casini bound → BW rewrite → first law) is fully machine-checked, upgrading `Phase5Master`'s modular
+  pieces from a carried hypothesis to derived results. Formalized modular QFT; NO `A/4G`, no gravity, no `G`.
+  **NEXT → B5 finish: point Track-A docs (website `open-problems`/`formalization`, ledger) at the built theorems
+  (QIQTH.lean import + AxiomAudit pins already done for B1–B4).**

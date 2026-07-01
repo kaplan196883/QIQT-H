@@ -7675,6 +7675,10 @@ namespace QIQTH.AxiomAudit
 -- variation is bounded by the boost energy: ΔS ≤ 2π Δ⟨K_boost⟩ (the Unruh 2π). Formalized modular QFT; the A/4G
 -- identification of the boost expectation with a geometric area is a gravitational input, not derived. Std 3.
 #print axioms QIQTH.ModularEnergyBound.finiteCorner_wedge_Casini_BW
+-- B4: the entanglement first law finiteCorner_firstLaw — D(ρ_t‖ρ_0) is stationary at t=0 (min at the reference),
+-- which IS δS = δ⟨K_σ⟩ (since D = ⟨K_σ⟩ − S); with BW, δS = 2π δ⟨K_boost⟩. The differentiability of D is carried
+-- as an explicit analytic hypothesis. Formalized modular QFT; no A/4G, no gravity. Axiom-free (std 3).
+#print axioms QIQTH.ModularEnergyBound.finiteCorner_firstLaw
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

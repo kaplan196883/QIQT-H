@@ -27,6 +27,7 @@
 -/
 
 import QIQTH.QuantumRelativeEntropy
+import Mathlib.Analysis.Calculus.LocalExtr.Basic
 import Mathlib.Tactic
 
 namespace QIQTH
@@ -109,6 +110,25 @@ theorem finiteCorner_wedge_Casini_BW {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) 
   have hcasini := modular_casini_bound hρ hσ hρd hσd
   rw [modEnergy_of_BW hρd hσ.1 Kboost c hBW, modEnergy_of_BW hσd hσ.1 Kboost c hBW] at hcasini
   linarith [hcasini]
+
+/-- **B4 — the entanglement first law (relative-entropy stationarity).** Along any differentiable family of
+    states `ρ_t` through the reference `ρ_0` (`ρ_0` being the modular reference `σ`), the relative entropy
+    `D(ρ_t‖ρ_0)` is **stationary** at `t = 0`: its derivative vanishes. Since `D = ⟨K_σ⟩ − S` (B1,
+    `modular_relEnt_identity`), this vanishing **is** the entanglement first law `δS = δ⟨K_σ⟩` — the entropy
+    variation equals the modular-energy variation at the reference (and, with the BW identification `K_σ =
+    2π K_boost + c`, `δS = 2π δ⟨K_boost⟩`). Proof: `D(ρ_t‖ρ_0) ≥ 0 = D(ρ_0‖ρ_0)`, so `t = 0` is a minimum, and a
+    differentiable function's derivative vanishes at a minimum. The differentiability of `D` is the analytic
+    input, carried as an explicit hypothesis. Formalized modular QFT — no `A/4G`, no gravity. -/
+theorem finiteCorner_firstLaw {ρt : ℝ → Matrix n n ℂ} {D' : ℝ}
+    (hρt : ∀ t, (ρt t).PosDef) (hρtd : ∀ t, IsDensity (ρt t))
+    (hderiv : HasDerivAt (fun t => relEntropy (hρt t).1 (hρt 0).1) D' 0) :
+    D' = 0 := by
+  have hmin : IsLocalMin (fun t => relEntropy (hρt t).1 (hρt 0).1) 0 := by
+    refine Filter.Eventually.of_forall (fun t => ?_)
+    show relEntropy (hρt 0).1 (hρt 0).1 ≤ relEntropy (hρt t).1 (hρt 0).1
+    rw [relEntropy_self]
+    exact relEntropy_nonneg (hρt t) (hρt 0) (hρtd t).trace_one (hρtd 0).trace_one
+  exact hmin.hasDerivAt_eq_zero hderiv
 
 end ModularEnergyBound
 end QIQTH
