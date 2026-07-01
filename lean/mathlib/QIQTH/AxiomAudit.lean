@@ -7925,6 +7925,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AreaMap.screenArea_eq_bg_add_areaVar
 #print axioms QIQTH.AreaMap.areaVar_ray
 #print axioms QIQTH.AreaMap.area_probes_separate
+-- BRIDGE B2a (BRIDGE_PLAN.md): the SOFT-GRAVITON WARD IDENTITY (the algebraic core of Weinberg 1964-65). The soft
+-- factor S(ε)=∑η_i g_i(p_i·ε·p_i)/(p_i·q) (TAKEN as given — its S-matrix derivation is carried QFT input).
+-- quadForm_gaugeShiftK: the longitudinal shift evaluates as p·(q⊙ξ)·p = 2(p·q)(p·ξ). softFactor_gauge_shift: the
+-- gauge variation is EXACTLY 2ξ·P with P=∑η_i g_i p_i (denominators cancel). soft_gauge_invariant_iff_ward — THE
+-- IFF: longitudinal decoupling (S gauge-invariant ∀ξ) ⟺ the Weinberg sum rule ∑η_i g_i p_i^μ = 0. Universality
+-- (all g_i equal, from momentum conservation + rich family) is B2b. ⚠ Algebraic identity only; NOT the analytic
+-- soft theorem. Std 3.
+#print axioms QIQTH.SoftGraviton.quadForm_gaugeShiftK
+#print axioms QIQTH.SoftGraviton.softFactor_gauge_shift
+#print axioms QIQTH.SoftGraviton.ward_of_gauge_invariant
+#print axioms QIQTH.SoftGraviton.soft_gauge_invariant_iff_ward
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

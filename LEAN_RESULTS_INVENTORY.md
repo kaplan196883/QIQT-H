@@ -335,6 +335,18 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   G1's separating-family hypothesis **non-vacuous with geometric (area) probes**. ⚠ The map is SUPPLIED (a carried
   hypothesis, never an axiom); deriving it from a substrate = bridge ingredient D; linearized only.
 
+- **The bridge, increment B2a — `QIQTH/SoftGraviton.lean`** (namespace `QIQTH.SoftGraviton`, all **[AF]** std-3;
+  `BRIDGE_PLAN.md`). **The soft-graviton Ward identity** — the algebraic core of Weinberg 1964–65. The soft factor
+  `S(ε) = ∑_i η_i g_i (p_i·ε·p_i)/(p_i·q)` (incoming/outgoing signs `η_i`, couplings `g_i`; TAKEN as given — its
+  S-matrix derivation is carried QFT input). **`quadForm_gaugeShiftK`** — the longitudinal (residual-gauge) shift
+  evaluates as `p·(q⊙ξ)·p = 2(p·q)(p·ξ)`. **`softFactor_gauge_shift`** — the gauge variation of the soft factor
+  is *exactly* `2ξ·P` with `P = ∑_i η_i g_i p_i` (the soft denominators cancel against the longitudinal
+  numerator). **`soft_gauge_invariant_iff_ward`** — **the iff**: longitudinal decoupling (the soft factor is
+  invariant under every residual-gauge shift of the polarization) ⟺ the **Weinberg sum rule** `∑_i η_i g_i p_i^μ
+  = 0`. The consistency of massless spin-2 emission and the weighted-momentum sum rule are the SAME statement.
+  ⚠ Algebraic identity only — NOT the analytic soft theorem; universality (all `g_i` equal ⟸ momentum
+  conservation + a rich scattering family) is B2b.
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

@@ -77,9 +77,13 @@ derived, or background independence.** Every theorem: NO `sorry`; `#print axioms
   (`area_probes_separate`): a symmetric `h` with vanishing area variation at every ray surface is ZERO — area
   probes genuinely reconstruct the perturbation, making G1's separating-family hypothesis **non-vacuous with
   geometric probes**. ⚠ The map is supplied, never derived (deriving it = D); linearized only.
-- [ ] **B2a — the soft Ward identity.** Finite algebraic core: the soft factor `∑_i η_i g_i (p_i·ε·p_i)/(p_i·q)`
-  (incoming/outgoing signs `η_i`); longitudinal decoupling `ε_{μν} → ε_{μν} + q_μξ_ν + q_νξ_μ` forces
-  **`∑_i η_i g_i p_i^μ = 0`**. NOT the full analytic soft theorem — the algebraic identity only.
+- [x] **B2a — the soft Ward identity ✅** (`QIQTH/SoftGraviton.lean`, `QIQTH.SoftGraviton`, all [AF] std-3, wired
+  + pinned, budget 0). The soft factor `S(ε)=∑η_i g_i(p_i·ε·p_i)/(p_i·q)` (TAKEN as given — its S-matrix derivation
+  is carried QFT input). **`quadForm_gaugeShiftK`** — the longitudinal shift evaluates as `p·(q⊙ξ)·p = 2(p·q)(p·ξ)`.
+  **`softFactor_gauge_shift`** — the gauge variation is EXACTLY `2ξ·P`, `P = ∑η_i g_i p_i` (the denominators cancel
+  against the longitudinal numerator). **`soft_gauge_invariant_iff_ward`** — **THE IFF**: longitudinal decoupling
+  (the soft factor gauge-invariant for every `ξ`) ⟺ the Weinberg sum rule `∑_i η_i g_i p_i^μ = 0`. ⚠ Algebraic
+  identity only — NOT the analytic soft theorem; universality (all `g_i` equal) is B2b.
 - [ ] **B2b — universality on connected components.** Given momentum conservation `∑_i η_i p_i^μ = 0` and a
   sufficiently rich connected scattering family (carried hypothesis), `∑_i η_i g_i p_i^μ = 0` at generic momenta
   forces **all `g_i` equal** on each connected species component — the equivalence principle as a finite theorem.
@@ -137,3 +141,8 @@ push via schannel; update this Progress log + `LEAN_RESULTS_INVENTORY.md`. Consu
   probes at all ray surfaces reconstruct a symmetric perturbation — G1's separating-family hypothesis is
   non-vacuous with geometric probes). All [AF] std-3, wired + pinned, budget 0. NEXT → B2a (the soft Ward
   identity).
+- **2026-07-02 — B2a ✅ LANDED** (`SoftGraviton.lean`): the soft-graviton Ward identity — the gauge variation of
+  the soft factor is exactly `2ξ·(∑η_i g_i p_i)` (`softFactor_gauge_shift`, denominators cancel), so longitudinal
+  decoupling ⟺ the Weinberg sum rule `∑η_i g_i p_i^μ = 0` (`soft_gauge_invariant_iff_ward`, an iff). All [AF]
+  std-3, wired + pinned, budget 0. NEXT → B2b (universality on connected components: momentum conservation + a
+  rich scattering family ⟹ all `g_i` equal — the equivalence principle).
