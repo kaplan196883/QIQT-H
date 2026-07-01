@@ -89,6 +89,35 @@ theorem number_one_particle (i j : Fin 2) :
   · have hji : j ≠ i := fun h' => h h'.symm
     simp [creat, annih, MvPolynomial.pderiv_X, h, hji]
 
+/-! ### Q2 — the number operator and its occupation eigenstates -/
+
+/-- The **number operator** `N_i = a†_i a_i` for helicity mode `i` — counts the occupation of that mode. -/
+def numberOp (i : Fin 2) : Fock →ₗ[ℂ] Fock := creat i ∘ₗ annih i
+
+/-- The number operator acts as `N_i p = X_i · ∂_i p`. -/
+theorem numberOp_apply (i : Fin 2) (p : Fock) : numberOp i p = (X i : Fock) * pderiv i p := rfl
+
+/-- **The occupation eigenstates** `X_i^n = |n_i⟩` diagonalize the number operator with eigenvalue `n`:
+    `N_i |n_i⟩ = n |n_i⟩`. The spectrum of `N_i` is `ℕ` — bosonic occupation. -/
+theorem numberOp_pow (i : Fin 2) (n : ℕ) :
+    numberOp i (X i ^ n) = (n : Fock) * (X i ^ n) := by
+  rw [numberOp_apply, MvPolynomial.pderiv_pow, MvPolynomial.pderiv_X_self, mul_one]
+  cases n with
+  | zero => simp
+  | succ m => rw [Nat.succ_sub_one]; ring
+
+/-- **The vacuum has zero occupation** `N_i|0⟩ = 0`. -/
+theorem numberOp_vacuum (i : Fin 2) : numberOp i (1 : Fock) = 0 := by
+  rw [numberOp_apply]; simp [annih_vacuum i]
+
+/-- **One-graviton states are occupation-1 eigenstates** `N_i|1_j⟩ = δ_ij|1_i⟩`. -/
+theorem numberOp_one_particle (i j : Fin 2) :
+    numberOp i (X j) = (if i = j then (X i : Fock) else 0) := by
+  by_cases h : i = j
+  · subst j; simp [numberOp_apply, MvPolynomial.pderiv_X]
+  · have hji : j ≠ i := fun h' => h h'.symm
+    simp [numberOp_apply, MvPolynomial.pderiv_X, h, hji]
+
 end
 
 end QIQTH.GravitonQuant

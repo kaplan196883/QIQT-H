@@ -7846,6 +7846,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GravitonQuant.creat_comm
 #print axioms QIQTH.GravitonQuant.annih_vacuum
 #print axioms QIQTH.GravitonQuant.number_one_particle
+-- G-QUANT Q2: the NUMBER OPERATOR N_i = a†_i a_i and its occupation eigenstates. numberOp_pow: N_i|n_i⟩ = n|n_i⟩
+-- (the monomials X_i^n = |n_i⟩ diagonalize N_i, eigenvalue n -- spectrum ℕ, bosonic occupation); numberOp_vacuum
+-- N_i|0⟩=0; numberOp_one_particle N_i|1_j⟩=δ_ij|1_i⟩. Free graviton, single mode. Std 3.
+#print axioms QIQTH.GravitonQuant.numberOp_pow
+#print axioms QIQTH.GravitonQuant.numberOp_vacuum
+#print axioms QIQTH.GravitonQuant.numberOp_one_particle
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

@@ -21,9 +21,10 @@ on an actual field. The quantization core is now started.
   **`annih_vacuum`** `a_i|0⟩=0` (vacuum `|0⟩=1`), **`one_particle_state`** `|1_i⟩=a†_i|0⟩=X_i`,
   **`number_one_particle`** `N_i|1_j⟩=δ_ij|1_i⟩` (the number operator `N_i=a†_i a_i` counts occupation). Helicity
   labels: `0↔e₊` (+2), `1↔e₋` (−2). All [AF] std-3, pinned, budget 0.
-- [ ] **Q2 — the number operator + occupation eigenstates.** `N_i = creat i ∘ annih i` as a `LinearMap`; the
-  monomials `X₀^m X₁^n` (the `|m,n⟩` occupation-number basis) are eigenvectors of `N_i` with eigenvalue `m`/`n`;
-  total number `N = N₀ + N₁`. Spectrum = ℕ (bosonic occupation).
+- [x] **Q2 — the number operator + occupation eigenstates ✅.** `numberOp i = creat i ∘ₗ annih i` (a `LinearMap`),
+  `numberOp_apply` (`N_i p = X_i·∂_i p`); **`numberOp_pow`** — the monomials `X_i^n = |n_i⟩` diagonalize `N_i` with
+  eigenvalue `n` (`N_i|n_i⟩ = n|n_i⟩`, spectrum = ℕ = bosonic occupation); `numberOp_vacuum` (`N_i|0⟩=0`),
+  `numberOp_one_particle` (`N_i|1_j⟩=δ_ij|1_i⟩`). All [AF] std-3, pinned, budget 0.
 - [ ] **Q3 — the Hamiltonian + zero-point energy.** `H = ω(N₀ + N₁ + 1)` on the mode; `H|m,n⟩ = ω(m+n+1)|m,n⟩`;
   the vacuum energy `ω` (the graviton zero-point). Positivity of `H`.
 - [ ] **Q4 — helicity as the little-group charge.** Wire the mode labels to the G11a helicity eigenstates `e_±`:
@@ -46,3 +47,5 @@ interacting; NOT a claim of quantum gravity (this is standard free-field QFT, ma
 ## Progress log
 - **2026-07-02 — Q1 ✅** the two-helicity bosonic CCR algebra on the Bargmann–Fock space; the canonical
   quantization of the free graviton's polarization d.o.f. All [AF] std-3, budget 0.
+- **2026-07-02 — Q2 ✅** the number operator `N_i=a†_i a_i`; the occupation eigenstates `X_i^n=|n_i⟩` with
+  `N_i|n_i⟩=n|n_i⟩` (spectrum ℕ); vacuum/one-particle occupation. All [AF] std-3, budget 0.
