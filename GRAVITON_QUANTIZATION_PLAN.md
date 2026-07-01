@@ -1,0 +1,48 @@
+# Quantizing the free graviton — the campaign
+
+**Goal:** canonically quantize the free linearized graviton, building up from the two-helicity CCR algebra to the
+momentum-space field and its propagator, each increment axiom-free (std-3), budget 0, green, one commit. Reuses the
+kinematics (`EmergentDynamics.lean` G11a/b: the helicity ±2 polarizations `e_±`, the propagator numerator) and the
+classical field EOM (G11c). Honest scope labels stay (free field; single-mode → momentum continuum; classical ≠
+interacting) — but nothing here is postponed as "too hard"; each rung is built.
+
+## Where the graviton is now (verified)
+Classical free graviton COMPLETE in Lean: 2 helicity-±2 polarizations (exactly 2, gauge quotient), spin-2 eigenvalue
+form, masslessness `k²=0`, the propagator numerator (physical-state projector), and the wave equation `∂²_t = ∂²_z`
+on an actual field. The quantization core is now started.
+
+## Increments
+
+- [x] **Q1 — the two-helicity bosonic CCR algebra ✅ (`QIQTH/GravitonQuantization.lean`, `QIQTH.GravitonQuant`).**
+  Canonical quantization of the free graviton at a single momentum mode, realized concretely on the Bargmann–Fock
+  space `Fock = ℂ[X₀,X₁] = MvPolynomial (Fin 2) ℂ` (one variable per helicity): `creat i = (X_i·)` (a†),
+  `annih i = ∂/∂X_i` (a). Proved: **`ccr`** `[a_i,a†_j] = δ_ij` (the defining CCR), **`annih_comm`** `[a_i,a_j]=0`
+  (Clairaut, by MvPolynomial induction — Mathlib has no `pderiv_comm`), **`creat_comm`** `[a†_i,a†_j]=0`,
+  **`annih_vacuum`** `a_i|0⟩=0` (vacuum `|0⟩=1`), **`one_particle_state`** `|1_i⟩=a†_i|0⟩=X_i`,
+  **`number_one_particle`** `N_i|1_j⟩=δ_ij|1_i⟩` (the number operator `N_i=a†_i a_i` counts occupation). Helicity
+  labels: `0↔e₊` (+2), `1↔e₋` (−2). All [AF] std-3, pinned, budget 0.
+- [ ] **Q2 — the number operator + occupation eigenstates.** `N_i = creat i ∘ annih i` as a `LinearMap`; the
+  monomials `X₀^m X₁^n` (the `|m,n⟩` occupation-number basis) are eigenvectors of `N_i` with eigenvalue `m`/`n`;
+  total number `N = N₀ + N₁`. Spectrum = ℕ (bosonic occupation).
+- [ ] **Q3 — the Hamiltonian + zero-point energy.** `H = ω(N₀ + N₁ + 1)` on the mode; `H|m,n⟩ = ω(m+n+1)|m,n⟩`;
+  the vacuum energy `ω` (the graviton zero-point). Positivity of `H`.
+- [ ] **Q4 — helicity as the little-group charge.** Wire the mode labels to the G11a helicity eigenstates `e_±`:
+  the helicity operator `J = 2(N₀ − N₁)` gives a one-graviton state helicity `±2` (eigenvalue on `|1_i⟩`), tying the
+  quantized occupation to the kinematic spin-2.
+- [ ] **Q5 — coherent states / the classical limit.** Coherent states `e^{αa†}|0⟩` as eigenstates of `a`; the
+  classical graviton wave (G11c) recovered as the coherent-state expectation — the field→classical bridge.
+- [ ] **Q6 — multi-mode: the momentum continuum (frontier scoping).** Index the CCR by momentum `k` (add `X_{k,λ}`),
+  the field `h_{μν}(x) = ∑_λ ∫ (a_λ(k) e^λ e^{ikx} + h.c.)`; the two-point function/propagator as a vacuum
+  expectation. Built one mode at a time; the free field is the (restricted) tensor product of single-mode Fock
+  spaces.
+
+## Discipline
+`cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green; `#print axioms` std-3; `bash
+scripts/axiom_budget_check.sh` budget 0; wire into `QIQTH.lean` + `AxiomAudit.lean`; one commit per increment with
+the `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>` trailer; push via schannel; update this checklist +
+`LEAN_RESULTS_INVENTORY.md`. Honest labels: free graviton; single-mode → continuum is additive; classical ≠
+interacting; NOT a claim of quantum gravity (this is standard free-field QFT, machine-checked).
+
+## Progress log
+- **2026-07-02 — Q1 ✅** the two-helicity bosonic CCR algebra on the Bargmann–Fock space; the canonical
+  quantization of the free graviton's polarization d.o.f. All [AF] std-3, budget 0.

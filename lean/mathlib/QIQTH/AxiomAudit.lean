@@ -7836,6 +7836,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GravDyn.graviton_null_wave
 #print axioms QIQTH.GravDyn.graviton_dalembertian_zero
 #print axioms QIQTH.GravDyn.graviton_cos_wave
+-- G-QUANT: CANONICAL QUANTIZATION of the free graviton -- the two-helicity bosonic CCR algebra, realized on the
+-- Bargmann-Fock space ℂ[X0,X1] (a†_i = X_i·, a_i = ∂/∂X_i). ccr [a_i,a†_j]=δ_ij (the DEFINING relation of the
+-- quantized graviton's two helicity oscillators), annih_comm [a_i,a_j]=0, creat_comm [a†_i,a†_j]=0, annih_vacuum
+-- a_i|0⟩=0 (vacuum=1), number_one_particle N_i|1_j⟩=δ_ij|1_i⟩ (occupation). Single-momentum-mode Fock rep. ⚠ Free
+-- graviton, single mode; the full momentum-space field + interactions are additive extensions of this CCR core. Std 3.
+#print axioms QIQTH.GravitonQuant.ccr
+#print axioms QIQTH.GravitonQuant.annih_comm
+#print axioms QIQTH.GravitonQuant.creat_comm
+#print axioms QIQTH.GravitonQuant.annih_vacuum
+#print axioms QIQTH.GravitonQuant.number_one_particle
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

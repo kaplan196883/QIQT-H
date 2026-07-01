@@ -257,6 +257,20 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (G10), `hTkk`, interacting matter, and the numerical `G` are the cited research **frontiers** — this is the honest
   finite skeleton that advances *toward* the mechanism, never a claim of having crossed it.
 
+- **The quantized free graviton — `QIQTH/GravitonQuantization.lean`** (namespace `QIQTH.GravitonQuant`, all **[AF]**
+  std-3; `GRAVITON_QUANTIZATION_PLAN.md`). **Canonical quantization of the free graviton's two helicity modes** as
+  bosonic oscillators, realized concretely on the **Bargmann–Fock space** `Fock = ℂ[X₀,X₁] = MvPolynomial (Fin 2) ℂ`
+  (one variable per helicity; `0↔e₊` helicity +2, `1↔e₋` helicity −2): creation `creat i = (X_i·)` (a†_i),
+  annihilation `annih i = ∂/∂X_i` (a_i). **`ccr`** — the canonical commutation relation `[a_i,a†_j] = δ_ij` (the
+  defining relation, realized as the Bargmann identity `[∂_i, X_j·] = δ_ij`); **`annih_comm`** `[a_i,a_j]=0`
+  (Clairaut, by `MvPolynomial` induction — Mathlib has no `pderiv_comm`); **`creat_comm`** `[a†_i,a†_j]=0`;
+  **`annih_vacuum`** `a_i|0⟩=0` (vacuum `|0⟩=1`); **`one_particle_state`** `|1_i⟩=a†_i|0⟩=X_i`;
+  **`number_one_particle`** `N_i|1_j⟩=δ_ij|1_i⟩` (the number operator `N_i=a†_i a_i` counts occupation). ⚠ **Free
+  graviton, single momentum mode** — the exact operator content of the quantized graviton's polarization d.o.f. as a
+  genuine Fock rep of the CCR; the full momentum-space field `h_{μν}(x)=∑_λ∫(a_λ(k)e^λe^{ikx}+h.c.)` and interactions
+  are additive extensions of this same CCR core (Q2–Q6 in the plan). Standard free-field QFT, machine-checked — NOT a
+  claim of quantum gravity.
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via
