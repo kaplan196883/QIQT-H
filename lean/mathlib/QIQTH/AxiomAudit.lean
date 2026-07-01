@@ -7701,6 +7701,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ModularEnergyBound.finiteCorner_wedge_BW_deficit_eq_relEntropy
 #print axioms QIQTH.ModularEnergyBound.finiteCorner_wedge_Casini_BW_strict
 #print axioms QIQTH.ModularEnergyBound.freeField_modularEnergyBound_finiteCorner_BW
+-- ── InducedNewtonConstant (the granularity-scale reframing; G delivered as an output) ────────────────────────────
+-- Posit a fundamental record-granularity scale Λ_s (a₀=1/Λ_s) as the primitive in place of ℓ_P, and DERIVE G from it
+-- + the species count N via the Sakharov/Dvali species bound 1/G = N Λ_s². inducedG_delivers: G·(N Λ_s²)=1 (G is the
+-- output). inducedG_ratio_is_pure_number: G/a₀² = 1/N (the genuinely-derived DIMENSIONLESS content; Λ_s is the one
+-- carried scale — dimensional necessity). capacity_exponent_in_primitives: A/4G = (A/4)N Λ_s² (capacity in
+-- {area,species,granularity}, no longer presupposing G). inducedG_strictAntitone_in_N: more species ⟹ weaker gravity.
+-- ⚠ Exact algebra [AF]; does NOT compute the numerical value of G (species-coefficient accounting = frontier).
+#print axioms QIQTH.InducedG.inducedG_delivers
+#print axioms QIQTH.InducedG.inducedG_ratio_is_pure_number
+#print axioms QIQTH.InducedG.planckLength_sq_eq_inducedG
+#print axioms QIQTH.InducedG.capacity_exponent_in_primitives
+#print axioms QIQTH.InducedG.inducedG_strictAntitone_in_N
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

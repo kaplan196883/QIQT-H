@@ -171,6 +171,18 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   localization map are cited inputs [frontier]**. `GRFromMicro` header: "P4-MICRO ⟹ GR is FALSE as a standalone
   implication" — the thermal (Unruh/BW) input "a microstate count can never supply."
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
+- **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
+  `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale
+  `Λ_s`** (`a₀=1/Λ_s`) as the primitive *in place of* `ℓ_P`, and DERIVES `G` from it + the species count `N` via the
+  Sakharov/Dvali species bound `1/G = N Λ_s²`: `inducedG_delivers` (`G·(N Λ_s²)=1` — `G` is the output),
+  `planckLength_sq_eq_inducedG` (`ℓ_P²=G`), `inducedG_mul_N` (`G·N=1/Λ_s²`, the analogue of AdS/CFT `1/G∝N²`),
+  `inducedG_strictAntitone_in_N` (more species ⟹ weaker gravity), and the honest crux
+  `inducedG_ratio_is_pure_number` (`G/a₀²=1/N` — the genuinely-*derived* content is DIMENSIONLESS; `Λ_s` is the one
+  carried scale, by dimensional necessity — a length cannot come from a count, exactly as AdS/CFT carries `α'`), plus
+  `capacity_exponent_in_primitives` (`A/4G=(A/4)N Λ_s²` — the capacity exponent in `{area,species,granularity}`, no
+  longer presupposing `G`). ⚠ **Exact algebra**: it moves `G` from *carried* to *derived-from-`{Λ_s, N}`* (a better
+  primitive), but does **NOT** compute the numerical value of `G` — that needs the full species-coefficient accounting
+  (induced-EH coefficients, good to `O(1)`) which is a **[frontier]**, and it is an effective, not UV-complete, relation.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

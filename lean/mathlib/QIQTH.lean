@@ -39,6 +39,7 @@ import QIQTH.ShannonFano
 import QIQTH.OperationalCapacity
 import QIQTH.MaxEntropyCapacity
 import QIQTH.ModularEnergyBound
+import QIQTH.InducedNewtonConstant
 import QIQTH.BellMarginal
 import QIQTH.Bell
 import QIQTH.Tsirelson
