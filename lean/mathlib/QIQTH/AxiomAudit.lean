@@ -7804,6 +7804,12 @@ namespace QIQTH.AxiomAudit
 -- quantized graviton. Std 3.
 #print axioms QIQTH.GravDyn.polPlus_helicity
 #print axioms QIQTH.GravDyn.polCross_helicity
+-- G11a EXACTLY-2 (the gauge quotient): tt_decomposition -- every symmetric transverse-traceless h = h11·e+ + h12·ex
+-- + (pure gauge k⊙ξ), so the physical space is spanned by the 2 polarizations (≤2). polarizations_not_gauge -- no
+-- nonzero combo of e+,ex is pure gauge (≥2). Together: {e+,ex} is a BASIS of the physical polarization space (TT mod
+-- gauge) => the graviton has EXACTLY 2 physical polarizations. KINEMATIC; not the quantized graviton. Std 3.
+#print axioms QIQTH.GravDyn.tt_decomposition
+#print axioms QIQTH.GravDyn.polarizations_not_gauge
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

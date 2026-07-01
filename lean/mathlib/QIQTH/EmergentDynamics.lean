@@ -415,4 +415,72 @@ theorem polCross_helicity (θ : ℝ) :
   fin_cases i <;> fin_cases j <;>
     simp [rot, polPlus, polCross, Matrix.mul_apply, Fin.sum_univ_four, Matrix.transpose_apply] <;> ring
 
+/-! ## G11a — the gauge quotient: the physical graviton polarization space is EXACTLY 2-dimensional -/
+
+/-- The down-index null wavevector `k_μ = (1,0,0,1)`. -/
+def kDown : Fin 4 → ℝ := ![1, 0, 0, 1]
+
+/-- A **pure-gauge shift** `δh_{μν} = k_μ ξ_ν + k_ν ξ_μ` (a linearized diffeomorphism, on-shell for null `k`). -/
+noncomputable def gaugeShift (ξ : Fin 4 → ℝ) : Matrix (Fin 4) (Fin 4) ℝ :=
+  Matrix.of (fun μ ν => kDown μ * ξ ν + kDown ν * ξ μ)
+
+/-- The gauge parameter that removes the unphysical part of a TT tensor: `ξ = (h₀₀/2, h₀₁, h₀₂, h₀₀/2)`. -/
+noncomputable def gaugeXi (h : Matrix (Fin 4) (Fin 4) ℝ) : Fin 4 → ℝ := ![h 0 0 / 2, h 0 1, h 0 2, h 0 0 / 2]
+
+/-- **G11a — the TT decomposition (upper bound: physical space is spanned by the 2 polarizations).** Every symmetric
+    transverse-traceless tensor decomposes as `h = h₁₁·e₊ + h₁₂·e× + (pure gauge)`. So modulo gauge, every physical
+    polarization is a combination of `e₊` and `e×` — the graviton has **at most 2** physical degrees of freedom. -/
+theorem tt_decomposition (h : Matrix (Fin 4) (Fin 4) ℝ) (hSym : h.IsSymm)
+    (hTrans : Transverse h) (hTrace : Traceless h) :
+    h = h 1 1 • polPlus + h 1 2 • polCross + gaugeShift (gaugeXi h) := by
+  have ht0 : h 3 0 = h 0 0 := by
+    have t := hTrans (0 : Fin 4)
+    simp [kUp, Fin.sum_univ_four, Matrix.cons_val_zero,
+      Matrix.cons_val_one, Matrix.cons_val_two, Matrix.cons_val_three] at t
+    linarith [t]
+  have ht1 : h 3 1 = h 0 1 := by
+    have t := hTrans (1 : Fin 4)
+    simp [kUp, Fin.sum_univ_four, Matrix.cons_val_zero,
+      Matrix.cons_val_one, Matrix.cons_val_two, Matrix.cons_val_three] at t
+    linarith [t]
+  have ht2 : h 3 2 = h 0 2 := by
+    have t := hTrans (2 : Fin 4)
+    simp [kUp, Fin.sum_univ_four, Matrix.cons_val_zero,
+      Matrix.cons_val_one, Matrix.cons_val_two, Matrix.cons_val_three] at t
+    linarith [t]
+  have ht3 : h 3 3 = h 0 3 := by
+    have t := hTrans (3 : Fin 4)
+    simp [kUp, Fin.sum_univ_four, Matrix.cons_val_zero,
+      Matrix.cons_val_one, Matrix.cons_val_two, Matrix.cons_val_three] at t
+    linarith [t]
+  have hs01 : h 1 0 = h 0 1 := by have s := hSym.apply (0 : Fin 4) (1 : Fin 4); linarith [s]
+  have hs02 : h 2 0 = h 0 2 := by have s := hSym.apply (0 : Fin 4) (2 : Fin 4); linarith [s]
+  have hs03 : h 3 0 = h 0 3 := by have s := hSym.apply (0 : Fin 4) (3 : Fin 4); linarith [s]
+  have hs12 : h 2 1 = h 1 2 := by have s := hSym.apply (1 : Fin 4) (2 : Fin 4); linarith [s]
+  have hs13 : h 3 1 = h 1 3 := by have s := hSym.apply (1 : Fin 4) (3 : Fin 4); linarith [s]
+  have hs23 : h 3 2 = h 2 3 := by have s := hSym.apply (2 : Fin 4) (3 : Fin 4); linarith [s]
+  have hTr : -h 0 0 + h 1 1 + h 2 2 + h 3 3 = 0 := by simpa [Traceless] using hTrace
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [Matrix.add_apply, Matrix.smul_apply, Matrix.of_apply,
+      polPlus, polCross, gaugeShift, gaugeXi, kDown,
+      Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two,
+      Matrix.cons_val_three, smul_eq_mul] <;>
+    linarith [ht0, ht1, ht2, ht3, hs01, hs02, hs03, hs12, hs13, hs23, hTr]
+
+/-- **G11a — independence mod gauge (lower bound: at least 2).** No nonzero combination of the polarizations is pure
+    gauge. With `tt_decomposition`, this makes `{e₊, e×}` a **basis** of the physical polarization space (TT modulo
+    gauge) — so the graviton has **exactly 2** physical polarizations. -/
+theorem polarizations_not_gauge (a b : ℝ) (ξ : Fin 4 → ℝ)
+    (h : a • polPlus + b • polCross = gaugeShift ξ) : a = 0 ∧ b = 0 := by
+  have h11 := congrFun (congrFun h (1 : Fin 4)) (1 : Fin 4)
+  have h12 := congrFun (congrFun h (1 : Fin 4)) (2 : Fin 4)
+  constructor
+  · simpa [Matrix.add_apply, Matrix.smul_apply, Matrix.of_apply,
+      polPlus, polCross, gaugeShift, kDown, Matrix.cons_val_zero, Matrix.cons_val_one,
+      Matrix.cons_val_two, Matrix.cons_val_three, smul_eq_mul] using h11
+  · simpa [Matrix.add_apply, Matrix.smul_apply, Matrix.of_apply,
+      polPlus, polCross, gaugeShift, kDown, Matrix.cons_val_zero, Matrix.cons_val_one,
+      Matrix.cons_val_two, Matrix.cons_val_three, smul_eq_mul] using h12
+
 end QIQTH.GravDyn

@@ -252,3 +252,13 @@ modular Hamiltonians, emergent metric, Iyer–Wald), as the inventory §8 alread
   `cos²−sin²`, `2 sin cos`). All [AF] std-3, pinned, budget 0. ⚠ KINEMATIC; NOT the quantized graviton. **The genuine
   "graviton" content reachable in finite algebra — its 2 polarizations *and* their spin-2 transformation — is now
   machine-checked; the dynamical/quantized graviton stays the research wall.**
+- **2026-07-01 — G11a EXACTLY-2 ✅ (the gauge quotient): the graviton has *exactly* 2 physical polarizations.**
+  `kDown`, `gaugeShift` (`δh = k_μ ξ_ν + k_ν ξ_μ`, a linearized diffeomorphism), `gaugeXi`; **`tt_decomposition`** —
+  every symmetric transverse-traceless `h` equals `h₁₁·e₊ + h₁₂·e× + (pure gauge)`, so modulo gauge the physical
+  space is spanned by the 2 polarizations (≤ 2); **`polarizations_not_gauge`** — no nonzero combination of `e₊,e×`
+  is pure gauge (≥ 2). Together `{e₊, e×}` is a **basis** of the physical polarization space (TT modulo gauge) — the
+  graviton has **exactly 2** physical polarizations (the `D(D−3)/2 = 2` count for `D=4`, via the explicit gauge
+  quotient). GPT-5.5-pro supplied the proof (transverse facts + symmetry + traceless → 16-entry `fin_cases`/`simp`/
+  `linarith`). All [AF] std-3, pinned, budget 0. ⚠ KINEMATIC; NOT the quantized graviton. **This closes the finite
+  linearized-graviton kinematics rigorously (2 polarizations · spin-2 transformation · exact count). The remaining
+  frontier is genuinely the dynamics/quantization — research, not loop-grindable.**
