@@ -7863,6 +7863,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GravitonQuant.helicityOp_plus
 #print axioms QIQTH.GravitonQuant.helicityOp_minus
 #print axioms QIQTH.GravitonQuant.helicityOp_vacuum
+-- G-QUANT Q5: LADDER operators + COHERENT states. creat_pow a†_i|n⟩=|n+1⟩ (raising), annih_pow_succ a_i|n+1⟩=(n+1)|n⟩
+-- (lowering, Bargmann ladder). annih_coherent: the coherent state |α⟩=e^{αX} (in the PowerSeries completion ℂ⟦X⟧, a
+-- single mode) is an eigenstate of the annihilation operator a=d/dX with eigenvalue α (a|α⟩=α|α⟩) -- the
+-- quantum→classical bridge. Free graviton. Std 3.
+#print axioms QIQTH.GravitonQuant.creat_pow
+#print axioms QIQTH.GravitonQuant.annih_pow_succ
+#print axioms QIQTH.GravitonQuant.annih_coherent
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

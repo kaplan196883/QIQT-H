@@ -163,6 +163,40 @@ theorem helicityOp_minus : helicityOp (X 1) = (-2 : ℂ) • (X 1) := by
 theorem helicityOp_vacuum : helicityOp (1 : Fock) = 0 := by
   simp [helicityOp, numberOp_vacuum, LinearMap.smul_apply, LinearMap.sub_apply]
 
+/-! ### Q5 — the ladder operators (raising/lowering on the occupation tower) -/
+
+/-- **The creation operator raises occupation** `a†_i|n_i⟩ = |(n+1)_i⟩`: `a†_i X_i^n = X_i^{n+1}`. -/
+theorem creat_pow (i : Fin 2) (n : ℕ) : creat i (X i ^ n) = X i ^ (n + 1) := by
+  change (X i : Fock) * X i ^ n = X i ^ (n + 1)
+  rw [pow_succ']
+
+/-- **The annihilation operator lowers occupation** `a_i|(n+1)_i⟩ = (n+1)|n_i⟩`: `a_i X_i^{n+1} = (n+1) X_i^n`
+    (the Bargmann-representation ladder). -/
+theorem annih_pow_succ (i : Fin 2) (n : ℕ) :
+    annih i (X i ^ (n + 1)) = ((n + 1 : ℕ) : Fock) * (X i ^ n) := by
+  change pderiv i (X i ^ (n + 1)) = _
+  rw [MvPolynomial.pderiv_pow, MvPolynomial.pderiv_X_self, mul_one, Nat.add_sub_cancel]
+
+/-! ### Q5 — coherent states: the quantum→classical bridge (single-mode Bargmann–Fock completion)
+
+  A coherent state `|α⟩ = e^{α a†}|0⟩` is the closest quantum analogue of a classical field configuration — it has a
+  definite complex amplitude `α`. The exponential `e^{αX}` is **not** a polynomial, so it lives in the power-series
+  completion `ℂ⟦X⟧` of a single mode's Fock space (the polynomial rep `ℂ[X_i]` of Q1–Q4 is the dense subspace of
+  finite-occupation states). There the annihilation operator is the formal derivative `a = d/dX`. -/
+
+/-- The **coherent state** `|α⟩ = e^{αX}` for a single helicity mode, in the Bargmann–Fock completion `ℂ⟦X⟧`. -/
+noncomputable def coherent (α : ℂ) : PowerSeries ℂ := PowerSeries.rescale α (PowerSeries.exp ℂ)
+
+/-- **Coherent states are eigenstates of the annihilation operator** `a|α⟩ = α|α⟩`: in the Bargmann representation
+    `a = d/dX`, and `d/dX e^{αX} = α e^{αX}`. The coherent state carries a definite (complex) amplitude `α` — the
+    quantum→classical bridge (the closest quantum state to a classical graviton field of amplitude `α`; recovering the
+    classical wave `f(t−z)` of G11c as its field expectation awaits the multi-mode field, Q6). -/
+theorem annih_coherent (α : ℂ) : PowerSeries.derivativeFun (coherent α) = α • coherent α := by
+  ext n
+  simp only [coherent, PowerSeries.coeff_derivativeFun, PowerSeries.coeff_rescale,
+    PowerSeries.coeff_exp, map_smul, smul_eq_mul]
+  rw [Nat.factorial_succ]; push_cast; field_simp; ring
+
 end
 
 end QIQTH.GravitonQuant

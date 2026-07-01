@@ -33,8 +33,11 @@ on an actual field. The quantization core is now started.
   (mode 0 = `e₊`, helicity +2), **`helicityOp_minus`** `J|1₁⟩=−2|1₁⟩` (mode 1 = `e₋`, helicity −2),
   `helicityOp_vacuum` `J|0⟩=0`. Ties the quantized occupation to the kinematic helicity-±2 eigenstates
   (`EmergentDynamics` `eR`/`eL_helicity`). All [AF] std-3, pinned, budget 0.
-- [ ] **Q5 — coherent states / the classical limit.** Coherent states `e^{αa†}|0⟩` as eigenstates of `a`; the
-  classical graviton wave (G11c) recovered as the coherent-state expectation — the field→classical bridge.
+- [x] **Q5 — ladder operators + coherent states ✅.** `creat_pow` (`a†_i|n⟩=|n+1⟩`, raising) + `annih_pow_succ`
+  (`a_i|n+1⟩=(n+1)|n⟩`, lowering) on the polynomial rep; **`coherent α = e^{αX}`** in the Bargmann–Fock completion
+  `ℂ⟦X⟧` (single mode; the exponential isn't a polynomial) with **`annih_coherent`** `a|α⟩=α|α⟩` — the coherent
+  state is an eigenstate of the annihilation operator `a=d/dX`, the quantum→classical bridge (definite amplitude
+  `α`). All [AF] std-3, pinned, budget 0. (Recovering the G11c classical wave as the field expectation awaits Q6.)
 - [ ] **Q6 — multi-mode: the momentum continuum (frontier scoping).** Index the CCR by momentum `k` (add `X_{k,λ}`),
   the field `h_{μν}(x) = ∑_λ ∫ (a_λ(k) e^λ e^{ikx} + h.c.)`; the two-point function/propagator as a vacuum
   expectation. Built one mode at a time; the free field is the (restricted) tensor product of single-mode Fock
@@ -56,3 +59,6 @@ interacting; NOT a claim of quantum gravity (this is standard free-field QFT, ma
   one-graviton energy `H|1_i⟩=2ω|1_i⟩`. All [AF] std-3, budget 0.
 - **2026-07-02 — Q4 ✅** the helicity operator `J=2(N₀−N₁)`; one-graviton states carry helicity `±2`
   (`J|1₀⟩=+2|1₀⟩`, `J|1₁⟩=−2|1₁⟩`), tying the occupation to the kinematic spin-2. All [AF] std-3, budget 0.
+- **2026-07-02 — Q5 ✅** the ladder operators (raising `a†|n⟩=|n+1⟩`, lowering `a|n+1⟩=(n+1)|n⟩`); the coherent
+  state `|α⟩=e^{αX}` in the Bargmann–Fock completion `ℂ⟦X⟧` with `a|α⟩=α|α⟩` (the quantum→classical bridge).
+  All [AF] std-3, budget 0.
