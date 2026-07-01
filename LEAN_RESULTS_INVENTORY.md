@@ -194,6 +194,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   longer presupposing `G`). ⚠ **Exact algebra**: it moves `G` from *carried* to *derived-from-`{Λ_s, N}`* (a better
   primitive), but does **NOT** compute the numerical value of `G` — that needs the full species-coefficient accounting
   (induced-EH coefficients, good to `O(1)`) which is a **[frontier]**, and it is an effective, not UV-complete, relation.
+  **Species-coefficient toy** (making that frontier concrete): `effSpeciesN`/`inducedInvG` — `1/G = N_eff Λ²` with
+  `N_eff = (n_s c_s + n_f c_f + n_v c_v)/12π`; `inducedInvG_eq_inv_inducedG` (recovers the earlier `inducedG` with
+  `N = N_eff`), `effSpeciesN_add_scalars` (the species sum is additive), `inducedInvG_scales_Lambda_sq`. ⚠ **CITED-
+  coefficient bookkeeping** (the `c_i` are hand-entered heat-kernel data, like `sakharov_ratio`); it makes the "numerical
+  `G`" step concrete (*compute `N_eff` from the field content*) but does **NOT** compute the value of `G` (needs the
+  real SM content + real cutoff + exact coefficients).
   **Bridge to the holographic dictionary (`HolographicBridge.lean`, [AF], see §0):** with this induced `G`, the AdS/CFT
   boundary Cardy microstate count of a BTZ horizon *equals* QIQT-H's bulk capacity exponent `(A/4)N Λ_s²`
   (`btz_cardy_eq_qiqth_capacity`; AdS radius cancels) — a *correspondence* (the two holographic bookkeepings agree

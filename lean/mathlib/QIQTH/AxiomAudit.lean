@@ -7713,6 +7713,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.InducedG.planckLength_sq_eq_inducedG
 #print axioms QIQTH.InducedG.capacity_exponent_in_primitives
 #print axioms QIQTH.InducedG.inducedG_strictAntitone_in_N
+-- Species-coefficient accounting toy (making the "numerical G" step concrete; CITED heat-kernel coefficients).
+-- effSpeciesN / inducedInvG: 1/G = N_eff Λ², N_eff = (n_s c_s + n_f c_f + n_v c_v)/12π. inducedInvG_eq_inv_inducedG
+-- (recovers the earlier inducedG with N=N_eff); inducedG_of_species; effSpeciesN_add_scalars (species sum additive);
+-- inducedInvG_scales_Lambda_sq. ⚠ CITED-coefficient bookkeeping (c_i hand-entered like sakharov_ratio); does NOT
+-- compute the numerical G of our universe (needs real SM content + real cutoff + exact coefficients). Std 3.
+#print axioms QIQTH.InducedG.effSpeciesN_add_scalars
+#print axioms QIQTH.InducedG.inducedInvG_eq_inv_inducedG
+#print axioms QIQTH.InducedG.inducedG_of_species
+#print axioms QIQTH.InducedG.inducedInvG_scales_Lambda_sq
 -- ── HolographicScreenCode (toy Stage 1; HOLOGRAPHIC_SCREEN_CODE_PLAN.md) ─────────────────────────────────────────
 -- ⚠ A TOY KINEMATIC INTERFACE, NOT gravity, NOT a QG claim, does NOT close the mechanism gap. Turns the capacity
 -- POSTULATE into a theorem GIVEN a LOCAL packing constraint: area_law_of_packing (local `logDim e ≤ areaWt e/4G`

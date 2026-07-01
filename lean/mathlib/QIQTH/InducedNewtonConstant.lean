@@ -87,4 +87,60 @@ theorem inducedG_strictAntitone_in_N (Λs : ℝ) (hΛ : 0 < Λs) {N₁ N₂ : �
   · positivity
   · exact mul_lt_mul_of_pos_right h₁₂ (by positivity)
 
+/-! ## Species-coefficient accounting — making the "numerical `G`" step concrete (CITED coefficients)
+
+  This addresses (as a TOY) the frontier flagged above: the numerical value of `G` needs the *species-coefficient
+  accounting*. The per-species coefficients `c_i` are the a₁ Seeley–DeWitt / heat-kernel data — **CITED, hand-entered
+  data** (exactly like `SakharovRatio.sakharov_ratio`'s `1/48π, 1/12π`), NOT derived here. It makes the induced `1/G`
+  a concrete **function of the field content and the cutoff** `Λ`, and shows the earlier `inducedG N Λ` is recovered
+  with `N = N_eff`, the *effective species number*. ⚠ It does **NOT** compute the numerical `G` of our universe — that
+  needs the *real* SM field content, the *real* cutoff, and the exact coefficients. Cited-coefficient bookkeeping. -/
+
+/-- A toy **field content** with the CITED per-species induced-gravity coefficients. -/
+structure SpeciesContent where
+  /-- (effective) number of real scalars -/
+  nScalar : ℝ
+  /-- number of Weyl fermions -/
+  nWeyl : ℝ
+  /-- number of gauge vectors -/
+  nVector : ℝ
+  /-- cited scalar a₁ coefficient -/
+  cScalar : ℝ
+  /-- cited Weyl-fermion coefficient -/
+  cWeyl : ℝ
+  /-- cited vector coefficient -/
+  cVector : ℝ
+
+/-- The **effective species number** `N_eff = (1/12π)·(n_s c_s + n_f c_f + n_v c_v)` — the coefficient of `Λ²` in
+    `1/G`. This is the concrete "species count" that the earlier `inducedG N Λ` relation carried abstractly. -/
+noncomputable def effSpeciesN (S : SpeciesContent) : ℝ :=
+  (S.nScalar * S.cScalar + S.nWeyl * S.cWeyl + S.nVector * S.cVector) / (12 * Real.pi)
+
+/-- The **induced inverse Newton constant** `1/G = N_eff·Λ²` (the Sakharov/heat-kernel species sum). -/
+noncomputable def inducedInvG (S : SpeciesContent) (Λ : ℝ) : ℝ := effSpeciesN S * Λ ^ 2
+
+/-- **The species toy recovers the earlier `inducedG` relation.** The species-summed inverse Newton constant is the
+    inverse of `inducedG` with `N = N_eff`: `inducedInvG S Λ = (inducedG (N_eff) Λ)⁻¹`. So the "numerical `G`" step is
+    precisely: *compute `N_eff` from the field content* (then `G = inducedG N_eff Λ`). -/
+theorem inducedInvG_eq_inv_inducedG (S : SpeciesContent) (Λ : ℝ)
+    (hN : effSpeciesN S ≠ 0) (hΛ : Λ ≠ 0) :
+    inducedInvG S Λ = (inducedG (effSpeciesN S) Λ)⁻¹ := by
+  unfold inducedInvG inducedG; field_simp
+
+/-- **The induced `G` from a field content** `G = 1/(N_eff·Λ²) = inducedG N_eff Λ`. -/
+theorem inducedG_of_species (S : SpeciesContent) (Λ : ℝ) :
+    inducedG (effSpeciesN S) Λ = 1 / (effSpeciesN S * Λ ^ 2) := rfl
+
+/-- **`N_eff` is additive in the field content** (splitting the scalar count adds the contributions) — the species
+    sum is genuinely a sum over species. -/
+theorem effSpeciesN_add_scalars (a b nW nV cS cW cV : ℝ) :
+    effSpeciesN ⟨a + b, nW, nV, cS, cW, cV⟩
+      = effSpeciesN ⟨a, nW, nV, cS, cW, cV⟩ + effSpeciesN ⟨b, 0, 0, cS, cW, cV⟩ := by
+  simp only [effSpeciesN]; ring
+
+/-- **`1/G ∝ Λ²`** at fixed field content (the induced Newton constant weakens as `Λ` grows). -/
+theorem inducedInvG_scales_Lambda_sq (S : SpeciesContent) (Λ : ℝ) :
+    inducedInvG S (2 * Λ) = 4 * inducedInvG S Λ := by
+  unfold inducedInvG; ring
+
 end QIQTH.InducedG
