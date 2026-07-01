@@ -269,4 +269,86 @@ theorem nullFocusing_of_areaLink (κ : ℝ) (N : ℤ) (T δA : ℤ → ℝ) (c :
   unfold RkkDisc
   exact secondDiff_of_area_firstLaw κ δA (tailK N T) T c hAK (secondDiff_tailK_eq N T c hcN)
 
+/-! ## G7a — null contractions ⟹ metric proportionality (the linearized Einstein residual, pointwise) -/
+
+/-- The 4D **Minkowski metric** `η = diag(−1,1,1,1)`. -/
+def minkMetric : Matrix (Fin 4) (Fin 4) ℝ := Matrix.diagonal ![-1, 1, 1, 1]
+
+/-- A vector is **null** iff `−k₀² + k₁² + k₂² + k₃² = 0`. -/
+def minkQuad (k : Fin 4 → ℝ) : ℝ := -(k 0) ^ 2 + (k 1) ^ 2 + (k 2) ^ 2 + (k 3) ^ 2
+
+/-- The quadratic form of a matrix `S`: `S(k,k) = ∑_{ij} S_ij k_i k_j`. -/
+def quadForm (S : Matrix (Fin 4) (Fin 4) ℝ) (k : Fin 4 → ℝ) : ℝ := ∑ i, ∑ j, S i j * k i * k j
+
+/-- **G7a — a symmetric form vanishing on the null cone is proportional to the metric.** If a symmetric `S`
+    satisfies `S(k,k) = 0` for every null `k`, then `S = φ·η` for some `φ`. Pure finite 4D linear algebra (nine
+    explicit rational null vectors extract the entry constraints). This is the *pointwise* content behind the
+    linearized Einstein residual `E_{ab} = φ g_{ab}`; removing `φ` (via Bianchi/conservation + a boundary condition)
+    is G7b, and it reaches at most the **linearized** equation — NEVER the propagating/quantized graviton (G11/G12). -/
+theorem symForm_proportional_to_minkowski_of_null_quad_zero
+    (S : Matrix (Fin 4) (Fin 4) ℝ) (hSym : S.IsSymm)
+    (hNull : ∀ k : Fin 4 → ℝ, minkQuad k = 0 → quadForm S k = 0) :
+    ∃ φ : ℝ, S = φ • minkMetric := by
+  have hs10 : S 1 0 = S 0 1 := by simpa [eq_comm] using hSym.apply 0 1
+  have hs20 : S 2 0 = S 0 2 := by simpa [eq_comm] using hSym.apply 0 2
+  have hs30 : S 3 0 = S 0 3 := by simpa [eq_comm] using hSym.apply 0 3
+  have hs21 : S 2 1 = S 1 2 := by simpa [eq_comm] using hSym.apply 1 2
+  have hs31 : S 3 1 = S 1 3 := by simpa [eq_comm] using hSym.apply 1 3
+  have hs32 : S 3 2 = S 2 3 := by simpa [eq_comm] using hSym.apply 2 3
+  have e01p_raw : S 0 0 + S 0 1 + S 1 0 + S 1 1 = 0 := by
+    have h := hNull (![1, 1, 0, 0] : Fin 4 → ℝ) (by simp only [minkQuad, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two, Matrix.cons_val_three]; norm_num)
+    simp [quadForm, Fin.sum_univ_four] at h; ring_nf at h ⊢; exact h
+  have e01m_raw : S 0 0 - S 0 1 - S 1 0 + S 1 1 = 0 := by
+    have h := hNull (![1, -1, 0, 0] : Fin 4 → ℝ) (by simp only [minkQuad, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two, Matrix.cons_val_three]; norm_num)
+    simp [quadForm, Fin.sum_univ_four] at h; ring_nf at h ⊢; exact h
+  have h01 : S 0 1 = 0 := by linarith [e01p_raw, e01m_raw, hs10]
+  have hdiag1 : S 0 0 + S 1 1 = 0 := by linarith [e01p_raw, e01m_raw, hs10]
+  have e02p_raw : S 0 0 + S 0 2 + S 2 0 + S 2 2 = 0 := by
+    have h := hNull (![1, 0, 1, 0] : Fin 4 → ℝ) (by simp only [minkQuad, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two, Matrix.cons_val_three]; norm_num)
+    simp [quadForm, Fin.sum_univ_four] at h; ring_nf at h ⊢; exact h
+  have e02m_raw : S 0 0 - S 0 2 - S 2 0 + S 2 2 = 0 := by
+    have h := hNull (![1, 0, -1, 0] : Fin 4 → ℝ) (by simp only [minkQuad, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two, Matrix.cons_val_three]; norm_num)
+    simp [quadForm, Fin.sum_univ_four] at h; ring_nf at h ⊢; exact h
+  have h02 : S 0 2 = 0 := by linarith [e02p_raw, e02m_raw, hs20]
+  have hdiag2 : S 0 0 + S 2 2 = 0 := by linarith [e02p_raw, e02m_raw, hs20]
+  have e03p_raw : S 0 0 + S 0 3 + S 3 0 + S 3 3 = 0 := by
+    have h := hNull (![1, 0, 0, 1] : Fin 4 → ℝ) (by simp only [minkQuad, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two, Matrix.cons_val_three]; norm_num)
+    simp [quadForm, Fin.sum_univ_four] at h; ring_nf at h ⊢; exact h
+  have e03m_raw : S 0 0 - S 0 3 - S 3 0 + S 3 3 = 0 := by
+    have h := hNull (![1, 0, 0, -1] : Fin 4 → ℝ) (by simp only [minkQuad, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two, Matrix.cons_val_three]; norm_num)
+    simp [quadForm, Fin.sum_univ_four] at h; ring_nf at h ⊢; exact h
+  have h03 : S 0 3 = 0 := by linarith [e03p_raw, e03m_raw, hs30]
+  have hdiag3 : S 0 0 + S 3 3 = 0 := by linarith [e03p_raw, e03m_raw, hs30]
+  have e12raw : 25 * S 0 0 + 15 * S 0 1 + 20 * S 0 2 + 15 * S 1 0 + 9 * S 1 1 + 12 * S 1 2 +
+      20 * S 2 0 + 12 * S 2 1 + 16 * S 2 2 = 0 := by
+    have h := hNull (![5, 3, 4, 0] : Fin 4 → ℝ) (by simp only [minkQuad, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two, Matrix.cons_val_three]; norm_num)
+    simp [quadForm, Fin.sum_univ_four] at h; ring_nf at h ⊢; exact h
+  have h12 : S 1 2 = 0 := by linarith [e12raw, h01, h02, hs10, hs20, hs21, hdiag1, hdiag2]
+  have e13raw : 25 * S 0 0 + 15 * S 0 1 + 20 * S 0 3 + 15 * S 1 0 + 9 * S 1 1 + 12 * S 1 3 +
+      20 * S 3 0 + 12 * S 3 1 + 16 * S 3 3 = 0 := by
+    have h := hNull (![5, 3, 0, 4] : Fin 4 → ℝ) (by simp only [minkQuad, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two, Matrix.cons_val_three]; norm_num)
+    simp [quadForm, Fin.sum_univ_four] at h; ring_nf at h ⊢; exact h
+  have h13 : S 1 3 = 0 := by linarith [e13raw, h01, h03, hs10, hs30, hs31, hdiag1, hdiag3]
+  have e23raw : 25 * S 0 0 + 15 * S 0 2 + 20 * S 0 3 + 15 * S 2 0 + 9 * S 2 2 + 12 * S 2 3 +
+      20 * S 3 0 + 12 * S 3 2 + 16 * S 3 3 = 0 := by
+    have h := hNull (![5, 0, 3, 4] : Fin 4 → ℝ) (by simp only [minkQuad, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two, Matrix.cons_val_three]; norm_num)
+    simp [quadForm, Fin.sum_univ_four] at h; ring_nf at h ⊢; exact h
+  have h23 : S 2 3 = 0 := by linarith [e23raw, h02, h03, hs20, hs30, hs32, hdiag2, hdiag3]
+  refine ⟨S 1 1, ?_⟩
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [minkMetric, Matrix.diagonal, Matrix.smul_apply] <;>
+    linarith [h01, h02, h03, h12, h13, h23, hdiag1, hdiag2, hdiag3,
+      hs10, hs20, hs30, hs21, hs31, hs32]
+
+/-- **G7b (conditional) — with a boundary condition the linearized residual vanishes.** Given the metric form
+    `S = φ•η` (from G7a) and the carried scalar condition `φ = 0`, the residual vanishes: `S = 0`. ⚠ Physically the
+    `φ`-removal is: the linearized Bianchi identity `∇^a E_{ab}=0` forces `φ` **constant** (a cosmological-constant
+    mode), then a boundary/trace condition sets it to zero. That Bianchi step is the **Iyer–Wald frontier (G10)** —
+    carried here as the hypothesis `hφ0`; this theorem is only the trivial finite plug. **Linearized only, NOT a
+    graviton** (G11/G12). -/
+theorem residual_vanishes_of_metric_form (S : Matrix (Fin 4) (Fin 4) ℝ) (φ : ℝ)
+    (hφS : S = φ • minkMetric) (hφ0 : φ = 0) : S = 0 := by
+  rw [hφS, hφ0, zero_smul]
+
 end QIQTH.GravDyn

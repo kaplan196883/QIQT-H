@@ -7772,6 +7772,13 @@ namespace QIQTH.AxiomAudit
 -- discrete proxy NOT geometric Ricci; hAK is the physics input. Axiom-free (std 3).
 #print axioms QIQTH.GravDyn.secondDiff_of_area_firstLaw
 #print axioms QIQTH.GravDyn.nullFocusing_of_areaLink
+-- G7a: symForm_proportional_to_minkowski_of_null_quad_zero -- a symmetric form vanishing on the Minkowski null cone
+-- is proportional to the metric (∃φ, S=φ·η), from 9 explicit rational null vectors. The pointwise content behind the
+-- linearized Einstein residual E_ab=φ g_ab. G7b: residual_vanishes_of_metric_form -- with a carried boundary
+-- condition φ=0, S=0 (the φ-removal genuinely needs the linearized Bianchi identity = the Iyer-Wald frontier G10;
+-- this is the trivial finite plug). LINEARIZED only, NEVER the propagating/quantized graviton (G11/G12). Std 3.
+#print axioms QIQTH.GravDyn.symForm_proportional_to_minkowski_of_null_quad_zero
+#print axioms QIQTH.GravDyn.residual_vanishes_of_metric_form
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

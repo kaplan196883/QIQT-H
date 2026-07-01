@@ -210,6 +210,25 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (not derived); the screen is **fixed** (NOT background-independent); and **gravitons / dynamical Einstein (Stage 3)
   + non-circular `G`** are the genuine QG frontiers this does **not** touch (cited). It is the honest "interface into
   which a real microscopic model could plug," never a gravity claim.
+- **The graviton-wall attack — `QIQTH/EmergentDynamics.lean`** (namespace `QIQTH.GravDyn`, all **[AF]** std-3;
+  `GRAVITON_WALL_PLAN.md`, GPT-5.5-pro-verified). ⚠ **A CONDITIONAL FINITE SKELETON of emergent (linearized)
+  dynamics — NOT solved QG, does NOT close the mechanism gap.** The FGHMVR "entanglement first law ⟹ linearized
+  Einstein" logic + a QIQT-H-native finite null-focusing route, G1–G7: **G1** `allBall_firstLaw_iff_residual_zero`
+  (first law at every probe ⟺ residual = 0, over a carried separating-probe family + Iyer–Wald identity); **G2**
+  `eq_zero_of_decoder`/`separating_of_decoder` (finite Radon inversion ⟹ separating); **G3** `secondDiff_tailK_eq`
+  (the discrete null modular kernel `Δ²K = T_kk`, anchoring to `wedge_boostCharge_eq_neg_stressFlux`); **G4**
+  `EdgeRefinement`/`refinement_preserves_area_and_capacity`/`regional_bound_invariant_under_refinement`/
+  `property_preserved_along_moves` (**toy** background independence, with the required weight-preserving cut
+  correspondence — NOT continuum); **G5** `LambdaRG_invariant`/`InducedG_pos` (discrete RG dimensional transmutation:
+  `Λ_s` from dimensionless `{b,g0}` — a **relation**, not the value of `G`); **G6** `secondDiff_of_area_firstLaw`/
+  `nullFocusing_of_areaLink` (⚠⚠ **CONDITIONAL BOOKKEEPING** — the finite null Einstein equation `R_kk = 8πG T_kk`
+  **given** the carried area–stress link `hAK`, which **carries the Einstein content and is NEVER derived**;
+  `RkkDisc` a discrete proxy, not Ricci); **G7a** `symForm_proportional_to_minkowski_of_null_quad_zero` (a symmetric
+  form vanishing on the null cone is `φ·η` — the pointwise linearized Einstein residual) + **G7b**
+  `residual_vanishes_of_metric_form` (the boundary-condition plug). ⚠ **Linearized ≠ full**; the propagating/quantized
+  graviton (G11/G12), continuum ball modular Hamiltonians (G8), RT/extremal-area emergence (G9), Iyer–Wald geometry
+  (G10), `hTkk`, interacting matter, and the numerical `G` are the cited research **frontiers** — this is the honest
+  finite skeleton that advances *toward* the mechanism, never a claim of having crossed it.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

@@ -221,3 +221,18 @@ modular Hamiltonians, emergent metric, Iyer–Wald), as the inventory §8 alread
   **conditional on the carried area–stress link**. The guard was held: `hAK` is a hypothesis of both theorems, never
   proved from packing/first-law/min-cut. **NEXT → G7a (`symForm_proportional_to_minkowski_of_null_quad_zero`: ∀ null
   `k`, `quadForm S k = 0` ⟹ `∃ φ, S = φ•metric` — pure 4D linear algebra) → G7b (conditional φ-removal).**
+- **2026-07-01 — G7a + G7b ✅ DONE + TRACK B (G1–G7) COMPLETE.** **G7a `symForm_proportional_to_minkowski_of_null_quad_zero`**
+  — a symmetric form vanishing on the Minkowski null cone is `φ·η` (9 explicit rational null vectors extract the
+  entry constraints; the `simp only [minkQuad, Matrix.cons_val_zero/one/two/three]; norm_num` null-proof + a
+  `fin_cases`/`linarith` finish; GPT-5.5-pro supplied the proof). The pointwise linearized Einstein residual. **G7b
+  `residual_vanishes_of_metric_form`** — the boundary-condition plug (`S = φ•η ∧ φ=0 ⟹ S=0`); the real φ-removal
+  needs the linearized Bianchi identity = the **Iyer–Wald frontier (G10)**, carried here. Both [AF] std-3, pinned,
+  budget 0; loudly-labelled inventory entry added. **⚠ Linearized only — NEVER the propagating/quantized graviton.**
+  **THE GRINDABLE TRACK B (G1–G7) IS COMPLETE** — a conditional finite skeleton of emergent (linearized) dynamics:
+  FGHMVR skeleton (G1) + separating (G2) + null modular kernel (G3) + toy background independence (G4) + RG
+  transmutation (G5) + the conditional null-focusing bet (G6) + null-quad⟹metric (G7). It advances *toward* the
+  mechanism gap with every honest rail held (the single most important guard — no `δA=8πG·K` derivation — held at G6),
+  and does **NOT** close it. **Remaining = the cited research walls G8–G12** (continuum ball modular Hamiltonian,
+  RT/extremal-area emergence, Iyer–Wald geometry, linearized-graviton PDE/QFT, full nonlinear/quantized graviton) +
+  `hTkk`/interacting-matter/numerical-`G` — genuine multi-year research, NOT loop-grindable. **The tractable surface
+  is exhausted; CHECKPOINTED COMPLETE.**
