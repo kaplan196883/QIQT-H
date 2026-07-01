@@ -77,6 +77,7 @@ after A1 (code-comment hygiene), A2 (website), and A3 (paper) landed.
 | E4 | "A covariant measure exists, but a covariant **selector cannot** — the honest no-go." | §11.4.3b; `open-problems` | §5 `CovariantGluing.no_covariant_selector` | **[no-go]** | ✓ |
 | E5 | "Operational **no-signaling** holds (bipartite / general); but no-signaling ≠ Lorentz-covariance of the beable." | §7.7, §11.4.3b | §5 `Theorem7.no_signaling`, `NoSignalingGeneral.bipartite_no_signaling` | **[AF]** | ✓ |
 | E6 | "The **Type II dual-weight trace** / continuum Type III₁ classification / vN-algebra (vs one-particle) relative entropy is the cited **frontier**." | `formalization` (290–291); §11.4.3 | §4, §8 | **[frontier]** | ✓ |
+| E7 | "The free-field **modular-energy bound** $\Delta S \le 2\pi\,\Delta\langle B_{\rm boost}\rangle$ + first law are theorems (Umegaki → Casini → BW → first law), upgrading `Phase5Master`'s modular pieces from carried to derived — **formalized modular QFT, NOT** a derivation of $A/4G$ (the $A/4G$ stays a gravitational input; free scalar has no $G$/area operator; the continuum Type II trace where $A/4G$ lives stays a cited frontier)." | `formalization`; `open-problems` | §2/§4 `ModularEnergyBound` (`modular_relEnt_identity`, `modular_casini_bound`, `finiteCorner_wedge_Casini_BW` [BW carried as explicit hyp], `finiteCorner_firstLaw`) | **[AF]** + **[frontier]** | ✓ |
 
 ## F. Corner / free SM fields / emergent spacetime (transport, not construction)
 

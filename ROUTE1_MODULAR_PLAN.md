@@ -138,3 +138,17 @@ modular QFT — and honestly checkpoints `A/4G` as the gravitational input it is
   pieces from a carried hypothesis to derived results. Formalized modular QFT; NO `A/4G`, no gravity, no `G`.
   **NEXT → B5 finish: point Track-A docs (website `open-problems`/`formalization`, ledger) at the built theorems
   (QIQTH.lean import + AxiomAudit pins already done for B1–B4).**
+- **2026-07-01 — B5 ✅ DONE + CAMPAIGN COMPLETE.** Wired the whole campaign into the public surfaces, pointing every
+  Track-A guardrail at the four built theorems: (i) `QIQTH.lean` import + `AxiomAudit.lean` std-3 pins (B1–B4, done
+  incrementally); (ii) **website `open-problems`** — a new "Route 1 reframed" note (the `A/4G` is not
+  free-field-derivable — no `G`/area operator, cutoff-dependent coefficient, the `δA/4G=2π∫δT_kk` step needs the
+  Einstein equations — and what IS machine-checked is the modular-energy bound `ΔS ≤ 2π Δ⟨B_boost⟩`, naming
+  `modular_relEnt_identity`/`modular_casini_bound`/`finiteCorner_wedge_Casini_BW`/`finiteCorner_firstLaw`); (iii)
+  **website `formalization`** — a new "free-field modular-energy bound" subsection with the four-theorem table;
+  (iv) **`CLAIMS_LEDGER.md`** row **E7** (`[AF]`+`[frontier]`), formalized modular QFT NOT `A/4G`. Website builds
+  green (66 pages). **All of Track A + B (B1–B5) DONE.** The deliverable: the free-field modular-energy chain
+  (Umegaki identity → Casini bound → BW rewrite → first law) is a fully machine-checked axiom-free theorem set,
+  upgrading `Phase5Master`'s modular pieces from a carried hypothesis to derived results — **formalized modular
+  QFT, honestly NOT a derivation of the holographic `A/4G` bound**. Follow-ons stay labelled cited frontiers: the
+  Fock lift of one-particle BW, the clock-dressed product-standard-subspace split, and the continuum Type III₁→II
+  crossed-product dual-weight trace (multi-year, where `A/4G` lives).

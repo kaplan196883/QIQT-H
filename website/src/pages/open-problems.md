@@ -234,6 +234,30 @@ $G$, no surviving novel prediction — but a precise, machine-checked map of exa
 
 </div>
 
+<div class="note">
+
+**"Route 1" (derive the capacity law via the JLMS modular identity) — reframed, and what it *does* deliver
+(2026-07-01).** The tempting route to *deriving* the area law is the JLMS identity
+$K_{\partial R} = A/4\ell_P^2 + K_{\rm bulk}$. For a fixed-background **free scalar** this is **not achievable**,
+and we do not claim it: the free theory has **no Newton constant $G$** and **no geometric area operator**; the
+cutoff wedge-entropy coefficient is matter/scheme-dependent, not universally $1/4G$; and the
+$\delta A/4G = 2\pi\!\int\!\delta T_{kk}$ step **uses the Einstein equations**, not pure Bisognano–Wichmann
+kinematics. So BW supplies the Unruh $2\pi$ but **not** the $1/4G$ — the $A/4G$ identification stays a
+*gravitational input*, and the continuum Type III$_1\!\to$II crossed-product dual-weight trace where it would
+live is a multi-year cited frontier. **What *is* now machine-checked** is the honest, derivable content — the
+free-field **modular-energy bound**: the entropy variation is bounded by (and, at the reference, equals) the
+modular-energy variation, $\Delta S \le \Delta\langle K_\sigma\rangle$ and $\delta S = \delta\langle K_\sigma\rangle$,
+which with the one-particle BW identification $K_\sigma = 2\pi B_{\rm boost}$ reads $\Delta S \le 2\pi\,\Delta\langle
+B_{\rm boost}\rangle$ (the Unruh modular bound). All four rungs are axiom-free theorems in
+`QIQTH/ModularEnergyBound.lean` — the Umegaki identity `modular_relEnt_identity`
+($D(\rho\|\sigma)=\Delta\langle K_\sigma\rangle-\Delta S$), the Casini bound `modular_casini_bound`, the
+Bisognano–Wichmann rewrite `finiteCorner_wedge_Casini_BW` (the modular-invariant-corner / BW identification
+carried as an **explicit hypothesis**), and the first law `finiteCorner_firstLaw`. This upgrades the *modular*
+pieces of the carried `Phase5Master` hypothesis from an assumption to derived results — **formalized modular
+QFT, not a derivation of the holographic $A/4G$ bound** (`ROUTE1_MODULAR_PLAN.md`).
+
+</div>
+
 ## Exploratory — is λ a *fact* or a *generator*? (a falsifiable alternative)
 
 This is a distinct, **speculative** direction, separate from Gaps 1–3, and it *changes the ontology* — so it is

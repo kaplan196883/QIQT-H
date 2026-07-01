@@ -48,6 +48,27 @@ $$
 S_{\mathrm{Araki}}\big(\omega_{W(f)\Omega}\,\Vert\,\omega_\Omega\big) = S_{\mathrm{CGP}}(f) \ge 0.
 $$
 
+## The free-field modular-energy bound (the honest core of "deriving holography")
+
+A related, self-contained axiom-free development formalizes the **modular-energy bound** — the derivable content
+of the JLMS route to the area law. The $A/4G$ area term itself is **not** free-field-derivable (the free scalar
+has no Newton constant $G$, no geometric area operator, a scheme-dependent cutoff coefficient, and the
+$\delta A/4G = 2\pi\!\int\!\delta T_{kk}$ step needs the Einstein equations) — so the $A/4G$ identification stays a
+*gravitational input*, not a theorem. What **is** machine-checked (`QIQTH/ModularEnergyBound.lean`) is that the
+entropy variation is controlled by the modular-energy variation, which under one-particle Bisognano–Wichmann
+$K_\sigma = 2\pi B_{\rm boost}$ is the Unruh bound $\Delta S \le 2\pi\,\Delta\langle B_{\rm boost}\rangle$:
+
+| theorem | statement |
+| --- | --- |
+| `modular_relEnt_identity` | Umegaki: $D(\rho\Vert\sigma) = (\langle K_\sigma\rangle_\rho-\langle K_\sigma\rangle_\sigma) - (S(\rho)-S(\sigma))$, $K_\sigma=-\log\sigma$ |
+| `modular_casini_bound` | $S(\rho)-S(\sigma) \le \langle K_\sigma\rangle_\rho-\langle K_\sigma\rangle_\sigma$ (from Klein positivity) |
+| `finiteCorner_wedge_Casini_BW` | with $K_\sigma=2\pi K_{\rm boost}+c$ (BW identification, **explicit** hypothesis): $\Delta S \le 2\pi\,\Delta\langle K_{\rm boost}\rangle$ |
+| `finiteCorner_firstLaw` | the first law $\delta S = \delta\langle K_\sigma\rangle$ at the reference (relative-entropy stationarity) |
+
+This upgrades the *modular* pieces of the carried `Phase5Master` hypothesis from an assumption to derived
+results. It is **formalized modular QFT — not a derivation of the holographic $A/4G$ bound**; the continuum
+Type III$_1\!\to$II crossed-product dual-weight trace where $A/4G$ would live remains a multi-year cited frontier.
+
 ## Emergent gravity: the Einstein equations as a machine-checked equation of state
 
 A second, self-contained axiom-free development formalizes **Jacobson's "Einstein equation of state"** route
