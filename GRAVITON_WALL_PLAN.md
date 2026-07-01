@@ -186,3 +186,11 @@ modular Hamiltonians, emergent metric, Iyer–Wald), as the inventory §8 alread
   directly feeding `allBall_firstLaw_iff_residual_zero`). Finite linear algebra; the *physical* probe family
   (continuum balls) stays a carried hypothesis (G8). **NEXT → G3 (`secondDiff_tailK_eq`: the discrete null modular
   kernel `Δ²(tailK) = T`; guard `Nat` subtraction, sign vs `wedge_boostCharge_eq_neg_stressFlux`, KG/free-field).**
+- **2026-07-01 — G3 ✅ DONE** ([AF] std-3, pinned, budget 0). The **discrete null modular shape derivative**:
+  `tailK N T c = ∑_{i=c}^N (i−c)·T_i` (the finite analogue of `K_V = 2π∫(u−V)·T_kk`), `secondDiff A c = A_{c−1}−2A_c+A_{c+1}`,
+  and **`secondDiff_tailK_eq : Δ²(tailK)_c = T_c`** for `c < N`. Proved cleanly via the backward-difference route
+  (`K_{d−1}−K_d = ∑_{i=d}^N T_i` by peeling the bottom of `Icc`, then `Δ²K = U_c − U_{c+1} = T_c`), over **`ℤ`
+  indices** to avoid `Nat`-subtraction truncation. Connects to the *existing* `T_kk` / `wedge_boostCharge_eq_neg_stressFlux`;
+  sign/orientation + KG/free-field instantiation carried — the discrete kernel identity only, NOT a physical
+  derivation. **NEXT → G4 (`EdgeRefinement` + refinement invariance — toy background independence; requires an
+  explicit cut/region correspondence).**

@@ -85,4 +85,48 @@ theorem separating_of_decoder {Cell Probe : Type*} [Fintype Cell] [Fintype Probe
   rw [hdecode f i]
   simp [hf]
 
+/-! ## G3 — the discrete null modular kernel  `Δ²K = T` (anchors to the existing `T_kk`) -/
+
+/-- The **discrete null modular tail kernel** `K_c = ∑_{i=c}^N (i−c)·T_i` — the finite/discrete analogue of the null
+    modular Hamiltonian `K_V = 2π∫(u−V)·T_kk`. Indices over `ℤ` to keep the subtraction genuine (no `Nat` truncation). -/
+noncomputable def tailK (N : ℤ) (T : ℤ → ℝ) (c : ℤ) : ℝ :=
+  ∑ i ∈ Finset.Icc c N, ((i : ℝ) - (c : ℝ)) * T i
+
+/-- The **discrete second difference** `Δ²A_c = A_{c−1} − 2A_c + A_{c+1}`. -/
+noncomputable def secondDiff (A : ℤ → ℝ) (c : ℤ) : ℝ := A (c - 1) - 2 * A c + A (c + 1)
+
+/-- **G3 — the discrete null modular shape derivative `Δ²K = T`.** The second difference of the tail kernel recovers
+    the local stress: `Δ²(tailK)_c = T_c` for `c < N` — the finite analogue of `δ²K_V/δV² = 2π T_kk`, connecting to
+    the *existing* `T_kk` / `wedge_boostCharge_eq_neg_stressFlux`. ⚠ Sign/orientation and the KG/free-field
+    instantiation of `T` are carried; this is the discrete kernel identity only, NOT a physical derivation. -/
+theorem secondDiff_tailK_eq (N : ℤ) (T : ℤ → ℝ) (c : ℤ) (hcN : c < N) :
+    secondDiff (tailK N T) c = T c := by
+  have hcle : c ≤ N := le_of_lt hcN
+  have e2 : Finset.Icc c N = insert c (Finset.Icc (c + 1) N) := by
+    ext x; simp only [Finset.mem_insert, Finset.mem_Icc]; omega
+  have hc_notin : c ∉ Finset.Icc (c + 1) N := by simp only [Finset.mem_Icc]; omega
+  -- backward difference: `K_{d-1} − K_d = ∑_{i=d}^N T_i`
+  have A : ∀ d : ℤ, d ≤ N → tailK N T (d - 1) - tailK N T d = ∑ i ∈ Finset.Icc d N, T i := by
+    intro d _
+    have ed : Finset.Icc (d - 1) N = insert (d - 1) (Finset.Icc d N) := by
+      ext x; simp only [Finset.mem_insert, Finset.mem_Icc]; omega
+    have hd_notin : (d - 1) ∉ Finset.Icc d N := by simp only [Finset.mem_Icc]; omega
+    unfold tailK
+    rw [ed, Finset.sum_insert hd_notin,
+      show (((d - 1 : ℤ) : ℝ) - ((d - 1 : ℤ) : ℝ)) = 0 by ring, zero_mul, zero_add,
+      ← Finset.sum_sub_distrib]
+    apply Finset.sum_congr rfl
+    intro i _
+    push_cast; ring
+  have hAc : tailK N T (c - 1) - tailK N T c = ∑ i ∈ Finset.Icc c N, T i := A c hcle
+  have hAc1 : tailK N T c - tailK N T (c + 1) = ∑ i ∈ Finset.Icc (c + 1) N, T i := by
+    simpa using A (c + 1) (by omega)
+  have hsplit : (∑ i ∈ Finset.Icc c N, T i) - (∑ i ∈ Finset.Icc (c + 1) N, T i) = T c := by
+    rw [e2, Finset.sum_insert hc_notin]; ring
+  unfold secondDiff
+  have hcomb : tailK N T (c - 1) - 2 * tailK N T c + tailK N T (c + 1)
+      = (tailK N T (c - 1) - tailK N T c) - (tailK N T c - tailK N T (c + 1)) := by ring
+  rw [hcomb, hAc, hAc1]
+  exact hsplit
+
 end QIQTH.GravDyn

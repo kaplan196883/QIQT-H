@@ -7746,6 +7746,11 @@ namespace QIQTH.AxiomAudit
 -- linear algebra; the physical probe family (continuum balls) is a carried hypothesis, plan G8. Axiom-free (std 3).
 #print axioms QIQTH.GravDyn.eq_zero_of_decoder
 #print axioms QIQTH.GravDyn.separating_of_decoder
+-- G3: the discrete null modular shape derivative. secondDiff_tailK_eq: Δ²(tailK N T) c = T c for c<N, where
+-- tailK c = ∑_{i=c}^N (i−c)·T_i -- the finite analogue of δ²K_V/δV² = 2π T_kk, connecting to the existing T_kk /
+-- wedge_boostCharge_eq_neg_stressFlux. Sign/orientation + KG/free-field instantiation carried; discrete kernel
+-- identity only, NOT a physical derivation. Axiom-free (std 3).
+#print axioms QIQTH.GravDyn.secondDiff_tailK_eq
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
