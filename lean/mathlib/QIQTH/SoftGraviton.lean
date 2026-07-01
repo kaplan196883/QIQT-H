@@ -96,4 +96,89 @@ theorem soft_gauge_invariant_iff_ward {n : ℕ} (η g : Fin n → ℝ) (p : Fin 
     rw [softFactor_gauge_shift η g p q hne]
     simp [hward]
 
+/-! ## B2b — universality on connected components (the equivalence principle)
+
+  With momentum conservation `∑_i η_i p_i = 0`, the Ward sum rule `∑_i η_i g_i p_i = 0` forces all couplings
+  EQUAL **provided the process is generic**: the only linear relation among the momenta is momentum conservation
+  itself. That genericity (`RichFamily`: the kernel of `c ↦ ∑ c_i p_i` is exactly the `η`-line) is the CARRIED
+  "sufficiently rich connected scattering family" hypothesis of Weinberg's argument — supplied here as an explicit
+  hypothesis (never an axiom), with a concrete kinematic non-vacuity witness (`witness_rich`). -/
+
+/-- **The rich-family (genericity) hypothesis**: the only linear relation among the momenta is momentum
+    conservation — the kernel of `c ↦ ∑_i c_i p_i` is the line `ℝ·η`. CARRIED physics input (generic momenta). -/
+def RichFamily {n : ℕ} (η : Fin n → ℝ) (p : Fin n → Fin 4 → ℝ) : Prop :=
+  ∀ c : Fin n → ℝ, (∀ μ, ∑ i, c i * p i μ = 0) → ∃ lam : ℝ, ∀ i, c i = lam * η i
+
+/-- **B2b — UNIVERSALITY (the equivalence principle):** for a generic process (`RichFamily`) with genuine
+    external particles (`η_i ≠ 0`), the Ward sum rule forces ALL couplings equal: `∃ g_U, ∀ i, g_i = g_U`.
+    Every species couples to the massless spin-2 field with ONE universal charge. -/
+theorem universality {n : ℕ} (η g : Fin n → ℝ) (p : Fin n → Fin 4 → ℝ)
+    (hη : ∀ i, η i ≠ 0) (hRich : RichFamily η p)
+    (hWard : ∀ μ, weightedMomentum η g p μ = 0) :
+    ∃ gU : ℝ, ∀ i, g i = gU := by
+  obtain ⟨lam, hlam⟩ := hRich (fun i => η i * g i) (fun μ => by
+    simpa [weightedMomentum] using hWard μ)
+  refine ⟨lam, fun i => ?_⟩
+  have h := hlam i
+  exact mul_left_cancel₀ (hη i) (by rw [h]; ring)
+
+/-- **The converse (consistency):** a universal coupling automatically satisfies the Ward sum rule, given
+    momentum conservation `∑_i η_i p_i = 0`. -/
+theorem ward_of_universal {n : ℕ} (η g : Fin n → ℝ) (p : Fin n → Fin 4 → ℝ) (gU : ℝ)
+    (hUniv : ∀ i, g i = gU) (hcons : ∀ μ, ∑ i, η i * p i μ = 0) (μ : Fin 4) :
+    weightedMomentum η g p μ = 0 := by
+  simp only [weightedMomentum, hUniv]
+  calc ∑ i, η i * gU * p i μ = gU * ∑ i, η i * p i μ := by
+        rw [Finset.mul_sum]; exact Finset.sum_congr rfl fun i _ => by ring
+    _ = 0 := by rw [hcons, mul_zero]
+
+/-- **B2 CAPSTONE — the equivalence principle from longitudinal decoupling:** for a generic scattering family,
+    gauge invariance of the soft-graviton factor (the consistency of massless spin-2 emission, B2a) forces ONE
+    universal coupling for all species. Weinberg's theorem at the algebraic level, end-to-end:
+    decoupling ⟹ Ward sum rule ⟹ (generic momenta) ⟹ universality. ⚠ The soft factor and the genericity
+    (`RichFamily`) are carried QFT/kinematics inputs; the analytic soft theorem is not claimed. -/
+theorem equivalence_principle {n : ℕ} (η g : Fin n → ℝ) (p : Fin n → Fin 4 → ℝ) (q : Fin 4 → ℝ)
+    (hne : ∀ i, dot (p i) q ≠ 0) (hη : ∀ i, η i ≠ 0) (hRich : RichFamily η p)
+    (ε : Matrix (Fin 4) (Fin 4) ℝ)
+    (hinv : ∀ ξ : Fin 4 → ℝ, softFactor η g p q (ε + gaugeShiftK q ξ) = softFactor η g p q ε) :
+    ∃ gU : ℝ, ∀ i, g i = gU :=
+  universality η g p hη hRich (ward_of_gauge_invariant η g p q hne ε hinv)
+
+/-! ### Non-vacuity: a concrete rich family -/
+
+/-- A concrete 5-particle momentum configuration: the four basis directions and their sum. -/
+def pW : Fin 5 → Fin 4 → ℝ := ![![1,0,0,0], ![0,1,0,0], ![0,0,1,0], ![0,0,0,1], ![1,1,1,1]]
+
+/-- Its sign vector (four incoming, one outgoing). -/
+def etaW : Fin 5 → ℝ := ![1, 1, 1, 1, -1]
+
+/-- Momentum conservation holds for the witness: `∑ η_i p_i = 0`. -/
+theorem witness_conserved (μ : Fin 4) : ∑ i, etaW i * pW i μ = 0 := by
+  fin_cases μ <;> simp [pW, etaW, Fin.sum_univ_five]
+
+/-- **The rich-family hypothesis is non-vacuous**: the concrete configuration `pW`/`etaW` satisfies it — the only
+    linear relation among these momenta is (a multiple of) momentum conservation. ⚠ A kinematic witness (the
+    genericity CAN hold), not a claim about physical on-shell processes. -/
+theorem witness_rich : RichFamily etaW pW := by
+  intro c hc
+  have h0 := hc 0
+  have h1 := hc 1
+  have h2 := hc 2
+  have h3 := hc 3
+  simp only [pW, Fin.sum_univ_five, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two,
+    Matrix.cons_val_three, Matrix.cons_val_four, Matrix.head_cons,
+    Matrix.tail_cons] at h0 h1 h2 h3
+  refine ⟨-(c 4), fun i => ?_⟩
+  fin_cases i
+  · show c 0 = -(c 4) * etaW 0
+    simp [etaW]; linarith
+  · show c 1 = -(c 4) * etaW 1
+    simp [etaW]; linarith
+  · show c 2 = -(c 4) * etaW 2
+    simp [etaW]; linarith
+  · show c 3 = -(c 4) * etaW 3
+    simp [etaW]; linarith
+  · show c 4 = -(c 4) * etaW 4
+    simp [etaW]
+
 end QIQTH.SoftGraviton

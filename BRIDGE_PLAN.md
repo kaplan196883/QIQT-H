@@ -84,9 +84,15 @@ derived, or background independence.** Every theorem: NO `sorry`; `#print axioms
   against the longitudinal numerator). **`soft_gauge_invariant_iff_ward`** — **THE IFF**: longitudinal decoupling
   (the soft factor gauge-invariant for every `ξ`) ⟺ the Weinberg sum rule `∑_i η_i g_i p_i^μ = 0`. ⚠ Algebraic
   identity only — NOT the analytic soft theorem; universality (all `g_i` equal) is B2b.
-- [ ] **B2b — universality on connected components.** Given momentum conservation `∑_i η_i p_i^μ = 0` and a
-  sufficiently rich connected scattering family (carried hypothesis), `∑_i η_i g_i p_i^μ = 0` at generic momenta
-  forces **all `g_i` equal** on each connected species component — the equivalence principle as a finite theorem.
+- [x] **B2b — universality (the equivalence principle) ✅** (`QIQTH/SoftGraviton.lean` extension, all [AF] std-3,
+  pinned, budget 0). **`RichFamily`** — the genericity hypothesis (the kernel of `c ↦ ∑c_ip_i` is exactly the
+  momentum-conservation line `ℝ·η`), CARRIED. **`universality`** — Ward sum rule + generic momenta + `η_i ≠ 0` ⟹
+  **all `g_i` equal**: one universal charge for every species. **`ward_of_universal`** — the converse consistency.
+  **`equivalence_principle`** — **the B2 capstone**: longitudinal decoupling of the soft graviton ⟹ Ward ⟹
+  (generic) ⟹ universal coupling — Weinberg's theorem at the algebraic level, end-to-end.
+  **`witness_rich`/`witness_conserved`** — a concrete 5-momentum configuration satisfying `RichFamily` +
+  conservation (non-vacuity; a kinematic witness, not an on-shell physical process). ⚠ Soft factor + genericity
+  carried; NOT the analytic soft theorem.
 - [ ] **C2a — the ball conformal Killing vector algebra.** The CHM kernel weight `(R² − |x|²)/2R` and its conformal
   Killing structure on the ball — the finite geometry (`K_B = 2π∫_{|x|<R} ((R²−|x|²)/2R) T_{00}` schematically).
 - [ ] **C2b — conditional CHM transport.** Under a **`CHMCompatible`** hypothesis (conformal covariance — CHM is a
@@ -146,3 +152,8 @@ push via schannel; update this Progress log + `LEAN_RESULTS_INVENTORY.md`. Consu
   decoupling ⟺ the Weinberg sum rule `∑η_i g_i p_i^μ = 0` (`soft_gauge_invariant_iff_ward`, an iff). All [AF]
   std-3, wired + pinned, budget 0. NEXT → B2b (universality on connected components: momentum conservation + a
   rich scattering family ⟹ all `g_i` equal — the equivalence principle).
+- **2026-07-02 — B2b ✅ LANDED** (`SoftGraviton.lean` extension): UNIVERSALITY — `universality` (Ward + generic
+  momenta (`RichFamily`, carried) + `η_i≠0` ⟹ all couplings equal), `equivalence_principle` (the B2 capstone:
+  decoupling ⟹ Ward ⟹ universal — Weinberg end-to-end at the algebraic level), `ward_of_universal` (converse),
+  `witness_rich`/`witness_conserved` (concrete non-vacuity). All [AF] std-3, pinned, budget 0. **Ingredient B is
+  COMPLETE.** NEXT → C2a (the ball conformal Killing weight / CHM kernel geometry).

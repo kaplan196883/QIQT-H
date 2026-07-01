@@ -347,6 +347,19 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   ⚠ Algebraic identity only — NOT the analytic soft theorem; universality (all `g_i` equal ⟸ momentum
   conservation + a rich scattering family) is B2b.
 
+- **The bridge, increment B2b — `QIQTH/SoftGraviton.lean` (extension)** (all **[AF]** std-3; `BRIDGE_PLAN.md`).
+  **Universality — the equivalence principle.** `RichFamily` (the genericity hypothesis: the kernel of
+  `c ↦ ∑c_ip_i` is exactly the momentum-conservation line `ℝ·η` — CARRIED kinematics input).
+  **`universality`** — the Ward sum rule + generic momenta + `η_i ≠ 0` ⟹ **all couplings `g_i` equal**: every
+  species couples to the massless spin-2 field with one universal charge. **`ward_of_universal`** — the converse
+  consistency (universal coupling + momentum conservation ⟹ Ward). **`equivalence_principle`** — **the B2
+  capstone**: longitudinal decoupling of the soft graviton ⟹ Ward sum rule ⟹ (generic family) ⟹ universal
+  coupling — **Weinberg's theorem at the algebraic level, end-to-end, machine-checked**.
+  **`witness_rich`/`witness_conserved`** — a concrete 5-momentum configuration satisfying `RichFamily` + momentum
+  conservation (non-vacuity; kinematic witness, not an on-shell physical process). ⚠ The soft factor and
+  genericity are carried QFT/kinematics inputs; the analytic soft theorem is not claimed. **Ingredient B (universal
+  coupling) is COMPLETE.**
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

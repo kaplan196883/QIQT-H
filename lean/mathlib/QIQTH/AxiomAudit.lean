@@ -7936,6 +7936,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SoftGraviton.softFactor_gauge_shift
 #print axioms QIQTH.SoftGraviton.ward_of_gauge_invariant
 #print axioms QIQTH.SoftGraviton.soft_gauge_invariant_iff_ward
+-- BRIDGE B2b (BRIDGE_PLAN.md): UNIVERSALITY = the EQUIVALENCE PRINCIPLE. RichFamily (kernel of c↦∑c_ip_i = the
+-- η-line = genericity, CARRIED). universality: Ward sum rule + generic momenta + η_i≠0 ⟹ ALL g_i EQUAL — one
+-- universal charge for every species. ward_of_universal: the converse consistency (universal + momentum
+-- conservation ⟹ Ward). equivalence_principle — B2 CAPSTONE: longitudinal decoupling of the soft graviton ⟹
+-- Ward ⟹ (generic) ⟹ universal coupling: WEINBERG'S THEOREM at the algebraic level, end-to-end.
+-- witness_rich + witness_conserved: a concrete 5-momentum configuration satisfying RichFamily + conservation
+-- (non-vacuity; kinematic witness, not an on-shell physical process). ⚠ Soft factor + genericity carried. Std 3.
+#print axioms QIQTH.SoftGraviton.universality
+#print axioms QIQTH.SoftGraviton.ward_of_universal
+#print axioms QIQTH.SoftGraviton.equivalence_principle
+#print axioms QIQTH.SoftGraviton.witness_rich
+#print axioms QIQTH.SoftGraviton.witness_conserved
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
