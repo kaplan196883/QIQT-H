@@ -93,7 +93,11 @@ push via schannel; update this Progress log + `LEAN_RESULTS_INVENTORY.md`. Consu
   into Ward identity + universality with `η_i` signs; C1/C2 weighted-boost/CHM-kernel formulas + `CHMCompatible`
   conditional; carried inputs as hypotheses not axioms; D phrased out-of-scope). Order re-cut per the verification:
   A1 → B1 → C1 → A2 → B2a → B2b → C2a → C2b → ASM. NEXT → A1.
-- **2026-07-02 — A1 ✅ LANDED** (`BridgeLinearizedGR.lean`): the full `G⁽¹⁾` symbol + gauge invariance (identical
-  vanishing on pure gauge, any `k`) + the TT reduction `G⁽¹⁾=−½k²e` + the capstone `graviton_solves_linEinstein`
-  (null TT ⟹ `G⁽¹⁾=0`, instantiated at `polPlus`/`polCross`) — **the quantized graviton (Q1–Q6) is provably the
-  graviton of GR**. All [AF] std-3, budget 0. NEXT → B1 (coupling ⟺ conservation).
+- **2026-07-02 — A1 ✅ LANDED** (`LinearizedEinstein.lean`, after consolidation): the full `G⁽¹⁾` symbol
+  (`ricciSymbol`/`einsteinSymbol`, every `(k,e)` — the ASM residual) + gauge invariance IDENTICALLY (pure-gauge and
+  additive forms, any `k`) + the **linearized Bianchi identity** `k^μ(δG)_{μν}=0` identically + the TT reduction
+  `einsteinSymbol_tt` (`δG=(−k²/2)•e` = "δG=−½□h") + the capstone `graviton_solves_linearized_einstein` (null `kDown`
+  + any `a•e₊+b•e×` ⟹ `δG=0`) + the CONVERSE `einstein_iff_dispersion` (nonzero TT: `δG=0 ⟺ ω²=κ²`, light-cone
+  dispersion) — **the quantized graviton (Q1–Q6) is provably the graviton of GR**. All [AF] std-3, budget 0.
+  (Two parallel A1 builds raced; the thinner duplicate `BridgeLinearizedGR.lean` was removed and the richer module
+  kept — a follow-up commit restored the module file the consolidation intended.) NEXT → B1 (coupling ⟺ conservation).
