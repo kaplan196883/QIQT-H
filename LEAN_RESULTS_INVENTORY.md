@@ -101,6 +101,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 >   entanglement `V_gen ≥ 0`, = 0 iff flat), and the conditional `distinctive_gap` under the `MaxEntropyCapacity`
 >   typeclass postulate (GIVEN the postulate, `Q_R − S_gen = gap ≥ 0`). The no-go forces it to be a postulate, not
 >   a derivation; the `√V_gen` continuum coefficient and `G` stay cited frontiers.
+> - **Route 1 ("derive holography") — REFRAMED** (GPT-5.5-pro expert review, 2026-07-01; `ROUTE1_MODULAR_PLAN.md`).
+>   Deriving the capacity bound via the JLMS modular identity `K_{∂R}=A/4ℓ_P²+K_bulk` — for a fixed-background
+>   **free scalar** the `A/4ℓ_P²` term is **NOT derivable** (no `G`, no area operator, cutoff/matter-dependent
+>   coefficient; the `δA/4G=2π∫δT_kk` step *uses the Einstein equations*, not pure BW). BW gives the Unruh `2π`, not
+>   the `1/4G`. So `A/4ℓ_P²` stays a **gravitational input**; the continuum Type III₁→II crossed-product dual-weight
+>   trace is a **multi-year cited frontier**. What **is** derivable (the honest Route-1 content, `ModularEnergyBound.lean`):
+>   the free-field **modular-energy bound** `ΔS ≤ 2π Δ⟨B_boost⟩` (Casini/first law, from relative-entropy positivity
+>   + the machine-checked one-particle BW `K_W=2π B_boost`) — upgrading `Phase5Master`'s modular pieces from carried
+>   hypothesis to theorems. **Formalized modular QFT, NOT a derivation of the holographic `A/4G` bound.**
 > - **Holographic confrontation — the postulate FALSIFIES/reduces** (GPT-5.5-pro expert review +
 >   `scripts/qr/twosector_killtest.py`, 2026-07-01). First independent test against real holography: **(i)** the
 >   postulate's universal `√V_gen` prediction is **FALSIFIED** at the Page/island transition (a two-fixed-area-sector

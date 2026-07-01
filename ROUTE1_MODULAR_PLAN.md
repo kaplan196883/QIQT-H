@@ -100,5 +100,11 @@ modular QFT — and honestly checkpoints `A/4G` as the gravitational input it is
 
 ## Progress log
 - **2026-07-01** — plan created from the GPT-5.5-pro Route-1 consult; goal REFRAMED (A/4G not free-field-derivable;
-  deliver the modular-energy bound instead). NEXT → Track A guardrail, then Track B (B1 Umegaki identity → B2 Casini
-  bound → B3 BW rewrite → B4 first law → B5 wire-in).
+  deliver the modular-energy bound instead).
+- **2026-07-01 — Track A (core) ✅.** Added the Route-1 reframing to the authoritative sources: paper §1.1a (appended
+  to the "Route 1 next target" sentence) and inventory §2 — "the `A/4ℓ_P²` term is NOT free-field-derivable (no `G`,
+  no area operator, cutoff-dependent coefficient, the `δA/4G=2π∫δT_kk` step uses the Einstein equations); BW gives
+  the Unruh `2π` not the `1/4G`; the honest deliverable is the free-field modular-energy bound `ΔS ≤ 2π Δ⟨B_boost⟩`
+  (formalized modular QFT, NOT a holographic-`A/4G` derivation); the continuum Type II trace stays a multi-year
+  frontier." **NEXT → finish Track A (website `open-problems`/`formalization` + ledger), then Track B (B1 Umegaki
+  identity → B2 Casini bound → B3 BW rewrite → B4 first law → B5 wire-in).**
