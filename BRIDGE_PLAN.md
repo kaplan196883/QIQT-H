@@ -35,15 +35,19 @@ derived, or background independence.** Every theorem: NO `sorry`; `#print axioms
 
 ## Increments (GPT-5.5-pro-recommended order; each axiom-free, green, one commit)
 
-- [x] **A1 — the full linearized Einstein anchor ✅** (`QIQTH/BridgeLinearizedGR.lean`, `QIQTH.Bridge`, all [AF]
-  std-3, wired + pinned, budget 0). The **full flat-background linearized Einstein tensor** in plane-wave-symbol form
-  (`∂ → k` exactly on each mode): `linRicci k e = ½(k_μ(k·e)_ν + k_ν(k·e)_μ − k²e − k_μk_ν tr_η e)`,
-  `linEinstein = R⁽¹⁾ − ½η·R⁽¹⁾-scalar` — defined for **every** `(k, e)` (the ASM `residual`). **`linEinstein_gauge`**
-  — pure gauge `e = k⊙ξ` ⟹ `G⁽¹⁾ = 0` *identically* (any `k`; linearized diffeo invariance — a bonus beyond the
-  plan). **`linEinstein_tt`** — transverse + traceless ⟹ `G⁽¹⁾ = −½k²e` (the TT reduction = "G⁽¹⁾=−½□h").
-  **`graviton_solves_linEinstein`** + `einstein_polPlus`/`einstein_polCross` — null `k` + TT ⟹ `G⁽¹⁾ = 0`: **the
-  field quantized in Q1–Q6 provably solves linearized vacuum Einstein — it IS the graviton of GR.** ⚠ Linearized,
-  vacuum, free, flat.
+- [x] **A1 — the full linearized Einstein anchor ✅** (`QIQTH/LinearizedEinstein.lean`, `QIQTH.LinEinstein`, all [AF]
+  std-3, wired + pinned, budget 0; sign conventions documented in the header, `linEinsteinCoeff` = the physical
+  coefficient). The **full flat-background linearized Einstein tensor** in plane-wave-symbol form (`∂ → k` exactly
+  per mode): `ricciSymbol`/`einsteinSymbol` defined for **every** `(k, e)` (the ASM `residual`).
+  **`einsteinSymbol_gauge`**/`ricciSymbol_gauge` — pure gauge `e = k⊙ξ` ⟹ `δG = 0` *identically* (any `k`;
+  linearized diffeo invariance). **`bianchi_einsteinSymbol`** — the **linearized Bianchi identity** `k^μ(δG)_{μν}=0`
+  identically (every `k, e`; the structural engine behind B1-conservation and the G7b `φ`-removal).
+  **`einsteinSymbol_tt`** — TT ⟹ `δG = (−k²/2)•e` (the reduction "δG = −½□h", tying to G11c `graviton_null_wave`).
+  **`graviton_solves_linearized_einstein`** — null `kDown` + the quantized graviton's polarization content
+  `a•e₊+b•e×` ⟹ `δG = 0`: **the field quantized in Q1–Q6 provably solves linearized vacuum Einstein — it IS the
+  graviton of GR.** **`einsteinSymbol_eq_zero_iff_massless`** + **`einstein_iff_dispersion`** — the converse: for
+  nonzero TT, `δG = 0 ⟺ k² = 0 ⟺ ω² = κ²` (Einstein *forces* light-cone propagation). ⚠ Linearized, vacuum, free,
+  flat. (An initial thinner duplicate `BridgeLinearizedGR.lean` was consolidated into this richer module.)
 - [ ] **B1 — coupling ⟺ conservation.** The linearized matter coupling `∫ h_{μν}T^{μν}` (symmetric `T`, no boundary
   terms): gauge invariance under `h → h + ∂ξ + (∂ξ)ᵀ` **iff** `∂_μT^{μν} = 0` (prove the iff where boundary conditions
   allow; at minimum ⟸ and the ⟹ under a separating class of `ξ`). The first half of Weinberg, algebraic.

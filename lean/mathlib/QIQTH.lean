@@ -43,7 +43,7 @@ import QIQTH.InducedNewtonConstant
 import QIQTH.HolographicScreenCode
 import QIQTH.EmergentDynamics
 import QIQTH.GravitonQuantization
-import QIQTH.BridgeLinearizedGR
+import QIQTH.LinearizedEinstein
 import QIQTH.BellMarginal
 import QIQTH.Bell
 import QIQTH.Tsirelson

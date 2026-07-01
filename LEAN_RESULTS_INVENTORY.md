@@ -281,16 +281,21 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   occupation · Hamiltonian+zero-point · helicity · ladder+coherent · two-point). Standard free-field QFT,
   machine-checked — NOT a claim of quantum gravity (free · single-mode→continuum additive · classical≠interacting).
 
-- **The bridge, increment A1 — `QIQTH/BridgeLinearizedGR.lean`** (namespace `QIQTH.Bridge`, all **[AF]** std-3;
-  `BRIDGE_PLAN.md`, GPT-5.5-pro-verified). **The full flat-background linearized Einstein tensor** in plane-wave
-  symbol form (`∂ → k` exact per mode): `linRicci`, `linRicciScalar`, `linEinstein = R⁽¹⁾ − ½η R⁽¹⁾` — defined for
-  **every** wavevector `k` and perturbation `e` (the assembly `residual`, not only on-shell modes).
-  **`linEinstein_gauge`** — pure gauge `e = k⊙ξ` gives `G⁽¹⁾ = 0` *identically* (any `k`): linearized diffeomorphism
-  invariance. **`linEinstein_tt`** — transverse+traceless ⟹ `G⁽¹⁾ = −½k²e` (the TT-gauge reduction, momentum-space
-  "`G⁽¹⁾=−½□h`"). **`graviton_solves_linEinstein`** (+ `einstein_polPlus`/`einstein_polCross`) — null `k` (`k²=0`) +
-  TT ⟹ `G⁽¹⁾ = 0`: **the quantized free graviton (Q1–Q6, whose polarization content is exactly the TT sector) is
-  provably the graviton of general relativity.** ⚠ Linearized ≠ full; vacuum; free; flat background — anchors the
-  graviton to GR; does NOT derive gravity (bridge ingredient D = the cited open frontier).
+- **The bridge, increment A1 — `QIQTH/LinearizedEinstein.lean`** (namespace `QIQTH.LinEinstein`, all **[AF]** std-3;
+  `BRIDGE_PLAN.md`, GPT-5.5-pro-verified; sign conventions in the header, `linEinsteinCoeff` = the physical
+  coefficient). **The full flat-background linearized Einstein tensor** in plane-wave symbol form (`∂ → k` exact per
+  mode): `ricciSymbol`/`einsteinSymbol` — defined for **every** wavevector `k` and perturbation `e` (the assembly
+  `residual`, not only on-shell modes). **`einsteinSymbol_gauge`**/`ricciSymbol_gauge` — pure gauge `e = k⊙ξ` gives
+  `δG = 0` *identically* (any `k`): linearized diffeomorphism invariance. **`bianchi_einsteinSymbol`** — the
+  **linearized Bianchi identity** `k^μ(δG)_{μν} = 0` identically (every `k, e`; the engine behind B1 stress-energy
+  conservation and the G7b `φ`-removal). **`einsteinSymbol_tt`** — transverse+traceless ⟹ `δG = (−k²/2)•e` (the
+  TT-gauge reduction, momentum-space "`δG=−½□h`", tying to G11c). **`graviton_solves_linearized_einstein`** — null
+  `kDown` + any polarization combo `a•e₊+b•e×` ⟹ `δG = 0`: **the quantized free graviton (Q1–Q6, whose polarization
+  content is exactly the TT sector) is provably the graviton of general relativity.**
+  **`einsteinSymbol_eq_zero_iff_massless`** + **`einstein_iff_dispersion`** — the converse: for a nonzero TT
+  polarization `δG = 0 ⟺ k² = 0`, and on the z-directed family `⟺ ω² = κ²` — linearized Einstein *forces*
+  propagation at the speed of light. ⚠ Linearized ≠ full; vacuum; free; flat background — anchors the graviton to
+  GR; does NOT derive gravity (bridge ingredient D = the cited open frontier).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
