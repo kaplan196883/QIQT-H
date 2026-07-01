@@ -78,5 +78,37 @@ theorem modular_casini_bound {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : �
   have hnn := relEntropy_nonneg hρ hσ hρd.trace_one hσd.trace_one
   linarith [hid, hnn]
 
+/-- The **boost energy** `⟨K_boost⟩_ρ = tr(ρ·K_boost).re` — the expectation of the Lorentz boost generator. -/
+noncomputable def boostEnergy (ρ K : Matrix n n ℂ) : ℝ := (ρ * K).trace.re
+
+/-- Under the **Bisognano–Wichmann identification** `K_σ = 2π·K_boost + c·1`, the modular energy is
+    `2π·⟨K_boost⟩_ρ + c` (the additive constant shifts by `c` because `tr ρ = 1`). -/
+lemma modEnergy_of_BW {ρ σ : Matrix n n ℂ} (hρd : IsDensity ρ) (hσ : σ.IsHermitian)
+    (Kboost : Matrix n n ℂ) (c : ℝ)
+    (hBW : modHam hσ = (2 * Real.pi) • Kboost + c • (1 : Matrix n n ℂ)) :
+    modEnergy ρ hσ = 2 * Real.pi * boostEnergy ρ Kboost + c := by
+  rw [modEnergy_eq_trace, hBW]
+  unfold boostEnergy
+  simp only [Matrix.mul_add, Matrix.mul_smul, Matrix.mul_one, Matrix.trace_add, Matrix.trace_smul,
+    Complex.add_re, Complex.smul_re, smul_eq_mul, hρd.trace_one, Complex.one_re, mul_one]
+
+/-- **B3 — the Casini / Bisognano–Wichmann modular-energy bound** (the honest free-field Route-1 content).
+    If the (finite-corner) modular Hamiltonian is the compressed boost generator up to a constant,
+    `K_σ = 2π·K_boost + c·1` (the **BW/KMS identification, carried as an EXPLICIT hypothesis** — a generic
+    corner does *not* preserve BW modular flow, so this is where the modular-invariant-corner assumption lives,
+    not silently), then the entropy variation is bounded by the **boost energy** (the Unruh `2π`):
+    `S(ρ) − S(σ) ≤ 2π (⟨K_boost⟩_ρ − ⟨K_boost⟩_σ)`.
+
+    ⚠ Formalized modular QFT — **NOT** the holographic `S ≤ A/4G` bound. The `A/4G` identification of the boost
+    generator's expectation with a geometric area is a *gravitational input*, not derivable here (file header). -/
+theorem finiteCorner_wedge_Casini_BW {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDef)
+    (hρd : IsDensity ρ) (hσd : IsDensity σ) (Kboost : Matrix n n ℂ) (c : ℝ)
+    (hBW : modHam hσ.1 = (2 * Real.pi) • Kboost + c • (1 : Matrix n n ℂ)) :
+    vonNeumannEntropy hρd - vonNeumannEntropy hσd
+      ≤ 2 * Real.pi * (boostEnergy ρ Kboost - boostEnergy σ Kboost) := by
+  have hcasini := modular_casini_bound hρ hσ hρd hσd
+  rw [modEnergy_of_BW hρd hσ.1 Kboost c hBW, modEnergy_of_BW hσd hσ.1 Kboost c hBW] at hcasini
+  linarith [hcasini]
+
 end ModularEnergyBound
 end QIQTH

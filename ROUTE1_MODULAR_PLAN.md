@@ -118,3 +118,10 @@ modular QFT — and honestly checkpoints `A/4G` as the gravitational input it is
   identification is NOT claimed (gravitational input). **NEXT → B3 `finiteCorner_wedge_Casini_BW` (substitute
   `K_σ = 2π K_boost + c·1`, carry the modular-invariant-corner caveat as an explicit hypothesis) → B4 first law →
   finish Track A (website/ledger) → B5.**
+- **2026-07-01 — B3 ✅ DONE** (the BW modular-energy bound). Built `boostEnergy ⟨K_boost⟩_ρ`, `modEnergy_of_BW`
+  (under `K_σ = 2π·K_boost + c·1` the modular energy is `2π⟨K_boost⟩ + c`, the `c` shifting by `tr ρ = 1`), and
+  **`finiteCorner_wedge_Casini_BW`**: `S(ρ)−S(σ) ≤ 2π(⟨K_boost⟩_ρ − ⟨K_boost⟩_σ)` — the Unruh `2π` modular bound,
+  with the BW/KMS identification (`K_σ = 2π K_boost + c·1`) carried as an **explicit hypothesis** (a generic corner
+  does NOT preserve BW flow — the modular-invariant-corner caveat lives there, not silently). Axiom-free std-3,
+  pinned, budget 0. **NEXT → B4 `finiteCorner_wedge_firstLaw_BW` (differentiate `S(ρ_t)` at `ρ_0=σ`, traceless
+  perturbation ⟹ `δS = 2π⟨δρ·K_boost⟩`) → finish Track A (website/ledger) → B5 wire-in.**

@@ -7670,6 +7670,11 @@ namespace QIQTH.AxiomAudit
 -- gravitational input; the continuum Type II trace is a cited frontier). Axiom-free (std 3).
 #print axioms QIQTH.ModularEnergyBound.modular_relEnt_identity
 #print axioms QIQTH.ModularEnergyBound.modular_casini_bound
+-- B3: the Bisognano–Wichmann rewrite finiteCorner_wedge_Casini_BW — given K_σ = 2π·K_boost + c·1 (BW/KMS
+-- identification carried as an EXPLICIT hypothesis; a generic corner does NOT preserve BW flow), the entropy
+-- variation is bounded by the boost energy: ΔS ≤ 2π Δ⟨K_boost⟩ (the Unruh 2π). Formalized modular QFT; the A/4G
+-- identification of the boost expectation with a geometric area is a gravitational input, not derived. Std 3.
+#print axioms QIQTH.ModularEnergyBound.finiteCorner_wedge_Casini_BW
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
