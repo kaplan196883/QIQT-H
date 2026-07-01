@@ -236,3 +236,11 @@ modular Hamiltonians, emergent metric, Iyer–Wald), as the inventory §8 alread
   RT/extremal-area emergence, Iyer–Wald geometry, linearized-graviton PDE/QFT, full nonlinear/quantized graviton) +
   `hTkk`/interacting-matter/numerical-`G` — genuine multi-year research, NOT loop-grindable. **The tractable surface
   is exhausted; CHECKPOINTED COMPLETE.**
+- **2026-07-01 — G11a ✅ (bonus, "keep grinding"): the graviton's two polarizations.** `kUp` (raised null
+  wavevector), `Transverse`/`Traceless`, the `+`/`×` polarization tensors `polPlus`/`polCross` (each **symmetric,
+  transverse, traceless**), and **`graviton_polarizations_indep`** — the two are **linearly independent**. So there
+  are **two independent physical transverse-traceless polarizations** of the linearized metric perturbation for a
+  null wavevector — the spin-2 polarization content in 4D. ⚠ **KINEMATIC only** (that the TT space is *exactly*
+  2-dimensional is the standard massless-spin-2 little-group result); this is **NOT** the quantized
+  graviton/propagator/dynamics (G11/G12 remain frontier). All [AF] std-3, pinned, budget 0. A genuine finite
+  extension of the linearized-graviton kinematics; beyond it the tractable surface is truly exhausted.

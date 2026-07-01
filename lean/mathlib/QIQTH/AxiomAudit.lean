@@ -7779,6 +7779,16 @@ namespace QIQTH.AxiomAudit
 -- this is the trivial finite plug). LINEARIZED only, NEVER the propagating/quantized graviton (G11/G12). Std 3.
 #print axioms QIQTH.GravDyn.symForm_proportional_to_minkowski_of_null_quad_zero
 #print axioms QIQTH.GravDyn.residual_vanishes_of_metric_form
+-- G11a (partial, KINEMATIC): the linearized graviton's two transverse-traceless polarizations. polPlus/polCross are
+-- symmetric, transverse (∑ k^μ h_μν = 0), traceless; graviton_polarizations_indep -- they are linearly independent.
+-- Two independent physical TT polarizations = the spin-2 polarization content in 4D. ⚠ KINEMATIC only (exact-2 is the
+-- little-group result); NOT the quantized graviton/propagator/dynamics (G11/G12 frontier). Std 3.
+#print axioms QIQTH.GravDyn.polPlus_isSymm
+#print axioms QIQTH.GravDyn.polPlus_transverse
+#print axioms QIQTH.GravDyn.polPlus_traceless
+#print axioms QIQTH.GravDyn.polCross_transverse
+#print axioms QIQTH.GravDyn.polCross_traceless
+#print axioms QIQTH.GravDyn.graviton_polarizations_indep
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

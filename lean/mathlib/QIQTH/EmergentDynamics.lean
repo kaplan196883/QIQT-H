@@ -351,4 +351,44 @@ theorem residual_vanishes_of_metric_form (S : Matrix (Fin 4) (Fin 4) ℝ) (φ : 
     (hφS : S = φ • minkMetric) (hφ0 : φ = 0) : S = 0 := by
   rw [hφS, hφ0, zero_smul]
 
+/-! ## G11a (partial) — the linearized graviton's two transverse-traceless polarizations (KINEMATIC only) -/
+
+/-- The raised null wavevector `k^μ = (−1,0,0,1)` (for `k` along `z`, `η = diag(−1,1,1,1)`). -/
+def kUp : Fin 4 → ℝ := ![-1, 0, 0, 1]
+
+/-- `h` is **transverse** to the null `k` iff `∑_μ k^μ h_{μν} = 0` for all `ν`. -/
+def Transverse (h : Matrix (Fin 4) (Fin 4) ℝ) : Prop := ∀ ν, ∑ μ, kUp μ * h μ ν = 0
+
+/-- `h` is **traceless** iff `η^{μν} h_{μν} = −h₀₀ + h₁₁ + h₂₂ + h₃₃ = 0`. -/
+def Traceless (h : Matrix (Fin 4) (Fin 4) ℝ) : Prop := -h 0 0 + h 1 1 + h 2 2 + h 3 3 = 0
+
+/-- The `+` polarization tensor `e_x⊗e_x − e_y⊗e_y`. -/
+def polPlus : Matrix (Fin 4) (Fin 4) ℝ := !![0, 0, 0, 0; 0, 1, 0, 0; 0, 0, -1, 0; 0, 0, 0, 0]
+/-- The `×` polarization tensor `e_x⊗e_y + e_y⊗e_x`. -/
+def polCross : Matrix (Fin 4) (Fin 4) ℝ := !![0, 0, 0, 0; 0, 0, 1, 0; 0, 1, 0, 0; 0, 0, 0, 0]
+
+theorem polPlus_isSymm : polPlus.IsSymm := by
+  ext i j; fin_cases i <;> fin_cases j <;> rfl
+theorem polCross_isSymm : polCross.IsSymm := by
+  ext i j; fin_cases i <;> fin_cases j <;> rfl
+theorem polPlus_transverse : Transverse polPlus := by
+  intro ν; fin_cases ν <;> simp [kUp, polPlus, Fin.sum_univ_four]
+theorem polCross_transverse : Transverse polCross := by
+  intro ν; fin_cases ν <;> simp [kUp, polCross, Fin.sum_univ_four]
+theorem polPlus_traceless : Traceless polPlus := by simp [Traceless, polPlus]
+theorem polCross_traceless : Traceless polCross := by simp [Traceless, polCross]
+
+/-- **G11a — the two graviton polarizations are linearly independent.** Together with symmetry/transverse/traceless
+    above, this exhibits **two independent physical (transverse-traceless) polarizations** of the linearized
+    metric perturbation for a null wavevector — the graviton's spin-2 polarization content in 4D. ⚠ This is the
+    **kinematic** polarization count; that the TT space is *exactly* 2-dimensional is the standard massless-spin-2
+    little-group result. It is **NOT** the quantized graviton / propagator / dynamics (G11/G12 remain frontier). -/
+theorem graviton_polarizations_indep (a b : ℝ)
+    (h : a • polPlus + b • polCross = 0) : a = 0 ∧ b = 0 := by
+  constructor
+  · have := congrFun (congrFun h 1) 1
+    simpa [polPlus, polCross] using this
+  · have := congrFun (congrFun h 1) 2
+    simpa [polPlus, polCross] using this
+
 end QIQTH.GravDyn
