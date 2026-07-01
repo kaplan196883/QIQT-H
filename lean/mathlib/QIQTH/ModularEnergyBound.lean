@@ -163,5 +163,36 @@ theorem finiteCorner_firstLaw_boostEnergy {ρt : ℝ → Matrix n n ℂ} {S' B' 
   have hD := finiteCorner_firstLaw hρt hρtd hrel
   linarith
 
+/-- **B6 — saturation / rigidity of the Casini modular-energy bound.** The bound
+    `S(ρ)−S(σ) ≤ ⟨K_σ⟩_ρ − ⟨K_σ⟩_σ` (`modular_casini_bound`) is **saturated** — equality holds — **iff**
+    `ρ = σ`. So the modular-energy bound is tight *only* at the modular reference state. Forward: equality forces
+    the relative entropy `D(ρ‖σ) = 0` (via B1's identity), hence `ρ = σ` by **faithfulness** of the relative
+    entropy (`relEntropy_eq_zero`, Klein's equality case). Reverse: at `ρ = σ`, `D = 0` and the identity gives
+    equality. Formalized modular QFT; no `A/4G`, no gravity. -/
+theorem modular_casini_saturation {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDef)
+    (hρd : IsDensity ρ) (hσd : IsDensity σ) :
+    vonNeumannEntropy hρd - vonNeumannEntropy hσd = modEnergy ρ hσ.1 - modEnergy σ hσ.1 ↔ ρ = σ := by
+  have hid := modular_relEnt_identity hρ hσ hρd hσd
+  constructor
+  · intro heq
+    have hD0 : relEntropy hρ.1 hσ.1 = 0 := by rw [hid]; linarith
+    exact relEntropy_eq_zero hρ hσ hρd.trace_one hσd.trace_one hD0
+  · intro hρσ
+    have hD0 : relEntropy hρ.1 hσ.1 = 0 := by subst hρσ; exact relEntropy_self hσ.1
+    linarith [hid, hD0]
+
+/-- **B6′ — saturation of the Bisognano–Wichmann boost-energy bound.** Under the BW identification
+    `K_σ = 2π·K_boost + c·1`, the Unruh bound `S(ρ)−S(σ) ≤ 2π(⟨K_boost⟩_ρ − ⟨K_boost⟩_σ)`
+    (`finiteCorner_wedge_Casini_BW`) is **saturated iff `ρ = σ`** — the entropy variation equals `2π` times the
+    boost-energy variation exactly at the reference vacuum and nowhere else. Formalized modular QFT; no `A/4G`. -/
+theorem finiteCorner_wedge_saturation_BW {ρ σ : Matrix n n ℂ} (hρ : ρ.PosDef) (hσ : σ.PosDef)
+    (hρd : IsDensity ρ) (hσd : IsDensity σ) (Kboost : Matrix n n ℂ) (c : ℝ)
+    (hBW : modHam hσ.1 = (2 * Real.pi) • Kboost + c • (1 : Matrix n n ℂ)) :
+    vonNeumannEntropy hρd - vonNeumannEntropy hσd
+      = 2 * Real.pi * (boostEnergy ρ Kboost - boostEnergy σ Kboost) ↔ ρ = σ := by
+  rw [← modular_casini_saturation hρ hσ hρd hσd,
+    modEnergy_of_BW hρd hσ.1 Kboost c hBW, modEnergy_of_BW hσd hσ.1 Kboost c hBW]
+  constructor <;> intro h <;> linarith
+
 end ModularEnergyBound
 end QIQTH

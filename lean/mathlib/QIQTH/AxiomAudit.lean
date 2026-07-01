@@ -7684,6 +7684,11 @@ namespace QIQTH.AxiomAudit
 -- derives the RELATION between their derivatives (B1 identity + B4 stationarity + BW rewrite), all scalar calculus.
 -- Formalized modular QFT; no A/4G, no gravity. Axiom-free (std 3).
 #print axioms QIQTH.ModularEnergyBound.finiteCorner_firstLaw_boostEnergy
+-- B6: saturation/rigidity of the Casini bound modular_casini_saturation — ΔS = Δ⟨K_σ⟩ ⟺ ρ = σ (the bound is
+-- tight only at the reference), from B1 + faithfulness of relative entropy (relEntropy_eq_zero, Klein equality).
+-- B6': the BW boost-energy form finiteCorner_wedge_saturation_BW — ΔS = 2π Δ⟨K_boost⟩ ⟺ ρ = σ. Both axiom-free.
+#print axioms QIQTH.ModularEnergyBound.modular_casini_saturation
+#print axioms QIQTH.ModularEnergyBound.finiteCorner_wedge_saturation_BW
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

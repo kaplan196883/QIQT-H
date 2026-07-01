@@ -162,3 +162,12 @@ modular QFT — and honestly checkpoints `A/4G` as the gravitational input it is
   so `D' = 2π·B' − S'`; B4 stationarity forces `D' = 0`; hence `S' = 2π·B'`. Axiom-free std-3, pinned, budget 0.
   This closes B4 to its full targeted form. Formalized modular QFT; no `A/4G`, no gravity, no `G`. The campaign
   deliverable now includes both the stationarity AND the explicit boost-energy first law.
+- **2026-07-01 — B6 + B6′ ✅ DONE (saturation / rigidity — completes the bound with its tightness case).** Built
+  **`modular_casini_saturation`**: the Casini bound `ΔS ≤ Δ⟨K_σ⟩` is **saturated iff `ρ = σ`** — equality holds
+  *only* at the modular reference. Forward: equality ⟹ `D(ρ‖σ) = 0` (B1) ⟹ `ρ = σ` by **faithfulness** of the
+  relative entropy (the repo's axiom-free `relEntropy_eq_zero`, Klein's equality case); reverse via `relEntropy_self`
+  + the identity. And **`finiteCorner_wedge_saturation_BW`**: the BW form `ΔS = 2π Δ⟨K_boost⟩ ⟺ ρ = σ` (the Unruh
+  bound is tight only at the reference vacuum), by rewriting the K_σ saturation through `modEnergy_of_BW`. Both
+  axiom-free std-3, pinned, budget 0. This gives the modular-energy bound its **rigidity** companion — the bound
+  AND exactly when it is an equality. Formalized modular QFT; no `A/4G`, no gravity. **Track-B tractable rungs now
+  fully exhausted** (B1–B6 + B4′ + B6′); only the labelled multi-year cited frontiers remain.
