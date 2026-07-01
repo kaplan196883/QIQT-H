@@ -7828,6 +7828,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GravDyn.physProj_gauge
 #print axioms QIQTH.GravDyn.physProj_trace
 #print axioms QIQTH.GravDyn.physProj_extracts_physical
+-- G11c THE GRAVITON PROPAGATES (classical field EOM, genuine calculus): a null-profile field h(t,z)=f(t−z) satisfies
+-- the 1+1 wave equation ∂²_t h = ∂²_z h (graviton_null_wave), i.e. the massless d'Alembertian −∂²_t+∂²_z annihilates
+-- it (graviton_dalembertian_zero) -- the graviton is a wave travelling at c (consistent with masslessness kUp_null).
+-- graviton_cos_wave: the concrete sinusoidal wave cos(t−z) (non-vacuous instance). ⚠ CLASSICAL linear field EOM;
+-- NOT the quantized graviton (Fock space = the wall). Std 3.
+#print axioms QIQTH.GravDyn.graviton_null_wave
+#print axioms QIQTH.GravDyn.graviton_dalembertian_zero
+#print axioms QIQTH.GravDyn.graviton_cos_wave
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

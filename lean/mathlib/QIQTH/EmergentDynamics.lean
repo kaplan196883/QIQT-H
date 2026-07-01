@@ -701,4 +701,64 @@ theorem physProj_extracts_physical (h : Matrix (Fin 4) (Fin 4) ℝ) (hSym : h.Is
   rw [physProj_add, physProj_add, physProj_smul, physProj_smul, physProj_polPlus,
     physProj_polCross, physProj_gauge, add_zero]
 
+/-! ## G11c — the graviton propagates: a null profile solves the wave equation (the classical field EOM)
+
+  The honest capstone of "the graviton propagates": a genuine field satisfying its PDE (real calculus, not a
+  momentum-space symbol). A null-profile field `h(t,z) = f(t−z)` — each transverse-traceless component of the metric
+  perturbation, moving along a null direction (`t∓z` is null, consistent with `kUp_null`) — satisfies the 1+1 wave
+  equation `∂²_t h = ∂²_z h`, so the massless d'Alembertian `−∂²_t + ∂²_z` annihilates it. The graviton is a wave
+  travelling at `c`. ⚠ CLASSICAL linear field equation; NOT the quantized graviton (Fock space = the wall). -/
+
+/-- **G11c — the linearized graviton propagates at the speed of light.** Any null-profile field `h(t,z) = f(t−z)`
+    satisfies the 1+1 wave equation `∂²_t h = ∂²_z h`. Genuine calculus: `∂_t f(t−z)=f'(t−z)`, `∂²_t=f''(t−z)`;
+    `∂_z f(t−z)=−f'(t−z)`, `∂²_z=f''(t−z)`; both equal `f''(t−z)`. Consistent with masslessness (`kUp_null`).
+    ⚠ Classical linear field EOM; NOT the quantized graviton. -/
+theorem graviton_null_wave (f : ℝ → ℝ) (hf_diff : Differentiable ℝ f)
+    (hdf_diff : Differentiable ℝ (deriv f)) (t z : ℝ) :
+    deriv (fun s => deriv (fun r => f (r - z)) s) t
+      = deriv (fun s => deriv (fun r => f (t - r)) s) z := by
+  have hsub_deriv :
+      (fun s : ℝ => deriv (fun r : ℝ => f (r - z)) s) = fun s : ℝ => deriv f (s - z) := by
+    funext s
+    have hs : HasDerivAt (fun r : ℝ => f (r - z)) (deriv f (s - z)) s := by
+      simpa using (((hf_diff (s - z)).hasDerivAt).comp s ((hasDerivAt_id s).sub_const z))
+    exact hs.deriv
+  have hconstsub_deriv :
+      (fun s : ℝ => deriv (fun r : ℝ => f (t - r)) s) = fun s : ℝ => -deriv f (t - s) := by
+    funext s
+    have hs : HasDerivAt (fun r : ℝ => f (t - r)) (-deriv f (t - s)) s := by
+      simpa using (((hf_diff (t - s)).hasDerivAt).comp s ((hasDerivAt_id s).const_sub t))
+    exact hs.deriv
+  have hleft :
+      deriv (fun s : ℝ => deriv (fun r : ℝ => f (r - z)) s) t = deriv (deriv f) (t - z) := by
+    rw [hsub_deriv]
+    have ht : HasDerivAt (fun s : ℝ => deriv f (s - z)) (deriv (deriv f) (t - z)) t := by
+      simpa using (((hdf_diff (t - z)).hasDerivAt).comp t ((hasDerivAt_id t).sub_const z))
+    exact ht.deriv
+  have hright :
+      deriv (fun s : ℝ => deriv (fun r : ℝ => f (t - r)) s) z = deriv (deriv f) (t - z) := by
+    rw [hconstsub_deriv]
+    have hz0 : HasDerivAt (fun s : ℝ => deriv f (t - s)) (-deriv (deriv f) (t - z)) z := by
+      simpa using (((hdf_diff (t - z)).hasDerivAt).comp z ((hasDerivAt_id z).const_sub t))
+    have hz : HasDerivAt (fun s : ℝ => -deriv f (t - s)) (deriv (deriv f) (t - z)) z := by
+      simpa using hz0.neg
+    exact hz.deriv
+  exact hleft.trans hright.symm
+
+/-- **The massless d'Alembertian annihilates the graviton** `−∂²_t h + ∂²_z h = 0` for the null profile
+    `h = f(t−z)` — the wave-operator form of `graviton_null_wave`. -/
+theorem graviton_dalembertian_zero (f : ℝ → ℝ) (hf_diff : Differentiable ℝ f)
+    (hdf_diff : Differentiable ℝ (deriv f)) (t z : ℝ) :
+    -deriv (fun s => deriv (fun r => f (r - z)) s) t
+      + deriv (fun s => deriv (fun r => f (t - r)) s) z = 0 := by
+  rw [graviton_null_wave f hf_diff hdf_diff t z]; ring
+
+/-- **A concrete sinusoidal graviton wave** `h(t,z) = cos(t−z)` solves the wave equation — a non-vacuous instance of
+    `graviton_null_wave` (the differentiability hypotheses hold for any smooth profile; here the plane wave `cos`). -/
+theorem graviton_cos_wave (t z : ℝ) :
+    deriv (fun s => deriv (fun r => Real.cos (r - z)) s) t
+      = deriv (fun s => deriv (fun r => Real.cos (t - r)) s) z :=
+  graviton_null_wave Real.cos Real.differentiable_cos
+    (by simpa [Real.deriv_cos] using Real.differentiable_sin.neg) t z
+
 end QIQTH.GravDyn

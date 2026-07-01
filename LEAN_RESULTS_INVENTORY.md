@@ -246,7 +246,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (`Π²=Π`), `physProj_gauge` (kills pure gauge), `physProj_trace` (kills the trace), and the capstone
   `physProj_extracts_physical` (on any symmetric TT `h`, `Π h = h₁₁·e₊ + h₁₂·e×` — extracts the physical helicity
   content, gauge projected out).
-  ⚠ **Linearized ≠ full**; the propagating/quantized
+  **G11c — THE GRAVITON PROPAGATES (classical field EOM, genuine calculus, NOT quantized):** `graviton_null_wave`
+  (a null-profile field `h(t,z)=f(t−z)` — each TT component — satisfies the 1+1 wave equation `∂²_t h = ∂²_z h`),
+  `graviton_dalembertian_zero` (equivalently the massless d'Alembertian `−∂²_t+∂²_z` annihilates it), and
+  `graviton_cos_wave` (the concrete sinusoidal wave `cos(t−z)`, non-vacuous). The graviton is a wave travelling at
+  `c` — consistent with masslessness. `HasDerivAt`-based (hypotheses = C²: `Differentiable f`, `Differentiable
+  (deriv f)`).
+  ⚠ **Linearized ≠ full**; the quantized
   graviton (G11/G12), continuum ball modular Hamiltonians (G8), RT/extremal-area emergence (G9), Iyer–Wald geometry
   (G10), `hTkk`, interacting matter, and the numerical `G` are the cited research **frontiers** — this is the honest
   finite skeleton that advances *toward* the mechanism, never a claim of having crossed it.

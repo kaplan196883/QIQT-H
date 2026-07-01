@@ -287,3 +287,14 @@ modular Hamiltonians, emergent metric, Iyer–Wald), as the inventory §8 alread
   operators, loops) is the research wall, untouched. **This is the first rung genuinely *past* kinematics: the
   graviton's masslessness + the propagator's numerator/pole structure, machine-checked. The dynamical wave operator
   on an actual field (calculus) and quantization remain the frontier.**
+- **2026-07-02 — G11c THE GRAVITON PROPAGATES ✅ (the classical field EOM, genuine calculus): a null profile solves
+  the wave equation.** **`graviton_null_wave`** — a null-profile field `h(t,z)=f(t−z)` (each TT component) satisfies
+  the 1+1 wave equation `∂²_t h = ∂²_z h`; **`graviton_dalembertian_zero`** — equivalently the massless d'Alembertian
+  `−∂²_t + ∂²_z` annihilates it. Real calculus (not a momentum-space symbol): `∂_t f(t−z)=f'`, `∂²_t=f''`;
+  `∂_z f(t−z)=−f'`, `∂²_z=f''`; both `= f''(t−z)`. So the graviton is a **wave travelling at `c`** — consistent with
+  masslessness (`kUp_null`). **`graviton_cos_wave`** — the concrete sinusoidal wave `cos(t−z)` (non-vacuous instance).
+  Proof: `HasDerivAt`-based (`hasDerivAt_id.sub_const`/`.const_sub` + `HasDerivAt.comp` + `.deriv`), hypotheses
+  `Differentiable f`, `Differentiable (deriv f)` (= C²); GPT-5.5 supplied the calculus. All [AF] std-3, pinned,
+  budget 0. ⚠ **CLASSICAL linear field EOM; NOT the quantized graviton** (Fock space / operators / loops = the wall).
+  **This is the honest capstone of "the graviton propagates" — an actual field satisfying its PDE at the speed of
+  light. What remains past this is genuinely quantization (the field → operator step), the research wall.**
