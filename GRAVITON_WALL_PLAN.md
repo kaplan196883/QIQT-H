@@ -194,3 +194,14 @@ modular Hamiltonians, emergent metric, Iyer–Wald), as the inventory §8 alread
   sign/orientation + KG/free-field instantiation carried — the discrete kernel identity only, NOT a physical
   derivation. **NEXT → G4 (`EdgeRefinement` + refinement invariance — toy background independence; requires an
   explicit cut/region correspondence).**
+- **2026-07-01 — G4 ✅ DONE** ([AF] std-3, pinned, budget 0). **Toy background independence** via dynamic-screen
+  refinement: `Screen`/`codeCap`/`screenArea`; **`EdgeRefinement`** — a map `π : E' → E` with **fiberwise-additive**
+  weights (`logDim_add`/`areaWt_add`), the explicit weight-preserving correspondence GPT-5.5-pro required (a bare
+  edge surjection is not enough); `pullCut` (the pulled-back cut); **`refinement_preserves_area_and_capacity`**
+  (`codeCap`/`screenArea` preserved under the pulled-back cut, via a `weightSum_refine` sum-swap +
+  `Finset.sum_ite_eq`); **`regional_bound_invariant_under_refinement`** (packing on the *fine* screen ⟹ the *coarse*
+  region's area law — the capacity theorem lives on the refinement class); **`property_preserved_along_moves`**
+  (`Relation.ReflTransGen` invariance — no axioms at all). ⚠ **Toy** background independence only (supplied finite
+  graph/cut data; the pulled-back cut is the required correspondence) — NOT continuum background independence.
+  **NEXT → G5 (`LambdaRG_invariant` + `InducedG_pos`: discrete RG dimensional transmutation; `Λ_s` a relation, not
+  the value of `G`).**

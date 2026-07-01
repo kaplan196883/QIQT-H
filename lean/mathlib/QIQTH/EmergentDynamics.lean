@@ -129,4 +129,79 @@ theorem secondDiff_tailK_eq (N : ℤ) (T : ℤ → ℝ) (c : ℤ) (hcN : c < N) 
   rw [hcomb, hAc, hAc1]
   exact hsplit
 
+/-! ## G4 — dynamic-screen refinement invariance (toy background independence) -/
+
+/-- A **screen** assigns each edge an (independent) log-dimension and area weight; a region's boundary is a cut
+    `C : Finset E`. (The refinement-facing view; cf. `ScreenCode.ScreenCut`.) -/
+structure Screen (E : Type*) where
+  logDim : E → ℝ
+  areaWt : E → ℝ
+
+/-- Code capacity of a cut. -/
+noncomputable def codeCap {E : Type*} (S : Screen E) (C : Finset E) : ℝ := ∑ e ∈ C, S.logDim e
+/-- The (independent) area charge of a cut. -/
+noncomputable def screenArea {E : Type*} (S : Screen E) (C : Finset E) : ℝ := ∑ e ∈ C, S.areaWt e
+
+/-- An **edge refinement** `S' ↦ S`: a map `π` from refined edges to coarse edges under which the coarse weights are
+    the **fiberwise sums** of the refined weights. ⚠ This is the explicit *weight-preserving correspondence*
+    GPT-5.5-pro requires — a bare edge surjection is NOT enough; the weights must add up over fibers. -/
+structure EdgeRefinement {E E' : Type*} [Fintype E'] [DecidableEq E] (S : Screen E) (S' : Screen E') where
+  π : E' → E
+  logDim_add : ∀ e, S.logDim e = ∑ e' : E', if π e' = e then S'.logDim e' else 0
+  areaWt_add : ∀ e, S.areaWt e = ∑ e' : E', if π e' = e then S'.areaWt e' else 0
+
+/-- The **pulled-back cut**: the refined edges lying over the coarse cut `C` (the explicit cut/region correspondence). -/
+def pullCut {E E' : Type*} [Fintype E'] [DecidableEq E] (π : E' → E) (C : Finset E) : Finset E' :=
+  Finset.univ.filter (fun e' => π e' ∈ C)
+
+/-- A weight that is a fiberwise sum of a finer weight is preserved by the pulled-back cut. -/
+lemma weightSum_refine {E E' : Type*} [Fintype E'] [DecidableEq E]
+    (w : E → ℝ) (w' : E' → ℝ) (π : E' → E) (C : Finset E)
+    (hadd : ∀ e, w e = ∑ e' : E', if π e' = e then w' e' else 0) :
+    (∑ e ∈ C, w e) = ∑ e' ∈ pullCut π C, w' e' := by
+  simp_rw [hadd]
+  rw [Finset.sum_comm]
+  unfold pullCut
+  rw [Finset.sum_filter]
+  exact Finset.sum_congr rfl (fun e' _ => Finset.sum_ite_eq C (π e') (fun _ => w' e'))
+
+/-- **G4a — refinement preserves capacity and area** (under the pulled-back cut correspondence). -/
+theorem refinement_preserves_area_and_capacity {E E' : Type*} [Fintype E'] [DecidableEq E]
+    {S : Screen E} {S' : Screen E'} (r : EdgeRefinement S S') (C : Finset E) :
+    codeCap S C = codeCap S' (pullCut r.π C) ∧ screenArea S C = screenArea S' (pullCut r.π C) :=
+  ⟨weightSum_refine S.logDim S'.logDim r.π C r.logDim_add,
+   weightSum_refine S.areaWt S'.areaWt r.π C r.areaWt_add⟩
+
+/-- The local holographic packing constraint on a screen. -/
+def Packing {E : Type*} (G : ℝ) (S : Screen E) : Prop := ∀ e, S.logDim e ≤ S.areaWt e / (4 * G)
+
+/-- Packing on a screen gives the regional area law on any cut. -/
+lemma codeCap_le_of_packing {E : Type*} (G : ℝ) {S : Screen E} (h : Packing G S) (D : Finset E) :
+    codeCap S D ≤ screenArea S D / (4 * G) := by
+  unfold codeCap screenArea
+  rw [Finset.sum_div]
+  exact Finset.sum_le_sum (fun e _ => h e)
+
+/-- **G4b — the regional area-law bound is invariant under refinement.** If the *fine* screen satisfies packing,
+    the *coarse* region's area law holds — via the pulled-back cut. So the capacity theorem lives on the refinement
+    class, not a single fixed graph. ⚠ **Toy** background independence only (supplied finite graph/cut data; the
+    pulled-back cut is the required correspondence) — NOT continuum background independence. -/
+theorem regional_bound_invariant_under_refinement {E E' : Type*} [Fintype E'] [DecidableEq E]
+    {S : Screen E} {S' : Screen E'} (r : EdgeRefinement S S') (G : ℝ)
+    (hpack' : Packing G S') (C : Finset E) :
+    codeCap S C ≤ screenArea S C / (4 * G) := by
+  obtain ⟨hcap, harea⟩ := refinement_preserves_area_and_capacity r C
+  rw [hcap, harea]
+  exact codeCap_le_of_packing G hpack' (pullCut r.π C)
+
+/-- **G4c — a property preserved by single moves is preserved along move-paths.** For a connectivity-move relation
+    on graph configurations, invariance under one move lifts to invariance along any `ReflTransGen` path — the toy
+    "observables live on the quotient of graph configurations" statement. -/
+theorem property_preserved_along_moves {Config : Type*} {Move : Config → Config → Prop} {P : Config → Prop}
+    (hmove : ∀ X Y, Move X Y → P X → P Y) {X Y : Config}
+    (h : Relation.ReflTransGen Move X Y) : P X → P Y := by
+  induction h with
+  | refl => exact id
+  | tail _ hbc ih => exact fun hP => hmove _ _ hbc (ih hP)
+
 end QIQTH.GravDyn

@@ -7751,6 +7751,14 @@ namespace QIQTH.AxiomAudit
 -- wedge_boostCharge_eq_neg_stressFlux. Sign/orientation + KG/free-field instantiation carried; discrete kernel
 -- identity only, NOT a physical derivation. Axiom-free (std 3).
 #print axioms QIQTH.GravDyn.secondDiff_tailK_eq
+-- G4: toy background independence via dynamic-screen refinement. EdgeRefinement (a map π with FIBERWISE-ADDITIVE
+-- weights -- the explicit weight-preserving correspondence, not a bare surjection); refinement_preserves_area_and_
+-- capacity (codeCap/screenArea preserved under the pulled-back cut); regional_bound_invariant_under_refinement
+-- (packing on the fine screen ⟹ the coarse area law); property_preserved_along_moves (ReflTransGen invariance).
+-- ⚠ TOY background independence only (supplied finite graph/cut data), NOT continuum. Axiom-free (std 3).
+#print axioms QIQTH.GravDyn.refinement_preserves_area_and_capacity
+#print axioms QIQTH.GravDyn.regional_bound_invariant_under_refinement
+#print axioms QIQTH.GravDyn.property_preserved_along_moves
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
