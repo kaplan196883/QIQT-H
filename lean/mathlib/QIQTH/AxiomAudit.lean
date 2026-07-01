@@ -7870,6 +7870,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GravitonQuant.creat_pow
 #print axioms QIQTH.GravitonQuant.annih_pow_succ
 #print axioms QIQTH.GravitonQuant.annih_coherent
+-- G-QUANT Q6: the free-field TWO-POINT FUNCTION (the graviton propagator's algebraic core). vacExp = ⟨0|·|0⟩ (the
+-- Bargmann vacuum functional = constant term); twoPoint ⟨0|a_i a†_j|0⟩=δ_ij (the canonical propagator residue;
+-- the tensor numerator is physProj (G11b), the pole 1/k² is kUp_null); vacExp_vacuum ⟨0|0⟩=1. Free graviton,
+-- single mode; the CCR extends to any momentum⊗helicity index (the continuum = more modes). Std 3.
+#print axioms QIQTH.GravitonQuant.twoPoint
+#print axioms QIQTH.GravitonQuant.vacExp_vacuum
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

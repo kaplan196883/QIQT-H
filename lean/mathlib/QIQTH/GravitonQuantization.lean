@@ -197,6 +197,32 @@ theorem annih_coherent (α : ℂ) : PowerSeries.derivativeFun (coherent α) = α
     PowerSeries.coeff_exp, map_smul, smul_eq_mul]
   rw [Nat.factorial_succ]; push_cast; field_simp; ring
 
+/-! ### Q6 — the free-field two-point function (the graviton propagator's algebraic core)
+
+  The graviton propagator is the vacuum two-point function `⟨0| a_λ a†_μ |0⟩`. In the Bargmann representation the
+  vacuum functional `⟨0|·|0⟩` is the constant term (the coefficient of `|0⟩=1`), and the two-point function is the
+  canonical `δ_λμ` — the residue structure of the momentum-space propagator `∝ P_{λμ}/k²` (with the tensor numerator
+  `P` = the physical-state projector of G11b, and the massless pole `1/k²` of `kUp_null`). The same CCR extends to any
+  mode/momentum index (the free field = the restricted tensor product of single-mode Fock spaces); here at one mode. -/
+
+/-- The **vacuum expectation** `⟨0|p|0⟩` — the coefficient of the vacuum `|0⟩=1` (the constant term). -/
+noncomputable def vacExp (p : Fock) : ℂ := MvPolynomial.constantCoeff p
+
+/-- **The free graviton two-point function** `⟨0| a_i a†_j |0⟩ = δ_ij` — the canonical propagator residue: create a
+    graviton of helicity `j`, annihilate one of helicity `i`, and the vacuum overlap is `δ_ij`. The tensor structure
+    of the full propagator is the physical-state projector (G11b `physProj`) and the pole is `1/k²` (`kUp_null`). -/
+theorem twoPoint (i j : Fin 2) :
+    vacExp (annih i (creat j (1 : Fock))) = (if i = j then 1 else 0) := by
+  have h1 : annih i (creat j (1 : Fock)) = pderiv i (X j) := by simp [annih, creat]
+  rw [vacExp, h1, MvPolynomial.pderiv_X]
+  by_cases h : i = j
+  · subst h; simp
+  · have hj : j ≠ i := fun h' => h h'.symm
+    rw [Pi.single_eq_of_ne hj]; simp [h]
+
+/-- **The vacuum is normalized** `⟨0|0⟩ = 1`. -/
+theorem vacExp_vacuum : vacExp (1 : Fock) = 1 := by simp [vacExp]
+
 end
 
 end QIQTH.GravitonQuant

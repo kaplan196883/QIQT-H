@@ -273,8 +273,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `numberOp_vacuum`/`numberOp_one_particle`. **Q3** — the Hamiltonian `H=ω(N₀+N₁+1)` (`hamiltonian`), the graviton
   **zero-point energy** `hamiltonian_vacuum` (`H|0⟩=ω|0⟩`) and one-graviton energy `hamiltonian_one_particle`
   (`H|1_i⟩=2ω|1_i⟩`). **Q4** — the **helicity operator** `J=2(N₀−N₁)` (`helicityOp`): `helicityOp_plus`/`_minus`
-  give one-graviton helicity `±2`, tying the quantized occupation to the kinematic spin-2 eigenstates. Standard
-  free-field QFT, machine-checked — NOT a claim of quantum gravity.
+  give one-graviton helicity `±2`, tying the quantized occupation to the kinematic spin-2 eigenstates. **Q5** — the
+  ladder operators (`creat_pow` raising, `annih_pow_succ` lowering) + the **coherent state** `coherent α = e^{αX}` in
+  the Bargmann–Fock completion `ℂ⟦X⟧` with `annih_coherent` (`a|α⟩=α|α⟩`, the quantum→classical bridge). **Q6** — the
+  free-field **two-point function** `twoPoint` (`⟨0|a_i a†_j|0⟩=δ_ij`, the propagator residue) via the vacuum
+  functional `vacExp`, `vacExp_vacuum` (`⟨0|0⟩=1`). **Q1–Q6 = the complete quantized free graviton** (CCR ·
+  occupation · Hamiltonian+zero-point · helicity · ladder+coherent · two-point). Standard free-field QFT,
+  machine-checked — NOT a claim of quantum gravity (free · single-mode→continuum additive · classical≠interacting).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

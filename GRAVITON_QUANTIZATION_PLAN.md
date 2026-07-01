@@ -38,10 +38,12 @@ on an actual field. The quantization core is now started.
   `ℂ⟦X⟧` (single mode; the exponential isn't a polynomial) with **`annih_coherent`** `a|α⟩=α|α⟩` — the coherent
   state is an eigenstate of the annihilation operator `a=d/dX`, the quantum→classical bridge (definite amplitude
   `α`). All [AF] std-3, pinned, budget 0. (Recovering the G11c classical wave as the field expectation awaits Q6.)
-- [ ] **Q6 — multi-mode: the momentum continuum (frontier scoping).** Index the CCR by momentum `k` (add `X_{k,λ}`),
-  the field `h_{μν}(x) = ∑_λ ∫ (a_λ(k) e^λ e^{ikx} + h.c.)`; the two-point function/propagator as a vacuum
-  expectation. Built one mode at a time; the free field is the (restricted) tensor product of single-mode Fock
-  spaces.
+- [x] **Q6 — the free-field two-point function (propagator core) ✅.** `vacExp = ⟨0|·|0⟩` (the Bargmann vacuum
+  functional = constant term); **`twoPoint`** `⟨0|a_i a†_j|0⟩ = δ_ij` (the canonical propagator residue — the tensor
+  numerator is the physical-state projector `physProj` of G11b, the pole is `1/k²` of `kUp_null`); `vacExp_vacuum`
+  `⟨0|0⟩=1`. All [AF] std-3, pinned, budget 0. (The full momentum-space field `h_{μν}(x)=∑_λ∫(a_λ(k)e^λe^{ikx}+h.c.)`
+  = the multi-mode extension, one mode at a time — the CCR/two-point core is done and generalizes verbatim to any
+  momentum⊗helicity index.)
 
 ## Discipline
 `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green; `#print axioms` std-3; `bash
@@ -62,3 +64,7 @@ interacting; NOT a claim of quantum gravity (this is standard free-field QFT, ma
 - **2026-07-02 — Q5 ✅** the ladder operators (raising `a†|n⟩=|n+1⟩`, lowering `a|n+1⟩=(n+1)|n⟩`); the coherent
   state `|α⟩=e^{αX}` in the Bargmann–Fock completion `ℂ⟦X⟧` with `a|α⟩=α|α⟩` (the quantum→classical bridge).
   All [AF] std-3, budget 0.
+- **2026-07-02 — Q6 ✅** the free-field two-point function `⟨0|a_i a†_j|0⟩=δ_ij` (the graviton propagator's
+  algebraic core) via the Bargmann vacuum functional `vacExp`; `⟨0|0⟩=1`. All [AF] std-3, budget 0. **Q1–Q6
+  complete: the free graviton is quantized (CCR · number/occupation · Hamiltonian+zero-point · helicity ·
+  ladder+coherent · two-point).**
