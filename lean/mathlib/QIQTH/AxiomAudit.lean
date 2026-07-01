@@ -7798,6 +7798,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GravDyn.polCross_transverse
 #print axioms QIQTH.GravDyn.polCross_traceless
 #print axioms QIQTH.GravDyn.graviton_polarizations_indep
+-- G11a helicity: polPlus_helicity / polCross_helicity -- under a rotation by θ about the propagation axis, the
+-- polarization doublet (e+,ex) rotates by 2θ (cos2θ=cos²θ−sin²θ, sin2θ=2sinθcosθ) -- the DOUBLE ANGLE = spin-2
+-- (helicity ±2) signature (a photon would rotate by θ, a scalar by 0). Finite matrix algebra. KINEMATIC; not the
+-- quantized graviton. Std 3.
+#print axioms QIQTH.GravDyn.polPlus_helicity
+#print axioms QIQTH.GravDyn.polCross_helicity
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

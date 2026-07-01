@@ -391,4 +391,28 @@ theorem graviton_polarizations_indep (a b : ℝ)
   · have := congrFun (congrFun h 1) 2
     simpa [polPlus, polCross] using this
 
+/-- Spatial **rotation by `θ` about the propagation (`z`) axis** — acts in the `x,y` plane, identity on `t,z`. -/
+noncomputable def rot (θ : ℝ) : Matrix (Fin 4) (Fin 4) ℝ :=
+  !![1, 0, 0, 0; 0, Real.cos θ, -Real.sin θ, 0; 0, Real.sin θ, Real.cos θ, 0; 0, 0, 0, 1]
+
+/-- **G11a — the graviton polarizations carry helicity ±2 (spin 2), part 1.** Under a rotation by `θ` about the
+    propagation axis, `e₊` maps to `cos2θ·e₊ + sin2θ·e×` (the coefficients `cos²θ−sin²θ = cos2θ`,
+    `2 sinθ cosθ = sin2θ`). The **double angle** `2θ` is the spin-2 / helicity-±2 signature — a photon (spin 1) would
+    rotate by `θ`, a scalar by `0`. ⚠ KINEMATIC; not the quantized graviton. -/
+theorem polPlus_helicity (θ : ℝ) :
+    rot θ * polPlus * (rot θ).transpose
+      = (Real.cos θ ^ 2 - Real.sin θ ^ 2) • polPlus + (2 * Real.sin θ * Real.cos θ) • polCross := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [rot, polPlus, polCross, Matrix.mul_apply, Fin.sum_univ_four, Matrix.transpose_apply] <;> ring
+
+/-- **G11a — helicity ±2, part 2.** `e×` maps to `−sin2θ·e₊ + cos2θ·e×`. Together with `polPlus_helicity`, the
+    polarization doublet `(e₊, e×)` transforms by the rotation `R(2θ)` — the spin-2 signature. -/
+theorem polCross_helicity (θ : ℝ) :
+    rot θ * polCross * (rot θ).transpose
+      = (-(2 * Real.sin θ * Real.cos θ)) • polPlus + (Real.cos θ ^ 2 - Real.sin θ ^ 2) • polCross := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [rot, polPlus, polCross, Matrix.mul_apply, Fin.sum_univ_four, Matrix.transpose_apply] <;> ring
+
 end QIQTH.GravDyn

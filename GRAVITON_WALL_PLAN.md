@@ -244,3 +244,11 @@ modular Hamiltonians, emergent metric, Iyer–Wald), as the inventory §8 alread
   2-dimensional is the standard massless-spin-2 little-group result); this is **NOT** the quantized
   graviton/propagator/dynamics (G11/G12 remain frontier). All [AF] std-3, pinned, budget 0. A genuine finite
   extension of the linearized-graviton kinematics; beyond it the tractable surface is truly exhausted.
+- **2026-07-01 — G11a helicity ✅ (bonus): the polarizations carry helicity ±2 (spin 2).** `rot θ` (rotation about
+  the propagation axis) + **`polPlus_helicity`**/**`polCross_helicity`** — under `R(θ)`, the doublet `(e₊,e×)` maps
+  by `R(2θ)`: `R·e₊·Rᵀ = (cos²θ−sin²θ)·e₊ + (2 sinθ cosθ)·e×` and `R·e×·Rᵀ = −(2 sinθ cosθ)·e₊ + (cos²θ−sin²θ)·e×`.
+  The **double angle** `2θ = cos2θ/sin2θ` is the **spin-2 / helicity-±2** signature (a photon rotates by `θ`, a
+  scalar by `0`). Proved by `fin_cases`/`simp`/`ring` — no Pythagorean identity needed (coefficients stated as
+  `cos²−sin²`, `2 sin cos`). All [AF] std-3, pinned, budget 0. ⚠ KINEMATIC; NOT the quantized graviton. **The genuine
+  "graviton" content reachable in finite algebra — its 2 polarizations *and* their spin-2 transformation — is now
+  machine-checked; the dynamical/quantized graviton stays the research wall.**
