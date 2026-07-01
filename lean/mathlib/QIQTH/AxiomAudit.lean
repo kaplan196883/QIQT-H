@@ -7741,6 +7741,11 @@ namespace QIQTH.AxiomAudit
 -- content is a carried hypothesis (plan G8/G10), NOT a physical derivation of Einstein. Axiom-free (std 3).
 #print axioms QIQTH.GravDyn.allBall_firstLaw_iff_residual_zero
 #print axioms QIQTH.GravDyn.residual_eq_zero_of_firstLaw
+-- G2: the finite decoder/Radon inversion supplying Separating for G1. eq_zero_of_decoder (reconstructible field +
+-- all probes vanish ⟹ field=0); separating_of_decoder (a linear probe family with a decoder is Separating). Finite
+-- linear algebra; the physical probe family (continuum balls) is a carried hypothesis, plan G8. Axiom-free (std 3).
+#print axioms QIQTH.GravDyn.eq_zero_of_decoder
+#print axioms QIQTH.GravDyn.separating_of_decoder
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

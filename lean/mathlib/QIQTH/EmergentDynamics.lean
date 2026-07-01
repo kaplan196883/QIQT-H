@@ -58,4 +58,31 @@ theorem allBall_firstLaw_iff_residual_zero {Ball E : Type*} [AddCommGroup E] [Mo
     have hzero : δK B - δS B = 0 := by rw [iw B, h, map_zero]
     exact (sub_eq_zero.mp hzero).symm
 
+/-! ## G2 — the finite decoder / Radon inversion (supplies `Separating` for G1) -/
+
+/-- **G2 — the finite decoder / Radon inversion.** If a finite field `f : Cell → ℝ` is *reconstructible* from its
+    probe measurements via a decoder — `∀ i, f i = ∑ p, decode i p · measure p f` — and every probe measurement of
+    `f` vanishes, then `f = 0`. This is the finite model of "all ball integrals of `f` vanish ⟹ `f = 0`" (the
+    separating property, made concrete on a finite cell/probe grid). -/
+theorem eq_zero_of_decoder {Cell Probe : Type*} [Fintype Cell] [Fintype Probe]
+    (measure : Probe → (Cell → ℝ) → ℝ) (decode : Cell → Probe → ℝ) (f : Cell → ℝ)
+    (hdecode : ∀ i, f i = ∑ p, decode i p * measure p f)
+    (hzero : ∀ p, measure p f = 0) : f = 0 := by
+  funext i
+  rw [hdecode i]
+  simp [hzero]
+
+/-- **G2 → G1 — the `Separating` instance G1 needs.** If a *linear* probe family `P : Probe → (Cell → ℝ) →ₗ[ℝ] ℝ`
+    admits a decoder (`∀ f i, f i = ∑ p, decode i p · P p f`), then it is `Separating`. This supplies the separating
+    hypothesis of `allBall_firstLaw_iff_residual_zero` concretely — the residual space is `Cell → ℝ`, the probes are
+    the ball/Iyer–Wald pairings, and finite reconstruction closes the "all probes vanish ⟹ residual vanishes" step. -/
+theorem separating_of_decoder {Cell Probe : Type*} [Fintype Cell] [Fintype Probe]
+    (P : Probe → (Cell → ℝ) →ₗ[ℝ] ℝ) (decode : Cell → Probe → ℝ)
+    (hdecode : ∀ (f : Cell → ℝ) (i : Cell), f i = ∑ p, decode i p * P p f) :
+    Separating P := by
+  intro f hf
+  funext i
+  rw [hdecode f i]
+  simp [hf]
+
 end QIQTH.GravDyn

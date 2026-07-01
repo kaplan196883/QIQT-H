@@ -179,3 +179,10 @@ modular Hamiltonians, emergent metric, Iyer–Wald), as the inventory §8 alread
   `residual = 0`. Pure linear algebra; the `∀ B` all-probe family + `iw` are explicit carried hypotheses (continuum
   balls = G8, Iyer–Wald = G10 — NOT supplied); NOT a physical derivation of Einstein. **NEXT → G2
   (`eq_zero_of_decoder`: a finite decoder identity ⟹ `Separating`).**
+- **2026-07-01 — G2 ✅ DONE** ([AF] std-3, pinned, budget 0). The finite decoder / Radon inversion that supplies G1's
+  `Separating` hypothesis: **`eq_zero_of_decoder`** (a reconstructible finite field `∀ i, f i = ∑ p, decode i p ·
+  measure p f` with all probe measurements zero ⟹ `f = 0` — the finite model of "all ball integrals vanish ⟹ the
+  field vanishes") and **`separating_of_decoder`** (a *linear* probe family admitting a decoder is `Separating`,
+  directly feeding `allBall_firstLaw_iff_residual_zero`). Finite linear algebra; the *physical* probe family
+  (continuum balls) stays a carried hypothesis (G8). **NEXT → G3 (`secondDiff_tailK_eq`: the discrete null modular
+  kernel `Δ²(tailK) = T`; guard `Nat` subtraction, sign vs `wedge_boostCharge_eq_neg_stressFlux`, KG/free-field).**
