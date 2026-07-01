@@ -310,6 +310,18 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   the coupling side demands (the linearized consistency triangle: gauge invariance ⟺ conservation ⟸ Bianchi).
   ⚠ Linearized; free ≠ interacting; universality of the coupling (one `G` for all species) is B2; `κ`/`G` carried.
 
+- **The bridge, increment C1 — `QIQTH/WedgeBoostClausius.lean`** (namespace `QIQTH.WedgeBoost`, all **[AF]** std-3;
+  `BRIDGE_PLAN.md`). **The wedge modular Hamiltonian as the geometric boost — the Clausius datum, packaged.**
+  `WedgeBoostPackage S ξ` bundles the geometric (Rindler) boost flow with the **carried Bisognano–Wichmann
+  identification** `hBW : V_t ξ = Δ^{it} ξ` (a structure field, never a Lean axiom — exactly `WedgeKMSFlux` input
+  #3 isolated). **`boost_correlator_hasDerivAt`** — the geometric boost correlator inherits the *derived* modular
+  derivative (`hasDerivAt_inner_modUnitary`): `d/dt⟪ξ,V_tξ⟫|₀ = i·(−S)` with `S = cgpEntropy S ξ` the modular
+  entanglement entropy. **`boost_flux_unique`** — the Clausius/heat-flux datum is **forced** (derivative
+  uniqueness): any candidate flux `c` must equal `−S` — `δ⟨K_boost⟩ = −δS` is not a choice.
+  **`boost_correlator_im_hasDerivAt`** — the real (physical) form: `d/dt Im⟪ξ,V_tξ⟫|₀ = −S`. ⚠ BW carried; the
+  Rindler-weight formula (`2π∫x¹T₀₀`) packaged only at the correlator-derivative level the existing theorems
+  support; free-field/RvD standard-subspace setting; NOT the area law (bridge ingredient D).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

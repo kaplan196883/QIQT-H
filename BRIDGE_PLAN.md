@@ -58,11 +58,15 @@ derived, or background independence.** Every theorem: NO `sorry`; `#print axioms
   `T` sourced by `δG^{μν} = κT^{μν}` is AUTOMATICALLY conserved: the geometry side forces exactly the conservation
   law the coupling side demands. The linearized consistency triangle closes. ⚠ Linearized; free ≠ interacting;
   universality is B2; `κ`/`G` carried.
-- [ ] **C1 — the wedge modular Hamiltonian is the weighted boost.** Package the DONE free-field results as: `K_wedge`
-  generates the geometric boost with the **Rindler weight** (`K = 2π∫_{x¹>0} x¹ T_{00}` schematically — the weighted
-  boost energy, NOT an unweighted `2π∫T_kk`), using exactly the existing derived theorem
-  (`hasDerivAt_inner_modUnitary` = the modular-derivative datum) + the BW identification (carried hypothesis #3 of
-  `WedgeKMSFlux`). Honest: the *weight formula* is packaged at the level the existing theorems support.
+- [x] **C1 — the wedge modular Hamiltonian is the geometric boost ✅** (`QIQTH/WedgeBoostClausius.lean`,
+  `QIQTH.WedgeBoost`, all [AF] std-3, wired + pinned, budget 0). **`WedgeBoostPackage`** — the geometric boost flow
+  + the **carried BW identification** `hBW : V_t ξ = Δ^{it} ξ` as a structure field (never an axiom; =
+  `WedgeKMSFlux` input #3 isolated). **`boost_correlator_hasDerivAt`** — the geometric boost correlator inherits
+  the DERIVED modular derivative: `d/dt⟪ξ,V_tξ⟫|₀ = i·(−S)`, `S = cgpEntropy` (the entanglement entropy).
+  **`boost_flux_unique`** — the Clausius/heat-flux datum is **forced** by derivative uniqueness: any candidate `c`
+  with `d/dt⟪ξ,V_tξ⟫|₀ = i·c` must equal `−S`. **`boost_correlator_im_hasDerivAt`** — the real (physical) form
+  `d/dt Im⟪ξ,V_tξ⟫|₀ = −S`. ⚠ BW carried; the Rindler weight (`2π∫x¹T₀₀`) packaged at the level the existing
+  theorems support (the correlator-derivative datum); free-field/RvD setting; not the area law (D).
 - [ ] **A2 — the emergence map (supplied geometric functional).** The linearized area variation
   `δA_Σ(h) = ½∫_Σ √γ γ^{ab} e_a^μ e_b^ν h_{μν}` (finite/discretized form) as a SUPPLIED functional of `h` — wire
   `δ(screenArea)` to it. Area is a functional of `h`, NOT the full metric data: any reconstruction claim requires a
@@ -115,3 +119,9 @@ push via schannel; update this Progress log + `LEAN_RESULTS_INVENTORY.md`. Consu
   `δG^{μν}=κT^{μν}` is AUTOMATICALLY conserved: geometry forces exactly the conservation the coupling demands; the
   linearized consistency triangle closes). All [AF] std-3, wired + pinned, budget 0. NEXT → C1 (wedge modular
   Hamiltonian = the weighted boost, packaging the DONE free-field modular results).
+- **2026-07-02 — C1 ✅ LANDED** (`WedgeBoostClausius.lean`): the geometric wedge boost packaged against the DONE
+  modular flow — the carried BW identification as a structure field (`WedgeBoostPackage.hBW`), the boost correlator
+  inheriting the derived modular derivative `d/dt⟪ξ,V_tξ⟫|₀ = i·(−S)` (`boost_correlator_hasDerivAt`), the
+  Clausius datum FORCED by derivative uniqueness (`boost_flux_unique`: any flux candidate = −S), and the real form
+  (`boost_correlator_im_hasDerivAt`). All [AF] std-3, wired + pinned, budget 0. NEXT → A2 (the emergence map:
+  supplied area functional δA(h) + separating family).

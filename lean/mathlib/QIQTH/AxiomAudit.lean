@@ -7903,6 +7903,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MatterCoupling.couple_gauge_invariant_iff_conserved
 #print axioms QIQTH.MatterCoupling.einstein_source_conserved
 #print axioms QIQTH.MatterCoupling.source_conserved_of_einstein_eq
+-- BRIDGE C1 (BRIDGE_PLAN.md): the wedge modular Hamiltonian as the geometric boost — the Clausius datum packaged.
+-- WedgeBoostPackage: the geometric boost flow + the CARRIED Bisognano–Wichmann identification hBW (structure field,
+-- NEVER an axiom; = WedgeKMSFlux input #3 isolated). boost_correlator_hasDerivAt: the geometric boost correlator
+-- inherits the DERIVED modular derivative d/dt⟪ξ,V_tξ⟫|₀ = i·(−S), S = cgpEntropy (the entanglement entropy).
+-- boost_flux_unique: the Clausius/heat-flux datum is FORCED — any c with d/dt⟪ξ,V_tξ⟫|₀ = i·c must equal −S
+-- (derivative uniqueness). boost_correlator_im_hasDerivAt: the real form, d/dt Im⟪ξ,V_tξ⟫|₀ = −S. ⚠ BW carried;
+-- Rindler weight packaged at the correlator-derivative level; free-field/RvD setting; NOT the area law (D). Std 3.
+#print axioms QIQTH.WedgeBoost.boost_correlator_hasDerivAt
+#print axioms QIQTH.WedgeBoost.boost_flux_unique
+#print axioms QIQTH.WedgeBoost.boost_correlator_im_hasDerivAt
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

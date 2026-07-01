@@ -45,6 +45,7 @@ import QIQTH.EmergentDynamics
 import QIQTH.GravitonQuantization
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
+import QIQTH.WedgeBoostClausius
 import QIQTH.BellMarginal
 import QIQTH.Bell
 import QIQTH.Tsirelson
