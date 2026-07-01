@@ -40,6 +40,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   string theory not rigorously defined — unformalizable). Kept purely as a labelled *comparison* of what AdS/CFT
   *derives given its inputs* (`G` fixed by the degree-count `N`; BH entropy as a boundary state count) vs what
   QIQT-H *carries* (`G` a free UV datum). Never cite it as a QIQT-H claim.
+- **Holographic dictionary bridge — `QIQTH/HolographicBridge.lean`** (namespace `QIQTH.HolographicBridge`, [AF]
+  std-3, NOT wired into `QIQTH.lean`/`AxiomAudit`). Connects the AdS/CFT comparison to the granularity reframing:
+  `btz_cardy_eq_qiqth_capacity` — Strominger's BTZ `Cardy = A/4G`, evaluated with QIQT-H's induced `G=1/(N Λ_s²)`,
+  equals QIQT-H's bulk **capacity exponent** `(A/4)N Λ_s²` (the boundary microstate count and the QIQT-H regional
+  capacity are the *same quantity* at the shared granularity; the AdS radius `ℓ` cancels); `centralCharge_in_primitives`
+  — the Brown–Henneaux `c=(3/2)ℓ N Λ_s²` *if* one posits a boundary length `ℓ` (AdS-specific, flagged). ⚠ A
+  variable-**correspondence** showing the two languages are consistent under the shared `G` — it does **NOT** import a
+  boundary CFT, the Cardy formula (needs a 2d Virasoro QIQT-H lacks), bulk reconstruction, or AdS/CFT's cross-check;
+  QIQT-H's capacity stays postulated/granularity-reframed. A bridge, not a QIQT-H physics claim.
 
 ## 1. Born rule / typicality / single-world selection (Φ, λ)
 
